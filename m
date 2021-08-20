@@ -2,107 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B93823F366E
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Aug 2021 00:29:00 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id EEB223F3670
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Aug 2021 00:29:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mHD0S-0006zr-Jo; Fri, 20 Aug 2021 22:28:56 +0000
+	id 1mHD0s-000287-42; Fri, 20 Aug 2021 22:29:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1mHD0I-0006yv-Tk
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 22:28:46 +0000
+ (envelope-from <daeho43@gmail.com>) id 1mHD0p-000281-O9
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 22:29:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6dFlH7kbm1IF+kuIeh/4GV9ZtC/78mojb0p+BSUZe6Y=; b=Wv5NUhZjEQHT07cdQPanVXQjsI
- 3Ssu8aQ5noA21Bu/gSNFy5/NXCugJHi27lYsfwALfY/36LaBDbfCePTX+OIuiBU0Cji85F3PvR9t9
- EH3X+ooSzM8w46sjiKU4QKu8Rv0I3YK9djfZvB6h86iw60qPgXRChbXgnsWP+cBinZas=;
+ bh=OX9S5ZMaFBhmgWAZ1aqaP+6bSnEZ1p8sO1Z2SRmWv7Y=; b=hT43pXstfdcoCXgVr/LU155iF1
+ YbdUMmoee8d6RB7Wn/eJtaTHer+y+ygsz3wvy34VHxC9NGBfEmDU/kYgEgjqIeqX+GeNtpsYot8oP
+ 1pE7KjUpXaiYVX4vG14opdEBB99lk+codvJ+f0HXVohH8bRdKoxnKtSOssiUxCN1xw7s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=6dFlH7kbm1IF+kuIeh/4GV9ZtC/78mojb0p+BSUZe6Y=; b=B
- M5SB3dbl/r02Zv6apqEElaRd3gvi9xk1guEyWrDjWPLbDMRA27DAceW8iC4ITWq0DZW/DGrIOkkkg
- f1egXBzp4pX+g97FGlHvt58tXoGCQ5fC5swT8wa8+JoQ+t5T7mJLEPHuqYkUaObMA/pWd12gXXG7b
- /yoXbDeEROmn80/o=;
-Received: from mail-pg1-f169.google.com ([209.85.215.169])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=OX9S5ZMaFBhmgWAZ1aqaP+6bSnEZ1p8sO1Z2SRmWv7Y=; b=l
+ Yc5kE5RQm5RovDKHFjqtLA01bSpnNTGIepLevLJA7MU6JkKoP4NmAV8O3UBYe0pwWjxjW2RmHfBF+
+ M0/m2cJRIfDaIFy/ApX6Q4DHpyzcpG0Fq+tfCzSLFj1dDk5o4g3Aqq1j4iS/q5CIDR39zPLI1whg6
+ /7zm0BwihEP+H83M=;
+Received: from mail-pj1-f45.google.com ([209.85.216.45])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1mHD0G-0001rx-Sp
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 22:28:46 +0000
-Received: by mail-pg1-f169.google.com with SMTP id c17so10596468pgc.0
+ id 1mHD0o-00DDlo-Jz
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 Aug 2021 22:29:19 +0000
+Received: by mail-pj1-f45.google.com with SMTP id
+ mq2-20020a17090b3802b0290178911d298bso8289162pjb.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 20 Aug 2021 15:28:44 -0700 (PDT)
+ Fri, 20 Aug 2021 15:29:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=6dFlH7kbm1IF+kuIeh/4GV9ZtC/78mojb0p+BSUZe6Y=;
- b=jPybJDziyZmpI8YE2wb3nWcM/nIF7ImLK/ORK1vUvEKuKOhdNPimVm8isNng6HjjOf
- /PFv7xnnUDBVu3i6v4Hrwp4SBvVEbYsJbp4W7TwjBe6SomDXuTPq+denUdi3ZeGq57vd
- NAdU/8+W56zcALCA6hR9x8ihx84TPxx7Q3xhKfWj4qWRsd9jbnJuh8V2jLeLcAb7qr8j
- 6U6zSODCS07Fi06S9yEGJrKMGoJryUhdCjjX3qiNptQtCPt3a5EJH6lK4Hg3IiupUmcW
- WQXi8BL5L8LppWYVeq6bXFCf3gHbU9rsOL8aq80E93SGUA8rG7BhBGCbfK0bLqM18iTa
- TAxA==
+ bh=OX9S5ZMaFBhmgWAZ1aqaP+6bSnEZ1p8sO1Z2SRmWv7Y=;
+ b=j1HaZFAUPYbEVdin55EaSB+aIi9ooq1+xxCdL6LjZ+ETOMprWOBoHYOoirc2b4y832
+ cNMTafVVZ2zl/TriNFtbxPMyED7Ty8gESR9/MswhH3sdBGwEe9jwi+EXWLPiV9CZHJKe
+ VlwdKvbippc905ireZkq3d3gF4bJTIdVccAlsq9XzL0zGkGSzV7xJvVeowYLYPUwASt8
+ +inEyvXk2AoR2le5af37IN8Ft9r16l3c13DSr9XBXNkR2pxVC528WTma/eRaq+8GDIJo
+ i6dOVQglZEeuEvM//jXYTySJs0ftxQtfIfF4G7hu07vVq6Ezet3TWOx65NBNlc8Cd1lT
+ XSGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=6dFlH7kbm1IF+kuIeh/4GV9ZtC/78mojb0p+BSUZe6Y=;
- b=buR9HnwA0mHrRDWO2tVj9C5rqK65i6AD4ahcyC/o7DQmZMjRrFcmSq46u/4hqRvUtL
- aSXlXtKShuyoeb9x5/daz+DLpYTzPrqlzXl61cx6XDhHW3BIdzBm4A58Iai0CIMb+c3h
- cKrVnwkTGlipdvmFC8ZfWArq3iS9GmzMbU4jV9WyAz1HdqfJ9pm8ZXqnr74kprVtUM1L
- ZQ9WNh/UaoTSmUXaE257RQAYko2sSxg2BpGrnaSyKnAi4pgvtrw7yT6XpK4HuOMo6kgW
- LkxUV17PAYkDRSK80kxS4LuPSiM81dH5AmPWE2XdbCRm2sS6kR0Fp8lu5clVsfdPBrrV
- Ibnw==
-X-Gm-Message-State: AOAM532QxfDtoUgJt84UUrzE6m93potGfaub0iXvwjpD0xQjcStm5lY5
- MwjkkGjXCW/j6sYn8LiJzPVWK/2n5Qg=
-X-Google-Smtp-Source: ABdhPJy3S7aQHr8X+3lq4RevkeT69OlUrY8kAe7EP9nrdhhbA6E40KFe1y4WmqLHhGVqz9jGlUYDuw==
-X-Received: by 2002:a05:6a00:228a:b0:3e1:a0b2:535b with SMTP id
- f10-20020a056a00228a00b003e1a0b2535bmr21863720pfe.5.1629498519052; 
- Fri, 20 Aug 2021 15:28:39 -0700 (PDT)
+ bh=OX9S5ZMaFBhmgWAZ1aqaP+6bSnEZ1p8sO1Z2SRmWv7Y=;
+ b=PqCBUTkLcRJJCBUpOvI2c8wA4okr3zFQHGyQdGbAOMvdfel8oIFVbV2Cush8wd14p1
+ LEbIW9MAFM7XOVB984Qdi9ErVqyuzzxglOnCdyWpM4W200RoJUBoTtvjvbAsKJPd6SZk
+ fJzcyxaXZG7QWFf95R9vZF2QjdqTjPcksota4mfd2M53gLofP3vy7I6J1pToZyL+LWeA
+ ps6O1zzcINxLjFLhLYr0MGm2oxb2uTniIvc+/nnuCUts7nWZe2FLbYyUZrZ3Zik4OjAq
+ UHIVq2rFV5Tj8brEsUbfte70KG9DVs+xbZvYNP9zfRp5CmiwnkuCfhYQtsLNuLpm5rNZ
+ FnsA==
+X-Gm-Message-State: AOAM530zeAD3S8EY26S+TlV6aYIxTwpmE4Ipq1xXs4zYW/B6ymg62IrG
+ w2B9orhxC18mN+LqsjVUz28=
+X-Google-Smtp-Source: ABdhPJz4vPvq24CAvNZ5aJ446XALL/uVpu4RDP2eqwipBkZeaHc5fa/6TgXZIgQDA47l8QZfqQMknQ==
+X-Received: by 2002:a17:90b:1981:: with SMTP id
+ mv1mr5077617pjb.45.1629498552115; 
+ Fri, 20 Aug 2021 15:29:12 -0700 (PDT)
 Received: from daehojeong-desktop.mtv.corp.google.com
  ([2620:15c:211:201:2c15:e1a9:d4c3:ff83])
- by smtp.gmail.com with ESMTPSA id b17sm8834758pgl.61.2021.08.20.15.28.37
+ by smtp.gmail.com with ESMTPSA id x7sm7954579pfj.200.2021.08.20.15.29.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Aug 2021 15:28:38 -0700 (PDT)
+ Fri, 20 Aug 2021 15:29:11 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  kernel-team@android.com
-Date: Fri, 20 Aug 2021 15:28:34 -0700
-Message-Id: <20210820222834.342035-1-daeho43@gmail.com>
+Date: Fri, 20 Aug 2021 15:29:09 -0700
+Message-Id: <20210820222909.342198-1-daeho43@gmail.com>
 X-Mailer: git-send-email 2.33.0.rc2.250.ged5fa647cd-goog
 MIME-Version: 1.0
-X-Spam-Score: 0.2 (/)
-X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
- See http://spamassassin.org/tag/ for more details.
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- (daeho43[at]gmail.com)
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.169 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/, no
- trust [209.85.215.169 listed in list.dnswl.org]
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: intel.com]
+X-Spam-Score: 0.1 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview:  From: Daeho Jeong Whenever we notice some sluggish issues
+ on our machines, we are always curious about how well all types of I/O in
+ the f2fs filesystem are handled. But, it's hard to get this kind of real data.
+ First o [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit (daeho43[at]gmail.com)
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.45 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.45 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1mHD0G-0001rx-Sp
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1mHD0o-00DDlo-Jz
 Subject: [f2fs-dev] [PATCH v5] f2fs: introduce periodic iostat io latency
  traces
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -152,6 +161,7 @@ wr_sync_data [120/12/2285], wr_sync_node [88/5/428],
 wr_sync_meta [52/6/2990], wr_async_data [4/1/3],
 wr_async_node [0/0/0], wr_async_meta [0/0/0]
 
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
 ---
 v5: cleaned up codes handling variables
 v4: separate the previous patch into two patches
@@ -159,8 +169,6 @@ v3: moved other I/O statistics related features into a separate file
     with the same kernel config option for better maintenance.
 v2: clean up with wrappers and fix a build breakage reported by
     kernel test robot <lkp@intel.com>
-
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
 ---
  fs/f2fs/data.c              |  19 ++++--
  fs/f2fs/f2fs.h              |   4 ++
