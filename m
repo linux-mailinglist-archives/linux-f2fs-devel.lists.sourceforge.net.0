@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEABA3F6539
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Aug 2021 19:10:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 868623F66C4
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Aug 2021 19:27:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mIZvx-0000tS-6T; Tue, 24 Aug 2021 17:09:57 +0000
+	id 1mIaCN-0005Vf-EN; Tue, 24 Aug 2021 17:26:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1mIZvv-0000t8-R4
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Aug 2021 17:09:55 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <jaegeuk@kernel.org>) id 1mIaCL-0005VX-VT
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Aug 2021 17:26:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=V2MTz9cQbW6iOz9s5K63TnyC6Zgxqq4IL2SaMXC9LcI=; b=UAyAeiQKjvZ6f9ZQSlGU+wK1eI
- 87jpR5G1a0lDowjqYTV9NTlRDSQT9yW+Kwzm2DV9jYmxooWhhaFom1RPZfGP4WEHR7QSmyLMT4gS3
- Y7uCXCC0AcfX2zGPDlSoa++NFhSgdLKlsQTN8RN+b7AprsVf9KA8GihYFzKmOiUidsSg=;
+ bh=wq8hSFaCsG9kVVDYar5jQhzC0LVaC7nrUdUgjjUh7fU=; b=WWCM/GvGnsfGqcyOsjW6TUJNKc
+ ZyddFb0j2otjR3N/+WXgevoI5Sa6OSzuyS4B+oPdTcrc4p+z7QGL5DJi9JhPSVfxGzlSnxzrDLFZI
+ G2ll0VQOeao1ygZi6U2AR3JGRizI6MqjbpuXt1EnpGqzmCbBBTuLh/79/p4/vHUFdB4U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,63 +29,48 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=V2MTz9cQbW6iOz9s5K63TnyC6Zgxqq4IL2SaMXC9LcI=; b=csoUggRnUiApsh4DSzSOn3A7tX
- MaSGIVNQ8zEAhEX216D/CnQ+qftW4sRSTNfkHdXrBbwEyUMdq6wDW8veOZKiKFyyoajCWsH9p+CLx
- tx1R5q5jVhJvAZghi2oLotefPc638X0dVYrMXmkUr/+YvhlmHZZnuenkRaA3j75fy32g=;
+ bh=wq8hSFaCsG9kVVDYar5jQhzC0LVaC7nrUdUgjjUh7fU=; b=DSqOtOOj7FTyLIxQjDmEfd0mSp
+ Rk3EnFHxUfy69aq4fOKdQVlWf3EJgwA4+5aPFQY3C6sreF69FWf7nvkLwGKOj/GTusnO4ozgdPoXS
+ 3uTWbkX3Th5k6cMuwBPjIYoTruFYO7KPG71edMTHidKL7EHK/2C8sVR+DxgkgWvVwdo0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mIZvu-00HA76-2v
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Aug 2021 17:09:55 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id ACB4B613DB;
- Tue, 24 Aug 2021 17:09:43 +0000 (UTC)
+ id 1mIaCK-0003PQ-1b
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 Aug 2021 17:26:53 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 7D472610A7;
+ Tue, 24 Aug 2021 17:26:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1629824983;
- bh=k6/DyiNxY9iHMyx+vqOZpeLhFY0OrsTTDraIpNfySmk=;
+ s=k20201202; t=1629826006;
+ bh=aIgNnNWgoZHQIiACgNhH+aNjlUHVUpf4mP6Hd9AYmJo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=m6mudTayuZeB7SiPMQXlGDH/1inDLPr+v9d0hlxVFaVmSr3pb9tz574iWPfbBC7N2
- jA5Lsn9U3zT49DcTaRzhe3Vs+4/tQqI3b0DLFlfBHDYpfPjSu2UJLsx14S5yh+kPCb
- uTcmtS1OufW7MKSbzo4MpzjbVg1xwxjN55SWRdowLT1hi1lcjntZoNeUGHkYnkxhnL
- OiHmQrIOmx8BA5DlrI+ZJKHCv9pkrhueHI52J8sZueo4exQ5m9lFi9Jlb7awJfYL1r
- PZPYvuouE3yOGDwC0wGwDOY1pkIuXWHFeY+hoY4qjv9e7RHtaS44Ia0dRtxnxVpg7P
- HOEi52W+z4HkQ==
-Date: Tue, 24 Aug 2021 10:09:42 -0700
+ b=GSeeaSKCriryh/io7TCKIjo5xUuUMX1HI/pARLoZcfeWy6iZBgey5msDgWfNi1Jt6
+ Fa1+CM0ITFBVMj8TJJagrs/EL1RhzYW5fu2JQgJlu45MRuQjRmh3TN/nM0s2DZGSxb
+ OQZlp05VQv8U3lph0UL3BIVuiwklgjWblZnSTMeHRzXkvYhgKrSQicx2Kq6gEKcJud
+ uzcBhnSf2p+RN0g8QU4+RqtP4VErG6UtmEAjfnoHfdfmb6cmT8lb4K5qawm5g9jT/F
+ LTyBj1A6GN3etNnhZ/1N+Aucp23md5QmOuLVLNoR59E9OPABVTygWmJKjeEnGDxZmJ
+ ss3UjX3PPB97g==
+Date: Tue, 24 Aug 2021 10:26:45 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <YSUn1j22s/kc+hWS@google.com>
-References: <20210823170151.1434772-1-jaegeuk@kernel.org>
- <baa8a361-1a22-76a0-423d-4378178f7073@kernel.org>
+Message-ID: <YSUr1GS0M7weoRTt@google.com>
+References: <20210824011948.15408-1-chao@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <baa8a361-1a22-76a0-423d-4378178f7073@kernel.org>
-X-Spam-Score: -5.9 (-----)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  On 08/24, Chao Yu wrote: > On 2021/8/24 1:01, Jaegeuk Kim
- wrote: > > We must flush dirty pages when calling fsync() during
- checkpoint=disable.
- > > Returning zero makes inode being clear, which fails t [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
+In-Reply-To: <20210824011948.15408-1-chao@kernel.org>
+X-Spam-Score: -0.8 (/)
+X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
+ See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mIZvu-00HA76-2v
-Subject: Re: [f2fs-dev] [PATCH] f2fs: don't ignore writing pages on fsync
- during checkpoint=disable
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1mIaCK-0003PQ-1b
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix wrong option name printed by
+ parse_options()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,37 +82,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 08/24, Chao Yu wrote:
-> On 2021/8/24 1:01, Jaegeuk Kim wrote:
-> > We must flush dirty pages when calling fsync() during checkpoint=disable.
-> > Returning zero makes inode being clear, which fails to flush them when
-> > enabling checkpoint back even by sync_inodes_sb().
+> It prints below kernel message during mounting w/ checkpoint=disable
+> option:
 > 
-> Without this patch, file can be persisted via checkpoint=enable as well, my
-> testcase:
+> "F2FS-fs (pmem0): checkpoint=merge cannot be used with checkpoint=disable"
 > 
-> - mount -t f2fs -o checkpoint=disable,checkpoint_nomerge /dev/pmem0 /mnt/f2fs/
-> - cp file /mnt/f2fs/
-> - xfs_io /mnt/f2fs/file -c "fdatasync"
-> - mount -o remount,checkpoint=enable /dev/pmem0 /mnt/f2fs/
-> - umount /mnt/f2fs
-> - mount /dev/pmem0 /mnt/f2fs
-> - md5sum file /mnt/f2fs/file
-> chksum values are the same.
+> Fix typo "checkpoint=merge" w/ "checkpoint_merge"
 > 
-> Am I missing something?
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>  fs/f2fs/super.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
+> 
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 49e153fd8183..88c66e46bd5c 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -1289,6 +1289,12 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>  		return -EINVAL;
+>  	}
+>  
+> +	if (test_opt(sbi, DISABLE_CHECKPOINT) &&
+> +			test_opt(sbi, MERGE_CHECKPOINT)) {
+> +		f2fs_err(sbi, "checkpoint_merge cannot be used with checkpoint=disable\n");
+> +		return -EINVAL;
 
-I'm trying to address one subtle issue where a file has only NEW_ADDR by the
-checkpoint=disable test. I don't think this hurts anything but can see
-some mitigation of the issue.
+What about disabling MERGE_CHECKPOINT autmatically?
 
-> 
-> Thanks,
+> +	}
+> +
+>  	/* Not pass down write hints if the number of active logs is lesser
+>  	 * than NR_CURSEG_PERSIST_TYPE.
+>  	 */
+> -- 
+> 2.32.0
 
 
 _______________________________________________
