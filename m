@@ -2,64 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8FB03F7DBE
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Aug 2021 23:32:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA9E83F7DC3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Aug 2021 23:33:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mJ0V4-0005G3-15; Wed, 25 Aug 2021 21:31:58 +0000
+	id 1mJ0WD-0001jj-GT; Wed, 25 Aug 2021 21:33:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1mJ0V3-0005Ft-67
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Aug 2021 21:31:57 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <jaegeuk@kernel.org>) id 1mJ0WB-0001jb-W2
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Aug 2021 21:33:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=E0BfCWlxmBxiYxsShj2Ri+js269TVuCmn7ZykqJ+rXQ=; b=J0qkOEqfzmx31Lx+BalOEu7EJu
- effEHUHFnvgzwzxcmwCYkmJ4/EVsdajadyOiLh3sE2Geoh0osM2mz1DH6IU3sEmsY2MvXNDgIj6O0
- rSS4Vvl87hRLRiTP/38vRJWlCEZEyONoTES5FjU91JahHeTM+ZYLeZxHuhkPQiMZKuqU=;
+ bh=C8zdNtpSKCfWxr4aM6MQ/di+Mtx1sYZxFIdLNmpoYps=; b=NOi0qAtM2E8voy8aXtPZdJZrEc
+ i+tZ7YR7n60yJ2Tf2QJNiGgMceSIL/yB5394uJeHHuU26bNMrnRNOfuLHpAKlihOoRw5wkIH2Ob03
+ vE7xZbzdSlU106ieXMiIIWm5EC7J52TF1g5sqSuiPq59CVYdV7B6n43+nh1R4YYbmZ0k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=E0BfCWlxmBxiYxsShj2Ri+js269TVuCmn7ZykqJ+rXQ=; b=enxYCmkp4R6OOECTCHZA7NHfwX
- BQ3iN8pJ71IZbhhf67OnA5ilPRosJprztcHVux72aAb9U6WwXmAy72WvP7zMG35A2yvDWbGwsnl3W
- QUnLPdPbdGfbk23HgrKMx19+VId1LeHwaZ46M5IlgqeDJmwSQa28kSFMpQg9VuN7RxVM=;
+ bh=C8zdNtpSKCfWxr4aM6MQ/di+Mtx1sYZxFIdLNmpoYps=; b=iyX9tCWW1EGg57wKw0sYAP/I58
+ Jcbn2/HZGKSBWDL6Y4GxFTfyMgMZx4KeJb3IjGX7rBcfBDAjdfRY8+MPaFZl9Z8TjKLSYpUbXXSUV
+ 2/b3nMLYvwSqvhDzX9pFbxZ75dW5AqP9Fp3gCNZygyiU2YvR1f1wQDTnwQ5Fh7MWb+hc=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mJ0V1-0011DE-Py
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Aug 2021 21:31:57 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5593F610A1;
- Wed, 25 Aug 2021 21:31:45 +0000 (UTC)
+ id 1mJ0WB-0011F8-FI
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 Aug 2021 21:33:07 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id EAAD8610C7;
+ Wed, 25 Aug 2021 21:33:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1629927105;
- bh=GQpaLXOeTre1tnsmkfBCzjL/6oulqKgM/Nfy5gJGBlM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=LeTFnAR42dMEaeLmLllAJtGnnuzmOTJ2zuduQj1EvtxFxgbK1UB8lG+6GyHEg6I+t
- cDe8Lssni0jvQce61VRK6rx2/ZjiKIQLgCCStezU1EXnHH4ON4miFWP4wni7blVQFC
- mRbQ/9f8/ECcFAFrPDCOMOPWF3HJHiJtslKIUGiu/9tL7afKYrOxmoPA385+pha4cG
- g1moZrSG/jIBFYHiwc9R/tcFozpBOiqeNT7Fcnl70vYRsFrU/5EMPXwe9pYkhvBJGM
- ENHEoI0x43sGo5BF7gLD4bij8B7W1lfmjpTwJh7QtHfhvqITuryuL0JfOOC4nc/TZi
- KYHc77utMzp3Q==
-Date: Wed, 25 Aug 2021 14:31:43 -0700
+ s=k20201202; t=1629927182;
+ bh=D8iK6G3Bb7hdOrp7isR46w/hrxdUS2CD53SAelcnhxg=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=lTb1ngu/UMRiIKK9CndtSGS0JuGl2Utt1PvlqBUqRaGtv4NTbljUD0dd22Alw1iWA
+ Lwd9gBG1eXLOx8o3WH1Oc0p6r7BHQkIiLedPBYuCSdZVZ5qrpxSuRvlyNBKNg0owdd
+ dXe5RVPPQ+JRSBYzrcJ4K9K7zBOpav6t/trCWSThnPaoeLHLtDsEq3WfxOvIRtJeFJ
+ 3ohCG6dRrz1LryyfdcaEAAOCtoE0MhUBZ0l6FWQCAeYf1ga7YIfr7ZW6idm80Q96eY
+ lN5LUCFWhK1FKj8hSB5v629I3vdiGftJ4sGzBO6GAWdaF9e0VPfFl2pYhN20SC+0+x
+ +PpGdYGWvA6lA==
+Date: Wed, 25 Aug 2021 14:33:00 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <YSa2v7oLMAWZP+b5@google.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <YSa3DPBIFZ5P17vt@google.com>
 References: <20210823170151.1434772-1-jaegeuk@kernel.org>
- <baa8a361-1a22-76a0-423d-4378178f7073@kernel.org>
- <YSUn1j22s/kc+hWS@google.com>
- <d0a48947-e4df-9b0f-735e-6b306a64c4fe@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <d0a48947-e4df-9b0f-735e-6b306a64c4fe@kernel.org>
+In-Reply-To: <20210823170151.1434772-1-jaegeuk@kernel.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -67,9 +64,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 08/25, Chao Yu wrote: > On 2021/8/25 1:09, Jaegeuk Kim
- wrote: > > On 08/24, Chao Yu wrote: > > > On 2021/8/24 1:01, Jaegeuk Kim wrote:
- > > > > We must flush dirty pages when calling fsync() during [...] 
+ Content preview:  We must flush all the dirty data when enabling checkpoint
+ back. Let's guarantee that first. In order to mitigate any failure, let's
+ flush data in fsync as well during checkpoint=disable. Signed-off-by: Jaegeuk
+ Kim <jaegeuk@kernel.org> --- v2 from v1: - handle sync_inodes_sb() failure
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -84,8 +82,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mJ0V1-0011DE-Py
-Subject: Re: [f2fs-dev] [PATCH] f2fs: don't ignore writing pages on fsync
+X-Headers-End: 1mJ0WB-0011F8-FI
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: don't ignore writing pages on fsync
  during checkpoint=disable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -98,61 +96,72 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 08/25, Chao Yu wrote:
-> On 2021/8/25 1:09, Jaegeuk Kim wrote:
-> > On 08/24, Chao Yu wrote:
-> > > On 2021/8/24 1:01, Jaegeuk Kim wrote:
-> > > > We must flush dirty pages when calling fsync() during checkpoint=disable.
-> > > > Returning zero makes inode being clear, which fails to flush them when
-> > > > enabling checkpoint back even by sync_inodes_sb().
-> > > 
-> > > Without this patch, file can be persisted via checkpoint=enable as well, my
-> > > testcase:
-> > > 
-> > > - mount -t f2fs -o checkpoint=disable,checkpoint_nomerge /dev/pmem0 /mnt/f2fs/
-> > > - cp file /mnt/f2fs/
-> > > - xfs_io /mnt/f2fs/file -c "fdatasync"
-> > > - mount -o remount,checkpoint=enable /dev/pmem0 /mnt/f2fs/
-> > > - umount /mnt/f2fs
-> > > - mount /dev/pmem0 /mnt/f2fs
-> > > - md5sum file /mnt/f2fs/file
-> > > chksum values are the same.
-> > > 
-> > > Am I missing something?
-> > 
-> > I'm trying to address one subtle issue where a file has only NEW_ADDR by the
-> 
-> Oh, I doubt that we may failed to flush data of all inodes due to failures during
-> sync_inodes_sb(), additionally, how about adding retry logic for sync_inodes_sb()
-> if there is still any F2FS_DIRTY_DATA reference counts in f2fs_enable_checkpoint()
-> to mitigate this issue, e.g.:
-> 
-> f2fs_enable_checkpoint()
-> 
-> 	do {
-> 		sync_inode_sb();
-> 		congestion_wait();
-> 		cond_resched();
-> 	} while (get_pages(sbi, F2FS_DIRTY_DATA) && retry_count--)
-> 
-> 	if (get_pages(sbi, F2FS_DIRTY_DATA))
-> 		f2fs_warm("");
+We must flush all the dirty data when enabling checkpoint back. Let's guarantee
+that first. In order to mitigate any failure, let's flush data in fsync as well
+during checkpoint=disable.
 
-Agreed. Sent v2.
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+v2 from v1:
+ - handle sync_inodes_sb() failure
 
-> 
-> Thanks,
-> 
-> > checkpoint=disable test. I don't think this hurts anything but can see
-> > some mitigation of the issue.
-> > 
-> > > 
-> > > Thanks,
+ fs/f2fs/file.c  |  5 ++---
+ fs/f2fs/super.c | 11 ++++++++++-
+ 2 files changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index cc2080866c54..3330efb41f22 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -263,8 +263,7 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+ 	};
+ 	unsigned int seq_id = 0;
+ 
+-	if (unlikely(f2fs_readonly(inode->i_sb) ||
+-				is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
++	if (unlikely(f2fs_readonly(inode->i_sb)))
+ 		return 0;
+ 
+ 	trace_f2fs_sync_file_enter(inode);
+@@ -278,7 +277,7 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+ 	ret = file_write_and_wait_range(file, start, end);
+ 	clear_inode_flag(inode, FI_NEED_IPU);
+ 
+-	if (ret) {
++	if (ret || is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
+ 		trace_f2fs_sync_file_exit(inode, cp_reason, datasync, ret);
+ 		return ret;
+ 	}
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 49e153fd8183..d2f97dfb17af 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2088,8 +2088,17 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+ 
+ static void f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
+ {
++	int retry = DEFAULT_RETRY_IO_COUNT;
++
+ 	/* we should flush all the data to keep data consistency */
+-	sync_inodes_sb(sbi->sb);
++	do {
++		sync_inodes_sb(sbi->sb);
++		cond_resched();
++		congestion_wait(BLK_RW_ASYNC, DEFAULT_IO_TIMEOUT);
++	} while (get_pages(sbi, F2FS_DIRTY_DATA) && retry--);
++
++	if (unlikely(!retry))
++		f2fs_warn(sbi, "checkpoint=enable has some unwritten data.");
+ 
+ 	down_write(&sbi->gc_lock);
+ 	f2fs_dirty_to_prefree(sbi);
+-- 
+2.33.0.rc2.250.ged5fa647cd-goog
+
 
 
 _______________________________________________
