@@ -2,60 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F7F43F804A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Aug 2021 04:03:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47C313F8C81
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Aug 2021 18:52:34 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mJ4jr-0004Cu-8N; Thu, 26 Aug 2021 02:03:31 +0000
+	id 1mJIc7-00048t-4m; Thu, 26 Aug 2021 16:52:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1mJ4jp-0004Ch-S8
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Aug 2021 02:03:29 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1mJIc5-00048X-Gw
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Aug 2021 16:52:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gJohtL3iKHwPERaojKuLQ2vmp+dW350PgYUzloeHUp4=; b=hgWDe2MBffypLHVYrewkMv+Gka
- VMM3iv/F7umEmDxozK7ei3qHebFAaKSKxUYDoNPfkujLNUp8J8T08e1a/cLmxxAIOrJraQ2XcOX7U
- UR31zRjbTue/kqhhtmyEodoXX3o8qC1fnWYRU76cjr+3GrPscbMHgYTfkw3VjInb4pkE=;
+ bh=h4km+co2cPM9RnoyNeQobKcFrCQT/hwF89pGgh7GPhE=; b=P7YPYcdU3Xo2TEPBBkLhcfo9yj
+ CfEIDEGb3Rd8cb7q1/X1K8Re/aIJJslP7xqNMpUhcgsq/3FE/M/p+e4ydNS25AdFcWM3sqMqtePyq
+ bhvfgxF2V2qDdofkXH5i9Q6g39oY0Rdmuaa4aLeMvBgzfhK2ZpoFolyMbo0hiBdM3l+c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=gJohtL3iKHwPERaojKuLQ2vmp+dW350PgYUzloeHUp4=; b=J
- lZrd0cuYwW+oOdzvvzz9mfqAUTA3tif4PLilCnqRJrY3/CfH3O/guMhZ5byi4Wsf7BBDaZOWnuKhU
- nN3gOAPk4Ga1PKF9rw1kDLjU3Ki55uTU93r3v0PcR2PmMuzsv3xROH3CEy0ZgHgB0douOpU4I8mQX
- 2JdygzUROI2yleHY=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=h4km+co2cPM9RnoyNeQobKcFrCQT/hwF89pGgh7GPhE=; b=iF2+pFujFxwG/gBUWQlEkFFDdL
+ azl2Fxmhdff5gV7OtIYwXal0IjOPyyFxtk/1CU82Og5aYS+4/F/jg3wE6jpFDIDaw27FEVRKFUagv
+ mYpeYSPhU6GgYZsWkizkIB4Y26KUWGc4RTWEtqp1ab81wwGeZwciYnEN/1xXVD6g3mHA=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mJ4jo-00018E-KL
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Aug 2021 02:03:29 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 0E96460F5C;
- Thu, 26 Aug 2021 02:03:21 +0000 (UTC)
+ id 1mJIc3-0002cJ-5z
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 26 Aug 2021 16:52:25 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 9E4B560F6F;
+ Thu, 26 Aug 2021 16:52:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1629943403;
- bh=/e7s8OHhSJWB06eMdrxjfFecme8EyMtS8cI5Ew9WuX8=;
- h=From:To:Cc:Subject:Date:From;
- b=HGtn92z8/PNNaHuSsUgeUxMJW3B2l3O6tP4it/rTNaT+8/vh7vhX/gCluuViBGrWZ
- 5cOpf0EtXLqcgP0dBbIETMTVwYQnTzobh5EtSx6ZKjUtxzPyXiuE28xgzBf7MBKFZ9
- 2yezHlTcuW6FE0tfKn2a5AlyZms+SUXHHQLS0a4K/IIfQl6rafM0l2mt+MLJ+h92ba
- RsODULdl7FvrKhm8VbR5tpGNsv/MgHOZa4a/4cIueRn9dKkRSKBtxCEuuENy6i9hQl
- 6LnskCM/yOzp5BFgO5IJjFcijj0fxT56XnMFKvyCv9IpLImC930kIag7G85fEeQZJF
- Cg4OaJaXFZGfw==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Thu, 26 Aug 2021 10:03:15 +0800
-Message-Id: <20210826020315.9032-1-chao@kernel.org>
-X-Mailer: git-send-email 2.32.0
+ s=k20201202; t=1629996737;
+ bh=guErEWGgIDqVdyfI48N0DvYQV67NWP3/SnLf44qfyPE=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=TWyi+FVi1qU8QTruMGbCChcl56G2e9GzyTo2mCeFA7wsMRPleNRV+awoOyDlLZZLG
+ N95jEpV1PbA7PxYp5JvewfhZTAvAbVwCRETXysbtZhrJhpjCWIXg7cEIadmrJlaydv
+ VkEMg7sfIX28Kp99UVA8dCUI5m0NuHIVtGtg6+t59neNK4ZmBt3Z3SNB6VPp3/lA/1
+ +lkrDk2yzCpCT/CTpSlYJkYAu5IIyJ3X/9N3LxEGll16F4puyRidWghvcm2aIY8n8O
+ XTJtdlR9WWwvrzlqps9asL7TnJrLlV53Yvn8Bpt77Bw6F+GkLeIN/0K1M4imY8s92a
+ 6AFm9sPIyIw6Q==
+Date: Thu, 26 Aug 2021 09:52:16 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <YSfGwKtGhutsTJ8x@google.com>
+References: <20210823170151.1434772-1-jaegeuk@kernel.org>
+ <YSa3DPBIFZ5P17vt@google.com>
 MIME-Version: 1.0
-X-Spam-Score: -1.6 (-)
+Content-Disposition: inline
+In-Reply-To: <YSa3DPBIFZ5P17vt@google.com>
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -66,10 +69,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- -0.8 AWL AWL: Adjusted score from AWL reputation of From: address
-X-Headers-End: 1mJ4jo-00018E-KL
-Subject: [f2fs-dev] [PATCH] f2fs: fix unexpected ENOENT comes from
- f2fs_map_blocks()
+ -0.0 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1mJIc3-0002cJ-5z
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: don't ignore writing pages on fsync
+ during checkpoint=disable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,105 +84,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In below path, it will return ENOENT if filesystem is shutdown:
+From 64fe93a7f9c35c2b5a34cfa3cf84158852c201be Mon Sep 17 00:00:00 2001
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Thu, 19 Aug 2021 14:00:57 -0700
+Subject: [PATCH] f2fs: guarantee to write dirty data when enabling checkpoint
+ back
 
-- f2fs_map_blocks
- - f2fs_get_dnode_of_data
-  - f2fs_get_node_page
-   - __get_node_page
-    - read_node_page
-     - is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN)
-       return -ENOENT
- - force return value from ENOENT to 0
+We must flush all the dirty data when enabling checkpoint back. Let's guarantee
+that first by adding a retry logic on sync_inodes_sb(). In addition to that,
+this patch adds to flush data in fsync when checkpoint is disabled, which can
+mitigate the sync_inodes_sb() failures in advance.
 
-It should be fine for read case, since it indicates a hole condition,
-and caller could use .m_next_pgofs to skip the hole and continue the
-lookup.
-
-However it may cause confusing for write case, since leaving a hole
-there, and said nothing was wrong doesn't help.
-
-There is at least one case from dax_iomap_actor() will complain that,
-so fix this in prior to supporting dax in f2fs.
-
-xfstest generic/388 reports below warning:
-
-ubuntu godown: xfstests-induced forced shutdown of /mnt/scratch_f2fs:
-------------[ cut here ]------------
-WARNING: CPU: 0 PID: 485833 at fs/dax.c:1127 dax_iomap_actor+0x339/0x370
-Call Trace:
- iomap_apply+0x1c4/0x7b0
- ? dax_iomap_rw+0x1c0/0x1c0
- dax_iomap_rw+0xad/0x1c0
- ? dax_iomap_rw+0x1c0/0x1c0
- f2fs_file_write_iter+0x5ab/0x970 [f2fs]
- do_iter_readv_writev+0x273/0x2e0
- do_iter_write+0xab/0x1f0
- vfs_iter_write+0x21/0x40
- iter_file_splice_write+0x287/0x540
- do_splice+0x37c/0xa60
- __x64_sys_splice+0x15f/0x3a0
- do_syscall_64+0x3b/0x90
- entry_SYSCALL_64_after_hwframe+0x44/0xae
-
-ubuntu godown: xfstests-induced forced shutdown of /mnt/scratch_f2fs:
-------------[ cut here ]------------
-RIP: 0010:dax_iomap_pte_fault.isra.0+0x72e/0x14a0
-Call Trace:
- dax_iomap_fault+0x44/0x70
- f2fs_dax_huge_fault+0x155/0x400 [f2fs]
- f2fs_dax_fault+0x18/0x30 [f2fs]
- __do_fault+0x4e/0x120
- do_fault+0x3cf/0x7a0
- __handle_mm_fault+0xa8c/0xf20
- ? find_held_lock+0x39/0xd0
- handle_mm_fault+0x1b6/0x480
- do_user_addr_fault+0x320/0xcd0
- ? rcu_read_lock_sched_held+0x67/0xc0
- exc_page_fault+0x77/0x3f0
- ? asm_exc_page_fault+0x8/0x30
- asm_exc_page_fault+0x1e/0x30
-
-Fixes: 83a3bfdb5a8a ("f2fs: indicate shutdown f2fs to allow unmount successfully")
-Signed-off-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/data.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ Change log from v2:
+- repharse the patch description a bit
+- fix retry condition check
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 5e4120b92f59..8e8824605f83 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1504,7 +1504,21 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 	if (err) {
- 		if (flag == F2FS_GET_BLOCK_BMAP)
- 			map->m_pblk = 0;
+ fs/f2fs/file.c  |  5 ++---
+ fs/f2fs/super.c | 11 ++++++++++-
+ 2 files changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index cc2080866c54..3330efb41f22 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -263,8 +263,7 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+ 	};
+ 	unsigned int seq_id = 0;
+ 
+-	if (unlikely(f2fs_readonly(inode->i_sb) ||
+-				is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
++	if (unlikely(f2fs_readonly(inode->i_sb)))
+ 		return 0;
+ 
+ 	trace_f2fs_sync_file_enter(inode);
+@@ -278,7 +277,7 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+ 	ret = file_write_and_wait_range(file, start, end);
+ 	clear_inode_flag(inode, FI_NEED_IPU);
+ 
+-	if (ret) {
++	if (ret || is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
+ 		trace_f2fs_sync_file_exit(inode, cp_reason, datasync, ret);
+ 		return ret;
+ 	}
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 49e153fd8183..b8fecf4f37e0 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2088,8 +2088,17 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+ 
+ static void f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
+ {
++	int retry = DEFAULT_RETRY_IO_COUNT;
 +
- 		if (err == -ENOENT) {
-+			/*
-+			 * There is one exceptional case that read_node_page()
-+			 * may return -ENOENT due to filesystem has been
-+			 * shutdown or cp_error, so force to convert error
-+			 * number to EIO for such case.
-+			 */
-+			if (map->m_may_create &&
-+				(is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN) ||
-+				f2fs_cp_error(sbi))) {
-+				err = -EIO;
-+				goto unlock_out;
-+			}
+ 	/* we should flush all the data to keep data consistency */
+-	sync_inodes_sb(sbi->sb);
++	do {
++		sync_inodes_sb(sbi->sb);
++		cond_resched();
++		congestion_wait(BLK_RW_ASYNC, DEFAULT_IO_TIMEOUT);
++	} while (get_pages(sbi, F2FS_DIRTY_DATA) && retry--);
 +
- 			err = 0;
- 			if (map->m_next_pgofs)
- 				*map->m_next_pgofs =
++	if (unlikely(retry < 0))
++		f2fs_warn(sbi, "checkpoint=enable has some unwritten data.");
+ 
+ 	down_write(&sbi->gc_lock);
+ 	f2fs_dirty_to_prefree(sbi);
 -- 
-2.32.0
+2.33.0.rc2.250.ged5fa647cd-goog
 
 
 
