@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C8043FC09A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Aug 2021 03:57:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BA293FC0AD
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Aug 2021 04:04:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mKt1c-0004EA-Dw; Tue, 31 Aug 2021 01:57:20 +0000
+	id 1mKt8d-0001iM-LP; Tue, 31 Aug 2021 02:04:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1mKt1a-0004E3-LJ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 Aug 2021 01:57:18 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <chao@kernel.org>) id 1mKt8b-0001iG-Ts
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 Aug 2021 02:04:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dZh6bkBKbU2Kvb4d8ci9ZyJ1fdFEZqsKDhqy4LNfiUE=; b=ckCbB8wqKdwB4iRxFyqd4iTxhE
- RDqTgnFRGushzY689o+3Y58RVfkkn5Wj5VtT9WnpySKeBhIUJeZEduEQ44SVwb+UwhRAQTksJyX8u
- fAABQC7U716wG1bFv5tepvEBEyKfzMbuzmFik+8wPL4y+Mw1N2NlcaCJVha+DOXb1Hq4=;
+ bh=pWz+ELnsmrRFOJr0WkCr9nNG/O8zzC77ngGgyVaPQFs=; b=CEDdQrUqen92mCh468vAadR+qi
+ M7NnBRdMqbobCf1viTzzMWTSb9/bqVXztnqBPr3k/LrPsqoNx7jSqXDNqa/8hukuyvjUAVIRa60q2
+ XKk9dpHPz7ltm2BEVvaJNpqYMK51HYbADfJ7oLXIuHulYkxn0MOH97EYhYtdqVpKT6Oo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,36 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dZh6bkBKbU2Kvb4d8ci9ZyJ1fdFEZqsKDhqy4LNfiUE=; b=Bev0yfVgOnkDsEJNFb1uvfDLZy
- YZWG9nmkxnwK5BK/KEaohiQHqZRdZycUanZRYzvT5rAyFPYeqJCB7YiVBFPeQqFyEFqduSGtkhYaB
- 2KMie21J5O0cp34iV6HiJxOMGOtfEHAzTaHn3jbGl9plg+0VRcptt7nDQa7HEVwI7AtU=;
+ bh=pWz+ELnsmrRFOJr0WkCr9nNG/O8zzC77ngGgyVaPQFs=; b=QBdBn7ZmRNpXLuJIxYz90t5may
+ OSmOYQ0oTQKqNWIHcSVOeWs3etvvXXZEbPiTqraqpQ/oV0n4AT9ZrZoPXrJozmC6lm8/sG7o89IGK
+ 8//HRtu1AVBe9cwwvQWEurnyRD2pzz2OWSO3XQ9FWslXz7qhoXmEw+Yon7+1w7jshly0=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mKt1Z-0006Bz-6A
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 Aug 2021 01:57:18 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 2F1CD6101C;
- Tue, 31 Aug 2021 01:57:06 +0000 (UTC)
+ id 1mKt8a-0006P6-Aj
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 Aug 2021 02:04:33 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 21343600AA;
+ Tue, 31 Aug 2021 02:04:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1630375026;
- bh=F+z5UHuWDdV+ffpMysnS1XGdtsy8b9i8pwL3eUp8Y/Y=;
+ s=k20201202; t=1630375466;
+ bh=tLp4LG+o8dZOpplbm9O+XCZS+ucavCtGk1I1yTmjv1Y=;
  h=Subject:To:References:From:Date:In-Reply-To:From;
- b=XkQ21EPBzspO8UnY4PdnPN/P5iO5aqRfgY/egkyCMWg2eLOpT1ag6BEIcI2Y6w+0b
- rt4eWnILpvYj1TOhBiMx0h5wtpRG2sqeCb+AZ57LpfjsHSrCU2QOTAm7+hFtImzycv
- Nc43yb3AZ3NI/JU8RFe3I3EV1ahBbxPbfbVPRCmWcx0QnMUwLX8RD/PNjN38yvWs7J
- Ro3qWoob8Q2ge8qVwL7KFc3blISIgwaV13E08VWM8Ysxppr067Vp5xnu3atSPmqnRS
- bGuhaZZDp0ulipvoM7R9rKH9B5V87mbu5z2BPOn3yrIo8Jk6H2T8k3g93Mu9dGegl8
- AfwELM5tUCYWg==
+ b=qwtrb9H/Ahn+PQZ9nIO7SGw7b07RIau5V+8u5rN47So/2Ti9SBHM+6myyLfYj8xII
+ 2F0Yr2Naq8nfb9wt3WFeOLcLefCs4PEXEb/ngk1HtqbC7Yfl2h0Aw9IpjcgCdTr8or
+ bpBgakK/LcIBpr4a1PnePNU2kbc96E4m/2zAzo1XaN616Nx2qqiV1Mmd4vfpBueui9
+ fTHaqu+c0u+LxNCYwbMQ+pi2vyngT1KiSRb4BBzNwJWgWgFwK3gvjb3zuhuGf7BW4v
+ CFRdtaR4O5qKjBYpMXzsV8JQ/INzeEyVUvO7cTVegOSynMJdeqMCGO3xG1L0CTeB/F
+ zGTjB6h4lNAyw==
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 References: <20210831005346.118701-1-jaegeuk@kernel.org>
+ <20210831005346.118701-2-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <d7268523-aa56-323a-d5a8-bef7fc69f126@kernel.org>
-Date: Tue, 31 Aug 2021 09:57:03 +0800
+Message-ID: <f4ef1181-87e9-d76a-9084-29808aeef7b4@kernel.org>
+Date: Tue, 31 Aug 2021 10:04:24 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20210831005346.118701-1-jaegeuk@kernel.org>
+In-Reply-To: <20210831005346.118701-2-jaegeuk@kernel.org>
 Content-Language: en-US
 X-Spam-Score: -1.4 (-)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
@@ -72,9 +73,9 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  not necessarily valid
  -0.9 NICE_REPLY_A           Looks like a legit reply (A)
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mKt1Z-0006Bz-6A
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: deallocate compressed pages when
- error happens
+X-Headers-End: 1mKt8a-0006P6-Aj
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: should put a page beyond EOF when
+ preparing a write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,14 +92,13 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2021/8/31 8:53, Jaegeuk Kim wrote:
-> In f2fs_write_multi_pages(), f2fs_compress_pages() allocates pages for
-> compression work in cc->cpages[]. Then, f2fs_write_compressed_pages() initiates
-> bio submission. But, if there's any error before submitting the IOs like early
-> f2fs_cp_error(), previously it didn't free cpages by f2fs_compress_free_page().
-> Let's fix memory leak by putting that just before deallocating cc->cpages.
+> The prepare_compress_overwrite() gets/locks a page to prepare a read, and calls
+> f2fs_read_multi_pages() which checks EOF first. If there's any page beyond EOF,
+> we unlock the page and set cc->rpages[i] = NULL, which we can't put the page
+> anymore. This makes page leak, so let's fix by putting that page.
 > 
 
-Fixes: 4c8ff7095bef ("f2fs: support data compression")
+Fixes: a949dc5f2c5c ("f2fs: compress: fix race condition of overwrite vs truncate")
 
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
