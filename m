@@ -2,60 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C772C3FBB69
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 30 Aug 2021 20:06:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 868C93FC02A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Aug 2021 02:54:06 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mKlfd-0002nW-9M; Mon, 30 Aug 2021 18:06:09 +0000
+	id 1mKs2I-0000MG-Kt; Tue, 31 Aug 2021 00:53:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1mKlfc-0002nJ-Ex
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 Aug 2021 18:06:08 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1mKs2H-0000M5-4z
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 Aug 2021 00:53:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tWIszcsmXuVTe3RPHiQIxYMneQLLyUwkPcqxQ3FIDpI=; b=XDNbR7Em/MIb8G6M8jgZElOrUj
- /8xwcJpmGfeKCE397KT8Zl79FBHKM3qGOknDMvlC+dMUyIMiL3MDFrpiq1B4L2TY2feLP3wnH2Z3/
- snUfg1AL5iAanObL1RfSW67rxal6swS2O9+7PqIf89l3MZB2lVYRI3OT7DPX0Phjxjvg=;
+ bh=S/eM6ub/e/UKAnLGYQrIwljPO3L/gHJfpOtSIwN+JGc=; b=eFV8wzCpWT2xPOKNMkjCb3lmNS
+ Y0M4WkdAp2JQ/eThS+llQdz/rFTWfH0fx7tXU9PRVyVo6V84q47d6FEZ0GQ5aJI49sWNShlLMP3sI
+ SKYaFL9mExVFkY8+LI14Z5IHEnGfBMkbyg6b9cG2cn0oQiZlBxQA8nlY1Z22KoY+lP+I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=tWIszcsmXuVTe3RPHiQIxYMneQLLyUwkPcqxQ3FIDpI=; b=V
- XjRY4YfAegiDxpzK1LStLPLAVS/KB/XxVqLUMPf4H3a/zSHtzSBjlt7Sl/KnLjhESreAGEpbxVW5W
- zw01SE9s/bFAydn0uqskoYeJ79cmR708z8LOMAqC7wxYlRdcksMJZgI07iqTK2TP4rPdYRxukqha4
- Q49dGqvVXYbVhEbk=;
+ List-Owner:List-Archive; bh=S/eM6ub/e/UKAnLGYQrIwljPO3L/gHJfpOtSIwN+JGc=; b=J
+ BO1m3Jle/q12qmS3r6YuxTMxuZx/c5/cT1gIYpgUwxXJNAH7LEiKNzoHUAPoLBqlWMoxO22TSdZ76
+ kxZ852KBv7goJj+StnaGwEWXQngnyc/mhIKEBVv6+RXwUgsfBjf77YUBXn1SVFZAKWbJcl4rbYhIL
+ rBcGJjAGRpDKnKic=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mKlfX-0000nh-JZ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 Aug 2021 18:06:08 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id E01B160F5B;
- Mon, 30 Aug 2021 16:47:18 +0000 (UTC)
+ id 1mKs2F-0003mu-JT
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 Aug 2021 00:53:57 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 767A260FE6;
+ Tue, 31 Aug 2021 00:53:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1630342039;
- bh=/ZbEAxvBW5ig7WPYzIG6ftbGUGoR7j4+CJT1CyKUAgE=;
- h=Date:From:To:Cc:Subject:From;
- b=pPqSREqxmcM2xCHL9kODFPILmxDGalIsKDmDe4jGEPsUozDmh+ruX/O/LmhFODtxt
- VIYvEwC66svykfXl46dTWe79Ys9le0rVp8NZQw7+j4+oAkLtIeqaBDdNerIXmXcYy2
- DL1OPRMOsyyZ2q+lnCE7aOMpGrtF1gToEk+RLJeAnoj92vfbhp0ATxlcesE0t4ukna
- UCMbyhEXzp4HW4Eeddf/2PerQXND5kpqT+osxua6VBfYadx7WWHEOBZqSUV18dXwku
- NgpMAbi14Mi2x+cqbjH7Q8Ol9FNwDAMOZ5wOFyU3Kl+CO6fH5m7N17PykROLOlsM3a
- try7iQyJi19Lg==
-Date: Mon, 30 Aug 2021 09:47:17 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <YS0LlXIhvZc4r5Vt@sol.localdomain>
+ s=k20201202; t=1630371228;
+ bh=ooTDUto4Y8X1OmuC8lpldPc6v/zwqtRT620l+46tx0c=;
+ h=From:To:Cc:Subject:Date:From;
+ b=asjTqDVPpZEmoBXOBj1lHhcouEn9iDwA4r5DOw8i0HfIcKsq5N/baZc2n19KOMziG
+ ppoP9V4ey2IqQoOmsJqNSdRV84vibU70KO6vy13o+fCqeKD3cD6e/BiGGg7CuBjvQY
+ IOHvVluo0KhZ6t33ysLfjRUoT/2IVAIQ+UG53G2T2CNTBdt/omBPgf88GAyBwSjFTC
+ UXOLBHIdhqF0B0mhUJr4eAz28PZi2V3VxILSkCRVPq12dp/zc+Kxl00DUCuePFXv7z
+ 25tWMz00qIZzedzbHRAZVb7yZpeVp4ZY9yezFG8wKwYKoLLTwgSbGBbHOStWGyuJck
+ UK48Duvrcf4YQ==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 30 Aug 2021 17:53:45 -0700
+Message-Id: <20210831005346.118701-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.33.0.259.gc128427fd7-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Spam-Score: -0.1 (/)
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -65,8 +66,10 @@ X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1mKlfX-0000nh-JZ
-Subject: [f2fs-dev] [GIT PULL] fscrypt updates for 5.15
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1mKs2F-0003mu-JT
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: deallocate compressed pages when error
+ happens
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,55 +81,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The following changes since commit ff1176468d368232b684f75e82563369208bc371:
+In f2fs_write_multi_pages(), f2fs_compress_pages() allocates pages for
+compression work in cc->cpages[]. Then, f2fs_write_compressed_pages() initiates
+bio submission. But, if there's any error before submitting the IOs like early
+f2fs_cp_error(), previously it didn't free cpages by f2fs_compress_free_page().
+Let's fix memory leak by putting that just before deallocating cc->cpages.
 
-  Linux 5.14-rc3 (2021-07-25 15:35:14 -0700)
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/compress.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-are available in the Git repository at:
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index ec70a0a32327..c1bf9ad4c220 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1394,12 +1394,6 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 
+ 	for (--i; i >= 0; i--)
+ 		fscrypt_finalize_bounce_page(&cc->cpages[i]);
+-	for (i = 0; i < cc->nr_cpages; i++) {
+-		if (!cc->cpages[i])
+-			continue;
+-		f2fs_compress_free_page(cc->cpages[i]);
+-		cc->cpages[i] = NULL;
+-	}
+ out_put_cic:
+ 	kmem_cache_free(cic_entry_slab, cic);
+ out_put_dnode:
+@@ -1410,6 +1404,12 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 	else
+ 		f2fs_unlock_op(sbi);
+ out_free:
++	for (i = 0; i < cc->nr_cpages; i++) {
++		if (!cc->cpages[i])
++			continue;
++		f2fs_compress_free_page(cc->cpages[i]);
++		cc->cpages[i] = NULL;
++	}
+ 	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
+ 	cc->cpages = NULL;
+ 	return -EAGAIN;
+-- 
+2.33.0.259.gc128427fd7-goog
 
-  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fscrypt-for-linus
-
-for you to fetch changes up to 38ef66b05cfa3560323344a0b3e09e583f1eb974:
-
-  fscrypt: document struct fscrypt_operations (2021-07-28 21:40:36 -0700)
-
-----------------------------------------------------------------
-
-Some small fixes and cleanups for fs/crypto/:
-
-- Fix ->getattr() for ext4, f2fs, and ubifs to report the correct
-  st_size for encrypted symlinks.
-
-- Use base64url instead of a custom Base64 variant.
-
-- Document struct fscrypt_operations.
-
-----------------------------------------------------------------
-Eric Biggers (7):
-      fscrypt: add fscrypt_symlink_getattr() for computing st_size
-      ext4: report correct st_size for encrypted symlinks
-      f2fs: report correct st_size for encrypted symlinks
-      ubifs: report correct st_size for encrypted symlinks
-      fscrypt: remove mention of symlink st_size quirk from documentation
-      fscrypt: align Base64 encoding with RFC 4648 base64url
-      fscrypt: document struct fscrypt_operations
-
- Documentation/filesystems/fscrypt.rst |  15 ++---
- fs/crypto/fname.c                     | 106 +++++++++++++++++++------------
- fs/crypto/hooks.c                     |  44 +++++++++++++
- fs/ext4/symlink.c                     |  12 +++-
- fs/f2fs/namei.c                       |  12 +++-
- fs/ubifs/file.c                       |  13 +++-
- include/linux/fscrypt.h               | 116 ++++++++++++++++++++++++++++++++--
- 7 files changed, 260 insertions(+), 58 deletions(-)
 
 
 _______________________________________________
