@@ -2,57 +2,57 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72CB63FD476
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Sep 2021 09:33:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AB093FD4E1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Sep 2021 10:06:51 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mLKkZ-00065X-Uf; Wed, 01 Sep 2021 07:33:35 +0000
+	id 1mLLGe-00019D-RQ; Wed, 01 Sep 2021 08:06:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1mLKkY-00065H-2v
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Sep 2021 07:33:34 +0000
+ (envelope-from <chao@kernel.org>) id 1mLLGd-00018l-3s
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Sep 2021 08:06:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=79qNy07G3tuuHUyU595sCqDFO5CseDJE6fuuoDW1Br8=; b=ly5gDB4IDjAvND/qpi2LXjazlm
- lJED36FmTeyUukbbY6OZ5NdH4dO0bm+l6I3PZpW0ogcejXsiHIi57SlU40IUeg1n6wGYuMr2mK5UY
- elNrEoDblGobfLkqexXDe/d5YoplruyHNq3bGyQmbJ/2MKPtEHttfflCpeybnYgI2KtY=;
+ bh=Pblvpa1XiHJljoQs8KOWJQEidfESGx7IO3ScQM/D3sw=; b=Wt+jCSEdbwwDvSjc4M2ODiAV2w
+ hW2WugyfKrAMc5X104ayTeETLQoergaBDV2mmCGwG2UnyGBtMTd1jXcREOvKomAE9iNfTgaNujf33
+ ujA5esB5SChvOP6Gi4yyjnD3/+igjZ+n6XgwAI8Rpy7N0qIYtyliHlzK7iyphqsVDlHI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=79qNy07G3tuuHUyU595sCqDFO5CseDJE6fuuoDW1Br8=; b=S
- araPzeehJ/pGIvi9O+rDnFKE7Lg8Ovhxzzq70+en47+Oz4+U8eTf+Si667xiYpWC1Zw6N4ZjTEYlQ
- 6dKKcJ7QP9JaShgM9nYRl1m65kb679tqsyPNVVJRyNbDTHl8nr5aK6F4GKWrg6z8B7JmntW9RXXHD
- S8J+pL6j+BMZN2o8=;
+ List-Owner:List-Archive; bh=Pblvpa1XiHJljoQs8KOWJQEidfESGx7IO3ScQM/D3sw=; b=U
+ 2AplAqfaj2bZWmHFlacUsJufD8yUASPwwaSKA4y9ZmvhqRxAhS9/3K5DMQk3CGoTlMt53yaROU1T5
+ IBQa+4o3RrkIu3BwqZLPyB0HkyGUcML02D+mlxd/tAGLSi+pOLfNPHf7PEmd7RsrPNFi6ldOwzyJB
+ /iUwxFSlVKVZkIxY=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mLKkX-00A6SA-BQ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Sep 2021 07:33:33 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id D9B0E61053;
- Wed,  1 Sep 2021 07:33:26 +0000 (UTC)
+ id 1mLLGc-00A8Al-Fd
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Sep 2021 08:06:43 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 7C5C06103D;
+ Wed,  1 Sep 2021 08:06:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1630481607;
- bh=oVGW2LLKuSUoG6VqtTOQRtvJs9Oj6W5e/WXkqgv1p48=;
+ s=k20201202; t=1630483589;
+ bh=HFXW2CXUVuj9t9Ig1elcp8R+lAYqA68TQyV8IJQJvmA=;
  h=From:To:Cc:Subject:Date:From;
- b=UByV8Mv+AkKXy8nUpooF1l85Nds35ZYIfmlkX0/FMg8NaRfaTogefjTKXmQHgXeK5
- JoBzZhB/wJEHZxgbcFy4t8iEzSY9mRcXHA22TzTzwFCYNuDAOvRUKyMgPt/ZttkL89
- h4TJ6xKWD5kB8ESndJTbT468xUmiomKGBUIsEnxkTB2092VScKhv8rqvqNW6okXqdD
- uRVvlPpUXN0D7PPMlILkPK93lMtDsk0V3zDnJEhDPXfYJOmrG0yhBlBmz/r97/Of7B
- YudtnVT+RT7CIQ+4I74718h/tBTAlAh8lYctcVoA1hTiJ9u/G5Vo6gqmxNKuZONdrQ
- Ik+EVN6je3CgQ==
+ b=PrGxvohdSMKpxmdJwW5SPfczCcjE5fL6gAUWGavIuNT7hu0PyUfwKybImG0WvaXn2
+ z6nig86cxvCyPjpfz5yZUO20j9538S1kNeoDCyH/GkInabkNG0+Xz4WFvbgCUj+M23
+ rlhVNBwclhRUhpt1ReCG9oiLeAClaia2Vp8yZ2RCgxmFi4kIGLfZkNO62TylLX0dFC
+ Z03oFieXanxlH0WK1lRf5yvL/FvgayU4z2FOeY9BEgM8YKhHRMk0MgZnq1eFv8EHZm
+ 65B5ZtdSWg+hyWNPERdua/0Q9JNMx5TZU6Ule3BpLYY+Sl2lh57XqawNLMw7GDofPr
+ LOin7K0sJnF4A==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Wed,  1 Sep 2021 15:32:32 +0800
-Message-Id: <20210901073232.109355-1-chao@kernel.org>
+Date: Wed,  1 Sep 2021 16:06:21 +0800
+Message-Id: <20210901080621.110319-1-chao@kernel.org>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 X-Spam-Score: -5.9 (-----)
@@ -62,10 +62,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch enables f2fs_balance_fs_bg() to check all
- metadatas'
- dirty threshold rather than just checking node block's, so that checkpoint()
- from background can be triggered more frequently to avoid h [...] 
+ Content preview: Quoted from [1] "I do remember that I've added this code back
+ then because otherwise orphan cleanup was losing updates to quota files.
+ But you're right that now I don't see how that could be happening and it would
+ be [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -80,8 +80,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mLKkX-00A6SA-BQ
-Subject: [f2fs-dev] [PATCH] f2fs: introduce excess_dirty_threshold()
+X-Headers-End: 1mLLGc-00A8Al-Fd
+Subject: [f2fs-dev] [PATCH v2] f2fs: avoid attaching SB_ACTIVE flag during
+ mount
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,103 +94,82 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
+Cc: Jan Kara <jack@suse.cz>, Zhang Yi <yi.zhang@huawei.com>,
+ Chao Yu <chao.yu@linux.dev>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch enables f2fs_balance_fs_bg() to check all metadatas' dirty
-threshold rather than just checking node block's, so that checkpoint()
-from background can be triggered more frequently to avoid heaping up
-too much dirty metadatas.
+Quoted from [1]
 
-Threshold value by default:
-race with foreground ops	single type	global
-No				16MB		24MB
-Yes				24MB		36MB
+"I do remember that I've added this code back then because otherwise
+orphan cleanup was losing updates to quota files. But you're right
+that now I don't see how that could be happening and it would be nice
+if we could get rid of this hack"
 
-In addtion, let f2fs_balance_fs_bg() be aware of roll-forward sapce
-as well as fsync().
+[1] https://lore.kernel.org/linux-ext4/99cce8ca-e4a0-7301-840f-2ace67c551f3@huawei.com/T/#m04990cfbc4f44592421736b504afcc346b2a7c00
 
+Related fix in ext4 by
+commit 72ffb49a7b62 ("ext4: do not set SB_ACTIVE in ext4_orphan_cleanup()").
+
+f2fs has the same hack implementation in
+- f2fs_recover_orphan_inodes()
+- f2fs_recover_fsync_data()
+
+Let's get rid of this hack as well in f2fs.
+
+Cc: Zhang Yi <yi.zhang@huawei.com>
+Cc: Jan Kara <jack@suse.cz>
+Acked-by: Jan Kara <jack@suse.cz>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/f2fs.h    |  3 +++
- fs/f2fs/node.h    |  5 -----
- fs/f2fs/segment.c | 23 +++++++++++++++++++++--
- 3 files changed, 24 insertions(+), 7 deletions(-)
+v2:
+- don't bother checkpoint disabling path
+ fs/f2fs/checkpoint.c | 3 ---
+ fs/f2fs/recovery.c   | 8 ++------
+ 2 files changed, 2 insertions(+), 9 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 6c5e75f86da4..5ae2ca6dba96 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -562,6 +562,9 @@ enum {
- 
- #define MAX_DIR_RA_PAGES	4	/* maximum ra pages of dir */
- 
-+/* dirty segments threshold for triggering CP */
-+#define DEFAULT_DIRTY_THRESHOLD		4
-+
- /* for in-memory extent cache entry */
- #define F2FS_MIN_EXTENT_LEN	64	/* minimum extent length */
- 
-diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
-index ff14a6e5ac1c..18b98cf0465b 100644
---- a/fs/f2fs/node.h
-+++ b/fs/f2fs/node.h
-@@ -138,11 +138,6 @@ static inline bool excess_cached_nats(struct f2fs_sb_info *sbi)
- 	return NM_I(sbi)->nat_cnt[TOTAL_NAT] >= DEF_NAT_CACHE_THRESHOLD;
- }
- 
--static inline bool excess_dirty_nodes(struct f2fs_sb_info *sbi)
--{
--	return get_pages(sbi, F2FS_DIRTY_NODES) >= sbi->blocks_per_seg * 8;
--}
--
- enum mem_type {
- 	FREE_NIDS,	/* indicates the free nid list */
- 	NAT_ENTRIES,	/* indicates the cached nat entry */
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 7358342652ec..ffd148429a9d 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -535,6 +535,25 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 83e9bc0f91ff..7d8803a4cbc2 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -705,9 +705,6 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
  	}
- }
  
-+static inline bool excess_dirty_threshold(struct f2fs_sb_info *sbi)
-+{
-+	int factor = rwsem_is_locked(&sbi->cp_rwsem) ? 3 : 2;
-+	unsigned int dents = get_pages(sbi, F2FS_DIRTY_DENTS);
-+	unsigned int qdata = get_pages(sbi, F2FS_DIRTY_QDATA);
-+	unsigned int nodes = get_pages(sbi, F2FS_DIRTY_NODES);
-+	unsigned int meta = get_pages(sbi, F2FS_DIRTY_META);
-+	unsigned int imeta = get_pages(sbi, F2FS_DIRTY_IMETA);
-+	unsigned int threshold = sbi->blocks_per_seg * factor *
-+					DEFAULT_DIRTY_THRESHOLD;
-+	unsigned int global_threshold = threshold * 3 / 2;
-+
-+	if (dents >= threshold || qdata >= threshold ||
-+		nodes >= threshold || meta >= threshold ||
-+		imeta >= threshold)
-+		return true;
-+	return dents + qdata + nodes + meta + imeta >  global_threshold;
-+}
-+
- void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
- {
- 	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
-@@ -553,8 +572,8 @@ void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
- 	else
- 		f2fs_build_free_nids(sbi, false, false);
+ #ifdef CONFIG_QUOTA
+-	/* Needed for iput() to work correctly and not trash data */
+-	sbi->sb->s_flags |= SB_ACTIVE;
+-
+ 	/*
+ 	 * Turn on quotas which were not enabled for read-only mounts if
+ 	 * filesystem has quota feature, so that they are updated correctly.
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index 04655511d7f5..706ddb3c95c0 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -787,8 +787,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ 	}
  
--	if (excess_dirty_nats(sbi) || excess_dirty_nodes(sbi) ||
--		excess_prefree_segs(sbi))
-+	if (excess_dirty_nats(sbi) || excess_dirty_threshold(sbi) ||
-+		excess_prefree_segs(sbi) || f2fs_space_for_roll_forward(sbi))
- 		goto do_sync;
+ #ifdef CONFIG_QUOTA
+-	/* Needed for iput() to work correctly and not trash data */
+-	sbi->sb->s_flags |= SB_ACTIVE;
+ 	/* Turn on quotas so that they are updated correctly */
+ 	quota_enabled = f2fs_enable_quota_files(sbi, s_flags & SB_RDONLY);
+ #endif
+@@ -816,10 +814,8 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ 	err = recover_data(sbi, &inode_list, &tmp_inode_list, &dir_list);
+ 	if (!err)
+ 		f2fs_bug_on(sbi, !list_empty(&inode_list));
+-	else {
+-		/* restore s_flags to let iput() trash data */
+-		sbi->sb->s_flags = s_flags;
+-	}
++	else
++		f2fs_bug_on(sbi, sbi->sb->s_flags & SB_ACTIVE);
+ skip:
+ 	fix_curseg_write_pointer = !check_only || list_empty(&inode_list);
  
- 	/* there is background inflight IO or foreground operation recently */
 -- 
 2.32.0
 
