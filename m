@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28E19400967
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  4 Sep 2021 05:06:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77EFB400970
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  4 Sep 2021 05:33:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mMM0v-0004PG-JM; Sat, 04 Sep 2021 03:06:41 +0000
+	id 1mMMQo-0000Ir-E3; Sat, 04 Sep 2021 03:33:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1mMM0u-0004P9-Gz
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Sep 2021 03:06:40 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <chao@kernel.org>) id 1mMMQm-0000Il-Q1
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Sep 2021 03:33:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tDhGE93/g9glcm5jpR+liAnKcM1a3TOUh4YDIMdSn9Y=; b=bmElCfCUANwvQ2/04H7jH2e2nS
- qc2atpT8AHE/kOrn3ittkDcsOYxMjvm/ZO3un0lqQ1zDeXk1hx7E67cgOkO9vW1Tm5z1uNak3aqgw
- UhMj+X/+xmOvxjKohEtVgL24O6qPeOmPkbKwdoz6TciE4v6hIfdk/diSgDtofgK5wxLE=;
+ bh=Cgttt+PmuLXEwn6spezJx6rx3osncPK4AC5hjcfB9MA=; b=YcOYD+/bgD+rEzHyPIk9uH0sIZ
+ DUbdrPeZO21Nylz90N/OSPATlsZ/xp3jd8xDtfHf6Q3zJz2RvQcFsdjhUOWszn7Xj61YauBZK/mQ2
+ 89LqTycTIyPBmbLc3+JvhTcOjPKZpuzKaWgPreGwUzYt0/MwjqEAHil/VLoVx4Q9cVXw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
@@ -29,36 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tDhGE93/g9glcm5jpR+liAnKcM1a3TOUh4YDIMdSn9Y=; b=iJRN+Bt2RZ70hwwyTZAIWiKYAN
- 1wWx4QpSD50/fGZIVh0WrT/nJwAkAjWZl7A36S5jsQok6NVX+O6zd5Pmuo+i1c/8SprG2pVH0Miyu
- 2mJklrqKkNtHSrwOSyBsJTDJgaNf/jsGst86XiG0lfX4Mxbf3N0mrjdWrKUyHhD8zv4I=;
+ bh=Cgttt+PmuLXEwn6spezJx6rx3osncPK4AC5hjcfB9MA=; b=fRBvJJdcESaSybTsx9zW+oTDhQ
+ GpGLKNux2/fjdxEB1TdFNqlje0hOmECD4/jrphURytT7lFuTfQRT6MXgoDfZwMfDuKiWNakib5u2o
+ GIKj02ywMYU6FqRmsg0+7rbYaASNbOOmpVfBG2APHqWEgvR9+z7lRF6H60yVsisupyXI=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mMM0s-00DuaL-Vv
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Sep 2021 03:06:40 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 86B75600EF;
- Sat,  4 Sep 2021 03:06:27 +0000 (UTC)
+ id 1mMMQm-00DwPB-7F
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 04 Sep 2021 03:33:24 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id C813F6069E;
+ Sat,  4 Sep 2021 03:33:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1630724788;
- bh=bf45uTGNybJZynZ0RzcJn0qt6WIrwA62SQcCpztjVco=;
+ s=k20201202; t=1630726398;
+ bh=vDInDMJ4sMJnmqblJcXU0QqfdBm47jpBvsDvYyfEXBk=;
  h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=BBA14g3K8DT6djOS+Ljvnzu8d3eBEEg7azMEbvGJbLqOBe8VKUrYJdkg4hcVh5Nwy
- Syj992eOSgQR7CsHeDl1v1sU1w0DffD32pmM+8TiiakuuDPvKv9POFHnYUi3i+U7gb
- cFzihK0RTgKAm4EQDeSoDQCtFhDiBgvrwBBHNmIpQPvwYEG5YlS2VVU4tR+0P7ptue
- HHZ1K2vx+RbA1DT7auTYvzMMaHQ0BrusSlR7RWVzTKB2zX1w99fZnJOWahzxE0Ox7S
- jzxtZPpMaeCXOsRvRHAVAnd0xhSCHNLgr3tgT6+4S57yXgxCdH1ODKigHEkb1f4Ioz
- Kx7/mmDi+IPBA==
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20210901080621.110319-1-chao@kernel.org>
- <YTK7JDnpc6+LNqsl@google.com>
+ b=iraM5xTi9QjL341eo2RxFLV1aclSle5NhZTFsRGheHHVdZTduYXKuNdSs93EzOCVq
+ 6o6+FQAhLcCmT3W0T8wEK22PEIG7H86pLQ40MeFVSBw9J4Z5FGZ4xhz1B96WQPzce3
+ 5E2vDC0cVURUDAICMhdjbW0HBHLDiTu/f141xsy+q2kBL9cDHr+A8zZ64+gX1BYHye
+ IMUPst2ejWYNR+S/B15UyKj/Qa8LhwCHXK9b9gsVfK6+ZpvqhSEMtHzxvusaldthus
+ QsP7gybXytaFUFA7Yj42bC2O+uh1Ok9vWcctFh3+R+N2uc0t7i/iL8sfjaRdkPVBc2
+ z4ZPFGIU9cNCg==
+To: Daeho Jeong <daeho43@gmail.com>
+References: <20210902172404.3517626-1-daeho43@gmail.com>
+ <9ab17089-accc-c3a3-a5dc-007fc4eeaa20@kernel.org>
+ <CACOAw_yovM592K3-2fQzA6M29XqWu8s_2f+zXawKo-QpNSXq0w@mail.gmail.com>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <8756a722-3363-9033-4a5f-047e28af645c@kernel.org>
-Date: Sat, 4 Sep 2021 11:06:29 +0800
+Message-ID: <8f8e4695-4062-60c4-0f91-2a1f6a5b0a11@kernel.org>
+Date: Sat, 4 Sep 2021 11:33:20 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <YTK7JDnpc6+LNqsl@google.com>
+In-Reply-To: <CACOAw_yovM592K3-2fQzA6M29XqWu8s_2f+zXawKo-QpNSXq0w@mail.gmail.com>
 Content-Language: en-US
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
@@ -67,9 +68,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2021/9/4 8:17, Jaegeuk Kim wrote: > I remember this gave
- a regression before? I have removed changes which bothers checkpoint disabling
- path, how about testing this in dev-test branch for a while? 
+ Content preview:  On 2021/9/4 4:33,
+ Daeho Jeong wrote: >> if (f2fs_need_seq_seg(sbi))
+ >> return 0; >> >> static inline bool f2fs_need_seq_seg(struct f2fs_sb_info
+ *sbi) >> { >> return F2FS_OPTION(sbi).fs_mode == FS_MODE [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -85,9 +87,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mMM0s-00DuaL-Vv
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: avoid attaching SB_ACTIVE flag
- during mount
+X-Headers-End: 1mMMQm-00DwPB-7F
+Subject: Re: [f2fs-dev] [PATCH v4] f2fs: introduce fragment allocation mode
+ mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,96 +101,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Zhang Yi <yi.zhang@huawei.com>, Jan Kara <jack@suse.cz>,
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/9/4 8:17, Jaegeuk Kim wrote:
-> I remember this gave a regression before?
+On 2021/9/4 4:33, Daeho Jeong wrote:
+>>          if (f2fs_need_seq_seg(sbi))
+>>                  return 0;
+>>
+>> static inline bool f2fs_need_seq_seg(struct f2fs_sb_info *sbi)
+>> {
+>>          return F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_FIXED_BLK;
+>> }
+>>
+> 
+> Do you need this in select_policy(), either?
 
-I have removed changes which bothers checkpoint disabling path, how
-about testing this in dev-test branch for a while?
+IMO, for this mode, I prefer to disable background GC and just use newly
+written userdata to fragment image, so I think it's fine to keep it as it is
+here.
 
-BTW, any plan to porting checkpoint disabling testcases from android
-into xfstest suit?
+> Like,
+>          if (f2fs_need_rand_seg(sbi))
+>                  p->offset = prandom_u32() % (MAIN_SECS(sbi) *
+> sbi->segs_per_sec);
+>          else if (f2fs_need_seq_seg(sbi))
+>                  p->offset = 0;
+> 
+>> One more concern... we'd better to save fragment_remained_hole as well
+>> as fragment_remained_chunk,  otherwise, if fragment_chunk_size +
+>> fragment_hole_size > 512, fragment hole will be truncated to 512 -
+>> fragment_chunk_size due to we won't create hole with enough size as
+>> seg->next_blkoff has crossed end of current segment.
+>>
+> 
+> Sorry, I don't get it. You mean making fragment_remained_hole as a
+> global variable?
+
+As a per curseg field.
+
+> Maybe, we run into the same race condition issue you told before for
+> fragment_remained_chunk.
+> Could you clarify this more?
+
+e.g.
+
+F2FS_OPTION(sbi).fs_mode = FS_MODE_FRAGMENT_FIXED_BLK
+fragment_chunk_size = 384
+fragment_hole_size = 384
+
+When creating hole:
+
+- f2fs_allocate_data_block
+  - __refresh_next_blkoff
+    chunk locates in [0, 383] of current segment
+    seg->next_blkoff = 384
+    sbi->fragment_remained_chunk = 0
+    then we will reset sbi->fragment_remained_chunk to 384
+    and move seg->next_blkoff forward to 768 (384 + 384)
+  - __has_curseg_space() returns false
+  - allocate_segment() allocates new current segment
+
+So, for such case that hole may cross two segments, hole size may be truncated
+to left size of previous segment.
 
 Thanks,
 
 > 
-> On 09/01, Chao Yu wrote:
->> Quoted from [1]
->>
->> "I do remember that I've added this code back then because otherwise
->> orphan cleanup was losing updates to quota files. But you're right
->> that now I don't see how that could be happening and it would be nice
->> if we could get rid of this hack"
->>
->> [1] https://lore.kernel.org/linux-ext4/99cce8ca-e4a0-7301-840f-2ace67c551f3@huawei.com/T/#m04990cfbc4f44592421736b504afcc346b2a7c00
->>
->> Related fix in ext4 by
->> commit 72ffb49a7b62 ("ext4: do not set SB_ACTIVE in ext4_orphan_cleanup()").
->>
->> f2fs has the same hack implementation in
->> - f2fs_recover_orphan_inodes()
->> - f2fs_recover_fsync_data()
->>
->> Let's get rid of this hack as well in f2fs.
->>
->> Cc: Zhang Yi <yi.zhang@huawei.com>
->> Cc: Jan Kara <jack@suse.cz>
->> Acked-by: Jan Kara <jack@suse.cz>
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->> v2:
->> - don't bother checkpoint disabling path
->>   fs/f2fs/checkpoint.c | 3 ---
->>   fs/f2fs/recovery.c   | 8 ++------
->>   2 files changed, 2 insertions(+), 9 deletions(-)
->>
->> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
->> index 83e9bc0f91ff..7d8803a4cbc2 100644
->> --- a/fs/f2fs/checkpoint.c
->> +++ b/fs/f2fs/checkpoint.c
->> @@ -705,9 +705,6 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
->>   	}
->>   
->>   #ifdef CONFIG_QUOTA
->> -	/* Needed for iput() to work correctly and not trash data */
->> -	sbi->sb->s_flags |= SB_ACTIVE;
->> -
->>   	/*
->>   	 * Turn on quotas which were not enabled for read-only mounts if
->>   	 * filesystem has quota feature, so that they are updated correctly.
->> diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
->> index 04655511d7f5..706ddb3c95c0 100644
->> --- a/fs/f2fs/recovery.c
->> +++ b/fs/f2fs/recovery.c
->> @@ -787,8 +787,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
->>   	}
->>   
->>   #ifdef CONFIG_QUOTA
->> -	/* Needed for iput() to work correctly and not trash data */
->> -	sbi->sb->s_flags |= SB_ACTIVE;
->>   	/* Turn on quotas so that they are updated correctly */
->>   	quota_enabled = f2fs_enable_quota_files(sbi, s_flags & SB_RDONLY);
->>   #endif
->> @@ -816,10 +814,8 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
->>   	err = recover_data(sbi, &inode_list, &tmp_inode_list, &dir_list);
->>   	if (!err)
->>   		f2fs_bug_on(sbi, !list_empty(&inode_list));
->> -	else {
->> -		/* restore s_flags to let iput() trash data */
->> -		sbi->sb->s_flags = s_flags;
->> -	}
->> +	else
->> +		f2fs_bug_on(sbi, sbi->sb->s_flags & SB_ACTIVE);
->>   skip:
->>   	fix_curseg_write_pointer = !check_only || list_empty(&inode_list);
->>   
->> -- 
->> 2.32.0
+> Thanks,
+> 
 
 
 _______________________________________________
