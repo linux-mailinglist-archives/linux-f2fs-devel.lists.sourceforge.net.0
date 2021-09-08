@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C2684040BC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Sep 2021 23:51:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7958C4040BE
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Sep 2021 23:51:48 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mO5Tp-0003xt-13; Wed, 08 Sep 2021 21:51:41 +0000
+	id 1mO5Tv-0004BZ-7g; Wed, 08 Sep 2021 21:51:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1mO5To-0003xk-7y
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Sep 2021 21:51:40 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1mO5Tt-0004BT-Dv
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Sep 2021 21:51:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SA3rrBucMbT7/kuMDa6WC5Pa5Oguu3eq7KjQI+1xXq0=; b=djQ3GRuAeqGx4VznI2g0DItUED
- Jf96nif/+ix7lMC0ZUPEdET8075fiMWgzlsvtjP6datyjQbCz+zvU0C1TQvYA6HisCeFtRKPlR2Z6
- /TQFhTQpok6Pg9GztoQeANjpzYKuzkZ3Mdn3mVssHmG+PGa3+LHF/G3IISWetHpVMSkk=;
+ bh=+Gh3uUeccBpyVomCIlekGcz2B4AV+XF0RcbdvCeX4X0=; b=dexSqwxsClR+zE/mrQMP6hoHSQ
+ 6ACaqX2pIZwxvABoiSQYzuEuoxPObKxu8pNOK/td5nh4Fmh2q5cx5e2wBEdXi8Yw9Y58Br92/9927
+ ql8cE46yh4EfxiDk+vnYF2iJ1p6dDm3PqyVmHLtLcZZvug8FEtyggoPZGFFUSCyJfFXQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,63 +29,48 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SA3rrBucMbT7/kuMDa6WC5Pa5Oguu3eq7KjQI+1xXq0=; b=INMWdBE0SdaZRRGwpkD6i+0qIn
- IHPse+Iai4fGcWg6Lyv368YE8bXIMJpeutJ79dyWWfpGF2fUrH3CwDMo7YQQePeXrvMEk7Cs4ISIe
- 7QQERhP+J3f0q5/OAAvx0hBpmBoGmNdsAXNXWFx60ODB0b3yCfWAAWxOSaCZFJg41VX4=;
+ bh=+Gh3uUeccBpyVomCIlekGcz2B4AV+XF0RcbdvCeX4X0=; b=IKdkonm9ZZKZHh3so0Nv7QgUCg
+ 3kDBR3zzlhE5c7PrriiPPFF5uH2pyhuJwfsE/iipA4lbkWpGBogzaP2NqFMDTvZ5Rvc8mpmsD0JZi
+ Kks+G5LW1ENEpC//nJz4dwy44rxeLc/LlQvjrk3vzvhnlv/nJKiOgzu9zEhiRO7jHoG0=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mO5Tm-003uEG-Qi
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Sep 2021 21:51:40 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5B4BA60FDA;
+ id 1mO5Tp-0003YV-JY
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Sep 2021 21:51:45 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id AE0216115B;
  Wed,  8 Sep 2021 21:51:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1631137889;
- bh=i6jyH8PvgB9yhUYtCQiIMlEe2F7QGBiOJVd7oI0isaQ=;
+ bh=Q7/Auj+gxb7Tq2h7AKECQp7f+V7wXd8uIeRwsSwC2uI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=uc0ABPV3twDuxLbMd8GxOBFitN/d4dzY/uDlYPFrSwJ2ssdr1If877Acir+VjZZ8n
- Nt/1rGsencho7jBMorqXtpxbbAGOew+veyR+teonjCszMDWx75NRw2lv/M/1JDvZgE
- p6ecHZl1/g/3/8zg5mkWJqIhBqONxZnc+NctmDqqVS45hJ+/JP9bsKIhSTIVU4hLJT
- mC6a5VpUhXm37nyOBu54PPLjy8QaT9GOey4LjQfuAp8Nz0dM8f7Qgw9gHni6eqO2Hr
- br4oThTq/jK3hdSY3kuxtu/Qxx8lyhEc545uStdAaEsUArmfAqD5pOq6M2Ok1P+Rq6
- Y/EuKsKzzo1Ug==
+ b=g6B3xPzWzmSOWbVujz05WcWiMqbJmrvjf663bftxNBe3SpFvKrqnf9HjmQt02WCYM
+ SWydEF5fnJe2PDJt02TSsWwnOJNVN0DQIA8QyX31MW4y4bh6/xnq2+ec4fqkHIuubd
+ SvzFgbwlnsZrqqazTbtxtlvrW9iAUFJ0MBEqmS/KMjUsF4ZUwPLf58CtQO2n3YuINH
+ mUhMtIpAHEDSWvdU8iX5EZZMCqDZHUUQ0lA4wUD7b1eC2QFKcNXTByJg0iLHO3eXl9
+ YqTesOY0LwkjQtsa9SStbmzHvBr/PfEGeGubbTW0QRwltraAP+uT2feQHOEReo6aol
+ SXsE9sw2hR4Kw==
 From: Eric Biggers <ebiggers@kernel.org>
 To: stable@vger.kernel.org
-Date: Wed,  8 Sep 2021 14:50:32 -0700
-Message-Id: <20210908215033.1122580-4-ebiggers@kernel.org>
+Date: Wed,  8 Sep 2021 14:50:33 -0700
+Message-Id: <20210908215033.1122580-5-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.33.0.153.gba50c8fa24-goog
 In-Reply-To: <20210908215033.1122580-1-ebiggers@kernel.org>
 References: <20210908215033.1122580-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -3.4 (---)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> commit
- 461b43a8f92e68e96c4424b31e15f2b35f1bbfa9
- upstream. The stat() family of syscalls report the wrong size for encrypted
- symlinks, which has caused breakage in several userspace programs. 
- Content analysis details:   (-3.4 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
+X-Spam-Score: 2.0 (++)
+X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
+ See http://spamassassin.org/tag/ for more details.
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mO5Tm-003uEG-Qi
-Subject: [f2fs-dev] [PATCH 3/4] f2fs: report correct st_size for encrypted
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1mO5Tp-0003YV-JY
+Subject: [f2fs-dev] [PATCH 4/4] ubifs: report correct st_size for encrypted
  symlinks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -106,49 +91,55 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-commit 461b43a8f92e68e96c4424b31e15f2b35f1bbfa9 upstream.
+commit 064c734986011390b4d111f1a99372b7f26c3850 upstream.
 
 The stat() family of syscalls report the wrong size for encrypted
 symlinks, which has caused breakage in several userspace programs.
 
-Fix this by calling fscrypt_symlink_getattr() after f2fs_getattr() for
+Fix this by calling fscrypt_symlink_getattr() after ubifs_getattr() for
 encrypted symlinks.  This function computes the correct size by reading
 and decrypting the symlink target (if it's not already cached).
 
 For more details, see the commit which added fscrypt_symlink_getattr().
 
-Fixes: cbaf042a3cc6 ("f2fs crypto: add symlink encryption")
+Fixes: ca7f85be8d6c ("ubifs: Add support for encrypted symlinks")
 Cc: stable@vger.kernel.org
-Link: https://lore.kernel.org/r/20210702065350.209646-4-ebiggers@kernel.org
+Link: https://lore.kernel.org/r/20210702065350.209646-5-ebiggers@kernel.org
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/f2fs/namei.c | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ fs/ubifs/file.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index e20a0f9e6845..edc80855974a 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -1219,9 +1219,18 @@ static const char *f2fs_encrypted_get_link(struct dentry *dentry,
- 	return target;
+diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
+index d7d2fdda4bbd..3dbb5ac630e4 100644
+--- a/fs/ubifs/file.c
++++ b/fs/ubifs/file.c
+@@ -1642,6 +1642,16 @@ static const char *ubifs_get_link(struct dentry *dentry,
+ 	return fscrypt_get_symlink(inode, ui->data, ui->data_len, done);
  }
  
-+static int f2fs_encrypted_symlink_getattr(const struct path *path,
-+					  struct kstat *stat, u32 request_mask,
-+					  unsigned int query_flags)
++static int ubifs_symlink_getattr(const struct path *path, struct kstat *stat,
++				 u32 request_mask, unsigned int query_flags)
 +{
-+	f2fs_getattr(path, stat, request_mask, query_flags);
++	ubifs_getattr(path, stat, request_mask, query_flags);
 +
-+	return fscrypt_symlink_getattr(path, stat);
++	if (IS_ENCRYPTED(d_inode(path->dentry)))
++		return fscrypt_symlink_getattr(path, stat);
++	return 0;
 +}
 +
- const struct inode_operations f2fs_encrypted_symlink_inode_operations = {
- 	.get_link       = f2fs_encrypted_get_link,
--	.getattr	= f2fs_getattr,
-+	.getattr	= f2fs_encrypted_symlink_getattr,
- 	.setattr	= f2fs_setattr,
- #ifdef CONFIG_F2FS_FS_XATTR
- 	.listxattr	= f2fs_listxattr,
+ const struct address_space_operations ubifs_file_address_operations = {
+ 	.readpage       = ubifs_readpage,
+ 	.writepage      = ubifs_writepage,
+@@ -1669,7 +1679,7 @@ const struct inode_operations ubifs_file_inode_operations = {
+ const struct inode_operations ubifs_symlink_inode_operations = {
+ 	.get_link    = ubifs_get_link,
+ 	.setattr     = ubifs_setattr,
+-	.getattr     = ubifs_getattr,
++	.getattr     = ubifs_symlink_getattr,
+ #ifdef CONFIG_UBIFS_FS_XATTR
+ 	.listxattr   = ubifs_listxattr,
+ #endif
 -- 
 2.33.0.153.gba50c8fa24-goog
 
