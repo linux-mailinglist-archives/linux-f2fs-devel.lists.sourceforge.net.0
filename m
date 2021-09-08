@@ -2,76 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7958C4040BE
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Sep 2021 23:51:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
-	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mO5Tv-0004BZ-7g; Wed, 08 Sep 2021 21:51:47 +0000
-Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1mO5Tt-0004BT-Dv
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Sep 2021 21:51:45 +0000
+	by mail.lfdr.de (Postfix) with ESMTPS id 22E3F4040CF
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Sep 2021 00:00:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+Gh3uUeccBpyVomCIlekGcz2B4AV+XF0RcbdvCeX4X0=; b=dexSqwxsClR+zE/mrQMP6hoHSQ
- 6ACaqX2pIZwxvABoiSQYzuEuoxPObKxu8pNOK/td5nh4Fmh2q5cx5e2wBEdXi8Yw9Y58Br92/9927
- ql8cE46yh4EfxiDk+vnYF2iJ1p6dDm3PqyVmHLtLcZZvug8FEtyggoPZGFFUSCyJfFXQ=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=sZJpjL+7N7QiVJcWmB8P3JzLvMsWuaQIYB3GDQ00glg=; b=UISIp7UVeZVHnddbU7oXfrzfa5
+	LxVTJrZEOEtc8vt//1+trgTHDWXxPslXxVnpsqqs+XZuwuSbJGgoDrWfJN+pKv9Mxv2HTnvUJiUwq
+	S22oMqihHY6sE3WQXEpz3PQPM6Ib0UvXn6lL7oKfiHxd4ElVdbEY07zN3hJC3ar1DOgw=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
+	id 1mO5ce-0003im-LU; Wed, 08 Sep 2021 22:00:48 +0000
+Received: from [172.30.20.202] (helo=mx.sourceforge.net)
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <jaegeuk@kernel.org>) id 1mO5cd-0003ie-01
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Sep 2021 22:00:47 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=+Gh3uUeccBpyVomCIlekGcz2B4AV+XF0RcbdvCeX4X0=; b=IKdkonm9ZZKZHh3so0Nv7QgUCg
- 3kDBR3zzlhE5c7PrriiPPFF5uH2pyhuJwfsE/iipA4lbkWpGBogzaP2NqFMDTvZ5Rvc8mpmsD0JZi
- Kks+G5LW1ENEpC//nJz4dwy44rxeLc/LlQvjrk3vzvhnlv/nJKiOgzu9zEhiRO7jHoG0=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=JLa8YbqoPwiQg/Jd2draf5B5imcsgqzUVQSjEjmRPBs=; b=cleTiCcXOycxuKBlgFGcot2QPa
+ 0uOYX2gDPEhhpoq1pYf/dRievjfsdE5K/eVLVBHPBOTfEJlHGIm3cACEUpTSqaGY5D8piPy9jzCiC
+ k3ZEIQBY2qucalb5w86db4lhLWs0CRND94QKRGWLwwCbrnjDFfWyzGN+YzvNfSERxbMg=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=JLa8YbqoPwiQg/Jd2draf5B5imcsgqzUVQSjEjmRPBs=; b=e
+ C06dZ+LLGrJhQYjauw42skkfixaidEPx0sZVG12ZWR0DNcXn5n9ZVQjim18KAJhJUUlA2Ca9gQ+gn
+ W3NkheMQtDusbipuRINxE3ugzdizCw7SXuxSrDyVNKoy6epzYjFRGh+AJf38naUiYR4rGiqARyMfZ
+ phQiZgr26YBIzAnI=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mO5Tp-0003YV-JY
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Sep 2021 21:51:45 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id AE0216115B;
- Wed,  8 Sep 2021 21:51:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1631137889;
- bh=Q7/Auj+gxb7Tq2h7AKECQp7f+V7wXd8uIeRwsSwC2uI=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=g6B3xPzWzmSOWbVujz05WcWiMqbJmrvjf663bftxNBe3SpFvKrqnf9HjmQt02WCYM
- SWydEF5fnJe2PDJt02TSsWwnOJNVN0DQIA8QyX31MW4y4bh6/xnq2+ec4fqkHIuubd
- SvzFgbwlnsZrqqazTbtxtlvrW9iAUFJ0MBEqmS/KMjUsF4ZUwPLf58CtQO2n3YuINH
- mUhMtIpAHEDSWvdU8iX5EZZMCqDZHUUQ0lA4wUD7b1eC2QFKcNXTByJg0iLHO3eXl9
- YqTesOY0LwkjQtsa9SStbmzHvBr/PfEGeGubbTW0QRwltraAP+uT2feQHOEReo6aol
- SXsE9sw2hR4Kw==
-From: Eric Biggers <ebiggers@kernel.org>
-To: stable@vger.kernel.org
-Date: Wed,  8 Sep 2021 14:50:33 -0700
-Message-Id: <20210908215033.1122580-5-ebiggers@kernel.org>
+ id 1mO5cZ-00042H-GN
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Sep 2021 22:00:46 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 7F77D61102;
+ Wed,  8 Sep 2021 22:00:24 +0000 (UTC)
+To: stable@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Wed,  8 Sep 2021 15:00:20 -0700
+Message-Id: <20210908220020.599899-1-jaegeuk@google.com>
 X-Mailer: git-send-email 2.33.0.153.gba50c8fa24-goog
-In-Reply-To: <20210908215033.1122580-1-ebiggers@kernel.org>
-References: <20210908215033.1122580-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 2.0 (++)
+X-Spam-Score: 1.5 (+)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
+ 0.0 DKIM_ADSP_CUSTOM_MED   No valid author signature, adsp_override is
+ CUSTOM_MED
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+ domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mO5Tp-0003YV-JY
-Subject: [f2fs-dev] [PATCH 4/4] ubifs: report correct st_size for encrypted
- symlinks
+ 1.2 NML_ADSP_CUSTOM_MED    ADSP custom_med hit, and not from a mailing list
+X-Headers-End: 1mO5cZ-00042H-GN
+Subject: [f2fs-dev] [PATCH] f2fs: guarantee to write dirty data when
+ enabling checkpoint back
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,63 +78,75 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-f2fs-devel@lists.sourceforge.net
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@google.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+From: Jaegeuk Kim <jaegeuk@kernel.org>
 
-commit 064c734986011390b4d111f1a99372b7f26c3850 upstream.
+commit dddd3d65293a52c2c3850c19b1e5115712e534d8 upstream.
 
-The stat() family of syscalls report the wrong size for encrypted
-symlinks, which has caused breakage in several userspace programs.
+We must flush all the dirty data when enabling checkpoint back. Let's guarantee
+that first by adding a retry logic on sync_inodes_sb(). In addition to that,
+this patch adds to flush data in fsync when checkpoint is disabled, which can
+mitigate the sync_inodes_sb() failures in advance.
 
-Fix this by calling fscrypt_symlink_getattr() after ubifs_getattr() for
-encrypted symlinks.  This function computes the correct size by reading
-and decrypting the symlink target (if it's not already cached).
-
-For more details, see the commit which added fscrypt_symlink_getattr().
-
-Fixes: ca7f85be8d6c ("ubifs: Add support for encrypted symlinks")
-Cc: stable@vger.kernel.org
-Link: https://lore.kernel.org/r/20210702065350.209646-5-ebiggers@kernel.org
-Signed-off-by: Eric Biggers <ebiggers@google.com>
+Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/ubifs/file.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ fs/f2fs/file.c  |  5 ++---
+ fs/f2fs/super.c | 11 ++++++++++-
+ 2 files changed, 12 insertions(+), 4 deletions(-)
 
-diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
-index d7d2fdda4bbd..3dbb5ac630e4 100644
---- a/fs/ubifs/file.c
-+++ b/fs/ubifs/file.c
-@@ -1642,6 +1642,16 @@ static const char *ubifs_get_link(struct dentry *dentry,
- 	return fscrypt_get_symlink(inode, ui->data, ui->data_len, done);
- }
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 5c74b2997197..6ee8b1e0e174 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -259,8 +259,7 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+ 	};
+ 	unsigned int seq_id = 0;
  
-+static int ubifs_symlink_getattr(const struct path *path, struct kstat *stat,
-+				 u32 request_mask, unsigned int query_flags)
-+{
-+	ubifs_getattr(path, stat, request_mask, query_flags);
+-	if (unlikely(f2fs_readonly(inode->i_sb) ||
+-				is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
++	if (unlikely(f2fs_readonly(inode->i_sb)))
+ 		return 0;
+ 
+ 	trace_f2fs_sync_file_enter(inode);
+@@ -274,7 +273,7 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+ 	ret = file_write_and_wait_range(file, start, end);
+ 	clear_inode_flag(inode, FI_NEED_IPU);
+ 
+-	if (ret) {
++	if (ret || is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
+ 		trace_f2fs_sync_file_exit(inode, cp_reason, datasync, ret);
+ 		return ret;
+ 	}
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index c52988067887..476b2c497d28 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1764,8 +1764,17 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+ 
+ static void f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
+ {
++	int retry = DEFAULT_RETRY_IO_COUNT;
 +
-+	if (IS_ENCRYPTED(d_inode(path->dentry)))
-+		return fscrypt_symlink_getattr(path, stat);
-+	return 0;
-+}
+ 	/* we should flush all the data to keep data consistency */
+-	sync_inodes_sb(sbi->sb);
++	do {
++		sync_inodes_sb(sbi->sb);
++		cond_resched();
++		congestion_wait(BLK_RW_ASYNC, DEFAULT_IO_TIMEOUT);
++	} while (get_pages(sbi, F2FS_DIRTY_DATA) && retry--);
 +
- const struct address_space_operations ubifs_file_address_operations = {
- 	.readpage       = ubifs_readpage,
- 	.writepage      = ubifs_writepage,
-@@ -1669,7 +1679,7 @@ const struct inode_operations ubifs_file_inode_operations = {
- const struct inode_operations ubifs_symlink_inode_operations = {
- 	.get_link    = ubifs_get_link,
- 	.setattr     = ubifs_setattr,
--	.getattr     = ubifs_getattr,
-+	.getattr     = ubifs_symlink_getattr,
- #ifdef CONFIG_UBIFS_FS_XATTR
- 	.listxattr   = ubifs_listxattr,
- #endif
++	if (unlikely(retry < 0))
++		f2fs_warn(sbi, "checkpoint=enable has some unwritten data.");
+ 
+ 	down_write(&sbi->gc_lock);
+ 	f2fs_dirty_to_prefree(sbi);
 -- 
 2.33.0.153.gba50c8fa24-goog
 
