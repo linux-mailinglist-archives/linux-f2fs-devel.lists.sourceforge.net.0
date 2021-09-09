@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1295E40451F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Sep 2021 07:43:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 10B3640456E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Sep 2021 08:09:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mOCpz-0004Nt-F7; Thu, 09 Sep 2021 05:43:03 +0000
+	id 1mODFO-0002CJ-AR; Thu, 09 Sep 2021 06:09:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1mOCpx-0004Ni-IY
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 05:43:01 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <gregkh@linuxfoundation.org>) id 1mODFL-0002C7-5G
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 06:09:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=315i0KjCqmMqRhSkvw/onlcJhHSuxbF+K6Ycu5z4h7k=; b=e8/jdl6CJah1dNiOWP2pub9Eut
- 4zRot+1q4Cewm+KL8OMQsahg/ZK1sNtz47fnOI2Lq0ccfsLbMaDGkdpRbW0kwtUGWX7tvKLe8n8Vy
- 9lhVcHM3QDe8+tiTc0fTmb7AN02M/u6iUM2FRL2mD38AHXBR4u9RkbduBJpIwGcqPqco=;
+ bh=sWfRyjZXmyfJRMfMpmgdpGcsCK6wIFsAnM4M9HGEZ3U=; b=eXgSMuCxRyEwmdJlDc2/hzZzcE
+ iOVV4vlVaPfq+tlurU44zZ3SSgEqnQekw5B9Jj+PbeLtwshr9BEtILa+p/rI7P1ESHG7Hc2mvquCz
+ Y/dw0XCVf3rim9SzYBA70+gG0ubjMUth3yTY0MKsVvtC7GqpFuLMhEQ569hOFrpfh2SM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,36 +29,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=315i0KjCqmMqRhSkvw/onlcJhHSuxbF+K6Ycu5z4h7k=; b=VPSCoeyPJZnEWGIYKX8w7Kn8jS
- ppjykdiksbnBXh/qcIIjrJkEPjnA7Zi/p55yNCWmgCpUEVzc/Z9ny44XF7z79qe9uBzhtTZIjkm6W
- Ln17jifT+/ZFf18nMyeysaKFuLux4xWJzW9/4YXLCRmYEXhnddLQXWg7KZ2nv0YwjoiM=;
+ bh=sWfRyjZXmyfJRMfMpmgdpGcsCK6wIFsAnM4M9HGEZ3U=; b=O+togVcEkdbRG45uuG2MXxbgIv
+ 32V/7B/T54+iuCTnmQAlSiwoaYu8PChFldqd74gWD/aDYIy3PXASR2YouarxRDR30OliONzPUMGoB
+ wJyNjSo8GAtSJzaPs3dbkhiVblYFlGKLrJWmD7fgq2/D98NowrNtE7D5b1VwUC3+bGyc=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mOCpx-0006Vj-1T
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 05:43:01 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 782C761158;
- Thu,  9 Sep 2021 05:42:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1631166175;
- bh=r9o1CP4+B7HBUCKSiENG0NPcrypHvY9dY0wYuuke0sA=;
+ id 1mODFK-00086E-KZ
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 06:09:15 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0FA5561176;
+ Thu,  9 Sep 2021 06:09:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1631167747;
+ bh=yvjgmxybSsnsnCQKpzwUQ53dsvC/6l4aZ3Bu0jatUPw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=nCNQjT6zf4C6XVa8EEopbGip4FGZOKbtusEUVgIfNaHCmIxwQi9kJQ8iQkEwy7Qzh
- z3LmSet1HIh7HdcVoyqpDUZGFVDaUCo7BcG+hAWPBBIcrb0HqHeaEsFaCwEXW5MPQ4
- h8zCGi/2azd60XmjXnV/tdZlS2fwR3cUBeLCyQXXMbXhiqlRoSI6hA3oL36VGaRrp9
- /azXWvcceir4qBowTh7C75j9j1ecuLgJezj2dA6eNAL++y4YFQCslVvLwSlOh4agx3
- Yjn5CEAPZVOU5P/Lf9mIL3nY72Pw2CC1e3sqREDNW4FRB9XsYTcgyNL96UPEPw77ab
- muNrSQQIUANDw==
-Date: Wed, 8 Sep 2021 22:42:53 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Greg KH <gregkh@linuxfoundation.org>
-Message-ID: <YTme3altl3q5lc8N@google.com>
+ b=jkKNBXgL9g++cwgdNYvdwxLOLZokkzBbwl7Xz+tGjFCH4Zrho3tAAv7odaajips+6
+ 6bvPEorNDfM7OtaO8RiQn2IsMGY5+QOuoAL37ym2If4brKTZev/1N/pj163XMCsH+V
+ QhPq1Qd+r6aOhMGFZCDrW1EvAhjVz6dUqYtq1j0E=
+Date: Thu, 9 Sep 2021 08:09:05 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <YTmlAWm7g4NyM/rG@kroah.com>
 References: <20210908220020.599899-1-jaegeuk@google.com>
  <YTmaPCd3/cpMyNEe@kroah.com> <YTmbhc7J5ZdVp3vI@google.com>
- <YTmcbNMRaPzQRqmf@kroah.com>
+ <YTmcbNMRaPzQRqmf@kroah.com> <YTme3altl3q5lc8N@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <YTmcbNMRaPzQRqmf@kroah.com>
+In-Reply-To: <YTme3altl3q5lc8N@google.com>
 X-Spam-Score: -6.2 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -66,14 +63,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  @@CONTACT_ADDRESS@@ for details.
- Content preview:  On 09/09, Greg KH wrote: > On Wed, Sep 08, 2021 at 10:28:37PM
- -0700, Jaegeuk Kim wrote: > > On 09/09, Greg KH wrote: > > > On Wed, Sep
- 08, 2021 at 03:00:20PM -0700, Jaegeuk Kim wrote: > > > > From: Ja [...] 
+ Content preview:  On Wed, Sep 08, 2021 at 10:42:53PM -0700, Jaegeuk Kim wrote:
+ > On 09/09, Greg KH wrote: > > On Wed, Sep 08, 2021 at 10:28:37PM -0700,
+ Jaegeuk Kim wrote: > > > On 09/09, Greg KH wrote: > > > > On Wed, [...] 
  Content analysis details:   (-6.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [198.145.29.99 listed in list.dnswl.org]
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: linuxfoundation.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -84,7 +85,7 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -1.0 DKIMWL_WL_HIGH         DKIMwl.org - Whitelisted High sender
-X-Headers-End: 1mOCpx-0006Vj-1T
+X-Headers-End: 1mODFK-00086E-KZ
 Subject: Re: [f2fs-dev] [PATCH] f2fs: guarantee to write dirty data when
  enabling checkpoint back
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -103,41 +104,48 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 09/09, Greg KH wrote:
-> On Wed, Sep 08, 2021 at 10:28:37PM -0700, Jaegeuk Kim wrote:
-> > On 09/09, Greg KH wrote:
-> > > On Wed, Sep 08, 2021 at 03:00:20PM -0700, Jaegeuk Kim wrote:
-> > > > From: Jaegeuk Kim <jaegeuk@kernel.org>
+On Wed, Sep 08, 2021 at 10:42:53PM -0700, Jaegeuk Kim wrote:
+> On 09/09, Greg KH wrote:
+> > On Wed, Sep 08, 2021 at 10:28:37PM -0700, Jaegeuk Kim wrote:
+> > > On 09/09, Greg KH wrote:
+> > > > On Wed, Sep 08, 2021 at 03:00:20PM -0700, Jaegeuk Kim wrote:
+> > > > > From: Jaegeuk Kim <jaegeuk@kernel.org>
+> > > > > 
+> > > > > commit dddd3d65293a52c2c3850c19b1e5115712e534d8 upstream.
+> > > > > 
+> > > > > We must flush all the dirty data when enabling checkpoint back. Let's guarantee
+> > > > > that first by adding a retry logic on sync_inodes_sb(). In addition to that,
+> > > > > this patch adds to flush data in fsync when checkpoint is disabled, which can
+> > > > > mitigate the sync_inodes_sb() failures in advance.
+> > > > > 
+> > > > > Reviewed-by: Chao Yu <chao@kernel.org>
+> > > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > > > > ---
+> > > > >  fs/f2fs/file.c  |  5 ++---
+> > > > >  fs/f2fs/super.c | 11 ++++++++++-
+> > > > >  2 files changed, 12 insertions(+), 4 deletions(-)
 > > > > 
-> > > > commit dddd3d65293a52c2c3850c19b1e5115712e534d8 upstream.
-> > > > 
-> > > > We must flush all the dirty data when enabling checkpoint back. Let's guarantee
-> > > > that first by adding a retry logic on sync_inodes_sb(). In addition to that,
-> > > > this patch adds to flush data in fsync when checkpoint is disabled, which can
-> > > > mitigate the sync_inodes_sb() failures in advance.
-> > > > 
-> > > > Reviewed-by: Chao Yu <chao@kernel.org>
-> > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > > > ---
-> > > >  fs/f2fs/file.c  |  5 ++---
-> > > >  fs/f2fs/super.c | 11 ++++++++++-
-> > > >  2 files changed, 12 insertions(+), 4 deletions(-)
+> > > > What stable kernel(s) are you wanting to have this backported to?
 > > > 
-> > > What stable kernel(s) are you wanting to have this backported to?
+> > > 5.10 please.
 > > 
-> > 5.10 please.
+> > Why would you want to skip 5.14.y and 5.13.y?  You never want anyone to
+> > upgrade stable kernel releases and have a regression.
 > 
-> Why would you want to skip 5.14.y and 5.13.y?  You never want anyone to
-> upgrade stable kernel releases and have a regression.
+> I was just looking at the essential kernel version, since the fix is only
+> related to checkpoint=disable feature used in android only. Feel free to
+> merge it into any stable kernels if you want.
 
-I was just looking at the essential kernel version, since the fix is only
-related to checkpoint=disable feature used in android only. Feel free to
-merge it into any stable kernels if you want.
+No regressions for any stable releases is key here, Android is just one
+user of the kernel...
 
-> 
-> thanks,
-> 
-> greg k-h
+And in the future, just put a cc: stable in the signed-off-by area when
+you submit the patch and it will be handled automatically, like the
+documentation states :)
+
+thanks,
+
+greg k-h
 
 
 _______________________________________________
