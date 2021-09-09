@@ -2,93 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D985D40603D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Sep 2021 01:51:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9ED67406043
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Sep 2021 01:53:45 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mOTpT-0000zn-Oh; Thu, 09 Sep 2021 23:51:39 +0000
+	id 1mOTrU-000132-0D; Thu, 09 Sep 2021 23:53:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1mOTpS-0000zh-Jr
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 23:51:38 +0000
+ (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
+ id 1mOTrS-00012w-JO
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 23:53:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vnx9eaK6Rf7jbpckAL093aW2bY1xrkRJ0JeFL3qz8fg=; b=T4JV0Ow/bGSyV6BUlP1rFJG/HS
- zaHopZHTeXw9xCZ6x/jCLs4oUU7sCW7ugTSCLrB9LZyzSKSL0FlNvcEz3xUfilQBruouqdHhB2D8y
- uOj9PosO8OcpPxq/b8sXYs3apl0rpb6ecXaC5EfRzUD66LVV2VG9hEwkKOvN0e9KUrHc=;
+ bh=tlDpyVFqh42Lw6A9AKhhsKuBLU/hfAsuePCPNJlffPE=; b=H9j+vLGn6XkqgSL03+D7f3KgdB
+ EPEX4UGDK+ZeVtuwlKLbjOv26iOVnfhcpoYdLvvhaQhAXrGkjztghqlLAyQt0nlRD+e3T26LHKgSq
+ E/2xtBRmFvwI36XBsuEwyk0t2p1aWmRwY4dyXuW5VLpoKJ8icbCxawfhzHLCCcbY8+m0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vnx9eaK6Rf7jbpckAL093aW2bY1xrkRJ0JeFL3qz8fg=; b=bA9pKidW00k3Nvc1AxJitjeM73
- MPaTuL1tMnFbcf7RGNW/GmH5K0ve2nZpGMxyUlXHzq1WUJEfe76UuaVVMHQ3zHtFqY+W4n0axtlSg
- 9FU13YRbwW5UPBJVcPzSOOtwV/lgLVjHxVfqoj0ZKxh0mXFjkA4zm3WS3nie3d+odA38=;
+ bh=tlDpyVFqh42Lw6A9AKhhsKuBLU/hfAsuePCPNJlffPE=; b=aZlWc6UNEtbeg9VRAv58djGxpT
+ QkGF7nY2wqyRQ1h/AvmGMHqjSvtvQkbWkaPOLmThDgDwQduq7eU6vbtOGmGz5feWEggKvE1ZiMyNg
+ uoD2Nl7FUAbV98O0As7I6nZSzMph5QRRbWaX8mGsysd+xIY0hyTnDwaJwVyMX9dv7aCw=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mOTpR-005Qfm-WC
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 23:51:38 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5FB36610E9;
- Thu,  9 Sep 2021 23:51:29 +0000 (UTC)
+ id 1mOTrS-00038E-3E
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 23:53:42 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPS id A9F71610E9
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  9 Sep 2021 23:53:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1631231490;
- bh=fztYKXwCNriqil1UbKCuyBqnFoKNcnIMC9/mJUjAils=;
- h=Subject:To:References:From:Date:In-Reply-To:From;
- b=urGtZ56EpHaXAcPm9F103+W/UhQ6A5tOHIELnS27hJPbf0riXPNIIaQ/6F3sxJOLO
- bleOHITbxmgh64Aok8t3qKQ2IvxGOz4caCBewz8dMSN/OSkaQ/hnlU/37Bew3u4/zK
- l5BuFR+6K9rYH1aMV+28+uxaTtd0gcpLPEmTgBlH81ht7SNMjn+/2T7vpiKzcRvLUD
- eAvifvkG18e2XX6OlzN5s0Xi8T13NAbh2Uj6k2Rhl0n/wyTW823AyiihfH53kfpB4Z
- msrSzms5LlrOrJ2+WvX9PnhlkVWSnpAEY33GO/N5HMT/JDaMtx38UXGDgxVT0ixU5p
- E5UMLNWsHyqMg==
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20210907174351.1104857-1-jaegeuk@kernel.org>
-From: Chao Yu <chao@kernel.org>
-Message-ID: <6c40b766-2bdc-03c2-9e8a-e399d6e83282@kernel.org>
-Date: Fri, 10 Sep 2021 07:51:29 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ s=k20201202; t=1631231616;
+ bh=G/vqFVKiW/e5GgQb/moCqw0cbL95Ut8Mp2w5szirNVE=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=BppBNafiGj9hJnEh2kNocZAQOlOBqKyYfj0+oA6dvzH8qrW6lDE+bLIwYBlF0PFMh
+ hGpuRZ9Cr6zpzKy2eY0LhuQVnJYK8avQY2QJHwYc9u7IqaMlKnicikbKnjAgmEWxdk
+ GPJU0hf2l1J8Lmu5pykACaMZMUaHrr41uSiuc7jbMoqfwFp375VeCD0ufa6SPvWzJl
+ uJGIythSHbvKKqNAb3I1YxloxbGoacwFZdkLIfbMYP7MRwtfGkndviUgRzqdjCSTsv
+ b7P0qaPi5qyxsqE0WQy3elfpndgg2E5H3lZB/f3ME82n3+DG0ZrEZpZ43P27t2gBM5
+ 37r1EnnJ7A7Ew==
+Received: by pdx-korg-bugzilla-2.web.codeaurora.org (Postfix, from userid 48)
+ id 938CF60F6B; Thu,  9 Sep 2021 23:53:36 +0000 (UTC)
+From: bugzilla-daemon@bugzilla.kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 09 Sep 2021 23:53:36 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: high
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: ASSIGNED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_status cc
+Message-ID: <bug-214299-202145-DTl8RBY0lC@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-214299-202145@https.bugzilla.kernel.org/>
+References: <bug-214299-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-In-Reply-To: <20210907174351.1104857-1-jaegeuk@kernel.org>
-Content-Language: en-US
-X-Spam-Score: -7.6 (-------)
+X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2021/9/8 1:43, Jaegeuk Kim wrote: > We use inline_dentry
- which requires to allocate dentry page when adding a link. > If we allow
- to reclaim memory from filesystem, we do down_read(&sbi->cp_rwsem) [...] 
- Content analysis details:   (-7.6 points, 6.0 required)
+ Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=214299 Chao Yu
+ (chao@kernel.org) changed: What |Removed |Added Status|NEW |ASSIGNED CC|
+ |chao@kernel.org 
+ Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [198.145.29.99 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mOTpR-005Qfm-WC
-Subject: Re: [f2fs-dev] [PATCH] f2fs: should use GFP_NOFS for directory
- inodes
+X-Headers-End: 1mOTrS-00038E-3E
+Subject: [f2fs-dev] [Bug 214299] A deadlock problem caused by the quota_sem
+ set in db6ec53b7e0
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,79 +114,29 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/9/8 1:43, Jaegeuk Kim wrote:
-> We use inline_dentry which requires to allocate dentry page when adding a link.
-> If we allow to reclaim memory from filesystem, we do down_read(&sbi->cp_rwsem)
-> twice by f2fs_lock_op(). I think this should be okay, but how about stopping
-> the lockdep complaint [1]?
-> 
-> f2fs_create()
->   - f2fs_lock_op()
->   - f2fs_do_add_link()
->    - __f2fs_find_entry
->     - f2fs_get_read_data_page()
->     -> kswapd
->      - shrink_node
->       - f2fs_evict_inode
->        - f2fs_lock_op()
-> 
-> [1]
-> 
-> fs_reclaim
-> ){+.+.}-{0:0}
-> :
-> kswapd0:        lock_acquire+0x114/0x394
-> kswapd0:        __fs_reclaim_acquire+0x40/0x50
-> kswapd0:        prepare_alloc_pages+0x94/0x1ec
-> kswapd0:        __alloc_pages_nodemask+0x78/0x1b0
-> kswapd0:        pagecache_get_page+0x2e0/0x57c
-> kswapd0:        f2fs_get_read_data_page+0xc0/0x394
-> kswapd0:        f2fs_find_data_page+0xa4/0x23c
-> kswapd0:        find_in_level+0x1a8/0x36c
-> kswapd0:        __f2fs_find_entry+0x70/0x100
-> kswapd0:        f2fs_do_add_link+0x84/0x1ec
-> kswapd0:        f2fs_mkdir+0xe4/0x1e4
-> kswapd0:        vfs_mkdir+0x110/0x1c0
-> kswapd0:        do_mkdirat+0xa4/0x160
-> kswapd0:        __arm64_sys_mkdirat+0x24/0x34
-> kswapd0:        el0_svc_common.llvm.17258447499513131576+0xc4/0x1e8
-> kswapd0:        do_el0_svc+0x28/0xa0
-> kswapd0:        el0_svc+0x24/0x38
-> kswapd0:        el0_sync_handler+0x88/0xec
-> kswapd0:        el0_sync+0x1c0/0x200
-> kswapd0:
-> -> #1
-> (
-> &sbi->cp_rwsem
-> ){++++}-{3:3}
-> :
-> kswapd0:        lock_acquire+0x114/0x394
-> kswapd0:        down_read+0x7c/0x98
-> kswapd0:        f2fs_do_truncate_blocks+0x78/0x3dc
-> kswapd0:        f2fs_truncate+0xc8/0x128
-> kswapd0:        f2fs_evict_inode+0x2b8/0x8b8
-> kswapd0:        evict+0xd4/0x2f8
-> kswapd0:        iput+0x1c0/0x258
-> kswapd0:        do_unlinkat+0x170/0x2a0
-> kswapd0:        __arm64_sys_unlinkat+0x4c/0x68
-> kswapd0:        el0_svc_common.llvm.17258447499513131576+0xc4/0x1e8
-> kswapd0:        do_el0_svc+0x28/0xa0
-> kswapd0:        el0_svc+0x24/0x38
-> kswapd0:        el0_sync_handler+0x88/0xec
-> kswapd0:        el0_sync+0x1c0/0x200
-> 
-> Fixes: bdbc90fa55af ("f2fs: don't put dentry page in pagecache into highmem")
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+https://bugzilla.kernel.org/show_bug.cgi?id=214299
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Chao Yu (chao@kernel.org) changed:
 
-Thanks,
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |ASSIGNED
+                 CC|                            |chao@kernel.org
 
+--- Comment #1 from Chao Yu (chao@kernel.org) ---
+I've sent a patch for this bug, could you please test with it?
 
+https://lore.kernel.org/linux-f2fs-devel/20210903023811.3458-1-chao@kernel.org/T/#u
+
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
