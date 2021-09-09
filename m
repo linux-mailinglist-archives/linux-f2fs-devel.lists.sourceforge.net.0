@@ -2,68 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCB4440603C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Sep 2021 01:51:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id D985D40603D
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Sep 2021 01:51:45 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mOTp4-0003dw-4s; Thu, 09 Sep 2021 23:51:14 +0000
+	id 1mOTpT-0000zn-Oh; Thu, 09 Sep 2021 23:51:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1mOTp3-0003dm-DF
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 23:51:13 +0000
+ (envelope-from <chao@kernel.org>) id 1mOTpS-0000zh-Jr
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 23:51:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xeYN+ZSzEiG6/fLNatOIqFXgBa99FJbQLnWYzAdUC3M=; b=Jd5Zp0J5O8drD9yOqToKOLS7nQ
- Iu/C5gymgyReL+uCtr33s/gNj3iXASfrC5Ok/RNNjLqR/uJ4Qk6HVeFWPEterShlJYzUWmZVQND7h
- jNccAw79b1RSU8KdnxZPODyuZJk5ctim/n0nQ0TRRg6OgAZrlK57MfmZou80NFCM7+zE=;
+ bh=vnx9eaK6Rf7jbpckAL093aW2bY1xrkRJ0JeFL3qz8fg=; b=T4JV0Ow/bGSyV6BUlP1rFJG/HS
+ zaHopZHTeXw9xCZ6x/jCLs4oUU7sCW7ugTSCLrB9LZyzSKSL0FlNvcEz3xUfilQBruouqdHhB2D8y
+ uOj9PosO8OcpPxq/b8sXYs3apl0rpb6ecXaC5EfRzUD66LVV2VG9hEwkKOvN0e9KUrHc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xeYN+ZSzEiG6/fLNatOIqFXgBa99FJbQLnWYzAdUC3M=; b=UPJRD2a5WolIsvUNwpC5Wtr410
- kXvCXAzdYWoDHXgLvq5265ndFuHtREBMLelGTzp1olBfaiwR26UczVwIxM56uNDnKUs/T4SlImf/e
- kDgLjJPoxtZUkCFPR91VsjVMhmyHMbw1JwT9juJZpn+PMoSdvz0qHCOYUR1GWwfYEFMA=;
+ bh=vnx9eaK6Rf7jbpckAL093aW2bY1xrkRJ0JeFL3qz8fg=; b=bA9pKidW00k3Nvc1AxJitjeM73
+ MPaTuL1tMnFbcf7RGNW/GmH5K0ve2nZpGMxyUlXHzq1WUJEfe76UuaVVMHQ3zHtFqY+W4n0axtlSg
+ 9FU13YRbwW5UPBJVcPzSOOtwV/lgLVjHxVfqoj0ZKxh0mXFjkA4zm3WS3nie3d+odA38=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mOTp0-00030p-4B
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 23:51:13 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id CFE3961101;
- Thu,  9 Sep 2021 23:50:57 +0000 (UTC)
+ id 1mOTpR-005Qfm-WC
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Sep 2021 23:51:38 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 5FB36610E9;
+ Thu,  9 Sep 2021 23:51:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1631231458;
- bh=DQNK28TOeDI5KHJpmRRR0Z4mB4pizyslewVn/qlEKPo=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=QRrio1fzenwWgX6Chhm0F9E6aA/MLYtTo/Gf9lc2XRxuYjHai/9/11KSIM3Hdx7Z+
- 7fQ/ZDn/4Wq9jYQVu4OUoOOv+sQ3c2VmXdgtz1u+RrTZ6sRuLP/8ZD0qC7WV14Dw3c
- XvbN6ZZddtTBir/x6x+ZSRsBuB5JIpM3T76vl6COdqCfX/UY102tPl+mBdkkJqI3Au
- +l59v3N4bp3SXEQED1e/z2g+VDyw1mTdeGa8Kc0YMTKxVJPJz2TI3WyTGCQFvQT2jx
- D/yVRXXT+sDctnL5HeZfIwPWWxYU/DjZVopU4Hj3Nj2mfSIlGQa0N3d8UNlUCtmJqZ
- M6ulAt/tmp71Q==
-To: Daeho Jeong <daeho43@gmail.com>
-References: <20210902172404.3517626-1-daeho43@gmail.com>
- <9ab17089-accc-c3a3-a5dc-007fc4eeaa20@kernel.org>
- <CACOAw_yovM592K3-2fQzA6M29XqWu8s_2f+zXawKo-QpNSXq0w@mail.gmail.com>
- <8f8e4695-4062-60c4-0f91-2a1f6a5b0a11@kernel.org>
- <CACOAw_yBYZzUVGV-A7K57zqrcAaZv7nFSk9mSj9AC6jTTeU7Vw@mail.gmail.com>
- <f64cb941-2bb7-eed2-732d-c9537f46f67c@kernel.org>
- <CACOAw_zxq=SX0OdXV77HyFytJc6aCMbYuS6KZAR_JoQeGZ26Sw@mail.gmail.com>
+ s=k20201202; t=1631231490;
+ bh=fztYKXwCNriqil1UbKCuyBqnFoKNcnIMC9/mJUjAils=;
+ h=Subject:To:References:From:Date:In-Reply-To:From;
+ b=urGtZ56EpHaXAcPm9F103+W/UhQ6A5tOHIELnS27hJPbf0riXPNIIaQ/6F3sxJOLO
+ bleOHITbxmgh64Aok8t3qKQ2IvxGOz4caCBewz8dMSN/OSkaQ/hnlU/37Bew3u4/zK
+ l5BuFR+6K9rYH1aMV+28+uxaTtd0gcpLPEmTgBlH81ht7SNMjn+/2T7vpiKzcRvLUD
+ eAvifvkG18e2XX6OlzN5s0Xi8T13NAbh2Uj6k2Rhl0n/wyTW823AyiihfH53kfpB4Z
+ msrSzms5LlrOrJ2+WvX9PnhlkVWSnpAEY33GO/N5HMT/JDaMtx38UXGDgxVT0ixU5p
+ E5UMLNWsHyqMg==
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20210907174351.1104857-1-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-Message-ID: <a59d23b9-961f-4129-7491-59f88923366a@kernel.org>
-Date: Fri, 10 Sep 2021 07:50:57 +0800
+Message-ID: <6c40b766-2bdc-03c2-9e8a-e399d6e83282@kernel.org>
+Date: Fri, 10 Sep 2021 07:51:29 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <CACOAw_zxq=SX0OdXV77HyFytJc6aCMbYuS6KZAR_JoQeGZ26Sw@mail.gmail.com>
+In-Reply-To: <20210907174351.1104857-1-jaegeuk@kernel.org>
 Content-Language: en-US
 X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam detection software,
@@ -72,16 +67,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2021/9/8 2:12, Daeho Jeong wrote: > On Fri, Sep 3, 2021
- at 11:45 PM Chao Yu <chao@kernel.org> wrote: >> >> On 2021/9/4 12:40, Daeho
- Jeong wrote: >>>> As a per curseg field. >>>> >>>>> Maybe, we run [...] 
+ Content preview:  On 2021/9/8 1:43, Jaegeuk Kim wrote: > We use inline_dentry
+ which requires to allocate dentry page when adding a link. > If we allow
+ to reclaim memory from filesystem, we do down_read(&sbi->cp_rwsem) [...] 
  Content analysis details:   (-7.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [198.145.29.99 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -91,9 +86,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mOTp0-00030p-4B
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: introduce fragment allocation mode
- mount option
+X-Headers-End: 1mOTpR-005Qfm-WC
+Subject: Re: [f2fs-dev] [PATCH] f2fs: should use GFP_NOFS for directory
+ inodes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,73 +100,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/9/8 2:12, Daeho Jeong wrote:
-> On Fri, Sep 3, 2021 at 11:45 PM Chao Yu <chao@kernel.org> wrote:
->>
->> On 2021/9/4 12:40, Daeho Jeong wrote:
->>>> As a per curseg field.
->>>>
->>>>> Maybe, we run into the same race condition issue you told before for
->>>>> fragment_remained_chunk.
->>>>> Could you clarify this more?
->>>>
->>>> e.g.
->>>>
->>>> F2FS_OPTION(sbi).fs_mode = FS_MODE_FRAGMENT_FIXED_BLK
->>>> fragment_chunk_size = 384
->>>> fragment_hole_size = 384
->>>>
->>>> When creating hole:
->>>>
->>>> - f2fs_allocate_data_block
->>>>     - __refresh_next_blkoff
->>>>       chunk locates in [0, 383] of current segment
->>>>       seg->next_blkoff = 384
->>>>       sbi->fragment_remained_chunk = 0
->>>>       then we will reset sbi->fragment_remained_chunk to 384
->>>>       and move seg->next_blkoff forward to 768 (384 + 384)
->>>>     - __has_curseg_space() returns false
->>>>     - allocate_segment() allocates new current segment
->>>>
->>>> So, for such case that hole may cross two segments, hole size may be truncated
->>>> to left size of previous segment.
->>>
->>> First, sbi->fragment_remained_chunk should be seg->fragment_remained_chunk.
->>
->> Oh, correct.
->>
->>> I understand what you mean, so you mean we need to take the leftover
->>> "hole" size over to the next segment?
->>> In the example, the leftover hole size will be (384 - (512-384)). Do
->>> you want to take this over to the next segment?
->>
->> Yes, the left 256 block-sized hole should be created before next chunk
->> in next opened segment.
->>
+On 2021/9/8 1:43, Jaegeuk Kim wrote:
+> We use inline_dentry which requires to allocate dentry page when adding a link.
+> If we allow to reclaim memory from filesystem, we do down_read(&sbi->cp_rwsem)
+> twice by f2fs_lock_op(). I think this should be okay, but how about stopping
+> the lockdep complaint [1]?
 > 
-> Chao,
+> f2fs_create()
+>   - f2fs_lock_op()
+>   - f2fs_do_add_link()
+>    - __f2fs_find_entry
+>     - f2fs_get_read_data_page()
+>     -> kswapd
+>      - shrink_node
+>       - f2fs_evict_inode
+>        - f2fs_lock_op()
 > 
-> Do you have any decent idea to pass the left hole size to the next
-> segment which will be allocated?
+> [1]
+> 
+> fs_reclaim
+> ){+.+.}-{0:0}
+> :
+> kswapd0:        lock_acquire+0x114/0x394
+> kswapd0:        __fs_reclaim_acquire+0x40/0x50
+> kswapd0:        prepare_alloc_pages+0x94/0x1ec
+> kswapd0:        __alloc_pages_nodemask+0x78/0x1b0
+> kswapd0:        pagecache_get_page+0x2e0/0x57c
+> kswapd0:        f2fs_get_read_data_page+0xc0/0x394
+> kswapd0:        f2fs_find_data_page+0xa4/0x23c
+> kswapd0:        find_in_level+0x1a8/0x36c
+> kswapd0:        __f2fs_find_entry+0x70/0x100
+> kswapd0:        f2fs_do_add_link+0x84/0x1ec
+> kswapd0:        f2fs_mkdir+0xe4/0x1e4
+> kswapd0:        vfs_mkdir+0x110/0x1c0
+> kswapd0:        do_mkdirat+0xa4/0x160
+> kswapd0:        __arm64_sys_mkdirat+0x24/0x34
+> kswapd0:        el0_svc_common.llvm.17258447499513131576+0xc4/0x1e8
+> kswapd0:        do_el0_svc+0x28/0xa0
+> kswapd0:        el0_svc+0x24/0x38
+> kswapd0:        el0_sync_handler+0x88/0xec
+> kswapd0:        el0_sync+0x1c0/0x200
+> kswapd0:
+> -> #1
+> (
+> &sbi->cp_rwsem
+> ){++++}-{3:3}
+> :
+> kswapd0:        lock_acquire+0x114/0x394
+> kswapd0:        down_read+0x7c/0x98
+> kswapd0:        f2fs_do_truncate_blocks+0x78/0x3dc
+> kswapd0:        f2fs_truncate+0xc8/0x128
+> kswapd0:        f2fs_evict_inode+0x2b8/0x8b8
+> kswapd0:        evict+0xd4/0x2f8
+> kswapd0:        iput+0x1c0/0x258
+> kswapd0:        do_unlinkat+0x170/0x2a0
+> kswapd0:        __arm64_sys_unlinkat+0x4c/0x68
+> kswapd0:        el0_svc_common.llvm.17258447499513131576+0xc4/0x1e8
+> kswapd0:        do_el0_svc+0x28/0xa0
+> kswapd0:        el0_svc+0x24/0x38
+> kswapd0:        el0_sync_handler+0x88/0xec
+> kswapd0:        el0_sync+0x1c0/0x200
+> 
+> Fixes: bdbc90fa55af ("f2fs: don't put dentry page in pagecache into highmem")
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-Daeho,
-
-I guess we can record left hole size in seg->fragment_remained_hole.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
 
-> 
-> Thanks,
-> 
->> Thanks,
->>
->>>
 
 
 _______________________________________________
