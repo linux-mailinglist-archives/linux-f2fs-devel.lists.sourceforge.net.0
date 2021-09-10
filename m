@@ -2,63 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FDBC407339
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Sep 2021 00:06:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DC1D4073A1
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Sep 2021 00:56:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mOof3-0001iB-PC; Fri, 10 Sep 2021 22:06:17 +0000
+	id 1mOpRd-0005JX-QM; Fri, 10 Sep 2021 22:56:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <jaegeuk@kernel.org>) id 1mOof2-0001hx-7S
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 22:06:16 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1mOpRc-0005JR-Dy
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 22:56:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MB17zCzC7ZeSzllJPJf55LkOq900k5VvfTn7KTBS49o=; b=HBdJp+/uGyqO4Ndeky1texDkbk
- L1jhrhqFr85d4zgmxflJwz5vwFKYOUOvla7oeDVkYUQW5xuBRwr/xFHt5GB1APyw+oNuJ9raHLTiH
- 9EiSfnyzsFwBW/gW9p3zqvDgG+Eahdm0+2MCemOn/TxjbtXNyPxliSvl7STX+dsUi/Sk=;
+ bh=rFoW4v3QTFZt4X/Qv+u2fAI9VdQ7aWZOYLFrMXvNeoM=; b=fvtJXnpZF9nSAaplKAVGD9H537
+ 6RIQv3b/zcS7sIQsn1VLw6mQ8U9NehE4G5jCtHuk4Np860VqTqU6wuxauQa1cky7K2Bil2F34UQwV
+ xPe2CxYlK9RNyKMaDbtR/sluaiR6Hgj+GrprkAkuGNYHcByollrKZ5CZ1aeYNLDY08rg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=MB17zCzC7ZeSzllJPJf55LkOq900k5VvfTn7KTBS49o=; b=NCd2bTppmmxV9ZqBXiaHMR5enL
- DPnZzNuzt2Okt93J/n9yIP1wm8glTigL5QHAtImNbWXAn5mRebn/H9AJ1dJOhTeaZOf9icr0xjg0c
- b3Mr6gMqof7Lm9oSm1kJJd1nma6k0k4B80GiFGrUm1co9Q66Od9RWAu1grMzdCdTj8e4=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=rFoW4v3QTFZt4X/Qv+u2fAI9VdQ7aWZOYLFrMXvNeoM=; b=m
+ Esz5JoUL0ninfKyGsOZ7PYtoJJki7ujgtT4Dxf1xGzrABU2SvjxsULbMTRc4YtHex+hfQl7vQIGnn
+ dPy453dZ4V8BB2zsgLDTMrLtt5fSbAK6XCRVizDiiSU43BJtenhqWGw8uElmdNOnFWXMlWKnHF/Rt
+ zsf7GvTWnXIAn9OI=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mOof0-006dd6-15
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 22:06:16 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 9EE29611F2;
- Fri, 10 Sep 2021 22:06:03 +0000 (UTC)
+ id 1mOpRb-0000g7-NH
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 22:56:28 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 3CAE6611AD;
+ Fri, 10 Sep 2021 22:56:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1631311563;
- bh=PEunPYJPwyTliF9xftaapcX30zPfNh/6RruZ8943MUk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=od7TVsPMqrC0NqamqwtHigYolDNHNwZE9AU0tyRFpyXZ/FN3PppvBozqJlX75QBxo
- kc45xKTEGYCHqbqjy2aA1GSqiYzEdCZ2A0RIWMbeRElzNg6/x/WP/hWoqu2o44Y9lw
- K6p8Xi7IHcUqLuWJO9IqQEXc64sjLOnOcoOMxYp7+JEFaYlz+A1ZvxqeG7uxnLl16A
- h5/EKPDC0NGjZVgDn8qkTebCtWKn/pA20rt2BEdeI45AyT+Ybjk05iO+By6EgCw15B
- sBolr54p1KKaZvSJeb4hg8v7lPzEvJlOn2kgSedwaGtIVOnPWy8KlCVhpHwcoOYXA2
- YIUYWvWJj41fA==
-Date: Fri, 10 Sep 2021 15:06:02 -0700
+ s=k20201202; t=1631314582;
+ bh=4AGMfJEYl6DZvuvlKpNnX5AmuKeNH7LmDhUk866by7U=;
+ h=From:To:Cc:Subject:Date:From;
+ b=NQIImZ+9iSsB1x5NlePIg2gSkoKbVICAPWswE5lFPonWa6msZjvB4r2QiqgpdWhKM
+ /eZOd9ulBZIU7HpnekRjdzEJsXKDYoTb7NcPM08xx7orBQiT9bC+z+RegBltkM7usQ
+ CSFesN2jN208KHw9ck5ZbHUxYGKCJraFrvvQ8WrninZHZnxp5JtfQYYcWzgmrDL5qi
+ o8u7Oj2GsRWkYBhT5Hc4apkmhrTx/qeM3tYGLgISR1A3zXiV4ZD4kAlO16khKE03gN
+ A9rrcJ+gWrWhVKuMATtocLe4JcLrYZDEjSBjW5UZ+wTx2MRInuKMVjpI0rSNXXhv82
+ pH1gn+rr4ZYMA==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <YTvWyqk/RzkTw2uP@google.com>
-References: <20210901080621.110319-1-chao@kernel.org>
- <YTK7JDnpc6+LNqsl@google.com>
- <8756a722-3363-9033-4a5f-047e28af645c@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 10 Sep 2021 15:56:18 -0700
+Message-Id: <20210910225618.501839-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.33.0.309.g3052b89438-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <8756a722-3363-9033-4a5f-047e28af645c@kernel.org>
 X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -66,10 +62,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 09/04, Chao Yu wrote: > On 2021/9/4 8:17,
- Jaegeuk Kim wrote:
- > > I remember this gave a regression before? > > I have removed changes
- which bothers checkpoint disabling path, how > about testing th [...] 
+ Content preview:  This patch fixes the below stale magic info. $ mkfs.btrfs
+ -f test.img btrfs-progs v5.10.1 See http://btrfs.wiki.kernel.org for more
+ information. Label: (null) UUID: 941d2db7-3ece-4090-8b22-c4ea548b5dae Node
+ size: 16384 Sector size: 4096 Filesystem size: 1.00GiB Block group profiles:
+ Data: single 8.00MiB Metadata: DUP 51.19MiB System: DUP 8.00M [...] 
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -84,9 +81,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mOof0-006dd6-15
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: avoid attaching SB_ACTIVE flag
- during mount
+X-Headers-End: 1mOpRb-0000g7-NH
+Subject: [f2fs-dev] [PATCH] mkfs.f2fs: wipe other FS magics given -f
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,100 +94,198 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Zhang Yi <yi.zhang@huawei.com>, Jan Kara <jack@suse.cz>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 09/04, Chao Yu wrote:
-> On 2021/9/4 8:17, Jaegeuk Kim wrote:
-> > I remember this gave a regression before?
-> 
-> I have removed changes which bothers checkpoint disabling path, how
-> about testing this in dev-test branch for a while?
+This patch fixes the below stale magic info.
 
-Let me give it a try.
+$ mkfs.btrfs -f test.img
+btrfs-progs v5.10.1
+See http://btrfs.wiki.kernel.org for more information.
 
-> 
-> BTW, any plan to porting checkpoint disabling testcases from android
-> into xfstest suit?
+Label:              (null)
+UUID:               941d2db7-3ece-4090-8b22-c4ea548b5dae
+Node size:          16384
+Sector size:        4096
+Filesystem size:    1.00GiB
+Block group profiles:
+  Data:             single            8.00MiB
+  Metadata:         DUP              51.19MiB
+  System:           DUP               8.00MiB
+SSD detected:       no
+Incompat features:  extref, skinny-metadata
+Runtime features:
+Checksum:           crc32c
+Number of devices:  1
+Devices:
+   ID        SIZE  PATH
+    1     1.00GiB  test.img
 
-No.
+$ hexdump -s 0x10000 -n 128 -C test.img
+00010000  81 29 94 0a 00 00 00 00  00 00 00 00 00 00 00 00  |.)..............|
+00010010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+00010020  94 1d 2d b7 3e ce 40 90  8b 22 c4 ea 54 8b 5d ae  |..-.>.@.."..T.].|
+00010030  00 00 01 00 00 00 00 00  01 00 00 00 00 00 00 00  |................|
+00010040  5f 42 48 52 66 53 5f 4d  05 00 00 00 00 00 00 00  |_BHRfS_M........|
+00010050  00 40 d2 01 00 00 00 00  00 40 50 01 00 00 00 00  |.@.......@P.....|
+00010060  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+00010070  00 00 00 40 00 00 00 00  00 00 02 00 00 00 00 00  |...@............|
+00010080
 
-> 
-> Thanks,
-> 
-> > 
-> > On 09/01, Chao Yu wrote:
-> > > Quoted from [1]
-> > > 
-> > > "I do remember that I've added this code back then because otherwise
-> > > orphan cleanup was losing updates to quota files. But you're right
-> > > that now I don't see how that could be happening and it would be nice
-> > > if we could get rid of this hack"
-> > > 
-> > > [1] https://lore.kernel.org/linux-ext4/99cce8ca-e4a0-7301-840f-2ace67c551f3@huawei.com/T/#m04990cfbc4f44592421736b504afcc346b2a7c00
-> > > 
-> > > Related fix in ext4 by
-> > > commit 72ffb49a7b62 ("ext4: do not set SB_ACTIVE in ext4_orphan_cleanup()").
-> > > 
-> > > f2fs has the same hack implementation in
-> > > - f2fs_recover_orphan_inodes()
-> > > - f2fs_recover_fsync_data()
-> > > 
-> > > Let's get rid of this hack as well in f2fs.
-> > > 
-> > > Cc: Zhang Yi <yi.zhang@huawei.com>
-> > > Cc: Jan Kara <jack@suse.cz>
-> > > Acked-by: Jan Kara <jack@suse.cz>
-> > > Signed-off-by: Chao Yu <chao@kernel.org>
-> > > ---
-> > > v2:
-> > > - don't bother checkpoint disabling path
-> > >   fs/f2fs/checkpoint.c | 3 ---
-> > >   fs/f2fs/recovery.c   | 8 ++------
-> > >   2 files changed, 2 insertions(+), 9 deletions(-)
-> > > 
-> > > diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> > > index 83e9bc0f91ff..7d8803a4cbc2 100644
-> > > --- a/fs/f2fs/checkpoint.c
-> > > +++ b/fs/f2fs/checkpoint.c
-> > > @@ -705,9 +705,6 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
-> > >   	}
-> > >   #ifdef CONFIG_QUOTA
-> > > -	/* Needed for iput() to work correctly and not trash data */
-> > > -	sbi->sb->s_flags |= SB_ACTIVE;
-> > > -
-> > >   	/*
-> > >   	 * Turn on quotas which were not enabled for read-only mounts if
-> > >   	 * filesystem has quota feature, so that they are updated correctly.
-> > > diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-> > > index 04655511d7f5..706ddb3c95c0 100644
-> > > --- a/fs/f2fs/recovery.c
-> > > +++ b/fs/f2fs/recovery.c
-> > > @@ -787,8 +787,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
-> > >   	}
-> > >   #ifdef CONFIG_QUOTA
-> > > -	/* Needed for iput() to work correctly and not trash data */
-> > > -	sbi->sb->s_flags |= SB_ACTIVE;
-> > >   	/* Turn on quotas so that they are updated correctly */
-> > >   	quota_enabled = f2fs_enable_quota_files(sbi, s_flags & SB_RDONLY);
-> > >   #endif
-> > > @@ -816,10 +814,8 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
-> > >   	err = recover_data(sbi, &inode_list, &tmp_inode_list, &dir_list);
-> > >   	if (!err)
-> > >   		f2fs_bug_on(sbi, !list_empty(&inode_list));
-> > > -	else {
-> > > -		/* restore s_flags to let iput() trash data */
-> > > -		sbi->sb->s_flags = s_flags;
-> > > -	}
-> > > +	else
-> > > +		f2fs_bug_on(sbi, sbi->sb->s_flags & SB_ACTIVE);
-> > >   skip:
-> > >   	fix_curseg_write_pointer = !check_only || list_empty(&inode_list);
-> > > -- 
-> > > 2.32.0
+$ mkfs.f2fs -t 0 -f test.img
+
+	F2FS-tools: mkfs.f2fs Ver: 1.14.0 (2020-12-28)
+
+Info: Disable heap-based policy
+Info: Debug level = 0
+Info: Trim is disabled
+Info: Segments per section = 1
+Info: Sections per zone = 1
+Info: sector size = 512
+Info: total sectors = 2097152 (1024 MB)
+Info: zone aligned segment0 blkaddr: 512
+Info: format version with
+  "Linux version 5.10.46-4rodete1-amd64 (glinux-team@google.com) (gcc-10 (Debian 10.2.1-6+build2) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2) #1 SMP Debian 5.10.46-4rodete1 (2021-08-20)"
+Info: Overprovision ratio = 6.360%
+Info: Overprovision segments = 68 (GC reserved = 39)
+Info: format successful
+
+$hexdump -s 0x10000 -n 128 -C test.img
+00010000  c2 8a c8 26 00 00 00 00  00 00 00 00 00 00 00 00  |...&............|
+00010010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+00010020  92 ab 3f c6 b7 82 49 5e  93 23 e8 c9 e9 45 7d ac  |..?...I^.#...E}.|
+00010030  00 00 01 00 00 00 00 00  01 00 00 00 00 00 00 00  |................|
+00010040  5f 42 48 52 66 53 5f 4d  05 00 00 00 00 00 00 00  |_BHRfS_M........|
+00010050  00 40 d2 01 00 00 00 00  00 40 50 01 00 00 00 00  |.@.......@P.....|
+00010060  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+00010070  00 00 00 40 00 00 00 00  00 00 02 00 00 00 00 00  |...@............|
+00010080
+
+--- After this patch ---
+$ mkfs.f2fs -t 0 -f test.img
+
+	F2FS-tools: mkfs.f2fs Ver: 1.14.0 (2020-12-28)
+
+Info: Disable heap-based policy
+Info: Debug level = 0
+Info: Trim is disabled
+	test.img appears to contain an existing filesystem (btrfs).
+Info: Segments per section = 1
+Info: Sections per zone = 1
+Info: sector size = 512
+Info: total sectors = 2097152 (1024 MB)
+Info: zone aligned segment0 blkaddr: 512
+Info: format version with
+  "Linux version 5.10.46-4rodete1-amd64 (glinux-team@google.com) (gcc-10 (Debian 10.2.1-6+build2) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2) #1 SMP Debian 5.10.46-4rodete1 (2021-08-20)"
+Info: Overprovision ratio = 6.360%
+Info: Overprovision segments = 68 (GC reserved = 39)
+Info: format successful
+
+$ hexdump -s 0x10000 -n 128 -C test.img
+00010000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+*
+00010080
+
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fsck/main.c             |  2 +-
+ include/f2fs_fs.h       |  1 +
+ lib/libf2fs.c           |  6 ++++++
+ mkfs/f2fs_format_main.c | 26 ++++++++++++++++++++++----
+ 4 files changed, 30 insertions(+), 5 deletions(-)
+
+diff --git a/fsck/main.c b/fsck/main.c
+index eda399cf0679..e4cfdf443867 100644
+--- a/fsck/main.c
++++ b/fsck/main.c
+@@ -1120,7 +1120,7 @@ int main(int argc, char **argv)
+ 	}
+ 
+ 	/* Get device */
+-	if (f2fs_get_device_info() < 0) {
++	if (f2fs_get_device_info() < 0 || f2fs_get_f2fs_info() < 0) {
+ 		ret = -1;
+ 		if (c.func == FSCK)
+ 			ret = FSCK_OPERATIONAL_ERROR;
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index 2a9c1169456c..69260a6fccd9 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -1341,6 +1341,7 @@ extern int f2fs_devs_are_umounted(void);
+ extern int f2fs_dev_is_writable(void);
+ extern int f2fs_dev_is_umounted(char *);
+ extern int f2fs_get_device_info(void);
++extern int f2fs_get_f2fs_info(void);
+ extern unsigned int calc_extra_isize(void);
+ extern int get_device_info(int);
+ extern int f2fs_init_sparse_file(void);
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index b27785dec757..420dfdae56da 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -1183,6 +1183,12 @@ int f2fs_get_device_info(void)
+ 	for (i = 0; i < c.ndevs; i++)
+ 		if (get_device_info(i))
+ 			return -1;
++	return 0;
++}
++
++int f2fs_get_f2fs_info(void)
++{
++	int i;
+ 
+ 	if (c.wanted_total_sectors < c.total_sectors) {
+ 		MSG(0, "Info: total device sectors = %"PRIu64" (in %u bytes)\n",
+diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+index 031244d5d67a..de93f1b5b778 100644
+--- a/mkfs/f2fs_format_main.c
++++ b/mkfs/f2fs_format_main.c
+@@ -396,18 +396,36 @@ int main(int argc, char *argv[])
+ 
+ 	c.func = MKFS;
+ 
+-	if (!force_overwrite && f2fs_check_overwrite()) {
+-		MSG(0, "\tUse the -f option to force overwrite.\n");
++	if (f2fs_get_device_info() < 0)
+ 		return -1;
++
++	if (f2fs_check_overwrite()) {
++		char *zero_buf = NULL;
++		int i;
++
++		if (!force_overwrite) {
++			MSG(0, "\tUse the -f option to force overwrite.\n");
++			goto err_format;
++		}
++		zero_buf = calloc(F2FS_BLKSIZE, 1);
++		if (!zero_buf) {
++			MSG(0, "\tFaile to allocate zero buffer.\n");
++			goto err_format;
++		}
++		/* wipe out other FS magics mostly first 4MB space */
++		for (i = 0; i < 1024; i++)
++			dev_fill_block(zero_buf, i);
++		free(zero_buf);
++		f2fs_fsync_device();
+ 	}
+ 
+ 	if (f2fs_devs_are_umounted() < 0) {
+ 		if (errno != EBUSY)
+ 			MSG(0, "\tError: Not available on mounted device!\n");
+-		return -1;
++		goto err_format;
+ 	}
+ 
+-	if (f2fs_get_device_info() < 0)
++	if (f2fs_get_f2fs_info() < 0)
+ 		goto err_format;
+ 
+ 	/*
+-- 
+2.33.0.309.g3052b89438-goog
+
 
 
 _______________________________________________
