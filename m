@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BEAB4060BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Sep 2021 02:18:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 683D24060BF
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Sep 2021 02:19:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mOUFl-0006IQ-Ot; Fri, 10 Sep 2021 00:18:49 +0000
+	id 1mOUFx-0001Wy-7m; Fri, 10 Sep 2021 00:19:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <sashal@kernel.org>) id 1mOUFk-0006CF-3Y
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 00:18:48 +0000
+ (envelope-from <sashal@kernel.org>) id 1mOUFv-0001Wr-Qk
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 00:18:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qCUHmiEwfrUyKrvJnefpyA+KzmJ0Ebz9RA5bWnEgGf0=; b=fsm5KNsdoCk05tHfaH1JkDrFkI
- re2vavDtxY2jUW110rp+3VTJx3LBkPFkDEPavwVXZRg9PQF7k6fNQhhG6BPrb9YuT7Ogu6fDHJQ+B
- S76F7Drnc8gT4NtsLPJU00IWiS8UuDROStkJCeTZzK/FFJMgOHtgXptle3Znu3G+Fz1s=;
+ bh=5PgKBd6QfL3eqHC+MLGtSuho/WKziwAUs7vX8/bRd/A=; b=IqDvnszC6y+s9o1hQEHzbK8ydR
+ RB+GNBhkWcYVVg2Pm8oqYk8aZ6kagNtJsvhGGCeBqzQGTu087tsm05zKS4NX4WCRgs0mkZnky9KFH
+ /4F8B40FsJhX2keKYlCJB07SG8bsel88vSuqu7o89zkMX4l7H4fMEurFpbeUfyzqtk+o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qCUHmiEwfrUyKrvJnefpyA+KzmJ0Ebz9RA5bWnEgGf0=; b=Xb5+JA3djNItRTb+sqED6cHe/F
- ImN254xhJTMp6WvfPtthhkZbNuju9TqcDNc6Zq2IdrX6E0aww59YN/rkyhKSz8hPDHl3n34KTGt0t
- Tzk4SFQ4mqWznQbCEkfbyDRdXWYJWs1pZgOgtEIFQX5o+1P93TuhHFkooH4EmjjTBVvk=;
+ bh=5PgKBd6QfL3eqHC+MLGtSuho/WKziwAUs7vX8/bRd/A=; b=lCeTFiPOeiZB4zQRvovhtNKu17
+ eaCpgMQVM9aPGu8XKE/x/Qkx5sCfzp2fKLi4szaToDffGz7jMmGCfcWBkT+baJhFySXNdVuhnOYLT
+ W9qNeUhNcDyLxfddRhseINyH4wp+BIlXaBK2+2QabdI3fsW/Nbbx2b2eLeQ6ZqE80YdE=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mOUFj-005S0j-Ir
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 00:18:48 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 7DDE8610A3;
- Fri, 10 Sep 2021 00:18:41 +0000 (UTC)
+ id 1mOUFv-005S1G-9Z
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 00:18:59 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id F1721611C8;
+ Fri, 10 Sep 2021 00:18:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1631233122;
- bh=0GSy/z9oteAShp89i8clV0SqHqaWt0d0zxQWpkUyeRU=;
+ s=k20201202; t=1631233133;
+ bh=nPoeR/Xk1IwI8b2b+g7ewNYQ1oq35N3ObNd00YuEkk0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Y8QOo/BNNrDPok9TzEFO+1ouNmdf3TYbqhu/XwvYdr8n2BaHxJVkbmBFOWQlQmjNY
- Igm5mnnrNQ+o49EFUXiK8YeiWZlbKCBbyRxe1E03LnoLTeoelO0cgPq5nAvjqOlenq
- gVAFgrcTDXijCEj7f+F4Mh2SwEIXNFd49E95Qjc1lUa0lM8uTd/+YTdTh1Ad6I6rnP
- jptCwtx7ei4jRlAk31K1WDTkdj1RjHJqWVJz37hLe8W4n4DYmPf+3i/WACoxzh2gee
- fwd8oIdpofoFt71ktkK4BIcbHxCqgR+L3963dfApkAKutkDsT6ZUSAqwBn853QLQTO
- zJP3d3jQW8baA==
+ b=p4DpZn5QVQb9UEpg8ho9gWXra+KxhAoTybU5qkWpDeADi7p8WtdETE+DFMq64tMXr
+ GV9AyU+WIKOVY4BD8/8JBzbmiSEds8TkcQOp9BHBlJ3Gj3vmM6cp1pII4DD+Ii31J6
+ CwU69qOV04v1WlnsjLVIuCjkghKOJZpk++/oxmTGcMHYNO/MNNS4Jcm2K9Nfy4n0Zz
+ QvRM6f6xfJftuz2fizGfl55L/i+4WUOOVcj4mrJ2d/k1EBez4teihxHTRkTt+upBrS
+ oiBH3qVGVX2BTJiOtOsOxYPn3ij1DNpWXJ/F062rRBpJ6xGAIQJbrU2dNFdQdFN1So
+ 1M8W/xPpLHAAA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu,  9 Sep 2021 20:17:07 -0400
-Message-Id: <20210910001820.174272-15-sashal@kernel.org>
+Date: Thu,  9 Sep 2021 20:17:15 -0400
+Message-Id: <20210910001820.174272-23-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210910001820.174272-1-sashal@kernel.org>
 References: <20210910001820.174272-1-sashal@kernel.org>
@@ -67,10 +67,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Jaegeuk Kim <jaegeuk@kernel.org> [ Upstream commit
- 2eeb0dce728a7eac3e4dfe355d98af40d61f7a26
- ] This tries to fix priority inversion in the below condition resulting in
- long checkpoint delay. 
+ Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
+ 2787991516468bfafafb9bf2b45a848e6b202e7c ] [1]
+ https://www.mail-archive.com/linux-f2fs-devel@lists.sourceforge.net/msg15126.html
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -85,10 +84,14 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: mail-archive.com]
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mOUFj-005S0j-Ir
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.13 15/88] f2fs: don't sleep while
- grabing nat_tree_lock
+X-Headers-End: 1mOUFv-005S1G-9Z
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.13 23/88] f2fs: fix to force keeping
+ write barrier for strict fsync mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,71 +104,68 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Daeho Jeong <daehojeong@google.com>, linux-f2fs-devel@lists.sourceforge.net
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Jaegeuk Kim <jaegeuk@kernel.org>
+From: Chao Yu <chao@kernel.org>
 
-[ Upstream commit 2eeb0dce728a7eac3e4dfe355d98af40d61f7a26 ]
+[ Upstream commit 2787991516468bfafafb9bf2b45a848e6b202e7c ]
 
-This tries to fix priority inversion in the below condition resulting in
-long checkpoint delay.
+[1] https://www.mail-archive.com/linux-f2fs-devel@lists.sourceforge.net/msg15126.html
 
-f2fs_get_node_info()
- - nat_tree_lock
-  -> sleep to grab journal_rwsem by contention
+As [1] reported, if lower device doesn't support write barrier, in below
+case:
 
-                                     checkpoint
-                                     - waiting for nat_tree_lock
+- write page #0; persist
+- overwrite page #0
+- fsync
+ - write data page #0 OPU into device's cache
+ - write inode page into device's cache
+ - issue flush
 
-In order to let checkpoint go, let's release nat_tree_lock, if there's a
-journal_rwsem contention.
+If SPO is triggered during flush command, inode page can be persisted
+before data page #0, so that after recovery, inode page can be recovered
+with new physical block address of data page #0, however there may
+contains dummy data in new physical block address.
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
+Then what user will see is: after overwrite & fsync + SPO, old data in
+file was corrupted, if any user do care about such case, we can suggest
+user to use STRICT fsync mode, in this mode, we will force to use atomic
+write sematics to keep write order in between data/node and last node,
+so that it avoids potential data corruption during fsync().
+
+Signed-off-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/node.c | 17 +++++++++++++----
- 1 file changed, 13 insertions(+), 4 deletions(-)
+ fs/f2fs/file.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index e67ce5f13b98..b731d7ff455c 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -538,7 +538,7 @@ int f2fs_get_node_info(struct f2fs_sb_info *sbi, nid_t nid,
- 	int i;
- 
- 	ni->nid = nid;
--
-+retry:
- 	/* Check nat cache */
- 	down_read(&nm_i->nat_tree_lock);
- 	e = __lookup_nat_cache(nm_i, nid);
-@@ -550,10 +550,19 @@ int f2fs_get_node_info(struct f2fs_sb_info *sbi, nid_t nid,
- 		return 0;
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index ceb575f99048..e78a7d9888c8 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -303,6 +303,18 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+ 				f2fs_exist_written_data(sbi, ino, UPDATE_INO))
+ 			goto flush_out;
+ 		goto out;
++	} else {
++		/*
++		 * for OPU case, during fsync(), node can be persisted before
++		 * data when lower device doesn't support write barrier, result
++		 * in data corruption after SPO.
++		 * So for strict fsync mode, force to use atomic write sematics
++		 * to keep write order in between data/node and last node to
++		 * avoid potential data corruption.
++		 */
++		if (F2FS_OPTION(sbi).fsync_mode ==
++				FSYNC_MODE_STRICT && !atomic)
++			atomic = true;
  	}
- 
--	memset(&ne, 0, sizeof(struct f2fs_nat_entry));
-+	/*
-+	 * Check current segment summary by trying to grab journal_rwsem first.
-+	 * This sem is on the critical path on the checkpoint requiring the above
-+	 * nat_tree_lock. Therefore, we should retry, if we failed to grab here
-+	 * while not bothering checkpoint.
-+	 */
-+	if (!rwsem_is_locked(&sbi->cp_global_sem)) {
-+		down_read(&curseg->journal_rwsem);
-+	} else if (!down_read_trylock(&curseg->journal_rwsem)) {
-+		up_read(&nm_i->nat_tree_lock);
-+		goto retry;
-+	}
- 
--	/* Check current segment summary */
--	down_read(&curseg->journal_rwsem);
- 	i = f2fs_lookup_journal_in_cursum(journal, NAT_JOURNAL, nid, 0);
- 	if (i >= 0) {
- 		ne = nat_in_journal(journal, i);
+ go_write:
+ 	/*
 -- 
 2.30.2
 
