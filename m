@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B34DB406DA8
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Sep 2021 16:35:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1BA7406E24
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Sep 2021 17:25:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mOhcS-0003Pe-3g; Fri, 10 Sep 2021 14:35:08 +0000
+	id 1mOiOl-00053C-5P; Fri, 10 Sep 2021 15:25:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1mOhcH-0003NO-G7
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 14:34:57 +0000
+ (envelope-from <daeho43@gmail.com>) id 1mOiOk-000536-Bm
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 15:25:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7ojA9ujletv5QxfO9Te+K34PRpc/+f6NKN+aRBBnpz4=; b=j/FFTKnzizxhamXLC4jisgNlwZ
- 5WGKPEbsKWjfsZqgC5E4zTVq6ixb33cb57bkteiPGRHKWeBc2BRHuyp+pjFIEcf5lwnHimiDNqIpQ
- nxkvnyrp+rJ4UBh+ck97vLotcbwz9bz5/fTmXMhwCz2n7eShVmjCHEbOPC3kmweWjYEg=;
+ bh=HZjKxxJhljDYpS5pxLUIvBKfKDGClyt9lfbrixdEiN4=; b=DRe7y7iplEO0H+6qXH2mM3ID0f
+ 2YKjOnDQxLOx8+FK4TjJV15t1QfhhPMMDlWbt6SWV1kqtmBgCF+e6ibNfmJqRpQwvyx5xzPx9mCSH
+ 0v8rmXKwBnbQjNTg8xQNc6zmPIetSgRJzfVCl6dGpLqvk0b5xjRDSYEoZrKPoBLS9Td0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -29,43 +29,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7ojA9ujletv5QxfO9Te+K34PRpc/+f6NKN+aRBBnpz4=; b=d88JgHlV4uCfqOj3ghTsP4+X1D
- CiZOjTHicEQXIYmw744ewthVt11iT7eS4gGL6uLLL4hD0Fw6O4qZNNGRMX8WFrF2BjrgPkC9FhnNQ
- Fxa+L7mMuNPIynlolzzRB3JFSQTLdEdXUxh7braMlcegfri67gVE1nxIuPViPtKgfpBM=;
-Received: from mail-lj1-f176.google.com ([209.85.208.176])
+ bh=HZjKxxJhljDYpS5pxLUIvBKfKDGClyt9lfbrixdEiN4=; b=PuNwsuDri1xsrnlD4C9xfyGTq/
+ xgvwLvgenxIE/ZxReUo5ktGrZBjqyvYIrYC3eLF+L8gjpSwb4R1OG3UAZDrj+ksm7unzfrHW0+Ww4
+ MtZFsrby3idNRRwu3xHidtXSUbFFR/6E0Ewm4t0yzLtn91XLLJGNEvLQmLYz+eEOlW0c=;
+Received: from mail-lj1-f179.google.com ([209.85.208.179])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1mOhcB-006JVm-Nu
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 14:34:52 +0000
-Received: by mail-lj1-f176.google.com with SMTP id j12so3505472ljg.10
+ id 1mOiOi-006Lr9-JA
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 15:25:02 +0000
+Received: by mail-lj1-f179.google.com with SMTP id f2so3799156ljn.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 10 Sep 2021 07:34:51 -0700 (PDT)
+ Fri, 10 Sep 2021 08:25:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7ojA9ujletv5QxfO9Te+K34PRpc/+f6NKN+aRBBnpz4=;
- b=OvOsA4iL/y6czweDJab/Mb2HHqt31KkhfdQKe8vwqLrdrBAReJpvyiczPL56F6BHPB
- QJN7Kiz+VxVTm8YCssJwhTeY+ei1JZUD/bWzun9dYtRCw+no7fM8XndKBt0ORAK1808h
- dpB3hIcGcA9MObPc/nyj4EbbOBLCrC1cRy10tvTrH2llR+DQ/Hu8yHjBIUQjzV7F1lVP
- BSdi5kXf8fwxDvQsj1AczF/DmOktL0dDLuACIhs3bDEvOiQDezqpCrU48tiOAmce++WV
- hzo2f4Gs6PU61xXEAsJtCOKsaRss0/W27o25zQ9ZGxgDanG3Xq/T5U50WdvS70MfPXC4
- DT1w==
+ :cc; bh=HZjKxxJhljDYpS5pxLUIvBKfKDGClyt9lfbrixdEiN4=;
+ b=CZk4eHjRRB0S9IDx1rrvd74xMZaLkjNkabIbLnVpAD5dYl1SUSxOxZs+Yyz4LS2dMj
+ 6Lfmu9lfrmJ+1/KsSIOPy5baFmFjfnMjUK+pW3Mi5+0/ifGafMfzw8iWZ/WSyX1DhB41
+ XNMftHbTzzlwa1mAJUW0m1RgL52Kcjg4K6MfALvHsiOUBVwDxbAXLzVR0/79zrqh9PGv
+ 54UeGbiPKNYtvbZOzCcNhQYfxyJnFjO63aikC+ijKSjptGbD8qM2w6rU11pGccdhHaj+
+ zO+zDBFqNNMGU/T8DfCmQgXhNUVggWpq6+GIpAWQRJbh9zZlVom1NUGPKUp7hmWqYJUu
+ f94Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=7ojA9ujletv5QxfO9Te+K34PRpc/+f6NKN+aRBBnpz4=;
- b=n6Qa9fIifR9u/Za57BbxBwsfK/TTyTNwbsFY1SorCO2t4weeF60VuApYrF3j99ao9X
- M+s3OmKGN5V7PCz0I8gxOEyMC4FBCCls2fwjMahYg33Quitz/0dCwiZ0qKtHuX2CkNtM
- noWRe+Nwj6aM2u1kyuZWJP2CxOttf5vhpnyCf/nk17QDpOrYXjm6t6ZDxY/Pitebtyvh
- RHgh4PfttIaGuiUkVPlGQRUIdQxtLA4QMlw0y5pZS0oWYw3TCYFzlbAtd9YdlKDHe7cb
- h716fkyjdeYq/p0JxUc/abpgLlyBIg04ElDFmeBpKwlp/o5guvyNBaeU1Cyhiqq2t3q5
- dWfQ==
-X-Gm-Message-State: AOAM530Sjok/IB7/gwi46lLwNOMSJulgwWEDkMP9k/VUK9ShTZJN7RsK
- hZK8m20kg9YfERNDsd63xpkU8CuudL1dGEk8FSY=
-X-Google-Smtp-Source: ABdhPJyPX865eWg+dzanuqZD4b0HhSTswfSGc6hpn1m/eZcvgvQXVSoJDJyHN3j9KK9oZe/seWfYRdAdhPzZwzf2Zbg=
+ bh=HZjKxxJhljDYpS5pxLUIvBKfKDGClyt9lfbrixdEiN4=;
+ b=AS7UYb3T/39PnpvE59UHlSi/XF5APwyP/ogtiCa7a9MdOsuxlB05WaPNc/Fcj7FNMu
+ 0AXPD8iB8HjEg6+gtDm16VXdUszMcJxIk2G83qAlKLUe5+Ypea540Di0v+se5vxwE6yN
+ jlvVhN32Lf+QdXHw4ZEXfpQMcUj0H04Ji6XESrhb1zKP3NT7RahVRH+/NOETw2Now2h3
+ 77WrRW4cqVarGRgWwSsBL4aRzAO4aHsrvR8lFjWT7czch91Wl6egvkYo1+inBUqbIh/N
+ k2n9YGePg2tGT/mA+xz2ekZEeETmljMUdX7SS/ylMRylZadszQ/zVrh8au6Bsw3AHguD
+ 742A==
+X-Gm-Message-State: AOAM5312dJfPt151GPdCzy0j4tRwGgGNdJ0IxREfIHK90KREYNBS9apj
+ bDnWfn8Qbr1dIpr7/s2tgyuoveBmlHCH30xTaTXFmK8w3Is=
+X-Google-Smtp-Source: ABdhPJzmV9HMQrYPGkgG2aWLS9B2OTLtQ7N720iigCvWL3xhTZlgn8ddrP3+7jnZSJJVHrjQSlCp0YddqRNbPvFLS3Q=
 X-Received: by 2002:a05:651c:88e:: with SMTP id
- d14mr4352030ljq.472.1631284485067; 
- Fri, 10 Sep 2021 07:34:45 -0700 (PDT)
+ d14mr4541154ljq.472.1631287493966; 
+ Fri, 10 Sep 2021 08:24:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210902172404.3517626-1-daeho43@gmail.com>
  <9ab17089-accc-c3a3-a5dc-007fc4eeaa20@kernel.org>
@@ -75,10 +75,11 @@ References: <20210902172404.3517626-1-daeho43@gmail.com>
  <f64cb941-2bb7-eed2-732d-c9537f46f67c@kernel.org>
  <CACOAw_zxq=SX0OdXV77HyFytJc6aCMbYuS6KZAR_JoQeGZ26Sw@mail.gmail.com>
  <a59d23b9-961f-4129-7491-59f88923366a@kernel.org>
-In-Reply-To: <a59d23b9-961f-4129-7491-59f88923366a@kernel.org>
+ <CACOAw_z+yfNN3p3U3Ji0vLe7xDP4vkVy11RdzwwcRwwnSTjsFg@mail.gmail.com>
+In-Reply-To: <CACOAw_z+yfNN3p3U3Ji0vLe7xDP4vkVy11RdzwwcRwwnSTjsFg@mail.gmail.com>
 From: Daeho Jeong <daeho43@gmail.com>
-Date: Fri, 10 Sep 2021 07:34:34 -0700
-Message-ID: <CACOAw_z+yfNN3p3U3Ji0vLe7xDP4vkVy11RdzwwcRwwnSTjsFg@mail.gmail.com>
+Date: Fri, 10 Sep 2021 08:24:42 -0700
+Message-ID: <CACOAw_y24AdH2Mpx4uhYbhmHnVRtUU2_4USUmi0Q61HGtE95RA@mail.gmail.com>
 To: Chao Yu <chao@kernel.org>
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
@@ -87,16 +88,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Sep 9, 2021 at 4:50 PM Chao Yu wrote: > > On 2021/9/8
- 2:12, Daeho Jeong wrote: > > On Fri, Sep 3, 2021 at 11:45 PM Chao Yu wrote:
- > >> > >> On 2021/9/4 12:40, Daeho Jeong wrote: > >>>> As [...] 
+ Content preview:  On Fri, Sep 10, 2021 at 7:34 AM Daeho Jeong wrote: > > On
+ Thu, Sep 9, 2021 at 4:50 PM Chao Yu wrote: > > > > On 2021/9/8 2:12, Daeho
+ Jeong wrote: > > > On Fri, Sep 3, 2021 at 11:45 PM Chao Yu wr [...] 
  Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.208.176 listed in list.dnswl.org]
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [daeho43[at]gmail.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.208.179 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
@@ -108,8 +109,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.176 listed in wl.mailspike.net]
-X-Headers-End: 1mOhcB-006JVm-Nu
+ [209.85.208.179 listed in wl.mailspike.net]
+X-Headers-End: 1mOiOi-006Lr9-JA
 Subject: Re: [f2fs-dev] [PATCH v4] f2fs: introduce fragment allocation mode
  mount option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -129,76 +130,81 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Sep 9, 2021 at 4:50 PM Chao Yu <chao@kernel.org> wrote:
+On Fri, Sep 10, 2021 at 7:34 AM Daeho Jeong <daeho43@gmail.com> wrote:
 >
-> On 2021/9/8 2:12, Daeho Jeong wrote:
-> > On Fri, Sep 3, 2021 at 11:45 PM Chao Yu <chao@kernel.org> wrote:
-> >>
-> >> On 2021/9/4 12:40, Daeho Jeong wrote:
-> >>>> As a per curseg field.
-> >>>>
-> >>>>> Maybe, we run into the same race condition issue you told before for
-> >>>>> fragment_remained_chunk.
-> >>>>> Could you clarify this more?
-> >>>>
-> >>>> e.g.
-> >>>>
-> >>>> F2FS_OPTION(sbi).fs_mode = FS_MODE_FRAGMENT_FIXED_BLK
-> >>>> fragment_chunk_size = 384
-> >>>> fragment_hole_size = 384
-> >>>>
-> >>>> When creating hole:
-> >>>>
-> >>>> - f2fs_allocate_data_block
-> >>>>     - __refresh_next_blkoff
-> >>>>       chunk locates in [0, 383] of current segment
-> >>>>       seg->next_blkoff = 384
-> >>>>       sbi->fragment_remained_chunk = 0
-> >>>>       then we will reset sbi->fragment_remained_chunk to 384
-> >>>>       and move seg->next_blkoff forward to 768 (384 + 384)
-> >>>>     - __has_curseg_space() returns false
-> >>>>     - allocate_segment() allocates new current segment
-> >>>>
-> >>>> So, for such case that hole may cross two segments, hole size may be truncated
-> >>>> to left size of previous segment.
-> >>>
-> >>> First, sbi->fragment_remained_chunk should be seg->fragment_remained_chunk.
-> >>
-> >> Oh, correct.
-> >>
-> >>> I understand what you mean, so you mean we need to take the leftover
-> >>> "hole" size over to the next segment?
-> >>> In the example, the leftover hole size will be (384 - (512-384)). Do
-> >>> you want to take this over to the next segment?
-> >>
-> >> Yes, the left 256 block-sized hole should be created before next chunk
-> >> in next opened segment.
-> >>
+> On Thu, Sep 9, 2021 at 4:50 PM Chao Yu <chao@kernel.org> wrote:
 > >
-> > Chao,
+> > On 2021/9/8 2:12, Daeho Jeong wrote:
+> > > On Fri, Sep 3, 2021 at 11:45 PM Chao Yu <chao@kernel.org> wrote:
+> > >>
+> > >> On 2021/9/4 12:40, Daeho Jeong wrote:
+> > >>>> As a per curseg field.
+> > >>>>
+> > >>>>> Maybe, we run into the same race condition issue you told before for
+> > >>>>> fragment_remained_chunk.
+> > >>>>> Could you clarify this more?
+> > >>>>
+> > >>>> e.g.
+> > >>>>
+> > >>>> F2FS_OPTION(sbi).fs_mode = FS_MODE_FRAGMENT_FIXED_BLK
+> > >>>> fragment_chunk_size = 384
+> > >>>> fragment_hole_size = 384
+> > >>>>
+> > >>>> When creating hole:
+> > >>>>
+> > >>>> - f2fs_allocate_data_block
+> > >>>>     - __refresh_next_blkoff
+> > >>>>       chunk locates in [0, 383] of current segment
+> > >>>>       seg->next_blkoff = 384
+> > >>>>       sbi->fragment_remained_chunk = 0
+> > >>>>       then we will reset sbi->fragment_remained_chunk to 384
+> > >>>>       and move seg->next_blkoff forward to 768 (384 + 384)
+> > >>>>     - __has_curseg_space() returns false
+> > >>>>     - allocate_segment() allocates new current segment
+> > >>>>
+> > >>>> So, for such case that hole may cross two segments, hole size may be truncated
+> > >>>> to left size of previous segment.
+> > >>>
+> > >>> First, sbi->fragment_remained_chunk should be seg->fragment_remained_chunk.
+> > >>
+> > >> Oh, correct.
+> > >>
+> > >>> I understand what you mean, so you mean we need to take the leftover
+> > >>> "hole" size over to the next segment?
+> > >>> In the example, the leftover hole size will be (384 - (512-384)). Do
+> > >>> you want to take this over to the next segment?
+> > >>
+> > >> Yes, the left 256 block-sized hole should be created before next chunk
+> > >> in next opened segment.
+> > >>
+> > >
+> > > Chao,
+> > >
+> > > Do you have any decent idea to pass the left hole size to the next
+> > > segment which will be allocated?
 > >
-> > Do you have any decent idea to pass the left hole size to the next
-> > segment which will be allocated?
+> > Daeho,
+> >
+> > I guess we can record left hole size in seg->fragment_remained_hole.
+> >
 >
-> Daeho,
->
-> I guess we can record left hole size in seg->fragment_remained_hole.
+> I understand we need a new fragment_remained_hole variable in segment structure.
+> But, I mean.. How can we pass over the left hole size from the
+> previous segment to the next segment?
 >
 
-I understand we need a new fragment_remained_hole variable in segment structure.
-But, I mean.. How can we pass over the left hole size from the
-previous segment to the next segment?
-
-Thanks,
+I mean we don't know which segment will be the next segment, do we?
 
 > Thanks,
 >
-> >
 > > Thanks,
 > >
-> >> Thanks,
-> >>
-> >>>
+> > >
+> > > Thanks,
+> > >
+> > >> Thanks,
+> > >>
+> > >>>
 
 
 _______________________________________________
