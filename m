@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83D804073B8
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Sep 2021 01:13:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B6F54073BF
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Sep 2021 01:15:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mOphw-00017f-UX; Fri, 10 Sep 2021 23:13:21 +0000
+	id 1mOpkN-0001CG-Ju; Fri, 10 Sep 2021 23:15:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <jaegeuk@kernel.org>) id 1mOphu-00017Y-F1
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 23:13:18 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <jaegeuk@kernel.org>) id 1mOpkN-0001C8-4B
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 23:15:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RsNYOQDIfglGqQnGT7bMynmpflMN7K/SViST2CdSLzQ=; b=fAPuVDdSHSylSwGkGj1931t4nE
- yL8zodKrd4YBxDbZu+bdYaadHe9e1JzE/FF1lTEt8DfPR5ukQYk/mCFLg5AjsO0Mz34ph+KPABBxV
- GdWWs3EgUz0LpVjpucTeK80YJfVZ4yHhpl5aUiV+NAmji4JmbTRBq0jON42PStfaj4wU=;
+ bh=Mt/yoJbRbDqoPwjirKW65951abgYNdFXUt2846IATtc=; b=lzz42TU4ZMU6CNju59wcZ76ra+
+ XwsMQtvMEBZibUce64lUpgrJUAuimQASHKCdv6HiO3gY4U+jgaBsyWFpgORjzfr7za8v/+Y1jyMlW
+ +1gbP73I5ArTLxyrIhiqcT8PCOg4ZeJi6IScaHHA8swFQp7+dnyNT0QIjX8mQLZmS2rs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,34 +29,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RsNYOQDIfglGqQnGT7bMynmpflMN7K/SViST2CdSLzQ=; b=c4auQtEgyi7xHCaddWN2IBp+Hy
- ihKA+0j8IT6x0DANMjgmYnQgdTtvKvtdWMIXzRD3uiLPuNDdr2LNonkhqJ1mgkCeEbPQCUlRwGYlv
- b69HhPiZwQNu1TIHO1bBtlhODOkxdOuOuA8wFiiaVQsK2qyCB6lu47kr8TlsFctOUQd0=;
+ bh=Mt/yoJbRbDqoPwjirKW65951abgYNdFXUt2846IATtc=; b=lywcx/egl59wuVh9goFfhANO3P
+ Vwxtq/uzSKHGnvxgfYnsIiFCngTgkgaqSBaCCAPS4+De3/5Z6wYWMiGTcCUwewn6C0klQxINzwuUy
+ ZkQAYPTzjPvfj3Nfk31MZTfAgYJvIMMOajy4QimXJ34c0FCDHNGey9ov9jazdH54wqYI=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mOpht-0002Cq-Dc
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 23:13:18 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id EB392611F0;
- Fri, 10 Sep 2021 23:13:10 +0000 (UTC)
+ id 1mOpkM-006geq-8G
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 23:15:51 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A0D16611F0;
+ Fri, 10 Sep 2021 23:15:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1631315591;
- bh=OFBF5WRw6gq2n+ISXnJ8iKjdcytMc1NAa1mukkXy5nE=;
+ s=k20201202; t=1631315739;
+ bh=j2gdBQ0yVEyBDV1HYjyN+sUjXN5yvCcAUY4feHmHyvQ=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=hETRDApLgkyfld4vxGhtQKIXoztiGiPzunOuePtro5HWAJHV4u75NiqIdUigxIxhw
- 6S1QkAsrhlb1QFs+jvQrhF7nzcngvr11yL4gQ9N24v7Sl1TvFNSOfdDX5hJS6uCqiQ
- PAQdSslnE078gBdmDGpgOkWXta55oy3tJbVmmLwfoL0M6Xzl17kH2XlPXNGEUKdWrp
- MQ5LKBFhcbkUEoxnThNtJKc12FUSndE6BwV9W46BUctGqv8pE/d8WH9uUiGoP2fPa0
- 6OxZvnlqCjoXBcIY1Bbkxh52KPJAtUaKahNCdhgwSt/bQXZtmk3mqxuCuBgV8N55a/
- bIlK0+cKyMVDg==
-Date: Fri, 10 Sep 2021 16:13:09 -0700
+ b=aJogqam7yeLteilx+2r2bk7zeaj40krd+urlh+I/Z33yuznqRk/OwFJem102JhKl9
+ SHQXTfmNFlxeZUlxY1d/RzSwbPcIvVEt3GoowhJHeiMRaJjnld6M0BP8GZwFifohHJ
+ pEQToqs0oK4SNuiB1x6dUlJDUwgHE9LgxLUpd7+lH7a57O+yAK33SKMNfKbf3khSLL
+ GAnEN9vWNZoFjqpQPuXdL3XpjqjuYi9mF9Qs8Npxe2SxY33ZZMxIrvIAJS74/bXAWE
+ LpL7ArH8bKhM54apSnnAyJ+9o9egEAntvrz7wvrpQyW/AcuJ2nL3tBbtNoqV1bUL/u
+ u1QkQ4giAbSYA==
+Date: Fri, 10 Sep 2021 16:15:38 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <YTvmhVhLlBPeASHT@google.com>
-References: <20210902172404.3517626-1-daeho43@gmail.com>
+To: Fengnan Chang <fengnanchang@gmail.com>
+Message-ID: <YTvnGoSLYL5rsJPj@google.com>
+References: <20210908133923.12836-1-fengnanchang@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210902172404.3517626-1-daeho43@gmail.com>
+In-Reply-To: <20210908133923.12836-1-fengnanchang@gmail.com>
 X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -64,10 +64,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 09/02,
- Daeho Jeong wrote: > From: Daeho Jeong <daehojeong@google.com>
- > > Added three options into "mode=" mount option to make it possible for
- > developers to make the filesystem fragmented or sim [...] 
+ Content preview:  On 09/08,
+ Fengnan Chang wrote: > From: Fengnan Chang <changfengnan@vivo.com>
+ > > improve block allocation statistics: > 1. fix missing inplace count in
+ overwrite with direct io. > 2. separate buffer a [...] 
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -82,9 +82,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mOpht-0002Cq-Dc
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: introduce fragment allocation mode
- mount option
+X-Headers-End: 1mOpkM-006geq-8G
+Subject: Re: [f2fs-dev] [PATCH] f2fs: improve block allocation statistics
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,359 +95,271 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Fengnan Chang <changfengnan@vivo.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 09/02, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On 09/08, Fengnan Chang wrote:
+> From: Fengnan Chang <changfengnan@vivo.com>
 > 
-> Added three options into "mode=" mount option to make it possible for
-> developers to make the filesystem fragmented or simulate filesystem
-> fragmentation/after-GC situation itself. The developers use these modes
-> to understand filesystem fragmentation/after-GC condition well,
-> and eventually get some insights to handle them better.
-> 
-> "fragment:segment": f2fs allocates a new segment in ramdom position.
-> 		With this, we can simulate the after-GC condition.
-> "fragment:fixed_block" : We can scatter block allocation with
-> 		"fragment_chunk_size" and "fragment_hole_size" sysfs
-> 		nodes. f2fs will allocate <fragment_chunk_size> blocks
-> 		in a chunk and make a hole in the length of
-> 		<fragment_hole_size> by turns in a newly allocated free
-> 		segment.
+> improve block allocation statistics:
+> 1. fix missing inplace count in overwrite with direct io.
+> 2. separate buffer and direct io.
 
-Wait. Why do we need to add so many options here? I was expecting to see
-performance difference when getting random segments or random blocks as
-an extreme case. I don't get the point why we need the middle of those cases.
+Could you please split out two problems in separate patches?
 
-> "fragment:rand_block" : Working like "fragment:fixed_block" mode, but
-> 		added some randomness to both chunk and hole size. So,
-> 		f2fs will allocate 1..<fragment_chunk_size> blocks in a
-> 		chunk and make a hole in the nodes. f2fs will allocate
-> 		1..<fragment_chunk_size> blocks in a chunk and make a
-> 		hole in the length of 1..<fragment_hole_size> by turns
-> 		in a newly allocated free segment.
-> 		Plus, f2fs implicitly enables "fragment:segment" option
-> 		for more randomness in allocation in "fragment:rand_block".
 > 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
 > ---
-> v4: implicitly enabled "fragment:segment" option only in
->     "fragment:rand_block".
-> v3: divided "fragment:block" mode and fixed a race condition related to
->     making chunks.
-> v2: changed mode name and added sysfs nodes to control the fragmentation
->     pattern.
-> ---
->  Documentation/ABI/testing/sysfs-fs-f2fs | 24 ++++++++++++++++++++
->  Documentation/filesystems/f2fs.rst      | 22 +++++++++++++++++++
->  fs/f2fs/f2fs.h                          | 20 +++++++++++++++--
->  fs/f2fs/gc.c                            |  5 ++++-
->  fs/f2fs/segment.c                       | 29 +++++++++++++++++++++++--
->  fs/f2fs/segment.h                       |  1 +
->  fs/f2fs/super.c                         | 14 ++++++++++++
->  fs/f2fs/sysfs.c                         | 20 +++++++++++++++++
->  8 files changed, 130 insertions(+), 5 deletions(-)
+>  fs/f2fs/data.c    | 17 ++++++++++++-----
+>  fs/f2fs/debug.c   | 24 +++++++++++++++---------
+>  fs/f2fs/f2fs.h    | 35 ++++++++++++++++++++++++++---------
+>  fs/f2fs/gc.c      |  2 +-
+>  fs/f2fs/segment.c |  8 ++++----
+>  5 files changed, 58 insertions(+), 28 deletions(-)
 > 
-> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-> index f627e705e663..d56ecfd16abf 100644
-> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
-> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-> @@ -512,3 +512,27 @@ Date:		July 2021
->  Contact:	"Daeho Jeong" <daehojeong@google.com>
->  Description:	You can	control the multiplier value of	bdi device readahead window size
->  		between 2 (default) and 256 for POSIX_FADV_SEQUENTIAL advise option.
-> +
-> +What:		/sys/fs/f2fs/<disk>/fragment_chunk_size
-> +Date:		August 2021
-> +Contact:	"Daeho Jeong" <daehojeong@google.com>
-> +Description:	With "mode=fragment:fixed_block" and "mode=fragment:rand_block" mount options,
-> +		we can scatter block allocation. Using this node, in "fragment:fixed_block"
-> +		mode, f2fs will allocate <fragment_chunk_size> blocks in a chunk and make
-> +		a hole in the length of	<fragment_hole_size> by turns in a newly allocated
-> +		free segment. Plus, in "fragment:rand_block" mode, f2fs will allocate
-> +		1..<fragment_chunk_size> blocks in a chunk and make a hole in the length of
-> +		1..<fragment_hole_size> by turns. This value can be set between 1..512 and
-> +		the default value is 4.
-> +
-> +What:		/sys/fs/f2fs/<disk>/fragment_hole_size
-> +Date:		August 2021
-> +Contact:	"Daeho Jeong" <daehojeong@google.com>
-> +Description:	With "mode=fragment:fixed_block" and "mode=fragment:rand_block" mount options,
-> +		we can scatter block allocation. Using this node, in "fragment:fixed_block"
-> +		mode, f2fs will allocate <fragment_chunk_size> blocks in a chunk and make
-> +		a hole in the length of	<fragment_hole_size> by turns in a newly allocated
-> +		free segment. Plus, in "fragment:rand_block" mode, f2fs will allocate
-> +		1..<fragment_chunk_size> blocks in a chunk and make a hole in the length of
-> +		1..<fragment_hole_size> by turns. This value can be set between 1..512 and
-> +		the default value is 4.
-> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-> index 09de6ebbbdfa..04ddae8754cc 100644
-> --- a/Documentation/filesystems/f2fs.rst
-> +++ b/Documentation/filesystems/f2fs.rst
-> @@ -201,6 +201,28 @@ fault_type=%d		 Support configuring fault injection type, should be
->  mode=%s			 Control block allocation mode which supports "adaptive"
->  			 and "lfs". In "lfs" mode, there should be no random
->  			 writes towards main area.
-> +			 "fragment:segment", "fragment:fixed_block" and "fragment:rand_block"
-> +			 are newly added here. These are developer options for experiments
-> +			 to make the filesystem fragmented or simulate filesystem
-> +			 fragmentation/after-GC situation itself. The developers use these
-> +			 modes to understand filesystem fragmentation/after-GC condition well,
-> +			 and eventually get some insights to handle them better.
-> +			 In "fragment:segment", f2fs allocates a new segment in ramdom
-> +			 position. With this, we can simulate the after-GC condition.
-> +			 In "fragment:fixed_block" and "fragment:rand_block", we can scatter
-> +			 block allocation with "fragment_chunk_size" and "fragment_hole_size"
-> +			 sysfs nodes. In "fragment:fixed_block" mode, f2fs will allocate
-> +			 <fragment_chunk_size> blocks in a chunk and make a hole in the length
-> +			 of <fragment_hole_size> by turns in a newly allocated free segment.
-> +			 But, in "fragment:rand_block" mode, f2fs adds some randomness to
-> +			 both chunk and hole size. So, f2fs will allocate
-> +			 1..<fragment_chunk_size> blocks in a chunk and make a hole in the
-> +			 length of 1..<fragment_hole_size> by turns. With these, the newly
-> +			 allocated blocks will be scattered throughout the whole partition.
-> +			 Plus, f2fs implicitly enables "fragment:segment" option for more
-> +			 randomness in allocation in "fragment:rand_block".
-> +			 Please, use these options for your experiments and we strongly
-> +			 recommend to re-format the filesystem after using these options.
->  io_bits=%u		 Set the bit size of write IO requests. It should be set
->  			 with "mode=lfs".
->  usrquota		 Enable plain user disk quota accounting.
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index c24f03e054cb..f9aa00b92222 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1285,8 +1285,11 @@ enum {
->  };
->  
->  enum {
-> -	FS_MODE_ADAPTIVE,	/* use both lfs/ssr allocation */
-> -	FS_MODE_LFS,		/* use lfs allocation only */
-> +	FS_MODE_ADAPTIVE,		/* use both lfs/ssr allocation */
-> +	FS_MODE_LFS,			/* use lfs allocation only */
-> +	FS_MODE_FRAGMENT_SEG,		/* segment fragmentation mode */
-> +	FS_MODE_FRAGMENT_FIXED_BLK,	/* fixed block fragmentation mode */
-> +	FS_MODE_FRAGMENT_RAND_BLK,	/* randomized block fragmentation mode */
->  };
->  
->  enum {
-> @@ -1757,6 +1760,9 @@ struct f2fs_sb_info {
->  
->  	unsigned long seq_file_ra_mul;		/* multiplier for ra_pages of seq. files in fadvise */
->  
-> +	int fragment_chunk_size;		/* the chunk size for block fragmentation mode */
-> +	int fragment_hole_size;			/* the hole size for block fragmentation mode */
-> +
->  #ifdef CONFIG_F2FS_FS_COMPRESSION
->  	struct kmem_cache *page_array_slab;	/* page array entry */
->  	unsigned int page_array_slab_size;	/* default page array slab size */
-> @@ -3517,6 +3523,16 @@ unsigned int f2fs_usable_segs_in_sec(struct f2fs_sb_info *sbi,
->  unsigned int f2fs_usable_blks_in_seg(struct f2fs_sb_info *sbi,
->  			unsigned int segno);
->  
-> +#define DEF_FRAGMENT_SIZE	4
-> +#define MIN_FRAGMENT_SIZE	1
-> +#define MAX_FRAGMENT_SIZE	512
-> +
-> +static inline bool f2fs_need_rand_seg(struct f2fs_sb_info *sbi)
-> +{
-> +	return F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_SEG ||
-> +		F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_RAND_BLK;
-> +}
-> +
->  /*
->   * checkpoint.c
->   */
-> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> index 2c18443972b6..72cfad99bbbe 100644
-> --- a/fs/f2fs/gc.c
-> +++ b/fs/f2fs/gc.c
-> @@ -14,6 +14,7 @@
->  #include <linux/delay.h>
->  #include <linux/freezer.h>
->  #include <linux/sched/signal.h>
-> +#include <linux/random.h>
->  
->  #include "f2fs.h"
->  #include "node.h"
-> @@ -257,7 +258,9 @@ static void select_policy(struct f2fs_sb_info *sbi, int gc_type,
->  		p->max_search = sbi->max_victim_search;
->  
->  	/* let's select beginning hot/small space first in no_heap mode*/
-> -	if (test_opt(sbi, NOHEAP) &&
-> +	if (f2fs_need_rand_seg(sbi))
-> +		p->offset = prandom_u32() % (MAIN_SECS(sbi) * sbi->segs_per_sec);
-> +	else if (test_opt(sbi, NOHEAP) &&
->  		(type == CURSEG_HOT_DATA || IS_NODESEG(type)))
->  		p->offset = 0;
->  	else
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index a135d2247415..954c06728b94 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -15,6 +15,7 @@
->  #include <linux/timer.h>
->  #include <linux/freezer.h>
->  #include <linux/sched/signal.h>
-> +#include <linux/random.h>
->  
->  #include "f2fs.h"
->  #include "segment.h"
-> @@ -2630,6 +2631,8 @@ static unsigned int __get_next_segno(struct f2fs_sb_info *sbi, int type)
->  	unsigned short seg_type = curseg->seg_type;
->  
->  	sanity_check_seg_type(sbi, seg_type);
-> +	if (f2fs_need_rand_seg(sbi))
-> +		return prandom_u32() % (MAIN_SECS(sbi) * sbi->segs_per_sec);
->  
->  	/* if segs_per_sec is large than 1, we need to keep original policy. */
->  	if (__is_large_section(sbi))
-> @@ -2681,6 +2684,11 @@ static void new_curseg(struct f2fs_sb_info *sbi, int type, bool new_sec)
->  	curseg->next_segno = segno;
->  	reset_curseg(sbi, type, 1);
->  	curseg->alloc_type = LFS;
-> +	if (F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_FIXED_BLK)
-> +		curseg->fragment_remained_chunk = sbi->fragment_chunk_size;
-> +	else if (F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_RAND_BLK)
-> +		curseg->fragment_remained_chunk =
-> +				prandom_u32() % sbi->fragment_chunk_size + 1;
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 41d29382eced..c563004b643e 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -1342,7 +1342,7 @@ struct page *f2fs_get_new_data_page(struct inode *inode,
+>  	return page;
 >  }
 >  
->  static int __next_free_blkoff(struct f2fs_sb_info *sbi,
-> @@ -2707,12 +2715,29 @@ static int __next_free_blkoff(struct f2fs_sb_info *sbi,
->  static void __refresh_next_blkoff(struct f2fs_sb_info *sbi,
->  				struct curseg_info *seg)
+> -static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
+> +static int __allocate_data_block(struct dnode_of_data *dn, int seg_type, bool direct_io)
 >  {
-> -	if (seg->alloc_type == SSR)
-> +	if (seg->alloc_type == SSR) {
->  		seg->next_blkoff =
->  			__next_free_blkoff(sbi, seg->segno,
->  						seg->next_blkoff + 1);
-> -	else
-> +	} else {
->  		seg->next_blkoff++;
-> +		if (F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_FIXED_BLK) {
-> +			if (--seg->fragment_remained_chunk <= 0) {
-> +				seg->fragment_remained_chunk =
-> +				   sbi->fragment_chunk_size;
-> +				seg->next_blkoff +=
-> +				   sbi->fragment_hole_size;
-> +			}
-> +		} else if (F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_RAND_BLK) {
-> +			/* To allocate block chunks in different sizes, use random number */
-> +			if (--seg->fragment_remained_chunk <= 0) {
-> +				seg->fragment_remained_chunk =
-> +				   prandom_u32() % sbi->fragment_chunk_size + 1;
-> +				seg->next_blkoff +=
-> +				   prandom_u32() % sbi->fragment_hole_size + 1;
-> +			}
-> +		}
-> +	}
->  }
->  
->  bool f2fs_segment_has_free_slot(struct f2fs_sb_info *sbi, int segno)
-> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-> index 89fff258727d..46fde9f3f28e 100644
-> --- a/fs/f2fs/segment.h
-> +++ b/fs/f2fs/segment.h
-> @@ -314,6 +314,7 @@ struct curseg_info {
->  	unsigned short next_blkoff;		/* next block offset to write */
->  	unsigned int zone;			/* current zone number */
->  	unsigned int next_segno;		/* preallocated segment */
-> +	int fragment_remained_chunk;		/* remained block size in a chunk for block fragmentation mode */
->  	bool inited;				/* indicate inmem log is inited */
->  };
->  
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 49e153fd8183..60067b6d9fea 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -817,6 +817,12 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->  				F2FS_OPTION(sbi).fs_mode = FS_MODE_ADAPTIVE;
->  			} else if (!strcmp(name, "lfs")) {
->  				F2FS_OPTION(sbi).fs_mode = FS_MODE_LFS;
-> +			} else if (!strcmp(name, "fragment:segment")) {
-> +				F2FS_OPTION(sbi).fs_mode = FS_MODE_FRAGMENT_SEG;
-> +			} else if (!strcmp(name, "fragment:fixed_block")) {
-> +				F2FS_OPTION(sbi).fs_mode = FS_MODE_FRAGMENT_FIXED_BLK;
-> +			} else if (!strcmp(name, "fragment:rand_block")) {
-> +				F2FS_OPTION(sbi).fs_mode = FS_MODE_FRAGMENT_RAND_BLK;
->  			} else {
->  				kfree(name);
->  				return -EINVAL;
-> @@ -1897,6 +1903,12 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
->  		seq_puts(seq, "adaptive");
->  	else if (F2FS_OPTION(sbi).fs_mode == FS_MODE_LFS)
->  		seq_puts(seq, "lfs");
-> +	else if (F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_SEG)
-> +		seq_puts(seq, "fragment:segment");
-> +	else if (F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_FIXED_BLK)
-> +		seq_puts(seq, "fragment:fixed_block");
-> +	else if (F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_RAND_BLK)
-> +		seq_puts(seq, "fragment:rand_block");
->  	seq_printf(seq, ",active_logs=%u", F2FS_OPTION(sbi).active_logs);
->  	if (test_opt(sbi, RESERVE_ROOT))
->  		seq_printf(seq, ",reserve_root=%u,resuid=%u,resgid=%u",
-> @@ -3515,6 +3527,8 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
->  	sbi->max_victim_search = DEF_MAX_VICTIM_SEARCH;
->  	sbi->migration_granularity = sbi->segs_per_sec;
->  	sbi->seq_file_ra_mul = MIN_RA_MUL;
-> +	sbi->fragment_chunk_size = DEF_FRAGMENT_SIZE;
-> +	sbi->fragment_hole_size = DEF_FRAGMENT_SIZE;
->  
->  	sbi->dir_level = DEF_DIR_LEVEL;
->  	sbi->interval_time[CP_TIME] = DEF_CP_INTERVAL;
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index a1a3e0f6d658..ab34b3c2e09d 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -551,6 +551,22 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
->  		return count;
+>  	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
+>  	struct f2fs_summary sum;
+> @@ -1369,7 +1369,7 @@ static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
+>  	set_summary(&sum, dn->nid, dn->ofs_in_node, ni.version);
+>  	old_blkaddr = dn->data_blkaddr;
+>  	f2fs_allocate_data_block(sbi, NULL, old_blkaddr, &dn->data_blkaddr,
+> -				&sum, seg_type, NULL);
+> +				&sum, seg_type, NULL, direct_io);
+>  	if (GET_SEGNO(sbi, old_blkaddr) != NULL_SEGNO) {
+>  		invalidate_mapping_pages(META_MAPPING(sbi),
+>  					old_blkaddr, old_blkaddr);
+> @@ -1491,6 +1491,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+>  		if (flag == F2FS_GET_BLOCK_DIO)
+>  			f2fs_wait_on_block_writeback_range(inode,
+>  						map->m_pblk, map->m_len);
+> +		if (!f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO &&
+> +				map->m_may_create)
+> +			stat_add_inplace_blocks(sbi, map->m_len, true);
+>  		goto out;
 >  	}
 >  
-> +	if (!strcmp(a->attr.name, "fragment_chunk_size")) {
-> +		if (t >= MIN_FRAGMENT_SIZE && t <= MAX_FRAGMENT_SIZE)
-> +			sbi->fragment_chunk_size = t;
-> +		else
-> +			return -EINVAL;
-> +		return count;
-> +	}
-> +
-> +	if (!strcmp(a->attr.name, "fragment_hole_size")) {
-> +		if (t >= MIN_FRAGMENT_SIZE && t <= MAX_FRAGMENT_SIZE)
-> +			sbi->fragment_hole_size = t;
-> +		else
-> +			return -EINVAL;
-> +		return count;
-> +	}
-> +
->  	*ui = (unsigned int)t;
+> @@ -1548,12 +1551,14 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+>  		/* use out-place-update for driect IO under LFS mode */
+>  		if (f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO &&
+>  							map->m_may_create) {
+> -			err = __allocate_data_block(&dn, map->m_seg_type);
+> +			err = __allocate_data_block(&dn, map->m_seg_type, true);
+>  			if (err)
+>  				goto sync_out;
+>  			blkaddr = dn.data_blkaddr;
+>  			set_inode_flag(inode, FI_APPEND_WRITE);
+> -		}
+> +		} else if (!create && !f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO &&
+> +				map->m_may_create)
+> +			stat_inc_inplace_blocks(sbi, true);
+>  	} else {
+>  		if (create) {
+>  			if (unlikely(f2fs_cp_error(sbi))) {
+> @@ -1569,7 +1574,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+>  				WARN_ON(flag != F2FS_GET_BLOCK_PRE_DIO &&
+>  					flag != F2FS_GET_BLOCK_DIO);
+>  				err = __allocate_data_block(&dn,
+> -							map->m_seg_type);
+> +					map->m_seg_type,
+> +					flag == F2FS_GET_BLOCK_PRE_DIO ||
+> +					flag == F2FS_GET_BLOCK_DIO);
+>  				if (!err)
+>  					set_inode_flag(inode, FI_APPEND_WRITE);
+>  			}
+> diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+> index 8c50518475a9..e1aa843b067c 100644
+> --- a/fs/f2fs/debug.c
+> +++ b/fs/f2fs/debug.c
+> @@ -64,7 +64,7 @@ static void update_general_status(struct f2fs_sb_info *sbi)
+>  {
+>  	struct f2fs_stat_info *si = F2FS_STAT(sbi);
+>  	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
+> -	int i;
+> +	int i, j;
 >  
->  	return count;
-> @@ -781,6 +797,8 @@ F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_threshold, age_threshold);
->  F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, seq_file_ra_mul, seq_file_ra_mul);
->  F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_segment_mode, gc_segment_mode);
->  F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_reclaimed_segments, gc_reclaimed_segs);
-> +F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, fragment_chunk_size, fragment_chunk_size);
-> +F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, fragment_hole_size, fragment_hole_size);
+>  	/* these will be changed if online resize is done */
+>  	si->main_area_segs = le32_to_cpu(raw_super->segment_count_main);
+> @@ -210,10 +210,12 @@ static void update_general_status(struct f2fs_sb_info *sbi)
 >  
->  #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
->  static struct attribute *f2fs_attrs[] = {
-> @@ -859,6 +877,8 @@ static struct attribute *f2fs_attrs[] = {
->  	ATTR_LIST(seq_file_ra_mul),
->  	ATTR_LIST(gc_segment_mode),
->  	ATTR_LIST(gc_reclaimed_segments),
-> +	ATTR_LIST(fragment_chunk_size),
-> +	ATTR_LIST(fragment_hole_size),
->  	NULL,
+>  	for (i = 0; i < 2; i++) {
+>  		si->segment_count[i] = sbi->segment_count[i];
+> -		si->block_count[i] = sbi->block_count[i];
+> +		for (j = 0; j < 2; j++)
+> +			si->block_count[i][j] = sbi->block_count[i][j];
+>  	}
+>  
+> -	si->inplace_count = atomic_read(&sbi->inplace_count);
+> +	for (i = 0; i < 2; i++)
+> +		si->inplace_count[i] = atomic_read(&sbi->inplace_count[i]);
+>  }
+>  
+>  /*
+> @@ -551,11 +553,14 @@ static int stat_show(struct seq_file *s, void *v)
+>  		for (j = 0; j < si->util_free; j++)
+>  			seq_putc(s, '-');
+>  		seq_puts(s, "]\n\n");
+> -		seq_printf(s, "IPU: %u blocks\n", si->inplace_count);
+> -		seq_printf(s, "SSR: %u blocks in %u segments\n",
+> -			   si->block_count[SSR], si->segment_count[SSR]);
+> -		seq_printf(s, "LFS: %u blocks in %u segments\n",
+> -			   si->block_count[LFS], si->segment_count[LFS]);
+> +
+> +		seq_printf(s, "       %10s %10s %10s\n", "buffer", "direct", "segments");
+> +		seq_printf(s,   "IPU:   %10d %10d        N/A\n", si->inplace_count[1],
+> +				si->inplace_count[0]);
+> +		seq_printf(s,   "SSR:   %10d %10d %10d\n", si->block_count[1][SSR],
+> +				si->block_count[0][SSR], si->segment_count[SSR]);
+> +		seq_printf(s,   "LFS:   %10d %10d %10d\n", si->block_count[1][LFS],
+> +				si->block_count[0][LFS], si->segment_count[LFS]);
+>  
+>  		/* segment usage info */
+>  		f2fs_update_sit_info(si->sbi);
+> @@ -611,7 +616,8 @@ int f2fs_build_stats(struct f2fs_sb_info *sbi)
+>  	atomic_set(&sbi->inline_dir, 0);
+>  	atomic_set(&sbi->compr_inode, 0);
+>  	atomic64_set(&sbi->compr_blocks, 0);
+> -	atomic_set(&sbi->inplace_count, 0);
+> +	for (i = 0; i < 2; i++)
+> +		atomic_set(&sbi->inplace_count[i], 0);
+>  	for (i = META_CP; i < META_MAX; i++)
+>  		atomic_set(&sbi->meta_count[i], 0);
+>  
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index c24f03e054cb..c83c998fe19c 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1693,8 +1693,8 @@ struct f2fs_sb_info {
+>  	struct f2fs_stat_info *stat_info;	/* FS status information */
+>  	atomic_t meta_count[META_MAX];		/* # of meta blocks */
+>  	unsigned int segment_count[2];		/* # of allocated segments */
+> -	unsigned int block_count[2];		/* # of allocated blocks */
+> -	atomic_t inplace_count;		/* # of inplace update */
+> +	unsigned int block_count[2][2];		/* # of allocated blocks */
+> +	atomic_t inplace_count[2];		/* # of inplace update */
+>  	atomic64_t total_hit_ext;		/* # of lookup extent cache */
+>  	atomic64_t read_hit_rbtree;		/* # of hit rbtree extent node */
+>  	atomic64_t read_hit_largest;		/* # of hit largest extent node */
+> @@ -3492,7 +3492,7 @@ void f2fs_replace_block(struct f2fs_sb_info *sbi, struct dnode_of_data *dn,
+>  void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
+>  			block_t old_blkaddr, block_t *new_blkaddr,
+>  			struct f2fs_summary *sum, int type,
+> -			struct f2fs_io_info *fio);
+> +			struct f2fs_io_info *fio, bool direct_io);
+>  void f2fs_wait_on_page_writeback(struct page *page,
+>  			enum page_type type, bool ordered, bool locked);
+>  void f2fs_wait_on_block_writeback(struct inode *inode, block_t blkaddr);
+> @@ -3700,8 +3700,8 @@ struct f2fs_stat_info {
+>  
+>  	unsigned int meta_count[META_MAX];
+>  	unsigned int segment_count[2];
+> -	unsigned int block_count[2];
+> -	unsigned int inplace_count;
+> +	unsigned int block_count[2][2];
+> +	unsigned int inplace_count[2];
+>  	unsigned long long base_mem, cache_mem, page_mem;
 >  };
->  ATTRIBUTE_GROUPS(f2fs);
+>  
+> @@ -3779,10 +3779,27 @@ static inline struct f2fs_stat_info *F2FS_STAT(struct f2fs_sb_info *sbi)
+>  	} while (0)
+>  #define stat_inc_seg_type(sbi, curseg)					\
+>  		((sbi)->segment_count[(curseg)->alloc_type]++)
+> -#define stat_inc_block_count(sbi, curseg)				\
+> -		((sbi)->block_count[(curseg)->alloc_type]++)
+> -#define stat_inc_inplace_blocks(sbi)					\
+> -		(atomic_inc(&(sbi)->inplace_count))
+> +#define stat_inc_block_count(sbi, curseg, direct_io)			\
+> +	do {								\
+> +		if (direct_io)						\
+> +			((sbi)->block_count[0][(curseg)->alloc_type]++);	\
+> +		else								\
+> +			((sbi)->block_count[1][(curseg)->alloc_type]++);	\
+> +	} while (0)
+> +#define stat_inc_inplace_blocks(sbi, direct_io)					\
+> +	do {								\
+> +		if (direct_io)						\
+> +			(atomic_inc(&(sbi)->inplace_count[0]));		\
+> +		else								\
+> +			(atomic_inc(&(sbi)->inplace_count[1]));		\
+> +	} while (0)
+> +#define stat_add_inplace_blocks(sbi, count, direct_io)			\
+> +	do {								\
+> +		if (direct_io)						\
+> +			(atomic_add(count, &(sbi)->inplace_count[0]));  \
+> +		else								\
+> +			(atomic_add(count, &(sbi)->inplace_count[1]));	\
+> +	} while (0)
+>  #define stat_update_max_atomic_write(inode)				\
+>  	do {								\
+>  		int cur = F2FS_I_SB(inode)->atomic_files;	\
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 77391e3b7d68..7c47082f73cc 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -1247,7 +1247,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  
+>  	/* allocate block address */
+>  	f2fs_allocate_data_block(fio.sbi, NULL, fio.old_blkaddr, &newaddr,
+> -				&sum, type, NULL);
+> +				&sum, type, NULL, false);
+>  
+>  	fio.encrypted_page = f2fs_pagecache_get_page(META_MAPPING(fio.sbi),
+>  				newaddr, FGP_LOCK | FGP_CREAT, GFP_NOFS);
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index a135d2247415..ded744e880d0 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -3391,7 +3391,7 @@ static int __get_segment_type(struct f2fs_io_info *fio)
+>  void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
+>  		block_t old_blkaddr, block_t *new_blkaddr,
+>  		struct f2fs_summary *sum, int type,
+> -		struct f2fs_io_info *fio)
+> +		struct f2fs_io_info *fio, bool direct_io)
+>  {
+>  	struct sit_info *sit_i = SIT_I(sbi);
+>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
+> @@ -3425,7 +3425,7 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
+>  
+>  	__refresh_next_blkoff(sbi, curseg);
+>  
+> -	stat_inc_block_count(sbi, curseg);
+> +	stat_inc_block_count(sbi, curseg, direct_io);
+>  
+>  	if (from_gc) {
+>  		old_mtime = get_segment_mtime(sbi, old_blkaddr);
+> @@ -3515,7 +3515,7 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
+>  		down_read(&fio->sbi->io_order_lock);
+>  reallocate:
+>  	f2fs_allocate_data_block(fio->sbi, fio->page, fio->old_blkaddr,
+> -			&fio->new_blkaddr, sum, type, fio);
+> +			&fio->new_blkaddr, sum, type, fio, false);
+>  	if (GET_SEGNO(fio->sbi, fio->old_blkaddr) != NULL_SEGNO) {
+>  		invalidate_mapping_pages(META_MAPPING(fio->sbi),
+>  					fio->old_blkaddr, fio->old_blkaddr);
+> @@ -3611,7 +3611,7 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
+>  		goto drop_bio;
+>  	}
+>  
+> -	stat_inc_inplace_blocks(fio->sbi);
+> +	stat_inc_inplace_blocks(fio->sbi, false);
+>  
+>  	if (fio->bio && !(SM_I(sbi)->ipu_policy & (1 << F2FS_IPU_NOCACHE)))
+>  		err = f2fs_merge_page_bio(fio);
 > -- 
-> 2.33.0.153.gba50c8fa24-goog
+> 2.32.0
 
 
 _______________________________________________
