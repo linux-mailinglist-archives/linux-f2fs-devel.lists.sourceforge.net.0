@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED65D4060C1
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Sep 2021 02:19:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20B7E4060C2
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Sep 2021 02:19:11 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mOUFz-0004pJ-Nx; Fri, 10 Sep 2021 00:19:03 +0000
+	id 1mOUG5-0004qG-Tv; Fri, 10 Sep 2021 00:19:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <sashal@kernel.org>) id 1mOUFw-0004p2-Qo
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 00:19:00 +0000
+ (envelope-from <sashal@kernel.org>) id 1mOUG5-0004q9-Ab
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 00:19:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jYLPyVBW6NdJdJ2teAcTokMWUoAf1yUbCVRoH2IafyY=; b=YJiXGKe+h3MZvntqBmBApw2/uM
- T0UUgY5GqzS+5YjHPKDnMwORmN6TBBy/qsz8Jk8RzT/O3FKH5Gl7Lf718Yk5q1ceyy2MmHTijYIU4
- p393U7/aFD6P/aDZIRcetywLwRMVeYRttRgsVR/i5ewcNTrg1K+jvFVsBUkFYGePQsBQ=;
+ bh=JB2Yh/l800YFw7vZW8+jp5xNwVgOerAVcGQqKy7fCW0=; b=BsbBjfNM6wDlfFbNQrU1q82hcK
+ ahKYkUSXf40i7df6oi6SmV3QYJRBWiMpLBXo7A7Y0Z9lWm8QRY8enpmfSaWVb3BaTzLMoK2aFSg+w
+ p0raEIVRVl3ZE4wZIPiYrPOGVdySu52iydijgOBm3mB/R1HwfJcAM39vVMmT1soSxDvc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jYLPyVBW6NdJdJ2teAcTokMWUoAf1yUbCVRoH2IafyY=; b=IwmjAmSDJ4dSJX4tvCCU+p057l
- i0qAtpOI4Ez47nEhzz4KzgF6C9ZBJUGUzuRtn2lvc0kbiY7fMux7Ke+/gWg/oSCHCJIAlbitl+ivf
- XO0O5U5GWYrXyhBdCdBUPiqBHGwllipcogoILeDJqYi2BDh72Rx02aUCgixaZBHWq7QQ=;
+ bh=JB2Yh/l800YFw7vZW8+jp5xNwVgOerAVcGQqKy7fCW0=; b=KLSMAHy4YGyQ8Nx76CJ0mnrdY+
+ 0r8wj5KNOuGDj2Rwwt1537QPYjHRRiETPHXQ0+T7ywdsMfHyUHnreglLnkx3jn2tS7AzbSFJMXktH
+ ess1BfYyeKIc59INmP0jJjNPWU+DGllq0jde65Cdl5Bid8a0PhONP6XIlMXV42F4N8sE=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mOUFw-005S1K-B8
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 00:19:00 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 363F261167;
- Fri, 10 Sep 2021 00:18:54 +0000 (UTC)
+ id 1mOUG4-0004We-L7
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Sep 2021 00:19:09 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 78A6D611C1;
+ Fri, 10 Sep 2021 00:19:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1631233135;
- bh=nooKu3Gi3ZWSe/TIfy3fI8i8GyXZlCmt/7fj2bnbOxI=;
+ s=k20201202; t=1631233143;
+ bh=mZOGPxpXZONxbkQlgbb7nSreTgz5qWEx6G3RM+zXJL4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=DSvEV5Z5ds0OiSxRjAh3FGm7UZL54YlUUgfi4mv9GGzPyW6FLbEwZeD2X8H0WBifE
- saZrDVY9/NCnLurT8Tuu7pGkW//j6CPB95m6Em7pmkuYgTmanC1PiMCtQ10UiMfpva
- M+WFe3h6o3Ru05LCdYOdzQ3uZxnrITPXzoS82Nbujv9w/CzyCW9paQKfNEuMXzOEUy
- 2lbr8KC3E2C4PTkG8Lmkqn8eKl5GlLTGFBXHqwHVoPI3lyAFev407ItrxhqVo2pR4K
- ytrr4MlQgQ7FrIgCtFVnamgOrVFnOnPhaOiKFwHOOXo/RTF/1+aLXgR3ExKJ2wa3pl
- pfJVzps9cIW0g==
+ b=sRPN01Kos2f4F90j+Z7Mevxe6D55m4ffRp81Z0O9d5p2TV995MI24MmrIJqDyWooN
+ DJ1MhT3toFJxAViZjhSIRW0CsHcRH2/n+i42cK6rSYyxdOXbz93N0xgsxrQfcQJZ8m
+ 0UlawsYUMVHa+8CCOLnfodKiFMGFDUvKwFtmyMUOn9SASusiPaBglI6ffBJyA95L3H
+ XjQ/hCLJq717ugpTLluf7DdrfG0U5zMsLrTPdUmZ6lEvCRqx91xtcnNpP32mB04sD5
+ XbD4BMcoFDBcmmoLs6Eb6sngfDY8xZIczyclzIeDFvOEip1tNW1ZLd4cTbaqkpRaVV
+ Uwc4HllLu7fMA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu,  9 Sep 2021 20:17:16 -0400
-Message-Id: <20210910001820.174272-24-sashal@kernel.org>
+Date: Thu,  9 Sep 2021 20:17:21 -0400
+Message-Id: <20210910001820.174272-29-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210910001820.174272-1-sashal@kernel.org>
 References: <20210910001820.174272-1-sashal@kernel.org>
@@ -67,11 +67,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Laibin Qiu <qiulaibin@huawei.com> [ Upstream commit
- dc675a97129c4d9d5af55a3d7f23d7e092b8e032 ] F2FS have dirty page count control
- for batched sequential write in writepages, and get the value of min_seq_blocks
- by blocks_per_seg * segs_per_sec(segs_per_sec defaults to 1). But in some
- scenes we s [...] 
+ Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
+ 91803392c732c43b5cf440e885ea89be7f5fecef
+ ] During f2fs_write_checkpoint(), once we failed in f2fs_flush_nat_entries()
+ or do_checkpoint(), metadata of filesystem such as prefree bitmap, nat/sit
+ version bitmap won't be recovered, it may cause f2 [...] 
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -87,9 +87,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mOUFw-005S1K-B8
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.13 24/88] f2fs: fix min_seq_blocks can
- not make sense in some scenes.
+X-Headers-End: 1mOUG4-0004We-L7
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.13 29/88] f2fs: fix to stop filesystem
+ update once CP failed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,43 +102,108 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+ linux-f2fs-devel@lists.sourceforge.net, Yangtao Li <frank.li@vivo.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Laibin Qiu <qiulaibin@huawei.com>
+From: Chao Yu <chao@kernel.org>
 
-[ Upstream commit dc675a97129c4d9d5af55a3d7f23d7e092b8e032 ]
+[ Upstream commit 91803392c732c43b5cf440e885ea89be7f5fecef ]
 
-F2FS have dirty page count control for batched sequential
-write in writepages, and get the value of min_seq_blocks by
-blocks_per_seg * segs_per_sec(segs_per_sec defaults to 1).
-But in some scenes we set a lager section size, Min_seq_blocks
-will become too large to achieve the expected effect(eg. 4thread
-sequential write, the number of merge requests will be reduced).
+During f2fs_write_checkpoint(), once we failed in
+f2fs_flush_nat_entries() or do_checkpoint(), metadata of filesystem
+such as prefree bitmap, nat/sit version bitmap won't be recovered,
+it may cause f2fs image to be inconsistent, let's just set CP error
+flag to avoid further updates until we figure out a scheme to rollback
+all metadatas in such condition.
 
-Signed-off-by: Laibin Qiu <qiulaibin@huawei.com>
-Reviewed-by: Chao Yu <chao@kernel.org>
+Reported-by: Yangtao Li <frank.li@vivo.com>
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
+Signed-off-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/segment.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/f2fs/checkpoint.c | 12 +++++++++---
+ fs/f2fs/f2fs.h       |  2 +-
+ fs/f2fs/segment.c    | 15 +++++++++++++--
+ 3 files changed, 23 insertions(+), 6 deletions(-)
 
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index f795049e63d5..b2d9980a6edf 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -1639,8 +1639,11 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 
+ 	/* write cached NAT/SIT entries to NAT/SIT area */
+ 	err = f2fs_flush_nat_entries(sbi, cpc);
+-	if (err)
++	if (err) {
++		f2fs_err(sbi, "f2fs_flush_nat_entries failed err:%d, stop checkpoint", err);
++		f2fs_bug_on(sbi, !f2fs_cp_error(sbi));
+ 		goto stop;
++	}
+ 
+ 	f2fs_flush_sit_entries(sbi, cpc);
+ 
+@@ -1648,10 +1651,13 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+ 	f2fs_save_inmem_curseg(sbi);
+ 
+ 	err = do_checkpoint(sbi, cpc);
+-	if (err)
++	if (err) {
++		f2fs_err(sbi, "do_checkpoint failed err:%d, stop checkpoint", err);
++		f2fs_bug_on(sbi, !f2fs_cp_error(sbi));
+ 		f2fs_release_discard_addrs(sbi);
+-	else
++	} else {
+ 		f2fs_clear_prefree_segments(sbi, cpc);
++	}
+ 
+ 	f2fs_restore_inmem_curseg(sbi);
+ stop:
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index a5de48e768d7..5a929c68353d 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -538,7 +538,7 @@ enum {
+ 					 */
+ };
+ 
+-#define DEFAULT_RETRY_IO_COUNT	8	/* maximum retry read IO count */
++#define DEFAULT_RETRY_IO_COUNT	8	/* maximum retry read IO or flush count */
+ 
+ /* congestion wait timeout value, default: 20ms */
+ #define	DEFAULT_IO_TIMEOUT	(msecs_to_jiffies(20))
 diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 51dc79fad4fe..800656e082c5 100644
+index 800656e082c5..621f60a9974b 100644
 --- a/fs/f2fs/segment.c
 +++ b/fs/f2fs/segment.c
-@@ -5147,7 +5147,7 @@ int f2fs_build_segment_manager(struct f2fs_sb_info *sbi)
- 		sm_info->ipu_policy = 1 << F2FS_IPU_FSYNC;
- 	sm_info->min_ipu_util = DEF_MIN_IPU_UTIL;
- 	sm_info->min_fsync_blocks = DEF_MIN_FSYNC_BLOCKS;
--	sm_info->min_seq_blocks = sbi->blocks_per_seg * sbi->segs_per_sec;
-+	sm_info->min_seq_blocks = sbi->blocks_per_seg;
- 	sm_info->min_hot_blocks = DEF_MIN_HOT_BLOCKS;
- 	sm_info->min_ssr_sections = reserved_sections(sbi);
+@@ -775,11 +775,22 @@ int f2fs_flush_device_cache(struct f2fs_sb_info *sbi)
+ 		return 0;
  
+ 	for (i = 1; i < sbi->s_ndevs; i++) {
++		int count = DEFAULT_RETRY_IO_COUNT;
++
+ 		if (!f2fs_test_bit(i, (char *)&sbi->dirty_device))
+ 			continue;
+-		ret = __submit_flush_wait(sbi, FDEV(i).bdev);
+-		if (ret)
++
++		do {
++			ret = __submit_flush_wait(sbi, FDEV(i).bdev);
++			if (ret)
++				congestion_wait(BLK_RW_ASYNC,
++						DEFAULT_IO_TIMEOUT);
++		} while (ret && --count);
++
++		if (ret) {
++			f2fs_stop_checkpoint(sbi, false);
+ 			break;
++		}
+ 
+ 		spin_lock(&sbi->dev_lock);
+ 		f2fs_clear_bit(i, (char *)&sbi->dirty_device);
 -- 
 2.30.2
 
