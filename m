@@ -2,61 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5577140881B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Sep 2021 11:24:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 573A6408847
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Sep 2021 11:33:48 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mPiCh-0007ys-05; Mon, 13 Sep 2021 09:24:43 +0000
+	id 1mPiLR-0008Kw-BM; Mon, 13 Sep 2021 09:33:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <gregkh@linuxfoundation.org>) id 1mPiCf-0007yi-Id
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Sep 2021 09:24:41 +0000
+ (envelope-from <gregkh@linuxfoundation.org>) id 1mPiLQ-0008Km-N2
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Sep 2021 09:33:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:In-Reply-To:Date:From:Cc:To:Subject:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=d6gbepqZSDcYOdoqoyJe/B7GGork6O2MnCOzIrXRsyA=; b=DTJjYOazHs771h/M+edBAnu2Or
- IasuUJLjntYJFnwgk+A2hGQn93VO8j3g6rRXAUv9b6fHGmNEQcTIk8W1YrgslKxr93UtEqpaebkbf
- moQMfGpihv2oBbOenl/GPok2Lgx9sYTx4kf+B2cTI1jeLafFe1VA/ejuH2FU4FvL3QyQ=;
+ bh=TL0pMINnnnZXKmQBA+GHy9A2jFp+/fcqehmZA0s6WKE=; b=XnqQvr1ZHRwH6f3w5LM+0WXa8v
+ Fz7mQdlkXy+/BcFFlT/MgxXCBUBLmCy2K0/nPZKahgRYzM08zmw4AzwYymfV2wERWUt3vS4JO9xVG
+ ldTYIv4tb0/KtJ0NY6ZVqEdAiDNA/axam2oJ3RdFUvlZsOvKhjFvGlT3u6omkBHDzKhY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:
+ In-Reply-To:Date:From:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=d6gbepqZSDcYOdoqoyJe/B7GGork6O2MnCOzIrXRsyA=; b=SeqB5DWdRyLTLos0RXzc3RUYQV
- 7AsIiRWTtoKIkH2x1MI/Jr/L/8Q2wKP95yyXrYZPAoQlLy6NdtASSr0zRSWwHfJHD8HFtI9yDKOvQ
- Jg8easWCUOPHWb1sLuJSmD21m5kod3th0UbtU/XcPqBDXAUPWuLSBG2R5EcvwmJCOdEg=;
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=TL0pMINnnnZXKmQBA+GHy9A2jFp+/fcqehmZA0s6WKE=; b=W4AwTjP74FypOKfO3xOn+AB4Q0
+ kTH4igQ1xS8fIRrAVuaTQ/Vby1TFjLzlCzVmuL2PjYFKqL4d1OYbgqYnfNpyiZJOlDd5IlO2J58zD
+ 63vlXCeQuQgsbhWdVX7XVXu7sr9iZZQP/tufwmUJ1w8GFko0d273Vifg0JVLJVsuRHlQ=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mPiCb-0002bK-Kn
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Sep 2021 09:24:41 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id CAACD6101A;
- Mon, 13 Sep 2021 09:24:26 +0000 (UTC)
+ id 1mPiLQ-0002yW-2u
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Sep 2021 09:33:44 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 2599B60D42;
+ Mon, 13 Sep 2021 09:33:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1631525067;
- bh=GMg86oIlLLx+ETn75Et6CCjLBv/Nlhtbb7ePATh9ZJA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=kpRcJQYAjbYk0ddU/oPaybepeuhIOtwp7ger+Iyw43j7bNr3yIbwMUedjNiIdfEM2
- aZNEOB0o7Lp7TDDXTAetLzgEQIE8CTLC471JqCmeFuEStGlZKGwlg1+EFBOlQm1yZm
- 4AKHktPEq2VIJ7H9KqedwVFIsHA8ei1sybkt4DZw=
-Date: Mon, 13 Sep 2021 11:24:24 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <YT8YyIiLf0u3gifM@kroah.com>
-References: <20210908220020.599899-1-jaegeuk@google.com>
- <YTmaPCd3/cpMyNEe@kroah.com> <YTmbhc7J5ZdVp3vI@google.com>
- <YTmcbNMRaPzQRqmf@kroah.com> <YTme3altl3q5lc8N@google.com>
- <YTmlAWm7g4NyM/rG@kroah.com>
+ s=korg; t=1631525618;
+ bh=piIeiAC9yhQFu+FX7/5huH/dyE8o919ZL0a7cJbonao=;
+ h=Subject:To:Cc:From:Date:In-Reply-To:From;
+ b=JMFSjBW8l6FRxkSK/iZc+XX4y7zR/0nlYdnXGlwpMiqEl2eX8CLX1yiztUbdEMwym
+ HxmVaNHu0YpEWz0ECkwGvic9j5sHmhy3sXrTO9BKA1NHXh0gtRH53OaLwQx/r8ciVH
+ 0MlDF9On2EeOCOsJEd1nNg9+AYLLL9G1IC2S9960=
+To: ebiggers@google.com, ebiggers@kernel.org, gregkh@linuxfoundation.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org
+From: <gregkh@linuxfoundation.org>
+Date: Mon, 13 Sep 2021 11:33:36 +0200
+In-Reply-To: <20210908215033.1122580-3-ebiggers@kernel.org>
+Message-ID: <163152561619799@kroah.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YTmlAWm7g4NyM/rG@kroah.com>
+X-stable: commit
+X-Patchwork-Hint: ignore 
 X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -64,9 +62,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Sep 09, 2021 at 08:09:05AM +0200, Greg KH wrote: >
- On Wed, Sep 08, 2021 at 10:42:53PM -0700, Jaegeuk Kim wrote: > > On 09/09,
- Greg KH wrote: > > > On Wed, Sep 08, 2021 at 10:28:37PM -0700, Jae [...] 
+ Content preview: This is a note to let you know that I've just added the patch
+ titled ext4: report correct st_size for encrypted symlinks to the 4.19-stable
+ tree which can be found at:
+ http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;
+ a=summary
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -81,9 +81,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mPiCb-0002bK-Kn
-Subject: Re: [f2fs-dev] [PATCH] f2fs: guarantee to write dirty data when
- enabling checkpoint back
+X-Headers-End: 1mPiLQ-0002yW-2u
+Subject: [f2fs-dev] Patch "ext4: report correct st_size for encrypted
+ symlinks" has been added to the 4.19-stable tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,54 +95,88 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: stable-commits@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Sep 09, 2021 at 08:09:05AM +0200, Greg KH wrote:
-> On Wed, Sep 08, 2021 at 10:42:53PM -0700, Jaegeuk Kim wrote:
-> > On 09/09, Greg KH wrote:
-> > > On Wed, Sep 08, 2021 at 10:28:37PM -0700, Jaegeuk Kim wrote:
-> > > > On 09/09, Greg KH wrote:
-> > > > > On Wed, Sep 08, 2021 at 03:00:20PM -0700, Jaegeuk Kim wrote:
-> > > > > > From: Jaegeuk Kim <jaegeuk@kernel.org>
-> > > > > > 
-> > > > > > commit dddd3d65293a52c2c3850c19b1e5115712e534d8 upstream.
-> > > > > > 
-> > > > > > We must flush all the dirty data when enabling checkpoint back. Let's guarantee
-> > > > > > that first by adding a retry logic on sync_inodes_sb(). In addition to that,
-> > > > > > this patch adds to flush data in fsync when checkpoint is disabled, which can
-> > > > > > mitigate the sync_inodes_sb() failures in advance.
-> > > > > > 
-> > > > > > Reviewed-by: Chao Yu <chao@kernel.org>
-> > > > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > > > > > ---
-> > > > > >  fs/f2fs/file.c  |  5 ++---
-> > > > > >  fs/f2fs/super.c | 11 ++++++++++-
-> > > > > >  2 files changed, 12 insertions(+), 4 deletions(-)
-> > > > > 
-> > > > > What stable kernel(s) are you wanting to have this backported to?
-> > > > 
-> > > > 5.10 please.
-> > > 
-> > > Why would you want to skip 5.14.y and 5.13.y?  You never want anyone to
-> > > upgrade stable kernel releases and have a regression.
-> > 
-> > I was just looking at the essential kernel version, since the fix is only
-> > related to checkpoint=disable feature used in android only. Feel free to
-> > merge it into any stable kernels if you want.
-> 
-> No regressions for any stable releases is key here, Android is just one
-> user of the kernel...
-> 
-> And in the future, just put a cc: stable in the signed-off-by area when
-> you submit the patch and it will be handled automatically, like the
-> documentation states :)
 
-Now queued up.
+This is a note to let you know that I've just added the patch titled
 
-greg k-h
+    ext4: report correct st_size for encrypted symlinks
+
+to the 4.19-stable tree which can be found at:
+    http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
+
+The filename of the patch is:
+     ext4-report-correct-st_size-for-encrypted-symlinks.patch
+and it can be found in the queue-4.19 subdirectory.
+
+If you, or anyone else, feels it should not be added to the stable tree,
+please let <stable@vger.kernel.org> know about it.
+
+
+From foo@baz Mon Sep 13 11:31:12 AM CEST 2021
+From: Eric Biggers <ebiggers@kernel.org>
+Date: Wed,  8 Sep 2021 14:50:31 -0700
+Subject: ext4: report correct st_size for encrypted symlinks
+To: stable@vger.kernel.org
+Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org
+Message-ID: <20210908215033.1122580-3-ebiggers@kernel.org>
+
+From: Eric Biggers <ebiggers@google.com>
+
+commit 8c4bca10ceafc43b1ca0a9fab5fa27e13cbce99e upstream.
+
+The stat() family of syscalls report the wrong size for encrypted
+symlinks, which has caused breakage in several userspace programs.
+
+Fix this by calling fscrypt_symlink_getattr() after ext4_getattr() for
+encrypted symlinks.  This function computes the correct size by reading
+and decrypting the symlink target (if it's not already cached).
+
+For more details, see the commit which added fscrypt_symlink_getattr().
+
+Fixes: f348c252320b ("ext4 crypto: add symlink encryption")
+Cc: stable@vger.kernel.org
+Link: https://lore.kernel.org/r/20210702065350.209646-3-ebiggers@kernel.org
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ fs/ext4/symlink.c |   11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+--- a/fs/ext4/symlink.c
++++ b/fs/ext4/symlink.c
+@@ -52,10 +52,19 @@ static const char *ext4_encrypted_get_li
+ 	return paddr;
+ }
+ 
++static int ext4_encrypted_symlink_getattr(const struct path *path,
++					  struct kstat *stat, u32 request_mask,
++					  unsigned int query_flags)
++{
++	ext4_getattr(path, stat, request_mask, query_flags);
++
++	return fscrypt_symlink_getattr(path, stat);
++}
++
+ const struct inode_operations ext4_encrypted_symlink_inode_operations = {
+ 	.get_link	= ext4_encrypted_get_link,
+ 	.setattr	= ext4_setattr,
+-	.getattr	= ext4_getattr,
++	.getattr	= ext4_encrypted_symlink_getattr,
+ 	.listxattr	= ext4_listxattr,
+ };
+ 
+
+
+Patches currently in stable-queue which might be from ebiggers@kernel.org are
+
+queue-4.19/ubifs-report-correct-st_size-for-encrypted-symlinks.patch
+queue-4.19/ext4-report-correct-st_size-for-encrypted-symlinks.patch
+queue-4.19/fscrypt-add-fscrypt_symlink_getattr-for-computing-st_size.patch
+queue-4.19/f2fs-report-correct-st_size-for-encrypted-symlinks.patch
 
 
 _______________________________________________
