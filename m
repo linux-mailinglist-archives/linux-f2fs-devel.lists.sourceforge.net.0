@@ -2,97 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8757040C040
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Sep 2021 09:11:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3368B40D596
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 16 Sep 2021 11:09:34 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mQP4i-0002K7-4o; Wed, 15 Sep 2021 07:11:20 +0000
+	id 1mQnOY-0005U3-7i; Thu, 16 Sep 2021 09:09:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from
- <BATV+8aa05ddd91fea3e0ef51+6597+infradead.org+hch@casper.srs.infradead.org>)
- id 1mQP4h-0002K1-10
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Sep 2021 07:11:19 +0000
+ (envelope-from <chao@kernel.org>) id 1mQnOR-0005TO-Fp
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Sep 2021 09:09:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZpomFWwUpYf+IqpVbx+BDcZslxhkwYY2lCkG5RS4qRY=; b=Mxh0dAud8WbX7ksD6nxIWoJhFU
- u3IVLMOHAyROuAyKUW9tEvrHeYhV5h1H+tZC61NWWelocEVOFx+kJgG5mWn+hgelVphtOHVhZUSY0
- BAm+Qg9bJQ+8wFgxlKvkbP49tM/dRm8KfrPe+GpOnOQRCk+ilp3hs2AQYTLqvCRKHyL4=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ZpomFWwUpYf+IqpVbx+BDcZslxhkwYY2lCkG5RS4qRY=; b=MgWO2YBjUsp7dxPcL8OZP8UGkf
- WsVsP71iY1xNArEaFZXoM1oP2VT6rsrxhY+6Ke/c9b3+L4tHqEyxgf3FGTkWuFatFE8nGG+i66anf
- 3JZjLGgutHLxozKELQ4nDGpCunrPihmM4jJ1NOM8wzSftRdAme0PKlxZwd5f+CFzajWY=;
-Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=grVnxltHY2J0afqjWo9PlvhFhuZkNZgma0sYVTkbjEs=; b=ihDnoCzY2sqJbkQQ3NWtVIEcc0
+ BeJUuVNMYzNIWNZW0YwNVUC+wSNHA7Z2oaHqYjHjNZkUI5+mo/pP9j+HdY2dAB+Jlm/wjx5gxpbfv
+ liB9VF7Dbh4WiDuMDzNnf2pj2r71QPEIIfhzFJyK0zctcFAbtVtPBCpfz18WANCdKgaA=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=grVnxltHY2J0afqjWo9PlvhFhuZkNZgma0sYVTkbjEs=; b=J
+ R0MFo2NZWng/ejtxBUtoMHl4ZQVx08bJt7gubVIWLX+ApHMF3YB9mzZR/K2rurL1E6A3NAheBYzXS
+ BAFCKxvezGuXnD8nmtHhIlV95ExVbBTpF8y9CWR6LFWZCSWyYORoGLVKBefb24X/48ZypMq0lPAzr
+ Y5fBbjBJGbucGOnM=;
+Received: from mail.kernel.org ([198.145.29.99])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mQP4g-0000SS-GJ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Sep 2021 07:11:18 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description;
- bh=ZpomFWwUpYf+IqpVbx+BDcZslxhkwYY2lCkG5RS4qRY=; b=BEWQ4g879RktvHp67Ny4ElsHRE
- MiSkfHkEbPpI3AWn4qRufIIyGPfVHrP9AXd+ORok+zE95lxJaXgBjWaVBCQcNgUrvF7O0IJnyXL/Z
- yRKtE55VKEPMoQwvbWVf6yxv1/fAUshz7YtBuiAm2/UWa8xstP/5Cbepc3vOkwGKpIyAvdKJ3aqjw
- /Ar9eV3jH9RXVnA0KJEovtEn0QM6xhyxya4d9E1o7M0IXjI0cOegLjHGWOYfN5mcfW4fSUJIWBltK
- NWEU6qalX2Jrsc6jdCtJnJ5MWrAvJ0vXybB2xYgPe/pKuPIEP64BoHrRvZ/a47PYOpUv/XmTYzywJ
- KWs+lUSg==;
-Received: from [2001:4bb8:184:72db:8457:d7a:6e21:dd20] (helo=localhost)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mQP3W-00FRzK-Mq; Wed, 15 Sep 2021 07:10:22 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Gabriel Krisman Bertazi <krisman@collabora.com>
-Date: Wed, 15 Sep 2021 09:00:06 +0200
-Message-Id: <20210915070006.954653-12-hch@lst.de>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210915070006.954653-1-hch@lst.de>
-References: <20210915070006.954653-1-hch@lst.de>
+ id 1mQnOM-00CZ8S-Ok
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 16 Sep 2021 09:09:19 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 7DA7C60F93;
+ Thu, 16 Sep 2021 09:09:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1631783349;
+ bh=97WnehG029XDtPsDQa1+PYmnlyuYrpfaBA6X7Pg/NQ0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=m2cm1xOdEqeL2YAbx1PmE8I1LCuZx7UdK9oUAABgSNzTkyWwj1Iy4McropjiGvOPh
+ 3+RAB92ikbTgpWjqHN0EGnYSTwN/HblSWTK/BIW2tSVBJ4Q2mm5915lOlCcuExqIyB
+ /4dh9Ij0+mat7Rh5ZAl3MH065QkcS4EqsFfq/8c3k3WHaWgwaj8vutHGPYPS53rwwv
+ h8mTs0+gCY0TFa9GpanANCVp0MpIwfV8ynJuMACUBHYf22SdQv33fncEOAiE7p1yib
+ u7cuFjpCJDSDkxzvPluA0ygYskFy+Vr9o8LFFTCsK5EsGLIiB2DnG4HVzb0TanlGyL
+ SRKcmmOXj4K3g==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Thu, 16 Sep 2021 17:09:03 +0800
+Message-Id: <20210916090903.18427-1-chao@kernel.org>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: 0.2 (/)
+X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: The exported symbols in utf8-norm.c are not needed for normal
- file system consumers, so move them to conditional _GPL exports just for
- the selftest. Signed-off-by: Christoph Hellwig <hch@lst.de> ---
- fs/unicode/utf8-norm.c
- | 11 +++++++---- 1 file changed, 7 insertions(+), 4 deletions(-) 
- Content analysis details:   (0.2 points, 6.0 required)
+ Content preview: This patch enables f2fs_balance_fs_bg() to check all
+ metadatas'
+ dirty threshold rather than just checking node block's, so that checkpoint()
+ from background can be triggered more frequently to avoid h [...] 
+ Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [198.145.29.99 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
-X-Headers-End: 1mQP4g-0000SS-GJ
-Subject: [f2fs-dev] [PATCH 11/11] unicode: only export internal symbols for
- the selftests
+ valid -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1mQnOM-00CZ8S-Ok
+Subject: [f2fs-dev] [PATCH v2] f2fs: introduce excess_dirty_threshold()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,64 +93,107 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Shreeya Patel <shreeya.patel@collabora.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The exported symbols in utf8-norm.c are not needed for normal
-file system consumers, so move them to conditional _GPL exports
-just for the selftest.
+This patch enables f2fs_balance_fs_bg() to check all metadatas' dirty
+threshold rather than just checking node block's, so that checkpoint()
+from background can be triggered more frequently to avoid heaping up
+too much dirty metadatas.
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
+Threshold value by default:
+race with foreground ops	single type	global
+No				16MB		24MB
+Yes				24MB		36MB
+
+In addtion, let f2fs_balance_fs_bg() be aware of roll-forward sapce
+as well as fsync().
+
+Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/unicode/utf8-norm.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+v2:
+- fix to use f2fs_space_for_roll_forward() correctly pointed out
+by Jaegeuk
+ fs/f2fs/f2fs.h    |  3 +++
+ fs/f2fs/node.h    |  5 -----
+ fs/f2fs/segment.c | 23 +++++++++++++++++++++--
+ 3 files changed, 24 insertions(+), 7 deletions(-)
 
-diff --git a/fs/unicode/utf8-norm.c b/fs/unicode/utf8-norm.c
-index 829c7e2ad764a..768f8ab448b8f 100644
---- a/fs/unicode/utf8-norm.c
-+++ b/fs/unicode/utf8-norm.c
-@@ -17,7 +17,6 @@ int utf8version_is_supported(const struct unicode_map *um, unsigned int version)
- 	}
- 	return 0;
- }
--EXPORT_SYMBOL(utf8version_is_supported);
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 58311eda4ce9..2e26b9e95ac5 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -561,6 +561,9 @@ enum {
  
- /*
-  * UTF-8 valid ranges.
-@@ -407,7 +406,6 @@ ssize_t utf8nlen(const struct unicode_map *um, enum utf8_normalization n,
- 	}
- 	return ret;
- }
--EXPORT_SYMBOL(utf8nlen);
+ #define MAX_DIR_RA_PAGES	4	/* maximum ra pages of dir */
  
- /*
-  * Set up an utf8cursor for use by utf8byte().
-@@ -442,7 +440,6 @@ int utf8ncursor(struct utf8cursor *u8c, const struct unicode_map *um,
- 		return -1;
- 	return 0;
- }
--EXPORT_SYMBOL(utf8ncursor);
- 
- /*
-  * Get one byte from the normalized form of the string described by u8c.
-@@ -588,4 +585,10 @@ int utf8byte(struct utf8cursor *u8c)
- 		}
- 	}
- }
--EXPORT_SYMBOL(utf8byte);
++/* dirty segments threshold for triggering CP */
++#define DEFAULT_DIRTY_THRESHOLD		4
 +
-+#ifdef CONFIG_UNICODE_NORMALIZATION_SELFTEST_MODULE
-+EXPORT_SYMBOL_GPL(utf8version_is_supported);
-+EXPORT_SYMBOL_GPL(utf8nlen);
-+EXPORT_SYMBOL_GPL(utf8ncursor);
-+EXPORT_SYMBOL_GPL(utf8byte);
-+#endif
+ /* for in-memory extent cache entry */
+ #define F2FS_MIN_EXTENT_LEN	64	/* minimum extent length */
+ 
+diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
+index ff14a6e5ac1c..18b98cf0465b 100644
+--- a/fs/f2fs/node.h
++++ b/fs/f2fs/node.h
+@@ -138,11 +138,6 @@ static inline bool excess_cached_nats(struct f2fs_sb_info *sbi)
+ 	return NM_I(sbi)->nat_cnt[TOTAL_NAT] >= DEF_NAT_CACHE_THRESHOLD;
+ }
+ 
+-static inline bool excess_dirty_nodes(struct f2fs_sb_info *sbi)
+-{
+-	return get_pages(sbi, F2FS_DIRTY_NODES) >= sbi->blocks_per_seg * 8;
+-}
+-
+ enum mem_type {
+ 	FREE_NIDS,	/* indicates the free nid list */
+ 	NAT_ENTRIES,	/* indicates the cached nat entry */
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 6cfbd62262f2..ceb20e91e125 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -529,6 +529,25 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
+ 	}
+ }
+ 
++static inline bool excess_dirty_threshold(struct f2fs_sb_info *sbi)
++{
++	int factor = rwsem_is_locked(&sbi->cp_rwsem) ? 3 : 2;
++	unsigned int dents = get_pages(sbi, F2FS_DIRTY_DENTS);
++	unsigned int qdata = get_pages(sbi, F2FS_DIRTY_QDATA);
++	unsigned int nodes = get_pages(sbi, F2FS_DIRTY_NODES);
++	unsigned int meta = get_pages(sbi, F2FS_DIRTY_META);
++	unsigned int imeta = get_pages(sbi, F2FS_DIRTY_IMETA);
++	unsigned int threshold = sbi->blocks_per_seg * factor *
++					DEFAULT_DIRTY_THRESHOLD;
++	unsigned int global_threshold = threshold * 3 / 2;
++
++	if (dents >= threshold || qdata >= threshold ||
++		nodes >= threshold || meta >= threshold ||
++		imeta >= threshold)
++		return true;
++	return dents + qdata + nodes + meta + imeta >  global_threshold;
++}
++
+ void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
+ {
+ 	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
+@@ -547,8 +566,8 @@ void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
+ 	else
+ 		f2fs_build_free_nids(sbi, false, false);
+ 
+-	if (excess_dirty_nats(sbi) || excess_dirty_nodes(sbi) ||
+-		excess_prefree_segs(sbi))
++	if (excess_dirty_nats(sbi) || excess_dirty_threshold(sbi) ||
++		excess_prefree_segs(sbi) || !f2fs_space_for_roll_forward(sbi))
+ 		goto do_sync;
+ 
+ 	/* there is background inflight IO or foreground operation recently */
 -- 
-2.30.2
+2.32.0
 
 
 
