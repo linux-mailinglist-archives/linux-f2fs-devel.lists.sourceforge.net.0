@@ -2,90 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B5F9412D57
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Sep 2021 05:18:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BEE241357E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Sep 2021 16:38:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mSWII-0008II-EQ; Tue, 21 Sep 2021 03:18:06 +0000
+	id 1mSgu5-0002n4-He; Tue, 21 Sep 2021 14:37:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <ebiggers@kernel.org>) id 1mSWIH-0008I9-LZ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Sep 2021 03:18:05 +0000
+ (envelope-from <hsiangkao@linux.alibaba.com>) id 1mSgu3-0002mx-Da
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Sep 2021 14:37:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XKm4fMkYB5BqCFsynK6e7C2Q+raC7VJQcQNAMCdj5tw=; b=OB4GvBwupjZvc/fQtC2MURRKDS
- LZvhmwF2N/zeaiLMmAfOcOghZ9P/2xNpZBQElryJeaooe8UvP1alnaaU5J5Whucudq1HxZMi6vfJ7
- Xs/aLXca0y7ykKstLdTMDB7XU2EZBDVGQgtqCcx9Uws8MYUa5QKRRxcOiJCKXjRcxWp0=;
+ bh=PG9J/ZWvEQ2PoLDeuhQ5N3p04p+PSBrHCn8k/ZL4aYw=; b=AgEzrtPRuEFp/r7i5r+kimNind
+ tBYjSNoIDbAkllytIS7VQtUjsEToVujwG4RIf1C9IDNBs0HbUyCRhTJ3yR8DiHZv/aSU12ewU2QYx
+ xzqre9r+4ZhTR7Gmach6cW2UfMrC7B1cIul6iGZuQ6U5Ueaxyarlx06x4wWshd34ABD8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=XKm4fMkYB5BqCFsynK6e7C2Q+raC7VJQcQNAMCdj5tw=; b=GbWz5zwaahA/wOI5bQICSarM4N
- zT3jJ7zGtLqlX3VgYYwAqxkvsJCVj4czR8bTQrBKBmGS5eoVj5zKKXq5rOyE/qX5iI+5ltkZJiPbA
- T1cZv+DdDDwpSIiH6kFnAXC6UO13Z47GvJYzG71SkRuMhC7HJ7yKDiFj/YftkpDBBGOs=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=PG9J/ZWvEQ2PoLDeuhQ5N3p04p+PSBrHCn8k/ZL4aYw=; b=L
+ KDuhRoJAK9KKLBeRvW+jVxbTY0OPCyE1EK2WFlWjQZoqpSw8dO5se3KYpEq1Zzz69T+c04G8IAnc2
+ gJ4yjIDxLa+3bLt9ewaMNbQaHRqaURpEzQgpmXnIIE3E/znSAnlklUA/t7hVZRNDjdH4RXrmmhUgv
+ YxOuZsm1vTu87iXw=;
+Received: from out30-132.freemail.mail.aliyun.com ([115.124.30.132])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mSWID-00027u-DN
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Sep 2021 03:18:05 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id C10B560FA0;
- Tue, 21 Sep 2021 03:17:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1632194263;
- bh=1z2WAjQcgYOvO1mOy7tZvGYG0cWDjea2L4QGJOBqXAc=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=jfAHRu31KG3TG0GFmYsYqIynz89ivQwawvig6FqG9mFfDKclwPC2tAqXg+XxwC510
- dKhH5VQdRP5cnl7yeHUPIgYKDkbLyXwADJ9kY7dOYreG8CkkiTStmaAY/0bNMnHkn6
- n5npjmo00AqREwTfwH9XqKpNRcuErmIxqdJxqfQ6UetUWz6wgbILr/UMu6pAAYQJrc
- zgoWhIY/wM6NKkoZbQutvcFtqjFBu9cu7WZta6glZmqJONVdv3+/Xho71IQziIbc5E
- JB+aSx88i6VDIWdXvcUlmrHgoHlbmwgyBdKWLLPocqN+hHdwBrtFY1bUpf2a2EIIAo
- 2uEQgbIWVPLDg==
-Date: Mon, 20 Sep 2021 20:17:42 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Message-ID: <YUlO1vmMXRaHHpTK@sol.localdomain>
-References: <20210909184513.139281-1-ebiggers@kernel.org>
+ id 1mSgu2-000aKl-2e
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Sep 2021 14:37:47 +0000
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R491e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04395; MF=hsiangkao@linux.alibaba.com;
+ NM=1; PH=DS; RN=5; SR=0; TI=SMTPD_---0Up9-D6K_1632235054; 
+Received: from
+ e18g09479.et15sqa.tbsite.net(mailfrom:hsiangkao@linux.alibaba.com
+ fp:SMTPD_---0Up9-D6K_1632235054) by smtp.aliyun-inc.com(127.0.0.1);
+ Tue, 21 Sep 2021 22:37:35 +0800
+From: Gao Xiang <hsiangkao@linux.alibaba.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Tue, 21 Sep 2021 22:37:30 +0800
+Message-Id: <20210921143730.82649-1-hsiangkao@linux.alibaba.com>
+X-Mailer: git-send-email 2.24.4
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210909184513.139281-1-ebiggers@kernel.org>
-X-Spam-Score: -6.7 (------)
+X-Spam-Score: -8.0 (--------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Sep 09, 2021 at 11:45:13AM -0700, Eric Biggers wrote:
- > From: Eric Biggers <ebiggers@google.com> > > The max_namelen field is
- unnecessary, 
- as it is set to 255 (NAME_MAX) on > all filesystems t [...] 
- Content analysis details:   (-6.7 points, 6.0 required)
+ Content preview: Fix up a misuse that the filename pointer isn't always valid
+ in the ring buffer, and we should copy the content instead. Fixes: 0c5e36db17f5
+ ("f2fs: trace f2fs_lookup") Signed-off-by: Gao Xiang
+ <hsiangkao@linux.alibaba.com>
+ --- include/trace/events/f2fs.h | 12 ++++++------ 1 file changed,
+ 6 insertions(+), 6 deletions(-) 
+ Content analysis details:   (-8.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [115.124.30.132 listed in list.dnswl.org]
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
+ white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
- -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mSWID-00027u-DN
-Subject: Re: [f2fs-dev] [PATCH] fscrypt: remove
- fscrypt_operations::max_namelen
+ 0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
+ lines
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
+ Match
+X-Headers-End: 1mSgu2-000aKl-2e
+Subject: [f2fs-dev] [PATCH] f2fs: fix up f2fs_lookup tracepoints
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,31 +90,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-ext4@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Gao Xiang <hsiangkao@linux.alibaba.com>,
+ LKML <linux-kernel@vger.kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Sep 09, 2021 at 11:45:13AM -0700, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
-> 
-> The max_namelen field is unnecessary, as it is set to 255 (NAME_MAX) on
-> all filesystems that support fscrypt (or plan to support fscrypt).  For
-> simplicity, just use NAME_MAX directly instead.
-> 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> ---
->  fs/crypto/fname.c       | 3 +--
->  fs/ext4/super.c         | 1 -
->  fs/f2fs/super.c         | 1 -
->  fs/ubifs/crypto.c       | 1 -
->  include/linux/fscrypt.h | 3 ---
->  5 files changed, 1 insertion(+), 8 deletions(-)
+Fix up a misuse that the filename pointer isn't always valid in
+the ring buffer, and we should copy the content instead.
 
-Applied to fscrypt.git#master for 5.16.
+Fixes: 0c5e36db17f5 ("f2fs: trace f2fs_lookup")
+Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
+---
+ include/trace/events/f2fs.h | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-- Eric
+diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+index 4e881d9..4cb055a 100644
+--- a/include/trace/events/f2fs.h
++++ b/include/trace/events/f2fs.h
+@@ -807,20 +807,20 @@
+ 	TP_STRUCT__entry(
+ 		__field(dev_t,	dev)
+ 		__field(ino_t,	ino)
+-		__field(const char *,	name)
++		__string(name,	dentry->d_name.name)
+ 		__field(unsigned int, flags)
+ 	),
+ 
+ 	TP_fast_assign(
+ 		__entry->dev	= dir->i_sb->s_dev;
+ 		__entry->ino	= dir->i_ino;
+-		__entry->name	= dentry->d_name.name;
++		__assign_str(name, dentry->d_name.name);
+ 		__entry->flags	= flags;
+ 	),
+ 
+ 	TP_printk("dev = (%d,%d), pino = %lu, name:%s, flags:%u",
+ 		show_dev_ino(__entry),
+-		__entry->name,
++		__get_str(name),
+ 		__entry->flags)
+ );
+ 
+@@ -834,7 +834,7 @@
+ 	TP_STRUCT__entry(
+ 		__field(dev_t,	dev)
+ 		__field(ino_t,	ino)
+-		__field(const char *,	name)
++		__string(name,	dentry->d_name.name)
+ 		__field(nid_t,	cino)
+ 		__field(int,	err)
+ 	),
+@@ -842,14 +842,14 @@
+ 	TP_fast_assign(
+ 		__entry->dev	= dir->i_sb->s_dev;
+ 		__entry->ino	= dir->i_ino;
+-		__entry->name	= dentry->d_name.name;
++		__assign_str(name, dentry->d_name.name);
+ 		__entry->cino	= ino;
+ 		__entry->err	= err;
+ 	),
+ 
+ 	TP_printk("dev = (%d,%d), pino = %lu, name:%s, ino:%u, err:%d",
+ 		show_dev_ino(__entry),
+-		__entry->name,
++		__get_str(name),
+ 		__entry->cino,
+ 		__entry->err)
+ );
+-- 
+1.8.3.1
+
 
 
 _______________________________________________
