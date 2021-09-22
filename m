@@ -2,82 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B4414141B4
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F9A54141B5
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Sep 2021 08:25:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=/FcQuICol9ubIoavLGzq4XJ5lgmgdSOcjNUumVNVwU4=; b=mBUTDqZNkzYiX/iXE+JL3rkJqT
-	/1/s+K1Zl6wLLbQMoCvfp3BpOO3gdf8RDrWVibduw1PAi8QPGLbjZRZd8zxvcLkFhNM4jtOAzfWRy
-	Ul6bHee3VZric2nDbqVgCTTGErbpFWQTNvS+fQA35zQK+eSB3+dPVBgbYVXI0yWxmsVs=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	 bh=gqNxrAkC15YLZ8B0ifMmV6XavQq/qUNbhGHIHY0jKq4=; b=ANvkwNlAAgeukFF+p8GD1veA2
+	rmhkQOLmNOBRrIKMvAi00pMMh2jX/ENTwZanS85p8xk3rOMcIfXSpH5VtBDflRW/8OYXOOP+k7hCE
+	AJJw3M5nT9UnfRhj1zPyXqDz5AhIYR2YH1TsBazwcPUAT4bwhfdV8jrFHm+1ST9JCcmW0=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mSvhX-0001A8-Dk; Wed, 22 Sep 2021 06:25:51 +0000
+	id 1mSvha-0002s4-ES; Wed, 22 Sep 2021 06:25:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <changfengnan@vivo.com>) id 1mSvhJ-00019j-Sy
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <changfengnan@vivo.com>) id 1mSvhK-0002ro-Pc
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Sep 2021 06:25:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C0ylYombX8NBsMhhzZ7zr2gQSEVHRSocFuphuaeM7pY=; b=dE1E84ogCmeLg6F7ZtlwjxNg5Q
- NjIovMd4my5GBzOTA85VFbwQm80lextnnHprmUo4lA2eU7WNNf29mLlHJXtdD2DqwqDiAL/33Xk4E
- vEodMmhKLW7AhdmnYmSVZ5uGXCx3Aq/y5ZMJ7SHSq7W+yqxJBZ9IsTk4wuwQJeooHfMg=;
+ bh=cV298BP++I+ngWHs1GaCuaQJGmpgNzbWfxkGPHShY6E=; b=VIoSEqcfvmwG6zb+B5dX9xmo96
+ LCbAeVbPHiUXF2Acnz+rp6iLM4U9+YoeIWlmnjqMyOfQa2sdBMR2OvbgCQTuYzGggldF2HKNJP4WL
+ Ez2TTQ9ZuLIP+9MYCCd46yKJ/5xY9nmjEd68TWTOrA1kGed5az2Z3pa5y3SAavPD1MOI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=C0ylYombX8NBsMhhzZ7zr2gQSEVHRSocFuphuaeM7pY=; b=V
- GzRUKPxtITQ35ZzX+cg2Wv5nMrtuPybYDrHJzY0sQOHMyUjODy666zPv2PccaKgyxAJ13t0sBT0ej
- 7ZT1c6eveNg04JrbdSIXx1C4PWHgDStUhqHif2G4w5CktGwoLg++r3mVcYnEAEZJ6ndB8o0pIpYKt
- sYT1A4lvAvkJGi90=;
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=cV298BP++I+ngWHs1GaCuaQJGmpgNzbWfxkGPHShY6E=; b=iGN+VBkfuP3Cuc8iymGIvgW+xc
+ 0mPXesn8ARcMdGaOZDvkSMuPm3k6Gn4NhQG14JofKd1RoQCy+cQ1QjouzfT8cDe3WQha1ggZYU06b
+ ZaxPkUIJ3COjVr1S8c2uLXOOEIdBFXSeMhhV0L2Bc7DKodeeH7iin6gvg8R6X8w2r3ik=;
 Received: from mail-eopbgr1300124.outbound.protection.outlook.com
  ([40.107.130.124] helo=APC01-HK2-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mSvhD-0008D3-C4
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Sep 2021 06:25:37 +0000
+ id 1mSvhK-0008D3-7N
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Sep 2021 06:25:38 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=obNZZReKbYn65ypmV3zr4L2RXk9lu47Et+EK9UzmALbYiYc3mcDudyHcKQhuDNF2pwwzXVW94CWXqFcq6DMgaMMiZKPSsy5eI2cW2bMhLTkrukL1R32OGczswTlInkRcEvDzhoRAcUtFQFc2GqczL9X9rKG47E5ILy5dh6DCiaUxpPb6rfy8dAoGlWqQGHUhOjd8QSBYaef5H/2f81vJ0ThdA7gDO9B9RJ07zOQ2VPepbobstj8T85whjktvdixpGz2s+DesWvJEXAbVMXCiloq32taed6W1tl8IgXYJa18g/gu6vl+A3dHsvQWb3lKJ7fnQSFsi6Usa22+0XkkmmQ==
+ b=MpYIUiCwyHgvMXUPEiUhjhDU94Xat44KHmzRAkCurzj9U8SVQC9uPP3G3QMIiUAvMfZgDIaBpRah5XV2YByivTaDs8nxG7xcvOv0FHLAJwEXyG20oxpBn9ittMDEhmGTNSXL+UQJl3mNHPO7/7URcs2IyQ8R1/7Mi6Q8LR3gTfnfBcwJGSn9O4YjVB7t+g9P/i+MzUrkWx+Czn4HNiJOBWMdgcOSMig/+vL6Hxcyoir6H2JeBJ+hNgzt+HfFI1y7okVxXbSXBzKqsWs4EgTC8f+Pu++r+5cJMZuWEQmZf4uBWeiPIRU66vPt44bjFhqJdUJaVnYHDmXDGaq5PmUflg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version; 
- bh=C0ylYombX8NBsMhhzZ7zr2gQSEVHRSocFuphuaeM7pY=;
- b=LoPQafto28ycXaxW13+wgdPkt+w8erszXEuGfrJSkq9NGCkyR0TVuTr66ZWTCRgB+rQuCk33JyifdDib2Lx6BxZ4SfyGJ2X4E3TJSMG6iPTlFAvzBzVEeLo8OjUFQk5isIX5lluXb3gjnaD1cl/cbFj2hijaqnqLQwDE7zBFb0dR7x2lgxCb9m1G2UhFTiY80LtLo+SpaCLIc949vaRUxkvakfzyVEStwoTp+QJ3vfSKmJwNHvRtkEzg2/OxS53v/Tv4xGTryv/3Qv4I0RccGXKy1FTgyxSyS17H2S+JnprEH+pYysGAbiawIPwAUdAsFtA//pGEo0jV+TNFNFi26Q==
+ bh=cV298BP++I+ngWHs1GaCuaQJGmpgNzbWfxkGPHShY6E=;
+ b=VKmLCxWXNJfutz9p8re86WqQSu8qDogbOoulJTxBx43Bu13LZlOMzH7AvxCUGo9hATxqnK8J6EBgHyjt/s/8ovlCl3WrDV0eyLbniv5fW86tOkxtxoO4Qd5jP9JhzRfoJcdEInBZ69GV7ahBIJN8CbH+BM6ilrNA8Qyl7QpbZnOsTHr0UP4l78iTTVN2ub1jvXJhTteshjtH6q6aQSKfP5zqM+hFJv5NcxWe7ho4/Zu9qKbq0GwxtQhsV4O+Ip9EcLNQgB3ax9MJMhpCTlH6zCV3d+OLRpA2PLC6i6QMNAFWILQJyWARFAUpTPn6j0BaO2W2pHPc3XXbn98TRgKAnA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo0.onmicrosoft.com; 
  s=selector2-vivo0-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=C0ylYombX8NBsMhhzZ7zr2gQSEVHRSocFuphuaeM7pY=;
- b=YtRM8TriCs2uBB9xLwFoJCF6ipxqOSjcSadParQQ/hP+kpZAAYa9Hbs9rzim/VKnZGMbnUti+A5iA0UQEZN/37dooozM5qflKO+q84GtEBPbKN9YQWBl8ochvW3+0uZdD/WSeUJSS8ECqL5EqCxgH2b79WZGbsGVaJ0j7fkelww=
+ bh=cV298BP++I+ngWHs1GaCuaQJGmpgNzbWfxkGPHShY6E=;
+ b=bSAiH2oh4D6w0xw+unOzEQd8UhGS0rARCrZ+bD5J1fr2Ym0/qpFdUS2aqFzz7E8F5+E7rgKzcS+RLR+3aJ4OagEeKjM0AyaqRGAQzBF04oMWTo36UdP1L7u2iBUIIrCC2GmBaJG//I+2h/KTUEMwm1Hi21X5WCuxgCjyZgS8wWQ=
 Authentication-Results: kernel.org; dkim=none (message not signed)
  header.d=none;kernel.org; dmarc=none action=none header.from=vivo.com;
 Received: from KL1PR0601MB4003.apcprd06.prod.outlook.com (2603:1096:820:26::6)
  by KL1PR0601MB4241.apcprd06.prod.outlook.com (2603:1096:820:70::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.13; Wed, 22 Sep
- 2021 06:25:20 +0000
+ 2021 06:25:23 +0000
 Received: from KL1PR0601MB4003.apcprd06.prod.outlook.com
  ([fe80::fcd1:f2b4:cfa6:6970]) by KL1PR0601MB4003.apcprd06.prod.outlook.com
  ([fe80::fcd1:f2b4:cfa6:6970%8]) with mapi id 15.20.4544.013; Wed, 22 Sep 2021
- 06:25:20 +0000
+ 06:25:22 +0000
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Wed, 22 Sep 2021 14:25:04 +0800
-Message-Id: <20210922062505.412057-1-changfengnan@vivo.com>
+Date: Wed, 22 Sep 2021 14:25:05 +0800
+Message-Id: <20210922062505.412057-2-changfengnan@vivo.com>
 X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20210922062505.412057-1-changfengnan@vivo.com>
+References: <20210922062505.412057-1-changfengnan@vivo.com>
 X-ClientProxiedBy: HK2PR03CA0063.apcprd03.prod.outlook.com
  (2603:1096:202:17::33) To KL1PR0601MB4003.apcprd06.prod.outlook.com
  (2603:1096:820:26::6)
@@ -85,54 +87,54 @@ MIME-Version: 1.0
 Received: from comdg01144017.vivo.xyz (203.90.234.88) by
  HK2PR03CA0063.apcprd03.prod.outlook.com (2603:1096:202:17::33) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
- 15.20.4566.7 via Frontend Transport; Wed, 22 Sep 2021 06:25:19 +0000
+ 15.20.4566.7 via Frontend Transport; Wed, 22 Sep 2021 06:25:22 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c021ac68-56ba-4274-f1d8-08d97d91c043
+X-MS-Office365-Filtering-Correlation-Id: 5f14def3-abdf-47f3-2462-08d97d91c1e3
 X-MS-TrafficTypeDiagnostic: KL1PR0601MB4241:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <KL1PR0601MB4241C8B0B6E51927307625EDBBA29@KL1PR0601MB4241.apcprd06.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:54;
+X-Microsoft-Antispam-PRVS: <KL1PR0601MB42410FC1630A620666CE97AABBA29@KL1PR0601MB4241.apcprd06.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:612;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 3kvQEiGeCguyAG3aOa3xPcnOkg4qyouYAkcoVJ9EKKYpzlXIrRGmJyXBZCjHE14tCwQIkGQodKdIvqsoEzPIBJhbpixUqEEWkue4xR2pKKNwuHYCZV+Ga+8tTpXEB52yEC06JpPjgg9bstK0QRBjA7PC8gBIqphI+cr4jWQtCZmCYRcidcqPYYJ84pF1Lfm1gHaqDXSQdmPwVTczfWlz60THXP+Eeb4bjH//Gav3S56H16fseSFB3y3qINcTv5ZAEq0impjEnsMcRfcRmo8Ut7EhYGVQCjlsUdxYt4V+OhvN8sO9ek6CXoE8H8Sk2UYl9YTnOSi8SJ6152g+LG6r3BfsGSKBi7fvkEWvzaK/RVV/8/xFhckvxromVNsILBjTDCs4VPAQNqMO0T6w6sx6epy+msycPp/fy7ojcfbpHAKIqMo/PrOwEJYIRs4XGCQtIFus5HUpwlVqE7crotE+UtL4if5KBf/JwVUgEOtQvJw8hOV9RSnuL3Im55K8DGftd7huusz62W6hbcPMqEhbluBSjsX+OkZ6pTfzxIFxEABZoUV/ywFvzl4ECqRc4OMPdM3mq9/X2DzHOz0h0nZ26qGAJgZc2EDybPXmcMUDF3f9Izoo3fPzGQva8I3DlV6XqU0G4jpZODPqAO3/+G9G07Njjznxn9yz8MKFNgJnUdTLdsvAMd8eZD8a+mI0zX99t2gdHpoSJCYy/JfEDUyuTcBUe4bP/uSizBsdxtZZTew=
+X-Microsoft-Antispam-Message-Info: pSpDLk9AnyZ+zIjq36nJNo4YG01tr8Q2mvz9Tco9hOp5ZSaENz0+d7+bu4URUwqL8M69P7NzHfQRsgRofwuYSY/g3DQzDcaVdcCIvNYlJ0+nIvaKpMvgwnKjcG/4tMZHQTSppTJ69eA23ympSVNBPz1O9siMLL0Qjs2QZYTn9H3ph5bzmLyV1Kewyxcib4NnBweV3YrRyAXk0g+8H40PzMlN+yVUfsVPDk2PP4MWW2VEvVkXH6s2oyNZVoFTbce16ty6mbwUL2lOKLl8itG3XwAIjZOYWVYNJrHcEf/Ak1n6uU5cUQp4FIR2e6E35ite0siFGp+Cqm0fzNpbxfAIRIUm+5Hfa/hikaq9mjd/TgMy47hMFnySagamnUM65Cg8lnkawgwIyxG3m5lrIn1GpaCZ8+GMV+2O7Jb2AOhFnmozzj9qmnOGWok0UygLEivLndmDx8MruoS9dxeytJHgzUZyxRF0bicr2tY8jIY8o7iaslv8ghlXPdJ7O8ixs0LiICt3KmHh7WSPPz9gusXT8ymNQwAcskHriqn8D4qmUV3Py5QzijlCMiXwGrcdsOpyKweVN0CTZRb5WNyc9fvvPbFL4PACbMi/pI4MDiK3/qBYASs0yNn3gY/b15S1nw4Cg8e0NS2L+AdG7fwDsa6uFsJjeV+58qHsqBny3PgVOOwnOlDUpGBd1gvqqkPWrFmBAazJSGDb8Knk8YoUZNakvXdeXEn+s1q/ru3jXBDBTH8=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:KL1PR0601MB4003.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(4636009)(366004)(956004)(83380400001)(2616005)(6512007)(2906002)(38100700002)(86362001)(508600001)(8936002)(107886003)(66556008)(4326008)(1076003)(66476007)(66946007)(6666004)(316002)(8676002)(186003)(6506007)(6486002)(26005)(52116002)(38350700002)(36756003)(5660300002)(4730100016);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Quas6sOuJRBXgIElT0gscXjs4PHZcuvDoTlpTZqNsUfVBFVEUxVF5LEjgJH2?=
- =?us-ascii?Q?KJ7MohnOsw3l2oj+c8ZXxa58MN0Zhjlc5APiCfb03JCnRoaYxsATbfMawjRe?=
- =?us-ascii?Q?YV+YZU6nqjUeMkPhPJ3Qd/Q7dSe6NVlYwzJDEhnI7us0+pva9XZbj3tIMh9H?=
- =?us-ascii?Q?zLBXMu+UoFL/kB7rYXghuB8lEZUu3AgsrQhToscoF6FCgWIuTk5bkaV4PQX/?=
- =?us-ascii?Q?8UL0B/YBt/Q91rulSla7G26FI6dXn9EbaejuWgXU+G1nY3oUsZDPN3IWzAXM?=
- =?us-ascii?Q?aNO0hqKNDox/j5FCRGVWJLm4pcqVxRPI2UJeDzB5tig1AS/B5Maw8+b0HHUK?=
- =?us-ascii?Q?M/oPQv/5gculYRJJUE6m1zXb5azJa9aifbvslxz/hH3hzUYER7pKjJgzxdp0?=
- =?us-ascii?Q?qMwB6W9K1hmlorEDqdvMx6DugAgBuJMrG88JLys/XA/SnRZTxhFJpIv+pe1w?=
- =?us-ascii?Q?GBLRpSSZ+X9i+x1pynPJb671aAZ4kGBXog7/DRDC0S4l8AnyGdQOIf33A+Y8?=
- =?us-ascii?Q?QViPVWJojR52ryVvTv0QHR4z5+ivGogUFpb+6VfPdWb7ou6C3lMiEz2HN1ud?=
- =?us-ascii?Q?hOsogv29fbvpMxcFl09NaKd+IEOhqN8ubNO/KXWQv3SSFF16M3nqF+y/hVLG?=
- =?us-ascii?Q?t8NUIzRwqMPH9ppsMXd5/W+buGZnghtLUv1Jvub2h4AEM+aYHj+hwkqLZDfn?=
- =?us-ascii?Q?UNzDqtpdEMetV758G5inelk/alIHAwYXDHK/LHqlkIUOYlkW8hH03lNQ+39k?=
- =?us-ascii?Q?ZOJ3IriomNa0MgZbvC3UmTS1wBX4XpLEB4SeVTovVVtCat8IsVGPyEwjQtWH?=
- =?us-ascii?Q?LNSmiQXeBRUijoseQ21zwJi5hR+BIWBylSXwRE/lAzh0gzhxmDCJzEr9CuP3?=
- =?us-ascii?Q?qN7tHfoDHSjOpVxaziqqZ6m1ETvtooCdJNElWOBD6ApZnjD8JzIVMJrtEoeC?=
- =?us-ascii?Q?bBzzGApa/8B3UhfAzmV9nDy0u8lLF8VlDeCAKsBihPMZ7O19B9OtOcJ4nACQ?=
- =?us-ascii?Q?MaCrXCy7dLB/zkpWto6Bn2dTJSqW3ZQLd+2jMyLUIyuQ0awW0qHsKtn07VYh?=
- =?us-ascii?Q?zj6Kg82L8l4ChMvLbmhzpHB9kQ6JPyTgbRVZqSsZtKvGMuG+ImmLvlWFUKBN?=
- =?us-ascii?Q?DYToxT7+gYyQs6e8tbgvKojmSEHMeF7V6fubO/ROQr0gXwS2wj18etJLkEBv?=
- =?us-ascii?Q?vb2RcdLUEXT8BdpKMPbBDsFsg6kb5QRQP4msOGJbwsWLyBRnO0JACGepDJma?=
- =?us-ascii?Q?5Xn+308ThrNsUJhKyVKOVJQR8yemvuCqPSMKE8VGZcOeOy+e8yE2cvDuMIzq?=
- =?us-ascii?Q?PTaul/4+oFvqOqxmas5cg4oH?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VOEp1Mdjr6tOrZtVNaKYF7MKljpy4DkmgkRAZnKzZ8NMu6af9Aeih+PMVpIX?=
+ =?us-ascii?Q?LRif5lMT1BuGB4TQcfMpwCFVAu9fPdCw/6MPL3Sd3OOynQQX9sMKfg6A6vRq?=
+ =?us-ascii?Q?nk6n8UbZQsYFK3um2gKODMDTPSviZ+h6ZURKzUJPM1Kokp3SCZPRq10ENoAo?=
+ =?us-ascii?Q?nShS8acS0HduBSbMTiEa/52ZNZSY//0q+1q9336+Vu3QJMK/hpD0dYG3iEue?=
+ =?us-ascii?Q?tacLCdn9UmCIpJat3Wv2k4dVJKEHR3C26ya96EPLSCh8DtFduVN1jEQ285tJ?=
+ =?us-ascii?Q?vdaMX0zBGNBVt9mm5N5AzYy3BpkCGfQIOVe3uxkgEVOvgnnu1jSmCgWzQ+QO?=
+ =?us-ascii?Q?c0vcrVHfGuEUC7xiMZl29FzT5g9FHVhtaQ0FbxJwQa7I0Fz8/Yrw2OxlOzBY?=
+ =?us-ascii?Q?PwPWPSib1XTsJWApA4BbT/DjzgKOXxRemKAjz5o/IQR/2FeRTyqblTxHc1Yw?=
+ =?us-ascii?Q?BjVrNwGBrumWeOR5pigGtf/qr/aYgtcZyNkltWB0YndnBTV2+o0u8F7W0nIH?=
+ =?us-ascii?Q?GtIsaLS8BjLw+qg7nfj5qwTgDi+j6tBIC/gbWglZGcs8cMtNuU2EEWSFv1c5?=
+ =?us-ascii?Q?rd3IrSKuRFzlCyKK6vdYxurTi6FlBjHTR1MQH6ivyKphKerOCVOFC8jqq9i9?=
+ =?us-ascii?Q?pveZ6x4cRuqPzsqoDTKRMu8YvJD+nrVER3i7t5uybtjCgJYhfObC9V6g5RjU?=
+ =?us-ascii?Q?RGmO7RaQQTFZkOkIhVkGPZdgvm6y8WuPemZ5m7yKHqUMVf3/dufzM113XSZO?=
+ =?us-ascii?Q?8Hb8EXUBvFL2CECCKcvsbm9FKUr+aKPCZOtZlvvw4YGMHAI77gyxZJyRfGz9?=
+ =?us-ascii?Q?p5l1r+FkOQO/0ZXygMnDdUGSiL5v7j530Gq/fj+CjtCJsg0uzCA3Z6SGR9Hq?=
+ =?us-ascii?Q?0lVqouwPsSeILhhBJh8eLboSt/8Rr9OWhh0z8trsusOdROcShZX02++/VmSt?=
+ =?us-ascii?Q?4p2SY2a39LEL5xCCS5sSgOai+rNHUXP7rlg8Q5EdO14BufilHF/NPJEOQWme?=
+ =?us-ascii?Q?HyZHoxUfr6AoKkfxnX+xcuvAOp5OTFqdLZs441jqSOkZHysFJDikd/ChuzwG?=
+ =?us-ascii?Q?kf5ZXcqtjVw0Zo6Vn3b2ei0kAyn+URNls+jogsf0XRdUICLRK3Xqan0/uukG?=
+ =?us-ascii?Q?ooaZYDg/+dp6MQmgKcveHBq+EMgeGRgcXdDLG3nnHDV6DhKjPP8tXcbjzPHq?=
+ =?us-ascii?Q?RQWXwElelxIXIv49JR3wXrJE+ZEh1c4Hpk0Me4khHofk6vR77FNzkJxcAo28?=
+ =?us-ascii?Q?EgUnDMgNGEGNq10+QhsdkBYUvN6qzqGXUzOX9ps08gbA/upEG7vnTy5C8xsZ?=
+ =?us-ascii?Q?D62qzG3SxVLWzdyCDNTbfUHZ?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c021ac68-56ba-4274-f1d8-08d97d91c043
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f14def3-abdf-47f3-2462-08d97d91c1e3
 X-MS-Exchange-CrossTenant-AuthSource: KL1PR0601MB4003.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2021 06:25:20.2339 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2021 06:25:22.7986 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 00e0bX5H2R16wrDOisG1q1K98yfWJcKDpTiZS4c8n4AWXlPv5GH47gXmRa0QMbjtRXGw9PjgN/joass4jTUMjQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: qkVIApF81oNKIQNAHYJIsaorIUtBDttMWWNQ/KCbrebvYQN/L8tQ+M0S3rISQKNm4twnZbS7kVlPIkpSv5wzlQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR0601MB4241
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
@@ -141,27 +143,27 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: separate buffer and direct io in block allocation statistics.
- New output will like this: buffer direct segments IPU: 0 0 N/A SSR: 0 0 0
- LFS: 0 0 0 Signed-off-by: Fengnan Chang <changfengnan@vivo.com> ---
- fs/f2fs/data.c
- | 10 ++++++---- fs/f2fs/debug.c | 24 +++++++++++++++--------- fs/f2fs/f2fs.h
- | 32 +++++++++++++++++++++ fs/f2fs/gc.c [...] 
+ Content preview:  For now, overwrite file with direct io use inplace policy,
+ but not counted, fix it. And use stat_add_inplace_blocks(sbi, 1, ) instead
+ of stat_inc_inplace_blocks(sb,
+ ). Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
+ --- fs/f2fs/data.c | 4 +++- fs/f2fs/f2fs.h | 8 ++++---- fs/f2fs/segment.c
+ | 2 +- 3 files changed, 8 insertions(+), 6 deletions(-) 
  Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.130.124 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
  [40.107.130.124 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.130.124 listed in list.dnswl.org]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid 0.0 MSGID_FROM_MTA_HEADER  Message-Id was added by a relay
-X-Headers-End: 1mSvhD-0008D3-C4
-Subject: [f2fs-dev] [PATCH v4 1/2] f2fs: separate buffer and direct io in
- block allocation statistics
+X-Headers-End: 1mSvhK-0008D3-7N
+Subject: [f2fs-dev] [PATCH v4 2/2] f2fs: fix missing inplace count in
+ overwrite with direct io
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -182,244 +184,71 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-separate buffer and direct io in block allocation statistics.
-
-New output will like this:
-           buffer     direct   segments
-IPU:            0          0        N/A
-SSR:            0          0          0
-LFS:            0          0          0
+For now, overwrite file with direct io use inplace policy, but
+not counted, fix it. And use stat_add_inplace_blocks(sbi, 1, )
+instead of stat_inc_inplace_blocks(sb, ).
 
 Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
 ---
- fs/f2fs/data.c    | 10 ++++++----
- fs/f2fs/debug.c   | 24 +++++++++++++++---------
- fs/f2fs/f2fs.h    | 32 +++++++++++++++++++++-----------
- fs/f2fs/gc.c      |  2 +-
- fs/f2fs/segment.c |  8 ++++----
- 5 files changed, 47 insertions(+), 29 deletions(-)
+ fs/f2fs/data.c    | 4 +++-
+ fs/f2fs/f2fs.h    | 8 ++++----
+ fs/f2fs/segment.c | 2 +-
+ 3 files changed, 8 insertions(+), 6 deletions(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index f4fd6c246c9a..c1490b9a1345 100644
+index c1490b9a1345..7798f7236376 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -1342,7 +1342,7 @@ struct page *f2fs_get_new_data_page(struct inode *inode,
- 	return page;
- }
- 
--static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
-+static int __allocate_data_block(struct dnode_of_data *dn, int seg_type, bool direct_io)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
- 	struct f2fs_summary sum;
-@@ -1369,7 +1369,7 @@ static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
- 	set_summary(&sum, dn->nid, dn->ofs_in_node, ni.version);
- 	old_blkaddr = dn->data_blkaddr;
- 	f2fs_allocate_data_block(sbi, NULL, old_blkaddr, &dn->data_blkaddr,
--				&sum, seg_type, NULL);
-+				&sum, seg_type, NULL, direct_io);
- 	if (GET_SEGNO(sbi, old_blkaddr) != NULL_SEGNO) {
- 		invalidate_mapping_pages(META_MAPPING(sbi),
- 					old_blkaddr, old_blkaddr);
-@@ -1548,7 +1548,7 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 		/* use out-place-update for driect IO under LFS mode */
- 		if (f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO &&
- 							map->m_may_create) {
--			err = __allocate_data_block(&dn, map->m_seg_type);
-+			err = __allocate_data_block(&dn, map->m_seg_type, true);
- 			if (err)
+@@ -1553,7 +1553,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
  				goto sync_out;
  			blkaddr = dn.data_blkaddr;
-@@ -1569,7 +1569,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 				WARN_ON(flag != F2FS_GET_BLOCK_PRE_DIO &&
- 					flag != F2FS_GET_BLOCK_DIO);
- 				err = __allocate_data_block(&dn,
--							map->m_seg_type);
-+					map->m_seg_type,
-+					flag == F2FS_GET_BLOCK_PRE_DIO ||
-+					flag == F2FS_GET_BLOCK_DIO);
- 				if (!err)
- 					set_inode_flag(inode, FI_APPEND_WRITE);
- 			}
-diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
-index 8c50518475a9..e1aa843b067c 100644
---- a/fs/f2fs/debug.c
-+++ b/fs/f2fs/debug.c
-@@ -64,7 +64,7 @@ static void update_general_status(struct f2fs_sb_info *sbi)
- {
- 	struct f2fs_stat_info *si = F2FS_STAT(sbi);
- 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
--	int i;
-+	int i, j;
- 
- 	/* these will be changed if online resize is done */
- 	si->main_area_segs = le32_to_cpu(raw_super->segment_count_main);
-@@ -210,10 +210,12 @@ static void update_general_status(struct f2fs_sb_info *sbi)
- 
- 	for (i = 0; i < 2; i++) {
- 		si->segment_count[i] = sbi->segment_count[i];
--		si->block_count[i] = sbi->block_count[i];
-+		for (j = 0; j < 2; j++)
-+			si->block_count[i][j] = sbi->block_count[i][j];
- 	}
- 
--	si->inplace_count = atomic_read(&sbi->inplace_count);
-+	for (i = 0; i < 2; i++)
-+		si->inplace_count[i] = atomic_read(&sbi->inplace_count[i]);
- }
- 
- /*
-@@ -551,11 +553,14 @@ static int stat_show(struct seq_file *s, void *v)
- 		for (j = 0; j < si->util_free; j++)
- 			seq_putc(s, '-');
- 		seq_puts(s, "]\n\n");
--		seq_printf(s, "IPU: %u blocks\n", si->inplace_count);
--		seq_printf(s, "SSR: %u blocks in %u segments\n",
--			   si->block_count[SSR], si->segment_count[SSR]);
--		seq_printf(s, "LFS: %u blocks in %u segments\n",
--			   si->block_count[LFS], si->segment_count[LFS]);
-+
-+		seq_printf(s, "       %10s %10s %10s\n", "buffer", "direct", "segments");
-+		seq_printf(s,   "IPU:   %10d %10d        N/A\n", si->inplace_count[1],
-+				si->inplace_count[0]);
-+		seq_printf(s,   "SSR:   %10d %10d %10d\n", si->block_count[1][SSR],
-+				si->block_count[0][SSR], si->segment_count[SSR]);
-+		seq_printf(s,   "LFS:   %10d %10d %10d\n", si->block_count[1][LFS],
-+				si->block_count[0][LFS], si->segment_count[LFS]);
- 
- 		/* segment usage info */
- 		f2fs_update_sit_info(si->sbi);
-@@ -611,7 +616,8 @@ int f2fs_build_stats(struct f2fs_sb_info *sbi)
- 	atomic_set(&sbi->inline_dir, 0);
- 	atomic_set(&sbi->compr_inode, 0);
- 	atomic64_set(&sbi->compr_blocks, 0);
--	atomic_set(&sbi->inplace_count, 0);
-+	for (i = 0; i < 2; i++)
-+		atomic_set(&sbi->inplace_count[i], 0);
- 	for (i = META_CP; i < META_MAX; i++)
- 		atomic_set(&sbi->meta_count[i], 0);
- 
+ 			set_inode_flag(inode, FI_APPEND_WRITE);
+-		}
++		} else if (!f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_PRE_DIO &&
++				map->m_may_create && create)
++			stat_add_inplace_blocks(sbi, 1, true);
+ 	} else {
+ 		if (create) {
+ 			if (unlikely(f2fs_cp_error(sbi))) {
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b339ae89c1ad..20d715cacf49 100644
+index 20d715cacf49..3895a4f44ecf 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -1692,8 +1692,8 @@ struct f2fs_sb_info {
- 	struct f2fs_stat_info *stat_info;	/* FS status information */
- 	atomic_t meta_count[META_MAX];		/* # of meta blocks */
- 	unsigned int segment_count[2];		/* # of allocated segments */
--	unsigned int block_count[2];		/* # of allocated blocks */
--	atomic_t inplace_count;		/* # of inplace update */
-+	unsigned int block_count[2][2];		/* # of allocated blocks */
-+	atomic_t inplace_count[2];		/* # of inplace update */
- 	atomic64_t total_hit_ext;		/* # of lookup extent cache */
- 	atomic64_t read_hit_rbtree;		/* # of hit rbtree extent node */
- 	atomic64_t read_hit_largest;		/* # of hit largest extent node */
-@@ -3491,7 +3491,7 @@ void f2fs_replace_block(struct f2fs_sb_info *sbi, struct dnode_of_data *dn,
- void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
- 			block_t old_blkaddr, block_t *new_blkaddr,
- 			struct f2fs_summary *sum, int type,
--			struct f2fs_io_info *fio);
-+			struct f2fs_io_info *fio, bool direct_io);
- void f2fs_wait_on_page_writeback(struct page *page,
- 			enum page_type type, bool ordered, bool locked);
- void f2fs_wait_on_block_writeback(struct inode *inode, block_t blkaddr);
-@@ -3699,8 +3699,8 @@ struct f2fs_stat_info {
- 
- 	unsigned int meta_count[META_MAX];
- 	unsigned int segment_count[2];
--	unsigned int block_count[2];
--	unsigned int inplace_count;
-+	unsigned int block_count[2][2];
-+	unsigned int inplace_count[2];
- 	unsigned long long base_mem, cache_mem, page_mem;
- };
- 
-@@ -3778,10 +3778,20 @@ static inline struct f2fs_stat_info *F2FS_STAT(struct f2fs_sb_info *sbi)
+@@ -3785,12 +3785,12 @@ static inline struct f2fs_stat_info *F2FS_STAT(struct f2fs_sb_info *sbi)
+ 		else								\
+ 			((sbi)->block_count[1][(curseg)->alloc_type]++);	\
  	} while (0)
- #define stat_inc_seg_type(sbi, curseg)					\
- 		((sbi)->segment_count[(curseg)->alloc_type]++)
--#define stat_inc_block_count(sbi, curseg)				\
--		((sbi)->block_count[(curseg)->alloc_type]++)
--#define stat_inc_inplace_blocks(sbi)					\
--		(atomic_inc(&(sbi)->inplace_count))
-+#define stat_inc_block_count(sbi, curseg, direct_io)			\
-+	do {								\
-+		if (direct_io)						\
-+			((sbi)->block_count[0][(curseg)->alloc_type]++);	\
-+		else								\
-+			((sbi)->block_count[1][(curseg)->alloc_type]++);	\
-+	} while (0)
-+#define stat_inc_inplace_blocks(sbi, direct_io)					\
-+	do {								\
-+		if (direct_io)						\
-+			(atomic_inc(&(sbi)->inplace_count[0]));		\
-+		else								\
-+			(atomic_inc(&(sbi)->inplace_count[1]));		\
-+	} while (0)
+-#define stat_inc_inplace_blocks(sbi, direct_io)					\
++#define stat_add_inplace_blocks(sbi, count, direct_io)			\
+ 	do {								\
+ 		if (direct_io)						\
+-			(atomic_inc(&(sbi)->inplace_count[0]));		\
++			(atomic_add(count, &(sbi)->inplace_count[0]));  \
+ 		else								\
+-			(atomic_inc(&(sbi)->inplace_count[1]));		\
++			(atomic_add(count, &(sbi)->inplace_count[1]));	\
+ 	} while (0)
  #define stat_update_max_atomic_write(inode)				\
  	do {								\
- 		int cur = F2FS_I_SB(inode)->atomic_files;	\
-@@ -3866,8 +3876,8 @@ void f2fs_update_sit_info(struct f2fs_sb_info *sbi);
- #define stat_update_max_volatile_write(inode)		do { } while (0)
+@@ -3877,7 +3877,7 @@ void f2fs_update_sit_info(struct f2fs_sb_info *sbi);
  #define stat_inc_meta_count(sbi, blkaddr)		do { } while (0)
  #define stat_inc_seg_type(sbi, curseg)			do { } while (0)
--#define stat_inc_block_count(sbi, curseg)		do { } while (0)
--#define stat_inc_inplace_blocks(sbi)			do { } while (0)
-+#define stat_inc_block_count(sbi, curseg, direct_io)		do { } while (0)
-+#define stat_inc_inplace_blocks(sbi, direct_io)			do { } while (0)
+ #define stat_inc_block_count(sbi, curseg, direct_io)		do { } while (0)
+-#define stat_inc_inplace_blocks(sbi, direct_io)			do { } while (0)
++#define stat_add_inplace_blocks(sbi, count, direct_io)		do { } while (0)
  #define stat_inc_seg_count(sbi, type, gc_type)		do { } while (0)
  #define stat_inc_tot_blk_count(si, blks)		do { } while (0)
  #define stat_inc_data_blk_count(sbi, blks, gc_type)	do { } while (0)
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 77391e3b7d68..7c47082f73cc 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1247,7 +1247,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
- 
- 	/* allocate block address */
- 	f2fs_allocate_data_block(fio.sbi, NULL, fio.old_blkaddr, &newaddr,
--				&sum, type, NULL);
-+				&sum, type, NULL, false);
- 
- 	fio.encrypted_page = f2fs_pagecache_get_page(META_MAPPING(fio.sbi),
- 				newaddr, FGP_LOCK | FGP_CREAT, GFP_NOFS);
 diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index a135d2247415..ded744e880d0 100644
+index ded744e880d0..c542c4b687ca 100644
 --- a/fs/f2fs/segment.c
 +++ b/fs/f2fs/segment.c
-@@ -3391,7 +3391,7 @@ static int __get_segment_type(struct f2fs_io_info *fio)
- void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
- 		block_t old_blkaddr, block_t *new_blkaddr,
- 		struct f2fs_summary *sum, int type,
--		struct f2fs_io_info *fio)
-+		struct f2fs_io_info *fio, bool direct_io)
- {
- 	struct sit_info *sit_i = SIT_I(sbi);
- 	struct curseg_info *curseg = CURSEG_I(sbi, type);
-@@ -3425,7 +3425,7 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
- 
- 	__refresh_next_blkoff(sbi, curseg);
- 
--	stat_inc_block_count(sbi, curseg);
-+	stat_inc_block_count(sbi, curseg, direct_io);
- 
- 	if (from_gc) {
- 		old_mtime = get_segment_mtime(sbi, old_blkaddr);
-@@ -3515,7 +3515,7 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
- 		down_read(&fio->sbi->io_order_lock);
- reallocate:
- 	f2fs_allocate_data_block(fio->sbi, fio->page, fio->old_blkaddr,
--			&fio->new_blkaddr, sum, type, fio);
-+			&fio->new_blkaddr, sum, type, fio, false);
- 	if (GET_SEGNO(fio->sbi, fio->old_blkaddr) != NULL_SEGNO) {
- 		invalidate_mapping_pages(META_MAPPING(fio->sbi),
- 					fio->old_blkaddr, fio->old_blkaddr);
 @@ -3611,7 +3611,7 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
  		goto drop_bio;
  	}
  
--	stat_inc_inplace_blocks(fio->sbi);
-+	stat_inc_inplace_blocks(fio->sbi, false);
+-	stat_inc_inplace_blocks(fio->sbi, false);
++	stat_add_inplace_blocks(sbi, 1, false);
  
  	if (fio->bio && !(SM_I(sbi)->ipu_policy & (1 << F2FS_IPU_NOCACHE)))
  		err = f2fs_merge_page_bio(fio);
