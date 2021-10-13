@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 409E742C40D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Oct 2021 16:53:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B9A842C4B0
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Oct 2021 17:18:53 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mafdK-0002Lr-Gp; Wed, 13 Oct 2021 14:53:30 +0000
+	id 1mag1p-0003A1-7t; Wed, 13 Oct 2021 15:18:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1mafdI-0002Lk-D8
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Oct 2021 14:53:28 +0000
+ (envelope-from <chao@kernel.org>) id 1mag1n-00039v-KD
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Oct 2021 15:18:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LMBrj9O+M5bHz1/gmiBdSLL01tsfdFn3sqsSY0dfmho=; b=E3RmkBD+Jq3emHPQYEP7j7Nx1X
- ZXAyA3DR/4khIkNOy/0GmhiR36xgjcJHzKTj+1JnMI+ZNf3OnTVtLAgFPznDlZmuZlHtMo5k3QHOt
- pDFizD0sPd/iRhnShbakMOZzSDeP+GSfvZY3Ts6G5VqIh5udV5H5xBxbx2nW5FhgMQwo=;
+ bh=Rhk8AFqrqpJ2aC3dKzvdsuQTwGFUHN56mD9ZjOW1IRc=; b=dQyzA2zvN6zamy7TlcXdyS1lAo
+ o9mS/W/UeQa9eTpDrmf6FWA3lCwioki3jIknRFP+8jRrw0WjwpyD4o648COtNPge+pEPpY5qOdXtO
+ vy1C22NhzQpHK8zvoa91zuU1Ka0nGqbyULzRyY+HTVMUHhrYBVa3jC1j/AmPHYFqX+2Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,36 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LMBrj9O+M5bHz1/gmiBdSLL01tsfdFn3sqsSY0dfmho=; b=hWJovZA4m7E4eZ6M7M/sbH3NhF
- BssK68bEAZCmFcujPiuhZNv9v9ljUDFWjmI/tfWdLAveO7d1lqJjAFID5tnI3yOI2Xwu4/w34vZYT
- ZWojexK3popvfhfL238eg84+VMbyxstHZjDZqZQyK7rulTSLOFBnM2zXBHaOa2SVonLQ=;
+ bh=Rhk8AFqrqpJ2aC3dKzvdsuQTwGFUHN56mD9ZjOW1IRc=; b=SX7OuP6edTDM2UmU2InIZyIP1y
+ /qlK5R07c+zSAWZAGoDe9rUdn4uxrHu3ldEtZ/1qzeYHj7/42Voc9RzQ4t3f0fS6dDaGhsPIsvUPt
+ 8OcrPHjazWPRhRCk8U9Dd47VoU+FebNDTDkzIk1mC3/WGM/s6MCwf5KP4ETIsJs5CEds=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mafdH-000073-TD
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Oct 2021 14:53:28 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5EA2C61108;
- Wed, 13 Oct 2021 14:53:21 +0000 (UTC)
+ id 1mag1l-008aVf-O3
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Oct 2021 15:18:47 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id C0C1C60F21;
+ Wed, 13 Oct 2021 15:18:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1634136802;
- bh=vts1+pm3L+IVnVc2tbBxum1i7/yC4cz23xOk/h10DBU=;
+ s=k20201202; t=1634138315;
+ bh=dqpYGOfOIzYPxxzj0LBw/X73XeoxwtcibuvZw5rg61A=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Spo9ckm5twAnSiHRFdn9Jqx4mjPXgqsWgMlJmgBzF7rhM9LnJlbAv3PtnB2B2X2Ao
- SGrw7P0c2FYvIYUx9ZYKpnb3V9njaOrgErpdR9mNykyaNdwP0fpFQK7qTUWLsPOi0i
- +WVKjiYfI41wvenGyDNAC7LJgL6GUYyDWFOv4EKoEOiCbSCtsOAb3xM+voDyOw3vyU
- Riugklw+CPjvRJRsy89EHYp1MD9x609D7amBs86lzG3CKPu/YZkzOxKw6iJVairC50
- VYi+sBs1zJSi4MgnnKFvT21j7Qzr6W7XUxihZK60IH40/QnsseF+RBlJt3fbBb3mse
- 1RdArgGEHcj4Q==
-Message-ID: <ee06fd6f-c342-03a8-ced1-4d397af07aeb@kernel.org>
-Date: Wed, 13 Oct 2021 22:53:19 +0800
+ b=BqJxxGF/Bxp2SlpGHuqVFzzDMbaQAG+zYWxayYlb8wCFeHjODODNIDSTbKu+vfm3o
+ MVT935vpabUrLZ1VYH47fw0zVGvNDzbxwO2Gpsbv6Hu/r1qG/bC6ksFrdV+M6+ovtl
+ diR/KBQzXScy2YdN1Ym0vkyMLRkQ5siZBDDkhzocsp2HyHD0Ev1tZ8kGzdiNY8j368
+ SEf2CITBY7C8UWVTBo0POAlHUWwuTPRaMAi92WzR6TYwfCWJoXIHeGh3tdTrWBZPMV
+ NtJLaBfQC7ktJ4ouFBy4KjD5qlrYY3L6cK78l/n3AN8W5HWI8DdVIkHS4GBJxk7RBV
+ fvShInMeiyuGg==
+Message-ID: <66a243ca-53ed-cb8b-064b-5f0d3c954579@kernel.org>
+Date: Wed, 13 Oct 2021 23:18:31 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
 Content-Language: en-US
 To: Fengnan Chang <changfengnan@vivo.com>, jaegeuk@kernel.org
 References: <20211009112744.33698-1-changfengnan@vivo.com>
+ <20211009112744.33698-2-changfengnan@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20211009112744.33698-1-changfengnan@vivo.com>
+In-Reply-To: <20211009112744.33698-2-changfengnan@vivo.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -66,12 +67,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2021/10/9 19:27, Fengnan Chang wrote: > separate buffer
- and direct io in block allocation statistics. > > New output will like this:
- > buffer direct segments > IPU: 0 0 N/A > SSR: 0 0 0 > LFS: 0 0 [...] 
+ Content preview:  On 2021/10/9 19:27, Fengnan Chang wrote: > For now, overwrite
+ file with direct io use inplace policy, but > not counted, fix it. And use
+ stat_add_inplace_blocks(sbi, 1, ) > instead of stat_inc_inplace [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [198.145.29.99 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -80,14 +83,11 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mafdH-000073-TD
-Subject: Re: [f2fs-dev] [PATCH v5 1/2] f2fs: separate buffer and direct io
- in block allocation statistics
+X-Headers-End: 1mag1l-008aVf-O3
+Subject: Re: [f2fs-dev] [PATCH v5 2/2] f2fs: fix missing inplace count in
+ overwrite with direct io
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,19 +105,97 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2021/10/9 19:27, Fengnan Chang wrote:
-> separate buffer and direct io in block allocation statistics.
-> 
-> New output will like this:
->             buffer     direct   segments
-> IPU:            0          0        N/A
-> SSR:            0          0          0
-> LFS:            0          0          0
+> For now, overwrite file with direct io use inplace policy, but
+> not counted, fix it. And use stat_add_inplace_blocks(sbi, 1, )
+> instead of stat_inc_inplace_blocks(sb, ).
 > 
 > Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
+> ---
+>   fs/f2fs/data.c    | 4 +++-
+>   fs/f2fs/f2fs.h    | 8 ++++----
+>   fs/f2fs/segment.c | 2 +-
+>   3 files changed, 8 insertions(+), 6 deletions(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index c1490b9a1345..7798f7236376 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -1553,7 +1553,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+>   				goto sync_out;
+>   			blkaddr = dn.data_blkaddr;
+>   			set_inode_flag(inode, FI_APPEND_WRITE);
+> -		}
+> +		} else if (!f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_PRE_DIO &&
+> +				map->m_may_create && create)
+> +			stat_add_inplace_blocks(sbi, 1, true);
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+What about this case?
+
+- f2fs_preallocate_blocks
+  - f2fs_map_blocks
+   - stat_add_inplace_blocks
+   map.m_len > 0 && err == -ENOSPC
+   err = 0;
+- __generic_file_write_iter
+  - generic_file_direct_write
+   - f2fs_direct_IO
+    - get_data_block_dio_write
+     - __allocate_data_block
+      - stat_inc_block_count
+
+DIO blocks will be accounted into different type? IIUC.
+
+>   	} else {
+>   		if (create) {
+>   			if (unlikely(f2fs_cp_error(sbi))) {
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index bf2e73e46304..a7da836ca64f 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3785,12 +3785,12 @@ static inline struct f2fs_stat_info *F2FS_STAT(struct f2fs_sb_info *sbi)
+>   		else								\
+>   			((sbi)->block_count[1][(curseg)->alloc_type]++);	\
+>   	} while (0)
+> -#define stat_inc_inplace_blocks(sbi, direct_io)					\
+> +#define stat_add_inplace_blocks(sbi, count, direct_io)			\
+>   	do {								\
+>   		if (direct_io)						\
+> -			(atomic_inc(&(sbi)->inplace_count[0]));		\
+> +			(atomic_add(count, &(sbi)->inplace_count[0]));  \
+>   		else								\
+> -			(atomic_inc(&(sbi)->inplace_count[1]));		\
+> +			(atomic_add(count, &(sbi)->inplace_count[1]));	\
+
+If count always be one, we can just keep to use atomic_inc() here?
 
 Thanks,
+
+>   	} while (0)
+>   #define stat_update_max_atomic_write(inode)				\
+>   	do {								\
+> @@ -3877,7 +3877,7 @@ void f2fs_update_sit_info(struct f2fs_sb_info *sbi);
+>   #define stat_inc_meta_count(sbi, blkaddr)		do { } while (0)
+>   #define stat_inc_seg_type(sbi, curseg)			do { } while (0)
+>   #define stat_inc_block_count(sbi, curseg, direct_io)	do { } while (0)
+> -#define stat_inc_inplace_blocks(sbi, direct_io)		do { } while (0)
+> +#define stat_add_inplace_blocks(sbi, count, direct_io)	do { } while (0)
+>   #define stat_inc_seg_count(sbi, type, gc_type)		do { } while (0)
+>   #define stat_inc_tot_blk_count(si, blks)		do { } while (0)
+>   #define stat_inc_data_blk_count(sbi, blks, gc_type)	do { } while (0)
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index ded744e880d0..c542c4b687ca 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -3611,7 +3611,7 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
+>   		goto drop_bio;
+>   	}
+>   
+> -	stat_inc_inplace_blocks(fio->sbi, false);
+> +	stat_add_inplace_blocks(sbi, 1, false);
+>   
+>   	if (fio->bio && !(SM_I(sbi)->ipu_policy & (1 << F2FS_IPU_NOCACHE)))
+>   		err = f2fs_merge_page_bio(fio);
+> 
 
 
 _______________________________________________
