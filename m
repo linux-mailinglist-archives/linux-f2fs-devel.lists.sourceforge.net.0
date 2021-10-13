@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B9A842C4B0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Oct 2021 17:18:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6852142C4BA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Oct 2021 17:22:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mag1p-0003A1-7t; Wed, 13 Oct 2021 15:18:49 +0000
+	id 1mag5j-0004kB-R6; Wed, 13 Oct 2021 15:22:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <chao@kernel.org>) id 1mag1n-00039v-KD
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Oct 2021 15:18:47 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <chao@kernel.org>) id 1mag5h-0004k3-IB
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Oct 2021 15:22:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Rhk8AFqrqpJ2aC3dKzvdsuQTwGFUHN56mD9ZjOW1IRc=; b=dQyzA2zvN6zamy7TlcXdyS1lAo
- o9mS/W/UeQa9eTpDrmf6FWA3lCwioki3jIknRFP+8jRrw0WjwpyD4o648COtNPge+pEPpY5qOdXtO
- vy1C22NhzQpHK8zvoa91zuU1Ka0nGqbyULzRyY+HTVMUHhrYBVa3jC1j/AmPHYFqX+2Y=;
+ bh=nlx/pgy6sjc+wQZy68oQipOZb+n8R/lYATW3AIC2hpM=; b=O7Em4M2aZEuHeP0c6WhPXpU/AS
+ DbP4llnTHMvOAzZGnxh4Dfk1SnPob+DFsOyzCmzApwBNo/IWdfW5r+jFQZKhY1OgdpT5GevAysmK4
+ WNdkHOakIA5nUHiHP3eP+FMT4JqSt7+daNSH8CrXm8nFcXdtFQCbzWmsiETHxLASw8aE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,37 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Rhk8AFqrqpJ2aC3dKzvdsuQTwGFUHN56mD9ZjOW1IRc=; b=SX7OuP6edTDM2UmU2InIZyIP1y
- /qlK5R07c+zSAWZAGoDe9rUdn4uxrHu3ldEtZ/1qzeYHj7/42Voc9RzQ4t3f0fS6dDaGhsPIsvUPt
- 8OcrPHjazWPRhRCk8U9Dd47VoU+FebNDTDkzIk1mC3/WGM/s6MCwf5KP4ETIsJs5CEds=;
+ bh=nlx/pgy6sjc+wQZy68oQipOZb+n8R/lYATW3AIC2hpM=; b=BKUDveY7zfCdnATSX98odG7Amm
+ H8PtoRcsj7JuXh3KITeX98eb0ozPWiv11K6tnGvR6WVTuKLIWNK+SOQQ7jOw/MJRLeIR3hfeo9Lde
+ 4Hft3VO8yTeJaJBxRr0L5wgoKOPpSw1xG9+QajKmBTktVh4JqQH9rljnXte23cUZhp7U=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mag1l-008aVf-O3
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Oct 2021 15:18:47 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id C0C1C60F21;
- Wed, 13 Oct 2021 15:18:34 +0000 (UTC)
+ id 1mag5h-008azM-0n
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Oct 2021 15:22:49 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 2B7A860F21;
+ Wed, 13 Oct 2021 15:22:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1634138315;
- bh=dqpYGOfOIzYPxxzj0LBw/X73XeoxwtcibuvZw5rg61A=;
+ s=k20201202; t=1634138563;
+ bh=BtCe891vLfW+speZQd9E3ZgbCkoMfZzWSEEVYCAx9iI=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=BqJxxGF/Bxp2SlpGHuqVFzzDMbaQAG+zYWxayYlb8wCFeHjODODNIDSTbKu+vfm3o
- MVT935vpabUrLZ1VYH47fw0zVGvNDzbxwO2Gpsbv6Hu/r1qG/bC6ksFrdV+M6+ovtl
- diR/KBQzXScy2YdN1Ym0vkyMLRkQ5siZBDDkhzocsp2HyHD0Ev1tZ8kGzdiNY8j368
- SEf2CITBY7C8UWVTBo0POAlHUWwuTPRaMAi92WzR6TYwfCWJoXIHeGh3tdTrWBZPMV
- NtJLaBfQC7ktJ4ouFBy4KjD5qlrYY3L6cK78l/n3AN8W5HWI8DdVIkHS4GBJxk7RBV
- fvShInMeiyuGg==
-Message-ID: <66a243ca-53ed-cb8b-064b-5f0d3c954579@kernel.org>
-Date: Wed, 13 Oct 2021 23:18:31 +0800
+ b=YO2Q3KYQzf20NEucNUVx6Oswm3ZojnFmUJpa5NoUMhECTlHOuK039nOXFIdSZ3oC9
+ pAkhRpKgy7KqmdYfcxGd2odq86WdIdvjfFIs7lbtRWAkQjYkigrCPLzUh+JbhyAlNp
+ vCKTdHpsZoIth6vKb9Xf5WVAHhIEIqBbX70XvevJkp6rlMXlqrxtv395Tt7FGDoNnD
+ myESfy8qvCfE9JppV8rnWQ2jysqlelCdUlklBhLisWiBCwaxJeYy5IuCpTJJJVojIj
+ BR4dmZ0bMvkAqmTsCUr3CorX80pQ5FGnBDR+KOrmmxZOoUx4xFEJsxpLaMzreqwmFk
+ Q5wsxyy8LoFeA==
+Message-ID: <5ebc307e-09e5-e064-269d-027c3ba615ef@kernel.org>
+Date: Wed, 13 Oct 2021 23:22:39 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
 Content-Language: en-US
-To: Fengnan Chang <changfengnan@vivo.com>, jaegeuk@kernel.org
-References: <20211009112744.33698-1-changfengnan@vivo.com>
- <20211009112744.33698-2-changfengnan@vivo.com>
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20210928204658.2230524-1-daeho43@gmail.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20211009112744.33698-2-changfengnan@vivo.com>
+In-Reply-To: <20210928204658.2230524-1-daeho43@gmail.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -67,9 +67,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2021/10/9 19:27, Fengnan Chang wrote: > For now, overwrite
- file with direct io use inplace policy, but > not counted, fix it. And use
- stat_add_inplace_blocks(sbi, 1, ) > instead of stat_inc_inplace [...] 
+ Content preview:  On 2021/9/29 4:46, Daeho Jeong wrote: > From: Daeho Jeong
+ <daehojeong@google.com> > > In lower versions than macOS 10.12, they don't
+ support clock_gettime > function. It breaks the build, so we need t [...]
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -85,9 +85,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mag1l-008aVf-O3
-Subject: Re: [f2fs-dev] [PATCH v5 2/2] f2fs: fix missing inplace count in
- overwrite with direct io
+X-Headers-End: 1mag5h-008azM-0n
+Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: fall back to the original
+ version check when clock_gettime is not supported
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,103 +99,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/10/9 19:27, Fengnan Chang wrote:
-> For now, overwrite file with direct io use inplace policy, but
-> not counted, fix it. And use stat_add_inplace_blocks(sbi, 1, )
-> instead of stat_inc_inplace_blocks(sb, ).
+On 2021/9/29 4:46, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
 > 
-> Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
-> ---
->   fs/f2fs/data.c    | 4 +++-
->   fs/f2fs/f2fs.h    | 8 ++++----
->   fs/f2fs/segment.c | 2 +-
->   3 files changed, 8 insertions(+), 6 deletions(-)
+> In lower versions than macOS 10.12, they don't support clock_gettime
+> function. It breaks the build, so we need to fall back to the original
+> kernel version check algorithm, in that case.
 > 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index c1490b9a1345..7798f7236376 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -1553,7 +1553,9 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
->   				goto sync_out;
->   			blkaddr = dn.data_blkaddr;
->   			set_inode_flag(inode, FI_APPEND_WRITE);
-> -		}
-> +		} else if (!f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_PRE_DIO &&
-> +				map->m_may_create && create)
-> +			stat_add_inplace_blocks(sbi, 1, true);
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
-What about this case?
-
-- f2fs_preallocate_blocks
-  - f2fs_map_blocks
-   - stat_add_inplace_blocks
-   map.m_len > 0 && err == -ENOSPC
-   err = 0;
-- __generic_file_write_iter
-  - generic_file_direct_write
-   - f2fs_direct_IO
-    - get_data_block_dio_write
-     - __allocate_data_block
-      - stat_inc_block_count
-
-DIO blocks will be accounted into different type? IIUC.
-
->   	} else {
->   		if (create) {
->   			if (unlikely(f2fs_cp_error(sbi))) {
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index bf2e73e46304..a7da836ca64f 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -3785,12 +3785,12 @@ static inline struct f2fs_stat_info *F2FS_STAT(struct f2fs_sb_info *sbi)
->   		else								\
->   			((sbi)->block_count[1][(curseg)->alloc_type]++);	\
->   	} while (0)
-> -#define stat_inc_inplace_blocks(sbi, direct_io)					\
-> +#define stat_add_inplace_blocks(sbi, count, direct_io)			\
->   	do {								\
->   		if (direct_io)						\
-> -			(atomic_inc(&(sbi)->inplace_count[0]));		\
-> +			(atomic_add(count, &(sbi)->inplace_count[0]));  \
->   		else								\
-> -			(atomic_inc(&(sbi)->inplace_count[1]));		\
-> +			(atomic_add(count, &(sbi)->inplace_count[1]));	\
-
-If count always be one, we can just keep to use atomic_inc() here?
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
->   	} while (0)
->   #define stat_update_max_atomic_write(inode)				\
->   	do {								\
-> @@ -3877,7 +3877,7 @@ void f2fs_update_sit_info(struct f2fs_sb_info *sbi);
->   #define stat_inc_meta_count(sbi, blkaddr)		do { } while (0)
->   #define stat_inc_seg_type(sbi, curseg)			do { } while (0)
->   #define stat_inc_block_count(sbi, curseg, direct_io)	do { } while (0)
-> -#define stat_inc_inplace_blocks(sbi, direct_io)		do { } while (0)
-> +#define stat_add_inplace_blocks(sbi, count, direct_io)	do { } while (0)
->   #define stat_inc_seg_count(sbi, type, gc_type)		do { } while (0)
->   #define stat_inc_tot_blk_count(si, blks)		do { } while (0)
->   #define stat_inc_data_blk_count(sbi, blks, gc_type)	do { } while (0)
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index ded744e880d0..c542c4b687ca 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -3611,7 +3611,7 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
->   		goto drop_bio;
->   	}
->   
-> -	stat_inc_inplace_blocks(fio->sbi, false);
-> +	stat_add_inplace_blocks(sbi, 1, false);
->   
->   	if (fio->bio && !(SM_I(sbi)->ipu_policy & (1 << F2FS_IPU_NOCACHE)))
->   		err = f2fs_merge_page_bio(fio);
-> 
 
 
 _______________________________________________
