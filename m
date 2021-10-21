@@ -2,111 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F26C43683E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Oct 2021 18:45:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id BED9A436C8F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Oct 2021 23:19:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mdbBV-0007bj-EG; Thu, 21 Oct 2021 16:44:53 +0000
+	id 1mdfSi-00019u-JO; Thu, 21 Oct 2021 21:18:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <daeho43@gmail.com>) id 1mdbBU-0007bQ-3R
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Oct 2021 16:44:52 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1mdfSh-00019n-5b
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Oct 2021 21:18:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rSAcocb1DpnBRWVfk8RW3057aiiYng+OMM3MbVC7Tos=; b=QDVJMTM4TgGX0fTLNI+NxjNMiY
- clqLPfjleN7GMz2C2rg2PbvXBQSAB52abbWnKqF9XD60yZgO0Xu8XqgadFnJKokpqNiDwuH7ARqGH
- ebjHBn+BaoEVN4qQtFvIhMoEMRoZGVMzodKlyW3dYw5RgIXfeVNajzNJFGbKd4iztMSg=;
+ bh=0OfrCFbT9mrMflZmkWbDJUsYW2gai6j1gi+VDfreEEY=; b=NkEFLzRqH7yP/x7Zwq+YCeHbDX
+ PD1x15ue7J66Jg3iwkqHxA8iQf3RH1RMjQZHZMCcoD/L5TaaauFdMDJQdSGiCQK1oot/W6y2/XgBL
+ pOEpICTKZxaeNeV+i24+gCq17CKxwaqbnYMsAe87Vl36nwcd6EZNkfAVCh4qsojM5jfI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rSAcocb1DpnBRWVfk8RW3057aiiYng+OMM3MbVC7Tos=; b=gjrp2S0L2y6dD4KSB64pu9VC2F
- Qvt9A7ga+55A0IB2elN+zEiqXFMp0J72C3nL3E1wcHJ+ZXyUUOxElKz5S0vi+Wt0/23P1I+gUWgnA
- 8UI2NysSG94Ag0zva08zHVtevPn36+Xi7lPaTaDAmZtlhUnBg0S2lCtLLuyUKfxuVxUU=;
-Received: from mail-lf1-f53.google.com ([209.85.167.53])
+ bh=0OfrCFbT9mrMflZmkWbDJUsYW2gai6j1gi+VDfreEEY=; b=An/o2rRBMwY1XeklDUvR8bkdVx
+ nT4eJ20zFOf0r2CyNzldut1jh6OqCCLWlQQSiqrT659KmlO5Lbq0oQJfEMKX7veKV15ltUJNi1A+b
+ 4OhENCwODmlgS3hlUsern1GBJ7dRoW8urSeaqKKz1ZJmyqrIJPgm0Prc/y9xxqi1uyMk=;
+Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1mdbBT-00AXPF-BO
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Oct 2021 16:44:52 +0000
-Received: by mail-lf1-f53.google.com with SMTP id y26so1579146lfa.11
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Oct 2021 09:44:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rSAcocb1DpnBRWVfk8RW3057aiiYng+OMM3MbVC7Tos=;
- b=kS5wsvBUxmJmOtn1/RXJwN3TZzeP3kBEraI2Yit+v+QTjMaxkrnthAm0qhawJY03Lb
- 4x86yMCxq3DEQBcQF0sIhsa/2niqUCWDRmRL5osvkWllWWuXwTD+3/q1S5Y/RGwja1Jm
- DNkpT90I+HzdkMcRA1uV0Ar4d77vXPRignToKaNB6tvCgaxYGWagqvQ0ecdbhBtzs7X/
- zF7RQ2XxYIMy4WCSto4wNexakV+/z7KjYgQ8BPjKjBq9hUuK3Vin1hVTtLz0EabDbx2f
- Yfvqih+WQRVcB1sEau3rkLxnSI7WPGVicVDOOYT3pO5pzIyHtqnv0EReNYb4XGwotTkK
- 1Xiw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=rSAcocb1DpnBRWVfk8RW3057aiiYng+OMM3MbVC7Tos=;
- b=bFThay1fh7zgqqPch+jb+arKLsSqQLDVRML0bBf8mCoDrLaFdDOM4sHtQ5BGEeS7JE
- CauPB1ANSJdYns1RZ5VFbxrm8igTOIEoIbD7h7ZpwYikgOt6v4iYtLlZlxUZgQqcEfWH
- jX0J5OM6nLSrNZefikKoKmpMQKGWCLmz+Ys0qy6rEgaMCDLKITZMAcnzYKe3IoibAy2K
- iMW9pIbaQ/iAuw6S+hfZ5RxHh39LN41D2tgo1suhf0OsdmcarSx1u8Dkrwb/5K/GKDTN
- PPf7Zgik+PVY5D0lRo+lyyLlXnzvlYphfoDiXuTa3uTlDD4NCCJfeOAkZsNGg9HKoEfu
- AP4g==
-X-Gm-Message-State: AOAM533PpZGbzOJ8eC2F97pYEGbkhNDGPR6tW4lSluuHbq3b17PttBtn
- NYe1JjUtaBYaWFLNDC9q7SOoa+H3eGQOmzw0G4c=
-X-Google-Smtp-Source: ABdhPJyRNBXjn9wxdZ7MbFFAfuc7SgOiEXEZ1NEqOg8ud6/szO1n+6DKtP3IvN6ZfsIux+0s0nXk159Jadl1pvhoQhY=
-X-Received: by 2002:a19:6742:: with SMTP id e2mr6220633lfj.568.1634834684740; 
- Thu, 21 Oct 2021 09:44:44 -0700 (PDT)
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1mdfSg-00At82-Id
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Oct 2021 21:18:55 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id EDC8D60F8F;
+ Thu, 21 Oct 2021 21:18:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1634851129;
+ bh=Gwyq+zNT7ASn4trOpGqWOvEtfQM+rFmKZzNvILCKN9w=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=hcLpceroDe5GwilFBhvK4YwRln2QMZHCQQTbfaAuSrb54zKI/z78zgl1CCotid7sS
+ evww543WI/EGj4u3XeQDfK6OHFT3svqclTNAFyLPVyOGGB2pyN29fNqWGIrJluGmvc
+ h5cJ1uB8PKVsFmASlG55lN9xhqU2x/YNk+ElOVTaTfybnsmDSd/WPlWnNNvj80V4z5
+ IXGkLX2cbLcxHacvlQlXWYg8wHndQ6BTI9d4lteM69Brvme3CaPQt3pbBDtWxYLw2S
+ uFxidjj/1OfxkiVyuep6pMEV+g4XpOADFUuWXy/K7op4ulig0Gg6wqjD35jv4l8LUH
+ SxmKoTn9ZtJ1A==
+Date: Thu, 21 Oct 2021 14:18:47 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Daeho Jeong <daeho43@gmail.com>
+Message-ID: <YXHZN5J2jyPG5tcx@google.com>
+References: <20211006174910.2964885-1-daeho43@gmail.com>
+ <5743eeca-a6e8-87d4-5799-c622fbada429@kernel.org>
+ <CACOAw_zfDZMB4pLEuHWU5YcKnAtfBBTSuXwXy+L2rNJxXC3ysg@mail.gmail.com>
+ <16840026-35ba-cce6-4e0b-3332b0902d2a@kernel.org>
+ <CACOAw_xW7MZi8BVi-2Zo-=LruZr6k7fC7huYiYuWyaDDDti6WA@mail.gmail.com>
+ <02abeeba-c359-cae3-4759-ee2087f21cc9@kernel.org>
+ <CACOAw_xh2HSQDjb_tGopvssipDJYnpi4O1X5_eJqSOLpLebqsw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20211014190503.717830-1-daeho43@gmail.com>
- <e8b106fb-2878-2fa9-788f-965eef179a85@kernel.org>
-In-Reply-To: <e8b106fb-2878-2fa9-788f-965eef179a85@kernel.org>
-From: Daeho Jeong <daeho43@gmail.com>
-Date: Thu, 21 Oct 2021 09:44:33 -0700
-Message-ID: <CACOAw_yupuz+Xx-z9V0UaExuARHd8H9rruWCa2yj5-mgkeuUtQ@mail.gmail.com>
-To: Chao Yu <chao@kernel.org>
-X-Spam-Score: 0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <CACOAw_xh2HSQDjb_tGopvssipDJYnpi4O1X5_eJqSOLpLebqsw@mail.gmail.com>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: There is a deadlock between sb_internal lock
- (sb_start_intwrite())
- and dquot related lock. It's because we call f2fs_truncate(), which eventually
- calls dquot_initialize(), while holding sb_internal lo [...] 
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview:  On 10/21, Daeho Jeong wrote: > > Okay, shouldn't we Cc stable
+ mailing list for this patch? otherwise > > userspace tool may get different
+ stat number with the same compressed > > file in different ker [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.167.53 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [198.145.29.99 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [daeho43[at]gmail.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [daeho43[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.53 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
-X-Headers-End: 1mdbBT-00AXPF-BO
-Subject: Re: [f2fs-dev] [PATCH] f2fs: remove circular locking between
- sb_internal and fs_reclaim
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1mdfSg-00At82-Id
+Subject: Re: [f2fs-dev] [PATCH] f2fs: include non-compressed blocks in
+ compr_written_block
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,86 +101,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: kernel-team@android.com, Daeho Jeong <daehojeong@google.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-There is a deadlock between sb_internal lock (sb_start_intwrite()) and
-dquot related lock.
-It's because we call f2fs_truncate(), which eventually calls
-dquot_initialize(), while holding sb_internal lock.
-So, I called dquot_initialize() in advance to make the 2nd calling of
-it in f2fs_truncate() ineffective.
-This is similar with the thing in f2fs_evict_inode() in inode.c
+On 10/21, Daeho Jeong wrote:
+> > Okay, shouldn't we Cc stable mailing list for this patch? otherwise
+> > userspace tool may get different stat number with the same compressed
+> > file in different kernel?
+> >
+> 
+> Oh, could you let me know what the address of the "stable" mailing list is?
 
-Thanks,
+Added Fixes and -stable. :)
 
-On Thu, Oct 21, 2021 at 5:11 AM Chao Yu <chao@kernel.org> wrote:
->
-> On 2021/10/15 3:05, Daeho Jeong wrote:
-> > From: Daeho Jeong <daehojeong@google.com>
-> >
-> > We detected the below circular locking dependency between sb_internal
-> > and fs_reclaim. So, removed it by calling dquot_initialize() before
-> > sb_start_intwrite().
-> >
-> >   ======================================================
-> >   WARNING: possible circular locking dependency detected
-> >   ------------------------------------------------------
-> >   kswapd0/133 is trying to acquire lock:
-> > ffffff80d5fb9680 (sb_internal#2){.+.+}-{0:0}, at: evict+0xd4/0x2f8
-> >
-> > but task is already holding lock:
-> > ffffffda597c93a8 (fs_reclaim){+.+.}-{0:0}, at:
-> > __fs_reclaim_acquire+0x4/0x50
-> >
-> > which lock already depends on the new lock.
-> > ...
-> > other info that might help us debug this:
-> >
-> >   Chain exists of:
-> >
-> > sb_internal#2 --> &s->s_dquot.dqio_sem --> fs_reclaim
-> >
-> >    Possible unsafe locking scenario:
-> >
-> >          CPU0                    CPU1
-> >          ----                    ----
-> >     lock(fs_reclaim);
-> >                                  lock(&s->s_dquot.dqio_sem);
-> >                                  lock(fs_reclaim);
-> >     lock(sb_internal#2);
->
-> Sorry, I still didn't get the root cause of this deadlock issue, could
-> you please explain more about this?
->
-> And why calling dquot_initialize() in drop_inode() could break the
-> circular locking dependency?
->
+> 
 > Thanks,
->
-> >
-> > Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> > ---
-> >   fs/f2fs/super.c | 2 ++
-> >   1 file changed, 2 insertions(+)
-> >
-> > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> > index 86eeb019cc52..a133932333c5 100644
-> > --- a/fs/f2fs/super.c
-> > +++ b/fs/f2fs/super.c
-> > @@ -1370,6 +1370,8 @@ static int f2fs_drop_inode(struct inode *inode)
-> >                       /* should remain fi->extent_tree for writepage */
-> >                       f2fs_destroy_extent_node(inode);
-> >
-> > +                     dquot_initialize(inode);
-> > +
-> >                       sb_start_intwrite(inode->i_sb);
-> >                       f2fs_i_size_write(inode, 0);
-> >
-> >
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
