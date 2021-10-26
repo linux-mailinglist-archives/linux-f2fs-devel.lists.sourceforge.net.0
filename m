@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3072343A933
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Oct 2021 02:23:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4176F43A93D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Oct 2021 02:30:02 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mfAFv-0005dk-Mv; Tue, 26 Oct 2021 00:23:55 +0000
+	id 1mfALn-0005y2-Ie; Tue, 26 Oct 2021 00:29:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1mfAFu-0005dZ-5b
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Oct 2021 00:23:54 +0000
+ (envelope-from <chao@kernel.org>) id 1mfALl-0005xu-5y
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Oct 2021 00:29:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=d3gvAYC7gisBvuQTd0NYnruT7z/289A2c9cG2Ak/cVQ=; b=W0L6Oo1j9buiq994mKwaR/amCr
- aZgI49/5xKaHbcM0F2AWTjWvPpTu/c4NgJ9CVTYvi04Zd0lsQoSYXfAKx6TRLBUxmU+mxyuR8E6bp
- xBnYwM8FJ0W1fIpp7UhdoevGainhPDULlNm+muqTBkmrAJ5T+fjYD2viJn1ODwMRl9yw=;
+ bh=TSXpIWxvN8Mly4TKzLRg78YblyzeOv4PzpKd8ASS2sU=; b=i/+rGQzQc57/G7RLMMBy0W0tCM
+ v7oMHojNmjaKrVMCfZIO9OCVvaNjmj+eO49Q8rlTdWY/hMPhiKatrh64n5cGGZWeYhxP3IvJu/iD7
+ kbD/pmYUASuMQpcpynPHZTjyHR8l2U/lPpiwPZxcMxztNxZdvc7rz7grneNwqtQEAHy8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,37 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=d3gvAYC7gisBvuQTd0NYnruT7z/289A2c9cG2Ak/cVQ=; b=FJQ8i/V5KZ0DsEe5Sprryk50d5
- 8T5CAqbfuvSvm6PeW1d1522x1RKEJSry77w+S03Ic5wGdGjF1T7Mjt5NhEP0lR+4y0x7lC7FvEY0J
- K5YkacJzyT+fDN4keIb/iPnESLw3/+2HieHNfTAR8Cu14/ETmCda5x3YJ73ooh9C7nNY=;
+ bh=TSXpIWxvN8Mly4TKzLRg78YblyzeOv4PzpKd8ASS2sU=; b=GYxBtOR+RY31TuwLn+bwYPTNBH
+ gjMCJZoZO7qm2y1OuFCXT0Ymwj3WCcMl/yP8pUvyI2QAbFmVfSqdU3cHWDlY5pbfQkpKJcO2sBSAh
+ Mg7HgqHgZ1/qzH3ChuXYLVGLMJ6Ej6yiA+4xb6DRtn/GKDmbIuCk04aFgp2hIs29xzj8=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mfAFs-0005e5-Rk
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Oct 2021 00:23:54 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B36FE60FC2;
- Tue, 26 Oct 2021 00:23:41 +0000 (UTC)
+ id 1mfALd-00GDyb-5q
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Oct 2021 00:29:57 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0ADB860F70;
+ Tue, 26 Oct 2021 00:29:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1635207822;
- bh=X4URehZSW2EUW+6kqx7H/4YQ4IILjFVgONmjP9AEGRw=;
+ s=k20201202; t=1635208183;
+ bh=0VuQAw+HzRJDE4rYOLmbnEb/8SHoVt05musi8JpRMys=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=F4GugLMD0oTkYf9qDSZ6dtfzf/YnWw/wA0xy9ntQZlIr6AcSqdLLYwNROgtJqdXW9
- /3FMgdDVKS/LBa/D/z72Twu0173QSSccYBBxJXauVPtmfEiY/DMZPoFF6KWnI1UbV/
- WF3jMKuVqfKcZT7X3q/9Et2ZRq26RTT2JEFbybKdH7NsMwAT6xre4TzSJGhxHfegny
- QVKknz8b1e0VCkonusNY4yjh0PCvckG5onvju0WVv2BFrLqIuZaMLdlFCawLUfXgJu
- UiSaMINXaWiqx8iCL27gOdb2dY93Pv0BXYeC7u6n5LgP/FvpzBs+9BzE7Fwfs+MdZD
- iP2VkuSFV/oPA==
-Message-ID: <630e58f1-6c27-ad97-2c3e-72a959cd8142@kernel.org>
-Date: Tue, 26 Oct 2021 08:23:39 +0800
+ b=AtixvkMlPYhYsZp2Bh18BV7qq5crjEYpwnryYnqqLY9TJ2I9vLJLjiXWeFVPZTphs
+ LbWnq35jTqj9YBd1jTckCu5FgINIgv2ig/hA2f8nTAD3ab9t8IpA8Yce++BzOUt1ut
+ 6Xah/LAWU9sbcClyu+RJ9WzQXyb8X354agBMliTUHhZc6U9Yvq/JLDrEKhJNwpY+3Y
+ LX7WhiYaAdE6p5wIfUNcdav0AmquQQoeN+WCD3g2s3NrlZpAT5SFSorSuUsoihbSMb
+ /zj57D9Z89buL7OVeJ7AoDgW2aGA7y/O6tP6ahON1OG46V6xSsW2wfP8yTJGRtBWOu
+ VGGKdBDQ/K+9Q==
+Message-ID: <1a8748f4-c15d-361a-f57a-bdacc037314f@kernel.org>
+Date: Tue, 26 Oct 2021 08:29:41 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.0.3
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk.kim@gmail.com>, Fengnan Chang <changfengnan@vivo.com>
-References: <20211023030835.218219-1-changfengnan@vivo.com>
- <CAOtxgye-6iZ8P7TdTib3wi+DRb2XHHnVdZe-0Yr3R-Wz017paw@mail.gmail.com>
+To: Wang Xiaojun <wangxiaojun11@huawei.com>, jaegeuk@kernel.org
+References: <20211025120931.1409835-1-wangxiaojun11@huawei.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <CAOtxgye-6iZ8P7TdTib3wi+DRb2XHHnVdZe-0Yr3R-Wz017paw@mail.gmail.com>
+In-Reply-To: <20211025120931.1409835-1-wangxiaojun11@huawei.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -67,10 +66,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2021/10/26 5:56, Jaegeuk Kim wrote: > Could you please
- take a look? > >
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=00426e4d450aad0ed66b04a16959e1895c1d29e7
- Looks good to me. 
+ Content preview:  On 2021/10/25 20:09, Wang Xiaojun wrote: > If sbi->cur_cp
+ is 2 and the duplicate_checkpoint function returns > in advance because
+ sbi->cp_backuped
+ is set to true, we cannot set > sbi->cur_cp to 1. Hmmm,
+ in previous implementation, 
+ what problem we will encounter, and what's the root cause? 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -86,9 +87,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mfAFs-0005e5-Rk
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: compress: fix overwrite may reduce
- compress ratio unproperly
+X-Headers-End: 1mfALd-00GDyb-5q
+Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: fix the wrong sbi->cur_cp setting
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,19 +100,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/10/26 5:56, Jaegeuk Kim wrote:
-> Could you please take a look?
-> 
-> https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=00426e4d450aad0ed66b04a16959e1895c1d29e7 
+On 2021/10/25 20:09, Wang Xiaojun wrote:
+> If sbi->cur_cp is 2 and the duplicate_checkpoint function returns
+> in advance because sbi->cp_backuped is set to true, we cannot set
+> sbi->cur_cp to 1.
 
-Looks good to me.
+Hmmm, in previous implementation, what problem we will encounter, and
+what's the root cause?
 
 Thanks,
+
+> 
+> Signed-off-by: Wang Xiaojun <wangxiaojun11@huawei.com>
+> ---
+>   fsck/fsck.c  | 3 ---
+>   fsck/mount.c | 5 ++---
+>   2 files changed, 2 insertions(+), 6 deletions(-)
+> 
+> diff --git a/fsck/fsck.c b/fsck/fsck.c
+> index 110c1ec..aa77a34 100644
+> --- a/fsck/fsck.c
+> +++ b/fsck/fsck.c
+> @@ -2383,9 +2383,6 @@ static void fix_checkpoints(struct f2fs_sb_info *sbi)
+>   {
+>   	/* copy valid checkpoint to its mirror position */
+>   	duplicate_checkpoint(sbi);
+> -
+> -	/* repair checkpoint at CP #0 position */
+> -	sbi->cur_cp = 1;
+>   	fix_checkpoint(sbi);
+>   }
+>   
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index c928a15..295170e 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -2998,6 +2998,8 @@ void duplicate_checkpoint(struct f2fs_sb_info *sbi)
+>   	ASSERT(ret >= 0);
+>   
+>   	sbi->cp_backuped = 1;
+> +	/* repair checkpoint at CP #0 position */
+> +	sbi->cur_cp = 1;
+>   
+>   	MSG(0, "Info: Duplicate valid checkpoint to mirror position "
+>   		"%llu -> %llu\n", src, dst);
+> @@ -3098,9 +3100,6 @@ void write_checkpoints(struct f2fs_sb_info *sbi)
+>   {
+>   	/* copy valid checkpoint to its mirror position */
+>   	duplicate_checkpoint(sbi);
+> -
+> -	/* repair checkpoint at CP #0 position */
+> -	sbi->cur_cp = 1;
+>   	write_checkpoint(sbi);
+>   }
+>   
+> 
 
 
 _______________________________________________
