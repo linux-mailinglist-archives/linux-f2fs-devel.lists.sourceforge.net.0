@@ -2,82 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95BA743D7C8
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Oct 2021 01:55:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE33043D800
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Oct 2021 02:19:41 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mfslm-0006t1-GG; Wed, 27 Oct 2021 23:55:45 +0000
+	id 1mft8u-00083L-0v; Thu, 28 Oct 2021 00:19:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <daeho43@gmail.com>) id 1mfsll-0006sb-2N
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 23:55:43 +0000
+ (envelope-from <daeho43@gmail.com>) id 1mft8t-00083F-G2
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 00:19:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vg6E5OmGYHn5+IyE3WrLoYyvAdoqCM0a4q0JJegvWrM=; b=VcnkHa/ppB+Kyii5OWkAE/cido
- PAFMs+MwdfGehsL73IRh7/5Nxk9KWUJss1RCgKxkywzWKT4aJkySDberr5UemBCZcOuWf/O+HaB2o
- KfgSJr4U/QEja0IoQYGdsG3ORlXtVsLksERTDvWmOcpflg47tVbBmNIC7Ubee7K9+IHk=;
+ bh=yk1HXF7J33uzPhunZD36y8oU6oQ1XrEctAld/JR4uvY=; b=ccgf+d3U8OuLpuwh9QJ6bmyzQD
+ Xe6AGaGJrBFPZo5NtysobPgY1gRgOfjR5NGRmrlc5bDoY1PLr1q92f8aZV9bWR7uicUyiaqOtwzY1
+ vhHMcmSqTSdSFAAm90qB4ruLcQzVTdXBVajCH9JHIb8q39/JKGZE0nEvZSnv/yskiOX0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=vg6E5OmGYHn5+IyE3WrLoYyvAdoqCM0a4q0JJegvWrM=; b=h
- 2L/rfnHudS2nVJnM2AFTVzqgyswNe/XU/vkd2KKmSHyYurDkWUtpfrtymx9Y4zUQJ5aS2VuRHzgEH
- 3Z0Qyp/ygtRQmvpQCa16LK0tmD+5+SsWFYbV8s89sgrLb2X1bH83ZhIugBbf3QpByylcHfTqS15tP
- EwhAoep8SfsKBlEg=;
-Received: from mail-oi1-f170.google.com ([209.85.167.170])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=yk1HXF7J33uzPhunZD36y8oU6oQ1XrEctAld/JR4uvY=; b=d1SU/b6hR6dXGCl80ftS2QCz15
+ PvI/FpU1Q8Oa6NWcc5GgFeabbK7NNlbvDxnZH1N+IAonRjuBAKtoalgzC59Gsm+tO2t9ZC1HI9kHB
+ /yhrggRVVJQl71NT6McG4EUANyyOp4s1wbtlcZcbyFnqrnxBEt5FeoLAE3OAvik+n2PU=;
+Received: from mail-il1-f177.google.com ([209.85.166.177])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1mfsld-002Lx1-VQ
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 23:55:43 +0000
-Received: by mail-oi1-f170.google.com with SMTP id x8so1521395oix.2
+ id 1mft8m-0002Tc-G3
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 00:19:38 +0000
+Received: by mail-il1-f177.google.com with SMTP id f10so370649ilu.5
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 27 Oct 2021 16:55:37 -0700 (PDT)
+ Wed, 27 Oct 2021 17:19:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=vg6E5OmGYHn5+IyE3WrLoYyvAdoqCM0a4q0JJegvWrM=;
- b=HOcNND3NwAYdfC1iNgX23mLTtOXmPIeoXtLFFSOH8mSPtJPxBBFyvKWiHvpKsSy8We
- IwxkX99QGe6YVajOZUV4bNuLB280NVgc15b+Ai/mLg+LY1Iu+UlYz4TRoPEu+gLuf1TI
- RRbLh+nA93ctjQuxpPc9kUHRv7MkDqdFYfItF+1z1m6SBNtzKuEH6Gg8pOAlOynKCAkq
- OZJGWw5f6YoIlx9LmLTFRRDUB9DRIxnaC2ZRxuQsUrl7sHWxO0BsyjEZAPlTZw4tjhnk
- emvD7ZyM0HQgqSngwBM2to43ZkPGBfcP3rp3KS8Xe5DgqCnMh8RszzBDnohYhPgLAGnZ
- HXpg==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=yk1HXF7J33uzPhunZD36y8oU6oQ1XrEctAld/JR4uvY=;
+ b=L12aulqnozTFkk9ipyX7hwKm+OwTRe6uvWDur/VrVtQeo3/Z7xFMEos+c7J5k9+b5G
+ q4c7DayuFhReg+dHITmNzUOODsfT9DOgsbgaCah46bmrjOEu97TI8NVJ9+dOKpFgRXt+
+ KndX11kL+2qSwW1WT2pT3zkgB8f0XWW3Hk/tZ8WGQLAnFys1L2QyVVELLGXmKkCM4i3C
+ iKxum/blEvABIlFnkBFkwdwvqjuMgf0MWnhdCHilg3EKAQlvCqowp34nLyHpUsr5D8tf
+ DgFxXGndE7vzJC5WmijYCxBKHA6HaTnO1QxTZ5eAfzf/ILxkuLYspXfrZa+RilDWA+tw
+ lbAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=vg6E5OmGYHn5+IyE3WrLoYyvAdoqCM0a4q0JJegvWrM=;
- b=6ISutl3Gqc93jnujLbsyM7wc2pxwDPgeXsKBHQrxbuNjHlxOSi4dCzoWeoVAC9az6T
- O7vAleHyWd99k7g6AonvdI0HVQ6kvXtmbXl9Zr1x7ETaOly4QaMu3z3cvctkT0l4jJVY
- ycGnXqmWq63MoJhJeL4te0L6KVILETidLhBXmRK0Y8MdgrjhNS5TE5x3G5lT8lg8SwiP
- kIj6M/5eMF2gtoafCTm7acxuPix2VzRTxVPZ1KjykU21yk5iifY6pgqWqFr+wrvMN+Bo
- 7CsIH94VOzc4pNnmta4vx0ep0ciMfbOGYhPKcWfjrQ6eSsbWWOjOrFpq002+lMjZoM9p
- KSGA==
-X-Gm-Message-State: AOAM532CThNbD1KTz/TnNbFD7N+VPFLcbwSTLYl8WtkpRO04/Cch7Gt0
- M8pQk2e2+57FjgXb29jYW/fWZWgHMlw=
-X-Google-Smtp-Source: ABdhPJwru7fnm40/ZeI7chy9uRFBqMQzp9ueR9qQPxssv9pW8hb9WOS0dxvezOR572DrXZFOdM6cgA==
-X-Received: by 2002:a17:90a:ae12:: with SMTP id
- t18mr9162564pjq.137.1635378375954; 
- Wed, 27 Oct 2021 16:46:15 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=yk1HXF7J33uzPhunZD36y8oU6oQ1XrEctAld/JR4uvY=;
+ b=KUzoRY1bCrog4qko2uQsO1+4JJ270c5Wy1kKBPNcFvDs+bppMQD2bP8L+rmovmfnp9
+ kMwFc/I/3+yc4bBzJidYNwANqTuPbGhlpf8QNUS1bUP+8GoHr+8Ek5cYd5+Bfa2g0K+v
+ sL3M50lBC7+P1/nH+JEuevl7U6uPggD0f1lCjNlh65HYoFWY6sgSnB03TmM4ayuLSkB/
+ VjBEOclJ1OfE0323Jrv9B+vbdzTzxGty5/h6ThjLdbPm0nAW7pk+aDEyjPaRr/ehCXuM
+ O0449Ir/BddSi6tB8uFs1LBjIw134nC3L0H7dZBGMlxRsSC3vpw6XA+/ecv/ZIq5XSMz
+ SD1A==
+X-Gm-Message-State: AOAM53021oF7E/Rv16TnAhFB++KyBdh3AZGXpRm9ltpJ3BHWpG/hN0B7
+ WUiEaO9q4T7jfjHVNa2SQUQeTEJxINM=
+X-Google-Smtp-Source: ABdhPJwO9EVBH9A8169jDk3/VM8L2G+Q9Dg7Zaa5k+YFrZrHIGy5hmCxHJEyAmreZosm+TsEa3NLMA==
+X-Received: by 2002:a63:7f0f:: with SMTP id a15mr644221pgd.9.1635378378755;
+ Wed, 27 Oct 2021 16:46:18 -0700 (PDT)
 Received: from daehojeong-desktop.mtv.corp.google.com
  ([2620:15c:211:201:b75c:b351:dcb7:11d8])
- by smtp.gmail.com with ESMTPSA id b9sm1048168pfv.158.2021.10.27.16.46.15
+ by smtp.gmail.com with ESMTPSA id b9sm1048168pfv.158.2021.10.27.16.46.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 16:46:15 -0700 (PDT)
+ Wed, 27 Oct 2021 16:46:18 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  kernel-team@android.com
-Date: Wed, 27 Oct 2021 16:46:10 -0700
-Message-Id: <20211027234611.1958146-1-daeho43@gmail.com>
+Date: Wed, 27 Oct 2021 16:46:11 -0700
+Message-Id: <20211027234611.1958146-2-daeho43@gmail.com>
 X-Mailer: git-send-email 2.33.0.1079.g6e70778dc9-goog
+In-Reply-To: <20211027234611.1958146-1-daeho43@gmail.com>
+References: <20211027234611.1958146-1-daeho43@gmail.com>
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
@@ -86,12 +87,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Daeho Jeong Even though fsck fixed quota issues, fsck
- returns failure status and makes the user code misunderstand like errors
- are still there. Signed-off-by: Daeho Jeong --- fsck/fsck.c | 6 ++++--
- include/f2fs_fs.h
- | 1 + 2 files changed, 5 insertions(+), 2 deletions(-) 
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview: From: Daeho Jeong When we check other corrupted bugs in fsck,
+ we use bug_on. So, if major bugs are already detected in fsck_verify(), fsck
+ will false alarm that there are other bugs, even if there are no other bugs.
+ So [...] Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
@@ -100,19 +99,20 @@ X-Spam-Report: Spam detection software,
  provider [daeho43[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.177 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.177 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.170 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.167.170 listed in list.dnswl.org]
-X-Headers-End: 1mfsld-002Lx1-VQ
-Subject: [f2fs-dev] [PATCH 1/2] f2fs-tools: remove false failure alarm when
- fixing quota
+ valid
+X-Headers-End: 1mft8m-0002Tc-G3
+Subject: [f2fs-dev] [PATCH 2/2] f2fs-tools: separate other bugs in
+ fsck_verify
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,58 +131,138 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Daeho Jeong <daehojeong@google.com>
 
-Even though fsck fixed quota issues, fsck returns failure status and
-makes the user code misunderstand like errors are still there.
+When we check other corrupted bugs in fsck, we use bug_on. So, if major
+bugs are already detected in fsck_verify(), fsck will false alarm that
+there are other bugs, even if there are no other bugs. So, let's fix this.
 
 Signed-off-by: Daeho Jeong <daehojeong@google.com>
 ---
- fsck/fsck.c       | 6 ++++--
- include/f2fs_fs.h | 1 +
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ fsck/fsck.c | 35 ++++++++++++++++-------------------
+ 1 file changed, 16 insertions(+), 19 deletions(-)
 
 diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 110c1ec..bc11e07 100644
+index bc11e07..0619519 100644
 --- a/fsck/fsck.c
 +++ b/fsck/fsck.c
-@@ -2025,7 +2025,7 @@ int fsck_chk_quota_files(struct f2fs_sb_info *sbi)
- 			f2fs_filesize_update(sbi, ino, 0);
- 			ret = quota_write_inode(sbi, qtype);
- 			if (!ret) {
--				c.bug_on = 1;
-+				c.quota_fixed = true;
- 				DBG(1, "OK\n");
- 			} else {
- 				ASSERT_MSG("Unable to write quota file");
-@@ -2197,6 +2197,8 @@ void fsck_init(struct f2fs_sb_info *sbi)
- 	ASSERT(fsck->dentry != NULL);
- 	memcpy(fsck->dentry->name, "/", 1);
- 	fsck->dentry_end = fsck->dentry;
+@@ -3162,6 +3162,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 	u32 nr_unref_nid = 0;
+ 	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
+ 	struct hard_link_node *node = NULL;
++	bool verify_failed = false;
+ 
+ 	if (c.show_file_map)
+ 		return 0;
+@@ -3175,7 +3176,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		} else {
+ 			printf(" [Fail] [0x%x]\n",
+ 			       fsck->chk.wp_inconsistent_zones);
+-			c.bug_on = 1;
++			verify_failed = true;
+ 		}
+ 
+ 		if (fsck->chk.wp_fixed && c.fix_on)
+@@ -3221,8 +3222,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		printf(" [Ok..] [0x%x]\n", nr_unref_nid);
+ 	} else {
+ 		printf(" [Fail] [0x%x]\n", nr_unref_nid);
+-		ret = EXIT_ERR_CODE;
+-		c.bug_on = 1;
++		verify_failed = true;
+ 	}
+ 
+ 	printf("[FSCK] SIT valid block bitmap checking                ");
+@@ -3231,8 +3231,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		printf("[Ok..]\n");
+ 	} else {
+ 		printf("[Fail]\n");
+-		ret = EXIT_ERR_CODE;
+-		c.bug_on = 1;
++		verify_failed = true;
+ 	}
+ 
+ 	printf("[FSCK] Hard link checking for regular file           ");
+@@ -3240,8 +3239,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		printf(" [Ok..] [0x%x]\n", fsck->chk.multi_hard_link_files);
+ 	} else {
+ 		printf(" [Fail] [0x%x]\n", fsck->chk.multi_hard_link_files);
+-		ret = EXIT_ERR_CODE;
+-		c.bug_on = 1;
++		verify_failed = true;
+ 	}
+ 
+ 	printf("[FSCK] valid_block_count matching with CP            ");
+@@ -3249,8 +3247,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		printf(" [Ok..] [0x%x]\n", (u32)fsck->chk.valid_blk_cnt);
+ 	} else {
+ 		printf(" [Fail] [0x%x]\n", (u32)fsck->chk.valid_blk_cnt);
+-		ret = EXIT_ERR_CODE;
+-		c.bug_on = 1;
++		verify_failed = true;
+ 	}
+ 
+ 	printf("[FSCK] valid_node_count matching with CP (de lookup) ");
+@@ -3258,8 +3255,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		printf(" [Ok..] [0x%x]\n", fsck->chk.valid_node_cnt);
+ 	} else {
+ 		printf(" [Fail] [0x%x]\n", fsck->chk.valid_node_cnt);
+-		ret = EXIT_ERR_CODE;
+-		c.bug_on = 1;
++		verify_failed = true;
+ 	}
+ 
+ 	printf("[FSCK] valid_node_count matching with CP (nat lookup)");
+@@ -3267,8 +3263,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		printf(" [Ok..] [0x%x]\n", fsck->chk.valid_nat_entry_cnt);
+ 	} else {
+ 		printf(" [Fail] [0x%x]\n", fsck->chk.valid_nat_entry_cnt);
+-		ret = EXIT_ERR_CODE;
+-		c.bug_on = 1;
++		verify_failed = true;
+ 	}
+ 
+ 	printf("[FSCK] valid_inode_count matched with CP             ");
+@@ -3276,8 +3271,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		printf(" [Ok..] [0x%x]\n", fsck->chk.valid_inode_cnt);
+ 	} else {
+ 		printf(" [Fail] [0x%x]\n", fsck->chk.valid_inode_cnt);
+-		ret = EXIT_ERR_CODE;
+-		c.bug_on = 1;
++		verify_failed = true;
+ 	}
+ 
+ 	printf("[FSCK] free segment_count matched with CP            ");
+@@ -3286,8 +3280,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		printf(" [Ok..] [0x%x]\n", fsck->chk.sit_free_segs);
+ 	} else {
+ 		printf(" [Fail] [0x%x]\n", fsck->chk.sit_free_segs);
+-		ret = EXIT_ERR_CODE;
+-		c.bug_on = 1;
++		verify_failed = true;
+ 	}
+ 
+ 	printf("[FSCK] next block offset is free                     ");
+@@ -3295,8 +3288,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		printf(" [Ok..]\n");
+ 	} else {
+ 		printf(" [Fail]\n");
+-		ret = EXIT_ERR_CODE;
+-		c.bug_on = 1;
++		verify_failed = true;
+ 	}
+ 
+ 	printf("[FSCK] fixing SIT types\n");
+@@ -3311,6 +3303,11 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 		ret = EXIT_ERR_CODE;
+ 	}
+ 
++	if (verify_failed) {
++		ret = EXIT_ERR_CODE;
++		c.bug_on = 1;
++	}
 +
-+	c.quota_fixed = false;
- }
- 
- static void fix_hard_links(struct f2fs_sb_info *sbi)
-@@ -3330,7 +3332,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 	if (force || (c.fix_on && f2fs_dev_is_writable())) {
- 		struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
- 
--		if (force || c.bug_on || c.bug_nat_bits) {
-+		if (force || c.bug_on || c.bug_nat_bits || c.quota_fixed) {
- 			/* flush nats to write_nit_bits below */
- 			flush_journal_entries(sbi);
- 			fix_hard_links(sbi);
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 69260a6..9f918ba 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -491,6 +491,7 @@ struct f2fs_configuration {
- 	int defset;
- 	int bug_on;
- 	int bug_nat_bits;
-+	bool quota_fixed;
- 	int alloc_failed;
- 	int auto_fix;
- 	int layout;
+ #ifndef WITH_ANDROID
+ 	if (nr_unref_nid && !c.ro) {
+ 		char ans[255] = {0};
 -- 
 2.33.0.1079.g6e70778dc9-goog
 
