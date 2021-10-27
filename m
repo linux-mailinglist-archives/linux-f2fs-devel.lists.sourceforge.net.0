@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDEE243C044
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Oct 2021 04:50:37 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1996943C056
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Oct 2021 04:53:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mfZ1O-0003P1-RD; Wed, 27 Oct 2021 02:50:34 +0000
+	id 1mfZ4K-0006cM-Uw; Wed, 27 Oct 2021 02:53:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- (envelope-from <chao@kernel.org>) id 1mfZ1O-0003Oq-AS
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 02:50:34 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <chao@kernel.org>) id 1mfZ4J-0006c6-0N
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 02:53:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
@@ -33,10 +33,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  f9DThEQGclHR9Nd3hoRNjkxWecNLikXlkdRz5KtMKccI+cGuAu/O2GByounuVLyrglRKTVtwm+F6K
  73QRpOgpzHNV4H7spLBoOXxMG/hHuKOqiL+zjb64/r1WY5gT4RADQM9jLWYgRrGCZE/U=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mfYvV-000Tme-60
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 02:50:34 +0000
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
+ id 1mfZ3o-000UWm-Qw
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 02:53:34 +0000
 Received: by mail.kernel.org (Postfix) with ESMTPSA id 0C02761002;
  Wed, 27 Oct 2021 02:44:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
@@ -59,7 +58,7 @@ To: Fengnan Chang <changfengnan@vivo.com>, jaegeuk@kernel.org
 References: <20211021022141.246051-1-changfengnan@vivo.com>
 From: Chao Yu <chao@kernel.org>
 In-Reply-To: <20211021022141.246051-1-changfengnan@vivo.com>
-X-Headers-End: 1mfYvV-000Tme-60
+X-Headers-End: 1mfZ3o-000UWm-Qw
 Subject: Re: [f2fs-dev] [PATCH v6 1/2] f2fs: separate buffer and direct io
  in block allocation statistics
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
