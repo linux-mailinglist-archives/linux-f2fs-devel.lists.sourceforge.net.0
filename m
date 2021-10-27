@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD16D43C1D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Oct 2021 06:44:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4063443C13C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Oct 2021 06:19:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mfanp-0004Hg-NG; Wed, 27 Oct 2021 04:44:41 +0000
+	id 1mfaOx-0001j9-I8; Wed, 27 Oct 2021 04:18:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <hj514.kim@samsung.com>) id 1mfann-0004HO-UE
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 04:44:40 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <hj514.kim@samsung.com>) id 1mfaOe-0001hQ-Kf
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 04:18:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
  MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
@@ -35,8 +35,8 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
 Received: from mailout2.samsung.com ([203.254.224.25])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mfajk-000hY1-Mr
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 04:44:39 +0000
+ id 1mfaMM-000drP-L6
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 04:18:39 +0000
 Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
  by mailout2.samsung.com (KnoxPortal) with ESMTP id
  20211027041608epoutp025698ac17e48c7b6aa38acd678ba19e1e~xyB2Er8G_1408914089epoutp02G
@@ -122,7 +122,7 @@ DLP-Filter: Pass
 X-CFilter-Loop: Reflected
 X-CMS-RootMailID: 20211027041606epcas1p237acb5e258066f2298f3fee162baffe4
 References: <CGME20211027041606epcas1p237acb5e258066f2298f3fee162baffe4@epcas1p2.samsung.com>
-X-Headers-End: 1mfajk-000hY1-Mr
+X-Headers-End: 1mfaMM-000drP-L6
 Subject: [f2fs-dev] [PATCH v2] f2fs: compress: disallow disabling compress
  on non-empty compressed file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
