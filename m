@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48F9743C181
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Oct 2021 06:32:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36BE143C1CB
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Oct 2021 06:42:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.92.3)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mfabr-0002Vj-EV; Wed, 27 Oct 2021 04:32:18 +0000
+	id 1mfam4-0007sO-5y; Wed, 27 Oct 2021 04:42:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mfabj-0002VK-S3
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 04:32:10 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ (envelope-from <chao@kernel.org>) id 1mfalr-0007rv-Eu
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 04:42:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
@@ -35,8 +35,8 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mfaVu-000gCN-1z
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 04:32:10 +0000
+ id 1mfalN-000hnf-Bs
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 27 Oct 2021 04:42:39 +0000
 Received: by mail.kernel.org (Postfix) with ESMTPSA id 8D4636109E;
  Wed, 27 Oct 2021 04:26:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
@@ -60,7 +60,7 @@ References: <CGME20211027041606epcas1p237acb5e258066f2298f3fee162baffe4@epcas1p2
  <20211027041600.115847-1-hj514.kim@samsung.com>
 From: Chao Yu <chao@kernel.org>
 In-Reply-To: <20211027041600.115847-1-hj514.kim@samsung.com>
-X-Headers-End: 1mfaVu-000gCN-1z
+X-Headers-End: 1mfalN-000hnf-Bs
 Subject: Re: [f2fs-dev] [PATCH v2] f2fs: compress: disallow disabling
  compress on non-empty compressed file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
