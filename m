@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 829BB43D936
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Oct 2021 04:10:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id B105143D929
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Oct 2021 04:07:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mfurz-0006fV-Ik; Thu, 28 Oct 2021 02:10:18 +0000
+	id 1mfuoy-0002nM-N9; Thu, 28 Oct 2021 02:07:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <krisman@collabora.com>) id 1mfury-0006fK-Hh
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 02:10:17 +0000
+ (envelope-from <krisman@collabora.com>) id 1mfuox-0002nG-Qd
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 02:07:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
  Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
@@ -33,9 +33,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  mdAMnUs09xKyixPWhCJ1LE8IzVeQHlwH/RpAZpunQqnz8qHGnvaBg/TcLs6U8wg7dWq94in/eEdWv
  J4pr4j65cduAf+qzmRjUGeldGRg9RPBRHzmbtuJkNYMp09GjPP9Bs+lNgyouccW9JbX8=;
 Received: from bhuna.collabora.co.uk ([46.235.227.227])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
- id 1mfurq-002Usb-Iq
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 02:10:16 +0000
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1mfuj7-0002T7-T9
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 02:07:10 +0000
 Received: from localhost (unknown [IPv6:2804:14c:124:8a08::1002])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: krisman)
@@ -55,23 +56,7 @@ In-Reply-To: <20211027090208.70e88aab@canb.auug.org.au> (Stephen Rothwell's
 Message-ID: <877ddxdi20.fsf_-_@collabora.com>
 User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
 MIME-Version: 1.0
-X-Spam-Score: -0.0 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  Stephen Rothwell <sfr@canb.auug.org.au> writes: > You just
- need to send me a git URL for your tree/branch (not a cgit or > gitweb URL,
- please), plus some idea of what the tree include and how it > is sent to
- Linus (directly or via another tree). Th [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1mfurq-002Usb-Iq
+X-Headers-End: 1mfuj7-0002T7-T9
 Subject: [f2fs-dev] Track unicode tree in linux-next (was Re: [PATCH 10/11]
  unicode: Add utf8-data module)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
