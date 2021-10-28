@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFB4343E1BC
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Oct 2021 15:12:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6541143E19E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Oct 2021 15:07:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mg5Cb-0001H3-G0; Thu, 28 Oct 2021 13:12:16 +0000
+	id 1mg58C-0000gt-Am; Thu, 28 Oct 2021 13:07:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mg5Ca-0001Gr-Kj
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 13:12:15 +0000
+ (envelope-from <chao@kernel.org>) id 1mg57r-0000gc-Gb
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 13:07:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
@@ -33,10 +33,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ekMCrls9W5uZxvc+bKvlkFYqNwsw5sCWJA+wIcYNTbM1uOBoUnMT2+e7PPng8JzhnrPrO7XyCRai8
  RX4lIyoQa++DIbjI=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mg5CT-003cMI-LY
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 13:12:15 +0000
+ id 1mg53u-0000nW-0G
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 13:07:23 +0000
 Received: by mail.kernel.org (Postfix) with ESMTPSA id 9978160F0F;
  Thu, 28 Oct 2021 13:03:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
@@ -55,32 +55,7 @@ Date: Thu, 28 Oct 2021 21:03:05 +0800
 Message-Id: <20211028130305.5333-1-chao@kernel.org>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  This patch adds a new function f2fs_dquot_initialize() to
- wrap dquot_initialize(),
- and it supports to inject fault into f2fs_dquot_initialize()
- to simulate inner failure occurs in dquot_initialize(). 
- Content analysis details:   (-5.2 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mg5CT-003cMI-LY
+X-Headers-End: 1mg53u-0000nW-0G
 Subject: [f2fs-dev] [PATCH] f2fs: support fault injection for
  dquot_initialize()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
