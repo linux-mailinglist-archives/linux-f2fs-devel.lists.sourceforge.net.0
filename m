@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B105143D929
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Oct 2021 04:07:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C00943D938
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Oct 2021 04:11:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mfuoy-0002nM-N9; Thu, 28 Oct 2021 02:07:11 +0000
+	id 1mfut4-0006p4-Rt; Thu, 28 Oct 2021 02:11:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <krisman@collabora.com>) id 1mfuox-0002nG-Qd
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 02:07:10 +0000
+ (envelope-from <krisman@collabora.com>) id 1mfut3-0006oo-93
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 02:11:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
  Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
@@ -33,10 +33,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  mdAMnUs09xKyixPWhCJ1LE8IzVeQHlwH/RpAZpunQqnz8qHGnvaBg/TcLs6U8wg7dWq94in/eEdWv
  J4pr4j65cduAf+qzmRjUGeldGRg9RPBRHzmbtuJkNYMp09GjPP9Bs+lNgyouccW9JbX8=;
 Received: from bhuna.collabora.co.uk ([46.235.227.227])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mfuj7-0002T7-T9
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 02:07:10 +0000
+ id 1mfuqw-002UqP-EA
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 02:11:23 +0000
 Received: from localhost (unknown [IPv6:2804:14c:124:8a08::1002])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: krisman)
@@ -56,7 +56,7 @@ In-Reply-To: <20211027090208.70e88aab@canb.auug.org.au> (Stephen Rothwell's
 Message-ID: <877ddxdi20.fsf_-_@collabora.com>
 User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
 MIME-Version: 1.0
-X-Headers-End: 1mfuj7-0002T7-T9
+X-Headers-End: 1mfuqw-002UqP-EA
 Subject: [f2fs-dev] Track unicode tree in linux-next (was Re: [PATCH 10/11]
  unicode: Add utf8-data module)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
