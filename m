@@ -2,65 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7C2A43F50E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Oct 2021 04:47:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F280440167
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Oct 2021 19:43:52 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mgHvE-0001BA-Ss; Fri, 29 Oct 2021 02:47:11 +0000
+	id 1mgVus-0000xf-1P; Fri, 29 Oct 2021 17:43:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mgHvD-0001Az-Ts
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 02:47:10 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1mgVuq-0000xY-FV
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 17:43:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- References:Cc:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PtXOk9JFB0N6iJwX5Ys8MNlCBawQZXqBVsqWfjXNFAU=; b=IF/7swGPhwTt2cGnIj/e9H+iU4
- Di4wqiQ2wXbOS9/5FYbM8mYgQXi+dGSX/xUWmkmUi2fZuG5OwxL2KI24CHLvNl1NwT4s+MRpszIcG
- Rw9UlHGEjGSuxzbgLJtcvYaWKr+6k+A9P3DwmKkAAOibtYWvCwE1pJeQsvqk2YCmbpF8=;
+ bh=pj4a1+I88NFqPE/JyEQR+FLPbZuzCd7+8bOb8HPS5p0=; b=iMmi8RZ8ED94cx7bWGXbTvn0mT
+ wwPyH6+wd/19AhXxRcOI4R3Ss+8EdpQ1LbQmtjmCVi9V83+7zWCXI/0JiVjVXQZYiqgld2KpWSD4R
+ aE+ppgsC1KQcI+Mi8J/ui5qvrezw4wTdsEDMTEkNk6DAq4YgD4hfm3Ib2x/Od6PKH0tg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:Cc:To:From:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PtXOk9JFB0N6iJwX5Ys8MNlCBawQZXqBVsqWfjXNFAU=; b=lxbXQ+ZXJhJtPZ4KR8PlomRwD8
- WKOm2NrU3UE0X+pxfALVGgpxlN+temefrWYh+cC1kJJu/5GHeSR29xUuvHpvQj9RKYqCCjV0Nw+vg
- SXwsDTUghH9yheUr/nagcPbqpgaPzl3OMQ1kNfrplq7nSc0Q95i/S3Kp813AjpGAH7LE=;
+ bh=pj4a1+I88NFqPE/JyEQR+FLPbZuzCd7+8bOb8HPS5p0=; b=erLM/9Klw8t7xlLQe5Y5uk2Vm1
+ GOs6Q7BSqoEoAEtoVuhYhbQ31wepExYKC1P1XbH767xWaCARr1lEeCuWE1sWA8eEX7tYmk3trs1z7
+ RRBWtoUp8IhiK0raMrzTf71/MpYN30a7aPNk76frWdBLqgqHR/gMIIwdlAeMF3Oaj4Vk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
- id 1mgHrE-004hqN-T4
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 02:47:10 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B34B9610E8;
- Fri, 29 Oct 2021 02:34:16 +0000 (UTC)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1mgVuj-0005p6-V4
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 17:43:44 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 92B7A61040;
+ Fri, 29 Oct 2021 17:43:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1635474857;
- bh=k+q5cwoUghGqcxAWgg2DvpUzWPsMNg2BWCU7/8wFZa4=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=Wjlt4z8uedxdmPbxVmntoWKxUtK1PCMg6UhhRS2GjRL5BPldvNWCkCuNNk5c6QY7t
- EAHlcGlVj0LmFtRsg+KtLAOxFOoddwdGDKnvf7mkjtsZEP4KbrPfAjXJGuigL2kxdj
- zREKIPRrchp4xGG1eEl+4qm/C6pwfIIQ0MwpuwXXGOokqeH/MOlAflGSzhudm8VyAX
- NA6qFggxKuibIyeNOOTiZa6hs7gP6akDvleMi+WEYtuCDM2+/AAPHZvjsj93QrpWe2
- fy0AnFYAfWKw8s0WOJsV+uUjreJoUXREWnptT7NLxKFoRPDLjPMcX/qWw5xYi+9Teb
- Aly8eiIr9mzXg==
-Message-ID: <dec765de-407b-07c3-75f6-ec7f71c618b7@kernel.org>
-Date: Fri, 29 Oct 2021 10:34:14 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.0.3
-Content-Language: en-US
-From: Chao Yu <chao@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
+ s=k20201202; t=1635529407;
+ bh=rsaoqoFMJRkFW8HbI1/g5SAhlNrxOJ2ODlLw2rtjQVw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=TWI+jjY0ML1p9Nw0Dtl1KOyq5HJqk87BImQU70Cl4KdrO+WFa4/1eXJxAHGo0I3B1
+ P/NvnMbfHSuOP2R46KsW2PdDpFH+Ejzgy2WcXm8VdW+MoO8hklvBq403DcDAKYxGDV
+ mHxsKA5ZC4yWlQanMq8jCrM8qWeXEku+Kg22esQqwvs1SMJSMjIlaZ5R1n656tYy3b
+ Lx5l4t9du+GMlRyUCeJsgwxECQ88Oq1feTNOL4xZBJ0gQ0YwGpafGfCWUZB7L8YPix
+ ksi7CCHYMIS34CwUiqSHNy3RC+DlXPwoPjbQWjjzyX44QJPRpzSWY2aJhdtHO45LE4
+ YcDzGXpMmMTQA==
+Date: Fri, 29 Oct 2021 10:43:26 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <YXwyvllUOm6jLiF5@google.com>
 References: <20210928151911.11189-1-chao@kernel.org>
  <YVNoHudG5c65X85G@google.com>
  <65f6c366-9e5b-fe7f-7c38-061996d1882b@kernel.org>
-In-Reply-To: <65f6c366-9e5b-fe7f-7c38-061996d1882b@kernel.org>
-X-Headers-End: 1mgHrE-004hqN-T4
+ <dec765de-407b-07c3-75f6-ec7f71c618b7@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <dec765de-407b-07c3-75f6-ec7f71c618b7@kernel.org>
+X-Spam-Score: -5.2 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview:  On 10/29, Chao Yu wrote: > Ping, > > On 2021/9/29 8:05, Chao
+ Yu wrote: > > On 2021/9/29 3:08, Jaegeuk Kim wrote: > > > On 09/28, Chao
+ Yu wrote: > > > > In f2fs_file_write_iter(), let's use f2fs_overwr [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [198.145.29.99 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1mgVuj-0005p6-V4
 Subject: Re: [f2fs-dev] [PATCH] f2fs: skip f2fs_preallocate_blocks() for
  overwrite case
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -75,51 +100,96 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-UGluZywKCk9uIDIwMjEvOS8yOSA4OjA1LCBDaGFvIFl1IHdyb3RlOgo+IE9uIDIwMjEvOS8yOSAz
-OjA4LCBKYWVnZXVrIEtpbSB3cm90ZToKPj4gT24gMDkvMjgsIENoYW8gWXUgd3JvdGU6Cj4+PiBJ
-biBmMmZzX2ZpbGVfd3JpdGVfaXRlcigpLCBsZXQncyB1c2UgZjJmc19vdmVyd3JpdGVfaW8oKSB0
-bwo+Pj4gY2hlY2sgd2hldGhlcmUgaXQgaXMgb3ZlcndyaXRlIGNhc2UsIGZvciBzdWNoIGNhc2Us
-IHdlIGNhbiBza2lwCj4+PiBmMmZzX3ByZWFsbG9jYXRlX2Jsb2NrcygpIGluIG9yZGVyIHRvIGF2
-b2lkIGYyZnNfZG9fbWFwX2xvY2soKSwKPj4+IHdoaWNoIG1heSBiZSBibG9ja2VkIGJ5IGNoZWNr
-cG9pbnQoKSBwb3RlbnRpYWxseS4KPj4+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBDaGFvIFl1IDxjaGFv
-QGtlcm5lbC5vcmc+Cj4+PiAtLS0KPj4+IMKgIGZzL2YyZnMvZmlsZS5jIHwgNCArKysrCj4+PiDC
-oCAxIGZpbGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspCj4+Pgo+Pj4gZGlmZiAtLWdpdCBhL2Zz
-L2YyZnMvZmlsZS5jIGIvZnMvZjJmcy9maWxlLmMKPj4+IGluZGV4IDEzZGVhZTAzZGYwNi4uNTFm
-ZWNiMmY0ZGI1IDEwMDY0NAo+Pj4gLS0tIGEvZnMvZjJmcy9maWxlLmMKPj4+ICsrKyBiL2ZzL2Yy
-ZnMvZmlsZS5jCj4+PiBAQCAtNDMyMSw2ICs0MzIxLDEwIEBAIHN0YXRpYyBzc2l6ZV90IGYyZnNf
-ZmlsZV93cml0ZV9pdGVyKHN0cnVjdCBraW9jYiAqaW9jYiwgc3RydWN0IGlvdl9pdGVyICpmcm9t
-KQo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIHByZWFsbG9jYXRlZCA9IHRydWU7Cj4+PiDCoMKgwqDC
-oMKgwqDCoMKgwqAgdGFyZ2V0X3NpemUgPSBpb2NiLT5raV9wb3MgKyBpb3ZfaXRlcl9jb3VudChm
-cm9tKTsKPj4+ICvCoMKgwqDCoMKgwqDCoCBpZiAoZjJmc19vdmVyd3JpdGVfaW8oaW5vZGUsIGlv
-Y2ItPmtpX3BvcywKPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIGlvdl9pdGVyX2NvdW50KGZyb20pKSkKPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IGdvdG8gd3JpdGU7Cj4+Cj4+IFRoaXMgY2FsbHMgZjJmc19tYXBfYmxvY2tzKCkgd2hpY2ggY2Fu
-IGJlIGR1cGxpY2F0ZSwgaWYgaXQncyBub3QgdGhlIG92ZXJ3aXJ0ZQo+PiBjYXNlLiBEbyB3ZSBo
-YXZlIG90aGVyIGJlbmVmaXQ/Cj4gCj4gZjJmc19vdmVyd3JpdGVfaW8oKSB3aWxsIGJyZWFrIGZv
-ciBhcHBlbmQgd3JpdGUgY2FzZSB3LyBiZWxvdyBjaGVjazoKPiAKPiAgwqDCoMKgwqBpZiAocG9z
-ICsgbGVuID4gaV9zaXplX3JlYWQoaW5vZGUpKQo+ICDCoMKgwqDCoMKgwqDCoCByZXR1cm4gZmFs
-c2U7Cj4gCj4gSSBndWVzcyB3ZSBtYXkgb25seSBzdWZmZXIgZG91YmxlIGYyZnNfbWFwX2Jsb2Nr
-cygpIGZvciB3cml0ZSBob2xlCj4gY2FzZSwgZS5nLiB0cnVuY2F0ZSB0byBsYXJnZSBzaXplICYg
-d3JpdGUgaW5zaWRlIHRoZSBmaWxlc2l6ZS4gRm9yCj4gdGhpcyBjYXNlLCBob3cgYWJvdXQgYWRk
-aW5nIGEgY29uZGl0aW9uIHRvIGFsbG93IGRvdWJsZSBmMmZzX21hcF9ibG9ja3MoKQo+IG9ubHkg
-aWYgd3JpdGUgc2l6ZSBpcyBzbWFsbGVyIHRoYW4gYSB0aHJlc2hvbGQ/Cj4gCj4gVGhhbmtzLAo+
-IAo+Pgo+Pj4gKwo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGVyciA9IGYyZnNfcHJlYWxsb2NhdGVf
-YmxvY2tzKGlvY2IsIGZyb20pOwo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChlcnIpIHsKPj4+
-IMKgIG91dF9lcnI6Cj4+PiAtLSAKPj4+IDIuMzIuMAo+IAo+IAo+IF9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTGludXgtZjJmcy1kZXZlbCBtYWlsaW5n
-IGxpc3QKPiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0dHBzOi8v
-YXBjMDEuc2FmZWxpbmtzLnByb3RlY3Rpb24ub3V0bG9vay5jb20vP3VybD1odHRwcyUzQSUyRiUy
-Rmxpc3RzLnNvdXJjZWZvcmdlLm5ldCUyRmxpc3RzJTJGbGlzdGluZm8lMkZsaW51eC1mMmZzLWRl
-dmVsJmFtcDtkYXRhPTA0JTdDMDElN0NjaGFvLnl1JTQwb3Bwby5jb20lN0M0MjFjMDY4MTJlYmE0
-ZjkyMmIwOTA4ZDk4MmRjZGNjNSU3Q2YxOTA1ZWIxYzM1MzQxYzU5NTE2NjJiNGE1NGI1ZWU2JTdD
-MCU3QzAlN0M2Mzc2ODQ3MDczNzQ5NDAxOTAlN0NVbmtub3duJTdDVFdGcGJHWnNiM2Q4ZXlKV0lq
-b2lNQzR3TGpBd01EQWlMQ0pRSWpvaVYybHVNeklpTENKQlRpSTZJazFoYVd3aUxDSlhWQ0k2TW4w
-JTNEJTdDMTAwMCZhbXA7c2RhdGE9dTIyZUVXREFQYUFaQ3lJU3lqVFVPdFFETER1eUt4VG5OQ0kz
-ZVN3d1dybyUzRCZhbXA7cmVzZXJ2ZWQ9MAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYy
-ZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2Uu
-bmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On 10/29, Chao Yu wrote:
+> Ping,
+> =
+
+> On 2021/9/29 8:05, Chao Yu wrote:
+> > On 2021/9/29 3:08, Jaegeuk Kim wrote:
+> > > On 09/28, Chao Yu wrote:
+> > > > In f2fs_file_write_iter(), let's use f2fs_overwrite_io() to
+> > > > check whethere it is overwrite case, for such case, we can skip
+> > > > f2fs_preallocate_blocks() in order to avoid f2fs_do_map_lock(),
+> > > > which may be blocked by checkpoint() potentially.
+> > > > =
+
+> > > > Signed-off-by: Chao Yu <chao@kernel.org>
+> > > > ---
+> > > > =A0 fs/f2fs/file.c | 4 ++++
+> > > > =A0 1 file changed, 4 insertions(+)
+> > > > =
+
+> > > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > > > index 13deae03df06..51fecb2f4db5 100644
+> > > > --- a/fs/f2fs/file.c
+> > > > +++ b/fs/f2fs/file.c
+> > > > @@ -4321,6 +4321,10 @@ static ssize_t f2fs_file_write_iter(struct k=
+iocb *iocb, struct iov_iter *from)
+> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0 preallocated =3D true;
+> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0 target_size =3D iocb->ki_pos + iov_iter=
+_count(from);
+> > > > +=A0=A0=A0=A0=A0=A0=A0 if (f2fs_overwrite_io(inode, iocb->ki_pos,
+> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0 iov_iter_count(from)))
+> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 goto write;
+> > > =
+
+> > > This calls f2fs_map_blocks() which can be duplicate, if it's not the =
+overwirte
+> > > case. Do we have other benefit?
+> > =
+
+> > f2fs_overwrite_io() will break for append write case w/ below check:
+> > =
+
+> >  =A0=A0=A0=A0if (pos + len > i_size_read(inode))
+> >  =A0=A0=A0=A0=A0=A0=A0 return false;
+> > =
+
+> > I guess we may only suffer double f2fs_map_blocks() for write hole
+> > case, e.g. truncate to large size & write inside the filesize. For
+> > this case, how about adding a condition to allow double f2fs_map_blocks=
+()
+> > only if write size is smaller than a threshold?
+
+I still don't see the benefit much to do double f2fs_map_blocks. What is the
+problem here?
+
+> > =
+
+> > Thanks,
+> > =
+
+> > > =
+
+> > > > +
+> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0 err =3D f2fs_preallocate_blocks(iocb, f=
+rom);
+> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0 if (err) {
+> > > > =A0 out_err:
+> > > > -- =
+
+> > > > 2.32.0
+> > =
+
+> > =
+
+> > _______________________________________________
+> > Linux-f2fs-devel mailing list
+> > Linux-f2fs-devel@lists.sourceforge.net
+> > https://apc01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Flis=
+ts.sourceforge.net%2Flists%2Flistinfo%2Flinux-f2fs-devel&amp;data=3D04%7C01=
+%7Cchao.yu%40oppo.com%7C421c06812eba4f922b0908d982dcdcc5%7Cf1905eb1c35341c5=
+951662b4a54b5ee6%7C0%7C0%7C637684707374940190%7CUnknown%7CTWFpbGZsb3d8eyJWI=
+joiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sd=
+ata=3Du22eEWDAPaAZCyISyjTUOtQDLDuyKxTnNCI3eSwwWro%3D&amp;reserved=3D0
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
