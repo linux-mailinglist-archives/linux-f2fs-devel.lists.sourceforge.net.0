@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D93D343F51B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Oct 2021 04:58:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7C2A43F50E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Oct 2021 04:47:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mgI5r-0000Ji-Mv; Fri, 29 Oct 2021 02:58:12 +0000
+	id 1mgHvE-0001BA-Ss; Fri, 29 Oct 2021 02:47:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mgI5q-0000Jc-Ht
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 02:58:11 +0000
+ (envelope-from <chao@kernel.org>) id 1mgHvD-0001Az-Ts
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 02:47:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  References:Cc:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
@@ -34,8 +34,8 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  SXwsDTUghH9yheUr/nagcPbqpgaPzl3OMQ1kNfrplq7nSc0Q95i/S3Kp813AjpGAH7LE=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
- id 1mgI5l-004iay-Ez
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 02:58:10 +0000
+ id 1mgHrE-004hqN-T4
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 02:47:10 +0000
 Received: by mail.kernel.org (Postfix) with ESMTPSA id B34B9610E8;
  Fri, 29 Oct 2021 02:34:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
@@ -60,32 +60,7 @@ References: <20210928151911.11189-1-chao@kernel.org>
  <YVNoHudG5c65X85G@google.com>
  <65f6c366-9e5b-fe7f-7c38-061996d1882b@kernel.org>
 In-Reply-To: <65f6c366-9e5b-fe7f-7c38-061996d1882b@kernel.org>
-X-Spam-Score: -8.0 (--------)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  Ping, On 2021/9/29 8:05, Chao Yu wrote: > On 2021/9/29 3:08, 
- Jaegeuk Kim wrote: >> On 09/28, Chao Yu wrote: >>> In f2fs_file_write_iter(), 
- let's use f2fs_overwrite_io() to >>> check whethere it is overwrite [...]
- Content analysis details:   (-8.0 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -2.8 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mgI5l-004iay-Ez
+X-Headers-End: 1mgHrE-004hqN-T4
 Subject: Re: [f2fs-dev] [PATCH] f2fs: skip f2fs_preallocate_blocks() for
  overwrite case
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
