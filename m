@@ -2,62 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6541143E19E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Oct 2021 15:07:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3ACE543F502
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Oct 2021 04:36:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mg58C-0000gt-Am; Thu, 28 Oct 2021 13:07:44 +0000
+	id 1mgHkv-0007Mo-Iw; Fri, 29 Oct 2021 02:36:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mg57r-0000gc-Gb
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 13:07:24 +0000
+ (envelope-from <chao@kernel.org>) id 1mgHku-0007Ma-4W
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 02:36:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ References:Cc:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2fP6rUNNO3NlC6oNQlxw79vVfhHjolOxvjULp2DKlNg=; b=T/nPrub6fwGX2EZFFmQvZTuhEj
- rDI+a/WQFDWsLi/81DjAVtqIiAQWr8dqjk/PZ7AIuBXIpBHKk3dwc4K6294l19ukkFQcgp//NjYLc
- AtQElgb7tMAMrNW2MYoPcAYn5uvPMvwI9atGMLFTdfsC5asGWBzGGCdMjuYfVloNfrn8=;
+ bh=PtXOk9JFB0N6iJwX5Ys8MNlCBawQZXqBVsqWfjXNFAU=; b=IF/7swGPhwTt2cGnIj/e9H+iU4
+ Di4wqiQ2wXbOS9/5FYbM8mYgQXi+dGSX/xUWmkmUi2fZuG5OwxL2KI24CHLvNl1NwT4s+MRpszIcG
+ Rw9UlHGEjGSuxzbgLJtcvYaWKr+6k+A9P3DwmKkAAOibtYWvCwE1pJeQsvqk2YCmbpF8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=2fP6rUNNO3NlC6oNQlxw79vVfhHjolOxvjULp2DKlNg=; b=D
- FLirMtFNeWrEqTqG8bBWQwKRBXlJk2otoS5W7NXdU07uUrapj2oBt183ErM1ZYDqzncrSYm3jL7jF
- ekMCrls9W5uZxvc+bKvlkFYqNwsw5sCWJA+wIcYNTbM1uOBoUnMT2+e7PPng8JzhnrPrO7XyCRai8
- RX4lIyoQa++DIbjI=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:Cc:To:From:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=PtXOk9JFB0N6iJwX5Ys8MNlCBawQZXqBVsqWfjXNFAU=; b=lxbXQ+ZXJhJtPZ4KR8PlomRwD8
+ WKOm2NrU3UE0X+pxfALVGgpxlN+temefrWYh+cC1kJJu/5GHeSR29xUuvHpvQj9RKYqCCjV0Nw+vg
+ SXwsDTUghH9yheUr/nagcPbqpgaPzl3OMQ1kNfrplq7nSc0Q95i/S3Kp813AjpGAH7LE=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mg53u-0000nW-0G
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Oct 2021 13:07:23 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 9978160F0F;
- Thu, 28 Oct 2021 13:03:11 +0000 (UTC)
+ id 1mgHir-0006Qi-8m
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 02:36:30 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id B34B9610E8;
+ Fri, 29 Oct 2021 02:34:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1635426192;
- bh=G3llENj5zaWeQ3Ev+d/6q267AlCv0UdQYTb35WjjKwA=;
- h=From:To:Cc:Subject:Date:From;
- b=rQn+eRLR4hMkkO0ZA/eIevaJk1/2IZPe6TPxZiwCsayddfnRnQsFGoSAEN0LmJRF2
- it0LSPyTwqPNvzXlyrJHx9uHqDU6FLT9g0EhuIg0YYyw/WIZTZYjaCTZ8rfpOk4WM3
- FPdxJDGEwmBygicRse393rdSLb+ofX70lexrpnBos8FqpuuSDjZePfvPBdkVxMBRR3
- DV84DxgKkHcScHQbJVLhrJB5WVpY42xTA7eyu3F4E9vqw2WnaMti0CaV5nFwg9o7vP
- Lbtmw/C/qTDqSBdsRjUmf1Nx4Pt0wKuVhu31XLkJN6IywgOppeK3TnzRzzDpRmsdT7
- +C9EZ882MFZcw==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Thu, 28 Oct 2021 21:03:05 +0800
-Message-Id: <20211028130305.5333-1-chao@kernel.org>
-X-Mailer: git-send-email 2.32.0
+ s=k20201202; t=1635474857;
+ bh=k+q5cwoUghGqcxAWgg2DvpUzWPsMNg2BWCU7/8wFZa4=;
+ h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+ b=Wjlt4z8uedxdmPbxVmntoWKxUtK1PCMg6UhhRS2GjRL5BPldvNWCkCuNNk5c6QY7t
+ EAHlcGlVj0LmFtRsg+KtLAOxFOoddwdGDKnvf7mkjtsZEP4KbrPfAjXJGuigL2kxdj
+ zREKIPRrchp4xGG1eEl+4qm/C6pwfIIQ0MwpuwXXGOokqeH/MOlAflGSzhudm8VyAX
+ NA6qFggxKuibIyeNOOTiZa6hs7gP6akDvleMi+WEYtuCDM2+/AAPHZvjsj93QrpWe2
+ fy0AnFYAfWKw8s0WOJsV+uUjreJoUXREWnptT7NLxKFoRPDLjPMcX/qWw5xYi+9Teb
+ Aly8eiIr9mzXg==
+Message-ID: <dec765de-407b-07c3-75f6-ec7f71c618b7@kernel.org>
+Date: Fri, 29 Oct 2021 10:34:14 +0800
 MIME-Version: 1.0
-X-Headers-End: 1mg53u-0000nW-0G
-Subject: [f2fs-dev] [PATCH] f2fs: support fault injection for
- dquot_initialize()
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.0.3
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20210928151911.11189-1-chao@kernel.org>
+ <YVNoHudG5c65X85G@google.com>
+ <65f6c366-9e5b-fe7f-7c38-061996d1882b@kernel.org>
+In-Reply-To: <65f6c366-9e5b-fe7f-7c38-061996d1882b@kernel.org>
+X-Headers-End: 1mgHir-0006Qi-8m
+Subject: Re: [f2fs-dev] [PATCH] f2fs: skip f2fs_preallocate_blocks() for
+ overwrite case
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,363 +76,51 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch adds a new function f2fs_dquot_initialize() to wrap
-dquot_initialize(), and it supports to inject fault into
-f2fs_dquot_initialize() to simulate inner failure occurs in
-dquot_initialize().
-
-Usage:
-a) echo 65536 > /sys/fs/f2fs/<dev>/inject_type or
-b) mount -o fault_type=65536 <dev> <mountpoint>
-
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- Documentation/filesystems/f2fs.rst |  1 +
- fs/f2fs/checkpoint.c               |  2 +-
- fs/f2fs/f2fs.h                     |  2 ++
- fs/f2fs/file.c                     |  6 +++---
- fs/f2fs/inline.c                   |  2 +-
- fs/f2fs/inode.c                    |  2 +-
- fs/f2fs/namei.c                    | 30 +++++++++++++++---------------
- fs/f2fs/recovery.c                 |  6 +++---
- fs/f2fs/super.c                    | 16 ++++++++++++++++
- fs/f2fs/verity.c                   |  2 +-
- fs/f2fs/xattr.c                    |  2 +-
- 11 files changed, 45 insertions(+), 26 deletions(-)
-
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index 4294db649fa8..6954c04753ad 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -197,6 +197,7 @@ fault_type=%d		 Support configuring fault injection type, should be
- 			 FAULT_DISCARD		  0x000002000
- 			 FAULT_WRITE_IO		  0x000004000
- 			 FAULT_SLAB_ALLOC	  0x000008000
-+			 FAULT_DQUOT_INIT	  0x000010000
- 			 ===================	  ===========
- mode=%s			 Control block allocation mode which supports "adaptive"
- 			 and "lfs". In "lfs" mode, there should be no random
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 6f6a7d812d60..f1693d45bb78 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -653,7 +653,7 @@ static int recover_orphan_inode(struct f2fs_sb_info *sbi, nid_t ino)
- 		return PTR_ERR(inode);
- 	}
- 
--	err = dquot_initialize(inode);
-+	err = f2fs_dquot_initialize(inode);
- 	if (err) {
- 		iput(inode);
- 		goto err_out;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index c8c7d9e7dd7a..ce9fc9f13000 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -55,6 +55,7 @@ enum {
- 	FAULT_DISCARD,
- 	FAULT_WRITE_IO,
- 	FAULT_SLAB_ALLOC,
-+	FAULT_DQUOT_INIT,
- 	FAULT_MAX,
- };
- 
-@@ -3376,6 +3377,7 @@ static inline int f2fs_add_link(struct dentry *dentry, struct inode *inode)
-  */
- int f2fs_inode_dirtied(struct inode *inode, bool sync);
- void f2fs_inode_synced(struct inode *inode);
-+int f2fs_dquot_initialize(struct inode *inode);
- int f2fs_enable_quota_files(struct f2fs_sb_info *sbi, bool rdonly);
- int f2fs_quota_sync(struct super_block *sb, int type);
- loff_t max_file_blocks(struct inode *inode);
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 9c8ef33bd8d3..abe7edc82582 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -786,7 +786,7 @@ int f2fs_truncate(struct inode *inode)
- 		return -EIO;
- 	}
- 
--	err = dquot_initialize(inode);
-+	err = f2fs_dquot_initialize(inode);
- 	if (err)
- 		return err;
- 
-@@ -916,7 +916,7 @@ int f2fs_setattr(struct user_namespace *mnt_userns, struct dentry *dentry,
- 		return err;
- 
- 	if (is_quota_modification(inode, attr)) {
--		err = dquot_initialize(inode);
-+		err = f2fs_dquot_initialize(inode);
- 		if (err)
- 			return err;
- 	}
-@@ -3020,7 +3020,7 @@ static int f2fs_ioc_setproject(struct inode *inode, __u32 projid)
- 	}
- 	f2fs_put_page(ipage, 1);
- 
--	err = dquot_initialize(inode);
-+	err = f2fs_dquot_initialize(inode);
- 	if (err)
- 		return err;
- 
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index 56a20d5c15da..ea08f0dfa1bd 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -192,7 +192,7 @@ int f2fs_convert_inline_inode(struct inode *inode)
- 			f2fs_hw_is_readonly(sbi) || f2fs_readonly(sbi->sb))
- 		return 0;
- 
--	err = dquot_initialize(inode);
-+	err = f2fs_dquot_initialize(inode);
- 	if (err)
- 		return err;
- 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 1213f15ffd68..0f8b2df3e1e0 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -754,7 +754,7 @@ void f2fs_evict_inode(struct inode *inode)
- 	if (inode->i_nlink || is_bad_inode(inode))
- 		goto no_delete;
- 
--	err = dquot_initialize(inode);
-+	err = f2fs_dquot_initialize(inode);
- 	if (err) {
- 		err = 0;
- 		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index ae0838001480..a728a0af9ce0 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -74,7 +74,7 @@ static struct inode *f2fs_new_inode(struct inode *dir, umode_t mode)
- 	if (err)
- 		goto fail_drop;
- 
--	err = dquot_initialize(inode);
-+	err = f2fs_dquot_initialize(inode);
- 	if (err)
- 		goto fail_drop;
- 
-@@ -345,7 +345,7 @@ static int f2fs_create(struct user_namespace *mnt_userns, struct inode *dir,
- 	if (!f2fs_is_checkpoint_ready(sbi))
- 		return -ENOSPC;
- 
--	err = dquot_initialize(dir);
-+	err = f2fs_dquot_initialize(dir);
- 	if (err)
- 		return err;
- 
-@@ -404,7 +404,7 @@ static int f2fs_link(struct dentry *old_dentry, struct inode *dir,
- 			F2FS_I(old_dentry->d_inode)->i_projid)))
- 		return -EXDEV;
- 
--	err = dquot_initialize(dir);
-+	err = f2fs_dquot_initialize(dir);
- 	if (err)
- 		return err;
- 
-@@ -460,7 +460,7 @@ static int __recover_dot_dentries(struct inode *dir, nid_t pino)
- 		return 0;
- 	}
- 
--	err = dquot_initialize(dir);
-+	err = f2fs_dquot_initialize(dir);
- 	if (err)
- 		return err;
- 
-@@ -598,10 +598,10 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
- 		goto fail;
- 	}
- 
--	err = dquot_initialize(dir);
-+	err = f2fs_dquot_initialize(dir);
- 	if (err)
- 		goto fail;
--	err = dquot_initialize(inode);
-+	err = f2fs_dquot_initialize(inode);
- 	if (err)
- 		goto fail;
- 
-@@ -675,7 +675,7 @@ static int f2fs_symlink(struct user_namespace *mnt_userns, struct inode *dir,
- 	if (err)
- 		return err;
- 
--	err = dquot_initialize(dir);
-+	err = f2fs_dquot_initialize(dir);
- 	if (err)
- 		return err;
- 
-@@ -746,7 +746,7 @@ static int f2fs_mkdir(struct user_namespace *mnt_userns, struct inode *dir,
- 	if (unlikely(f2fs_cp_error(sbi)))
- 		return -EIO;
- 
--	err = dquot_initialize(dir);
-+	err = f2fs_dquot_initialize(dir);
- 	if (err)
- 		return err;
- 
-@@ -803,7 +803,7 @@ static int f2fs_mknod(struct user_namespace *mnt_userns, struct inode *dir,
- 	if (!f2fs_is_checkpoint_ready(sbi))
- 		return -ENOSPC;
- 
--	err = dquot_initialize(dir);
-+	err = f2fs_dquot_initialize(dir);
- 	if (err)
- 		return err;
- 
-@@ -841,7 +841,7 @@ static int __f2fs_tmpfile(struct inode *dir, struct dentry *dentry,
- 	struct inode *inode;
- 	int err;
- 
--	err = dquot_initialize(dir);
-+	err = f2fs_dquot_initialize(dir);
- 	if (err)
- 		return err;
- 
-@@ -965,16 +965,16 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- 			return err;
- 	}
- 
--	err = dquot_initialize(old_dir);
-+	err = f2fs_dquot_initialize(old_dir);
- 	if (err)
- 		goto out;
- 
--	err = dquot_initialize(new_dir);
-+	err = f2fs_dquot_initialize(new_dir);
- 	if (err)
- 		goto out;
- 
- 	if (new_inode) {
--		err = dquot_initialize(new_inode);
-+		err = f2fs_dquot_initialize(new_inode);
- 		if (err)
- 			goto out;
- 	}
-@@ -1138,11 +1138,11 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
- 			F2FS_I(new_dentry->d_inode)->i_projid)))
- 		return -EXDEV;
- 
--	err = dquot_initialize(old_dir);
-+	err = f2fs_dquot_initialize(old_dir);
- 	if (err)
- 		goto out;
- 
--	err = dquot_initialize(new_dir);
-+	err = f2fs_dquot_initialize(new_dir);
- 	if (err)
- 		goto out;
- 
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 706ddb3c95c0..6a1b4668d933 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -81,7 +81,7 @@ static struct fsync_inode_entry *add_fsync_inode(struct f2fs_sb_info *sbi,
- 	if (IS_ERR(inode))
- 		return ERR_CAST(inode);
- 
--	err = dquot_initialize(inode);
-+	err = f2fs_dquot_initialize(inode);
- 	if (err)
- 		goto err_out;
- 
-@@ -203,7 +203,7 @@ static int recover_dentry(struct inode *inode, struct page *ipage,
- 			goto out_put;
- 		}
- 
--		err = dquot_initialize(einode);
-+		err = f2fs_dquot_initialize(einode);
- 		if (err) {
- 			iput(einode);
- 			goto out_put;
-@@ -508,7 +508,7 @@ static int check_index_in_prev_nodes(struct f2fs_sb_info *sbi,
- 		if (IS_ERR(inode))
- 			return PTR_ERR(inode);
- 
--		ret = dquot_initialize(inode);
-+		ret = f2fs_dquot_initialize(inode);
- 		if (ret) {
- 			iput(inode);
- 			return ret;
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 989e76ec7fb2..75f706b91ebf 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -58,6 +58,7 @@ const char *f2fs_fault_name[FAULT_MAX] = {
- 	[FAULT_DISCARD]		= "discard error",
- 	[FAULT_WRITE_IO]	= "write IO error",
- 	[FAULT_SLAB_ALLOC]	= "slab alloc",
-+	[FAULT_DQUOT_INIT]	= "dquot initialize",
- };
- 
- void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
-@@ -2499,6 +2500,16 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
- 	return len - towrite;
- }
- 
-+int f2fs_dquot_initialize(struct inode *inode)
-+{
-+	if (time_to_inject(F2FS_I_SB(inode), FAULT_DQUOT_INIT)) {
-+		f2fs_show_injection_info(F2FS_I_SB(inode), FAULT_DQUOT_INIT);
-+		return -ESRCH;
-+	}
-+
-+	return dquot_initialize(inode);
-+}
-+
- static struct dquot **f2fs_get_dquots(struct inode *inode)
- {
- 	return F2FS_I(inode)->i_dquot;
-@@ -2883,6 +2894,11 @@ static const struct quotactl_ops f2fs_quotactl_ops = {
- 	.get_nextdqblk	= dquot_get_next_dqblk,
- };
- #else
-+int f2fs_dquot_initialize(struct inode *inode)
-+{
-+	return 0;
-+}
-+
- int f2fs_quota_sync(struct super_block *sb, int type)
- {
- 	return 0;
-diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
-index 03549b5ba204..fe5acdccaae1 100644
---- a/fs/f2fs/verity.c
-+++ b/fs/f2fs/verity.c
-@@ -136,7 +136,7 @@ static int f2fs_begin_enable_verity(struct file *filp)
- 	 * here and not rely on ->open() doing it.  This must be done before
- 	 * evicting the inline data.
- 	 */
--	err = dquot_initialize(inode);
-+	err = f2fs_dquot_initialize(inode);
- 	if (err)
- 		return err;
- 
-diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index 1d2d29dcd41c..e348f33bcb2b 100644
---- a/fs/f2fs/xattr.c
-+++ b/fs/f2fs/xattr.c
-@@ -773,7 +773,7 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
- 	if (!f2fs_is_checkpoint_ready(sbi))
- 		return -ENOSPC;
- 
--	err = dquot_initialize(inode);
-+	err = f2fs_dquot_initialize(inode);
- 	if (err)
- 		return err;
- 
--- 
-2.32.0
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+UGluZywKCk9uIDIwMjEvOS8yOSA4OjA1LCBDaGFvIFl1IHdyb3RlOgo+IE9uIDIwMjEvOS8yOSAz
+OjA4LCBKYWVnZXVrIEtpbSB3cm90ZToKPj4gT24gMDkvMjgsIENoYW8gWXUgd3JvdGU6Cj4+PiBJ
+biBmMmZzX2ZpbGVfd3JpdGVfaXRlcigpLCBsZXQncyB1c2UgZjJmc19vdmVyd3JpdGVfaW8oKSB0
+bwo+Pj4gY2hlY2sgd2hldGhlcmUgaXQgaXMgb3ZlcndyaXRlIGNhc2UsIGZvciBzdWNoIGNhc2Us
+IHdlIGNhbiBza2lwCj4+PiBmMmZzX3ByZWFsbG9jYXRlX2Jsb2NrcygpIGluIG9yZGVyIHRvIGF2
+b2lkIGYyZnNfZG9fbWFwX2xvY2soKSwKPj4+IHdoaWNoIG1heSBiZSBibG9ja2VkIGJ5IGNoZWNr
+cG9pbnQoKSBwb3RlbnRpYWxseS4KPj4+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBDaGFvIFl1IDxjaGFv
+QGtlcm5lbC5vcmc+Cj4+PiAtLS0KPj4+IMKgIGZzL2YyZnMvZmlsZS5jIHwgNCArKysrCj4+PiDC
+oCAxIGZpbGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspCj4+Pgo+Pj4gZGlmZiAtLWdpdCBhL2Zz
+L2YyZnMvZmlsZS5jIGIvZnMvZjJmcy9maWxlLmMKPj4+IGluZGV4IDEzZGVhZTAzZGYwNi4uNTFm
+ZWNiMmY0ZGI1IDEwMDY0NAo+Pj4gLS0tIGEvZnMvZjJmcy9maWxlLmMKPj4+ICsrKyBiL2ZzL2Yy
+ZnMvZmlsZS5jCj4+PiBAQCAtNDMyMSw2ICs0MzIxLDEwIEBAIHN0YXRpYyBzc2l6ZV90IGYyZnNf
+ZmlsZV93cml0ZV9pdGVyKHN0cnVjdCBraW9jYiAqaW9jYiwgc3RydWN0IGlvdl9pdGVyICpmcm9t
+KQo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIHByZWFsbG9jYXRlZCA9IHRydWU7Cj4+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgdGFyZ2V0X3NpemUgPSBpb2NiLT5raV9wb3MgKyBpb3ZfaXRlcl9jb3VudChm
+cm9tKTsKPj4+ICvCoMKgwqDCoMKgwqDCoCBpZiAoZjJmc19vdmVyd3JpdGVfaW8oaW5vZGUsIGlv
+Y2ItPmtpX3BvcywKPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIGlvdl9pdGVyX2NvdW50KGZyb20pKSkKPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IGdvdG8gd3JpdGU7Cj4+Cj4+IFRoaXMgY2FsbHMgZjJmc19tYXBfYmxvY2tzKCkgd2hpY2ggY2Fu
+IGJlIGR1cGxpY2F0ZSwgaWYgaXQncyBub3QgdGhlIG92ZXJ3aXJ0ZQo+PiBjYXNlLiBEbyB3ZSBo
+YXZlIG90aGVyIGJlbmVmaXQ/Cj4gCj4gZjJmc19vdmVyd3JpdGVfaW8oKSB3aWxsIGJyZWFrIGZv
+ciBhcHBlbmQgd3JpdGUgY2FzZSB3LyBiZWxvdyBjaGVjazoKPiAKPiAgwqDCoMKgwqBpZiAocG9z
+ICsgbGVuID4gaV9zaXplX3JlYWQoaW5vZGUpKQo+ICDCoMKgwqDCoMKgwqDCoCByZXR1cm4gZmFs
+c2U7Cj4gCj4gSSBndWVzcyB3ZSBtYXkgb25seSBzdWZmZXIgZG91YmxlIGYyZnNfbWFwX2Jsb2Nr
+cygpIGZvciB3cml0ZSBob2xlCj4gY2FzZSwgZS5nLiB0cnVuY2F0ZSB0byBsYXJnZSBzaXplICYg
+d3JpdGUgaW5zaWRlIHRoZSBmaWxlc2l6ZS4gRm9yCj4gdGhpcyBjYXNlLCBob3cgYWJvdXQgYWRk
+aW5nIGEgY29uZGl0aW9uIHRvIGFsbG93IGRvdWJsZSBmMmZzX21hcF9ibG9ja3MoKQo+IG9ubHkg
+aWYgd3JpdGUgc2l6ZSBpcyBzbWFsbGVyIHRoYW4gYSB0aHJlc2hvbGQ/Cj4gCj4gVGhhbmtzLAo+
+IAo+Pgo+Pj4gKwo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGVyciA9IGYyZnNfcHJlYWxsb2NhdGVf
+YmxvY2tzKGlvY2IsIGZyb20pOwo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChlcnIpIHsKPj4+
+IMKgIG91dF9lcnI6Cj4+PiAtLSAKPj4+IDIuMzIuMAo+IAo+IAo+IF9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTGludXgtZjJmcy1kZXZlbCBtYWlsaW5n
+IGxpc3QKPiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0dHBzOi8v
+YXBjMDEuc2FmZWxpbmtzLnByb3RlY3Rpb24ub3V0bG9vay5jb20vP3VybD1odHRwcyUzQSUyRiUy
+Rmxpc3RzLnNvdXJjZWZvcmdlLm5ldCUyRmxpc3RzJTJGbGlzdGluZm8lMkZsaW51eC1mMmZzLWRl
+dmVsJmFtcDtkYXRhPTA0JTdDMDElN0NjaGFvLnl1JTQwb3Bwby5jb20lN0M0MjFjMDY4MTJlYmE0
+ZjkyMmIwOTA4ZDk4MmRjZGNjNSU3Q2YxOTA1ZWIxYzM1MzQxYzU5NTE2NjJiNGE1NGI1ZWU2JTdD
+MCU3QzAlN0M2Mzc2ODQ3MDczNzQ5NDAxOTAlN0NVbmtub3duJTdDVFdGcGJHWnNiM2Q4ZXlKV0lq
+b2lNQzR3TGpBd01EQWlMQ0pRSWpvaVYybHVNeklpTENKQlRpSTZJazFoYVd3aUxDSlhWQ0k2TW4w
+JTNEJTdDMTAwMCZhbXA7c2RhdGE9dTIyZUVXREFQYUFaQ3lJU3lqVFVPdFFETER1eUt4VG5OQ0kz
+ZVN3d1dybyUzRCZhbXA7cmVzZXJ2ZWQ9MAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYy
+ZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2Uu
+bmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
