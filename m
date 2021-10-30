@@ -2,81 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F280440167
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Oct 2021 19:43:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AD91440706
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 Oct 2021 05:03:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mgVus-0000xf-1P; Fri, 29 Oct 2021 17:43:46 +0000
+	id 1mgee7-0001RB-Vo; Sat, 30 Oct 2021 03:03:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1mgVuq-0000xY-FV
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 17:43:45 +0000
+ (envelope-from <chao@kernel.org>) id 1mgee6-0001Qc-NZ
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 Oct 2021 03:03:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pj4a1+I88NFqPE/JyEQR+FLPbZuzCd7+8bOb8HPS5p0=; b=iMmi8RZ8ED94cx7bWGXbTvn0mT
- wwPyH6+wd/19AhXxRcOI4R3Ss+8EdpQ1LbQmtjmCVi9V83+7zWCXI/0JiVjVXQZYiqgld2KpWSD4R
- aE+ppgsC1KQcI+Mi8J/ui5qvrezw4wTdsEDMTEkNk6DAq4YgD4hfm3Ib2x/Od6PKH0tg=;
+ bh=ZXMQO/gmeod9j/JhJwW3M21aNcIwpLEeYTNQo9U2ln0=; b=ivVgfkVtwEv/ITWnmUGIt1EUA6
+ QEcRLxT6gIrT3TQwTJjWnadW8WmUyaRaT2VGTGoxgu3jvQYZHOMMpiasUHPTmcpY1JPcILlywpYq3
+ rPH4xIETPrKDtbgiO3ppXoY994QKHxlFIOVuVVp9RcY0KETdH8oeX4Zl4FkbLnYsG1mc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pj4a1+I88NFqPE/JyEQR+FLPbZuzCd7+8bOb8HPS5p0=; b=erLM/9Klw8t7xlLQe5Y5uk2Vm1
- GOs6Q7BSqoEoAEtoVuhYhbQ31wepExYKC1P1XbH767xWaCARr1lEeCuWE1sWA8eEX7tYmk3trs1z7
- RRBWtoUp8IhiK0raMrzTf71/MpYN30a7aPNk76frWdBLqgqHR/gMIIwdlAeMF3Oaj4Vk=;
+ bh=ZXMQO/gmeod9j/JhJwW3M21aNcIwpLEeYTNQo9U2ln0=; b=fYIbrGZLk6WL01gcdSo+4sb6GP
+ QtxVRqqqVZ4eRKRYv7dFNb6Pk13ukRulMUanTyFhHM+EbOBbjFwTNDE15JYCOCrx7aOe/dRE80pSH
+ 3r9qy2LrN2NP5ZJmjrtw5nyNzOqlqJPDWSDcBkcEoGTpQzc0TYdpsZ50KhFiqaZ2iYhM=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mgVuj-0005p6-V4
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Oct 2021 17:43:44 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 92B7A61040;
- Fri, 29 Oct 2021 17:43:27 +0000 (UTC)
+ id 1mgedz-006gpi-SY
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 Oct 2021 03:03:01 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id C23216101B;
+ Sat, 30 Oct 2021 03:02:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1635529407;
- bh=rsaoqoFMJRkFW8HbI1/g5SAhlNrxOJ2ODlLw2rtjQVw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=TWI+jjY0ML1p9Nw0Dtl1KOyq5HJqk87BImQU70Cl4KdrO+WFa4/1eXJxAHGo0I3B1
- P/NvnMbfHSuOP2R46KsW2PdDpFH+Ejzgy2WcXm8VdW+MoO8hklvBq403DcDAKYxGDV
- mHxsKA5ZC4yWlQanMq8jCrM8qWeXEku+Kg22esQqwvs1SMJSMjIlaZ5R1n656tYy3b
- Lx5l4t9du+GMlRyUCeJsgwxECQ88Oq1feTNOL4xZBJ0gQ0YwGpafGfCWUZB7L8YPix
- ksi7CCHYMIS34CwUiqSHNy3RC+DlXPwoPjbQWjjzyX44QJPRpzSWY2aJhdtHO45LE4
- YcDzGXpMmMTQA==
-Date: Fri, 29 Oct 2021 10:43:26 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <YXwyvllUOm6jLiF5@google.com>
+ s=k20201202; t=1635562966;
+ bh=4Ng1hPz2ZdQc9vj3i8T2gRU7YKbsF5ock4q66vtGinc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=aXjOuYETmRLQcRUoAVZtO85Ry8nQbwf/9s+P7g/wcUaixb7A2R5lYyHbepuNc7nyu
+ k0X+7pL6tySh2rY5JwtNTsK6LDPuZTVh3CY12V6F+S6gpYMlkQ7wO+eZojHTYUMN1/
+ 1AFzQ00nX+og2YzxYQbpMr2xMInk7FwfovRd8o4Ym9zGEDYyUYQPyb7nz0TARyPsqG
+ QaipqJkNlRBtjAnj6SgLv+pEOhMXqyBalRere0LpIWKRtkSqwo89uPbcvqKDBO3XNF
+ IhoZHxYz1MsSyIkoSDoDvDxjhv4h2jEdpFkc3naH4x2gQpgkB4EokO9Toi55HlStaN
+ 2gRVXC5Bv0BTA==
+Message-ID: <3e653a3d-ddb9-e115-d871-3659a1ba5530@kernel.org>
+Date: Sat, 30 Oct 2021 11:02:42 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20210928151911.11189-1-chao@kernel.org>
  <YVNoHudG5c65X85G@google.com>
  <65f6c366-9e5b-fe7f-7c38-061996d1882b@kernel.org>
  <dec765de-407b-07c3-75f6-ec7f71c618b7@kernel.org>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <dec765de-407b-07c3-75f6-ec7f71c618b7@kernel.org>
-X-Spam-Score: -5.2 (-----)
+ <YXwyvllUOm6jLiF5@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <YXwyvllUOm6jLiF5@google.com>
+X-Spam-Score: -7.7 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 10/29, Chao Yu wrote: > Ping, > > On 2021/9/29 8:05, Chao
- Yu wrote: > > On 2021/9/29 3:08, Jaegeuk Kim wrote: > > > On 09/28, Chao
- Yu wrote: > > > > In f2fs_file_write_iter(), let's use f2fs_overwr [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 2021/10/30 1:43, Jaegeuk Kim wrote: > On 10/29, Chao Yu
+ wrote: >> Ping, >> >> On 2021/9/29 8:05, Chao Yu wrote: >>> On 2021/9/29
+ 3:08, Jaegeuk Kim wrote: >>>> On 09/28, Chao Yu wrote: >>>>> In f2fs [...]
+ Content analysis details:   (-7.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -84,8 +85,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [198.145.29.99 listed in list.dnswl.org]
+ -2.5 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mgVuj-0005p6-V4
+X-Headers-End: 1mgedz-006gpi-SY
 Subject: Re: [f2fs-dev] [PATCH] f2fs: skip f2fs_preallocate_blocks() for
  overwrite case
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -100,96 +104,64 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 10/29, Chao Yu wrote:
-> Ping,
-> =
-
-> On 2021/9/29 8:05, Chao Yu wrote:
-> > On 2021/9/29 3:08, Jaegeuk Kim wrote:
-> > > On 09/28, Chao Yu wrote:
-> > > > In f2fs_file_write_iter(), let's use f2fs_overwrite_io() to
-> > > > check whethere it is overwrite case, for such case, we can skip
-> > > > f2fs_preallocate_blocks() in order to avoid f2fs_do_map_lock(),
-> > > > which may be blocked by checkpoint() potentially.
-> > > > =
-
-> > > > Signed-off-by: Chao Yu <chao@kernel.org>
-> > > > ---
-> > > > =A0 fs/f2fs/file.c | 4 ++++
-> > > > =A0 1 file changed, 4 insertions(+)
-> > > > =
-
-> > > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > > > index 13deae03df06..51fecb2f4db5 100644
-> > > > --- a/fs/f2fs/file.c
-> > > > +++ b/fs/f2fs/file.c
-> > > > @@ -4321,6 +4321,10 @@ static ssize_t f2fs_file_write_iter(struct k=
-iocb *iocb, struct iov_iter *from)
-> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0 preallocated =3D true;
-> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0 target_size =3D iocb->ki_pos + iov_iter=
-_count(from);
-> > > > +=A0=A0=A0=A0=A0=A0=A0 if (f2fs_overwrite_io(inode, iocb->ki_pos,
-> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0 iov_iter_count(from)))
-> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 goto write;
-> > > =
-
-> > > This calls f2fs_map_blocks() which can be duplicate, if it's not the =
-overwirte
-> > > case. Do we have other benefit?
-> > =
-
-> > f2fs_overwrite_io() will break for append write case w/ below check:
-> > =
-
-> >  =A0=A0=A0=A0if (pos + len > i_size_read(inode))
-> >  =A0=A0=A0=A0=A0=A0=A0 return false;
-> > =
-
-> > I guess we may only suffer double f2fs_map_blocks() for write hole
-> > case, e.g. truncate to large size & write inside the filesize. For
-> > this case, how about adding a condition to allow double f2fs_map_blocks=
-()
-> > only if write size is smaller than a threshold?
-
-I still don't see the benefit much to do double f2fs_map_blocks. What is the
-problem here?
-
-> > =
-
-> > Thanks,
-> > =
-
-> > > =
-
-> > > > +
-> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0 err =3D f2fs_preallocate_blocks(iocb, f=
-rom);
-> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0 if (err) {
-> > > > =A0 out_err:
-> > > > -- =
-
-> > > > 2.32.0
-> > =
-
-> > =
-
-> > _______________________________________________
-> > Linux-f2fs-devel mailing list
-> > Linux-f2fs-devel@lists.sourceforge.net
-> > https://apc01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Flis=
-ts.sourceforge.net%2Flists%2Flistinfo%2Flinux-f2fs-devel&amp;data=3D04%7C01=
-%7Cchao.yu%40oppo.com%7C421c06812eba4f922b0908d982dcdcc5%7Cf1905eb1c35341c5=
-951662b4a54b5ee6%7C0%7C0%7C637684707374940190%7CUnknown%7CTWFpbGZsb3d8eyJWI=
-joiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sd=
-ata=3Du22eEWDAPaAZCyISyjTUOtQDLDuyKxTnNCI3eSwwWro%3D&amp;reserved=3D0
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjAyMS8xMC8zMCAxOjQzLCBKYWVnZXVrIEtpbSB3cm90ZToKPiBPbiAxMC8yOSwgQ2hhbyBZ
+dSB3cm90ZToKPj4gUGluZywKPj4KPj4gT24gMjAyMS85LzI5IDg6MDUsIENoYW8gWXUgd3JvdGU6
+Cj4+PiBPbiAyMDIxLzkvMjkgMzowOCwgSmFlZ2V1ayBLaW0gd3JvdGU6Cj4+Pj4gT24gMDkvMjgs
+IENoYW8gWXUgd3JvdGU6Cj4+Pj4+IEluIGYyZnNfZmlsZV93cml0ZV9pdGVyKCksIGxldCdzIHVz
+ZSBmMmZzX292ZXJ3cml0ZV9pbygpIHRvCj4+Pj4+IGNoZWNrIHdoZXRoZXJlIGl0IGlzIG92ZXJ3
+cml0ZSBjYXNlLCBmb3Igc3VjaCBjYXNlLCB3ZSBjYW4gc2tpcAo+Pj4+PiBmMmZzX3ByZWFsbG9j
+YXRlX2Jsb2NrcygpIGluIG9yZGVyIHRvIGF2b2lkIGYyZnNfZG9fbWFwX2xvY2soKSwKPj4+Pj4g
+d2hpY2ggbWF5IGJlIGJsb2NrZWQgYnkgY2hlY2twb2ludCgpIHBvdGVudGlhbGx5Lgo+Pj4+Pgo+
+Pj4+PiBTaWduZWQtb2ZmLWJ5OiBDaGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+Cj4+Pj4+IC0tLQo+
+Pj4+PiAgwqAgZnMvZjJmcy9maWxlLmMgfCA0ICsrKysKPj4+Pj4gIMKgIDEgZmlsZSBjaGFuZ2Vk
+LCA0IGluc2VydGlvbnMoKykKPj4+Pj4KPj4+Pj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZmlsZS5j
+IGIvZnMvZjJmcy9maWxlLmMKPj4+Pj4gaW5kZXggMTNkZWFlMDNkZjA2Li41MWZlY2IyZjRkYjUg
+MTAwNjQ0Cj4+Pj4+IC0tLSBhL2ZzL2YyZnMvZmlsZS5jCj4+Pj4+ICsrKyBiL2ZzL2YyZnMvZmls
+ZS5jCj4+Pj4+IEBAIC00MzIxLDYgKzQzMjEsMTAgQEAgc3RhdGljIHNzaXplX3QgZjJmc19maWxl
+X3dyaXRlX2l0ZXIoc3RydWN0IGtpb2NiICppb2NiLCBzdHJ1Y3QgaW92X2l0ZXIgKmZyb20pCj4+
+Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqAgcHJlYWxsb2NhdGVkID0gdHJ1ZTsKPj4+Pj4gIMKgwqDC
+oMKgwqDCoMKgwqDCoCB0YXJnZXRfc2l6ZSA9IGlvY2ItPmtpX3BvcyArIGlvdl9pdGVyX2NvdW50
+KGZyb20pOwo+Pj4+PiArwqDCoMKgwqDCoMKgwqAgaWYgKGYyZnNfb3ZlcndyaXRlX2lvKGlub2Rl
+LCBpb2NiLT5raV9wb3MsCj4+Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIGlvdl9pdGVyX2NvdW50KGZyb20pKSkKPj4+Pj4gK8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgZ290byB3cml0ZTsKPj4+Pgo+Pj4+IFRoaXMgY2FsbHMgZjJmc19tYXBfYmxvY2tz
+KCkgd2hpY2ggY2FuIGJlIGR1cGxpY2F0ZSwgaWYgaXQncyBub3QgdGhlIG92ZXJ3aXJ0ZQo+Pj4+
+IGNhc2UuIERvIHdlIGhhdmUgb3RoZXIgYmVuZWZpdD8KPj4+Cj4+PiBmMmZzX292ZXJ3cml0ZV9p
+bygpIHdpbGwgYnJlYWsgZm9yIGFwcGVuZCB3cml0ZSBjYXNlIHcvIGJlbG93IGNoZWNrOgo+Pj4K
+Pj4+ICAgwqDCoMKgwqBpZiAocG9zICsgbGVuID4gaV9zaXplX3JlYWQoaW5vZGUpKQo+Pj4gICDC
+oMKgwqDCoMKgwqDCoCByZXR1cm4gZmFsc2U7Cj4+Pgo+Pj4gSSBndWVzcyB3ZSBtYXkgb25seSBz
+dWZmZXIgZG91YmxlIGYyZnNfbWFwX2Jsb2NrcygpIGZvciB3cml0ZSBob2xlCj4+PiBjYXNlLCBl
+LmcuIHRydW5jYXRlIHRvIGxhcmdlIHNpemUgJiB3cml0ZSBpbnNpZGUgdGhlIGZpbGVzaXplLiBG
+b3IKPj4+IHRoaXMgY2FzZSwgaG93IGFib3V0IGFkZGluZyBhIGNvbmRpdGlvbiB0byBhbGxvdyBk
+b3VibGUgZjJmc19tYXBfYmxvY2tzKCkKPj4+IG9ubHkgaWYgd3JpdGUgc2l6ZSBpcyBzbWFsbGVy
+IHRoYW4gYSB0aHJlc2hvbGQ/Cj4gCj4gSSBzdGlsbCBkb24ndCBzZWUgdGhlIGJlbmVmaXQgbXVj
+aCB0byBkbyBkb3VibGUgZjJmc19tYXBfYmxvY2tzLiBXaGF0IGlzIHRoZQo+IHByb2JsZW0gaGVy
+ZT8KClRoZXJlIGlzIHBvdGVudGlhbCBoYW5ndGFzayBoYXBwZW5lZCBkdXJpbmcgc3dhcGZpbGUn
+cyB3cml0ZWJhY2s6CgotIGxvb3Bfa3RocmVhZF93b3JrZXJfZm4KICAtIGt0aHJlYWRfd29ya2Vy
+X2ZuCiAgIC0gbG9vcF9xdWV1ZV93b3JrCiAgICAtIGxvX3J3X2FpbwogICAgIC0gZjJmc19maWxl
+X3dyaXRlX2l0ZXIKICAgICAgLSBmMmZzX3ByZWFsbG9jYXRlX2Jsb2NrcwogICAgICAgLSBmMmZz
+X21hcF9ibG9ja3MKICAgICAgICAtIGRvd25fcmVhZAogICAgICAgICAtIHJ3c2VtX2Rvd25fcmVh
+ZF9zbG93cGF0aAogICAgICAgICAgLSBzY2hlZHVsZQoKSSB0cnkgdG8gbWl0aWdhdGUgc3VjaCBp
+c3N1ZSBieSBwcmVhbGxvY2F0aW5nIHN3YXBmaWxlJ3MgYmxvY2sgYWRkcmVzcyBhbmQKYXZvaWQg
+ZjJmc19kb19tYXBfbG9jaygpIGFzIG11Y2ggYXMgcG9zc2libGUgaW4gc3dhcGZpbGUncyB3cml0
+ZWJhY2sgcGF0aC4uLgoKVGhhbmtzLAoKPiAKPj4+Cj4+PiBUaGFua3MsCj4+Pgo+Pj4+Cj4+Pj4+
+ICsKPj4+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCBlcnIgPSBmMmZzX3ByZWFsbG9jYXRlX2Jsb2Nr
+cyhpb2NiLCBmcm9tKTsKPj4+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoZXJyKSB7Cj4+Pj4+
+ICDCoCBvdXRfZXJyOgo+Pj4+PiAtLSAKPj4+Pj4gMi4zMi4wCj4+Pgo+Pj4KPj4+IF9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4+PiBMaW51eC1mMmZzLWRl
+dmVsIG1haWxpbmcgbGlzdAo+Pj4gTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5u
+ZXQKPj4+IGh0dHBzOi8vYXBjMDEuc2FmZWxpbmtzLnByb3RlY3Rpb24ub3V0bG9vay5jb20vP3Vy
+bD1odHRwcyUzQSUyRiUyRmxpc3RzLnNvdXJjZWZvcmdlLm5ldCUyRmxpc3RzJTJGbGlzdGluZm8l
+MkZsaW51eC1mMmZzLWRldmVsJmFtcDtkYXRhPTA0JTdDMDElN0NjaGFvLnl1JTQwb3Bwby5jb20l
+N0M0MjFjMDY4MTJlYmE0ZjkyMmIwOTA4ZDk4MmRjZGNjNSU3Q2YxOTA1ZWIxYzM1MzQxYzU5NTE2
+NjJiNGE1NGI1ZWU2JTdDMCU3QzAlN0M2Mzc2ODQ3MDczNzQ5NDAxOTAlN0NVbmtub3duJTdDVFdG
+cGJHWnNiM2Q4ZXlKV0lqb2lNQzR3TGpBd01EQWlMQ0pRSWpvaVYybHVNeklpTENKQlRpSTZJazFo
+YVd3aUxDSlhWQ0k2TW4wJTNEJTdDMTAwMCZhbXA7c2RhdGE9dTIyZUVXREFQYUFaQ3lJU3lqVFVP
+dFFETER1eUt4VG5OQ0kzZVN3d1dybyUzRCZhbXA7cmVzZXJ2ZWQ9MAoKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGlu
+ZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlz
+dHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
