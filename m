@@ -2,59 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BBEF440D98
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 31 Oct 2021 10:22:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79148440DA9
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 31 Oct 2021 10:42:16 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mh72k-000515-Fo; Sun, 31 Oct 2021 09:22:22 +0000
+	id 1mh7Lw-0001vt-Li; Sun, 31 Oct 2021 09:42:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1mh72Y-00050t-RC
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 31 Oct 2021 09:22:10 +0000
+ id 1mh7Lu-0001vl-IM
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 31 Oct 2021 09:42:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SHHcb+y+g8KljZvUBKYsUyZqVY82cq3BCnI/YNlbPnU=; b=F0Mr1QS2o9f3nxYfsEP+DQLcEX
- 7xRye87lKJU3heJwGVfutnsC0jSTYH0DLCkvO++9reNzTj8+BUKtSTL3bYx6Cl08GD/tXPZvi9J7y
- n4U6eW8372/Y2Got17/KhoHIQ+4WGOXCNYWfRayKG5xc4hYuXfX3N+UqyrmwX9ANeEFY=;
+ bh=gsCzkcXMiMZR+Nj/Hjmd+4tyzEygrfLxKqzCDdrmvao=; b=GgGgfzIvDLXK+Eu/1O6Ozh03y5
+ yIqM0FFYV2G3a5CZu9un5jLB8QuQsRmj9pJsTc4x2W3ZoAggpfo2qXTbjpRj1kG4fHx35YoyhbSM9
+ wZ2EVklwcfFJXS0yl1ColCBISz1aUl8zJKvgsMCVX+MEAy/maxU04XhpeZTUGvmFvvkU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
  Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=SHHcb+y+g8KljZvUBKYsUyZqVY82cq3BCnI/YNlbPnU=; b=Q
- PMLpvyo3FXM+tvevp4OyGLCdGA3I5zb0+ezm/ZZ5CXAY8zi/qo043ygIr9oATJq1zx6Hr/KPwrA13
- yDUajThCAv9f2hibT6yue9aKMXXwLjliAsEq+zMKWEGojC+Za592zrNZAy7daMObFbuIvav0HwOva
- oMDbNAb16yY5zsec=;
+ List-Owner:List-Archive; bh=gsCzkcXMiMZR+Nj/Hjmd+4tyzEygrfLxKqzCDdrmvao=; b=Q
+ o/fzxGVYBlldP6wpVM8m1T5W1EHRN3sZD0le2PHVArnX6YSmpZa7wgGXbJYgWgz8al/SBE+Y8bBbI
+ GtnyjvOaivhhOVcpxr1O1rBMC4J7eJ1THtUHsfsVmQyJStUxUeBSyjH8qUXt5xJapw9/q/19SYRHi
+ RtO+j1m89aM7+DAg=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
- id 1mh6ya-008YrW-PL
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 31 Oct 2021 09:22:10 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPS id 1518560527
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
+ id 1mh7Hw-0002zn-Jb
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 31 Oct 2021 09:42:10 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPS id 7C50561054
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 31 Oct 2021 08:58:37 +0000 (UTC)
+ Sun, 31 Oct 2021 09:01:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1635670717;
- bh=cqZKCoyhCz90Yck1z08SU6lrtk/QsLNLhaUSumJBV3I=;
+ s=k20201202; t=1635670868;
+ bh=/md2R2tUQUewCDNDQ8kv88qazI7Oe5amFNOE9FA3aZs=;
  h=From:To:Subject:Date:From;
- b=RwImaqWepoTpsphb9/vndHyvdkFHuxCAIvhgPqH5WT3k2phT9+XowZXytampKSzuB
- pu/KHGgIkCD14OZnQuTF5wqPSXOvlgVodzidbGz8VNA19CRClMNqIgZVruHLocgyne
- fJz29qeWv/GgpjatHXXCmIO3HhJXv8xZQSWtYQj2A6k8RUG9QlGJZXBr9UgyJX/WD0
- 0moCHuDYwp2lWfUl/ktZkTwzYHZDF59+fqPRnIgGFf5RI4XHY+DjQY2qXXMe7BuGwN
- Vz/HMrDqRqfgzl+f2UoS0VNwp8x7VR30RtFcHxtU9nWyr9toGIA27PT+RvfBTwFYO0
- FysbZBEzA9miA==
+ b=m0eqt7F6z829g3TTh3fcRaX3RXRiclZd1DbD/TjOnpvCyOp8iaE5ckbmQxDankH1/
+ flbgOlX9OOiOcesGeYAzzT1NzZtP0Nrt6h/fMMbSCY0MrTx0k4FncM4oui1nYTjzVX
+ LstgivKL4OP3WVOfmJMPECa8iaWTJfjAlw01Yz14AJgsRFIdbQ0WR5aY6nlitbNiQ9
+ /CAhsA7NjYaOgBd+OMhuzOsoIuOcJdrUFCiWrO7x5M9ASOBMOLIBA1yaEQE4IBnMok
+ vRu710zMqatRLgImwWz9IWbanhKjMb8L3jTnb/UlSe4/jfn1Va87edMIAeuUWlArol
+ StYY0JgI+krtQ==
 Received: by pdx-korg-bugzilla-2.web.codeaurora.org (Postfix, from userid 48)
- id 013D560F00; Sun, 31 Oct 2021 08:58:36 +0000 (UTC)
+ id 62A8560F00; Sun, 31 Oct 2021 09:01:08 +0000 (UTC)
 From: bugzilla-daemon@bugzilla.kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Sun, 31 Oct 2021 08:58:36 +0000
+Date: Sun, 31 Oct 2021 09:01:08 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: new
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -72,13 +72,13 @@ X-Bugzilla-Flags:
 X-Bugzilla-Changed-Fields: bug_id short_desc product version
  cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
  priority component assigned_to reporter cf_regression attachments.created
-Message-ID: <bug-214891-202145@https.bugzilla.kernel.org/>
+Message-ID: <bug-214893-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Headers-End: 1mh6ya-008YrW-PL
-Subject: [f2fs-dev] [Bug 214891] New: F2FS BUG: KASAN: stack-out-of-bounds
- in string+0x23c/0x270
+X-Headers-End: 1mh7Hw-0002zn-Jb
+Subject: [f2fs-dev] [Bug 214893] New: F2FS BUG: KASAN: stack-out-of-bounds
+ in update_stack_state+0x5f2/0x750
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,11 +94,11 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=214891
+https://bugzilla.kernel.org/show_bug.cgi?id=214893
 
-            Bug ID: 214891
+            Bug ID: 214893
            Summary: F2FS BUG: KASAN: stack-out-of-bounds in
-                    string+0x23c/0x270
+                    update_stack_state+0x5f2/0x750
            Product: File System
            Version: 2.5
     Kernel Version: 4.15.7
@@ -113,8 +113,8 @@ https://bugzilla.kernel.org/show_bug.cgi?id=214891
           Reporter: 793679547@qq.com
         Regression: No
 
-Created attachment 299373
-  --> https://bugzilla.kernel.org/attachment.cgi?id=299373&action=edit
+Created attachment 299375
+  --> https://bugzilla.kernel.org/attachment.cgi?id=299375&action=edit
 out.c
 
 I tested the Linux kernel under version 4.15.7, and encounter a kernel bug when
@@ -124,8 +124,8 @@ related to file operation and mount operation.
 
 #!/bin/bash
 
-dd if=/dev/zero of=f2fs-0.img bs=1M count=1879
-mkfs.f2fs -a 0 -o 9 -t 1 -z 3 -q f2fs-0.img
+dd if=/dev/zero of=f2fs-0.img bs=1M count=1405
+mkfs.f2fs -a 0 -o 5 -t 1 -z 2 -q f2fs-0.img
 
 g++ -std=c++11 -static "out.c" -o "./runner" -pthread
 
@@ -140,191 +140,199 @@ losetup -d $loop_dev
 File "out.c" realizes the file operation and mount operation by C++ language.
 
 Core dump:
-3,1078,681788796,-;==================================================================
-3,1079,681788808,-;BUG: KASAN: stack-out-of-bounds in string+0x23c/0x270
-3,1080,681788821,-;Read of size 8 at addr ffff8806b86af630 by task
-kworker/u16:4/2757
-3,1081,681788825,-;
-4,1082,681788838,-;CPU: 4 PID: 2757 Comm: kworker/u16:4 Tainted: G      D      
-   4.15.7 #1
-4,1083,681788854,-;Hardware name: LENOVO 20J6A00NHH/20J6A00NHH, BIOS R0FET24W
+4,1050,989316005,-;CPU: 0 PID: 6028 Comm: runner-1 Not tainted 4.15.7 #1
+4,1051,989316013,-;Hardware name: LENOVO 20J6A00NHH/20J6A00NHH, BIOS R0FET24W
 (1.04 ) 12/21/2016
-4,1084,681788866,-;Workqueue: writeback wb_workfn (flush-7:1)
-4,1085,681788883,-;Call Trace:
-4,1086,681788890,-; dump_stack+0xd8/0x124
-4,1087,681788901,-; print_address_description+0x95/0x400
-4,1088,681788911,-; kasan_report+0x21c/0x3f0
-4,1089,681788920,-; ? string+0x23c/0x270
-4,1090,681788927,-; __asan_report_load_n_noabort+0x24/0x30
-4,1091,681788937,-; string+0x23c/0x270
-4,1092,681788947,-; ? do_exit+0x12a/0x3140
-4,1093,681788954,-; symbol_string+0x170/0x250
-4,1094,681788960,-; ? do_exit+0x12a/0x3140
-4,1095,681788967,-; ? hex_string+0x480/0x480
-4,1096,681788976,-; ? radix_tree_tag_set+0x2eb/0x370
-4,1097,681788985,-; ? __mark_inode_dirty+0x5fe/0xdd0
-4,1098,681788995,-; ? __f2fs_write_data_pages+0x801/0xb90 [f2fs]
-4,1099,681789004,-; ? put_dec_trunc8+0xc2/0x300
-4,1100,681789013,-; ? put_dec+0x43/0x100
-4,1101,681789023,-; ? do_exit+0x12a/0x3140
-4,1102,681789029,-; pointer+0x92d/0xbe0
-4,1103,681789036,-; ? address_val+0xc0/0xc0
-4,1104,681789043,-; ? string+0x1af/0x270
-4,1105,681789054,-; ? format_decode+0x194/0xa60
-4,1106,681789064,-; vsnprintf+0x36a/0x1820
-4,1107,681789071,-; ? bstr_printf+0x1060/0x1060
-4,1108,681789078,-; vscnprintf+0x35/0x80
-4,1109,681789085,-; vprintk_emit+0x15b/0x860
-4,1110,681789092,-; ? do_exit+0x12a/0x3140
-4,1111,681789103,-; vprintk_default+0x75/0x110
-4,1112,681789112,-; vprintk_func+0x64/0x140
-4,1113,681789118,-; printk+0xbe/0xf0
-4,1114,681789125,-; ? show_regs_print_info+0x2d/0x2d
-4,1115,681789135,-; ? __probe_kernel_read+0x1c2/0x220
-4,1116,681789143,-; ? do_exit+0x12a/0x3140
-4,1117,681789151,-; __warn+0xbb/0x280
-4,1118,681789162,-; ? find_bug+0x296/0x300
-4,1119,681789176,-; ? do_exit+0x12a/0x3140
-4,1120,681789184,-; report_bug+0x1ac/0x280
-4,1121,681789191,-; fixup_bug+0x55/0xb0
-4,1122,681789202,-; do_error_trap+0xc7/0x2a0
-4,1123,681789210,-; ? fixup_bug+0xb0/0xb0
-4,1124,681789218,-; ? wb_workfn+0xa56/0xfd0
-4,1125,681789228,-; ? wb_workfn+0xa56/0xfd0
-4,1126,681789238,-; do_invalid_op+0x28/0x40
-4,1127,681789243,-; invalid_op+0x58/0x80
-4,1128,681789251,-;RIP: 0010:do_exit+0x12a/0x3140
-4,1129,681789261,-;RSP: 0018:ffff8806b86afde0 EFLAGS: 00010202
-4,1130,681789282,-;RAX: ffff8806f079c980 RBX: 000000000000000b RCX:
-ffffffff923dad02
-4,1131,681789298,-;RDX: 0000000000000000 RSI: 0000000000000000 RDI:
-ffff8806f079d528
-4,1132,681789311,-;RBP: ffff8806b86aff48 R08: 0000000000000000 R09:
-ffffffff95beb528
-4,1133,681789326,-;R10: ffffed00d70d5e27 R11: ffffffff973cc252 R12:
-ffff8806b86afbc0
-4,1134,681789343,-;R13: ffff8806b86afbd0 R14: ffff8806f079c980 R15:
+4,1052,989316028,-;RIP: 0010:mempool_alloc+0x116/0x3c0
+4,1053,989316037,-;RSP: 0018:ffff8807c2a871f8 EFLAGS: 00010293
+4,1054,989316050,-;RAX: dffffc0000000004 RBX: 1ffff100f8550e46 RCX:
+ffffffffa6c720af
+4,1055,989316067,-;RDX: 0000000000000000 RSI: 0000000001408800 RDI:
 0000000000000000
-4,1135,681789350,-; ? do_exit+0x122/0x3140
-4,1136,681789359,-; ? mm_update_next_owner+0x900/0x900
-4,1137,681789371,-; ? __sched_text_start+0x8/0x8
-4,1138,681789383,-; ? __wake_up_common+0x13a/0x510
-4,1139,681789390,-; ? kthread+0x38e/0x460
-4,1140,681789398,-; rewind_stack_do_exit+0x17/0x20
-3,1141,681789401,-;
-3,1142,681789410,-;The buggy address belongs to the page:
-0,1143,681789431,-;page:ffffea001ae1abc0 count:0 mapcount:0 mapping:         
-(null) index:0x0
-0,1144,681789441,-;flags: 0x17ffffc0000000()
-1,1145,681789455,-;raw: 0017ffffc0000000 0000000000000000 0000000000000000
-00000000ffffffff
-1,1146,681789475,-;raw: 0000000000000000 dead000000000200 0000000000000000
+4,1056,989316081,-;RBP: ffff8807c2a872d8 R08: 0000000000000001 R09:
 0000000000000000
-1,1147,681789487,-;page dumped because: kasan: bad access detected
-3,1148,681789490,-;
-3,1149,681789500,-;Memory state around the buggy address:
-3,1150,681789517,-; ffff8806b86af500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 00
-3,1151,681789537,-; ffff8806b86af580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 f2
-3,1152,681789553,-;>ffff8806b86af600: f2 f2 f2 f2 f2 00 f2 f2 f2 f2 f2 f2 f2 00
-00 00
-3,1153,681789561,-;                                     ^
-3,1154,681789576,-; ffff8806b86af680: 00 00 f1 f1 f1 f1 00 00 00 00 00 00 00 f3
-f3 f3
-3,1155,681789594,-; ffff8806b86af700: f3 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 00
-3,1156,681789609,-;==================================================================
-0,1157,760464251,-;kasan: CONFIG_KASAN_INLINE enabled
-0,1158,760464274,-;kasan: GPF could be caused by NULL-ptr deref or user memory
-access
-4,1159,760464307,-;general protection fault: 0000 [#2] SMP KASAN PTI
-4,1160,760464326,-;Modules linked in: f2fs rfcomm bnep nls_iso8859_1 arc4
-iwlmvm intel_rapl x86_pkg_temp_thermal mac80211 intel_powerclamp coretemp
-snd_hda_codec_hdmi kvm_intel snd_hda_codec_realtek snd_hda_codec_generic
-snd_hda_intel kvm snd_hda_codec uvcvideo iwlwifi snd_hda_core irqbypass
-videobuf2_vmalloc snd_hwdep crct10dif_pclmul videobuf2_memops thinkpad_acpi
-crc32_pclmul snd_pcm videobuf2_v4l2 videobuf2_core nvram ghash_clmulni_intel
-cfg80211 videodev snd_seq_midi pcbc btusb media btrtl btbcm aesni_intel btintel
-snd_seq_midi_event aes_x86_64 bluetooth crypto_simd snd_rawmidi glue_helper
-cryptd snd_seq snd_seq_device intel_cstate snd_timer input_leds joydev
-intel_rapl_perf mei_me serio_raw ecdh_generic intel_wmi_thunderbolt wmi_bmof
-snd mei mac_hid soundcore shpchp intel_pch_thermal acpi_pad parport_pc
-4,1161,760464820,c; ppdev lp parport autofs4 btrfs xor zstd_compress raid6_pq
-nouveau i915 mxm_wmi ttm i2c_algo_bit drm_kms_helper e1000e syscopyarea
-sysfillrect sysimgblt fb_sys_fops ptp drm psmouse ahci pps_core libahci wmi
-video hid_generic usbhid hid
-4,1162,760465042,-;CPU: 5 PID: 2752 Comm: f2fs_gc-7:1 Tainted: G    B D W      
- 4.15.7 #1
-4,1163,760465071,-;Hardware name: LENOVO 20J6A00NHH/20J6A00NHH, BIOS R0FET24W
-(1.04 ) 12/21/2016
-4,1164,760465109,-;RIP: 0010:mempool_alloc+0x116/0x3c0
-4,1165,760465135,-;RSP: 0018:ffff8806cbb57530 EFLAGS: 00010293
-4,1166,760465169,-;RAX: dffffc0000000004 RBX: 1ffff100d976aead RCX:
-ffffffff928720af
-4,1167,760465198,-;RDX: 0000000000000000 RSI: 0000000001408800 RDI:
+4,1057,989316086,-;R10: 0000000000000002 R11: 000000000b3edd8a R12:
 0000000000000000
-4,1168,760465227,-;RBP: ffff8806cbb57610 R08: 0000000000000001 R09:
-0000000000000001
-4,1169,760465256,-;R10: 0000000000000002 R11: 0000000009fad99f R12:
-0000000000000000
-4,1170,760465285,-;R13: dffffc0000000000 R14: ffff8806c8f4f050 R15:
+4,1058,989316090,-;R13: dffffc0000000000 R14: ffff8806d58b5a50 R15:
 0000000000000020
-4,1171,760465319,-;FS:  0000000000000000(0000) GS:ffff8807e7740000(0000)
+4,1059,989316095,-;FS:  0000000001f2a8c0(0000) GS:ffff8807e7600000(0000)
 knlGS:0000000000000000
-4,1172,760465348,-;CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-4,1173,760465372,-;CR2: 00007fbf332e9000 CR3: 000000039680e006 CR4:
-00000000003606e0
-4,1174,760465389,-;Call Trace:
-4,1175,760465432,-; ? remove_element.isra.4+0x210/0x210
-4,1176,760465477,-; ? radix_tree_next_chunk+0x72d/0xab0
-4,1177,760465517,-; ? mem_cgroup_uncharge+0x160/0x160
-4,1178,760465583,-; __submit_bio+0x498/0xa50 [f2fs]
-4,1179,760465649,-; __submit_merged_bio+0x1bb/0x760 [f2fs]
-4,1180,760465714,-; __submit_merged_write_cond+0x21f/0x740 [f2fs]
-4,1181,760465753,-; ? put_pages_list+0x370/0x370
-4,1182,760465817,-; f2fs_submit_merged_write+0x36/0x50 [f2fs]
-4,1183,760465877,-; sync_node_pages+0x507/0x1750 [f2fs]
-4,1184,760465936,-; ? f2fs_write_node_page+0x50/0x50 [f2fs]
-4,1185,760465980,-; ? map_id_up+0x215/0x3e0
-4,1186,760466046,-; ? fsync_node_pages+0x14e0/0x14e0 [f2fs]
-4,1187,760466084,-; ? pagecache_get_page+0x228/0x620
-4,1188,760466145,-; ? f2fs_set_node_page_dirty+0x129/0x430 [f2fs]
-4,1189,760466206,-; ? clear_node_page_dirty+0x410/0x410 [f2fs]
-4,1190,760466266,-; ? update_inode+0x181f/0x1f80 [f2fs]
-4,1191,760466334,-; ? f2fs_sync_inode_meta+0x316/0x3c0 [f2fs]
-4,1192,760466372,-; ? _cond_resched+0x2c/0xb0
-4,1193,760466434,-; block_operations+0x35e/0x8a0 [f2fs]
-4,1194,760466495,-; ? f2fs_sync_inode_meta+0x3c0/0x3c0 [f2fs]
-4,1195,760466561,-; ? f2fs_write_data_pages+0x9b/0xc0 [f2fs]
-4,1196,760466619,-; ? f2fs_write_data_pages+0x9b/0xc0 [f2fs]
-4,1197,760466652,-; ? wbc_detach_inode+0x510/0x700
-4,1198,760466714,-; write_checkpoint+0x252/0x4ec0 [f2fs]
-4,1199,760466774,-; ? write_checkpoint+0x252/0x4ec0 [f2fs]
-4,1200,760466817,-; ? __filemap_fdatawrite_range+0x1cf/0x3c0
-4,1201,760466859,-; ? delete_from_page_cache_batch+0xb20/0xb20
-4,1202,760466904,-; ? blk_flush_plug_list+0x85a/0xc20
-4,1203,760466968,-; f2fs_sync_fs+0x285/0x460 [f2fs]
-4,1204,760467031,-; ? trace_event_raw_event_f2fs__page+0x710/0x710 [f2fs]
-4,1205,760467096,-; f2fs_balance_fs_bg+0x3d6/0x8f0 [f2fs]
-4,1206,760467160,-; ? drop_inmem_page+0x7e0/0x7e0 [f2fs]
-4,1207,760467199,-; ? __clear_rsb+0x25/0x3d
-4,1208,760467241,-; ? compat_start_thread+0x90/0x90
-4,1209,760467305,-; gc_thread_func+0xa09/0x13b0 [f2fs]
-4,1210,760467364,-; ? gc_thread_func+0xa09/0x13b0 [f2fs]
-4,1211,760467429,-; ? f2fs_gc+0x2c70/0x2c70 [f2fs]
-4,1212,760467460,-; ? __wake_up_common+0x13a/0x510
-4,1213,760467501,-; ? woken_wake_function+0x80/0x80
-4,1214,760467547,-; ? __kthread_parkme+0x127/0x1c0
-4,1215,760467587,-; kthread+0x38e/0x460
-4,1216,760467646,-; ? f2fs_gc+0x2c70/0x2c70 [f2fs]
-4,1217,760467686,-; ? kthread_create_worker+0x100/0x100
-4,1218,760467728,-; ret_from_fork+0x35/0x40
-4,1219,760467755,-;Code: 89 85 40 ff ff ff 48 8d 85 78 ff ff ff 48 89 85 30 ff
+4,1060,989316100,-;CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+4,1061,989316104,-;CR2: 00000000007d15e4 CR3: 000000068ef22001 CR4:
+00000000003606f0
+4,1062,989316108,-;Call Trace:
+4,1063,989316120,-; ? remove_element.isra.4+0x210/0x210
+4,1064,989316127,-; ? mem_cgroup_uncharge+0x160/0x160
+4,1065,989316134,-; ? release_pages+0x4e0/0xd10
+4,1066,989316140,-; ? unlock_page+0x7d/0xa0
+4,1067,989316182,-; __submit_bio+0x498/0xa50 [f2fs]
+4,1068,989316228,-; __submit_merged_bio+0x1bb/0x760 [f2fs]
+4,1069,989316258,-; __submit_merged_write_cond+0x21f/0x740 [f2fs]
+4,1070,989316263,-; ? pagevec_move_tail+0xc0/0xc0
+4,1071,989316297,-; f2fs_write_cache_pages+0xf81/0x1250 [f2fs]
+4,1072,989316356,-; ? __write_data_page+0x1bd0/0x1bd0 [f2fs]
+4,1073,989316384,-; ? unwind_dump+0x3d0/0x3d0
+4,1074,989316418,-; ? radix_tree_next_chunk+0x72d/0xab0
+4,1075,989316452,-; ? kernel_text_address+0x1b6/0x1e0
+4,1076,989316478,-; ? __kernel_text_address+0x1a/0x60
+4,1077,989316558,-; __f2fs_write_data_pages+0x801/0xb90 [f2fs]
+4,1078,989316578,-; ? find_get_pages_range_tag+0x67d/0xb70
+4,1079,989316632,-; ? f2fs_write_data_page+0x40/0x40 [f2fs]
+4,1080,989316657,-; ? find_lock_entry+0x180/0x180
+4,1081,989316716,-; f2fs_write_data_pages+0x9b/0xc0 [f2fs]
+4,1082,989316782,-; ? f2fs_write_data_pages+0x9b/0xc0 [f2fs]
+4,1083,989316905,-; ? __f2fs_write_data_pages+0xb90/0xb90 [f2fs]
+4,1084,989316949,-; do_writepages+0x123/0x1c0
+4,1085,989316981,-; __filemap_fdatawrite_range+0x2c4/0x3c0
+4,1086,989317012,-; ? delete_from_page_cache_batch+0xb20/0xb20
+4,1087,989317100,-; ? __write_data_page+0x1bd0/0x1bd0 [f2fs]
+4,1088,989317112,-; filemap_fdatawrite+0x33/0x40
+4,1089,989317158,-; sync_dirty_inodes+0x1e6/0x880 [f2fs]
+4,1090,989317220,-; block_operations+0x168/0x8a0 [f2fs]
+4,1091,989317270,-; ? f2fs_sync_inode_meta+0x3c0/0x3c0 [f2fs]
+4,1092,989317309,-; ? read_node_page+0x235/0x370 [f2fs]
+4,1093,989317349,-; write_checkpoint+0x252/0x4ec0 [f2fs]
+4,1094,989317394,-; ? write_checkpoint+0x252/0x4ec0 [f2fs]
+4,1095,989317457,-; ? f2fs_set_page_dirty_nobuffers+0x2b9/0x440 [f2fs]
+4,1096,989317503,-; ? f2fs_set_node_page_dirty+0x361/0x430 [f2fs]
+4,1097,989317554,-; f2fs_sync_fs+0x285/0x460 [f2fs]
+4,1098,989317611,-; ? trace_event_raw_event_f2fs__page+0x710/0x710 [f2fs]
+4,1099,989317628,-; ? radix_tree_lookup+0x29/0x40
+4,1100,989317669,-; f2fs_do_sync_file+0x50a/0x1ac0 [f2fs]
+4,1101,989317712,-; ? __f2fs_ioc_setflags+0x320/0x320 [f2fs]
+4,1102,989317724,-; ? kmem_cache_free+0xc0/0x390
+4,1103,989317733,-; ? putname+0x12c/0x180
+4,1104,989317780,-; f2fs_sync_file+0x14d/0x1b0 [f2fs]
+4,1105,989317819,-; ? f2fs_do_sync_file+0x1ac0/0x1ac0 [f2fs]
+4,1106,989317833,-; vfs_fsync_range+0x131/0x290
+4,1107,989317842,-; ? __fget_light+0x195/0x230
+4,1108,989317850,-; do_fsync+0x5f/0xb0
+4,1109,989317856,-; ? SyS_syncfs+0x140/0x140
+4,1110,989317862,-; SyS_fsync+0x23/0x30
+4,1111,989317871,-; do_syscall_64+0x1c3/0x570
+4,1112,989317880,-; ? do_page_fault+0x5f/0x380
+4,1113,989317886,-; ? prepare_exit_to_usermode+0x105/0x1e0
+4,1114,989317897,-; entry_SYSCALL_64_after_hwframe+0x3d/0xa2
+4,1115,989317904,-;RIP: 0033:0x49a340
+4,1116,989317908,-;RSP: 002b:00007ffc7e5f53c8 EFLAGS: 00000246 ORIG_RAX:
+000000000000004a
+4,1117,989317935,-;RAX: ffffffffffffffda RBX: 0000000000400328 RCX:
+000000000049a340
+4,1118,989317941,-;RDX: 000000000055a6e8 RSI: 0000000000000000 RDI:
+0000000000000062
+4,1119,989317968,-;RBP: 00007ffc7e5f53f0 R08: 0000000000000000 R09:
+000000000000012b
+4,1120,989317978,-;R10: 0000000000000122 R11: 0000000000000246 R12:
+000000000049c030
+4,1121,989317992,-;R13: 000000000049c0c0 R14: 0000000000000000 R15:
+0000000000000000
+4,1122,989318005,-;Code: 89 85 40 ff ff ff 48 8d 85 78 ff ff ff 48 89 85 30 ff
 ff ff 48 83 c0 18 48 89 85 28 ff ff ff e8 c1 36 e1 ff 48 8b 85 40 ff ff ff <80>
 38 00 0f 85 68 02 00 00 48 8b 85 48 ff ff ff 4d 8b 74 24 20 
-1,1220,760468310,-;RIP: mempool_alloc+0x116/0x3c0 RSP: ffff8806cbb57530
-4,1221,760468352,-;---[ end trace 9dc3ab78fda1ade1 ]---
+1,1123,989318122,-;RIP: mempool_alloc+0x116/0x3c0 RSP: ffff8807c2a871f8
+4,1124,989318128,-;---[ end trace 00cfe425f6a4df85 ]---
+3,1125,989318981,-;==================================================================
+3,1126,989318990,-;BUG: KASAN: stack-out-of-bounds in
+update_stack_state+0x5f2/0x750
+3,1127,989318995,-;Read of size 8 at addr ffff8807c2a87c90 by task
+runner-1/6028
+3,1128,989318997,-;
+4,1129,989319003,-;CPU: 0 PID: 6028 Comm: runner-1 Tainted: G      D         
+4.15.7 #1
+4,1130,989319007,-;Hardware name: LENOVO 20J6A00NHH/20J6A00NHH, BIOS R0FET24W
+(1.04 ) 12/21/2016
+4,1131,989319010,-;Call Trace:
+4,1132,989319016,-; dump_stack+0xd8/0x124
+4,1133,989319022,-; print_address_description+0x95/0x400
+4,1134,989319028,-; kasan_report+0x21c/0x3f0
+4,1135,989319033,-; ? update_stack_state+0x5f2/0x750
+4,1136,989319039,-; __asan_report_load8_noabort+0x29/0x40
+4,1137,989319045,-; update_stack_state+0x5f2/0x750
+4,1138,989319050,-; ? unwind_dump+0x3d0/0x3d0
+4,1139,989319056,-; ? unwind_dump+0x3d0/0x3d0
+4,1140,989319061,-; ? unwind_next_frame+0x215/0xb90
+4,1141,989319067,-; unwind_next_frame+0x215/0xb90
+4,1142,989319073,-; ? __filemap_fdatawrite_range+0x2c4/0x3c0
+4,1143,989319079,-; ? update_stack_state+0x750/0x750
+4,1144,989319085,-; ? __unwind_start+0x1f0/0x3e0
+4,1145,989319090,-; __save_stack_trace+0xb2/0x170
+4,1146,989319125,-; ? free_pgtables+0x289/0x3c0
+4,1147,989319204,-; save_stack_trace+0x27/0x40
+4,1148,989319229,-; save_stack+0x4b/0x170
+4,1149,989319241,-; ? save_stack+0x4b/0x170
+4,1150,989319255,-; ? kasan_slab_free+0x99/0x110
+4,1151,989319266,-; ? kmem_cache_free+0xc0/0x390
+4,1152,989319293,-; ? unlink_anon_vmas+0x4a0/0x730
+4,1153,989319304,-; ? free_pgtables+0x289/0x3c0
+4,1154,989319316,-; ? pagevec_lru_move_fn+0x1f9/0x290
+4,1155,989319327,-; ? alloc_pages_current+0xeb/0x2d0
+4,1156,989319339,-; ? PageHuge+0xf6/0x150
+4,1157,989319350,-; ? unlock_page_memcg+0x39/0x50
+4,1158,989319364,-; ? __tlb_remove_page_size+0xdf/0x410
+4,1159,989319378,-; ? page_remove_rmap+0x483/0x9f0
+4,1160,989319389,-; ? _cond_resched+0x2c/0xb0
+4,1161,989319402,-; ? unmap_page_range+0x1df2/0x2440
+4,1162,989319409,-; ? __slab_free+0xd0/0x400
+4,1163,989319414,-; ? __slab_free+0xd0/0x400
+4,1164,989319421,-; ? anon_vma_interval_tree_remove+0xb7f/0x11b0
+4,1165,989319426,-; ? __put_anon_vma+0xb1/0x290
+4,1166,989319431,-; ? kmem_cache_free+0x339/0x390
+4,1167,989319436,-; kasan_slab_free+0x99/0x110
+4,1168,989319442,-; ? unlink_anon_vmas+0x4a0/0x730
+4,1169,989319447,-; kmem_cache_free+0xc0/0x390
+4,1170,989319452,-; unlink_anon_vmas+0x4a0/0x730
+4,1171,989319458,-; free_pgtables+0x289/0x3c0
+4,1172,989319464,-; exit_mmap+0x1f0/0x550
+4,1173,989319469,-; ? SyS_munmap+0x50/0x50
+4,1174,989319476,-; ? mm_update_next_owner+0x51a/0x900
+4,1175,989319482,-; mmput+0x106/0x460
+4,1176,989319487,-; do_exit+0x87b/0x3140
+4,1177,989319492,-; ? putname+0x12c/0x180
+4,1178,989319499,-; ? mm_update_next_owner+0x900/0x900
+4,1179,989319504,-; ? vfs_fsync_range+0x131/0x290
+4,1180,989319509,-; ? __fget_light+0x195/0x230
+4,1181,989319514,-; ? do_fsync+0x5f/0xb0
+4,1182,989319519,-; ? SyS_syncfs+0x140/0x140
+4,1183,989319524,-; ? SyS_fsync+0x23/0x30
+4,1184,989319530,-; ? do_syscall_64+0x1c3/0x570
+4,1185,989319535,-; rewind_stack_do_exit+0x17/0x20
+4,1186,989319539,-;RIP: 0033:0x49a340
+4,1187,989319543,-;RSP: 002b:00007ffc7e5f53c8 EFLAGS: 00000246 ORIG_RAX:
+000000000000004a
+4,1188,989319548,-;RAX: ffffffffffffffda RBX: 0000000000400328 RCX:
+000000000049a340
+4,1189,989319552,-;RDX: 000000000055a6e8 RSI: 0000000000000000 RDI:
+0000000000000062
+4,1190,989319556,-;RBP: 00007ffc7e5f53f0 R08: 0000000000000000 R09:
+000000000000012b
+4,1191,989319560,-;R10: 0000000000000122 R11: 0000000000000246 R12:
+000000000049c030
+4,1192,989319563,-;R13: 000000000049c0c0 R14: 0000000000000000 R15:
+0000000000000000
+3,1193,989319567,-;
+3,1194,989319570,-;The buggy address belongs to the page:
+0,1195,989319575,-;page:ffffea001f0aa1c0 count:0 mapcount:0 mapping:         
+(null) index:0x0
+0,1196,989319579,-;flags: 0x17ffffc0000000()
+1,1197,989319586,-;raw: 0017ffffc0000000 0000000000000000 0000000000000000
+00000000ffffffff
+1,1198,989319592,-;raw: 0000000000000000 dead000000000200 0000000000000000
+0000000000000000
+1,1199,989319596,-;page dumped because: kasan: bad access detected
+3,1200,989319598,-;
+3,1201,989319600,-;Memory state around the buggy address:
+3,1202,989319605,-; ffff8807c2a87b80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00
+3,1203,989319610,-; ffff8807c2a87c00: 00 00 00 00 00 00 00 00 00 f1 f1 f1 00 00
+00 00
+3,1204,989319615,-;>ffff8807c2a87c80: f3 f3 f3 f3 f1 f1 f1 f1 00 00 00 00 00 00
+00 00
+3,1205,989319618,-;                         ^
+3,1206,989319622,-; ffff8807c2a87d00: 00 00 00 00 00 00 00 00 00 f2 f2 f2 00 00
+00 00
+3,1207,989319627,-; ffff8807c2a87d80: 00 00 00 00 00 00 00 00 f3 f3 f3 f3 00 00
+00 00
+3,1208,989319629,-;==================================================================
 
 -- 
 You may reply to this email to add a comment.
