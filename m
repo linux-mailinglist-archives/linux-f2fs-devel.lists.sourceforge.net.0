@@ -2,107 +2,61 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C561C440DD1
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 31 Oct 2021 11:22:23 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 213A74411A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Nov 2021 01:13:15 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mh7yn-0004Bx-Ay; Sun, 31 Oct 2021 10:22:21 +0000
+	id 1mhKwp-0002vC-RJ; Mon, 01 Nov 2021 00:13:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1mh7yl-0004AA-RF
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 31 Oct 2021 10:22:19 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1mhKwo-0002us-Ad
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 00:13:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5seKTjjqrkKovQIrntUMnCap2CzGq686uETW+YP2rkI=; b=bQP74cr+3XoJTaMn+2W5eS8saC
- 7+ADUYGYa6igOUgYjS3syvtEgQktbcmyPinXtbJfDe2+D4drhP5usmYvl4RC/7pTDKPkBy2jy7moD
- whK9J9M95Fkz7ArIGOlImbX8u/BOMy2QMTf7CUbGEKj04sP7HrqgH5gJlu/zIojZh+vI=;
+ bh=fwoVXAquEuQg5UZImIxzfFjCuQ6OiG/DmKEGfaXCUdY=; b=J6qLVK6bdHfog7c5D2EzUYcO13
+ TEixRyM6VQF8+cPfIR5aXvPZjRyhgxFVXwYXU+ewKTxG6R6XYMSgs1alA9PLlCHZpleEaeB7YIfBc
+ vXSZKOLBOL/hxh0pelKEMTzAO3+f+ulkYHaNiPEokle9KQrpQztVdGO/OLsXqCKZ2NAk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=5seKTjjqrkKovQIrntUMnCap2CzGq686uETW+YP2rkI=; b=fzgi/xY9q5wwdAgJ8QHEKC6iyd
- tvJ+p4fPjGhaW8skgsPipnPp4o7fwzq66CQ6ehDh3T6YJkN2ctiar2ae0GwHPGaV39AqP3KrnaN2M
- SxGE/Lv+qh4vHgF3bKwyYoGltvut+rRXzuWAOKmKeif9hMZAC1dlILP/ka4dwuVdELHw=;
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=fwoVXAquEuQg5UZImIxzfFjCuQ6OiG/DmKEGfaXCUdY=; b=N
+ n489BgZaHK8uaPGYtmhfZri4e14x5MH6KLrIfytNHKMh2lItsQ2XMgsKDCOGTWu2OPaE5SyDbx164
+ 8mnBcZ2Bl+7Lv3tbE/JtMt4JnrAZ7F84tlMd5z6nR72XmcP9npMM92p14bZLvvWiJBHIve4k6B5pr
+ aDjtlGY7TIRd9qzk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mh7yg-008e4N-A9
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 31 Oct 2021 10:22:19 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPS id 9DAC060EBB
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 31 Oct 2021 09:57:54 +0000 (UTC)
+ id 1mhKqz-0005TU-NU
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 00:13:10 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 6632F60E98;
+ Sun, 31 Oct 2021 23:15:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1635674274;
- bh=rnVDdTD638WpYN2f6qn1p3XI7N82eTYmpDfpnh+AELI=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=N4IK+spHp9zGL+F+WYK18r3lMvR6nz8PlR7wJJXaw4F68435/git1y8ZT1E0JfU96
- rz5q1A4TaQKYqqmwofjYUWBus4mKmgmesVuCxYynJWikC2WmFlL788tKzOJFxShm6A
- qgKY7IolHT9dmo/jGY/AK1KBbtA8gW+iAA7uTQbKdOtvvmDFjc6xslmAXKozF/KQ0c
- xpsm0uyynkeHp2ytZ2g1LyZ1UZ99qpCkB5c85yzI9S9dxet9FOOWdC8Y3X4DsSlU5w
- RRxUm1+kzUBbPrfVeGcp/WaLBjYv+pcOm/HfmLYX1RqJuYB6gQW7z+cFeD2usI5AH0
- 7/DTCFmi/SzfA==
-Received: by pdx-korg-bugzilla-2.web.codeaurora.org (Postfix, from userid 48)
- id 87CB360F12; Sun, 31 Oct 2021 09:57:54 +0000 (UTC)
-From: bugzilla-daemon@bugzilla.kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Sun, 31 Oct 2021 09:57:54 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: daniel.santos@pobox.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: cc
-Message-ID: <bug-214895-202145-jKkd5EFh4I@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-214895-202145@https.bugzilla.kernel.org/>
-References: <bug-214895-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1635722104;
+ bh=suxkNGmue9aghjYNtvFMsxbmCggQU/mTEGgyuyM6yEo=;
+ h=Date:From:To:Cc:Subject:From;
+ b=fpGO32U+MsTNZbHohxpPwvg1Uq/nPjwDaBlA9NFDdb8JtWAGK6sTrbB+lu3yBYkyF
+ C912kGL8/qX6nG76cT0WwM6WPK707JMNhvnTL1WWkGh2M5LK7Tqxpqo/tLnDABJkLt
+ KquLGV9Z/3RgrdBlXFR2D/SFGhuDx+DdXnJHPEKL4noPzfIGweLhwzdWt36jzXblFS
+ M9bf+mET+ZIt9lAOOjbeyet8ziREuNph58SvdfojegO9FZiaaJKNICUKkzQspjqpEz
+ Ig8eS55+3Rs5M0buwjx5/KDMVkSANT3fdnOoTLsW761BJyErEqIFMlRRFT2g6yS1Yk
+ gJbeRw++6EQtQ==
+Date: Sun, 31 Oct 2021 16:15:02 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <YX8jdp73zUDwlB5E@sol.localdomain>
 MIME-Version: 1.0
-X-Spam-Score: -5.8 (-----)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=214895 Daniel
- Santos (daniel.santos@pobox.com) changed: What |Removed |Added CC|
- |daniel.santos@pobox.com
- Content analysis details:   (-5.8 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mh7yg-008e4N-A9
-Subject: [f2fs-dev] [Bug 214895] F2FS BUG: KASAN: stack-out-of-bounds in
- d_shrink_add+0x17f/0x1c0
+Content-Disposition: inline
+X-Headers-End: 1mhKqz-0005TU-NU
+Subject: [f2fs-dev] [GIT PULL] fscrypt updates for 5.16
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,32 +68,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=214895
+The following changes since commit e4e737bb5c170df6135a127739a9e6148ee3da82:
 
-Daniel Santos (daniel.santos@pobox.com) changed:
+  Linux 5.15-rc2 (2021-09-19 17:28:22 -0700)
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-                 CC|                            |daniel.santos@pobox.com
+are available in the Git repository at:
 
---- Comment #1 from Daniel Santos (daniel.santos@pobox.com) ---
-That's a 3.5 year old kernel and 4.15 is EOLed.  Can you see if this bug still
-exists in one of the current longterm releases, like 4.19.214 or 4.14.253?
-https://www.kernel.org
+  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fscrypt-for-linus
 
-When you have a bug like this, it's always best to check to see if it still
-exists in a longterm branch, because bug fixes are regularly back-ported to
-these branches.
+for you to fetch changes up to b7e072f9b77f4c516df96e0c22ec09f8b2e76ba1:
 
--- 
-You may reply to this email to add a comment.
+  fscrypt: improve a few comments (2021-10-25 19:11:50 -0700)
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+----------------------------------------------------------------
+
+Some cleanups for fs/crypto/:
+
+- Allow 256-bit master keys with AES-256-XTS
+
+- Improve documentation and comments
+
+- Remove unneeded field fscrypt_operations::max_namelen
+
+----------------------------------------------------------------
+Eric Biggers (5):
+      fscrypt: remove fscrypt_operations::max_namelen
+      fscrypt: clean up comments in bio.c
+      fscrypt: improve documentation for inline encryption
+      fscrypt: allow 256-bit master keys with AES-256-XTS
+      fscrypt: improve a few comments
+
+ Documentation/block/inline-encryption.rst |  2 +
+ Documentation/filesystems/fscrypt.rst     | 83 +++++++++++++++++++++++--------
+ fs/crypto/bio.c                           | 32 ++++++------
+ fs/crypto/fname.c                         |  3 +-
+ fs/crypto/fscrypt_private.h               | 16 ++++--
+ fs/crypto/hkdf.c                          | 11 ++--
+ fs/crypto/keysetup.c                      | 62 +++++++++++++++++------
+ fs/ext4/super.c                           |  1 -
+ fs/f2fs/super.c                           |  1 -
+ fs/ubifs/crypto.c                         |  1 -
+ include/linux/fscrypt.h                   |  3 --
+ 11 files changed, 150 insertions(+), 65 deletions(-)
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
