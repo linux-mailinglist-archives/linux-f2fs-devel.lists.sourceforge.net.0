@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFC414415AA
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Nov 2021 09:53:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A52A4415B1
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Nov 2021 09:55:49 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mhT3r-0005w4-NC; Mon, 01 Nov 2021 08:52:58 +0000
+	id 1mhT6a-0006al-EX; Mon, 01 Nov 2021 08:55:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <hj514.kim@samsung.com>) id 1mhT3q-0005ve-I7
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 08:52:57 +0000
+ (envelope-from <hj514.kim@samsung.com>) id 1mhT6S-0006aN-7b
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 08:55:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
  MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
@@ -35,8 +35,8 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
 Received: from mailout1.samsung.com ([203.254.224.24])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mhSy0-0001Iv-J2
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 08:52:57 +0000
+ id 1mhT6K-00039o-TQ
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 08:55:38 +0000
 Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
  by mailout1.samsung.com (KnoxPortal) with ESMTP id
  20211101084649epoutp01fa6b469be0c190b56fdd507f07cac542~zX8mWdnme0961909619epoutp011
@@ -122,7 +122,40 @@ DLP-Filter: Pass
 X-CFilter-Loop: Reflected
 X-CMS-RootMailID: 20211101084637epcas1p3a17850a8a437488649be9b41ffa889e2
 References: <CGME20211101084637epcas1p3a17850a8a437488649be9b41ffa889e2@epcas1p3.samsung.com>
-X-Headers-End: 1mhSy0-0001Iv-J2
+X-Spam-Score: -3.2 (---)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview: Encrypted pages during GC are read and cached in
+ META_MAPPING.
+ However, due to cached pages in META_MAPPING, there is an issue where newly
+ written pages are lost by IPU or DIO writes. Thread A - f2fs_gc() Thread
+ B /* phase 3 */ down_write(i_gc_rwsem) ra_data_block() ---- (a)
+ up_write(i_gc_rwsem)
+ f2fs_direct_IO() : - down_read(i_gc_rwsem) - __blockdev_direct_io() -
+ get_data_block_di [...] 
+ Content analysis details:   (-3.2 points, 6.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [203.254.224.24 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.24 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1mhT6K-00039o-TQ
 Subject: [f2fs-dev] [PATCH v2] F2FS: invalidate META_MAPPING before IPU/DIO
  write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
