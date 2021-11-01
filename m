@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFE0944141C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Nov 2021 08:23:23 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F027441409
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Nov 2021 08:16:01 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mhRf4-0007lS-HB; Mon, 01 Nov 2021 07:23:18 +0000
+	id 1mhRXz-00046F-NB; Mon, 01 Nov 2021 07:15:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <hj514.kim@samsung.com>) id 1mhRf2-0007lM-5L
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 07:23:16 +0000
+ (envelope-from <hj514.kim@samsung.com>) id 1mhRXe-00045h-U2
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 07:15:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
  MIME-Version:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
@@ -33,10 +33,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  xyjSIj8XE6VI1SHZKzCKEkHThvQcN0d9+mD+zCqEFYqIteAi3Ju6dzhf+Uw+Yk5GlYvXOfJ/rd2ff
  VKUXZbdMbL+ONar7vAVCqPbmTZWy9/B9yJQloT44Bb4Un8p7O2//8gm6YdLXDQn9FqKo=;
 Received: from mailout3.samsung.com ([203.254.224.33])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mhRZC-0000nt-Mv
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 07:23:16 +0000
+ id 1mhRRj-00AeJT-Qg
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 07:15:34 +0000
 Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
  by mailout3.samsung.com (KnoxPortal) with ESMTP id
  20211101070924epoutp03da09adff2494b6e7ba6d3fb5abf9a772~zWnjIykE_2071520715epoutp037
@@ -125,7 +125,7 @@ X-CMS-RootMailID: 20211101054217epcas1p3c695f37ab925f47156bd45e3adb5ed94
 References: <CGME20211101054217epcas1p3c695f37ab925f47156bd45e3adb5ed94@epcas1p3.samsung.com>
  <20211101054214.24456-1-hj514.kim@samsung.com>
  <d1929b64-15a3-feaf-5401-1552b2eb2461@kernel.org>
-X-Headers-End: 1mhRZC-0000nt-Mv
+X-Headers-End: 1mhRRj-00AeJT-Qg
 Subject: Re: [f2fs-dev] [PATCH] F2FS: invalidate META_MAPPING before IPU/DIO
  write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
