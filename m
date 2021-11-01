@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E90144413C2
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Nov 2021 07:31:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 105964413CB
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Nov 2021 07:37:19 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mhQqU-0002vD-7h; Mon, 01 Nov 2021 06:31:02 +0000
+	id 1mhQwW-00034x-Sf; Mon, 01 Nov 2021 06:37:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mhQqN-0002ur-3a
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 06:30:55 +0000
+ (envelope-from <chao@kernel.org>) id 1mhQwV-00034r-Kn
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 06:37:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
@@ -35,8 +35,8 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mhQoJ-0000Dz-4P
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 06:30:55 +0000
+ id 1mhQwP-0001kT-HJ
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 06:37:15 +0000
 Received: by mail.kernel.org (Postfix) with ESMTPSA id 7CB9160F45;
  Mon,  1 Nov 2021 06:28:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
@@ -60,7 +60,33 @@ References: <CGME20211101054217epcas1p3c695f37ab925f47156bd45e3adb5ed94@epcas1p3
  <20211101054214.24456-1-hj514.kim@samsung.com>
 From: Chao Yu <chao@kernel.org>
 In-Reply-To: <20211101054214.24456-1-hj514.kim@samsung.com>
-X-Headers-End: 1mhQoJ-0000Dz-4P
+X-Spam-Score: -6.5 (------)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview:  On 2021/11/1 13:42, Hyeong-Jun Kim wrote: > Encrypted pages
+ during GC are read and cached in META_MAPPING. > However, due to cached pages
+ in META_MAPPING, there is an issue where > newly written pages [...] 
+ Content analysis details:   (-6.5 points, 6.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [198.145.29.99 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.6 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1mhQwP-0001kT-HJ
 Subject: Re: [f2fs-dev] [PATCH] F2FS: invalidate META_MAPPING before IPU/DIO
  write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
