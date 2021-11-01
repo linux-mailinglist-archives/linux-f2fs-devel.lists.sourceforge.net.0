@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2359E441422
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Nov 2021 08:27:20 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1F3E44142A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Nov 2021 08:28:12 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mhRiw-0002eV-Qj; Mon, 01 Nov 2021 07:27:17 +0000
+	id 1mhRjn-0004qF-E8; Mon, 01 Nov 2021 07:28:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mhRiq-0002e9-0m
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 07:27:10 +0000
+ (envelope-from <chao@kernel.org>) id 1mhRjm-0004q9-0s
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 07:28:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
@@ -33,9 +33,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  hrjmKlThBd0yMPk27MM72SEe8tzW6KB72dXQmuIWWkm2v9LS80TjdZkUiBl2Wivd0/VDjEFRXqSXT
  GWlwmOEqwOp/UPlcgPU6jdKHlOsgXur1Z6YAfBkNoLkWzsFwQLCdVmHp/HJDM2E1nq6s=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
- id 1mhReq-00020b-SA
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 07:27:10 +0000
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1mhRdx-00AgbN-Kj
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Nov 2021 07:28:09 +0000
 Received: by mail.kernel.org (Postfix) with ESMTPSA id 9723E60FE8;
  Mon,  1 Nov 2021 07:12:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
@@ -61,7 +62,7 @@ References: <CGME20211101054217epcas1p3c695f37ab925f47156bd45e3adb5ed94@epcas1p3
  <9a0360922130485f4252970de4bb535667cc26e9.camel@samsung.com>
 From: Chao Yu <chao@kernel.org>
 In-Reply-To: <9a0360922130485f4252970de4bb535667cc26e9.camel@samsung.com>
-X-Headers-End: 1mhReq-00020b-SA
+X-Headers-End: 1mhRdx-00AgbN-Kj
 Subject: Re: [f2fs-dev] [PATCH] F2FS: invalidate META_MAPPING before IPU/DIO
  write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
