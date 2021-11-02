@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDDEE442526
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Nov 2021 02:29:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C486A44261B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Nov 2021 04:37:51 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mhibv-00011S-Nx; Tue, 02 Nov 2021 01:29:11 +0000
+	id 1mhkcM-0004z7-It; Tue, 02 Nov 2021 03:37:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mhibu-00011M-Bl
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Nov 2021 01:29:10 +0000
+ (envelope-from <chao@kernel.org>) id 1mhkcL-0004z1-A5
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Nov 2021 03:37:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C4UxcBOoOLIfAKidKnB1PH6RINBgvBnrzOhJNj+/kG0=; b=gpsjEMzmwfRVMChBhnYtVSAtAP
- pE6TNRUrx0vQFg3JqZFVV0xiUKmxn/OMwn/NrPnknmwpjWUQWNLdIu8pJAb8pKqbz5CpyhD4Gr0sQ
- LdFxNAeTaZ7nPPKcZhONvK5gjB3DkxvOVC+oy+bdZvtQzOn+hAcm4sgTvOKowV6riGy8=;
+ bh=8VfvwlRFSnnnvvDQlwNomZvHdkeFL5BD54QGepNw+SU=; b=Rar/+vAFhHMYTQnzypMbmCYN/q
+ RExZf/bfO67nhFPzWOnAcqCXu+Nt0qESf2DDlwKfD5l0hqDgJgVgPKf9F69/NZsBICpyrkt8FIC1T
+ PmWIhvbM9NxYKqPFPBezIvJd9s348LXUZVB6GiTnT3tbDApPzZvzs3GPWcECw3sJRgd4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,28 +29,28 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=C4UxcBOoOLIfAKidKnB1PH6RINBgvBnrzOhJNj+/kG0=; b=k49uGVJOWlK2T9pR+bDRX0wVPw
- 8Gr/gN4d5RQ13YTlAAkvkkTsOHV5jcY1lOhXtyB72ZEo0U7OvCvRBdNH61iBbm7shpvYs29Ts3Hv2
- zEXiLGCLJZdMZiyh4LT3uOIGS9n2xYjhjylnHs3Xe9DQ633pFmMNFV8FuXE7QlvendzA=;
+ bh=8VfvwlRFSnnnvvDQlwNomZvHdkeFL5BD54QGepNw+SU=; b=dgW/u/+mQiiU6WdIHvoS9mgfji
+ iKuHW0qIIgzDSEENBJ3Gay/N53JW/1njSWKS5xSFvqth1hPaasDhduZV/iTaiM6a5pCsR1AHjEeXS
+ fWuStT0gGi4JLj5KNBlpn1ZDeZksC8ym8oNzwz1OL95tHwjh/zyzSTOIkrIGi8+g9Voc=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mhibs-00033E-Lw
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Nov 2021 01:29:10 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 8100E610CC;
- Tue,  2 Nov 2021 01:28:57 +0000 (UTC)
+ id 1mhkcK-0003ug-Ms
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Nov 2021 03:37:45 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 62C2760F6F;
+ Tue,  2 Nov 2021 03:37:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1635816538;
- bh=U4ZfHBCoy7l0t3Jy95ZI7OxQi81CBShvutclXQmAFT0=;
+ s=k20201202; t=1635824254;
+ bh=W+VhXomHRpnllsGX4zhga7jZFF/Pxk2QVmjmmokRQyo=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=h3e/wPN49mFL+g6AWga1fecsxgMNYCRZpqscSnDcjjDs+1bnHGvZNIDMocr78L448
- XJeP3J6z4+6AhonbxwIiX3Q3hJXdlQwKivUvTvDgMX7VxPVHjDtzHCHRT2UFWSb8Hh
- dEnyUc42UULcpm/Ta19CFsa5Kxz/Y82qR5hWODdnJybgS8fpUFBslyoc438CZMpOCI
- KG/QAUqYWU+mxLCt+SFA4RrGrdrnPMpqkNwlPSpyJGdyPDlGM8rCgXC7Y8HOCStydp
- LLkgxU1TvVVHc4l3Qi6G8O3RuvUfMYd8oOoZPrhk5BJehbuuWSNNxAAqWdSHu9O6HM
- eWFfYFvG0qrZA==
-Message-ID: <56b09503-e545-919b-b86b-d90d9b84fbae@kernel.org>
-Date: Tue, 2 Nov 2021 09:28:56 +0800
+ b=TA2wMT44AIu+nh8LQKpHgTUM321wn2zdpSo/mzBm3uXLVGhMbv8X+D6vfXjIeiSt5
+ Gt3b+tv8vHhNPKa+itGu8ofPGzmpbv6QBwNvlnzGGO9hE4MQ1ckdPTYj8zLgeL8MSZ
+ m5h4GZw2MAQf712BXXa2/LAfsi9eh0Bna68JHOXg6KUH37bzKAJSdPpWrKiBUUec5c
+ 2KXx5H9QfiFS/8mwFbNmkwfmV9yHSQ2BcGOUSWFeMCimVhz9GxKIQlPJJRVSXM73+Z
+ y311E7PQf9TVfAbxY1ykeGyERb6mvvSRR6+1YBWxnEEM5fy3XZwjdKVzHBBeT3NWHc
+ RNjqvgBsdXaiA==
+Message-ID: <228a7789-4b38-f08c-ecdf-584ef491ea7a@kernel.org>
+Date: Tue, 2 Nov 2021 11:37:31 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.1
@@ -86,7 +86,7 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mhibs-00033E-Lw
+X-Headers-End: 1mhkcK-0003ug-Ms
 Subject: Re: [f2fs-dev] [PATCH v2] F2FS: invalidate META_MAPPING before
  IPU/DIO write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -138,10 +138,46 @@ On 2021/11/1 16:46, Hyeong-Jun Kim wrote:
 > 
 > Fixes: 6aa58d8ad20a ("f2fs: readahead encrypted block during GC")
 > Signed-off-by: Hyeong-Jun Kim <hj514.kim@samsung.com>
+> ---
+>   fs/f2fs/data.c    | 2 ++
+>   fs/f2fs/segment.c | 3 +++
+>   2 files changed, 5 insertions(+)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 74e1a350c1d8..9f754aaef558 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -1708,6 +1708,8 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+>   		 */
+>   		f2fs_wait_on_block_writeback_range(inode,
+>   						map->m_pblk, map->m_len);
+> +		invalidate_mapping_pages(META_MAPPING(sbi),
+> +						map->m_pblk, map->m_pblk);
+>   
+>   		if (map->m_multidev_dio) {
+>   			block_t blk_addr = map->m_pblk;
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 526423fe84ce..f57c55190f9e 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -3652,6 +3652,9 @@ int f2fs_inplace_write_data(struct f2fs_io_info *fio)
+>   		goto drop_bio;
+>   	}
+>   
+> +	invalidate_mapping_pages(META_MAPPING(fio->sbi),
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+There is one more comment from Weichao:
+
+Use sbi instead of fio->sbi?
 
 Thanks,
+
+> +				fio->new_blkaddr, fio->new_blkaddr);
+> +
+>   	stat_inc_inplace_blocks(fio->sbi);
+>   
+>   	if (fio->bio && !(SM_I(sbi)->ipu_policy & (1 << F2FS_IPU_NOCACHE)))
+> 
 
 
 _______________________________________________
