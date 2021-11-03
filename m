@@ -2,79 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52DB14428AD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 Nov 2021 08:36:21 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71B8744435B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Nov 2021 15:23:00 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mhoLB-0003pJ-V0; Tue, 02 Nov 2021 07:36:17 +0000
+	id 1miHAD-0000ya-K3; Wed, 03 Nov 2021 14:22:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mhoLA-0003pC-Kl
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Nov 2021 07:36:16 +0000
+ (envelope-from <mudongliangabcd@gmail.com>) id 1miHAB-0000yO-IN
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Nov 2021 14:22:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tCymKZxM1K0P2bGwd1aIVkDe8O2JKIWpZbldXvxKrYs=; b=k0oXF5lal9lSqZj4PIg42Avvtr
- FtW7jx1a/hW5HukNV5tQ0mvchOo4mxBz0mpLg5vkS8/Pm2j63xR3sqYZq+416tACgKVx/5qCHULej
- 6IkFsxYQhgX3kaB0zynmDPk2k61vZkLsljnIRZQe3tTjRByirMYBzdyoGpXdxzn1gP1c=;
+ bh=odOeSMEh9ZpBA89eL2qhRpEs4XuRy4e44peglvFnMtU=; b=AvfEmsy+IaNRoSdBlk1vlfo4lh
+ r2W2dL5yogjCOB6xnZhrmLU5r1Y1BV4lmFBvTfCG66yYaWRZh2vqgBK4hz5dZN86FRvUMnB74Q0P5
+ hLp+v6WSCLwE79gxs9G9NX7ZEXbsVWNld9Izty4In6tJmIxokKBnN/5qA7cM0mp0EzOg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=tCymKZxM1K0P2bGwd1aIVkDe8O2JKIWpZbldXvxKrYs=; b=kmwRSf8CE2Nf7X0Lz6EVlEVOP6
- IUAwANy0vYYvcNommSrOScQlcnkis2p3NqJW2J3gfqAaNoPhtQskrZLIsDD423o1YxgdKUrPrfcYN
- H/cIwAgoIXVmC3hEXOA2T3xUo/PNgPH+2FLaU76aO3zBGud9vOdxjO924w3DrqiHera4=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mhoLA-0003PY-3a
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 02 Nov 2021 07:36:16 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id C4C4A60EB8;
- Tue,  2 Nov 2021 07:36:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1635838570;
- bh=E0ffIejdumv1RC0pKbIxm0RZVYMo3MKph+prxcwMGlU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=MBqM7NOGsv5CRd9fXjWUpiLJyBboJX6EhA5ls6iSoQFlruMVWgONtIO52dMnDunlD
- 5f70COA/MArLTyI1XBEScaKSYzHIjyv6gcyO3bB1lrVbfvI9LwqoaWw1Fvi+/DKw3E
- XAUh90H//Wl9REfS/aKRH2OQiwHn/IhSYyQTuZ8k7mlS366fiTq3Lidrbmu4qro9nS
- 2Q94oHzTXQpVuYCsdWQsdf3N/Lcit73nGOpbsG11GDXVy9SXGnPsHUERWNxd4Je8Nw
- U5D8ECrCc4testNtX0Z9rlbNLmJS00wRlBCe1uyzS2WtReNGTIQt8f0oIa6UM5NL0E
- OLYsf31jectiw==
-Message-ID: <037676b3-4f66-c749-5c8b-ac0c1ef7facf@kernel.org>
-Date: Tue, 2 Nov 2021 15:36:07 +0800
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=odOeSMEh9ZpBA89eL2qhRpEs4XuRy4e44peglvFnMtU=; b=K
+ f75vk3gn7wfKv7KV/455JcmTvwBkk9o3TBRZtnf23xoWDnwKT7qogOzAVWquYNtyRWOpYvbBKxd60
+ o4l+0Q/2VSkdlxSMkoVRqaRE9huBfVgjzOmhhlZghEHAICtl6Yu5EHBQRP/nZZ8g4yA9ztAlaWBIi
+ /OX7Ou6UhEHyPt/8=;
+Received: from mail-pl1-f169.google.com ([209.85.214.169])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1miHAA-00GiDk-VL
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Nov 2021 14:22:51 +0000
+Received: by mail-pl1-f169.google.com with SMTP id u11so2606577plf.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 03 Nov 2021 07:22:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=odOeSMEh9ZpBA89eL2qhRpEs4XuRy4e44peglvFnMtU=;
+ b=XvnnyeRAxuitPImPJIlZ70HPKNSIKTcgcDDCY0BNYwKZWzeSb5fDk1B3m41sj1be5e
+ JBE6X0HSXj9sHYamSvwZSv0DuNVWnqQ2rPGnd5vvxwHwHjRDOPLcfuYIriiJ7GUjv/Od
+ 8BG9Kxs9jWpA1Xepdcr9KRfekCJQ0CmTHp+xZ5aQryS9DFroWIs6G/cYS+DuCdEP1Y5u
+ scsALWMNUaNfM4hT5rvf+MJak6cx1BlCEdKDTUO49B5uDS3DftuL/XS+O43iZX1uxePw
+ bVnhf1/EkcSTncJmKhvlbO72RoA2w0CDrgGISL1VMSgJQF5WpieOhKwKk3JT/ZmVIi4r
+ Ghmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=odOeSMEh9ZpBA89eL2qhRpEs4XuRy4e44peglvFnMtU=;
+ b=kyhhfv0Nwllv0LBg+5wTNvgKDrv91tmBhn6j3hwCSKc6hREo9u5FK+V62DQ2XoBiNY
+ tz4kf1y3asGLdnqEB2hlm84/GI1qpiqw4Y7sDcfSPv2O5CSIv8toMl+sYZ0T4vscWOyo
+ Sdki8ohGxBlPNhkvSzNm0MQXklQ1Q5I2KnqbfKqqv34a8vD+eJfDs5rfk1+jYvcTlvYb
+ h2JcePKlj7dKAiE7NjJy4e9braM9XSz+h3wnJEBq4zs71aqM6LI3xvbl00uPshxmR1wq
+ WTo/nPEuILaWMW3TCvPgJe/XvIvJ2pb4qivRQffgORYSXPg974pQ0yag49UtG9t/dTIW
+ vUeQ==
+X-Gm-Message-State: AOAM533+wEG19aAi0O+lYg/VgVUmII7nIMKCGQwEd75qoUNb3z/iBOsv
+ ++kb9Hm9dRwqRZEiTAwJPig=
+X-Google-Smtp-Source: ABdhPJx9boeHyijVo0W1PSZZtMsybz7on3bwcC9dzysQlM/8X3F4rrEQ+xNqP6JGnTelBQ2qFY9VIg==
+X-Received: by 2002:a17:90b:1293:: with SMTP id
+ fw19mr14920912pjb.155.1635949365327; 
+ Wed, 03 Nov 2021 07:22:45 -0700 (PDT)
+Received: from localhost.localdomain ([94.177.118.123])
+ by smtp.gmail.com with ESMTPSA id z21sm2855893pfk.31.2021.11.03.07.22.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Nov 2021 07:22:44 -0700 (PDT)
+From: Dongliang Mu <mudongliangabcd@gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Wed,  3 Nov 2021 22:22:27 +0800
+Message-Id: <20211103142228.1235864-1-mudongliangabcd@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.1
-Content-Language: en-US
-To: Hyeong-Jun Kim <hj514.kim@samsung.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <CGME20211102071004epcas1p4d6422cb2ccaa6af495cee4f041f63048@epcas1p4.samsung.com>
- <20211102071002.71823-1-hj514.kim@samsung.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20211102071002.71823-1-hj514.kim@samsung.com>
-X-Spam-Score: -7.9 (-------)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2021/11/2 15:10, Hyeong-Jun Kim wrote: > Encrypted pages
- during GC are read and cached in META_MAPPING. > However, due to cached pages
- in META_MAPPING, there is an issue where > newly written pages [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview: f2fs_fill_super -> f2fs_build_segment_manager ->
+ create_discard_cmd_control
+ -> f2fs_start_discard_thread It invokes kthread_run to create a thread and
+ run issue_discard_thread. However, if f2fs_build_node_manager fails, the
+ control flow goes to free_nm and calls f2fs_destroy_node_manager. This
+ function
+ will free sbi->nm_info. However, if issue_discard_thread accesses sbi->nm
+ [...] Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [mudongliangabcd[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -84,11 +106,13 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mhoLA-0003PY-3a
-Subject: Re: [f2fs-dev] [PATCH v4] F2FS: invalidate META_MAPPING before
- IPU/DIO write
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.169 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.169 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1miHAA-00GiDk-VL
+Subject: [f2fs-dev] [PATCH] fs: f2fs: fix UAF in f2fs_available_free_memory
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,48 +124,82 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, Dongliang Mu <mudongliangabcd@gmail.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/11/2 15:10, Hyeong-Jun Kim wrote:
-> Encrypted pages during GC are read and cached in META_MAPPING.
-> However, due to cached pages in META_MAPPING, there is an issue where
-> newly written pages are lost by IPU or DIO writes.
-> 
-> Thread A - f2fs_gc()            Thread B
-> /* phase 3 */
-> down_write(i_gc_rwsem)
-> ra_data_block()       ---- (a)
-> up_write(i_gc_rwsem)
->                                  f2fs_direct_IO() :
->                                   - down_read(i_gc_rwsem)
->                                   - __blockdev_direct_io()
->                                   - get_data_block_dio_write()
->                                   - f2fs_dio_submit_bio()  ---- (b)
->                                   - up_read(i_gc_rwsem)
-> /* phase 4 */
-> down_write(i_gc_rwsem)
-> move_data_block()     ---- (c)
-> up_write(i_gc_rwsem)
-> 
-> (a) In phase 3 of f2fs_gc(), up-to-date page is read from storage and
->      cached in META_MAPPING.
-> (b) In thread B, writing new data by IPU or DIO write on same blkaddr as
->      read in (a). cached page in META_MAPPING become out-dated.
-> (c) In phase 4 of f2fs_gc(), out-dated page in META_MAPPING is copied to
->      new blkaddr. In conclusion, the newly written data in (b) is lost.
-> 
-> To address this issue, invalidating pages in META_MAPPING before IPU or
-> DIO write.
-> 
-> Fixes: 6aa58d8ad20a ("f2fs: readahead encrypted block during GC")
-> Signed-off-by: Hyeong-Jun Kim <hj514.kim@samsung.com>
+f2fs_fill_super
+-> f2fs_build_segment_manager
+   -> create_discard_cmd_control
+      -> f2fs_start_discard_thread
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+It invokes kthread_run to create a thread and run issue_discard_thread.
 
-Thanks,
+However, if f2fs_build_node_manager fails, the control flow goes to
+free_nm and calls f2fs_destroy_node_manager. This function will free
+sbi->nm_info. However, if issue_discard_thread accesses sbi->nm_info
+after the deallocation, but before the f2fs_stop_discard_thread, it will
+cause UAF(Use-after-free).
+
+-> f2fs_destroy_segment_manager
+   -> destroy_discard_cmd_control
+      -> f2fs_stop_discard_thread
+
+Fix this by switching the order of f2fs_build_segment_manager
+and f2fs_build_node_manager.
+
+Signed-off-by: Dongliang Mu <mudongliangabcd@gmail.com>
+---
+ fs/f2fs/super.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 78ebc306ee2b..1a23b64cfb74 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4135,18 +4135,18 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	}
+ 
+ 	/* setup f2fs internal modules */
+-	err = f2fs_build_segment_manager(sbi);
+-	if (err) {
+-		f2fs_err(sbi, "Failed to initialize F2FS segment manager (%d)",
+-			 err);
+-		goto free_sm;
+-	}
+ 	err = f2fs_build_node_manager(sbi);
+ 	if (err) {
+ 		f2fs_err(sbi, "Failed to initialize F2FS node manager (%d)",
+ 			 err);
+ 		goto free_nm;
+ 	}
++	err = f2fs_build_segment_manager(sbi);
++	if (err) {
++		f2fs_err(sbi, "Failed to initialize F2FS segment manager (%d)",
++			 err);
++		goto free_sm;
++	}
+ 
+ 	/* For write statistics */
+ 	sbi->sectors_written_start = f2fs_get_sectors_written(sbi);
+@@ -4351,10 +4351,10 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	sbi->node_inode = NULL;
+ free_stats:
+ 	f2fs_destroy_stats(sbi);
+-free_nm:
+-	f2fs_destroy_node_manager(sbi);
+ free_sm:
+ 	f2fs_destroy_segment_manager(sbi);
++free_nm:
++	f2fs_destroy_node_manager(sbi);
+ 	f2fs_destroy_post_read_wq(sbi);
+ stop_ckpt_thread:
+ 	f2fs_stop_ckpt_thread(sbi);
+-- 
+2.25.1
+
 
 
 _______________________________________________
