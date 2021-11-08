@@ -2,98 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 397AE4481CF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  8 Nov 2021 15:30:46 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7251449800
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  8 Nov 2021 16:18:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mk5fU-0008QX-DW; Mon, 08 Nov 2021 14:30:40 +0000
+	id 1mk6Pa-00061C-8L; Mon, 08 Nov 2021 15:18:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mk5fO-0008QM-5a
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Nov 2021 14:30:34 +0000
+ (envelope-from <chao@kernel.org>) id 1mk6PY-00060u-Nx
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Nov 2021 15:18:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G9c6icg0rCHqREM3gCLVHmH4Stdwd6DdC2gLHnr0esI=; b=MrsPCTp1kqwrvZWAq3RNO8IuMC
- 70nAdQD6wasvcENnMt5qtuxFRke+26vAHsBbWwPQz76YyRqQKc3v5FfNC++42IqAKLkGq8Cc2pfNg
- cBFnBYzPk07BNbCzIzs17JV1spQmMe0HvQZeX5UAZq+baTrd73sQCXud6nvW6qox8cRQ=;
+ bh=qG3MDjcSJb9YOl16z/MziqVp0/H6r3OgfRqsA1FLJWk=; b=KF9JivL4h7W+is6j9eKCIvXcw8
+ zwv4WRPmo0naiXih9woMUtFvTP0afHB/VfXJpsx9qz7/4iiMKJhQekcxHvZBSDM1DxMKw8lqrvqNM
+ uJQKdtpadzahvmlEZAgQTmAI/XqAPjfzllIKWAuajwL7m+bkscvpfe66FjPtqygnJCQs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=G9c6icg0rCHqREM3gCLVHmH4Stdwd6DdC2gLHnr0esI=; b=TLjNts5O/YcTJKg8ytq7EeAhDL
- rGYV7iREaALu9rIrdCNonbB7dS6xlCvcz3kM140Jn3p+USW44XAqpfxoAUgDZ3dGlWw0/ErD9ENev
- CxfbgXrESHDAEsRFdE/YjwE4VdS+TVDzO1oWM6pncR3ZXaS1DF/kf0ek8WxZRXEh0htA=;
+ bh=qG3MDjcSJb9YOl16z/MziqVp0/H6r3OgfRqsA1FLJWk=; b=VeAJ3braQ8A5QDpx17ZFYvFv2j
+ DAlj1Erdux4NEiDHRIJm8Yde9H3ADcnJ1BrgnzC8PXs2iEYUMr07pfQ+NPPNQARgip9pl9s3qujcH
+ lc9gDfozHtJjfLbbYWCjExkJKV4KmNO0H0TxaDfrWdEiFK7k6Whr+XJYZg5mjLOSaa3k=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mk5fN-0001HC-Dm
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Nov 2021 14:30:34 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 0850C610E9;
- Mon,  8 Nov 2021 14:30:20 +0000 (UTC)
+ id 1mk6PX-006CLJ-Fc
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 08 Nov 2021 15:18:16 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id F2DB56120D;
+ Mon,  8 Nov 2021 15:18:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1636381827;
- bh=teSXmvT55Yru85Ve3wsi5RT8pweJUXPYK8qaNRYt0PY=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=M1STzeGVSB2LGrrkopscw6XEFpweF8vWOzHehtruvkuQgF8/zAhsnryYBP2fz6B6z
- ZgLO1EHD6wE5l69vlQGI4DZM+NlfQBtmB4MXZRq/DssXiNGrVyNBp6vd1yzWxFs0OP
- LdXDBbspMxIXS28i3eQWLk0NnwHzUEokCdPvoA46OsoQex2Clhqh/RxObeIE1FKRCB
- Xwd3rl5abhMq7zICvbKhQ1zlLedjyuD1vKiKHXM1CwlbTQOoy71xtIy00jM0zWnNpa
- Ta7NE2laJU5WKqDA1ayZay8fV/MTUzX6AQB2gEGFEXKnZAExllmi1LLY29lM4iNgZs
- mA6Ad3Txrp8ag==
-Message-ID: <dcfc96ba-6654-4da2-3421-4c59c9bb9432@kernel.org>
-Date: Mon, 8 Nov 2021 22:30:18 +0800
+ s=k20201202; t=1636384690;
+ bh=R+wYiCERXjYNrpHC1c+bYtsL51nQ0c1O9Fjs/nlAi9M=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=lV49R2lfPcEKMMibuHumgCau3sdL7xNZg6N3dukmMbghPGFUYQWd/QpG/ft4rmiLA
+ zrNArJW2hh9NLvs+xq9OqvQfz+7h75hJJN9EbC/i9/Z7sTwa/x0VapBCCvN7kz+Nkt
+ ki8zNvxirurTBQ51WF14fh54W6i+N6zZ1qtJsnUuEvRUzflpH4LAWf04u0pe0a+Dqc
+ f6ITEWBEmpBcXxCTGC9U7zPE5krrb2Pq1zFMaATu0yW/xqHCPZUKCKfJFQCTTJNTm2
+ 62hMQ5x0y4JJeZsaUBgHs5l004y6kr9vBaTWHYGafbO6oaDJrFJtr2t5xP/jFCwhog
+ yncTMnZZ7VLUw==
+Message-ID: <98786147-6377-063b-900f-4c15636a9f6e@kernel.org>
+Date: Mon, 8 Nov 2021 23:18:06 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.3.0
 Content-Language: en-US
-To: =?UTF-8?B?5bi45Yek5qWg?= <changfengnan@vivo.com>,
- "jaegeuk@kernel.org" <jaegeuk@kernel.org>
-References: <20211108035459.40139-1-changfengnan@vivo.com>
- <KL1PR0601MB4003615E989DEFDE86793B58BB919@KL1PR0601MB4003.apcprd06.prod.outlook.com>
+To: Fengnan Chang <changfengnan@vivo.com>, jaegeuk@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20210723083745.172016-1-changfengnan@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <KL1PR0601MB4003615E989DEFDE86793B58BB919@KL1PR0601MB4003.apcprd06.prod.outlook.com>
+In-Reply-To: <20210723083745.172016-1-changfengnan@vivo.com>
 X-Spam-Score: -7.9 (-------)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 2021/11/8 16:56, 常凤楠 wrote: > Anyway, I did some
-   modify to verify my idea, and did some test, not found problem for now. Could
-    you please consider: 1. pin file 2. fallocate file w/ filesize keeped - it
-    will preallocate physical blocks aligned to segments 3. unpin file 4. overwrite
-    compressed file 
- 
+ Content preview:  On 2021/7/23 16:37, Fengnan Chang wrote: > Don't alloc new
+ page array to replace old, just use old page array, try > to reduce one page
+ array alloc and free when write compress page. > > Signed-off-by [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [198.145.29.99 listed in list.dnswl.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ high trust [198.145.29.99 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
+ envelope-from domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mk5fN-0001HC-Dm
-Subject: Re: [f2fs-dev] Do we need serial io for compress file?
+X-Headers-End: 1mk6PX-006CLJ-Fc
+Subject: Re: [f2fs-dev] [PATCH v1] f2fs: compress: reduce one page array
+ alloc and free when write compressed page
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,69 +100,127 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyMS8xMS84IDE2OjU2LCDluLjlh6TmpaAgd3JvdGU6Cj4gQW55d2F5LCBJIGRpZCBzb21l
-IG1vZGlmeSB0byB2ZXJpZnkgbXkgaWRlYSwgYW5kIGRpZCBzb21lIHRlc3QsIG5vdCBmb3VuZCBw
-cm9ibGVtIGZvciBub3cuCgpDb3VsZCB5b3UgcGxlYXNlIGNvbnNpZGVyOgoxLiBwaW4gZmlsZQoy
-LiBmYWxsb2NhdGUgZmlsZSB3LyBmaWxlc2l6ZSBrZWVwZWQKICAtIGl0IHdpbGwgcHJlYWxsb2Nh
-dGUgcGh5c2ljYWwgYmxvY2tzIGFsaWduZWQgdG8gc2VnbWVudHMKMy4gdW5waW4gZmlsZQo0LiBv
-dmVyd3JpdGUgY29tcHJlc3NlZCBmaWxlCgpUaGFua3MsCgo+IAo+IFRoZSBtb2RpZnkgYXMgZm9s
-bG93czoKPiAKPiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9kYXRhLmMgYi9mcy9mMmZzL2RhdGEuYwo+
-IGluZGV4IGY0ZmQ2YzI0NmM5YS4uMGVkNjc3ZWZlODIwIDEwMDY0NAo+IC0tLSBhL2ZzL2YyZnMv
-ZGF0YS5jCj4gKysrIGIvZnMvZjJmcy9kYXRhLmMKPiBAQCAtMzE2NSw4ICszMTY1LDYgQEAgc3Rh
-dGljIGlubGluZSBib29sIF9fc2hvdWxkX3NlcmlhbGl6ZV9pbyhzdHJ1Y3QgaW5vZGUgKmlub2Rl
-LAo+ICAgCWlmIChJU19OT1FVT1RBKGlub2RlKSkKPiAgIAkJcmV0dXJuIGZhbHNlOwo+ICAgCj4g
-LQlpZiAoZjJmc19uZWVkX2NvbXByZXNzX2RhdGEoaW5vZGUpKQo+IC0JCXJldHVybiB0cnVlOwo+
-ICAgCWlmICh3YmMtPnN5bmNfbW9kZSAhPSBXQl9TWU5DX0FMTCkKPiAgIAkJcmV0dXJuIHRydWU7
-Cj4gICAJaWYgKGdldF9kaXJ0eV9wYWdlcyhpbm9kZSkgPj0gU01fSShGMkZTX0lfU0IoaW5vZGUp
-KS0+bWluX3NlcV9ibG9ja3MpCj4gQEAgLTMyMTgsMTEgKzMyMTYsMTYgQEAgc3RhdGljIGludCBf
-X2YyZnNfd3JpdGVfZGF0YV9wYWdlcyhzdHJ1Y3QgYWRkcmVzc19zcGFjZSAqbWFwcGluZywKPiAg
-IAkJbXV0ZXhfbG9jaygmc2JpLT53cml0ZXBhZ2VzKTsKPiAgIAkJbG9ja2VkID0gdHJ1ZTsKPiAg
-IAl9Cj4gKwlpZiAoZjJmc19uZWVkX2NvbXByZXNzX2RhdGEoaW5vZGUpKQo+ICsJCW11dGV4X2xv
-Y2soJihGMkZTX0koaW5vZGUpLT5jb21wcmVzc19sb2NrKSk7Cj4gICAKPiAgIAlibGtfc3RhcnRf
-cGx1ZygmcGx1Zyk7Cj4gICAJcmV0ID0gZjJmc193cml0ZV9jYWNoZV9wYWdlcyhtYXBwaW5nLCB3
-YmMsIGlvX3R5cGUpOwo+ICAgCWJsa19maW5pc2hfcGx1ZygmcGx1Zyk7Cj4gICAKPiArCWlmIChm
-MmZzX25lZWRfY29tcHJlc3NfZGF0YShpbm9kZSkpCj4gKwkJbXV0ZXhfdW5sb2NrKCYoRjJGU19J
-KGlub2RlKS0+Y29tcHJlc3NfbG9jaykpOwo+ICsKPiAgIAlpZiAobG9ja2VkKQo+ICAgCQltdXRl
-eF91bmxvY2soJnNiaS0+d3JpdGVwYWdlcyk7Cj4gICAKPiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9m
-MmZzLmggYi9mcy9mMmZzL2YyZnMuaAo+IGluZGV4IDAzOWEyMjllMTFjOS4uM2E2NTg3ZjEzZDJm
-IDEwMDY0NAo+IC0tLSBhL2ZzL2YyZnMvZjJmcy5oCj4gKysrIGIvZnMvZjJmcy9mMmZzLmgKPiBA
-QCAtNzYzLDYgKzc2Myw3IEBAIHN0cnVjdCBmMmZzX2lub2RlX2luZm8gewo+ICAgCXN0cnVjdCBs
-aXN0X2hlYWQgaW5tZW1fcGFnZXM7CS8qIGlubWVtb3J5IHBhZ2VzIG1hbmFnZWQgYnkgZjJmcyAq
-Lwo+ICAgCXN0cnVjdCB0YXNrX3N0cnVjdCAqaW5tZW1fdGFzazsJLyogc3RvcmUgaW5tZW1vcnkg
-dGFzayAqLwo+ICAgCXN0cnVjdCBtdXRleCBpbm1lbV9sb2NrOwkvKiBsb2NrIGZvciBpbm1lbW9y
-eSBwYWdlcyAqLwo+ICsJc3RydWN0IG11dGV4IGNvbXByZXNzX2xvY2s7CS8qIGxvY2sgZm9yIGNv
-bXByZXNzIGZpbGUgKi8KPiAgIAlzdHJ1Y3QgZXh0ZW50X3RyZWUgKmV4dGVudF90cmVlOwkvKiBj
-YWNoZWQgZXh0ZW50X3RyZWUgZW50cnkgKi8KPiAgIAo+ICAgCS8qIGF2b2lkIHJhY2luZyBiZXR3
-ZWVuIGZvcmVncm91bmQgb3AgYW5kIGdjICovCj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvc3VwZXIu
-YyBiL2ZzL2YyZnMvc3VwZXIuYwo+IGluZGV4IGExMzM5MzIzMzNjNS4uODU2NmU5YzM0NTQwIDEw
-MDY0NAo+IC0tLSBhL2ZzL2YyZnMvc3VwZXIuYwo+ICsrKyBiL2ZzL2YyZnMvc3VwZXIuYwo+IEBA
-IC0xMzIzLDYgKzEzMjMsNyBAQCBzdGF0aWMgc3RydWN0IGlub2RlICpmMmZzX2FsbG9jX2lub2Rl
-KHN0cnVjdCBzdXBlcl9ibG9jayAqc2IpCj4gICAJSU5JVF9MSVNUX0hFQUQoJmZpLT5pbm1lbV9p
-bGlzdCk7Cj4gICAJSU5JVF9MSVNUX0hFQUQoJmZpLT5pbm1lbV9wYWdlcyk7Cj4gICAJbXV0ZXhf
-aW5pdCgmZmktPmlubWVtX2xvY2spOwo+ICsJbXV0ZXhfaW5pdCgmZmktPmNvbXByZXNzX2xvY2sp
-Owo+ICAgCWluaXRfcndzZW0oJmZpLT5pX2djX3J3c2VtW1JFQURdKTsKPiAgIAlpbml0X3J3c2Vt
-KCZmaS0+aV9nY19yd3NlbVtXUklURV0pOwo+ICAgCWluaXRfcndzZW0oJmZpLT5pX3hhdHRyX3Nl
-bSk7Cj4gLS0KPiAKPj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0KPj4gRnJvbTog5bi45Yek
-5qWgCj4+IFNlbnQ6IE1vbmRheSwgTm92ZW1iZXIgOCwgMjAyMSAxMTo1NSBBTQo+PiBUbzogamFl
-Z2V1a0BrZXJuZWwub3JnOyBjaGFvQGtlcm5lbC5vcmcKPj4gQ2M6IGxpbnV4LWYyZnMtZGV2ZWxA
-bGlzdHMuc291cmNlZm9yZ2UubmV0Cj4+IFN1YmplY3Q6IERvIHdlIG5lZWQgc2VyaWFsIGlvIGZv
-ciBjb21wcmVzcyBmaWxlPwo+Pgo+PiBJbiBteSB0ZXN0LCBzZXJpYWwgaW8gZm9yIGNvbXByZXNz
-IGZpbGUgd2lsbCBtYWtlIG11bHRpdGhyZWFkIHNtYWxsIHdyaXRlCj4+IHBlcmZvcm1hbmNlIGRy
-b3AgYSBsb3QuCj4+Cj4+IEknbSB0cnkgdG8gZmluZ3VyZSBvdXQgd2h5IHdlIG5lZWQgX19zaG91
-bGRfc2VyaWFsaXplX2lvLCBJTU8sIHdlIHVzZQo+PiBfX3Nob3VsZF9zZXJpYWxpemVfaW8gdG8g
-YXZvaWQgZGVhZGxvY2sgb3IgdHJ5IHRvIGltcHJvdmUgc2VxdWVudGlhbAo+PiBwZXJmb3JtYW5j
-ZSwgYnV0IEkgZG9uJ3QgdW5kZXJzdGFuZCB3aHkgd2Ugc2hvdWxkIGRvIHRoaXMgZm9yIGNvbXBy
-ZXNzZWQKPj4gZmlsZS4gSW4gbXkgdGVzdCwgaWYgd2UganVzdCByZW1vdmUgdGhpcywgd3JpdGUg
-c2FtZSBmaWxlIGluIG11bHRpdGhyZWFkIHdpbGwgaGF2ZQo+PiBwcm9ibGVtLCBidXQgcGFyYWxs
-ZWwgd3JpdGUgZGlmZmVyZW50IGZpbGVzIGluIG11bHRpdGhyZWFkIGlzIG9rLiBTbyBJIHRoaW5r
-Cj4+IG1heWJlIHdlIHNob3VsZCB1c2UgYW5vdGhlciBsb2NrIHRvIGFsbG93IHdyaXRlIGRpZmZl
-cmVudCBmaWxlcyBpbgo+PiBtdWx0aXRocmVhZC4KCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51
-eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZv
-cmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On 2021/7/23 16:37, Fengnan Chang wrote:
+> Don't alloc new page array to replace old, just use old page array, try
+> to reduce one page array alloc and free when write compress page.
+> 
+> Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
+> ---
+>   fs/f2fs/compress.c | 18 ++++--------------
+>   fs/f2fs/f2fs.h     |  1 +
+>   2 files changed, 5 insertions(+), 14 deletions(-)
+> 
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index 455561826c7d..1395b9cec7f4 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -618,7 +618,6 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+>   	const struct f2fs_compress_ops *cops =
+>   				f2fs_cops[fi->i_compress_algorithm];
+>   	unsigned int max_len, new_nr_cpages;
+> -	struct page **new_cpages;
+>   	u32 chksum = 0;
+>   	int i, ret;
+>   
+> @@ -633,6 +632,7 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+>   
+>   	max_len = COMPRESS_HEADER_SIZE + cc->clen;
+>   	cc->nr_cpages = DIV_ROUND_UP(max_len, PAGE_SIZE);
+> +	cc->raw_nr_cpages = cc->nr_cpages;
+>   
+>   	cc->cpages = page_array_alloc(cc->inode, cc->nr_cpages);
+>   	if (!cc->cpages) {
+> @@ -683,13 +683,6 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+>   
+>   	new_nr_cpages = DIV_ROUND_UP(cc->clen + COMPRESS_HEADER_SIZE, PAGE_SIZE);
+>   
+> -	/* Now we're going to cut unnecessary tail pages */
+> -	new_cpages = page_array_alloc(cc->inode, new_nr_cpages);
+> -	if (!new_cpages) {
+> -		ret = -ENOMEM;
+> -		goto out_vunmap_cbuf;
+> -	}
+> -
+>   	/* zero out any unused part of the last page */
+>   	memset(&cc->cbuf->cdata[cc->clen], 0,
+>   			(new_nr_cpages * PAGE_SIZE) -
+> @@ -700,7 +693,6 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+>   
+>   	for (i = 0; i < cc->nr_cpages; i++) {
+>   		if (i < new_nr_cpages) {
+> -			new_cpages[i] = cc->cpages[i];
+>   			continue;
+>   		}
+>   		f2fs_compress_free_page(cc->cpages[i]);
+> @@ -710,8 +702,6 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+>   	if (cops->destroy_compress_ctx)
+>   		cops->destroy_compress_ctx(cc);
+>   
+> -	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
+> -	cc->cpages = new_cpages;
+>   	cc->nr_cpages = new_nr_cpages;
+>   
+>   	trace_f2fs_compress_pages_end(cc->inode, cc->cluster_idx,
+> @@ -727,7 +717,7 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+>   		if (cc->cpages[i])
+>   			f2fs_compress_free_page(cc->cpages[i]);
+>   	}
+> -	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
+> +	page_array_free(cc->inode, cc->cpages, cc->raw_nr_cpages);
+>   	cc->cpages = NULL;
+>   destroy_compress_ctx:
+>   	if (cops->destroy_compress_ctx)
+> @@ -1330,7 +1320,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+>   	spin_unlock(&fi->i_size_lock);
+>   
+>   	f2fs_put_rpages(cc);
+> -	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
+> +	page_array_free(cc->inode, cc->cpages, cc->raw_nr_cpages);
+>   	cc->cpages = NULL;
+>   	f2fs_destroy_compress_ctx(cc, false);
+>   	return 0;
+> @@ -1356,7 +1346,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+>   	else
+>   		f2fs_unlock_op(sbi);
+>   out_free:
+> -	page_array_free(cc->inode, cc->cpages, cc->nr_cpages);
+> +	page_array_free(cc->inode, cc->cpages, cc->raw_nr_cpages);
+>   	cc->cpages = NULL;
+>   	return -EAGAIN;
+>   }
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 867f2c5d9559..8b1f84d88a65 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1454,6 +1454,7 @@ struct compress_ctx {
+>   	unsigned int nr_rpages;		/* total page number in rpages */
+>   	struct page **cpages;		/* pages store compressed data in cluster */
+>   	unsigned int nr_cpages;		/* total page number in cpages */
+> +	unsigned int raw_nr_cpages;	/* max total page number in cpages */
+
+Sorry for the long delay, I guess it's worth to take this patch to simply compress
+flow...
+
+One more concern about code readability:
+
+How about keeping nr_{cpages,rpages} to indicate max number of page pointers in array,
+and introduce valid_nr_cpages to indicate valid number of page pointers in array.
+
+Thoughts?
+
+Thanks,
+
+>   	void *rbuf;			/* virtual mapped address on rpages */
+>   	struct compress_data *cbuf;	/* virtual mapped address on cpages */
+>   	size_t rlen;			/* valid data length in rbuf */
+> 
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
