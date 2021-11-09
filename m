@@ -2,90 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E3FA44B154
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  9 Nov 2021 17:40:32 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A5E144B162
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  9 Nov 2021 17:42:36 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mkUAa-0005dS-4P; Tue, 09 Nov 2021 16:40:25 +0000
+	id 1mkUCf-0002YK-VI; Tue, 09 Nov 2021 16:42:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
- <BATV+d5854fb4eedb8c199da5+6652+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1mkUAN-0005cA-Pv
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 09 Nov 2021 16:40:13 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <axboe@kernel.dk>) id 1mkUCe-0002YE-46
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 09 Nov 2021 16:42:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HrXSYw8rk4n+A4PZtzybK6DqKpPd/fbVLmvWcN7MKLY=; b=VWjvfjM1csji6v9nHb8+KdlQYk
- oVQMDTSTn9FN01FBMEHj3pCCwloojAKcTLJsA1mPPlI2u2WePZQhELhNawLUqay/TC6nGyBDy0mbb
- ETk51/xdMD04BS/3M6pApbsXrKtllKvHyv4SeN/IPEbNemvJXRdNgrZRpTvBVOFylX4A=;
+ bh=ZUeqW/lq8pCujML2AhgHfhtcT1KSprwhQa9BHxegsUw=; b=Z+duGOtMiCaI4ON8S/AWZbBTJI
+ V/MmAiUJsJ/zQddJIPQDJlSR7RqpMymPx41OVVgvcUv6ieLE18Ia2CPxnQzlkC2JUtI5mUQInCEza
+ SYESy0zbVZacJhsDCVWJGYCYhh+ufdyY1TyZTt8UZwGlkbuIdcJXV6dZe6GfP9eO1NCY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HrXSYw8rk4n+A4PZtzybK6DqKpPd/fbVLmvWcN7MKLY=; b=P7Dy6+bUj/HlCDb8QlpJYmMPQk
- Ug2sSqSZvalRO+aBMmZ0xH3Q6IfIRFeZJLN15CDNs4lEEuVNd9a2uUraVty4w+ocRK5qLYSpgCVrn
- UQkv0eVF8devZjZ4wBmsWY0FL+8kGvv2wbPoYkdvkzmMoPnQGkUqS0djRrBNjy03EWVs=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mkUAI-0003Qz-A4
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 09 Nov 2021 16:40:10 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=HrXSYw8rk4n+A4PZtzybK6DqKpPd/fbVLmvWcN7MKLY=; b=UHjJm/M0a6jysVzwv55hP5Uzm0
- iK1H669wXcWisFWKFSki4/Ys5QBVqbHMvV9j2k8nqyNM2wfyzFm1sVQxeLirA/z0jTWRoCPP0jO8M
- KmZIOk1hXTrQTzbFuA8PdQs0Os9FYtElATLiI7crSQ80+LzhHhQv8XqmgGw0RQQaGQLmPZXUDDU14
- 5sJDCSUVxgsqpXXmdRzhqe/Vqbfa/OLUXDh9qrjUv4iVCt453PNSWAurV7//B1mbO0jcfcw+0EQr5
- 5/kAikwmtzYqjPKAdTUG5Ach3mso5A+4FGI0aXzIHzmhmsCBmOlChE2ehNLtUdC6qiDBT4cI1zT4C
- evdBOVbw==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1mkUA5-002iSj-NZ; Tue, 09 Nov 2021 16:39:53 +0000
-Date: Tue, 9 Nov 2021 08:39:53 -0800
-From: Christoph Hellwig <hch@infradead.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <YYqkWWZZsMW49/xu@infradead.org>
+ bh=ZUeqW/lq8pCujML2AhgHfhtcT1KSprwhQa9BHxegsUw=; b=c6Ma8QilAzQBUkXMIu6RL16ZtI
+ 6oNKmFQ8bcOueKbVw5GJAkEYMg/oPkOGs+7vjnRoDlF4aMj3Z/YN8J/TekxedkWWOcmhwNgqGD9x1
+ 92k4Q2/KI8jvQDnRvkp5XqUsDGXFBAN5px5BrTdxEngRdz489X4YebvN922mEpz4TYkk=;
+Received: from mail-il1-f173.google.com ([209.85.166.173])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1mkUCX-007UOU-HJ
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 09 Nov 2021 16:42:32 +0000
+Received: by mail-il1-f173.google.com with SMTP id s15so2237633ild.9
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 09 Nov 2021 08:42:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel-dk.20210112.gappssmtp.com; s=20210112;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=ZUeqW/lq8pCujML2AhgHfhtcT1KSprwhQa9BHxegsUw=;
+ b=UJr9e4n/Fy9YeToIpiq/SIWUjqkGf9Ucb/A5whoFNf2FvkNI7neaCK3O1WPWJhf1Fa
+ aqoG8notC0BveuJl9hH3pEhKyBXTwe3i5AbwCVFgQ/1l1uMQNsSLMYvScWSMWvK58KNw
+ O0pFGwe8jc1N1kCBetK+91KLrlgdHBEYMfT5ZXcNDb897zGqhLJOj+YSk6eOHeP3JgDf
+ OJNoSYudXiajB+KEcMRf0pU7KWR8STZOEmLBm/CIseEuOBEqai/0s/YmmXrsNT1RWX8z
+ KOobbhvhXEgwTkc6nPOE6qf5filokDPgOTvSjpFhn1DFgxEium39JD6MU/b8S6ma3Q1D
+ QTpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=ZUeqW/lq8pCujML2AhgHfhtcT1KSprwhQa9BHxegsUw=;
+ b=xuMqVs2qN9ndw9EEK8hy424XrJKDyrLNEZT3F+hlReaRKAoa2MS0TeLvrI8r7Ae/6P
+ sRzbFk9uevvfqjEKh+Ax90m3yaHoKZqO/qO34ikyWc4LC4/EnJ24k4W9Pu6Kh3oygrd5
+ iipeTm9DuYofp5qIXfBaUk06ATYneNei4ajL/jBD0lis3FysjME0RYzCAqUeAe8i2jlj
+ ZARhDpxyBMoAA4QuDMoySVl042Ve5lnj3NBRjzX4InrIDDuxfA6in29qrDASatwcDx1X
+ Eez0LjCj/GHh4F15+DhSRcQ+N6rOAorQyU12Wcw9F2zxMEtLudegGbMskXtMPXKDqvIv
+ sADA==
+X-Gm-Message-State: AOAM531oGKzEj3+kKu/ocxgXCVL1/VZqsS407u57e9hoIwhrNjJM24B8
+ VZhN+UdmXZNgkt4avVPJAGkqmQ==
+X-Google-Smtp-Source: ABdhPJyzOQ+ZATudReIxL0Z/XQPF2ByazrfkavI3W2BoftBSQ7ULpLSV085IxHyatWS1GUyLbbDakw==
+X-Received: by 2002:a92:cd86:: with SMTP id r6mr6099676ilb.149.1636476139843; 
+ Tue, 09 Nov 2021 08:42:19 -0800 (PST)
+Received: from [192.168.1.30] ([207.135.234.126])
+ by smtp.gmail.com with ESMTPSA id a25sm2478977ioa.24.2021.11.09.08.42.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 09 Nov 2021 08:42:19 -0800 (PST)
+To: Christoph Hellwig <hch@infradead.org>, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20211109021336.3796538-1-jaegeuk@kernel.org>
+ <YYqkWWZZsMW49/xu@infradead.org>
+From: Jens Axboe <axboe@kernel.dk>
+Message-ID: <042997ce-8382-40fe-4840-25f40a84c4bf@kernel.dk>
+Date: Tue, 9 Nov 2021 09:42:18 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20211109021336.3796538-1-jaegeuk@kernel.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -2.5 (--)
+In-Reply-To: <YYqkWWZZsMW49/xu@infradead.org>
+Content-Language: en-US
+X-Spam-Score: -2.0 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Nov 08, 2021 at 06:13:36PM -0800, Jaegeuk Kim wrote:
- > This patch adds a way to attach HIPRI by expanding the existing sysfs's
- > data_io_flag. User can measure IO performance by enabling it. NAK. This
- flag should only be used when explicitly specified by the submitter of the
- I/O. Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On 11/9/21 9:39 AM, Christoph Hellwig wrote: > On Mon, Nov
+ 08, 2021 at 06:13:36PM -0800, Jaegeuk Kim wrote: >> This patch adds a way
+ to attach HIPRI by expanding the existing sysfs's >> data_io_flag. [...] 
+ Content analysis details:   (-2.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [198.137.202.133 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.173 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.173 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
-X-Headers-End: 1mkUAI-0003Qz-A4
+ valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1mkUCX-007UOU-HJ
 Subject: Re: [f2fs-dev] [PATCH] f2fs: provide a way to attach HIPRI for
  Direct IO
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -105,79 +125,20 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Nov 08, 2021 at 06:13:36PM -0800, Jaegeuk Kim wrote:
-> This patch adds a way to attach HIPRI by expanding the existing sysfs's
-> data_io_flag. User can measure IO performance by enabling it.
+On 11/9/21 9:39 AM, Christoph Hellwig wrote:
+> On Mon, Nov 08, 2021 at 06:13:36PM -0800, Jaegeuk Kim wrote:
+>> This patch adds a way to attach HIPRI by expanding the existing sysfs's
+>> data_io_flag. User can measure IO performance by enabling it.
+> 
+> NAK.  This flag should only be used when explicitly specified by
+> the submitter of the I/O.
 
-NAK.  This flag should only be used when explicitly specified by
-the submitter of the I/O.
+Yes, this cannot be set in the middle for a multitude of reasons. I wonder
+if we should add a comment to that effect near the definition of it.
 
-> 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->  Documentation/ABI/testing/sysfs-fs-f2fs | 16 +++++++++-------
->  fs/f2fs/data.c                          |  2 ++
->  fs/f2fs/f2fs.h                          |  3 +++
->  3 files changed, 14 insertions(+), 7 deletions(-)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-> index b268e3e18b4a..ac52e1c6bcbc 100644
-> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
-> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-> @@ -369,13 +369,15 @@ Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
->  Description:	Give a way to attach REQ_META|FUA to data writes
->  		given temperature-based bits. Now the bits indicate:
->  
-> -		+-------------------+-------------------+
-> -		|      REQ_META     |      REQ_FUA      |
-> -		+------+------+-----+------+------+-----+
-> -		|    5 |    4 |   3 |    2 |    1 |   0 |
-> -		+------+------+-----+------+------+-----+
-> -		| Cold | Warm | Hot | Cold | Warm | Hot |
-> -		+------+------+-----+------+------+-----+
-> +		+------------+-------------------+-------------------+
-> +		| HIPRI_DIO  |      REQ_META     |      REQ_FUA      |
-> +		+------------+------+------+-----+------+------+-----+
-> +		|          6 |    5 |    4 |   3 |    2 |    1 |   0 |
-> +		+------------+------+------+-----+------+------+-----+
-> +		|        All | Cold | Warm | Hot | Cold | Warm | Hot |
-> +		+------------+------+------+-----+------+------+-----+
-> +
-> +		Note that, HIPRI_DIO bit is only for direct IO path.
->  
->  What:		/sys/fs/f2fs/<disk>/node_io_flag
->  Date:		June 2020
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 9f754aaef558..faa40aca2848 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -3707,6 +3707,8 @@ static ssize_t f2fs_direct_IO(struct kiocb *iocb, struct iov_iter *iter)
->  		if (do_opu)
->  			down_read(&fi->i_gc_rwsem[READ]);
->  	}
-> +	if (sbi->data_io_flag & HIPRI_DIO)
-> +		iocb->ki_flags |= IOCB_HIPRI;
->  
->  	err = __blockdev_direct_IO(iocb, inode, inode->i_sb->s_bdev,
->  			iter, rw == WRITE ? get_data_block_dio_write :
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index ce9fc9f13000..094f1e8ff82b 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1557,6 +1557,9 @@ struct decompress_io_ctx {
->  #define MAX_COMPRESS_LOG_SIZE		8
->  #define MAX_COMPRESS_WINDOW_SIZE(log_size)	((PAGE_SIZE) << (log_size))
->  
-> +/* HIPRI for direct IO used in sysfs/data_io_flag */
-> +#define HIPRI_DIO			(1 << 6)
-> +
->  struct f2fs_sb_info {
->  	struct super_block *sb;			/* pointer to VFS super block */
->  	struct proc_dir_entry *s_proc;		/* proc entry */
-> -- 
-> 2.34.0.rc0.344.g81b53c2807-goog
-> 
----end quoted text---
+-- 
+Jens Axboe
+
 
 
 _______________________________________________
