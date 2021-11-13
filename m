@@ -2,76 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2339644F1D5
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 13 Nov 2021 07:36:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D240C44F50A
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 13 Nov 2021 20:44:48 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mlmdp-000670-Cg; Sat, 13 Nov 2021 06:35:57 +0000
+	id 1mlyx8-0007TI-L3; Sat, 13 Nov 2021 19:44:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mlmdo-00066p-1X
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 13 Nov 2021 06:35:56 +0000
+ (envelope-from <pr-tracker-bot@kernel.org>) id 1mlyx7-0007T8-EP
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 13 Nov 2021 19:44:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
+ Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=V6TjgWyuvPAcEFW/cf6xf/A2z8gQBdRvtpgah42xx/E=; b=TdIfZpRKeVgiCX0qgBS7YOvc+X
- gjocA4tlcLFRQZUydBZlz2y6sIdO5U97/Sci7oO0NsEk7QUs2nBWNf8ZyNTrkgV9Ft140EWjMFNJW
- 2e11LnujD+/SLJR7V63KXTzaGg7cdebFW8VJs9ILpFu/Eaqg9Ayt7D3nRtCLLcI6v40I=;
+ bh=r7b5L4IDGax5Vjo4FYAUkBvZRaL7TxtBa5A8WJYknj0=; b=Hga7Nj5o0Q7eCUAgdFa984Dh43
+ I9UXygfCDk9q6VNVpwXrLHHoFT1FIJ2r5oGhp3o2P3dODGpQZ/y7VnWg87LwtzwRK7ptODy4fqytt
+ 1hqlz0rSntH6JhJ6tYRKJmjHbTaBiZ+pkOgDLWta1IUH1F0uDV6ECQ2ikx84C4375U4k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=V6TjgWyuvPAcEFW/cf6xf/A2z8gQBdRvtpgah42xx/E=; b=M+1QAZxSfEAzaVPLnob6MumVOC
- Hjx6aoSNL7qB3ox5E7XKw98eOJQ/tzNeJIjgU7DGH8xDX53c873IWXFc8axQoSj7BOWzKe7ftX6il
- uvWE9aEXYxzwBcYOeVlOK6Pp1w4EVoZhzcf0lDaoWqmUWfJtCiS29VicjJhq380xsNlo=;
+ bh=r7b5L4IDGax5Vjo4FYAUkBvZRaL7TxtBa5A8WJYknj0=; b=fvbnEdKmH8Kkr93xWoG84aFec2
+ D5jqbihGIOfONN0F9cCpr2DE6G6Q48aqdnr8grN3hAdFAh/xyPWNz8qRkfSd4GkSgNhbqlN4OAQUU
+ l0AB/dNhzM+gDc2KINQNB2Dh4sQaZ4usSDGgpOovImHQwnMiZCbQwsw/q5EahVjTt6Vc=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mlmdm-00BU3b-AG
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 13 Nov 2021 06:35:55 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 3D61260F6E;
- Sat, 13 Nov 2021 06:35:48 +0000 (UTC)
+ id 1mlyx3-00C0qg-08
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 13 Nov 2021 19:44:41 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPS id A500361207;
+ Sat, 13 Nov 2021 19:44:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1636785348;
- bh=5RuWFBu974qvccl+AOrYvjfBw4cuVbtNsDfCHV4Yuio=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=asLgYkyQrNn9BjLHWujbvWs6LHlOP0T24oBf8yRrYI6ZNrfa92TZMPLdlKmGDtu9V
- o8tR1pSjmSMd1/vmQbdfrDnrpfua3shuXO6b6YtZ6SKwyVM7M6fgKDkvZsHFMwn+Pa
- RBiGIC7pdnRAJovLSaDrv+c084WFIfBWKJXvztOaF/9eUQIzqcA5O5FacS45POkRph
- Cpc2EJgYuPDb5TJob51/WdM9aWbfpnTRkUk6IFP4ts+vBsNgozMdalK0vxf/FSNczD
- V7znrXkIhz9uz2F2B6AtVgHjwN8L4rPH1+VjjFe27lhtmk5DEzKw2/dXsZFwvq1Goi
- qJTuZ717OssYg==
-Message-ID: <2fa09598-c967-18e9-1672-2b109320bcdb@kernel.org>
-Date: Sat, 13 Nov 2021 14:35:46 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.1
-Content-Language: en-US
-To: Fengnan Chang <changfengnan@vivo.com>, jaegeuk@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20211028112433.23879-1-changfengnan@vivo.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20211028112433.23879-1-changfengnan@vivo.com>
-X-Spam-Score: -7.9 (-------)
+ s=k20201202; t=1636832666;
+ bh=qjKVF+R30OaY0jTv/XtMmQw9pfN+A18vJ8yIhEcSnCQ=;
+ h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
+ b=I+HyOqhG3QXUyhHaX8KzlC9yfodCLLl95lmz4Sd8jIA46Wy+gvuBB1g5+Rqf9rPm0
+ L4TXeCDnyLSJOquceCWohjfMIxBhudtpFwaA3QDUDFixzZBksfeN/mAGtOre9A7o5T
+ UMzgry40PCWcRg+ETr/FAklh+cB/BaiwdKmWgKrBkeSViQl6332RCja5grXY4WOId/
+ lHCffHKQVO2Lgc0/kmjZw8JPFw9w0w+pdhs259kK1mQDvKZjX2wl7cfjqDFscZKeVb
+ x1x/OJXlKXCJzW3c3MJCJ3vTHeQqnEUhmIdAaNaZj6ERacuvWmG2XBCT1euOQjAVWQ
+ vu8Od5jPYlCjw==
+Received: from pdx-korg-docbuild-2.ci.codeaurora.org (localhost.localdomain
+ [127.0.0.1])
+ by pdx-korg-docbuild-2.ci.codeaurora.org (Postfix) with ESMTP id 9910760987;
+ Sat, 13 Nov 2021 19:44:26 +0000 (UTC)
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <YYyX3oZXNAjYzG0A@google.com>
+References: <YYyX3oZXNAjYzG0A@google.com>
+X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
+X-PR-Tracked-Message-Id: <YYyX3oZXNAjYzG0A@google.com>
+X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ tags/f2fs-for-5.16-rc1
+X-PR-Tracked-Commit-Id: 5429c9dbc9025f9a166f64e22e3a69c94fd5b29b
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 5664896ba29e6d8c60b6a73564d0a97d380c0f92
+Message-Id: <163683266661.24678.17070565669479389986.pr-tracker-bot@kernel.org>
+Date: Sat, 13 Nov 2021 19:44:26 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2021/10/28 19:24,
- Fengnan Chang wrote: > Add "f2fs_lzo_compress_private"
- and "f2fs_lz4_compress_private" slab > cache, to speed up memory allocation
- when init compress ctx. > No slab cache is added [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  The pull request you sent on Wed, 10 Nov 2021 20:11:10 -0800:
+ > git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ tags/f2fs-for-5.16-rc1 has been merged into torvalds/linux.git:
+ https://git.kernel.org/torvalds/c/5664896ba29e6d8c60b6a73564d0a97d380c0f92
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -85,11 +92,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mlmdm-00BU3b-AG
-Subject: Re: [f2fs-dev] [RFC PATCH] f2fs:compress: introduce compress
- private data slab cache
+X-Headers-End: 1mlyx3-00C0qg-08
+Subject: Re: [f2fs-dev] [GIT PULL] f2fs update for 5.16-rc1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,138 +106,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/10/28 19:24, Fengnan Chang wrote:
-> Add "f2fs_lzo_compress_private" and "f2fs_lz4_compress_private" slab
-> cache, to speed up memory allocation when init compress ctx.
-> No slab cache is added to zstd as the private data for zstd is related to
-> mount option, and too big.
-> 
-> Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
-> ---
->   fs/f2fs/compress.c | 45 ++++++++++++++++++++++++++++++++++++++++-----
->   1 file changed, 40 insertions(+), 5 deletions(-)
-> 
-> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index 7588e4e817b8..4a8a4858d358 100644
-> --- a/fs/f2fs/compress.c
-> +++ b/fs/f2fs/compress.c
-> @@ -171,10 +171,11 @@ void f2fs_compress_ctx_add_page(struct compress_ctx *cc, struct page *page)
->   }
->   
->   #ifdef CONFIG_F2FS_FS_LZO
-> +static struct kmem_cache *lzo_compress_private_slab;
->   static int lzo_init_compress_ctx(struct compress_ctx *cc)
->   {
-> -	cc->private = f2fs_kvmalloc(F2FS_I_SB(cc->inode),
-> -				LZO1X_MEM_COMPRESS, GFP_NOFS);
-> +	cc->private = f2fs_kmem_cache_alloc(lzo_compress_private_slab,
-> +			GFP_F2FS_ZERO, false, F2FS_I_SB(cc->inode));
->   	if (!cc->private)
->   		return -ENOMEM;
->   
-> @@ -184,7 +185,7 @@ static int lzo_init_compress_ctx(struct compress_ctx *cc)
->   
->   static void lzo_destroy_compress_ctx(struct compress_ctx *cc)
->   {
-> -	kvfree(cc->private);
-> +	kmem_cache_free(lzo_compress_private_slab, cc->private);
->   	cc->private = NULL;
->   }
->   
-> @@ -234,6 +235,7 @@ static const struct f2fs_compress_ops f2fs_lzo_ops = {
->   #endif
->   
->   #ifdef CONFIG_F2FS_FS_LZ4
-> +static struct kmem_cache *lz4_compress_private_slab;
->   static int lz4_init_compress_ctx(struct compress_ctx *cc)
->   {
->   	unsigned int size = LZ4_MEM_COMPRESS;
-> @@ -243,7 +245,8 @@ static int lz4_init_compress_ctx(struct compress_ctx *cc)
->   		size = LZ4HC_MEM_COMPRESS;
->   #endif
->   
-> -	cc->private = f2fs_kvmalloc(F2FS_I_SB(cc->inode), size, GFP_NOFS);
+The pull request you sent on Wed, 10 Nov 2021 20:11:10 -0800:
 
-The size could be LZ4HC_MEM_COMPRESS rather than LZ4_MEM_COMPRESS if we enable
-lz4hc algorithm, so they should never share the same lz4_compress_private_slab
-slab cache.
+> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.16-rc1
 
-Other concern is I'm not sure whether there is any side-effect if we introduce
-slab cache which has such large object size...
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/5664896ba29e6d8c60b6a73564d0a97d380c0f92
 
-Thanks,
+Thank you!
 
-> +	cc->private = f2fs_kmem_cache_alloc(lz4_compress_private_slab,
-> +			GFP_F2FS_ZERO, false, F2FS_I_SB(cc->inode));
->   	if (!cc->private)
->   		return -ENOMEM;
->   
-> @@ -258,7 +261,7 @@ static int lz4_init_compress_ctx(struct compress_ctx *cc)
->   
->   static void lz4_destroy_compress_ctx(struct compress_ctx *cc)
->   {
-> -	kvfree(cc->private);
-> +	kmem_cache_free(lz4_compress_private_slab, cc->private);
->   	cc->private = NULL;
->   }
->   
-> @@ -1944,6 +1947,32 @@ void f2fs_destroy_page_array_cache(struct f2fs_sb_info *sbi)
->   {
->   	kmem_cache_destroy(sbi->page_array_slab);
->   }
-> +static int __init f2fs_init_compress_private_cache(void)
-> +{
-> +#ifdef CONFIG_F2FS_FS_LZ4
-> +	lz4_compress_private_slab = f2fs_kmem_cache_create("f2fs_lz4_compress_private",
-> +					LZ4_MEM_COMPRESS);
-> +	if (!lz4_compress_private_slab)
-> +		return -ENOMEM;
-> +#endif
-> +#ifdef CONFIG_F2FS_FS_LZO
-> +	lzo_compress_private_slab = f2fs_kmem_cache_create("f2fs_lzo_compress_private",
-> +					LZO1X_MEM_COMPRESS);
-> +	if (!lzo_compress_private_slab)
-> +		return -ENOMEM;
-> +#endif
-> +	return 0;
-> +}
-> +
-> +static void f2fs_destroy_compress_private_cache(void)
-> +{
-> +#ifdef CONFIG_F2FS_FS_LZ4
-> +	kmem_cache_destroy(lz4_compress_private_slab);
-> +#endif
-> +#ifdef CONFIG_F2FS_FS_LZO
-> +	kmem_cache_destroy(lzo_compress_private_slab);
-> +#endif
-> +}
->   
->   static int __init f2fs_init_cic_cache(void)
->   {
-> @@ -1983,7 +2012,12 @@ int __init f2fs_init_compress_cache(void)
->   	err = f2fs_init_dic_cache();
->   	if (err)
->   		goto free_cic;
-> +	err = f2fs_init_compress_private_cache();
-> +	if (err)
-> +		goto free_dic;
->   	return 0;
-> +free_dic:
-> +	f2fs_destroy_dic_cache();
->   free_cic:
->   	f2fs_destroy_cic_cache();
->   out:
-> @@ -1994,4 +2028,5 @@ void f2fs_destroy_compress_cache(void)
->   {
->   	f2fs_destroy_dic_cache();
->   	f2fs_destroy_cic_cache();
-> +	f2fs_destroy_compress_private_cache();
->   }
-> 
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/prtracker.html
 
 
 _______________________________________________
