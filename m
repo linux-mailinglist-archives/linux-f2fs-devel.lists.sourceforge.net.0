@@ -2,91 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C558044EEAD
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 12 Nov 2021 22:32:49 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70E6E44F1B1
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 13 Nov 2021 06:58:49 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mleA6-0006Kg-Jk; Fri, 12 Nov 2021 21:32:42 +0000
+	id 1mlm3k-00030m-K1; Sat, 13 Nov 2021 05:58:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1mleA5-0006Ka-I0
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 12 Nov 2021 21:32:41 +0000
+ (envelope-from <herbert@gondor.apana.org.au>)
+ id 1mlm3i-00030b-HP; Sat, 13 Nov 2021 05:58:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7bYQarVRKy5eL45qiskZyCgtIIcWrGULW7wSUHVggXI=; b=MYwDTLo/DU4cBOkQmJEQVeHjs/
- qtX89w+bkcFinFcGQYA130bU5ve66CPv6uPz/BqiiJaV+vtGRs4tpupXJUcC0J3aqVWg0sZWE52tV
- R1MSAAWhoTLKrtnXriD61XrRx2A7rvtW25uwsiht5n7IA0ZBO0WnDuBE8QNBleRMdcMI=;
+ bh=E1iM48WVnyE7qdbQeaA5Aiqosaltkjxs25xFJ9BRwoY=; b=F9TFzcK+UJvOOthRyHobAFmH30
+ Nh9gZV5J1a++ljMNNG1SiXB4MTJUPcs+iMwd2F1JLe2e9ykLIgnvLMlcq8MiGsEfTO9twkxa993cN
+ orVZV36kMv/nDRzGHjzuLyrtsKe8N4dnvA36xOloIp+gMC35xcsuTAfapbSnBvoqqzuo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=7bYQarVRKy5eL45qiskZyCgtIIcWrGULW7wSUHVggXI=; b=M
- GZJWLRxpzmxFzooDwQeJ349Ub56ZD1pRRAIzpPjOWXP9mJPd1V5D2WLhi2uYVROEyXya+gcHqgKac
- ZWFb6SVkyQQgPBdB7I4Zd9pBirIlR2gfx49gluFSx/4CK48HkrrngRm+r+gpSKM7H/zAjmFeWnCHd
- ddECVsLL3Kv3lQ5U=;
-Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=E1iM48WVnyE7qdbQeaA5Aiqosaltkjxs25xFJ9BRwoY=; b=OBr1UjVidw+gb+ToKrlh15VMlD
+ 3Rf20TduxCyJbGu/dCj2kgmfjwu26qClRJ1npEqvVqHMJYKfEj+tUj8/e6G0MnCY7MENl3YAN+YkP
+ VLMr/Be3882+b++hAhihIpfSxm+skGJV455NHTjLQduG9AIl+g9AK9zdOS/91CjtWAkY=;
+Received: from helcar.hmeau.com ([216.24.177.18] helo=deadmen.hmeau.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mleA5-0001N6-11
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 12 Nov 2021 21:32:41 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 8223360EFD;
- Fri, 12 Nov 2021 21:32:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1636752755;
- bh=tT2rrkB4j3yoXxgi1WqPEOPL25m2M20otAFbBpBTVXw=;
- h=From:To:Cc:Subject:Date:From;
- b=shsw6PslE7j1QBmC1LlfrJGPEWV4roKPAYaNLia0TwHytAz9AWd+WF0plDSuMSkXW
- +urym2VQi281NxrO/RyyKhhJtUGACEem45jiJgKDC/Okxzds20oLm04YPSymwUEhAQ
- LfJOIN95FJ4b1Pwh8T0y6R4R4sxj1CzSCXtDc1Pqh2FljlAPk2hTR2/uvwbQknhj7K
- v58zQFvZrIJcPDaCmjn/zR0JVXC+vMp3loUhI+IiqZvwa0xVBsr4ufiGG06oK0goO1
- t/5rkU8AGrE6RQLt6xxmVqWweePDdedV9xVWwJo8DN+wUZiXlXqj1jaCwsPxymcaRN
- GIZ3xgKVLB8+A==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 12 Nov 2021 13:32:31 -0800
-Message-Id: <20211112213231.2483419-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.34.0.rc1.387.gb447b232ab-goog
+ id 1mlm3h-00BSUd-VV; Sat, 13 Nov 2021 05:58:39 +0000
+Received: from gondobar.mordor.me.apana.org.au ([192.168.128.4] helo=gondobar)
+ by deadmen.hmeau.com with esmtp (Exim 4.92 #5 (Debian))
+ id 1mllna-0008U5-Tf; Sat, 13 Nov 2021 13:41:58 +0800
+Received: from herbert by gondobar with local (Exim 4.92)
+ (envelope-from <herbert@gondor.apana.org.au>)
+ id 1mllnI-0005S4-Mh; Sat, 13 Nov 2021 13:41:40 +0800
+Date: Sat, 13 Nov 2021 13:41:40 +0800
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: Nick Terrell <terrelln@fb.com>
+Message-ID: <20211113054140.GA20916@gondor.apana.org.au>
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+Content-Disposition: inline
+In-Reply-To: <7A1FF8B7-CB5B-415A-9203-1A0DAA1FDD9B@fb.com>
+X-Newsgroups: apana.lists.os.linux.cryptoapi,apana.lists.os.linux.kernel
+Organization: Core
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Spam-Score: 0.0 (/)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This case is not a bug,
- so we should fix seamlessly. Signed-off-by:
- Jaegeuk Kim <jaegeuk@kernel.org> --- fsck/fsck.c | 10 +++------- 1 file
- changed, 
- 3 insertions(+), 7 deletions(-) diff --git a/fsck/fsck.c b/fsck/fsck.c index
- 0619519f9b42..ecd87af0ff7f 100644 --- a/fsck/fsck.c +++ b/fsck/fsck.c @@
- -1131,14 +1131,10 @@ skip_blkcnt_fix: 
- Content analysis details:   (-5.9 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  Nick Terrell <terrelln@fb.com> wrote: > > 2. Reaching out
+   to Herbert Xu—because the first zstd version went through the > crypto tree—and
+    other relevant maintainers who have been > involved, and t [...] 
+ 
+ Content analysis details:   (0.0 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mleA5-0001N6-11
-Subject: [f2fs-dev] [PATCH] fsck.f2fs: do not assert if i_size is missing
- i_blocks in symlink
+  0.0 FAKE_REPLY_C           No description available.
+X-Headers-End: 1mlm3h-00BSUd-VV
+Subject: Re: [f2fs-dev] [GIT PULL] zstd changes for v5.16
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,46 +83,33 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: oleksandr@natalenko.name, linux-kernel@vger.kernel.org, tseewald@gmail.com,
+ clm@fb.com, jd.girard@sysnux.pf, sfr@canb.auug.org.au, paul@pauljones.id.au,
+ nickrterrell@gmail.com, cyan@fb.com, hch@infradead.org, Kernel-team@fb.com,
+ ebiggers@kernel.org, squashfs-devel@lists.sourceforge.net,
+ mirq-linux@rere.qmqm.pl, sedat.dilek@gmail.com, rdunlap@infradead.org,
+ dsterba@suse.cz, linux-f2fs-devel@lists.sourceforge.net, oss@malat.biz,
+ linux-crypto@vger.kernel.org, felixh@fb.com, torvalds@linux-foundation.org,
+ linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This case is not a bug, so we should fix seamlessly.
-
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fsck/fsck.c | 10 +++-------
- 1 file changed, 3 insertions(+), 7 deletions(-)
-
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 0619519f9b42..ecd87af0ff7f 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -1131,14 +1131,10 @@ skip_blkcnt_fix:
- 
- 	if (ftype == F2FS_FT_SYMLINK && i_size == 0 &&
- 			i_blocks == (i_xattr_nid ? 3 : 2)) {
--		ASSERT_MSG("ino: 0x%x i_blocks: %lu with zero i_size\n",
--						nid, (unsigned long)i_blocks);
--		if (c.fix_on) {
--			node_blk->i.i_size = cpu_to_le64(F2FS_BLKSIZE);
--			need_fix = 1;
--			FIX_MSG("Symlink: recover 0x%x with i_size=%lu",
-+		node_blk->i.i_size = cpu_to_le64(F2FS_BLKSIZE);
-+		need_fix = 1;
-+		FIX_MSG("Symlink: recover 0x%x with i_size=%lu",
- 					nid, (unsigned long)F2FS_BLKSIZE);
--		}
- 	}
- 
- 	if (ftype == F2FS_FT_ORPHAN && i_links) {
--- 
-2.34.0.rc1.387.gb447b232ab-goog
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+TmljayBUZXJyZWxsIDx0ZXJyZWxsbkBmYi5jb20+IHdyb3RlOgo+Cj4gMi4gUmVhY2hpbmcgb3V0
+IHRvIEhlcmJlcnQgWHXigJRiZWNhdXNlIHRoZSBmaXJzdCB6c3RkIHZlcnNpb24gd2VudCB0aHJv
+dWdoIHRoZQo+ICAgIGNyeXB0byB0cmVl4oCUYW5kIG90aGVyIHJlbGV2YW50IG1haW50YWluZXJz
+IHdobyBoYXZlIGJlZW4KPiAgICBpbnZvbHZlZCwgYW5kIHRyeWluZyB0byBnZXQgYSB3b3JkIG9m
+IHN1cHBvcnQgZm9yIGFkZGluZyBtZSBhcyB0aGUgbWFpbnRhaW5lcgo+ICAgIG9mIGxpYi96c3Rk
+IGluIHRoaXMgdGhyZWFkLgoKQWN0dWFsbHkgSSBkb24ndCB0aGluayBJIGV2ZXIgbWVyZ2VkIGxp
+Yi96c3RkLiAgSSBkaWQgdGFrZQpjcnlwdG8venN0ZCB0aG91Z2ggd2hpY2ggaXMgdGhlIENyeXB0
+byBBUEkgd3JhcHBlciBhcm91bmQgdGhlCmxpYi96c3RkIGNvZGUuCgpTaW5jZSB0aGUgY3VycmVu
+dCBjb250ZW50aW9uIGlzIHdpdGggbGliL3pzdGQgSSB0aGluayBpdCBwcm9iYWJseQptYWtlcyBz
+ZW5zZSBmb3IgTGludXMgdG8gdGFrZSBpdCBkaXJlY3RseS4KCkkgdGhpbmsgeW91IHNob3VsZCBj
+ZXJ0YWlubHkgYmUgdGhlIG1haW50YWluZXIgb2YgbGliL3pzdGQgc2luY2UKaXQgd2FzIGFkZGVk
+IGJ5IHlvdSBhbmQgbW9zdGx5IHVzZWQgYnkgeW91IHRvbyA6KQoKVGhhbmtzLAotLSAKRW1haWw6
+IEhlcmJlcnQgWHUgPGhlcmJlcnRAZ29uZG9yLmFwYW5hLm9yZy5hdT4KSG9tZSBQYWdlOiBodHRw
+Oi8vZ29uZG9yLmFwYW5hLm9yZy5hdS9+aGVyYmVydC8KUEdQIEtleTogaHR0cDovL2dvbmRvci5h
+cGFuYS5vcmcuYXUvfmhlcmJlcnQvcHVia2V5LnR4dAoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Ckxp
+bnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNl
+Zm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
