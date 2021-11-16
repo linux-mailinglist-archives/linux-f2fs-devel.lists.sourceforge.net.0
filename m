@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CD82453BDA
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Nov 2021 22:45:39 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F1FB453BDF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Nov 2021 22:45:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mn6Gg-0002DE-2f; Tue, 16 Nov 2021 21:45:30 +0000
+	id 1mn6Gp-0005pS-3x; Tue, 16 Nov 2021 21:45:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1mn6Gd-0002D8-NS
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Nov 2021 21:45:27 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1mn6Gf-0005pF-U1
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Nov 2021 21:45:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0zWK0udguESb4q9Cd2ZCP8LHG4UU72K6jDcVXHFcZMc=; b=SwY8gdJI2o45qOjWN9vpP8bPgP
- WWTkwS8/1pVwKp+dXH0Le5f1zCSATffXJLwajE6Tz+eq/95T8n1C5wqQqMY3ZcPgQcw9o4ZLrp4VF
- ZvvbVkzOArbuQjgfD2aMyAOMG2ygj1vAN8eiRVV8lj/YfxaAFOneZtNT3tbm1jeC5i4E=;
+ bh=Im1vU2VEzK1WYL6sOXd0+urd1JBcBBgwiZSveXWHIyM=; b=jXCKgSrugLYslM/1sejPCNQS2f
+ WHBhnQSsGwcLZ26Z4kc6/mAS96Yev+XRo76jqtMnvG2ZpaLwtZzWL9hDZhiWMO+dy/p1rBZwe6Gqy
+ lbx6fcykgbxQfPBPTfBilDu4obtDe1LUKhxwd1AG7N8bmIulJpxzQ3LMJI6jXCegMoKg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0zWK0udguESb4q9Cd2ZCP8LHG4UU72K6jDcVXHFcZMc=; b=c3nY5vf7xHAJiLPgvWYz3OpFOp
- FbnnQABSgveXrocpNmA4+Vo6e1BzpqyV4SkDBSItkYWgVX7sIpMtp6RD7QWJWA0URoAoNBgiZzY4V
- 1D+X5JavYXkGQw6Q9gw0hKij3NSsHVdkKxhCNJGH3qKSZPQr7PkDx5BLHr4xN43y7yOo=;
+ bh=Im1vU2VEzK1WYL6sOXd0+urd1JBcBBgwiZSveXWHIyM=; b=R7WKC1vFfCyxwx11sr/yKhV091
+ rA49P4SUKwFH1ncLdshk4+t914unMLGNoG++ZSWiP9fLug0Ap1KJB/YyYgLtBP3pX0AZVkDtREMQE
+ rsXfQRVJ9ppFefoAjPPREyNRTySjLQxRCKYZE0wCLrAYC7d/HulkLFRspIkoRQpeorxk=;
 Received: from mail.kernel.org ([198.145.29.99])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mn6Gb-0006S2-Vo
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Nov 2021 21:45:27 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 64DE063222;
+ id 1mn6Gd-00FLo2-62
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Nov 2021 21:45:30 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E36F76322D;
  Tue, 16 Nov 2021 21:45:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1637099119;
- bh=/UYDcQmJ+TIG3AnvmVkhGY0X2O0bdavDOZOMvrqCSXM=;
+ s=k20201202; t=1637099120;
+ bh=eZWcKYxkCa8oij/qLUPoWTMsDGU6CU4uG/UMTp01tJg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=u4x4PT4xaB0rZeD6u9C7YIdTMrOKK05iRGKP1d6Q9CYXNgtKHFcx4OgUJPpxG67mz
- wgdmHswYMXMxb/CLgu1nGuO9OTsLFq8XM2baEdKbZcoGNBckPgVuhGmXBYdF9sttUk
- OqxxE9pWsU+OUKyvfQULLDPhfwtoy+L22RXg7kR6yOVU+Rn20GOphXo1toziJLfYr2
- 7/EYracV6NaYOiPKxtSHeYKCREX6fTdGj020uV1KTW9LQWxWfP+YYPgygcFuoRbwlq
- rzBC4RrR4V0bDVdplHcaeu+vWs+TTFK+XAXDfUwB/4xX8gIJjn/EkotP+anV3vtgEh
- 1D27H5F/Y7teA==
+ b=ZrrXSWhFp7t2q5s2eLV7wdLMLZYVqtNqOs+vFGhSm2MlScTc5pp2nx/BCK5KHz0zP
+ +SspiQXWF5mNZA9hqFv8rrhEeOu8OM0HDoFikLo+V4yHxxBNc+D5CRVlJulqWdAagc
+ 4hnhwhxM2FEJChAj0hpO6SrOrPFhHmbTQEuhzmqHNfNVRPvE2Uo22KRAO14aLFNtVd
+ Pm827ju5YYwg+Z8daoxZoCvu6kh2vTgqxuEJCI/tHErLNu+jkP9AsX3Neln7iebWNv
+ 7tUJt/ujj+nxE0wStELNMF14zmDy5+lbcvbbUcUqXnayF/kWbmikaFpacknbWuG8I2
+ GidRYYthb/R4w==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 16 Nov 2021 13:45:08 -0800
-Message-Id: <20211116214510.2934905-4-jaegeuk@kernel.org>
+Date: Tue, 16 Nov 2021 13:45:09 -0800
+Message-Id: <20211116214510.2934905-5-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.34.0.rc1.387.gb447b232ab-goog
 In-Reply-To: <20211116214510.2934905-1-jaegeuk@kernel.org>
 References: <20211116214510.2934905-1-jaegeuk@kernel.org>
@@ -65,10 +65,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> Pass in the original
- position and count rather than the position and count that were updated by
- the write. Also use the correct types for all arguments, in particular the
- file offset which was being t [...] 
+ Content preview:  From: Eric Biggers <ebiggers@google.com> Implement 'struct
+ iomap_ops' for f2fs, in preparation for making f2fs use iomap for direct
+ I/O. Note that this may be used for other things besides direct I/O in the
+ future; however, for now I've only tested it for direct I/O. 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -84,8 +84,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mn6Gb-0006S2-Vo
-Subject: [f2fs-dev] [PATCH 4/6] f2fs: fix the f2fs_file_write_iter tracepoint
+X-Headers-End: 1mn6Gd-00FLo2-62
+Subject: [f2fs-dev] [PATCH 5/6] f2fs: implement iomap operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,77 +104,117 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Pass in the original position and count rather than the position and
-count that were updated by the write.  Also use the correct types for
-all arguments, in particular the file offset which was being truncated
-to 32 bits on 32-bit platforms.
+Implement 'struct iomap_ops' for f2fs, in preparation for making f2fs
+use iomap for direct I/O.
+
+Note that this may be used for other things besides direct I/O in the
+future; however, for now I've only tested it for direct I/O.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/file.c              |  5 +++--
- include/trace/events/f2fs.h | 12 ++++++------
- 2 files changed, 9 insertions(+), 8 deletions(-)
+ fs/f2fs/Kconfig |  1 +
+ fs/f2fs/data.c  | 58 +++++++++++++++++++++++++++++++++++++++++++++++++
+ fs/f2fs/f2fs.h  |  1 +
+ 3 files changed, 60 insertions(+)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index fdc440d212c3..709fa893d832 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4321,6 +4321,8 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+diff --git a/fs/f2fs/Kconfig b/fs/f2fs/Kconfig
+index 7eea3cfd894d..f46a7339d6cf 100644
+--- a/fs/f2fs/Kconfig
++++ b/fs/f2fs/Kconfig
+@@ -7,6 +7,7 @@ config F2FS_FS
+ 	select CRYPTO_CRC32
+ 	select F2FS_FS_XATTR if FS_ENCRYPTION
+ 	select FS_ENCRYPTION_ALGS if FS_ENCRYPTION
++	select FS_IOMAP
+ 	select LZ4_COMPRESS if F2FS_FS_LZ4
+ 	select LZ4_DECOMPRESS if F2FS_FS_LZ4
+ 	select LZ4HC_COMPRESS if F2FS_FS_LZ4HC
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 7ac1a39fcad2..43b3ca7cabe0 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -21,6 +21,7 @@
+ #include <linux/cleancache.h>
+ #include <linux/sched/signal.h>
+ #include <linux/fiemap.h>
++#include <linux/iomap.h>
+ 
+ #include "f2fs.h"
+ #include "node.h"
+@@ -4236,3 +4237,60 @@ void f2fs_destroy_bio_entry_cache(void)
  {
- 	struct file *file = iocb->ki_filp;
- 	struct inode *inode = file_inode(file);
-+	const loff_t orig_pos = iocb->ki_pos;
-+	const size_t orig_count = iov_iter_count(from);
- 	loff_t target_size;
- 	int preallocated;
- 	ssize_t ret;
-@@ -4403,8 +4405,7 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
- out_unlock:
- 	inode_unlock(inode);
- out:
--	trace_f2fs_file_write_iter(inode, iocb->ki_pos,
--					iov_iter_count(from), ret);
-+	trace_f2fs_file_write_iter(inode, orig_pos, orig_count, ret);
- 	if (ret > 0)
- 		ret = generic_write_sync(iocb, ret);
- 	return ret;
-diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-index f8cb916f3595..dcb94d740e12 100644
---- a/include/trace/events/f2fs.h
-+++ b/include/trace/events/f2fs.h
-@@ -540,17 +540,17 @@ TRACE_EVENT(f2fs_truncate_partial_nodes,
+ 	kmem_cache_destroy(bio_entry_slab);
+ }
++
++static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
++			    unsigned int flags, struct iomap *iomap,
++			    struct iomap *srcmap)
++{
++	struct f2fs_map_blocks map = {};
++	pgoff_t next_pgofs = 0;
++	int err;
++
++	map.m_lblk = bytes_to_blks(inode, offset);
++	map.m_len = bytes_to_blks(inode, offset + length - 1) - map.m_lblk + 1;
++	map.m_next_pgofs = &next_pgofs;
++	map.m_seg_type = f2fs_rw_hint_to_seg_type(inode->i_write_hint);
++	if (flags & IOMAP_WRITE)
++		map.m_may_create = true;
++
++	err = f2fs_map_blocks(inode, &map, flags & IOMAP_WRITE,
++			      F2FS_GET_BLOCK_DIO);
++	if (err)
++		return err;
++
++	iomap->offset = blks_to_bytes(inode, map.m_lblk);
++
++	if (map.m_flags & (F2FS_MAP_MAPPED | F2FS_MAP_UNWRITTEN)) {
++		iomap->length = blks_to_bytes(inode, map.m_len);
++		if (map.m_flags & F2FS_MAP_MAPPED) {
++			iomap->type = IOMAP_MAPPED;
++			iomap->flags |= IOMAP_F_MERGED;
++		} else {
++			iomap->type = IOMAP_UNWRITTEN;
++		}
++		if (WARN_ON_ONCE(!__is_valid_data_blkaddr(map.m_pblk)))
++			return -EINVAL;
++		iomap->addr = blks_to_bytes(inode, map.m_pblk);
++
++		if (WARN_ON_ONCE(f2fs_is_multi_device(F2FS_I_SB(inode))))
++			return -EINVAL;
++		iomap->bdev = inode->i_sb->s_bdev;
++	} else {
++		iomap->length = blks_to_bytes(inode, next_pgofs) -
++				iomap->offset;
++		iomap->type = IOMAP_HOLE;
++		iomap->addr = IOMAP_NULL_ADDR;
++	}
++
++	if (map.m_flags & F2FS_MAP_NEW)
++		iomap->flags |= IOMAP_F_NEW;
++	if ((inode->i_state & I_DIRTY_DATASYNC) ||
++	    offset + length > i_size_read(inode))
++		iomap->flags |= IOMAP_F_DIRTY;
++
++	return 0;
++}
++
++const struct iomap_ops f2fs_iomap_ops = {
++	.iomap_begin	= f2fs_iomap_begin,
++};
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 14bea669f87e..0d199e8f2c1d 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3654,6 +3654,7 @@ int f2fs_init_post_read_processing(void);
+ void f2fs_destroy_post_read_processing(void);
+ int f2fs_init_post_read_wq(struct f2fs_sb_info *sbi);
+ void f2fs_destroy_post_read_wq(struct f2fs_sb_info *sbi);
++extern const struct iomap_ops f2fs_iomap_ops;
  
- TRACE_EVENT(f2fs_file_write_iter,
- 
--	TP_PROTO(struct inode *inode, unsigned long offset,
--		unsigned long length, int ret),
-+	TP_PROTO(struct inode *inode, loff_t offset, size_t length,
-+		 ssize_t ret),
- 
- 	TP_ARGS(inode, offset, length, ret),
- 
- 	TP_STRUCT__entry(
- 		__field(dev_t,	dev)
- 		__field(ino_t,	ino)
--		__field(unsigned long, offset)
--		__field(unsigned long, length)
--		__field(int,	ret)
-+		__field(loff_t, offset)
-+		__field(size_t, length)
-+		__field(ssize_t, ret)
- 	),
- 
- 	TP_fast_assign(
-@@ -562,7 +562,7 @@ TRACE_EVENT(f2fs_file_write_iter,
- 	),
- 
- 	TP_printk("dev = (%d,%d), ino = %lu, "
--		"offset = %lu, length = %lu, written(err) = %d",
-+		"offset = %lld, length = %zu, written(err) = %zd",
- 		show_dev_ino(__entry),
- 		__entry->offset,
- 		__entry->length,
+ /*
+  * gc.c
 -- 
 2.34.0.rc1.387.gb447b232ab-goog
 
