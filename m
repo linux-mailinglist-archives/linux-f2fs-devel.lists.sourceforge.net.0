@@ -2,80 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C69B453BDE
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Nov 2021 22:45:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D906453F7A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Nov 2021 05:28:42 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mn6Go-0003c7-Fd; Tue, 16 Nov 2021 21:45:38 +0000
+	id 1mnCYi-0005NT-J7; Wed, 17 Nov 2021 04:28:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1mn6Gl-0003bp-W6
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Nov 2021 21:45:36 +0000
+ (envelope-from <neilb@suse.de>) id 1mnCYg-0005NN-RS
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 17 Nov 2021 04:28:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-id:Date:Subject:Cc:To:From:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MN1UqGXXenF6ob+RWVt/6XR2kvOGgaWCiIgQYxw70Uc=; b=RGn0rv5CR4YcpTpeBzvAh+ZyOl
- NWtadvRjgeM+Wb+2xhJahY/akjqoHN0r2h3Qj3kRQrLkl2szTv4PqtmEXtKGtkLIWj5PrO538w07E
- ofDT63JShqm8k1KubLOqQU6SxyZUtpw5Mfa+bXVklkFCINqWVeJV2xdvQKOq6WShuiFQ=;
+ bh=kc0HxmfBU+ql0DF05rNPRBsYUD/ySXg7fjtodEZMljA=; b=cc/tbRkk0IaEdqDX3PqzGGkDQr
+ +p8AvpTF/gbKEP0UJdTxLCwUZHYmwWA4C/oLywAfvkUO5FQgOmo9OvmuMQ20D7rcpQl56YhzOVxBa
+ FV4xhm8owYcjx58wPaED5mmUAsa2vHxqBJt8J26su+E8v8YLDTBMffiK+CkvrhSHTYS0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=MN1UqGXXenF6ob+RWVt/6XR2kvOGgaWCiIgQYxw70Uc=; b=dfEiQ4brk/EHvm0BwCnUvOP7b7
- jtiBmw9OJ0flGRDSUy0eTxHiSFlRxXjCs/eRe1syx49lo52syNWrJpdZBdmgFNSz4zwPbFpmyQfs8
- /VYg2PLHOH/aAhTyN8o1iYtfCetSPBZrDEAGklgLJLYYku032uQXvHwWw8BHZOyP3Bf0=;
-Received: from mail.kernel.org ([198.145.29.99])
+ h=Message-id:Date:Subject:Cc:To:From:MIME-Version:Content-Transfer-Encoding
+ :Content-Type:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=kc0HxmfBU+ql0DF05rNPRBsYUD/ySXg7fjtodEZMljA=; b=j
+ 199pBvBYEkuQB5HbYMt2fJGhB0VbXWvBwAW/DzrvDoZwUOzeWXAitD0k4O9fd83+0c5u8KJi9xBRu
+ R8q3YRzHIM4hRVV8bcljQGXHQMu0qDxbzv4k27vUQL3KnZWwrq0lRAfDe1vsyuqPQG5z3EH00zfak
+ kVnLIMKTUaQ7euCY=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mn6Gk-0006SV-Be
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 16 Nov 2021 21:45:35 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 707756324D;
- Tue, 16 Nov 2021 21:45:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1637099120;
- bh=UIaPdBTCmM79LePEG4sUxpZml9dwqb4e6ZUb/JMgRBw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=O79lcKGKgyT06PKHsFqW5wxlFb760NjRfXNuLXr9cT/edhZdyEy2Spl81HncgYPlT
- hAs5VL4C0eQ50C9dHB130hH09/VBgRxy3DGrmVowHc6nyn9UaAaKTlV9pR/9l4XFz3
- pB/7Md6zzf21cN000fJe6eZid52lS/IOGyv+rYjicfja0ItELl25RY4yQi8H8quKml
- rz2LuPTSJL1Km2HTfAwYGXM/xBpjLtcblBSv5nt7ceOoaN/ZINIC+Zck4p5y2a4GDO
- goiUMsHm7pxSKhmhDmUeyg92UNkFTPM6EMiQQM/Fw5xkKgk4irpmk8wgzdY9KCHG57
- gJ+NZHVwdv1VQ==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 16 Nov 2021 13:45:10 -0800
-Message-Id: <20211116214510.2934905-6-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.34.0.rc1.387.gb447b232ab-goog
-In-Reply-To: <20211116214510.2934905-1-jaegeuk@kernel.org>
-References: <20211116214510.2934905-1-jaegeuk@kernel.org>
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
+ id 1mnCYf-0006nG-EO
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 17 Nov 2021 04:28:30 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 92A4B2190C;
+ Wed, 17 Nov 2021 04:28:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1637123299; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=kc0HxmfBU+ql0DF05rNPRBsYUD/ySXg7fjtodEZMljA=;
+ b=GxASxKHN2Wsl2PZDLsnkle5eDd7m4KZRehbiEQyDWvdTHh2x2w4cOx5sMjXj6w+rO6ob8n
+ V4OvHzZMPQmtcTzD5YNnuCjDE82bvFkLYRfQkUFoHKfSohGSeolTnh60J5qXLODlOs7LEF
+ E/je6pvcbImMp5HI8mk67sbcxGKqpDk=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1637123299;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=kc0HxmfBU+ql0DF05rNPRBsYUD/ySXg7fjtodEZMljA=;
+ b=Y1JctX916jtVYTFPZCNMjCBDszdDPtmzChvu1aOs1OssrUtDpUe2jZVRp0o2IohPWU05aw
+ kgVtAi0wTrLdhlAw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2C49B13BC3;
+ Wed, 17 Nov 2021 04:28:15 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id olF+Nt+ElGGUFwAAMHmgww
+ (envelope-from <neilb@suse.de>); Wed, 17 Nov 2021 04:28:15 +0000
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+From: "NeilBrown" <neilb@suse.de>
+To: Andrew Morton <akpm@linux-foundation.org>, Michal Hocko <mhocko@suse.com>
+Date: Wed, 17 Nov 2021 15:28:10 +1100
+Message-id: <163712329077.13692.12796971766360881401@noble.neil.brown.name>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> Make
- f2fs_file_read_iter()
- and f2fs_file_write_iter() use the iomap direct I/O implementation instead
- of the fs/direct-io.c one. The iomap implementation is more efficient, and
- it also avoids the need to add new features and optimizations to the old
- implementation. 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview: Various places in the kernel - largely in filesystems -
+ respond
+ to a memory allocation failure by looping around and re-trying. Some of these
+ cannot conveniently use __GFP_NOFAIL, for reasons such as: [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -85,9 +98,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mn6Gk-0006SV-Be
-Subject: [f2fs-dev] [PATCH 6/6] f2fs: use iomap for direct I/O
+X-Headers-End: 1mnCYf-0006nG-EO
+Subject: [f2fs-dev] [PATCH] MM: introduce memalloc_retry_wait()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,768 +111,417 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Eric Biggers <ebiggers@google.com>
+Cc: linux-nfs@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
+ "Darrick J. Wong" <djwong@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ Chuck Lever <chuck.lever@oracle.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
 
-Make f2fs_file_read_iter() and f2fs_file_write_iter() use the iomap
-direct I/O implementation instead of the fs/direct-io.c one.
+Various places in the kernel - largely in filesystems - respond to a
+memory allocation failure by looping around and re-trying.
+Some of these cannot conveniently use __GFP_NOFAIL, for reasons such as:
+ - a GFP_ATOMIC allocation, which __GFP_NOFAIL doesn't work on
+ - a need to check for the process being signalled between failures
+ - the possibility that other recovery actions could be performed
+ - the allocation is quite deep in support code, and passing down an
+   extra flag to say if __GFP_NOFAIL is wanted would be clumsy.
 
-The iomap implementation is more efficient, and it also avoids the need
-to add new features and optimizations to the old implementation.
+Many of these currently use congestion_wait() which (in almost all
+cases) simply waits the given timeout - congestion isn't tracked for
+most devices.
 
-This new implementation also eliminates the need for f2fs to hook bio
-submission and completion and to allocate memory per-bio.  This is
-because it's possible to correctly update f2fs's in-flight DIO counters
-using __iomap_dio_rw() in combination with an implementation of
-iomap_dio_ops::end_io() (as suggested by Christoph Hellwig).
+It isn't clear what the best delay is for loops, but it is clear that
+the various filesystems shouldn't be responsible for choosing a timeout.
 
-When possible, this new implementation preserves existing f2fs behavior
-such as the conditions for falling back to buffered I/O.
+This patch introduces memalloc_retry_wait() with takes on that
+responsibility.  Code that wants to retry a memory allocation can call
+this function passing the GFP flags that were used.  It will wait
+however is appropriate.
 
-This patch has been tested with xfstests by running 'gce-xfstests -c
-f2fs -g auto -X generic/017' with and without this patch; no regressions
-were seen.  (Some tests fail both before and after.  generic/017 hangs
-both before and after, so it had to be excluded.)
+For now, it only considers the __GFP_DIRECT_RECLAIM and __GFP_NORETRY
+flags.  If DIRECT_RECLAIM is set without GFP_NORETRY, then alloc_page
+either made some reclaim progress, or waited for a while, before
+failing.  So there is no need for much further waiting.
+memalloc_retry_wait() will wait until the current jiffie ends.  If this
+condition is not met, then alloc_page() won't have waited.  In that case
+memalloc_retry_wait() waits about 200ms.  This is the delay that most
+current loops uses.
 
-Signed-off-by: Eric Biggers <ebiggers@google.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+linux/sched/mm.h needs to be included in some files now,
+but linux/backing-dev.h does not.
+
+Signed-off-by: NeilBrown <neilb@suse.de>
 ---
- fs/f2fs/data.c   | 205 +---------------------------
- fs/f2fs/f2fs.h   |   8 +-
- fs/f2fs/file.c   | 343 +++++++++++++++++++++++++++++++++++++++++------
- fs/f2fs/iostat.c |  15 +--
- 4 files changed, 311 insertions(+), 260 deletions(-)
 
+I could split this up by filesystems if people prefer that, but they we
+would have to wait for the -mm patch to land before they could be
+applied.  What do people think?  Can Andrew just collected acked-bys?
+
+Thanks,
+NeilBrown
+
+
+ fs/ext4/extents.c        |  8 +++-----
+ fs/ext4/inline.c         |  5 ++---
+ fs/ext4/page-io.c        |  9 +++++----
+ fs/f2fs/data.c           |  3 +--
+ fs/f2fs/gc.c             |  5 ++---
+ fs/f2fs/inode.c          |  4 ++--
+ fs/f2fs/node.c           |  3 +--
+ fs/f2fs/recovery.c       |  6 +++---
+ fs/f2fs/segment.c        |  8 ++------
+ fs/f2fs/super.c          |  4 +---
+ fs/xfs/kmem.c            |  3 +--
+ fs/xfs/xfs_buf.c         |  2 +-
+ include/linux/sched/mm.h | 21 +++++++++++++++++++++
+ net/sunrpc/svc_xprt.c    |  2 +-
+ 14 files changed, 46 insertions(+), 37 deletions(-)
+
+diff --git a/fs/ext4/extents.c b/fs/ext4/extents.c
+index 0ecf819bf189..5582fba36b44 100644
+--- a/fs/ext4/extents.c
++++ b/fs/ext4/extents.c
+@@ -27,8 +27,8 @@
+ #include <linux/slab.h>
+ #include <linux/uaccess.h>
+ #include <linux/fiemap.h>
+-#include <linux/backing-dev.h>
+ #include <linux/iomap.h>
++#include <linux/sched/mm.h>
+ #include "ext4_jbd2.h"
+ #include "ext4_extents.h"
+ #include "xattr.h"
+@@ -4407,8 +4407,7 @@ int ext4_ext_truncate(handle_t *handle, struct inode *inode)
+ 	err = ext4_es_remove_extent(inode, last_block,
+ 				    EXT_MAX_BLOCKS - last_block);
+ 	if (err == -ENOMEM) {
+-		cond_resched();
+-		congestion_wait(BLK_RW_ASYNC, HZ/50);
++		memalloc_retry_wait(GFP_ATOMIC);
+ 		goto retry;
+ 	}
+ 	if (err)
+@@ -4416,8 +4415,7 @@ int ext4_ext_truncate(handle_t *handle, struct inode *inode)
+ retry_remove_space:
+ 	err = ext4_ext_remove_space(inode, last_block, EXT_MAX_BLOCKS - 1);
+ 	if (err == -ENOMEM) {
+-		cond_resched();
+-		congestion_wait(BLK_RW_ASYNC, HZ/50);
++		memalloc_retry_wait(GFP_ATOMIC);
+ 		goto retry_remove_space;
+ 	}
+ 	return err;
+diff --git a/fs/ext4/inline.c b/fs/ext4/inline.c
+index 39a1ab129fdc..635bcf68a67e 100644
+--- a/fs/ext4/inline.c
++++ b/fs/ext4/inline.c
+@@ -7,7 +7,7 @@
+ #include <linux/iomap.h>
+ #include <linux/fiemap.h>
+ #include <linux/iversion.h>
+-#include <linux/backing-dev.h>
++#include <linux/sched/mm.h>
+ 
+ #include "ext4_jbd2.h"
+ #include "ext4.h"
+@@ -1929,8 +1929,7 @@ int ext4_inline_data_truncate(struct inode *inode, int *has_inline)
+ retry:
+ 			err = ext4_es_remove_extent(inode, 0, EXT_MAX_BLOCKS);
+ 			if (err == -ENOMEM) {
+-				cond_resched();
+-				congestion_wait(BLK_RW_ASYNC, HZ/50);
++				memalloc_retry_wait(GFP_ATOMIC);
+ 				goto retry;
+ 			}
+ 			if (err)
+diff --git a/fs/ext4/page-io.c b/fs/ext4/page-io.c
+index 9cb261714991..1d370364230e 100644
+--- a/fs/ext4/page-io.c
++++ b/fs/ext4/page-io.c
+@@ -24,7 +24,7 @@
+ #include <linux/kernel.h>
+ #include <linux/slab.h>
+ #include <linux/mm.h>
+-#include <linux/backing-dev.h>
++#include <linux/sched/mm.h>
+ 
+ #include "ext4_jbd2.h"
+ #include "xattr.h"
+@@ -523,12 +523,13 @@ int ext4_bio_write_page(struct ext4_io_submit *io,
+ 			ret = PTR_ERR(bounce_page);
+ 			if (ret == -ENOMEM &&
+ 			    (io->io_bio || wbc->sync_mode == WB_SYNC_ALL)) {
+-				gfp_flags = GFP_NOFS;
++				gfp_t new_gfp_flags = GFP_NOFS;
+ 				if (io->io_bio)
+ 					ext4_io_submit(io);
+ 				else
+-					gfp_flags |= __GFP_NOFAIL;
+-				congestion_wait(BLK_RW_ASYNC, HZ/50);
++					new_gfp_flags |= __GFP_NOFAIL;
++				memalloc_retry_wait(gfp_flags);
++				gfp_flags = new_gfp_flags;
+ 				goto retry_encrypt;
+ 			}
+ 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 43b3ca7cabe0..a9124d94a5d1 100644
+index 9f754aaef558..48b80e7ec35e 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -1377,11 +1377,6 @@ static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
- 		f2fs_invalidate_compress_page(sbi, old_blkaddr);
- 	}
- 	f2fs_update_data_blkaddr(dn, dn->data_blkaddr);
--
--	/*
--	 * i_size will be updated by direct_IO. Otherwise, we'll get stale
--	 * data from unwritten block via dio_read.
--	 */
- 	return 0;
- }
- 
-@@ -1743,50 +1738,6 @@ static inline u64 blks_to_bytes(struct inode *inode, u64 blks)
- 	return (blks << inode->i_blkbits);
- }
- 
--static int __get_data_block(struct inode *inode, sector_t iblock,
--			struct buffer_head *bh, int create, int flag,
--			pgoff_t *next_pgofs, int seg_type, bool may_write)
--{
--	struct f2fs_map_blocks map;
--	int err;
--
--	map.m_lblk = iblock;
--	map.m_len = bytes_to_blks(inode, bh->b_size);
--	map.m_next_pgofs = next_pgofs;
--	map.m_next_extent = NULL;
--	map.m_seg_type = seg_type;
--	map.m_may_create = may_write;
--
--	err = f2fs_map_blocks(inode, &map, create, flag);
--	if (!err) {
--		map_bh(bh, inode->i_sb, map.m_pblk);
--		bh->b_state = (bh->b_state & ~F2FS_MAP_FLAGS) | map.m_flags;
--		bh->b_size = blks_to_bytes(inode, map.m_len);
--
--		if (map.m_multidev_dio)
--			bh->b_bdev = map.m_bdev;
--	}
--	return err;
--}
--
--static int get_data_block_dio_write(struct inode *inode, sector_t iblock,
--			struct buffer_head *bh_result, int create)
--{
--	return __get_data_block(inode, iblock, bh_result, create,
--				F2FS_GET_BLOCK_DIO, NULL,
--				f2fs_rw_hint_to_seg_type(inode->i_write_hint),
--				true);
--}
--
--static int get_data_block_dio(struct inode *inode, sector_t iblock,
--			struct buffer_head *bh_result, int create)
--{
--	return __get_data_block(inode, iblock, bh_result, create,
--				F2FS_GET_BLOCK_DIO, NULL,
--				f2fs_rw_hint_to_seg_type(inode->i_write_hint),
--				false);
--}
--
- static int f2fs_xattr_fiemap(struct inode *inode,
- 				struct fiemap_extent_info *fieinfo)
- {
-@@ -3262,7 +3213,7 @@ static int f2fs_write_data_pages(struct address_space *mapping,
- 			FS_CP_DATA_IO : FS_DATA_IO);
- }
- 
--static void f2fs_write_failed(struct inode *inode, loff_t to)
-+void f2fs_write_failed(struct inode *inode, loff_t to)
- {
- 	loff_t i_size = i_size_read(inode);
- 
-@@ -3550,158 +3501,6 @@ static int f2fs_write_end(struct file *file,
- 	return copied;
- }
- 
--static int check_direct_IO(struct inode *inode, struct iov_iter *iter,
--			   loff_t offset)
--{
--	unsigned i_blkbits = READ_ONCE(inode->i_blkbits);
--	unsigned blkbits = i_blkbits;
--	unsigned blocksize_mask = (1 << blkbits) - 1;
--	unsigned long align = offset | iov_iter_alignment(iter);
--	struct block_device *bdev = inode->i_sb->s_bdev;
--
--	if (iov_iter_rw(iter) == READ && offset >= i_size_read(inode))
--		return 1;
--
--	if (align & blocksize_mask) {
--		if (bdev)
--			blkbits = blksize_bits(bdev_logical_block_size(bdev));
--		blocksize_mask = (1 << blkbits) - 1;
--		if (align & blocksize_mask)
--			return -EINVAL;
--		return 1;
--	}
--	return 0;
--}
--
--static void f2fs_dio_end_io(struct bio *bio)
--{
--	struct f2fs_private_dio *dio = bio->bi_private;
--
--	dec_page_count(F2FS_I_SB(dio->inode),
--			dio->write ? F2FS_DIO_WRITE : F2FS_DIO_READ);
--
--	bio->bi_private = dio->orig_private;
--	bio->bi_end_io = dio->orig_end_io;
--
--	kfree(dio);
--
--	bio_endio(bio);
--}
--
--static void f2fs_dio_submit_bio(struct bio *bio, struct inode *inode,
--							loff_t file_offset)
--{
--	struct f2fs_private_dio *dio;
--	bool write = (bio_op(bio) == REQ_OP_WRITE);
--
--	dio = f2fs_kzalloc(F2FS_I_SB(inode),
--			sizeof(struct f2fs_private_dio), GFP_NOFS);
--	if (!dio)
--		goto out;
--
--	dio->inode = inode;
--	dio->orig_end_io = bio->bi_end_io;
--	dio->orig_private = bio->bi_private;
--	dio->write = write;
--
--	bio->bi_end_io = f2fs_dio_end_io;
--	bio->bi_private = dio;
--
--	inc_page_count(F2FS_I_SB(inode),
--			write ? F2FS_DIO_WRITE : F2FS_DIO_READ);
--
--	submit_bio(bio);
--	return;
--out:
--	bio->bi_status = BLK_STS_IOERR;
--	bio_endio(bio);
--}
--
--static ssize_t f2fs_direct_IO(struct kiocb *iocb, struct iov_iter *iter)
--{
--	struct address_space *mapping = iocb->ki_filp->f_mapping;
--	struct inode *inode = mapping->host;
--	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
--	struct f2fs_inode_info *fi = F2FS_I(inode);
--	size_t count = iov_iter_count(iter);
--	loff_t offset = iocb->ki_pos;
--	int rw = iov_iter_rw(iter);
--	int err;
--	enum rw_hint hint = iocb->ki_hint;
--	int whint_mode = F2FS_OPTION(sbi).whint_mode;
--	bool do_opu;
--
--	err = check_direct_IO(inode, iter, offset);
--	if (err)
--		return err < 0 ? err : 0;
--
--	if (f2fs_force_buffered_io(inode, iocb, iter))
--		return 0;
--
--	do_opu = rw == WRITE && f2fs_lfs_mode(sbi);
--
--	trace_f2fs_direct_IO_enter(inode, offset, count, rw);
--
--	if (rw == WRITE && whint_mode == WHINT_MODE_OFF)
--		iocb->ki_hint = WRITE_LIFE_NOT_SET;
--
--	if (iocb->ki_flags & IOCB_NOWAIT) {
--		if (!down_read_trylock(&fi->i_gc_rwsem[rw])) {
--			iocb->ki_hint = hint;
--			err = -EAGAIN;
--			goto out;
--		}
--		if (do_opu && !down_read_trylock(&fi->i_gc_rwsem[READ])) {
--			up_read(&fi->i_gc_rwsem[rw]);
--			iocb->ki_hint = hint;
--			err = -EAGAIN;
--			goto out;
--		}
--	} else {
--		down_read(&fi->i_gc_rwsem[rw]);
--		if (do_opu)
--			down_read(&fi->i_gc_rwsem[READ]);
--	}
--
--	err = __blockdev_direct_IO(iocb, inode, inode->i_sb->s_bdev,
--			iter, rw == WRITE ? get_data_block_dio_write :
--			get_data_block_dio, NULL, f2fs_dio_submit_bio,
--			rw == WRITE ? DIO_LOCKING | DIO_SKIP_HOLES :
--			DIO_SKIP_HOLES);
--
--	if (do_opu)
--		up_read(&fi->i_gc_rwsem[READ]);
--
--	up_read(&fi->i_gc_rwsem[rw]);
--
--	if (rw == WRITE) {
--		if (whint_mode == WHINT_MODE_OFF)
--			iocb->ki_hint = hint;
--		if (err > 0) {
--			f2fs_update_iostat(F2FS_I_SB(inode), APP_DIRECT_IO,
--									err);
--			if (!do_opu)
--				set_inode_flag(inode, FI_UPDATE_WRITE);
--		} else if (err == -EIOCBQUEUED) {
--			f2fs_update_iostat(F2FS_I_SB(inode), APP_DIRECT_IO,
--						count - iov_iter_count(iter));
--		} else if (err < 0) {
--			f2fs_write_failed(inode, offset + count);
--		}
--	} else {
--		if (err > 0)
--			f2fs_update_iostat(sbi, APP_DIRECT_READ_IO, err);
--		else if (err == -EIOCBQUEUED)
--			f2fs_update_iostat(F2FS_I_SB(inode), APP_DIRECT_READ_IO,
--						count - iov_iter_count(iter));
--	}
--
--out:
--	trace_f2fs_direct_IO_exit(inode, offset, count, rw, err);
--
--	return err;
--}
--
- void f2fs_invalidate_page(struct page *page, unsigned int offset,
- 							unsigned int length)
- {
-@@ -4157,7 +3956,7 @@ const struct address_space_operations f2fs_dblock_aops = {
- 	.set_page_dirty	= f2fs_set_data_page_dirty,
- 	.invalidatepage	= f2fs_invalidate_page,
- 	.releasepage	= f2fs_release_page,
--	.direct_IO	= f2fs_direct_IO,
-+	.direct_IO	= noop_direct_IO,
- 	.bmap		= f2fs_bmap,
- 	.swap_activate  = f2fs_swap_activate,
- 	.swap_deactivate = f2fs_swap_deactivate,
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 0d199e8f2c1d..26e92799ac6c 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1806,13 +1806,6 @@ struct f2fs_sb_info {
- #endif
- };
- 
--struct f2fs_private_dio {
--	struct inode *inode;
--	void *orig_private;
--	bio_end_io_t *orig_end_io;
--	bool write;
--};
--
- #ifdef CONFIG_F2FS_FAULT_INJECTION
- #define f2fs_show_injection_info(sbi, type)					\
- 	printk_ratelimited("%sF2FS-fs (%s) : inject %s in %s of %pS\n",	\
-@@ -3641,6 +3634,7 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
- 				struct writeback_control *wbc,
- 				enum iostat_type io_type,
- 				int compr_blocks, bool allow_balance);
-+void f2fs_write_failed(struct inode *inode, loff_t to);
- void f2fs_invalidate_page(struct page *page, unsigned int offset,
- 			unsigned int length);
- int f2fs_release_page(struct page *page, gfp_t wait);
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 709fa893d832..60e5e2f1c1e8 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -24,6 +24,7 @@
+@@ -10,7 +10,6 @@
+ #include <linux/buffer_head.h>
+ #include <linux/mpage.h>
+ #include <linux/writeback.h>
+-#include <linux/backing-dev.h>
+ #include <linux/pagevec.h>
+ #include <linux/blkdev.h>
+ #include <linux/bio.h>
+@@ -2542,7 +2541,7 @@ int f2fs_encrypt_one_page(struct f2fs_io_info *fio)
+ 		/* flush pending IOs and wait for a while in the ENOMEM case */
+ 		if (PTR_ERR(fio->encrypted_page) == -ENOMEM) {
+ 			f2fs_flush_merged_writes(fio->sbi);
+-			congestion_wait(BLK_RW_ASYNC, DEFAULT_IO_TIMEOUT);
++			memalloc_retry_wait(GFP_NOFS);
+ 			gfp_flags |= __GFP_NOFAIL;
+ 			goto retry_encrypt;
+ 		}
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index a946ce0ead34..374bbb5294d9 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -7,7 +7,6 @@
+  */
+ #include <linux/fs.h>
+ #include <linux/module.h>
+-#include <linux/backing-dev.h>
+ #include <linux/init.h>
+ #include <linux/f2fs_fs.h>
+ #include <linux/kthread.h>
+@@ -15,6 +14,7 @@
+ #include <linux/freezer.h>
  #include <linux/sched/signal.h>
- #include <linux/fileattr.h>
- #include <linux/fadvise.h>
-+#include <linux/iomap.h>
+ #include <linux/random.h>
++#include <linux/sched/mm.h>
  
  #include "f2fs.h"
  #include "node.h"
-@@ -4229,23 +4230,145 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- 	return __f2fs_ioctl(filp, cmd, arg);
- }
+@@ -1375,8 +1375,7 @@ static int move_data_page(struct inode *inode, block_t bidx, int gc_type,
+ 		if (err) {
+ 			clear_page_private_gcing(page);
+ 			if (err == -ENOMEM) {
+-				congestion_wait(BLK_RW_ASYNC,
+-						DEFAULT_IO_TIMEOUT);
++				memalloc_retry_wait(GFP_NOFS);
+ 				goto retry;
+ 			}
+ 			if (is_dirty)
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index 0f8b2df3e1e0..4c11254a07d4 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -8,8 +8,8 @@
+ #include <linux/fs.h>
+ #include <linux/f2fs_fs.h>
+ #include <linux/buffer_head.h>
+-#include <linux/backing-dev.h>
+ #include <linux/writeback.h>
++#include <linux/sched/mm.h>
  
--static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *iter)
-+/*
-+ * Return %true if the given read or write request should use direct I/O, or
-+ * %false if it should use buffered I/O.
-+ */
-+static bool f2fs_should_use_dio(struct inode *inode, struct kiocb *iocb,
-+				struct iov_iter *iter)
-+{
-+	unsigned int align;
-+
-+	if (!(iocb->ki_flags & IOCB_DIRECT))
-+		return false;
-+
-+	if (f2fs_force_buffered_io(inode, iocb, iter))
-+		return false;
-+
-+	/*
-+	 * Direct I/O not aligned to the disk's logical_block_size will be
-+	 * attempted, but will fail with -EINVAL.
-+	 *
-+	 * f2fs additionally requires that direct I/O be aligned to the
-+	 * filesystem block size, which is often a stricter requirement.
-+	 * However, f2fs traditionally falls back to buffered I/O on requests
-+	 * that are logical_block_size-aligned but not fs-block aligned.
-+	 *
-+	 * The below logic implements this behavior.
-+	 */
-+	align = iocb->ki_pos | iov_iter_alignment(iter);
-+	if (!IS_ALIGNED(align, i_blocksize(inode)) &&
-+	    IS_ALIGNED(align, bdev_logical_block_size(inode->i_sb->s_bdev)))
-+		return false;
-+
-+	return true;
-+}
-+
-+static int f2fs_dio_read_end_io(struct kiocb *iocb, ssize_t size, int error,
-+				unsigned int flags)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(file_inode(iocb->ki_filp));
-+
-+	dec_page_count(sbi, F2FS_DIO_READ);
-+	if (error)
-+		return error;
-+	f2fs_update_iostat(sbi, APP_DIRECT_READ_IO, size);
-+	return 0;
-+}
-+
-+static const struct iomap_dio_ops f2fs_iomap_dio_read_ops = {
-+	.end_io = f2fs_dio_read_end_io,
-+};
-+
-+static ssize_t f2fs_dio_read_iter(struct kiocb *iocb, struct iov_iter *to)
- {
- 	struct file *file = iocb->ki_filp;
- 	struct inode *inode = file_inode(file);
--	int ret;
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	struct f2fs_inode_info *fi = F2FS_I(inode);
-+	const loff_t pos = iocb->ki_pos;
-+	const size_t count = iov_iter_count(to);
-+	struct iomap_dio *dio;
-+	ssize_t ret;
-+
-+	if (count == 0)
-+		return 0; /* skip atime update */
-+
-+	trace_f2fs_direct_IO_enter(inode, pos, count, READ);
-+
-+	if (iocb->ki_flags & IOCB_NOWAIT) {
-+		if (!down_read_trylock(&fi->i_gc_rwsem[READ])) {
-+			ret = -EAGAIN;
-+			goto out;
-+		}
-+	} else {
-+		down_read(&fi->i_gc_rwsem[READ]);
-+	}
-+
-+	/*
-+	 * We have to use __iomap_dio_rw() and iomap_dio_complete() instead of
-+	 * the higher-level function iomap_dio_rw() in order to ensure that the
-+	 * F2FS_DIO_READ counter will be decremented correctly in all cases.
-+	 */
-+	inc_page_count(sbi, F2FS_DIO_READ);
-+	dio = __iomap_dio_rw(iocb, to, &f2fs_iomap_ops,
-+			     &f2fs_iomap_dio_read_ops, 0, 0);
-+	if (IS_ERR_OR_NULL(dio)) {
-+		ret = PTR_ERR_OR_ZERO(dio);
-+		if (ret != -EIOCBQUEUED)
-+			dec_page_count(sbi, F2FS_DIO_READ);
-+	} else {
-+		ret = iomap_dio_complete(dio);
-+	}
-+
-+	up_read(&fi->i_gc_rwsem[READ]);
-+
-+	file_accessed(file);
-+out:
-+	trace_f2fs_direct_IO_exit(inode, pos, count, READ, ret);
-+	return ret;
-+}
-+
-+static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
-+{
-+	struct inode *inode = file_inode(iocb->ki_filp);
-+	ssize_t ret;
+ #include "f2fs.h"
+ #include "node.h"
+@@ -562,7 +562,7 @@ struct inode *f2fs_iget_retry(struct super_block *sb, unsigned long ino)
+ 	inode = f2fs_iget(sb, ino);
+ 	if (IS_ERR(inode)) {
+ 		if (PTR_ERR(inode) == -ENOMEM) {
+-			congestion_wait(BLK_RW_ASYNC, DEFAULT_IO_TIMEOUT);
++			memalloc_retry_wait(GFP_NOFS);
+ 			goto retry;
+ 		}
+ 	}
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 556fcd8457f3..f8646c29e00b 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -8,7 +8,6 @@
+ #include <linux/fs.h>
+ #include <linux/f2fs_fs.h>
+ #include <linux/mpage.h>
+-#include <linux/backing-dev.h>
+ #include <linux/blkdev.h>
+ #include <linux/pagevec.h>
+ #include <linux/swap.h>
+@@ -2750,7 +2749,7 @@ int f2fs_recover_inode_page(struct f2fs_sb_info *sbi, struct page *page)
+ retry:
+ 	ipage = f2fs_grab_cache_page(NODE_MAPPING(sbi), ino, false);
+ 	if (!ipage) {
+-		congestion_wait(BLK_RW_ASYNC, DEFAULT_IO_TIMEOUT);
++		memalloc_retry_wait(GFP_NOFS);
+ 		goto retry;
+ 	}
  
- 	if (!f2fs_is_compress_backend_ready(inode))
- 		return -EOPNOTSUPP;
- 
--	ret = generic_file_read_iter(iocb, iter);
-+	if (f2fs_should_use_dio(inode, iocb, to))
-+		return f2fs_dio_read_iter(iocb, to);
- 
-+	ret = filemap_read(iocb, to, 0);
- 	if (ret > 0)
--		f2fs_update_iostat(F2FS_I_SB(inode), APP_READ_IO, ret);
--
-+		f2fs_update_iostat(F2FS_I_SB(inode), APP_BUFFERED_READ_IO, ret);
- 	return ret;
- }
- 
-+static ssize_t f2fs_write_checks(struct kiocb *iocb, struct iov_iter *from)
-+{
-+	struct file *file = iocb->ki_filp;
-+	struct inode *inode = file_inode(file);
-+	ssize_t count;
-+	int err;
-+
-+	if (IS_IMMUTABLE(inode))
-+		return -EPERM;
-+
-+	if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED))
-+		return -EPERM;
-+
-+	count = generic_write_checks(iocb, from);
-+	if (count <= 0)
-+		return count;
-+
-+	err = file_modified(file);
-+	if (err)
-+		return err;
-+	return count;
-+}
-+
- /*
-  * Preallocate blocks for a write request, if it is possible and helpful to do
-  * so.  Returns a positive number if blocks may have been preallocated, 0 if no
-@@ -4253,15 +4376,14 @@ static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *iter)
-  * seriously wrong.  Also sets FI_PREALLOCATED_ALL on the inode if *all* the
-  * requested blocks (not just some of them) have been allocated.
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index 6a1b4668d933..d1664a0567ef 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -8,6 +8,7 @@
+ #include <asm/unaligned.h>
+ #include <linux/fs.h>
+ #include <linux/f2fs_fs.h>
++#include <linux/sched/mm.h>
+ #include "f2fs.h"
+ #include "node.h"
+ #include "segment.h"
+@@ -587,7 +588,7 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
+ 	err = f2fs_get_dnode_of_data(&dn, start, ALLOC_NODE);
+ 	if (err) {
+ 		if (err == -ENOMEM) {
+-			congestion_wait(BLK_RW_ASYNC, DEFAULT_IO_TIMEOUT);
++			memalloc_retry_wait(GFP_NOFS);
+ 			goto retry_dn;
+ 		}
+ 		goto out;
+@@ -670,8 +671,7 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
+ 			err = check_index_in_prev_nodes(sbi, dest, &dn);
+ 			if (err) {
+ 				if (err == -ENOMEM) {
+-					congestion_wait(BLK_RW_ASYNC,
+-							DEFAULT_IO_TIMEOUT);
++					memalloc_retry_wait(GFP_NOFS);
+ 					goto retry_prev;
+ 				}
+ 				goto err;
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index df9ed75f0b7a..6140eada8607 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -245,9 +245,7 @@ static int __revoke_inmem_pages(struct inode *inode,
+ 								LOOKUP_NODE);
+ 			if (err) {
+ 				if (err == -ENOMEM) {
+-					congestion_wait(BLK_RW_ASYNC,
+-							DEFAULT_IO_TIMEOUT);
+-					cond_resched();
++					memalloc_retry_wait(GFP_NOFS);
+ 					goto retry;
+ 				}
+ 				err = -EAGAIN;
+@@ -424,9 +422,7 @@ static int __f2fs_commit_inmem_pages(struct inode *inode)
+ 			err = f2fs_do_write_data_page(&fio);
+ 			if (err) {
+ 				if (err == -ENOMEM) {
+-					congestion_wait(BLK_RW_ASYNC,
+-							DEFAULT_IO_TIMEOUT);
+-					cond_resched();
++					memalloc_retry_wait(GFP_NOFS);
+ 					goto retry;
+ 				}
+ 				unlock_page(page);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 040b6d02e1d8..be9006d6213f 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -10,7 +10,6 @@
+ #include <linux/fs.h>
+ #include <linux/statfs.h>
+ #include <linux/buffer_head.h>
+-#include <linux/backing-dev.h>
+ #include <linux/kthread.h>
+ #include <linux/parser.h>
+ #include <linux/mount.h>
+@@ -2415,8 +2414,7 @@ static ssize_t f2fs_quota_read(struct super_block *sb, int type, char *data,
+ 		page = read_cache_page_gfp(mapping, blkidx, GFP_NOFS);
+ 		if (IS_ERR(page)) {
+ 			if (PTR_ERR(page) == -ENOMEM) {
+-				congestion_wait(BLK_RW_ASYNC,
+-						DEFAULT_IO_TIMEOUT);
++				memalloc_retry_wait(GFP_NOFS);
+ 				goto repeat;
+ 			}
+ 			set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
+diff --git a/fs/xfs/kmem.c b/fs/xfs/kmem.c
+index 6f49bf39183c..c557a030acfe 100644
+--- a/fs/xfs/kmem.c
++++ b/fs/xfs/kmem.c
+@@ -4,7 +4,6 @@
+  * All Rights Reserved.
   */
--static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter)
-+static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
-+				   bool dio)
- {
- 	struct inode *inode = file_inode(iocb->ki_filp);
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	const loff_t pos = iocb->ki_pos;
- 	const size_t count = iov_iter_count(iter);
- 	struct f2fs_map_blocks map = {};
--	bool dio = (iocb->ki_flags & IOCB_DIRECT) &&
--		   !f2fs_force_buffered_io(inode, iocb, iter);
- 	int flag;
- 	int ret;
+ #include "xfs.h"
+-#include <linux/backing-dev.h>
+ #include "xfs_message.h"
+ #include "xfs_trace.h"
  
-@@ -4317,13 +4439,174 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter)
- 	return map.m_len;
+@@ -26,6 +25,6 @@ kmem_alloc(size_t size, xfs_km_flags_t flags)
+ 	"%s(%u) possible memory allocation deadlock size %u in %s (mode:0x%x)",
+ 				current->comm, current->pid,
+ 				(unsigned int)size, __func__, lflags);
+-		congestion_wait(BLK_RW_ASYNC, HZ/50);
++		memalloc_retry_wait(lflags);
+ 	} while (1);
  }
+diff --git a/fs/xfs/xfs_buf.c b/fs/xfs/xfs_buf.c
+index 631c5a61d89b..6c45e3fa56f4 100644
+--- a/fs/xfs/xfs_buf.c
++++ b/fs/xfs/xfs_buf.c
+@@ -394,7 +394,7 @@ xfs_buf_alloc_pages(
+ 		}
  
--static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
-+static ssize_t f2fs_buffered_write_iter(struct kiocb *iocb,
-+					struct iov_iter *from)
-+{
-+	struct file *file = iocb->ki_filp;
-+	struct inode *inode = file_inode(file);
-+	ssize_t ret;
-+
-+	if (iocb->ki_flags & IOCB_NOWAIT)
-+		return -EOPNOTSUPP;
-+
-+	current->backing_dev_info = inode_to_bdi(inode);
-+	ret = generic_perform_write(file, from, iocb->ki_pos);
-+	current->backing_dev_info = NULL;
-+
-+	if (ret > 0) {
-+		iocb->ki_pos += ret;
-+		f2fs_update_iostat(F2FS_I_SB(inode), APP_BUFFERED_IO, ret);
-+	}
-+	return ret;
-+}
-+
-+static int f2fs_dio_write_end_io(struct kiocb *iocb, ssize_t size, int error,
-+				 unsigned int flags)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(file_inode(iocb->ki_filp));
-+
-+	dec_page_count(sbi, F2FS_DIO_WRITE);
-+	if (error)
-+		return error;
-+	f2fs_update_iostat(sbi, APP_DIRECT_IO, size);
-+	return 0;
-+}
-+
-+static const struct iomap_dio_ops f2fs_iomap_dio_write_ops = {
-+	.end_io = f2fs_dio_write_end_io,
-+};
-+
-+static ssize_t f2fs_dio_write_iter(struct kiocb *iocb, struct iov_iter *from,
-+				   bool *may_need_sync)
- {
- 	struct file *file = iocb->ki_filp;
- 	struct inode *inode = file_inode(file);
-+	struct f2fs_inode_info *fi = F2FS_I(inode);
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	const bool do_opu = f2fs_lfs_mode(sbi);
-+	const int whint_mode = F2FS_OPTION(sbi).whint_mode;
-+	const loff_t pos = iocb->ki_pos;
-+	const ssize_t count = iov_iter_count(from);
-+	const enum rw_hint hint = iocb->ki_hint;
-+	unsigned int dio_flags;
-+	struct iomap_dio *dio;
-+	ssize_t ret;
-+
-+	trace_f2fs_direct_IO_enter(inode, pos, count, WRITE);
-+
-+	if (iocb->ki_flags & IOCB_NOWAIT) {
-+		/* f2fs_convert_inline_inode() and block allocation can block */
-+		if (f2fs_has_inline_data(inode) ||
-+		    !f2fs_overwrite_io(inode, pos, count)) {
-+			ret = -EAGAIN;
-+			goto out;
-+		}
-+
-+		if (!down_read_trylock(&fi->i_gc_rwsem[WRITE])) {
-+			ret = -EAGAIN;
-+			goto out;
-+		}
-+		if (do_opu && !down_read_trylock(&fi->i_gc_rwsem[READ])) {
-+			up_read(&fi->i_gc_rwsem[WRITE]);
-+			ret = -EAGAIN;
-+			goto out;
-+		}
-+	} else {
-+		ret = f2fs_convert_inline_inode(inode);
-+		if (ret)
-+			goto out;
-+
-+		down_read(&fi->i_gc_rwsem[WRITE]);
-+		if (do_opu)
-+			down_read(&fi->i_gc_rwsem[READ]);
-+	}
-+	if (whint_mode == WHINT_MODE_OFF)
-+		iocb->ki_hint = WRITE_LIFE_NOT_SET;
-+
-+	/*
-+	 * We have to use __iomap_dio_rw() and iomap_dio_complete() instead of
-+	 * the higher-level function iomap_dio_rw() in order to ensure that the
-+	 * F2FS_DIO_WRITE counter will be decremented correctly in all cases.
-+	 */
-+	inc_page_count(sbi, F2FS_DIO_WRITE);
-+	dio_flags = 0;
-+	if (pos + count > inode->i_size)
-+		dio_flags |= IOMAP_DIO_FORCE_WAIT;
-+	dio = __iomap_dio_rw(iocb, from, &f2fs_iomap_ops,
-+			     &f2fs_iomap_dio_write_ops, dio_flags, 0);
-+	if (IS_ERR_OR_NULL(dio)) {
-+		ret = PTR_ERR_OR_ZERO(dio);
-+		if (ret == -ENOTBLK)
-+			ret = 0;
-+		if (ret != -EIOCBQUEUED)
-+			dec_page_count(sbi, F2FS_DIO_WRITE);
-+	} else {
-+		ret = iomap_dio_complete(dio);
-+	}
-+
-+	if (whint_mode == WHINT_MODE_OFF)
-+		iocb->ki_hint = hint;
-+	if (do_opu)
-+		up_read(&fi->i_gc_rwsem[READ]);
-+	up_read(&fi->i_gc_rwsem[WRITE]);
-+
-+	if (ret < 0)
-+		goto out;
-+	if (pos + ret > inode->i_size)
-+		f2fs_i_size_write(inode, pos + ret);
-+	if (!do_opu)
-+		set_inode_flag(inode, FI_UPDATE_WRITE);
-+
-+	if (iov_iter_count(from)) {
-+		ssize_t ret2;
-+		loff_t bufio_start_pos = iocb->ki_pos;
-+
-+		/*
-+		 * The direct write was partial, so we need to fall back to a
-+		 * buffered write for the remainder.
-+		 */
-+
-+		ret2 = f2fs_buffered_write_iter(iocb, from);
-+		if (iov_iter_count(from))
-+			f2fs_write_failed(inode, iocb->ki_pos);
-+		if (ret2 < 0)
-+			goto out;
-+
-+		/*
-+		 * Ensure that the pagecache pages are written to disk and
-+		 * invalidated to preserve the expected O_DIRECT semantics.
-+		 */
-+		if (ret2 > 0) {
-+			loff_t bufio_end_pos = bufio_start_pos + ret2 - 1;
-+
-+			ret += ret2;
-+
-+			ret2 = filemap_write_and_wait_range(file->f_mapping,
-+							    bufio_start_pos,
-+							    bufio_end_pos);
-+			if (ret2 < 0)
-+				goto out;
-+			invalidate_mapping_pages(file->f_mapping,
-+						 bufio_start_pos >> PAGE_SHIFT,
-+						 bufio_end_pos >> PAGE_SHIFT);
-+		}
-+	} else {
-+		/* iomap_dio_rw() already handled the generic_write_sync(). */
-+		*may_need_sync = false;
-+	}
-+out:
-+	trace_f2fs_direct_IO_exit(inode, pos, count, WRITE, ret);
-+	return ret;
-+}
-+
-+static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
-+{
-+	struct inode *inode = file_inode(iocb->ki_filp);
- 	const loff_t orig_pos = iocb->ki_pos;
- 	const size_t orig_count = iov_iter_count(from);
- 	loff_t target_size;
-+	bool dio;
-+	bool may_need_sync = true;
- 	int preallocated;
- 	ssize_t ret;
- 
-@@ -4346,44 +4629,26 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
- 		inode_lock(inode);
+ 		XFS_STATS_INC(bp->b_mount, xb_page_retries);
+-		congestion_wait(BLK_RW_ASYNC, HZ / 50);
++		memalloc_retry_wait(gfp_mask);
  	}
+ 	return 0;
+ }
+diff --git a/include/linux/sched/mm.h b/include/linux/sched/mm.h
+index aca874d33fe6..f2f2a5b28808 100644
+--- a/include/linux/sched/mm.h
++++ b/include/linux/sched/mm.h
+@@ -214,6 +214,27 @@ static inline void fs_reclaim_acquire(gfp_t gfp_mask) { }
+ static inline void fs_reclaim_release(gfp_t gfp_mask) { }
+ #endif
  
--	if (unlikely(IS_IMMUTABLE(inode))) {
--		ret = -EPERM;
--		goto out_unlock;
--	}
--
--	if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED)) {
--		ret = -EPERM;
--		goto out_unlock;
--	}
--
--	ret = generic_write_checks(iocb, from);
-+	ret = f2fs_write_checks(iocb, from);
- 	if (ret <= 0)
- 		goto out_unlock;
- 
--	if (iocb->ki_flags & IOCB_NOWAIT) {
--		if (!f2fs_overwrite_io(inode, iocb->ki_pos,
--					iov_iter_count(from)) ||
--				f2fs_has_inline_data(inode) ||
--				f2fs_force_buffered_io(inode, iocb, from)) {
--			ret = -EAGAIN;
--			goto out_unlock;
--		}
--	}
-+	/* Determine whether we will do a direct write or a buffered write. */
-+	dio = f2fs_should_use_dio(inode, iocb, from);
- 
--	if (iocb->ki_flags & IOCB_DIRECT) {
--		ret = f2fs_convert_inline_inode(inode);
--		if (ret)
--			goto out_unlock;
--	}
- 	/* Possibly preallocate the blocks for the write. */
- 	target_size = iocb->ki_pos + iov_iter_count(from);
--	preallocated = f2fs_preallocate_blocks(iocb, from);
-+	preallocated = f2fs_preallocate_blocks(iocb, from, dio);
- 	if (preallocated < 0) {
- 		ret = preallocated;
- 		goto out_unlock;
- 	}
- 
--	ret = __generic_file_write_iter(iocb, from);
-+	/* Do the actual write. */
-+	if (dio)
-+		ret = f2fs_dio_write_iter(iocb, from, &may_need_sync);
++/* Any memory-allocation retry loop should use
++ * memalloc_retry_wait(), and pass the flags for the most
++ * constrained allocation attempt that might have failed.
++ * This provides useful documentation of where loops are,
++ * and a central place to fine tune the waiting as the MM
++ * implementation changes.
++ */
++static inline void memalloc_retry_wait(gfp_t gfp_flags)
++{
++	gfp_flags = current_gfp_context(gfp_flags);
++	if ((gfp_flags & __GFP_DIRECT_RECLAIM) &&
++	    !(gfp_flags & __GFP_NORETRY))
++		/* Probably waited already, no need for much more */
++		schedule_timeout_uninterruptible(1);
 +	else
-+		ret = f2fs_buffered_write_iter(iocb, from);
- 
- 	/* Don't leave any preallocated blocks around past i_size. */
- 	if (preallocated > 0 && i_size_read(inode) < target_size) {
-@@ -4398,15 +4663,11 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
++		/* Probably didn't wait, and has now released a lock,
++		 * so now is a good time to wait
++		 */
++		schedule_timeout_uninterruptible(HZ/50);
++}
++
+ /**
+  * might_alloc - Mark possible allocation sites
+  * @gfp_mask: gfp_t flags that would be used to allocate
+diff --git a/net/sunrpc/svc_xprt.c b/net/sunrpc/svc_xprt.c
+index 1e99ba1b9d72..f9584e8e8324 100644
+--- a/net/sunrpc/svc_xprt.c
++++ b/net/sunrpc/svc_xprt.c
+@@ -688,7 +688,7 @@ static int svc_alloc_arg(struct svc_rqst *rqstp)
+ 			return -EINTR;
+ 		}
+ 		trace_svc_alloc_arg_err(pages);
+-		schedule_timeout(msecs_to_jiffies(500));
++		memalloc_retry_wait(GFP_KERNEL);
  	}
- 
- 	clear_inode_flag(inode, FI_PREALLOCATED_ALL);
--
--	if (ret > 0)
--		f2fs_update_iostat(F2FS_I_SB(inode), APP_WRITE_IO, ret);
--
- out_unlock:
- 	inode_unlock(inode);
- out:
- 	trace_f2fs_file_write_iter(inode, orig_pos, orig_count, ret);
--	if (ret > 0)
-+	if (ret > 0 && may_need_sync)
- 		ret = generic_write_sync(iocb, ret);
- 	return ret;
- }
-diff --git a/fs/f2fs/iostat.c b/fs/f2fs/iostat.c
-index cdcf54ae0db8..b911ea73c21a 100644
---- a/fs/f2fs/iostat.c
-+++ b/fs/f2fs/iostat.c
-@@ -166,15 +166,12 @@ void f2fs_update_iostat(struct f2fs_sb_info *sbi,
- 	spin_lock(&sbi->iostat_lock);
- 	sbi->rw_iostat[type] += io_bytes;
- 
--	if (type == APP_WRITE_IO || type == APP_DIRECT_IO)
--		sbi->rw_iostat[APP_BUFFERED_IO] =
--			sbi->rw_iostat[APP_WRITE_IO] -
--			sbi->rw_iostat[APP_DIRECT_IO];
--
--	if (type == APP_READ_IO || type == APP_DIRECT_READ_IO)
--		sbi->rw_iostat[APP_BUFFERED_READ_IO] =
--			sbi->rw_iostat[APP_READ_IO] -
--			sbi->rw_iostat[APP_DIRECT_READ_IO];
-+	if (type == APP_BUFFERED_IO || type == APP_DIRECT_IO)
-+		sbi->rw_iostat[APP_WRITE_IO] += io_bytes;
-+
-+	if (type == APP_BUFFERED_READ_IO || type == APP_DIRECT_READ_IO)
-+		sbi->rw_iostat[APP_READ_IO] += io_bytes;
-+
- 	spin_unlock(&sbi->iostat_lock);
- 
- 	f2fs_record_iostat(sbi);
+ 	rqstp->rq_page_end = &rqstp->rq_pages[pages];
+ 	rqstp->rq_pages[pages] = NULL; /* this might be seen in nfsd_splice_actor() */
 -- 
-2.34.0.rc1.387.gb447b232ab-goog
+2.33.1
 
 
 
