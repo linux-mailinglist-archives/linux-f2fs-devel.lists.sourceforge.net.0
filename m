@@ -2,61 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECB4E45E483
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Nov 2021 03:30:26 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id F39DF45E486
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Nov 2021 03:30:51 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mqR0J-0004qz-K2; Fri, 26 Nov 2021 02:30:24 +0000
+	id 1mqR0e-0006Hp-LH; Fri, 26 Nov 2021 02:30:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <sashal@kernel.org>) id 1mqR0A-0004qS-Lh
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 02:30:15 +0000
+ (envelope-from <sashal@kernel.org>) id 1mqR0d-0006Hi-2Y
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 02:30:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EUdEgX0M70OgRYiuWl6KJQeLBMIkQCjTNIYCkY+E2Eo=; b=HwggDnUPZ1cmUWCiGG3H1LdRyM
- sZGDRCDKWC9LyYztyIYgwemf8L7GQDWxHcbaaSBKOH6GfLKXBQq8HUByOgvq/ncOcwbfTnQMurTuy
- vPFK572jWfcnJrfzR0zM+YHE9mJ3P1u/VfD+0cEyJEUNgRBGdU9UOGHEWDJSp9PYTNI8=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=EUdEgX0M70OgRYiuWl6KJQeLBMIkQCjTNIYCkY+E2Eo=; b=hy9tCow4QgPq7Z446x0GDhibHx
- 8mxxwJVLIQyncz+03vulhq/nqB9E2zoNCZNH+FGcIMFwYhy4bgyrqSgZqKVxWxcLyvpmt79wGgE7L
- qZxRU9hnNMGRd6o5e8hAAXR4BCANDBWV1CM7R3ILHvz7I0txtjf4IPVmPFS2G39Wej2w=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=jFPiRgm2XP8XIvqtBJ0fr7DPeXdLT9s2P7HCvGD3cq0=; b=NICUwTpkHArnkEU4DrlUaOUHT7
+ TRSCVYmqvTJE2oPr9kVx28MSqciuHWq1SjYtFMrYmiajS3StFqlaVb3sSgC7Ioof69r+PJTk8uU2+
+ EkZgQQ+Ww8jxAkYabZBbYFMHxop0UfW96NzPpUFAX6HB5g3robAaq/hEX5mLHtWNeqBo=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=jFPiRgm2XP8XIvqtBJ0fr7DPeXdLT9s2P7HCvGD3cq0=; b=G
+ MJysWYvFcBYFSh29Big4XJbRUxjKcXYahIXK1SVvKsUIht2rLg3ui5vydNVdFpV6kODe681WN8Hfc
+ CHwzTjwPIK6+X6tWhKDrMTNqRpfaNE+zAsoeG0t6P9r2Haj2EQrReXDkr2guw/kkD991xV/1Zp9k3
+ 8pvOTbt+LT23rHC0=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mqR0B-009XXV-6K
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 02:30:15 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 2DD0461155;
- Fri, 26 Nov 2021 02:30:09 +0000 (UTC)
+ id 1mqR0c-009XYR-Gw
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 02:30:42 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 7443F61154;
+ Fri, 26 Nov 2021 02:30:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1637893809;
- bh=7RSYnjakDGbVSQHSGL9A7juJSunyWzBmGji4TfHiWaI=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=uYqTe0JcxS2hIH0CKu3+M6NDoQy5TntK1EBUaEyW1P5X5iwFVLzA1vbEdqxgCP/5o
- sVBwzccJTj+Wh31sWMxMTwwA3KoxPlJA9WzRCBCxm+BBSqWU67tzI+quflaNl9UJn7
- X/ypiBlMeA0GzclwhMxsR1B2YFycYn4f32XRVLJy5bB0IPz27dV5Tdk5T6RIAkyr3w
- dAN5LTisPxbXHDu2jqCyMtZBIS/9HdkTU8UvoOdI+k8VDiJKzFRbVVL250nwlJkaVe
- dTcViCu/GHzIyvXUp9BpAteM4qa2sSkTrMoBcdqiepB8mbuCThfu/j+p7+XmiI24Jt
- +nhCukbZcu6Kg==
+ s=k20201202; t=1637893837;
+ bh=JyLokz3uTX1psmva6XXCGWuAqkaTiwTqi+lVRfFS/O8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ErqPXU3E+clUwbGsxGi25omWapVNnGema8fA/AHdCpnCDcPaTlqbgSOtVSi+eIXfB
+ 4364uQPz8AVIqv3/sKnhdBfxhgHfJG0JDwDP5pXssdWjtOEOMsjXWc+gP01SlaWBLB
+ ThvWV0nEp765BXQ+lCIKDkewROeD52kedkVgNqRo2CMgXwY9ZD/fdMKEl1qyRLn79v
+ YQwsjx1N0fHsv14kOHtv13yZ3t93QDkBDKZpnRNTCyVd7tNLBlTyMFv9wv/l2QdZgU
+ fUgizkRd8FSvUPrPpoQzjkmeUM4a8IRjAJjs9gxa9VO4mJpQiTrhEMwvHZd17omRJk
+ KDxD9mtFHmtDg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 25 Nov 2021 21:30:01 -0500
-Message-Id: <20211126023006.440839-2-sashal@kernel.org>
+Date: Thu, 25 Nov 2021 21:30:31 -0500
+Message-Id: <20211126023034.440961-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20211126023006.440839-1-sashal@kernel.org>
-References: <20211126023006.440839-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -87,8 +85,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mqR0B-009XXV-6K
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.15 2/7] f2fs: set SBI_NEED_FSCK flag
+X-Headers-End: 1mqR0c-009XYR-Gw
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.10 1/4] f2fs: set SBI_NEED_FSCK flag
  when inconsistent node block found
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -126,10 +124,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+)
 
 diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index e863136081b47..556fcd8457f3f 100644
+index 597a145c08ef5..7e625806bd4a2 100644
 --- a/fs/f2fs/node.c
 +++ b/fs/f2fs/node.c
-@@ -1443,6 +1443,7 @@ static struct page *__get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid,
+@@ -1389,6 +1389,7 @@ static struct page *__get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid,
  			  nid, nid_of_node(page), ino_of_node(page),
  			  ofs_of_node(page), cpver_of_node(page),
  			  next_blkaddr_of_node(page));
