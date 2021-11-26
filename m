@@ -2,58 +2,58 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F39DF45E486
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Nov 2021 03:30:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8925845E487
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Nov 2021 03:30:54 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mqR0e-0006Hp-LH; Fri, 26 Nov 2021 02:30:44 +0000
+	id 1mqR0l-0004tk-Q9; Fri, 26 Nov 2021 02:30:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <sashal@kernel.org>) id 1mqR0d-0006Hi-2Y
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 02:30:43 +0000
+ (envelope-from <sashal@kernel.org>) id 1mqR0j-0004tb-NG
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 02:30:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jFPiRgm2XP8XIvqtBJ0fr7DPeXdLT9s2P7HCvGD3cq0=; b=NICUwTpkHArnkEU4DrlUaOUHT7
- TRSCVYmqvTJE2oPr9kVx28MSqciuHWq1SjYtFMrYmiajS3StFqlaVb3sSgC7Ioof69r+PJTk8uU2+
- EkZgQQ+Ww8jxAkYabZBbYFMHxop0UfW96NzPpUFAX6HB5g3robAaq/hEX5mLHtWNeqBo=;
+ bh=0EvmeULabBeTI+ZAyrWv18yDC3UlpsNKBTR3Bnr7bAM=; b=Gzbf1acUHBs9MSvrDBzwDmSBG4
+ SKBDg2jwc+4G1vyV1jyXTAp65wgGKSfceZKbWZIFBqyAaBsytAhe24W/2CM92jKX55DXIL0fiOe+k
+ 9kPNSv9OXh63u8e7/8RyxT7zOoVGrel2gxgeO2glO+1/Bs9DaLj9KQgFZ6SjU9U5pNBc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=jFPiRgm2XP8XIvqtBJ0fr7DPeXdLT9s2P7HCvGD3cq0=; b=G
- MJysWYvFcBYFSh29Big4XJbRUxjKcXYahIXK1SVvKsUIht2rLg3ui5vydNVdFpV6kODe681WN8Hfc
- CHwzTjwPIK6+X6tWhKDrMTNqRpfaNE+zAsoeG0t6P9r2Haj2EQrReXDkr2guw/kkD991xV/1Zp9k3
- 8pvOTbt+LT23rHC0=;
+ List-Owner:List-Archive; bh=0EvmeULabBeTI+ZAyrWv18yDC3UlpsNKBTR3Bnr7bAM=; b=T
+ ey6j2THg3I29K6iO+DGx9ZnqEu1w3ygx5SS/7fNiGVn7vbhP5EHcxq4VkFt+VBzRQ7bPio0X4N6BY
+ KfettBaKFtRUR0LABaaT0pIOzJfsS1ehFhcgFcW6QG/K0yi+rdG7+aE8BXbl1mt0BdAhChBO4y/YH
+ T9vraRsq/+Sgpxs0=;
 Received: from mail.kernel.org ([198.145.29.99])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mqR0c-009XYR-Gw
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 02:30:42 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 7443F61154;
- Fri, 26 Nov 2021 02:30:36 +0000 (UTC)
+ id 1mqR0k-009XYr-1N
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 02:30:50 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id EF08E61163;
+ Fri, 26 Nov 2021 02:30:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1637893837;
- bh=JyLokz3uTX1psmva6XXCGWuAqkaTiwTqi+lVRfFS/O8=;
+ s=k20201202; t=1637893844;
+ bh=1bJXgMPjotzg4shCd/vFtSiQm9PWDHgzlsTJ28Iny8Q=;
  h=From:To:Cc:Subject:Date:From;
- b=ErqPXU3E+clUwbGsxGi25omWapVNnGema8fA/AHdCpnCDcPaTlqbgSOtVSi+eIXfB
- 4364uQPz8AVIqv3/sKnhdBfxhgHfJG0JDwDP5pXssdWjtOEOMsjXWc+gP01SlaWBLB
- ThvWV0nEp765BXQ+lCIKDkewROeD52kedkVgNqRo2CMgXwY9ZD/fdMKEl1qyRLn79v
- YQwsjx1N0fHsv14kOHtv13yZ3t93QDkBDKZpnRNTCyVd7tNLBlTyMFv9wv/l2QdZgU
- fUgizkRd8FSvUPrPpoQzjkmeUM4a8IRjAJjs9gxa9VO4mJpQiTrhEMwvHZd17omRJk
- KDxD9mtFHmtDg==
+ b=QHQpv8oCt5Jf7AyTiNOBBnTto6rEzI5XjxfwiwFTLej9c9cvs2rYu61WOGIn1DbYS
+ UgEN8ey3zBR+VjQBNfYt+61iuuMe+KDTgwZBifujr4+c664f447c1OR7wLO80jONR8
+ TrRR3fu7R9ukdh0RSBmCT1xOm+RuKZk6xxMtysQKfRRCoVh/0Kn/YG4xNKI0MeSXdv
+ 7iYkV+wdJGwg8ECIqLht3Sm7HzUkY1k0GNHh/q+r3ESku09sps1nK7ssaiSsaIfIzu
+ +8PtAq8T6OuZIngZcsTDgPcB/eIcvw6SkpsFM1FaYgDHUMyH//5ANZAFKd7sa6kGHG
+ fcu73V1re+UGg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 25 Nov 2021 21:30:31 -0500
-Message-Id: <20211126023034.440961-1-sashal@kernel.org>
+Date: Thu, 25 Nov 2021 21:30:41 -0500
+Message-Id: <20211126023042.441107-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
 X-stable: review
@@ -85,8 +85,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mqR0c-009XYR-Gw
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.10 1/4] f2fs: set SBI_NEED_FSCK flag
+X-Headers-End: 1mqR0k-009XYr-1N
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.4 1/2] f2fs: set SBI_NEED_FSCK flag
  when inconsistent node block found
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -124,10 +124,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+)
 
 diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 597a145c08ef5..7e625806bd4a2 100644
+index 4cb182c20eedd..0cd1d51dde06d 100644
 --- a/fs/f2fs/node.c
 +++ b/fs/f2fs/node.c
-@@ -1389,6 +1389,7 @@ static struct page *__get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid,
+@@ -1385,6 +1385,7 @@ static struct page *__get_node_page(struct f2fs_sb_info *sbi, pgoff_t nid,
  			  nid, nid_of_node(page), ino_of_node(page),
  			  ofs_of_node(page), cpver_of_node(page),
  			  next_blkaddr_of_node(page));
