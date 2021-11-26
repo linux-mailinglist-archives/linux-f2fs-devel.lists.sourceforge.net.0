@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AB6245F06E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Nov 2021 16:13:09 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id EEBB445F0CF
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Nov 2021 16:36:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mqcuN-0002nW-JZ; Fri, 26 Nov 2021 15:13:03 +0000
+	id 1mqdHM-0004ZN-Cu; Fri, 26 Nov 2021 15:36:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mqcuM-0002nQ-9C
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 15:13:02 +0000
+ (envelope-from <chao@kernel.org>) id 1mqdHK-0004ZG-II
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 15:36:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=y5L8KmMpvt81dT75QTEkxTG0vhrhSP9CfJqM2Jh5MtI=; b=ZmxYSxnrVlOQGkSK0QIXFvnCSS
- aEM6txsJ15C9be9S41l5y892/W3VkNECv+ttZDLa/Z8FRfz9XlzBP8fy+x/lBLPh94QnJoZfa1Yz2
- WEy2Nfee+RIrdeQtT8jmJ8am0viW4f4gTIDBHqSwRtCzEVt7vCtevBxUmpQUYMRwtZv4=;
+ bh=9sPyh/tM79dP+gIa9UOQq8YC2z2G9fUW1elIUYx/H1c=; b=jbmX/Cpu8yOcjRXnkzIPui6w3D
+ 1cMibWl3V8lnPQpyB59gnwjZHyNRNHWrXhb0/QOwJsr6EXyIaHFoepR43H3CmYEyueTcAVhIGylmS
+ hMl47Eg9HJJcIxZAGOtW2speUVa8+P0U/zbkIUaRxReHtfX4GUcuqJ5T3Bqh5+ld5+JI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,52 +29,56 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=y5L8KmMpvt81dT75QTEkxTG0vhrhSP9CfJqM2Jh5MtI=; b=HCMF/VTJxprtVk1vHdmX0B53Ut
- MdWIhe7I/cYj5SaX193by/6/kfzka9vboEt4RwxlRXHpyiDDCb2Iex40hymR0/iD8zflHNfv0i68r
- /ED7VUBGkfzEZC4Qkgyeos+LkLbnwFknCW3kEux0EjgEhMxiKUtZ30/WhRlJ5bENaKts=;
-Received: from [198.145.29.99] (helo=mail.kernel.org)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=9sPyh/tM79dP+gIa9UOQq8YC2z2G9fUW1elIUYx/H1c=; b=D0UTwxpOF1QWnQJ8EDJG3NHBZ/
+ XxGzMCDQjeC0mqka3AtYfz+L70OX7StVG+G07CNbNwacSwLL2WJAQKFRDVJZ5QjGcQv2REZBZVZZu
+ smacopd7gpqf3qyVH1IiHVyVatj+c5xHC6s6HBssvmVrOrWlWdoTdlYijCffBX6OuJFQ=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mqcuL-0000G5-MP
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 15:13:02 +0000
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 8FA52600CC;
- Fri, 26 Nov 2021 15:12:50 +0000 (UTC)
+ id 1mqdHH-00AF0G-6m
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 26 Nov 2021 15:36:46 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 37D2162280;
+ Fri, 26 Nov 2021 15:21:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0A42C93056;
+ Fri, 26 Nov 2021 15:21:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1637939571;
- bh=JGOs5xrMkmXHn6QBH3/p/id/LAg9cKwmXJxxxLabdjk=;
+ s=k20201202; t=1637940068;
+ bh=Fa6TGuIztWU+mhxOp7t6mLKVwDR6r2DAjicreLLNpPA=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SA4+C539XJAC4xyJRVUWw9F/kEPA0iOLpR0QFY13eg/uv3QkQzTWogbJWcZvQLVtl
- VQPfOcrOBzcEBOUYBt3jsakzfyuWHp8ZKj0Blb1WPWRYBimec7WJejAqLkg0GTRzT6
- 8m3YofkEBK0KqxCiybcJAHTNPJHUcqFxxEcj5VyV4EQUFEYEz+kXjPegm0Vx7mLXM/
- izgJfTNTZivNty59UGTaS62s3VLSPiZdgSgLCKFiCJkHbuSiv1A+ANWdbBuPL0s/i6
- 6LeIVdYz3x+N5jVCFcqkv7v3qzRwINJPjvuTOsCFvvhQCtEqJ9OSWfehhQ6Ug8Amv4
- 1R3kgO5AMYFrQ==
-Message-ID: <9695acad-80bc-b53a-6b65-b60a6d5c8bdf@kernel.org>
-Date: Fri, 26 Nov 2021 23:12:45 +0800
+ b=LI1Kr0BdAej3WFqywRZXcrU7ZD+JE8TVsPBHgfemXI6yPtpXF1hFdAY7bksbzmfcu
+ fq7/gCuUHPk5f//A4UUueA9h7Iu/wqLmnFk1n6dR1Pq7yVp7BCr+2INe8NfljZsKiA
+ Lq4rU1g5eE4YTKgfKhuUiUBs7vEsDp4pN/DxVWWiD6/5qC4ysQ7QgbXQWVGJLoQKTs
+ Che+S9DybS95ITZtcIc8hxzyQq2azcW/oh/1hvl46HLBWJHrOFBjG1BfdrEbN5D2kh
+ 3TvGnzYc9OaulDtnCCY/ylZhaS/6oZf8LGah5ZkX4rAY0kmwrARzKp6nTuhQU2M8tm
+ 6jHCtUwDHUpng==
+Message-ID: <bc37d799-ae77-9ab7-14a3-a70fccb0d454@kernel.org>
+Date: Fri, 26 Nov 2021 23:21:03 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.3.2
 Content-Language: en-US
 To: Fengnan Chang <changfengnan@vivo.com>, jaegeuk@kernel.org
 References: <20211126101921.305013-1-changfengnan@vivo.com>
+ <20211126101921.305013-2-changfengnan@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20211126101921.305013-1-changfengnan@vivo.com>
-X-Spam-Score: -6.6 (------)
+In-Reply-To: <20211126101921.305013-2-changfengnan@vivo.com>
+X-Spam-Score: -2.9 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2021/11/26 18:19, Fengnan Chang wrote: > Since compress
- inode not a regular file,
- generic_error_remove_page in > f2fs_invalidate_compress_pages
- will always be failed, set compress > inode as a regu [...] 
- Content analysis details:   (-6.6 points, 6.0 required)
+ Content preview:  On 2021/11/26 18:19, Fengnan Chang wrote: > Previously,
+ compressed
+ page cache drop when clean page cache, but > POSIX_FADV_DONTNEED can't clean
+ compressed page cache because raw page > don't have priv [...] 
+ Content analysis details:   (-2.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [198.145.29.99 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -84,12 +88,11 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mqcuL-0000G5-MP
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: fix remove page failed in
- invalidate compress pages
+X-Headers-End: 1mqdHH-00AF0G-6m
+Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs: support POSIX_FADV_DONTNEED
+ drop compressed page cache
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,17 +110,53 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2021/11/26 18:19, Fengnan Chang wrote:
-> Since compress inode not a regular file, generic_error_remove_page in
-> f2fs_invalidate_compress_pages will always be failed, set compress
-> inode as a regular file to fix it.
+> Previously, compressed page cache drop when clean page cache, but
+> POSIX_FADV_DONTNEED can't clean compressed page cache because raw page
+> don't have private data, and won't call f2fs_invalidate_compress_pages.
+> This commit call f2fs_invalidate_compress_pages() directly in
+> f2fs_file_fadvise() for POSIX_FADV_DONTNEED case.
 > 
-> Fixes: 6ce19aff0b8c ("f2fs: compress: add compress_inode to cache compressed
-> blocks")
 > Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
+> ---
+>   fs/f2fs/file.c | 7 +++++--
+>   1 file changed, 5 insertions(+), 2 deletions(-)
+> 
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 32c0bd545c5c..dafdaad9a9e4 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -4677,12 +4677,11 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+>   static int f2fs_file_fadvise(struct file *filp, loff_t offset, loff_t len,
+>   		int advice)
+>   {
+> -	struct inode *inode;
+>   	struct address_space *mapping;
+>   	struct backing_dev_info *bdi;
+> +	struct inode *inode = file_inode(filp);
+>   
+>   	if (advice == POSIX_FADV_SEQUENTIAL) {
+> -		inode = file_inode(filp);
+>   		if (S_ISFIFO(inode->i_mode))
+>   			return -ESPIPE;
+>   
+> @@ -4697,6 +4696,10 @@ static int f2fs_file_fadvise(struct file *filp, loff_t offset, loff_t len,
+>   		filp->f_mode &= ~FMODE_RANDOM;
+>   		spin_unlock(&filp->f_lock);
+>   		return 0;
+> +	} else if (advice == POSIX_FADV_DONTNEED) {
+> +		if (test_opt(F2FS_I_SB(inode), COMPRESS_CACHE) &&
+> +			f2fs_compressed_file(inode))
+> +			f2fs_invalidate_compress_pages(F2FS_I_SB(inode), inode->i_ino);
+>   	}
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Well, how about invalidating compressed pages after generic_fadvise() in order to
+check inode status before dropping caches?
 
 Thanks,
+
+>   
+>   	return generic_fadvise(filp, offset, len, advice);
+> 
 
 
 _______________________________________________
