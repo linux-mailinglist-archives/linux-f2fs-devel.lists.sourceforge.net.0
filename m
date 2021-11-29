@@ -2,50 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D49CE461D96
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Nov 2021 19:23:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AC3246202E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Nov 2021 20:16:58 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mrlJV-0004yx-6i; Mon, 29 Nov 2021 18:23:41 +0000
+	id 1mrm8w-0006r6-BQ; Mon, 29 Nov 2021 19:16:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <info@ts3card.com>) id 1mrlJT-0004yq-SF
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Nov 2021 18:23:39 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1mrm8v-0006qx-Bg
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Nov 2021 19:16:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Date:Subject:To:From:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MXnxAJmnNAJdj6LDm2a383BkutWMtmqHOxWC8ObDolw=; b=Ial2XbPbe/GWk2hYerRKOVL5lz
- ug8CTtJeeZI7eHQkrLQd7QpjlN5kvwxw5Iptv5TgSCjjs9K432bax2sQGSjA61KSo3YWlF2muFwYJ
- B65LplzypWl+ryr3jvkGXQqWSTpQjmLyIDCDizl6GCZnQjCX+HOZA3/Y1F9o6lVM5cmg=;
+ bh=l1NyEebT1wk6LnRhQJKzJYxELh/8IfkzO7MbSool7zo=; b=gIXrdB/FpgIb4Y6W2+aJ1ikuK3
+ LK7NE/arEwQzA5ji4KSiBMb09HCOlXqxxa4xw4hCWbR58h9MHl4XlWzjHX2BwdQDxZ/ou9e9xO7KL
+ l29r02kp7luIYamvBE2bmWVHZeHAeYYqeDIY50OLeuI8N6fIn9qYjJ5VshMbfnilcb50=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Subject:To:From:
- Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=MXnxAJmnNAJdj6LDm2a383BkutWMtmqHOxWC8ObDolw=; b=O
- r50vtS//u1N4pL3kmLwckIeMcmnXCbfipXn6gn9fjj8vjOui9PToxMWSRtU1DWKHN/Vvyi1AR5iAe
- eibGIeWh8xKCEZIDjBo3pzqYQpr/WONa7OF8H21IyJFpga4sN9E7D8RFwkB50GX3a3cFgX8Nkysbl
- Z1vueNzK5fTbThBo=;
-Received: from [165.154.59.20] (helo=ts3card.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
- id 1mrlIz-00EZdQ-Al
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Nov 2021 18:23:39 +0000
-Message-ID: <20211130022309373555@ts3card.com>
-From: =?utf-8?B?44OI44Oo44K/44OV44Kh44Kk44OK44Oz44K55qCq5byP5Lya56S+?=
- <info@ts3card.com>
-To: <linux-f2fs-devel@lists.sourceforge.net>
-Date: Tue, 30 Nov 2021 02:22:55 +0800
+ List-Owner:List-Archive; bh=l1NyEebT1wk6LnRhQJKzJYxELh/8IfkzO7MbSool7zo=; b=e
+ AVuPKiVIToBw3aMY3pEzMZRfc+l+i42cLiymSNxu76lwSvIKMuP59bQ65o9H1hnoACTUH4Ty/m+mB
+ LPmqEGOT1IpUaK8Fjplsr3OQ6cVMk4Dw0vIpnDKBR4pKQ0QCGazNSJ5r70BS6qPanB4X6appzri9l
+ WJ+0/qgLc7KEZRKk=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1mrm8Q-00Ed3u-RZ
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Nov 2021 19:16:49 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by sin.source.kernel.org (Postfix) with ESMTPS id BAB7ACE139A
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 29 Nov 2021 19:00:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4C2FC53FC7;
+ Mon, 29 Nov 2021 19:00:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1638212448;
+ bh=VFjdBV+1MP8kWP3KLfc2GhDfYqlzcaAmHQtzSwB0EnA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=oed8vzV/xbK9n0Al68xmkbVSHrwxf8xB460U8yJbGCvGlPLzJ1qfDOwKaMlp3LShw
+ xaWHX8UCOnuYijI5C/3e/3FlANWV5BbQRJmk16Zuq4psTIX9GYQqhvTSCzW0dLrE4n
+ BlBdEC+7M0zHKwrGAPxfenlb8Vp2lyCAfn3dWlH2i/4A2xE1aPqLLU3Ay0F6b7VF22
+ QfPt2HvOwfCPtcenJiqrZcIfH5jeZpESOA9yLlf0yiIY4FsXd7J1dFn+mBD5RfBGEK
+ 90YrsI45KE9nEBFUbuuThc28h4R72/IyIlfg6QMmvjbcEnh3lcM6AbCLd5nH+KXCJf
+ 4cWx8pCr/STyw==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 29 Nov 2021 11:00:39 -0800
+Message-Id: <20211129190039.598115-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.34.0.rc2.393.gf8c9666880-goog
 MIME-Version: 1.0
-X-mailer: Muznbw 9
-X-Headers-End: 1mrlIz-00EZdQ-Al
-Subject: [f2fs-dev] =?utf-8?b?VFMzIFRTIENVQklDQ0FSROOCq+ODvOODieOAkOmHjQ==?=
-	=?utf-8?b?6KaBOuW/heOBmuOBiuiqreOBv+OBj+OBoOOBleOBhOOAkQ==?=
+X-Headers-End: 1mrm8Q-00Ed3u-RZ
+Subject: [f2fs-dev] [PATCH] f2fs: show number of pending discard commands
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -57,58 +75,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB
-4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB
-4pSB4pSBDQoNCuKYheOAgi46KjpUUyBDVUJJQyBDQVJE5Lya5ZOh5YCL5Lq65oOF5aCx5aSJ5pu0
-44CC4piF44CCLjoqOg0KDQrilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHi
-lIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHi
-lIHilIHilIHilIHilIHilIHilIHilIENCg0KDQpUUyBDVUJJQyBDQVJE5Lya5ZOh5qijDQoNCuOB
-k+OBruOBn+OBs+OBr+OAgVRTIENVQklDIENBUkRF44Oh44O844Or44K144O844OT44K544KS44GU
-5Yip55So44GE44Gf44Gg44GN44GC44KK44GM44Go44GG44GU44GW44GE44G+44GZ44CCDQoNCuW9
-k+ekvuOBr+OCu+OCreODpeODquODhuOCo+OCt+OCueODhuODoOOBruWkp+W5heOBquOCouODg+OD
-l+OCsOODrOODvOODieOCkuWun+aWveOBl+OBpuOBhOOCi+OBn+OCgeOAgeWAi+S6uuaDheWgseOB
-rg0K5YaN6KqN6Ki844GM5a6M5LqG44GZ44KL44G+44Gn44CBVFMgQ1VCSUMgQ0FSROODoeODs+OD
-kOODvOOBruOCteODvOODk+OCueOBr+OBmeOBueOBpuWBnOatouOBleOCjOOBvuOBmeOAgg0KDQrm
-nKzml6XjgYvjgonjgIFUUyBDVUJJQyBDQVJE44Oh44Oz44OQ44O844Gu44Om44O844K244O844GM
-6YCa5bi45L2/55So44GX44Gf44GE5aC05ZCI44Gv44CBMjTmmYLplpPku6XlhoXjgasNCuS7peS4
-i+OBruWAi+S6uuaDheWgseaUueWWhOiqjeiovOOCkuihjOOBhuW/heimgeOBjOOBguOCiuOBvuOB
-meaJv+iqjeW+jOOBq+OBruOBv+S9v+eUqOOBp+OBjeOBvuOBmSANCg0K44Ot44Kw44Kk44Oz6KqN
-6Ki8Omh0dHBzOi8vbXktdHMzY2FyZC1jb20uaml1cGludGFuZzE1My50b3ANCg0K44GT44Gu44K1
-44O844OT44K544Gv44CBVFMgQ1VCSUMgQ0FSROODoeODjuODkOODvOWwgueUqOOBrumAmuefpeOC
-teODvOODk+OCueOBp+OBmeOAguOBk+OBruODoeODvOODq+OBruWGheWuuQ0K44Gr44GU5rOo5oSP
-44GE44Gf44Gg44GN44CB5LiN5b+F6KaB44Gq57Sb5aSx44KS6YG/44GR44Gm44GP44Gg44GV44GE
-44CCDQoNCuKUj+KUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKU
-geKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKU
-geKUgeKUgeKUkw0KDQrjgIDilqDmnKzjg6Hjg7zjg6vjga/pgIHkv6HlsILnlKjjga7jgZ/jgoHj
-gIHjgZPjgaHjgonjga7jg6Hjg7zjg6vjgqLjg4njg6zjgrnjgavjgZTov5Tkv6HjgYTjgZ/jgaDj
-gYTjgabjgoINCuOAgOOAgOWvvuW/nOOBr+OBhOOBn+OBl+OBi+OBreOBvuOBmeOBruOBp+OBlOS6
-huaJv+OBj+OBoOOBleOBhOOAgg0K44CA44CA44Gq44GK44CB5pys44Oh44O844Or44Gr44Gk44GE
-44Gm44GK5b+D5b2T44Gf44KK44GM44Gq44GE5aC05ZCI44Gr44Gv44CBDQrjgIAg44GK5omL5pWw
-44Gn44GZ44GM44CB5LiL6KiY44GK5ZWP44GE5ZCI44KP44Gb5YWI44G+44Gn44GK6Zu76Kmx44Gr
-44Gm6YCj57Wh44KS44GK6aGY44GE44GE44Gf44GX44G+44GZ44CCDQoNCuOAgD09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCg0K
-44CA4pag55m66KGM77yaVFMgQ1VCSUMgQ0FSROOAjOODhuOCo+ODvOOCqOOCueOCreODpeODvOOD
-k+ODg+OCr+OCq+ODvOODieOAjQ0K44CA44CA44CA44CA44CAIGh0dHBzOi8vdHNjdWJpYy5jb20v
-DQrjgIDjgIDjgIDjgIDjgIDjg4jjg6jjgr/jg5XjgqHjgqTjg4rjg7PjgrnmoKrlvI/kvJrnpL4N
-CuOAgOOAgOOAgOOAgOOAgOOAkjQ1MS02MDE044CA5oSb55+l55yM5ZCN5Y+k5bGL5biC6KW/5Yy6
-54mb5bO255S6NueVqjHlj7cNCg0K44CA4pag5pys44Oh44O844Or44Gr44Gk44GE44Gm44Gu44GK
-5ZWP44GE5ZCI44KP44Gb77yaDQril49UT1lPVEEsIERBSUhBVFNVLCDjgrjjgqfjg7zjg6Djgrks
-IOODiOODqOOCv+ODrOODs+OCv+OCq+ODvCBGREPjga4NCuOAgOOAgOOAgOOAgOOAgOOAgFRTIENV
-QklDIENBUkQsIFRTIENVQklDIFZJRVcgQ0FSROOCkuOBiuaMgeOBoeOBruaWueOBr+OBk+OBoeOC
-iQ0K44CA44CA44CA44CA44CA44CA44Kk44Oz44OV44Kp44Oh44O844K344On44Oz44OH44K544Kv
-DQrjgIDjgIDjgIDjgIDjgIDjgIBbIOadseS6rCBd44CAMDPvvI01NjE377yNMjUxMQ0K44CA44CA
-44CA44CA44CA44CAW+WQjeWPpOWxi13jgIAwNTLvvI0yMznvvI0yNTExDQooOTowMO+9njE3OjMw
-IOW5tOS4reeEoeS8kSDlubTmnKvlubTlp4vpmaTjgY8pDQril4/kuIroqJjku6XlpJbjga7jgqvj
-g7zjg4nkvJrlk6HjgZXjgb7jga/jgIHjgYrmiYvmjIHjgaHjga7jgqvjg7zjg4nliLjpnaLoo4/j
-gavoqJjovInjga4NCuOAgOOAgOOAgOOAgOOAgOOAgOOCq+ODvOODieOBq+mWouOBmeOCi+OBiuWV
-j+OBhOWQiOOCj+OBm+mbu+ipseeVquWPt+OBq+OBiuOBi+OBkeOBj+OBoOOBleOBhA0K44CA44CA
-44CA44CA44CADQrilJfilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHi
-lIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHi
-lIHilIHilIHilIHilJsNCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxp
-c3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9s
-aXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+This information can be used to check how much time we need to give to issue
+all the discard commands.
+
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs |  5 +++++
+ fs/f2fs/sysfs.c                         | 11 +++++++++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index b268e3e18b4a..9f3c355bb70e 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -112,6 +112,11 @@ Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
+ Description:	Set timeout to issue discard commands during umount.
+ 	        Default: 5 secs
+ 
++What:		/sys/fs/f2fs/<disk>/pending_discard
++Date:		November 2021
++Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
++Description:	Shows the number of pending discard commands in the queue.
++
+ What:		/sys/fs/f2fs/<disk>/max_victim_search
+ Date:		January 2014
+ Contact:	"Jaegeuk Kim" <jaegeuk.kim@samsung.com>
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 7d289249cd7e..47c950f65b6f 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -118,6 +118,15 @@ static ssize_t sb_status_show(struct f2fs_attr *a,
+ 	return sprintf(buf, "%lx\n", sbi->s_flag);
+ }
+ 
++static ssize_t pending_discard_show(struct f2fs_attr *a,
++		struct f2fs_sb_info *sbi, char *buf)
++{
++	if (!SM_I(sbi)->dcc_info)
++		return -EINVAL;
++	return sprintf(buf, "%llu\n", (unsigned long long)atomic_read(
++				&SM_I(sbi)->dcc_info->discard_cmd_cnt));
++}
++
+ static ssize_t features_show(struct f2fs_attr *a,
+ 		struct f2fs_sb_info *sbi, char *buf)
+ {
+@@ -744,6 +753,7 @@ F2FS_GENERAL_RO_ATTR(unusable);
+ F2FS_GENERAL_RO_ATTR(encoding);
+ F2FS_GENERAL_RO_ATTR(mounted_time_sec);
+ F2FS_GENERAL_RO_ATTR(main_blkaddr);
++F2FS_GENERAL_RO_ATTR(pending_discard);
+ #ifdef CONFIG_F2FS_STAT_FS
+ F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_foreground_calls, cp_count);
+ F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_background_calls, bg_cp_count);
+@@ -812,6 +822,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(main_blkaddr),
+ 	ATTR_LIST(max_small_discards),
+ 	ATTR_LIST(discard_granularity),
++	ATTR_LIST(pending_discard),
+ 	ATTR_LIST(batched_trim_sections),
+ 	ATTR_LIST(ipu_policy),
+ 	ATTR_LIST(min_ipu_util),
+-- 
+2.34.0.rc2.393.gf8c9666880-goog
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
