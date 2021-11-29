@@ -2,97 +2,50 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 552E4460CA1
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Nov 2021 03:24:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D49CE461D96
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Nov 2021 19:23:47 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mrWL3-0002vL-Ln; Mon, 29 Nov 2021 02:24:17 +0000
+	id 1mrlJV-0004yx-6i; Mon, 29 Nov 2021 18:23:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mrWL2-0002vF-KQ
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Nov 2021 02:24:16 +0000
+ (envelope-from <info@ts3card.com>) id 1mrlJT-0004yq-SF
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Nov 2021 18:23:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Date:Subject:To:From:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=T1rQJBqwnNHisMlYR4fHGALen8+ysX8QIhFoOZUiZgI=; b=dz6P5KAhZslgjoCYHkYJHxwnIk
- A30YJLLE3PErk+8T5Q90PliSKuLVXxz+Kcm+gNAsbhj++PbG1PE4T6Yj2fhR0jBLNELyqLQtRJrU5
- Z8ksAowCL1dJkH0r1wezRHTxJD7uJ7PrjhPwPsK3SVHOU+asXM9A+HvKHUD5QsgywHW8=;
+ bh=MXnxAJmnNAJdj6LDm2a383BkutWMtmqHOxWC8ObDolw=; b=Ial2XbPbe/GWk2hYerRKOVL5lz
+ ug8CTtJeeZI7eHQkrLQd7QpjlN5kvwxw5Iptv5TgSCjjs9K432bax2sQGSjA61KSo3YWlF2muFwYJ
+ B65LplzypWl+ryr3jvkGXQqWSTpQjmLyIDCDizl6GCZnQjCX+HOZA3/Y1F9o6lVM5cmg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=T1rQJBqwnNHisMlYR4fHGALen8+ysX8QIhFoOZUiZgI=; b=OFuGd8Gwx5UULogiP6m5RkZcfP
- ogCsXruM1LWU3SCrVqWTHirzyR1+uoyaiG4zFj/keSLDnr4cp4nthntuPlhrNa8t6Fp/immRuNgf5
- kds2cuoVz/mrs4wCZ282EeKNg8CRAZ5PuEOMqcqeOG/rzb16zc8lc0Bjech45jJtsI1k=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mrWL0-00DKjz-VX
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Nov 2021 02:24:16 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 50D54B80DCD;
- Mon, 29 Nov 2021 02:24:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22524C004E1;
- Mon, 29 Nov 2021 02:24:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1638152642;
- bh=r8EFCgvSDzTmaOCHs3N1UDePob9MIZN0fkgeAg3x39c=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=kyup6A/K2eWSe44XuGbb8mAIvAtSZvNUzMFBNJ6Sv+C6eoC7tln/TWwcMk+32SIgM
- +6UAUzZPKBS4tUUTXFFYdSFlG4mPJUPNCPiAMjueSaUAsKTBOPmmVM8hkDXOpB03AF
- DiWMNP+dhcDgoJz3+aleWrpkUAC95kdS4THSW/MoEWymfh/7x5UoKC0ienum2HjKKC
- 0Z6C1npJvfrWOuSSJaxXrKA6L1/AA6xdLAYEXKw+lfFF18eGU3prdKdQszfkArSs2O
- HZKnM/QCbCx9p95H2wr+OQjtw/EhFLeiyn5Kitpe2mILOrxvSVlSEBE+yquMzzeBQ5
- 09MRrBsX81meA==
-Message-ID: <3b6217af-f4b1-a3e7-e855-6f22da94f005@kernel.org>
-Date: Mon, 29 Nov 2021 10:23:58 +0800
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Subject:To:From:
+ Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=MXnxAJmnNAJdj6LDm2a383BkutWMtmqHOxWC8ObDolw=; b=O
+ r50vtS//u1N4pL3kmLwckIeMcmnXCbfipXn6gn9fjj8vjOui9PToxMWSRtU1DWKHN/Vvyi1AR5iAe
+ eibGIeWh8xKCEZIDjBo3pzqYQpr/WONa7OF8H21IyJFpga4sN9E7D8RFwkB50GX3a3cFgX8Nkysbl
+ Z1vueNzK5fTbThBo=;
+Received: from [165.154.59.20] (helo=ts3card.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
+ id 1mrlIz-00EZdQ-Al
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 29 Nov 2021 18:23:39 +0000
+Message-ID: <20211130022309373555@ts3card.com>
+From: =?utf-8?B?44OI44Oo44K/44OV44Kh44Kk44OK44Oz44K55qCq5byP5Lya56S+?=
+ <info@ts3card.com>
+To: <linux-f2fs-devel@lists.sourceforge.net>
+Date: Tue, 30 Nov 2021 02:22:55 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.2
-Content-Language: en-US
-To: Fengnan Chang <changfengnan@vivo.com>, jaegeuk@kernel.org
-References: <20211129021341.162422-1-changfengnan@vivo.com>
- <20211129021341.162422-2-changfengnan@vivo.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20211129021341.162422-2-changfengnan@vivo.com>
-X-Spam-Score: -2.9 (--)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview:  On 2021/11/29 10:13, Fengnan Chang wrote: > Previously,
- compressed
- page cache drop when clean page cache, but > POSIX_FADV_DONTNEED can't clean
- compressed page cache because raw page > don't have priv [...] 
- Content analysis details:   (-2.9 points, 6.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mrWL0-00DKjz-VX
-Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs: support POSIX_FADV_DONTNEED
- drop compressed page cache
+X-mailer: Muznbw 9
+X-Headers-End: 1mrlIz-00EZdQ-Al
+Subject: [f2fs-dev] =?utf-8?b?VFMzIFRTIENVQklDQ0FSROOCq+ODvOODieOAkOmHjQ==?=
+	=?utf-8?b?6KaBOuW/heOBmuOBiuiqreOBv+OBj+OBoOOBleOBhOOAkQ==?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,26 +57,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/11/29 10:13, Fengnan Chang wrote:
-> Previously, compressed page cache drop when clean page cache, but
-> POSIX_FADV_DONTNEED can't clean compressed page cache because raw page
-> don't have private data, and won't call f2fs_invalidate_compress_pages.
-> This commit call f2fs_invalidate_compress_pages() directly in
-> f2fs_file_fadvise() for POSIX_FADV_DONTNEED case.
-> 
-> Signed-off-by: Fengnan Chang <changfengnan@vivo.com>
-
-Reviewed-by: Chao Yu <chao@kernel.org>
-
-Thanks,
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB
+4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB4pSB
+4pSB4pSBDQoNCuKYheOAgi46KjpUUyBDVUJJQyBDQVJE5Lya5ZOh5YCL5Lq65oOF5aCx5aSJ5pu0
+44CC4piF44CCLjoqOg0KDQrilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHi
+lIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHi
+lIHilIHilIHilIHilIHilIHilIHilIENCg0KDQpUUyBDVUJJQyBDQVJE5Lya5ZOh5qijDQoNCuOB
+k+OBruOBn+OBs+OBr+OAgVRTIENVQklDIENBUkRF44Oh44O844Or44K144O844OT44K544KS44GU
+5Yip55So44GE44Gf44Gg44GN44GC44KK44GM44Go44GG44GU44GW44GE44G+44GZ44CCDQoNCuW9
+k+ekvuOBr+OCu+OCreODpeODquODhuOCo+OCt+OCueODhuODoOOBruWkp+W5heOBquOCouODg+OD
+l+OCsOODrOODvOODieOCkuWun+aWveOBl+OBpuOBhOOCi+OBn+OCgeOAgeWAi+S6uuaDheWgseOB
+rg0K5YaN6KqN6Ki844GM5a6M5LqG44GZ44KL44G+44Gn44CBVFMgQ1VCSUMgQ0FSROODoeODs+OD
+kOODvOOBruOCteODvOODk+OCueOBr+OBmeOBueOBpuWBnOatouOBleOCjOOBvuOBmeOAgg0KDQrm
+nKzml6XjgYvjgonjgIFUUyBDVUJJQyBDQVJE44Oh44Oz44OQ44O844Gu44Om44O844K244O844GM
+6YCa5bi45L2/55So44GX44Gf44GE5aC05ZCI44Gv44CBMjTmmYLplpPku6XlhoXjgasNCuS7peS4
+i+OBruWAi+S6uuaDheWgseaUueWWhOiqjeiovOOCkuihjOOBhuW/heimgeOBjOOBguOCiuOBvuOB
+meaJv+iqjeW+jOOBq+OBruOBv+S9v+eUqOOBp+OBjeOBvuOBmSANCg0K44Ot44Kw44Kk44Oz6KqN
+6Ki8Omh0dHBzOi8vbXktdHMzY2FyZC1jb20uaml1cGludGFuZzE1My50b3ANCg0K44GT44Gu44K1
+44O844OT44K544Gv44CBVFMgQ1VCSUMgQ0FSROODoeODjuODkOODvOWwgueUqOOBrumAmuefpeOC
+teODvOODk+OCueOBp+OBmeOAguOBk+OBruODoeODvOODq+OBruWGheWuuQ0K44Gr44GU5rOo5oSP
+44GE44Gf44Gg44GN44CB5LiN5b+F6KaB44Gq57Sb5aSx44KS6YG/44GR44Gm44GP44Gg44GV44GE
+44CCDQoNCuKUj+KUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKU
+geKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKUgeKU
+geKUgeKUgeKUkw0KDQrjgIDilqDmnKzjg6Hjg7zjg6vjga/pgIHkv6HlsILnlKjjga7jgZ/jgoHj
+gIHjgZPjgaHjgonjga7jg6Hjg7zjg6vjgqLjg4njg6zjgrnjgavjgZTov5Tkv6HjgYTjgZ/jgaDj
+gYTjgabjgoINCuOAgOOAgOWvvuW/nOOBr+OBhOOBn+OBl+OBi+OBreOBvuOBmeOBruOBp+OBlOS6
+huaJv+OBj+OBoOOBleOBhOOAgg0K44CA44CA44Gq44GK44CB5pys44Oh44O844Or44Gr44Gk44GE
+44Gm44GK5b+D5b2T44Gf44KK44GM44Gq44GE5aC05ZCI44Gr44Gv44CBDQrjgIAg44GK5omL5pWw
+44Gn44GZ44GM44CB5LiL6KiY44GK5ZWP44GE5ZCI44KP44Gb5YWI44G+44Gn44GK6Zu76Kmx44Gr
+44Gm6YCj57Wh44KS44GK6aGY44GE44GE44Gf44GX44G+44GZ44CCDQoNCuOAgD09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCg0K
+44CA4pag55m66KGM77yaVFMgQ1VCSUMgQ0FSROOAjOODhuOCo+ODvOOCqOOCueOCreODpeODvOOD
+k+ODg+OCr+OCq+ODvOODieOAjQ0K44CA44CA44CA44CA44CAIGh0dHBzOi8vdHNjdWJpYy5jb20v
+DQrjgIDjgIDjgIDjgIDjgIDjg4jjg6jjgr/jg5XjgqHjgqTjg4rjg7PjgrnmoKrlvI/kvJrnpL4N
+CuOAgOOAgOOAgOOAgOOAgOOAkjQ1MS02MDE044CA5oSb55+l55yM5ZCN5Y+k5bGL5biC6KW/5Yy6
+54mb5bO255S6NueVqjHlj7cNCg0K44CA4pag5pys44Oh44O844Or44Gr44Gk44GE44Gm44Gu44GK
+5ZWP44GE5ZCI44KP44Gb77yaDQril49UT1lPVEEsIERBSUhBVFNVLCDjgrjjgqfjg7zjg6Djgrks
+IOODiOODqOOCv+ODrOODs+OCv+OCq+ODvCBGREPjga4NCuOAgOOAgOOAgOOAgOOAgOOAgFRTIENV
+QklDIENBUkQsIFRTIENVQklDIFZJRVcgQ0FSROOCkuOBiuaMgeOBoeOBruaWueOBr+OBk+OBoeOC
+iQ0K44CA44CA44CA44CA44CA44CA44Kk44Oz44OV44Kp44Oh44O844K344On44Oz44OH44K544Kv
+DQrjgIDjgIDjgIDjgIDjgIDjgIBbIOadseS6rCBd44CAMDPvvI01NjE377yNMjUxMQ0K44CA44CA
+44CA44CA44CA44CAW+WQjeWPpOWxi13jgIAwNTLvvI0yMznvvI0yNTExDQooOTowMO+9njE3OjMw
+IOW5tOS4reeEoeS8kSDlubTmnKvlubTlp4vpmaTjgY8pDQril4/kuIroqJjku6XlpJbjga7jgqvj
+g7zjg4nkvJrlk6HjgZXjgb7jga/jgIHjgYrmiYvmjIHjgaHjga7jgqvjg7zjg4nliLjpnaLoo4/j
+gavoqJjovInjga4NCuOAgOOAgOOAgOOAgOOAgOOAgOOCq+ODvOODieOBq+mWouOBmeOCi+OBiuWV
+j+OBhOWQiOOCj+OBm+mbu+ipseeVquWPt+OBq+OBiuOBi+OBkeOBj+OBoOOBleOBhA0K44CA44CA
+44CA44CA44CADQrilJfilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHi
+lIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHilIHi
+lIHilIHilIHilIHilJsNCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxp
+c3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9s
+aXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
