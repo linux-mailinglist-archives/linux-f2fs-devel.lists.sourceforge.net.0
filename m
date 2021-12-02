@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0FAC4669AB
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Dec 2021 19:13:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E0FB4669CC
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Dec 2021 19:27:16 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1msqa7-0000Nn-RB; Thu, 02 Dec 2021 18:13:19 +0000
+	id 1msqnX-0004G5-TI; Thu, 02 Dec 2021 18:27:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1msqa6-0000Nd-Am
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Dec 2021 18:13:18 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1msqcT-00030S-Mu
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Dec 2021 18:15:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=l0Kw321G14DtaXAqvw1CMAVzJIljOy+vf7bFYVB4HRI=; b=KOK4Y0Vy+Pg14tyY40YRdtjP4C
- PAs9McDKD2ue3uXdLQcaqFVZ2NG0FV88UoiHD0PnUG1+PLjyz7o0FgzEOOCsVglwf6KwJVUImbq12
- rBGZqh+9gSd6FTRSq4xkexXqaup9WPG2IK/rdxIqajJc7wXBMOGb8n224k4ipLNOKOqo=;
+ bh=gthJgC5WbxXDPe3qWeFrJzU6mu2TJSVnZ6GwzCBV7sE=; b=f7E54xpwn6yQnV/GvT+0YG9s4g
+ p3H+zWjHwtgTACMQS9Obu9qsZL8/aGgh3A38EE7v0fgED3713WqPpy8xmxhTpUnwo7mnkDos+pJyX
+ onMPpEfAwzGBA9l4ZdUb7SmWt0lwPSLEsukuICw0Dnk6iwYgCK4DBUDuBm+p3uMolI2U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,42 +29,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=l0Kw321G14DtaXAqvw1CMAVzJIljOy+vf7bFYVB4HRI=; b=ZgspQvSrvL+WhYcLyYSh5CR+BC
- eLXtAGW4Av2GLNI31On9ZmjMibcBFPet2rqKdtBmPkIm6v+F8XUzk6vLwcsBI3K2HARYW2P2jP21G
- cCsRY5JNa51GrrLd3v3iWJKq/nj6C6InQ+Ny2A/balI+vCPFiWFqTNLfIXsvRZBiB7Yg=;
+ bh=gthJgC5WbxXDPe3qWeFrJzU6mu2TJSVnZ6GwzCBV7sE=; b=W06iLwy45PbKwQRjEmBTY3nz8o
+ MBVFPbedAsWaxRp79mwy+VBpFh4EY/HSxcK2lsybPSYNlGVwwIcrinJq/z5ppbL4bNBzfMWOB0Vq5
+ /OTw1sfISgCd4KolAT5oVVtrrGUrL8YI9bTtBuNko5Qe0tqduaanIrpbtOOqPKXVeOlY=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1msqa5-0007Mm-EP
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Dec 2021 18:13:18 +0000
+ id 1msqcT-001mEY-VC
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Dec 2021 18:15:46 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 166996279C
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  2 Dec 2021 18:13:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A258C00446;
- Thu,  2 Dec 2021 18:13:11 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id C109462775;
+ Thu,  2 Dec 2021 18:15:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F52CC00446;
+ Thu,  2 Dec 2021 18:15:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1638468791;
- bh=m+ZbylS5VCgMMr0/cLLi4oUbGnPEJYr8motS6DdZotQ=;
+ s=k20201202; t=1638468939;
+ bh=rXdSCw7yvks4MsvqXc1cR/AMkdpo30qxXV6UWDcJXmo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=sALKktU0NlrjrFrpZSQlWO2BbnQTq5wgSMv4uhSgOLR+nu7eYeTOVS+uycvhFCtFe
- 6H+MK3Vam/o2IQ1u+mnfczUab9PCdh7bI6gldPweVZpMcOI5KMXbon7FMUvKpoZ0pV
- 8fyjtGi4uoFeigsJXCVzvlADH99HTvh4BzLwrErHO0Cb0wswhtEBvTczx7LwGmV5g2
- Ekz0PGliaUzMAeAkM6/Jl/MOstJUWLan1/Y7XXmQvpFFyuqp0zzyCAs/VToOjApRkZ
- z81cM68C36Iz7YbotDiFLKKlnN+Wqtt39K6LFoO3e6quLgu9y0eZx+Sxrf8JzYADeS
- +mhcc0jZhDZjA==
-Date: Thu, 2 Dec 2021 10:13:09 -0800
+ b=ehAna/A8UKEtPBZc/0QjGYTY1r3P4MYWY8xUJLKFXwd4isHusPhGEoDG2Wzlc9ZYW
+ sVJFmuUCf//qaYRSjTTPZVQkuJh7XI3srsU7SxN2Fz50jZsX5CUi58heINBHbPsiZt
+ FzEnh/m2oXDhAkXccxHS9ElJ3LnLMlzeG2d/vQNanv2ndF4YcYRFbwRKz0F6J1THXU
+ UXe5YrmKtJ00UroMhVME4ACfKetqNJ7X743sfdCIhFIpUsfXNVhLG1+Kes/gKpa94b
+ ysR+9P/rq0Fer/ZKpCK6BZRmwo7Qu3+rrBBM0PNodxwVnO+96vm8VxxvMgVFJCgLbw
+ u7/L7sDdiuOyQ==
+Date: Thu, 2 Dec 2021 10:15:37 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <YakMtRif1f0cXT6R@google.com>
-References: <20211116214510.2934905-1-jaegeuk@kernel.org>
- <20211116214510.2934905-2-jaegeuk@kernel.org>
- <6576ab84-7441-e594-a7c4-e5876a814df7@kernel.org>
+Message-ID: <YakNSfMyzGAe2y42@google.com>
+References: <1636438608-27597-1-git-send-email-niuzhiguo84@gmail.com>
+ <YZU0TFBH6k2Q6fJZ@google.com>
+ <e28d4963-d816-b568-dec8-60a79a9fe88d@kernel.org>
+ <e25053e9-f97e-6a2f-3bac-acfcd689fdcb@kernel.org>
+ <Yaf1J/GtTrJekmtn@google.com>
+ <f0fa20e0-7c03-c454-d5a7-62457663412b@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <6576ab84-7441-e594-a7c4-e5876a814df7@kernel.org>
+In-Reply-To: <f0fa20e0-7c03-c454-d5a7-62457663412b@kernel.org>
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,9 +74,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/02, Chao Yu wrote: > On 2021/11/17 5:45, Jaegeuk Kim
- wrote: > > DIO preallocates physical blocks before writing data, but if an
- error occurrs > > or power-cut happens, we can see block contents [...] 
+ Content preview:  On 12/02, Chao Yu wrote: > On 2021/12/2 6:20, Jaegeuk Kim
+ wrote: > > On 11/20, Chao Yu wrote: > > > On 2021/11/18 14:46, Chao Yu wrote:
+ > > > > On 2021/11/18 0:56, Jaegeuk Kim wrote: > > > > > On 11/0 [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +90,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1msqa5-0007Mm-EP
-Subject: Re: [f2fs-dev] [PATCH 2/6] f2fs: do not expose unwritten blocks to
- user by DIO
+X-Headers-End: 1msqcT-001mEY-VC
+Subject: Re: [f2fs-dev] [PATCH Vx 1/1] f2fs: Avoid deadlock between
+ writeback and checkpoint
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,131 +104,186 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jing.Xia@unisoc.com, niuzhiguo84@gmail.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 12/02, Chao Yu wrote:
-> On 2021/11/17 5:45, Jaegeuk Kim wrote:
-> > DIO preallocates physical blocks before writing data, but if an error occurrs
-> > or power-cut happens, we can see block contents from the disk. This patch tries
-> > to fix it by 1) turning to buffered writes for DIO into holes, 2) truncating
-> > unwritten blocks from error or power-cut.
+> On 2021/12/2 6:20, Jaegeuk Kim wrote:
+> > On 11/20, Chao Yu wrote:
+> > > On 2021/11/18 14:46, Chao Yu wrote:
+> > > > On 2021/11/18 0:56, Jaegeuk Kim wrote:
+> > > > > On 11/09, niuzhiguo84@gmail.com wrote:
+> > > > > > From: Zhiguo Niu <zhiguo.niu@unisoc.com>
+> > > > > > 
+> > > > > > There could be a scenario as following:
+> > > > > > The inodeA and inodeB are in b_io queue of writeback
+> > > > > > inodeA : f2fs's node inode
+> > > > > > inodeB : a dir inode with only one dirty pages, and the node page
+> > > > > > of inodeB cached into inodeA
+> > > > > > 
+> > > > > > writeback:
+> > > > > > 
+> > > > > > wb_workfn
+> > > > > > wb_writeback
+> > > > > > blk_start_plug
+> > > > > >            loop {
+> > > > > >            queue_io
+> > > > > >            progress=__writeback_inodes_wb
+> > > > > >                    __writeback_single_inode
+> > > > > >                            do_writepages
+> > > > > >                                    f2fs_write_data_pages
+> > > > > >                                    wbc->pages_skipped +=get_dirty_pages
+> > > > > >                            inode->i_state &= ~dirty
+> > > > > >                    wrote++
+> > > > > >                    requeue_inode
+> > > > > >            }
+> > > > > > blk_finish_plug
+> > > > > > 
+> > > > > > checkpoint:
+> > > > > > 
+> > > > > > f2fs_write_checkpoint
+> > > > > > f2fs_sync_dirty_inodes
+> > > > > > filemap_fdatawrite
+> > > > > > do_writepages
+> > > > > > f2fs_write_data_pages
+> > > > > >            f2fs_write_single_data_page
+> > > > > >                    f2fs_do_write_data_page
+> > > > > >                            set_page_writeback
+> > > > > >                            f2fs_outplace_write_data
+> > > > > >                                    f2fs_update_data_blkaddr
+> > > > > >                                            f2fs_wait_on_page_writeback
+> > > > > >                    inode_dec_dirty_pages
+> > > > > > 
+> > > > > > 1. Writeback thread flush inodeA, and push it's bio request in task's plug;
+> > > > > > 2. Checkpoint thread writes inodeB's dirty page, and then wait its node
+> > > > > >        page writeback cached into inodeA which is in writeback task's plug
+> > > > > > 3. Writeback thread flush inodeB and skip writing the dirty page as
+> > > > > >        wb_sync_req[DATA] > 0.
+> > > > > > 4. As none of the inodeB's page is marked as PAGECACHE_TAG_DIRTY, writeback
+> > > > > >        thread clear inodeB's dirty state.
+> > > > > > 5. Then inodeB is moved from b_io to b_dirty because of pages_skipped > 0
+> > > > > >        as checkpoint thread is stuck before dec dirty_pages.
+> > > > > > 
+> > > > > > This patch collect correct pages_skipped according to the tag state in
+> > > > > > page tree of inode
+> > > > > > 
+> > > > > > Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+> > > > > > Signed-off-by: Jing Xia <jing.xia@unisoc.com>
+> > > > > > ---
+> > > > > >     fs/f2fs/data.c | 4 +++-
+> > > > > >     1 file changed, 3 insertions(+), 1 deletion(-)
+> > > > > > 
+> > > > > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > > > > > index f4fd6c246c9a..e98628e3868c 100644
+> > > > > > --- a/fs/f2fs/data.c
+> > > > > > +++ b/fs/f2fs/data.c
+> > > > > > @@ -3237,7 +3237,9 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
+> > > > > >     	return ret;
+> > > > > >     skip_write:
+> > > > > > -	wbc->pages_skipped += get_dirty_pages(inode);
+> > > > > > +	wbc->pages_skipped +=
+> > > > > > +		mapping_tagged(inode->i_mapping, PAGECACHE_TAG_DIRTY) ?
+> > > > > 
+> > > > > Is there any race condition to get 0, if there's any dirty page? IOWs, it
+> > > > 
+> > > > Quoted from Jing Xia's explanation:
+> > > > 
+> > > > [T:writeback]				[T:checkpoint]
+> > > 
+> > > My bad, [1] should be here:
+> > > 
+> > > bio contains NodeA was plugged in writeback threads
+> > > 
+> > > Thanks,
+> > > 
+> > > > 					- do_writepages  -- sync write inodeB, inc wb_sync_req[DATA]
+> > > > 					 - f2fs_write_data_pages
+> > > > 					  - f2fs_write_single_data_page -- write last dirty page
+> > > > 					   - f2fs_do_write_data_page
+> > > > 					    - set_page_writeback  -- clear page dirty flag and
+> > > > 					    PAGECACHE_TAG_DIRTY tag in radix tree
+> > > > 					    - f2fs_outplace_write_data
+> > > > 					     - f2fs_update_data_blkaddr
+> > > > 					      - f2fs_wait_on_page_writeback -- wait NodeA to writeback here
+> > > > 					   - inode_dec_dirty_pages
+> > > 
+> > > > bio contains NodeA was plugged in writeback threads
+> > > 
+> > > [1]
+> > > 
+> > > Thanks,
+> > > 
+> > > > - writeback_sb_inodes
+> > > >     - writeback_single_inode
+> > > >      - do_writepages
+> > > >       - f2fs_write_data_pages -- skip writepages due to wb_sync_req[DATA]
+> > > >        - wbc->pages_skipped += get_dirty_pages() -- PAGECACHE_TAG_DIRTY is not set but get_dirty_pages() returns one
+> > > >     - requeue_inode -- requeue inode to wb->b_dirty queue due to non-zero.pages_skipped
 > > 
-> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > ---
-> >   fs/f2fs/data.c |  5 ++++-
-> >   fs/f2fs/f2fs.h |  5 +++++
-> >   fs/f2fs/file.c | 24 +++++++++++++++++++++++-
-> >   3 files changed, 32 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > index 3b27fb7daa8b..7ac1a39fcad2 100644
-> > --- a/fs/f2fs/data.c
-> > +++ b/fs/f2fs/data.c
-> > @@ -1543,8 +1543,11 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
-> >   					flag != F2FS_GET_BLOCK_DIO);
-> >   				err = __allocate_data_block(&dn,
-> >   							map->m_seg_type);
-> > -				if (!err)
-> > +				if (!err) {
-> > +					if (flag == F2FS_GET_BLOCK_PRE_DIO)
-> > +						file_need_truncate(inode);
-> >   					set_inode_flag(inode, FI_APPEND_WRITE);
-> > +				}
-> >   			}
-> >   			if (err)
-> >   				goto sync_out;
-> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > index be871a79c634..14bea669f87e 100644
-> > --- a/fs/f2fs/f2fs.h
-> > +++ b/fs/f2fs/f2fs.h
-> > @@ -654,6 +654,7 @@ enum {
-> >   #define FADVISE_KEEP_SIZE_BIT	0x10
-> >   #define FADVISE_HOT_BIT		0x20
-> >   #define FADVISE_VERITY_BIT	0x40
-> > +#define FADVISE_TRUNC_BIT	0x80
-> >   #define FADVISE_MODIFIABLE_BITS	(FADVISE_COLD_BIT | FADVISE_HOT_BIT)
-> > @@ -681,6 +682,10 @@ enum {
-> >   #define file_is_verity(inode)	is_file(inode, FADVISE_VERITY_BIT)
-> >   #define file_set_verity(inode)	set_file(inode, FADVISE_VERITY_BIT)
-> > +#define file_should_truncate(inode)	is_file(inode, FADVISE_TRUNC_BIT)
-> > +#define file_need_truncate(inode)	set_file(inode, FADVISE_TRUNC_BIT)
-> > +#define file_dont_truncate(inode)	clear_file(inode, FADVISE_TRUNC_BIT)
-> > +
-> >   #define DEF_DIR_LEVEL		0
-> >   enum {
-> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > index 4bf77a5bf998..ec8de0662437 100644
-> > --- a/fs/f2fs/file.c
-> > +++ b/fs/f2fs/file.c
-> > @@ -960,10 +960,21 @@ int f2fs_setattr(struct user_namespace *mnt_userns, struct dentry *dentry,
-> >   		down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
-> >   		filemap_invalidate_lock(inode->i_mapping);
-> > +		/*
-> > +		 * Truncate stale preallocated blocks used by the previous DIO.
-> > +		 */
-> > +		if (file_should_truncate(inode)) {
-> > +			err = f2fs_truncate(inode);
-> > +			if (err)
-> > +				goto out_unlock;
-> > +			file_dont_truncate(inode);
-> > +		}
-> > +
-> >   		truncate_setsize(inode, attr->ia_size);
-> >   		if (attr->ia_size <= old_size)
-> >   			err = f2fs_truncate(inode);
-> > +out_unlock:
-> >   		/*
-> >   		 * do not trim all blocks after i_size if target size is
-> >   		 * larger than i_size.
-> > @@ -4257,6 +4268,13 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter)
-> >   	/* If it will be an out-of-place direct write, don't bother. */
-> >   	if (dio && f2fs_lfs_mode(sbi))
-> >   		return 0;
-> > +	/*
-> > +	 * Don't preallocate holes aligned to DIO_SKIP_HOLES which turns into
-> > +	 * buffered IO, if DIO meets any holes.
-> > +	 */
-> > +	if (dio && i_size_read(inode) &&
-> > +		(F2FS_BYTES_TO_BLK(pos) < F2FS_BLK_ALIGN(i_size_read(inode))))
-> > +		return 0;
-> >   	/* No-wait I/O can't allocate blocks. */
-> >   	if (iocb->ki_flags & IOCB_NOWAIT)
-> > @@ -4366,10 +4384,14 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
-> >   		if (preallocated > 0 && i_size_read(inode) < target_size) {
-> >   			down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
-> >   			filemap_invalidate_lock(inode->i_mapping);
-> > -			f2fs_truncate(inode);
-> > +			if (!f2fs_truncate(inode))
-> > +				file_dont_truncate(inode);
-> >   			filemap_invalidate_unlock(inode->i_mapping);
-> >   			up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
-> > +		} else {
-> > +			file_dont_truncate(inode);
+> > So, my question was why this is the problem?
 > 
-> How about this case:
-> 
-> - touch file
-> - DIO write [0, 8kb] to file
->  - preallocate 2 physical blocks
->  - set FADVISE_TRUNC_BIT
->  - SPO
-> - BUFIO write [0, 4kb] to file
->  - file_dont_truncate -- it leaks unwritten [4kb, 8kb] to user after
-> truncating file to 8kb
+> kworker will loop writebacking this requeued inode.
 
-i_size should be 4kb, no?
+Does it make a problem?
 
 > 
 > Thanks,
 > 
-> >   		}
-> > +
-> >   		clear_inode_flag(inode, FI_PREALLOCATED_ALL);
-> >   		if (ret > 0)
 > > 
+> > > > 
+> > > > > seems the current condition is just requeuing the inode as dirty, but next
+> > > > > flushing time will remove it from dirty list. Is this giving too much overheads?
+> > > > 
+> > > > I prefer to let writeback thread call blk_flush_plug() after skipping
+> > > > writepages() due to wb_sync_req[DATA/NODE] check condition, thoughts?
+> > > > 
+> > > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > > > index 9f754aaef558..b6e1ed73f8f5 100644
+> > > > --- a/fs/f2fs/data.c
+> > > > +++ b/fs/f2fs/data.c
+> > > > @@ -3087,6 +3087,8 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
+> > > >     			/* give a priority to WB_SYNC threads */
+> > > >     			if (atomic_read(&sbi->wb_sync_req[DATA]) &&
+> > > >     					wbc->sync_mode == WB_SYNC_NONE) {
+> > > > +				if (current->plug)
+> > > > +					blk_flush_plug(current->plug, false);
+> > > >     				done = 1;
+> > > >     				break;
+> > > >     			}
+> > > > diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> > > > index 556fcd8457f3..dd9a817d8dab 100644
+> > > > --- a/fs/f2fs/node.c
+> > > > +++ b/fs/f2fs/node.c
+> > > > @@ -1946,6 +1946,8 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
+> > > >     			if (atomic_read(&sbi->wb_sync_req[NODE]) &&
+> > > >     					wbc->sync_mode == WB_SYNC_NONE) {
+> > > >     				done = 1;
+> > > > +				if (current->plug)
+> > > > +					blk_flush_plug(current->plug, false);
+> > > >     				break;
+> > > >     			}
+> > > > 
+> > > > 
+> > > > 
+> > > > Thanks,
+> > > > 
+> > > > > 
+> > > > > > +		get_dirty_pages(inode) : 0;
+> > > > > >     	trace_f2fs_writepages(mapping->host, wbc, DATA);
+> > > > > >     	return 0;
+> > > > > >     }
+> > > > > > -- 
+> > > > > > 2.28.0
+> > > > 
+> > > > 
+> > > > _______________________________________________
+> > > > Linux-f2fs-devel mailing list
+> > > > Linux-f2fs-devel@lists.sourceforge.net
+> > > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> > > > 
 
 
 _______________________________________________
