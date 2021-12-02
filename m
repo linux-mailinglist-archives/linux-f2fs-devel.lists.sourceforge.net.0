@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 935E3465C57
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Dec 2021 03:59:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC3F4465C89
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Dec 2021 04:10:59 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mscJn-0002xA-2l; Thu, 02 Dec 2021 02:59:31 +0000
+	id 1mscUq-0003fg-74; Thu, 02 Dec 2021 03:10:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mscJl-0002x4-Tj
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Dec 2021 02:59:29 +0000
+ (envelope-from <chao@kernel.org>) id 1mscUp-0003fa-4v
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Dec 2021 03:10:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=12rwr1wm19o7jA+E7NLtt22GE1AYt15z2pOzbYXr/lk=; b=TfZMda2yVmxOaon0vwqlutxzve
- jaIySXgA1GCbPDuXgagxgqjo0Jc7awP55LdZ3UfnS17yt6pa/FCLqVxEE6s4KTZe3tVKpe+sFZaK0
- YyW7+JehK1abl7PHm+F7fNYSlAaBbMH6sgHZd8TM3++kBJNm2wm9mRVuZfpBOPutduDw=;
+ bh=Siu9uS1pDLfDqotOz/iCVcKDS+XLiAMXqlBaPm6rVbc=; b=M95RCnXmFDSjjHJDQioquGboQ0
+ 7aH9WfSR2b3n+Su25CmfpVa3DgGZFjqBpjyh/xZcfLtg/Gfd4B/OU3QgUCCAm6uLuowzAak8KkBx/
+ r3zsiSkUgUejdP5FtnAE9qtq+N/vByQCS4Q57EacX212EaAtPF4+QgdhuMNphpGhm8+s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,33 +29,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=12rwr1wm19o7jA+E7NLtt22GE1AYt15z2pOzbYXr/lk=; b=MacND/GkOq09oAMQijxwbEp3p7
- n/ryXR6fLzTkYojf1Q9faRRQXakBvXhSN+X/02JKkLP25usT/0NOihpAhyh3qa/Q2tYmgYd/FrbYB
- Uyonk7nhAPpiCFzssvbaKoscGhFT/vK+k2zRMTs/rZzhws9m48dFWfWsfEAMu/Wo5XSo=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=Siu9uS1pDLfDqotOz/iCVcKDS+XLiAMXqlBaPm6rVbc=; b=FGc2gtQmIkqyTLxLzdU0sEaTDR
+ avj1n3GRps+Ere/VqHd5RIgRtXoFQhNHFaS3ytpRBFXUXPKdBCCUmSiOD8/3tPeb2+ItZAAAOCYJR
+ VzY+MLqn9vb10x/0wOGcrATJZwq0IYE4NbHiTbz+DdaExOPVsvNpmCUiYNTTX3ciT2mA=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mscJl-0004vJ-6V
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Dec 2021 02:59:29 +0000
+ id 1mscUl-0005sQ-JE
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 02 Dec 2021 03:10:55 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 39AC6CE2160;
- Thu,  2 Dec 2021 02:59:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84B63C00446;
- Thu,  2 Dec 2021 02:59:11 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 29F1DB80D51;
+ Thu,  2 Dec 2021 03:10:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0D176C00446;
+ Thu,  2 Dec 2021 03:10:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1638413952;
- bh=o0NFyjVR2qKGQkr94mZhlpfOuhwPuvNP637P3gi6/8k=;
+ s=k20201202; t=1638414644;
+ bh=6x02M+oNKOcHx0oToe06+vo2NwN8rWx6I9CTKjVOHxM=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=AkzX99sR2ycBPpq7wWlIq9cDgb+id32l/orV1UQ9u0VYVAblCC7iq6oBxGBUZOHFC
- RXjVvOlysLlZMSZxThtoAKtJSufGY08tqC9CUCaY3nRdddGP7gedC9FN1Y0WYsCMPs
- DMeoYFyhKoM0p6rvNhIEBdG54s7nbJwu6wMbuU3sIKG/x4OYn7Un9X6PHiOn/goBql
- KPsa99t3/8XT5k44jycEiF9nnbNd2YJ3CHxGST0hHSrkg+3PZ7Oy4N58PCaR6ipoR7
- 9a36ELos2HfNh7dorqVR5TJ0Oz4/JaCHBldJHFElLLOCxl8YutISculzg/C5gDXGzY
- AG4AYboRhqz0g==
-Message-ID: <f1c6e1f5-e2c7-a704-9a3d-5012ba3e9be2@kernel.org>
-Date: Thu, 2 Dec 2021 10:59:09 +0800
+ b=h2C575LQW6nb/vJouchWkl/9mndJyqNhKDfgMPA+1N+rxNgA5iKLLd7L7gpxiq3Vd
+ LKVW77c+N0EZdXO7L61BjNpei4TcWVTmPSW4do4xL7IxTXBGLyJuox2heXpoL9wG7u
+ /Po6wJF46Q9pezxz8kSbZfjdwVkywXex7BZ0xZMj+u/XF0TGGgQB72zKRsWoZvyBkg
+ FL7Z+uwDqkc4go/SjLz8h2KkMC91Mbl/GeQ5DAMv3o14IwyVU20Mu9nkTitn7XGSG9
+ rmELpggDuvFxIZkod1XDLmfYLfawVjNCbNiE9uBrfIG99E+IO+qSb9sfbA0r2QsZsS
+ vZZHZBvQLpkbw==
+Message-ID: <b36e2d44-4834-3931-6a32-4fa52d1d7785@kernel.org>
+Date: Thu, 2 Dec 2021 11:10:41 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.3.1
@@ -63,9 +63,9 @@ Content-Language: en-US
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 References: <20211116214510.2934905-1-jaegeuk@kernel.org>
- <20211116214510.2934905-4-jaegeuk@kernel.org>
+ <20211116214510.2934905-5-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20211116214510.2934905-4-jaegeuk@kernel.org>
+In-Reply-To: <20211116214510.2934905-5-jaegeuk@kernel.org>
 X-Spam-Score: -2.9 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -74,8 +74,8 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On 2021/11/17 5:45, Jaegeuk Kim wrote: > From: Eric Biggers
- <ebiggers@google.com> > > Pass in the original position and count rather
- than the position and > count that were updated by the write. Also [...] 
+ <ebiggers@google.com> > > Implement 'struct iomap_ops' for f2fs, in preparation
+ for making f2fs > use iomap for direct I/O. > > Note that th [...] 
  Content analysis details:   (-2.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,9 +90,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mscJl-0004vJ-6V
-Subject: Re: [f2fs-dev] [PATCH 4/6] f2fs: fix the f2fs_file_write_iter
- tracepoint
+X-Headers-End: 1mscUl-0005sQ-JE
+Subject: Re: [f2fs-dev] [PATCH 5/6] f2fs: implement iomap operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,17 +111,123 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 On 2021/11/17 5:45, Jaegeuk Kim wrote:
 > From: Eric Biggers <ebiggers@google.com>
 > 
-> Pass in the original position and count rather than the position and
-> count that were updated by the write.  Also use the correct types for
-> all arguments, in particular the file offset which was being truncated
-> to 32 bits on 32-bit platforms.
+> Implement 'struct iomap_ops' for f2fs, in preparation for making f2fs
+> use iomap for direct I/O.
+> 
+> Note that this may be used for other things besides direct I/O in the
+> future; however, for now I've only tested it for direct I/O.
 > 
 > Signed-off-by: Eric Biggers <ebiggers@google.com>
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>   fs/f2fs/Kconfig |  1 +
+>   fs/f2fs/data.c  | 58 +++++++++++++++++++++++++++++++++++++++++++++++++
+>   fs/f2fs/f2fs.h  |  1 +
+>   3 files changed, 60 insertions(+)
+> 
+> diff --git a/fs/f2fs/Kconfig b/fs/f2fs/Kconfig
+> index 7eea3cfd894d..f46a7339d6cf 100644
+> --- a/fs/f2fs/Kconfig
+> +++ b/fs/f2fs/Kconfig
+> @@ -7,6 +7,7 @@ config F2FS_FS
+>   	select CRYPTO_CRC32
+>   	select F2FS_FS_XATTR if FS_ENCRYPTION
+>   	select FS_ENCRYPTION_ALGS if FS_ENCRYPTION
+> +	select FS_IOMAP
+>   	select LZ4_COMPRESS if F2FS_FS_LZ4
+>   	select LZ4_DECOMPRESS if F2FS_FS_LZ4
+>   	select LZ4HC_COMPRESS if F2FS_FS_LZ4HC
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 7ac1a39fcad2..43b3ca7cabe0 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -21,6 +21,7 @@
+>   #include <linux/cleancache.h>
+>   #include <linux/sched/signal.h>
+>   #include <linux/fiemap.h>
+> +#include <linux/iomap.h>
+>   
+>   #include "f2fs.h"
+>   #include "node.h"
+> @@ -4236,3 +4237,60 @@ void f2fs_destroy_bio_entry_cache(void)
+>   {
+>   	kmem_cache_destroy(bio_entry_slab);
+>   }
+> +
+> +static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+> +			    unsigned int flags, struct iomap *iomap,
+> +			    struct iomap *srcmap)
+> +{
+> +	struct f2fs_map_blocks map = {};
+> +	pgoff_t next_pgofs = 0;
+> +	int err;
+> +
+> +	map.m_lblk = bytes_to_blks(inode, offset);
+> +	map.m_len = bytes_to_blks(inode, offset + length - 1) - map.m_lblk + 1;
+> +	map.m_next_pgofs = &next_pgofs;
+> +	map.m_seg_type = f2fs_rw_hint_to_seg_type(inode->i_write_hint);
+> +	if (flags & IOMAP_WRITE)
+> +		map.m_may_create = true;
+> +
+> +	err = f2fs_map_blocks(inode, &map, flags & IOMAP_WRITE,
+> +			      F2FS_GET_BLOCK_DIO);
+> +	if (err)
+> +		return err;
+> +
+> +	iomap->offset = blks_to_bytes(inode, map.m_lblk);
+> +
+> +	if (map.m_flags & (F2FS_MAP_MAPPED | F2FS_MAP_UNWRITTEN)) {
+> +		iomap->length = blks_to_bytes(inode, map.m_len);
+> +		if (map.m_flags & F2FS_MAP_MAPPED) {
+> +			iomap->type = IOMAP_MAPPED;
+> +			iomap->flags |= IOMAP_F_MERGED;
+> +		} else {
+> +			iomap->type = IOMAP_UNWRITTEN;
+> +		}
+> +		if (WARN_ON_ONCE(!__is_valid_data_blkaddr(map.m_pblk)))
+> +			return -EINVAL;
+> +		iomap->addr = blks_to_bytes(inode, map.m_pblk);
+> +
+> +		if (WARN_ON_ONCE(f2fs_is_multi_device(F2FS_I_SB(inode))))
+> +			return -EINVAL;
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Why not relocating this check before f2fs_map_blocks()?
 
 Thanks,
+
+> +		iomap->bdev = inode->i_sb->s_bdev;
+> +	} else {
+> +		iomap->length = blks_to_bytes(inode, next_pgofs) -
+> +				iomap->offset;
+> +		iomap->type = IOMAP_HOLE;
+> +		iomap->addr = IOMAP_NULL_ADDR;
+> +	}
+> +
+> +	if (map.m_flags & F2FS_MAP_NEW)
+> +		iomap->flags |= IOMAP_F_NEW;
+> +	if ((inode->i_state & I_DIRTY_DATASYNC) ||
+> +	    offset + length > i_size_read(inode))
+> +		iomap->flags |= IOMAP_F_DIRTY;
+> +
+> +	return 0;
+> +}
+> +
+> +const struct iomap_ops f2fs_iomap_ops = {
+> +	.iomap_begin	= f2fs_iomap_begin,
+> +};
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 14bea669f87e..0d199e8f2c1d 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -3654,6 +3654,7 @@ int f2fs_init_post_read_processing(void);
+>   void f2fs_destroy_post_read_processing(void);
+>   int f2fs_init_post_read_wq(struct f2fs_sb_info *sbi);
+>   void f2fs_destroy_post_read_wq(struct f2fs_sb_info *sbi);
+> +extern const struct iomap_ops f2fs_iomap_ops;
+>   
+>   /*
+>    * gc.c
+> 
 
 
 _______________________________________________
