@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C601946722B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Dec 2021 07:44:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A78446723C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Dec 2021 07:51:46 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mt2Io-0004uJ-N3; Fri, 03 Dec 2021 06:44:14 +0000
+	id 1mt2Q4-000574-26; Fri, 03 Dec 2021 06:51:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1mt2Im-0004uD-JR
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Dec 2021 06:44:12 +0000
+ (envelope-from <chao@kernel.org>) id 1mt2Pp-00056o-Os
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Dec 2021 06:51:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=X8gpuYn9I7kUK2bVZOcRxqX7uuQUxn/8cJQghDJznjU=; b=cFixHRFMzNXFFDEj5CD0RAUaJQ
- FxzTBkeLzOyEdCpJWBhyKuWWDzciCQ12lOQ8995iW87q/uGM2UANMb12e4sz4bNC4UujOp9OZmChc
- n5Ezz5nbmmHD1NcjW6QquLjY3Ww70KBPrV2fIgak8Hwp19oC0Sa8RLp3q1CB3p3AtR/8=;
+ bh=8Tf+tWudwO04imjjpk1Dj987X+NrUEA6GyWLO3+7iNM=; b=Jk3ur2xI9yBz4ZrV1sHyP1YG3y
+ zCqOE5ivBW19zSm1suKBHSlCIc6GfMKmVBTNakhzZZFQRrn3DZXxD1g19Pblcq3XOq5NJevloCy3V
+ qMIQKgxaRNgjDlpPLv12Pt+kz9/F11wTkJC0T1F5XwqaIpvPuVyS6FisWx1rDv3HJ4es=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,47 +29,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=X8gpuYn9I7kUK2bVZOcRxqX7uuQUxn/8cJQghDJznjU=; b=IvoIbNtHGEvjLLuIk2JJ+EEo6e
- aplObeOc8oywh2aul+q8atS8Hl5dEtseygwA6NfTYPW3RKy6Hu3vt+yn8g8I6G6xP+LawNKMvo/Yr
- e8NOrfs5DYB/yDE0w1Z6fBbLxV+RgdLG8NKcWLJY6JlDdykpBSby/LJNoI4lhtTR2XiE=;
+ bh=8Tf+tWudwO04imjjpk1Dj987X+NrUEA6GyWLO3+7iNM=; b=OVBpfjkQVbtLsKM80rD91DyqPR
+ X3sMk+DbEe/G2pJdAe03uWHZHIy5AVx0m6ENl0dCIJXaeIfZtl/JwUAXftbTsrSDPe3Bp5VLWdgIc
+ aLcNF0SDvPtN/hwUkj1yB3+0m/dPHydF7NCwA3iDYux372EAYexR2XYbUday7Dsp9dzk=;
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mt2Il-002OWZ-JG
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Dec 2021 06:44:12 +0000
+ id 1mt2Po-002OvS-TQ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 03 Dec 2021 06:51:29 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 34E3CB81DC8;
- Fri,  3 Dec 2021 06:44:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC946C53FAD;
- Fri,  3 Dec 2021 06:44:02 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 81C89B81DCB
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri,  3 Dec 2021 06:51:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4AF4DC53FAD;
+ Fri,  3 Dec 2021 06:51:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1638513844;
- bh=Jj4LHT6HjmAYU7Qr8wYJ8qtkUYbT7DUL8pZH6U2n77Q=;
+ s=k20201202; t=1638514281;
+ bh=34SFPgg3ArvbMFrw5JC591DMTXjD/TO+MiQWb5X3ym8=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=kGLZHjyWHPK9qvMVQDYQQjemcrf1mkBjFFCePR7zAEf7MrNP4X9n1X5KlO3oX60D6
- mReWI/+wxKbmC0phrthH4TrBwGbacVh6gG6A1AIfhP8gl70e9vyOJz+erzC0AcwFiY
- +SxuGpfxeNa4i2wuUZMoAuttrD5p4DwDqL3zhYkL16j0kLUVHhgoE7BmER+R84ISww
- gvIbcLRHONmUJWkjOXMnv2iXKp2Qy2LMgNhzeKaQv2seS+fmJU7tlmcPkyUBubgLl2
- o4rMCuORuHDZILc1qOrhzXM0A6EP2IdLxe/weRSLy45jvDX3UHngWa3pawf+k3YX3I
- qUJCankX4c4Og==
-Message-ID: <80bc28c5-f050-05a9-e9a8-ff42781a191a@kernel.org>
-Date: Fri, 3 Dec 2021 14:44:00 +0800
+ b=QBhHl6RWBlamf3vNxCoGNKiLxekNfYSbEqncAKb/7+EwY2XQf3e/9iy1wheuldXCu
+ Sx5qvAOSMf1CClb8ISSEkPDREEfOAAJy1Qa9cZLEo7ruf/PM5w5h/wxTdveTJHMUK5
+ PfMzjphMwcKMXFsZojqKPHuSd9fusZiR6hczBkH95656wPdPEe5yeFu/kSm+Qtgg7n
+ JY7I80xTjqa9Y42kHOfXE2T0nClAUAFtQTkwxwLDXs0XRBbs1cZ8Bko4x9zU4wQjCR
+ L+XWcTe2qYEqrAGeBAFZ8HXDCuRlpgSYYh1+61VVf6m21JVxhMQkOsPySxUS3rV/jv
+ irT7LbGG4D/Cw==
+Message-ID: <a0c55b6d-a325-d40d-e030-bc936ef592fe@kernel.org>
+Date: Fri, 3 Dec 2021 14:51:18 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.3.2
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <1636438608-27597-1-git-send-email-niuzhiguo84@gmail.com>
- <YZU0TFBH6k2Q6fJZ@google.com>
- <e28d4963-d816-b568-dec8-60a79a9fe88d@kernel.org>
- <e25053e9-f97e-6a2f-3bac-acfcd689fdcb@kernel.org>
- <Yaf1J/GtTrJekmtn@google.com>
- <f0fa20e0-7c03-c454-d5a7-62457663412b@kernel.org>
- <YakNSfMyzGAe2y42@google.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Eric Biggers <ebiggers@kernel.org>
+References: <20211116214510.2934905-1-jaegeuk@kernel.org>
+ <20211116214510.2934905-5-jaegeuk@kernel.org>
+ <b36e2d44-4834-3931-6a32-4fa52d1d7785@kernel.org>
+ <YahIf3UlhuxJT1O4@sol.localdomain>
+ <1ba0f002-42c7-b085-0c54-6071664ba79b@kernel.org>
+ <YakPrVPz5+qQm3kQ@sol.localdomain> <YakXMV0UvBV7TVwe@google.com>
+ <YakX38onzsW5Ef8B@google.com> <YakzVAkHAVMueJwe@sol.localdomain>
+ <Yak4cxU6htgQk7ck@google.com> <Yak6gtXthBRK3eeM@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <YakNSfMyzGAe2y42@google.com>
+In-Reply-To: <Yak6gtXthBRK3eeM@google.com>
 X-Spam-Score: -2.9 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -77,9 +79,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2021/12/3 2:15, Jaegeuk Kim wrote: > On 12/02, Chao Yu
- wrote: >> On 2021/12/2 6:20, Jaegeuk Kim wrote: >>> On 11/20, Chao Yu wrote:
- >>>> On 2021/11/18 14:46, Chao Yu wrote: >>>>> On 2021/11/18 0:56 [...] 
+ Content preview:  On 2021/12/3 5:28, Jaegeuk Kim wrote: > On 12/02, Jaegeuk
+ Kim wrote: >> On 12/02, Eric Biggers wrote: >>> On Thu, Dec 02,
+ 2021 at 11:00:47AM
+ -0800, Jaegeuk Kim wrote: >>>> On 12/02, Jaegeuk Kim wrote: [...] 
  Content analysis details:   (-2.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +97,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mt2Il-002OWZ-JG
-Subject: Re: [f2fs-dev] [PATCH Vx 1/1] f2fs: Avoid deadlock between
- writeback and checkpoint
+X-Headers-End: 1mt2Po-002OvS-TQ
+Subject: Re: [f2fs-dev] [PATCH 5/6] f2fs: implement iomap operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,192 +110,80 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jing.Xia@unisoc.com, niuzhiguo84@gmail.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2021/12/3 2:15, Jaegeuk Kim wrote:
-> On 12/02, Chao Yu wrote:
->> On 2021/12/2 6:20, Jaegeuk Kim wrote:
->>> On 11/20, Chao Yu wrote:
->>>> On 2021/11/18 14:46, Chao Yu wrote:
->>>>> On 2021/11/18 0:56, Jaegeuk Kim wrote:
->>>>>> On 11/09, niuzhiguo84@gmail.com wrote:
->>>>>>> From: Zhiguo Niu <zhiguo.niu@unisoc.com>
+On 2021/12/3 5:28, Jaegeuk Kim wrote:
+> On 12/02, Jaegeuk Kim wrote:
+>> On 12/02, Eric Biggers wrote:
+>>> On Thu, Dec 02, 2021 at 11:00:47AM -0800, Jaegeuk Kim wrote:
+>>>> On 12/02, Jaegeuk Kim wrote:
+>>>>> On 12/02, Eric Biggers wrote:
+>>>>>> On Thu, Dec 02, 2021 at 10:04:11PM +0800, Chao Yu wrote:
+>>>>>>> On 2021/12/2 12:15, Eric Biggers wrote:
+>>>>>>>> On Thu, Dec 02, 2021 at 11:10:41AM +0800, Chao Yu wrote:
+>>>>>>>>> Why not relocating this check before f2fs_map_blocks()?
 >>>>>>>
->>>>>>> There could be a scenario as following:
->>>>>>> The inodeA and inodeB are in b_io queue of writeback
->>>>>>> inodeA : f2fs's node inode
->>>>>>> inodeB : a dir inode with only one dirty pages, and the node page
->>>>>>> of inodeB cached into inodeA
+>>>>>>> Wait, it supports DIO in multi-device image after commit 	71f2c8206202
+>>>>>>> ("f2fs: multidevice: support direct IO"), how about
+>>>>>>> checking with f2fs_allow_multi_device_dio()?
 >>>>>>>
->>>>>>> writeback:
+>>>>>>> Thanks,
 >>>>>>>
->>>>>>> wb_workfn
->>>>>>> wb_writeback
->>>>>>> blk_start_plug
->>>>>>>             loop {
->>>>>>>             queue_io
->>>>>>>             progress=__writeback_inodes_wb
->>>>>>>                     __writeback_single_inode
->>>>>>>                             do_writepages
->>>>>>>                                     f2fs_write_data_pages
->>>>>>>                                     wbc->pages_skipped +=get_dirty_pages
->>>>>>>                             inode->i_state &= ~dirty
->>>>>>>                     wrote++
->>>>>>>                     requeue_inode
->>>>>>>             }
->>>>>>> blk_finish_plug
->>>>>>>
->>>>>>> checkpoint:
->>>>>>>
->>>>>>> f2fs_write_checkpoint
->>>>>>> f2fs_sync_dirty_inodes
->>>>>>> filemap_fdatawrite
->>>>>>> do_writepages
->>>>>>> f2fs_write_data_pages
->>>>>>>             f2fs_write_single_data_page
->>>>>>>                     f2fs_do_write_data_page
->>>>>>>                             set_page_writeback
->>>>>>>                             f2fs_outplace_write_data
->>>>>>>                                     f2fs_update_data_blkaddr
->>>>>>>                                             f2fs_wait_on_page_writeback
->>>>>>>                     inode_dec_dirty_pages
->>>>>>>
->>>>>>> 1. Writeback thread flush inodeA, and push it's bio request in task's plug;
->>>>>>> 2. Checkpoint thread writes inodeB's dirty page, and then wait its node
->>>>>>>         page writeback cached into inodeA which is in writeback task's plug
->>>>>>> 3. Writeback thread flush inodeB and skip writing the dirty page as
->>>>>>>         wb_sync_req[DATA] > 0.
->>>>>>> 4. As none of the inodeB's page is marked as PAGECACHE_TAG_DIRTY, writeback
->>>>>>>         thread clear inodeB's dirty state.
->>>>>>> 5. Then inodeB is moved from b_io to b_dirty because of pages_skipped > 0
->>>>>>>         as checkpoint thread is stuck before dec dirty_pages.
->>>>>>>
->>>>>>> This patch collect correct pages_skipped according to the tag state in
->>>>>>> page tree of inode
->>>>>>>
->>>>>>> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
->>>>>>> Signed-off-by: Jing Xia <jing.xia@unisoc.com>
->>>>>>> ---
->>>>>>>      fs/f2fs/data.c | 4 +++-
->>>>>>>      1 file changed, 3 insertions(+), 1 deletion(-)
->>>>>>>
->>>>>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>>>>>> index f4fd6c246c9a..e98628e3868c 100644
->>>>>>> --- a/fs/f2fs/data.c
->>>>>>> +++ b/fs/f2fs/data.c
->>>>>>> @@ -3237,7 +3237,9 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
->>>>>>>      	return ret;
->>>>>>>      skip_write:
->>>>>>> -	wbc->pages_skipped += get_dirty_pages(inode);
->>>>>>> +	wbc->pages_skipped +=
->>>>>>> +		mapping_tagged(inode->i_mapping, PAGECACHE_TAG_DIRTY) ?
 >>>>>>
->>>>>> Is there any race condition to get 0, if there's any dirty page? IOWs, it
+>>>>>> Okay, that was not the case when I sent this patch originally.  We'll need to
+>>>>>> update this to support multiple devices.
 >>>>>
->>>>> Quoted from Jing Xia's explanation:
+>>>>> Chao/Eric, does this make sense?
 >>>>>
->>>>> [T:writeback]				[T:checkpoint]
+>>>>> --- a/fs/f2fs/data.c
+>>>>> +++ b/fs/f2fs/data.c
+>>>>> @@ -4070,11 +4070,10 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+>>>>>                  }
+>>>>>                  if (WARN_ON_ONCE(!__is_valid_data_blkaddr(map.m_pblk)))
+>>>>>                          return -EINVAL;
+>>>>> -               iomap->addr = blks_to_bytes(inode, map.m_pblk);
+>>>>>
+>>>>> -               if (WARN_ON_ONCE(f2fs_is_multi_device(F2FS_I_SB(inode))))
+>>>>> -                       return -EINVAL;
+>>>>> -               iomap->bdev = inode->i_sb->s_bdev;
+>>>>> +               iomap->bdev = map->m_multidev_dio ? map.m_bdev :
 >>>>
->>>> My bad, [1] should be here:
+>>>> correction:			map.m_multidev_dio
 >>>>
->>>> bio contains NodeA was plugged in writeback threads
->>>>
->>>> Thanks,
->>>>
->>>>> 					- do_writepages  -- sync write inodeB, inc wb_sync_req[DATA]
->>>>> 					 - f2fs_write_data_pages
->>>>> 					  - f2fs_write_single_data_page -- write last dirty page
->>>>> 					   - f2fs_do_write_data_page
->>>>> 					    - set_page_writeback  -- clear page dirty flag and
->>>>> 					    PAGECACHE_TAG_DIRTY tag in radix tree
->>>>> 					    - f2fs_outplace_write_data
->>>>> 					     - f2fs_update_data_blkaddr
->>>>> 					      - f2fs_wait_on_page_writeback -- wait NodeA to writeback here
->>>>> 					   - inode_dec_dirty_pages
->>>>
->>>>> bio contains NodeA was plugged in writeback threads
->>>>
->>>> [1]
->>>>
->>>> Thanks,
->>>>
->>>>> - writeback_sb_inodes
->>>>>      - writeback_single_inode
->>>>>       - do_writepages
->>>>>        - f2fs_write_data_pages -- skip writepages due to wb_sync_req[DATA]
->>>>>         - wbc->pages_skipped += get_dirty_pages() -- PAGECACHE_TAG_DIRTY is not set but get_dirty_pages() returns one
->>>>>      - requeue_inode -- requeue inode to wb->b_dirty queue due to non-zero.pages_skipped
 >>>
->>> So, my question was why this is the problem?
+>>> I guess so, but why doesn't f2fs_map_blocks() just always set m_bdev to the
+>>> correct block device?  What is the point of m_multidev_dio?
 >>
->> kworker will loop writebacking this requeued inode.
+>> It seems we can simply assign iomap->bdev = map.m_bdev, and remove
+>> map->m_multidev_dio.
 > 
-> Does it make a problem?
+> Ok, it was used in previous get_block flow, but I think it'd be worth to keep it
+> to show by f2fs_map_blocks tracepoint.
 
-The problem here is kworker will loop for ever.
+Yes, it was added for that.
 
 Thanks,
 
 > 
 >>
->> Thanks,
->>
 >>>
->>>>>
->>>>>> seems the current condition is just requeuing the inode as dirty, but next
->>>>>> flushing time will remove it from dirty list. Is this giving too much overheads?
->>>>>
->>>>> I prefer to let writeback thread call blk_flush_plug() after skipping
->>>>> writepages() due to wb_sync_req[DATA/NODE] check condition, thoughts?
->>>>>
->>>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>>>> index 9f754aaef558..b6e1ed73f8f5 100644
->>>>> --- a/fs/f2fs/data.c
->>>>> +++ b/fs/f2fs/data.c
->>>>> @@ -3087,6 +3087,8 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
->>>>>      			/* give a priority to WB_SYNC threads */
->>>>>      			if (atomic_read(&sbi->wb_sync_req[DATA]) &&
->>>>>      					wbc->sync_mode == WB_SYNC_NONE) {
->>>>> +				if (current->plug)
->>>>> +					blk_flush_plug(current->plug, false);
->>>>>      				done = 1;
->>>>>      				break;
->>>>>      			}
->>>>> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
->>>>> index 556fcd8457f3..dd9a817d8dab 100644
->>>>> --- a/fs/f2fs/node.c
->>>>> +++ b/fs/f2fs/node.c
->>>>> @@ -1946,6 +1946,8 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
->>>>>      			if (atomic_read(&sbi->wb_sync_req[NODE]) &&
->>>>>      					wbc->sync_mode == WB_SYNC_NONE) {
->>>>>      				done = 1;
->>>>> +				if (current->plug)
->>>>> +					blk_flush_plug(current->plug, false);
->>>>>      				break;
->>>>>      			}
->>>>>
->>>>>
->>>>>
->>>>> Thanks,
->>>>>
->>>>>>
->>>>>>> +		get_dirty_pages(inode) : 0;
->>>>>>>      	trace_f2fs_writepages(mapping->host, wbc, DATA);
->>>>>>>      	return 0;
->>>>>>>      }
->>>>>>> -- 
->>>>>>> 2.28.0
->>>>>
->>>>>
->>>>> _______________________________________________
->>>>> Linux-f2fs-devel mailing list
->>>>> Linux-f2fs-devel@lists.sourceforge.net
->>>>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
->>>>>
+>>> - Eric
+>>
+>>
+>> _______________________________________________
+>> Linux-f2fs-devel mailing list
+>> Linux-f2fs-devel@lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> 
 
 
 _______________________________________________
