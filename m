@@ -2,63 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC796469960
+	by mail.lfdr.de (Postfix) with ESMTPS id 675FC46995F
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Dec 2021 15:44:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1muFEb-0005fZ-FU; Mon, 06 Dec 2021 14:44:53 +0000
+	id 1muFEZ-0007i4-Kq; Mon, 06 Dec 2021 14:44:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1muFEZ-0005fN-8U
+ (envelope-from <chao@kernel.org>) id 1muFEY-0007ht-4o
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Dec 2021 14:44:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EfGS39SPwZTxdLPLjGtvuJ8EV+kqlwnlrNhIkc0tbY0=; b=jsy9tYnHwJ7QyfeQw3P2/DHytS
- kGbNF3VEkOc5aonv3sm/sg/mj2RXSmld9TXZFzifCSAY1FZzBnQaGo1gR7WNqKNp4aOqd1kBMtlBp
- duSUtI+LZXLVv7G//h9Bmt96J0oao71P3D7EimUPvidNO2+xGclNVZvyrb6Kt9h0x3cg=;
+ bh=Tik9/IqbGCAAxqUoPwWGtD5oSIRZbk2+n1YQ0SYYp4s=; b=DKSKN9Y/9nIcf7WDSrL+yqrZFY
+ QfAtXLI85xKWf3ECBC42L5J4LXZM+2GfRRVUJaVUdGk9GPwYFiRQ8Y33ja/Rpw/D5HClbd2Gyaggu
+ YfFUJrVjjvKTGWBgMwRASZgNb3Sg/ob8VKSk2DOJ05XFxL/N/XjhbufWx63P64jB/M30=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=EfGS39SPwZTxdLPLjGtvuJ8EV+kqlwnlrNhIkc0tbY0=; b=Q
- 3XfsVjVVEKpleBJ8/e+x+CJK7yB7Vw/Ke79Z5CIFpBK3otGtFqQm878P+Zk0kj2+bS8pOStJV+gQE
- AaNzCq0R2QDfaM0jGgEHnfrtkJPwBlG95C53JHI0ahyB0pQ+c9MUIk2hIvv+75pMcdk1wKtrUnLaB
- pXyHZTWU+1CoZzQo=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Tik9/IqbGCAAxqUoPwWGtD5oSIRZbk2+n1YQ0SYYp4s=; b=QNX9kY2qLw29kZllDNI/H3pR95
+ Z4RmPcowMvr05IxnWxWNiqWZ00sIuxRYQBg1MxkfDoN3XwbKzNL1KxtHpwyVM2eFW0U1hgFJTzpxA
+ 6FZccYS4vXM9zLJAyeTiflZF1ULyKRw9kUn8txAH/jStr1EjwHEWu25e4JwWnrtHnXqc=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1muFEY-0000fI-L2
+ id 1muFEY-0000fP-MG
  for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Dec 2021 14:44:51 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 64676612DD;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 065BB612E7
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  6 Dec 2021 14:44:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54F72C341C7;
  Mon,  6 Dec 2021 14:44:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C086C341C1;
- Mon,  6 Dec 2021 14:44:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1638801879;
- bh=jD7hTCqRrM5m/SGRU4q5TUNEzaYAGktc8wEkQCep70U=;
- h=From:To:Cc:Subject:Date:From;
- b=JyP7syxCBvz6OfIrqUdgMTUm4ChppcExoWsjjEAMnaTUJv9xSDjS1fC8J7HDyQTdw
- S2NTL1aPX+bwJLQFMEa0mWGjLAMNTOj/Kd7RI+3vxn1/0Brdy2tfx0Zm9roAOiA6QH
- 1Jxrxdnk1hwBUWCqj4eccyWNLfWvn17lXEHMnnraHSb7jJSR8PW2UwmDCnU6ZAQUyO
- wqQAvnuym4Kzf3QGh0lBX0j4viVwbSWXAH7O9ds5mPxdiQ5Vmqm5v3LCISaGnXRlNz
- M6r50lx74WB6XzAWf/1Yk0r5hgH5P6yhpvkPklfMvDKzBw03UvE5xOb/EsCuNBWyv8
- 6c3FEM0fOOsEA==
+ s=k20201202; t=1638801881;
+ bh=+wGjoWxtrdJzbDER7vNy2XoGsXgjIrVFYt/HaUrfQKY=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=hhTdYDSmLMO39Gk9mgAJAdhsGEzVXNyea1u1iSkFyZBCqmVHkbTtU+X3oFKi34UFX
+ ueXDyXf7y2ggUAr/pNFLZbJsTk0SyeQA/6IwYfvaD48iCZltyv4lvcOrQoGUyXQZUc
+ o4EQoCzIO5hx76W/OTtwIEyR7ZIepDip9Frak1sjL/9nMwzdxnvu2WnvQ8lQIvSa4a
+ V+RMr6QNLGlnq33iSPxEcwxWEDZCyauJFPvxVy6oFOERQNQ48Nn8Mg873XACgepRFS
+ fBSQaZ/c4BNo+V8OgWOS5vK0O8hazX8gIRhSK/IKsrvsFcee0Tm9HCabM39eXGANxa
+ coJpXyYw+mMYw==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Mon,  6 Dec 2021 22:44:19 +0800
-Message-Id: <20211206144421.3735-1-chao@kernel.org>
+Date: Mon,  6 Dec 2021 22:44:20 +0800
+Message-Id: <20211206144421.3735-2-chao@kernel.org>
 X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20211206144421.3735-1-chao@kernel.org>
+References: <20211206144421.3735-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
@@ -69,8 +72,8 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview: As report by Wenqing Liu in bugzilla:
  https://bugzilla.kernel.org/show_bug.cgi?id=215231
- - Overview kernel NULL pointer dereference triggered in folio_mark_dirty()
- when mount and operate on a crafted f2fs image 
+ If we enable CONFIG_F2FS_CHECK_FS config, and with fuzzed image attached
+ in above link, we will encounter panic when executing below script: 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -84,9 +87,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1muFEY-0000fI-L2
-Subject: [f2fs-dev] [PATCH 1/3] f2fs: fix to do sanity check on inode type
- during garbage collection
+X-Headers-End: 1muFEY-0000fP-MG
+Subject: [f2fs-dev] [PATCH 2/3] f2fs: fix to avoid panic in is_alive() if
+ metadata is inconsistent
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,8 +101,7 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Wenqing Liu <wenqingliu0120@gmail.com>, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -108,58 +110,51 @@ As report by Wenqing Liu in bugzilla:
 
 https://bugzilla.kernel.org/show_bug.cgi?id=215231
 
-- Overview
-kernel NULL pointer dereference triggered  in folio_mark_dirty() when mount and operate on a crafted f2fs image
-
-- Reproduce
-tested on kernel 5.16-rc3, 5.15.X under root
+If we enable CONFIG_F2FS_CHECK_FS config, and with fuzzed image attached
+in above link, we will encounter panic when executing below script:
 
 1. mkdir mnt
 2. mount -t f2fs tmp1.img mnt
 3. touch tmp
-4. cp tmp mnt
 
-F2FS-fs (loop0): sanity_check_inode: inode (ino=49) extent info [5942, 4294180864, 4] is incorrect, run fsck to fix
-F2FS-fs (loop0): f2fs_check_nid_range: out-of-range nid=31340049, run fsck to fix.
-BUG: kernel NULL pointer dereference, address: 0000000000000000
- folio_mark_dirty+0x33/0x50
- move_data_page+0x2dd/0x460 [f2fs]
- do_garbage_collect+0xc18/0x16a0 [f2fs]
- f2fs_gc+0x1d3/0xd90 [f2fs]
- f2fs_balance_fs+0x13a/0x570 [f2fs]
- f2fs_create+0x285/0x840 [f2fs]
- path_openat+0xe6d/0x1040
- do_filp_open+0xc5/0x140
- do_sys_openat2+0x23a/0x310
- do_sys_open+0x57/0x80
+F2FS-fs (loop11): mismatched blkaddr 5765 (source_blkaddr 1) in seg 3
+kernel BUG at fs/f2fs/gc.c:1042!
+ do_garbage_collect+0x90f/0xa80 [f2fs]
+ f2fs_gc+0x294/0x12a0 [f2fs]
+ f2fs_balance_fs+0x2c5/0x7d0 [f2fs]
+ f2fs_create+0x239/0xd90 [f2fs]
+ lookup_open+0x45e/0xa90
+ open_last_lookups+0x203/0x670
+ path_openat+0xae/0x490
+ do_filp_open+0xbc/0x160
+ do_sys_openat2+0x2f1/0x500
+ do_sys_open+0x5e/0xa0
+ __x64_sys_openat+0x28/0x40
 
-The root cause is for special file: e.g. character, block, fifo or socket file,
-f2fs doesn't assign address space operations pointer array for mapping->a_ops field,
-so, in a fuzzed image, SSA table indicates a data block belong to special file, when
-f2fs tries to migrate that block, it causes NULL pointer access once move_data_page()
-calls a_ops->set_dirty_page().
+Previously, f2fs tries to catch data inconcistency exception in between
+SSA and SIT table during GC, however once the exception is caught, it will
+call f2fs_bug_on to hang kernel, it's not needed, instead, let's set
+SBI_NEED_FSCK flag and skip migrating current block.
 
-Cc: stable@vger.kernel.org
-Reported-by: Wenqing Liu <wenqingliu0120@gmail.com>
+Fixes: bbf9f7d90f21 ("f2fs: Fix indefinite loop in f2fs_gc()")
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/gc.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ fs/f2fs/gc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index a946ce0ead34..e0bdc4361a9b 100644
+index e0bdc4361a9b..3e64b234df21 100644
 --- a/fs/f2fs/gc.c
 +++ b/fs/f2fs/gc.c
-@@ -1457,7 +1457,8 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
- 
- 		if (phase == 3) {
- 			inode = f2fs_iget(sb, dni.ino);
--			if (IS_ERR(inode) || is_bad_inode(inode))
-+			if (IS_ERR(inode) || is_bad_inode(inode) ||
-+					special_file(inode->i_mode))
- 				continue;
- 
- 			if (!down_write_trylock(
+@@ -1039,7 +1039,7 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 			if (!test_and_set_bit(segno, SIT_I(sbi)->invalid_segmap)) {
+ 				f2fs_err(sbi, "mismatched blkaddr %u (source_blkaddr %u) in seg %u",
+ 					 blkaddr, source_blkaddr, segno);
+-				f2fs_bug_on(sbi, 1);
++				set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			}
+ 		}
+ #endif
 -- 
 2.32.0
 
