@@ -2,88 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A01646B1DB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Dec 2021 05:30:52 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0A8446B218
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Dec 2021 06:07:44 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1muS7s-00063B-UD; Tue, 07 Dec 2021 04:30:48 +0000
+	id 1muShY-0005j0-U1; Tue, 07 Dec 2021 05:07:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <willy@infradead.org>) id 1muS7q-000634-Df
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Dec 2021 04:30:46 +0000
+ (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
+ id 1muShX-0005iu-OG
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Dec 2021 05:07:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wKd62R1O+n/b8+8p7dSshUv94xdrcZFmKMGZQmbSu/8=; b=WknO24DeACkdhKXyUjXaEcDGN2
- UEHk3zDcDjAMlQQ9kz3WKF0zN8UwvIy0sKEvbY5I3zfMbX6j1NOOMvV6hp1H/2Hl6amqeKc+EYJRo
- zaTgtBbgNBozWHkiFMqihC+uyNoDHyuOTxQSGWLMicVY3ASjCIrhcwMyfFnwRa/mF6Lg=;
+ bh=1U4QTsjwqwbeSIDZz4oSAV6Q/fe8kFlVDDn2MjQeiuA=; b=JpRsCAf0p7s9CDJsAJzIq8irSH
+ kyt/UhMziW264V9rsoGG59j42oS2jTvhTpRrxM2UuuL7ktM3GrxUeNJgWGlMD2/9FZse7Y7oncZ+b
+ Zsil3QcfY9XsWhFSzq+wngPlyO4+PwK8J6HYL4JFIMS1UtU5k9+4OOEpVA/JLqm17xuw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wKd62R1O+n/b8+8p7dSshUv94xdrcZFmKMGZQmbSu/8=; b=d44XsgWpVuMKVYdOF6RXZStQ67
- ZpCbCZPrF5bkg/Jl5YFVSRZYPWxFctG1wpjTk+MjUD0Od34EMZSY0xvj/B+3DMPPGqfS5pk/cbfsg
- OKMFs+UH//cGXvfFHgxbuXGOX+A5sgy5tTmdDodor50W75U5SMurBnaRQ7+/U3NBluYU=;
-Received: from casper.infradead.org ([90.155.50.34])
+ bh=1U4QTsjwqwbeSIDZz4oSAV6Q/fe8kFlVDDn2MjQeiuA=; b=dsE2cr2R3HHyXfk+XDpnR3gDGL
+ ShC/IRR8WeBxTywRJUbSFJJ2IXb4q/N8aUNZyCUaMLVpBBknASQKlzbnqN1MIIkVsyKjgVFrMzkME
+ JbqU7++t6t35X7yzkC+OMilZ72VJ1VC64AMvMGDR1aLEpY0qwVG1xQ0/SW3SeyNoP3dM=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1muS7p-006yRS-9B
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Dec 2021 04:30:46 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=wKd62R1O+n/b8+8p7dSshUv94xdrcZFmKMGZQmbSu/8=; b=A+hZR/vUX5VNCcHOMYNR+9q1Gf
- k+mL5iQ4ZZgSQyG7gkWT5RDAZptG15HEvq79LhxNskciPTWTgZ3Y81xJ/MaVB36m3RgXahYMiAeST
- m1NBgzCyRfNbClpRAt8Bta9nG61I0WAYpb9/iqGVBU2oKuMLnTfNTXZcyTEKw9ly1vCfjK8T9cCir
- 2v7MVV68LqwJwJjr2zOle6qCci0SQtipocH0Kk6KMLr6lJoUQAB1PIL6Y/8G213eMC2dOUNzZgKNp
- pTitwH6brwSE2Cj7kMvgaOw7yAqHTydQI21pBslbBvmx+FNqH2PQqF3M4H1cNN8iW+wB1TH37FyRF
- UZkuEhjA==;
-Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1muS7V-006w14-G0; Tue, 07 Dec 2021 04:30:25 +0000
-Date: Tue, 7 Dec 2021 04:30:25 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Andrew Morton <akpm@linux-foundation.org>
-Message-ID: <Ya7jYRDwQqftGLtW@casper.infradead.org>
-References: <0000000000005f297e05d24f05f6@google.com>
- <20211206175631.5d0c3caefa96f0479f0fc2e8@linux-foundation.org>
+ id 1muShW-006zf4-Vz
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Dec 2021 05:07:39 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by sin.source.kernel.org (Postfix) with ESMTPS id 4C2DBCE194B
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  7 Dec 2021 04:49:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7E18DC341C3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  7 Dec 2021 04:49:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1638852574;
+ bh=1U4QTsjwqwbeSIDZz4oSAV6Q/fe8kFlVDDn2MjQeiuA=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=B737X2atuq8de7RRuvEDwbmF5AdDaHqJm6FNYXl8HwAg7MZr1wFQCgCLr8Bj50j9v
+ 1a7fur4Dp4TyyZGNBEathN8EaI33dyKMENENDkMeCZUGiTeIF5B2S+liDr7Q3odvA8
+ eRDIyEM4M0zEQGzlwI+11rQaJNSarsbg9go5DGrsmgD55FTz1PARbqUuNocngK6tk/
+ HRL0Zgm1OV96zkAYcSkespk95VZzHqXBi2e8ykq9viKim8gYHN2Opf3f+ee8WnEayw
+ YXyteiZH8Er7/Zxf3phNhzT7VQgPqXBVZYtk/fxIcsC4cHYIpYCR8NaSkBG9zhCs04
+ lGTuKp36DIKgQ==
+Received: by pdx-korg-bugzilla-2.web.codeaurora.org (Postfix, from userid 48)
+ id 5257A60E4C; Tue,  7 Dec 2021 04:49:34 +0000 (UTC)
+From: bugzilla-daemon@bugzilla.kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 07 Dec 2021 04:49:33 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: wenqingliu0120@gmail.com
+X-Bugzilla-Status: ASSIGNED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-215231-202145-FKfJ0jaWf9@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-215231-202145@https.bugzilla.kernel.org/>
+References: <bug-215231-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20211206175631.5d0c3caefa96f0479f0fc2e8@linux-foundation.org>
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Dec 06, 2021 at 05:56:31PM -0800,
- Andrew Morton wrote: > On Sat, 04 Dec 2021 01:55:17 -0800 syzbot
- <syzbot+7cd473c2cac13fd2dd72@syzkaller.appspotmail.com>
- wrote: > > > Hello, > > > > syzbot fo [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=215231 ---
+ Comment
+ #2 from Wenqing Liu (wenqingliu0120@gmail.com) --- Thank you for your prompt
+ reply.The bug disappeared after patched the kernel with the fixes. 
+ Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1muS7p-006yRS-9B
-Subject: Re: [f2fs-dev] [syzbot] BUG: unable to handle kernel NULL pointer
- dereference in folio_mark_dirty
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1muShW-006zf4-Vz
+Subject: [f2fs-dev] [Bug 215231] kernel NULL pointer dereference triggered
+ in folio_mark_dirty() when mount and operate on a crafted f2fs image
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,122 +119,21 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: syzbot <syzbot+7cd473c2cac13fd2dd72@syzkaller.appspotmail.com>,
- linux-mm@kvack.org, syzkaller-bugs@googlegroups.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Dec 06, 2021 at 05:56:31PM -0800, Andrew Morton wrote:
-> On Sat, 04 Dec 2021 01:55:17 -0800 syzbot <syzbot+7cd473c2cac13fd2dd72@syzkaller.appspotmail.com> wrote:
-> 
-> > Hello,
-> > 
-> > syzbot found the following issue on:
-> > 
-> > HEAD commit:    58e1100fdc59 MAINTAINERS: co-maintain random.c
-> > git tree:       upstream
-> > console output: https://syzkaller.appspot.com/x/log.txt?x=1362881eb00000
-> > kernel config:  https://syzkaller.appspot.com/x/.config?x=e9ea28d2c3c2c389
-> > dashboard link: https://syzkaller.appspot.com/bug?extid=7cd473c2cac13fd2dd72
-> > compiler:       Debian clang version 11.0.1-2, GNU ld (GNU Binutils for Debian) 2.35.2
-> > 
-> > Unfortunately, I don't have any reproducer for this issue yet.
-> > 
-> > IMPORTANT: if you fix the issue, please add the following tag to the commit:
-> > Reported-by: syzbot+7cd473c2cac13fd2dd72@syzkaller.appspotmail.com
-> > 
-> > BUG: kernel NULL pointer dereference, address: 0000000000000000
-> 
-> cc linux-f2fs-devel@lists.sourceforge.net
-> 
-> And willy, who might help with diagnosing this.  But it does seem that
-> f2fs got itself a NULL page* then put it in places where it shouldn't have.
+https://bugzilla.kernel.org/show_bug.cgi?id=215231
 
-Oh -- it's not a NULL data pointer.  It's a NULL instruction pointer.
+--- Comment #2 from Wenqing Liu (wenqingliu0120@gmail.com) ---
+Thank you for your prompt reply.The bug disappeared after patched the kernel
+with the fixes.
 
-> > #PF: supervisor instruction fetch in kernel mode
-> > #PF: error_code(0x0010) - not-present page
-> > PGD 70764067 P4D 70764067 PUD 0 
-> > Oops: 0010 [#1] PREEMPT SMP KASAN
-> > CPU: 1 PID: 6541 Comm: syz-executor.3 Not tainted 5.16.0-rc3-syzkaller #0
-> > Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/01/2011
-> > RIP: 0010:0x0
-> > Code: Unable to access opcode bytes at RIP 0xffffffffffffffd6.
-> > RSP: 0018:ffffc900027ff7f8 EFLAGS: 00010246
-> > RAX: 1ffffffff14fef03 RBX: ffffffff8a7f7818 RCX: ffff88801b40d700
-> > RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffea0002790ec0
-> > RBP: dffffc0000000000 R08: ffffffff81b0fa16 R09: fffff940004f21d9
-> > R10: fffff940004f21d9 R11: 0000000000000000 R12: ffff88806c11c7b0
-> > R13: 0000000000000000 R14: 1ffffd40004f21d9 R15: ffffea0002790ec0
-> > FS:  0000555557165400(0000) GS:ffff8880b9b00000(0000) knlGS:0000000000000000
-> > CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> > CR2: ffffffffffffffd6 CR3: 0000000030d85000 CR4: 00000000003526e0
-> > Call Trace:
-> >  <TASK>
-> >  folio_mark_dirty+0x136/0x270 mm/page-writeback.c:2639
+-- 
+You may reply to this email to add a comment.
 
-        if (likely(mapping)) {
-...
-                if (folio_test_reclaim(folio))
-                        folio_clear_reclaim(folio);
-                return mapping->a_ops->set_page_dirty(&folio->page);
-
-how do we get to a NULL ->set_page_dirty for a metadata page's
-mapping->a_ops?  This is definitely an f2fs expert question.
-
-> >  f2fs_update_meta_page+0x4b/0x380 fs/f2fs/segment.c:2485
-> >  do_checkpoint fs/f2fs/checkpoint.c:1513 [inline]
-> >  f2fs_write_checkpoint+0x31ad/0x5430 fs/f2fs/checkpoint.c:1674
-> >  f2fs_issue_checkpoint+0x361/0x4e0
-> >  sync_filesystem+0x19c/0x1f0 fs/sync.c:63
-> >  generic_shutdown_super+0x6b/0x300 fs/super.c:448
-> >  kill_block_super+0x79/0xd0 fs/super.c:1397
-> >  kill_f2fs_super+0x2f9/0x3c0 fs/f2fs/super.c:4478
-> >  deactivate_locked_super+0xa7/0xf0 fs/super.c:335
-> >  cleanup_mnt+0x462/0x510 fs/namespace.c:1137
-> >  task_work_run+0x146/0x1c0 kernel/task_work.c:164
-> >  tracehook_notify_resume include/linux/tracehook.h:189 [inline]
-> >  exit_to_user_mode_loop kernel/entry/common.c:175 [inline]
-> >  exit_to_user_mode_prepare+0x209/0x220 kernel/entry/common.c:207
-> >  __syscall_exit_to_user_mode_work kernel/entry/common.c:289 [inline]
-> >  syscall_exit_to_user_mode+0x2e/0x70 kernel/entry/common.c:300
-> >  do_syscall_64+0x53/0xd0 arch/x86/entry/common.c:86
-> >  entry_SYSCALL_64_after_hwframe+0x44/0xae
-> > RIP: 0033:0x7f6cfdd59f57
-> > Code: ff ff ff f7 d8 64 89 01 48 83 c8 ff c3 66 0f 1f 44 00 00 31 f6 e9 09 00 00 00 66 0f 1f 84 00 00 00 00 00 b8 a6 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 bc ff ff ff f7 d8 64 89 01 48
-> > RSP: 002b:00007fffcbddcad8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a6
-> > RAX: 0000000000000000 RBX: 0000000000000000 RCX: 00007f6cfdd59f57
-> > RDX: 00007fffcbddcbac RSI: 000000000000000a RDI: 00007fffcbddcba0
-> > RBP: 00007fffcbddcba0 R08: 00000000ffffffff R09: 00007fffcbddc970
-> > R10: 0000555557166903 R11: 0000000000000246 R12: 00007f6cfddb2105
-> > R13: 00007fffcbdddc60 R14: 0000555557166810 R15: 00007fffcbdddca0
-> >  </TASK>
-> > Modules linked in:
-> > CR2: 0000000000000000
-> > ---[ end trace 08eda5a5e35b48a0 ]---
-> > RIP: 0010:0x0
-> > Code: Unable to access opcode bytes at RIP 0xffffffffffffffd6.
-> > RSP: 0018:ffffc900027ff7f8 EFLAGS: 00010246
-> > RAX: 1ffffffff14fef03 RBX: ffffffff8a7f7818 RCX: ffff88801b40d700
-> > RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffea0002790ec0
-> > RBP: dffffc0000000000 R08: ffffffff81b0fa16 R09: fffff940004f21d9
-> > R10: fffff940004f21d9 R11: 0000000000000000 R12: ffff88806c11c7b0
-> > R13: 0000000000000000 R14: 1ffffd40004f21d9 R15: ffffea0002790ec0
-> > FS:  0000555557165400(0000) GS:ffff8880b9b00000(0000) knlGS:0000000000000000
-> > CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> > CR2: ffffffffffffffd6 CR3: 0000000030d85000 CR4: 00000000003526e0
-> > 
-> > 
-> > ---
-> > This report is generated by a bot. It may contain errors.
-> > See https://goo.gl/tpsmEJ for more information about syzbot.
-> > syzbot engineers can be reached at syzkaller@googlegroups.com.
-> > 
-> > syzbot will keep track of this issue. See:
-> > https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
