@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF24146B1D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Dec 2021 05:20:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A01646B1DB
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Dec 2021 05:30:52 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1muRxK-0005Zo-8J; Tue, 07 Dec 2021 04:19:55 +0000
+	id 1muS7s-00063B-UD; Tue, 07 Dec 2021 04:30:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <willy@infradead.org>) id 1muRxI-0005Zh-1L
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Dec 2021 04:19:53 +0000
+ (envelope-from <willy@infradead.org>) id 1muS7q-000634-Df
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Dec 2021 04:30:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eI/E/scurWRpXvQ4y7yg58dqUt9tO+R5AEVz3Yib1pI=; b=AeCz0qQaxETOVfBDTJyQkZ0gVK
- bppKAMJNzLcvcu8hCFtc0qc8Y6DifBgOU8lsPry626dQ05bqZBKi2+mc8XAMxDX0pkWAs9tUB/5kE
- RoFlXGeXw8aMFLofcFiUKixHiwd2gZqiByl+cNNzWtbbpVj9xZ0F6Qmuf4EBpmx6Sr2s=;
+ bh=wKd62R1O+n/b8+8p7dSshUv94xdrcZFmKMGZQmbSu/8=; b=WknO24DeACkdhKXyUjXaEcDGN2
+ UEHk3zDcDjAMlQQ9kz3WKF0zN8UwvIy0sKEvbY5I3zfMbX6j1NOOMvV6hp1H/2Hl6amqeKc+EYJRo
+ zaTgtBbgNBozWHkiFMqihC+uyNoDHyuOTxQSGWLMicVY3ASjCIrhcwMyfFnwRa/mF6Lg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eI/E/scurWRpXvQ4y7yg58dqUt9tO+R5AEVz3Yib1pI=; b=ObzPPAk9X4zvq+/NqZeRQxXRWx
- oM48iTpZsy8fJ5pJJUsQFBhQOjdzhTqS9SxGVdAuMhJuvm6ffqzwyfzOOztRARQIY+3aoX632QMbl
- EiLVfkWrw1nToGvk/cdnoeLvLWvcCBsk6/rD/is0HDX2CKNHgNtu+IkgU2azx4i9DqlM=;
+ bh=wKd62R1O+n/b8+8p7dSshUv94xdrcZFmKMGZQmbSu/8=; b=d44XsgWpVuMKVYdOF6RXZStQ67
+ ZpCbCZPrF5bkg/Jl5YFVSRZYPWxFctG1wpjTk+MjUD0Od34EMZSY0xvj/B+3DMPPGqfS5pk/cbfsg
+ OKMFs+UH//cGXvfFHgxbuXGOX+A5sgy5tTmdDodor50W75U5SMurBnaRQ7+/U3NBluYU=;
 Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1muRxG-0007zH-Ri
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Dec 2021 04:19:53 +0000
+ id 1muS7p-006yRS-9B
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Dec 2021 04:30:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=eI/E/scurWRpXvQ4y7yg58dqUt9tO+R5AEVz3Yib1pI=; b=DsjLAg+kppkmLxuifRzHc7NCy+
- 7q/TbExCf1+cP/NGmcZzF7pi4pa7Ey+X7+mffz+Tr+PYm9mr4ADH4yTGHSH+HpJ2qQu4roIj9FqW5
- w7bF7HvrSbUxvMKTOVJp/5gd4xvURrn2OLxGlbXPXLQ/BKWvFPglN9+QB8fRxvGMGeFBriL2P1uGn
- dwpdvovNse2yinWIkp31hKT/ImTWfI622SNrPXR7zK8y6L3ncuo6ONQ+Hw2MwoyHa45nqvpzRlJ6i
- VhmpLM/Qhr04X1NKE7tPOvcdfoouDhhUJHMYofR81sWqMfQYyFg5bXnPTx08j5LeUEicumKjR7Bgc
- q7o/Blcw==;
+ bh=wKd62R1O+n/b8+8p7dSshUv94xdrcZFmKMGZQmbSu/8=; b=A+hZR/vUX5VNCcHOMYNR+9q1Gf
+ k+mL5iQ4ZZgSQyG7gkWT5RDAZptG15HEvq79LhxNskciPTWTgZ3Y81xJ/MaVB36m3RgXahYMiAeST
+ m1NBgzCyRfNbClpRAt8Bta9nG61I0WAYpb9/iqGVBU2oKuMLnTfNTXZcyTEKw9ly1vCfjK8T9cCir
+ 2v7MVV68LqwJwJjr2zOle6qCci0SQtipocH0Kk6KMLr6lJoUQAB1PIL6Y/8G213eMC2dOUNzZgKNp
+ pTitwH6brwSE2Cj7kMvgaOw7yAqHTydQI21pBslbBvmx+FNqH2PQqF3M4H1cNN8iW+wB1TH37FyRF
+ UZkuEhjA==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1muRww-006vYD-9T; Tue, 07 Dec 2021 04:19:30 +0000
-Date: Tue, 7 Dec 2021 04:19:30 +0000
+ Hat Linux)) id 1muS7V-006w14-G0; Tue, 07 Dec 2021 04:30:25 +0000
+Date: Tue, 7 Dec 2021 04:30:25 +0000
 From: Matthew Wilcox <willy@infradead.org>
 To: Andrew Morton <akpm@linux-foundation.org>
-Message-ID: <Ya7g0qoH9ihhxDM4@casper.infradead.org>
+Message-ID: <Ya7jYRDwQqftGLtW@casper.infradead.org>
 References: <0000000000005f297e05d24f05f6@google.com>
  <20211206175631.5d0c3caefa96f0479f0fc2e8@linux-foundation.org>
 MIME-Version: 1.0
@@ -66,9 +66,9 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On Mon, Dec 06, 2021 at 05:56:31PM -0800,
- Andrew Morton wrote:
- > > BUG: kernel NULL pointer dereference, address: 0000000000000000 > > cc
- linux-f2fs-devel@lists.sourceforge.net > > And willy, who migh [...] 
+ Andrew Morton wrote: > On Sat, 04 Dec 2021 01:55:17 -0800 syzbot
+ <syzbot+7cd473c2cac13fd2dd72@syzkaller.appspotmail.com>
+ wrote: > > > Hello, > > > > syzbot fo [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -81,7 +81,7 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1muRxG-0007zH-Ri
+X-Headers-End: 1muS7p-006yRS-9B
 Subject: Re: [f2fs-dev] [syzbot] BUG: unable to handle kernel NULL pointer
  dereference in folio_mark_dirty
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -103,6 +103,24 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On Mon, Dec 06, 2021 at 05:56:31PM -0800, Andrew Morton wrote:
+> On Sat, 04 Dec 2021 01:55:17 -0800 syzbot <syzbot+7cd473c2cac13fd2dd72@syzkaller.appspotmail.com> wrote:
+> 
+> > Hello,
+> > 
+> > syzbot found the following issue on:
+> > 
+> > HEAD commit:    58e1100fdc59 MAINTAINERS: co-maintain random.c
+> > git tree:       upstream
+> > console output: https://syzkaller.appspot.com/x/log.txt?x=1362881eb00000
+> > kernel config:  https://syzkaller.appspot.com/x/.config?x=e9ea28d2c3c2c389
+> > dashboard link: https://syzkaller.appspot.com/bug?extid=7cd473c2cac13fd2dd72
+> > compiler:       Debian clang version 11.0.1-2, GNU ld (GNU Binutils for Debian) 2.35.2
+> > 
+> > Unfortunately, I don't have any reproducer for this issue yet.
+> > 
+> > IMPORTANT: if you fix the issue, please add the following tag to the commit:
+> > Reported-by: syzbot+7cd473c2cac13fd2dd72@syzkaller.appspotmail.com
+> > 
 > > BUG: kernel NULL pointer dereference, address: 0000000000000000
 > 
 > cc linux-f2fs-devel@lists.sourceforge.net
@@ -110,20 +128,7 @@ On Mon, Dec 06, 2021 at 05:56:31PM -0800, Andrew Morton wrote:
 > And willy, who might help with diagnosing this.  But it does seem that
 > f2fs got itself a NULL page* then put it in places where it shouldn't have.
 
-I'm surprised it got that far.
-
-void f2fs_update_meta_page(struct f2fs_sb_info *sbi,
-                                        void *src, block_t blk_addr)
-{
-        struct page *page = f2fs_grab_meta_page(sbi, blk_addr);
-
-        memcpy(page_address(page), src, PAGE_SIZE);
-        set_page_dirty(page);
-        f2fs_put_page(page, 1);
-}
-
-How does page_address(NULL) not crash first?  Or return an address that
-can be the target of a memcpy()?
+Oh -- it's not a NULL data pointer.  It's a NULL instruction pointer.
 
 > > #PF: supervisor instruction fetch in kernel mode
 > > #PF: error_code(0x0010) - not-present page
@@ -145,6 +150,16 @@ can be the target of a memcpy()?
 > > Call Trace:
 > >  <TASK>
 > >  folio_mark_dirty+0x136/0x270 mm/page-writeback.c:2639
+
+        if (likely(mapping)) {
+...
+                if (folio_test_reclaim(folio))
+                        folio_clear_reclaim(folio);
+                return mapping->a_ops->set_page_dirty(&folio->page);
+
+how do we get to a NULL ->set_page_dirty for a metadata page's
+mapping->a_ops?  This is definitely an f2fs expert question.
+
 > >  f2fs_update_meta_page+0x4b/0x380 fs/f2fs/segment.c:2485
 > >  do_checkpoint fs/f2fs/checkpoint.c:1513 [inline]
 > >  f2fs_write_checkpoint+0x31ad/0x5430 fs/f2fs/checkpoint.c:1674
