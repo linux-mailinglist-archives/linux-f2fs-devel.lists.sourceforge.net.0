@@ -2,95 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BE8A46F34E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Dec 2021 19:43:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 62DF346F968
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Dec 2021 03:57:23 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mvONc-0006uG-FL; Thu, 09 Dec 2021 18:42:56 +0000
+	id 1mvW61-0002d5-6k; Fri, 10 Dec 2021 02:57:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1mvONa-0006u5-Cl
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Dec 2021 18:42:54 +0000
+ (envelope-from <mkt@wondfobiotech.com>) id 1mvW5z-0002cy-K3
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Dec 2021 02:57:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Subject:Content-Type:MIME-Version:Message-ID:
+ Reply-To:From:Date:To:Sender:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gHY0dRvQC5JItuHB0carmdPNQ5S4IcJkVBfqPccw2Ak=; b=Mn0maeNAO7ikAjRQguXojqDlFq
- Wk1+L0fQyQ9Cc3w9CuWDfuUK2TG6quuVO/3O5tJJQX/ma74EL/AzgC6imHxdpjNryeOKTDT0k3ys9
- yvmivGWHdsjBR0OuvhX4QqBpAh+tNpNcBMBUZsnt79sTHBgdn/4QqSlUHYs0xZ6qTKmo=;
+ bh=m29ACLOIXPQ4NO6pJsbECjUACG6t8x1wraUkR6NdO48=; b=FRuAe/ovZBM/uaC2bPujiuk+yJ
+ yhrXZwyCskVRG5E+DHQybjvKUsSRVXeCjRs6CoO6dZ3F3ChGttqFn/cdRUF4eUpjenrrwPP0l3lgZ
+ 2fvz1eRruUkPQoqRmSp4BxMu55vpYtVVXd39OhPNMRC0yIvrnPvN0LKcnOTEg/aA1jHM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ h=Subject:Content-Type:MIME-Version:Message-ID:Reply-To:From:Date:To:Sender
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=gHY0dRvQC5JItuHB0carmdPNQ5S4IcJkVBfqPccw2Ak=; b=i
- /YE7ZTPgKzlmUYmS+GijWSQnYLTmcr5K7QLntmyuHsr2tJv5yeADOTU56qZT48MBoE+tkXeGDWOyJ
- snUc84GEL+X/v2ioT2z0w5Aa2weadp9FHmtqKeYNMuGrR9ihS/aR6aGFlgRKosb63+wnIpvDnb2L+
- 6RowfVLYnytYxMhw=;
-Received: from sin.source.kernel.org ([145.40.73.55])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=m29ACLOIXPQ4NO6pJsbECjUACG6t8x1wraUkR6NdO48=; b=Q
+ uZWu6YRTxhqrK4H+oUXUe+Rb5/xzvaTKyt2N4cijoQIihiFzl8yBilyFyuhHLx2TVcytYFX1AV0+q
+ yO36fnsxWy5KqHhN2TiqgBhjujXf+DIXzDngMfdu81j8I/arDBpotBxYbNsibohfHegjTabp6jn8d
+ s4G4GkdBQ7pMJeHc=;
+Received: from discountvideocommercials.com ([192.129.175.112])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mvONV-00AHE7-Vh
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Dec 2021 18:42:54 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 7A0B2CE27AF
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  9 Dec 2021 18:42:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97946C004DD;
- Thu,  9 Dec 2021 18:42:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1639075356;
- bh=QiKstchJv+BrfI7jqC+XbVfFY9A5AR8xbhxUveQsJ84=;
- h=From:To:Cc:Subject:Date:From;
- b=RsQ6rNaDnRFnzSOu5reHuT5fA0es2TDMLC/VPNkc+94ULWCynlolNYOn/jz4UkaSz
- KcoLCkFBv5CQPqtf3i/tOQVipMZp32kp/BjOw2qUgp4CXPIQGFdxh1cNLy3GhXQRvH
- hirZ2p7YC13HbZBrZ/yCfgWxx6xGGCcYQNVt7zpu0BEGPmLEN1v+qKTSrDSWJ4PvCm
- lJX60yzsL4Zagdhztx9PFehYA8QUAOYV6LiOtkXEtqtBUqKMPQX1mTcodxFuesp82j
- tTdiqmzoG6a8ucKYmIxjLYUvLx7+G6mL4nWaKJKbRuVkTPcyPqt22ATNgZDxFIks+K
- eBlSFnAGbiNng==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Thu,  9 Dec 2021 10:42:34 -0800
-Message-Id: <20211209184234.2583205-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.34.1.173.g76aa8bc2d0-goog
+ id 1mvW5y-0006w8-U5
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Dec 2021 02:57:15 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=marketing-products.net; s=default; h=Content-Type:MIME-Version:Message-ID:
+ Reply-To:From:Date:Subject:To:Sender:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=m29ACLOIXPQ4NO6pJsbECjUACG6t8x1wraUkR6NdO48=; b=MVHIh+3MFz+BgVrwxm/501d42d
+ 35YdMLyPkPhUHXtI/1oNscif9xpl5+b1ptfbYmHykSDgEDcVyWrpeJ0nt3lF2Tijx3VQX5kD+n8Le
+ nvwOFlwrh4yE6UAuooEHywVtY9bzXCgeKRslh0Z6UYG6xurElWthFcIZOMZ+rmURQV0s8zphsJWyT
+ u6OtU03ZXyhjNaDExjFJ3gcpnWbl7lM4PaO35XE77tSh1rZz7KSgVk/Um2dc9RW1TI175kfNiN2Y1
+ VcTjiV8YTVGNLXQaHGIXsVxkAd8uwmivwzV+G+TsICWlcmCBtXZoH6TT6ky4clwAiHp+SigvQTzPm
+ t8G501sg==;
+Received: from marketin by hwsrv-652951.hostwindsdns.com with local (Exim
+ 4.94.2) (envelope-from <mkt@wondfobiotech.com>) id 1mvW5t-0006nk-0W
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Dec 2021 02:57:09 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
+X-PHP-Script: marketing-products.net/wp-content/plugins/fabklhqici/vczstmtmvn.php for
+ 84.38.135.152
+X-PHP-Originating-Script: 1012:vczstmtmvn.php(1) : eval()'d code(1) : eval()'d
+ code(286) : eval()'d code(1) : eval()'d code
+Date: Fri, 10 Dec 2021 02:57:08 +0000
+From: marketing <mkt@wondfobiotech.com>
+Message-ID: <b4c456350fd69d4da68567e818ea9ab5@marketing-products.net>
 MIME-Version: 1.0
-X-Spam-Score: -0.9 (/)
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - hwsrv-652951.hostwindsdns.com
+X-AntiAbuse: Original Domain - lists.sourceforge.net
+X-AntiAbuse: Originator/Caller UID/GID - [1012 992] / [47 12]
+X-AntiAbuse: Sender Address Domain - wondfobiotech.com
+X-Get-Message-Sender-Via: hwsrv-652951.hostwindsdns.com: authenticated_id:
+ marketin/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: hwsrv-652951.hostwindsdns.com: marketin
+X-Source: 
+X-Source-Args: /opt/cpanel/ea-php71/root/usr/bin/php-cgi 
+X-Source-Dir: marketing-products.net:/public_html/wp-content/plugins/fabklhqici
+X-Spam-Score: 8.2 (++++++++)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
+ has identified this incoming email as possible spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Android OTA failed due to SBI_NEED_FSCK flag when pinning
- the file. Let's avoid it since we can do in-place-updates. Signed-off-by:
- Jaegeuk Kim <jaegeuk@kernel.org> Change-Id:
- I3fd33c984417c10b38e23de6cec017b03d588945
- --- fs/f2fs/data.c | 7 +++++-- fs/f2fs/file.c | 10 +++++----- 2 files changed, 
- 10 insertions(+), 7 [...] 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview:  Warm greetings from Guangzhou Wondfo Biotech Co., Ltd. We
+ are selling rapid test kit and it plays an important role for anti COVID-19.
+ Please contact us freely if you need rapid test kit or gloves , mask and
+ so on. Founded since 1992, Wondfo now has a wid [...] 
+ Content analysis details:   (8.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.4 NO_DNS_FOR_FROM        DNS: Envelope sender has no MX or A DNS records
+ 0.8 DKIM_ADSP_NXDOMAIN     No valid author signature and domain not in
+ DNS
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mvONV-00AHE7-Vh
-Subject: [f2fs-dev] [PATCH] f2fs: avoid EINVAL by SBI_NEED_FSCK when pinning
- a file
+ 1.5 PDS_PHP_EVAL           PHP header shows eval'd code
+ 3.0 PHP_ORIG_SCRIPT_EVAL   From suspicious PHP source
+ 0.0 PHP_SCRIPT             Sent by PHP script
+ 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+X-VA-Spam-Flag: YES
+X-Spam-Flag: YES
+X-Headers-End: 1mvW5y-0006w8-U5
+Subject: [f2fs-dev] [SPAM] Rapid test kit supplier
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,75 +114,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Reply-To: wondfotestkit@hotmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Android OTA failed due to SBI_NEED_FSCK flag when pinning the file. Let's avoid
-it since we can do in-place-updates.
+Warm greetings from Guangzhou Wondfo Biotech Co., Ltd.
+ 
+We are selling rapid test kit and it plays an important role for anti COVID-19. Please contact us freely if you need rapid test kit or gloves , mask and so on.
+Founded since 1992, Wondfo now has a wide range of products for the rapid identification of cardiovascular diseases, inflammation, tumor, infectious diseases, drug abuse, pregnancy, and so on, widely sold to 140  countries and regions
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-Change-Id: I3fd33c984417c10b38e23de6cec017b03d588945
----
- fs/f2fs/data.c |  7 +++++--
- fs/f2fs/file.c | 10 +++++-----
- 2 files changed, 10 insertions(+), 7 deletions(-)
+if anything you need, kindly let me know. We can fight over diseases together !
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index a9652a8e669b..40c0d1426a11 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2525,6 +2525,11 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 
-+	/* The below cases were checked when setting it. */
-+	if (f2fs_is_pinned_file(inode))
-+		return false;
-+	if (fio && is_sbi_flag_set(sbi, SBI_NEED_FSCK))
-+		return true;
- 	if (f2fs_lfs_mode(sbi))
- 		return true;
- 	if (S_ISDIR(inode->i_mode))
-@@ -2533,8 +2538,6 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
- 		return true;
- 	if (f2fs_is_atomic_file(inode))
- 		return true;
--	if (is_sbi_flag_set(sbi, SBI_NEED_FSCK))
--		return true;
- 
- 	/* swap file is migrating in aligned write mode */
- 	if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index a15f8ba239f0..5ec6bef3937f 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -3145,17 +3145,17 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
- 
- 	inode_lock(inode);
- 
--	if (f2fs_should_update_outplace(inode, NULL)) {
--		ret = -EINVAL;
--		goto out;
--	}
--
- 	if (!pin) {
- 		clear_inode_flag(inode, FI_PIN_FILE);
- 		f2fs_i_gc_failures_write(inode, 0);
- 		goto done;
- 	}
- 
-+	if (f2fs_should_update_outplace(inode, NULL)) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
- 	if (f2fs_pin_file_control(inode, false)) {
- 		ret = -EAGAIN;
- 		goto out;
--- 
-2.34.1.173.g76aa8bc2d0-goog
+Thanks and regards
+Xiulan Jingyi
+
+Guangzhou Wondfo Biotech Co., Ltd
+Phone :( 86) 400-831-8768 
+Fax: ( 86) 400-811-8797
+Address :No.8 Lizhishan Road, Science City, Luogang District,Guangzhou, China
+Website: www.wondfo.com.cn
 
 
 
