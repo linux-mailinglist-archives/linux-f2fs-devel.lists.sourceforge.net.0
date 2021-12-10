@@ -2,110 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3976A470303
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Dec 2021 15:41:29 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1465C47035F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Dec 2021 16:00:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mvh5S-0004eG-GP; Fri, 10 Dec 2021 14:41:26 +0000
+	id 1mvhNR-0005Yi-1z; Fri, 10 Dec 2021 15:00:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1mvh5R-0004e8-Ex
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Dec 2021 14:41:25 +0000
+ (envelope-from <chao@kernel.org>) id 1mvhNP-0005Yc-Ch
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Dec 2021 14:59:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dYHBfTSaKjYe70bHhDmETwJhRNMgmq/E9/DdmQcq+OM=; b=lYJKdzf6KzziIMqlBq3TLpAYVb
- 9REugMgHq0wBKroRT4cB9LVGaxl4zFMAFQl9dZLGgjYxQsA69Od5EUO44+lYXdBbyfA59RqPO7SW3
- jhA9u6lot9bbdi/mvI4oFSb+tMl7XDuXMelLMHKMYu3q6fil3rxVyZQm1qbvvrZB+eCA=;
+ bh=cvTezRuWua0J0rF6cdDR0KmEAscIr3w008OxOrzmm14=; b=flQaJIfauQqr4sp0uqC82PVUgq
+ 9S/R1JqMvpyjcjRmI5oHt4mqVioUYz72AXRwlqx1ki480/f8PpK48ed1SAXpqaJlf5n1IO22mezYH
+ 0lSaEpvOdOIzC1rK8Vd7jmTNjWmtIJCVPbAjtSblhpiVWo9nDg0vMVFq7G/ZMX26x82s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dYHBfTSaKjYe70bHhDmETwJhRNMgmq/E9/DdmQcq+OM=; b=FSzRfSUsgTpTCQTwDKg+KMB+HU
- 7xMMR8Mcb+UGLERWXtx/DU21vk3lNig1jaxTnb0j7sN4f5dRaafL2VTEKOO0NkGo9iaxS7uan6r+y
- mB1AGQ+zfq8I47G8VyDtyTcrB+K75R5KPYdDdBcDRl96iEP0wWGn8JrFtGeSDwxEb2ew=;
-Received: from sin.source.kernel.org ([145.40.73.55])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=cvTezRuWua0J0rF6cdDR0KmEAscIr3w008OxOrzmm14=; b=QDdbf4PDnVJEG19ivK7jwNoj8P
+ Evm94hpCnZmFyxLlaV2HrQRauq4hWBXG3p2ufsAfZPc2add8frSVYObdcUSQFxcObx8ug1VTj2Nfb
+ nZU71O2SJGzTNMaD2W9VnRlJ9CR77pJBVl4TTExmJ/s0UWaeAbEJx0cFuikhd/hejgMU=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mvh5Q-0007mp-OR
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Dec 2021 14:41:25 +0000
+ id 1mvhNN-00BDGi-O6
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Dec 2021 14:59:59 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 4EF0ECE2AFF
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 10 Dec 2021 14:41:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 7ED23C341C6
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 10 Dec 2021 14:41:11 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 7CAFFB82873;
+ Fri, 10 Dec 2021 14:59:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6210CC00446;
+ Fri, 10 Dec 2021 14:59:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1639147271;
- bh=kemfnt9B49hv2AIOMiC+WP0U8V1bQto7uE0QdQVIBQQ=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=oHiGb2QcPH1Yu2rUxUMe4U9s3xfHEhYzXW+nPyfsE197Bd7JH8wX2Gl82IPK8xG+C
- nSuKzNFp0Uqwb9r9gjQjvfEWnLcp+23nSD6A5ekc5cj6bENceoMwEb/5P9Xxuci1QM
- 40IzBKEpub5z8o8uZp64wD/EbKKAvx6hTIlRx7TiKkCfswbVRKo5Iypxd2FXhzwsZ7
- /bKmitlILbaY7yEEzoWaUKFi2/nu1oNRhrG8Z/1EMyvSQzdou8o3c0G0HCe6HUiCoZ
- JSfu6N93//nPI17UATO+lRSgTakT+96F5uQtlWyxT8ZhXqmNFyrEkkTKf5MIWHD/h3
- WxkFPQx89dKFA==
-Received: by pdx-korg-bugzilla-2.web.codeaurora.org (Postfix, from userid 48)
- id 5882960F38; Fri, 10 Dec 2021 14:41:11 +0000 (UTC)
-From: bugzilla-daemon@bugzilla.kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 10 Dec 2021 14:41:11 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: ASSIGNED
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status cc
-Message-ID: <bug-215293-202145-JYFuhVf9PF@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-215293-202145@https.bugzilla.kernel.org/>
-References: <bug-215293-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1639148382;
+ bh=PdbfVC9mP6F4V4P5AhVme4cHoFX8hGaC2COLxZT+mek=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=pbCIj0pVv7KJ4MtXlVCG0xTc5YEHB4HRRTIsiN5hMHDtq+Vp5Kp9QxArEAAU4f8zW
+ nnpeiBbnZl6Mi7zBlTlVZx+FbAm5ghKAQuDCK8McngaMoMc80RWe3T7wvhO1fSzb/J
+ 5w+rnJvVfR9B3f2VfkATqGXNQ4YnVqzyp5IEKSjhjgu7TeP9IVwnde7dIGItVVThCI
+ UBQOdc48Y5sLxs5z+cjN8uIHY9SOXZhQ6Ym1glDDIFOvEtBlZ/Cpg5Sg4YX+yeynOi
+ b/GBga8Ngu6vZLz7gl+6DPf0a8XhqsNqGm5ZtDH/FJMCuqb+x4Xn3TSKjdOK9RykoB
+ J/GK/XjGQBzQQ==
+Message-ID: <139522fa-ad23-ccce-52cb-e7fa9caf2394@kernel.org>
+Date: Fri, 10 Dec 2021 22:59:35 +0800
 MIME-Version: 1.0
-X-Spam-Score: -0.8 (/)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.2
+Content-Language: en-US
+To: Hyeong-Jun Kim <hj514.kim@samsung.com>,
+ Fengnan Chang <changfengnan@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <CGME20211210043017epcas1p38cc53389a50e33752e97618498b18f33@epcas1p3.samsung.com>
+ <20211210043012.180588-1-hj514.kim@samsung.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20211210043012.180588-1-hj514.kim@samsung.com>
+X-Spam-Score: -2.9 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=215293 Chao Yu
- (chao@kernel.org) changed: What |Removed |Added Status|NEW |ASSIGNED CC|
- |chao@kernel.org 
- Content analysis details:   (-0.8 points, 6.0 required)
+ Content preview:  On 2021/12/10 12:30,
+ Hyeong-Jun Kim wrote: > There is a potential
+ deadlock between writeback process and a process > performing write_begin()
+ or write_cache_pages() while trying to write > same compre [...] 
+ Content analysis details:   (-2.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mvh5Q-0007mp-OR
-Subject: [f2fs-dev] [Bug 215293] F2FS: kernel bug at fs/f2fs/segment.c:2543
+X-Headers-End: 1mvhNN-00BDGi-O6
+Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: fix potential deadlock of
+ compress file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,34 +105,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
+Cc: Sungjong Seo <sj1557.seo@samsung.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=215293
+On 2021/12/10 12:30, Hyeong-Jun Kim wrote:
+> There is a potential deadlock between writeback process and a process
+> performing write_begin() or write_cache_pages() while trying to write
+> same compress file, but not compressable, as below:
+> 
+> [Process A] - doing checkpoint
+> [Process B]                     [Process C]
+> f2fs_write_cache_pages()
+> - lock_page() [all pages in cluster, 0-31]
+> - f2fs_write_multi_pages()
+>   - f2fs_write_raw_pages()
+>    - f2fs_write_single_data_page()
+>     - f2fs_do_write_data_page()
+>       - return -EAGAIN [f2fs_trylock_op() failed]
+>     - unlock_page(page) [e.g., page 0]
+>                                  - generic_perform_write()
+>                                   - f2fs_write_begin()
+>                                    - f2fs_prepare_compress_overwrite()
+>                                     - prepare_compress_overwrite()
+>                                      - lock_page() [e.g., page 0]
+>                                      - lock_page() [e.g., page 1]
+>     - lock_page(page) [e.g., page 0]
+> 
+> Since there is no compress process, it is no longer necessary to hold
+> locks on every pages in cluster within f2fs_write_raw_pages().
+> 
+> This patch changes f2fs_write_raw_pages() to release all locks first
+> and then perform write same as the non-compress file in
+> f2fs_write_cache_pages().
+> 
+> Fixes: 4c8ff7095bef ("f2fs: support data compression")
+> Signed-off-by: Hyeong-Jun Kim <hj514.kim@samsung.com>
+> Signed-off-by: Sungjong Seo <sj1557.seo@samsung.com>
+> Signed-off-by: Youngjin Gil <youngjin.gil@samsung.com>
 
-Chao Yu (chao@kernel.org) changed:
+Looks good to me, thanks for Fengnan and Hyeong-Jun's report and Hyeong-Jun's
+fixing. :)
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |ASSIGNED
-                 CC|                            |chao@kernel.org
+Reviewed-by: Chao Yu <chao@kernel.org>
 
---- Comment #1 from Chao Yu (chao@kernel.org) ---
-Thanks for the report, can you please provider more info about this bug:
-- kernel config
-- mkfs.f2fs parameter
-- image size
-- mountoption
-- testcase (operation you performed)
+Thanks,
 
-BTW, is this bug reproducible?
-
--- 
-You may reply to this email to add a comment.
-
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
