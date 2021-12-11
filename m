@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F4ED47148D
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Dec 2021 16:43:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 775F94714CF
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Dec 2021 17:53:26 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mw4XN-000888-JM; Sat, 11 Dec 2021 15:43:49 +0000
+	id 1mw5cf-0001fj-Uv; Sat, 11 Dec 2021 16:53:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <bugzilla-daemon@bugzilla.kernel.org>)
- id 1mw4X5-00087C-GF
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 11 Dec 2021 15:43:31 +0000
+ id 1mw5ce-0001fZ-MQ
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 11 Dec 2021 16:53:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ARCce60XjvR0erT0DjR3VVEdMxH1ZmfFuI2jyHlhHmU=; b=atXxUaDlrEaA+TQRnGOm8rl5+w
- ENhxwYl/ip3T2Qd21uPiizOaQOoe+J718us95BGxBH63eTjvoh0KUxXZ0Iym41LIzUlGsx1KplOhN
- mAERH/hpmRVrap3UWr3UsIWCrZAgzf6h1CVuCj/R+SOyCMZcHqhi3gZjIh0whVq4gUfU=;
+ bh=/lWgmoM3K90TyagFYr78YfPqF3yTVCGYgi5HLT4iZhQ=; b=B12XaNo8sMO/J9DVGsCtdFPOLJ
+ FefHOCIY5+4ujI55OiMnmL61OZLwnlbTHGO8qvuVXe8ZxiBiPm9nbl5mprPghG6gAXXVRzcyicPMu
+ RW+XDorZFQEL3Q1SXqTerMht3OlPQXu81+GWNxgy2JGXaJWkJVJu6LaSzTQ8EONxmnDA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -30,38 +30,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ARCce60XjvR0erT0DjR3VVEdMxH1ZmfFuI2jyHlhHmU=; b=GXqx2mj4xPgyqKBgu+4VVR4luF
- LFRB2plksfX7bgn9teibqiBOyh4WXgpVKHpgxvSv7X9Bh97F4Xo7VSpxpDo6tciYXHRrwWtgxHsTC
- bQSTdhDPNAwpz7G8YUlnHxPNJz4PehHconh13i654yL5CElhlJaiBfrjZ9gZbShX8Q8Q=;
-Received: from sin.source.kernel.org ([145.40.73.55])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=/lWgmoM3K90TyagFYr78YfPqF3yTVCGYgi5HLT4iZhQ=; b=XvprJIz5iop4ymsy3/1TaALoRm
+ Be4FG6Ohcd/Wg2B4850GVDRG6j0HBF5QZeKxyPhleie/8h80t/JGC21VdRPkh34lbyclELtgZ8gQL
+ qrLqTw6HfpOVC3dXsYiy8Bz9jIngHPutWh9tziIRFoCBgc1dbebwIOfGayadT/KLpcCs=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mw4X1-00CGwt-45
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 11 Dec 2021 15:43:31 +0000
+ id 1mw5cc-00050S-Cw
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 11 Dec 2021 16:53:20 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 9DB20CE09D0
+ by ams.source.kernel.org (Postfix) with ESMTPS id 15374B80AD0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 11 Dec 2021 15:43:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CBE17C004DD
+ Sat, 11 Dec 2021 16:53:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D73CEC004DD
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 11 Dec 2021 15:43:13 +0000 (UTC)
+ Sat, 11 Dec 2021 16:53:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1639237393;
- bh=sNes7ehy2btvIJAb3AB9MI6ll+M0qnOr7ZpGKTSj5Mk=;
+ s=k20201202; t=1639241582;
+ bh=/lWgmoM3K90TyagFYr78YfPqF3yTVCGYgi5HLT4iZhQ=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=f4Km1qb0ff5zC5DcCZwPWBG0oPsISgSnqraLNib8izU7Vdd4bK9OefrS33SC4E/dQ
- prGW0wm6S6XdHOT6rQe/s4rjCMR926qVtoI+kDt2meG1DuLFiobgop3HDF4wQTEBiZ
- GRNbUFdmnIGOw00z1sl/BgJWb8SBQukNY6ZWBZvv6t50zx4Cf51ykv1kPpgnLXa+/N
- jJZawwRrXWYlFbVICZ5hJx+qXsdDQ2GES0iRd1+L/OomXTb2ruCgPpJTyHXbVGHYND
- bonuU6R1fcgifHOTa7/1V1jXVp6EJDMUN6WPo1CFBh/LNfKIaPQ5UojIJxZp3699MC
- SnKtqNLTxNtIg==
+ b=MlKN+q2whHs1ptbimm1eaopm8DnHDdYggnx5qV/UISKV6cjlUs1ErYKzfLrGjMpOE
+ 37FQ+cKq1Gw1H3G8bBVt6WVG1nQ2JtEXK7y7mqO49c1cKR3LgukCRD0DQIOLd0+LZ9
+ lhDLXZh72mhwpkj7KDDn6kdZ+D6Monln4ONIcxBk+L/TWBwccJqkZuZeaeNf811ipN
+ IVuDN4BGnsDm2rBWCPzaxb2y85VFpgEVHURwQ6+P2lGjEjnD9pP9vVdK4o8I5tKVW9
+ UqhCuDPbJrDoGqw/yOvnT0pCDLE+Jgg5UV/KVd3uXhRUqL+UYBx9l2mtce0XG1K37C
+ G8iIUnBsbQfcQ==
 Received: by pdx-korg-bugzilla-2.web.codeaurora.org (Postfix, from userid 48)
- id 99EFE60F48; Sat, 11 Dec 2021 15:43:13 +0000 (UTC)
+ id AE9AB60F48; Sat, 11 Dec 2021 16:53:02 +0000 (UTC)
 From: bugzilla-daemon@bugzilla.kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Sat, 11 Dec 2021 15:43:13 +0000
+Date: Sat, 11 Dec 2021 16:53:02 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -70,14 +70,14 @@ X-Bugzilla-Component: f2fs
 X-Bugzilla-Version: 2.5
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Who: wenqingliu0120@gmail.com
 X-Bugzilla-Status: ASSIGNED
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status cc
-Message-ID: <bug-215235-202145-rumQWisrpN@https.bugzilla.kernel.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-215235-202145-5xVMM8NZAu@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-215235-202145@https.bugzilla.kernel.org/>
 References: <bug-215235-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -90,9 +90,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=215235 Chao Yu
- (chao@kernel.org) changed: What |Removed |Added Status|NEW |ASSIGNED CC|
- |chao@kernel.org 
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=215235 ---
+ Comment
+ #2 from Wenqing Liu (wenqingliu0120@gmail.com) --- Thank you. The issue is
+ gone with the patch on my test machine. -- You may reply to this email to
+ add a comment. 
  Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -104,7 +106,7 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mw4X1-00CGwt-45
+X-Headers-End: 1mw5cc-00050S-Cw
 Subject: [f2fs-dev] [Bug 215235] page fault in f2fs_setxattr() when mount
  and operate on corrupted image
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -124,19 +126,8 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=215235
 
-Chao Yu (chao@kernel.org) changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-             Status|NEW                         |ASSIGNED
-                 CC|                            |chao@kernel.org
-
---- Comment #1 from Chao Yu (chao@kernel.org) ---
-Thanks for the report!
-
-I've submitted a fixing patch, could you please have a try?
-
-https://lore.kernel.org/linux-f2fs-devel/20211211154059.7173-1-chao@kernel.org/T/#u
+--- Comment #2 from Wenqing Liu (wenqingliu0120@gmail.com) ---
+Thank you. The issue is gone with the patch on my test machine.
 
 -- 
 You may reply to this email to add a comment.
