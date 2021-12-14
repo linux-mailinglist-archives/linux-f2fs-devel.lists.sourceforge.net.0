@@ -2,68 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46A08474AC2
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Dec 2021 19:24:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F64E474B4A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Dec 2021 19:57:06 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mxCTr-0004SM-2M; Tue, 14 Dec 2021 18:24:52 +0000
+	id 1mxCyz-0000hU-48; Tue, 14 Dec 2021 18:57:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1mxCTp-0004Qx-Ei
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Dec 2021 18:24:50 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1mxCyx-0000Pf-BP
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Dec 2021 18:57:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CfNswB5OP+PKGVs18YqeaEoYc6s6bC4jygQqxD3nt48=; b=PbINM58aA019iDV296VUXsmwGU
- XmbaCFF762fBHYO7TQkmjA31Fw4b1jC3zIh15rEbDp9zn+5akvUlbpy2Pj7xay1fmbUOekMXzJ3iD
- lfeXQLrpUgN0YGi/OYbJvLgKpGmuY2BoAsKUyUZbAFC6/uQwDp/+Q+qHps8VDq7wPJvM=;
+ bh=LN/yvr8nIRcm5bqnFkatQzjEmUUL7NbS69uFFdNSAGQ=; b=PmdsgZKHKSxAd3cOD+CGiiL5iB
+ 6D120aIyah1VFLnNIzAz9KLiIZXdX1p5UfGy47wZp2GwxoO5jC8SIsfWFXOeEGVWextoLk5kqBX5y
+ Bc3xtlJF/pWVVZKCgscBDW1x1W0YfGRrcguXMBTL6wNMHEpAJMoHIXLWUGX9WsRYMMCM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CfNswB5OP+PKGVs18YqeaEoYc6s6bC4jygQqxD3nt48=; b=OFYZtFwkIaMDalQ17+u5mLfte/
- dAvA8Kllh3Hm8lJeO1FOyGvhzyjcryvMNSjyKV3yjS3A9GBgqEqXnqoi0oj8WDw9mz1SJhF9sux8b
- q5HsQRMz/dMwdeKmRCklx5xtEdVeTcKgM20XWhtiM2FOGv4R92HmPMb1bWjMjhSjr7wo=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=LN/yvr8nIRcm5bqnFkatQzjEmUUL7NbS69uFFdNSAGQ=; b=LcAEFC1M9LT4zd6QdioQipVfWA
+ t4OtwjPNg6swQVgpYix5uB6HPFsTgoS0hfENBNK1iigIL3nXN/iqUvnFk5kMCj8bPU9AOIJobDyhQ
+ uEu/nS/9lhV42dHgl9zFjDetYW6rUzNjsI6fnZZw86jaV8L8QilDRXjZbyaYQl/lFhzQ=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mxCTp-00FPku-Cb
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Dec 2021 18:24:50 +0000
+ id 1mxCyu-0007I4-PK
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Dec 2021 18:57:00 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 67821B81C54
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5E1886168F
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 14 Dec 2021 18:24:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 10471C34604;
- Tue, 14 Dec 2021 18:24:40 +0000 (UTC)
+ Tue, 14 Dec 2021 18:56:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A9BD5C34600;
+ Tue, 14 Dec 2021 18:56:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1639506280;
- bh=KGpzRAZYX4JGq/Ihfde8r/esiBiCBH+uxdJ+VLvvm4A=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fXNBz7b2XKwCYEO0BKOACovuaWq2wnnqA5XayWNcSIx/7FcFo5a/K5O8/zs1dZMoE
- RzaTLf0ZySxZAy4fuSGux61m7NbqMRqel05rC1fU3kicn4/DBP40HMbZORdrnEGqX6
- YGl/Rnd/jyl54QXR4pjFQ+z+YdRnB3Ykvc6MbfzjPaYd08WoGclrfgzsDKHnAjdCo+
- I8ii+Lxztrso25LVhoFegj8y5+kgVUL1HlSTo7EI+9ItB0AjyDcOedDtz7U8WuwpUw
- bbjQS58m059Kn7puBV51JtofxSnSZiJ8nHiLiIWzl1H4MhLdfz1f444wC7M34BxXVJ
- gzKkCRtSTQfDw==
+ s=k20201202; t=1639508202;
+ bh=Jku8PD9u6YzING5IrsfqdnR2FiqVRc94gowzLrYhrMU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=fw9jlfuXdFWgiyQU72FVE4aD8jsnJm4xaWFvKv5HNlAPPZXckXuxckbJO+7TvRYEc
+ kftFJ8R0Wi7Qsk+YdUu7GHBp+4ScMp4jVYGudTnpDkDax06NwCNhtw3nWgsh/KqsO6
+ +WJnvMFbnuE0tOtQ5U6XR1raxzfSVNGaiHlhRkGnMQ4miKf0deVqu8lpRrIQcoSsh6
+ BX4FB+p3/JGdAxP6wAxQXYJhYtrLH66fYF5F1umuUKFpqRLhhjEsbRJTk80kgu7Ga7
+ +QVoFjp8/2ilTY9aosC1Ry83Icfakl2RT7sbND+bOuKAVhAMiHmXQ1G0Xc+QvoJt7J
+ 0jM3H3lh1WEDg==
+Date: Tue, 14 Dec 2021 10:56:41 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 14 Dec 2021 10:24:35 -0800
-Message-Id: <20211214182435.2595176-2-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.34.1.173.g76aa8bc2d0-goog
-In-Reply-To: <20211214182435.2595176-1-jaegeuk@kernel.org>
-References: <20211214182435.2595176-1-jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <Ybjo6Zqpc7Wnev/r@google.com>
+References: <20210928151911.11189-1-chao@kernel.org>
+ <YVNoHudG5c65X85G@google.com>
+ <65f6c366-9e5b-fe7f-7c38-061996d1882b@kernel.org>
+ <dec765de-407b-07c3-75f6-ec7f71c618b7@kernel.org>
+ <YXwyvllUOm6jLiF5@google.com>
+ <3e653a3d-ddb9-e115-d871-3659a1ba5530@kernel.org>
+ <96959788-73b2-6e9b-3aa7-b1e23e9da417@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <96959788-73b2-6e9b-3aa7-b1e23e9da417@kernel.org>
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -71,11 +76,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch tries to mitigate lock contention between
- f2fs_write_checkpoint
- and f2fs_get_node_info along with nat_tree_lock. The idea is, if checkpoint
- is currently running, other threads that try to grab nat_tree_lock would
- be better to wait for checkpoint. 
+ Content preview:  On 12/12, Chao Yu wrote: > Ping, > > On 2021/10/30 11:02,
+ Chao Yu wrote: > > On 2021/10/30 1:43, Jaegeuk Kim wrote: > > > On 10/29,
+ Chao Yu wrote: > > > > Ping, > > > > > > > > On 2021/9/29 8:05, Chao [...]
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,9 +92,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mxCTp-00FPku-Cb
-Subject: [f2fs-dev] [PATCH 2/2] f2fs: do not bother checkpoint by
- f2fs_get_node_info
+X-Headers-End: 1mxCyu-0007I4-PK
+Subject: Re: [f2fs-dev] [PATCH] f2fs: skip f2fs_preallocate_blocks() for
+ overwrite case
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,299 +106,145 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch tries to mitigate lock contention between f2fs_write_checkpoint and
-f2fs_get_node_info along with nat_tree_lock.
+On 12/12, Chao Yu wrote:
+> Ping,
+> =
 
-The idea is, if checkpoint is currently running, other threads that try to grab
-nat_tree_lock would be better to wait for checkpoint.
+> On 2021/10/30 11:02, Chao Yu wrote:
+> > On 2021/10/30 1:43, Jaegeuk Kim wrote:
+> > > On 10/29, Chao Yu wrote:
+> > > > Ping,
+> > > > =
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/checkpoint.c |  2 +-
- fs/f2fs/compress.c   |  2 +-
- fs/f2fs/data.c       |  8 ++++----
- fs/f2fs/f2fs.h       |  2 +-
- fs/f2fs/file.c       |  2 +-
- fs/f2fs/gc.c         |  6 +++---
- fs/f2fs/inline.c     |  4 ++--
- fs/f2fs/inode.c      |  2 +-
- fs/f2fs/node.c       | 19 ++++++++++---------
- fs/f2fs/recovery.c   |  2 +-
- fs/f2fs/segment.c    |  2 +-
- 11 files changed, 26 insertions(+), 25 deletions(-)
+> > > > On 2021/9/29 8:05, Chao Yu wrote:
+> > > > > On 2021/9/29 3:08, Jaegeuk Kim wrote:
+> > > > > > On 09/28, Chao Yu wrote:
+> > > > > > > In f2fs_file_write_iter(), let's use f2fs_overwrite_io() to
+> > > > > > > check whethere it is overwrite case, for such case, we can sk=
+ip
+> > > > > > > f2fs_preallocate_blocks() in order to avoid f2fs_do_map_lock(=
+),
+> > > > > > > which may be blocked by checkpoint() potentially.
+> > > > > > > =
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index f1693d45bb78..55e3c54d99c1 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -664,7 +664,7 @@ static int recover_orphan_inode(struct f2fs_sb_info *sbi, nid_t ino)
- 	/* truncate all the data during iput */
- 	iput(inode);
- 
--	err = f2fs_get_node_info(sbi, ino, &ni);
-+	err = f2fs_get_node_info(sbi, ino, &ni, false);
- 	if (err)
- 		goto err_out;
- 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 4b49038d150d..d0c3aeba5945 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -1286,7 +1286,7 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
- 
- 	psize = (loff_t)(cc->rpages[last_index]->index + 1) << PAGE_SHIFT;
- 
--	err = f2fs_get_node_info(fio.sbi, dn.nid, &ni);
-+	err = f2fs_get_node_info(fio.sbi, dn.nid, &ni, false);
- 	if (err)
- 		goto out_put_dnode;
- 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 40c0d1426a11..2737fcc0dbcf 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1355,7 +1355,7 @@ static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
- 	if (unlikely(is_inode_flag_set(dn->inode, FI_NO_ALLOC)))
- 		return -EPERM;
- 
--	err = f2fs_get_node_info(sbi, dn->nid, &ni);
-+	err = f2fs_get_node_info(sbi, dn->nid, &ni, false);
- 	if (err)
- 		return err;
- 
-@@ -1757,7 +1757,7 @@ static int f2fs_xattr_fiemap(struct inode *inode,
- 		if (!page)
- 			return -ENOMEM;
- 
--		err = f2fs_get_node_info(sbi, inode->i_ino, &ni);
-+		err = f2fs_get_node_info(sbi, inode->i_ino, &ni, false);
- 		if (err) {
- 			f2fs_put_page(page, 1);
- 			return err;
-@@ -1789,7 +1789,7 @@ static int f2fs_xattr_fiemap(struct inode *inode,
- 		if (!page)
- 			return -ENOMEM;
- 
--		err = f2fs_get_node_info(sbi, xnid, &ni);
-+		err = f2fs_get_node_info(sbi, xnid, &ni, false);
- 		if (err) {
- 			f2fs_put_page(page, 1);
- 			return err;
-@@ -2649,7 +2649,7 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
- 		fio->need_lock = LOCK_REQ;
- 	}
- 
--	err = f2fs_get_node_info(fio->sbi, dn.nid, &ni);
-+	err = f2fs_get_node_info(fio->sbi, dn.nid, &ni, false);
- 	if (err)
- 		goto out_writepage;
- 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 5da592286721..a9ed2fd3fffb 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3412,7 +3412,7 @@ int f2fs_need_dentry_mark(struct f2fs_sb_info *sbi, nid_t nid);
- bool f2fs_is_checkpointed_node(struct f2fs_sb_info *sbi, nid_t nid);
- bool f2fs_need_inode_block_update(struct f2fs_sb_info *sbi, nid_t ino);
- int f2fs_get_node_info(struct f2fs_sb_info *sbi, nid_t nid,
--						struct node_info *ni);
-+				struct node_info *ni, bool checkpoint_context);
- pgoff_t f2fs_get_next_page_offset(struct dnode_of_data *dn, pgoff_t pgofs);
- int f2fs_get_dnode_of_data(struct dnode_of_data *dn, pgoff_t index, int mode);
- int f2fs_truncate_inode_blocks(struct inode *inode, pgoff_t from);
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 5ec6bef3937f..f540c1cbddca 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -1233,7 +1233,7 @@ static int __clone_blkaddrs(struct inode *src_inode, struct inode *dst_inode,
- 			if (ret)
- 				return ret;
- 
--			ret = f2fs_get_node_info(sbi, dn.nid, &ni);
-+			ret = f2fs_get_node_info(sbi, dn.nid, &ni, false);
- 			if (ret) {
- 				f2fs_put_dnode(&dn);
- 				return ret;
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 7fbe46477a5a..a6accec60d04 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -959,7 +959,7 @@ static int gc_node_segment(struct f2fs_sb_info *sbi,
- 			continue;
- 		}
- 
--		if (f2fs_get_node_info(sbi, nid, &ni)) {
-+		if (f2fs_get_node_info(sbi, nid, &ni, false)) {
- 			f2fs_put_page(node_page, 1);
- 			continue;
- 		}
-@@ -1027,7 +1027,7 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
- 	if (IS_ERR(node_page))
- 		return false;
- 
--	if (f2fs_get_node_info(sbi, nid, dni)) {
-+	if (f2fs_get_node_info(sbi, nid, dni, false)) {
- 		f2fs_put_page(node_page, 1);
- 		return false;
- 	}
-@@ -1221,7 +1221,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
- 
- 	f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
- 
--	err = f2fs_get_node_info(fio.sbi, dn.nid, &ni);
-+	err = f2fs_get_node_info(fio.sbi, dn.nid, &ni, false);
- 	if (err)
- 		goto put_out;
- 
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index ea08f0dfa1bd..4b5cefa3f90c 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -131,7 +131,7 @@ int f2fs_convert_inline_page(struct dnode_of_data *dn, struct page *page)
- 	if (err)
- 		return err;
- 
--	err = f2fs_get_node_info(fio.sbi, dn->nid, &ni);
-+	err = f2fs_get_node_info(fio.sbi, dn->nid, &ni, false);
- 	if (err) {
- 		f2fs_truncate_data_blocks_range(dn, 1);
- 		f2fs_put_dnode(dn);
-@@ -786,7 +786,7 @@ int f2fs_inline_data_fiemap(struct inode *inode,
- 		ilen = start + len;
- 	ilen -= start;
- 
--	err = f2fs_get_node_info(F2FS_I_SB(inode), inode->i_ino, &ni);
-+	err = f2fs_get_node_info(F2FS_I_SB(inode), inode->i_ino, &ni, false);
- 	if (err)
- 		goto out;
- 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 935016e56010..2ab3b424735a 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -881,7 +881,7 @@ void f2fs_handle_failed_inode(struct inode *inode)
- 	 * so we can prevent losing this orphan when encoutering checkpoint
- 	 * and following suddenly power-off.
- 	 */
--	err = f2fs_get_node_info(sbi, inode->i_ino, &ni);
-+	err = f2fs_get_node_info(sbi, inode->i_ino, &ni, false);
- 	if (err) {
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "May loss orphan inode, run fsck to fix.");
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index b1bc7d76da3b..e0b5eb28d383 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -543,7 +543,7 @@ int f2fs_try_to_free_nats(struct f2fs_sb_info *sbi, int nr_shrink)
- }
- 
- int f2fs_get_node_info(struct f2fs_sb_info *sbi, nid_t nid,
--						struct node_info *ni)
-+				struct node_info *ni, bool checkpoint_context)
- {
- 	struct f2fs_nm_info *nm_i = NM_I(sbi);
- 	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
-@@ -576,9 +576,10 @@ int f2fs_get_node_info(struct f2fs_sb_info *sbi, nid_t nid,
- 	 * nat_tree_lock. Therefore, we should retry, if we failed to grab here
- 	 * while not bothering checkpoint.
- 	 */
--	if (!rwsem_is_locked(&sbi->cp_global_sem)) {
-+	if (!rwsem_is_locked(&sbi->cp_global_sem) || checkpoint_context) {
- 		down_read(&curseg->journal_rwsem);
--	} else if (!down_read_trylock(&curseg->journal_rwsem)) {
-+	} else if (rwsem_is_contended(&nm_i->nat_tree_lock) ||
-+				!down_read_trylock(&curseg->journal_rwsem)) {
- 		up_read(&nm_i->nat_tree_lock);
- 		goto retry;
- 	}
-@@ -891,7 +892,7 @@ static int truncate_node(struct dnode_of_data *dn)
- 	int err;
- 	pgoff_t index;
- 
--	err = f2fs_get_node_info(sbi, dn->nid, &ni);
-+	err = f2fs_get_node_info(sbi, dn->nid, &ni, false);
- 	if (err)
- 		return err;
- 
-@@ -1290,7 +1291,7 @@ struct page *f2fs_new_node_page(struct dnode_of_data *dn, unsigned int ofs)
- 		goto fail;
- 
- #ifdef CONFIG_F2FS_CHECK_FS
--	err = f2fs_get_node_info(sbi, dn->nid, &new_ni);
-+	err = f2fs_get_node_info(sbi, dn->nid, &new_ni, false);
- 	if (err) {
- 		dec_valid_node_count(sbi, dn->inode, !ofs);
- 		goto fail;
-@@ -1352,7 +1353,7 @@ static int read_node_page(struct page *page, int op_flags)
- 		return LOCKED_PAGE;
- 	}
- 
--	err = f2fs_get_node_info(sbi, page->index, &ni);
-+	err = f2fs_get_node_info(sbi, page->index, &ni, false);
- 	if (err)
- 		return err;
- 
-@@ -1604,7 +1605,7 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
- 	nid = nid_of_node(page);
- 	f2fs_bug_on(sbi, page->index != nid);
- 
--	if (f2fs_get_node_info(sbi, nid, &ni))
-+	if (f2fs_get_node_info(sbi, nid, &ni, !do_balance))
- 		goto redirty_out;
- 
- 	if (wbc->for_reclaim) {
-@@ -2705,7 +2706,7 @@ int f2fs_recover_xattr_data(struct inode *inode, struct page *page)
- 		goto recover_xnid;
- 
- 	/* 1: invalidate the previous xattr nid */
--	err = f2fs_get_node_info(sbi, prev_xnid, &ni);
-+	err = f2fs_get_node_info(sbi, prev_xnid, &ni, false);
- 	if (err)
- 		return err;
- 
-@@ -2745,7 +2746,7 @@ int f2fs_recover_inode_page(struct f2fs_sb_info *sbi, struct page *page)
- 	struct page *ipage;
- 	int err;
- 
--	err = f2fs_get_node_info(sbi, ino, &old_ni);
-+	err = f2fs_get_node_info(sbi, ino, &old_ni, false);
- 	if (err)
- 		return err;
- 
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 6a1b4668d933..e65c73c4411d 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -595,7 +595,7 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 
- 	f2fs_wait_on_page_writeback(dn.node_page, NODE, true, true);
- 
--	err = f2fs_get_node_info(sbi, dn.nid, &ni);
-+	err = f2fs_get_node_info(sbi, dn.nid, &ni, false);
- 	if (err)
- 		goto err;
- 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index df9ed75f0b7a..b4a2f8c36149 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -254,7 +254,7 @@ static int __revoke_inmem_pages(struct inode *inode,
- 				goto next;
- 			}
- 
--			err = f2fs_get_node_info(sbi, dn.nid, &ni);
-+			err = f2fs_get_node_info(sbi, dn.nid, &ni, false);
- 			if (err) {
- 				f2fs_put_dnode(&dn);
- 				return err;
--- 
-2.34.1.173.g76aa8bc2d0-goog
+> > > > > > > Signed-off-by: Chao Yu <chao@kernel.org>
+> > > > > > > ---
+> > > > > > > =A0=A0 fs/f2fs/file.c | 4 ++++
+> > > > > > > =A0=A0 1 file changed, 4 insertions(+)
+> > > > > > > =
 
+> > > > > > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > > > > > > index 13deae03df06..51fecb2f4db5 100644
+> > > > > > > --- a/fs/f2fs/file.c
+> > > > > > > +++ b/fs/f2fs/file.c
+> > > > > > > @@ -4321,6 +4321,10 @@ static ssize_t f2fs_file_write_iter(st=
+ruct kiocb *iocb, struct iov_iter *from)
+> > > > > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 preallocated =3D true;
+> > > > > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 target_size =3D iocb->ki_pos +=
+ iov_iter_count(from);
+> > > > > > > +=A0=A0=A0=A0=A0=A0=A0 if (f2fs_overwrite_io(inode, iocb->ki_=
+pos,
+> > > > > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0 iov_iter_count(from)))
+> > > > > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 goto write;
+> > > > > > =
+
+> > > > > > This calls f2fs_map_blocks() which can be duplicate, if it's no=
+t the overwirte
+> > > > > > case. Do we have other benefit?
+> > > > > =
+
+> > > > > f2fs_overwrite_io() will break for append write case w/ below che=
+ck:
+> > > > > =
+
+> > > > > =A0 =A0=A0=A0=A0if (pos + len > i_size_read(inode))
+> > > > > =A0 =A0=A0=A0=A0=A0=A0=A0 return false;
+> > > > > =
+
+> > > > > I guess we may only suffer double f2fs_map_blocks() for write hole
+> > > > > case, e.g. truncate to large size & write inside the filesize. For
+> > > > > this case, how about adding a condition to allow double f2fs_map_=
+blocks()
+> > > > > only if write size is smaller than a threshold?
+> > > =
+
+> > > I still don't see the benefit much to do double f2fs_map_blocks. What=
+ is the
+> > > problem here?
+> > =
+
+> > There is potential hangtask happened during swapfile's writeback:
+> > =
+
+> > - loop_kthread_worker_fn
+> >  =A0- kthread_worker_fn
+> >  =A0 - loop_queue_work
+> >  =A0=A0 - lo_rw_aio
+> >  =A0=A0=A0 - f2fs_file_write_iter
+> >  =A0=A0=A0=A0 - f2fs_preallocate_blocks
+> >  =A0=A0=A0=A0=A0 - f2fs_map_blocks
+> >  =A0=A0=A0=A0=A0=A0 - down_read
+> >  =A0=A0=A0=A0=A0=A0=A0 - rwsem_down_read_slowpath
+> >  =A0=A0=A0=A0=A0=A0=A0=A0 - schedule
+> > =
+
+> > I try to mitigate such issue by preallocating swapfile's block address =
+and
+> > avoid f2fs_do_map_lock() as much as possible in swapfile's writeback pa=
+th...
+
+How about checking i_blocks and i_size instead of checking the entire map?
+
+> > =
+
+> > Thanks,
+> > =
+
+> > > =
+
+> > > > > =
+
+> > > > > Thanks,
+> > > > > =
+
+> > > > > > =
+
+> > > > > > > +
+> > > > > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 err =3D f2fs_preallocate_block=
+s(iocb, from);
+> > > > > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (err) {
+> > > > > > > =A0=A0 out_err:
+> > > > > > > -- =
+
+> > > > > > > 2.32.0
+> > > > > =
+
+> > > > > =
+
+> > > > > _______________________________________________
+> > > > > Linux-f2fs-devel mailing list
+> > > > > Linux-f2fs-devel@lists.sourceforge.net
+> > > > > https://apc01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F=
+%2Flists.sourceforge.net%2Flists%2Flistinfo%2Flinux-f2fs-devel&amp;data=3D0=
+4%7C01%7Cchao.yu%40oppo.com%7Cbb41006c3f6d4e4d600a08d99b51cbcd%7Cf1905eb1c3=
+5341c5951662b4a54b5ee6%7C0%7C0%7C637711597895400286%7CUnknown%7CTWFpbGZsb3d=
+8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&=
+amp;sdata=3D%2BlEAXWLpV5wGX2hL0Wj5p2qX0AqfUFI05Qiqdp8PK8g%3D&amp;reserved=
+=3D0
+> > =
+
+> > =
+
+> > _______________________________________________
+> > Linux-f2fs-devel mailing list
+> > Linux-f2fs-devel@lists.sourceforge.net
+> > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
