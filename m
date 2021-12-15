@@ -2,99 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D376A474B6F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Dec 2021 20:02:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE931475105
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Dec 2021 03:39:20 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1mxD3z-0006xI-RF; Tue, 14 Dec 2021 19:02:11 +0000
+	id 1mxKCG-0000iy-IE; Wed, 15 Dec 2021 02:39:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1mxD3y-0006xB-E3
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Dec 2021 19:02:10 +0000
+ (envelope-from <yang.lee@linux.alibaba.com>) id 1mxKCF-0000ir-RS
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Dec 2021 02:39:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1m0Oj9ZIlckG4W6EWqQ646uvvqAkwhfJGo/fA6KO+2I=; b=SVYdQV5tFOR3So6mWrAz+XQVox
- 8Um/egNPJfm0tx5JkRuF+XDIJg/Z2o/y8tiedVHO4ScvdKbIL6LR+/u+QAoXP/qLs84NYRxiOP2y7
- xLb2pa3a6gYGjPUUO1+AwsmMFrNVtkP1tliExg+Nl0XpUNBxboMS3TicDeer/aMll2tc=;
+ bh=VLKZPSi0K/NMZ5All9TI2raXaXeGScEcjfI2mqf4gzo=; b=gaYWiYlQz5q6uK1ENsFeJzJUor
+ 8y++E7DllJgVciWfSsqzUbKj3YJznvVt2F4SuTSxD9R2q1HumtHDRjoZsDO61kjR0rPvb1/PfE7Jc
+ VSujgkgDKUTJlcG0M8tTTOuNp489cF3kM/pd81Fl8a47sc5fCz8suDhYFvjSKTk5ZTNM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=1m0Oj9ZIlckG4W6EWqQ646uvvqAkwhfJGo/fA6KO+2I=; b=BNpx29JSOmneyQehoPE2J0QRKq
- r+80rRkGlWvDKDvc1h40Q6ZhVAT8B7DIiZToiaxUMbcqoOm06wYeDbJ5fqj6RK8ZVI543LUiXNuY1
- UFHVPLQwJjZO0j6Xw/J1iRQpunInlJHBEq0sJLFnUFfho8WXeh4QH8d+t4X9XV5LY4XE=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=VLKZPSi0K/NMZ5All9TI2raXaXeGScEcjfI2mqf4gzo=; b=A
+ RamrSmJO706teMR91PCR1oNIAntRVcBr51zmYe8/Vbsy8xuaCH6qRkQ0+KpQGG+oQBWWHxvMQ8/Dj
+ /mLlEcXl47FXqe7rpmxt4rMMrYSlG/cdUUf06/w8cB6utf5Vd6g3jwyGRwOn1t0DezK8EykEdP27z
+ 9QaQhMUNHG4ASgYI=;
+Received: from out30-56.freemail.mail.aliyun.com ([115.124.30.56])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1mxD3w-00FR9C-Hl
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Dec 2021 19:02:10 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8CE206167D;
- Tue, 14 Dec 2021 19:01:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4347C34600;
- Tue, 14 Dec 2021 19:01:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1639508517;
- bh=3jXrjZMUUllEdVwoHar50e5mfi/E6/goCnlo3Lz/d3Q=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Z5RWaNZf3h+K3cZO7BKPXE2aPLe7DyBOZphnGPwhh4RITP98hSzfDlXIROpFB3aE0
- 6eiVK/Jazsjt5FV0QYZmRRuCubq9+dJtUrrkRho1t5dCBzFyYWOqjhhRpO9uU4gFxl
- TiVzv8sP3C881eg1uwyGITX395VS+lALMMQ5LoahRkBAX3nQzWcaHGywG/tFmceS3F
- oE8B2GA7iIg6KztwL7oRjfrGmnuH8pCjcxvXlZyxFB3tXvwVDwP7dwVDvYKkSBKxwV
- h5AvCLTTrBvC6/R6DweiBLgIba0L4yyXZPRQyyHLAG+HfD/4mLCMm2zMA7F/nxTRYs
- Rk0WU65btqDHQ==
-Date: Tue, 14 Dec 2021 11:01:55 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <YbjqI0qvbxbW9aDz@google.com>
-References: <1636438608-27597-1-git-send-email-niuzhiguo84@gmail.com>
- <YZU0TFBH6k2Q6fJZ@google.com>
- <e28d4963-d816-b568-dec8-60a79a9fe88d@kernel.org>
- <e25053e9-f97e-6a2f-3bac-acfcd689fdcb@kernel.org>
- <Yaf1J/GtTrJekmtn@google.com>
- <f0fa20e0-7c03-c454-d5a7-62457663412b@kernel.org>
- <YakNSfMyzGAe2y42@google.com>
- <80bc28c5-f050-05a9-e9a8-ff42781a191a@kernel.org>
+ id 1mxKCD-0003TE-E9
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 15 Dec 2021 02:39:12 +0000
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R871e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04407; MF=yang.lee@linux.alibaba.com;
+ NM=1; PH=DS; RN=6; SR=0; TI=SMTPD_---0V-g8tNf_1639535941; 
+Received: from localhost(mailfrom:yang.lee@linux.alibaba.com
+ fp:SMTPD_---0V-g8tNf_1639535941) by smtp.aliyun-inc.com(127.0.0.1);
+ Wed, 15 Dec 2021 10:39:01 +0800
+From: Yang Li <yang.lee@linux.alibaba.com>
+To: jaegeuk@kernel.org
+Date: Wed, 15 Dec 2021 10:38:58 +0800
+Message-Id: <20211215023858.33303-1-yang.lee@linux.alibaba.com>
+X-Mailer: git-send-email 2.20.1.7.g153144c
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <80bc28c5-f050-05a9-e9a8-ff42781a191a@kernel.org>
-X-Spam-Score: -0.9 (/)
+X-Spam-Score: -8.0 (--------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/03, Chao Yu wrote: > On 2021/12/3 2:15, Jaegeuk Kim
- wrote: > > On 12/02, Chao Yu wrote: > > > On 2021/12/2 6:20, Jaegeuk Kim wrote:
- > > > > On 11/20, Chao Yu wrote: > > > > > On 2021/11/18 14:46 [...] 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview: Fix the following coccicheck warning:
+ ./fs/f2fs/sysfs.c:491:41-46:
+ WARNING: conversion to bool not needed here Reported-by: Abaci Robot
+ <abaci@linux.alibaba.com>
+ Signed-off-by: Yang Li <yang.lee@linux.alibaba.com> --- fs/f2fs/sysfs.c |
+ 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
+ Content analysis details:   (-8.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [115.124.30.56 listed in list.dnswl.org]
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
+ white-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1mxD3w-00FR9C-Hl
-Subject: Re: [f2fs-dev] [PATCH Vx 1/1] f2fs: Avoid deadlock between
- writeback and checkpoint
+ 0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
+ lines
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
+ Match
+X-Headers-End: 1mxKCD-0003TE-E9
+Subject: [f2fs-dev] [PATCH -next] f2fs: Simplify bool conversion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,196 +88,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jing.Xia@unisoc.com, niuzhiguo84@gmail.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Abaci Robot <abaci@linux.alibaba.com>, Yang Li <yang.lee@linux.alibaba.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 12/03, Chao Yu wrote:
-> On 2021/12/3 2:15, Jaegeuk Kim wrote:
-> > On 12/02, Chao Yu wrote:
-> > > On 2021/12/2 6:20, Jaegeuk Kim wrote:
-> > > > On 11/20, Chao Yu wrote:
-> > > > > On 2021/11/18 14:46, Chao Yu wrote:
-> > > > > > On 2021/11/18 0:56, Jaegeuk Kim wrote:
-> > > > > > > On 11/09, niuzhiguo84@gmail.com wrote:
-> > > > > > > > From: Zhiguo Niu <zhiguo.niu@unisoc.com>
-> > > > > > > > 
-> > > > > > > > There could be a scenario as following:
-> > > > > > > > The inodeA and inodeB are in b_io queue of writeback
-> > > > > > > > inodeA : f2fs's node inode
-> > > > > > > > inodeB : a dir inode with only one dirty pages, and the node page
-> > > > > > > > of inodeB cached into inodeA
-> > > > > > > > 
-> > > > > > > > writeback:
-> > > > > > > > 
-> > > > > > > > wb_workfn
-> > > > > > > > wb_writeback
-> > > > > > > > blk_start_plug
-> > > > > > > >             loop {
-> > > > > > > >             queue_io
-> > > > > > > >             progress=__writeback_inodes_wb
-> > > > > > > >                     __writeback_single_inode
-> > > > > > > >                             do_writepages
-> > > > > > > >                                     f2fs_write_data_pages
-> > > > > > > >                                     wbc->pages_skipped +=get_dirty_pages
-> > > > > > > >                             inode->i_state &= ~dirty
-> > > > > > > >                     wrote++
-> > > > > > > >                     requeue_inode
-> > > > > > > >             }
-> > > > > > > > blk_finish_plug
-> > > > > > > > 
-> > > > > > > > checkpoint:
-> > > > > > > > 
-> > > > > > > > f2fs_write_checkpoint
-> > > > > > > > f2fs_sync_dirty_inodes
-> > > > > > > > filemap_fdatawrite
-> > > > > > > > do_writepages
-> > > > > > > > f2fs_write_data_pages
-> > > > > > > >             f2fs_write_single_data_page
-> > > > > > > >                     f2fs_do_write_data_page
-> > > > > > > >                             set_page_writeback
-> > > > > > > >                             f2fs_outplace_write_data
-> > > > > > > >                                     f2fs_update_data_blkaddr
-> > > > > > > >                                             f2fs_wait_on_page_writeback
-> > > > > > > >                     inode_dec_dirty_pages
-> > > > > > > > 
-> > > > > > > > 1. Writeback thread flush inodeA, and push it's bio request in task's plug;
-> > > > > > > > 2. Checkpoint thread writes inodeB's dirty page, and then wait its node
-> > > > > > > >         page writeback cached into inodeA which is in writeback task's plug
-> > > > > > > > 3. Writeback thread flush inodeB and skip writing the dirty page as
-> > > > > > > >         wb_sync_req[DATA] > 0.
-> > > > > > > > 4. As none of the inodeB's page is marked as PAGECACHE_TAG_DIRTY, writeback
-> > > > > > > >         thread clear inodeB's dirty state.
-> > > > > > > > 5. Then inodeB is moved from b_io to b_dirty because of pages_skipped > 0
-> > > > > > > >         as checkpoint thread is stuck before dec dirty_pages.
-> > > > > > > > 
-> > > > > > > > This patch collect correct pages_skipped according to the tag state in
-> > > > > > > > page tree of inode
-> > > > > > > > 
-> > > > > > > > Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-> > > > > > > > Signed-off-by: Jing Xia <jing.xia@unisoc.com>
-> > > > > > > > ---
-> > > > > > > >      fs/f2fs/data.c | 4 +++-
-> > > > > > > >      1 file changed, 3 insertions(+), 1 deletion(-)
-> > > > > > > > 
-> > > > > > > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > > > > > > > index f4fd6c246c9a..e98628e3868c 100644
-> > > > > > > > --- a/fs/f2fs/data.c
-> > > > > > > > +++ b/fs/f2fs/data.c
-> > > > > > > > @@ -3237,7 +3237,9 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
-> > > > > > > >      	return ret;
-> > > > > > > >      skip_write:
-> > > > > > > > -	wbc->pages_skipped += get_dirty_pages(inode);
-> > > > > > > > +	wbc->pages_skipped +=
-> > > > > > > > +		mapping_tagged(inode->i_mapping, PAGECACHE_TAG_DIRTY) ?
-> > > > > > > 
-> > > > > > > Is there any race condition to get 0, if there's any dirty page? IOWs, it
-> > > > > > 
-> > > > > > Quoted from Jing Xia's explanation:
-> > > > > > 
-> > > > > > [T:writeback]				[T:checkpoint]
-> > > > > 
-> > > > > My bad, [1] should be here:
-> > > > > 
-> > > > > bio contains NodeA was plugged in writeback threads
-> > > > > 
-> > > > > Thanks,
-> > > > > 
-> > > > > > 					- do_writepages  -- sync write inodeB, inc wb_sync_req[DATA]
-> > > > > > 					 - f2fs_write_data_pages
-> > > > > > 					  - f2fs_write_single_data_page -- write last dirty page
-> > > > > > 					   - f2fs_do_write_data_page
-> > > > > > 					    - set_page_writeback  -- clear page dirty flag and
-> > > > > > 					    PAGECACHE_TAG_DIRTY tag in radix tree
-> > > > > > 					    - f2fs_outplace_write_data
-> > > > > > 					     - f2fs_update_data_blkaddr
-> > > > > > 					      - f2fs_wait_on_page_writeback -- wait NodeA to writeback here
-> > > > > > 					   - inode_dec_dirty_pages
-> > > > > 
-> > > > > > bio contains NodeA was plugged in writeback threads
-> > > > > 
-> > > > > [1]
-> > > > > 
-> > > > > Thanks,
-> > > > > 
-> > > > > > - writeback_sb_inodes
-> > > > > >      - writeback_single_inode
-> > > > > >       - do_writepages
-> > > > > >        - f2fs_write_data_pages -- skip writepages due to wb_sync_req[DATA]
-> > > > > >         - wbc->pages_skipped += get_dirty_pages() -- PAGECACHE_TAG_DIRTY is not set but get_dirty_pages() returns one
-> > > > > >      - requeue_inode -- requeue inode to wb->b_dirty queue due to non-zero.pages_skipped
-> > > > 
-> > > > So, my question was why this is the problem?
-> > > 
-> > > kworker will loop writebacking this requeued inode.
-> > 
-> > Does it make a problem?
-> 
-> The problem here is kworker will loop for ever.
+Fix the following coccicheck warning:
+./fs/f2fs/sysfs.c:491:41-46: WARNING: conversion to bool not needed here
 
-Could you point out where it goes in the loop?
+Reported-by: Abaci Robot <abaci@linux.alibaba.com>
+Signed-off-by: Yang Li <yang.lee@linux.alibaba.com>
+---
+ fs/f2fs/sysfs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> 
-> Thanks,
-> 
-> > 
-> > > 
-> > > Thanks,
-> > > 
-> > > > 
-> > > > > > 
-> > > > > > > seems the current condition is just requeuing the inode as dirty, but next
-> > > > > > > flushing time will remove it from dirty list. Is this giving too much overheads?
-> > > > > > 
-> > > > > > I prefer to let writeback thread call blk_flush_plug() after skipping
-> > > > > > writepages() due to wb_sync_req[DATA/NODE] check condition, thoughts?
-> > > > > > 
-> > > > > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > > > > > index 9f754aaef558..b6e1ed73f8f5 100644
-> > > > > > --- a/fs/f2fs/data.c
-> > > > > > +++ b/fs/f2fs/data.c
-> > > > > > @@ -3087,6 +3087,8 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
-> > > > > >      			/* give a priority to WB_SYNC threads */
-> > > > > >      			if (atomic_read(&sbi->wb_sync_req[DATA]) &&
-> > > > > >      					wbc->sync_mode == WB_SYNC_NONE) {
-> > > > > > +				if (current->plug)
-> > > > > > +					blk_flush_plug(current->plug, false);
-> > > > > >      				done = 1;
-> > > > > >      				break;
-> > > > > >      			}
-> > > > > > diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> > > > > > index 556fcd8457f3..dd9a817d8dab 100644
-> > > > > > --- a/fs/f2fs/node.c
-> > > > > > +++ b/fs/f2fs/node.c
-> > > > > > @@ -1946,6 +1946,8 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
-> > > > > >      			if (atomic_read(&sbi->wb_sync_req[NODE]) &&
-> > > > > >      					wbc->sync_mode == WB_SYNC_NONE) {
-> > > > > >      				done = 1;
-> > > > > > +				if (current->plug)
-> > > > > > +					blk_flush_plug(current->plug, false);
-> > > > > >      				break;
-> > > > > >      			}
-> > > > > > 
-> > > > > > 
-> > > > > > 
-> > > > > > Thanks,
-> > > > > > 
-> > > > > > > 
-> > > > > > > > +		get_dirty_pages(inode) : 0;
-> > > > > > > >      	trace_f2fs_writepages(mapping->host, wbc, DATA);
-> > > > > > > >      	return 0;
-> > > > > > > >      }
-> > > > > > > > -- 
-> > > > > > > > 2.28.0
-> > > > > > 
-> > > > > > 
-> > > > > > _______________________________________________
-> > > > > > Linux-f2fs-devel mailing list
-> > > > > > Linux-f2fs-devel@lists.sourceforge.net
-> > > > > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> > > > > > 
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 9e1cf44642ae..530c36b89bf1 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -488,7 +488,7 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 
+ 	if (!strcmp(a->attr.name, "gc_urgent_high_remaining")) {
+ 		spin_lock(&sbi->gc_urgent_high_lock);
+-		sbi->gc_urgent_high_limited = t == 0 ? false : true;
++		sbi->gc_urgent_high_limited = t != 0;
+ 		sbi->gc_urgent_high_remaining = t;
+ 		spin_unlock(&sbi->gc_urgent_high_lock);
+ 
+-- 
+2.20.1.7.g153144c
+
 
 
 _______________________________________________
