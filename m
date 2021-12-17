@@ -2,68 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2A2E4791E4
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Dec 2021 17:52:13 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 986574791FC
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Dec 2021 17:54:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1myGSl-0004RI-QJ; Fri, 17 Dec 2021 16:52:07 +0000
+	id 1myGUo-0006YV-PU; Fri, 17 Dec 2021 16:54:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1myGSb-0004Qz-UD
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 17 Dec 2021 16:51:57 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1myGUm-0006YN-MR
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 17 Dec 2021 16:54:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=n4GIyDTy/M61Gq3vlBkRNs1NmP3JL27ZofDPWNHhnvA=; b=CPu6nV4nz+VYs0EvrzmHsJ0EZH
- jrCPHy1aY43jXBGO1VM1YOxpEbKWb66qE7NfIEO3uk0gNUKa1xffbm5jxalST66gXHnMj3Uv1cOOf
- dLHevRDlYgnrQNecFrJbowHwKWr7M8CcOwirUn54N0+Tiww3QLApkRD8OUci0TasJqTM=;
+ bh=knNDUQ7niGXHQZ5y7HivfjeJ7ga02BuvQwiwXgcriTU=; b=kEqe+WTtupdlEQNRmhSbwpAGNa
+ tgkw43YaxwzTZ1yhdviQcaUD/MkN5fqsKJrEMbmSfjYy46TtfHN8T/O4tqyve6nNvWAdBlQQsWHw2
+ wo4h8pf6Y9bhfgFkrE0rsQ2mghI0wYRRkiSJbCpvKkHnLoZwiYbONFD98DxuRPNzRsP4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=n4GIyDTy/M61Gq3vlBkRNs1NmP3JL27ZofDPWNHhnvA=; b=jUJo9i0WKQJzmDZOx7PjVKWUtC
- Xa5XjjWf/JpRriFWJFEUvq4KcHfo59xG5SuGUEFm1zkLhXHzAiOYASxX30spEh3Y1VxiSgIx27tZz
- NsuIbAcfljsJ1gg1nYXoQ2BrLSss4vAtwSz49uJS5bt0tyeq1U3ia50sF5tPMxDl4/VA=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=knNDUQ7niGXHQZ5y7HivfjeJ7ga02BuvQwiwXgcriTU=; b=W4K6sXdUntuIZInm7GP9LXvsD3
+ fwwG5ED/VxfQ10/KkqTobAB6/qAgANLw7l5Jz3VCaJV2PGwftyqR2fQHxs5cJVDpud12Fkg68zOw4
+ TRVZtq2jjIu3KW6CKh40mUzcdOHoRujJvbNsX321IOcFTm1FZ/sTGXz/A9LvH/tje5+Y=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1myGSb-0015pE-2f
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 17 Dec 2021 16:51:57 +0000
+ id 1myGUm-0015tQ-2K
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 17 Dec 2021 16:54:12 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B48A262305;
- Fri, 17 Dec 2021 16:51:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EEB3CC36AE1;
- Fri, 17 Dec 2021 16:51:50 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id D2081B828FF;
+ Fri, 17 Dec 2021 16:54:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CE57C36AE7;
+ Fri, 17 Dec 2021 16:54:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1639759911;
- bh=tuQrVEIodDfTP/WIeUxfIZy0X9WpU5zJkldM4Fk5eCQ=;
+ s=k20201202; t=1639760044;
+ bh=4qkBQD3tIu/ijOewv4T54vWUsvjDwIv3x7p5rF+QXFg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=L+6n4O1OOPNczcbNWZxVZ3pF37qVcJ2KwXhaxcVrDGJkpQ6GF/Yhs68GXX8lzQF0e
- UPywYr8tXGnjwMN7F7kDxF3A4j4/fROKAYwV3KblL01gCtAMmGVZZ+cmVjkOL02NGt
- muAgEU/Fcu4oSmzZClLFzvfP3WeR85wqfqJm/VisMCkRyzxzpsodrz5KdFUq4GxH0w
- f3vT8EW+Tvzyeb9dAbwSlQvJzgNr7UeMKV8/JsJeeusXRMwMVpizR2Ki92GSArZ19D
- Pzo2e5fe1J3OR03v9y7e6/VtE+C/7cwecasJa+KHybXFoa87zuOZTPdjFeB5N1Z6lO
- AZTV1n6Pnz+Xg==
-Date: Fri, 17 Dec 2021 08:51:49 -0800
+ b=eDg9dp3ckWRHa2B0PTZmxS0cj1PM51Z4Aq9UwtNzHkcQpTUannyqHQCzi503/gxHT
+ ATbHDuaJ3Bkvq5LFm+eN2tuJZeKfPy1Qe0AaPap8Y7AdxMIAm8cy71Y7VWw+j/bxCU
+ TWiYPN6E5fbcpTeHyjeMy3gBfS5J2ZAXx2hR9UpJ4EaUm6vlfNYx3aUUQf/oTlJz+v
+ a1mvFjCy9cQO31k9YomJitxAvAENTDn4WuOA2lvGOnoZk+1cj5d4ZtJFq+nouU4MMt
+ dyh/d/05Rf63DvJes8weGRzegatEdPpxjEmoTQd/EMkjLaOrAL1DIrf/v1/lS9/4Dw
+ dc8K7DhMyES2g==
+Date: Fri, 17 Dec 2021 08:54:03 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: "Yang.Lee" <yang.lee@linux.alibaba.com>
-Message-ID: <YbzAJWlnSHrnR4/X@google.com>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <YbzAq43KYQqYx5ar@google.com>
 References: <20211215023858.33303-1-yang.lee@linux.alibaba.com>
- <YbuTLr/HJO3IMI6u@google.com>
- <fc89c7e6-ced2-40e1-9d01-496a3b60b268.yang.lee@linux.alibaba.com>
+ <7e51b00a-ae83-66d1-8f0e-920423ac7fa7@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <fc89c7e6-ced2-40e1-9d01-496a3b60b268.yang.lee@linux.alibaba.com>
+In-Reply-To: <7e51b00a-ae83-66d1-8f0e-920423ac7fa7@kernel.org>
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -71,10 +70,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/17,
- Yang.Lee wrote: > "Why not this? > sbi->gc_urgent_high_limited
- = t;" > > Since 't' is an unsigned long type and 'gc_urgent_high_limited'
- is a bool type, the assignment operation will cause a [...] 
+ Content preview:  On 12/17, Chao Yu wrote: > On 2021/12/15 10:38,
+ Yang Li wrote:
+ > > Fix the following coccicheck warning: > > ./fs/f2fs/sysfs.c:491:41-46:
+ WARNING: conversion to bool not needed here > > > > Reported-b [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +87,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1myGSb-0015pE-2f
-Subject: Re: [f2fs-dev] =?utf-8?b?5Zue5aSN77yaW1BBVENIIC1uZXh0XSBmMmZzOiBT?=
- =?utf-8?q?implify_bool_conversion?=
+X-Headers-End: 1myGUm-0015tQ-2K
+Subject: Re: [f2fs-dev] [PATCH -next] f2fs: Simplify bool conversion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,44 +100,29 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Abaci Robot <abaci@linux.alibaba.com>,
- linux-kernel <linux-kernel@vger.kernel.org>,
- linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Abaci Robot <abaci@linux.alibaba.com>, Yang Li <yang.lee@linux.alibaba.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMTIvMTcsIFlhbmcuTGVlIHdyb3RlOgo+ICJXaHkgbm90IHRoaXM/Cj4gICBzYmktPmdjX3Vy
-Z2VudF9oaWdoX2xpbWl0ZWQgPSB0OyIKPiAKPiBTaW5jZSAndCcgaXMgYW4gdW5zaWduZWQgbG9u
-ZyB0eXBlIGFuZCAnZ2NfdXJnZW50X2hpZ2hfbGltaXRlZCcgaXMgYSBib29sIHR5cGUsIHRoZSBh
-c3NpZ25tZW50IG9wZXJhdGlvbiB3aWxsIGNhdXNlIGEgbmV3IHdhcm5pbmcuCgpIdWgsIHRoYXQg
-ZG9lc24ndCBhbGxvdyBhdXRvIGNhc3RpbmcgYXMgd2VsbC4KCj4gCj4gCj4gLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4g
-5Y+R5Lu25Lq677yaSmFlZ2V1ayBLaW0gPGphZWdldWtAa2VybmVsLm9yZz4KPiDlj5HpgIHml7bp
-l7TvvJoyMDIx5bm0MTLmnIgxN+aXpSjmmJ/mnJ/kupQpIDAzOjI3Cj4g5pS25Lu25Lq677yaWWFu
-ZyBMaSA8eWFuZy5sZWVAbGludXguYWxpYmFiYS5jb20+Cj4g5oqE44CA6YCB77yaY2hhbyA8Y2hh
-b0BrZXJuZWwub3JnPjsgbGludXgtZjJmcy1kZXZlbCA8bGludXgtZjJmcy1kZXZlbEBsaXN0cy5z
-b3VyY2Vmb3JnZS5uZXQ+OyBsaW51eC1rZXJuZWwgPGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5v
-cmc+OyBBYmFjaSBSb2JvdCA8YWJhY2lAbGludXguYWxpYmFiYS5jb20+Cj4g5Li744CA6aKY77ya
-UmU6IFtQQVRDSCAtbmV4dF0gZjJmczogU2ltcGxpZnkgYm9vbCBjb252ZXJzaW9uCj4gCj4gT24g
-MTIvMTUsIFlhbmcgTGkgd3JvdGU6Cj4gPiBGaXggdGhlIGZvbGxvd2luZyBjb2NjaWNoZWNrIHdh
-cm5pbmc6Cj4gPiAuL2ZzL2YyZnMvc3lzZnMuYzo0OTE6NDEtNDY6IFdBUk5JTkc6IGNvbnZlcnNp
-b24gdG8gYm9vbCBub3QgbmVlZGVkIGhlcmUKPiA+IAo+ID4gUmVwb3J0ZWQtYnk6IEFiYWNpIFJv
-Ym90IDxhYmFjaUBsaW51eC5hbGliYWJhLmNvbT4KPiA+IFNpZ25lZC1vZmYtYnk6IFlhbmcgTGkg
-PHlhbmcubGVlQGxpbnV4LmFsaWJhYmEuY29tPgo+ID4gLS0tCj4gPiAgZnMvZjJmcy9zeXNmcy5j
-IHwgMiArLQo+ID4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigt
-KQo+ID4gCj4gPiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9zeXNmcy5jIGIvZnMvZjJmcy9zeXNmcy5j
-Cj4gPiBpbmRleCA5ZTFjZjQ0NjQyYWUuLjUzMGMzNmI4OWJmMSAxMDA2NDQKPiA+IC0tLSBhL2Zz
-L2YyZnMvc3lzZnMuYwo+ID4gKysrIGIvZnMvZjJmcy9zeXNmcy5jCj4gPiBAQCAtNDg4LDcgKzQ4
-OCw3IEBAIHN0YXRpYyBzc2l6ZV90IF9fc2JpX3N0b3JlKHN0cnVjdCBmMmZzX2F0dHIgKmEsCj4g
-PiAgCj4gPiAgIGlmICghc3RyY21wKGEtPmF0dHIubmFtZSwgImdjX3VyZ2VudF9oaWdoX3JlbWFp
-bmluZyIpKSB7Cj4gPiAgICBzcGluX2xvY2soJnNiaS0+Z2NfdXJnZW50X2hpZ2hfbG9jayk7Cj4g
-PiAtICBzYmktPmdjX3VyZ2VudF9oaWdoX2xpbWl0ZWQgPSB0ID09IDAgPyBmYWxzZSA6IHRydWU7
-Cj4gPiArICBzYmktPmdjX3VyZ2VudF9oaWdoX2xpbWl0ZWQgPSB0ICE9IDA7Cj4gCj4gV2h5IG5v
-dCB0aGlzPwo+ICAgc2JpLT5nY191cmdlbnRfaGlnaF9saW1pdGVkID0gdDsKPiAKPiA+ICAgIHNi
-aS0+Z2NfdXJnZW50X2hpZ2hfcmVtYWluaW5nID0gdDsKPiA+ICAgIHNwaW5fdW5sb2NrKCZzYmkt
-PmdjX3VyZ2VudF9oaWdoX2xvY2spOwo+ID4gIAo+ID4gLS0gCj4gPiAyLjIwLjEuNy5nMTUzMTQ0
-Ywo+IAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxp
-bnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNl
-Zm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xp
-bnV4LWYyZnMtZGV2ZWwK
+On 12/17, Chao Yu wrote:
+> On 2021/12/15 10:38, Yang Li wrote:
+> > Fix the following coccicheck warning:
+> > ./fs/f2fs/sysfs.c:491:41-46: WARNING: conversion to bool not needed here
+> > 
+> > Reported-by: Abaci Robot <abaci@linux.alibaba.com>
+> > Signed-off-by: Yang Li <yang.lee@linux.alibaba.com>
+> 
+> Thanks for fixing this issue, do you mind merging this fix into original patch?
+
+I applied this separately in order to avoid huge rebase.
+
+> 
+> Thanks,
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
