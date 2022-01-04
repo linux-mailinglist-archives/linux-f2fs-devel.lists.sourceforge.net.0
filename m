@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63DEC4849D2
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Jan 2022 22:24:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4428E4849CF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Jan 2022 22:24:49 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1n4rIa-0005sj-S1; Tue, 04 Jan 2022 21:24:53 +0000
+	id 1n4rIU-0005rJ-Nd; Tue, 04 Jan 2022 21:24:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1n4rIY-0005sF-WE
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jan 2022 21:24:52 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1n4rIT-0005rA-PW
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jan 2022 21:24:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4mgWYZjcNNnLGIvHQ1aFtdw0FSWPCjBYZVV6cmkzN78=; b=k/hgPoEj0Jb+IFm9m5YvAcCydx
- ByoCJfm03dYmTQyoAhvh6DMtHKbJaT4dgFtcFRyq29fhKJEKKM0YSNUQP8NmB4xyk3dTr1qt84GeT
- RVfkFjqpo/HWrc560/BPLBRO6w28ycQ00qeE1wqn/4NHOuxJHGPoELWIrzocNEgfolx0=;
+ bh=lSwZwG8haXsXYHTgKhVwUMvG6D9WXEZBNkBp3/L9j+0=; b=FwaZ9ulmrymh7LSqcKrmym7z1L
+ eDT9esxc5sxmpOM8K3xebGMR5S2/cmOQ1m3ncR6yOOnD8/6gsUB2lX+cNIiy0qvaSBtz7rcbhIL6k
+ K/i4LJS5DKC4cQL63MdVrlgJi+VIJc/sbL8bzOJzTrbwN7wBG5E2EzLGZofFkqAyDqlo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,36 +29,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4mgWYZjcNNnLGIvHQ1aFtdw0FSWPCjBYZVV6cmkzN78=; b=VQ9l4YqsIzS5SuolJ5NdkI+xzh
- 8lxPOZgfxZyWf9j8os/CM1UaAM2mBrriDvNOPfTXFQVbmaRLEDh9rrYCV1WWUu0tdFmt5I8bg9m1+
- BkZo8xoxXCLOA4B8uKIv96RGrYoOfO5vRPx+KPUcse6b1VPZ2QlG/hr9p8NjUr+kD7+w=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=lSwZwG8haXsXYHTgKhVwUMvG6D9WXEZBNkBp3/L9j+0=; b=GxEttskPVxSMoJGC6lDCwajUpX
+ v9ojV+IpkDU05maein72JU3EKYvwHKSrRfPGyOJak0rwD/hBuDHTI5qcHT2JlaW29wJ+kQPiOREVt
+ 01L9jQMbQd5qpL8QDKEnTwiJuVmMu7fZU+og4LmfypFjORllXaVgP+2sO50DSnTBjySY=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1n4rIV-0007hA-IX
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jan 2022 21:24:51 +0000
+ id 1n4rIU-0007h8-6l
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jan 2022 21:24:46 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 4CABEB817F6;
- Tue,  4 Jan 2022 21:24:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EB919C36AF2;
- Tue,  4 Jan 2022 21:24:31 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D0282614B6
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  4 Jan 2022 21:24:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 903E7C36AE0;
+ Tue,  4 Jan 2022 21:24:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1641331472;
- bh=YiWOX5NHugXaDJT6Ol1nD26li2vyW4k8fkEADYyvcpI=;
+ bh=QaQAAMBUqG+y0KgQZ5h783BXHPubPbNfRTxo2K7MZnw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=S/XeR0ge7IecEcEoypLgMUedgfPysRkHsJRD3+yW2ljdA8Q2wPGq71noN3eDTlbc6
- 2/SAMRrXCjndlnTeiGs+bFaroRXJjwqWY64h9LQDmejyaR8NOdEQJubQTAiJVqCRzE
- ZoF0f6h1DUEAScti5ZLYnfuVFmHnOHD20GcTCgMlW0xQES0vF7pJVcjB6eRwACRImo
- EdBBH/cohz5xgJm70PGj4ofxBeyVXqzR6aBk3MM/xBexAfPacmjIdbZy3F7T1EYirf
- NIVEgZOstRMqeuz+Kp0W1HFGhBsQ6OuLq8F/GxxvawQbeqrB2gXXM3Az/KpJTzjFOo
- If7JG/hGy+wdA==
+ b=gBKH6kSPJOUkTsxvsD7etYzV0VbCyGZeA8cg1OsoalNWIfmY5A8NiU+lA5qsZx82g
+ u/T4iZlLCAL5oU3cjebSIIsAqN84BS64MHhvHndcIW2quHZtrA6ESrYOvqlUpv2lzo
+ vR8XStaAsdgSUlXx+tSq0bmjCP7+iCEeY81qgwzC4R8tzfsCJ0tZf5q8iQemklqkvA
+ o7rYb16fOXdN2dCMJzovpODu4MT5qZS0FhPXsJ2E1XjudV6KqmcxzALzGmweYoTfyP
+ s9tzYsrvcxf4J1UQN3TNP/Cov7FJ2p9hiRq17NjooNL3SssV4KpV3zu2WJXpUzbRfT
+ NXCKNG6p+pGhg==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	linux-f2fs-devel@lists.sourceforge.net
-Date: Tue,  4 Jan 2022 13:24:15 -0800
-Message-Id: <20220104212419.1879225-2-jaegeuk@kernel.org>
+Date: Tue,  4 Jan 2022 13:24:16 -0800
+Message-Id: <20220104212419.1879225-3-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.34.1.448.ga2b2bfdf31-goog
 In-Reply-To: <20220104212419.1879225-1-jaegeuk@kernel.org>
 References: <20220104212419.1879225-1-jaegeuk@kernel.org>
@@ -70,12 +71,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Eric Biggers <ebiggers@google.com> Replace 'if (ret
- > 0)' with 'if (ret <= 0) goto out_unlock;
- '. No change in behavior. Signed-off-by:
- Eric Biggers <ebiggers@google.com> Reviewed-by: Chao Yu <chao@kernel.org>
- Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> --- fs/f2fs/file.c | 64
- +++++++++++++++++++++++++++ [...] 
+ Content preview:  DIO preallocates physical blocks before writing data, but
+ if an error occurrs or power-cut happens, we can see block contents from the
+ disk. This patch tries to fix it by 1) turning to buffered writes [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,9 +87,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1n4rIV-0007hA-IX
-Subject: [f2fs-dev] [PATCH 2/6] f2fs: reduce indentation in
- f2fs_file_write_iter()
+X-Headers-End: 1n4rIU-0007h8-6l
+Subject: [f2fs-dev] [PATCH 3/6] f2fs: do not expose unwritten blocks to user
+ by DIO
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,106 +101,149 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Eric Biggers <ebiggers@google.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+DIO preallocates physical blocks before writing data, but if an error occurrs
+or power-cut happens, we can see block contents from the disk. This patch tries
+to fix it by 1) turning to buffered writes for DIO into holes, 2) truncating
+unwritten blocks from error or power-cut.
 
-Replace 'if (ret > 0)' with 'if (ret <= 0) goto out_unlock;'.
-No change in behavior.
-
-Signed-off-by: Eric Biggers <ebiggers@google.com>
-Reviewed-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/file.c | 64 +++++++++++++++++++++++++++-----------------------
- 1 file changed, 34 insertions(+), 30 deletions(-)
+ fs/f2fs/data.c  |  5 ++++-
+ fs/f2fs/f2fs.h  |  5 +++++
+ fs/f2fs/file.c  | 27 ++++++++++++++++++---------
+ fs/f2fs/inode.c |  8 ++++++++
+ 4 files changed, 35 insertions(+), 10 deletions(-)
 
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 3db0f3049b90..9c867de1ec29 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1543,8 +1543,11 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+ 					flag != F2FS_GET_BLOCK_DIO);
+ 				err = __allocate_data_block(&dn,
+ 							map->m_seg_type);
+-				if (!err)
++				if (!err) {
++					if (flag == F2FS_GET_BLOCK_PRE_DIO)
++						file_need_truncate(inode);
+ 					set_inode_flag(inode, FI_APPEND_WRITE);
++				}
+ 			}
+ 			if (err)
+ 				goto sync_out;
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 6f196621f772..d7435fcb9658 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -654,6 +654,7 @@ enum {
+ #define FADVISE_KEEP_SIZE_BIT	0x10
+ #define FADVISE_HOT_BIT		0x20
+ #define FADVISE_VERITY_BIT	0x40
++#define FADVISE_TRUNC_BIT	0x80
+ 
+ #define FADVISE_MODIFIABLE_BITS	(FADVISE_COLD_BIT | FADVISE_HOT_BIT)
+ 
+@@ -681,6 +682,10 @@ enum {
+ #define file_is_verity(inode)	is_file(inode, FADVISE_VERITY_BIT)
+ #define file_set_verity(inode)	set_file(inode, FADVISE_VERITY_BIT)
+ 
++#define file_should_truncate(inode)	is_file(inode, FADVISE_TRUNC_BIT)
++#define file_need_truncate(inode)	set_file(inode, FADVISE_TRUNC_BIT)
++#define file_dont_truncate(inode)	clear_file(inode, FADVISE_TRUNC_BIT)
++
+ #define DEF_DIR_LEVEL		0
+ 
+ enum {
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index fc87d0f5b82b..808a7c24d993 100644
+index 808a7c24d993..e1445cf915ea 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -4338,44 +4338,48 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+@@ -1687,6 +1687,7 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
+ 
+ 		map.m_seg_type = CURSEG_COLD_DATA_PINNED;
+ 		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_DIO);
++		file_dont_truncate(inode);
+ 
+ 		up_write(&sbi->pin_sem);
+ 
+@@ -4257,6 +4258,13 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter)
+ 	/* If it will be an out-of-place direct write, don't bother. */
+ 	if (dio && f2fs_lfs_mode(sbi))
+ 		return 0;
++	/*
++	 * Don't preallocate holes aligned to DIO_SKIP_HOLES which turns into
++	 * buffered IO, if DIO meets any holes.
++	 */
++	if (dio && i_size_read(inode) &&
++		(F2FS_BYTES_TO_BLK(pos) < F2FS_BLK_ALIGN(i_size_read(inode))))
++		return 0;
+ 
+ 	/* No-wait I/O can't allocate blocks. */
+ 	if (iocb->ki_flags & IOCB_NOWAIT)
+@@ -4292,8 +4300,8 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter)
  	}
  
- 	ret = generic_write_checks(iocb, from);
--	if (ret > 0) {
--		if (iocb->ki_flags & IOCB_NOWAIT) {
--			if (!f2fs_overwrite_io(inode, iocb->ki_pos,
--						iov_iter_count(from)) ||
-+	if (ret <= 0)
-+		goto out_unlock;
-+
-+	if (iocb->ki_flags & IOCB_NOWAIT) {
-+		if (!f2fs_overwrite_io(inode, iocb->ki_pos,
-+					iov_iter_count(from)) ||
- 				f2fs_has_inline_data(inode) ||
- 				f2fs_force_buffered_io(inode, iocb, from)) {
--				ret = -EAGAIN;
--				goto out_unlock;
--			}
--		}
--		if (iocb->ki_flags & IOCB_DIRECT) {
--			ret = f2fs_convert_inline_inode(inode);
--			if (ret)
--				goto out_unlock;
--		}
--		/* Possibly preallocate the blocks for the write. */
--		target_size = iocb->ki_pos + iov_iter_count(from);
--		preallocated = f2fs_preallocate_blocks(iocb, from);
--		if (preallocated < 0) {
--			ret = preallocated;
-+			ret = -EAGAIN;
- 			goto out_unlock;
- 		}
-+	}
+ 	ret = f2fs_map_blocks(inode, &map, 1, flag);
+-	/* -ENOSPC is only a fatal error if no blocks could be allocated. */
+-	if (ret < 0 && !(ret == -ENOSPC && map.m_len > 0))
++	/* -ENOSPC|-EDQUOT are fine to report the number of allocated blocks. */
++	if (ret < 0 && !((ret == -ENOSPC || ret == -EDQUOT) && map.m_len > 0))
+ 		return ret;
+ 	if (ret == 0)
+ 		set_inode_flag(inode, FI_PREALLOCATED_ALL);
+@@ -4359,20 +4367,21 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+ 	/* Possibly preallocate the blocks for the write. */
+ 	target_size = iocb->ki_pos + iov_iter_count(from);
+ 	preallocated = f2fs_preallocate_blocks(iocb, from);
+-	if (preallocated < 0) {
++	if (preallocated < 0)
+ 		ret = preallocated;
+-		goto out_unlock;
+-	}
+-
+-	ret = __generic_file_write_iter(iocb, from);
++	else
++		ret = __generic_file_write_iter(iocb, from);
  
--		ret = __generic_file_write_iter(iocb, from);
-+	if (iocb->ki_flags & IOCB_DIRECT) {
-+		ret = f2fs_convert_inline_inode(inode);
+ 	/* Don't leave any preallocated blocks around past i_size. */
+-	if (preallocated > 0 && i_size_read(inode) < target_size) {
++	if (preallocated && i_size_read(inode) < target_size) {
+ 		down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+ 		filemap_invalidate_lock(inode->i_mapping);
+-		f2fs_truncate(inode);
++		if (!f2fs_truncate(inode))
++			file_dont_truncate(inode);
+ 		filemap_invalidate_unlock(inode->i_mapping);
+ 		up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
++	} else {
++		file_dont_truncate(inode);
+ 	}
+ 
+ 	clear_inode_flag(inode, FI_PREALLOCATED_ALL);
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index 0f8b2df3e1e0..6998eb1d6bdb 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -544,6 +544,14 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+ 		goto bad_inode;
+ 	}
+ 	f2fs_set_inode_flags(inode);
++
++	if (file_should_truncate(inode)) {
++		ret = f2fs_truncate(inode);
 +		if (ret)
-+			goto out_unlock;
++			goto bad_inode;
++		file_dont_truncate(inode);
 +	}
-+	/* Possibly preallocate the blocks for the write. */
-+	target_size = iocb->ki_pos + iov_iter_count(from);
-+	preallocated = f2fs_preallocate_blocks(iocb, from);
-+	if (preallocated < 0) {
-+		ret = preallocated;
-+		goto out_unlock;
-+	}
- 
--		/* Don't leave any preallocated blocks around past i_size. */
--		if (preallocated > 0 && i_size_read(inode) < target_size) {
--			down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
--			filemap_invalidate_lock(inode->i_mapping);
--			f2fs_truncate(inode);
--			filemap_invalidate_unlock(inode->i_mapping);
--			up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
--		}
--		clear_inode_flag(inode, FI_PREALLOCATED_ALL);
-+	ret = __generic_file_write_iter(iocb, from);
- 
--		if (ret > 0)
--			f2fs_update_iostat(F2FS_I_SB(inode), APP_WRITE_IO, ret);
-+	/* Don't leave any preallocated blocks around past i_size. */
-+	if (preallocated > 0 && i_size_read(inode) < target_size) {
-+		down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
-+		filemap_invalidate_lock(inode->i_mapping);
-+		f2fs_truncate(inode);
-+		filemap_invalidate_unlock(inode->i_mapping);
-+		up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
- 	}
 +
-+	clear_inode_flag(inode, FI_PREALLOCATED_ALL);
-+
-+	if (ret > 0)
-+		f2fs_update_iostat(F2FS_I_SB(inode), APP_WRITE_IO, ret);
-+
- out_unlock:
- 	inode_unlock(inode);
- out:
+ 	unlock_new_inode(inode);
+ 	trace_f2fs_iget(inode);
+ 	return inode;
 -- 
 2.34.1.448.ga2b2bfdf31-goog
 
