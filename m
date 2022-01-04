@@ -2,82 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C213A48452C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Jan 2022 16:48:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9EB44849BD
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Jan 2022 22:15:34 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1n4m3E-00060A-7O; Tue, 04 Jan 2022 15:48:40 +0000
+	id 1n4r9U-0007UX-A2; Tue, 04 Jan 2022 21:15:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1n4m3B-000603-NR
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jan 2022 15:48:37 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1n4r9T-0007UR-8t
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jan 2022 21:15:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bq+MId+NKm13zzhRTfLqPdWB2dcv1BIsh+KimD1sbk8=; b=W8FkFEVye89lYLqnHnARTjT0Xz
- G3DoMI7ez4TtY+P6DpjO5QG4xeFP0RGGVaosGMiFlCU5iyKSHVrOKSVBfe6i9h7DukOF+GxeQ6gDB
- QOkwIciOtQlZTZ0zLfgVWUT6kJhxFAIh+AMBV8QpPjWuJVOBk+O9mOTUhblQXCVY/70U=;
+ bh=psC4H3oa5ayoSvwaJLuDe8l0ZAZFRtyWUVB2hVqESes=; b=UiYEE5oQ+aN+prbKSfUUZ/UX99
+ TdQ8a8WxGRlA4MWYGM6KoN1sIj28RVArgj3q0vCMa6r7xCd+fgBIJi8NqejleXTrRpC5psFIgDaPJ
+ J8aNXFYu5pm6DB1mAa8KioRTPuNPW4aXCvtfoJhOjSqADdvHqofQYwujrXuTgkj45QsQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bq+MId+NKm13zzhRTfLqPdWB2dcv1BIsh+KimD1sbk8=; b=dnXYihS8wU9e/xqv9DpTLqHvf3
- E8BKBRD8NT39ZMCuyxT1EAWgXy7h42pa3mTKnE65XsYvj2D6NaoIA3FvapDKH5IMKqMtAhCRvTHUH
- cC7nUmkr5HuAy2GdzHlbVoguF7G+CjvnPGLe4EfU91JwZonrO7baFBDo6MOLs8QucPVA=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=psC4H3oa5ayoSvwaJLuDe8l0ZAZFRtyWUVB2hVqESes=; b=EkesZJjrUqx6zBu9VxhfhfLZcr
+ Sm+ya7RoBDZJ2r6v8obETrVeupdBhqvUhJXNheJn22OJCoyI6/HHT1wuJ4d5prRrLVjj/sxYBzlNQ
+ XQjKWrCezkaMZhYqjewiJuf7j1pKxHjoEKAlJMorLyPF699KvD/063iAfpxiVHddtARA=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1n4m3A-0020bS-Sg
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jan 2022 15:48:37 +0000
+ id 1n4r9R-002FwG-14
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 04 Jan 2022 21:15:27 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id A7A85B816F8;
- Tue,  4 Jan 2022 15:48:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDABCC36AED;
- Tue,  4 Jan 2022 15:48:27 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9C17C6144A
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  4 Jan 2022 21:15:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E86CEC36AEB;
+ Tue,  4 Jan 2022 21:15:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1641311309;
- bh=JhpOCub1C8JKAe8Xx/XjYFctuvGH7dqRVs206RpUSeM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=AVqgS7EOB/Nu/S776pX8sLCCKM2DqBOroODt8HwZxIdMqJE5AXK31TMny8rdEmCNR
- /JD8lA9A3NHzkxpMLAw0GQ05aikZgfuJI0Fg9Vwi6ivp9D+bccqKX7+LDXb8XF3Wgk
- qH+mgooNs3fWKvCAgGxgpJd2vYpyWoUXCpjG5ttQjp+EOe2ew4V3Qf1KeO2eTzU+m/
- w06k39GkeUcNTcHIcRBsdVrMghg5DrmcaTi6iT7T0OFc1fTbWH1frhKmnBxd/LTV11
- KUY01e7qU8+xmAZa4hUTuo9ZGZ2bw5Ii6Y487MBT59X6uJpj1yw81/QeFL/A4CzYZI
- B+J3FgAWVmIDA==
-Message-ID: <f07cbfa3-29f8-c671-98cf-45b664000f95@kernel.org>
-Date: Tue, 4 Jan 2022 23:48:25 +0800
+ s=k20201202; t=1641330911;
+ bh=aGwL1KfIyrbAmcd342EY4+l8L/kbbRvuvCn21vJF5Xg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=lhJpT4pWc2lq1KVuyf1JbpIH1IdewsJ55pRrICra7G69/ucvcTFRcdSkyVPrUVtTE
+ jeBG22FtZ8tbuUz6il0e9qM7SnGrK/gMnmbvmpTfkrg6xsxh718jRORTd7YxOTQ/OU
+ snskQpQcuAYp2rLGmHwl2a7R4Pi8sNWv5tQ1AjNjsoAg2XBxUudZnOaDMTdT69KUvK
+ RuGMEA4oMKouMcPS1wNef6w5zFqX33MQdp+aGCIeoCVrqcrI6HMo9smwK73zBqYeR8
+ 6aRN6KBFuCRVz8K6l1IIdbCP6ZDTJbWzpfb0yXeeS2OUJilAQNNpCdcYkzpa66Rj1u
+ XPT7zkHtwIeAg==
+Date: Tue, 4 Jan 2022 13:15:09 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <YdS43f15g1enklVX@google.com>
+References: <b36e2d44-4834-3931-6a32-4fa52d1d7785@kernel.org>
+ <YahIf3UlhuxJT1O4@sol.localdomain>
+ <1ba0f002-42c7-b085-0c54-6071664ba79b@kernel.org>
+ <YakPrVPz5+qQm3kQ@sol.localdomain> <YakXMV0UvBV7TVwe@google.com>
+ <YakX38onzsW5Ef8B@google.com> <YakzVAkHAVMueJwe@sol.localdomain>
+ <Yak4cxU6htgQk7ck@google.com> <Yak6gtXthBRK3eeM@google.com>
+ <ed10bb7a-af8c-d5a6-8bb1-a47559f78fbf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.0
-Content-Language: en-US
-To: Greg KH <gregkh@linuxfoundation.org>
-References: <20220104130513.3077-1-chao@kernel.org>
- <YdRJEBhSg8vlD6cP@kroah.com>
- <53d75d26-2289-a66a-a7fa-62593bad81c8@kernel.org>
- <YdRk8tXZ6PHXKLJV@kroah.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <YdRk8tXZ6PHXKLJV@kroah.com>
-X-Spam-Score: -2.9 (--)
+Content-Disposition: inline
+In-Reply-To: <ed10bb7a-af8c-d5a6-8bb1-a47559f78fbf@kernel.org>
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/1/4 23:17, Greg KH wrote: > On Tue, Jan 04, 2022 at
- 11:05:36PM +0800, Chao Yu wrote: >> On 2022/1/4 21:18, Greg KH wrote: >>>
- On Tue, Jan 04, 2022 at 09:05:13PM +0800, Chao Yu wrote: >>>> comm [...] 
- Content analysis details:   (-2.9 points, 6.0 required)
+ Content preview:  On 12/30, Chao Yu wrote: > On 2021/12/3 5:28, Jaegeuk Kim
+ wrote: > > On 12/02, Jaegeuk Kim wrote: > > > On 12/02, Eric Biggers wrote:
+ > > > > On Thu, Dec 02, 2021 at 11:00:47AM -0800, Jaegeuk Kim wrot [...] 
+ Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
@@ -89,10 +91,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1n4m3A-0020bS-Sg
-Subject: Re: [f2fs-dev] [PATCH] f2fs: quota: fix potential deadlock
+X-Headers-End: 1n4r9R-002FwG-14
+Subject: Re: [f2fs-dev] [PATCH 5/6] f2fs: implement iomap operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,101 +105,84 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, Yi Zhuang <zhuangyi1@huawei.com>,
- stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Eric Biggers <ebiggers@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/1/4 23:17, Greg KH wrote:
-> On Tue, Jan 04, 2022 at 11:05:36PM +0800, Chao Yu wrote:
->> On 2022/1/4 21:18, Greg KH wrote:
->>> On Tue, Jan 04, 2022 at 09:05:13PM +0800, Chao Yu wrote:
->>>> commit a5c0042200b28fff3bde6fa128ddeaef97990f8d upstream.
->>>>
->>>> As Yi Zhuang reported in bugzilla:
->>>>
->>>> https://bugzilla.kernel.org/show_bug.cgi?id=214299
->>>>
->>>> There is potential deadlock during quota data flush as below:
->>>>
->>>> Thread A:			Thread B:
->>>> f2fs_dquot_acquire
->>>> down_read(&sbi->quota_sem)
->>>> 				f2fs_write_checkpoint
->>>> 				block_operations
->>>> 				f2fs_look_all
->>>> 				down_write(&sbi->cp_rwsem)
->>>> f2fs_quota_write
->>>> f2fs_write_begin
->>>> __do_map_lock
->>>> f2fs_lock_op
->>>> down_read(&sbi->cp_rwsem)
->>>> 				__need_flush_qutoa
->>>> 				down_write(&sbi->quota_sem)
->>>>
->>>> This patch changes block_operations() to use trylock, if it fails,
->>>> it means there is potential quota data updater, in this condition,
->>>> let's flush quota data first and then trylock again to check dirty
->>>> status of quota data.
->>>>
->>>> The side effect is: in heavy race condition (e.g. multi quota data
->>>> upaters vs quota data flusher), it may decrease the probability of
->>>> synchronizing quota data successfully in checkpoint() due to limited
->>>> retry time of quota flush.
->>>>
->>>> Fixes: db6ec53b7e03 ("f2fs: add a rw_sem to cover quota flag changes")
->>>> Cc: stable@vger.kernel.org # v5.3+
->>>> Reported-by: Yi Zhuang <zhuangyi1@huawei.com>
->>>> Signed-off-by: Chao Yu <chao@kernel.org>
->>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>>> ---
->>>>    fs/f2fs/checkpoint.c | 3 ++-
->>>>    1 file changed, 2 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
->>>> index 83e9bc0f91ff..7b0282724231 100644
->>>> --- a/fs/f2fs/checkpoint.c
->>>> +++ b/fs/f2fs/checkpoint.c
->>>> @@ -1162,7 +1162,8 @@ static bool __need_flush_quota(struct f2fs_sb_info *sbi)
->>>>    	if (!is_journalled_quota(sbi))
->>>>    		return false;
->>>> -	down_write(&sbi->quota_sem);
->>>> +	if (!down_write_trylock(&sbi->quota_sem))
->>>> +		return true;
->>>>    	if (is_sbi_flag_set(sbi, SBI_QUOTA_SKIP_FLUSH)) {
->>>>    		ret = false;
->>>>    	} else if (is_sbi_flag_set(sbi, SBI_QUOTA_NEED_REPAIR)) {
->>>> -- 
->>>> 2.32.0
->>>>
->>>
->>> What stable tree(s) is this for?
->>
->> Oh, please help to try applying to 5.4, 5.10, and 5.15 stable trees, thanks!
+On 12/30, Chao Yu wrote:
+> On 2021/12/3 5:28, Jaegeuk Kim wrote:
+> > On 12/02, Jaegeuk Kim wrote:
+> > > On 12/02, Eric Biggers wrote:
+> > > > On Thu, Dec 02, 2021 at 11:00:47AM -0800, Jaegeuk Kim wrote:
+> > > > > On 12/02, Jaegeuk Kim wrote:
+> > > > > > On 12/02, Eric Biggers wrote:
+> > > > > > > On Thu, Dec 02, 2021 at 10:04:11PM +0800, Chao Yu wrote:
+> > > > > > > > On 2021/12/2 12:15, Eric Biggers wrote:
+> > > > > > > > > On Thu, Dec 02, 2021 at 11:10:41AM +0800, Chao Yu wrote:
+> > > > > > > > > > Why not relocating this check before f2fs_map_blocks()?
+> > > > > > > > 
+> > > > > > > > Wait, it supports DIO in multi-device image after commit 	71f2c8206202
+> > > > > > > > ("f2fs: multidevice: support direct IO"), how about
+> > > > > > > > checking with f2fs_allow_multi_device_dio()?
+> > > > > > > > 
+> > > > > > > > Thanks,
+> > > > > > > > 
+> > > > > > > 
+> > > > > > > Okay, that was not the case when I sent this patch originally.  We'll need to
+> > > > > > > update this to support multiple devices.
+> > > > > > 
+> > > > > > Chao/Eric, does this make sense?
+> > > > > > 
+> > > > > > --- a/fs/f2fs/data.c
+> > > > > > +++ b/fs/f2fs/data.c
+> > > > > > @@ -4070,11 +4070,10 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+> > > > > >                  }
+> > > > > >                  if (WARN_ON_ONCE(!__is_valid_data_blkaddr(map.m_pblk)))
+> > > > > >                          return -EINVAL;
+> > > > > > -               iomap->addr = blks_to_bytes(inode, map.m_pblk);
+> > > > > > 
+> > > > > > -               if (WARN_ON_ONCE(f2fs_is_multi_device(F2FS_I_SB(inode))))
+> > > > > > -                       return -EINVAL;
+> > > > > > -               iomap->bdev = inode->i_sb->s_bdev;
+> > > > > > +               iomap->bdev = map->m_multidev_dio ? map.m_bdev :
+> > > > > 
+> > > > > correction:			map.m_multidev_dio
+> > > > > 
+> > > > 
+> > > > I guess so, but why doesn't f2fs_map_blocks() just always set m_bdev to the
+> > > > correct block device?  What is the point of m_multidev_dio?
+> > > 
+> > > It seems we can simply assign iomap->bdev = map.m_bdev, and remove
+> > > map->m_multidev_dio.
+> > 
+> > Ok, it was used in previous get_block flow, but I think it'd be worth to keep it
+> > to show by f2fs_map_blocks tracepoint.
 > 
-> This is already in the 5.15.6 kernel release, do you need it applied
-> there again?  :)
+> The last version wasn't sent into mailing list?
 
-Oops, no, so 5.4 and 5.10 is enough. ;)
-We can skip 5.15 since this patch was merged in 5.15-rc1 at the first time.
+No, will post it again soon.
 
 > 
->> Let me know if I should send patches for different trees separately.
+> Thanks,
 > 
-> If the same commit here works for all of the above, it's fine.  But for
-> some reason I don't think it will work in 5.15.y...
-
-Copied.
-
-Thank you for the help!
-
-Thanks,
-
-> 
-> thanks,
-> 
-> greg k-h
+> > 
+> > > 
+> > > > 
+> > > > - Eric
+> > > 
+> > > 
+> > > _______________________________________________
+> > > Linux-f2fs-devel mailing list
+> > > Linux-f2fs-devel@lists.sourceforge.net
+> > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> > 
+> > 
+> > _______________________________________________
+> > Linux-f2fs-devel mailing list
+> > Linux-f2fs-devel@lists.sourceforge.net
+> > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
