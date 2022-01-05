@@ -2,61 +2,60 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B342485360
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jan 2022 14:19:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49659485365
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jan 2022 14:20:17 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1n56CW-0005XY-7v; Wed, 05 Jan 2022 13:19:36 +0000
+	id 1n56D9-0005Zc-LO; Wed, 05 Jan 2022 13:20:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1n56CU-0005XS-Cc
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jan 2022 13:19:34 +0000
+ (envelope-from <chao@kernel.org>) id 1n56D7-0005ZM-HE
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jan 2022 13:20:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zw5CC9m0m8IVO1gnSdiL1eWE1uP0AFL4MCtEPJU5YoA=; b=LVognLdzlcadl/VkgJMwq6F/Xx
- CQfYaSX0eMCRjop2IsreCUP0Cd2Yt4bBREba2MC3JOOFbMrTpS2tf6xq4Zxw8NyQXrsDSWZOkYi/t
- P7iF4JpY7Z5ecF3mK7MXmWu7C82ZRDIfetNoP8zG7SAujZyUcBqhmejPpYBW3xns+JRU=;
+ bh=ToanKNqM1R1Zf/2W/RRVzJJebLFPl+4rgljnX1K5Sqo=; b=TLw4MO1GI0QlGB321hO+cvnMwY
+ 5jenxlPhR1+mHLZLV5w28yMs/PdTJadSefqjCqWp88ZUQCPZpGx4QEPmvUNH93CXsNOzklkK7IW+K
+ F8dhiuTGGRtyNG1QrgKTZO0xChNCBfvh7SW9axBhCKXigSeLGSub7GQnbCDSiiIoVpTs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zw5CC9m0m8IVO1gnSdiL1eWE1uP0AFL4MCtEPJU5YoA=; b=AXjc9jNILxlRQXkVZ3VnzlLkv2
- b+MyhxQe0GIQ9V17MQ1Jvi2A4trivgag38V5XtaaVENOvEosyK0sRBT4cj/T8kqxnU1OnA7F29Y0M
- Rt8+0k1ZY0GW2OW2NeEQ0ozQVtSr/vs9EUZbdlioPXr+QO6qhyTWblTG/Y3bkElU1Y38=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=ToanKNqM1R1Zf/2W/RRVzJJebLFPl+4rgljnX1K5Sqo=; b=BglHxPjXT3tL2lKsbMxJf5mXVL
+ rmrCKuxw35x7Nl2f1d5BL5qo9eNDGKiPxRv1/R7ALqgnv82u5HSpxWKeFqlApZB54H2pDQlAKAYSS
+ +28Q1Tiklwz0+4lBpyn3TNikbDREgQN4sOU3z81MaiZUyMRwIz/0iVmCo9jknyikhe9M=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1n56CQ-00032w-Qf
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jan 2022 13:19:34 +0000
+ id 1n56D6-00034y-W0
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 05 Jan 2022 13:20:13 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 98C05B81AA0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  5 Jan 2022 13:19:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ADD8DC36AE0;
- Wed,  5 Jan 2022 13:19:17 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9C027616D4;
+ Wed,  5 Jan 2022 13:20:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1A623C36AE0;
+ Wed,  5 Jan 2022 13:20:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1641388758;
- bh=+WwWNgnGqh9XKYRNXBRhQR5JlOjez82G+xx4+InuGTk=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=nnd1NXzGhmBCx2stpx6uM8DAuouE5BCINIPeMH9oYt8XOtqzqJyi2X9Zhhbp8ztlh
- L7Fr0inLESAUrye5qEw3i60fI2R4Cx0YEkN1aixSzFlfOGdRo2ZoFj31c735d8clTB
- Rqw5ReShkO92DUbHLjs4FrOEv87SR2YdSRyNu030IoIIAUhdl40Qt8DVMUdNdPdgI2
- nKl1tR8ELGcqzCgPixdRQ2UWolsIkL7UrnX5ETsI6ObIyaoisep7vCeYXsEdxDaW4i
- qR0cgopk6DMeX6Xt118mzP+SBAJx5LpdCmXu9+WNXX5j9vndmhCOtWnhGcZM6s0bIE
- Fj+dSffn4z0Gg==
-Message-ID: <a2036978-81f9-fad4-90ce-15dadf048693@kernel.org>
-Date: Wed, 5 Jan 2022 21:19:12 +0800
+ s=k20201202; t=1641388807;
+ bh=5DYH+Xsmw1j55OhJ3f6OPmp1X9UKdjHNAC16Jtgw5gI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=l7vKgxPg1dyrBfvf1QiQ0MXjJmF8PkGXAQhkifQaofH5oCJqLv3JwvkkHAbolQDuG
+ 5srUtVayyFIiPOp9ZLT9kVYgvYHRQnd+nEbMr1r2m0bLPUZxDiJhUiHub80vCfM1Zu
+ IqJpW17+RQwQppsxTO0vvJB7/5lOEaOr05G+KEpU24ylKpXijubkJwoxf5/n+pL1mM
+ JCnJaedIxvgMUJdvb3kcee03/LHWgEHixIID3tasELG/9rkHT86zBJhILHiZK7UeYU
+ WEXqNvOtThmRHZZ+nNMlfvE9RoBLQl1NjSWkhT6IPak1i/JVSfHVlSYmcLlvO6tnqO
+ iSRDMpA0+VgvQ==
+Message-ID: <f8c0d9f8-6a1f-e7b7-4dd3-fcd31272a0df@kernel.org>
+Date: Wed, 5 Jan 2022 21:20:02 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.4.0
@@ -64,9 +63,9 @@ Content-Language: en-US
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 References: <20220104212419.1879225-1-jaegeuk@kernel.org>
- <20220104212419.1879225-3-jaegeuk@kernel.org>
+ <20220104212419.1879225-5-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220104212419.1879225-3-jaegeuk@kernel.org>
+In-Reply-To: <20220104212419.1879225-5-jaegeuk@kernel.org>
 X-Spam-Score: -2.9 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -74,10 +73,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/1/5 5:24,
- Jaegeuk Kim wrote: > DIO preallocates physical
- blocks before writing data, but if an error occurrs > or power-cut happens,
- we can see block contents from the disk. This patch tries > [...] 
+ Content preview:  On 2022/1/5 5:24, Jaegeuk Kim wrote: > From: Eric Biggers
+ <ebiggers@google.com> > > Implement 'struct iomap_ops' for f2fs, in preparation
+ for making f2fs > use iomap for direct I/O. > > Note that this [...] 
  Content analysis details:   (-2.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,9 +90,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1n56CQ-00032w-Qf
-Subject: Re: [f2fs-dev] [PATCH 3/6] f2fs: do not expose unwritten blocks to
- user by DIO
+X-Headers-End: 1n56D6-00034y-W0
+Subject: Re: [f2fs-dev] [PATCH 5/6] f2fs: implement iomap operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,16 +103,21 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Eric Biggers <ebiggers@google.com>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2022/1/5 5:24, Jaegeuk Kim wrote:
-> DIO preallocates physical blocks before writing data, but if an error occurrs
-> or power-cut happens, we can see block contents from the disk. This patch tries
-> to fix it by 1) turning to buffered writes for DIO into holes, 2) truncating
-> unwritten blocks from error or power-cut.
+> From: Eric Biggers <ebiggers@google.com>
 > 
+> Implement 'struct iomap_ops' for f2fs, in preparation for making f2fs
+> use iomap for direct I/O.
+> 
+> Note that this may be used for other things besides direct I/O in the
+> future; however, for now I've only tested it for direct I/O.
+> 
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
