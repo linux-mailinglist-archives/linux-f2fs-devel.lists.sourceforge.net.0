@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E49054880E0
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  8 Jan 2022 03:21:47 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BAD8488120
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  8 Jan 2022 04:36:20 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1n61MV-0006rn-1E; Sat, 08 Jan 2022 02:21:41 +0000
+	id 1n62We-0004b3-KP; Sat, 08 Jan 2022 03:36:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ebiggers@kernel.org>) id 1n61MT-0006rg-8q
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 08 Jan 2022 02:21:40 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1n62Wc-0004ax-PH
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 08 Jan 2022 03:36:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CtUXuo+hHAB+sfGbSESsl221tlomTnH+6pgXPwBA14k=; b=M0Yuuju1CNaQoeV7dR8+A+iHut
- NM4LXVrUDZRk//THeRaOo/Bpphzrb7FQVophq47cdbZ6lur4ytNF3jnPHVim8sYqhxM6peqa54675
- GKlr4b0I+yuQjbQ90CM1xoaPI/4cMPRgzxSYl0aokGAB894RYQTUazqq/eys7uWeMX7w=;
+ bh=tXOaefNfEsjbJnQZ6Fwv/vqxh7lX/EyQB0b/hGVc2RE=; b=LiRwBu4jgVJUU2y2bWQhRb7mZG
+ 0PGOkwwpJ1nTeQEtywgs/NQoi7hpK6YMEqyFv8jttob53TI/Od7eFUGMcwwVSgw2S/yaVa/ek7UQu
+ Ra8PzcOpxGJqpnQ/4rrP2Xs8cGuHMxzDY79G/4fbPYg5owpzOUdy7TGJofjnWRxRzhDs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,42 +29,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CtUXuo+hHAB+sfGbSESsl221tlomTnH+6pgXPwBA14k=; b=AyW3e9gk1GgfhMUR6hDbXg4+Ip
- GOyXZg1Lbdz6wh3Lc8veGSN3cI/c+BALDQybBnb7awJi6ewM+BdC4l2DhNBAqhXRJpiEUrtpcR4VX
- 3hVtcU0OVN+mAUsHe7bAXTBhA7IHW1YOruK/N+iy5P8lrXaYGzlaAKdMm4iMhj7n2/LQ=;
+ bh=tXOaefNfEsjbJnQZ6Fwv/vqxh7lX/EyQB0b/hGVc2RE=; b=aRE8X1e26q8BB1cElaYfrHiYgG
+ s4YFKqEpAqT/97bXIRmz1C7TniBpUmQBkASlWjsioliC8H3Mxl0f8kkT1Usj5U5qUPW7fUincknVZ
+ mmJCcQT0EMQPhZgh3VelPDU51+bXFVOPO/hDN2hRrVMKK3NAPVANg6tXQa5yD5HXdqzM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1n61MR-0004cV-EZ
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 08 Jan 2022 02:21:39 +0000
+ id 1n62WZ-005h7X-MX
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 08 Jan 2022 03:36:13 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 468D561F0C
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 547166205A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat,  8 Jan 2022 02:21:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99DBCC36AEB;
- Sat,  8 Jan 2022 02:21:28 +0000 (UTC)
+ Sat,  8 Jan 2022 03:35:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A14B1C36AE0;
+ Sat,  8 Jan 2022 03:35:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1641608488;
- bh=d6tCE8L07WiRQLdTYY6Wo8RkTxESU2i1+P95PULKkIY=;
+ s=k20201202; t=1641612957;
+ bh=hKYGsyuzBJO04oP8yE2Lv5IRXUyoE6ue4ZmbzPKsNy4=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=bujMAGF6pgyHVhKQKZcmvfxdRkR7hdH8E6Z2WtaUI2kJMt7ZWdpVwY8j28eU2pjsr
- eB5noMBWxJLjXGt9AcSc0tOordHBLhAGcEG2AamuSvy68MFEZo3PDnu/ABNdOr7kNN
- eVvAoNt+VdAVYfNQvBxNV1RQ8y5vpoXfoFTsikDFRDKP5WfV+Dq2pzuon6Vvx89/GM
- pPyfOWeeIn9MFS8cyWShjIWRIulzTGoOGrlCleBvMUoCpmQAhgA4Hltgn3v/Hd9dAS
- jTjmLEi6J8oJj9mwqcFpZ+QG/nqm1jBrWQPb8QvBnh8iG8yHSi4U1PtpNz1uJALVz3
- IrBDXX/qYgtfw==
-Date: Fri, 7 Jan 2022 18:21:26 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <Ydj1JvEeLo1mrqvb@sol.localdomain>
+ b=jh4jugah5bS70Ajj89OvfPQIQL70fkjFwA6WnYZV6iQNjM/Mu8IPvebDk9fobfF/C
+ RYVp8vfWSNhq2UhLG4uCKbpuQd4wiWxdf336Huvr9dzs3x8SrDBBFIWS7ddsoH8+N0
+ p4zeTklnTJ/UzmDC+tBmYetCNurDoUnUG+yKkFfDKkIzQdWlQg+Vq/PDQv01SQIHH9
+ M28VhIs+YpRAtFLpWimJolSgDWQir6PYghTKa85Q0aV5eD1b2B5jTmjFkCv0rM8Xw3
+ mRZmS+nOv+WQT0z3SG1KzvERgBCgh0gN7o09J1gC1mHZBvNGSYk1cJJFbDKDG7otO7
+ 6t0zxB0QO2k/w==
+Date: Fri, 7 Jan 2022 19:35:56 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <YdkGnA3/3f/Qka5M@google.com>
 References: <20220104212419.1879225-1-jaegeuk@kernel.org>
  <20220104212419.1879225-3-jaegeuk@kernel.org>
  <YdjJAS7Ua4aJEFhz@sol.localdomain> <YdjucBBopEDuUb5b@google.com>
+ <Ydj1JvEeLo1mrqvb@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <YdjucBBopEDuUb5b@google.com>
+In-Reply-To: <Ydj1JvEeLo1mrqvb@sol.localdomain>
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,9 +73,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jan 07, 2022 at 05:52:48PM -0800, Jaegeuk Kim wrote:
- > On 01/07, Eric Biggers wrote: > > Hi Jaegeuk, > > > > On Tue, Jan 04, 2022
- at 01:24:16PM -0800, Jaegeuk Kim wrote: > > > DIO preallocates [...] 
+ Content preview:  On 01/07, Eric Biggers wrote: > On Fri, Jan 07,
+ 2022 at 05:52:48PM
+ -0800, Jaegeuk Kim wrote: > > On 01/07, Eric Biggers wrote: > > > Hi Jaegeuk, 
+ > > > > > > On Tue, Jan 04, 2022 at 01:24:16PM -0800, J [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,7 +90,7 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1n61MR-0004cV-EZ
+X-Headers-End: 1n62WZ-005h7X-MX
 Subject: Re: [f2fs-dev] [PATCH 3/6] f2fs: do not expose unwritten blocks to
  user by DIO
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -107,39 +109,45 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jan 07, 2022 at 05:52:48PM -0800, Jaegeuk Kim wrote:
-> On 01/07, Eric Biggers wrote:
-> > Hi Jaegeuk,
-> > 
-> > On Tue, Jan 04, 2022 at 01:24:16PM -0800, Jaegeuk Kim wrote:
-> > > DIO preallocates physical blocks before writing data, but if an error occurrs
-> > > or power-cut happens, we can see block contents from the disk. This patch tries
-> > > to fix it by 1) turning to buffered writes for DIO into holes, 2) truncating
-> > > unwritten blocks from error or power-cut.
+On 01/07, Eric Biggers wrote:
+> On Fri, Jan 07, 2022 at 05:52:48PM -0800, Jaegeuk Kim wrote:
+> > On 01/07, Eric Biggers wrote:
+> > > Hi Jaegeuk,
 > > > 
-> > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > > ---
-> > >  fs/f2fs/data.c  |  5 ++++-
-> > >  fs/f2fs/f2fs.h  |  5 +++++
-> > >  fs/f2fs/file.c  | 27 ++++++++++++++++++---------
-> > >  fs/f2fs/inode.c |  8 ++++++++
-> > >  4 files changed, 35 insertions(+), 10 deletions(-)
+> > > On Tue, Jan 04, 2022 at 01:24:16PM -0800, Jaegeuk Kim wrote:
+> > > > DIO preallocates physical blocks before writing data, but if an error occurrs
+> > > > or power-cut happens, we can see block contents from the disk. This patch tries
+> > > > to fix it by 1) turning to buffered writes for DIO into holes, 2) truncating
+> > > > unwritten blocks from error or power-cut.
+> > > > 
+> > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > > > ---
+> > > >  fs/f2fs/data.c  |  5 ++++-
+> > > >  fs/f2fs/f2fs.h  |  5 +++++
+> > > >  fs/f2fs/file.c  | 27 ++++++++++++++++++---------
+> > > >  fs/f2fs/inode.c |  8 ++++++++
+> > > >  4 files changed, 35 insertions(+), 10 deletions(-)
+> > > 
+> > > Unfortunately, this patch doesn't completely fix the uninitialized data
+> > > exposure.  The problem is that it only makes DIO writes fall back to buffered
+> > > writes for holes, and not for reserved blocks (NEW_ADDR).  f2fs's reserved
+> > > blocks are *not* the same as the unwritten extents that other filesystems have;
+> > > f2fs's reserved blocks have to be turned into regular blocks before DIO can
+> > > write to them.  That immediately exposes them to concurrent reads (at least
+> > > buffered reads, but I think DIO reads too).
 > > 
-> > Unfortunately, this patch doesn't completely fix the uninitialized data
-> > exposure.  The problem is that it only makes DIO writes fall back to buffered
-> > writes for holes, and not for reserved blocks (NEW_ADDR).  f2fs's reserved
-> > blocks are *not* the same as the unwritten extents that other filesystems have;
-> > f2fs's reserved blocks have to be turned into regular blocks before DIO can
-> > write to them.  That immediately exposes them to concurrent reads (at least
-> > buffered reads, but I think DIO reads too).
+> > Isn't it resolved by i_size which gives the written blocks only?
+> > 
 > 
-> Isn't it resolved by i_size which gives the written blocks only?
+> I'm not sure what you mean, but this is for non-extending writes, so i_size
+> isn't relevant.
+
+Ah, do you mean the file has NEW_ADDR within i_size? If so, let me continue
+to investigate further based on the current -dev, as it's quite hard to remove
+the old commits.
+
 > 
-
-I'm not sure what you mean, but this is for non-extending writes, so i_size
-isn't relevant.
-
-- Eric
+> - Eric
 
 
 _______________________________________________
