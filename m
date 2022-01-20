@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FD68494A46
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Jan 2022 10:04:31 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 038DC4952ED
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Jan 2022 18:10:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nATMq-0000ah-NL; Thu, 20 Jan 2022 09:04:27 +0000
+	id 1nAaxK-0000AM-Hf; Thu, 20 Jan 2022 17:10:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ebiggers@kernel.org>) id 1nATMp-0000ab-NG
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Jan 2022 09:04:26 +0000
+ (envelope-from <djwong@kernel.org>) id 1nAaxJ-0000AB-Bf
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Jan 2022 17:10:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rmXc3oNZu1+BkAlGkUyo9VOhcB8K3UU/OZLIIt/S3WY=; b=Y3Gv3jJZ9Q7D4aFZyBZcP1omp4
- 0JLed91R9cSWb7I0L4qW8tfgtkB4K08OrdOc6nSUQk6BNYJWxH044FqCrmrw9yzWrUco68njEybgN
- TOext82EeD5SUO/uBsEtMO3R+75YxirP1mEco/E+ef+hIfLR++Q/vgTNcFPRJpVdwBTY=;
+ bh=gNktdXg+JN1j8MvcFmJ5hNCd4MLyU0iMR3T+IVlIzTw=; b=g+5DZTVo/+1uF/stHRJ2wBpthd
+ 1zpbZ3L/tp4CGHMWo9KC25jZ1+EnzsaGC/gPReaFc1JIsUxWu8iI8yLNo2URyz/I4C9t35Ah0ACdY
+ YeaEpJqyisuJEBLwMdsvZGDuyCgh5UGu5l5aqCvZs0ILNV15qNKOnsZj2zKX+ReAUIQw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,41 +29,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rmXc3oNZu1+BkAlGkUyo9VOhcB8K3UU/OZLIIt/S3WY=; b=RnA427d1QQUklo6Ap1Gc1cmEBU
- rYj6W+bcPcyBZWs/cW7xCIVGTA2x180zFZ9jcRsMc8PFuURtSPEByNCROqVmJv9vcgZZMBbcCZ6jd
- yf3IyJmuUS1NTrwsiBejO7zmbM0KGVBGPeCyrPAVxjU9mu400jqtAXxWKdQIQWYc1Rmg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=gNktdXg+JN1j8MvcFmJ5hNCd4MLyU0iMR3T+IVlIzTw=; b=hIrJqP8IYrkkNpHQBrE7ulWlEF
+ QZG5I0PHhTLEFv5vDe+SfaOPNf5K0iEQ19Bu8bwh6kYHG5l1wHxdVN6IYbLlNe/p5OPFLnZ5lDuFh
+ 5lTsbKlEMmff+Rpsx8YvR8vlH9fzpp/0duP/I0fgETLP3yyL9J9G4+WlU8vIcI/A6+9s=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1nATMn-004hhN-Nu
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Jan 2022 09:04:26 +0000
+ id 1nAaxH-005D4b-4c
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Jan 2022 17:10:36 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 62A85617A5;
- Thu, 20 Jan 2022 09:04:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 740ACC340E0;
- Thu, 20 Jan 2022 09:04:19 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id C5A66B81D46;
+ Thu, 20 Jan 2022 17:10:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95112C340E3;
+ Thu, 20 Jan 2022 17:10:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1642669459;
- bh=pfcthZCzooY2kl7Qa+cy/1Et4X5WXDRQLsSpT+07JNk=;
+ s=k20201202; t=1642698627;
+ bh=9PrP2YPwXIw91H36sa+ARSocJ1Cu1ipD8VSQgbT6nsA=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=C4VrIZYfGPgn0lzFMGsDmv/5TJ65MtkSeLkZ/xugErRO7yEmM4T4FUpDKKp9LkDZy
- m8nHN+Zv9vYV74Fn9nFjB+k1iKKVZrT8SYKWQ9NloeIENKz9SjLn9ekr6svNGmlu9X
- 9E/T5KZS/LphCPHQp879QSPVdpzM0XMkIV6e4DlDR+4VH2Q7Ri1v5lOHFotzeQeQEE
- nkI8FaSX9rs8WMHkIUd28GD0IzwAkP1FX+iX0Ha+d2y0f0pdnoTGc7N0JTJzMEBqcJ
- 5y5fmKtLWxbDHNdHEGMtZRGwwHCJQOIca4mT4LQ3CanX8yoM1G7an7HiaMPVVWYm9E
- BXhiBw6TTdh+A==
-Date: Thu, 20 Jan 2022 01:04:17 -0800
-From: Eric Biggers <ebiggers@kernel.org>
+ b=bhOy/kkCPk22TFeoPt2RuBI8RgWYvZQ4Q+WFtZjvDyGcYQVZUpqdG5f0VUgm48K0h
+ MAJ5Td5mQTsGy6R0nKSPKNAuHmiQRFPMWGOJK0pWRMbGTYMDpHnksDXZGhe+pFPQ2d
+ 2bRQbwL3T+pLDBMnj01EyoieNkhV45F1Lhh+r8UZIrzDKk3rGWTMRZ8eBzL1W/BOxs
+ K4eeC/S6bq53oHhxE60pa3B/MiQmgmzr/9Z4AzvnfHWnNqy5BEjJG3IXdYfiP2Cr91
+ RQPzfu7rc3eq7EC08CEIDJzpjFAiTI8wtD7IcmJ6LCNRyIcL3jl6mSk+xkPhQS/8FW
+ ZcRex+d8Jee8A==
+Date: Thu, 20 Jan 2022 09:10:27 -0800
+From: "Darrick J. Wong" <djwong@kernel.org>
 To: Christoph Hellwig <hch@infradead.org>
-Message-ID: <Yeklkcc7NXKYDHUL@sol.localdomain>
+Message-ID: <20220120171027.GL13540@magnolia>
 References: <20220120071215.123274-1-ebiggers@kernel.org>
- <20220120071215.123274-2-ebiggers@kernel.org>
- <YekdAa4fCKw7VY3J@infradead.org>
+ <YekdnxpeunTGfXqX@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <YekdAa4fCKw7VY3J@infradead.org>
+In-Reply-To: <YekdnxpeunTGfXqX@infradead.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -71,15 +70,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jan 20, 2022 at 12:27:45AM -0800, Christoph Hellwig
- wrote: > > +/** > > + * fscrypt_dio_unsupported() - check whether a DIO
- (direct
- I/O) request is > > + * unsupported due to encryption constr [...] 
+ Content preview:  On Thu, Jan 20, 2022 at 12:30:23AM -0800, Christoph Hellwig
+ wrote: > On Wed, Jan 19, 2022 at 11:12:10PM -0800, Eric Biggers wrote: >
+ > > > Given the above, as far as I know the only remaining objectio [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -90,9 +88,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nATMn-004hhN-Nu
-Subject: Re: [f2fs-dev] [PATCH v10 1/5] fscrypt: add functions for direct
- I/O support
+X-Headers-End: 1nAaxH-005D4b-4c
+Subject: Re: [f2fs-dev] [PATCH v10 0/5] add support for direct I/O with
+ fscrypt using blk-crypto
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,39 +102,83 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Satya Tangirala <satyat@google.com>, Theodore Ts'o <tytso@mit.edu>,
- "Darrick J . Wong" <djwong@kernel.org>, Dave Chinner <david@fromorbit.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
+Cc: linux-xfs@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
+ Dave Chinner <david@fromorbit.com>, linux-f2fs-devel@lists.sourceforge.net,
+ Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jan 20, 2022 at 12:27:45AM -0800, Christoph Hellwig wrote:
-> > +/**
-> > + * fscrypt_dio_unsupported() - check whether a DIO (direct I/O) request is
-> > + *			       unsupported due to encryption constraints
-> > + * @iocb: the file and position the I/O is targeting
-> > + * @iter: the I/O data segment(s)
-> > + *
-> > + * Return: true if DIO is unsupported
-> > + */
-> > +bool fscrypt_dio_unsupported(struct kiocb *iocb, struct iov_iter *iter)
+On Thu, Jan 20, 2022 at 12:30:23AM -0800, Christoph Hellwig wrote:
+> On Wed, Jan 19, 2022 at 11:12:10PM -0800, Eric Biggers wrote:
+> > 
+> > Given the above, as far as I know the only remaining objection to this
+> > patchset would be that DIO constraints aren't sufficiently discoverable
+> > by userspace.  Now, to put this in context, this is a longstanding issue
+> > with all Linux filesystems, except XFS which has XFS_IOC_DIOINFO.  It's
+> > not specific to this feature, and it doesn't actually seem to be too
+> > important in practice; many other filesystem features place constraints
+> > on DIO, and f2fs even *only* allows fully FS block size aligned DIO.
+> > (And for better or worse, many systems using fscrypt already have
+> > out-of-tree patches that enable DIO support, and people don't seem to
+> > have trouble with the FS block size alignment requirement.)
 > 
-> I always find non-negated functions easier to follow, i.e. turn this
-> into fscrypt_dio_supported().
+> It might make sense to use this as an opportunity to implement
+> XFS_IOC_DIOINFO for ext4 and f2fs.
+
+Hmm.  A potential problem with DIOINFO is that it doesn't explicitly
+list the /file/ position alignment requirement:
+
+struct dioattr {
+	__u32		d_mem;		/* data buffer memory alignment */
+	__u32		d_miniosz;	/* min xfer size		*/
+	__u32		d_maxiosz;	/* max xfer size		*/
+};
+
+Since I /think/ fscrypt requires that directio writes be aligned to file
+block size, right?
+
+> > I plan to propose a new generic ioctl to address the issue of DIO
+> > constraints being insufficiently discoverable.  But until then, I'm
+
+Which is what I suspect Eric meant by this sentence. :)
+
+> > wondering if people are willing to consider this patchset again, or
+> > whether it is considered blocked by this issue alone.  (And if this
+> > patchset is still unacceptable, would it be acceptable with f2fs support
+> > only, given that f2fs *already* only allows FS block size aligned DIO?)
 > 
+> I think the patchset looks fine, but I'd really love to have a way for
+> the alignment restrictions to be discoverable from the start.
 
-I actually had changed this from v9 because fscrypt_dio_supported() seemed
-backwards, given that its purpose is to check whether DIO is unsupported, not
-whether it's supported per se (and the function's comment reflected this).  What
-ext4 and f2fs do is check a list of reasons why DIO would *not* be supported,
-and if none apply, then it is supported.  This is just one of those reasons.
+I agree.  The mechanics of the patchset look ok to me, but it's very
+unfortunate that there's no way for userspace programs to ask the kernel
+about the directio geometry for a file.
 
-This is subjective though, so if people prefer the old way, I'll change it back.
+Ever since we added reflink to XFS I've wanted to add a way to tell
+userspace that direct writes to a reflink(able) file will be much more
+efficient if they can align the io request to 1 fs block instead of 1
+sector.
 
-- Eric
+How about something like this:
+
+struct dioattr2 {
+	__u32		d_mem;		/* data buffer memory alignment */
+	__u32		d_miniosz;	/* min xfer size		*/
+	__u32		d_maxiosz;	/* max xfer size		*/
+
+	/* file range must be aligned to this value */
+	__u32		d_min_fpos;
+
+	/* for optimal performance, align file range to this */
+	__u32		d_opt_fpos;
+
+	__u32		d_padding[11];
+};
+
+--D
 
 
 _______________________________________________
