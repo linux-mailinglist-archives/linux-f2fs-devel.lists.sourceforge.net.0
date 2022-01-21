@@ -2,87 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E96B049571F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jan 2022 00:58:12 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D8E84957B6
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jan 2022 02:30:40 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nAhJh-0006iE-S8; Thu, 20 Jan 2022 23:58:08 +0000
+	id 1nAilA-0005pt-Aw; Fri, 21 Jan 2022 01:30:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <david@fromorbit.com>) id 1nAhJh-0006i7-EX
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Jan 2022 23:58:08 +0000
+ (envelope-from <krisman@collabora.com>) id 1nAil9-0005pd-3Z
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jan 2022 01:30:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
+ Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=D+WWuMO42Sv2Vke98r5UkdgSOger5emU1ai0r08HXHs=; b=BUQGb7DxX3MzKYumxzdllghcu/
- tqFrcfk+fY6lBtK8Cq7dR73+K8H9DmzDH8JRT9loYg5ccbBT2ZQF9Rq+wKPD9tk2vHh7NKR5YJmgY
- VL7+8Uk0rQbNytpBpo3FEqi9duRcJlK3G/ZT/L5uUmzCMV2PV1quTg15iyV1az5OaQts=;
+ bh=5q7WlQD6Vh2kbqt2X4lfyI8Lp08JDSbIfYVgFkgvU5o=; b=Rg0KdPVLC2aMRlCQ+izZ9HLqGX
+ UO6Ns5MFcqXIWc1OWw5WWEVsz8k0mP2eLtsl/ao5wd7EJCBR4eMoiu588hs79eUjpNA45shm89/tO
+ P2tzV5IDTC7ixAmp6hNelmatUWXJ7lCJZ85jXBizSldkAg4gSARpxXxHOx8qENRv4osc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=D+WWuMO42Sv2Vke98r5UkdgSOger5emU1ai0r08HXHs=; b=bVNGXM+oVgOg1G0G1OscnaGKtX
- dk+hMqRT/dc3kRfRcjZDrSxMwQY49wZfItP+FnbFnNKSsiiMeJOU/jhNlGBHJCdQnsMMRbaQWFqNj
- cUqJl0TKsnBwnjMzExUlI5re9MqKb2+Nv4ZNWzo3hSMKZVk+8LxM1y6o5CcbXbzOaih8=;
-Received: from mail105.syd.optusnet.com.au ([211.29.132.249])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.92.3)
- id 1nAhJb-005f1s-9p
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 20 Jan 2022 23:58:07 +0000
-Received: from dread.disaster.area (pa49-179-45-11.pa.nsw.optusnet.com.au
- [49.179.45.11])
- by mail105.syd.optusnet.com.au (Postfix) with ESMTPS id C44B210C2A68;
- Fri, 21 Jan 2022 10:57:56 +1100 (AEDT)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1nAhJT-002GNn-75; Fri, 21 Jan 2022 10:57:55 +1100
-Date: Fri, 21 Jan 2022 10:57:55 +1100
-From: Dave Chinner <david@fromorbit.com>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20220120235755.GI59729@dread.disaster.area>
-References: <20220120071215.123274-1-ebiggers@kernel.org>
- <YekdnxpeunTGfXqX@infradead.org> <20220120171027.GL13540@magnolia>
- <YenIcshA706d/ziV@sol.localdomain>
- <20220120210027.GQ13540@magnolia>
- <20220120220414.GH59729@dread.disaster.area>
- <Yenm1Ipx87JAlyXg@sol.localdomain>
+ bh=5q7WlQD6Vh2kbqt2X4lfyI8Lp08JDSbIfYVgFkgvU5o=; b=jlJ1HSbEthe80af3QEaGOuXbKz
+ gAK6hp/7+Bf0TshTDDIkgSN3K5PEOPgzFF8ixksmA/EUpI3qO6HrVHKLc/Q/ukwmxHTnw6ka0Bryk
+ VNfsHD/PrFCgvIaBKabijEtrn+0pu9NaAv67b3YEyNiG/gCCU73kPGjqNWh1hM9wIJUQ=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
+ id 1nAikv-005lPu-M3
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jan 2022 01:30:22 +0000
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: krisman) with ESMTPSA id 3ED411F45843
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1642727451;
+ bh=jHIs3XKzhPz//rxsayW/LeWaylwWk5P+YYlJwHwjTNc=;
+ h=From:To:Cc:Subject:References:Date:In-Reply-To:From;
+ b=d/45kpz7h1Gh3Fee/A+jedC+TvoXnUVF7l8ZKMR6NoSTrSg5ujani40PMzMSnbnwN
+ WP6wYw9iU883Yw18oiZSo5NNTEzFpxK8Zm8XhrtpDRO9siR//g1CzQCHVm1HNidhjt
+ EjAkMzEMH6i/H6SVFxfhKlkW73E7C5F13zKxKs0Zlb/mztZUt/Ea3+HiOkgeTVrdsP
+ +CMe27c4rvBR/8P80dE/AJqC/ZZFrgy33rxC0hc7RagSfMQbDZRiW3DQ4PAztXYwLF
+ LaYWkxlKNb+z8mhY2LG2/uY15OKOGIHfYhy/aryR3L+9+XpqJYac/JjmemufolP/tI
+ 8ykwdwKmLHupA==
+From: Gabriel Krisman Bertazi <krisman@collabora.com>
+To: Christoph Hellwig <hch@lst.de>
+Organization: Collabora
+References: <20220118065614.1241470-1-hch@lst.de>
+Date: Thu, 20 Jan 2022 20:10:47 -0500
+In-Reply-To: <20220118065614.1241470-1-hch@lst.de> (Christoph Hellwig's
+ message of "Tue, 18 Jan 2022 07:56:14 +0100")
+Message-ID: <87zgnp51wo.fsf@collabora.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Yenm1Ipx87JAlyXg@sol.localdomain>
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.4 cv=deDjYVbe c=1 sm=1 tr=0 ts=61e9f705
- a=Eslsx4mF8WGvnV49LKizaA==:117 a=Eslsx4mF8WGvnV49LKizaA==:17
- a=kj9zAlcOel0A:10 a=DghFqjY3_ZEA:10 a=7-415B0cAAAA:8
- a=oC4KDInKSQZeXA427xcA:9 a=CjuIK1q_8ugA:10 a=biEYGPWJfzWAr4FL6Ov7:22
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jan 20, 2022 at 02:48:52PM -0800, Eric Biggers wrote:
- > On Fri, Jan 21, 2022 at 09:04:14AM +1100, Dave Chinner wrote: > > On Thu,
- Jan 20, 2022 at 01:00:27PM -0800, Darrick J. Wong wrote: > > > [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview: Christoph Hellwig <hch@lst.de> writes: > Turn the
+ CONFIG_UNICODE
+ symbol into a tristate that generates some always > built in code and remove
+ the confusing CONFIG_UNICODE_UTF8_DATA symbol. > > Note that a lot of the
+ IS_ENALBED() checks cou [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [211.29.132.249 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [211.29.132.249 listed in wl.mailspike.net]
-X-Headers-End: 1nAhJb-005f1s-9p
-Subject: Re: [f2fs-dev] [PATCH v10 0/5] add support for direct I/O with
- fscrypt using blk-crypto
+ [46.235.227.227 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
+ lines
+X-Headers-End: 1nAikv-005lPu-M3
+Subject: Re: [f2fs-dev] [PATCH] unicode: clean up the Kconfig symbol
+ confusion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,131 +101,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- "Darrick J. Wong" <djwong@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- Christoph Hellwig <hch@infradead.org>, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org
+Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jan 20, 2022 at 02:48:52PM -0800, Eric Biggers wrote:
-> On Fri, Jan 21, 2022 at 09:04:14AM +1100, Dave Chinner wrote:
-> > On Thu, Jan 20, 2022 at 01:00:27PM -0800, Darrick J. Wong wrote:
-> > > On Thu, Jan 20, 2022 at 12:39:14PM -0800, Eric Biggers wrote:
-> > > > On Thu, Jan 20, 2022 at 09:10:27AM -0800, Darrick J. Wong wrote:
-> > > > > On Thu, Jan 20, 2022 at 12:30:23AM -0800, Christoph Hellwig wrote:
-> > > > > > On Wed, Jan 19, 2022 at 11:12:10PM -0800, Eric Biggers wrote:
-> > > > > > > 
-> > > > > > > Given the above, as far as I know the only remaining objection to this
-> > > > > > > patchset would be that DIO constraints aren't sufficiently discoverable
-> > > > > > > by userspace.  Now, to put this in context, this is a longstanding issue
-> > > > > > > with all Linux filesystems, except XFS which has XFS_IOC_DIOINFO.  It's
-> > > > > > > not specific to this feature, and it doesn't actually seem to be too
-> > > > > > > important in practice; many other filesystem features place constraints
-> > > > > > > on DIO, and f2fs even *only* allows fully FS block size aligned DIO.
-> > > > > > > (And for better or worse, many systems using fscrypt already have
-> > > > > > > out-of-tree patches that enable DIO support, and people don't seem to
-> > > > > > > have trouble with the FS block size alignment requirement.)
-> > > > > > 
-> > > > > > It might make sense to use this as an opportunity to implement
-> > > > > > XFS_IOC_DIOINFO for ext4 and f2fs.
-> > > > > 
-> > > > > Hmm.  A potential problem with DIOINFO is that it doesn't explicitly
-> > > > > list the /file/ position alignment requirement:
-> > > > > 
-> > > > > struct dioattr {
-> > > > > 	__u32		d_mem;		/* data buffer memory alignment */
-> > > > > 	__u32		d_miniosz;	/* min xfer size		*/
-> > > > > 	__u32		d_maxiosz;	/* max xfer size		*/
-> > > > > };
-> > > > 
-> > > > Well, the comment above struct dioattr says:
-> > > > 
-> > > > 	/*
-> > > > 	 * Direct I/O attribute record used with XFS_IOC_DIOINFO
-> > > > 	 * d_miniosz is the min xfer size, xfer size multiple and file seek offset
-> > > > 	 * alignment.
-> > > > 	 */
-> > > > 
-> > > > So d_miniosz serves that purpose already.
-> > > > 
-> > > > > 
-> > > > > Since I /think/ fscrypt requires that directio writes be aligned to file
-> > > > > block size, right?
-> > > > 
-> > > > The file position must be a multiple of the filesystem block size, yes.
-> > > > Likewise for the "minimum xfer size" and "xfer size multiple", and the "data
-> > > > buffer memory alignment" for that matter.  So I think XFS_IOC_DIOINFO would be
-> > > > good enough for the fscrypt direct I/O case.
-> > > 
-> > > Oh, ok then.  In that case, just hoist XFS_IOC_DIOINFO to the VFS and
-> > > add a couple of implementations for ext4 and f2fs, and I think that'll
-> > > be enough to get the fscrypt patchset moving again.
-> > 
-> > On the contrary, I'd much prefer to see this information added to
-> > statx(). The file offset alignment info is a property of the current
-> > file (e.g. XFS can have different per-file requirements depending on
-> > whether the file data is hosted on the data or RT device, etc) and
-> > so it's not a fixed property of the filesystem.
-> > 
-> > statx() was designed to be extended with per-file property
-> > information, and we already have stuff like filesystem block size in
-> > that syscall. Hence I would much prefer that we extend it with the
-> > DIO properties we need to support rather than "create" a new VFS
-> > ioctl to extract this information. We already have statx(), so let's
-> > use it for what it was intended for.
-> > 
-> 
-> I assumed that XFS_IOC_DIOINFO *was* per-file.  XFS's *implementation* of it
-> looks at the filesystem only,
 
-You've got that wrong.
+Christoph Hellwig <hch@lst.de> writes:
 
-        case XFS_IOC_DIOINFO: {
->>>>>>          struct xfs_buftarg      *target = xfs_inode_buftarg(ip);
-                struct dioattr          da;
+> Turn the CONFIG_UNICODE symbol into a tristate that generates some always
+> built in code and remove the confusing CONFIG_UNICODE_UTF8_DATA symbol.
+>
+> Note that a lot of the IS_ENALBED() checks could be turned from cpp
+> statements into normal ifs, but this change is intended to be fairly
+> mechanic, so that should be cleaned up later.
 
-                da.d_mem =  da.d_miniosz = target->bt_logical_sectorsize;
+Hi,
 
-xfs_inode_buftarg() is determining which block device the inode is
-storing it's data on, so the returned dioattr values can be
-different for different inodes in the filesystem...
+Just a typo s/ENALBED/ENABLED/.
 
-It's always been that way since the early Irix days - XFS RT devices
-could have very different IO constraints than the data device and
-DIO had to conform to the hardware limits underlying the filesystem.
-Hence the dioattr information has -always- been per-inode
-information.
+> Fixes: 2b3d04787012 ("unicode: Add utf8-data module")
+> Reported-by: Linus Torvalds <torvalds@linux-foundation.org>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
 
-> (Per-file state is required for encrypted
-> files.  It's also required for other filesystem features; e.g., files that use
-> compression or fs-verity don't support direct I/O at all.)
+I fixed the typo and pushed the patch to a linux-next visible branch
 
-Which is exactly why is should be a property of statx(), rather than
-try to re-use a ~30 year old filesystem specific API from a
-different OS that was never intended to indicate things like "DIO
-not supported on this file at all"....
+https://git.kernel.org/pub/scm/linux/kernel/git/krisman/unicode.git/commit/?h=for-next&id=5298d4bfe80f6ae6ae2777bcd1357b0022d98573
 
-We've been bitten many times by this "lift a rarely used filesystem
-specific ioctl to the VFS because it exists" method of API
-promotion. It almost always ends up in us discovering further down
-the track that there's something wrong with the API, it doesn't
-quite do what we need, we have to extend it anyway, or it's just
-plain borken, etc. And then we have to create a new, fit for purpose
-API anyway, and there's two VFS APIs we have to maintain forever
-instead of just one...
+I'm also sending a patch series shortly turning IS_ENABLED into part of
+the code flow where possible.
 
-Can we learn from past mistakes this time instead of repeating them
-yet again?
+Thank you,
 
-Cheers,
-
-Dave.
 -- 
-Dave Chinner
-david@fromorbit.com
+Gabriel Krisman Bertazi
 
 
 _______________________________________________
