@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 723B1495A59
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jan 2022 08:10:23 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDE02495A65
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Jan 2022 08:13:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nAo3u-0005xH-Nn; Fri, 21 Jan 2022 07:10:17 +0000
+	id 1nAo6m-0004ix-C1; Fri, 21 Jan 2022 07:13:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
  <BATV+e38482cd6722563dea4e+6725+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1nAo3s-0005wz-T9
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jan 2022 07:10:15 +0000
+ id 1nAo6k-0004im-JA
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jan 2022 07:13:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/iWwKF5zBo+/YqnIlxI/fBLzy6wUHNMRmfKOAf2uK/0=; b=WIXIV9Wn+VSIaGyY5uXMJA1EFw
- 8q0jk0pBnXbbvSU2nPtJTeGS7euaAVKtb3CF0mu2YZGGK+6Py+cYRI7jghwaNVOXI3Vxvf3ll+GMe
- TDIeFkPDPb15ZkxCqwFn3iYWTS7o6F5gtv8N8n0We9tr2fByi5anW+JARdKsWevjFlK4=;
+ bh=3xQuu5tx1EVXpvy8gXk3sJ9oqDEqzzzoX73hPh5DOfA=; b=YzLIG+d+qxdTZMar/IxctTrbr8
+ Dto2k1FINRVoK/dqkViMjoO6IDkrI+a7+3FeqW3ztBE+XmcHLjJlrTzqf4hmqRYFmvVIPalxmXgMF
+ zFYJ5w7qbFMTK555PJTjY/Plds/VcEUyXaYzGPRpVd6fUFn/0zHeIbZ60N6zWcSdwZB4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,36 +30,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/iWwKF5zBo+/YqnIlxI/fBLzy6wUHNMRmfKOAf2uK/0=; b=Qi9qT1Ea9fC7N/0V62SXSooKQK
- p7kd2eKm40x8aNK+mxTIhRZAKfAzhNLRodXyDksqwCGcjrDuMCyCJTfd7cFIsJQgXlEQJ0hXo5EtD
- intVIwmN7YLaETgg8882CLU6H7Ph7Hdparjqb1OlEr8g7gKsFawlkFB2mm9my6pa9DQg=;
+ bh=3xQuu5tx1EVXpvy8gXk3sJ9oqDEqzzzoX73hPh5DOfA=; b=VI2LS9mEaXUe/zCUS+s2OVIR2h
+ ZHT4IJeRgZigm/avGf2tsX7cek89ZkmZKaBnL1hGEoQ6qSBtqLORdyWkGtARYrD3TsZxNL+Me9FOM
+ BAga095Qpzoydensge2j8PPYsRYF4kYKrhGR36DYCu02XXyV0hD8bv2YYxmgB2+xxXeY=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1nAo3n-005ycu-R6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jan 2022 07:10:15 +0000
+ id 1nAo6f-0006Zn-9m
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 21 Jan 2022 07:13:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=/iWwKF5zBo+/YqnIlxI/fBLzy6wUHNMRmfKOAf2uK/0=; b=euNtdBdzwfCYHwQlnISZwlowHv
- Ghmi9l9Zl16SCmCwWK7jluHzRlhl52g/7nnfe1ORbcbWz9eDsTLODftQAP0tQHhTQXNKExIDhJWQR
- 4fKqsCljldRSV8PZQHlegwZhFHZ9EtUloBylY5RK3eI/qjkyxiZFaZj6fQ4MiR0+zNZXQsGMAycnU
- 2oWxcxPC/e7RJEfKpGZ3J1zNhH/rSYHEEISC9QO9qMPLt3qitFPkckTdxf3yffrudX0s+EP6cLkkY
- 1UsupL+zm3akz9Ziutyd2iS7/vdibOYkDaUDgTd30H6/mok/dXO+eYc+FQsShPk5ewqwwszZTJ470
- kA5hUg5w==;
+ bh=3xQuu5tx1EVXpvy8gXk3sJ9oqDEqzzzoX73hPh5DOfA=; b=q8Mnz0Gu2GNpfhG/y3b/jMfQWZ
+ mrffWaQqN4RqOjJuC4ulhiTWsAkL/RACkK6FG43IXgNrMmZ2ObvkbaNdiwzYoorsoRl43aRSgDFDl
+ GjEvNumk7JqTJq9J6ggkGCUYci/n+AXZ5zEGP8/NG6QsGIn+KdsUUitgTHMGzVG7b0cOfSwHdMZvD
+ 21D9iTrO/B9kHAYKo2GVNsUx1xxKLpW7+/eUQLNaVaN/yVYE2izpcQ2WOte5HOGUcujc7WjqBwK3V
+ VWrIsvlUxABtXb2ZoKLsrZkhJD+qMBbGE6i2Mi6YVINqkulvo8ShP2gqaF5FOMpt71no8rw0g0Cv2
+ +1gJdHPw==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nAo3c-00E1cx-0w; Fri, 21 Jan 2022 07:10:00 +0000
-Date: Thu, 20 Jan 2022 23:10:00 -0800
+ Hat Linux)) id 1nAo6S-00E1l5-Pa; Fri, 21 Jan 2022 07:12:56 +0000
+Date: Thu, 20 Jan 2022 23:12:56 -0800
 From: Christoph Hellwig <hch@infradead.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <YepcSJGy2IbBrMZB@infradead.org>
+To: "Darrick J. Wong" <djwong@kernel.org>
+Message-ID: <Yepc+JcZiICsJfTQ@infradead.org>
 References: <20220120071215.123274-1-ebiggers@kernel.org>
- <20220120071215.123274-2-ebiggers@kernel.org>
- <YekdAa4fCKw7VY3J@infradead.org> <Yeklkcc7NXKYDHUL@sol.localdomain>
+ <YekdnxpeunTGfXqX@infradead.org> <20220120171027.GL13540@magnolia>
+ <YenIcshA706d/ziV@sol.localdomain>
+ <20220120210027.GQ13540@magnolia>
+ <20220120220414.GH59729@dread.disaster.area>
+ <Yenm1Ipx87JAlyXg@sol.localdomain>
+ <20220120235755.GI59729@dread.disaster.area>
+ <20220121023603.GH13563@magnolia>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <Yeklkcc7NXKYDHUL@sol.localdomain>
+In-Reply-To: <20220121023603.GH13563@magnolia>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -2.5 (--)
@@ -69,9 +74,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jan 20, 2022 at 01:04:17AM -0800, Eric Biggers wrote:
- > I actually had changed this from v9 because fscrypt_dio_supported() seemed
- > backwards, given that its purpose is to check whether DIO i [...] 
+ Content preview:  On Thu, Jan 20, 2022 at 06:36:03PM -0800, Darrick J. Wong
+ wrote: > Sure. How's this? I couldn't think of a real case of directio >
+ requiring
+ different alignments for pos and bytecount, so the only rea [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -86,9 +92,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1nAo3n-005ycu-R6
-Subject: Re: [f2fs-dev] [PATCH v10 1/5] fscrypt: add functions for direct
- I/O support
+X-Headers-End: 1nAo6f-0006Zn-9m
+Subject: Re: [f2fs-dev] [PATCH v10 0/5] add support for direct I/O with
+ fscrypt using blk-crypto
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,28 +106,50 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- "Darrick J . Wong" <djwong@kernel.org>, Dave Chinner <david@fromorbit.com>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, Satya Tangirala <satyat@google.com>,
- linux-ext4@vger.kernel.org
+Cc: Christoph Hellwig <hch@infradead.org>, Theodore Ts'o <tytso@mit.edu>,
+ Dave Chinner <david@fromorbit.com>, linux-f2fs-devel@lists.sourceforge.net,
+ Eric Biggers <ebiggers@kernel.org>, linux-fscrypt@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org, linux-xfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jan 20, 2022 at 01:04:17AM -0800, Eric Biggers wrote:
-> I actually had changed this from v9 because fscrypt_dio_supported() seemed
-> backwards, given that its purpose is to check whether DIO is unsupported, not
-> whether it's supported per se (and the function's comment reflected this).  What
-> ext4 and f2fs do is check a list of reasons why DIO would *not* be supported,
-> and if none apply, then it is supported.  This is just one of those reasons.
-> 
-> This is subjective though, so if people prefer the old way, I'll change it back.
+On Thu, Jan 20, 2022 at 06:36:03PM -0800, Darrick J. Wong wrote:
+> Sure.  How's this?  I couldn't think of a real case of directio
+> requiring different alignments for pos and bytecount, so the only real
+> addition here is the alignment requirements for best performance.
 
-I find non-negated API much better and would also help with undinwinding
-the ext4/f2fs mess.  But I'm not going to block the series on such a
-minor detail, of course.
+While I see some benefits of adding the information to a catchall like
+statx we really need to be careful to not bloat the structure like
+crazy.
+
+> struct statx {
+> ...
+> 	/* 0x90 */
+> 	__u64	stx_mnt_id;
+> 
+> 	/* Memory buffer alignment required for directio, in bytes. */
+> 	__u32	stx_dio_mem_align;
+> 
+> 	/* File range alignment required for directio, in bytes. */
+> 	__u32	stx_dio_fpos_align_min;
+
+So this really needs a good explanation why we need both iven that we
+had no real use case for this.
+
+> 	/* File range alignment needed for best performance, in bytes. */
+> 	__u32	stx_dio_fpos_align_opt;
+
+And why we really care about this.  I guess you want to allow sector
+size dio in reflink setups, but discourage it.  But is this really as
+important?
+
+> 	/* Maximum size of a directio request, in bytes. */
+> 	__u32	stx_dio_max_iosize;
+
+I know XFS_IOC_DIOINFO had this, but does it really make much sense?
+Why do we need it for direct I/O and not buffered I/O?
 
 
 _______________________________________________
