@@ -2,71 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5191C497BEB
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jan 2022 10:26:20 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AAD0498659
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jan 2022 18:20:23 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nBvc7-0002S7-Lt; Mon, 24 Jan 2022 09:26:14 +0000
+	id 1nC30s-00043y-RE; Mon, 24 Jan 2022 17:20:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <hch@lst.de>) id 1nBvc6-0002S1-0q
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jan 2022 09:26:12 +0000
+ (envelope-from <no_reply@aswadtradinggroup.com>) id 1nC30r-00043s-Bj
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jan 2022 17:20:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Subject:Content-Type:MIME-Version:Message-ID:
+ Reply-To:From:Date:To:Sender:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KcXJu9e6b5trBlmuwWUMc7FyxqkPEPmQ/xdjE9rNxO0=; b=VacUk2m1jDku7Qay0XUgTFyqmC
- 3soSupsQDWE6p6dE8vILPL9ZUbdD+Y52LBxBrRoAczHfu587Ja3ssLIwfPZq/UemT/Vl12kB2ReEc
- Khue4PyXniv/Hdnk2EUlng7qpzRqyEsrqta5jBGqEMXljmiYf5LQ1SUwgf2TWXdy5NBc=;
+ bh=2kR6UU0ZHZs2GTfiTaLJC1Luc8cMVl1ga+KtPnf+AFQ=; b=aevK4QnWlaVM7lt/HTTvKlm4+s
+ qCrzlejWwhPHWy8R0XS01xcxy/u4MjaJcgTU11JINq3PMjX6XvYkpWgfuIk00p46p5ItROzPZzTvR
+ AfhIvNl7Lk423HcMMVsdQ31NTO4sNBmPLiKEzAwiBrvmu0nGTFg3nwUvTWjHkwpguxAw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=KcXJu9e6b5trBlmuwWUMc7FyxqkPEPmQ/xdjE9rNxO0=; b=L/NbWZbFnjDXAd99L7fbtYS6Av
- WsuvMPXOxDG64gOZoECrXRhv06cXyRuzgNiYG7iSiotqpgUT/2RFN29PxpAjEt+vCPSqSti+obAvS
- mJrCTJ6fdcbUzZCGBbfE8N48Y4N09Uok0W98h1/CWt6wNiL6MTAA87z7W9R0MSwhtqIU=;
-Received: from verein.lst.de ([213.95.11.211])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Subject:Content-Type:MIME-Version:Message-ID:Reply-To:From:Date:To:Sender
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=2kR6UU0ZHZs2GTfiTaLJC1Luc8cMVl1ga+KtPnf+AFQ=; b=L
+ 8DQfwrhyuNqudr7DbhPMe9/iVsK8kcdg248GU0cxtQyKuNng5lbXj9yMLwKYmWnhQmxOBbxYiAKr3
+ Fxn85YBuz39JJQJ9paehkhdcHrtSX1qeSLZxjrFWX+hY9JwrRlJneVZu3sk1Bq0xWjuR4S8EF7Xjj
+ ULbVl8IHcC7EQaMo=;
+Received: from ps535275.dreamhostps.com ([64.111.117.237])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1nBvc0-00ACXa-A8
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jan 2022 09:26:12 +0000
-Received: by verein.lst.de (Postfix, from userid 2407)
- id B760268BEB; Mon, 24 Jan 2022 10:08:55 +0100 (CET)
-Date: Mon, 24 Jan 2022 10:08:55 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: Gabriel Krisman Bertazi <krisman@collabora.com>
-Message-ID: <20220124090855.GA23041@lst.de>
-References: <20220118065614.1241470-1-hch@lst.de>
- <87zgnp51wo.fsf@collabora.com>
+ id 1nC30p-0000Oy-8L
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 24 Jan 2022 17:20:15 +0000
+Received: by ps535275.dreamhostps.com (Postfix, from userid 5060194)
+ id DB04C3C27C3B17; Mon, 24 Jan 2022 08:33:07 -0800 (PST)
+To: linux-f2fs-devel@lists.sourceforge.net
+X-PHP-Originating-Script: 5060194:scyflejrhn.php(6) : eval()'d code
+Date: Mon, 24 Jan 2022 08:33:07 -0800
+From: Seth Aswad <no_reply@aswadtradinggroup.com>
+Message-ID: <4b8c5e98b27924468d3057d323060e71@www.freeringtonesfyi.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <87zgnp51wo.fsf@collabora.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: 8.2 (++++++++)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has NOT identified this incoming email as spam.  The original
+ has identified this incoming email as possible spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jan 20, 2022 at 08:10:47PM -0500, Gabriel Krisman
- Bertazi wrote: > > Fixes: 2b3d04787012 ("unicode: Add utf8-data module") >
- > Reported-by: Linus Torvalds <torvalds@linux-foundation.org> > > S [...]
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  Hello Sir/Madam,
+ I am Seth Aswad and i am the Purchase Manager
+ for Aswad Trading Group. We are checking new suppliers who can constantly
+ supply us with products at competitive prices and we came across your company
+ on [...] Content analysis details:   (8.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.4 NO_DNS_FOR_FROM        DNS: Envelope sender has no MX or A DNS records
+ 0.8 DKIM_ADSP_NXDOMAIN     No valid author signature and domain not in
+ DNS
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
-X-Headers-End: 1nBvc0-00ACXa-A8
-Subject: Re: [f2fs-dev] [PATCH] unicode: clean up the Kconfig symbol
- confusion
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [64.111.117.237 listed in wl.mailspike.net]
+ 1.5 PDS_PHP_EVAL           PHP header shows eval'd code
+ 3.0 PHP_ORIG_SCRIPT_EVAL   From suspicious PHP source
+ 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+X-VA-Spam-Flag: YES
+X-Spam-Flag: YES
+X-Headers-End: 1nC30p-0000Oy-8L
+Subject: [f2fs-dev] [SPAM] Purchase Inquiry
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,27 +84,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Linus Torvalds <torvalds@linux-foundation.org>, Christoph Hellwig <hch@lst.de>,
- linux-f2fs-devel@lists.sourceforge.net
+Reply-To: s.aswadtradinggroup@outlook.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jan 20, 2022 at 08:10:47PM -0500, Gabriel Krisman Bertazi wrote:
-> > Fixes: 2b3d04787012 ("unicode: Add utf8-data module")
-> > Reported-by: Linus Torvalds <torvalds@linux-foundation.org>
-> > Signed-off-by: Christoph Hellwig <hch@lst.de>
-> 
-> I fixed the typo and pushed the patch to a linux-next visible branch
-> 
-> https://git.kernel.org/pub/scm/linux/kernel/git/krisman/unicode.git/commit/?h=for-next&id=5298d4bfe80f6ae6ae2777bcd1357b0022d98573
-> 
-> I'm also sending a patch series shortly turning IS_ENABLED into part of
-> the code flow where possible.
+Hello Sir/Madam,
 
-Thanks.  It might make sense to get the one patch to Linux for 5.17
-so that we don't have the new Kconfig symbol for just one release.
+I am Seth Aswad and i am the Purchase Manager for Aswad Trading Group. We are checking new suppliers who can constantly supply us with products at competitive prices and we came across your company on crunchbase.com. We are expanding into new markets and are interested in your product.
+Can you please send me your product catalog so i can choose and place an urgent order?Also what are your payment terms?We are interested in a quote and MOQ for the first  trial order. Thank you very much .
+
+As a first time client,would you accept  100% L/C at sight for a trial order?
+Do you have whatsapp or skype where we can communicate better?
+
+I will forward my order request upon your reply.
+Have a great day.
+--------------------------------------------------------------------------------
+Best Regards,
+
+Seth Aswad,
+Purchase Manager,
+Al Aswad Trading Establishment.
+Address:Bldg No 1275 Budiya, Northern Governorate 30264,Bahrain
+Email:s.aswadtradinggroup@outlook.com
+
 
 
 _______________________________________________
