@@ -2,64 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C65CB49BCF4
+	by mail.lfdr.de (Postfix) with ESMTPS id C7B5449BCF5
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jan 2022 21:23:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nCSLS-0000X6-1H; Tue, 25 Jan 2022 20:23:12 +0000
+	id 1nCSLS-0001cX-1D; Tue, 25 Jan 2022 20:23:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nCSLR-0000Wy-4R
+ (envelope-from <jaegeuk@kernel.org>) id 1nCSLQ-0001cQ-Tb
  for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Jan 2022 20:23:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=diKApOmmlUl7VKOC9j8TZEdi4iRwpWyFyS5IoXhPjNI=; b=ZCJ4+LECOb0lP1+r3ppoPjJK80
- 1pjEQpZ39mZZrk0Y4pbedBHHUj0u8iqOXk+esoosSxYXwQxzXR71sXezlq6+Mg2n8G1rqKZzvmgG2
- QWYALSO4U5LFr3r/HFiUr7JCm2wpbQ4Udzhita0D6RuacahoCuiKsQidAHrR+vwsq8hU=;
+ bh=I5imAOA6gMJ2Voc7H/Ixwoqs0J+xlDSEyK/v+m4Mpao=; b=nQ2vjUUI3M2UhJK2ej3H1ROCPJ
+ nHCG0GLzjQM0gXb+q5Cbl2VO916g3+7XtF+KGbxmytR/U9zZYlpF5PG7IyhrzrZsGsfgJIOCDPviw
+ JPT6H2CVp95IJXVoCNQcunZtaM9OiHLZ7g2j76LzhbiXXtt5PsS13AUm6maco9zU/PFQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=diKApOmmlUl7VKOC9j8TZEdi4iRwpWyFyS5IoXhPjNI=; b=m
- eGiihZYXespaK0XbS6nm+VegvXlkFAuv7D0Vf8sFEQMSoY9Qly/izmupdmlkIsHfn3jCLVikkrY07
- m2KvOrGdHtob9gobwstXGazEcF01ade3HS66ttnkEmNpg8qKMMAR3AwjsQm3yr+l/KFu5BCu5fs1k
- IlHR+FSRgQ8kbpxk=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=I5imAOA6gMJ2Voc7H/Ixwoqs0J+xlDSEyK/v+m4Mpao=; b=Y3zzAkPv1PYJcgnAFxCu+yMjiR
+ dQrClaBQi4PiYey9C6VtJeoy4riyQZrGItSOpZh1MbNmd/aEDk2wBJyjLby5CZ/7+gdKUutdbf0dG
+ U2BidMv2bcaniOcrX8LV25iiBe19VY9ppQCK4FHMU15iEKY9x4Oh6IQOQ2VTPplTBBe0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.3)
- id 1nCSLO-00Cyb4-4g
+ id 1nCSLO-00Cyb6-54
  for linux-f2fs-devel@lists.sourceforge.net; Tue, 25 Jan 2022 20:23:11 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id EC2B96164C;
- Tue, 25 Jan 2022 20:22:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C622C340E0;
- Tue, 25 Jan 2022 20:22:59 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7ED2561768;
+ Tue, 25 Jan 2022 20:23:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD945C340E6;
+ Tue, 25 Jan 2022 20:23:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1643142179;
- bh=Vhh6AI4AOoZbcGx6PVrCy7EGGWcFf1i53vnevyRykCo=;
- h=From:To:Cc:Subject:Date:From;
- b=NmzIsqN96Zg6fxi4BZY2TWYOEVleoJD1jo7JKczg/RyCInirH07JtTy2/UXDtsOat
- rOEHc2nE/Tf7e4NUqLpwTZ5cu3tIY0yVgrP1EZTGanBU9mlM7Cp3Yli6ujkTbxpZOY
- +XdHAyXNXGkT3U7KWcIL6E5ZH47xxt0eD5nvPRwf2UeeHk5fMiF5ILumfqK1zZAd2T
- sD73gLddkBXAsFlNdjPDYM+S1kLf1pwMLRVSpOEeYXdd4Y5B8WtnxcwCrUu/RoGDCB
- Sg9VENPaQu5aCj7ZyMH50De11f9GC2n2HLtZqkgmICTuqDNRUr61r9g1Jm659BNq1Z
- qsSC7BGiSxNxg==
+ s=k20201202; t=1643142180;
+ bh=ofAycFRhfggnQ8vC0SVr08d1Hq7S/JeroNDpfQa4dno=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=spiTYMZrR/hipoHCjyv2pboNqs5CtD0mXMXOqfK3MmXpZnjViOMQOS24FZrnqeX7V
+ ogLwF0EA7iwCASRL+TbsGBuHoCmN37Ba/qL0OqiraktZkNjieZpDgRgV5GArMP4mPW
+ HOxep14tpwnwQw3eJgpQKaC/0mI3H4EfVLVSk/R6DtrXQvRZE9Ik6R+OQDuPlcc5n5
+ OpAdy6jM5NER+P1gEUzLkCWTKPogx4AOM+f9yUkce9fiklNzaYDDIl78aUMf+5lzDD
+ 57CAgJow841eOGaoGs6SVXtVt4j9B0OE5Lmv7/LQhxYhd1ZMQwkpGgVngDy45Z09Ps
+ KlZHVY3HcXHlQ==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 25 Jan 2022 12:22:53 -0800
-Message-Id: <20220125202254.3111474-1-jaegeuk@kernel.org>
+Date: Tue, 25 Jan 2022 12:22:54 -0800
+Message-Id: <20220125202254.3111474-2-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.35.0.rc0.227.g00780c9af4-goog
+In-Reply-To: <20220125202254.3111474-1-jaegeuk@kernel.org>
+References: <20220125202254.3111474-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
@@ -69,10 +71,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: From: Konstantin Vyshetsky <vkon@google.com> This patch
- unifies
- parameters related to how often discard is issued and how many requests go
- out at the same time by placing them in discard_cmd_control. The move will
- allow the parameters to be modi [...] 
+ exposes
+ max_discard_request, min_discard_issue_time, mid_discard_issue_time, and
+ max_discard_issue_time in sysfs. This will allow the user to fine tune discard
+ operations. 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +90,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nCSLO-00Cyb4-4g
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: move discard parameters into
- discard_cmd_control
+X-Headers-End: 1nCSLO-00Cyb6-54
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: expose discard related parameters in
+ sysfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,93 +111,81 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Konstantin Vyshetsky <vkon@google.com>
 
-This patch unifies parameters related to how often discard is issued and
-how many requests go out at the same time by placing them in
-discard_cmd_control. The move will allow the parameters to be modified
-in the future without relying on hard-coded values.
+This patch exposes max_discard_request, min_discard_issue_time,
+mid_discard_issue_time, and max_discard_issue_time in sysfs. This will
+allow the user to fine tune discard operations.
 
 Signed-off-by: Konstantin Vyshetsky <vkon@google.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/f2fs.h    |  4 ++++
- fs/f2fs/segment.c | 22 +++++++++++++---------
- 2 files changed, 17 insertions(+), 9 deletions(-)
+ Documentation/ABI/testing/sysfs-fs-f2fs | 27 +++++++++++++++++++++++++
+ fs/f2fs/sysfs.c                         |  8 ++++++++
+ 2 files changed, 35 insertions(+)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 8178a9152e49..63c90416364b 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -398,6 +398,10 @@ struct discard_cmd_control {
- 	struct mutex cmd_lock;
- 	unsigned int nr_discards;		/* # of discards in the list */
- 	unsigned int max_discards;		/* max. discards to be issued */
-+	unsigned int max_discard_request;	/* max. discard request per round */
-+	unsigned int min_discard_issue_time;	/* min. interval between discard issue */
-+	unsigned int mid_discard_issue_time;	/* mid. interval between discard issue */
-+	unsigned int max_discard_issue_time;	/* max. interval between discard issue */
- 	unsigned int discard_granularity;	/* discard granularity */
- 	unsigned int undiscard_blks;		/* # of undiscard blocks */
- 	unsigned int next_pos;			/* next discard position */
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 216538b57331..56211e201d51 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -1156,14 +1156,14 @@ static void __init_discard_policy(struct f2fs_sb_info *sbi,
- 	dpolicy->ordered = false;
- 	dpolicy->granularity = granularity;
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 2416b03ff283..87d3884c90ea 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -98,6 +98,33 @@ Description:	Controls the issue rate of discard commands that consist of small
+ 		checkpoint is triggered, and issued during the checkpoint.
+ 		By default, it is disabled with 0.
  
--	dpolicy->max_requests = DEF_MAX_DISCARD_REQUEST;
-+	dpolicy->max_requests = dcc->max_discard_request;
- 	dpolicy->io_aware_gran = MAX_PLIST_NUM;
- 	dpolicy->timeout = false;
- 
- 	if (discard_type == DPOLICY_BG) {
--		dpolicy->min_interval = DEF_MIN_DISCARD_ISSUE_TIME;
--		dpolicy->mid_interval = DEF_MID_DISCARD_ISSUE_TIME;
--		dpolicy->max_interval = DEF_MAX_DISCARD_ISSUE_TIME;
-+		dpolicy->min_interval = dcc->min_discard_issue_time;
-+		dpolicy->mid_interval = dcc->mid_discard_issue_time;
-+		dpolicy->max_interval = dcc->max_discard_issue_time;
- 		dpolicy->io_aware = true;
- 		dpolicy->sync = false;
- 		dpolicy->ordered = true;
-@@ -1171,12 +1171,12 @@ static void __init_discard_policy(struct f2fs_sb_info *sbi,
- 			dpolicy->granularity = 1;
- 			if (atomic_read(&dcc->discard_cmd_cnt))
- 				dpolicy->max_interval =
--					DEF_MIN_DISCARD_ISSUE_TIME;
-+					dcc->min_discard_issue_time;
- 		}
- 	} else if (discard_type == DPOLICY_FORCE) {
--		dpolicy->min_interval = DEF_MIN_DISCARD_ISSUE_TIME;
--		dpolicy->mid_interval = DEF_MID_DISCARD_ISSUE_TIME;
--		dpolicy->max_interval = DEF_MAX_DISCARD_ISSUE_TIME;
-+		dpolicy->min_interval = dcc->min_discard_issue_time;
-+		dpolicy->mid_interval = dcc->mid_discard_issue_time;
-+		dpolicy->max_interval = dcc->max_discard_issue_time;
- 		dpolicy->io_aware = false;
- 	} else if (discard_type == DPOLICY_FSTRIM) {
- 		dpolicy->io_aware = false;
-@@ -1781,7 +1781,7 @@ static int issue_discard_thread(void *data)
- 	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
- 	wait_queue_head_t *q = &dcc->discard_wait_queue;
- 	struct discard_policy dpolicy;
--	unsigned int wait_ms = DEF_MIN_DISCARD_ISSUE_TIME;
-+	unsigned int wait_ms = dcc->min_discard_issue_time;
- 	int issued;
- 
- 	set_freezable();
-@@ -2180,6 +2180,10 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
- 	atomic_set(&dcc->discard_cmd_cnt, 0);
- 	dcc->nr_discards = 0;
- 	dcc->max_discards = MAIN_SEGS(sbi) << sbi->log_blocks_per_seg;
-+	dcc->max_discard_request = DEF_MAX_DISCARD_REQUEST;
-+	dcc->min_discard_issue_time = DEF_MIN_DISCARD_ISSUE_TIME;
-+	dcc->mid_discard_issue_time = DEF_MID_DISCARD_ISSUE_TIME;
-+	dcc->max_discard_issue_time = DEF_MAX_DISCARD_ISSUE_TIME;
- 	dcc->undiscard_blks = 0;
- 	dcc->next_pos = 0;
- 	dcc->root = RB_ROOT_CACHED;
++What:		/sys/fs/f2fs/<disk>/max_discard_request
++Date:		December 2021
++Contact:	"Konstantin Vyshetsky" <vkon@google.com>
++Description:	Controls the number of discards a thread will issue at a time.
++		Higher number will allow the discard thread to finish its work
++		faster, at the cost of higher latency for incomming I/O.
++
++What:		/sys/fs/f2fs/<disk>/min_discard_issue_time
++Date:		December 2021
++Contact:	"Konstantin Vyshetsky" <vkon@google.com>
++Description:	Controls the interval the discard thread will wait between
++		issuing discard requests when there are discards to be issued and
++		no I/O aware interruptions occur.
++
++What:		/sys/fs/f2fs/<disk>/mid_discard_issue_time
++Date:		December 2021
++Contact:	"Konstantin Vyshetsky" <vkon@google.com>
++Description:	Controls the interval the discard thread will wait between
++		issuing discard requests when there are discards to be issued and
++		an I/O aware interruption occurs.
++
++What:		/sys/fs/f2fs/<disk>/max_discard_issue_time
++Date:		December 2021
++Contact:	"Konstantin Vyshetsky" <vkon@google.com>
++Description:	Controls the interval the discard thread will wait when there are
++		no discard operations to be issued.
++
+ What:		/sys/fs/f2fs/<disk>/discard_granularity
+ Date:		July 2017
+ Contact:	"Chao Yu" <yuchao0@huawei.com>
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 2bccdaedfb00..281bc0133ee6 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -716,6 +716,10 @@ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_idle, gc_mode);
+ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent, gc_mode);
+ F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, reclaim_segments, rec_prefree_segments);
+ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_small_discards, max_discards);
++F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_request, max_discard_request);
++F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, min_discard_issue_time, min_discard_issue_time);
++F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, mid_discard_issue_time, mid_discard_issue_time);
++F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_issue_time, max_discard_issue_time);
+ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_granularity, discard_granularity);
+ F2FS_RW_ATTR(RESERVED_BLOCKS, f2fs_sb_info, reserved_blocks, reserved_blocks);
+ F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, batched_trim_sections, trim_sections);
+@@ -832,6 +836,10 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(reclaim_segments),
+ 	ATTR_LIST(main_blkaddr),
+ 	ATTR_LIST(max_small_discards),
++	ATTR_LIST(max_discard_request),
++	ATTR_LIST(min_discard_issue_time),
++	ATTR_LIST(mid_discard_issue_time),
++	ATTR_LIST(max_discard_issue_time),
+ 	ATTR_LIST(discard_granularity),
+ 	ATTR_LIST(pending_discard),
+ 	ATTR_LIST(batched_trim_sections),
 -- 
 2.35.0.rc0.227.g00780c9af4-goog
 
