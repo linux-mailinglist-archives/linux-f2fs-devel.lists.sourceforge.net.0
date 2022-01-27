@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1C0F49D835
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Jan 2022 03:47:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E33949D878
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Jan 2022 03:50:03 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nCuom-0003go-UN; Thu, 27 Jan 2022 02:47:23 +0000
+	id 1nCurG-0003oV-KC; Thu, 27 Jan 2022 02:49:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <neilb@suse.de>) id 1nCuom-0003gi-0i
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 02:47:22 +0000
+ (envelope-from <neilb@suse.de>) id 1nCurE-0003oK-Ps
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 02:49:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :References:In-Reply-To:Message-ID:Date:Cc:To:From:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KkOF4oPkeZZZKayzg8ZVQCwB7v+mDSIDC7L5LPHRKXQ=; b=MS0UXree6dg24MUZmdOu6KnbS/
- ih00zHCs/DKbjs8Oec3SOpYBO2Dbx7B47AO0ajWuZYbO92fg7FMEOoX+HZopLjKNIPD/yBddaEAja
- fR6BQ8GkMqZQA2gpO+/FMJyi0gqNpbp3TdcRwTPCFlfrEvn6Z1t96+9tsXmuT774dT2A=;
+ bh=OVO5L5oh76QqfW3n1oDvBos2Yawv0E43OsrqMmz97u8=; b=GP5/6BOHj0RJ2NGO2mwAZUjfuQ
+ XIolh6gOV7YF0YF1X9/icP2SbXK7JWnhV7BEk3OQurFH7tDfhKw2QtaEsd4UYRL+YQlRou1Q4nhbF
+ sO5kYtA/ANq/dQPCcq6cwP9lUvSs5Dm7kFNQ3T7vjra96BxvrvfzYJlCPGm2qlC4ScbM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
@@ -29,47 +29,47 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KkOF4oPkeZZZKayzg8ZVQCwB7v+mDSIDC7L5LPHRKXQ=; b=ICiIeW+E2Ye2B+2crw4rhnPsbD
- ubLjGfBSDP6K8XfGwnNvSBKP3VKRxzJ1ikOnMLDh7+EYWa2lba6yji0kQUMxlpa7SeQwvGriWR6R9
- Rj3T2xSe5e1qD/+9O3mh8sPIb0qPNzxMEFHwpYizw3WgMdcyQKxVMIv7fLxzW4mqALOg=;
+ bh=OVO5L5oh76QqfW3n1oDvBos2Yawv0E43OsrqMmz97u8=; b=a7poQCO0oB0RjBu4RbFA9iHRDP
+ JdH8XyLDAmL4lUjDBq65zyJLocL2Ht0S+KkC6sOJOTN6LlWZr5d3eGe3D8GmkChOeY8QKdtC344ab
+ RI6qw9k7MQo0RHBkBxAOFQ4Wq3I26mwz+bum6Hx38GlUSOGFyI2HhjS1/sggtnAtOZgs=;
 Received: from smtp-out1.suse.de ([195.135.220.28])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92.3)
- id 1nCuoj-0007Zu-OF
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 02:47:22 +0000
+ id 1nCurC-00FTWY-ID
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 02:49:55 +0000
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 7CACD21923;
- Thu, 27 Jan 2022 02:47:15 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id BC4B62190B;
+ Thu, 27 Jan 2022 02:49:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1643251635; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1643251787; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=KkOF4oPkeZZZKayzg8ZVQCwB7v+mDSIDC7L5LPHRKXQ=;
- b=B0O+3jp4mxkh1XpwWM+FNy40XFfLzGb0Axq21Ieo05EzgRkUvnhGii2kHiGjgkRLqvdhtC
- 2knTbGE65MpnfDYPlDD/ccAf6ArX+ks9W62f9mMUjn4Y9URMQFRbndQiWvherjRx1cbWEU
- ThaX50CNYQb06Pj1OE0TAC2fkpaINRI=
+ bh=OVO5L5oh76QqfW3n1oDvBos2Yawv0E43OsrqMmz97u8=;
+ b=JOFvU7iAGyn/v6BD3Bp+bh089vjSIxSCwY01PObM+BmenfkUZ1j2GJfL9RHxbWRZM/l98u
+ qo/UEFC5lfk1D4MRdyMUcjwh6hIji/NTYfIRlm9cB6k65ocg8RHieVXuXzdIix2W/WWAJB
+ +fCFtWOMn+6HtfPTgy8eWKnyVdE1o0E=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1643251635;
+ s=susede2_ed25519; t=1643251787;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=KkOF4oPkeZZZKayzg8ZVQCwB7v+mDSIDC7L5LPHRKXQ=;
- b=akBmVAaqPSHWwfizVR5+UEN5LqmpYqCrwUXapYuPOGUA+SFdSPkHY8zNLaSjFpANMaqGvw
- pDptIRxgjShhOQDA==
+ bh=OVO5L5oh76QqfW3n1oDvBos2Yawv0E43OsrqMmz97u8=;
+ b=IBhAkB2hVQaF92fXW6Y2P175TbQ6CFUUnjY/M7g7xzSXg9kQBD90kXkX3iZRhhBhPwaHez
+ ofEg50iSvDeTM4BA==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id F121013E46;
- Thu, 27 Jan 2022 02:47:08 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B085A13E46;
+ Thu, 27 Jan 2022 02:49:40 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id x7+BK6wH8mGsKwAAMHmgww
- (envelope-from <neilb@suse.de>); Thu, 27 Jan 2022 02:47:08 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id DVgjG0QI8mF9LAAAMHmgww
+ (envelope-from <neilb@suse.de>); Thu, 27 Jan 2022 02:49:40 +0000
 From: NeilBrown <neilb@suse.de>
 To: Andrew Morton <akpm@linux-foundation.org>,
  Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
@@ -83,7 +83,7 @@ To: Andrew Morton <akpm@linux-foundation.org>,
  Lars Ellenberg <lars.ellenberg@linbit.com>,
  Paolo Valente <paolo.valente@linaro.org>, Jens Axboe <axboe@kernel.dk>
 Date: Thu, 27 Jan 2022 13:46:29 +1100
-Message-ID: <164325158954.29787.7856652136298668100.stgit@noble.brown>
+Message-ID: <164325158960.29787.17588717894058708630.stgit@noble.brown>
 In-Reply-To: <164325106958.29787.4865219843242892726.stgit@noble.brown>
 References: <164325106958.29787.4865219843242892726.stgit@noble.brown>
 User-Agent: StGit/0.23
@@ -95,12 +95,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: inode_congested() reports if the backing-device for the inode
- is congested. Few bdi report congestion any more, only ceph, fuse, and nfs.
- Having support just for those is unlikely to be useful. The places which
- test inode_congested() or it variants like inode_write_congested(), avoid
- initiating IO if congestion is present. We now have to rely on other places
- in the stack to back off, or abor [...] 
+ Content preview: This framework is no longer used - so discard it.
+ Signed-off-by:
+ NeilBrown <neilb@suse.de> --- include/linux/backing-dev-defs.h | 8 -----
+ include/linux/backing-dev.h | 2 - include/trace/events/writeback.h | 28
+ mm/backing-dev.c | 5 [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -115,8 +114,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1nCuoj-0007Zu-OF
-Subject: [f2fs-dev] [PATCH 1/9] Remove inode_congested()
+X-Headers-End: 1nCurC-00FTWY-ID
+Subject: [f2fs-dev] [PATCH 9/9] Remove congestion tracking framework.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -137,192 +136,152 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-inode_congested() reports if the backing-device for the inode is
-congested.  Few bdi report congestion any more, only ceph, fuse, and
-nfs.  Having support just for those is unlikely to be useful.
-
-The places which test inode_congested() or it variants like
-inode_write_congested(), avoid initiating IO if congestion is present.
-We now have to rely on other places in the stack to back off, or abort
-requests - we already do for everything except these 3 filesystems.
-
-So remove inode_congested() and related functions, and remove the call
-sites, assuming that inode_congested() always returns 'false'.
+This framework is no longer used - so discard it.
 
 Signed-off-by: NeilBrown <neilb@suse.de>
 ---
- fs/fs-writeback.c           |   37 -------------------------------------
- include/linux/backing-dev.h |   22 ----------------------
- mm/fadvise.c                |    5 ++---
- mm/readahead.c              |    6 ------
- mm/vmscan.c                 |   17 +----------------
- 5 files changed, 3 insertions(+), 84 deletions(-)
+ include/linux/backing-dev-defs.h |    8 -----
+ include/linux/backing-dev.h      |    2 -
+ include/trace/events/writeback.h |   28 -------------------
+ mm/backing-dev.c                 |   57 --------------------------------------
+ 4 files changed, 95 deletions(-)
 
-diff --git a/fs/fs-writeback.c b/fs/fs-writeback.c
-index f8d7fe6db989..42a3dfad40b8 100644
---- a/fs/fs-writeback.c
-+++ b/fs/fs-writeback.c
-@@ -893,43 +893,6 @@ void wbc_account_cgroup_owner(struct writeback_control *wbc, struct page *page,
- }
- EXPORT_SYMBOL_GPL(wbc_account_cgroup_owner);
+diff --git a/include/linux/backing-dev-defs.h b/include/linux/backing-dev-defs.h
+index 993c5628a726..e863c88df95f 100644
+--- a/include/linux/backing-dev-defs.h
++++ b/include/linux/backing-dev-defs.h
+@@ -207,14 +207,6 @@ struct backing_dev_info {
+ #endif
+ };
  
--/**
-- * inode_congested - test whether an inode is congested
-- * @inode: inode to test for congestion (may be NULL)
-- * @cong_bits: mask of WB_[a]sync_congested bits to test
-- *
-- * Tests whether @inode is congested.  @cong_bits is the mask of congestion
-- * bits to test and the return value is the mask of set bits.
-- *
-- * If cgroup writeback is enabled for @inode, the congestion state is
-- * determined by whether the cgwb (cgroup bdi_writeback) for the blkcg
-- * associated with @inode is congested; otherwise, the root wb's congestion
-- * state is used.
-- *
-- * @inode is allowed to be NULL as this function is often called on
-- * mapping->host which is NULL for the swapper space.
-- */
--int inode_congested(struct inode *inode, int cong_bits)
--{
--	/*
--	 * Once set, ->i_wb never becomes NULL while the inode is alive.
--	 * Start transaction iff ->i_wb is visible.
--	 */
--	if (inode && inode_to_wb_is_valid(inode)) {
--		struct bdi_writeback *wb;
--		struct wb_lock_cookie lock_cookie = {};
--		bool congested;
+-enum {
+-	BLK_RW_ASYNC	= 0,
+-	BLK_RW_SYNC	= 1,
+-};
 -
--		wb = unlocked_inode_to_wb_begin(inode, &lock_cookie);
--		congested = wb_congested(wb, cong_bits);
--		unlocked_inode_to_wb_end(inode, &lock_cookie);
--		return congested;
--	}
+-void clear_bdi_congested(struct backing_dev_info *bdi, int sync);
+-void set_bdi_congested(struct backing_dev_info *bdi, int sync);
 -
--	return wb_congested(&inode_to_bdi(inode)->wb, cong_bits);
--}
--EXPORT_SYMBOL_GPL(inode_congested);
--
- /**
-  * wb_split_bdi_pages - split nr_pages to write according to bandwidth
-  * @wb: target bdi_writeback to split @nr_pages to
+ struct wb_lock_cookie {
+ 	bool locked;
+ 	unsigned long flags;
 diff --git a/include/linux/backing-dev.h b/include/linux/backing-dev.h
-index 483979c1b9f4..860b675c2929 100644
+index 2d764566280c..87ce24d238f3 100644
 --- a/include/linux/backing-dev.h
 +++ b/include/linux/backing-dev.h
-@@ -162,7 +162,6 @@ struct bdi_writeback *wb_get_create(struct backing_dev_info *bdi,
- 				    gfp_t gfp);
- void wb_memcg_offline(struct mem_cgroup *memcg);
- void wb_blkcg_offline(struct blkcg *blkcg);
--int inode_congested(struct inode *inode, int cong_bits);
+@@ -135,8 +135,6 @@ static inline bool writeback_in_progress(struct bdi_writeback *wb)
  
- /**
-  * inode_cgwb_enabled - test whether cgroup writeback is enabled on an inode
-@@ -390,29 +389,8 @@ static inline void wb_blkcg_offline(struct blkcg *blkcg)
+ struct backing_dev_info *inode_to_bdi(struct inode *inode);
+ 
+-long congestion_wait(int sync, long timeout);
+-
+ static inline bool mapping_can_writeback(struct address_space *mapping)
  {
+ 	return inode_to_bdi(mapping->host)->capabilities & BDI_CAP_WRITEBACK;
+diff --git a/include/trace/events/writeback.h b/include/trace/events/writeback.h
+index a345b1e12daf..86b2a82da546 100644
+--- a/include/trace/events/writeback.h
++++ b/include/trace/events/writeback.h
+@@ -735,34 +735,6 @@ TRACE_EVENT(writeback_sb_inodes_requeue,
+ 	)
+ );
+ 
+-DECLARE_EVENT_CLASS(writeback_congest_waited_template,
+-
+-	TP_PROTO(unsigned int usec_timeout, unsigned int usec_delayed),
+-
+-	TP_ARGS(usec_timeout, usec_delayed),
+-
+-	TP_STRUCT__entry(
+-		__field(	unsigned int,	usec_timeout	)
+-		__field(	unsigned int,	usec_delayed	)
+-	),
+-
+-	TP_fast_assign(
+-		__entry->usec_timeout	= usec_timeout;
+-		__entry->usec_delayed	= usec_delayed;
+-	),
+-
+-	TP_printk("usec_timeout=%u usec_delayed=%u",
+-			__entry->usec_timeout,
+-			__entry->usec_delayed)
+-);
+-
+-DEFINE_EVENT(writeback_congest_waited_template, writeback_congestion_wait,
+-
+-	TP_PROTO(unsigned int usec_timeout, unsigned int usec_delayed),
+-
+-	TP_ARGS(usec_timeout, usec_delayed)
+-);
+-
+ DECLARE_EVENT_CLASS(writeback_single_inode_template,
+ 
+ 	TP_PROTO(struct inode *inode,
+diff --git a/mm/backing-dev.c b/mm/backing-dev.c
+index eae96dfe0261..7176af65b103 100644
+--- a/mm/backing-dev.c
++++ b/mm/backing-dev.c
+@@ -1005,60 +1005,3 @@ const char *bdi_dev_name(struct backing_dev_info *bdi)
+ 	return bdi->dev_name;
  }
- 
--static inline int inode_congested(struct inode *inode, int cong_bits)
+ EXPORT_SYMBOL_GPL(bdi_dev_name);
+-
+-static wait_queue_head_t congestion_wqh[2] = {
+-		__WAIT_QUEUE_HEAD_INITIALIZER(congestion_wqh[0]),
+-		__WAIT_QUEUE_HEAD_INITIALIZER(congestion_wqh[1])
+-	};
+-static atomic_t nr_wb_congested[2];
+-
+-void clear_bdi_congested(struct backing_dev_info *bdi, int sync)
 -{
--	return wb_congested(&inode_to_bdi(inode)->wb, cong_bits);
--}
+-	wait_queue_head_t *wqh = &congestion_wqh[sync];
+-	enum wb_congested_state bit;
 -
- #endif	/* CONFIG_CGROUP_WRITEBACK */
- 
--static inline int inode_read_congested(struct inode *inode)
+-	bit = sync ? WB_sync_congested : WB_async_congested;
+-	if (test_and_clear_bit(bit, &bdi->wb.congested))
+-		atomic_dec(&nr_wb_congested[sync]);
+-	smp_mb__after_atomic();
+-	if (waitqueue_active(wqh))
+-		wake_up(wqh);
+-}
+-EXPORT_SYMBOL(clear_bdi_congested);
+-
+-void set_bdi_congested(struct backing_dev_info *bdi, int sync)
 -{
--	return inode_congested(inode, 1 << WB_sync_congested);
--}
+-	enum wb_congested_state bit;
 -
--static inline int inode_write_congested(struct inode *inode)
+-	bit = sync ? WB_sync_congested : WB_async_congested;
+-	if (!test_and_set_bit(bit, &bdi->wb.congested))
+-		atomic_inc(&nr_wb_congested[sync]);
+-}
+-EXPORT_SYMBOL(set_bdi_congested);
+-
+-/**
+- * congestion_wait - wait for a backing_dev to become uncongested
+- * @sync: SYNC or ASYNC IO
+- * @timeout: timeout in jiffies
+- *
+- * Waits for up to @timeout jiffies for a backing_dev (any backing_dev) to exit
+- * write congestion.  If no backing_devs are congested then just wait for the
+- * next write to be completed.
+- */
+-long congestion_wait(int sync, long timeout)
 -{
--	return inode_congested(inode, 1 << WB_async_congested);
+-	long ret;
+-	unsigned long start = jiffies;
+-	DEFINE_WAIT(wait);
+-	wait_queue_head_t *wqh = &congestion_wqh[sync];
+-
+-	prepare_to_wait(wqh, &wait, TASK_UNINTERRUPTIBLE);
+-	ret = io_schedule_timeout(timeout);
+-	finish_wait(wqh, &wait);
+-
+-	trace_writeback_congestion_wait(jiffies_to_usecs(timeout),
+-					jiffies_to_usecs(jiffies - start));
+-
+-	return ret;
 -}
--
--static inline int inode_rw_congested(struct inode *inode)
--{
--	return inode_congested(inode, (1 << WB_sync_congested) |
--				      (1 << WB_async_congested));
--}
--
- static inline int bdi_congested(struct backing_dev_info *bdi, int cong_bits)
- {
- 	return wb_congested(&bdi->wb, cong_bits);
-diff --git a/mm/fadvise.c b/mm/fadvise.c
-index d6baa4f451c5..338f16022012 100644
---- a/mm/fadvise.c
-+++ b/mm/fadvise.c
-@@ -109,9 +109,8 @@ int generic_fadvise(struct file *file, loff_t offset, loff_t len, int advice)
- 	case POSIX_FADV_NOREUSE:
- 		break;
- 	case POSIX_FADV_DONTNEED:
--		if (!inode_write_congested(mapping->host))
--			__filemap_fdatawrite_range(mapping, offset, endbyte,
--						   WB_SYNC_NONE);
-+		__filemap_fdatawrite_range(mapping, offset, endbyte,
-+					   WB_SYNC_NONE);
- 
- 		/*
- 		 * First and last FULL page! Partial pages are deliberately
-diff --git a/mm/readahead.c b/mm/readahead.c
-index cf0dcf89eb69..feda2b1702f1 100644
---- a/mm/readahead.c
-+++ b/mm/readahead.c
-@@ -595,12 +595,6 @@ void page_cache_async_ra(struct readahead_control *ractl,
- 
- 	folio_clear_readahead(folio);
- 
--	/*
--	 * Defer asynchronous read-ahead on IO congestion.
--	 */
--	if (inode_read_congested(ractl->mapping->host))
--		return;
--
- 	if (blk_cgroup_congested())
- 		return;
- 
-diff --git a/mm/vmscan.c b/mm/vmscan.c
-index 090bfb605ecf..ce8492939bd3 100644
---- a/mm/vmscan.c
-+++ b/mm/vmscan.c
-@@ -989,17 +989,6 @@ static inline int is_page_cache_freeable(struct page *page)
- 	return page_count(page) - page_has_private(page) == 1 + page_cache_pins;
- }
- 
--static int may_write_to_inode(struct inode *inode)
--{
--	if (current->flags & PF_SWAPWRITE)
--		return 1;
--	if (!inode_write_congested(inode))
--		return 1;
--	if (inode_to_bdi(inode) == current->backing_dev_info)
--		return 1;
--	return 0;
--}
--
- /*
-  * We detected a synchronous write error writing a page out.  Probably
-  * -ENOSPC.  We need to propagate that into the address_space for a subsequent
-@@ -1199,8 +1188,6 @@ static pageout_t pageout(struct page *page, struct address_space *mapping)
- 	}
- 	if (mapping->a_ops->writepage == NULL)
- 		return PAGE_ACTIVATE;
--	if (!may_write_to_inode(mapping->host))
--		return PAGE_KEEP;
- 
- 	if (clear_page_dirty_for_io(page)) {
- 		int res;
-@@ -1576,9 +1563,7 @@ static unsigned int shrink_page_list(struct list_head *page_list,
- 		 * end of the LRU a second time.
- 		 */
- 		mapping = page_mapping(page);
--		if (((dirty || writeback) && mapping &&
--		     inode_write_congested(mapping->host)) ||
--		    (writeback && PageReclaim(page)))
-+		if (writeback && PageReclaim(page))
- 			stat->nr_congested++;
- 
- 		/*
+-EXPORT_SYMBOL(congestion_wait);
 
 
 
