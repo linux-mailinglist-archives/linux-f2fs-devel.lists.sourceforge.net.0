@@ -2,108 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B19749EDF9
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Jan 2022 23:10:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 498C349EE5F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Jan 2022 00:01:20 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nDCyT-0001Lq-Gi; Thu, 27 Jan 2022 22:10:36 +0000
+	id 1nDDlW-0005pc-10; Thu, 27 Jan 2022 23:01:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <konishi.ryusuke@gmail.com>) id 1nDCyS-0001Lj-Az
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 22:10:34 +0000
+ (envelope-from <akpm@linux-foundation.org>) id 1nDDlU-0005pV-EV
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 23:01:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Mime-Version
+ :References:In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pkUjSb/fdfaa3FAu68ePw4JIYSvRfOC6qyjCilb3MLA=; b=X3SBG9fVVptYYpy1Zy7JvdPxSL
- jKMAvGkcnyNWN6FqYDskydncYpNGamy5591J8Aqe4hrHYZT2Lf9fUavThT1/Q1w5/f1kOA+2l9BHL
- FAVJPC63Zr4EUVCdk3li3QOi+cJj/4ezvGUrypaJilMGkhLnTPlS041E1pJCG6RuuQ9o=;
+ bh=+hNmKfQ+m0W1/dRJe2O7J8Guba0XaVl4e/i4tKvhzL4=; b=b82FJm0310elWBrXSCelG4gtAl
+ mef5TvwlwVbXpeKV6uhfVGAH0afRHOYQ5F7L+I1nVOoQPk/0BYBzmPIwERPfd/06sin+49NYP9jVB
+ tlaDxgRu3BzOVTXCyrgHr1757mcqme++6gr1i+38dZsOxuzGomRidTluK4enyieEUqPE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Mime-Version:References:
+ In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pkUjSb/fdfaa3FAu68ePw4JIYSvRfOC6qyjCilb3MLA=; b=LKasHXHA/hes7LLBjAQ8e2dUnE
- FYZGqwtrrXs1pXfOkyiT7aJjZFqvQh1WzHNYEHIjavhAvsHuTmKwa3l8lSu33802mLChSxcNIqu2o
- vngNkYsggpc/18WoI5THd7gdpytZZL13ZnQZgDp6soM6EJ+4Wwffq/ZuNYaXiicE4pGk=;
-Received: from mail-lj1-f169.google.com ([209.85.208.169])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nDCyM-00HAU3-6K
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 22:10:34 +0000
-Received: by mail-lj1-f169.google.com with SMTP id c15so6307626ljf.11
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 27 Jan 2022 14:10:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pkUjSb/fdfaa3FAu68ePw4JIYSvRfOC6qyjCilb3MLA=;
- b=RZypLcBcYIUdWY9vV42TppO4LaQPblBv+kCbhi7sSIeity0kCuHxjxBkOW+017vQfl
- mGJzLUkiIibnMnTTVFBLt50VetVg1KzsVDl5jUao0XF5T7oAmS+N8pzAB7j2FNpZGYiq
- xbHy2XvQvsScldzehtVeFOoApJ3rHFqpSLvhJxxrFdkCY4SBOyNaqvrt+GIQFpxxuFFh
- CmyJh/SQOY6vLReOapEDPt77zxgz4JT8F/AZF2zWXE0KCoQ1ChkpEBN24khQj5g1i9qq
- aguCWoq8pgm51d0p5z0SrS13R+0j/TGLyIS5NFK+7PHw2xgpowySjWS1of9EUGPSq6jn
- /AOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=pkUjSb/fdfaa3FAu68ePw4JIYSvRfOC6qyjCilb3MLA=;
- b=3b3dqarPBueXigO665YeHqOKuZJrsbwcOre9/fspvnY3OMfsXKaRZ/L4RFMPMzIMK5
- y7aCySoShX+oqGeKqxPBJCzj+lZwTppnIzM3PVG+LKgQyzDE9cKGvqgKgnlfqp4Lsm1+
- fJdlm6SCIE9NbGBj545D+vPGkgY3ocVHgJDVmPAf+D40EgD8Ajk0vgbWXFneF53r0VmC
- zAwbjUDVF1Av0n/MDZOfi4NaPMwfxrrwqEIBxZy9Fk7+DeYp8yMZvWEEGz+gLEFCE5Wd
- GmBi3pQVrNfPOJR7Xbp0dPemf15ef52nEUssA0JOE7bbT92Axuvxq7A0sT/GyvoW9Ocd
- gYhQ==
-X-Gm-Message-State: AOAM531hRZjOGSbQ2boZCaJNkDZcgWTQRHjV6dZ4BmuBw3/iBXzTSYPn
- 8IUYR623xdWgL2kMweWtL4T501QgBDCMeHmlk1Y=
-X-Google-Smtp-Source: ABdhPJy9dJl6L/bnRQi8tK1Am+5DPjPBZvatcTyLSMpbpD4vy19hTtp8mGF/Cl1TBx2f3Cw7TL+lgScx4mlljQ4behg=
-X-Received: by 2002:a2e:5d3:: with SMTP id 202mr3981304ljf.330.1643321423317; 
- Thu, 27 Jan 2022 14:10:23 -0800 (PST)
-MIME-Version: 1.0
-References: <164325106958.29787.4865219843242892726.stgit@noble.brown>
- <164325158955.29787.4769373293473421057.stgit@noble.brown>
-In-Reply-To: <164325158955.29787.4769373293473421057.stgit@noble.brown>
-From: Ryusuke Konishi <konishi.ryusuke@gmail.com>
-Date: Fri, 28 Jan 2022 07:10:11 +0900
-Message-ID: <CAKFNMom4Z76ti4fp69UeKYf0d4x635OR7Q_CjVnBj+vQSuhESg@mail.gmail.com>
+ bh=+hNmKfQ+m0W1/dRJe2O7J8Guba0XaVl4e/i4tKvhzL4=; b=l+i15JlMFtek9ixLs6WUPece8s
+ HOjUmX7U4I8wJCtqF/RF8eK6NBXLhG0ebK/iGkjAKiVhj/1DOnA2bPE1dgYJBKc1qZglFNmdMF7pD
+ hpu+1JNej6o3KvALm12d3TjvnJW1PDIpPP0nIpFANU5vtgvRPI374BqZSBHYWAIzrF5Q=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1nDDlQ-0000uJ-SG
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 23:01:14 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 99871B8238C;
+ Thu, 27 Jan 2022 22:42:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93342C340E4;
+ Thu, 27 Jan 2022 22:42:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
+ s=korg; t=1643323352;
+ bh=ybh+vNa1e2zVCBIHmgIav4rSBCIa4tEXBrjj/Zvd9DM=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=lD8DNYdSP5VgdUVvLTzLs87NT6X2RUv/tVO0wVWZV57Mo8tiF+Cy9CVqnSr4Mr28N
+ /4z/vln9zP3ZnibjoeX42f/bT+EANd4Y6/PvlZ8IiaLj4IayJe8a69r3sno42DD5jQ
+ fiofeE7oSvVhmRsxcbaFoTER4oAWLDgl8zvqXutM=
+Date: Thu, 27 Jan 2022 14:42:29 -0800
+From: Andrew Morton <akpm@linux-foundation.org>
 To: NeilBrown <neilb@suse.de>
-X-Spam-Score: -0.2 (/)
+Message-Id: <20220127144229.a7109a508521db5e8ddda09c@linux-foundation.org>
+In-Reply-To: <164325106958.29787.4865219843242892726.stgit@noble.brown>
+References: <164325106958.29787.4865219843242892726.stgit@noble.brown>
+X-Mailer: Sylpheed 3.5.1 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+X-Spam-Score: -7.2 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jan 27, 2022 at 11:47 AM NeilBrown wrote: > > These
- functions are no longer useful as the only bdis that report > congestion
- are in ceph, fuse, and nfs. None of those bdis can be the > targe [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Thu, 27 Jan 2022 13:46:29 +1100 NeilBrown <neilb@suse.de>
+ wrote: > Congestion hasn't been reliably tracked for quite some time. > Most
+ MM uses of it for guiding writeback decisions were removed in 5.16. > Some
+ other uses were removed in 17-rc1. > > This series remo [...] 
+ Content analysis details:   (-7.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [konishi.ryusuke[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.169 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.208.169 listed in list.dnswl.org]
-X-Headers-End: 1nDCyM-00HAU3-6K
-Subject: Re: [f2fs-dev] [PATCH 2/9] Remove bdi_congested() and
- wb_congested() and related functions
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1nDDlQ-0000uJ-SG
+Subject: Re: [f2fs-dev] [PATCH 0/9] Remove remaining parts of congestions
+ tracking code.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,15 +99,15 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Darrick J. Wong" <djwong@kernel.org>, LKML <linux-kernel@vger.kernel.org>,
- Linux MM <linux-mm@kvack.org>, drbd-dev@lists.linbit.com,
+Cc: "Darrick J. Wong" <djwong@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-mm@kvack.org, drbd-dev@lists.linbit.com,
  Paolo Valente <paolo.valente@linaro.org>, Miklos Szeredi <miklos@szeredi.hu>,
- Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- linux-block@vger.kernel.org, linux-nilfs <linux-nilfs@vger.kernel.org>,
- Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
  Trond Myklebust <trond.myklebust@hammerspace.com>,
- Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>, Jeff Layton <jlayton@kernel.org>,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
+ linux-block@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>, Jens Axboe <axboe@kernel.dk>,
+ linux-nfs@vger.kernel.org, Jeff Layton <jlayton@kernel.org>,
  Philipp Reisner <philipp.reisner@linbit.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
  Lars Ellenberg <lars.ellenberg@linbit.com>,
@@ -132,36 +116,27 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jan 27, 2022 at 11:47 AM NeilBrown <neilb@suse.de> wrote:
->
-> These functions are no longer useful as the only bdis that report
-> congestion are in ceph, fuse, and nfs.  None of those bdis can be the
-> target of the calls in drbd, ext2, nilfs2, or xfs.
->
-> Removing the test on bdi_write_contested() in current_may_throttle()
-> could cause a small change in behaviour, but only when PF_LOCAL_THROTTLE
-> is set.
->
-> So replace the calls by 'false' and simplify the code - and remove the
-> functions.
->
-> Signed-off-by: NeilBrown <neilb@suse.de>
-> ---
->  drivers/block/drbd/drbd_int.h |    3 ---
->  drivers/block/drbd/drbd_req.c |    3 +--
->  fs/ext2/ialloc.c              |    2 --
->  fs/nilfs2/segbuf.c            |   11 -----------
->  fs/xfs/xfs_buf.c              |    3 ---
->  include/linux/backing-dev.h   |   26 --------------------------
->  mm/vmscan.c                   |    4 +---
->  7 files changed, 2 insertions(+), 50 deletions(-)
+On Thu, 27 Jan 2022 13:46:29 +1100 NeilBrown <neilb@suse.de> wrote:
 
-for nilfs2 bits,
+> Congestion hasn't been reliably tracked for quite some time.
+> Most MM uses of it for guiding writeback decisions were removed in 5.16.
+> Some other uses were removed in 17-rc1.
+> 
+> This series removes the remaining places that test for congestion, and
+> the few places which still set it.
+> 
+> The second patch touches a few filesystems.  I didn't think there was
+> much value in splitting this out by filesystems, but if maintainers
+> would rather I did that, I will.
+> 
+> The f2fs, cephfs, fuse, NFS, and block patches can go through the
+> respective trees proving the final patch doesn't land until after they
+> all do - so maybe it should be held for 5.18-rc2 if all the rest lands
+> by 5.18-rc1.
 
-Acked-by: Ryusuke Konishi <konishi.ryusuke@gmail.com>
+Plan B: I'll just take everything.  While collecting tested-bys and
+acked-bys from filesystem maintainers (please).
 
-Thanks,
-Ryusuke Konishi
 
 
 _______________________________________________
