@@ -2,83 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FBDF49EDE5
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Jan 2022 23:00:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B19749EDF9
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Jan 2022 23:10:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nDCoA-0002UW-Fc; Thu, 27 Jan 2022 21:59:57 +0000
+	id 1nDCyT-0001Lq-Gi; Thu, 27 Jan 2022 22:10:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nDCo6-0002UL-18
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 21:59:52 +0000
+ (envelope-from <konishi.ryusuke@gmail.com>) id 1nDCyS-0001Lj-Az
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 22:10:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TeOYlbgau7VmAB9JgbdC78m44ACjQgU1ccbDFR+Cyik=; b=YbtyJUQmxVamvw97I3/jRb73x0
- 782mmYp6e2C6Dkc9zIkH16Wg4CrjiQqed6dMGYzfBIAI9I7Qo6rbiHNAKWw/QXeAQfLUGJquizHy+
- CTIeXr4B55QxHykSNkTjwx0KY/eRelA8jWR0ezdXaS83jpkTaBXYAnVwLItvro9xvIgA=;
+ bh=pkUjSb/fdfaa3FAu68ePw4JIYSvRfOC6qyjCilb3MLA=; b=X3SBG9fVVptYYpy1Zy7JvdPxSL
+ jKMAvGkcnyNWN6FqYDskydncYpNGamy5591J8Aqe4hrHYZT2Lf9fUavThT1/Q1w5/f1kOA+2l9BHL
+ FAVJPC63Zr4EUVCdk3li3QOi+cJj/4ezvGUrypaJilMGkhLnTPlS041E1pJCG6RuuQ9o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TeOYlbgau7VmAB9JgbdC78m44ACjQgU1ccbDFR+Cyik=; b=d13q9A7BGzNjpusWEOZfvVBESj
- XIUjAJlWl7lo5HEsaxUqFu23WJTWCFWYmlHS+49az82EvcQrJ1TckqPTP4brtr1vTkV3zYGczQ8BN
- 5QR+c/3Blz79nRQi4gr2JmWeZfOKBN/EQbf8sfQjUciysteP1pKbWt2JRMFbatZmCpXc=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nDCo1-0004j8-S4
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 21:59:50 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id CE4C3B823E4;
- Thu, 27 Jan 2022 21:59:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C6B0C340E4;
- Thu, 27 Jan 2022 21:59:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1643320777;
- bh=/7dcXRwVEnPr0dXZp92T2BNhR7M0wFD4AUEevWU24Mo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=KHKtBRvq8wWL8Vwo9RYVAvMoLEnlvzLTulWPFq+shU44EAtSOG9pPFFCZMwVPR9TF
- h1vR0LqT+GxKbbYktmE1lO2WAyNGIAivzC2Q28tAf+9AjeXyTQwghTdCUwfITCpPhx
- Dg//4OSdXwyoBUaOGsa5lAaaDw0W2IU1hHen7ivkplMUHrc0Rn9c/7GrkJ3ifwIMNx
- oUAM0CD2yqGMbXnxQ+0ie9VdrXg5d0DnM8cO33Q+ixUdIMbK1q1KsnFlHJbmU116aL
- vsYSV0IxSrtOHyuU0NuktiVGoZdEAWfe86Til30GCB428korg56AQ/H+GKvStSEWfE
- nnf/7UtZBwfUA==
-Date: Thu, 27 Jan 2022 13:59:35 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <YfMVxzdhat01ca7m@google.com>
-References: <20220127054449.24711-1-chao@kernel.org>
+ bh=pkUjSb/fdfaa3FAu68ePw4JIYSvRfOC6qyjCilb3MLA=; b=LKasHXHA/hes7LLBjAQ8e2dUnE
+ FYZGqwtrrXs1pXfOkyiT7aJjZFqvQh1WzHNYEHIjavhAvsHuTmKwa3l8lSu33802mLChSxcNIqu2o
+ vngNkYsggpc/18WoI5THd7gdpytZZL13ZnQZgDp6soM6EJ+4Wwffq/ZuNYaXiicE4pGk=;
+Received: from mail-lj1-f169.google.com ([209.85.208.169])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nDCyM-00HAU3-6K
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 27 Jan 2022 22:10:34 +0000
+Received: by mail-lj1-f169.google.com with SMTP id c15so6307626ljf.11
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 27 Jan 2022 14:10:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=pkUjSb/fdfaa3FAu68ePw4JIYSvRfOC6qyjCilb3MLA=;
+ b=RZypLcBcYIUdWY9vV42TppO4LaQPblBv+kCbhi7sSIeity0kCuHxjxBkOW+017vQfl
+ mGJzLUkiIibnMnTTVFBLt50VetVg1KzsVDl5jUao0XF5T7oAmS+N8pzAB7j2FNpZGYiq
+ xbHy2XvQvsScldzehtVeFOoApJ3rHFqpSLvhJxxrFdkCY4SBOyNaqvrt+GIQFpxxuFFh
+ CmyJh/SQOY6vLReOapEDPt77zxgz4JT8F/AZF2zWXE0KCoQ1ChkpEBN24khQj5g1i9qq
+ aguCWoq8pgm51d0p5z0SrS13R+0j/TGLyIS5NFK+7PHw2xgpowySjWS1of9EUGPSq6jn
+ /AOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=pkUjSb/fdfaa3FAu68ePw4JIYSvRfOC6qyjCilb3MLA=;
+ b=3b3dqarPBueXigO665YeHqOKuZJrsbwcOre9/fspvnY3OMfsXKaRZ/L4RFMPMzIMK5
+ y7aCySoShX+oqGeKqxPBJCzj+lZwTppnIzM3PVG+LKgQyzDE9cKGvqgKgnlfqp4Lsm1+
+ fJdlm6SCIE9NbGBj545D+vPGkgY3ocVHgJDVmPAf+D40EgD8Ajk0vgbWXFneF53r0VmC
+ zAwbjUDVF1Av0n/MDZOfi4NaPMwfxrrwqEIBxZy9Fk7+DeYp8yMZvWEEGz+gLEFCE5Wd
+ GmBi3pQVrNfPOJR7Xbp0dPemf15ef52nEUssA0JOE7bbT92Axuvxq7A0sT/GyvoW9Ocd
+ gYhQ==
+X-Gm-Message-State: AOAM531hRZjOGSbQ2boZCaJNkDZcgWTQRHjV6dZ4BmuBw3/iBXzTSYPn
+ 8IUYR623xdWgL2kMweWtL4T501QgBDCMeHmlk1Y=
+X-Google-Smtp-Source: ABdhPJy9dJl6L/bnRQi8tK1Am+5DPjPBZvatcTyLSMpbpD4vy19hTtp8mGF/Cl1TBx2f3Cw7TL+lgScx4mlljQ4behg=
+X-Received: by 2002:a2e:5d3:: with SMTP id 202mr3981304ljf.330.1643321423317; 
+ Thu, 27 Jan 2022 14:10:23 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220127054449.24711-1-chao@kernel.org>
-X-Spam-Score: -5.4 (-----)
+References: <164325106958.29787.4865219843242892726.stgit@noble.brown>
+ <164325158955.29787.4769373293473421057.stgit@noble.brown>
+In-Reply-To: <164325158955.29787.4769373293473421057.stgit@noble.brown>
+From: Ryusuke Konishi <konishi.ryusuke@gmail.com>
+Date: Fri, 28 Jan 2022 07:10:11 +0900
+Message-ID: <CAKFNMom4Z76ti4fp69UeKYf0d4x635OR7Q_CjVnBj+vQSuhESg@mail.gmail.com>
+To: NeilBrown <neilb@suse.de>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 01/27, Chao Yu wrote: > Quoted from Jing Xia's report,
- there is a potential deadlock may happen > between kworker and checkpoint
- as below: > > [T:writeback] [T:checkpoint] > - wb_writeback > - blk_ [...]
- Content analysis details:   (-5.4 points, 6.0 required)
+ Content preview:  On Thu, Jan 27, 2022 at 11:47 AM NeilBrown wrote: > > These
+ functions are no longer useful as the only bdis that report > congestion
+ are in ceph, fuse, and nfs. None of those bdis can be the > targe [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [konishi.ryusuke[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -86,9 +97,13 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nDCo1-0004j8-S4
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid potential deadlock
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.169 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.208.169 listed in list.dnswl.org]
+X-Headers-End: 1nDCyM-00HAU3-6K
+Subject: Re: [f2fs-dev] [PATCH 2/9] Remove bdi_congested() and
+ wb_congested() and related functions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,93 +115,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jing Xia <jing.xia@unisoc.com>, Zhiguo Niu <zhiguo.niu@unisoc.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: "Darrick J. Wong" <djwong@kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+ Linux MM <linux-mm@kvack.org>, drbd-dev@lists.linbit.com,
+ Paolo Valente <paolo.valente@linaro.org>, Miklos Szeredi <miklos@szeredi.hu>,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
+ linux-block@vger.kernel.org, linux-nilfs <linux-nilfs@vger.kernel.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, Jeff Layton <jlayton@kernel.org>,
+ Philipp Reisner <philipp.reisner@linbit.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ Lars Ellenberg <lars.ellenberg@linbit.com>,
+ Anna Schumaker <anna.schumaker@netapp.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 01/27, Chao Yu wrote:
-> Quoted from Jing Xia's report, there is a potential deadlock may happen
-> between kworker and checkpoint as below:
-> 
-> [T:writeback]				[T:checkpoint]
-> - wb_writeback
->  - blk_start_plug
-> bio contains NodeA was plugged in writeback threads
-
-I'm still trying to understand more precisely. So, how is it possible to
-have bio having node write in this current context?
-
-> 					- do_writepages  -- sync write inodeB, inc wb_sync_req[DATA]
-> 					 - f2fs_write_data_pages
-> 					  - f2fs_write_single_data_page -- write last dirty page
-> 					   - f2fs_do_write_data_page
-> 					    - set_page_writeback  -- clear page dirty flag and
-> 					    PAGECACHE_TAG_DIRTY tag in radix tree
-> 					    - f2fs_outplace_write_data
-> 					     - f2fs_update_data_blkaddr
-> 					      - f2fs_wait_on_page_writeback -- wait NodeA to writeback here
-> 					   - inode_dec_dirty_pages
->  - writeback_sb_inodes
->   - writeback_single_inode
->    - do_writepages
->     - f2fs_write_data_pages -- skip writepages due to wb_sync_req[DATA]
->      - wbc->pages_skipped += get_dirty_pages() -- PAGECACHE_TAG_DIRTY is not set but get_dirty_pages() returns one
->   - requeue_inode -- requeue inode to wb->b_dirty queue due to non-zero.pages_skipped
->  - blk_finish_plug
-> 
-> Let's try to avoid deadlock condition by forcing unplugging previous bio via
-> blk_finish_plug(current->plug) once we'v skipped writeback in writepages()
-> due to valid sbi->wb_sync_req[DATA/NODE].
-> 
-> Fixes: 687de7f1010c ("f2fs: avoid IO split due to mixed WB_SYNC_ALL and WB_SYNC_NONE")
-> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-> Signed-off-by: Jing Xia <jing.xia@unisoc.com>
-> Signed-off-by: Chao Yu <chao@kernel.org>
+On Thu, Jan 27, 2022 at 11:47 AM NeilBrown <neilb@suse.de> wrote:
+>
+> These functions are no longer useful as the only bdis that report
+> congestion are in ceph, fuse, and nfs.  None of those bdis can be the
+> target of the calls in drbd, ext2, nilfs2, or xfs.
+>
+> Removing the test on bdi_write_contested() in current_may_throttle()
+> could cause a small change in behaviour, but only when PF_LOCAL_THROTTLE
+> is set.
+>
+> So replace the calls by 'false' and simplify the code - and remove the
+> functions.
+>
+> Signed-off-by: NeilBrown <neilb@suse.de>
 > ---
->  fs/f2fs/data.c | 6 +++++-
->  fs/f2fs/node.c | 6 +++++-
->  2 files changed, 10 insertions(+), 2 deletions(-)
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 76d6fe7b0c8f..932a4c81acaf 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -3174,8 +3174,12 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
->  	/* to avoid spliting IOs due to mixed WB_SYNC_ALL and WB_SYNC_NONE */
->  	if (wbc->sync_mode == WB_SYNC_ALL)
->  		atomic_inc(&sbi->wb_sync_req[DATA]);
-> -	else if (atomic_read(&sbi->wb_sync_req[DATA]))
-> +	else if (atomic_read(&sbi->wb_sync_req[DATA])) {
-> +		/* to avoid potential deadlock */
-> +		if (current->plug)
-> +			blk_finish_plug(current->plug);
->  		goto skip_write;
-> +	}
->  
->  	if (__should_serialize_io(inode, wbc)) {
->  		mutex_lock(&sbi->writepages);
-> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> index 556fcd8457f3..69c6bcaf5aae 100644
-> --- a/fs/f2fs/node.c
-> +++ b/fs/f2fs/node.c
-> @@ -2106,8 +2106,12 @@ static int f2fs_write_node_pages(struct address_space *mapping,
->  
->  	if (wbc->sync_mode == WB_SYNC_ALL)
->  		atomic_inc(&sbi->wb_sync_req[NODE]);
-> -	else if (atomic_read(&sbi->wb_sync_req[NODE]))
-> +	else if (atomic_read(&sbi->wb_sync_req[NODE])) {
-> +		/* to avoid potential deadlock */
-> +		if (current->plug)
-> +			blk_finish_plug(current->plug);
->  		goto skip_write;
-> +	}
->  
->  	trace_f2fs_writepages(mapping->host, wbc, NODE);
->  
-> -- 
-> 2.32.0
+>  drivers/block/drbd/drbd_int.h |    3 ---
+>  drivers/block/drbd/drbd_req.c |    3 +--
+>  fs/ext2/ialloc.c              |    2 --
+>  fs/nilfs2/segbuf.c            |   11 -----------
+>  fs/xfs/xfs_buf.c              |    3 ---
+>  include/linux/backing-dev.h   |   26 --------------------------
+>  mm/vmscan.c                   |    4 +---
+>  7 files changed, 2 insertions(+), 50 deletions(-)
+
+for nilfs2 bits,
+
+Acked-by: Ryusuke Konishi <konishi.ryusuke@gmail.com>
+
+Thanks,
+Ryusuke Konishi
 
 
 _______________________________________________
