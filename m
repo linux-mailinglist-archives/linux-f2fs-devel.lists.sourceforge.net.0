@@ -2,67 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB0B649F097
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Jan 2022 02:34:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D24449F0A3
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Jan 2022 02:43:44 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nDGA4-0008Ja-Jb; Fri, 28 Jan 2022 01:34:47 +0000
+	id 1nDGIf-0000L5-IU; Fri, 28 Jan 2022 01:43:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nDGA3-0008JU-Lf
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Jan 2022 01:34:46 +0000
+ (envelope-from <chao@kernel.org>) id 1nDGId-0000Kz-G1
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Jan 2022 01:43:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=L/5Pws0QPBSAkWs4DXMZwEniy7T6HvoJHEut3Nbsq2I=; b=CYmtbx6tR35v6hH/e+/iFLFqTh
- /YWrKhadzcM/7/WjNpqSuL2D8zh50EFyOUq0sFTN0p8f04raB3tZLFgX4FvFocpDG8SNtBWvDFHZl
- g1DX1LdU5pJn3MOXA3vso48A5Ytz0y215Liprs7gBqr24kas/+dbwtaslJQw6Jo6Pfks=;
+ bh=4VRZAMeotHYSmmx9nIiyPGhqFravo8ExEaA0AyLmASo=; b=KGI/TpQbwji4CnUpXD95ZKEcA/
+ X+/PvapGSNoY1zc4bp9DgaOix3/Erznw72vMdhzT32sx3GUt/Ad+mpxeeG0k2P1J5f8KfXNs54YNS
+ ZCbH3qoInwG7TSghsyUP5jxIUrYLlB7E8ZTbUY31WfhTMxbJ0XgjmuQOYjnkW9CObXHY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=L/5Pws0QPBSAkWs4DXMZwEniy7T6HvoJHEut3Nbsq2I=; b=LYzCY3c8ym4N8oI9knAB8Ir4Db
- uDCnJmSQyUu8XxXWZSqe66vxdQ6hWp4zHk1VZZaPFXdjDYcA2cCLzuneoKS8qcP/42IzPKYDzU1EY
- 298Sh4H4wwQzMeNYn5kTirZkhb2i4o5i8YD3sb0Uab9xfNKma0FLob1CTuPaact0n/M8=;
+ bh=4VRZAMeotHYSmmx9nIiyPGhqFravo8ExEaA0AyLmASo=; b=TI9LhTNIirk4yE8E38zgQYKbhh
+ BvLdJRRRGKQQbcgV4fdnIGLQbsQaYTGriM4cSGj+mSGAmOWlRXSnImLVZX9LCNPCji7h1r7zBr8n+
+ kCJEJqmERuxlrVdSgtLrOGxZJan5hbsvwbTGSaYur4zelgpcwAprvNL5qMaO3XtQVeis=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nDGA1-00HQVA-B6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Jan 2022 01:34:45 +0000
+ id 1nDGIb-00HRBK-6k
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 28 Jan 2022 01:43:37 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9335961D9F;
- Fri, 28 Jan 2022 01:34:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54A24C340E4;
- Fri, 28 Jan 2022 01:34:33 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D26A961DB9;
+ Fri, 28 Jan 2022 01:43:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5EE5C340E5;
+ Fri, 28 Jan 2022 01:43:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1643333674;
- bh=syJ8YNq0jFqssCN+Fpn6CejIFER0XxHyJW+5cZh7qQA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=r4MmK2L91UnUY3Ju+lob6pGYrfuC4tFQze7/UdZcwtg0my1bI0HYZ/EGzcR2/0eYh
- 5qWQkXkz6GQ99yyiTKsnnZ4hM95RpS6f7bdJAM5P56admAP3hc/ZCtXKNCnRVkrgES
- v2zuReXf7omP1BD/F2BPe0mg+8tbNoZzsZhdyhFKiYcIFiKTzLCcaIL+zbZB+jgKI2
- HaKelY2L0Vg6ndyDgX/aggsEHmYplzWVSHFk3KYEO4hj0B99GHfDlJ8bPCc2gICQtz
- XRdKz8lPe2Sew/3rSqRIVIUhmZZ9ob0Va5c0yw/atKn6Dw4IaoROTNoyJVls08WLFV
- 3jQ5xdJOfRU/w==
-Date: Thu, 27 Jan 2022 17:34:31 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: NeilBrown <neilb@suse.de>
-Message-ID: <YfNIJxirDBO/pcQQ@google.com>
-References: <164325106958.29787.4865219843242892726.stgit@noble.brown>
- <164325158956.29787.7016948342209980097.stgit@noble.brown>
+ s=k20201202; t=1643334211;
+ bh=TkowqnMfrmwTAcJsGdAvnwq3afg44JpFf1XwkrSPxKo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=hk6QOu3rIsQHhDpi2BCWY+cWfyR/YNeg4e14onaDxvIPcbSf2AGlf6qAnUhxUskl2
+ 1iIsNbwPzfnA/Ttdlirbmi3GsOJdNzX7LuUfl88RP6Sq7tn2yQpQZDJ4SBijNbAmU3
+ IK3JxXuC997DZTyXuJRHX0S+0aA2EYth82qNVwAOjQj44AZSiNXG2LoDiXUl8vg9Sp
+ YotnMNzAgoaTGyed/vkSusyudJwKrdsNx+4K9MfN+2m6LDwlTSthZZHj2WDNsjTrQ+
+ +cL1+ehElCCAzQYHLYZ/hiM7XIqKT7VUWB3T+tGAU++CQqPVBfIAfwluMRpSMsojwF
+ gIEn1fqnm5ZLA==
+Message-ID: <e434b0a4-a66a-eebc-cafc-f0bad03c3fa5@kernel.org>
+Date: Fri, 28 Jan 2022 09:43:27 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <164325158956.29787.7016948342209980097.stgit@noble.brown>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.1
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20220127054449.24711-1-chao@kernel.org>
+ <YfMVxzdhat01ca7m@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <YfMVxzdhat01ca7m@google.com>
 X-Spam-Score: -5.4 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -70,9 +72,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 01/27, NeilBrown wrote: > f2fs_write_single_data_page()
- can return -EAGAIN if it cannot get > the cp_rwsem lock - it holds a page
- lock and so cannot wait for it. > > Some code which calls f2fs_writ [...]
+ Content preview:  On 2022/1/28 5:59, Jaegeuk Kim wrote: > On 01/27, Chao Yu
+ wrote: >> Quoted from Jing Xia's report, there is a potential deadlock may
+ happen >> between kworker and checkpoint as below: >> >> [T:writeba [...]
  Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -87,10 +89,10 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nDGA1-00HQVA-B6
-Subject: Re: [f2fs-dev] [PATCH 3/9] f2fs: change retry waiting for
- f2fs_write_single_data_page()
+X-Headers-End: 1nDGIb-00HRBK-6k
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid potential deadlock
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,84 +104,100 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Darrick J. Wong" <djwong@kernel.org>, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, drbd-dev@lists.linbit.com,
- Paolo Valente <paolo.valente@linaro.org>, Miklos Szeredi <miklos@szeredi.hu>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- linux-block@vger.kernel.org, linux-nilfs@vger.kernel.org,
- ceph-devel@vger.kernel.org, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>, Jeff Layton <jlayton@kernel.org>,
- Philipp Reisner <philipp.reisner@linbit.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- Lars Ellenberg <lars.ellenberg@linbit.com>,
- Anna Schumaker <anna.schumaker@netapp.com>
-Content-Type: text/plain; charset="us-ascii"
+Cc: Jing Xia <jing.xia@unisoc.com>, Zhiguo Niu <zhiguo.niu@unisoc.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 01/27, NeilBrown wrote:
-> f2fs_write_single_data_page() can return -EAGAIN if it cannot get
-> the cp_rwsem lock - it holds a page lock and so cannot wait for it.
+On 2022/1/28 5:59, Jaegeuk Kim wrote:
+> On 01/27, Chao Yu wrote:
+>> Quoted from Jing Xia's report, there is a potential deadlock may happen
+>> between kworker and checkpoint as below:
+>>
+>> [T:writeback]				[T:checkpoint]
+>> - wb_writeback
+>>   - blk_start_plug
+>> bio contains NodeA was plugged in writeback threads
 > 
-> Some code which calls f2fs_write_single_data_page() use
-> congestion_wait() and then tries again.  congestion_wait() doesn't do
-> anything useful as congestion is no longer tracked.  So this is just a
-> simple sleep.
-> 
-> A better approach is it wait until the cp_rwsem lock can be taken - then
-> try again.  There is certainly no point trying again *before* the lock
-> can be taken.
-> 
-> Signed-off-by: NeilBrown <neilb@suse.de>
-> ---
->  fs/f2fs/compress.c |    6 +++---
->  fs/f2fs/data.c     |    9 ++++++---
->  2 files changed, 9 insertions(+), 6 deletions(-)
-> 
-> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index d0c3aeba5945..58ff7f4b296c 100644
-> --- a/fs/f2fs/compress.c
-> +++ b/fs/f2fs/compress.c
-> @@ -1505,9 +1505,9 @@ static int f2fs_write_raw_pages(struct compress_ctx *cc,
->  				if (IS_NOQUOTA(cc->inode))
->  					return 0;
->  				ret = 0;
-> -				cond_resched();
-> -				congestion_wait(BLK_RW_ASYNC,
-> -						DEFAULT_IO_TIMEOUT);
-> +				/* Wait until we can get the lock, then try again. */
-> +				f2fs_lock_op(F2FS_I_SB(cc->inode));
-> +				f2fs_unlock_op(F2FS_I_SB(cc->inode));
+> I'm still trying to understand more precisely. So, how is it possible to
+> have bio having node write in this current context?
 
-Since checkpoint uses down_write(cp_rwsem), I'm not sure the write path is safe
-and needs to wait for checkpoint. Can we just do io_schedule_timeout()?
+IMO, after above blk_start_plug(), it may plug some inode's node page in kworker
+during writebacking node_inode's data page (which should be node page)?
 
->  				goto retry_write;
->  			}
->  			return ret;
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 8c417864c66a..1d2341163e2c 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -3047,9 +3047,12 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
->  				} else if (ret == -EAGAIN) {
->  					ret = 0;
->  					if (wbc->sync_mode == WB_SYNC_ALL) {
-> -						cond_resched();
-> -						congestion_wait(BLK_RW_ASYNC,
-> -							DEFAULT_IO_TIMEOUT);
-> +						/* Wait until we can get the
-> +						 * lock, then try again.
-> +						 */
-> +						f2fs_lock_op(F2FS_I_SB(mapping->host));
-> +						f2fs_unlock_op(F2FS_I_SB(mapping->host));
-> +
->  						goto retry_write;
->  					}
->  					goto next;
+Thanks,
+
 > 
+>> 					- do_writepages  -- sync write inodeB, inc wb_sync_req[DATA]
+>> 					 - f2fs_write_data_pages
+>> 					  - f2fs_write_single_data_page -- write last dirty page
+>> 					   - f2fs_do_write_data_page
+>> 					    - set_page_writeback  -- clear page dirty flag and
+>> 					    PAGECACHE_TAG_DIRTY tag in radix tree
+>> 					    - f2fs_outplace_write_data
+>> 					     - f2fs_update_data_blkaddr
+>> 					      - f2fs_wait_on_page_writeback -- wait NodeA to writeback here
+>> 					   - inode_dec_dirty_pages
+>>   - writeback_sb_inodes
+>>    - writeback_single_inode
+>>     - do_writepages
+>>      - f2fs_write_data_pages -- skip writepages due to wb_sync_req[DATA]
+>>       - wbc->pages_skipped += get_dirty_pages() -- PAGECACHE_TAG_DIRTY is not set but get_dirty_pages() returns one
+>>    - requeue_inode -- requeue inode to wb->b_dirty queue due to non-zero.pages_skipped
+>>   - blk_finish_plug
+>>
+>> Let's try to avoid deadlock condition by forcing unplugging previous bio via
+>> blk_finish_plug(current->plug) once we'v skipped writeback in writepages()
+>> due to valid sbi->wb_sync_req[DATA/NODE].
+>>
+>> Fixes: 687de7f1010c ("f2fs: avoid IO split due to mixed WB_SYNC_ALL and WB_SYNC_NONE")
+>> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+>> Signed-off-by: Jing Xia <jing.xia@unisoc.com>
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>>   fs/f2fs/data.c | 6 +++++-
+>>   fs/f2fs/node.c | 6 +++++-
+>>   2 files changed, 10 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+>> index 76d6fe7b0c8f..932a4c81acaf 100644
+>> --- a/fs/f2fs/data.c
+>> +++ b/fs/f2fs/data.c
+>> @@ -3174,8 +3174,12 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
+>>   	/* to avoid spliting IOs due to mixed WB_SYNC_ALL and WB_SYNC_NONE */
+>>   	if (wbc->sync_mode == WB_SYNC_ALL)
+>>   		atomic_inc(&sbi->wb_sync_req[DATA]);
+>> -	else if (atomic_read(&sbi->wb_sync_req[DATA]))
+>> +	else if (atomic_read(&sbi->wb_sync_req[DATA])) {
+>> +		/* to avoid potential deadlock */
+>> +		if (current->plug)
+>> +			blk_finish_plug(current->plug);
+>>   		goto skip_write;
+>> +	}
+>>   
+>>   	if (__should_serialize_io(inode, wbc)) {
+>>   		mutex_lock(&sbi->writepages);
+>> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+>> index 556fcd8457f3..69c6bcaf5aae 100644
+>> --- a/fs/f2fs/node.c
+>> +++ b/fs/f2fs/node.c
+>> @@ -2106,8 +2106,12 @@ static int f2fs_write_node_pages(struct address_space *mapping,
+>>   
+>>   	if (wbc->sync_mode == WB_SYNC_ALL)
+>>   		atomic_inc(&sbi->wb_sync_req[NODE]);
+>> -	else if (atomic_read(&sbi->wb_sync_req[NODE]))
+>> +	else if (atomic_read(&sbi->wb_sync_req[NODE])) {
+>> +		/* to avoid potential deadlock */
+>> +		if (current->plug)
+>> +			blk_finish_plug(current->plug);
+>>   		goto skip_write;
+>> +	}
+>>   
+>>   	trace_f2fs_writepages(mapping->host, wbc, NODE);
+>>   
+>> -- 
+>> 2.32.0
 
 
 _______________________________________________
