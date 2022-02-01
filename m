@@ -2,70 +2,114 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 164B44A5847
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Feb 2022 09:07:41 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C591C4A5B6A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Feb 2022 12:47:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nEoCO-0001hl-3T; Tue, 01 Feb 2022 08:07:34 +0000
+	id 1nErcw-0003kC-A9; Tue, 01 Feb 2022 11:47:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <hch@lst.de>) id 1nEoCM-0001ha-CN
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Feb 2022 08:07:33 +0000
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1nErcu-0003jy-Td
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Feb 2022 11:47:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=YBxeUJ3hJBFHm1jLrwRH1ggA75
- h4rNqgAgoNYOGhkj3GiyEebJy1nYEMZb7I5GA22NWE2c4JE3oo0C132Cy0En2DCpIDEEQkCb2KOVZ
- LQdNswpWgoW9QVEH/6rStWv9cVV0SXzA5Levvz8YlikhRAsnWdbpcjxO7kar+wAn3bxI=;
+ bh=MrJKB0X0hZIHTfYrunDkSkh1QH5vj70SFkNfy8IUkps=; b=V0p3A+oM6ix8TOi7vcg6/KFwSo
+ JUkaZiTXdzyuJMb5rkBu2fa8acNCbPSZoPdswpZK9Y+FyXtI9Kx51klQ+ifv9YrPTyVzawBluwb9P
+ 2zvyYnXSArlzU3aV7FQprWrupSSFeUKl0QW/R7HC6sneoyPH5jkIxnP6Z94z6ey09ck8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=PpMc+FC1TCe92dMMaoFPrpFobA
- 9yVnfeKGAeYRSoXVKVX/m6ROJG9OdmuM2zjIbP3Q5703kCNcPotUpwFBapVXGF4RIuh7IVlK/zIZs
- TEqbHlTssEIluVwIkTilLg+PPaOlRSZhWUALf5CzA6d8bnSwTqvGe8rYEItu/QNNjwIA=;
-Received: from verein.lst.de ([213.95.11.211])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=MrJKB0X0hZIHTfYrunDkSkh1QH5vj70SFkNfy8IUkps=; b=hmMxB5/+yq6H0sHJv67aC3WHkm
+ d0a/wdDrJeor8GSdzYu9iTIrw3lPjdwDoEBFsy9GIahfh8H1PQsFZp2xXY0uhrJQ9SHSbRIsOH77w
+ RkuQS1wa94nLLG6UB0KXtHyC8hK5A4HYuwHct5G8LDaU+VkOP3iEJtPOwHZBEX2FXYz8=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nEoCJ-009rTB-NK
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Feb 2022 08:07:32 +0000
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 00A0368BEB; Tue,  1 Feb 2022 09:07:23 +0100 (CET)
-Date: Tue, 1 Feb 2022 09:07:23 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20220201080723.GB29730@lst.de>
-References: <20220128233940.79464-1-ebiggers@kernel.org>
- <20220128233940.79464-6-ebiggers@kernel.org>
+ id 1nErcs-0003BI-Is
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Feb 2022 11:47:11 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 0B25161204
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  1 Feb 2022 11:47:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7317CC340EB
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  1 Feb 2022 11:47:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1643716024;
+ bh=cc92/HOZQ/Uz0cJ0jVodsYEqsTNheH4v19cDAyxve1o=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=q5z7WdLhX41DW/BhHX3omLZ7KCqx0svQr/45jccS3cYMAH2GvCU67TEwgphCEMuxd
+ /7LNEcaWyMi3YXExSBdAuyTRayibabfrHuZJcphJoyOp4mQf2uFKPP7UkALWOfaBmK
+ L/BeOHjGku+G/ZfsoesY09QdDrEcwefBugqy3jTdjsPCCqM+odp1pXZ/xVQTslLpYa
+ kRSDIQmxAFkwY8rl3VChJ67DoS32DaXGLdiX9SgTmDpdJHxVXWuGW7oEYtFPrcmXum
+ SeIsdaOWKBJr/EPksweT6MLRrukQIDw1EkvhvAzuKujAoySi37siAv8v4IW7FXoFZV
+ 0s3xU0tyBz7iQ==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 5E2B6C05FD0; Tue,  1 Feb 2022 11:47:04 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 01 Feb 2022 11:47:04 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: low
+X-Bugzilla-Who: arcticgane@hmpoeao.com
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: CODE_FIX
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: cc
+Message-ID: <bug-213089-202145-58Zj7kbpRa@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-213089-202145@https.bugzilla.kernel.org/>
+References: <bug-213089-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220128233940.79464-6-ebiggers@kernel.org>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de> 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=213089
+ CarisaZellmer
+ (arcticgane@hmpoeao.com) changed: What |Removed |Added CC|
+ |arcticgane@hmpoeao.com
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nEoCJ-009rTB-NK
-Subject: Re: [f2fs-dev] [PATCH v11 5/5] fscrypt: update documentation for
- direct I/O support
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nErcs-0003BI-Is
+Subject: [f2fs-dev] [Bug 213089] Add "pre: crc32" softdep
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,19 +121,29 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, "Darrick J . Wong" <djwong@kernel.org>,
- Dave Chinner <david@fromorbit.com>, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Looks good:
+https://bugzilla.kernel.org/show_bug.cgi?id=213089
 
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+CarisaZellmer (arcticgane@hmpoeao.com) changed:
 
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 CC|                            |arcticgane@hmpoeao.com
+
+--- Comment #3 from CarisaZellmer (arcticgane@hmpoeao.com) ---
+A bug of the maxilla is led for the identification of the turns. The form of
+the https://www.ninjaessays.com/coursework-writing-service/ is don for all
+issues. Path is fit for the medical element for the turns. The true termism met
+for the activity based joy for the candidates.
+
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
