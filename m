@@ -2,96 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75B124A7CEB
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Feb 2022 01:34:42 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id D45904A7D7F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Feb 2022 02:51:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nFQ57-0002nm-AZ; Thu, 03 Feb 2022 00:34:36 +0000
+	id 1nFRH5-00083p-Br; Thu, 03 Feb 2022 01:51:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nFQ55-0002ng-F7
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Feb 2022 00:34:34 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nFRH4-00083X-31
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Feb 2022 01:51:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iUzCoSTbNBtNV3SU4jsWTHkQmCd6lzOSfO998Dfw438=; b=G+G0irsm0qscBsnAEaGFAy2jyt
- ftj3EzKI01eub5Xt7HQrQlNDwMUL6+jmfC+/4j0wGjxhgqKjZpgvgj4d2820oV7eczkyYapFlpJh0
- mvnyfYmHSnRbOsLDffAbA+AZHajyw1/ttnOqudvB25OUve/NaC5L6wLzf5xAhT08S1bM=;
+ bh=BDsF6tP7eIFh8YgN3oAMLW0te6doLml979PLhA3I1g0=; b=ATk0V2pEOzVppasm8YRtyiBHc5
+ ThcIefu1i6HkYpP8kmfSF5NSW/T913d1C5CvjSkpIOYl/itI/A0jZFbRJ16CUdYILXV1FHqf0ePJE
+ Y/PJkliSa1QkvrpCommZ+SORWCvn3OP9weUC5yPDLvZGF++9V7yTHl8jHayCng6jLbzA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iUzCoSTbNBtNV3SU4jsWTHkQmCd6lzOSfO998Dfw438=; b=mWYyY7pspqL6A442MsFaGxdFIK
- PmQNHe/Wi7G9AYQhtBT5mdl56b5r4hza+uTjU36lQiOCe1OJxuPMjzQBzCxrrmYxKtUEgR+Zk1zkc
- ydjcaWOEen+jI2jkh7S/H4JXEzjb+y1rEetJ0+XcCDEcNp7zHYYWof4D3yo3+ar94nbA=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=BDsF6tP7eIFh8YgN3oAMLW0te6doLml979PLhA3I1g0=; b=C4PkaDGzIX+LywDOCefgeFAdIn
+ kawqhwph1saCuNqZaTSk50cxwzhaObLrijbu6FtMWCJHFsKsaWefYiTh0v1iuJwYi7djnxB4VA5bY
+ KhWC2khs/syUqWVTyP+mBuHbqTMkYNPntwIfwrO0Nk/PJWnES5actghrDGXiMRmSaWKw=;
+Received: from [139.178.84.217] (helo=dfw.source.kernel.org)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nFQ53-0002Kw-7w
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Feb 2022 00:34:34 +0000
+ id 1nFRH1-0007TO-RL
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 03 Feb 2022 01:51:00 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id DB67C60C3E
+ by dfw.source.kernel.org (Postfix) with ESMTPS id C9DFC61074
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  3 Feb 2022 00:34:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41E27C004E1;
- Thu,  3 Feb 2022 00:34:27 +0000 (UTC)
+ Thu,  3 Feb 2022 01:50:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 24E33C004E1;
+ Thu,  3 Feb 2022 01:50:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1643848467;
- bh=8QJX3qWr6cqhCXTKj08PfczEVgPWtJbtujEQFQSTzTg=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=P9dDhMyuDKw4BfJaI2cgCqYs/xc+RmHzPsjhvPI5ruprCpjbIelZomXaPm0QVoldk
- QOpoXz5MPVqDqKai56YyANF5+7so3kfVzp2nRMnIV8iKkP5b286gSMHN26/0/9QuRh
- FRPwr/tN4bVOSrT3wVipk1h2T3slgVrM9tQOa5zaWJveD0RKOv/5vqi1nLkOxQSOE/
- Zinple0mtRTybAb+NkxL6kGZA8+B9fSwsnx4KJg3zgVc6azyD/qwrOkeUFU/JVeTqD
- tK7B8yPtKcUz6nbdZwqAIMhvZIlhmgschGXBG1Dv8OInyYG138Todgl8+qQvCUuxe0
- GW5VOMES9twOA==
-Date: Wed, 2 Feb 2022 16:34:25 -0800
+ s=k20201202; t=1643853048;
+ bh=WlV+VOlxIMB7KE/ukafvV4Fp7I1v2Cm1b8oD+shESfg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=GpFDYhReINkAi68f1tdvvaKFlHnT/iqsCrc9H1q3SDc/flyxErWnLAS1CRZV8nyrA
+ SflO2LNYKjH/30BufO5wZbx9i+Cx6dp2k8ClAZbb3kj72lUP7blb/b3La9dReh+Ge3
+ sLa7xehdDUM4hHbdim3Q1qfiPAoaJ4EpKg7aU2rH0nA1tok2gwDCQ2lBPTKSGIaQgi
+ F+pSpmNa5sGd0J9GTtk2ZRv/HwI0qMqGBR72LP8CtUddiPito6tcJoqOeo3hNaZHvV
+ SzO/qgj7jl3/ryMc1LvlWywiqiEVus/5s8nd5Zk8vGRrSRgrPufFlhPUOCNgV8SIch
+ 8Dx3XA6+4P5vQ==
+Date: Wed, 2 Feb 2022 17:50:46 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <YfsjEb2ii3eyPzng@google.com>
-References: <20220127214102.2040254-1-jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <Yfs09i06EZASuLGI@google.com>
+References: <20220128091920.1556480-1-chao@kernel.org>
+ <YfSLvyMUd3lam415@google.com>
+ <d5851f31-6eec-e00c-5412-59496c2c849e@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220127214102.2040254-1-jaegeuk@kernel.org>
-X-Spam-Score: -5.3 (-----)
+In-Reply-To: <d5851f31-6eec-e00c-5412-59496c2c849e@kernel.org>
+X-Spam-Score: -4.6 (----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This adds a sysfs entry to call checkpoint during fsync()
- in order to avoid long elapsed time to run roll-forward recovery when booting
- the device. Default value doesn't enforce the limitation which i [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  On 01/29, Chao Yu wrote: > On 2022/1/29 8:35, Jaegeuk Kim
+ wrote: > > On 01/28, Chao Yu wrote: > > > Once IPU policy is enabled in some
+ cases: > > > a) f2fs forces to use F2FS_IPU_FORCE in a small-size [...] 
+ Content analysis details:   (-4.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nFQ53-0002Kw-7w
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: add a way to limit roll forward
- recovery time
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nFRH1-0007TO-RL
+Subject: Re: [f2fs-dev] [PATCH] f2fs: don't check IPU policy during file
+ defragment
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,150 +105,162 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This adds a sysfs entry to call checkpoint during fsync() in order to avoid
-long elapsed time to run roll-forward recovery when booting the device.
-Default value doesn't enforce the limitation which is same as before.
+On 01/29, Chao Yu wrote:
+> On 2022/1/29 8:35, Jaegeuk Kim wrote:
+> > On 01/28, Chao Yu wrote:
+> > > Once IPU policy is enabled in some cases:
+> > > a) f2fs forces to use F2FS_IPU_FORCE in a small-sized volume
+> > > b) user configures IPU policy via sysfs
+> > 
+> > It's contradictory to each other. How about just letting users decide to do what
+> > they want to do? IOWs, if user wants to do defrag, they should change ipu_policy
+> > on the fly.
+> 
+> How about the case user wants to do defrag for specified files, and also use
+> ipu_policy for other common writes?
+> 
+> IMO, it may be not completely contradictory, if we try to treat userspace defraging
+> requirement as specified OPU requirement, like kernel-side OPU requirement from
+> node write or GC write.
+> 
+> Or maybe we can introduce a new ipu_policy which allow triggering OPU when defraging
+> triggered from userspace?
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
-v2 from v1:
- - make the default w/o enforcement
+OPU is the default as F2FS was originated from LFS. Then, IPU was added to
+improve performance in some cases to avoid node updates. IPU_FORCE was added
+to enforce IPU all the time. So, I think you can add another IPU bit which
+can relax IPU_FORCE.
 
- Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++
- fs/f2fs/checkpoint.c                    | 1 +
- fs/f2fs/f2fs.h                          | 3 +++
- fs/f2fs/node.c                          | 2 ++
- fs/f2fs/node.h                          | 3 +++
- fs/f2fs/recovery.c                      | 4 ++++
- fs/f2fs/sysfs.c                         | 2 ++
- 7 files changed, 21 insertions(+)
-
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 87d3884c90ea..ce8103f522cb 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -567,3 +567,9 @@ Contact:	"Daeho Jeong" <daehojeong@google.com>
- Description:	You can set the trial count limit for GC urgent high mode with this value.
- 		If GC thread gets to the limit, the mode will turn back to GC normal mode.
- 		By default, the value is zero, which means there is no limit like before.
-+
-+What:		/sys/fs/f2fs/<disk>/max_roll_forward_node_blocks
-+Date:		January 2022
-+Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
-+Description:	Controls max # of node block writes to be used for roll forward
-+		recovery. This can limit the roll forward recovery time.
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index deeda95688f0..57a2d9164bee 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1543,6 +1543,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 	/* update user_block_counts */
- 	sbi->last_valid_block_count = sbi->total_valid_block_count;
- 	percpu_counter_set(&sbi->alloc_valid_block_count, 0);
-+	percpu_counter_set(&sbi->rf_node_block_count, 0);
- 
- 	/* Here, we have one bio having CP pack except cp pack 2 page */
- 	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 63c90416364b..6ddb98ff0b7c 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -913,6 +913,7 @@ struct f2fs_nm_info {
- 	nid_t max_nid;			/* maximum possible node ids */
- 	nid_t available_nids;		/* # of available node ids */
- 	nid_t next_scan_nid;		/* the next nid to be scanned */
-+	nid_t max_rf_node_blocks;	/* max # of nodes for recovery */
- 	unsigned int ram_thresh;	/* control the memory footprint */
- 	unsigned int ra_nid_pages;	/* # of nid pages to be readaheaded */
- 	unsigned int dirty_nats_ratio;	/* control dirty nats ratio threshold */
-@@ -1684,6 +1685,8 @@ struct f2fs_sb_info {
- 	atomic_t nr_pages[NR_COUNT_TYPE];
- 	/* # of allocated blocks */
- 	struct percpu_counter alloc_valid_block_count;
-+	/* # of node block writes as roll forward recovery */
-+	struct percpu_counter rf_node_block_count;
- 
- 	/* writeback control */
- 	atomic_t wb_sync_req[META];	/* count # of WB_SYNC threads */
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 93512f8859d5..0d9883457579 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -1782,6 +1782,7 @@ int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
- 
- 			if (!atomic || page == last_page) {
- 				set_fsync_mark(page, 1);
-+				percpu_counter_inc(&sbi->rf_node_block_count);
- 				if (IS_INODE(page)) {
- 					if (is_inode_flag_set(inode,
- 								FI_DIRTY_INODE))
-@@ -3218,6 +3219,7 @@ static int init_node_manager(struct f2fs_sb_info *sbi)
- 	nm_i->ram_thresh = DEF_RAM_THRESHOLD;
- 	nm_i->ra_nid_pages = DEF_RA_NID_PAGES;
- 	nm_i->dirty_nats_ratio = DEF_DIRTY_NAT_RATIO_THRESHOLD;
-+	nm_i->max_rf_node_blocks = DEF_RF_NODE_BLOCKS;
- 
- 	INIT_RADIX_TREE(&nm_i->free_nid_root, GFP_ATOMIC);
- 	INIT_LIST_HEAD(&nm_i->free_nid_list);
-diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
-index 18b98cf0465b..4c1d34bfea78 100644
---- a/fs/f2fs/node.h
-+++ b/fs/f2fs/node.h
-@@ -31,6 +31,9 @@
- /* control total # of nats */
- #define DEF_NAT_CACHE_THRESHOLD			100000
- 
-+/* control total # of node writes used for roll-fowrad recovery */
-+#define DEF_RF_NODE_BLOCKS			0
-+
- /* vector size for gang look-up from nat cache that consists of radix tree */
- #define NATVEC_SIZE	64
- #define SETVEC_SIZE	32
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 10d152cfa58d..1c8041fd854e 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -53,9 +53,13 @@ extern struct kmem_cache *f2fs_cf_name_slab;
- bool f2fs_space_for_roll_forward(struct f2fs_sb_info *sbi)
- {
- 	s64 nalloc = percpu_counter_sum_positive(&sbi->alloc_valid_block_count);
-+	u32 rf_node = percpu_counter_sum_positive(&sbi->rf_node_block_count);
- 
- 	if (sbi->last_valid_block_count + nalloc > sbi->user_block_count)
- 		return false;
-+	if (NM_I(sbi)->max_rf_node_blocks &&
-+			rf_node >= NM_I(sbi)->max_rf_node_blocks)
-+		return false;
- 	return true;
- }
- 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 281bc0133ee6..47efcf233afd 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -732,6 +732,7 @@ F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, min_ssr_sections, min_ssr_sections);
- F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, ram_thresh, ram_thresh);
- F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, ra_nid_pages, ra_nid_pages);
- F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, dirty_nats_ratio, dirty_nats_ratio);
-+F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, max_roll_forward_node_blocks, max_rf_node_blocks);
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_victim_search, max_victim_search);
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, migration_granularity, migration_granularity);
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, dir_level, dir_level);
-@@ -855,6 +856,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(ram_thresh),
- 	ATTR_LIST(ra_nid_pages),
- 	ATTR_LIST(dirty_nats_ratio),
-+	ATTR_LIST(max_roll_forward_node_blocks),
- 	ATTR_LIST(cp_interval),
- 	ATTR_LIST(idle_interval),
- 	ATTR_LIST(discard_idle_interval),
--- 
-2.35.0.rc2.247.g8bbb082509-goog
-
+> 
+> Thanks,
+> 
+> > 
+> > > 
+> > > Then we may fail to defragment file via ioctl due to IPU policy check,
+> > > it doesn't make sense, so let's change to use IPU policy for common
+> > > data writeback, rather than for specific data writeback, e.g. GC,
+> > > defragment, and so on.
+> > > 
+> > > Signed-off-by: Chao Yu <chao@kernel.org>
+> > > ---
+> > >   fs/f2fs/data.c | 15 ++++++++++-----
+> > >   fs/f2fs/f2fs.h |  3 ++-
+> > >   fs/f2fs/file.c | 17 ++++++++++-------
+> > >   3 files changed, 22 insertions(+), 13 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > > index 0f124e8de1d4..bce7ecac8976 100644
+> > > --- a/fs/f2fs/data.c
+> > > +++ b/fs/f2fs/data.c
+> > > @@ -2530,6 +2530,9 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
+> > >   	if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
+> > >   		return true;
+> > > +	if (is_inode_flag_set(inode, FI_DEFRAG_PROCESS))
+> > > +		return true;
+> > > +
+> > >   	if (fio) {
+> > >   		if (page_private_gcing(fio->page))
+> > >   			return true;
+> > > @@ -3154,8 +3157,8 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
+> > >   			f2fs_available_free_memory(sbi, DIRTY_DENTS))
+> > >   		goto skip_write;
+> > > -	/* skip writing during file defragment */
+> > > -	if (is_inode_flag_set(inode, FI_DO_DEFRAG))
+> > > +	/* skip writing in file defragment preparing stage */
+> > > +	if (is_inode_flag_set(inode, FI_DEFRAG_PREPARE))
+> > >   		goto skip_write;
+> > >   	trace_f2fs_writepages(mapping->host, wbc, DATA);
+> > > @@ -3733,7 +3736,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
+> > >   		f2fs_allocate_new_section(sbi, CURSEG_COLD_DATA_PINNED, false);
+> > >   		f2fs_unlock_op(sbi);
+> > > -		set_inode_flag(inode, FI_DO_DEFRAG);
+> > > +		set_inode_flag(inode, FI_DEFRAG_PREPARE);
+> > >   		for (blkofs = 0; blkofs < blk_per_sec; blkofs++) {
+> > >   			struct page *page;
+> > > @@ -3750,9 +3753,11 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
+> > >   			f2fs_put_page(page, 1);
+> > >   		}
+> > > -		clear_inode_flag(inode, FI_DO_DEFRAG);
+> > > +		clear_inode_flag(inode, FI_DEFRAG_PREPARE);
+> > > +		set_inode_flag(inode, FI_DEFRAG_PROCESS);
+> > >   		ret = filemap_fdatawrite(inode->i_mapping);
+> > > +		clear_inode_flag(inode, FI_DEFRAG_PROCESS);
+> > >   		f2fs_up_write(&sbi->pin_sem);
+> > > @@ -3761,7 +3766,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
+> > >   	}
+> > >   done:
+> > > -	clear_inode_flag(inode, FI_DO_DEFRAG);
+> > > +	clear_inode_flag(inode, FI_DEFRAG_PREPARE);
+> > >   	clear_inode_flag(inode, FI_ALIGNED_WRITE);
+> > >   	filemap_invalidate_unlock(inode->i_mapping);
+> > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > > index 8178a9152e49..4b905059a81e 100644
+> > > --- a/fs/f2fs/f2fs.h
+> > > +++ b/fs/f2fs/f2fs.h
+> > > @@ -733,7 +733,8 @@ enum {
+> > >   	FI_DROP_CACHE,		/* drop dirty page cache */
+> > >   	FI_DATA_EXIST,		/* indicate data exists */
+> > >   	FI_INLINE_DOTS,		/* indicate inline dot dentries */
+> > > -	FI_DO_DEFRAG,		/* indicate defragment is running */
+> > > +	FI_DEFRAG_PREPARE,	/* indicate defragment is preparing */
+> > > +	FI_DEFRAG_PROCESS,	/* indicate defragment is processing */
+> > >   	FI_DIRTY_FILE,		/* indicate regular/symlink has dirty pages */
+> > >   	FI_PREALLOCATED_ALL,	/* all blocks for write were preallocated */
+> > >   	FI_HOT_DATA,		/* indicate file is hot */
+> > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > > index 6ccdd6e347e2..696f4a175228 100644
+> > > --- a/fs/f2fs/file.c
+> > > +++ b/fs/f2fs/file.c
+> > > @@ -2559,10 +2559,6 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+> > >   	bool fragmented = false;
+> > >   	int err;
+> > > -	/* if in-place-update policy is enabled, don't waste time here */
+> > > -	if (f2fs_should_update_inplace(inode, NULL))
+> > > -		return -EINVAL;
+> > > -
+> > >   	pg_start = range->start >> PAGE_SHIFT;
+> > >   	pg_end = (range->start + range->len) >> PAGE_SHIFT;
+> > > @@ -2570,6 +2566,11 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+> > >   	inode_lock(inode);
+> > > +	if (f2fs_is_pinned_file(inode)) {
+> > > +		err = -EINVAL;
+> > > +		goto out;
+> > > +	}
+> > > +
+> > >   	/* writeback all dirty pages in the range */
+> > >   	err = filemap_write_and_wait_range(inode->i_mapping, range->start,
+> > >   						range->start + range->len - 1);
+> > > @@ -2651,7 +2652,7 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+> > >   			goto check;
+> > >   		}
+> > > -		set_inode_flag(inode, FI_DO_DEFRAG);
+> > > +		set_inode_flag(inode, FI_DEFRAG_PREPARE);
+> > >   		idx = map.m_lblk;
+> > >   		while (idx < map.m_lblk + map.m_len && cnt < blk_per_seg) {
+> > > @@ -2676,14 +2677,16 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+> > >   		if (map.m_lblk < pg_end && cnt < blk_per_seg)
+> > >   			goto do_map;
+> > > -		clear_inode_flag(inode, FI_DO_DEFRAG);
+> > > +		clear_inode_flag(inode, FI_DEFRAG_PREPARE);
+> > > +		set_inode_flag(inode, FI_DEFRAG_PROCESS);
+> > >   		err = filemap_fdatawrite(inode->i_mapping);
+> > > +		clear_inode_flag(inode, FI_DEFRAG_PROCESS);
+> > >   		if (err)
+> > >   			goto out;
+> > >   	}
+> > >   clear_out:
+> > > -	clear_inode_flag(inode, FI_DO_DEFRAG);
+> > > +	clear_inode_flag(inode, FI_DEFRAG_PREPARE);
+> > >   out:
+> > >   	inode_unlock(inode);
+> > >   	if (!err)
+> > > -- 
+> > > 2.25.1
 
 
 _______________________________________________
