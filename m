@@ -2,90 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1282B4A918D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Feb 2022 01:20:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E41F4A91A9
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Feb 2022 01:34:40 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nFmLM-0005UT-IK; Fri, 04 Feb 2022 00:20:51 +0000
+	id 1nFmYd-00065s-EM; Fri, 04 Feb 2022 00:34:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nFmLK-0005UN-Qe
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 00:20:49 +0000
+ (envelope-from <chao@kernel.org>) id 1nFmYb-00065i-Ro
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 00:34:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tlB9n/6JhO7vYbSkSJ00bxoIVXM4ottuh8rOnuG/VfU=; b=OAunXvlfnv+Jh/naw3VL2dJ+NV
- mzdfeAQiPUEOXrPgRoiTWc74soFvNaSLEUwE+oong8YBdHqAeSew+R+zfPA1oTcJN7cho16FhX/Id
- Hkewd0UhJOq2ZdGheOCar/LttUqPx1LaR8yuA1vOfB6PEfp8UrlEwlEhV9XF1DKv8nvQ=;
+ bh=F08+mR6VwUTdUB7G8Mo5bqfuQjKguWdmTbIaqMUQQbk=; b=iWAe1mw/LXyqCDo1+KFGxsy1ga
+ o3VKBxt5NW7tpWhBQ6I6KyQ1t/mFj8uLgMeC+vlaiMwJa6+6CtJyYQEQfEnuy/xCZbhkaGFhZBqqG
+ 7liUU/WFEYt4V1CwZqXzuTCQ7HzmLcfQIwDpBrttenSqpQcJQHucwU/ncGT0Ri5tIKe0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=tlB9n/6JhO7vYbSkSJ00bxoIVXM4ottuh8rOnuG/VfU=; b=E4/9/YiWwX7a9I5ogk4nHJ4Y50
- jf+wfiuLrcMhLQi8FVhq8GQD9W7ELle9bnOZoSivl35X1kvAVlFifbBxDR6lD7o3vYTqkhBJjveWZ
- aw2gonkwnmb+S9fyVwDIQWSoy3AWONjQ+Ibp/FSKS5dt+QBFxo1G2xm2TF53IPN/KXF8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=F08+mR6VwUTdUB7G8Mo5bqfuQjKguWdmTbIaqMUQQbk=; b=L
+ xeg8xqfWHBbdu8D87H8Nd+y9yYwqATFgLznILQXiGnRNSCINaSg0mGGBM06CR12cNA4zXnvKH3+JC
+ YIKjYprFgEPZqW5145/GgzDRUtvQkdFVwud66w42VycO+3DmQEZPNeSrlwWwwL5uGGVb63P6pHedE
+ aY9qbqI0gFau6mlM=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nFmLI-0007gb-Hm
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 00:20:49 +0000
+ id 1nFmYZ-00Fy3J-Cg
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 00:34:32 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 25A506192A
+ by sin.source.kernel.org (Postfix) with ESMTPS id 281BDCE21B5
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  4 Feb 2022 00:20:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E628C340E8;
- Fri,  4 Feb 2022 00:20:41 +0000 (UTC)
+ Fri,  4 Feb 2022 00:34:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 950AAC340E8;
+ Fri,  4 Feb 2022 00:34:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1643934043;
- bh=SAspO1lsj8KC/6vzo9n7vXR2mlOb38UitSov7/738X0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=np2YIvHbh/LZS/+wgvzyxlkDi9Vk8z8DGT5CGLc8RzU6E7U//hse3MneJX37CM51n
- xa8bQUPOrpga74dOQpVKJ729lqxdK2CG6oGbQQ3smNjh4YDND1Lu3xso61eBjipfD7
- ncCe6e9Iv2gbk66Bf1oj9FmghbKAdNal9qP1H/E0xkO0aTDbEioP4FvyYW73jGdpV6
- QLNWPCy7agFnUDqPz0/TCwFpDGaYr5gU0c14ZA/niRUJP3EbqEcr6L/z0C0GoJ9SbP
- n15LaTsVIPwR+etB1bIRGyO0xtf/72qKNj3fkzeI3zxMD9sdxVVsq54lxyWbXCX9Yw
- Kj8fYEz6W7LbQ==
-Message-ID: <211c28eb-789e-e6e6-5daf-8040ac5ddd93@kernel.org>
-Date: Fri, 4 Feb 2022 08:20:39 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.0
-Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20220127214102.2040254-1-jaegeuk@kernel.org>
- <YfsjEb2ii3eyPzng@google.com>
- <142d2cc9-73f2-f9fa-2543-6426c62e77a6@kernel.org>
- <YfwT/6bSqUqUF/B3@google.com>
+ s=k20201202; t=1643934854;
+ bh=nQnosq7piKjUNQnT37l53MUyvUvNTsbl9ttaBqRjjRk=;
+ h=From:To:Cc:Subject:Date:From;
+ b=fwOEjSG9Iz3YhR1Dt/UhLkOb6/j8lKCW46HWX3Xz39XLpDGMWWl770h/9m0yk2HSz
+ o6D144z6f/e6JVeRLPBVqTWsnS6WWsNgQiW6yQDsuOXbMvSYNPyA75HqhOlf9pvniU
+ Hqy6yiqFlgBwHLRB2zFKousi3eIvDOPqAZbiJNTgXf60DU5F1bYxY66tzYgsrft54m
+ 2Agc8ZO6U5RWzcJrWkdiL5RPttq4UuxvEbGHCXkhBbWFo0zu242xh4Omf7KmvyJH9u
+ +P4GG/+4Ki+BVq4+VmxfCRvnkjwWZJS/fvkhEHkzleYWGzXoqXtLtTm21u0shgBpNS
+ 4GaZqnh29xWPg==
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <YfwT/6bSqUqUF/B3@google.com>
-X-Spam-Score: -7.9 (-------)
+To: jaegeuk@kernel.org
+Date: Fri,  4 Feb 2022 08:34:10 +0800
+Message-Id: <20220204003410.41366-1-chao@kernel.org>
+X-Mailer: git-send-email 2.32.0
+MIME-Version: 1.0
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/2/4 1:42, Jaegeuk Kim wrote: > On 02/03,
- Chao Yu wrote:
- >> On 2022/2/3 8:34, Jaegeuk Kim wrote: >>> This adds a sysfs entry to call
- checkpoint during fsync() in order to avoid >>> long elapsed [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  In a fragmented image, entries in dnode block list may locate
+ in incontiguous physical block address space, however, in recovery flow,
+ we will always readahead BIO_MAX_VECS size blocks, so in such cas [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -93,11 +85,10 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nFmLI-0007gb-Hm
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: add a way to limit roll forward
- recovery time
+X-Headers-End: 1nFmYZ-00Fy3J-Cg
+Subject: [f2fs-dev] [PATCH v2] f2fs: adjust readahead block number during
+ recovery
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,161 +101,161 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/2/4 1:42, Jaegeuk Kim wrote:
-> On 02/03, Chao Yu wrote:
->> On 2022/2/3 8:34, Jaegeuk Kim wrote:
->>> This adds a sysfs entry to call checkpoint during fsync() in order to avoid
->>> long elapsed time to run roll-forward recovery when booting the device.
->>> Default value doesn't enforce the limitation which is same as before.
->>>
->>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>> ---
->>> v2 from v1:
->>>    - make the default w/o enforcement
->>>
->>>    Documentation/ABI/testing/sysfs-fs-f2fs | 6 ++++++
->>>    fs/f2fs/checkpoint.c                    | 1 +
->>>    fs/f2fs/f2fs.h                          | 3 +++
->>>    fs/f2fs/node.c                          | 2 ++
->>>    fs/f2fs/node.h                          | 3 +++
->>>    fs/f2fs/recovery.c                      | 4 ++++
->>>    fs/f2fs/sysfs.c                         | 2 ++
->>>    7 files changed, 21 insertions(+)
->>>
->>> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
->>> index 87d3884c90ea..ce8103f522cb 100644
->>> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
->>> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
->>> @@ -567,3 +567,9 @@ Contact:	"Daeho Jeong" <daehojeong@google.com>
->>>    Description:	You can set the trial count limit for GC urgent high mode with this value.
->>>    		If GC thread gets to the limit, the mode will turn back to GC normal mode.
->>>    		By default, the value is zero, which means there is no limit like before.
->>> +
->>> +What:		/sys/fs/f2fs/<disk>/max_roll_forward_node_blocks
->>> +Date:		January 2022
->>> +Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
->>> +Description:	Controls max # of node block writes to be used for roll forward
->>> +		recovery. This can limit the roll forward recovery time.
->>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
->>> index deeda95688f0..57a2d9164bee 100644
->>> --- a/fs/f2fs/checkpoint.c
->>> +++ b/fs/f2fs/checkpoint.c
->>> @@ -1543,6 +1543,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
->>>    	/* update user_block_counts */
->>>    	sbi->last_valid_block_count = sbi->total_valid_block_count;
->>>    	percpu_counter_set(&sbi->alloc_valid_block_count, 0);
->>> +	percpu_counter_set(&sbi->rf_node_block_count, 0);
->>>    	/* Here, we have one bio having CP pack except cp pack 2 page */
->>>    	f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_CP_META_IO);
->>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>> index 63c90416364b..6ddb98ff0b7c 100644
->>> --- a/fs/f2fs/f2fs.h
->>> +++ b/fs/f2fs/f2fs.h
->>> @@ -913,6 +913,7 @@ struct f2fs_nm_info {
->>>    	nid_t max_nid;			/* maximum possible node ids */
->>>    	nid_t available_nids;		/* # of available node ids */
->>>    	nid_t next_scan_nid;		/* the next nid to be scanned */
->>> +	nid_t max_rf_node_blocks;	/* max # of nodes for recovery */
->>>    	unsigned int ram_thresh;	/* control the memory footprint */
->>>    	unsigned int ra_nid_pages;	/* # of nid pages to be readaheaded */
->>>    	unsigned int dirty_nats_ratio;	/* control dirty nats ratio threshold */
->>> @@ -1684,6 +1685,8 @@ struct f2fs_sb_info {
->>>    	atomic_t nr_pages[NR_COUNT_TYPE];
->>>    	/* # of allocated blocks */
->>>    	struct percpu_counter alloc_valid_block_count;
->>> +	/* # of node block writes as roll forward recovery */
->>> +	struct percpu_counter rf_node_block_count;
->>>    	/* writeback control */
->>>    	atomic_t wb_sync_req[META];	/* count # of WB_SYNC threads */
->>> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
->>> index 93512f8859d5..0d9883457579 100644
->>> --- a/fs/f2fs/node.c
->>> +++ b/fs/f2fs/node.c
->>> @@ -1782,6 +1782,7 @@ int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
->>>    			if (!atomic || page == last_page) {
->>>    				set_fsync_mark(page, 1);
->>> +				percpu_counter_inc(&sbi->rf_node_block_count);
->>
->> if (NM_I(sbi)->max_rf_node_blocks)
->> 	percpu_counter_inc(&sbi->rf_node_block_count);
-> 
-> I think we can just count this and adjust right away once sysfs is changed.
+In a fragmented image, entries in dnode block list may locate in
+incontiguous physical block address space, however, in recovery flow,
+we will always readahead BIO_MAX_VECS size blocks, so in such case,
+current readahead policy is low efficient, let's adjust readahead
+window size dynamically based on consecutiveness of dnode blocks.
 
-Since this long recovery latency issue is a corner case, I guess we can avoid this
-to save cpu time...
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v2:
+- fix wrong parameter of min_t/max_t in adjust_por_ra_blocks().
+ fs/f2fs/checkpoint.c |  8 ++++++--
+ fs/f2fs/f2fs.h       |  6 +++++-
+ fs/f2fs/recovery.c   | 27 ++++++++++++++++++++++++---
+ 3 files changed, 35 insertions(+), 6 deletions(-)
 
-BTW, shouldn't we account all warn dnode blocks? as we will traverse all blocks there
-in warn node list.
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 57a2d9164bee..203a1577942d 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -282,18 +282,22 @@ int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
+ 	return blkno - start;
+ }
+ 
+-void f2fs_ra_meta_pages_cond(struct f2fs_sb_info *sbi, pgoff_t index)
++void f2fs_ra_meta_pages_cond(struct f2fs_sb_info *sbi, pgoff_t index,
++							unsigned int ra_blocks)
+ {
+ 	struct page *page;
+ 	bool readahead = false;
+ 
++	if (ra_blocks == RECOVERY_MIN_RA_BLOCKS)
++		return;
++
+ 	page = find_get_page(META_MAPPING(sbi), index);
+ 	if (!page || !PageUptodate(page))
+ 		readahead = true;
+ 	f2fs_put_page(page, 0);
+ 
+ 	if (readahead)
+-		f2fs_ra_meta_pages(sbi, index, BIO_MAX_VECS, META_POR, true);
++		f2fs_ra_meta_pages(sbi, index, ra_blocks, META_POR, true);
+ }
+ 
+ static int __f2fs_write_meta_page(struct page *page,
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 5af415208488..1fa6b3f98a71 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -590,6 +590,9 @@ enum {
+ /* number of extent info in extent cache we try to shrink */
+ #define EXTENT_CACHE_SHRINK_NUMBER	128
+ 
++#define RECOVERY_MAX_RA_BLOCKS		BIO_MAX_VECS
++#define RECOVERY_MIN_RA_BLOCKS		1
++
+ struct rb_entry {
+ 	struct rb_node rb_node;		/* rb node located in rb-tree */
+ 	union {
+@@ -3655,7 +3658,8 @@ bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+ 					block_t blkaddr, int type);
+ int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
+ 			int type, bool sync);
+-void f2fs_ra_meta_pages_cond(struct f2fs_sb_info *sbi, pgoff_t index);
++void f2fs_ra_meta_pages_cond(struct f2fs_sb_info *sbi, pgoff_t index,
++							unsigned int ra_blocks);
+ long f2fs_sync_meta_pages(struct f2fs_sb_info *sbi, enum page_type type,
+ 			long nr_to_write, enum iostat_type io_type);
+ void f2fs_add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type);
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index f69b685fb2b2..013e99c6671d 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -346,6 +346,19 @@ static int recover_inode(struct inode *inode, struct page *page)
+ 	return 0;
+ }
+ 
++static unsigned int adjust_por_ra_blocks(struct f2fs_sb_info *sbi,
++				unsigned int ra_blocks, unsigned int blkaddr,
++				unsigned int next_blkaddr)
++{
++	if (blkaddr + 1 == next_blkaddr)
++		ra_blocks = min_t(unsigned int, RECOVERY_MAX_RA_BLOCKS,
++							ra_blocks * 2);
++	else if (next_blkaddr % sbi->blocks_per_seg)
++		ra_blocks = max_t(unsigned int, RECOVERY_MIN_RA_BLOCKS,
++							ra_blocks / 2);
++	return ra_blocks;
++}
++
+ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
+ 				bool check_only)
+ {
+@@ -353,6 +366,7 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
+ 	struct page *page = NULL;
+ 	block_t blkaddr;
+ 	unsigned int loop_cnt = 0;
++	unsigned int ra_blocks = RECOVERY_MAX_RA_BLOCKS;
+ 	unsigned int free_blocks = MAIN_SEGS(sbi) * sbi->blocks_per_seg -
+ 						valid_user_blocks(sbi);
+ 	int err = 0;
+@@ -427,11 +441,14 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
+ 			break;
+ 		}
+ 
++		ra_blocks = adjust_por_ra_blocks(sbi, ra_blocks, blkaddr,
++						next_blkaddr_of_node(page));
++
+ 		/* check next segment */
+ 		blkaddr = next_blkaddr_of_node(page);
+ 		f2fs_put_page(page, 1);
+ 
+-		f2fs_ra_meta_pages_cond(sbi, blkaddr);
++		f2fs_ra_meta_pages_cond(sbi, blkaddr, ra_blocks);
+ 	}
+ 	return err;
+ }
+@@ -707,6 +724,7 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
+ 	struct page *page = NULL;
+ 	int err = 0;
+ 	block_t blkaddr;
++	unsigned int ra_blocks = RECOVERY_MAX_RA_BLOCKS;
+ 
+ 	/* get node pages in the current segment */
+ 	curseg = CURSEG_I(sbi, CURSEG_WARM_NODE);
+@@ -718,8 +736,6 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
+ 		if (!f2fs_is_valid_blkaddr(sbi, blkaddr, META_POR))
+ 			break;
+ 
+-		f2fs_ra_meta_pages_cond(sbi, blkaddr);
+-
+ 		page = f2fs_get_tmp_page(sbi, blkaddr);
+ 		if (IS_ERR(page)) {
+ 			err = PTR_ERR(page);
+@@ -762,9 +778,14 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
+ 		if (entry->blkaddr == blkaddr)
+ 			list_move_tail(&entry->list, tmp_inode_list);
+ next:
++		ra_blocks = adjust_por_ra_blocks(sbi, ra_blocks, blkaddr,
++						next_blkaddr_of_node(page));
++
+ 		/* check next segment */
+ 		blkaddr = next_blkaddr_of_node(page);
+ 		f2fs_put_page(page, 1);
++
++		f2fs_ra_meta_pages_cond(sbi, blkaddr, ra_blocks);
+ 	}
+ 	if (!err)
+ 		f2fs_allocate_new_segments(sbi);
+-- 
+2.32.0
 
-Thanks,
-
-> 
->>
->> Thanks,
->>
->>>    				if (IS_INODE(page)) {
->>>    					if (is_inode_flag_set(inode,
->>>    								FI_DIRTY_INODE))
->>> @@ -3218,6 +3219,7 @@ static int init_node_manager(struct f2fs_sb_info *sbi)
->>>    	nm_i->ram_thresh = DEF_RAM_THRESHOLD;
->>>    	nm_i->ra_nid_pages = DEF_RA_NID_PAGES;
->>>    	nm_i->dirty_nats_ratio = DEF_DIRTY_NAT_RATIO_THRESHOLD;
->>> +	nm_i->max_rf_node_blocks = DEF_RF_NODE_BLOCKS;
->>>    	INIT_RADIX_TREE(&nm_i->free_nid_root, GFP_ATOMIC);
->>>    	INIT_LIST_HEAD(&nm_i->free_nid_list);
->>> diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
->>> index 18b98cf0465b..4c1d34bfea78 100644
->>> --- a/fs/f2fs/node.h
->>> +++ b/fs/f2fs/node.h
->>> @@ -31,6 +31,9 @@
->>>    /* control total # of nats */
->>>    #define DEF_NAT_CACHE_THRESHOLD			100000
->>> +/* control total # of node writes used for roll-fowrad recovery */
->>> +#define DEF_RF_NODE_BLOCKS			0
->>> +
->>>    /* vector size for gang look-up from nat cache that consists of radix tree */
->>>    #define NATVEC_SIZE	64
->>>    #define SETVEC_SIZE	32
->>> diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
->>> index 10d152cfa58d..1c8041fd854e 100644
->>> --- a/fs/f2fs/recovery.c
->>> +++ b/fs/f2fs/recovery.c
->>> @@ -53,9 +53,13 @@ extern struct kmem_cache *f2fs_cf_name_slab;
->>>    bool f2fs_space_for_roll_forward(struct f2fs_sb_info *sbi)
->>>    {
->>>    	s64 nalloc = percpu_counter_sum_positive(&sbi->alloc_valid_block_count);
->>> +	u32 rf_node = percpu_counter_sum_positive(&sbi->rf_node_block_count);
->>>    	if (sbi->last_valid_block_count + nalloc > sbi->user_block_count)
->>>    		return false;
->>> +	if (NM_I(sbi)->max_rf_node_blocks &&
->>> +			rf_node >= NM_I(sbi)->max_rf_node_blocks)
->>> +		return false;
->>>    	return true;
->>>    }
->>> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
->>> index 281bc0133ee6..47efcf233afd 100644
->>> --- a/fs/f2fs/sysfs.c
->>> +++ b/fs/f2fs/sysfs.c
->>> @@ -732,6 +732,7 @@ F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, min_ssr_sections, min_ssr_sections);
->>>    F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, ram_thresh, ram_thresh);
->>>    F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, ra_nid_pages, ra_nid_pages);
->>>    F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, dirty_nats_ratio, dirty_nats_ratio);
->>> +F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, max_roll_forward_node_blocks, max_rf_node_blocks);
->>>    F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_victim_search, max_victim_search);
->>>    F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, migration_granularity, migration_granularity);
->>>    F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, dir_level, dir_level);
->>> @@ -855,6 +856,7 @@ static struct attribute *f2fs_attrs[] = {
->>>    	ATTR_LIST(ram_thresh),
->>>    	ATTR_LIST(ra_nid_pages),
->>>    	ATTR_LIST(dirty_nats_ratio),
->>> +	ATTR_LIST(max_roll_forward_node_blocks),
->>>    	ATTR_LIST(cp_interval),
->>>    	ATTR_LIST(idle_interval),
->>>    	ATTR_LIST(discard_idle_interval),
 
 
 _______________________________________________
