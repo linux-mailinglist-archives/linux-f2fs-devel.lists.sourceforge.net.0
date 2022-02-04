@@ -2,93 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E41F4A91A9
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Feb 2022 01:34:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D0844A91D9
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Feb 2022 02:06:04 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nFmYd-00065s-EM; Fri, 04 Feb 2022 00:34:34 +0000
+	id 1nFn33-0006pV-F9; Fri, 04 Feb 2022 01:06:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nFmYb-00065i-Ro
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 00:34:32 +0000
+ (envelope-from <chao@kernel.org>) id 1nFn32-0006pO-1C
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 01:05:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=F08+mR6VwUTdUB7G8Mo5bqfuQjKguWdmTbIaqMUQQbk=; b=iWAe1mw/LXyqCDo1+KFGxsy1ga
- o3VKBxt5NW7tpWhBQ6I6KyQ1t/mFj8uLgMeC+vlaiMwJa6+6CtJyYQEQfEnuy/xCZbhkaGFhZBqqG
- 7liUU/WFEYt4V1CwZqXzuTCQ7HzmLcfQIwDpBrttenSqpQcJQHucwU/ncGT0Ri5tIKe0=;
+ bh=gpRtqa4gX6IG3Ba/AU1MKJ3Kkcl+RtouxNdQMf8Mn/I=; b=Oiul7P9REK6CU8CL98YFPMV32i
+ cWuqeR0t0JC2U9NEHMk+3RbwXMlnB2yj/JpBYCgwehnSY5Re2GgFqHLX0ocontkvpRnuzcRd5VNhW
+ ejhfAiPXHKJmp89zavrNe/IvWMa6UWb+1GBRsOOgWMRzM1cxhU9zp7rvGRx5bxL2Ravw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=F08+mR6VwUTdUB7G8Mo5bqfuQjKguWdmTbIaqMUQQbk=; b=L
- xeg8xqfWHBbdu8D87H8Nd+y9yYwqATFgLznILQXiGnRNSCINaSg0mGGBM06CR12cNA4zXnvKH3+JC
- YIKjYprFgEPZqW5145/GgzDRUtvQkdFVwud66w42VycO+3DmQEZPNeSrlwWwwL5uGGVb63P6pHedE
- aY9qbqI0gFau6mlM=;
-Received: from sin.source.kernel.org ([145.40.73.55])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=gpRtqa4gX6IG3Ba/AU1MKJ3Kkcl+RtouxNdQMf8Mn/I=; b=i
+ VnrYoaFgTmsVqJLJ9/7Y53S2Npz85bNqDy5MHMljF2/gHZeVp1QxQMRoeZaeUi5x9wTQYmdCswZXM
+ 4nL3bRVZa2KouJk/IBC0kLBPIqU0OnvHewmJZYqhSbrWX02Dfz/PsOH56ILovGduAQ1pwsWKVJMzI
+ REMS9JT6vijfErms=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nFmYZ-00Fy3J-Cg
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 00:34:32 +0000
+ id 1nFn2z-0003KH-Jg
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 01:05:58 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 281BDCE21B5
+ by ams.source.kernel.org (Postfix) with ESMTPS id 8FA97B8350C
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  4 Feb 2022 00:34:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 950AAC340E8;
- Fri,  4 Feb 2022 00:34:13 +0000 (UTC)
+ Fri,  4 Feb 2022 01:05:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44A77C340E8;
+ Fri,  4 Feb 2022 01:05:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1643934854;
- bh=nQnosq7piKjUNQnT37l53MUyvUvNTsbl9ttaBqRjjRk=;
+ s=k20201202; t=1643936745;
+ bh=vsR1skta8BdBDj6kL6AEC79zRqPrW/y6o1L/lWlh4uI=;
  h=From:To:Cc:Subject:Date:From;
- b=fwOEjSG9Iz3YhR1Dt/UhLkOb6/j8lKCW46HWX3Xz39XLpDGMWWl770h/9m0yk2HSz
- o6D144z6f/e6JVeRLPBVqTWsnS6WWsNgQiW6yQDsuOXbMvSYNPyA75HqhOlf9pvniU
- Hqy6yiqFlgBwHLRB2zFKousi3eIvDOPqAZbiJNTgXf60DU5F1bYxY66tzYgsrft54m
- 2Agc8ZO6U5RWzcJrWkdiL5RPttq4UuxvEbGHCXkhBbWFo0zu242xh4Omf7KmvyJH9u
- +P4GG/+4Ki+BVq4+VmxfCRvnkjwWZJS/fvkhEHkzleYWGzXoqXtLtTm21u0shgBpNS
- 4GaZqnh29xWPg==
+ b=PgVcBuMScdTKhISUU6GAxm4lb6Qe6RhZZhRePTVsqb0uk9ZwJMsWgXuxtXis/Gzj4
+ ocCl9h3UYg8ynbwbxbXcJgvnpR6oDrKOZBu8nsPLI9AF2fdRru1V5GkTHD1t3V+NHB
+ DcJ6+hW/oeKNbq0OVaqnf9xjBo346IcUh9mYo1dNFUrD/QKQaLGE5hRJWZkWiyqWAm
+ 9qr5Zw4cdX+N+AbWewuIiT6sisfx/5efA3jB/cgCJfU0HeMwtJpW3YO7yxp6ZNfS8j
+ m+RRIgytOzZPKglxwpUjUfCwGjBRUqY58qco1D9k7iA5XuyFW/XfzK/XLQH++d2iJ7
+ 1zh8ree/bSITw==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Fri,  4 Feb 2022 08:34:10 +0800
-Message-Id: <20220204003410.41366-1-chao@kernel.org>
+Date: Fri,  4 Feb 2022 09:05:39 +0800
+Message-Id: <20220204010539.42672-1-chao@kernel.org>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In a fragmented image, entries in dnode block list may locate
- in incontiguous physical block address space, however, in recovery flow,
- we will always readahead BIO_MAX_VECS size blocks, so in such cas [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview: Once IPU policy is enabled in some cases: a) f2fs forces to
+ use F2FS_IPU_FORCE in a small-sized volume b) user configures IPU policy
+ via sysfs Then we may fail to defragment file via ioctl due to IPU policy
+ check, it doesn't make sense, let's introduce a new IPU policy to allow OPU
+ during file defragmentation, by default use IPU_DEFRAG inste [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.73.55 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nFmYZ-00Fy3J-Cg
-Subject: [f2fs-dev] [PATCH v2] f2fs: adjust readahead block number during
- recovery
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nFn2z-0003KH-Jg
+Subject: [f2fs-dev] [PATCH v2] f2fs: introduce F2FS_IPU_DEFRAG to allow file
+ defragment in IPU mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,154 +108,230 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In a fragmented image, entries in dnode block list may locate in
-incontiguous physical block address space, however, in recovery flow,
-we will always readahead BIO_MAX_VECS size blocks, so in such case,
-current readahead policy is low efficient, let's adjust readahead
-window size dynamically based on consecutiveness of dnode blocks.
+Once IPU policy is enabled in some cases:
+a) f2fs forces to use F2FS_IPU_FORCE in a small-sized volume
+b) user configures IPU policy via sysfs
+
+Then we may fail to defragment file via ioctl due to IPU policy check,
+it doesn't make sense, let's introduce a new IPU policy to allow OPU
+during file defragmentation, by default use IPU_DEFRAG instead of
+IPU_FORCE in small-sized volume for android device.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
 v2:
-- fix wrong parameter of min_t/max_t in adjust_por_ra_blocks().
- fs/f2fs/checkpoint.c |  8 ++++++--
- fs/f2fs/f2fs.h       |  6 +++++-
- fs/f2fs/recovery.c   | 27 ++++++++++++++++++++++++---
- 3 files changed, 35 insertions(+), 6 deletions(-)
+- handle F2FS_IPU_DEFRAG before F2FS_IPU_FORCE in check_inplace_update_policy().
+ Documentation/ABI/testing/sysfs-fs-f2fs |  3 ++-
+ fs/f2fs/data.c                          | 18 +++++++++++++-----
+ fs/f2fs/f2fs.h                          |  3 ++-
+ fs/f2fs/file.c                          | 18 +++++++++++-------
+ fs/f2fs/segment.h                       |  8 ++++----
+ fs/f2fs/super.c                         |  2 +-
+ 6 files changed, 33 insertions(+), 19 deletions(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 57a2d9164bee..203a1577942d 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -282,18 +282,22 @@ int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
- 	return blkno - start;
- }
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index ce8103f522cb..d8abb674ee86 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -55,8 +55,9 @@ Description:	Controls the in-place-update policy.
+ 		0x04  F2FS_IPU_UTIL
+ 		0x08  F2FS_IPU_SSR_UTIL
+ 		0x10  F2FS_IPU_FSYNC
+-		0x20  F2FS_IPU_ASYNC,
++		0x20  F2FS_IPU_ASYNC
+ 		0x40  F2FS_IPU_NOCACHE
++		0x80  F2FS_IPU_DEFRAG
+ 		====  =================
  
--void f2fs_ra_meta_pages_cond(struct f2fs_sb_info *sbi, pgoff_t index)
-+void f2fs_ra_meta_pages_cond(struct f2fs_sb_info *sbi, pgoff_t index,
-+							unsigned int ra_blocks)
- {
- 	struct page *page;
- 	bool readahead = false;
+ 		Refer segment.h for details.
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index b3c152de4bba..3c0f001e3fe1 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2460,6 +2460,9 @@ static inline bool check_inplace_update_policy(struct inode *inode,
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	unsigned int policy = SM_I(sbi)->ipu_policy;
  
-+	if (ra_blocks == RECOVERY_MIN_RA_BLOCKS)
-+		return;
++	if (policy & (0x1 << F2FS_IPU_DEFRAG) &&
++			is_inode_flag_set(inode, FI_DEFRAG_PROCESS))
++		return false;
+ 	if (policy & (0x1 << F2FS_IPU_FORCE))
+ 		return true;
+ 	if (policy & (0x1 << F2FS_IPU_SSR) && f2fs_need_SSR(sbi))
+@@ -2530,6 +2533,9 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
+ 	if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
+ 		return true;
+ 
++	if (is_inode_flag_set(inode, FI_DEFRAG_PROCESS))
++		return true;
 +
- 	page = find_get_page(META_MAPPING(sbi), index);
- 	if (!page || !PageUptodate(page))
- 		readahead = true;
- 	f2fs_put_page(page, 0);
+ 	if (fio) {
+ 		if (page_private_gcing(fio->page))
+ 			return true;
+@@ -3154,8 +3160,8 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
+ 			f2fs_available_free_memory(sbi, DIRTY_DENTS))
+ 		goto skip_write;
  
- 	if (readahead)
--		f2fs_ra_meta_pages(sbi, index, BIO_MAX_VECS, META_POR, true);
-+		f2fs_ra_meta_pages(sbi, index, ra_blocks, META_POR, true);
- }
+-	/* skip writing during file defragment */
+-	if (is_inode_flag_set(inode, FI_DO_DEFRAG))
++	/* skip writing in file defragment preparing stage */
++	if (is_inode_flag_set(inode, FI_DEFRAG_PREPARE))
+ 		goto skip_write;
  
- static int __f2fs_write_meta_page(struct page *page,
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 5af415208488..1fa6b3f98a71 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -590,6 +590,9 @@ enum {
- /* number of extent info in extent cache we try to shrink */
- #define EXTENT_CACHE_SHRINK_NUMBER	128
+ 	trace_f2fs_writepages(mapping->host, wbc, DATA);
+@@ -3729,6 +3735,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
+ 	filemap_invalidate_lock(inode->i_mapping);
  
-+#define RECOVERY_MAX_RA_BLOCKS		BIO_MAX_VECS
-+#define RECOVERY_MIN_RA_BLOCKS		1
-+
- struct rb_entry {
- 	struct rb_node rb_node;		/* rb node located in rb-tree */
- 	union {
-@@ -3655,7 +3658,8 @@ bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
- 					block_t blkaddr, int type);
- int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
- 			int type, bool sync);
--void f2fs_ra_meta_pages_cond(struct f2fs_sb_info *sbi, pgoff_t index);
-+void f2fs_ra_meta_pages_cond(struct f2fs_sb_info *sbi, pgoff_t index,
-+							unsigned int ra_blocks);
- long f2fs_sync_meta_pages(struct f2fs_sb_info *sbi, enum page_type type,
- 			long nr_to_write, enum iostat_type io_type);
- void f2fs_add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type);
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index f69b685fb2b2..013e99c6671d 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -346,6 +346,19 @@ static int recover_inode(struct inode *inode, struct page *page)
- 	return 0;
- }
+ 	set_inode_flag(inode, FI_ALIGNED_WRITE);
++	set_inode_flag(inode, FI_DEFRAG_PROCESS);
  
-+static unsigned int adjust_por_ra_blocks(struct f2fs_sb_info *sbi,
-+				unsigned int ra_blocks, unsigned int blkaddr,
-+				unsigned int next_blkaddr)
-+{
-+	if (blkaddr + 1 == next_blkaddr)
-+		ra_blocks = min_t(unsigned int, RECOVERY_MAX_RA_BLOCKS,
-+							ra_blocks * 2);
-+	else if (next_blkaddr % sbi->blocks_per_seg)
-+		ra_blocks = max_t(unsigned int, RECOVERY_MIN_RA_BLOCKS,
-+							ra_blocks / 2);
-+	return ra_blocks;
-+}
-+
- static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
- 				bool check_only)
- {
-@@ -353,6 +366,7 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
- 	struct page *page = NULL;
- 	block_t blkaddr;
- 	unsigned int loop_cnt = 0;
-+	unsigned int ra_blocks = RECOVERY_MAX_RA_BLOCKS;
- 	unsigned int free_blocks = MAIN_SEGS(sbi) * sbi->blocks_per_seg -
- 						valid_user_blocks(sbi);
- 	int err = 0;
-@@ -427,11 +441,14 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
- 			break;
+ 	for (; secidx < end_sec; secidx++) {
+ 		f2fs_down_write(&sbi->pin_sem);
+@@ -3737,7 +3744,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
+ 		f2fs_allocate_new_section(sbi, CURSEG_COLD_DATA_PINNED, false);
+ 		f2fs_unlock_op(sbi);
+ 
+-		set_inode_flag(inode, FI_DO_DEFRAG);
++		set_inode_flag(inode, FI_DEFRAG_PREPARE);
+ 
+ 		for (blkofs = 0; blkofs < blk_per_sec; blkofs++) {
+ 			struct page *page;
+@@ -3754,7 +3761,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
+ 			f2fs_put_page(page, 1);
  		}
  
-+		ra_blocks = adjust_por_ra_blocks(sbi, ra_blocks, blkaddr,
-+						next_blkaddr_of_node(page));
-+
- 		/* check next segment */
- 		blkaddr = next_blkaddr_of_node(page);
- 		f2fs_put_page(page, 1);
+-		clear_inode_flag(inode, FI_DO_DEFRAG);
++		clear_inode_flag(inode, FI_DEFRAG_PREPARE);
  
--		f2fs_ra_meta_pages_cond(sbi, blkaddr);
-+		f2fs_ra_meta_pages_cond(sbi, blkaddr, ra_blocks);
+ 		ret = filemap_fdatawrite(inode->i_mapping);
+ 
+@@ -3765,7 +3772,8 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
  	}
- 	return err;
- }
-@@ -707,6 +724,7 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
- 	struct page *page = NULL;
- 	int err = 0;
- 	block_t blkaddr;
-+	unsigned int ra_blocks = RECOVERY_MAX_RA_BLOCKS;
  
- 	/* get node pages in the current segment */
- 	curseg = CURSEG_I(sbi, CURSEG_WARM_NODE);
-@@ -718,8 +736,6 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
- 		if (!f2fs_is_valid_blkaddr(sbi, blkaddr, META_POR))
- 			break;
+ done:
+-	clear_inode_flag(inode, FI_DO_DEFRAG);
++	clear_inode_flag(inode, FI_DEFRAG_PREPARE);
++	clear_inode_flag(inode, FI_DEFRAG_PROCESS);
+ 	clear_inode_flag(inode, FI_ALIGNED_WRITE);
  
--		f2fs_ra_meta_pages_cond(sbi, blkaddr);
+ 	filemap_invalidate_unlock(inode->i_mapping);
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 6ddb98ff0b7c..5af415208488 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -737,7 +737,8 @@ enum {
+ 	FI_DROP_CACHE,		/* drop dirty page cache */
+ 	FI_DATA_EXIST,		/* indicate data exists */
+ 	FI_INLINE_DOTS,		/* indicate inline dot dentries */
+-	FI_DO_DEFRAG,		/* indicate defragment is running */
++	FI_DEFRAG_PREPARE,	/* indicate defragment is preparing */
++	FI_DEFRAG_PROCESS,	/* indicate defragment is processing */
+ 	FI_DIRTY_FILE,		/* indicate regular/symlink has dirty pages */
+ 	FI_PREALLOCATED_ALL,	/* all blocks for write were preallocated */
+ 	FI_HOT_DATA,		/* indicate file is hot */
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 6ccdd6e347e2..3a573125002b 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2559,10 +2559,6 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+ 	bool fragmented = false;
+ 	int err;
+ 
+-	/* if in-place-update policy is enabled, don't waste time here */
+-	if (f2fs_should_update_inplace(inode, NULL))
+-		return -EINVAL;
 -
- 		page = f2fs_get_tmp_page(sbi, blkaddr);
- 		if (IS_ERR(page)) {
- 			err = PTR_ERR(page);
-@@ -762,9 +778,14 @@ static int recover_data(struct f2fs_sb_info *sbi, struct list_head *inode_list,
- 		if (entry->blkaddr == blkaddr)
- 			list_move_tail(&entry->list, tmp_inode_list);
- next:
-+		ra_blocks = adjust_por_ra_blocks(sbi, ra_blocks, blkaddr,
-+						next_blkaddr_of_node(page));
+ 	pg_start = range->start >> PAGE_SHIFT;
+ 	pg_end = (range->start + range->len) >> PAGE_SHIFT;
+ 
+@@ -2570,6 +2566,13 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+ 
+ 	inode_lock(inode);
+ 
++	/* if in-place-update policy is enabled, don't waste time here */
++	set_inode_flag(inode, FI_DEFRAG_PROCESS);
++	if (f2fs_should_update_inplace(inode, NULL)) {
++		err = -EINVAL;
++		goto out;
++	}
 +
- 		/* check next segment */
- 		blkaddr = next_blkaddr_of_node(page);
- 		f2fs_put_page(page, 1);
-+
-+		f2fs_ra_meta_pages_cond(sbi, blkaddr, ra_blocks);
+ 	/* writeback all dirty pages in the range */
+ 	err = filemap_write_and_wait_range(inode->i_mapping, range->start,
+ 						range->start + range->len - 1);
+@@ -2651,7 +2654,7 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+ 			goto check;
+ 		}
+ 
+-		set_inode_flag(inode, FI_DO_DEFRAG);
++		set_inode_flag(inode, FI_DEFRAG_PREPARE);
+ 
+ 		idx = map.m_lblk;
+ 		while (idx < map.m_lblk + map.m_len && cnt < blk_per_seg) {
+@@ -2676,15 +2679,16 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+ 		if (map.m_lblk < pg_end && cnt < blk_per_seg)
+ 			goto do_map;
+ 
+-		clear_inode_flag(inode, FI_DO_DEFRAG);
++		clear_inode_flag(inode, FI_DEFRAG_PREPARE);
+ 
+ 		err = filemap_fdatawrite(inode->i_mapping);
+ 		if (err)
+ 			goto out;
  	}
+ clear_out:
+-	clear_inode_flag(inode, FI_DO_DEFRAG);
++	clear_inode_flag(inode, FI_DEFRAG_PREPARE);
+ out:
++	clear_inode_flag(inode, FI_DEFRAG_PROCESS);
+ 	inode_unlock(inode);
  	if (!err)
- 		f2fs_allocate_new_segments(sbi);
+ 		range->len = (u64)total << PAGE_SHIFT;
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 0291cd55cf09..a9373861ab1c 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -651,7 +651,8 @@ static inline int utilization(struct f2fs_sb_info *sbi)
+  *                     pages over min_fsync_blocks. (=default option)
+  * F2FS_IPU_ASYNC - do IPU given by asynchronous write requests.
+  * F2FS_IPU_NOCACHE - disable IPU bio cache.
+- * F2FS_IPUT_DISABLE - disable IPU. (=default option in LFS mode)
++ * F2FS_IPU_DEFRAG - allow OPU during file defragmentation.
++ * F2FS_IPU_DISABLE - disable IPU. (=default option in LFS mode)
+  */
+ #define DEF_MIN_IPU_UTIL	70
+ #define DEF_MIN_FSYNC_BLOCKS	8
+@@ -667,6 +668,7 @@ enum {
+ 	F2FS_IPU_FSYNC,
+ 	F2FS_IPU_ASYNC,
+ 	F2FS_IPU_NOCACHE,
++	F2FS_IPU_DEFRAG,
+ };
+ 
+ static inline unsigned int curseg_segno(struct f2fs_sb_info *sbi,
+@@ -675,9 +677,7 @@ static inline unsigned int curseg_segno(struct f2fs_sb_info *sbi,
+ 	struct curseg_info *curseg = CURSEG_I(sbi, type);
+ 	return curseg->segno;
+ }
+-
+-static inline unsigned char curseg_alloc_type(struct f2fs_sb_info *sbi,
+-		int type)
++static inline unsigned char curseg_alloc_type(struct f2fs_sb_info *sbi, int type)
+ {
+ 	struct curseg_info *curseg = CURSEG_I(sbi, type);
+ 	return curseg->alloc_type;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 9af6c20532ec..cc0429279b4c 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -3957,7 +3957,7 @@ static void f2fs_tuning_parameters(struct f2fs_sb_info *sbi)
+ 		F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_REUSE;
+ 		if (f2fs_block_unit_discard(sbi))
+ 			sm_i->dcc_info->discard_granularity = 1;
+-		sm_i->ipu_policy = 1 << F2FS_IPU_FORCE;
++		sm_i->ipu_policy = 1 << F2FS_IPU_DEFRAG;
+ 	}
+ 
+ 	sbi->readdir_ra = 1;
 -- 
 2.32.0
 
