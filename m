@@ -2,65 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 922674A938E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Feb 2022 06:25:27 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA9154A93DD
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Feb 2022 07:13:16 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nFr63-0002Y7-7S; Fri, 04 Feb 2022 05:25:21 +0000
+	id 1nFrqK-0005li-MM; Fri, 04 Feb 2022 06:13:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nFr61-0002Xv-Sz
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 05:25:20 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nFrqI-0005lc-AH
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 06:13:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9CWNAjdbwlGE5FkXeO0+r/a+zlbuzmRMh80hlq/NAuw=; b=jjZD2NCFiAKSHwkc+QvqswrqEP
- 9q6ryqjhRVvj4j57HBNO3yfWDcnOo/EwG2Xjx9UXAiSju9d+tztZTvQDewXK3CHkYJc6dzY2/KQmK
- jvEZTTLuh2ZZ8hLyIJxS08bOSnXPAzgSI04tfAACK+Zd5SwRnxj6REctLVV8e+Tf8DVQ=;
+ bh=paSJwTgH7fFH1FWV/nzXCZd/zW/3V2dwVOnFEjjdwi0=; b=ciCQHNIeIurGBg8SsJABkmNKSp
+ kPrH/3Qq3kkIW3bG+SdGV0EbfHAOI4XXJO0/gQV+x1HRy/pwFPdAI4arxWdSH+sVFySVvsCmtzoWV
+ QlO/QoiF3nnxJlOPSQf8xkfsaxSoX4YARfcEbp2YKdPZpx1bBQN7wJnWwu1nfdH2xHqU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=9CWNAjdbwlGE5FkXeO0+r/a+zlbuzmRMh80hlq/NAuw=; b=E
- LpwyXt1axH5afwkgxXH0jCDP/bON1Jf80coIQy+x7czp1mazHijk8W81v0WtSmgYslzKNSmojvdep
- fuqI93hZsVMVc81lCIeEUtX1pNdk+xruzo+JNS0oEC21fumfSsDoS8j+uZQ211cCc77b6OKWUGjiM
- GAIhv+FadIo0Bpjw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=paSJwTgH7fFH1FWV/nzXCZd/zW/3V2dwVOnFEjjdwi0=; b=SZ/3bFp6V51e2EaVpx450H3MEu
+ Gg4AOtEGhcPwC0GoLCah+kCkQk+1O0ticEluLb9a27GxnQ1kYcJp+pkNz1tAQwr2oJRQWe492ANrv
+ OkAPPj9mNAsoKaUUh4ICYKIwU+tXdOVlDZL1Gbb4zuAqq8kVRIYlLTyEPubbxxtk3oCs=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nFr5v-0003ot-Ms
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 05:25:20 +0000
+ id 1nFrqC-00GTTD-6K
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 06:13:08 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8193761B69
+ by sin.source.kernel.org (Postfix) with ESMTPS id 8AB42CE223A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  4 Feb 2022 05:25:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DAC89C004E1;
- Fri,  4 Feb 2022 05:25:03 +0000 (UTC)
+ Fri,  4 Feb 2022 06:12:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6CABC004E1;
+ Fri,  4 Feb 2022 06:12:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1643952304;
- bh=aQ5bbnmYYvcskYkqujvFmjwHmT9XNwy0IN/9pGWKqpg=;
- h=From:To:Cc:Subject:Date:From;
- b=dxDOh9RAsYqT+PVcaUnxNI5/Kd7qKlTq4F/1DETN4N6fEmIv1XU1uzwBRoi9kJSWZ
- bO5Qs1ObbkJY60wEO1Brh6Q8g8p1obcknWT7UBl8GwCMzc1TqxsGrXfqcusHDayKys
- 4MbWrhV9aD0yW/lx8lOjbl5FcGStdqe+XRbNyV1sviJ5ym8VtntOmZ4Vv0Rqyoe7x+
- N57qgd/mP+beu/hgTFnDjJPmqZ38xUYQiK8r0BMrmRQfA8zLiG+rcofHD7ye49yU65
- Rv9IoZ++ch7J/kX+JnI7o59Mi7DFDfavZwxQWlQmQLb9iqvbeJ0Okf43Si2H4kRrfG
- 6krLuX5lSCyug==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Fri,  4 Feb 2022 13:24:56 +0800
-Message-Id: <20220204052456.44573-1-chao@kernel.org>
-X-Mailer: git-send-email 2.32.0
+ s=k20201202; t=1643955171;
+ bh=9M3+xkNv3SVDv2CeCWdxNgazHxfvOt6X0DzE5We3Tm0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=dcYx3JHxep0VHHOXGKsxHNY5xqxLxtMhom+2OwPvOxzOuzsZHWuqZniTeX6P3CCLD
+ eIfzE//ZV+MoI6uQ4wmcfGQ4lCfr40bWF8WOWjFsLDXkBVPvg0fJCFqxjq7WrmJgJH
+ yb+YwFeaX4AP78CEhxClnB3eSRAHrPiJXswsjI6IuXHYGJLP3cFuD/7AnD+GBKEL+M
+ yoYJTjXH0imh7Lv3Lkzt4Ucvmebzkf/je+kJ8izU4+9jq8q7kpV46kFLKT/twL+zWN
+ X3jlZvj2Xu8tI8gjwJ2/EAwwFUHDnbLaFbZrTMjuVJPnbae/h1OVUCghZU98ZIqutE
+ IkShq6sQF5v1g==
+Date: Thu, 3 Feb 2022 22:12:49 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <YfzD4aTbDW2xKlO9@google.com>
+References: <20220204010539.42672-1-chao@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20220204010539.42672-1-chao@kernel.org>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -68,17 +70,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This patch enables idmapped mounts for f2fs,
- since all dedicated
- helpers for this functionality existsm, so, in this patch we just pass down
- the user_namespace argument from the VFS methods to the rel [...] 
+ Content preview:  On 02/04, Chao Yu wrote: > Once IPU policy is enabled in some
+ cases: > a) f2fs forces to use F2FS_IPU_FORCE in a small-sized volume > b)
+ user configures IPU policy via sysfs > > Then we may fail to de [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -88,8 +89,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nFr5v-0003ot-Ms
-Subject: [f2fs-dev] [PATCH] f2fs: support idmapped mounts
+X-Headers-End: 1nFrqC-00GTTD-6K
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: introduce F2FS_IPU_DEFRAG to allow
+ file defragment in IPU mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,222 +104,256 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-VGhpcyBwYXRjaCBlbmFibGVzIGlkbWFwcGVkIG1vdW50cyBmb3IgZjJmcywgc2luY2UgYWxsIGRl
-ZGljYXRlZCBoZWxwZXJzCmZvciB0aGlzIGZ1bmN0aW9uYWxpdHkgZXhpc3RzbSwgc28sIGluIHRo
-aXMgcGF0Y2ggd2UganVzdCBwYXNzIGRvd24gdGhlCnVzZXJfbmFtZXNwYWNlIGFyZ3VtZW50IGZy
-b20gdGhlIFZGUyBtZXRob2RzIHRvIHRoZSByZWxldmFudCBoZWxwZXJzLgoKU2ltcGxlIGlkbWFw
-IGV4YW1wbGUgb24gZjJmcyBpbWFnZToKCjEuIHRydW5jYXRlIC1zIDEyOE0gZjJmcy5pbWcKMi4g
-bWtmcy5mMmZzIGYyZnMuaW1nCjMuIG1vdW50IGYyZnMuaW1nIC9tbnQvZjJmcy8KNC4gdG91Y2gg
-L21udC9mMmZzL2ZpbGUKCjUuIGxzIC1sbiAvbW50L2YyZnMvCnRvdGFsIDAKLXJ3LXItLXItLSAx
-IDAgMCAwIDLmnIggICA0IDEzOjE3IGZpbGUKCjYuIC4vbW91bnQtaWRtYXBwZWQgLS1tYXAtbW91
-bnQgYjowOjEwMDE6MSAvbW50L2YyZnMvIC9tbnQvc2NyYXRjaF9mMmZzLwoKNy4gbHMgLWxuIC9t
-bnQvc2NyYXRjaF9mMmZzLwp0b3RhbCAwCi1ydy1yLS1yLS0gMSAxMDAxIDEwMDEgMCAy5pyIICAg
-NCAxMzoxNyBmaWxlCgpTaWduZWQtb2ZmLWJ5OiBDaGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+Ci0t
-LQogZnMvZjJmcy9hY2wuYyAgIHwgMjEgKysrKysrKysrKysrLS0tLS0tLS0tCiBmcy9mMmZzL2Zp
-bGUuYyAgfCAyMyArKysrKysrKysrKysrKy0tLS0tLS0tLQogZnMvZjJmcy9uYW1laS5jIHwgNDEg
-KysrKysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0tLS0KIGZzL2YyZnMvc3VwZXIu
-YyB8ICAyICstCiA0IGZpbGVzIGNoYW5nZWQsIDUwIGluc2VydGlvbnMoKyksIDM3IGRlbGV0aW9u
-cygtKQoKZGlmZiAtLWdpdCBhL2ZzL2YyZnMvYWNsLmMgYi9mcy9mMmZzL2FjbC5jCmluZGV4IDE2
-ZTgyNmUwMWYwOS4uZWFhMjQwYjIxZjA3IDEwMDY0NAotLS0gYS9mcy9mMmZzL2FjbC5jCisrKyBi
-L2ZzL2YyZnMvYWNsLmMKQEAgLTIwNCw4ICsyMDQsOSBAQCBzdHJ1Y3QgcG9zaXhfYWNsICpmMmZz
-X2dldF9hY2woc3RydWN0IGlub2RlICppbm9kZSwgaW50IHR5cGUsIGJvb2wgcmN1KQogCXJldHVy
-biBfX2YyZnNfZ2V0X2FjbChpbm9kZSwgdHlwZSwgTlVMTCk7CiB9CiAKLXN0YXRpYyBpbnQgZjJm
-c19hY2xfdXBkYXRlX21vZGUoc3RydWN0IGlub2RlICppbm9kZSwgdW1vZGVfdCAqbW9kZV9wLAot
-CQkJICBzdHJ1Y3QgcG9zaXhfYWNsICoqYWNsKQorc3RhdGljIGludCBmMmZzX2FjbF91cGRhdGVf
-bW9kZShzdHJ1Y3QgdXNlcl9uYW1lc3BhY2UgKm1udF91c2VybnMsCisJCQkJc3RydWN0IGlub2Rl
-ICppbm9kZSwgdW1vZGVfdCAqbW9kZV9wLAorCQkJCXN0cnVjdCBwb3NpeF9hY2wgKiphY2wpCiB7
-CiAJdW1vZGVfdCBtb2RlID0gaW5vZGUtPmlfbW9kZTsKIAlpbnQgZXJyb3I7CkBAIC0yMTgsMTQg
-KzIxOSwxNSBAQCBzdGF0aWMgaW50IGYyZnNfYWNsX3VwZGF0ZV9tb2RlKHN0cnVjdCBpbm9kZSAq
-aW5vZGUsIHVtb2RlX3QgKm1vZGVfcCwKIAkJcmV0dXJuIGVycm9yOwogCWlmIChlcnJvciA9PSAw
-KQogCQkqYWNsID0gTlVMTDsKLQlpZiAoIWluX2dyb3VwX3AoaV9naWRfaW50b19tbnQoJmluaXRf
-dXNlcl9ucywgaW5vZGUpKSAmJgotCSAgICAhY2FwYWJsZV93cnRfaW5vZGVfdWlkZ2lkKCZpbml0
-X3VzZXJfbnMsIGlub2RlLCBDQVBfRlNFVElEKSkKKwlpZiAoIWluX2dyb3VwX3AoaV9naWRfaW50
-b19tbnQobW50X3VzZXJucywgaW5vZGUpKSAmJgorCSAgICAhY2FwYWJsZV93cnRfaW5vZGVfdWlk
-Z2lkKG1udF91c2VybnMsIGlub2RlLCBDQVBfRlNFVElEKSkKIAkJbW9kZSAmPSB+U19JU0dJRDsK
-IAkqbW9kZV9wID0gbW9kZTsKIAlyZXR1cm4gMDsKIH0KIAotc3RhdGljIGludCBfX2YyZnNfc2V0
-X2FjbChzdHJ1Y3QgaW5vZGUgKmlub2RlLCBpbnQgdHlwZSwKK3N0YXRpYyBpbnQgX19mMmZzX3Nl
-dF9hY2woc3RydWN0IHVzZXJfbmFtZXNwYWNlICptbnRfdXNlcm5zLAorCQkJc3RydWN0IGlub2Rl
-ICppbm9kZSwgaW50IHR5cGUsCiAJCQlzdHJ1Y3QgcG9zaXhfYWNsICphY2wsIHN0cnVjdCBwYWdl
-ICppcGFnZSkKIHsKIAlpbnQgbmFtZV9pbmRleDsKQEAgLTIzOCw3ICsyNDAsOCBAQCBzdGF0aWMg
-aW50IF9fZjJmc19zZXRfYWNsKHN0cnVjdCBpbm9kZSAqaW5vZGUsIGludCB0eXBlLAogCWNhc2Ug
-QUNMX1RZUEVfQUNDRVNTOgogCQluYW1lX2luZGV4ID0gRjJGU19YQVRUUl9JTkRFWF9QT1NJWF9B
-Q0xfQUNDRVNTOwogCQlpZiAoYWNsICYmICFpcGFnZSkgewotCQkJZXJyb3IgPSBmMmZzX2FjbF91
-cGRhdGVfbW9kZShpbm9kZSwgJm1vZGUsICZhY2wpOworCQkJZXJyb3IgPSBmMmZzX2FjbF91cGRh
-dGVfbW9kZShtbnRfdXNlcm5zLCBpbm9kZSwKKwkJCQkJCQkJJm1vZGUsICZhY2wpOwogCQkJaWYg
-KGVycm9yKQogCQkJCXJldHVybiBlcnJvcjsKIAkJCXNldF9hY2xfaW5vZGUoaW5vZGUsIG1vZGUp
-OwpAQCAtMjc5LDcgKzI4Miw3IEBAIGludCBmMmZzX3NldF9hY2woc3RydWN0IHVzZXJfbmFtZXNw
-YWNlICptbnRfdXNlcm5zLCBzdHJ1Y3QgaW5vZGUgKmlub2RlLAogCWlmICh1bmxpa2VseShmMmZz
-X2NwX2Vycm9yKEYyRlNfSV9TQihpbm9kZSkpKSkKIAkJcmV0dXJuIC1FSU87CiAKLQlyZXR1cm4g
-X19mMmZzX3NldF9hY2woaW5vZGUsIHR5cGUsIGFjbCwgTlVMTCk7CisJcmV0dXJuIF9fZjJmc19z
-ZXRfYWNsKG1udF91c2VybnMsIGlub2RlLCB0eXBlLCBhY2wsIE5VTEwpOwogfQogCiAvKgpAQCAt
-NDE5LDcgKzQyMiw3IEBAIGludCBmMmZzX2luaXRfYWNsKHN0cnVjdCBpbm9kZSAqaW5vZGUsIHN0
-cnVjdCBpbm9kZSAqZGlyLCBzdHJ1Y3QgcGFnZSAqaXBhZ2UsCiAJZjJmc19tYXJrX2lub2RlX2Rp
-cnR5X3N5bmMoaW5vZGUsIHRydWUpOwogCiAJaWYgKGRlZmF1bHRfYWNsKSB7Ci0JCWVycm9yID0g
-X19mMmZzX3NldF9hY2woaW5vZGUsIEFDTF9UWVBFX0RFRkFVTFQsIGRlZmF1bHRfYWNsLAorCQll
-cnJvciA9IF9fZjJmc19zZXRfYWNsKE5VTEwsIGlub2RlLCBBQ0xfVFlQRV9ERUZBVUxULCBkZWZh
-dWx0X2FjbCwKIAkJCQkgICAgICAgaXBhZ2UpOwogCQlwb3NpeF9hY2xfcmVsZWFzZShkZWZhdWx0
-X2FjbCk7CiAJfSBlbHNlIHsKQEAgLTQyNyw3ICs0MzAsNyBAQCBpbnQgZjJmc19pbml0X2FjbChz
-dHJ1Y3QgaW5vZGUgKmlub2RlLCBzdHJ1Y3QgaW5vZGUgKmRpciwgc3RydWN0IHBhZ2UgKmlwYWdl
-LAogCX0KIAlpZiAoYWNsKSB7CiAJCWlmICghZXJyb3IpCi0JCQllcnJvciA9IF9fZjJmc19zZXRf
-YWNsKGlub2RlLCBBQ0xfVFlQRV9BQ0NFU1MsIGFjbCwKKwkJCWVycm9yID0gX19mMmZzX3NldF9h
-Y2woTlVMTCwgaW5vZGUsIEFDTF9UWVBFX0FDQ0VTUywgYWNsLAogCQkJCQkgICAgICAgaXBhZ2Up
-OwogCQlwb3NpeF9hY2xfcmVsZWFzZShhY2wpOwogCX0gZWxzZSB7CmRpZmYgLS1naXQgYS9mcy9m
-MmZzL2ZpbGUuYyBiL2ZzL2YyZnMvZmlsZS5jCmluZGV4IDNhNTczMTI1MDAyYi4uMTM1ZTZhYzA3
-OTJjIDEwMDY0NAotLS0gYS9mcy9mMmZzL2ZpbGUuYworKysgYi9mcy9mMmZzL2ZpbGUuYwpAQCAt
-ODQ0LDcgKzg0NCw3IEBAIGludCBmMmZzX2dldGF0dHIoc3RydWN0IHVzZXJfbmFtZXNwYWNlICpt
-bnRfdXNlcm5zLCBjb25zdCBzdHJ1Y3QgcGF0aCAqcGF0aCwKIAkJCQkgIFNUQVRYX0FUVFJfTk9E
-VU1QIHwKIAkJCQkgIFNUQVRYX0FUVFJfVkVSSVRZKTsKIAotCWdlbmVyaWNfZmlsbGF0dHIoJmlu
-aXRfdXNlcl9ucywgaW5vZGUsIHN0YXQpOworCWdlbmVyaWNfZmlsbGF0dHIobW50X3VzZXJucywg
-aW5vZGUsIHN0YXQpOwogCiAJLyogd2UgbmVlZCB0byBzaG93IGluaXRpYWwgc2VjdG9ycyB1c2Vk
-IGZvciBpbmxpbmVfZGF0YS9kZW50cmllcyAqLwogCWlmICgoU19JU1JFRyhpbm9kZS0+aV9tb2Rl
-KSAmJiBmMmZzX2hhc19pbmxpbmVfZGF0YShpbm9kZSkpIHx8CkBAIC05MDQsNyArOTA0LDcgQEAg
-aW50IGYyZnNfc2V0YXR0cihzdHJ1Y3QgdXNlcl9uYW1lc3BhY2UgKm1udF91c2VybnMsIHN0cnVj
-dCBkZW50cnkgKmRlbnRyeSwKIAkJIWYyZnNfaXNfY29tcHJlc3NfYmFja2VuZF9yZWFkeShpbm9k
-ZSkpCiAJCXJldHVybiAtRU9QTk9UU1VQUDsKIAotCWVyciA9IHNldGF0dHJfcHJlcGFyZSgmaW5p
-dF91c2VyX25zLCBkZW50cnksIGF0dHIpOworCWVyciA9IHNldGF0dHJfcHJlcGFyZShtbnRfdXNl
-cm5zLCBkZW50cnksIGF0dHIpOwogCWlmIChlcnIpCiAJCXJldHVybiBlcnI7CiAKQEAgLTk4MCwx
-MCArOTgwLDEwIEBAIGludCBmMmZzX3NldGF0dHIoc3RydWN0IHVzZXJfbmFtZXNwYWNlICptbnRf
-dXNlcm5zLCBzdHJ1Y3QgZGVudHJ5ICpkZW50cnksCiAJCXNwaW5fdW5sb2NrKCZGMkZTX0koaW5v
-ZGUpLT5pX3NpemVfbG9jayk7CiAJfQogCi0JX19zZXRhdHRyX2NvcHkoJmluaXRfdXNlcl9ucywg
-aW5vZGUsIGF0dHIpOworCV9fc2V0YXR0cl9jb3B5KG1udF91c2VybnMsIGlub2RlLCBhdHRyKTsK
-IAogCWlmIChhdHRyLT5pYV92YWxpZCAmIEFUVFJfTU9ERSkgewotCQllcnIgPSBwb3NpeF9hY2xf
-Y2htb2QoJmluaXRfdXNlcl9ucywgaW5vZGUsIGYyZnNfZ2V0X2lub2RlX21vZGUoaW5vZGUpKTsK
-KwkJZXJyID0gcG9zaXhfYWNsX2NobW9kKG1udF91c2VybnMsIGlub2RlLCBmMmZzX2dldF9pbm9k
-ZV9tb2RlKGlub2RlKSk7CiAKIAkJaWYgKGlzX2lub2RlX2ZsYWdfc2V0KGlub2RlLCBGSV9BQ0xf
-TU9ERSkpIHsKIAkJCWlmICghZXJyKQpAQCAtMTk4OSwxMSArMTk4OSwxMiBAQCBzdGF0aWMgaW50
-IGYyZnNfaW9jX2dldHZlcnNpb24oc3RydWN0IGZpbGUgKmZpbHAsIHVuc2lnbmVkIGxvbmcgYXJn
-KQogc3RhdGljIGludCBmMmZzX2lvY19zdGFydF9hdG9taWNfd3JpdGUoc3RydWN0IGZpbGUgKmZp
-bHApCiB7CiAJc3RydWN0IGlub2RlICppbm9kZSA9IGZpbGVfaW5vZGUoZmlscCk7CisJc3RydWN0
-IHVzZXJfbmFtZXNwYWNlICptbnRfdXNlcm5zID0gZmlsZV9tbnRfdXNlcl9ucyhmaWxwKTsKIAlz
-dHJ1Y3QgZjJmc19pbm9kZV9pbmZvICpmaSA9IEYyRlNfSShpbm9kZSk7CiAJc3RydWN0IGYyZnNf
-c2JfaW5mbyAqc2JpID0gRjJGU19JX1NCKGlub2RlKTsKIAlpbnQgcmV0OwogCi0JaWYgKCFpbm9k
-ZV9vd25lcl9vcl9jYXBhYmxlKCZpbml0X3VzZXJfbnMsIGlub2RlKSkKKwlpZiAoIWlub2RlX293
-bmVyX29yX2NhcGFibGUobW50X3VzZXJucywgaW5vZGUpKQogCQlyZXR1cm4gLUVBQ0NFUzsKIAog
-CWlmICghU19JU1JFRyhpbm9kZS0+aV9tb2RlKSkKQEAgLTIwNTgsOSArMjA1OSwxMCBAQCBzdGF0
-aWMgaW50IGYyZnNfaW9jX3N0YXJ0X2F0b21pY193cml0ZShzdHJ1Y3QgZmlsZSAqZmlscCkKIHN0
-YXRpYyBpbnQgZjJmc19pb2NfY29tbWl0X2F0b21pY193cml0ZShzdHJ1Y3QgZmlsZSAqZmlscCkK
-IHsKIAlzdHJ1Y3QgaW5vZGUgKmlub2RlID0gZmlsZV9pbm9kZShmaWxwKTsKKwlzdHJ1Y3QgdXNl
-cl9uYW1lc3BhY2UgKm1udF91c2VybnMgPSBmaWxlX21udF91c2VyX25zKGZpbHApOwogCWludCBy
-ZXQ7CiAKLQlpZiAoIWlub2RlX293bmVyX29yX2NhcGFibGUoJmluaXRfdXNlcl9ucywgaW5vZGUp
-KQorCWlmICghaW5vZGVfb3duZXJfb3JfY2FwYWJsZShtbnRfdXNlcm5zLCBpbm9kZSkpCiAJCXJl
-dHVybiAtRUFDQ0VTOwogCiAJcmV0ID0gbW50X3dhbnRfd3JpdGVfZmlsZShmaWxwKTsKQEAgLTIx
-MDAsOSArMjEwMiwxMCBAQCBzdGF0aWMgaW50IGYyZnNfaW9jX2NvbW1pdF9hdG9taWNfd3JpdGUo
-c3RydWN0IGZpbGUgKmZpbHApCiBzdGF0aWMgaW50IGYyZnNfaW9jX3N0YXJ0X3ZvbGF0aWxlX3dy
-aXRlKHN0cnVjdCBmaWxlICpmaWxwKQogewogCXN0cnVjdCBpbm9kZSAqaW5vZGUgPSBmaWxlX2lu
-b2RlKGZpbHApOworCXN0cnVjdCB1c2VyX25hbWVzcGFjZSAqbW50X3VzZXJucyA9IGZpbGVfbW50
-X3VzZXJfbnMoZmlscCk7CiAJaW50IHJldDsKIAotCWlmICghaW5vZGVfb3duZXJfb3JfY2FwYWJs
-ZSgmaW5pdF91c2VyX25zLCBpbm9kZSkpCisJaWYgKCFpbm9kZV9vd25lcl9vcl9jYXBhYmxlKG1u
-dF91c2VybnMsIGlub2RlKSkKIAkJcmV0dXJuIC1FQUNDRVM7CiAKIAlpZiAoIVNfSVNSRUcoaW5v
-ZGUtPmlfbW9kZSkpCkBAIC0yMTM1LDkgKzIxMzgsMTAgQEAgc3RhdGljIGludCBmMmZzX2lvY19z
-dGFydF92b2xhdGlsZV93cml0ZShzdHJ1Y3QgZmlsZSAqZmlscCkKIHN0YXRpYyBpbnQgZjJmc19p
-b2NfcmVsZWFzZV92b2xhdGlsZV93cml0ZShzdHJ1Y3QgZmlsZSAqZmlscCkKIHsKIAlzdHJ1Y3Qg
-aW5vZGUgKmlub2RlID0gZmlsZV9pbm9kZShmaWxwKTsKKwlzdHJ1Y3QgdXNlcl9uYW1lc3BhY2Ug
-Km1udF91c2VybnMgPSBmaWxlX21udF91c2VyX25zKGZpbHApOwogCWludCByZXQ7CiAKLQlpZiAo
-IWlub2RlX293bmVyX29yX2NhcGFibGUoJmluaXRfdXNlcl9ucywgaW5vZGUpKQorCWlmICghaW5v
-ZGVfb3duZXJfb3JfY2FwYWJsZShtbnRfdXNlcm5zLCBpbm9kZSkpCiAJCXJldHVybiAtRUFDQ0VT
-OwogCiAJcmV0ID0gbW50X3dhbnRfd3JpdGVfZmlsZShmaWxwKTsKQEAgLTIxNjQsOSArMjE2OCwx
-MCBAQCBzdGF0aWMgaW50IGYyZnNfaW9jX3JlbGVhc2Vfdm9sYXRpbGVfd3JpdGUoc3RydWN0IGZp
-bGUgKmZpbHApCiBzdGF0aWMgaW50IGYyZnNfaW9jX2Fib3J0X3ZvbGF0aWxlX3dyaXRlKHN0cnVj
-dCBmaWxlICpmaWxwKQogewogCXN0cnVjdCBpbm9kZSAqaW5vZGUgPSBmaWxlX2lub2RlKGZpbHAp
-OworCXN0cnVjdCB1c2VyX25hbWVzcGFjZSAqbW50X3VzZXJucyA9IGZpbGVfbW50X3VzZXJfbnMo
-ZmlscCk7CiAJaW50IHJldDsKIAotCWlmICghaW5vZGVfb3duZXJfb3JfY2FwYWJsZSgmaW5pdF91
-c2VyX25zLCBpbm9kZSkpCisJaWYgKCFpbm9kZV9vd25lcl9vcl9jYXBhYmxlKG1udF91c2VybnMs
-IGlub2RlKSkKIAkJcmV0dXJuIC1FQUNDRVM7CiAKIAlyZXQgPSBtbnRfd2FudF93cml0ZV9maWxl
-KGZpbHApOwpkaWZmIC0tZ2l0IGEvZnMvZjJmcy9uYW1laS5jIGIvZnMvZjJmcy9uYW1laS5jCmlu
-ZGV4IDAzNDdjNTc4MDkxMC4uMmIyM2E3NmJkYWU5IDEwMDY0NAotLS0gYS9mcy9mMmZzL25hbWVp
-LmMKKysrIGIvZnMvZjJmcy9uYW1laS5jCkBAIC0yMiw3ICsyMiw4IEBACiAjaW5jbHVkZSAiYWNs
-LmgiCiAjaW5jbHVkZSA8dHJhY2UvZXZlbnRzL2YyZnMuaD4KIAotc3RhdGljIHN0cnVjdCBpbm9k
-ZSAqZjJmc19uZXdfaW5vZGUoc3RydWN0IGlub2RlICpkaXIsIHVtb2RlX3QgbW9kZSkKK3N0YXRp
-YyBzdHJ1Y3QgaW5vZGUgKmYyZnNfbmV3X2lub2RlKHN0cnVjdCB1c2VyX25hbWVzcGFjZSAqbW50
-X3VzZXJucywKKwkJCQkJCXN0cnVjdCBpbm9kZSAqZGlyLCB1bW9kZV90IG1vZGUpCiB7CiAJc3Ry
-dWN0IGYyZnNfc2JfaW5mbyAqc2JpID0gRjJGU19JX1NCKGRpcik7CiAJbmlkX3QgaW5vOwpAQCAt
-NDYsNyArNDcsNyBAQCBzdGF0aWMgc3RydWN0IGlub2RlICpmMmZzX25ld19pbm9kZShzdHJ1Y3Qg
-aW5vZGUgKmRpciwgdW1vZGVfdCBtb2RlKQogCiAJbmlkX2ZyZWUgPSB0cnVlOwogCi0JaW5vZGVf
-aW5pdF9vd25lcigmaW5pdF91c2VyX25zLCBpbm9kZSwgZGlyLCBtb2RlKTsKKwlpbm9kZV9pbml0
-X293bmVyKG1udF91c2VybnMsIGlub2RlLCBkaXIsIG1vZGUpOwogCiAJaW5vZGUtPmlfaW5vID0g
-aW5vOwogCWlub2RlLT5pX2Jsb2NrcyA9IDA7CkBAIC02Nyw3ICs2OCw3IEBAIHN0YXRpYyBzdHJ1
-Y3QgaW5vZGUgKmYyZnNfbmV3X2lub2RlKHN0cnVjdCBpbm9kZSAqZGlyLCB1bW9kZV90IG1vZGUp
-CiAJCShGMkZTX0koZGlyKS0+aV9mbGFncyAmIEYyRlNfUFJPSklOSEVSSVRfRkwpKQogCQlGMkZT
-X0koaW5vZGUpLT5pX3Byb2ppZCA9IEYyRlNfSShkaXIpLT5pX3Byb2ppZDsKIAllbHNlCi0JCUYy
-RlNfSShpbm9kZSktPmlfcHJvamlkID0gbWFrZV9rcHJvamlkKCZpbml0X3VzZXJfbnMsCisJCUYy
-RlNfSShpbm9kZSktPmlfcHJvamlkID0gbWFrZV9rcHJvamlkKG1udF91c2VybnMsCiAJCQkJCQkJ
-RjJGU19ERUZfUFJPSklEKTsKIAogCWVyciA9IGZzY3J5cHRfcHJlcGFyZV9uZXdfaW5vZGUoZGly
-LCBpbm9kZSwgJmVuY3J5cHQpOwpAQCAtMzQ5LDcgKzM1MCw3IEBAIHN0YXRpYyBpbnQgZjJmc19j
-cmVhdGUoc3RydWN0IHVzZXJfbmFtZXNwYWNlICptbnRfdXNlcm5zLCBzdHJ1Y3QgaW5vZGUgKmRp
-ciwKIAlpZiAoZXJyKQogCQlyZXR1cm4gZXJyOwogCi0JaW5vZGUgPSBmMmZzX25ld19pbm9kZShk
-aXIsIG1vZGUpOworCWlub2RlID0gZjJmc19uZXdfaW5vZGUobW50X3VzZXJucywgZGlyLCBtb2Rl
-KTsKIAlpZiAoSVNfRVJSKGlub2RlKSkKIAkJcmV0dXJuIFBUUl9FUlIoaW5vZGUpOwogCkBAIC02
-NzksNyArNjgwLDcgQEAgc3RhdGljIGludCBmMmZzX3N5bWxpbmsoc3RydWN0IHVzZXJfbmFtZXNw
-YWNlICptbnRfdXNlcm5zLCBzdHJ1Y3QgaW5vZGUgKmRpciwKIAlpZiAoZXJyKQogCQlyZXR1cm4g
-ZXJyOwogCi0JaW5vZGUgPSBmMmZzX25ld19pbm9kZShkaXIsIFNfSUZMTksgfCBTX0lSV1hVR08p
-OworCWlub2RlID0gZjJmc19uZXdfaW5vZGUobW50X3VzZXJucywgZGlyLCBTX0lGTE5LIHwgU19J
-UldYVUdPKTsKIAlpZiAoSVNfRVJSKGlub2RlKSkKIAkJcmV0dXJuIFBUUl9FUlIoaW5vZGUpOwog
-CkBAIC03NTAsNyArNzUxLDcgQEAgc3RhdGljIGludCBmMmZzX21rZGlyKHN0cnVjdCB1c2VyX25h
-bWVzcGFjZSAqbW50X3VzZXJucywgc3RydWN0IGlub2RlICpkaXIsCiAJaWYgKGVycikKIAkJcmV0
-dXJuIGVycjsKIAotCWlub2RlID0gZjJmc19uZXdfaW5vZGUoZGlyLCBTX0lGRElSIHwgbW9kZSk7
-CisJaW5vZGUgPSBmMmZzX25ld19pbm9kZShtbnRfdXNlcm5zLCBkaXIsIFNfSUZESVIgfCBtb2Rl
-KTsKIAlpZiAoSVNfRVJSKGlub2RlKSkKIAkJcmV0dXJuIFBUUl9FUlIoaW5vZGUpOwogCkBAIC04
-MDcsNyArODA4LDcgQEAgc3RhdGljIGludCBmMmZzX21rbm9kKHN0cnVjdCB1c2VyX25hbWVzcGFj
-ZSAqbW50X3VzZXJucywgc3RydWN0IGlub2RlICpkaXIsCiAJaWYgKGVycikKIAkJcmV0dXJuIGVy
-cjsKIAotCWlub2RlID0gZjJmc19uZXdfaW5vZGUoZGlyLCBtb2RlKTsKKwlpbm9kZSA9IGYyZnNf
-bmV3X2lub2RlKG1udF91c2VybnMsIGRpciwgbW9kZSk7CiAJaWYgKElTX0VSUihpbm9kZSkpCiAJ
-CXJldHVybiBQVFJfRVJSKGlub2RlKTsKIApAQCAtODM0LDggKzgzNSw5IEBAIHN0YXRpYyBpbnQg
-ZjJmc19ta25vZChzdHJ1Y3QgdXNlcl9uYW1lc3BhY2UgKm1udF91c2VybnMsIHN0cnVjdCBpbm9k
-ZSAqZGlyLAogCXJldHVybiBlcnI7CiB9CiAKLXN0YXRpYyBpbnQgX19mMmZzX3RtcGZpbGUoc3Ry
-dWN0IGlub2RlICpkaXIsIHN0cnVjdCBkZW50cnkgKmRlbnRyeSwKLQkJCQkJdW1vZGVfdCBtb2Rl
-LCBzdHJ1Y3QgaW5vZGUgKip3aGl0ZW91dCkKK3N0YXRpYyBpbnQgX19mMmZzX3RtcGZpbGUoc3Ry
-dWN0IHVzZXJfbmFtZXNwYWNlICptbnRfdXNlcm5zLCBzdHJ1Y3QgaW5vZGUgKmRpciwKKwkJCQkJ
-c3RydWN0IGRlbnRyeSAqZGVudHJ5LCB1bW9kZV90IG1vZGUsCisJCQkJCXN0cnVjdCBpbm9kZSAq
-KndoaXRlb3V0KQogewogCXN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSA9IEYyRlNfSV9TQihkaXIp
-OwogCXN0cnVjdCBpbm9kZSAqaW5vZGU7CkBAIC04NDUsNyArODQ3LDcgQEAgc3RhdGljIGludCBf
-X2YyZnNfdG1wZmlsZShzdHJ1Y3QgaW5vZGUgKmRpciwgc3RydWN0IGRlbnRyeSAqZGVudHJ5LAog
-CWlmIChlcnIpCiAJCXJldHVybiBlcnI7CiAKLQlpbm9kZSA9IGYyZnNfbmV3X2lub2RlKGRpciwg
-bW9kZSk7CisJaW5vZGUgPSBmMmZzX25ld19pbm9kZShtbnRfdXNlcm5zLCBkaXIsIG1vZGUpOwog
-CWlmIChJU19FUlIoaW5vZGUpKQogCQlyZXR1cm4gUFRSX0VSUihpbm9kZSk7CiAKQEAgLTkwOSwy
-MCArOTExLDIyIEBAIHN0YXRpYyBpbnQgZjJmc190bXBmaWxlKHN0cnVjdCB1c2VyX25hbWVzcGFj
-ZSAqbW50X3VzZXJucywgc3RydWN0IGlub2RlICpkaXIsCiAJaWYgKCFmMmZzX2lzX2NoZWNrcG9p
-bnRfcmVhZHkoc2JpKSkKIAkJcmV0dXJuIC1FTk9TUEM7CiAKLQlyZXR1cm4gX19mMmZzX3RtcGZp
-bGUoZGlyLCBkZW50cnksIG1vZGUsIE5VTEwpOworCXJldHVybiBfX2YyZnNfdG1wZmlsZShtbnRf
-dXNlcm5zLCBkaXIsIGRlbnRyeSwgbW9kZSwgTlVMTCk7CiB9CiAKLXN0YXRpYyBpbnQgZjJmc19j
-cmVhdGVfd2hpdGVvdXQoc3RydWN0IGlub2RlICpkaXIsIHN0cnVjdCBpbm9kZSAqKndoaXRlb3V0
-KQorc3RhdGljIGludCBmMmZzX2NyZWF0ZV93aGl0ZW91dChzdHJ1Y3QgdXNlcl9uYW1lc3BhY2Ug
-Km1udF91c2VybnMsCisJCQkJc3RydWN0IGlub2RlICpkaXIsIHN0cnVjdCBpbm9kZSAqKndoaXRl
-b3V0KQogewogCWlmICh1bmxpa2VseShmMmZzX2NwX2Vycm9yKEYyRlNfSV9TQihkaXIpKSkpCiAJ
-CXJldHVybiAtRUlPOwogCi0JcmV0dXJuIF9fZjJmc190bXBmaWxlKGRpciwgTlVMTCwgU19JRkNI
-UiB8IFdISVRFT1VUX01PREUsIHdoaXRlb3V0KTsKKwlyZXR1cm4gX19mMmZzX3RtcGZpbGUobW50
-X3VzZXJucywgZGlyLCBOVUxMLAorCQkJCVNfSUZDSFIgfCBXSElURU9VVF9NT0RFLCB3aGl0ZW91
-dCk7CiB9CiAKLXN0YXRpYyBpbnQgZjJmc19yZW5hbWUoc3RydWN0IGlub2RlICpvbGRfZGlyLCBz
-dHJ1Y3QgZGVudHJ5ICpvbGRfZGVudHJ5LAotCQkJc3RydWN0IGlub2RlICpuZXdfZGlyLCBzdHJ1
-Y3QgZGVudHJ5ICpuZXdfZGVudHJ5LAotCQkJdW5zaWduZWQgaW50IGZsYWdzKQorc3RhdGljIGlu
-dCBmMmZzX3JlbmFtZShzdHJ1Y3QgdXNlcl9uYW1lc3BhY2UgKm1udF91c2VybnMsIHN0cnVjdCBp
-bm9kZSAqb2xkX2RpciwKKwkJCXN0cnVjdCBkZW50cnkgKm9sZF9kZW50cnksIHN0cnVjdCBpbm9k
-ZSAqbmV3X2RpciwKKwkJCXN0cnVjdCBkZW50cnkgKm5ld19kZW50cnksIHVuc2lnbmVkIGludCBm
-bGFncykKIHsKIAlzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkgPSBGMkZTX0lfU0Iob2xkX2Rpcik7
-CiAJc3RydWN0IGlub2RlICpvbGRfaW5vZGUgPSBkX2lub2RlKG9sZF9kZW50cnkpOwpAQCAtOTYw
-LDcgKzk2NCw3IEBAIHN0YXRpYyBpbnQgZjJmc19yZW5hbWUoc3RydWN0IGlub2RlICpvbGRfZGly
-LCBzdHJ1Y3QgZGVudHJ5ICpvbGRfZGVudHJ5LAogCX0KIAogCWlmIChmbGFncyAmIFJFTkFNRV9X
-SElURU9VVCkgewotCQllcnIgPSBmMmZzX2NyZWF0ZV93aGl0ZW91dChvbGRfZGlyLCAmd2hpdGVv
-dXQpOworCQllcnIgPSBmMmZzX2NyZWF0ZV93aGl0ZW91dChtbnRfdXNlcm5zLCBvbGRfZGlyLCAm
-d2hpdGVvdXQpOwogCQlpZiAoZXJyKQogCQkJcmV0dXJuIGVycjsKIAl9CkBAIC0xMzAwLDcgKzEz
-MDQsOCBAQCBzdGF0aWMgaW50IGYyZnNfcmVuYW1lMihzdHJ1Y3QgdXNlcl9uYW1lc3BhY2UgKm1u
-dF91c2VybnMsCiAJICogVkZTIGhhcyBhbHJlYWR5IGhhbmRsZWQgdGhlIG5ldyBkZW50cnkgZXhp
-c3RlbmNlIGNhc2UsCiAJICogaGVyZSwgd2UganVzdCBkZWFsIHdpdGggIlJFTkFNRV9OT1JFUExB
-Q0UiIGFzIHJlZ3VsYXIgcmVuYW1lLgogCSAqLwotCXJldHVybiBmMmZzX3JlbmFtZShvbGRfZGly
-LCBvbGRfZGVudHJ5LCBuZXdfZGlyLCBuZXdfZGVudHJ5LCBmbGFncyk7CisJcmV0dXJuIGYyZnNf
-cmVuYW1lKG1udF91c2VybnMsIG9sZF9kaXIsIG9sZF9kZW50cnksCisJCQkJCW5ld19kaXIsIG5l
-d19kZW50cnksIGZsYWdzKTsKIH0KIAogc3RhdGljIGNvbnN0IGNoYXIgKmYyZnNfZW5jcnlwdGVk
-X2dldF9saW5rKHN0cnVjdCBkZW50cnkgKmRlbnRyeSwKZGlmZiAtLWdpdCBhL2ZzL2YyZnMvc3Vw
-ZXIuYyBiL2ZzL2YyZnMvc3VwZXIuYwppbmRleCBjYzA0MjkyNzliNGMuLjQxZWYxMjczZjJmMiAx
-MDA2NDQKLS0tIGEvZnMvZjJmcy9zdXBlci5jCisrKyBiL2ZzL2YyZnMvc3VwZXIuYwpAQCAtNDUy
-OCw3ICs0NTI4LDcgQEAgc3RhdGljIHN0cnVjdCBmaWxlX3N5c3RlbV90eXBlIGYyZnNfZnNfdHlw
-ZSA9IHsKIAkubmFtZQkJPSAiZjJmcyIsCiAJLm1vdW50CQk9IGYyZnNfbW91bnQsCiAJLmtpbGxf
-c2IJPSBraWxsX2YyZnNfc3VwZXIsCi0JLmZzX2ZsYWdzCT0gRlNfUkVRVUlSRVNfREVWLAorCS5m
-c19mbGFncwk9IEZTX1JFUVVJUkVTX0RFViB8IEZTX0FMTE9XX0lETUFQLAogfTsKIE1PRFVMRV9B
-TElBU19GUygiZjJmcyIpOwogCi0tIAoyLjMyLjAKCgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGlu
-dXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vm
-b3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On 02/04, Chao Yu wrote:
+> Once IPU policy is enabled in some cases:
+> a) f2fs forces to use F2FS_IPU_FORCE in a small-sized volume
+> b) user configures IPU policy via sysfs
+> 
+> Then we may fail to defragment file via ioctl due to IPU policy check,
+> it doesn't make sense, let's introduce a new IPU policy to allow OPU
+> during file defragmentation, by default use IPU_DEFRAG instead of
+> IPU_FORCE in small-sized volume for android device.
+> 
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+> v2:
+> - handle F2FS_IPU_DEFRAG before F2FS_IPU_FORCE in check_inplace_update_policy().
+>  Documentation/ABI/testing/sysfs-fs-f2fs |  3 ++-
+>  fs/f2fs/data.c                          | 18 +++++++++++++-----
+>  fs/f2fs/f2fs.h                          |  3 ++-
+>  fs/f2fs/file.c                          | 18 +++++++++++-------
+>  fs/f2fs/segment.h                       |  8 ++++----
+>  fs/f2fs/super.c                         |  2 +-
+>  6 files changed, 33 insertions(+), 19 deletions(-)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+> index ce8103f522cb..d8abb674ee86 100644
+> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+> @@ -55,8 +55,9 @@ Description:	Controls the in-place-update policy.
+>  		0x04  F2FS_IPU_UTIL
+>  		0x08  F2FS_IPU_SSR_UTIL
+>  		0x10  F2FS_IPU_FSYNC
+> -		0x20  F2FS_IPU_ASYNC,
+> +		0x20  F2FS_IPU_ASYNC
+>  		0x40  F2FS_IPU_NOCACHE
+> +		0x80  F2FS_IPU_DEFRAG
+
+How about F2FS_IPU_HONOR_OPU_WRITE?
+
+>  		====  =================
+>  
+>  		Refer segment.h for details.
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index b3c152de4bba..3c0f001e3fe1 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2460,6 +2460,9 @@ static inline bool check_inplace_update_policy(struct inode *inode,
+>  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>  	unsigned int policy = SM_I(sbi)->ipu_policy;
+>  
+> +	if (policy & (0x1 << F2FS_IPU_DEFRAG) &&
+> +			is_inode_flag_set(inode, FI_DEFRAG_PROCESS))
+> +		return false;
+>  	if (policy & (0x1 << F2FS_IPU_FORCE))
+>  		return true;
+>  	if (policy & (0x1 << F2FS_IPU_SSR) && f2fs_need_SSR(sbi))
+> @@ -2530,6 +2533,9 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
+>  	if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
+>  		return true;
+>  
+> +	if (is_inode_flag_set(inode, FI_DEFRAG_PROCESS))
+> +		return true;
+> +
+>  	if (fio) {
+>  		if (page_private_gcing(fio->page))
+>  			return true;
+> @@ -3154,8 +3160,8 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
+>  			f2fs_available_free_memory(sbi, DIRTY_DENTS))
+>  		goto skip_write;
+>  
+> -	/* skip writing during file defragment */
+> -	if (is_inode_flag_set(inode, FI_DO_DEFRAG))
+> +	/* skip writing in file defragment preparing stage */
+> +	if (is_inode_flag_set(inode, FI_DEFRAG_PREPARE))
+>  		goto skip_write;
+>  
+>  	trace_f2fs_writepages(mapping->host, wbc, DATA);
+> @@ -3729,6 +3735,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
+>  	filemap_invalidate_lock(inode->i_mapping);
+>  
+>  	set_inode_flag(inode, FI_ALIGNED_WRITE);
+> +	set_inode_flag(inode, FI_DEFRAG_PROCESS);
+>  
+>  	for (; secidx < end_sec; secidx++) {
+>  		f2fs_down_write(&sbi->pin_sem);
+> @@ -3737,7 +3744,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
+>  		f2fs_allocate_new_section(sbi, CURSEG_COLD_DATA_PINNED, false);
+>  		f2fs_unlock_op(sbi);
+>  
+> -		set_inode_flag(inode, FI_DO_DEFRAG);
+> +		set_inode_flag(inode, FI_DEFRAG_PREPARE);
+>  
+>  		for (blkofs = 0; blkofs < blk_per_sec; blkofs++) {
+>  			struct page *page;
+> @@ -3754,7 +3761,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
+>  			f2fs_put_page(page, 1);
+>  		}
+>  
+> -		clear_inode_flag(inode, FI_DO_DEFRAG);
+> +		clear_inode_flag(inode, FI_DEFRAG_PREPARE);
+>  
+>  		ret = filemap_fdatawrite(inode->i_mapping);
+>  
+> @@ -3765,7 +3772,8 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
+>  	}
+>  
+>  done:
+> -	clear_inode_flag(inode, FI_DO_DEFRAG);
+> +	clear_inode_flag(inode, FI_DEFRAG_PREPARE);
+> +	clear_inode_flag(inode, FI_DEFRAG_PROCESS);
+>  	clear_inode_flag(inode, FI_ALIGNED_WRITE);
+>  
+>  	filemap_invalidate_unlock(inode->i_mapping);
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 6ddb98ff0b7c..5af415208488 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -737,7 +737,8 @@ enum {
+>  	FI_DROP_CACHE,		/* drop dirty page cache */
+>  	FI_DATA_EXIST,		/* indicate data exists */
+>  	FI_INLINE_DOTS,		/* indicate inline dot dentries */
+> -	FI_DO_DEFRAG,		/* indicate defragment is running */
+> +	FI_DEFRAG_PREPARE,	/* indicate defragment is preparing */
+
+This is used for f2fs_migrate_blocks for swap file. Can we rename to
+FI_SKIP_WRITES that makes skipping writeback pages?
+
+> +	FI_DEFRAG_PROCESS,	/* indicate defragment is processing */
+
+How about FI_OPU_WRITE?
+
+>  	FI_DIRTY_FILE,		/* indicate regular/symlink has dirty pages */
+>  	FI_PREALLOCATED_ALL,	/* all blocks for write were preallocated */
+>  	FI_HOT_DATA,		/* indicate file is hot */
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 6ccdd6e347e2..3a573125002b 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -2559,10 +2559,6 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+>  	bool fragmented = false;
+>  	int err;
+>  
+> -	/* if in-place-update policy is enabled, don't waste time here */
+> -	if (f2fs_should_update_inplace(inode, NULL))
+> -		return -EINVAL;
+> -
+>  	pg_start = range->start >> PAGE_SHIFT;
+>  	pg_end = (range->start + range->len) >> PAGE_SHIFT;
+>  
+> @@ -2570,6 +2566,13 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+>  
+>  	inode_lock(inode);
+>  
+> +	/* if in-place-update policy is enabled, don't waste time here */
+> +	set_inode_flag(inode, FI_DEFRAG_PROCESS);
+> +	if (f2fs_should_update_inplace(inode, NULL)) {
+> +		err = -EINVAL;
+> +		goto out;
+> +	}
+> +
+>  	/* writeback all dirty pages in the range */
+>  	err = filemap_write_and_wait_range(inode->i_mapping, range->start,
+>  						range->start + range->len - 1);
+> @@ -2651,7 +2654,7 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+>  			goto check;
+>  		}
+>  
+> -		set_inode_flag(inode, FI_DO_DEFRAG);
+> +		set_inode_flag(inode, FI_DEFRAG_PREPARE);
+>  
+>  		idx = map.m_lblk;
+>  		while (idx < map.m_lblk + map.m_len && cnt < blk_per_seg) {
+> @@ -2676,15 +2679,16 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
+>  		if (map.m_lblk < pg_end && cnt < blk_per_seg)
+>  			goto do_map;
+>  
+> -		clear_inode_flag(inode, FI_DO_DEFRAG);
+> +		clear_inode_flag(inode, FI_DEFRAG_PREPARE);
+>  
+>  		err = filemap_fdatawrite(inode->i_mapping);
+>  		if (err)
+>  			goto out;
+>  	}
+>  clear_out:
+> -	clear_inode_flag(inode, FI_DO_DEFRAG);
+> +	clear_inode_flag(inode, FI_DEFRAG_PREPARE);
+>  out:
+> +	clear_inode_flag(inode, FI_DEFRAG_PROCESS);
+>  	inode_unlock(inode);
+>  	if (!err)
+>  		range->len = (u64)total << PAGE_SHIFT;
+> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+> index 0291cd55cf09..a9373861ab1c 100644
+> --- a/fs/f2fs/segment.h
+> +++ b/fs/f2fs/segment.h
+> @@ -651,7 +651,8 @@ static inline int utilization(struct f2fs_sb_info *sbi)
+>   *                     pages over min_fsync_blocks. (=default option)
+>   * F2FS_IPU_ASYNC - do IPU given by asynchronous write requests.
+>   * F2FS_IPU_NOCACHE - disable IPU bio cache.
+> - * F2FS_IPUT_DISABLE - disable IPU. (=default option in LFS mode)
+> + * F2FS_IPU_DEFRAG - allow OPU during file defragmentation.
+> + * F2FS_IPU_DISABLE - disable IPU. (=default option in LFS mode)
+>   */
+>  #define DEF_MIN_IPU_UTIL	70
+>  #define DEF_MIN_FSYNC_BLOCKS	8
+> @@ -667,6 +668,7 @@ enum {
+>  	F2FS_IPU_FSYNC,
+>  	F2FS_IPU_ASYNC,
+>  	F2FS_IPU_NOCACHE,
+> +	F2FS_IPU_DEFRAG,
+>  };
+>  
+>  static inline unsigned int curseg_segno(struct f2fs_sb_info *sbi,
+> @@ -675,9 +677,7 @@ static inline unsigned int curseg_segno(struct f2fs_sb_info *sbi,
+>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
+>  	return curseg->segno;
+>  }
+> -
+> -static inline unsigned char curseg_alloc_type(struct f2fs_sb_info *sbi,
+> -		int type)
+> +static inline unsigned char curseg_alloc_type(struct f2fs_sb_info *sbi, int type)
+
+Don't do this.
+
+>  {
+>  	struct curseg_info *curseg = CURSEG_I(sbi, type);
+>  	return curseg->alloc_type;
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 9af6c20532ec..cc0429279b4c 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -3957,7 +3957,7 @@ static void f2fs_tuning_parameters(struct f2fs_sb_info *sbi)
+>  		F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_REUSE;
+>  		if (f2fs_block_unit_discard(sbi))
+>  			sm_i->dcc_info->discard_granularity = 1;
+> -		sm_i->ipu_policy = 1 << F2FS_IPU_FORCE;
+
+No, I think we should have both.
+
+> +		sm_i->ipu_policy = 1 << F2FS_IPU_DEFRAG;
+>  	}
+>  
+>  	sbi->readdir_ra = 1;
+> -- 
+> 2.32.0
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
