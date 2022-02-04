@@ -2,96 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D0844A91D9
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Feb 2022 02:06:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75F6E4A92AE
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Feb 2022 04:20:19 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nFn33-0006pV-F9; Fri, 04 Feb 2022 01:06:00 +0000
+	id 1nFp8x-0001kQ-4V; Fri, 04 Feb 2022 03:20:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nFn32-0006pO-1C
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 01:05:58 +0000
+ (envelope-from <chao@kernel.org>) id 1nFp8p-0001kF-PX
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 03:20:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gpRtqa4gX6IG3Ba/AU1MKJ3Kkcl+RtouxNdQMf8Mn/I=; b=Oiul7P9REK6CU8CL98YFPMV32i
- cWuqeR0t0JC2U9NEHMk+3RbwXMlnB2yj/JpBYCgwehnSY5Re2GgFqHLX0ocontkvpRnuzcRd5VNhW
- ejhfAiPXHKJmp89zavrNe/IvWMa6UWb+1GBRsOOgWMRzM1cxhU9zp7rvGRx5bxL2Ravw=;
+ bh=HVcbGmBTmP6fEQxw9BPmPJPQoW+Ws9gPf+S7lPtPqpA=; b=ccBXc2V264IKliEc0+ticeyWPe
+ 4zpjJQlCI7ocv1jD6j2AMczl1dUe1P/TmRnv+sp5d6N9aYKDEjFZfHBu3PQ/I8pql9+C3JJ6rw0XE
+ znqDLaSgrIF4V2bvXU8tMel2TkJ2chW2I4AZ8n64B0QLtnjNKeZn1KU3Uiw8F3Zwsntg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=gpRtqa4gX6IG3Ba/AU1MKJ3Kkcl+RtouxNdQMf8Mn/I=; b=i
- VnrYoaFgTmsVqJLJ9/7Y53S2Npz85bNqDy5MHMljF2/gHZeVp1QxQMRoeZaeUi5x9wTQYmdCswZXM
- 4nL3bRVZa2KouJk/IBC0kLBPIqU0OnvHewmJZYqhSbrWX02Dfz/PsOH56ILovGduAQ1pwsWKVJMzI
- REMS9JT6vijfErms=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=HVcbGmBTmP6fEQxw9BPmPJPQoW+Ws9gPf+S7lPtPqpA=; b=FkI2cNNXyKKVMVoqw1PbHavNYY
+ c+aeImgVlg+xS4Uvni8OK3sPNz28GaHnIzG/LOa1lKwkFxbr5LgUGBtndh54GcSbqW+mWGqgVaBvh
+ 3fg6W5WsmieTdbQbvbmgwuIQYonCsTPgEZ1rpTgEY1FzK2dcMTdEcLbcWaelZzA5vhqM=;
 Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nFn2z-0003KH-Jg
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 01:05:58 +0000
+ id 1nFp8m-00GDBy-3T
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 04 Feb 2022 03:20:06 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 8FA97B8350C
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  4 Feb 2022 01:05:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44A77C340E8;
- Fri,  4 Feb 2022 01:05:44 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 014FCB834D3;
+ Fri,  4 Feb 2022 03:19:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 995B8C340E8;
+ Fri,  4 Feb 2022 03:19:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1643936745;
- bh=vsR1skta8BdBDj6kL6AEC79zRqPrW/y6o1L/lWlh4uI=;
- h=From:To:Cc:Subject:Date:From;
- b=PgVcBuMScdTKhISUU6GAxm4lb6Qe6RhZZhRePTVsqb0uk9ZwJMsWgXuxtXis/Gzj4
- ocCl9h3UYg8ynbwbxbXcJgvnpR6oDrKOZBu8nsPLI9AF2fdRru1V5GkTHD1t3V+NHB
- DcJ6+hW/oeKNbq0OVaqnf9xjBo346IcUh9mYo1dNFUrD/QKQaLGE5hRJWZkWiyqWAm
- 9qr5Zw4cdX+N+AbWewuIiT6sisfx/5efA3jB/cgCJfU0HeMwtJpW3YO7yxp6ZNfS8j
- m+RRIgytOzZPKglxwpUjUfCwGjBRUqY58qco1D9k7iA5XuyFW/XfzK/XLQH++d2iJ7
- 1zh8ree/bSITw==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Fri,  4 Feb 2022 09:05:39 +0800
-Message-Id: <20220204010539.42672-1-chao@kernel.org>
-X-Mailer: git-send-email 2.32.0
+ s=k20201202; t=1643944791;
+ bh=ZlIGcuypCyxj9pYmnJrdabP+w4iW8DzvlECu6ZAvYc8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=jqOpNuHa9UFJfOYzzBlS61vK2kMADyjb2qAnQDZe1p/KPv107AkasJinDP95LZRqJ
+ 3QFZ4j4mt0Qvwz4myjzGUzda423myiIxvh/Yjs4BqqmTKlXVQ+8/8Z8R+XasKbz+OO
+ RgvqvtaV6Sc+ONZXke77i4xFw3aQDBybj0waXbtZnVLkVihPoCHyFNPxPxRqQk+2t1
+ EVPKG2efvy3ic16o/hHQoJ5ZkyuH3o/Inj4aMBHBqcT59fR+iAlmKX896iygRpIuCl
+ VCagGdRAgnQ92V1Tz/kwAqYJJuYJmtkgLAytkST5Zp/RGHL6N0WfEqYfsqZ+jneAc4
+ wOxmExkLfeQcQ==
+Message-ID: <9faddf59-0c09-aa20-981a-65b06c4517ae@kernel.org>
+Date: Fri, 4 Feb 2022 11:19:47 +0800
 MIME-Version: 1.0
-X-Spam-Score: -5.3 (-----)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20220203144705.23528-1-chao@kernel.org>
+ <Yfw1FnkiO+U+zGS0@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <Yfw1FnkiO+U+zGS0@google.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Once IPU policy is enabled in some cases: a) f2fs forces to
- use F2FS_IPU_FORCE in a small-sized volume b) user configures IPU policy
- via sysfs Then we may fail to defragment file via ioctl due to IPU policy
- check, it doesn't make sense, let's introduce a new IPU policy to allow OPU
- during file defragmentation, by default use IPU_DEFRAG inste [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  On 2022/2/4 4:03, Jaegeuk Kim wrote: > On 02/03,
+ Chao Yu wrote:
+ >> As Pavel Machek reported in below link [1]: >> >> After commit 77900c45ee5c
+ ("f2fs: fix to do sanity check in is_alive()"), >> node p [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nFn2z-0003KH-Jg
-Subject: [f2fs-dev] [PATCH v2] f2fs: introduce F2FS_IPU_DEFRAG to allow file
- defragment in IPU mode
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nFp8m-00GDBy-3T
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to unlock page correctly in error
+ path of is_alive()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,238 +106,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: Pavel Machek <pavel@denx.de>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Once IPU policy is enabled in some cases:
-a) f2fs forces to use F2FS_IPU_FORCE in a small-sized volume
-b) user configures IPU policy via sysfs
+On 2022/2/4 4:03, Jaegeuk Kim wrote:
+> On 02/03, Chao Yu wrote:
+>> As Pavel Machek reported in below link [1]:
+>>
+>> After commit 77900c45ee5c ("f2fs: fix to do sanity check in is_alive()"),
+>> node page should be unlock via calling f2fs_put_page() in the error path
+>> of is_alive(), otherwise, f2fs may hang when it tries to lock the node
+>> page, fix it.
+>>
+>> [1] https://lore.kernel.org/stable/20220124203637.GA19321@duo.ucw.cz/
+> 
+> Need -stable? It seems 4.19+?
 
-Then we may fail to defragment file via ioctl due to IPU policy check,
-it doesn't make sense, let's introduce a new IPU policy to allow OPU
-during file defragmentation, by default use IPU_DEFRAG instead of
-IPU_FORCE in small-sized volume for android device.
+It depends on where commit 77900c45ee5c ("f2fs: fix to do sanity check in is_alive()")
+be backported to? Anyway, let me Cc stable-kernel mailing list.
 
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v2:
-- handle F2FS_IPU_DEFRAG before F2FS_IPU_FORCE in check_inplace_update_policy().
- Documentation/ABI/testing/sysfs-fs-f2fs |  3 ++-
- fs/f2fs/data.c                          | 18 +++++++++++++-----
- fs/f2fs/f2fs.h                          |  3 ++-
- fs/f2fs/file.c                          | 18 +++++++++++-------
- fs/f2fs/segment.h                       |  8 ++++----
- fs/f2fs/super.c                         |  2 +-
- 6 files changed, 33 insertions(+), 19 deletions(-)
+Thanks,
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index ce8103f522cb..d8abb674ee86 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -55,8 +55,9 @@ Description:	Controls the in-place-update policy.
- 		0x04  F2FS_IPU_UTIL
- 		0x08  F2FS_IPU_SSR_UTIL
- 		0x10  F2FS_IPU_FSYNC
--		0x20  F2FS_IPU_ASYNC,
-+		0x20  F2FS_IPU_ASYNC
- 		0x40  F2FS_IPU_NOCACHE
-+		0x80  F2FS_IPU_DEFRAG
- 		====  =================
- 
- 		Refer segment.h for details.
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index b3c152de4bba..3c0f001e3fe1 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2460,6 +2460,9 @@ static inline bool check_inplace_update_policy(struct inode *inode,
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	unsigned int policy = SM_I(sbi)->ipu_policy;
- 
-+	if (policy & (0x1 << F2FS_IPU_DEFRAG) &&
-+			is_inode_flag_set(inode, FI_DEFRAG_PROCESS))
-+		return false;
- 	if (policy & (0x1 << F2FS_IPU_FORCE))
- 		return true;
- 	if (policy & (0x1 << F2FS_IPU_SSR) && f2fs_need_SSR(sbi))
-@@ -2530,6 +2533,9 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
- 	if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
- 		return true;
- 
-+	if (is_inode_flag_set(inode, FI_DEFRAG_PROCESS))
-+		return true;
-+
- 	if (fio) {
- 		if (page_private_gcing(fio->page))
- 			return true;
-@@ -3154,8 +3160,8 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
- 			f2fs_available_free_memory(sbi, DIRTY_DENTS))
- 		goto skip_write;
- 
--	/* skip writing during file defragment */
--	if (is_inode_flag_set(inode, FI_DO_DEFRAG))
-+	/* skip writing in file defragment preparing stage */
-+	if (is_inode_flag_set(inode, FI_DEFRAG_PREPARE))
- 		goto skip_write;
- 
- 	trace_f2fs_writepages(mapping->host, wbc, DATA);
-@@ -3729,6 +3735,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
- 	filemap_invalidate_lock(inode->i_mapping);
- 
- 	set_inode_flag(inode, FI_ALIGNED_WRITE);
-+	set_inode_flag(inode, FI_DEFRAG_PROCESS);
- 
- 	for (; secidx < end_sec; secidx++) {
- 		f2fs_down_write(&sbi->pin_sem);
-@@ -3737,7 +3744,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
- 		f2fs_allocate_new_section(sbi, CURSEG_COLD_DATA_PINNED, false);
- 		f2fs_unlock_op(sbi);
- 
--		set_inode_flag(inode, FI_DO_DEFRAG);
-+		set_inode_flag(inode, FI_DEFRAG_PREPARE);
- 
- 		for (blkofs = 0; blkofs < blk_per_sec; blkofs++) {
- 			struct page *page;
-@@ -3754,7 +3761,7 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
- 			f2fs_put_page(page, 1);
- 		}
- 
--		clear_inode_flag(inode, FI_DO_DEFRAG);
-+		clear_inode_flag(inode, FI_DEFRAG_PREPARE);
- 
- 		ret = filemap_fdatawrite(inode->i_mapping);
- 
-@@ -3765,7 +3772,8 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
- 	}
- 
- done:
--	clear_inode_flag(inode, FI_DO_DEFRAG);
-+	clear_inode_flag(inode, FI_DEFRAG_PREPARE);
-+	clear_inode_flag(inode, FI_DEFRAG_PROCESS);
- 	clear_inode_flag(inode, FI_ALIGNED_WRITE);
- 
- 	filemap_invalidate_unlock(inode->i_mapping);
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 6ddb98ff0b7c..5af415208488 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -737,7 +737,8 @@ enum {
- 	FI_DROP_CACHE,		/* drop dirty page cache */
- 	FI_DATA_EXIST,		/* indicate data exists */
- 	FI_INLINE_DOTS,		/* indicate inline dot dentries */
--	FI_DO_DEFRAG,		/* indicate defragment is running */
-+	FI_DEFRAG_PREPARE,	/* indicate defragment is preparing */
-+	FI_DEFRAG_PROCESS,	/* indicate defragment is processing */
- 	FI_DIRTY_FILE,		/* indicate regular/symlink has dirty pages */
- 	FI_PREALLOCATED_ALL,	/* all blocks for write were preallocated */
- 	FI_HOT_DATA,		/* indicate file is hot */
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 6ccdd6e347e2..3a573125002b 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2559,10 +2559,6 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
- 	bool fragmented = false;
- 	int err;
- 
--	/* if in-place-update policy is enabled, don't waste time here */
--	if (f2fs_should_update_inplace(inode, NULL))
--		return -EINVAL;
--
- 	pg_start = range->start >> PAGE_SHIFT;
- 	pg_end = (range->start + range->len) >> PAGE_SHIFT;
- 
-@@ -2570,6 +2566,13 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
- 
- 	inode_lock(inode);
- 
-+	/* if in-place-update policy is enabled, don't waste time here */
-+	set_inode_flag(inode, FI_DEFRAG_PROCESS);
-+	if (f2fs_should_update_inplace(inode, NULL)) {
-+		err = -EINVAL;
-+		goto out;
-+	}
-+
- 	/* writeback all dirty pages in the range */
- 	err = filemap_write_and_wait_range(inode->i_mapping, range->start,
- 						range->start + range->len - 1);
-@@ -2651,7 +2654,7 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
- 			goto check;
- 		}
- 
--		set_inode_flag(inode, FI_DO_DEFRAG);
-+		set_inode_flag(inode, FI_DEFRAG_PREPARE);
- 
- 		idx = map.m_lblk;
- 		while (idx < map.m_lblk + map.m_len && cnt < blk_per_seg) {
-@@ -2676,15 +2679,16 @@ static int f2fs_defragment_range(struct f2fs_sb_info *sbi,
- 		if (map.m_lblk < pg_end && cnt < blk_per_seg)
- 			goto do_map;
- 
--		clear_inode_flag(inode, FI_DO_DEFRAG);
-+		clear_inode_flag(inode, FI_DEFRAG_PREPARE);
- 
- 		err = filemap_fdatawrite(inode->i_mapping);
- 		if (err)
- 			goto out;
- 	}
- clear_out:
--	clear_inode_flag(inode, FI_DO_DEFRAG);
-+	clear_inode_flag(inode, FI_DEFRAG_PREPARE);
- out:
-+	clear_inode_flag(inode, FI_DEFRAG_PROCESS);
- 	inode_unlock(inode);
- 	if (!err)
- 		range->len = (u64)total << PAGE_SHIFT;
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 0291cd55cf09..a9373861ab1c 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -651,7 +651,8 @@ static inline int utilization(struct f2fs_sb_info *sbi)
-  *                     pages over min_fsync_blocks. (=default option)
-  * F2FS_IPU_ASYNC - do IPU given by asynchronous write requests.
-  * F2FS_IPU_NOCACHE - disable IPU bio cache.
-- * F2FS_IPUT_DISABLE - disable IPU. (=default option in LFS mode)
-+ * F2FS_IPU_DEFRAG - allow OPU during file defragmentation.
-+ * F2FS_IPU_DISABLE - disable IPU. (=default option in LFS mode)
-  */
- #define DEF_MIN_IPU_UTIL	70
- #define DEF_MIN_FSYNC_BLOCKS	8
-@@ -667,6 +668,7 @@ enum {
- 	F2FS_IPU_FSYNC,
- 	F2FS_IPU_ASYNC,
- 	F2FS_IPU_NOCACHE,
-+	F2FS_IPU_DEFRAG,
- };
- 
- static inline unsigned int curseg_segno(struct f2fs_sb_info *sbi,
-@@ -675,9 +677,7 @@ static inline unsigned int curseg_segno(struct f2fs_sb_info *sbi,
- 	struct curseg_info *curseg = CURSEG_I(sbi, type);
- 	return curseg->segno;
- }
--
--static inline unsigned char curseg_alloc_type(struct f2fs_sb_info *sbi,
--		int type)
-+static inline unsigned char curseg_alloc_type(struct f2fs_sb_info *sbi, int type)
- {
- 	struct curseg_info *curseg = CURSEG_I(sbi, type);
- 	return curseg->alloc_type;
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 9af6c20532ec..cc0429279b4c 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3957,7 +3957,7 @@ static void f2fs_tuning_parameters(struct f2fs_sb_info *sbi)
- 		F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_REUSE;
- 		if (f2fs_block_unit_discard(sbi))
- 			sm_i->dcc_info->discard_granularity = 1;
--		sm_i->ipu_policy = 1 << F2FS_IPU_FORCE;
-+		sm_i->ipu_policy = 1 << F2FS_IPU_DEFRAG;
- 	}
- 
- 	sbi->readdir_ra = 1;
--- 
-2.32.0
-
+> 
+>>
+>> Fixes: 77900c45ee5c ("f2fs: fix to do sanity check in is_alive()")
+>> Reported-by: Pavel Machek <pavel@denx.de>
+>> Signed-off-by: Pavel Machek <pavel@denx.de>
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>>   fs/f2fs/gc.c | 4 +++-
+>>   1 file changed, 3 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>> index 0a6b0a8ae97e..2d53ef121e76 100644
+>> --- a/fs/f2fs/gc.c
+>> +++ b/fs/f2fs/gc.c
+>> @@ -1038,8 +1038,10 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+>>   		set_sbi_flag(sbi, SBI_NEED_FSCK);
+>>   	}
+>>   
+>> -	if (f2fs_check_nid_range(sbi, dni->ino))
+>> +	if (f2fs_check_nid_range(sbi, dni->ino)) {
+>> +		f2fs_put_page(node_page, 1);
+>>   		return false;
+>> +	}
+>>   
+>>   	*nofs = ofs_of_node(node_page);
+>>   	source_blkaddr = data_blkaddr(NULL, node_page, ofs_in_node);
+>> -- 
+>> 2.32.0
 
 
 _______________________________________________
