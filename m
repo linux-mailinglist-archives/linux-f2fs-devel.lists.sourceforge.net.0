@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62D584B0555
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Feb 2022 06:40:46 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED4E64B0562
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Feb 2022 06:41:15 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nI2CD-0006mY-ED; Thu, 10 Feb 2022 05:40:44 +0000
+	id 1nI2Ch-0004VI-Mq; Thu, 10 Feb 2022 05:41:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <neilb@suse.de>) id 1nI2CC-0006mR-Dy
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Feb 2022 05:40:43 +0000
+ (envelope-from <neilb@suse.de>) id 1nI2Cg-0004V8-LD
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Feb 2022 05:41:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :References:In-Reply-To:Message-ID:Date:Cc:To:From:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9k0SsVBi5QRjY2tRpgnqChbWnvQSjoZJhdb/WspgxzU=; b=EH2hnnDDGpD1gIhMbrTnPuIhCP
- Wq3poEx1KlALsiMFTtM8MtTEgAcuZRFU9cAj26vrO1l/z+Bu3tczHdvpqqY8YfzH1xE+j3bA4p1eh
- 1PAcVS8fP8VV7z4Tuz8VRyiQ4tKID/vLh4PxRG+MEa2GSNqvIJl+jgrOCoyipNaoo4YI=;
+ bh=8atKcTs1vGzRKsFuuo0s3H5/aq5rfpEmJOal8XngzxM=; b=ksDD33cBK3Wk/GPqWmx/59d3Qu
+ yi8sLbvOM/1t25VOWF+pmv40prTInFUMqPy0hqwn5OtHWnClRGvLi2F+faypjAsSz0uHLEP1jVgs6
+ SLjag8soBVVkxNhp6tL4IV8ZUa8EpmJSLULF1iZ56LgXFQkSsD+5gfC7d+vWCCqLwrjo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
@@ -29,47 +29,47 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9k0SsVBi5QRjY2tRpgnqChbWnvQSjoZJhdb/WspgxzU=; b=MnkC1LopFPQL18pm30IkNET2CB
- N8x9WhTgFhRqixBx+KBh8q7Xdx7b3yEoTWcSr/ITo4dG7uXXz8zDCNbnTaavqW/zWGGMJnU7xgXQl
- xL6ZtGjHFQaXGItIfN701UVDeByhYPw89Tbp6i47QHVkpuRQZsE7mhVv1zchv0yXEDoI=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=8atKcTs1vGzRKsFuuo0s3H5/aq5rfpEmJOal8XngzxM=; b=cS5m3Rq0z+Yh0tJXh+59rCaLPg
+ FQ0hsWUGmsFagvhFXxNiEXTn/wB4uxJ5ewN5CCvm43E8A2whIk6dhfSvoivxBDpKJDyHRJUjYnnuk
+ d4IMXVjlIGUAj+/APqM06W0H7RashGOtZcbECKIvQkdIvUAQJLw5Kt6Le5PKEmBu3rbc=;
+Received: from smtp-out2.suse.de ([195.135.220.29])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nI2C9-000709-W7
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Feb 2022 05:40:42 +0000
+ id 1nI2Ce-00Ce76-E5
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Feb 2022 05:41:13 +0000
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id C1113212BF;
- Thu, 10 Feb 2022 05:40:35 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 3B3211F43F;
+ Thu, 10 Feb 2022 05:41:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1644471635; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1644471666; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=9k0SsVBi5QRjY2tRpgnqChbWnvQSjoZJhdb/WspgxzU=;
- b=Yu5T3oQ4VuYeLO9DPDs3jfXJrNxmMUgbzopf1cNVoy3SV7kPKKVJWSr5QVuBsfWjZhsT/F
- 7lHBV1zj4w7ZmfH8+e9OoOGdViZaRInHUF6FSc0EKkh5db0hq6lSHAuSlsXsUXxPhAYRkf
- kIG4OSusUrrjzgs0aDcYoit2ZLXdEKM=
+ bh=8atKcTs1vGzRKsFuuo0s3H5/aq5rfpEmJOal8XngzxM=;
+ b=Pq3xluwCjmCg7EaeJoHMO86/e3dv2bBBRDxL1lFlfhOgh/3WF5fP8AFj7wAlyXgxoAtgMl
+ N3+kVgBg172TD9RUqVOpd9yk2tTwTJYhBO8hlBuDzSkhgF2eE8G10va5yJGLlMVWMYDGqN
+ xaeOuMjQy6htR+r4VtPHph4GmWGlQEI=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1644471635;
+ s=susede2_ed25519; t=1644471666;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=9k0SsVBi5QRjY2tRpgnqChbWnvQSjoZJhdb/WspgxzU=;
- b=Qk19JobDq9MGvjgEG7PbHnu5HR5EccBPnGjg4FLkcetMuh1Upe9CJLl3kCkfWzUSVStBym
- r71qPfjj0bj9e2DQ==
+ bh=8atKcTs1vGzRKsFuuo0s3H5/aq5rfpEmJOal8XngzxM=;
+ b=OOFNgHC24Y2xSbGzdBsWDk4om+9T3lWm/31sMpgU82LCEPPDyjRRjWMj2yoIIvnqIOGfzP
+ iWiddXb6a4ir2ACA==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3F8CF13519;
- Thu, 10 Feb 2022 05:40:27 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B195D13519;
+ Thu, 10 Feb 2022 05:40:57 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id GpIwO0ulBGJ8OQAAMHmgww
- (envelope-from <neilb@suse.de>); Thu, 10 Feb 2022 05:40:27 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id HGvqGmmlBGKbOQAAMHmgww
+ (envelope-from <neilb@suse.de>); Thu, 10 Feb 2022 05:40:57 +0000
 From: NeilBrown <neilb@suse.de>
 To: Andrew Morton <akpm@linux-foundation.org>, Jan Kara <jack@suse.cz>,
  Wu Fengguang <fengguang.wu@intel.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
@@ -83,39 +83,39 @@ To: Andrew Morton <akpm@linux-foundation.org>, Jan Kara <jack@suse.cz>,
  Lars Ellenberg <lars.ellenberg@linbit.com>,
  Paolo Valente <paolo.valente@linaro.org>, Jens Axboe <axboe@kernel.dk>
 Date: Thu, 10 Feb 2022 16:37:52 +1100
-Message-ID: <164447147261.23354.14022902241501698367.stgit@noble.brown>
+Message-ID: <164447147262.23354.13106570458589592051.stgit@noble.brown>
 In-Reply-To: <164447124918.23354.17858831070003318849.stgit@noble.brown>
 References: <164447124918.23354.17858831070003318849.stgit@noble.brown>
 User-Agent: StGit/0.23
 MIME-Version: 1.0
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: inode_congested() reports if the backing-device for the inode
- is congested. No bdi reports congestion any more, so this always returns
- 'false'. So remove inode_congested() and related functions, and remove the
- call sites, assuming that inode_congested() always returns 'false'. 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview: These functions are no longer useful as no BDIs report
+ congestions
+ any more. Removing the test on bdi_write_contested() in current_may_throttle()
+ could cause a small change in behaviour, but only when PF_LOCAL_THROTTLE
+ is set. Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [195.135.220.28 listed in list.dnswl.org]
+ low trust [195.135.220.29 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nI2C9-000709-W7
-Subject: [f2fs-dev] [PATCH 07/11] Remove inode_congested()
+X-Headers-End: 1nI2Ce-00Ce76-E5
+Subject: [f2fs-dev] [PATCH 08/11] Remove bdi_congested() and wb_congested()
+ and related functions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -136,187 +136,178 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-inode_congested() reports if the backing-device for the inode is
-congested.  No bdi reports congestion any more, so this always
-returns 'false'.
+These functions are no longer useful as no BDIs report congestions any
+more.
 
-So remove inode_congested() and related functions, and remove the call
-sites, assuming that inode_congested() always returns 'false'.
+Removing the test on bdi_write_contested() in current_may_throttle()
+could cause a small change in behaviour, but only when PF_LOCAL_THROTTLE
+is set.
 
+So replace the calls by 'false' and simplify the code - and remove the
+functions.
+
+Acked-by: Ryusuke Konishi <konishi.ryusuke@gmail.com> (for nilfs bits)
 Signed-off-by: NeilBrown <neilb@suse.de>
 ---
- fs/fs-writeback.c           |   37 -------------------------------------
- include/linux/backing-dev.h |   22 ----------------------
- mm/fadvise.c                |    5 ++---
- mm/readahead.c              |    6 ------
- mm/vmscan.c                 |   17 +----------------
- 5 files changed, 3 insertions(+), 84 deletions(-)
+ drivers/block/drbd/drbd_int.h |    3 ---
+ drivers/block/drbd/drbd_req.c |    3 +--
+ fs/ext2/ialloc.c              |    5 -----
+ fs/nilfs2/segbuf.c            |   15 ---------------
+ fs/xfs/xfs_buf.c              |    3 ---
+ include/linux/backing-dev.h   |   26 --------------------------
+ mm/vmscan.c                   |    4 +---
+ 7 files changed, 2 insertions(+), 57 deletions(-)
 
-diff --git a/fs/fs-writeback.c b/fs/fs-writeback.c
-index f8d7fe6db989..42a3dfad40b8 100644
---- a/fs/fs-writeback.c
-+++ b/fs/fs-writeback.c
-@@ -893,43 +893,6 @@ void wbc_account_cgroup_owner(struct writeback_control *wbc, struct page *page,
- }
- EXPORT_SYMBOL_GPL(wbc_account_cgroup_owner);
+diff --git a/drivers/block/drbd/drbd_int.h b/drivers/block/drbd/drbd_int.h
+index f27d5b0f9a0b..f804b1bfb3e6 100644
+--- a/drivers/block/drbd/drbd_int.h
++++ b/drivers/block/drbd/drbd_int.h
+@@ -638,9 +638,6 @@ enum {
+ 	STATE_SENT,		/* Do not change state/UUIDs while this is set */
+ 	CALLBACK_PENDING,	/* Whether we have a call_usermodehelper(, UMH_WAIT_PROC)
+ 				 * pending, from drbd worker context.
+-				 * If set, bdi_write_congested() returns true,
+-				 * so shrink_page_list() would not recurse into,
+-				 * and potentially deadlock on, this drbd worker.
+ 				 */
+ 	DISCONNECT_SENT,
  
--/**
-- * inode_congested - test whether an inode is congested
-- * @inode: inode to test for congestion (may be NULL)
-- * @cong_bits: mask of WB_[a]sync_congested bits to test
-- *
-- * Tests whether @inode is congested.  @cong_bits is the mask of congestion
-- * bits to test and the return value is the mask of set bits.
-- *
-- * If cgroup writeback is enabled for @inode, the congestion state is
-- * determined by whether the cgwb (cgroup bdi_writeback) for the blkcg
-- * associated with @inode is congested; otherwise, the root wb's congestion
-- * state is used.
-- *
-- * @inode is allowed to be NULL as this function is often called on
-- * mapping->host which is NULL for the swapper space.
-- */
--int inode_congested(struct inode *inode, int cong_bits)
--{
--	/*
--	 * Once set, ->i_wb never becomes NULL while the inode is alive.
--	 * Start transaction iff ->i_wb is visible.
--	 */
--	if (inode && inode_to_wb_is_valid(inode)) {
--		struct bdi_writeback *wb;
--		struct wb_lock_cookie lock_cookie = {};
--		bool congested;
+diff --git a/drivers/block/drbd/drbd_req.c b/drivers/block/drbd/drbd_req.c
+index 3235532ae077..2e5fb7e442e3 100644
+--- a/drivers/block/drbd/drbd_req.c
++++ b/drivers/block/drbd/drbd_req.c
+@@ -909,8 +909,7 @@ static bool remote_due_to_read_balancing(struct drbd_device *device, sector_t se
+ 
+ 	switch (rbm) {
+ 	case RB_CONGESTED_REMOTE:
+-		return bdi_read_congested(
+-			device->ldev->backing_bdev->bd_disk->bdi);
++		return 0;
+ 	case RB_LEAST_PENDING:
+ 		return atomic_read(&device->local_cnt) >
+ 			atomic_read(&device->ap_pending_cnt) + atomic_read(&device->rs_pending_cnt);
+diff --git a/fs/ext2/ialloc.c b/fs/ext2/ialloc.c
+index df14e750e9fe..998dd2ac8008 100644
+--- a/fs/ext2/ialloc.c
++++ b/fs/ext2/ialloc.c
+@@ -170,11 +170,6 @@ static void ext2_preread_inode(struct inode *inode)
+ 	unsigned long offset;
+ 	unsigned long block;
+ 	struct ext2_group_desc * gdp;
+-	struct backing_dev_info *bdi;
 -
--		wb = unlocked_inode_to_wb_begin(inode, &lock_cookie);
--		congested = wb_congested(wb, cong_bits);
--		unlocked_inode_to_wb_end(inode, &lock_cookie);
--		return congested;
+-	bdi = inode_to_bdi(inode);
+-	if (bdi_rw_congested(bdi))
+-		return;
+ 
+ 	block_group = (inode->i_ino - 1) / EXT2_INODES_PER_GROUP(inode->i_sb);
+ 	gdp = ext2_get_group_desc(inode->i_sb, block_group, NULL);
+diff --git a/fs/nilfs2/segbuf.c b/fs/nilfs2/segbuf.c
+index 43287b0d3e9b..c4510f79037f 100644
+--- a/fs/nilfs2/segbuf.c
++++ b/fs/nilfs2/segbuf.c
+@@ -343,17 +343,6 @@ static int nilfs_segbuf_submit_bio(struct nilfs_segment_buffer *segbuf,
+ 	struct bio *bio = wi->bio;
+ 	int err;
+ 
+-	if (segbuf->sb_nbio > 0 &&
+-	    bdi_write_congested(segbuf->sb_super->s_bdi)) {
+-		wait_for_completion(&segbuf->sb_bio_event);
+-		segbuf->sb_nbio--;
+-		if (unlikely(atomic_read(&segbuf->sb_err))) {
+-			bio_put(bio);
+-			err = -EIO;
+-			goto failed;
+-		}
 -	}
 -
--	return wb_congested(&inode_to_bdi(inode)->wb, cong_bits);
--}
--EXPORT_SYMBOL_GPL(inode_congested);
+ 	bio->bi_end_io = nilfs_end_bio_write;
+ 	bio->bi_private = segbuf;
+ 	bio_set_op_attrs(bio, mode, mode_flags);
+@@ -365,10 +354,6 @@ static int nilfs_segbuf_submit_bio(struct nilfs_segment_buffer *segbuf,
+ 	wi->nr_vecs = min(wi->max_pages, wi->rest_blocks);
+ 	wi->start = wi->end;
+ 	return 0;
 -
- /**
-  * wb_split_bdi_pages - split nr_pages to write according to bandwidth
-  * @wb: target bdi_writeback to split @nr_pages to
-diff --git a/include/linux/backing-dev.h b/include/linux/backing-dev.h
-index 483979c1b9f4..860b675c2929 100644
---- a/include/linux/backing-dev.h
-+++ b/include/linux/backing-dev.h
-@@ -162,7 +162,6 @@ struct bdi_writeback *wb_get_create(struct backing_dev_info *bdi,
- 				    gfp_t gfp);
- void wb_memcg_offline(struct mem_cgroup *memcg);
- void wb_blkcg_offline(struct blkcg *blkcg);
--int inode_congested(struct inode *inode, int cong_bits);
- 
- /**
-  * inode_cgwb_enabled - test whether cgroup writeback is enabled on an inode
-@@ -390,29 +389,8 @@ static inline void wb_blkcg_offline(struct blkcg *blkcg)
- {
+- failed:
+-	wi->bio = NULL;
+-	return err;
  }
  
--static inline int inode_congested(struct inode *inode, int cong_bits)
--{
--	return wb_congested(&inode_to_bdi(inode)->wb, cong_bits);
--}
--
- #endif	/* CONFIG_CGROUP_WRITEBACK */
- 
--static inline int inode_read_congested(struct inode *inode)
--{
--	return inode_congested(inode, 1 << WB_sync_congested);
--}
--
--static inline int inode_write_congested(struct inode *inode)
--{
--	return inode_congested(inode, 1 << WB_async_congested);
--}
--
--static inline int inode_rw_congested(struct inode *inode)
--{
--	return inode_congested(inode, (1 << WB_sync_congested) |
--				      (1 << WB_async_congested));
--}
--
- static inline int bdi_congested(struct backing_dev_info *bdi, int cong_bits)
+ /**
+diff --git a/fs/xfs/xfs_buf.c b/fs/xfs/xfs_buf.c
+index b45e0d50a405..b7ebcfe6b8d3 100644
+--- a/fs/xfs/xfs_buf.c
++++ b/fs/xfs/xfs_buf.c
+@@ -843,9 +843,6 @@ xfs_buf_readahead_map(
  {
- 	return wb_congested(&bdi->wb, cong_bits);
-diff --git a/mm/fadvise.c b/mm/fadvise.c
-index d6baa4f451c5..338f16022012 100644
---- a/mm/fadvise.c
-+++ b/mm/fadvise.c
-@@ -109,9 +109,8 @@ int generic_fadvise(struct file *file, loff_t offset, loff_t len, int advice)
- 	case POSIX_FADV_NOREUSE:
- 		break;
- 	case POSIX_FADV_DONTNEED:
--		if (!inode_write_congested(mapping->host))
--			__filemap_fdatawrite_range(mapping, offset, endbyte,
--						   WB_SYNC_NONE);
-+		__filemap_fdatawrite_range(mapping, offset, endbyte,
-+					   WB_SYNC_NONE);
+ 	struct xfs_buf		*bp;
  
- 		/*
- 		 * First and last FULL page! Partial pages are deliberately
-diff --git a/mm/readahead.c b/mm/readahead.c
-index 35a7ebfcb504..31127d5f909f 100644
---- a/mm/readahead.c
-+++ b/mm/readahead.c
-@@ -709,12 +709,6 @@ void page_cache_async_ra(struct readahead_control *ractl,
- 
- 	folio_clear_readahead(folio);
- 
--	/*
--	 * Defer asynchronous read-ahead on IO congestion.
--	 */
--	if (inode_read_congested(ractl->mapping->host))
+-	if (bdi_read_congested(target->bt_bdev->bd_disk->bdi))
 -		return;
 -
- 	if (blk_cgroup_congested())
- 		return;
+ 	xfs_buf_read_map(target, map, nmaps,
+ 		     XBF_TRYLOCK | XBF_ASYNC | XBF_READ_AHEAD, &bp, ops,
+ 		     __this_address);
+diff --git a/include/linux/backing-dev.h b/include/linux/backing-dev.h
+index 860b675c2929..2d764566280c 100644
+--- a/include/linux/backing-dev.h
++++ b/include/linux/backing-dev.h
+@@ -135,11 +135,6 @@ static inline bool writeback_in_progress(struct bdi_writeback *wb)
  
-diff --git a/mm/vmscan.c b/mm/vmscan.c
-index 090bfb605ecf..ce8492939bd3 100644
---- a/mm/vmscan.c
-+++ b/mm/vmscan.c
-@@ -989,17 +989,6 @@ static inline int is_page_cache_freeable(struct page *page)
- 	return page_count(page) - page_has_private(page) == 1 + page_cache_pins;
- }
+ struct backing_dev_info *inode_to_bdi(struct inode *inode);
  
--static int may_write_to_inode(struct inode *inode)
+-static inline int wb_congested(struct bdi_writeback *wb, int cong_bits)
 -{
--	if (current->flags & PF_SWAPWRITE)
--		return 1;
--	if (!inode_write_congested(inode))
--		return 1;
--	if (inode_to_bdi(inode) == current->backing_dev_info)
--		return 1;
--	return 0;
+-	return wb->congested & cong_bits;
 -}
 -
+ long congestion_wait(int sync, long timeout);
+ 
+ static inline bool mapping_can_writeback(struct address_space *mapping)
+@@ -391,27 +386,6 @@ static inline void wb_blkcg_offline(struct blkcg *blkcg)
+ 
+ #endif	/* CONFIG_CGROUP_WRITEBACK */
+ 
+-static inline int bdi_congested(struct backing_dev_info *bdi, int cong_bits)
+-{
+-	return wb_congested(&bdi->wb, cong_bits);
+-}
+-
+-static inline int bdi_read_congested(struct backing_dev_info *bdi)
+-{
+-	return bdi_congested(bdi, 1 << WB_sync_congested);
+-}
+-
+-static inline int bdi_write_congested(struct backing_dev_info *bdi)
+-{
+-	return bdi_congested(bdi, 1 << WB_async_congested);
+-}
+-
+-static inline int bdi_rw_congested(struct backing_dev_info *bdi)
+-{
+-	return bdi_congested(bdi, (1 << WB_sync_congested) |
+-				  (1 << WB_async_congested));
+-}
+-
+ const char *bdi_dev_name(struct backing_dev_info *bdi);
+ 
+ #endif	/* _LINUX_BACKING_DEV_H */
+diff --git a/mm/vmscan.c b/mm/vmscan.c
+index ce8492939bd3..0b930556c4f2 100644
+--- a/mm/vmscan.c
++++ b/mm/vmscan.c
+@@ -2362,9 +2362,7 @@ static unsigned int move_pages_to_lru(struct lruvec *lruvec,
+  */
+ static int current_may_throttle(void)
+ {
+-	return !(current->flags & PF_LOCAL_THROTTLE) ||
+-		current->backing_dev_info == NULL ||
+-		bdi_write_congested(current->backing_dev_info);
++	return !(current->flags & PF_LOCAL_THROTTLE);
+ }
+ 
  /*
-  * We detected a synchronous write error writing a page out.  Probably
-  * -ENOSPC.  We need to propagate that into the address_space for a subsequent
-@@ -1199,8 +1188,6 @@ static pageout_t pageout(struct page *page, struct address_space *mapping)
- 	}
- 	if (mapping->a_ops->writepage == NULL)
- 		return PAGE_ACTIVATE;
--	if (!may_write_to_inode(mapping->host))
--		return PAGE_KEEP;
- 
- 	if (clear_page_dirty_for_io(page)) {
- 		int res;
-@@ -1576,9 +1563,7 @@ static unsigned int shrink_page_list(struct list_head *page_list,
- 		 * end of the LRU a second time.
- 		 */
- 		mapping = page_mapping(page);
--		if (((dirty || writeback) && mapping &&
--		     inode_write_congested(mapping->host)) ||
--		    (writeback && PageReclaim(page)))
-+		if (writeback && PageReclaim(page))
- 			stat->nr_congested++;
- 
- 		/*
 
 
 
