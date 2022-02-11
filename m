@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B7C64B1E57
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Feb 2022 07:13:49 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4AFC4B1E53
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Feb 2022 07:13:48 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nIPBl-0004F7-0P; Fri, 11 Feb 2022 06:13:47 +0000
+	id 1nIPBk-0005HY-5l; Fri, 11 Feb 2022 06:13:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ebiggers@kernel.org>) id 1nIPBi-0004Ej-Lp
+ (envelope-from <ebiggers@kernel.org>) id 1nIPBi-0005HC-J7
  for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Feb 2022 06:13:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kwuxkdpKC0ilTYoxcUtzE+TNA2cGwUWB9AQHXLF2NpU=; b=WUKhxbXYBuUrRkeDh1iBreVxDw
- a3wl7/PA4/Sm/5CMPpYf25/zYswGpxj6oTjBecOubh2o0L11ZWwXZhV53+OAbbaTTiHFYSFDnTI/Y
- 4LYDBbxxm4npK/MEgblquaMvfbeY+507m6ODrETzBS13KzXY6VWBHkvihMS76+mjBChg=;
+ bh=gXqC7l9rLDFscewAsIXWvttxHgxsPGFU/FwFqZvI8S4=; b=eE9yzhRNJ6NDLDbie3O9b45Ze2
+ HmOVg6OWE0ISXhzgNhT8gmRKChWq0hI6nqurUB/20Ikok6ouwsWe854mxQjA55XSfLEcmd0qWmETH
+ zs+LlvPk3zrez+WyMQLwrzNIKD8EEeR1c5bZe9HeghCz9U2KouJm3RrYdK52vr+Hoc7E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kwuxkdpKC0ilTYoxcUtzE+TNA2cGwUWB9AQHXLF2NpU=; b=EywAnZz1ssONbiW/3r9IkfWErM
- DabdIe8jplOfq0sIcqHmE7NDc0gh09G0qG6QNkBlSjqpzX2nBtb+yTLhBghF2GzaNY0ONuPYBipXm
- QxQC+iD4uDdZ2DWyTCRftdMUfFJXvIUYxI3tJza8wR9KA9MKQJxJ6dIfFTN0tI09hbTY=;
+ bh=gXqC7l9rLDFscewAsIXWvttxHgxsPGFU/FwFqZvI8S4=; b=UZfBwk/5zxhWQ/ciqo3Pj7nsKj
+ +L5uExxK5ZAsBPHe85VsF1pxV7LeR/DmmGVySd6SL1ZXLoDIuU6P32VMYUDoYZGiClv+TnssGUETG
+ NVQIRA4cfbXvjAjT9ouGMkSgPZ3y+iJsoWv4WTpE/2AYm5VVyzWqtjET8NQvDXPC+o8s=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nIPBb-00Eztp-Ou
+ id 1nIPBa-0004iA-Ba
  for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Feb 2022 06:13:45 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C0D51619FD
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2D0F1619F3
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 11 Feb 2022 06:13:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F763C340E9;
  Fri, 11 Feb 2022 06:13:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 035D5C340F1;
- Fri, 11 Feb 2022 06:13:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1644560008;
- bh=e2n9PMnl+tHXKcMfwdI+IPZ+Q3hO4MQSixEt+QYdtnU=;
+ bh=jpGDy6Iy7Lo9fogGzTmc2GQJ7sIvAivYezF205RJ4lY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ldm3XEmVY5j7V25uEM6cIxxwVNRTaKcISjqfOCIoTxIfypLjRhU37cnBu21a+/O9M
- bb0Odckf1V0ktsUzwci9p/UAaKu/ZelpUr6gFrUa9t135jQ6WdDbj43zkja3p331nS
- DzUhYxyjWwPv17bJm9DqS1FfqRW+/zhiEO+7CN96u6iMXO+UTa1gkKOR16QaS1fNtN
- KiZFn4WqTfQcmn694/eegOmyohro/cDGftKiobuDFF6AbNrzBGMCHI5NnZdskuxlaW
- S5GH0ZNIkeXUCkKGOoQYcSPWn3ScVR3RVv/Jdrf3uALy6rr4aTt/DPUO3z/50q65Vf
- qZb1n19gbDuMQ==
+ b=C5oljZ81biLnBS5BIZSFLCaQNbO8BT9flCghj93ZNPYevL2x97V9cL70f+0OTjZB7
+ YaDQg0DWg6jqiDXl1xm3/0SccUH/08SSwJPra1x34o4LMY4jbEoJWsemamfzGtJJtc
+ tIOWVjkWq7tfX9djN2zl686fTjTGvfsiq62KC6AxEpmFTskaZ4Zap5qAvBLHmvB8YU
+ n1aSA8NrdBc0Dc8jWEpVtlOnkFJlCDiyZdxoPp9bzsAWIZ2JKGokceWj72XsMImzTd
+ bmoEMCO52S7A8djx05UFxNFaKLHEEt/Q4KUITmwr97YiVaIW3ibM+rANlmQqXfWiU4
+ xpVwFf2mNlHdg==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Thu, 10 Feb 2022 22:11:55 -0800
-Message-Id: <20220211061158.227688-5-ebiggers@kernel.org>
+Date: Thu, 10 Feb 2022 22:11:56 -0800
+Message-Id: <20220211061158.227688-6-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220211061158.227688-1-ebiggers@kernel.org>
 References: <20220211061158.227688-1-ebiggers@kernel.org>
@@ -70,14 +70,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com>
- f2fs_force_buffered_io()
- is only used in file.c, so move it into there. No behavior change. This makes
- it easier to review later patches. Signed-off-by: Eric Biggers
- <ebiggers@google.com>
- --- fs/f2fs/f2fs.h | 45 fs/f2fs/file.c | 45
- +++++++++++++++++++++++++++++++++++++++++++++
- 2 files change [...] 
+ Content preview:  From: Eric Biggers <ebiggers@google.com> Currently, if an
+ f2fs filesystem is mounted with the mode=lfs and io_bits mount options, DIO
+ reads are allowed but DIO writes are not. Allowing DIO reads but not DIO
+ writes is an unusual restriction, [...] 
  Content analysis details:   (-3.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +90,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nIPBb-00Eztp-Ou
-Subject: [f2fs-dev] [RFC PATCH 4/7] f2fs: move f2fs_force_buffered_io() into
- file.c
+X-Headers-End: 1nIPBa-0004iA-Ba
+Subject: [f2fs-dev] [RFC PATCH 5/7] f2fs: don't allow DIO reads but not DIO
+ writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,134 +113,39 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-f2fs_force_buffered_io() is only used in file.c, so move it into there.
-No behavior change.  This makes it easier to review later patches.
+Currently, if an f2fs filesystem is mounted with the mode=lfs and
+io_bits mount options, DIO reads are allowed but DIO writes are not.
+Allowing DIO reads but not DIO writes is an unusual restriction, which
+is likely to be surprising to applications, namely any application that
+both reads and writes from a file (using O_DIRECT).  Given this, let's
+drop the support for DIO reads in this configuration.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/f2fs/f2fs.h | 45 ---------------------------------------------
- fs/f2fs/file.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 45 insertions(+), 45 deletions(-)
+ fs/f2fs/file.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 1739a0eec6432..9400efc4ef51b 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4344,17 +4344,6 @@ static inline void f2fs_i_compr_blocks_update(struct inode *inode,
- 	f2fs_mark_inode_dirty_sync(inode, true);
- }
- 
--static inline int block_unaligned_IO(struct inode *inode,
--				struct kiocb *iocb, struct iov_iter *iter)
--{
--	unsigned int i_blkbits = READ_ONCE(inode->i_blkbits);
--	unsigned int blocksize_mask = (1 << i_blkbits) - 1;
--	loff_t offset = iocb->ki_pos;
--	unsigned long align = offset | iov_iter_alignment(iter);
--
--	return align & blocksize_mask;
--}
--
- static inline bool f2fs_allow_multi_device_dio(struct f2fs_sb_info *sbi,
- 								int flag)
- {
-@@ -4365,40 +4354,6 @@ static inline bool f2fs_allow_multi_device_dio(struct f2fs_sb_info *sbi,
- 	return sbi->aligned_blksize;
- }
- 
--static inline bool f2fs_force_buffered_io(struct inode *inode,
--				struct kiocb *iocb, struct iov_iter *iter)
--{
--	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
--	int rw = iov_iter_rw(iter);
--
--	if (!fscrypt_dio_supported(inode))
--		return true;
--	if (fsverity_active(inode))
--		return true;
--	if (f2fs_compressed_file(inode))
--		return true;
--
--	/* disallow direct IO if any of devices has unaligned blksize */
--	if (f2fs_is_multi_device(sbi) && !sbi->aligned_blksize)
--		return true;
--	/*
--	 * for blkzoned device, fallback direct IO to buffered IO, so
--	 * all IOs can be serialized by log-structured write.
--	 */
--	if (f2fs_sb_has_blkzoned(sbi))
--		return true;
--	if (f2fs_lfs_mode(sbi) && (rw == WRITE)) {
--		if (block_unaligned_IO(inode, iocb, iter))
--			return true;
--		if (F2FS_IO_ALIGNED(sbi))
--			return true;
--	}
--	if (is_sbi_flag_set(F2FS_I_SB(inode), SBI_CP_DISABLED))
--		return true;
--
--	return false;
--}
--
- static inline bool f2fs_need_verity(const struct inode *inode, pgoff_t idx)
- {
- 	return fsverity_active(inode) &&
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 3c98ef6af97d1..26c51517c2a30 100644
+index 26c51517c2a30..61ff0fc16e160 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -807,6 +807,51 @@ int f2fs_truncate(struct inode *inode)
- 	return 0;
- }
- 
-+static int block_unaligned_IO(struct inode *inode, struct kiocb *iocb,
-+			      struct iov_iter *iter)
-+{
-+	unsigned int i_blkbits = READ_ONCE(inode->i_blkbits);
-+	unsigned int blocksize_mask = (1 << i_blkbits) - 1;
-+	loff_t offset = iocb->ki_pos;
-+	unsigned long align = offset | iov_iter_alignment(iter);
-+
-+	return align & blocksize_mask;
-+}
-+
-+static inline bool f2fs_force_buffered_io(struct inode *inode,
-+				struct kiocb *iocb, struct iov_iter *iter)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	int rw = iov_iter_rw(iter);
-+
-+	if (!fscrypt_dio_supported(inode))
-+		return true;
-+	if (fsverity_active(inode))
-+		return true;
-+	if (f2fs_compressed_file(inode))
-+		return true;
-+
-+	/* disallow direct IO if any of devices has unaligned blksize */
-+	if (f2fs_is_multi_device(sbi) && !sbi->aligned_blksize)
-+		return true;
-+	/*
-+	 * for blkzoned device, fallback direct IO to buffered IO, so
-+	 * all IOs can be serialized by log-structured write.
-+	 */
-+	if (f2fs_sb_has_blkzoned(sbi))
-+		return true;
-+	if (f2fs_lfs_mode(sbi) && (rw == WRITE)) {
-+		if (block_unaligned_IO(inode, iocb, iter))
-+			return true;
-+		if (F2FS_IO_ALIGNED(sbi))
-+			return true;
-+	}
-+	if (is_sbi_flag_set(F2FS_I_SB(inode), SBI_CP_DISABLED))
-+		return true;
-+
-+	return false;
-+}
-+
- int f2fs_getattr(struct user_namespace *mnt_userns, const struct path *path,
- 		 struct kstat *stat, u32 request_mask, unsigned int query_flags)
+@@ -822,7 +822,6 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
+ 				struct kiocb *iocb, struct iov_iter *iter)
  {
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+-	int rw = iov_iter_rw(iter);
+ 
+ 	if (!fscrypt_dio_supported(inode))
+ 		return true;
+@@ -840,7 +839,7 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
+ 	 */
+ 	if (f2fs_sb_has_blkzoned(sbi))
+ 		return true;
+-	if (f2fs_lfs_mode(sbi) && (rw == WRITE)) {
++	if (f2fs_lfs_mode(sbi)) {
+ 		if (block_unaligned_IO(inode, iocb, iter))
+ 			return true;
+ 		if (F2FS_IO_ALIGNED(sbi))
 -- 
 2.35.1
 
