@@ -2,78 +2,176 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77DFD4B2175
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Feb 2022 10:19:56 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7B774B255F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Feb 2022 13:13:30 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nIS5p-0007ju-HD; Fri, 11 Feb 2022 09:19:52 +0000
+	id 1nIUnm-0000Tv-Su; Fri, 11 Feb 2022 12:13:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <yebin10@huawei.com>) id 1nIS5m-0007jl-Vm
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Feb 2022 09:19:49 +0000
+ (envelope-from <chaitanyak@nvidia.com>) id 1nIUnl-0000To-Dw
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Feb 2022 12:13:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
+ Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
+ :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
+ :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=y6yZ50VSR5F9a34W1cj6AQ0mrQA2VxaCWib4yypVids=; b=nBkclW9z5H9ScywyA2t1unnrcV
- L5gQc/COGN1I8nvyxBKRmFX2Xz6pqmEcQwRCRbM2cDKpk6a8dDiD6xoDgmXJlyFvV8q8EQ7qMknn7
- HCOHK1hToYZUVB44Q+J8T91JI/UmKaLpWRPn69yFh9og51AVO7MgLln2Z6DBMBdqi6po=;
+ bh=KhT5YiWLnew0VrPJOfN6l+a/a/WSpiyjWcAkGC3UDEs=; b=a2T/4WDP7kPRlg1UFF+aYUnrKB
+ I1dhmZu3u94QI4+NcZdxCBtREG0Xywvxv/W3zljbh4egpUBI7n+FtdHxxuuaJPAffhubqwFIC34RH
+ 47U9fvlAdrMoaqfkIFIoZ+Go3JKVO20hi7RXwbRVUHoYcNUw3wG1xZbZoKGJFfzegLHs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=y6yZ50VSR5F9a34W1cj6AQ0mrQA2VxaCWib4yypVids=; b=S
- ASWTl/qWaxFkr81nAzK+dH2yDP9/EwMzn8CKK/LZ1lGYyoKxK0WOu/S303mWs+4XIG5pBC1x6MJDV
- Pm80LrXkWDlVlGqd7+On34FbPwwmWsOiDBzFaBGfJukDsZnWBzjIIxl0NWYwvU0iKHbruWPLNEEd8
- nBRLAZPdZgViVe+k=;
-Received: from szxga02-in.huawei.com ([45.249.212.188])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
+ In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=KhT5YiWLnew0VrPJOfN6l+a/a/WSpiyjWcAkGC3UDEs=; b=U/jOl/Xrq6xmYcVsg69wDT9Xfh
+ JBmuG4qlSs19Y2X8QjoLrKPuMFGlkqhe85QHAXCAEF2oqqXUW6ywuTzfE48s//AMaQFSk6f1K8VnU
+ vmTEJ7d8/h9mLPXIKyIExdNpA3kiX3slFROnYm2m6YB775OjKsyQTP/s6fBYYSy8lc24=;
+Received: from mail-bn7nam10on2065.outbound.protection.outlook.com
+ ([40.107.92.65] helo=NAM10-BN7-obe.outbound.protection.outlook.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nIS5g-0001Wt-CL
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Feb 2022 09:19:49 +0000
-Received: from canpemm500010.china.huawei.com (unknown [172.30.72.55])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Jw7Lv6phRz9rwj;
- Fri, 11 Feb 2022 17:17:59 +0800 (CST)
-Received: from huawei.com (10.175.127.227) by canpemm500010.china.huawei.com
- (7.192.105.118) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.21; Fri, 11 Feb
- 2022 17:19:32 +0800
-To: <tytso@mit.edu>, <adilger.kernel@dilger.ca>, <linux-ext4@vger.kernel.org>
-Date: Fri, 11 Feb 2022 17:35:27 +0800
-Message-ID: <20220211093527.3335518-1-yebin10@huawei.com>
-X-Mailer: git-send-email 2.31.1
+ id 1nIUnf-00FMwW-PN
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 11 Feb 2022 12:13:23 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=VUyyDM5z4h7VhXswr4btj6PhG+P5q5Klk973mzRU02h/4Qwbu0zZ5K+Dgz0S/2ZJTxBI+H8n3rzkNpQSAlC/LLTdyMFNny28sTnxdAGDtzLCyGUALCVcYAgeVAIKVrzMjfuooOSpDYtmFf1HX8reRxezwFN2oPYck0iUmU4rFjtndF1q85N4HFqgjX3T+9atz4vZ4vou5hTShrsAUhbqvNkJ3Igz1Rr0kykFexG5FLj4MmhYEt8+D4yIOKoCzkAUdoM9YjAi0XFSMAWcCN+IOadoCXppk7yZ33McWqiTBn+dQ1rrm7HXdslJrX6n1ZwtzlVYtaAZ6hZYfU/iPACwbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KhT5YiWLnew0VrPJOfN6l+a/a/WSpiyjWcAkGC3UDEs=;
+ b=TJ8yIvJBhuiIFZyeuIQsOB/VTyqraLy2frS8nEkDqdfwGAawqvXGSzTuuRmTAJ3xEHveiL5A6XWc9Ib4AiR9b1a0MKbMLhDVcpiCcj/AJDDodOj0SZMNMG/QhO/PFoExxGlwU968l8z/cwqhMy3Fu42ThBDrUq0eANFK0wNBHVxD61hR1rudK0+lJwo/ncRUHtCqKvrgZwyu1tLTYKLIDjeQpFrK/PWBFkLVO0V67J77No8FyUj86St7o3+HeeIZMBrgLs/RXIEDYMJ6dvYrUCIhZ84FRgU51re9eBm4rlhjw6PumnM2xNa6PXtptrjzAighb7Z+eyvJPXL6TINMJA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KhT5YiWLnew0VrPJOfN6l+a/a/WSpiyjWcAkGC3UDEs=;
+ b=DNriNoyX58xMGp/o7whwoSj7X3mha7MzgOdkwQ1Z74XYuIQJi4gEiuiRn5z+BNYX8iIqdHoSKXugIeS0SPKDnJuETOFLNlqaoNFLnJE+/aZqWkt0eVNQxM3AMmsyqGVkex6ZBsoJ5wA3wbiCiK1gArfKC8oRNyRf7Q2GZrPyjO0Mg7np/sYJA+XPZU47hwTOmCZ93D1dkHnZl0CMQ3AOhteOssfyoNKIWS7bA+XoM++Cv/Q6KWvmb9+SEWyg3XAHP1afhC9vLGgl7w3Raj0DZuEqq1XUeAdYrX4or0yazTBZx9gCbqp8dfYhNXaNL05LtiIeqeJ5+agV5cTcvcxxnw==
+Received: from MW2PR12MB4667.namprd12.prod.outlook.com (2603:10b6:302:12::28)
+ by MN2PR12MB3199.namprd12.prod.outlook.com (2603:10b6:208:ae::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4975.12; Fri, 11 Feb
+ 2022 11:40:21 +0000
+Received: from MW2PR12MB4667.namprd12.prod.outlook.com
+ ([fe80::846c:d3cd:5a30:c35]) by MW2PR12MB4667.namprd12.prod.outlook.com
+ ([fe80::846c:d3cd:5a30:c35%5]) with mapi id 15.20.4951.019; Fri, 11 Feb 2022
+ 11:40:21 +0000
+To: Eric Biggers <ebiggers@kernel.org>, "linux-fsdevel@vger.kernel.org"
+ <linux-fsdevel@vger.kernel.org>
+Thread-Topic: [RFC PATCH 1/7] statx: add I/O alignment information
+Thread-Index: AQHYHw6MhkvU3aWvQUef3qvKk4R/5KyOOi4A
+Date: Fri, 11 Feb 2022 11:40:21 +0000
+Message-ID: <1762970b-94b6-1cd0-8ae2-41a5d057f72a@nvidia.com>
+References: <20220211061158.227688-1-ebiggers@kernel.org>
+ <20220211061158.227688-2-ebiggers@kernel.org>
+In-Reply-To: <20220211061158.227688-2-ebiggers@kernel.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: a67e323c-eb06-4344-dc1e-08d9ed5348e9
+x-ms-traffictypediagnostic: MN2PR12MB3199:EE_
+x-microsoft-antispam-prvs: <MN2PR12MB3199759C4DC6E8EB9CF7A168A3309@MN2PR12MB3199.namprd12.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:2331;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: vXdHmGwpFnh7FvGwXqqZgLEl/oP7wzqIxVS3Rc29Kvj3Q8iqqbV7dKWC0TuvI+V1yMxJd8q9AdSPQVboG2EoCOfwCU0iqycUAISKnaaOJvS5NylCg4TMNM9Dxg8tXxYvWbsIdHprwPVW7k6X3EmwE3QzGob+dOBuOmU02zEP4rUjgcgxIBEY7OhwdAHiZO26zEub+5ld3IZNLneNeJbZsjH3AxBT5MFdLY4ozTlYjFPDXtdOPYXPySnNeynjlRpoZTZzjVXmHvbF+WbqtlhKX250059/yNxm6LdIjtR09R8CxriZywIZx6tp0KR7Ql2GviuRXjAxOjg8kxtgBB/h0Qqt/QZy0Md0/2paM9KfKMEo8p6kKqbQEmSj053whmOsQQqk53zawWUJ1gx0WZYitY5i7ErKFLy11I8iQZ95lfwCkhwojXMtv6W/uWYEhXLHNfn8AoZgvmiQfSoLsU8uadGn5Rc0tKiDqSvL0CSLOIWwBbtG//yu5uWPk1TtroaGfas4NBXnHpdEXTDNLAxasQqEvtCBxVctcPfCQhCKDq5onn5kbEeo6uIhOyud0XR640P28mt8aaTaLFFIUenDxxnLAu4PQV0mjDzqOIw3MdhXsJ7trU/6f2axwXN0L5ByZrzbkwf5hAONMnN5mu/pEo8uWe4qPs1trO/Vvcc4qoNjNJLXYdGMhT1gWEwYIJ1ve2ch784eXUlzFc1I8zKuPa3lDaitkkmYLBGSqMG0SGq78FxHlXblmjjt+xQ2ci1GoLgxXTUUZqjaobDgxmacrYpY0JPKlkoplFhX2jBC1kX0Xx03/iykCKvqdHvi5HSDbJ0o1nzVSHZgGwjRiw4zGMFJWuKKqd2eUJ4KMtYlAtZ8QqnlC1CQBzYEL9t7IQaANjdfHwT8K2q9gj7euCzISOUb2+EqKNR20FP8BfrfPd8=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MW2PR12MB4667.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230001)(4636009)(366004)(83380400001)(966005)(508600001)(71200400001)(6486002)(36756003)(5660300002)(31686004)(2906002)(64756008)(186003)(66476007)(8676002)(66556008)(4326008)(66946007)(91956017)(110136005)(54906003)(8936002)(316002)(6512007)(122000001)(2616005)(66446008)(38070700005)(76116006)(38100700002)(86362001)(31696002)(6506007)(53546011)(21314003)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?QkVKUUY0RkZNTTBSa2tHZnJiUnNoczdXTFNGWDJPTUJzbUxEbCtia2NzL2xW?=
+ =?utf-8?B?dzMra1JmbFM4Y1JIWnRoRXRsMEFqY09Rc3JNQ0RqSmczWTNxRTlNblZsQTN0?=
+ =?utf-8?B?WjdzNHVMSVQyVHB1MkFPUUZYL0lwZVRDVVA4NW8yZk1zVzZsNGVvY1Jac0F1?=
+ =?utf-8?B?LzhIZDJwZXRyYzlpa2owVTk4VGl4THArTTNicGVxTWxXVlFISmh3WEFWYjJQ?=
+ =?utf-8?B?MXQ2M3JyTTRGVkFJWlk1REdDUHB1U1BsSW9DdUhwT3g3cUJWbUpRb2ZxN3px?=
+ =?utf-8?B?SlcwL09OZS9ERjZRa0hjS043N3Y2a3MxelpYWHQ0ejhibzlnbDY5dUxDN1Bs?=
+ =?utf-8?B?U1g2ckUxS3VXS1NuVm1EVDBlWGVqWGN5Y002ejhGVzdwS2V0ZU5QN2gvYkNl?=
+ =?utf-8?B?eThGQXA1RUh0cWxaRG9mZnlVaXJDbjBZR0VHblhleTI5blFGWWYwTTVCWDJI?=
+ =?utf-8?B?QTVNU2tKZEpuWmxFZmYwcndyR011d09pc1BBeTZhWnVJQkJJSkFDOGtJUGxn?=
+ =?utf-8?B?dGpNblgvZG13WXRCRzJmNmlEUFBUSWpDaGdHNGFvQys3djJWVnRpQVg5OEFX?=
+ =?utf-8?B?ZWJEZFBQNVlvMnVQSy8zZ2M5UFZaWk0zaDFBWDNRMENoRU5oUHY1c2d4dkVB?=
+ =?utf-8?B?K1VlcjV2QjlWWmVrSWtReWVaYW92b3dIVXY2Rnd6Z3Z4TGxtaTU3NEVUeHN3?=
+ =?utf-8?B?d2p3NWdONisxN1hMUHJ3S1VmODJodTVqWk9zMzRaNGZERlJnRk8vclNEbnpy?=
+ =?utf-8?B?Z1pSbGp5KzJPNWd3ZmRZeVdpNmpsSzdXYlFVNzVLSWdSM2hMYXB4Q2twYUM2?=
+ =?utf-8?B?dzljeUtndFFMVTZCdGp1UU9FYXdpR2o5YWwxekkyT3VsUkkvZW5yanhjS2xw?=
+ =?utf-8?B?b0I5WEs5cmoyd25LdzlPUkZOejhmdHQ1QW8rbkR4a1VOS3dtV2w1T3FUZG94?=
+ =?utf-8?B?V1dPdGVuQnB1aFN4MjF3RHlveTBxQlRmOGpVRkhQRFZUcEV0Y0w4cVBpNElN?=
+ =?utf-8?B?MHg3YnQ3UHAySG1tU0tNdzJUZnlnYUlvVGhwQkEvS1hxckxPb2RnV1pSK3Fl?=
+ =?utf-8?B?alpyZzBvb05CRnllSTJVdzU5T3hQTnNoa01taGVTek9PQkswbERheFZ2dzJm?=
+ =?utf-8?B?dEdPNU83elpObHJWNzM4dTlvcWJCWkNRNVhaRkpPMW8vYk0ycXMxVTlkcDRC?=
+ =?utf-8?B?UUQrRDZ3R3F4R2dFVWRCWnMyU3BYM3F5NkNnc2dCNytZcjU1bUpCOWZ0d2lR?=
+ =?utf-8?B?N2RrT1ppd3loa2w2SnFwZFQ1TlVvZFRwdVFZRU5wR2lwUFllQmFQS0ZUQzNo?=
+ =?utf-8?B?NVdwVkhMZlBpNStzT1U2OUFNK2oxMzhFNDIrRWhwYkQvNzJGQTk1TzRtdklD?=
+ =?utf-8?B?dE9PbE92YXI5N1lyMmZCWVdyTy9HSEQrM3lhbHhNOUpncXErRTVEM090aDJy?=
+ =?utf-8?B?VWJhMU4vc3N2TTcyT1M4c2MxekltUmJnbXpSM1pNWWJKZTNBZUVsVzN5VWd0?=
+ =?utf-8?B?VXBtOUUxSVNEc21yNEh2eUlKYWh5SnllVGdoekJDNVFNdmtsNWJUcHBscm5q?=
+ =?utf-8?B?TkxaOFBpSE1vdjRrL1RyaVJTWTNQeEZFNEpDNVZleUtRc0xvK2wxS09BOTJ3?=
+ =?utf-8?B?L1pCZHZMdkdiR2ZnK1p0dEZhcGRZczdJczB1eDdna3M2d2VFSVlWdERZdnE2?=
+ =?utf-8?B?S0ZHeEs4eVdoTWNSUWVUUFA4YnBsRzN6RmtBWi9QMjVzamJQaUhMWVltY3ZB?=
+ =?utf-8?B?VWdGTXk1UlJQWXpwNnNXdEg1ZFhXTVgrYWphVU43VUFIS1FkTVRYWEtGdjR4?=
+ =?utf-8?B?dXcyTGNoYUZYVFlTS2hHNFJFTlhlclB6TUR1dGM2Y2dsT3dFdDIzY0loNVk5?=
+ =?utf-8?B?Njk2cHhlSzNzRDk1VWwvMDUwN3NrUmQvQ3JjeGNjRjN4amt5RnNhZVJwWEwy?=
+ =?utf-8?B?TVYzTkY1QTdnNEdOYUNmRm1DZ1N5SzBFaTZkTjlZRW96N3dEemc5RzkrMVZS?=
+ =?utf-8?B?bzgvZ0haMGxMc0ttUHp6cVJMUGlFRXB2SjE4R2MwUkkvU2tkTHdqbnRpYlNG?=
+ =?utf-8?B?VFp2WFR5N1N3dTBSaEpyTS80U0F1OFFoNlBaSlhBb0cvVzZzK2hvWnZFbWEz?=
+ =?utf-8?B?eUN4Q25WVFQydXVVSzlmZ3NuL2J4OFp0T25xMVhrQzhrNkJYcmhWbVJqQTFX?=
+ =?utf-8?Q?s/Ydwois7cqDk2qO8H/cR+/H5OLbmn4KAta49am2T2tf?=
+Content-ID: <5881397ACD1A9442B7B45570DFB29AB6@namprd12.prod.outlook.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.175.127.227]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- canpemm500010.china.huawei.com (7.192.105.118)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.3 (--)
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MW2PR12MB4667.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a67e323c-eb06-4344-dc1e-08d9ed5348e9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Feb 2022 11:40:21.0208 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: c6YMl99caM+32qkVjLy6gIYGRbnP625QIlDREwGHM2c0CALVeu00Xi+4C0fys25km/a/fJcsWqpvqF5Z8iokbQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB3199
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  We inject IO error when rmdir non empty direcory, then got
- issue as follows: step1: mkfs.ext4 -F /dev/sda step2: mount /dev/sda test
- step3: cd test step4: mkdir -p 1/2 step5: rmdir 1 [ 110.920551] ext [...]
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  On 2/10/22 10:11 PM, Eric Biggers wrote: > From: Eric Biggers
+ <ebiggers@google.com> > > Traditionally, the conditions for when DIO (direct
+ I/O) is supported > were fairly simple: filesystems either su [...] 
+ Content analysis details:   (-0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.188 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.92.65 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.92.65 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nIS5g-0001Wt-CL
-Subject: [f2fs-dev] [PATCH -next v2] ext4:fix file system corrupted when
- rmdir non empty directory with IO error
+ 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nIUnf-00FMwW-PN
+Subject: Re: [f2fs-dev] [RFC PATCH 1/7] statx: add I/O alignment information
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,413 +183,104 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Ye Bin via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Ye Bin <yebin10@huawei.com>
-Cc: jack@suse.cz, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, lczerner@redhat.com,
- jaegeuk@kernel.org, Ye Bin <yebin10@huawei.com>
+From: Chaitanya Kulkarni via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chaitanya Kulkarni <chaitanyak@nvidia.com>
+Cc: "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>,
+ "linux-fscrypt@vger.kernel.org" <linux-fscrypt@vger.kernel.org>,
+ "linux-ext4@vger.kernel.org" <linux-ext4@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-We inject IO error when rmdir non empty direcory, then got issue as follows:
-step1: mkfs.ext4 -F /dev/sda
-step2: mount /dev/sda  test
-step3: cd test
-step4: mkdir -p 1/2
-step5: rmdir 1
-	[  110.920551] ext4_empty_dir: inject fault
-	[  110.921926] EXT4-fs warning (device sda): ext4_rmdir:3113: inode #12:
-	comm rmdir: empty directory '1' has too many links (3)
-step6: cd ..
-step7: umount test
-step8: fsck.ext4 -f /dev/sda
-	e2fsck 1.42.9 (28-Dec-2013)
-	Pass 1: Checking inodes, blocks, and sizes
-	Pass 2: Checking directory structure
-	Entry '..' in .../??? (13) has deleted/unused inode 12.  Clear<y>? yes
-	Pass 3: Checking directory connectivity
-	Unconnected directory inode 13 (...)
-	Connect to /lost+found<y>? yes
-	Pass 4: Checking reference counts
-	Inode 13 ref count is 3, should be 2.  Fix<y>? yes
-	Pass 5: Checking group summary information
+On 2/10/22 10:11 PM, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+> 
+> Traditionally, the conditions for when DIO (direct I/O) is supported
+> were fairly simple: filesystems either supported DIO aligned to the
+> block device's logical block size, or didn't support DIO at all.
+> 
+> However, due to filesystem features that have been added over time (e.g,
+> data journalling, inline data, encryption, verity, compression,
+> checkpoint disabling, log-structured mode), the conditions for when DIO
+> is allowed on a file have gotten increasingly complex.  Whether a
+> particular file supports DIO, and with what alignment, can depend on
+> various file attributes and filesystem mount options, as well as which
+> block device(s) the file's data is located on.
+> 
+> XFS has an ioctl XFS_IOC_DIOINFO which exposes this information to
+> applications.  However, as discussed
+> (https://lore.kernel.org/linux-fsdevel/20220120071215.123274-1-ebiggers@kernel.org/T/#u),
+> this ioctl is rarely used and not known to be used outside of
+> XFS-specific code.  It also was never intended to indicate when a file
+> doesn't support DIO at all, and it only exposes the minimum I/O
+> alignment, not the optimal I/O alignment which has been requested too.
+> 
+> Therefore, let's expose this information via statx().  Add the
+> STATX_IOALIGN flag and three fields associated with it:
+> 
+> * stx_mem_align_dio: the alignment (in bytes) required for user memory
+>    buffers for DIO, or 0 if DIO is not supported on the file.
+> 
+> * stx_offset_align_dio: the alignment (in bytes) required for file
+>    offsets and I/O segment lengths for DIO, or 0 if DIO is not supported
+>    on the file.  This will only be nonzero if stx_mem_align_dio is
+>    nonzero, and vice versa.
+> 
+> * stx_offset_align_optimal: the alignment (in bytes) suggested for file
+>    offsets and I/O segment lengths to get optimal performance.  This
+>    applies to both DIO and buffered I/O.  It differs from stx_blocksize
+>    in that stx_offset_align_optimal will contain the real optimum I/O
+>    size, which may be a large value.  In contrast, for compatibility
+>    reasons stx_blocksize is the minimum size needed to avoid page cache
+>    read/write/modify cycles, which may be much smaller than the optimum
+>    I/O size.  For more details about the motivation for this field, see
+>    https://lore.kernel.org/r/20220210040304.GM59729@dread.disaster.area
+> 
+> Note that as with other statx() extensions, if STATX_IOALIGN isn't set
+> in the returned statx struct, then these new fields won't be filled in.
+> This will happen if the filesystem doesn't support STATX_IOALIGN, or if
+> the file isn't a regular file.  (It might be supported on block device
+> files in the future.)  It might also happen if the caller didn't include
+> STATX_IOALIGN in the request mask, since statx() isn't required to
+> return information that wasn't requested.
+> 
+> This commit adds the VFS-level plumbing for STATX_IOALIGN.  Individual
+> filesystems will still need to add code to support it.
+> 
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
 
-	/dev/sda: ***** FILE SYSTEM WAS MODIFIED *****
-	/dev/sda: 12/131072 files (0.0% non-contiguous), 26157/524288 blocks
 
-ext4_rmdir
-	if (!ext4_empty_dir(inode))
-		goto end_rmdir;
-ext4_empty_dir
-	bh = ext4_read_dirblock(inode, 0, DIRENT_HTREE);
-	if (IS_ERR(bh))
-		return true;
-Now if read directory block failed, 'ext4_empty_dir' will return true, assume
-directory is empty. Obviously, it will lead to above issue.
-To solve this issue, if read directory block failed 'ext4_empty_dir' just assume
-directory isn't empty. To avoid making things worse when file system is already
-corrupted, 'ext4_empty_dir' also assume directory isn't empty.
-To distinguish the error type, return the exact error code to the caller.
+I've actually worked on similar series to export alignment and 
+granularity for non-trivial operations, this implementation
+only exporting I/O alignments (mostly REQ_OP_WRITE/REQ_OP_READ) via
+stax.
 
-Signed-off-by: Ye Bin <yebin10@huawei.com>
----
- fs/crypto/policy.c      |  4 +---
- fs/ext4/ext4.h          |  4 ++--
- fs/ext4/inline.c        | 23 +++++++++++------------
- fs/ext4/ioctl.c         |  5 ++---
- fs/ext4/namei.c         | 27 +++++++++++++++------------
- fs/f2fs/dir.c           |  8 ++++----
- fs/f2fs/f2fs.h          |  2 +-
- fs/f2fs/file.c          |  7 +++++--
- fs/f2fs/namei.c         | 10 ++++------
- fs/ubifs/crypto.c       |  4 ++--
- include/linux/fscrypt.h |  2 +-
- 11 files changed, 48 insertions(+), 48 deletions(-)
+Since it is coming from :-
+bdev_logical_block_size()->q->limits.logical_block_size that is set when
+low level driver like nvme calls blk_queue_logical_block_size().
 
-diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
-index ed3d623724cd..373945022bb6 100644
---- a/fs/crypto/policy.c
-+++ b/fs/crypto/policy.c
-@@ -480,9 +480,7 @@ int fscrypt_ioctl_set_policy(struct file *filp, const void __user *arg)
- 			ret = -ENOTDIR;
- 		else if (IS_DEADDIR(inode))
- 			ret = -ENOENT;
--		else if (!inode->i_sb->s_cop->empty_dir(inode))
--			ret = -ENOTEMPTY;
--		else
-+		else if (!(ret = inode->i_sb->s_cop->empty_dir(inode)))
- 			ret = set_encryption_policy(inode, &policy);
- 	} else if (ret == -EINVAL ||
- 		   (ret == 0 && !fscrypt_policies_equal(&policy,
-diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-index bcd3b9bf8069..e799cc269f7f 100644
---- a/fs/ext4/ext4.h
-+++ b/fs/ext4/ext4.h
-@@ -3087,7 +3087,7 @@ extern int ext4_generic_delete_entry(struct inode *dir,
- 				     void *entry_buf,
- 				     int buf_size,
- 				     int csum_size);
--extern bool ext4_empty_dir(struct inode *inode);
-+extern int ext4_empty_dir(struct inode *inode);
- 
- /* resize.c */
- extern void ext4_kvfree_array_rcu(void *to_free);
-@@ -3623,7 +3623,7 @@ extern int ext4_delete_inline_entry(handle_t *handle,
- 				    struct ext4_dir_entry_2 *de_del,
- 				    struct buffer_head *bh,
- 				    int *has_inline_data);
--extern bool empty_inline_dir(struct inode *dir, int *has_inline_data);
-+extern int empty_inline_dir(struct inode *dir, int *has_inline_data);
- extern struct buffer_head *ext4_get_first_inline_block(struct inode *inode,
- 					struct ext4_dir_entry_2 **parent_de,
- 					int *retval);
-diff --git a/fs/ext4/inline.c b/fs/ext4/inline.c
-index e42941803605..c9b02127ff95 100644
---- a/fs/ext4/inline.c
-+++ b/fs/ext4/inline.c
-@@ -1775,22 +1775,22 @@ ext4_get_inline_entry(struct inode *inode,
- 	return (struct ext4_dir_entry_2 *)(inline_pos + offset);
- }
- 
--bool empty_inline_dir(struct inode *dir, int *has_inline_data)
-+int empty_inline_dir(struct inode *dir, int *has_inline_data)
- {
--	int err, inline_size;
-+	int inline_size;
- 	struct ext4_iloc iloc;
- 	size_t inline_len;
- 	void *inline_pos;
- 	unsigned int offset;
- 	struct ext4_dir_entry_2 *de;
--	bool ret = true;
-+	int ret = 0;
- 
--	err = ext4_get_inode_loc(dir, &iloc);
--	if (err) {
--		EXT4_ERROR_INODE_ERR(dir, -err,
-+	ret = ext4_get_inode_loc(dir, &iloc);
-+	if (ret) {
-+		EXT4_ERROR_INODE_ERR(dir, -ret,
- 				     "error %d getting inode %lu block",
--				     err, dir->i_ino);
--		return true;
-+				     ret, dir->i_ino);
-+		return ret;
- 	}
- 
- 	down_read(&EXT4_I(dir)->xattr_sem);
-@@ -1804,7 +1804,7 @@ bool empty_inline_dir(struct inode *dir, int *has_inline_data)
- 		ext4_warning(dir->i_sb,
- 			     "bad inline directory (dir #%lu) - no `..'",
- 			     dir->i_ino);
--		ret = true;
-+		ret = -EFSCORRUPTED;
- 		goto out;
- 	}
- 
-@@ -1823,16 +1823,15 @@ bool empty_inline_dir(struct inode *dir, int *has_inline_data)
- 				     dir->i_ino, le32_to_cpu(de->inode),
- 				     le16_to_cpu(de->rec_len), de->name_len,
- 				     inline_size);
--			ret = true;
-+			ret = -EFSCORRUPTED;
- 			goto out;
- 		}
- 		if (le32_to_cpu(de->inode)) {
--			ret = false;
-+			ret = -ENOTEMPTY;
- 			goto out;
- 		}
- 		offset += ext4_rec_len_from_disk(de->rec_len, inline_size);
- 	}
--
- out:
- 	up_read(&EXT4_I(dir)->xattr_sem);
- 	brelse(iloc.bh);
-diff --git a/fs/ext4/ioctl.c b/fs/ext4/ioctl.c
-index a8022c2c6a58..3845fd554249 100644
---- a/fs/ext4/ioctl.c
-+++ b/fs/ext4/ioctl.c
-@@ -620,10 +620,9 @@ static int ext4_ioctl_setflags(struct inode *inode,
- 			goto flags_out;
- 		}
- 
--		if (!ext4_empty_dir(inode)) {
--			err = -ENOTEMPTY;
-+		err = ext4_empty_dir(inode);
-+		if (err)
- 			goto flags_out;
--		}
- 	}
- 
- 	/*
-diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
-index 8cf0a924a49b..2862deb374f7 100644
---- a/fs/ext4/namei.c
-+++ b/fs/ext4/namei.c
-@@ -2976,8 +2976,11 @@ static int ext4_mkdir(struct user_namespace *mnt_userns, struct inode *dir,
- 
- /*
-  * routine to check that the specified directory is empty (for rmdir)
-+ * return value:
-+ * 0: directory is empty
-+ * <0: error code
-  */
--bool ext4_empty_dir(struct inode *inode)
-+int ext4_empty_dir(struct inode *inode)
- {
- 	unsigned int offset;
- 	struct buffer_head *bh;
-@@ -2997,14 +3000,14 @@ bool ext4_empty_dir(struct inode *inode)
- 	if (inode->i_size < ext4_dir_rec_len(1, NULL) +
- 					ext4_dir_rec_len(2, NULL)) {
- 		EXT4_ERROR_INODE(inode, "invalid size");
--		return true;
-+		return -EFSCORRUPTED;
- 	}
- 	/* The first directory block must not be a hole,
- 	 * so treat it as DIRENT_HTREE
- 	 */
- 	bh = ext4_read_dirblock(inode, 0, DIRENT_HTREE);
- 	if (IS_ERR(bh))
--		return true;
-+		return PTR_ERR(bh);
- 
- 	de = (struct ext4_dir_entry_2 *) bh->b_data;
- 	if (ext4_check_dir_entry(inode, NULL, de, bh, bh->b_data, bh->b_size,
-@@ -3012,7 +3015,7 @@ bool ext4_empty_dir(struct inode *inode)
- 	    le32_to_cpu(de->inode) != inode->i_ino || strcmp(".", de->name)) {
- 		ext4_warning_inode(inode, "directory missing '.'");
- 		brelse(bh);
--		return true;
-+		return -EFSCORRUPTED;
- 	}
- 	offset = ext4_rec_len_from_disk(de->rec_len, sb->s_blocksize);
- 	de = ext4_next_entry(de, sb->s_blocksize);
-@@ -3021,7 +3024,7 @@ bool ext4_empty_dir(struct inode *inode)
- 	    le32_to_cpu(de->inode) == 0 || strcmp("..", de->name)) {
- 		ext4_warning_inode(inode, "directory missing '..'");
- 		brelse(bh);
--		return true;
-+		return -EFSCORRUPTED;
- 	}
- 	offset += ext4_rec_len_from_disk(de->rec_len, sb->s_blocksize);
- 	while (offset < inode->i_size) {
-@@ -3035,7 +3038,7 @@ bool ext4_empty_dir(struct inode *inode)
- 				continue;
- 			}
- 			if (IS_ERR(bh))
--				return true;
-+				return PTR_ERR(bh);
- 		}
- 		de = (struct ext4_dir_entry_2 *) (bh->b_data +
- 					(offset & (sb->s_blocksize - 1)));
-@@ -3046,12 +3049,12 @@ bool ext4_empty_dir(struct inode *inode)
- 		}
- 		if (le32_to_cpu(de->inode)) {
- 			brelse(bh);
--			return false;
-+			return -ENOTEMPTY;
- 		}
- 		offset += ext4_rec_len_from_disk(de->rec_len, sb->s_blocksize);
- 	}
- 	brelse(bh);
--	return true;
-+	return 0;
- }
- 
- static int ext4_rmdir(struct inode *dir, struct dentry *dentry)
-@@ -3087,8 +3090,8 @@ static int ext4_rmdir(struct inode *dir, struct dentry *dentry)
- 	if (le32_to_cpu(de->inode) != inode->i_ino)
- 		goto end_rmdir;
- 
--	retval = -ENOTEMPTY;
--	if (!ext4_empty_dir(inode))
-+	retval = ext4_empty_dir(inode);
-+	if (retval)
- 		goto end_rmdir;
- 
- 	handle = ext4_journal_start(dir, EXT4_HT_DIR,
-@@ -3787,8 +3790,8 @@ static int ext4_rename(struct user_namespace *mnt_userns, struct inode *old_dir,
- 
- 	if (S_ISDIR(old.inode->i_mode)) {
- 		if (new.inode) {
--			retval = -ENOTEMPTY;
--			if (!ext4_empty_dir(new.inode))
-+			retval = ext4_empty_dir(new.inode);
-+			if (retval)
- 				goto end_rename;
- 		} else {
- 			retval = -EMLINK;
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index a0e51937d92e..3de5a1343070 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -953,7 +953,7 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
- 		f2fs_drop_nlink(dir, inode);
- }
- 
--bool f2fs_empty_dir(struct inode *dir)
-+int f2fs_empty_dir(struct inode *dir)
- {
- 	unsigned long bidx;
- 	struct page *dentry_page;
-@@ -970,7 +970,7 @@ bool f2fs_empty_dir(struct inode *dir)
- 			if (PTR_ERR(dentry_page) == -ENOENT)
- 				continue;
- 			else
--				return false;
-+				return PTR_ERR(dentry_page);
- 		}
- 
- 		dentry_blk = page_address(dentry_page);
-@@ -985,9 +985,9 @@ bool f2fs_empty_dir(struct inode *dir)
- 		f2fs_put_page(dentry_page, 1);
- 
- 		if (bit_pos < NR_DENTRY_IN_BLOCK)
--			return false;
-+			return -ENOTEMPTY;
- 	}
--	return true;
-+	return 0;
- }
- 
- int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 5c30a65467e2..09617d7b37fd 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3465,7 +3465,7 @@ int f2fs_do_add_link(struct inode *dir, const struct qstr *name,
- void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
- 			struct inode *dir, struct inode *inode);
- int f2fs_do_tmpfile(struct inode *inode, struct inode *dir);
--bool f2fs_empty_dir(struct inode *dir);
-+int f2fs_empty_dir(struct inode *dir);
- 
- static inline int f2fs_add_link(struct dentry *dentry, struct inode *inode)
- {
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index cfdc41f87f5d..a3b60d6a58f7 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -1846,10 +1846,13 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
- 		return -EPERM;
- 
- 	if ((iflags ^ masked_flags) & F2FS_CASEFOLD_FL) {
-+		int ret;
-+
- 		if (!f2fs_sb_has_casefold(F2FS_I_SB(inode)))
- 			return -EOPNOTSUPP;
--		if (!f2fs_empty_dir(inode))
--			return -ENOTEMPTY;
-+		ret = f2fs_empty_dir(inode);
-+		if (ret)
-+			return ret;
- 	}
- 
- 	if (iflags & (F2FS_COMPR_FL | F2FS_NOCOMP_FL)) {
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index 13a0ffc39fa4..e4d1821b707b 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -786,10 +786,10 @@ static int f2fs_mkdir(struct user_namespace *mnt_userns, struct inode *dir,
- static int f2fs_rmdir(struct inode *dir, struct dentry *dentry)
- {
- 	struct inode *inode = d_inode(dentry);
-+	int ret;
- 
--	if (f2fs_empty_dir(inode))
--		return f2fs_unlink(dir, dentry);
--	return -ENOTEMPTY;
-+	ret = f2fs_empty_dir(inode);
-+	return ret ? : f2fs_unlink(dir, dentry);
- }
- 
- static int f2fs_mknod(struct user_namespace *mnt_userns, struct inode *dir,
-@@ -1001,9 +1001,7 @@ static int f2fs_rename(struct user_namespace *mnt_userns, struct inode *old_dir,
- 	}
- 
- 	if (new_inode) {
--
--		err = -ENOTEMPTY;
--		if (old_dir_entry && !f2fs_empty_dir(new_inode))
-+		if (old_dir_entry && (err = f2fs_empty_dir(new_inode)))
- 			goto out_dir;
- 
- 		err = -ENOENT;
-diff --git a/fs/ubifs/crypto.c b/fs/ubifs/crypto.c
-index c57b46a352d8..3ef2017c1444 100644
---- a/fs/ubifs/crypto.c
-+++ b/fs/ubifs/crypto.c
-@@ -19,9 +19,9 @@ static int ubifs_crypt_set_context(struct inode *inode, const void *ctx,
- 			       ctx, len, 0, false);
- }
- 
--static bool ubifs_crypt_empty_dir(struct inode *inode)
-+static int ubifs_crypt_empty_dir(struct inode *inode)
- {
--	return ubifs_check_dir_empty(inode) == 0;
-+	return ubifs_check_dir_empty(inode);
- }
- 
- int ubifs_encrypt(const struct inode *inode, struct ubifs_data_node *dn,
-diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 91ea9477e9bd..9d3b8df3f5ea 100644
---- a/include/linux/fscrypt.h
-+++ b/include/linux/fscrypt.h
-@@ -116,7 +116,7 @@ struct fscrypt_operations {
- 	/*
- 	 * Check whether a directory is empty.  i_rwsem will be held for write.
- 	 */
--	bool (*empty_dir)(struct inode *inode);
-+	int (*empty_dir)(struct inode *inode);
- 
- 	/*
- 	 * Check whether the filesystem's inode numbers and UUID are stable,
--- 
-2.31.1
+ From my experience especially with SSDs, applications want to
+know similar information about different non-trivial requests such as
+REQ_OP_DISCARD/REQ_OP_WRITE_ZEROES/REQ_OP_VERIFY (work in progress see
+[1]) etc.
 
+It will be great to make this generic userspace interface where user can
+ask for specific REQ_OP_XXX such as generic I/O REQ_OP_READ/REQ_OP_WRITE
+and non generic REQ_OP_XX such as REQ_OP_DISCARD/REQ_OP_VERIFY etc ....
+
+Since I've worked on implementing REQ_OP_VERIFY support I don't want to
+implement separate interface for querying the REQ_OP_VERIFY or any other
+non-trivial REQ_OP_XXX granularity or alignment.
+
+-ck
+
+[1] https://www.spinics.net/lists/linux-xfs/msg56826.html
 
 
 _______________________________________________
