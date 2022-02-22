@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13E894BF007
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Feb 2022 04:20:37 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 343454BEFF7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Feb 2022 04:18:26 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nMLjA-0006yZ-Lb; Tue, 22 Feb 2022 03:20:35 +0000
+	id 1nMLh0-0005Yv-2L; Tue, 22 Feb 2022 03:18:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <neilb@suse.de>) id 1nMLj7-0006xg-51
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Feb 2022 03:20:32 +0000
+ (envelope-from <neilb@suse.de>) id 1nMLgy-0005Ye-Bi
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Feb 2022 03:18:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :References:In-Reply-To:Message-ID:Date:Cc:To:From:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ViDG/yMqWZxCAxTaqQtcLcHL6JhRHELXtVbiJuJsPUo=; b=Mwk+KWuZORuAR6Pw59fIR5rErR
- PU+PRzOsWs8syCwCGpwbYIB3dPcIJvpbvb/v0G7u+uGNcw/0bsvo9OefIoBWfuUEBmEQhtSOcMsYf
- 9HGqdBgKAH+IJK48RPN7wc34b6acqmJSAMMlDRPXRFjwOHeWmte0W8G17hXUCIL5lUtY=;
+ bh=TNOQTzqXc1dwn0sxVclyo5qS7TsZyCY45jkw8WmjP7o=; b=JDRMlhoCdAoZft5w4hbs2qhuqn
+ 9uVSp0dXHEqllJ1EUb2rQb1nPGqcdZgirYaiUvyfHks2ZS6ms6hnQq6ugrXj84/osVq9GzrUyguvY
+ aijMmWegVh1Qrkd00hvXwB148Qc93aULMw6PT7/X6BNhtEKHqpT8Lqbt0jpV4Tizwnpo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
@@ -29,47 +29,47 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ViDG/yMqWZxCAxTaqQtcLcHL6JhRHELXtVbiJuJsPUo=; b=U4c8ZT6k9/6oKup5oX4NvL+pxq
- Mk4lmRjOQd5xTRUua/Ulf+0t1Hdzgy9TCd7+bBt8gU1enMO5IgPuYzah4ZmBgwtedjo3DzVdoKTsu
- SytTI01+3qUtYefUsA2tj6R4qAQdZHJfemPqlv61DvaC35wsD/C7LBZ1AR9nh/X4UYMw=;
+ bh=TNOQTzqXc1dwn0sxVclyo5qS7TsZyCY45jkw8WmjP7o=; b=IyN+hLratXtZ1+PtZLa6xvZOJL
+ P4k24LSw3GYFuU24uFAK6WB12gxlliN7n8L/4cuXFTu3i9LqYo/pfZ51BZ3p/x+9lbG3/ydsRym9/
+ UIZSc0EBC1T4Hbt0KQI1+8bh5f6khxPq2nXSffuw3stVUG43EmD6LTXC8FLrzH0Sb6OI=;
 Received: from smtp-out1.suse.de ([195.135.220.28])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nMLj5-0005uo-5r
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Feb 2022 03:20:31 +0000
+ id 1nMLgv-00AobD-UD
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Feb 2022 03:18:18 +0000
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id F1CA8210E6;
- Tue, 22 Feb 2022 03:20:24 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 7DAB821100;
+ Tue, 22 Feb 2022 03:18:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1645500024; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1645499883; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ViDG/yMqWZxCAxTaqQtcLcHL6JhRHELXtVbiJuJsPUo=;
- b=Tmz1uo8woLZXqpnP6AmoA/NTuRgmjrgW2cLueq9/kp9TCyUa6S7R3LyYWeiTFJaHuy3dUM
- KZRmOxRvt9ZDQSR+hpxKFewxvdZZ9Urtb6en4poxusvXIBIlgrBpBLKDAdWO2ORb+DR1Mi
- bSVP8TV+gQpT0TCoBjfqhnJf7D5nXLw=
+ bh=TNOQTzqXc1dwn0sxVclyo5qS7TsZyCY45jkw8WmjP7o=;
+ b=kR91uGJ/RTS+8au54fMBC4GFPKvaC1Yv8WHhfvVKpqmM16g4nNPlQcAHLBtdr5ZLLG+RJF
+ 0AU++6qtEyJii20SGyIpbVs10MuwPMU/4wT7WXwMaLbceGreQ8aBE66tHihRjhfbzWVvpS
+ hiYuCHmmNxooYdfWYOf9cBPIOhc4FRg=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1645500024;
+ s=susede2_ed25519; t=1645499883;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ViDG/yMqWZxCAxTaqQtcLcHL6JhRHELXtVbiJuJsPUo=;
- b=BbqDPkZmtQqupAAVe4rSFiNNNRKLh+0XT0FLFde2mCgSKOwY64NUe64xN29OsgNhaJyglf
- D4tHxubXuewZC/CA==
+ bh=TNOQTzqXc1dwn0sxVclyo5qS7TsZyCY45jkw8WmjP7o=;
+ b=8txKd6I/x+pP445IuPzI3CE1ZWl4VGR/oru7gKU7G5Ico3dFFmNbzJjmpXh2/2uBC9kTFG
+ dbGnv5+lrLnOa2CQ==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8B58613BA7;
- Tue, 22 Feb 2022 03:20:16 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C05A113BA7;
+ Tue, 22 Feb 2022 03:17:54 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id pLKjEXBWFGI0WwAAMHmgww
- (envelope-from <neilb@suse.de>); Tue, 22 Feb 2022 03:20:16 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 7k2IH+JVFGJZWgAAMHmgww
+ (envelope-from <neilb@suse.de>); Tue, 22 Feb 2022 03:17:54 +0000
 From: NeilBrown <neilb@suse.de>
 To: Andrew Morton <akpm@linux-foundation.org>, Jan Kara <jack@suse.cz>,
  Wu Fengguang <fengguang.wu@intel.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
@@ -83,40 +83,38 @@ To: Andrew Morton <akpm@linux-foundation.org>, Jan Kara <jack@suse.cz>,
  Lars Ellenberg <lars.ellenberg@linbit.com>,
  Paolo Valente <paolo.valente@linaro.org>, Jens Axboe <axboe@kernel.dk>
 Date: Tue, 22 Feb 2022 14:17:17 +1100
-Message-ID: <164549983746.9187.7949730109246767909.stgit@noble.brown>
+Message-ID: <164549983733.9187.17894407453436115822.stgit@noble.brown>
 In-Reply-To: <164549971112.9187.16871723439770288255.stgit@noble.brown>
 References: <164549971112.9187.16871723439770288255.stgit@noble.brown>
 User-Agent: StGit/0.23
 MIME-Version: 1.0
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  bfq_get_queue() expects a "bool" for the third arg, so pass
- "false" rather than "BLK_RW_ASYNC" which will soon be removed. Acked-by:
- Jens Axboe <axboe@kernel.dk> Signed-off-by: NeilBrown <neilb@suse.de> ---
- block/bfq-iosched.c | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
+ Content preview: Various DOC: sections in gfp.h have subsection headers (~~~)
+ but the place where they are included in mm-api.rst does not have section,
+ only chapters. So convert to section headers (---) to avoid conf [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [195.135.220.28 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nMLj5-0005uo-5r
-Subject: [f2fs-dev] [PATCH 10/11] block/bfq-iosched.c: use "false" rather
- than "BLK_RW_ASYNC"
+X-Headers-End: 1nMLgv-00AobD-UD
+Subject: [f2fs-dev] [PATCH 01/11] DOC: convert 'subsection' to 'section' in
+ gfp.h
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -137,28 +135,66 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-bfq_get_queue() expects a "bool" for the third arg, so pass "false"
-rather than "BLK_RW_ASYNC" which will soon be removed.
+Various DOC: sections in gfp.h have subsection headers (~~~) but the
+place where they are included in mm-api.rst does not have section, only
+chapters.
+So convert to section headers (---) to avoid confusion.  Specifically if
+section are added later in mm-api.rst, an error results.
 
-Acked-by: Jens Axboe <axboe@kernel.dk>
 Signed-off-by: NeilBrown <neilb@suse.de>
 ---
- block/bfq-iosched.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/linux/gfp.h |   10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/block/bfq-iosched.c b/block/bfq-iosched.c
-index 36a66e97e3c2..ed9bb1054bf2 100644
---- a/block/bfq-iosched.c
-+++ b/block/bfq-iosched.c
-@@ -5448,7 +5448,7 @@ static void bfq_check_ioprio_change(struct bfq_io_cq *bic, struct bio *bio)
- 	bfqq = bic_to_bfqq(bic, false);
- 	if (bfqq) {
- 		bfq_release_process_ref(bfqd, bfqq);
--		bfqq = bfq_get_queue(bfqd, bio, BLK_RW_ASYNC, bic, true);
-+		bfqq = bfq_get_queue(bfqd, bio, false, bic, true);
- 		bic_set_bfqq(bic, bfqq, false);
- 	}
- 
+diff --git a/include/linux/gfp.h b/include/linux/gfp.h
+index 80f63c862be5..20f6fbe12993 100644
+--- a/include/linux/gfp.h
++++ b/include/linux/gfp.h
+@@ -79,7 +79,7 @@ struct vm_area_struct;
+  * DOC: Page mobility and placement hints
+  *
+  * Page mobility and placement hints
+- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ * ---------------------------------
+  *
+  * These flags provide hints about how mobile the page is. Pages with similar
+  * mobility are placed within the same pageblocks to minimise problems due
+@@ -112,7 +112,7 @@ struct vm_area_struct;
+  * DOC: Watermark modifiers
+  *
+  * Watermark modifiers -- controls access to emergency reserves
+- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ * ------------------------------------------------------------
+  *
+  * %__GFP_HIGH indicates that the caller is high-priority and that granting
+  * the request is necessary before the system can make forward progress.
+@@ -144,7 +144,7 @@ struct vm_area_struct;
+  * DOC: Reclaim modifiers
+  *
+  * Reclaim modifiers
+- * ~~~~~~~~~~~~~~~~~
++ * -----------------
+  * Please note that all the following flags are only applicable to sleepable
+  * allocations (e.g. %GFP_NOWAIT and %GFP_ATOMIC will ignore them).
+  *
+@@ -224,7 +224,7 @@ struct vm_area_struct;
+  * DOC: Action modifiers
+  *
+  * Action modifiers
+- * ~~~~~~~~~~~~~~~~
++ * ----------------
+  *
+  * %__GFP_NOWARN suppresses allocation failure reports.
+  *
+@@ -256,7 +256,7 @@ struct vm_area_struct;
+  * DOC: Useful GFP flag combinations
+  *
+  * Useful GFP flag combinations
+- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ * ----------------------------
+  *
+  * Useful GFP flag combinations that are commonly used. It is recommended
+  * that subsystems start with one of these combinations and then set/clear
 
 
 
