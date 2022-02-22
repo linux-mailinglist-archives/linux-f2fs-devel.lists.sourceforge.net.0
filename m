@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1EDE4BEFFC
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Feb 2022 04:18:57 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 496ED4BEFFE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Feb 2022 04:19:19 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nMLhZ-0005dN-8n; Tue, 22 Feb 2022 03:18:56 +0000
+	id 1nMLhu-0006io-0X; Tue, 22 Feb 2022 03:19:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <neilb@suse.de>) id 1nMLhX-0005dD-Ro
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Feb 2022 03:18:54 +0000
+ (envelope-from <neilb@suse.de>) id 1nMLht-0006ii-4O
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Feb 2022 03:19:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :References:In-Reply-To:Message-ID:Date:Cc:To:From:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=j2iKmKfQAV47ltxyUTpJL5kF151jPpkpJZBMxZj0hPA=; b=XFOd9Qw1TYxuXv2i+HK+6IRFDG
- vUXGTv3ocuCVKAJ1DG+Te15SOm94mVzcssy/DGj38rivFUs84A53oGKLhmPgg4xxZgTuQj/6fa34W
- bYnIT1FiKazpr05vRZqjY0TZu/L78ZQ7w3HeAj5F4lgCtw+MxN9p08rgrvVZF9y37kTg=;
+ bh=eBfA0J1VAN4vDciFet8kyITCSUUXphOKJM0dbNgQDlg=; b=fLpSOUuYj22PseCB7Gx9kZS+bK
+ eZd9jIFa84zw0wcpchbZve0KCrkBJ0vZdDDZa1qYFplcTmmSWv5u74pHc4pOiIAli//fw9n1RKil5
+ uRnJAaTmWMjjpfc+NulfOphh9iuUeHf5sZliMVqZXld2/s+w4IOuSflU+4VNdJJX1saU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
@@ -29,47 +29,47 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=j2iKmKfQAV47ltxyUTpJL5kF151jPpkpJZBMxZj0hPA=; b=Z4mBh1n4u16JfeoUDsicjCBSi6
- fvCO+Z9TPv6vzLed3ZbPrb6OEIFGr9wbfIFKC+odBrhfUvfXogdvokFnrk1aH7yL8gqoExx+5FHXq
- FTIz7+JO7zp0t3k8eWdDkuOEiwYJ2d4B+Xmu4zG83/rP3oDRsf863tbu449gvEkh4K98=;
-Received: from smtp-out2.suse.de ([195.135.220.29])
+ bh=eBfA0J1VAN4vDciFet8kyITCSUUXphOKJM0dbNgQDlg=; b=XoUepGPmTPfJXv7DOzhiYjZED3
+ WgAQRwGy0plHQTgmfpENxRVcS7Qy6k1T/l/s/UT/iwYAEc8FN/snsykkwBqhB4dQQxi7oS6924HbB
+ RhF6juVFGU7LmchA0VS+zTWTghqbQqtdgyfbPwgnluXE1HO+/LHrxO3sDtR0X2HSifj0=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nMLhV-00AofF-Hl
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Feb 2022 03:18:54 +0000
+ id 1nMLhr-00Aogy-25
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Feb 2022 03:19:15 +0000
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 562ED1F396;
- Tue, 22 Feb 2022 03:18:47 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id D6B21210E8;
+ Tue, 22 Feb 2022 03:19:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1645499927; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1645499948; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=j2iKmKfQAV47ltxyUTpJL5kF151jPpkpJZBMxZj0hPA=;
- b=0+g51AMGEI3r9A8ASMpz3wY3CyKSJDeDWn0AKqsQTwh9NMem16Yu3oX327mnvhNj8U+DA9
- 33oY/yjrsDIe2YUWn2bZG7jQOA+4FUB3X9JdnoOXaU38SgqeQ9WEuMqtv61aD05pH60kr9
- 62rxLcOCo92AZ73iiwrb3gpP+RZqT9c=
+ bh=eBfA0J1VAN4vDciFet8kyITCSUUXphOKJM0dbNgQDlg=;
+ b=i/NDtzyku1VotL27Yt5ND5uuuQDGX4tAL44NUrr7an8PugkHaqoNxoBxn6WhY9Zt0cJN06
+ IrmlVgKZlFI4eGKB2RklR3Dt6IF7R1G7GZaellr0Kq8CN0od6q7uHbJ4mgOfhhW7zJkzqA
+ rO1bQkI32VQdA/pTUNRUBAt4x9JjlcE=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1645499927;
+ s=susede2_ed25519; t=1645499948;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=j2iKmKfQAV47ltxyUTpJL5kF151jPpkpJZBMxZj0hPA=;
- b=RQ5ZNUEdexnmqLSqD8rTQIgSPwQRUQeUCQajOzdhoZRnXzxb5C8Ud6kKPvOlourkGfZFR4
- QB7vKbrUxbKosNBQ==
+ bh=eBfA0J1VAN4vDciFet8kyITCSUUXphOKJM0dbNgQDlg=;
+ b=G4azxQs3m/GiCNS1OtSNXkwOgWeZkHdPwA5vsNLp+pc6nW6/NFnKo60Ie1EuGO1FdMHYZw
+ 2sGIrCV+BV9wnGCQ==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A183013BA7;
- Tue, 22 Feb 2022 03:18:36 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CE2DB13BA7;
+ Tue, 22 Feb 2022 03:19:01 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id Pv19FwxWFGKWWgAAMHmgww
- (envelope-from <neilb@suse.de>); Tue, 22 Feb 2022 03:18:36 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id rd8AIyVWFGLCWgAAMHmgww
+ (envelope-from <neilb@suse.de>); Tue, 22 Feb 2022 03:19:01 +0000
 From: NeilBrown <neilb@suse.de>
 To: Andrew Morton <akpm@linux-foundation.org>, Jan Kara <jack@suse.cz>,
  Wu Fengguang <fengguang.wu@intel.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
@@ -83,7 +83,7 @@ To: Andrew Morton <akpm@linux-foundation.org>, Jan Kara <jack@suse.cz>,
  Lars Ellenberg <lars.ellenberg@linbit.com>,
  Paolo Valente <paolo.valente@linaro.org>, Jens Axboe <axboe@kernel.dk>
 Date: Tue, 22 Feb 2022 14:17:17 +1100
-Message-ID: <164549983737.9187.2627117501000365074.stgit@noble.brown>
+Message-ID: <164549983739.9187.14895675781408171186.stgit@noble.brown>
 In-Reply-To: <164549971112.9187.16871723439770288255.stgit@noble.brown>
 References: <164549971112.9187.16871723439770288255.stgit@noble.brown>
 User-Agent: StGit/0.23
@@ -96,16 +96,15 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  The bdi congestion tracking in not widely used and will be
- removed. Fuse is one of a small number of filesystems that uses it, setting
- both the sync (read) and async (write) congestion flags at what it determines
- are appropriate times. 
- Content analysis details:   (-2.5 points, 6.0 required)
+ removed. CEPHfs is one of a small number of filesystems that uses it, setting
+ just the async (write) congestion flags at what it determines are appropriate
+ times. Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.29 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -113,8 +112,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1nMLhV-00AofF-Hl
-Subject: [f2fs-dev] [PATCH 04/11] fuse: remove reliance on bdi congestion
+X-Headers-End: 1nMLhr-00Aogy-25
+Subject: [f2fs-dev] [PATCH 06/11] ceph: remove reliance on bdi congestion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -137,144 +136,122 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 The bdi congestion tracking in not widely used and will be removed.
 
-Fuse is one of a small number of filesystems that uses it, setting both
-the sync (read) and async (write) congestion flags at what it determines
-are appropriate times.
+CEPHfs is one of a small number of filesystems that uses it, setting
+just the async (write) congestion flags at what it determines are
+appropriate times.
 
-The only remaining effect of the sync flag is to cause read-ahead to be
-skipped.
 The only remaining effect of the async flag is to cause (some)
 WB_SYNC_NONE writes to be skipped.
 
-So instead of setting the flags, change:
- - .readahead to stop when it has submitted all non-async pages
-    for read.
- - .writepages to do nothing if WB_SYNC_NONE and the flag would be set
+So instead of setting the flag, set an internal flag and change:
+ - .writepages to do nothing if WB_SYNC_NONE and the flag is set
  - .writepage to return AOP_WRITEPAGE_ACTIVATE if WB_SYNC_NONE
-    and the flag would be set.
+    and the flag is set.
 
 The writepages change causes a behavioural change in that pageout() can
 now return PAGE_ACTIVATE instead of PAGE_KEEP, so SetPageActive() will
-be called on the page which (I think) will further delay the next attempt
+be called on the page which (I think) wil further delay the next attempt
 at writeout.  This might be a good thing.
 
 Signed-off-by: NeilBrown <neilb@suse.de>
 ---
- fs/fuse/control.c |   17 -----------------
- fs/fuse/dev.c     |    8 --------
- fs/fuse/file.c    |   17 +++++++++++++++++
- 3 files changed, 17 insertions(+), 25 deletions(-)
+ fs/ceph/addr.c  |   22 +++++++++++++---------
+ fs/ceph/super.c |    1 +
+ fs/ceph/super.h |    1 +
+ 3 files changed, 15 insertions(+), 9 deletions(-)
 
-diff --git a/fs/fuse/control.c b/fs/fuse/control.c
-index 000d2e5627e9..7cede9a3bc96 100644
---- a/fs/fuse/control.c
-+++ b/fs/fuse/control.c
-@@ -164,7 +164,6 @@ static ssize_t fuse_conn_congestion_threshold_write(struct file *file,
- {
- 	unsigned val;
- 	struct fuse_conn *fc;
--	struct fuse_mount *fm;
- 	ssize_t ret;
+diff --git a/fs/ceph/addr.c b/fs/ceph/addr.c
+index c98e5238a1b6..dc7af34640dd 100644
+--- a/fs/ceph/addr.c
++++ b/fs/ceph/addr.c
+@@ -563,7 +563,7 @@ static int writepage_nounlock(struct page *page, struct writeback_control *wbc)
  
- 	ret = fuse_conn_limit_write(file, buf, count, ppos, &val,
-@@ -178,22 +177,6 @@ static ssize_t fuse_conn_congestion_threshold_write(struct file *file,
- 	down_read(&fc->killsb);
- 	spin_lock(&fc->bg_lock);
- 	fc->congestion_threshold = val;
--
--	/*
--	 * Get any fuse_mount belonging to this fuse_conn; s_bdi is
--	 * shared between all of them
--	 */
--
--	if (!list_empty(&fc->mounts)) {
--		fm = list_first_entry(&fc->mounts, struct fuse_mount, fc_entry);
--		if (fc->num_background < fc->congestion_threshold) {
--			clear_bdi_congested(fm->sb->s_bdi, BLK_RW_SYNC);
--			clear_bdi_congested(fm->sb->s_bdi, BLK_RW_ASYNC);
--		} else {
--			set_bdi_congested(fm->sb->s_bdi, BLK_RW_SYNC);
--			set_bdi_congested(fm->sb->s_bdi, BLK_RW_ASYNC);
--		}
--	}
- 	spin_unlock(&fc->bg_lock);
- 	up_read(&fc->killsb);
- 	fuse_conn_put(fc);
-diff --git a/fs/fuse/dev.c b/fs/fuse/dev.c
-index cd54a529460d..e1b4a846c90d 100644
---- a/fs/fuse/dev.c
-+++ b/fs/fuse/dev.c
-@@ -315,10 +315,6 @@ void fuse_request_end(struct fuse_req *req)
- 				wake_up(&fc->blocked_waitq);
- 		}
+ 	if (atomic_long_inc_return(&fsc->writeback_count) >
+ 	    CONGESTION_ON_THRESH(fsc->mount_options->congestion_kb))
+-		set_bdi_congested(inode_to_bdi(inode), BLK_RW_ASYNC);
++		fsc->write_congested = true;
  
--		if (fc->num_background == fc->congestion_threshold && fm->sb) {
--			clear_bdi_congested(fm->sb->s_bdi, BLK_RW_SYNC);
--			clear_bdi_congested(fm->sb->s_bdi, BLK_RW_ASYNC);
--		}
- 		fc->num_background--;
- 		fc->active_background--;
- 		flush_bg_queue(fc);
-@@ -540,10 +536,6 @@ static bool fuse_request_queue_background(struct fuse_req *req)
- 		fc->num_background++;
- 		if (fc->num_background == fc->max_background)
- 			fc->blocked = 1;
--		if (fc->num_background == fc->congestion_threshold && fm->sb) {
--			set_bdi_congested(fm->sb->s_bdi, BLK_RW_SYNC);
--			set_bdi_congested(fm->sb->s_bdi, BLK_RW_ASYNC);
--		}
- 		list_add_tail(&req->list, &fc->bg_queue);
- 		flush_bg_queue(fc);
- 		queued = true;
-diff --git a/fs/fuse/file.c b/fs/fuse/file.c
-index 829094451774..94747bac3489 100644
---- a/fs/fuse/file.c
-+++ b/fs/fuse/file.c
-@@ -966,6 +966,14 @@ static void fuse_readahead(struct readahead_control *rac)
- 		struct fuse_io_args *ia;
- 		struct fuse_args_pages *ap;
+ 	req = ceph_osdc_new_request(osdc, &ci->i_layout, ceph_vino(inode), page_off, &len, 0, 1,
+ 				    CEPH_OSD_OP_WRITE, CEPH_OSD_FLAG_WRITE, snapc,
+@@ -623,7 +623,7 @@ static int writepage_nounlock(struct page *page, struct writeback_control *wbc)
  
-+		if (fc->num_background >= fc->congestion_threshold &&
-+		    rac->ra->async_size >= readahead_count(rac))
-+			/*
-+			 * Congested and only async pages left, so skip the
-+			 * rest.
-+			 */
-+			break;
-+
- 		nr_pages = readahead_count(rac) - nr_pages;
- 		if (nr_pages > max_pages)
- 			nr_pages = max_pages;
-@@ -1958,6 +1966,7 @@ static int fuse_writepage_locked(struct page *page)
+ 	if (atomic_long_dec_return(&fsc->writeback_count) <
+ 	    CONGESTION_OFF_THRESH(fsc->mount_options->congestion_kb))
+-		clear_bdi_congested(inode_to_bdi(inode), BLK_RW_ASYNC);
++		fsc->write_congested = false;
  
- static int fuse_writepage(struct page *page, struct writeback_control *wbc)
- {
-+	struct fuse_conn *fc = get_fuse_conn(page->mapping->host);
- 	int err;
- 
- 	if (fuse_page_is_writeback(page->mapping->host, page->index)) {
-@@ -1973,6 +1982,10 @@ static int fuse_writepage(struct page *page, struct writeback_control *wbc)
- 		return 0;
- 	}
+ 	return err;
+ }
+@@ -635,6 +635,10 @@ static int ceph_writepage(struct page *page, struct writeback_control *wbc)
+ 	BUG_ON(!inode);
+ 	ihold(inode);
  
 +	if (wbc->sync_mode == WB_SYNC_NONE &&
-+	    fc->num_background >= fc->congestion_threshold)
++	    ceph_inode_to_client(inode)->write_congested)
 +		return AOP_WRITEPAGE_ACTIVATE;
 +
- 	err = fuse_writepage_locked(page);
- 	unlock_page(page);
+ 	wait_on_page_fscache(page);
  
-@@ -2226,6 +2239,10 @@ static int fuse_writepages(struct address_space *mapping,
- 	if (fuse_is_bad(inode))
- 		goto out;
+ 	err = writepage_nounlock(page, wbc);
+@@ -707,8 +711,7 @@ static void writepages_finish(struct ceph_osd_request *req)
+ 			if (atomic_long_dec_return(&fsc->writeback_count) <
+ 			     CONGESTION_OFF_THRESH(
+ 					fsc->mount_options->congestion_kb))
+-				clear_bdi_congested(inode_to_bdi(inode),
+-						    BLK_RW_ASYNC);
++				fsc->write_congested = false;
+ 
+ 			ceph_put_snap_context(detach_page_private(page));
+ 			end_page_writeback(page);
+@@ -760,6 +763,10 @@ static int ceph_writepages_start(struct address_space *mapping,
+ 	bool done = false;
+ 	bool caching = ceph_is_cache_enabled(inode);
  
 +	if (wbc->sync_mode == WB_SYNC_NONE &&
-+	    fc->num_background >= fc->congestion_threshold)
++	    fsc->write_congested)
 +		return 0;
 +
- 	data.inode = inode;
- 	data.wpa = NULL;
- 	data.ff = NULL;
+ 	dout("writepages_start %p (mode=%s)\n", inode,
+ 	     wbc->sync_mode == WB_SYNC_NONE ? "NONE" :
+ 	     (wbc->sync_mode == WB_SYNC_ALL ? "ALL" : "HOLD"));
+@@ -954,11 +961,8 @@ static int ceph_writepages_start(struct address_space *mapping,
+ 
+ 			if (atomic_long_inc_return(&fsc->writeback_count) >
+ 			    CONGESTION_ON_THRESH(
+-				    fsc->mount_options->congestion_kb)) {
+-				set_bdi_congested(inode_to_bdi(inode),
+-						  BLK_RW_ASYNC);
+-			}
+-
++				    fsc->mount_options->congestion_kb))
++				fsc->write_congested = true;
+ 
+ 			pages[locked_pages++] = page;
+ 			pvec.pages[i] = NULL;
+diff --git a/fs/ceph/super.c b/fs/ceph/super.c
+index bf79f369aec6..4a3b77d049c7 100644
+--- a/fs/ceph/super.c
++++ b/fs/ceph/super.c
+@@ -802,6 +802,7 @@ static struct ceph_fs_client *create_fs_client(struct ceph_mount_options *fsopt,
+ 	fsc->have_copy_from2 = true;
+ 
+ 	atomic_long_set(&fsc->writeback_count, 0);
++	fsc->write_congested = false;
+ 
+ 	err = -ENOMEM;
+ 	/*
+diff --git a/fs/ceph/super.h b/fs/ceph/super.h
+index 67f145e1ae7a..0bd97aea2319 100644
+--- a/fs/ceph/super.h
++++ b/fs/ceph/super.h
+@@ -121,6 +121,7 @@ struct ceph_fs_client {
+ 	struct ceph_mds_client *mdsc;
+ 
+ 	atomic_long_t writeback_count;
++	bool write_congested;
+ 
+ 	struct workqueue_struct *inode_wq;
+ 	struct workqueue_struct *cap_wq;
 
 
 
