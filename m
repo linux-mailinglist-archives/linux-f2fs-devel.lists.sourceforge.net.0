@@ -2,103 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 468754C018E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Feb 2022 19:43:40 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1F9F4C0D7F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Feb 2022 08:42:52 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nMa8O-0001yS-Bm; Tue, 22 Feb 2022 18:43:34 +0000
+	id 1nMmIR-0005OG-64; Wed, 23 Feb 2022 07:42:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bart.vanassche@gmail.com>) id 1nMa8N-0001yL-Dd
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Feb 2022 18:43:34 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
+ <BATV+94e795790efaf498204f+6758+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1nMmIN-0005Le-E8
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Feb 2022 07:42:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+bXHFL77ezZEg+awCahATq+Oub/xwDc/cfPztbFrhd0=; b=ZO/pkHZc9G9Dm7meXf/DPYziSv
- NM1qLRhZqzn5Ry6BPzVAmPF27a+MqOZ0C74Hcp9PDXZ60U+2jT9wQLDyyWIHDYyE0L4wu61Vul0Id
- br9JJRMz5q2hkrm7A3ioGaLXgUmXOhpNi5Dt7ogclnbjNqc+YcthKeKaOC1e8jhGnA/w=;
+ bh=UUDMqr/9c1gNA/wamWMnwltjDT92zuHM5PlATkNE7uw=; b=A1vuzldz0liHoERfACqLwjnigf
+ K1FbpAT2Ebv4xr9rfYrwiEuoK8oYn6iCtQnOFIg2v4nCeFdt1p+dn9ODRvvDE4L0EYJBgsVU2EDm5
+ nTh9ncfj68mXhcp5++taAZEx1ZE90/h1qffyYS0kqxQv8CphIfpQACx+Le1SdYEn7/II=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=+bXHFL77ezZEg+awCahATq+Oub/xwDc/cfPztbFrhd0=; b=Z
- Vdol8CycgPbiLu8su0+Jje8HMmqFFBdwRuAbefYO9ePweZTeMHDlSXcBunxSLO6EhWW0wKr2Qf7I8
- TvM4MN9hmoh2y1367gQ69kNvePBOLk+0qPnJHa6xAzTplIvhILY749DHm1BU1Y19cTrELqVQS8JXI
- SdNwZWoF5DKzfJo8=;
-Received: from mail-pl1-f180.google.com ([209.85.214.180])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=UUDMqr/9c1gNA/wamWMnwltjDT92zuHM5PlATkNE7uw=; b=FXnhEaboi8nov8lB75E0kmNd16
+ hpuE5w/XEM95fNWn/71zlckCWogBa+/XYCQiQivgnQPEfOF4gy99eI1YY7sJua9uEkeyhUj/3IRfQ
+ WJrjMzFXw1YUMN5F0peJ6Qp/+1l+TagvZvGcv9qiNrEd55W6G3jZ57xvCkj0O6slYkxA=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nMa8D-0001Qq-LH
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Feb 2022 18:43:30 +0000
-Received: by mail-pl1-f180.google.com with SMTP id bd1so477088plb.13
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 22 Feb 2022 10:43:25 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=+bXHFL77ezZEg+awCahATq+Oub/xwDc/cfPztbFrhd0=;
- b=sVSxsg2Qb1U8Ll3lSWhorFR6O7xIU2TrwZvB4tJWxhYNjR3mFPiQpeRaCOF/G0uG9m
- 3gR6P0ybP44fQhIhLjuBt8A06nuAxr1n+TfbNDvzwLjaCqYthyfaikx6A/lfVMv3lvey
- /jBhdSUp9GtoLN1FKWoAjwTrTV9IBrL4kJtn+qYZ5JzcysyINIymuas7cnE4UQjyDjL6
- RTZCbB8jePpXNkOfpJshUdmA7CE8bwRehf7qLVdd1fC29tihYq9eADxNs/W6XPuItRsA
- 56Ytks1jiBncR4fS8zQqSoRckSd6u3/4BytPR1I1RKwBKhXkzDXhm+bOW9SF02VliESm
- hhLg==
-X-Gm-Message-State: AOAM532ikff7rXWwJf72k4+M1p3kFmvEflyFRc8Lihcvyd8af9egqu1i
- rZIkMCedu768AfojTVcz4o4=
-X-Google-Smtp-Source: ABdhPJydSJaXTujv64vjm/Z4VlO9b+0PnVgywp358B2Kpz2oi8dhAGga0bWCQ0Ml9mdN59eD1RqpKw==
-X-Received: by 2002:a17:902:7e8f:b0:14f:b09c:937a with SMTP id
- z15-20020a1709027e8f00b0014fb09c937amr11389064pla.0.1645555399967; 
- Tue, 22 Feb 2022 10:43:19 -0800 (PST)
-Received: from asus.hsd1.ca.comcast.net
- ([2601:647:4000:d7:feaa:14ff:fe9d:6dbd])
- by smtp.gmail.com with ESMTPSA id o5sm17193329pfk.172.2022.02.22.10.43.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Feb 2022 10:43:19 -0800 (PST)
-From: Bart Van Assche <bvanassche@acm.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Tue, 22 Feb 2022 10:43:13 -0800
-Message-Id: <20220222184313.6057-1-bvanassche@acm.org>
-X-Mailer: git-send-email 2.35.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1nMmII-0001fT-0H
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Feb 2022 07:42:41 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=UUDMqr/9c1gNA/wamWMnwltjDT92zuHM5PlATkNE7uw=; b=knZxiD9W6pRdpjcOchY0fSbRZR
+ TuX7xUFcdsrpfwV71LIZFOUZdYME9PbodVM8OlD9ckYCHq7+g7pkI7gveYqEcn19vo1h8el7P7AXC
+ 1mlrWZ3BikTpHCM40cJUPGsz7RP2HKehF0FmgMFveF/UMFqfPmPGUkN64YwrVOzTaD33TupF3ngnj
+ KrEiIHAC2p9PbwASviKdVZbh9jgQlkuH3eKJTMlvCyTM+U91+FYI0ja+C7wHvvN74hRFb5gz95CJy
+ egwLl1rGprTjkvVpVVv9pygIkadMFj8FaFPZE/Uh27euKaX7zniv9e5rkfQ+Xj132fVaVLw7wCI8C
+ 0l+g6oVA==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
+ Hat Linux)) id 1nMmI1-00D9pM-CA; Wed, 23 Feb 2022 07:42:21 +0000
+Date: Tue, 22 Feb 2022 23:42:21 -0800
+From: Christoph Hellwig <hch@infradead.org>
+To: Peter Zijlstra <peterz@infradead.org>
+Message-ID: <YhXlXY28XiG7lVH1@infradead.org>
+References: <20220108164617.3130175-1-jaegeuk@kernel.org>
+ <YdvoxkAAquI17UbX@infradead.org>
+ <a23a3226-95d9-9835-c1c7-2d13f4a1ee16@redhat.com>
+ <CAEe=SxnWeK0pSfijPKJSTxBiMgD1Ev69fV3qSTCgWASk0b3vhA@mail.gmail.com>
+ <Yd7gVLdHW11TQUAi@hirez.programming.kicks-ass.net>
 MIME-Version: 1.0
-X-Spam-Score: 0.5 (/)
+Content-Disposition: inline
+In-Reply-To: <Yd7gVLdHW11TQUAi@hirez.programming.kicks-ass.net>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Lockdep uses lock class keys in its analysis. init_rwsem()
- instantiates one lock class key with each init_rwsem() user as follows:
- #define
- init_rwsem(sem) \ do { \ static struct lock_class_key __key;
- \ \ __init_rwsem((sem), #sem, &__key); \ } while (0) 
- Content analysis details:   (0.5 points, 6.0 required)
+ Content preview:  It looks like this patch landed in linux-next despite all
+ the perfectly reasonable objections. Jaegeuk, please drop it again. On Wed,
+ Jan 12, 2022 at 03:06:12PM +0100, Peter Zijlstra wrote: > On Mon, Jan 10,
+ 2022 at 11:41:23AM -0800, Tim Murray wrote: > > > 1. f2fs-ckpt thread is
+ running f2fs_write_checkpoint(), holding the [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.180 listed in list.dnswl.org]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [198.137.202.133 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [bart.vanassche[at]gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.180 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
- EnvelopeFrom freemail headers are different
-X-Headers-End: 1nMa8D-0001Qq-LH
-Subject: [f2fs-dev] [PATCH] f2fs: Restore rwsem lockdep support
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1nMmII-0001fT-0H
+Subject: Re: [f2fs-dev] [PATCH] f2fs: move f2fs to use reader-unfair rwsems
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,62 +103,65 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: syzbot+0b9cadf5fc45a98a5083@syzkaller.appspotmail.com,
- Bart Van Assche <bvanassche@acm.org>, Tim Murray <timmurray@google.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Boqun Feng <boqun.feng@gmail.com>, LKML <linux-kernel@vger.kernel.org>,
+ Tim Murray <timmurray@google.com>, linux-f2fs-devel@lists.sourceforge.net,
+ Christoph Hellwig <hch@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Waiman Long <longman@redhat.com>,
+ Will Deacon <will@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Lockdep uses lock class keys in its analysis. init_rwsem() instantiates
-one lock class key with each init_rwsem() user as follows:
+It looks like this patch landed in linux-next despite all the perfectly
+reasonable objections.  Jaegeuk, please drop it again.
 
- #define init_rwsem(sem)                                        \
- do {                                                           \
-         static struct lock_class_key __key;                    \
-                                                                \
-         __init_rwsem((sem), #sem, &__key);                     \
- } while (0)
-
-Commit e4544b63a7ee ("f2fs: move f2fs to use reader-unfair rwsems") reduced
-the number of lock class keys from one per init_rwsem() user to one per
-file in which init_f2fs_rwsem() is used. This causes the same lock class key
-to be associated with multiple f2fs rwsems and also triggers a number of
-false positive lockdep deadlock reports. Fix this by again instantiating one
-lock class key with each init_f2fs_rwsem() caller.
-
-Cc: Tim Murray <timmurray@google.com>
-Reported-by: syzbot+0b9cadf5fc45a98a5083@syzkaller.appspotmail.com
-Fixes: e4544b63a7ee ("f2fs: move f2fs to use reader-unfair rwsems")
-Signed-off-by: Bart Van Assche <bvanassche@acm.org>
----
- fs/f2fs/f2fs.h | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index c9515c3c54fd..47bf9e30913f 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -2115,9 +2115,17 @@ static inline void clear_ckpt_flags(struct f2fs_sb_info *sbi, unsigned int f)
- 	spin_unlock_irqrestore(&sbi->cp_lock, flags);
- }
- 
--static inline void init_f2fs_rwsem(struct f2fs_rwsem *sem)
-+#define init_f2fs_rwsem(sem)					\
-+do {								\
-+	static struct lock_class_key __key;			\
-+								\
-+	__init_f2fs_rwsem((sem), #sem, &__key);			\
-+} while (0)
-+
-+static inline void __init_f2fs_rwsem(struct f2fs_rwsem *sem,
-+		const char *sem_name, struct lock_class_key *key)
- {
--	init_rwsem(&sem->internal_rwsem);
-+	__init_rwsem(&sem->internal_rwsem, sem_name, key);
- 	init_waitqueue_head(&sem->read_waiters);
- }
- 
+On Wed, Jan 12, 2022 at 03:06:12PM +0100, Peter Zijlstra wrote:
+> On Mon, Jan 10, 2022 at 11:41:23AM -0800, Tim Murray wrote:
+> 
+> > 1. f2fs-ckpt thread is running f2fs_write_checkpoint(), holding the
+> > cp_rwsem write lock while doing so via f2fs_lock_all() in
+> > block_operations().
+> > 2. Random very-low-priority thread A makes some other f2fs call that
+> > tries to get the cp_rwsem read lock by atomically adding on the rwsem,
+> > fails and deschedules in uninterruptible sleep. cp_rwsem now has a
+> > non-zero reader count but is write-locked.
+> > 3. f2fs-ckpt thread releases the cp_rwsem write lock. cp_rwsem now has
+> > a non-zero reader count and is not write-locked, so is reader-locked.
+> > 4. Other threads call fsync(), which requests checkpoints from
+> > f2fs-ckpt, and block on a completion event that f2fs-ckpt dispatches.
+> > cp_rwsem still has a non-zero reader count because the low-prio thread
+> > A from (2) has not been scheduled again yet.
+> > 5. f2fs-ckpt wakes up to perform checkpoints, but it stalls on the
+> > write lock via cmpxchg in block_operations() until the low-prio thread
+> > A has run and released the cp_rwsem read lock. Because f2fs-ckpt can't
+> > run, all fsync() callers are also effectively blocked by the
+> > low-priority thread holding the read lock.
+> > 
+> > I think this is the rough shape of the problem (vs readers holding the
+> > lock for too long or something like that) because the low-priority
+> > thread is never run between when it is initially made runnable by
+> > f2fs-ckpt and when it runs tens/hundreds of milliseconds later then
+> > immediately unblocks f2fs-ckpt.
+> 
+> *urgh*... so you're making the worst case less likely but fundamentally
+> you don't change anything.
+> 
+> If one of those low prio threads manages to block while holding
+> cp_rwsem your checkpoint thread will still block for a very long time.
+> 
+> So while you improve the average case, the worst case doesn't improve
+> much I think.
+> 
+> Also, given that this is a system wide rwsem, would percpu-rwsem not be
+> 'better' ? Arguably with the same hack cgroups uses for it (see
+> cgroup_init()) to lower the cost of percpu_down_write().
+> 
+> Now, I'm not a filesystem developer and I'm not much familiar with the
+> problem space, but this locking reads like a fairly big problem. I'm not
+> sure optimizing the lock is the answer.
+> 
+> 
+---end quoted text---
 
 
 _______________________________________________
