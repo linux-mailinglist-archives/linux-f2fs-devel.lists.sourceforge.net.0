@@ -2,78 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49C9F4C276D
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Feb 2022 10:08:03 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E9E14C2AED
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Feb 2022 12:31:02 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nNA6S-0005r1-3A; Thu, 24 Feb 2022 09:07:58 +0000
+	id 1nNCKo-0005Jc-5K; Thu, 24 Feb 2022 11:30:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <hdanton@sina.com>) id 1nNA6P-0005qq-Ce
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Feb 2022 09:07:56 +0000
+ (envelope-from <jlayton@kernel.org>) id 1nNCKf-0005JQ-3I
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Feb 2022 11:30:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Content-Type
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YG30lg6z0D0N34jxgNgocLCmtj6K6KoOjyVexFFNzrc=; b=bbYbj0dd+FHwBiBdpV0ybfVZX/
- Clv0t9RDWeYCex0FInu6z02IYvrmOpPOLZGPgiASC14CbwDht+A/rq7bDdXjzDCd8lkqK8sYeN4zY
- +HB5bd+gLk51rSa3332nyRK5DjBLC9eTBJr3IO7vMINyTQ5omAsJnoXN7iPHZAMsrVts=;
+ bh=2cCEVBm34sHIrOWUbRtxcp9TjjNnmPv4V1dP7atF1H4=; b=jWm8TyHHEW6MgvU6j3yYmK2a80
+ Msp0eYXchRJSgZ/fczB1nwf6vfEhZpzWy41uqXywuzff64MPZFaEskRX7YplsZyvy2bUJRSBx4FxK
+ wk1tOJ4MHuSbsaaUAx3EPy9sfWq8UhxrPMCckYt+lw6MWM5s3u+5/DEdQOFvpqiyY61A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YG30lg6z0D0N34jxgNgocLCmtj6K6KoOjyVexFFNzrc=; b=U+ItoMpO96sRZ+LYK7+vdiIP7R
- weIsOlzwYZ7TRR0x09KP/S8ye3xP0R48GiLL4LLn5inHk0+AhupyvtW/HTQv4U9CW8p3lql9k64Jy
- QMFKF4u3WTCwLUoDl/RnmpMEE0abUE02Y+T1bJfwes1aVGO+KiDTBTYbCYR/hcx5VBc8=;
-Received: from r3-19.sinamail.sina.com.cn ([202.108.3.19])
- by sfi-mx-2.v28.lw.sourceforge.com with smtp (Exim 4.94.2)
- id 1nNA6G-0001xD-8u
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Feb 2022 09:07:54 +0000
-Received: from unknown (HELO localhost.localdomain)([114.249.61.131])
- by sina.com (172.16.97.35) with ESMTP
- id 6217460700019413; Thu, 24 Feb 2022 16:47:05 +0800 (CST)
-X-Sender: hdanton@sina.com
-X-Auth-ID: hdanton@sina.com
-X-SMAIL-MID: 33505215074446
-From: Hillf Danton <hdanton@sina.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Thu, 24 Feb 2022 16:47:30 +0800
-Message-Id: <20220224084730.2226-1-hdanton@sina.com>
-In-Reply-To: <20220108164617.3130175-1-jaegeuk@kernel.org>
-References: <20220108164617.3130175-1-jaegeuk@kernel.org>
+ bh=2cCEVBm34sHIrOWUbRtxcp9TjjNnmPv4V1dP7atF1H4=; b=eMXyNrKnjIE7pgHMpw0wSXED4c
+ Nkc49vQJfMnsVDBQaOX4etvK+t9syJXIFuVJYuNmFjTVTb7gg98pifJn9LWZG+0C2WQk2G0nps6dG
+ iejZOcMOS2G/l2kGK7Ij/nMoRkfT01jhqM1nJKPYs2DIIMBmTNI7CmgxmV/CbdZWYjDM=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1nNCKa-0002Vu-BP
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Feb 2022 11:30:46 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B70F861784;
+ Thu, 24 Feb 2022 11:30:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE696C340E9;
+ Thu, 24 Feb 2022 11:30:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1645702235;
+ bh=NEiEy8aPQXv4YCvSSvu1CrwZcw8hIl0XdkWsb+8kvdc=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=lzpWsjsxoWJp5qkJ96UqX80NBnU+UC1GaWf56BLmCibrCohLLcjWbwrFK+UFLdIgS
+ M3+IVpmCOF1k1d18hfO0Yq0UaOYTv8twIThmyrZyJtS0BaI+IBuZ8GbGCLoCA4Nfky
+ uw0HWHltyCjHAtOKREnE0y6956nBervDeobT4ihNlqBT6q1gMuJz1O6ENY8jS1nD30
+ C4oS6GqmHNV9tEmM4VTc/rfnlTTnWEqSE78JNNYFLUpVx8tkL5Lpk/To+UfIvaeCaj
+ xXDDgEeajWU/EpVj5VTsQF8+WQbltJex+TSRMA276bz7hfF54LMk8fLTqs2VgkV0uj
+ ELHbDgvjlTNSA==
+Message-ID: <e8ec98a9c4fab9b7aa099001f09ff9b11f0c3f96.camel@kernel.org>
+From: Jeff Layton <jlayton@kernel.org>
+To: NeilBrown <neilb@suse.de>
+Date: Thu, 24 Feb 2022 06:30:31 -0500
+In-Reply-To: <164568131640.25116.884631856219777713@noble.neil.brown.name>
+References: <164549971112.9187.16871723439770288255.stgit@noble.brown>
+ , <164549983739.9187.14895675781408171186.stgit@noble.brown>
+ , <ccc81eb5c23f933137c5da8d5050540cc54e58f0.camel@kernel.org>
+ <164568131640.25116.884631856219777713@noble.neil.brown.name>
+User-Agent: Evolution 3.42.4 (3.42.4-1.fc35) 
 MIME-Version: 1.0
-X-Spam-Score: -0.7 (/)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sat, 8 Jan 2022 08:46:17 -0800 > From: Tim Murray > > f2fs
- rw_semaphores work better if writers can starve readers, > especially for
- the checkpoint thread, because writers are strictly > more imp [...] 
- Content analysis details:   (-0.7 points, 6.0 required)
+ Content preview:  On Thu, 2022-02-24 at 16:41 +1100, NeilBrown wrote: > On Thu,
+ 24 Feb 2022, Jeff Layton wrote: > > On Tue, 2022-02-22 at 14:17 +1100,
+ NeilBrown
+ wrote: > > > The bdi congestion tracking in not widely us [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [202.108.3.19 listed in wl.mailspike.net]
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [202.108.3.19 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [hdanton[at]sina.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1nNA6G-0001xD-8u
-Subject: [f2fs-dev] [PATCH] f2fs: move f2fs to use reader-unfair rwsems
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nNCKa-0002Vu-BP
+Subject: Re: [f2fs-dev] [PATCH 06/11] ceph: remove reliance on bdi congestion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -85,186 +104,102 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Tim Murray <timmurray@google.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jan Kara <jack@suse.cz>, linux-doc@vger.kernel.org,
+ "Darrick J. Wong" <djwong@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-mm@kvack.org, drbd-dev@lists.linbit.com,
+ Paolo Valente <paolo.valente@linaro.org>, Miklos Szeredi <miklos@szeredi.hu>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Philipp Reisner <philipp.reisner@linbit.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ Lars Ellenberg <lars.ellenberg@linbit.com>,
+ Wu Fengguang <fengguang.wu@intel.com>,
+ Anna Schumaker <anna.schumaker@netapp.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sat,  8 Jan 2022 08:46:17 -0800
-> From: Tim Murray <timmurray@google.com>
+On Thu, 2022-02-24 at 16:41 +1100, NeilBrown wrote:
+> On Thu, 24 Feb 2022, Jeff Layton wrote:
+> > On Tue, 2022-02-22 at 14:17 +1100, NeilBrown wrote:
+> > > The bdi congestion tracking in not widely used and will be removed.
+> > > 
+> > > CEPHfs is one of a small number of filesystems that uses it, setting
+> > > just the async (write) congestion flags at what it determines are
+> > > appropriate times.
+> > > 
+> > > The only remaining effect of the async flag is to cause (some)
+> > > WB_SYNC_NONE writes to be skipped.
+> > > 
+> > > So instead of setting the flag, set an internal flag and change:
+> > >  - .writepages to do nothing if WB_SYNC_NONE and the flag is set
+> > >  - .writepage to return AOP_WRITEPAGE_ACTIVATE if WB_SYNC_NONE
+> > >     and the flag is set.
+> > > 
+> > > The writepages change causes a behavioural change in that pageout() can
+> > > now return PAGE_ACTIVATE instead of PAGE_KEEP, so SetPageActive() will
+> > > be called on the page which (I think) wil further delay the next attempt
+> > > at writeout.  This might be a good thing.
+> > > 
+> > > Signed-off-by: NeilBrown <neilb@suse.de>
+> > 
+> > Maybe. I have to wonder whether all of this is really useful.
+> > 
+> > When things are congested we'll avoid trying to issue new writeback
+> > requests. Note that we don't prevent new pages from being dirtied here -
+> > - only their being written back.
+> > 
+> > This also doesn't do anything in the DIO or sync_write cases, so if we
+> > lose caps or are doing DIO, we'll just keep churning out "unlimited"
+> > writes in those cases anyway.
 > 
-> f2fs rw_semaphores work better if writers can starve readers,
-> especially for the checkpoint thread, because writers are strictly
-> more important than reader threads. This prevents significant priority
-> inversion between low-priority readers that blocked while trying to
-> acquire the read lock and a second acquisition of the write lock that
-> might be blocking high priority work.
+> I think the point of congestion tracking is to differentiate between
+> sync and async IO.  Or maybe "required" and "optional".
+> Eventually the "optional" IO will become required, but if we can delay
+> it until a time when there is less "required" io, then maybe we can
+> improve perceived latency.
 > 
-> Signed-off-by: Tim Murray <timmurray@google.com>
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
+> "optional" IO here is write-back and read-ahead.  If the load of
+> "required" IO is bursty, and if we can shuffle that optional stuff into
+> the quiet periods, we might win.
+> 
 
-...
+In that case, maybe we should be counting in-flight reads too and deny
+readahead when the count crosses some threshold? It seems a bit silly to
+only look at writes when it comes to "congestion".
 
-> +/*
-> + * An implementation of an rwsem that is explicitly unfair to readers. This
-> + * prevents priority inversion when a low-priority reader acquires the read lock
-> + * while sleeping on the write lock but the write lock is needed by
-> + * higher-priority clients.
-> + */
-> +
-> +struct f2fs_rwsem {
-> +        struct rw_semaphore internal_rwsem;
-> +        wait_queue_head_t read_waiters;
-> +};
+> Whether this is a real need is an important question that I don't have an
+> answer for.  And whether it is better to leave delayed requests in the
+> page cache, or in the low-level queue with sync requests able to
+> over-take them - I don't know.  If you have multiple low-level queue as
+> you say you can with ceph, then lower might be better.
+> 
+> The block layer has REQ_RAHEAD ..  maybe those request get should get a
+> lower priority ... though I don't think they do.
+> NFS has a 3 level priority queue, with write-back going at a lower
+> priority ... I think... for NFSv3 at least.
+> 
+> Sometimes I suspect that as all our transports have become faster, we
+> have been able to ignore the extra latency caused by poor scheduling of
+> optional requests.  But at other times when my recently upgraded desktop
+> is struggling to view a web page while compiling a kernel ...  I wonder
+> if maybe we don't have the balance right any more.
+> 
+> So maybe you are right - maybe we can rip all this stuff out.
+> 
 
-...
+I lean more toward just removing it. The existing implementation seems a
+bit half-baked with the gaps in what's being counted. Granted, the
+default congestion threshold is pretty high with modern memory sizes, so
+it probably doesn't come into play much in practice, but removing it
+would reduce some complexity in the client.
 
-> +static inline void f2fs_down_read(struct f2fs_rwsem *sem)
-> +{
-> +	wait_event(sem->read_waiters, down_read_trylock(&sem->internal_rwsem));
-> +}
-> +
-> +static inline int f2fs_down_read_trylock(struct f2fs_rwsem *sem)
-> +{
-> +	return down_read_trylock(&sem->internal_rwsem);
-> +}
-> +
-> +static inline void f2fs_up_read(struct f2fs_rwsem *sem)
-> +{
-> +	up_read(&sem->internal_rwsem);
-> +}
-> +
-> +static inline void f2fs_down_write(struct f2fs_rwsem *sem)
-> +{
-> +	down_write(&sem->internal_rwsem);
-> +}
-> +
-> +static inline int f2fs_down_write_trylock(struct f2fs_rwsem *sem)
-> +{
-> +	return down_write_trylock(&sem->internal_rwsem);
-> +}
-> +
-> +static inline void f2fs_up_write(struct f2fs_rwsem *sem)
-> +{
-> +	up_write(&sem->internal_rwsem);
-> +	wake_up_all(&sem->read_waiters);
-> +}
-> +
-
-Here is my two cents, the unfair rwsem derived from lock_sock(), which has
-no link to rwsem.
-
-Only for thoughts now.
-
-Hillf
-
-struct unfair_rwsem {
-	spinlock_t 	lock;
-	int 		owner; /* < 0 writer, > 0 readers */
-
-	struct list_head reader, writer; /* read/write waiters */
-
-#ifdef CONFIG_DEBUG_LOCK_ALLOC
-	struct lockdep_map dep_map;
-#endif
-};
-
-struct unfair_rwsem_wait {
-	struct list_head 	node;
-	struct task_struct 	*task;
-};
-
-static void lock_unfair_rwsem(struct unfair_rwsem *us, int read)
-{
-	struct unfair_rwsem_wait wait;
-
-	mutex_acquire(&us->dep_map, 0, 0, _RET_IP_);
-	might_sleep();
-	wait.task = current;
-	for (;;) {
-		spin_lock(&us->lock);
-		if (read) {
-			if (us->owner >= 0) {
-				us->owner++;
-				spin_unlock(&us->lock);
-				return;
-			}
-			list_add_tail(&wait.node, &us->reader);
-		} else {
-			if (us->owner == 0) {
-				us->owner--;
-				spin_unlock(&us->lock);
-				return;
-			}
-			list_add_tail(&wait.node, &us->writer);
-		}
-		set_current_state(TASK_UNINTERRUPTIBLE);
-		spin_unlock(&us->lock);
-		schedule();
-	}
-}
-
-void down_read_unfair_rwsem(struct unfair_rwsem *us)
-{
-	lock_unfair_rwsem(us, 1);
-}
-
-void down_write_unfair_rwsem(struct unfair_rwsem *us)
-{
-	lock_unfair_rwsem(us, 0);
-}
-
-static void unlock_unfair_rwsem(struct unfair_rwsem *us, int read)
-{
-	struct list_head *head = NULL;
-	int all = 0;
-
-	spin_lock(&us->lock);
-	if (us->owner < 0) {
-		BUG_ON(read);
-		us->owner++;
-		BUG_ON(0 != us->owner);
-
-		if (!list_empty(&us->writer))
-			head = &us->writer;
-		else if (!list_empty(&us->reader)) {
-			head = &us->reader;
-			all = 1;
-		}
-	} else if (us->owner > 0) {
-		BUG_ON(!read);
-		BUG_ON(!list_empty(&us->reader));
-		us->owner--;
-		if (us->owner == 0)
-			if (!list_empty(&us->writer))
-				head = &us->writer;
-	} else
-		BUG_ON(1);
-
-	mutex_release(&us->dep_map, _RET_IP_);
-	if (head) {
-		struct unfair_rwsem_wait *wait;
-		do {
-			wait = list_first_entry(head, struct unfair_rwsem_wait, node);
-			list_del(&wait->node);
-			wake_up_process(wait->task);
-		} while (all && !list_empty(head));
-	}
-	spin_unlock(&us->lock);
-}
-
-void up_write_unfair_rwsem(struct unfair_rwsem *us)
-{
-	unlock_unfair_rwsem(us, 0);
-}
-
-void up_read_unfair_rwsem(struct unfair_rwsem *us)
-{
-	unlock_unfair_rwsem(us, 1);
-}
-
+-- 
+Jeff Layton <jlayton@kernel.org>
 
 
 _______________________________________________
