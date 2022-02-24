@@ -2,87 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E9E14C2AED
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Feb 2022 12:31:02 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54A7C4C3457
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Feb 2022 19:10:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nNCKo-0005Jc-5K; Thu, 24 Feb 2022 11:30:57 +0000
+	id 1nNIZl-0001zh-Gm; Thu, 24 Feb 2022 18:10:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jlayton@kernel.org>) id 1nNCKf-0005JQ-3I
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Feb 2022 11:30:49 +0000
+ (envelope-from <konishi.ryusuke@gmail.com>) id 1nNIZk-0001za-A4
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Feb 2022 18:10:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Content-Type
- :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2cCEVBm34sHIrOWUbRtxcp9TjjNnmPv4V1dP7atF1H4=; b=jWm8TyHHEW6MgvU6j3yYmK2a80
- Msp0eYXchRJSgZ/fczB1nwf6vfEhZpzWy41uqXywuzff64MPZFaEskRX7YplsZyvy2bUJRSBx4FxK
- wk1tOJ4MHuSbsaaUAx3EPy9sfWq8UhxrPMCckYt+lw6MWM5s3u+5/DEdQOFvpqiyY61A=;
+ bh=5eZDgcxBiEahgQGqIVo4NOwq5Qo0wc2zSQHHLGRnIQM=; b=Ci3nmOHOezqxCuAIZg7UCqf67I
+ TWHr17cvmktyUDwlWQfPVl/jQOcOx4a6Yt0NVUBT4yXbqs3/Rf+hm48PEct10tqcJtucmAqlw9RXO
+ UCL27GfljiZufX6y4GM/fKEMfelckaF0a6rT3WSoQeXSNb0zQ29gEh1rL8YdfE8Td+0I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:
- In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2cCEVBm34sHIrOWUbRtxcp9TjjNnmPv4V1dP7atF1H4=; b=eMXyNrKnjIE7pgHMpw0wSXED4c
- Nkc49vQJfMnsVDBQaOX4etvK+t9syJXIFuVJYuNmFjTVTb7gg98pifJn9LWZG+0C2WQk2G0nps6dG
- iejZOcMOS2G/l2kGK7Ij/nMoRkfT01jhqM1nJKPYs2DIIMBmTNI7CmgxmV/CbdZWYjDM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nNCKa-0002Vu-BP
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Feb 2022 11:30:46 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B70F861784;
- Thu, 24 Feb 2022 11:30:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE696C340E9;
- Thu, 24 Feb 2022 11:30:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1645702235;
- bh=NEiEy8aPQXv4YCvSSvu1CrwZcw8hIl0XdkWsb+8kvdc=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=lzpWsjsxoWJp5qkJ96UqX80NBnU+UC1GaWf56BLmCibrCohLLcjWbwrFK+UFLdIgS
- M3+IVpmCOF1k1d18hfO0Yq0UaOYTv8twIThmyrZyJtS0BaI+IBuZ8GbGCLoCA4Nfky
- uw0HWHltyCjHAtOKREnE0y6956nBervDeobT4ihNlqBT6q1gMuJz1O6ENY8jS1nD30
- C4oS6GqmHNV9tEmM4VTc/rfnlTTnWEqSE78JNNYFLUpVx8tkL5Lpk/To+UfIvaeCaj
- xXDDgEeajWU/EpVj5VTsQF8+WQbltJex+TSRMA276bz7hfF54LMk8fLTqs2VgkV0uj
- ELHbDgvjlTNSA==
-Message-ID: <e8ec98a9c4fab9b7aa099001f09ff9b11f0c3f96.camel@kernel.org>
-From: Jeff Layton <jlayton@kernel.org>
-To: NeilBrown <neilb@suse.de>
-Date: Thu, 24 Feb 2022 06:30:31 -0500
-In-Reply-To: <164568131640.25116.884631856219777713@noble.neil.brown.name>
-References: <164549971112.9187.16871723439770288255.stgit@noble.brown>
- , <164549983739.9187.14895675781408171186.stgit@noble.brown>
- , <ccc81eb5c23f933137c5da8d5050540cc54e58f0.camel@kernel.org>
- <164568131640.25116.884631856219777713@noble.neil.brown.name>
-User-Agent: Evolution 3.42.4 (3.42.4-1.fc35) 
+ bh=5eZDgcxBiEahgQGqIVo4NOwq5Qo0wc2zSQHHLGRnIQM=; b=Fwg7GrAhKTwDfJAdYZkHYAsrod
+ a2SuoPx0THWRH6oTNqSGKC4KLHkjCPOMvt224fewJrRbgHxhsrWgOhW7XkHFiFX2RDLnxrjrHSbku
+ Zw0nDhXWCBpqjL2SGIvmDDqvqnbbB7AgzEsksEqia7A/kRuSX0l/oDSxq/vtDP4Z0ZNA=;
+Received: from mail-yw1-f173.google.com ([209.85.128.173])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nNIZf-00DtQw-Ab
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 24 Feb 2022 18:10:46 +0000
+Received: by mail-yw1-f173.google.com with SMTP id
+ 00721157ae682-2d646fffcc2so7121397b3.4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 24 Feb 2022 10:10:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=5eZDgcxBiEahgQGqIVo4NOwq5Qo0wc2zSQHHLGRnIQM=;
+ b=hOAnqSTI/Gh9yfCHqk+7dOsYcudQiruj8mpt7dmfjM5mWHLmv0u3d04DW8ALfBIXMG
+ jo1aQNu8b37er4WOYMPhB0UKNBWuYIbVmK1S5rZBnKtE3j6emTQsT3qFtpIheorsTivo
+ 5oFwymdPrzK0TL7yVgoFRt/N/qYgq59XcFETBcR/mN/BchTGsA3oSWbl70lTpcsstt5O
+ nRtu1Pud8PUcNNfPv5BadE0iVwqkk4S+ioB/E0TkrKnbVoRVJH4C91+Hcq3PdR/ymM2E
+ gaQI4Q/rQrPyeTqMR7KeZVadtXbPVvCVGUzET6Lt8AJ66Q92342VKnjcz1C6+ONF0BvN
+ RdLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=5eZDgcxBiEahgQGqIVo4NOwq5Qo0wc2zSQHHLGRnIQM=;
+ b=y8T/0MVyOLQcsXtMXTX852Z//W9ed5jjnzGNBwm59PwtbtIqrMmQV3sxESwRhLQVPW
+ peUDmvClAJ9Lh3qkhtxNQ0qhVv2Dwto+zW58xfTsgSi5xMSm6snLwdFlEfoWgIfCEXFh
+ n9/ijnnwoQzKe1lb4SBNg7qtLcsEm9D2AQnCpv/Nwtfy+haGsSiupHbzrH3b+z4QhvfO
+ I8kQzcE0g0x/JDft3/7jOlK8i0WJpDQ37aV77HJFHADNCTd20wNX8TcOCE7vkw/axYMm
+ rE+59YBSIIb34zm5GHdL/keCeVccm2Yj6F8RdzWCm/icETbrMf5WREtaYjMNfpHlA1YR
+ r5kQ==
+X-Gm-Message-State: AOAM531OgUoiHFKqGO/cPY9X4qI6EC/SW9RrS7dkq9izQDbuKnMa85aV
+ mDBhwIQYttfDtypwFCoPwEnCzEzkApulGNBk3vc=
+X-Google-Smtp-Source: ABdhPJzAIqYPKdGLE2EeqFKSCMroLeeiWgQwRfA5B8K+sGjJ+1Pn3nTjD/EQPHmJEn7zy85dqMfSQ0Bfo7hIsT3Znj8=
+X-Received: by 2002:a81:83d7:0:b0:2d6:b550:21b8 with SMTP id
+ t206-20020a8183d7000000b002d6b55021b8mr3756069ywf.188.1645726237054; Thu, 24
+ Feb 2022 10:10:37 -0800 (PST)
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+References: <164447124918.23354.17858831070003318849.stgit@noble.brown>
+ <164447147262.23354.13106570458589592051.stgit@noble.brown>
+In-Reply-To: <164447147262.23354.13106570458589592051.stgit@noble.brown>
+From: Ryusuke Konishi <konishi.ryusuke@gmail.com>
+Date: Fri, 25 Feb 2022 03:10:24 +0900
+Message-ID: <CAKFNMokgJMxfvdwc4isNj_gQHAecJF2tq3j8HRhhxW_xN5L5_Q@mail.gmail.com>
+To: NeilBrown <neilb@suse.de>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 2022-02-24 at 16:41 +1100, NeilBrown wrote: > On Thu,
- 24 Feb 2022, Jeff Layton wrote: > > On Tue, 2022-02-22 at 14:17 +1100,
- NeilBrown
- wrote: > > > The bdi congestion tracking in not widely us [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Thu, Feb 10, 2022 at 2:41 PM NeilBrown wrote: > > These
+ functions are no longer useful as no BDIs report congestions any > more.
+ > > Removing the test on bdi_write_contested() in current_may_thro [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.128.173 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [konishi.ryusuke[at]gmail.com]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.173 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -90,9 +103,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nNCKa-0002Vu-BP
-Subject: Re: [f2fs-dev] [PATCH 06/11] ceph: remove reliance on bdi congestion
+X-Headers-End: 1nNIZf-00DtQw-Ab
+Subject: Re: [f2fs-dev] [PATCH 08/11] Remove bdi_congested() and
+ wb_congested() and related functions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,15 +118,15 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Jan Kara <jack@suse.cz>, linux-doc@vger.kernel.org,
- "Darrick J. Wong" <djwong@kernel.org>, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, drbd-dev@lists.linbit.com,
+ "Darrick J. Wong" <djwong@kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+ Linux MM <linux-mm@kvack.org>, drbd-dev@lists.linbit.com,
  Paolo Valente <paolo.valente@linaro.org>, Miklos Szeredi <miklos@szeredi.hu>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
  Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- linux-nilfs@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ linux-block@vger.kernel.org, linux-nilfs <linux-nilfs@vger.kernel.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
  Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>,
+ Andrew Morton <akpm@linux-foundation.org>, Jeff Layton <jlayton@kernel.org>,
  Philipp Reisner <philipp.reisner@linbit.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
  Lars Ellenberg <lars.ellenberg@linbit.com>,
@@ -123,83 +136,189 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, 2022-02-24 at 16:41 +1100, NeilBrown wrote:
-> On Thu, 24 Feb 2022, Jeff Layton wrote:
-> > On Tue, 2022-02-22 at 14:17 +1100, NeilBrown wrote:
-> > > The bdi congestion tracking in not widely used and will be removed.
-> > > 
-> > > CEPHfs is one of a small number of filesystems that uses it, setting
-> > > just the async (write) congestion flags at what it determines are
-> > > appropriate times.
-> > > 
-> > > The only remaining effect of the async flag is to cause (some)
-> > > WB_SYNC_NONE writes to be skipped.
-> > > 
-> > > So instead of setting the flag, set an internal flag and change:
-> > >  - .writepages to do nothing if WB_SYNC_NONE and the flag is set
-> > >  - .writepage to return AOP_WRITEPAGE_ACTIVATE if WB_SYNC_NONE
-> > >     and the flag is set.
-> > > 
-> > > The writepages change causes a behavioural change in that pageout() can
-> > > now return PAGE_ACTIVATE instead of PAGE_KEEP, so SetPageActive() will
-> > > be called on the page which (I think) wil further delay the next attempt
-> > > at writeout.  This might be a good thing.
-> > > 
-> > > Signed-off-by: NeilBrown <neilb@suse.de>
-> > 
-> > Maybe. I have to wonder whether all of this is really useful.
-> > 
-> > When things are congested we'll avoid trying to issue new writeback
-> > requests. Note that we don't prevent new pages from being dirtied here -
-> > - only their being written back.
-> > 
-> > This also doesn't do anything in the DIO or sync_write cases, so if we
-> > lose caps or are doing DIO, we'll just keep churning out "unlimited"
-> > writes in those cases anyway.
-> 
-> I think the point of congestion tracking is to differentiate between
-> sync and async IO.  Or maybe "required" and "optional".
-> Eventually the "optional" IO will become required, but if we can delay
-> it until a time when there is less "required" io, then maybe we can
-> improve perceived latency.
-> 
-> "optional" IO here is write-back and read-ahead.  If the load of
-> "required" IO is bursty, and if we can shuffle that optional stuff into
-> the quiet periods, we might win.
-> 
+On Thu, Feb 10, 2022 at 2:41 PM NeilBrown <neilb@suse.de> wrote:
+>
+> These functions are no longer useful as no BDIs report congestions any
+> more.
+>
+> Removing the test on bdi_write_contested() in current_may_throttle()
+> could cause a small change in behaviour, but only when PF_LOCAL_THROTTLE
+> is set.
+>
+> So replace the calls by 'false' and simplify the code - and remove the
+> functions.
+>
+> Acked-by: Ryusuke Konishi <konishi.ryusuke@gmail.com> (for nilfs bits)
+> Signed-off-by: NeilBrown <neilb@suse.de>
+> ---
+>  drivers/block/drbd/drbd_int.h |    3 ---
+>  drivers/block/drbd/drbd_req.c |    3 +--
+>  fs/ext2/ialloc.c              |    5 -----
+>  fs/nilfs2/segbuf.c            |   15 ---------------
+>  fs/xfs/xfs_buf.c              |    3 ---
+>  include/linux/backing-dev.h   |   26 --------------------------
+>  mm/vmscan.c                   |    4 +---
+>  7 files changed, 2 insertions(+), 57 deletions(-)
+>
+> diff --git a/drivers/block/drbd/drbd_int.h b/drivers/block/drbd/drbd_int.h
+> index f27d5b0f9a0b..f804b1bfb3e6 100644
+> --- a/drivers/block/drbd/drbd_int.h
+> +++ b/drivers/block/drbd/drbd_int.h
+> @@ -638,9 +638,6 @@ enum {
+>         STATE_SENT,             /* Do not change state/UUIDs while this is set */
+>         CALLBACK_PENDING,       /* Whether we have a call_usermodehelper(, UMH_WAIT_PROC)
+>                                  * pending, from drbd worker context.
+> -                                * If set, bdi_write_congested() returns true,
+> -                                * so shrink_page_list() would not recurse into,
+> -                                * and potentially deadlock on, this drbd worker.
+>                                  */
+>         DISCONNECT_SENT,
+>
+> diff --git a/drivers/block/drbd/drbd_req.c b/drivers/block/drbd/drbd_req.c
+> index 3235532ae077..2e5fb7e442e3 100644
+> --- a/drivers/block/drbd/drbd_req.c
+> +++ b/drivers/block/drbd/drbd_req.c
+> @@ -909,8 +909,7 @@ static bool remote_due_to_read_balancing(struct drbd_device *device, sector_t se
+>
+>         switch (rbm) {
+>         case RB_CONGESTED_REMOTE:
+> -               return bdi_read_congested(
+> -                       device->ldev->backing_bdev->bd_disk->bdi);
+> +               return 0;
+>         case RB_LEAST_PENDING:
+>                 return atomic_read(&device->local_cnt) >
+>                         atomic_read(&device->ap_pending_cnt) + atomic_read(&device->rs_pending_cnt);
+> diff --git a/fs/ext2/ialloc.c b/fs/ext2/ialloc.c
+> index df14e750e9fe..998dd2ac8008 100644
+> --- a/fs/ext2/ialloc.c
+> +++ b/fs/ext2/ialloc.c
+> @@ -170,11 +170,6 @@ static void ext2_preread_inode(struct inode *inode)
+>         unsigned long offset;
+>         unsigned long block;
+>         struct ext2_group_desc * gdp;
+> -       struct backing_dev_info *bdi;
+> -
+> -       bdi = inode_to_bdi(inode);
+> -       if (bdi_rw_congested(bdi))
+> -               return;
+>
+>         block_group = (inode->i_ino - 1) / EXT2_INODES_PER_GROUP(inode->i_sb);
+>         gdp = ext2_get_group_desc(inode->i_sb, block_group, NULL);
+> diff --git a/fs/nilfs2/segbuf.c b/fs/nilfs2/segbuf.c
+> index 43287b0d3e9b..c4510f79037f 100644
+> --- a/fs/nilfs2/segbuf.c
+> +++ b/fs/nilfs2/segbuf.c
+> @@ -343,17 +343,6 @@ static int nilfs_segbuf_submit_bio(struct nilfs_segment_buffer *segbuf,
+>         struct bio *bio = wi->bio;
+>         int err;
+>
+> -       if (segbuf->sb_nbio > 0 &&
+> -           bdi_write_congested(segbuf->sb_super->s_bdi)) {
+> -               wait_for_completion(&segbuf->sb_bio_event);
+> -               segbuf->sb_nbio--;
+> -               if (unlikely(atomic_read(&segbuf->sb_err))) {
+> -                       bio_put(bio);
+> -                       err = -EIO;
+> -                       goto failed;
+> -               }
+> -       }
+> -
+>         bio->bi_end_io = nilfs_end_bio_write;
+>         bio->bi_private = segbuf;
+>         bio_set_op_attrs(bio, mode, mode_flags);
+> @@ -365,10 +354,6 @@ static int nilfs_segbuf_submit_bio(struct nilfs_segment_buffer *segbuf,
+>         wi->nr_vecs = min(wi->max_pages, wi->rest_blocks);
+>         wi->start = wi->end;
+>         return 0;
+> -
+> - failed:
+> -       wi->bio = NULL;
+> -       return err;
+>  }
 
-In that case, maybe we should be counting in-flight reads too and deny
-readahead when the count crosses some threshold? It seems a bit silly to
-only look at writes when it comes to "congestion".
+In this revised version, "int err" is no longer used, so could you
+delete it as well ?
 
-> Whether this is a real need is an important question that I don't have an
-> answer for.  And whether it is better to leave delayed requests in the
-> page cache, or in the low-level queue with sync requests able to
-> over-take them - I don't know.  If you have multiple low-level queue as
-> you say you can with ceph, then lower might be better.
-> 
-> The block layer has REQ_RAHEAD ..  maybe those request get should get a
-> lower priority ... though I don't think they do.
-> NFS has a 3 level priority queue, with write-back going at a lower
-> priority ... I think... for NFSv3 at least.
-> 
-> Sometimes I suspect that as all our transports have become faster, we
-> have been able to ignore the extra latency caused by poor scheduling of
-> optional requests.  But at other times when my recently upgraded desktop
-> is struggling to view a web page while compiling a kernel ...  I wonder
-> if maybe we don't have the balance right any more.
-> 
-> So maybe you are right - maybe we can rip all this stuff out.
-> 
+Regards,
+Ryusuke Konishi
 
-I lean more toward just removing it. The existing implementation seems a
-bit half-baked with the gaps in what's being counted. Granted, the
-default congestion threshold is pretty high with modern memory sizes, so
-it probably doesn't come into play much in practice, but removing it
-would reduce some complexity in the client.
-
--- 
-Jeff Layton <jlayton@kernel.org>
+>
+>  /**
+> diff --git a/fs/xfs/xfs_buf.c b/fs/xfs/xfs_buf.c
+> index b45e0d50a405..b7ebcfe6b8d3 100644
+> --- a/fs/xfs/xfs_buf.c
+> +++ b/fs/xfs/xfs_buf.c
+> @@ -843,9 +843,6 @@ xfs_buf_readahead_map(
+>  {
+>         struct xfs_buf          *bp;
+>
+> -       if (bdi_read_congested(target->bt_bdev->bd_disk->bdi))
+> -               return;
+> -
+>         xfs_buf_read_map(target, map, nmaps,
+>                      XBF_TRYLOCK | XBF_ASYNC | XBF_READ_AHEAD, &bp, ops,
+>                      __this_address);
+> diff --git a/include/linux/backing-dev.h b/include/linux/backing-dev.h
+> index 860b675c2929..2d764566280c 100644
+> --- a/include/linux/backing-dev.h
+> +++ b/include/linux/backing-dev.h
+> @@ -135,11 +135,6 @@ static inline bool writeback_in_progress(struct bdi_writeback *wb)
+>
+>  struct backing_dev_info *inode_to_bdi(struct inode *inode);
+>
+> -static inline int wb_congested(struct bdi_writeback *wb, int cong_bits)
+> -{
+> -       return wb->congested & cong_bits;
+> -}
+> -
+>  long congestion_wait(int sync, long timeout);
+>
+>  static inline bool mapping_can_writeback(struct address_space *mapping)
+> @@ -391,27 +386,6 @@ static inline void wb_blkcg_offline(struct blkcg *blkcg)
+>
+>  #endif /* CONFIG_CGROUP_WRITEBACK */
+>
+> -static inline int bdi_congested(struct backing_dev_info *bdi, int cong_bits)
+> -{
+> -       return wb_congested(&bdi->wb, cong_bits);
+> -}
+> -
+> -static inline int bdi_read_congested(struct backing_dev_info *bdi)
+> -{
+> -       return bdi_congested(bdi, 1 << WB_sync_congested);
+> -}
+> -
+> -static inline int bdi_write_congested(struct backing_dev_info *bdi)
+> -{
+> -       return bdi_congested(bdi, 1 << WB_async_congested);
+> -}
+> -
+> -static inline int bdi_rw_congested(struct backing_dev_info *bdi)
+> -{
+> -       return bdi_congested(bdi, (1 << WB_sync_congested) |
+> -                                 (1 << WB_async_congested));
+> -}
+> -
+>  const char *bdi_dev_name(struct backing_dev_info *bdi);
+>
+>  #endif /* _LINUX_BACKING_DEV_H */
+> diff --git a/mm/vmscan.c b/mm/vmscan.c
+> index ce8492939bd3..0b930556c4f2 100644
+> --- a/mm/vmscan.c
+> +++ b/mm/vmscan.c
+> @@ -2362,9 +2362,7 @@ static unsigned int move_pages_to_lru(struct lruvec *lruvec,
+>   */
+>  static int current_may_throttle(void)
+>  {
+> -       return !(current->flags & PF_LOCAL_THROTTLE) ||
+> -               current->backing_dev_info == NULL ||
+> -               bdi_write_congested(current->backing_dev_info);
+> +       return !(current->flags & PF_LOCAL_THROTTLE);
+>  }
+>
+>  /*
+>
+>
 
 
 _______________________________________________
