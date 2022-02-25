@@ -2,99 +2,170 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B7034C3C29
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Feb 2022 04:08:09 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id F24EA4C3C67
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Feb 2022 04:26:14 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nNQxi-0006rV-H8; Fri, 25 Feb 2022 03:08:05 +0000
+	id 1nNRFE-0000xD-Hf; Fri, 25 Feb 2022 03:26:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nNQxg-0006rP-SR
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Feb 2022 03:08:03 +0000
+ (envelope-from <chao.yu@oppo.com>) id 1nNRFC-0000x7-8I
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Feb 2022 03:26:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=r/nZaq7qdcEJwjEoG+bCgVfu6XWqzyf1psbacFaPnBM=; b=TyZCeQZwkTQbatX4Mvz8z9tnvv
- gpFvHUGZeQCxS1HuHlG3b2Cn0p8GyVh0xQ3nnx1lmq1k565uFoAno9RhBmJXJcV0lA+HYrPXBkG2Z
- RrYON8RbWWgkXG9NoZGQ7/ThzR0OImXpn27vGIxZoTwUdxrfIrv8a+RBEYU3IdFEO1J0=;
+ bh=Lr3Gle7A55jENViCYigy6sCx14PdZhJgfC6nlQdXkN8=; b=mCraW9xznuKf3Bf+WcGH3wX9D7
+ A6K06GWupE/Vfh8KJduZzG1Viy8XMhASI65exLUuFtlhV2fvL0gyYOaGvHJ1JMvKshGU12OprMEOm
+ 5cvov0aQhUWR6UBD6iuaEH4P454Bo7W/FNFhRWWVrtKpcqEvaNiZSDiVS9jcR7upJN4I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=r/nZaq7qdcEJwjEoG+bCgVfu6XWqzyf1psbacFaPnBM=; b=RToCr7Vn0nsL9gJ4ZbMRlkurFs
- xTHRGZkofio3RSg0xq3uD1Ur9nNiKp3tL39BBmOXjqFXyppa60r9stN55pZQzHbYD6Mh3jRVgPFFn
- jz1a2xTU0T6F8YaPEWf64e14DiCNGpzxKO2QXgh5v4ELgu7txm6bwunwQNAHsBjWRxps=;
-Received: from sin.source.kernel.org ([145.40.73.55])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=Lr3Gle7A55jENViCYigy6sCx14PdZhJgfC6nlQdXkN8=; b=Q+yzENqmHkYcbh+n8/4z5fZhGi
+ Ctaalrvs0eZNb/GZZk8+QWqM5g7iOHnHW2WCYD4ofa2E82izwvpqn61JvlElLrYVrs572FB/Gr0NE
+ AFoB23PVJasdkPlhvphoprr+dmmna55R0ZM5HgY0ZWhLQra5hO2bDqa3gjjgTys0+UnE=;
+Received: from mail-sgaapc01on2059.outbound.protection.outlook.com
+ ([40.107.215.59] helo=APC01-SG2-obe.outbound.protection.outlook.com)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nNQxe-00EPmh-I6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Feb 2022 03:08:03 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 6C156CE2176
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 25 Feb 2022 03:07:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 156DBC340E9;
- Fri, 25 Feb 2022 03:07:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1645758470;
- bh=BU9Hea8Fp60TY5OzrOeAri5+VBAOMYh/l6aBBbSri7o=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=TinDmYzi1VW5lUeIom5wQgLkUgObNu9u7oARLNgDw4nnM/eSL1h0N8uSbB+u/TkFe
- Fhj8zvtNiMzGYOMcOtI7ULW3IFo6zBPIkQ4JR1DDDoNgMCq5NULkqPpoTe8M0Lm29q
- mhLBMhWGNPCg3By+BYe+zo7psdQfX8RVkJYS79QAEBNf9a9C0x6dhi4uwJTIF0c6vf
- eyHeJXS1Maz2CoJoB8v3ThI5d8oP9eU4kL/gsosSBEk2OsjrrIs4AAqq2R+w3IhXgH
- +36vZu5Od2i7vjF+6w7aAJIDBMUoLZPv8EnPGDp8oShNLmzYwD/K4aTCuaxBsmIOz/
- xDIn6DuANncPw==
-Message-ID: <d8216020-b439-ca77-fbe2-b68dc44fba25@kernel.org>
-Date: Fri, 25 Feb 2022 11:07:48 +0800
-MIME-Version: 1.0
+ id 1nNRF2-0004Mj-UJ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 25 Feb 2022 03:26:08 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jM1pRrF4FXDpAlv4AACrs93JQp6u3bd0U34Zy1YTH1uCpHO1jPe9K8RJ82+/Lg0N25e5VCrOsRBlv6ZaVqtjhEQ3bHxnrN3GiKOZrI2BPia2e7ls69VGbllIRa13j18PPooAs3TRCCeeHCPCT79Al2NPujw8PsUXUoEq2U0fgbVPkeChLC0fcG+S6S8JLK20vpZe6qnRXM33S3EBiYWxTz37nSrtwXZcscjZzgqbHqjUzCR5LrWCuWkD8fpj771m4HjHVhyHnd9zNYSCCcqlBL6dJgQsS5K+Le3E+xh/t14Mgpw82HQwW0+aPhrBTvNfd2gUhw0oa++sHFipsdgQlQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Lr3Gle7A55jENViCYigy6sCx14PdZhJgfC6nlQdXkN8=;
+ b=Ihj5a62ehZDSNYe3OB1yJhzCt3/2PcpM80P6EhV7dUKVoXg4mi4963wkKML/yDq54bv55PH+AIqEtIGtjjs1/cuRPbv2G4rRfJ5aEpxrvKRxE3pFP/jEVRnrNJepyq6+zreK83tnV2I0xB+QgSrFCj05AjqUUMe2RgViPHRptrUVnD4eHl/EydTqgrCuaFvXkFWnCoj8stdoTqbFiCqM6vD0Y5v7JAj4/QL/C9jGrZien73SKI75/2pecA59lj1OpT9u3vlJQmbtvDdR6dx2golfg+oy7sItw9jCugN3XTn3itmDVTgmAFp9kHY/BZHvGJu6fsXcNf2+u7JeMXf26A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Lr3Gle7A55jENViCYigy6sCx14PdZhJgfC6nlQdXkN8=;
+ b=q4sOlF43DCZefz3El3EielpSvWAG+5WL5pgl8P0Jruux+bATBCdNkq0Ur04LMxM9Wr3zcMsIGnH9Ld/ZQtQxIdsl8N91NN7SSjBpSg0pCgKW3bpMsJ5tuIdg73KV78EngSFBMcAbHl7wQRXLj6WqRD3u9MQu/QvpNhnveimMZ9A=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oppo.com;
+Received: from TY2PR02MB3165.apcprd02.prod.outlook.com (2603:1096:404:4f::13)
+ by HK0PR02MB2897.apcprd02.prod.outlook.com (2603:1096:203:37::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4951.19; Fri, 25 Feb
+ 2022 03:11:24 +0000
+Received: from TY2PR02MB3165.apcprd02.prod.outlook.com
+ ([fe80::cc04:c674:b67b:baac]) by TY2PR02MB3165.apcprd02.prod.outlook.com
+ ([fe80::cc04:c674:b67b:baac%6]) with mapi id 15.20.5017.024; Fri, 25 Feb 2022
+ 03:11:24 +0000
+Message-ID: <51d259d5-468d-4a5e-b654-50d0f02d6c30@oppo.com>
+Date: Fri, 25 Feb 2022 11:11:20 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.6.0
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
-References: <20220203174458.3598593-1-jaegeuk@kernel.org>
- <YgL/HK2aGhFUQhtZ@google.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <YgL/HK2aGhFUQhtZ@google.com>
-X-Spam-Score: -7.9 (-------)
+To: Juhyung Park <qkrwngud825@gmail.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20220215082721.844244-1-qkrwngud825@gmail.com>
+In-Reply-To: <20220215082721.844244-1-qkrwngud825@gmail.com>
+X-ClientProxiedBy: HKAPR04CA0009.apcprd04.prod.outlook.com
+ (2603:1096:203:d0::19) To TY2PR02MB3165.apcprd02.prod.outlook.com
+ (2603:1096:404:4f::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 6c1828b7-64e8-4b57-8794-08d9f80c811a
+X-MS-TrafficTypeDiagnostic: HK0PR02MB2897:EE_
+X-Microsoft-Antispam-PRVS: <HK0PR02MB289726DA9FDCFA82C4BAB4CE923E9@HK0PR02MB2897.apcprd02.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Nae8qNvv/PuV9COdKe9wkKpefmqMV01jratL3eqnPzh2h3nTQ0odE3pS5hWsghmgO7r/PZcMeYOeaf+3CYsn1ho0cw0Zr/sPRvq1Ph5qIMZFquhPDvEg7blryHfHPuWSmDU8QsQfEGFZFn0X+nVnxkNalC+ioVy85EhVrWoeCWedtkchWx7eVVLIKu5zkoodLH2M8TCjqVAia/lZRlZpPyfw10avj7V6FbIACPXacHfHvr6NcXdlBufNWCjrsq6KihOLl5Nyk/ZhXZ3ux+/1Liw6JqFJiRX1FlVd4frOWVGeKgqmmvi+oeondbAi/rvpHKa5rc/ZZLPyJDM1H7Z9Pt24e7fn4WOhlQdk4KuZ93fsA4Pw1v+lv8pfFeU9WSdbRXEJ4DdR0uwshBHGYKhcW0wlNYrg+80x45JuOm5W3Ry6aqgF2pRhAgkncPTcDgfKO+tOu0mf7s1IsIov5MAQeq3mmLAUgPzpsQgOyExMvbRALkB7/cWgMrYFUr+XP5d7VWW4tyaZUlUUTJzcB9Mhj4rsOwPh0ruOXBc7hzfNDcTwKVqmYWtmhy6wlO1zKo0qAS0ysDw7IlIqHgcxGyKLunujtI1sUNOKSBB164IhrhQwc6BikKkh4ok+eScKQnLn1gBU/L0j3FbtrFlKRbvMzLLD/tQHAZrof4DpvmtJzSgbdxfGRNpiNFgIPXRen3KqgGcNvFCFQg4KgNl7dqlMTgtqjYBt/9RqHw4ovZB0OV/5QJPCUe7GOduC/WPcGQYarcmwx9xbdu/h698bKQz4yw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TY2PR02MB3165.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230001)(4636009)(366004)(31686004)(8936002)(316002)(186003)(66476007)(6486002)(53546011)(83380400001)(6666004)(52116002)(5660300002)(26005)(2616005)(31696002)(36756003)(508600001)(66556008)(15650500001)(66946007)(6506007)(38350700002)(44832011)(8676002)(2906002)(86362001)(6512007)(38100700002)(4326008)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ekJvRENhaTU5d3RrNHhrN043ZUV0ZDE5eVJqbTNQZGl1dkpUODJBN2RGOEJU?=
+ =?utf-8?B?TjQrWFpidU93eGR1Ry9QeUpMRUFEWkxUd1FKZ2xwajRMTkxjSDhwQlZuYjJT?=
+ =?utf-8?B?VEs2Wk5NQjk0aldqMzJtek9tZ05sUEdRKzhqNEprTlNTazFFRGtkNUVXV1Vk?=
+ =?utf-8?B?SEQ2TjNCSlpKc05WRGxoRE5WTjF1anFxOUJBKzV2NnhDMzNXUFQzaGR0L3Nj?=
+ =?utf-8?B?bnhMaGZGVW5lVzJ6blU4QkJXbU1uSStpRzJ1VWZmSVBlb0gyR21FdWx6WVd2?=
+ =?utf-8?B?RDRUbVB4RHE4bnhhRWUvMmN0YmhHUm5OQmRPeGlBUWxjZk1yTy9CTHZKa3FD?=
+ =?utf-8?B?YkZqVDY2ZVl5N2JWMlJES3k4a0JiQ0RZRXE0U1o1YkJqRnY2Z04vUDBDZllO?=
+ =?utf-8?B?RDlSbFdaTFNxMGRCZlZTOTJoTkhHZjM4cTF1TjZyZXN1ZGwwSWEvbmk3YTNG?=
+ =?utf-8?B?VnZFQVA0VUlwOStxWndlbU9haTBFcGxtYTZSc3JxZHh5dWpBM0FnRWlVNDFZ?=
+ =?utf-8?B?Mm1LaVZobSs1S2V5cW1ZQjFDWTFBVTJ5VVh5MEE5RUdHZVJEaktUVFRGaWo3?=
+ =?utf-8?B?dWZRM3RkenpJV3hmbnY5Q0k3NTgrY1g4SnIyalNNZzZiQit2N0JVZkl5Z3A4?=
+ =?utf-8?B?SWtOZnpleXFGa0lVbWJKUlN4dDZqWlhNU3QrS2J0TnB3Y04wdW8yNDRDTjB5?=
+ =?utf-8?B?bGwzQ2dtVHh3TFFod25kU093emVEU0tGVHZLbUJFQm9FRVZEWnlFYzN1RmRV?=
+ =?utf-8?B?NitmU2wxQVlmMWRyVGhWQS93STdiSGVYRk9kaG13MWMyNmd2YTRpRHVCYXhT?=
+ =?utf-8?B?YXFuOFNwSW1yd3dudmIzR0dreWd5N3BVejNBaGsrRzRlZ01EYlFoL3A5b0JH?=
+ =?utf-8?B?U0s4eVJDUmFXQW1wK0hVcnJRQnp0NUY3Nkc2ajh4cng5Y1l3K3VjR2I0RWNI?=
+ =?utf-8?B?MWZ1Y2F6S3c4MjNwYUZqZlBvamtiZlcyWlRrOXI2V1pUVTRoTlIwZG9Sa0JV?=
+ =?utf-8?B?Wmg0TmFtVm15NTd0UUl4WnFndEtZb3dvbjQxQTBxUFdnVUh3REVqY3kxalVF?=
+ =?utf-8?B?bDBsN0E5MjN3NHY0cUZDSC84SXlZcCttck94TC8xb0wyZHNST0Y4Z1NxaFdU?=
+ =?utf-8?B?UWR3WTZPRGZ2T3VuVVFaL082N3lSQm50cmlCTkxGTWsxZnpiUkdLVCtWcXlY?=
+ =?utf-8?B?OHhaMkpXK0NKdmgxOXhjRUNkeC82ZENlRllBZVFteUVRK1NtUVBtU01HdWg2?=
+ =?utf-8?B?dHVTYkY0K05OTGM0QWdCT2xkQzFRZys1TUJRMmY2aW9ra0dLTDBHNjVnQnV4?=
+ =?utf-8?B?VWgzcXozQmUwaCtzZkpsUVBkRkV1KzJrVGFnanpkdGxPa3d2aTBRUTJuT2hv?=
+ =?utf-8?B?TFFFMXdIY0lteUN5bXd3NFc4YzYwazlYRHFEZHQ1MlhNVUR1bEM3MkovQ29D?=
+ =?utf-8?B?NlczTnRqVzZ1Z3FhTndqOWMvdmtWdUNBS1Q2N0wvdG9NM1lXU29EQkkrTC9O?=
+ =?utf-8?B?Y21YLy9oK1RHOGR5MjY5aTlUL0krb1JWeHZ5QXBQVHo4MS9kRVA0Y3VQa1BH?=
+ =?utf-8?B?djNUeDEwb2g4NXpGbGd2U0RiaGMrZmFobXJ0cDNkcTdUMm1tZU9VVWZCd1Z6?=
+ =?utf-8?B?bUpQc3NHdVNrVjROMjZwb3VjMFU2ZGpWSzNFb0VhMmlRWU4ySXNESHlJeW15?=
+ =?utf-8?B?TCtaVWpFWEJsRFB5YUlNdmE0UHRaZHJsbURkaVU3WE5FeVZtNnA2Qlp4N2R5?=
+ =?utf-8?B?S2lBVllCdGtLR0hQeWR4TUVXT1ZrYWtMdnAxK1JqR3ZzbFM1aXlESUYvTGhS?=
+ =?utf-8?B?b0gzSStLTlo5eUdORHBHbjJIWHBsZlcyZXZpb21oYjNmbEFXelV1eXlvU0RR?=
+ =?utf-8?B?elVJQm5XUUVtU3UyeFBjQnI2ZjZMYnVKb3lUY2QraHpaVXgvbVZrLzlZbWtI?=
+ =?utf-8?B?UThTNzdDQkhqbnBINTI5Z3dqWFJhS2dYbnlHbjlTUGI2cUNKRlpyRUc5aGkw?=
+ =?utf-8?B?T2pZaWl3eTdia2lkUGRrVWkvTlI2YkNRZWtoRk96WXBNLzJZSHI3M3FCcWtz?=
+ =?utf-8?B?cUxaWE9WS3piWlh2MnhEd1k2NFlLbWp2UnhrZ0pieEFRVWNGZVpSU0h4YW1V?=
+ =?utf-8?B?MU1lVk1Xd1FzYml0bHhYQmk0WU83UFVlWlZ4MTBPVTNOem9zSVFwQVpCMjhi?=
+ =?utf-8?Q?JjY/rXSsr41n/uYZVdPB4bA=3D?=
+X-OriginatorOrg: oppo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6c1828b7-64e8-4b57-8794-08d9f80c811a
+X-MS-Exchange-CrossTenant-AuthSource: TY2PR02MB3165.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2022 03:11:24.2837 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: E93WD/XD+/c7Sr0sJmHNmywCKfU5EGAtAMOgSmTwT+Sb8boQjj31Tjbx3cb72PSE/8lIEMESnBEJebUZ4M4IoA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HK0PR02MB2897
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/2/9 7:39, Jaegeuk Kim wrote: > With this patch, "-g
- android" enables usr/grp/proj quota by default. > > 1) -O quota : enables
- usr/grp > 2) -O project_quota -O extra_attr : enabled prj > 3) -O [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  On 2022/2/15 16:27,
+ Juhyung Park wrote: > cnt should be passed
+ to sb_has_quota_active() instead of type to check > active quota properly.
+ > > Moreover, when the type is -1, the compiler with enough in [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.215.59 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.215.59 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.73.55 listed in list.dnswl.org]
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nNQxe-00EPmh-I6
-Subject: Re: [f2fs-dev] [PATCH v2] mkfs.f2fs: set project quota by default
- for -g android
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1nNRF2-0004Mj-UJ
+Subject: Re: [f2fs-dev] [PATCH] f2fs: quota: fix loop condition at
+ f2fs_quota_sync()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,20 +177,71 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao.yu@oppo.com>
+Cc: stable@vger.kernel.org
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/2/9 7:39, Jaegeuk Kim wrote:
-> With this patch, "-g android" enables usr/grp/proj quota by default.
+On 2022/2/15 16:27, Juhyung Park wrote:
+> cnt should be passed to sb_has_quota_active() instead of type to check
+> active quota properly.
 > 
-> 1) -O quota : enables usr/grp
-> 2) -O project_quota -O extra_attr : enabled prj
-> 3) -O quota -O project_quota -O extra_attr : enables usr/grp/proj
-> 4) -g android : enables usr/grp/proj
-> 5) -g android -O project_quota -O extra_attr : enables usr/grp/proj
+> Moreover, when the type is -1, the compiler with enough inline knowledge
+> can discard sb_has_quota_active() check altogether, causing a NULL pointer
+> dereference at the following inode_lock(dqopt->files[cnt]):
 > 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> [    2.796010] Unable to handle kernel NULL pointer dereference at virtual address 00000000000000a0
+> [    2.796024] Mem abort info:
+> [    2.796025]   ESR = 0x96000005
+> [    2.796028]   EC = 0x25: DABT (current EL), IL = 32 bits
+> [    2.796029]   SET = 0, FnV = 0
+> [    2.796031]   EA = 0, S1PTW = 0
+> [    2.796032] Data abort info:
+> [    2.796034]   ISV = 0, ISS = 0x00000005
+> [    2.796035]   CM = 0, WnR = 0
+> [    2.796046] user pgtable: 4k pages, 39-bit VAs, pgdp=00000003370d1000
+> [    2.796048] [00000000000000a0] pgd=0000000000000000, pud=0000000000000000
+> [    2.796051] Internal error: Oops: 96000005 [#1] PREEMPT SMP
+> [    2.796056] CPU: 7 PID: 640 Comm: f2fs_ckpt-259:7 Tainted: G S                5.4.179-arter97-r8-64666-g2f16e087f9d8 #1
+> [    2.796057] Hardware name: Qualcomm Technologies, Inc. Lahaina MTP lemonadep (DT)
+> [    2.796059] pstate: 80c00005 (Nzcv daif +PAN +UAO)
+> [    2.796065] pc : down_write+0x28/0x70
+> [    2.796070] lr : f2fs_quota_sync+0x100/0x294
+> [    2.796071] sp : ffffffa3f48ffc30
+> [    2.796073] x29: ffffffa3f48ffc30 x28: 0000000000000000
+> [    2.796075] x27: ffffffa3f6d718b8 x26: ffffffa415fe9d80
+> [    2.796077] x25: ffffffa3f7290048 x24: 0000000000000001
+> [    2.796078] x23: 0000000000000000 x22: ffffffa3f7290000
+> [    2.796080] x21: ffffffa3f72904a0 x20: ffffffa3f7290110
+> [    2.796081] x19: ffffffa3f77a9800 x18: ffffffc020aae038
+> [    2.796083] x17: ffffffa40e38e040 x16: ffffffa40e38e6d0
+> [    2.796085] x15: ffffffa40e38e6cc x14: ffffffa40e38e6d0
+> [    2.796086] x13: 00000000000004f6 x12: 00162c44ff493000
+> [    2.796088] x11: 0000000000000400 x10: ffffffa40e38c948
+> [    2.796090] x9 : 0000000000000000 x8 : 00000000000000a0
+> [    2.796091] x7 : 0000000000000000 x6 : 0000d1060f00002a
+> [    2.796093] x5 : ffffffa3f48ff718 x4 : 000000000000000d
+> [    2.796094] x3 : 00000000060c0000 x2 : 0000000000000001
+> [    2.796096] x1 : 0000000000000000 x0 : 00000000000000a0
+> [    2.796098] Call trace:
+> [    2.796100]  down_write+0x28/0x70
+> [    2.796102]  f2fs_quota_sync+0x100/0x294
+> [    2.796104]  block_operations+0x120/0x204
+> [    2.796106]  f2fs_write_checkpoint+0x11c/0x520
+> [    2.796107]  __checkpoint_and_complete_reqs+0x7c/0xd34
+> [    2.796109]  issue_checkpoint_thread+0x6c/0xb8
+> [    2.796112]  kthread+0x138/0x414
+> [    2.796114]  ret_from_fork+0x10/0x18
+> [    2.796117] Code: aa0803e0 aa1f03e1 52800022 aa0103e9 (c8e97d02)
+> [    2.796120] ---[ end trace 96e942e8eb6a0b53 ]---
+> [    2.800116] Kernel panic - not syncing: Fatal exception
+> [    2.800120] SMP: stopping secondary CPUs
+> 
+> Fixes: 9de71ede81e6 ("f2fs: quota: fix potential deadlock")
+> Cc: <stable@vger.kernel.org> # v5.15+
+> Signed-off-by: Juhyung Park <qkrwngud825@gmail.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 
