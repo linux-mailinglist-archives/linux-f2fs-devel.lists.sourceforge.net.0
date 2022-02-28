@@ -2,89 +2,124 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5F2B4C79E2
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 21:17:13 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0B994C7AD5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 21:45:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nOmSE-0005CQ-CA; Mon, 28 Feb 2022 20:17:08 +0000
+	id 1nOmtJ-00052R-CS; Mon, 28 Feb 2022 20:45:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <willy@infradead.org>)
- id 1nOmSC-0005Bt-45; Mon, 28 Feb 2022 20:17:06 +0000
+ (envelope-from <torvalds@linuxfoundation.org>) id 1nOmtF-00052K-U1
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Feb 2022 20:45:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Gzmb9gGTyCSEGFZjR7TUOSRZ1bWW/G5bAVEV+T9ChYA=; b=P9bYlpdliXP+RntH8X4buDu4Ez
- RJ2GK9nSVoUu1ZzmESSo8KP6QpLLsVn6/iA7IPyc91Wr59BkRa6eH/na5do5zvSJ/MBowiSapzZQ6
- y3RrEESIwB30b9DB0f0OD/xpajwBZTeb3yBZntjY+Rvm9R6ZO+L+iR61zgklnsIcvXng=;
+ bh=S/LNP14iVGpJY7HEU3KoWC3rGBeIOldyeXi/18P4YEg=; b=CFWPhxoql0gKACiRJoSCoaVE4M
+ +97avcBrRglUeHvdghmyqXIVXP8oPGtZgAl9wBKzkufFHkC8YblLjGvRjFJafM1hMPedzpxfALuM/
+ q2RxpKCrrFd/o9xMA8iFH9WCw7vW6YqUQYiBya3W+OnA4R0jtuyW8mMgMLeHFhaAHKYY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Gzmb9gGTyCSEGFZjR7TUOSRZ1bWW/G5bAVEV+T9ChYA=; b=IhK5DXRaQHOHz4MOh9bsGdmzhS
- //0KnX8vnhoqF0z04chlFtb/wE9U0jzfRefvOFovbxm5qAdc/JED8yjzxOqkzzo3SELI6os5oPO+w
- l7DXYWH3A1Vk1eg+FRKKGwbUzAdtws9MRJm96BQey2dHS8quZJXQF26qC7P5/SfyM+Fw=;
-Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nOmS8-000T8U-Ep; Mon, 28 Feb 2022 20:17:06 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Gzmb9gGTyCSEGFZjR7TUOSRZ1bWW/G5bAVEV+T9ChYA=; b=HMc4MBy8Vzw7Zw6bzwiCq0vper
- wGe8MnGgfy3P9tw37992OGwcjtB/nFZdz8dqNima3vpVALFvZyXZ3FLoo4RUIh3Ab9CrQCeBzKMqY
- Ctk97R68KJQlQYl84mgCzKSPEBlsm5unT7lh2/ssDfpaJ9kijdyJZ7M9Gq/AZ9YISpkY4qwyvfd22
- UNXuHqD0QUEzQlXJX3VELz7E5j90JJI15fiDqKM4f3XzpVoGyrKZNwsue1ODaw91KQCRdaBoqAoRS
- K+CsuK7iyfWO24fTeFRAPdlXgnD6RcCDMvrfP15+eL0CkbNFD8MwWSyqHmDh8nTOhNkj6bmyxGR8R
- ZvPOqL+g==;
-Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nOmRT-008sRP-GZ; Mon, 28 Feb 2022 20:16:23 +0000
-Date: Mon, 28 Feb 2022 20:16:23 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <Yh0tl3Lni4weIMkl@casper.infradead.org>
+ bh=S/LNP14iVGpJY7HEU3KoWC3rGBeIOldyeXi/18P4YEg=; b=LS/mTeR+GKzOsygrMSv1QIAj0y
+ jzbPdjrMUcXNRhXoc01GRMy385Rdkg/q/vmLhxSZmWN8afjkg+WzxggDFXxUfwOVFjFuwEE71OHFP
+ oztMcUrkBhPJvJ3f9oc0cBytqmBpaeAQYsHzv2V2ZUJAUpD1aZ9b5Ln3Dl7DtBiy2/10=;
+Received: from mail-lf1-f43.google.com ([209.85.167.43])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nOmtA-0005US-Bx
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Feb 2022 20:45:04 +0000
+Received: by mail-lf1-f43.google.com with SMTP id f37so23401466lfv.8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 28 Feb 2022 12:45:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux-foundation.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=S/LNP14iVGpJY7HEU3KoWC3rGBeIOldyeXi/18P4YEg=;
+ b=JCfpf2EkV0u8p2DIwI3SoZoRhHthQMEAy9/7LEkowc8JnTmPgsFXHlzh4U3t+Q6SEk
+ Lc7ftzGO2kIrejoWkV3dzzd0jpx1zu67BigJ1Dmt6MH2aSREOTU5VOooJKZjMGKU+kco
+ F0IyOo2hDxkf3WtcbllN4ffR7kqC0AZqO0I4w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=S/LNP14iVGpJY7HEU3KoWC3rGBeIOldyeXi/18P4YEg=;
+ b=XHfRUG7ezAmRiqWQZ4XWP1OGatV9n4tMG7PbqM5PqCkHcOU6rSV0qZkRdfFm8cO2tM
+ w41Cz7IaZgIW+zo/nfWihd6UyRvq3jKTxqR3YQ7ynyh4KCZ016Rli877fx0QF9gAu+e1
+ 8tVbEQBIuB1kHNQ7eXYrVfkCoFlNu8CZMhtUOlXhq5kSFz/34JeGnw/zroA2SDSrvSU0
+ exXzJjkHS8FmvpNgcG0XRhxRSZSyUWtRHySAKpTvSyjG4LMuzClXO7OqmbRiC9rfT5Wx
+ AJHuNVzAC3lxB9axf0blHjMtjoFzNxNrp+x+CZz5ofZ6LZtIiJ2F4w/vKDM9yBYDwOh9
+ BVMA==
+X-Gm-Message-State: AOAM532YRWLkNjCB+UyaM4oypSB5zdO0tA4rY2Gj0L6Tx3piSzGAADvL
+ YKEkJ225heNqymbvznSMrWRP/qml4rslYw9zfmE=
+X-Google-Smtp-Source: ABdhPJwqfGeEi7Uieo/G0ajxdQB0OmEj9zhRp5YnOjEp6UGdXgAlLy9fyWb8OYclNKh8MZR9aLQpSg==
+X-Received: by 2002:a19:fc15:0:b0:445:79b6:3bf6 with SMTP id
+ a21-20020a19fc15000000b0044579b63bf6mr11336611lfi.282.1646081093610; 
+ Mon, 28 Feb 2022 12:44:53 -0800 (PST)
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com.
+ [209.85.208.169]) by smtp.gmail.com with ESMTPSA id
+ i6-20020a198c46000000b0044424910c94sm1137125lfj.113.2022.02.28.12.44.53
+ for <linux-f2fs-devel@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Feb 2022 12:44:53 -0800 (PST)
+Received: by mail-lj1-f169.google.com with SMTP id p20so19171665ljo.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 28 Feb 2022 12:44:53 -0800 (PST)
+X-Received: by 2002:a2e:924d:0:b0:246:370c:5618 with SMTP id
+ v13-20020a2e924d000000b00246370c5618mr15158756ljg.358.1646080652034; Mon, 28
+ Feb 2022 12:37:32 -0800 (PST)
+MIME-Version: 1.0
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <20220228110822.491923-3-jakobkoschel@gmail.com>
  <2e4e95d6-f6c9-a188-e1cd-b1eae465562a@amd.com>
  <CAHk-=wgQps58DPEOe4y5cTh5oE9EdNTWRLXzgMiETc+mFX7jzw@mail.gmail.com>
  <CAHk-=wj8fkosQ7=bps5K+DDazBXk=ypfn49A0sEq+7-nZnyfXA@mail.gmail.com>
  <CAHk-=wiTCvLQkHcJ3y0hpqH7FEk9D28LDvZZogC6OVLk7naBww@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAHk-=wiTCvLQkHcJ3y0hpqH7FEk9D28LDvZZogC6OVLk7naBww@mail.gmail.com>
-X-Spam-Score: -0.2 (/)
+ <Yh0tl3Lni4weIMkl@casper.infradead.org>
+In-Reply-To: <Yh0tl3Lni4weIMkl@casper.infradead.org>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Mon, 28 Feb 2022 12:37:15 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wgBfJ1-cPA2LTvFyyy8owpfmtCuyiZi4+um8DhFNe+CyA@mail.gmail.com>
+Message-ID: <CAHk-=wgBfJ1-cPA2LTvFyyy8owpfmtCuyiZi4+um8DhFNe+CyA@mail.gmail.com>
+To: Matthew Wilcox <willy@infradead.org>
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Feb 28, 2022 at 12:10:24PM -0800,
- Linus Torvalds wrote:
- > We can do > > typeof(pos) pos > > in the 'for ()' loop, and never use __iter
- at all. > > That means that inside the for-loop, we use a [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Mon, Feb 28,
+ 2022 at 12:16 PM Matthew Wilcox <willy@infradead.org>
+ wrote: > > Then we can never use -Wshadow ;-( I'd love to be able to turn
+ it on; > it catches real bugs. Oh, we already can never use -Wshadow regardless
+ of things like this. That bridge hasn't just been burned, it never existed
+ in the first place. 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.167.43 listed in list.dnswl.org]
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1nOmS8-000T8U-Ep
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.43 listed in wl.mailspike.net]
+X-Headers-End: 1nOmtA-0005US-Bx
 Subject: Re: [f2fs-dev] [PATCH 2/6] treewide: remove using list iterator
  after loop body as a ptr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -133,28 +168,50 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  linux-fsdevel <linux-fsdevel@vger.kernel.org>,
  linux-mediatek@lists.infradead.org, Andrew Morton <akpm@linux-foundation.org>,
  linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Feb 28, 2022 at 12:10:24PM -0800, Linus Torvalds wrote:
-> We can do
-> 
->         typeof(pos) pos
-> 
-> in the 'for ()' loop, and never use __iter at all.
-> 
-> That means that inside the for-loop, we use a _different_ 'pos' than outside.
+On Mon, Feb 28, 2022 at 12:16 PM Matthew Wilcox <willy@infradead.org> wrote:
+>
+> Then we can never use -Wshadow ;-(  I'd love to be able to turn it on;
+> it catches real bugs.
 
-Then we can never use -Wshadow ;-(  I'd love to be able to turn it on;
-it catches real bugs.
+Oh, we already can never use -Wshadow regardless of things like this.
+That bridge hasn't just been burned, it never existed in the first
+place.
 
-> +#define list_for_each_entry(pos, head, member)					\
-> +	for (typeof(pos) pos = list_first_entry(head, typeof(*pos), member);	\
-> +	     !list_entry_is_head(pos, head, member);	\
->  	     pos = list_next_entry(pos, member))
+The whole '-Wshadow' thing simply cannot work with local variables in
+macros - something that we've used since day 1.
+
+Try this (as a "p.c" file):
+
+        #define min(a,b) ({                     \
+                typeof(a) __a = (a);            \
+                typeof(b) __b = (b);            \
+                __a < __b ? __a : __b; })
+
+        int min3(int a, int b, int c)
+        {
+                return min(a,min(b,c));
+        }
+
+and now do "gcc -O2 -S t.c".
+
+Then try it with -Wshadow.
+
+In other words, -Wshadow is simply not acceptable. Never has been,
+never will be, and that has nothing to do with the
+
+        typeof(pos) pos
+
+kind of thing.
+
+Your argument just isn't an argument.
+
+              Linus
 
 
 _______________________________________________
