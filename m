@@ -2,183 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D27E4C6AF4
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 12:40:47 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5C5F4C6BB0
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 13:04:00 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nOeOT-000088-3S; Mon, 28 Feb 2022 11:40:43 +0000
+	id 1nOekt-0005vZ-GA; Mon, 28 Feb 2022 12:03:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <dan.carpenter@oracle.com>)
- id 1nOeOS-00007i-71; Mon, 28 Feb 2022 11:40:43 +0000
+ (envelope-from <jakobkoschel@gmail.com>)
+ id 1nOeko-0005v8-9I; Mon, 28 Feb 2022 12:03:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:In-Reply-To:Content-Type:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
+ Cc:Date:In-Reply-To:From:Subject:Mime-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OqbNlEGVi0Jhv1xB49AY5u0qmTkxv1WHdEQutQxlTT8=; b=emirO1h6SOSqUt3ufe3nTbysWF
- rpJaCE9i2COUfHeJf4AUnbjl2o0n0mwSzcRFwvOKdLEYg0UtldBAY5yNRjcZCHvU50caH9G+En2g2
- Nn/Zat5HJbey1w71tFYVa1OPHuqaEspomM8lJZ+cZTV7169aNR8HTfhpryrMygqdDbDk=;
+ bh=m/mYa1XqvvHLfnL3BOoOqYDa1ViNV7MB47waZKIycw0=; b=i8MioxSoTG3gXfn8IuKXw3ssbI
+ 4B2JorE8b3Ek1guKCh/oLy6R2OP3VJVu3aAf4Q3Joey7LCLN40mZuJ1r9l+lALNCrnVapeU0KNXMj
+ ns3pTFKtmcHpFdd8nlKeyUBVQwzL0QOusgNF1WAqz77mVkWAe3mbKU6C4+u8SzNi/d8o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:In-Reply-To:Content-Type:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
+ From:Subject:Mime-Version:Content-Type:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OqbNlEGVi0Jhv1xB49AY5u0qmTkxv1WHdEQutQxlTT8=; b=kbM/xUWa086sRdrfvrEAozVZDY
- Mz+fTPxXcBSkusTO0ewdaBi4evBZ9p/rQAEJrQ4TAkeBpRWHe9QSig5ja4Youmzsn0qBTAgDkMxnZ
- fF0a58PNkYPAR0F6HHMNwPDkRGvSOZ/BWMFAHmrHg1yzAJb6ytTSxRnLPAqTnwFx/Oyg=;
-Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nOeOO-0003VQ-9K; Mon, 28 Feb 2022 11:40:41 +0000
-Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 21S9cW2R008190; 
- Mon, 28 Feb 2022 11:39:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : references : content-type : in-reply-to :
- mime-version; s=corp-2021-07-09;
- bh=OqbNlEGVi0Jhv1xB49AY5u0qmTkxv1WHdEQutQxlTT8=;
- b=WUSt1la7FIyC8ZUVQu5nCaBTXgKOLI/Q6bKKhlaHU30XfXgGPEAo3gmzBt/NE/JaCfhj
- O+hoiRx4PSkEcmWeUQDXx4RplN3znxyQGuUUxtx8+aQ1fvj6k+WCvCCLs5hMZG/vZX/N
- jg/fUHOCjUX5voQefXR+XB4BsDw3Irc/v1R+wnH4iol3bZs1O3TKRE0H8ZH0OS7h1+Vq
- p5GtUcrhSRtwoVgdyau19oh0Ahwnv75FOWDyTK50CZPLlRYGGL1N0Bs2/SbR+4CPW52r
- VKDCn0x4c1cgHZSRfnI6Qb+jA9wMWpTKGiAKWga/ruqdV97Tmk6MiOMaIiOvgrFrPGCV +g== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
- by mx0b-00069f02.pphosted.com with ESMTP id 3efb02m17t-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 28 Feb 2022 11:39:40 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
- by aserp3030.oracle.com (8.16.1.2/8.16.1.2) with SMTP id 21SBVPlj016430;
- Mon, 28 Feb 2022 11:39:40 GMT
-Received: from nam04-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam08lp2169.outbound.protection.outlook.com [104.47.73.169])
- by aserp3030.oracle.com with ESMTP id 3efa8cckpf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 28 Feb 2022 11:39:40 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WCQX5NY4dE2xQvEr0sL98uvLyQoyLrh5a0jWSWIQp/huSfot/3vl03g7He1qmTVAdwOVsI8iZK8z29JKf6cZJIiayYEgyaGYH1b2Fmediy8GivFX+pTHBKMEyzgr+BXF3656H1N+weUyR03HzFfrJoFV3d+1SYYII2bBPsz9w75MLmWrHEN90kGiqvr6ePt0KrX667W3VO0vTikYvpawYZ6A7nYWmrySCGawdSP5xUv8RCmVHVtsLdrqIJ1Lj0/gWIhJFvXkb4tBYJQB1183OcrQrHogQ4CK/on3caF+WTtaqYFHPF5Q/scwOlrmRpjJvTx1ga3ncsIIDqZE1UkJGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OqbNlEGVi0Jhv1xB49AY5u0qmTkxv1WHdEQutQxlTT8=;
- b=V1HATOWw3GxC5jn/JGCZc33bIUy+LQmOZQ4IqghYANez6+035Jfu02X8uRq+RZ7S1LN0D/Dj9a4izsxewWAo+6QfsT/oh8zL884ZjjzUxLNzTsUYpgl4AejViQJwkXmpkuS5QO5ugmCPuLC3bHHzopefW2y3rjgkndXf2YQmweHaEQRXYLlDwxqgQ3Zm3Rfx3bcKL/BWf04MwC6hmicsOfAQwttMUM5qIAmfUgJCotiDFqBolSMpj3+A49rCtySpwF0uxcQgvmcQmEsau+fKqf7Ji+xXWu83lKdes20/mktmWdd1lpcSnowoVw1H89mQEz9jzzL/SOteEFB/6jNMww==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OqbNlEGVi0Jhv1xB49AY5u0qmTkxv1WHdEQutQxlTT8=;
- b=wGS8NmDTNU/GV1DmxKgvxarGxBre6uklesfQdatmpiYNNK8g0Vm+Ds4DkLPUTxj9C1DB0e5mWC5AgMr+6jre59U09N4kgFx8wK5YB6HrGCI1iZ/Su4cYx1eLRbmnT9whQg36qICZFSeFhBP21mRBkSAncZXkC+RPQRfMmivuA4U=
-Received: from MWHPR1001MB2365.namprd10.prod.outlook.com
- (2603:10b6:301:2d::28) by CY4PR10MB1992.namprd10.prod.outlook.com
- (2603:10b6:903:124::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5017.26; Mon, 28 Feb
- 2022 11:39:36 +0000
-Received: from MWHPR1001MB2365.namprd10.prod.outlook.com
- ([fe80::2c3d:92b5:42b3:c1c5]) by MWHPR1001MB2365.namprd10.prod.outlook.com
- ([fe80::2c3d:92b5:42b3:c1c5%4]) with mapi id 15.20.5017.027; Mon, 28 Feb 2022
- 11:39:36 +0000
-Date: Mon, 28 Feb 2022 14:38:58 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: Jakob Koschel <jakobkoschel@gmail.com>
-Message-ID: <20220228113858.GB2812@kadam>
+ bh=m/mYa1XqvvHLfnL3BOoOqYDa1ViNV7MB47waZKIycw0=; b=fi9A+XIiEtzy40EoJuK+IfM0lQ
+ gl3MzXXUE/9MMbOlVJzplfpU4W7Xxg0LhCxsRgLTlJOMxIn+fD615UbjPtP2UzV/jTsTZW8Y1su87
+ IA2gNKOm2WiSpzT9YhMpBDdjuyges1foG+RpSBdm7O0yozk0/rStsCzX2nYYdYxN+/Zc=;
+Received: from mail-ej1-f45.google.com ([209.85.218.45])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nOekk-00023B-RE; Mon, 28 Feb 2022 12:03:48 +0000
+Received: by mail-ej1-f45.google.com with SMTP id hw13so24235025ejc.9;
+ Mon, 28 Feb 2022 04:03:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=m/mYa1XqvvHLfnL3BOoOqYDa1ViNV7MB47waZKIycw0=;
+ b=puET9FaE+iPLWSLHaH0Jc15P7LML3ILv/CtQc1xDRlDOvchBnePGr3CpZ8iNTFg26S
+ MvdmzyKLao5C/5rXrSzR7jzTPZ0Yuj+7M+cqDE4eOMJCgAt9uraXgTEJwynFkzni1Fvy
+ Vjo1HNa/jUOUFI/CmrkLVTegwpA5o7Cf0wR8qBn5y2xARegC4rz7JN5F70qSFE936vyK
+ a6/WQ787WIaZ7lFx0I/tSaiXwe3z6FIrVBWdIQkzq0oVXXDZs7cCv56cl8qPmZ4RxzRI
+ sP+DHiZk3rxPTft7o6PkfUdJMVZiSNaECaj+ljhYu978P5TkgTkfoRd54h/EuhklkuKS
+ esTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=m/mYa1XqvvHLfnL3BOoOqYDa1ViNV7MB47waZKIycw0=;
+ b=iJEDzITqYZGyBAtGM+Qq5iCbgltTX+aU5u2u0y848wJAY5wW9Jefo3GZmAw8SOW5no
+ OjnRbjknbCsfAMktXRBnBu7nvVVvFo1JZFCJj2Aplu8+WiK8gvHi09fN5uhudIOCytBD
+ d19pFx2VeatPPN13IZQnFEHKFsCbCz7M4PJFmZXcsllysXy/UREMTeyU7UGxBCvMBjAT
+ mm0wVs51luYoXSoNhT5SfgBpPB43n4AwBL7Jf6Sg/Igt4TxzTMkHVUgTDYHRLnzqKEvF
+ fjnCKNpRc9ZV+JV7wPuvWtk0rNQFTiS8ab75gqXt+t79SEu+Hs0TiiksSE0zMbdtIUKw
+ l39w==
+X-Gm-Message-State: AOAM532VtJpoHpY6NjZJh++xWfJS3RBDH8q6Oww65twjtuJyB9225aG7
+ iquKrWc+AbFinJFVxis3CDs=
+X-Google-Smtp-Source: ABdhPJyPihjoYwx+e9NKg98XvxKCbWi7t13guT1EBLKeJ6QGdK72cKHCeJpX8hRszpc83uJxZ+jQ9w==
+X-Received: by 2002:a17:906:d14e:b0:6cd:8d7e:eec9 with SMTP id
+ br14-20020a170906d14e00b006cd8d7eeec9mr14944415ejb.28.1646049820086; 
+ Mon, 28 Feb 2022 04:03:40 -0800 (PST)
+Received: from smtpclient.apple ([2a02:8109:9d80:3f6c:957a:1d13:c949:d1f3])
+ by smtp.gmail.com with ESMTPSA id
+ l9-20020a1709060cc900b006ce04bb8668sm4257528ejh.184.2022.02.28.04.03.37
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 28 Feb 2022 04:03:39 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 15.0 \(3693.60.0.1.1\))
+From: Jakob Koschel <jakobkoschel@gmail.com>
+In-Reply-To: <20220228112413.GA2812@kadam>
+Date: Mon, 28 Feb 2022 13:03:36 +0100
+Message-Id: <E31E215E-C409-40B8-8452-57E70C91484C@gmail.com>
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
- <20220228110822.491923-4-jakobkoschel@gmail.com>
-Content-Disposition: inline
-In-Reply-To: <20220228110822.491923-4-jakobkoschel@gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-ClientProxiedBy: JNXP275CA0047.ZAFP275.PROD.OUTLOOK.COM (2603:1086:0:18::35)
- To MWHPR1001MB2365.namprd10.prod.outlook.com
- (2603:10b6:301:2d::28)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e2d38878-6d1e-4001-acf2-08d9faaeff5c
-X-MS-TrafficTypeDiagnostic: CY4PR10MB1992:EE_
-X-Microsoft-Antispam-PRVS: <CY4PR10MB199245A769D59389E3932A138E019@CY4PR10MB1992.namprd10.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 5WRTAwKBns2/XQ9PsyPpqednV8fus9ZsglKwbOmsgxlB7syM+0sD3GbxVb5jYdPYGhG4LadKveKCgpATaKtxLuSe+PcogCe0nRBaDyZq39uv4rPFOrUu3wOA2mehZPYjZWaY+vB8BznQMHFuQXJy53w2WXU10pM0NQdpjs28jqgJKMtQTt1eQIjdbTnkP4df+v/HV0kqBr6Ork6ytX78P4Fkn9hPuEFvnzSWDm3em34qX4kJyGWbB7rjhRhHYuqvyeuw2ZOS7wECMc524/JRIqlVBRqnsNUiHcOLu0OcqS75wpJseMatI0BKlWvRiworHJBPmPPdhX8hRgDfDuOF4utV5rfGnct7vEstIhmreKv5rZW9Ys9ioNrWHnFEV4BuzaeFKMz4Ffq+VmeJRQpG5g9DupQ8i3QXdR0AsSKPv5ORYbzkzGY4u64pKt6Aeo8q/VmvxJEiI9C+puGzwOiecyerJutHP1peoXsQjmN1xzvIoyVUIArMSgi7Ka2ycoazfimZ+wX1/HwF9xgUewn691VAzfKylohgnW8EWhQayEtmfaDz+xLwjc9rk2Kcx5Fdb3xKkhQ3VAzSQcjLik330N55oWtQN3jRBRb4Ake/IVffypQngavuoI7JHAxa3T5OB3UjXy10uAxuDUGS7MfPVkEetCWRT47h20rrQqd5N9uxfS+HYfVzIzwekqhthM4Uh9QxwPBa+Tel3BAiR8l8Pg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MWHPR1001MB2365.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(7916004)(366004)(4744005)(38350700002)(6486002)(7366002)(6512007)(38100700002)(9686003)(7406005)(33716001)(83380400001)(2906002)(6506007)(52116002)(7416002)(6666004)(316002)(86362001)(508600001)(5660300002)(33656002)(44832011)(8936002)(186003)(54906003)(6916009)(1076003)(4326008)(66476007)(8676002)(66946007)(66556008)(26005);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?NA5Meblnx6V84SsPfqJWvMoKr+dP9hpfGzR4U3LvL1ahID65eQY1UcY57sic?=
- =?us-ascii?Q?0XeRZnJInYgM270YbWfQW0L3bYtzIg3cRtT2zttJWZuelv0UbS1CixTLcAkm?=
- =?us-ascii?Q?nXUtmqr5tatkFOhnVjKyU/KGn7r0aM7YzFN4dilEhhPM/zNaIlHwQo4QJBLd?=
- =?us-ascii?Q?PyJl3utnNe3hJr/jJqwECOjUxuC/2eujqTedNu64aUAdgcW/Lw/Rv4k7FY1H?=
- =?us-ascii?Q?ZW6OfRviTcAgC+GWZK+EUrZV5kkk4JzKI0zHpkYeaXiNaB1bnkVKRWLBxmof?=
- =?us-ascii?Q?mdSGQ8E5j5cqr5m7/4+XXdKHxqXYDRXnnzdk4Ph6NWtycYZg89Gb3iW9efAw?=
- =?us-ascii?Q?3W8P8vNQIfs+2g2t5praY4Lc96spQW/RXy6jDcevwMgTluX8GzXYCdpRAwJ6?=
- =?us-ascii?Q?K6KE1X+Eca+M6/41u4y379/ATNhTH/GCiOa1ljJP9FHxO7ZxdJtGDlMKKwnE?=
- =?us-ascii?Q?Rean1o/p2jRczmtcDxEq6d99tR2ZADj/shTPCDiuU75MErbSZlozrP4dESdT?=
- =?us-ascii?Q?yM0IJsglBTpjOo1QqSOtmMzpYOe+7DWs0zLA3U+UU+1LT1Sk8hksbJXprs2S?=
- =?us-ascii?Q?qqOf2vGFEHPi7EpEOREHIp4JwR1xAKcVczRQvC2zXPo8yVoNBEEeHzaVKib4?=
- =?us-ascii?Q?ZbJJdUZ7Y1hmYNgQRhCumjMx3HD5+p2/LcoVeaiNtDmxAxf34VsSWh+WEMrZ?=
- =?us-ascii?Q?eWkJdBrN4oZqrfUeBDzDiaaeCqwy1AJyk0blttzAJrDbGcH+ImpbsJb73YBf?=
- =?us-ascii?Q?DwxQfEu3vpeUep92um5/woZPP5HNZ1hzae9t6AVeFe7SQlLSYxkZOg2LRmLl?=
- =?us-ascii?Q?it/jW4zwfEQzp7vBNFI3KP7pl29Sutb506CCmG9iAK65ekCMp/02JvvtQrc/?=
- =?us-ascii?Q?I5cdf3XZguLuH5qCU9GyiODq2ggW3ANgCFb9D2BdZ87SN1Pi8FvN2+zkiq+3?=
- =?us-ascii?Q?1SCeRgvxyQcly22CHcVsqqLD2NFyQirmX++nDAukoV/s/Rnl0FIfzC8AkHQ9?=
- =?us-ascii?Q?/LaA7B8cKNVPkiKIigTqE162HDfHRx2wJfO1NVVtlEzYJfPNjaHm1zkm5ati?=
- =?us-ascii?Q?6GqSNKa8rJ68t3QTuAMONeK7KP9DSS/g7QcFomoodu8jXZoZvMqAUOTNx0qD?=
- =?us-ascii?Q?NQOGZ5SBEvJYILrvIiDmeu2XYScAsVaCVTqoEgSCCaJM1kn/AEuk0bhK1EKK?=
- =?us-ascii?Q?kbecQcVF2k6DyM7HaB1XQ5juQVi8VfbeCUWHB+61UhZRVrOGruEeFcuqIgUg?=
- =?us-ascii?Q?HasYt4CD1u8JqEw2tphWmyIg8F7orSEkP9fAKLRt3q//bEXGxt2Y5gKnQXfo?=
- =?us-ascii?Q?zJcJn7rWgrJKg8vHkmlmSLX1l2PVJ8YVnJnP7pJLrjNlQNtqLWHKk6IrqMYV?=
- =?us-ascii?Q?T4oXQzGhsgvyPz52Pnp9jIMj+Km4n63ZZ81jbVgTY+cEqGPY4myVJmqbyzYH?=
- =?us-ascii?Q?YYu8ndUXQ2dTJqYljZz+v5TfhksJ25cOI2cbsIZD8+R4AZm2QW1tA4ZrbFij?=
- =?us-ascii?Q?cFk2NbMoFGGiVGcP3N910jbPQiDn92BBsWw548NLTq9hjwAwuBT9JRA3iEW2?=
- =?us-ascii?Q?UwbbxQiZhQ3ffBhCRqAb8oc51lPG+l15Y9cGNeJA+0AgUzMq4o5x89Rrlm31?=
- =?us-ascii?Q?1g6zVA0FMVndR5JORsqDTnihObEqAXlLb6ILHWU/cDWTeWaVmm7KzDjevcYa?=
- =?us-ascii?Q?3aYugQ=3D=3D?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e2d38878-6d1e-4001-acf2-08d9faaeff5c
-X-MS-Exchange-CrossTenant-AuthSource: MWHPR1001MB2365.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Feb 2022 11:39:36.8121 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dkUwrPKpjs80RDqoyAOItasMuWoYE+Ye3JvGuw+6/228Sl54myDfnuMBziNyptgx5nEMsebN63SK9V7twBYSnLPH4MRsx5zMiCALFupkGdw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR10MB1992
-X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10271
- signatures=684655
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- bulkscore=0 phishscore=0
- malwarescore=0 mlxscore=0 suspectscore=0 spamscore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2201110000
- definitions=main-2202280065
-X-Proofpoint-GUID: 5d_oYQli914BnmJHotDzcMWXY7cT3DqS
-X-Proofpoint-ORIG-GUID: 5d_oYQli914BnmJHotDzcMWXY7cT3DqS
-X-Spam-Score: -0.9 (/)
+ <20220228110822.491923-2-jakobkoschel@gmail.com>
+ <20220228112413.GA2812@kadam>
+To: Dan Carpenter <dan.carpenter@oracle.com>
+X-Mailer: Apple Mail (2.3693.60.0.1.1)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Feb 28, 2022 at 12:08:19PM +0100,
- Jakob Koschel wrote:
- > The list iterator value will *always* be set by list_for_each_entry().
- > It is incorrect to assume that the iterator value will be NULL [...] 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview:  > On 28. Feb 2022, at 12:24, Dan Carpenter wrote: > > On Mon,
+ Feb 28, 2022 at 12:08:17PM +0100,
+ Jakob Koschel wrote: >> diff --git a/drivers/usb/gadget/udc/at91_udc.c
+ b/drivers/usb/gadget/udc/at91_u [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [205.220.177.32 listed in wl.mailspike.net]
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [205.220.177.32 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.218.45 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [jakobkoschel[at]gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.45 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -187,9 +110,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1nOeOO-0003VQ-9K
-Subject: Re: [f2fs-dev] [PATCH 3/6] treewide: fix incorrect use to determine
- if list is empty
+X-Headers-End: 1nOekk-00023B-RE
+Subject: Re: [f2fs-dev] [PATCH 1/6] drivers: usb: remove usage of list
+ iterator past the loop body
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -224,7 +147,8 @@ Cc: alsa-devel@alsa-project.org, linux-aspeed@lists.ozlabs.org,
  linux-arm-kernel@lists.infradead.org, linux-sgx@vger.kernel.org,
  Nathan Chancellor <nathan@kernel.org>,
  Linus Torvalds <torvalds@linux-foundation.org>, linux-usb@vger.kernel.org,
- linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-wireless@vger.kernel.org,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  linux-f2fs-devel@lists.sourceforge.net, tipc-discussion@lists.sourceforge.net,
  linux-crypto@vger.kernel.org, netdev@vger.kernel.org,
  dmaengine@vger.kernel.org, linux-mediatek@lists.infradead.org,
@@ -234,31 +158,120 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Feb 28, 2022 at 12:08:19PM +0100, Jakob Koschel wrote:
-> The list iterator value will *always* be set by list_for_each_entry().
-> It is incorrect to assume that the iterator value will be NULL if the
-> list is empty.
+
+
+> On 28. Feb 2022, at 12:24, Dan Carpenter <dan.carpenter@oracle.com> wrote:
 > 
-> Instead of checking the pointer it should be checked if
-> the list is empty.
-> In acpi_get_pmu_hw_inf() instead of setting the pointer to NULL
-> on the break, it is set to the correct value and leaving it
-> NULL if no element was found.
+> On Mon, Feb 28, 2022 at 12:08:17PM +0100, Jakob Koschel wrote:
+>> diff --git a/drivers/usb/gadget/udc/at91_udc.c b/drivers/usb/gadget/udc/at91_udc.c
+>> index 9040a0561466..0fd0307bc07b 100644
+>> --- a/drivers/usb/gadget/udc/at91_udc.c
+>> +++ b/drivers/usb/gadget/udc/at91_udc.c
+>> @@ -150,13 +150,14 @@ static void proc_ep_show(struct seq_file *s, struct at91_ep *ep)
+>> 	if (list_empty (&ep->queue))
+>> 		seq_printf(s, "\t(queue empty)\n");
+>> 
+>> -	else list_for_each_entry (req, &ep->queue, queue) {
+>> -		unsigned	length = req->req.actual;
+>> +	else
+>> +		list_for_each_entry(req, &ep->queue, queue) {
+>> +			unsigned int	length = req->req.actual;
+>> 
+>> -		seq_printf(s, "\treq %p len %d/%d buf %p\n",
+>> -				&req->req, length,
+>> -				req->req.length, req->req.buf);
+>> -	}
+>> +			seq_printf(s, "\treq %p len %d/%d buf %p\n",
+>> +					&req->req, length,
+>> +					req->req.length, req->req.buf);
+>> +		}
 > 
-> Signed-off-by: Jakob Koschel <jakobkoschel@gmail.com>
-> ---
->  arch/powerpc/sysdev/fsl_gtm.c            |  4 ++--
->  drivers/media/pci/saa7134/saa7134-alsa.c |  4 ++--
->  drivers/perf/xgene_pmu.c                 | 13 +++++++------
->  3 files changed, 11 insertions(+), 10 deletions(-)
+> Don't make unrelated white space changes.  It just makes the patch
+> harder to review.  As you're writing the patch make note of any
+> additional changes and do them later in a separate patch.
+> 
+> Also a multi-line indent gets curly braces for readability even though
+> it's not required by C.  And then both sides would get curly braces.
+> 
+>> 	spin_unlock_irqrestore(&udc->lock, flags);
+>> }
+>> 
+>> @@ -226,7 +227,7 @@ static int proc_udc_show(struct seq_file *s, void *unused)
+>> 
+>> 	if (udc->enabled && udc->vbus) {
+>> 		proc_ep_show(s, &udc->ep[0]);
+>> -		list_for_each_entry (ep, &udc->gadget.ep_list, ep.ep_list) {
+>> +		list_for_each_entry(ep, &udc->gadget.ep_list, ep.ep_list) {
+> 
+> Another unrelated change.
+> 
+>> 			if (ep->ep.desc)
+>> 				proc_ep_show(s, ep);
+>> 		}
+> 
+> 
+> [ snip ]
 
-These are all bug fixes.
+Thanks for pointing out, I'll remove the changes here and note them down
+to send them separately.
 
-1) Send them as 3 separate patches.
-2) Add Fixes tags.
+> 
+>> diff --git a/drivers/usb/gadget/udc/net2272.c b/drivers/usb/gadget/udc/net2272.c
+>> index 7c38057dcb4a..bb59200f1596 100644
+>> --- a/drivers/usb/gadget/udc/net2272.c
+>> +++ b/drivers/usb/gadget/udc/net2272.c
+>> @@ -926,7 +926,8 @@ static int
+>> net2272_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+>> {
+>> 	struct net2272_ep *ep;
+>> -	struct net2272_request *req;
+>> +	struct net2272_request *req = NULL;
+>> +	struct net2272_request *tmp;
+>> 	unsigned long flags;
+>> 	int stopped;
+>> 
+>> @@ -939,11 +940,13 @@ net2272_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+>> 	ep->stopped = 1;
+>> 
+>> 	/* make sure it's still queued on this endpoint */
+>> -	list_for_each_entry(req, &ep->queue, queue) {
+>> -		if (&req->req == _req)
+>> +	list_for_each_entry(tmp, &ep->queue, queue) {
+>> +		if (&tmp->req == _req) {
+>> +			req = tmp;
+>> 			break;
+>> +		}
+>> 	}
+>> -	if (&req->req != _req) {
+>> +	if (!req) {
+>> 		ep->stopped = stopped;
+>> 		spin_unlock_irqrestore(&ep->dev->lock, flags);
+>> 		return -EINVAL;
+>> @@ -954,7 +957,6 @@ net2272_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+>> 		dev_dbg(ep->dev->dev, "unlink (%s) pio\n", _ep->name);
+>> 		net2272_done(ep, req, -ECONNRESET);
+>> 	}
+>> -	req = NULL;
+> 
+> Another unrelated change.  These are all good changes but send them as
+> separate patches.
 
-regards,
-dan carpenter
+You are referring to the req = NULL, right?
+
+I've changed the use of 'req' in the same function and assumed that I can
+just remove the unnecessary statement. But if it's better to do separately
+I'll do that.
+
+> 
+>> 	ep->stopped = stopped;
+>> 
+>> 	spin_unlock_irqrestore(&ep->dev->lock, flags);
+> 
+> regards,
+> dan carpenter
+
+thanks,
+Jakob Koschel
 
 
 
