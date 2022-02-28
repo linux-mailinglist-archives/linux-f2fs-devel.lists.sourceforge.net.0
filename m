@@ -2,79 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CDDC4C6980
+	by mail.lfdr.de (Postfix) with ESMTPS id B363C4C6985
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 12:09:12 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nOdts-0005TC-Jg; Mon, 28 Feb 2022 11:09:07 +0000
+	id 1nOdtw-0004Ql-6u; Mon, 28 Feb 2022 11:09:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <jakobkoschel@gmail.com>)
- id 1nOdtq-0005ST-QQ; Mon, 28 Feb 2022 11:09:05 +0000
+ id 1nOdtr-0004QU-WB; Mon, 28 Feb 2022 11:09:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DGHuYFjchXbmgUIZ1SnPPgINXW2r1tGfV7LKxanZ5rw=; b=ThoOcUPaw0DFX/p8k2Ntrh+8Vs
- WbwS8qdwBiEBY24WryrqTA2fyrjoXyG0xKprlqOFstcrCrrcCADRP7V4nRtQLm/RtFiIwVbZ304j1
- LvFHMlAP6JDfsANfudVU+u1eeCMsnKlKPJqsIa1SiFqtMi48J2nQnYjXJbyt5RyLpiHY=;
+ bh=/EGi4mr40p3raaac66vU0+hvD5YB9qCu1pOgtbPKlNE=; b=C10KBIxJWij1h4e0Ay7QadqsIo
+ InNTC0zJQJZBTYgitJ46xQxswK1N+uF+ql6TFFDsfkDKCKuuWI0o5DIFaajRt0YLU88an3psZ2eg1
+ O6w1d2F74Zpw/jUi1/l+ZlgiRK8aRatMoi1rIFgtixI5UYyE7LlKRiR/BpauRLkafgak=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DGHuYFjchXbmgUIZ1SnPPgINXW2r1tGfV7LKxanZ5rw=; b=c
- m/uGRHaRuXqKAmPeZf5kOO6wH7SJznKJc8/dDjMOtLLJekvquX+3brpXb71m/SKLkQ53au01Os+nP
- XjJPN9qKXEQKeKlQXIcPOaKcC/mILMa+FW50PZCDcl+9sTun6kV5z9pk+G70xI8Fr0szgZdvMYFRw
- bg9kUrraIDcijsxE=;
-Received: from mail-ej1-f53.google.com ([209.85.218.53])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=/EGi4mr40p3raaac66vU0+hvD5YB9qCu1pOgtbPKlNE=; b=bKwMNyVEP6aIdYK7K/02fDntzO
+ Y2CMW2pZLxKpbK4D2smyfiASfQgEvSl2ge723/HYp8a5kPwrlnstZsTd+cY+FJe4KugmcyxTVyj5O
+ WokXxsZsl9j8hNmvAqiBW08moeRYkZY/QHao+JTcQvcdY4naIY5ducwcSBALBC5Q5mDM=;
+Received: from mail-ej1-f45.google.com ([209.85.218.45])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nOdtj-0007IF-Jg; Mon, 28 Feb 2022 11:09:04 +0000
-Received: by mail-ej1-f53.google.com with SMTP id gb39so24032858ejc.1;
- Mon, 28 Feb 2022 03:08:59 -0800 (PST)
+ id 1nOdtl-0007IL-5x; Mon, 28 Feb 2022 11:09:06 +0000
+Received: by mail-ej1-f45.google.com with SMTP id lw4so23946704ejb.12;
+ Mon, 28 Feb 2022 03:09:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=DGHuYFjchXbmgUIZ1SnPPgINXW2r1tGfV7LKxanZ5rw=;
- b=mx6+xil8F/OwTucWDkjx4s8oWe9qKYEvq+lRSteVfL7qHoHjMYzOaON1c2kL9OYiTX
- db1Mykp/ffS9il6Fqi76pAlN/G5rXNdswBXj/5Gig3gkxoatbBHPRDADsVd/P2bKgern
- FiNaHDXHNfiQkUQdDT0QxGTuel99Vo9xYQqWbNfVZEfqWt3+vAZeTOc1QbByn6ecNGa6
- S2BlhLxmBqy/aCRkfkMxvBR+4RMiFfh+//eOhtERGL+8TdWCfHba+zdrYCDUyKUpjEKv
- GoJF4WvvVQmT7fMcDismFLp5shdM79FKyOLpnEpulQji7R6fg8Aw9kXLsIi9eJ28dAK+
- e6Aw==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=/EGi4mr40p3raaac66vU0+hvD5YB9qCu1pOgtbPKlNE=;
+ b=VH7eVEC8n4nRrOoErZmqRCmKK7V5zc3O3oKOvZo//InJ7XISRo4OXBvRXMfd2rUS1i
+ Z3McStXnEH5YC1rDBQByspf6SMehlrdIcvguNTspxofen/r+Ku9/5Zc6VDa43ZuI+L2p
+ ODGsjalHPfmdltJq4PehGBFpGUI5lnN4Jq/QY5horoOOjoTVfSDxXFEdAwVql0IqIAtS
+ 7kgSGPGWQVceCqMCNEvvla+av+fJUYIE93j17d1iaJrIlF6Edh2jwNed9PrIimvbPII3
+ vwkIbcMNChpBfeEAd9IaH2Ydb6zZyuRdWphPE+E4m5NB1jeJOzq80m/tuCsGSREkl1bm
+ sUSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=DGHuYFjchXbmgUIZ1SnPPgINXW2r1tGfV7LKxanZ5rw=;
- b=Z6wKcmqTakK6TsRpiC+eYpbW2y3Ttd3HrOzli7ziEkqr2CwX6cGvA6CJU56KySkZVt
- sCnN7rpkzHfYGYELHcsZOeoWLYU6gJ2C2aFO70xP/A30sHLzeZ3ieStUxV64G1UovEVy
- /avUEyIFIKTxnZ7X+K6NSKzW196VpHNJhcpIp489RTa0staN2bHtmzePZQF5jAc8fQPM
- BOtcVxdcZcijHe6LsDnMcG/Ja98ij84Z1AbRhA2Qvu3nsMNFlslP7PURTs1/T8gQUmsO
- +AkvPwOh2vF2q1jfCGw7v/PA8CHAw2XiGb6fOGeBUuRRP4OGGLYxIQkSKFFluVHARSRI
- 7h+g==
-X-Gm-Message-State: AOAM530mnOvr9qyXbDOOGXlKszd1boDpxLAqHFE+lIWD1QKo0ITSYE+O
- 8RgjTrGOAe+KW8NyHXY8N+k=
-X-Google-Smtp-Source: ABdhPJzNctGRxtGORumk8xJxhLEhhYPBXw3MCY4PM4mZEwTJgQgzAy87Z2fgE8nw5jOtXDmEFeeNlg==
-X-Received: by 2002:a17:906:32d8:b0:6ce:d850:f79 with SMTP id
- k24-20020a17090632d800b006ced8500f79mr14260258ejk.414.1646046532887; 
- Mon, 28 Feb 2022 03:08:52 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=/EGi4mr40p3raaac66vU0+hvD5YB9qCu1pOgtbPKlNE=;
+ b=erkOeeNIt94tSlSySGtkbJYZKS3PvcBH77S0Qp/7WQBw1f3CrUYoHbBCyc9TWAD7Zh
+ bjCsdYeeWG313Tgv426j//Ve8TuWJ1tRoTTINytszDkQKV1JLH8Lj70WAfI37tqLoLMk
+ scBu96caYL7oz5cCvWUdFOVkRYjjPxI4qCI74sPgef3AdJI9yggAxxU93QHL3HxZ0dik
+ k7Gv+pFxZP+hYvsUU+tFSuTKeqPFO+42vjwfO/+/DCvXIJvWTsgygrx0zFYk5YLN89+F
+ pLoEdueC5J/EOG9ctOjtAhi5HvsAsIZtaXSEaK/XezDHvLNgdzQDoA+M6eyqh2CnSv9o
+ JmLg==
+X-Gm-Message-State: AOAM533fr8i50nGJLtUGMz36N8MzPv2TADzASzmF4nsJZWft5QKigv3d
+ Klamc5nRQxv1HR0JCfvjkhQ=
+X-Google-Smtp-Source: ABdhPJxdOZxTrBRs3m8EHdN9xiZB1+7/ZwU5F9dTBO3q/FP0GLy97OxjFGh37oi6BNvQ+yLVOlfqsg==
+X-Received: by 2002:a17:907:3dab:b0:6d6:a9a8:be4b with SMTP id
+ he43-20020a1709073dab00b006d6a9a8be4bmr4593604ejc.34.1646046534587; 
+ Mon, 28 Feb 2022 03:08:54 -0800 (PST)
 Received: from localhost.localdomain (dhcp-077-250-038-153.chello.nl.
  [77.250.38.153]) by smtp.googlemail.com with ESMTPSA id
- z22-20020a17090655d600b006d229436793sm4209049ejp.223.2022.02.28.03.08.51
+ z22-20020a17090655d600b006d229436793sm4209049ejp.223.2022.02.28.03.08.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Feb 2022 03:08:52 -0800 (PST)
+ Mon, 28 Feb 2022 03:08:54 -0800 (PST)
 From: Jakob Koschel <jakobkoschel@gmail.com>
 To: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Mon, 28 Feb 2022 12:08:16 +0100
-Message-Id: <20220228110822.491923-1-jakobkoschel@gmail.com>
+Date: Mon, 28 Feb 2022 12:08:17 +0100
+Message-Id: <20220228110822.491923-2-jakobkoschel@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220228110822.491923-1-jakobkoschel@gmail.com>
+References: <20220228110822.491923-1-jakobkoschel@gmail.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -83,22 +85,20 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This is the first patch removing several categories of use
- cases of the list iterator variable past the loop. This is follow up to the
- discussion in: As concluded in: the correct use should be using a separate
- variable after the loop and using a 'tmp' variable as the list iterator.
- The list iterator will not point to a valid structure after the l [...] 
+ Content preview: If the list representing the request queue does not contain
+ the expected request, the value of list_for_each_entry() iterator will not
+ point to a valid structure. To avoid type confusion in such case, [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.218.53 listed in list.dnswl.org]
+ no trust [209.85.218.45 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [jakobkoschel[at]gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.218.53 listed in wl.mailspike.net]
+ [209.85.218.45 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -108,9 +108,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nOdtj-0007IF-Jg
-Subject: [f2fs-dev] [PATCH 0/6] Remove usage of list iterator past the loop
- body
+X-Headers-End: 1nOdtl-0007IL-5x
+Subject: [f2fs-dev] [PATCH 1/6] drivers: usb: remove usage of list iterator
+ past the loop body
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -153,158 +153,604 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This is the first patch removing several categories of use cases of
-the list iterator variable past the loop.
-This is follow up to the discussion in:
-https://lore.kernel.org/all/20220217184829.1991035-1-jakobkoschel@gmail.com/
+If the list representing the request queue does not contain the expected
+request, the value of list_for_each_entry() iterator will not point to a
+valid structure. To avoid type confusion in such case, the list iterator
+scope will be limited to list_for_each_entry() loop.
 
-As concluded in:
-https://lore.kernel.org/all/YhdfEIwI4EdtHdym@kroah.com/
-the correct use should be using a separate variable after the loop
-and using a 'tmp' variable as the list iterator.
-The list iterator will not point to a valid structure after the loop
-if no break/goto was hit. Invalid uses of the list iterator variable
-can be avoided altogether by simply using a separate pointer to
-iterate the list.
+In preparation to limiting scope of a list iterator to the list traversal
+loop, use a dedicated pointer to point to the found request object.
 
-Linus and Greg agreed on the following pattern:
+Signed-off-by: Jakob Koschel <jakobkoschel@gmail.com>
+---
+ drivers/usb/gadget/udc/aspeed-vhub/epn.c | 11 ++++++----
+ drivers/usb/gadget/udc/at91_udc.c        | 26 ++++++++++++++----------
+ drivers/usb/gadget/udc/atmel_usba_udc.c  | 11 ++++++----
+ drivers/usb/gadget/udc/bdc/bdc_ep.c      | 11 +++++++---
+ drivers/usb/gadget/udc/fsl_qe_udc.c      | 11 ++++++----
+ drivers/usb/gadget/udc/fsl_udc_core.c    | 11 ++++++----
+ drivers/usb/gadget/udc/goku_udc.c        | 11 ++++++----
+ drivers/usb/gadget/udc/gr_udc.c          | 11 ++++++----
+ drivers/usb/gadget/udc/lpc32xx_udc.c     | 11 ++++++----
+ drivers/usb/gadget/udc/mv_u3d_core.c     | 11 ++++++----
+ drivers/usb/gadget/udc/mv_udc_core.c     | 11 ++++++----
+ drivers/usb/gadget/udc/net2272.c         | 12 ++++++-----
+ drivers/usb/gadget/udc/net2280.c         | 11 ++++++----
+ drivers/usb/gadget/udc/omap_udc.c        | 11 ++++++----
+ drivers/usb/gadget/udc/pxa25x_udc.c      | 11 ++++++----
+ drivers/usb/gadget/udc/s3c-hsudc.c       | 11 ++++++----
+ drivers/usb/gadget/udc/udc-xilinx.c      | 11 ++++++----
+ 17 files changed, 128 insertions(+), 75 deletions(-)
 
--	struct gr_request *req;
-+	struct gr_request *req = NULL;
-+	struct gr_request *tmp;
-	struct gr_ep *ep;
-	int ret = 0;
+diff --git a/drivers/usb/gadget/udc/aspeed-vhub/epn.c b/drivers/usb/gadget/udc/aspeed-vhub/epn.c
+index 917892ca8753..cad874ee4472 100644
+--- a/drivers/usb/gadget/udc/aspeed-vhub/epn.c
++++ b/drivers/usb/gadget/udc/aspeed-vhub/epn.c
+@@ -466,19 +466,22 @@ static int ast_vhub_epn_dequeue(struct usb_ep* u_ep, struct usb_request *u_req)
+ {
+ 	struct ast_vhub_ep *ep = to_ast_ep(u_ep);
+ 	struct ast_vhub *vhub = ep->vhub;
+-	struct ast_vhub_req *req;
++	struct ast_vhub_req *req = NULL;
++	struct ast_vhub_req *tmp;
+ 	unsigned long flags;
+ 	int rc = -EINVAL;
+
+ 	spin_lock_irqsave(&vhub->lock, flags);
+
+ 	/* Make sure it's actually queued on this endpoint */
+-	list_for_each_entry (req, &ep->queue, queue) {
+-		if (&req->req == u_req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == u_req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+
+-	if (&req->req == u_req) {
++	if (req) {
+ 		EPVDBG(ep, "dequeue req @%p active=%d\n",
+ 		       req, req->active);
+ 		if (req->active)
+diff --git a/drivers/usb/gadget/udc/at91_udc.c b/drivers/usb/gadget/udc/at91_udc.c
+index 9040a0561466..0fd0307bc07b 100644
+--- a/drivers/usb/gadget/udc/at91_udc.c
++++ b/drivers/usb/gadget/udc/at91_udc.c
+@@ -150,13 +150,14 @@ static void proc_ep_show(struct seq_file *s, struct at91_ep *ep)
+ 	if (list_empty (&ep->queue))
+ 		seq_printf(s, "\t(queue empty)\n");
+
+-	else list_for_each_entry (req, &ep->queue, queue) {
+-		unsigned	length = req->req.actual;
++	else
++		list_for_each_entry(req, &ep->queue, queue) {
++			unsigned int	length = req->req.actual;
+
+-		seq_printf(s, "\treq %p len %d/%d buf %p\n",
+-				&req->req, length,
+-				req->req.length, req->req.buf);
+-	}
++			seq_printf(s, "\treq %p len %d/%d buf %p\n",
++					&req->req, length,
++					req->req.length, req->req.buf);
++		}
+ 	spin_unlock_irqrestore(&udc->lock, flags);
+ }
+
+@@ -226,7 +227,7 @@ static int proc_udc_show(struct seq_file *s, void *unused)
+
+ 	if (udc->enabled && udc->vbus) {
+ 		proc_ep_show(s, &udc->ep[0]);
+-		list_for_each_entry (ep, &udc->gadget.ep_list, ep.ep_list) {
++		list_for_each_entry(ep, &udc->gadget.ep_list, ep.ep_list) {
+ 			if (ep->ep.desc)
+ 				proc_ep_show(s, ep);
+ 		}
+@@ -704,7 +705,8 @@ static int at91_ep_queue(struct usb_ep *_ep,
+ static int at91_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct at91_ep		*ep;
+-	struct at91_request	*req;
++	struct at91_request	*req = NULL;
++	struct at91_request	*tmp;
+ 	unsigned long		flags;
+ 	struct at91_udc		*udc;
+
+@@ -717,11 +719,13 @@ static int at91_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	spin_lock_irqsave(&udc->lock, flags);
+
+ 	/* make sure it's actually queued on this endpoint */
+-	list_for_each_entry (req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (!req) {
+ 		spin_unlock_irqrestore(&udc->lock, flags);
+ 		return -EINVAL;
+ 	}
+diff --git a/drivers/usb/gadget/udc/atmel_usba_udc.c b/drivers/usb/gadget/udc/atmel_usba_udc.c
+index 2b893bceea45..8e393e14f137 100644
+--- a/drivers/usb/gadget/udc/atmel_usba_udc.c
++++ b/drivers/usb/gadget/udc/atmel_usba_udc.c
+@@ -860,7 +860,8 @@ static int usba_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct usba_ep *ep = to_usba_ep(_ep);
+ 	struct usba_udc *udc = ep->udc;
+-	struct usba_request *req;
++	struct usba_request *req = NULL;
++	struct usba_request *tmp;
+ 	unsigned long flags;
+ 	u32 status;
+
+@@ -869,12 +870,14 @@ static int usba_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+
+ 	spin_lock_irqsave(&udc->lock, flags);
 
 -	list_for_each_entry(req, &ep->queue, queue) {
 -		if (&req->req == _req)
 +	list_for_each_entry(tmp, &ep->queue, queue) {
 +		if (&tmp->req == _req) {
 +			req = tmp;
-			break;
+ 			break;
 +		}
-	}
+ 	}
+
 -	if (&req->req != _req) {
 +	if (!req) {
-		ret = -EINVAL;
-		goto out;
-	}
+ 		spin_unlock_irqrestore(&udc->lock, flags);
+ 		return -EINVAL;
+ 	}
+diff --git a/drivers/usb/gadget/udc/bdc/bdc_ep.c b/drivers/usb/gadget/udc/bdc/bdc_ep.c
+index 8e2f20b12519..829e96791d0a 100644
+--- a/drivers/usb/gadget/udc/bdc/bdc_ep.c
++++ b/drivers/usb/gadget/udc/bdc/bdc_ep.c
+@@ -1757,6 +1757,7 @@ static int bdc_gadget_ep_dequeue(struct usb_ep *_ep,
+ 				  struct usb_request *_req)
+ {
+ 	struct bdc_req *req;
++	struct bdc_req *tmp;
+ 	unsigned long flags;
+ 	struct bdc_ep *ep;
+ 	struct bdc *bdc;
+@@ -1771,12 +1772,16 @@ static int bdc_gadget_ep_dequeue(struct usb_ep *_ep,
+ 	dev_dbg(bdc->dev, "%s ep:%s req:%p\n", __func__, ep->name, req);
+ 	bdc_dbg_bd_list(bdc, ep);
+ 	spin_lock_irqsave(&bdc->lock, flags);
++
++	req = NULL;
+ 	/* make sure it's still queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->usb_req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->usb_req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->usb_req != _req) {
++	if (!req) {
+ 		spin_unlock_irqrestore(&bdc->lock, flags);
+ 		dev_err(bdc->dev, "usb_req !=req n");
+ 		return -EINVAL;
+diff --git a/drivers/usb/gadget/udc/fsl_qe_udc.c b/drivers/usb/gadget/udc/fsl_qe_udc.c
+index 15db7a3868fe..3979a2825e3c 100644
+--- a/drivers/usb/gadget/udc/fsl_qe_udc.c
++++ b/drivers/usb/gadget/udc/fsl_qe_udc.c
+@@ -1776,7 +1776,8 @@ static int qe_ep_queue(struct usb_ep *_ep, struct usb_request *_req,
+ static int qe_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct qe_ep *ep = container_of(_ep, struct qe_ep, ep);
+-	struct qe_req *req;
++	struct qe_req *req = NULL;
++	struct qe_req *tmp;
+ 	unsigned long flags;
 
+ 	if (!_ep || !_req)
+@@ -1785,12 +1786,14 @@ static int qe_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	spin_lock_irqsave(&ep->udc->lock, flags);
 
-With gnu89 the list iterator variable cannot yet be declared
-within the for loop of the list iterator.
-Moving to a more modern version of C would allow defining
-the list iterator variable within the macro, limiting
-the scope to the loop.
-This avoids any incorrect usage past the loop altogether.
+ 	/* make sure it's actually queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
 
-This are around 30% of the cases where the iterator
-variable is used past the loop (identified with a slightly
-modified version of use_after_iter.cocci).
-I've decided to split it into at a few patches separated
-by similar use cases.
+-	if (&req->req != _req) {
++	if (!req) {
+ 		spin_unlock_irqrestore(&ep->udc->lock, flags);
+ 		return -EINVAL;
+ 	}
+diff --git a/drivers/usb/gadget/udc/fsl_udc_core.c b/drivers/usb/gadget/udc/fsl_udc_core.c
+index 29fcb9b461d7..23d670fae12c 100644
+--- a/drivers/usb/gadget/udc/fsl_udc_core.c
++++ b/drivers/usb/gadget/udc/fsl_udc_core.c
+@@ -918,7 +918,8 @@ fsl_ep_queue(struct usb_ep *_ep, struct usb_request *_req, gfp_t gfp_flags)
+ static int fsl_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct fsl_ep *ep = container_of(_ep, struct fsl_ep, ep);
+-	struct fsl_req *req;
++	struct fsl_req *req = NULL;
++	struct fsl_req *tmp;
+ 	unsigned long flags;
+ 	int ep_num, stopped, ret = 0;
+ 	u32 epctrl;
+@@ -940,11 +941,13 @@ static int fsl_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	fsl_writel(epctrl, &dr_regs->endptctrl[ep_num]);
 
-Because the output of get_maintainer.pl was too big,
-I included all the found lists and everyone from the
-previous discussion.
+ 	/* make sure it's actually queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (!req) {
+ 		ret = -EINVAL;
+ 		goto out;
+ 	}
+diff --git a/drivers/usb/gadget/udc/goku_udc.c b/drivers/usb/gadget/udc/goku_udc.c
+index 3757a772a55e..62f0b7d794ec 100644
+--- a/drivers/usb/gadget/udc/goku_udc.c
++++ b/drivers/usb/gadget/udc/goku_udc.c
+@@ -809,7 +809,8 @@ static void nuke(struct goku_ep *ep, int status)
+ /* dequeue JUST ONE request */
+ static int goku_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+-	struct goku_request	*req;
++	struct goku_request	*req = NULL;
++	struct goku_request	*tmp;
+ 	struct goku_ep		*ep;
+ 	struct goku_udc		*dev;
+ 	unsigned long		flags;
+@@ -833,11 +834,13 @@ static int goku_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	spin_lock_irqsave(&dev->lock, flags);
 
-Jakob Koschel (6):
-  drivers: usb: remove usage of list iterator past the loop body
-  treewide: remove using list iterator after loop body as a ptr
-  treewide: fix incorrect use to determine if list is empty
-  drivers: remove unnecessary use of list iterator variable
-  treewide: remove dereference of list iterator after loop body
-  treewide: remove check of list iterator against head past the loop
-    body
+ 	/* make sure it's actually queued on this endpoint */
+-	list_for_each_entry (req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (req) {
+ 		spin_unlock_irqrestore (&dev->lock, flags);
+ 		return -EINVAL;
+ 	}
+diff --git a/drivers/usb/gadget/udc/gr_udc.c b/drivers/usb/gadget/udc/gr_udc.c
+index 4b35739d3695..5d65d8ad5281 100644
+--- a/drivers/usb/gadget/udc/gr_udc.c
++++ b/drivers/usb/gadget/udc/gr_udc.c
+@@ -1690,7 +1690,8 @@ static int gr_queue_ext(struct usb_ep *_ep, struct usb_request *_req,
+ /* Dequeue JUST ONE request */
+ static int gr_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+-	struct gr_request *req;
++	struct gr_request *req = NULL;
++	struct gr_request *tmp;
+ 	struct gr_ep *ep;
+ 	struct gr_udc *dev;
+ 	int ret = 0;
+@@ -1710,11 +1711,13 @@ static int gr_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	spin_lock_irqsave(&dev->lock, flags);
 
- arch/arm/mach-mmp/sram.c                      |  9 ++--
- arch/arm/plat-pxa/ssp.c                       | 28 +++++-------
- arch/powerpc/sysdev/fsl_gtm.c                 |  4 +-
- arch/x86/kernel/cpu/sgx/encl.c                |  6 ++-
- drivers/block/drbd/drbd_req.c                 | 45 ++++++++++++-------
- drivers/counter/counter-chrdev.c              | 26 ++++++-----
- drivers/crypto/cavium/nitrox/nitrox_main.c    | 11 +++--
- drivers/dma/dw-edma/dw-edma-core.c            |  4 +-
- drivers/dma/ppc4xx/adma.c                     | 11 +++--
- drivers/firewire/core-transaction.c           | 32 +++++++------
- drivers/firewire/sbp2.c                       | 14 +++---
- drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c        | 19 +++++---
- drivers/gpu/drm/drm_memory.c                  | 15 ++++---
- drivers/gpu/drm/drm_mm.c                      | 17 ++++---
- drivers/gpu/drm/drm_vm.c                      | 13 +++---
- drivers/gpu/drm/gma500/oaktrail_lvds.c        |  9 ++--
- drivers/gpu/drm/i915/gem/i915_gem_context.c   | 14 +++---
- .../gpu/drm/i915/gem/i915_gem_execbuffer.c    | 15 ++++---
- drivers/gpu/drm/i915/gt/intel_ring.c          | 15 ++++---
- .../gpu/drm/nouveau/nvkm/subdev/clk/base.c    | 11 +++--
- .../gpu/drm/nouveau/nvkm/subdev/fb/ramgk104.c | 13 +++---
- drivers/gpu/drm/scheduler/sched_main.c        | 14 +++---
- drivers/gpu/drm/ttm/ttm_bo.c                  | 19 ++++----
- drivers/gpu/drm/vmwgfx/vmwgfx_kms.c           | 22 +++++----
- drivers/infiniband/hw/hfi1/tid_rdma.c         | 16 ++++---
- drivers/infiniband/hw/mlx4/main.c             | 12 ++---
- drivers/media/dvb-frontends/mxl5xx.c          | 11 +++--
- drivers/media/pci/saa7134/saa7134-alsa.c      |  4 +-
- drivers/media/v4l2-core/v4l2-ctrls-api.c      | 31 +++++++------
- drivers/misc/mei/interrupt.c                  | 12 ++---
- .../net/ethernet/intel/i40e/i40e_ethtool.c    |  3 +-
- .../net/ethernet/qlogic/qede/qede_filter.c    | 11 +++--
- drivers/net/wireless/ath/ath6kl/htc_mbox.c    |  2 +-
- .../net/wireless/intel/ipw2x00/libipw_rx.c    | 15 ++++---
- drivers/perf/xgene_pmu.c                      | 13 +++---
- drivers/power/supply/cpcap-battery.c          | 11 +++--
- drivers/scsi/lpfc/lpfc_bsg.c                  | 16 ++++---
- drivers/scsi/scsi_transport_sas.c             | 17 ++++---
- drivers/scsi/wd719x.c                         | 12 +++--
- drivers/staging/rtl8192e/rtl819x_TSProc.c     | 17 +++----
- drivers/staging/rtl8192e/rtllib_rx.c          | 17 ++++---
- .../staging/rtl8192u/ieee80211/ieee80211_rx.c | 15 ++++---
- .../rtl8192u/ieee80211/rtl819x_TSProc.c       | 19 ++++----
- drivers/thermal/thermal_core.c                | 38 ++++++++++------
- drivers/usb/gadget/composite.c                |  9 ++--
- drivers/usb/gadget/configfs.c                 | 22 +++++----
- drivers/usb/gadget/udc/aspeed-vhub/epn.c      | 11 +++--
- drivers/usb/gadget/udc/at91_udc.c             | 26 ++++++-----
- drivers/usb/gadget/udc/atmel_usba_udc.c       | 11 +++--
- drivers/usb/gadget/udc/bdc/bdc_ep.c           | 11 +++--
- drivers/usb/gadget/udc/fsl_qe_udc.c           | 11 +++--
- drivers/usb/gadget/udc/fsl_udc_core.c         | 11 +++--
- drivers/usb/gadget/udc/goku_udc.c             | 11 +++--
- drivers/usb/gadget/udc/gr_udc.c               | 11 +++--
- drivers/usb/gadget/udc/lpc32xx_udc.c          | 11 +++--
- drivers/usb/gadget/udc/max3420_udc.c          | 11 +++--
- drivers/usb/gadget/udc/mv_u3d_core.c          | 11 +++--
- drivers/usb/gadget/udc/mv_udc_core.c          | 11 +++--
- drivers/usb/gadget/udc/net2272.c              | 12 ++---
- drivers/usb/gadget/udc/net2280.c              | 11 +++--
- drivers/usb/gadget/udc/omap_udc.c             | 11 +++--
- drivers/usb/gadget/udc/pxa25x_udc.c           | 11 +++--
- drivers/usb/gadget/udc/s3c-hsudc.c            | 11 +++--
- drivers/usb/gadget/udc/tegra-xudc.c           | 11 +++--
- drivers/usb/gadget/udc/udc-xilinx.c           | 11 +++--
- drivers/usb/mtu3/mtu3_gadget.c                | 11 +++--
- drivers/usb/musb/musb_gadget.c                | 11 +++--
- drivers/vfio/mdev/mdev_core.c                 | 11 +++--
- fs/cifs/smb2misc.c                            | 10 +++--
- fs/f2fs/segment.c                             |  9 ++--
- fs/proc/kcore.c                               | 13 +++---
- kernel/debug/kdb/kdb_main.c                   | 36 +++++++++------
- kernel/power/snapshot.c                       | 10 +++--
- kernel/trace/ftrace.c                         | 22 +++++----
- kernel/trace/trace_eprobe.c                   | 15 ++++---
- kernel/trace/trace_events.c                   | 11 ++---
- net/9p/trans_xen.c                            | 11 +++--
- net/ipv4/udp_tunnel_nic.c                     | 10 +++--
- net/tipc/name_table.c                         | 11 +++--
- net/tipc/socket.c                             | 11 +++--
- net/xfrm/xfrm_ipcomp.c                        | 11 +++--
- sound/soc/intel/catpt/pcm.c                   | 13 +++---
- sound/soc/sprd/sprd-mcdt.c                    | 13 +++---
- 83 files changed, 708 insertions(+), 465 deletions(-)
+ 	/* Make sure it's actually queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (!req) {
+ 		ret = -EINVAL;
+ 		goto out;
+ 	}
+diff --git a/drivers/usb/gadget/udc/lpc32xx_udc.c b/drivers/usb/gadget/udc/lpc32xx_udc.c
+index a25d01c89564..024b646638fb 100644
+--- a/drivers/usb/gadget/udc/lpc32xx_udc.c
++++ b/drivers/usb/gadget/udc/lpc32xx_udc.c
+@@ -1830,7 +1830,8 @@ static int lpc32xx_ep_queue(struct usb_ep *_ep,
+ static int lpc32xx_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct lpc32xx_ep *ep;
+-	struct lpc32xx_request *req;
++	struct lpc32xx_request *req = NULL;
++	struct lpc32xx_request *tmp;
+ 	unsigned long flags;
 
+ 	ep = container_of(_ep, struct lpc32xx_ep, ep);
+@@ -1840,11 +1841,13 @@ static int lpc32xx_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	spin_lock_irqsave(&ep->udc->lock, flags);
 
-base-commit: 7ee022567bf9e2e0b3cd92461a2f4986ecc99673
+ 	/* make sure it's actually queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (!req) {
+ 		spin_unlock_irqrestore(&ep->udc->lock, flags);
+ 		return -EINVAL;
+ 	}
+diff --git a/drivers/usb/gadget/udc/mv_u3d_core.c b/drivers/usb/gadget/udc/mv_u3d_core.c
+index a1057ddfbda3..39bd0aeb58d1 100644
+--- a/drivers/usb/gadget/udc/mv_u3d_core.c
++++ b/drivers/usb/gadget/udc/mv_u3d_core.c
+@@ -844,7 +844,8 @@ mv_u3d_ep_queue(struct usb_ep *_ep, struct usb_request *_req, gfp_t gfp_flags)
+ static int mv_u3d_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct mv_u3d_ep *ep;
+-	struct mv_u3d_req *req;
++	struct mv_u3d_req *req = NULL;
++	struct mv_u3d_req *tmp;
+ 	struct mv_u3d *u3d;
+ 	struct mv_u3d_ep_context *ep_context;
+ 	struct mv_u3d_req *next_req;
+@@ -861,11 +862,13 @@ static int mv_u3d_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	spin_lock_irqsave(&ep->u3d->lock, flags);
+
+ 	/* make sure it's actually queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (!req) {
+ 		ret = -EINVAL;
+ 		goto out;
+ 	}
+diff --git a/drivers/usb/gadget/udc/mv_udc_core.c b/drivers/usb/gadget/udc/mv_udc_core.c
+index b6d34dda028b..9d708ce49c50 100644
+--- a/drivers/usb/gadget/udc/mv_udc_core.c
++++ b/drivers/usb/gadget/udc/mv_udc_core.c
+@@ -771,7 +771,8 @@ static void mv_prime_ep(struct mv_ep *ep, struct mv_req *req)
+ static int mv_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct mv_ep *ep = container_of(_ep, struct mv_ep, ep);
+-	struct mv_req *req;
++	struct mv_req *req = NULL;
++	struct mv_req *tmp;
+ 	struct mv_udc *udc = ep->udc;
+ 	unsigned long flags;
+ 	int stopped, ret = 0;
+@@ -793,11 +794,13 @@ static int mv_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	writel(epctrlx, &udc->op_regs->epctrlx[ep->ep_num]);
+
+ 	/* make sure it's actually queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (!req) {
+ 		ret = -EINVAL;
+ 		goto out;
+ 	}
+diff --git a/drivers/usb/gadget/udc/net2272.c b/drivers/usb/gadget/udc/net2272.c
+index 7c38057dcb4a..bb59200f1596 100644
+--- a/drivers/usb/gadget/udc/net2272.c
++++ b/drivers/usb/gadget/udc/net2272.c
+@@ -926,7 +926,8 @@ static int
+ net2272_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct net2272_ep *ep;
+-	struct net2272_request *req;
++	struct net2272_request *req = NULL;
++	struct net2272_request *tmp;
+ 	unsigned long flags;
+ 	int stopped;
+
+@@ -939,11 +940,13 @@ net2272_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	ep->stopped = 1;
+
+ 	/* make sure it's still queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (!req) {
+ 		ep->stopped = stopped;
+ 		spin_unlock_irqrestore(&ep->dev->lock, flags);
+ 		return -EINVAL;
+@@ -954,7 +957,6 @@ net2272_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 		dev_dbg(ep->dev->dev, "unlink (%s) pio\n", _ep->name);
+ 		net2272_done(ep, req, -ECONNRESET);
+ 	}
+-	req = NULL;
+ 	ep->stopped = stopped;
+
+ 	spin_unlock_irqrestore(&ep->dev->lock, flags);
+diff --git a/drivers/usb/gadget/udc/net2280.c b/drivers/usb/gadget/udc/net2280.c
+index 16e7d2db6411..dbf5592dbcf0 100644
+--- a/drivers/usb/gadget/udc/net2280.c
++++ b/drivers/usb/gadget/udc/net2280.c
+@@ -1240,7 +1240,8 @@ static void nuke(struct net2280_ep *ep)
+ static int net2280_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct net2280_ep	*ep;
+-	struct net2280_request	*req;
++	struct net2280_request	*req = NULL;
++	struct net2280_request	*tmp;
+ 	unsigned long		flags;
+ 	u32			dmactl;
+ 	int			stopped;
+@@ -1266,11 +1267,13 @@ static int net2280_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	}
+
+ 	/* make sure it's still queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (!req) {
+ 		ep->stopped = stopped;
+ 		spin_unlock_irqrestore(&ep->dev->lock, flags);
+ 		ep_dbg(ep->dev, "%s: Request mismatch\n", __func__);
+diff --git a/drivers/usb/gadget/udc/omap_udc.c b/drivers/usb/gadget/udc/omap_udc.c
+index 494da00398d7..c0f6e066ccc2 100644
+--- a/drivers/usb/gadget/udc/omap_udc.c
++++ b/drivers/usb/gadget/udc/omap_udc.c
+@@ -1003,7 +1003,8 @@ omap_ep_queue(struct usb_ep *_ep, struct usb_request *_req, gfp_t gfp_flags)
+ static int omap_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct omap_ep	*ep = container_of(_ep, struct omap_ep, ep);
+-	struct omap_req	*req;
++	struct omap_req	*req = NULL;
++	struct omap_req	*tmp;
+ 	unsigned long	flags;
+
+ 	if (!_ep || !_req)
+@@ -1012,11 +1013,13 @@ static int omap_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	spin_lock_irqsave(&ep->udc->lock, flags);
+
+ 	/* make sure it's actually queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (!req) {
+ 		spin_unlock_irqrestore(&ep->udc->lock, flags);
+ 		return -EINVAL;
+ 	}
+diff --git a/drivers/usb/gadget/udc/pxa25x_udc.c b/drivers/usb/gadget/udc/pxa25x_udc.c
+index b38747fd3bb0..889ea52bbe0a 100644
+--- a/drivers/usb/gadget/udc/pxa25x_udc.c
++++ b/drivers/usb/gadget/udc/pxa25x_udc.c
+@@ -966,7 +966,8 @@ static void nuke(struct pxa25x_ep *ep, int status)
+ static int pxa25x_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct pxa25x_ep	*ep;
+-	struct pxa25x_request	*req;
++	struct pxa25x_request	*req = NULL;
++	struct pxa25x_request	*tmp;
+ 	unsigned long		flags;
+
+ 	ep = container_of(_ep, struct pxa25x_ep, ep);
+@@ -976,11 +977,13 @@ static int pxa25x_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ 	local_irq_save(flags);
+
+ 	/* make sure it's actually queued on this endpoint */
+-	list_for_each_entry (req, &ep->queue, queue) {
+-		if (&req->req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->req != _req) {
++	if (!req) {
+ 		local_irq_restore(flags);
+ 		return -EINVAL;
+ 	}
+diff --git a/drivers/usb/gadget/udc/s3c-hsudc.c b/drivers/usb/gadget/udc/s3c-hsudc.c
+index 89f1f8c9f02e..5006c9ebbac6 100644
+--- a/drivers/usb/gadget/udc/s3c-hsudc.c
++++ b/drivers/usb/gadget/udc/s3c-hsudc.c
+@@ -877,7 +877,8 @@ static int s3c_hsudc_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct s3c_hsudc_ep *hsep = our_ep(_ep);
+ 	struct s3c_hsudc *hsudc = hsep->dev;
+-	struct s3c_hsudc_req *hsreq;
++	struct s3c_hsudc_req *hsreq = NULL;
++	struct s3c_hsudc_req *tmp;
+ 	unsigned long flags;
+
+ 	hsep = our_ep(_ep);
+@@ -886,11 +887,13 @@ static int s3c_hsudc_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+
+ 	spin_lock_irqsave(&hsudc->lock, flags);
+
+-	list_for_each_entry(hsreq, &hsep->queue, queue) {
+-		if (&hsreq->req == _req)
++	list_for_each_entry(tmp, &hsep->queue, queue) {
++		if (&tmp->req == _req) {
++			hsreq = tmp;
+ 			break;
++		}
+ 	}
+-	if (&hsreq->req != _req) {
++	if (!hsreq) {
+ 		spin_unlock_irqrestore(&hsudc->lock, flags);
+ 		return -EINVAL;
+ 	}
+diff --git a/drivers/usb/gadget/udc/udc-xilinx.c b/drivers/usb/gadget/udc/udc-xilinx.c
+index 6ce886fb7bfe..6812824cc823 100644
+--- a/drivers/usb/gadget/udc/udc-xilinx.c
++++ b/drivers/usb/gadget/udc/udc-xilinx.c
+@@ -1136,17 +1136,20 @@ static int xudc_ep_queue(struct usb_ep *_ep, struct usb_request *_req,
+ static int xudc_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+ {
+ 	struct xusb_ep *ep	= to_xusb_ep(_ep);
+-	struct xusb_req *req	= to_xusb_req(_req);
++	struct xusb_req *req	= NULL;
++	struct xusb_req *tmp;
+ 	struct xusb_udc *udc	= ep->udc;
+ 	unsigned long flags;
+
+ 	spin_lock_irqsave(&udc->lock, flags);
+ 	/* Make sure it's actually queued on this endpoint */
+-	list_for_each_entry(req, &ep->queue, queue) {
+-		if (&req->usb_req == _req)
++	list_for_each_entry(tmp, &ep->queue, queue) {
++		if (&tmp->usb_req == _req) {
++			req = tmp;
+ 			break;
++		}
+ 	}
+-	if (&req->usb_req != _req) {
++	if (!req) {
+ 		spin_unlock_irqrestore(&udc->lock, flags);
+ 		return -EINVAL;
+ 	}
 --
 2.25.1
+
 
 
 _______________________________________________
