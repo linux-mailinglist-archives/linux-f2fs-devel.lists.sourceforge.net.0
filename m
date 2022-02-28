@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 909BC4C6CCF
+	by mail.lfdr.de (Postfix) with ESMTPS id A04E34C6CD0
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 13:41:45 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nOfLT-00071A-P7; Mon, 28 Feb 2022 12:41:42 +0000
+	id 1nOfLV-0001vL-BV; Mon, 28 Feb 2022 12:41:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
  <BATV+72096dbc355c8c690838+6763+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1nOfLR-000712-Dh
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Feb 2022 12:41:40 +0000
+ id 1nOfLT-0001vF-O6
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Feb 2022 12:41:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sO2im4q5HIxQ/9U7/PnqC7nl9Uj+KF5Fp6rQ0FndRNE=; b=b6OcLb9uVfJ8BvplZHpo4q4S40
- 07Kp3Ls5usFIjmpLJY5FCsiw429fKKMPplIUXdlDnA3P68GAq+m+fqTvAv0Dmt+2joPTliRCv9Wz9
- P0wGO7eDeCsrOW18kNsOFq+aKWbpev2cIe8wZwLFLyLXNA18dYLff7N+qfIbUzMrYuLg=;
+ bh=IR4abFvHdW12CaulzRpJ7ldY+fqUsw7Tyy0gpgznxxI=; b=Bm/ADymDwYXhrt+M2mdOLP0A7A
+ Lqp6ZaNDtNyS889P2YCr2xoJg6pu4hwTB44FVYOmwKNydsshzphQSbrDE0fCRpTv/VsWZR+/udeA4
+ fLByQh7Kql/7uzsC4TZJF4x/JZqJLMk9YJ0ocJB2cuuYU50n2k3LEagOy/sTBxEPL3LE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,32 +30,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sO2im4q5HIxQ/9U7/PnqC7nl9Uj+KF5Fp6rQ0FndRNE=; b=cDaeP3r2Susa7x8P4ipK0PUVK8
- qKtPAHKwtjqt1/vD7P1AkXWGlg5T2sQbFkgRMGLkA8mLCxV23fTGX5eUpmR4mja+vv8qePtHJzT0y
- /65/xTAY3Q5i2QbG+eLwlHs9hAW6rCWcTVpTQXQ0JEKIvXJJNoswNYy8S48E6rvyjnRU=;
+ bh=IR4abFvHdW12CaulzRpJ7ldY+fqUsw7Tyy0gpgznxxI=; b=fiPI+cN3UrRgssA9Y1fg5MBFiw
+ p/xUVJWUWN5Spo6RqfHXtS9Wyn1VM+1LIu/+t9T86btBO6trQkC9+cVwSTMSW1CLzt6DUHKjtRWf6
+ /tAbfBb7HlFAZKUtB6uih5hRFhRXtcxOEbWhnwoYfGUnGXC0ALl7xdJbWRTLq2zfRa4c=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nOfLN-0004Rr-Q7
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Feb 2022 12:41:39 +0000
+ id 1nOfLR-0004S7-D1
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Feb 2022 12:41:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=sO2im4q5HIxQ/9U7/PnqC7nl9Uj+KF5Fp6rQ0FndRNE=; b=BivsgwChJw97A0S/uSpa52r0My
- qVGNhxb5MX50TYGOfNOirKymaMrAKXYyjuDLMIndNKkXI4O8YGNg3mDwPPiU8cmBECswKZtt0gdEX
- b26QYXNKP1GOPOhGt/UbPiWYTjgXQ6bQzkRgkrXdLJaELSdGK0/yl26l1kXK7MkwwX+baoQ5kG1Rm
- ap+36rhuuQqJXNe54vPbsa3fNTGr5Q9wg385nn5U7zCwpO7n1VXX+7nI1cjwGDbvZ2vdTEXhm6Hep
- TVfTRbIMFweU1LDWgxLSTy+bKKwSBH6Aq363FxxVzfdaHxHb+MEaAgJLUb+afUx0aYZSE5UoBfnaM
- kcZWDBLA==;
+ bh=IR4abFvHdW12CaulzRpJ7ldY+fqUsw7Tyy0gpgznxxI=; b=OoW4TgUzT4R+MfenewyNryXeUW
+ iUL2PXMIjxTZ5yJDCOM6yL0WBzWRJJ6Y463Kahd9peAFJng7WXdTXf1JgTu2QY7KO3mXw3mumoU/r
+ q30VivZukzwo+BIyGQ/rrRKYztZZpf8WPJXi8TtN8ev7iU/01cpfUCDWt8B5lpLP4vIOPNURRit4t
+ 60hDFVt3uDc/endDjmoChnaQKjPMTe2ec7jFN4xF2oVq6OT+BQnRJmHfF0Lg8jjJjCZpcZQlQrHjJ
+ ixUur7ZpsLXDr15j7MCNssueEMdMdmssra5Dod6ibAr+/eYEhicDGIsRbrCoxKfKskpVwe9zdWz3q
+ CNts/IFQ==;
 Received: from [2.53.163.181] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nOfLG-00CHdk-Ex; Mon, 28 Feb 2022 12:41:30 +0000
+ id 1nOfLJ-00CHew-Lq; Mon, 28 Feb 2022 12:41:34 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	Chao Yu <chao@kernel.org>
-Date: Mon, 28 Feb 2022 14:41:22 +0200
-Message-Id: <20220228124123.856027-2-hch@lst.de>
+Date: Mon, 28 Feb 2022 14:41:23 +0200
+Message-Id: <20220228124123.856027-3-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220228124123.856027-1-hch@lst.de>
 References: <20220228124123.856027-1-hch@lst.de>
@@ -69,12 +69,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Set the bdev at bio allocation time by changing the
- f2fs_target_device
- calling conventions, so that no bio needs to be passed in. Signed-off-by:
- Christoph Hellwig <hch@lst.de> --- fs/f2fs/data.c | 25 +++++++++++++
- fs/f2fs/f2fs.h
- | 2 +- 2 files changed, 14 insertions(+), 13 deletions(-) 
+ Content preview: Refactor block I/O code so that the bio operation and known
+ flags are set at bio allocation time. Only the later updated flags are updated
+ on the fly. Signed-off-by: Christoph Hellwig <hch@lst.de> --- fs/f2fs/data.c
+ | 70 +++++++++++++++++++++ 1 file changed, 29 insertions(+), 41 deletions(-)
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,8 +87,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1nOfLN-0004Rr-Q7
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: don't pass a bio to f2fs_target_device
+X-Headers-End: 1nOfLR-0004S7-D1
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: pass the bio operation to
+ bio_alloc_bioset
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,92 +107,149 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Set the bdev at bio allocation time by changing the f2fs_target_device
-calling conventions, so that no bio needs to be passed in.
+Refactor block I/O code so that the bio operation and known flags are set
+at bio allocation time.  Only the later updated flags are updated on the
+fly.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/f2fs/data.c | 25 +++++++++++++------------
- fs/f2fs/f2fs.h |  2 +-
- 2 files changed, 14 insertions(+), 13 deletions(-)
+ fs/f2fs/data.c | 70 +++++++++++++++++++++-----------------------------
+ 1 file changed, 29 insertions(+), 41 deletions(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index e71dde8de0db0..59dd0347c4bc8 100644
+index 59dd0347c4bc8..fc077bce679d9 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -354,7 +354,7 @@ static void f2fs_write_end_io(struct bio *bio)
+@@ -388,6 +388,24 @@ int f2fs_target_device_index(struct f2fs_sb_info *sbi, block_t blkaddr)
+ 	return 0;
  }
  
- struct block_device *f2fs_target_device(struct f2fs_sb_info *sbi,
--				block_t blk_addr, struct bio *bio)
-+		block_t blk_addr, sector_t *sector)
- {
- 	struct block_device *bdev = sbi->sb->s_bdev;
- 	int i;
-@@ -369,10 +369,9 @@ struct block_device *f2fs_target_device(struct f2fs_sb_info *sbi,
- 			}
- 		}
- 	}
--	if (bio) {
--		bio_set_dev(bio, bdev);
--		bio->bi_iter.bi_sector = SECTOR_FROM_BLOCK(blk_addr);
--	}
++static void __attach_io_flag(struct f2fs_io_info *fio, unsigned int io_flag)
++{
++	unsigned int temp_mask = (1 << NR_TEMP_TYPE) - 1;
++	unsigned int fua_flag = io_flag & temp_mask;
++	unsigned int meta_flag = (io_flag >> NR_TEMP_TYPE) & temp_mask;
 +
-+	if (sector)
-+		*sector = SECTOR_FROM_BLOCK(blk_addr);
- 	return bdev;
- }
- 
-@@ -392,11 +391,13 @@ int f2fs_target_device_index(struct f2fs_sb_info *sbi, block_t blkaddr)
++	/*
++	 * data/node io flag bits per temp:
++	 *      REQ_META     |      REQ_FUA      |
++	 *    5 |    4 |   3 |    2 |    1 |   0 |
++	 * Cold | Warm | Hot | Cold | Warm | Hot |
++	 */
++	if ((1 << fio->temp) & meta_flag)
++		fio->op_flags |= REQ_META;
++	if ((1 << fio->temp) & fua_flag)
++		fio->op_flags |= REQ_FUA;
++}
++
  static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
  {
  	struct f2fs_sb_info *sbi = fio->sbi;
-+	struct block_device *bdev;
-+	sector_t sector;
+@@ -395,8 +413,14 @@ static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
+ 	sector_t sector;
  	struct bio *bio;
  
--	bio = bio_alloc_bioset(NULL, npages, 0, GFP_NOIO, &f2fs_bioset);
--
--	f2fs_target_device(sbi, fio->new_blkaddr, bio);
-+	bdev = f2fs_target_device(sbi, fio->new_blkaddr, &sector);
-+	bio = bio_alloc_bioset(bdev, npages, 0, GFP_NOIO, &f2fs_bioset);
-+	bio->bi_iter.bi_sector = sector;
++	if (fio->type == DATA)
++		__attach_io_flag(fio, sbi->data_io_flag);
++	else if (fio->type == NODE)
++		__attach_io_flag(fio, sbi->node_io_flag);
++
+ 	bdev = f2fs_target_device(sbi, fio->new_blkaddr, &sector);
+-	bio = bio_alloc_bioset(bdev, npages, 0, GFP_NOIO, &f2fs_bioset);
++	bio = bio_alloc_bioset(bdev, npages, fio->op | fio->op_flags, GFP_NOIO,
++			       &f2fs_bioset);
+ 	bio->bi_iter.bi_sector = sector;
  	if (is_read_io(fio->op)) {
  		bio->bi_end_io = f2fs_read_end_io;
- 		bio->bi_private = NULL;
-@@ -984,15 +985,15 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
- 	struct bio *bio;
- 	struct bio_post_read_ctx *ctx = NULL;
- 	unsigned int post_read_steps = 0;
-+	sector_t sector;
-+	struct block_device *bdev = f2fs_target_device(sbi, blkaddr, &sector);
+@@ -501,34 +525,6 @@ void f2fs_submit_bio(struct f2fs_sb_info *sbi,
+ 	__submit_bio(sbi, bio, type);
+ }
  
--	bio = bio_alloc_bioset(NULL, bio_max_segs(nr_pages), REQ_OP_READ,
-+	bio = bio_alloc_bioset(bdev, bio_max_segs(nr_pages), REQ_OP_READ,
+-static void __attach_io_flag(struct f2fs_io_info *fio)
+-{
+-	struct f2fs_sb_info *sbi = fio->sbi;
+-	unsigned int temp_mask = (1 << NR_TEMP_TYPE) - 1;
+-	unsigned int io_flag, fua_flag, meta_flag;
+-
+-	if (fio->type == DATA)
+-		io_flag = sbi->data_io_flag;
+-	else if (fio->type == NODE)
+-		io_flag = sbi->node_io_flag;
+-	else
+-		return;
+-
+-	fua_flag = io_flag & temp_mask;
+-	meta_flag = (io_flag >> NR_TEMP_TYPE) & temp_mask;
+-
+-	/*
+-	 * data/node io flag bits per temp:
+-	 *      REQ_META     |      REQ_FUA      |
+-	 *    5 |    4 |   3 |    2 |    1 |   0 |
+-	 * Cold | Warm | Hot | Cold | Warm | Hot |
+-	 */
+-	if ((1 << fio->temp) & meta_flag)
+-		fio->op_flags |= REQ_META;
+-	if ((1 << fio->temp) & fua_flag)
+-		fio->op_flags |= REQ_FUA;
+-}
+-
+ static void __submit_merged_bio(struct f2fs_bio_info *io)
+ {
+ 	struct f2fs_io_info *fio = &io->fio;
+@@ -536,9 +532,6 @@ static void __submit_merged_bio(struct f2fs_bio_info *io)
+ 	if (!io->bio)
+ 		return;
+ 
+-	__attach_io_flag(fio);
+-	bio_set_op_attrs(io->bio, fio->op, fio->op_flags);
+-
+ 	if (is_read_io(fio->op))
+ 		trace_f2fs_prepare_read_bio(io->sbi->sb, fio->type, io->bio);
+ 	else
+@@ -596,10 +589,9 @@ static void __f2fs_submit_merged_write(struct f2fs_sb_info *sbi,
+ 	/* change META to META_FLUSH in the checkpoint procedure */
+ 	if (type >= META_FLUSH) {
+ 		io->fio.type = META_FLUSH;
+-		io->fio.op = REQ_OP_WRITE;
+-		io->fio.op_flags = REQ_META | REQ_PRIO | REQ_SYNC;
++		io->bio->bi_opf |= REQ_META | REQ_PRIO | REQ_SYNC;
+ 		if (!test_opt(sbi, NOBARRIER))
+-			io->fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
++			io->bio->bi_opf |= REQ_PREFLUSH | REQ_FUA;
+ 	}
+ 	__submit_merged_bio(io);
+ 	up_write(&io->io_rwsem);
+@@ -680,9 +672,6 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
+ 	if (fio->io_wbc && !is_read_io(fio->op))
+ 		wbc_account_cgroup_owner(fio->io_wbc, page, PAGE_SIZE);
+ 
+-	__attach_io_flag(fio);
+-	bio_set_op_attrs(bio, fio->op, fio->op_flags);
+-
+ 	inc_page_count(fio->sbi, is_read_io(fio->op) ?
+ 			__read_io_type(page): WB_DATA_TYPE(fio->page));
+ 
+@@ -876,10 +865,8 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+ alloc_new:
+ 	if (!bio) {
+ 		bio = __bio_alloc(fio, BIO_MAX_VECS);
+-		__attach_io_flag(fio);
+ 		f2fs_set_bio_crypt_ctx(bio, fio->page->mapping->host,
+ 				       fio->page->index, fio, GFP_NOIO);
+-		bio_set_op_attrs(bio, fio->op, fio->op_flags);
+ 
+ 		add_bio_entry(fio->sbi, bio, page, fio->temp);
+ 	} else {
+@@ -988,7 +975,8 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
+ 	sector_t sector;
+ 	struct block_device *bdev = f2fs_target_device(sbi, blkaddr, &sector);
+ 
+-	bio = bio_alloc_bioset(bdev, bio_max_segs(nr_pages), REQ_OP_READ,
++	bio = bio_alloc_bioset(bdev, bio_max_segs(nr_pages),
++			       REQ_OP_READ | op_flag,
  			       for_write ? GFP_NOIO : GFP_KERNEL, &f2fs_bioset);
  	if (!bio)
  		return ERR_PTR(-ENOMEM);
--
-+	bio->bi_iter.bi_sector = sector;
- 	f2fs_set_bio_crypt_ctx(bio, inode, first_idx, NULL, GFP_NOFS);
--
--	f2fs_target_device(sbi, blkaddr, bio);
- 	bio->bi_end_io = f2fs_read_end_io;
- 
- 	if (fscrypt_inode_uses_fs_layer_crypto(inode))
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index eb22fa91c2b26..37faae388fe01 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3631,7 +3631,7 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio);
- int f2fs_merge_page_bio(struct f2fs_io_info *fio);
- void f2fs_submit_page_write(struct f2fs_io_info *fio);
- struct block_device *f2fs_target_device(struct f2fs_sb_info *sbi,
--			block_t blk_addr, struct bio *bio);
-+		block_t blk_addr, sector_t *sector);
- int f2fs_target_device_index(struct f2fs_sb_info *sbi, block_t blkaddr);
- void f2fs_set_data_blkaddr(struct dnode_of_data *dn);
- void f2fs_update_data_blkaddr(struct dnode_of_data *dn, block_t blkaddr);
 -- 
 2.30.2
 
