@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5C5F4C6BB0
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 13:04:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 829964C6BCF
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 13:07:21 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nOekt-0005vZ-GA; Mon, 28 Feb 2022 12:03:54 +0000
+	id 1nOeo9-00064L-JT; Mon, 28 Feb 2022 12:07:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <jakobkoschel@gmail.com>)
- id 1nOeko-0005v8-9I; Mon, 28 Feb 2022 12:03:49 +0000
+ id 1nOeo5-00063x-DE; Mon, 28 Feb 2022 12:07:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
  Cc:Date:In-Reply-To:From:Subject:Mime-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=m/mYa1XqvvHLfnL3BOoOqYDa1ViNV7MB47waZKIycw0=; b=i8MioxSoTG3gXfn8IuKXw3ssbI
- 4B2JorE8b3Ek1guKCh/oLy6R2OP3VJVu3aAf4Q3Joey7LCLN40mZuJ1r9l+lALNCrnVapeU0KNXMj
- ns3pTFKtmcHpFdd8nlKeyUBVQwzL0QOusgNF1WAqz77mVkWAe3mbKU6C4+u8SzNi/d8o=;
+ bh=mpq6EOSgaJN9TDHyutZ1vk7Ts/tQX7VWZG2tuQLEVnE=; b=AQJ1nGvW9be7mbwb4ku5RgxNff
+ dBUmk9AeJ4voQuLIbklSpe/0JPDpXlzS9b0BdTf798pPLwyjhsiZSzt7TomTULRTQ4r+9d5pI9wze
+ UXjgFioECzM4zuQmTg2/fyAgtKxURkPfOyQlcXGe+D46GbyNYvaihT7Qu6z4+bTSE9Ns=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
@@ -29,56 +29,55 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=m/mYa1XqvvHLfnL3BOoOqYDa1ViNV7MB47waZKIycw0=; b=fi9A+XIiEtzy40EoJuK+IfM0lQ
- gl3MzXXUE/9MMbOlVJzplfpU4W7Xxg0LhCxsRgLTlJOMxIn+fD615UbjPtP2UzV/jTsTZW8Y1su87
- IA2gNKOm2WiSpzT9YhMpBDdjuyges1foG+RpSBdm7O0yozk0/rStsCzX2nYYdYxN+/Zc=;
-Received: from mail-ej1-f45.google.com ([209.85.218.45])
+ bh=mpq6EOSgaJN9TDHyutZ1vk7Ts/tQX7VWZG2tuQLEVnE=; b=If+IlgS6ZQyqqiVN9KD9aK1J8B
+ eqf1rfbFW6y5+PznXhz/6TLqwvSUHdA+4jwtpkkMAkKkvzmJMmD9s7Ud64tYWzQnQlOP9d6TL836W
+ UiP7sumwttPUwYZmqOH6ez1B2v5rl8F2w9AioThjXZ5aW74k8MH+ohMwfjQZtEBtoQj4=;
+Received: from mail-ej1-f51.google.com ([209.85.218.51])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nOekk-00023B-RE; Mon, 28 Feb 2022 12:03:48 +0000
-Received: by mail-ej1-f45.google.com with SMTP id hw13so24235025ejc.9;
- Mon, 28 Feb 2022 04:03:46 -0800 (PST)
+ id 1nOeny-0002Cx-UP; Mon, 28 Feb 2022 12:07:10 +0000
+Received: by mail-ej1-f51.google.com with SMTP id d10so24268480eje.10;
+ Mon, 28 Feb 2022 04:07:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:subject:from:in-reply-to:date:cc
  :content-transfer-encoding:message-id:references:to;
- bh=m/mYa1XqvvHLfnL3BOoOqYDa1ViNV7MB47waZKIycw0=;
- b=puET9FaE+iPLWSLHaH0Jc15P7LML3ILv/CtQc1xDRlDOvchBnePGr3CpZ8iNTFg26S
- MvdmzyKLao5C/5rXrSzR7jzTPZ0Yuj+7M+cqDE4eOMJCgAt9uraXgTEJwynFkzni1Fvy
- Vjo1HNa/jUOUFI/CmrkLVTegwpA5o7Cf0wR8qBn5y2xARegC4rz7JN5F70qSFE936vyK
- a6/WQ787WIaZ7lFx0I/tSaiXwe3z6FIrVBWdIQkzq0oVXXDZs7cCv56cl8qPmZ4RxzRI
- sP+DHiZk3rxPTft7o6PkfUdJMVZiSNaECaj+ljhYu978P5TkgTkfoRd54h/EuhklkuKS
- esTA==
+ bh=mpq6EOSgaJN9TDHyutZ1vk7Ts/tQX7VWZG2tuQLEVnE=;
+ b=P6Qm9QV+tKwfj02RvG70Y6RM578oBE7xk1h9xLRDl0Phoeno/cOg2X5jGG320h7a80
+ 51RqQzzCwbkind1CCh/PsD+YJ2xLuw3nTu9DY+Zris5SVOV1FI+8DsU52Jy5KlVydcNu
+ G0XxThLJxiMxymk0pHTiYIUYA6Uj3RhvFK2FvOkFF3qdetV9R5zYggWzNl+ojj1OXKZf
+ MkNjwD1Q29EHNb+3aSEEQSq9r3HlkkV49QyRIpbAEX1BAYg/I0l3VyVoctyp9PVfLMdm
+ 3mwm8jDaSc7WWe042oo4mIB/QOs4nHzHS6+i8MWcrLd/SBvvylJKxoeMQwrp3MTt3slq
+ 2wxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
  :content-transfer-encoding:message-id:references:to;
- bh=m/mYa1XqvvHLfnL3BOoOqYDa1ViNV7MB47waZKIycw0=;
- b=iJEDzITqYZGyBAtGM+Qq5iCbgltTX+aU5u2u0y848wJAY5wW9Jefo3GZmAw8SOW5no
- OjnRbjknbCsfAMktXRBnBu7nvVVvFo1JZFCJj2Aplu8+WiK8gvHi09fN5uhudIOCytBD
- d19pFx2VeatPPN13IZQnFEHKFsCbCz7M4PJFmZXcsllysXy/UREMTeyU7UGxBCvMBjAT
- mm0wVs51luYoXSoNhT5SfgBpPB43n4AwBL7Jf6Sg/Igt4TxzTMkHVUgTDYHRLnzqKEvF
- fjnCKNpRc9ZV+JV7wPuvWtk0rNQFTiS8ab75gqXt+t79SEu+Hs0TiiksSE0zMbdtIUKw
- l39w==
-X-Gm-Message-State: AOAM532VtJpoHpY6NjZJh++xWfJS3RBDH8q6Oww65twjtuJyB9225aG7
- iquKrWc+AbFinJFVxis3CDs=
-X-Google-Smtp-Source: ABdhPJyPihjoYwx+e9NKg98XvxKCbWi7t13guT1EBLKeJ6QGdK72cKHCeJpX8hRszpc83uJxZ+jQ9w==
-X-Received: by 2002:a17:906:d14e:b0:6cd:8d7e:eec9 with SMTP id
- br14-20020a170906d14e00b006cd8d7eeec9mr14944415ejb.28.1646049820086; 
- Mon, 28 Feb 2022 04:03:40 -0800 (PST)
+ bh=mpq6EOSgaJN9TDHyutZ1vk7Ts/tQX7VWZG2tuQLEVnE=;
+ b=Jk6gU3wqoFX5AvJXTRpSWlL1TR6a9Vq1ZAn6F5CD2ETAI5GsrsMUGCGwdO0l2IhwwP
+ ENs5icXSJTB9kSiYfCPpDeoiUr3Eb2W5i+6QB/qhaDP2GaYbfgjPX2oRK5Rh1MBNXJTO
+ A2Mlh51Ns7h0GoL7ZoZIvdDal0qJXsFPZALaG2cKI6o0jqRv1xgqfGjigX+E/dTeU+5q
+ ShRAEZDdps1fw7XWOaTH2gL7SfaKpac5GOyVYIA6aDKRd7+BflMEYJYZBDlqM8DGlrez
+ /kXiI3td+HcMR7FE3wWMAXwsqajYzJBHdnH0+KwS/fiZ1Wu/rKm908jJtMx7d7WCHOlj
+ J3jw==
+X-Gm-Message-State: AOAM531m3rwpJXEso0D1I8pmcaO6YSNR1sf2d8zNu7MpS0diiPAyVlUo
+ U6QpjFHaVm1Gb9FVtbFhRys=
+X-Google-Smtp-Source: ABdhPJw3Wj1NaKaNlFGnSPXqnbDgppea1F4wGZoXZbWDfwDJgXssQhrPLcI1GM9ROPIg4DuPtt07Tg==
+X-Received: by 2002:a17:907:248a:b0:6ce:e03c:e1df with SMTP id
+ zg10-20020a170907248a00b006cee03ce1dfmr14689906ejb.258.1646050020495; 
+ Mon, 28 Feb 2022 04:07:00 -0800 (PST)
 Received: from smtpclient.apple ([2a02:8109:9d80:3f6c:957a:1d13:c949:d1f3])
  by smtp.gmail.com with ESMTPSA id
- l9-20020a1709060cc900b006ce04bb8668sm4257528ejh.184.2022.02.28.04.03.37
+ d23-20020a1709067a1700b006d0ebe4af89sm4282959ejo.20.2022.02.28.04.06.58
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 28 Feb 2022 04:03:39 -0800 (PST)
+ Mon, 28 Feb 2022 04:07:00 -0800 (PST)
 Mime-Version: 1.0 (Mac OS X Mail 15.0 \(3693.60.0.1.1\))
 From: Jakob Koschel <jakobkoschel@gmail.com>
-In-Reply-To: <20220228112413.GA2812@kadam>
-Date: Mon, 28 Feb 2022 13:03:36 +0100
-Message-Id: <E31E215E-C409-40B8-8452-57E70C91484C@gmail.com>
+In-Reply-To: <Yhyv42ONIxTj04mg@kroah.com>
+Date: Mon, 28 Feb 2022 13:06:57 +0100
+Message-Id: <79FCD5F4-0EBA-4E3F-8B3F-D450BBA10367@gmail.com>
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
- <20220228110822.491923-2-jakobkoschel@gmail.com>
- <20220228112413.GA2812@kadam>
-To: Dan Carpenter <dan.carpenter@oracle.com>
+ <20220228110822.491923-3-jakobkoschel@gmail.com> <Yhyv42ONIxTj04mg@kroah.com>
+To: Greg KH <gregkh@linuxfoundation.org>
 X-Mailer: Apple Mail (2.3693.60.0.1.1)
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -87,21 +86,20 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  > On 28. Feb 2022, at 12:24, Dan Carpenter wrote: > > On Mon,
- Feb 28, 2022 at 12:08:17PM +0100,
- Jakob Koschel wrote: >> diff --git a/drivers/usb/gadget/udc/at91_udc.c
- b/drivers/usb/gadget/udc/at91_u [...] 
+ Content preview:  > On 28. Feb 2022, at 12:20, Greg KH wrote: > > On Mon, Feb
+ 28, 2022 at 12:08:18PM +0100, Jakob Koschel wrote: >> If the list does not
+ contain the expected element, the value of >> list_for_each_ent [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.218.45 listed in list.dnswl.org]
+ no trust [209.85.218.51 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [jakobkoschel[at]gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.218.45 listed in wl.mailspike.net]
+ [209.85.218.51 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -110,9 +108,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1nOekk-00023B-RE
-Subject: Re: [f2fs-dev] [PATCH 1/6] drivers: usb: remove usage of list
- iterator past the loop body
+X-Headers-End: 1nOeny-0002Cx-UP
+Subject: Re: [f2fs-dev] [PATCH 2/6] treewide: remove using list iterator
+ after loop body as a ptr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -135,19 +133,18 @@ Cc: alsa-devel@alsa-project.org, linux-aspeed@lists.ozlabs.org,
  linux-staging@lists.linux.dev, "Bos, H.J." <h.j.bos@vu.nl>,
  Jason Gunthorpe <jgg@ziepe.ca>, intel-wired-lan@lists.osuosl.org,
  kgdb-bugreport@lists.sourceforge.net, bcm-kernel-feedback-list@broadcom.com,
- linux-media@vger.kernel.org, Kees Cook <keescook@chromium.org>,
- Arnd Bergman <arnd@arndb.de>, linux-pm@vger.kernel.org,
- intel-gfx@lists.freedesktop.org,
- Brian Johannesmeyer <bjohannesmeyer@gmail.com>, linux-block@vger.kernel.org,
- linux-fsdevel@vger.kernel.org,
+ Dan Carpenter <dan.carpenter@oracle.com>, linux-media@vger.kernel.org,
+ Kees Cook <keescook@chromium.org>, Arnd Bergman <arnd@arndb.de>,
+ linux-pm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
+ Nathan Chancellor <nathan@kernel.org>, linux-fsdevel@vger.kernel.org,
  Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
  v9fs-developer@lists.sourceforge.net, linux-tegra@vger.kernel.org,
  Thomas Gleixner <tglx@linutronix.de>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  linux-arm-kernel@lists.infradead.org, linux-sgx@vger.kernel.org,
- Nathan Chancellor <nathan@kernel.org>,
- Linus Torvalds <torvalds@linux-foundation.org>, linux-usb@vger.kernel.org,
- linux-wireless@vger.kernel.org,
+ linux-block@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>,
+ linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  linux-f2fs-devel@lists.sourceforge.net, tipc-discussion@lists.sourceforge.net,
  linux-crypto@vger.kernel.org, netdev@vger.kernel.org,
@@ -160,115 +157,53 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 
 
-> On 28. Feb 2022, at 12:24, Dan Carpenter <dan.carpenter@oracle.com> wrote:
+> On 28. Feb 2022, at 12:20, Greg KH <gregkh@linuxfoundation.org> wrote:
 > 
-> On Mon, Feb 28, 2022 at 12:08:17PM +0100, Jakob Koschel wrote:
->> diff --git a/drivers/usb/gadget/udc/at91_udc.c b/drivers/usb/gadget/udc/at91_udc.c
->> index 9040a0561466..0fd0307bc07b 100644
->> --- a/drivers/usb/gadget/udc/at91_udc.c
->> +++ b/drivers/usb/gadget/udc/at91_udc.c
->> @@ -150,13 +150,14 @@ static void proc_ep_show(struct seq_file *s, struct at91_ep *ep)
->> 	if (list_empty (&ep->queue))
->> 		seq_printf(s, "\t(queue empty)\n");
+> On Mon, Feb 28, 2022 at 12:08:18PM +0100, Jakob Koschel wrote:
+>> If the list does not contain the expected element, the value of
+>> list_for_each_entry() iterator will not point to a valid structure.
+>> To avoid type confusion in such case, the list iterator
+>> scope will be limited to list_for_each_entry() loop.
 >> 
->> -	else list_for_each_entry (req, &ep->queue, queue) {
->> -		unsigned	length = req->req.actual;
->> +	else
->> +		list_for_each_entry(req, &ep->queue, queue) {
->> +			unsigned int	length = req->req.actual;
+>> In preparation to limiting scope of a list iterator to the list traversal
+>> loop, use a dedicated pointer to point to the found element.
+>> Determining if an element was found is then simply checking if
+>> the pointer is != NULL.
 >> 
->> -		seq_printf(s, "\treq %p len %d/%d buf %p\n",
->> -				&req->req, length,
->> -				req->req.length, req->req.buf);
->> -	}
->> +			seq_printf(s, "\treq %p len %d/%d buf %p\n",
->> +					&req->req, length,
->> +					req->req.length, req->req.buf);
->> +		}
+>> Signed-off-by: Jakob Koschel <jakobkoschel@gmail.com>
+>> ---
+>> arch/x86/kernel/cpu/sgx/encl.c       |  6 +++--
+>> drivers/scsi/scsi_transport_sas.c    | 17 ++++++++-----
+>> drivers/thermal/thermal_core.c       | 38 ++++++++++++++++++----------
+>> drivers/usb/gadget/configfs.c        | 22 ++++++++++------
+>> drivers/usb/gadget/udc/max3420_udc.c | 11 +++++---
+>> drivers/usb/gadget/udc/tegra-xudc.c  | 11 +++++---
+>> drivers/usb/mtu3/mtu3_gadget.c       | 11 +++++---
+>> drivers/usb/musb/musb_gadget.c       | 11 +++++---
+>> drivers/vfio/mdev/mdev_core.c        | 11 +++++---
+>> 9 files changed, 88 insertions(+), 50 deletions(-)
 > 
-> Don't make unrelated white space changes.  It just makes the patch
-> harder to review.  As you're writing the patch make note of any
-> additional changes and do them later in a separate patch.
-> 
-> Also a multi-line indent gets curly braces for readability even though
-> it's not required by C.  And then both sides would get curly braces.
-> 
->> 	spin_unlock_irqrestore(&udc->lock, flags);
->> }
->> 
->> @@ -226,7 +227,7 @@ static int proc_udc_show(struct seq_file *s, void *unused)
->> 
->> 	if (udc->enabled && udc->vbus) {
->> 		proc_ep_show(s, &udc->ep[0]);
->> -		list_for_each_entry (ep, &udc->gadget.ep_list, ep.ep_list) {
->> +		list_for_each_entry(ep, &udc->gadget.ep_list, ep.ep_list) {
-> 
-> Another unrelated change.
-> 
->> 			if (ep->ep.desc)
->> 				proc_ep_show(s, ep);
->> 		}
-> 
-> 
-> [ snip ]
+> The drivers/usb/ portion of this patch should be in patch 1/X, right?
 
-Thanks for pointing out, I'll remove the changes here and note them down
-to send them separately.
+I kept them separate since it's a slightly different case.
+Using 'ptr' instead of '&ptr->other_member'. Regardless, I'll split
+this commit up as you mentioned.
 
 > 
->> diff --git a/drivers/usb/gadget/udc/net2272.c b/drivers/usb/gadget/udc/net2272.c
->> index 7c38057dcb4a..bb59200f1596 100644
->> --- a/drivers/usb/gadget/udc/net2272.c
->> +++ b/drivers/usb/gadget/udc/net2272.c
->> @@ -926,7 +926,8 @@ static int
->> net2272_dequeue(struct usb_ep *_ep, struct usb_request *_req)
->> {
->> 	struct net2272_ep *ep;
->> -	struct net2272_request *req;
->> +	struct net2272_request *req = NULL;
->> +	struct net2272_request *tmp;
->> 	unsigned long flags;
->> 	int stopped;
->> 
->> @@ -939,11 +940,13 @@ net2272_dequeue(struct usb_ep *_ep, struct usb_request *_req)
->> 	ep->stopped = 1;
->> 
->> 	/* make sure it's still queued on this endpoint */
->> -	list_for_each_entry(req, &ep->queue, queue) {
->> -		if (&req->req == _req)
->> +	list_for_each_entry(tmp, &ep->queue, queue) {
->> +		if (&tmp->req == _req) {
->> +			req = tmp;
->> 			break;
->> +		}
->> 	}
->> -	if (&req->req != _req) {
->> +	if (!req) {
->> 		ep->stopped = stopped;
->> 		spin_unlock_irqrestore(&ep->dev->lock, flags);
->> 		return -EINVAL;
->> @@ -954,7 +957,6 @@ net2272_dequeue(struct usb_ep *_ep, struct usb_request *_req)
->> 		dev_dbg(ep->dev->dev, "unlink (%s) pio\n", _ep->name);
->> 		net2272_done(ep, req, -ECONNRESET);
->> 	}
->> -	req = NULL;
-> 
-> Another unrelated change.  These are all good changes but send them as
-> separate patches.
+> Also, you will have to split these up per-subsystem so that the
+> different subsystem maintainers can take these in their trees.
 
-You are referring to the req = NULL, right?
+Thanks for the feedback.
+To clarify I understand you correctly:
+I should do one patch set per-subsystem with every instance/(file?)
+fixed as a separate commit?
 
-I've changed the use of 'req' in the same function and assumed that I can
-just remove the unnecessary statement. But if it's better to do separately
-I'll do that.
+If I understand correctly, I'll repost accordingly.
 
 > 
->> 	ep->stopped = stopped;
->> 
->> 	spin_unlock_irqrestore(&ep->dev->lock, flags);
+> thanks,
 > 
-> regards,
-> dan carpenter
+> greg k-h
 
 thanks,
 Jakob Koschel
