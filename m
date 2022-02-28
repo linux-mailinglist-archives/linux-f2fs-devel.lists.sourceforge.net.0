@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D8064C698D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 12:09:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 383224C699A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 12:09:20 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nOdty-0005Wh-6M; Mon, 28 Feb 2022 11:09:12 +0000
+	id 1nOdu4-0004SS-0T; Mon, 28 Feb 2022 11:09:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <jakobkoschel@gmail.com>)
- id 1nOdtw-0005V6-9h; Mon, 28 Feb 2022 11:09:10 +0000
+ id 1nOdtx-0004R4-4H; Mon, 28 Feb 2022 11:09:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NwvvEiJPPM0SG7ZI4yc03tHRsjcGU4DYrm0+p7QW2+g=; b=RUQv5qrHqgQAwd6TNw6Nhgtn47
- l4gKN7yQhWMqz2wtn9VlbenKszMjl3EbZHFhVT2oLL9IppucL1C3YFtVjk2z7lzB5IMtaMhvVaF3I
- e4iUHHpz6HzlhZghVSBb7etQlWY1aPzJ0NMZR5TzE1Qd0qj3FyJ+HXX+V53fSbeFoy60=;
+ bh=ewSqtxWpAEouzx42J3KLaoNJ3zRCYps/nc7KO/73VjI=; b=RnTj+3rxdTen2oF6Jr8dQbTyiI
+ Hoj3z8X1VXx2RS0CRMdADavYAe4DM54oNNS20QkLr8u+gNsCQ2d/9IgD1HUyJsmXZDI1poHawLNhB
+ uPSLRtIJE0gDUIE6Ob1Pp+JcnmkGMrJOc84hWXIg2JAHLf3lV5uxlzzbMiJXdxmvbj+Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,51 +29,51 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NwvvEiJPPM0SG7ZI4yc03tHRsjcGU4DYrm0+p7QW2+g=; b=bI+yoY+5WsTcPhB8C3jlPMlyIG
- GlGw5ZWcQyUcdnrdLH0Nbr2FKzGGu4EErjLeivWuaDCniqCXn9k8vAsF2CU34XGhfuBZgw+IMUH3v
- BafXOheIm2rCJXSKWTfak4teg0/NxMHDs5OSEbU2S0lX/zs4c9IA9a+KWoJbDlMqINrQ=;
-Received: from mail-ej1-f50.google.com ([209.85.218.50])
+ bh=ewSqtxWpAEouzx42J3KLaoNJ3zRCYps/nc7KO/73VjI=; b=WZb/mSkPuSuHMKh/zH94ZQY5Lt
+ m7oC+iOnbeXhX+1y0FanG4j6d1RdfzLSZ0SiK6LnIAQQIZAcTbTWfXAB8kRAJQYe3xBWYDUDYfst2
+ LQFxolxcAwStIRrJDzbOqxfBcD2TXc+9nwk2KJ7y8AlWHEYH37l54x4cIyjEp20E43PQ=;
+Received: from mail-ej1-f48.google.com ([209.85.218.48])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nOdtp-0001rq-RS; Mon, 28 Feb 2022 11:09:10 +0000
-Received: by mail-ej1-f50.google.com with SMTP id p15so23996430ejc.7;
- Mon, 28 Feb 2022 03:09:05 -0800 (PST)
+ id 1nOdtr-0001s2-GW; Mon, 28 Feb 2022 11:09:11 +0000
+Received: by mail-ej1-f48.google.com with SMTP id qk11so24048690ejb.2;
+ Mon, 28 Feb 2022 03:09:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=NwvvEiJPPM0SG7ZI4yc03tHRsjcGU4DYrm0+p7QW2+g=;
- b=XoHp2vZs5sXnnQm8jTsL06JwdjgH4Z1Am+qeboNHSyU/csHp7G8mKHTnYwT7vMJf3q
- 1zZobpdX4BxBQ2erAJx74EzSCDXfVaAB33jAX9ZekfWtpz9xLL4KIzz7DciQBlIBY9DK
- vi6LJyw6u5UaEjT8CWPzRGPwv8GzX6oWgjgvygChKW8zu7PwVtsUQz/kuHu5rW/3vaBt
- P3mcu2gbh7uG62xQrliOtXiVl+brL2WoHfh7VHyAXnwazE3NNCXTKdQujGPQMoLCoB+H
- 4TwL3ENhlSsI5tK0hgbUY+rfbxgFEyt/dohDr5V+g2PZ9mAGfyjh/75qZVaBOXbUEFp6
- QPtA==
+ bh=ewSqtxWpAEouzx42J3KLaoNJ3zRCYps/nc7KO/73VjI=;
+ b=NJzfXKcN7hL1Nl33p4E04eSCSKXsmXm0guAXz3+luhQpanQnRU99MCp2hnFUKYaL+B
+ 1x361O+pkC4o39HmFVweecOA5EyrbgRoo6hBpKoe+ZK3uwuMgKcjXUUzcyKnqq4Ihz7Y
+ 0pE7mGFU6qwm5nlEaQI6CtIcQNt/P0yiVszOfwFWGIKlTpST4oUB8Axjb2KGdfFCf6oM
+ BF7gos7RIFK+C7zFe1BBqWlnyj9ABXdIe2RTMFKfzCdWuqPXqav1BQyfcB8KfJDsFPFC
+ rwx0y6HLf2zquaEOFfVg855ZoIJbHt3hF+DdFMjnEF9CZ4aqYu3RYVbCj5tslcC60Xqy
+ JDWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=NwvvEiJPPM0SG7ZI4yc03tHRsjcGU4DYrm0+p7QW2+g=;
- b=KmqTZFkUCFgK3q6T58Hnhl3dCLoSptQXcTYKQiKU5DRmd4ueVTVmhrLlYDJEb9dDAh
- ygvLNsC9ylBySNCYNMOGhIQjPRn8djYa1D2AYDpuQ7DnkNv2yqYIVfyafDZt7B1wESv6
- VX3Ky7OjOyJQeKHx2HsEJ5B/vwoqB7tQm3fWJ77Kjn96sAau3OeMSsK6jh1vNZzoSoGg
- pM09bIBgCbnTQyIQBeomo+ZEs+mXwUlI4mqFlOpwe3WbEqetu+NI9uMNM0GnIyByJqfl
- syTjdtZvrS7fWROHfczYt//45fhsI1S7DiKdrmZShI9kZaP8J6XWawH68jdA2D8H2Lpq
- P+6g==
-X-Gm-Message-State: AOAM531PNXOwtPlGLOApJrU9WvR1XXzhLSH35WTD1OwD9ocs4dqA/ZCn
- oIgUFu5TtBPSIaHXbUswTEs=
-X-Google-Smtp-Source: ABdhPJwx6JZK1Sd067eYUFaKDGIuHgaxlGXhzFGfLUQYCLtFq3NCzAqvSFrK3I6DGGTf6F+6FgXuew==
-X-Received: by 2002:a17:906:2608:b0:6c9:b248:4dcf with SMTP id
- h8-20020a170906260800b006c9b2484dcfmr14572317ejc.320.1646046539415; 
- Mon, 28 Feb 2022 03:08:59 -0800 (PST)
+ bh=ewSqtxWpAEouzx42J3KLaoNJ3zRCYps/nc7KO/73VjI=;
+ b=pIbCL6JsV3ss1LtgJLML5OT3xt0WRa84MosAy2zcapYJtxAJvyH28zfq9VWPc+Anai
+ dIRh6hJV/RxHN8W+FYhjG4ioDMeKcLoqeufFZ491Sv+aP9V0lHpOLSyVq+ieo6MlEUPN
+ kCPXfEPHW+DRNx11sfdsIisqiFMA6s9vLCVnJvpTEzZtRHlMZQeYxequChGnl86iWt5L
+ bJNwSWXsV4g/jt/O8LcYDRrUr3PuP5tJVmWqo+pOW+fhSM2EDUDQdWlRebX3KZH8bsCE
+ h/oGgLacSNNsBQLkPwdZCzHNkFI4DBY/LwhctGDZk5Gh8Mb1euFQXXuFyp8QedTwqU8W
+ HHtw==
+X-Gm-Message-State: AOAM5325Z89xDQCmwBetBOohXobz7C+u3SmnzhgqvwKjns94ZnAubWcx
+ fVGPwiHNhb4B2Bfy2LR1G8k=
+X-Google-Smtp-Source: ABdhPJzNtnbGg8Nz3uHKd7Xw6L7mCtzAWYaq4yun9pZXXpwsqc9NwfSvsBrijeUqxIoEXwfdb0F3Mg==
+X-Received: by 2002:a17:906:26da:b0:6d6:da2e:d338 with SMTP id
+ u26-20020a17090626da00b006d6da2ed338mr451651ejc.700.1646046541112; 
+ Mon, 28 Feb 2022 03:09:01 -0800 (PST)
 Received: from localhost.localdomain (dhcp-077-250-038-153.chello.nl.
  [77.250.38.153]) by smtp.googlemail.com with ESMTPSA id
- z22-20020a17090655d600b006d229436793sm4209049ejp.223.2022.02.28.03.08.57
+ z22-20020a17090655d600b006d229436793sm4209049ejp.223.2022.02.28.03.08.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Feb 2022 03:08:59 -0800 (PST)
+ Mon, 28 Feb 2022 03:09:00 -0800 (PST)
 From: Jakob Koschel <jakobkoschel@gmail.com>
 To: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Mon, 28 Feb 2022 12:08:20 +0100
-Message-Id: <20220228110822.491923-5-jakobkoschel@gmail.com>
+Date: Mon, 28 Feb 2022 12:08:21 +0100
+Message-Id: <20220228110822.491923-6-jakobkoschel@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220228110822.491923-1-jakobkoschel@gmail.com>
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
@@ -85,21 +85,21 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: When list_for_each_entry() completes the iteration over the
- whole list without breaking the loop, the iterator value will *always* be
- a bogus pointer computed based on the head element. To avoid type confusion
- use the actual list head directly instead of last iterator value. 
+ Content preview: The list iterator variable will be a bogus pointer if no
+ break
+ was hit. Dereferencing it could load *any* out-of-bounds/undefined value
+ making it unsafe to use that in the comparision to determine if [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.218.48 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [jakobkoschel[at]gmail.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.218.50 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.218.50 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.218.48 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -107,11 +107,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nOdtp-0001rq-RS
-Subject: [f2fs-dev] [PATCH 4/6] drivers: remove unnecessary use of list
- iterator variable
+X-Headers-End: 1nOdtr-0001s2-GW
+Subject: [f2fs-dev] [PATCH 5/6] treewide: remove dereference of list
+ iterator after loop body
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -154,68 +153,105 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When list_for_each_entry() completes the iteration over the whole list
-without breaking the loop, the iterator value will *always* be a bogus
-pointer computed based on the head element.
+The list iterator variable will be a bogus pointer if no break was hit.
+Dereferencing it could load *any* out-of-bounds/undefined value
+making it unsafe to use that in the comparision to determine if the
+specific element was found.
 
-To avoid type confusion use the actual list head directly instead of last
-iterator value.
+This is fixed by using a separate list iterator variable for the loop
+and only setting the original variable if a suitable element was found.
+Then determing if the element was found is simply checking if the
+variable is set.
 
 Signed-off-by: Jakob Koschel <jakobkoschel@gmail.com>
 ---
- drivers/dma/dw-edma/dw-edma-core.c             | 4 ++--
- drivers/net/ethernet/intel/i40e/i40e_ethtool.c | 3 ++-
- drivers/net/wireless/ath/ath6kl/htc_mbox.c     | 2 +-
- 3 files changed, 5 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c | 11 +++++++----
+ drivers/scsi/wd719x.c                          | 12 ++++++++----
+ fs/f2fs/segment.c                              |  9 ++++++---
+ 3 files changed, 21 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/dma/dw-edma/dw-edma-core.c b/drivers/dma/dw-edma/dw-edma-core.c
-index 468d1097a1ec..7883c4831857 100644
---- a/drivers/dma/dw-edma/dw-edma-core.c
-+++ b/drivers/dma/dw-edma/dw-edma-core.c
-@@ -136,7 +136,7 @@ static void dw_edma_free_burst(struct dw_edma_chunk *chunk)
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
+index 57199be082fd..c56cd9e59a66 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
+@@ -471,20 +471,23 @@ nvkm_pstate_new(struct nvkm_clk *clk, int idx)
+ static int
+ nvkm_clk_ustate_update(struct nvkm_clk *clk, int req)
+ {
+-	struct nvkm_pstate *pstate;
++	struct nvkm_pstate *pstate = NULL;
++	struct nvkm_pstate *tmp;
+ 	int i = 0;
+
+ 	if (!clk->allow_reclock)
+ 		return -ENOSYS;
+
+ 	if (req != -1 && req != -2) {
+-		list_for_each_entry(pstate, &clk->states, head) {
+-			if (pstate->pstate == req)
++		list_for_each_entry(tmp, &clk->states, head) {
++			if (tmp->pstate == req) {
++				pstate = tmp;
+ 				break;
++			}
+ 			i++;
+ 		}
+
+-		if (pstate->pstate != req)
++		if (!pstate)
+ 			return -EINVAL;
+ 		req = i;
+ 	}
+diff --git a/drivers/scsi/wd719x.c b/drivers/scsi/wd719x.c
+index 1a7947554581..be270ed8e00d 100644
+--- a/drivers/scsi/wd719x.c
++++ b/drivers/scsi/wd719x.c
+@@ -684,11 +684,15 @@ static irqreturn_t wd719x_interrupt(int irq, void *dev_id)
+ 	case WD719X_INT_SPIDERFAILED:
+ 		/* was the cmd completed a direct or SCB command? */
+ 		if (regs.bytes.OPC == WD719X_CMD_PROCESS_SCB) {
+-			struct wd719x_scb *scb;
+-			list_for_each_entry(scb, &wd->active_scbs, list)
+-				if (SCB_out == scb->phys)
++			struct wd719x_scb *scb = NULL;
++			struct wd719x_scb *tmp;
++
++			list_for_each_entry(tmp, &wd->active_scbs, list)
++				if (SCB_out == tmp->phys) {
++					scb = tmp;
+ 					break;
+-			if (SCB_out == scb->phys)
++				}
++			if (scb)
+ 				wd719x_interrupt_SCB(wd, regs, scb);
+ 			else
+ 				dev_err(&wd->pdev->dev, "card returned invalid SCB pointer\n");
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 1dabc8244083..a3684385e04a 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -356,16 +356,19 @@ void f2fs_drop_inmem_page(struct inode *inode, struct page *page)
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	struct list_head *head = &fi->inmem_pages;
+ 	struct inmem_pages *cur = NULL;
++	struct inmem_pages *tmp;
+
+ 	f2fs_bug_on(sbi, !page_private_atomic(page));
+
+ 	mutex_lock(&fi->inmem_lock);
+-	list_for_each_entry(cur, head, list) {
+-		if (cur->page == page)
++	list_for_each_entry(tmp, head, list) {
++		if (tmp->page == page) {
++			cur = tmp;
+ 			break;
++		}
  	}
 
- 	/* Remove the list head */
--	kfree(child);
-+	kfree(chunk->burst);
- 	chunk->burst = NULL;
- }
-
-@@ -156,7 +156,7 @@ static void dw_edma_free_chunk(struct dw_edma_desc *desc)
- 	}
-
- 	/* Remove the list head */
--	kfree(child);
-+	kfree(desc->chunk);
- 	desc->chunk = NULL;
- }
-
-diff --git a/drivers/net/ethernet/intel/i40e/i40e_ethtool.c b/drivers/net/ethernet/intel/i40e/i40e_ethtool.c
-index 091f36adbbe1..c0ea9dbc4ff6 100644
---- a/drivers/net/ethernet/intel/i40e/i40e_ethtool.c
-+++ b/drivers/net/ethernet/intel/i40e/i40e_ethtool.c
-@@ -3963,7 +3963,8 @@ static void __i40e_reprogram_flex_pit(struct i40e_pf *pf,
- 	 * correctly, the hardware will disable flexible field parsing.
- 	 */
- 	if (!list_empty(flex_pit_list))
--		last_offset = list_prev_entry(entry, list)->src_offset + 1;
-+		last_offset = list_entry(flex_pit_list->prev,
-+					 struct i40e_flex_pit, list)->src_offset + 1;
-
- 	for (; i < 3; i++, last_offset++) {
- 		i40e_write_rx_ctl(&pf->hw,
-diff --git a/drivers/net/wireless/ath/ath6kl/htc_mbox.c b/drivers/net/wireless/ath/ath6kl/htc_mbox.c
-index e3874421c4c0..cf5b05860799 100644
---- a/drivers/net/wireless/ath/ath6kl/htc_mbox.c
-+++ b/drivers/net/wireless/ath/ath6kl/htc_mbox.c
-@@ -104,7 +104,7 @@ static void ath6kl_credit_init(struct ath6kl_htc_credit_info *cred_info,
- 	 * it use list_for_each_entry_reverse to walk around the whole ep list.
- 	 * Therefore assign this lowestpri_ep_dist after walk around the ep_list
- 	 */
--	cred_info->lowestpri_ep_dist = cur_ep_dist->list;
-+	cred_info->lowestpri_ep_dist = *ep_list;
-
- 	WARN_ON(cred_info->cur_free_credits <= 0);
+-	f2fs_bug_on(sbi, list_empty(head) || cur->page != page);
++	f2fs_bug_on(sbi, !cur);
+ 	list_del(&cur->list);
+ 	mutex_unlock(&fi->inmem_lock);
 
 --
 2.25.1
