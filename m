@@ -2,112 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61EA94C7BBC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 22:19:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A7824C7C75
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 22:47:35 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nOnQN-0000qp-Uw; Mon, 28 Feb 2022 21:19:18 +0000
+	id 1nOnrg-0002KR-6N; Mon, 28 Feb 2022 21:47:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <noloader@gmail.com>)
- id 1nOnQM-0000qP-PH; Mon, 28 Feb 2022 21:19:17 +0000
+ (envelope-from <jakobkoschel@gmail.com>)
+ id 1nOnrT-0002Jk-T0; Mon, 28 Feb 2022 21:47:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- Reply-To:In-Reply-To:References:MIME-Version:Sender:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
+ Cc:Date:In-Reply-To:From:Subject:Mime-Version:Content-Type:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pX3FOaQ5tpG+krWAy5EzbawK39YqA5YwRZTg6hddt4E=; b=XplNfm8LsGKhFTiwD83nENoLUV
- UpUaUqbvW/HCdjhV7qAqnPWeG7FeOlJFOJoMEdvlcV8ZNqW07ZC0v6a7y8GErlVx2Jax4ivgsE56r
- 75owL7dTHz0iTIZ/gH2gnQrb9zSnJKNThTkTeCuTEDWt6WCKgDLCx1JgX6BK+JGKGLTA=;
+ bh=U6qUODqKVLrC7qZqs553HfNOTdovwKFxE93drAu/Dlk=; b=Q/tieumxBfFoa+yhyidWrtcWvb
+ Z/XiI7A5PAgRrLoPQ90k8fk/8xuzfY5YCNCrEcMPwAGYh2XuUr2PiXozTnpwsdieXEuSTCsuX9R53
+ 3OlVb1NcI4tkeTzOq0E8ljp5+Vm/p6BaP9FrDaqGy9CMMYfWo0SbFXiVo68eOb1q5kHc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:Reply-To:In-Reply-To:
- References:MIME-Version:Sender:Content-Transfer-Encoding:Content-ID:
+ h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
+ From:Subject:Mime-Version:Content-Type:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pX3FOaQ5tpG+krWAy5EzbawK39YqA5YwRZTg6hddt4E=; b=iFHr7ogXj3qexABixswVcFrK1f
- hFhwNCncdtf6CGda1SUKSicLC7LENx7TtmZXS2h3qlkSGd3w4jAtE+J8tgiOl6WHOXiaZDYf+xCIK
- eVDGHD/wEKqXQWXiotiCoKtTT3KFrUxqPte/UMqmeJr5qRblqhcO/k8wIviUSdj9xykM=;
-Received: from mail-pl1-f180.google.com ([209.85.214.180])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=U6qUODqKVLrC7qZqs553HfNOTdovwKFxE93drAu/Dlk=; b=mDvZpTTNflDibiAN9ruZ9h6QuT
+ WJ332WPijP+EEIAaWlbr9k9icub9VxqsIajhHi58H/NbMFVmRBn90bsS+3W8dY9bZPM5978uWFRxH
+ LjqlPk3b8UvI/DFVKNaEWLtxSbABaAce0ElUxAaC5pV/GT0ywDhJvS1I80OdP63TZEcQ=;
+Received: from mail-ed1-f54.google.com ([209.85.208.54])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nOnQH-000W1i-Px; Mon, 28 Feb 2022 21:19:17 +0000
-Received: by mail-pl1-f180.google.com with SMTP id ay5so8989902plb.1;
- Mon, 28 Feb 2022 13:19:13 -0800 (PST)
+ id 1nOnrK-00009l-Bj; Mon, 28 Feb 2022 21:47:12 +0000
+Received: by mail-ed1-f54.google.com with SMTP id p4so4399911edi.1;
+ Mon, 28 Feb 2022 13:47:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:reply-to:from:date:message-id
- :subject:to:cc;
- bh=pX3FOaQ5tpG+krWAy5EzbawK39YqA5YwRZTg6hddt4E=;
- b=JpEWCU5sl0Tb/FD34RSH61Ey9dRKreZqOQa3CJ02luf0uqIT78+8GWNevF0TXmNO1k
- V82hjNGseb3oWLNgnnFwXHAFmfIF+pTCtPsXm95pt2iCzBmJFwg04njU2K1WfIC8K4PQ
- JYTCrkA4ACMCh2biL4u47uoOFfhnbmO/1jCCSOx3OESfK5+oDGNitg9s7NqsmIU5fVsE
- xsR4ABTTJUTksMDshckaPyVLHegSArBm3erCaRT01IEJkH2S1g98XNdRHKV6JZW5AanM
- gI9+nSzlxhKCRaqGLAQjGqwME5o9/K6faQyfblLD265MKP0MWlgdnuFxCRxjUTwlasET
- Zo4g==
+ h=mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=U6qUODqKVLrC7qZqs553HfNOTdovwKFxE93drAu/Dlk=;
+ b=DcAOXNn/ViLnmA/Pl4xJfWkhBybquVghVb27ULjvzphMd1cBlP8EnT2avc3nlq8Ncp
+ XU0OlwqVPcxmpQGfXIX8cDSYeDqzQFDIjUJw6vYkNcJJHsbpQaotozEaUyIGD250VuoD
+ 60I5wOFshLHgsaHS54p/JatmHLrrllGTo/egDJjxoeGmck3vK6ZaE0ldZN4szqLK845U
+ BQNwjpOC8zhohOQR/VOEr6j/DtNOqZN6I6F48XJrq+10cNhH40s7WdjZ8f4gJpCeR9JY
+ suF4D0bui+heOiMd0XjHUkKuJX/fj0a+j8l22tTUgDxT9LwW7gkDbHU26uOV2JCB+l1v
+ aZYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
- :from:date:message-id:subject:to:cc;
- bh=pX3FOaQ5tpG+krWAy5EzbawK39YqA5YwRZTg6hddt4E=;
- b=phTAERSzYgyUAeXyuwrG3KCAc/FYxOXH07CjeCS3xCEbQvHXj0ZQ88p6/50ODgfO4+
- QfXtdjKy7NONSHOPjZe2bwGK7RVeP0uopG2p9cRhCV78D70cu3rD1maC1sZPMWI5++Ya
- X7wLFcA/R2pDnHaVtO6mJ8hQ0CURl+dsb0mNvoED+Cl0IZ3zbP5BT3+0K7C8rT+kd3Tq
- UpAkugtB0oFwlpwXqWDlDJ0ORI6Sqw5Rj5m3rpLOR7HTO0xhOFZSU6eNWRU7bOIy1y2i
- 8FpohddhVN4C3ZKSOJp3nZUKSZZuODxbOKN4PCLoAMerkZaDFNxdS80M9c6z5+qtJ7Nr
- Nzwg==
-X-Gm-Message-State: AOAM5321gzXlt1YLZOdRXFqB2qrmy/y1MGT5cuKSQAeZ3hkGkzN55REB
- 3ea1SDUDjif+fadKENS/yJgqQboRlZY8dkEbEnY=
-X-Google-Smtp-Source: ABdhPJxYQDaw0FFWrTXZCk3OvnKpy6mSdQ8Z9qbCWYQ2FvSetamSp4Rz90y2uoGU7tjomvOtre1MYsL9s+rZuYttBVs=
-X-Received: by 2002:a17:902:ce8a:b0:14f:fd0e:e4a4 with SMTP id
- f10-20020a170902ce8a00b0014ffd0ee4a4mr22765912plg.47.1646083147399; Mon, 28
- Feb 2022 13:19:07 -0800 (PST)
-MIME-Version: 1.0
+ h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=U6qUODqKVLrC7qZqs553HfNOTdovwKFxE93drAu/Dlk=;
+ b=4BXN5DwKb8RvvFdQsbvJ+xEYFyL45evqBHxUtafvXmbopZRUvR2fLwX6VReHqmxIQD
+ 2VjBqXawk2WYX9PRVG3wgtgt6dT4an2iP5vqRr29PAyXvKKIsX95aMwrgz9SwAOofkh4
+ 4bvc4UiCZ8I9w2wRe3EInDXMkdPsWRKxDqAMTY0OpQYJ8C20Ht5kqc53mpBKohXt+TbI
+ 11sGVajdKK+zqMsECh5dCVJXimkSCh48/ZQxBapkd1xlnhArx0TCBBwILKMPbmhMCPNF
+ H1wcKGpYinJWxrlQ31WrYCvSgTLN3pQ+ul7zYVC/qVDYzTA4WyKvO1KoLhh4HvOr0qeS
+ RHxA==
+X-Gm-Message-State: AOAM5338C1TPb/hywKQF8nt6J0DzED8f5a7jloalN/C49+XSOCXWC0dC
+ +78PFkE71lckESni9l4Fttk=
+X-Google-Smtp-Source: ABdhPJxKG2ff16tCWsK6Ck3Y2a57p3q44AgnQUgUMRZ3ajKrFkwS/Wlp6PHXO9g9MP9OhOujc97TPw==
+X-Received: by 2002:a05:6402:40d0:b0:412:f86a:efd1 with SMTP id
+ z16-20020a05640240d000b00412f86aefd1mr21791110edb.194.1646084823834; 
+ Mon, 28 Feb 2022 13:47:03 -0800 (PST)
+Received: from smtpclient.apple ([2a02:8109:9d80:3f6c:957a:1d13:c949:d1f3])
+ by smtp.gmail.com with ESMTPSA id
+ ce7-20020a170906b24700b006cf095c2f5bsm4701847ejb.83.2022.02.28.13.47.01
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 28 Feb 2022 13:47:03 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 15.0 \(3693.60.0.1.1\))
+From: Jakob Koschel <jakobkoschel@gmail.com>
+In-Reply-To: <CAHk-=wiTCvLQkHcJ3y0hpqH7FEk9D28LDvZZogC6OVLk7naBww@mail.gmail.com>
+Date: Mon, 28 Feb 2022 22:47:00 +0100
+Message-Id: <FC710A1A-524E-481B-A668-FC258F529A2E@gmail.com>
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <20220228110822.491923-3-jakobkoschel@gmail.com>
  <2e4e95d6-f6c9-a188-e1cd-b1eae465562a@amd.com>
  <CAHk-=wgQps58DPEOe4y5cTh5oE9EdNTWRLXzgMiETc+mFX7jzw@mail.gmail.com>
- <282f0f8d-f491-26fc-6ae0-604b367a5a1a@amd.com>
- <b2d20961dbb7533f380827a7fcc313ff849875c1.camel@HansenPartnership.com>
-In-Reply-To: <b2d20961dbb7533f380827a7fcc313ff849875c1.camel@HansenPartnership.com>
-From: Jeffrey Walton <noloader@gmail.com>
-Date: Mon, 28 Feb 2022 16:18:56 -0500
-Message-ID: <CAH8yC8nwp8f3rANhCiiP_Oiw2cjfqCwAgZdTXY9OxtN9Tmm7HA@mail.gmail.com>
-To: James Bottomley <James.Bottomley@hansenpartnership.com>
+ <CAHk-=wj8fkosQ7=bps5K+DDazBXk=ypfn49A0sEq+7-nZnyfXA@mail.gmail.com>
+ <CAHk-=wiTCvLQkHcJ3y0hpqH7FEk9D28LDvZZogC6OVLk7naBww@mail.gmail.com>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+X-Mailer: Apple Mail (2.3693.60.0.1.1)
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Feb 28, 2022 at 3:45 PM James Bottomley wrote: > ...
- > > Just from skimming over the patches to change this and experience > >
- with the drivers/subsystems I help to maintain I think the prim [...] 
+ Content preview:  > On 28. Feb 2022, at 21:10, Linus Torvalds wrote: > > On
+ Mon, Feb 28, 2022 at 12:03 PM Linus Torvalds > wrote: >> >> Side note: we
+ do need *some* way to do it. > > Ooh. > > This patch is a work o [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [noloader[at]gmail.com]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ provider [jakobkoschel[at]gmail.com]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.180 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.54 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.180 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nOnQH-000W1i-Px
+ no trust [209.85.208.54 listed in list.dnswl.org]
+X-Headers-End: 1nOnrK-00009l-Bj
 Subject: Re: [f2fs-dev] [PATCH 2/6] treewide: remove using list iterator
  after loop body as a ptr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -121,18 +125,18 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: noloader@gmail.com
 Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  alsa-devel@alsa-project.org, KVM list <kvm@vger.kernel.org>,
  "Gustavo A. R. Silva" <gustavo@embeddedor.com>, linux-iio@vger.kernel.org,
  nouveau@lists.freedesktop.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
  dri-devel <dri-devel@lists.freedesktop.org>,
- Cristiano Giuffrida <c.giuffrida@vu.nl>, "Bos, H.J." <h.j.bos@vu.nl>,
+ Cristiano Giuffrida <c.giuffrida@vu.nl>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>,
  linux1394-devel@lists.sourceforge.net, drbd-dev@lists.linbit.com,
  linux-arch <linux-arch@vger.kernel.org>, CIFS <linux-cifs@vger.kernel.org>,
  linux-aspeed@lists.ozlabs.org, linux-scsi <linux-scsi@vger.kernel.org>,
- linux-rdma <linux-rdma@vger.kernel.org>, linux-staging@lists.linux.dev,
- amd-gfx list <amd-gfx@lists.freedesktop.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+ linux-rdma <linux-rdma@vger.kernel.org>, linux-staging@lists.linux.dev, "Bos,
+ H.J." <h.j.bos@vu.nl>, Jason Gunthorpe <jgg@ziepe.ca>,
  intel-wired-lan@lists.osuosl.org, kgdb-bugreport@lists.sourceforge.net,
  bcm-kernel-feedback-list@broadcom.com,
  Dan Carpenter <dan.carpenter@oracle.com>,
@@ -140,11 +144,10 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  Kees Cook <keescook@chromium.org>, Arnd Bergman <arnd@arndb.de>,
  Linux PM <linux-pm@vger.kernel.org>,
  intel-gfx <intel-gfx@lists.freedesktop.org>,
- linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
  Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
  Nathan Chancellor <nathan@kernel.org>, dma <dmaengine@vger.kernel.org>,
  Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- Jakob Koschel <jakobkoschel@gmail.com>, v9fs-developer@lists.sourceforge.net,
+ v9fs-developer@lists.sourceforge.net,
  linux-tegra <linux-tegra@vger.kernel.org>,
  Thomas Gleixner <tglx@linutronix.de>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
@@ -157,43 +160,68 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
  linux-fsdevel <linux-fsdevel@vger.kernel.org>,
  linux-mediatek@lists.infradead.org, Andrew Morton <akpm@linux-foundation.org>,
- Linus Torvalds <torvalds@linux-foundation.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
+ =?utf-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Feb 28, 2022 at 3:45 PM James Bottomley
-<James.Bottomley@hansenpartnership.com> wrote:
-> ...
-> > Just from skimming over the patches to change this and experience
-> > with the drivers/subsystems I help to maintain I think the primary
-> > pattern looks something like this:
-> >
-> > list_for_each_entry(entry, head, member) {
-> >      if (some_condition_checking(entry))
-> >          break;
-> > }
-> > do_something_with(entry);
->
->
-> Actually, we usually have a check to see if the loop found anything,
-> but in that case it should something like
->
-> if (list_entry_is_head(entry, head, member)) {
->     return with error;
-> }
-> do_somethin_with(entry);
 
-Borrowing from c++, perhaps an explicit end should be used:
 
-  if (list_entry_not_end(entry))
-    do_somethin_with(entry)
+> On 28. Feb 2022, at 21:10, Linus Torvalds <torvalds@linux-foundation.org> wrote:
+> 
+> On Mon, Feb 28, 2022 at 12:03 PM Linus Torvalds
+> <torvalds@linux-foundation.org> wrote:
+>> 
+>> Side note: we do need *some* way to do it.
+> 
+> Ooh.
+> 
+> This patch is a work of art.
+> 
+> And I mean that in the worst possible way.
+> 
+> We can do
+> 
+>        typeof(pos) pos
+> 
+> in the 'for ()' loop, and never use __iter at all.
+> 
+> That means that inside the for-loop, we use a _different_ 'pos' than outside.
+> 
+> And then the compiler will not see some "might be uninitialized", but
+> the outer 'pos' *will* be uninitialized.
+> 
+> Unless, of course, the outer 'pos' had that pointless explicit initializer.
 
-It is modelled after c++ and the 'while(begin != end) {}' pattern.
+The goal of this is to get compiler warnings right? This would indeed be great.
 
-Jeff
+Changing the list_for_each_entry() macro first will break all of those cases
+(e.g. the ones using 'list_entry_is_head()).
+I assumed it is better to fix those cases first and then have a simple
+coccinelle script changing the macro + moving the iterator into the scope
+of the macro.
+
+> 
+> Here - can somebody poke holes in this "work of art" patch?
+
+With this you are no longer able to set the 'outer' pos within the list
+iterator loop body or am I missing something? Like this it stays
+uninitialized but you'll probably want to set it from within the loop.
+
+You would then yet again need a variable with another name to use
+after the loop.
+
+I fail to see how this will make most of the changes in this
+patch obsolete (if that was the intention).
+
+> 
+>                     Linus
+> <patch.diff>
+
+- Jakob
+
 
 
 _______________________________________________
