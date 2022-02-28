@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBE6D4C6A22
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 12:20:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9E334C6A35
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Feb 2022 12:22:49 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nOe4g-0007eN-Hg; Mon, 28 Feb 2022 11:20:17 +0000
+	id 1nOe75-0008Cv-Bs; Mon, 28 Feb 2022 11:22:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <gregkh@linuxfoundation.org>)
- id 1nOe4e-0007dj-Ps; Mon, 28 Feb 2022 11:20:15 +0000
+ (envelope-from <asmadeus@codewreck.org>)
+ id 1nOe74-0008Bs-4a; Mon, 28 Feb 2022 11:22:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CUq/EaLFFXg0vhZMACqUoVkVw0RJnOw2bdnxbJPsby8=; b=MO76sD7kOB562pfd1cTsJEB9Q1
- Yvux5f6HWYVcpvtbbLRf1IIs2fu/0P/kUPU3aTwtVaaSm784hMQJ36X0freLRclWC4lWla2eUDEac
- co4Lrb1fC0boWiSgGvlUqtk7HVUD7PDoitP7tUUB6zvoSHzSmFryYacl9PIH1VoAu1J8=;
+ bh=nbIjFrzgDVTmB4SrJnZGd7fIFmdwChwe2lL83Uag4us=; b=h8/DKw7aHHlS8pyZHNrjqIbn9/
+ yb2baDJJmIDCMqZaqHphleZJaDi2aTlfIWFbfnSkcr2mXHGqu1WYhjXQyxK9a1AVZeatLsdpXqG2X
+ Y7mYwhnmzxeuSiYog4GLwLuIZnduQFS6p9WZqOZ0bdF4hiPJjcA79oUrPrBBFFeJxZa4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,53 +29,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CUq/EaLFFXg0vhZMACqUoVkVw0RJnOw2bdnxbJPsby8=; b=k1R/eMG8Dj4k/5CA4SY94CuUWa
- i45CI0IwhD9l4CsLG4U08DxZqluFABPq9wTwROJPMk95GZjiN6E/A5Ov4ILyYokVJejhW5LUaRgZI
- tAIGn2xGSeZ/2Lw6E1ns5SyHhEORCqgWvX1bn6fv93O47DpeGXZgSq71PIUZPP69/6Y8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=nbIjFrzgDVTmB4SrJnZGd7fIFmdwChwe2lL83Uag4us=; b=PtH8wZELmOLsPQKPtFx6mzPceg
+ oOP/0Je2BnWDBJTzpw3nqk6y62Bub519li4xBqeciEg+fYImUgC/ThT+Vdr4hy1KjgYq4xz9HUdHR
+ EWkams/UmS7vslHe+FWTY2uLUAnjoFDkwpH4haExGlaqc8AEcLx9WGsz1o5iQbOQ2OzM=;
+Received: from nautica.notk.org ([91.121.71.147])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nOe4c-000802-Di; Mon, 28 Feb 2022 11:20:15 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id DE71F60F9E;
- Mon, 28 Feb 2022 11:20:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 577DAC340E7;
- Mon, 28 Feb 2022 11:20:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1646047208;
- bh=TZYI8CoLqZwdjhCp4FIqkyAKtFSpIqtbXR7Aczi5lHQ=;
+ id 1nOe6z-0008Gl-PZ; Mon, 28 Feb 2022 11:22:43 +0000
+Received: by nautica.notk.org (Postfix, from userid 108)
+ id 69D16C01A; Mon, 28 Feb 2022 12:22:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org; s=2;
+ t=1646047355; bh=nbIjFrzgDVTmB4SrJnZGd7fIFmdwChwe2lL83Uag4us=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=C57riiYnEjUdxOZhn04GGyA8PIVDUJ6DJKuCKjTYwuUmTfW6bVKDrs724kyxSBaKx
- RgI2btjN0kChcFl20e7HpTgxlexOr2YrBREdqqTBvDVt/Whdw/5z0V77N814zObmo3
- /EeMG4N6szzw6EaZ5Y2WBm3/aL7Ea4aeZYOpa8Fs=
-Date: Mon, 28 Feb 2022 12:20:03 +0100
-From: Greg KH <gregkh@linuxfoundation.org>
+ b=RT/IL34ZMb4wE13ecGpP0cPYfvUALLBHI3h+Nwqjk6un5A9pkdgT4k1/FqMlC2j9j
+ 5rXnbfX9CeRpV2BF45XH/gyMBAIlLBsJthcQL9g53J0izMt9+z9BAyzbfmHq+6LfSX
+ iY61zvlTrG45WH2waKu+VWh33WBy571UkxI0mCXre32lMHSogGum3oUpiCiQjYBFm0
+ UrVmOxcDfy2+XRbr8yw+xW4xvsCb62na1mVOfycyKoB6ejlKrB2T4jQrMTugRWsRaP
+ 9QmdpahZrSpqJLY1nBe2woUd/0EuRh0B46d3WvFe6/e41bNLFb+98ZtIxTmDiQp/ER
+ KjOOwgzjanHhA==
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on nautica.notk.org
+X-Spam-Level: 
+X-Spam-Status: No, score=0.0 required=5.0 tests=UNPARSEABLE_RELAY
+ autolearn=unavailable version=3.3.2
+Received: from odin.codewreck.org (localhost [127.0.0.1])
+ by nautica.notk.org (Postfix) with ESMTPS id 6162EC009;
+ Mon, 28 Feb 2022 12:22:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org; s=2;
+ t=1646047353; bh=nbIjFrzgDVTmB4SrJnZGd7fIFmdwChwe2lL83Uag4us=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=E7ShsxTdVoGEbpDYFF27HXnsiskOzo+90fWYK/YK/pcgewcio/aI2ukKBbk8Ggf8c
+ PSXNNRohBAnroHDgJmzD26WOCBS51v3CgaeWJoVRlz3gzi1Wk2c722FgVeG9ZC8Gq1
+ VxeMBZJsJJ2s49Z0zkRuzCFT0FdEMmJ4Jlg8so5xUNkI1Pmhr9T77hNpqbhc5MUSIm
+ Vf9CZqLUP+U5LMthWxqmxcIfa+qcI6C/HHTtBGWVbD6UPJLDQeI2MK30nqaJN3mP3G
+ MxeZ4iTWnejwYcukxHfaPz9ZlYf9Zxp1r7k3O+mRBYZR8EPZsNImCl3hToWu78+1r5
+ 3QpJ5t/64l3TQ==
+Received: from localhost (odin.codewreck.org [local])
+ by odin.codewreck.org (OpenSMTPD) with ESMTPA id 8186bc45;
+ Mon, 28 Feb 2022 11:22:16 +0000 (UTC)
+Date: Mon, 28 Feb 2022 20:22:01 +0900
+From: Dominique Martinet <asmadeus@codewreck.org>
 To: Jakob Koschel <jakobkoschel@gmail.com>
-Message-ID: <Yhyv42ONIxTj04mg@kroah.com>
+Message-ID: <YhywWTEIY7UnCYtL@codewreck.org>
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
- <20220228110822.491923-3-jakobkoschel@gmail.com>
+ <20220228110822.491923-7-jakobkoschel@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220228110822.491923-3-jakobkoschel@gmail.com>
-X-Spam-Score: -5.9 (-----)
+In-Reply-To: <20220228110822.491923-7-jakobkoschel@gmail.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Feb 28, 2022 at 12:08:18PM +0100,
- Jakob Koschel wrote:
- > If the list does not contain the expected element,
- the value of > list_for_each_entry()
- iterator will not point to a valid structure. > [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  This is a bit more work (and a lot more noise),
+ but I'd prefer
+ if this were split into as many patches as there are components. I'm not
+ going to review the parts of the patches that don't concern me,
+ and if something
+ turns out to be a problem later one (it shouldn't but one never knows) it'll
+ be much easier to revert or put th [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -85,10 +101,11 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nOe4c-000802-Di
-Subject: Re: [f2fs-dev] [PATCH 2/6] treewide: remove using list iterator
- after loop body as a ptr
+ 0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
+ lines
+X-Headers-End: 1nOe6z-0008Gl-PZ
+Subject: Re: [f2fs-dev] [PATCH 6/6] treewide: remove check of list iterator
+ against head past the loop body
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -132,38 +149,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Feb 28, 2022 at 12:08:18PM +0100, Jakob Koschel wrote:
-> If the list does not contain the expected element, the value of
-> list_for_each_entry() iterator will not point to a valid structure.
-> To avoid type confusion in such case, the list iterator
-> scope will be limited to list_for_each_entry() loop.
-> 
-> In preparation to limiting scope of a list iterator to the list traversal
-> loop, use a dedicated pointer to point to the found element.
-> Determining if an element was found is then simply checking if
-> the pointer is != NULL.
-> 
-> Signed-off-by: Jakob Koschel <jakobkoschel@gmail.com>
-> ---
->  arch/x86/kernel/cpu/sgx/encl.c       |  6 +++--
->  drivers/scsi/scsi_transport_sas.c    | 17 ++++++++-----
->  drivers/thermal/thermal_core.c       | 38 ++++++++++++++++++----------
->  drivers/usb/gadget/configfs.c        | 22 ++++++++++------
->  drivers/usb/gadget/udc/max3420_udc.c | 11 +++++---
->  drivers/usb/gadget/udc/tegra-xudc.c  | 11 +++++---
->  drivers/usb/mtu3/mtu3_gadget.c       | 11 +++++---
->  drivers/usb/musb/musb_gadget.c       | 11 +++++---
->  drivers/vfio/mdev/mdev_core.c        | 11 +++++---
->  9 files changed, 88 insertions(+), 50 deletions(-)
+This is a bit more work (and a lot more noise), but I'd prefer if
+this were split into as many patches as there are components.
 
-The drivers/usb/ portion of this patch should be in patch 1/X, right?
+I'm not going to review the parts of the patches that don't concern me,
+and if something turns out to be a problem later one (it shouldn't but
+one never knows) it'll be much easier to revert or put the blame on an
+individual smaller commit than on this...
 
-Also, you will have to split these up per-subsystem so that the
-different subsystem maintainers can take these in their trees.
+With that being said, ultimately I don't care that much and will leave
+that to people who do :)
 
-thanks,
+Jakob Koschel wrote on Mon, Feb 28, 2022 at 12:08:22PM +0100:
+>  net/9p/trans_xen.c                            | 11 +++--
 
-greg k-h
+This 9p change looks good to me.
+
+Reviewed-by: Dominique Martinet <asmadeus@codewreck.org> # 9p
+
+-- 
+Dominique
 
 
 _______________________________________________
