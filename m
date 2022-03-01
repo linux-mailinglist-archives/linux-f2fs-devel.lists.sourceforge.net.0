@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E6A74C8128
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Mar 2022 03:48:56 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 878904C8131
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Mar 2022 03:49:26 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nOsZJ-0006aD-TE; Tue, 01 Mar 2022 02:48:52 +0000
+	id 1nOsZq-0005Hg-IA; Tue, 01 Mar 2022 02:49:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nOsZI-0006a7-Rr
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Mar 2022 02:48:51 +0000
+ (envelope-from <chao@kernel.org>) id 1nOsZp-0005HX-4V
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Mar 2022 02:49:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TFNn+6aEf5FXLFz300ee2VUkkF0ue1kTrf7HVkfQAkw=; b=AqwK2jHP9kqYwxjBWedeF5H8I6
- c6rVbD9SRk4ZbxRKj9gayS5gv2RYRsv/r5HQcnunhxq/6UC115wW+Yk0ZrB5GwkP/tv5H5WKIHRTC
- j3a32PfsvcxindE1oHFlb1LyH/PpFpWbbELPJJTXfCZu14fGVfV2KPJzV2kfCQGqXULk=;
+ bh=TA/IKlIqF/ZB/3Xjc8dyc73+Nb3FOMWpHWau/EBuciQ=; b=OlOOZXqzqxVlhYUqJnLGPKiJdQ
+ Y1bBQa5En483ExUo206VvhE2VpvoUTU6/+dHcm6TF6Nhho7PIAap0KLPmZ63nzU8Cig83QMsHj5sI
+ F22xBfQG7w+RaRJ6jNlrowND+LZXE9jL0P11kdmoIJ8pMDOUiMC3tasETpYACqUaij2Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,42 +29,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TFNn+6aEf5FXLFz300ee2VUkkF0ue1kTrf7HVkfQAkw=; b=JJlhCYlvAezD10uATT3eHNmYva
- 90RzKBidtpJmt33Ad3h+zm/qnHqgtB8kEDVkjB1bEHj3wik4Vk6sbR7jCkhDh7OKyzUIrVcRaKxRm
- tS6XBBAKCpSuXloyo40ZrYa//fXUykWBjfMJBx+duGpH5ypS1YXwHYwdLD4IryeYsqZQ=;
+ bh=TA/IKlIqF/ZB/3Xjc8dyc73+Nb3FOMWpHWau/EBuciQ=; b=bCucqbpv6cSHd8Vd6M9cK80grc
+ o4Ssnzp32iG8Tkm99B6CKSkF3FdpnKnxpHWTiZYmEudQT/6DGK2NZf19WQql5vNUQ7vtm/7KOvDkJ
+ 6dBsKDeRGV0ptP2dlyr2e+nFUsbfraP7EmbaUDKUI1iaLw14hmWXvB4ZRz5jYxbRTqXY=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nOsZE-000k6y-HT
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Mar 2022 02:48:51 +0000
+ id 1nOsZf-000k7o-Ku
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Mar 2022 02:49:16 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 597A761602;
- Tue,  1 Mar 2022 02:48:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8820C34100;
- Tue,  1 Mar 2022 02:48:34 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 42E676160B;
+ Tue,  1 Mar 2022 02:49:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA988C340FA;
+ Tue,  1 Mar 2022 02:49:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1646102916;
- bh=G2d75bdlzRrheNLw7+a1JdKZGmhfjGIrrcOU2ZLlt64=;
+ s=k20201202; t=1646102950;
+ bh=KBM7Zi6UaFQwiF1vKbsCZWoDlDUJvqp3nrY82ducTY4=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ZP0VHhiZ6mI1LuF2JJbqQJcdj2lKsN2n7h+UA9P4yB3psb9IsRIVXUmNOaWZbBxkX
- nEE/H1m3ijo7ABJKlx7SCh/CXZKx2ck5zce2gaspIP1hj2ljHt9U12kS3Jiq3MWh/1
- UQ96GLAEC7nGJM/1I4/smtoQCiCZ7UOPzMXRh+9lbLeBUzBrMvVirFMKQS/j+op3oI
- ZT8zT6AzS5LQ+OQ9I0/BNyKCwipLLHPGz2QShRrzRA5qyXNJAPm9nns91uRafkc86t
- WXuMnFzSjS8Cgc2zwNuXmxSnE/9i3hFi6lvGLfoa060AVAj/0NSDuWo4d+wfodoaUy
- VhcQJYwUjgu6Q==
-Message-ID: <32114417-fd17-9412-28da-10f0ff09530d@kernel.org>
-Date: Tue, 1 Mar 2022 10:48:28 +0800
+ b=P+1ZEZpHYdKhEC/GWzAkoI/qtNS7jj8rgLjWkdzynrxE1yfM8h9McK8HeuH9B5Ob9
+ 0jKYEj9zxjHH+Y3exJcgnUTq2RWPqpB3ar9RX5xcHvviWKqufg5aDLCD2w7FWmPYWT
+ tMUn+N5tjk1H4Mz8sT3T9ukivXZBiZt27OLaqwMuqLizDFG6fcBbS7S6zsFQx6DmRb
+ djFo7rOkGXNBL6ggN7ZdX31Q+Pw0rOY45Y3IajzvhURO+0fLK0LmuTvBp3/pnRJj5o
+ 4qzo1bCFNXsQEhB6Wt7TAp/TZ2iSoW02NP07W/I+AwayRuRpIUv/XVr12MC31hWhCH
+ WwInl4n9XgbdQ==
+Message-ID: <782226e0-5e7a-aec8-b9aa-e7fd7b3110a7@kernel.org>
+Date: Tue, 1 Mar 2022 10:49:06 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.6.1
 Content-Language: en-US
 To: Christoph Hellwig <hch@lst.de>, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20220228124123.856027-1-hch@lst.de>
- <20220228124123.856027-2-hch@lst.de>
+ <20220228124123.856027-3-hch@lst.de>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220228124123.856027-2-hch@lst.de>
+In-Reply-To: <20220228124123.856027-3-hch@lst.de>
 X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,10 +72,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/2/28 20:41, Christoph Hellwig wrote: > Set the bdev
- at bio allocation time by changing the f2fs_target_device > calling
- conventions, 
- so that no bio needs to be passed in. > > Signed-off-by: Ch [...] 
+ Content preview:  On 2022/2/28 20:41, Christoph Hellwig wrote: > Refactor block
+ I/O code so that the bio operation and known flags are set > at bio allocation
+ time. Only the later updated flags are updated on the > fly [...] 
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nOsZE-000k6y-HT
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: don't pass a bio to
- f2fs_target_device
+X-Headers-End: 1nOsZf-000k7o-Ku
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: pass the bio operation to
+ bio_alloc_bioset
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,8 +113,9 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2022/2/28 20:41, Christoph Hellwig wrote:
-> Set the bdev at bio allocation time by changing the f2fs_target_device
-> calling conventions, so that no bio needs to be passed in.
+> Refactor block I/O code so that the bio operation and known flags are set
+> at bio allocation time.  Only the later updated flags are updated on the
+> fly.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 
