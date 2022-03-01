@@ -2,59 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C29B4C9968
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Mar 2022 00:36:50 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55FB14C99A4
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Mar 2022 01:03:30 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nPC27-00073m-B7; Tue, 01 Mar 2022 23:35:53 +0000
+	id 1nPCSk-00077W-Iz; Wed, 02 Mar 2022 00:03:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <david.laight@aculab.com>) id 1nPC25-00073W-HL
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Mar 2022 23:35:52 +0000
+ (envelope-from <torvalds@linuxfoundation.org>) id 1nPCSd-00077L-Mq
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 00:03:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sIOu8tHoyRdYMGnVfPBuzOIO1uMxv7Cf2JTuiK5yJKI=; b=VqLbS3lbiDFRnyTqNjPPRXU22l
- nICVDKdoq2MEcmg4diQHhfKkrVYQWNTFgVppOImfA2C76bN4UiR9HtfjKqb2Ppn5cLVxD6xk3TeS/
- 6aYAbnslj2eDI7NAu4TI8s/3Z04h7hW/XvLSqDGLYHhkkNDmQWlUu4+PliGK+ULHYg5M=;
+ bh=4H0hy1V+vsSL/J4iRHU98fs6Ghx9E/bawvPg5OjXQmQ=; b=IYooCL2bErS8C+LVK8D5E90GiP
+ rwzBWln/tHuGF0ZEOOB8gakNcVN+nNCdDS8I9T3ocyo8H4oX0Qb+38mReX0L2E1UQq/+HrL2yxuYi
+ 0KgYo6N1eh0dupzs0RyVjC/M+/n4B1mcwnz8x8mKC6osZC+OqWS48mdHXcZgzof7e3tU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:In-Reply-To:
- References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sIOu8tHoyRdYMGnVfPBuzOIO1uMxv7Cf2JTuiK5yJKI=; b=Wka6GgWIklxx9PtXLoGnX6bevx
- q0JrLtk3VEj8jcVGDVpzqiaR6DxHTHixeUBwRSn0AqP29iXUMFrlJrXXhaZEu9TRpUEA4gVajpgM3
- OetQirNi1JHAmQyqOuRf91tko79Q/v8zI34/2WuX3qfP7ug9pKMG8hS4TrpWf8Ppbyd0=;
-Received: from eu-smtp-delivery-151.mimecast.com ([185.58.85.151])
+ bh=4H0hy1V+vsSL/J4iRHU98fs6Ghx9E/bawvPg5OjXQmQ=; b=S0iSlD24auOsZdSR8vOHzdOrRY
+ 8XNM/zmbvot34AMyMfN8sH3QlJbE5O36zwJyGlgXmqKWLlTO8OuJIAK6gt9vU7OACrxYJ+vUx0UN9
+ oSWedhCWxp9vP0FXA42C2bHmHPzTXAT61yCnu5LIKANoIkPy3Twv+3Tyoi1rUAjzHGpQ=;
+Received: from mail-lf1-f41.google.com ([209.85.167.41])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nPC1s-00065f-Gr
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Mar 2022 23:35:51 +0000
-Received: from AcuMS.aculab.com (156.67.243.121 [156.67.243.121]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- uk-mta-274-hYNDa1-rPGCuZAB3qy-How-1; Tue, 01 Mar 2022 23:19:49 +0000
-X-MC-Unique: hYNDa1-rPGCuZAB3qy-How-1
-Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) by
- AcuMS.aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) with Microsoft SMTP
- Server (TLS) id 15.0.1497.28; Tue, 1 Mar 2022 23:19:46 +0000
-Received: from AcuMS.Aculab.com ([fe80::994c:f5c2:35d6:9b65]) by
- AcuMS.aculab.com ([fe80::994c:f5c2:35d6:9b65%12]) with mapi id
- 15.00.1497.028; Tue, 1 Mar 2022 23:19:46 +0000
-From: David Laight <David.Laight@ACULAB.COM>
-To: 'Linus Torvalds' <torvalds@linux-foundation.org>
-Thread-Topic: [PATCH 2/6] treewide: remove using list iterator after loop body
- as a ptr
-Thread-Index: AQHYLZ9++DU/OogLf0+tiSFmjztyUKyrHL5AgAAJGICAAAEEcA==
-Date: Tue, 1 Mar 2022 23:19:46 +0000
-Message-ID: <0ced2b155b984882b39e895f0211037c@AcuMS.aculab.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nPCSY-0007Om-3x
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 00:03:17 +0000
+Received: by mail-lf1-f41.google.com with SMTP id y24so29648181lfg.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 01 Mar 2022 16:03:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux-foundation.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=4H0hy1V+vsSL/J4iRHU98fs6Ghx9E/bawvPg5OjXQmQ=;
+ b=A1xSV6w+mnGI8KddmZFT+SVp47UhRqZlj7dZE7Ue1BgWjGw2+QCc51Zb6PIPvKiXuh
+ /TGd1P3o63R0kiFyLwVU+kzDBf6Kt9wFSZwwJYnrWAqavu9szp3nfmKm0Qe68N3l8Mdl
+ bWvesgtwBf4BWRSm4aUiCmj0pmAaHYwmzAjUs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=4H0hy1V+vsSL/J4iRHU98fs6Ghx9E/bawvPg5OjXQmQ=;
+ b=3ZkbuBBXTeAsrpKM41DwEk+fZmjC+5ngVYN9BT9UTJErcMsEkCZH6lPIhhI89jSKMO
+ ZLcygmpHDfOAsyaO2wqycDQP1DVAsbKMLFLZpNqNZsLATRSkP+iBLOcNmk41WwYLc3R5
+ Lv1XJTPVhoWUtw5886hB0ncmEbhVCcKAMj9mEh2qBKXNt2Pf02zD8geijzWMcqymatyu
+ E0FYr3t0lODuPK5Jhn7AQFg0qyjHakTKmE9dm6iAmL9mLdu+KIIsHMaW8MuaWWek8A5F
+ u7NQnFupiqLWSdJGd5+1AjDdjvI7yvmRCd+LeO2+SYtOBXILDTE1fhP+GfmUgW2PhV5A
+ 5eGg==
+X-Gm-Message-State: AOAM5333AodvC/5r7dKQC+9vyS1C1ojc3o2wdkUwCbWvzt/wYnCWLWzu
+ coAOtjwEVY3AK+NnlV8hL+uR+RZfmip2Ibn2Sw8=
+X-Google-Smtp-Source: ABdhPJwAyoStVqKMVW8Cvrd0BZXBm9eF7rfn+1YYb8+6ceU9Tj0cxVC2e3nr5kcC7AEIJCFRLV0gaw==
+X-Received: by 2002:a19:6a16:0:b0:442:2062:f7a with SMTP id
+ u22-20020a196a16000000b0044220620f7amr16531139lfu.456.1646179387239; 
+ Tue, 01 Mar 2022 16:03:07 -0800 (PST)
+Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com.
+ [209.85.208.179]) by smtp.gmail.com with ESMTPSA id
+ f6-20020a2eb386000000b0024624f70b13sm2253527lje.136.2022.03.01.16.03.06
+ for <linux-f2fs-devel@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Mar 2022 16:03:07 -0800 (PST)
+Received: by mail-lj1-f179.google.com with SMTP id e8so50073ljj.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 01 Mar 2022 16:03:06 -0800 (PST)
+X-Received: by 2002:a05:6512:3042:b0:437:96f5:e68a with SMTP id
+ b2-20020a056512304200b0043796f5e68amr17643498lfb.449.1646178958685; Tue, 01
+ Mar 2022 15:55:58 -0800 (PST)
+MIME-Version: 1.0
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <20220228110822.491923-3-jakobkoschel@gmail.com>
  <2e4e95d6-f6c9-a188-e1cd-b1eae465562a@amd.com>
@@ -66,39 +88,44 @@ References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <CAHk-=wiT5HX6Kp0Qv4ZYK_rkq9t5fZ5zZ7vzvi6pub9kgp=72g@mail.gmail.com>
  <7dc860874d434d2288f36730d8ea3312@AcuMS.aculab.com>
  <CAHk-=whKqg89zu4T95+ctY-hocR6kDArpo2qO14-kV40Ga7ufw@mail.gmail.com>
-In-Reply-To: <CAHk-=whKqg89zu4T95+ctY-hocR6kDArpo2qO14-kV40Ga7ufw@mail.gmail.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.202.205.107]
-MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: aculab.com
-Content-Language: en-US
-X-Spam-Score: -0.7 (/)
+ <0ced2b155b984882b39e895f0211037c@AcuMS.aculab.com>
+In-Reply-To: <0ced2b155b984882b39e895f0211037c@AcuMS.aculab.com>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Tue, 1 Mar 2022 15:55:42 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wix0HLCBs5sxAeW3uckg0YncXbTjMsE-Tv8WzmkOgLAXQ@mail.gmail.com>
+Message-ID: <CAHk-=wix0HLCBs5sxAeW3uckg0YncXbTjMsE-Tv8WzmkOgLAXQ@mail.gmail.com>
+To: David Laight <David.Laight@aculab.com>
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Linus Torvalds > Sent: 01 March 2022 23:03 > > On Tue, 
- Mar 1, 2022 at 2:58 PM David Laight <David.Laight@aculab.com> wrote: > >
- > > Can it be resolved by making: > > #define list_entry_is_head(p [...] 
- Content analysis details:   (-0.7 points, 6.0 required)
+ Content preview:  On Tue, Mar 1,
+ 2022 at 3:19 PM David Laight <David.Laight@aculab.com>
+ wrote: > > Having said that there are so few users of list_entry_is_head()
+ > it is reasonable to generate two new names. Well, the problem is that the
+ users of list_entry_is_head() may be few - but there are a number of _other_
+ ways to check "was that the HEAD pointer", and not all of them are necessarily
+ correct. Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [185.58.85.151 listed in wl.mailspike.net]
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [185.58.85.151 listed in list.dnswl.org]
- 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1nPC1s-00065f-Gr
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.167.41 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.41 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1nPCSY-0007Om-3x
 Subject: Re: [f2fs-dev] [PATCH 2/6] treewide: remove using list iterator
  after loop body as a ptr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -136,8 +163,8 @@ Cc: "alsa-devel@alsa-project.org" <alsa-devel@alsa-project.org>,
  <bcm-kernel-feedback-list@broadcom.com>,
  Dan Carpenter <dan.carpenter@oracle.com>,
  Linux Media Mailing List <linux-media@vger.kernel.org>,
- Kees Cook <keescook@chromium.org>, Arnd
- Bergman <arnd@arndb.de>, Linux PM <linux-pm@vger.kernel.org>,
+ Kees Cook <keescook@chromium.org>, Arnd Bergman <arnd@arndb.de>,
+ Linux PM <linux-pm@vger.kernel.org>,
  intel-gfx <intel-gfx@lists.freedesktop.org>,
  Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
  Nathan Chancellor <nathan@kernel.org>,
@@ -146,8 +173,8 @@ Cc: "alsa-devel@alsa-project.org" <alsa-devel@alsa-project.org>,
  Jakob Koschel <jakobkoschel@gmail.com>,
  "v9fs-developer@lists.sourceforge.net" <v9fs-developer@lists.sourceforge.net>,
  linux-tegra <linux-tegra@vger.kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>, Andy
- Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Linux ARM <linux-arm-kernel@lists.infradead.org>,
  "linux-sgx@vger.kernel.org" <linux-sgx@vger.kernel.org>,
  linux-block <linux-block@vger.kernel.org>, Netdev <netdev@vger.kernel.org>,
@@ -162,54 +189,67 @@ Cc: "alsa-devel@alsa-project.org" <alsa-devel@alsa-project.org>,
  "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
  Andrew Morton <akpm@linux-foundation.org>,
  linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
- =?utf-8?B?Q2hyaXN0aWFuIEvDtm5pZw==?= <christian.koenig@amd.com>, Mike
- Rapoport <rppt@kernel.org>
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Linus Torvalds
-> Sent: 01 March 2022 23:03
-> 
-> On Tue, Mar 1, 2022 at 2:58 PM David Laight <David.Laight@aculab.com> wrote:
-> >
-> > Can it be resolved by making:
-> > #define list_entry_is_head(pos, head, member) ((pos) == NULL)
-> > and double-checking that it isn't used anywhere else (except in
-> > the list macros themselves).
-> 
-> Well, yes, except for the fact that then the name is entirely misleading...
-> 
-> And somebody possibly uses it together with list_first_entry() etc, so
-> it really is completely broken to mix that change with the list
-> traversal change.
+On Tue, Mar 1, 2022 at 3:19 PM David Laight <David.Laight@aculab.com> wrote:
+>
+> Having said that there are so few users of list_entry_is_head()
+> it is reasonable to generate two new names.
 
-Probably true :-(
+Well, the problem is that the users of list_entry_is_head() may be few
+- but there are a number of _other_ ways to check "was that the HEAD
+pointer", and not all of them are necessarily correct.
 
-Actually adding list_entry_not_found() as a synonym for
-list_entry_is_head() and changing the 25ish places that
-use it after a loop might work.
+IOW, different places do different random tests for "did we walk the
+whole loop without breaking out". And many of them happen to work. In
+fact, in practice, pretty much *all* of them happen to work, and you
+have to have the right struct layout and really really bad luck to hit
+a case of "type confusion ended up causing the test to not work".
 
-Once that is done the loop can be changed at the same time
-as list_entry_not_found().
-That won't affect the in-tree callers.
-(and my out of tree modules don't use those lists - so I
-don't care about that!)
+And *THAT* is the problem here. It's not the "there are 25ish places
+that current use list_entry_is_head()".
 
-Having said that there are so few users of list_entry_is_head()
-it is reasonable to generate two new names.
-One for use after list_for_each_entry() and one for list_next_entry().
-Then the change all the call sites.
-After that list_entry_is_head() can be deleted - breaking out of
-tree compiles.
-Finally list_for_each_entry() can be rewritten to set NULL
-at the end of the list.
+It's the "there are ~480 places that use the type-confused HEAD entry
+that has been cast to the wrong type".
 
-	David
+And THAT is why I think we'd be better off with that bigger change
+that simply means that you can't use the iterator variable at all
+outside the loop, and try to make it something where the compiler can
+help catch mis-uses.
 
--
-Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
-Registration No: 1397386 (Wales)
+Now, making the list_for_each_entry() thing force the iterator to NULL
+at the end of the loop does fix the problem. The issue I have with it
+is really just that you end up getting no warning at all from the
+compiler if you mix old-style and new-style semantics. Now, you *will*
+get an oops (if using a new-style iterator with an old-style check),
+but many of these things will be in odd driver code and may happen
+only for error cases.
+
+And if you use a new-style check with an old-style iterator (ie some
+backport problem), you will probably end up getting random memory
+corruption, because you'll decide "it's not a HEAD entry", and then
+you'll actually *use* the HEAD that has the wrong type cast associated
+with it.
+
+See what my worry is?
+
+With the "don't use iterator outside the loop" approach, the exact
+same code works in both the old world order and the new world order,
+and you don't have the semantic confusion. And *if* you try to use the
+iterator outside the loop, you'll _mostly_ (*) get a compiler warning
+about it not being initialized.
+
+             Linus
+
+(*) Unless somebody initializes the iterator pointer pointlessly.
+Which clearly does happen. Thus the "mostly". It's not perfect, and
+that's most definitely not nice - but it should at least hopefully
+make it that much harder to mess up.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
