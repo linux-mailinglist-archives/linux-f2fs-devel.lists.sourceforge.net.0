@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56D244C7FEB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Mar 2022 02:02:13 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 90E874C7FF7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Mar 2022 02:03:58 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nOqu2-0004iX-GY; Tue, 01 Mar 2022 01:02:09 +0000
+	id 1nOqvj-0000ED-4t; Tue, 01 Mar 2022 01:03:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <torvalds@linuxfoundation.org>) id 1nOqu1-0004iR-7p
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Mar 2022 01:02:07 +0000
+ (envelope-from <torvalds@linuxfoundation.org>) id 1nOqvh-0000E2-Px
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Mar 2022 01:03:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
  In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
  :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ud5/y/EBwvp8QN7vw5ZxaiWuDsWQaCGba2UHh4N4mec=; b=QuGLEFZUNLPo8rkVJuk1zVpkwq
- EOhAjFimt5YVAMQ+9L1UAbdjTG9SUVmMWynLKwdS3qCOYMkq8RYeVwZG4La6DxtnvHdPZXvIuScQ1
- MBhURuFk0Ip2JNudSHvNLxbtqBFeivzfViAe6MTU3KH0Ti1QmT3ev3uwztgL+vqFpsYQ=;
+ bh=+UrwimTIhzKiU9pJv3o5X6bf+6FXMWBGxz+Z+GIIGDc=; b=gLItBUQmUxT7ZrAdBtjcqgAeX7
+ AuV519gAHAZePh/SmappFvdx8in3bbvnvhOFZzmXdNPfSb9A2tlcyDizsJ7zSuDnsk5OCIH4cFmsj
+ 0axCcGICJrCdqvG+JmQm5FN+mTuVW0HWQxWlJ5m1vjgBPZ5YD5IsrnEuVJOw6lV7h1xg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
@@ -29,97 +29,101 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ud5/y/EBwvp8QN7vw5ZxaiWuDsWQaCGba2UHh4N4mec=; b=VrfwBbHQVzZ2BkRVtTDL+G4HRG
- eoiDs1yA6Klx+ICoUf6ZyclA/8Cgz+TLxctdhfUV3pEGwC3g/0os4xjToNsbaKAB7nWAB3+TL/cIO
- uslF7vTThtAtC72T9pfCL1/h1eqlR64ziQCwQ012pL6HrK/K0y9iiH5vRQCNzbe85CiM=;
-Received: from mail-ed1-f47.google.com ([209.85.208.47])
+ bh=+UrwimTIhzKiU9pJv3o5X6bf+6FXMWBGxz+Z+GIIGDc=; b=iI/Nt1mAHMyc4WuA+iJCuhV49k
+ 5eQQXWyQdoFlxy193t4rVp09Kfw3QwhKq2d9NE8jMlIaapS6OO1vDfqe+kZ1/IpTCuc5QyPiRns8w
+ Fl/+XXzyqcim18bqVEfxW19/8tJ6xtVKyKWDwbkkNl+RSc6IvZDiWsk5/Qh3CCVQ3ryE=;
+Received: from mail-lj1-f179.google.com ([209.85.208.179])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nOqtx-0001Bh-SE
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Mar 2022 01:02:07 +0000
-Received: by mail-ed1-f47.google.com with SMTP id s14so20030975edw.0
+ id 1nOqvf-0001HU-Ts
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 01 Mar 2022 01:03:52 +0000
+Received: by mail-lj1-f179.google.com with SMTP id u11so19799372lju.4
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 28 Feb 2022 17:02:05 -0800 (PST)
+ Mon, 28 Feb 2022 17:03:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux-foundation.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ud5/y/EBwvp8QN7vw5ZxaiWuDsWQaCGba2UHh4N4mec=;
- b=QDNLH8KOj2N5elfQIiFc9ZMVPG667ughU6MItd4VPmNt6fV069Cvzy3GNDu1LboIOU
- /ukem7qn980/nnuqsEKTwz+sJAAGQSBr/OuNtNkm7jqBwkXZFdDq4KuXeUYSVdjS5Ygf
- UbLkNglYiw3uAvK1jhMlolPsp6Bm5sW2kE0eY=
+ :cc; bh=+UrwimTIhzKiU9pJv3o5X6bf+6FXMWBGxz+Z+GIIGDc=;
+ b=avIYh8aQ2dDobwKAVUmxzj/7dS14/rGtEVGY0pMiaJUsHbP3qIU6kno3XMfBz/RlQM
+ DBr9tOtZ8iqO/uKNwSujAwo9mle8zBl2HT1HDuvvvRH+Bqr8BYPzCJojUUOk2VYbR5wW
+ hMzIeM3di7snjNNfrAaBZvtX47IfluwYB/RPY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ud5/y/EBwvp8QN7vw5ZxaiWuDsWQaCGba2UHh4N4mec=;
- b=mEl8ixioHRHu/0T6JPje4KX4viWWjfpKZ37ISWuoZsndhFyzGdhzjJLw/FOGaW+a3p
- 38Jm2LFIFt6Q9aTDh5NGGMe7/CdqWJkjGL/9fjZBJR5FEN2rx22hF1AoD9GyGxrmouSm
- w1eW2r2rHWI6OPDRWbap6qRjFTMB/faYxMBPmkXMHkY/3m8S66mX49Ku/CjcwNLWqFlK
- SoCwLvoGNRiNpTjZXLVkSS0qxANiplUr3vYCBo1xy0mDHvfugFhZ2yWXRNGBvkFc4tgU
- qEIAkROjtzpwX1DVLmHRCdtn5P002QTIeP5UUz6kHc7LBKovOtEeBuS35YxiorMqjCM8
- azZQ==
-X-Gm-Message-State: AOAM53056lMj675IOwAiwtVAT/8lB7kp05o5CcebNjx0KgTKags8dEUc
- t8ohUTdECEVZ6v3OuKpF8n8qkOaCI9hAlPq9A64=
-X-Google-Smtp-Source: ABdhPJyvMmDL/spIk6lHQB44GeTii66l25OLcga7SiyaA7HE4hNdQ1FJkUIRpJCxPS23FHxG+itdWA==
-X-Received: by 2002:a05:6402:168e:b0:410:d2a4:b0dd with SMTP id
- a14-20020a056402168e00b00410d2a4b0ddmr21933953edv.403.1646096519282; 
- Mon, 28 Feb 2022 17:01:59 -0800 (PST)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com.
- [209.85.218.46]) by smtp.gmail.com with ESMTPSA id
- d25-20020aa7d699000000b004128cfcc228sm6725957edr.5.2022.02.28.17.01.58
+ bh=+UrwimTIhzKiU9pJv3o5X6bf+6FXMWBGxz+Z+GIIGDc=;
+ b=GLVsc/kF29HljwW+2EN+uiIftS2Mts2SIP+ctqv5Hg/Nr8CheOWmlNjQLVOc4sBVOp
+ ehHatxXnqWQ/AGBMxhXHc3nRZQO28UCrL7TaSmkEj0P0/0XEcQWex6i63yy4qmL0Lc+j
+ dumpN5PLA5+Hh9fS3B15Ynf4JZksSPU9lSnL/dLWLMjZ4yuryR4k0RcIQRku21t4mrlc
+ 2O0QFFhfMPKvj8ZTNFjf+jMUUDOW3JEnkJHY3xuW3UfOYaIJdCD7/N2zXnQqjdBqriA2
+ S/PQBN7hPmN5X+2Ka2rEU5KKK9JSI/8RSqJylZkUbnOASUpTLp2ujN9Nj9mOl5lHtXl7
+ lBsg==
+X-Gm-Message-State: AOAM530UjoIACjrU41EVyxhT1yTTKZR8CN5tKwufIas3epfDVswzFCNI
+ UHQ5MUivItS/XmiViD+GeziT2k0T2M4tvrqOwcs=
+X-Google-Smtp-Source: ABdhPJzjwizkPLuv0jbJ6Rw5bP+2w9mRnl6w18fljTEVfLfbmCIN0sdAFeQSWCCqvzJ+BTUxo9u6Lg==
+X-Received: by 2002:a05:651c:1797:b0:23a:18d7:1d39 with SMTP id
+ bn23-20020a05651c179700b0023a18d71d39mr15617759ljb.470.1646096625127; 
+ Mon, 28 Feb 2022 17:03:45 -0800 (PST)
+Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com.
+ [209.85.208.173]) by smtp.gmail.com with ESMTPSA id
+ m6-20020a056512114600b0044313065fecsm1217830lfg.266.2022.02.28.17.03.44
  for <linux-f2fs-devel@lists.sourceforge.net>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Feb 2022 17:01:59 -0800 (PST)
-Received: by mail-ej1-f46.google.com with SMTP id a23so28307587eju.3
+ Mon, 28 Feb 2022 17:03:44 -0800 (PST)
+Received: by mail-lj1-f173.google.com with SMTP id s25so19791790lji.5
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 28 Feb 2022 17:01:58 -0800 (PST)
-X-Received: by 2002:a2e:aaa2:0:b0:244:bf42:3e6e with SMTP id
- bj34-20020a2eaaa2000000b00244bf423e6emr16240083ljb.176.1646096101617; Mon, 28
- Feb 2022 16:55:01 -0800 (PST)
+ Mon, 28 Feb 2022 17:03:44 -0800 (PST)
+X-Received: by 2002:a05:6512:3042:b0:437:96f5:e68a with SMTP id
+ b2-20020a056512304200b0043796f5e68amr14803965lfb.449.1646096282839; Mon, 28
+ Feb 2022 16:58:02 -0800 (PST)
 MIME-Version: 1.0
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <20220228110822.491923-3-jakobkoschel@gmail.com>
  <2e4e95d6-f6c9-a188-e1cd-b1eae465562a@amd.com>
  <CAHk-=wgQps58DPEOe4y5cTh5oE9EdNTWRLXzgMiETc+mFX7jzw@mail.gmail.com>
- <282f0f8d-f491-26fc-6ae0-604b367a5a1a@amd.com>
- <b2d20961dbb7533f380827a7fcc313ff849875c1.camel@HansenPartnership.com>
- <7D0C2A5D-500E-4F38-AD0C-A76E132A390E@kernel.org>
- <73fa82a20910c06784be2352a655acc59e9942ea.camel@HansenPartnership.com>
- <20220301003059.GE614@gate.crashing.org>
-In-Reply-To: <20220301003059.GE614@gate.crashing.org>
+ <CAHk-=wj8fkosQ7=bps5K+DDazBXk=ypfn49A0sEq+7-nZnyfXA@mail.gmail.com>
+ <CAHk-=wiTCvLQkHcJ3y0hpqH7FEk9D28LDvZZogC6OVLk7naBww@mail.gmail.com>
+ <Yh0tl3Lni4weIMkl@casper.infradead.org>
+ <CAHk-=wgBfJ1-cPA2LTvFyyy8owpfmtCuyiZi4+um8DhFNe+CyA@mail.gmail.com>
+ <Yh1aMm3hFe/j9ZbI@casper.infradead.org>
+ <CAHk-=wi0gSUMBr2SVF01Gy1xC1w1iGtJT5ztju9BPWYKjdh+NA@mail.gmail.com>
+In-Reply-To: <CAHk-=wi0gSUMBr2SVF01Gy1xC1w1iGtJT5ztju9BPWYKjdh+NA@mail.gmail.com>
 From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Mon, 28 Feb 2022 16:54:45 -0800
-X-Gmail-Original-Message-ID: <CAHk-=wgLYqYcw0xv65xrLSR7KDpS_6M+S9737m6NQorHGWsXYQ@mail.gmail.com>
-Message-ID: <CAHk-=wgLYqYcw0xv65xrLSR7KDpS_6M+S9737m6NQorHGWsXYQ@mail.gmail.com>
-To: Segher Boessenkool <segher@kernel.crashing.org>
+Date: Mon, 28 Feb 2022 16:57:46 -0800
+X-Gmail-Original-Message-ID: <CAHk-=whqJmCZ+VHTJPwsHYc1YNNEvWS7=ukqGKfBxcBYAToAkw@mail.gmail.com>
+Message-ID: <CAHk-=whqJmCZ+VHTJPwsHYc1YNNEvWS7=ukqGKfBxcBYAToAkw@mail.gmail.com>
+To: Matthew Wilcox <willy@infradead.org>
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On Mon, Feb 28,
- 2022 at 4:38 PM Segher Boessenkool <segher@kernel.crashing.org>
- wrote: > > In C its scope is the rest of the declaration and the entire loop, 
- not > anything after it. This was the same [...] 
- Content analysis details:   (0.1 points, 6.0 required)
+ 2022 at 4:45 PM Linus Torvalds <torvalds@linux-foundation.org>
+ wrote: > > Yeah, except that's ugly beyond belief, plus it's literally not
+ what > we do in the kernel. (Of course, I probably shouldn't have used 'min()'
+ as an example, because that is actually one of the few places where we do
+ exactly that, using our __UNIQUE_ID() macros. Exactly because people _have_
+ [...] Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.208.47 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.47 listed in wl.mailspike.net]
+ no trust [209.85.208.179 listed in list.dnswl.org]
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
  mail domains are different
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1nOqtx-0001Bh-SE
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.179 listed in wl.mailspike.net]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1nOqvf-0001HU-Ts
 Subject: Re: [f2fs-dev] [PATCH 2/6] treewide: remove using list iterator
  after loop body as a ptr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -133,16 +137,15 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: alsa-devel@alsa-project.org, linux-aspeed@lists.ozlabs.org,
+Cc: linux-wireless <linux-wireless@vger.kernel.org>,
+ alsa-devel@alsa-project.org, KVM list <kvm@vger.kernel.org>,
  "Gustavo A. R. Silva" <gustavo@embeddedor.com>, linux-iio@vger.kernel.org,
  nouveau@lists.freedesktop.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
  dri-devel <dri-devel@lists.freedesktop.org>,
- James Bottomley <James.Bottomley@hansenpartnership.com>,
  Cristiano Giuffrida <c.giuffrida@vu.nl>, "Bos, H.J." <h.j.bos@vu.nl>,
- samba-technical@lists.samba.org, linux1394-devel@lists.sourceforge.net,
- drbd-dev@lists.linbit.com, linux-arch <linux-arch@vger.kernel.org>,
- CIFS <linux-cifs@vger.kernel.org>, KVM list <kvm@vger.kernel.org>,
- linux-scsi <linux-scsi@vger.kernel.org>,
+ linux1394-devel@lists.sourceforge.net, drbd-dev@lists.linbit.com,
+ linux-arch <linux-arch@vger.kernel.org>, CIFS <linux-cifs@vger.kernel.org>,
+ linux-aspeed@lists.ozlabs.org, linux-scsi <linux-scsi@vger.kernel.org>,
  linux-rdma <linux-rdma@vger.kernel.org>, linux-staging@lists.linux.dev,
  amd-gfx list <amd-gfx@lists.freedesktop.org>, Jason Gunthorpe <jgg@ziepe.ca>,
  intel-wired-lan@lists.osuosl.org, kgdb-bugreport@lists.sourceforge.net,
@@ -153,8 +156,7 @@ Cc: alsa-devel@alsa-project.org, linux-aspeed@lists.ozlabs.org,
  Linux PM <linux-pm@vger.kernel.org>,
  intel-gfx <intel-gfx@lists.freedesktop.org>,
  Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
- Nathan Chancellor <nathan@kernel.org>,
- linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ Nathan Chancellor <nathan@kernel.org>, dma <dmaengine@vger.kernel.org>,
  Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
  Jakob Koschel <jakobkoschel@gmail.com>, v9fs-developer@lists.sourceforge.net,
  linux-tegra <linux-tegra@vger.kernel.org>,
@@ -162,13 +164,13 @@ Cc: alsa-devel@alsa-project.org, linux-aspeed@lists.ozlabs.org,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Linux ARM <linux-arm-kernel@lists.infradead.org>, linux-sgx@vger.kernel.org,
  linux-block <linux-block@vger.kernel.org>, Netdev <netdev@vger.kernel.org>,
- linux-usb@vger.kernel.org, linux-wireless <linux-wireless@vger.kernel.org>,
+ linux-usb@vger.kernel.org, samba-technical@lists.samba.org,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>,
  tipc-discussion@lists.sourceforge.net,
  Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
- dma <dmaengine@vger.kernel.org>, linux-mediatek@lists.infradead.org,
- Andrew Morton <akpm@linux-foundation.org>,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ linux-mediatek@lists.infradead.org, Andrew Morton <akpm@linux-foundation.org>,
  linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Mike Rapoport <rppt@kernel.org>
@@ -176,39 +178,18 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Feb 28, 2022 at 4:38 PM Segher Boessenkool
-<segher@kernel.crashing.org> wrote:
+On Mon, Feb 28, 2022 at 4:45 PM Linus Torvalds
+<torvalds@linux-foundation.org> wrote:
 >
-> In C its scope is the rest of the declaration and the entire loop, not
-> anything after it.  This was the same in C++98 already, btw (but in
-> pre-standard versions of C++ things were like you remember, yes, and it
-> was painful).
+> Yeah, except that's ugly beyond belief, plus it's literally not what
+> we do in the kernel.
 
-Yeah, the original C++ model was just unadulterated garbage, with no
-excuse for it, and the scope was not the loop, but the block the loop
-existed in.
+(Of course, I probably shouldn't have used 'min()' as an example,
+because that is actually one of the few places where we do exactly
+that, using our __UNIQUE_ID() macros. Exactly because people _have_
+tried to do -Wshadow when doing W=2).
 
-That would never have been acceptable for the kernel - it's basically
-just an even uglier version of "put variable declarations in the
-middle of code" (and we use "-Wdeclaration-after-statement" to
-disallow that for kernel code, although apparently some of our user
-space tooling code doesn't enforce or follow that rule).
-
-The actual C99 version is the sane one which actually makes it easier
-and clearer to have loop iterators that are clearly just in loop
-scope.
-
-That's a good idea in general, and I have wanted to start using that
-in the kernel even aside from some of the loop construct macros.
-Because putting variables in natural minimal scope is a GoodThing(tm).
-
-Of course, we shouldn't go crazy with it. Even after we do that
--std=gnu11 thing, we'll have backports to worry about. And it's not
-clear that we necessarily want to backport that gnu11 thing - since
-people who run old stable kernels also may be still using those really
-old compilers...
-
-            Linus
+                 Linus
 
 
 _______________________________________________
