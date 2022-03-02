@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FD644C9B48
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Mar 2022 03:40:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FE144C9C2B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Mar 2022 04:31:47 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nPEum-0008Hz-Dd; Wed, 02 Mar 2022 02:40:31 +0000
+	id 1nPFiK-0003Mj-SM; Wed, 02 Mar 2022 03:31:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nPEui-0008Ht-Mj
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 02:40:27 +0000
+ (envelope-from <chao@kernel.org>) id 1nPFiK-0003Mb-7g
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 03:31:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4BAM9CVtILAAPpqbPQuAHF7jVACi35/pyDdB8m5Z6Yw=; b=TFcVCq5kb/+M0RoZsQdByVgsa3
- wCGw4FRUFbq39PMKt4+PKln7VgHdqYULywtG2RdzzVU0k3EmNMP1rRFuUgDY2MeTjjTBjeOcwAHIz
- gvqNcF72csAoYGfbeXMlov5VE9ewfnmqJlRLuBVI9ldnMK37iHxy/yBwKbgQBELcIWcA=;
+ bh=Ylh1Y6K5r/F4GJ4W9vbgCWS3eTfNC9sLFkFTW1lpcAs=; b=Tn71GqERYpw33ugERTgpb5tSJ3
+ DZ2Nnp0lYY32hzJa4nge0mEnbl3rBdKZye2G0W9r0NTvIFp5Qyiut1vzJdykN0ZWW5DOceC6uhaYt
+ 2Kn1gChokAt0v+Zmo2K1BHnD6dvz7mvNPJNvs000BslBGS6GI+FcJYmmcY49AvCD2SuY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,44 +29,45 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4BAM9CVtILAAPpqbPQuAHF7jVACi35/pyDdB8m5Z6Yw=; b=lXJM/y2Num9Cq6ac3fZuofsqfT
- drbIvIKV+yxwsd4RPYdS5F7x1umKJgOcvlL0abAYhavfnUp3KNc5jvMI62lG6PUwG0fQJ6x9sE3e6
- CFCFU+ZAZQ1Lu8DNqpnW1bEl21eyJabCAOJKgBHzjr0ckmd4byOwa5Z5GvgPsB5t7+p8=;
+ bh=Ylh1Y6K5r/F4GJ4W9vbgCWS3eTfNC9sLFkFTW1lpcAs=; b=VSX3oeb/6k+QvXvQN2M7E1G4gI
+ 7z0Y+lFXOu7FqfovQxfCdNAdLNyoVjzz/Igp93rzcZHHUHrGWBqxMQcyqx+x2Z2KVspCoP5cvC8oH
+ pwos6+/H4TV7Los4T829qtVnuNGpqdffQ/mCDQ7+2hMNho3ZchyB2oCh/Os+8fQLXjGE=;
 Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nPEuf-001yW5-0K
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 02:40:27 +0000
+ id 1nPFiH-00014t-U6
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 03:31:42 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id DE731B81EE3
+ by ams.source.kernel.org (Postfix) with ESMTPS id A1921B81EE3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  2 Mar 2022 02:40:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8B8AC340EE;
- Wed,  2 Mar 2022 02:40:11 +0000 (UTC)
+ Wed,  2 Mar 2022 03:31:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91E38C340EE;
+ Wed,  2 Mar 2022 03:31:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1646188812;
- bh=xpbzS62wFUB5qKwr+JpG3FXlmb8dShFlcZ/h4z7lRsk=;
+ s=k20201202; t=1646191894;
+ bh=qsM3gmrIYwEhQ11fW9RTy/LatjIek7q8y931df4juyg=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=RsBbmjjm2X8LtdNiC8vfYq00PMrcM4aJshPQnRrqkYdHIJs0V4x/Gjh5/XdLg0tEv
- nIOMWDt/zgAw4yqToW2+5C1BMJ2RdfQkjFLYzuvN+drJfTTkF9nV9uBfCOEHdm8O14
- Yy51I6P7OPnAe734w5lxzFBegnJ9fZwLKWU1HWcHL7GQKdOxyn0riUs2ya6maAKVg1
- sN72gTnnvThc8bSvkIMQYk0ScaAoXXfvBgnWt5q8IeTbGK+NVPVUnj6lRzV3xVA9JD
- +bIm4aJrU1qdjEFQpc/0/MTvcSwCtZH2GwKxVwHqMG4Af0B1S7Fn2rveQk4X/nHJ02
- +c0UVr58cDgFg==
-Message-ID: <4b264607-4d60-7370-eca7-8816a3f8d29f@kernel.org>
-Date: Wed, 2 Mar 2022 10:40:08 +0800
+ b=rfgXM3rMn0Pn1tf0Ca2EJuktXWTtudif4ucMBoEZIbsuAIKpZVkp1l26Vl0vk8p0b
+ XtL8V6KP8IP+vTqFV7BPMM2nis0T3eTHGNoxVzb9AY7amvtF/pGOK1GqtaAMp6e1Db
+ k+hgLauIKtxgmqywmqytBF/By47enC3I4+Px4Y65cI8nxJYoHUeVd4P5P8+lp2/UGt
+ la8bNFoBecMgOHq/mFYmvu38nj9UlrQCQipz6SCihy5wmmpfrNVyIprJMPOut1jj1t
+ Zo8zG/LqSOZa5lWIsSw/NQqNCMvCKYTGZW9C+SrYuTLXGBjYQCRiLnb3tc4azSPA78
+ UeE3A/8dFtZPA==
+Message-ID: <3f81ebcb-c14a-ba76-5600-dcb3860d738e@kernel.org>
+Date: Wed, 2 Mar 2022 11:31:30 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.6.1
 Content-Language: en-US
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20220215220039.1477906-1-jaegeuk@kernel.org>
- <09683b83-b6c0-fe05-0dae-b93cab2f4b63@kernel.org>
- <YhkpjWZ3NO5ihvH5@google.com> <Yh2lpb3c5X9aPJ+r@google.com>
+References: <20220203174458.3598593-1-jaegeuk@kernel.org>
+ <YgL/HK2aGhFUQhtZ@google.com>
+ <d8216020-b439-ca77-fbe2-b68dc44fba25@kernel.org>
+ <YhkhyWTqwwx1Ck67@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <Yh2lpb3c5X9aPJ+r@google.com>
+In-Reply-To: <YhkhyWTqwwx1Ck67@google.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -74,11 +75,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/3/1 12:48,
- Jaegeuk Kim wrote: > 1. waiting for f2fs_evict_inode
- > [ 5560.043945] __wait_on_freeing_inode+0xac/0xf0 > [ 5560.045540] ?
- var_wake_function+0x30/0x30
- > [ 5560.047036] find_inode_fa [...] 
+ Content preview:  On 2022/2/26 2:36, Jaegeuk Kim wrote: > On 02/25, Chao Yu
+ wrote: >> On 2022/2/9 7:39, Jaegeuk Kim wrote: >>> With this patch,
+ "-g android"
+ enables usr/grp/proj quota by default. >>> >>> 1) -O quota : [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +95,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nPEuf-001yW5-0K
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: avoid sb_start_intwrite during
- eviction
+X-Headers-End: 1nPFiH-00014t-U6
+Subject: Re: [f2fs-dev] [PATCH v2] mkfs.f2fs: set project quota by default
+ for -g android
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,107 +109,35 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/3/1 12:48, Jaegeuk Kim wrote:
-> 1. waiting for f2fs_evict_inode
-> [ 5560.043945]  __wait_on_freeing_inode+0xac/0xf0
-> [ 5560.045540]  ? var_wake_function+0x30/0x30
-> [ 5560.047036]  find_inode_fast+0x6d/0xc0
-> [ 5560.048473]  iget_locked+0x79/0x230
-> [ 5560.049933]  f2fs_iget+0x27/0x1200 [f2fs]
-> [ 5560.051496]  f2fs_lookup+0x18c/0x3e0 [f2fs]
-> [ 5560.053069]  __lookup_slow+0x84/0x150
-> [ 5560.054503]  walk_component+0x141/0x1b0
-> [ 5560.055938]  link_path_walk.part.0+0x23b/0x360
-> [ 5560.057541]  ? end_bio_bh_io_sync+0x37/0x50
-> [ 5560.059086]  path_parentat+0x3c/0x90
-> [ 5560.060492]  filename_parentat+0xd7/0x1e0
-> [ 5560.062002]  ? blk_mq_free_request+0x127/0x150
-> [ 5560.063576]  do_renameat2+0xc1/0x5b0
->   --> sb_start_write(m->mnt_sb); ->  __sb_start_write(sb, SB_FREEZE_WRITE);
+On 2022/2/26 2:36, Jaegeuk Kim wrote:
+> On 02/25, Chao Yu wrote:
+>> On 2022/2/9 7:39, Jaegeuk Kim wrote:
+>>> With this patch, "-g android" enables usr/grp/proj quota by default.
+>>>
+>>> 1) -O quota : enables usr/grp
+>>> 2) -O project_quota -O extra_attr : enabled prj
+>>> 3) -O quota -O project_quota -O extra_attr : enables usr/grp/proj
+>>> 4) -g android : enables usr/grp/proj
+>>> 5) -g android -O project_quota -O extra_attr : enables usr/grp/proj
+>>>
+>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>
+>> Reviewed-by: Chao Yu <chao@kernel.org>
 > 
-> [ 5560.064999]  ? __check_object_size+0x13f/0x150
-> [ 5560.066559]  ? strncpy_from_user+0x44/0x150
-> [ 5560.068038]  ? getname_flags.part.0+0x4c/0x1b0
-> [ 5560.069617]  __x64_sys_renameat2+0x51/0x60
-> 
-> 2. waiting for sb_start_intwrite -> __sb_start_write(sb, SB_FREEZE_FS);
+> Is this for v3?
 
-It's still not clear that why __sb_start_write(sb, SB_FREEZE_FS) will be blocked,
-as SB_FREEZE_FS and SB_FREEZE_WRITE points to different locks.
-
-Thread A				Thread B				Thread C
-- rename
-  - sb_start_write
-   - __sb_start_write(SB_FREEZE_WRITE)
-...
-      - f2fs_lookup
-...
-        - __wait_on_freeing_inode
-					- drop_slab
-					 - prune_icache_sb
-					  - inode_lru_isolate
-					   :inode->i_state |= I_FREEING
-										- Is there any flow that it has already held
-										 SB_FREEZE_FS and try to lock SB_FREEZE_WRITE?
-					   - f2fs_evict_inode
-					    - __sb_start_write(SB_FREEZE_FS)
+Yup, :)
 
 Thanks,
 
 > 
-> [ 5560.152447]  percpu_rwsem_wait+0xaf/0x160
-> [ 5560.154000]  ? percpu_down_write+0xd0/0xd0
-> [ 5560.155498]  __percpu_down_read+0x4e/0x60
-> [ 5560.157000]  f2fs_evict_inode+0x5a3/0x610 [f2fs]
-> [ 5560.158648]  ? var_wake_function+0x30/0x30
-> [ 5560.160341]  evict+0xd2/0x180
-> [ 5560.161728]  prune_icache_sb+0x81/0xb0
->   --> inode_lru_isolate() -> inode->i_state |= I_FREEING;
-> 
-> [ 5560.163179]  super_cache_scan+0x169/0x1f0
-> [ 5560.164675]  do_shrink_slab+0x145/0x2b0
-> [ 5560.166121]  shrink_slab+0x186/0x2d0
-> [ 5560.167481]  drop_slab_node+0x4a/0x90
-> [ 5560.168876]  drop_slab+0x3e/0x80
-> [ 5560.170178]  drop_caches_sysctl_handler+0x75/0x90
-> [ 5560.171761]  proc_sys_call_handler+0x149/0x280
-> [ 5560.173328]  proc_sys_write+0x13/0x20
-> [ 5560.174667]  new_sync_write+0x117/0x1b0
-> [ 5560.176120]  vfs_write+0x1d5/0x270
-> [ 5560.177409]  ksys_write+0x67/0xe0
-> 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->   Note, I found this call stack.
-> 
->   fs/f2fs/inode.c | 2 --
->   1 file changed, 2 deletions(-)
-> 
-> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> index ab8e0c06c78c..882db4bd917b 100644
-> --- a/fs/f2fs/inode.c
-> +++ b/fs/f2fs/inode.c
-> @@ -778,7 +778,6 @@ void f2fs_evict_inode(struct inode *inode)
->   	f2fs_remove_ino_entry(sbi, inode->i_ino, UPDATE_INO);
->   	f2fs_remove_ino_entry(sbi, inode->i_ino, FLUSH_INO);
->   
-> -	sb_start_intwrite(inode->i_sb);
->   	set_inode_flag(inode, FI_NO_ALLOC);
->   	i_size_write(inode, 0);
->   retry:
-> @@ -809,7 +808,6 @@ void f2fs_evict_inode(struct inode *inode)
->   		if (dquot_initialize_needed(inode))
->   			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
->   	}
-> -	sb_end_intwrite(inode->i_sb);
->   no_delete:
->   	dquot_drop(inode);
->   
+>>
+>> Thanks,
 
 
 _______________________________________________
