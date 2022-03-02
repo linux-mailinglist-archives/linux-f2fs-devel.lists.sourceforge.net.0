@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC1184CAF02
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Mar 2022 20:46:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FE924CAF58
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Mar 2022 21:07:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nPUvx-0000ag-IZ; Wed, 02 Mar 2022 19:46:48 +0000
+	id 1nPVFj-0005Dl-Pe; Wed, 02 Mar 2022 20:07:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nPUvw-0000aZ-4V
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 19:46:47 +0000
+ (envelope-from <keescook@chromium.org>) id 1nPVFi-0005Df-Lo
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 20:07:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=T0ksMtkkRRqAEeiz0+FltOlumpt/7okqGZMqcaGxyeM=; b=NJsBApQ6gTT2a2JRq1cbrcSsxO
- 0RT4AWDJPm9FeD8Fv+GB9w+GZFql2YDWfkobMybJHT9zQiTf518jSp0A5lUIPSU4e3ysIYlQo9WGk
- gfvckADMxLnQV2DEX53TF4Uiti0THyaNZSWgki1rcWGzm7Auqx8rZQPw76awUOVXC84c=;
+ bh=9llME+iRL2iH9L07jwvbWbmbHLr47Rbz7WJ4fOgTlZc=; b=b4O44c9MiuSSztOYMj8OZkmeek
+ qAfDx2sdZOgazIFZ2EPy2j7wwdKlWlmbI5wvnNMjCN3tVPkH2tsoznvhQHTLe8zMde3vPRDPlSmT/
+ K+js2eFphiXOWV4iB7CTRr+daSddL49HS9jQ0qAPozeKmRMbG28ZbfXdWDSRoY1e058g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,75 +29,94 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=T0ksMtkkRRqAEeiz0+FltOlumpt/7okqGZMqcaGxyeM=; b=g8khJnnSuHwQZCl+kE7bg54jRo
- 0cJbghtTLU0ZlfON1nqfapETMBIXdfHGm0fu8bYryo5ocnSH6/zppTQ6QrQiXyiV9HCErMNfZnSFV
- GDLLJIfyXt27oHv56CEY9ciohYh0twYt/qT+UDOZEOWGV6yWb5zq9u6zmx0N0Cg7GBS8=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=9llME+iRL2iH9L07jwvbWbmbHLr47Rbz7WJ4fOgTlZc=; b=gPXPnGXO34/C7n2L1+1rSJd6lJ
+ l1r2gS41ekN3pTU2Aq0ofbPJlKMIDq284rGS70MdXf50GpOkRWfVfVVPrTESOieVAi130qf24uNkC
+ gqM3VMIjtR0cd01sdyHXcOA1IkBKiY618jTKEayXjl5IHJnwGjcD5nOkn4eqXc5/mVv0=;
+Received: from mail-pl1-f173.google.com ([209.85.214.173])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nPUvt-0002Js-RV
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 19:46:46 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id B0688B82157
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nPVFf-0003CX-Cl
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 20:07:13 +0000
+Received: by mail-pl1-f173.google.com with SMTP id p17so2517369plo.9
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  2 Mar 2022 19:46:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B514C004E1;
- Wed,  2 Mar 2022 19:46:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1646250393;
- bh=rwuNNe+xfMuhL8QwE62/c9y7pTkw5kU6r8YitNPd8JE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=B5n9emTEQS0IVLgnh/Vwusid0Riv9bGZ8r2TOvAO59l86lo1IoqNpLaRtf1UTq9pw
- geWxfKFniGgVBio4dRWrhhPpDCqL38x9PgeMnO8s2px4AnwyzR788ATd3b8e0SZdy7
- xKPaMSLmVQlwOgWiiv/4qDTqVyVf/7JqAMPeru3QlOZERMc5kEtO3xAsDt5mweHJ7Z
- 1X0k/0HlRqJ8KHyFjmcZZobExFLErWWSMWfGz12FWoCiYA5MXVOD8ZrPkWH27/g24X
- taCYzkiywEsYDxDXMfIXogT1GYUWKzICPy9mAsG7dWxQczCI2drSCqbN4+ZuIj1hh9
- m/NuK0U9qLU/Q==
-Date: Wed, 2 Mar 2022 11:46:31 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Yh/Jl3wU+y1wRqRb@google.com>
-References: <20220215220039.1477906-1-jaegeuk@kernel.org>
- <09683b83-b6c0-fe05-0dae-b93cab2f4b63@kernel.org>
- <YhkpjWZ3NO5ihvH5@google.com> <Yh2lpb3c5X9aPJ+r@google.com>
- <4b264607-4d60-7370-eca7-8816a3f8d29f@kernel.org>
- <Yh8B/w9kPGU98Hfh@google.com> <Yh8C4aA+nBajs+fc@google.com>
- <Yh8EgciUTRAbWDNG@google.com>
- <3d861bf6-c404-140d-b91a-60df3ddec304@kernel.org>
+ Wed, 02 Mar 2022 12:07:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=9llME+iRL2iH9L07jwvbWbmbHLr47Rbz7WJ4fOgTlZc=;
+ b=IvpJRwG7ynxkReEE85KaN5rJUYtD4xKNHA+hy6TwBmoQ8B3uYeJI+QViQcnaGiWq86
+ F88M3HTERkoil1v4VBpPtCvYuei+/tfueI2kCXzM7ddvcotxLyWZwiewhTHLUCy28lRK
+ BraqPBOXvwYRthhpbxTgJWS9pGCc3zSZJBqHk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=9llME+iRL2iH9L07jwvbWbmbHLr47Rbz7WJ4fOgTlZc=;
+ b=PwVR1B9ID1+X200IXuk7mQbpVI/6bFoNYi7NFl+/XAZb3Sd8Gk//CSa9dzjHNR7OjF
+ EwIR6hMk98mkQ5hUIQ1isNZ6uw7he1Sd0crzb7rfjY12bCsmviQ+5brX55KaRX7r8sME
+ 0dkZXoI7KHwKmCK9Ajs508pfFEAbK6wBeQ3HUcGPtiHV8UtN9s/OVfjbkOcNCGmQb/VU
+ WBYW5POEl8zqIVoGozLDkOy8gb0iB5K3TuLJ93X7DBJUj3LSeZvwpmNdBfZ3wlrKXDWi
+ dL4c2gUzpiFehBiFkiSyU+bcwewUbjRpSh2zVix62YbfP2wVQ+L+bDonC5LN7ep8gUJX
+ m5BQ==
+X-Gm-Message-State: AOAM5328n+PY/IQ1l0jee6qQVOvhpn7dkNJxw9DDSOMCfafq5gD+rNq1
+ 9o82QEneOOjCBy7SlphDhPh+cQ==
+X-Google-Smtp-Source: ABdhPJyalZw/yElDAQSdRYusWOxjkvZUrvn+e5j/jboS/+hXUtUpvVb6mMnbBbqlv1j/a0ygzQBPkQ==
+X-Received: by 2002:a17:90b:94e:b0:1bc:c99f:ede1 with SMTP id
+ dw14-20020a17090b094e00b001bcc99fede1mr1518926pjb.49.1646251625762; 
+ Wed, 02 Mar 2022 12:07:05 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id
+ d25-20020a637359000000b0037843afb785sm6664pgn.25.2022.03.02.12.07.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Mar 2022 12:07:05 -0800 (PST)
+Date: Wed, 2 Mar 2022 12:07:04 -0800
+From: Kees Cook <keescook@chromium.org>
+To: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+Message-ID: <202203021158.DB5204A0@keescook>
+References: <282f0f8d-f491-26fc-6ae0-604b367a5a1a@amd.com>
+ <b2d20961dbb7533f380827a7fcc313ff849875c1.camel@HansenPartnership.com>
+ <7D0C2A5D-500E-4F38-AD0C-A76E132A390E@kernel.org>
+ <73fa82a20910c06784be2352a655acc59e9942ea.camel@HansenPartnership.com>
+ <CAHk-=wiT5HX6Kp0Qv4ZYK_rkq9t5fZ5zZ7vzvi6pub9kgp=72g@mail.gmail.com>
+ <7dc860874d434d2288f36730d8ea3312@AcuMS.aculab.com>
+ <CAHk-=whKqg89zu4T95+ctY-hocR6kDArpo2qO14-kV40Ga7ufw@mail.gmail.com>
+ <0ced2b155b984882b39e895f0211037c@AcuMS.aculab.com>
+ <CAHk-=wix0HLCBs5sxAeW3uckg0YncXbTjMsE-Tv8WzmkOgLAXQ@mail.gmail.com>
+ <78ccb184-405e-da93-1e02-078f90d2b9bc@rasmusvillemoes.dk>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <3d861bf6-c404-140d-b91a-60df3ddec304@kernel.org>
-X-Spam-Score: -5.6 (-----)
+In-Reply-To: <78ccb184-405e-da93-1e02-078f90d2b9bc@rasmusvillemoes.dk>
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 03/02, Chao Yu wrote: > On 2022/3/2 13:45, Jaegeuk Kim
- wrote: > > On 03/01, Jaegeuk Kim wrote: > > > On 03/01, Jaegeuk Kim wrote:
- > > > > On 03/02, Chao Yu wrote: > > > > > On 2022/3/1 12:48, Jaege [...]
- Content analysis details:   (-5.6 points, 6.0 required)
+ Content preview:  On Wed, Mar 02, 2022 at 10:29:31AM +0100, Rasmus Villemoes
+ wrote: > This won't help the current issue (because it doesn't exist and
+ might > never), but just in case some compiler people are listening, [...]
+ Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.173 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.173 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nPUvt-0002Js-RV
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: avoid sb_start_intwrite during
- eviction
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nPVFf-0003CX-Cl
+Subject: Re: [f2fs-dev] [PATCH 2/6] treewide: remove using list iterator
+ after loop body as a ptr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,141 +128,115 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: "alsa-devel@alsa-project.org" <alsa-devel@alsa-project.org>,
+ "linux-aspeed@lists.ozlabs.org" <linux-aspeed@lists.ozlabs.org>,
+ "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
+ "linux-iio@vger.kernel.org" <linux-iio@vger.kernel.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ James Bottomley <James.Bottomley@hansenpartnership.com>,
+ Cristiano Giuffrida <c.giuffrida@vu.nl>, "Bos, H.J." <h.j.bos@vu.nl>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ "linux1394-devel@lists.sourceforge.net"
+ <linux1394-devel@lists.sourceforge.net>,
+ "drbd-dev@lists.linbit.com" <drbd-dev@lists.linbit.com>,
+ linux-arch <linux-arch@vger.kernel.org>, CIFS <linux-cifs@vger.kernel.org>,
+ KVM list <kvm@vger.kernel.org>, linux-scsi <linux-scsi@vger.kernel.org>,
+ linux-rdma <linux-rdma@vger.kernel.org>,
+ "linux-staging@lists.linux.dev" <linux-staging@lists.linux.dev>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+ "intel-wired-lan@lists.osuosl.org" <intel-wired-lan@lists.osuosl.org>,
+ "kgdb-bugreport@lists.sourceforge.net" <kgdb-bugreport@lists.sourceforge.net>,
+ "bcm-kernel-feedback-list@broadcom.com"
+ <bcm-kernel-feedback-list@broadcom.com>,
+ Dan Carpenter <dan.carpenter@oracle.com>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>,
+ Arnd Bergman <arnd@arndb.de>, Linux PM <linux-pm@vger.kernel.org>,
+ intel-gfx <intel-gfx@lists.freedesktop.org>,
+ linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
+ Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
+ Nathan Chancellor <nathan@kernel.org>,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+ Jakob Koschel <jakobkoschel@gmail.com>,
+ "v9fs-developer@lists.sourceforge.net" <v9fs-developer@lists.sourceforge.net>,
+ linux-tegra <linux-tegra@vger.kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ "linux-sgx@vger.kernel.org" <linux-sgx@vger.kernel.org>,
+ linux-block <linux-block@vger.kernel.org>, Netdev <netdev@vger.kernel.org>,
+ "linux-usb@vger.kernel.org" <linux-usb@vger.kernel.org>,
+ linux-wireless <linux-wireless@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>,
+ David Laight <David.Laight@aculab.com>,
+ "tipc-discussion@lists.sourceforge.net"
+ <tipc-discussion@lists.sourceforge.net>,
+ Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
+ dma <dmaengine@vger.kernel.org>,
+ "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/02, Chao Yu wrote:
-> On 2022/3/2 13:45, Jaegeuk Kim wrote:
-> > On 03/01, Jaegeuk Kim wrote:
-> > > On 03/01, Jaegeuk Kim wrote:
-> > > > On 03/02, Chao Yu wrote:
-> > > > > On 2022/3/1 12:48, Jaegeuk Kim wrote:
-> > > > > > 1. waiting for f2fs_evict_inode
-> > > > > > [ 5560.043945]  __wait_on_freeing_inode+0xac/0xf0
-> > > > > > [ 5560.045540]  ? var_wake_function+0x30/0x30
-> > > > > > [ 5560.047036]  find_inode_fast+0x6d/0xc0
-> > > > > > [ 5560.048473]  iget_locked+0x79/0x230
-> > > > > > [ 5560.049933]  f2fs_iget+0x27/0x1200 [f2fs]
-> > > > > > [ 5560.051496]  f2fs_lookup+0x18c/0x3e0 [f2fs]
-> > > > > > [ 5560.053069]  __lookup_slow+0x84/0x150
-> > > > > > [ 5560.054503]  walk_component+0x141/0x1b0
-> > > > > > [ 5560.055938]  link_path_walk.part.0+0x23b/0x360
-> > > > > > [ 5560.057541]  ? end_bio_bh_io_sync+0x37/0x50
-> > > > > > [ 5560.059086]  path_parentat+0x3c/0x90
-> > > > > > [ 5560.060492]  filename_parentat+0xd7/0x1e0
-> > > > > > [ 5560.062002]  ? blk_mq_free_request+0x127/0x150
-> > > > > > [ 5560.063576]  do_renameat2+0xc1/0x5b0
-> > > > > >    --> sb_start_write(m->mnt_sb); ->  __sb_start_write(sb, SB_FREEZE_WRITE);
-> > > > > > 
-> > > > > > [ 5560.064999]  ? __check_object_size+0x13f/0x150
-> > > > > > [ 5560.066559]  ? strncpy_from_user+0x44/0x150
-> > > > > > [ 5560.068038]  ? getname_flags.part.0+0x4c/0x1b0
-> > > > > > [ 5560.069617]  __x64_sys_renameat2+0x51/0x60
-> > > > > > 
-> > > > > > 2. waiting for sb_start_intwrite -> __sb_start_write(sb, SB_FREEZE_FS);
-> > > > > 
-> > > > > It's still not clear that why __sb_start_write(sb, SB_FREEZE_FS) will be blocked,
-> > > > > as SB_FREEZE_FS and SB_FREEZE_WRITE points to different locks.
-> > > > 
-> > > > It seems I missed another call, thaw_super(), got SB_FREEZE_FS and then being
-> > > > stuck to grab SB_FREEZE_WRITE.
-> > > 
-> > > Ah, sorry. freeze_super().
-> > 
-> > Messed up. So, the lock order is SB_FREEZE_WRITE -> SB_FREEZE_FS in both cases.
+On Wed, Mar 02, 2022 at 10:29:31AM +0100, Rasmus Villemoes wrote:
+> This won't help the current issue (because it doesn't exist and might
+> never), but just in case some compiler people are listening, I'd like to
+> have some sort of way to tell the compiler "treat this variable as
+> uninitialized from here on". So one could do
 > 
-> Yeah, I noticed this, w/ such lock order, Thread C (freeze_super) will be blocked
-> on SB_FREEZE_WRITE, and then Thread B won't be block on SB_FREEZE_FS, right?
+> #define kfree(p) do { __kfree(p); __magic_uninit(p); } while (0)
+> 
+> with __magic_uninit being a magic no-op that doesn't affect the
+> semantics of the code, but could be used by the compiler's "[is/may be]
+> used uninitialized" machinery to flag e.g. double frees on some odd
+> error path etc. It would probably only work for local automatic
+> variables, but it should be possible to just ignore the hint if p is
+> some expression like foo->bar or has side effects. If we had that, the
+> end-of-loop test could include that to "uninitialize" the iterator.
 
-Yeah, checking the code path again.
+I've long wanted to change kfree() to explicitly set pointers to NULL on
+free. https://github.com/KSPP/linux/issues/87
 
-> 
-> Thanks,
-> 
-> > 
-> > > 
-> > > > 
-> > > > > 
-> > > > > Thread A				Thread B				Thread C
-> > > > > - rename
-> > > > >   - sb_start_write
-> > > > >    - __sb_start_write(SB_FREEZE_WRITE)
-> > > > > ...
-> > > > >       - f2fs_lookup
-> > > > > ...
-> > > > >         - __wait_on_freeing_inode
-> > > > > 					- drop_slab
-> > > > > 					 - prune_icache_sb
-> > > > > 					  - inode_lru_isolate
-> > > > > 					   :inode->i_state |= I_FREEING
-> > > > > 										- Is there any flow that it has already held
-> > > > > 										 SB_FREEZE_FS and try to lock SB_FREEZE_WRITE?
-> > > > > 					   - f2fs_evict_inode
-> > > > > 					    - __sb_start_write(SB_FREEZE_FS)
-> > > > > 
-> > > > > Thanks,
-> > > > > 
-> > > > > > 
-> > > > > > [ 5560.152447]  percpu_rwsem_wait+0xaf/0x160
-> > > > > > [ 5560.154000]  ? percpu_down_write+0xd0/0xd0
-> > > > > > [ 5560.155498]  __percpu_down_read+0x4e/0x60
-> > > > > > [ 5560.157000]  f2fs_evict_inode+0x5a3/0x610 [f2fs]
-> > > > > > [ 5560.158648]  ? var_wake_function+0x30/0x30
-> > > > > > [ 5560.160341]  evict+0xd2/0x180
-> > > > > > [ 5560.161728]  prune_icache_sb+0x81/0xb0
-> > > > > >    --> inode_lru_isolate() -> inode->i_state |= I_FREEING;
-> > > > > > 
-> > > > > > [ 5560.163179]  super_cache_scan+0x169/0x1f0
-> > > > > > [ 5560.164675]  do_shrink_slab+0x145/0x2b0
-> > > > > > [ 5560.166121]  shrink_slab+0x186/0x2d0
-> > > > > > [ 5560.167481]  drop_slab_node+0x4a/0x90
-> > > > > > [ 5560.168876]  drop_slab+0x3e/0x80
-> > > > > > [ 5560.170178]  drop_caches_sysctl_handler+0x75/0x90
-> > > > > > [ 5560.171761]  proc_sys_call_handler+0x149/0x280
-> > > > > > [ 5560.173328]  proc_sys_write+0x13/0x20
-> > > > > > [ 5560.174667]  new_sync_write+0x117/0x1b0
-> > > > > > [ 5560.176120]  vfs_write+0x1d5/0x270
-> > > > > > [ 5560.177409]  ksys_write+0x67/0xe0
-> > > > > > 
-> > > > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > > > > > ---
-> > > > > >    Note, I found this call stack.
-> > > > > > 
-> > > > > >    fs/f2fs/inode.c | 2 --
-> > > > > >    1 file changed, 2 deletions(-)
-> > > > > > 
-> > > > > > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> > > > > > index ab8e0c06c78c..882db4bd917b 100644
-> > > > > > --- a/fs/f2fs/inode.c
-> > > > > > +++ b/fs/f2fs/inode.c
-> > > > > > @@ -778,7 +778,6 @@ void f2fs_evict_inode(struct inode *inode)
-> > > > > >    	f2fs_remove_ino_entry(sbi, inode->i_ino, UPDATE_INO);
-> > > > > >    	f2fs_remove_ino_entry(sbi, inode->i_ino, FLUSH_INO);
-> > > > > > -	sb_start_intwrite(inode->i_sb);
-> > > > > >    	set_inode_flag(inode, FI_NO_ALLOC);
-> > > > > >    	i_size_write(inode, 0);
-> > > > > >    retry:
-> > > > > > @@ -809,7 +808,6 @@ void f2fs_evict_inode(struct inode *inode)
-> > > > > >    		if (dquot_initialize_needed(inode))
-> > > > > >    			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
-> > > > > >    	}
-> > > > > > -	sb_end_intwrite(inode->i_sb);
-> > > > > >    no_delete:
-> > > > > >    	dquot_drop(inode);
-> > > > 
-> > > > 
-> > > > _______________________________________________
-> > > > Linux-f2fs-devel mailing list
-> > > > Linux-f2fs-devel@lists.sourceforge.net
-> > > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> > > 
-> > > 
-> > > _______________________________________________
-> > > Linux-f2fs-devel mailing list
-> > > Linux-f2fs-devel@lists.sourceforge.net
-> > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+The thing stopping a trivial transformation of kfree() is:
+
+	kfree(get_some_pointer());
+
+I would argue, though, that the above is poor form: the thing holding
+the pointer should be the thing freeing it, so these cases should be
+refactored and kfree() could do the NULLing by default.
+
+Quoting myself in the above issue:
+
+
+Without doing massive tree-wide changes, I think we need compiler
+support. If we had something like __builtin_is_lvalue(), we could
+distinguish function returns from lvalues. For example, right now a
+common case are things like:
+
+	kfree(get_some_ptr());
+
+But if we could at least gain coverage of the lvalue cases, and detect
+them statically at compile-time, we could do:
+
+#define __kfree_and_null(x) do { __kfree(*x); *x = NULL; } while (0)
+#define kfree(x) __builtin_choose_expr(__builtin_is_lvalue(x),
+			__kfree_and_null(&(x)), __kfree(x))
+
+Alternatively, we could do a tree-wide change of the former case (findable
+with Coccinelle) and change them into something like kfree_no_null()
+and redefine kfree() itself:
+
+#define kfree_no_null(x) do { void *__ptr = (x); __kfree(__ptr); } while (0)
+#define kfree(x) do { __kfree(x); x = NULL; } while (0)
+
+-- 
+Kees Cook
 
 
 _______________________________________________
