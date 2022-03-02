@@ -2,102 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 425FD4CAEFA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Mar 2022 20:45:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC1184CAF02
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Mar 2022 20:46:53 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nPUud-0000VE-9z; Wed, 02 Mar 2022 19:45:26 +0000
+	id 1nPUvx-0000ag-IZ; Wed, 02 Mar 2022 19:46:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nPUub-0000V7-Li
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 19:45:24 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nPUvw-0000aZ-4V
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 19:46:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8y4rgBLpVIw4MjV6MLLpYDuQWTWUIccIlv3ptgZMU14=; b=FvHq3Pr+TV7hzT6UYfprNBEjYi
- +Fw1vuP95VX5AYa7jov3wxA+8l0kclSbvvOpnDPQKzDFL0RYXevUmfurK+IjsllWZllQiAaQA7qNb
- FEgaWQkQaJrsNPUKsgr5CO12lqyinC5cZR5JZ5F/2RanwgxXOfekUsCKfIksSvp9fIbE=;
+ bh=T0ksMtkkRRqAEeiz0+FltOlumpt/7okqGZMqcaGxyeM=; b=NJsBApQ6gTT2a2JRq1cbrcSsxO
+ 0RT4AWDJPm9FeD8Fv+GB9w+GZFql2YDWfkobMybJHT9zQiTf518jSp0A5lUIPSU4e3ysIYlQo9WGk
+ gfvckADMxLnQV2DEX53TF4Uiti0THyaNZSWgki1rcWGzm7Auqx8rZQPw76awUOVXC84c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8y4rgBLpVIw4MjV6MLLpYDuQWTWUIccIlv3ptgZMU14=; b=jw7p17euCUx+bmu8QV32gowza3
- CPN7uw9ZpXxtH1t7BJOGbMxNfmgf2eTFjSuywqsg3rBd2fCuZYH8U2gp5k1rbbSVrX/FCCbvkvcbV
- ldpbq/DBCUJ+OCH0uRihiHCbaBpu410PcKKC2jin6Omz+Yx7BA1BQMtwpTWOn7aDJB8k=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=T0ksMtkkRRqAEeiz0+FltOlumpt/7okqGZMqcaGxyeM=; b=g8khJnnSuHwQZCl+kE7bg54jRo
+ 0cJbghtTLU0ZlfON1nqfapETMBIXdfHGm0fu8bYryo5ocnSH6/zppTQ6QrQiXyiV9HCErMNfZnSFV
+ GDLLJIfyXt27oHv56CEY9ciohYh0twYt/qT+UDOZEOWGV6yWb5zq9u6zmx0N0Cg7GBS8=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nPUuY-0002D7-8I
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 19:45:24 +0000
+ id 1nPUvt-0002Js-RV
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 02 Mar 2022 19:46:46 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C1F10616C6;
- Wed,  2 Mar 2022 19:45:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06090C340ED;
- Wed,  2 Mar 2022 19:45:15 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id B0688B82157
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  2 Mar 2022 19:46:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B514C004E1;
+ Wed,  2 Mar 2022 19:46:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1646250316;
- bh=hETAxvTljSSwJ5OXPM0CCfq1GwnQ4dsqfLkAh1duLGk=;
+ s=k20201202; t=1646250393;
+ bh=rwuNNe+xfMuhL8QwE62/c9y7pTkw5kU6r8YitNPd8JE=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=OMQ9fysgQzC03Vuc2Lnv4krnv1NeQwKYX3oiFUZMIJNqz+V4hHeiklJsJqCv3ydC1
- oyZXJhKXhnPYDH/+P7rI/IEFGeEV7hS+yFqT+8HPIyLvkqpdSJC06cacIb9GvVf58g
- KjoyC2pNHu7Rs6pOQGZpxmheQhzZTeF6ExwPd6u61+bi+qnJQ1htJ4GfAemgc+/UU1
- Haibh/8n7/7OLfkouoRZEDQutRE5Tes/RpZx8dKyPYx/kP152A4vJtNc6K95G2ibUj
- DdMxMwctQQAl0urnuD0TiShlrl61/sDMSCUQj6/iV9l6EZhbhxaLegPl/XpZe/+jZE
- oTbak9ebwk3RQ==
-Date: Wed, 2 Mar 2022 11:45:14 -0800
+ b=B5n9emTEQS0IVLgnh/Vwusid0Riv9bGZ8r2TOvAO59l86lo1IoqNpLaRtf1UTq9pw
+ geWxfKFniGgVBio4dRWrhhPpDCqL38x9PgeMnO8s2px4AnwyzR788ATd3b8e0SZdy7
+ xKPaMSLmVQlwOgWiiv/4qDTqVyVf/7JqAMPeru3QlOZERMc5kEtO3xAsDt5mweHJ7Z
+ 1X0k/0HlRqJ8KHyFjmcZZobExFLErWWSMWfGz12FWoCiYA5MXVOD8ZrPkWH27/g24X
+ taCYzkiywEsYDxDXMfIXogT1GYUWKzICPy9mAsG7dWxQczCI2drSCqbN4+ZuIj1hh9
+ m/NuK0U9qLU/Q==
+Date: Wed, 2 Mar 2022 11:46:31 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <Yh/JSlaIw49gV+15@google.com>
-References: <YfMVxzdhat01ca7m@google.com>
- <e434b0a4-a66a-eebc-cafc-f0bad03c3fa5@kernel.org>
- <YfSMMpj2GrYXAJK2@google.com>
- <51be77f1-6e85-d46d-d0d3-c06d2055a190@kernel.org>
- <Yfs1KRgwgzSOvocR@google.com>
- <86a175d3-c438-505b-1dbc-4ef6e8b5adcb@kernel.org>
- <5b5e20d1-877f-b321-b341-c0f233ee976c@kernel.org>
- <51826b5f-e480-994a-4a72-39ff4572bb3f@kernel.org>
- <Yh8AAOjxTItKTwPQ@google.com>
- <c0d3528b-e6b4-8557-4c2b-e26a972d8aaa@kernel.org>
+Message-ID: <Yh/Jl3wU+y1wRqRb@google.com>
+References: <20220215220039.1477906-1-jaegeuk@kernel.org>
+ <09683b83-b6c0-fe05-0dae-b93cab2f4b63@kernel.org>
+ <YhkpjWZ3NO5ihvH5@google.com> <Yh2lpb3c5X9aPJ+r@google.com>
+ <4b264607-4d60-7370-eca7-8816a3f8d29f@kernel.org>
+ <Yh8B/w9kPGU98Hfh@google.com> <Yh8C4aA+nBajs+fc@google.com>
+ <Yh8EgciUTRAbWDNG@google.com>
+ <3d861bf6-c404-140d-b91a-60df3ddec304@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <c0d3528b-e6b4-8557-4c2b-e26a972d8aaa@kernel.org>
-X-Spam-Score: -5.9 (-----)
+In-Reply-To: <3d861bf6-c404-140d-b91a-60df3ddec304@kernel.org>
+X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 03/02, Chao Yu wrote: > On 2022/3/2 13:26, Jaegeuk Kim
- wrote: > > On 03/02, Chao Yu wrote: > > > ping, > > > > > > On 2022/2/25 11:02,
- Chao Yu wrote: > > > > On 2022/2/3 22:57, Chao Yu wrote: > > > [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 03/02, Chao Yu wrote: > On 2022/3/2 13:45, Jaegeuk Kim
+ wrote: > > On 03/01, Jaegeuk Kim wrote: > > > On 03/01, Jaegeuk Kim wrote:
+ > > > > On 03/02, Chao Yu wrote: > > > > > On 2022/3/1 12:48, Jaege [...]
+ Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nPUuY-0002D7-8I
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid potential deadlock
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nPUvt-0002Js-RV
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: avoid sb_start_intwrite during
+ eviction
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,250 +109,141 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Jing Xia <jing.xia@unisoc.com>,
- Zhiguo Niu <zhiguo.niu@unisoc.com>, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 03/02, Chao Yu wrote:
-> On 2022/3/2 13:26, Jaegeuk Kim wrote:
-> > On 03/02, Chao Yu wrote:
-> > > ping,
-> > > =
+> On 2022/3/2 13:45, Jaegeuk Kim wrote:
+> > On 03/01, Jaegeuk Kim wrote:
+> > > On 03/01, Jaegeuk Kim wrote:
+> > > > On 03/02, Chao Yu wrote:
+> > > > > On 2022/3/1 12:48, Jaegeuk Kim wrote:
+> > > > > > 1. waiting for f2fs_evict_inode
+> > > > > > [ 5560.043945]  __wait_on_freeing_inode+0xac/0xf0
+> > > > > > [ 5560.045540]  ? var_wake_function+0x30/0x30
+> > > > > > [ 5560.047036]  find_inode_fast+0x6d/0xc0
+> > > > > > [ 5560.048473]  iget_locked+0x79/0x230
+> > > > > > [ 5560.049933]  f2fs_iget+0x27/0x1200 [f2fs]
+> > > > > > [ 5560.051496]  f2fs_lookup+0x18c/0x3e0 [f2fs]
+> > > > > > [ 5560.053069]  __lookup_slow+0x84/0x150
+> > > > > > [ 5560.054503]  walk_component+0x141/0x1b0
+> > > > > > [ 5560.055938]  link_path_walk.part.0+0x23b/0x360
+> > > > > > [ 5560.057541]  ? end_bio_bh_io_sync+0x37/0x50
+> > > > > > [ 5560.059086]  path_parentat+0x3c/0x90
+> > > > > > [ 5560.060492]  filename_parentat+0xd7/0x1e0
+> > > > > > [ 5560.062002]  ? blk_mq_free_request+0x127/0x150
+> > > > > > [ 5560.063576]  do_renameat2+0xc1/0x5b0
+> > > > > >    --> sb_start_write(m->mnt_sb); ->  __sb_start_write(sb, SB_FREEZE_WRITE);
+> > > > > > 
+> > > > > > [ 5560.064999]  ? __check_object_size+0x13f/0x150
+> > > > > > [ 5560.066559]  ? strncpy_from_user+0x44/0x150
+> > > > > > [ 5560.068038]  ? getname_flags.part.0+0x4c/0x1b0
+> > > > > > [ 5560.069617]  __x64_sys_renameat2+0x51/0x60
+> > > > > > 
+> > > > > > 2. waiting for sb_start_intwrite -> __sb_start_write(sb, SB_FREEZE_FS);
+> > > > > 
+> > > > > It's still not clear that why __sb_start_write(sb, SB_FREEZE_FS) will be blocked,
+> > > > > as SB_FREEZE_FS and SB_FREEZE_WRITE points to different locks.
+> > > > 
+> > > > It seems I missed another call, thaw_super(), got SB_FREEZE_FS and then being
+> > > > stuck to grab SB_FREEZE_WRITE.
+> > > 
+> > > Ah, sorry. freeze_super().
+> > 
+> > Messed up. So, the lock order is SB_FREEZE_WRITE -> SB_FREEZE_FS in both cases.
+> 
+> Yeah, I noticed this, w/ such lock order, Thread C (freeze_super) will be blocked
+> on SB_FREEZE_WRITE, and then Thread B won't be block on SB_FREEZE_FS, right?
 
-> > > On 2022/2/25 11:02, Chao Yu wrote:
-> > > > On 2022/2/3 22:57, Chao Yu wrote:
-> > > > > On 2022/2/3 9:51, Jaegeuk Kim wrote:
-> > > > > > On 01/29, Chao Yu wrote:
-> > > > > > > On 2022/1/29 8:37, Jaegeuk Kim wrote:
-> > > > > > > > On 01/28, Chao Yu wrote:
-> > > > > > > > > On 2022/1/28 5:59, Jaegeuk Kim wrote:
-> > > > > > > > > > On 01/27, Chao Yu wrote:
-> > > > > > > > > > > Quoted from Jing Xia's report, there is a potential d=
-eadlock may happen
-> > > > > > > > > > > between kworker and checkpoint as below:
-> > > > > > > > > > > =
+Yeah, checking the code path again.
 
-> > > > > > > > > > > [T:writeback]=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0 [T:checkpoint]
-> > > > > > > > > > > - wb_writeback
-> > > > > > > > > > >  =A0=A0=A0 - blk_start_plug
-> > > > > > > > > > > bio contains NodeA was plugged in writeback threads
-> > > > > > > > > > =
-
-> > > > > > > > > > I'm still trying to understand more precisely. So, how =
-is it possible to
-> > > > > > > > > > have bio having node write in this current context?
-> > > > > > > > > =
-
-> > > > > > > > > IMO, after above blk_start_plug(), it may plug some inode=
-'s node page in kworker
-> > > > > > > > > during writebacking node_inode's data page (which should =
-be node page)?
-> > > > > > > > =
-
-> > > > > > > > Wasn't that added into a different task->plug?
-> > > > > > > =
-
-> > > > > > > I'm not sure I've got your concern correctly...
-> > > > > > > =
-
-> > > > > > > Do you mean NodeA and other IOs from do_writepages() were plu=
-gged in
-> > > > > > > different local plug variables?
-> > > > > > =
-
-> > > > > > I think so.
-> > > > > =
-
-> > > > > I guess block plug helper says it doesn't allow to use nested plu=
-g, so there
-> > > > > is only one plug in kworker thread?
-> > =
-
-> > Is there only one kworker thread that flushes node and inode pages?
-> =
-
-> IIRC, =3Done kworker per block device?
-
-If there's one kworker only, f2fs_write_node_pages() should have flushed its
-plug?
-
-> =
-
+> 
 > Thanks,
-> =
-
-> > =
-
-> > > > > =
-
-> > > > > void blk_start_plug_nr_ios(struct blk_plug *plug, unsigned short =
-nr_ios)
-> > > > > {
-> > > > >  =A0=A0=A0=A0=A0struct task_struct *tsk =3D current;
-> > > > > =
-
-> > > > >  =A0=A0=A0=A0=A0/*
-> > > > >  =A0=A0=A0=A0=A0 * If this is a nested plug, don't actually assig=
-n it.
-> > > > >  =A0=A0=A0=A0=A0 */
-> > > > >  =A0=A0=A0=A0=A0if (tsk->plug)
-> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0 return;
+> 
+> > 
+> > > 
+> > > > 
+> > > > > 
+> > > > > Thread A				Thread B				Thread C
+> > > > > - rename
+> > > > >   - sb_start_write
+> > > > >    - __sb_start_write(SB_FREEZE_WRITE)
 > > > > > ...
-> > > > > }
-> > > > =
-
-> > > > Any further comments?
-> > > > =
-
-> > > > Thanks,
-> > > > =
-
-> > > > > =
-
+> > > > >       - f2fs_lookup
+> > > > > ...
+> > > > >         - __wait_on_freeing_inode
+> > > > > 					- drop_slab
+> > > > > 					 - prune_icache_sb
+> > > > > 					  - inode_lru_isolate
+> > > > > 					   :inode->i_state |= I_FREEING
+> > > > > 										- Is there any flow that it has already held
+> > > > > 										 SB_FREEZE_FS and try to lock SB_FREEZE_WRITE?
+> > > > > 					   - f2fs_evict_inode
+> > > > > 					    - __sb_start_write(SB_FREEZE_FS)
+> > > > > 
 > > > > > Thanks,
-> > > > > =
-
-> > > > > > =
-
-> > > > > > > =
-
-> > > > > > > Thanks,
-> > > > > > > =
-
-> > > > > > > > =
-
-> > > > > > > > > =
-
-> > > > > > > > > Thanks,
-> > > > > > > > > =
-
-> > > > > > > > > > =
-
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0 - do_writepages=A0 -- sync write inodeB, inc wb_sync_req[DATA]
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0 - f2fs_write_data_pages
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0 - f2fs_write_single_data_page -- write last dirty page
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0 - f2fs_do_write_data_page
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0 - set_page_writeback=A0 -- clear page dirty flag and
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0 PAGECACHE_TAG_DIRTY tag in radix tree
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0 - f2fs_outplace_write_data
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0=A0 - f2fs_update_data_blkaddr
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0=A0=A0 - f2fs_wait_on_page_writeback -- wait NodeA to wri=
-teback here
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0 - inode_dec_dirty_pages
-> > > > > > > > > > >  =A0=A0=A0 - writeback_sb_inodes
-> > > > > > > > > > >  =A0=A0=A0=A0 - writeback_single_inode
-> > > > > > > > > > >  =A0=A0=A0=A0=A0 - do_writepages
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0 - f2fs_write_data_pages -- skip w=
-ritepages due to wb_sync_req[DATA]
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0 - wbc->pages_skipped +=3D get_=
-dirty_pages() -- PAGECACHE_TAG_DIRTY is not set but get_dirty_pages() retur=
-ns one
-> > > > > > > > > > >  =A0=A0=A0=A0 - requeue_inode -- requeue inode to wb-=
->b_dirty queue due to non-zero.pages_skipped
-> > > > > > > > > > >  =A0=A0=A0 - blk_finish_plug
-> > > > > > > > > > > =
-
-> > > > > > > > > > > Let's try to avoid deadlock condition by forcing unpl=
-ugging previous bio via
-> > > > > > > > > > > blk_finish_plug(current->plug) once we'v skipped writ=
-eback in writepages()
-> > > > > > > > > > > due to valid sbi->wb_sync_req[DATA/NODE].
-> > > > > > > > > > > =
-
-> > > > > > > > > > > Fixes: 687de7f1010c ("f2fs: avoid IO split due to mix=
-ed WB_SYNC_ALL and WB_SYNC_NONE")
-> > > > > > > > > > > Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-> > > > > > > > > > > Signed-off-by: Jing Xia <jing.xia@unisoc.com>
-> > > > > > > > > > > Signed-off-by: Chao Yu <chao@kernel.org>
-> > > > > > > > > > > ---
-> > > > > > > > > > >  =A0=A0=A0 fs/f2fs/data.c | 6 +++++-
-> > > > > > > > > > >  =A0=A0=A0 fs/f2fs/node.c | 6 +++++-
-> > > > > > > > > > >  =A0=A0=A0 2 files changed, 10 insertions(+), 2 delet=
-ions(-)
-> > > > > > > > > > > =
-
-> > > > > > > > > > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > > > > > > > > > > index 76d6fe7b0c8f..932a4c81acaf 100644
-> > > > > > > > > > > --- a/fs/f2fs/data.c
-> > > > > > > > > > > +++ b/fs/f2fs/data.c
-> > > > > > > > > > > @@ -3174,8 +3174,12 @@ static int __f2fs_write_data_p=
-ages(struct address_space *mapping,
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0 /* to avoid spliting IOs due t=
-o mixed WB_SYNC_ALL and WB_SYNC_NONE */
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0 if (wbc->sync_mode =3D=3D WB_S=
-YNC_ALL)
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 atomic_inc(&sbi->w=
-b_sync_req[DATA]);
-> > > > > > > > > > > -=A0=A0=A0 else if (atomic_read(&sbi->wb_sync_req[DAT=
-A]))
-> > > > > > > > > > > +=A0=A0=A0 else if (atomic_read(&sbi->wb_sync_req[DAT=
-A])) {
-> > > > > > > > > > > +=A0=A0=A0=A0=A0=A0=A0 /* to avoid potential deadlock=
- */
-> > > > > > > > > > > +=A0=A0=A0=A0=A0=A0=A0 if (current->plug)
-> > > > > > > > > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 blk_finish_plug(cu=
-rrent->plug);
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 goto skip_write;
-> > > > > > > > > > > +=A0=A0=A0 }
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0 if (__should_serialize_io(inod=
-e, wbc)) {
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 mutex_lock(&sbi->w=
-ritepages);
-> > > > > > > > > > > diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> > > > > > > > > > > index 556fcd8457f3..69c6bcaf5aae 100644
-> > > > > > > > > > > --- a/fs/f2fs/node.c
-> > > > > > > > > > > +++ b/fs/f2fs/node.c
-> > > > > > > > > > > @@ -2106,8 +2106,12 @@ static int f2fs_write_node_pag=
-es(struct address_space *mapping,
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0 if (wbc->sync_mode =3D=3D WB_S=
-YNC_ALL)
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 atomic_inc(&sbi->w=
-b_sync_req[NODE]);
-> > > > > > > > > > > -=A0=A0=A0 else if (atomic_read(&sbi->wb_sync_req[NOD=
-E]))
-> > > > > > > > > > > +=A0=A0=A0 else if (atomic_read(&sbi->wb_sync_req[NOD=
-E])) {
-> > > > > > > > > > > +=A0=A0=A0=A0=A0=A0=A0 /* to avoid potential deadlock=
- */
-> > > > > > > > > > > +=A0=A0=A0=A0=A0=A0=A0 if (current->plug)
-> > > > > > > > > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 blk_finish_plug(cu=
-rrent->plug);
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 goto skip_write;
-> > > > > > > > > > > +=A0=A0=A0 }
-> > > > > > > > > > >  =A0=A0=A0=A0=A0=A0=A0 trace_f2fs_writepages(mapping-=
->host, wbc, NODE);
-> > > > > > > > > > > -- =
-
-> > > > > > > > > > > 2.32.0
-> > > > > =
-
-> > > > > =
-
-> > > > > _______________________________________________
-> > > > > Linux-f2fs-devel mailing list
-> > > > > Linux-f2fs-devel@lists.sourceforge.net
-> > > > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
-> > > > =
-
-> > > > =
-
+> > > > > 
+> > > > > > 
+> > > > > > [ 5560.152447]  percpu_rwsem_wait+0xaf/0x160
+> > > > > > [ 5560.154000]  ? percpu_down_write+0xd0/0xd0
+> > > > > > [ 5560.155498]  __percpu_down_read+0x4e/0x60
+> > > > > > [ 5560.157000]  f2fs_evict_inode+0x5a3/0x610 [f2fs]
+> > > > > > [ 5560.158648]  ? var_wake_function+0x30/0x30
+> > > > > > [ 5560.160341]  evict+0xd2/0x180
+> > > > > > [ 5560.161728]  prune_icache_sb+0x81/0xb0
+> > > > > >    --> inode_lru_isolate() -> inode->i_state |= I_FREEING;
+> > > > > > 
+> > > > > > [ 5560.163179]  super_cache_scan+0x169/0x1f0
+> > > > > > [ 5560.164675]  do_shrink_slab+0x145/0x2b0
+> > > > > > [ 5560.166121]  shrink_slab+0x186/0x2d0
+> > > > > > [ 5560.167481]  drop_slab_node+0x4a/0x90
+> > > > > > [ 5560.168876]  drop_slab+0x3e/0x80
+> > > > > > [ 5560.170178]  drop_caches_sysctl_handler+0x75/0x90
+> > > > > > [ 5560.171761]  proc_sys_call_handler+0x149/0x280
+> > > > > > [ 5560.173328]  proc_sys_write+0x13/0x20
+> > > > > > [ 5560.174667]  new_sync_write+0x117/0x1b0
+> > > > > > [ 5560.176120]  vfs_write+0x1d5/0x270
+> > > > > > [ 5560.177409]  ksys_write+0x67/0xe0
+> > > > > > 
+> > > > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > > > > > ---
+> > > > > >    Note, I found this call stack.
+> > > > > > 
+> > > > > >    fs/f2fs/inode.c | 2 --
+> > > > > >    1 file changed, 2 deletions(-)
+> > > > > > 
+> > > > > > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> > > > > > index ab8e0c06c78c..882db4bd917b 100644
+> > > > > > --- a/fs/f2fs/inode.c
+> > > > > > +++ b/fs/f2fs/inode.c
+> > > > > > @@ -778,7 +778,6 @@ void f2fs_evict_inode(struct inode *inode)
+> > > > > >    	f2fs_remove_ino_entry(sbi, inode->i_ino, UPDATE_INO);
+> > > > > >    	f2fs_remove_ino_entry(sbi, inode->i_ino, FLUSH_INO);
+> > > > > > -	sb_start_intwrite(inode->i_sb);
+> > > > > >    	set_inode_flag(inode, FI_NO_ALLOC);
+> > > > > >    	i_size_write(inode, 0);
+> > > > > >    retry:
+> > > > > > @@ -809,7 +808,6 @@ void f2fs_evict_inode(struct inode *inode)
+> > > > > >    		if (dquot_initialize_needed(inode))
+> > > > > >    			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+> > > > > >    	}
+> > > > > > -	sb_end_intwrite(inode->i_sb);
+> > > > > >    no_delete:
+> > > > > >    	dquot_drop(inode);
+> > > > 
+> > > > 
 > > > > _______________________________________________
 > > > > Linux-f2fs-devel mailing list
 > > > > Linux-f2fs-devel@lists.sourceforge.net
 > > > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> > > 
+> > > 
+> > > _______________________________________________
+> > > Linux-f2fs-devel mailing list
+> > > Linux-f2fs-devel@lists.sourceforge.net
+> > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
