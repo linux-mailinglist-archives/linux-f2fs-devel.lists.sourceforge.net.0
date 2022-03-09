@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEF9C4D2605
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Mar 2022 02:24:49 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0EED4D2639
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Mar 2022 04:33:23 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nRl4H-00036d-Al; Wed, 09 Mar 2022 01:24:44 +0000
+	id 1nRn4h-0004NA-HM; Wed, 09 Mar 2022 03:33:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <axboe@kernel.dk>) id 1nRl4F-00036X-3I
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Mar 2022 01:24:41 +0000
+ (envelope-from <chao@kernel.org>) id 1nRn4g-0004N4-H2
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Mar 2022 03:33:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KpeRyglq/KKb6h+FPp2kPuLZPFCdso3DNN8oDwE8uJM=; b=iAeCmy1g9MexHfbLG66Tc/bdaK
- IfrlYvLQ3+7gAIpSknHCo81tO8FcJfxif4FE5zGtnuXi+xelAnHoPbQnsDMs3y7NpEPm5fKZamhW3
- +k2U+vc+LJ7iIqkzW+ZGFzBntWWHjCXB8xrXqzZA41EboofgLPXNoTPaYZCN4zO/HpXI=;
+ bh=nNTfH5lIhovKqSuzk0oAbbib6do2sv6awVAMPYCJQk4=; b=iaAwuFUYdSC7G0z9oJcYzsyrjs
+ kODZWJlERxOemeTpALwy7wtUneAwHD3DXxrBH1JNAx5pBv28jWKNZqYzL9UnQGjjHTJ496A+WX3ja
+ bPzzliPjJniq0b0B4P9oB/2jRmGb2fcxibxL3tcPbvwRnfySYtxlTXoRoEZ7wn822i/M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,91 +29,77 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KpeRyglq/KKb6h+FPp2kPuLZPFCdso3DNN8oDwE8uJM=; b=k2yT/IfH5xbnWjk9zuZfQcXMCe
- 3sz7nIKWktpI/wgYUEbsAGTMm16kHkt4Vk0OaEpyN8DZRO7/VXEb2IHRKOvrvtqNQNGoPARO6tdbg
- ApE5FiJUgYDx9Ya4lDHNMpl+BCJ0t/gNVsid5QZsss/rPPsRpaj1veMn5ovPT9Tcg258=;
-Received: from mail-oi1-f173.google.com ([209.85.167.173])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nRl4B-009Ci6-Qt
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Mar 2022 01:24:41 +0000
-Received: by mail-oi1-f173.google.com with SMTP id i5so1198792oih.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 08 Mar 2022 17:24:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel-dk.20210112.gappssmtp.com; s=20210112;
- h=message-id:date:mime-version:user-agent:subject:content-language:to
- :cc:references:from:in-reply-to:content-transfer-encoding;
- bh=KpeRyglq/KKb6h+FPp2kPuLZPFCdso3DNN8oDwE8uJM=;
- b=sIS5e4ip/C/OQYpC1HbLN3p/gS7oZxzSenbpbk+Qu9qLfk3/4NcyDvpTulApQ/5YfY
- WEKzfrYxC89sfiwYPEegV84r0VtDAe2D7NhN4aWUuf6RBMjuPh933SqiiZCJyIHQNx/7
- 4baLL4jVOMHMGwCj4xDzFSITORK6f4cvgrftMHEDfboidOgt9TEh6GsO0QETUDU9SD6w
- zqO3gJNJlqBoBIa56IB9qzZ9/S1Yq7VQ1mhODDkMXTleAXn0U6au23rOZMtlmM3dbOhC
- xkckm9zeJ0G8AQO1pOjy8WSt9SFZv4bMVALpP2eY0xCFNunsNQ/Ao3CdcdHtPmqKkJHo
- hWhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=KpeRyglq/KKb6h+FPp2kPuLZPFCdso3DNN8oDwE8uJM=;
- b=6XV6oZTvZBdCAebbbg9OQUoJwbOzVXEdsvva/IFFhnkg0cUHws66CYpEr/0mFmuXc6
- SZDMs8J6Gv3ICIAdrhMSW/+6S9bPXqrj18RJ+IXGc/A/6YYX6PizGRU8FnAZipG/Go7S
- P3+ViA6FwD9kPkMh6dScUPDsZzLtPPFNlGodJlGvVr9/uN7E3rFUwoTCl20r9yJbP+NS
- 5Vy8cQXQCLi3vtkccNh1e7Nftv+rwCO1EndU73lBJb3Pd8XcNypnCY7mg+fNtK0vRZeR
- Wq4g+sXFaf/2ikI27nWi2KHcMV/vPRkV/qnwLVz8H+jUWpx85o5TT1bRMkYmz2w7VFE+
- VtBg==
-X-Gm-Message-State: AOAM5338pwwG4i15O2GU/SlpgmMwTQXqmcaYj+l2bKu/ElerS9SB4AgN
- lHUTyqMN1Uk4vZFHAg/OrDNpF68SvftJI5Bx
-X-Google-Smtp-Source: ABdhPJw509jIgleFtjR4YJQ7shm6aXQ4P7p1SQgvGOXtMNxP2WiXmawU2fT5sxJzQFM599gtPxX+yA==
-X-Received: by 2002:a17:90b:e08:b0:1bc:2b0c:65aa with SMTP id
- ge8-20020a17090b0e0800b001bc2b0c65aamr7527206pjb.102.1646787581515; 
- Tue, 08 Mar 2022 16:59:41 -0800 (PST)
-Received: from [192.168.1.100] ([198.8.77.157])
- by smtp.gmail.com with ESMTPSA id
- om17-20020a17090b3a9100b001bf0fffee9bsm4519603pjb.52.2022.03.08.16.59.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Mar 2022 16:59:41 -0800 (PST)
-Message-ID: <779bf1fe-7f58-51ed-27e8-1152375780ff@kernel.dk>
-Date: Tue, 8 Mar 2022 17:59:40 -0700
+ bh=nNTfH5lIhovKqSuzk0oAbbib6do2sv6awVAMPYCJQk4=; b=BOfnu341pwCNPJ+/zIrbGQkMhV
+ me6Zgt8Y8s+YiDOIga6XCrsJLGT0dvNleCMg7X2Tb7uo/6DX7qe7NOIIpwcQr8s3darBM/7gFviXW
+ 93LNp62ewYOEAQwU7rqwfWV9015ZETVp4YxTZVPTZMY4sHbw/cLwNqoId/AAuKh8kLR0=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1nRn4Y-00086Z-8t
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Mar 2022 03:33:17 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id EE9EB617E4;
+ Wed,  9 Mar 2022 03:32:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E496C340EB;
+ Wed,  9 Mar 2022 03:32:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1646796779;
+ bh=ZDspUUhW760B4crluRIFcJIV6QNdcpAKS8VKTu2xcbY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=N7WYp/xut3AfU2ZU/gOysSduayvRJz1i086Vb53QESobcHJ2y/8773mgrQP8nSKZE
+ LE09xPOCkJ1+rQa1LrZyEkQ8/YoXkvt+khynntMe67PoQlYr5civb5HNe6zSlHPG89
+ ej7GbvvjWOa9563VB6y/mzrr/uIaS+VGEtjUc6l/vTOum9PVrK1MFJZR3Bp0B7QFqp
+ EhvXWNKiBoLUtelNQQFNhqJA48T+LIPTsw4S0PXdkOtLQsYKU5Z0mVOqL8uMGIjJCm
+ +OTUIZ/ImWsISh9nuAY2t6j8hGX3Sias9T8bL4LB3C26sAiIMPEVh+CvjJuWoyCFLM
+ BZBLO1jutbJiA==
+Message-ID: <16f9b36b-5dda-0540-1f7f-2fa0b5081a21@kernel.org>
+Date: Wed, 9 Mar 2022 11:32:50 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.2
 Content-Language: en-US
-To: Christoph Hellwig <hch@lst.de>, Chao Yu <chao@kernel.org>
-References: <20220228124123.856027-1-hch@lst.de>
- <20220228124123.856027-3-hch@lst.de>
- <782226e0-5e7a-aec8-b9aa-e7fd7b3110a7@kernel.org>
- <20220308060624.GA23629@lst.de>
-From: Jens Axboe <axboe@kernel.dk>
-In-Reply-To: <20220308060624.GA23629@lst.de>
-X-Spam-Score: -0.0 (/)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+To: =?UTF-8?B?5bi45Yek5qWg?= <changfengnan@vivo.com>,
+ Fengnan Chang <fengnanchang@gmail.com>,
+ "jaegeuk@kernel.org" <jaegeuk@kernel.org>
+References: <20220305040019.225150-1-fengnanchang@gmail.com>
+ <bc67518a-37c9-724d-9a27-d8e9354c5404@kernel.org>
+ <KL1PR0601MB40038428764F5731EEEF7AABBB089@KL1PR0601MB4003.apcprd06.prod.outlook.com>
+ <a9cbd24b-9da8-9f92-dd20-39f3a4fa5732@kernel.org>
+ <KL1PR0601MB4003900FB74F94306BA32EA6BB089@KL1PR0601MB4003.apcprd06.prod.outlook.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <KL1PR0601MB4003900FB74F94306BA32EA6BB089@KL1PR0601MB4003.apcprd06.prod.outlook.com>
+X-Spam-Score: -7.9 (-------)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 3/7/22 11:06 PM, Christoph Hellwig wrote: > On Tue, Mar
- 01, 2022 at 10:49:06AM +0800, Chao Yu wrote: >> On 2022/2/28 20:41, Christoph
- Hellwig wrote: >>> Refactor block I/O code so that the bio oper [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  On 2022/3/7 19:07, 常凤楠 wrote: >> 
+ 
+ Content analysis details:   (-7.9 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.173 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.167.173 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1nRl4B-009Ci6-Qt
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: pass the bio operation to
- bio_alloc_bioset
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+                             high trust
+                             [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+                             envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nRn4Y-00086Z-8t
+Subject: Re: [f2fs-dev] [RFC PATCH] f2fs: fix compress file start atomic
+ write may cause data corruption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,35 +111,89 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 3/7/22 11:06 PM, Christoph Hellwig wrote:
-> On Tue, Mar 01, 2022 at 10:49:06AM +0800, Chao Yu wrote:
->> On 2022/2/28 20:41, Christoph Hellwig wrote:
->>> Refactor block I/O code so that the bio operation and known flags are set
->>> at bio allocation time.  Only the later updated flags are updated on the
->>> fly.
->>>
->>> Signed-off-by: Christoph Hellwig <hch@lst.de>
->>
->> Reviewed-by: Chao Yu <chao@kernel.org>
-> 
-> Is it okay for Jens to pick these two patches up in the
-> https://git.kernel.dk/cgit/linux-block/log/?h=for-5.18/alloc-cleanups
-> branch?
-
-I have tentatively done so, let me know you prefer doing it differently.
-
--- 
-Jens Axboe
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjAyMi8zLzcgMTk6MDcsIOW4uOWHpOaloCB3cm90ZToKPj4gLS0tLS1PcmlnaW5hbCBNZXNz
+YWdlLS0tLS0KPj4gRnJvbTogQ2hhbyBZdSA8Y2hhb0BrZXJuZWwub3JnPgo+PiBTZW50OiBNb25k
+YXksIE1hcmNoIDcsIDIwMjIgNjozMCBQTQo+PiBUbzog5bi45Yek5qWgIDxjaGFuZ2ZlbmduYW5A
+dml2by5jb20+OyBGZW5nbmFuIENoYW5nCj4+IDxmZW5nbmFuY2hhbmdAZ21haWwuY29tPjsgamFl
+Z2V1a0BrZXJuZWwub3JnCj4+IENjOiBsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdl
+Lm5ldAo+PiBTdWJqZWN0OiBSZTogW1JGQyBQQVRDSF0gZjJmczogZml4IGNvbXByZXNzIGZpbGUg
+c3RhcnQgYXRvbWljIHdyaXRlIG1heSBjYXVzZQo+PiBkYXRhIGNvcnJ1cHRpb24KPj4KPj4gT24g
+MjAyMi8zLzcgMTU6NTQsIOW4uOWHpOaloCB3cm90ZToKPj4+Cj4+Pj4gLS0tLS1PcmlnaW5hbCBN
+ZXNzYWdlLS0tLS0KPj4+PiBGcm9tOiBDaGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+Cj4+Pj4gU2Vu
+dDogTW9uZGF5LCBNYXJjaCA3LCAyMDIyIDk6NDMgQU0KPj4+PiBUbzogRmVuZ25hbiBDaGFuZyA8
+ZmVuZ25hbmNoYW5nQGdtYWlsLmNvbT47IGphZWdldWtAa2VybmVsLm9yZwo+Pj4+IENjOiBsaW51
+eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldDsg5bi45Yek5qWgCj4+Pj4gPGNoYW5n
+ZmVuZ25hbkB2aXZvLmNvbT4KPj4+PiBTdWJqZWN0OiBSZTogW1JGQyBQQVRDSF0gZjJmczogZml4
+IGNvbXByZXNzIGZpbGUgc3RhcnQgYXRvbWljIHdyaXRlCj4+Pj4gbWF5IGNhdXNlIGRhdGEgY29y
+cnVwdGlvbgo+Pj4+Cj4+Pj4gT24gMjAyMi8zLzUgMTI6MDAsIEZlbmduYW4gQ2hhbmcgd3JvdGU6
+Cj4+Pj4+IFdoZW4gY29tcHJlc3NlZCBmaWxlIGhhcyBibG9ja3MsIHN0YXJ0IGF0b21pYyB3cml0
+ZSB3aWxsIGJlIGZhaWxlZCwKPj4+Pj4gYnV0Cj4+Pj4KPj4+PiBZb3UgbWVhbiBmMmZzX2lvY19z
+dGFydF9hdG9taWNfd3JpdGUgd2lsbCBzdWNjZWVkLCBidXQgY29tcHJlc3NlZAo+Pj4+IGZsYWcg
+d2lsbCBiZSByZW1haW5lZCBpbiBpbm9kZT8KPj4+Cj4+PiBZZXMuCj4+Pgo+Pj4+Cj4+Pj4+IHN0
+aWxsIHNldCBGSV9BVE9NSUNfRklMRSBmbGFnLCBpZiB3cml0ZSBwYXJ0aWFsIGNsdXN0ZXIgYW5k
+IGNvbW1pdAo+Pj4+PiBhdG9taWMgd3JpdGUgd2lsbCBjYXVzZSBkYXRhIGNvcnJ1cHRpb24uCj4+
+Pj4KPj4+PiBDb3VsZCB5b3UgcGxlYXNlIGV4cGxhaW4gbW9yZSBhYm91dCB3aHkgZGF0YSB3aWxs
+IGJlIGNvcnJ1cHRlZD8KPj4+Cj4+PiBTdGVwIDE6Cj4+PiBDcmVhdGUgYSBjb21wcmVzc2VkIGZp
+bGUgLHdyaXRlIDY0SyBkYXRhICwgY2FsbCBmc3luYygpLCB0aGVuIHRoZSBibG9ja3MgYXJlCj4+
+IHdyaXRlIGFzIGNvbXByZXNzZWQgY2x1c3Rlci4KPj4+IFN0ZXAyOgo+Pj4gaW90Y2woRjJGU19J
+T0NfU1RBUlRfQVRPTUlDX1dSSVRFKSAgLS0tIHRoaXMgc2hvdWxkIGJlIGZhaWwsIGJ1dCBub3Qu
+Cj4+PiB3cml0ZSBwYWdlIDAgYW5kIHBhZ2UgMy4KPj4+IGlvdGNsKEYyRlNfSU9DX0NPTU1JVF9B
+VE9NSUNfV1JJVEUpICAtLSBwYWdlIDAgYW5kIDMgd3JpdGUgYXMgbm9ybWFsCj4+PiBmaWxlLAo+
+Pj4gU3RlcDM6Cj4+PiBkcm9wIGNhY2hlLgo+Pj4gUmVhZCBwYWdlIDAtNCAgIC0tIFNpbmNlIHBh
+Z2UgMCBoYXMgYSB2YWxpZCBibG9jayBhZGRyZXNzLCByZWFkIGFzCj4+IG5vLWNvbXByZXNzZWQs
+IHBhZ2UgMSBhbmQgMiB3aWxsIGJlIGNvbXByZXNzZWQgZGF0YSBvciB6ZXJvLgo+Pj4KPj4+IEFu
+ZCBiZWZvcmUgZjJmczogY29tcHJlc3M6IHJlbW92ZSB1bm5lZWRlZCByZWFkIHdoZW4gcmV3cml0
+ZSB3aG9sZQo+Pj4gY2x1c3RlciksIGV2ZW4gU3RlcCAyIGlzIG5vdCByaWdodCwgYnV0IHdob2xl
+IGNsdXN0ZXIgd2lsbCBtYXJrIGRpcnR5IGluCj4+IHdyaXRlX2JlZ2luLCBhbmQgd2hvbGUgY2x1
+c3RlciB3aWxsIGJlIHJlLXdyaXRlIGFzIG5vLWNvbXByZXNzZWQgY2x1c3Rlciwgc28KPj4gaXQn
+cyBvay4KPj4KPj4gQWgsIGFmdGVyIDdlYWI3YTY5NjgyNyAoZjJmczogY29tcHJlc3M6IHJlbW92
+ZSB1bm5lZWRlZCByZWFkIHdoZW4gcmV3cml0ZQo+PiB3aG9sZSBjbHVzdGVyKSwgd2UgZXhwZWN0
+IHRoYXQgZjJmc193cml0ZV9jYWNoZV9wYWdlcygpIHdpbGwgYmUgY2FsbGVkLCBhbmQKPj4gZjJm
+c19wcmVwYXJlX2NvbXByZXNzX292ZXJ3cml0ZSgpIGNhbiByZWFkIGFuZCBzZXQgZGlydHkgbGVm
+dCBwYWdlcyBvZgo+PiBjb21wcmVzc2VkIGNsdXN0ZXIuCj4+Cj4+IEhvd2V2ZXIgYXRvbWljIGNv
+bW1pdCBmbG93IHdvbid0IGNhbGwgZjJmc193cml0ZV9jYWNoZV9wYWdlcygpLi4uCj4+Cj4+IEFu
+eXdheSwgdGhhbmtzIGZvciB0aGUgZXhwbGFuYXRpb24sIGFuZCwgY291bGQgeW91IHBsZWFzZSBh
+ZGQgYWJvdmUKPj4gY29tbWVudHMgaW50byBjb21taXQgZGVzY3JpcHRpb24gb2YgdGhpcyBwYXRj
+aD8KPiAKPiBZZXMsIEknbGwgYWRkIG1vcmUgY29tbWVudHMgaW4gbmV4dCB2ZXJzaW9uLgo+IEFu
+ZCBJIHdhbnQgdG8ga25vdyB3aHkgYXRvbWljIHdyaXRlIG5lZWQgZGlzYWJsZSBjb21wcmVzc2Vk
+IGZpbGUsIEkgZGlkbid0IHNlZSBhbnkgc3BlY2lhbCBpcyBpbmNvbXBhdGlibGUgd2l0aCBjb21w
+cmVzc2lvbi4KCkkgZ3Vlc3MgdGhlcmUgaXMgbm8gaW5jb21wYXRpYmlsaXR5IGlzc3VlLCBob3dl
+dmVyLCBhcyBtb3N0IGRhdGFiYXNlIGZpbGUgd2lsbApiZSB1cGRhdGVkIGZyZXF1ZW50bHksIHdy
+aXRlIGFtcGxpZmljYXRpb24gZHVlIHRvIGNvbXByZXNzaW9uIGNsdXN0ZXIgZGVzaWduCm1heSBo
+dXJ0IGRhdGFiYXNlIHVwZGF0ZSBwZXJmb3JtYW5jZSwgYW55IHBhcnRpY3VsYXIgc2NlbmFyaW8g
+b2YgdXNpbmcgY29tcHJlc3NlZApkYiBmaWxlPwoKVGhhbmtzLAoKPiAKPiBUaGFua3MuCj4+Cj4+
+IFRoYW5rcywKPj4KPj4+Cj4+Pj4KPj4+PiBUaGFua3MsCj4+Pj4KPj4+Pj4gRml4ZXM6IDRjOGZm
+NzA5NWJlZiAoZjJmczogc3VwcG9ydCBkYXRhIGNvbXByZXNzaW9uKQo+Pj4+PiBGaXhlczogN2Vh
+YjdhNjk2ODI3IChmMmZzOiBjb21wcmVzczogcmVtb3ZlIHVubmVlZGVkIHJlYWQgd2hlbgo+Pj4+
+PiByZXdyaXRlIHdob2xlIGNsdXN0ZXIpCj4+Pj4+Cj4+Pj4+IFNpZ25lZC1vZmYtYnk6IEZlbmdu
+YW4gQ2hhbmcgPGZlbmduYW5jaGFuZ0BnbWFpbC5jb20+Cj4+Pj4+IC0tLQo+Pj4+PiAgICAgZnMv
+ZjJmcy9kYXRhLmMgfCA0ICstLS0KPj4+Pj4gICAgIGZzL2YyZnMvZmlsZS5jIHwgMyArKy0KPj4+
+Pj4gICAgIDIgZmlsZXMgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQo+
+Pj4+Pgo+Pj4+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9kYXRhLmMgYi9mcy9mMmZzL2RhdGEuYyBp
+bmRleAo+Pj4+PiA2YjVmMzg5YmE5OTguLjVjYmVlNGVkMDk4MiAxMDA2NDQKPj4+Pj4gLS0tIGEv
+ZnMvZjJmcy9kYXRhLmMKPj4+Pj4gKysrIGIvZnMvZjJmcy9kYXRhLmMKPj4+Pj4gQEAgLTMzNTgs
+OCArMzM1OCw3IEBAIHN0YXRpYyBpbnQgZjJmc193cml0ZV9iZWdpbihzdHJ1Y3QgZmlsZSAqZmls
+ZSwKPj4+Pj4gc3RydWN0Cj4+Pj4gYWRkcmVzc19zcGFjZSAqbWFwcGluZywKPj4+Pj4gICAgIAkJ
+aW50IHJldDsKPj4+Pj4KPj4+Pj4gICAgIAkJKmZzZGF0YSA9IE5VTEw7Cj4+Pj4+IC0KPj4+Pj4g
+LQkJaWYgKGxlbiA9PSBQQUdFX1NJWkUpCj4+Pj4+ICsJCWlmIChsZW4gPT0gUEFHRV9TSVpFICYm
+ICEoZjJmc19pc19hdG9taWNfZmlsZShpbm9kZSkpKQo+Pj4+PiAgICAgCQkJZ290byByZXBlYXQ7
+Cj4+Pj4+Cj4+Pj4+ICAgICAJCXJldCA9IGYyZnNfcHJlcGFyZV9jb21wcmVzc19vdmVyd3JpdGUo
+aW5vZGUsIHBhZ2VwLCBkaWZmIC0tZ2l0Cj4+Pj4+IGEvZnMvZjJmcy9maWxlLmMgYi9mcy9mMmZz
+L2ZpbGUuYyBpbmRleCBjZmRjNDFmODdmNWQuLjI2YTY0OGVmOWUxZgo+Pj4+PiAxMDA2NDQKPj4+
+Pj4gLS0tIGEvZnMvZjJmcy9maWxlLmMKPj4+Pj4gKysrIGIvZnMvZjJmcy9maWxlLmMKPj4+Pj4g
+QEAgLTIwMDksNyArMjAwOSw4IEBAIHN0YXRpYyBpbnQgZjJmc19pb2Nfc3RhcnRfYXRvbWljX3dy
+aXRlKHN0cnVjdAo+Pj4+PiBmaWxlICpmaWxwKQo+Pj4+Pgo+Pj4+PiAgICAgCWlub2RlX2xvY2so
+aW5vZGUpOwo+Pj4+Pgo+Pj4+PiAtCWYyZnNfZGlzYWJsZV9jb21wcmVzc2VkX2ZpbGUoaW5vZGUp
+Owo+Pj4+PiArCWlmICghZjJmc19kaXNhYmxlX2NvbXByZXNzZWRfZmlsZShpbm9kZSkpCj4+Pj4+
+ICsJCXJldHVybiAtRUlOVkFMOwo+Pj4+Pgo+Pj4+PiAgICAgCWlmIChmMmZzX2lzX2F0b21pY19m
+aWxlKGlub2RlKSkgewo+Pj4+PiAgICAgCQlpZiAoaXNfaW5vZGVfZmxhZ19zZXQoaW5vZGUsIEZJ
+X0FUT01JQ19SRVZPS0VfUkVRVUVTVCkpCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJm
+cy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5u
+ZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
