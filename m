@@ -2,92 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E2F34D296D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Mar 2022 08:25:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE1744D2984
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Mar 2022 08:34:49 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nRqgs-0003Vr-79; Wed, 09 Mar 2022 07:24:57 +0000
+	id 1nRqqL-0003lt-99; Wed, 09 Mar 2022 07:34:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jiayang5@huawei.com>) id 1nRqgq-0003Vi-Oc
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Mar 2022 07:24:55 +0000
+ (envelope-from <chao@kernel.org>) id 1nRqqJ-0003ll-Ht
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Mar 2022 07:34:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=op1OVAfpKTDv5l1zbMwucB1B3su188RBJpP7/IqYmbU=; b=b0qsbHoKdPxGU1Y0QnyMdrOO1h
- ZsQ5QhwtgY5+y1JQ3MzRwwQJE9ZXvOGGR7Ri12saz2Vhsotw/vKiL9yz0dINyAY0vgi59VPwy0v4R
- a6Y0xfBVGV2mG7vW5yLlgVBk/BESuRCV3eneall8ldgEkmKM5rNB4tOzTsA2vSgNQiLY=;
+ bh=ic/UCbhfXbLvws9ZPkGfAvrFdX05Ha/zX59qAV+3FMk=; b=VNfTd5hOyMUs+KJZQ+1pAtr8N8
+ 4WVsLW9xt8ymG3Aa6QZPYBzVkA5Ig/KAEE1RqC2JwL/T+pnlKpJLRCjTynOizrdhNE3BhV6M7xrnD
+ 2/IHY3wB4whe2li8C61iDcy/oZf11UTomnfEAHqspZIjejDag42nX4ELp6q9QshustDg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=op1OVAfpKTDv5l1zbMwucB1B3su188RBJpP7/IqYmbU=; b=Fd1syGQW+BodfQXCJom3a26PJK
- 6z1XxzyXDtz80TOTKcE+yplaRrf+/tTmzngb2pg+z9XQjwYB/+0eCJ7itb9E+rNZI2N0uDbplN9NL
- IOS2n+4DNzB+apo4BxoADoAeqFw/jsKI1GHRn8B9q3B3pHBEfiCAcw9Q4ORZMmH2cbLA=;
-Received: from szxga02-in.huawei.com ([45.249.212.188])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=ic/UCbhfXbLvws9ZPkGfAvrFdX05Ha/zX59qAV+3FMk=; b=ZAzFf5fWUma1QWLNSbbq/1c8TS
+ Lj+mMRHFL/T/+JUpJULE+LkoqCnB6v0Ft1n1PtRQK1yn85/c7O29rqd2WDxf/OihbV9SiO7gZVLcr
+ ZFKCKChJkvLKX9CQcomZCy/cywTvCmjfsG5qYf6yIEQtEEIWRB3cFdsWqG2a1x1w2DII=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nRqgo-009T6n-0I
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Mar 2022 07:24:55 +0000
-Received: from dggpemm500023.china.huawei.com (unknown [172.30.72.53])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4KD3Z015V9zBrdH;
- Wed,  9 Mar 2022 15:22:48 +0800 (CST)
-Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
- dggpemm500023.china.huawei.com (7.185.36.83) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Wed, 9 Mar 2022 15:24:43 +0800
-Received: from [10.174.179.183] (10.174.179.183) by
- dggpemm500007.china.huawei.com (7.185.36.183) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
- 15.1.2308.21; Wed, 9 Mar 2022 15:24:43 +0800
-To: Chao Yu <chao@kernel.org>, <jaegeuk@kernel.org>
-References: <20220307081227.1353957-1-jiayang5@huawei.com>
- <0833a084-f31d-2815-40cf-c8e173feec02@kernel.org>
- <1dfef1c2-2bea-e4ca-39d1-986c2c9b0813@huawei.com>
- <edbf3e72-ab58-74d8-52f2-34b4034b484d@kernel.org>
-Message-ID: <0e910b52-a1ed-ca82-7c09-67a7879ee934@huawei.com>
-Date: Wed, 9 Mar 2022 15:24:42 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+ id 1nRqqD-0003sh-Od
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Mar 2022 07:34:41 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5B54661993;
+ Wed,  9 Mar 2022 07:34:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0B503C340E8;
+ Wed,  9 Mar 2022 07:34:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1646811271;
+ bh=rTKxb57bycgvdehhRlTtdgsGDA+8TkLS2+mydnbohzg=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=ZC0rCB5Zwq4ufyfjNyN3cVotqBvcP7x698vFuQy88bEwhwPT0aKWOojTkzTMmLi1q
+ r3jJ+Hr5fHwXTTXt6cFIrCR+czfJTnkfaXoHmQfRMdzLw7Eqyz6urAAaf9WSGgxvDY
+ poMzWHDVYzYMwP2fVFMam8JWqV29ug2bKu3Mx+dj3r8zcXdYRRjBmR4jazKAX17HxZ
+ owcJubQRqNSfGbZ7t6M1bvn6U53BNYgQxNhTzlK7RUP4bIiYEpXc3SVAFJ+xaoc79O
+ 2HtSvxSEsRxgO4kIamVM7TAdhJAe1xoMh4QXkzJQrlCKuDF+w6A8oK5klzZ8EI9+tt
+ YK8pG6/PTAAHg==
+Message-ID: <0a5c5efd-597e-7d13-9008-195cf6cf83f1@kernel.org>
+Date: Wed, 9 Mar 2022 15:34:27 +0800
 MIME-Version: 1.0
-In-Reply-To: <edbf3e72-ab58-74d8-52f2-34b4034b484d@kernel.org>
-X-Originating-IP: [10.174.179.183]
-X-ClientProxiedBy: dggeme710-chm.china.huawei.com (10.1.199.106) To
- dggpemm500007.china.huawei.com (7.185.36.183)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.3 (--)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.2
+Content-Language: en-US
+To: Dave Chinner <david@fromorbit.com>
+References: <20220228035719.4102745-1-sunke32@huawei.com>
+ <cd2a245e-b9d2-c09c-0f8c-a7ca9157ca9f@oppo.com>
+ <20220309062223.GY3927073@dread.disaster.area>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20220309062223.GY3927073@dread.disaster.area>
+X-Spam-Score: -5.7 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/3/9 12:12, Chao Yu wrote: > On 2022/3/8 16:19, Jia
- Yang via Linux-f2fs-devel wrote: >> >> >> On 2022/3/7 18:40, Chao Yu wrote:
- >>> On 2022/3/7 16:12, Jia Yang via Linux-f2fs-devel wrote: >>>> [...] 
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  On 2022/3/9 14:22, Dave Chinner wrote: > On Wed, Mar 09, 2022
+ at 12:31:17PM +0800, Chao Yu wrote: >> On 2022/2/28 11:57,
+ Sun Ke via Linux-f2fs-devel
+ wrote: >>> The test fail on f2fs: >>> xattr names a [...] 
+ Content analysis details:   (-5.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.188 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [45.249.212.188 listed in wl.mailspike.net]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1nRqgo-009T6n-0I
-Subject: Re: [f2fs-dev] [PATCH -next] f2fs: remove unnecessary read for
- F2FS_FITS_IN_INODE
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nRqqD-0003sh-Od
+Subject: Re: [f2fs-dev] [PATCH] generic/066: attr1 is still there after log
+ replay on f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,62 +108,93 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jia Yang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jia Yang <jiayang5@huawei.com>
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: jaegeuk@kernel.org, Sun Ke <sunke32@huawei.com>, guan@eryu.me,
+ fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-CgpPbiAyMDIyLzMvOSAxMjoxMiwgQ2hhbyBZdSB3cm90ZToKPiBPbiAyMDIyLzMvOCAxNjoxOSwg
-SmlhIFlhbmcgdmlhIExpbnV4LWYyZnMtZGV2ZWwgd3JvdGU6Cj4+Cj4+Cj4+IE9uIDIwMjIvMy83
-IDE4OjQwLCBDaGFvIFl1IHdyb3RlOgo+Pj4gT24gMjAyMi8zLzcgMTY6MTIsIEppYSBZYW5nIHZp
-YSBMaW51eC1mMmZzLWRldmVsIHdyb3RlOgo+Pj4+IEYyRlNfRklUU19JTl9JTk9ERSBvbmx5IGNh
-cmVzIHRoZSB0eXBlIG9mIGYyZnMgaW5vZGUsIHNvIHRoZXJlCj4+Pj4gaXMgbm8gbmVlZCB0byBy
-ZWFkIG5vZGUgcGFnZSBvZiBmMmZzIGlub2RlLgo+Pj4+Cj4+Pj4gU2lnbmVkLW9mZi1ieTogSmlh
-IFlhbmcgPGppYXlhbmc1QGh1YXdlaS5jb20+Cj4+Pj4gLS0tCj4+Pj4gwqDCoCBmcy9mMmZzL2Zp
-bGUuYyB8IDEwICsrLS0tLS0tLS0KPj4+PiDCoMKgIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlv
-bnMoKyksIDggZGVsZXRpb25zKC0pCj4+Pj4KPj4+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9maWxl
-LmMgYi9mcy9mMmZzL2ZpbGUuYwo+Pj4+IGluZGV4IGNmZGM0MWY4N2Y1ZC4uNGI5M2ZiZWMyZWMw
-IDEwMDY0NAo+Pj4+IC0tLSBhL2ZzL2YyZnMvZmlsZS5jCj4+Pj4gKysrIGIvZnMvZjJmcy9maWxl
-LmMKPj4+PiBAQCAtMjk5OSw3ICsyOTk5LDcgQEAgc3RhdGljIGludCBmMmZzX2lvY19zZXRwcm9q
-ZWN0KHN0cnVjdCBpbm9kZSAqaW5vZGUsIF9fdTMyIHByb2ppZCkKPj4+PiDCoMKgIHsKPj4+PiDC
-oMKgwqDCoMKgwqAgc3RydWN0IGYyZnNfaW5vZGVfaW5mbyAqZmkgPSBGMkZTX0koaW5vZGUpOwo+
-Pj4+IMKgwqDCoMKgwqDCoCBzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkgPSBGMkZTX0lfU0IoaW5v
-ZGUpOwo+Pj4+IC3CoMKgwqAgc3RydWN0IHBhZ2UgKmlwYWdlOwo+Pj4+ICvCoMKgwqAgc3RydWN0
-IGYyZnNfaW5vZGUgKnJpOwo+Pj4KPj4+IHN0cnVjdCBmMmZzX2lub2RlICpyaSA9IE5VTEw7Cj4+
-Pgo+Pj4gKG9mZnNldG9mKHR5cGVvZigqKGYyZnNfaW5vZGUpKSwgZmllbGQpICsKPj4+IHNpemVv
-ZigoZjJmc19pbm9kZSktPmZpZWxkKQo+Pj4KPj4+IEEgbGl0dGxlIGJpdCB3b3JyeSBhYm91dCB1
-c2luZyBhIE5VTEwgcG9pbnRlciBoZXJlLCBkdWUgdG8gbm90IHN1cmUgdGhlIHJlc3VsdCBvZgo+
-Pj4gb2Zmc2V0b2YoKSBhbmQgc2l6ZW9mKCkgd2lsbCBhbHdheXMgYmUgY2FsY3VsYXRlZCBhdCBj
-b21waWxpbmcgdGltZSBmb3IgYWxsIGtpbmQgb2YKPj4+IGNvbXBpbGVycywgY2FuIHdlIGd1YXJh
-bnRlZSB0aGF0Pwo+Pgo+PiBXZSBjYW4ndCBndWFyYW50ZWUgdGhhdCwgYnV0IEkgc2VlIHRoYXQg
-ZjJmc19nZXRhdHRyIGFsc28gcnVucyBpbiB0aGlzIHdheS4gRG8geW91IHRoaW5rIHRoYXQgYWxs
-b2NhdGluZyBtZW1vcnkgZm9yCj4+IGYyZnMgaW5vZGUgaXMgYXZhaWxhYmxlPwo+IAo+IFdlbGws
-IGl0IGxvb2tzIGV4dDRfZ2V0YXR0cigpIGFsc28gZGlkIHRoaXMgd2F5Li4uCj4gCj4gSG93IGFi
-b3V0IGluaXRpYWxpemluZyByaSB3LyBOVUxMIGF0IGxlYXN0Pwo+IAoKSSBhZ3JlZSB3aXRoIHRo
-YXQgYW5kIEkgd2lsbCBmaXggaXQgaW4gVjIgdmVyc2lvbi4KClRoYW5rcywKCj4gVGhhbmtzLAo+
-IAo+Pgo+PiBUaGFua3MuCj4+Cj4+Pgo+Pj4+IMKgwqDCoMKgwqDCoCBrcHJvamlkX3Qga3Byb2pp
-ZDsKPj4+PiDCoMKgwqDCoMKgwqAgaW50IGVycjsKPj4+PiDCoMKgIEBAIC0zMDIzLDE3ICszMDIz
-LDExIEBAIHN0YXRpYyBpbnQgZjJmc19pb2Nfc2V0cHJvamVjdChzdHJ1Y3QgaW5vZGUgKmlub2Rl
-LCBfX3UzMiBwcm9qaWQpCj4+Pj4gwqDCoMKgwqDCoMKgIGlmIChJU19OT1FVT1RBKGlub2RlKSkK
-Pj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gZXJyOwo+Pj4+IMKgwqAgLcKgwqDCoCBp
-cGFnZSA9IGYyZnNfZ2V0X25vZGVfcGFnZShzYmksIGlub2RlLT5pX2lubyk7Cj4+Pj4gLcKgwqDC
-oCBpZiAoSVNfRVJSKGlwYWdlKSkKPj4+PiAtwqDCoMKgwqDCoMKgwqAgcmV0dXJuIFBUUl9FUlIo
-aXBhZ2UpOwo+Pj4+IMKgwqAgLcKgwqDCoCBpZiAoIUYyRlNfRklUU19JTl9JTk9ERShGMkZTX0lO
-T0RFKGlwYWdlKSwgZmktPmlfZXh0cmFfaXNpemUsCj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlfcHJvamlkKSkgewo+
-Pj4+ICvCoMKgwqAgaWYgKCFGMkZTX0ZJVFNfSU5fSU5PREUocmksIGZpLT5pX2V4dHJhX2lzaXpl
-LCBpX3Byb2ppZCkpIHsKPj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoCBlcnIgPSAtRU9WRVJGTE9X
-Owo+Pj4+IC3CoMKgwqDCoMKgwqDCoCBmMmZzX3B1dF9wYWdlKGlwYWdlLCAxKTsKPj4+PiDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gZXJyOwo+Pj4KPj4+IHJldHVybiAtRU9WRVJGTE9XOwo+
-Pj4KPj4+IFRoYW5rcywKPj4+Cj4+Pj4gwqDCoMKgwqDCoMKgIH0KPj4+PiAtwqDCoMKgIGYyZnNf
-cHV0X3BhZ2UoaXBhZ2UsIDEpOwo+Pj4+IMKgwqAgwqDCoMKgwqDCoCBlcnIgPSBmMmZzX2RxdW90
-X2luaXRpYWxpemUoaW5vZGUpOwo+Pj4+IMKgwqDCoMKgwqDCoCBpZiAoZXJyKQo+Pj4gLgo+Pgo+
-Pgo+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+PiBM
-aW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdAo+PiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNv
-dXJjZWZvcmdlLm5ldAo+PiBodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0
-aW5mby9saW51eC1mMmZzLWRldmVsCj4gLgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYy
-ZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2Uu
-bmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On 2022/3/9 14:22, Dave Chinner wrote:
+> On Wed, Mar 09, 2022 at 12:31:17PM +0800, Chao Yu wrote:
+>> On 2022/2/28 11:57, Sun Ke via Linux-f2fs-devel wrote:
+>>> The test fail on f2fs:
+>>>        xattr names and values after second fsync log replay:
+>>>        # file: SCRATCH_MNT/foobar
+>>>       +user.attr1="val1"
+>>>        user.attr3="val3"
+>>>
+>>> attr1 is still there after log replay.
+>>> I guess it is f2fs's special feature to improve the performance.
+>>>
+>>> Signed-off-by: Sun Ke <sunke32@huawei.com>
+>>> ---
+>>>
+>>> Is it a BUG on f2fs?
+>>
+>> I don't think so, it fails due to f2fs doesn't follow recovery rule which
+>> btrfs/ext4/xfs does, but it doesn't mean f2fs has break posix semantics of
+>> fsync().
+> 
+> I disagree.  A failure in this test is indicative of non-conformance
+> with the Linux definition of fsync() behaviour.
+> 
+> You are right in that it does not break POSIX fsync semantics, but
+> POSIX allows "do nothing" as a valid implementation. However,
+> because of this loophole, the POSIX definition is complete garbage
+> and we do not use it.
+> 
+> That behaviour that Linux filesytsems are supposed to implement is
+> defined in the Linux fsync() man page, and it goes way beyond what
+> POSIX requires:
+> 
+> $ man fsync
+> ....
+> DESCRIPTION
+>      fsync() transfers ("flushes") all modified in-core data of
+>      (i.e., modified buffer cache pages for) the file referred to by
+>      the file descriptor fd to the disk device (or other permanent
+>      storage device) so that all changed information can be retrieved
+>      even if the  system  crashes  or  is rebooted.  This includes
+>      writing through or flushing a disk cache if present.  The call
+>      blocks until the device reports that the transfer has
+>      completed.
+> 
+>      As well as flushing the file data, fsync() also flushes the
+>      metadata information associated with the file (see inode(7)).
+> ....
+> 
+> IOWs, fsync() on Linux is supposed to persist all data and
+> metadata associated with the inode to stable storage such that it
+> can be retreived after a crash or reboot. "metadata information"
+> includes xattrs attached to the inode that is being fsync()d.
+
+Quoted from g/066:
+
+echo "hello world!" >> $SCRATCH_MNT/foobar
+$XFS_IO_PROG -c "fsync" $SCRATCH_MNT/foobar
+$SETFATTR_PROG -x user.attr1 $SCRATCH_MNT/foobar
+ln $SCRATCH_MNT/foobar $SCRATCH_MNT/foobar_link
+touch $SCRATCH_MNT/qwerty
+$XFS_IO_PROG -c "fsync" $SCRATCH_MNT/qwerty
+
+IIUC, to match what Linux fsync() manual restricts, if we want to persist the
+xattr removal, we should call fsync() on $SCRATCH_MNT/foobar after
+"$SETFATTR_PROG -x user.attr1 $SCRATCH_MNT/foobar"? rather than calling fsync()
+on unrelated $SCRATCH_MNT/qwerty.
+
+Thanks,
+
+> 
+> *fdatasync()* does not require xattrs to be persisted unless
+> they are needed to retreive data, but that's not what g/066 is
+> exercising.
+> 
+> Cheers,
+> 
+> Dave.
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
