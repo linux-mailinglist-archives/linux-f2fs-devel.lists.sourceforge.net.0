@@ -2,92 +2,118 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6595E4D18E5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Mar 2022 14:15:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEF9C4D2605
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Mar 2022 02:24:49 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nRZgQ-0006wN-EL; Tue, 08 Mar 2022 13:15:21 +0000
+	id 1nRl4H-00036d-Al; Wed, 09 Mar 2022 01:24:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <sunke32@huawei.com>) id 1nRZgP-0006wD-4F
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Mar 2022 13:15:20 +0000
+ (envelope-from <axboe@kernel.dk>) id 1nRl4F-00036X-3I
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Mar 2022 01:24:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iYxCngVtmUy0/3j25IVILwJpb8suJPvIHzeRuiWHw3g=; b=gNqeWnZLy7STv+1hOeKIl3/PqP
- VPPEZ5rYZJmObdST9/gOgL+5rFMdt/iqlfZNLQagimfAvCRrbKJzvsFYlQi2A6HIKztUMRmhSZkQz
- dkw75CfNRZTjq44blvYr5XpVQPpZRzPHxHTmAJSbJp32jwHR0tZH9SioFamRg4AuFR3E=;
+ bh=KpeRyglq/KKb6h+FPp2kPuLZPFCdso3DNN8oDwE8uJM=; b=iAeCmy1g9MexHfbLG66Tc/bdaK
+ IfrlYvLQ3+7gAIpSknHCo81tO8FcJfxif4FE5zGtnuXi+xelAnHoPbQnsDMs3y7NpEPm5fKZamhW3
+ +k2U+vc+LJ7iIqkzW+ZGFzBntWWHjCXB8xrXqzZA41EboofgLPXNoTPaYZCN4zO/HpXI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iYxCngVtmUy0/3j25IVILwJpb8suJPvIHzeRuiWHw3g=; b=RgznGVd8WUMh6brKiM4q1+ToUh
- t5358r3aVVDTjL2TSW17mEFd0SPiD9L5Os+cNdCHESaLKIHJCQOa3l3YnrtoZ7VWfJT7IrflE/M87
- 7ztAWY9dBkf3KZ1CfH0pnS7DWKvQEPpzakpFCRBHGhmpeEeV9pHi23xCRKWjspixiEd0=;
-Received: from szxga01-in.huawei.com ([45.249.212.187])
+ bh=KpeRyglq/KKb6h+FPp2kPuLZPFCdso3DNN8oDwE8uJM=; b=k2yT/IfH5xbnWjk9zuZfQcXMCe
+ 3sz7nIKWktpI/wgYUEbsAGTMm16kHkt4Vk0OaEpyN8DZRO7/VXEb2IHRKOvrvtqNQNGoPARO6tdbg
+ ApE5FiJUgYDx9Ya4lDHNMpl+BCJ0t/gNVsid5QZsss/rPPsRpaj1veMn5ovPT9Tcg258=;
+Received: from mail-oi1-f173.google.com ([209.85.167.173])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nRZgI-008bF9-Vq
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 08 Mar 2022 13:15:19 +0000
-Received: from kwepemi500012.china.huawei.com (unknown [172.30.72.54])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4KCbKM6gQ5zbc37;
- Tue,  8 Mar 2022 21:10:15 +0800 (CST)
-Received: from kwepemm600010.china.huawei.com (7.193.23.86) by
- kwepemi500012.china.huawei.com (7.221.188.12) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 8 Mar 2022 21:15:03 +0800
-Received: from [10.174.178.31] (10.174.178.31) by
- kwepemm600010.china.huawei.com (7.193.23.86) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 8 Mar 2022 21:15:03 +0800
-To: <fstests@vger.kernel.org>, <guan@eryu.me>
-References: <20220228035719.4102745-1-sunke32@huawei.com>
-Message-ID: <bc2d3921-083f-d867-4213-eee05bd6c1cb@huawei.com>
-Date: Tue, 8 Mar 2022 21:15:02 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nRl4B-009Ci6-Qt
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 09 Mar 2022 01:24:41 +0000
+Received: by mail-oi1-f173.google.com with SMTP id i5so1198792oih.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 08 Mar 2022 17:24:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel-dk.20210112.gappssmtp.com; s=20210112;
+ h=message-id:date:mime-version:user-agent:subject:content-language:to
+ :cc:references:from:in-reply-to:content-transfer-encoding;
+ bh=KpeRyglq/KKb6h+FPp2kPuLZPFCdso3DNN8oDwE8uJM=;
+ b=sIS5e4ip/C/OQYpC1HbLN3p/gS7oZxzSenbpbk+Qu9qLfk3/4NcyDvpTulApQ/5YfY
+ WEKzfrYxC89sfiwYPEegV84r0VtDAe2D7NhN4aWUuf6RBMjuPh933SqiiZCJyIHQNx/7
+ 4baLL4jVOMHMGwCj4xDzFSITORK6f4cvgrftMHEDfboidOgt9TEh6GsO0QETUDU9SD6w
+ zqO3gJNJlqBoBIa56IB9qzZ9/S1Yq7VQ1mhODDkMXTleAXn0U6au23rOZMtlmM3dbOhC
+ xkckm9zeJ0G8AQO1pOjy8WSt9SFZv4bMVALpP2eY0xCFNunsNQ/Ao3CdcdHtPmqKkJHo
+ hWhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=KpeRyglq/KKb6h+FPp2kPuLZPFCdso3DNN8oDwE8uJM=;
+ b=6XV6oZTvZBdCAebbbg9OQUoJwbOzVXEdsvva/IFFhnkg0cUHws66CYpEr/0mFmuXc6
+ SZDMs8J6Gv3ICIAdrhMSW/+6S9bPXqrj18RJ+IXGc/A/6YYX6PizGRU8FnAZipG/Go7S
+ P3+ViA6FwD9kPkMh6dScUPDsZzLtPPFNlGodJlGvVr9/uN7E3rFUwoTCl20r9yJbP+NS
+ 5Vy8cQXQCLi3vtkccNh1e7Nftv+rwCO1EndU73lBJb3Pd8XcNypnCY7mg+fNtK0vRZeR
+ Wq4g+sXFaf/2ikI27nWi2KHcMV/vPRkV/qnwLVz8H+jUWpx85o5TT1bRMkYmz2w7VFE+
+ VtBg==
+X-Gm-Message-State: AOAM5338pwwG4i15O2GU/SlpgmMwTQXqmcaYj+l2bKu/ElerS9SB4AgN
+ lHUTyqMN1Uk4vZFHAg/OrDNpF68SvftJI5Bx
+X-Google-Smtp-Source: ABdhPJw509jIgleFtjR4YJQ7shm6aXQ4P7p1SQgvGOXtMNxP2WiXmawU2fT5sxJzQFM599gtPxX+yA==
+X-Received: by 2002:a17:90b:e08:b0:1bc:2b0c:65aa with SMTP id
+ ge8-20020a17090b0e0800b001bc2b0c65aamr7527206pjb.102.1646787581515; 
+ Tue, 08 Mar 2022 16:59:41 -0800 (PST)
+Received: from [192.168.1.100] ([198.8.77.157])
+ by smtp.gmail.com with ESMTPSA id
+ om17-20020a17090b3a9100b001bf0fffee9bsm4519603pjb.52.2022.03.08.16.59.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 08 Mar 2022 16:59:41 -0800 (PST)
+Message-ID: <779bf1fe-7f58-51ed-27e8-1152375780ff@kernel.dk>
+Date: Tue, 8 Mar 2022 17:59:40 -0700
 MIME-Version: 1.0
-In-Reply-To: <20220228035719.4102745-1-sunke32@huawei.com>
-X-Originating-IP: [10.174.178.31]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- kwepemm600010.china.huawei.com (7.193.23.86)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -4.3 (----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.1
+Content-Language: en-US
+To: Christoph Hellwig <hch@lst.de>, Chao Yu <chao@kernel.org>
+References: <20220228124123.856027-1-hch@lst.de>
+ <20220228124123.856027-3-hch@lst.de>
+ <782226e0-5e7a-aec8-b9aa-e7fd7b3110a7@kernel.org>
+ <20220308060624.GA23629@lst.de>
+From: Jens Axboe <axboe@kernel.dk>
+In-Reply-To: <20220308060624.GA23629@lst.de>
+X-Spam-Score: -0.0 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Friendly ping... ÔÚ 2022/2/28 11:57, Sun Ke Ð´µÀ: > The test
-    fail on f2fs: > xattr names and values after second fsync log replay: > #
-    file: SCRATCH_MNT/foobar > +user.attr1="val1" > user.attr3="val3" > > attr1
-    is sti [...] 
- 
- Content analysis details:   (-4.3 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 3/7/22 11:06 PM, Christoph Hellwig wrote: > On Tue, Mar
+ 01, 2022 at 10:49:06AM +0800, Chao Yu wrote: >> On 2022/2/28 20:41, Christoph
+ Hellwig wrote: >>> Refactor block I/O code so that the bio oper [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
-                             medium trust
-                             [45.249.212.187 listed in list.dnswl.org]
-  0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
-                             [45.249.212.187 listed in wl.mailspike.net]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.167.173 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.167.173 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1nRZgI-008bF9-Vq
-Subject: Re: [f2fs-dev] [PATCH] generic/066: attr1 is still there after log
- replay on f2fs
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1nRl4B-009Ci6-Qt
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: pass the bio operation to
+ bio_alloc_bioset
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,59 +125,35 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Sun Ke via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Sun Ke <sunke32@huawei.com>
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="gbk"; Format="flowed"
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-RnJpZW5kbHkgcGluZy4uLgoK1NogMjAyMi8yLzI4IDExOjU3LCBTdW4gS2Ug0LS1wDoKPiBUaGUg
-dGVzdCBmYWlsIG9uIGYyZnM6Cj4gICAgICAgeGF0dHIgbmFtZXMgYW5kIHZhbHVlcyBhZnRlciBz
-ZWNvbmQgZnN5bmMgbG9nIHJlcGxheToKPiAgICAgICAjIGZpbGU6IFNDUkFUQ0hfTU5UL2Zvb2Jh
-cgo+ICAgICAgK3VzZXIuYXR0cjE9InZhbDEiCj4gICAgICAgdXNlci5hdHRyMz0idmFsMyIKPgo+
-IGF0dHIxIGlzIHN0aWxsIHRoZXJlIGFmdGVyIGxvZyByZXBsYXkuCj4gSSBndWVzcyBpdCBpcyBm
-MmZzJ3Mgc3BlY2lhbCBmZWF0dXJlIHRvIGltcHJvdmUgdGhlIHBlcmZvcm1hbmNlLgo+Cj4gU2ln
-bmVkLW9mZi1ieTogU3VuIEtlIDxzdW5rZTMyQGh1YXdlaS5jb20+Cj4gLS0tCj4KPiBJcyBpdCBh
-IEJVRyBvbiBmMmZzPwo+ICAgLmdpdGlnbm9yZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHwgIDEgKwo+ICAgdGVzdHMvZ2VuZXJpYy8wNjYgICAgICAgICAgICAgICAgICAgICAgICAg
-IHwgIDMgKysrCj4gICB0ZXN0cy9nZW5lcmljLzA2Ni5jZmcgICAgICAgICAgICAgICAgICAgICAg
-fCAgMSArCj4gICB0ZXN0cy9nZW5lcmljL3swNjYub3V0ID0+IDA2Ni5vdXQuZGVmYXVsdH0gfCAg
-MAo+ICAgdGVzdHMvZ2VuZXJpYy8wNjYub3V0LmYyZnMgICAgICAgICAgICAgICAgIHwgMTEgKysr
-KysrKysrKysKPiAgIDUgZmlsZXMgY2hhbmdlZCwgMTYgaW5zZXJ0aW9ucygrKQo+ICAgY3JlYXRl
-IG1vZGUgMTAwNjQ0IHRlc3RzL2dlbmVyaWMvMDY2LmNmZwo+ICAgcmVuYW1lIHRlc3RzL2dlbmVy
-aWMvezA2Ni5vdXQgPT4gMDY2Lm91dC5kZWZhdWx0fSAoMTAwJSkKPiAgIGNyZWF0ZSBtb2RlIDEw
-MDY0NCB0ZXN0cy9nZW5lcmljLzA2Ni5vdXQuZjJmcwo+Cj4gZGlmZiAtLWdpdCBhLy5naXRpZ25v
-cmUgYi8uZ2l0aWdub3JlCj4gaW5kZXggNjViOTMzMDcuLjEzNTc0MmY1IDEwMDY0NAo+IC0tLSBh
-Ly5naXRpZ25vcmUKPiArKysgYi8uZ2l0aWdub3JlCj4gQEAgLTE5NCw2ICsxOTQsNyBAQCB0YWdz
-Cj4gICAvc3JjL3BlcmYvKi5weWMKPiAgIAo+ICAgIyBTeW1saW5rZWQgZmlsZXMKPiArL3Rlc3Rz
-L2dlbmVyaWMvMDY2Lm91dAo+ICAgL3Rlc3RzL2dlbmVyaWMvMDM1Lm91dAo+ICAgL3Rlc3RzL2dl
-bmVyaWMvMDUwLm91dAo+ICAgL3Rlc3RzL3hmcy8wMzMub3V0Cj4gZGlmZiAtLWdpdCBhL3Rlc3Rz
-L2dlbmVyaWMvMDY2IGIvdGVzdHMvZ2VuZXJpYy8wNjYKPiBpbmRleCAxMDVhN2FjZC4uNTI0ZGM4
-MmQgMTAwNzU1Cj4gLS0tIGEvdGVzdHMvZ2VuZXJpYy8wNjYKPiArKysgYi90ZXN0cy9nZW5lcmlj
-LzA2Ngo+IEBAIC0xNyw2ICsxNyw3IEBACj4gICAjCj4gICAjICBCdHJmczogcmVtb3ZlIGRlbGV0
-ZWQgeGF0dHJzIG9uIGZzeW5jIGxvZyByZXBsYXkKPiAgICMKPiArc2VxZnVsbD0kMAo+ICAgLiAu
-L2NvbW1vbi9wcmVhbWJsZQo+ICAgX2JlZ2luX2ZzdGVzdCBhdXRvIHF1aWNrIGF0dHIgbWV0YWRh
-dGEgbG9nCj4gICAKPiBAQCAtMzIsNiArMzMsOCBAQCBfY2xlYW51cCgpCj4gICAuIC4vY29tbW9u
-L2RtZmxha2V5Cj4gICAuIC4vY29tbW9uL2F0dHIKPiAgIAo+ICsjIFNlbGVjdCBhcHByb3ByaWF0
-ZSBnb2xkZW4gb3V0cHV0IGJhc2VkIG9uIGZzdHlwZQo+ICtfbGlua19vdXRfZmlsZQo+ICAgIyBy
-ZWFsIFFBIHRlc3Qgc3RhcnRzIGhlcmUKPiAgIF9zdXBwb3J0ZWRfZnMgZ2VuZXJpYwo+ICAgX3Jl
-cXVpcmVfc2NyYXRjaAo+IGRpZmYgLS1naXQgYS90ZXN0cy9nZW5lcmljLzA2Ni5jZmcgYi90ZXN0
-cy9nZW5lcmljLzA2Ni5jZmcKPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+IGluZGV4IDAwMDAwMDAw
-Li5jMjU2NDFiZQo+IC0tLSAvZGV2L251bGwKPiArKysgYi90ZXN0cy9nZW5lcmljLzA2Ni5jZmcK
-PiBAQCAtMCwwICsxIEBACj4gK2YyZnM6IGYyZnMKPiBkaWZmIC0tZ2l0IGEvdGVzdHMvZ2VuZXJp
-Yy8wNjYub3V0IGIvdGVzdHMvZ2VuZXJpYy8wNjYub3V0LmRlZmF1bHQKPiBzaW1pbGFyaXR5IGlu
-ZGV4IDEwMCUKPiByZW5hbWUgZnJvbSB0ZXN0cy9nZW5lcmljLzA2Ni5vdXQKPiByZW5hbWUgdG8g
-dGVzdHMvZ2VuZXJpYy8wNjYub3V0LmRlZmF1bHQKPiBkaWZmIC0tZ2l0IGEvdGVzdHMvZ2VuZXJp
-Yy8wNjYub3V0LmYyZnMgYi90ZXN0cy9nZW5lcmljLzA2Ni5vdXQuZjJmcwo+IG5ldyBmaWxlIG1v
-ZGUgMTAwNjQ0Cj4gaW5kZXggMDAwMDAwMDAuLjhmYzU4NjkzCj4gLS0tIC9kZXYvbnVsbAo+ICsr
-KyBiL3Rlc3RzL2dlbmVyaWMvMDY2Lm91dC5mMmZzCj4gQEAgLTAsMCArMSwxMSBAQAo+ICtRQSBv
-dXRwdXQgY3JlYXRlZCBieSAwNjYKPiAreGF0dHIgbmFtZXMgYW5kIHZhbHVlcyBhZnRlciBmaXJz
-dCBmc3luYyBsb2cgcmVwbGF5Ogo+ICsjIGZpbGU6IFNDUkFUQ0hfTU5UL2Zvb2Jhcgo+ICt1c2Vy
-LmF0dHIxPSJ2YWwxIgo+ICt1c2VyLmF0dHIzPSJ2YWwzIgo+ICsKPiAreGF0dHIgbmFtZXMgYW5k
-IHZhbHVlcyBhZnRlciBzZWNvbmQgZnN5bmMgbG9nIHJlcGxheToKPiArIyBmaWxlOiBTQ1JBVENI
-X01OVC9mb29iYXIKPiArdXNlci5hdHRyMT0idmFsMSIKPiArdXNlci5hdHRyMz0idmFsMyIKPiAr
-CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgt
-ZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3Jn
-ZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgt
-ZjJmcy1kZXZlbAo=
+On 3/7/22 11:06 PM, Christoph Hellwig wrote:
+> On Tue, Mar 01, 2022 at 10:49:06AM +0800, Chao Yu wrote:
+>> On 2022/2/28 20:41, Christoph Hellwig wrote:
+>>> Refactor block I/O code so that the bio operation and known flags are set
+>>> at bio allocation time.  Only the later updated flags are updated on the
+>>> fly.
+>>>
+>>> Signed-off-by: Christoph Hellwig <hch@lst.de>
+>>
+>> Reviewed-by: Chao Yu <chao@kernel.org>
+> 
+> Is it okay for Jens to pick these two patches up in the
+> https://git.kernel.dk/cgit/linux-block/log/?h=for-5.18/alloc-cleanups
+> branch?
+
+I have tentatively done so, let me know you prefer doing it differently.
+
+-- 
+Jens Axboe
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
