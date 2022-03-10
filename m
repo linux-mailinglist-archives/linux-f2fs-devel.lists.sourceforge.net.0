@@ -2,83 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9A6D4D3EDA
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Mar 2022 02:41:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A7384D3EF8
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Mar 2022 02:53:37 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nS7oO-00074E-BD; Thu, 10 Mar 2022 01:41:50 +0000
+	id 1nS7zj-0001JB-65; Thu, 10 Mar 2022 01:53:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <david@fromorbit.com>) id 1nS7oM-000747-Dv
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Mar 2022 01:41:49 +0000
+ (envelope-from <chao@kernel.org>) id 1nS7zi-0001J4-N2
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Mar 2022 01:53:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tiShq+7q4wvh+LtcX3eKlfeYmKTYxulAgpIPEFJEnW4=; b=TYAAHCmWQLtefaWHihPvOZ2QJn
- 2CZVv+AT7+nUmS0YwCFGhH01RG9SF3+ibnIMRO23Pj2Oce9Qj21sU9+qmERA9swQlUjFT7Xrunwcb
- 1pgo5FoJSm9kzl/Op7bWbDE446E5NXA63Wm+79QCkZNIQasb7p9WRzfK8v4CA0SAXrqU=;
+ bh=VAoqdHVPC1R3dEvV4PriYe9lPkybtq9qTj6XQuKPsjs=; b=lENnl/0oWEtI8RHDhDU3s2V5OU
+ T+GhPkeo3hNgPED3j3OnDxrRrUN8VoXMKtSucb21FrpV51/f6RM8iFzgYT3Yh/FNqb0X9JcBBPTJA
+ et0yB0+2s4m6OjtWncj8k0sKIJrdOTa7Ict5irCeAPoRU3ZheOPZFzFnbhsO7F1R3Bcg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tiShq+7q4wvh+LtcX3eKlfeYmKTYxulAgpIPEFJEnW4=; b=bxsheOJaqngTv3Axl+VpKvlVAy
- Wk5mR/SycV6MhB/7L5lx9Rg+r45IQiRuipcg++D3VN+1GcCy4u+bHQXgIVbpGf68ffCw5R0fa/YpK
- I8MkM6ERreHMxzt1xL85jryHX7aXMoc+bfMXdn0JvCThd7X9lSYW4ZvRLksaWQ5SNRIk=;
-Received: from mail105.syd.optusnet.com.au ([211.29.132.249])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.94.2)
- id 1nS7oJ-00AOjp-RL
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Mar 2022 01:41:48 +0000
-Received: from dread.disaster.area (pa49-186-150-27.pa.vic.optusnet.com.au
- [49.186.150.27])
- by mail105.syd.optusnet.com.au (Postfix) with ESMTPS id 4906010E2BEC;
- Thu, 10 Mar 2022 12:41:40 +1100 (AEDT)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1nS7oB-003bhG-DU; Thu, 10 Mar 2022 12:41:39 +1100
-Date: Thu, 10 Mar 2022 12:41:39 +1100
-From: Dave Chinner <david@fromorbit.com>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <20220310014139.GZ3927073@dread.disaster.area>
-References: <20220228035719.4102745-1-sunke32@huawei.com>
- <cd2a245e-b9d2-c09c-0f8c-a7ca9157ca9f@oppo.com>
- <20220309062223.GY3927073@dread.disaster.area>
- <0a5c5efd-597e-7d13-9008-195cf6cf83f1@kernel.org>
+ bh=VAoqdHVPC1R3dEvV4PriYe9lPkybtq9qTj6XQuKPsjs=; b=dIutekDAnx0w/NMG9FSTEF4Nk2
+ U2cQJJxmcMAhberqPKUNZQ8dVx8C0FLKO69yhEWMSWl7dBhPpvs1SAbCd+8P0AVloeHTIRnVP1WiE
+ lSkkH/dJTiqV50RMN7YylYcj2Tbxgei4It8gNk0/thGS3J+nlxjFf/9Y0CxUNXO3/riw=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1nS7zd-00087g-HH
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Mar 2022 01:53:33 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id A0C8CB82459
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 10 Mar 2022 01:53:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54853C340E8;
+ Thu, 10 Mar 2022 01:53:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1646877196;
+ bh=FSwwg7VIAWVfVNVd3TkpDiWBggJe4J2RS2eGz3KYKkI=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=o9hlq/3/YlHMZWtZcKPQhziCXhpUiLVNj5h5GtH6a+juwKjsJim/ii6fHMXGhr0Q+
+ t+/fw5hBgFSPZnUOYoa2+VWf3WS4oJIfKR2VWgTSj68phjGhVS/nkmkF+2EjLTEB9+
+ DAqCcABDWULl8RVK+I1YXDpoRd8Y+C/VqEAmGkyE4ph/83UGgKdYi0MnvD732UKHqE
+ jTXB4qHiVPC3FgKfo/hI7tGwiRC/LOPEQ2RCSjAFITSSAwWX5lcGJzcGOnh/jlKZ3f
+ QuEk8FFaBjkM5zxlKzqKPvpUAKPe8PHhddbn+dluvj++oXv8EMLZbC7ILHEXtfbHXx
+ Kijrv6rn35aRQ==
+Message-ID: <2a5564bb-463e-d163-0042-34fad42e2e46@kernel.org>
+Date: Thu, 10 Mar 2022 09:53:12 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <0a5c5efd-597e-7d13-9008-195cf6cf83f1@kernel.org>
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.4 cv=VuxAv86n c=1 sm=1 tr=0 ts=62295756
- a=sPqof0Mm7fxWrhYUF33ZaQ==:117 a=sPqof0Mm7fxWrhYUF33ZaQ==:17
- a=kj9zAlcOel0A:10 a=o8Y5sQTvuykA:10 a=i0EeH86SAAAA:8 a=7-415B0cAAAA:8
- a=NuAcnk6cltMIAt2ZYeMA:9 a=CjuIK1q_8ugA:10 a=biEYGPWJfzWAr4FL6Ov7:22
-X-Spam-Score: 0.0 (/)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.2
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20220309214834.3408741-1-jaegeuk@kernel.org>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20220309214834.3408741-1-jaegeuk@kernel.org>
+X-Spam-Score: -5.7 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Mar 09, 2022 at 03:34:27PM +0800, Chao Yu wrote: >
- On 2022/3/9 14:22, Dave Chinner wrote: > > On Wed, Mar 09, 2022 at 12:31:17PM
- +0800, Chao Yu wrote: > > > On 2022/2/28 11:57, Sun Ke via Linu [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  On 2022/3/10 5:48, Jaegeuk Kim wrote: > Let's purge inode
+ cache in order to avoid the below deadlock. > > [freeze test] shrinkder >
+ freeze_super > - pwercpu_down_write(SB_FREEZE_FS) > - super_cache_sc [...]
+ Content analysis details:   (-5.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [211.29.132.249 listed in list.dnswl.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
-X-Headers-End: 1nS7oJ-00AOjp-RL
-Subject: Re: [f2fs-dev] [PATCH] generic/066: attr1 is still there after log
- replay on f2fs
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nS7zd-00087g-HH
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: evict inode cache for frozen fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,111 +106,111 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, Sun Ke <sunke32@huawei.com>, guan@eryu.me,
- fstests@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Mar 09, 2022 at 03:34:27PM +0800, Chao Yu wrote:
-> On 2022/3/9 14:22, Dave Chinner wrote:
-> > On Wed, Mar 09, 2022 at 12:31:17PM +0800, Chao Yu wrote:
-> > > On 2022/2/28 11:57, Sun Ke via Linux-f2fs-devel wrote:
-> > > > The test fail on f2fs:
-> > > >        xattr names and values after second fsync log replay:
-> > > >        # file: SCRATCH_MNT/foobar
-> > > >       +user.attr1="val1"
-> > > >        user.attr3="val3"
-> > > > 
-> > > > attr1 is still there after log replay.
-> > > > I guess it is f2fs's special feature to improve the performance.
-> > > > 
-> > > > Signed-off-by: Sun Ke <sunke32@huawei.com>
-> > > > ---
-> > > > 
-> > > > Is it a BUG on f2fs?
-> > > 
-> > > I don't think so, it fails due to f2fs doesn't follow recovery rule which
-> > > btrfs/ext4/xfs does, but it doesn't mean f2fs has break posix semantics of
-> > > fsync().
-> > 
-> > I disagree.  A failure in this test is indicative of non-conformance
-> > with the Linux definition of fsync() behaviour.
-> > 
-> > You are right in that it does not break POSIX fsync semantics, but
-> > POSIX allows "do nothing" as a valid implementation. However,
-> > because of this loophole, the POSIX definition is complete garbage
-> > and we do not use it.
-> > 
-> > That behaviour that Linux filesytsems are supposed to implement is
-> > defined in the Linux fsync() man page, and it goes way beyond what
-> > POSIX requires:
-> > 
-> > $ man fsync
-> > ....
-> > DESCRIPTION
-> >      fsync() transfers ("flushes") all modified in-core data of
-> >      (i.e., modified buffer cache pages for) the file referred to by
-> >      the file descriptor fd to the disk device (or other permanent
-> >      storage device) so that all changed information can be retrieved
-> >      even if the  system  crashes  or  is rebooted.  This includes
-> >      writing through or flushing a disk cache if present.  The call
-> >      blocks until the device reports that the transfer has
-> >      completed.
-> > 
-> >      As well as flushing the file data, fsync() also flushes the
-> >      metadata information associated with the file (see inode(7)).
-> > ....
-> > 
-> > IOWs, fsync() on Linux is supposed to persist all data and
-> > metadata associated with the inode to stable storage such that it
-> > can be retreived after a crash or reboot. "metadata information"
-> > includes xattrs attached to the inode that is being fsync()d.
+On 2022/3/10 5:48, Jaegeuk Kim wrote:
+> Let's purge inode cache in order to avoid the below deadlock.
 > 
-> Quoted from g/066:
+> [freeze test]                         shrinkder
+> freeze_super
+>   - pwercpu_down_write(SB_FREEZE_FS)
+>                                         - super_cache_scan
+>                                           - down_read(&sb->s_umount)
+>                                             - prune_icache_sb
+>                                              - dispose_list
+>                                               - evict
+>                                                - f2fs_evict_inode
+> thaw_super
+>   - down_write(&sb->s_umount);
+>                                                - __percpu_down_read(SB_FREEZE_FS)
+
+Ah, finally we catch this. :)
+
 > 
-> echo "hello world!" >> $SCRATCH_MNT/foobar
-> $XFS_IO_PROG -c "fsync" $SCRATCH_MNT/foobar
-> $SETFATTR_PROG -x user.attr1 $SCRATCH_MNT/foobar
-> ln $SCRATCH_MNT/foobar $SCRATCH_MNT/foobar_link
-> touch $SCRATCH_MNT/qwerty
-> $XFS_IO_PROG -c "fsync" $SCRATCH_MNT/qwerty
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>   fs/f2fs/debug.c | 1 +
+>   fs/f2fs/f2fs.h  | 1 +
+>   fs/f2fs/inode.c | 6 ++++--
+>   fs/f2fs/super.c | 4 ++++
+>   4 files changed, 10 insertions(+), 2 deletions(-)
 > 
-> IIUC, to match what Linux fsync() manual restricts, if we want to persist the
-> xattr removal, we should call fsync() on $SCRATCH_MNT/foobar after
-> "$SETFATTR_PROG -x user.attr1 $SCRATCH_MNT/foobar"? rather than calling fsync()
-> on unrelated $SCRATCH_MNT/qwerty.
+> diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+> index 9a13902c7702..cba5eab24595 100644
+> --- a/fs/f2fs/debug.c
+> +++ b/fs/f2fs/debug.c
+> @@ -338,6 +338,7 @@ static char *s_flag[] = {
+>   	[SBI_QUOTA_SKIP_FLUSH]	= " quota_skip_flush",
+>   	[SBI_QUOTA_NEED_REPAIR]	= " quota_need_repair",
+>   	[SBI_IS_RESIZEFS]	= " resizefs",
+> +	[SBI_IS_FREEZING]	= " freezefs",
 
-It might look that way, but it's not that straight forward: there's
-a carefully constructed object dependency chain in this test that
-defines what the correct behaviour should be here.
+Could you please update description of "sb_status" entry in
+Documentation/ABI/testing/sysfs-fs-f2fs as well?
 
-What's the link count of $SCRATCH_MNT/foobar when
-$SCRATCH_MNT/qwerty is present after recovery? Is it 1 or 2?  Does
-$SCRATCH_MNT/foobar_link exist?  And if $SCRATCH_MNT/foobar_link
-exists, and the link count is 2. The test doesn't even look at these
-things, but if user.attr1 is not present, it means that foobar_link
-and qwerty are present, $SCRATCH_MNT has a link count of 5 and
-foobar has a link count of 2 because that's the dependency chain
-that leads to the user.attr1 removal being recovered correctly.
+Thanks,
 
-So what does SCRATCH_MNT actually contain when f2fs fails this test?
-
-These depedencies exist because we can't just randomly re-order
-recovery of modifications to individual inodes and certain
-operations create atomic change dependencies between inodes. It's
-those atomic change dependencies that this test is actually
-exercising.  i.e. the link count changes tie directory modifications
-to inode modifications and this creates cross-object ordering
-dependencies down the line that fsync then exposes. That's what the
-second part of this test is actually exercising....
-
-Cheers,
-
-Dave.
--- 
-Dave Chinner
-david@fromorbit.com
+>   };
+>   
+>   static int stat_show(struct seq_file *s, void *v)
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 68d791ec8b27..da729f53daa8 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1293,6 +1293,7 @@ enum {
+>   	SBI_QUOTA_SKIP_FLUSH,			/* skip flushing quota in current CP */
+>   	SBI_QUOTA_NEED_REPAIR,			/* quota file may be corrupted */
+>   	SBI_IS_RESIZEFS,			/* resizefs is in process */
+> +	SBI_IS_FREEZING,			/* freezefs is in process */
+>   };
+>   
+>   enum {
+> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> index ab8e0c06c78c..71f232dcf3c2 100644
+> --- a/fs/f2fs/inode.c
+> +++ b/fs/f2fs/inode.c
+> @@ -778,7 +778,8 @@ void f2fs_evict_inode(struct inode *inode)
+>   	f2fs_remove_ino_entry(sbi, inode->i_ino, UPDATE_INO);
+>   	f2fs_remove_ino_entry(sbi, inode->i_ino, FLUSH_INO);
+>   
+> -	sb_start_intwrite(inode->i_sb);
+> +	if (!is_sbi_flag_set(sbi, SBI_IS_FREEZING))
+> +		sb_start_intwrite(inode->i_sb);
+>   	set_inode_flag(inode, FI_NO_ALLOC);
+>   	i_size_write(inode, 0);
+>   retry:
+> @@ -809,7 +810,8 @@ void f2fs_evict_inode(struct inode *inode)
+>   		if (dquot_initialize_needed(inode))
+>   			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+>   	}
+> -	sb_end_intwrite(inode->i_sb);
+> +	if (!is_sbi_flag_set(sbi, SBI_IS_FREEZING))
+> +		sb_end_intwrite(inode->i_sb);
+>   no_delete:
+>   	dquot_drop(inode);
+>   
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 8e3840973077..4b570b5c2674 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -1663,11 +1663,15 @@ static int f2fs_freeze(struct super_block *sb)
+>   	/* ensure no checkpoint required */
+>   	if (!llist_empty(&F2FS_SB(sb)->cprc_info.issue_list))
+>   		return -EINVAL;
+> +
+> +	/* to avoid deadlock on f2fs_evict_inode->SB_FREEZE_FS */
+> +	set_sbi_flag(F2FS_SB(sb), SBI_IS_FREEZING);
+>   	return 0;
+>   }
+>   
+>   static int f2fs_unfreeze(struct super_block *sb)
+>   {
+> +	clear_sbi_flag(F2FS_SB(sb), SBI_IS_FREEZING);
+>   	return 0;
+>   }
+>   
 
 
 _______________________________________________
