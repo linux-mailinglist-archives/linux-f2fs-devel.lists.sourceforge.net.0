@@ -2,69 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 980C54D3F64
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Mar 2022 03:51:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8BF24D3F69
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Mar 2022 03:52:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nS8u4-0003nD-Ke; Thu, 10 Mar 2022 02:51:47 +0000
+	id 1nS8uw-0006Pw-4V; Thu, 10 Mar 2022 02:52:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nS8u3-0003n7-Db
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Mar 2022 02:51:46 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nS8uv-0006Pp-Fv
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Mar 2022 02:52:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tBBd3QLqppysp8lqf9pQNJmYmXskWgU7SGEz8Skjdkc=; b=M6gz7xEQ3Nkn7nF28HwlcXlv7P
- T/+TjMbB3tuC8F7kcGkvtpYbLs301GZqP67oKzhyyg9/bQP4qmSECE8042qjlin2OBNqYnKYHMZqS
- uf/0M6GmZ6/Dv9tk/bRMhk2MnCIOXv4FyJGm+pFvqGbgZYG0+MaVVSYS3qI/o6nB6d1I=;
+ bh=V1oeC4nusLmxbGSdtSvxcwfue4tToad/PIZRfqBjnVY=; b=NbliU+s6fiw61oJESzncEPXszP
+ JQ0JoWOLyNgsvX9Otn/j2y/QpAPWoJ/PMfjzRoY/oimOufNTC0TFutNt8iynYW7mMItYLe8qaPpTS
+ 4BTfhG84s/SUOLuArdar88la5BVkhejejGkX33NZ/G9Yof9oLhCOUD9z9hw6adob5dX8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tBBd3QLqppysp8lqf9pQNJmYmXskWgU7SGEz8Skjdkc=; b=GlMd1ZceMjM1icUN6U9040oQeC
- h7fubTQ545fIlYMnbdArZpHb3kBwT5/wP1J3P7UwA8lzQwbzQeN+gd1EUQlUI1SoAWsgLIlhmbl2L
- jof2HGcwnzUK+8hqRHPJB1OWIEqSjhKYcmylWZid3vLf3GXRJbzE+exo+8kFanUBXrmE=;
+ bh=V1oeC4nusLmxbGSdtSvxcwfue4tToad/PIZRfqBjnVY=; b=hZM/FuMYUYHJx4eCSDkB7Kcznj
+ iPVJRinGnMyhbTPTflWKU6MBXBWngquHSx5RKB3WyVclzcyJXK8XKLzc/OVjWvBznE8a87rsoq5Ja
+ 7bg7bq0qvJa0AJtV35+Bf4CgMeehtETK6j0bZjd1j8hq4yS2qro1FaoJtUuAtVJR2X14=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nS8u1-00ARr3-DJ
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Mar 2022 02:51:46 +0000
+ id 1nS8ur-0002ZQ-8P
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 10 Mar 2022 02:52:39 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 26037614D4
+ by dfw.source.kernel.org (Postfix) with ESMTPS id DC8D5614FE
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 10 Mar 2022 02:51:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F309C340E8;
- Thu, 10 Mar 2022 02:51:34 +0000 (UTC)
+ Thu, 10 Mar 2022 02:52:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3AEBDC340E8;
+ Thu, 10 Mar 2022 02:52:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1646880694;
- bh=wnMbY2M5xbXyRTNGfw/R/oyMLMef861Nh511DGSVEUY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=b4LYAoe7BpzUz5yzavMhQrLSYbktYNURouVVoJvApDaEtt2v2S3r7gQvTuXEG5Qp4
- kntjBeYSqVKJ86Xi9eOe9d7mza7ec9rlDiqmAQWvJxw0N84T+QO8IKXAlGhqCIQ+e9
- 2i6ui4O4+CpwErc+Kjn1ky93AYAVO9V0FDV/Y099Bx9cNTPdrmG/Q6Y3pBVEOEe3Ut
- 3v1+YacxfoW5tLpB1exeiJt7QWyvuxwCfSQK4PeE0T55isKef/WdtmSiT2mOz0YRW8
- g8Y7x/w4LJm2qUdSuLFkR/EN80j1EKYQbCVR3OYNVVXRHruFqOV7TRseNFKOAoTv/h
- dlBWvsY9hoStQ==
-Date: Wed, 9 Mar 2022 18:51:32 -0800
+ s=k20201202; t=1646880751;
+ bh=HpVTTTr8PbusXmul2H66Jzw0dd3D6fNFf0OwnRc1hII=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=f4MWATkQ+7vf8dtfeA81v0X/sgvqFAu+mM4dunCMdO8EAU2Y4LotDp/fkVC0H9HeO
+ aUPaIIEPx92v6JQd7DetqSe6bQQBKE19S0mUnQcs7nSpEVh4bhsW9Yi1tNZjwWIdmR
+ 3CE728pFYvQ5y0l3GwP2iKSOVjIMEVXHi/RD1THzMRWHh0agFf4W5DOH6oIUz66mPr
+ P4HgUoL+IeVvZ5zXdX80GHxUq6ayMUCRSPclsuJH9ZOIA10ec6X1l+dcSpQVFpgOie
+ KOrjP9Q0VSmGoARLl5LhsBlIcDhOlsqpdLPCpvAZ9X+vMPncAK5WrKw/yiIV3TRCbd
+ eSXe+HjxrYxwg==
+Date: Wed, 9 Mar 2022 18:52:29 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <YilntIMrQchFfq9n@google.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <Yiln7Q/YgCzw1y9G@google.com>
 References: <20220309214834.3408741-1-jaegeuk@kernel.org>
- <20220309214834.3408741-2-jaegeuk@kernel.org>
- <7b12573b-cad4-45b0-9e8a-9cc40a08b856@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <7b12573b-cad4-45b0-9e8a-9cc40a08b856@kernel.org>
+In-Reply-To: <20220309214834.3408741-1-jaegeuk@kernel.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,16 +70,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 03/10, Chao Yu wrote: > On 2022/3/10 5:48, Jaegeuk Kim
- wrote: > > [14696.634553] task:cat state:D stack: 0 pid:1613738 ppid:1613735
- flags:0x00000004 > > [14696.638285] Call Trace: > > [14696.639038 [...] 
+ Content preview:  DIO preallocates physical blocks before writing data, but
+ if an error occurrs or power-cut happens, we can see block contents from the
+ disk. This patch tries to fix it by 1) turning to buffered writes [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -90,8 +88,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nS8u1-00ARr3-DJ
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: use spin_lock to avoid hang
+X-Headers-End: 1nS8ur-0002ZQ-8P
+Subject: Re: [f2fs-dev] [PATCH 1/2 v2] f2fs: do not expose unwritten blocks
+ to user by DIO
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,73 +102,153 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/10, Chao Yu wrote:
-> On 2022/3/10 5:48, Jaegeuk Kim wrote:
-> > [14696.634553] task:cat             state:D stack:    0 pid:1613738 ppid:1613735 flags:0x00000004
-> > [14696.638285] Call Trace:
-> > [14696.639038]  <TASK>
-> > [14696.640032]  __schedule+0x302/0x930
-> > [14696.640969]  schedule+0x58/0xd0
-> > [14696.641799]  schedule_preempt_disabled+0x18/0x30
-> > [14696.642890]  __mutex_lock.constprop.0+0x2fb/0x4f0
-> > [14696.644035]  ? mod_objcg_state+0x10c/0x310
-> > [14696.645040]  ? obj_cgroup_charge+0xe1/0x170
-> > [14696.646067]  __mutex_lock_slowpath+0x13/0x20
-> > [14696.647126]  mutex_lock+0x34/0x40
-> > [14696.648070]  stat_show+0x25/0x17c0 [f2fs]
-> > [14696.649218]  seq_read_iter+0x120/0x4b0
-> > [14696.650289]  ? aa_file_perm+0x12a/0x500
-> > [14696.651357]  ? lru_cache_add+0x1c/0x20
-> > [14696.652470]  seq_read+0xfd/0x140
-> > [14696.653445]  full_proxy_read+0x5c/0x80
-> > [14696.654535]  vfs_read+0xa0/0x1a0
-> > [14696.655497]  ksys_read+0x67/0xe0
-> > [14696.656502]  __x64_sys_read+0x1a/0x20
-> > [14696.657580]  do_syscall_64+0x3b/0xc0
-> > [14696.658671]  entry_SYSCALL_64_after_hwframe+0x44/0xae
-> > [14696.660068] RIP: 0033:0x7efe39df1cb2
-> > [14696.661133] RSP: 002b:00007ffc8badd948 EFLAGS: 00000246 ORIG_RAX: 0000000000000000
-> > [14696.662958] RAX: ffffffffffffffda RBX: 0000000000020000 RCX: 00007efe39df1cb2
-> > [14696.664757] RDX: 0000000000020000 RSI: 00007efe399df000 RDI: 0000000000000003
-> > [14696.666542] RBP: 00007efe399df000 R08: 00007efe399de010 R09: 00007efe399de010
-> > [14696.668363] R10: 0000000000000022 R11: 0000000000000246 R12: 0000000000000000
-> > [14696.670155] R13: 0000000000000003 R14: 0000000000020000 R15: 0000000000020000
-> > [14696.671965]  </TASK>
-> > [14696.672826] task:umount          state:D stack:    0 pid:1614985 ppid:1614984 flags:0x00004000
-> > [14696.674930] Call Trace:
-> > [14696.675903]  <TASK>
-> > [14696.676780]  __schedule+0x302/0x930
-> > [14696.677927]  schedule+0x58/0xd0
-> > [14696.679019]  schedule_preempt_disabled+0x18/0x30
-> > [14696.680412]  __mutex_lock.constprop.0+0x2fb/0x4f0
-> > [14696.681783]  ? destroy_inode+0x65/0x80
-> > [14696.683006]  __mutex_lock_slowpath+0x13/0x20
-> > [14696.684305]  mutex_lock+0x34/0x40
-> > [14696.685442]  f2fs_destroy_stats+0x1e/0x60 [f2fs]
-> > [14696.686803]  f2fs_put_super+0x158/0x390 [f2fs]
-> > [14696.688238]  generic_shutdown_super+0x7a/0x120
-> > [14696.689621]  kill_block_super+0x27/0x50
-> > [14696.690894]  kill_f2fs_super+0x7f/0x100 [f2fs]
-> > [14696.692311]  deactivate_locked_super+0x35/0xa0
-> > [14696.693698]  deactivate_super+0x40/0x50
-> > [14696.694985]  cleanup_mnt+0x139/0x190
-> > [14696.696209]  __cleanup_mnt+0x12/0x20
-> > [14696.697390]  task_work_run+0x64/0xa0
-> > [14696.698587]  exit_to_user_mode_prepare+0x1b7/0x1c0
-> > [14696.700053]  syscall_exit_to_user_mode+0x27/0x50
-> > [14696.701418]  do_syscall_64+0x48/0xc0
-> > [14696.702630]  entry_SYSCALL_64_after_hwframe+0x44/0xae
-> 
-> Any race case here? I didn't catch the root cause here...
+DIO preallocates physical blocks before writing data, but if an error occurrs
+or power-cut happens, we can see block contents from the disk. This patch tries
+to fix it by 1) turning to buffered writes for DIO into holes, 2) truncating
+unwritten blocks from error or power-cut.
 
-This is the only clue that I could use. :(
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ - log from v1: added documentation
 
-> Thanks,
+ fs/f2fs/data.c  |  5 ++++-
+ fs/f2fs/f2fs.h  |  5 +++++
+ fs/f2fs/file.c  | 27 ++++++++++++++++++---------
+ fs/f2fs/inode.c |  8 ++++++++
+ 4 files changed, 35 insertions(+), 10 deletions(-)
+
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 3db0f3049b90..9c867de1ec29 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1543,8 +1543,11 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+ 					flag != F2FS_GET_BLOCK_DIO);
+ 				err = __allocate_data_block(&dn,
+ 							map->m_seg_type);
+-				if (!err)
++				if (!err) {
++					if (flag == F2FS_GET_BLOCK_PRE_DIO)
++						file_need_truncate(inode);
+ 					set_inode_flag(inode, FI_APPEND_WRITE);
++				}
+ 			}
+ 			if (err)
+ 				goto sync_out;
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 6f196621f772..d7435fcb9658 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -654,6 +654,7 @@ enum {
+ #define FADVISE_KEEP_SIZE_BIT	0x10
+ #define FADVISE_HOT_BIT		0x20
+ #define FADVISE_VERITY_BIT	0x40
++#define FADVISE_TRUNC_BIT	0x80
+ 
+ #define FADVISE_MODIFIABLE_BITS	(FADVISE_COLD_BIT | FADVISE_HOT_BIT)
+ 
+@@ -681,6 +682,10 @@ enum {
+ #define file_is_verity(inode)	is_file(inode, FADVISE_VERITY_BIT)
+ #define file_set_verity(inode)	set_file(inode, FADVISE_VERITY_BIT)
+ 
++#define file_should_truncate(inode)	is_file(inode, FADVISE_TRUNC_BIT)
++#define file_need_truncate(inode)	set_file(inode, FADVISE_TRUNC_BIT)
++#define file_dont_truncate(inode)	clear_file(inode, FADVISE_TRUNC_BIT)
++
+ #define DEF_DIR_LEVEL		0
+ 
+ enum {
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 808a7c24d993..e1445cf915ea 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1687,6 +1687,7 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
+ 
+ 		map.m_seg_type = CURSEG_COLD_DATA_PINNED;
+ 		err = f2fs_map_blocks(inode, &map, 1, F2FS_GET_BLOCK_PRE_DIO);
++		file_dont_truncate(inode);
+ 
+ 		up_write(&sbi->pin_sem);
+ 
+@@ -4257,6 +4258,13 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter)
+ 	/* If it will be an out-of-place direct write, don't bother. */
+ 	if (dio && f2fs_lfs_mode(sbi))
+ 		return 0;
++	/*
++	 * Don't preallocate holes aligned to DIO_SKIP_HOLES which turns into
++	 * buffered IO, if DIO meets any holes.
++	 */
++	if (dio && i_size_read(inode) &&
++		(F2FS_BYTES_TO_BLK(pos) < F2FS_BLK_ALIGN(i_size_read(inode))))
++		return 0;
+ 
+ 	/* No-wait I/O can't allocate blocks. */
+ 	if (iocb->ki_flags & IOCB_NOWAIT)
+@@ -4292,8 +4300,8 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter)
+ 	}
+ 
+ 	ret = f2fs_map_blocks(inode, &map, 1, flag);
+-	/* -ENOSPC is only a fatal error if no blocks could be allocated. */
+-	if (ret < 0 && !(ret == -ENOSPC && map.m_len > 0))
++	/* -ENOSPC|-EDQUOT are fine to report the number of allocated blocks. */
++	if (ret < 0 && !((ret == -ENOSPC || ret == -EDQUOT) && map.m_len > 0))
+ 		return ret;
+ 	if (ret == 0)
+ 		set_inode_flag(inode, FI_PREALLOCATED_ALL);
+@@ -4359,20 +4367,21 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+ 	/* Possibly preallocate the blocks for the write. */
+ 	target_size = iocb->ki_pos + iov_iter_count(from);
+ 	preallocated = f2fs_preallocate_blocks(iocb, from);
+-	if (preallocated < 0) {
++	if (preallocated < 0)
+ 		ret = preallocated;
+-		goto out_unlock;
+-	}
+-
+-	ret = __generic_file_write_iter(iocb, from);
++	else
++		ret = __generic_file_write_iter(iocb, from);
+ 
+ 	/* Don't leave any preallocated blocks around past i_size. */
+-	if (preallocated > 0 && i_size_read(inode) < target_size) {
++	if (preallocated && i_size_read(inode) < target_size) {
+ 		down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+ 		filemap_invalidate_lock(inode->i_mapping);
+-		f2fs_truncate(inode);
++		if (!f2fs_truncate(inode))
++			file_dont_truncate(inode);
+ 		filemap_invalidate_unlock(inode->i_mapping);
+ 		up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
++	} else {
++		file_dont_truncate(inode);
+ 	}
+ 
+ 	clear_inode_flag(inode, FI_PREALLOCATED_ALL);
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index 0f8b2df3e1e0..6998eb1d6bdb 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -544,6 +544,14 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+ 		goto bad_inode;
+ 	}
+ 	f2fs_set_inode_flags(inode);
++
++	if (file_should_truncate(inode)) {
++		ret = f2fs_truncate(inode);
++		if (ret)
++			goto bad_inode;
++		file_dont_truncate(inode);
++	}
++
+ 	unlock_new_inode(inode);
+ 	trace_f2fs_iget(inode);
+ 	return inode;
+-- 
+2.34.1.400.ga245620fadb-goog
+
 
 
 _______________________________________________
