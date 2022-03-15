@@ -2,92 +2,117 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1204D4D97B7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Mar 2022 10:35:05 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07D794D98AD
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Mar 2022 11:25:54 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nU3S3-0000X2-HN; Tue, 15 Mar 2022 09:34:59 +0000
+	id 1nU4NC-0003Nc-AB; Tue, 15 Mar 2022 10:25:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <sunke32@huawei.com>) id 1nU3S2-0000Ww-BU
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Mar 2022 09:34:58 +0000
+ (envelope-from <qkrwngud825@gmail.com>) id 1nU4N1-0003NR-FE
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Mar 2022 10:25:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XMRm0As4TuarndC0bWoXVkRfSQEUkWg/gEYzfUQdjfo=; b=F42LB9rcqd0rvJRs86+GulPBch
- ji1yw1OEktmcl6OzDMq87UOjmhsgiTWv4FBQAWa5cb6NhXi5MiFrwc4dcArLmJAI1nexofa2HR3Rn
- fyPyvc1lMU/7kLPTYhsRBc1eI0xLcFEFPs7PKglYvNrbkL/d2fy2web3qGT7atiGIb38=;
+ bh=0SrEoxUl6uShnpGnBfpWlhgfXURbqr+joJXpVwxfigc=; b=IaciuBjuBRa9iWV+YyqEEFU3p/
+ DsxnOiQKSvdCNfvZAOud05cC1/hezBcAgyedssz/qH+jbjkfbYSaM5KmL5EuJXZuQbIW82HChw5pU
+ ibpztlMGqHyL9QwVoTISpEW14bKnC+YPEFgZ8IDTL/rByO4usis5wz2O5dp/9YPFUJS0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XMRm0As4TuarndC0bWoXVkRfSQEUkWg/gEYzfUQdjfo=; b=TNsK8KHlVRgMn4TyM9KT+n/17O
- W+bL/OC54tznSs+FJsaybhmkPy2SLJqw2ZLo1hOkm/O5/MXQru7hgqb+D7dE2CaBoLAfNRy51Bfmu
- JgaP7jXWSQm5Ezvej7QFAPuHDgamut8c77XskorG9LU1wPTufKeTxTFEbtUtSW+DDvx0=;
-Received: from szxga02-in.huawei.com ([45.249.212.188])
+ bh=0SrEoxUl6uShnpGnBfpWlhgfXURbqr+joJXpVwxfigc=; b=l/CpAMnQ6TQSHJuPhI381jwYIi
+ n9tXM/BX6Yskp013nTOHBxK9ii6Yyvx55lpYEnof65qzwEZ0G+ZSWogoVlQ9xcPWJUjFOBdc7du0/
+ WNSN+m9jPTgjaZbCPJ3ckii4mj2Oaz7eoGzSlD6pDBQaNbpqh68nzVxZX/eO/JNTNOho=;
+Received: from mail-ej1-f52.google.com ([209.85.218.52])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nU3Zw-00GXxD-IK
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Mar 2022 09:34:57 +0000
-Received: from kwepemi500022.china.huawei.com (unknown [172.30.72.54])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4KHp995FHPzBrn5;
- Tue, 15 Mar 2022 17:32:45 +0800 (CST)
-Received: from kwepemm600010.china.huawei.com (7.193.23.86) by
- kwepemi500022.china.huawei.com (7.221.188.64) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Tue, 15 Mar 2022 17:34:45 +0800
-Received: from [10.174.178.31] (10.174.178.31) by
- kwepemm600010.china.huawei.com (7.193.23.86) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 15 Mar 2022 17:34:45 +0800
-To: Chao Yu <chao.yu@oppo.com>, <fstests@vger.kernel.org>, <guan@eryu.me>
-References: <20220311094315.2476774-1-sunke32@huawei.com>
- <de79517f-4fa6-c409-42d4-6187eb968e0e@oppo.com>
-Message-ID: <690fc25e-263e-5c7a-2bd0-55fa06c85e23@huawei.com>
-Date: Tue, 15 Mar 2022 17:34:44 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nU4My-00GeB9-UY
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Mar 2022 10:25:38 +0000
+Received: by mail-ej1-f52.google.com with SMTP id bg10so40178240ejb.4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 15 Mar 2022 03:25:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=0SrEoxUl6uShnpGnBfpWlhgfXURbqr+joJXpVwxfigc=;
+ b=JP9+zXb7yTMovtkHc+F9n/WQZxmEBWjLPuUmIOIqOLas3freKMDnhPKLX7uP09qP83
+ /RAFDWOo+nF2ZxllDB664cp0G1ioRnFVhFxQmqXNCT4rOGLJlmARRK9TjNoUYlOxzjg+
+ z3B2kZ7zPuCDzYOVJvyxC6KGN/0Vmy1L1b+Xdc+zgoKlK/pbHoZs6g7v1ubUpKxod3iJ
+ 7riQtYH3USX6lrVLC3lRiMUHt1O9inKSwUe1udicXGVUXecpk9XmsYQlzI35brL6N7e6
+ 3dKwC3KF/btn7FMG98fdBcF2GG1XmsndJY7BjUU0RvNT/4ElEES4wKfz/51GW8qYYybu
+ yzGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=0SrEoxUl6uShnpGnBfpWlhgfXURbqr+joJXpVwxfigc=;
+ b=tWJuk9I6uz0ZWZHaOEfBmNIAbSxcjqa4gFk8a1KaYaoXWjIhW0lNAZVsHKkAB2z19y
+ Vzt9GDOL+dd4Ve5E7HIcz7PEBw9yF/YpR3wvBs98D7AOdf77bfQtjA9dgLPfs/k76bkz
+ An2gd/s5fx+agVFCYaSyddqak9aZ1K2luB5LrWQwFwLeO7gnlBLI59Cau2wPddspOSxC
+ 6edUirTtXII7hURPylmBVypRU9Fk2ZEnew/X3Dt8cCaG9UJ9h91gQ99xwqalayi+/js7
+ c23BAZLM53y0/OzebV61bx1ZgjbEA/3cyLHb9eqopFwg/LBoXcD5pMJh4B/elR7o1pGJ
+ zqUg==
+X-Gm-Message-State: AOAM5336sDHQPOgBg0oxjD6smJAHOd+35NXVtgd4SZ1EnJSJm5YVfSFU
+ htt/PB+rQ6eDTUFCcAlRSiFlXle+48xFV6MmL6I=
+X-Google-Smtp-Source: ABdhPJxC+7sO2vdtCa2koYvBLBKkk92JWznBH2xkQNG49w7pkgDtF2wcqoieRKBXMAe3+eWmaNUDuwAyMllbZI0sLyU=
+X-Received: by 2002:a17:907:6096:b0:6da:68d2:327f with SMTP id
+ ht22-20020a170907609600b006da68d2327fmr22070363ejc.761.1647339930130; Tue, 15
+ Mar 2022 03:25:30 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <de79517f-4fa6-c409-42d4-6187eb968e0e@oppo.com>
-X-Originating-IP: [10.174.178.31]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
- kwepemm600010.china.huawei.com (7.193.23.86)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -4.3 (----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+References: <CAD14+f2nBZtLfLC6CwNjgCOuRRRjwzttp3D3iK4Of+1EEjK+cw@mail.gmail.com>
+ <15c6c075-7ed1-db3d-e9a3-d2beaa48577f@kernel.org>
+ <CAD14+f1sr=kN_d59MGtrCJ8e-GAxzPXsc=j2TP6ChkAccS9hZg@mail.gmail.com>
+ <376d12ed-afd0-41d7-495c-054bfd24d5d1@kernel.org>
+In-Reply-To: <376d12ed-afd0-41d7-495c-054bfd24d5d1@kernel.org>
+From: Juhyung Park <qkrwngud825@gmail.com>
+Date: Tue, 15 Mar 2022 19:25:18 +0900
+Message-ID: <CAD14+f3SnZir_Q7pyVzFZ6zHJendYyxYfGaxP9iLEDQuPE=AZw@mail.gmail.com>
+To: Chao Yu <chao@kernel.org>
+X-Spam-Score: 1.3 (+)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  在 2022/3/15 12:01, Chao Yu 写道: > On 2022/3/11 17:43,
-    Sun Ke via Linux-f2fs-devel wrote: >> The test fail on f2fs: >>      
-    xattr names and values after second fsync log replay: >>     � [...] 
- 
- Content analysis details:   (-4.3 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  Hi Chao, On Tue, Mar 15, 2022 at 5:45 PM Chao Yu wrote: >
+ > Hi Juhyung, > > On 2022/3/15 16:37, Juhyung Park wrote: > > Hi Chao, > >
+ > > I actually have never used compression on f2fs yet and this image is
+ > [...] Content analysis details:   (1.3 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
-                             [45.249.212.188 listed in wl.mailspike.net]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
-                             medium trust
-                             [45.249.212.188 listed in list.dnswl.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.3 HK_RANDOM_FROM         From username looks random
+ 1.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.218.52 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1nU3Zw-00GXxD-IK
-Subject: Re: [f2fs-dev] [PATCH v2] generic/066: attr1 is still there after
- log replay on f2fs
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [qkrwngud825[at]gmail.com]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [qkrwngud825[at]gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.52 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1nU4My-00GeB9-UY
+Subject: Re: [f2fs-dev] EIO returned when reading files from R/O,
+ compressed f2fs image
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,52 +124,268 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Sun Ke via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Sun Ke <sunke32@huawei.com>
-Cc: jaegeuk@kernel.org, david@fromorbit.com,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-CgrlnKggMjAyMi8zLzE1IDEyOjAxLCBDaGFvIFl1IOWGmemBkzoKPiBPbiAyMDIyLzMvMTEgMTc6
-NDMsIFN1biBLZSB2aWEgTGludXgtZjJmcy1kZXZlbCB3cm90ZToKPj4gVGhlIHRlc3QgZmFpbCBv
-biBmMmZzOgo+PiDCoMKgwqDCoMKgIHhhdHRyIG5hbWVzIGFuZCB2YWx1ZXMgYWZ0ZXIgc2Vjb25k
-IGZzeW5jIGxvZyByZXBsYXk6Cj4+IMKgwqDCoMKgwqAgIyBmaWxlOiBTQ1JBVENIX01OVC9mb29i
-YXIKPj4gwqDCoMKgwqAgK3VzZXIuYXR0cjE9InZhbDEiCj4+IMKgwqDCoMKgwqAgdXNlci5hdHRy
-Mz0idmFsMyIKPj4KPj4gYXR0cjEgaXMgc3RpbGwgdGhlcmUgYWZ0ZXIgbG9nIHJlcGxheS4gZjJm
-cyBkb2Vzbid0IHN1cHBvcnQgZnMtb3AgbGV2ZWwKPj4gdHJhbnNhY3Rpb24gZnVuY3Rpb25hbGl0
-eS4gc28gaXQgaGF2ZSBubyB3YXkgdG8gcGVyc2lzdCBhbGwgbWV0YWRhdGEKPj4gdXBkYXRlcyBp
-biBvbmUgdHJhbnNhY3Rpb24uwqAgV2UgY2FuIHVzZSAiZmFzdGJvb3QiIG1vdW50b3B0aW9uIGZv
-ciB0aGlzCj4+IGNhc2UsIHNvIGR1cmluZyBsYXN0IGZzeW5jIG9uIHF3ZXJ0eSwgZjJmcyBjYW4g
-dHJpZ2dlciBhIGNoZWNrcG9pbnQKPj4gd2hpY2ggd2lsbCBwZXJzaXN0IGFsbCBtZXRhZGF0YSB1
-cGRhdGVzIGJlZm9yZSBmc3luYygpLgo+Pgo+PiBTdWdnZXN0ZWQtYnk6IENoYW8gWXUgPGNoYW9A
-a2VybmVsLm9yZz4KPj4gU2lnbmVkLW9mZi1ieTogU3VuIEtlIDxzdW5rZTMyQGh1YXdlaS5jb20+
-Cj4+IC0tLQo+PiDCoCB0ZXN0cy9nZW5lcmljLzA2NiB8IDggKysrKysrKysKPj4gwqAgMSBmaWxl
-IGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvdGVzdHMvZ2VuZXJp
-Yy8wNjYgYi90ZXN0cy9nZW5lcmljLzA2Ngo+PiBpbmRleCAxMDVhN2FjZC4uYjg0NjUxMDEgMTAw
-NzU1Cj4+IC0tLSBhL3Rlc3RzL2dlbmVyaWMvMDY2Cj4+ICsrKyBiL3Rlc3RzL2dlbmVyaWMvMDY2
-Cj4+IEBAIC01Niw2ICs1NiwxNCBAQCBzeW5jCj4+IMKgICRTRVRGQVRUUl9QUk9HIC14IHVzZXIu
-YXR0cjIgJFNDUkFUQ0hfTU5UL2Zvb2Jhcgo+PiDCoCAkWEZTX0lPX1BST0cgLWMgImZzeW5jIiAk
-U0NSQVRDSF9NTlQvZm9vYmFyCj4+ICsjIGYyZnMgZG9lc24ndCBzdXBwb3J0IGZzLW9wIGxldmVs
-IHRyYW5zYWN0aW9uIGZ1bmN0aW9uYWxpdHkuIHNvIGl0IAo+PiBoYXZlIG5vIHdheQo+PiArIyB0
-byBwZXJzaXN0IGFsbCBtZXRhZGF0YSB1cGRhdGVzIGluIG9uZSB0cmFuc2FjdGlvbi7CoCBXZSBj
-YW4gdXNlIAo+PiAiZmFzdGJvb3QiCj4+ICsjIG1vdW50b3B0aW9uIGZvciB0aGlzIGNhc2UsIHNv
-IGR1cmluZyBsYXN0IGZzeW5jIG9uIHF3ZXJ0eSwgZjJmcyBjYW4gCj4+IHRyaWdnZXIgYQo+PiAr
-IyBjaGVja3BvaW50IHdoaWNoIHdpbGwgcGVyc2lzdCBhbGwgbWV0YWRhdGEgdXBkYXRlcyBiZWZv
-cmUgZnN5bmMoKS4KPj4gK2lmIFsgJEZTVFlQID0gImYyZnMiIF07IHRoZW4KPj4gK8KgwqDCoCBl
-eHBvcnQgTU9VTlRfT1BUSU9OUz0iLW8gZmFzdGJvb3QiCj4gCj4gQ2FuIHdlIG1lcmdlICJmYXN0
-Ym9vdCIgd2l0aCBvcmlnaW5hbCBtb3VudCBvcHRpb25zPyBhbmQgYWZ0ZXIgdGhlIHRlc3QsIAo+
-IGhvdyBhYm91dAo+IHJlY292ZXJpbmcgdG8gb3JpZ2luYWwgbW91bnQgb3B0aW9ucz8KPiAKPiBU
-aGFua3MsCgpMaWtlIHRoaXM6CgogIGlmIFsgJEZTVFlQID0gImYyZnMiIF07IHRoZW4KLSAgICAg
-ICBleHBvcnQgTU9VTlRfT1BUSU9OUz0iLW8gZmFzdGJvb3QiCisgICAgICAgZXhwb3J0IE1PVU5U
-X09QVElPTlM9Ii1vIGZhc3Rib290ICRNT1VOVF9PUFRJT05TIgogIGZpCgpyaWdodD8KCkFuZCBJ
-IGhhdmUgdGVzdGVkIHRoYXQgdGhlcmUgaXMgbm8gbmVlZCB0byByZWNvdmVyIHRvIG9yaWdpbmFs
-IG1vdW50IApvcHRpb25zIGFmdGVyIHRoZSB0ZXN0LiBJdCB3aWxsIGJlIHRoZSBvcmlnaW5hbCBv
-bmUgaW4gdGhlIG5leHQgdGVzdC4KClRoYW5rcywKU3VuIEtlCgo+IAo+PiArZmkKPj4gKwo+PiDC
-oCBfZmxha2V5X2Ryb3BfYW5kX3JlbW91bnQKPj4gwqAgIyBBZnRlciB0aGUgZnN5bmMgbG9nIGlz
-IHJlcGxheWVkLCB0aGUgZmlsZSBzaG91bGQgaGF2ZSBvbmx5IDIgCj4+IHhhdHRycywgdGhlIG9u
-ZXMKPiAuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-TGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3Vy
-Y2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8v
-bGludXgtZjJmcy1kZXZlbAo=
+Hi Chao,
+
+On Tue, Mar 15, 2022 at 5:45 PM Chao Yu <chao@kernel.org> wrote:
+>
+> Hi Juhyung,
+>
+> On 2022/3/15 16:37, Juhyung Park wrote:
+> > Hi Chao,
+> >
+> > I actually have never used compression on f2fs yet and this image is
+> > from an unmodified firmware taken directly from the OTA server, not
+> > made by me.
+>
+> Alright.
+>
+> >
+> > If you can tell me how to check if the file is compressed or not, I'll
+> > run it and report back.
+>
+> lsattr <target_file_path> |grep c
+>
+> You can check the flag's mean in manual of chattr.
+
+Ah, didn't know that lsattr shows compressed state.
+It seems that every single file under that system partition is
+compressed except ones with file size of < 4096, but the error only
+happens on select files.
+
+>
+> >
+> > I never had this sort of issue (a lot of multiple readers causing
+> > troubles) before with a regular R/W, uncompressed f2fs partition, so
+> > I'm guessing it has something to do with RO or compression feature.
+>
+> Agreed, maybe we can repacking image to RO one or compressed one to
+> check which one can cause this issue?
+
+Is this easy to do standalone?
+
+AOSP's ext4 image creation was already super complicated to do
+out-of-tree with their dedup and minimizing file size (so that the
+resulting image is as small as possible) thinggies going on. I think
+I've seen EROFS support but I don't know how f2fs system images are
+handled under AOSP.
+
+Also, I moved the environment to my personal laptop. It's running
+v5.15.28 with the latest f2fs-stable/linux-5.15.y merged and it still
+happens there.
+
+One weird thing that I've been able to confirm is that it seems that
+multiple readers are not the problem:
+#!/bin/bash
+
+set -v
+
+APK=system/app/some_app/some_app.apk
+
+echo 3 > /proc/sys/vm/drop_caches
+tar -pcf - $APK | cat > /dev/null     # Works!
+cp $APK /tmp                          # Works!
+
+echo 3 > /proc/sys/vm/drop_caches
+tar -pcf - $APK | cat > /dev/null     # Works!
+echo 3 > /proc/sys/vm/drop_caches
+cp $APK /tmp                          # cp: error reading
+'system/app/some_app/some_app.apk': Input/output error
+
+echo 3 > /proc/sys/vm/drop_caches
+cp $APK /tmp                          # cp: error reading
+'system/app/some_app/some_app.apk': Input/output error
+tar -pcf - $APK | cat > /dev/null     # tar:
+system/app/some_app/some_app.apk: File shrank by 3375397 bytes;
+padding with zeros
+
+echo 3 > /proc/sys/vm/drop_caches
+cp $APK /tmp                          # cp: error reading
+'system/app/some_app/some_app.apk': Input/output error
+echo 3 > /proc/sys/vm/drop_caches
+tar -pcf - $APK | cat > /dev/null     # Works!
+
+I'm guessing some system-calls that cp use causes f2fs to malfunction.
+(GNU tar is smart enough to detect if the output is /dev/null, so it
+skips the actual file read when it is piped directly to /dev/null, so
+I added `cat` in between.)
+
+Hope this new info helps.
+
+Thanks.
+
+>
+> Thanks,
+>
+> >
+> > Thanks.
+> >
+> > On Tue, Mar 15, 2022 at 5:33 PM Chao Yu <chao@kernel.org> wrote:
+> >>
+> >> On 2022/3/14 1:52, Juhyung Park wrote:
+> >>> Hi.
+> >>>
+> >>> We have a production server storing some Android firmwares over a ZFS
+> >>> file-system, and we noticed some issues when extracting firmware files
+> >>> that use f2fs for Android system partitions.
+> >>>
+> >>> This is a proprietary environment, so I cannot disclose every detail,
+> >>> so I hope you understand. I'll try to elaborate as much as I can.
+> >>>
+> >>> The server is running Ubuntu 20.04 with Linux v5.15 (recently upgraded
+> >>> from v5.13 after noticing RO feature added on v5.14 being required).
+> >>> We have a set of scripts extracting Android firmware files. The input
+> >>> is typically the OTA zip file and after going through the script, it
+> >>> extracts every file and binary image from a given file.
+> >>>
+> >>> So that includes extracting super (dynamic partition), ext4 system
+> >>> partitions with dedup enabled, and now, f2fs system partitions with RO
+> >>> and compression enabled.
+> >>>
+> >>> Our script never had to deal with f2fs before as we only started
+> >>> seeing f2fs system partitions with recently released devices.
+> >>>
+> >>> This is the f2fs mount flag after mounting with `mount -o ro
+> >>> system.raw /some/dir`:
+> >>> ro,relatime,lazytime,background_gc=on,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,extent_cache,mode=adaptive,active_logs=2,alloc_mode=reuse,checkpoint_merge,fsync_mode=posix,compress_algorithm=lz4,compress_log_size=2,compress_mode=fs,discard_unit=block
+> >>>
+> >>> There are *a lot* of files in Android firmware these days, so we try
+> >>> to parallelize parts when we can.
+> >>>
+> >>> This is a snippet of the script:
+> >>> ```
+> >>> #!/bin/bash
+> >>> <...>
+> >>> RSYNC="rsync -ahAXx --inplace --numeric-ids"
+> >>> <...>
+> >>> for val in system vendor product odm; do
+> >>>     if ! ls images/$val.raw > /dev/null 2>&1; then continue; fi
+> >>>
+> >>>     mkdir -p fs
+> >>>     cd fs
+> >>>
+> >>>     mkdir -p $val.mount tmp_$val
+> >>>     mount -o ro ../images/$val.raw $val.mount
+> >>>
+> >>>     $RSYNC $val.mount/ "$DEST_PWD/fs/$val/" &
+> >>>     echo $! > $val.pid
+> >>>     disown
+> >>>
+> >>>     cd $val.mount
+> >>>     find . -type d -exec mkdir -p "$DEST_PWD/strings/$val/"{} \;
+> >>>     find . -type d -exec mkdir -p "../tmp_$val/"{} \;
+> >>>
+> >>>     while read file; do strings "$file" > "$DEST_PWD/strings/$val/$file"
+> >>> & done < <(find . -type f | grep -v '\.apk\|\.jar\|\.zip')
+> >>>     wait
+> >>>
+> >>> <...>
+> >>>
+> >>>     cd ../
+> >>>     rm -rf tmp_$val
+> >>>     cd ../
+> >>> done
+> >>>
+> >>> wait
+> >>> <...>
+> >>> for val in system vendor product odm; do
+> >>>     if ! ls images/$val.raw > /dev/null 2>&1; then continue; fi
+> >>>     tail --pid=$(cat fs/$val.pid) -f /dev/null
+> >>>     umount fs/$val.mount
+> >>>     rmdir fs/$val.mount
+> >>>     rm -f images/$val.img images/$val.raw 2>/dev/null
+> >>> done
+> >>> ```
+> >>>
+> >>> The offending part is:
+> >>> ```
+> >>>     $RSYNC $val.mount/ "$DEST_PWD/fs/$val/" &
+> >>>     find . -type d -exec mkdir -p "$DEST_PWD/strings/$val/"{} \;
+> >>>     find . -type d -exec mkdir -p "../tmp_$val/"{} \;
+> >>>     while read file; do strings "$file" > "$DEST_PWD/strings/$val/$file"
+> >>> & done < <(find . -type f | grep -v '\.apk\|\.jar\|\.zip')
+> >>>     wait
+> >>> ```
+> >>>
+> >>> When that part is reached, the script forks thousands of new processes
+> >>> and starts reading from f2fs. (We simply decided to rely on Linux's
+> >>> task scheduler and didn't bother to limit the number of
+> >>> sub-processes.)
+> >>>
+> >>> I am able to reliably cause f2fs to return EIO on some files:
+> >>> cp: error reading './system/priv-app/some_apk_1/some_apk_1.apk':
+> >>> Input/output error
+> >>> cp: error reading './system/priv-app/some_apk_2/some_apk_2.apk':
+> >>> Input/output error
+> >>> cp: error reading './system/priv-app/some_apk_3/some_apk_3.apk':
+> >>> Input/output error
+> >>> rsync: [sender] read errors mapping
+> >>> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_1/some_apk_1.apk":
+> >>> Input/output error (5)
+> >>> rsync: [sender] read errors mapping
+> >>> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_2/some_apk_2.apk":
+> >>> Input/output error (5)
+> >>> rsync: [sender] read errors mapping
+> >>> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_3/some_apk_3.apk":
+> >>> Input/output error (5)
+> >>> rsync: [sender] read errors mapping
+> >>> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_1/some_apk_1.apk":
+> >>> Input/output error (5)
+> >>> ERROR: system/priv-app/some_apk_1/some_apk_1.apk failed verification
+> >>> -- update retained.
+> >>> rsync: [sender] read errors mapping
+> >>> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_2/some_apk_2.apk":
+> >>> Input/output error (5)
+> >>> ERROR: system/priv-app/some_apk_2/some_apk_2.apk failed verification
+> >>> -- update retained.
+> >>> rsync: [sender] read errors mapping
+> >>> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_3/some_apk_3.apk":
+> >>> Input/output error (5)
+> >>> ERROR: system/priv-app/some_apk_3/some_apk_3.apk failed verification
+> >>> -- update retained.
+> >>> rsync error: some files/attrs were not transferred (see previous
+> >>> errors) (code 23) at main.c(1333) [sender=v3.2.3-45-ga28c4558]
+> >>
+> >> Hi Juhyung,
+> >>
+> >> Do you enable compression on specified files? if so, do all EIOs come from compressed
+> >> file?
+> >>
+> >> Thanks,
+> >>
+> >>>
+> >>> The dmesg remains silent.
+> >>>
+> >>> When I modify the script a little bit and force it to run in a
+> >>> single-thread (by removing &), it runs well.
+> >>>
+> >>> I was able to confirm that it isn't a memory issue. The server has
+> >>> 50G+ of free memory, and the issue is still reliably reproducible when
+> >>> I defragment the memory by dropping caches and doing `echo 1 >
+> >>> /proc/sys/vm/compact_memory`.
+> >>>
+> >>> I wasn't able to test any recent kernels (v5.16 or v5.17) as it's
+> >>> unsupported by ZFS. And it being a production server, I am somewhat
+> >>> limited in dabbling around the kernel.
+> >>>
+> >>> I am planning to test a new kernel with v5.15 +
+> >>> f2fs-stable/linux-5.15.y merged. Meanwhile, if this is a new report or
+> >>> fixed with newer commits, I'd appreciate a tip.
+> >>>
+> >>> Thanks.
+> >>>
+> >>>
+> >>> _______________________________________________
+> >>> Linux-f2fs-devel mailing list
+> >>> Linux-f2fs-devel@lists.sourceforge.net
+> >>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
