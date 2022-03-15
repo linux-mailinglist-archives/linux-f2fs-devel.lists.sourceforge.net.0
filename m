@@ -2,80 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11E764D7B69
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Mar 2022 08:15:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 656814D918E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Mar 2022 01:31:13 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nTevi-0004TO-DI; Mon, 14 Mar 2022 07:15:45 +0000
+	id 1nTv5b-00046z-Ci; Tue, 15 Mar 2022 00:31:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <wangxiaojun11@huawei.com>) id 1nTevf-0004T2-65
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 14 Mar 2022 07:15:41 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nTv5a-00046f-FY
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Mar 2022 00:31:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=e+5wD+2TxQdBwrjtZmo8X7sq4G5aoslCZQYiZqKuEkU=; b=duPlcFnV0znkIKrM9K96ignYxR
- SJm/Z/8ndQidJly0VcblCrc31hfPz9vmz07J+ZN3Wp5LkNq+tZ9w0FKK0ftPmoGLoTeBCYK2I7SwS
- ioXHeEl+VROvhQDyez6IM8G0wpEK6uHDi+SCHbtU/hGqs1lx7a50qvyNowrOK47wnzl0=;
+ bh=SwXyqJgfjqYv89yjQWaX/2aHbMe4gu8hPHA69oG/PWY=; b=kHBVC8QlWUw5+JE18gyWfOGwk1
+ /78Wnpl0rMpVGsGnv+QBh/LtZv18LLTJBvDy9ujFiX3pyzEweRzgcXQNDAgqSjn/ugfUfBbVXF2/F
+ RX1VEL+EwZh9C7qRWThAyHVQZ5rvtFl5mS0C3x7cE/sEY7G/0Il3/554OiBHLSe6s0gM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=e+5wD+2TxQdBwrjtZmo8X7sq4G5aoslCZQYiZqKuEkU=; b=S
- awnHuOswroveM1uT6S7W9rp/S+i2XKjqmbmqMo5U0gpE3cb8eAlu634dY6SPLDdB4cq18zUo1dweW
- h6UD7dQKI3sQ5BI7vvEZCOobZ69lM8IO1Hk28J9Y7L7cDohUbudHl0vp6OAkBs8LAf7MM6NkEPadP
- Z3c0e3MFq9gkYyrs=;
-Received: from szxga02-in.huawei.com ([45.249.212.188])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=SwXyqJgfjqYv89yjQWaX/2aHbMe4gu8hPHA69oG/PWY=; b=IlCGBl54zL/hsAraMVqze8vLt6
+ 31c/xw4a+5BMQ6E5LtJSIa8dePSIzRl1cYLYzhMwr3Z+3O/IlZr+2AljQuStB58lLA+TIbvh2ZME+
+ Bt1M3aSI7pdxNOQwcl+4mlh+EpemHLNv+t1tAlCyQnLuxi4xfmh460a1Tt6GBmtae8MM=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nTevb-000192-0E
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 14 Mar 2022 07:15:41 +0000
-Received: from canpemm500005.china.huawei.com (unknown [172.30.72.53])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4KH77b0lyCzfZ0T;
- Mon, 14 Mar 2022 15:14:03 +0800 (CST)
-Received: from huawei.com (10.90.53.225) by canpemm500005.china.huawei.com
- (7.192.104.229) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.21; Mon, 14 Mar
- 2022 15:15:29 +0800
-To: <chao@kernel.org>, <jaegeuk@kernel.org>
-Date: Mon, 14 Mar 2022 15:15:15 +0800
-Message-ID: <20220314071515.93565-1-wangxiaojun11@huawei.com>
-X-Mailer: git-send-email 2.26.0.106.g9fadedd
+ id 1nTv5X-0006YY-07
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 15 Mar 2022 00:31:00 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 8699261514;
+ Tue, 15 Mar 2022 00:30:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB93FC340E9;
+ Tue, 15 Mar 2022 00:30:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1647304245;
+ bh=bLe/QVFp8radYLp9AdKDfy4+4qML8MrMtuLOt+CAuO0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ot9TTECR6aYWpF4uWO+D4wa0+GWnsvET718fhszAsM780hSUkl5XiEs5HCp8d22rZ
+ Zd5FsPXQw1GlHy2fSysa4TCfWR14Ie6d2yr5QLHj9vwpwLRNBCbEqQbgsHPy71tfjk
+ +iYP8aBFLrL0gdzoihGv+xrXUH+8Zq2ExdliChbfP863Le0CTN4Fg1l9DaorDImrXW
+ +oB+sXBlm93YiNPkTanNGFITJFyx3SuBJnXBXhF4uuBkvUGFGuZ1dalswkJz6mxlri
+ UnRgYhMRpnANEs3N+tYR640Pl5y7DAH2zZic5Xdwqtfz3g6Jk61ZwFaWhedOJxnJ1I
+ k1kk1E7zlOYow==
+Date: Mon, 14 Mar 2022 17:30:43 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Juhyung Park <qkrwngud825@gmail.com>
+Message-ID: <Yi/eMwvpeWAjwoER@google.com>
+References: <CAD14+f2nBZtLfLC6CwNjgCOuRRRjwzttp3D3iK4Of+1EEjK+cw@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.90.53.225]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
- canpemm500005.china.huawei.com (7.192.104.229)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.3 (--)
+Content-Disposition: inline
+In-Reply-To: <CAD14+f2nBZtLfLC6CwNjgCOuRRRjwzttp3D3iK4Of+1EEjK+cw@mail.gmail.com>
+X-Spam-Score: -6.7 (------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  iput() has already judged the incoming parameter, so there
- is no need to repeat the judgment here. Signed-off-by: Wang Xiaojun
- <wangxiaojun11@huawei.com>
- --- fs/f2fs/namei.c | 3 +-- 1 file changed, 1 insertion(+), 2 deletions(-)
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  Juhyung, On 03/14, Juhyung Park wrote: > Hi. > > We have a
+ production server storing some Android firmwares over a ZFS > file-system,
+ and we noticed some issues when extracting firmware files > that use f2fs
+ f [...] Content analysis details:   (-6.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.188 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [45.249.212.188 listed in wl.mailspike.net]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1nTevb-000192-0E
-Subject: [f2fs-dev] [PATCH] f2fs: remove redundant parameter judgment
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nTv5X-0006YY-07
+Subject: Re: [f2fs-dev] EIO returned when reading files from R/O,
+ compressed f2fs image
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,39 +102,165 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Wang Xiaojun via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Wang Xiaojun <wangxiaojun11@huawei.com>
 Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-iput() has already judged the incoming parameter, so there is
-no need to repeat the judgment here.
+Juhyung,
 
-Signed-off-by: Wang Xiaojun <wangxiaojun11@huawei.com>
----
- fs/f2fs/namei.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+On 03/14, Juhyung Park wrote:
+> Hi.
+> 
+> We have a production server storing some Android firmwares over a ZFS
+> file-system, and we noticed some issues when extracting firmware files
+> that use f2fs for Android system partitions.
+> 
+> This is a proprietary environment, so I cannot disclose every detail,
+> so I hope you understand. I'll try to elaborate as much as I can.
+> 
+> The server is running Ubuntu 20.04 with Linux v5.15 (recently upgraded
+> from v5.13 after noticing RO feature added on v5.14 being required).
+> We have a set of scripts extracting Android firmware files. The input
+> is typically the OTA zip file and after going through the script, it
+> extracts every file and binary image from a given file.
+> 
+> So that includes extracting super (dynamic partition), ext4 system
+> partitions with dedup enabled, and now, f2fs system partitions with RO
+> and compression enabled.
+> 
+> Our script never had to deal with f2fs before as we only started
+> seeing f2fs system partitions with recently released devices.
+> 
+> This is the f2fs mount flag after mounting with `mount -o ro
+> system.raw /some/dir`:
+> ro,relatime,lazytime,background_gc=on,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,extent_cache,mode=adaptive,active_logs=2,alloc_mode=reuse,checkpoint_merge,fsync_mode=posix,compress_algorithm=lz4,compress_log_size=2,compress_mode=fs,discard_unit=block
+> 
+> There are *a lot* of files in Android firmware these days, so we try
+> to parallelize parts when we can.
+> 
+> This is a snippet of the script:
+> ```
+> #!/bin/bash
+> <...>
+> RSYNC="rsync -ahAXx --inplace --numeric-ids"
+> <...>
+> for val in system vendor product odm; do
+>   if ! ls images/$val.raw > /dev/null 2>&1; then continue; fi
+> 
+>   mkdir -p fs
+>   cd fs
+> 
+>   mkdir -p $val.mount tmp_$val
+>   mount -o ro ../images/$val.raw $val.mount
+> 
+>   $RSYNC $val.mount/ "$DEST_PWD/fs/$val/" &
+>   echo $! > $val.pid
+>   disown
+> 
+>   cd $val.mount
+>   find . -type d -exec mkdir -p "$DEST_PWD/strings/$val/"{} \;
+>   find . -type d -exec mkdir -p "../tmp_$val/"{} \;
+> 
+>   while read file; do strings "$file" > "$DEST_PWD/strings/$val/$file"
+> & done < <(find . -type f | grep -v '\.apk\|\.jar\|\.zip')
+>   wait
+> 
+> <...>
+> 
+>   cd ../
+>   rm -rf tmp_$val
+>   cd ../
+> done
+> 
+> wait
+> <...>
+> for val in system vendor product odm; do
+>   if ! ls images/$val.raw > /dev/null 2>&1; then continue; fi
+>   tail --pid=$(cat fs/$val.pid) -f /dev/null
+>   umount fs/$val.mount
+>   rmdir fs/$val.mount
+>   rm -f images/$val.img images/$val.raw 2>/dev/null
+> done
+> ```
+> 
+> The offending part is:
+> ```
+>   $RSYNC $val.mount/ "$DEST_PWD/fs/$val/" &
+>   find . -type d -exec mkdir -p "$DEST_PWD/strings/$val/"{} \;
+>   find . -type d -exec mkdir -p "../tmp_$val/"{} \;
+>   while read file; do strings "$file" > "$DEST_PWD/strings/$val/$file"
+> & done < <(find . -type f | grep -v '\.apk\|\.jar\|\.zip')
+>   wait
+> ```
+> 
+> When that part is reached, the script forks thousands of new processes
+> and starts reading from f2fs. (We simply decided to rely on Linux's
+> task scheduler and didn't bother to limit the number of
+> sub-processes.)
+> 
+> I am able to reliably cause f2fs to return EIO on some files:
+> cp: error reading './system/priv-app/some_apk_1/some_apk_1.apk':
+> Input/output error
+> cp: error reading './system/priv-app/some_apk_2/some_apk_2.apk':
+> Input/output error
+> cp: error reading './system/priv-app/some_apk_3/some_apk_3.apk':
+> Input/output error
+> rsync: [sender] read errors mapping
+> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_1/some_apk_1.apk":
+> Input/output error (5)
+> rsync: [sender] read errors mapping
+> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_2/some_apk_2.apk":
+> Input/output error (5)
+> rsync: [sender] read errors mapping
+> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_3/some_apk_3.apk":
+> Input/output error (5)
+> rsync: [sender] read errors mapping
+> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_1/some_apk_1.apk":
+> Input/output error (5)
+> ERROR: system/priv-app/some_apk_1/some_apk_1.apk failed verification
+> -- update retained.
+> rsync: [sender] read errors mapping
+> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_2/some_apk_2.apk":
+> Input/output error (5)
+> ERROR: system/priv-app/some_apk_2/some_apk_2.apk failed verification
+> -- update retained.
+> rsync: [sender] read errors mapping
+> "/ssd/some_firmware.zip/fs/system.mount/system/priv-app/some_apk_3/some_apk_3.apk":
+> Input/output error (5)
+> ERROR: system/priv-app/some_apk_3/some_apk_3.apk failed verification
+> -- update retained.
+> rsync error: some files/attrs were not transferred (see previous
+> errors) (code 23) at main.c(1333) [sender=v3.2.3-45-ga28c4558]
+> 
+> The dmesg remains silent.
 
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index 5f213f05556d..b7c9b602bd72 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -1107,8 +1107,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
- out_old:
- 	f2fs_put_page(old_page, 0);
- out:
--	if (whiteout)
--		iput(whiteout);
-+	iput(whiteout);
- 	return err;
- }
- 
--- 
-2.26.0.106.g9fadedd
+Hmm, could you share fsck.f2fs result with the image?
 
+> 
+> When I modify the script a little bit and force it to run in a
+> single-thread (by removing &), it runs well.
+> 
+> I was able to confirm that it isn't a memory issue. The server has
+> 50G+ of free memory, and the issue is still reliably reproducible when
+> I defragment the memory by dropping caches and doing `echo 1 >
+> /proc/sys/vm/compact_memory`.
+> 
+> I wasn't able to test any recent kernels (v5.16 or v5.17) as it's
+> unsupported by ZFS. And it being a production server, I am somewhat
+> limited in dabbling around the kernel.
+> 
+> I am planning to test a new kernel with v5.15 +
+> f2fs-stable/linux-5.15.y merged. Meanwhile, if this is a new report or
+> fixed with newer commits, I'd appreciate a tip.
+> 
+> Thanks.
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
