@@ -2,75 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 703E04DAE04
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Mar 2022 11:02:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8C2D4DAE2B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Mar 2022 11:20:31 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nUQU0-0007wE-0Z; Wed, 16 Mar 2022 10:02:18 +0000
+	id 1nUQdc-0000X2-St; Wed, 16 Mar 2022 10:20:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nUQTx-0007vu-VG
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Mar 2022 10:02:16 +0000
+ (envelope-from <chao@kernel.org>) id 1nUQdc-0000Ww-0p
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Mar 2022 10:20:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9ITP14Tvv/FN6ONqVkFH5EGKUKKFYW0xSIh06VqL2gY=; b=Erksfzt3DbmsFFsyQ5fznE5mzm
- LHNBmJsx5j2Mk1+n1IbczbjHVybX1To1iTfFiL8JMBkj3h8wnLoEZCFZgVGq1DG9m4FHjsczA/FYI
- abVITwbnF/mxiePL4oNTlIdACzSp84grvTzBpDxEqDqGKdSBQqlOAYZJOT0esL49MHPs=;
+ bh=XGr49ptncj/lazavgMoufDJQLHhuybF1t0Z0WtSFbAQ=; b=XhSCWHJGz048NxW48DslWJhD6z
+ 1Ybn1yjNJEuAnn8DUrWCuUfL1jOosGnHNrfPRUoZb7pRIkGGE0EydQ9iVmGQAVU/5iAjQS60H8mUb
+ MnZCPG563RczoHEweKGTVqp56alMua0BJ+4Qs2GWMgJSQE2OGAkIQkhRkVHJwL4Q4D/E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=9ITP14Tvv/FN6ONqVkFH5EGKUKKFYW0xSIh06VqL2gY=; b=hb2cJKfiJ1DiM2EF9QBcfLNXNf
- LrI5ufofUDoNr1xueDc/KrJhgqpH9cOrPF35kwJmRgZ8a6eI9MLHZ6xPZ/wGJ9PXQ9fy47nU/WgOu
- HwB4LPoew5Xsp+6btk6CnHIw7M99S+EVEEfzpUzBi5iMePTXBOEbO/qe8yyw4a71KHUs=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=XGr49ptncj/lazavgMoufDJQLHhuybF1t0Z0WtSFbAQ=; b=W
+ 1ClNNWXo2jOhl7aJRGy92sz4XokUQULjH9DiUsu5Fo0jCMi5u8n8gxnz9qoawWNRcOiVJ9CoXKdjR
+ AAJ8mAuNmDqPyFWQoU9/DQ6yo3PdvMwzU3ANIt5yvPE15EhN47TeUZvrBwUehrxgzsHXwnY6b74P6
+ gu06sn3+IIq/AhP0=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nUQSf-00078Q-Fq
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Mar 2022 10:01:46 +0000
+ id 1nUQlP-000qRl-Vh
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Mar 2022 10:20:27 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 1C2FBB81731;
- Wed, 16 Mar 2022 10:00:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 707B5C340E9;
- Wed, 16 Mar 2022 10:00:25 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id C74436164F;
+ Wed, 16 Mar 2022 10:20:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5630C340E9;
+ Wed, 16 Mar 2022 10:20:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1647424826;
- bh=N6/eftwupi9ZKbXW+bkYAwhv2SRaTUXVuVgrSe8CGZM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=mPFL3Wk58VqFWTdOilXBrHTZxlRoEgMaA0zVPFBA89WMx+mQ7eYV6TrTpf8nh24+I
- Ddf3RHzXEJIo6C8nsQJUFjTddr6asxrQLtPEgMEbqHSowu2UZ+nZX7HN8MupI9xkIS
- iOif5eYC3ycewGAsZ4ERysaZxPkQ38Wv6CfF2X1Ot2dYK2fRFjRizlntDpoj7LVWdl
- f6V4cgq3WLXVh6ZvyJqGNBFibqbzp2J0NHOR/oBks0g4mIhrK7Z4+JmWpmjPex8qGE
- mrDy5kYVKgwU9HpH0Szi92ZrDhYGGd3ZeZf9YbZVRX2/NfIqaP3bR16mVWnivTFmwB
- yrGOjHltvociQ==
-Message-ID: <708c18e8-8497-6557-c0d9-8a39f30459cd@kernel.org>
-Date: Wed, 16 Mar 2022 18:00:22 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.2
-Content-Language: en-US
-To: Juhyung Park <qkrwngud825@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <CAD14+f2nBZtLfLC6CwNjgCOuRRRjwzttp3D3iK4Of+1EEjK+cw@mail.gmail.com>
- <15c6c075-7ed1-db3d-e9a3-d2beaa48577f@kernel.org>
- <CAD14+f1sr=kN_d59MGtrCJ8e-GAxzPXsc=j2TP6ChkAccS9hZg@mail.gmail.com>
- <376d12ed-afd0-41d7-495c-054bfd24d5d1@kernel.org>
- <CAD14+f3SnZir_Q7pyVzFZ6zHJendYyxYfGaxP9iLEDQuPE=AZw@mail.gmail.com>
- <CAD14+f1_smUWHgZRffuTNfsmCk-j_LL_vw5RuWffGdnd=vP8BA@mail.gmail.com>
- <YjD78BmHAKBHj3wN@google.com>
- <CAD14+f2nSy710HggEVfzRAipL_7F=HHmqc9mG4oyLrn2=AhzXw@mail.gmail.com>
+ s=k20201202; t=1647426009;
+ bh=/O1Nhrg2OVtXL/SSKJRs6a8jMBlhRF0EgxSsjcaNu0Y=;
+ h=From:To:Cc:Subject:Date:From;
+ b=S+isYU66SstsukJ6kfyz5DNuehqto6YJ82XjSjYa1hOR1/vGmQhj7T7t0+HHCzKv9
+ 4anjJIqogV0DqfF/UCRNamOcXgywYRWuvWy/6mGjzbYK2SpkwAIyiLB3exSIPVzhz+
+ tR0rgegTTn4RtH6YaY8dySNLPMd408f55Yj45gujmlvVBZw/m+HHSeYzLCCH3yFh5p
+ wfBGowmca9mL8au3jSn8J76ES2j6corrdOoFaCLMDnhictoT3RHtf1xkh0tfw6lY8q
+ X1jlPn6HAj37pJmoPrMvxImMpc3TMC+RbFkr9d83PxNsQfKjUe/symF5+mzYwj147J
+ PwnS2/Tmnxscg==
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <CAD14+f2nSy710HggEVfzRAipL_7F=HHmqc9mG4oyLrn2=AhzXw@mail.gmail.com>
+To: jaegeuk@kernel.org
+Date: Wed, 16 Mar 2022 18:20:00 +0800
+Message-Id: <20220316102000.3727130-1-chao@kernel.org>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
 X-Spam-Score: -6.7 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -78,14 +67,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/3/16 16:43, Juhyung Park wrote: > Hi Jaegeuk, > >
- I'll perform the trace debugging later. > > Meanwhile, we encountered another
- issue. > > For now, I added a workaround that performs mlockall( [...] 
+ Content preview:  In lz4_decompress_pages(), if size of decompressed data is
+ not equal to expected one, we should print the size rather than size of target
+ buffer for decompressed data, fix it. Signed-off-by: Chao Yu <chao.yu@oppo.com>
+ --- fs/f2fs/compress.c | 5 ++--- 1 file changed, 2 insertions(+),
+ 3 deletions(-)
  Content analysis details:   (-6.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -96,11 +87,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nUQSf-00078Q-Fq
-Subject: Re: [f2fs-dev] EIO returned when reading files from R/O,
- compressed f2fs image
+X-Headers-End: 1nUQlP-000qRl-Vh
+Subject: [f2fs-dev] [PATCH] f2fs: compress: fix to print raw data size in
+ error path of lz4 decompression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,172 +102,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/3/16 16:43, Juhyung Park wrote:
-> Hi Jaegeuk,
-> 
-> I'll perform the trace debugging later.
-> 
-> Meanwhile, we encountered another issue.
-> 
-> For now, I added a workaround that performs mlockall() on all files
-> (vmtouch -L $val.mount -d -w -P $val.vmtouch) under the f2fs partition
-> so that the cp command works.
-> 
-> After confirming that extraction works, I've parallelized the script
-> again (on our production server again, so v5.15 without f2fs-stable
-> backports) and while userspace processes don't complain, there's
-> something going on on dmesg:
-> 
-> [224319.321668] loop0: detected capacity change from 0 to 11041080
-> [224319.361530] F2FS-fs (loop0): Found nat_bits in checkpoint
-> [224319.365029] F2FS-fs (loop0): write access unavailable, skipping recovery
-> [224319.365033] F2FS-fs (loop0): Mounted with checkpoint version = 4321
-> [224340.047471] loop1: detected capacity change from 0 to 11769352
-> [224340.101509] F2FS-fs (loop1): Found nat_bits in checkpoint
-> [224340.103799] F2FS-fs (loop1): write access unavailable, skipping recovery
-> [224340.103802] F2FS-fs (loop1): Mounted with checkpoint version = 4321
-> [224361.763528] loop2: detected capacity change from 0 to 11386480
-> [224361.812891] F2FS-fs (loop2): Found nat_bits in checkpoint
-> [224361.814881] F2FS-fs (loop2): write access unavailable, skipping recovery
-> [224361.814886] F2FS-fs (loop2): Mounted with checkpoint version = 4321
-> [224386.701011] F2FS-fs (loop2): lz4 invalid rlen:16384, expected:16384
-> [224386.701248] F2FS-fs (loop2): lz4 invalid rlen:16384, expected:16384
-> [224386.701779] F2FS-fs (loop2): lz4 invalid rlen:16384, expected:16384
-> [224386.701806] F2FS-fs (loop2): lz4 invalid rlen:16384, expected:16384
-> [224386.701826] F2FS-fs (loop2): lz4 invalid rlen:16384, expected:16384
-> [224391.823216] loop3: detected capacity change from 0 to 11045240
-> [224391.884383] F2FS-fs (loop3): Found nat_bits in checkpoint
-> [224392.194608] F2FS-fs (loop3): write access unavailable, skipping recovery
-> [224392.194612] F2FS-fs (loop3): Mounted with checkpoint version = 4321
-> [224401.386330] loop4: detected capacity change from 0 to 11428112
-> [224401.424575] F2FS-fs (loop4): Found nat_bits in checkpoint
-> [224401.428872] F2FS-fs (loop4): write access unavailable, skipping recovery
-> [224401.428875] F2FS-fs (loop4): Mounted with checkpoint version = 4321
-> [224576.100839] loop0: detected capacity change from 0 to 11041080
-> [224576.140862] F2FS-fs (loop0): Found nat_bits in checkpoint
-> [224576.142694] F2FS-fs (loop0): write access unavailable, skipping recovery
-> [224576.142699] F2FS-fs (loop0): Mounted with checkpoint version = 4321
-> [224599.330003] loop1: detected capacity change from 0 to 2913344
-> [224599.360425] F2FS-fs (loop1): Found nat_bits in checkpoint
-> [224599.362257] F2FS-fs (loop1): write access unavailable, skipping recovery
-> [224599.362260] F2FS-fs (loop1): Mounted with checkpoint version = 4321
-> [224602.241868] loop2: detected capacity change from 0 to 2064344
-> [224602.276146] F2FS-fs (loop2): Found nat_bits in checkpoint
-> [224602.277955] F2FS-fs (loop2): write access unavailable, skipping recovery
-> [224602.277971] F2FS-fs (loop2): Mounted with checkpoint version = 4321
-> [224629.346056] loop3: detected capacity change from 0 to 41776
-> [224629.375324] F2FS-fs (loop3): Found nat_bits in checkpoint
-> [224629.377167] F2FS-fs (loop3): write access unavailable, skipping recovery
-> [224629.377170] F2FS-fs (loop3): Mounted with checkpoint version = 4321
-> [225029.224078] loop0: detected capacity change from 0 to 11411472
-> [225029.270396] F2FS-fs (loop0): Found nat_bits in checkpoint
-> [225029.271345] F2FS-fs (loop0): write access unavailable, skipping recovery
-> [225029.271348] F2FS-fs (loop0): Mounted with checkpoint version = 4321
-> [225625.045254] loop0: detected capacity change from 0 to 11045240
-> [225625.078435] F2FS-fs (loop0): Found nat_bits in checkpoint
-> [225625.079453] F2FS-fs (loop0): write access unavailable, skipping recovery
-> [225625.079455] F2FS-fs (loop0): Mounted with checkpoint version = 4321
-> [225651.466438] loop1: detected capacity change from 0 to 11428112
-> [225651.532489] F2FS-fs (loop1): Found nat_bits in checkpoint
-> [225651.582589] F2FS-fs (loop1): write access unavailable, skipping recovery
-> [225651.582594] F2FS-fs (loop1): Mounted with checkpoint version = 4321
-> [225653.729775] loop2: detected capacity change from 0 to 2896696
-> [225653.817115] F2FS-fs (loop2): Found nat_bits in checkpoint
-> [225653.842649] F2FS-fs (loop2): write access unavailable, skipping recovery
-> [225653.842654] F2FS-fs (loop2): Mounted with checkpoint version = 4321
-> [225665.480652] loop3: detected capacity change from 0 to 2064344
-> [225665.548952] F2FS-fs (loop3): Found nat_bits in checkpoint
-> [225665.551460] F2FS-fs (loop3): write access unavailable, skipping recovery
-> [225665.551465] F2FS-fs (loop3): Mounted with checkpoint version = 4321
-> [225687.173551] loop4: detected capacity change from 0 to 3753984
-> [225687.297132] F2FS-fs (loop4): Found nat_bits in checkpoint
-> [225687.299702] F2FS-fs (loop4): write access unavailable, skipping recovery
-> [225687.299705] F2FS-fs (loop4): Mounted with checkpoint version = 4321
-> [225694.934235] loop5: detected capacity change from 0 to 1868760
-> [225695.047462] F2FS-fs (loop5): Found nat_bits in checkpoint
-> [225695.049562] F2FS-fs (loop5): write access unavailable, skipping recovery
-> [225695.049567] F2FS-fs (loop5): Mounted with checkpoint version = 4321
-> [225704.254531] loop6: detected capacity change from 0 to 41776
-> [225704.282972] F2FS-fs (loop6): Found nat_bits in checkpoint
-> [225704.286725] F2FS-fs (loop6): write access unavailable, skipping recovery
-> [225704.286730] F2FS-fs (loop6): Mounted with checkpoint version = 4321
-> [225723.689515] loop0: detected capacity change from 0 to 11411472
-> [225723.723250] F2FS-fs (loop0): Found nat_bits in checkpoint
-> [225723.725740] F2FS-fs (loop0): write access unavailable, skipping recovery
-> [225723.725744] F2FS-fs (loop0): Mounted with checkpoint version = 4321
-> [225727.574004] loop2: detected capacity change from 0 to 11386480
-> [225727.621016] F2FS-fs (loop2): Found nat_bits in checkpoint
-> [225727.623296] F2FS-fs (loop2): write access unavailable, skipping recovery
-> [225727.623300] F2FS-fs (loop2): Mounted with checkpoint version = 4321
-> [225728.404524] loop3: detected capacity change from 0 to 41776
-> [225728.440403] F2FS-fs (loop3): Found nat_bits in checkpoint
-> [225728.442743] F2FS-fs (loop3): write access unavailable, skipping recovery
-> [225728.442748] F2FS-fs (loop3): Mounted with checkpoint version = 4321
-> [225731.328330] F2FS-fs (loop2): lz4 invalid rlen:16384, expected:16384
-> [225731.328400] F2FS-fs (loop2): lz4 invalid rlen:16384, expected:16384
-> [225731.328424] F2FS-fs (loop2): lz4 invalid rlen:16384, expected:16384
-> [225743.064116] loop1: detected capacity change from 0 to 11769352
-> [225743.110306] F2FS-fs (loop1): Found nat_bits in checkpoint
-> [225743.113408] F2FS-fs (loop1): write access unavailable, skipping recovery
-> [225743.113414] F2FS-fs (loop1): Mounted with checkpoint version = 4321
-> [225761.148410] loop3: detected capacity change from 0 to 3758152
-> [225761.195014] F2FS-fs (loop3): Found nat_bits in checkpoint
-> [225761.196431] F2FS-fs (loop3): write access unavailable, skipping recovery
-> [225761.196432] F2FS-fs (loop3): Mounted with checkpoint version = 4321
-> [225766.885693] loop4: detected capacity change from 0 to 1868760
-> [225767.010849] F2FS-fs (loop4): Found nat_bits in checkpoint
-> [225767.013024] F2FS-fs (loop4): write access unavailable, skipping recovery
-> [225767.013027] F2FS-fs (loop4): Mounted with checkpoint version = 4321
-> [225781.475142] loop5: detected capacity change from 0 to 3766472
-> [225781.500625] F2FS-fs (loop5): Found nat_bits in checkpoint
-> [225781.503148] F2FS-fs (loop5): write access unavailable, skipping recovery
-> [225781.503150] F2FS-fs (loop5): Mounted with checkpoint version = 4321
-> [225785.367635] loop6: detected capacity change from 0 to 1868760
-> [225785.474029] F2FS-fs (loop6): Found nat_bits in checkpoint
-> [225785.475673] F2FS-fs (loop6): write access unavailable, skipping recovery
-> [225785.475678] F2FS-fs (loop6): Mounted with checkpoint version = 4321
-> [225802.664721] loop7: detected capacity change from 0 to 41776
-> [225802.706846] F2FS-fs (loop7): Found nat_bits in checkpoint
-> [225802.709092] F2FS-fs (loop7): write access unavailable, skipping recovery
-> [225802.709095] F2FS-fs (loop7): Mounted with checkpoint version = 4321
-> [225812.972186] loop0: detected capacity change from 0 to 41776
-> [225813.000175] F2FS-fs (loop0): Found nat_bits in checkpoint
-> [225813.003617] F2FS-fs (loop0): write access unavailable, skipping recovery
-> [225813.003619] F2FS-fs (loop0): Mounted with checkpoint version = 4321
-> 
-> Those "lz4 invalid rlen:16384, expected:16384", is this normal?
+In lz4_decompress_pages(), if size of decompressed data is not equal to
+expected one, we should print the size rather than size of target buffer
+for decompressed data, fix it.
 
-Juhyung, good catch.
+Signed-off-by: Chao Yu <chao.yu@oppo.com>
+---
+ fs/f2fs/compress.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-I guess this is the place in where it returns EIO in your scenario.
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 67bac2792e57..11e99bf6286c 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -314,10 +314,9 @@ static int lz4_decompress_pages(struct decompress_io_ctx *dic)
+ 	}
+ 
+ 	if (ret != PAGE_SIZE << dic->log_cluster_size) {
+-		printk_ratelimited("%sF2FS-fs (%s): lz4 invalid rlen:%zu, "
++		printk_ratelimited("%sF2FS-fs (%s): lz4 invalid ret:%d, "
+ 					"expected:%lu\n", KERN_ERR,
+-					F2FS_I_SB(dic->inode)->sb->s_id,
+-					dic->rlen,
++					F2FS_I_SB(dic->inode)->sb->s_id, ret,
+ 					PAGE_SIZE << dic->log_cluster_size);
+ 		return -EIO;
+ 	}
+-- 
+2.25.1
 
-Actually, it looks we printed the wrong variable in the message... could
-you please change the code as below, using "ret" instead of "dic->rlen",
-and try another test to check the log.
-
-static int lz4_decompress_pages()
-{
-...
-	if (ret != PAGE_SIZE << dic->log_cluster_size) {
-		printk_ratelimited("%sF2FS-fs (%s): lz4 invalid rlen:%zu, "
-					"expected:%lu\n", KERN_ERR,
-					F2FS_I_SB(dic->inode)->sb->s_id,
-					ret,
-					PAGE_SIZE << dic->log_cluster_size);
-		return -EIO;
-	}
-	return 0;
-}
-
-Not sure, is it possible that you can share this f2fs image in somewhere?
-then I can check details of this issue directly w/ the image.
-
-Thanks,
 
 
 _______________________________________________
