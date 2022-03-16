@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64C264DAE13
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Mar 2022 11:08:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 703E04DAE04
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Mar 2022 11:02:25 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nUQZd-0000I9-8R; Wed, 16 Mar 2022 10:08:07 +0000
+	id 1nUQU0-0007wE-0Z; Wed, 16 Mar 2022 10:02:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nUQZc-0000Hi-8E
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Mar 2022 10:08:06 +0000
+ (envelope-from <chao@kernel.org>) id 1nUQTx-0007vu-VG
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Mar 2022 10:02:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
@@ -35,8 +35,8 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nUQZA-0007ec-ME
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Mar 2022 10:07:54 +0000
+ id 1nUQSf-00078Q-Fq
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Mar 2022 10:01:46 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
@@ -71,9 +71,9 @@ References: <CAD14+f2nBZtLfLC6CwNjgCOuRRRjwzttp3D3iK4Of+1EEjK+cw@mail.gmail.com>
  <CAD14+f2nSy710HggEVfzRAipL_7F=HHmqc9mG4oyLrn2=AhzXw@mail.gmail.com>
 From: Chao Yu <chao@kernel.org>
 In-Reply-To: <CAD14+f2nSy710HggEVfzRAipL_7F=HHmqc9mG4oyLrn2=AhzXw@mail.gmail.com>
-X-Spam-Score: -7.9 (-------)
+X-Spam-Score: -6.7 (------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -81,23 +81,24 @@ X-Spam-Report: Spam detection software,
  Content preview:  On 2022/3/16 16:43, Juhyung Park wrote: > Hi Jaegeuk, > >
  I'll perform the trace debugging later. > > Meanwhile, we encountered another
  issue. > > For now, I added a workaround that performs mlockall( [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content analysis details:   (-6.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [145.40.68.75 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nUQZA-0007ec-ME
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nUQSf-00078Q-Fq
 Subject: Re: [f2fs-dev] EIO returned when reading files from R/O,
  compressed f2fs image
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
