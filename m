@@ -2,64 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8C2D4DAE2B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Mar 2022 11:20:31 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35E784DBBC9
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Mar 2022 01:30:27 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nUQdc-0000X2-St; Wed, 16 Mar 2022 10:20:28 +0000
+	id 1nUe23-0007Ov-BP; Thu, 17 Mar 2022 00:30:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nUQdc-0000Ww-0p
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Mar 2022 10:20:27 +0000
+ (envelope-from <chao@kernel.org>) id 1nUe1j-0007OP-4Z
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Mar 2022 00:30:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XGr49ptncj/lazavgMoufDJQLHhuybF1t0Z0WtSFbAQ=; b=XhSCWHJGz048NxW48DslWJhD6z
- 1Ybn1yjNJEuAnn8DUrWCuUfL1jOosGnHNrfPRUoZb7pRIkGGE0EydQ9iVmGQAVU/5iAjQS60H8mUb
- MnZCPG563RczoHEweKGTVqp56alMua0BJ+4Qs2GWMgJSQE2OGAkIQkhRkVHJwL4Q4D/E=;
+ bh=wUtyJlrlzOzEHs3bcvGXfhTEsAgNjuENR9M4EA1bF6M=; b=B4B9Am8oMNsHkf7SQACR98KxrT
+ fHqlR6eZHcz2oSpJWZgUeq77DS34hWmUuD8Z5jyEEKKWwlCCrKIKpE08EK3g50MXTEvqZl3VFrs3Q
+ GGDdu9gZOZGT1o/L1JK2q+pUjkr0hYIdl8mn+H70stVoARIpOnN08ZtiSTd1pytlNnSo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=XGr49ptncj/lazavgMoufDJQLHhuybF1t0Z0WtSFbAQ=; b=W
- 1ClNNWXo2jOhl7aJRGy92sz4XokUQULjH9DiUsu5Fo0jCMi5u8n8gxnz9qoawWNRcOiVJ9CoXKdjR
- AAJ8mAuNmDqPyFWQoU9/DQ6yo3PdvMwzU3ANIt5yvPE15EhN47TeUZvrBwUehrxgzsHXwnY6b74P6
- gu06sn3+IIq/AhP0=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=wUtyJlrlzOzEHs3bcvGXfhTEsAgNjuENR9M4EA1bF6M=; b=RjqqFI1Fn/e3zMhgTbjD32s7e2
+ QYqdbnSdQiwNFHsdS1viMk4SU5YusJ6c0JHPrhxvdB+DxOMnrO7szev0qHs/WQejXRcYP1OYGoVtB
+ 5yho8hEs9/ES9gaAECieLpGYGCm9UBIFEFbg1QwhnzyaELtqacpLgt++V+QbS02JPF9U=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nUQlP-000qRl-Vh
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 16 Mar 2022 10:20:27 +0000
+ id 1nUe1e-001RfW-0w
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Mar 2022 00:30:01 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C74436164F;
- Wed, 16 Mar 2022 10:20:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5630C340E9;
- Wed, 16 Mar 2022 10:20:07 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 66500616C0;
+ Thu, 17 Mar 2022 00:29:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B221C340E9;
+ Thu, 17 Mar 2022 00:29:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1647426009;
- bh=/O1Nhrg2OVtXL/SSKJRs6a8jMBlhRF0EgxSsjcaNu0Y=;
- h=From:To:Cc:Subject:Date:From;
- b=S+isYU66SstsukJ6kfyz5DNuehqto6YJ82XjSjYa1hOR1/vGmQhj7T7t0+HHCzKv9
- 4anjJIqogV0DqfF/UCRNamOcXgywYRWuvWy/6mGjzbYK2SpkwAIyiLB3exSIPVzhz+
- tR0rgegTTn4RtH6YaY8dySNLPMd408f55Yj45gujmlvVBZw/m+HHSeYzLCCH3yFh5p
- wfBGowmca9mL8au3jSn8J76ES2j6corrdOoFaCLMDnhictoT3RHtf1xkh0tfw6lY8q
- X1jlPn6HAj37pJmoPrMvxImMpc3TMC+RbFkr9d83PxNsQfKjUe/symF5+mzYwj147J
- PwnS2/Tmnxscg==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Wed, 16 Mar 2022 18:20:00 +0800
-Message-Id: <20220316102000.3727130-1-chao@kernel.org>
-X-Mailer: git-send-email 2.25.1
+ s=k20201202; t=1647476982;
+ bh=Hdocd/5ZlPbFYEa5t6OfwSG3tyIiffmqWFq4OlJz3SY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=jBP2BpDbQ15WLaUz/QzJoCvZIjel395dOCiKEaIEbWj2MePoYbwilxiPPIPQ72iIj
+ hrjr0N16ew2FI1KZYBBBSQOGt09TthdSB54ivZm/gbivL9AsyYElF2R4atSgywtjIu
+ 4MpPlCXW09KhzKZK0ZzWEWvNWcNkzJOSHuMdnfmnAHeLlnTiSAczQbmHz+wltGCzav
+ 4mXs+TOiT0tJ809/sQHx/K4N48fmvv27vzYqynTs0WNcqgS8lnLN16x2l+lAnypf2V
+ ER2kb/U9dyVtd/BszdIKmpIKTHJXr2SabdepeHlM62n49hjrIYSDdOL5/ygnbiPhbn
+ Fl8GLzOHwt9Qg==
+Message-ID: <bfce3a4d-b937-de8e-84c9-418f34e3a0e0@kernel.org>
+Date: Thu, 17 Mar 2022 08:29:38 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.2
+Content-Language: en-US
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20220316041414.1738616-1-daeho43@gmail.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20220316041414.1738616-1-daeho43@gmail.com>
 X-Spam-Score: -6.7 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -67,16 +72,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In lz4_decompress_pages(), if size of decompressed data is
- not equal to expected one, we should print the size rather than size of target
- buffer for decompressed data, fix it. Signed-off-by: Chao Yu <chao.yu@oppo.com>
- --- fs/f2fs/compress.c | 5 ++--- 1 file changed, 2 insertions(+),
- 3 deletions(-)
+ Content preview:  On 2022/3/16 12:14, Daeho Jeong wrote: > From: Daeho Jeong
+ <daehojeong@google.com> > > We need a mid level of gc urgent mode to do GC
+ forcibly in a period > of given gc_urgent_sleep_time, but not like [...] 
  Content analysis details:   (-6.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -86,11 +87,13 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -1.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nUQlP-000qRl-Vh
-Subject: [f2fs-dev] [PATCH] f2fs: compress: fix to print raw data size in
- error path of lz4 decompression
+X-Headers-End: 1nUe1e-001RfW-0w
+Subject: Re: [f2fs-dev] [PATCH] f2fs: introduce gc_urgent_mid mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,40 +105,24 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In lz4_decompress_pages(), if size of decompressed data is not equal to
-expected one, we should print the size rather than size of target buffer
-for decompressed data, fix it.
+On 2022/3/16 12:14, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> We need a mid level of gc urgent mode to do GC forcibly in a period
+> of given gc_urgent_sleep_time, but not like using greedy GC approach
+> and switching to SSR mode such as gc urgent high mode. This can be
+> used for more aggressive periodic storage clean up.
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
-Signed-off-by: Chao Yu <chao.yu@oppo.com>
----
- fs/f2fs/compress.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 67bac2792e57..11e99bf6286c 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -314,10 +314,9 @@ static int lz4_decompress_pages(struct decompress_io_ctx *dic)
- 	}
- 
- 	if (ret != PAGE_SIZE << dic->log_cluster_size) {
--		printk_ratelimited("%sF2FS-fs (%s): lz4 invalid rlen:%zu, "
-+		printk_ratelimited("%sF2FS-fs (%s): lz4 invalid ret:%d, "
- 					"expected:%lu\n", KERN_ERR,
--					F2FS_I_SB(dic->inode)->sb->s_id,
--					dic->rlen,
-+					F2FS_I_SB(dic->inode)->sb->s_id, ret,
- 					PAGE_SIZE << dic->log_cluster_size);
- 		return -EIO;
- 	}
--- 
-2.25.1
-
+Thanks,
 
 
 _______________________________________________
