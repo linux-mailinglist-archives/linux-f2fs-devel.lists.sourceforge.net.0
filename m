@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0E6F4DC2C0
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Mar 2022 10:32:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1013E4DC27B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 17 Mar 2022 10:18:19 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nUmMR-0003Tk-RU; Thu, 17 Mar 2022 09:32:11 +0000
+	id 1nUmGt-0003cy-In; Thu, 17 Mar 2022 09:18:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nUmMQ-0003Te-BS
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Mar 2022 09:32:10 +0000
+ (envelope-from <chao@kernel.org>) id 1nUmGr-0003cr-F8
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Mar 2022 09:18:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
@@ -33,10 +33,10 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  RmGz8yA75XOnavwCcWCDG+ZI6/2z3+jQFSDSs0Ojnr4/J57Nn6EbUqPNxJz67PWEvBjU7U4KZkZSf
  MuIBDavci9nkOHs4=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nUmUL-001ma1-Cc
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Mar 2022 09:32:09 +0000
+ id 1nUmFt-0007sI-3F
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 17 Mar 2022 09:17:39 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
@@ -73,10 +73,10 @@ X-Spam-Report: Spam detection software,
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -85,7 +85,7 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nUmUL-001ma1-Cc
+X-Headers-End: 1nUmFt-0007sI-3F
 Subject: [f2fs-dev] [PATCH] f2fs: use aggressive GC policy during
  f2fs_disable_checkpoint()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
