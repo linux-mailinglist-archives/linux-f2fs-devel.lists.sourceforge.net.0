@@ -2,85 +2,63 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B0E94E24B9
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Mar 2022 11:54:56 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 195334E2C10
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Mar 2022 16:22:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nWFga-0002j9-Fz; Mon, 21 Mar 2022 10:54:51 +0000
+	id 1nWJje-00059g-G4; Mon, 21 Mar 2022 15:22:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1nWFgY-0002iz-6M
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 21 Mar 2022 10:54:49 +0000
+ (envelope-from <chao@kernel.org>) id 1nWJjc-00059Z-QU
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 21 Mar 2022 15:22:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=azqoxDNPdtignEkoAPCeVMyMR49ObDEpyqSVPeyeyHs=; b=NkwTm/ipczyN5vB4V4Ay1nwETw
- GPRmkRTb3WtyDtB7XUDfRQbptl+BQPfIvntb9KVljjxGmj0KPuEb7bYIQGaoDkwJ7lkkFUCqKo4NY
- JTioIu0kHQF5fN1XFtNYwTgozTIfTv23Je2Vb1fSyJJoNd+ZuJB2a5yNxZMFRpnkK1wo=;
+ bh=GMvAPCwY2BE+i2t9uPhrloGfRUs+Qd6QIj8Iqez+fQg=; b=Hijg9gz0MnqEEv2edNZMWe9VtG
+ xKrV0061hY0AaM8fngtMqBOlEGSZ1voWcuXCMGWYu6N5pG1t6mIxs5HV2WgSCh0QB/YJaOj/yScw1
+ MzzeBN6ZQpnpkhFjzdJoMtyDY7Pf5onQRTO+Bsc58EO7Sxn7FpZUW0XW3xzz7lpD+28E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
- Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=azqoxDNPdtignEkoAPCeVMyMR49ObDEpyqSVPeyeyHs=; b=L
- fuckKpS3H6MSB9pMHgnRG51EjGxstlWM2vpX+0BrOf/drm03Rk131+y814Ti3Wh9ylWZzwbxm3Mt2
- tI2tf2ACDhD/qe29RTY0S/z3s/wujyaELGXgwNOIHQ3iMExU2x8jU7ZIs6qDEuE0dHzG1SLqBglYH
- ZKQ6b5M9ZJEYfVZc=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ List-Owner:List-Archive; bh=GMvAPCwY2BE+i2t9uPhrloGfRUs+Qd6QIj8Iqez+fQg=; b=c
+ 6huZ4FmVbShLUemJ7sYU9Y07xGEKnypXXb0mN3WtfsalAxLPy40yb/P1BbjY7FS+0dUsUguFPtHSu
+ QQ/s1uZWKrOnntgs4pQfK1UTR50OF6oEcewq6P47CEdFmbaDAoHEM1FkUvAV94dO3WfdXwODnVczS
+ 3YJWpqkqgMaDJ1hQ=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nWFgT-0003Xq-8r
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 21 Mar 2022 10:54:48 +0000
+ id 1nWJrX-0000X7-Kp
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 21 Mar 2022 15:22:28 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 2C425B811BE
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 21 Mar 2022 10:54:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CEDE6C340E8
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 21 Mar 2022 10:54:32 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 96C3660F7F;
+ Mon, 21 Mar 2022 15:22:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 25B33C340E8;
+ Mon, 21 Mar 2022 15:22:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1647860072;
- bh=7W/8/xCIpPzSeZC43ulA89UM+0ecZZFxlfrvQH3IXWI=;
- h=From:To:Subject:Date:From;
- b=U7JFCqmN8BEvGIl/2MkfMmm1FXZsKON265ciIAJI9ozzZIjYQYT4/fb+bUFkrApIb
- wI8XLKRaPj+uxgxqsr52fZgGHEAema4m31fzMt1oP9Cb1JkoLp1qZL4Sahp71IvqaI
- NLHb2GodvSe1n3bUBHsokp664N3Fv2ynGR/ZWHpRTKtNYvkSnQKGEzmljXfCNbrTVO
- FXOP6oKfcq6CxQcIdcVQoD897TP650Htd7JLoJe3PDF2MdNSuDxUSwasBzDdgqrm5B
- KsJKGGgGI5aA/q/4IKrHk6lVeXs33uQdpXx9+7gfh76TCRwJXrF5Cifvhshft0OY/L
- 8cEDqQrhIOTuQ==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id B0A79C05F98; Mon, 21 Mar 2022 10:54:32 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 21 Mar 2022 10:54:32 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: new
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: yanming@tju.edu.cn
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version
- cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
- priority component assigned_to reporter cf_regression
-Message-ID: <bug-215709-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1647876140;
+ bh=BmDckR9oVCj0Dpd4A7Tl1cnWlUNuPswQxFdMCV/VB28=;
+ h=From:To:Cc:Subject:Date:From;
+ b=MVQLwBvoPv739CozYeYWtmsjiElxLsHftJW0CyEqAFU8TDqKf/lZ0pr44OTuhBXku
+ UasA+zKlU4VFI+8EB34OUZkR+m9XuD6v7IWgcQX8LSDtmUvGEVp+Vz85Nz9lezM4Lq
+ NlKnH5UQdxesNjrkU5yhmAmVgJvQaH3DaEpk9B7muO6TMB+XtFgh9ddla872vCJvCD
+ 0evxGiuwkFwFvrrgrfL6Y9uYYgH+EAZDFQehNLqbgycTaVYBJFuT8JGM83Bs6JRUXD
+ ENQ+rCL/vZvU/b32WEZ9nbsqbyNxywLB1VIUqaQh8iYa1ziKAHNnjn7S3ALVjeb4D1
+ c6WqHvhOWMPRQ==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Mon, 21 Mar 2022 23:22:11 +0800
+Message-Id: <20220321152211.5656-1-chao@kernel.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Spam-Score: -6.4 (------)
 X-Spam-Report: Spam detection software,
@@ -89,15 +67,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=215709 Bug ID:
- 215709 Summary: kernel deadlocks while mounting the image Product: File System
- Version: 2.5 Kernel Version: 5.15.4 Hardware: All OS: Linux Tree: Mainline
- Status: NEW Severity: normal Priority [...] 
+ Content preview: As bughunter reported in bugzilla:
+ https://bugzilla.kernel.org/show_bug.cgi?id=215709
+ f2fs may hang when mounting a fuzzed image, the dmesg shows as below: 
  Content analysis details:   (-6.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -105,13 +84,11 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -1.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nWFgT-0003Xq-8r
-Subject: [f2fs-dev] [Bug 215709] New: kernel deadlocks while mounting the
- image
+X-Headers-End: 1nWJrX-0000X7-Kp
+Subject: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on
+ .cp_pack_total_block_count
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,44 +100,83 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+As bughunter reported in bugzilla:
+
 https://bugzilla.kernel.org/show_bug.cgi?id=215709
 
-            Bug ID: 215709
-           Summary: kernel deadlocks while mounting the image
-           Product: File System
-           Version: 2.5
-    Kernel Version: 5.15.4
-          Hardware: All
-                OS: Linux
-              Tree: Mainline
-            Status: NEW
-          Severity: normal
-          Priority: P1
-         Component: f2fs
-          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
-          Reporter: yanming@tju.edu.cn
-        Regression: No
+f2fs may hang when mounting a fuzzed image, the dmesg shows as below:
 
-I have created an image with mkfs.f2fs, and modified some of the metadata of
-the image. Unfortunately, when I tried to mount the image with a loop device,
-the kernel deadlocked. I have attempted many ways to stop the mount process,
-even executed a 'kill' command, but they are failed, only what I can do is to
-reboot the system. Can anyone tell me why the kernel deadlocked, and how can I
-fix this problem?
+__filemap_get_folio+0x3a9/0x590
+pagecache_get_page+0x18/0x60
+__get_meta_page+0x95/0x460 [f2fs]
+get_checkpoint_version+0x2a/0x1e0 [f2fs]
+validate_checkpoint+0x8e/0x2a0 [f2fs]
+f2fs_get_valid_checkpoint+0xd0/0x620 [f2fs]
+f2fs_fill_super+0xc01/0x1d40 [f2fs]
+mount_bdev+0x18a/0x1c0
+f2fs_mount+0x15/0x20 [f2fs]
+legacy_get_tree+0x28/0x50
+vfs_get_tree+0x27/0xc0
+path_mount+0x480/0xaa0
+do_mount+0x7c/0xa0
+__x64_sys_mount+0x8b/0xe0
+do_syscall_64+0x38/0xc0
+entry_SYSCALL_64_after_hwframe+0x44/0xae
 
-I have upload the image to the Google Drive
-(https://drive.google.com/file/d/1DBwKP0-MpkD3eHPTluz3KPcxbdZAw06t/view?usp=sharing).
-Looking forward to getting a reply :)
+The root cause is cp_pack_total_block_count field in checkpoint was fuzzed
+to one, as calcuated, two cp pack block locates in the same block address,
+so then read latter cp pack block, it will block on the page lock due to
+the lock has already held when reading previous cp pack block, fix it by
+adding sanity check for cp_pack_total_block_count.
 
+Cc: stable@vger.kernel.org
+Signed-off-by: Chao Yu <chao.yu@oppo.com>
+---
+ fs/f2fs/checkpoint.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 871eee35a32f..aba1b8a1ce66 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -875,6 +875,7 @@ static struct page *validate_checkpoint(struct f2fs_sb_info *sbi,
+ 	struct page *cp_page_1 = NULL, *cp_page_2 = NULL;
+ 	struct f2fs_checkpoint *cp_block = NULL;
+ 	unsigned long long cur_version = 0, pre_version = 0;
++	unsigned int cp_blocks;
+ 	int err;
+ 
+ 	err = get_checkpoint_version(sbi, cp_addr, &cp_block,
+@@ -882,15 +883,16 @@ static struct page *validate_checkpoint(struct f2fs_sb_info *sbi,
+ 	if (err)
+ 		return NULL;
+ 
+-	if (le32_to_cpu(cp_block->cp_pack_total_block_count) >
+-					sbi->blocks_per_seg) {
++	cp_blocks = le32_to_cpu(cp_block->cp_pack_total_block_count);
++
++	if (cp_blocks > sbi->blocks_per_seg || cp_blocks <= F2FS_CP_PACKS) {
+ 		f2fs_warn(sbi, "invalid cp_pack_total_block_count:%u",
+ 			  le32_to_cpu(cp_block->cp_pack_total_block_count));
+ 		goto invalid_cp;
+ 	}
+ 	pre_version = *version;
+ 
+-	cp_addr += le32_to_cpu(cp_block->cp_pack_total_block_count) - 1;
++	cp_addr += cp_blocks - 1;
+ 	err = get_checkpoint_version(sbi, cp_addr, &cp_block,
+ 					&cp_page_2, version);
+ 	if (err)
 -- 
-You may reply to this email to add a comment.
+2.25.1
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
