@@ -2,104 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D8FF4E460E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Mar 2022 19:32:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1C784E47F0
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Mar 2022 21:58:55 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nWjAn-0007Ud-P5; Tue, 22 Mar 2022 18:32:13 +0000
+	id 1nWlSd-00038K-9H; Tue, 22 Mar 2022 20:58:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <pr-tracker-bot@kernel.org>) id 1nWjAm-0007UV-5v
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Mar 2022 18:32:11 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nWlSc-00038E-OO
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Mar 2022 20:58:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
- Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=b6LQdWYZgMlscH00sPTx7Ia1JB/3jh2AjQr/UcKZxZU=; b=agpwME0m+4P7MI8YiwPB/3/nZY
- yT9T7TGMxq1YANhx/WWzNutBYwxEHrGdDMBLmEZ9fcl1xfc9xHMUc61fER+GM/ETW0QmE3G2PIlnw
- 72NA8HbdXz9iuUGqFHqmpGybAaN+B+B9eWU5m3FdgOjmsemvsI/XQIFWNiOZqecE/gIU=;
+ bh=IPFf4rRNTkfLE4qT5dA3A4cfnFMzjH/sjEFMHi8mjpg=; b=kj4k/g1AzXXjz76U7cNz0hoeKT
+ 8ocobXM2b+SOttRkUtdMrfkFoY3aPO7JupbM8mXa1RWpEByfJTb6RJspFNhY5EKljm3nwWmOfgrSe
+ U4XPynZUpLw9vneUTA0mk2fb999w5S+EhAK2WhWuddczHGFKachLhohDps2WaJL3MeSs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=b6LQdWYZgMlscH00sPTx7Ia1JB/3jh2AjQr/UcKZxZU=; b=DxWWjVdPe0j43DF4wZOM3gI55p
- yFzrQz4uCIpmN4khI93MT5+PYEpJWTpM2LTwCq4+y0G14kE4UAPzq9DR+dBbj8+i/HB3rvhrevRPx
- mR2hiQ/ru5ccIywqed4Uc4ZGAlungA4MLv4/efbF2fwIIazkIYcHvmU5uCzCFdT96vzA=;
+ bh=IPFf4rRNTkfLE4qT5dA3A4cfnFMzjH/sjEFMHi8mjpg=; b=BU7xWzN92oljLhTua41wSu1oIx
+ 9BTVQp0cAUtJlDBmiFX9JX+G1UHNZvqYo50Js0M+ztFyIDj/K3I6s8ZMG9g3Jw7wMEE7LkBSxe/3j
+ I6LNYqRUHNkqtxy9MqWC5a3yH0DIT6mo0ioTOatMfbErsegj7ixL3bgc9qQerJJH+KAc=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nWjIh-008mbc-AL
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Mar 2022 18:32:11 +0000
+ id 1nWlaX-0000Hn-NJ
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 22 Mar 2022 20:58:46 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 48768615D9;
- Tue, 22 Mar 2022 18:32:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id AE290C340EC;
- Tue, 22 Mar 2022 18:32:03 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 538D861712;
+ Tue, 22 Mar 2022 20:58:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 019BBC340EC;
+ Tue, 22 Mar 2022 20:58:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1647973923;
- bh=56pMLYS62NlbI9+1QeTpYPBinGiZHOomY/pRjTYFL/o=;
- h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
- b=LHMYjtnlF9b8M50iF/fewdFw5UO8Ifb3H8ZX32WPn8LmTyNlXKVhQ1bCmy3wj3lEE
- oOFLcoFkOonXvmOETpTKkOaufFVS36HLEb9AkF34pn7FvyWj+XAP1Gp5Sye8Hs2jJm
- vy4RElpf0brOc9L/fP5BSwt8NbeKZ4CC4VAgzAuFIT8ZSL7IKi8uC45+EPftnGR38F
- /D35RqkybBK3uzSCuSvqZsWY+vsBF6QX69HdhGdC7AhSn0kYE/lx869p9h2x3s9sde
- Bhccq+AgV0gPgnZFemolPFKgm2IJGvaQ2MnhtVmeIFoXejpjAw69Mvs67xu1wmKBf+
- y5e2XZ9fGIkmg==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 9BCE5E6D406; Tue, 22 Mar 2022 18:32:03 +0000 (UTC)
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <YjjihIZuvZpUjaSs@google.com>
+ s=k20201202; t=1647982720;
+ bh=qneKTjCnzz1tSRczDENyPpegPElP0m0jzzOPobXNPLk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Ht4dYd/bNEB12UbTCLdQOiYj35b9WG6DBUguqxmVkhLeU5fCqJUa8ZLhRZbqmPnKa
+ leOOQPPl9CIm2JlCWfDym3kx99dyQ8JyM0HmSxS3JWmsisL0aJhsL9wRjN6jnTRTTs
+ Y16qQV8sHJCGnqSP9JDo//puaaVKuF/eQIQmIal2zlpphLTmsxqr78C43cE78uVYaz
+ n0nPEsNfE/62DIrpwvnbCjB56Q9naia+8XdWszdQNMoWbkHchBr+qU1JJCgFL59abo
+ 2NWqJgv2/GiP0Rk640D9z4gmlJYagwuoyR+ALI6j49boo9+u6aEzvSkVvS+saGcqHG
+ I5sa/JchBKDtw==
+Date: Tue, 22 Mar 2022 13:58:38 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <Yjo4fg4HRzEVDr7o@google.com>
 References: <YjjihIZuvZpUjaSs@google.com>
-X-PR-Tracked-List-Id: <linux-f2fs-devel.lists.sourceforge.net>
-X-PR-Tracked-Message-Id: <YjjihIZuvZpUjaSs@google.com>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- tags/f2fs-for-5.18
-X-PR-Tracked-Commit-Id: 5b5b4f85b01604389f7a0f11ef180a725bf0e2d4
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: ef510682af3dbe2f9cdae7126a1461c94e010967
-Message-Id: <164797392362.17704.11716595490664039978.pr-tracker-bot@kernel.org>
-Date: Tue, 22 Mar 2022 18:32:03 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: -6.0 (------)
+ <CAHk-=wgsmvoJFKFWxQ2orEVUOWH1agk9iUNZ=-DFh5OXZL=Ldw@mail.gmail.com>
+ <51cded74-3135-eed8-06d3-0b2165e3b379@redhat.com>
+ <CAHk-=wi=Xsekgj7zfw_vpOM673CG24vznmz-yx9G05rWSAAYXg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAHk-=wi=Xsekgj7zfw_vpOM673CG24vznmz-yx9G05rWSAAYXg@mail.gmail.com>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The pull request you sent on Mon, 21 Mar 2022 13:39:32 -0700:
- > git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- tags/f2fs-for-5.18 has been merged into torvalds/linux.git:
- https://git.kernel.org/torvalds/c/ef510682af3dbe2f9cdae7126a1461c94e010967
- Content analysis details:   (-6.0 points, 6.0 required)
+ Content preview:  Hi Linus, On 03/22, Linus Torvalds wrote: > On Tue, Mar 22, 
+ 2022 at 10:37 AM Waiman Long <longman@redhat.com> wrote: > > > > AFAICS,
+ the read-unfair rwsem code is created to resolve a potential > > lock starvat
+ [...] Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.8 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nWjIh-008mbc-AL
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nWlaX-0000Hn-NJ
 Subject: Re: [f2fs-dev] [GIT PULL] f2fs for 5.18
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -112,26 +103,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+Cc: Waiman Long <longman@redhat.com>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Tim Murray <timmurray@google.com>,
  Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The pull request you sent on Mon, 21 Mar 2022 13:39:32 -0700:
+Hi Linus,
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.18
+On 03/22, Linus Torvalds wrote:
+> On Tue, Mar 22, 2022 at 10:37 AM Waiman Long <longman@redhat.com> wrote:
+> >
+> > AFAICS, the read-unfair rwsem code is created to resolve a potential
+> > lock starvation problem that they found on linux-5.10.y stable tree. I
+> > believe I have fixed that in the v5.11 kernel, see commit 2f06f702925
+> > ("locking/rwsem: Prevent potential lock starvation").
+> 
+> Ahh.
+> 
+> Adding Tim Murray to the cc, since he was the source of that odd
+> reader-unfair thing.
+> 
+> I really *really* dislike people thinking they can do locking
+> primitives, because history has taught us that they are wrong.
+> 
+> Even when people get the semantics and memory ordering right (which is
+> not always the case, but at least the f2fs code uses real lock
+> primitives - just oddly - and should thus be ok), it invariably tends
+> to be a sign of something else being very wrong.
+> 
+> And I can easily believe that in this case it's due to a rmsem issue
+> that was already fixed long long ago as per Waiman.
+> 
+> Can people please test with the actual modern rwsem code and with the
+> odd reader-unfair locks disabled?
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/ef510682af3dbe2f9cdae7126a1461c94e010967
+The pain point is 1) we don't have a specific test to reproduce the issue,
+but got some foundings from field only, 2) in order to test the patches, we
+need to merge the patches into Android kernel [1] through LTS, 3) but, LTS
+wants to see any test results [2].
 
-Thank you!
+[1] https://android-review.googlesource.com/q/topic:rwsem_unfair
+[2] https://lore.kernel.org/stable/988fd9b5-8e89-03ae-3858-85320382792e@redhat.com/
 
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
+So, I thought applying it in f2fs could avoid kernel version issues without
+any risk of updating rwsem. Meanwhile, agreed that we should use the right APIs,
+I'm going to disable this f2fs change in the next device having newer kernel to
+see whether or not uptodate rwsem can really fix the issue.
+
+> 
+>             Linus
 
 
 _______________________________________________
