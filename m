@@ -2,89 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F48E4E4E19
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Mar 2022 09:22:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A8324E564D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Mar 2022 17:27:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nWw8U-0002NL-SK; Wed, 23 Mar 2022 08:22:42 +0000
+	id 1nX3p6-0001gz-Q6; Wed, 23 Mar 2022 16:26:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <sunke32@huawei.com>) id 1nWw8U-0002NF-1E
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Mar 2022 08:22:41 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nX3p5-0001gt-3T
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Mar 2022 16:26:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jpImjOK0dU/UFobQ9b0Qe6NwG0UIKhBo/Cj61EM8ZcM=; b=f3QYksqRye2lZ0l76rnU1u8zaH
- eK0POS6MX3mSTGRZW+f0ZvsgL4nxY6azqyRPNoFFH8wiyAL2Uc5WemErLOr/6fR/nKWTwJrCRPZlb
- nZIB/WyA4TWXHL1soMtctGWV0cJrEg6VLyoNWt+AofGwofMGsbiVZRCHPh1NycWP+uyY=;
+ bh=3hZVbpHDywGkXTePwfYB+/7l7SaLUJq+aT60p7gyAiI=; b=mJx0hL8vuYy2i5u+LCx2Exb7ZB
+ R87LSmsSxxX5chCJVpwUhjbnJ+MWHy/2CAgV6NicsbYs0wTYN6OYmk61iNiUCN01vNm2shvQu0Lq/
+ NJ6xBCQ/OxcziZc0+D1CfYQCl/rvppyM5nQSHFMLPpUpGm+pSYFXwcz04rAZCNcDCSnI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=jpImjOK0dU/UFobQ9b0Qe6NwG0UIKhBo/Cj61EM8ZcM=; b=J
- 6zFmUybchPq1jC0BEDLDz7cG/X++/9BF5lvdfXfWJvDf4b/5kECtlbnVwSQJiMFy5ztkb+LavMpNv
- epF76Zb4spCPq8UYwRBVzdIHFcA6rejSL1Inb4zpQYQewRUMCJ4D4AQ0/8NaY9B2XPLOLC0YQR+ED
- ASBBt0CQwS9RDc8E=;
-Received: from szxga01-in.huawei.com ([45.249.212.187])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=3hZVbpHDywGkXTePwfYB+/7l7SaLUJq+aT60p7gyAiI=; b=XciLE+HvqDw1By5nd97pWCvP42
+ qaeZehmeoGrAGqiltKuLreHFZUH8bA0LvaEGNVECvdqcCnCeYnbOGh3Q3A6Z63CVY8OK4cBNxOlPG
+ r9P1oKkwbdWDIjxzQ5KiysAZ21+1Bc5xAr2RuDiyHPNdOCwd1ypYvdv3EX4rBwgrOliE=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nWwGN-0006r2-52
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Mar 2022 08:22:41 +0000
-Received: from kwepemi100015.china.huawei.com (unknown [172.30.72.56])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4KNhBZ44k3zfZ0d;
- Wed, 23 Mar 2022 16:20:54 +0800 (CST)
-Received: from kwepemm600010.china.huawei.com (7.193.23.86) by
- kwepemi100015.china.huawei.com (7.221.188.125) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Wed, 23 Mar 2022 16:22:27 +0800
-Received: from huawei.com (10.175.127.227) by kwepemm600010.china.huawei.com
- (7.193.23.86) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.21; Wed, 23 Mar
- 2022 16:22:26 +0800
-To: <fstests@vger.kernel.org>, <guan@eryu.me>
-Date: Wed, 23 Mar 2022 16:37:24 +0800
-Message-ID: <20220323083724.55902-1-sunke32@huawei.com>
-X-Mailer: git-send-email 2.31.1
+ id 1nX3p1-009cXF-2F
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 23 Mar 2022 16:26:57 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id EA379B81F84;
+ Wed, 23 Mar 2022 16:26:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85B50C340E8;
+ Wed, 23 Mar 2022 16:26:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1648052806;
+ bh=CuBjkLYRVIIbPFpIa1Vl/F+x4Z7zFyfHbwVgo+ZjRio=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=GvcXdybUQM9gcIggCekgj5mnNxjvBi72554H//JkbF6fQPFJIgDbDbZPvBnj5z19u
+ fZXv1v3djBOYB+hysQsnADJtiCrUJjbv+4BlgCBsVrYcqXlWw/qBxW72kH0j6/EiPM
+ JXngEyhQWZqh/wcv1dDYhyu4eeyxG1kTLp0+FQUFSBd4aMKMWILjRBrhgwFb+XWuWE
+ BGql5CU7E8s4+tEx3RI300EvwKcbNRDxov5lbxMuDpAn8I3a2AQop4jxZk86Dx6AE0
+ I14kSjNfnYcmVaHbh7PCNpgNBoXB/WeeVMbLIcBEWL7AMeOCCPWSZNESvo/gW0Mztt
+ eAR6Jo9nyHNAQ==
+Date: Wed, 23 Mar 2022 09:26:44 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <YjtKRAgFmBfgU0al@google.com>
+References: <YjjihIZuvZpUjaSs@google.com>
+ <CAHk-=wgsmvoJFKFWxQ2orEVUOWH1agk9iUNZ=-DFh5OXZL=Ldw@mail.gmail.com>
+ <51cded74-3135-eed8-06d3-0b2165e3b379@redhat.com>
+ <CAHk-=wi=Xsekgj7zfw_vpOM673CG24vznmz-yx9G05rWSAAYXg@mail.gmail.com>
+ <CAEe=Sxmcn5+YUXBQhxDpzZVJu_T6S6+EURDqrP9uUS-PHGyuSg@mail.gmail.com>
+ <CAHk-=whGKUyJpi0dTQJjyJxdmG+WCeKkJJyycpOaUW0De17h_Q@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.175.127.227]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- kwepemm600010.china.huawei.com (7.193.23.86)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.3 (--)
+Content-Disposition: inline
+In-Reply-To: <CAHk-=whGKUyJpi0dTQJjyJxdmG+WCeKkJJyycpOaUW0De17h_Q@mail.gmail.com>
+X-Spam-Score: -6.4 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The test fail on f2fs: xattr names and values after second
- fsync log replay: # file: SCRATCH_MNT/foobar +user.attr1="val1"
- user.attr3="val3"
- attr1 is still there after log replay. f2fs doesn't support fs-op level
- transaction
- functionality. so it have no way to persist all metadata updates in one
- transaction. We can use "fastboot" mountopti [...] 
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  On 03/22, Linus Torvalds wrote: > On Tue, Mar 22, 2022 at
+ 5:34 PM Tim Murray <timmurray@google.com> wrote: > > > > AFAICT,
+ what's happening
+ is that rwsem_down_read_slowpath > > modifies sem->count to [...] 
+ Content analysis details:   (-6.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.187 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [45.249.212.187 listed in wl.mailspike.net]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nWwGN-0006r2-52
-Subject: [f2fs-dev] [PATCH v3] generic/066: attr1 is still there after log
- replay on f2fs
+ -1.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nX3p1-009cXF-2F
+Subject: Re: [f2fs-dev] [GIT PULL] f2fs for 5.18
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,55 +107,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Sun Ke via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Sun Ke <sunke32@huawei.com>
-Cc: jaegeuk@kernel.org, david@fromorbit.com,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Waiman Long <longman@redhat.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Tim Murray <timmurray@google.com>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The test fail on f2fs:
-     xattr names and values after second fsync log replay:
-     # file: SCRATCH_MNT/foobar
-    +user.attr1="val1"
-     user.attr3="val3"
+On 03/22, Linus Torvalds wrote:
+> On Tue, Mar 22, 2022 at 5:34 PM Tim Murray <timmurray@google.com> wrote:
+> >
+> > AFAICT, what's happening is that rwsem_down_read_slowpath
+> > modifies sem->count to indicate that there's a pending reader while
+> > f2fs_ckpt holds the write lock, and when f2fs_ckpt releases the write
+> > lock, it wakes pending readers and hands the lock over to readers.
+> > This means that any subsequent attempt to grab the write lock from
+> > f2fs_ckpt will stall until the newly-awakened reader releases the read
+> > lock, which depends on the readers' arbitrarily long scheduling
+> > delays.
+> 
+> Ugh.
+> 
+> So I'm looking at some of this, and you have things like this:
+> 
+>         f2fs_down_read(&F2FS_I(inode)->i_sem);
+>         cp_reason = need_do_checkpoint(inode);
+>         f2fs_up_read(&F2FS_I(inode)->i_sem);
+> 
+> which really doesn't seem to want a sleeping lock at all.
+> 
+> In fact, it's not clear that it has any business serializing with IO
+> at all. It seems to just check very basic inode state. Very strange.
+> It's the kind of thing that the VFS layer tends to use te i_lock
+> *spinlock* for.
 
-attr1 is still there after log replay. f2fs doesn't support fs-op level
-transaction functionality. so it have no way to persist all metadata
-updates in one transaction.  We can use "fastboot" mountoption for this
-case, so during last fsync on qwerty, f2fs can trigger a checkpoint
-which will persist all metadata updates before fsync().
+Um.. let me check this i_sem, introduced by
+d928bfbfe77a ("f2fs: introduce fi->i_sem to protect fi's info").
 
-Suggested-by: Chao Yu <chao@kernel.org>
-Signed-off-by: Sun Ke <sunke32@huawei.com>
----
-v3: merge "fastboot" with original mount options
- tests/generic/066 | 8 ++++++++
- 1 file changed, 8 insertions(+)
+OTOH, I was suspecting the major contetion would be
+	f2fs_lock_op -> f2fs_down_read(&sbi->cp_rwsem);
+, which was used for most of filesystem operations.
 
-diff --git a/tests/generic/066 b/tests/generic/066
-index 105a7acd..d8a38655 100755
---- a/tests/generic/066
-+++ b/tests/generic/066
-@@ -56,6 +56,14 @@ sync
- $SETFATTR_PROG -x user.attr2 $SCRATCH_MNT/foobar
- $XFS_IO_PROG -c "fsync" $SCRATCH_MNT/foobar
- 
-+# f2fs doesn't support fs-op level transaction functionality. so it have no way
-+# to persist all metadata updates in one transaction.  We can use "fastboot"
-+# mountoption for this case, so during last fsync on qwerty, f2fs can trigger a
-+# checkpoint which will persist all metadata updates before fsync().
-+if [ $FSTYP = "f2fs" ]; then
-+	export MOUNT_OPTIONS="-o fastboot $MOUNT_OPTIONS"
-+fi
-+
- _flakey_drop_and_remount
- 
- # After the fsync log is replayed, the file should have only 2 xattrs, the ones
--- 
-2.13.6
+And, when we need to do checkpoint, we'd like to block internal operations by
+	f2fs_lock_all -> f2fs_down_write(&sbi->cp_rwsem);
 
+So, what I expected was giving the highest priority to the checkpoint thread
+by grabbing down_write to block all the other readers.
+
+> 
+> And perhaps equally oddly, then when you do f2fs_issue_checkpoint(),
+> _that_ code uses fancy lockless lists.
+> 
+> I'm probably mis-reading it.
+> 
+>              Linus
 
 
 _______________________________________________
