@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EED14E9FDC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Mar 2022 21:42:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id E522A4E9FDE
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Mar 2022 21:42:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nYvFw-0000hS-Vz; Mon, 28 Mar 2022 19:42:23 +0000
+	id 1nYv88-0004QI-O6; Mon, 28 Mar 2022 19:42:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <sashal@kernel.org>) id 1nYvFw-0000hK-0x
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Mar 2022 19:42:22 +0000
+ (envelope-from <sashal@kernel.org>) id 1nYv86-0004QC-MV
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Mar 2022 19:42:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cK/FazBFEfOw/f8rLn9ZCs9tw8HqAHS7xribQCIT6sA=; b=BHKV9KEUZ7u4BL2dqLXNm0juRR
- rY/sPXekg7JETosgY0b7v96AOKDrCW33Icd8VS8wDIRPnP/FKwGHxhZRsp/g6vJQb2FSx0zja32fp
- 1TvTt8Hv7CZdTR7WLElrC853Buk70+n6SiEnPAqVGwj8LVrMHFI9apzw4x0kheYPakIM=;
+ bh=4jnQkpFleSNnszE7RZOyb3yJO9mFQyfdUd8ASdFgl2o=; b=gL/fqg1UGj+PJCOl4F2tab9t+H
+ 3hwl3bLV/xzgmt4fn9601idac0bWIlOrksPp/b7WK2K9DsK6/LLGbt/g0nq0AiR/sHQjrsd8Hf6vT
+ TBJBs0RlJV/0uXOVZwZyndO49Sx2qNkx6ouzuotNlIyFBedqdVo0TOVI+IsWBW5XANWA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cK/FazBFEfOw/f8rLn9ZCs9tw8HqAHS7xribQCIT6sA=; b=gfVJXe8jo185GM46vpq0sN5BNU
- 3Y+idPUTR+qv3BX/ZsyiD7YF98nQXfkBVNCZ3n56PWPp2FlPmhVddIJSR30F19i7aNIxDjoMGdpCW
- HIlVvEOQEZI7ct6hirhRA+P4hg1CNP1mVC1Xp612iTXpEeo9pIUFB4eyP24UqibSYN7Y=;
+ bh=4jnQkpFleSNnszE7RZOyb3yJO9mFQyfdUd8ASdFgl2o=; b=Yn3MlC/c7szdO1wgoBVdxdB35E
+ OObmpXQ+C4hgKmLZFmY8tt+KjF6Rk9Zt/gzi2/c8A2VKBLKJKgnmPtHwEfCJne8T9buPscNi2ddcP
+ obJe2Mr2bxyPo22j+ekkfby2f1m3LOf7Md2FhTx8turI+2x/pZV6X90fJnd7DHWA/2ps=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nYvFt-00EwnD-HW
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Mar 2022 19:42:22 +0000
+ id 1nYvG0-00EwnU-2m
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 28 Mar 2022 19:42:28 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 54C94612AC;
- Mon, 28 Mar 2022 19:42:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F4BAC34100;
- Mon, 28 Mar 2022 19:42:10 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9BC34612CA;
+ Mon, 28 Mar 2022 19:42:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03D1BC34111;
+ Mon, 28 Mar 2022 19:42:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1648496531;
- bh=EhX138gT4xw4XP//qPi7bg6ZwwdT6/mNNofgRsU8Cnw=;
+ s=k20201202; t=1648496541;
+ bh=Ho/BjnVNGfweAgBtMiS7dBtzUEAbt0AM1Wjb60i/UUs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ESbJdsysmyRjAysrUH/gqU48FtUBwsE2r8mSvsaNMPK0VFIz/Vsg5ifnWrRYkGgd3
- +fU1G/u8niHnrerrzHyQHwbWR0FIrTS4UmrPV35/nuv7ZN1iX7OolHnEB6eOq0wURy
- k21b1uBXQ/FeSb9fuyYb9UcKGeC3CS/vAdg0/Cmf0Re+UkAiz1aFOf8sNkbugCc8yj
- rBxLXEOQh6M1i/OwKyWUsDuoolkQcAiVLra35zUP0uBKr3xjesAQ85xDSZO5J+HQIw
- DfuDdhDu67lwEYKF+BPwtvTvCjyv5m0ZHaLbG98CUciwvhO9xHxrR2IS5clnweiNUE
- 8dUoa17PFgiTA==
+ b=TDLZa+VaNAtwlieI6dmRL6auO3GEFPwnMIifx5a5nAoXuK6ePpaz8IOEjNCaCkJzo
+ ut9gwcvtnJhcyktbpJXLqsS3ZxiDjN/VemASPUPhqqAgKp+w1srQCLaTwkXf6JgsdF
+ Zpfr0Fw8/AYw0Sf8ZSTpkTqk4zQcNpnO+w4dpo22YFtB5Cok+OmQA9bDZ1IN/SRPIm
+ VVNWWTbu9Gt741ypNOYjWDGbHqbtzxi7tiu1SYNO0blxMlFJtZBnHOPyKDGQ9McsSc
+ IfiY66m0ULuqNS135/j7BrNQw71hfztxf7FEPtsouYGHKs94+ve1V8khxSS041IBHt
+ iifd51w1AeHxg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 28 Mar 2022 15:41:45 -0400
-Message-Id: <20220328194157.1585642-10-sashal@kernel.org>
+Date: Mon, 28 Mar 2022 15:41:53 -0400
+Message-Id: <20220328194157.1585642-18-sashal@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220328194157.1585642-1-sashal@kernel.org>
 References: <20220328194157.1585642-1-sashal@kernel.org>
@@ -73,8 +73,11 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: From: Jaegeuk Kim <jaegeuk@kernel.org> [ Upstream commit
- ba900534f807f0b327c92d5141c85d2313e2d55c
- ] Let's purge inode cache in order to avoid the below deadlock. 
+ 98237fcda4a24e67b0a4498c17d5aa4ad4537bc7
+ ] [14696.634553] task:cat state:D stack: 0 pid:1613738 ppid:1613735
+ flags:0x00000004
+ [14696.638285] Call Trace: [14696.639038] <TASK> [14696.640032]
+ __schedule+0x302/0x930 [14696.640969] schedule+0x58/0 [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,9 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nYvFt-00EwnD-HW
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.17 10/21] f2fs: don't get FREEZE lock
- in f2fs_evict_inode in frozen fs
+X-Headers-End: 1nYvG0-00EwnU-2m
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.17 18/21] f2fs: use spin_lock to avoid
+ hang
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,114 +116,137 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 
-[ Upstream commit ba900534f807f0b327c92d5141c85d2313e2d55c ]
+[ Upstream commit 98237fcda4a24e67b0a4498c17d5aa4ad4537bc7 ]
 
-Let's purge inode cache in order to avoid the below deadlock.
-
-[freeze test]                         shrinkder
-freeze_super
- - pwercpu_down_write(SB_FREEZE_FS)
-                                       - super_cache_scan
-                                         - down_read(&sb->s_umount)
-                                           - prune_icache_sb
-                                            - dispose_list
-                                             - evict
-                                              - f2fs_evict_inode
-thaw_super
- - down_write(&sb->s_umount);
-                                              - __percpu_down_read(SB_FREEZE_FS)
+[14696.634553] task:cat             state:D stack:    0 pid:1613738 ppid:1613735 flags:0x00000004
+[14696.638285] Call Trace:
+[14696.639038]  <TASK>
+[14696.640032]  __schedule+0x302/0x930
+[14696.640969]  schedule+0x58/0xd0
+[14696.641799]  schedule_preempt_disabled+0x18/0x30
+[14696.642890]  __mutex_lock.constprop.0+0x2fb/0x4f0
+[14696.644035]  ? mod_objcg_state+0x10c/0x310
+[14696.645040]  ? obj_cgroup_charge+0xe1/0x170
+[14696.646067]  __mutex_lock_slowpath+0x13/0x20
+[14696.647126]  mutex_lock+0x34/0x40
+[14696.648070]  stat_show+0x25/0x17c0 [f2fs]
+[14696.649218]  seq_read_iter+0x120/0x4b0
+[14696.650289]  ? aa_file_perm+0x12a/0x500
+[14696.651357]  ? lru_cache_add+0x1c/0x20
+[14696.652470]  seq_read+0xfd/0x140
+[14696.653445]  full_proxy_read+0x5c/0x80
+[14696.654535]  vfs_read+0xa0/0x1a0
+[14696.655497]  ksys_read+0x67/0xe0
+[14696.656502]  __x64_sys_read+0x1a/0x20
+[14696.657580]  do_syscall_64+0x3b/0xc0
+[14696.658671]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+[14696.660068] RIP: 0033:0x7efe39df1cb2
+[14696.661133] RSP: 002b:00007ffc8badd948 EFLAGS: 00000246 ORIG_RAX: 0000000000000000
+[14696.662958] RAX: ffffffffffffffda RBX: 0000000000020000 RCX: 00007efe39df1cb2
+[14696.664757] RDX: 0000000000020000 RSI: 00007efe399df000 RDI: 0000000000000003
+[14696.666542] RBP: 00007efe399df000 R08: 00007efe399de010 R09: 00007efe399de010
+[14696.668363] R10: 0000000000000022 R11: 0000000000000246 R12: 0000000000000000
+[14696.670155] R13: 0000000000000003 R14: 0000000000020000 R15: 0000000000020000
+[14696.671965]  </TASK>
+[14696.672826] task:umount          state:D stack:    0 pid:1614985 ppid:1614984 flags:0x00004000
+[14696.674930] Call Trace:
+[14696.675903]  <TASK>
+[14696.676780]  __schedule+0x302/0x930
+[14696.677927]  schedule+0x58/0xd0
+[14696.679019]  schedule_preempt_disabled+0x18/0x30
+[14696.680412]  __mutex_lock.constprop.0+0x2fb/0x4f0
+[14696.681783]  ? destroy_inode+0x65/0x80
+[14696.683006]  __mutex_lock_slowpath+0x13/0x20
+[14696.684305]  mutex_lock+0x34/0x40
+[14696.685442]  f2fs_destroy_stats+0x1e/0x60 [f2fs]
+[14696.686803]  f2fs_put_super+0x158/0x390 [f2fs]
+[14696.688238]  generic_shutdown_super+0x7a/0x120
+[14696.689621]  kill_block_super+0x27/0x50
+[14696.690894]  kill_f2fs_super+0x7f/0x100 [f2fs]
+[14696.692311]  deactivate_locked_super+0x35/0xa0
+[14696.693698]  deactivate_super+0x40/0x50
+[14696.694985]  cleanup_mnt+0x139/0x190
+[14696.696209]  __cleanup_mnt+0x12/0x20
+[14696.697390]  task_work_run+0x64/0xa0
+[14696.698587]  exit_to_user_mode_prepare+0x1b7/0x1c0
+[14696.700053]  syscall_exit_to_user_mode+0x27/0x50
+[14696.701418]  do_syscall_64+0x48/0xc0
+[14696.702630]  entry_SYSCALL_64_after_hwframe+0x44/0xae
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 1 +
- fs/f2fs/debug.c                         | 1 +
- fs/f2fs/f2fs.h                          | 1 +
- fs/f2fs/inode.c                         | 6 ++++--
- fs/f2fs/super.c                         | 4 ++++
- 5 files changed, 11 insertions(+), 2 deletions(-)
+ fs/f2fs/debug.c | 17 ++++++++++-------
+ 1 file changed, 10 insertions(+), 7 deletions(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 2416b03ff283..137f16feee08 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -430,6 +430,7 @@ Description:	Show status of f2fs superblock in real time.
- 		0x800  SBI_QUOTA_SKIP_FLUSH  skip flushing quota in current CP
- 		0x1000 SBI_QUOTA_NEED_REPAIR quota file may be corrupted
- 		0x2000 SBI_IS_RESIZEFS       resizefs is in process
-+		0x4000 SBI_IS_FREEZING       freefs is in process
- 		====== ===================== =================================
- 
- What:		/sys/fs/f2fs/<disk>/ckpt_thread_ioprio
 diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
-index 8c50518475a9..07ad0d81f0c5 100644
+index 07ad0d81f0c5..b449c7a372a4 100644
 --- a/fs/f2fs/debug.c
 +++ b/fs/f2fs/debug.c
-@@ -338,6 +338,7 @@ static char *s_flag[] = {
- 	[SBI_QUOTA_SKIP_FLUSH]	= " quota_skip_flush",
- 	[SBI_QUOTA_NEED_REPAIR]	= " quota_need_repair",
- 	[SBI_IS_RESIZEFS]	= " resizefs",
-+	[SBI_IS_FREEZING]	= " freezefs",
- };
+@@ -21,7 +21,7 @@
+ #include "gc.h"
  
- static int stat_show(struct seq_file *s, void *v)
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 68b44015514f..2514597f5b26 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1267,6 +1267,7 @@ enum {
- 	SBI_QUOTA_SKIP_FLUSH,			/* skip flushing quota in current CP */
- 	SBI_QUOTA_NEED_REPAIR,			/* quota file may be corrupted */
- 	SBI_IS_RESIZEFS,			/* resizefs is in process */
-+	SBI_IS_FREEZING,			/* freezefs is in process */
- };
- 
- enum {
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 0ec8e32a00b4..026c2f79fd05 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -778,7 +778,8 @@ void f2fs_evict_inode(struct inode *inode)
- 	f2fs_remove_ino_entry(sbi, inode->i_ino, UPDATE_INO);
- 	f2fs_remove_ino_entry(sbi, inode->i_ino, FLUSH_INO);
- 
--	sb_start_intwrite(inode->i_sb);
-+	if (!is_sbi_flag_set(sbi, SBI_IS_FREEZING))
-+		sb_start_intwrite(inode->i_sb);
- 	set_inode_flag(inode, FI_NO_ALLOC);
- 	i_size_write(inode, 0);
- retry:
-@@ -809,7 +810,8 @@ void f2fs_evict_inode(struct inode *inode)
- 		if (dquot_initialize_needed(inode))
- 			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
- 	}
--	sb_end_intwrite(inode->i_sb);
-+	if (!is_sbi_flag_set(sbi, SBI_IS_FREEZING))
-+		sb_end_intwrite(inode->i_sb);
- no_delete:
- 	dquot_drop(inode);
- 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index baefd398ec1a..e18726c5a564 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1662,11 +1662,15 @@ static int f2fs_freeze(struct super_block *sb)
- 	/* ensure no checkpoint required */
- 	if (!llist_empty(&F2FS_SB(sb)->cprc_info.issue_list))
- 		return -EINVAL;
-+
-+	/* to avoid deadlock on f2fs_evict_inode->SB_FREEZE_FS */
-+	set_sbi_flag(F2FS_SB(sb), SBI_IS_FREEZING);
- 	return 0;
- }
- 
- static int f2fs_unfreeze(struct super_block *sb)
+ static LIST_HEAD(f2fs_stat_list);
+-static DEFINE_MUTEX(f2fs_stat_mutex);
++static DEFINE_RAW_SPINLOCK(f2fs_stat_lock);
+ #ifdef CONFIG_DEBUG_FS
+ static struct dentry *f2fs_debugfs_root;
+ #endif
+@@ -345,8 +345,9 @@ static int stat_show(struct seq_file *s, void *v)
  {
-+	clear_sbi_flag(F2FS_SB(sb), SBI_IS_FREEZING);
+ 	struct f2fs_stat_info *si;
+ 	int i = 0, j = 0;
++	unsigned long flags;
+ 
+-	mutex_lock(&f2fs_stat_mutex);
++	raw_spin_lock_irqsave(&f2fs_stat_lock, flags);
+ 	list_for_each_entry(si, &f2fs_stat_list, stat_list) {
+ 		update_general_status(si->sbi);
+ 
+@@ -574,7 +575,7 @@ static int stat_show(struct seq_file *s, void *v)
+ 		seq_printf(s, "  - paged : %llu KB\n",
+ 				si->page_mem >> 10);
+ 	}
+-	mutex_unlock(&f2fs_stat_mutex);
++	raw_spin_unlock_irqrestore(&f2fs_stat_lock, flags);
  	return 0;
  }
  
+@@ -585,6 +586,7 @@ int f2fs_build_stats(struct f2fs_sb_info *sbi)
+ {
+ 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
+ 	struct f2fs_stat_info *si;
++	unsigned long flags;
+ 	int i;
+ 
+ 	si = f2fs_kzalloc(sbi, sizeof(struct f2fs_stat_info), GFP_KERNEL);
+@@ -620,9 +622,9 @@ int f2fs_build_stats(struct f2fs_sb_info *sbi)
+ 	atomic_set(&sbi->max_aw_cnt, 0);
+ 	atomic_set(&sbi->max_vw_cnt, 0);
+ 
+-	mutex_lock(&f2fs_stat_mutex);
++	raw_spin_lock_irqsave(&f2fs_stat_lock, flags);
+ 	list_add_tail(&si->stat_list, &f2fs_stat_list);
+-	mutex_unlock(&f2fs_stat_mutex);
++	raw_spin_unlock_irqrestore(&f2fs_stat_lock, flags);
+ 
+ 	return 0;
+ }
+@@ -630,10 +632,11 @@ int f2fs_build_stats(struct f2fs_sb_info *sbi)
+ void f2fs_destroy_stats(struct f2fs_sb_info *sbi)
+ {
+ 	struct f2fs_stat_info *si = F2FS_STAT(sbi);
++	unsigned long flags;
+ 
+-	mutex_lock(&f2fs_stat_mutex);
++	raw_spin_lock_irqsave(&f2fs_stat_lock, flags);
+ 	list_del(&si->stat_list);
+-	mutex_unlock(&f2fs_stat_mutex);
++	raw_spin_unlock_irqrestore(&f2fs_stat_lock, flags);
+ 
+ 	kfree(si);
+ }
 -- 
 2.34.1
 
