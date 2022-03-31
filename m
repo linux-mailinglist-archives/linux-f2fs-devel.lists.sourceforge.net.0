@@ -2,98 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1ADE4ECAE9
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Mar 2022 19:42:40 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1490C4EE3E9
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  1 Apr 2022 00:18:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nZcDA-0006uU-OK; Wed, 30 Mar 2022 17:42:36 +0000
+	id 1na37O-0001XE-7F; Thu, 31 Mar 2022 22:18:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
- <3hJZEYgkbANsPVWH7IIBO7MMFA.DLLDIBRPBO9LKQBKQ.9LJ@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1nZcD9-0006uK-8a
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Mar 2022 17:42:35 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <jakobkoschel@gmail.com>) id 1na37N-0001X8-NQ
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Mar 2022 22:18:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=v89tVw8ySyr98HqbPOA8KhBHppRaKTd45nWoytVaQ0U=; b=j6cO92qdzx8/MHWWMYv0c1FfmC
- l3hoTuqC86zXLCgkiWgcIU2F2kpnBwKWP1F4TBz3TSWKSJ1VVLzpOTk2oOzGQhS9wiS4fYlXhJNwE
- UpvEkbrDDeDjSvQmuW9N6QJqR1NEP9wIQCVXMaV35u4lIE5+zwbkL+kjjGx+V078Aicg=;
+ bh=JGGgLAEg4vKemtCj1ntyLaCyd5rpT3euBf5HMUBa/kQ=; b=GyBX1Sxesa0wQ/i2UQ30Afpuob
+ jmLNCYdCvCi7wMjg/KD46Xpt9AtDU1KhhQXiOgiyj7cW0sIhvZjDHVCv0mCe2QPlWWN8aRPnpk+rP
+ t37OQueeJTrkhmpSpjy7cBaJUQDjobWvDDaB8RVhW+Yg/Jo6plE6hmGoNDzN4/3XRsbM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=v89tVw8ySyr98HqbPOA8KhBHppRaKTd45nWoytVaQ0U=; b=R
- BjOcGrc/Trm6bQAqq0v62BQABCgUlPcXMV4v0VGn6HDetDmE7BarDQrajKbcn+3wkqZ3L+pantJTJ
- 1TiW4+U2YmEXb3lRBF2VGzuxE8VvJ0xs22UkcsXFYmfgq+bMFbBbLaSYn1l9oYXrL74N1FrttttND
- miTbTyl9NPKQE3Z4=;
-Received: from mail-io1-f71.google.com ([209.85.166.71])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=JGGgLAEg4vKemtCj1ntyLaCyd5rpT3euBf5HMUBa/kQ=; b=Q
+ HQRJAPc0L8ayAqK7dbtXmcmhH14V1gSQjUaoPMraA27oxYsHmPySwXDhQDoxDrlq210LrgXx0RA34
+ ZDn+W1VjNdqWNBzyiLnTRlLCHZIXcvFm5ADeD4baN+oZovxb2BHfEJwB3BsBtiYew5vUmi/EfcIkb
+ YiCTj8o29FT8udhU=;
+Received: from mail-ej1-f53.google.com ([209.85.218.53])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nZcL4-0007ai-5u
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 30 Mar 2022 17:42:34 +0000
-Received: by mail-io1-f71.google.com with SMTP id
- g11-20020a056602072b00b00645cc0735d7so14908500iox.1
+ id 1na37I-0015BT-HA
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 31 Mar 2022 22:18:12 +0000
+Received: by mail-ej1-f53.google.com with SMTP id bg10so2162884ejb.4
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 30 Mar 2022 10:42:34 -0700 (PDT)
+ Thu, 31 Mar 2022 15:18:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=JGGgLAEg4vKemtCj1ntyLaCyd5rpT3euBf5HMUBa/kQ=;
+ b=E4NYH+s4Okdqjh+xibJ5yjwAj29PreK5heggPOvUbxc/0XOdOKvGymtbtO1kdi0uqA
+ UTEECTNqzjgKeolfmzwke5mOwqIs4wWuLfKL5uODd4rbA40wuiQ7ID2VG13DkbzrAgpm
+ TibtqBacUFO/gCVs4fOChK+vTvTI0CMQ2RJNYJBtVfbP1mKzM2Nymvi9uxeV4JX/Y66J
+ ttgp9L0VTaNGCIuMHFRPcefjynbEaH9zslYB+PWJU00tFU1NLZtNFjxPG4mLEpAoYTvF
+ AzKoZFjMWec/izbllW5SeSyHP8sfsHDxbbixsGlw7ym9IhCFjvSBhGQaDwVJ/I72FwfP
+ M5qA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
- bh=v89tVw8ySyr98HqbPOA8KhBHppRaKTd45nWoytVaQ0U=;
- b=CavWJCONNARQXZ2rwR1XPs/CzfJAaukTQQN8igorwOly8iPo0qfNo1FP104KvFu4Vw
- I2McfILrbw+35XvdB5C4vhIdI6Zb8hZXur+sqcA/s2RmI4d0MnNFvo2dTqyGTxIlrZZU
- en4DzOM1LR9IZyHvhA295/m0xgbDXAbWN+QQNRYBMy2jBUi28B3tUu7/BJcAFTXP3+WT
- UF87A1ECtGixaS5mS43GesyWl9IhD4MCEBRRixRZ7ohlFxWNS1xiSAyVNVqejZB9Etn7
- nebuM9qfNrvDl+pfbqaY35+SJ+lQHgSnYk+LoKNouYG95Hto9t7l5iIzB+l3vPnnuuGc
- K59A==
-X-Gm-Message-State: AOAM532FKamHZetaDUbFa4E4+0sJfh7ekHflCbbQbs9WiEK2LqzJAFFs
- z+5HW8W66YhCT7MhaR/0OXlhEukCsrMtjsYRrvvBXaKRyAFu
-X-Google-Smtp-Source: ABdhPJyiz50nZ2RWpGYPBTvfpWsTpAwBWqsfVFFK+b/4bOJNNcHpmERV4SikYJ2bYt+Yp6SYDg/ejepWPdxLAKCPQ7gkC/gl80c6
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=JGGgLAEg4vKemtCj1ntyLaCyd5rpT3euBf5HMUBa/kQ=;
+ b=E1x2HYApAfCaZrkCthNefiSeLtLb1iKLzv30ySURFz36DEdqSNsej+4llYeni82Mrw
+ GrJCUIfqxv+8/GNaNnnfEcS7e7goi8S5pavcJSeF0BsfYil1IlsDW6M9CofS9CIUh0he
+ ku8rOgCh5YJzRkzX9aDVdCCMJldjmkXEeQFJU/NfPpYic+7TL417oqqQcCWvb0mpl/V8
+ CWvfL40NWe2wje7QDwCJNcK+GIJyJ7h3ScAbkqh7t1Z2vYn90Ug3ES5iSKZAkfwe3dL8
+ Z9UQaVGjgDUWdsA1DWYFYHKCpPuh1sJylc8AcSpIDFm6tXlsQ+X+uucrWyT/f+hfEpM4
+ VBWA==
+X-Gm-Message-State: AOAM533Q+7sH9UHjPtimeSreS7YYiNoSkaLlSHna0zBeLvtkcNEqoFp1
+ 5mlVW9xhDVFlHKKbqj9eOfM=
+X-Google-Smtp-Source: ABdhPJwsPBXkMH3zqricdh6VqGP9lTF4os4T+dHyBkSiFt6jonLB2mmicd0A0DqTtqhS+Op9ohNBFw==
+X-Received: by 2002:a17:907:a414:b0:6e0:68f3:d7a with SMTP id
+ sg20-20020a170907a41400b006e068f30d7amr798723ejc.75.1648765082139; 
+ Thu, 31 Mar 2022 15:18:02 -0700 (PDT)
+Received: from localhost.localdomain (i130160.upc-i.chello.nl.
+ [62.195.130.160]) by smtp.googlemail.com with ESMTPSA id
+ c4-20020a170906340400b006d077e850b5sm267295ejb.23.2022.03.31.15.18.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Mar 2022 15:18:01 -0700 (PDT)
+From: Jakob Koschel <jakobkoschel@gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Fri,  1 Apr 2022 00:16:49 +0200
+Message-Id: <20220331221650.891790-1-jakobkoschel@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Received: by 2002:a05:6638:1453:b0:319:c928:5ccd with SMTP id
- l19-20020a056638145300b00319c9285ccdmr543819jad.136.1648662148565; Wed, 30
- Mar 2022 10:42:28 -0700 (PDT)
-Date: Wed, 30 Mar 2022 10:42:28 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000b850b905db73117a@google.com>
-From: syzbot <syzbot+9e29d4a176b24eaa4fc1@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: ae085d7f9365
- mm: kfence: fix missing objcg housekeeping fo.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=12a11a77700000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview: In preparation to limit the scope of a list iterator to the
+ list traversal loop, use a dedicated pointer to point to the found element
+ [1]. If no break is hit or the list is empty,
+ 'next' will be NULL and list_move_tail()
+ should be called explicitly on the head directly. 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.71 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.71 listed in list.dnswl.org]
-X-Headers-End: 1nZcL4-0007ai-5u
-Subject: [f2fs-dev] [syzbot] BUG: unable to handle kernel NULL pointer
- dereference in f2fs_update_meta_page (2)
+ no trust [209.85.218.53 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [jakobkoschel[at]gmail.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.53 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1na37I-0015BT-HA
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: use separate list iterator variable to
+ call list_move_tail()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,99 +123,62 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, "Bos, H.J." <h.j.bos@vu.nl>,
+ Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
+ Cristiano Giuffrida <c.giuffrida@vu.nl>,
+ Jakob Koschel <jakobkoschel@gmail.com>, linux-f2fs-devel@lists.sourceforge.net,
+ Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+In preparation to limit the scope of a list iterator to the list
+traversal loop, use a dedicated pointer to point to the found element
+[1].
 
-syzbot found the following issue on:
+If no break is hit or the list is empty, 'next' will be NULL and
+list_move_tail() should be called explicitly on the head directly.
 
-HEAD commit:    ae085d7f9365 mm: kfence: fix missing objcg housekeeping fo..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=12a11a77700000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=91f0a0c422e301dd
-dashboard link: https://syzkaller.appspot.com/bug?extid=9e29d4a176b24eaa4fc1
-compiler:       Debian clang version 11.0.1-2, GNU ld (GNU Binutils for Debian) 2.35.2
-
-Unfortunately, I don't have any reproducer for this issue yet.
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+9e29d4a176b24eaa4fc1@syzkaller.appspotmail.com
-
-BUG: kernel NULL pointer dereference, address: 0000000000000000
-#PF: supervisor instruction fetch in kernel mode
-#PF: error_code(0x0010) - not-present page
-PGD 1ef8e067 P4D 1ef8e067 PUD 0 
-Oops: 0010 [#1] PREEMPT SMP KASAN
-CPU: 0 PID: 3615 Comm: syz-executor.0 Tainted: G        W         5.17.0-syzkaller-11407-gae085d7f9365 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/01/2011
-RIP: 0010:0x0
-Code: Unable to access opcode bytes at RIP 0xffffffffffffffd6.
-RSP: 0018:ffffc9000400f818 EFLAGS: 00010286
-RAX: 0000000000000000 RBX: ffffea0000c768c0 RCX: ffff88801a581d00
-RDX: 0000000000000000 RSI: ffffea0000c768c0 RDI: ffff88802c0203b8
-RBP: ffffc9000400faf0 R08: ffffffff81b497cb R09: fffff9400018ed19
-R10: fffff9400018ed19 R11: 0000000000000000 R12: ffff88807bb85b10
-R13: 0000000000000001 R14: ffff888040fea000 R15: ffff888058d74000
-FS:  000055555607f400(0000) GS:ffff8880b9a00000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: ffffffffffffffd6 CR3: 00000000479d6000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- f2fs_update_meta_page+0x45/0x60 fs/f2fs/segment.c:2484
- do_checkpoint fs/f2fs/checkpoint.c:1527 [inline]
- f2fs_write_checkpoint+0x3136/0x5b80 fs/f2fs/checkpoint.c:1689
- f2fs_issue_checkpoint+0x361/0x4e0
- sync_filesystem+0x1bc/0x220 fs/sync.c:66
- generic_shutdown_super+0x6b/0x300 fs/super.c:445
- kill_block_super+0x79/0xd0 fs/super.c:1394
- kill_f2fs_super+0x2f9/0x3c0 fs/f2fs/super.c:4546
- deactivate_locked_super+0xa7/0xf0 fs/super.c:332
- cleanup_mnt+0x462/0x510 fs/namespace.c:1186
- task_work_run+0x146/0x1c0 kernel/task_work.c:164
- tracehook_notify_resume include/linux/tracehook.h:188 [inline]
- exit_to_user_mode_loop kernel/entry/common.c:190 [inline]
- exit_to_user_mode_prepare+0x1dd/0x200 kernel/entry/common.c:222
- __syscall_exit_to_user_mode_work kernel/entry/common.c:304 [inline]
- syscall_exit_to_user_mode+0x2e/0x70 kernel/entry/common.c:315
- entry_SYSCALL_64_after_hwframe+0x44/0xae
-RIP: 0033:0x7f48a848a4b7
-Code: ff ff ff f7 d8 64 89 01 48 83 c8 ff c3 66 0f 1f 44 00 00 31 f6 e9 09 00 00 00 66 0f 1f 84 00 00 00 00 00 b8 a6 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007ffd9c82d6e8 EFLAGS: 00000246 ORIG_RAX: 00000000000000a6
-RAX: 0000000000000000 RBX: 0000000000000000 RCX: 00007f48a848a4b7
-RDX: 00007ffd9c82d7bc RSI: 000000000000000a RDI: 00007ffd9c82d7b0
-RBP: 00007ffd9c82d7b0 R08: 00000000ffffffff R09: 00007ffd9c82d580
-R10: 00005555560808b3 R11: 0000000000000246 R12: 00007f48a84e21ea
-R13: 00007ffd9c82e870 R14: 0000555556080810 R15: 00007ffd9c82e8b0
- </TASK>
-Modules linked in:
-CR2: 0000000000000000
----[ end trace 0000000000000000 ]---
-RIP: 0010:0x0
-Code: Unable to access opcode bytes at RIP 0xffffffffffffffd6.
-RSP: 0018:ffffc9000400f818 EFLAGS: 00010286
-RAX: 0000000000000000 RBX: ffffea0000c768c0 RCX: ffff88801a581d00
-RDX: 0000000000000000 RSI: ffffea0000c768c0 RDI: ffff88802c0203b8
-RBP: ffffc9000400faf0 R08: ffffffff81b497cb R09: fffff9400018ed19
-R10: fffff9400018ed19 R11: 0000000000000000 R12: ffff88807bb85b10
-R13: 0000000000000001 R14: ffff888040fea000 R15: ffff888058d74000
-FS:  000055555607f400(0000) GS:ffff8880b9a00000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: ffffffffffffffd6 CR3: 00000000479d6000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-
-
+Link: https://lore.kernel.org/all/CAHk-=wgRr_D8CB-D9Kg-c=EHreAsk5SqXPwr9Y7k9sA6cWXJ6w@mail.gmail.com/
+Signed-off-by: Jakob Koschel <jakobkoschel@gmail.com>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ fs/f2fs/segment.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 22dfeb991529..81ef2c3d08e5 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -4175,16 +4175,20 @@ static void release_sit_entry_set(struct sit_entry_set *ses)
+ static void adjust_sit_entry_set(struct sit_entry_set *ses,
+ 						struct list_head *head)
+ {
+-	struct sit_entry_set *next = ses;
++	struct sit_entry_set *next = NULL, *iter = ses;
+ 
+ 	if (list_is_last(&ses->set_list, head))
+ 		return;
+ 
+-	list_for_each_entry_continue(next, head, set_list)
+-		if (ses->entry_cnt <= next->entry_cnt)
++	list_for_each_entry_continue(iter, head, set_list)
++		if (ses->entry_cnt <= iter->entry_cnt) {
++			next = iter;
++			list_move_tail(&ses->set_list, &iter->set_list);
+ 			break;
++		}
+ 
+-	list_move_tail(&ses->set_list, &next->set_list);
++	if (!next)
++		list_move_tail(&ses->set_list, head);
+ }
+ 
+ static void add_sit_entry(unsigned int segno, struct list_head *head)
+
+base-commit: d888c83fcec75194a8a48ccd283953bdba7b2550
+-- 
+2.25.1
+
 
 
 _______________________________________________
