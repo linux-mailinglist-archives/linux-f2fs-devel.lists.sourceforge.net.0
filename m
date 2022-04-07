@@ -2,187 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 156C84F742C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Apr 2022 05:42:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id D26BD4F752E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Apr 2022 07:16:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ncJ2K-0007MT-Rg; Thu, 07 Apr 2022 03:42:19 +0000
+	id 1ncKVY-0000C3-Ho; Thu, 07 Apr 2022 05:16:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <martin.petersen@oracle.com>)
- id 1ncJ2J-0007MI-Lr; Thu, 07 Apr 2022 03:42:18 +0000
+ (envelope-from <colyli@suse.de>)
+ id 1ncKVW-0000Bo-Ir; Thu, 07 Apr 2022 05:16:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:In-Reply-To:Date:
- References:Message-ID:From:Subject:Cc:To:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0fSH05fVrj4EsKu7GruSr6V8eDQcmEnuW15iSPtYu3U=; b=GeWLk5bmGYKBmH+eV77sncanBb
- 7IPgsJzaw5oNbU6Y9RD0mrT7ZbfiLTQWCwAOIS6rxsbabVZinj1GxT4yDu/2rSqKCJNAYwuy+jWVg
- TMpv8FqKYHh/xbFI8iqfvpj1HrvFzPEeOEcwtqTelH+at/IWJkRhIlAePi5hSpzGJqBg=;
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=3mSljOe/NcqR0nJ5LYJS1IexMd+XWdNrUUnY7u8p4ss=; b=hbUK91ekvi9BJmCy9CI0ws/kZ+
+ ap4RNMYQCAMMqInshDep4+OtLV9IsEOcULwjQpsFcsUhM+uFb+bfAY0XC/1Hdx4ms0UDWb1F9aG3R
+ zmL6K+ompKferOHiT4C3UWwRabnpiB5K5pEoH3/HSeSNI0RDnX2I2cGRZg8qTyu5E0e8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:In-Reply-To:Date:References:Message-ID:From:
- Subject:Cc:To:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0fSH05fVrj4EsKu7GruSr6V8eDQcmEnuW15iSPtYu3U=; b=DoiZkcdY2ZwXnE7LL5O3Mkcm4g
- ePQzI5YBmeoAEUnbKtexux7j3E8egpcHuVhRI524mSoC8N64TMYKf2DDH8Mddv1VxA3mdDzkfwY4u
- pfnBOi49/DLGP5QxfbS0itJH7fCkNRpZK7KrPmuz2Q2ZJ7xQBFWyEOoGd975vNPsTyYE=;
-Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1ncJ2H-0008Ia-1v; Thu, 07 Apr 2022 03:42:17 +0000
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 236Lmv86000758; 
- Thu, 7 Apr 2022 03:36:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=to : cc : subject :
- from : message-id : references : date : in-reply-to : content-type :
- mime-version; s=corp-2021-07-09;
- bh=0fSH05fVrj4EsKu7GruSr6V8eDQcmEnuW15iSPtYu3U=;
- b=iag3pmaogwT0fVNNtSBn/JoHcAOg5JTOiwAr7G+XUgGvcNjxegCBNThSYqe+F4T0NNMS
- B/59HaBNX03xPzKp11moq8ZsFxeak9RIA3RrLouwkC4YK+71tDVE0sdTjSK6BxxCftbo
- 0EZ+onJIUBjU/ENdCS5sy3svT9bx0UEJmXm8G3Vy6SHK2y8Xy6l3WbHoInOxD2xK3+eI
- 6prGeQ9aYuOEK5xF9lkj3vVuts9fdh0ePfPpNw+bzbLVZ7ePbcRp8+ED14FvB3NB4vug
- 6MW3QIbWBa8G316LrQWtBIEFgUnKlZc368HFrB7khC0iArMf4byEey+uTWpLJY8E6DL7 IA== 
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
- by mx0b-00069f02.pphosted.com with ESMTP id 3f6e3stjs6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 07 Apr 2022 03:36:57 +0000
-Received: from pps.filterd
- (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.16.1.2/8.16.1.2)
- with SMTP id 2373aWrY036365; Thu, 7 Apr 2022 03:36:56 GMT
-Received: from nam11-dm6-obe.outbound.protection.outlook.com
- (mail-dm6nam11lp2177.outbound.protection.outlook.com [104.47.57.177])
- by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com with ESMTP id
- 3f9803hf4d-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 07 Apr 2022 03:36:56 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bBtux/rJhtrl5yFsMQjtRJdNwFQDZ9e04K1j7qVY0mAmG6dIu7xDxjOrjBgp+kFuKMueCgrSMqOXko+XEZyej82ypi5BX6JAzWkqNsGhUOaj9PoAInFp9H4bruc2aiGt0CpE3Oue7uzYHCHlFhY6fVqtxqRotkx5lbzGr+6d27jpkn9KVr+sww7X6KU3E78q4Zy5BVnQgPfDp+CNOWIqTN9BpVqzHDmMW5bonjigwV/kHLDJthWtpi54PVY2SZSFbWTXEgGbPtwV4PNWRmZ1i1EYm+cP89DdG7R2Kg5tQR1oYE8DTKOr8BIpQ4stnk3+Ku4OfQA0CTF1UpS9t3yQoQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0fSH05fVrj4EsKu7GruSr6V8eDQcmEnuW15iSPtYu3U=;
- b=odYnQWdRRJ4FXJrzHv2+etqgNvxmSn2vvpwdNqfb5DEFoolf4R4cEZiboooNhkOdz02fjvfzGeFU7WGIKhYip/D1zaygAcFdVFpG1UGZbKuLWYf8zYKkFZgprk9Qnv0MrM3oSQ6x29lGO59/H2p0zdh2xcBWmLowqjeG53Vxoj6ei1BJCaF84DHi6/jNnw2LpC8Y1hWzXH6Cpuoyu4EQhhOJmke/h01RkdXQ5cKLYlvUIchQcC5wSWttmpGfg/NOaL99WAPP9WKqRwjUBcVfR6O/V1Et/yQknL/BQ8lm+kWpbBkbwma4xwMnQyw9dzYiYwoQIuGa+qHEbJtauHpjbg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0fSH05fVrj4EsKu7GruSr6V8eDQcmEnuW15iSPtYu3U=;
- b=lD2AOIVmspgZK/pwyBQri5RZA765JIpiAnX41gCyPVtP+Y0SeaHhVXkNeMjdO0jW+v8zL255prslBhs6U+n+XeYmqaxrxa75WKicpSdy1fVEeZ7x8Qf8na7UC0cNAtS20puZeuMXz7/6AAnLUVOLh00DYpJUCv3AWFnY07aff5g=
-Received: from PH0PR10MB4759.namprd10.prod.outlook.com (2603:10b6:510:3d::12)
- by CY4PR1001MB2200.namprd10.prod.outlook.com (2603:10b6:910:3f::28)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.31; Thu, 7 Apr
- 2022 03:36:54 +0000
-Received: from PH0PR10MB4759.namprd10.prod.outlook.com
- ([fe80::48e3:d153:6df4:fbed]) by PH0PR10MB4759.namprd10.prod.outlook.com
- ([fe80::48e3:d153:6df4:fbed%4]) with mapi id 15.20.5144.022; Thu, 7 Apr 2022
- 03:36:54 +0000
-To: Christoph Hellwig via Ocfs2-devel <ocfs2-devel@oss.oracle.com>
-From: "Martin K. Petersen" <martin.petersen@oracle.com>
-Organization: Oracle Corporation
-Message-ID: <yq1r169fttr.fsf@ca-mkp.ca.oracle.com>
-References: <20220406060516.409838-1-hch@lst.de>
- <20220406060516.409838-27-hch@lst.de>
-Date: Wed, 06 Apr 2022 23:36:52 -0400
-In-Reply-To: <20220406060516.409838-27-hch@lst.de> (Christoph Hellwig via
- Ocfs2-devel's message of "Wed, 6 Apr 2022 08:05:15 +0200")
-X-ClientProxiedBy: CH2PR20CA0025.namprd20.prod.outlook.com
- (2603:10b6:610:58::35) To PH0PR10MB4759.namprd10.prod.outlook.com
- (2603:10b6:510:3d::12)
+ bh=3mSljOe/NcqR0nJ5LYJS1IexMd+XWdNrUUnY7u8p4ss=; b=TIR602P3YlPGAwTFCcp5i5krrD
+ XfxIpq/rvTH0b+k18sSNfGcRMdFR8NfI4DU53h0NDKbSnga5PhNF1VCIXcSFPtab9f66L7ejAhm2M
+ ZM4k9XTAvs8Bn/h/QqJgDX6biEPNe0ZTqtsGhumLq+9GoaefnvA2FD4Kd15igrKOcfZI=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1ncKVU-008MwZ-D8; Thu, 07 Apr 2022 05:16:35 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id B76E021122;
+ Thu,  7 Apr 2022 05:16:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1649308580; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=3mSljOe/NcqR0nJ5LYJS1IexMd+XWdNrUUnY7u8p4ss=;
+ b=S8u6tT4MOmjtYxCqeb3qmZNn/bHZfqArgo8fnUTx30csmaC8EzqkNzsFCobTftsYYuUnLo
+ j2CEECTylf45En922p7zGMdDliHlOB0W/p8IrTqMAAnrwN0MZYWeSbIR9ZZAecmXn6aNZm
+ pYWtnVOXe4neFTwM3RVsKoYuaP4pLxY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1649308580;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=3mSljOe/NcqR0nJ5LYJS1IexMd+XWdNrUUnY7u8p4ss=;
+ b=8wVCLmcmG2fqohkxPiOTT+zNzsZDHS4xqLNwNHKElc9o7Ynzusas5Vi1t3zyX0xdAJFT8y
+ NypPr2uWld7TnxBQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 81FE713A66;
+ Thu,  7 Apr 2022 05:16:14 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id 0FojFJ5zTmLoQAAAMHmgww
+ (envelope-from <colyli@suse.de>); Thu, 07 Apr 2022 05:16:14 +0000
+Message-ID: <2aee78dd-d5b6-5444-da28-34ab2631b264@suse.de>
+Date: Thu, 7 Apr 2022 13:16:12 +0800
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 75691adb-1eb9-469a-d0c0-08da1847dc61
-X-MS-TrafficTypeDiagnostic: CY4PR1001MB2200:EE_
-X-Microsoft-Antispam-PRVS: <CY4PR1001MB220040178D0947BB8E0291BA8EE69@CY4PR1001MB2200.namprd10.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ZxwI0u0en9TbpPBjX+jKQqZmtEjdTU+hpQXjR0MzzgXrLrJ065c+0SD/3sGksMlfGH/BB2BD7TmYRbIwz1E2JgaPlpy/OS74QnhtwcOrRBvy8UBGECnQRnU8lCQ175MRgpma4j/Vop6oaQGlIk8AU2Q9DcipoSNEy5NbVfSKmQG6Be/CKtH8M8hPgFY8MD2skrgtTuu/qSpHcuM3x+NVIzIhwe+1wmhZuwqfVWY1Y89pvX6NSPNe6ailXnUeNs5dwWEGWjyKwY1aHy0mflMVqfGe/dZSSMUON9lk6WXh32PaXbATnzVymeODLke9XQ7v6aiMzOvTNIUiYzu9Fdq6xL1rUzwmnDzGDpI56rFwJBKxvwSYIWRTp/oOcqSCFtXIPVmEWHWsNj3Rm2t1cium8u/AubDLbk38TzvsTW5LdTC9aUjfLW8vA0bj1OU8jNICNqopoV1Qm99CJW8WMOFYAKzbw0U3TfNDU4wU8Gem6Huq7Ql3SR5sVvEWkyXQp+ysiyQKlEP0mmidBgWBgt02lxRtOpH9nBgBsQclSHetDc7nWBlwsiG6Zzj5ZDXRBw/W8ajrBDzFxCOIaRd6CfbhOO+fMLikDEHFGEmHS//VkhovtgJkPbJKtH/8df2Q7/OVLXPH8kNlpyhs++T1nL95ewdcC+tuWEQbgMOBzlbJ37TIjdyetJ/Cgv4PtXrAMopz/WRYSdvX/1UuU+jv2RpzGA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH0PR10MB4759.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(366004)(4744005)(7416002)(26005)(52116002)(186003)(2906002)(8936002)(5660300002)(6862004)(4326008)(38350700002)(66476007)(6486002)(38100700002)(36916002)(66946007)(83380400001)(66556008)(6512007)(508600001)(316002)(54906003)(86362001)(6506007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?g82OZEWV3QyBoHz83z1vwz2sBBr7It7JAYL4pSpihGQXQVsMQI4Ppcfg6J4u?=
- =?us-ascii?Q?PU50KIresDLXg+OH6CjUolrM2T6sKjMXWLOBpEuO46hh6PVTbrhpVU1+JjlU?=
- =?us-ascii?Q?mMAENapGGv/v/7ycuAUX/W235hHMNzvQ28L931QOmUOYyDQilhcvklPMETU2?=
- =?us-ascii?Q?pgAaX6+ZIZe6zfuKqD0235OLnPBNMavw7xq8qVz1ER4C1K7YgEjgmbmpJx5k?=
- =?us-ascii?Q?3SYZGv56O0KMd3mrspayjqV2t+/s7EyFYryrF/fWsWOR+fYpuy4k42flI4qa?=
- =?us-ascii?Q?+Jj//A6FqJkVvhFBz1CokQe7NpOr8+P5svmNoAC9H1asUzJ//wzK3Cb2QThH?=
- =?us-ascii?Q?wGH96Vv9SpG8KzErtx0luYvL6aLZviM+Qv+rUvQYuzYg7EipDuWHC6T+KJfc?=
- =?us-ascii?Q?x6ell8xS3Kez/vWwpRHgFLoxidiEkZOzceKeBos1psf+8J1ybirGML0xB+RF?=
- =?us-ascii?Q?yJo9Gr23XWxqDZiwP72uIuiJDswH1Ka0fmQMibUXdHrDLCB/+wQhTYV7wfFF?=
- =?us-ascii?Q?RysQUrk3OWUKJC08cSiPZWVS/LoMxzh8Zv6lV3t1JBXJpIfa7nH7uz7jZHVf?=
- =?us-ascii?Q?BNMiaHkgUTR7mfVOAjWa4+01QacTB4FubvclHAPnyMm/MetdPuVJEQKX6W+p?=
- =?us-ascii?Q?lvTyo+/wbNniMJrJNISMItIq6Gv9VDW8kNKliftLs7Wb8gSdgAIGYSk0k9DR?=
- =?us-ascii?Q?O3MAe5iLlMlNW4wVRoKF4wgKQGIdgT4Td+vUWRlW292GBQo9RdtGTn+CMluu?=
- =?us-ascii?Q?XeyFRr0boZf3h5/63NI+aMBToiAMAhIyK9lGbrVCdh5tIZXW5tXQi24PiVNb?=
- =?us-ascii?Q?C1z2z+KEHPYZ5NfTImPYmsNF7sG794hTNnRo0z82+gkF81tNCp6eReUombyS?=
- =?us-ascii?Q?CKfvPa+L3z944Cx7CLsm+FkNEmlM/mokqmy+meiuNMIbOgEVOGEnb1O5ybOI?=
- =?us-ascii?Q?6rVxntAu+AA/gNacun3DPGUuwwbd9+pdBjoC8hr86lHaljzim+loGq+V6RCo?=
- =?us-ascii?Q?nlJvZpMk9naBhExYED7lBpJjT6CO7pUEz+fIxvaGKLiIe0T+AnNxta2JtD2f?=
- =?us-ascii?Q?ycutLjj+XVcdbDaWt5HLsMnCStH7jrv9wZxHfHjMxdHxU47CkmyydLC6wqn9?=
- =?us-ascii?Q?70Fj3sK43LNgjbB9qL7BFyqmMT7soDMzg/voargbfqRVIEErbM/isHtWTmyQ?=
- =?us-ascii?Q?IDCwvunTzHjXRqo3uDkVL2PNQjrMrfNfl4s36onpZ/M5UMAv9Wp+rU8/V/IJ?=
- =?us-ascii?Q?ZvEmN2wi2clCy+5ZhmPjG4DAZ5Ea2Xs2X1s9FKpLHUrIPOKELkyfsCXH7Xlw?=
- =?us-ascii?Q?2wTJ+y3s3gOXJw3nHkOH6x5WfKGk9BGnXKWAAOJzfowQPDK1nykLCqLMqAHZ?=
- =?us-ascii?Q?iVbJIXtTEx5czdjx6+VowJ3GiRfdzL++TM+xbIMsEwev3+FxNDza98tZa63t?=
- =?us-ascii?Q?fMsevOztJxpUydWpvzh7VVW3mAwJroktBg1Wnd+o7LnG/vmoNT2AMttO2Nuk?=
- =?us-ascii?Q?5USTcGTEonuwQFPubXBavRrNfqpa9MkYOR3kuU3gHbvqvfa4N5ToV+BqQb1Q?=
- =?us-ascii?Q?K7a90zxFWiWPAwTqZ8ODDAMj4BPZOS6iffa+ULDPfA9MGhBFhha0QkG/UYeJ?=
- =?us-ascii?Q?XSgAC08xWhGOlnpbglcYSiRxhPgyeyJOFwfiOlbdTkI/Iql0Q82Gf73x9dX/?=
- =?us-ascii?Q?699odWRzsDBBcTy9wW/nJ3yeNUyCCNXq1qZCig32aJOvyHJZcokuyqzOn9cZ?=
- =?us-ascii?Q?hoyJIeCr1vf7iUvpVbxUwHDen9QGcfo=3D?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 75691adb-1eb9-469a-d0c0-08da1847dc61
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR10MB4759.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Apr 2022 03:36:54.7050 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xxI5XHXU2sbc/fWC9ndbwbsQZvdnJajAa1/8lQ+60/0I67zBHPfFXIKkzPg1a7pl8jTUriXu7jFYTH2C+zxBhKKaELIPNtXE5AOXygQB+ng=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR1001MB2200
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.425, 18.0.850
- definitions=2022-04-06_13:2022-04-06,
- 2022-04-06 signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
- malwarescore=0 adultscore=0
- suspectscore=0 spamscore=0 mlxlogscore=999 bulkscore=0 phishscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2202240000
- definitions=main-2204070018
-X-Proofpoint-ORIG-GUID: PQKfP4CskAkKSo2NFyL3CJikBxo0t_l1
-X-Proofpoint-GUID: PQKfP4CskAkKSo2NFyL3CJikBxo0t_l1
-X-Spam-Score: -0.9 (/)
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.7.0
+Content-Language: en-US
+To: Christoph Hellwig <hch@lst.de>
+References: <20220406060516.409838-1-hch@lst.de>
+ <20220406060516.409838-24-hch@lst.de>
+From: Coly Li <colyli@suse.de>
+In-Reply-To: <20220406060516.409838-24-hch@lst.de>
+X-Spam-Score: -4.5 (----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Christoph, > Secure erase is a very different operation from
- discard in that it is > a data integrity operation vs hint. Fully split the
- limits and helper > infrastructure to make the separation more clear. 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview:  On 4/6/22 2:05 PM, Christoph Hellwig wrote: > Add a helper
+ to query the number of sectors support per each discard bio > based on the
+ block device and use this helper to stop various places from > pok [...] 
+ Content analysis details:   (-4.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [205.220.177.32 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [205.220.177.32 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -190,10 +104,10 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1ncJ2H-0008Ia-1v
-Subject: Re: [f2fs-dev] [Ocfs2-devel] [PATCH 26/27] block: uncouple
-	REQ_OP_SECURE_ERASE	from REQ_OP_DISCARD
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1ncKVU-008MwZ-D8
+Subject: Re: [f2fs-dev] [PATCH 23/27] block: add a bdev_max_discard_sectors
+ helper
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -208,34 +122,148 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: jfs-discussion@lists.sourceforge.net, linux-nvme@lists.infradead.org,
  virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
  dm-devel@redhat.com, target-devel@vger.kernel.org,
- linux-mtd@lists.infradead.org, Christoph Hellwig <hch@lst.de>,
- drbd-dev@lists.linbit.com, linux-s390@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- cluster-devel@redhat.com, xen-devel@lists.xenproject.org,
- linux-ext4@vger.kernel.org, linux-um@lists.infradead.org, nbd@other.debian.org,
- linux-raid@vger.kernel.org, linux-bcache@vger.kernel.org,
+ linux-mtd@lists.infradead.org, drbd-dev@lists.linbit.com,
+ linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ linux-scsi@vger.kernel.org, cluster-devel@redhat.com,
+ xen-devel@lists.xenproject.org, linux-ext4@vger.kernel.org,
+ linux-um@lists.infradead.org, nbd@other.debian.org,
+ linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
  ceph-devel@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
- linux-block@vger.kernel.org, linux-mmc@vger.kernel.org,
+ linux-raid@vger.kernel.org, linux-mmc@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, ntfs3@lists.linux.dev,
- linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+ ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
+ ntfs3@lists.linux.dev, linux-btrfs@vger.kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+On 4/6/22 2:05 PM, Christoph Hellwig wrote:
+> Add a helper to query the number of sectors support per each discard bio
+> based on the block device and use this helper to stop various places from
+> poking into the request_queue to see if discard is supported and if so how
+> much.  This mirrors what is done e.g. for write zeroes as well.
+>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
 
-Christoph,
 
-> Secure erase is a very different operation from discard in that it is
-> a data integrity operation vs hint.  Fully split the limits and helper
-> infrastructure to make the separation more clear.
+For the bcache part,
 
-Great!
+Acked-by: Coly Li <colyli@suse.de>
 
-Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
 
--- 
-Martin K. Petersen	Oracle Linux Engineering
+Thanks.
+
+
+Coly Li
+
+
+
+> ---
+>   block/blk-core.c                    |  2 +-
+>   block/blk-lib.c                     |  2 +-
+>   block/ioctl.c                       |  3 +--
+>   drivers/block/drbd/drbd_main.c      |  2 +-
+>   drivers/block/drbd/drbd_nl.c        | 12 +++++++-----
+>   drivers/block/drbd/drbd_receiver.c  |  5 ++---
+>   drivers/block/loop.c                |  9 +++------
+>   drivers/block/rnbd/rnbd-srv-dev.h   |  6 +-----
+>   drivers/block/xen-blkback/xenbus.c  |  2 +-
+>   drivers/md/bcache/request.c         |  4 ++--
+>   drivers/md/bcache/super.c           |  2 +-
+>   drivers/md/bcache/sysfs.c           |  2 +-
+>   drivers/md/dm-cache-target.c        |  9 +--------
+>   drivers/md/dm-clone-target.c        |  9 +--------
+>   drivers/md/dm-io.c                  |  2 +-
+>   drivers/md/dm-log-writes.c          |  3 +--
+>   drivers/md/dm-raid.c                |  9 ++-------
+>   drivers/md/dm-table.c               |  4 +---
+>   drivers/md/dm-thin.c                |  9 +--------
+>   drivers/md/dm.c                     |  2 +-
+>   drivers/md/md-linear.c              |  4 ++--
+>   drivers/md/raid0.c                  |  2 +-
+>   drivers/md/raid1.c                  |  6 +++---
+>   drivers/md/raid10.c                 |  8 ++++----
+>   drivers/md/raid5-cache.c            |  2 +-
+>   drivers/target/target_core_device.c |  8 +++-----
+>   fs/btrfs/extent-tree.c              |  4 ++--
+>   fs/btrfs/ioctl.c                    |  2 +-
+>   fs/exfat/file.c                     |  2 +-
+>   fs/exfat/super.c                    | 10 +++-------
+>   fs/ext4/ioctl.c                     | 10 +++-------
+>   fs/ext4/super.c                     | 10 +++-------
+>   fs/f2fs/f2fs.h                      |  3 +--
+>   fs/f2fs/segment.c                   |  6 ++----
+>   fs/fat/file.c                       |  2 +-
+>   fs/fat/inode.c                      | 10 +++-------
+>   fs/gfs2/rgrp.c                      |  2 +-
+>   fs/jbd2/journal.c                   |  7 ++-----
+>   fs/jfs/ioctl.c                      |  2 +-
+>   fs/jfs/super.c                      |  8 ++------
+>   fs/nilfs2/ioctl.c                   |  2 +-
+>   fs/ntfs3/file.c                     |  2 +-
+>   fs/ntfs3/super.c                    |  2 +-
+>   fs/ocfs2/ioctl.c                    |  2 +-
+>   fs/xfs/xfs_discard.c                |  2 +-
+>   fs/xfs/xfs_super.c                  | 12 ++++--------
+>   include/linux/blkdev.h              |  5 +++++
+>   mm/swapfile.c                       | 17 ++---------------
+>   48 files changed, 87 insertions(+), 163 deletions(-)
+
+[snipped]
+
+
+> diff --git a/drivers/md/bcache/request.c b/drivers/md/bcache/request.c
+> index fdd0194f84dd0..e27f67f06a428 100644
+> --- a/drivers/md/bcache/request.c
+> +++ b/drivers/md/bcache/request.c
+> @@ -1005,7 +1005,7 @@ static void cached_dev_write(struct cached_dev *dc, struct search *s)
+>   		bio_get(s->iop.bio);
+>   
+>   		if (bio_op(bio) == REQ_OP_DISCARD &&
+> -		    !blk_queue_discard(bdev_get_queue(dc->bdev)))
+> +		    !bdev_max_discard_sectors(dc->bdev))
+>   			goto insert_data;
+>   
+>   		/* I/O request sent to backing device */
+> @@ -1115,7 +1115,7 @@ static void detached_dev_do_request(struct bcache_device *d, struct bio *bio,
+>   	bio->bi_private = ddip;
+>   
+>   	if ((bio_op(bio) == REQ_OP_DISCARD) &&
+> -	    !blk_queue_discard(bdev_get_queue(dc->bdev)))
+> +	    !bdev_max_discard_sectors(dc->bdev))
+>   		bio->bi_end_io(bio);
+>   	else
+>   		submit_bio_noacct(bio);
+> diff --git a/drivers/md/bcache/super.c b/drivers/md/bcache/super.c
+> index bf3de149d3c9f..296f200b2e208 100644
+> --- a/drivers/md/bcache/super.c
+> +++ b/drivers/md/bcache/super.c
+> @@ -2350,7 +2350,7 @@ static int register_cache(struct cache_sb *sb, struct cache_sb_disk *sb_disk,
+>   	ca->bdev->bd_holder = ca;
+>   	ca->sb_disk = sb_disk;
+>   
+> -	if (blk_queue_discard(bdev_get_queue(bdev)))
+> +	if (bdev_max_discard_sectors((bdev)))
+>   		ca->discard = CACHE_DISCARD(&ca->sb);
+>   
+>   	ret = cache_alloc(ca);
+> diff --git a/drivers/md/bcache/sysfs.c b/drivers/md/bcache/sysfs.c
+> index d1029d71ff3bc..c6f677059214d 100644
+> --- a/drivers/md/bcache/sysfs.c
+> +++ b/drivers/md/bcache/sysfs.c
+> @@ -1151,7 +1151,7 @@ STORE(__bch_cache)
+>   	if (attr == &sysfs_discard) {
+>   		bool v = strtoul_or_return(buf);
+>   
+> -		if (blk_queue_discard(bdev_get_queue(ca->bdev)))
+> +		if (bdev_max_discard_sectors(ca->bdev))
+>   			ca->discard = v;
+>   
+>   		if (v != CACHE_DISCARD(&ca->sb)) {
+
+
+[snipped]
+
 
 
 _______________________________________________
