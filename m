@@ -2,66 +2,53 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F9664F8327
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  7 Apr 2022 17:27:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A54BB4F8D4A
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  8 Apr 2022 07:44:10 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ncU2Z-0000nD-3Z; Thu, 07 Apr 2022 15:27:17 +0000
+	id 1nchPi-0004Hl-4M; Fri, 08 Apr 2022 05:44:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <hch@lst.de>)
- id 1ncU2X-0000n3-CA; Thu, 07 Apr 2022 15:27:15 +0000
+ (envelope-from <dzm91@hust.edu.cn>) id 1nchPg-0004Ha-Om
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Apr 2022 05:44:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sISlP0OMg7nEvOtp3Dti3kXSBe0AxAlWOrlqCeYkfmw=; b=DZrWTwrQvI7H/Qp6O4x/LskeY4
- u6jlG/EjKvhq6ZKE3lrkhfCMRxt+hKx0Rr/h73ufqqQgG41YlNOV6YRlRAs6YY532WEpt41kppIAc
- xY3drF7AvL2Jxto9wAUVDDlQ4Birl2zAafFIx66kaY+MPY9ILbtxUsT49V5Adefzo1Bo=;
+ bh=fCd8fFcmC3MxMth2q/Gkxm9sxVqNUIf55fBEtjQSvHc=; b=i9CdcjgYn6EXr+box8RcyBQU32
+ Az2Lgz91qlx8T/YElE2UmqWlWm3wkOTHUqHAWW8ZIl7S8oImEf+65h/kNtRdvKUuQuN9/Zne+Zscv
+ HoC16AU5omA/YaRn6QkVx498abtDg3WK0JvXmg1I9gH2Fvr328yA6yhuSjkfcvxR6Hws=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=sISlP0OMg7nEvOtp3Dti3kXSBe0AxAlWOrlqCeYkfmw=; b=i0+hVWC4m9fuWZAe7fD0E3UQWd
- jOUbFGyZjfrtMGPS+1OtyazzvXbJQJxXBm4BbfTmC6Dw9z4qqjSPgeItRHHWgfn22bZyNw312l1AP
- axt7RIzdM7ZDDkW3CeJwhsdor2jjxamVhjP8PJqOCUE1aAoJ1MsCnsmiMLG0ix88M3bg=;
-Received: from verein.lst.de ([213.95.11.211])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=fCd8fFcmC3MxMth2q/Gkxm9sxVqNUIf55fBEtjQSvHc=; b=N
+ o1cdsngIPBeeNPLaf/4GypqwmK0KATv/TlyeXOuMz0rp82+o3X+HCGukqipg7l3Ta69iAEveqek1+
+ jhpn9YnUxYPNN+ryq/dljo+nlRFcBq8WtDdip/j/1vraUn2HGCxQUwkoT3eKlZc955GUMm1c/ZI/C
+ rlX/I9MgbtQI2QdU=;
+Received: from mail.hust.edu.cn ([202.114.0.240] helo=hust.edu.cn)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1ncU2S-0003pi-1S; Thu, 07 Apr 2022 15:27:15 +0000
-Received: by verein.lst.de (Postfix, from userid 2407)
- id AE08468AFE; Thu,  7 Apr 2022 17:26:59 +0200 (CEST)
-Date: Thu, 7 Apr 2022 17:26:59 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: dsterba@suse.cz, Christoph Hellwig <hch@lst.de>,
- Jens Axboe <axboe@kernel.dk>, dm-devel@redhat.com,
- linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-um@lists.infradead.org, linux-block@vger.kernel.org,
- drbd-dev@lists.linbit.com, nbd@other.debian.org,
- ceph-devel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org,
- linux-raid@vger.kernel.org, linux-mmc@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-nvme@lists.infradead.org,
- linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org,
- target-devel@vger.kernel.org, linux-btrfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com, jfs-discussion@lists.sourceforge.net,
- linux-nilfs@vger.kernel.org, ntfs3@lists.linux.dev,
- ocfs2-devel@oss.oracle.com, linux-mm@kvack.org
-Message-ID: <20220407152659.GA15200@lst.de>
-References: <20220406060516.409838-1-hch@lst.de>
- <20220406060516.409838-8-hch@lst.de> <20220407152049.GH15609@twin.jikos.cz>
+ id 1nchPc-0001UT-9d
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 08 Apr 2022 05:44:03 +0000
+Received: from localhost.localdomain ([222.20.126.44])
+ (user=dzm91@hust.edu.cn mech=LOGIN bits=0)
+ by mx1.hust.edu.cn  with ESMTP id 2385ME7N017799-2385ME7Q017799
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NO);
+ Fri, 8 Apr 2022 13:22:20 +0800
+From: Dongliang Mu <dzm91@hust.edu.cn>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
+Date: Fri,  8 Apr 2022 13:22:06 +0800
+Message-Id: <20220408052207.209856-1-dzm91@hust.edu.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220407152049.GH15609@twin.jikos.cz>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+X-FEAS-AUTH-USER: dzm91@hust.edu.cn
 X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -69,18 +56,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Apr 07, 2022 at 05:20:49PM +0200, David Sterba wrote:
- > On Wed, Apr 06, 2022 at 08:04:56AM +0200, Christoph Hellwig wrote: > >
- Signed-off-by: Christoph Hellwig <hch@lst.de> > > As it's a stand [...] 
+ Content preview: From: Dongliang Mu <mudongliangabcd@gmail.com> In
+ f2fs_is_valid_blkaddr, 
+ if type is DATA_GENERIC_ENHANCE or DATA_GENERIC_ENHANCE_READ, it invokes
+ WARN_ON(1) not matter blkaddr is in the range or not. 
  Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1ncU2S-0003pi-1S
-Subject: Re: [f2fs-dev] [PATCH 07/27] btrfs: use bdev_max_active_zones
- instead of open coding it
+X-Headers-End: 1nchPc-0001UT-9d
+Subject: [f2fs-dev] [PATCH] fs: f2fs: remove WARN_ON in f2fs_is_valid_blkaddr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,20 +79,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org,
+ syzbot+763ae12a2ede1d99d4dc@syzkaller.appspotmail.com,
+ Dongliang Mu <mudongliangabcd@gmail.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Apr 07, 2022 at 05:20:49PM +0200, David Sterba wrote:
-> On Wed, Apr 06, 2022 at 08:04:56AM +0200, Christoph Hellwig wrote:
-> > Signed-off-by: Christoph Hellwig <hch@lst.de>
-> 
-> As it's a standalone patch I can take it (possibly with other similar
-> prep btrfs patches) in current development cycle to relieve the
-> inter-tree dependencies.
+From: Dongliang Mu <mudongliangabcd@gmail.com>
 
-Unless there's a conflict in other btrfs patches it would probably be
-easiest to merge everything through the block tree.
+In f2fs_is_valid_blkaddr, if type is DATA_GENERIC_ENHANCE or
+DATA_GENERIC_ENHANCE_READ, it invokes WARN_ON(1) not matter
+blkaddr is in the range or not.
+
+Fix this by removing WARN_ON.
+
+Note that, syzbot patch testing does not incur any further issues
+
+Reported-by: syzbot+763ae12a2ede1d99d4dc@syzkaller.appspotmail.com
+Signed-off-by: Dongliang Mu <mudongliangabcd@gmail.com>
+---
+ fs/f2fs/checkpoint.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index f5366feea82d..521498b2dd8c 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -158,7 +158,6 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
+ 		f2fs_err(sbi, "Inconsistent error blkaddr:%u, sit bitmap:%d",
+ 			 blkaddr, exist);
+ 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+-		WARN_ON(1);
+ 	}
+ 	return exist;
+ }
+@@ -196,7 +195,6 @@ bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+ 			f2fs_warn(sbi, "access invalid blkaddr:%u",
+ 				  blkaddr);
+ 			set_sbi_flag(sbi, SBI_NEED_FSCK);
+-			WARN_ON(1);
+ 			return false;
+ 		} else {
+ 			return __is_bitmap_valid(sbi, blkaddr, type);
+-- 
+2.25.1
+
 
 
 _______________________________________________
