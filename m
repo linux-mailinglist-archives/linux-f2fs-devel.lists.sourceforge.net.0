@@ -2,98 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D49634FD366
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Apr 2022 11:49:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8745B4FDC30
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Apr 2022 13:02:40 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1neD9V-00007n-Ta; Tue, 12 Apr 2022 09:49:37 +0000
+	id 1neEI6-0004bZ-3W; Tue, 12 Apr 2022 11:02:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1neD9U-00007Z-Lt
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Apr 2022 09:49:35 +0000
+ (envelope-from <jakobkoschel@gmail.com>) id 1neEI3-0004at-6E
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Apr 2022 11:02:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
+ Cc:Date:In-Reply-To:From:Subject:Mime-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zAXLaEZNyeZlv6FO3BLygA5GGTQy041zwLruD/Tl3og=; b=G71iIw4AWqlCTtvzWNmtt9l2vd
- u11MY3mRqZ7As0OZoWbLP9WlhvUIfPwjejkE8f+koaf73SSbkrt13I8rmCoNsOve6Tchkiy2EEWr6
- PDIjINRN8/k7E+WcfLHy+cI1dsufp5N38U7LNpa044Jplr7+Lh//8nCsbq/9rSj46NOo=;
+ bh=VYlSwRs2xXTAAyUlwb+gbXuW16FUgB8AcvnUgAkw87M=; b=F5MunA0rmuCNIlk0nwFbWEjUJY
+ FYpbv3XzDgNN63EAgM8+1Fu0JaKUqNkzQ3Ax4u8FiyWf3jDhPOEFJ65yLmojtvlor5AmnvplZq19S
+ RPA1z4jv88tx0IdfQPZl3nVPptC24kmzqjCpR4bxGi85OoHmuKVYfpB9mxPrLdKnYLjg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
+ From:Subject:Mime-Version:Content-Type:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zAXLaEZNyeZlv6FO3BLygA5GGTQy041zwLruD/Tl3og=; b=ay7EAodw4sOHm6/rD02riTbC7u
- EiLKW0DpA0fP8BUm1EeZw+HnlBbzeXXsMO5ghji2iqt6eKHpuwi7w26wrUOzEGibq7h6y/6RJ04bC
- SG+bWWnlW0SXrgZ9ClLsVkBetEIs9+jpNKtt0+ejGe9imKLXDvkLNLHlzJ7M82V+10S4=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=VYlSwRs2xXTAAyUlwb+gbXuW16FUgB8AcvnUgAkw87M=; b=aKhmNqUUUxi42IUvOM0599JNP7
+ 1wWt5ShhGZQKHoQYzhRAbXxqZKPLKOHvtN3ktFeaYQfyQYHmalpg6vxzhHw6TYAia0K0SBopnZsoT
+ eP56wntxX6NoDkJVNaKrC8Bzcv3WVmvg4MstfTJa0VJEqunwC5Af4bXYhMvIv6+8lnVE=;
+Received: from mail-ej1-f48.google.com ([209.85.218.48])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1neD9T-00038x-44
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Apr 2022 09:49:35 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id D277D61886;
- Tue, 12 Apr 2022 09:49:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 21E2CC385A5;
- Tue, 12 Apr 2022 09:49:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1649756962;
- bh=gYR2YBHwwyx9GaI6f6MK1uifVDe1QgQzsrtQ7laIKeU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=OD5yENxhrqinRZ28NRL3z3M2cXMflFjo7rdvdCtxSCxp424qOJ4xZBCXY7G3h7jan
- gFAvOtajyghA11u56CcEIv0q8QqJ+sukQWtvPmf4/5LJJFEv/d9j7s6d12Ol7j47FA
- bxc3w6gRwbsOI4teqsdV5BgoVZErwUPu5JEnsRVDJPo+fjAtKOdYqJWTv4b0lkLKt8
- Kx/X43PP/NTMuNR/1iO2Xrmkx/vO+waCU6oeNucMOsDa8OMvV3v1l1gupRnFCNqS9K
- UlWSjoljm81z5ZemS8x2D9hsf+6S+sevNUTgv1TFLMgP5SXchUa9fiQYh5ZrwwZfcG
- AN+RmMmYdZXow==
-Message-ID: <8b62a788-d5ba-b244-d9f1-2edecba9769f@kernel.org>
-Date: Tue, 12 Apr 2022 17:49:17 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: Jakob Koschel <jakobkoschel@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20220331223414.901960-1-jakobkoschel@gmail.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220331223414.901960-1-jakobkoschel@gmail.com>
-X-Spam-Score: -6.3 (------)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1neEHx-0006ct-4E
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Apr 2022 11:02:30 +0000
+Received: by mail-ej1-f48.google.com with SMTP id bv19so13546329ejb.6
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 12 Apr 2022 04:02:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=VYlSwRs2xXTAAyUlwb+gbXuW16FUgB8AcvnUgAkw87M=;
+ b=eSbceTFB98b3Z4e++6Y2eKyh0djI4T4ned0/KGkHF4WkQ2ae1MrCfN/x1DtyjdQ9EK
+ I6uRjCoOv2AxG0UVJB0EOUOEcKG1gRlCsYmqXVCMaB1783YxmdMMk9Er1euKcvHliDpE
+ tRH2iCH/Aaoe6tasaDrdqEiifWeCJ3oo0c8Gps11Zz8r3CFiu+WckRFSke/7vQpAhA39
+ SdyWjtnFobiiFiq0baedSX18wfT0ay8xSeoyNDUUujyaFI7DfjEyqROymvDx4JAbt5cB
+ Q9dW0CrEFyWsiFUbVC+RGVEBAtPjMno47ARxUA30DU7nZ+ZhEguqThGbutt1Rd0YYr/W
+ YCig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=VYlSwRs2xXTAAyUlwb+gbXuW16FUgB8AcvnUgAkw87M=;
+ b=h2PL9YfQFEZ4T/oPsFpSEEsumNI3osUr8/RbS9b7eMdZDJ9jynd7TkOfA3+YcGj2oi
+ bTH1bta98d5okJd7vXcvIXNylUogGbxEORrFIkE/XDhcXwOMbrm8j2xFxsOCzzmemTxR
+ XPJ2ok8Xg6gDjRMwIYtG3ufj7BusijrkkgbGDSmr1AY3r5jgeIKZUtC4xx/6INgsoeyL
+ GX44f3n6Ml420fozLj4shR7nc7i9Z62YNDNFX0B6vdy/9z7i3X7Ce0t+L+gmpn5Qp7s8
+ +1TiFnwEbpQop8HOqOeWxHVi6xI2TgpoGxipkaB5UFvGycAa8yw2re55gSJIPaUnVBoH
+ FBQA==
+X-Gm-Message-State: AOAM531DKYwOFsHCJqnsrhlTzZrjAXJhJEWZxGXx1mdTzIfk1D7RHVxr
+ FUwNYADAhmF0dkG9h/Uww4ue5Z9/P0AJGg==
+X-Google-Smtp-Source: ABdhPJwPcRInSEEVAplx2Q7xSQldnlj/l6p5lEplZaCg8iRKCy5wsP3rhJrj4lvajacO3js5nLJNfQ==
+X-Received: by 2002:a17:907:d04:b0:6e8:8cbc:e86a with SMTP id
+ gn4-20020a1709070d0400b006e88cbce86amr9739701ejc.194.1649761338744; 
+ Tue, 12 Apr 2022 04:02:18 -0700 (PDT)
+Received: from smtpclient.apple (i130160.upc-i.chello.nl. [62.195.130.160])
+ by smtp.gmail.com with ESMTPSA id
+ f1-20020a056402194100b00416b174987asm16990227edz.35.2022.04.12.04.02.17
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 12 Apr 2022 04:02:18 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3696.80.82.1.1\))
+From: Jakob Koschel <jakobkoschel@gmail.com>
+In-Reply-To: <4d54f494-b143-8885-a31e-924a83409e2d@kernel.org>
+Date: Tue, 12 Apr 2022 13:02:17 +0200
+Message-Id: <632AA316-A1B4-4E2C-B5FD-204FD3BE8633@gmail.com>
+References: <20220331221650.891790-1-jakobkoschel@gmail.com>
+ <4d54f494-b143-8885-a31e-924a83409e2d@kernel.org>
+To: Chao Yu <chao@kernel.org>
+X-Mailer: Apple Mail (2.3696.80.82.1.1)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/4/1 6:34, Jakob Koschel wrote: > The list iterator
- variable will be a bogus pointer if no break was hit. > Dereferencing it
- (cur->page in this case) could load an out-of-bounds/undefined > val [...]
- Content analysis details:   (-6.3 points, 6.0 required)
+ Content preview:  > On 12. Apr 2022, at 11:40, Chao Yu wrote: > > On 2022/4/1
+ 6:16, Jakob Koschel wrote: >> In preparation to limit the scope of a list
+ iterator to the list >> traversal loop, use a dedicated pointer [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.218.48 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [jakobkoschel[at]gmail.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -1.1 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1neD9T-00038x-44
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix dereference of stale list iterator
- after loop body
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.218.48 listed in wl.mailspike.net]
+X-Headers-End: 1neEHx-0006ct-4E
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: use separate list iterator
+ variable to call list_move_tail()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,35 +123,71 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, "Bos, H.J." <h.j.bos@vu.nl>,
+Cc: LKML <linux-kernel@vger.kernel.org>, "Bos, H.J." <h.j.bos@vu.nl>,
  Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
- Cristiano Giuffrida <c.giuffrida@vu.nl>,
- linux-f2fs-devel@lists.sourceforge.net, Mike Rapoport <rppt@kernel.org>
+ Cristiano Giuffrida <c.giuffrida@vu.nl>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>,
+ Mike Rapoport <rppt@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/4/1 6:34, Jakob Koschel wrote:
-> The list iterator variable will be a bogus pointer if no break was hit.
-> Dereferencing it (cur->page in this case) could load an out-of-bounds/undefined
-> value making it unsafe to use that in the comparision to determine if the
-> specific element was found.
-> 
-> Since 'cur->page' *can* be out-ouf-bounds it cannot be guaranteed that
-> by chance (or intention of an attacker) it matches the value of 'page'
-> even though the correct element was not found.
-> 
-> This is fixed by using a separate list iterator variable for the loop
-> and only setting the original variable if a suitable element was found.
-> Then determing if the element was found is simply checking if the
-> variable is set.
-> 
-> Fixes: 8c242db9b8c0 ("f2fs: fix stale ATOMIC_WRITTEN_PAGE private pointer")
-> Signed-off-by: Jakob Koschel <jakobkoschel@gmail.com>
 
-Reviewed-by: Chao Yu <chao@kernel.org>
 
-Thanks,
+> On 12. Apr 2022, at 11:40, Chao Yu <chao@kernel.org> wrote:
+> 
+> On 2022/4/1 6:16, Jakob Koschel wrote:
+>> In preparation to limit the scope of a list iterator to the list
+>> traversal loop, use a dedicated pointer to point to the found element
+>> [1].
+>> If no break is hit or the list is empty, 'next' will be NULL and
+>> list_move_tail() should be called explicitly on the head directly.
+>> Link: https://lore.kernel.org/all/CAHk-=wgRr_D8CB-D9Kg-c=EHreAsk5SqXPwr9Y7k9sA6cWXJ6w@mail.gmail.com/
+>> Signed-off-by: Jakob Koschel <jakobkoschel@gmail.com>
+>> ---
+>> fs/f2fs/segment.c | 12 ++++++++----
+>> 1 file changed, 8 insertions(+), 4 deletions(-)
+>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>> index 22dfeb991529..81ef2c3d08e5 100644
+>> --- a/fs/f2fs/segment.c
+>> +++ b/fs/f2fs/segment.c
+>> @@ -4175,16 +4175,20 @@ static void release_sit_entry_set(struct sit_entry_set *ses)
+>> static void adjust_sit_entry_set(struct sit_entry_set *ses,
+>> 						struct list_head *head)
+>> {
+>> -	struct sit_entry_set *next = ses;
+>> +	struct sit_entry_set *next = NULL, *iter = ses;
+>> 	if (list_is_last(&ses->set_list, head))
+>> 		return;
+>> -	list_for_each_entry_continue(next, head, set_list)
+>> -		if (ses->entry_cnt <= next->entry_cnt)
+>> +	list_for_each_entry_continue(iter, head, set_list)
+>> +		if (ses->entry_cnt <= iter->entry_cnt) {
+>> +			next = iter;
+>> +			list_move_tail(&ses->set_list, &iter->set_list);
+>> 			break;
+> 
+> return;
+> 
+>> +		}
+>> -	list_move_tail(&ses->set_list, &next->set_list);
+>> +	if (!next)
+>> +		list_move_tail(&ses->set_list, head);
+> 
+> list_move_tail(&ses->set_list, head);
+> 
+> Then we don't need @next variable, right?
+
+Of course yes, good spot! I'll fix and resend a v2 in the next days.
+Thanks for the input.
+
+> 
+> Thanks,
+> 
+>> }
+>> static void add_sit_entry(unsigned int segno, struct list_head *head)
+>> base-commit: d888c83fcec75194a8a48ccd283953bdba7b2550
+
 
 
 _______________________________________________
