@@ -2,156 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F8874FE4C0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Apr 2022 17:30:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BEA14FE5BC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 Apr 2022 18:22:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1neITe-0002aN-Lg; Tue, 12 Apr 2022 15:30:45 +0000
+	id 1neJHD-0002HL-7f; Tue, 12 Apr 2022 16:21:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <p.raghav@samsung.com>) id 1neITc-0002aF-TL
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Apr 2022 15:30:43 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1neJHB-0002HF-VH
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Apr 2022 16:21:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+s2qb2kmA5gV+qQl0xP6jDpsVr3Cf4zhKwyLPUtPblE=; b=XvhVUxhXL74++kDCWrq2JqoiqU
- IcEVOm39UxsvcJGNv3YaoP6zsHO4+xcqi1HjD75DtFbgoPjAPbzLf3HviE42VbHVUmXOweYp2qs+r
- dF40r/AJIZEor78ULQ7x9vK4vLz0hLAFVHfX0XlpS4gOhPiNiRvIhKPc1W0C2fIgwkqA=;
+ bh=dRyt8Q+WSrdoQOC4fC5q55T12v8N2RONN7EDBOF5n00=; b=TLKb1LS2nDOfoZ6vcQiLT8WWlh
+ EBslu9JIKV8PIEdjcw5BlAnp7qIFDEg2xd+QZlFZ2zhj2eDlVwlkyBuZSruG1JcO1PVP+uMh8URlB
+ sEbvhCEqcbt8PIAwN/SGHX8pL45tANnITgk345fTe5zGA21gfvyJgHw2glhzv5iDlKu4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Transfer-Encoding:Content-Type:In-Reply-To:From:CC:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+s2qb2kmA5gV+qQl0xP6jDpsVr3Cf4zhKwyLPUtPblE=; b=EMcVV/GKfQUr5v7KWokJDJ0Odw
- Q96a4DgIiaS4NhFUlfdQZAcwwl7oGj6LfbopWzqVdF+ooA6OnP6JAbnWtO4wz0b4TkPfKJK3nS/1P
- p7LPkSrYfBtHnG0BXgLHq3pvCF1IjdaI75Qy187GGGCxVQScHQSewt4kF7cBmIMXcIPE=;
-Received: from mailout1.w1.samsung.com ([210.118.77.11])
+ bh=dRyt8Q+WSrdoQOC4fC5q55T12v8N2RONN7EDBOF5n00=; b=fvKYbKHfEWolxJJSZOE54d+q8J
+ Iz4SWlcL9PBMZTjCs7yXMv85sUnbs6llkaHe5lXwsavSdoFxPbz4Vdt7FojpEaxk1MGElf6SEaZ67
+ hqSJhj2029hAsQNZw5mDCt7vL9CefULh/4cLxoh2sxbup2XnzgBYfWkIHn6BYn0j6eZI=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1neITW-00EF1l-P2
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Apr 2022 15:30:43 +0000
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
- by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id
- 20220412153030euoutp0105c74b2e22b7228e8cdabae21bb476aa~lL9UPAN910336503365euoutp01d
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 12 Apr 2022 15:30:30 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com
- 20220412153030euoutp0105c74b2e22b7228e8cdabae21bb476aa~lL9UPAN910336503365euoutp01d
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1649777430;
- bh=+s2qb2kmA5gV+qQl0xP6jDpsVr3Cf4zhKwyLPUtPblE=;
- h=Date:Subject:To:CC:From:In-Reply-To:References:From;
- b=KBl0LEKBniRs1q3vbksFfefDyEDYcamtjaa+HCnlFsMyIb2itrkNSg4JmCsJIGUCZ
- YLgQcgR3U8DQz3nnKdW3IsUm8CMxwJgbmhFEcL4eIzqQEYZBkEKZzJg4bL5nQ+Mz6R
- I8kv0MW/KFfLmBLfJHzPEmF9hH8sID1KwrUUkIFo=
-Received: from eusmges3new.samsung.com (unknown [203.254.199.245]) by
- eucas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20220412153030eucas1p29895d9a307605335e44b9b74c8eb2183~lL9UFkIPG1282712827eucas1p2Z;
- Tue, 12 Apr 2022 15:30:30 +0000 (GMT)
-Received: from eucas1p2.samsung.com ( [182.198.249.207]) by
- eusmges3new.samsung.com (EUCPMTA) with SMTP id E8.1C.10260.61B95526; Tue, 12
- Apr 2022 16:30:30 +0100 (BST)
-Received: from eusmtrp2.samsung.com (unknown [182.198.249.139]) by
- eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20220412153030eucas1p2194b34a96b6bf9e3de4c7f1f86ceb661~lL9TrYr760204802048eucas1p25;
- Tue, 12 Apr 2022 15:30:30 +0000 (GMT)
-Received: from eusmgms2.samsung.com (unknown [182.198.249.180]) by
- eusmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20220412153030eusmtrp21685ca0f0885703e43046b46cc98e30a~lL9Tqlrg40319203192eusmtrp2B;
- Tue, 12 Apr 2022 15:30:29 +0000 (GMT)
-X-AuditID: cbfec7f5-bf3ff70000002814-c2-62559b168d64
-Received: from eusmtip1.samsung.com ( [203.254.199.221]) by
- eusmgms2.samsung.com (EUCPMTA) with SMTP id 11.2F.09404.51B95526; Tue, 12
- Apr 2022 16:30:29 +0100 (BST)
-Received: from CAMSVWEXC02.scsc.local (unknown [106.1.227.72]) by
- eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20220412153029eusmtip10d2e4afda34ba1b11897eaee36f32457~lL9TY2d_43234532345eusmtip1M;
- Tue, 12 Apr 2022 15:30:29 +0000 (GMT)
-Received: from [192.168.8.130] (106.210.248.108) by CAMSVWEXC02.scsc.local
- (2002:6a01:e348::6a01:e348) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
- Tue, 12 Apr 2022 16:30:26 +0100
-Message-ID: <26d7e8b9-218e-b94c-7b2d-763dc0c631f3@samsung.com>
-Date: Tue, 12 Apr 2022 17:30:25 +0200
+ id 1neJH4-00EJ35-I1
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 12 Apr 2022 16:21:56 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 4E16A617BF;
+ Tue, 12 Apr 2022 16:21:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EDD5C385A5;
+ Tue, 12 Apr 2022 16:21:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1649780494;
+ bh=YX1K3hgodzRVsdXHLfhYdT2tm/Do8Yb/RFq0lLnIddU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=UinVddoYYr6fIKKZaqjMNN4zzG4I4FwRkbYdBvhzUTomjC3deL3e2m0PtpgHll/4p
+ pQPHyo0T78WW6YnzMSlqGOfh/YHKCHjFKPdO39M768JTOqywrZEz6L62OXt81jHtat
+ VeZHqqQh46Ks2o2qdQGmR08GsUzJfvG0m216hjSIyoGuZx7eUD3Fz4C9FZbRZTedFo
+ rikwgN66H5dJC9wF2kieUoHYT+amUYUjS+8kJMBrwcnHy0+660WBcczgXhLM3euMH0
+ e/xG18mKf0PWX7KP5e+DZfG7C46oSG0hxiiu2nzR0f+erF1Qka52NeqlJuYkW1erSk
+ crr0+QX4yLTew==
+Date: Tue, 12 Apr 2022 09:21:32 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <YlWnDD2H+AueUYcK@google.com>
+References: <20220406152651.5142-1-chao@kernel.org>
+ <YlSNjgQwoiENx5EK@google.com>
+ <1eee9abe-f468-ce32-cdb9-3a706404de2f@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: Damien Le Moal <Damien.LeMoal@wdc.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-From: Pankaj Raghav <p.raghav@samsung.com>
-In-Reply-To: <cf4e409966936c1d5e4486f172b45aaad128ae36.camel@wdc.com>
-X-Originating-IP: [106.210.248.108]
-X-ClientProxiedBy: CAMSVWEXC01.scsc.local (2002:6a01:e347::6a01:e347) To
- CAMSVWEXC02.scsc.local (2002:6a01:e348::6a01:e348)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphleLIzCtJLcpLzFFi42LZduzneV2x2aFJBtceSFi0tn9jsri0yN3i
- xoSnjBZrbj5lcWDx2DnrLrvHplWdbB67F3xm8mg/0M0UwBLFZZOSmpNZllqkb5fAlbF59n2m
- gn6OinunvrI1ME5k62Lk5JAQMJF423CCsYuRi0NIYAWjxIzZH6GcL4wSr19MZIJwPjNKbNqy
- mhGm5fj1LewQieWMEv1HNiJU3f8wnRmkSkhgN6PEzZ8hIDavgJ3E7P1vWUFsFgFVidXb1jJD
- xAUlTs58wgJiiwpESPy69YgdxBYWcJeY+2QnWJxZQFzi1pP5YAtEBBoZJebdvQfmMAvsY5S4
- du8Y0E0cHGwCWhKNnWDNnAKuEtdefmeGaNaUaN3+mx3ClpfY/nYOM0i5hICyxO/z/hDf1Eqc
- 2nILbKSEwAsOiaZfncwQCReJr5//QkNJWOLV8S3sELaMxP+dIAeB2NUST2/8ZoZobgEGxc71
- bBALrCX6zuRA1DhKnHn9nxEizCdx460gxDl8EpO2TWeewKg6CykoZiF5eRaSD2Yh+WABI8sq
- RvHU0uLc9NRi47zUcr3ixNzi0rx0veT83E2MwARz+t/xrzsYV7z6qHeIkYmD8RCjBAezkghv
- v3pokhBvSmJlVWpRfnxRaU5q8SFGaQ4WJXHe5MwNiUIC6YklqdmpqQWpRTBZJg5OqQYmoY/d
- dq28Tz8W8qko+hoY/zVkVv7fs/TFLu6NfhOeLTnqsSrx6PudnYLG98wlLXczRm6bVc5u8EnB
- 7+Bt9lv5pgfmL/x37+rht7t/q/PLVGtZnbsvddZchWvDJJ3arS+4TmYITj7XcEZgWZlQaX9d
- RdqKEhm+LSb5Qm5fHUN3N1/80GQeenjnhUntVoJ7T8k8cuzkXfuwrzPqXdBcqU8zTZ5YfxZr
- ORS6uev/V6+tE/bUnvVLnTHdp2qef2Ke78MlH7/8YXrjGXN50hue+vXzjL3bpi5rmHR8z6ej
- xwS8QtPWdM5dlu11Pk1Ra7Os8qxjioW+bql+PIZeiZcjD7J9Yj5iU7++JYtpVcym1zfZlViK
- MxINtZiLihMBM+aIm58DAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEIsWRmVeSWpSXmKPExsVy+t/xu7qis0OTDPq2mFq0tn9jsri0yN3i
- xoSnjBZrbj5lcWDx2DnrLrvHplWdbB67F3xm8mg/0M0UwBKlZ1OUX1qSqpCRX1xiqxRtaGGk
- Z2hpoWdkYqlnaGwea2VkqqRvZ5OSmpNZllqkb5egl7F59n2mgn6OinunvrI1ME5k62Lk5JAQ
- MJE4fn0LexcjF4eQwFJGiXd7m5khEjISn658ZIewhSX+XOtigyj6yCjxcO5pVghnN6PE6oZV
- YB28AnYSs/e/ZQWxWQRUJVZvWwsVF5Q4OfMJC4gtKhAhsWzXVDBbWMBdYu6TnWA2s4C4xK0n
- 85lAhooINDJKzLt7D8xhFtjHKHHt3jFGiHU/GCWanxwHcjg42AS0JBo7we7jFHCVuPbyOzPE
- JE2J1u2/2SFseYntb+cwg5RLCChL/D7vD/FOrcTnv88YJzCKzkJy3ywkd8xCMmkWkkkLGFlW
- MYqklhbnpucWG+kVJ+YWl+al6yXn525iBEbmtmM/t+xgXPnqo94hRiYOxkOMEhzMSiK8/eqh
- SUK8KYmVValF+fFFpTmpxYcYTYGBNJFZSjQ5H5ga8kriDc0MTA1NzCwNTC3NjJXEeT0LOhKF
- BNITS1KzU1MLUotg+pg4OKUamOK9GeJyn03n7Hn16No1duWLrgv2/NylXy1xex7LPYlMV6ut
- bNwyYpuXVTafvm8SdJDN5zDvt0MzJ+wzz7g8nWF+7s/C2Ls9y+7f7lojum+pPcP6mu0yS7at
- nn3n3UfevB1TuL6dV3+0gX+J/4lLvDoV99reZOtfTFNbzi9Rarbh1+408Q28krpOOZsvnv71
- UUU05ObBstz11Y+uJUdlBfdvdEkRTt7+df6vaz922iZkXL46ccu18utZV3wv37EX7HHnmSj0
- c8qvXNkrr3mZdvidaml/5ha3Y/urTY63Pxies5ylsPCu7xJv94vtEQeYlf+JrZm0ReWvxPzT
- 7zoePCtdNJmjOj39DsPd/h6934d9lViKMxINtZiLihMBIDMWB1UDAAA=
-X-CMS-MailID: 20220412153030eucas1p2194b34a96b6bf9e3de4c7f1f86ceb661
-X-Msg-Generator: CA
-X-RootMTR: 20220412112749eucas1p28b82e6b3b563f2e25c78f479c1192451
-X-EPHeader: CA
-CMS-TYPE: 201P
-X-CMS-RootMailID: 20220412112749eucas1p28b82e6b3b563f2e25c78f479c1192451
-References: <20220412112745.44108-1-p.raghav@samsung.com>
- <CGME20220412112749eucas1p28b82e6b3b563f2e25c78f479c1192451@eucas1p2.samsung.com>
- <20220412112745.44108-4-p.raghav@samsung.com>
- <cf4e409966936c1d5e4486f172b45aaad128ae36.camel@wdc.com>
-X-Spam-Score: -6.3 (------)
+Content-Disposition: inline
+In-Reply-To: <1eee9abe-f468-ce32-cdb9-3a706404de2f@kernel.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Damien, On 2022-04-12 14:16, Damien Le Moal wrote:>> int
- get_device_info(int i) >> { >> int32_t fd = 0; >> @@ -1043,6 +1048,13 @@
- int get_device_info(int i) >> return -1; >> } >> >> + if (!dev->zone_size
- || ! [...] 
- Content analysis details:   (-6.3 points, 6.0 required)
+ Content preview:  On 04/12, Chao Yu wrote: > On 2022/4/12 4:20, Jaegeuk Kim
+ wrote: > > On 04/06, Chao Yu wrote: > > > Previously, during foreground GC,
+ if victims contain data of pinned file, > > > it will fail migrati [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [210.118.77.11 listed in wl.mailspike.net]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [210.118.77.11 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -160,12 +89,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -1.1 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1neITW-00EF1l-P2
-Subject: Re: [f2fs-dev] [PATCH 3/3] libf2fs: don't allow mkfs / fsck on
- zoned NPO2
+X-Headers-End: 1neJH4-00EJ35-I1
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: give priority to select unpinned
+ section for foreground GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -177,45 +104,405 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "javier.gonz@samsung.com" <javier.gonz@samsung.com>,
- "mcgrof@kernel.org" <mcgrof@kernel.org>,
- "pankydev8@gmail.com" <pankydev8@gmail.com>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Damien,
+On 04/12, Chao Yu wrote:
+> On 2022/4/12 4:20, Jaegeuk Kim wrote:
+> > On 04/06, Chao Yu wrote:
+> > > Previously, during foreground GC, if victims contain data of pinned file,
+> > > it will fail migration of the data, and meanwhile i_gc_failures of that
+> > > pinned file may increase, and when it exceeds threshold, GC will unpin
+> > > the file, result in breaking pinfile's semantics.
+> > > 
+> > > In order to mitigate such condition, let's record and skip section which
+> > > has pinned file's data and give priority to select unpinned one.
+> > > 
+> > > Signed-off-by: Chao Yu <chao.yu@oppo.com>
+> > > ---
+> > > v3:
+> > > - check pin status before pinning section in pin_section().
+> > >   fs/f2fs/gc.c      | 56 ++++++++++++++++++++++++++++++++++++++++++++---
+> > >   fs/f2fs/segment.c |  7 ++++++
+> > >   fs/f2fs/segment.h |  2 ++
+> > >   3 files changed, 62 insertions(+), 3 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> > > index 6a7e4148ff9d..df23824ae3c2 100644
+> > > --- a/fs/f2fs/gc.c
+> > > +++ b/fs/f2fs/gc.c
+> > > @@ -646,6 +646,37 @@ static void release_victim_entry(struct f2fs_sb_info *sbi)
+> > >   	f2fs_bug_on(sbi, !list_empty(&am->victim_list));
+> > >   }
+> > > +static void pin_section(struct f2fs_sb_info *sbi, unsigned int segno)
+> > 
+> > Need f2fs_...?
+> 
+> Sure, I can add prefix...
+> 
+> It's a local function, it won't pollute global namespace w/o f2fs_ prefix
+> though.
+> 
+> > 
+> > > +{
+> > > +	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+> > > +	unsigned int secno = GET_SEC_FROM_SEG(sbi, segno);
+> > > +
+> > > +	if (test_bit(secno, dirty_i->pinned_secmap))
+> > > +		return;
+> > > +	set_bit(secno, dirty_i->pinned_secmap);
+> > > +	dirty_i->pinned_secmap_cnt++;
+> > > +}
+> > > +
+> > > +static bool pinned_section_exists(struct dirty_seglist_info *dirty_i)
+> > > +{
+> > > +	return dirty_i->pinned_secmap_cnt;
+> > > +}
+> > > +
+> > > +static bool section_is_pinned(struct dirty_seglist_info *dirty_i,
+> > > +						unsigned int secno)
+> > > +{
+> > > +	return pinned_section_exists(dirty_i) &&
+> > > +			test_bit(secno, dirty_i->pinned_secmap);
+> > > +}
+> > > +
+> > > +static void unpin_all_sections(struct f2fs_sb_info *sbi)
+> > > +{
+> > > +	unsigned int bitmap_size = f2fs_bitmap_size(MAIN_SECS(sbi));
+> > > +
+> > > +	memset(DIRTY_I(sbi)->pinned_secmap, 0, bitmap_size);
+> > > +	DIRTY_I(sbi)->pinned_secmap_cnt = 0;
+> > > +}
+> > > +
+> > >   /*
+> > >    * This function is called from two paths.
+> > >    * One is garbage collection and the other is SSR segment selection.
+> > > @@ -787,6 +818,9 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+> > >   		if (gc_type == BG_GC && test_bit(secno, dirty_i->victim_secmap))
+> > >   			goto next;
+> > > +		if (gc_type == FG_GC && section_is_pinned(dirty_i, secno))
+> > > +			goto next;
+> > > +
+> > >   		if (is_atgc) {
+> > >   			add_victim_entry(sbi, &p, segno);
+> > >   			goto next;
+> > > @@ -1202,8 +1236,10 @@ static int move_data_block(struct inode *inode, block_t bidx,
+> > >   	}
+> > >   	if (f2fs_is_pinned_file(inode)) {
+> > > -		if (gc_type == FG_GC)
+> > > +		if (gc_type == FG_GC) {
+> > >   			f2fs_pin_file_control(inode, true);
+> > > +			pin_section(F2FS_I_SB(inode), segno);
+> > 
+> > Do we need to check unpinning the inode?
+> > 			if (!f2fs_pin_file_control())
+> > 				f2fs_set_pin_section();
+> 
+> I'm thinking that it needs to avoid increasing GC_FAILURE_PIN AMAP,
+> so could you please check below logic:
+> 
+> From 7cb1ee0df32ede44b17c503b81930dae25d287eb Mon Sep 17 00:00:00 2001
+> From: Chao Yu <chao@kernel.org>
+> Date: Wed, 6 Apr 2022 23:26:51 +0800
+> Subject: [PATCH v4] f2fs: give priority to select unpinned section for
+>  foreground GC
+> 
+> Previously, during foreground GC, if victims contain data of pinned file,
+> it will fail migration of the data, and meanwhile i_gc_failures of that
+> pinned file may increase, and when it exceeds threshold, GC will unpin
+> the file, result in breaking pinfile's semantics.
+> 
+> In order to mitigate such condition, let's record and skip section which
+> has pinned file's data and give priority to select unpinned one.
+> 
+> Signed-off-by: Chao Yu <chao.yu@oppo.com>
+> ---
+> v4:
+> - add f2fs_ prefix for newly introduced functions
+> - add bool type variable for functionality switch
+> - increase GC_FAILURE_PIN only if it disable pinning section
+>  fs/f2fs/gc.c      | 66 ++++++++++++++++++++++++++++++++++++++++++-----
+>  fs/f2fs/segment.c |  8 ++++++
+>  fs/f2fs/segment.h |  3 +++
+>  3 files changed, 71 insertions(+), 6 deletions(-)
+> 
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 6a7e4148ff9d..296b31e28d3d 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -646,6 +646,41 @@ static void release_victim_entry(struct f2fs_sb_info *sbi)
+>  	f2fs_bug_on(sbi, !list_empty(&am->victim_list));
+>  }
+> 
+> +static bool f2fs_pin_section(struct f2fs_sb_info *sbi, unsigned int segno)
+> +{
+> +	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+> +	unsigned int secno = GET_SEC_FROM_SEG(sbi, segno);
+> +
+> +	if (!dirty_i->enable_pin_section)
+> +		return false;
+> +	if (test_bit(secno, dirty_i->pinned_secmap))
+> +		return true;
+> +	set_bit(secno, dirty_i->pinned_secmap);
+> +	dirty_i->pinned_secmap_cnt++;
 
-On 2022-04-12 14:16, Damien Le Moal wrote:>>  int get_device_info(int i)
->>  {
->>  	int32_t fd = 0;
->> @@ -1043,6 +1048,13 @@ int get_device_info(int i)
->>  			return -1;
->>  		}
->>  
->> +		if (!dev->zone_size || !is_power_of_2(dev->zone_size)) {
->> +			MSG(0, "\tError: zoned: illegal zone size %lu (not a power of 2)\n",
->> +					dev->zone_size);
+	if (!test_and_set_bit())
+		dirty_i->pinned_secmap_cnt++;
+
+> +	return true;
+> +}
+> +
+> +static bool f2fs_pinned_section_exists(struct dirty_seglist_info *dirty_i)
+> +{
+> +	return dirty_i->enable_pin_section && dirty_i->pinned_secmap_cnt;
+> +}
+> +
+> +static bool f2fs_section_is_pinned(struct dirty_seglist_info *dirty_i,
+> +						unsigned int secno)
+> +{
+> +	return f2fs_pinned_section_exists(dirty_i) &&
+> +			test_bit(secno, dirty_i->pinned_secmap);
+> +}
+> +
+> +static void f2fs_unpin_all_sections(struct f2fs_sb_info *sbi, bool enable)
+> +{
+> +	unsigned int bitmap_size = f2fs_bitmap_size(MAIN_SECS(sbi));
+> +
+> +	memset(DIRTY_I(sbi)->pinned_secmap, 0, bitmap_size);
+> +	DIRTY_I(sbi)->pinned_secmap_cnt = 0;
+> +	DIRTY_I(sbi)->enable_pin_section = enable;
+> +}
+> +
+>  /*
+>   * This function is called from two paths.
+>   * One is garbage collection and the other is SSR segment selection.
+> @@ -787,6 +822,9 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+>  		if (gc_type == BG_GC && test_bit(secno, dirty_i->victim_secmap))
+>  			goto next;
 > 
-> The message should be different for the !dev->zone_size case since that
-> would be an error.
-I just noticed that there is a check for zero value in
-f2fs_get_zone_blocks. So this could be simplified with just a power of 2
-check.
+> +		if (gc_type == FG_GC && f2fs_section_is_pinned(dirty_i, secno))
+> +			goto next;
+> +
+>  		if (is_atgc) {
+>  			add_victim_entry(sbi, &p, segno);
+>  			goto next;
+> @@ -1202,8 +1240,10 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>  	}
 > 
->> +			free(stat_buf);
->> +			return -1;
->> +		}
->> +
->>  		/*
->>  		 * Check zone configuration: for the first disk of a
->>  		 * multi-device volume, conventional zones are needed.
+
+Can we make a generic function?
+
+f2fs_gc_pinned_control()
+{
+	if (!f2fs_is_pinned_file(inode))
+		return 0;
+	if (gc_type != FG_GC)
+		return 0;
+	if (!f2fs_pin_section())
+		f2fs_pin_file_control();
+	return -EAGAIN;
+}
+
+>  	if (f2fs_is_pinned_file(inode)) {
+> -		if (gc_type == FG_GC)
+> -			f2fs_pin_file_control(inode, true);
+> +		if (gc_type == FG_GC) {
+> +			if (!f2fs_pin_section(F2FS_I_SB(inode), segno))
+
+> +				f2fs_pin_file_control(inode, true);
+> +		}
+>  		err = -EAGAIN;
+>  		goto out;
+>  	}
+> @@ -1352,8 +1392,10 @@ static int move_data_page(struct inode *inode, block_t bidx, int gc_type,
+>  		goto out;
+>  	}
+>  	if (f2fs_is_pinned_file(inode)) {
+> -		if (gc_type == FG_GC)
+> -			f2fs_pin_file_control(inode, true);
+> +		if (gc_type == FG_GC) {
+> +			if (!f2fs_pin_section(F2FS_I_SB(inode), segno))
+> +				f2fs_pin_file_control(inode, true);
+> +		}
+>  		err = -EAGAIN;
+>  		goto out;
+>  	}
+> @@ -1483,7 +1525,8 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
 > 
-> Of the 3 patches of this series, this one is the only one that makes sense
-> to me. I fail to see how the first 2 patches improve things.
+>  			if (is_inode_flag_set(inode, FI_PIN_FILE) &&
+>  							gc_type == FG_GC) {
+> -				f2fs_pin_file_control(inode, true);
+> +				if (!f2fs_pin_section(sbi, segno))
+> +					f2fs_pin_file_control(inode, true);
+>  				iput(inode);
+>  				return submitted;
+>  			}
+> @@ -1766,9 +1809,17 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+>  		ret = -EINVAL;
+>  		goto stop;
+>  	}
+> +retry:
+>  	ret = __get_victim(sbi, &segno, gc_type);
+> -	if (ret)
+> +	if (ret) {
+> +		/* allow to search victim from sections has pinned data */
+> +		if (ret == -ENODATA && gc_type == FG_GC &&
+> +				f2fs_pinned_section_exists(DIRTY_I(sbi))) {
+> +			f2fs_unpin_all_sections(sbi, false);
+> +			goto retry;
+> +		}
+>  		goto stop;
+> +	}
 > 
-Probably I can squash them together with your comments in to one commit.
-Thanks.
+>  	seg_freed = do_garbage_collect(sbi, segno, &gc_list, gc_type, force);
+>  	if (gc_type == FG_GC &&
+> @@ -1811,6 +1862,9 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+>  	SIT_I(sbi)->last_victim[ALLOC_NEXT] = 0;
+>  	SIT_I(sbi)->last_victim[FLUSH_DEVICE] = init_segno;
+> 
+> +	if (gc_type == FG_GC && f2fs_pinned_section_exists(DIRTY_I(sbi)))
+> +		f2fs_unpin_all_sections(sbi, true);
+> +
+>  	trace_f2fs_gc_end(sbi->sb, ret, total_freed, sec_freed,
+>  				get_pages(sbi, F2FS_DIRTY_NODES),
+>  				get_pages(sbi, F2FS_DIRTY_DENTS),
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 22dfeb991529..93c7bae57a25 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -4734,6 +4734,13 @@ static int init_victim_secmap(struct f2fs_sb_info *sbi)
+>  	dirty_i->victim_secmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+>  	if (!dirty_i->victim_secmap)
+>  		return -ENOMEM;
+> +
+> +	dirty_i->pinned_secmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+> +	if (!dirty_i->pinned_secmap)
+> +		return -ENOMEM;
+> +
+> +	dirty_i->pinned_secmap_cnt = 0;
+> +	dirty_i->enable_pin_section = true;
+>  	return 0;
+>  }
+> 
+> @@ -5322,6 +5329,7 @@ static void destroy_victim_secmap(struct f2fs_sb_info *sbi)
+>  {
+>  	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+> 
+> +	kvfree(dirty_i->pinned_secmap);
+>  	kvfree(dirty_i->victim_secmap);
+>  }
+> 
+> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+> index 5c94caf0c0a1..8a591455d796 100644
+> --- a/fs/f2fs/segment.h
+> +++ b/fs/f2fs/segment.h
+> @@ -294,6 +294,9 @@ struct dirty_seglist_info {
+>  	struct mutex seglist_lock;		/* lock for segment bitmaps */
+>  	int nr_dirty[NR_DIRTY_TYPE];		/* # of dirty segments */
+>  	unsigned long *victim_secmap;		/* background GC victims */
+> +	unsigned long *pinned_secmap;		/* pinned victims from foreground GC */
+> +	unsigned int pinned_secmap_cnt;		/* count of victims which has pinned data */
+> +	bool enable_pin_section;		/* enable pinning section */
+>  };
+> 
+>  /* victim selection function for cleaning and SSR */
+> -- 
+> 2.25.1
+> 
+> Thanks,
+> 
+> > 
+> > > +		}
+> > >   		err = -EAGAIN;
+> > >   		goto out;
+> > >   	}
+> > > @@ -1352,8 +1388,10 @@ static int move_data_page(struct inode *inode, block_t bidx, int gc_type,
+> > >   		goto out;
+> > >   	}
+> > >   	if (f2fs_is_pinned_file(inode)) {
+> > > -		if (gc_type == FG_GC)
+> > > +		if (gc_type == FG_GC) {
+> > >   			f2fs_pin_file_control(inode, true);
+> > > +			pin_section(F2FS_I_SB(inode), segno);
+> > > +		}
+> > >   		err = -EAGAIN;
+> > >   		goto out;
+> > >   	}
+> > > @@ -1485,6 +1523,7 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+> > >   							gc_type == FG_GC) {
+> > >   				f2fs_pin_file_control(inode, true);
+> > >   				iput(inode);
+> > > +				pin_section(sbi, segno);
+> > 
+> > We don't have this code.
+> > 
+> > >   				return submitted;
+> > >   			}
+> > > @@ -1766,9 +1805,17 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+> > >   		ret = -EINVAL;
+> > >   		goto stop;
+> > >   	}
+> > > +retry:
+> > >   	ret = __get_victim(sbi, &segno, gc_type);
+> > > -	if (ret)
+> > > +	if (ret) {
+> > > +		/* allow to search victim from sections has pinned data */
+> > > +		if (ret == -ENODATA && gc_type == FG_GC &&
+> > > +				pinned_section_exists(DIRTY_I(sbi))) {
+> > > +			unpin_all_sections(sbi);
+> > > +			goto retry;
+> > > +		}
+> > >   		goto stop;
+> > > +	}
+> > >   	seg_freed = do_garbage_collect(sbi, segno, &gc_list, gc_type, force);
+> > >   	if (gc_type == FG_GC &&
+> > > @@ -1811,6 +1858,9 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+> > >   	SIT_I(sbi)->last_victim[ALLOC_NEXT] = 0;
+> > >   	SIT_I(sbi)->last_victim[FLUSH_DEVICE] = init_segno;
+> > > +	if (gc_type == FG_GC && pinned_section_exists(DIRTY_I(sbi)))
+> > > +		unpin_all_sections(sbi);
+> > > +
+> > >   	trace_f2fs_gc_end(sbi->sb, ret, total_freed, sec_freed,
+> > >   				get_pages(sbi, F2FS_DIRTY_NODES),
+> > >   				get_pages(sbi, F2FS_DIRTY_DENTS),
+> > > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> > > index 012524db7437..1c20d7c9eca3 100644
+> > > --- a/fs/f2fs/segment.c
+> > > +++ b/fs/f2fs/segment.c
+> > > @@ -4736,6 +4736,12 @@ static int init_victim_secmap(struct f2fs_sb_info *sbi)
+> > >   	dirty_i->victim_secmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+> > >   	if (!dirty_i->victim_secmap)
+> > >   		return -ENOMEM;
+> > > +
+> > > +	dirty_i->pinned_secmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+> > > +	if (!dirty_i->pinned_secmap)
+> > > +		return -ENOMEM;
+> > > +
+> > > +	dirty_i->pinned_secmap_cnt = 0;
+> > >   	return 0;
+> > >   }
+> > > @@ -5324,6 +5330,7 @@ static void destroy_victim_secmap(struct f2fs_sb_info *sbi)
+> > >   {
+> > >   	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+> > > +	kvfree(dirty_i->pinned_secmap);
+> > >   	kvfree(dirty_i->victim_secmap);
+> > >   }
+> > > diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+> > > index 5c94caf0c0a1..fd6f246e649c 100644
+> > > --- a/fs/f2fs/segment.h
+> > > +++ b/fs/f2fs/segment.h
+> > > @@ -294,6 +294,8 @@ struct dirty_seglist_info {
+> > >   	struct mutex seglist_lock;		/* lock for segment bitmaps */
+> > >   	int nr_dirty[NR_DIRTY_TYPE];		/* # of dirty segments */
+> > >   	unsigned long *victim_secmap;		/* background GC victims */
+> > > +	unsigned long *pinned_secmap;		/* pinned victims from foreground GC */
+> > > +	unsigned int pinned_secmap_cnt;		/* count of victims which has pinned data */
+> > >   };
+> > >   /* victim selection function for cleaning and SSR */
+> > > -- 
+> > > 2.32.0
 
 
 _______________________________________________
