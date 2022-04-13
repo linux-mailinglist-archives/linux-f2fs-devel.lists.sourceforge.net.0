@@ -2,165 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC9054FF588
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Apr 2022 13:15:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id A26514FF595
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Apr 2022 13:20:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1neaxp-0001VK-DP; Wed, 13 Apr 2022 11:15:10 +0000
+	id 1neb30-00061D-En; Wed, 13 Apr 2022 11:20:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <p.raghav@samsung.com>) id 1neaxn-0001VD-Ke
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 11:15:08 +0000
+ (envelope-from <wu-yan@tcl.com>) id 1neb2z-000612-1c
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 11:20:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RyKCPR/im2K/bdW2nJB5bz+4Plg8hWkZCXV7bcVrMPc=; b=Qufp/gPW7KBhCII5jTuc10L0CN
- jLja3RABqtqjLC1n7hSJn3QhZuHH1w+CoBXaCc67l4kpNeBGFNwJnbcWc3xjEdrEE2H70BhSCeEub
- 1g9TrtZ0YRudbXU3G8oVEmxdfoYs7yjYxwOyEzURDSwM9WmrIMk9NOikY4n1bxkfazKs=;
+ bh=Zk7c/EEjwxmKgmdyLgdGsJPK5vxp8QPXgTtuhhdo40Q=; b=WDm7P4JMRvankTVXbbcHjNJ6UC
+ YgKYjCTDu4gRy9asl57xi0jaO0h5DsQ3ZiBcVT4s2GqkoLlD90xa9JMB3H8VcCt5lShJzalGrIQrX
+ Arw7P4tydG1xUcUJWfcLSCRV6Xc8bv5SldHVCzY1hANaDu9yKoBbWLNzMd5M/grC2wK0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Transfer-Encoding:Content-Type:In-Reply-To:From:CC:To:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:CC:To:
  Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RyKCPR/im2K/bdW2nJB5bz+4Plg8hWkZCXV7bcVrMPc=; b=hkJJqp9h8rTEoxWXHrb++q8dmw
- xoKSMsP6rqaUAeDchrZI4Hs/0LgGISTGtXMfaprTqoBtRlwHJEYuVGtStWy6dqQy28nWRUfv5jXHp
- nEqLs6th9iXfbpbe6RthMeeIr4VKABhaGUkwvONSOwcJ/KarcRM0zVGzgjXFEhQvyiPY=;
-Received: from mailout2.w1.samsung.com ([210.118.77.12])
+ bh=Zk7c/EEjwxmKgmdyLgdGsJPK5vxp8QPXgTtuhhdo40Q=; b=HJxNoxdtAO3e0JiTK/stmCJuJT
+ w9em5pXbqvul8UVApn2dKkfi1WgEofqjyRZveQtbxl/kdDqU0dh0Otq5DB2TLcaaaM6WceHx/ukHX
+ Q1sUPNn4IrwFqhDDKgAQR9PsRicacYbP1qUDxY7oxYjjLNw5sHBdIODMcoE7YOTBLyXY=;
+Received: from smtp233.corp-email.com ([222.73.234.233])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1neaxn-00F9Vh-3L
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 11:15:08 +0000
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
- by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id
- 20220413111455euoutp02839b91c4f8d5f79cba155e113a7b2963~lcHcoMyl61778817788euoutp02Q
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 13 Apr 2022 11:14:55 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com
- 20220413111455euoutp02839b91c4f8d5f79cba155e113a7b2963~lcHcoMyl61778817788euoutp02Q
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1649848495;
- bh=RyKCPR/im2K/bdW2nJB5bz+4Plg8hWkZCXV7bcVrMPc=;
- h=Date:Subject:To:CC:From:In-Reply-To:References:From;
- b=Vq8imfuh0XOXhfnOR3d64a3T0wrIvgSFLsWvBY+qtC6k90tur39m62gT0MtJJgGa7
- WuMGiLwuKvRlMAL+xkM1PGzZkv5ExoMFx/CAnRhI6ufj5iVjHRzsiEE76vddFX2e+o
- a7tVAX5Ja0KsAs8WcqFEIBQDepGNZJnnvBKc/1l4=
-Received: from eusmges1new.samsung.com (unknown [203.254.199.242]) by
- eucas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20220413111455eucas1p21bd2c9941eb44814dcdfdb739f6e3e26~lcHcVnARz1190511905eucas1p2n;
- Wed, 13 Apr 2022 11:14:55 +0000 (GMT)
-Received: from eucas1p2.samsung.com ( [182.198.249.207]) by
- eusmges1new.samsung.com (EUCPMTA) with SMTP id F5.2C.10009.FA0B6526; Wed, 13
- Apr 2022 12:14:55 +0100 (BST)
-Received: from eusmtrp1.samsung.com (unknown [182.198.249.138]) by
- eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20220413111454eucas1p23306b4a4ece383270821176d0ec3ec64~lcHb_iGqJ1321113211eucas1p2h;
- Wed, 13 Apr 2022 11:14:54 +0000 (GMT)
-Received: from eusmgms2.samsung.com (unknown [182.198.249.180]) by
- eusmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20220413111454eusmtrp1d977721e224e58637bbe9427ba3e16a2~lcHb9yFtV1778917789eusmtrp12;
- Wed, 13 Apr 2022 11:14:54 +0000 (GMT)
-X-AuditID: cbfec7f2-e95ff70000002719-98-6256b0af4946
-Received: from eusmtip2.samsung.com ( [203.254.199.222]) by
- eusmgms2.samsung.com (EUCPMTA) with SMTP id E8.E5.09404.EA0B6526; Wed, 13
- Apr 2022 12:14:54 +0100 (BST)
-Received: from CAMSVWEXC01.scsc.local (unknown [106.1.227.71]) by
- eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20220413111454eusmtip2f18db6e6db9b88762ddd72b6192733e5~lcHb2pfam1377313773eusmtip2H;
- Wed, 13 Apr 2022 11:14:54 +0000 (GMT)
-Received: from [192.168.8.130] (106.210.248.178) by CAMSVWEXC01.scsc.local
- (2002:6a01:e347::6a01:e347) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
- Wed, 13 Apr 2022 12:14:51 +0100
-Message-ID: <5a86b90d-ec5d-6c83-e8dd-0ced976059fe@samsung.com>
-Date: Wed, 13 Apr 2022 13:14:50 +0200
+ id 1neb2t-00F9km-RT
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 11:20:27 +0000
+Received: from ([114.119.32.142])
+ by smtp233.corp-email.com ((D)) with ASMTP (SSL) id IHI00009;
+ Wed, 13 Apr 2022 19:20:09 +0800
+Received: from [172.16.35.4] (172.16.35.4) by GCY-MBS-28.TCL.com (10.136.3.28)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.18; Wed, 13 Apr
+ 2022 19:20:00 +0800
+Message-ID: <ff186d65-2103-b796-79b9-3eb4a3e04380@tcl.com>
+Date: Wed, 13 Apr 2022 19:20:06 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-From: Pankaj Raghav <p.raghav@samsung.com>
-In-Reply-To: <YlWp468pKUrRLFTH@google.com>
-X-Originating-IP: [106.210.248.178]
-X-ClientProxiedBy: CAMSVWEXC01.scsc.local (2002:6a01:e347::6a01:e347) To
- CAMSVWEXC01.scsc.local (2002:6a01:e347::6a01:e347)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupjleLIzCtJLcpLzFFi42LZduzned31G8KSDJ6t4LJobf/GZPFk/Sxm
- i0uL3C1uTHjKaLHm5lMWB1aPnbPusntsWtXJ5rF7wWcmj/YD3UwBLFFcNimpOZllqUX6dglc
- GSt+LmMsOM9R8eD5QdYGxndsXYwcHBICJhIbzqd1MXJxCAmsYJSYO2M9K4TzhVHi7452pi5G
- TiDnM6PE/e9hIDZIw/vd99kgipYzSmy4cpcdrujXPhaIxG5GiakzP7KCJHgF7CRaNh1lA7FZ
- BFQlbl6/AxUXlDg58wkLiC0qECHx69YjdpCThAXyJOZMjAEJMwuIS9x6Mh/sCBEBFYlDiy6z
- g8xnFuhjlFj+YgIjSD2bgJZEYyfYDZxA5pr509ghejUlWrf/hrLlJba/ncMM8YCyxI8Np9kg
- 7FqJtcfOgM2UEHjBIfH/xEomiISLxPrrN6BsYYlXx7ewQ9gyEqcn97BA2NUST2/8ZoZobmGU
- 6N+5Hhqm1hJ9Z3Igahwljvx+xwgR5pO48VYQ4h4+iUnbpjNPYFSdhRQSs5C8PAvJC7OQvLCA
- kWUVo3hqaXFuemqxYV5quV5xYm5xaV66XnJ+7iZGYJI5/e/4px2Mc1991DvEyMTBeIhRgoNZ
- SYS3Xz00SYg3JbGyKrUoP76oNCe1+BCjNAeLkjhvcuaGRCGB9MSS1OzU1ILUIpgsEwenVANT
- /MfLdyuuiF2UUr0WLjzj5v15hzKvcSf8DlEsWHpQ0Xyq24osLc/T/JqhKTVXk8KTbih8PyK8
- MD/hwv5wrheR7+wbzp/uZ97uwXHJ40BFuYsnk4TCq1C/T59mTzeKPPLn3KH/RyP4Pr0UOKzY
- fOdJs1z9X9OCxkm8+5+bWk2taT+xZa34Pu2KkI3dG9dkNX9TmzPFz0NKz+WeyNQa0UfnTx7b
- ueCJou36OZkBApqu6vLhFSX8al0Nz/hOLTA9KrokIOQd88nfAgJaG3aabS6cdPnHlFpb/foX
- U05xhEdr75fyqOhbynOvudhD3rZq4bxDG6LVuiLKZjFtFp9mHVIissv4hex7pR+TPzvPaGlX
- YinOSDTUYi4qTgQAINvy06EDAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRmVeSWpSXmKPExsVy+t/xe7rrNoQlGTw4bWTR2v6NyeLJ+lnM
- FpcWuVvcmPCU0WLNzacsDqweO2fdZffYtKqTzWP3gs9MHu0HupkCWKL0bIryS0tSFTLyi0ts
- laINLYz0DC0t9IxMLPUMjc1jrYxMlfTtbFJSczLLUov07RL0Mlb8XMZYcJ6j4sHzg6wNjO/Y
- uhg5OSQETCTe774PZHNxCAksZZTY/3kyM0RCRuLTlY/sELawxJ9rXVBFHxklpvw+zgiSEBLY
- zSixbGcqiM0rYCfRsuko2FQWAVWJm9fvsELEBSVOznzCAmKLCkRILNs1FcwWFsiT2D1hExOI
- zSwgLnHryXwwW0RAReLQosvsIMuYBfoYJZa/mMAIsXk1o8S6y0uApnJwsAloSTR2gl3HCWSu
- mT+NHWKQpkTr9t9QtrzE9rdzoL5Rlvix4TTUy7USr+7vZpzAKDoLyX2zkNwxC8moWUhGLWBk
- WcUoklpanJueW2ykV5yYW1yal66XnJ+7iREYoduO/dyyg3Hlq496hxiZOBgPMUpwMCuJ8Par
- hyYJ8aYkVlalFuXHF5XmpBYfYjQFBtJEZinR5HxgisgriTc0MzA1NDGzNDC1NDNWEuf1LOhI
- FBJITyxJzU5NLUgtgulj4uCUamDaKey1+khvhfi7cHGvkD2/bts2KxryNGxva3OYzxcQyeFb
- 5xpZOXF+0yQNud76SHfzRYYny7VCJxybfm+foNqO4oOXTB3b/feF/T6kKmg+s319xWYLPwE2
- R4Ybfys7mo5MqVbUf9k1dwm/6rrfoQ2pk83Xbc1p61vwPa1B1OH217+fVuw4vdY0s7JA10/2
- rOQyG46pHEzGm2oDH8wXvnGr4Nx/gSeaHCn2l2tPN5vYGujUfN3g1RTcdPnUvp8nOZ7Odqpd
- u0fpQLHg3aBS9mnv7zGbd21eFVfJvT/qyZnVf12k9Nrl114wt9yYEvnh3QbPRcaSbw5O6Jop
- o7tb6guHjtmVzS6LtdK7XFsZ1iuxFGckGmoxFxUnAgBUlgqPWQMAAA==
-X-CMS-MailID: 20220413111454eucas1p23306b4a4ece383270821176d0ec3ec64
-X-Msg-Generator: CA
-X-RootMTR: 20220412112746eucas1p14f52961641ef07fdc7274e75887da9ad
-X-EPHeader: CA
-CMS-TYPE: 201P
-X-CMS-RootMailID: 20220412112746eucas1p14f52961641ef07fdc7274e75887da9ad
-References: <CGME20220412112746eucas1p14f52961641ef07fdc7274e75887da9ad@eucas1p1.samsung.com>
- <20220412112745.44108-1-p.raghav@samsung.com> <YlWp468pKUrRLFTH@google.com>
-X-Spam-Score: -7.9 (-------)
+To: Michal Hocko <mhocko@suse.com>
+References: <181ce21548da652d9a14eebc684fe75c@sslemail.net>
+ <Ylab+Tz4d8kZYjef@dhcp22.suse.cz>
+From: Wu Yan <wu-yan@tcl.com>
+In-Reply-To: <Ylab+Tz4d8kZYjef@dhcp22.suse.cz>
+X-Originating-IP: [172.16.35.4]
+X-ClientProxiedBy: GCY-EXS-05.TCL.com (10.74.128.155) To GCY-MBS-28.TCL.com
+ (10.136.3.28)
+tUid: 2022413192009cdda9d904e4172743aab11da4840b35c
+X-Abuse-Reports-To: service@corp-email.com
+Abuse-Reports-To: service@corp-email.com
+X-Complaints-To: service@corp-email.com
+X-Report-Abuse-To: service@corp-email.com
+X-Spam-Score: -2.7 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Jaegeuk, On 2022-04-12 18:33,
- Jaegeuk Kim wrote: > On 04/12, 
- Pankaj Raghav wrote: >> F2FS only works for zoned devices with power-of-2
- zone sizes as the >> f2fs section needs to be a power-of-2. > > The sectio
- [...] Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  On 4/13/22 17:46,
+ Michal Hocko wrote: > On Wed 13-04-22 16:44:32, 
+ Rokudo Yan wrote: >> There is a potential deadlock in gc thread may happen
+ >> under low memory as below: >> >> gc_thread_func >> -f2fs [...] 
+ Content analysis details:   (-2.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [210.118.77.12 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [210.118.77.12 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [222.73.234.233 listed in wl.mailspike.net]
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [222.73.234.233 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1neaxn-00F9Vh-3L
-Subject: Re: [f2fs-dev] [PATCH 0/3] f2fs-tools: return error for zoned
- devices with non power-of-2 zone size
+X-Headers-End: 1neb2t-00F9km-RT
+Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid deadlock in gc thread under low
+ memory
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -172,39 +99,86 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: javier.gonz@samsung.com, Damien.LeMoal@wdc.com, mcgrof@kernel.org,
- pankydev8@gmail.com, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: jaegeuk@kernel.org, tang.ding@tcl.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Jaegeuk,
-
-On 2022-04-12 18:33, Jaegeuk Kim wrote:
-> On 04/12, Pankaj Raghav wrote:
->> F2FS only works for zoned devices with power-of-2 zone sizes as the
->> f2fs section needs to be a power-of-2.
+On 4/13/22 17:46, Michal Hocko wrote:
+> On Wed 13-04-22 16:44:32, Rokudo Yan wrote:
+>> There is a potential deadlock in gc thread may happen
+>> under low memory as below:
+>>
+>> gc_thread_func
+>>   -f2fs_gc
+>>    -do_garbage_collect
+>>     -gc_data_segment
+>>      -move_data_block
+>>       -set_page_writeback(fio.encrypted_page);
+>>       -f2fs_submit_page_write
+>> as f2fs_submit_page_write try to do io merge when possible, so the
+>> encrypted_page is marked PG_writeback but may not submit to block
+>> layer immediately, if system enter low memory when gc thread try
+>> to move next data block, it may do direct reclaim and enter fs layer
+>> as below:
+>>     -move_data_block
+>>      -f2fs_grab_cache_page(index=?, for_write=false)
+>>       -grab_cache_page
+>>        -find_or_create_page
+>>         -pagecache_get_page
+>>          -__page_cache_alloc --  __GFP_FS is set
+>>           -alloc_pages_node
+>>            -__alloc_pages
+>>             -__alloc_pages_slowpath
+>>              -__alloc_pages_direct_reclaim
+>>               -__perform_reclaim
+>>                -try_to_free_pages
+>>                 -do_try_to_free_pages
+>>                  -shrink_zones
+>>                   -mem_cgroup_soft_limit_reclaim
+>>                    -mem_cgroup_soft_reclaim
+>>                     -mem_cgroup_shrink_node
+>>                      -shrink_node_memcg
+>>                       -shrink_list
+>>                        -shrink_inactive_list
+>>                         -shrink_page_list
+>>                          -wait_on_page_writeback -- the page is marked
+>>                         writeback during previous move_data_block call
 > 
-> The section size actually supports multiple 2MBs, not PO2.
+> This is a memcg reclaim path and you would have to have __GFP_ACCOUNT in
+> the gfp mask to hit it from the page allocator. I am not really familiar
+> with f2fs but I doubt it is using this flag.
 > 
-Thanks a lot for the clarification. I will remove this statement in the
-next revision.
+> On the other hand the memory is charged to a memcg when the newly
+> allocated page is added to the page cache. That wouldn't trigger the
+> soft reclaim path but that is not really necessary because even the
+> regular memcg reclaim would trigger wait_on_page_writeback for cgroup
+> v1.
+> 
+> Also are you sure that the mapping's gfp mask has __GFP_FS set for this
+> allocation? f2fs_iget uses GFP_NOFS like mask for some inode types.
+> 
+> All that being said, you will need to change the above call chain but it
+> would be worth double checking the dead lock is real.
 
-I was partially misled by [1] where it is stated "Segments are collected
-into sections. There is genuine flexibility in the size of a section,
-though it must be a power of two.".
+Hi, Michal
 
-Just FYI, when I did a quick check, there are some assumptions in the
-zoned support for f2fs which assumes the zoned device size is a power of
-2 such as in the __f2fs_issue_discard_zone. So if I am not wrong, when
-we remove those assumptions in f2fs for zone size, then everything
-should work fine provided the zone size is a multiple of 2MB. Am I
-missing something here?
+1. The issue is occur when do monkey test in Android Device with 4GB RAM 
++ 3GB zram, and memory cgroup v1 enabled.
 
-I am new to f2fs but is there testsuite that I can run for f2fs apart
-from the two tests listed in (x)fstests?
+2. full memory dump has caught when the issue occur and the dead lock 
+has confirmed from dump. We can see the mapping->gfp_mask is 0x14200ca,
+so both __GFP_ACCOUNT(0x1000000) and __GFP_FS(0x80) set
 
-[1] [https://lwn.net/Articles/518988/](An f2fs teardown)
+crash-arm64> struct inode.i_mapping 0xFFFFFFDFD578EEA0
+   i_mapping = 0xffffffdfd578f028,
+crash-arm64> struct address_space.host,gfp_mask -x 0xffffffdfd578f028
+   host = 0xffffffdfd578eea0,
+   gfp_mask = 0x14200ca,
+
+Thanks
+yanwu
 
 
 _______________________________________________
