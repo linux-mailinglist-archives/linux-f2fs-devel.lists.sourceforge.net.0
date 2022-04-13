@@ -2,185 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8E4D4FEC26
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Apr 2022 03:19:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 740104FEC3D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Apr 2022 03:26:36 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1neRfM-0003vl-Lg; Wed, 13 Apr 2022 01:19:27 +0000
+	id 1neRmD-0004D8-Ch; Wed, 13 Apr 2022 01:26:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <prvs=09503ed5f=Damien.LeMoal@wdc.com>)
- id 1neRfL-0003ve-3Y
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 01:19:26 +0000
+ (envelope-from <chao@kernel.org>) id 1neRmB-0004D1-Nm
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 01:26:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
- :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
- :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=swoa7TtnQh1oYll93E6WvF7ZDpPAh3hPcZglN2Rofkc=; b=eCbVWe52wCyBKAi6FMk3sQSXsA
- EFe88zZ49FMOmBIE+Jggn2pa3wpQ4m3wlToRbctPIdRS0t8tCYBnPHcYeGy/1rp4UUzuFzne+UcRM
- ZCohByXFNHuCbRt4mBSJhVbuqW/mlItu1RLRVZ1GxxFWZvoHkUYYfTGjt/zH+qtnP4TI=;
+ bh=/AR3emCo7ow3RxbhzPIAuD7+rMFDRiQzbJCgE8E3NoQ=; b=Sbsw9WgAVk2bA0/ADjQjhHbav1
+ a0ur5L2IOwTx+ap9C7/x32reyzzQQlbAQiMNAMuQr7OUl4n8RKmDxdWrJzrWQHS8p0JDvIXTeuMGN
+ 4w14wuKUl3X+aqWIDLMODLNCiX+QpkdObAqJdkZCag7dz4A1C7ozTzJaRZ1nyYngP0f8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
- In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=swoa7TtnQh1oYll93E6WvF7ZDpPAh3hPcZglN2Rofkc=; b=fpn+hoCDeFc/AAB+X534vkmaZm
- qB5PUAp6n3ipXfNvwVr/KE167mMPejdu6Rzh6itk1hRYlUUB3OUyAUWmjZqGVt55mrol/TaRDsHp5
- kDseBlqX7N9lf1JCUt7s/UTEq6/ZUOqGae/SUWAApsNWWPe6GVuvewoUSiXyA/sR7N2Y=;
-Received: from esa2.hgst.iphmx.com ([68.232.143.124])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=/AR3emCo7ow3RxbhzPIAuD7+rMFDRiQzbJCgE8E3NoQ=; b=DegsrdIOUQjxEZX5ZJlUBYELxx
+ MqBdBSKms86P19QH6BtvM9ljUwVKvfQ+XoLznVJHl8L6LIsxkMukkpBey3ClHJ3IQlV1BfNoHDoxb
+ O0+jmy3oIp5G3tPvjceOR4gvYMxLBly1C7a2SC2R76Gb8d8CuRuwo1c5UnSYj5O1yH1k=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1neRfF-00EiX0-3t
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 01:19:26 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1649812760; x=1681348760;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=swoa7TtnQh1oYll93E6WvF7ZDpPAh3hPcZglN2Rofkc=;
- b=QNEBv1O6RWamgghqLVr6BqiblYLBh0AIkO5mLGVqIiNhLudpMmfqx5tK
- j7hpQH2Ps50+b+OGl6kc6+tC3LvJBqDydbotSOKpv5WZbD7DLSQUlgLQi
- KOurHYGJKlEag1KBF5Ig/Ikq53ySG8M5ewIR+6YpMN0QyRhQF13opy3D6
- s7T4Cn9aoENVrzkLq5wgGIWspjRx3Za8HvYAfZDAYO9IRk4drSXnsMOOc
- ZrP3iUC2Zi51NigzIUi6iLAz/qALYb98QhcGAlixyUHnaqME8Aat3iLAj
- 2jje2ThOWCYMbSUCxzaV3ojKPLLydCOtYrBYvwVZtMJVFL3f5OrAw9Hnq w==;
-X-IronPort-AV: E=Sophos;i="5.90,255,1643644800"; d="scan'208";a="301961599"
-Received: from mail-mw2nam12lp2046.outbound.protection.outlook.com (HELO
- NAM12-MW2-obe.outbound.protection.outlook.com) ([104.47.66.46])
- by ob1.hgst.iphmx.com with ESMTP; 13 Apr 2022 09:03:44 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EDwP3CMS8mk7M1bolBRpAv7ux/otrFMRaafiV0F23CGxqzm4JZrhTPX1obrjwYVZTGeeX9SzgteTa4v9BN9tP+F5V/DsryJ6OhFkn1j/0NfVmsRaBOiQJqGt8nEUewqXWnJhm0jhLDc9IoBe8mE/TibNdUsk1up9lK2BdNcloIPRkxER9KukxsQKYXckNAO2hlEEtJS/zRlYCfJNnakalglhVm2jQO0yn+nUcMKpCB9fGZh32+uM2skfOcvTmMp1iWXY89a9GsposVzbeR5M7YWYtw5UU7dXTntJr/kTD/q/TblxIN7nM9ul7otJsL/sJDaQmt8P0ROw4LwH2NONNA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=swoa7TtnQh1oYll93E6WvF7ZDpPAh3hPcZglN2Rofkc=;
- b=J322X+tmq4GmLTKo4OHTdteRUXlNYx+oP0c1czvLEd3ZoCGCUvC3RBp30Rckark9i/IkAmZRpDn23ZvVFJPA4S7NfMBJhW5Zy/oBn5QWTMOdyUkuIZMlyKHLyo12EvnnDitdfQXE0zvuGPb03oHNUR5Gtc9pfxlZBrpbGh7K927U07312wNo4Nq+owyZpSqWyheSNFxJwkkb/NesKsyiwU1FpcsNubhxi2tzZrKYOdOYOP+2sKMgA0FkhNWf14b1Pi4QDNrLX1nIcEJuICZxmbLmH1fpZUg8Fs30m+GXM9Zn14bcs3WWHvbYpxt0+fYeAklnxSPprPZ+QjF4wL703g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=swoa7TtnQh1oYll93E6WvF7ZDpPAh3hPcZglN2Rofkc=;
- b=CZQCbfeqy29cIfZRY2/cd04Z8jw1hfdvFfOhoOBCGr0fPPQyOyU2QdH/uJMRZ1OFtz0EFuCcFwJFZwlixe323phpjnWMp546gHPTV5r+yis+3Ia0oT7zDIc/6rCWXxhh7orRmIq+ytRdJlntVWj7UFOofMxwqpZlQsf0EwLcSNM=
-Received: from DM6PR04MB7081.namprd04.prod.outlook.com (2603:10b6:5:244::21)
- by SN6PR04MB4334.namprd04.prod.outlook.com (2603:10b6:805:2f::25) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5144.29; Wed, 13 Apr
- 2022 01:03:42 +0000
-Received: from DM6PR04MB7081.namprd04.prod.outlook.com
- ([fe80::4b6:fefc:2474:bdd0]) by DM6PR04MB7081.namprd04.prod.outlook.com
- ([fe80::4b6:fefc:2474:bdd0%4]) with mapi id 15.20.5144.029; Wed, 13 Apr 2022
- 01:03:42 +0000
-To: "mcgrof@kernel.org" <mcgrof@kernel.org>
-Thread-Topic: [PATCH 2/3] libf2fs: add support to report zone size
-Thread-Index: AQHYTmBb2LIelwd/ukG+tQdMvewZSKzsMOIAgABFxwCAAJE3gA==
-Date: Wed, 13 Apr 2022 01:03:42 +0000
-Message-ID: <ab15014c9830233fca43ba9a187d560d62e1bb57.camel@wdc.com>
-References: <20220412112745.44108-1-p.raghav@samsung.com>
- <CGME20220412112748eucas1p19a9e013fa04d5a82abd5364604a8ad31@eucas1p1.samsung.com>
- <20220412112745.44108-3-p.raghav@samsung.com>
- <aa4133c915f61811b40cd11a738bdb18859fe3c0.camel@wdc.com>
- <YlWnnJEw1ifCkU/k@bombadil.infradead.org>
-In-Reply-To: <YlWnnJEw1ifCkU/k@bombadil.infradead.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.42.4 (3.42.4-2.fc35) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=wdc.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: c9bcfdab-2782-4736-845d-08da1ce97423
-x-ms-traffictypediagnostic: SN6PR04MB4334:EE_
-x-microsoft-antispam-prvs: <SN6PR04MB433412657B3994C4C713A282E7EC9@SN6PR04MB4334.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: FE8xrjdttumseRwkITFQVe8ZYGFUvyNiG3Np/Si0oRqfa09Nkb5IUVRnsYF39zkqO0Nzg0qaaDml65VhecA1QMqCNPk8Xln+UrdT2tCOXSm03tzCppbNSHGChv/vNBTkXZ8ayFhjRqADGYmb+qCnQaJOiQ6N7smSS5djYT/VWtDvN/MGLfJ2rAY2T9ldZJVLcaqpPo4EPZ+DTYs49SEQIU5MdxXbthui0oqWFXQM7uY+fBwykqfZjXUlT10higCvj3B3f3s7X5ySthZqvFRr5wx9L7zgMKbiXxy/hKGiNBr59EvSPQOkMSpcmJHyMzqZZyd6bQjVwwzywD61hHKSpZxH+1RymrG6kMKuFFzMTpylxVpgLUsahG+GHU7OaqCAUkTuXvJeFDeLMM6gY91ZHvrvJ8ZANZv89F6c/XAq6OJk9zq9jr+KZ4NhP0I7TUfzgdn03evRA1d1ikUyf1mkS45UsX02Ni+xJa5fShHiKWs24PaV5eoUf5xXbk6LJ7rgvyokhweMQSKabSTZ0kJkOCOUfFwxlTeJ8dFtdbzb1BdkdR6GLlQeyARm2/1oYs5xVweG/VrKzF45fMBr1gkKVIp3IR2JDe2VlSWdOvzE9Xzx6uXJIuAzXPf7Cxrf3+pJZ4KbpKDf28WEJUlat3VDcFuuX3nioZm+9og1oxvJ69YhssRkJ2bZHk3ry3KXfQgOfnPHTlqRJsBTkRTXWH5FEtTcXYfSTok9OZSaBGuxTkPsqsDx14elgmkLhz9Xea7VFjKZ6EFK5WG08Qj590s5SfWNmiWXHgv/Yw9gZtsr4X8=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM6PR04MB7081.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(4636009)(366004)(76116006)(86362001)(4326008)(91956017)(66476007)(66446008)(64756008)(5660300002)(66946007)(2616005)(66556008)(8936002)(122000001)(82960400001)(8676002)(38100700002)(6506007)(38070700005)(2906002)(186003)(6512007)(71200400001)(54906003)(6916009)(966005)(316002)(6486002)(508600001)(36756003)(26005);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?VTVhSnd5UWNjV2hXWjByODFNaDZwUmR4aWdISGJpQzA0eExoZ2hMT1plQkRV?=
- =?utf-8?B?OGpkRmFzZVRVa0VQZjAxeW0zTC9YYVEvTEtDOUtyUkVNRE1OVVdCRXdEZ3R6?=
- =?utf-8?B?QVlIaS9QQWM2RW5KcmgzeE9reDJUa2F0R1ZSV2FZT3NYcGRZRDlCaURwaWlx?=
- =?utf-8?B?NStjSWFBMlYva0ZxdWczOUVwdE1xdy9lenRWRHFqQkNjMWtEdWtock5id2t4?=
- =?utf-8?B?dnFiaENXQ0Vlbm91eVFqSmE0N2ZDcEpFVkF1Mmh2VkhBZUF6b0JCbnc0QXFH?=
- =?utf-8?B?dWU0WnQ3aklPWEdIL2Q0T3Q2cXFkVjhvL3kvdTFteHRtSTN5azk0MllsMy9R?=
- =?utf-8?B?eUVST3dEYlBKcjFhQ0JacFR1Uy9BWm4xTzlrTVdmUE1tUnV3UVdnRDZZMDYr?=
- =?utf-8?B?ZnQ0K1pSWUh0TDR5TzAvUi9FNGh3L2plSlJzWEpxVVpuV3BmcTZHdHZES0tP?=
- =?utf-8?B?R3dJOTFJblpKVTdqWGZZazAydW1YZ1QwbEVTbDlwZXprZXBEUFNsVklUWVVO?=
- =?utf-8?B?ZjlWTTluN25MKzNFdThTNitub1B3a3REMkc0UDNRTmw0dFFwQ2M2RGU5MDky?=
- =?utf-8?B?cytrUGRIMW9na1hnVG44Sjg2SUVYb1dxME04Z1I1N2tTMUFQWWdxUUJqcUpL?=
- =?utf-8?B?SWpwQ2FlNzlDY29EWUFON01PajhOS0NLQ2VxZklaaWpXSkUvNFJpY3E1TnVw?=
- =?utf-8?B?ZDJPMEFFSG9BNHhBdTNZU0FVWXdnc0IybCtRckoyY2FualRFNXJiQUdMV3Jn?=
- =?utf-8?B?YXpSWFJyaDNKZWdpWlhEYzcyb0dGM3Jwa3lwbXRQei9IbGhablNTNy81bGd4?=
- =?utf-8?B?b2pXMkJ3ZXRCbk1oZzkrNm8zQXpFbk1yQ0lwTjdIek9CeEc0bEZTcms4S1hk?=
- =?utf-8?B?SUx4NUp0ai9hczlSNW1JcXNvOGZGZXhVZ2lCUGJoM0NkbHdtNFlUMG1oUnNN?=
- =?utf-8?B?TVNHYTJJMzFqdHZxelB5WHZmMkk1VUw5YnFZOTZ6U1Z3YkhiY0dOMnZWcUFr?=
- =?utf-8?B?VnR5QS91WDVhUlVLS241VEtlSHQ2aDFST2lsWXJZZEhNRU13aWpaTHp5OHkv?=
- =?utf-8?B?em16a1VkbnBzbk5jWVBKdStzeVJqMlRsdURsVE5mYjBzOWtIclowM1ppOU45?=
- =?utf-8?B?c3FJZlQvS2ZrUEpCa1Bhc1dOVDd2ellXU25xL1dySXFsUi9Iakc0M0VlSVpE?=
- =?utf-8?B?NGw0dlQxQVorYTZrNkpNRDYxSkFISkpUVk1pbFp4bFdlQ0F6TjRkdkFYYm1Z?=
- =?utf-8?B?R3k2a09LRTJuL1p4azlPTkYyOUROM2lYSzlWMFMya3paYm0xclJYOUxaQ0pn?=
- =?utf-8?B?TkFlZzJpaDJndjlDcG1rejlmeSsyc2dEZllCNGlzbVlzTnFVTWhSWjdaZFht?=
- =?utf-8?B?UVdTbmNjb1BKcUtDYzg3TXEwSFhpQklpMVpwb0lFUm1rT3h0QTk1QUVlNWF3?=
- =?utf-8?B?Q3p2WnNLeUdSMTdXWHFSWTJOOGtMU3RhMFpXTVJISFI1WGMxL3lhZjRZd2px?=
- =?utf-8?B?NGdrY29COVFCSmZ5eERiY2tNVDloUWNIeklyQVFaNThndG1oSUdKby9pMm12?=
- =?utf-8?B?eWlPdytFY1R1T1JYSkVDQmIvTWFsVXZ2QmRldmdaVHgxMkk5QXpFeDhTb0Qy?=
- =?utf-8?B?RUhyNWJ1a0hLOWdqb0RoRTl2Y1A0Z1lueEV4bUxBS0Qvc0xld2lrckc2dlFQ?=
- =?utf-8?B?OUR1WXAyK2JSc0dlYkxzVVEwTmh3ekFOV2RZUlR1eThyK2dnT1h3R2ZDcUNX?=
- =?utf-8?B?RXozUzZFVjFFZ2VFU2x6RFN6YXJjTFJBeGtwY0lEWDlvQWFGSXV0eXREYVJr?=
- =?utf-8?B?MWFpamdPMGM0bUFhMUtMVCtLUldxMjJvb3crY1VCNStDRGFZZ0tCU2tWd1ln?=
- =?utf-8?B?WlNFckRRV3J1V2l0RnZPeUVNaUFRY0JZOE50ZVc2eHFHUkJFbW0vWENrUWdW?=
- =?utf-8?B?cW5MNFZ4ZlY1cFIrc2ZDdU1lYitIR0s2T3ptYjloRFRBRzIyNzRROS9DNlBh?=
- =?utf-8?B?NlNUcVZGcUhwUnBDL05nNEZnUWsra3AvbG01M0FFRU40MVFaOEozUWNqcFZa?=
- =?utf-8?B?QWdaYm8yOEo5T1N2V0Z3S2JPeXFrUFpuUVMrNnFDWUd1YmxJVVZzQUVkKzY1?=
- =?utf-8?B?YUxzaHFmOFN4VHo2M0xYNlJINXRYSUgxZW15SjdBZHJENTB4NXlvQk9oeG00?=
- =?utf-8?B?MUpWNmx4TjNlVWtrMzNTcGdLcysxWWIzUkY4aVZCMGc4MUZiZVhDMExuUjBr?=
- =?utf-8?B?V1FyTWhmV0ZrM2t0VldDemZZdjFRYnE4dHZ1WmZkeWR5R1IvcWprVndUVzNw?=
- =?utf-8?B?U3dDK1NqQTFpeVdnenFVamh4ZjJYNDNpZXpRN1lqUVUxQ0oySU1mb1FGU0py?=
- =?utf-8?Q?K+OXSKEEHgF9QR7A=3D?=
-Content-ID: <52D8B11AEDADE445A9ACA564AEDEFEA2@namprd04.prod.outlook.com>
+ id 1neRm8-0000XI-SW
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 01:26:30 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E1FCD618C1;
+ Wed, 13 Apr 2022 01:26:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 25586C385A1;
+ Wed, 13 Apr 2022 01:26:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1649813179;
+ bh=K/6FWbMzAcuGO4JVBgyhM+eY72etwU8K3Ish3/dDSw4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=uA2wcTDtwy9I2/T2l50iLlV/osO3WccoJjVBjKKEBckBCVyS87eRmxGGhuo3X/yKr
+ RPPdRCN6xbgLxbWcdo9bPTtaj40bCNZKaAthNLUeWd6nl3vQ2q0Ccq0pHj2zYKIrYF
+ 7ryeU7B3bRPYgLIGmW5eAHO9MeNy4LYxo2n2dtKkMNcpJo9VfMsUCFhzIRQ35ky2tp
+ AtxictKm2qyeAUvVGppDT/0CG53O6DfXGHIka8wgqV9yzpuB1JGHinHl5Dxy293PD+
+ b6s9NMNrd4CH9gHACxVODq0c16MsfQbfdlmS5VTeq5ucRluvT56s9Y1b9NEIYBCduS
+ RokYke61AGiuQ==
+Message-ID: <e9865a0c-d14d-e689-330f-f8339bb33fec@kernel.org>
+Date: Wed, 13 Apr 2022 09:26:15 +0800
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR04MB7081.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c9bcfdab-2782-4736-845d-08da1ce97423
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Apr 2022 01:03:42.7320 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: krwmG5cydKfch/3PA0K7Y6of0wlylBLwreYDSIfMGesTDaGB+8e0m7Rg/1pPQxVG9DV85vt1lEXE5PCeBj3u2Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR04MB4334
-X-Spam-Score: -2.5 (--)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20220406152651.5142-1-chao@kernel.org>
+ <YlSNjgQwoiENx5EK@google.com>
+ <1eee9abe-f468-ce32-cdb9-3a706404de2f@kernel.org>
+ <YlWnDD2H+AueUYcK@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <YlWnDD2H+AueUYcK@google.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, 2022-04-12 at 09:23 -0700, Luis Chamberlain wrote:
- > On Tue, Apr 12, 2022 at 12:14:13PM +0000, Damien Le Moal wrote: > > On
- Tue, 2022-04-12 at 13:27 +0200, Pankaj Raghav wrote: > > > From: Lui [...]
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On 2022/4/13 0:21, Jaegeuk Kim wrote: > On 04/12, Chao Yu
+ wrote: >> On 2022/4/12 4:20, Jaegeuk Kim wrote: >>> On 04/06, Chao Yu wrote:
+ >>>> Previously, during foreground GC, if victims contain data of [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [68.232.143.124 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [68.232.143.124 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -188,8 +91,11 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1neRfF-00EiX0-3t
-Subject: Re: [f2fs-dev] [PATCH 2/3] libf2fs: add support to report zone size
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1neRm8-0000XI-SW
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: give priority to select unpinned
+ section for foreground GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -201,67 +107,414 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Damien Le Moal via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Damien Le Moal <Damien.LeMoal@wdc.com>
-Cc: "p.raghav@samsung.com" <p.raghav@samsung.com>,
- "javier.gonz@samsung.com" <javier.gonz@samsung.com>,
- "pankydev8@gmail.com" <pankydev8@gmail.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, 2022-04-12 at 09:23 -0700, Luis Chamberlain wrote:
-> On Tue, Apr 12, 2022 at 12:14:13PM +0000, Damien Le Moal wrote:
-> > On Tue, 2022-04-12 at 13:27 +0200, Pankaj Raghav wrote:
-> > > From: Luis Chamberlain <mcgrof@kernel.org>
-> > > 
-> > > Expand get_device_info() to report the zone size.
-> > > This is now important give power of 2 zone sizees (PO2)
-> > 
-> > s/give/given that
-> > s/sizees/size
-> > 
-> > > can exist, and so can non power of 2 zones sizes (NPO2),
-> > 
-> > No they cannot, not yet in Linux.
+On 2022/4/13 0:21, Jaegeuk Kim wrote:
+> On 04/12, Chao Yu wrote:
+>> On 2022/4/12 4:20, Jaegeuk Kim wrote:
+>>> On 04/06, Chao Yu wrote:
+>>>> Previously, during foreground GC, if victims contain data of pinned file,
+>>>> it will fail migration of the data, and meanwhile i_gc_failures of that
+>>>> pinned file may increase, and when it exceeds threshold, GC will unpin
+>>>> the file, result in breaking pinfile's semantics.
+>>>>
+>>>> In order to mitigate such condition, let's record and skip section which
+>>>> has pinned file's data and give priority to select unpinned one.
+>>>>
+>>>> Signed-off-by: Chao Yu <chao.yu@oppo.com>
+>>>> ---
+>>>> v3:
+>>>> - check pin status before pinning section in pin_section().
+>>>>    fs/f2fs/gc.c      | 56 ++++++++++++++++++++++++++++++++++++++++++++---
+>>>>    fs/f2fs/segment.c |  7 ++++++
+>>>>    fs/f2fs/segment.h |  2 ++
+>>>>    3 files changed, 62 insertions(+), 3 deletions(-)
+>>>>
+>>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>>>> index 6a7e4148ff9d..df23824ae3c2 100644
+>>>> --- a/fs/f2fs/gc.c
+>>>> +++ b/fs/f2fs/gc.c
+>>>> @@ -646,6 +646,37 @@ static void release_victim_entry(struct f2fs_sb_info *sbi)
+>>>>    	f2fs_bug_on(sbi, !list_empty(&am->victim_list));
+>>>>    }
+>>>> +static void pin_section(struct f2fs_sb_info *sbi, unsigned int segno)
+>>>
+>>> Need f2fs_...?
+>>
+>> Sure, I can add prefix...
+>>
+>> It's a local function, it won't pollute global namespace w/o f2fs_ prefix
+>> though.
+>>
+>>>
+>>>> +{
+>>>> +	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+>>>> +	unsigned int secno = GET_SEC_FROM_SEG(sbi, segno);
+>>>> +
+>>>> +	if (test_bit(secno, dirty_i->pinned_secmap))
+>>>> +		return;
+>>>> +	set_bit(secno, dirty_i->pinned_secmap);
+>>>> +	dirty_i->pinned_secmap_cnt++;
+>>>> +}
+>>>> +
+>>>> +static bool pinned_section_exists(struct dirty_seglist_info *dirty_i)
+>>>> +{
+>>>> +	return dirty_i->pinned_secmap_cnt;
+>>>> +}
+>>>> +
+>>>> +static bool section_is_pinned(struct dirty_seglist_info *dirty_i,
+>>>> +						unsigned int secno)
+>>>> +{
+>>>> +	return pinned_section_exists(dirty_i) &&
+>>>> +			test_bit(secno, dirty_i->pinned_secmap);
+>>>> +}
+>>>> +
+>>>> +static void unpin_all_sections(struct f2fs_sb_info *sbi)
+>>>> +{
+>>>> +	unsigned int bitmap_size = f2fs_bitmap_size(MAIN_SECS(sbi));
+>>>> +
+>>>> +	memset(DIRTY_I(sbi)->pinned_secmap, 0, bitmap_size);
+>>>> +	DIRTY_I(sbi)->pinned_secmap_cnt = 0;
+>>>> +}
+>>>> +
+>>>>    /*
+>>>>     * This function is called from two paths.
+>>>>     * One is garbage collection and the other is SSR segment selection.
+>>>> @@ -787,6 +818,9 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+>>>>    		if (gc_type == BG_GC && test_bit(secno, dirty_i->victim_secmap))
+>>>>    			goto next;
+>>>> +		if (gc_type == FG_GC && section_is_pinned(dirty_i, secno))
+>>>> +			goto next;
+>>>> +
+>>>>    		if (is_atgc) {
+>>>>    			add_victim_entry(sbi, &p, segno);
+>>>>    			goto next;
+>>>> @@ -1202,8 +1236,10 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>>>>    	}
+>>>>    	if (f2fs_is_pinned_file(inode)) {
+>>>> -		if (gc_type == FG_GC)
+>>>> +		if (gc_type == FG_GC) {
+>>>>    			f2fs_pin_file_control(inode, true);
+>>>> +			pin_section(F2FS_I_SB(inode), segno);
+>>>
+>>> Do we need to check unpinning the inode?
+>>> 			if (!f2fs_pin_file_control())
+>>> 				f2fs_set_pin_section();
+>>
+>> I'm thinking that it needs to avoid increasing GC_FAILURE_PIN AMAP,
+>> so could you please check below logic:
+>>
+>>  From 7cb1ee0df32ede44b17c503b81930dae25d287eb Mon Sep 17 00:00:00 2001
+>> From: Chao Yu <chao@kernel.org>
+>> Date: Wed, 6 Apr 2022 23:26:51 +0800
+>> Subject: [PATCH v4] f2fs: give priority to select unpinned section for
+>>   foreground GC
+>>
+>> Previously, during foreground GC, if victims contain data of pinned file,
+>> it will fail migration of the data, and meanwhile i_gc_failures of that
+>> pinned file may increase, and when it exceeds threshold, GC will unpin
+>> the file, result in breaking pinfile's semantics.
+>>
+>> In order to mitigate such condition, let's record and skip section which
+>> has pinned file's data and give priority to select unpinned one.
+>>
+>> Signed-off-by: Chao Yu <chao.yu@oppo.com>
+>> ---
+>> v4:
+>> - add f2fs_ prefix for newly introduced functions
+>> - add bool type variable for functionality switch
+>> - increase GC_FAILURE_PIN only if it disable pinning section
+>>   fs/f2fs/gc.c      | 66 ++++++++++++++++++++++++++++++++++++++++++-----
+>>   fs/f2fs/segment.c |  8 ++++++
+>>   fs/f2fs/segment.h |  3 +++
+>>   3 files changed, 71 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>> index 6a7e4148ff9d..296b31e28d3d 100644
+>> --- a/fs/f2fs/gc.c
+>> +++ b/fs/f2fs/gc.c
+>> @@ -646,6 +646,41 @@ static void release_victim_entry(struct f2fs_sb_info *sbi)
+>>   	f2fs_bug_on(sbi, !list_empty(&am->victim_list));
+>>   }
+>>
+>> +static bool f2fs_pin_section(struct f2fs_sb_info *sbi, unsigned int segno)
+>> +{
+>> +	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+>> +	unsigned int secno = GET_SEC_FROM_SEG(sbi, segno);
+>> +
+>> +	if (!dirty_i->enable_pin_section)
+>> +		return false;
+>> +	if (test_bit(secno, dirty_i->pinned_secmap))
+>> +		return true;
+>> +	set_bit(secno, dirty_i->pinned_secmap);
+>> +	dirty_i->pinned_secmap_cnt++;
 > 
-> They *do* exist in the real world, and in Linux they do come up when
-> users are manually removing the current po2 requirement on Linux
-> sources [0].
-> 
-> So how about:
-> 
-> This is now important give power of 2 zone sizees (PO2)
-> do exist and some users are manually forcing to enable these
-> on Linux [0].
+> 	if (!test_and_set_bit())
+> 		dirty_i->pinned_secmap_cnt++;
 
-Please fix the grammar and typos as mentioned above.
+More clean.
 
 > 
-> [0] https://lkml.kernel.org/r/CAJjM=8Cap1bwu8cp-mRTsiBmbHH=Ed8pp9vdAsig2o_ZiHTc-g@mail.gmail.com
+>> +	return true;
+>> +}
+>> +
+>> +static bool f2fs_pinned_section_exists(struct dirty_seglist_info *dirty_i)
+>> +{
+>> +	return dirty_i->enable_pin_section && dirty_i->pinned_secmap_cnt;
+>> +}
+>> +
+>> +static bool f2fs_section_is_pinned(struct dirty_seglist_info *dirty_i,
+>> +						unsigned int secno)
+>> +{
+>> +	return f2fs_pinned_section_exists(dirty_i) &&
+>> +			test_bit(secno, dirty_i->pinned_secmap);
+>> +}
+>> +
+>> +static void f2fs_unpin_all_sections(struct f2fs_sb_info *sbi, bool enable)
+>> +{
+>> +	unsigned int bitmap_size = f2fs_bitmap_size(MAIN_SECS(sbi));
+>> +
+>> +	memset(DIRTY_I(sbi)->pinned_secmap, 0, bitmap_size);
+>> +	DIRTY_I(sbi)->pinned_secmap_cnt = 0;
+>> +	DIRTY_I(sbi)->enable_pin_section = enable;
+>> +}
+>> +
+>>   /*
+>>    * This function is called from two paths.
+>>    * One is garbage collection and the other is SSR segment selection.
+>> @@ -787,6 +822,9 @@ static int get_victim_by_default(struct f2fs_sb_info *sbi,
+>>   		if (gc_type == BG_GC && test_bit(secno, dirty_i->victim_secmap))
+>>   			goto next;
+>>
+>> +		if (gc_type == FG_GC && f2fs_section_is_pinned(dirty_i, secno))
+>> +			goto next;
+>> +
+>>   		if (is_atgc) {
+>>   			add_victim_entry(sbi, &p, segno);
+>>   			goto next;
+>> @@ -1202,8 +1240,10 @@ static int move_data_block(struct inode *inode, block_t bidx,
+>>   	}
+>>
+> 
+> Can we make a generic function?
+> 
+> f2fs_gc_pinned_control()
+> {
+> 	if (!f2fs_is_pinned_file(inode))
+> 		return 0;
+> 	if (gc_type != FG_GC)
+> 		return 0;
+> 	if (!f2fs_pin_section())
+> 		f2fs_pin_file_control();
+> 	return -EAGAIN;
+> }
 
-This link does not work: lore says "not found"
+Better. :)
+
+Thanks,
 
 > 
-> > Overall, I really do not see the point of this patch.
+>>   	if (f2fs_is_pinned_file(inode)) {
+>> -		if (gc_type == FG_GC)
+>> -			f2fs_pin_file_control(inode, true);
+>> +		if (gc_type == FG_GC) {
+>> +			if (!f2fs_pin_section(F2FS_I_SB(inode), segno))
 > 
-> It makes the subsequent patch easier to read and also makes
-> the displaying zone support separate easier to review. It can
-> certainly be merged, but I don't think it makes the last patch
-> as easier to read. It's subjective and up to the maintainer.
-
-In my opinion, a single patch that adds power of 2 check right after
-chunk_sectors is read would be a lot simpler and easier to understand.
-
-> 
->   Luis
-
--- 
-Damien Le Moal
-Western Digital Research
+>> +				f2fs_pin_file_control(inode, true);
+>> +		}
+>>   		err = -EAGAIN;
+>>   		goto out;
+>>   	}
+>> @@ -1352,8 +1392,10 @@ static int move_data_page(struct inode *inode, block_t bidx, int gc_type,
+>>   		goto out;
+>>   	}
+>>   	if (f2fs_is_pinned_file(inode)) {
+>> -		if (gc_type == FG_GC)
+>> -			f2fs_pin_file_control(inode, true);
+>> +		if (gc_type == FG_GC) {
+>> +			if (!f2fs_pin_section(F2FS_I_SB(inode), segno))
+>> +				f2fs_pin_file_control(inode, true);
+>> +		}
+>>   		err = -EAGAIN;
+>>   		goto out;
+>>   	}
+>> @@ -1483,7 +1525,8 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+>>
+>>   			if (is_inode_flag_set(inode, FI_PIN_FILE) &&
+>>   							gc_type == FG_GC) {
+>> -				f2fs_pin_file_control(inode, true);
+>> +				if (!f2fs_pin_section(sbi, segno))
+>> +					f2fs_pin_file_control(inode, true);
+>>   				iput(inode);
+>>   				return submitted;
+>>   			}
+>> @@ -1766,9 +1809,17 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+>>   		ret = -EINVAL;
+>>   		goto stop;
+>>   	}
+>> +retry:
+>>   	ret = __get_victim(sbi, &segno, gc_type);
+>> -	if (ret)
+>> +	if (ret) {
+>> +		/* allow to search victim from sections has pinned data */
+>> +		if (ret == -ENODATA && gc_type == FG_GC &&
+>> +				f2fs_pinned_section_exists(DIRTY_I(sbi))) {
+>> +			f2fs_unpin_all_sections(sbi, false);
+>> +			goto retry;
+>> +		}
+>>   		goto stop;
+>> +	}
+>>
+>>   	seg_freed = do_garbage_collect(sbi, segno, &gc_list, gc_type, force);
+>>   	if (gc_type == FG_GC &&
+>> @@ -1811,6 +1862,9 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+>>   	SIT_I(sbi)->last_victim[ALLOC_NEXT] = 0;
+>>   	SIT_I(sbi)->last_victim[FLUSH_DEVICE] = init_segno;
+>>
+>> +	if (gc_type == FG_GC && f2fs_pinned_section_exists(DIRTY_I(sbi)))
+>> +		f2fs_unpin_all_sections(sbi, true);
+>> +
+>>   	trace_f2fs_gc_end(sbi->sb, ret, total_freed, sec_freed,
+>>   				get_pages(sbi, F2FS_DIRTY_NODES),
+>>   				get_pages(sbi, F2FS_DIRTY_DENTS),
+>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>> index 22dfeb991529..93c7bae57a25 100644
+>> --- a/fs/f2fs/segment.c
+>> +++ b/fs/f2fs/segment.c
+>> @@ -4734,6 +4734,13 @@ static int init_victim_secmap(struct f2fs_sb_info *sbi)
+>>   	dirty_i->victim_secmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+>>   	if (!dirty_i->victim_secmap)
+>>   		return -ENOMEM;
+>> +
+>> +	dirty_i->pinned_secmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+>> +	if (!dirty_i->pinned_secmap)
+>> +		return -ENOMEM;
+>> +
+>> +	dirty_i->pinned_secmap_cnt = 0;
+>> +	dirty_i->enable_pin_section = true;
+>>   	return 0;
+>>   }
+>>
+>> @@ -5322,6 +5329,7 @@ static void destroy_victim_secmap(struct f2fs_sb_info *sbi)
+>>   {
+>>   	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+>>
+>> +	kvfree(dirty_i->pinned_secmap);
+>>   	kvfree(dirty_i->victim_secmap);
+>>   }
+>>
+>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+>> index 5c94caf0c0a1..8a591455d796 100644
+>> --- a/fs/f2fs/segment.h
+>> +++ b/fs/f2fs/segment.h
+>> @@ -294,6 +294,9 @@ struct dirty_seglist_info {
+>>   	struct mutex seglist_lock;		/* lock for segment bitmaps */
+>>   	int nr_dirty[NR_DIRTY_TYPE];		/* # of dirty segments */
+>>   	unsigned long *victim_secmap;		/* background GC victims */
+>> +	unsigned long *pinned_secmap;		/* pinned victims from foreground GC */
+>> +	unsigned int pinned_secmap_cnt;		/* count of victims which has pinned data */
+>> +	bool enable_pin_section;		/* enable pinning section */
+>>   };
+>>
+>>   /* victim selection function for cleaning and SSR */
+>> -- 
+>> 2.25.1
+>>
+>> Thanks,
+>>
+>>>
+>>>> +		}
+>>>>    		err = -EAGAIN;
+>>>>    		goto out;
+>>>>    	}
+>>>> @@ -1352,8 +1388,10 @@ static int move_data_page(struct inode *inode, block_t bidx, int gc_type,
+>>>>    		goto out;
+>>>>    	}
+>>>>    	if (f2fs_is_pinned_file(inode)) {
+>>>> -		if (gc_type == FG_GC)
+>>>> +		if (gc_type == FG_GC) {
+>>>>    			f2fs_pin_file_control(inode, true);
+>>>> +			pin_section(F2FS_I_SB(inode), segno);
+>>>> +		}
+>>>>    		err = -EAGAIN;
+>>>>    		goto out;
+>>>>    	}
+>>>> @@ -1485,6 +1523,7 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+>>>>    							gc_type == FG_GC) {
+>>>>    				f2fs_pin_file_control(inode, true);
+>>>>    				iput(inode);
+>>>> +				pin_section(sbi, segno);
+>>>
+>>> We don't have this code.
+>>>
+>>>>    				return submitted;
+>>>>    			}
+>>>> @@ -1766,9 +1805,17 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+>>>>    		ret = -EINVAL;
+>>>>    		goto stop;
+>>>>    	}
+>>>> +retry:
+>>>>    	ret = __get_victim(sbi, &segno, gc_type);
+>>>> -	if (ret)
+>>>> +	if (ret) {
+>>>> +		/* allow to search victim from sections has pinned data */
+>>>> +		if (ret == -ENODATA && gc_type == FG_GC &&
+>>>> +				pinned_section_exists(DIRTY_I(sbi))) {
+>>>> +			unpin_all_sections(sbi);
+>>>> +			goto retry;
+>>>> +		}
+>>>>    		goto stop;
+>>>> +	}
+>>>>    	seg_freed = do_garbage_collect(sbi, segno, &gc_list, gc_type, force);
+>>>>    	if (gc_type == FG_GC &&
+>>>> @@ -1811,6 +1858,9 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
+>>>>    	SIT_I(sbi)->last_victim[ALLOC_NEXT] = 0;
+>>>>    	SIT_I(sbi)->last_victim[FLUSH_DEVICE] = init_segno;
+>>>> +	if (gc_type == FG_GC && pinned_section_exists(DIRTY_I(sbi)))
+>>>> +		unpin_all_sections(sbi);
+>>>> +
+>>>>    	trace_f2fs_gc_end(sbi->sb, ret, total_freed, sec_freed,
+>>>>    				get_pages(sbi, F2FS_DIRTY_NODES),
+>>>>    				get_pages(sbi, F2FS_DIRTY_DENTS),
+>>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+>>>> index 012524db7437..1c20d7c9eca3 100644
+>>>> --- a/fs/f2fs/segment.c
+>>>> +++ b/fs/f2fs/segment.c
+>>>> @@ -4736,6 +4736,12 @@ static int init_victim_secmap(struct f2fs_sb_info *sbi)
+>>>>    	dirty_i->victim_secmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+>>>>    	if (!dirty_i->victim_secmap)
+>>>>    		return -ENOMEM;
+>>>> +
+>>>> +	dirty_i->pinned_secmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+>>>> +	if (!dirty_i->pinned_secmap)
+>>>> +		return -ENOMEM;
+>>>> +
+>>>> +	dirty_i->pinned_secmap_cnt = 0;
+>>>>    	return 0;
+>>>>    }
+>>>> @@ -5324,6 +5330,7 @@ static void destroy_victim_secmap(struct f2fs_sb_info *sbi)
+>>>>    {
+>>>>    	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
+>>>> +	kvfree(dirty_i->pinned_secmap);
+>>>>    	kvfree(dirty_i->victim_secmap);
+>>>>    }
+>>>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+>>>> index 5c94caf0c0a1..fd6f246e649c 100644
+>>>> --- a/fs/f2fs/segment.h
+>>>> +++ b/fs/f2fs/segment.h
+>>>> @@ -294,6 +294,8 @@ struct dirty_seglist_info {
+>>>>    	struct mutex seglist_lock;		/* lock for segment bitmaps */
+>>>>    	int nr_dirty[NR_DIRTY_TYPE];		/* # of dirty segments */
+>>>>    	unsigned long *victim_secmap;		/* background GC victims */
+>>>> +	unsigned long *pinned_secmap;		/* pinned victims from foreground GC */
+>>>> +	unsigned int pinned_secmap_cnt;		/* count of victims which has pinned data */
+>>>>    };
+>>>>    /* victim selection function for cleaning and SSR */
+>>>> -- 
+>>>> 2.32.0
 
 
 _______________________________________________
