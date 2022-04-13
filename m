@@ -2,121 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82A054FF6D5
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Apr 2022 14:30:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EFEE4FFAA7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 Apr 2022 17:49:47 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nec8D-0000CM-A2; Wed, 13 Apr 2022 12:29:56 +0000
+	id 1nefFX-0007zE-JY; Wed, 13 Apr 2022 15:49:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <p.raghav@samsung.com>) id 1nec8B-0000C6-9R
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 12:29:54 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nefFW-0007z8-OR
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 15:49:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8tceLpQCZY8XtXPcoFL1bD1vU5G4FDe/1Ig7REroJXA=; b=G+doMGg+zGbnJRTh60QA+ZvCGn
- JbuYMXkrXFWyVEtWShgzuaL/8oDQz/+jT9ErjwT7nNXz0QR63uH6H4MtRMJ+/2/5FyEzzDMbj8Jv/
- 1E+KbqOk+n1TpRSmN1zm7REZNSbrqF6LQx1keUZgRQf5oh6b8n3GgZk0bfCwKoMtY9uM=;
+ bh=DEjo6kIwLO1rHG/v+pM569AROIeh5/Xt4A97krp+xJo=; b=RipUD1OrUG0dghMAr3dBbILhb5
+ 6X+B1Yzrbjez7SbCqkOQVz3LTkQQHqCx/11ad3Lh60FsezpiOTXYIIlEiwQ+AcKJ6KR/61DQq0jTS
+ tjt3ssE/UnWwRqwxK6qU8N62Pwbw4a0CZFNKTo8/fjD5fGiTTyilcD14aYGbchwbdG/8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id
- :Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=8tceLpQCZY8XtXPcoFL1bD1vU5G4FDe/1Ig7REroJXA=; b=V
- XIp4NctsA6/yxFgEFwvdVIhBKnMaemNRJc3UN+0Ib6Rcd+OUnT84aR4LUzCYib4dk/JBJvDpwQnaC
- TL8RCdPRS8x0abVTkGaVIsOvlL5BWHDqWwGPRzTcTV3sr1t1xQW7QaBE3i5EEKvz4hJHbVMlxQvUY
- qTyhoJi3Uz9ZFVo0=;
-Received: from mailout2.w1.samsung.com ([210.118.77.12])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=DEjo6kIwLO1rHG/v+pM569AROIeh5/Xt4A97krp+xJo=; b=I
+ 5kukm64+TNI6oo2Hmsm58yJ5V9pTE4qi28SMfVKMipxq7a9uMQyTUs72ulIcPrFjL8y2Qzz2b1FaF
+ kZnU1nNNhZEbfyDqvITT6SxHC61K45mD2caaMOzdPbgZJqBFQ5GtDvsjhtqhfz6w2xiWvL3pVAGWU
+ Lcv3qMF1jOCv4aP4=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nec88-0000kg-25
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 12:29:54 +0000
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
- by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id
- 20220413122942euoutp0202a4a74eda647f885832b33b98636e5a~ldIvZntgu0776207762euoutp02h
+ id 1nefFO-0001ta-MC
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 13 Apr 2022 15:49:41 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 7581FB8256A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 13 Apr 2022 12:29:42 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com
- 20220413122942euoutp0202a4a74eda647f885832b33b98636e5a~ldIvZntgu0776207762euoutp02h
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1649852982;
- bh=8tceLpQCZY8XtXPcoFL1bD1vU5G4FDe/1Ig7REroJXA=;
- h=From:To:Cc:Subject:Date:References:From;
- b=YnB2ER6IraJk9D5LhxymTG4ZpayYBMdrOi/ABiRElYyHZn9V++m1zUB9qOusHreJz
- fUQzYX4etkc5EA/AEXfJTQXzrydy0aB1gfQXMRYzD55HEcfiEP1PulNda8T+RWdkK4
- Jhbk/zunmYomz59sg8qA2Q580N7SMZL3KgHlEdlk=
-Received: from eusmges3new.samsung.com (unknown [203.254.199.245]) by
- eucas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20220413122941eucas1p18ae16aaaf33eddc1590815e70278057c~ldIuy-4to1480414804eucas1p1A;
- Wed, 13 Apr 2022 12:29:41 +0000 (GMT)
-Received: from eucas1p1.samsung.com ( [182.198.249.206]) by
- eusmges3new.samsung.com (EUCPMTA) with SMTP id FB.FF.10260.532C6526; Wed, 13
- Apr 2022 13:29:41 +0100 (BST)
-Received: from eusmtrp2.samsung.com (unknown [182.198.249.139]) by
- eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20220413122941eucas1p1ec05e8e8dfe2baf451fcb549d60fda35~ldIuT-wvG1000610006eucas1p1v;
- Wed, 13 Apr 2022 12:29:41 +0000 (GMT)
-Received: from eusmgms1.samsung.com (unknown [182.198.249.179]) by
- eusmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20220413122941eusmtrp24d0a4f8986c1443744045953cd30cec3~ldIuTJ9U10748907489eusmtrp2w;
- Wed, 13 Apr 2022 12:29:41 +0000 (GMT)
-X-AuditID: cbfec7f5-bf3ff70000002814-8e-6256c23576a0
-Received: from eusmtip1.samsung.com ( [203.254.199.221]) by
- eusmgms1.samsung.com (EUCPMTA) with SMTP id A9.FD.09522.532C6526; Wed, 13
- Apr 2022 13:29:41 +0100 (BST)
-Received: from localhost (unknown [106.210.248.178]) by eusmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20220413122940eusmtip173c8d6a57ad0f4a2856b8f0f3677a438~ldIt-82rA1762317623eusmtip1j;
- Wed, 13 Apr 2022 12:29:40 +0000 (GMT)
-From: Pankaj Raghav <p.raghav@samsung.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 13 Apr 2022 14:29:40 +0200
-Message-Id: <20220413122940.133981-1-p.raghav@samsung.com>
-X-Mailer: git-send-email 2.25.1
+ Wed, 13 Apr 2022 15:49:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A37EC385A4;
+ Wed, 13 Apr 2022 15:49:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1649864962;
+ bh=rYLGXIpB12ST+Babui2aYL7ah1DI8YjqH2/JvSIYjEo=;
+ h=From:To:Cc:Subject:Date:From;
+ b=YSMjDAd6mAh74VfoYdtiMyGXlYez7jk0UIELx+kZbh0JCrLX2LoVYiTSRLDIQSNgD
+ L2o4xlIbG9mCmLC1zhZiEcvUT0BuIy9XeIvgVzIkCSvOy6CRRvhDnMdTcz3b9JX6iN
+ 1LagXRzTXH4dDA5Kg9UMqymwNhfB+O/tU1sIPgTwDcAOIpcRdMYsCJGdwD5aw/BjaJ
+ PY+Gi31UdeQo8P+cwu6+tRzJbkZbnj8lkTIimMnyfC1xeBujmAKku4nfz7obPqZGD8
+ 4h53duXTLw/6C0nS/fBuFTq5BzK2sybAW0Vm42OvhCJMrTJ3uQZhMoekTqIJX1pAqQ
+ /jwrptYW3r6aw==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 13 Apr 2022 08:49:19 -0700
+Message-Id: <20220413154920.2024872-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.36.0.rc0.470.gd361397f0d-goog
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplleLIzCtJLcpLzFFi42LZduznOV3TQ2FJBtu3aVu0tn9jsnh85zO7
- xdH/b9ksLi1yt7gx4SmjxeelLewWa24+ZXFg99g56y67x6ZVnWweuxd8ZvLo27KK0aP9QDdT
- AGsUl01Kak5mWWqRvl0CV8bJXy9YCp4rVOx7w9/AeE+yi5GTQ0LARGLW60tMXYxcHEICKxgl
- flxZzAjhfGGUePZ4M5TzmVHi45cFjDAt9yYdhGpZzigxdVM/M4TzklFi+fEmoAwHB5uAlkRj
- JztIgwiQObHhL1gzs8B0Rok7f1xBSoQFwiQ+9dSBhFkEVCWe3LjCBmLzClhJrLrYzAKxS15i
- 5qXv7BBxQYmTM5+wQIyRl2jeOhtsrYTAXA6J3k9drBANLhLLfi+HOlRY4tXxLewQtozE/53z
- mSDsaomnN35DNbcwSvTvXM8GcpCEgLVE35kcEJNZQFNi/S59iKijxL8+HgiTT+LGW0GIC/gk
- Jm2bzgwR5pXoaBOCmK0ksfPnE6idEhKXm+ZAPeIhcffSW2YQW0ggVmLmzU+MExgVZiH5axaS
- v2YhnLCAkXkVo3hqaXFuemqxcV5quV5xYm5xaV66XnJ+7iZGYIo5/e/41x2MK1591DvEyMTB
- eIhRgoNZSYS3Xz00SYg3JbGyKrUoP76oNCe1+BCjNAeLkjhvcuaGRCGB9MSS1OzU1ILUIpgs
- EwenVANTmmm3859vf/O8w2zDnLXvMa3fZs+quLBq9wZfo9v2ckqW/Tr/0o0qOI7PXfj3XtnX
- 9SfLG69qrC+6+I5nir22s7j3p+mz1nQ3n+qd6BG5VNVx806xKUt0s75surVGqVsz2Tj0zE+b
- DfECP0UOiLxPN2K5/Lv/IVPyyf5Np0o+fM51+8uptCyuOcP58V1zX97TWrnhDOLNrzSeNPfv
- 8JhSs1Hyw7biTuWncyWXF0y8GlXR/8dqa2uwwWuODclpqj2KfPs3B1T3RMttvDlje8WyJ4yn
- ttd7TkjdcdAmwDhtv8ab5TuYdva5hpdlfu14sV6wxsv7i++lIs1MQTs+qaQ0/QzOzJbdX+Xu
- pGdv4FNiKc5INNRiLipOBAA3jLm6oAMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrOLMWRmVeSWpSXmKPExsVy+t/xu7qmh8KSDF6f4bVobf/GZPH4zmd2
- i6P/37JZXFrkbnFjwlNGi89LW9gt1tx8yuLA7rFz1l12j02rOtk8di/4zOTRt2UVo0f7gW6m
- ANYoPZui/NKSVIWM/OISW6VoQwsjPUNLCz0jE0s9Q2PzWCsjUyV9O5uU1JzMstQifbsEvYyT
- v16wFDxXqNj3hr+B8Z5kFyMnh4SAicS9SQeZuhi5OIQEljJKnNo6hwkiISFxe2ETI4QtLPHn
- WhcbRNFzRonO39uAEhwcbAJaEo2d7CA1IkDmxIa/jCA1zALzGSW27VnEApIQFgiR2P3qJFgR
- i4CqxJMbV9hAbF4BK4lVF5tZIBbIS8y89J0dIi4ocXLmE7A4M1C8eets5gmMfLOQpGYhSS1g
- ZFrFKJJaWpybnltsqFecmFtcmpeul5yfu4kRGOLbjv3cvINx3quPeocYmTgYDzFKcDArifD2
- q4cmCfGmJFZWpRblxxeV5qQWH2I0BbpvIrOUaHI+MMrySuINzQxMDU3MLA1MLc2MlcR5PQs6
- EoUE0hNLUrNTUwtSi2D6mDg4pRqYCrMeveI74t0+o0jsu3ir1/4vh6JW1ttucozsXqEx9aKa
- zI3iuy/ZrnFM2/j3x61Y92C3EmNJ46A7u8VWf/+1XM/tyH1jod4DZ/4kvRB0KeLZWXb5Mc/y
- 25p+rHmfo9Ya79P8Pqk7W9Lxp6S0p1rsCybFueZaXQtl7a7duHR5i/XPk3Jr+/RFXJ6ltMg9
- 2L1NceLH5E2vgkWmuxwS8s/eWWpr1Leo89R5QTv7/8vVGnlT43zNwjnOTLq1LfJ9WLXcvQ8O
- 9w2vbK0qZor8b17dvGPJl5CvOwIPJUbODi6xO3Lz5IHJXw77RuSVcJQ8rebZuizu4SmDAz/W
- 194Tn8ffsDrQ72pNmBnHrGWPN031VWIpzkg01GIuKk4EAEELHGP6AgAA
-X-CMS-MailID: 20220413122941eucas1p1ec05e8e8dfe2baf451fcb549d60fda35
-X-Msg-Generator: CA
-X-RootMTR: 20220413122941eucas1p1ec05e8e8dfe2baf451fcb549d60fda35
-X-EPHeader: CA
-CMS-TYPE: 201P
-X-CMS-RootMailID: 20220413122941eucas1p1ec05e8e8dfe2baf451fcb549d60fda35
-References: <CGME20220413122941eucas1p1ec05e8e8dfe2baf451fcb549d60fda35@eucas1p1.samsung.com>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -124,19 +69,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Luis Chamberlain <mcgrof@kernel.org> f2fs currently
- only work with zoned storage devices with a zone size which is a power of
- 2 (PO2). So check if a non-power of 2 zoned device is found, and if so disallow
- its use. This prevents users fr [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview: This patch removes obsolete whint_mode. Fixes: commit
+ 41d36a9f3e53
+ ("fs: remove kiocb.ki_hint") Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+ --- Documentation/filesystems/f2fs.rst | 70 fs/f2fs/f2fs.h | 3 - fs/f2fs/
+ [...] Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [210.118.77.12 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [210.118.77.12 listed in wl.mailspike.net]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -145,11 +88,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nec88-0000kg-25
-Subject: [f2fs-dev] [PATCH v2] libf2fs: don't allow mkfs / fsck on non
- power-of-2 zoned devices
+X-Headers-End: 1nefFO-0001ta-MC
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: remove obsolete whint_mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -161,161 +102,316 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Pankaj Raghav <p.raghav@samsung.com>, Damien.LeMoal@wdc.com,
- pankydev8@gmail.com, mcgrof@kernel.org, javier.gonz@samsung.com
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Luis Chamberlain <mcgrof@kernel.org>
+This patch removes obsolete whint_mode.
 
-f2fs currently only work with zoned storage devices with a zone
-size which is a power of 2 (PO2). So check if a non-power of 2
-zoned device is found, and if so disallow its use. This prevents
-users from incorrectly using these devices.
-
-This is a non-issue today given today's kernel does not allow NPO2
-zoned devices to exist as a block device. But NPO2 zoned devices do exist
-so proactively put a stop-gap measure in place to prevent it from being
-incorrectly used.
-
-Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
-Signed-off-by: Pankaj Raghav <p.raghav@samsung.com>
+Fixes: commit 41d36a9f3e53 ("fs: remove kiocb.ki_hint")
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
-Changes since v1:
-- Squash the commits for clarity (Damien)
-- f2fs_get_zone_chunk_sectors can return uint32_t (Damien)
-- Include the units for zone size in msg info (Damien)
-- Sections can be npo2 but it should only be a multiple of 2MB (Jaegeuk)
+ Documentation/filesystems/f2fs.rst | 70 ----------------------
+ fs/f2fs/f2fs.h                     |  3 -
+ fs/f2fs/segment.c                  | 95 ------------------------------
+ fs/f2fs/super.c                    | 31 +---------
+ 4 files changed, 1 insertion(+), 198 deletions(-)
 
- include/f2fs_fs.h   |  1 +
- lib/libf2fs.c       | 17 +++++++++++++++--
- lib/libf2fs_zoned.c | 34 ++++++++++++++++++++++------------
- 3 files changed, 38 insertions(+), 14 deletions(-)
-
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index d236437..83c5b33 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -386,6 +386,7 @@ struct device_info {
- 	u_int32_t nr_zones;
- 	u_int32_t nr_rnd_zones;
- 	size_t zone_blocks;
-+	uint64_t zone_size;
- 	size_t *zone_cap_blocks;
- };
+diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+index 4a2426f0485a..ad8dc8c040a2 100644
+--- a/Documentation/filesystems/f2fs.rst
++++ b/Documentation/filesystems/f2fs.rst
+@@ -235,12 +235,6 @@ offgrpjquota		 Turn off group journalled quota.
+ offprjjquota		 Turn off project journalled quota.
+ quota			 Enable plain user disk quota accounting.
+ noquota			 Disable all plain disk quota option.
+-whint_mode=%s		 Control which write hints are passed down to block
+-			 layer. This supports "off", "user-based", and
+-			 "fs-based".  In "off" mode (default), f2fs does not pass
+-			 down hints. In "user-based" mode, f2fs tries to pass
+-			 down hints given by users. And in "fs-based" mode, f2fs
+-			 passes down hints with its policy.
+ alloc_mode=%s		 Adjust block allocation policy, which supports "reuse"
+ 			 and "default".
+ fsync_mode=%s		 Control the policy of fsync. Currently supports "posix",
+@@ -751,70 +745,6 @@ In order to identify whether the data in the victim segment are valid or not,
+ F2FS manages a bitmap. Each bit represents the validity of a block, and the
+ bitmap is composed of a bit stream covering whole blocks in main area.
  
-diff --git a/lib/libf2fs.c b/lib/libf2fs.c
-index 420dfda..8104667 100644
---- a/lib/libf2fs.c
-+++ b/lib/libf2fs.c
-@@ -882,6 +882,11 @@ static int open_check_fs(char *path, int flag)
- 	return open(path, O_RDONLY | flag);
- }
- 
-+static int is_power_of_2(unsigned long n)
-+{
-+	return (n != 0 && ((n & (n - 1)) == 0));
-+}
-+
- int get_device_info(int i)
- {
- 	int32_t fd = 0;
-@@ -1043,6 +1048,13 @@ int get_device_info(int i)
- 			return -1;
- 		}
- 
-+		if (!is_power_of_2(dev->zone_size)) {
-+			MSG(0, "\tError: zoned: illegal zone size %lu (not a power of 2)\n",
-+					dev->zone_size);
-+			free(stat_buf);
-+			return -1;
-+		}
-+
- 		/*
- 		 * Check zone configuration: for the first disk of a
- 		 * multi-device volume, conventional zones are needed.
-@@ -1055,8 +1067,9 @@ int get_device_info(int i)
- 		MSG(0, "Info: Host-%s zoned block device:\n",
- 				(dev->zoned_model == F2FS_ZONED_HA) ?
- 					"aware" : "managed");
--		MSG(0, "      %u zones, %u randomly writeable zones\n",
--				dev->nr_zones, dev->nr_rnd_zones);
-+		MSG(0, "      %u zones, %lu zone size(bytes), %u randomly writeable zones\n",
-+				dev->nr_zones, dev->zone_size,
-+				dev->nr_rnd_zones);
- 		MSG(0, "      %lu blocks per zone\n",
- 				dev->zone_blocks);
- 	}
-diff --git a/lib/libf2fs_zoned.c b/lib/libf2fs_zoned.c
-index ce73b9a..48a23c0 100644
---- a/lib/libf2fs_zoned.c
-+++ b/lib/libf2fs_zoned.c
-@@ -146,40 +146,50 @@ int f2fs_get_zoned_model(int i)
- 	return 0;
- }
- 
--int f2fs_get_zone_blocks(int i)
-+uint32_t f2fs_get_zone_chunk_sectors(struct device_info *dev)
- {
--	struct device_info *dev = c.devices + i;
--	uint64_t sectors;
-+	uint32_t sectors;
- 	char str[PATH_MAX];
- 	FILE *file;
- 	int res;
- 
--	/* Get zone size */
--	dev->zone_blocks = 0;
+-Write-hint Policy
+------------------
 -
- 	res = get_sysfs_path(dev, "queue/chunk_sectors", str, sizeof(str));
- 	if (res != 0) {
- 		MSG(0, "\tError: Failed to get device sysfs attribute path\n");
--		return -1;
-+		return 0;
+-1) whint_mode=off. F2FS only passes down WRITE_LIFE_NOT_SET.
+-
+-2) whint_mode=user-based. F2FS tries to pass down hints given by
+-users.
+-
+-===================== ======================== ===================
+-User                  F2FS                     Block
+-===================== ======================== ===================
+-N/A                   META                     WRITE_LIFE_NOT_SET
+-N/A                   HOT_NODE                 "
+-N/A                   WARM_NODE                "
+-N/A                   COLD_NODE                "
+-ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
+-extension list        "                        "
+-
+--- buffered io
+-WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
+-WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
+-WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
+-WRITE_LIFE_NONE       "                        "
+-WRITE_LIFE_MEDIUM     "                        "
+-WRITE_LIFE_LONG       "                        "
+-
+--- direct io
+-WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
+-WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
+-WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
+-WRITE_LIFE_NONE       "                        WRITE_LIFE_NONE
+-WRITE_LIFE_MEDIUM     "                        WRITE_LIFE_MEDIUM
+-WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
+-===================== ======================== ===================
+-
+-3) whint_mode=fs-based. F2FS passes down hints with its policy.
+-
+-===================== ======================== ===================
+-User                  F2FS                     Block
+-===================== ======================== ===================
+-N/A                   META                     WRITE_LIFE_MEDIUM;
+-N/A                   HOT_NODE                 WRITE_LIFE_NOT_SET
+-N/A                   WARM_NODE                "
+-N/A                   COLD_NODE                WRITE_LIFE_NONE
+-ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
+-extension list        "                        "
+-
+--- buffered io
+-WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
+-WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
+-WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_LONG
+-WRITE_LIFE_NONE       "                        "
+-WRITE_LIFE_MEDIUM     "                        "
+-WRITE_LIFE_LONG       "                        "
+-
+--- direct io
+-WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
+-WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
+-WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
+-WRITE_LIFE_NONE       "                        WRITE_LIFE_NONE
+-WRITE_LIFE_MEDIUM     "                        WRITE_LIFE_MEDIUM
+-WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
+-===================== ======================== ===================
+-
+ Fallocate(2) Policy
+ -------------------
+ 
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index f793bbe1e6ce..d76afbb8efdf 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -154,7 +154,6 @@ struct f2fs_mount_info {
+ 	int s_jquota_fmt;			/* Format of quota to use */
+ #endif
+ 	/* For which write hints are passed down to block layer */
+-	int whint_mode;
+ 	int alloc_mode;			/* segment allocation policy */
+ 	int fsync_mode;			/* fsync policy */
+ 	int fs_mode;			/* fs mode: LFS or ADAPTIVE */
+@@ -3640,8 +3639,6 @@ void f2fs_destroy_segment_manager(struct f2fs_sb_info *sbi);
+ int __init f2fs_create_segment_manager_caches(void);
+ void f2fs_destroy_segment_manager_caches(void);
+ int f2fs_rw_hint_to_seg_type(enum rw_hint hint);
+-enum rw_hint f2fs_io_type_to_rw_hint(struct f2fs_sb_info *sbi,
+-			enum page_type type, enum temp_type temp);
+ unsigned int f2fs_usable_segs_in_sec(struct f2fs_sb_info *sbi,
+ 			unsigned int segno);
+ unsigned int f2fs_usable_blks_in_seg(struct f2fs_sb_info *sbi,
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index a6bb46ccbac2..6d6f7b4e907b 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -3110,101 +3110,6 @@ int f2fs_rw_hint_to_seg_type(enum rw_hint hint)
+ 	}
+ }
+ 
+-/* This returns write hints for each segment type. This hints will be
+- * passed down to block layer. There are mapping tables which depend on
+- * the mount option 'whint_mode'.
+- *
+- * 1) whint_mode=off. F2FS only passes down WRITE_LIFE_NOT_SET.
+- *
+- * 2) whint_mode=user-based. F2FS tries to pass down hints given by users.
+- *
+- * User                  F2FS                     Block
+- * ----                  ----                     -----
+- *                       META                     WRITE_LIFE_NOT_SET
+- *                       HOT_NODE                 "
+- *                       WARM_NODE                "
+- *                       COLD_NODE                "
+- * ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
+- * extension list        "                        "
+- *
+- * -- buffered io
+- * WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
+- * WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
+- * WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
+- * WRITE_LIFE_NONE       "                        "
+- * WRITE_LIFE_MEDIUM     "                        "
+- * WRITE_LIFE_LONG       "                        "
+- *
+- * -- direct io
+- * WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
+- * WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
+- * WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
+- * WRITE_LIFE_NONE       "                        WRITE_LIFE_NONE
+- * WRITE_LIFE_MEDIUM     "                        WRITE_LIFE_MEDIUM
+- * WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
+- *
+- * 3) whint_mode=fs-based. F2FS passes down hints with its policy.
+- *
+- * User                  F2FS                     Block
+- * ----                  ----                     -----
+- *                       META                     WRITE_LIFE_MEDIUM;
+- *                       HOT_NODE                 WRITE_LIFE_NOT_SET
+- *                       WARM_NODE                "
+- *                       COLD_NODE                WRITE_LIFE_NONE
+- * ioctl(COLD)           COLD_DATA                WRITE_LIFE_EXTREME
+- * extension list        "                        "
+- *
+- * -- buffered io
+- * WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
+- * WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
+- * WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_LONG
+- * WRITE_LIFE_NONE       "                        "
+- * WRITE_LIFE_MEDIUM     "                        "
+- * WRITE_LIFE_LONG       "                        "
+- *
+- * -- direct io
+- * WRITE_LIFE_EXTREME    COLD_DATA                WRITE_LIFE_EXTREME
+- * WRITE_LIFE_SHORT      HOT_DATA                 WRITE_LIFE_SHORT
+- * WRITE_LIFE_NOT_SET    WARM_DATA                WRITE_LIFE_NOT_SET
+- * WRITE_LIFE_NONE       "                        WRITE_LIFE_NONE
+- * WRITE_LIFE_MEDIUM     "                        WRITE_LIFE_MEDIUM
+- * WRITE_LIFE_LONG       "                        WRITE_LIFE_LONG
+- */
+-
+-enum rw_hint f2fs_io_type_to_rw_hint(struct f2fs_sb_info *sbi,
+-				enum page_type type, enum temp_type temp)
+-{
+-	if (F2FS_OPTION(sbi).whint_mode == WHINT_MODE_USER) {
+-		if (type == DATA) {
+-			if (temp == WARM)
+-				return WRITE_LIFE_NOT_SET;
+-			else if (temp == HOT)
+-				return WRITE_LIFE_SHORT;
+-			else if (temp == COLD)
+-				return WRITE_LIFE_EXTREME;
+-		} else {
+-			return WRITE_LIFE_NOT_SET;
+-		}
+-	} else if (F2FS_OPTION(sbi).whint_mode == WHINT_MODE_FS) {
+-		if (type == DATA) {
+-			if (temp == WARM)
+-				return WRITE_LIFE_LONG;
+-			else if (temp == HOT)
+-				return WRITE_LIFE_SHORT;
+-			else if (temp == COLD)
+-				return WRITE_LIFE_EXTREME;
+-		} else if (type == NODE) {
+-			if (temp == WARM || temp == HOT)
+-				return WRITE_LIFE_NOT_SET;
+-			else if (temp == COLD)
+-				return WRITE_LIFE_NONE;
+-		} else if (type == META) {
+-			return WRITE_LIFE_MEDIUM;
+-		}
+-	}
+-	return WRITE_LIFE_NOT_SET;
+-}
+-
+ static int __get_segment_type_2(struct f2fs_io_info *fio)
+ {
+ 	if (fio->type == DATA)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index fb8fea9f703a..6ab39bf36761 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -214,7 +214,6 @@ static match_table_t f2fs_tokens = {
+ 	{Opt_jqfmt_vfsold, "jqfmt=vfsold"},
+ 	{Opt_jqfmt_vfsv0, "jqfmt=vfsv0"},
+ 	{Opt_jqfmt_vfsv1, "jqfmt=vfsv1"},
+-	{Opt_whint, "whint_mode=%s"},
+ 	{Opt_alloc, "alloc_mode=%s"},
+ 	{Opt_fsync, "fsync_mode=%s"},
+ 	{Opt_test_dummy_encryption, "test_dummy_encryption=%s"},
+@@ -975,22 +974,6 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 			f2fs_info(sbi, "quota operations not supported");
+ 			break;
+ #endif
+-		case Opt_whint:
+-			name = match_strdup(&args[0]);
+-			if (!name)
+-				return -ENOMEM;
+-			if (!strcmp(name, "user-based")) {
+-				F2FS_OPTION(sbi).whint_mode = WHINT_MODE_USER;
+-			} else if (!strcmp(name, "off")) {
+-				F2FS_OPTION(sbi).whint_mode = WHINT_MODE_OFF;
+-			} else if (!strcmp(name, "fs-based")) {
+-				F2FS_OPTION(sbi).whint_mode = WHINT_MODE_FS;
+-			} else {
+-				kfree(name);
+-				return -EINVAL;
+-			}
+-			kfree(name);
+-			break;
+ 		case Opt_alloc:
+ 			name = match_strdup(&args[0]);
+ 			if (!name)
+@@ -1328,12 +1311,6 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 		return -EINVAL;
  	}
  
- 	file = fopen(str, "r");
- 	if (!file)
--		return -1;
-+		return 0;
+-	/* Not pass down write hints if the number of active logs is lesser
+-	 * than NR_CURSEG_PERSIST_TYPE.
+-	 */
+-	if (F2FS_OPTION(sbi).active_logs != NR_CURSEG_PERSIST_TYPE)
+-		F2FS_OPTION(sbi).whint_mode = WHINT_MODE_OFF;
+-
+ 	if (f2fs_sb_has_readonly(sbi) && !f2fs_readonly(sbi->sb)) {
+ 		f2fs_err(sbi, "Allow to mount readonly mode only");
+ 		return -EROFS;
+@@ -1974,10 +1951,6 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+ 		seq_puts(seq, ",prjquota");
+ #endif
+ 	f2fs_show_quota_options(seq, sbi->sb);
+-	if (F2FS_OPTION(sbi).whint_mode == WHINT_MODE_USER)
+-		seq_printf(seq, ",whint_mode=%s", "user-based");
+-	else if (F2FS_OPTION(sbi).whint_mode == WHINT_MODE_FS)
+-		seq_printf(seq, ",whint_mode=%s", "fs-based");
  
- 	memset(str, 0, sizeof(str));
- 	res = fscanf(file, "%s", str);
- 	fclose(file);
+ 	fscrypt_show_test_dummy_encryption(seq, ',', sbi->sb);
  
- 	if (res != 1)
--		return -1;
-+		return 0;
+@@ -2029,7 +2002,6 @@ static void default_options(struct f2fs_sb_info *sbi)
+ 		F2FS_OPTION(sbi).active_logs = NR_CURSEG_PERSIST_TYPE;
  
--	sectors = atol(str);
-+	sectors = atoi(str);
-+
-+	return sectors;
-+}
-+
-+int f2fs_get_zone_blocks(int i)
-+{
-+	struct device_info *dev = c.devices + i;
-+	uint64_t sectors;
-+
-+	/* Get zone size */
-+	dev->zone_blocks = 0;
-+
-+	sectors = f2fs_get_zone_chunk_sectors(dev);
- 	if (!sectors)
- 		return -1;
+ 	F2FS_OPTION(sbi).inline_xattr_size = DEFAULT_INLINE_XATTR_ADDRS;
+-	F2FS_OPTION(sbi).whint_mode = WHINT_MODE_OFF;
+ 	F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_DEFAULT;
+ 	F2FS_OPTION(sbi).fsync_mode = FSYNC_MODE_POSIX;
+ 	F2FS_OPTION(sbi).s_resuid = make_kuid(&init_user_ns, F2FS_DEF_RESUID);
+@@ -2310,8 +2282,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+ 		need_stop_gc = true;
+ 	}
  
--	dev->zone_blocks = sectors >> (F2FS_BLKSIZE_BITS - 9);
--	sectors = (sectors << 9) / c.sector_size;
-+	dev->zone_size = sectors << SECTOR_SHIFT;
-+	dev->zone_blocks = sectors >> (F2FS_BLKSIZE_BITS - SECTOR_SHIFT);
-+	sectors = dev->zone_size / c.sector_size;
+-	if (*flags & SB_RDONLY ||
+-		F2FS_OPTION(sbi).whint_mode != org_mount_opt.whint_mode) {
++	if (*flags & SB_RDONLY) {
+ 		sync_inodes_sb(sb);
  
- 	/*
- 	 * Total number of zones: there may
+ 		set_sbi_flag(sbi, SBI_IS_DIRTY);
 -- 
-2.25.1
+2.36.0.rc0.470.gd361397f0d-goog
 
 
 
