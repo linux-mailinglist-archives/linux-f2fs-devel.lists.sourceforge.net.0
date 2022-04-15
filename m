@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EF29502192
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Apr 2022 06:53:57 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF2CE502196
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 15 Apr 2022 06:54:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nfDy0-0002Ig-Gk; Fri, 15 Apr 2022 04:53:55 +0000
+	id 1nfDy3-0002fc-A8; Fri, 15 Apr 2022 04:54:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
  <BATV+2d633663de0085320ac7+6809+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1nfDxz-0002IW-PD; Fri, 15 Apr 2022 04:53:55 +0000
+ id 1nfDy1-0002et-Cr; Fri, 15 Apr 2022 04:53:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Bh+vV8H1PUD+w/3YWj6wMRz8JdOJ8okMcDjW6Mx/Fiw=; b=GtAcQtI6o1rt5N0WnWb4SQtfdK
- huTokFyco7OA/ZLWtRJ6r5OsT0vysI67noZjfwcUqB7K7vyKE/L6H4f7R+BysLOGMWqanxOwCd9Aj
- lL4oubiNIomcwdvgXqE8S14vfql031ZZUw+PeCpBlgl4lL6ayd+0GNits9ko9j07H/jI=;
+ bh=OGJvHxXgCvw9/l2/0Y6T0ivupEa5/VICLVgDi4pj6zk=; b=ZMYRCPp0CWdhyZkuk6Ze5WdURN
+ /48Jn3/OVyggZCiBK2+kRAKSXsqgTeI58sjcJrsUFZyl0oLacd+tj7zRFypMWxT+YjiDvi2DWqy1t
+ xqqazBERgHk9lN8E/IoeKCdHmHw02iD8WzLBQ0PKUUKmfPy8iekzwPbTxNSQGXL4olTU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Bh+vV8H1PUD+w/3YWj6wMRz8JdOJ8okMcDjW6Mx/Fiw=; b=gOxKmksF8Cq7UQHpjS0v5iuXWP
- aTc86vOMQJ/XcOfMRWwGBO1ECIkqWMdSZxwr0/+0XxAhdybfnpnOEKeY8R03ldVm6niRZ0CaZZFjU
- ZhCtef5dCiQtlTV7WlUFbPoiDgv7pSvVWN/FA31xQ9ThBsLt2uQtRDhdQaageYsWS6y0=;
+ bh=OGJvHxXgCvw9/l2/0Y6T0ivupEa5/VICLVgDi4pj6zk=; b=A8RNHwqp4t7H9pxsYAGCwR43Xh
+ lWU/EVxsp4ymh4eFnPQtZbTf+tRvnqd9d5VGt/lzmCfaF5LdAbK6DiBLx9ltYKIdq0WTXsksKUSWH
+ vkKh/E9xwsxbAjokJGBb21Hc0id8l82ZvNGiTyWXFgx6/OnHxnQyq4mOgPaHPgBpG2vI=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nfDxy-00084Y-AX; Fri, 15 Apr 2022 04:53:54 +0000
+ id 1nfDy1-0001qW-NT; Fri, 15 Apr 2022 04:53:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=Bh+vV8H1PUD+w/3YWj6wMRz8JdOJ8okMcDjW6Mx/Fiw=; b=EDKTioiwyVTPK+3osA6SlCjZIh
- XT2MFqWZOTWCp0TzWu6P4fqhDWPMpkttHrN+m9dRro3N5CDnlXbRs0EPkfGOyM+igunHSMpD1drYP
- wVG9uOkzBpiVKojyqfYhi6+OMNU5l2i8PZR4B1REL+uCtnEoooz23D6FVFibL3Fu1/dIA+0rTSxtr
- oKyzI2WMLHHUV9rvM0v15/lCAj3aZ6PKIBUE2kOCt4TslhWmWNZKgszd/7d2ie8DKfEQnXgchcj36
- NzfvLJkjkLxSqax1JuD1ELqlJ8gRaVf5Gn7y07gnCWPWGyuEN/9bXBtizUFBY7p5eDKr/MYNHjMCe
- ltnYH85Q==;
+ bh=OGJvHxXgCvw9/l2/0Y6T0ivupEa5/VICLVgDi4pj6zk=; b=V1O5NFc1OlhQKBAtPUESXrscbH
+ +gcfK8CWzUYJRweVfHt/gmcJRbnnyENCL0uxhp1nElH2rQXnBLZskSDze6nM9j3gF5JGx31h7pu9N
+ vPub4AczDFXqMD/nyRBLgGmvIyYUqZBGTv5Cc6JJINS7BJNf0/btoIeeLCOjZ4a5fxHer4O2Wp+wl
+ 3U3FDeLPVBAqUisUOlzqQt8zs+kHINf2usFr1NigldxLvR21wl2YG3uLr/6AwNNFGfA7YCs2iW8C/
+ bPJ75RbYfKAHSDs+/fiusGnx0gVrEkfUrP1ZPu0GLZCLsq5AzPGOB49mYYVnrdML7RbrD/GaYtdc7
+ GVJ2xQ0g==;
 Received: from [2a02:1205:504b:4280:f5dd:42a4:896c:d877] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nfDxg-008P0P-IF; Fri, 15 Apr 2022 04:53:36 +0000
+ id 1nfDxj-008P34-1w; Fri, 15 Apr 2022 04:53:39 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Fri, 15 Apr 2022 06:52:40 +0200
-Message-Id: <20220415045258.199825-10-hch@lst.de>
+Date: Fri, 15 Apr 2022 06:52:41 +0200
+Message-Id: <20220415045258.199825-11-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220415045258.199825-1-hch@lst.de>
 References: <20220415045258.199825-1-hch@lst.de>
@@ -66,14 +66,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Signed-off-by: Christoph Hellwig <hch@lst.de> Reviewed-by:
- Johannes Thumshirn <johannes.thumshirn@wdc.com> --- fs/ntfs3/super.c | 2
- +- 1 file changed, 1 insertion(+), 1 deletion(-) diff --git a/fs/ntfs3/super.c
- b/fs/ntfs3/super.c index 278dcf5024102..cd30e81abbce0 100644 ---
- a/fs/ntfs3/super.c
- +++ b/fs/ntfs3/super.c @@ -920,7 +920,7 @@ static int ntfs_fill_super(struct
- super_blo [...] 
- Content analysis details:   (-2.2 points, 6.0 required)
+ Content preview: Use the bdev based helper instead of poking into the queue.
+ Signed-off-by: Christoph Hellwig <hch@lst.de> --- mm/swapfile.c | 2 +- 1
+ file changed, 1 insertion(+),
+ 1 deletion(-) diff --git a/mm/swapfile.c b/mm/swapfile.c
+ index 63c61f8b26118..4c7537162af5e 100644 --- a/mm/swapfile.c +++
+ b/mm/swapfile.c
+ @@ -2761,7 +2761,7 @@ static int claim_swapfile(struct swap_info_struct *p,
+ [...] Content analysis details:   (-2.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
@@ -88,9 +88,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nfDxy-00084Y-AX
-Subject: [f2fs-dev] [PATCH 09/27] ntfs3: use bdev_logical_block_size instead
- of open coding it
+X-Headers-End: 1nfDy1-0001qW-NT
+Subject: [f2fs-dev] [PATCH 10/27] mm: use bdev_is_zoned in claim_swapfile
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,33 +111,34 @@ Cc: jfs-discussion@lists.sourceforge.net, linux-nvme@lists.infradead.org,
  linux-um@lists.infradead.org, nbd@other.debian.org,
  linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
  ceph-devel@vger.kernel.org, linux-raid@vger.kernel.org,
- Johannes Thumshirn <johannes.thumshirn@wdc.com>, linux-mmc@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
- ntfs3@lists.linux.dev, linux-btrfs@vger.kernel.org
+ linux-mmc@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, ocfs2-devel@oss.oracle.com,
+ linux-fsdevel@vger.kernel.org, ntfs3@lists.linux.dev,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+Use the bdev based helper instead of poking into the queue.
+
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- fs/ntfs3/super.c | 2 +-
+ mm/swapfile.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/ntfs3/super.c b/fs/ntfs3/super.c
-index 278dcf5024102..cd30e81abbce0 100644
---- a/fs/ntfs3/super.c
-+++ b/fs/ntfs3/super.c
-@@ -920,7 +920,7 @@ static int ntfs_fill_super(struct super_block *sb, struct fs_context *fc)
- 	}
- 
- 	/* Parse boot. */
--	err = ntfs_init_from_boot(sb, rq ? queue_logical_block_size(rq) : 512,
-+	err = ntfs_init_from_boot(sb, bdev_logical_block_size(bdev),
- 				  bdev_nr_bytes(bdev));
- 	if (err)
- 		goto out;
+diff --git a/mm/swapfile.c b/mm/swapfile.c
+index 63c61f8b26118..4c7537162af5e 100644
+--- a/mm/swapfile.c
++++ b/mm/swapfile.c
+@@ -2761,7 +2761,7 @@ static int claim_swapfile(struct swap_info_struct *p, struct inode *inode)
+ 		 * write only restriction.  Hence zoned block devices are not
+ 		 * suitable for swapping.  Disallow them here.
+ 		 */
+-		if (blk_queue_is_zoned(p->bdev->bd_disk->queue))
++		if (bdev_is_zoned(p->bdev))
+ 			return -EINVAL;
+ 		p->flags |= SWP_BLKDEV;
+ 	} else if (S_ISREG(inode->i_mode)) {
 -- 
 2.30.2
 
