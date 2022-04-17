@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AE715046D6
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 Apr 2022 08:33:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECDEB5046D9
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 Apr 2022 08:37:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nfyT7-0001JL-J9; Sun, 17 Apr 2022 06:33:08 +0000
+	id 1nfyWj-0006EV-BZ; Sun, 17 Apr 2022 06:36:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nfyT5-0001JF-QH
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Apr 2022 06:33:07 +0000
+ (envelope-from <chao@kernel.org>) id 1nfyWi-0006EP-60
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Apr 2022 06:36:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sT7S3vnN8MYEs2liUzisGREDQcHoQ+A2YFzXpgXZGf0=; b=Xp4qeEMtAdL5P4lGHP99frSAzV
- m2cZBVcO8iBkq5E6tTw1nQ990NeMINy3Hl9usP3rCLMo/TALhcdDTuRb/oNLOfKxJUpH/9BaQLQHC
- UJtPmU3AVw/GhYHRO3UeI4rZLxf7V1g4LIGQIq9J1axlj0ZafR6qO3pEPaGG0bEturNI=;
+ bh=EKNuxXWU12GM2UzTCNfH8g8cLnfkUSAHDLif/y/bl7w=; b=FQYi6D96NYLTJFJ5WTlb054Owl
+ EEdi/7nXZmT+cThhHiX8y/ndn1T5JRQ4VexrX0Oqq8mgDmUbZFcTGxOcVc2c80zoyUmnkE3KHfSAM
+ qx3KoXg/eyqGtbR7MQc9Uus6IBM6bS0sCEYdD5erWXnJt2BrtKVKgG5lxvvqyVUSnapk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -29,43 +29,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sT7S3vnN8MYEs2liUzisGREDQcHoQ+A2YFzXpgXZGf0=; b=edfJHcOfPmgCXEbPGofHVBkwJx
- 6QQvfAQOgscYZp203KtAToLtAQvd7+GtQcABzbRj01NO32cqEKKspChSp3UdzwS7IItwL87Dn7vQC
- ZNJEa9zXJpnT36motwIMVcrlgqnJcDePe2yzjwfhWz+9rq/IL9UROUiDGpdTdXBzov0Q=;
+ bh=EKNuxXWU12GM2UzTCNfH8g8cLnfkUSAHDLif/y/bl7w=; b=Qjbb/W3RK9pk7NsL73BAGF3KzC
+ Ci+Sw60cIwN3ShOLNl4X0MaS/xQBCWsCPe17wfOacOvMzqrSHFxdz7QyO2ISYybsh0uVM+3dufIp6
+ ikZGXtLsfA5qN6plaVv95BXSO0RbDObfeRiJo1W4J2It36L1XJzdRzcc8Zc/0kdUX1Rs=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nfyT2-00044H-UO
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Apr 2022 06:33:06 +0000
+ id 1nfyWf-0004EG-Q8
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Apr 2022 06:36:50 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C531B6103F
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6763B61036
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 17 Apr 2022 06:32:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BB91C385A7;
- Sun, 17 Apr 2022 06:32:53 +0000 (UTC)
+ Sun, 17 Apr 2022 06:36:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32987C385A7;
+ Sun, 17 Apr 2022 06:36:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1650177176;
- bh=il3gPx/oYqYy8snasqd2G+n5oON9hLbfVENXrGUtHFU=;
+ s=k20201202; t=1650177403;
+ bh=aKPWGRM5VxIJbLEEY2sSyVOljL1D5DvxjWI3i4feUsk=;
  h=Date:Subject:To:References:From:In-Reply-To:From;
- b=kpa6ViPSZjyTyZf6S1pWEaQ43NI/C7+4nt82QA+TvgtS9NqlJPD/h+ucmR44L6I0S
- KQQPEblvkKG5Jo7ww+rc6GMFv6kjw3SjPS2Wx1/nUaIkQkQFotilelNpqLaf+gyRCW
- 2vXF/t1JdMH9iduGyvIQoqxyyEdyJK7EyDMnvCp2feIATsnmup51iyMMRBlvYVm8vc
- O/oOfsN0y0NxAi/TEWVTilocw+8g1NT2zqEHCjiFABRe2ai2GFCewZIkqydu8ufeaw
- MxERqmvMZj17LYAMimEDuTYSs7Z5lrKIzAsKuaQNW1VDzuJ4yRSdapsqEypuGBlcvY
- MafznwVeCNKew==
-Message-ID: <ad5aae57-42d6-e2f2-66ee-14178384cde3@kernel.org>
-Date: Sun, 17 Apr 2022 14:32:50 +0800
+ b=Y9fEW42431wvmXRjjiq7WeGPbtOVd8lv8BFB02h74F55FlGG+csvnrG2rbnOczo29
+ ziuGmuxxr/HU7Ips5wNEACwVS9PsKRBK4tx/MVenRg9QUCfJBtJlXW60OP9eOluB7v
+ 8t6h705R7PwnYEDS30wX3QT9z2s6FACqWXwFtkgZaKg3KYicZuuRaM0YDpJUvtP6pX
+ 31FKC1tMmJD9i2p2A9S8gDzFOGEbSfMLpGhhpdEMaDi8IkcmuOj14JFbeF/aXQkobF
+ 1qVoPe3UljXDSuCJtIM/pYOejshS5JuKRHcMs+uLT4eYNbhxmzeEAqakO943Ztfyuj
+ q/Sqc43FnChmw==
+Message-ID: <38535431-906e-a61d-4feb-156df9585bdf@kernel.org>
+Date: Sun, 17 Apr 2022 14:36:41 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.8.0
 Content-Language: en-US
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-References: <20220413154920.2024872-1-jaegeuk@kernel.org>
+References: <20220411212141.1775589-1-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220413154920.2024872-1-jaegeuk@kernel.org>
+In-Reply-To: <20220411212141.1775589-1-jaegeuk@kernel.org>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -73,11 +73,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/4/13 23:49, Jaegeuk Kim wrote: > This patch removes
- obsolete whint_mode. > > Fixes: commit 41d36a9f3e53 ("fs: remove
- kiocb.ki_hint")
- > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> Reviewed-by: Chao Yu
- <chao@kernel.org>
+ Content preview:  On 2022/4/12 5:21,
+ Jaegeuk Kim wrote: > This patch fixes wrong
+ initialization. > > Fixes: 50c63009f6ab ("f2fs: avoid an infinite loop in
+ f2fs_sync_dirty_inodes") > Signed-off-by: Jaegeuk Kim <jaegeuk@ [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,8 +93,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nfyT2-00044H-UO
-Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: remove obsolete whint_mode
+X-Headers-End: 1nfyWf-0004EG-Q8
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: fix wrong condition check when
+ failing metapage read
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,10 +111,10 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/4/13 23:49, Jaegeuk Kim wrote:
-> This patch removes obsolete whint_mode.
+On 2022/4/12 5:21, Jaegeuk Kim wrote:
+> This patch fixes wrong initialization.
 > 
-> Fixes: commit 41d36a9f3e53 ("fs: remove kiocb.ki_hint")
+> Fixes: 50c63009f6ab ("f2fs: avoid an infinite loop in f2fs_sync_dirty_inodes")
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
