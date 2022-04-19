@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3FB8506FAC
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 19 Apr 2022 16:05:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C6822506FCE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 19 Apr 2022 16:09:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ngoTt-0004fY-Ox; Tue, 19 Apr 2022 14:05:24 +0000
+	id 1ngoXf-0001Ee-Tg; Tue, 19 Apr 2022 14:09:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <brauner@kernel.org>) id 1ngoTt-0004fS-58
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 Apr 2022 14:05:23 +0000
+ (envelope-from <brauner@kernel.org>) id 1ngoXe-0001EP-9i
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 Apr 2022 14:09:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eyolx3WkawdmgyQKh8K4ckL6R/I53ODc69SptHzAcsY=; b=J1uPYsVmCygAT6ICJnWncVGhR6
- eEmq8U3LnzsynFvCaEgi8Cw/UgaZmHGCvPaXmOjhn04HJhOkKI7fl8Cx9uBd0ctpFF0sVdTG+5WMf
- jJYDvzTmXipKfHApXu7gxec2cHz0YpPUDpWu6jvXcQeWF7hLFqNmad0bFfzx2LeDlDeA=;
+ bh=BB2IpWnzuFZn4xjY5LqgD0JYmq9st+rHwRg6o1MR5Us=; b=NLoiGEUSgjv0P4ekVigdoiH9FP
+ /ldJMVuQ1fZyYhBO+9tXisHfTmf71CXfbH6PFN4DcITQ/ersIS2NaByyca84znFgJxWtThL8XYgvi
+ D/cNqznwRLJeOoPiZH1M1X3FqqBIaLVyVJ3EGxbsiNT/lE8TpgvYloinpucd1cMMWzI0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,39 +29,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eyolx3WkawdmgyQKh8K4ckL6R/I53ODc69SptHzAcsY=; b=SiOfeqkAN0eLhYZhcJf87II1C0
- NOjVm5+OwQ/lKLIx7T922uVRTP9NBJ/e+s8A2DwLNstT5+TU7do1EChlnewvE929JaQPtfWrkczB3
- cgM6feU+7M+/y6D3hZeJSC6rrx76/otPh8ZRxOe1Hp4loi4v/rr3+q0/BBvjjsWRi85M=;
+ bh=BB2IpWnzuFZn4xjY5LqgD0JYmq9st+rHwRg6o1MR5Us=; b=WQ/CPTL7DXV3D8xe6uT6cyRLPo
+ +Ql2PA2ZN8MOSfcuYwZ+AAgERRA5qhtOkeai39Eq78vn1z14HbR4HeJCIr+v+sENW3gZClDxni6NX
+ d+y+VIJMFiVHZb5yj9fb5HUrEMKUD4Is8zplJ5ga4abJDFck/8+/EXND9IBA4mpqMg40=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1ngoTn-003xSt-7V
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 Apr 2022 14:05:23 +0000
+ id 1ngoXc-003xez-IS
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 Apr 2022 14:09:17 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C66CA616AB;
- Tue, 19 Apr 2022 14:05:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A661BC385A7;
- Tue, 19 Apr 2022 14:05:10 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1FA4C616AB;
+ Tue, 19 Apr 2022 14:09:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9F82C385A8;
+ Tue, 19 Apr 2022 14:09:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1650377113;
- bh=mCyLOQ+YYWJdnCkas4j4KrcCEsk9TWMaw5fUA2B90wk=;
+ s=k20201202; t=1650377350;
+ bh=ehE0f+n6BW1o04+JVmVR3SUS0NOx6+AaaAJridegsTk=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=sbUJfZtKE357HLp9zwkgO1gzbtcIxHIOOMuWmDIljYvWwcLZdyiJ/Z+gm3xs2XS/3
- 62n6gpgcZwGH2LfiSx0A+5gKTfdMcONgxyIt+InI4zGJqnY84H/LuCnsQDO0Px9G/N
- vTDDN71LOQJt3cKZ0ThGi3Fo2zsRnvmXAy5HmJ9GQ/UqpRXNrN9AoJll/tvY4WWE5E
- ppI5nh+G7uVGCJvBmOQYl49dNALLu442pIiHZh0eVa1pggrPjnC2QXiyZPw2rTRzAP
- Do7Kd2/fCr2TTpw+wSa/pKf0FCtBVw/g4NmGZ50jEKRUFySiu6NnEDyaF87NF8RNKh
- TPDU8z9wgcbFw==
-Date: Tue, 19 Apr 2022 16:05:08 +0200
+ b=qXsCj/Cs8DmBGHQyYiSqiVEAbepBjzRlZKZxNVmvrexWE4j6UVGOtBZDdJofYPojk
+ B2gV83VdxCaYw4/qFM8pUYmZ6eZNG/odJZrNTzmweGf+gUJIo3NQEWQUZeyJskvFZ7
+ 6hmQLgHiJDNOWj5TzIYaJyRd+JJA7ujd6/PjDarlreo+FG/OFBumMH4yLVEqI9gxTR
+ iJDrVdj1K5i8U7PfJ1BgpGkFNzgG+xvGOOHR+8qjt9MICSDq3VhKmBK031lDqaxIaR
+ YcWG6xx26MmBeHCd0Ul7MLG18QGbQd/yuau267Hg9YEim6zcCcTHcx5qLPJqgOcQuc
+ hlB8ZSrq6QsNw==
+Date: Tue, 19 Apr 2022 16:09:05 +0200
 From: Christian Brauner <brauner@kernel.org>
 To: Yang Xu <xuyang2018.jy@fujitsu.com>
-Message-ID: <20220419140508.b6c4uit3u5hmdql4@wittgenstein>
+Message-ID: <20220419140905.7pbfqrzmyczyhneh@wittgenstein>
 References: <1650368834-2420-1-git-send-email-xuyang2018.jy@fujitsu.com>
+ <1650368834-2420-7-git-send-email-xuyang2018.jy@fujitsu.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1650368834-2420-1-git-send-email-xuyang2018.jy@fujitsu.com>
+In-Reply-To: <1650368834-2420-7-git-send-email-xuyang2018.jy@fujitsu.com>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -69,9 +70,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Apr 19, 2022 at 07:47:07PM +0800, Yang Xu wrote: >
- This has no functional change. Just create and export inode_sgid_strip api
- for > the subsequent patch. This function is used to strip S_ISGID [...] 
+ Content preview:  On Tue, Apr 19, 2022 at 07:47:13PM +0800, Yang Xu wrote: >
+ Currently, vfs only passes mode argument to filesystem,
+ then use inode_init_owner()
+ > to strip S_ISGID. Some filesystem(ie ext4/btrfs) will c [...] 
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +90,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ngoTn-003xSt-7V
-Subject: Re: [f2fs-dev] [PATCH v4 1/8] fs: move sgid strip operation from
- inode_init_owner into inode_sgid_strip
+X-Headers-End: 1ngoXc-003xez-IS
+Subject: Re: [f2fs-dev] [PATCH v4 7/8] fs: strip file's S_ISGID mode on vfs
+ instead of on underlying filesystem
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,47 +112,109 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Apr 19, 2022 at 07:47:07PM +0800, Yang Xu wrote:
-> This has no functional change. Just create and export inode_sgid_strip api for
-> the subsequent patch. This function is used to strip S_ISGID mode when init
-> a new inode.
+On Tue, Apr 19, 2022 at 07:47:13PM +0800, Yang Xu wrote:
+> Currently, vfs only passes mode argument to filesystem, then use inode_init_owner()
+> to strip S_ISGID. Some filesystem(ie ext4/btrfs) will call inode_init_owner
+> firstly, then posxi acl setup, but xfs uses the contrary order. It will affect
+> S_ISGID clear especially we filter S_IXGRP by umask or acl.
 > 
-> Acked-by: Christian Brauner (Microsoft) <brauner@kernel.org>
+> Regardless of which filesystem is in use, failure to strip the SGID correctly is
+> considered a security failure that needs to be fixed. The current VFS infrastructure
+> requires the filesystem to do everything right and not step on any landmines to
+> strip the SGID bit, when in fact it can easily be done at the VFS and the filesystems
+> then don't even need to be aware that the SGID needs to be (or has been stripped) by
+> the operation the user asked to be done.
+> 
+> Vfs has all the info it needs - it doesn't need the filesystems to do everything
+> correctly with the mode and ensuring that they order things like posix acl setup
+> functions correctly with inode_init_owner() to strip the SGID bit.
+> 
+> Just strip the SGID bit at the VFS, and then the filesystems can't get it wrong.
+> 
+> Also, the inode_sgid_strip() api should be used before IS_POSIXACL() because
+> this api may change mode.
+> 
+> Only the following places use inode_init_owner
+> "
+> arch/powerpc/platforms/cell/spufs/inode.c:      inode_init_owner(&init_user_ns, inode, dir, mode | S_IFDIR);
+> arch/powerpc/platforms/cell/spufs/inode.c:      inode_init_owner(&init_user_ns, inode, dir, mode | S_IFDIR);
+> fs/9p/vfs_inode.c:      inode_init_owner(&init_user_ns, inode, NULL, mode);
+> fs/bfs/dir.c:   inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/btrfs/inode.c:       inode_init_owner(mnt_userns, inode, dir, mode);
+> fs/btrfs/tests/btrfs-tests.c:   inode_init_owner(&init_user_ns, inode, NULL, S_IFREG);
+> fs/ext2/ialloc.c:               inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/ext4/ialloc.c:               inode_init_owner(mnt_userns, inode, dir, mode);
+> fs/f2fs/namei.c:        inode_init_owner(mnt_userns, inode, dir, mode);
+> fs/hfsplus/inode.c:     inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/hugetlbfs/inode.c:           inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/jfs/jfs_inode.c:     inode_init_owner(&init_user_ns, inode, parent, mode);
+> fs/minix/bitmap.c:      inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/nilfs2/inode.c:      inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/ntfs3/inode.c:       inode_init_owner(mnt_userns, inode, dir, mode);
+> fs/ocfs2/dlmfs/dlmfs.c:         inode_init_owner(&init_user_ns, inode, NULL, mode);
+> fs/ocfs2/dlmfs/dlmfs.c: inode_init_owner(&init_user_ns, inode, parent, mode);
+> fs/ocfs2/namei.c:       inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/omfs/inode.c:        inode_init_owner(&init_user_ns, inode, NULL, mode);
+> fs/overlayfs/dir.c:     inode_init_owner(&init_user_ns, inode, dentry->d_parent->d_inode, mode);
+> fs/ramfs/inode.c:               inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/reiserfs/namei.c:    inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/sysv/ialloc.c:       inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/ubifs/dir.c: inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/udf/ialloc.c:        inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/ufs/ialloc.c:        inode_init_owner(&init_user_ns, inode, dir, mode);
+> fs/xfs/xfs_inode.c:             inode_init_owner(mnt_userns, inode, dir, mode);
+> fs/zonefs/super.c:      inode_init_owner(&init_user_ns, inode, parent, S_IFDIR | 0555);
+> kernel/bpf/inode.c:     inode_init_owner(&init_user_ns, inode, dir, mode);
+> mm/shmem.c:             inode_init_owner(&init_user_ns, inode, dir, mode);
+> "
+> 
+> They are used in filesystem init new inode function and these init inode functions are used
+> by following operations:
+> mkdir
+> symlink
+> mknod
+> create
+> tmpfile
+> rename
+> 
+> We don't care about mkdir because we don't strip SGID bit for directory except fs.xfs.irix_sgid_inherit.
+> But we even call it in do_mkdirat() since inode_sgid_strip() will skip directories anyway. This will
+> enforce the same ordering for all relevant operations and it will make the code more uniform and
+> easier to understand by using new helper prepare_mode().
+> 
+> symlink and rename only use valid mode that doesn't have SGID bit.
+> 
+> We have added inode_sgid_strip api for the remaining operations.
+> 
+> In addition to the above six operations, four filesystems has a little difference
+> 1) btrfs has btrfs_create_subvol_root to create new inode but used non SGID bit mode and can ignore
+> 2) ocfs2 reflink function should add inode_sgid_strip api manually because we don't add it in vfs
+> 3) spufs which doesn't really go hrough the regular VFS callpath because it has separate system call
+> spu_create, but it t only allows the creation of directories and only allows bits in 0777 and can ignore
+> 4)bpf use vfs_mkobj in bpf_obj_do_pin with "S_IFREG | ((S_IRUSR | S_IWUSR) & ~current_umask()) mode and
+> use bpf_mkobj_ops in bpf_iter_link_pin_kernel with S_IFREG | S_IRUSR; , so bpf is also not affected
+> 
+> This patch also changed grpid behaviour for ext4/xfs because the mode passed to them may been
+> changed by inode_sgid_strip.
+> 
+> Also as Christian Brauner said"
+> The patch itself is useful as it would move a security sensitive operation that is currently burried in
+> individual filesystems into the vfs layer. But it has a decent regression  potential since it might strip
+> filesystems that have so far relied on getting the S_ISGID bit with a mode argument. So this needs a lot
+> of testing and long exposure in -next for at least one full kernel cycle."
+> 
+> Suggested-by: Dave Chinner <david@fromorbit.com>
 > Signed-off-by: Yang Xu <xuyang2018.jy@fujitsu.com>
 > ---
->  fs/inode.c         | 22 ++++++++++++++++++----
->  include/linux/fs.h |  3 ++-
->  2 files changed, 20 insertions(+), 5 deletions(-)
-> 
-> diff --git a/fs/inode.c b/fs/inode.c
-> index 9d9b422504d1..3215e61a0021 100644
-> --- a/fs/inode.c
-> +++ b/fs/inode.c
-> @@ -2246,10 +2246,8 @@ void inode_init_owner(struct user_namespace *mnt_userns, struct inode *inode,
->  		/* Directories are special, and always inherit S_ISGID */
->  		if (S_ISDIR(mode))
->  			mode |= S_ISGID;
-> -		else if ((mode & (S_ISGID | S_IXGRP)) == (S_ISGID | S_IXGRP) &&
-> -			 !in_group_p(i_gid_into_mnt(mnt_userns, dir)) &&
-> -			 !capable_wrt_inode_uidgid(mnt_userns, dir, CAP_FSETID))
-> -			mode &= ~S_ISGID;
-> +		else
-> +			inode_sgid_strip(mnt_userns, dir, &mode);
->  	} else
->  		inode_fsgid_set(inode, mnt_userns);
->  	inode->i_mode = mode;
-> @@ -2405,3 +2403,19 @@ struct timespec64 current_time(struct inode *inode)
->  	return timestamp_truncate(now, inode);
->  }
->  EXPORT_SYMBOL(current_time);
-> +
-> +void inode_sgid_strip(struct user_namespace *mnt_userns,
-> +		      const struct inode *dir, umode_t *mode)
-> +{
 
-I think with Willy agreeing in an earlier version with me and you
-needing to resend anyway I'd say have this return umode_t instead of
-passing a pointer.
+I think we're getting closer but please focus the patch series. This has
+morphed into an 8 patch series where 4 or 5 of these patches are fixes
+that a) I'm not sure are worth it or fix anything b) they are filesystem
+specific and can be independently upstreamed and c) have nothing to do
+with the core of this patch series.
+
+So I'd suggest you'd just make this about sgid stripping and then this
+doesn't have to be more than 3 maybe 4 patches, imho.
 
 
 _______________________________________________
