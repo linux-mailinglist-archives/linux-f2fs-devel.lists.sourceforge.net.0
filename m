@@ -2,85 +2,169 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6822506FCE
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 19 Apr 2022 16:09:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5B515070E2
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 19 Apr 2022 16:46:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ngoXf-0001Ee-Tg; Tue, 19 Apr 2022 14:09:19 +0000
+	id 1ngp7c-0005mB-Pf; Tue, 19 Apr 2022 14:46:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <brauner@kernel.org>) id 1ngoXe-0001EP-9i
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 Apr 2022 14:09:17 +0000
+ (envelope-from <trondmy@hammerspace.com>) id 1ngp7a-0005m4-Kr
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 Apr 2022 14:46:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
+ Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
+ :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
+ :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BB2IpWnzuFZn4xjY5LqgD0JYmq9st+rHwRg6o1MR5Us=; b=NLoiGEUSgjv0P4ekVigdoiH9FP
- /ldJMVuQ1fZyYhBO+9tXisHfTmf71CXfbH6PFN4DcITQ/ersIS2NaByyca84znFgJxWtThL8XYgvi
- D/cNqznwRLJeOoPiZH1M1X3FqqBIaLVyVJ3EGxbsiNT/lE8TpgvYloinpucd1cMMWzI0=;
+ bh=88EfXzalNS7vnTV9qCOz8pW1qmzRDqi6pCFvIgUlRCc=; b=NE6/imW+zKooqYvS4IxofuOBgw
+ Jf/Csi63Bho5vAgcq68b4bKW11Mt8Km1PfiMedrQhbaoDT9yNnMHo0CzyZk+v79VIb3hfIHFRznNd
+ /vSYtuCjOP3K9sOHHrI6PrhchS4WOohghdqWWnWMoqMCsKAhm2Aa7jewJMuybTwXDKuY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
+ In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BB2IpWnzuFZn4xjY5LqgD0JYmq9st+rHwRg6o1MR5Us=; b=WQ/CPTL7DXV3D8xe6uT6cyRLPo
- +Ql2PA2ZN8MOSfcuYwZ+AAgERRA5qhtOkeai39Eq78vn1z14HbR4HeJCIr+v+sENW3gZClDxni6NX
- d+y+VIJMFiVHZb5yj9fb5HUrEMKUD4Is8zplJ5ga4abJDFck/8+/EXND9IBA4mpqMg40=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=88EfXzalNS7vnTV9qCOz8pW1qmzRDqi6pCFvIgUlRCc=; b=nS+M5E/EGarLI7NCKNJ7wK/Mj+
+ cCFTo4dw6QxHM0Ri8Cjazmk5TmIIArPfXsdwTZMq420DXjOl9WYFzNI9u08+tsOfk9JU/wWRtwlif
+ a0Wihj3qKlCWTl3PYeaZt2JiWcZ0his92MhM5TW8gePBvpi+DPQfN5NCrB8XN66IS2ys=;
+Received: from mail-bn8nam12on2114.outbound.protection.outlook.com
+ ([40.107.237.114] helo=NAM12-BN8-obe.outbound.protection.outlook.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1ngoXc-003xez-IS
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 Apr 2022 14:09:17 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 1FA4C616AB;
- Tue, 19 Apr 2022 14:09:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9F82C385A8;
- Tue, 19 Apr 2022 14:09:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1650377350;
- bh=ehE0f+n6BW1o04+JVmVR3SUS0NOx6+AaaAJridegsTk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=qXsCj/Cs8DmBGHQyYiSqiVEAbepBjzRlZKZxNVmvrexWE4j6UVGOtBZDdJofYPojk
- B2gV83VdxCaYw4/qFM8pUYmZ6eZNG/odJZrNTzmweGf+gUJIo3NQEWQUZeyJskvFZ7
- 6hmQLgHiJDNOWj5TzIYaJyRd+JJA7ujd6/PjDarlreo+FG/OFBumMH4yLVEqI9gxTR
- iJDrVdj1K5i8U7PfJ1BgpGkFNzgG+xvGOOHR+8qjt9MICSDq3VhKmBK031lDqaxIaR
- YcWG6xx26MmBeHCd0Ul7MLG18QGbQd/yuau267Hg9YEim6zcCcTHcx5qLPJqgOcQuc
- hlB8ZSrq6QsNw==
-Date: Tue, 19 Apr 2022 16:09:05 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Yang Xu <xuyang2018.jy@fujitsu.com>
-Message-ID: <20220419140905.7pbfqrzmyczyhneh@wittgenstein>
+ id 1ngp7U-003yj7-Lp
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 19 Apr 2022 14:46:24 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=epT01J5u2NSB3hJ7m/zO+fMpsggTbGONJGzLxJO0eyXkHg8hknsvBAT8Nobbv9WhUxUuA2Xeq3guCSKQCvbK/fXpWaV0/OHkpMsSXazT7UlqCuc79CF4AQrNRkV6MIV0bLOp/8Uhc+0YcqjthnZMuKOlaQm0mfWtccwZIXSAHqNdDf+Ejmsz+q0/i1pkvsCPMHXr0Ypi3XEx6GiZlRNxcx+cMRitBZMPIAW4moUY+KDz/99Mm/GZV10m6jabQboLN8YvN8hiCuJ2/krfnEV+rr0AuYcsqfL0FpdePnXBjU4rjLCrNxI3E74Q+1qKTCKd1SdeylfcJBVOQ4jeZCYzfw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=88EfXzalNS7vnTV9qCOz8pW1qmzRDqi6pCFvIgUlRCc=;
+ b=X7XE5AjEl0gVFwpuRamjAtXS2oIGsaCmLzjHgCMrez4dbgehT4Rz4vGrWIpOMOiCUs+pXSTQdQVMZcdoznD+gXMxAR4YJIJjLEjKDdtC5H0EsWIsSaEYX7dOg09D/gr2Sc47IzpnkSGNxl36Qq7+bmLviRzoyPKDDdEf50DOJkhKkA6ropM/PXcK80mKz7tVbRTcUOWNlrTscstQjkUR3MUn7hx685ThT5Xf4unmc5zNHPSFIm1PqJp8HJJydadNFBc+kaDAPLeRS8ezFxqHQg0kgs7IFowHyzHndPpasmjO00BNA5jAkeGgFiBgAvpPm1BCJd7OXRnN66kurVSWsg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=hammerspace.com; dmarc=pass action=none
+ header.from=hammerspace.com; dkim=pass header.d=hammerspace.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hammerspace.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=88EfXzalNS7vnTV9qCOz8pW1qmzRDqi6pCFvIgUlRCc=;
+ b=TaxhrmO/6Uy0DIVsT+/QVjxntK0wVXSuKjEwwuCMiAg61aT89ooy5ziOylBjCWlQIeai9u2FEwdApYGenjqOPlE+8X3oszf+XOcxmuFUIy4xzAH9cBmbPhJJaGBsLMqDG1alQ4ZRS29ebrmhTamReYzgbi5rOAvDPho/g0J0tiE=
+Received: from CH0PR13MB5084.namprd13.prod.outlook.com (2603:10b6:610:111::7)
+ by DM6PR13MB3017.namprd13.prod.outlook.com (2603:10b6:5:192::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.13; Tue, 19 Apr
+ 2022 14:11:59 +0000
+Received: from CH0PR13MB5084.namprd13.prod.outlook.com
+ ([fe80::c0b:4fda:5713:9006]) by CH0PR13MB5084.namprd13.prod.outlook.com
+ ([fe80::c0b:4fda:5713:9006%7]) with mapi id 15.20.5186.013; Tue, 19 Apr 2022
+ 14:11:59 +0000
+From: Trond Myklebust <trondmy@hammerspace.com>
+To: "brauner@kernel.org" <brauner@kernel.org>, "xuyang2018.jy@fujitsu.com"
+ <xuyang2018.jy@fujitsu.com>
+Thread-Topic: [PATCH v4 4/8] NFSv3: only do posix_acl_create under
+ CONFIG_NFS_V3_ACL
+Thread-Index: AQHYU9rkuNt4/dYxt0yZ2ARc+gLlVqz3Q7QAgAADaQA=
+Date: Tue, 19 Apr 2022 14:11:59 +0000
+Message-ID: <707fc9d665b44943d4235a51450bff880248eda6.camel@hammerspace.com>
 References: <1650368834-2420-1-git-send-email-xuyang2018.jy@fujitsu.com>
- <1650368834-2420-7-git-send-email-xuyang2018.jy@fujitsu.com>
+ <1650368834-2420-4-git-send-email-xuyang2018.jy@fujitsu.com>
+ <20220419135938.flv776f36v6xb6sj@wittgenstein>
+In-Reply-To: <20220419135938.flv776f36v6xb6sj@wittgenstein>
+Accept-Language: en-US, en-GB
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=hammerspace.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 7c1862e2-589d-4da3-974a-08da220e91aa
+x-ms-traffictypediagnostic: DM6PR13MB3017:EE_
+x-microsoft-antispam-prvs: <DM6PR13MB3017756B31036152242D7D19B8F29@DM6PR13MB3017.namprd13.prod.outlook.com>
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: +J7Vk/2Xb+ykUesD1p9qyZss+KTELKIgPS3n1uydEP1ovSKhQpcmJ0sBS7ZkU6wafqc53banhKCtOSbABCmneJttJeHRY1lt1fjg88Dy+uVPAExJpdozu8VXuIt1tj9r1ckfhDxC67GrCDv6LwZiZFam506od9ZlPBb/dve0QqYbhmwM++ozJbE4F0pwqzDv5ACR6FmHayaS3+HwkNSCg2LEUyySzBPTrC+KAjNdAsqKgu4f4TpfEfq94Dv8ZIt/tduNzRW3hRFTqAI2ygEAdHbtFZaRkBuCUzFSAKIiG/w/qAKvTLGuvlhdxwFFe/I9naNhg8R3caF48uPb2/nrLjRVyo2hvq/qqOlOmdjdTWMmQOHPtDKV3Qy/zDDpf2/jRFyQFPd6cg+2vUJg+JAW5YFlM1Akx7gjbdti/pdttvN/LM8S9tA05A1u0zSQOG6i2AKyroQPPhUPmAbVFfk1Bxt8Zd8iZT6q+m5eC0wJ9KvNM+EMW2jJUPKL2A0CzYk8wwkUWe1VZB0G7ZfZUEaodAp2eVHuhHQvLL8ylpi+2Sks5fR9xEIHGzFy5IdICYKWPBIaRAVGIF++FyoT/pfs6n40KWN/uqjk365EvWwS+frM6JdzoCYYogD3jMNUAAVKWj/7ppAButVpaT+gKURWiX2V2RaCviXy4nZbeWSo3gelI5kjdreMcZPRKCelA+Peq7X+BV3WrMvKE8Pf8DejKw==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH0PR13MB5084.namprd13.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230001)(366004)(66556008)(66476007)(66446008)(64756008)(66946007)(4326008)(8676002)(76116006)(110136005)(6506007)(71200400001)(6486002)(2616005)(54906003)(508600001)(86362001)(36756003)(316002)(26005)(38070700005)(38100700002)(7416002)(5660300002)(8936002)(6512007)(186003)(122000001)(2906002);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UzBhOXhTR3RDczlSc21Va25HUnZGZ1ZWK3gvWkVYZmMxMjk4T2I2aXJFQ0N4?=
+ =?utf-8?B?VnNUL05NMWl6OFU1V2QzR2RoQllxVWFjZVdOajNKd0E2eGtMRHk5bCtibStR?=
+ =?utf-8?B?TUJmQlduUk42U09VcFJxRjdOWmFWam5jWUpZazFPeFM2U1g0Zkt2VHUyYloz?=
+ =?utf-8?B?L1FHK1J3T0Vab1A4YzRpYy94QWRZSFluT0RIQmZlL2ZsTzJUaUk0aUJIT3dU?=
+ =?utf-8?B?ZkZlYitZRkFMTSs3TkZOdmVTaEkwRXBSVWhVNWhVcmpmWHVqWTF5V1BQaTJS?=
+ =?utf-8?B?R0lyaDJEeWFaeVJVRG1vNW1rdXljSUJwaEJqVDdXMDlOQUIwNnZudHc1a0FY?=
+ =?utf-8?B?b1ZkeUVHTWtqNjRiT3kxUmhKdmltcmxkTTNteDFVR0E1dmVQbU1oaTdDVlZu?=
+ =?utf-8?B?eTZTNXk3QmhEMTdNMnJFRnE3MEc2LzJ0TUNaTmFkU0RETWFXODJqckVaKzJL?=
+ =?utf-8?B?eUtlY2Vrb3RqU3llRDZwM1FmNm02M3VCRW1uMHBCakZORHA1TW9aWWU4Wk1j?=
+ =?utf-8?B?a21wZFdCYVd6dVBuUkk4eEY4Z3AzUkFmWjNXZVVuKzJ3RGlma0RLbktmODRF?=
+ =?utf-8?B?TmN5K1FydzVzTzYyalVaeWp0NFkyeGRDOFBROTNDWm1KYmpCWnErYUhDN1hM?=
+ =?utf-8?B?S0lYUVJxV05CZVhJQlc5aHdKSE1Cd2ZmeTdoU3lQbFErRWJiWVRhc1o0ZGNK?=
+ =?utf-8?B?QWhHL3NQY3dqYTBDWkNrakNpTVR1WThUNTRoNE5abnIxb1lIcFJTZEdCS2hy?=
+ =?utf-8?B?Sy92MEtRRVNva1YvekNyMUp3M0xjM1lyWHdJNlZNNGppTlJDT1daazBhdGxo?=
+ =?utf-8?B?ejc5WUpKclVXVUJsMGRXWEtGK0g1Y3BnU29uSzl3d2VXN0NIendZZDVNQ0Q4?=
+ =?utf-8?B?YTQzV0FCWm5HM1N2SVJJaHJDVmVQOUN2djRISE1TVGlLc1JkMUhieHQ4Z3Jw?=
+ =?utf-8?B?cGR3VXdEV3YxQkh4TTA2d0x0OUtJOGRDMEdzN3BQNDY5S056Z1VHaVh2SEV2?=
+ =?utf-8?B?SEZISlFocXkveGFsK010dHBzNERrVXZmRUluQXRhZmdrTUFxUEZqbzRmdHN6?=
+ =?utf-8?B?ZWtpQWNGNGdlVS9nZm0va3hRUkl4OUFaeVpZdmEyZVg4a1VtNU15SUFZRkFP?=
+ =?utf-8?B?d1lZd0R2c1MySGdyWXczdGRtMUduTG8wZ1JzOCtxOHE3bms1Qk9VV3NNb0tV?=
+ =?utf-8?B?ZGE0alFDQTN3ajlpTXN0QzRYQUNna2dzRTF0MnIvOWRFSmdqNld3Q2tZNytt?=
+ =?utf-8?B?WEsvcUhQOXI0dlVGWDNuN05rUnl6VUZtREt0c1hlb3VxRlRMSW9mZ3pNWmh2?=
+ =?utf-8?B?TzM3WitIUzlyUjQ1VTlnVU4rM2ZzQ1ZSQ1JpeFJyMndzekdXTHl1bEZ6cTZS?=
+ =?utf-8?B?azE1dDhPZ0NZQ2RPc1dyZUVsTjl6NXpObnhRcUtBNW9SeEVwY3lmQU9weU1D?=
+ =?utf-8?B?VTFiMzJJRHFzVXE5V09ZTXNJcXA1NnlvZTRiZkk0eXI2bGZCWUpab1lVZkEr?=
+ =?utf-8?B?Zy94eW1JZEZqaTNXdTJxbityL3BjckhyS0hwVVplOXpwV0FyeXBaekp3Q2ZY?=
+ =?utf-8?B?eGMwb3U4VkduRFVmMHN0d2ZqWSsxZU1paUlCTWxYRjJ6NUpOVEVyY3dWK2Zu?=
+ =?utf-8?B?bXIxL1cyZ3RkOWV1L3BCbEova29rVkNDM21lUFBxSG1lS1VidHAreForZ2tn?=
+ =?utf-8?B?ZGRaVUVvZTVRVjRwTFREc0pzaUZteHIyU3g1dHYvemMrdm9NWUlCa1FGWXk3?=
+ =?utf-8?B?akhtQnJNcXZUL0hBMy95emo5SElDRThsQmloM1NWNldOZzBqc1NKam4rdU5S?=
+ =?utf-8?B?V1daTFlvNGpEZGxKd2ljUVNudEVjOWtYSHczbzdwaXNQcExXNU5XR2ZKeFF6?=
+ =?utf-8?B?UVdNbDVhS1EycGRTTllDNnVETWJsb3RPQWxsRlQ4RTJhNVV1cm1IUkxZODd5?=
+ =?utf-8?B?bTlXcGtWNDlqQTJmT3BValFxdGVyaGhtUGlUdG1YK0I1bXlES2RkdU02c2FC?=
+ =?utf-8?B?UHRKR3NMWTg5RnhoQU5mQTBWUkZ3bzh0L2hyVGF5a1h5US9FNVBITXhCZ2F0?=
+ =?utf-8?B?Z3RJOXM1YkRVVnhPOGVkNkRoeHF4QUR6U2NQQlFUT0JmMUxHZ0lUbm84ZGFh?=
+ =?utf-8?B?WGx6dFpuU1RqQUczbWdYWlNHU240d2U1V3JRd3RESUhjUGhyeFZKc2lOdjEr?=
+ =?utf-8?B?Zkt3V0taUXQzdUYzZVY4VnFEWHkrUjBFam1BT2ZFelRaV1ZLbDZaN1kwSDg4?=
+ =?utf-8?B?NFF5SEtsQUF2VHJKcXlmTVhzM2RRL3o2eXMvMlNJZEkzN3A1SlNYaUlNRmxm?=
+ =?utf-8?B?Z01HR2pTVXhzWEtIRldMVDg3a3BKL1FoenFHakltQkpxZDZCb0hJWnI5SmxV?=
+ =?utf-8?Q?rZVdoPhJEQ/F8aJ0=3D?=
+Content-ID: <E127A97A75E7FE4B91198A0053345E07@namprd13.prod.outlook.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1650368834-2420-7-git-send-email-xuyang2018.jy@fujitsu.com>
-X-Spam-Score: -5.8 (-----)
+X-OriginatorOrg: hammerspace.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CH0PR13MB5084.namprd13.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c1862e2-589d-4da3-974a-08da220e91aa
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Apr 2022 14:11:59.4640 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 0d4fed5c-3a70-46fe-9430-ece41741f59e
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: FkrJaHtDRrHg0lpj9pzqM2vo8h7SMU+/qpd2PqmjKCCA80XOpcAZCJvnAB5alRZzAud/YIZ/gpNUWtwELtscBg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR13MB3017
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Apr 19, 2022 at 07:47:13PM +0800, Yang Xu wrote: >
- Currently, vfs only passes mode argument to filesystem,
- then use inode_init_owner()
- > to strip S_ISGID. Some filesystem(ie ext4/btrfs) will c [...] 
- Content analysis details:   (-5.8 points, 6.0 required)
+ Content preview:  On Tue, 2022-04-19 at 15:59 +0200, Christian Brauner wrote:
+ > On Tue, Apr 19, 2022 at 07:47:10PM +0800,
+ Yang Xu wrote: > > Since nfs3_proc_create/nfs3_proc_mkdir/nfs3_proc_mknod
+ these rpc > > ops are [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.237.114 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.237.114 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -89,10 +173,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ngoXc-003xez-IS
-Subject: Re: [f2fs-dev] [PATCH v4 7/8] fs: strip file's S_ISGID mode on vfs
- instead of on underlying filesystem
+X-Headers-End: 1ngp7U-003yj7-Lp
+Subject: Re: [f2fs-dev] [PATCH v4 4/8] NFSv3: only do posix_acl_create under
+ CONFIG_NFS_V3_ACL
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,117 +187,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-nfs@vger.kernel.org, djwong@kernel.org, david@fromorbit.com,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jlayton@kernel.org,
- ceph-devel@vger.kernel.org, ntfs3@lists.linux.dev
+Cc: "linux-nfs@vger.kernel.org" <linux-nfs@vger.kernel.org>,
+ "djwong@kernel.org" <djwong@kernel.org>,
+ "david@fromorbit.com" <david@fromorbit.com>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>,
+ "viro@zeniv.linux.org.uk" <viro@zeniv.linux.org.uk>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+ "jlayton@kernel.org" <jlayton@kernel.org>,
+ "ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
+ "ntfs3@lists.linux.dev" <ntfs3@lists.linux.dev>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Apr 19, 2022 at 07:47:13PM +0800, Yang Xu wrote:
-> Currently, vfs only passes mode argument to filesystem, then use inode_init_owner()
-> to strip S_ISGID. Some filesystem(ie ext4/btrfs) will call inode_init_owner
-> firstly, then posxi acl setup, but xfs uses the contrary order. It will affect
-> S_ISGID clear especially we filter S_IXGRP by umask or acl.
+On Tue, 2022-04-19 at 15:59 +0200, Christian Brauner wrote:
+> On Tue, Apr 19, 2022 at 07:47:10PM +0800, Yang Xu wrote:
+> > Since nfs3_proc_create/nfs3_proc_mkdir/nfs3_proc_mknod these rpc
+> > ops are called
+> > by nfs_create/nfs_mkdir/nfs_mkdir these inode ops, so they are all
+> > in control of
+> > vfs.
+> > 
+> > nfs3_proc_setacls does nothing in the !CONFIG_NFS_V3_ACL case, so
+> > we put
+> > posix_acl_create under CONFIG_NFS_V3_ACL and it also doesn't affect
+> > sattr->ia_mode value because vfs has did umask strip.
+> > 
+> > Signed-off-by: Yang Xu <xuyang2018.jy@fujitsu.com>
+> > ---
 > 
-> Regardless of which filesystem is in use, failure to strip the SGID correctly is
-> considered a security failure that needs to be fixed. The current VFS infrastructure
-> requires the filesystem to do everything right and not step on any landmines to
-> strip the SGID bit, when in fact it can easily be done at the VFS and the filesystems
-> then don't even need to be aware that the SGID needs to be (or has been stripped) by
-> the operation the user asked to be done.
+> I have the same comment as on the xfs patch. If the filesystem has
+> opted
+> out of acls and SB_POSIXACL isn't set in sb->s_flags then
+> posix_acl_create() is a nop. Why bother placing it under an ifdef?
 > 
-> Vfs has all the info it needs - it doesn't need the filesystems to do everything
-> correctly with the mode and ensuring that they order things like posix acl setup
-> functions correctly with inode_init_owner() to strip the SGID bit.
+> It adds visual noise and it implies that posix_acl_create() actually
+> does something even if the filesystem doesn't support posix acls.
 > 
-> Just strip the SGID bit at the VFS, and then the filesystems can't get it wrong.
-> 
-> Also, the inode_sgid_strip() api should be used before IS_POSIXACL() because
-> this api may change mode.
-> 
-> Only the following places use inode_init_owner
-> "
-> arch/powerpc/platforms/cell/spufs/inode.c:      inode_init_owner(&init_user_ns, inode, dir, mode | S_IFDIR);
-> arch/powerpc/platforms/cell/spufs/inode.c:      inode_init_owner(&init_user_ns, inode, dir, mode | S_IFDIR);
-> fs/9p/vfs_inode.c:      inode_init_owner(&init_user_ns, inode, NULL, mode);
-> fs/bfs/dir.c:   inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/btrfs/inode.c:       inode_init_owner(mnt_userns, inode, dir, mode);
-> fs/btrfs/tests/btrfs-tests.c:   inode_init_owner(&init_user_ns, inode, NULL, S_IFREG);
-> fs/ext2/ialloc.c:               inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/ext4/ialloc.c:               inode_init_owner(mnt_userns, inode, dir, mode);
-> fs/f2fs/namei.c:        inode_init_owner(mnt_userns, inode, dir, mode);
-> fs/hfsplus/inode.c:     inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/hugetlbfs/inode.c:           inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/jfs/jfs_inode.c:     inode_init_owner(&init_user_ns, inode, parent, mode);
-> fs/minix/bitmap.c:      inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/nilfs2/inode.c:      inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/ntfs3/inode.c:       inode_init_owner(mnt_userns, inode, dir, mode);
-> fs/ocfs2/dlmfs/dlmfs.c:         inode_init_owner(&init_user_ns, inode, NULL, mode);
-> fs/ocfs2/dlmfs/dlmfs.c: inode_init_owner(&init_user_ns, inode, parent, mode);
-> fs/ocfs2/namei.c:       inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/omfs/inode.c:        inode_init_owner(&init_user_ns, inode, NULL, mode);
-> fs/overlayfs/dir.c:     inode_init_owner(&init_user_ns, inode, dentry->d_parent->d_inode, mode);
-> fs/ramfs/inode.c:               inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/reiserfs/namei.c:    inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/sysv/ialloc.c:       inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/ubifs/dir.c: inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/udf/ialloc.c:        inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/ufs/ialloc.c:        inode_init_owner(&init_user_ns, inode, dir, mode);
-> fs/xfs/xfs_inode.c:             inode_init_owner(mnt_userns, inode, dir, mode);
-> fs/zonefs/super.c:      inode_init_owner(&init_user_ns, inode, parent, S_IFDIR | 0555);
-> kernel/bpf/inode.c:     inode_init_owner(&init_user_ns, inode, dir, mode);
-> mm/shmem.c:             inode_init_owner(&init_user_ns, inode, dir, mode);
-> "
-> 
-> They are used in filesystem init new inode function and these init inode functions are used
-> by following operations:
-> mkdir
-> symlink
-> mknod
-> create
-> tmpfile
-> rename
-> 
-> We don't care about mkdir because we don't strip SGID bit for directory except fs.xfs.irix_sgid_inherit.
-> But we even call it in do_mkdirat() since inode_sgid_strip() will skip directories anyway. This will
-> enforce the same ordering for all relevant operations and it will make the code more uniform and
-> easier to understand by using new helper prepare_mode().
-> 
-> symlink and rename only use valid mode that doesn't have SGID bit.
-> 
-> We have added inode_sgid_strip api for the remaining operations.
-> 
-> In addition to the above six operations, four filesystems has a little difference
-> 1) btrfs has btrfs_create_subvol_root to create new inode but used non SGID bit mode and can ignore
-> 2) ocfs2 reflink function should add inode_sgid_strip api manually because we don't add it in vfs
-> 3) spufs which doesn't really go hrough the regular VFS callpath because it has separate system call
-> spu_create, but it t only allows the creation of directories and only allows bits in 0777 and can ignore
-> 4)bpf use vfs_mkobj in bpf_obj_do_pin with "S_IFREG | ((S_IRUSR | S_IWUSR) & ~current_umask()) mode and
-> use bpf_mkobj_ops in bpf_iter_link_pin_kernel with S_IFREG | S_IRUSR; , so bpf is also not affected
-> 
-> This patch also changed grpid behaviour for ext4/xfs because the mode passed to them may been
-> changed by inode_sgid_strip.
-> 
-> Also as Christian Brauner said"
-> The patch itself is useful as it would move a security sensitive operation that is currently burried in
-> individual filesystems into the vfs layer. But it has a decent regression  potential since it might strip
-> filesystems that have so far relied on getting the S_ISGID bit with a mode argument. So this needs a lot
-> of testing and long exposure in -next for at least one full kernel cycle."
-> 
-> Suggested-by: Dave Chinner <david@fromorbit.com>
-> Signed-off-by: Yang Xu <xuyang2018.jy@fujitsu.com>
-> ---
 
-I think we're getting closer but please focus the patch series. This has
-morphed into an 8 patch series where 4 or 5 of these patches are fixes
-that a) I'm not sure are worth it or fix anything b) they are filesystem
-specific and can be independently upstreamed and c) have nothing to do
-with the core of this patch series.
+Agreed and NACKed...
 
-So I'd suggest you'd just make this about sgid stripping and then this
-doesn't have to be more than 3 maybe 4 patches, imho.
+Any patch that gratuitously adds #ifdefs in situations where cleaner
+alternatives exist is not going going to be applied by the NFS
+maintainers.
+
+-- 
+Trond Myklebust
+Linux NFS client maintainer, Hammerspace
+trond.myklebust@hammerspace.com
+
 
 
 _______________________________________________
