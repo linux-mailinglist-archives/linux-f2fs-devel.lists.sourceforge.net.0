@@ -2,82 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FA01508638
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Apr 2022 12:45:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 159DA508F2B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Apr 2022 20:12:35 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nh7px-0004vp-GH; Wed, 20 Apr 2022 10:45:28 +0000
+	id 1nhEoV-0008CI-S2; Wed, 20 Apr 2022 18:12:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nh7pw-0004vj-Fo
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 10:45:27 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nhEoJ-0008C5-Tu
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 18:12:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9LmdZi45TVqs+MIlRuHVdk1ixT8xjscfUZ7chTwppqU=; b=CPWdy0gagne1kcadsYTfDreE6T
- g9ftivkgFO77QYPWgjy9x6S1SC+uQyKj5RrrRNds0UUI6haKmwc5xAdN9VzpJ6rkoEB0JEfrqDjGh
- VyurxsdaM/KZr++uPMpSc705b6LOPHsyUK5PntzQHVzdmS3f+Srf3O2eHCK77Bgh7c2s=;
+ bh=igYFGVwUtMrYFtCOVyOEziT54htNgcX7DvW0MJFZu8I=; b=AclzPMscMHD9UU3qOsrVPcAnoo
+ y8zvsJ2b04u1dPJ3e07TYSLzP9DVO4f2zKKwtEvlN9ATIqTWlULg2wn+kwZhm73R/LpG5P8ak9KqZ
+ R0g+uGBpBeFJcw3717E0waGLfFrOuT0LoR3f1SrQ9F5ZBzBIDMqY8FGoqcKNbJnlXAIA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9LmdZi45TVqs+MIlRuHVdk1ixT8xjscfUZ7chTwppqU=; b=Bq/WpLZytOwF2oN6tSlSOZwv2U
- cv4sIG2UIJZVYIx1jrOi+AF8IXQUggHJDEOXu25SGvWBky8RhOBw3xsCJCTCrFEWBEV9AQpUYDukI
- gM6kHVbNENMfEvWoMzpfxB8ygIJzntMmQlnebUG9hhVIBiws++zP22lDbzYAuCA6ZBOg=;
+ bh=igYFGVwUtMrYFtCOVyOEziT54htNgcX7DvW0MJFZu8I=; b=XQAqdb5/cUIT7KdgJUm7YsaQNs
+ LRpTH2oGkgrmd40vezDjL2JOitolhJYcvGHYQOClPOKgvr82dj0iO1h6TH28lBXQMYjG5kDGr9kE6
+ 0JvNh7IYDTI35lFMqpp4C5p6qtWH5Hk/ay6XafjyI/sv3VkLM4Bbwdpf+k0d53qJV4fk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nh7pu-004bxH-BA
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 10:45:26 +0000
+ id 1nhEoG-0006Nx-7w
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 18:12:14 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id AD2D261784;
- Wed, 20 Apr 2022 10:45:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7209CC385A0;
- Wed, 20 Apr 2022 10:45:18 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id CEF5D61B4A;
+ Wed, 20 Apr 2022 18:12:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A071C385A0;
+ Wed, 20 Apr 2022 18:12:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1650451520;
- bh=F4iRQLYUOp0KM7vbDs9HIf+8WwsG0fO5ZEHyU/G2VLg=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Dii27LsWCVIBumzLpw0W1zRUe3lQucndkcznhF/tuEBLqyKJ5AngdIyNfv7m7BBGQ
- a9sI5LEQ46Yw67GPVlcYDlDfdA1WXvudm1LBLesxToZFksJxC9plih44U7pJHtiTe2
- Clb0kzLGQHPNgx4Rc8pXHORyOAxGNfN40yk+/UQEWoT2fOHtlAV2uI5nt2fD1wdvdN
- pnRzxv/h67RZcfY/C0up1eH7z7/pKsWz8r8ho3783UbJD3HAOEAKdJo5kce8HXRTBS
- r3qgOlWEfbbkQKyq81OQD3NED4X6nbjk991TTt0GG6UNOINGVek+S1ftl5wbkee8Mg
- zYFzBVlP+X0Iw==
-Message-ID: <8b1c2c4e-4769-67d1-42b9-42d2d1d0871d@kernel.org>
-Date: Wed, 20 Apr 2022 18:45:15 +0800
+ s=k20201202; t=1650478322;
+ bh=NTy9pFDWRuCUyy+uRS6JtLFaKO2Z2cLw81UXIFC+Vr4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=DdBFOPQKPs5WI1dCKZuS5WAuu77VokqeMbZM5eTxoTWfi+tZDeOdFOBl/exLtmrE/
+ 50q2oNjj7F2e547EfrKKG5jMin0+lWpjlUGv65p3WMbp3NxnN+tk1WAmotlyvsci+P
+ kpnuCskiQbDl7HubYrAeF9HUiDZ6c0hdK29vtZaTebAxvE9p6AHY1c1D/a3YeV5SRG
+ kYhJ1SmaMyOEyQ/InoqZjNrwLMzvIPqbd5onUlptLNKS1zH2vd+9j96oX2K2sriXKe
+ 9yIuO7woiJuruLrI5YjaQ/C4LMguzLYyex44KpqiW5QPHpUEzKgjspdeHTljRuOuK1
+ 2oxBEZtax11BQ==
+Date: Wed, 20 Apr 2022 11:12:00 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <YmBM8KEZ9JttevxH@google.com>
+References: <20220419215703.1271395-1-jaegeuk@kernel.org>
+ <Yl+XIjiuFRN9Pzxv@infradead.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Content-Language: en-US
-To: Pankaj Raghav <p.raghav@samsung.com>,
- linux-f2fs-devel@lists.sourceforge.net
-References: <CGME20220413122941eucas1p1ec05e8e8dfe2baf451fcb549d60fda35@eucas1p1.samsung.com>
- <20220413122940.133981-1-p.raghav@samsung.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220413122940.133981-1-p.raghav@samsung.com>
-X-Spam-Score: -9.9 (---------)
+Content-Disposition: inline
+In-Reply-To: <Yl+XIjiuFRN9Pzxv@infradead.org>
+X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/4/13 20:29,
- Pankaj Raghav wrote: > From: Luis Chamberlain
- <mcgrof@kernel.org> > > f2fs currently only work with zoned storage devices
- with a zone > size which is a power of 2 (PO2). So check i [...] 
- Content analysis details:   (-9.9 points, 6.0 required)
+ Content preview:  On 04/19, Christoph Hellwig wrote: > On Tue, Apr 19, 2022
+ at 02:57:03PM -0700, Jaegeuk Kim wrote: > > The block layer for zoned disk
+ can reorder the FUA'ed IOs. Let's use flush > > command to keep the [...]
+ Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -91,11 +87,10 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -4.1 NICE_REPLY_A           Looks like a legit reply (A)
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nh7pu-004bxH-BA
-Subject: Re: [f2fs-dev] [PATCH v2] libf2fs: don't allow mkfs / fsck on non
- power-of-2 zoned devices
+X-Headers-End: 1nhEoG-0006Nx-7w
+Subject: Re: [f2fs-dev] [PATCH] f2fs: use flush command instead of FUA for
+ zoned device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,31 +102,22 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: javier.gonz@samsung.com, Damien.LeMoal@wdc.com, mcgrof@kernel.org,
- pankydev8@gmail.com
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/4/13 20:29, Pankaj Raghav wrote:
-> From: Luis Chamberlain <mcgrof@kernel.org>
+On 04/19, Christoph Hellwig wrote:
+> On Tue, Apr 19, 2022 at 02:57:03PM -0700, Jaegeuk Kim wrote:
+> > The block layer for zoned disk can reorder the FUA'ed IOs. Let's use flush
+> > command to keep the write order.
 > 
-> f2fs currently only work with zoned storage devices with a zone
-> size which is a power of 2 (PO2). So check if a non-power of 2
-> zoned device is found, and if so disallow its use. This prevents
-> users from incorrectly using these devices.
-> 
-> This is a non-issue today given today's kernel does not allow NPO2
-> zoned devices to exist as a block device. But NPO2 zoned devices do exist
-> so proactively put a stop-gap measure in place to prevent it from being
-> incorrectly used.
-> 
-> Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
-> Signed-off-by: Pankaj Raghav <p.raghav@samsung.com>
+> The block layer can reorder all commands.  Given that FUA only affects
+> the command itself that should not matter.  What is this trying to fix?
 
-Reviewed-by: Chao Yu <chao@kernel.org>
-
-Thanks,
+Not for zoned disk, as I mentioned. The mq-deadline serializes write commands
+but I got an reordered command, if there's a FUA|PREFLUSH command, which emits
+EIO by the disk.
 
 
 _______________________________________________
