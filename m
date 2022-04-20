@@ -2,191 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB7B0507E20
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Apr 2022 03:28:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A4BC507F05
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Apr 2022 04:45:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ngz8S-00075Y-Go; Wed, 20 Apr 2022 01:27:59 +0000
+	id 1nh0La-0003ZB-Dx; Wed, 20 Apr 2022 02:45:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <xuyang2018.jy@fujitsu.com>) id 1ngz8R-00075S-5B
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 01:27:57 +0000
+ (envelope-from <chao@kernel.org>) id 1nh0LZ-0003Z5-Gl
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 02:45:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
- Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
- :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
- :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fGvdzhGdKopQh1a7OYLriTI1e3NOhITqSKG3ZAB2tsc=; b=mtq4nH+KhAY1WxmrrBRVi4P+Zi
- SS9DpG1xyn92+hzTQkDWWlX3JeEJJngWZ/GPmD/hctjuQnukpcjKmJYCd1FGQj/TC2KmIE28qBfY7
- P1nGyN7PocRQTztvX6UZSk0ABYDYiK+767/8EMcc65iIlIMewWvHrbIpKan7uVMkmOos=;
+ bh=8IKhjIvFr29ZMESXzsimRJOPTN0Pz37lwOkipPbskCE=; b=moOuc7wok6QRKersJRPk0xiLNy
+ FLLK7sYWbiO9R/nUAhuzAbGu0XYvkWRjxO0jidUyHT4daYX6ixpYcrlN8jkivH4lkuH5lrwFO901s
+ sSqHi4alP3vTDoNu18JQDdhiZewRgIyo7HBdCIo+3S6x9FaJL39yA3LsLS1sb+sn/YYg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
- In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fGvdzhGdKopQh1a7OYLriTI1e3NOhITqSKG3ZAB2tsc=; b=AZ8h8aJJoPos4Qo+MmsOqGLZSA
- ie2FH4zFoWP7Sj7ufEq5oGxJRGRD2sn8VBaug6TOJ1StzyQNg5aImmJ7HyC1vfvjAZswnFp1a1CkH
- BUNJpMf6ILfLPqzOuQLlb/IezGx/zBLjSt9PCqYar5VMRN/vTBtlAE8IdgFuKjF/VoLQ=;
-Received: from esa9.fujitsucc.c3s2.iphmx.com ([68.232.159.90])
+ bh=8IKhjIvFr29ZMESXzsimRJOPTN0Pz37lwOkipPbskCE=; b=KP01y/7oHBcNh3khAMFuS7QZO/
+ P33ZVglr1E5j+GAHiWSN0EKhV9R1gybvl6APuqjJquooTvyJxoaBttgCNuXIrS+n1RsetkT2/mf+M
+ 3hxglG53Vwuj1tTaZy2QnMIye0eh7ZNqvVBvOwGkjPkr+0gw6RRYvEWabAWiiNGex9WA=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1ngz8L-004JL9-LL
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 01:27:57 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
- t=1650418074; x=1681954074;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=fGvdzhGdKopQh1a7OYLriTI1e3NOhITqSKG3ZAB2tsc=;
- b=NNPqGXwD5sVmVkFpoVd4E30FqV58zhrag1XRmZEn+sEXHS2VGZeQPlUV
- x7Us17uXOue02oMSPw+PASgnaWfJKr/WOPzvPDZ+ozSvwKa+8DpgXLilQ
- gtEiEdmDXn6ZnziCyySW0PK4fvim9Sq972Ew2Y/zmlIrnLFZndy5Vv2IM
- biV6ZDsXTf+Yw0nDStmiMSpqD7/VigUVvrxY/zF3o07DFWZvlgp1wLP6X
- gpM30M+cDX9UoRSH1k4V9XLecokKaEtsj5HkpsOITnvLLz5LMyjMzucRz
- 3KS7ZvsJhHDKg4moKiDZmV9n6XsVJ5VY8s3GfCAI63sUNDgYmjYEfU02r A==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10322"; a="54387674"
-X-IronPort-AV: E=Sophos;i="5.90,274,1643641200"; d="scan'208";a="54387674"
-Received: from mail-os0jpn01lp2110.outbound.protection.outlook.com (HELO
- JPN01-OS0-obe.outbound.protection.outlook.com) ([104.47.23.110])
- by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Apr 2022 10:27:44 +0900
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SBQwRxfUuc7x9ASDjYEPXrt8K/JHPZ6zVJrEH9tnEBxzlMd/KXWrlwDcPtqKqWcVMZMw/i3KgIg3hwv6nLRgAijTVQS1UAUFHxC6Q0HV36U6aQbloWmJ7j3hQqwoEdDSWhmFfB48p4BedGzks9fKAUAjPOJvce6b1GA46izt8PeZnCVuqCbQh7eHJK2ES9a+SOtIjHH5w6+Zmt2eHXUZ+CqpJcqQzyZYi69KRQ7kkF2FikBD1F7jASHcpYrdrYE70ydRxJOScSACp7aCMVeF12/z84ubGhAFPMwMwkV/PkuEiaeWRcAfddFlbVIS7LpxpsXDtgJIFnFP8hsb5ywxRw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fGvdzhGdKopQh1a7OYLriTI1e3NOhITqSKG3ZAB2tsc=;
- b=Bx4fm1m87LV1tYROUy6D/m0yPKi3KwkOBCGPJOX7hZMIUzfJkI0hhv5Mf62xHBA1ubyEBPKkDleZPJZxZcxei4KAb/18+KOm48eIKt0GKyfJHqxA5XaI8BYxd7jn/wDKpAhHTIEpeZ+55JyCX/NwgBaZF/iTaRysnSIxFMbo1xgdyRwT1dYqYGV0MBZYiqhXxRz4sLPsOwj1cffdapXALCrK14xVcLTp0fYONDSoVujvM8IA0Ca2mI67VY7PQCAKUF+A2rV5xAaJ3iS1caa+1/jVDXwenL9WzvbY+vibOe/hhcAVfswBuUdZ4l5Gi5uQyQnudgGHEvYxHkJ63meQAA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
- dkim=pass header.d=fujitsu.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fujitsu.onmicrosoft.com; s=selector2-fujitsu-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fGvdzhGdKopQh1a7OYLriTI1e3NOhITqSKG3ZAB2tsc=;
- b=J3hu6ABqgnxq0qmhJ28ppzMHqiJJA+Uh4ISJLS9W+63vr1Nvz4VZ/ez9vlx+i0aJ/SG3xSUtOxW/i8u37bxeUgFcbGjDQbp7pHjanVYMetDQpUrfnJBZnQnYNjz4MYcP+oE5DMs3HMq6hTI6GlMC2ZLsX7McUet4gJN/8CYxDPM=
-Received: from TY2PR01MB4427.jpnprd01.prod.outlook.com (2603:1096:404:10d::20)
- by OSAPR01MB2689.jpnprd01.prod.outlook.com (2603:1096:604:1::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.13; Wed, 20 Apr
- 2022 01:27:39 +0000
-Received: from TY2PR01MB4427.jpnprd01.prod.outlook.com
- ([fe80::fca9:dcb9:88b4:40fd]) by TY2PR01MB4427.jpnprd01.prod.outlook.com
- ([fe80::fca9:dcb9:88b4:40fd%7]) with mapi id 15.20.5164.026; Wed, 20 Apr 2022
- 01:27:39 +0000
-From: "xuyang2018.jy@fujitsu.com" <xuyang2018.jy@fujitsu.com>
-To: Christian Brauner <brauner@kernel.org>
-Thread-Topic: [PATCH v4 1/8] fs: move sgid strip operation from
- inode_init_owner into inode_sgid_strip
-Thread-Index: AQHYU9rGMcoXoXAhFUC0+s6Sqe+NAqz3RT4AgADPzgA=
-Date: Wed, 20 Apr 2022 01:27:39 +0000
-Message-ID: <625F6FE6.4010305@fujitsu.com>
-References: <1650368834-2420-1-git-send-email-xuyang2018.jy@fujitsu.com>
- <20220419140508.b6c4uit3u5hmdql4@wittgenstein>
-In-Reply-To: <20220419140508.b6c4uit3u5hmdql4@wittgenstein>
-Accept-Language: zh-CN, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=fujitsu.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 435481f6-8261-4f1a-1758-08da226cf575
-x-ms-traffictypediagnostic: OSAPR01MB2689:EE_
-x-microsoft-antispam-prvs: <OSAPR01MB268903EDE05D2131C76484E5FDF59@OSAPR01MB2689.jpnprd01.prod.outlook.com>
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 7+0fD1+GQW1OSEc1HsHRR76qffGIVob8vPsHyR2nHrY2WIcRbOOmYS4z5RuUUgFCMDKoyHc5na2BtSuVLUk2jRuLNDIctHOpAK+6EJsXTXz2T2H0S2+50BjpBENoeyAMdDE0m9uE0tY2SpfQspTmOIH6LYTdpoSEGcjMq9ql8UR0iiJ0CKbc3euuVb+Sj3xZ0YEnuThLS/SiOCxXyB2kra158UWiXVqzFm1gDk3Lr64oUwQLZzJB8GueA3eIMqmU3WhKVIor9rsSTubzO2XwmVT39CpRcvTm0x4h4D7aDvigubgiSrxd/oHFGl+zvdzkYy85OqXKGOUUUoKTJPfz2kDj8GTuYDACrkG3RTXWEKsA5oNpdgJyT9lVHvInMAaZW+QYAlfjCxcvhK8K+SGLaD9zpNDz3he3gp4PtR1X2TUEcQmEObkcNhrwm/i5ck+2cEBrGkl0PCxmOysfQjZ+ZBv1q0KOmSXqllX+G+1MMPn5ehSQxw0P6RsFqcWg9w1EO+fM1Peh13ydsRZt3EI1duNmvpYArzUkgZlaUNCxoVj3hTs+9SHmjEjSVNgtzt119HKqI/iFBmx3Qi4a3ZbvXf4N/OuHRZ4m7fnnu1a165lfFmW16GyMHvNzx6bVKFObV6T+S/kFU6RP3Z6GRuTutVAjpCq9UpWh+dnte5erexIEKWPeJleEitqfRff/dxEREm5Gb1Yq4dyinJbCZAnygw==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TY2PR01MB4427.jpnprd01.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(4636009)(366004)(82960400001)(26005)(87266011)(4326008)(6506007)(6486002)(5660300002)(508600001)(38100700002)(7416002)(38070700005)(2906002)(8936002)(33656002)(122000001)(45080400002)(186003)(86362001)(6512007)(83380400001)(2616005)(316002)(85182001)(8676002)(54906003)(64756008)(66446008)(91956017)(6916009)(71200400001)(66946007)(76116006)(36756003)(66556008)(66476007);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?RGQ3cVBPY3VSVTFQZjBQME5manl3ZklkZDBJejBKK3AzamxtNGdrQ2xjU2R3?=
- =?utf-8?B?SVVKZ0tVNEZZNHd2M0lpR2ZVUmZRazhGL3VNUncwR0lJQTdlbG9SbStxdG85?=
- =?utf-8?B?WHN4VkxyZmxsczhtTTI0WkQxVnBRcnN3TG1pL0ZmQ3NzbEhwUzdQc3krbkFv?=
- =?utf-8?B?bll6Wk5ENEJvQnZ6M2xNNWZteVlyZUxGZ05GL1RjaXBYeFhqU1dTTHp3UDQ5?=
- =?utf-8?B?OXpPcHZIMEg5YVdvM2M5ZEdGODZleVhpOEVLUktJUkNPSzFtd0JvMnZ1YTJT?=
- =?utf-8?B?ZVZ2Q3RaLzJiWFl1eUlSOG1ZekdCSFJoN3BtZmlnZTgzYmF4S2JVTnBpMVZU?=
- =?utf-8?B?bUQvZmdyNWZ6ejJVTXlySjBneVpBYXBMQlljVC9TU0xTTENZNUxOd1dGL1BT?=
- =?utf-8?B?MFpxcUc4TmVqazdDOGRRQXgzSVdVOXQrQ3FBbDV4OUxyTzdyZzhlc3IySHBD?=
- =?utf-8?B?SmR0UmxLaGhIYmp5anRGcGNNVE5xRENMb1pBS085b2hQcllReXpNellPdFVq?=
- =?utf-8?B?UjN3cTVlV1V0Q2VYWlFhcnBQWU5KTU4yZ3BhanA2Ykt6Sm13RVRVWDhiRHo0?=
- =?utf-8?B?SHBEWmN3YnFLaXdnUUZhdFpZcE1sZW1oZXFSWDkzb1JoSnhka2lIMlByaEVL?=
- =?utf-8?B?dDh4QnpLdHdZVlVlZzJPVGJ6YlJEdGxEdTgzMTNLWEcxYXpSbk9CVDErQ1c3?=
- =?utf-8?B?Y0s0YzR4SWlKeW1jVXpwWHVVcXo2c1JvN1BDNkpFMWZucUxwbXdReDYraGFK?=
- =?utf-8?B?WDNSWldXMzBYczdjWnM0SGFlQWxzMGRRQUVPQ013VlM3OVg2ZmpEYU4zTmNk?=
- =?utf-8?B?WUd0TVlCRUUxRzcyYzdWNktlWkU2ajlvUWtUWUZFZ3FmbGRjNWxCa3hpZStZ?=
- =?utf-8?B?d1NmU09mSFpjazJnODRld1BjVlMyeWdXeEpnOVdKYW9DSWpnNUNoWFp6MjE5?=
- =?utf-8?B?WHdJQ1A5WEpIUnNyYkRZQ05XTEN0akEvbXQwdmJnazVTT00zVUdtL1FqYWl6?=
- =?utf-8?B?OGc0VlVER2FGK1pyZFcydTE2ZCtydTV3NnlkVUhGaUdqbVFmL3FZenhCTEV6?=
- =?utf-8?B?UHcvZDNsVGxrVk13RHZtVWFaQXF0QU1XUVl0ZkNQZ0tkSVIvbmEzK3lpWU5k?=
- =?utf-8?B?NE41YW96RjlGb2gyak1VbFZZanZFZ3FJV0NISnZBdlJlYUV6bjRKN2REVENw?=
- =?utf-8?B?VGFObTdWcDBsbUdORmFOWGVVUk95ODQ3b0JscnZlTDZybVl0bjRNQk5sY0s3?=
- =?utf-8?B?bHprRXZqQ3JKb1lOenJ2YkhpcXUwcDVWeFpmcnFjRlhLR043OG5WNHlrWFNr?=
- =?utf-8?B?czBEdzhPS0lRUFpDVS9MNmtnYjlsTUVLaGYyL0M4Sm5ZZ2dQSVRlVG1uMFg1?=
- =?utf-8?B?WHZCOTBWU1FiT3loNzZDamRXSDhFZFF6NEZGc1h4U3oya3VBOW9KekFiOTF2?=
- =?utf-8?B?S0xwNTU0R0JzekZ4TUJXL2VGTWlkQ0crbWhKN1ZqY1NoVExDMldZNXllSjFz?=
- =?utf-8?B?MjVROVEzTklrcEJJU1hqZk9icGdGVkpIZzAvVDg5Rk1CQW5yUFRtdCtyeFZr?=
- =?utf-8?B?cFJJNlY1LzFQR3N2TnphYXpFNlh3OHFPV2dqblhrSkFmd3grWjc1WVVaR2pk?=
- =?utf-8?B?dVVRTU52bmUyTnVxU2dnV3BldHhOYXE4akFyUzNhT1NOcERIWlZNdkg1SW4w?=
- =?utf-8?B?M1FGaVRJZDVWU2hGd1Fvc2xvSnBITCtxbm5ZSTVyYjVTeWRwenFyZmtCaGwy?=
- =?utf-8?B?TWRsM3Q0YVR2bysxN1U0UDFTeWZNSkx4M29NUzRYMWpCa21ybjE0ZldLa0dD?=
- =?utf-8?B?RTAvZUxxbkVycHFCSW8wcjNZemtpVnJJMXJ3Mm1hekkzYlpjWVpQQ2NqVWpR?=
- =?utf-8?B?bVVZUDFXcmN6NUo2ckFWcFc0TmRUUkRPZW5zRUdUTjkwbktMNjI1Y2paNmo5?=
- =?utf-8?B?KzdqSDVwSEM3MTRZUE9KcnV2ZXBpVVZyRGJrQit4bzJ5YlVNbnZySEJKZXVw?=
- =?utf-8?B?YkZCNDJUTTNpSHZJNDZmZGsyM2dVODBLS2pUSXlFeXJONmduQ044OE9lOTI4?=
- =?utf-8?B?RTNnTmJWZWlTVlI0MEgzVzFmMDd3Vk1lTDA2RTVqQ2xXM3dYcXVWN01iT0Ju?=
- =?utf-8?B?QVQzTmZJMzVzalhLK1ppTUlSTnlJcDZwM0VmUlZzZEFnemZKTm9lK0pFV2dt?=
- =?utf-8?B?a0c0TDA1UStFcUVnN0pZUXBpS0tHT0pKSmJNQmVCQmdHQm5Hczgxdk1IT1RG?=
- =?utf-8?B?TDJJTVJaM3FQZFcrajFtQytGd1lNbHA0TXdwanNZRFE1YnkyelcxVTh6SDRv?=
- =?utf-8?B?TEJGMlFXRFRPZlJ5NHRRRmZsZFAwU3dWTjNoZHl0RzlNZy9xOEl6ZTZxOURu?=
- =?utf-8?Q?cQxMLZPP/LEyoR3InHaurQSq4IKs5ANe4sXET?=
-Content-ID: <4BDC29D4A3266544A4D1B5506A11F6AD@jpnprd01.prod.outlook.com>
+ id 1nh0LX-004LUD-Sa
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 02:45:36 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6F48C61610
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 20 Apr 2022 02:45:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7AE93C385A5;
+ Wed, 20 Apr 2022 02:45:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1650422729;
+ bh=dqJj8cxS5GfPVVKnznBjD5JCJjlatiZ36UsnvCkAqdU=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=t7hyOiEZA5rsal29kufImzA7DtamHpc4g66YlVBPR60X8mdVmNtZmJ0Hqh5VFVosu
+ bhKqxpVCmBmB1Q+prNwfR8uuvz0jp/vdZSyuZYbZLcXfFBiGmJRTEKHb7VtxKY/0D0
+ t3u66PEYuGl1/m2LgpBAy2pVaqxQi9jPj18u0XyD2xgWtONZ/Vqz8dPm91qpDXjSR2
+ mRr42Z96nK7216CHcl8eomJ2StHS7NrJTaOiNk+4H+TMD3E01jmBLSX40LI5JmJjvN
+ X2Ulh88OdGqg7zdT0oS5ZuEmMviajkMyhLY3q9MLmQRxRnRUO5YT5fW/qUaIW1Hl8N
+ jkcJek0od1uRw==
+Message-ID: <47f19561-11a7-9da3-1cf9-78843e0d0ec3@kernel.org>
+Date: Wed, 20 Apr 2022 10:45:25 +0800
 MIME-Version: 1.0
-X-OriginatorOrg: fujitsu.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TY2PR01MB4427.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 435481f6-8261-4f1a-1758-08da226cf575
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Apr 2022 01:27:39.5469 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 0JqUUgRldlvTuP8/VQ6r9PuDJkz3psCXhuazGIrsdXkPdMcgYvqRYAZw+oRw8EL/3Heza1FbsAgH4bZwHd6L9VSHry4SPtlz5Emzc+5BEpo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSAPR01MB2689
-X-Spam-Score: -2.5 (--)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.0
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20220413154920.2024872-1-jaegeuk@kernel.org>
+ <20220413154920.2024872-2-jaegeuk@kernel.org>
+ <d22c42f8-525a-a0a6-2fef-a43b2fc3a2c7@kernel.org>
+ <Yl88F3RVRMfwyB7+@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <Yl88F3RVRMfwyB7+@google.com>
+X-Spam-Score: -9.0 (---------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  on 2022/4/19 22:05, Christian Brauner wrote: > On Tue, Apr
- 19, 2022 at 07:47:07PM +0800, Yang Xu wrote: >> This has no functional change.
- Just create and export inode_sgid_strip api for >> the subsequ [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On 2022/4/20 6:47, Jaegeuk Kim wrote: > On 04/17, Chao Yu
+ wrote: >> On 2022/4/13 23:49, Jaegeuk Kim wrote: >>> Let's attach io_flags
+ to bio only, so that we can merge IOs given original >>> io_flags o [...]
+ Content analysis details:   (-9.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [68.232.159.90 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1ngz8L-004JL9-LL
-Subject: Re: [f2fs-dev] [PATCH v4 1/8] fs: move sgid strip operation from
- inode_init_owner into inode_sgid_strip
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -3.2 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nh0LX-004LUD-Sa
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: keep io_flags to avoid IO split
+ due to different op_flags in two fio holders
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -198,74 +109,110 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-nfs@vger.kernel.org" <linux-nfs@vger.kernel.org>,
- "djwong@kernel.org" <djwong@kernel.org>,
- "david@fromorbit.com" <david@fromorbit.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>,
- "viro@zeniv.linux.org.uk" <viro@zeniv.linux.org.uk>,
- "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
- "jlayton@kernel.org" <jlayton@kernel.org>,
- "ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
- "ntfs3@lists.linux.dev" <ntfs3@lists.linux.dev>
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-on 2022/4/19 22:05, Christian Brauner wrote:
-> On Tue, Apr 19, 2022 at 07:47:07PM +0800, Yang Xu wrote:
->> This has no functional change. Just create and export inode_sgid_strip api for
->> the subsequent patch. This function is used to strip S_ISGID mode when init
->> a new inode.
+On 2022/4/20 6:47, Jaegeuk Kim wrote:
+> On 04/17, Chao Yu wrote:
+>> On 2022/4/13 23:49, Jaegeuk Kim wrote:
+>>> Let's attach io_flags to bio only, so that we can merge IOs given original
+>>> io_flags only.
+>>>
+>>> Fixes: 64bf0eef0171 ("f2fs: pass the bio operation to bio_alloc_bioset")
 >>
->> Acked-by: Christian Brauner (Microsoft)<brauner@kernel.org>
->> Signed-off-by: Yang Xu<xuyang2018.jy@fujitsu.com>
->> ---
->>   fs/inode.c         | 22 ++++++++++++++++++----
->>   include/linux/fs.h |  3 ++-
->>   2 files changed, 20 insertions(+), 5 deletions(-)
+>> Nice catch.
 >>
->> diff --git a/fs/inode.c b/fs/inode.c
->> index 9d9b422504d1..3215e61a0021 100644
->> --- a/fs/inode.c
->> +++ b/fs/inode.c
->> @@ -2246,10 +2246,8 @@ void inode_init_owner(struct user_namespace *mnt_userns, struct inode *inode,
->>   		/* Directories are special, and always inherit S_ISGID */
->>   		if (S_ISDIR(mode))
->>   			mode |= S_ISGID;
->> -		else if ((mode&  (S_ISGID | S_IXGRP)) == (S_ISGID | S_IXGRP)&&
->> -			 !in_group_p(i_gid_into_mnt(mnt_userns, dir))&&
->> -			 !capable_wrt_inode_uidgid(mnt_userns, dir, CAP_FSETID))
->> -			mode&= ~S_ISGID;
->> +		else
->> +			inode_sgid_strip(mnt_userns, dir,&mode);
->>   	} else
->>   		inode_fsgid_set(inode, mnt_userns);
->>   	inode->i_mode = mode;
->> @@ -2405,3 +2403,19 @@ struct timespec64 current_time(struct inode *inode)
->>   	return timestamp_truncate(now, inode);
->>   }
->>   EXPORT_SYMBOL(current_time);
->> +
->> +void inode_sgid_strip(struct user_namespace *mnt_userns,
->> +		      const struct inode *dir, umode_t *mode)
->> +{
->
-> I think with Willy agreeing in an earlier version with me and you
-> needing to resend anyway I'd say have this return umode_t instead of
-> passing a pointer.
+>> Wasn't this bug introduced by:
+> 
+> I don't think so.
 
-IMO, I am fine with your and Willy way. But I need a reason otherwise
-I can't convince myself why not use mode pointer directly.
+Oh, correct, it looks in original patch, we only attach IO flag before
+__submit_bio().
 
-I have asked you and Willy before why return umode_t value is better, 
-why not modify mode pointer directly? Since we have use mode as 
-argument, why not modify mode pointer directly in function?
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-Also the function name(inode_sgid_strip and prepare_mode) has  expressed 
-their function clearly.
+Thanks,
 
+> 
+>>
+>> commit da9953b729c1 ("f2fs: introduce sysfs/data_io_flag to attach REQ_META/FUA")
+>>
+>> static void __attach_data_io_flag(struct f2fs_io_info *fio)
+>> {
+>> ...
+>>         if ((1 << fio->temp) & meta_flag)
+>>                 fio->op_flags |= REQ_META;
+>>         if ((1 << fio->temp) & fua_flag)
+>>                 fio->op_flags |= REQ_FUA;
+>> ...
+>>
+>> Thanks,
+>>
+>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>> ---
+>>>    fs/f2fs/data.c | 33 +++++++++++++++++++++------------
+>>>    1 file changed, 21 insertions(+), 12 deletions(-)
+>>>
+>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+>>> index acc523f893ba..fcf0daa386de 100644
+>>> --- a/fs/f2fs/data.c
+>>> +++ b/fs/f2fs/data.c
+>>> @@ -387,11 +387,23 @@ int f2fs_target_device_index(struct f2fs_sb_info *sbi, block_t blkaddr)
+>>>    	return 0;
+>>>    }
+>>> -static void __attach_io_flag(struct f2fs_io_info *fio, unsigned int io_flag)
+>>> +static unsigned int f2fs_io_flags(struct f2fs_io_info *fio)
+>>>    {
+>>>    	unsigned int temp_mask = (1 << NR_TEMP_TYPE) - 1;
+>>> -	unsigned int fua_flag = io_flag & temp_mask;
+>>> -	unsigned int meta_flag = (io_flag >> NR_TEMP_TYPE) & temp_mask;
+>>> +	unsigned int fua_flag, meta_flag, io_flag;
+>>> +	unsigned int op_flags = 0;
+>>> +
+>>> +	if (fio->op != REQ_OP_WRITE)
+>>> +		return 0;
+>>> +	if (fio->type == DATA)
+>>> +		io_flag = fio->sbi->data_io_flag;
+>>> +	else if (fio->type == NODE)
+>>> +		io_flag = fio->sbi->node_io_flag;
+>>> +	else
+>>> +		return 0;
+>>> +
+>>> +	fua_flag = io_flag & temp_mask;
+>>> +	meta_flag = (io_flag >> NR_TEMP_TYPE) & temp_mask;
+>>>    	/*
+>>>    	 * data/node io flag bits per temp:
+>>> @@ -400,9 +412,10 @@ static void __attach_io_flag(struct f2fs_io_info *fio, unsigned int io_flag)
+>>>    	 * Cold | Warm | Hot | Cold | Warm | Hot |
+>>>    	 */
+>>>    	if ((1 << fio->temp) & meta_flag)
+>>> -		fio->op_flags |= REQ_META;
+>>> +		op_flags |= REQ_META;
+>>>    	if ((1 << fio->temp) & fua_flag)
+>>> -		fio->op_flags |= REQ_FUA;
+>>> +		op_flags |= REQ_FUA;
+>>> +	return op_flags;
+>>>    }
+>>>    static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
+>>> @@ -412,14 +425,10 @@ static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
+>>>    	sector_t sector;
+>>>    	struct bio *bio;
+>>> -	if (fio->type == DATA)
+>>> -		__attach_io_flag(fio, sbi->data_io_flag);
+>>> -	else if (fio->type == NODE)
+>>> -		__attach_io_flag(fio, sbi->node_io_flag);
+>>> -
+>>>    	bdev = f2fs_target_device(sbi, fio->new_blkaddr, &sector);
+>>> -	bio = bio_alloc_bioset(bdev, npages, fio->op | fio->op_flags, GFP_NOIO,
+>>> -			       &f2fs_bioset);
+>>> +	bio = bio_alloc_bioset(bdev, npages,
+>>> +				fio->op | fio->op_flags | f2fs_io_flags(fio),
+>>> +				GFP_NOIO, &f2fs_bioset);
+>>>    	bio->bi_iter.bi_sector = sector;
+>>>    	if (is_read_io(fio->op)) {
+>>>    		bio->bi_end_io = f2fs_read_end_io;
 
 
 _______________________________________________
