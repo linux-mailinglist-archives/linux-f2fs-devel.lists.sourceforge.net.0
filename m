@@ -2,85 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A4BC507F05
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Apr 2022 04:45:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E6F6507FBA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Apr 2022 06:02:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nh0La-0003ZB-Dx; Wed, 20 Apr 2022 02:45:37 +0000
+	id 1nh1Y1-0007F6-8r; Wed, 20 Apr 2022 04:02:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nh0LZ-0003Z5-Gl
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 02:45:36 +0000
+ (envelope-from <mcgrof@kernel.org>) id 1nh1Xz-0007Ez-G1
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 04:02:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8IKhjIvFr29ZMESXzsimRJOPTN0Pz37lwOkipPbskCE=; b=moOuc7wok6QRKersJRPk0xiLNy
- FLLK7sYWbiO9R/nUAhuzAbGu0XYvkWRjxO0jidUyHT4daYX6ixpYcrlN8jkivH4lkuH5lrwFO901s
- sSqHi4alP3vTDoNu18JQDdhiZewRgIyo7HBdCIo+3S6x9FaJL39yA3LsLS1sb+sn/YYg=;
+ bh=x8R7mXHv2E9Gmn7gfmk5ClKc3Bcn7khtUwFYAqiLiqE=; b=X1nVnNuqS2wbk9YQjVJPNU9jIe
+ 8gtwKOB6N0jhdvMXcX7KB3DUze2U6E13OnhPxcpAYy55DoBY3QQuaTgZpUq7V4RPVO9HOqL9A5Lqt
+ ef6Fvl00bmnKb8EeXujMPNnDXN412BQfy8Olwhn1iKuO5kw5aoA5D3YiUht2n2XaumBw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8IKhjIvFr29ZMESXzsimRJOPTN0Pz37lwOkipPbskCE=; b=KP01y/7oHBcNh3khAMFuS7QZO/
- P33ZVglr1E5j+GAHiWSN0EKhV9R1gybvl6APuqjJquooTvyJxoaBttgCNuXIrS+n1RsetkT2/mf+M
- 3hxglG53Vwuj1tTaZy2QnMIye0eh7ZNqvVBvOwGkjPkr+0gw6RRYvEWabAWiiNGex9WA=;
+ bh=x8R7mXHv2E9Gmn7gfmk5ClKc3Bcn7khtUwFYAqiLiqE=; b=izYBbBZqK/uvN/MJjZhOHAcac3
+ csSrx4JLUSFQ5zH9YIfpGbaAiY2YafIhTdjMqfBLUalW2SrGytlZ+9QxaZ7v9l/LU/nVpMy0l4Gcd
+ /cgr8zIbvEypT+g4cxmxJe2f+SODZLbq4FOXUNZRzFRpr3lXAkS7E6qmz1SG3qlYXH44=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nh0LX-004LUD-Sa
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 02:45:36 +0000
+ id 1nh1Xw-004NRt-50
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 20 Apr 2022 04:02:32 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6F48C61610
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AE57D616D6
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 20 Apr 2022 02:45:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7AE93C385A5;
- Wed, 20 Apr 2022 02:45:28 +0000 (UTC)
+ Wed, 20 Apr 2022 04:02:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 042FDC385A0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 20 Apr 2022 04:02:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1650422729;
- bh=dqJj8cxS5GfPVVKnznBjD5JCJjlatiZ36UsnvCkAqdU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=t7hyOiEZA5rsal29kufImzA7DtamHpc4g66YlVBPR60X8mdVmNtZmJ0Hqh5VFVosu
- bhKqxpVCmBmB1Q+prNwfR8uuvz0jp/vdZSyuZYbZLcXfFBiGmJRTEKHb7VtxKY/0D0
- t3u66PEYuGl1/m2LgpBAy2pVaqxQi9jPj18u0XyD2xgWtONZ/Vqz8dPm91qpDXjSR2
- mRr42Z96nK7216CHcl8eomJ2StHS7NrJTaOiNk+4H+TMD3E01jmBLSX40LI5JmJjvN
- X2Ulh88OdGqg7zdT0oS5ZuEmMviajkMyhLY3q9MLmQRxRnRUO5YT5fW/qUaIW1Hl8N
- jkcJek0od1uRw==
-Message-ID: <47f19561-11a7-9da3-1cf9-78843e0d0ec3@kernel.org>
-Date: Wed, 20 Apr 2022 10:45:25 +0800
+ s=k20201202; t=1650427334;
+ bh=rWPTIEy8yYReWX0HRAZ5B5jMc0RwXDYkgDQRPbIhahg=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=udj+Ysm9HMxwhKeJmEKQwVLozGFbLd7V4DLVkRuuZjWPuadUCa3lenfQJUH64uorf
+ 41sgdWrS5y+espyiFV8FoZrw/NOiaOQQGGxxndmisCxLXmo1hyVG9By1viVWYWcM84
+ 0A+p8uRYfgm6zwiIMfFzqOX9oT+uS+flOM+r4oE4R7Aw05qbxSmqiRl0puVP8dDfBN
+ Ahr5o/PZq0QpI1dlnKdqRPfCNS6ANGO5KCLgQrEsLznWDUpOEkFBnjTVoQJz9kxbwl
+ G6ezipktBHn07+YDnn+6v9Ve7ChnY7TGNO1xMUXxYJxOj31mh3L9wbY0blfO6/l0Ut
+ IZuY3jnx1bqXg==
+Received: by mail-ot1-f41.google.com with SMTP id
+ l9-20020a056830268900b006054381dd35so339502otu.4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 19 Apr 2022 21:02:13 -0700 (PDT)
+X-Gm-Message-State: AOAM533vcM2srPRFMlpqzA/3wIXmfjY0aBO8MB4W6qaBirA+FWD1RRG4
+ tBcascCsowGcbCQfn2xTnZ/1ezc6YVKAeblXrK8=
+X-Google-Smtp-Source: ABdhPJywGk6fJNPAU789SetJ7XIlQLirF3U4AFhxxj9qPcJLaKDm51KkhNRo7HZ38lhe7ZOaEIofgMJDvPLKFe8Kl94=
+X-Received: by 2002:a9d:1f5:0:b0:605:4b5e:93d2 with SMTP id
+ e108-20020a9d01f5000000b006054b5e93d2mr5053391ote.234.1650427333083; Tue, 19
+ Apr 2022 21:02:13 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Content-Language: en-US
+References: <CAB=NE6U7AnJf3_eHG_ZmVA66YfjH4rT+7dYiHgEurArpQS489g@mail.gmail.com>
+ <Yl86tKxvBN6lHoma@google.com>
+ <CAB=NE6W3r_O5L30pPLJ9s12ahfBGvudFAKyLbO_1=JCf2bDTkg@mail.gmail.com>
+ <Yl8/2cPCkSZ17hxN@google.com>
+ <CAB=NE6U+KbnFPd+EYEhXxF7o4DSB58k-uGevC6y1h2SSE2sbtA@mail.gmail.com>
+In-Reply-To: <CAB=NE6U+KbnFPd+EYEhXxF7o4DSB58k-uGevC6y1h2SSE2sbtA@mail.gmail.com>
+From: Luis Chamberlain <mcgrof@kernel.org>
+Date: Tue, 19 Apr 2022 21:02:01 -0700
+X-Gmail-Original-Message-ID: <CAB=NE6X8e48pvKd+4Ms3c89gcUzh58Nd-n_xxyD5HRkEGbks3A@mail.gmail.com>
+Message-ID: <CAB=NE6X8e48pvKd+4Ms3c89gcUzh58Nd-n_xxyD5HRkEGbks3A@mail.gmail.com>
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20220413154920.2024872-1-jaegeuk@kernel.org>
- <20220413154920.2024872-2-jaegeuk@kernel.org>
- <d22c42f8-525a-a0a6-2fef-a43b2fc3a2c7@kernel.org>
- <Yl88F3RVRMfwyB7+@google.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <Yl88F3RVRMfwyB7+@google.com>
-X-Spam-Score: -9.0 (---------)
+X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/4/20 6:47, Jaegeuk Kim wrote: > On 04/17, Chao Yu
- wrote: >> On 2022/4/13 23:49, Jaegeuk Kim wrote: >>> Let's attach io_flags
- to bio only, so that we can merge IOs given original >>> io_flags o [...]
- Content analysis details:   (-9.0 points, 6.0 required)
+ Content preview:  On Tue, Apr 19,
+ 2022 at 4:26 PM Luis Chamberlain <mcgrof@kernel.org>
+ wrote: > Oh... so this is not upstream... I see.. ok hrm.. Any plans to try
+ to upstream your delta? Luis 
+ Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -90,14 +103,10 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -3.2 NICE_REPLY_A           Looks like a legit reply (A)
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nh0LX-004LUD-Sa
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: keep io_flags to avoid IO split
- due to different op_flags in two fio holders
+X-Headers-End: 1nh1Xw-004NRt-50
+Subject: Re: [f2fs-dev] Baseline for f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,110 +118,17 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Pankaj Raghav <pankydev8@gmail.com>, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/4/20 6:47, Jaegeuk Kim wrote:
-> On 04/17, Chao Yu wrote:
->> On 2022/4/13 23:49, Jaegeuk Kim wrote:
->>> Let's attach io_flags to bio only, so that we can merge IOs given original
->>> io_flags only.
->>>
->>> Fixes: 64bf0eef0171 ("f2fs: pass the bio operation to bio_alloc_bioset")
->>
->> Nice catch.
->>
->> Wasn't this bug introduced by:
-> 
-> I don't think so.
+On Tue, Apr 19, 2022 at 4:26 PM Luis Chamberlain <mcgrof@kernel.org> wrote:
+> Oh... so this is not upstream...  I see.. ok hrm..
 
-Oh, correct, it looks in original patch, we only attach IO flag before
-__submit_bio().
+Any plans to try to upstream your delta?
 
-Reviewed-by: Chao Yu <chao@kernel.org>
-
-Thanks,
-
-> 
->>
->> commit da9953b729c1 ("f2fs: introduce sysfs/data_io_flag to attach REQ_META/FUA")
->>
->> static void __attach_data_io_flag(struct f2fs_io_info *fio)
->> {
->> ...
->>         if ((1 << fio->temp) & meta_flag)
->>                 fio->op_flags |= REQ_META;
->>         if ((1 << fio->temp) & fua_flag)
->>                 fio->op_flags |= REQ_FUA;
->> ...
->>
->> Thanks,
->>
->>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>> ---
->>>    fs/f2fs/data.c | 33 +++++++++++++++++++++------------
->>>    1 file changed, 21 insertions(+), 12 deletions(-)
->>>
->>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>> index acc523f893ba..fcf0daa386de 100644
->>> --- a/fs/f2fs/data.c
->>> +++ b/fs/f2fs/data.c
->>> @@ -387,11 +387,23 @@ int f2fs_target_device_index(struct f2fs_sb_info *sbi, block_t blkaddr)
->>>    	return 0;
->>>    }
->>> -static void __attach_io_flag(struct f2fs_io_info *fio, unsigned int io_flag)
->>> +static unsigned int f2fs_io_flags(struct f2fs_io_info *fio)
->>>    {
->>>    	unsigned int temp_mask = (1 << NR_TEMP_TYPE) - 1;
->>> -	unsigned int fua_flag = io_flag & temp_mask;
->>> -	unsigned int meta_flag = (io_flag >> NR_TEMP_TYPE) & temp_mask;
->>> +	unsigned int fua_flag, meta_flag, io_flag;
->>> +	unsigned int op_flags = 0;
->>> +
->>> +	if (fio->op != REQ_OP_WRITE)
->>> +		return 0;
->>> +	if (fio->type == DATA)
->>> +		io_flag = fio->sbi->data_io_flag;
->>> +	else if (fio->type == NODE)
->>> +		io_flag = fio->sbi->node_io_flag;
->>> +	else
->>> +		return 0;
->>> +
->>> +	fua_flag = io_flag & temp_mask;
->>> +	meta_flag = (io_flag >> NR_TEMP_TYPE) & temp_mask;
->>>    	/*
->>>    	 * data/node io flag bits per temp:
->>> @@ -400,9 +412,10 @@ static void __attach_io_flag(struct f2fs_io_info *fio, unsigned int io_flag)
->>>    	 * Cold | Warm | Hot | Cold | Warm | Hot |
->>>    	 */
->>>    	if ((1 << fio->temp) & meta_flag)
->>> -		fio->op_flags |= REQ_META;
->>> +		op_flags |= REQ_META;
->>>    	if ((1 << fio->temp) & fua_flag)
->>> -		fio->op_flags |= REQ_FUA;
->>> +		op_flags |= REQ_FUA;
->>> +	return op_flags;
->>>    }
->>>    static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
->>> @@ -412,14 +425,10 @@ static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
->>>    	sector_t sector;
->>>    	struct bio *bio;
->>> -	if (fio->type == DATA)
->>> -		__attach_io_flag(fio, sbi->data_io_flag);
->>> -	else if (fio->type == NODE)
->>> -		__attach_io_flag(fio, sbi->node_io_flag);
->>> -
->>>    	bdev = f2fs_target_device(sbi, fio->new_blkaddr, &sector);
->>> -	bio = bio_alloc_bioset(bdev, npages, fio->op | fio->op_flags, GFP_NOIO,
->>> -			       &f2fs_bioset);
->>> +	bio = bio_alloc_bioset(bdev, npages,
->>> +				fio->op | fio->op_flags | f2fs_io_flags(fio),
->>> +				GFP_NOIO, &f2fs_bioset);
->>>    	bio->bi_iter.bi_sector = sector;
->>>    	if (is_read_io(fio->op)) {
->>>    		bio->bi_end_io = f2fs_read_end_io;
+  Luis
 
 
 _______________________________________________
