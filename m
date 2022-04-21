@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E0FC50AB55
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Apr 2022 00:19:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A2A150AB58
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Apr 2022 00:19:14 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nhf8n-0007wZ-N3; Thu, 21 Apr 2022 22:19:08 +0000
+	id 1nhf8r-0007xh-Qw; Thu, 21 Apr 2022 22:19:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bart.vanassche@gmail.com>) id 1nhf8m-0007wG-7x
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 22:19:07 +0000
+ (envelope-from <bart.vanassche@gmail.com>) id 1nhf8p-0007x8-P1
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 22:19:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tKDEEADIYQVytDvYqKLcVedQjfgIjM2wttb1wHl0dTg=; b=JPEI9KMhvwwgS9IoZ2J3FmkL67
- a+erL3XW46etCp1+OwBPj3NX2NwEXI3LisYEqnPxB2c0iotvHbHWZtLVE08qj2jhkA20Eg873E19q
- vWy2ICWkrvcGLAa2HXbhQ4vXg8OTiuheZG+UmLPyR3QJXcg8q4OVy3HAF6So8HI8FJGQ=;
+ bh=OaT6zCE4dp7MnUL4LCoGf06ofFrGt4oAQFn/LF2mxJA=; b=L+jU9KVuuMITb9gf3swYnbyYq/
+ O6ux2i6S7uUf8w1I7asf3RHOGFukTuTn87iaKQkZDt4xwwp4U0B+toFFJziidHgicuIpNCKeaI4xE
+ favghbmZchz49RVQOaflN2aGfoB0J7bnaWaG22UoOttqKlZM3x71ZR9HOnP3QaY90/II=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,44 +29,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tKDEEADIYQVytDvYqKLcVedQjfgIjM2wttb1wHl0dTg=; b=J1yZc3sVgDK8b6YMDwy2l7C6zi
- ub3gHGhR8pTR90+7O/Bbd5p3mYVgW12Q7LyYuQ0Ujfnltk//cWv6rP3FaSZsYIwwJrGXH5d5iMkan
- Gw3VuO60hL99hd79jxZECs0U8DjmS/aPBIA0gCmLRyI3WifL0ivrrZvqUwcn3C8MDtG8=;
-Received: from mail-pl1-f182.google.com ([209.85.214.182])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=OaT6zCE4dp7MnUL4LCoGf06ofFrGt4oAQFn/LF2mxJA=; b=XUPjeGP/scii6Kt0olqg7WoXFo
+ MsRWt/EHE74RLO6lzNJvYUn0MU+ZgGHDvoaHHxp8vzn/uiaLvAq7wAInKpkDGtOzy4Wd7xoBEmeUN
+ fDZ5PM4J7GoLKQaDWG72XUd7CFG8lbTC32xqOHhGpgD9+xzEzKn+JDKPBWKWAhlFI920=;
+Received: from mail-pl1-f171.google.com ([209.85.214.171])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nhf8k-0002vJ-M3
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 22:19:07 +0000
-Received: by mail-pl1-f182.google.com with SMTP id q1so5595188plx.13
+ id 1nhf8l-005sPJ-SM
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 22:19:09 +0000
+Received: by mail-pl1-f171.google.com with SMTP id h12so3098584plf.12
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Apr 2022 15:19:06 -0700 (PDT)
+ Thu, 21 Apr 2022 15:19:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=tKDEEADIYQVytDvYqKLcVedQjfgIjM2wttb1wHl0dTg=;
- b=bbh22eM+GrG4rsbtgyUuDqoMHpuUphx7AX4Gf+ovlQZnrBh9g/B/qoB5gOqoNds9Ts
- 8Rv6we8tMMHzczW7YAvPl2xBqSsMD7djcNB34lM7w1SrF4j0rVY5wRvH9rDP9vOS/Ts+
- bi5Q2ykaRWANvMbqkY+hfY4/lOqBP8s4fw7PHP2IYCJH2H+1Dp5PX89u30RgSscKa2T8
- 160NbBwelWFzrgU7ZcznBguYd3VUTXnywXn/RhJRuv5MPS9alrRJK+KUAk/4inU2JHZ6
- Y1NjkBeoJ5Hv27r0NI6p4zIOH2BcQTLq3lVd0deg3goS8nYCB+A0SczUrh84gJRBFiMC
- 50lg==
-X-Gm-Message-State: AOAM531SiiwOwBmRhxySD919omvjHl1SrvEI9OhrFn44z2wBVdCPTtiO
- iaTpjAiX98swORnn2oknDk4Hi+M8gMP6qw==
-X-Google-Smtp-Source: ABdhPJzGI31kx5LkWHDC3M/jGtUVBBNkfaJI/vxFwfqL8AK4v/58HzUYvLkscS1q8Jn+MD38/5+dbg==
-X-Received: by 2002:a17:90b:3c47:b0:1cb:8121:dcc8 with SMTP id
- pm7-20020a17090b3c4700b001cb8121dcc8mr12898347pjb.35.1650579541005; 
- Thu, 21 Apr 2022 15:19:01 -0700 (PDT)
+ bh=OaT6zCE4dp7MnUL4LCoGf06ofFrGt4oAQFn/LF2mxJA=;
+ b=ckK9SN8kK+p1P8qaZ6jVVrYbkeOwz1Idp5Bra6VlTmcuB2h1SAO2o3L2NBi6Pj4LTf
+ Awz4QfnTenR2bVkRkZ4Yabn//dog0XSPb154l62MmRtv7F3Y1NidePLaN77JCXY+HhL2
+ aU1IsmZFN3HOcWxrvYtKZNbA+toyh12y8By+adG/BTN5u6MTgXq91CrHXxAGTclVaUHD
+ WRSL0np1xBy4/Xy7iVfTTnyni4yKoA8O5sY4cywhU5FH6wo7K8Rd4omUv+itIouUT3Mv
+ xMGUJfKzL1aGka+O3W3Qn3F6qui9YVQyBXxrRCR6JK+KWaFXt7Qptei2khVgpF7KaWsF
+ DLSg==
+X-Gm-Message-State: AOAM530RTSULC4hKmQfDN7E0EJS8ynuPSMkJ91sYqhemcDp6RBRwSU8g
+ nFutgmphFpnp1wMsyWKNQ3c=
+X-Google-Smtp-Source: ABdhPJxP4uX4VNCpcwLmes3muaupzAz83/yVR03y/uVo0uY207T8GsnkGP2C6BBDhGBSFOFaxauzTA==
+X-Received: by 2002:a17:90a:6d96:b0:1c9:c1de:ef2f with SMTP id
+ a22-20020a17090a6d9600b001c9c1deef2fmr12651555pjk.210.1650579542301; 
+ Thu, 21 Apr 2022 15:19:02 -0700 (PDT)
 Received: from bvanassche-linux.mtv.corp.google.com
  ([2620:15c:211:201:a034:31d8:ca4e:1f35])
  by smtp.gmail.com with ESMTPSA id
- hi21-20020a17090b30d500b001cd4989ff4csm3794876pjb.19.2022.04.21.15.18.59
+ hi21-20020a17090b30d500b001cd4989ff4csm3794876pjb.19.2022.04.21.15.19.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Apr 2022 15:19:00 -0700 (PDT)
+ Thu, 21 Apr 2022 15:19:01 -0700 (PDT)
 From: Bart Van Assche <bvanassche@acm.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Thu, 21 Apr 2022 15:18:13 -0700
-Message-Id: <20220421221836.3935616-9-bvanassche@acm.org>
+Date: Thu, 21 Apr 2022 15:18:14 -0700
+Message-Id: <20220421221836.3935616-10-bvanassche@acm.org>
 X-Mailer: git-send-email 2.36.0.rc2.479.g8af0fa9b8e-goog
 In-Reply-To: <20220421221836.3935616-1-bvanassche@acm.org>
 References: <20220421221836.3935616-1-bvanassche@acm.org>
@@ -78,9 +78,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  For those who use Github to contribute f2fs-tools patches,
- let the github servers build the f2fs-tools source code upon every push and
- pull requests. This change does not affect users who do not use G [...] 
+ Content preview: Prepare for verifying structure sizes with static_assert().
+ Signed-off-by: Bart Van Assche <bvanassche@acm.org> --- fsck/f2fs.h | 4 ++--
+ include/f2fs_fs.h | 2 +- 2 files changed, 3 insertions(+), 3 deletions(-)
  Content analysis details:   (0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,16 +90,15 @@ X-Spam-Report: Spam detection software,
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [bart.vanassche[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.182 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.214.171 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.182 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ no trust [209.85.214.171 listed in list.dnswl.org]
  0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
  EnvelopeFrom freemail headers are different
-X-Headers-End: 1nhf8k-0002vJ-M3
-Subject: [f2fs-dev] [PATCH 08/31] ci: Build f2fstools upon push and pull
- requests
+X-Headers-End: 1nhf8l-005sPJ-SM
+Subject: [f2fs-dev] [PATCH 09/31] Change one array member into a flexible
+ array member
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,92 +116,49 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-For those who use Github to contribute f2fs-tools patches, let the
-github servers build the f2fs-tools source code upon every push and pull
-requests. This change does not affect users who do not use Github.
+Prepare for verifying structure sizes with static_assert().
 
 Signed-off-by: Bart Van Assche <bvanassche@acm.org>
 ---
- .github/workflows/ci.yml | 70 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 70 insertions(+)
- create mode 100644 .github/workflows/ci.yml
+ fsck/f2fs.h       | 4 ++--
+ include/f2fs_fs.h | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
-new file mode 100644
-index 000000000000..0c774f92fac8
---- /dev/null
-+++ b/.github/workflows/ci.yml
-@@ -0,0 +1,70 @@
-+# See also https://docs.github.com/en/actions/learn-github-actions/expressions
-+# See also https://github.com/marketplace/actions/setup-android-ndk
-+
-+name: CI
-+
-+on: [push, pull_request]
-+
-+jobs:
-+  build:
-+    runs-on: ubuntu-latest
-+    strategy:
-+      fail-fast: false
-+      matrix:
-+        build:
-+        - android
-+        - linux-gcc
-+        - linux-clang
-+        - linux-x86-gcc
-+        - linux-powerpc64-gcc
-+        - linux-mingw64-gcc
-+        - macos
-+        include:
-+        - build: android
-+          cc: clang
-+          host: aarch64-linux-android32
-+        - build: linux-gcc
-+          cc: gcc
-+        - build: linux-clang
-+          cc: clang
-+        - build: linux-x86-gcc
-+          cc: gcc
-+          arch: x86
-+        - build: linux-powerpc64-gcc
-+          cc: gcc
-+          host: powerpc64-linux-gnu
-+        - build: linux-mingw64-gcc
-+          cc: gcc
-+          host: x86_64-w64-mingw32
-+          cflags: -D__USE_MINGW_ANSI_STDIO
-+        - build: macos
-+          cc: clang
-+          os: macos-latest
-+    steps:
-+      - uses: actions/checkout@v3
-+      - name: Install Android NDK
-+        run: |
-+          if [ ${{matrix.build}} = android ]; then \
-+              wget --quiet https://dl.google.com/android/repository/android-ndk-r24-linux.zip; \
-+              unzip -q android-ndk-r24-linux.zip;  \
-+          fi
-+      - name: Install Ubuntu packages
-+        run: |
-+          sudo apt-get -q update
-+          case "${{matrix.host}}" in                                        \
-+            x86_64-w64-mingw32)                                             \
-+              sudo apt-get -q install -y binutils-mingw-w64 gcc-mingw-w64;; \
-+            powerpc64-linux-gnu)                                            \
-+              sudo apt-get -q install -y binutils-powerpc64-linux-gnu       \
-+              gcc-powerpc64-linux-gnu;;                                     \
-+          esac
-+      - name: Build
-+        run: |
-+          echo "HOST=${{matrix.host}}"
-+          NDK=$PWD/android-ndk-r24/toolchains/llvm/prebuilt/linux-x86_64/bin
-+          export PATH="$NDK:$PATH"
-+          ./autogen.sh
-+          ./configure --host=${{matrix.host}} \
-+              CC=${{ matrix.host && format('{0}-{1}', matrix.host, matrix.cc) || matrix.cc }} \
-+              CFLAGS="${{matrix.cflags}}"
-+          make -j$(nproc)
+diff --git a/fsck/f2fs.h b/fsck/f2fs.h
+index 7fb328ff8861..eacfd42478b8 100644
+--- a/fsck/f2fs.h
++++ b/fsck/f2fs.h
+@@ -381,7 +381,7 @@ static inline void *__bitmap_ptr(struct f2fs_sb_info *sbi, int flag)
+ 					CP_MIN_CHKSUM_OFFSET)
+ 			chksum_size = sizeof(__le32);
+ 
+-		return &ckpt->sit_nat_version_bitmap + offset + chksum_size;
++		return &ckpt->sit_nat_version_bitmap[offset + chksum_size];
+ 	}
+ 
+ 	if (le32_to_cpu(F2FS_RAW_SUPER(sbi)->cp_payload) > 0) {
+@@ -392,7 +392,7 @@ static inline void *__bitmap_ptr(struct f2fs_sb_info *sbi, int flag)
+ 	} else {
+ 		offset = (flag == NAT_BITMAP) ?
+ 			le32_to_cpu(ckpt->sit_ver_bitmap_bytesize) : 0;
+-		return &ckpt->sit_nat_version_bitmap + offset;
++		return &ckpt->sit_nat_version_bitmap[offset];
+ 	}
+ }
+ 
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index 1e38d93ff40d..e6fc8a0e08f6 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -832,7 +832,7 @@ struct f2fs_checkpoint {
+ 	unsigned char alloc_type[MAX_ACTIVE_LOGS];
+ 
+ 	/* SIT and NAT version bitmap */
+-	unsigned char sit_nat_version_bitmap[1];
++	unsigned char sit_nat_version_bitmap[];
+ } __attribute__((packed));
+ 
+ #define CP_BITMAP_OFFSET	\
 
 
 _______________________________________________
