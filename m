@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5CC950AB64
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Apr 2022 00:19:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A98050AB65
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Apr 2022 00:19:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nhf97-0005Qm-7P; Thu, 21 Apr 2022 22:19:30 +0000
+	id 1nhf9B-0001o5-CL; Thu, 21 Apr 2022 22:19:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bart.vanassche@gmail.com>) id 1nhf95-0005Pz-Oq
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 22:19:28 +0000
+ (envelope-from <bart.vanassche@gmail.com>) id 1nhf9A-0001nd-3Z
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 22:19:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=47F3YavIqtOahrtYKZfh2cVMDeC/3NDFumH2A5ynDRo=; b=aJSRp4bBnm1mrZd5ZHt3RFxeXp
- m/voNt0ma7LS+x0ap2ZvK2to5QAy0YoqzL6d9Wm8L3nhBMeXS9V6aSI4VdRQ0OYQzai5qvGnZ99x9
- MD8s9UtnhCab+M4EduRG3He8gTtcTYJ+/p1mEzp3iYO/x88dstqp61minl/idgFTqpX8=;
+ bh=kr6o/ffcroC8ZFV7QVSAoVWXW1Mh66w9qZqxDoEsaE4=; b=EAOj/7Fo1JHQxCbNbSRcD8zCYk
+ 0eEnzepC0tMDU9eryX1RKosvPw84hL93NXmAKXucotacquTS1auTRua50elUXOxaI2QAvGI/gPK4h
+ L2ONt/pPbjK2/DSQwX8xshvfVADIbpeulTQINL3yeuVWwDaHNAsRaaMn2xugboLkJxBk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,44 +29,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=47F3YavIqtOahrtYKZfh2cVMDeC/3NDFumH2A5ynDRo=; b=Sp2sfjQjO5tOZE73kI41N8/Eo1
- 71WHeOAbtcwD9LsvSEkgCb8t100CfVsVaVMFlhJZXAB7FLqQ6yIi1olA7Tpcy9EDdd/xExnoVcvJJ
- bRXZbuPa2JXCzCcVvNrGNopi0DAQAc0pXZFx5UsG7qQfBxsPHOPD+DfJx2fAe0dCSW5w=;
-Received: from mail-pl1-f171.google.com ([209.85.214.171])
+ bh=kr6o/ffcroC8ZFV7QVSAoVWXW1Mh66w9qZqxDoEsaE4=; b=NBmSfPwlp/A+4/vFgkzwUxH85f
+ yQmCsP27bXkdTxW6y5FzTtgO4T0PYBUPHWM2j3D/oFnG1F76sioN2kIf0Pf7Az1IctZMMqqBK3L+7
+ CffPGk6x6HPB77AbEOcOO2YUO3OC16SxANX++dMF/2KtQDZIcZRAI7WU1H3Xdb5q0atE=;
+Received: from mail-pf1-f179.google.com ([209.85.210.179])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nhf96-0002xc-4N
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 22:19:28 +0000
-Received: by mail-pl1-f171.google.com with SMTP id n8so6795263plh.1
+ id 1nhf97-0002xk-SG
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 22:19:30 +0000
+Received: by mail-pf1-f179.google.com with SMTP id i24so6238467pfa.7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Apr 2022 15:19:28 -0700 (PDT)
+ Thu, 21 Apr 2022 15:19:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=47F3YavIqtOahrtYKZfh2cVMDeC/3NDFumH2A5ynDRo=;
- b=YXUid/CHJmhhem5mNKc9RWQ+2z9g/3n19GePzPJ2UNM3OzjJy9uZk8wVHcuotm0B3Z
- YazsimVHOaetgVR5w/nWPE62bbFGSORHY3qOUxJKn+RhD07R2wY05ARnLnAuvfwmr6c9
- JQpsFE3l5sNsd/vx3eFR9i6nnKlcBHUf+hb1YTURWMAnHkDJ8m+povqq4sNExwo+PJiY
- 6Hre+hnxaXXRG+PSU4sr3oqcPx5oKGhnWM8ZBoNO3S9FB7SUTpZRDtdtEhxKXU1gCtFc
- IGoEV4Og7S0I9lroit6GZC2MCTAaIr0jjT6IxX2LQ59xTl+P8KFQRhVWV5cIIYR95HDr
- o89Q==
-X-Gm-Message-State: AOAM532X2ZGpEwPxztAX/8cucSYIdFL8+irW/YU53gt891A9/k9uLBIa
- 84FUdaibmc9S1HjzMPnb5qIJI7AQR0Xb0g==
-X-Google-Smtp-Source: ABdhPJxgsxWcPNO2+93Z3+/1LJCFFPXI0TxhEHtRpTnWh2Ba/JyikPPpD5F7iEfInnBjRs/sirBgcg==
-X-Received: by 2002:a17:90a:634b:b0:1ca:6c7e:7952 with SMTP id
- v11-20020a17090a634b00b001ca6c7e7952mr12622518pjs.54.1650579562550; 
- Thu, 21 Apr 2022 15:19:22 -0700 (PDT)
+ bh=kr6o/ffcroC8ZFV7QVSAoVWXW1Mh66w9qZqxDoEsaE4=;
+ b=FqlguRWJJNgJ0XWhpnDkyfkwuW7fVj+4UfCSGPo5u7lzH6jXhiGex4N4FjcbIOqkYA
+ Yb6p++8vCJB6n0EvaYlDG9JF6nmMT74RpEN7YSvqJqGV7eudjOGv0PP9R0s6TKnKqbgU
+ tHbMjn84ZF2jwKxrVPqOX0CkOFM7KAxOXZN3aHQTpY1iRAFtOJzK4uZmSO3Q+YcUSl5Y
+ wJwkeJDXgv7/QRuvrthZGFKX+K2fCXld+tFo8l8H7dqpGetOsL7fygT++AjFJ/oi2hFQ
+ 31JjVrz1xA2pF7Lnnef05XS1uKmAEpt2kySEF9ThteGofvuoYTRGhEiw/GBRqj3VWbzu
+ wupQ==
+X-Gm-Message-State: AOAM531h+NziS5TK+HvdqAwwDS2jF2HeZOZEpsFqOd/QQQ6+iQ9cp+N4
+ w5uKAZIhaI9ke97xBjAvSrm+BVdJjNtPLg==
+X-Google-Smtp-Source: ABdhPJy10pTbnBEV+I5K2TFYw99qs/CdH1Ga5NE03/7cb+v9s+gPwoV6chw6RUQ5gqYMJotVU/MsTQ==
+X-Received: by 2002:a63:194b:0:b0:39d:f8e:9bb0 with SMTP id
+ 11-20020a63194b000000b0039d0f8e9bb0mr1369218pgz.56.1650579564026; 
+ Thu, 21 Apr 2022 15:19:24 -0700 (PDT)
 Received: from bvanassche-linux.mtv.corp.google.com
  ([2620:15c:211:201:a034:31d8:ca4e:1f35])
  by smtp.gmail.com with ESMTPSA id
- hi21-20020a17090b30d500b001cd4989ff4csm3794876pjb.19.2022.04.21.15.19.21
+ hi21-20020a17090b30d500b001cd4989ff4csm3794876pjb.19.2022.04.21.15.19.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Apr 2022 15:19:21 -0700 (PDT)
+ Thu, 21 Apr 2022 15:19:23 -0700 (PDT)
 From: Bart Van Assche <bvanassche@acm.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Thu, 21 Apr 2022 15:18:27 -0700
-Message-Id: <20220421221836.3935616-23-bvanassche@acm.org>
+Date: Thu, 21 Apr 2022 15:18:28 -0700
+Message-Id: <20220421221836.3935616-24-bvanassche@acm.org>
 X-Mailer: git-send-email 2.36.0.rc2.479.g8af0fa9b8e-goog
 In-Reply-To: <20220421221836.3935616-1-bvanassche@acm.org>
 References: <20220421221836.3935616-1-bvanassche@acm.org>
@@ -78,31 +78,30 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Signed-off-by: Bart Van Assche <bvanassche@acm.org> ---
- tools/f2fscrypt.c
- | 6 ++++++ 1 file changed, 6 insertions(+) diff --git a/tools/f2fscrypt.c
- b/tools/f2fscrypt.c index 0f0650f4dd63..293173fcb5b4 100644 ---
- a/tools/f2fscrypt.c
- +++ b/tools/f2fscrypt.c @@ -45,6 +45,8 @@ #endif #ifdef HAVE_UUID_UUID_H
- #include <uu [...] 
+ Content preview: Suppress the following compiler warning: main.c:37:14:
+ warning:
+ unused function 'absolute_path' [-Wunused-function] static char
+ *absolute_path(const
+ char *file) ^ Signed-off-by: Bart Van Assche <bvanassche@acm.org> ---
+ fsck/main.c | 2 ++ 1 file changed, 2 insertions(+) 
  Content analysis details:   (0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.171 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.214.171 listed in wl.mailspike.net]
+ no trust [209.85.210.179 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [bart.vanassche[at]gmail.com]
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
  mail domains are different
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.179 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
  EnvelopeFrom freemail headers are different
-X-Headers-End: 1nhf96-0002xc-4N
-Subject: [f2fs-dev] [PATCH 22/31] tools/f2fscrypt.c: Fix build without
- uuid/uuid.h header file
+X-Headers-End: 1nhf97-0002xk-SG
+Subject: [f2fs-dev] [PATCH 23/31] fsck/main.c: Suppress a compiler warning
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,49 +119,37 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+Suppress the following compiler warning:
+
+main.c:37:14: warning: unused function 'absolute_path' [-Wunused-function]
+static char *absolute_path(const char *file)
+             ^
+
 Signed-off-by: Bart Van Assche <bvanassche@acm.org>
 ---
- tools/f2fscrypt.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ fsck/main.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/tools/f2fscrypt.c b/tools/f2fscrypt.c
-index 0f0650f4dd63..293173fcb5b4 100644
---- a/tools/f2fscrypt.c
-+++ b/tools/f2fscrypt.c
-@@ -45,6 +45,8 @@
- #endif
- #ifdef HAVE_UUID_UUID_H
- #include <uuid/uuid.h>
-+#else
-+typedef unsigned char uuid_t[16];
- #endif
+diff --git a/fsck/main.c b/fsck/main.c
+index fc776eb0af1f..8676f17555c5 100644
+--- a/fsck/main.c
++++ b/fsck/main.c
+@@ -34,6 +34,7 @@ struct f2fs_fsck gfsck;
  
- #if !defined(HAVE_ADD_KEY) || !defined(HAVE_KEYCTL)
-@@ -354,11 +356,13 @@ static void parse_salt(char *salt_str, int flags)
- 			perror("F2FS_IOC_GET_ENCRYPTION_PWSALT");
- 			exit(1);
- 		}
-+#ifdef HAVE_UUID_UUID_H
- 		if (options & OPT_VERBOSE) {
- 			char tmp[80];
- 			uuid_unparse(buf, tmp);
- 			printf("%s has pw salt %s\n", cp, tmp);
- 		}
+ INIT_FEATURE_TABLE;
+ 
++#ifdef WITH_SLOAD
+ static char *absolute_path(const char *file)
+ {
+ 	char *ret;
+@@ -51,6 +52,7 @@ static char *absolute_path(const char *file)
+ 		ret = strdup(file);
+ 	return ret;
+ }
 +#endif
- 		salt_len = 16;
- 	} else if (strncmp(cp, "f:", 2) == 0) {
- 		cp += 2;
-@@ -380,8 +384,10 @@ static void parse_salt(char *salt_str, int flags)
- 				(((unsigned char)(h - hexchars) << 4) +
- 				 (unsigned char)(l - hexchars));
- 		}
-+#ifdef HAVE_UUID_UUID_H
- 	} else if (uuid_parse(cp, buf) == 0) {
- 		salt_len = 16;
-+#endif
- 	} else {
- 	invalid_salt:
- 		fprintf(stderr, "Invalid salt: %s\n", salt_str);
+ 
+ void fsck_usage()
+ {
 
 
 _______________________________________________
