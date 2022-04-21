@@ -2,67 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC7E450A4FE
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Apr 2022 18:06:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2723750A854
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 Apr 2022 20:46:33 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nhZJu-00031M-6c; Thu, 21 Apr 2022 16:06:15 +0000
+	id 1nhbov-00083i-NM; Thu, 21 Apr 2022 18:46:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nhZJs-00031C-I0
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 16:06:13 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1nhbou-00083c-S5
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 18:46:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=41kN55QSH1Ax2Txdf1K7qT3TMBmRq5VaoT5UUl6yWHQ=; b=geMBj3zGYej+DOh5knN+BKXRnt
- 4rGonDdE33Rc4y095j7TW7volx9rBTTgGJpMiKy72oSb5Or5+A7xaiu28ltpvkkiQIuYUTYRCFSJW
- kbCyqkNQvG35kGMMXGtM3FfKTBgCcbOCVPdR0/ow1/2MPxqPBhI6OgTTBpWdyihThBBI=;
+ bh=UhPUdYWcPrHDO0+fBNO4ifhvnxNM0uzu57i3QlDVcK0=; b=WRgclbdI5XFV6axLekmjl6PADG
+ cAX/PzC6EqMnsM5TsDbgAWPXPtNjAfi9ylhQqNbaEaLxREdLbjazFJhZMoebvB6NaZt2xNDIkewab
+ pnpHM1JcpmQk5nGSp5rQEn8RQWhcRX9UlH7y8nIGmAfYpGDxOMYFsn6KLGGTTX2M6YpM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=41kN55QSH1Ax2Txdf1K7qT3TMBmRq5VaoT5UUl6yWHQ=; b=dUCL4Zl8GiDkfj3Wy2bmFSPOg+
- a+srKEMlNMYzKrwPXhZGvIe3IqDsw3GS1aGuvDk+BDRBoLNrKjM1W9qBcfagxRDkOnA6D9loDvxNK
- K6SFxwMUdQ7doXzHeYJPsUyNCwQbAM+Cq0O5ivMFWFpbaewhV/jRN36XFrcO+eO1OsYU=;
+ bh=UhPUdYWcPrHDO0+fBNO4ifhvnxNM0uzu57i3QlDVcK0=; b=Zs4ZMPshtNDgBCisUMu2jZ+uMP
+ tfGT1HPpSeNDhretGvk1lVuv4vGEt+Ee39tyzsvgTmddBzwhwJXhjAuifAt/VtVIZ9UeSPV+IUR10
+ AM11Hp40tzSd+g3c4DFXXgI8Bma1TZ+V1YsBMQo/cIS6yEs710ER2BM1ZfajhBPeATgI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nhZJp-0005y4-TO
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 16:06:13 +0000
+ id 1nhbov-0003l6-5y
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 21 Apr 2022 18:46:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id AE85261CDD
+ by dfw.source.kernel.org (Postfix) with ESMTPS id C75D160F15
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Apr 2022 16:05:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1128BC385A1;
- Thu, 21 Apr 2022 16:05:59 +0000 (UTC)
+ Thu, 21 Apr 2022 18:46:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C5EEC385A1;
+ Thu, 21 Apr 2022 18:46:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1650557159;
- bh=VVe3j0YQ+Cidqf5v6vAbgMUL/5uLwWmI3G/CApfYCig=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=or6jC1vCCTurM4j5pClK6zvbFvQ2JvEIHkWSQciAvTyrHMZH8A5ukoCq0d2uORHS+
- BoxqGZp5c/YzEIBmg6T2J0jl5mBLpcxvD8exCYcKF4U9G3tzLwSFidg2Yo3RNoSkVQ
- 1zGz0d3nuSK9ZGPC34/U3Km7oIjxm8Bngpn/SS770L868tlhrUYGjAp6mEXzueWadX
- THAO6YSe9zyY4IpJnXAoTkS4UbsSblME3HHt33iGRDgPVOAoMuYcFeu28eqtcaslQe
- YKDLZC5SE79CxEi5swtmi3De4ZnNj2MceQ1W3C7EwRTL53PAfvOG3CPYCrr8R5zEmT
- aPZDZUP050OjA==
-Date: Thu, 21 Apr 2022 09:05:57 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <YmGA5X4mtmXc3p/m@google.com>
-References: <20220419215703.1271395-1-jaegeuk@kernel.org>
+ s=k20201202; t=1650566779;
+ bh=xIFSZuODUQ/i7IO02KTWGkjbD5hF9Q1d08rVSQEHXn0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Mk+bBkEvbPEQTisY2L/fxw/dTRah48WE//hutSJZHR4isII1JrO0/6vZwoO6MW3us
+ 9yhuj27ur4Nt6Lf70LGT6JiDsANR1RSXxV5GXb65wf/oPMbiqfcFSWQE/UBxnDESeN
+ EHD8crMvmEiFFluUPIKwP1IJi6k65Sj4qXOhaYBEi8zUVqb7zid8TbVflUKQcnLbgK
+ WNdO5OF0F57RQ1o43XEkFHqwrF5GSPEVEZAiMGjpWhNJEnPQ+47n31/7MzUFzTzaJ2
+ Yt1qAaEJoggASrGlzLJle2kOQNHDGmYh7F31NWhxHVtmISzLXOoaGUfg1WJyMtSbDo
+ mSP0IrdOaICsA==
+Date: Thu, 21 Apr 2022 11:46:17 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Message-ID: <YmGmeZ5sm9nqEqxd@sol.localdomain>
+References: <20220414053415.158986-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220419215703.1271395-1-jaegeuk@kernel.org>
+In-Reply-To: <20220414053415.158986-1-ebiggers@kernel.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -70,9 +70,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The block layer for zoned disk can reorder the FUA'ed IOs.
- Let's use flush command to keep the write order. Signed-off-by: Jaegeuk Kim
- <jaegeuk@kernel.org> --- change log from v1: - minor clean up 
+ Content preview:  On Wed, Apr 13, 2022 at 10:34:15PM -0700, Eric Biggers wrote:
+ > From: Eric Biggers <ebiggers@google.com> > > When inline encryption is
+ used, the usual message "fscrypt: AES-256-XTS > using implementat [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +88,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nhZJp-0005y4-TO
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: use flush command instead of FUA
- for zoned device
+X-Headers-End: 1nhbov-0003l6-5y
+Subject: Re: [f2fs-dev] [PATCH] fscrypt: log when starting to use inline
+ encryption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,53 +102,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The block layer for zoned disk can reorder the FUA'ed IOs. Let's use flush
-command to keep the write order.
+On Wed, Apr 13, 2022 at 10:34:15PM -0700, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+> 
+> When inline encryption is used, the usual message "fscrypt: AES-256-XTS
+> using implementation <impl>" doesn't appear in the kernel log.  Add a
+> similar message for the blk-crypto case that indicates that inline
+> encryption was used, and whether blk-crypto-fallback was used or not.
+> This can be useful for debugging performance problems.
+> 
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  fs/crypto/fscrypt_private.h |  4 +++-
+>  fs/crypto/inline_crypt.c    | 33 ++++++++++++++++++++++++++++++++-
+>  fs/crypto/keysetup.c        |  2 +-
+>  3 files changed, 36 insertions(+), 3 deletions(-)
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
+Applied to fscrypt.git#master for 5.19.
 
- change log from v1:
-  - minor clean up
-
- fs/f2fs/file.c | 3 ++-
- fs/f2fs/node.c | 2 +-
- 2 files changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index f08e6208e183..eae2e7908072 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -372,7 +372,8 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
- 	f2fs_remove_ino_entry(sbi, ino, APPEND_INO);
- 	clear_inode_flag(inode, FI_APPEND_WRITE);
- flush_out:
--	if (!atomic && F2FS_OPTION(sbi).fsync_mode != FSYNC_MODE_NOBARRIER)
-+	if ((!atomic && F2FS_OPTION(sbi).fsync_mode != FSYNC_MODE_NOBARRIER) ||
-+	    (atomic && !test_opt(sbi, NOBARRIER) && f2fs_sb_has_blkzoned(sbi)))
- 		ret = f2fs_issue_flush(sbi, inode->i_ino);
- 	if (!ret) {
- 		f2fs_remove_ino_entry(sbi, ino, UPDATE_INO);
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index c45d341dcf6e..144f9f966690 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -1631,7 +1631,7 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
- 		goto redirty_out;
- 	}
- 
--	if (atomic && !test_opt(sbi, NOBARRIER))
-+	if (atomic && !test_opt(sbi, NOBARRIER) && !f2fs_sb_has_blkzoned(sbi))
- 		fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
- 
- 	/* should add to global list before clearing PAGECACHE status */
--- 
-2.36.0.rc2.479.g8af0fa9b8e-goog
-
+- Eric
 
 
 _______________________________________________
