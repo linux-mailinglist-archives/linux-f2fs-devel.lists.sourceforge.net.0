@@ -2,66 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2AD150AD85
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Apr 2022 03:57:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84C1A50BDF3
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Apr 2022 19:07:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nhiXm-0001qW-Cn; Fri, 22 Apr 2022 01:57:09 +0000
+	id 1nhwkQ-0002V2-VU; Fri, 22 Apr 2022 17:07:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nhiXJ-0001pv-1D
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 01:56:40 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nhwkP-0002Uv-Ct
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 17:07:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VLO6n5Kyx5Jt1lDOIMAhd6sizYhI+Qn7Hd+uBN8pjgE=; b=YHUpKxfpFYItCSQGK7lWft+bko
- v/4zVcP3XcN/T11674Vgr4PRuKOzGuO2Er1ds5hH2hHz0qGxTxkc/xbJtN/JH9JCqOXDGB+jCWqwx
- B5sANrpYg/cv41WpEQjya8sRAXnMQpCdxjRxbM8fRNWmYrEY18KGwAZUYeQaresnd2Lo=;
+ bh=bUnOalO935k0JJsJQhRhk55CFalmW4UqHTehykQy6Gs=; b=Dpt9u4KCwh5nLqYrOqa0T5+uni
+ lIz39ELhOBWVU0nBGzVJYPU6ry7HZyKcj6dz7rG1eMtEIpy7UGlEratDTcNVr1EYXHjgKCUQf13tE
+ 6TmRDGcrrgZYIbeGCq//WnssCu1hMRKBohXSG6X1WT5e0TJFFT80kLX54cynD3hYKnYI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=VLO6n5Kyx5Jt1lDOIMAhd6sizYhI+Qn7Hd+uBN8pjgE=; b=C
- tIhuLyFOBpiVP0djEdvMqmrneFqiXmIJEPfdQV1cHyt0W4dUpLvXEvzhHJEZH0Jy4MosH6mbaTZ8q
- sVFaqz5Z6VgVb1rjdQyhuCZSKElQ/FQUG8oSJTNXw8Ijj7eX9a/N8RJbt3LtXA3hUCyk1MvZMKriw
- sEtYpZwMd5Byv4NQ=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=bUnOalO935k0JJsJQhRhk55CFalmW4UqHTehykQy6Gs=; b=gS9LsAdPySLYsx466yB4fg9M6J
+ bhsFeIsHuR9B6L+YhrIP7NOjUSn31A9uOzKo4tIh57CsvfoLIS0bXgifPIDxb3z93A4SjXMYknDC9
+ NJ9wTQrAxv3aTZMVs2ng9KtKpv1f3J04wqSEFxQ7jp0YbeOJZpsBB2M2TO3nesdIlwiU=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nhiXE-0060dJ-Ox
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 01:56:39 +0000
+ id 1nhwkN-006isb-Dg
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 17:07:10 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8700E61F52
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 22 Apr 2022 01:56:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7F9EC385A5;
- Fri, 22 Apr 2022 01:56:25 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2FE6B6215F;
+ Fri, 22 Apr 2022 17:06:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E6EDC385A0;
+ Fri, 22 Apr 2022 17:06:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1650592585;
- bh=CzcOPGlCV2xBPZx/jKlTI8M8Y1NunJ0Bj92iUue9INk=;
- h=From:To:Cc:Subject:Date:From;
- b=iiLN8BDg66zTXKmHVej8yVayRizhGuBO6B+N2pie/4oFdO7UER4X0grM5jKZfUd5X
- +l0pfAj72kDnySTte91S4LoxcsVEjE68ufCnw7zdwmBU5yMniRL/NKJEdiQAUPPLXZ
- k8sdEWmmwA00Jc9SQa/QIWcGgucBqOF5oDVB5KKU2nM1GS0nSvIw/vegRomfXUuHfy
- bqgaR4JGg1AavxejnRftYJp/6+mxq+KuomAQi1Az1kNY7WLhHn61GrJm3jApHLyvB8
- cvR4UtgHXunncIwzmHJdcnjh7xB8q+tXreEONhBmKJplF6tUtCHvWNEFKG9xD75BdB
- R42WeyOzze27A==
+ s=k20201202; t=1650647216;
+ bh=K6Uor3nWfDQnKtHBIqsfPkXJHzFiKuJkXPNepFuhfiI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=MnsFS2DnzvvtqTtcGPdZF34MXSR9rabN8/W0NhI5aBYIe4Ltc1tDX2DmeNHqcPApL
+ IO1Jq5L1Kx0Qd5iuaASctI6lO00dcDVsa0jucLWdgqGWXg4D4yTl9aULtmmNk1pK/3
+ vQUGCIuglL7IhYhTbaeOrk7IcQBtVfzXYYH12P5tgw25+fYRm0Xbatv6TK2gIHtiz/
+ iElJiBOyrfmzVVmgcMsjt+8MKCezTBeR4np/lpMClS/SIAdXd5DzmT8z4Z3462X1ia
+ pG+ODn/p2iXg7q0Xt3CeanXcJe0WbfRabTCkym1oLB0i0v2LHDcYai2ay8yFlLn+h/
+ A3yAkd7v9Nagw==
+Date: Fri, 22 Apr 2022 10:06:54 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 21 Apr 2022 18:56:24 -0700
-Message-Id: <20220422015624.3521607-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.36.0.rc2.479.g8af0fa9b8e-goog
+To: Niels Dossche <dossche.niels@gmail.com>
+Message-ID: <YmLgrm72eU7ttjdY@google.com>
+References: <20220421210948.73198-1-dossche.niels@gmail.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20220421210948.73198-1-dossche.niels@gmail.com>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -69,30 +69,27 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  If the file preallocated blocks and fsync'ed, we should not
- truncate them during roll-forward recovery which will recover i_size correctly
- back. Fixes: d4dd19ec1ea0 ("f2fs: do not expose unwritten blocks to user
- by DIO") Cc: <stable@vger.kernel.org> # 5.17+ Signed-off-by: Jaegeuk Kim
- <jaegeuk@kernel.org>
- --- fs/f2fs/inode.c | 3 ++- 1 file chan [...] 
+ Content preview:  On 04/21, Niels Dossche wrote: > The calculation for f_bfree
+ performs a calculation involving > current_reserved_blocks and
+ total_valid_user_blocks.
+ Both can be > modified under stat_lock. As stat_loc [...] 
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nhiXE-0060dJ-Ox
-Subject: [f2fs-dev] [PATCH] f2fs: should not truncate blocks during
- roll-forward recovery
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nhwkN-006isb-Dg
+Subject: Re: [f2fs-dev] [PATCH] f2fs: extend stat_lock to avoid potential
+ race in statfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,38 +101,64 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, stable@vger.kernel.org
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If the file preallocated blocks and fsync'ed, we should not truncate them during
-roll-forward recovery which will recover i_size correctly back.
+On 04/21, Niels Dossche wrote:
+> The calculation for f_bfree performs a calculation involving
+> current_reserved_blocks and total_valid_user_blocks. Both can be
+> modified under stat_lock. As stat_lock is not used to read both these
+> values in statfs, this can lead to inconsistent results. Extend the
+> locking to prevent this issue.
+> Commit c9c8ed50d94c ("f2fs: fix to avoid potential race on sbi->unusable_block_count access/update")
+> already added the use of sbi->stat_lock in statfs in
+> order to make the calculation of multiple, different fields atomic so
+> that results are consistent. This is similar to that patch regarding the
+> change in statfs.
 
-Fixes: d4dd19ec1ea0 ("f2fs: do not expose unwritten blocks to user by DIO")
-Cc: <stable@vger.kernel.org> # 5.17+
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/inode.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Is this enough? It seems we also need to cover sbi->user_block_count and
+sbi->total_node_count by stat_lock.
 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 71f232dcf3c2..83639238a1fe 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -550,7 +550,8 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
- 	}
- 	f2fs_set_inode_flags(inode);
- 
--	if (file_should_truncate(inode)) {
-+	if (file_should_truncate(inode) &&
-+			!is_sbi_flag_set(sbi, SBI_POR_DOING)) {
- 		ret = f2fs_truncate(inode);
- 		if (ret)
- 			goto bad_inode;
--- 
-2.36.0.rc2.479.g8af0fa9b8e-goog
-
+> 
+> Signed-off-by: Niels Dossche <dossche.niels@gmail.com>
+> ---
+> 
+> Note:
+> I am currently working on a static analyser to detect missing locks
+> using type-based static analysis as my master's thesis
+> in order to obtain my master's degree.
+> If you would like to have more details, please let me know.
+> This was a reported case. I manually verified the report by looking
+> at the code, so that I do not send wrong information or patches.
+> After concluding that this seems to be a true positive, I created
+> this patch. This was compile-tested and runtime-tested on x86_64.
+> This issue was found on Linux v5.17.4.
+> 
+>  fs/f2fs/super.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index ea939db18f88..ece768869187 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -1739,10 +1739,12 @@ static int f2fs_statfs(struct dentry *dentry, struct kstatfs *buf)
+>  	buf->f_bsize = sbi->blocksize;
+>  
+>  	buf->f_blocks = total_count - start_count;
+> +
+> +	spin_lock(&sbi->stat_lock);
+> +
+>  	buf->f_bfree = user_block_count - valid_user_blocks(sbi) -
+>  						sbi->current_reserved_blocks;
+>  
+> -	spin_lock(&sbi->stat_lock);
+>  	if (unlikely(buf->f_bfree <= sbi->unusable_block_count))
+>  		buf->f_bfree = 0;
+>  	else
+> -- 
+> 2.35.2
 
 
 _______________________________________________
