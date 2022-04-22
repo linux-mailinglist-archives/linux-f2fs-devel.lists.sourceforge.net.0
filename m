@@ -2,64 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47DED50C108
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Apr 2022 23:18:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4672E50C106
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Apr 2022 23:18:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ni0fz-0002jc-MC; Fri, 22 Apr 2022 21:18:50 +0000
+	id 1ni0fu-00014O-Qh; Fri, 22 Apr 2022 21:18:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1ni0fv-0002jK-QR
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 21:18:47 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1ni0fs-00014B-W3
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 21:18:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=T150FBHbGleIB5mrb9HL3szXKTUr2956ZFtpCqxsPgQ=; b=UYdWfTlVxAesZ9NDNt8Vc4xy4J
- D/v8K26tKxzLJwd8i/uvO6I3Xx63SityZvWwwXEPKq5CitKpO2SkiNRMWdub2MyEM3YhFa8p00Cte
- ZAX0mjFNDZlWsValYHjHkLjzK9dTR97/N1e5GqzojByuiitYe2U284X3ULdgQiD8m0T8=;
+ bh=gq7uL/6GS2MgLx7SNSNMNHU0/R0Zsiez1jxIaEAQ6bQ=; b=FspTxjmdlW7kObcOXQ9g44Vt2n
+ n7t7GdXaYZB+ti56Sa6SgCWKUcagqrSpjy1IPOvG/hcHw7FlbXoA6JcGkUjOIbGhcNn7Ldo45EbJ5
+ WxUKg31bSe1XnLIQaypiSFjHpk5Js5S7ktXw8wcghQAUJvy3LTHTJ8oTnKaCT1tkF+lA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=T150FBHbGleIB5mrb9HL3szXKTUr2956ZFtpCqxsPgQ=; b=C
- BNRAbTW5NjxDTcmoOeabqUVLOiTZfNVeAfdkXfoYOtsdpUe2/HqjZvjm7Kjt6FIyn+QI0sSGEO7b7
- 9juw8I135gUsaVsmpXbX7SrINtBQVg/NdtIdUhry1QeyTohqwboHXMMRXmruK+VCqTjscozwO4f/U
- InRnSWFL2F7cQvmc=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=gq7uL/6GS2MgLx7SNSNMNHU0/R0Zsiez1jxIaEAQ6bQ=; b=LPG6TC5FOkHD/5HZqZwVzTu7bR
+ e3Qa2Jb2Z1V/0Zkt7fZiMJB1hHlsWUMIq6ToJ5sjrrxVhX+VE2irWowAzCTbta6KN1JyWotmUen74
+ TUeEnHCOkMbjhhk9yppM1eXK0a3ECiWFgKnbGZ4SDyWPH3u+cPCq6b+VsRoCIfjDKkuI=;
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1ni0fq-006rCD-C3
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 21:18:46 +0000
+ id 1ni0fp-006rCE-E2
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 21:18:45 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id EE4DDB8327C
+ by ams.source.kernel.org (Postfix) with ESMTPS id D0EEAB83276
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 22 Apr 2022 21:18:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B89FC385A0;
  Fri, 22 Apr 2022 21:18:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC36DC385A4;
- Fri, 22 Apr 2022 21:18:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1650662305;
- bh=hqWuDh2/4bxBqikSOmOW5A/qv61DX68gdU1Tb71NWMI=;
- h=From:To:Cc:Subject:Date:From;
- b=KW++VE43h/4O+yK+DHLdNLcgk7b5Hq+BtGAH6Sq6sNANptG6axSP+xCd7xPJs1sPo
- xzPgwUpDSg+F0d6FrY3kltM1Cdy2ctgiWRhmQdzSNqeUGwbp3W22FmxvYWvgNFBY0q
- UbFDNmKZWumUQHypd+HQdHs34PFMhoMW9diwHXhCM2GsZIJt3QHQW3iPYA0z9brNUn
- VeRyIZFWdPH/EHxjMBy1DaFEPRcd4gau0jWYPLy7MPzWErXrLzKCqtMp3kY0X8HDbD
- 8vl8GEyVUEBx+/iMlk9uBpJ3l49Hl2/RuApPcaVypSTPQdCLi2gKyLQXXp73V13VE8
- ZSdxnhalGCzrA==
+ s=k20201202; t=1650662306;
+ bh=GQhCouHqWpVHnE7ypMnsjgUEbsJapGv6lkm/bnFo8ZQ=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=SIW0pMg45sXTQCeZ46v8SGugRGGEUINxZYpXtq+GvqtoMcBbMNtTfhvkZU02acyd3
+ MFbGe2tIjIC6XvZO5Hjvf6fe8vXJp7TQli2gjW6zAD2I2rMb/hjZncqO2D6Y/hpte5
+ siLqLeKx9xtJs+yaM9ZPc6DcdUrxU9j/VWX6FbCakdpegfh6pY0R91Q9WYj1nWy4Kn
+ P2YdfYNAJfv61NHWD/AkFyLr0lboeKjZkzyHbyKK4uit12hpnZJo6TMpyuFtBru0Kx
+ Ps0TrOMbtwQ+p2DS1VuFymlg6srgsxj3duAvXP4cm5kEVZoEEUvYVmkBCbG/ZWgyFf
+ nQTbaxJp8fvNA==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 22 Apr 2022 14:18:14 -0700
-Message-Id: <20220422211819.2230879-1-jaegeuk@kernel.org>
+Date: Fri, 22 Apr 2022 14:18:15 -0700
+Message-Id: <20220422211819.2230879-2-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.36.0.rc2.479.g8af0fa9b8e-goog
+In-Reply-To: <20220422211819.2230879-1-jaegeuk@kernel.org>
+References: <20220422211819.2230879-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
@@ -69,12 +71,11 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> ---
- lib/libf2fs_io.c
- | 19 ++++++++++++++++--- 1 file changed, 16 insertions(+), 3 deletions(-)
- diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c index
- 09a689293356..a392255e8e85
- 100644 --- a/lib/libf2fs_io.c +++ b/lib/libf2fs_io.c @@ -501,9 +501,22 @@
- static int sparse_merge_blocks(uint64_t star [...] 
+ include/android_config.h
+ | 2 ++ 1 file changed, 2 insertions(+) diff --git a/include/android_config.h
+ b/include/android_config.h index 865e4087ccfe..ce6723309447 100644 ---
+ a/include/android_config.h
+ +++ b/include/android_config.h @@ -31,6 +31,7 @@ #define HAVE_SE [...] 
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,9 +90,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ni0fq-006rCD-C3
-Subject: [f2fs-dev] [PATCH 1/6] libf2fs_io: add unused mactor to avoid build
- failure
+X-Headers-End: 1ni0fp-006rCE-E2
+Subject: [f2fs-dev] [PATCH 2/6] android_config.h: add missing liblz4
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,39 +110,29 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- lib/libf2fs_io.c | 19 ++++++++++++++++---
- 1 file changed, 16 insertions(+), 3 deletions(-)
+ include/android_config.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
-index 09a689293356..a392255e8e85 100644
---- a/lib/libf2fs_io.c
-+++ b/lib/libf2fs_io.c
-@@ -501,9 +501,22 @@ static int sparse_merge_blocks(uint64_t start, uint64_t num, int zero)
- 					F2FS_BLKSIZE * num, start);
- }
- #else
--static int sparse_read_blk(__u64 block, int count, void *buf) { return 0; }
--static int sparse_write_blk(__u64 block, int count, const void *buf) { return 0; }
--static int sparse_write_zeroed_blk(__u64 block, int count) { return 0; }
-+static int sparse_read_blk(__u64 UNUSED(block),
-+				int UNUSED(count), void *UNUSED(buf))
-+{
-+	return 0;
-+}
-+
-+static int sparse_write_blk(__u64 UNUSED(block),
-+				int UNUSED(count), const void *UNUSED(buf))
-+{
-+	return 0;
-+}
-+
-+static int sparse_write_zeroed_blk(__u64 UNUSED(block), int UNUSED(count))
-+{
-+	return 0;
-+}
- #endif
+diff --git a/include/android_config.h b/include/android_config.h
+index 865e4087ccfe..ce6723309447 100644
+--- a/include/android_config.h
++++ b/include/android_config.h
+@@ -31,6 +31,7 @@
+ #define HAVE_SELINUX_ANDROID_H 1
+ #define HAVE_SETMNTENT 1
+ #define HAVE_SPARSE_SPARSE_H 1
++#define HAVE_LIBLZ4 1
  
- int dev_read(void *buf, __u64 offset, size_t len)
+ #ifdef WITH_SLOAD
+ #define HAVE_LIBSELINUX 1
+@@ -57,6 +58,7 @@
+ #define HAVE_GETMNTENT 1
+ #define HAVE_LLSEEK 1
+ #define HAVE_MEMSET 1
++#define HAVE_LIBLZ4 1
+ 
+ #ifdef WITH_SLOAD
+ #define HAVE_LIBSELINUX 1
 -- 
 2.36.0.rc2.479.g8af0fa9b8e-goog
 
