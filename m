@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84C1A50BDF3
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Apr 2022 19:07:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C8CE50BF14
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Apr 2022 19:53:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nhwkQ-0002V2-VU; Fri, 22 Apr 2022 17:07:12 +0000
+	id 1nhxTT-0005g2-Qu; Fri, 22 Apr 2022 17:53:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nhwkP-0002Uv-Ct
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 17:07:10 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nhxTS-0005fw-HQ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 17:53:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bUnOalO935k0JJsJQhRhk55CFalmW4UqHTehykQy6Gs=; b=Dpt9u4KCwh5nLqYrOqa0T5+uni
- lIz39ELhOBWVU0nBGzVJYPU6ry7HZyKcj6dz7rG1eMtEIpy7UGlEratDTcNVr1EYXHjgKCUQf13tE
- 6TmRDGcrrgZYIbeGCq//WnssCu1hMRKBohXSG6X1WT5e0TJFFT80kLX54cynD3hYKnYI=;
+ bh=DBDxWn9cq4mRCJrbIn1LiKKvu//YkCVwqJ+pS6TwtZ0=; b=PQDjrpcz6xOfQKR+zUhigQPjdt
+ yeZkUw5CGXWJu34lNccIIAYy9wgsulDvZBWOxTUMMMncYhFcRj4tvsLOFiKy94e/8swqPcFCTozuB
+ oYqqsnhqi/iNNqY4BQ4zQIsWgcypwtEPgUOyI7hiPu+tDMKgmIqXbfXSAERXlbF5Osps=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,39 +29,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bUnOalO935k0JJsJQhRhk55CFalmW4UqHTehykQy6Gs=; b=gS9LsAdPySLYsx466yB4fg9M6J
- bhsFeIsHuR9B6L+YhrIP7NOjUSn31A9uOzKo4tIh57CsvfoLIS0bXgifPIDxb3z93A4SjXMYknDC9
- NJ9wTQrAxv3aTZMVs2ng9KtKpv1f3J04wqSEFxQ7jp0YbeOJZpsBB2M2TO3nesdIlwiU=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=DBDxWn9cq4mRCJrbIn1LiKKvu//YkCVwqJ+pS6TwtZ0=; b=eE62DJkFUro9qI5rnTkTwnrTFM
+ ksHPEMkW77Fay8sSErYXUdHjTAXn45bORwTDDeysYqGh45ccFda+f5m8roxnDNlC5e3W7Xr0fa7HI
+ 5AM/WMCsr5mbnDbUgL6ja+8jvGQRgcQkZfvArN3EgjLIVv9AzuEx7YEQRjJGnhqlWFjQ=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nhwkN-006isb-Dg
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 17:07:10 +0000
+ id 1nhxTP-0007Qp-Da
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Apr 2022 17:53:41 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2FE6B6215F;
- Fri, 22 Apr 2022 17:06:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E6EDC385A0;
- Fri, 22 Apr 2022 17:06:56 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id E42E1B831B9;
+ Fri, 22 Apr 2022 17:53:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D1B2C385A4;
+ Fri, 22 Apr 2022 17:53:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1650647216;
- bh=K6Uor3nWfDQnKtHBIqsfPkXJHzFiKuJkXPNepFuhfiI=;
+ s=k20201202; t=1650650011;
+ bh=gkp6DNyw2iHYqYUFBECtTfXkL7Au8rcuyhUw8+hZ+zc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=MnsFS2DnzvvtqTtcGPdZF34MXSR9rabN8/W0NhI5aBYIe4Ltc1tDX2DmeNHqcPApL
- IO1Jq5L1Kx0Qd5iuaASctI6lO00dcDVsa0jucLWdgqGWXg4D4yTl9aULtmmNk1pK/3
- vQUGCIuglL7IhYhTbaeOrk7IcQBtVfzXYYH12P5tgw25+fYRm0Xbatv6TK2gIHtiz/
- iElJiBOyrfmzVVmgcMsjt+8MKCezTBeR4np/lpMClS/SIAdXd5DzmT8z4Z3462X1ia
- pG+ODn/p2iXg7q0Xt3CeanXcJe0WbfRabTCkym1oLB0i0v2LHDcYai2ay8yFlLn+h/
- A3yAkd7v9Nagw==
-Date: Fri, 22 Apr 2022 10:06:54 -0700
+ b=JxDRF+mkF5po/ooXps/4TpeIlkQj4QSy+qlv/d2bS7Ff7Ql4INXVrCXeanHTNdw4N
+ lUCIUeQfwEkQr1ztjBTzZjLe6A7GdHcktvesfHk5u6wmw7ZCMA3sdXBzA+k4C57dsm
+ k3h7rXA7GhAIu4qtvhn+rJu2RFCnfL/qIx96Ve6hXMVhX631PYGXRKZJ3yi3SfIl73
+ 6sSLaEc6UaJTdl0CPZ7oPhiE12eukIuQ22nJBCGUVgYxpjuzY6JOfiYhOQmVsbznEq
+ eZZj9BnN3FuxyGGyO2MDwcWkfOr0IH05fvktLob1KKXjTVGYXqJOzSt/3TitSd2VEQ
+ qDbYEyaNnOmAg==
+Date: Fri, 22 Apr 2022 10:53:29 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Niels Dossche <dossche.niels@gmail.com>
-Message-ID: <YmLgrm72eU7ttjdY@google.com>
-References: <20220421210948.73198-1-dossche.niels@gmail.com>
+To: Bart Van Assche <bvanassche@acm.org>
+Message-ID: <YmLrmeSPGPYmXtwi@google.com>
+References: <20220421221836.3935616-1-bvanassche@acm.org>
+ <20220421221836.3935616-8-bvanassche@acm.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220421210948.73198-1-dossche.niels@gmail.com>
+In-Reply-To: <20220421221836.3935616-8-bvanassche@acm.org>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -69,17 +70,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 04/21, Niels Dossche wrote: > The calculation for f_bfree
- performs a calculation involving > current_reserved_blocks and
- total_valid_user_blocks.
- Both can be > modified under stat_lock. As stat_loc [...] 
+ Content preview: Fixed a missing resolution from [PATCH 06/31]. In
+ include/f2fs_fs.h, 
+ 71 #ifdef ANDROID_WINDOWS_HOST 72 #undef HAVE_LINUX_TYPES_H 73 #endif 
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -87,9 +87,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nhwkN-006isb-Dg
-Subject: Re: [f2fs-dev] [PATCH] f2fs: extend stat_lock to avoid potential
- race in statfs
+X-Headers-End: 1nhxTP-0007Qp-Da
+Subject: Re: [f2fs-dev] [PATCH 07/31] Change the ANDROID_WINDOWS_HOST macro
+ into _WIN32
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,59 +106,168 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 04/21, Niels Dossche wrote:
-> The calculation for f_bfree performs a calculation involving
-> current_reserved_blocks and total_valid_user_blocks. Both can be
-> modified under stat_lock. As stat_lock is not used to read both these
-> values in statfs, this can lead to inconsistent results. Extend the
-> locking to prevent this issue.
-> Commit c9c8ed50d94c ("f2fs: fix to avoid potential race on sbi->unusable_block_count access/update")
-> already added the use of sbi->stat_lock in statfs in
-> order to make the calculation of multiple, different fields atomic so
-> that results are consistent. This is similar to that patch regarding the
-> change in statfs.
+Fixed a missing resolution from [PATCH 06/31].
 
-Is this enough? It seems we also need to cover sbi->user_block_count and
-sbi->total_node_count by stat_lock.
+In include/f2fs_fs.h,
 
+71 #ifdef ANDROID_WINDOWS_HOST
+72 #undef HAVE_LINUX_TYPES_H
+73 #endif
+
+On 04/21, Bart Van Assche wrote:
+> This makes it easier to build f2fs-tools for Windows.
 > 
-> Signed-off-by: Niels Dossche <dossche.niels@gmail.com>
+> Signed-off-by: Bart Van Assche <bvanassche@acm.org>
 > ---
+>  lib/libf2fs.c            | 10 +++++-----
+>  lib/libf2fs_io.c         |  6 +++---
+>  lib/libf2fs_zoned.c      |  2 +-
+>  mkfs/f2fs_format.c       |  2 +-
+>  mkfs/f2fs_format_main.c  |  2 +-
+>  mkfs/f2fs_format_utils.c |  4 ++--
+>  6 files changed, 13 insertions(+), 13 deletions(-)
 > 
-> Note:
-> I am currently working on a static analyser to detect missing locks
-> using type-based static analysis as my master's thesis
-> in order to obtain my master's degree.
-> If you would like to have more details, please let me know.
-> This was a reported case. I manually verified the report by looking
-> at the code, so that I do not send wrong information or patches.
-> After concluding that this seems to be a true positive, I created
-> this patch. This was compile-tested and runtime-tested on x86_64.
-> This issue was found on Linux v5.17.4.
-> 
->  fs/f2fs/super.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index ea939db18f88..ece768869187 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -1739,10 +1739,12 @@ static int f2fs_statfs(struct dentry *dentry, struct kstatfs *buf)
->  	buf->f_bsize = sbi->blocksize;
+> diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+> index b0a892772de1..c7102528f2f4 100644
+> --- a/lib/libf2fs.c
+> +++ b/lib/libf2fs.c
+> @@ -22,7 +22,7 @@
+>  #endif
+>  #include <time.h>
+>  #include <sys/stat.h>
+> -#ifndef ANDROID_WINDOWS_HOST
+> +#ifndef _WIN32
+>  #include <sys/mount.h>
+>  #include <sys/ioctl.h>
+>  #endif
+> @@ -49,7 +49,7 @@
+>  #define MODELINQUIRY	0x12,0x00,0x00,0x00,0x4A,0x00
+>  #endif
 >  
->  	buf->f_blocks = total_count - start_count;
-> +
-> +	spin_lock(&sbi->stat_lock);
-> +
->  	buf->f_bfree = user_block_count - valid_user_blocks(sbi) -
->  						sbi->current_reserved_blocks;
+> -#ifndef ANDROID_WINDOWS_HOST /* O_BINARY is windows-specific flag */
+> +#ifndef _WIN32 /* O_BINARY is windows-specific flag */
+>  #define O_BINARY 0
+>  #else
+>  /* On Windows, wchar_t is 8 bit sized and it causes compilation errors. */
+> @@ -606,7 +606,7 @@ int write_inode(struct f2fs_node *inode, u64 blkaddr)
+>   */
+>  char *get_rootdev()
+>  {
+> -#if defined(ANDROID_WINDOWS_HOST) || defined(WITH_ANDROID)
+> +#if defined(_WIN32) || defined(WITH_ANDROID)
+>  	return NULL;
+>  #else
+>  	struct stat sb;
+> @@ -740,7 +740,7 @@ static int is_mounted(const char *mpt, const char *device)
 >  
-> -	spin_lock(&sbi->stat_lock);
->  	if (unlikely(buf->f_bfree <= sbi->unusable_block_count))
->  		buf->f_bfree = 0;
->  	else
-> -- 
-> 2.35.2
+>  int f2fs_dev_is_umounted(char *path)
+>  {
+> -#ifdef ANDROID_WINDOWS_HOST
+> +#ifdef _WIN32
+>  	return 0;
+>  #else
+>  	struct stat *st_buf;
+> @@ -872,7 +872,7 @@ void get_kernel_uname_version(__u8 *version)
+>  #define BLKSSZGET	DKIOCGETBLOCKCOUNT
+>  #endif /* APPLE_DARWIN */
+>  
+> -#ifndef ANDROID_WINDOWS_HOST
+> +#ifndef _WIN32
+>  static int open_check_fs(char *path, int flag)
+>  {
+>  	if (c.func != DUMP && (c.func != FSCK || c.fix_on || c.auto_fix))
+> diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
+> index b985e6f37a0a..bf6dfe240bb7 100644
+> --- a/lib/libf2fs_io.c
+> +++ b/lib/libf2fs_io.c
+> @@ -23,7 +23,7 @@
+>  #include <mntent.h>
+>  #endif
+>  #include <time.h>
+> -#ifndef ANDROID_WINDOWS_HOST
+> +#ifndef _WIN32
+>  #include <sys/stat.h>
+>  #include <sys/mount.h>
+>  #include <sys/ioctl.h>
+> @@ -634,7 +634,7 @@ int dev_reada_block(__u64 blk_addr)
+>  
+>  int f2fs_fsync_device(void)
+>  {
+> -#ifndef ANDROID_WINDOWS_HOST
+> +#ifndef _WIN32
+>  	int i;
+>  
+>  	for (i = 0; i < c.ndevs; i++) {
+> @@ -783,7 +783,7 @@ int f2fs_finalize_device(void)
+>  	 * in the block device page cache.
+>  	 */
+>  	for (i = 0; i < c.ndevs; i++) {
+> -#ifndef ANDROID_WINDOWS_HOST
+> +#ifndef _WIN32
+>  		ret = fsync(c.devices[i].fd);
+>  		if (ret < 0) {
+>  			MSG(0, "\tError: Could not conduct fsync!!!\n");
+> diff --git a/lib/libf2fs_zoned.c b/lib/libf2fs_zoned.c
+> index c408a4991fa1..cb954feabe61 100644
+> --- a/lib/libf2fs_zoned.c
+> +++ b/lib/libf2fs_zoned.c
+> @@ -22,7 +22,7 @@
+>  #ifdef HAVE_LINUX_LIMITS_H
+>  #include <linux/limits.h>
+>  #endif
+> -#ifndef ANDROID_WINDOWS_HOST
+> +#ifndef _WIN32
+>  #include <sys/ioctl.h>
+>  #endif
+>  #include <libgen.h>
+> diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+> index 8bd33ac003c5..332abf60d0d9 100644
+> --- a/mkfs/f2fs_format.c
+> +++ b/mkfs/f2fs_format.c
+> @@ -13,7 +13,7 @@
+>  #include <fcntl.h>
+>  #include <string.h>
+>  #include <unistd.h>
+> -#ifndef ANDROID_WINDOWS_HOST
+> +#ifndef _WIN32
+>  #include <sys/stat.h>
+>  #include <sys/mount.h>
+>  #endif
+> diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
+> index d05d4e2cb4e5..ecc942b61d63 100644
+> --- a/mkfs/f2fs_format_main.c
+> +++ b/mkfs/f2fs_format_main.c
+> @@ -15,7 +15,7 @@
+>  #include <stdbool.h>
+>  #include <unistd.h>
+>  #include <sys/stat.h>
+> -#ifndef ANDROID_WINDOWS_HOST
+> +#ifndef _WIN32
+>  #include <sys/mount.h>
+>  #endif
+>  #include <time.h>
+> diff --git a/mkfs/f2fs_format_utils.c b/mkfs/f2fs_format_utils.c
+> index e84311ae1287..53101d1bd790 100644
+> --- a/mkfs/f2fs_format_utils.c
+> +++ b/mkfs/f2fs_format_utils.c
+> @@ -26,7 +26,7 @@
+>  #include <unistd.h>
+>  #include <stdlib.h>
+>  #include <stdbool.h>
+> -#ifndef ANDROID_WINDOWS_HOST
+> +#ifndef _WIN32
+>  #include <sys/ioctl.h>
+>  #endif
+>  #include <sys/stat.h>
+> @@ -48,7 +48,7 @@
+>  
+>  static int trim_device(int i)
+>  {
+> -#ifndef ANDROID_WINDOWS_HOST
+> +#ifndef _WIN32
+>  	unsigned long long range[2];
+>  	struct stat *stat_buf;
+>  	struct device_info *dev = c.devices + i;
 
 
 _______________________________________________
