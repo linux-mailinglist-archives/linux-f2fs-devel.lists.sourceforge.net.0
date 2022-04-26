@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2F45510358
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 Apr 2022 18:30:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB244510C69
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Apr 2022 01:06:59 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1njO5I-0000mi-T0; Tue, 26 Apr 2022 16:30:39 +0000
+	id 1njUGj-0004Ht-10; Tue, 26 Apr 2022 23:06:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1njO5H-0000mY-4v
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Apr 2022 16:30:37 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1njUGY-0004Hl-Oj
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Apr 2022 23:06:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=F+RjSnjlqZjvDbmlaADnjfPHTPBxgE1mv0nr/XuAtsM=; b=EjZPTgUSwrAGifM+lELkCDa6g9
- rlNJPCM2fRoj8bKGlLYk4AvGolg/XKmO7LoWCu3TUVNwWdjT0W7he6L6zdr4w1aQKnJpujMZRwVNj
- vI+GsqeYI8tW90sCoVsi05JAwrQj3KCXXEr6eT/01UfkPD2b7R3YsEdifkIcIpjJNv9Y=;
+ bh=Dh7EAPJZyvmA8mFLiU1B3pGdQFHe2YGfJgTvfkdEMqo=; b=aNQs7QRHCEOS3QbOI33N5OFXoH
+ g+dhhmGcfWO3/X1IT6A6g79UNbKb1TtiKCiuZh1jkhwgg+WtB+JL+j1E1MIwSKhe8/tCfuuE0NEhS
+ sXnjTxbNrW9WjI+WgP1I4CATA9gMsreK0U2E1Oyt3m9VTW1zDgWwcleVVnP8uE7JxE68=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
@@ -29,42 +29,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=F+RjSnjlqZjvDbmlaADnjfPHTPBxgE1mv0nr/XuAtsM=; b=ju8jTeRD/FjojWgGU9rXoI4qXz
- spOI4ZevVAA3Lm7+50nkmvfhLKKVkhhFYxAF76QoD/FYDaWQFkFnbsklLTwTEc/81u/vEwYNuxpLY
- MGMKLrB+zQYe7kVo+ss6JOPGgHN6HceXmd0qoM+sOaDtV2ip9fdh9NSgM0JqB7J9o+z8=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=Dh7EAPJZyvmA8mFLiU1B3pGdQFHe2YGfJgTvfkdEMqo=; b=Ix3ZBYUhMziXmb+Tkq0bs3GBNT
+ lzjOUmpeefbolS8PV6pJPyBkVO8V8n8s3REZJfUm2F/mGhfmsGrCztTMRLSdP4S63+EpE7vhCdDf0
+ 5zVGcy6SWhBmXe3VLFAlih4s7vI19N0ghgWg2DTQQkOSgkBxPWyqXu7FX6/Wt1ywQZ70=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1njO5E-00ArA2-Sw
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Apr 2022 16:30:37 +0000
+ id 1njUGS-00B7NL-AO
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 26 Apr 2022 23:06:41 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 0723CB82047
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 171D1619B9
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 26 Apr 2022 16:30:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2518C385A0
+ Tue, 26 Apr 2022 23:06:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70844C385A0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 26 Apr 2022 16:30:23 +0000 (UTC)
+ Tue, 26 Apr 2022 23:06:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1650990623;
- bh=YNeOYWxJR7wjVSw+Ti3XYGoMVjXTkzBHPM6tsfMxWXc=;
+ s=k20201202; t=1651014385;
+ bh=iQU0CKO8lOoG+Myj3dOrmNHi3w/GKWV8VE39MnU0MyI=;
  h=Date:From:To:Subject:References:In-Reply-To:From;
- b=H0C6JbHxW9T9TijPfOI/urWd6q8fVlgU7jwjESni6J6xeQ/+34nwgP1jKzyT0a37Z
- 5CMGSfgxLsmwoUmHBL9bHA0oCwh/RKn5PYP9fcxRwrTi5MOf6Kr7Y/ho6nFWmFoDjI
- /d9P1jjJ7JbKTUtp/9nC1nMfAdnlyYxEEkc3oN35WqpDwZMkjM8UrET68cHxe4q1m4
- nFl0wJ/P/sk1MA2JH6xel2CbBvA/rIWUYscD4arciMQVPdc3zO9RvcJvU0G+Xz/ACh
- MdovQBPipHHyCmiPf6BpO/tcVgqjl5KqvSjDrmds7oMC3buLAMk7XHpj77jz6tMpD8
- eEHcsW5bghRMQ==
-Date: Tue, 26 Apr 2022 09:30:22 -0700
+ b=E3MVtBYDab/ZWWiih76hRPTHLO6g3x6yCA4b/EK/+0QmxSHIwkKiOYngcdeUBaIUH
+ A+K1MV4xtuPuHeBQFcnlbzX118c3mxQoMXBG3AqIoEnjQCzjEbpm9r/FivkZWlAV2n
+ 7abTZy10ZWO4A6rkWs773DJIfr/2n+Mf7YyKw1R8QKAtGb6Y860ektLemUT6KpXGA+
+ 3S0jFwXKt1Y8iAVvmmmwdnqM6Rzmqs0UivN/HiLbuSA50VeR21WmGEJIioi4wfc5VD
+ 73RHniaQFczxMXNLN+uMgbyieWzT7m68lkSpwEeWctrqX1Rc634AI2v+Ne+hWVKyuh
+ j3v3cVFt5wcjQ==
+Date: Tue, 26 Apr 2022 16:06:23 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <YmgeHgnGY2AFgjHl@google.com>
+Message-ID: <Ymh678gnPofwuo7M@google.com>
 References: <20220422211819.2230879-1-jaegeuk@kernel.org>
- <20220422211819.2230879-5-jaegeuk@kernel.org>
+ <20220422211819.2230879-3-jaegeuk@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220422211819.2230879-5-jaegeuk@kernel.org>
+In-Reply-To: <20220422211819.2230879-3-jaegeuk@kernel.org>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,14 +72,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> --- Change
- log from v1: - Fix xfstests failure include/f2fs_fs.h | 5 +++-- 1 file changed,
- 3 insertions(+), 2 deletions(-) 
+ Content preview:  This requires to change Android.bp in AOSP. Signed-off-by:
+ Jaegeuk Kim <jaegeuk@kernel.org> Change-Id:
+ I28a4a701513cb2420cdf0e0e2aa3f60e712f2fcb
+ --- configure.ac | 9 ++++++++- fsck/fsck.c | 2 +- include/android_config.h
+ | 4 ++++ include/f2fs_fs [...] 
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -87,12 +91,10 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1njO5E-00ArA2-Sw
-Subject: Re: [f2fs-dev] [PATCH 5/6 v2] f2fs-tools: use android config only
- if there's no config.h
+X-Headers-End: 1njUGS-00B7NL-AO
+Subject: Re: [f2fs-dev] [PATCH 3/6 v2] f2fs-tools: support zoned device in
+ Android
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,38 +110,153 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+This requires to change Android.bp in AOSP.
+
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+Change-Id: I28a4a701513cb2420cdf0e0e2aa3f60e712f2fcb
 ---
+ configure.ac             |  9 ++++++++-
+ fsck/fsck.c              |  2 +-
+ include/android_config.h |  4 ++++
+ include/f2fs_fs.h        |  4 +++-
+ lib/libf2fs.c            | 10 +++-------
+ 5 files changed, 19 insertions(+), 10 deletions(-)
 
-Change log from v1:
- - Fix xfstests failure
-
- include/f2fs_fs.h | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
+diff --git a/configure.ac b/configure.ac
+index f0ed5f6528d9..e8ce0057c4ff 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -95,6 +95,7 @@ AC_CHECK_HEADERS(m4_flatten([
+ 	blkid/blkid.h
+ 	byteswap.h
+ 	fcntl.h
++	kernel/uapi/linux/blkzoned.h
+ 	linux/blkzoned.h
+ 	linux/falloc.h
+ 	linux/fiemap.h
+@@ -222,7 +223,13 @@ AC_CONFIG_FILES([
+ 
+ AC_CHECK_MEMBER([struct blk_zone.capacity],
+ 		[AC_DEFINE(HAVE_BLK_ZONE_REP_V2, [1], [report zones includes zone capacity])],
+-		[], [[#include <linux/blkzoned.h>]])
++		[], [[
++#ifdef HAVE_KERNEL_UAPI_LINUX_BLKZONED_H
++#include <kernel/uapi/linux/blkzoned.h>
++#elif defined(HAVE_LINUX_BLKZONED_H)
++#include <linux/blkzoned.h>
++#endif
++		]])
+ 
+ # export library version info for mkfs/libf2fs_format_la
+ AC_SUBST(FMT_CURRENT, 7)
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index 19a28b0eedad..3b37519e9054 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -2994,7 +2994,7 @@ struct write_pointer_check_data {
+ 	int dev_index;
+ };
+ 
+-static int chk_and_fix_wp_with_sit(int i, void *blkzone, void *opaque)
++static int chk_and_fix_wp_with_sit(int UNUSED(i), void *blkzone, void *opaque)
+ {
+ 	struct blk_zone *blkz = (struct blk_zone *)blkzone;
+ 	struct write_pointer_check_data *wpd = opaque;
+diff --git a/include/android_config.h b/include/android_config.h
+index ce6723309447..d7e4f60d91c6 100644
+--- a/include/android_config.h
++++ b/include/android_config.h
+@@ -1,7 +1,10 @@
+ #if defined(__linux__)
++#define HAVE_BLK_ZONE_REP_V2 1
+ #define HAVE_BYTESWAP_H 1
+ #define HAVE_FCNTL_H 1
+ #define HAVE_FALLOC_H 1
++#define HAVE_KERNEL_UAPI_LINUX_BLKZONED_H 1
++#define HAVE_LINUX_BLKZONED_H 1
+ #define HAVE_LINUX_HDREG_H 1
+ #define HAVE_LINUX_LIMITS_H 1
+ #define HAVE_POSIX_ACL_H 1
+@@ -19,6 +22,7 @@
+ #define HAVE_SYS_SYSMACROS_H 1
+ #define HAVE_SYS_XATTR_H 1
+ #define HAVE_UNISTD_H 1
++#define HAVE_SCSI_SG_H 1
+ 
+ #define HAVE_FALLOCATE 1
+ #define HAVE_FSETXATTR 1
 diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index d6374270c188..ad2798cf388c 100644
+index 1d7103c1d6fe..d6374270c188 100644
 --- a/include/f2fs_fs.h
 +++ b/include/f2fs_fs.h
-@@ -26,13 +26,14 @@
- #include <stddef.h>
- #include <string.h>
- #include <time.h>
-+
- #ifdef HAVE_CONFIG_H
- #include <config.h>
--#endif
--
-+#else
- #ifdef __ANDROID__
- #define WITH_ANDROID
+@@ -50,7 +50,9 @@
  #endif
-+#endif /* HAVE_CONFIG_H */
+ #include <sys/types.h>
  
- #ifdef WITH_ANDROID
- #include <android_config.h>
+-#ifdef HAVE_LINUX_BLKZONED_H
++#ifdef HAVE_KERNEL_UAPI_LINUX_BLKZONED_H
++#include <kernel/uapi/linux/blkzoned.h>
++#elif defined(HAVE_LINUX_BLKZONED_H)
+ #include <linux/blkzoned.h>
+ #endif
+ 
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index 63d07f26c739..afdbbbe17d84 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -34,11 +34,9 @@
+ #ifdef HAVE_SYS_UTSNAME_H
+ #include <sys/utsname.h>
+ #endif
+-#ifndef WITH_ANDROID
+ #ifdef HAVE_SCSI_SG_H
+ #include <scsi/sg.h>
+ #endif
+-#endif
+ #ifdef HAVE_LINUX_HDREG_H
+ #include <linux/hdreg.h>
+ #endif
+@@ -46,10 +44,8 @@
+ #include <linux/limits.h>
+ #endif
+ 
+-#ifndef WITH_ANDROID
+ /* SCSI command for standard inquiry*/
+ #define MODELINQUIRY	0x12,0x00,0x00,0x00,0x4A,0x00
+-#endif
+ 
+ #ifndef _WIN32 /* O_BINARY is windows-specific flag */
+ #define O_BINARY 0
+@@ -900,7 +896,7 @@ int get_device_info(int i)
+ #ifdef HDIO_GETGIO
+ 	struct hd_geometry geom;
+ #endif
+-#if !defined(WITH_ANDROID) && defined(__linux__)
++#ifdef __linux__
+ 	sg_io_hdr_t io_hdr;
+ 	unsigned char reply_buffer[96] = {0};
+ 	unsigned char model_inq[6] = {MODELINQUIRY};
+@@ -1002,7 +998,7 @@ int get_device_info(int i)
+ #endif
+ 		}
+ 
+-#if !defined(WITH_ANDROID) && defined(__linux__)
++#ifdef __linux__
+ 		/* Send INQUIRY command */
+ 		memset(&io_hdr, 0, sizeof(sg_io_hdr_t));
+ 		io_hdr.interface_id = 'S';
+@@ -1033,7 +1029,7 @@ int get_device_info(int i)
+ 		return -1;
+ 	}
+ 
+-#if !defined(WITH_ANDROID) && defined(__linux__)
++#ifdef __linux__
+ 	if (S_ISBLK(stat_buf->st_mode)) {
+ 		if (f2fs_get_zoned_model(i) < 0) {
+ 			free(stat_buf);
 -- 
 2.36.0.rc2.479.g8af0fa9b8e-goog
+
 
 
 _______________________________________________
