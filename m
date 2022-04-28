@@ -2,114 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8A3851399E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Apr 2022 18:20:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EFBD513AF6
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Apr 2022 19:30:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nk6sT-0003GK-Ht; Thu, 28 Apr 2022 16:20:24 +0000
+	id 1nk7xp-00061V-3I; Thu, 28 Apr 2022 17:30:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1nk6sS-0003GD-EV
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Apr 2022 16:20:23 +0000
+ (envelope-from <mcgrof@infradead.org>) id 1nk7xm-000618-Pm
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Apr 2022 17:30:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KKyU9ULjrADVinwIi9WI5piK0F7MrOjmq95Q5O1aOms=; b=Nnqr93f/ty0G0mTnrnjEMtNPco
- rv//RMpHxEnQ2v0x0UWJQFVoox83cEz5k14G/HEUvNMgcXrJy0MT87OICSPkHfmCcY7COM44p/qR+
- NKf8mzTR6bSd4zLSqEqHqMnmH5pvbNM7MEWKOWnOWlEbUMfJCqgAiAPizT4djTu+hAAA=;
+ d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=M77UyFZc/CQOenG5boLjqoc0qTJMwAANdJbVnxb68KE=; b=bVKlF5y1n6CfmAqU8m8tcdg98X
+ 41fFqTi+kGAWZcyG2Gj3skaxzKhtgnCDwjfH1jG56OAnaD4/YA2FLTqfVtoxdu9c9CaGC1oLn7HP5
+ YeE0QhSg4wN9FCh8H5IRB5+/BiyRUkupFNCdUY75kjZnxFynS54kc7jIAzZ17wvmxO00=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
- Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=KKyU9ULjrADVinwIi9WI5piK0F7MrOjmq95Q5O1aOms=; b=G
- bmbGOv8tXmyPbxDgYHCrO1T9ghNCWo4d6skb++BD3z3kH+xhWg5co9+UmgVazuVlmVYy/tfwKknEO
- f9W+yM8lMwzoCknW7aevKKrzOl4aMitO6O7XT8HtEq8OhGI/+EXEew/p8o3kEdVcV2pM0kN5MCc4j
- bdFBK+9b9D1UNvn4=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=M77UyFZc/CQOenG5boLjqoc0qTJMwAANdJbVnxb68KE=; b=Zv8QpQElhyBIg3y63ZXbfYop3+
+ uON6/QqakWS3kh9OeygDYlrHqdX2d3QVU59WhjZShnbBdrUyCIll3G9R3folZUuQrST2jVwVAMntc
+ H02uXAXiZpeFfF+HBBmYH2IFsSi/Pf3cK5bhfwLxn0Afhb19YWwPy9oldTvwLgxodgxQ=;
+Received: from bombadil.infradead.org ([198.137.202.133])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nk6sO-00Cx1y-8u
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Apr 2022 16:20:22 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4E0C162083
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 28 Apr 2022 16:20:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id B3C72C385A0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 28 Apr 2022 16:20:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1651162812;
- bh=SsrEJZygFem/DP+OD+Jglsa+PgqAcq+rKi5AFUDXh3A=;
- h=From:To:Subject:Date:From;
- b=aChsb00GyqWeStT05VOppbMTdmGfda9m4FBlG7ynR0m3xzE4uScj6nc/36hKePFZe
- 4Ek8opnc1SDGY6/5k6GQOUCVM8wpdHTUx6qBRkbSVZ0bVolLiWQfv588JsTuu2Oez/
- mU6EndHCBXlNGzlt/m6Qcu/+WE8pfl0riX2eovW0muM99X6hvmbvOwkEfUl+69bXZc
- Lt8IvnlVtcPPQkmS3MDQ0ejKwYq07lKR+QauumGqt3+xR60kwu3RC0/l52WRYKDY/R
- OVHl/thq7n1NLlfzDuEl4483lCHl+E4uJx9PNwtKWvmfSLTaQPaahp9mE4yemVkp8M
- qtdIFmV/SDjJw==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 97125C05F98; Thu, 28 Apr 2022 16:20:12 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 28 Apr 2022 16:20:12 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: new
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: yanming@tju.edu.cn
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version
- cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
- priority component assigned_to reporter cf_regression
-Message-ID: <bug-215914-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1nk7xj-0008OS-QE
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Apr 2022 17:29:59 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Sender:In-Reply-To:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=M77UyFZc/CQOenG5boLjqoc0qTJMwAANdJbVnxb68KE=; b=JWA7yBd2WgLv8JgmAvqWwyoH7N
+ CbCI23q7BAOQJ0ekZUG/FMPi05rdlj74q9wztR9r4BIk+quAD2WWbX+5hu0/Tn9NNZBjpH7On+mMo
+ VC6igZust8a3wLGSg61u8qnlyDLLzOqnSRuUT272lK0I/PfG3acjO4xrDkVkSKqZP881da1wHQb0o
+ YPusvURC9voi3RnaJh4nT8b+IVwjMG6wfxev2aPSyh9jfbfzwITiAEf0dPZe2VsVzZunc5WtOly+c
+ R1yUG4N0F25z4sNcXZVg07M81adkeM3AyCXsGszurdLc5pViE/I3gVGt7mNG8XZe7KQhBn80LujAv
+ 8QWTtyqQ==;
+Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
+ (Red Hat Linux)) id 1nk7xL-0082dM-NY; Thu, 28 Apr 2022 17:29:31 +0000
+Date: Thu, 28 Apr 2022 10:29:31 -0700
+From: Luis Chamberlain <mcgrof@kernel.org>
+To: Damien Le Moal <damien.lemoal@opensource.wdc.com>
+Message-ID: <YmrO+2sexVkJEaIr@bombadil.infradead.org>
+References: <20220427160255.300418-1-p.raghav@samsung.com>
+ <CGME20220427160300eucas1p1470fe30535849de6204bb78d7083cb3a@eucas1p1.samsung.com>
+ <20220427160255.300418-5-p.raghav@samsung.com>
+ <eeb86052-399c-a79b-32ab-1ed1b2d05e07@opensource.wdc.com>
 MIME-Version: 1.0
-X-Spam-Score: -5.8 (-----)
+Content-Disposition: inline
+In-Reply-To: <eeb86052-399c-a79b-32ab-1ed1b2d05e07@opensource.wdc.com>
+X-Spam-Score: -2.1 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=215914 Bug ID:
- 215914 Summary: kernel hangs after mounting the image Product: File System
- Version: 2.5 Kernel Version: 5.17 Hardware: All OS: Linux Tree: Mainline
- Status: NEW Severity: normal Priority: P1 C [...] 
- Content analysis details:   (-5.8 points, 6.0 required)
+ Content preview:  On Thu, Apr 28, 2022 at 08:37:27AM +0900,
+ Damien Le Moal wrote:
+ > Also, the entire premise of this patch series is that it is hard for >
+ people to support the unusable sectors between zone capacity an [...] 
+ Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [198.137.202.133 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nk6sO-00Cx1y-8u
-Subject: [f2fs-dev] [Bug 215914] New: kernel hangs after mounting the image
+X-Headers-End: 1nk7xj-0008OS-QE
+Subject: Re: [f2fs-dev] [PATCH 04/16] block: allow blk-zoned devices to have
+ non-power-of-2 zone size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,48 +99,36 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: jiangbo.365@bytedance.com, linux-nvme@lists.infradead.org, clm@fb.com,
+ dm-devel@redhat.com, hch@lst.de, agk@redhat.com, naohiro.aota@wdc.com,
+ sagi@grimberg.me, gost.dev@samsung.com, jonathan.derrick@linux.dev,
+ Pankaj Raghav <p.raghav@samsung.com>, kch@nvidia.com, snitzer@kernel.org,
+ josef@toxicpanda.com, linux-block@vger.kernel.org, dsterba@suse.com,
+ kbusch@kernel.org, jaegeuk@kernel.org, matias.bjorling@wdc.com,
+ bvanassche@acm.org, axboe@kernel.dk, johannes.thumshirn@wdc.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fsdevel@vger.kernel.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=215914
+On Thu, Apr 28, 2022 at 08:37:27AM +0900, Damien Le Moal wrote:
+> Also, the entire premise of this patch series is that it is hard for
+> people to support the unusable sectors between zone capacity and zone end
+> for drives with a zone capacity smaller than the zone size.
+> 
+> Yet, here you do not check that zone capacity == zone size for drives that
+> do not have a zone size equal to a power of 2 number of sectors. This
+> means that we can still have drives with ZC < ZS AND ZS not equal to a
+> power of 2. So from the point of view of your arguments, no gains at all.
+> Any thoughts on this ?
 
-            Bug ID: 215914
-           Summary: kernel hangs after mounting the image
-           Product: File System
-           Version: 2.5
-    Kernel Version: 5.17
-          Hardware: All
-                OS: Linux
-              Tree: Mainline
-            Status: NEW
-          Severity: normal
-          Priority: P1
-         Component: f2fs
-          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
-          Reporter: yanming@tju.edu.cn
-        Regression: No
+You are right, a check should be added on bringup so that if npo2 is
+used, zone cap == zone size. That should be added on the next iteration
+of this patch.
 
-I have mounted a F2FS image with several mount options. When I try to perform
-any file operations on the mount point, the kernel hangs. The process even
-cannot be killed. I am wondering whether there is a bug in the file system?
+  Luis
 
-The image is provided at
-(https://drive.google.com/file/d/1EwbxTExo7lsNgGKRpK-CP3ccIkFJe4kg/view?usp=sharing).
-
-This issue can be reproduced by running the following commands:
-losetup /dev/loop0 case.img
-mount -o
-"disable_ext_identify,inline_data,nobarrier,extent_cache,grpquota,fsync_mode=nobarrier,test_dummy_encryption"
-/dev/loop0 /mnt/test/
-cd /mnt/test/
-touch test
-
--- 
-You may reply to this email to add a comment.
-
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
