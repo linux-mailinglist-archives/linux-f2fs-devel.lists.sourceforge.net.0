@@ -2,94 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D500F5153AA
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Apr 2022 20:28:11 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 684CE515A2D
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 Apr 2022 05:36:56 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nkVLf-0001aW-A6; Fri, 29 Apr 2022 18:28:10 +0000
+	id 1nkduc-0005rC-Jd; Sat, 30 Apr 2022 03:36:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <krisman@collabora.com>) id 1nkVLe-0001ZZ-5M
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 18:28:09 +0000
+ (envelope-from <chao@kernel.org>) id 1nkdua-0005r5-TE
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 Apr 2022 03:36:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BrAXTMvTIhycLuK0grcieo2H56kgVrTIGRjLGiNEa04=; b=k5Y0IMEE20hEXtAeK4cDlhVPRb
- x3QSb+/wSmsRnPR1cdCDJ7f1QzY2qu47l6i30xCtEAl7pj+8Hr2LerXboz5qp6zl3vjqWV3LiecCj
- zlsKUPaWVDtACl4fPlSfdd9emL9SWcfZVNlVmAlqKPLTQ/I46wBQh4IhNm2duy0y8UAI=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=BrAXTMvTIhycLuK0grcieo2H56kgVrTIGRjLGiNEa04=; b=QnznfC2f7LXqGJBACZ7Kk/zGnf
- LdoaV4bfocdrm46opM4Y5VxmH/ASAgEeFIAScZ/wjWuadMcRac25QQ+BEAZT4ghSfmUX4AVSW2j/L
- lPwIi6LWPqJH2gA8lXWXA1MGE5rGRquzRYAj37w8ebS+izgUckeFkdxn+Gl+COtZ2xyQ=;
-Received: from bhuna.collabora.co.uk ([46.235.227.227])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=4cL9CgxPIn/X28DQd8OxzN8aW4+vjpBr+0BjJ7gyN6s=; b=QC2d3gB+hmCYa7DFn+TqWZiZ3t
+ hVGwGzccDdtCcTgAlDDmC2xyFLOocipPXr+7lfKsQkPzkD8VNc2/X6taXt7Vlp6/NpBZ9fFb4eHr0
+ YRj6bzxwzEd6Y4SkFa/HALkET1TdqdvrWyLZXeEAuOkBzTR6t0Klj97wBwbUgFx7nhs4=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=4cL9CgxPIn/X28DQd8OxzN8aW4+vjpBr+0BjJ7gyN6s=; b=C
+ l1TdtknkZuIA6vsWK18tcbo0aSe+FV4TtsF4dbp/XzmTpRd+K5DYAWVwHC0F6kzAxBTNXajWA0ibK
+ DZNnwgFaDA8QfqabLCSJmpXYQWhpwXT31ikWoIyVlQ3sHlV2VXNqWHgw7Hc1liZxk6f3hVoyhffT6
+ 1+QwPycVMjJ1Bvu0=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nkVLZ-0001sG-Nu
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 18:28:06 +0000
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: krisman) with ESMTPSA id 698541F46913
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1651256879;
- bh=e2mIC2NlA+jrtGJdGyDt40xQfgyktaRVyuhlRHDssdg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=mhUIS5KolkDEVLKydJJGwtmBAUfMjZYY65SAMwLu6HY0GWa8UA9NyMk5vsKnhBGnz
- 6DaiSFCen8PCqjZq2AAcDKydm37BU3MTUx2JhKJjxwnN5Fm1PPtJBehtmOGlf+ztIz
- Te9ORRP6J//LieyP1Pg1U6xMFBcwOsKPAtj2ETUeBot/Oef9d6SghZ2ecVHh1FdTjW
- TbCFGcRx1G3+vrc5pg1BAPcjOGtug7aLvHvHZl8DHGzTwBJsEoehQ8dPEGVROjAq7p
- 4hJ/Jtu7f7chzSdZjk+pOSr2pdIils3iffVpSlw6kgkAEL7OM8TrDEHW1w79s3XPNE
- xG9FZ3q5ArwXw==
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
-To: tytso@mit.edu,
-	adilger.kernel@dilger.ca,
-	jaegeuk@kernel.org
-Date: Fri, 29 Apr 2022 14:27:28 -0400
-Message-Id: <20220429182728.14008-8-krisman@collabora.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220429182728.14008-1-krisman@collabora.com>
-References: <20220429182728.14008-1-krisman@collabora.com>
+ id 1nkduY-00EVtF-AI
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 30 Apr 2022 03:36:47 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 22C04B838BE;
+ Sat, 30 Apr 2022 03:36:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58302C385A7;
+ Sat, 30 Apr 2022 03:36:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1651289795;
+ bh=/wxIu6sulo5yHNBHDR4kSxJL1m5XWpAKeneenD0KkMc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=n3vErz3f7a2glcLdJ3Psi2sZ9Zi9+BWPoAyM/Kql35yPY9CcHBEiyF3NKiccIkkrD
+ khXF+teJTcv8lgCgdrgAOi4Vj+3Azc2hsiUz5PlidjCauBCrSC62qL2jITG35JuCTm
+ Oprz5PMBy08+ah4wN6kD7ToJoxfLm/8VzxSe2eA4IJvkGWCIH+Ekvs3X6QZPXo5qVO
+ XQuXozQeq9Q7ZOHg8LzxWeo3RYChK9WSGvoMzTI1FysMrYN3U7XbO+grU5C8Oj8eb2
+ bHn+vKtYLVJz3z+ZEW87oU2uL9gyDAsVd4BvZxae9xy26S1qbX1Mf3fb7fItOdpOM8
+ wX/xTNhBabYew==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Sat, 30 Apr 2022 04:46:31 +0800
+Message-Id: <20220429204631.7241-1-chao@kernel.org>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-X-Spam-Score: 1.5 (+)
+X-Spam-Score: -4.8 (----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Now that ci_match is part of libfs,
- make f2fs reuse it instead
- of having a different implementation. Signed-off-by: Gabriel Krisman Bertazi
- <krisman@collabora.com> --- fs/f2fs/dir.c | 58 ++++ 1 file changed,
- 4 insertions(+), 54 deletions(-) 
- Content analysis details:   (1.5 points, 6.0 required)
+ Content preview: As Yanming reported in bugzilla:
+ https://bugzilla.kernel.org/show_bug.cgi?id=215914
+ The root cause is: in a very small sized image, it's very easy to exceed
+ threshold of foreground GC, if we calculate free space and dirty data based
+ on section granularity, in corner case, has_not_eno [...] 
+ Content analysis details:   (-4.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 1.7 URIBL_BLACK            Contains an URL listed in the URIBL blacklist
- [URIs: entry.name]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ 1.1 DATE_IN_PAST_06_12     Date: is 6 to 12 hours before Received: date
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
- lines
-X-Headers-End: 1nkVLZ-0001sG-Nu
-Subject: [f2fs-dev] [PATCH v3 7/7] f2fs: Reuse generic_ci_match for ci
- comparisons
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nkduY-00EVtF-AI
+Subject: [f2fs-dev] [PATCH] f2fs: fix deadloop in foreground GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,101 +101,94 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ebiggers@kernel.org, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>, kernel@collabora.com,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Ming Yan <yanming@tju.edu.cn>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Now that ci_match is part of libfs, make f2fs reuse it instead of having
-a different implementation.
+As Yanming reported in bugzilla:
 
-Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+https://bugzilla.kernel.org/show_bug.cgi?id=215914
+
+The root cause is: in a very small sized image, it's very easy to
+exceed threshold of foreground GC, if we calculate free space and
+dirty data based on section granularity, in corner case,
+has_not_enough_free_secs() will always return true, result in
+deadloop in f2fs_gc().
+
+So this patch refactors has_not_enough_free_secs() as below to fix
+this issue:
+1. calculate needed space based on block granularity, and separate
+all blocks to two parts, section part, and block part, comparing
+section part to free section, and comparing block part to free space
+in openned log.
+2. account F2FS_DIRTY_NODES, F2FS_DIRTY_IMETA and F2FS_DIRTY_DENTS
+as node block consumer;
+3. account F2FS_DIRTY_DENTS as data block consumer;
+
+Cc: stable@vger.kernel.org
+Reported-by: Ming Yan <yanming@tju.edu.cn>
+Signed-off-by: Chao Yu <chao.yu@oppo.com>
 ---
- fs/f2fs/dir.c | 58 ++++-----------------------------------------------
- 1 file changed, 4 insertions(+), 54 deletions(-)
+ fs/f2fs/segment.h | 30 +++++++++++++++++-------------
+ 1 file changed, 17 insertions(+), 13 deletions(-)
 
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index 166f08623362..c39b3abbf99e 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -208,69 +208,19 @@ static struct f2fs_dir_entry *find_in_block(struct inode *dir,
- 	return f2fs_find_target_dentry(&d, fname, max_slots);
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 8a591455d796..28f7aa9b40bf 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -575,11 +575,10 @@ static inline int reserved_sections(struct f2fs_sb_info *sbi)
+ 	return GET_SEC_FROM_SEG(sbi, reserved_segments(sbi));
  }
  
--#if IS_ENABLED(CONFIG_UNICODE)
--/*
-- * Test whether a case-insensitive directory entry matches the filename
-- * being searched for.
-- *
-- * Returns 1 for a match, 0 for no match, and -errno on an error.
-- */
--static int f2fs_match_ci_name(const struct inode *dir, const struct qstr *name,
--			       const u8 *de_name, u32 de_name_len)
--{
--	const struct super_block *sb = dir->i_sb;
--	const struct unicode_map *um = sb->s_encoding;
--	struct fscrypt_str decrypted_name = FSTR_INIT(NULL, de_name_len);
--	struct qstr entry = QSTR_INIT(de_name, de_name_len);
--	int res;
--
--	if (IS_ENCRYPTED(dir)) {
--		const struct fscrypt_str encrypted_name =
--			FSTR_INIT((u8 *)de_name, de_name_len);
--
--		if (WARN_ON_ONCE(!fscrypt_has_encryption_key(dir)))
--			return -EINVAL;
--
--		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
--		if (!decrypted_name.name)
--			return -ENOMEM;
--		res = fscrypt_fname_disk_to_usr(dir, 0, 0, &encrypted_name,
--						&decrypted_name);
--		if (res < 0)
--			goto out;
--		entry.name = decrypted_name.name;
--		entry.len = decrypted_name.len;
--	}
--
--	res = utf8_strncasecmp_folded(um, name, &entry);
--	/*
--	 * In strict mode, ignore invalid names.  In non-strict mode,
--	 * fall back to treating them as opaque byte sequences.
--	 */
--	if (res < 0 && !sb_has_strict_encoding(sb)) {
--		res = name->len == entry.len &&
--				memcmp(name->name, entry.name, name->len) == 0;
--	} else {
--		/* utf8_strncasecmp_folded returns 0 on match */
--		res = (res == 0);
--	}
--out:
--	kfree(decrypted_name.name);
--	return res;
--}
--#endif /* CONFIG_UNICODE */
--
- static inline int f2fs_match_name(const struct inode *dir,
- 				   const struct f2fs_filename *fname,
- 				   const u8 *de_name, u32 de_name_len)
+-static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi)
++static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
++			unsigned int node_blocks, unsigned int dent_blocks)
  {
- 	struct fscrypt_name f;
-+	struct unicode_name u;
+-	unsigned int node_blocks = get_pages(sbi, F2FS_DIRTY_NODES) +
+-					get_pages(sbi, F2FS_DIRTY_DENTS);
+-	unsigned int dent_blocks = get_pages(sbi, F2FS_DIRTY_DENTS);
++
+ 	unsigned int segno, left_blocks;
+ 	int i;
  
- #if IS_ENABLED(CONFIG_UNICODE)
- 	if (fname->cf_name.name) {
- 		struct qstr cf = FSTR_TO_QSTR(&fname->cf_name);
--
--		return f2fs_match_ci_name(dir, &cf, de_name, de_name_len);
-+		u.folded_name = &cf;
-+		u.usr_name = fname->usr_fname;
-+		return generic_ci_match(dir, &u, (u8*) de_name, de_name_len);
- 	}
- #endif
- 	f.usr_fname = fname->usr_fname;
+@@ -605,19 +604,24 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi)
+ static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
+ 					int freed, int needed)
+ {
+-	int node_secs = get_blocktype_secs(sbi, F2FS_DIRTY_NODES);
+-	int dent_secs = get_blocktype_secs(sbi, F2FS_DIRTY_DENTS);
+-	int imeta_secs = get_blocktype_secs(sbi, F2FS_DIRTY_IMETA);
++	unsigned int total_node_blocks = get_pages(sbi, F2FS_DIRTY_NODES) +
++					get_pages(sbi, F2FS_DIRTY_DENTS) +
++					get_pages(sbi, F2FS_DIRTY_IMETA);
++	unsigned int total_dent_blocks = get_pages(sbi, F2FS_DIRTY_DENTS);
++	unsigned int node_secs = total_node_blocks / BLKS_PER_SEC(sbi);
++	unsigned int dent_secs = total_dent_blocks / BLKS_PER_SEC(sbi);
++	unsigned int node_blocks = total_node_blocks % BLKS_PER_SEC(sbi);
++	unsigned int dent_blocks = total_dent_blocks % BLKS_PER_SEC(sbi);
+ 
+ 	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
+ 		return false;
+ 
+-	if (free_sections(sbi) + freed == reserved_sections(sbi) + needed &&
+-			has_curseg_enough_space(sbi))
+-		return false;
+-	return (free_sections(sbi) + freed) <=
+-		(node_secs + 2 * dent_secs + imeta_secs +
+-		reserved_sections(sbi) + needed);
++	if (free_sections(sbi) + freed <=
++			node_secs + dent_secs + reserved_sections(sbi) + needed)
++		return true;
++	if (!has_curseg_enough_space(sbi, node_blocks, dent_blocks))
++		return true;
++	return false;
+ }
+ 
+ static inline bool f2fs_is_checkpoint_ready(struct f2fs_sb_info *sbi)
 -- 
-2.35.1
+2.32.0
 
 
 
