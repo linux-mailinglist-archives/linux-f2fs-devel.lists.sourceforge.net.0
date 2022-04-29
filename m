@@ -2,91 +2,113 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23ACE514DDD
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Apr 2022 16:45:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1A57514E21
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Apr 2022 16:48:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nkRs4-0001JV-C1; Fri, 29 Apr 2022 14:45:24 +0000
+	id 1nkRuw-0000kn-Je; Fri, 29 Apr 2022 14:48:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nkRrr-0001JC-FD
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 14:45:11 +0000
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1nkRuv-0000kh-DP
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 14:48:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cwyEkaRXzpSv2X2uue4Fq4ZjpwBUxQxUxY9GHDNAkU8=; b=FAYysBNGcGq6xBE22RClTKIJ+m
- oCcq+AyRL1/IvK+C8GGT61/f3/fIYnPW4X+uJwi4lpPy2D/1/2P7VGCBji2P+qy5QB4O2xcOGqga+
- /29dsT41eUxbTo95nTDGW8weqMqiq6x7R18Lp8CnSyquldrIlm4p61Y7L1OWyODAqnic=;
+ bh=k++9RaPGvcPVRlLSieF44cPPghdWm3YmlV9/llZkj/s=; b=RrcX7tGmt+gdDLhLY33CRXOn9N
+ R1W4PLF7sxPrI8Iz9gtEdfJihKQzG5jOLRRhblKMWUjIb0PZ+IWKcaK55yeFr9PMEsZBa9pwmnL+y
+ Fs93dmaDc1obDQomzZ/ZYA5cSCbFjME+kso8aqRsHVLHoPH3qPOe0tKLbkBlw/2DSMJc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=cwyEkaRXzpSv2X2uue4Fq4ZjpwBUxQxUxY9GHDNAkU8=; b=M
- n1u7Ln1hqJV4sBN4r2kjabzQb/A00Zi0yrfjI+h24KsZY0bZiwyRLLdiEgdayUjUFHhSlO5yoUOHS
- hHjOfG1WhR4jz/Vd65V5Q8388hV2xrL57WxJCMej7FDnqO8QGX2BicaB1sG5yRGoN/wxcQj636pjK
- w0rPlW5KxsKIMNHk=;
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=k++9RaPGvcPVRlLSieF44cPPghdWm3YmlV9/llZkj/s=; b=NO0W2UEgsQ910+0HqVOIPpPz7G
+ eYvJvtuFSr+2nWCjiQ7qgNVxhupyvb86p9WjLg97Uxml2CmDiWRA2hLlNWeyUEry+GZ9umBKQAI4S
+ 9OSsXW+KTUFIGkwHMlQ/mLqK6rNC4gHPtp9b+0k4k0FURhfEE3zZem6JQ5O26pAhVpeI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nkRrp-00DtX7-0A
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 14:45:09 +0000
+ id 1nkRuu-00Dtgq-07
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 14:48:21 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9F1BE61C9A;
- Fri, 29 Apr 2022 14:45:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A046C385A7;
- Fri, 29 Apr 2022 14:45:00 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9FE0B61890
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 29 Apr 2022 14:48:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 02E63C385AE
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 29 Apr 2022 14:48:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1651243503;
- bh=io/+OPI9dei5Q8+p9fscebrNqMGOirbaNL6vlPLV/ro=;
- h=From:To:Cc:Subject:Date:From;
- b=gcvPrXrr54Akq96wqB6c5szu1SPIlj/6VwHjxNrLK4zjPFjPK6esrrLD19xM6b9ey
- E7f3yz7Za/OLQBFXEMQEQqFHfuE1Ow/PQi0ymbxIu1qPn48W/B8fOQDXJRNLW74NLW
- K0kqRDBDca1a2B+PmBRkdFYJIK2KlQEb1CbqYavzjV7HpH+57CUKaZFeYLlZdULJDQ
- QCNq64HOzHB+HWv5lIWCxaM2nufxF4c8WfjtExeh/pQ7PwsLc73I+18li8qbmQ2J/w
- XBXiH+xSnR5H8qxtjNhx0SvcHtC5pxLwKBls6eD8XhG3HMWZ7Sm7kmnqdSg/CH/Ekq
- vMWuCbjGq2Y9g==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Fri, 29 Apr 2022 22:44:56 +0800
-Message-Id: <20220429144456.22232-1-chao@kernel.org>
-X-Mailer: git-send-email 2.25.1
+ s=k20201202; t=1651243694;
+ bh=hqmwiluI72IiBSsdZ3sfCPVEj2jJTo7sx7EmR+W4FB4=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=UWkMYjrHnV7V9Ew2diK3prReipGODPmenJRT11VdbOB/KUCBMuuTKRQ2Vc5I0AcX0
+ GjNlmRQkSbziW7O1xXY7yLDFMiAZm1tdXzL2247fDDOXSU7eLVnonnhW7kWm3/+S8P
+ ozMI5AKLT128KEZtrFBliCuwWHx4BBqobTUJ9csWn07C7E2sxBoraFH66H4e6KuU6C
+ MSHw26u1G7dL0HnNsycicxq1B5owkUa7Hh3OhbcZRg10Ip4Z9grlRN2V2JwhIlV2pp
+ cRkN9GPTJrnelRnXLNNSN4Kh1CbQ5Hu0oA3x8/z9g/T2u5hUkxeGt3QDiHJePUb/xJ
+ k6U0lLj/JfX0w==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id D6D14C05FCE; Fri, 29 Apr 2022 14:48:13 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 29 Apr 2022 14:48:13 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: ASSIGNED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_status cc
+Message-ID: <bug-215916-202145-GEUtGH4CyY@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-215916-202145@https.bugzilla.kernel.org/>
+References: <bug-215916-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Spam-Score: -5.8 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: As Yanming reported in bugzilla:
- https://bugzilla.kernel.org/show_bug.cgi?id=215916
- The kernel message is shown below: 
- Content analysis details:   (-5.8 points, 6.0 required)
+ Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=215916 Chao Yu
+ (chao@kernel.org) changed: What |Removed |Added Status|NEW |ASSIGNED CC|
+ |chao@kernel.org 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nkRrp-00DtX7-0A
-Subject: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on total_data_blocks
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nkRuu-00Dtgq-07
+Subject: [f2fs-dev] [Bug 215916] kernel BUG at fs/f2fs/segment.c:2560!
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,132 +120,29 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Ming Yan <yanming@tju.edu.cn>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As Yanming reported in bugzilla:
-
 https://bugzilla.kernel.org/show_bug.cgi?id=215916
 
-The kernel message is shown below:
+Chao Yu (chao@kernel.org) changed:
 
-kernel BUG at fs/f2fs/segment.c:2560!
-Call Trace:
- allocate_segment_by_default+0x228/0x440
- f2fs_allocate_data_block+0x13d1/0x31f0
- do_write_page+0x18d/0x710
- f2fs_outplace_write_data+0x151/0x250
- f2fs_do_write_data_page+0xef9/0x1980
- move_data_page+0x6af/0xbc0
- do_garbage_collect+0x312f/0x46f0
- f2fs_gc+0x6b0/0x3bc0
- f2fs_balance_fs+0x921/0x2260
- f2fs_write_single_data_page+0x16be/0x2370
- f2fs_write_cache_pages+0x428/0xd00
- f2fs_write_data_pages+0x96e/0xd50
- do_writepages+0x168/0x550
- __writeback_single_inode+0x9f/0x870
- writeback_sb_inodes+0x47d/0xb20
- __writeback_inodes_wb+0xb2/0x200
- wb_writeback+0x4bd/0x660
- wb_workfn+0x5f3/0xab0
- process_one_work+0x79f/0x13e0
- worker_thread+0x89/0xf60
- kthread+0x26a/0x300
- ret_from_fork+0x22/0x30
-RIP: 0010:new_curseg+0xe8d/0x15f0
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |ASSIGNED
+                 CC|                            |chao@kernel.org
 
-The root cause is: ckpt.valid_block_count is inconsistent with SIT table,
-stat info indicates filesystem has free blocks, but SIT table indicates
-filesystem has no free segment.
+--- Comment #1 from Chao Yu (chao@kernel.org) ---
+Could you please help to test below patch?
 
-So that during garbage colloection, it triggers panic when LFS allocator
-fails to find free segment.
+https://lore.kernel.org/linux-f2fs-devel/20220429144456.22232-1-chao@kernel.org/T/#u
 
-This patch tries to fix this issue by checking consistency in between
-ckpt.valid_block_count and block accounted from SIT.
-
-Cc: stable@vger.kernel.org
-Reported-by: Ming Yan <yanming@tju.edu.cn>
-Signed-off-by: Chao Yu <chao.yu@oppo.com>
----
- fs/f2fs/segment.c | 24 +++++++++++++++++++++---
- 1 file changed, 21 insertions(+), 3 deletions(-)
-
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 8c17fed8987e..eddaf3b45b25 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -4462,6 +4462,7 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
- 	unsigned int readed, start_blk = 0;
- 	int err = 0;
- 	block_t total_node_blocks = 0;
-+	block_t total_data_blocks = 0;
- 
- 	do {
- 		readed = f2fs_ra_meta_pages(sbi, start_blk, BIO_MAX_VECS,
-@@ -4488,6 +4489,8 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
- 			seg_info_from_raw_sit(se, &sit);
- 			if (IS_NODESEG(se->type))
- 				total_node_blocks += se->valid_blocks;
-+			else
-+				total_data_blocks += se->valid_blocks;
- 
- 			if (f2fs_block_unit_discard(sbi)) {
- 				/* build discard map only one time */
-@@ -4529,6 +4532,8 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
- 		old_valid_blocks = se->valid_blocks;
- 		if (IS_NODESEG(se->type))
- 			total_node_blocks -= old_valid_blocks;
-+		else
-+			total_data_blocks -= old_valid_blocks;
- 
- 		err = check_block_count(sbi, start, &sit);
- 		if (err)
-@@ -4536,6 +4541,8 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
- 		seg_info_from_raw_sit(se, &sit);
- 		if (IS_NODESEG(se->type))
- 			total_node_blocks += se->valid_blocks;
-+		else
-+			total_data_blocks += se->valid_blocks;
- 
- 		if (f2fs_block_unit_discard(sbi)) {
- 			if (is_set_ckpt_flags(sbi, CP_TRIMMED_FLAG)) {
-@@ -4557,13 +4564,24 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
- 	}
- 	up_read(&curseg->journal_rwsem);
- 
--	if (!err && total_node_blocks != valid_node_count(sbi)) {
-+	if (err)
-+		return err;
-+
-+	if (total_node_blocks != valid_node_count(sbi)) {
- 		f2fs_err(sbi, "SIT is corrupted node# %u vs %u",
- 			 total_node_blocks, valid_node_count(sbi));
--		err = -EFSCORRUPTED;
-+		return -EFSCORRUPTED;
- 	}
- 
--	return err;
-+	if (total_data_blocks + total_node_blocks !=
-+				valid_user_blocks(sbi)) {
-+		f2fs_err(sbi, "SIT is corrupted data# %u vs %u",
-+			 total_data_blocks,
-+			 valid_user_blocks(sbi) - total_node_blocks);
-+		return -EFSCORRUPTED;
-+	}
-+
-+	return 0;
- }
- 
- static void init_free_segmap(struct f2fs_sb_info *sbi)
 -- 
-2.25.1
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
