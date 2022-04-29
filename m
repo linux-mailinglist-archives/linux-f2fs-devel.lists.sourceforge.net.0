@@ -2,94 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C96C5513E83
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Apr 2022 00:30:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id E54BC5141D4
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Apr 2022 07:40:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nkCeT-0006d4-5T; Thu, 28 Apr 2022 22:30:20 +0000
+	id 1nkJMT-0006s0-MC; Fri, 29 Apr 2022 05:40:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <krisman@collabora.com>) id 1nkCeR-0006cs-QB
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Apr 2022 22:30:19 +0000
+ (envelope-from <lkp@intel.com>) id 1nkJMS-0006qZ-0g
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 05:40:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BrAXTMvTIhycLuK0grcieo2H56kgVrTIGRjLGiNEa04=; b=DArad3KIoXLoxxHfjLtEVhYtp0
- dBWeOW2QJXegUF/aWjOZ19iNeIeFtlIfA1k7frBenAaHvIQLc9OahI3o2wHBuUiL1DvLr6aplgNSA
- XXBFMYG7SyhUPGFzzKbBfnH6wq98f7vj2BqW6aovIAnQTthHMGYtxZiSQ8Yo416eT658=;
+ bh=nz8Tg1nIwEaZK3MhRjHHbNA/rs47lF/NakQ1oizttaQ=; b=eNnwhO/kQElbNt5hrwr46krItn
+ 8Ata9XoPuCnrcaCd1uUy2eVKfo9zlbo7uCJvXi7TiTjgux8pDJgqDmA8zsAZxGnUySHGi55SWmZii
+ j2ZaMJOcLF/kHPMDQYv2HvTuNKvhTf+VXEmJT02qPpMVnvd2weNsW2na6SMtzj3hZdGw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BrAXTMvTIhycLuK0grcieo2H56kgVrTIGRjLGiNEa04=; b=M4OrZkIhFBOv0QJ0ZZpTGFWpf4
- jFEPlzp6JybBYXWOHxDJbQywAnGx63gjsT8okME5d7xZDWT3OEtKecbUJZ29aI01dX9F5vqonoVxz
- CPRpRToEBucULWlEHrHSensorWgeUahSk+rmlexbWs/XZKd/X7naNKM/VxhQANmTf3pc=;
-Received: from bhuna.collabora.co.uk ([46.235.227.227])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=nz8Tg1nIwEaZK3MhRjHHbNA/rs47lF/NakQ1oizttaQ=; b=XIct/ybUAzFDILwZS0vn0p6A+3
+ 0wWq0rKLAykCZ/vsu0RWbQuV2157hP1QNGe5+fIeYU9bVv/lkD+vULzOHcdCHagyPdZOU98HeIahG
+ E5CgwOdNMQiBhR368Ter+2ooRlSONyPtwMswP7a95Fyj/YHFpiIbw5eMPJ9YrpouREmw=;
+Received: from mga09.intel.com ([134.134.136.24])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nkCeP-0001Tk-FD
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 28 Apr 2022 22:30:18 +0000
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: krisman) with ESMTPSA id 2BB801F45D1A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1651183864;
- bh=e2mIC2NlA+jrtGJdGyDt40xQfgyktaRVyuhlRHDssdg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=F1h/0crsTfyaJzgahez6OLwjQxjaTKI3kwM3H3V5lHvWiMge1TInY2jn5O8oySU0Q
- Km/SXp2GneySKQbSdaj2Ig18t2s8YNdM45DRvaaE9LrKe7m5MoVaUIJLbaxdyjRlaz
- 83etAlhMkS3dB9y45jkLAOYmNNBLaMU50KNAgOMmdC2VrauQ5Tj2pYslBgwfz5ywvw
- FcZBE2t+Tpz77ywJhjh+AVr4N9hdEQH4x5nBzcScodQEfXyzSTFjE7dxNZIniUnPNO
- 5bEZWGWlgkzAKkNdWpa/IwDyFhKggot18TeVbdK/U15uRPRNgxLtBL2mkohANr6Brc
- SYCPm8i9/1DSQ==
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
-To: tytso@mit.edu,
-	adilger.kernel@dilger.ca,
-	jaegeuk@kernel.org
-Date: Thu, 28 Apr 2022 18:10:27 -0400
-Message-Id: <20220428221027.269084-8-krisman@collabora.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220428221027.269084-1-krisman@collabora.com>
-References: <20220428221027.269084-1-krisman@collabora.com>
+ id 1nkJMM-00DYfk-SI
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 05:40:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1651210806; x=1682746806;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=Op5OsO4DO/H0TOFJ8Y7/W+N96i75JcfxWveF6JmHGNE=;
+ b=HnNtZNaKcGORZ8gLO+wfm/1weQaKgWXaEhORpCHWoTqDOLlv/70hoWXs
+ Pt4SL8eaVATrQ2CkZouh4QUpiA3BapJ9FLWGMBDSsIk0cRLySFvLuCyp0
+ ffCz1UIYQUyr4ayJg52Foj7405X9WsLCswM1MRJTCmU/EybHt8IpONN9C
+ 833CBxB/rQe62sAc0KXPBZphip2MFJX+KkpF/+I7NuIsKREmeG78Dwg0B
+ V1nldbsVngpKdwPBjOZRsZXmCBNsai7VMkh0em/m1OHakvtXavih6agoF
+ XGK/+mIxNM90VjIxVAUbG4wco5hM6kclITFMKvOL+wtRjbyPGN3ij/KYH A==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10331"; a="266064657"
+X-IronPort-AV: E=Sophos;i="5.91,297,1647327600"; d="scan'208";a="266064657"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Apr 2022 22:40:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.91,297,1647327600"; d="scan'208";a="597172094"
+Received: from lkp-server01.sh.intel.com (HELO 5056e131ad90) ([10.239.97.150])
+ by orsmga001.jf.intel.com with ESMTP; 28 Apr 2022 22:39:57 -0700
+Received: from kbuild by 5056e131ad90 with local (Exim 4.95)
+ (envelope-from <lkp@intel.com>) id 1nkJMC-00062B-Dj;
+ Fri, 29 Apr 2022 05:39:56 +0000
+Date: Fri, 29 Apr 2022 13:39:19 +0800
+From: kernel test robot <lkp@intel.com>
+To: Gabriel Krisman Bertazi <krisman@collabora.com>, tytso@mit.edu,
+ adilger.kernel@dilger.ca, jaegeuk@kernel.org
+Message-ID: <202204291327.Jwfp0oHk-lkp@intel.com>
+References: <20220428221027.269084-7-krisman@collabora.com>
 MIME-Version: 1.0
-X-Spam-Score: 1.5 (+)
+Content-Disposition: inline
+In-Reply-To: <20220428221027.269084-7-krisman@collabora.com>
+X-Spam-Score: -3.1 (---)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Now that ci_match is part of libfs,
- make f2fs reuse it instead
- of having a different implementation. Signed-off-by: Gabriel Krisman Bertazi
- <krisman@collabora.com> --- fs/f2fs/dir.c | 58 ++++ 1 file changed,
- 4 insertions(+), 54 deletions(-) 
- Content analysis details:   (1.5 points, 6.0 required)
+ Content preview:  Hi Gabriel,
+ I love your patch! Yet something to improve: [auto
+ build test ERROR on tytso-ext4/dev] [also build test ERROR on
+ jaegeuk-f2fs/dev-test
+ linus/master v5.18-rc4 next-20220428] [If your patch is applied to the wrong
+ git tree, kindly drop us a note. [...] 
+ Content analysis details:   (-3.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- 1.7 URIBL_BLACK            Contains an URL listed in the URIBL blacklist
- [URIs: entry.name]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [134.134.136.24 listed in wl.mailspike.net]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [134.134.136.24 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
- lines
-X-Headers-End: 1nkCeP-0001Tk-FD
-Subject: [f2fs-dev] [PATCH v2 7/7] f2fs: Reuse generic_ci_match for ci
- comparisons
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nkJMM-00DYfk-SI
+Subject: Re: [f2fs-dev] [PATCH v2 6/7] ext4: Move ext4_match_ci into libfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,102 +114,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ebiggers@kernel.org, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>, kernel@collabora.com,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: kernel@collabora.com, kbuild-all@lists.01.org,
+ linux-f2fs-devel@lists.sourceforge.net, ebiggers@kernel.org,
+ linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Now that ci_match is part of libfs, make f2fs reuse it instead of having
-a different implementation.
+Hi Gabriel,
 
-Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
----
- fs/f2fs/dir.c | 58 ++++-----------------------------------------------
- 1 file changed, 4 insertions(+), 54 deletions(-)
+I love your patch! Yet something to improve:
 
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index 166f08623362..c39b3abbf99e 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -208,69 +208,19 @@ static struct f2fs_dir_entry *find_in_block(struct inode *dir,
- 	return f2fs_find_target_dentry(&d, fname, max_slots);
- }
- 
--#if IS_ENABLED(CONFIG_UNICODE)
--/*
-- * Test whether a case-insensitive directory entry matches the filename
-- * being searched for.
-- *
-- * Returns 1 for a match, 0 for no match, and -errno on an error.
-- */
--static int f2fs_match_ci_name(const struct inode *dir, const struct qstr *name,
--			       const u8 *de_name, u32 de_name_len)
--{
--	const struct super_block *sb = dir->i_sb;
--	const struct unicode_map *um = sb->s_encoding;
--	struct fscrypt_str decrypted_name = FSTR_INIT(NULL, de_name_len);
--	struct qstr entry = QSTR_INIT(de_name, de_name_len);
--	int res;
--
--	if (IS_ENCRYPTED(dir)) {
--		const struct fscrypt_str encrypted_name =
--			FSTR_INIT((u8 *)de_name, de_name_len);
--
--		if (WARN_ON_ONCE(!fscrypt_has_encryption_key(dir)))
--			return -EINVAL;
--
--		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
--		if (!decrypted_name.name)
--			return -ENOMEM;
--		res = fscrypt_fname_disk_to_usr(dir, 0, 0, &encrypted_name,
--						&decrypted_name);
--		if (res < 0)
--			goto out;
--		entry.name = decrypted_name.name;
--		entry.len = decrypted_name.len;
--	}
--
--	res = utf8_strncasecmp_folded(um, name, &entry);
--	/*
--	 * In strict mode, ignore invalid names.  In non-strict mode,
--	 * fall back to treating them as opaque byte sequences.
--	 */
--	if (res < 0 && !sb_has_strict_encoding(sb)) {
--		res = name->len == entry.len &&
--				memcmp(name->name, entry.name, name->len) == 0;
--	} else {
--		/* utf8_strncasecmp_folded returns 0 on match */
--		res = (res == 0);
--	}
--out:
--	kfree(decrypted_name.name);
--	return res;
--}
--#endif /* CONFIG_UNICODE */
--
- static inline int f2fs_match_name(const struct inode *dir,
- 				   const struct f2fs_filename *fname,
- 				   const u8 *de_name, u32 de_name_len)
- {
- 	struct fscrypt_name f;
-+	struct unicode_name u;
- 
- #if IS_ENABLED(CONFIG_UNICODE)
- 	if (fname->cf_name.name) {
- 		struct qstr cf = FSTR_TO_QSTR(&fname->cf_name);
--
--		return f2fs_match_ci_name(dir, &cf, de_name, de_name_len);
-+		u.folded_name = &cf;
-+		u.usr_name = fname->usr_fname;
-+		return generic_ci_match(dir, &u, (u8*) de_name, de_name_len);
- 	}
- #endif
- 	f.usr_fname = fname->usr_fname;
+[auto build test ERROR on tytso-ext4/dev]
+[also build test ERROR on jaegeuk-f2fs/dev-test linus/master v5.18-rc4 next-20220428]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Gabriel-Krisman-Bertazi/Clean-up-the-case-insenstive-lookup-path/20220429-061233
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/tytso/ext4.git dev
+config: microblaze-buildonly-randconfig-r004-20220428 (https://download.01.org/0day-ci/archive/20220429/202204291327.Jwfp0oHk-lkp@intel.com/config)
+compiler: microblaze-linux-gcc (GCC) 11.3.0
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/51d480019fcf38c09d664fc2d459907908b62615
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Gabriel-Krisman-Bertazi/Clean-up-the-case-insenstive-lookup-path/20220429-061233
+        git checkout 51d480019fcf38c09d664fc2d459907908b62615
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.3.0 make.cross W=1 O=build_dir ARCH=microblaze SHELL=/bin/bash
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+All errors (new ones prefixed by >>, old ones prefixed by <<):
+
+>> ERROR: modpost: "generic_ci_match" [fs/ext4/ext4.ko] undefined!
+
 -- 
-2.35.1
-
+0-DAY CI Kernel Test Service
+https://01.org/lkp
 
 
 _______________________________________________
