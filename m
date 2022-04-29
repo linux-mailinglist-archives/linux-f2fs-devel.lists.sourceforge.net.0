@@ -2,114 +2,157 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60A995141D9
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Apr 2022 07:41:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 460C25142B9
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Apr 2022 08:55:12 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nkJNz-00063C-Vx; Fri, 29 Apr 2022 05:41:49 +0000
+	id 1nkKWw-0007jC-Vd; Fri, 29 Apr 2022 06:55:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1nkJNy-000636-8R
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 05:41:47 +0000
+ (envelope-from <changfengnan@vivo.com>) id 1nkKWv-0007j6-Ud
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 06:55:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qkURhUACtnnqG/gLEyW8fuUawZ3bVFFC+2ZooOgXPF8=; b=eBY227Z1UjingDeMkztelkLT4O
- IuLLBSMexcsMURRlKY9kZPYEniwhQwijO1Snoco7AwcDSqFm9t3jpTvaz1etDF6w7A7jRjVSPg9Gl
- rPl1ypwyTeAFeNuLqPx5EPJHuYqg5irMbYmZuO+7tGYy13WlXIT6nkvHB4JB4E9f2Hz4=;
+ bh=OcupsmO1fCmJmRytJfgfRb9dDmsEqE/ou/PjJKIbrSM=; b=dmGLQbBCe/KnYiD86xKV3190OF
+ zqFJN1n+lV152ctTdXUyC4+JcshCfSmyBFbWs764ke+hJdBnkrZFz9xuXhDoJ8RLt3p3T0yvQQIJX
+ 9q/fgFslVzP6XNmVT3UQomLFLhiRdpQtmX+vFMl7cn1dAmUOwwhF71dVujTwT24/Nu3o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
- Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=qkURhUACtnnqG/gLEyW8fuUawZ3bVFFC+2ZooOgXPF8=; b=P
- CNlS2ym6eVjEqVvMTfpOk8N6xwal+DboVlQFDwgyUhQAFE6EyljxnwdErcm89ZrvJFxTxfbrmx7Mv
- kyItX/z28UDq36PrOUCdZeDIVijOFC1dnBNhyvDMZAVFlOECYEKILEgaKsLrXoq3fe2gdL7etdtKZ
- NvCiSI2isVMy+Vdo=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=OcupsmO1fCmJmRytJfgfRb9dDmsEqE/ou/PjJKIbrSM=; b=X
+ yNYyeG5FI8dg7kZnXJHBDK60vh8HA0BTmU8yX5b/Dcs2zXrVF4/oEPHBVEwj+YuU0892Z6e5ZSf/W
+ psmwYG/J3XpFPcH4SDb7Vltee4vdSGCSbS6btdHw39yRmJz/JKB4Ju420JfgMhbZ3mZiECayrwXSh
+ 6C35rUEPJQ0wq6dY=;
+Received: from mail-psaapc01on2092.outbound.protection.outlook.com
+ ([40.107.255.92] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nkJNv-00DYiI-Ex
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 05:41:46 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 0E5B8612C6
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 29 Apr 2022 05:41:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 6E03CC385A7
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 29 Apr 2022 05:41:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1651210889;
- bh=sxyUAU2wxtdX0yg7BYZtnDRFDgp51+AdOgjsIjJxcC8=;
- h=From:To:Subject:Date:From;
- b=MLk0Peyf0KayzkBeptHMYxbpneMQREAbisSgMhGegw9IghUmowd+aAOCCU35jezQH
- FrjOg7OnKpKZLPHzg5e0RAl8wK5LVLXt0DqAP3mWKJHyFBO5S8/cZQUfVGVi5fPLuh
- iGWDoguPoYjZbk/jgPsCsVlk1H/7ijHHhsvxjwkxOneA+9lDrXYHPFzUhPa4xigH6b
- cmThNJqd4jQAp3GC4hAsSREXiw8UOJLPl5/qNe/U5xeHjtd9w3CZgb5XTTtZGuvCc4
- yQIzQyDFYHHeZyDXkwCFWxEi3cCXIaHc0gJKAWszwvkeVZrHbEjQPS3Lrou1mcKAdc
- WnJ5Rllb7WbkQ==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 514A2C05FCE; Fri, 29 Apr 2022 05:41:29 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 29 Apr 2022 05:41:29 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: new
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: yanming@tju.edu.cn
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version
- cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
- priority component assigned_to reporter cf_regression attachments.created
-Message-ID: <bug-215916-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1nkKWu-0001a9-Nx
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Apr 2022 06:55:06 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RuXPKl3z+YTtmgK5qhsqFE/Qf5+u+7qwcXx3XjLD1c3cN2V3wxt5ZNA7NIi+dgsYYva5Yr0qI3TX9nH3CGUzzIt/2Blr9+cTq0kgwmx+1Qd9gGKGFKSaLyQthvBqLAbidKiHF/N03i1ErttmxbEoKCjdgbrAKWy5gaWItGVxFeX3hZG9ezXw33RHrfg1giDor/u6kKpu1Xfh/wm05gNh70GZ8GPWV0qklbLxUDv4BOPC2v48JYWa9XcL11JgqzvW08xpYmN1cygkUFdcPvankABRbsZqzBX+5uuUz5+u+POLA+gvvcKUp5wk99A041QcOiQphH3gBk7SlZb8Qlb7Lw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OcupsmO1fCmJmRytJfgfRb9dDmsEqE/ou/PjJKIbrSM=;
+ b=HnZp8uC9yQ5SI8hE+kkWl6+ov4wRh6Re+TGgJNGQ57Ab+Yu0pRltd8mAfyhi18nT55Pxbgkt+6UJ7KUzZ2dVpnkF2OofCxw+pIHIfgIEe30gIHeHtsThnlwiKKdpVGu2e67dSkClASe06tm3/qPBKIaawvDoB2m5745vaee3FqMKh3EDL6zgiJPlDHZVEsxJPghAZkMR4LhvkuTSwvUKD9rGTd4hNKb6keghHLjFa4/+4K0YtdcwcI8ApV3+Ocl96642mCvsshE4h1nBvHnemaVBIU+efUNOQV/S+rDyoMVO/5MQb2kHr2nMiq2YUf3jfwWV4DL+ZgK+/znFGOGgCA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo0.onmicrosoft.com; 
+ s=selector2-vivo0-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OcupsmO1fCmJmRytJfgfRb9dDmsEqE/ou/PjJKIbrSM=;
+ b=brg02n+8PkIvOWklpno29FWCOdZGaSDH+/B/8iJyy547f2v+DhdqpxxlMs+qLEzqUeIrOReFtjm27PVBPojujilrpWoXOqb7C72zBVux3mshwplEoFq8lDC76oQnee+ggNk9YQA3wLCy7FPIkBbP3C5tTbQiRmh1p+1vNe6r0ME=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from KL1PR0601MB4003.apcprd06.prod.outlook.com (2603:1096:820:26::6)
+ by TYZPR06MB4176.apcprd06.prod.outlook.com (2603:1096:400:2c::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.14; Fri, 29 Apr
+ 2022 06:54:56 +0000
+Received: from KL1PR0601MB4003.apcprd06.prod.outlook.com
+ ([fe80::fc26:a0b5:8bfd:7c02]) by KL1PR0601MB4003.apcprd06.prod.outlook.com
+ ([fe80::fc26:a0b5:8bfd:7c02%5]) with mapi id 15.20.5206.013; Fri, 29 Apr 2022
+ 06:54:55 +0000
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Fri, 29 Apr 2022 14:54:43 +0800
+Message-Id: <20220429065446.208019-1-changfengnan@vivo.com>
+X-Mailer: git-send-email 2.32.0
+X-ClientProxiedBy: SI2P153CA0005.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:4:140::11) To KL1PR0601MB4003.apcprd06.prod.outlook.com
+ (2603:1096:820:26::6)
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: ee26bf48-7737-49c8-a7c0-08da29ad2aba
+X-MS-TrafficTypeDiagnostic: TYZPR06MB4176:EE_
+X-Microsoft-Antispam-PRVS: <TYZPR06MB4176B966036A888CEF8DDA51BBFC9@TYZPR06MB4176.apcprd06.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 7fy5M/OpuEfTYh1Rv3oPHlTRr6iFHngoGBk8DCPGXkqJDHy9+1WQk3AH001Je+WEZ1UzeXkP/KWiTLL8EA8DS0oTt9oT5JI3dUH4zjOgcRDqkpDEun4yVuc0iSSxf9J9veyVQ5Unagb8jOfBWaBcSyxNhs059qlHvBjfQ+W5/bsTIGZP2vD42qXBfOe5T167t+Bzm+1Ed7syLv+dtIuOxBYHNlMxEOSeJwtHsQV5p8Uj3LWUUA6iF//DFXDFwy/nfnwOT6H+eYrZbO9PrqWGUP9xhyyd9pKp1TKv59kdl0kg8QMZr8R9VJZVJZrnMjRgHG459cwQ4pg7V/MqeOGz8h+aV8ozVa38gPc1R/yAkbVH70D3hyCQcAl5t7OJffidZykGlzOpFqjGrM+xzUM+aZR57XnBz7KdazfiPQ4GChqfhl9L8mVjgNSalpvQyBvJl4mf4tKAolW5vr5iR7sz1YLrbtav2dMHnJTanrUlv1E+elFAydQPTEbGUybU5EK3mI8zYJsUKZvlLSaAAv+BIAjCsb+cyouOolASMYJR1EbLPWxV0qHgV1yY8Jpf+TH5roUdo5JYb8oXuVz4sG/8CBcsCPWbX3KpSouGDx8yJoYC+f0eM5cPWuMpZ4IiJsdxkJyLQFCTH1aSK0ItcbWAGYq6svGbfjh3IOvzeV1CGYPE932gMud9CqzfwWj9sfuQoNEwYatVsjhIh3cQIQt0Kw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:KL1PR0601MB4003.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230001)(4636009)(366004)(316002)(66556008)(4744005)(186003)(66476007)(36756003)(2616005)(6666004)(83380400001)(8676002)(4326008)(6512007)(86362001)(52116002)(26005)(6506007)(508600001)(107886003)(15650500001)(66946007)(2906002)(5660300002)(6486002)(1076003)(8936002)(38100700002)(38350700002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?6KgF0XF2dED9ET42bmTRlNYFFBobsdHe2aDIjR4YyOEaouu3S+xCVwsfw4dA?=
+ =?us-ascii?Q?iBmTNQv5tkFxPAGYq8UfHaRYHfiOCdHx1UjFQl9n2LGCV349WmRz5Zvx7TLx?=
+ =?us-ascii?Q?Y67fQnDnNAaiwtSAYQq9A8awVlD0qGCA/X/Vnb7+Ow7OwDVCh4qj6Q8wu3DD?=
+ =?us-ascii?Q?mv+xS9jxOAWt8aCxYdtAyOVr4VgHDRvw3p+ywpxS6CfrmfX98LCPefoLMCzF?=
+ =?us-ascii?Q?1Fvd91nL4UMyPEbwvapHO4EiEgitG3A+hruB6lRGoZmS19vacMgn8BkVEOoS?=
+ =?us-ascii?Q?VhQbtGnkQLtB43yzoFKi9BO7f7mFSRp4dpX6amr4GyL42R8TVguSdkyHYYuG?=
+ =?us-ascii?Q?zMbEX5QtQt2zPhk1LDbxwZfKpiufopn3xMOTOEeuF+hgxT9/hnCrjpYno2Yb?=
+ =?us-ascii?Q?nOXwfzWgwi3Z/rge03X1iJ2WEYdnuFC3HQWeXHN/MsGR/ISJNrLssB9eB8ot?=
+ =?us-ascii?Q?gF1bSuZzPvTPizOwPS6+Wum7JXi9703bKBF1mOB+IgnivgfAK2cbwpWs0I9q?=
+ =?us-ascii?Q?/AmLtHNn0p1jIUG61POoiwE41Y6JCk1Cu4tSotf+NGvWktXIBs+ltaOR8yTw?=
+ =?us-ascii?Q?g/C/az69HnA87EmsJrwe5tA3ULaxZ1YYPHbbD7HzFRCUj5FPprOALWTdQWN3?=
+ =?us-ascii?Q?/2VE/UTbgUTj08zxe0d+gNBvliVtkzYUqre6dma7kx21ntgMm8o/sR7hzaab?=
+ =?us-ascii?Q?arN3Frk0dfg3+MwQ+e/Nei3MnvkNF8Ch9XeiCtM+M8Ln2IjRjpZl3Zl3syhE?=
+ =?us-ascii?Q?gDPIVW4WA6vEJJKr6xRbkEdKA+s3fYZzKli5kG4PFSMTLBh3NO9Vxrkjgrhv?=
+ =?us-ascii?Q?hvI4l3hj/KhEE6bsnYIGqam5zfsxzs8CeY9gShtGrqr7NqestzZebfBWBYAp?=
+ =?us-ascii?Q?kh3WQa78yxikjTKgIx5gebfkGbRbeKb65SDeN4NPdJd+ZVgkNtm71LUid6iX?=
+ =?us-ascii?Q?30RL52NKQwmUd/apTTK4H/ficS2Mz4P39gIELmIoAuNmCU7I3tDV3WMkUjwG?=
+ =?us-ascii?Q?5+JI0TL78icyeSLieSq3vR598VTdg8vSqZhCPO7SE3tTB2kec67hOHKjJbhx?=
+ =?us-ascii?Q?TKjFtbvjTr6+ykROpeTdMz3hH+n/PuAZCbNtN176RxQMe1N5o2JSdhXpyUl0?=
+ =?us-ascii?Q?jeaZtAvF8eH+jJXTrQYv3+sT5ZcILw6bRa3ByQHhXLNXMmCRzxRn70wnGdhr?=
+ =?us-ascii?Q?1Prn9LeFDBH6STkcoQlSvTGI9Ji+V2tk2UcM9r6wTrYWwtgU3g34tbB1OxtJ?=
+ =?us-ascii?Q?UcZjeZOsu76ZccLBgzpgiGgcb/6I63fSiZ+ogHKJ2W1ZySk59zgd/qpITpNT?=
+ =?us-ascii?Q?xsJvAneSDkiMFJ/n/RLj54j4ZzDHLHCPMT42WXhDDtQdsIKzuB5F3Mtgaqse?=
+ =?us-ascii?Q?CvZKqrw1aG8UGQSEMh3Ur+1YKPA/ykd922krJ6E6edRJGNoUZbVoZsxr1Lcx?=
+ =?us-ascii?Q?WCaLkxfJDr1B7J5lu8SgSJ6YXCpDHzgpDncAzzDA/84kekk55d9MDuVz6hbj?=
+ =?us-ascii?Q?mAz6rYLB1PCLXfjFWuX//7qo2tjJdqQ/hVjP/HPpVqWOkXY2CR7AhnjFYjhJ?=
+ =?us-ascii?Q?al+QoQn+gUbG4tPJ2x5wBL0TKtUV89DhTjzASplrjF7jCMRRlmz25OCoNqlu?=
+ =?us-ascii?Q?d9Sxvu9Guf2015jUQGhoHCIf/n0dK2zr+NEsAk3NhcREoVicYONLrIy7g/7G?=
+ =?us-ascii?Q?0my5JS/cLlFjHQuG4HhhM2/gBroigy9c7R6pStui2I9JtnZsRCiC9ndAeM5i?=
+ =?us-ascii?Q?occzeTBrYw=3D=3D?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ee26bf48-7737-49c8-a7c0-08da29ad2aba
+X-MS-Exchange-CrossTenant-AuthSource: KL1PR0601MB4003.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2022 06:54:55.1958 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: SCWMiYaKjZGHXXEYXQjtwUUfJiclGABRtaLR3Q8hVdGexwwl6QtRXOV5ak6YKTmtftVyaVWKzIAXqWP8VRXLkQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB4176
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=215916 Bug ID:
- 215916 Summary: kernel BUG at fs/f2fs/segment.c:2560! Product: File System
- Version: 2.5 Kernel Version: 5.17 Hardware: All OS: Linux Tree: Mainline
- Status: NEW Severity: normal Priority: P1 C [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  Optimise f2fs_write_cache_pages, and support compressed file
+ write amplifiction accounting. Fengnan Chang (3): f2fs: intorduce
+ f2fs_all_cluster_page_uptodate
+ f2fs: use onstack pages instead of pvec f2fs: support compressed file write
+ amplifiction accounting 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.255.92 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.255.92 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nkJNv-00DYiI-Ex
-Subject: [f2fs-dev] [Bug 215916] New: kernel BUG at fs/f2fs/segment.c:2560!
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1nkKWu-0001a9-Nx
+Subject: [f2fs-dev] [PATCH 0/3] *** support compressed file write
+ amplifiction accounting ***
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,253 +164,33 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Fengnan Chang via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Fengnan Chang <changfengnan@vivo.com>
+Cc: Fengnan Chang <changfengnan@vivo.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=215916
+Optimise f2fs_write_cache_pages, and support compressed file write
+amplifiction accounting.
 
-            Bug ID: 215916
-           Summary: kernel BUG at fs/f2fs/segment.c:2560!
-           Product: File System
-           Version: 2.5
-    Kernel Version: 5.17
-          Hardware: All
-                OS: Linux
-              Tree: Mainline
-            Status: NEW
-          Severity: normal
-          Priority: P1
-         Component: f2fs
-          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
-          Reporter: yanming@tju.edu.cn
-        Regression: No
+Fengnan Chang (3):
+  f2fs: intorduce f2fs_all_cluster_page_uptodate
+  f2fs: use onstack pages instead of pvec
+  f2fs: support compressed file write amplifiction accounting
 
-Created attachment 300845
-  --> https://bugzilla.kernel.org/attachment.cgi?id=300845&action=edit
-case.c
-
-I have encountered a F2FS bug in the kernel v5.17.
-
-This bug can be reproduced by running the following commands:
-losetup /dev/loop0 case.img
-mount -o
-"background_gc=off,no_heap,noacl,inline_dentry,flush_merge,test_dummy_encryption,test_dummy_encryption"
-/dev/loop0 /mnt/test/
-gcc -o case case.c
-./case
-
-The system call sequence is in case.c, and the modified image can be found at
-(https://drive.google.com/file/d/1NJPVAObap1fuhCCbaAF0YacDuoc1LRxo/view?usp=sharing).
-
-The kernel message is shown below:
-
-6,811,176146014,-;loop0: detected capacity change from 0 to 131072
-4,812,176177760,-;F2FS-fs (loop0): Test dummy encryption mount option ignored
-4,813,176177773,-;F2FS-fs (loop0): Test dummy encryption mount option ignored
-5,814,176180172,-;F2FS-fs (loop0): Disable nat_bits due to incorrect cp_ver
-(9632544162839053021, 5086346976812384983)
-5,815,176207578,-;F2FS-fs (loop0): Mounted with checkpoint version = 7548c2dd
-4,816,176363509,-;------------[ cut here ]------------
-2,817,176363515,-;kernel BUG at fs/f2fs/segment.c:2560!
-4,818,176363524,-;invalid opcode: 0000 [#1] PREEMPT SMP KASAN PTI
-4,819,176363528,-;CPU: 5 PID: 90 Comm: kworker/u16:2 Not tainted 5.17.0 #5
-4,820,176363532,-;Hardware name: Dell Inc. OptiPlex 9020/03CPWF, BIOS A14
-09/14/2015
-4,821,176363535,-;Workqueue: writeback wb_workfn (flush-7:0)
-4,822,176363543,-;RIP: 0010:new_curseg+0xe8d/0x15f0
-4,823,176363548,-;Code: 45 0c 48 89 44 24 38 e9 2d f4 ff ff 89 e8 31 d2 41 89
-ef f7 b3 58 04 00 00 31 d2 89 c1 f7 f6 89 cd 89 44 24 70 e9 0f f4 ff ff <0f> 0b
-e8 dc 56 1f 00 48 8d bb 08 0a 00 00 48 ba 00 00 00 00 00 fc
-4,824,176363551,-;RSP: 0018:ffff888109ea6738 EFLAGS: 00010246
-4,825,176363555,-;RAX: 0000000000000018 RBX: ffff888145c2c000 RCX:
-0000000000000018
-4,826,176363557,-;RDX: 0000000000000000 RSI: 0000000000000018 RDI:
-ffff888101a9be90
-4,827,176363559,-;RBP: ffffed1028b8588c R08: ffff888101a9be88 R09:
-0000000000000000
-4,828,176363561,-;R10: 0000000000000000 R11: 0000000000000000 R12:
-0000000000000000
-4,829,176363563,-;R13: ffff888101100dc0 R14: dffffc0000000000 R15:
-ffffed10202201bb
-4,830,176363566,-;FS:  0000000000000000(0000) GS:ffff8881d5740000(0000)
-knlGS:0000000000000000
-4,831,176363568,-;CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-4,832,176363571,-;CR2: 00007f8dd8ecd0a0 CR3: 0000000159e10005 CR4:
-00000000001706e0
-4,833,176363573,-;Call Trace:
-4,834,176363575,-; <TASK>
-4,835,176363578,-; allocate_segment_by_default+0x228/0x440
-4,836,176363582,-; f2fs_allocate_data_block+0x13d1/0x31f0
-4,837,176363587,-; ? _raw_spin_lock_irqsave+0x88/0xe0
-4,838,176363592,-; do_write_page+0x18d/0x710
-4,839,176363596,-; f2fs_outplace_write_data+0x151/0x250
-4,840,176363599,-; ? f2fs_do_write_node_page+0x110/0x110
-4,841,176363602,-; ? __xa_set_mark+0xa8/0xf0
-4,842,176363607,-; f2fs_do_write_data_page+0xef9/0x1980
-4,843,176363611,-; ? f2fs_should_update_outplace+0x4f0/0x4f0
-4,844,176363615,-; ? folio_mkclean+0xc9/0x150
-4,845,176363621,-; ? percpu_counter_add_batch+0x79/0x130
-4,846,176363625,-; move_data_page+0x6af/0xbc0
-4,847,176363628,-; ? rwsem_down_read_slowpath+0x880/0x880
-4,848,176363632,-; ? add_gc_inode+0x240/0x240
-4,849,176363635,-; ? _raw_spin_unlock+0x34/0x60
-4,850,176363639,-; ? down_write_trylock+0xa0/0x110
-4,851,176363643,-; ? down_read_trylock+0x1c0/0x1c0
-4,852,176363646,-; ? __get_node_page+0x13c/0xd30
-4,853,176363649,-; do_garbage_collect+0x312f/0x46f0
-4,854,176363654,-; ? move_data_page+0xbc0/0xbc0
-4,855,176363657,-; ? move_data_block+0x22d0/0x22d0
-4,856,176363661,-; f2fs_gc+0x6b0/0x3bc0
-4,857,176363665,-; ? f2fs_start_bidx_of_node+0x10/0x10
-4,858,176363669,-; ? f2fs_inode_chksum_set+0x15/0x130
-4,859,176363672,-; ? f2fs_start_bidx_of_node.part.0+0x22f/0x310
-4,860,176363676,-; ? down_write+0xa8/0x110
-4,861,176363678,-; ? down_write_killable+0x120/0x120
-4,862,176363681,-; ? f2fs_outplace_write_data+0x1c4/0x250
-4,863,176363685,-; ? f2fs_balance_fs+0x921/0x2260
-4,864,176363688,-; f2fs_balance_fs+0x921/0x2260
-4,865,176363691,-; ? f2fs_should_update_outplace+0x4f0/0x4f0
-4,866,176363695,-; ? __blk_account_io_start+0xe6/0x220
-4,867,176363699,-; ? f2fs_balance_fs_bg+0xcd0/0xcd0
-4,868,176363703,-; ? _raw_spin_lock+0x82/0xd0
-4,869,176363706,-; ? _raw_spin_lock_irqsave+0xe0/0xe0
-4,870,176363709,-; ? __unwind_start+0x514/0x7d0
-4,871,176363712,-; ? kernel_text_address+0xd/0xb0
-4,872,176363717,-; f2fs_write_single_data_page+0x16be/0x2370
-4,873,176363721,-; ? submit_bio_checks+0x11e1/0x1240
-4,874,176363724,-; ? submit_bio_noacct+0x5c6/0x850
-4,875,176363727,-; ? release_pages+0x26f/0xa80
-4,876,176363730,-; ? f2fs_do_write_data_page+0x1980/0x1980
-4,877,176363734,-; ? invalid_page_referenced_vma+0x10/0x10
-4,878,176363738,-; ? percpu_counter_add_batch+0x79/0x130
-4,879,176363741,-; f2fs_write_cache_pages+0x428/0xd00
-4,880,176363745,-; ? f2fs_write_single_data_page+0x2370/0x2370
-4,881,176363749,-; ? nr_blockdev_pages+0xcb/0x100
-4,882,176363753,-; ? si_meminfo+0x115/0x230
-4,883,176363756,-; ? xas_set_mark+0xf0/0x1c0
-4,884,176363760,-; ? __mutex_lock_slowpath+0x10/0x10
-4,885,176363763,-; f2fs_write_data_pages+0x96e/0xd50
-4,886,176363767,-; ? f2fs_write_cache_pages+0xd00/0xd00
-4,887,176363770,-; ? f2fs_inode_synced+0x1e7/0x370
-4,888,176363773,-; ? f2fs_set_node_page_dirty+0x1e1/0x7b0
-4,889,176363777,-; ? f2fs_balance_fs_bg+0xcd0/0xcd0
-4,890,176363780,-; do_writepages+0x168/0x550
-4,891,176363783,-; ? page_writeback_cpu_online+0x10/0x10
-4,892,176363786,-; ? f2fs_write_inode+0x468/0x1200
-4,893,176363789,-; ? _raw_spin_lock+0x82/0xd0
-4,894,176363792,-; ? _raw_spin_lock_irqsave+0xe0/0xe0
-4,895,176363795,-; __writeback_single_inode+0x9f/0x870
-4,896,176363799,-; ? __inode_add_lru+0x56/0x1c0
-4,897,176363804,-; writeback_sb_inodes+0x47d/0xb20
-4,898,176363808,-; ? _raw_spin_unlock+0x34/0x60
-4,899,176363811,-; ? sync_inode_metadata+0xe0/0xe0
-4,900,176363814,-; ? down_read_trylock+0x117/0x1c0
-4,901,176363818,-; ? __traceiter_sb_clear_inode_writeback+0x90/0x90
-4,902,176363822,-; __writeback_inodes_wb+0xb2/0x200
-4,903,176363826,-; wb_writeback+0x4bd/0x660
-4,904,176363830,-; ? __writeback_inodes_wb+0x200/0x200
-4,905,176363834,-; ? get_nr_dirty_inodes+0xa9/0x100
-4,906,176363837,-; wb_workfn+0x5f3/0xab0
-4,907,176363840,-; ? inode_wait_for_writeback+0x30/0x30
-4,908,176363842,-; ? set_next_entity+0x2b7/0x500
-4,909,176363846,-; ? dequeue_task_fair+0x2cd/0x14d0
-4,910,176363849,-; ? _raw_spin_unlock+0x34/0x60
-4,911,176363852,-; ? finish_task_switch+0x1c8/0x680
-4,912,176363856,-; ? read_word_at_a_time+0xe/0x20
-4,913,176363859,-; ? strscpy+0x96/0x2a0
-4,914,176363862,-; process_one_work+0x79f/0x13e0
-4,915,176363865,-; worker_thread+0x89/0xf60
-4,916,176363869,-; ? __kthread_parkme+0x86/0x150
-4,917,176363872,-; ? process_one_work+0x13e0/0x13e0
-4,918,176363875,-; kthread+0x26a/0x300
-4,919,176363878,-; ? kthread_complete_and_exit+0x20/0x20
-4,920,176363880,-; ret_from_fork+0x22/0x30
-4,921,176363885,-; </TASK>
-4,922,176363886,-;Modules linked in: x86_pkg_temp_thermal efivarfs
-4,923,176363893,-;---[ end trace 0000000000000000 ]---
-4,924,176363895,-;RIP: 0010:new_curseg+0xe8d/0x15f0
-4,925,176363898,-;Code: 45 0c 48 89 44 24 38 e9 2d f4 ff ff 89 e8 31 d2 41 89
-ef f7 b3 58 04 00 00 31 d2 89 c1 f7 f6 89 cd 89 44 24 70 e9 0f f4 ff ff <0f> 0b
-e8 dc 56 1f 00 48 8d bb 08 0a 00 00 48 ba 00 00 00 00 00 fc
-4,926,176363901,-;RSP: 0018:ffff888109ea6738 EFLAGS: 00010246
-4,927,176363904,-;RAX: 0000000000000018 RBX: ffff888145c2c000 RCX:
-0000000000000018
-4,928,176363906,-;RDX: 0000000000000000 RSI: 0000000000000018 RDI:
-ffff888101a9be90
-4,929,176363908,-;RBP: ffffed1028b8588c R08: ffff888101a9be88 R09:
-0000000000000000
-4,930,176363910,-;R10: 0000000000000000 R11: 0000000000000000 R12:
-0000000000000000
-4,931,176363912,-;R13: ffff888101100dc0 R14: dffffc0000000000 R15:
-ffffed10202201bb
-4,932,176363915,-;FS:  0000000000000000(0000) GS:ffff8881d5740000(0000)
-knlGS:0000000000000000
-4,933,176363917,-;CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-4,934,176363919,-;CR2: 00007f8dd8ecd0a0 CR3: 0000000159e10005 CR4:
-00000000001706e0
-6,935,176363922,-;note: kworker/u16:2[90] exited with preempt_count 1
-4,936,176363925,-;------------[ cut here ]------------
-4,937,176363926,-;WARNING: CPU: 5 PID: 90 at kernel/exit.c:738
-do_exit+0xb8/0x27b0
-4,938,176363931,-;Modules linked in: x86_pkg_temp_thermal efivarfs
-4,939,176363935,-;CPU: 5 PID: 90 Comm: kworker/u16:2 Tainted: G      D         
- 5.17.0 #5
-4,940,176363938,-;Hardware name: Dell Inc. OptiPlex 9020/03CPWF, BIOS A14
-09/14/2015
-4,941,176363940,-;Workqueue: writeback wb_workfn (flush-7:0)
-4,942,176363944,-;RIP: 0010:do_exit+0xb8/0x27b0
-4,943,176363947,-;Code: 85 ed 74 28 48 b8 00 00 00 00 00 fc ff df 48 89 ea 48
-c1 ea 03 80 3c 02 00 0f 85 b3 21 00 00 48 83 7d 00 00 0f 84 b4 0b 00 00 <0f> 0b
-4c 8d ab 90 07 00 00 48 b8 00 00 00 00 00 fc ff df 4c 89 ea
-4,944,176363949,-;RSP: 0018:ffff888109ea7e48 EFLAGS: 00010202
-4,945,176363952,-;RAX: dffffc0000000000 RBX: ffff888109def000 RCX:
-0000000080000000
-4,946,176363954,-;RDX: 1ffff110213d4f77 RSI: 0000000000000004 RDI:
-ffff888109def878
-4,947,176363956,-;RBP: ffff888109ea7bb8 R08: 0000000000000033 R09:
-ffffed103aaece8e
-4,948,176363959,-;R10: ffff8881d576746b R11: ffffed103aaece8d R12:
-000000000000000b
-4,949,176363961,-;R13: ffffffffab21c2e0 R14: ffff888109def000 R15:
-0000000000000000
-4,950,176363963,-;FS:  0000000000000000(0000) GS:ffff8881d5740000(0000)
-knlGS:0000000000000000
-4,951,176363965,-;CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-4,952,176363967,-;CR2: 00007f8dd8ecd0a0 CR3: 0000000159e10005 CR4:
-00000000001706e0
-4,953,176363970,-;Call Trace:
-4,954,176363971,-; <TASK>
-4,955,176363973,-; ? _printk+0xad/0xde
-4,956,176363977,-; ? swsusp_write.cold+0x39b/0x39b
-4,957,176363980,-; ? is_current_pgrp_orphaned+0x90/0x90
-4,958,176363983,-; ? __kthread_parkme+0x86/0x150
-4,959,176363987,-; ? process_one_work+0x13e0/0x13e0
-4,960,176363990,-; make_task_dead+0xab/0xc0
-4,961,176363993,-; rewind_stack_and_make_dead+0x17/0x17
-4,962,176363996,-;RIP: 0000:0x0
-4,963,176364000,-;Code: Unable to access opcode bytes at RIP
-0xffffffffffffffd6.
-4,964,176364002,-;RSP: 0000:0000000000000000 EFLAGS: 00000000 ORIG_RAX:
-0000000000000000
-4,965,176364005,-;RAX: 0000000000000000 RBX: 0000000000000000 RCX:
-0000000000000000
-4,966,176364007,-;RDX: 0000000000000000 RSI: 0000000000000000 RDI:
-0000000000000000
-4,967,176364009,-;RBP: 0000000000000000 R08: 0000000000000000 R09:
-0000000000000000
-4,968,176364011,-;R10: 0000000000000000 R11: 0000000000000000 R12:
-0000000000000000
-4,969,176364013,-;R13: 0000000000000000 R14: 0000000000000000 R15:
-0000000000000000
-4,970,176364015,-; </TASK>
-4,971,176364017,-;---[ end trace 0000000000000000 ]---
+ fs/f2fs/compress.c | 27 ++++++++++++++++++++++++---
+ fs/f2fs/data.c     | 33 +++++++++++++++++++++------------
+ fs/f2fs/debug.c    |  5 +++--
+ fs/f2fs/f2fs.h     | 22 +++++++++++++++++++++-
+ 4 files changed, 69 insertions(+), 18 deletions(-)
 
 -- 
-You may reply to this email to add a comment.
+2.32.0
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
