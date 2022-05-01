@@ -2,96 +2,115 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC2DB5161EC
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  1 May 2022 07:13:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 817D55164B0
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  1 May 2022 16:21:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nl1tG-00018p-LC; Sun, 01 May 2022 05:13:03 +0000
+	id 1nlARs-0007Fu-P9; Sun, 01 May 2022 14:21:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ebiggers@kernel.org>) id 1nl1tD-00018B-JI
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 01 May 2022 05:13:00 +0000
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1nlARn-0007Fn-Cf
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 01 May 2022 14:21:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C2IjJB40DxzY+x+YTYyAcBYZxinzkCbKTjxtD37k/6k=; b=KND2lg6XPHMJHqdl0obwno9XE5
- HaTeA9ZeUpbAa1feD5XG2xiTKEFM+kllRlLIySm84ZLLlBC8UhECS6OBFpBo9HuPilGXCzVgKzbmY
- x01+Pn93rhw+gSszi2OvrBaMqqDJy9et6kn0TbpNdGKc+UkuSGoiNp1sQbD27yV+inFE=;
+ bh=lmUbc2ViYlaIFaBT1jUoxn+gt4Gv7FFBv0dvVDtCkHA=; b=Koz5/QIKKBoWWZKlEC24i/guEe
+ HZTeONLXDd7sPWqRj1TpONgxg8eM209VIe9s73f7cmyB5owfBn2aTl9ZC57vp1+NJ436ct6vIZkRl
+ MZgHexTtu6TIEYYsf2I+D9RGKNAsAANLfZfJ65tXpAjMArENMgbW3Bjdn3YI7yxzFr1w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=C2IjJB40DxzY+x+YTYyAcBYZxinzkCbKTjxtD37k/6k=; b=d1yhmGRHUXzblYYsJt6sRCJ9kW
- x6/eDLp1iDpyZ0yBgBmwVPDKmtppKSdvzxhM5vyZCjzYmGRfDofx1zvF9h/5BhsoCNSTLDNkXOyhh
- CS6qduwxlH6iAxbQlLsZ5iffOmRBi6LC2ZEnyOVJ0vrDrAT5Cim7fx8NaHkB67Z0a9BM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
+ Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=lmUbc2ViYlaIFaBT1jUoxn+gt4Gv7FFBv0dvVDtCkHA=; b=C
+ U19VLecVcgSQOPLeS2b70i9ESiBGIB2bnRJ/X3E85QTRFP1Ypgct5s/0W0BbbG0QaRrQOEd+AbvV8
+ yfrh8S0dQ7X6VuRyAgRmGksaUoaigM2HqoUI+xYqXXHYhf5d02rxNQunqV67ZHf5yiHBjNOjtWalN
+ YAY9jeQo8j7Rlv4U=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nl1t9-00087T-Kr
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 01 May 2022 05:12:59 +0000
+ id 1nlARi-0000jK-MC
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 01 May 2022 14:21:14 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 50820611B5;
- Sun,  1 May 2022 05:12:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2EFCC385B3;
- Sun,  1 May 2022 05:12:48 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 9173AB80CED
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun,  1 May 2022 14:20:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5038AC385AA
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun,  1 May 2022 14:20:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1651381969;
- bh=YtbThwNrWRFAZXwtYRqFAKhwGVU0Vesj5yuz5dRPcmo=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=MkAOdZMy+onRagtGNOdJpAzL1DW55+hzoi7zktbWQo9H6S/w9w9ALLtjpXHhZwGRk
- hMM0mWitK7vfAbZmNo4mvlEFAtyIgEeHsKXsh4ZQ/98HM/HORdDpSSIeb/gmoHKTtV
- OVV65+5Kb5sAo0Gt6geHveAksXvgvDJR9nn+NGmrTbJreVn/ag1DHkg/7eNlUKMLcg
- JE9X3tHtEPvENAF8lUdbZ6PbeAjlVteM+ZdufTlCrf1kKxKiV4eVl7Ynq4Kwuvw+dZ
- p34Za8SPotxTLZmT5ZIckiX/jXOJZUbVFO7Nk6LvCI4xSKsIUKfnOpdPpdrR5wuRX5
- kuuvpGTMadRUQ==
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Date: Sat, 30 Apr 2022 22:08:57 -0700
-Message-Id: <20220501050857.538984-8-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.36.0
-In-Reply-To: <20220501050857.538984-1-ebiggers@kernel.org>
-References: <20220501050857.538984-1-ebiggers@kernel.org>
+ s=k20201202; t=1651414858;
+ bh=2sqmASBR2W2fmeTrVGj+cbs8NRgnVScgL/d4ofSqQYw=;
+ h=From:To:Subject:Date:From;
+ b=hNfZ2IvFxx2FOpB+JpHmAcRd5Qtloy9GTHvbS3pRAcm4Tsd3/KhU4k5Xn2aPPJPHS
+ 6NIfPcgaMHcSWD6rXVJmrZcpqjpxoWkUjAowwiWzSDFlo2lQvZWbH1TWyZn/3dAKNi
+ HnCwfv+VejbrQXFF/RRY3ZuVG844TMlbTagVPVhI2x9oMIuKNz4WYKbE7lAaFCxHag
+ FlREEkpkur6u6LPGnAISHEYgZdd2thFQ4DA7aRsJ0cBSjN9rf0zxdg0WsJ8aVHPXFO
+ slNE4xGV5Zenhs30ll87B4nhXWvAhrO36StVsN3fVAf96Q0c51S100TxVtnuX1t6M9
+ blnP0XS6caM5Q==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 313B0C05FCE; Sun,  1 May 2022 14:20:58 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Sun, 01 May 2022 14:20:57 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: yanming@tju.edu.cn
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version
+ cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
+ priority component assigned_to reporter cf_regression attachments.created
+Message-ID: <bug-215929-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Spam-Score: -5.8 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Eric Biggers <ebiggers@google.com> Now that all its
- callers have been converted to fscrypt_parse_test_dummy_encryption() and
- fscrypt_add_test_dummy_key()
- instead, fscrypt_set_test_dummy_encryption() can be removed. 
- Content analysis details:   (-5.8 points, 6.0 required)
+ Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=215929 Bug ID:
+ 215929 Summary: kernel deadlocks while performing file operations Product:
+ File System Version: 2.5 Kernel Version: 5.17 Hardware: All OS: Linux Tree:
+ Mainline Status: NEW Severity: normal Pr [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nl1t9-00087T-Kr
-Subject: [f2fs-dev] [PATCH v2 7/7] fscrypt: remove
- fscrypt_set_test_dummy_encryption()
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nlARi-0000jK-MC
+Subject: [f2fs-dev] [Bug 215929] New: kernel deadlocks while performing file
+ operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,65 +122,52 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jeff Layton <jlayton@kernel.org>, Lukas Czerner <lczerner@redhat.com>,
- Theodore Ts'o <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+https://bugzilla.kernel.org/show_bug.cgi?id=215929
 
-Now that all its callers have been converted to
-fscrypt_parse_test_dummy_encryption() and fscrypt_add_test_dummy_key()
-instead, fscrypt_set_test_dummy_encryption() can be removed.
+            Bug ID: 215929
+           Summary: kernel deadlocks while performing file operations
+           Product: File System
+           Version: 2.5
+    Kernel Version: 5.17
+          Hardware: All
+                OS: Linux
+              Tree: Mainline
+            Status: NEW
+          Severity: normal
+          Priority: P1
+         Component: f2fs
+          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
+          Reporter: yanming@tju.edu.cn
+        Regression: No
 
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/crypto/policy.c      | 13 -------------
- include/linux/fscrypt.h |  2 --
- 2 files changed, 15 deletions(-)
+Created attachment 300864
+  --> https://bugzilla.kernel.org/attachment.cgi?id=300864&action=edit
+case.c, contains file operations
 
-diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
-index 5f858cee1e3b0..d0a8921577def 100644
---- a/fs/crypto/policy.c
-+++ b/fs/crypto/policy.c
-@@ -802,19 +802,6 @@ bool fscrypt_dummy_policies_equal(const struct fscrypt_dummy_policy *p1,
- }
- EXPORT_SYMBOL_GPL(fscrypt_dummy_policies_equal);
- 
--/* Deprecated, do not use */
--int fscrypt_set_test_dummy_encryption(struct super_block *sb, const char *arg,
--				      struct fscrypt_dummy_policy *dummy_policy)
--{
--	struct fs_parameter param = {
--		.type = fs_value_is_string,
--		.string = arg ? (char *)arg : "",
--	};
--	return fscrypt_parse_test_dummy_encryption(&param, dummy_policy) ?:
--		fscrypt_add_test_dummy_key(sb, dummy_policy);
--}
--EXPORT_SYMBOL_GPL(fscrypt_set_test_dummy_encryption);
--
- /**
-  * fscrypt_show_test_dummy_encryption() - show '-o test_dummy_encryption'
-  * @seq: the seq_file to print the option to
-diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 099b881e63e49..11db6d61d4244 100644
---- a/include/linux/fscrypt.h
-+++ b/include/linux/fscrypt.h
-@@ -284,8 +284,6 @@ int fscrypt_parse_test_dummy_encryption(const struct fs_parameter *param,
- 				    struct fscrypt_dummy_policy *dummy_policy);
- bool fscrypt_dummy_policies_equal(const struct fscrypt_dummy_policy *p1,
- 				  const struct fscrypt_dummy_policy *p2);
--int fscrypt_set_test_dummy_encryption(struct super_block *sb, const char *arg,
--				struct fscrypt_dummy_policy *dummy_policy);
- void fscrypt_show_test_dummy_encryption(struct seq_file *seq, char sep,
- 					struct super_block *sb);
- static inline bool
+I'd mounted a F2FS image with several mount options. When I was performing file
+operations on the mount point, the kernel hangs, and the process cannot be
+killed.
+
+The file operations are in case.c, and the image is provided at
+(https://drive.google.com/file/d/1be1SyKJwBWvQKSnhD0Y05ZquEIPT62-W/view?usp=sharing).
+
+This issue can be reproduced by running the following commands:
+losetup /dev/loop0 case.img
+mount -o
+"background_gc=sync,active_logs=4,disable_ext_identify,inline_dentry,data_flush,fsync_mode=posix"
+/dev/loop0 /mnt/test/
+gcc -o case case.c
+./case
+
 -- 
-2.36.0
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
