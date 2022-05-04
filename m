@@ -2,67 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 844F75193BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 May 2022 03:48:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7F5C51973D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 May 2022 08:09:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nm47j-0005qB-TS; Wed, 04 May 2022 01:48:16 +0000
+	id 1nm8Cn-0000hb-NU; Wed, 04 May 2022 06:09:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nm47i-0005q5-L0
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 May 2022 01:48:15 +0000
+ (envelope-from <chao@kernel.org>) id 1nm8Cl-0000hS-Tp
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 May 2022 06:09:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2PlFdOCZizCNuxQpR2MPp4WthbBAcdEbIMnq0fTzQ+M=; b=awCpSnCv1Fm+v06aAbdlhoz/Eh
- rOiYbAxT9ZhUpGHEIQ+2TCoBYuRP1ox97oKBYEJgp1P5FUbZ1DD7wXAzw2glSaKTvMGr15MBrl8yn
- TjgL1VlyxCYkL8DMqX4oFx9wTCDwGA/aL+T9+uC5opMc9D/UJ57AGMWFM8kg885LSPy4=;
+ bh=+N6HKNw3m2AmMWK+q97fzat88R6YgjiWyYLMSRiWuXA=; b=Hi0gdU9Pr7MWPbhU5gaYKQUylF
+ 0NzwHCv5DnfDSczUrtA5h52Fd4rDa+nrERkEB1dmidv+Y0lbbq8Ky7acRGkGNd+xrY4lX4znqrGO/
+ ujBeXUpy/9Ox/NhW/CBweZMGrz7+gOgcD2svwMSed0hrG62VyaiYpcP00I9OWLOn5eNY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=2PlFdOCZizCNuxQpR2MPp4WthbBAcdEbIMnq0fTzQ+M=; b=V
- du6Kb8MBDgLQAdnSAUp63P0goghr8Oov59e2LP92gQbVqkPL5AmXtLahJe+bVb77jFs8zlA+epGol
- mxIO74P4TSYjn3vOdl7MPAYBTQK26C4QlZl3m0UMAHi5D58IfpZtH/YwOp2jlwOBq3CetMcOgaTQf
- yNrKdOvVTM5L3/9Q=;
+ List-Owner:List-Archive; bh=+N6HKNw3m2AmMWK+q97fzat88R6YgjiWyYLMSRiWuXA=; b=C
+ qn85ZxjNNIGlWfL6hxIBCJv1zsCjJjpPnQsRwXM+/LS0dkxprSRcXub7mupby6NvY1xbx/7wTFkW0
+ UU0+2+iQkIwcRNuM6FXGhHOD4KpM5nt1iI8AOrHfNr3jk1mcipvIOAGFcUPb0rHnZAYfGE52jmJpQ
+ TsL1VqOs/TFxfrck=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nm47i-000ce6-8m
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 May 2022 01:48:14 +0000
+ id 1nm8Cj-00069R-6W
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 May 2022 06:09:42 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id DD5AC61985;
- Wed,  4 May 2022 01:48:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 817C5C385A9;
- Wed,  4 May 2022 01:48:05 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id CE7C96110F;
+ Wed,  4 May 2022 06:09:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2D33EC385A4;
+ Wed,  4 May 2022 06:09:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1651628888;
- bh=1sRYRjLbt8trZsAxQP405ve5/+hZRzhVT+rXdU002IU=;
+ s=k20201202; t=1651644575;
+ bh=N6t+QKrUH1bipYHnngO3FWlGNQptDbFS7bpC/zRcyR4=;
  h=From:To:Cc:Subject:Date:From;
- b=ZIqODaO4EeJ3AGQlFrE98zItIkLii9TzICBsRd4HttDYp3pWa1CS91mDp0ZUG6rw7
- 0CfC61X+QTB8CfkhI0IfKJTrK1XkCVKDbALRtn1/jIDPB5DgnezjcBpdxiqCgiSSQq
- RYy0Sr5k8tF72NreVxLBMxbHzhHejpdQD7l1ztACPs4V7bzwugXp19PXHC0yLQuLEw
- Zqphrb0YORYhyJR/9DFSPDwVegg6iCuFN3kzs+NeOaUfToWmH4IvpL7jbcKERBjYhU
- us+cOa1ec/2irqMEf8UQ3DkvRfQ/CKtyYEZQD26cQhblA2dk3l3Tz1Vrlsmix1UJY1
- FKD8FhW6pSJqQ==
+ b=ocl16qj/RVszFhnHrjRHyWhFSbhZezxnhP2jdAguVrCxdDy/HgrQry5cFItiSyyCr
+ B3/zZ8TjM/zLrt4tNY7l/+MdP/sKDBMzbB7u9d8egBR0xgU63q8cNNYTMfi77fBc8I
+ tuULaFMw0TDqDUF5gFGUMOuHRvXyCX9I01Gjb4UZVqeG2zVR8tBtvUJiG7sq7EzOhI
+ 4j1yfwmUTs0PBvwBPqOHJmcqleJKOQgEw0Dbx2vK71pwadwsPryxaIikVi+RGReFE/
+ YWtBaaJkoVhOBtw/VVm9USTe69NfxmBMuQD10j0PglSlSfDQtyDF2oeJXviRKBObIp
+ k42XFAY5V+ypw==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Wed,  4 May 2022 09:47:55 +0800
-Message-Id: <20220504014755.1727-1-chao@kernel.org>
-X-Mailer: git-send-email 2.32.0
+Date: Wed,  4 May 2022 14:09:22 +0800
+Message-Id: <20220504060922.3527354-1-chao@kernel.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -72,23 +72,23 @@ X-Spam-Report: Spam detection software,
  The root cause is: in a very small sized image, it's very easy to exceed
  threshold of foreground GC, if we calculate free space and dirty data based
  on section granularity, in corner case, has_not_eno [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nm47i-000ce6-8m
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix deadloop in foreground GC
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nm8Cj-00069R-6W
+Subject: [f2fs-dev] [PATCH v3] f2fs: fix deadloop in foreground GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -130,13 +130,13 @@ Cc: stable@vger.kernel.org
 Reported-by: Ming Yan <yanming@tju.edu.cn>
 Signed-off-by: Chao Yu <chao.yu@oppo.com>
 ---
-v2:
-- fix performance regression
+v3:
+- fix incorrect calculation of 'need_upper' variable.
  fs/f2fs/segment.h | 32 ++++++++++++++++++++------------
  1 file changed, 20 insertions(+), 12 deletions(-)
 
 diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 8a591455d796..c38263dbc5ca 100644
+index 8a591455d796..b1951bd30efa 100644
 --- a/fs/f2fs/segment.h
 +++ b/fs/f2fs/segment.h
 @@ -575,11 +575,10 @@ static inline int reserved_sections(struct f2fs_sb_info *sbi)
@@ -178,7 +178,7 @@ index 8a591455d796..c38263dbc5ca 100644
 -			has_curseg_enough_space(sbi))
 +	free = free_sections(sbi) + freed;
 +	need_lower = node_secs + dent_secs + reserved_sections(sbi) + needed;
-+	need_upper = need_lower + node_blocks ? 1 : 0 + dent_blocks ? 1 : 0;
++	need_upper = need_lower + (node_blocks ? 1 : 0) + (dent_blocks ? 1 : 0);
 +
 +	if (free > need_upper)
  		return false;
@@ -192,7 +192,7 @@ index 8a591455d796..c38263dbc5ca 100644
  
  static inline bool f2fs_is_checkpoint_ready(struct f2fs_sb_info *sbi)
 -- 
-2.32.0
+2.25.1
 
 
 
