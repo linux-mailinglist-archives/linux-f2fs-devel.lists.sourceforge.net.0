@@ -2,97 +2,141 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D2B551AEF4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 May 2022 22:23:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6076E51B04A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 May 2022 23:19:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nmLWh-00028b-Sg; Wed, 04 May 2022 20:23:11 +0000
+	id 1nmMOo-00022d-Dw; Wed, 04 May 2022 21:19:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nmLWg-00028V-8f
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 May 2022 20:23:09 +0000
+ (envelope-from <dsterba@suse.cz>) id 1nmMOm-00022X-Sl
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 May 2022 21:19:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=naxLxOVKAPm2Jaro+LEcbo24jZG+euVPOx89u+mrym8=; b=R0R19/zGtF3AsReA3/2F9kCjM5
- HSG9329iZyCjfZOpmf7gPYnqCFL1iEIHdhWX/x9PidXZGzTGCM2jy9XEGG4X3DtmccZd1baM+us2I
- MvZZon3y6QFmylq0SbEUSK3E1xubJoifm6Cmt42IPs4Es+GiIFe3TSxHKhkLD4p+i3BU=;
+ bh=npPu7v4PVxjYw5k81v34byZcxUoLWsQ8uewcVPzgU3Y=; b=JR6HH3cs8V2M1CVKWotf7XTkas
+ qUkMrYE6zG8YeR8wvHXX0HpmL7a+rpkFv5coyhsbVfn506Xj2Nf1HTSExlgGtYZtrVwEDMKex4oFo
+ I2mhrY4FXsjBxKQ60R8zuyrSAYJSxOkEG/aMIIawsYMFrCdf+XRRid3leUcjY7T/SZ1w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Reply-To:Message-ID:
+ Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=naxLxOVKAPm2Jaro+LEcbo24jZG+euVPOx89u+mrym8=; b=GU2eNxa/EuBcCVC0YD+RQ0aL3i
- rB6QlUkCmzQESQXtnIlXQm6cizPurCkTzwzgtp2wQLMVx4TfXMD4LCFBHH+jh6m1nOY+uotif/30u
- wTn/wYZtVT2yJdKpQaYBjjlGLAEk6b5bhZkPuHIVnC5luVCHlxSuOjqBm4S27XiHXZQM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nmLWd-0000dh-QM
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 May 2022 20:23:08 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ bh=npPu7v4PVxjYw5k81v34byZcxUoLWsQ8uewcVPzgU3Y=; b=PbUlQKJoSQCW7ePADpwgaaHwld
+ je+m8aaBC5eT2NpdN2CnK1ZbcyoJKZsbbm8X4u1fWFNGQXpCnkgfFKxU65hCUlyrDWH+G71PAw6to
+ H2Nguy4iAWVjdKC+MO9iCAI8o3HPctuPcE7S1/75dYWv3OVVvcV+MU9F4D7GXuTRIK6I=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nmMOh-001T3s-4b
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 04 May 2022 21:19:03 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id D0B3C61728
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  4 May 2022 20:22:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 256CEC385A4;
- Wed,  4 May 2022 20:22:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1651695776;
- bh=Pvp/ayE3bEr1ThzltiOs0liNClPGDqGM57U4y3ZJCs4=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=Jb1H+umWfnfEpWqRV20Q4YhcGwRLYGWiL464vbh1AFJeLggogbh3DgfdhCRMeUThT
- XNv5jkVDb09twhYv4kQ1HPTEvqpD1A9rDMXWas6eF0Jch8V8bWocjrGjgjvTI+7mDE
- k7Y4wuNJ7sFd1PkbhH3cM6NHpPU1kH27+95u07THwk2LSvSKMFS64PEaeWAgBWwbUB
- /5eZqJHkZ1yfcpEKtZl1G8IndjStS3uqXjjaoyGrAFWo2Peiti6Tcqz7VBE9BDTxu8
- bqmYMdQzVyQ4v5wiU/pYIPJu5AEzmRtqdnpmupU4kAkDSIubdwgG8wWaPAPEOM0Vya
- PG1KYfPHXeaQg==
-Date: Wed, 4 May 2022 13:22:54 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <YnLgnhiJtrutv8nw@google.com>
-References: <20220503203040.365028-1-jaegeuk@kernel.org>
- <20220503203040.365028-2-jaegeuk@kernel.org>
+ by smtp-out1.suse.de (Postfix) with ESMTPS id BABED210E5;
+ Wed,  4 May 2022 21:18:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1651699132;
+ h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+ cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=npPu7v4PVxjYw5k81v34byZcxUoLWsQ8uewcVPzgU3Y=;
+ b=tM1dspGpfMipCiAbW0HO2dZVPEAgyrff0KMavj6bZk8T37R9hRgCKrWvzwgeAGT0wBlOIm
+ ubeLZ7ieBvBdZyh1MDcuOhs1j09imPderIadxrCmq/Rsm19BAfVTGh1hT5vsADF9X2YLOS
+ su7DARpA5vqfoa0MkPB71ULlFqjV3/w=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1651699132;
+ h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+ cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=npPu7v4PVxjYw5k81v34byZcxUoLWsQ8uewcVPzgU3Y=;
+ b=vS6Y/NRPgUhS2xB+r59V5ZgrZyl8A56t3CcwGyemIqz6M8o7VVvzu6uPNAFvfQz1MtnccG
+ 5x8uPy6F8/V4gpDg==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B60DD131BD;
+ Wed,  4 May 2022 21:18:51 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id ptTKKrvtcmJMMQAAMHmgww
+ (envelope-from <dsterba@suse.cz>); Wed, 04 May 2022 21:18:51 +0000
+Date: Wed, 4 May 2022 23:14:40 +0200
+From: David Sterba <dsterba@suse.cz>
+To: Pankaj Raghav <p.raghav@samsung.com>
+Message-ID: <20220504211440.GU18596@suse.cz>
+Mail-Followup-To: dsterba@suse.cz, Pankaj Raghav <p.raghav@samsung.com>,
+ Johannes Thumshirn <Johannes.Thumshirn@wdc.com>,
+ "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
+ "axboe@kernel.dk" <axboe@kernel.dk>,
+ "snitzer@kernel.org" <snitzer@kernel.org>,
+ "hch@lst.de" <hch@lst.de>, "mcgrof@kernel.org" <mcgrof@kernel.org>,
+ Naohiro Aota <Naohiro.Aota@wdc.com>,
+ "sagi@grimberg.me" <sagi@grimberg.me>,
+ "damien.lemoal@opensource.wdc.com" <damien.lemoal@opensource.wdc.com>,
+ "dsterba@suse.com" <dsterba@suse.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>,
+ "clm@fb.com" <clm@fb.com>,
+ "gost.dev@samsung.com" <gost.dev@samsung.com>,
+ "chao@kernel.org" <chao@kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, 
+ "josef@toxicpanda.com" <josef@toxicpanda.com>,
+ "jonathan.derrick@linux.dev" <jonathan.derrick@linux.dev>,
+ "agk@redhat.com" <agk@redhat.com>,
+ "kbusch@kernel.org" <kbusch@kernel.org>,
+ "kch@nvidia.com" <kch@nvidia.com>,
+ "linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+ "dm-devel@redhat.com" <dm-devel@redhat.com>,
+ "bvanassche@acm.org" <bvanassche@acm.org>,
+ "jiangbo.365@bytedance.com" <jiangbo.365@bytedance.com>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+ Matias =?iso-8859-1?Q?Bj=F8rling?= <Matias.Bjorling@wdc.com>,
+ "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>
+References: <CGME20220427160256eucas1p2db2b58792ffc93026d870c260767da14@eucas1p2.samsung.com>
+ <20220427160255.300418-1-p.raghav@samsung.com>
+ <PH0PR04MB74167FC8BA634A3DA09586489BC19@PH0PR04MB7416.namprd04.prod.outlook.com>
+ <a702c7f7-9719-9f3e-63de-1e96f2912432@samsung.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220503203040.365028-2-jaegeuk@kernel.org>
-X-Spam-Score: -5.8 (-----)
+In-Reply-To: <a702c7f7-9719-9f3e-63de-1e96f2912432@samsung.com>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The f2fs_gc uses a bitmap to indicate pinned sections, but
- when disabling chckpoint, we call f2fs_gc() with NULL_SEGNO which selects
- the same dirty segment as a victim all the time, resulting in check [...]
- Content analysis details:   (-5.8 points, 6.0 required)
+ Content preview:  On Tue, May 03, 2022 at 11:12:04AM +0200,
+ Pankaj Raghav wrote:
+ > Hi Johannes, > On 2022-05-03 00:07, Johannes Thumshirn wrote: > >> There
+ was an effort previously [1] to add support to non po2 devices [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nmLWd-0000dh-QM
-Subject: Re: [f2fs-dev] [PATCH 2/2 v2] f2fs: avoid to select pinned section
- during checkpoint=disable
+X-Headers-End: 1nmMOh-001T3s-4b
+Subject: Re: [f2fs-dev] [PATCH 00/16] support non power of 2 zoned devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,43 +148,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Reply-To: dsterba@suse.cz
+Cc: "jiangbo.365@bytedance.com" <jiangbo.365@bytedance.com>,
+ "linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+ "clm@fb.com" <clm@fb.com>, "dm-devel@redhat.com" <dm-devel@redhat.com>,
+ "hch@lst.de" <hch@lst.de>, "agk@redhat.com" <agk@redhat.com>,
+ Naohiro Aota <Naohiro.Aota@wdc.com>, "sagi@grimberg.me" <sagi@grimberg.me>,
+ "gost.dev@samsung.com" <gost.dev@samsung.com>,
+ "damien.lemoal@opensource.wdc.com" <damien.lemoal@opensource.wdc.com>,
+ "jonathan.derrick@linux.dev" <jonathan.derrick@linux.dev>,
+ "kch@nvidia.com" <kch@nvidia.com>, "snitzer@kernel.org" <snitzer@kernel.org>,
+ "josef@toxicpanda.com" <josef@toxicpanda.com>,
+ "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+ "dsterba@suse.com" <dsterba@suse.com>, "kbusch@kernel.org" <kbusch@kernel.org>,
+ "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
+ Matias =?iso-8859-1?Q?Bj=F8rling?= <Matias.Bjorling@wdc.com>,
+ "bvanassche@acm.org" <bvanassche@acm.org>, "axboe@kernel.dk" <axboe@kernel.dk>,
+ Johannes Thumshirn <Johannes.Thumshirn@wdc.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "mcgrof@kernel.org" <mcgrof@kernel.org>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+ "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The f2fs_gc uses a bitmap to indicate pinned sections, but when disabling
-chckpoint, we call f2fs_gc() with NULL_SEGNO which selects the same dirty
-segment as a victim all the time, resulting in checkpoint=disable failure.
-Let's pick another one, if we fail to collect it.
+On Tue, May 03, 2022 at 11:12:04AM +0200, Pankaj Raghav wrote:
+> Hi Johannes,
+> On 2022-05-03 00:07, Johannes Thumshirn wrote:
+> >> There was an effort previously [1] to add support to non po2 devices via
+> >> device level emulation but that was rejected with a final conclusion
+> >> to add support for non po2 zoned device in the complete stack[2].
+> > 
+> > Hey Pankaj,
+> > 
+> > One thing I'm concerned with this patches is, once we have npo2 zones (or to be precise 
+> > not fs_info->sectorsize aligned zones) we have to check on every allocation if we still 
+> > have at least have fs_info->sectorsize bytes left in a zone. If not we need to 
+> > explicitly finish the zone, otherwise we'll run out of max active zones. 
+> > 
+> This commit: `btrfs: zoned: relax the alignment constraint for zoned
+> devices` makes sure the zone size is BTRFS_STRIPE_LEN aligned (64K). So
+> even the npo2 zoned device should be aligned to `fs_info->sectorsize`,
+> which is typically 4k.
+> 
+> This was one of the comment that came from David Sterba:
+> https://lore.kernel.org/all/20220315142740.GU12643@twin.jikos.cz/
+> where he suggested to have some sane alignment for the zone sizes.
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
-
- Change log from v1:
-  - keep sync condition to stop GC
-
- fs/f2fs/gc.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
-
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 4d47723523c3..441190ab8593 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1838,10 +1838,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, bool sync,
- 	if (gc_type == FG_GC)
- 		sbi->cur_victim_sec = NULL_SEGNO;
- 
--	if (sync)
--		goto stop;
--
--	if (!has_not_enough_free_secs(sbi, sec_freed, 0))
-+	if ((!has_not_enough_free_secs(sbi, sec_freed, 0) || sync) && seg_freed)
- 		goto stop;
- 
- 	if (skipped_round <= MAX_SKIP_GC_COUNT || skipped_round * 2 < round) {
--- 
-2.36.0.464.gb9c8b46e94-goog
-
+My idea of 'sane' value would be 1M, that we have 4K for sectors is
+because of the 1:1 mapping to pages, but RAM sizes are on a different
+scale than storage devices. The 4K is absolute minimum but if the page
+size is taken as a basic constraint, ARM has 64K and there are some 256K
+arches.
 
 
 _______________________________________________
