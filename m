@@ -2,104 +2,161 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C86B51B6AC
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 May 2022 05:46:07 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C200C51B8EB
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 May 2022 09:29:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nmSRJ-0003hz-Mu; Thu, 05 May 2022 03:46:04 +0000
+	id 1nmVv7-0000jE-MJ; Thu, 05 May 2022 07:29:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1nmSRI-0003hs-Bt
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 May 2022 03:46:03 +0000
+ (envelope-from <p.raghav@samsung.com>) id 1nmVv6-0000j8-KZ
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 May 2022 07:29:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=References:Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:From:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3cFTJinjakGeW/6mWOUa4ZfFI5r/6BTNWfmS9zTPk58=; b=h7Or5/lzTYZ9aMGdyVTIik2V3t
- 4Y1q4NrgETN9yyLIsiAf2w/HXXFcAzYRNP6Z+jiH5ptj6BohTkPi7Bz2c88/StgQSZxmrG6E80NAg
- uEkcVXUxr2uvR3grt5rvAaeThpRFnx0x9zZFYmOzWWvC81Hpah1ZbPl8KRV/kCFQhK/o=;
+ bh=j19LG41QlgQqZ+lZFqrhtRma1C1jIg9OOFvDpBlTex4=; b=Lj4zHNU02kBpH5d6hUDyGyGtUh
+ 9Qot+tSUmXalw889uqIxiqSqofDk1dpCuVGHaBmmQiB92Fa4zoYfgllXmIKPLVRdZBkkzO4ZbAY7z
+ f4LODGrSDGNSb4X++oaZW1v/bGm81haHbtCnhE/3fHht6p90n9R0SI7h9GvUPAxZbBCc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=References:Content-Transfer-Encoding:Content-Type:In-Reply-To:From:CC:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3cFTJinjakGeW/6mWOUa4ZfFI5r/6BTNWfmS9zTPk58=; b=ZFxnhPyMeGCiA5XM42VOIi5yZ0
- 5bTGlQ5gYN4fDFq0Ez3HRGZF2ttY95vQfQqZcg8agp8HCwhmkiQMQFBPzIZ9mC8b4qa1Cx7bINka7
- +LONHZRdvUFyTwv0Qy7VTBNyMZ7QmRqns90gCaMBRghmLZ8Ey24sMNK09uBWkyVl56Y4=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=j19LG41QlgQqZ+lZFqrhtRma1C1jIg9OOFvDpBlTex4=; b=BqRYnLHDIkC1qzCRR151AqH7z6
+ kIFnXtq5s42U2vXx33GoG9Tp64PwivZpGAVr/1fyhjk0NpTOV0viDcvNHaeJ9fBG7VjWNXt06ReDA
+ mhMHw6RL9h2jVXf4LzhzSFFZ41pvrRDA6eQhqM8eZ9Uht3DRfDY/VKHRDJbG4cu2+I64=;
+Received: from mailout1.w1.samsung.com ([210.118.77.11])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nmSRG-0000Ni-1D
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 May 2022 03:46:02 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9C411611DB
+ id 1nmVv1-00006o-Lu
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 05 May 2022 07:29:03 +0000
+Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
+ by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id
+ 20220505072848euoutp010334f5e5d6839b3fac02e63ba15cd7ab~sJOTkNMat3164231642euoutp01U
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  5 May 2022 03:45:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 06658C385A4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  5 May 2022 03:45:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1651722356;
- bh=3cFTJinjakGeW/6mWOUa4ZfFI5r/6BTNWfmS9zTPk58=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=pLC7SAwsTvIMDdB05KAIpjPojsE/WBG6J58qxrbjTMkt1Fl1iZ1jxcag/5TwqwfYj
- nqAY9vil30S/OD4QWuCcyPri+WGr38dKairqs7iLCl+a2Zg/OQgSZbnnmHBe53TVl3
- btr2oLrTjIrVxI9fPPJtNvHeEtdgv99f9RbjBv2/kdVHtCPx0ti06rthoYga5+0WRD
- P8taLXjTUWHeH1ddyqicc5mvfhbdiEE75uvH1wJCuybM41doaR298CkCr/YJ53+yDH
- Swj74jT4osMotHjWzFujLf1NMezQ3+G1I3qlMOtMD1sDo9wptXXHqnnNZH6jApyppy
- WfsoepQmv3jPw==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id DC6D7C05F98; Thu,  5 May 2022 03:45:55 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 05 May 2022 03:45:55 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: yanming@tju.edu.cn
-X-Bugzilla-Status: NEEDINFO
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-215935-202145-7FOey2y8ga@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-215935-202145@https.bugzilla.kernel.org/>
-References: <bug-215935-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ Thu,  5 May 2022 07:28:48 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com
+ 20220505072848euoutp010334f5e5d6839b3fac02e63ba15cd7ab~sJOTkNMat3164231642euoutp01U
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1651735728;
+ bh=j19LG41QlgQqZ+lZFqrhtRma1C1jIg9OOFvDpBlTex4=;
+ h=Date:Subject:To:CC:From:In-Reply-To:References:From;
+ b=Hc59fTK6PxHZ0M4uhwGtKBELXw9/2UJFTr1QlmD/0hl+2RJDu0qhnKOad3qRKHyXS
+ nH1Vu0K1VivDRdNDtWqRmsYW0M8ZGJWYvYT5//EblBI6minLmz6bnyRd7LZT//JZ0S
+ R8kBWubn+ScpWMlF0vKcj9qFSPgooa10JbhN+zuY=
+Received: from eusmges2new.samsung.com (unknown [203.254.199.244]) by
+ eucas1p1.samsung.com (KnoxPortal) with ESMTP id
+ 20220505072848eucas1p1d66f136b7b1226351171cd4dd1152d26~sJOTKK_DF2541325413eucas1p1z;
+ Thu,  5 May 2022 07:28:48 +0000 (GMT)
+Received: from eucas1p1.samsung.com ( [182.198.249.206]) by
+ eusmges2new.samsung.com (EUCPMTA) with SMTP id B4.15.09887.0BC73726; Thu,  5
+ May 2022 08:28:48 +0100 (BST)
+Received: from eusmtrp2.samsung.com (unknown [182.198.249.139]) by
+ eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20220505072847eucas1p27c50364580d96918bc2a59b6877671ba~sJOSvbf6V0726607266eucas1p2b;
+ Thu,  5 May 2022 07:28:47 +0000 (GMT)
+Received: from eusmgms2.samsung.com (unknown [182.198.249.180]) by
+ eusmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20220505072847eusmtrp2acdb61270717097424f910760caaa9a7~sJOStu9m32757327573eusmtrp2B;
+ Thu,  5 May 2022 07:28:47 +0000 (GMT)
+X-AuditID: cbfec7f4-471ff7000000269f-26-62737cb08449
+Received: from eusmtip1.samsung.com ( [203.254.199.221]) by
+ eusmgms2.samsung.com (EUCPMTA) with SMTP id 73.0D.09404.FAC73726; Thu,  5
+ May 2022 08:28:47 +0100 (BST)
+Received: from CAMSVWEXC01.scsc.local (unknown [106.1.227.71]) by
+ eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
+ 20220505072847eusmtip133d8624e020309d5e17197a6d3fce6cd~sJOSiJ1WZ1867518675eusmtip1m;
+ Thu,  5 May 2022 07:28:47 +0000 (GMT)
+Received: from [192.168.8.130] (106.210.248.170) by CAMSVWEXC01.scsc.local
+ (2002:6a01:e347::6a01:e347) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
+ Thu, 5 May 2022 08:28:44 +0100
+Message-ID: <fe8746d5-f7c4-efd6-b4a6-e198f6d95813@samsung.com>
+Date: Thu, 5 May 2022 09:28:43 +0200
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.1
+Content-Language: en-US
+To: David Sterba <dsterba@suse.cz>
+From: Pankaj Raghav <p.raghav@samsung.com>
+In-Reply-To: <20220504211440.GU18596@suse.cz>
+X-Originating-IP: [106.210.248.170]
+X-ClientProxiedBy: CAMSVWEXC01.scsc.local (2002:6a01:e347::6a01:e347) To
+ CAMSVWEXC01.scsc.local (2002:6a01:e347::6a01:e347)
+X-Brightmail-Tracker: H4sIAAAAAAAAA01Sa0xTZxjed87pOaedkGOB8K2wbMOxcZk4yJJ9G5sDN+dJRtQfbGMmRiuc
+ AI5yaenmmKZ0KFEY4+IFd0Rg3rCIFoEUqVwEpAgWXYA6JFrmKAkWqd1AkRRxtIct/Hve55L3
+ fb58NC41kjI6NT2bU6bL04JICWEwzd9aW79Xtevd0iop0vebcHThfjGJjjnncXTz6ACGyoqP
+ U8g1cBtHbY4TIvT7My2GTrvmCKS70IMhm57H0c/XnAR6XmDFkG7/AxwtPIhEZV13AJqw8Bhq
+ Gw1Hg+PnKTR4ahNqbesj0JCxgkRV5yYoVJL/BEcjJRMAlfY2itClqccEujEaEBPIDg1/wS7e
+ qCPZ0jwHxd62XibYoQE121B7iGR/yz2Ks41nNOzV6hmMvXo3l2SL8hwk23JgTMQ+breQrL7J
+ QrDm6usUW9J4WbRVuk3yURKXlvodp1y3fqckZfKci8rsp/YYzA0gFxSRBUBMQ+Y9eG2hYQlL
+ aClzHsCJwfuEMMwCaC3rWR5mAGxfyPs/8nSmiRKEGgCnrAaRW/C4bK0bBcEIoHM435PwYtbD
+ uzWdhBsTzJuwcGx+mV8N+361eXg/JgEe480e3of5BF40zmJujDP+cNRW5cG+TBCsNFkw9wKc
+ cUmgo7VyaTNNk0wY1B6i3B4xsxYeqejHhWwoPNDsogT8GmyersCFBmvg4ZFhTMD74EWT2dMG
+ MpMS+MeJ08umz2DBi/Jlkw+09zZRAg6EL1qqlvkf4cSICxfC+wEsbtGT7oMgEw1/MacJnlj4
+ Z5FNJNDecGR6tXCPNywzlOMlIJhf8RT8isr8igr8igrVgKgF/pxapUjmVFHp3PcRKrlCpU5P
+ jkjMUDSApe99c7F39gqosf8d0QUwGnQBSONBvl6fns3cJfVKkv+QwykzdijVaZyqCwTQRJC/
+ V2JqvVzKJMuzuW85LpNT/qditFiWi9VHWTd3NNfVGQoSAyLj7PH6O1mZEnF3yOB2/i8yUTG3
+ o+M6r9k+3rNzxhA78E9e2qq5KeZhsdT+isw3sCZasTfE76zlJ8OXhYrBRwlbgrOfD8s0b4un
+ D6ptYdMv51AObfSa/vKOW88SNogiOsMveXUfH+OzNmzN73WqU/OzdLEZB2UaLVF4ZHHVWzJr
+ /MhL2Y/inPu2iaiN9R+caQgNd9KvmqIaO0VGy0Of8Th7RHDV6+HajP43Pv7Q4H3PmFPGvXMl
+ ZtzvpObrb3ZbYp4CmqytXPc+3x5rD6xVn+oOTfqqNUVXVPx54ea6Jw6nbjIxku4R7/YOc9wb
+ Cqm37tnUF58SRKhS5JFhuFIl/xeMBbOtTQQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrPKsWRmVeSWpSXmKPExsVy+t/xu7rra4qTDDa0GVusP3WM2WL13X42
+ i2kffjJbnJ56lsliUv8MdovfZ88zW+x9N5vV4sKPRiaLxb+/s1isXH2UyeLJ+lnMFj0HPrBY
+ /O26x2SxsuUhs8Wfh4YWkw5dY7R4enUWk8XeW9oWlx6vYLe4tMjdYs/ekywWl3fNYbOYv+wp
+ u8WEtq/MFjcmPGW0mHh8M6vFutfvWSxO3JJ2kPG4fMXb49+JNWweE5vfsXucv7eRxePy2VKP
+ Tas62TwWNkxl9ti8pN5j94LPTB67bzawefQ2v2Pz2Nl6n9Xj/b6rbB7rt1xl8Tiz4Ai7x4TN
+ G1kDhKL0bIryS0tSFTLyi0tslaINLYz0DC0t9IxMLPUMjc1jrYxMlfTtbFJSczLLUov07RL0
+ Ml4s+81ecIq9YtuZTYwNjL1sXYycHBICJhLfPm9h72Lk4hASWMoocXXLJqiEjMSnKx/ZIWxh
+ iT/Xutggij4ySsz61cIM4exilPj05DdYFa+AncTN5QdZQGwWARWJ7vs/2SDighInZz4Bi4sK
+ REg82H2WFcQWFrCXWLvrCxOIzSwgLnHryXwwW0RASWLesatgtpDATiaJR99iQJYxC/zkkpj5
+ uRFoMwcHm4CWRGMn2F5OAV2JKXNOMUPM0ZRo3Q5xD7OAvMT2t3OYIT5Qlph84woThF0r8er+
+ bsYJjKKzkJw3C8kZs5CMmoVk1AJGllWMIqmlxbnpucVGesWJucWleel6yfm5mxiBKW/bsZ9b
+ djCufPVR7xAjEwfjIUYJDmYlEV7npQVJQrwpiZVVqUX58UWlOanFhxhNgWE0kVlKNDkfmHTz
+ SuINzQxMDU3MLA1MLc2MlcR5PQs6EoUE0hNLUrNTUwtSi2D6mDg4pRqYPJye+xrfntSvZ258
+ sj6QJ9fgXaL0leeRGjbXc2Z27Emf8VX0/e7QfR3TnWf9nXBUmW1d3O05uo/j9ub9Xv+do/+c
+ 6k+Xz5Ncz6auZj7aEKfMKPCOLZH/r4iFUtiBjKMlDRwBTp+tOK/Eq/yU/GDnG3Juaej7f7c9
+ 32dmfnFOOtLQFn3ZwdynzppHc+uk5ZVL7ktFvw/KOpx5UzHl3601M7+fPD7P8ac8e2Kl6nvL
+ qZ5LLqyY9XS+sreS5fy62uavc7R6Y8t6O8xzT3hWGIR517PbPPu33uTrLOvmbsGnEdf39hW2
+ Hr8b+t6/Yu9yK/NfD2vdi45rWb9xTXYKSbueFt7nJ526oeeI8lJrUSclluKMREMt5qLiRABk
+ 5eXBAgQAAA==
+X-CMS-MailID: 20220505072847eucas1p27c50364580d96918bc2a59b6877671ba
+X-Msg-Generator: CA
+X-RootMTR: 20220427160256eucas1p2db2b58792ffc93026d870c260767da14
+X-EPHeader: CA
+CMS-TYPE: 201P
+X-CMS-RootMailID: 20220427160256eucas1p2db2b58792ffc93026d870c260767da14
+References: <CGME20220427160256eucas1p2db2b58792ffc93026d870c260767da14@eucas1p2.samsung.com>
+ <20220427160255.300418-1-p.raghav@samsung.com>
+ <PH0PR04MB74167FC8BA634A3DA09586489BC19@PH0PR04MB7416.namprd04.prod.outlook.com>
+ <a702c7f7-9719-9f3e-63de-1e96f2912432@samsung.com>
+ <20220504211440.GU18596@suse.cz>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=215935 ---
- Comment
- #2 from bughunter (yanming@tju.edu.cn) --- I have tried the latest branch,
- while it is weird that this issue still exists. A long list of kernel logs
- are printed like: 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 2022-05-04 23:14,
+ David Sterba wrote: >> This commit: `btrfs:
+ zoned: relax the alignment constraint for zoned >> devices` makes sure the
+ zone size is BTRFS_STRIPE_LEN aligned (64K). So >> even the [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [210.118.77.11 listed in wl.mailspike.net]
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ high trust [210.118.77.11 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -108,9 +165,11 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nmSRG-0000Ni-1D
-Subject: [f2fs-dev] [Bug 215935] kernel hangs when invoking system calls
+X-Headers-End: 1nmVv1-00006o-Lu
+Subject: Re: [f2fs-dev] [PATCH 00/16] support non power of 2 zoned devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,98 +181,52 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: "jiangbo.365@bytedance.com" <jiangbo.365@bytedance.com>,
+ "linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+ "clm@fb.com" <clm@fb.com>, "dm-devel@redhat.com" <dm-devel@redhat.com>,
+ "hch@lst.de" <hch@lst.de>, "agk@redhat.com" <agk@redhat.com>,
+ Naohiro Aota <Naohiro.Aota@wdc.com>, "sagi@grimberg.me" <sagi@grimberg.me>,
+ "gost.dev@samsung.com" <gost.dev@samsung.com>,
+ "damien.lemoal@opensource.wdc.com" <damien.lemoal@opensource.wdc.com>,
+ "jonathan.derrick@linux.dev" <jonathan.derrick@linux.dev>,
+ "kch@nvidia.com" <kch@nvidia.com>, "snitzer@kernel.org" <snitzer@kernel.org>,
+ "josef@toxicpanda.com" <josef@toxicpanda.com>,
+ "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+ "dsterba@suse.com" <dsterba@suse.com>, "kbusch@kernel.org" <kbusch@kernel.org>,
+ "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
+ =?UTF-8?Q?Matias_Bj=c3=b8rling?= <Matias.Bjorling@wdc.com>,
+ "bvanassche@acm.org" <bvanassche@acm.org>, "axboe@kernel.dk" <axboe@kernel.dk>,
+ Johannes Thumshirn <Johannes.Thumshirn@wdc.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "mcgrof@kernel.org" <mcgrof@kernel.org>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+ "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=215935
+On 2022-05-04 23:14, David Sterba wrote:
+>> This commit: `btrfs: zoned: relax the alignment constraint for zoned
+>> devices` makes sure the zone size is BTRFS_STRIPE_LEN aligned (64K). So
+>> even the npo2 zoned device should be aligned to `fs_info->sectorsize`,
+>> which is typically 4k.
+>>
+>> This was one of the comment that came from David Sterba:
+>> https://lore.kernel.org/all/20220315142740.GU12643@twin.jikos.cz/
+>> where he suggested to have some sane alignment for the zone sizes.
+> 
+> My idea of 'sane' value would be 1M, that we have 4K for sectors is
+> because of the 1:1 mapping to pages, but RAM sizes are on a different
+> scale than storage devices. The 4K is absolute minimum but if the page
+> size is taken as a basic constraint, ARM has 64K and there are some 256K
+> arches.
 
---- Comment #2 from bughunter (yanming@tju.edu.cn) ---
-I have tried the latest branch, while it is weird that this issue still exists.
-A long list of kernel logs are printed like:
+That is a good point. I think it is safe to have 1MB as the minimum
+alignment so that it covers all architecture's page sizes. Thanks. I
+will queue this up.
 
-4,4716,31237186595,-; <TASK>
-4,4717,31237186597,-; dump_stack_lvl+0x34/0x44
-4,4718,31237186601,-; f2fs_is_valid_blkaddr.cold+0x2a/0x47
-4,4719,31237186607,-; f2fs_do_write_data_page+0x30a/0x1ff0
-4,4720,31237186610,-; ? f2fs_should_update_outplace+0x530/0x530
-4,4721,31237186613,-; ? percpu_counter_add_batch+0x79/0x130
-4,4722,31237186618,-; ? unwind_get_return_address+0xa0/0xa0
-4,4723,31237186620,-; ? percpu_counter_add_batch+0x79/0x130
-4,4724,31237186625,-; f2fs_write_single_data_page+0x1408/0x1c60
-4,4725,31237186629,-; ? f2fs_do_write_data_page+0x1ff0/0x1ff0
-4,4726,31237186634,-; ? invalid_folio_referenced_vma+0x10/0x10
-4,4727,31237186638,-; ? percpu_counter_add_batch+0x79/0x130
-4,4728,31237186643,-; f2fs_write_cache_pages+0x4ae/0xeb0
-4,4729,31237186647,-; ? f2fs_write_single_data_page+0x1c60/0x1c60
-4,4730,31237186649,-; ? unwind_next_frame+0x1301/0x1c60
-4,4731,31237186653,-; ? entry_SYSCALL_64_after_hwframe+0x44/0xae
-4,4732,31237186656,-; ? unwind_get_return_address+0xa0/0xa0
-4,4733,31237186660,-; ? _raw_spin_lock+0x82/0xd0
-4,4734,31237186663,-; ? _raw_spin_lock_irqsave+0xe0/0xe0
-4,4735,31237186666,-; ? blk_start_plug_nr_ios+0x270/0x270
-4,4736,31237186669,-; ? __kernel_text_address+0x9/0x30
-4,4737,31237186674,-; ? f2fs_remove_dirty_inode+0x112/0x4d0
-4,4738,31237186677,-; f2fs_write_data_pages+0x3cb/0xde0
-4,4739,31237186682,-; ? f2fs_write_cache_pages+0xeb0/0xeb0
-4,4740,31237186685,-; ? load_balance+0x20d0/0x20d0
-4,4741,31237186688,-; ? find_get_pages_range_tag+0x329/0x530
-4,4742,31237186693,-; do_writepages+0x168/0x550
-4,4743,31237186696,-; ? page_writeback_cpu_online+0x10/0x10
-4,4744,31237186699,-; ? attach_entity_load_avg+0x5b4/0x7f0
-4,4745,31237186703,-; ? pagevec_lookup_range_tag+0x23/0x60
-4,4746,31237186706,-; ? f2fs_flush_inline_data+0xfb/0x910
-4,4747,31237186711,-; filemap_fdatawrite+0xa5/0xe0
-4,4748,31237186714,-; ? folio_unlock+0x30/0x30
-4,4749,31237186716,-; ? _raw_spin_lock+0x82/0xd0
-4,4750,31237186721,-; ? _raw_spin_unlock+0x34/0x60
-4,4751,31237186724,-; f2fs_sync_dirty_inodes+0x1c4/0x760
-4,4752,31237186730,-; f2fs_write_checkpoint+0x55c/0x6000
-4,4753,31237186734,-; ? _raw_spin_lock_irqsave+0x88/0xe0
-4,4754,31237186737,-; ? _raw_read_lock_bh+0x40/0x40
-4,4755,31237186741,-; ? _raw_spin_unlock_irqrestore+0x3d/0x70
-4,4756,31237186745,-; ? f2fs_get_sectors_written+0x370/0x370
-4,4757,31237186750,-; ? down_write_killable+0x120/0x120
-4,4758,31237186753,-; ? trace_raw_output_jbd2_checkpoint_stats+0x1f0/0x1f0
-4,4759,31237186759,-; ? _raw_write_lock+0x82/0xd0
-4,4760,31237186761,-; ? __ia32_sys_fdatasync+0x40/0x40
-4,4761,31237186764,-; f2fs_issue_checkpoint+0x27b/0x3a0
-4,4762,31237186769,-; ? f2fs_destroy_checkpoint_caches+0x20/0x20
-4,4763,31237186773,-; ? down_read+0x121/0x200
-4,4764,31237186778,-; ? rwsem_down_read_slowpath+0x880/0x880
-4,4765,31237186781,-; ? _raw_spin_lock+0x82/0xd0
-4,4766,31237186784,-; ? _raw_spin_lock_irqsave+0xe0/0xe0
-4,4767,31237186788,-; ? __ia32_sys_fdatasync+0x40/0x40
-4,4768,31237186791,-; iterate_supers+0x10c/0x190
-4,4769,31237186794,-; ksys_sync+0xa3/0x130
-4,4770,31237186798,-; ? __x64_sys_syncfs+0x110/0x110
-4,4771,31237186801,-; ? exit_to_user_mode_prepare+0x36/0x120
-4,4772,31237186806,-; __do_sys_sync+0x5/0x10
-4,4773,31237186809,-; do_syscall_64+0x3b/0x90
-4,4774,31237186814,-; entry_SYSCALL_64_after_hwframe+0x44/0xae
-4,4775,31237186817,-;RIP: 0033:0x7fbd00f1476d
-4,4776,31237186819,-;Code: 00 c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa
-48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48>
-3d 01 f0 ff ff 73 01 c3 48 8b 0d f3 36 0d 00 f7 d8 64 89 01 48
-4,4777,31237186822,-;RSP: 002b:00007ffea57d8538 EFLAGS: 00000217 ORIG_RAX:
-00000000000000a2
-4,4778,31237186826,-;RAX: ffffffffffffffda RBX: 000055595cb04ee0 RCX:
-00007fbd00f1476d
-4,4779,31237186828,-;RDX: 00007fbd00f1476d RSI: ffffffffffffff80 RDI:
-00007ffea57d8700
-4,4780,31237186830,-;RBP: 00007ffea5bd88b0 R08: 00007ffea5bd89a8 R09:
-00007ffea5bd89a8
-4,4781,31237186833,-;R10: 00007ffea5bd89a8 R11: 0000000000000217 R12:
-000055595cb040a0
-4,4782,31237186836,-;R13: 00007ffea5bd89a0 R14: 0000000000000000 R15:
-0000000000000000
-4,4783,31237186838,-; </TASK>
-
--- 
-You may reply to this email to add a comment.
-
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
