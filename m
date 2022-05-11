@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C69B7523D87
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 May 2022 21:32:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C598D523D8B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 May 2022 21:32:24 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nos4L-0006ul-20; Wed, 11 May 2022 19:32:20 +0000
+	id 1nos4O-0006vd-7b; Wed, 11 May 2022 19:32:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <krisman@collabora.com>) id 1nos4J-0006uV-Mc
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 May 2022 19:32:18 +0000
+ (envelope-from <krisman@collabora.com>) id 1nos4N-0006vI-4X
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 May 2022 19:32:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ol3n/j1Z0J4X4oP8jPfVRWmaIqS4l3Sy3R87YV4Hrm4=; b=nU405UhzzKe5dZB+RI20IhkT7F
- fXOjgFbkEY+yLjddEmKret1FiyH96irDCkNRshTCs92roUBgNyPN8bDMAZT3f1ItWkzr0+MgT/U/w
- x/YQvMrKYMw6BbjtZS/ArH5upLz+XEgi2EqTjq9SdLr2e8lQcjNIWitrVCk0J+OWGfJA=;
+ bh=/oUXjrybZKTCrYL9FuHz1QRYOIdPMUMyKCsGW60fmcU=; b=ZahNneeTwL0nncyFDf4mWUEt7v
+ yGVfzvLbmKXWXlQPbIcf3RKAYVoNsDr3tYaDfEh0b1kMpsNsDfKjMBsjLKxqo28IZRqoB86ttVeTV
+ QG059uzUt/t4cNI9ziah3I7hnOrWwyhD6Lyl+1ZpZzOB0x3uCC5RVfS8k8wX+FDnqA+E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ol3n/j1Z0J4X4oP8jPfVRWmaIqS4l3Sy3R87YV4Hrm4=; b=ggcgcQp/cVnVwzrI6yBfBxoybG
- NY8G2YXS9AqRuwgSOnPa5jtRf9l0KSiK7+Ps3MKAMJ1mg1wAaJWek+3fVDnQHWwP9qAzxQZhhRfUh
- b7AOlTMInrd7qcFau9zSfrf9cprVckjtPEUdNUlJKEae1Y2TekLOJGadm/DwMMZvqjM8=;
+ bh=/oUXjrybZKTCrYL9FuHz1QRYOIdPMUMyKCsGW60fmcU=; b=k/wf06K2LmKcPcKQEE4NPHQ/Vy
+ SZy0J9EIEHYPPDKS0cuvc6IrZIhEhC2+XJEzOGRnddMsL9qCb7+FbOW0j+w4ERvZp+3LPgb1S+JxR
+ RDQZsbU7HWG4+cPKACmlEIQkJPqk1jB9M6YjJR2aqvjRMOdvRsSSkE7Pm66qmNI5XcLM=;
 Received: from bhuna.collabora.co.uk ([46.235.227.227])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nos4I-0093hD-0O
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 May 2022 19:32:18 +0000
+ id 1nos4L-0093hO-8n
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 May 2022 19:32:22 +0000
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: krisman) with ESMTPSA id A23651F42914
+ (Authenticated sender: krisman) with ESMTPSA id E7FDB1F42934
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1652297531;
- bh=TjgXhAZ/MBxjUpu+HmWWAjpjE8dWN7hkqM2SLl+MDBM=;
+ s=mail; t=1652297535;
+ bh=c75v2/ZUWH6IoljcFit0bLWBPzrmfaQjfZFWk4rflVg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=VvnzLQ74hbS+WXZ8pHwFFxiMw0z8L3tIEV0a8oPFrq/dlkcMT9D8372goZdjjIiL1
- U4Nd1VmivnTjUYHsQz6MOQ8gZg13qS5w+7EMeZmjC1obOQzoVroUZqfLP/n45isJk2
- I9CBQr9sUzcFNiAcVAjvy+t/2wavw/087SmnsbJ1O2SL9U/ViXomrHFsNDykUkUf3N
- e4kYN2nrO3Z1BXZmPNTWqYjX8Tn/ohS73l8HSFpKng0/2a48pcXTKyZYQTN0wcSvSk
- xrYfXD/T/dUbyZ+01yqCVH1ONS1KhWF8rbZg/i7ETUMb9oWGlGNbgFa3lA7JJMA2dJ
- o4i93sxDxfzEw==
+ b=EBsuGOrJmRxDdIL3UVqqU1yAN4lBgbgq3f8FZQzAAkij6aNfupt4PWtsdjafYk+AL
+ UAlPlzykOGpCkQS6d0KXu0g4zVJKXL5QvDli3p68k7QsMe+poeKeDe7fzHLc6VuER/
+ fQS0cHMVZRKaIy9d1TCZ2eP/WmNLbWM1jtEWU3U5Q6YnGA46jJqxFwRnWB2FnF0ujv
+ VzBvAKosu0i/B2aZY8KjbvKgrLhfRoKv7d2j4auiW6eaO7qySxbzywY3+XpUQBqcEH
+ hYVzRf06Fo4NruE2WwNDsV8uFu08G65aiCJ3ikI2bOgLGCPt7le7ACMu6Lk5e2w2wA
+ DL82qOXaPSZvA==
 From: Gabriel Krisman Bertazi <krisman@collabora.com>
 To: tytso@mit.edu,
 	adilger.kernel@dilger.ca,
 	jaegeuk@kernel.org
-Date: Wed, 11 May 2022 15:31:41 -0400
-Message-Id: <20220511193146.27526-6-krisman@collabora.com>
+Date: Wed, 11 May 2022 15:31:42 -0400
+Message-Id: <20220511193146.27526-7-krisman@collabora.com>
 X-Mailer: git-send-email 2.36.1
 In-Reply-To: <20220511193146.27526-1-krisman@collabora.com>
 References: <20220511193146.27526-1-krisman@collabora.com>
@@ -66,10 +66,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The existence of fname->cf_name.name requires s_encoding &
- IS_CASEFOLDED, therefore this can be simplified. Signed-off-by: Gabriel Krisman
- Bertazi <krisman@collabora.com> --- fs/ext4/namei.c | 20 +++++++ 1 file
- changed, 7 insertions(+), 13 deletions(-) 
+ Content preview:  If the volume is in strict mode, ext4_ci_compare can report
+ a broken encoding name. This will not trigger on a bad lookup, which is caught
+ earlier, only if the actual disk name is bad. Signed-off-by: Gabriel Krisman
+ Bertazi <krisman@collabora.com> 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -84,8 +84,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
  lines
-X-Headers-End: 1nos4I-0093hD-0O
-Subject: [f2fs-dev] [PATCH v4 05/10] ext4: Simplify hash check on ext4_match
+X-Headers-End: 1nos4L-0093hO-8n
+Subject: [f2fs-dev] [PATCH v4 06/10] ext4: Log error when lookup of encoded
+ dentry fails
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,51 +105,34 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The existence of fname->cf_name.name requires s_encoding & IS_CASEFOLDED,
-therefore this can be simplified.
+If the volume is in strict mode, ext4_ci_compare can report a broken
+encoding name.  This will not trigger on a bad lookup, which is caught
+earlier, only if the actual disk name is bad.
 
 Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+
 ---
- fs/ext4/namei.c | 20 +++++++-------------
- 1 file changed, 7 insertions(+), 13 deletions(-)
+
+Changes since v1:
+  - reword error message "file in directory" -> "filename" (Eric)
+---
+ fs/ext4/namei.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
-index 5296ced2e43e..cebbcabf0ff0 100644
+index cebbcabf0ff0..708811525411 100644
 --- a/fs/ext4/namei.c
 +++ b/fs/ext4/namei.c
-@@ -1438,25 +1438,19 @@ static bool ext4_match(struct inode *parent,
- #endif
- 
- #if IS_ENABLED(CONFIG_UNICODE)
--	if (parent->i_sb->s_encoding && IS_CASEFOLDED(parent) &&
--	    (!IS_ENCRYPTED(parent) || fscrypt_has_encryption_key(parent))) {
-+	if (IS_ENCRYPTED(parent) && fname->cf_name.name) {
-+		if (fname->hinfo.hash != EXT4_DIRENT_HASH(de) ||
-+		    fname->hinfo.minor_hash != EXT4_DIRENT_MINOR_HASH(de))
-+			return false;
-+	}
-+
-+	if (parent->i_sb->s_encoding && IS_CASEFOLDED(parent)) {
- 		struct unicode_name u = {
- 			.folded_name = &fname->cf_name,
- 			.usr_name = fname->usr_fname
- 		};
- 		int ret;
- 
--		if (fname->cf_name.name) {
--			if (IS_ENCRYPTED(parent)) {
--				if (fname->hinfo.hash != EXT4_DIRENT_HASH(de) ||
--					fname->hinfo.minor_hash !=
--						EXT4_DIRENT_MINOR_HASH(de)) {
--
--					return false;
--				}
--			}
--		}
--
- 		ret = ext4_match_ci(parent, &u, de->name, de->name_len);
- 		if (ret < 0) {
- 			/*
+@@ -1458,6 +1458,9 @@ static bool ext4_match(struct inode *parent,
+ 			 * only case where it happens is on a disk
+ 			 * corruption or ENOMEM.
+ 			 */
++			if (ret == -EINVAL)
++				EXT4_ERROR_INODE(parent,
++						 "Bad encoded filename");
+ 			return false;
+ 		}
+ 		return ret;
 -- 
 2.36.1
 
