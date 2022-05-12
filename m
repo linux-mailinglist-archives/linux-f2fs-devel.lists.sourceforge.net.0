@@ -2,92 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC172523D91
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 May 2022 21:32:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8782952424B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 May 2022 04:04:59 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nos4d-0001uW-J1; Wed, 11 May 2022 19:32:38 +0000
+	id 1noyCB-0003rA-PB; Thu, 12 May 2022 02:04:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <krisman@collabora.com>) id 1nos4c-0001uI-5R
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 May 2022 19:32:36 +0000
+ (envelope-from <chao@kernel.org>) id 1noyBt-0003qp-6Q
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 May 2022 02:04:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OAOicXaTooZP2BzF1RfrH/nrvulMAZZWXgoxm/XhX7c=; b=XI178QqtnkxQ78eyj5T+8eG7Cv
- +YJWOIMAW5po9+bPqiYILW4y/5kXh5n1pc2NT0h/HwJrrlOe2B6XqNTkGNh5KjZXmsyLrehe542uk
- yfuwW1exI9dkrOhJ9hU5tpTRXgq4kKM1mcEOXeKlu5k+pclHhM9AWSk80DEMUtB7QQV0=;
+ bh=K+JD5aj7nqwkMXCaBE0pPC8G0SjuK/JOrCpDreizuic=; b=Rwmd61BELbsgH3bnmpHtlLHuQ4
+ T0PbzlFD8g0Gh2/Zgh4+ZEr9lFNZJN+g9JYawsM8dmNR+Zn2XGbhxsBhru+SCoGgUde3XH6epC1M3
+ hvN9kSzlHPfvcBEc02rVNrctF3P0elEODuwsKcs1C+rskjJ89kGTvVCKabPVT/DIgiuA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OAOicXaTooZP2BzF1RfrH/nrvulMAZZWXgoxm/XhX7c=; b=lsCeTcEEI5xraWiezsMDTDrY6o
- ma1kxLYnoFZhqcRZdX99ZMShWDCcjpd6xGVL599qfsdE32+1askPTHCV3xyQcBAYCNjDi90a8x1IK
- bEKHwkrGIUZWqFl9GwvVeKr+lfO97lya0xNNj3dAIe2mstcGJ2Tf+eSyNnj3skRtaJH0=;
-Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ bh=K+JD5aj7nqwkMXCaBE0pPC8G0SjuK/JOrCpDreizuic=; b=ivv+Xzmvbr7R04HYgRgkl1ZUY8
+ pAbEACJlLEMSUS/liuFijCI6nMnUAsfic4jZwyWcSOVjlL4tXGYh7hlXWPzk3TyEVIOe7ktFyfM9g
+ 0kFKILgGDaEpHecyXcdpWQ4LKQykpJrKhA/K9NyvDecMBzej1L6dvi3OIkLmLvHOxSM4=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nos4Z-0007KF-Na
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 11 May 2022 19:32:36 +0000
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: krisman) with ESMTPSA id 5DAEB1F42944
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1652297549;
- bh=lWwjGPQZNKQyZU9L/pR9B/2LEb9B0zvK7S61tCd+dv8=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Y5u22+4IgucVqcfLjfcc8LdflwZG7JbI6mA2jIW+suVrl2Ggrnphft/0OZRtazk+W
- /+r/HhuptTJiwRfI3t83Urs6+FTsuX3lIwAkPXq2d8QzMKG23yVtGr10cr0n1X1Xr1
- InlazdsxP2/pwlmejtxaJFb5rP59/Ckgs85JOdyeLX47wr6P/RlOmr7BtqgGbdtS/j
- KDeVrPE6i7fnCITjBIJ/0loNZs5EixeB9CZfzwqqY/D4LfjEvDNAbFDBYsunn2J0IS
- 8aH0b45fUDOti5xUN0lKzmvm9UtoNCF3GdHdXQLgmNpoS5vhaY1fqdX7Fz0nfP3JnU
- mljC93fN1sqPA==
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
-To: tytso@mit.edu,
-	adilger.kernel@dilger.ca,
-	jaegeuk@kernel.org
-Date: Wed, 11 May 2022 15:31:46 -0400
-Message-Id: <20220511193146.27526-11-krisman@collabora.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220511193146.27526-1-krisman@collabora.com>
-References: <20220511193146.27526-1-krisman@collabora.com>
+ id 1noyBm-00078y-9M
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 May 2022 02:04:30 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by sin.source.kernel.org (Postfix) with ESMTPS id 9831ECE0AD2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 12 May 2022 02:04:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5154CC340EE;
+ Thu, 12 May 2022 02:04:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1652321045;
+ bh=Wud9ZjEwcU5I2fkae6/vF+vlYg7dBuM3CqHBWPGLhc0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=D4zOOI8NdqlXQXE3TicnihYvWwIQMf4jp+7RWrZbjVOj2aH+VQghK+NKn1QO0ypnt
+ jAY4YV0CuZPDmhv+2gqT35MZ1erNz09DlNSsYVfTfB57RJ9Vlcnr/UkyG3AT8Q/dLO
+ 6RD8IhJR4kF/11P3IIC9wxg/njSPK8VHlMD2OjsSCkRJHlvPvkwaQvFVPjiPze88Da
+ KqOGJ+xVkqRgWODyGk1QaTBVVFcnpQxoXDsLRjA3E1m8LvuCiKNT4or+L37tkMw0Vx
+ ATr+HThX4wvg9JjSb3fDqCEGcGes2pR4fzOWk4yjC73lmHThO4e7OZmXtohlWFFebk
+ vlAIo/Vu0yk9g==
+Message-ID: <ab569309-f639-33af-ebb3-909a02158d02@kernel.org>
+Date: Thu, 12 May 2022 10:04:01 +0800
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.0
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20220506232032.1264078-1-jaegeuk@kernel.org>
+ <20220506232032.1264078-4-jaegeuk@kernel.org>
+ <77e870dd-fd7a-f58e-79fb-d0e5b8fbfc16@kernel.org>
+ <YnlHdgHix+3qlc1a@google.com>
+ <42c23c83-1914-e8dd-c765-df3d6d872532@kernel.org>
+ <Ynvoszmp7+64NdZg@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <Ynvoszmp7+64NdZg@google.com>
+X-Spam-Score: -6.5 (------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Instead of a bunch of ifdefs, make the unicode built checks
- part of the code flow where possible, as requested by Torvalds. Signed-off-by:
- Gabriel Krisman Bertazi <krisman@collabora.com> --- fs/f2fs/namei.c | 12
- ++++++------ fs/f2fs/super.c | 22 ++++++++++++ 2 files changed,
- 18 insertions(+), 16 deletions(-) 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 2022/5/12 0:47, Jaegeuk Kim wrote: >>>>> @@ -147, 6 +147,
+ 7
+ @@ static int gc_thread_func(void *data) >>>>> gc_control.init_gc_type =
+ sync_mode ? FG_GC : BG_GC; >>>>> gc_control.no_bg_gc = foreground; [...] 
+ Content analysis details:   (-6.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
- lines
-X-Headers-End: 1nos4Z-0007KF-Na
-Subject: [f2fs-dev] [PATCH v4 10/10] f2fs: Move CONFIG_UNICODE defguards
- into the code flow
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.7 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1noyBm-00078y-9M
+Subject: Re: [f2fs-dev] [PATCH 4/5] f2fs: do not stop GC when requiring a
+ free section
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,139 +112,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: ebiggers@kernel.org, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>, kernel@collabora.com,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Instead of a bunch of ifdefs, make the unicode built checks part of the
-code flow where possible, as requested by Torvalds.
+On 2022/5/12 0:47, Jaegeuk Kim wrote:
+>>>>> @@ -147,6 +147,7 @@ static int gc_thread_func(void *data)
+>>>>>     		gc_control.init_gc_type = sync_mode ? FG_GC : BG_GC;
+>>>>>     		gc_control.no_bg_gc = foreground;
+>>>>> +		gc_control.nr_free_secs = foreground ? 1 : 0;
 
-Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+[snip]
+
+> 
+> I mean gc_control->nr_free_secs should be 0.
+
+[snip]
+
+>>>>> @@ -528,7 +528,8 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
+>>>>>     				.init_gc_type = BG_GC,
+>>>>>     				.no_bg_gc = true,
+>>>>>     				.should_migrate_blocks = false,
+>>>>> -				.err_gc_skipped = false };
+>>>>> +				.err_gc_skipped = false,
+>>>>> +				.nr_free_secs = 1 };
+
+Oh, so, in above two paths, when .nr_free_secs is 1, no_bg_gc should be true
+to keep skipping BG_GC flow.
+
+How about adding a check condition in f2fs_gc() to avoid invalid argument
+usage in future?
+
+From: Chao Yu <chao@kernel.org>
+
 ---
- fs/f2fs/namei.c | 12 ++++++------
- fs/f2fs/super.c | 22 ++++++++++++----------
- 2 files changed, 18 insertions(+), 16 deletions(-)
+  fs/f2fs/gc.c | 17 +++++++++++++----
+  1 file changed, 13 insertions(+), 4 deletions(-)
 
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index 5f213f05556d..843e4102347d 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -561,8 +561,8 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
- 		goto out_iput;
- 	}
- out_splice:
--#if IS_ENABLED(CONFIG_UNICODE)
--	if (!inode && IS_CASEFOLDED(dir)) {
-+
-+	if (IS_ENABLED(CONFIG_UNICODE) && !inode && IS_CASEFOLDED(dir)) {
- 		/* Eventually we want to call d_add_ci(dentry, NULL)
- 		 * for negative dentries in the encoding case as
- 		 * well.  For now, prevent the negative dentry
-@@ -571,7 +571,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
- 		trace_f2fs_lookup_end(dir, dentry, ino, err);
- 		return NULL;
- 	}
--#endif
-+
- 	new = d_splice_alias(inode, dentry);
- 	err = PTR_ERR_OR_ZERO(new);
- 	trace_f2fs_lookup_end(dir, dentry, ino, !new ? -ENOENT : err);
-@@ -622,16 +622,16 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
- 		goto fail;
- 	}
- 	f2fs_delete_entry(de, page, dir, inode);
--#if IS_ENABLED(CONFIG_UNICODE)
-+
- 	/* VFS negative dentries are incompatible with Encoding and
- 	 * Case-insensitiveness. Eventually we'll want avoid
- 	 * invalidating the dentries here, alongside with returning the
- 	 * negative dentries at f2fs_lookup(), when it is better
- 	 * supported by the VFS for the CI case.
- 	 */
--	if (IS_CASEFOLDED(dir))
-+	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
- 		d_invalidate(dentry);
--#endif
-+
- 	f2fs_unlock_op(sbi);
- 
- 	if (IS_DIRSYNC(dir))
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index baefd398ec1a..c336760ff743 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -278,12 +278,13 @@ f2fs_sb_read_encoding(const struct f2fs_super_block *sb)
- 
- 	return NULL;
- }
-+#endif
- 
- struct kmem_cache *f2fs_cf_name_slab;
- static int __init f2fs_create_casefold_cache(void)
- {
- 	f2fs_cf_name_slab = f2fs_kmem_cache_create("f2fs_casefolded_name",
--							F2FS_NAME_LEN);
-+						   F2FS_NAME_LEN);
- 	if (!f2fs_cf_name_slab)
- 		return -ENOMEM;
- 	return 0;
-@@ -293,10 +294,6 @@ static void f2fs_destroy_casefold_cache(void)
- {
- 	kmem_cache_destroy(f2fs_cf_name_slab);
- }
--#else
--static int __init f2fs_create_casefold_cache(void) { return 0; }
--static void f2fs_destroy_casefold_cache(void) { }
--#endif
- 
- static inline void limit_reserve_root(struct f2fs_sb_info *sbi)
- {
-@@ -1259,13 +1256,13 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 		return -EINVAL;
- 	}
- #endif
--#if !IS_ENABLED(CONFIG_UNICODE)
--	if (f2fs_sb_has_casefold(sbi)) {
-+
-+	if (!IS_ENABLED(CONFIG_UNICODE) && f2fs_sb_has_casefold(sbi)) {
- 		f2fs_err(sbi,
- 			"Filesystem with casefold feature cannot be mounted without CONFIG_UNICODE");
- 		return -EINVAL;
- 	}
--#endif
-+
- 	/*
- 	 * The BLKZONED feature indicates that the drive was formatted with
- 	 * zone alignment optimization. This is optional for host-aware
-@@ -4611,7 +4608,10 @@ static int __init init_f2fs_fs(void)
- 	err = f2fs_init_compress_cache();
- 	if (err)
- 		goto free_compress_mempool;
--	err = f2fs_create_casefold_cache();
-+
-+	if (IS_ENABLED(CONFIG_UNICODE))
-+		err = f2fs_create_casefold_cache();
-+
- 	if (err)
- 		goto free_compress_cache;
- 	return 0;
-@@ -4654,7 +4654,9 @@ static int __init init_f2fs_fs(void)
- 
- static void __exit exit_f2fs_fs(void)
- {
--	f2fs_destroy_casefold_cache();
-+	if (IS_ENABLED(CONFIG_UNICODE))
-+		f2fs_destroy_casefold_cache();
-+
- 	f2fs_destroy_compress_cache();
- 	f2fs_destroy_compress_mempool();
- 	f2fs_destroy_bioset();
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 385282017317..a98276fd3cc1 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1799,10 +1799,19 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+  			gc_type = FG_GC;
+  	}
+
+-	/* f2fs_balance_fs doesn't need to do BG_GC in critical path. */
+-	if (gc_type == BG_GC && gc_control->no_bg_gc) {
+-		ret = -EINVAL;
+-		goto stop;
++	if (gc_type == BG_GC) {
++		/* f2fs_balance_fs doesn't need to do BG_GC in critical path. */
++		if (gc_control->no_bg_gc) {
++			ret = -EINVAL;
++			goto stop;
++		}
++		/*
++		 * BG_GC never guarantee that blocks are migrated synchronously.
++		 */
++		if (gc_control->nr_free_secs) {
++			ret = -EINVAL;
++			goto stop;
++		}
+  	}
+  retry:
+  	ret = __get_victim(sbi, &segno, gc_type);
 -- 
-2.36.1
+2.25.1
 
+
+
+Thanks,
 
 
 _______________________________________________
