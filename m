@@ -2,69 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6407952576F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 May 2022 23:54:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F29E525776
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 May 2022 23:57:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1npGld-0004R8-KD; Thu, 12 May 2022 21:54:40 +0000
+	id 1npGod-0007Pr-VR; Thu, 12 May 2022 21:57:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1npGlc-0004R1-T5
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 May 2022 21:54:39 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1npGoc-0007Pl-LY
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 May 2022 21:57:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=20LVXL8LPmxR2J5/zvzNY59odG7D6hd1vXL8SReZC5Q=; b=HFKLjexvbAglaA1zFXdFdME+0u
- yyDbOtg1G5PFikPYRX0QgPtu31Qj7bWZqmgjIN2G3VzSsHDm6VfTho+bRtVf/zrtMCjqb0RQ8gXj4
- MFfnGM2voDsB/cXulcPc7yBq/qsWLTfQ2xq4kd/Th0Bq2gDhJtmWvnwp+XUpTDUnK8ZA=;
+ bh=G6VyvXO72eL12iY40tthMXZQ5WZSV341U3V824MC214=; b=Ogm1EdET8Ns4h/rAHWS2NljWMX
+ DtUAZwxRQTWie1ZN/kjfYJ/QoQ03w8c0BFIr0bH5UIsjXdsMso1sARSxGqLgbeSkhkh9o4v3TVtxp
+ YqV5/+TV4dzSSDYekHY011Au3Dh5v1lQS1sULcaMXtj/XxydURLeDoht011WA5Iv1imk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=20LVXL8LPmxR2J5/zvzNY59odG7D6hd1vXL8SReZC5Q=; b=bYM2LK9WJlemrRP6DbwgagpbOZ
- kL6fUZnp4Vx/AzrL7CoUdcF32L+eKkLBgOQAzscvp18HIhbYlefLqN4y8mO0+CnyriE8DMDQh3LIp
- IrxA2CXqR4Jd9ld1V5mxG9N9o4y+iph+9Mp+wXVMreyp/sJNH1TkHE5yMlDIpOW0m0Lc=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=G6VyvXO72eL12iY40tthMXZQ5WZSV341U3V824MC214=; b=Mi2F3spTOl9rlAORbQaWFv27T8
+ cGs1yjK7ZOPzUKWoRdLujDG/02p3WntCKzFj0ZLZW722K9bijh7nkjo+E6tUbObt60cq87iNTb0Bw
+ RjSJEOmBAnKhtE7c6uNF05tmIpCMD1gXwjhocTaPh6vl3ZJaPePDfD7j8DSGyJwNVZQU=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1npGla-0001zO-7f
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 May 2022 21:54:38 +0000
+ id 1npGoZ-00027O-Dg
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 May 2022 21:57:45 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3131D61F07
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 12 May 2022 21:54:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85C43C385B8;
- Thu, 12 May 2022 21:54:29 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 20440B82910;
+ Thu, 12 May 2022 21:57:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A80BCC385B8;
+ Thu, 12 May 2022 21:57:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652392469;
- bh=W+liMmt2G2grq92xz7rb6DVciY47ndg6F0gIOG7mIEw=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=KbLQnLJCViNlwZgaKQEMcCx3ynucEeFZfZ/7OxS74XzNFu2TAaGJRpMauV9Hl4uTp
- 3pHP1mizqfQSX0icLbIlmPlwzSkQcrSfsC/OLsxqY1M+Had3GB9ntS4LYNqonDeZH0
- WOvm/llpG/1fydRy43A5D/42YB9jRakX9g1kfbRfXeh4cjnFFLf0Ac0yPt2ZeMwbI0
- zUu1Nz0n1x1iOxhXdPdyf9pq8amnMDbcwW5esMgyw+g0KcmLi/6Sg5C0RyuK3kXTFn
- WFbQfomKyVFIjw3GlLmP4vK5XfUQxSYQ0T/hSPqQF37f6HUZ4LMELOJgJkGleIK+tw
- +qApAKbGaz8fw==
-Date: Thu, 12 May 2022 14:54:27 -0700
+ s=k20201202; t=1652392655;
+ bh=yU6s+/+h1gRHCRJ83nqrVGKUBm1fWFm2gD7n/no4qEw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=OfRePn8vFReViGnjqaf4Nuft1lzf0vc4DKD3h+LbhvH6CM39JZSzNUPEntffy6ttr
+ g6X8q5mMz1ISEEbjxJXT15mcjtbt8vm3zdrFTOfzVIH7h1o0o96np1souzIUJxNWw/
+ kNjIwLU3cSe2ruxp8kQ6d6QSw9xQtjGToehOCDS8BNr0KKPRYXRiqpMx9INN3e3kkL
+ R3HqBa/hYDEFwM/o38E8P8x7PVA7GTA/vifavMuEVY9nBZohrRq9dfrgkzVYf7aOw7
+ U3DFUr3W2eifkwpn4rMCjzomDJEf0vqkRmwGhxxWt+DZlX5OL0Yx0hx7063xnULI4i
+ TkghMnuhvOn7A==
+Date: Thu, 12 May 2022 14:57:34 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <Yn2CE7QssbhcCqQi@google.com>
-References: <20220506232032.1264078-1-jaegeuk@kernel.org>
- <20220506232032.1264078-4-jaegeuk@kernel.org>
- <Yn1zC6MUZOEbSlWK@google.com>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <Yn2CztiJUY2UAjnd@google.com>
+References: <20220512082116.2991611-1-chao@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <Yn1zC6MUZOEbSlWK@google.com>
+In-Reply-To: <20220512082116.2991611-1-chao@kernel.org>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,15 +69,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 05/12, Jaegeuk Kim wrote: > The f2fs_gc uses a bitmap to
- indicate pinned sections, but when disabling > chckpoint, we call f2fs_gc()
- with NULL_SEGNO which selects the same dirty > segment as a vict [...] 
+ Content preview:  On 05/12, Chao Yu wrote: > Pinning a file is heavy, because
+ skipping pinned files make GC > running with heavy load or no effect. > >
+ So that this patch proposes to separate nocow and pinfile semantic [...] 
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -91,9 +88,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1npGla-0001zO-7f
-Subject: Re: [f2fs-dev] [PATCH 4/5 v2] f2fs: do not stop GC when requiring a
- free section
+X-Headers-End: 1npGoZ-00027O-Dg
+Subject: Re: [f2fs-dev] [PATCH] f2fs: separate NOCoW and pinfile semantics
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,225 +101,120 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/12, Jaegeuk Kim wrote:
-> The f2fs_gc uses a bitmap to indicate pinned sections, but when disabling
-> chckpoint, we call f2fs_gc() with NULL_SEGNO which selects the same dirty
-> segment as a victim all the time, resulting in checkpoint=disable failure,
-> for example. Let's pick another one, if we fail to collect it.
+On 05/12, Chao Yu wrote:
+> Pinning a file is heavy, because skipping pinned files make GC
+> running with heavy load or no effect.
 > 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> So that this patch proposes to separate nocow and pinfile semantics:
+> - NOCoW flag can only be set on regular file.
+> - NOCoW file will only trigger IPU at common writeback/flush.
+> - NOCow file will do OPU during GC.
+> 
+> This flag can satisfying the demand of:
+> 1) avoiding fragment of file's physical block
+> 2) userspace doesn't want to pin file's physical address
+> 
+> Signed-off-by: Chao Yu <chao.yu@oppo.com>
 > ---
+>  fs/f2fs/data.c |  3 ++-
+>  fs/f2fs/f2fs.h |  1 +
+>  fs/f2fs/file.c | 25 ++++++++++++++++++++++++-
+>  3 files changed, 27 insertions(+), 2 deletions(-)
 > 
->  Change log from v1:
->   - refactor the code path to avoid ambiguous condition like BG_GC/sec_freed
-> 
->  fs/f2fs/f2fs.h              |  1 +
->  fs/f2fs/file.c              | 12 ++++++++----
->  fs/f2fs/gc.c                | 14 +++++++++-----
->  fs/f2fs/segment.c           |  3 ++-
->  fs/f2fs/super.c             |  3 ++-
->  include/trace/events/f2fs.h | 11 ++++++++---
->  6 files changed, 30 insertions(+), 14 deletions(-)
-> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 54a7a8ad994d..c8eab78f7d89 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2495,7 +2495,8 @@ bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio)
+>  	if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
+>  		return false;
+>  
+> -	if (f2fs_is_pinned_file(inode))
+> +	if (f2fs_is_pinned_file(inode) ||
+> +			F2FS_I(inode)->i_flags & F2FS_NOCOW_FL)
+>  		return true;
+>  
+>  	/* if this is cold file, we should overwrite to avoid fragmentation */
 > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 9920b2d6af8f..492af5b96de1 100644
+> index 492af5b96de1..e91ece55f5e8 100644
 > --- a/fs/f2fs/f2fs.h
 > +++ b/fs/f2fs/f2fs.h
-> @@ -1271,6 +1271,7 @@ struct f2fs_gc_control {
->  	bool no_bg_gc;			/* check the space and stop bg_gc */
->  	bool should_migrate_blocks;	/* should migrate blocks */
->  	bool err_gc_skipped;		/* return EAGAIN if GC skipped */
-> +	unsigned int nr_free_secs;	/* # of free sections to do GC */
->  };
+> @@ -2916,6 +2916,7 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
+>  #define F2FS_NOCOMP_FL			0x00000400 /* Don't compress */
+>  #define F2FS_INDEX_FL			0x00001000 /* hash-indexed directory */
+>  #define F2FS_DIRSYNC_FL			0x00010000 /* dirsync behaviour (directories only) */
+> +#define F2FS_NOCOW_FL			0x00800000 /* Do not cow file */
+>  #define F2FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
+>  #define F2FS_CASEFOLD_FL		0x40000000 /* Casefolded file */
 >  
->  /* For s_flag in struct f2fs_sb_info */
 > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index d0547bef0851..216081ea8c81 100644
+> index 09287876dbb7..7f92a3a157f7 100644
 > --- a/fs/f2fs/file.c
 > +++ b/fs/f2fs/file.c
-> @@ -1650,7 +1650,8 @@ static int expand_inode_data(struct inode *inode, loff_t offset,
->  	struct f2fs_gc_control gc_control = { .victim_segno = NULL_SEGNO,
->  			.init_gc_type = FG_GC,
->  			.should_migrate_blocks = false,
-> -			.err_gc_skipped = true };
-> +			.err_gc_skipped = true,
-> +			.nr_free_secs = 0 };
->  	pgoff_t pg_start, pg_end;
->  	loff_t new_size = i_size_read(inode);
->  	loff_t off_end;
-> @@ -2350,7 +2351,8 @@ static int f2fs_ioc_gc(struct file *filp, unsigned long arg)
->  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->  	struct f2fs_gc_control gc_control = { .victim_segno = NULL_SEGNO,
->  			.no_bg_gc = false,
-> -			.should_migrate_blocks = false };
-> +			.should_migrate_blocks = false,
-> +			.nr_free_secs = 0 };
->  	__u32 sync;
->  	int ret;
+> @@ -1851,6 +1851,20 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+>  	if (IS_NOQUOTA(inode))
+>  		return -EPERM;
 >  
-> @@ -2391,7 +2393,8 @@ static int __f2fs_ioc_gc_range(struct file *filp, struct f2fs_gc_range *range)
->  			.init_gc_type = range->sync ? FG_GC : BG_GC,
->  			.no_bg_gc = false,
->  			.should_migrate_blocks = false,
-> -			.err_gc_skipped = range->sync };
-> +			.err_gc_skipped = range->sync,
-> +			.nr_free_secs = 0 };
->  	u64 end;
->  	int ret;
->  
-> @@ -2837,7 +2840,8 @@ static int f2fs_ioc_flush_device(struct file *filp, unsigned long arg)
->  	struct f2fs_gc_control gc_control = {
->  			.init_gc_type = FG_GC,
->  			.should_migrate_blocks = true,
-> -			.err_gc_skipped = true };
-> +			.err_gc_skipped = true,
-> +			.nr_free_secs = 0 };
->  	int ret;
->  
->  	if (!capable(CAP_SYS_ADMIN))
-> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> index e275b72bc65f..10b24b0f13a5 100644
-> --- a/fs/f2fs/gc.c
-> +++ b/fs/f2fs/gc.c
-> @@ -147,6 +147,7 @@ static int gc_thread_func(void *data)
->  
->  		gc_control.init_gc_type = sync_mode ? FG_GC : BG_GC;
->  		gc_control.no_bg_gc = foreground;
-> +		gc_control.nr_free_secs = foreground ? 1 : 0;
->  
->  		/* if return value is not zero, no victim was selected */
->  		if (f2fs_gc(sbi, &gc_control))
-> @@ -1761,6 +1762,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
->  	unsigned int skipped_round = 0, round = 0;
->  
->  	trace_f2fs_gc_begin(sbi->sb, gc_type, gc_control->no_bg_gc,
-> +				gc_control->nr_free_secs,
->  				get_pages(sbi, F2FS_DIRTY_NODES),
->  				get_pages(sbi, F2FS_DIRTY_DENTS),
->  				get_pages(sbi, F2FS_DIRTY_IMETA),
-> @@ -1823,12 +1825,13 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
->  	if (gc_type == FG_GC)
->  		sbi->cur_victim_sec = NULL_SEGNO;
->  
-> -	if (gc_control->init_gc_type == FG_GC)
-> -		goto stop;
-> -
-> -	if (!has_not_enough_free_secs(sbi,
-> -			(gc_type == FG_GC) ? sec_freed : 0, 0))
-> +	if (gc_control->init_gc_type == FG_GC ||
-> +	    !has_not_enough_free_secs(sbi,
-> +				(gc_type == FG_GC) ? sec_freed : 0, 0)) {
-> +		if (gc_mode == FG_GC && sec_freed < gc_control->nr_free_secs)
-
-Fixed
-		   -> gc_type
-
-> +			goto go_gc_more;
->  		goto stop;
+> +	if ((iflags ^ masked_flags) & F2FS_NOCOW_FL) {
+> +		int ret;
+> +
+> +		if (!S_ISREG(inode->i_mode))
+> +			return -EINVAL;
+> +		if (f2fs_should_update_outplace(inode, NULL))
+> +			return -EINVAL;
+> +		if (f2fs_is_pinned_file(inode))
+> +			return -EINVAL;
+> +		ret = f2fs_convert_inline_inode(inode);
+> +		if (ret)
+> +			return ret;
 > +	}
+> +
+>  	if ((iflags ^ masked_flags) & F2FS_CASEFOLD_FL) {
+>  		if (!f2fs_sb_has_casefold(F2FS_I_SB(inode)))
+>  			return -EOPNOTSUPP;
+> @@ -1926,6 +1940,7 @@ static const struct {
+>  	{ F2FS_NOCOMP_FL,	FS_NOCOMP_FL },
+>  	{ F2FS_INDEX_FL,	FS_INDEX_FL },
+>  	{ F2FS_DIRSYNC_FL,	FS_DIRSYNC_FL },
+> +	{ F2FS_NOCOW_FL,	FS_NOCOW_FL },
+>  	{ F2FS_PROJINHERIT_FL,	FS_PROJINHERIT_FL },
+>  	{ F2FS_CASEFOLD_FL,	FS_CASEFOLD_FL },
+>  };
+> @@ -1957,7 +1972,8 @@ static const struct {
+>  		FS_NOCOMP_FL |		\
+>  		FS_DIRSYNC_FL |		\
+>  		FS_PROJINHERIT_FL |	\
+> -		FS_CASEFOLD_FL)
+> +		FS_CASEFOLD_FL |	\
+> +		FS_NOCOW_FL)
 >  
->  	/* FG_GC stops GC by skip_count */
->  	if (gc_type == FG_GC) {
-> @@ -1849,6 +1852,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
->  		if (ret)
->  			goto stop;
->  	}
-> +go_gc_more:
->  	segno = NULL_SEGNO;
->  	goto gc_more;
+>  /* Convert f2fs on-disk i_flags to FS_IOC_{GET,SET}FLAGS flags */
+>  static inline u32 f2fs_iflags_to_fsflags(u32 iflags)
+> @@ -3081,6 +3097,13 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
 >  
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 8b4f2b1d2cca..0a4180f64291 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -404,7 +404,8 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
->  				.init_gc_type = BG_GC,
->  				.no_bg_gc = true,
->  				.should_migrate_blocks = false,
-> -				.err_gc_skipped = false };
-> +				.err_gc_skipped = false,
-> +				.nr_free_secs = 1 };
->  			f2fs_down_write(&sbi->gc_lock);
->  			f2fs_gc(sbi, &gc_control);
->  		}
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index a28c27eed6d0..63daae67a9d9 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -2080,7 +2080,8 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
->  			.victim_segno = NULL_SEGNO,
->  			.init_gc_type = FG_GC,
->  			.should_migrate_blocks = false,
-> -			.err_gc_skipped = true };
-> +			.err_gc_skipped = true,
-> +			.nr_free_secs = 1 };
+>  	inode_lock(inode);
 >  
->  		f2fs_down_write(&sbi->gc_lock);
->  		err = f2fs_gc(sbi, &gc_control);
-> diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-> index 54ec9e543f09..16c67ede85b6 100644
-> --- a/include/trace/events/f2fs.h
-> +++ b/include/trace/events/f2fs.h
-> @@ -645,18 +645,21 @@ TRACE_EVENT(f2fs_background_gc,
->  TRACE_EVENT(f2fs_gc_begin,
->  
->  	TP_PROTO(struct super_block *sb, int gc_type, bool no_bg_gc,
-> +			unsigned int nr_free_secs,
->  			long long dirty_nodes, long long dirty_dents,
->  			long long dirty_imeta, unsigned int free_sec,
->  			unsigned int free_seg, int reserved_seg,
->  			unsigned int prefree_seg),
->  
-> -	TP_ARGS(sb, gc_type, no_bg_gc, dirty_nodes, dirty_dents, dirty_imeta,
-> +	TP_ARGS(sb, gc_type, no_bg_gc, nr_free_secs, dirty_nodes,
-> +		dirty_dents, dirty_imeta,
->  		free_sec, free_seg, reserved_seg, prefree_seg),
->  
->  	TP_STRUCT__entry(
->  		__field(dev_t,		dev)
->  		__field(int,		gc_type)
->  		__field(bool,		no_bg_gc)
-> +		__field(unsigned int,	nr_free_secs)
->  		__field(long long,	dirty_nodes)
->  		__field(long long,	dirty_dents)
->  		__field(long long,	dirty_imeta)
-> @@ -670,6 +673,7 @@ TRACE_EVENT(f2fs_gc_begin,
->  		__entry->dev		= sb->s_dev;
->  		__entry->gc_type	= gc_type;
->  		__entry->no_bg_gc	= no_bg_gc;
-> +		__entry->nr_free_secs	= nr_free_secs;
->  		__entry->dirty_nodes	= dirty_nodes;
->  		__entry->dirty_dents	= dirty_dents;
->  		__entry->dirty_imeta	= dirty_imeta;
-> @@ -679,12 +683,13 @@ TRACE_EVENT(f2fs_gc_begin,
->  		__entry->prefree_seg	= prefree_seg;
->  	),
->  
-> -	TP_printk("dev = (%d,%d), gc_type = %s, no_background_GC = %d, nodes = %lld, "
-> -		"dents = %lld, imeta = %lld, free_sec:%u, free_seg:%u, "
-> +	TP_printk("dev = (%d,%d), gc_type = %s, no_background_GC = %d, nr_free_secs = %u, "
-> +		"nodes = %lld, dents = %lld, imeta = %lld, free_sec:%u, free_seg:%u, "
->  		"rsv_seg:%d, prefree_seg:%u",
->  		show_dev(__entry->dev),
->  		show_gc_type(__entry->gc_type),
->  		(__entry->gc_type == BG_GC) ? __entry->no_bg_gc : -1,
-> +		__entry->nr_free_secs,
->  		__entry->dirty_nodes,
->  		__entry->dirty_dents,
->  		__entry->dirty_imeta,
+> +	if (F2FS_I(inode)->i_flags & F2FS_NOCOW_FL) {
+> +		f2fs_info(F2FS_I_SB(inode), "inode (%lu) is already NOCOW one",
+> +			inode->i_ino);
+> +		ret = -EINVAL;
+
+Why rejecting this? We can pin the file to get 2MB-aligned allocation on the
+NOCOW file.
+
+> +		goto out;
+> +	}
+> +
+>  	if (!pin) {
+>  		clear_inode_flag(inode, FI_PIN_FILE);
+>  		f2fs_i_gc_failures_write(inode, 0);
 > -- 
-> 2.36.0.550.gb090851708-goog
-> 
-> 
-> 
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> 2.25.1
 
 
 _______________________________________________
