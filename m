@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC47B524520
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 May 2022 07:46:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4603C524526
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 May 2022 07:49:05 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1np1eY-0000yp-Oi; Thu, 12 May 2022 05:46:21 +0000
+	id 1np1hA-00015c-1w; Thu, 12 May 2022 05:49:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ebiggers@kernel.org>) id 1np1eX-0000yi-IX
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 May 2022 05:46:20 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1np1h9-00015S-5G
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 May 2022 05:49:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0QBKw7ALVE4B/JnJyLoMKRKH0QmanGOLEQn3CWGFtyI=; b=S3iJJ520ZU1EYQJ2RI7aAX6eqf
- 8EJix6rjqtQj+9n5eEoLu4d9wSbjqN+qSYIumxKrwfG929EtspOUM1nHOGja9YaShNWgIgIbB6Xcb
- j2MMSOxhJ4GYK1f2QJahTDgzRvm4bT7pTW3RDz33sqamvYk4Zw9DUpKUjB3BTTMYobuQ=;
+ bh=blKQp9NbxeOpm5rI37NawX7u+i6HxnVTrdJj3E2/UGc=; b=TTesk3XuHTM5KBe1JdNZzs1B41
+ KsJqCjLLgRtEoEfyiKeons6pRLTHmeTfTmUqpkiPIEkVWca+j8CCNrr+lb6Nx3xAdnKjGuRpqpOzU
+ JnY3wHZd+n8rfOYgQcNBVQBBfbPpFbIgWBxfdQHnf8qB2ECWetgEkGuLsFA1jx8timEU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,40 +29,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0QBKw7ALVE4B/JnJyLoMKRKH0QmanGOLEQn3CWGFtyI=; b=OhszdpKuvOPcqC+7JQYWrFtCoM
- G9A6ahzdzU6XzvU/gHC6P2p3/rO3R9slEMxgkqRuhM1ripVRey+Qq7BiTJSfJwQpYqxle+lcs6KqU
- I79BuOGqvfKy5dptTDAAiTUXSK6wekeKOmTReTVff27oKsNWS9yMZd3BCyGgxOsUb/ps=;
+ bh=blKQp9NbxeOpm5rI37NawX7u+i6HxnVTrdJj3E2/UGc=; b=ZX2ry1AHZqkkgy3HH9loR0pPiJ
+ ZlYkUB37mtDty7IQktp9+iO0bmfryCpZdTkkeMoz+3Qv1j1UhzYUAtsIytaeG5XdXN/2ExNlHBXqr
+ IoPGvBuyndqFsCcdtpD+5a4qcZo2L0EG9fAop/eUStDHs5EaBQ76742X9/TDNdv4feQA=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1np1eU-009PZu-TY
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 May 2022 05:46:19 +0000
+ id 1np1h6-0007mm-VU
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 12 May 2022 05:49:01 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7A23361CE4;
- Thu, 12 May 2022 05:46:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77A87C34100;
- Thu, 12 May 2022 05:46:12 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id F372361CEF;
+ Thu, 12 May 2022 05:48:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9E30C34100;
+ Thu, 12 May 2022 05:48:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652334372;
- bh=gyKsjkRqtv54mB/Owm8oe3NUBcn2Nz/5hAT4vfxUkVg=;
+ s=k20201202; t=1652334534;
+ bh=d08puB5fh8hsuQ35H3WmEybfW309kt4JfYm4wR3DdCI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=bRtoXiKoAN1oMcyoLY2h7ueQZgNgjPGJy9gRREAc+JzARJHx/TJ/PqfgXnij1rxa5
- Ta87yhrdgayrGKHRCUVdtPsY6Kg0qlz4VU71DWQn6NLXffSb1K/RBPt6Lnx310ieOW
- Kz+iX6xAPxj05pltbBvA88Te65W84866xGq76MmdNyDimD6dctLaSCNpQoZhIN0MID
- xC+LGsQhNJv+DKlwa3kdqX4u+wUXvTRYoK9YQ/VjBaS4FLdPHey20xlBRHqvliFs3T
- uPPyvKv5KY6ouglYS3EdxstiKs3HNJ7/qqpaIvxM4QCcIqWUk1mQ9EnkDoGK9z4EH6
- 59QDyzvhoaBsQ==
-Date: Wed, 11 May 2022 22:46:10 -0700
+ b=FQ49KXR5PTPy0h8HyvgwYK4024ceZHItRofouxcJ+5L8lFGZxOGyONCFg0DYXie9y
+ IGbGmEaZVViRdK5Tu93KLwmIiIoK7qie1PmNm7IsuyIJeMGN+23c2w79lwV/GCvTfQ
+ DubIYXKytnaAgtL+tKFlqzHlo+taC3uBpCrGfepRjxEc4KwUnxeUx9Zk6FlOXXV/Ni
+ igZE33iAYb0vHdHld1BJ7HiIYFEsRh+mLd0puAEkg1nTyHZUvWuvPh/usab+vUCEcd
+ mMEVah3l9TlotcamEY1okYWpY3EYpPXcPpMjvRQ9DTeMgw36icUSRjxYJtYeWMBqc3
+ oo2+cgbmXiZ2g==
+Date: Wed, 11 May 2022 22:48:52 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Gabriel Krisman Bertazi <krisman@collabora.com>
-Message-ID: <YnyfIn6AuDw/ImUi@sol.localdomain>
+Message-ID: <YnyfxNBxFy0LZfJ7@sol.localdomain>
 References: <20220511193146.27526-1-krisman@collabora.com>
- <20220511193146.27526-6-krisman@collabora.com>
+ <20220511193146.27526-7-krisman@collabora.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220511193146.27526-6-krisman@collabora.com>
+In-Reply-To: <20220511193146.27526-7-krisman@collabora.com>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -70,9 +70,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, May 11, 2022 at 03:31:41PM -0400, Gabriel Krisman
- Bertazi wrote: > The existence of fname->cf_name.name requires s_encoding
- & IS_CASEFOLDED, > therefore this can be simplified. > > Signed-off- [...]
+ Content preview:  On Wed, May 11, 2022 at 03:31:42PM -0400, Gabriel Krisman
+ Bertazi wrote: > If the volume is in strict mode, ext4_ci_compare can report
+ a broken > encoding name. This will not trigger on a bad lookup, [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +88,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1np1eU-009PZu-TY
-Subject: Re: [f2fs-dev] [PATCH v4 05/10] ext4: Simplify hash check on
- ext4_match
+X-Headers-End: 1np1h6-0007mm-VU
+Subject: Re: [f2fs-dev] [PATCH v4 06/10] ext4: Log error when lookup of
+ encoded dentry fails
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,56 +109,36 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, May 11, 2022 at 03:31:41PM -0400, Gabriel Krisman Bertazi wrote:
-> The existence of fname->cf_name.name requires s_encoding & IS_CASEFOLDED,
-> therefore this can be simplified.
+On Wed, May 11, 2022 at 03:31:42PM -0400, Gabriel Krisman Bertazi wrote:
+> If the volume is in strict mode, ext4_ci_compare can report a broken
+> encoding name.  This will not trigger on a bad lookup, which is caught
+> earlier, only if the actual disk name is bad.
 > 
 > Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+> 
 > ---
->  fs/ext4/namei.c | 20 +++++++-------------
->  1 file changed, 7 insertions(+), 13 deletions(-)
+> 
+> Changes since v1:
+>   - reword error message "file in directory" -> "filename" (Eric)
+> ---
+>  fs/ext4/namei.c | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
 > diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
-> index 5296ced2e43e..cebbcabf0ff0 100644
+> index cebbcabf0ff0..708811525411 100644
 > --- a/fs/ext4/namei.c
 > +++ b/fs/ext4/namei.c
-> @@ -1438,25 +1438,19 @@ static bool ext4_match(struct inode *parent,
->  #endif
->  
->  #if IS_ENABLED(CONFIG_UNICODE)
-> -	if (parent->i_sb->s_encoding && IS_CASEFOLDED(parent) &&
-> -	    (!IS_ENCRYPTED(parent) || fscrypt_has_encryption_key(parent))) {
-> +	if (IS_ENCRYPTED(parent) && fname->cf_name.name) {
-> +		if (fname->hinfo.hash != EXT4_DIRENT_HASH(de) ||
-> +		    fname->hinfo.minor_hash != EXT4_DIRENT_MINOR_HASH(de))
-> +			return false;
-> +	}
-> +
-> +	if (parent->i_sb->s_encoding && IS_CASEFOLDED(parent)) {
->  		struct unicode_name u = {
->  			.folded_name = &fname->cf_name,
->  			.usr_name = fname->usr_fname
->  		};
->  		int ret;
->  
-> -		if (fname->cf_name.name) {
-> -			if (IS_ENCRYPTED(parent)) {
-> -				if (fname->hinfo.hash != EXT4_DIRENT_HASH(de) ||
-> -					fname->hinfo.minor_hash !=
-> -						EXT4_DIRENT_MINOR_HASH(de)) {
-> -
-> -					return false;
-> -				}
-> -			}
-> -		}
-> -
+> @@ -1458,6 +1458,9 @@ static bool ext4_match(struct inode *parent,
+>  			 * only case where it happens is on a disk
+>  			 * corruption or ENOMEM.
+>  			 */
+> +			if (ret == -EINVAL)
+> +				EXT4_ERROR_INODE(parent,
+> +						 "Bad encoded filename");
 
-I don't think it's correct to delete the check for the encryption key here.  If
-lookup is by no-key name, then fscrypt_match_name() must be used, not
-generic_ci_match().  And unlike f2fs, ext4 doesn't keep track of whether the
-whole lookup is by no-key name; ext4 relies on this fscrypt_has_encryption_key()
-check at the last minute when doing each individual comparison.  (Which is not
-great, but that's how it works now.)
+This message is still quite vague; perhaps it should be more specific about what
+a "bad" filename is?  Maybe something like: "Directory contains filename that is
+not valid UTF-8" (or whatever the encoding being enforced is).
 
 - Eric
 
