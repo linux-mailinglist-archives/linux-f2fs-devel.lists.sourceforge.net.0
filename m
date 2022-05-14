@@ -2,104 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8574C527103
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 May 2022 14:14:56 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C88B5527365
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 May 2022 20:00:34 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1npqfa-0003TL-C8; Sat, 14 May 2022 12:14:50 +0000
+	id 1npw46-0007kv-DT; Sat, 14 May 2022 18:00:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bagasdotme@gmail.com>) id 1npqfY-0003T6-8n
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 May 2022 12:14:48 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1npw44-0007kp-Vk
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 May 2022 18:00:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1aSGY0h+9mFG07V/uGzLZko6mgSx1gaXsXLrsGCI9XA=; b=Tqy3+DZiK4Sl/+Ueknbf+u6jbh
- ZxQTBjYY97M/3ePJrXaaXUzWOWHzkBr0e/Fbs98yAZqK5ASj61ZIfSagw4Q5q5VDvuIWl5YqERVHz
- LBAoo0DT7A7y169ZBNBq4PdnKIECcKh0bvRtBIQJtonWlZhtZ3+gyRGNrvW/pzbaEO8A=;
+ bh=IcSxTO0tiPF4q4A7UQYDj3DwRLovMJcX7f+D+2KbtyI=; b=czJ0ktqPuAOQbyeJ8RPRqUZwy5
+ j6frKIPn6idxY7xIEtfrL5jAjoDQC+xMZ5cradSHM3imPkXaWRoomusq5Fbf04K2MEuYjEJKGvwty
+ OawUTVB/wHvdur2Ig//NwwpZ/kjUyWkEKLKPr7c71G8jVJh73TtzVAnfOk/jjPNT5zbo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=1aSGY0h+9mFG07V/uGzLZko6mgSx1gaXsXLrsGCI9XA=; b=Z3dBT6fKcEBFokIRR9ktxhLrR3
- Ae7MP6E4f8JpYGZ8oWIbSh7OnGq5r74ZF7jwUyh3o4Dc9MkOGZ0q8x7GR5h9NWgKcOceQ6+0heCXs
- 9yz3YODHbmyeYg7zsVQg+NIEruBOQMzWZIlBSNmCqAOspiDXm0GgSltAuSTfHRk8crYs=;
-Received: from mail-pg1-f182.google.com ([209.85.215.182])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=IcSxTO0tiPF4q4A7UQYDj3DwRLovMJcX7f+D+2KbtyI=; b=e
+ h4WvWNTDCO2mkXqTkf2GtG0Bk1WVPJGhhl/OKd7n+8FfzueGJ8rJk9sxFzgolbVrbghw5WT8Q0KT5
+ 1KzMZgX2QxH2hcpIIn6U9N4LzpZfl+UEXEBk1rGhPL/7wIttqaRX/o3nZdAXg0drj67zmCAvz70Z9
+ gUUUWdqBQ3so3NmE=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1npqfX-0006bx-V3
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 May 2022 12:14:48 +0000
-Received: by mail-pg1-f182.google.com with SMTP id 31so9851133pgp.8
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 14 May 2022 05:14:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=1aSGY0h+9mFG07V/uGzLZko6mgSx1gaXsXLrsGCI9XA=;
- b=N7Hmhn5Lg9cczfQn3yUsdZ/KhteBfYV4DxaXQX1ynP/EGQpy1xkmF+CaY3zyG4wE7z
- cJ5wLDs/g7UBXXQkfGMJ8cdc+nIeq5VDRakjMfmf4n4SP4dSmd5SG8w9C6VtIo06SwSf
- 4lEgvYhUn3Zd4IMaaO8OgKlt3xGvuIJkWg7lotceD53JQnQjtDMtC5wdVR7iNgs+Vmj7
- 1lKDKT31aU+zjUBFGCHqZED2HctANq+UrVqRDEYt3qJgS0SBtQZ0+i/4c/jOKHdw9+Fw
- Rzu9HiEH2oBuEkMwL3WMSWQmXUDqwrx8bWn9srrM994bF3ygOWrd0SMSe97JYeFOpqBZ
- 7vKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=1aSGY0h+9mFG07V/uGzLZko6mgSx1gaXsXLrsGCI9XA=;
- b=sAj3mlcX/Zy5CDASvXpbAdv5HzU9bTDGTKQVMJK9OK8TwjdwHhhfQuuALdvAWNhP2V
- Kitu/vP7ncCEmAhCU9VTYPWQc9ZD2A07sFrLPcVYitTzJtUGEiHbzzrDWMNgY8+UT02v
- Xzr34k9red+PVHeTqe7jvVPiSgsOrIwwikp3Lt7tejDZxEUL4Iw4Sfljc9TAnPwFGJ5s
- 3DQ5s2c9hB0PW1aHYfeje2TuR3biR980KAxbwiaWUSBvUdxlnCX+I+emqtZi1+r6zLa+
- I5m8zA6isW9brsnk/ZsxPVzUh1+9PherFPD/nY6fmPn0zaQBOBYuwbqjGz5nVC38/W68
- u0Vw==
-X-Gm-Message-State: AOAM531oY7+oWDeiIAinEDAx+sXiiTc+tdB7CpaQzT7aHUA4oIYXx9Yf
- DHL+HX0OMp9TVmMOvJq5kHU=
-X-Google-Smtp-Source: ABdhPJyvXfa3aO808JTEoNWi/aJttupdVwqAH0ymCcC/qYyTZhZFgrfYarrbc+e6gIxYXNXz2KeiyQ==
-X-Received: by 2002:a63:1e1d:0:b0:3c6:a36f:7b13 with SMTP id
- e29-20020a631e1d000000b003c6a36f7b13mr7785413pge.447.1652530482317; 
- Sat, 14 May 2022 05:14:42 -0700 (PDT)
-Received: from localhost (subs09a-223-255-225-65.three.co.id. [223.255.225.65])
- by smtp.gmail.com with ESMTPSA id
- j24-20020a62b618000000b0050dc76281b1sm3430254pff.139.2022.05.14.05.14.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 May 2022 05:14:41 -0700 (PDT)
-Date: Sat, 14 May 2022 19:14:38 +0700
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Yn+dLtxsy6LwVIBQ@debian.me>
-References: <20220514080102.2246-1-chao@kernel.org>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1npw41-0000CG-1d
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 May 2022 18:00:27 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 53E90B80AF5;
+ Sat, 14 May 2022 18:00:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5808C34113;
+ Sat, 14 May 2022 18:00:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1652551207;
+ bh=zMdAqlOlcoMBi8vXNWHO9v1vLmu+3e67HT++NXP4bQg=;
+ h=From:To:Cc:Subject:Date:From;
+ b=S3BcptZ6vCGDAfEb9eDP2fDZk5pSeofFMRm48liqAKL3XjmIiQNenMfo7dtodJWop
+ uf63GA9AYDLy+D7YbiPGshutyOA9HmFN4ycbLPSsp3hALCP0H8eElquPrrR2aZ5uMl
+ R1KHIBhcPIG5Eepbz91W0cEjgmcuvLEO4HzwV1KVuB/pvTx+53pH+0WOnPAWhghg73
+ Kkb7C77UkfJs1fPCje19epnLj92BVm4Eeut6LkgqCMX2g91LR+B7lROYifStApgEgn
+ J6wdLwLkZZzVejQfn9FwjSl5CMDsQ+exsNYAlX9cSFPSDDIWednmogUfJL6X/uOaOg
+ 6z945m18zHMKw==
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Sat, 14 May 2022 10:59:29 -0700
+Message-Id: <20220514175929.44439-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220514080102.2246-1-chao@kernel.org>
-X-Spam-Score: 1.3 (+)
+X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sat, May 14, 2022 at 04:01:02PM +0800, Chao Yu wrote: >
- As Yanming reported in bugzilla: > >
- https://bugzilla.kernel.org/show_bug.cgi?id=215895
- > > I have encountered a bug in F2FS file system in k [...] 
- Content analysis details:   (1.3 points, 6.0 required)
+ Content preview:  From: Eric Biggers <ebiggers@google.com> Tryng to rename a
+ directory that has all following properties fails with EINVAL and triggers
+ the 'WARN_ON_ONCE(!fscrypt_has_encryption_key(dir))' in f2fs_match_ci_name():
+ Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [bagasdotme[at]gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.182 listed in wl.mailspike.net]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -107,15 +84,11 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.215.182 listed in list.dnswl.org]
- 1.5 RCVD_IN_SORBS_WEB      RBL: SORBS: sender is an abusable web server
- [223.255.225.65 listed in dnsbl.sorbs.net]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1npqfX-0006bx-V3
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to do sanity check for inline
- inode
+ -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1npw41-0000CG-1d
+Subject: [f2fs-dev] [PATCH] f2fs: don't use casefolded comparison for "."
+ and ".."
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,71 +100,115 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Ming Yan <yanming@tju.edu.cn>,
- jaegeuk@kernel.org
+Cc: linux-fscrypt@vger.kernel.org,
+ Gabriel Krisman Bertazi <krisman@collabora.com>, stable@vger.kernel.org,
+ Daniel Rosenberg <drosen@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sat, May 14, 2022 at 04:01:02PM +0800, Chao Yu wrote:
-> As Yanming reported in bugzilla:
-> 
-> https://bugzilla.kernel.org/show_bug.cgi?id=215895
-> 
-> I have encountered a bug in F2FS file system in kernel v5.17.
-> 
-> The kernel message is shown below:
-> 
-> kernel BUG at fs/inode.c:611!
-> Call Trace:
->  evict+0x282/0x4e0
->  __dentry_kill+0x2b2/0x4d0
->  dput+0x2dd/0x720
->  do_renameat2+0x596/0x970
->  __x64_sys_rename+0x78/0x90
->  do_syscall_64+0x3b/0x90
-> 
-> The root cause is: fuzzed inode has both inline_data flag and encrypted
-> flag, so after it was deleted by rename(), during f2fs_evict_inode(),
-> it will cause inline data conversion due to flags confilction, then
-> page cache will be polluted and trigger panic in clear_inode().
-> 
-> This patch tries to fix the issue by do more sanity checks for inline
-> data inode in sanity_check_inode().
-> 
-> Cc: stable@vger.kernel.org
-> Reported-by: Ming Yan <yanming@tju.edu.cn>
-> Signed-off-by: Chao Yu <chao.yu@oppo.com>
+From: Eric Biggers <ebiggers@google.com>
 
-Hi Chao,
+Tryng to rename a directory that has all following properties fails with
+EINVAL and triggers the 'WARN_ON_ONCE(!fscrypt_has_encryption_key(dir))'
+in f2fs_match_ci_name():
 
-I think the patch message can be reworked , like below:
+    - The directory is casefolded
+    - The directory is encrypted
+    - The directory's encryption key is not yet set up
+    - The parent directory is *not* encrypted
 
-Yanming reported a kernel bug in Bugzilla kernel, which can be reproduced.
-The bug message is:
+The problem is incorrect handling of the lookup of ".." to get the
+parent reference to update.  fscrypt_setup_filename() treats ".." (and
+".") specially, as it's never encrypted.  It's passed through as-is, and
+setting up the directory's key is not attempted.  As the name isn't a
+no-key name, f2fs treats it as a "normal" name and attempts a casefolded
+comparison.  That breaks the assumption of the WARN_ON_ONCE() in
+f2fs_match_ci_name() which assumes that for encrypted directories,
+casefolded comparisons only happen when the directory's key is set up.
 
-kernel BUG at fs/inode.c:611!
-Call Trace:
- evict+0x282/0x4e0
- __dentry_kill+0x2b2/0x4d0
- dput+0x2dd/0x720
- do_renameat2+0x596/0x970
- __x64_sys_rename+0x78/0x90
- do_syscall_64+0x3b/0x90
+We could just remove this WARN_ON_ONCE().  However, since casefolding is
+always a no-op on "." and ".." anyway, let's instead just not casefold
+these names.  This results in the standard bytewise comparison.
 
-The bug is due to fuzzed inode has both inline_data and encrypted flags.
-During f2fs_evict_inode(), after the inode was deleted by rename(), it
-will cause inline data conversion due to conflicting flags. The page
-cache will be polluted and the panic will be triggered in clear_inode().
+Fixes: 7ad08a58bf67 ("f2fs: Handle casefolding with Encryption")
+Cc: <stable@vger.kernel.org> # v5.11+
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/f2fs/dir.c  |  3 ++-
+ fs/f2fs/f2fs.h | 10 +++++-----
+ fs/f2fs/hash.c | 11 ++++++-----
+ 3 files changed, 13 insertions(+), 11 deletions(-)
 
-Try fixing the bug by doing more sanity checks for inline data inode in
-sanity_check_inode().
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index a0e51937d92eb..d5bd7932fb642 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -82,7 +82,8 @@ int f2fs_init_casefolded_name(const struct inode *dir,
+ #if IS_ENABLED(CONFIG_UNICODE)
+ 	struct super_block *sb = dir->i_sb;
+ 
+-	if (IS_CASEFOLDED(dir)) {
++	if (IS_CASEFOLDED(dir) &&
++	    !is_dot_dotdot(fname->usr_fname->name, fname->usr_fname->len)) {
+ 		fname->cf_name.name = f2fs_kmem_cache_alloc(f2fs_cf_name_slab,
+ 					GFP_NOFS, false, F2FS_SB(sb));
+ 		if (!fname->cf_name.name)
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 492af5b96de19..e9e32bc814dfe 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -508,11 +508,11 @@ struct f2fs_filename {
+ #if IS_ENABLED(CONFIG_UNICODE)
+ 	/*
+ 	 * For casefolded directories: the casefolded name, but it's left NULL
+-	 * if the original name is not valid Unicode, if the directory is both
+-	 * casefolded and encrypted and its encryption key is unavailable, or if
+-	 * the filesystem is doing an internal operation where usr_fname is also
+-	 * NULL.  In all these cases we fall back to treating the name as an
+-	 * opaque byte sequence.
++	 * if the original name is not valid Unicode, if the original name is
++	 * "." or "..", if the directory is both casefolded and encrypted and
++	 * its encryption key is unavailable, or if the filesystem is doing an
++	 * internal operation where usr_fname is also NULL.  In all these cases
++	 * we fall back to treating the name as an opaque byte sequence.
+ 	 */
+ 	struct fscrypt_str cf_name;
+ #endif
+diff --git a/fs/f2fs/hash.c b/fs/f2fs/hash.c
+index 3cb1e7a24740f..049ce50cec9b0 100644
+--- a/fs/f2fs/hash.c
++++ b/fs/f2fs/hash.c
+@@ -91,7 +91,7 @@ static u32 TEA_hash_name(const u8 *p, size_t len)
+ /*
+  * Compute @fname->hash.  For all directories, @fname->disk_name must be set.
+  * For casefolded directories, @fname->usr_fname must be set, and also
+- * @fname->cf_name if the filename is valid Unicode.
++ * @fname->cf_name if the filename is valid Unicode and is not "." or "..".
+  */
+ void f2fs_hash_filename(const struct inode *dir, struct f2fs_filename *fname)
+ {
+@@ -110,10 +110,11 @@ void f2fs_hash_filename(const struct inode *dir, struct f2fs_filename *fname)
+ 		/*
+ 		 * If the casefolded name is provided, hash it instead of the
+ 		 * on-disk name.  If the casefolded name is *not* provided, that
+-		 * should only be because the name wasn't valid Unicode, so fall
+-		 * back to treating the name as an opaque byte sequence.  Note
+-		 * that to handle encrypted directories, the fallback must use
+-		 * usr_fname (plaintext) rather than disk_name (ciphertext).
++		 * should only be because the name wasn't valid Unicode or was
++		 * "." or "..", so fall back to treating the name as an opaque
++		 * byte sequence.  Note that to handle encrypted directories,
++		 * the fallback must use usr_fname (plaintext) rather than
++		 * disk_name (ciphertext).
+ 		 */
+ 		WARN_ON_ONCE(!fname->usr_fname->name);
+ 		if (fname->cf_name.name) {
 
-Thanks.
-
+base-commit: c0d31ec6397d963d85a190996b4b74654ef32e1d
 -- 
-An old man doll... just what I always wanted! - Clara
+2.36.1
+
 
 
 _______________________________________________
