@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6716F5270FD
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 May 2022 14:09:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8574C527103
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 14 May 2022 14:14:56 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1npqaH-0002wI-Nh; Sat, 14 May 2022 12:09:22 +0000
+	id 1npqfa-0003TL-C8; Sat, 14 May 2022 12:14:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ritesh.list@gmail.com>) id 1npqaF-0002w0-MW
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 May 2022 12:09:20 +0000
+ (envelope-from <bagasdotme@gmail.com>) id 1npqfY-0003T6-8n
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 May 2022 12:14:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9Go1aD/L4/NwaeqwABKS0DOpnE/e7XYIGVtitFbk6RI=; b=PV+5GsslcLQmwyc+HVvHSQWqVE
- O/JluVW16C92Bs+lyPaEpE8/vCLUrD44ASL1wJ3Hwcw/0fCSuInyeeZB+21KCJejHR+RZuoRUQS8t
- KllRBrskTHVaMiAP6kM2GnA7zjdSXctwbXf6QTJwVmfBNzvlciDYbPFFuekKVUddmwh4=;
+ bh=1aSGY0h+9mFG07V/uGzLZko6mgSx1gaXsXLrsGCI9XA=; b=Tqy3+DZiK4Sl/+Ueknbf+u6jbh
+ ZxQTBjYY97M/3ePJrXaaXUzWOWHzkBr0e/Fbs98yAZqK5ASj61ZIfSagw4Q5q5VDvuIWl5YqERVHz
+ LBAoo0DT7A7y169ZBNBq4PdnKIECcKh0bvRtBIQJtonWlZhtZ3+gyRGNrvW/pzbaEO8A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,79 +29,77 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9Go1aD/L4/NwaeqwABKS0DOpnE/e7XYIGVtitFbk6RI=; b=cWn48qzbptwwPiHVfwPJ9LujKf
- PxRDK+ixhCoBYHC0EHxnwvJs7fMl4o7DXrIMg7KE4Ux1EXsP2PGXuojA4FDk81APz5TfLx3ON7Vm0
- pRKkotWfTpfhEuKKkwhu1SDtr+BwHStrDEZj2N3z/bj29GqqP2EGWykfgA72iqbtv9jI=;
-Received: from mail-pg1-f180.google.com ([209.85.215.180])
+ bh=1aSGY0h+9mFG07V/uGzLZko6mgSx1gaXsXLrsGCI9XA=; b=Z3dBT6fKcEBFokIRR9ktxhLrR3
+ Ae7MP6E4f8JpYGZ8oWIbSh7OnGq5r74ZF7jwUyh3o4Dc9MkOGZ0q8x7GR5h9NWgKcOceQ6+0heCXs
+ 9yz3YODHbmyeYg7zsVQg+NIEruBOQMzWZIlBSNmCqAOspiDXm0GgSltAuSTfHRk8crYs=;
+Received: from mail-pg1-f182.google.com ([209.85.215.182])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1npqaB-00068V-N1
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 May 2022 12:09:19 +0000
-Received: by mail-pg1-f180.google.com with SMTP id a19so9653267pgw.6
+ id 1npqfX-0006bx-V3
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 May 2022 12:14:48 +0000
+Received: by mail-pg1-f182.google.com with SMTP id 31so9851133pgp.8
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 14 May 2022 05:09:15 -0700 (PDT)
+ Sat, 14 May 2022 05:14:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=9Go1aD/L4/NwaeqwABKS0DOpnE/e7XYIGVtitFbk6RI=;
- b=cr9B1ubSgoeNa8HWa7DlBZUE2aIGzxa/fMzmsqxGuFWTN4UmNNvz857LoKZijhKS73
- W94vlm1Qry889tH1VHyyOFrX9JT8eFwG7MhxKo7FjHVUfcF+BBtheAs1gHMHk6j0gu9E
- WfdXuX0nSe3jFm/zdabCkUyZfJ8LT0VlVWPqNfZ0F3EJSARY0f7g4rLV6NTdVGhVYN2/
- QMSMwR1GRa57XLDVSV8QRD5YEgvTzLvvY4JcwFLoVZSgzs4Bk3tepYCIUupebUYD42LT
- Xot6pF1h0QXPDL2eB6OEQMDAf7NNzC7Pt6sogOdxstMVGSigs/T26LlTQ1MwZFllXfQ5
- 8ZEg==
+ bh=1aSGY0h+9mFG07V/uGzLZko6mgSx1gaXsXLrsGCI9XA=;
+ b=N7Hmhn5Lg9cczfQn3yUsdZ/KhteBfYV4DxaXQX1ynP/EGQpy1xkmF+CaY3zyG4wE7z
+ cJ5wLDs/g7UBXXQkfGMJ8cdc+nIeq5VDRakjMfmf4n4SP4dSmd5SG8w9C6VtIo06SwSf
+ 4lEgvYhUn3Zd4IMaaO8OgKlt3xGvuIJkWg7lotceD53JQnQjtDMtC5wdVR7iNgs+Vmj7
+ 1lKDKT31aU+zjUBFGCHqZED2HctANq+UrVqRDEYt3qJgS0SBtQZ0+i/4c/jOKHdw9+Fw
+ Rzu9HiEH2oBuEkMwL3WMSWQmXUDqwrx8bWn9srrM994bF3ygOWrd0SMSe97JYeFOpqBZ
+ 7vKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=9Go1aD/L4/NwaeqwABKS0DOpnE/e7XYIGVtitFbk6RI=;
- b=nj3bBv1I76SVaunAb456rITD+lyDGgADjkGn1jMgE7JtWdSASRNn//o4d1y3eNK6Zx
- nCX6Q0Dct1ygbqEVroHCpDiT3k5cwIKnZGj0oYOBFyFcyztvADhTYiQ42Jk2PB3LVM4v
- KlqAfip8wyF4/RNmHBPDnqYM+O9vgxTSf7MmJ8fFywrZhzUfAFPvctnOinfk9aU9f4C8
- u3WLo+nLjiDvc+HMKFpWG3fzug03UeCBqvkJgL5aSL0Vwj5MK3qJ4LKUm7r+fw1GBnEM
- QRV7k1MyL3mrCaImq274+34oDmn7r4sB1IDaiME2XEFnhCpgx/dwgZwWIUF8Dng6Y2zU
- /V+A==
-X-Gm-Message-State: AOAM533SOb5AC8Y+8HhG6Y4WIbioFWoD7XwmLIhrPbSp39Ye32gj2k92
- y+uVvEflH1ZqKQoEVIu6kRg=
-X-Google-Smtp-Source: ABdhPJxIFGUTGYOAyPcmNz7UCTfE17jXAclddbJBz9rYIifOloe2Yp+ZX4La1h+1ilezeoi/436n6A==
-X-Received: by 2002:a63:8841:0:b0:3db:2e5f:1271 with SMTP id
- l62-20020a638841000000b003db2e5f1271mr7824710pgd.233.1652530150033; 
- Sat, 14 May 2022 05:09:10 -0700 (PDT)
-Received: from localhost ([2406:7400:63:532d:c4bb:97f7:b03d:2c53])
+ bh=1aSGY0h+9mFG07V/uGzLZko6mgSx1gaXsXLrsGCI9XA=;
+ b=sAj3mlcX/Zy5CDASvXpbAdv5HzU9bTDGTKQVMJK9OK8TwjdwHhhfQuuALdvAWNhP2V
+ Kitu/vP7ncCEmAhCU9VTYPWQc9ZD2A07sFrLPcVYitTzJtUGEiHbzzrDWMNgY8+UT02v
+ Xzr34k9red+PVHeTqe7jvVPiSgsOrIwwikp3Lt7tejDZxEUL4Iw4Sfljc9TAnPwFGJ5s
+ 3DQ5s2c9hB0PW1aHYfeje2TuR3biR980KAxbwiaWUSBvUdxlnCX+I+emqtZi1+r6zLa+
+ I5m8zA6isW9brsnk/ZsxPVzUh1+9PherFPD/nY6fmPn0zaQBOBYuwbqjGz5nVC38/W68
+ u0Vw==
+X-Gm-Message-State: AOAM531oY7+oWDeiIAinEDAx+sXiiTc+tdB7CpaQzT7aHUA4oIYXx9Yf
+ DHL+HX0OMp9TVmMOvJq5kHU=
+X-Google-Smtp-Source: ABdhPJyvXfa3aO808JTEoNWi/aJttupdVwqAH0ymCcC/qYyTZhZFgrfYarrbc+e6gIxYXNXz2KeiyQ==
+X-Received: by 2002:a63:1e1d:0:b0:3c6:a36f:7b13 with SMTP id
+ e29-20020a631e1d000000b003c6a36f7b13mr7785413pge.447.1652530482317; 
+ Sat, 14 May 2022 05:14:42 -0700 (PDT)
+Received: from localhost (subs09a-223-255-225-65.three.co.id. [223.255.225.65])
  by smtp.gmail.com with ESMTPSA id
- z4-20020a62d104000000b0050dc7628184sm3528728pfg.94.2022.05.14.05.09.08
+ j24-20020a62b618000000b0050dc76281b1sm3430254pff.139.2022.05.14.05.14.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 May 2022 05:09:09 -0700 (PDT)
-Date: Sat, 14 May 2022 17:39:04 +0530
-From: Ritesh Harjani <ritesh.list@gmail.com>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20220514120904.xbbfyne32lp47t2p@riteshh-domain>
-References: <20220513231605.175121-1-ebiggers@kernel.org>
- <20220513231605.175121-2-ebiggers@kernel.org>
+ Sat, 14 May 2022 05:14:41 -0700 (PDT)
+Date: Sat, 14 May 2022 19:14:38 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <Yn+dLtxsy6LwVIBQ@debian.me>
+References: <20220514080102.2246-1-chao@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220513231605.175121-2-ebiggers@kernel.org>
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20220514080102.2246-1-chao@kernel.org>
+X-Spam-Score: 1.3 (+)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 22/05/13 04:16PM, Eric Biggers wrote: > From: Eric Biggers
- > > If processing the on-disk mount options fails after any memory was >
- allocated in the ext4_fs_context, e.g. s_qf_names, then this me [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Sat, May 14, 2022 at 04:01:02PM +0800, Chao Yu wrote: >
+ As Yanming reported in bugzilla: > >
+ https://bugzilla.kernel.org/show_bug.cgi?id=215895
+ > > I have encountered a bug in F2FS file system in k [...] 
+ Content analysis details:   (1.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [ritesh.list[at]gmail.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.215.180 listed in list.dnswl.org]
+ provider [bagasdotme[at]gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.180 listed in wl.mailspike.net]
+ [209.85.215.182 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -109,11 +107,15 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.215.182 listed in list.dnswl.org]
+ 1.5 RCVD_IN_SORBS_WEB      RBL: SORBS: sender is an abusable web server
+ [223.255.225.65 listed in dnsbl.sorbs.net]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1npqaB-00068V-N1
-Subject: Re: [f2fs-dev] [PATCH v3 1/5] ext4: fix memory leak in
- parse_apply_sb_mount_options()
+X-Headers-End: 1npqfX-0006bx-V3
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to do sanity check for inline
+ inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,100 +127,71 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Theodore Ts'o <tytso@mit.edu>, Jeff Layton <jlayton@kernel.org>,
- stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- Lukas Czerner <lczerner@redhat.com>, linux-ext4@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Ming Yan <yanming@tju.edu.cn>,
+ jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 22/05/13 04:16PM, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
->
-> If processing the on-disk mount options fails after any memory was
-> allocated in the ext4_fs_context, e.g. s_qf_names, then this memory is
-> leaked.  Fix this by calling ext4_fc_free() instead of kfree() directly.
-
-Thanks for splitting the patch. It becomes an easy backport.
-
->
-> Reproducer:
->
->     mkfs.ext4 -F /dev/vdc
->     tune2fs /dev/vdc -E mount_opts=usrjquota=file
->     echo clear > /sys/kernel/debug/kmemleak
->     mount /dev/vdc /vdc
->     echo scan > /sys/kernel/debug/kmemleak
->     sleep 5
->     echo scan > /sys/kernel/debug/kmemleak
->     cat /sys/kernel/debug/kmemleak
-
-Tested this and as you mentioned this patch fixes the memory leak with
-s_qf_names in note_qf_name().
-
-tune2fs 1.46.5 (30-Dec-2021)
-Setting extended default mount options to 'usrjquota=file'
-unreferenced object 0xffff8881126b9a50 (size 8):
-  comm "mount", pid 1475, jiffies 4294829180 (age 48.670s)
-  hex dump (first 8 bytes):
-    66 69 6c 65 00 6b 6b a5                          file.kk.
-  backtrace:
-    [<ffffffff8153b09d>] __kmalloc_track_caller+0x17d/0x2f0
-    [<ffffffff8149b7e8>] kmemdup_nul+0x28/0x70
-    [<ffffffff81753a75>] note_qf_name.isra.0+0x95/0x180
-    [<ffffffff817548a8>] ext4_parse_param+0xd48/0x11c0
-    [<ffffffff8175a131>] ext4_fill_super+0x1cc1/0x6260
-    [<ffffffff8155edce>] get_tree_bdev+0x24e/0x3a0
-    [<ffffffff81740355>] ext4_get_tree+0x15/0x20
-    [<ffffffff8155d3a2>] vfs_get_tree+0x52/0x140
-    [<ffffffff815a2048>] path_mount+0x3f8/0xf30
-    [<ffffffff815a2c52>] do_mount+0xd2/0xf0
-    [<ffffffff815a2e4a>] __x64_sys_mount+0xca/0x110
-    [<ffffffff82e6674b>] do_syscall_64+0x3b/0x90
-    [<ffffffff8300007c>] entry_SYSCALL_64_after_hwframe+0x44/0xae
-
-
-Feel free to add by -
-
-Tested-by: Ritesh Harjani <ritesh.list@gmail.com>
-
--ritesh
-
->
-> Fixes: 7edfd85b1ffd ("ext4: Completely separate options parsing and sb setup")
+On Sat, May 14, 2022 at 04:01:02PM +0800, Chao Yu wrote:
+> As Yanming reported in bugzilla:
+> 
+> https://bugzilla.kernel.org/show_bug.cgi?id=215895
+> 
+> I have encountered a bug in F2FS file system in kernel v5.17.
+> 
+> The kernel message is shown below:
+> 
+> kernel BUG at fs/inode.c:611!
+> Call Trace:
+>  evict+0x282/0x4e0
+>  __dentry_kill+0x2b2/0x4d0
+>  dput+0x2dd/0x720
+>  do_renameat2+0x596/0x970
+>  __x64_sys_rename+0x78/0x90
+>  do_syscall_64+0x3b/0x90
+> 
+> The root cause is: fuzzed inode has both inline_data flag and encrypted
+> flag, so after it was deleted by rename(), during f2fs_evict_inode(),
+> it will cause inline data conversion due to flags confilction, then
+> page cache will be polluted and trigger panic in clear_inode().
+> 
+> This patch tries to fix the issue by do more sanity checks for inline
+> data inode in sanity_check_inode().
+> 
 > Cc: stable@vger.kernel.org
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> ---
->  fs/ext4/super.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-> index 1466fbdbc8e34..60fa2f2623e07 100644
-> --- a/fs/ext4/super.c
-> +++ b/fs/ext4/super.c
-> @@ -2625,8 +2625,10 @@ static int parse_apply_sb_mount_options(struct super_block *sb,
->  	ret = ext4_apply_options(fc, sb);
->
->  out_free:
-> -	kfree(s_ctx);
-> -	kfree(fc);
-> +	if (fc) {
-> +		ext4_fc_free(fc);
-> +		kfree(fc);
-> +	}
->  	kfree(s_mount_opts);
->  	return ret;
->  }
-> --
-> 2.36.1
->
->
->
-> _______________________________________________
-> Linux-f2fs-devel mailing list
-> Linux-f2fs-devel@lists.sourceforge.net
-> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> Reported-by: Ming Yan <yanming@tju.edu.cn>
+> Signed-off-by: Chao Yu <chao.yu@oppo.com>
+
+Hi Chao,
+
+I think the patch message can be reworked , like below:
+
+Yanming reported a kernel bug in Bugzilla kernel, which can be reproduced.
+The bug message is:
+
+kernel BUG at fs/inode.c:611!
+Call Trace:
+ evict+0x282/0x4e0
+ __dentry_kill+0x2b2/0x4d0
+ dput+0x2dd/0x720
+ do_renameat2+0x596/0x970
+ __x64_sys_rename+0x78/0x90
+ do_syscall_64+0x3b/0x90
+
+The bug is due to fuzzed inode has both inline_data and encrypted flags.
+During f2fs_evict_inode(), after the inode was deleted by rename(), it
+will cause inline data conversion due to conflicting flags. The page
+cache will be polluted and the panic will be triggered in clear_inode().
+
+Try fixing the bug by doing more sanity checks for inline data inode in
+sanity_check_inode().
+
+Thanks.
+
+-- 
+An old man doll... just what I always wanted! - Clara
 
 
 _______________________________________________
