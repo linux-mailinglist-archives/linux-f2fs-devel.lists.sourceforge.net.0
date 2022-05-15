@@ -2,93 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED42252767D
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 May 2022 11:06:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DABF527744
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 May 2022 13:17:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nqACf-0004ab-L8; Sun, 15 May 2022 09:06:16 +0000
+	id 1nqCFb-00017P-9c; Sun, 15 May 2022 11:17:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nqACV-0004aP-Ka
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 May 2022 09:06:06 +0000
+ (envelope-from <chao@kernel.org>) id 1nqCFa-00017J-EI
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 May 2022 11:17:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=S7EUqAIjWFIxm/DJTSrRLtLMq6nn33T45s7tfqHnv8o=; b=Eg8MbDeSo0mfbWV+90JhjDTlkH
- RRmYYD1QlrZVeLMhsPxPF2xSivUR1g952CtAL87NzRFY4JcD+/C8T3RL1DLhAyr583Dz0cA34fU96
- RBwYbonIDW6vLiQqSF/b4fYa0kllHf6iR7frFOzTgf0zc87icCN4bKlS0aaxNXh7mqUw=;
+ bh=ley37C+FLIOrNacG/8nrnabLLLolHRUsN5D6Ad3KsiQ=; b=II8mNyzt+azCwtTzL2AbRighNy
+ Wjb8aaP3T1bKVM0FqTUlH7mQNrCjUsxpiswb9YrHvBlG2T30otceU+Y5pzoOq/T2hSXdj0fJIqfbH
+ OcS5OchFx1TNfxL0bbHlZAtzduBOvS4X/W+UWXkH3wnwaklZ2iHNaRQF2e0ahyBD+Ovk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=S7EUqAIjWFIxm/DJTSrRLtLMq6nn33T45s7tfqHnv8o=; b=C
- W1U0rL3WwjNbnhQCID+tIFrXWQZIBKq0L9PR71J0fbLO/ittKQdiLal87eLtIRtJHZpe7NtGfOQid
- 63ckLAr1bPGHV7fbYbCnXH1qJ9pN06szZe+PdmwiF5h3/OP4WWnQNFNNli7XTuCTPUixrRqAEnyea
- E9ibZVID8vfpkpMs=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=ley37C+FLIOrNacG/8nrnabLLLolHRUsN5D6Ad3KsiQ=; b=Q
+ hTedq0BDnS79rFsfJ4BEq35ZPLzJRZV9bQMiGzhxDPdpATxx3ilIa/SgGR6qrVQl6JL9j7OQGJbU3
+ EHMlQ5NzhMcNfDxo/9M7AT6hCdjMXPJa0O+4sl3EerTmrpYe9ldadN+mbklazfVYfFrrusp0Ayngs
+ +7TkcOkh/hd2GfMk=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nqACP-0001vR-Kw
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 May 2022 09:06:05 +0000
+ id 1nqCFV-00Ecbi-5R
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 May 2022 11:17:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id C7626B80AF1;
- Sun, 15 May 2022 09:05:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C060C385B8;
- Sun, 15 May 2022 09:05:52 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id EA64E60F4C;
+ Sun, 15 May 2022 11:17:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66B4AC385B8;
+ Sun, 15 May 2022 11:17:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652605553;
- bh=Mwj8x5n/ya19o/UjDZ9DoXSZRKW2j74+Pxpl01vamHo=;
+ s=k20201202; t=1652613430;
+ bh=d0TL17vMLRIGLh71PguP2wy7GGGqSL/xy2fQvHsvOL8=;
  h=From:To:Cc:Subject:Date:From;
- b=Aw8nfDi+XuMAAvR8hXetPUqHAMISpxvq/+AC3YD6OlFkrUOrRQrZ1Ak72n1lAmdT2
- N9a0UuSW1irAO31CoFBE/4uD5AVZ77ZriRkVJX7OfEnShDnVEZZtTqEF9CGc2v3qX3
- ypfyVg5YVIV80gg5sAi46/WGSKQpQPKut23DiTxeVWm0K1lReth16WCT0vQDiq0R00
- O58qgnIlyRsLttNVpJhPVHA4nibzXiw8VuYKLzxh8r+Zq3xOhFtnzz8TkMec2CzzOH
- nZG33bMVgW6VMsoPZlkgbCJvcMijg10UgcdjBfK1nch1wLlIDfiX0yLSUu582iM2cd
- zUnzgPBA+TONQ==
+ b=GrxZnQJi8vwlTzhfuxKigVFdkojTW2WthcuhEjXg/rKT5DICe8fYB8XsJSBQQTfI+
+ MeEFoOv1vX6QEoBfYMJVYdNeELfOQlrEb3aI5F+mYAkxC1+TWt6oRuAy3cHk9Ckcjq
+ bJ//p5emIVWUV+IF2sFSXQu5I2o9BamNlTdYpkfCzmYRz0uVYrI+uot0e40yhNaajY
+ n6JW1ipf1+iI4l76ol3h7R4UuFBIR5gt7q8XzHYPPaRgoVTYh+k9YFAHPbpcdHqEBS
+ LHk5BX2Rh9AKUFSri2SIYAsImfU8qxpFqLeEqMwK7R1lp9Galn/jkmv4eus6WoZMBl
+ 1uEcdAlwtcTdw==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Sun, 15 May 2022 17:05:47 +0800
-Message-Id: <20220515090547.1914-1-chao@kernel.org>
+Date: Sun, 15 May 2022 18:39:34 +0800
+Message-Id: <20220515103934.5306-1-chao@kernel.org>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Yanming reported a kernel bug in Bugzilla kernel [1], which
- can be reproduced. The bug message is: The kernel message is shown below:
- kernel BUG at fs/inode.c:611! Call Trace: evict+0x282/0x4e0
- __dentry_kill+0x2b2/0x4d0
- dput+0x2dd/0x720 do_renameat2+0x596/0x970 __x64_sys_rename+0x78/0x90
- do_syscall_64+0x3b/0x90
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  Pinning a file is heavy, because skipping pinned files make
+ GC running with heavy load or no effect. So that this patch proposes to
+ separate
+ nocow and pinfile semantics: - NOCoW flag can only be set on regular file.
+ - NOCoW file will only trigger IPU at common writeback/flush. - NOCow file
+ will do OP [...] 
+ Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
-X-Headers-End: 1nqACP-0001vR-Kw
-Subject: [f2fs-dev] [PATCH v3] f2fs: fix to do sanity check for inline inode
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nqCFV-00Ecbi-5R
+Subject: [f2fs-dev] [PATCH v2] f2fs: separate NOCoW and pinfile semantics
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,79 +101,133 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Ming Yan <yanming@tju.edu.cn>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Yanming reported a kernel bug in Bugzilla kernel [1], which can be
-reproduced. The bug message is:
+Pinning a file is heavy, because skipping pinned files make GC
+running with heavy load or no effect.
 
-The kernel message is shown below:
+So that this patch proposes to separate nocow and pinfile semantics:
+- NOCoW flag can only be set on regular file.
+- NOCoW file will only trigger IPU at common writeback/flush.
+- NOCow file will do OPU during GC.
 
-kernel BUG at fs/inode.c:611!
-Call Trace:
- evict+0x282/0x4e0
- __dentry_kill+0x2b2/0x4d0
- dput+0x2dd/0x720
- do_renameat2+0x596/0x970
- __x64_sys_rename+0x78/0x90
- do_syscall_64+0x3b/0x90
+This flag can satisfying the demand of:
+1) avoiding fragment of file's physical block
+2) userspace doesn't want to pin file's physical address
 
-[1] https://bugzilla.kernel.org/show_bug.cgi?id=215895
+After commit 5d539245cb18 ("f2fs: export FS_NOCOW_FL flag to user"),
+Pin_file and NOCoW flags have already been twined closely. e.g.
+once we set pinfile flag in file, nocow flag will be shown; and after
+clearing pinfile flag, nocow flag will disappear.
 
-The bug is due to fuzzed inode has both inline_data and encrypted flags.
-During f2fs_evict_inode(), as the inode was deleted by rename(), it
-will cause inline data conversion due to conflicting flags. The page
-cache will be polluted and the panic will be triggered in clear_inode().
+So, in order to keep backward compatibility, let use below semantics:
 
-Try fixing the bug by doing more sanity checks for inline data inode in
-sanity_check_inode().
+f2fs_ioc_set_pin_file/f2fs_fileattr_set logic:
+		pinfile			nocow
+set		set pinfile | nocow	set nocow
+clear		clear pinfile | nocow	clear nocow
 
-Cc: stable@vger.kernel.org
-Reported-by: Ming Yan <yanming@tju.edu.cn>
+File Behaviors:
+w/ pinfile, w/ nocow:		use pinfile semantics
+w/ pinfile, w/o nocow:		use pinfile semantics
+w/o pinfile, w/ nocow:		use nocow semantics
+w/o pinfile, w/o nocow:		no pinfile or nocow semantics
+
 Signed-off-by: Chao Yu <chao.yu@oppo.com>
 ---
-v3:
-- clean up commit message suggested by Bagas Sanjaya.
- fs/f2fs/f2fs.h  | 8 ++++++++
- fs/f2fs/inode.c | 3 +--
- 2 files changed, 9 insertions(+), 2 deletions(-)
+v2:
+- keep compatibility in between pinfile and nocow flags
+ fs/f2fs/data.c |  3 ++-
+ fs/f2fs/f2fs.h |  8 +++++++-
+ fs/f2fs/file.c | 16 +++++++++++++++-
+ 3 files changed, 24 insertions(+), 3 deletions(-)
 
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 54a7a8ad994d..c8eab78f7d89 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2495,7 +2495,8 @@ bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio)
+ 	if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
+ 		return false;
+ 
+-	if (f2fs_is_pinned_file(inode))
++	if (f2fs_is_pinned_file(inode) ||
++			F2FS_I(inode)->i_flags & F2FS_NOCOW_FL)
+ 		return true;
+ 
+ 	/* if this is cold file, we should overwrite to avoid fragmentation */
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 492af5b96de1..0dc2461ef02c 100644
+index 18a0335799ad..d9445fc62bd7 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -4126,6 +4126,14 @@ static inline void f2fs_set_encrypted_inode(struct inode *inode)
-  */
- static inline bool f2fs_post_read_required(struct inode *inode)
- {
-+	/*
-+	 * used by sanity_check_inode(), when disk layout fields has not
-+	 * been synchronized to inmem fields.
-+	 */
-+	if (S_ISREG(inode->i_mode) && (file_is_encrypt(inode) ||
-+		F2FS_I(inode)->i_flags & F2FS_COMPR_FL ||
-+		file_is_verity(inode)))
-+		return true;
- 	return f2fs_encrypted_file(inode) || fsverity_active(inode) ||
- 		f2fs_compressed_file(inode);
- }
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 2fce8fa0dac8..5e494c98e3c2 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -276,8 +276,7 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 		}
- 	}
+@@ -2929,6 +2929,7 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
+ #define F2FS_NOCOMP_FL			0x00000400 /* Don't compress */
+ #define F2FS_INDEX_FL			0x00001000 /* hash-indexed directory */
+ #define F2FS_DIRSYNC_FL			0x00010000 /* dirsync behaviour (directories only) */
++#define F2FS_NOCOW_FL			0x00800000 /* Do not cow file */
+ #define F2FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
+ #define F2FS_CASEFOLD_FL		0x40000000 /* Casefolded file */
  
--	if (f2fs_has_inline_data(inode) &&
--			(!S_ISREG(inode->i_mode) && !S_ISLNK(inode->i_mode))) {
-+	if (f2fs_has_inline_data(inode) && !f2fs_may_inline_data(inode)) {
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: inode (ino=%lx, mode=%u) should not have inline_data, run fsck to fix",
- 			  __func__, inode->i_ino, inode->i_mode);
+@@ -2965,9 +2966,14 @@ static inline void __mark_inode_dirty_flag(struct inode *inode,
+ 		if (set)
+ 			return;
+ 		fallthrough;
++	case FI_PIN_FILE:
++		if (set)
++			F2FS_I(inode)->i_flags |= F2FS_NOCOW_FL;
++		else
++			F2FS_I(inode)->i_flags &= ~F2FS_NOCOW_FL;
++		fallthrough;
+ 	case FI_DATA_EXIST:
+ 	case FI_INLINE_DOTS:
+-	case FI_PIN_FILE:
+ 	case FI_COMPRESS_RELEASED:
+ 		f2fs_mark_inode_dirty_sync(inode, true);
+ 	}
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index b857384ccd12..da635a904e69 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1854,6 +1854,18 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+ 	if (IS_NOQUOTA(inode))
+ 		return -EPERM;
+ 
++	if ((iflags ^ masked_flags) & F2FS_NOCOW_FL) {
++		int ret;
++
++		if (!S_ISREG(inode->i_mode))
++			return -EINVAL;
++		if (f2fs_should_update_outplace(inode, NULL))
++			return -EINVAL;
++		ret = f2fs_convert_inline_inode(inode);
++		if (ret)
++			return ret;
++	}
++
+ 	if ((iflags ^ masked_flags) & F2FS_CASEFOLD_FL) {
+ 		if (!f2fs_sb_has_casefold(F2FS_I_SB(inode)))
+ 			return -EOPNOTSUPP;
+@@ -1929,6 +1941,7 @@ static const struct {
+ 	{ F2FS_NOCOMP_FL,	FS_NOCOMP_FL },
+ 	{ F2FS_INDEX_FL,	FS_INDEX_FL },
+ 	{ F2FS_DIRSYNC_FL,	FS_DIRSYNC_FL },
++	{ F2FS_NOCOW_FL,	FS_NOCOW_FL },
+ 	{ F2FS_PROJINHERIT_FL,	FS_PROJINHERIT_FL },
+ 	{ F2FS_CASEFOLD_FL,	FS_CASEFOLD_FL },
+ };
+@@ -1960,7 +1973,8 @@ static const struct {
+ 		FS_NOCOMP_FL |		\
+ 		FS_DIRSYNC_FL |		\
+ 		FS_PROJINHERIT_FL |	\
+-		FS_CASEFOLD_FL)
++		FS_CASEFOLD_FL |	\
++		FS_NOCOW_FL)
+ 
+ /* Convert f2fs on-disk i_flags to FS_IOC_{GET,SET}FLAGS flags */
+ static inline u32 f2fs_iflags_to_fsflags(u32 iflags)
 -- 
 2.32.0
 
