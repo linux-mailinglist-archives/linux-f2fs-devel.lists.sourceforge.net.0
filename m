@@ -2,104 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AB8952748D
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 May 2022 00:53:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C99C3527678
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 15 May 2022 10:57:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nq0dN-0002th-CQ; Sat, 14 May 2022 22:53:13 +0000
+	id 1nqA4D-0004I8-KL; Sun, 15 May 2022 08:57:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <info@gmail.com>) id 1nq0dM-0002tY-Qt
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 May 2022 22:53:13 +0000
+ (envelope-from <chao@kernel.org>) id 1nqA4C-0004I1-0B
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 May 2022 08:57:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Reply-To:Date:From:To:Subject:Content-Description:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Message-ID:Cc:
- Content-ID:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:
- Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BhpxYm+zfGG6ckfFLQ6uRvkCIbQ0hmIU03wQwuTlmQc=; b=iHe9bdalrb31MYcwNNmb8xMWap
- qm4ejlsqkoqacO2fV9f1K6DsjtRd4A4bDpUp65IGmPeduNj3j8Bur6W9M8q2Uaenbb9RAmEujt3b3
- Paj/YXNIfXl9NsMNUxescElX7tmRcN4fB3qiVkS++3o1ndI2ATi+DHwgBEUaK84EpZq0=;
+ bh=hewMJ/5zLYg2Gsx29rzFCEyLMYiP2qf92vFha0f4gQQ=; b=gIWqeINumvIUNgH6XTemNRfsBQ
+ e5rdCl4hNwhF2uLIq87J2Ogn3el3HuHiSQaiHz7IaWkZSYNrMMbI64/tRMRUZvt2Sbq1urqQof+o0
+ rQdODOun3C2SlO9Eh2RBFeiPDtdBLEX7bzs/NfJi4jM1nBGZa4E8tEawyztJenoYg/4I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Reply-To:Date:From:To:Subject:Content-Description:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Message-ID:Cc:
- Content-ID:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:
- Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BhpxYm+zfGG6ckfFLQ6uRvkCIbQ0hmIU03wQwuTlmQc=; b=Xv/vd5xD8r7333xnI5Ab2PX1r+
- AuzS2kHp18FemUFWEHI89Plj/YR3ESFotK+9SEoJlCC6D4tqWXzZQecOS9zouNhnhkI1n1x+eAxTx
- b+NGZ2xtRf3hZA9omNpk4jJzEx4RdTJqplUCegEkegdUlzWf/cXSGVHRxOpkI4kpk/3M=;
-Received: from cloud46308.mywhc.ca ([72.10.162.214])
+ ;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=hewMJ/5zLYg2Gsx29rzFCEyLMYiP2qf92vFha0f4gQQ=; b=gBMl5R8KyleU2NRRuMaMmFT8jA
+ 5KjWbtko+Wv4jrBFN5tPxC2sDYqJmOdQpn83JRmMeRU6l7VtMVl2iTfi00u41U0ZhXzS20NIlXhQR
+ cOkYAdLFFp6pHrBoqYnAKh614q2AeWHiVpBY4duCM5RLtne0ne27ydzZl6yZm0XW5+sQ=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nq0dM-0006vQ-6I
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 14 May 2022 22:53:12 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=webventure.ca; s=default; h=Reply-To:Date:From:To:Subject:
- Content-Description:Content-Transfer-Encoding:MIME-Version:Content-Type:
- Sender:Message-ID:Cc:Content-ID:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BhpxYm+zfGG6ckfFLQ6uRvkCIbQ0hmIU03wQwuTlmQc=; b=oX03nKPrNthDLJI65dEzo5vkP8
- 7isLj830hWZjGO0ob+GFMT7qqcK/l9X0n6at+PXaPM62bTp2+MdrpYGGfxOKBroyW6qSi4DiCWcYZ
- gtJiguYWZkUcaXyCth/25vsVGtPgQfJWGfvApTMzCfe0dt1CBZvFl3So8tnSdA6AMckyKeGkoajMu
- CUZYRmeciCHaGtFIe1a02HQf80Rq4KG1jrcFPR7evvZhJEM+fLCF3VJqKEee4fQ61OTC5RiSJ5lPx
- avdzQJsk2XBoN6Kp4H56nhQUnmL609WVr02lGrAZt6XW+9IddKQRXfU+rN2Eu5Vb7D1h9XhFFVKu1
- qwTRApqQ==;
-Received: from [197.94.69.188] (port=52804 helo=LAPTOP-TU40EMK7.home)
- by cloud46308.mywhc.ca with esmtpsa (TLS1) tls
- TLS_DHE_RSA_WITH_AES_256_CBC_SHA (Exim 4.95)
- (envelope-from <info@gmail.com>) id 1nq0V6-00022G-C8
- for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 14 May 2022 18:44:44 -0400
+ id 1nqA48-0000gU-Tl
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 15 May 2022 08:57:30 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 85F5060EAC;
+ Sun, 15 May 2022 08:57:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89667C385B8;
+ Sun, 15 May 2022 08:57:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1652605042;
+ bh=VxFX7xx56JZzOHMNORrQI6bWg6BbNTRrh7GpU1e75ew=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=g/CZJvOU1p1ZrPXYrVQvy1DW6PuSKfsNt6Hx9SxbNQA3J2ffj1FQqyBsZOnvjHtAc
+ yR9a1B18F8UujVdntyEYxjkx5KlnHFeXp9hcudsx+pqZG7tnFFs29u5o1k7urIEZlI
+ lo4PfqtaJvVvziEDvfugt44I1pd8H9nymDOLW3oJ+ov37LNufRFT94ZDa2mu0/n3aq
+ r3w+bt1E++P01OcXiIjagYV8Z8q879qGmu9NbeOv5Bbnwn2k249Wv55TVUAa3J3H8p
+ WrIqcv7othwhF8lkpO9nqKORo4YDU2nXXnKPSQNGqDcwNOLXV7Ega173ZAXiFXk4Gu
+ 2bGbvqKrUl7gQ==
+Message-ID: <6b316ed0-c5af-0157-b04a-4aea1c0b9143@kernel.org>
+Date: Sun, 15 May 2022 16:57:19 +0800
 MIME-Version: 1.0
-Content-Description: Mail message body
-To: linux-f2fs-devel@lists.sourceforge.net
-From: "Barr. Jerry McCumber" <info@gmail.com>
-Date: Sun, 15 May 2022 06:44:33 +0800
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cloud46308.mywhc.ca
-X-AntiAbuse: Original Domain - lists.sourceforge.net
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - gmail.com
-X-Get-Message-Sender-Via: cloud46308.mywhc.ca: authenticated_id:
- test@webventure.ca
-X-Authenticated-Sender: cloud46308.mywhc.ca: test@webventure.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Spam-Score: 6.1 (++++++)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.0
+Content-Language: en-US
+To: Bagas Sanjaya <bagasdotme@gmail.com>
+References: <20220514080102.2246-1-chao@kernel.org>
+ <Yn+dLtxsy6LwVIBQ@debian.me>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <Yn+dLtxsy6LwVIBQ@debian.me>
+X-Spam-Score: -7.1 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has identified this incoming email as possible spam.  The original
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Jerry D. McCumber, P.C.: Law Firm Decatur, GA. PO Box 178
- Decatur, GA 30031-0178 Attention prospective client Kindly write back if you
- will be interested to be the beneficiary to the late Arthur Mealer . 
- Content analysis details:   (6.1 points, 6.0 required)
+ Content preview:  On 2022/5/14 20:14, Bagas Sanjaya wrote: > On Sat, May 14,
+ 2022 at 04:01:02PM +0800, Chao Yu wrote: >> As Yanming reported in bugzilla:
+ >> >> https://bugzilla.kernel.org/show_bug.cgi?id=215895 >> >> I [...] 
+ Content analysis details:   (-7.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
- digit [jerrymccumber86[at]gmail.com]
- 1.0 FORGED_GMAIL_RCVD      'From' gmail.com does not match 'Received'
- headers
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
- 0.0 DKIM_ADSP_CUSTOM_MED   No valid author signature, adsp_override is
- CUSTOM_MED
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid 0.1 MISSING_MID            Missing Message-Id: header
- 2.5 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
- 1.2 NML_ADSP_CUSTOM_MED    ADSP custom_med hit, and not from a mailing
- list
-X-Headers-End: 1nq0dM-0006vQ-6I
-Subject: [f2fs-dev] Attention prospective client
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -1.6 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nqA48-0000gU-Tl
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to do sanity check for inline
+ inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,28 +106,86 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: jerrymccumber86@gmail.com
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Ming Yan <yanming@tju.edu.cn>,
+ jaegeuk@kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-Message-Id: <E1nq0dN-0002th-CQ@sfs-ml-1.v29.lw.sourceforge.com>
 
-Jerry D. McCumber, P.C.: Law Firm
-Decatur, GA.
-PO Box 178
-Decatur, GA 30031-0178    
+On 2022/5/14 20:14, Bagas Sanjaya wrote:
+> On Sat, May 14, 2022 at 04:01:02PM +0800, Chao Yu wrote:
+>> As Yanming reported in bugzilla:
+>>
+>> https://bugzilla.kernel.org/show_bug.cgi?id=215895
+>>
+>> I have encountered a bug in F2FS file system in kernel v5.17.
+>>
+>> The kernel message is shown below:
+>>
+>> kernel BUG at fs/inode.c:611!
+>> Call Trace:
+>>   evict+0x282/0x4e0
+>>   __dentry_kill+0x2b2/0x4d0
+>>   dput+0x2dd/0x720
+>>   do_renameat2+0x596/0x970
+>>   __x64_sys_rename+0x78/0x90
+>>   do_syscall_64+0x3b/0x90
+>>
+>> The root cause is: fuzzed inode has both inline_data flag and encrypted
+>> flag, so after it was deleted by rename(), during f2fs_evict_inode(),
+>> it will cause inline data conversion due to flags confilction, then
+>> page cache will be polluted and trigger panic in clear_inode().
+>>
+>> This patch tries to fix the issue by do more sanity checks for inline
+>> data inode in sanity_check_inode().
+>>
+>> Cc: stable@vger.kernel.org
+>> Reported-by: Ming Yan <yanming@tju.edu.cn>
+>> Signed-off-by: Chao Yu <chao.yu@oppo.com>
+> 
+> Hi Chao,
+> 
+> I think the patch message can be reworked , like below:
 
- Attention prospective client
+Hi Bagas,
 
- Kindly write back if you will be interested to be the beneficiary to
- the late Arthur Mealer .
+Thanks a lot for your cleanup. :)
 
-Jerry McCumber                  
-Attorney at Jerry D. McCumber
-                    
-  
+> 
+> Yanming reported a kernel bug in Bugzilla kernel, which can be reproduced.
+> The bug message is:
 
-		
+I will keep the link for backtrace.
+
+> 
+> kernel BUG at fs/inode.c:611!
+> Call Trace:
+>   evict+0x282/0x4e0
+>   __dentry_kill+0x2b2/0x4d0
+>   dput+0x2dd/0x720
+>   do_renameat2+0x596/0x970
+>   __x64_sys_rename+0x78/0x90
+>   do_syscall_64+0x3b/0x90
+> 
+> The bug is due to fuzzed inode has both inline_data and encrypted flags.
+> During f2fs_evict_inode(), after the inode was deleted by rename(), it
+
+I prefer "during f2fs_evict_inode(), as inode was deleted by rename()"
+
+> will cause inline data conversion due to conflicting flags. The page
+> cache will be polluted and the panic will be triggered in clear_inode().
+> 
+> Try fixing the bug by doing more sanity checks for inline data inode in
+> sanity_check_inode().
+
+Let me revise in v3.
+
+Thanks,
+
+> 
+> Thanks.
+> 
 
 
 _______________________________________________
