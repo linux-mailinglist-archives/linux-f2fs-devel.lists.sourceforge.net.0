@@ -2,100 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90A5A52841B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 May 2022 14:23:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C4E152892F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 May 2022 17:50:33 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nqZlD-0004Lh-Nn; Mon, 16 May 2022 12:23:40 +0000
+	id 1nqczK-0000bk-Ag; Mon, 16 May 2022 15:50:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1nqZlC-0004LX-Jt
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 May 2022 12:23:39 +0000
+ (envelope-from <krisman@collabora.com>) id 1nqczJ-0000bY-CD
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 May 2022 15:50:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
+ Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=E5JIs1rQrkzwYQPqpiAXmMjH1xhhoDWJtDb1z7PZL4g=; b=XD0MNfAxTlCABX1PxTBF32pJk7
- gVowhideBkjLrojLlp14KaHPnlgJDDvT/NFep0QGgvO698XmL5Lo0T/mTRpXM8XudsxiBsQjT74C9
- QK49ygdoabL6x+lbSEC10rffBVogoRoq2U32q1l1V0/MquCiPHTevahiIHDtGlXa4bfo=;
+ bh=55byWR0gAOXo/FAcUJhhoGa8a1ld89kqJpm97aZow7M=; b=g52WeHRPtZg6BYV96OKCG8mTbl
+ MYyaH6Fb7QoQ5N472sDurTG2PjaRR01qWgcM+U3SGeeDrACtF9owaCaM+Eu8VwUWW09+XUH/sXCdr
+ 13XikC1WhGhZOHkAp6PAHD6haiqeZAyCNzXq1y1aknmn0MYn/XacKk6L23tQPVPUVmr4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=E5JIs1rQrkzwYQPqpiAXmMjH1xhhoDWJtDb1z7PZL4g=; b=MDQoD8a3RUNbqm1f9hLqbNFzcn
- 3c8/l12m9DPLW+Es8276pYIS34z7CGKUaSvDcqGtMKc6YZxC8SzW57vH61DcRF5VIlSZUzrDlWuMc
- YZIPkgJVD1lhQXBZ/JL/OtdvW1LirlvFkTvmU16Bdi3cXiH1+yWwsalPKubhIh2i0BTk=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=55byWR0gAOXo/FAcUJhhoGa8a1ld89kqJpm97aZow7M=; b=NBNQLThKchLf7vD5dNop4JcdmX
+ mHRJTv9Yfw9Xf0DgqbD7QllDoCBWY0KEUnLw37koVcaJblNduiNKZoN44pEanzBktTwX5bUrqpgjY
+ CzW+tDS2QgMFpbTjaNwfZXS/CH12ppwVVVIDAmA+2S5qUYbD3x1EkjmWSeWWZ256OjKI=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nqZlB-0002qG-H3
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 May 2022 12:23:38 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 58F256119D
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 16 May 2022 12:23:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id B982CC385AA
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 16 May 2022 12:23:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652703806;
- bh=h/CoXDOR4f740ERPxj/QRMumOdP8c2wCHHlKt0RwHBs=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=Iy85nR7mOodT5rIVCKgNNIPgHvBwElzuuOdNs0BfZqMIJicwFgwA3nmnoa4WSQOkS
- 5EGc8BKKwftNHniTDeWaLVQM/3BLoGa8K9hMS0nUVbzSBSFE8ZlR0kAFLLkGRV5blw
- vzCurN8hRRssLlDVT/D8Qq/Z4z1II4UNfRq8hURFoICoCA0PFjtihzZ2gq/Z4gAXWy
- 4Od6axSALFbR2QBz+aYbFy2JqGfZ9+Su1YiXwTkzhUfTkg0kWtSg2fOhRfqo5j8U2Y
- 2c95GjBHjCd1hv2G3ao6xR1lTt6/O5+qiAonlmY+Dl/xQGlp/9DbGF5yeX9v7KKJmu
- I3N9j88oCMVHg==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 9B6D8C05FD0; Mon, 16 May 2022 12:23:26 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 16 May 2022 12:23:26 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: cc
-Message-ID: <bug-215984-202145-GmqtdQ75iE@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-215984-202145@https.bugzilla.kernel.org/>
-References: <bug-215984-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1nqczH-00HPZb-Hh
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 16 May 2022 15:50:25 +0000
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: krisman) with ESMTPSA id 25D6B1F431E3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1652716215;
+ bh=LKlIdLOO4j50+tfjv98qyF6r1YItkJl+IUV5p+TB/6k=;
+ h=From:To:Cc:Subject:References:Date:In-Reply-To:From;
+ b=B4G8ttqT8x2WWy6RVT7vFYvQ9NokIrgIiydUuOJofiVW5bFY4TYb4QLMF4G47aEUl
+ 2BT1h8XhlquGJbFlOjQmD3F9eokTq/BWT4LDplYoKAVxOpdbdScJiTYgsU3AoSwI2B
+ J2Byk1M1UDnr2ai4E6eSgGUMK9Pq4fxsdx84OZIlVDznfFKqYlIUfat+V1q/IejA97
+ KZ9fj1Anjx8JPyozvJgwPNIXA6IVeAp52sMLokMLrbZZB5Thmb0DUZkAkOD9S2pFIC
+ bkD3NfN8r0Ff+1JfAmlW4WMSKZIfTpZB5BbZmUB8svVWbsJd32DkV48po2MQMZnmza
+ W2Q1OZzMr4byw==
+From: Gabriel Krisman Bertazi <krisman@collabora.com>
+To: Eric Biggers <ebiggers@kernel.org>
+Organization: Collabora
+References: <20220514175929.44439-1-ebiggers@kernel.org>
+Date: Mon, 16 May 2022 11:50:10 -0400
+In-Reply-To: <20220514175929.44439-1-ebiggers@kernel.org> (Eric Biggers's
+ message of "Sat, 14 May 2022 10:59:29 -0700")
+Message-ID: <87r14txyrx.fsf@collabora.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
 MIME-Version: 1.0
-X-Spam-Score: -5.5 (-----)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=215984 Chao Yu
- (chao@kernel.org) changed: What |Removed |Added CC| |chao@kernel.org 
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content preview: Eric Biggers <ebiggers@kernel.org> writes: > From: Eric
+ Biggers
+ <ebiggers@google.com> > > Tryng to rename a directory that has all following
+ properties fails with > EINVAL and triggers the
+ 'WARN_ON_ONCE(!fscrypt_has_encryption_key(dir))' > in [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -103,12 +83,12 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nqZlB-0002qG-H3
-Subject: [f2fs-dev] [Bug 215984] Is there a f2fs_sload tool used on windows?
+ 0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
+ lines
+X-Headers-End: 1nqczH-00HPZb-Hh
+Subject: Re: [f2fs-dev] [PATCH] f2fs: don't use casefolded comparison for
+ "." and ".."
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,29 +100,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-fscrypt@vger.kernel.org, stable@vger.kernel.org,
+ Daniel Rosenberg <drosen@google.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=215984
+Eric Biggers <ebiggers@kernel.org> writes:
 
-Chao Yu (chao@kernel.org) changed:
+> From: Eric Biggers <ebiggers@google.com>
+>
+> Tryng to rename a directory that has all following properties fails with
+> EINVAL and triggers the 'WARN_ON_ONCE(!fscrypt_has_encryption_key(dir))'
+> in f2fs_match_ci_name():
+>
+>     - The directory is casefolded
+>     - The directory is encrypted
+>     - The directory's encryption key is not yet set up
+>     - The parent directory is *not* encrypted
+>
+> The problem is incorrect handling of the lookup of ".." to get the
+> parent reference to update.  fscrypt_setup_filename() treats ".." (and
+> ".") specially, as it's never encrypted.  It's passed through as-is, and
+> setting up the directory's key is not attempted.  As the name isn't a
+> no-key name, f2fs treats it as a "normal" name and attempts a casefolded
+> comparison.  That breaks the assumption of the WARN_ON_ONCE() in
+> f2fs_match_ci_name() which assumes that for encrypted directories,
+> casefolded comparisons only happen when the directory's key is set up.
+>
+> We could just remove this WARN_ON_ONCE().  However, since casefolding is
+> always a no-op on "." and ".." anyway, let's instead just not casefold
+> these names.  This results in the standard bytewise comparison.
+>
+> Fixes: 7ad08a58bf67 ("f2fs: Handle casefolding with Encryption")
+> Cc: <stable@vger.kernel.org> # v5.11+
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  fs/f2fs/dir.c  |  3 ++-
+>  fs/f2fs/f2fs.h | 10 +++++-----
+>  fs/f2fs/hash.c | 11 ++++++-----
+>  3 files changed, 13 insertions(+), 11 deletions(-)
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-                 CC|                            |chao@kernel.org
+Hi Eric,
 
---- Comment #1 from Chao Yu (chao@kernel.org) ---
-bugzilla is the place people reports bug against upstream linux kernels,
-I don't think this thread is openned in the right place.
+This looks good to me:
 
-BTW, I guess there is no such tool yet...
+Reviewed-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+
+Thanks,
 
 -- 
-You may reply to this email to add a comment.
+Gabriel Krisman Bertazi
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
