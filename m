@@ -2,67 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 723875297CD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 May 2022 05:19:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBFA45297EC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 May 2022 05:24:32 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nqnkY-0006EF-C9; Tue, 17 May 2022 03:19:53 +0000
+	id 1nqnoy-0006ND-0H; Tue, 17 May 2022 03:24:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nqnkW-0006E9-OP
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 May 2022 03:19:51 +0000
+ (envelope-from <chao@kernel.org>) id 1nqnox-0006N7-Bm
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 May 2022 03:24:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sIKGL6+vbh9U8GooCW/XyHzEXwOFkljX/I0YAS2CnIY=; b=iAuusxzvwz3pr8xfnvrU7tLp6U
- S9Q9Dq5pWhL6neI9/FRoXqHQRqR/BqdSp2k+pkA1wPjE/gccgGm3T9fVZTf88dup6o2ZuY2XVLDf5
- r/7wsq+zVnlLica6WwMEBtfbj60Lw0wV3wn/ce8Exx1Cqsu8hX1Tlx2SSZr3EFoK7d/E=;
+ bh=5oMl00gX5xjQyVkBkzRskjBuRT+a13k4RygNqSTrga8=; b=nAyx46dsLB/gyOhVPGr8s6I6fC
+ ycx1aSOcvA0OHiq2zzPkWiVZun35VhPNyE1R8TW3DDnLs3lWYSM5W71/maR0S9hZ7+to20vdy1jzM
+ 6ZB4jbIa2ioZGBgbXR+rCDUDSDAEEJamS/nhkiL+WpKieE3eU6djwyJwosYGnwR9reKI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=sIKGL6+vbh9U8GooCW/XyHzEXwOFkljX/I0YAS2CnIY=; b=m
- SyZv+Glzu58hxRr5DqJ6xo3/GZz+ozcauoYuUgNaSblvGDqxt+9RGLpM/UEHJZbRcfobHNJK9ubsc
- nYqRWoxQWZ5rI23HGoDpfgrKebutFPwVHL55flf9Y2TnIRrZIxQ2+d8zy6/YD+mE4BWK8GHcUvoLZ
- InsautTB35LQGVlo=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ List-Owner:List-Archive; bh=5oMl00gX5xjQyVkBkzRskjBuRT+a13k4RygNqSTrga8=; b=B
+ zrtAY8MhY1aBtnbuwa9i4bYYLSxOQqHZofXalINjnysWO8gizV9alCjN7YDNGSedBzifqlb/XDkzE
+ lkeUANad8WCzietPxzwpa7rR9yNOJjvBDJrJVb87bL8Uxy2tKXii0oK3pI9CXz4oSfrxixUD5EJTW
+ 1dR/oUopZpF4FxNw=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nqnkU-0001Vn-Ur
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 May 2022 03:19:51 +0000
+ id 1nqnov-0002TQ-96
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 May 2022 03:24:26 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id BFC5D61407;
- Tue, 17 May 2022 03:19:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99DBEC385B8;
- Tue, 17 May 2022 03:19:38 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 5D058B816CA;
+ Tue, 17 May 2022 03:24:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 703BDC385AA;
+ Tue, 17 May 2022 03:24:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652757580;
- bh=VIHjd9WHoqUG2QiApVkWuQIrOpyDysFKEQQlq03kRIA=;
+ s=k20201202; t=1652757856;
+ bh=lIb4LTEmMJ+9Fi6aXyTcRQ4qMsUp8+2ufFcwO9rQDyA=;
  h=From:To:Cc:Subject:Date:From;
- b=PlbuoWjU155FW8X2ZQgGyHZzC3b9YI1xXr++vJ6YOQoX7P2eukYHMyxzHlIhGdXQI
- vK8b0mr1+FU1hjrVEgYIQhnVbZVHiy8rIxHrzUpgZlahNWOT4Y24nGGfu0JGVaw2QB
- +PRtLa4qP03H6E00hioAJ/Mh791AwSk46sN3hoUmq3BPmnFfeWg3WQ0pQOT8/E2o4V
- qjiGHyLvFnIg7Yp/9aPApV52DsInQzrJGTVI8Zp7K0o12vUrqnDmc3gQUuBMWsX7Se
- 2a3SXJx5ghRfwSk+54/71deNVs0bX/f+/b7PNUhc/iJRN3JoQxSeaIyvkbU4glhh5d
- PdLKxJCearSDw==
+ b=XGz3qNfM7GbIeXPDGPabGDbG/5klt0LpGzaUcOW+uGcFBlEcXIkSyxMpzUHMAgURA
+ qJAbmQKwA7pYkpjmudLZ3EDx2L8TYTXfFRYBRN8qgzp0mBAvwHHYibo5LgXfrJI3W5
+ Kx9cQgDIa+bE3UAZlNz5YDoJONmay+Td0/SAl1vrmkpUVuww80ljj8Sysn40NCZ0pg
+ zbf3m53xUU1RlkFt8ZSG471F97BwkBMYJCj0CvlVn0YIjpuyD8qtPJxZzroKAzCYvj
+ 10ysxU/8xyq1E66yYRI5AUxT3sKSZu8dweEiKwAyNZTN5kOIXuGx1zmw/RzpLiUKME
+ MEfiIO0C++3mg==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Tue, 17 May 2022 11:19:34 +0800
-Message-Id: <20220517031934.3563135-1-chao@kernel.org>
+Date: Tue, 17 May 2022 11:24:10 +0800
+Message-Id: <20220517032410.3564033-1-chao@kernel.org>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -73,23 +73,24 @@ X-Spam-Report: Spam detection software,
  nocow and pinfile semantics: - NOCoW flag can only be set on regular file.
  - NOCoW file will only trigger IPU at common writeback/flush. - NOCow file
  will do OP [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nqnkU-0001Vn-Ur
-Subject: [f2fs-dev] [PATCH v3] f2fs: separate NOCoW and pinfile semantics
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nqnov-0002TQ-96
+Subject: [f2fs-dev] [PATCH v4] f2fs: separate NOCoW and pinfile semantics
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -142,27 +143,27 @@ flag set.
 
 Signed-off-by: Chao Yu <chao.yu@oppo.com>
 ---
-v3:
-- support nocow flag for directory.
- fs/f2fs/data.c |  3 ++-
+v4:
+- allow IPU only for NoCowed regular inode.
+ fs/f2fs/data.c |  3 +++
  fs/f2fs/f2fs.h | 13 +++++++++++--
  fs/f2fs/file.c | 18 +++++++++++++++++-
- 3 files changed, 30 insertions(+), 4 deletions(-)
+ 3 files changed, 31 insertions(+), 3 deletions(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 54a7a8ad994d..c8eab78f7d89 100644
+index 54a7a8ad994d..42d95ac6b508 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -2495,7 +2495,8 @@ bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio)
- 	if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
- 		return false;
- 
--	if (f2fs_is_pinned_file(inode))
-+	if (f2fs_is_pinned_file(inode) ||
-+			F2FS_I(inode)->i_flags & F2FS_NOCOW_FL)
+@@ -2498,6 +2498,9 @@ bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio)
+ 	if (f2fs_is_pinned_file(inode))
  		return true;
  
++	if (S_ISREG(inode->i_mode) && F2FS_I(inode)->i_flags & F2FS_NOCOW_FL)
++		return true;
++
  	/* if this is cold file, we should overwrite to avoid fragmentation */
+ 	if (file_is_cold(inode))
+ 		return true;
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
 index 492af5b96de1..5c67736000a7 100644
 --- a/fs/f2fs/f2fs.h
