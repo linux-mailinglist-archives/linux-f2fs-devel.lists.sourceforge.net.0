@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D694752AA70
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 May 2022 20:18:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7F0052AC11
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 17 May 2022 21:38:32 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nr1mF-0004dZ-LW; Tue, 17 May 2022 18:18:36 +0000
+	id 1nr31P-0001Dl-M3; Tue, 17 May 2022 19:38:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nr1mD-0004dT-TU
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 May 2022 18:18:34 +0000
+ (envelope-from <tytso@mit.edu>) id 1nr31N-0001De-Tr
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 May 2022 19:38:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ms7wK3YdSmeqqSbo5Mk97msT9LRUFNQy7KldKFIWyIE=; b=cf3zM6rN+YCZ3hDTAWG481m4A6
- AtisYhSlGGYO8AXH8ryoz8djwwaOEyvwvtJRDQm2soyxG+c9w7pPKfpcP9/FLmahwsyV1eUsDz+8X
- Ss3XIjWpBd4Z8FS43YVtzH8wnSsOfUbBdrgQ6FTsQgaTDw4c4kdeRB0RvrDpvUW34ZAU=;
+ bh=gjF3UmMC4ZyoJnTzFcqn/F3r7v+E//TAc0+qhfAKPdA=; b=P9VYX5CI14gzFXswJ5SdjsZWsK
+ 7nOhJVtGiRf6nT+sQvfqbQrmRk1Y04bhzP88FnIKgjTrWnR4T1I95ZmHZr2cveWBusVFrYSKQ06e+
+ 0pF5VCwzT3w5K6YM1rBdjmOQQV5hfjtFT868P6LecyUSQoqCThX5lsZB//KmmbaQ+KB0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,68 +29,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ms7wK3YdSmeqqSbo5Mk97msT9LRUFNQy7KldKFIWyIE=; b=Xl2a3LdpuYjzj0CbAAwtWsWQKI
- VmHvumvbVdlUjC8dtSW5UN3+V3gEIssVnc+mKj9Bm5jdbbRgE9+yiDEwRhjWz3sE1Ed/ZApErOdWS
- BwrcvHQcq+oOQ9s9jVfca24Tnc1R5gZn0YjNz7vxf1EGYzAT25UECqcDN61lD1DUdZdU=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=gjF3UmMC4ZyoJnTzFcqn/F3r7v+E//TAc0+qhfAKPdA=; b=Sk/GDTuCiLZhxEz8HCXpn8dptl
+ t47gesVk0MSL80ArpQjBe4V9os2RXtTD3XpVZEuhz5AO42lp2xeckSPVFt0/PGJF6Tp9rPeVF8BO2
+ cJq5VBDWZvgJvsv1yONUIxc2aRGq6cObP/FazJVOpxUeRT6jpWoHulIU1WLmzV4PR0WI=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nr1mD-004dhd-A0
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 May 2022 18:18:33 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id EA12A61551;
- Tue, 17 May 2022 18:18:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 293B7C385B8;
- Tue, 17 May 2022 18:18:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652811507;
- bh=2LCmXWONhKrPy7V/HFUdgxZKavcQYloErhSK6XQD1tI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=okiCUjDmTLzdZyWXfepJpPbdx1gK30/Wqd0sXKdy6X/Naod/JEIiHeCGOBbjFrYj+
- rHbGIXINnXvx3NrlrP1LntVd2nEQZJJT3ivOs6NnPOmt7eSX9mfARpztaHWBN7pJSA
- LxYGDl3HSnAjiNZTZWlyivpAxw4W8jarJC1mFpvMJYEYmcMrk2KzUFHG8eNIDab32j
- bfTTchj1nBXJxXtaL7H6oV/kL+e31N18OP4nb22uj26EUjgVX4frSybpvStSl9VUw1
- PrSd3ULmI+V+M83nEXjta4iZZeql8zQue2Uze4r87DZzNtxUOCurCcRd0Kt31cmPsH
- d30YIf/xo/9dQ==
-Date: Tue, 17 May 2022 11:18:25 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <YoPm8UI61eKtKPB8@google.com>
-References: <20220517033120.3564912-1-chao@kernel.org>
+ id 1nr31I-004ilW-6U
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 17 May 2022 19:38:18 +0000
+Received: from cwcc.thunk.org (pool-108-7-220-252.bstnma.fios.verizon.net
+ [108.7.220.252]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 24HJbmKM032272
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 17 May 2022 15:37:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
+ t=1652816271; bh=gjF3UmMC4ZyoJnTzFcqn/F3r7v+E//TAc0+qhfAKPdA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=YWZ6i/3IdBGwr4SyraXxcIhbLRAbOxr0dvLm3I5n7e241sNy6Ch6v2KncDvUDSpbR
+ Lmro19q8OiJ7hQ1ll443cFRi1fn/I/p+bBFI890xz/sexmaPab50F9RXxg64+H8J47
+ uS3Zr0VojaZnDQOW8Whwh64YGpaxbrgNZnTzb+qzbu0BQ9DUb03W9832yvasiOZCzD
+ M6fEzqU1r6+viwSH+VTMnMShnFWGl7Ms9Z/CsxocpvZ2L3HWgmRMSzk0MLXa+JoqXf
+ +QiW2Mmw4aa5SomGy3ojp3XS90hFpxQlHepDewrXiflqfjJZB8/hY46Ath5vzgbNTr
+ C07Yz1RX0YpIQ==
+Received: by cwcc.thunk.org (Postfix, from userid 15806)
+ id 651DE15C3EC0; Tue, 17 May 2022 15:37:48 -0400 (EDT)
+Date: Tue, 17 May 2022 15:37:48 -0400
+From: "Theodore Ts'o" <tytso@mit.edu>
+To: Gabriel Krisman Bertazi <krisman@collabora.com>
+Message-ID: <YoP5jH5axe9ltX2Y@mit.edu>
+References: <20220511193146.27526-1-krisman@collabora.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220517033120.3564912-1-chao@kernel.org>
-X-Spam-Score: -5.3 (-----)
+In-Reply-To: <20220511193146.27526-1-krisman@collabora.com>
+X-Spam-Score: -2.1 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 05/17, Chao Yu wrote: > Yanming reported a kernel bug in
- Bugzilla kernel [1], which can be > reproduced. The bug message is: > > The
- kernel message is shown below: > > kernel BUG at fs/inode.c:611! [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  On Wed, May 11, 2022 at 03:31:36PM -0400, Gabriel Krisman
+ Bertazi wrote: > The case-insensitive implementations in f2fs and ext4 have
+ quite a bit > of duplicated code. This series simplifies the ext4 [...] 
+ Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [18.9.28.11 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nr1mD-004dhd-A0
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: fix to do sanity check for inline
- inode
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ 0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
+X-Headers-End: 1nr31I-004ilW-6U
+Subject: Re: [f2fs-dev] [PATCH v4 00/10] Clean up the case-insensitive
+ lookup path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,131 +96,35 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Ming Yan <yanming@tju.edu.cn>, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: kernel@collabora.com, linux-f2fs-devel@lists.sourceforge.net,
+ ebiggers@kernel.org, adilger.kernel@dilger.ca, jaegeuk@kernel.org,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/17, Chao Yu wrote:
-> Yanming reported a kernel bug in Bugzilla kernel [1], which can be
-> reproduced. The bug message is:
+On Wed, May 11, 2022 at 03:31:36PM -0400, Gabriel Krisman Bertazi wrote:
+> The case-insensitive implementations in f2fs and ext4 have quite a bit
+> of duplicated code.  This series simplifies the ext4 version, with the
+> goal of extracting ext4_ci_compare into a helper library that can be
+> used by both filesystems.  It also reduces the clutter from many
+> codeguards for CONFIG_UNICODE; as requested by Linus, they are part of
+> the codeflow now.
 > 
-> The kernel message is shown below:
-> 
-> kernel BUG at fs/inode.c:611!
-> Call Trace:
->  evict+0x282/0x4e0
->  __dentry_kill+0x2b2/0x4d0
->  dput+0x2dd/0x720
->  do_renameat2+0x596/0x970
->  __x64_sys_rename+0x78/0x90
->  do_syscall_64+0x3b/0x90
-> 
-> [1] https://bugzilla.kernel.org/show_bug.cgi?id=215895
-> 
-> The bug is due to fuzzed inode has both inline_data and encrypted flags.
-> During f2fs_evict_inode(), as the inode was deleted by rename(), it
-> will cause inline data conversion due to conflicting flags. The page
-> cache will be polluted and the panic will be triggered in clear_inode().
-> 
-> Try fixing the bug by doing more sanity checks for inline data inode in
-> sanity_check_inode().
-> 
-> Cc: stable@vger.kernel.org
-> Reported-by: Ming Yan <yanming@tju.edu.cn>
-> Signed-off-by: Chao Yu <chao.yu@oppo.com>
-> ---
-> v4:
-> - introduce and use f2fs_post_read_required_ondisk() only for
+> While there, I noticed we can leverage the utf8 functions to detect
+> encoded names that are corrupted in the filesystem. Therefore, it also
+> adds an ext4 error on that scenario, to mark the filesystem as
+> corrupted.
 
-Can we do like this?
+Gabriel, are you planning on doing another version of this patch series?
 
----
- fs/f2fs/f2fs.h   |  1 +
- fs/f2fs/inline.c | 30 +++++++++++++++++++++++++-----
- fs/f2fs/inode.c  |  3 +--
- 3 files changed, 27 insertions(+), 7 deletions(-)
+It looks like the first two patches for ext4 are not controversial, so
+I could take those, while some of the other patches have questions
+which Eric has raised.
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index e9e32bc814df..000468bf06ca 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4019,6 +4019,7 @@ extern struct kmem_cache *f2fs_inode_entry_slab;
-  * inline.c
-  */
- bool f2fs_may_inline_data(struct inode *inode);
-+bool f2fs_sanity_check_inline_data(struct inode *inode);
- bool f2fs_may_inline_dentry(struct inode *inode);
- void f2fs_do_read_inline_data(struct page *page, struct page *ipage);
- void f2fs_truncate_inline_inode(struct inode *inode,
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index a578bf83b803..daf8c0e0a6b6 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -14,21 +14,41 @@
- #include "node.h"
- #include <trace/events/f2fs.h>
- 
--bool f2fs_may_inline_data(struct inode *inode)
-+static bool support_inline_data(struct inode *inode)
- {
- 	if (f2fs_is_atomic_file(inode))
- 		return false;
--
- 	if (!S_ISREG(inode->i_mode) && !S_ISLNK(inode->i_mode))
- 		return false;
--
- 	if (i_size_read(inode) > MAX_INLINE_DATA(inode))
- 		return false;
-+	return true;
-+}
- 
--	if (f2fs_post_read_required(inode))
-+bool f2fs_may_inline_data(struct inode *inode)
-+{
-+	if (!support_inline_data(inode))
- 		return false;
- 
--	return true;
-+	return !(f2fs_encrypted_file(inode) || fsverity_active(inode) ||
-+		f2fs_compressed_file(inode));
-+}
-+
-+bool f2fs_sanity_check_inline_data(struct inode *inode)
-+{
-+	if (!f2fs_has_inline_data(inode))
-+		return false;
-+
-+	if (!support_inline_data(inode))
-+		return true;
-+
-+	/*
-+	 * used by sanity_check_inode(), when disk layout fields has not
-+	 * been synchronized to inmem fields.
-+	 */
-+	return (S_ISREG(inode->i_mode) &&
-+		(file_is_encrypt(inode) || file_is_verity(inode) ||
-+		(F2FS_I(inode)->i_flags & F2FS_COMPR_FL)));
- }
- 
- bool f2fs_may_inline_dentry(struct inode *inode)
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 2fce8fa0dac8..938961a9084e 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -276,8 +276,7 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 		}
- 	}
- 
--	if (f2fs_has_inline_data(inode) &&
--			(!S_ISREG(inode->i_mode) && !S_ISLNK(inode->i_mode))) {
-+	if (f2fs_sanity_check_inline_data(inode)) {
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: inode (ino=%lx, mode=%u) should not have inline_data, run fsck to fix",
- 			  __func__, inode->i_ino, inode->i_mode);
--- 
-2.36.0.550.gb090851708-goog
+Thanks,
+
+						- Ted
 
 
 
