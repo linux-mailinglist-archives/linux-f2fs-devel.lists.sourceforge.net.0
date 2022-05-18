@@ -2,66 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1087D52C1AC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 May 2022 19:56:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BAAA52C295
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 May 2022 20:50:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nrNty-0008A1-VC; Wed, 18 May 2022 17:56:02 +0000
+	id 1nrOkH-0004Z2-Hm; Wed, 18 May 2022 18:50:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nrNty-00089n-42
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 17:56:01 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1nrOkH-0004Yv-2w
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 18:50:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UVJXAKA7VBhK+EcjKRR7FWyndn69CCDS4Mjg0hgrlVc=; b=YFSBR53qy8dpSjgKdzWlVpBJ0e
- +6bScauGmqvqJd1zzI/UzGzz+DrBWQWKsH9zgxQJf2m6R//J5X4ycibFiAo+eMf4o4Gdk6smGWvP/
- aR81OhJJFsjA7/jXL+ti1DVt1zKtilv/pLM5Ml/1NypnYbdjL/FKjjkQU370xyDydaEQ=;
+ bh=ZNmX6nNHzUV65tOQmC0MnBGl2bsZ85bjRjMmjVXuCic=; b=Y2LWLJNgz0jPCMP1rRo44uuX2J
+ ZulKrLqGUYPgAw6TyJkOt7LfuVzFyplAILAZdvWL8gWv34bKiSN8wA145Td8UlztnNNcoprxB8xbp
+ QNBBJX9LiX6VrEpUzzYFZ7hYOIXU2RYq7XS6P0f0hf2rfrq3Y1Id/nc3xrvrS9JFsiIA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=UVJXAKA7VBhK+EcjKRR7FWyndn69CCDS4Mjg0hgrlVc=; b=C
- TQL3Etr9TFctwqjapc4Pe++EY0EzcOhvii25NUafgiA8ijs8wuw8t3QTE04nHwvOo0oZvOKPYGa12
- dWTuQtZec5aF50eR2tR6FYvhbwf+lGT/y7iedn4soIJvZTNYy260yTS1OIjQkCCuwKPzDaDfdtlIN
- OftPTWV+vdVY9G6c=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ZNmX6nNHzUV65tOQmC0MnBGl2bsZ85bjRjMmjVXuCic=; b=JP3Ic1z66lZJuWwJs7NB5zLxQ/
+ DpoTpasyBgPJv/U3f6wn1yHEfuR8AirroDqZ9TXfopzbAvikk3Czku9HFV4z8qOKlm4WTSaROx8sL
+ 9vAxaBoOVNvX5o2CEhMQNoB1svaY79bNN5+aZjYbZfMlDI9EM3d4ZArEmb/TzDe70DSw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nrNtw-007DZ5-CT
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 17:56:00 +0000
+ id 1nrOkC-007Idf-1I
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 18:50:05 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 361D261825
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 18 May 2022 17:55:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AB88C385A5;
- Wed, 18 May 2022 17:55:49 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id A74C9618B9;
+ Wed, 18 May 2022 18:49:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6754C385A5;
+ Wed, 18 May 2022 18:49:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652896549;
- bh=HBYXEZNCYGiDeETVCOvO+Gk69oq/4MZUE9rOXOS97fk=;
- h=From:To:Cc:Subject:Date:From;
- b=ZqmcwOBnYweBt/zdVLG+N3QXD/Fj4An0JfumB8lIO7aj4FlQyywbVfZrAngMtHLsH
- 4nI50PPFXnxPGqmcKBYOJ7aM9nUuYSmAh4Arq3cq+JzNOJ0qxf7oJWKS9v6d7fcRm3
- WzB/Pqy6AmNOKUUMigcWrh5wGehwNKzF7o3+XD+jGswLhWbOcJXby/HIGybirIHdtQ
- 5Bvu+QsFWqCZuuHXmOab137O1yJwXLY+PhJCwrsUXeoQ0WlXjwewdNYesXbfLnuEVN
- yKn8/969Md7M3Ew45hAfKvZXkgiod+9DofJ9ANyHVPjhpjoJmrtTjkb3zhuffxfVZr
- qq3ywZcGNKHoQ==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 18 May 2022 10:55:47 -0700
-Message-Id: <20220518175547.3284875-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.36.1.124.g0e6072fb45-goog
+ s=k20201202; t=1652899794;
+ bh=+Apu+Nel2cEDwc+hc9Dn71n7RNyqrWqJjXXdOwbxaDQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=H6ExxwSk+WU0hzWKNiP6k4MURxiYIRBOwkNNWsvVn/XELTkLBZBQTY0L6ojiC8538
+ Nu68TmKdYlI6sW8Cbqa1wTsBu26wHnUIDiHEmpoOI/mwQkyPIG4rmBP+MCZ5BT38oG
+ 6SO+z/6VCtLV+pY+POMWSN/wYgDN4HTNwKu0bpYYGgE6iOBPPjNurfGEvTyhossmTW
+ cE/ISHD6/1+JC+Izp+9PNhS6yRZ+YqCVn3oXvp+bUqHrBx5a+h7TZWDMPdool26Vq7
+ b90/I5bpponsYE8ALi52lgsoArwQgaiW+pbekAqb07EGocvR/tE0RIdMvnGIs8mIU+
+ gVXK26GpYsCDA==
+Date: Wed, 18 May 2022 11:49:52 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Gabriel Krisman Bertazi <krisman@collabora.com>
+Message-ID: <YoU/0I1CzfDqY/yU@sol.localdomain>
+References: <20220518172320.333617-1-krisman@collabora.com>
+ <20220518172320.333617-2-krisman@collabora.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20220518172320.333617-2-krisman@collabora.com>
 X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -69,14 +70,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Let's decompress data under the same context to avoid
- workqueue
- delay. Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> --- fs/f2fs/data.c
- | 4 +++- 1 file changed, 3 insertions(+),
- 1 deletion(-) diff --git a/fs/f2fs/data.c
- b/fs/f2fs/data.c index 54a7a8ad994d..37aa7ac5d463 100644 --- a/fs/f2fs/data.c
- +++ b/fs/f2fs/data.c @@ -285, 10 +285,
- 12 @@ static void f2fs_read_end_io(struct bio *bio) retur [...] 
+ Content preview:  On Wed, May 18, 2022 at 01:23:13PM -0400, Gabriel Krisman
+ Bertazi wrote: > Keeping it as qstr avoids the unnecessary conversion in
+ ext4_match
+ > > Signed-off-by: Gabriel Krisman Bertazi <krisman@collab [...] 
  Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,8 +89,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nrNtw-007DZ5-CT
-Subject: [f2fs-dev] [PATCH] f2fs: decompress data without workqueue
+X-Headers-End: 1nrOkC-007Idf-1I
+Subject: Re: [f2fs-dev] [PATCH v5 1/8] ext4: Simplify the handling of cached
+ insensitive names
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,39 +103,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: linux-ext4@vger.kernel.org, tytso@mit.edu,
+ linux-f2fs-devel@lists.sourceforge.net, adilger.kernel@dilger.ca,
+ jaegeuk@kernel.org, kernel@collabora.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Let's decompress data under the same context to avoid workqueue delay.
+On Wed, May 18, 2022 at 01:23:13PM -0400, Gabriel Krisman Bertazi wrote:
+> Keeping it as qstr avoids the unnecessary conversion in ext4_match
+> 
+> Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+> 
+> --
+> Changes since v1:
+>   - Simplify hunk (eric)
+> ---
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/data.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+The changelog needs to be deleted (or moved below the scissors line).
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 54a7a8ad994d..37aa7ac5d463 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -285,10 +285,12 @@ static void f2fs_read_end_io(struct bio *bio)
- 		return;
- 	}
- 
--	if (ctx && (ctx->enabled_steps & (STEP_DECRYPT | STEP_DECOMPRESS))) {
-+	if (ctx && (ctx->enabled_steps & STEP_DECRYPT)) {
- 		INIT_WORK(&ctx->work, f2fs_post_read_work);
- 		queue_work(ctx->sbi->post_read_wq, &ctx->work);
- 	} else {
-+		if (ctx && (ctx->enabled_steps & STEP_DECOMPRESS))
-+			f2fs_handle_step_decompress(ctx);
- 		f2fs_verify_and_finish_bio(bio);
- 	}
- }
--- 
-2.36.1.124.g0e6072fb45-goog
+Otherwise this patch looks good:
 
+Reviewed-by: Eric Biggers <ebiggers@google.com>
+
+- Eric
 
 
 _______________________________________________
