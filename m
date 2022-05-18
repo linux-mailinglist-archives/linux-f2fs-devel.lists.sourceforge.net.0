@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A7A152C81E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 May 2022 01:53:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E90C52C822
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 May 2022 01:54:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nrTUJ-0002hW-RG; Wed, 18 May 2022 23:53:56 +0000
+	id 1nrTUO-0000HT-T0; Wed, 18 May 2022 23:54:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ebiggers@kernel.org>) id 1nrTUC-0002hA-Up
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 23:53:49 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1nrTUA-0000H8-IA
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 23:53:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SFmvAtFulB5qiQ5xr77gctmx3JEVA7FpiJ9xTequTps=; b=Tl60c3TMF5pUw1cXzYMx4Dz589
- TrGnBSqpsNKwcmZ/xrFox9AtYGg+WZZq8QZwREjUKnByOZLu5vqA8DvepxIil8hQHcmhHxrYW9aVO
- PDIhzxZt5/d1O9sEr2Y+RmfM85047AyehBKEcjW+rViQ+fdJdDMERQ4rBS8jOVW2bNu0=;
+ bh=xmvuDnACj1/gRG9TinKXlbFA+kN5PQIxckB3PvzFAig=; b=QSDO0UmUGDbbhNWRLzREo5k+r8
+ tP8wtYVlIEwdRvpCpfnV5GciQV2zejohPqhxIdBL+HOYq21SAC8u/5X101+fWD38zVy/VmpA0Nxxf
+ NDXF60jdV5xl1EhwIN8LFeALio6YJyqaG9YV13T/oSFW2j8oBLX1C9Gq43yIq9eewL60=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,36 +29,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SFmvAtFulB5qiQ5xr77gctmx3JEVA7FpiJ9xTequTps=; b=ayAOcGhS7ECG789L+WZidAJpfI
- dRJBn9UNwD61hO1PXuSr63VbHE51AF4tpXsEf0r1uIGiAIFvuMRi4Wz+xjPv3fbzw/fwY/lUhEq0y
- 8RM8eKXg4Lnye7qP9X75oEJLk+KPp2jwDEFx7GZcQra4UJt1fiLEnE3HnOx1MgSvW3BM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=xmvuDnACj1/gRG9TinKXlbFA+kN5PQIxckB3PvzFAig=; b=B3yUFCWcX3w2Y0BLhG5y/bxSut
+ Cos8qy6CeDcqlUf0nar2QbGlgRoQAtr8QJyGe/vonimbU4+UANTBY17ztiohw8e/Pz16FODvq0T3i
+ UOjhicPC9CtlaGRGIpZ2xkiRcyxuDN5WPhAQZg6c7dl2AInVo13twxM+t16e8gf2Tm/k=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nrTU4-007nP4-UE
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 23:53:49 +0000
+ id 1nrTU4-007nP6-NB
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 23:53:45 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B8CE160BBA
+ by ams.source.kernel.org (Postfix) with ESMTPS id D9D99B8225D
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 18 May 2022 23:53:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5214BC3411A;
  Wed, 18 May 2022 23:53:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7CC5C34115;
- Wed, 18 May 2022 23:53:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1652918010;
- bh=3gpH8eYoou3dU+J4Tjf9kz5T3WXmPsEc2RTNKPm5Bms=;
+ bh=3sZKLjhW06TI7c+BVa7gpFBKd4C/l+SSKwcEXk2rzX4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ItJevShOiBn0DpXopfgMGN2yyeoJx+oDtkgTlFYL/qG4o/UbPIt0O5bKQ/rlo89xp
- eSip0ZbldHm5WXJm7c5r2O7gIxik+6N6WNthX0IbTzbteIQ/xSOgbyO/wcLk1ewuhQ
- q3ABdGQYYRhEhq5xTiqzs5pVcLYMYoG44gNOLV4biTeOMt+cSfBK79kwGHnUWxs1Ag
- nVxo3WfQ+y9xzHEFgm9bMCyLbF5YPbm5mS5IDTHMbanuAzAnoLnEiPTtNZgegxxzfI
- F+FhYwTu/AbjmZGV62hDe9n+YwzqTADmozb20jDWR3VFyvFP7b2HLUDC+b3Out6Ldq
- pMYET0MKTNtbQ==
+ b=j+97VEJ8HtA4dSe2xlZDFCMyTr0v0o1esE+ZYr1Pp/3lSdTk/ZbgbKv+4J7u1hl6x
+ 5QrX+wl3wxxdLquQmGPHKlZTFY7nDWvGKCXCly+s2EGc4OKye9LZYP3Lqac/SFXB01
+ j+Ajgae21bh8oVFdB/UeGDmlM7+1tfTUwaZdFG8MPYa8RG1TW+ZTtpCAznsNq2andv
+ RVJRLAjfWnBhX4V5AOj1VPin12DiFsIHBRAJx70sJMGwmxqa0j0HAH99OIcgKr8pKQ
+ 4s5EHa2wC/0Dz3hyZ1MsIPHYDU2eGhPOYtmOtQS/oHDEDBV1CQlS5t3m82cKI8HNd+
+ To0Lakc2KzaDw==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Wed, 18 May 2022 16:50:07 -0700
-Message-Id: <20220518235011.153058-4-ebiggers@kernel.org>
+Date: Wed, 18 May 2022 16:50:08 -0700
+Message-Id: <20220518235011.153058-5-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.36.1
 In-Reply-To: <20220518235011.153058-1-ebiggers@kernel.org>
 References: <20220518235011.153058-1-ebiggers@kernel.org>
@@ -70,18 +70,19 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> Add support for
- STATX_IOALIGN to ext4,
- so that I/O alignment information is exposed to userspace in a consistent
- and easy-to-use way. Signed-off-by: Eric Biggers <ebiggers@google.com> ---
- fs/ext4/ext4.h | 1 + fs/ext4/file.c | 15 ++++ fs/ext4/inode.c | 31
- +++++++++++++++++++++++++++++++
- 3 files changed, 36 insertions(+), 1 [...] 
+ Content preview: From: Eric Biggers <ebiggers@google.com>
+ f2fs_force_buffered_io()
+ is only used in file.c, so move it into there. No behavior change. This makes
+ it easier to review later patches. Signed-off-by: Eric Biggers
+ <ebiggers@google.com>
+ --- fs/f2fs/f2fs.h | 45 fs/f2fs/file.c | 45
+ +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files change [...] 
  Content analysis details:   (-3.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -93,8 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nrTU4-007nP4-UE
-Subject: [f2fs-dev] [RFC PATCH v2 3/7] ext4: support STATX_IOALIGN
+X-Headers-End: 1nrTU4-007nP6-NB
+Subject: [f2fs-dev] [RFC PATCH v2 4/7] f2fs: move f2fs_force_buffered_io()
+ into file.c
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,105 +118,134 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Add support for STATX_IOALIGN to ext4, so that I/O alignment information
-is exposed to userspace in a consistent and easy-to-use way.
+f2fs_force_buffered_io() is only used in file.c, so move it into there.
+No behavior change.  This makes it easier to review later patches.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/ext4.h  |  1 +
- fs/ext4/file.c  | 15 ++++-----------
- fs/ext4/inode.c | 31 +++++++++++++++++++++++++++++++
- 3 files changed, 36 insertions(+), 11 deletions(-)
+ fs/f2fs/f2fs.h | 45 ---------------------------------------------
+ fs/f2fs/file.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 45 insertions(+), 45 deletions(-)
 
-diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-index a743b1e3b89ec..7c43428901632 100644
---- a/fs/ext4/ext4.h
-+++ b/fs/ext4/ext4.h
-@@ -3020,6 +3020,7 @@ extern struct inode *__ext4_iget(struct super_block *sb, unsigned long ino,
- extern int  ext4_write_inode(struct inode *, struct writeback_control *);
- extern int  ext4_setattr(struct user_namespace *, struct dentry *,
- 			 struct iattr *);
-+extern u32  ext4_dio_alignment(struct inode *inode);
- extern int  ext4_getattr(struct user_namespace *, const struct path *,
- 			 struct kstat *, u32, unsigned int);
- extern void ext4_evict_inode(struct inode *);
-diff --git a/fs/ext4/file.c b/fs/ext4/file.c
-index de153b508b20a..ba2271e5287b2 100644
---- a/fs/ext4/file.c
-+++ b/fs/ext4/file.c
-@@ -39,19 +39,12 @@
- static bool ext4_dio_supported(struct kiocb *iocb, struct iov_iter *iter)
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 271509b1c7928..2d6492c016ad6 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -4442,17 +4442,6 @@ static inline void f2fs_i_compr_blocks_update(struct inode *inode,
+ 	f2fs_mark_inode_dirty_sync(inode, true);
+ }
+ 
+-static inline int block_unaligned_IO(struct inode *inode,
+-				struct kiocb *iocb, struct iov_iter *iter)
+-{
+-	unsigned int i_blkbits = READ_ONCE(inode->i_blkbits);
+-	unsigned int blocksize_mask = (1 << i_blkbits) - 1;
+-	loff_t offset = iocb->ki_pos;
+-	unsigned long align = offset | iov_iter_alignment(iter);
+-
+-	return align & blocksize_mask;
+-}
+-
+ static inline bool f2fs_allow_multi_device_dio(struct f2fs_sb_info *sbi,
+ 								int flag)
  {
- 	struct inode *inode = file_inode(iocb->ki_filp);
-+	u32 dio_align = ext4_dio_alignment(inode);
+@@ -4463,40 +4452,6 @@ static inline bool f2fs_allow_multi_device_dio(struct f2fs_sb_info *sbi,
+ 	return sbi->aligned_blksize;
+ }
  
--	if (IS_ENCRYPTED(inode)) {
--		if (!fscrypt_dio_supported(inode))
--			return false;
--		if (!IS_ALIGNED(iocb->ki_pos | iov_iter_alignment(iter),
--				i_blocksize(inode)))
--			return false;
--	}
+-static inline bool f2fs_force_buffered_io(struct inode *inode,
+-				struct kiocb *iocb, struct iov_iter *iter)
+-{
+-	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+-	int rw = iov_iter_rw(iter);
+-
+-	if (!fscrypt_dio_supported(inode))
+-		return true;
 -	if (fsverity_active(inode))
--		return false;
--	if (ext4_should_journal_data(inode))
-+	if (!dio_align)
- 		return false;
--	if (ext4_has_inline_data(inode))
-+	if (dio_align > bdev_logical_block_size(inode->i_sb->s_bdev) &&
-+	    !IS_ALIGNED(iocb->ki_pos | iov_iter_alignment(iter), dio_align))
- 		return false;
- 	return true;
- }
-diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index 646ece9b3455f..5af2598aa170d 100644
---- a/fs/ext4/inode.c
-+++ b/fs/ext4/inode.c
-@@ -5533,6 +5533,22 @@ int ext4_setattr(struct user_namespace *mnt_userns, struct dentry *dentry,
- 	return error;
+-		return true;
+-	if (f2fs_compressed_file(inode))
+-		return true;
+-
+-	/* disallow direct IO if any of devices has unaligned blksize */
+-	if (f2fs_is_multi_device(sbi) && !sbi->aligned_blksize)
+-		return true;
+-	/*
+-	 * for blkzoned device, fallback direct IO to buffered IO, so
+-	 * all IOs can be serialized by log-structured write.
+-	 */
+-	if (f2fs_sb_has_blkzoned(sbi))
+-		return true;
+-	if (f2fs_lfs_mode(sbi) && (rw == WRITE)) {
+-		if (block_unaligned_IO(inode, iocb, iter))
+-			return true;
+-		if (F2FS_IO_ALIGNED(sbi))
+-			return true;
+-	}
+-	if (is_sbi_flag_set(F2FS_I_SB(inode), SBI_CP_DISABLED))
+-		return true;
+-
+-	return false;
+-}
+-
+ static inline bool f2fs_need_verity(const struct inode *inode, pgoff_t idx)
+ {
+ 	return fsverity_active(inode) &&
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 5b89af0f27f05..67f2e21ffbd67 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -807,6 +807,51 @@ int f2fs_truncate(struct inode *inode)
+ 	return 0;
  }
  
-+u32 ext4_dio_alignment(struct inode *inode)
++static int block_unaligned_IO(struct inode *inode, struct kiocb *iocb,
++			      struct iov_iter *iter)
 +{
-+	if (fsverity_active(inode))
-+		return 0;
-+	if (ext4_should_journal_data(inode))
-+		return 0;
-+	if (ext4_has_inline_data(inode))
-+		return 0;
-+	if (IS_ENCRYPTED(inode)) {
-+		if (!fscrypt_dio_supported(inode))
-+			return 0;
-+		return i_blocksize(inode);
-+	}
-+	return bdev_logical_block_size(inode->i_sb->s_bdev);
++	unsigned int i_blkbits = READ_ONCE(inode->i_blkbits);
++	unsigned int blocksize_mask = (1 << i_blkbits) - 1;
++	loff_t offset = iocb->ki_pos;
++	unsigned long align = offset | iov_iter_alignment(iter);
++
++	return align & blocksize_mask;
 +}
 +
- int ext4_getattr(struct user_namespace *mnt_userns, const struct path *path,
++static inline bool f2fs_force_buffered_io(struct inode *inode,
++				struct kiocb *iocb, struct iov_iter *iter)
++{
++	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
++	int rw = iov_iter_rw(iter);
++
++	if (!fscrypt_dio_supported(inode))
++		return true;
++	if (fsverity_active(inode))
++		return true;
++	if (f2fs_compressed_file(inode))
++		return true;
++
++	/* disallow direct IO if any of devices has unaligned blksize */
++	if (f2fs_is_multi_device(sbi) && !sbi->aligned_blksize)
++		return true;
++	/*
++	 * for blkzoned device, fallback direct IO to buffered IO, so
++	 * all IOs can be serialized by log-structured write.
++	 */
++	if (f2fs_sb_has_blkzoned(sbi))
++		return true;
++	if (f2fs_lfs_mode(sbi) && (rw == WRITE)) {
++		if (block_unaligned_IO(inode, iocb, iter))
++			return true;
++		if (F2FS_IO_ALIGNED(sbi))
++			return true;
++	}
++	if (is_sbi_flag_set(F2FS_I_SB(inode), SBI_CP_DISABLED))
++		return true;
++
++	return false;
++}
++
+ int f2fs_getattr(struct user_namespace *mnt_userns, const struct path *path,
  		 struct kstat *stat, u32 request_mask, unsigned int query_flags)
  {
-@@ -5548,6 +5564,21 @@ int ext4_getattr(struct user_namespace *mnt_userns, const struct path *path,
- 		stat->btime.tv_nsec = ei->i_crtime.tv_nsec;
- 	}
- 
-+	/*
-+	 * Return the I/O alignment information if requested.  We only return
-+	 * this information when requested, since on encrypted files it might
-+	 * take a fair bit of work to get if the file wasn't opened recently.
-+	 */
-+	if ((request_mask & STATX_IOALIGN) && S_ISREG(inode->i_mode)) {
-+		u32 dio_align = ext4_dio_alignment(inode);
-+		unsigned int io_opt = bdev_io_opt(inode->i_sb->s_bdev);
-+
-+		stat->result_mask |= STATX_IOALIGN;
-+		stat->mem_align_dio = dio_align;
-+		stat->offset_align_dio = dio_align;
-+		stat->offset_align_optimal = max(io_opt, i_blocksize(inode));
-+	}
-+
- 	flags = ei->i_flags & EXT4_FL_USER_VISIBLE;
- 	if (flags & EXT4_APPEND_FL)
- 		stat->attributes |= STATX_ATTR_APPEND;
 -- 
 2.36.1
 
