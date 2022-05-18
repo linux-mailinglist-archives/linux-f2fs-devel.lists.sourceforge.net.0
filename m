@@ -2,64 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 984E852C81D
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 May 2022 01:53:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5288452C821
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 May 2022 01:54:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nrTUJ-0002hb-TB; Wed, 18 May 2022 23:53:56 +0000
+	id 1nrTUP-00054J-BJ; Wed, 18 May 2022 23:53:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ebiggers@kernel.org>) id 1nrTUC-0002h9-Uj
+ (envelope-from <ebiggers@kernel.org>) id 1nrTUE-00053o-Qi
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 23:53:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/9mW0P0dY4/H+pUt5Ymldd8NLKiIgbU7h4KT0mVtJhY=; b=ijJ0C/z9sScsS+SA5JOn+wU+Zc
- LYf+TpEsE6A5OvsS3QgTtIjI/DDQ+lPlLxqzZz51oRLWKN176AFPc8yxIdXQoiGk6FkehV/Wix9rj
- knpm9Q58a5tglCKu5LVhanC2EMjWZ3CSTYgbRDfN1vJzhPlfNlHT6ojINQd+/BByv3Pk=;
+ bh=Uyk/13HWmxxXgXitMt9BTuXM+vY0HVYDuvx/QFFXsCQ=; b=j6FJz3HD60xbWENpnzGIES1/N5
+ 8WnJX0psbI7ajhNB4ELRmzum+1esLQVPjVcjj7a3NaGtaAIB9ZWiDd7g9vzuS8SLiiz3bO2aMDQ98
+ YToPw28qD1lnWyn1j4T0U/mD2jv8EumcWVTUjRU9G41jbNZTHiA21YTuJZyFHU0e1yOk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=/9mW0P0dY4/H+pUt5Ymldd8NLKiIgbU7h4KT0mVtJhY=; b=J
- dtDXq9ChkqkxbnCUPz2LwrZTKJ1tpJm2xap0Km9F+dJvzmnlnbs2XuJp0wSw0y2cW7FYRRV3eTD0h
- 7ZhghqiM1Jvvjw2HiG+Vliottw5ZgPfjLuEBnePOzdRgF9lgzqdMmt+J87JC/saX9tpIRkmGdZgtY
- y1S2onppdv+pnMf8=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Uyk/13HWmxxXgXitMt9BTuXM+vY0HVYDuvx/QFFXsCQ=; b=eqSWuDULejl8NzSemX2EmuXAMC
+ FlpYVQEjRl85r6TVTEJGlnLfT7ZKzBKFByaITC9D4BZ2HA4DBXVXDGiSynfyL0stRe6ij3UojH+Ni
+ kRFZVBwjFfIvyYFZxCFvKoK+1n9SBnG8BKjpFF/27ZC1mhCnWdgbn9nPuA1I4Uov48F0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nrTU6-0006CE-Rn
+ id 1nrTU4-007nOl-UD
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 23:53:49 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6D7C161734
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D226E6172B
  for <linux-f2fs-devel@lists.sourceforge.net>;
  Wed, 18 May 2022 23:53:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 76052C385A9;
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F00AFC34113;
  Wed, 18 May 2022 23:53:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652918008;
- bh=urChUY7g9muzenao6Op/35xCF3MRcXpVDil5q1s0Oy4=;
- h=From:To:Cc:Subject:Date:From;
- b=OV61lWEayn3LYEHqqYjdbT4rDnSYkojA/uBcYiviKrLQosTqoljlBxdyQuag4D38t
- QD3252d92imOW+XVDTj0qjrOJ+PoJ1FHyjBnZPYlsp6uvQj29AfMW/W9l/rAHYKyz1
- EIhGcaMmM0JN4aG/HcXCFiYrX6jbcm36zLqiheYnoEV/n8g93nWWuHGTHlbljGZIyW
- DwtikEg30uOxeLh6dEvCADQkuEKd5jCOvDNzz3suRYVpoI0hAgf8LBxjbIdG8fLEMv
- 52a1BO/Ce+DjZrrYEzZcYdQZR3Zhx1bno/f/yNbVWXKZAiVyJNYG5rA6eoaqmksXog
- K4HSm1NvPH8FA==
+ s=k20201202; t=1652918009;
+ bh=W4in/ybmcjm+UrJuvAG7UeC7pkJyRJbDj25/2WE1Eh0=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=lOAtpiNFQkTYZE91Q/t5P4je8t/RVIkVfNdzALCn4RoRU4e4sFnMKtE93c6dW/6rZ
+ L//O7wlP73j+497ckrHMFzwwn8p0H6HbGOTHeoaSmWCFZADXvSqBBAH3IExgDuGJ2j
+ uB1z4wbDKYKUKl6H3vD43vI5utDgaLZSwkF30Ap9o6+SAfhV1CU/2O16gwjnaf0/Cx
+ O6WgzKb3DQ/d865dHztAoRmWomCcYWCmZECuR0Rj7/Wbi6yGhj5j6SqbWwrugT3/AZ
+ HNrSCu7xlXphpO/cuvQqNSqP0BdXAPtyBb+rJz/ndUVdzFELKDPmCfCgz5hGua/cDd
+ l/bdVDq9X6gtQ==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Wed, 18 May 2022 16:50:04 -0700
-Message-Id: <20220518235011.153058-1-ebiggers@kernel.org>
+Date: Wed, 18 May 2022 16:50:05 -0700
+Message-Id: <20220518235011.153058-2-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.36.1
+In-Reply-To: <20220518235011.153058-1-ebiggers@kernel.org>
+References: <20220518235011.153058-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -3.4 (---)
 X-Spam-Report: Spam detection software,
@@ -68,11 +70,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patchset makes the statx() system call return I/O
- alignment information,
- roughly following the design that was suggested at
- https://lore.kernel.org/linux-fsdevel/20220120071215.123274-1-ebiggers@
- [...] Content analysis details:   (-3.4 points, 6.0 required)
+ Content preview:  From: Eric Biggers <ebiggers@google.com> Traditionally, the
+ conditions for when DIO (direct I/O) is supported were fairly simple:
+ filesystems
+ either supported DIO aligned to the block device's logical block size, or
+ didn't support DIO at all [...] 
+ Content analysis details:   (-3.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -88,9 +91,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nrTU6-0006CE-Rn
-Subject: [f2fs-dev] [RFC PATCH v2 0/7] make statx() return I/O alignment
- information
+X-Headers-End: 1nrTU4-007nOl-UD
+Subject: [f2fs-dev] [RFC PATCH v2 1/7] statx: add I/O alignment information
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,61 +112,123 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patchset makes the statx() system call return I/O alignment
-information, roughly following the design that was suggested at
-https://lore.kernel.org/linux-fsdevel/20220120071215.123274-1-ebiggers@kernel.org/T/#u
+From: Eric Biggers <ebiggers@google.com>
 
-This feature solves two problems: (a) it allows userspace to determine
-when a file supports direct I/O, and with what alignment restrictions;
-and (b) it allows userspace to determine the optimum I/O alignment for a
-file.  For more details, see patch 1.
+Traditionally, the conditions for when DIO (direct I/O) is supported
+were fairly simple: filesystems either supported DIO aligned to the
+block device's logical block size, or didn't support DIO at all.
 
-This is an RFC.  I'd greatly appreciate any feedback on the UAPI, as
-that obviously needs to be gotten right from the beginning.  E.g., does
-the proposed set of fields make sense?  Am I including the right
-information in stx_offset_align_optimal?
+However, due to filesystem features that have been added over time (e.g,
+data journalling, inline data, encryption, verity, compression,
+checkpoint disabling, log-structured mode), the conditions for when DIO
+is allowed on a file have gotten increasingly complex.  Whether a
+particular file supports DIO, and with what alignment, can depend on
+various file attributes and filesystem mount options, as well as which
+block device(s) the file's data is located on.
 
-Patch 1 adds the VFS support for STATX_IOALIGN.  The remaining patches
-wire it up to ext4 and f2fs.  Support for other filesystems can be added
-later.  We could also support this on block device files; however, since
-block device nodes have different inodes from the block devices
-themselves, it wouldn't apply to statx("/dev/$foo") but rather just to
-'fd = open("/dev/foo"); statx(fd)'.  I'm unsure how useful that would be.
+XFS has an ioctl XFS_IOC_DIOINFO which exposes this information to
+applications.  However, as discussed
+(https://lore.kernel.org/linux-fsdevel/20220120071215.123274-1-ebiggers@kernel.org/T/#u),
+this ioctl is rarely used and not known to be used outside of
+XFS-specific code.  It also was never intended to indicate when a file
+doesn't support DIO at all, and it only exposes the minimum I/O
+alignment, not the optimal I/O alignment which has been requested too.
 
-Note, f2fs has one corner case where DIO reads are allowed but not DIO
-writes.  The proposed statx fields can't represent this.  My proposal
-(patch 5) is to just eliminate this case, as it seems much too weird.
-But I'd appreciate any feedback on that part.
+Therefore, let's expose this information via statx().  Add the
+STATX_IOALIGN flag and three fields associated with it:
 
-This patchset applies to v5.18-rc7.
+* stx_mem_align_dio: the alignment (in bytes) required for user memory
+  buffers for DIO, or 0 if DIO is not supported on the file.
 
-No changes since v1, which I sent a few months ago; I'm resending this
-because people seem interested in it again
-(https://lore.kernel.org/r/20220518171131.3525293-1-kbusch@fb.com).
+* stx_offset_align_dio: the alignment (in bytes) required for file
+  offsets and I/O segment lengths for DIO, or 0 if DIO is not supported
+  on the file.  This will only be nonzero if stx_mem_align_dio is
+  nonzero, and vice versa.
 
-Eric Biggers (7):
-  statx: add I/O alignment information
-  fscrypt: change fscrypt_dio_supported() to prepare for STATX_IOALIGN
-  ext4: support STATX_IOALIGN
-  f2fs: move f2fs_force_buffered_io() into file.c
-  f2fs: don't allow DIO reads but not DIO writes
-  f2fs: simplify f2fs_force_buffered_io()
-  f2fs: support STATX_IOALIGN
+* stx_offset_align_optimal: the alignment (in bytes) suggested for file
+  offsets and I/O segment lengths to get optimal performance.  This
+  applies to both DIO and buffered I/O.  It differs from stx_blocksize
+  in that stx_offset_align_optimal will contain the real optimum I/O
+  size, which may be a large value.  In contrast, for compatibility
+  reasons stx_blocksize is the minimum size needed to avoid page cache
+  read/write/modify cycles, which may be much smaller than the optimum
+  I/O size.  For more details about the motivation for this field, see
+  https://lore.kernel.org/r/20220210040304.GM59729@dread.disaster.area
 
- fs/crypto/inline_crypt.c  | 48 +++++++++++++++---------------
- fs/ext4/ext4.h            |  1 +
- fs/ext4/file.c            | 10 +++----
- fs/ext4/inode.c           | 31 ++++++++++++++++++++
- fs/f2fs/f2fs.h            | 45 -----------------------------
- fs/f2fs/file.c            | 61 ++++++++++++++++++++++++++++++++++++++-
- fs/stat.c                 |  3 ++
- include/linux/fscrypt.h   |  7 ++---
- include/linux/stat.h      |  3 ++
- include/uapi/linux/stat.h |  9 ++++--
- 10 files changed, 136 insertions(+), 82 deletions(-)
+Note that as with other statx() extensions, if STATX_IOALIGN isn't set
+in the returned statx struct, then these new fields won't be filled in.
+This will happen if the filesystem doesn't support STATX_IOALIGN, or if
+the file isn't a regular file.  (It might be supported on block device
+files in the future.)  It might also happen if the caller didn't include
+STATX_IOALIGN in the request mask, since statx() isn't required to
+return information that wasn't requested.
 
+This commit adds the VFS-level plumbing for STATX_IOALIGN.  Individual
+filesystems will still need to add code to support it.
 
-base-commit: 42226c989789d8da4af1de0c31070c96726d990c
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/stat.c                 | 3 +++
+ include/linux/stat.h      | 3 +++
+ include/uapi/linux/stat.h | 9 +++++++--
+ 3 files changed, 13 insertions(+), 2 deletions(-)
+
+diff --git a/fs/stat.c b/fs/stat.c
+index 5c2c94464e8b0..9d477218545b8 100644
+--- a/fs/stat.c
++++ b/fs/stat.c
+@@ -611,6 +611,9 @@ cp_statx(const struct kstat *stat, struct statx __user *buffer)
+ 	tmp.stx_dev_major = MAJOR(stat->dev);
+ 	tmp.stx_dev_minor = MINOR(stat->dev);
+ 	tmp.stx_mnt_id = stat->mnt_id;
++	tmp.stx_mem_align_dio = stat->mem_align_dio;
++	tmp.stx_offset_align_dio = stat->offset_align_dio;
++	tmp.stx_offset_align_optimal = stat->offset_align_optimal;
+ 
+ 	return copy_to_user(buffer, &tmp, sizeof(tmp)) ? -EFAULT : 0;
+ }
+diff --git a/include/linux/stat.h b/include/linux/stat.h
+index 7df06931f25d8..48b8b1ad1567c 100644
+--- a/include/linux/stat.h
++++ b/include/linux/stat.h
+@@ -50,6 +50,9 @@ struct kstat {
+ 	struct timespec64 btime;			/* File creation time */
+ 	u64		blocks;
+ 	u64		mnt_id;
++	u32		mem_align_dio;
++	u32		offset_align_dio;
++	u32		offset_align_optimal;
+ };
+ 
+ #endif
+diff --git a/include/uapi/linux/stat.h b/include/uapi/linux/stat.h
+index 1500a0f58041a..f822b23e81091 100644
+--- a/include/uapi/linux/stat.h
++++ b/include/uapi/linux/stat.h
+@@ -124,9 +124,13 @@ struct statx {
+ 	__u32	stx_dev_minor;
+ 	/* 0x90 */
+ 	__u64	stx_mnt_id;
+-	__u64	__spare2;
++	__u32	stx_mem_align_dio;	/* Memory buffer alignment for direct I/O */
++	__u32	stx_offset_align_dio;	/* File offset alignment for direct I/O */
+ 	/* 0xa0 */
+-	__u64	__spare3[12];	/* Spare space for future expansion */
++	__u32	stx_offset_align_optimal; /* Optimal file offset alignment for I/O */
++	__u32	__spare2;
++	/* 0xa8 */
++	__u64	__spare3[11];	/* Spare space for future expansion */
+ 	/* 0x100 */
+ };
+ 
+@@ -152,6 +156,7 @@ struct statx {
+ #define STATX_BASIC_STATS	0x000007ffU	/* The stuff in the normal stat struct */
+ #define STATX_BTIME		0x00000800U	/* Want/got stx_btime */
+ #define STATX_MNT_ID		0x00001000U	/* Got stx_mnt_id */
++#define STATX_IOALIGN		0x00002000U	/* Want/got IO alignment info */
+ 
+ #define STATX__RESERVED		0x80000000U	/* Reserved for future struct statx expansion */
+ 
 -- 
 2.36.1
 
