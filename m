@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0CB152C343
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 May 2022 21:26:11 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD31052C347
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 May 2022 21:27:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nrPJA-0001mX-Ic; Wed, 18 May 2022 19:26:07 +0000
+	id 1nrPKI-0007WD-1F; Wed, 18 May 2022 19:27:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ebiggers@kernel.org>) id 1nrPJ9-0001mR-Gl
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 19:26:06 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1nrPK5-0007W1-Oi
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 19:27:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lczG5iBdTv2QN2gyzjRLekQTrnlVhwSLdC3r1nOd1Jc=; b=XE+BxAu6XO47ggJgUWGG5p+dbZ
- wq04/XbKW1/mEQqjmpl6ZmPE4brwCDylNuhG67FMn6E7MtIIvsBK0mfJSIQbpkLJqr0x10M4lU4OQ
- RaRIICKI7WNsR8NZC7uCrAFW7Ui+Ya4SbfzHHCyojA4wlT/MaXq4Fzl5xAyVmBMcBsgw=;
+ bh=j8+absFiRt71sQVT9HiVnziVhcGHmYgCjIpOBqkpKWw=; b=G3xQxRsufUKhEPsPQsN/kFgo70
+ BpfOGpx71EdOKJJd4xeRO2BIgnmBu+ZZZJIkiOpZFJ510hZCChBepMxaaL22+0ehgz/P5uZ6Oag3X
+ 04ciqc99yjDMNDWYZtSFaYq1nci2rzKygqHJ8oeZMflKfL6yRfIHyCC1HhCytaUjQgZ0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,67 +29,67 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lczG5iBdTv2QN2gyzjRLekQTrnlVhwSLdC3r1nOd1Jc=; b=Tc2IswSI8k7hDebasuIejndBvZ
- 8KJ2LOmUwvDPIxGYxh64Cb5X41XsPu3IXOEbLnuw+dzdZzYRQ0SBcHt7WrNzPFHgz4odoPEpOPP0i
- wVI4jHJ//i9UkD6TtcTJFSse7Vj5B3c1pQ4n4AS/tRPnvfpEdHWY0gUfdCNb/4m7Zjtk=;
+ bh=j8+absFiRt71sQVT9HiVnziVhcGHmYgCjIpOBqkpKWw=; b=Tne9/2SLCofCJm9YVLUporipZQ
+ mRzgFN4suK7sfYCueuiufZ6OrRN6iACaiIZjX0eQG3t15PhqjlXdaUwRfy6WAPKArN5OSTMAPSLDS
+ JGcMyPXTPAVmQj6hZIBW2QvjTWKsgKidmYJrBUocKCQ+iAE4dhFi6z5Rihs3ljtG0+/Q=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nrPJ7-0002K6-Oy
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 19:26:06 +0000
+ id 1nrPK2-0002P0-Co
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 19:27:04 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2D875617FE;
- Wed, 18 May 2022 19:26:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 567D9C385A9;
- Wed, 18 May 2022 19:25:59 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id EB31061913;
+ Wed, 18 May 2022 19:26:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1CD69C385A5;
+ Wed, 18 May 2022 19:26:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652901959;
- bh=7gr+zzTA/0OSnCbg25nIyqBkSv4XukYotLrz1lhRwlk=;
+ s=k20201202; t=1652902016;
+ bh=6bK0g96KHKgmSLVgDc/esxHtkqrzJWXIyc5tLrYriNM=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=rEAYvsj+AcnJMph7AJPvpIK/uuEcXPLJzb4rygd5A1lAOK8XKUGDeC5eBdUJ076Bq
- ZyPN+eNM2uDM/Q6ERXl2AYzfSSQkYWgI+XSbHgdTX4z+Uj/BWB+Gt5uwU39Qpi61wZ
- LnH4k0H+51S5g9tMB3TUGO7fsVPLCL/xUg7eB0/uwVTgNrPlKYEEm16Ea2cp9T6fDz
- iQHD8CoaHQihox2j0WrJYiZVKTJzNVcmxzw1/IUtHo+7dh2WQrnH9RPftQVXFJkRlR
- nyK4ma/VpVEn6zUFsE3uhqcVDCEn+p4RQuAvF7B4HPVJewxpZ8invUYInYULRn+Qxh
- 8bK+HptAv5+oQ==
-Date: Wed, 18 May 2022 12:25:57 -0700
+ b=C2Wz/2Nvj4IMrE3hQMQPPRHCALP2EaKRug9MA4I0XX7WC/5AfQJY0lvZN+mFRZLkw
+ RoxwlJF3mCK7hGxKuNfWOwCmr5JyS8BJm0mTLOINQpO2Oh6AA4yKBpcb3lz9AG6P04
+ DXJk4MimjTgMHrgYigXWoHY/VZd//Cj7wWBVvyi+v/JlW92EweUrqC1Pc/VFnbCWbB
+ pAZl6zwc68mXSlm4nextD9sS38g6I8wg8jCuqccKA1pbNgANC6SZN9VBvi6dhHLQ8U
+ hSG/e3nnI8tqJ5OKiJWVlncLTQVjvhEt8oGO9gUvnJuthqXwPfPshuIfN6ylaB/DYx
+ tRRp4rE5HydQA==
+Date: Wed, 18 May 2022 12:26:54 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Gabriel Krisman Bertazi <krisman@collabora.com>
-Message-ID: <YoVIRewDI7EWLdQd@sol.localdomain>
+Message-ID: <YoVIfsjT2OE6Wj2k@sol.localdomain>
 References: <20220518172320.333617-1-krisman@collabora.com>
- <20220518172320.333617-8-krisman@collabora.com>
+ <20220518172320.333617-9-krisman@collabora.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220518172320.333617-8-krisman@collabora.com>
-X-Spam-Score: -5.5 (-----)
+In-Reply-To: <20220518172320.333617-9-krisman@collabora.com>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, May 18, 2022 at 01:23:19PM -0400, Gabriel Krisman
+ Content preview:  On Wed, May 18, 2022 at 01:23:20PM -0400, Gabriel Krisman
  Bertazi wrote: > Instead of a bunch of ifdefs, make the unicode built checks
  part of the > code flow where possible, as requested by Torvalds. [...] 
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nrPJ7-0002K6-Oy
-Subject: Re: [f2fs-dev] [PATCH v5 7/8] ext4: Move CONFIG_UNICODE defguards
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nrPK2-0002P0-Co
+Subject: Re: [f2fs-dev] [PATCH v5 8/8] f2fs: Move CONFIG_UNICODE defguards
  into the code flow
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -109,7 +109,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, May 18, 2022 at 01:23:19PM -0400, Gabriel Krisman Bertazi wrote:
+On Wed, May 18, 2022 at 01:23:20PM -0400, Gabriel Krisman Bertazi wrote:
 > Instead of a bunch of ifdefs, make the unicode built checks part of the
 > code flow where possible, as requested by Torvalds.
 > 
@@ -117,94 +117,13 @@ On Wed, May 18, 2022 at 01:23:19PM -0400, Gabriel Krisman Bertazi wrote:
 > 
 > ---
 > Changes since v4:
->   - Create stub for !CONFIG_UNICODE case (eric)
+>   - Drop stub removal for !CONFIG_UNICODE case (eric)
 > ---
->  fs/ext4/ext4.h  | 37 ++++++++++++++++++++-----------------
->  fs/ext4/namei.c | 15 ++++++---------
->  fs/ext4/super.c |  4 +---
->  3 files changed, 27 insertions(+), 29 deletions(-)
-> 
-> diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-> index 93a28fcb2e22..c38999ee3627 100644
-> --- a/fs/ext4/ext4.h
-> +++ b/fs/ext4/ext4.h
-> @@ -2727,8 +2727,24 @@ ext4_fsblk_t ext4_inode_to_goal_block(struct inode *);
->  
->  #if IS_ENABLED(CONFIG_UNICODE)
->  extern int ext4_fname_setup_ci_filename(struct inode *dir,
-> -					 const struct qstr *iname,
-> -					 struct ext4_filename *fname);
-> +					const struct qstr *iname,
-> +					struct ext4_filename *fname);
-> +
-> +static inline void ext4_fname_free_ci_filename(struct ext4_filename *fname)
-> +{
-> +	kfree(fname->cf_name.name);
-> +	fname->cf_name.name = NULL;
-> +}
-> +#else
-> +static inline int ext4_fname_setup_ci_filename(struct inode *dir,
-> +					       const struct qstr *iname,
-> +					       struct ext4_filename *fname)
-> +{
-> +	return 0;
-> +}
-> +static inline void ext4_fname_free_ci_filename(struct ext4_filename *fname)
-> +{
-> +}
->  #endif
->  
->  #ifdef CONFIG_FS_ENCRYPTION
-> @@ -2758,9 +2774,7 @@ static inline int ext4_fname_setup_filename(struct inode *dir,
->  
->  	ext4_fname_from_fscrypt_name(fname, &name);
->  
-> -#if IS_ENABLED(CONFIG_UNICODE)
->  	err = ext4_fname_setup_ci_filename(dir, iname, fname);
-> -#endif
->  	return err;
->  }
+>  fs/f2fs/namei.c | 11 +++++------
+>  fs/f2fs/super.c |  8 ++++----
+>  2 files changed, 9 insertions(+), 10 deletions(-)
 
-This can just do 'return ext4_fname_setup_ci_filename(...)'.  No need for the
-err variable.
-
->  
-> @@ -2777,9 +2791,7 @@ static inline int ext4_fname_prepare_lookup(struct inode *dir,
->  
->  	ext4_fname_from_fscrypt_name(fname, &name);
->  
-> -#if IS_ENABLED(CONFIG_UNICODE)
->  	err = ext4_fname_setup_ci_filename(dir, &dentry->d_name, fname);
-> -#endif
->  	return err;
->  }
-
-Similarly, this can just return ext4_fname_setup_ci_filename(...).
-
->  
-> @@ -2794,10 +2806,7 @@ static inline void ext4_fname_free_filename(struct ext4_filename *fname)
->  	fname->usr_fname = NULL;
->  	fname->disk_name.name = NULL;
->  
-> -#if IS_ENABLED(CONFIG_UNICODE)
-> -	kfree(fname->cf_name.name);
-> -	fname->cf_name.name = NULL;
-> -#endif
-> +	ext4_fname_free_ci_filename(fname);
->  }
->  #else /* !CONFIG_FS_ENCRYPTION */
->  static inline int ext4_fname_setup_filename(struct inode *dir,
-> @@ -2810,10 +2819,7 @@ static inline int ext4_fname_setup_filename(struct inode *dir,
->  	fname->disk_name.name = (unsigned char *) iname->name;
->  	fname->disk_name.len = iname->len;
->  
-> -#if IS_ENABLED(CONFIG_UNICODE)
->  	err = ext4_fname_setup_ci_filename(dir, iname, fname);
-> -#endif
-> -
->  	return err;
-
-Likewise.
+Reviewed-by: Eric Biggers <ebiggers@google.com>
 
 - Eric
 
