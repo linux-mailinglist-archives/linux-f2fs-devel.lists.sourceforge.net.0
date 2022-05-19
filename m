@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E60D52DF3A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 May 2022 23:24:37 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id A575A52DF3B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 May 2022 23:24:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nrndN-0006Ss-2J; Thu, 19 May 2022 21:24:35 +0000
+	id 1nrndO-0000I0-QO; Thu, 19 May 2022 21:24:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <krisman@collabora.com>) id 1nrndK-0006Sk-MU
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 May 2022 21:24:33 +0000
+ (envelope-from <krisman@collabora.com>) id 1nrndN-0000Hh-6K
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 May 2022 21:24:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yEfXRjvKZF5+vY+nj/z3X0NmkyCsv3iKazISGd7ozd8=; b=Ya3rk9F5z3C5ybCaxK+OQy7peL
- LpryUm/WKC0depCpmypJdmJesuHZxv0jRv2P9tJAiYCOivAEOg3pHWlTim0XD/ZtGm/zXcpJeryLb
- n11z1c6viUXjmxnJRI4ChezrDcRWl6X8GCIyGb13ZWmTYnxb6hPx00G80GZIFWsi6jec=;
+ bh=KIYUXnUyKb9VI8UEwboCDwLHps3xzxEAcxBqmKrxHIU=; b=F4pQZdlEYfA+AcBGCszC4W7xZd
+ CwyUYv6axw6kG93qvP+9VhmzrN1Yhr0pmeYSKErj+mHeu1ykjm+vmvPKbZ95dgpwHCE8VzI8VyEyJ
+ JP1x/BwLhIaDWMAiyFnRCB7osyg6HgsoYaVv3JNKNb0HwETnSsx051Ky5E2FJ62Iu/Vk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,31 +29,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=yEfXRjvKZF5+vY+nj/z3X0NmkyCsv3iKazISGd7ozd8=; b=CM9mVHiJVu1PJ1inmAiutxjkw6
- Al9eX4walD9lN5A64RVVBW6ypkmBVmbQWdCQCMF1G+Vk+0mGXftPYIMdWFQ2AgT9w4jjF1Xml6RKz
- UV4l0ciTPGx5p86x1VhH6fKXyWdMI8eokgf9ieqr2K+QeiTG03SYw/IJfGXfOW/QaV/A=;
+ bh=KIYUXnUyKb9VI8UEwboCDwLHps3xzxEAcxBqmKrxHIU=; b=ig1noTkWeliHRYkuwSq0IORguw
+ deZNM7FzVOxrYu+geHmXjSudLPtNsWYb50lNhthadK6bzaBHJMSMkhl8hwDhmF68Mi2UBPeACkQpN
+ sxBkKbr4gAj8+Aax2gB8Nw6Ps6yvi+sT/6f+Lc4pu/bJCzUvcHqu8qj76CLa4J7f9oxg=;
 Received: from bhuna.collabora.co.uk ([46.235.227.227])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nrndI-00AbT5-8J
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 May 2022 21:24:33 +0000
+ id 1nrndL-0003wv-NE
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 May 2022 21:24:37 +0000
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: krisman) with ESMTPSA id E6A6A1F45F78
+ (Authenticated sender: krisman) with ESMTPSA id 6107F1F45F74
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1652995466;
- bh=4aprNls1SIrgCGEknan+1QCNSFzZMfaiFkY311lbaUE=;
+ s=mail; t=1652995469;
+ bh=S6queVANKLkR6rGNVZjZSlibWPKGEIm13teUWj2MnUc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=CdLJ3EH/R8kH5XGpI1nmoLA1vvT4Nnb5wGKg+awNGoFswzJVpWnNnKWaYYxl3N72D
- Xk2hwjVb+mjLFKxqCl7TirLD0AWI+prsAKYxojlOQCmz+E58wTRNVRs8cUaSGUMKKe
- e6yDA2bD2D5nvCCQQsefwILcSvnPdH9w5XhHWoQAtIJPf9zZzs040cx/aF1M9sGf4u
- 0MUTVZVQUlpIJ/XZSTEap5dv6OMxMdQ6fzHs7M/Bbew1h11GRsItVKgYvduoPARt2W
- xL1A40DJjEcspoC6+nJhL4YC/RXCvFk0lgBfJSqWaD99S3R1m7V/1zUBCxPZu98T9S
- p07MczN/we8jw==
+ b=ILMEZO5tqFHa32A7CL4nY01QPtLA7O5LgvfZ+e41+huPlXpi+kQ2s7Q5b+PBL7J9F
+ Fy2dtvbOLHOrJD6zKeI1hBHTSQr5dlbYUo3HdVximPazv0YrUHzAbcp3Gi+KuSVOeJ
+ x8Xd6GcyGlaHQg7L4jzjMp2vWX0eqxkn6IrugdFhecl5kLILV0lzUUEKFwHtmIk7md
+ GSBWUcT98Ubte6rIHihA4I5vqzJDp/SnlpVe+BbwPVA3MA088w/fmq3kfCEZ1iyzQC
+ d89E2Gl67uedNZDf07Dp1Zu+uoAZP5DvHbIR/b383WO33l8s/1OFQS7rP5GcACzCGl
+ usxDvokHpUUqA==
 From: Gabriel Krisman Bertazi <krisman@collabora.com>
 To: tytso@mit.edu, adilger.kernel@dilger.ca, jaegeuk@kernel.org,
  ebiggers@kernel.org
-Date: Thu, 19 May 2022 17:23:57 -0400
-Message-Id: <20220519212359.19442-7-krisman@collabora.com>
+Date: Thu, 19 May 2022 17:23:58 -0400
+Message-Id: <20220519212359.19442-8-krisman@collabora.com>
 X-Mailer: git-send-email 2.36.1
 In-Reply-To: <20220519212359.19442-1-krisman@collabora.com>
 References: <20220519212359.19442-1-krisman@collabora.com>
@@ -65,12 +65,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  If the volume is in strict mode, ext4_ci_compare can report
- a broken encoding name. This will not trigger on a bad lookup, which is caught
- earlier,
- only if the actual disk name is bad. Reviewed-by: Eric Biggers
- <ebiggers@google.com>
- Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com> 
+ Content preview:  Instead of a bunch of ifdefs, make the unicode built checks
+ part of the code flow where possible, as requested by Torvalds. Reviewed-by:
+ Eric Biggers <ebiggers@google.com> Signed-off-by: Gabriel Krisman Bertazi
+ <krisman@collabora.com> 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -85,9 +83,9 @@ X-Spam-Report: Spam detection software,
  valid
  0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
  lines -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nrndI-00AbT5-8J
-Subject: [f2fs-dev] [PATCH v8 6/8] ext4: Log error when lookup of encoded
- dentry fails
+X-Headers-End: 1nrndL-0003wv-NE
+Subject: [f2fs-dev] [PATCH v8 7/8] ext4: Move CONFIG_UNICODE defguards into
+ the code flow
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,38 +104,201 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If the volume is in strict mode, ext4_ci_compare can report a broken
-encoding name.  This will not trigger on a bad lookup, which is caught
-earlier, only if the actual disk name is bad.
+Instead of a bunch of ifdefs, make the unicode built checks part of the
+code flow where possible, as requested by Torvalds.
 
 Reviewed-by: Eric Biggers <ebiggers@google.com>
 Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
 
 ---
-
-changes since v4:
-  - Reword error message (Eric)
-
-Changes since v1:
-  - reword error message "file in directory" -> "filename" (Eric)
+Changes since v5:
+  - Drop err variable (eric)
+Changes since v4:
+  - Create stub for !CONFIG_UNICODE case (eric)
 ---
- fs/ext4/namei.c | 3 +++
- 1 file changed, 3 insertions(+)
+ fs/ext4/ext4.h  | 47 +++++++++++++++++++++++------------------------
+ fs/ext4/namei.c | 15 ++++++---------
+ fs/ext4/super.c |  4 +---
+ 3 files changed, 30 insertions(+), 36 deletions(-)
 
+diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
+index 93a28fcb2e22..4bc3649e3385 100644
+--- a/fs/ext4/ext4.h
++++ b/fs/ext4/ext4.h
+@@ -2727,8 +2727,24 @@ ext4_fsblk_t ext4_inode_to_goal_block(struct inode *);
+ 
+ #if IS_ENABLED(CONFIG_UNICODE)
+ extern int ext4_fname_setup_ci_filename(struct inode *dir,
+-					 const struct qstr *iname,
+-					 struct ext4_filename *fname);
++					const struct qstr *iname,
++					struct ext4_filename *fname);
++
++static inline void ext4_fname_free_ci_filename(struct ext4_filename *fname)
++{
++	kfree(fname->cf_name.name);
++	fname->cf_name.name = NULL;
++}
++#else
++static inline int ext4_fname_setup_ci_filename(struct inode *dir,
++					       const struct qstr *iname,
++					       struct ext4_filename *fname)
++{
++	return 0;
++}
++static inline void ext4_fname_free_ci_filename(struct ext4_filename *fname)
++{
++}
+ #endif
+ 
+ #ifdef CONFIG_FS_ENCRYPTION
+@@ -2758,10 +2774,7 @@ static inline int ext4_fname_setup_filename(struct inode *dir,
+ 
+ 	ext4_fname_from_fscrypt_name(fname, &name);
+ 
+-#if IS_ENABLED(CONFIG_UNICODE)
+-	err = ext4_fname_setup_ci_filename(dir, iname, fname);
+-#endif
+-	return err;
++	return ext4_fname_setup_ci_filename(dir, iname, fname);
+ }
+ 
+ static inline int ext4_fname_prepare_lookup(struct inode *dir,
+@@ -2777,10 +2790,7 @@ static inline int ext4_fname_prepare_lookup(struct inode *dir,
+ 
+ 	ext4_fname_from_fscrypt_name(fname, &name);
+ 
+-#if IS_ENABLED(CONFIG_UNICODE)
+-	err = ext4_fname_setup_ci_filename(dir, &dentry->d_name, fname);
+-#endif
+-	return err;
++	return ext4_fname_setup_ci_filename(dir, &dentry->d_name, fname);
+ }
+ 
+ static inline void ext4_fname_free_filename(struct ext4_filename *fname)
+@@ -2794,10 +2804,7 @@ static inline void ext4_fname_free_filename(struct ext4_filename *fname)
+ 	fname->usr_fname = NULL;
+ 	fname->disk_name.name = NULL;
+ 
+-#if IS_ENABLED(CONFIG_UNICODE)
+-	kfree(fname->cf_name.name);
+-	fname->cf_name.name = NULL;
+-#endif
++	ext4_fname_free_ci_filename(fname);
+ }
+ #else /* !CONFIG_FS_ENCRYPTION */
+ static inline int ext4_fname_setup_filename(struct inode *dir,
+@@ -2805,16 +2812,11 @@ static inline int ext4_fname_setup_filename(struct inode *dir,
+ 					    int lookup,
+ 					    struct ext4_filename *fname)
+ {
+-	int err = 0;
+ 	fname->usr_fname = iname;
+ 	fname->disk_name.name = (unsigned char *) iname->name;
+ 	fname->disk_name.len = iname->len;
+ 
+-#if IS_ENABLED(CONFIG_UNICODE)
+-	err = ext4_fname_setup_ci_filename(dir, iname, fname);
+-#endif
+-
+-	return err;
++	return ext4_fname_setup_ci_filename(dir, iname, fname);
+ }
+ 
+ static inline int ext4_fname_prepare_lookup(struct inode *dir,
+@@ -2826,10 +2828,7 @@ static inline int ext4_fname_prepare_lookup(struct inode *dir,
+ 
+ static inline void ext4_fname_free_filename(struct ext4_filename *fname)
+ {
+-#if IS_ENABLED(CONFIG_UNICODE)
+-	kfree(fname->cf_name.name);
+-	fname->cf_name.name = NULL;
+-#endif
++	ext4_fname_free_ci_filename(fname);
+ }
+ #endif /* !CONFIG_FS_ENCRYPTION */
+ 
 diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
-index eaf383740965..708c241b23ec 100644
+index 708c241b23ec..6a46851675d2 100644
 --- a/fs/ext4/namei.c
 +++ b/fs/ext4/namei.c
-@@ -1406,6 +1406,9 @@ static bool ext4_match(struct inode *parent,
- 			 * only case where it happens is on a disk
- 			 * corruption or ENOMEM.
- 			 */
-+			if (ret == -EINVAL)
-+				EXT4_ERROR_INODE(parent,
-+					"Directory contains filename that is invalid UTF-8");
- 			return false;
+@@ -1765,8 +1765,7 @@ static struct dentry *ext4_lookup(struct inode *dir, struct dentry *dentry, unsi
  		}
- 		return ret;
+ 	}
+ 
+-#if IS_ENABLED(CONFIG_UNICODE)
+-	if (!inode && IS_CASEFOLDED(dir)) {
++	if (IS_ENABLED(CONFIG_UNICODE) && !inode && IS_CASEFOLDED(dir)) {
+ 		/* Eventually we want to call d_add_ci(dentry, NULL)
+ 		 * for negative dentries in the encoding case as
+ 		 * well.  For now, prevent the negative dentry
+@@ -1774,7 +1773,7 @@ static struct dentry *ext4_lookup(struct inode *dir, struct dentry *dentry, unsi
+ 		 */
+ 		return NULL;
+ 	}
+-#endif
++
+ 	return d_splice_alias(inode, dentry);
+ }
+ 
+@@ -3091,16 +3090,14 @@ static int ext4_rmdir(struct inode *dir, struct dentry *dentry)
+ 	ext4_fc_track_unlink(handle, dentry);
+ 	retval = ext4_mark_inode_dirty(handle, dir);
+ 
+-#if IS_ENABLED(CONFIG_UNICODE)
+ 	/* VFS negative dentries are incompatible with Encoding and
+ 	 * Case-insensitiveness. Eventually we'll want avoid
+ 	 * invalidating the dentries here, alongside with returning the
+ 	 * negative dentries at ext4_lookup(), when it is better
+ 	 * supported by the VFS for the CI case.
+ 	 */
+-	if (IS_CASEFOLDED(dir))
++	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
+ 		d_invalidate(dentry);
+-#endif
+ 
+ end_rmdir:
+ 	brelse(bh);
+@@ -3196,16 +3193,16 @@ static int ext4_unlink(struct inode *dir, struct dentry *dentry)
+ 	retval = __ext4_unlink(handle, dir, &dentry->d_name, d_inode(dentry));
+ 	if (!retval)
+ 		ext4_fc_track_unlink(handle, dentry);
+-#if IS_ENABLED(CONFIG_UNICODE)
++
+ 	/* VFS negative dentries are incompatible with Encoding and
+ 	 * Case-insensitiveness. Eventually we'll want avoid
+ 	 * invalidating the dentries here, alongside with returning the
+ 	 * negative dentries at ext4_lookup(), when it is  better
+ 	 * supported by the VFS for the CI case.
+ 	 */
+-	if (IS_CASEFOLDED(dir))
++	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
+ 		d_invalidate(dentry);
+-#endif
++
+ 	if (handle)
+ 		ext4_journal_stop(handle);
+ 
+diff --git a/fs/ext4/super.c b/fs/ext4/super.c
+index 1847b46af808..fa0004459dd6 100644
+--- a/fs/ext4/super.c
++++ b/fs/ext4/super.c
+@@ -3645,14 +3645,12 @@ int ext4_feature_set_ok(struct super_block *sb, int readonly)
+ 		return 0;
+ 	}
+ 
+-#if !IS_ENABLED(CONFIG_UNICODE)
+-	if (ext4_has_feature_casefold(sb)) {
++	if (!IS_ENABLED(CONFIG_UNICODE) && ext4_has_feature_casefold(sb)) {
+ 		ext4_msg(sb, KERN_ERR,
+ 			 "Filesystem with casefold feature cannot be "
+ 			 "mounted without CONFIG_UNICODE");
+ 		return 0;
+ 	}
+-#endif
+ 
+ 	if (readonly)
+ 		return 1;
 -- 
 2.36.1
 
