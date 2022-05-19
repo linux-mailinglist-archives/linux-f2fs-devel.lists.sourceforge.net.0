@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54C1352D190
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 May 2022 13:35:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F97852D788
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 May 2022 17:30:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nreR6-0007QN-BG; Thu, 19 May 2022 11:35:18 +0000
+	id 1nri6b-0007KH-DP; Thu, 19 May 2022 15:30:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nreR4-0007QH-Ts
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 May 2022 11:35:17 +0000
+ (envelope-from <chao@kernel.org>) id 1nri6Z-0007K6-Qa
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 May 2022 15:30:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QiZBUYxb+LZ8HQ7xupsCN97TS2qlMmW2iQ0cG2KDaTQ=; b=jVOdJZkPQgWzgfnR9zD6tLUUIz
- LwuvntI+27vW2PBmLH5YHRtrU0cPk8hWMzJHaIzCx3cg23yLFCSgovsduNd5fTWlUDBY5uPf9yc1N
- JDqgz/gRKchk+8OMre5N7CC9PJ8UdVCAAF5DBIs2czHrLPO1dw74t/kV4UKOJidzwdrY=;
+ bh=1S20JCzcneSFdQsrs89B00Hokq/thRFgC1Iv5sb25ak=; b=L4sD92IOGBcvoWi4tfAVdC8xsd
+ x/fp7uqKPlSJMf/Vc1movR++pAfnxbiTMYk2bCM1qNX/t5x24C+PXYk6ezghFtZy6F45hJ0Qvgtyz
+ 6wQNemC1DUO2tLFTfK/A64asLtVANx1pwbaR84s9ztmS+dB1Mf9otayWHzL85IYmVPIw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,43 +29,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=QiZBUYxb+LZ8HQ7xupsCN97TS2qlMmW2iQ0cG2KDaTQ=; b=fBBmhnF4TIUkMXFyLpxmlCPA9R
- 951CnLLWZ0VgdASyB64Mw+gouZXvHwzCJnY46vA8YeUxmlPy/PuVrERO8X+idDeGXN0JtuziD1jXK
- aXzEnumrAZAUrNJwzSxbri4Am1+rZZ/rIyKcSk7t4TFPkAjI/q5k5obkqv/P7wbEpWOU=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=1S20JCzcneSFdQsrs89B00Hokq/thRFgC1Iv5sb25ak=; b=cktgu5+y6nMeOtQKry+KjvSNS7
+ xtg6DeXqwST9m0tLe4y2Z1NvTVL/oMQYNlDBToOawnQXZ0bBd4BeFL0YFGFKnP8tETsVHBHsD48jQ
+ gyT1W1JH7aisPD7a5l/jy0BH65mvCgFreWtx9y0fA7SpZJG+RXo7rYoog9YeY62AcMb4=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nreR2-0005On-Ht
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 May 2022 11:35:17 +0000
+ id 1nri6Z-009dyP-Af
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 May 2022 15:30:24 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5ED0D61B22;
- Thu, 19 May 2022 11:35:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 18A02C385AA;
- Thu, 19 May 2022 11:35:02 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 0BCCFB82568;
+ Thu, 19 May 2022 15:30:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B708C34113;
+ Thu, 19 May 2022 15:30:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652960105;
- bh=l+UvfwWDbzIpNOrWxSKX1teRaSjmc4rzDjynn+J1lAA=;
+ s=k20201202; t=1652974215;
+ bh=tzRUqmBOG/j1qnFGl9Mf3VOLrKBnNATJIoMIm5y8DLU=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=XJRqYvIKuODj6ZGJfUdZPj+xNEUlH9X7Rsdu7MQIxDCHfh3Z02y1Zg0BpdvqZTdmf
- xs27fBxE6B525tsNCbWFlYqzWUZPiZ+n6kaAKfH4nq9GAFk0RV8i2bP5TtaWjOkFzm
- 9bM5AEKqAkJ63FXMIyIJ+nOuY8APGA3v0nafC0xBoJ67iNbTsyYP/eWpx59r4BGSnW
- W6XBT02DW7CAXPU6x/xuYQLQgpUUohMr5QqNoBwEKpTznubV1s3l1IDFvrIt1cqwst
- vKiYeI4UzZo56NC8yVdLyMW4PWdH0i6ELDocLb603EzzTvDlh6H16RT6S9Cp++HLpc
- F4eXZ7w7YuVGw==
-Message-ID: <893fcc14-6cda-ce2b-222c-2c48bf2275d2@kernel.org>
-Date: Thu, 19 May 2022 19:35:00 +0800
+ b=H62aCog291QEMK1cW22c3HyyS+7mpmPcZ5vI2yPWfGk5wrhlNzZr9I45Ox1FywU/l
+ ZBijtlE6xiaZoRmzT65RGW2gXud9mnPHJsB+VQGv3GrScFWh4JhxTkieaJBZx3GpuM
+ U2x5CMJ4opRjX80VkOo/96jrvYYhPr6tS+XiWBCptZWy3+hR3exmODHSPo2CYzQb5T
+ GABJy/7V8QRvLXMp9SHwDQFK8Ueayf1/W4yLah8vAepLfYMHBiUtAbexd7wvLfnytC
+ UpJEFgcH0jf021sqR+uD7oXfEWWvAOK4EiNlND8LdUhTSrvuAK1C97hQtzn2B258la
+ RJoZJqzgzJnJw==
+Message-ID: <78b1e40e-69cd-465c-ee78-698eb38892be@kernel.org>
+Date: Thu, 19 May 2022 23:30:10 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.9.0
 Content-Language: en-US
-To: Gabriel Krisman Bertazi <krisman@collabora.com>, tytso@mit.edu,
- adilger.kernel@dilger.ca, jaegeuk@kernel.org, ebiggers@kernel.org
-References: <20220519014044.508099-1-krisman@collabora.com>
- <20220519014044.508099-9-krisman@collabora.com>
+To: Chao Liu <chaoliu719@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20220519104010.2814819-1-chaoliu719@gmail.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220519014044.508099-9-krisman@collabora.com>
+In-Reply-To: <20220519104010.2814819-1-chaoliu719@gmail.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -73,14 +71,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/5/19 9:40, Gabriel Krisman Bertazi wrote: > Instead
- of a bunch of ifdefs, make the unicode built checks part of the > code flow
- where possible, as requested by Torvalds. > > Reviewed-by: Eric [...] 
+ Content preview:  On 2022/5/19 18:40,
+ Chao Liu wrote: > From: Chao Liu <liuchao@coolpad.com>
+ > > In f2fs_read_inline_data(), it is confused with checking of > inline_data
+ flag, as we checked it before calling. So this [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -92,9 +91,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nreR2-0005On-Ht
-Subject: Re: [f2fs-dev] [PATCH v6 8/8] f2fs: Move CONFIG_UNICODE defguards
- into the code flow
+X-Headers-End: 1nri6Z-009dyP-Af
+Subject: Re: [f2fs-dev] [PATCH RESEND] f2fs: make f2fs_read_inline_data()
+ more readable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,18 +105,20 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-ext4@vger.kernel.org, kernel@collabora.com,
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@google.com>
+Cc: Wayne Zhang <zhangwen@coolpad.com>, Yue Hu <huyue2@coolpad.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/5/19 9:40, Gabriel Krisman Bertazi wrote:
-> Instead of a bunch of ifdefs, make the unicode built checks part of the
-> code flow where possible, as requested by Torvalds.
+On 2022/5/19 18:40, Chao Liu wrote:
+> From: Chao Liu <liuchao@coolpad.com>
 > 
-> Reviewed-by: Eric Biggers <ebiggers@google.com>
-> Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+> In f2fs_read_inline_data(), it is confused with checking of
+> inline_data flag, as we checked it before calling. So this
+> patch add some comments for f2fs_has_inline_data().
+> 
+> Signed-off-by: Chao Liu <liuchao@coolpad.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 
