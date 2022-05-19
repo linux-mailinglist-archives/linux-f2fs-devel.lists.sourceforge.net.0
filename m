@@ -2,86 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96F1F52C81C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 May 2022 01:53:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2039752C94C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 May 2022 03:41:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nrTUM-000541-Hj; Wed, 18 May 2022 23:53:57 +0000
+	id 1nrVAA-0002qX-0L; Thu, 19 May 2022 01:41:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ebiggers@kernel.org>) id 1nrTUC-00053h-NX
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 23:53:47 +0000
+ (envelope-from <krisman@collabora.com>) id 1nrVA8-0002qR-R4
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 May 2022 01:41:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VK+fxpefrXkihvbJXirC2GvOU4OhiStGiNVMoly2AWA=; b=FhJWZUaUhJ9j2ryQlRpSNl8QVo
- 6jH/rDS/Qw7aE+cYgkutmMtmQXkil0hb0fQgp4eB4Fljnq3JK6ciMQ0QUwsTiQR/8ggskO2iZhdjV
- evL1qZYppheL1uOUpwGbf6ZoiZK8KGGxjlmK6IbWSMvaAQLthKWndf7Yj/Noq0eEWEvE=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=VK+fxpefrXkihvbJXirC2GvOU4OhiStGiNVMoly2AWA=; b=k81pKTFIS/DqWTLWsnb0JjTaBN
- b9ryiEV91azCVfD1NzJPIrCQnipD0yviLx8k9GlhTKRNoulLu78mlt9UriC6ZL6DvI3xalmcIkUPH
- jGrLST1WaXknoiJ+xped1VM/PBZgmyR4rMhFR1/iJCR+GeJ6/o5xXts9lZh775CLf8Ag=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=TOSFMQpyD/DjSbWOT1eZ+rjNyZM6llU3me+0ZONkNVU=; b=bbKRnXfDpYPNNKEoVVacWqEILd
+ HpC8PkR1KHVdspWxcjl0SOI0DQxU6av+/UMgCKWwJ93PvtV1OGeu9XVdEXACCPcGEjtKEZtta1oOS
+ D+ncjRGVxt7QyKFFOqJmilgVgsZ5vKdAoMIZq4Ei3Sn9jMDDVMV3Z+cHLpL+v+GCFTSI=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=TOSFMQpyD/DjSbWOT1eZ+rjNyZM6llU3me+0ZONkNVU=; b=B
+ iNnXD9YLvVrFg/QLn5173X+RXb/K/L7YGv+N3msd6o6oNiihwrJv1/9SU4WSRL+p1Pqaf6MeShIeT
+ BefBJS6cLdhV6AFRnqs2GCtCL7o9utd/ZXxSDFXnJeVy3AJiP9mTVypYO7JU42DzOfGCmVU7uPv8h
+ khi+Q8x3IUKUbQzM=;
+Received: from bhuna.collabora.co.uk ([46.235.227.227])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nrTU6-0006CZ-Rm
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 18 May 2022 23:53:47 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 27E586175E
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 18 May 2022 23:53:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6A28C3411C;
- Wed, 18 May 2022 23:53:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1652918012;
- bh=mHfaNK/yqtCaO/YT1VZcqJFlQSMjauSczWDdIigQbH4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=X9OLn4uN0IO4WyRABB3ByikS4qWBMsqFglNa8PeQ72cZC0adZSBvyLrplspqEtJRX
- mZxZJWuw2e0+J9G4KOg8g+NuMV3eMDe6MRLVhA2PXNtqgJ/22jaYPwmRJBuar7XPkV
- BZMEX5DB0YvhDEVWNjqSNgnIYGirlIO+VpWpNzNKoRiCPTwZ013i1D1hEWsq+odUQ0
- jqK5EGlKizkZblHmj0qlIhshRQvVwH+kkUcnm3PZiENEHBLFjoXOZL42G3moRRaLxh
- iMIuOcvo/Xjrlh0wnusnqJd4zv9t2f8C4dAh8KR9Ee024Rmn8spgTVzaebA0uQzBKl
- AGm4vyf4h8/Mg==
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fsdevel@vger.kernel.org
-Date: Wed, 18 May 2022 16:50:11 -0700
-Message-Id: <20220518235011.153058-8-ebiggers@kernel.org>
+ id 1nrVA5-0001T4-Gw
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 19 May 2022 01:41:11 +0000
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: krisman) with ESMTPSA id 7EB0D1F45360
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1652924459;
+ bh=cDPrEKf0JU2IBDHkl3+Mv2tvpcr+3lXlXVKIov5p0GA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=iLkvZgWYP+ALK8iXHf9zqiw76OICiqcdmx1mw1Xn0FloGlQe/Z486G8+1Fprw+ZN3
+ /SFHFq2dqLv4lzjWqky6AOKodVt8ZfLA2WOc0UejC9dUtpk1PiUg9QdB/PoA1GlYlR
+ SfcHrpKNtiIqvMbfNYMN8lZaVjSCyN8Wed+kZpZRGdZfHrTU4U32/rll5wTIIYjtNz
+ kOvmiyH1lA98J75meUbNn6WkPGlTAb76e+uupJOvLJWKpn8ILKT7kG2QiAalEjuZpM
+ vzECsjFLiyy2TJPdGniIMmt9Y9P4FkPeO4ZRt18VXYbnRG9y9rUjx+1KuuemJEcC+p
+ Dg+aXselu+OoA==
+From: Gabriel Krisman Bertazi <krisman@collabora.com>
+To: tytso@mit.edu, adilger.kernel@dilger.ca, jaegeuk@kernel.org,
+ ebiggers@kernel.org
+Date: Wed, 18 May 2022 21:40:36 -0400
+Message-Id: <20220519014044.508099-1-krisman@collabora.com>
 X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220518235011.153058-1-ebiggers@kernel.org>
-References: <20220518235011.153058-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -3.0 (---)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> Add support for
- STATX_IOALIGN to f2fs,
- so that I/O alignment information is exposed to userspace in a consistent
- and easy-to-use way. Signed-off-by: Eric Biggers <ebiggers@google.com> ---
- fs/f2fs/file.c | 31 +++++++++++++++++++++++++++++++ 1 file changed,
- 31 insertions(+)
- Content analysis details:   (-3.0 points, 6.0 required)
+ Content preview:  Hi Eric, Ted, Sorry for the second submission of this series
+ on the same day. Just a batch of simple fixes, so I hope it is getting close
+ to merging. This is v6 of this series (thank you for the feedback!) . This
+ picks up a few r-b tags and apply the comments from Eric. No big changes,
+ all documented in the respective patches. Once again, tested wi [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -89,12 +80,10 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nrTU6-0006CZ-Rm
-Subject: [f2fs-dev] [RFC PATCH v2 7/7] f2fs: support STATX_IOALIGN
+ 0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
+ lines -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1nrVA5-0001T4-Gw
+Subject: [f2fs-dev] [PATCH v6 0/8] Clean up the case-insensitive lookup path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,73 +95,60 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org, linux-api@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- Keith Busch <kbusch@kernel.org>, linux-ext4@vger.kernel.org
+Cc: linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>,
+ kernel@collabora.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+Hi Eric, Ted,
 
-Add support for STATX_IOALIGN to f2fs, so that I/O alignment information
-is exposed to userspace in a consistent and easy-to-use way.
+Sorry for the second submission of this series on the same day.  Just a
+batch of simple fixes, so I hope it is getting close to merging.
 
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/f2fs/file.c | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
+This is v6 of this series (thank you for the feedback!) .  This picks up
+a few r-b tags and apply the comments from Eric.  No big changes, all
+documented in the respective patches.  Once again, tested with fstests
+generic/556.
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index c32f7722ba6b0..f89a190949c59 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -835,6 +835,21 @@ static bool f2fs_force_buffered_io(struct inode *inode)
- 	return false;
- }
- 
-+/* Return the maximum value of io_opt across all the filesystem's devices. */
-+static unsigned int f2fs_max_io_opt(struct inode *inode)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	int io_opt = 0;
-+	int i;
-+
-+	if (!f2fs_is_multi_device(sbi))
-+		return bdev_io_opt(sbi->sb->s_bdev);
-+
-+	for (i = 0; i < sbi->s_ndevs; i++)
-+		io_opt = max(io_opt, bdev_io_opt(FDEV(i).bdev));
-+	return io_opt;
-+}
-+
- int f2fs_getattr(struct user_namespace *mnt_userns, const struct path *path,
- 		 struct kstat *stat, u32 request_mask, unsigned int query_flags)
- {
-@@ -851,6 +866,22 @@ int f2fs_getattr(struct user_namespace *mnt_userns, const struct path *path,
- 		stat->btime.tv_nsec = fi->i_crtime.tv_nsec;
- 	}
- 
-+	/*
-+	 * Return the I/O alignment information if requested.  We only return
-+	 * this information when requested, since on encrypted files it might
-+	 * take a fair bit of work to get if the file wasn't opened recently.
-+	 */
-+	if ((request_mask & STATX_IOALIGN) && S_ISREG(inode->i_mode)) {
-+		unsigned int bsize = i_blocksize(inode);
-+
-+		stat->result_mask |= STATX_IOALIGN;
-+		if (!f2fs_force_buffered_io(inode)) {
-+			stat->mem_align_dio = bsize;
-+			stat->offset_align_dio = bsize;
-+		}
-+		stat->offset_align_optimal = max(f2fs_max_io_opt(inode), bsize);
-+	}
-+
- 	flags = fi->i_flags;
- 	if (flags & F2FS_COMPR_FL)
- 		stat->attributes |= STATX_ATTR_COMPRESSED;
+* Original commit letter
+
+The case-insensitive implementations in f2fs and ext4 have quite a bit
+of duplicated code.  This series simplifies the ext4 version, with the
+goal of extracting ext4_ci_compare into a helper library that can be
+used by both filesystems.  It also reduces the clutter from many
+codeguards for CONFIG_UNICODE; as requested by Linus, they are part of
+the codeflow now.
+
+While there, I noticed we can leverage the utf8 functions to detect
+encoded names that are corrupted in the filesystem. Therefore, it also
+adds an ext4 error on that scenario, to mark the filesystem as
+corrupted.
+
+This series survived passes of xfstests -g quick.
+
+Gabriel Krisman Bertazi (8):
+  ext4: Simplify the handling of cached insensitive names
+  f2fs: Simplify the handling of cached insensitive names
+  libfs: Introduce case-insensitive string comparison helper
+  ext4: Reuse generic_ci_match for ci comparisons
+  f2fs: Reuse generic_ci_match for ci comparisons
+  ext4: Log error when lookup of encoded dentry fails
+  ext4: Move CONFIG_UNICODE defguards into the code flow
+  f2fs: Move CONFIG_UNICODE defguards into the code flow
+
+ fs/ext4/ext4.h     |  49 +++++++++---------
+ fs/ext4/namei.c    | 120 ++++++++++++++-------------------------------
+ fs/ext4/super.c    |   4 +-
+ fs/f2fs/dir.c      | 103 ++++++++++++--------------------------
+ fs/f2fs/f2fs.h     |  15 +++++-
+ fs/f2fs/namei.c    |  11 ++---
+ fs/f2fs/recovery.c |   5 +-
+ fs/f2fs/super.c    |   8 +--
+ fs/libfs.c         |  68 +++++++++++++++++++++++++
+ include/linux/fs.h |   4 ++
+ 10 files changed, 187 insertions(+), 200 deletions(-)
+
 -- 
 2.36.1
 
