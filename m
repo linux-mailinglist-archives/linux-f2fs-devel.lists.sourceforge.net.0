@@ -2,94 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C96D52E113
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 May 2022 02:20:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 927A052E317
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 May 2022 05:27:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nrqN3-00056D-03; Fri, 20 May 2022 00:19:57 +0000
+	id 1nrtIv-00025u-To; Fri, 20 May 2022 03:27:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nrqN1-000564-Mq
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 May 2022 00:19:56 +0000
+ (envelope-from <david@fromorbit.com>) id 1nrtIt-00025n-Ox
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 May 2022 03:27:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BRUrK2Dts6zO2m3pyfnZ2UTjrMwO+C/CjIRCQNdkTXk=; b=VBmIn24OVW0KRPxp/2uU5FDjK8
- 1aT2hBjGRl7obfkhjeY6b/tz59EOVCbva5AgSwbztdN3jO1ej5k7qVBLkC3Kq7/LoW2fHdunzZhX8
- ni/LOMJkyno5L+YDTYfiFzKSQJUVW0HGU950W+TIYwB/7GkM0pplEIOVWhB6W7j2qpho=;
+ bh=5kw+EBZjE7VU1oZGnaJXzP9KKs0ff2QnGmEMcPk/zFo=; b=BdBkIY7ToWfhGMcYQ4n71Cl2C2
+ 3JWpMUZuZ/PxK6kI4CON6qpaMxAg8d7V3ckFmkXE1AQ9Ak/UFK+yq1pNVg9VhOETXgT0ZN3uUgwpx
+ 4wJ0ZFN8By+Vm2/OSRRvKYVmeTHx9zjOImEefHInHJiwEElYkDh71eqr1NHvIZjdKN2g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BRUrK2Dts6zO2m3pyfnZ2UTjrMwO+C/CjIRCQNdkTXk=; b=ACKL4T2SSNQtKW6O2jeQT2/Kz1
- PQZscdMCekMRaYrYzsOMquaE5RwewmnsCJjZ9sPLLxNCL5xpaiaUo8WlzD5hymd4xYaiLP/HwUSQ7
- wiswWszojoEU3g1aq1Zdit72//2jnV2BqCQsybHijTjsFCoUzrmm92X95N8nnpBCgieY=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nrqMy-00B7Gx-0V
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 May 2022 00:19:55 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A213461A59
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 20 May 2022 00:19:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00FD8C34114
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 20 May 2022 00:19:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1653005986;
- bh=Bkf8ogacLmaUaly4YE74FduqW4LLpgLZ9LvF2kleM6s=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=siUAh/xJKLR6YxlDea5CfPuaNtmprjAXq1+EYn+3WfsItlXzmJdPETqC2q+0hQ4Fl
- JgzXgst+H+lMGTnuxxS9EmTh1kMsNFMf3c4ZdFpmYV9on1X/CRsFX6wl8Kzk4aXBow
- 49CaVV9vWlSPrQciHIBdXUyKD27/+QjEyKbk60NuNqEXOQ+mTZnX6X3hy3wM7NOamH
- 4KzoVrG+XAnRES24RlGEQzngVNUMhcIZWodgTBtVJyVHK6g4Kj4wlWhr8BubM7mhma
- wMibtK2paY+VDTdF4n8dGzObulQKMUTpi9FZZ64cC6hQfOv11I8iLIVvqFtEcpPXPr
- IAeZ76dqQ3U4A==
-Date: Thu, 19 May 2022 17:19:44 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <YobeoOh9F55TzqJb@google.com>
-References: <20220519234605.633645-1-jaegeuk@kernel.org>
+ bh=5kw+EBZjE7VU1oZGnaJXzP9KKs0ff2QnGmEMcPk/zFo=; b=SPfe0kH7HT/r961/UDtq++RztE
+ XY7Xiq3AXMvz2Gk8q2+J3YGzN6DG/YL5aW84th7uFbci26+KHRJrA+PuJe9Ao9D4Li8HEzjRthcHj
+ LukHlGV4qKdzXamUVIInScrhhpdO5E6rPoUjYk14m9mn9ssY63h2ZO68QyMCp73FNa5M=;
+Received: from mail105.syd.optusnet.com.au ([211.29.132.249])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.94.2)
+ id 1nrtIp-0007Xr-55
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 20 May 2022 03:27:50 +0000
+Received: from dread.disaster.area (pa49-181-2-147.pa.nsw.optusnet.com.au
+ [49.181.2.147])
+ by mail105.syd.optusnet.com.au (Postfix) with ESMTPS id 4126E10E68AE;
+ Fri, 20 May 2022 13:27:41 +1000 (AEST)
+Received: from dave by dread.disaster.area with local (Exim 4.92.3)
+ (envelope-from <david@fromorbit.com>)
+ id 1nrtIh-00E6GN-MT; Fri, 20 May 2022 13:27:39 +1000
+Date: Fri, 20 May 2022 13:27:39 +1000
+From: Dave Chinner <david@fromorbit.com>
+To: "Darrick J. Wong" <djwong@kernel.org>
+Message-ID: <20220520032739.GB1098723@dread.disaster.area>
+References: <20220518235011.153058-1-ebiggers@kernel.org>
+ <20220518235011.153058-2-ebiggers@kernel.org>
+ <YobNXbYnhBiqniTH@magnolia>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220519234605.633645-1-jaegeuk@kernel.org>
-X-Spam-Score: -5.7 (-----)
+In-Reply-To: <YobNXbYnhBiqniTH@magnolia>
+X-Optus-CM-Score: 0
+X-Optus-CM-Analysis: v=2.4 cv=VuxAv86n c=1 sm=1 tr=0 ts=62870aad
+ a=ivVLWpVy4j68lT4lJFbQgw==:117 a=ivVLWpVy4j68lT4lJFbQgw==:17
+ a=kj9zAlcOel0A:10 a=oZkIemNP1mAA:10 a=1XWaLZrsAAAA:8 a=VwQbUJbxAAAA:8
+ a=7-415B0cAAAA:8 a=-h69JAkiF4VdWyV60hkA:9 a=CjuIK1q_8ugA:10
+ a=AjGcO6oz07-iQ99wixmX:22 a=biEYGPWJfzWAr4FL6Ov7:22
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: We need to get the definitions first. Signed-off-by: Jaegeuk
- Kim <jaegeuk@kernel.org> --- Change log from v1: - fix build problems 
- Content analysis details:   (-5.7 points, 6.0 required)
+ Content preview:  On Thu, May 19, 2022 at 04:06:05PM -0700, Darrick J. Wong
+ wrote: > On Wed, May 18, 2022 at 04:50:05PM -0700, Eric Biggers wrote: > >
+ From: Eric Biggers <ebiggers@google.com> > > > > Traditionally, the [...]
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nrqMy-00B7Gx-0V
-Subject: Re: [f2fs-dev] [PATCH 1/2 v2] f2fs-tools: adjust config file first
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [211.29.132.249 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1nrtIp-0007Xr-55
+Subject: Re: [f2fs-dev] [RFC PATCH v2 1/7] statx: add I/O alignment
+ information
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,46 +91,83 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-xfs@vger.kernel.org, linux-api@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Eric Biggers <ebiggers@kernel.org>, Keith Busch <kbusch@kernel.org>,
+ linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-We need to get the definitions first.
+On Thu, May 19, 2022 at 04:06:05PM -0700, Darrick J. Wong wrote:
+> On Wed, May 18, 2022 at 04:50:05PM -0700, Eric Biggers wrote:
+> > From: Eric Biggers <ebiggers@google.com>
+> > 
+> > Traditionally, the conditions for when DIO (direct I/O) is supported
+> > were fairly simple: filesystems either supported DIO aligned to the
+> > block device's logical block size, or didn't support DIO at all.
+> > 
+> > However, due to filesystem features that have been added over time (e.g,
+> > data journalling, inline data, encryption, verity, compression,
+> > checkpoint disabling, log-structured mode), the conditions for when DIO
+> > is allowed on a file have gotten increasingly complex.  Whether a
+> > particular file supports DIO, and with what alignment, can depend on
+> > various file attributes and filesystem mount options, as well as which
+> > block device(s) the file's data is located on.
+> > 
+> > XFS has an ioctl XFS_IOC_DIOINFO which exposes this information to
+> > applications.  However, as discussed
+> > (https://lore.kernel.org/linux-fsdevel/20220120071215.123274-1-ebiggers@kernel.org/T/#u),
+> > this ioctl is rarely used and not known to be used outside of
+> > XFS-specific code.  It also was never intended to indicate when a file
+> > doesn't support DIO at all, and it only exposes the minimum I/O
+> > alignment, not the optimal I/O alignment which has been requested too.
+> > 
+> > Therefore, let's expose this information via statx().  Add the
+> > STATX_IOALIGN flag and three fields associated with it:
+> > 
+> > * stx_mem_align_dio: the alignment (in bytes) required for user memory
+> >   buffers for DIO, or 0 if DIO is not supported on the file.
+> > 
+> > * stx_offset_align_dio: the alignment (in bytes) required for file
+> >   offsets and I/O segment lengths for DIO, or 0 if DIO is not supported
+> >   on the file.  This will only be nonzero if stx_mem_align_dio is
+> >   nonzero, and vice versa.
+> > 
+> > * stx_offset_align_optimal: the alignment (in bytes) suggested for file
+> >   offsets and I/O segment lengths to get optimal performance.  This
+> >   applies to both DIO and buffered I/O.  It differs from stx_blocksize
+> >   in that stx_offset_align_optimal will contain the real optimum I/O
+> >   size, which may be a large value.  In contrast, for compatibility
+> >   reasons stx_blocksize is the minimum size needed to avoid page cache
+> >   read/write/modify cycles, which may be much smaller than the optimum
+> >   I/O size.  For more details about the motivation for this field, see
+> >   https://lore.kernel.org/r/20220210040304.GM59729@dread.disaster.area
+> 
+> Hmm.  So I guess this is supposed to be the filesystem's best guess at
+> the IO size that will minimize RMW cycles in the entire stack?  i.e. if
+> the user does not want RMW of pagecache pages, of file allocation units
+> (if COW is enabled), of RAID stripes, or in the storage itself, then it
+> should ensure that all IOs are aligned to this value?
+> 
+> I guess that means for XFS it's effectively max(pagesize, i_blocksize,
+> bdev io_opt, sb_width, and (pretend XFS can reflink the realtime volume)
+> the rt extent size)?  I didn't see a manpage update for statx(2) but
+> that's mostly what I'm interested in. :)
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
+Yup, xfs_stat_blksize() should give a good idea of what we should
+do. It will end up being pretty much that, except without the need
+to a mount option to turn on the sunit/swidth return, and always
+taking into consideration extent size hints rather than just doing
+that for RT inodes...
 
- Change log from v1:
-  - fix build problems
+Cheers,
 
- tools/f2fscrypt.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/tools/f2fscrypt.c b/tools/f2fscrypt.c
-index 4c5d87036225..b406bcf56640 100644
---- a/tools/f2fscrypt.c
-+++ b/tools/f2fscrypt.c
-@@ -43,6 +43,9 @@
- #ifdef __KERNEL__
- #include <linux/fs.h>
- #endif
-+
-+#include <f2fs_fs.h>
-+
- #ifdef HAVE_UUID_UUID_H
- #include <uuid/uuid.h>
- #else
-@@ -55,7 +58,6 @@ typedef unsigned char uuid_t[16];
- #ifdef HAVE_SYS_KEY_H
- #include <sys/key.h>
- #endif
--#include <f2fs_fs.h>
- 
- #define F2FS_MAX_KEY_SIZE		64
- #define F2FS_MAX_PASSPHRASE_SIZE	1024
+Dave.
 -- 
-2.36.1.124.g0e6072fb45-goog
-
+Dave Chinner
+david@fromorbit.com
 
 
 _______________________________________________
