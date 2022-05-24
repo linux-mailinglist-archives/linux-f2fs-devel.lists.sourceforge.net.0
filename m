@@ -2,69 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFBBC532D64
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 May 2022 17:26:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 341EA5331FC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 May 2022 21:53:32 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ntWQp-0001SF-Vm; Tue, 24 May 2022 15:26:47 +0000
+	id 1ntaau-0000NI-Rf; Tue, 24 May 2022 19:53:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1ntWQo-0001S9-Jf
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 May 2022 15:26:45 +0000
+ (envelope-from <pr-tracker-bot@kernel.org>) id 1ntaat-0000NC-7l
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 May 2022 19:53:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
+ Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uBuhfGI5zGEpbbBJ0zuaUuRd/xyV/cJJyhheiKsecdY=; b=LEgYaxAHMxhbE2Rii4j7nWEeTp
- 7SimLq3DTPph+zBGoDlGPxV9dsTXtLJlNRo1Cy36Zo/JRziI9WLoBIQ6MxBSZhkg6beXHOH4lQB/y
- WmvdvRrGfIJqDbirW9RoAsk4IWPRbgNyiIJvwy93KX0qCCm0PXu3+HwX+w/R5lgf9xnI=;
+ bh=OjfyAeZhDkHl5U9YvPYsWySTFZ1XXM3tkhBKQqn+Cq8=; b=PGYnR0tI6+PhQ4pjmCvCOsn+di
+ MXiZSGBZIxgqiF7gw20dn8PkJx3fwiUCN7HKFWvlbmcSDYUnBoujgPI7GNbvrxzFbHxs2b7XZHRYc
+ OYhXQgSO0SebvsBWslJxlE6GloDGAuSdjJ4kapuyE2OVuPDa0nRtZ5yFTkWEz5p3Ld2U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uBuhfGI5zGEpbbBJ0zuaUuRd/xyV/cJJyhheiKsecdY=; b=cluSrU4MonS9w6esLrFL3Zdvgn
- El/BL/D/zWM8fkpPLLanFq/Lmzsgvt1TcCHhuRVcbP+Uh4Q5ffFKF647siyCzqIpb+0W6YocZxPp6
- X4LR9epq01Ee7/fSgIniKTE2PI/UD/8b4QXKTgmVa6bHg/YxAHbZe7M3yGc+L5hBI9Os=;
+ bh=OjfyAeZhDkHl5U9YvPYsWySTFZ1XXM3tkhBKQqn+Cq8=; b=IqeSeLOe+Kx9jJWvzL53qOLrTJ
+ R9Asg0a2SuhFTNOjsIunwB0PKshAHnUQ4CfOIzXutEx4h2HeUjvD4xFH98ngdXX3u7CoiQwAI507K
+ akUKr7mVoDUluHomGKSGxpNek88Th3nU7Toq+q0WiBjY4fCPnoS334q//ju8YreEShdk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1ntWQl-005cFW-Io
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 May 2022 15:26:45 +0000
+ id 1ntaaq-000384-Rs
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 24 May 2022 19:53:26 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5689A6171B;
- Tue, 24 May 2022 15:26:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6CBCAC34113;
- Tue, 24 May 2022 15:26:32 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AA539616CE;
+ Tue, 24 May 2022 19:53:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0FA35C34115;
+ Tue, 24 May 2022 19:53:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1653405992;
- bh=lXzHpD73ZNq/mGAnzxwqk68q+3cpJPWaCAtRV53tatI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=bQBRLUIB+CzIv9geGx/fXV1J6eBqxc8uSBz22ga34tMA74Tt6sznwf8zUq/13AD3g
- pdGVCep8TGTDLVFsFsup31isXOho6wgY/+Q7cecYJW4bfL8ItsMkFwlpgkQ3ZMq4oG
- 5tVMDxUuYnY2Akhqw//Z6OkkPHiPqOs+3hdTszjVtvIuCh875iDjkFjTjaujORqKdG
- KTofWputI5KayJewQ7P0ObQiZQIRQhM5kWEAxlEZA+yp/AoDk/Xa3+MKWg25TPAdxg
- WI01dlqWihXad0nm824+pzM/hhnXzEElVIjFBQbYNo1TDOsFT2LGR59Ui0zVuhcVI5
- 08TvHm8JXTg2Q==
-Date: Tue, 24 May 2022 08:26:30 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Yoz5JteVWWfZmOBp@google.com>
-References: <20220428181809.2352352-1-daeho43@gmail.com>
- <dd1ea728-4cb6-e35d-dc76-a1d62bead69a@kernel.org>
- <YovMeQO2n0XAxMhe@google.com>
- <227d10d5-2afe-acfa-7cfc-3a2f45331c6f@kernel.org>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <227d10d5-2afe-acfa-7cfc-3a2f45331c6f@kernel.org>
+ s=k20201202; t=1653421994;
+ bh=sIX5nepxizjoL5CUIZMMrQ7EMyDjBxLiWbw2JWQ11CY=;
+ h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
+ b=NEK2UjL9rBbHHy4NXYKRTLJyDgwZaVw/B6sBAkYZoAz/QfUPs9gYQSruZoRTRELvy
+ PkoCh0nEVxvahDBr7mYA52TNVCUNJa4WsX9s3AJoX/ANec5ZgdmjwXMEXHfVxMzjEM
+ CfxJucsq0bCCtz7BJ+bpT2dGiuJO115hzLXZYDeK/SatE9D2aahfJi0nurNKL5VH7I
+ FKmLL6KQGYxs403zE1oKNcrwbQbi+F9vw0KxqApRnmf3XTRgdfDVm+Yc8VUcCYN9D8
+ h87wwwjIYs3bAogORo7esUl74KxMCUhyvSBjFJyWm7DH+Ro1I9Xu4GFKTSqdHNT7zB
+ QwOr7nGQD/gog==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ E8D99E8DD61; Tue, 24 May 2022 19:53:13 +0000 (UTC)
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <YoszVvtG55xJnUJ6@sol.localdomain>
+References: <YoszVvtG55xJnUJ6@sol.localdomain>
+X-PR-Tracked-List-Id: <linux-ext4.vger.kernel.org>
+X-PR-Tracked-Message-Id: <YoszVvtG55xJnUJ6@sol.localdomain>
+X-PR-Tracked-Remote: https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git
+ tags/fsverity-for-linus
+X-PR-Tracked-Commit-Id: e6af1bb07704b53bad7771db1b05ee17abad11cb
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 51518aa68c1ffb54f2fdfed5324af30325529b32
+Message-Id: <165342199394.18932.13143767074670225290.pr-tracker-bot@kernel.org>
+Date: Tue, 24 May 2022 19:53:13 +0000
+To: Eric Biggers <ebiggers@kernel.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,13 +79,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 05/24, Chao Yu wrote: > On 2022/5/24 2:03, Jaegeuk Kim
- wrote: > > On 05/22, Chao Yu wrote: > > > On 2022/4/29 2:18,
- Daeho Jeong wrote:>
- + *old_addr = dn.data_blkaddr; > > > > + f2fs_truncate_data_b [...] 
+ Content preview:  The pull request you sent on Mon, 23 May 2022 00:10:14 -0700:
+ > https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git
+ tags/fsverity-for-linus has been merged into torvalds/linux.git:
+ https://git.kernel.org/torvalds/c/51518aa68c1ffb54f2fdfed5324af30325529b32
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -87,13 +96,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ntWQl-005cFW-Io
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: change the current atomic write way
+X-Headers-End: 1ntaaq-000384-Rs
+Subject: Re: [f2fs-dev] [GIT PULL] fsverity updates for 5.19
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,63 +111,27 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/24, Chao Yu wrote:
-> On 2022/5/24 2:03, Jaegeuk Kim wrote:
-> > On 05/22, Chao Yu wrote:
-> > > On 2022/4/29 2:18, Daeho Jeong wrote:> +		*old_addr = dn.data_blkaddr;
-> > > > +		f2fs_truncate_data_blocks_range(&dn, 1);
-> > > > +		dec_valid_block_count(sbi, F2FS_I(inode)->cow_inode, count);
-> > > > +		inc_valid_block_count(sbi, inode, &count);
-> > > > +		f2fs_replace_block(sbi, &dn, dn.data_blkaddr, new_addr,
-> > > > +					ni.version, true, false);
-> > > 
-> > > My concern is, if cow_inode's data was persisted into previous checkpoint,
-> > > and then f2fs_replace_block() will update SSA from cow_inode to inode?
-> > 
-> > SSA for original file is intact, so we'll see the orignal file's block addresses
-> > and SSA, if we flush cow_inode's SSA after committing the atomic writes?
-> > It'd be good to flush any SSA for cow_inode, since we'll truncate
-> > cow_inode after powercut by the ohphan recovery?
-> 
-> I think it's safe for recovery flow, but before that, fsck will report inconsistent
-> status during checking orphan atomic_write inode.
+The pull request you sent on Mon, 23 May 2022 00:10:14 -0700:
 
-That should be fine as well, since it'll just drop that cow_inode.
+> https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fsverity-for-linus
 
-> 
-> Thanks,
-> 
-> > 
-> > > it will cause inconsistent status of last valid checkpoint? Or am I mssing
-> > > something?
-> > > 
-> > > > -		f2fs_submit_merged_write_cond(sbi, inode, NULL, 0, DATA);
-> > > > +			new = f2fs_kmem_cache_alloc(revoke_entry_slab, GFP_NOFS,
-> > > > +							true, NULL);
-> > > > +			if (!new) {
-> > > > +				f2fs_put_dnode(&dn);
-> > > > +				ret = -ENOMEM;
-> > > > +				goto out;
-> > > 
-> > > It doesn't need to handle failure of f2fs_kmem_cache_alloc()
-> > > due to nofail parameter is true.
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/51518aa68c1ffb54f2fdfed5324af30325529b32
 
-Let's get this by another patch. Could you please send one?
+Thank you!
 
-> > > 
-> > > Thanks,
-> > > 
-> > > 
-> > > _______________________________________________
-> > > Linux-f2fs-devel mailing list
-> > > Linux-f2fs-devel@lists.sourceforge.net
-> > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/prtracker.html
 
 
 _______________________________________________
