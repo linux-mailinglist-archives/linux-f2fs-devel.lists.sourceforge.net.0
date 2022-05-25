@@ -2,16 +2,16 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCA53534703
+	by mail.lfdr.de (Postfix) with ESMTPS id 22F8E534702
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 May 2022 01:35:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nu0XM-0007kh-35; Wed, 25 May 2022 23:35:31 +0000
+	id 1nu0XO-000527-Dk; Wed, 25 May 2022 23:35:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nu0XL-0007kb-Ah
+ (envelope-from <jaegeuk@kernel.org>) id 1nu0XM-00051w-6b
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 May 2022 23:35:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -19,9 +19,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZSMlgvwXfFQ7wAFonsX08gzrcxdZI6oAIqfXaAzyfck=; b=DbWRc5tz30apWIlOcT9reuRDEK
- mN3JKro0QiSnfAc7bmTxYHl3feRjOyRAtKKp3FBYWqXw+zsO4sDkQSNcAs/55MUX2PQAQWkhrYKOe
- ojl++qLnKqItM3QeP6KzKRBx9GFTa4IFVrGYg1FC87bTQUFNfQPFU/92eD2WKAYXTdt8=;
+ bh=ONNOFNF4nh3cFwCgmgAI9TaKzkdKMUUmQesoEIUv3n0=; b=Cblo1oSFtZb1wlBz7OSq11qiem
+ Mdx3ms+I3moiVLYj6YA7kazL//rRms67R2o3/lru4CgCme7c+mxkG2d6JD7LRB74LvlS39oypDeHc
+ h0fmts9aQLze4ykP9acwo/7K49RQVT+ikTfkcqeb8S8vUAr3B+hToZPUrNOBG0MY0PmE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,69 +29,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZSMlgvwXfFQ7wAFonsX08gzrcxdZI6oAIqfXaAzyfck=; b=mcxomHvUCFZR/OGDQk8+Zo9wJf
- x3gtyOfqotM9ARt1QykWaPitTWvRwIK5VFu9uPvMJZSdn6CjwTpZGIseyP2ppaZMo3+/i7WXFbyj8
- Z1Sr6RMSokcniZTj90iriUE6oNbTxkk+9H1EdWSZMxbWuHATuqV2gqPj+D01DdgUVQ0Q=;
+ bh=ONNOFNF4nh3cFwCgmgAI9TaKzkdKMUUmQesoEIUv3n0=; b=nTlKqCswP6nFAW8o/YPO8o7vNd
+ UcQIpkv2VdH0xn4SyIhdYth6zmHznikBdImOHpqloWUMGOIh9f9tvWiVlq0yypuPzngglMB5jkm4h
+ rDbYCMbbUpHP6JC9vnK8XMOYuSRJRDMl1c8zv3sx7iHoBidRw9gwcIHQ/d0LWkjVFneM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nu0XG-000hRM-1K
+ id 1nu0XF-0007Pe-0N
  for linux-f2fs-devel@lists.sourceforge.net; Wed, 25 May 2022 23:35:30 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C8DAB6159A
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 25 May 2022 23:35:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 30BF6C34114;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2733961568;
+ Wed, 25 May 2022 23:35:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E13F0C34114;
  Wed, 25 May 2022 23:35:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1653521715;
- bh=8ZXsmg5Hjdo3M1GTUekFf1//Cc4x41kGvl3dUA93EGs=;
+ s=k20201202; t=1653521716;
+ bh=9tFJgOMB/CwSaGwkQCwZv14DYDwYLB/gyf/aR5Rc1UM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=PKXFMhS2Pl2vu5rvgO6COEmCiPpgiUvhBNpohE5wcHLRH0QRTEsUBm8GOzP2LWD5G
- CNsg7G85aPI0sPbz20TgaMHZhd3tmoY0KlBWUfvFDpEmGWkD2UkFzU8LA2vYx4nJu1
- baLKAq0ZLcwGPj/ebtLeX8r6A9hXg0iqd0w5jdntT/02ZRtGlP6JyhJ0DeiLoIVOvN
- sZP3+1QJQK9AwkikxWF346Jmm+08oleqisid/lJZ5t1z85RVmS0OuqoSpUwVnBk1dh
- k4Co6FK+8jmyOpT2eAISSU/sg/yZquT852J1+KtyoYZ3KJ56h3QJEnbLIselL/XbWA
- nR3lub7aMjYVA==
+ b=gpaQvDzs4lLhGvFxnFRLyOW550nAZ8kd3DLPv5EQ/T12L6A15lAj+qY4s6Dsr1lp4
+ mxXBtbKhI9OvdGGPcvLYHd3/EBShtRj6JiWQ0mCP+xN20ecuehTcr+Eij2XeyoULJI
+ afxSsMvOvF4IudP2Ot6mBgBTzVYFh796maU2UdJrmCkxP/vDPg4ZaN0tqeQNJuRZon
+ 2u59m4WZe+EPMNgHbAJHkD3lnEDcpRID+W9DDl24mnFsxeyRCHekQKPhJtv+zSWKXR
+ aoaQsYVk6nTyjzM4nAct4eNJ6/qEMn6Bl9V9XAiHSgCAksJ5vokkoiYKhDLGaS/ogi
+ U/rO23+b8SMpg==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 25 May 2022 16:35:08 -0700
-Message-Id: <20220525233510.4023217-2-jaegeuk@kernel.org>
+Date: Wed, 25 May 2022 16:35:09 -0700
+Message-Id: <20220525233510.4023217-3-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.36.1.124.g0e6072fb45-goog
 In-Reply-To: <20220525233510.4023217-1-jaegeuk@kernel.org>
 References: <20220525233510.4023217-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Instead, we should use <config.h> generated by configure.
- Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> --- fsck/dict.c | 1 -
- fsck/mkquota.c
- | 2 +- fsck/quotaio.c | 1 - fsck/quotaio_tree.c | 1 - fsck/quotaio_v2.c |
- 1 - lib/nls_utf8.c | 3 +-- mkfs/f2fs_form [...] 
+ Content preview: From: Martin Stjernholm <mast@google.com> This reverts commit
+ adcec10b4dee ("Support zoned device if libc exists). Signed-off-by: Martin
+ Stjernholm <mast@google.com> Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
+ --- include/android_config.h | 3 +-- 1 file changed, 1 insertion(+),
+ 2 deletions(-)
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nu0XG-000hRM-1K
-Subject: [f2fs-dev] [PATCH 2/4] Remove unnecessary config.h
+X-Headers-End: 1nu0XF-0007Pe-0N
+Subject: [f2fs-dev] [PATCH 3/4] Fix dependencies on linux/blkzoned.h when
+ using Bionic.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,181 +103,35 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Jaegeuk Kim <jaegeuk@google.com>, Martin Stjernholm <mast@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Instead, we should use <config.h> generated by configure.
+From: Martin Stjernholm <mast@google.com>
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+This reverts commit adcec10b4dee ("Support zoned device if libc exists).
+
+Signed-off-by: Martin Stjernholm <mast@google.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@google.com>
 ---
- fsck/dict.c             | 1 -
- fsck/mkquota.c          | 2 +-
- fsck/quotaio.c          | 1 -
- fsck/quotaio_tree.c     | 1 -
- fsck/quotaio_v2.c       | 1 -
- lib/nls_utf8.c          | 3 +--
- mkfs/f2fs_format.c      | 2 --
- mkfs/f2fs_format_main.c | 4 ++--
- tools/f2fs_io/f2fs_io.c | 2 +-
- tools/f2fscrypt.c       | 1 -
- tools/sha512.c          | 1 -
- 11 files changed, 5 insertions(+), 14 deletions(-)
+ include/android_config.h | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/fsck/dict.c b/fsck/dict.c
-index bb7600cc4fae..5b875bed81b3 100644
---- a/fsck/dict.c
-+++ b/fsck/dict.c
-@@ -20,7 +20,6 @@
- 
- #define DICT_NODEBUG
- 
--#include "config.h"
- #include <stdlib.h>
- #include <stddef.h>
- #ifdef DICT_NODEBUG
-diff --git a/fsck/mkquota.c b/fsck/mkquota.c
-index c419a0fe2078..d18141e2460f 100644
---- a/fsck/mkquota.c
-+++ b/fsck/mkquota.c
-@@ -4,7 +4,7 @@
-  * Aditya Kali <adityakali@google.com>
-  * Hyojun Kim <hyojun@google.com> - Ported to f2fs-tools
-  */
--#include "config.h"
-+
- #include <sys/types.h>
- #include <sys/stat.h>
- #include <unistd.h>
-diff --git a/fsck/quotaio.c b/fsck/quotaio.c
-index a3815b0c8835..d02475287c91 100644
---- a/fsck/quotaio.c
-+++ b/fsck/quotaio.c
-@@ -6,7 +6,6 @@
-  * Hyojun Kim <hyojun@google.com> - Ported to f2fs-tools
-  */
- 
--#include "config.h"
- #include <stdio.h>
- #include <errno.h>
- #include <string.h>
-diff --git a/fsck/quotaio_tree.c b/fsck/quotaio_tree.c
-index c2034005cfe0..40521c54c436 100644
---- a/fsck/quotaio_tree.c
-+++ b/fsck/quotaio_tree.c
-@@ -5,7 +5,6 @@
-  * Hyojun Kim <hyojun@google.com> - Ported to f2fs-tools
-  */
- 
--#include "config.h"
- #include <sys/types.h>
- #include <errno.h>
- #include <stdio.h>
-diff --git a/fsck/quotaio_v2.c b/fsck/quotaio_v2.c
-index 9353f8567647..e19f303d96ea 100644
---- a/fsck/quotaio_v2.c
-+++ b/fsck/quotaio_v2.c
-@@ -5,7 +5,6 @@
-  * Hyojun Kim <hyojun@google.com> - Ported to f2fs-tools
-  */
- 
--#include "config.h"
- #include <sys/types.h>
- #include <errno.h>
- #include <stdio.h>
-diff --git a/lib/nls_utf8.c b/lib/nls_utf8.c
-index 9e7590deb338..e6f34ba60b18 100644
---- a/lib/nls_utf8.c
-+++ b/lib/nls_utf8.c
-@@ -20,14 +20,13 @@
-  * implementation.
-  */
- 
--#include "config.h"
- #include <stdint.h>
- #include <unistd.h>
- #include <string.h>
- #include <limits.h>
- #include <errno.h>
- 
--#include "f2fs_fs.h"
-+#include <f2fs_fs.h>
- 
- /* Encoding a unicode version number as a single unsigned int. */
- #define UNICODE_MAJ_SHIFT		(16)
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 3b96d3182ac8..7cd5815e1f80 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -8,8 +8,6 @@
-  */
- #define _LARGEFILE64_SOURCE
- 
--#include "config.h"
--
- #include <stdio.h>
- #include <stdlib.h>
- #include <fcntl.h>
-diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
-index b8936f15e0f2..d2c2605ae6a5 100644
---- a/mkfs/f2fs_format_main.c
-+++ b/mkfs/f2fs_format_main.c
-@@ -22,7 +22,8 @@
- #include <errno.h>
- #include <getopt.h>
- 
--#include "config.h"
-+#include <f2fs_fs.h>
-+
- #ifdef HAVE_LIBBLKID
- #include <blkid/blkid.h>
- #endif
-@@ -30,7 +31,6 @@
- #include <uuid/uuid.h>
+diff --git a/include/android_config.h b/include/android_config.h
+index 07440874188c..21eed28669e1 100644
+--- a/include/android_config.h
++++ b/include/android_config.h
+@@ -41,8 +41,7 @@
+ #define HAVE_LIBSELINUX 1
  #endif
  
--#include "f2fs_fs.h"
- #include "quota.h"
- #include "f2fs_format_utils.h"
- 
-diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index 0edac6fedf33..2f0fc7b25d41 100644
---- a/tools/f2fs_io/f2fs_io.c
-+++ b/tools/f2fs_io/f2fs_io.c
-@@ -43,7 +43,7 @@
- #include <unistd.h>
- 
- #ifdef HAVE_CONFIG_H
--#include "config.h"
-+#include <config.h>
- #endif
- #include <android_config.h>
- 
-diff --git a/tools/f2fscrypt.c b/tools/f2fscrypt.c
-index 1233f3a5b103..8640ffae1404 100644
---- a/tools/f2fscrypt.c
-+++ b/tools/f2fscrypt.c
-@@ -20,7 +20,6 @@
- #define _GNU_SOURCE
+-#ifdef WITH_LIBC
+-#define HAVE_KERNEL_UAPI_LINUX_BLKZONED_H 1
++#if defined(__BIONIC__)
+ #define HAVE_LINUX_BLKZONED_H 1
  #endif
  
--#include "config.h"
- #include <f2fs_fs.h>
- 
- #include <assert.h>
-diff --git a/tools/sha512.c b/tools/sha512.c
-index bf0d9a4efaef..c6d35afa7e2c 100644
---- a/tools/sha512.c
-+++ b/tools/sha512.c
-@@ -11,7 +11,6 @@
-  */
- 
- 
--#include "config.h"
- #include <assert.h>
- #include <errno.h>
- #include <getopt.h>
 -- 
 2.36.1.124.g0e6072fb45-goog
 
