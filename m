@@ -2,67 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4A785379DD
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 30 May 2022 13:29:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37906537A30
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 30 May 2022 13:53:09 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nvdaG-0002MQ-9W; Mon, 30 May 2022 11:29:16 +0000
+	id 1nvdxF-0000Ou-Dx; Mon, 30 May 2022 11:53:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1nvdaF-0002M0-49
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 May 2022 11:29:15 +0000
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1nvdxE-0000OP-0E
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 May 2022 11:53:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=j5+gffg2wWVQbq31GSzO5Oga+IlzhuVsQJrbbsORqYw=; b=iE4IhVJZrpq3SMYEmhqZsSWcBW
- vX0ZgPAE4Y/+P0ch3sJmdmRxlni6Pj6KO3KNCXrf/Zgi8lU3c8KeYME9HPpGC3Pdny8dGLy7AGCX4
- DrUoLyX+KG3ow4sZVbhqzzZMZ1FT4ZibpFEhKYf4EKMuqqouN2kkRelG3R5PdKYYwoe0=;
+ bh=PvkwNazNRjkWZrXsuOm1WM5xTnev/Z0Gljvsx4RV3L4=; b=ESU2DiUNw0db+3o5GTEuKgEhhX
+ r6DEIhG5bwgTOpsYWJGHq2DT10qOnBG9eGDfQwUCkbK7COMbGI4g18B12XgtCpNnMvl9tud14oevf
+ T2J6ZxKkqn6uKzFiDng6rVyk6MsCdFijtk9BuLhZiiJ7iL/+QKj907O/WytOXOoMgy3Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
- Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=j5+gffg2wWVQbq31GSzO5Oga+IlzhuVsQJrbbsORqYw=; b=A
- mexSX0fcjlShhTtCGRwYALoAP44B98SdXjsqnZocLEbJM4aDw3+LlSe9Nl4IDnf0viGfG6E/bzlDq
- afoiDvalQMuU5B2/Gif6BHRpc015D0Wu4S7GVhunI9CCyt8lVO6Wa19b+PH6if0vwPeeXGiOew29R
- eEuVjSa7l+QuNFXY=;
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=PvkwNazNRjkWZrXsuOm1WM5xTnev/Z0Gljvsx4RV3L4=; b=dwfzACJzz2PgmBy9IV78XG6W7M
+ kwTJczOq4FFBwQSeL9TQRPGs/f0aOcnmyB22wrJW2OIZTqbCehR5A/AdGP3mZk2tvCys8TGlHjAHo
+ 4Xzx2R6IpzcekZGHuoMmRLlUp6eiHo8q8Znj542w+YOOBrDmkuR8/tMCueoMIlJc0nPo=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nvda9-00030s-Ke
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 May 2022 11:29:15 +0000
+ id 1nvdxD-002ODz-KB
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 30 May 2022 11:53:00 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B840F61157
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2D646611A8
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 30 May 2022 11:29:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 29CE7C3411C
+ Mon, 30 May 2022 11:52:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 90C8BC3411A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 30 May 2022 11:29:00 +0000 (UTC)
+ Mon, 30 May 2022 11:52:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1653910140;
- bh=EzAVJQ1/U3njxbbyiGAjXuBCzzFX4Ftun+kwL6lgkx8=;
- h=From:To:Subject:Date:From;
- b=orbgsgSsNZTkVJFdm56jMZTAgL9fmTBgiOeqBOCZUoHIMg8rFEWDA9lvw6GzYLrMe
- i2zLvlw3yp1C+emtqwQkaMiydthQMkGj184cSfIHwvSJz4W30h2knZwd+vcybMWIuN
- FsCLwYIfxAaeBZZFmyV3lGZjvfh6u8miHfrIKHiw6LMqXpMHtbe2+rAniYmjLrGdKA
- mBxx6Y+6V0ki4sXkIdezzDFtLBLjOD98jXRXU2+dqo5Z6WNaywBZOJVnks6XWdBfyE
- WAujTXcIp+avCTJBQOHc1w70ck4wuISzYZDp5fqTpXrqkjkWwA1cKGSTOQpgBP7qbx
- Y5FjPF4JnRj4Q==
+ s=k20201202; t=1653911568;
+ bh=PvkwNazNRjkWZrXsuOm1WM5xTnev/Z0Gljvsx4RV3L4=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=DfCW0koC/LPUIW2IBdQRkIhXgN0CfTTeXwuuz5E7grgZ9wua96aDqZC8fa5wjnZDO
+ 1Zum6uq7V3tYtFfr96ARQX2DAeaBvdbfenn2fZLQizs+zNwVDCJ6f/B9pqLa0ZxeRw
+ l2ewEIyW+PpnUsQiSYpT+eRazgdMIN17aBg8+A7XXBhIR4drD2tEPRQXyZ6lYUzita
+ gA6+y+xnUbitMcyr7FZl8VTguiikQsOa3UqoLpjxF/OrECCK0ZNLrimcTy45FwaO49
+ TPiQXdpwmKGKqiSNzgcz9g5jySCd4Eze0JprEncp1EEG3AikqL0DKWVcqHiu3gQNpG
+ j6TwKP4NGPeMw==
 Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 00557C05FD2; Mon, 30 May 2022 11:28:59 +0000 (UTC)
+ from userid 48) id 73DEDC05FD4; Mon, 30 May 2022 11:52:48 +0000 (UTC)
 From: bugzilla-daemon@kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 30 May 2022 11:28:59 +0000
+Date: Mon, 30 May 2022 11:52:48 +0000
 X-Bugzilla-Reason: None
-X-Bugzilla-Type: new
+X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Product: File System
 X-Bugzilla-Component: f2fs
@@ -75,42 +75,41 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version
- cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
- priority component assigned_to reporter cf_regression
-Message-ID: <bug-216050-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-216050-202145-eooe9ZDr17@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
+References: <bug-216050-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Spam-Score: -5.8 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=216050 Bug ID:
- 216050 Summary: fsfs_gc occupies 100% cpu Product: File System Version: 2.5
- Kernel Version: 5.18 Hardware: All OS: Linux Tree: Mainline Status: NEW
- Severity: normal Priority: P1 Component: f2 [...] 
- Content analysis details:   (-5.8 points, 6.0 required)
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
+ Comment
+ #1 from Guido (guido.iodice@gmail.com) --- I was too optimistic. The problem
+ reoccurred. 217 root 20 0 0.0m 99.3 0.0 12:28.48 R f2fs_gc-259:3 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nvda9-00030s-Ke
-Subject: [f2fs-dev] [Bug 216050] New: fsfs_gc occupies 100% cpu
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nvdxD-002ODz-KB
+Subject: [f2fs-dev] [Bug 216050] fsfs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -128,29 +127,16 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
-            Bug ID: 216050
-           Summary: fsfs_gc occupies 100% cpu
-           Product: File System
-           Version: 2.5
-    Kernel Version: 5.18
-          Hardware: All
-                OS: Linux
-              Tree: Mainline
-            Status: NEW
-          Severity: normal
-          Priority: P1
-         Component: f2fs
-          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
-          Reporter: guido.iodice@gmail.com
-        Regression: No
+--- Comment #1 from Guido (guido.iodice@gmail.com) ---
+I was too optimistic. The problem reoccurred.
 
-The problem started when I symlinked a file in my /home/user to a file in my
-/root (both partitions are f2fs). By removing that symlink the problem seems no
-longer occurs.
-From dmesg I don't see any error related to f2fs.
+217 root 20 0 0.0m 99.3 0.0 12:28.48 R f2fs_gc-259:3
 
-UUID=... /              f2fs    defaults,noatime,nodiscard 0 1
-UUID=... /home          f2fs    defaults,noatime,nodiscard 0 2
+the only related error I see the logs is:
+
+30/05/22 13:13 kernel nvme nvme0: missing or invalid SUBNQN field.
+
+I forced fsck on all partitions, but with no result.
 
 -- 
 You may reply to this email to add a comment.
