@@ -2,68 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 565825397E5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 May 2022 22:19:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D43C539862
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 May 2022 23:02:20 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nw8Kg-0005gR-CQ; Tue, 31 May 2022 20:19:14 +0000
+	id 1nw90J-0001C3-6N; Tue, 31 May 2022 21:02:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nw8Kf-0005gJ-UA
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 May 2022 20:19:14 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1nw90I-0001Bx-GL
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 May 2022 21:02:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TQSW7OaILxH+AtAgo6HaU+Tuo8W1HwBvQ678pfMiUPk=; b=FH2B9bHraUd531+XTok8MkzWYF
- wnDeF3vbgih/5Kvd3Kh4o3MdIEPSswT209lLE5JWHFqZJ5X8YKc1xVW2dhby0oTycN3G3IVatRD+6
- 0qlFxVDcyebZLOGAkQRWTCRcsLbUHHPYOtS7enJMXn/P36eDNTPIHLyUPoboj33jTJJU=;
+ bh=KyY+pZZvxKrB/6wKRYHAhwqkeKBOnXfo5Q/E4NVu5nU=; b=hBgp2d0p/azb8bG22X9kwTx6Kv
+ opjM/itjYSlbzlxMguWPp7FDfuQYsNBMzeIrFpWAzmQn5s/7ZNHdWI/rqzAZaVXpluFToswvfPtoq
+ Lybj+5xRMF+E21RYxZ3hxADX+7ovtQ5aOFBeaM3ofyq5/uv+LYs9/7nc39zRtJD8GbV0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=TQSW7OaILxH+AtAgo6HaU+Tuo8W1HwBvQ678pfMiUPk=; b=WOZrjAgSNwGfsWxlDxScjjswgZ
- AwGliqB5pdCbd83s2lkJy77vVfv2EboxmnR+2j9YQZSK1hLJlOMmVq/O+uZcDMljFIWSvbqFFNbiN
- S3iSb9gB8H9qnejV6GTkPuxBwbbLg1UGDv+vjmQEHSsKZvbFDkJ31Lky5PttseHMZyOg=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=KyY+pZZvxKrB/6wKRYHAhwqkeKBOnXfo5Q/E4NVu5nU=; b=G
+ MtWfDN/C6hLFRthdoeqS7Jbl2N2cACOsRRFn+FMUt2k84z0dln0Si6B0JWljSw427o7WTQmMTSq8w
+ E9g8hbUrkELOEGG5/0fk6Dr54ib0TJ/podXQxdbw1ozhgoK7Ax70E4kE9QN3XbtzWruG3rwrcxBN+
+ eYWfl7XCJsihO5bw=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nw8Ka-00C8Va-M9
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 May 2022 20:19:14 +0000
+ id 1nw90D-0007Ur-4F
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 May 2022 21:02:14 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 55874B81644;
- Tue, 31 May 2022 20:19:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8BEBC385A9;
- Tue, 31 May 2022 20:19:00 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 192B861329;
+ Tue, 31 May 2022 21:02:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62D15C385A9;
+ Tue, 31 May 2022 21:02:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1654028341;
- bh=IZPLDxma0qmA4BPl9VbHU5G0CLSbH2M3+tuvF4hFXoM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Cin1TMB/Ch04NYDf3DSX8SbCnlForzeN2gIPVrbtEYk8GcUdb5ckypdkvvQnjUSit
- URu2UN0FKr1/qPuAYslHW0dQMq6Fq4Dixgl49OL6ZHvGm+sP4IVTvA1ZIrIlzA2V90
- GCqwvucNeKkfbSlS7vrhwf11TrxLZvCxlswZf/IY54rQEJJX8XSMIATmA2NGGxvm5P
- 3a2YBEcmZNd8tX4BnZ5zB6lBm1kF8WWGN3D8hSajM9jLFCfsjPUIiu8QWndlxmoq8y
- UVG8bBNFjH2lyTkbpzkI3zV3d9W5vPzTIOkvo8OJb3iS7YZvQn2VN8uxShMdLQtz4T
- eZlN6AE8WAHAg==
-Date: Tue, 31 May 2022 13:18:59 -0700
+ s=k20201202; t=1654030924;
+ bh=zimXZZGRYReHBNE2SVCnLEGfZzXqmrfhmRSoT8zU2z0=;
+ h=Date:From:To:Cc:Subject:From;
+ b=oe8biq0UdICPQEUrWhL4com6oFsfxX7JQZ6n1lKum1VLmhnL5aW7dvr0Y/vZErCo+
+ Q9vEXDkSLvy7RwM0cP+9mFM5hRuDo7V4WifUzWPgGzAa8BBqWedLASGA5W1hMR1BRu
+ vkWiEcZYJHwQmCXEtwOLF0FpJE7UvVA+cmn4spF/346CGwZLydxlhgghEMD0lVxvD+
+ p+HVQ5DF2d88YYhrCY+wGevhl4b5iHv40RQ1gDgNVUCswKWTvCOFgrdK/aTcv8NVhW
+ V+eJ72ku6BtwZiO5NZsp1jR22b9CkktOyOG9WTqOYoEp4/4Icbwd5xEWxMGRv22oJQ
+ 0jt+JhdQxYgew==
+Date: Tue, 31 May 2022 14:02:02 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <YpZ4MxH3bkWbTPvI@google.com>
-References: <20220517032410.3564033-1-chao@kernel.org>
- <YoPZh+vl68IH5loV@google.com>
- <fa3cbe36-1738-a811-ce03-dd5aaf8ea3d4@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <YpaCSoxxcWCqo8FQ@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <fa3cbe36-1738-a811-ce03-dd5aaf8ea3d4@kernel.org>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -71,14 +67,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 05/31, Chao Yu wrote: > On 2022/5/18 1:21, Jaegeuk Kim
- wrote: > > On 05/17, Chao Yu wrote: > > > Pinning a file is heavy, because
- skipping pinned files make GC > > > running with heavy load or no e [...]
+ Content preview:  Hi Linus, Could you please consider this pull request? Thanks,
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -90,8 +84,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nw8Ka-00C8Va-M9
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: separate NOCoW and pinfile semantics
+X-Headers-End: 1nw90D-0007Ur-4F
+Subject: [f2fs-dev] [GIT PULL] f2fs for 5.19
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,166 +97,145 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/31, Chao Yu wrote:
-> On 2022/5/18 1:21, Jaegeuk Kim wrote:
-> > On 05/17, Chao Yu wrote:
-> > > Pinning a file is heavy, because skipping pinned files make GC
-> > > running with heavy load or no effect.
-> > > 
-> > > So that this patch proposes to separate nocow and pinfile semantics:
-> > > - NOCoW flag can only be set on regular file.
-> > > - NOCoW file will only trigger IPU at common writeback/flush.
-> > > - NOCow file will do OPU during GC.
-> > 
-> > How about adding
-> >   - NOCow file will allocate 2MB-aligned space via fallocate.
-> > 
-> > So, it'd be same as file pinning except allowing GCs. wdyt?
-> 
-> Well, it seems the segment-aligned allocation feature should not couple with
-> pin_file or NoCow flag, what about introducing another ioctl for that? something
-> like: F2FS_IOC_ALIGNMENT_PREALLOCATION w/ arg.alignment_start, arg.alignment_len,
-> arg.total_len?
+Hi Linus,
 
-We should allocate 2MB to pin the file, since android is using it.
+Could you please consider this pull request?
 
-> 
-> Thanks,
-> 
-> > 
-> > > 
-> > > This flag can satisfying the demand of:
-> > > 1) avoiding fragment of file's physical block
-> > > 2) userspace doesn't want to pin file's physical address
-> > > 
-> > > After commit 5d539245cb18 ("f2fs: export FS_NOCOW_FL flag to user"),
-> > > Pin_file and NOCoW flags have already been twined closely. e.g.
-> > > once we set pinfile flag in file, nocow flag will be shown; and after
-> > > clearing pinfile flag, nocow flag will disappear.
-> > > 
-> > > So, in order to keep backward compatibility, let use below semantics:
-> > > 
-> > > f2fs_ioc_set_pin_file/f2fs_fileattr_set logic:
-> > > 		pinfile			nocow
-> > > set		set pinfile | nocow	set nocow
-> > > clear		clear pinfile | nocow	clear nocow
-> > > 
-> > > File Behaviors:
-> > > w/ pinfile, w/ nocow:		use pinfile semantics
-> > > w/ pinfile, w/o nocow:		use pinfile semantics
-> > > w/o pinfile, w/ nocow:		use nocow semantics
-> > > w/o pinfile, w/o nocow:		no pinfile or nocow semantics
-> > > 
-> > > NOCoW can also be set on directory, and it will have no effect on
-> > > directory, however, new files created in nocow directory will have the
-> > > flag set.
-> > > 
-> > > Signed-off-by: Chao Yu <chao.yu@oppo.com>
-> > > ---
-> > > v4:
-> > > - allow IPU only for NoCowed regular inode.
-> > >   fs/f2fs/data.c |  3 +++
-> > >   fs/f2fs/f2fs.h | 13 +++++++++++--
-> > >   fs/f2fs/file.c | 18 +++++++++++++++++-
-> > >   3 files changed, 31 insertions(+), 3 deletions(-)
-> > > 
-> > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > > index 54a7a8ad994d..42d95ac6b508 100644
-> > > --- a/fs/f2fs/data.c
-> > > +++ b/fs/f2fs/data.c
-> > > @@ -2498,6 +2498,9 @@ bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio)
-> > >   	if (f2fs_is_pinned_file(inode))
-> > >   		return true;
-> > > +	if (S_ISREG(inode->i_mode) && F2FS_I(inode)->i_flags & F2FS_NOCOW_FL)
-> > > +		return true;
-> > > +
-> > >   	/* if this is cold file, we should overwrite to avoid fragmentation */
-> > >   	if (file_is_cold(inode))
-> > >   		return true;
-> > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > > index 492af5b96de1..5c67736000a7 100644
-> > > --- a/fs/f2fs/f2fs.h
-> > > +++ b/fs/f2fs/f2fs.h
-> > > @@ -2916,13 +2916,15 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
-> > >   #define F2FS_NOCOMP_FL			0x00000400 /* Don't compress */
-> > >   #define F2FS_INDEX_FL			0x00001000 /* hash-indexed directory */
-> > >   #define F2FS_DIRSYNC_FL			0x00010000 /* dirsync behaviour (directories only) */
-> > > +#define F2FS_NOCOW_FL			0x00800000 /* Do not cow file */
-> > >   #define F2FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
-> > >   #define F2FS_CASEFOLD_FL		0x40000000 /* Casefolded file */
-> > >   /* Flags that should be inherited by new inodes from their parent. */
-> > >   #define F2FS_FL_INHERITED (F2FS_SYNC_FL | F2FS_NODUMP_FL | F2FS_NOATIME_FL | \
-> > >   			   F2FS_DIRSYNC_FL | F2FS_PROJINHERIT_FL | \
-> > > -			   F2FS_CASEFOLD_FL | F2FS_COMPR_FL | F2FS_NOCOMP_FL)
-> > > +			   F2FS_CASEFOLD_FL | F2FS_COMPR_FL | F2FS_NOCOMP_FL | \
-> > > +			   F2FS_NOCOW_FL)
-> > >   /* Flags that are appropriate for regular files (all but dir-specific ones). */
-> > >   #define F2FS_REG_FLMASK		(~(F2FS_DIRSYNC_FL | F2FS_PROJINHERIT_FL | \
-> > > @@ -2954,9 +2956,16 @@ static inline void __mark_inode_dirty_flag(struct inode *inode,
-> > >   		fallthrough;
-> > >   	case FI_DATA_EXIST:
-> > >   	case FI_INLINE_DOTS:
-> > > -	case FI_PIN_FILE:
-> > >   	case FI_COMPRESS_RELEASED:
-> > >   		f2fs_mark_inode_dirty_sync(inode, true);
-> > > +		break;
-> > > +	case FI_PIN_FILE:
-> > > +		if (set)
-> > > +			F2FS_I(inode)->i_flags |= F2FS_NOCOW_FL;
-> > > +		else
-> > > +			F2FS_I(inode)->i_flags &= ~F2FS_NOCOW_FL;
-> > > +		f2fs_mark_inode_dirty_sync(inode, true);
-> > > +		break;
-> > >   	}
-> > >   }
-> > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > > index 216081ea8c81..9e71ce8601f9 100644
-> > > --- a/fs/f2fs/file.c
-> > > +++ b/fs/f2fs/file.c
-> > > @@ -1851,6 +1851,20 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
-> > >   	if (IS_NOQUOTA(inode))
-> > >   		return -EPERM;
-> > > +	if ((iflags ^ masked_flags) & F2FS_NOCOW_FL) {
-> > > +		int ret;
-> > > +
-> > > +		if (!S_ISREG(inode->i_mode) && !S_ISDIR(inode->i_mode))
-> > > +			return -EINVAL;
-> > > +		if (S_ISREG(inode->i_mode)) {
-> > > +			if (f2fs_should_update_outplace(inode, NULL))
-> > > +				return -EINVAL;
-> > > +			ret = f2fs_convert_inline_inode(inode);
-> > > +			if (ret)
-> > > +				return ret;
-> > > +		}
-> > > +	}
-> > > +
-> > >   	if ((iflags ^ masked_flags) & F2FS_CASEFOLD_FL) {
-> > >   		if (!f2fs_sb_has_casefold(F2FS_I_SB(inode)))
-> > >   			return -EOPNOTSUPP;
-> > > @@ -1926,6 +1940,7 @@ static const struct {
-> > >   	{ F2FS_NOCOMP_FL,	FS_NOCOMP_FL },
-> > >   	{ F2FS_INDEX_FL,	FS_INDEX_FL },
-> > >   	{ F2FS_DIRSYNC_FL,	FS_DIRSYNC_FL },
-> > > +	{ F2FS_NOCOW_FL,	FS_NOCOW_FL },
-> > >   	{ F2FS_PROJINHERIT_FL,	FS_PROJINHERIT_FL },
-> > >   	{ F2FS_CASEFOLD_FL,	FS_CASEFOLD_FL },
-> > >   };
-> > > @@ -1957,7 +1972,8 @@ static const struct {
-> > >   		FS_NOCOMP_FL |		\
-> > >   		FS_DIRSYNC_FL |		\
-> > >   		FS_PROJINHERIT_FL |	\
-> > > -		FS_CASEFOLD_FL)
-> > > +		FS_CASEFOLD_FL |	\
-> > > +		FS_NOCOW_FL)
-> > >   /* Convert f2fs on-disk i_flags to FS_IOC_{GET,SET}FLAGS flags */
-> > >   static inline u32 f2fs_iflags_to_fsflags(u32 iflags)
-> > > -- 
-> > > 2.25.1
+Thanks,
+
+The following changes since commit d615b5416f8a1afeb82d13b238f8152c572d59c0:
+
+  Merge tag 'f2fs-fix-5.18' of git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs (2022-04-25 10:53:56 -0700)
+
+are available in the Git repository at:
+
+  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.19-rc1
+
+for you to fetch changes up to 2d1fe8a86bf5e0663866fd0da83c2af1e1b0e362:
+
+  f2fs: fix to tag gcing flag on page during file defragment (2022-05-27 13:58:42 -0700)
+
+----------------------------------------------------------------
+f2fs-for-5.19
+
+In this round, we've refactored the existing atomic write support implemented
+by in-memory operations to have storing data in disk temporarily, which can give
+us a benefit to accept more atomic writes. At the same time, we removed the
+existing volatile write support. We've also revisited the file pinning and GC
+flows and found some corner cases which contributeed abnormal system behaviours.
+As usual, there're several minor code refactoring for readability, sanity check,
+and clean ups.
+
+Enhancement
+ - allow compression for mmap files in compress_mode=user
+ - kill volatile write support
+ - change the current atomic write way
+ - give priority to select unpinned section for foreground GC
+ - introduce data read/write showing path info
+ - remove unnecessary f2fs_lock_op in f2fs_new_inode
+
+Bug fix
+ - fix the file pinning flow during checkpoint=disable and GCs
+ - fix foreground and background GCs to select the right victims and get free
+   sections on time
+ - fix GC flags on defragmenting pages
+ - avoid an infinite loop to flush node pages
+ - fix fallocate to use file_modified to update permissions consistently
+
+----------------------------------------------------------------
+Byungki Lee (1):
+      f2fs: write checkpoint during FG_GC
+
+Chao Liu (1):
+      f2fs: make f2fs_read_inline_data() more readable
+
+Chao Yu (13):
+      f2fs: check pinfile in gc_data_segment() in advance
+      f2fs: don't set GC_FAILURE_PIN for background GC
+      f2fs: fix to do sanity check on inline_dots inode
+      f2fs: fix to clear dirty inode in f2fs_evict_inode()
+      f2fs: fix to avoid f2fs_bug_on() in dec_valid_node_count()
+      f2fs: fix to do sanity check on block address in f2fs_do_zero_range()
+      f2fs: fix deadloop in foreground GC
+      f2fs: fix to do sanity check on total_data_blocks
+      f2fs: give priority to select unpinned section for foreground GC
+      f2fs: fix fallocate to use file_modified to update permissions consistently
+      f2fs: fix to do sanity check for inline inode
+      f2fs: avoid unneeded error handling for revoke_entry_slab allocation
+      f2fs: fix to tag gcing flag on page during file defragment
+
+Daeho Jeong (1):
+      f2fs: change the current atomic write way
+
+Dongliang Mu (1):
+      f2fs: remove WARN_ON in f2fs_is_valid_blkaddr
+
+Eric Biggers (2):
+      f2fs: reject test_dummy_encryption when !CONFIG_FS_ENCRYPTION
+      f2fs: don't use casefolded comparison for "." and ".."
+
+Jaegeuk Kim (10):
+      f2fs: remove unnecessary f2fs_lock_op in f2fs_new_inode
+      f2fs: introduce data read/write showing path info
+      f2fs: use flush command instead of FUA for zoned device
+      f2fs: avoid infinite loop to flush node pages
+      f2fs: stop allocating pinned sections if EAGAIN happens
+      f2fs: don't need inode lock for system hidden quota
+      f2fs: kill volatile write support
+      f2fs: introduce f2fs_gc_control to consolidate f2fs_gc parameters
+      f2fs: keep wait_ms if EAGAIN happens
+      f2fs: do not stop GC when requiring a free section
+
+Jakob Koschel (3):
+      f2fs: fix dereference of stale list iterator after loop body
+      f2fs: Remove usage of list iterator pas the loop for list_move_tail()
+      f2fs: replace usage of found with dedicated list iterator variable
+
+Julia Lawall (1):
+      f2fs: fix typo in comment
+
+Luis Chamberlain (2):
+      f2fs: call bdev_zone_sectors() only once on init_blkz_info()
+      f2fs: ensure only power of 2 zone sizes are allowed
+
+Niels Dossche (1):
+      f2fs: extend stat_lock to avoid potential race in statfs
+
+Sungjong Seo (1):
+      f2fs: allow compression for mmap files in compress_mode=user
+
+Weichao Guo (1):
+      f2fs: skip GC if possible when checkpoint disabling
+
+Yufen Yu (2):
+      f2fs: add f2fs_init_write_merge_io function
+      f2fs: replace F2FS_I(inode) and sbi by the local variable
+
+ fs/f2fs/checkpoint.c        |  16 +-
+ fs/f2fs/data.c              | 213 +++++++++++++-------
+ fs/f2fs/debug.c             |  18 +-
+ fs/f2fs/dir.c               |   3 +-
+ fs/f2fs/f2fs.h              | 133 ++++++-------
+ fs/f2fs/file.c              | 307 +++++++++++++----------------
+ fs/f2fs/gc.c                | 186 ++++++++++++------
+ fs/f2fs/hash.c              |  11 +-
+ fs/f2fs/inline.c            |  29 ++-
+ fs/f2fs/inode.c             |  34 ++--
+ fs/f2fs/namei.c             |  38 ++--
+ fs/f2fs/node.c              |  29 ++-
+ fs/f2fs/node.h              |   1 -
+ fs/f2fs/segment.c           | 460 +++++++++++++++++---------------------------
+ fs/f2fs/segment.h           |  40 ++--
+ fs/f2fs/super.c             |  88 ++++-----
+ fs/f2fs/verity.c            |   2 +-
+ include/trace/events/f2fs.h | 141 +++++++++++---
+ 18 files changed, 926 insertions(+), 823 deletions(-)
 
 
 _______________________________________________
