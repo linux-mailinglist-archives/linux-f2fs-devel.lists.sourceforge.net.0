@@ -2,68 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB424538C84
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 May 2022 10:09:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A8E65394B2
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 May 2022 18:04:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nvwwK-0005Dn-FW; Tue, 31 May 2022 08:09:21 +0000
+	id 1nw4MW-0002Ar-UX; Tue, 31 May 2022 16:04:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1nvwwJ-0005Dh-53
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 May 2022 08:09:20 +0000
+ (envelope-from <chao@kernel.org>) id 1nw4MV-0002Ak-SU
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 May 2022 16:04:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZtMiojetBpHua/5bnI1YomxXNJ35+TU0jlPD8vWgSjs=; b=KDylTMARjSYRoo2SrV8XURgbKA
- IR3mCHjsETgoXUs8SZnzbW2OcZd4yr6RKavcSl7Adbf+2wXgAiBTu4O50q4E7G2Ib38cKy2CQacPo
- ly41BNujeOm69de8mU2hz4PYxjbGjydlDjIudQWJ/ntNC2wjC86ggC55cR7Oontgdz9E=;
+ bh=5D6CIOdw6kWNBYg5H1o/ROhiEaylC2Qsg/grTFJ8lB0=; b=a7eQxOaoruzfOwPqeVwCoxqNbL
+ 1ybz49RlhU3I67vd7L6an8yNlNO4sKaO9l0PQgpxy4vjkODf7M/g+LScqPonq58Lp4t//19tHkq9M
+ n6lqsswZphaCNMjbzKKa5UwZn202QKbjE+dlb7//ifDgNww9wrZ17tVIRWj8OI49TjDw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZtMiojetBpHua/5bnI1YomxXNJ35+TU0jlPD8vWgSjs=; b=QtHCUpGF5izRaCskxebHXlwD/P
- jy4oqZdb2cCWfbETu/tYm7EhL1NqTjSV9ZNsW2n/Ugg1Yt45sOyJplRoOCoPb24Z8fqlYMa72OntV
- CG8Z5SVmRKBf53QKLLm2KLNfgDBMjRN3rxWQ19JoTXIl0z5rGFn1qFtQVGxCwEESCejA=;
+ bh=5D6CIOdw6kWNBYg5H1o/ROhiEaylC2Qsg/grTFJ8lB0=; b=O6kY7S6pz6ZBm24L+GIP6Es/w7
+ /0yDFyXV8SmfCfk1lmKEFlztiywSv9x8A2c5XhwYgK+PxNK0izcnDqyWQXfeL0fHIvwzWrMCOnnJl
+ NETfZJwvVlOhhkgg66K1pQA7vnmJNkqJKxMfKWFk5bDXnFgCGLPXZvZy3kPtoVGNMW90=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nvwwJ-009GvT-AX
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 May 2022 08:09:19 +0000
+ id 1nw4MS-0006nU-Jw
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 31 May 2022 16:04:50 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id EEC1461222;
- Tue, 31 May 2022 08:09:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2BB3C385A9;
- Tue, 31 May 2022 08:09:12 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 84A7E61423;
+ Tue, 31 May 2022 16:04:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C99EC385A9;
+ Tue, 31 May 2022 16:04:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1653984553;
- bh=4dQtquz8rVMavXHRf8F4BEaei3Z5MRS3ycZq2+aGL1Q=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=EflYlqUdG30oqLN7RVMH3z1QIJLJlbptSEkbBlTG5SzSlhvq/VOt/UbRdIQTHT8w5
- 7sNJ1HnKYsbpSnFOGZjBl3W+0yzK9G/nx/N9p2fcAkLMopC6q4sgpSf7xay1X7+DaR
- Fhs/DSbHHdbfim55sQJ4FjTmGT/tIGBY/Kf0B+TqUV8b1lKIoEjXCDVDpAVvpZeh6K
- k7Qz//k7hohTlU8WFjcSeDp+HaE13CUow/5CrFq+pmmz5W4NZU6krG7vxfbKaJjC9L
- rYwmptzsj2FxUJdv1Bl/7Zt0uOpAw0WWS43Z+kQ/3KR4faWfFOZYy3XSWJNZrGzdEQ
- ++5rv8WCtFdwg==
-Message-ID: <b6b34ec0-b4e0-92ce-3d50-62654dfb3b30@kernel.org>
-Date: Tue, 31 May 2022 16:09:10 +0800
+ s=k20201202; t=1654013083;
+ bh=77pU4mwBBht72Ang/QQcd6KRn2N6f7Mxq8dkjBDJfeM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=cXx1k+e2ECfP9Qa3v1SjLX/RR+2uUC8XMiT4t8HrIhV4SrPc6iIc3LWIKYumPonHE
+ KkTxxPZCtM/QdZ1Jsg3a+OMz3kOnDrlux3Z9wC5VY2yZTSIgx0UCgPW5qp6hNLfN0p
+ j2YzF2p/B+7e4V3PBvPGmjhJy9JtfYDyfOrYzcT3pwJQTUs6y+tV7y+H5wLqLbuywp
+ IBmgde2ipcReL9baBDQCBHcSyTpV7MwmNmDupb2+y5cBDS3syVVPp/Nvig+GiXSVRU
+ mUhBoYsuatfSKxWAt6w8lB3ZmErn2PtiQvg4RZ5f67q+RcJNOFvNZn9PWAYBhqTldL
+ TgQc6zh8OSOfQ==
+Message-ID: <1643075e-f830-5e0a-9c12-e32a37ca0f5d@kernel.org>
+Date: Wed, 1 Jun 2022 00:04:41 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.9.1
 Content-Language: en-US
-To: Jack Qiu <jack.qiu@huawei.com>, linux-f2fs-devel@lists.sourceforge.net
-References: <20220531011656.608641-1-jack.qiu@huawei.com>
+To: fstests@vger.kernel.org
+References: <20220521031621.3494402-1-chao@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220531011656.608641-1-jack.qiu@huawei.com>
+In-Reply-To: <20220521031621.3494402-1-chao@kernel.org>
 X-Spam-Score: -8.6 (--------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -71,9 +71,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/5/31 9:16, Jack Qiu via Linux-f2fs-devel wrote: >
- Current error handling is at risk of page leaks. However, we dot't seek >
- any failure scenarios, just use f2fs_bug_on. > > Signed-off-by: Jack [...]
+ Content preview:  +Cc Zorro, Any comments? On 2022/5/21 11:16, Chao Yu wrote:
+ > Testcases like generic 342/502/526/527 expect that filesystems will >
+ recover
+ all related metadata changes to the file which was fsynced > before sudden
+ power off. [...] 
  Content analysis details:   (-8.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,9 +93,9 @@ X-Spam-Report: Spam detection software,
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -2.8 NICE_REPLY_A           Looks like a legit reply (A)
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nvwwJ-009GvT-AX
-Subject: Re: [f2fs-dev] [PATCH] f2fs: optimize error handling in
- redirty_blocks
+X-Headers-End: 1nw4MS-0006nU-Jw
+Subject: Re: [f2fs-dev] [PATCH] generic: adjust strict SPO recovery
+ testcases for f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,19 +107,95 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: guan@eryu.me, zlang@kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/5/31 9:16, Jack Qiu via Linux-f2fs-devel wrote:
-> Current error handling is at risk of page leaks. However, we dot't seek
-> any failure scenarios, just use f2fs_bug_on.
++Cc Zorro,
+
+Any comments?
+
+On 2022/5/21 11:16, Chao Yu wrote:
+> Testcases like generic 342/502/526/527 expect that filesystems will
+> recover all related metadata changes to the file which was fsynced
+> before sudden power off.
 > 
-> Signed-off-by: Jack Qiu <jack.qiu@huawei.com>
-
-Reviewed-by: Chao Yu <chao@kernel.org>
-
-Thanks,
+> This patch adjusts to use "fsync_mode=strict" mountoption for f2fs
+> to pass these testcases.
+> 
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>   tests/generic/342 | 5 +++++
+>   tests/generic/502 | 5 +++++
+>   tests/generic/526 | 5 +++++
+>   tests/generic/527 | 5 +++++
+>   4 files changed, 20 insertions(+)
+> 
+> diff --git a/tests/generic/342 b/tests/generic/342
+> index 676b876b..cdffaaf3 100755
+> --- a/tests/generic/342
+> +++ b/tests/generic/342
+> @@ -31,6 +31,11 @@ _require_dm_target flakey
+>   
+>   _scratch_mkfs >>$seqres.full 2>&1
+>   _require_metadata_journaling $SCRATCH_DEV
+> +
+> +if [ $FSTYP = "f2fs" ]; then
+> +	export MOUNT_OPTIONS="-o fsync_mode=strict $MOUNT_OPTIONS"
+> +fi
+> +
+>   _init_flakey
+>   _mount_flakey
+>   
+> diff --git a/tests/generic/502 b/tests/generic/502
+> index b0f9077f..b5589b81 100755
+> --- a/tests/generic/502
+> +++ b/tests/generic/502
+> @@ -34,6 +34,11 @@ _require_dm_target flakey
+>   
+>   _scratch_mkfs >>$seqres.full 2>&1
+>   _require_metadata_journaling $SCRATCH_DEV
+> +
+> +if [ $FSTYP = "f2fs" ]; then
+> +	export MOUNT_OPTIONS="-o fsync_mode=strict $MOUNT_OPTIONS"
+> +fi
+> +
+>   _init_flakey
+>   _mount_flakey
+>   
+> diff --git a/tests/generic/526 b/tests/generic/526
+> index dc7cb36c..ada4dbee 100755
+> --- a/tests/generic/526
+> +++ b/tests/generic/526
+> @@ -32,6 +32,11 @@ _require_dm_target flakey
+>   
+>   _scratch_mkfs >>$seqres.full 2>&1
+>   _require_metadata_journaling $SCRATCH_DEV
+> +
+> +if [ $FSTYP = "f2fs" ]; then
+> +	export MOUNT_OPTIONS="-o fsync_mode=strict $MOUNT_OPTIONS"
+> +fi
+> +
+>   _init_flakey
+>   _mount_flakey
+>   
+> diff --git a/tests/generic/527 b/tests/generic/527
+> index 40cd1c6a..de09d171 100755
+> --- a/tests/generic/527
+> +++ b/tests/generic/527
+> @@ -32,6 +32,11 @@ _require_dm_target flakey
+>   
+>   _scratch_mkfs >>$seqres.full 2>&1
+>   _require_metadata_journaling $SCRATCH_DEV
+> +
+> +if [ $FSTYP = "f2fs" ]; then
+> +	export MOUNT_OPTIONS="-o fsync_mode=strict $MOUNT_OPTIONS"
+> +fi
+> +
+>   _init_flakey
+>   _mount_flakey
+>   
 
 
 _______________________________________________
