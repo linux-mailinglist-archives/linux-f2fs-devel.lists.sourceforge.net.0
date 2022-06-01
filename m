@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8249953ADBA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jun 2022 22:45:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA41253ADBB
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jun 2022 22:45:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nwVDH-0001qc-O1; Wed, 01 Jun 2022 20:45:08 +0000
+	id 1nwVDM-0001hO-C6; Wed, 01 Jun 2022 20:45:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <krisman@collabora.com>) id 1nwVDH-0001qV-68
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jun 2022 20:45:07 +0000
+ (envelope-from <krisman@collabora.com>) id 1nwVDL-0001hB-9N
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jun 2022 20:45:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pvTT0L82tOAgxlgXOl8NZHN+dLF4cMiIpAHW4KJaZFM=; b=FKRHsYaxY7y2588rwAs2G/n9xJ
- 9nR2LDpbGH/xyyRB/dTfXTyT3wMils0Q19i1HON/7ZBCoZ5r44h9TCGk063vKcV5RYvpHfKleMeKk
- w/+trcKC/Ztvup+KWJiyFUxayvj7mOn9GldV97Ui4Kgy1N+j+OFYFljIisj21Af2ivsc=;
+ bh=bnce1kE7esaMucqzXjaZOV7uzfzoJyFdDzUfPSN4AW8=; b=XQWc3RvZy0PmpFuiu2h5/auY3B
+ +KgbaMTYmSEmHiuquYjA/kuKeOOpPOarmxadsvbUcqBB3F1KyfoLtgnUiryJaii5cGK584OSn6LPm
+ XrqXblAsz6OEY+//YC5UWc5hrn7SX1LiHcBiKJc+3FwDSHVIibqhD5YmT43OSlB8v6tY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pvTT0L82tOAgxlgXOl8NZHN+dLF4cMiIpAHW4KJaZFM=; b=dnTN5jGixNX+tywrKvC+3H64vX
- /4ibg4dkNI+9wm6NR9ZzXaDthnY0nXqUp76N3JK7ySUfCMF8eiKJdXcbiJkKy2uG9oPgWWOIlzQNd
- r7KVkO7pAXl3nzsEgznqxR32CrhNl0Dq2JbVB1sXTziYtUu2eS4IPRmRypZxpRgBgGsk=;
+ bh=bnce1kE7esaMucqzXjaZOV7uzfzoJyFdDzUfPSN4AW8=; b=WriJeG2rdOIgRHMQomq6yLgNFF
+ 6kzPnEC//JIiTwnZaN0jlJnAf7D38chVwXUgx2/nfA2Lbn+MyW6mFw37DZU2JftadO5IgT9hzroPs
+ cT/BVF0aQcTAmSj3GWPWCp3XxFSKirrxTble9HdKwHw25xQsHeS01+hefUrf/LTs4zs0=;
 Received: from bhuna.collabora.co.uk ([46.235.227.227])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nwVDF-000295-Ba
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jun 2022 20:45:07 +0000
+ id 1nwVDH-00029i-UU
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jun 2022 20:45:09 +0000
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: krisman) with ESMTPSA id 452BA1F4394C
+ (Authenticated sender: krisman) with ESMTPSA id E34211F4398A
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1654116299;
- bh=QTM2y9smEdZYIXwJ+bdg4VmJ/jF3wm5qE0XMmetiWjI=;
+ s=mail; t=1654116303;
+ bh=EYpe7jq8IZWr8tink05axuBf87GgQR+c3mze25uRf3I=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=h49m/n59xKW6nHMlGcysHhGPofAz4PIP4jPDzNTN5t/SXgwxQzoXD+JA4xeKsdIcF
- rj91KVJ2PHVbc7qaUMJlIkNSzvUondrn5ruu7RjUJmi0U+gUGXTnGqMCSUOPdXusQw
- 4YISWMPtAnr2tBjDtxZ4wzwW6lwxqntdoLwGikCm6F7jCPJfSy8Iq86u7RsH3hIBy1
- QfVXz9rdefOGp/+pVNlVXkgLYqY6w9mbp54ylf5yvT66uV7QgY/QFNmaglf8gbUyzp
- t5YNb6ZaP+86W6bU6Udke+DIAggSSWXaf27AN9sER6taAVcuH8uKbvQG4ajbIFSfKH
- iXElV95hPBWFg==
+ b=Gu2U+x1xr9c68jrHWXNn9eK1h9sFH7RfO+WWdoaw+vkefkr38W4doINXmEvoPn1hF
+ HJfJBJPf9iSbKwIETQtwBHyaJieDSdQi1hcifoJVebxIlltN3BT5yN/ftwK3zBajJV
+ m37KAbWpRVzhxtbWir2I1V70xgAx5OVPomi6LYsh3/w/1c257PBAeWSORU0JSj6kPm
+ Vwo31RfttlP7sa2Y1fPWWM7wOX9JNlEHiUdsQPn3SiyRQAYU1f7NtG7ZqN5wIaD1X4
+ S4yvqr7NkQy7u1+NwemQVm0aWqY2s0QthVcsV6y8UeMPCk/sT/DyB6bcrq+CzuIJy5
+ SOei/Uj4PJ/4A==
 From: Gabriel Krisman Bertazi <krisman@collabora.com>
 To: viro@zeniv.linux.org.uk,
 	tytso@mit.edu,
 	jaegeuk@kernel.org
-Date: Wed,  1 Jun 2022 16:44:35 -0400
-Message-Id: <20220601204437.676872-6-krisman@collabora.com>
+Date: Wed,  1 Jun 2022 16:44:36 -0400
+Message-Id: <20220601204437.676872-7-krisman@collabora.com>
 X-Mailer: git-send-email 2.36.1
 In-Reply-To: <20220601204437.676872-1-krisman@collabora.com>
 References: <20220601204437.676872-1-krisman@collabora.com>
@@ -66,10 +66,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Now that casefold needs d_revalidate and calls
- fscrypt_d_revalidate itself,
- generic_encrypt_ci_dentry_ops and generic_ci_dentry_ops are now equivalent.
- Merge them together and simplify the setup code. 
+ Content preview: Instead of invalidating negative dentries during
+ case-insensitive
+ lookups, mark them as such and let them be added to the dcache. d_ci_revalidate
+ is able to properly filter them out if necessary based [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -84,9 +84,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
  lines
-X-Headers-End: 1nwVDF-000295-Ba
-Subject: [f2fs-dev] [PATCH RFC 5/7] libfs: Merge encrypted_ci_dentry_ops and
- ci_dentry_ops
+X-Headers-End: 1nwVDH-00029i-UU
+Subject: [f2fs-dev] [PATCH RFC 6/7] ext4: Enable negative dentries on
+ case-insensitive lookup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,97 +105,76 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Now that casefold needs d_revalidate and calls fscrypt_d_revalidate
-itself, generic_encrypt_ci_dentry_ops and generic_ci_dentry_ops are now
-equivalent.  Merge them together and simplify the setup code.
+Instead of invalidating negative dentries during case-insensitive
+lookups, mark them as such and let them be added to the dcache.
+d_ci_revalidate is able to properly filter them out if necessary based
+on the dentry casefold flag.
 
 Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
 ---
- fs/libfs.c | 44 +++++++++++++-------------------------------
- 1 file changed, 13 insertions(+), 31 deletions(-)
+ fs/ext4/namei.c | 35 ++++-------------------------------
+ 1 file changed, 4 insertions(+), 31 deletions(-)
 
-diff --git a/fs/libfs.c b/fs/libfs.c
-index fe22738291e4..9d91f471203a 100644
---- a/fs/libfs.c
-+++ b/fs/libfs.c
-@@ -1477,7 +1477,7 @@ static inline int generic_ci_d_revalidate(struct dentry *dentry,
- 	return fscrypt_d_revalidate(dentry, flags);
- }
- 
--static const struct dentry_operations generic_ci_dentry_ops = {
-+static const struct dentry_operations generic_encrypted_ci_dentry_ops = {
- 	.d_hash = generic_ci_d_hash,
- 	.d_compare = generic_ci_d_compare,
- 	.d_revalidate_name = generic_ci_d_revalidate,
-@@ -1490,26 +1490,20 @@ static const struct dentry_operations generic_encrypted_dentry_ops = {
- };
- #endif
- 
--#if defined(CONFIG_FS_ENCRYPTION) && IS_ENABLED(CONFIG_UNICODE)
--static const struct dentry_operations generic_encrypted_ci_dentry_ops = {
--	.d_hash = generic_ci_d_hash,
--	.d_compare = generic_ci_d_compare,
--	.d_revalidate_name = generic_ci_d_revalidate,
--};
--#endif
--
- /**
-  * generic_set_encrypted_ci_d_ops - helper for setting d_ops for given dentry
-  * @dentry:	dentry to set ops on
-  *
-- * Casefolded directories need d_hash and d_compare set, so that the dentries
-- * contained in them are handled case-insensitively.  Note that these operations
-- * are needed on the parent directory rather than on the dentries in it, and
-- * while the casefolding flag can be toggled on and off on an empty directory,
-- * dentry_operations can't be changed later.  As a result, if the filesystem has
-- * casefolding support enabled at all, we have to give all dentries the
-- * casefolding operations even if their inode doesn't have the casefolding flag
-- * currently (and thus the casefolding ops would be no-ops for now).
-+ * Casefolded directories need d_hash, d_compare and d_revalidate set, so
-+ * that the dentries contained in them are handled case-insensitively,
-+ * but implement support for fs_encryption.  Note that these operations
-+ * are needed on the parent directory rather than on the dentries in it,
-+ * and while the casefolding flag can be toggled on and off on an empty
-+ * directory, dentry_operations can't be changed later.  As a result, if
-+ * the filesystem has casefolding support enabled at all, we have to
-+ * give all dentries the casefolding operations even if their inode
-+ * doesn't have the casefolding flag currently (and thus the casefolding
-+ * ops would be no-ops for now).
-  *
-  * Encryption works differently in that the only dentry operation it needs is
-  * d_revalidate, which it only needs on dentries that have the no-key name flag.
-@@ -1522,29 +1516,17 @@ static const struct dentry_operations generic_encrypted_ci_dentry_ops = {
-  */
- void generic_set_encrypted_ci_d_ops(struct dentry *dentry)
- {
--#ifdef CONFIG_FS_ENCRYPTION
--	bool needs_encrypt_ops = dentry->d_flags & DCACHE_NOKEY_NAME;
--#endif
- #if IS_ENABLED(CONFIG_UNICODE)
--	bool needs_ci_ops = dentry->d_sb->s_encoding;
--#endif
--#if defined(CONFIG_FS_ENCRYPTION) && IS_ENABLED(CONFIG_UNICODE)
--	if (needs_encrypt_ops && needs_ci_ops) {
-+	if (dentry->d_sb->s_encoding) {
- 		d_set_d_op(dentry, &generic_encrypted_ci_dentry_ops);
- 		return;
+diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
+index 767b4bfe39c3..783ba0b186c1 100644
+--- a/fs/ext4/namei.c
++++ b/fs/ext4/namei.c
+@@ -1800,16 +1800,9 @@ static struct dentry *ext4_lookup(struct inode *dir, struct dentry *dentry, unsi
+ 		}
  	}
- #endif
- #ifdef CONFIG_FS_ENCRYPTION
--	if (needs_encrypt_ops) {
-+	if (dentry->d_flags & DCACHE_NOKEY_NAME) {
- 		d_set_d_op(dentry, &generic_encrypted_dentry_ops);
- 		return;
- 	}
- #endif
+ 
 -#if IS_ENABLED(CONFIG_UNICODE)
--	if (needs_ci_ops) {
--		d_set_d_op(dentry, &generic_ci_dentry_ops);
--		return;
+-	if (!inode && IS_CASEFOLDED(dir)) {
+-		/* Eventually we want to call d_add_ci(dentry, NULL)
+-		 * for negative dentries in the encoding case as
+-		 * well.  For now, prevent the negative dentry
+-		 * from being cached.
+-		 */
+-		return NULL;
 -	}
 -#endif
++	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
++		d_set_casefold_lookup(dentry);
++
+ 	return d_splice_alias(inode, dentry);
  }
- EXPORT_SYMBOL(generic_set_encrypted_ci_d_ops);
+ 
+@@ -3126,17 +3119,6 @@ static int ext4_rmdir(struct inode *dir, struct dentry *dentry)
+ 	ext4_fc_track_unlink(handle, dentry);
+ 	retval = ext4_mark_inode_dirty(handle, dir);
+ 
+-#if IS_ENABLED(CONFIG_UNICODE)
+-	/* VFS negative dentries are incompatible with Encoding and
+-	 * Case-insensitiveness. Eventually we'll want avoid
+-	 * invalidating the dentries here, alongside with returning the
+-	 * negative dentries at ext4_lookup(), when it is better
+-	 * supported by the VFS for the CI case.
+-	 */
+-	if (IS_CASEFOLDED(dir))
+-		d_invalidate(dentry);
+-#endif
+-
+ end_rmdir:
+ 	brelse(bh);
+ 	if (handle)
+@@ -3231,16 +3213,7 @@ static int ext4_unlink(struct inode *dir, struct dentry *dentry)
+ 	retval = __ext4_unlink(handle, dir, &dentry->d_name, d_inode(dentry));
+ 	if (!retval)
+ 		ext4_fc_track_unlink(handle, dentry);
+-#if IS_ENABLED(CONFIG_UNICODE)
+-	/* VFS negative dentries are incompatible with Encoding and
+-	 * Case-insensitiveness. Eventually we'll want avoid
+-	 * invalidating the dentries here, alongside with returning the
+-	 * negative dentries at ext4_lookup(), when it is  better
+-	 * supported by the VFS for the CI case.
+-	 */
+-	if (IS_CASEFOLDED(dir))
+-		d_invalidate(dentry);
+-#endif
++
+ 	if (handle)
+ 		ext4_journal_stop(handle);
+ 
 -- 
 2.36.1
 
