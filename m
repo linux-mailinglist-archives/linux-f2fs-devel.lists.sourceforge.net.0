@@ -2,70 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9112253AB8C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jun 2022 19:08:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27B3553ACAE
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Jun 2022 20:23:02 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nwRp6-0001Sp-BX; Wed, 01 Jun 2022 17:07:57 +0000
+	id 1nwSzd-0003nD-TU; Wed, 01 Jun 2022 18:22:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1nwRp5-0001Sf-1K
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jun 2022 17:07:55 +0000
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1nwSzd-0003n5-7c
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jun 2022 18:22:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=N1CbI0QR30cP+CRBrvVe8lOBHlP4hvHfeWa39/Q1HQ4=; b=VZGinLq27OH1PCrNcuNcE+qN2G
- IWwxL1RJRUie2/hUanPYM8c6YvzWRVX0YRURaDpCNO6IzSocQkG6WhBBMcLabLwllRFuu6vZH2Mda
- 2t9Gw/y0dQopOVNy6biM9y+bLBMfbDwzIACK6N8oa+j3181/4/NUTqcOqd4Apz3Bp+Ks=;
+ bh=vMA0/UFAXPAwcwejtDsQwPRAlUb88P+ZeLAeWa1FJIs=; b=B2cGKF6K1f5ntVj6IFw1K0BLX8
+ +94sDUGVqK6gEzuVnfnsgkVPiGnXOalC8HvZq3c41u9wlLWZw8m7pVZlzYOfdyY79xiBvBxyeaLKe
+ OW6adeGujcFigKHc6iVqol+ULO7knX5z6ZdlnM/gjEU7SyEK5jlAotjCMOJ3eONeZJok=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=N1CbI0QR30cP+CRBrvVe8lOBHlP4hvHfeWa39/Q1HQ4=; b=SO4Mf1ESXUqDqdt4sfkz2HJ+3A
- xmEIXFEOQLEVCkMu9yAn1DAOqHxhJqeui/NiNC+1l7Mr3w14rFQDasYQeLCqqmjSPKhQZntd8hXuX
- hi5DY+T+Bltb5X0ZCv8DixCBAI7qCSv9Zy63/U7cGeeWRLK7/DG02JD7mT0zR4o0ZHbI=;
+ bh=vMA0/UFAXPAwcwejtDsQwPRAlUb88P+ZeLAeWa1FJIs=; b=HUnTL8hx9e0Ts28UZkbXtIUxxF
+ F9Y6ivlwEHsY1QCis86DSMNRCyrOOxGUYhwZggkO9dfNtCxUCelhYajC/lmAb0k7fjg1sD/mkOexv
+ VoRTND0vLIxU/nR2j1x8tcCrBHCY/N2wrxvRgOm62w3hngeXZey4URErpAt5+CAvaTM0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nwRp3-0004WE-IM
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jun 2022 17:07:55 +0000
+ id 1nwSzY-0006Po-Bn
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 01 Jun 2022 18:22:53 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id E01FD615EF;
- Wed,  1 Jun 2022 17:07:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2EEB0C385A5;
- Wed,  1 Jun 2022 17:07:47 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 760706166F
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  1 Jun 2022 18:22:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 45F91C385A5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  1 Jun 2022 18:22:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1654103267;
- bh=72qEmgLbc7pAUWVkP0JQ6faAOy3QZLL6JLCHFrHXOLY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Se7AHdcekmPXOtXhc9kZBgoAsDJzeRm2V/53BYjXLaHYHKRaUM+H0gxQxQOD2e9HF
- 066EVQfqMi+avOC0FyvKroZqNYBMJC2jsK2J/nC8kjhOPEN1tMI2JuliG2sKmevp1t
- bDZicfvWgQz0oB6c9DqpCev3A6mPQeunwrK5M+NNVUn7pVLX6M/M+Utr/NsSfWpb9U
- rpV2OAjQ6C7IVJmdb4QIXJrnmrBZ43QpwL0JupjkG2B9UROg1zaxM/dD19PUO3Tr2X
- oIgyCd8l3z4wWCUezx6eM2tq7yq+1MHtr+99BwfUdgOIiOwpIVOaYceufCv2gbdMC6
- /V2d9OfDJQlnw==
-Date: Wed, 1 Jun 2022 10:07:45 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Ypec4YV5nBNvo4H4@google.com>
-References: <20220517032410.3564033-1-chao@kernel.org>
- <YoPZh+vl68IH5loV@google.com>
- <fa3cbe36-1738-a811-ce03-dd5aaf8ea3d4@kernel.org>
- <YpZ4MxH3bkWbTPvI@google.com>
- <7ea1c35f-e176-1a17-f3ed-14d4118d3c21@kernel.org>
+ s=k20201202; t=1654107759;
+ bh=RwAsLhK2+qkz3JnXo7Yyd+M6M71YVmyLJR4x0eUxZC0=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=MfIkMYtLCP5jTD2BXIdrN4ocbxLxBUkD/anYxpRol5F/YHrXmUAyubhaXkJ8qPe9y
+ nsEbK3pR8KeBDAXzSaP0rk0n+xS1Vzz/te5B36kxImgAKr/y5LLQQoYeItSFzrCQJS
+ kZLLzkkvsFDC9fcntU4Oj819Y5xcQm/4A5adQoD4uO859FRzXF6RkHaqHPfqtJq4lG
+ Qg2bPMk2hhiT+ifUqes7hBKLml1hMjpQBzSD4m35DZsSe1GR0OTKFAIgBKl/9p6h3W
+ zEYJ4qZckxsHMk907xBYP+Zz5KfcRXO3pBTS+XxEs8unAJXueAcm45vGLc85U+uEYn
+ Z3dEqXSe1gIug==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 298E8C05FD4; Wed,  1 Jun 2022 18:22:39 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 01 Jun 2022 18:22:38 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: jaegeuk@kernel.org
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-216050-202145-H66f1DQqpW@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
+References: <bug-216050-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <7ea1c35f-e176-1a17-f3ed-14d4118d3c21@kernel.org>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -73,10 +89,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 06/01, Chao Yu wrote: > On 2022/6/1 4:18,
- Jaegeuk Kim wrote:
- > > On 05/31, Chao Yu wrote: > > > On 2022/5/18 1:21, Jaegeuk Kim wrote:
- > > > > On 05/17, Chao Yu wrote: > > > > > Pinning a file is he [...] 
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
+ Comment
+ #14 from Jaegeuk Kim (jaegeuk@kernel.org) --- Re #9, Thank you so much. 
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,8 +107,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nwRp3-0004WE-IM
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: separate NOCoW and pinfile semantics
+X-Headers-End: 1nwSzY-0006Po-Bn
+Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,178 +120,50 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 06/01, Chao Yu wrote:
-> On 2022/6/1 4:18, Jaegeuk Kim wrote:
-> > On 05/31, Chao Yu wrote:
-> > > On 2022/5/18 1:21, Jaegeuk Kim wrote:
-> > > > On 05/17, Chao Yu wrote:
-> > > > > Pinning a file is heavy, because skipping pinned files make GC
-> > > > > running with heavy load or no effect.
-> > > > > 
-> > > > > So that this patch proposes to separate nocow and pinfile semantics:
-> > > > > - NOCoW flag can only be set on regular file.
-> > > > > - NOCoW file will only trigger IPU at common writeback/flush.
-> > > > > - NOCow file will do OPU during GC.
-> > > > 
-> > > > How about adding
-> > > >    - NOCow file will allocate 2MB-aligned space via fallocate.
-> > > > 
-> > > > So, it'd be same as file pinning except allowing GCs. wdyt?
-> > > 
-> > > Well, it seems the segment-aligned allocation feature should not couple with
-> > > pin_file or NoCow flag, what about introducing another ioctl for that? something
-> > > like: F2FS_IOC_ALIGNMENT_PREALLOCATION w/ arg.alignment_start, arg.alignment_len,
-> > > arg.total_len?
-> > 
-> > We should allocate 2MB to pin the file, since android is using it.
-> 
-> I mean we can use nocow + new ioctl instead of pinfile, thoughts?
+https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
-Can we focus on the original problem that you saw where there were some
-pinned files alived in Android logcat?
+--- Comment #14 from Jaegeuk Kim (jaegeuk@kernel.org) ---
+Re #9,
 
-> 
-> Thanks,
-> 
-> > 
-> > > 
-> > > Thanks,
-> > > 
-> > > > 
-> > > > > 
-> > > > > This flag can satisfying the demand of:
-> > > > > 1) avoiding fragment of file's physical block
-> > > > > 2) userspace doesn't want to pin file's physical address
-> > > > > 
-> > > > > After commit 5d539245cb18 ("f2fs: export FS_NOCOW_FL flag to user"),
-> > > > > Pin_file and NOCoW flags have already been twined closely. e.g.
-> > > > > once we set pinfile flag in file, nocow flag will be shown; and after
-> > > > > clearing pinfile flag, nocow flag will disappear.
-> > > > > 
-> > > > > So, in order to keep backward compatibility, let use below semantics:
-> > > > > 
-> > > > > f2fs_ioc_set_pin_file/f2fs_fileattr_set logic:
-> > > > > 		pinfile			nocow
-> > > > > set		set pinfile | nocow	set nocow
-> > > > > clear		clear pinfile | nocow	clear nocow
-> > > > > 
-> > > > > File Behaviors:
-> > > > > w/ pinfile, w/ nocow:		use pinfile semantics
-> > > > > w/ pinfile, w/o nocow:		use pinfile semantics
-> > > > > w/o pinfile, w/ nocow:		use nocow semantics
-> > > > > w/o pinfile, w/o nocow:		no pinfile or nocow semantics
-> > > > > 
-> > > > > NOCoW can also be set on directory, and it will have no effect on
-> > > > > directory, however, new files created in nocow directory will have the
-> > > > > flag set.
-> > > > > 
-> > > > > Signed-off-by: Chao Yu <chao.yu@oppo.com>
-> > > > > ---
-> > > > > v4:
-> > > > > - allow IPU only for NoCowed regular inode.
-> > > > >    fs/f2fs/data.c |  3 +++
-> > > > >    fs/f2fs/f2fs.h | 13 +++++++++++--
-> > > > >    fs/f2fs/file.c | 18 +++++++++++++++++-
-> > > > >    3 files changed, 31 insertions(+), 3 deletions(-)
-> > > > > 
-> > > > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > > > > index 54a7a8ad994d..42d95ac6b508 100644
-> > > > > --- a/fs/f2fs/data.c
-> > > > > +++ b/fs/f2fs/data.c
-> > > > > @@ -2498,6 +2498,9 @@ bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio)
-> > > > >    	if (f2fs_is_pinned_file(inode))
-> > > > >    		return true;
-> > > > > +	if (S_ISREG(inode->i_mode) && F2FS_I(inode)->i_flags & F2FS_NOCOW_FL)
-> > > > > +		return true;
-> > > > > +
-> > > > >    	/* if this is cold file, we should overwrite to avoid fragmentation */
-> > > > >    	if (file_is_cold(inode))
-> > > > >    		return true;
-> > > > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > > > > index 492af5b96de1..5c67736000a7 100644
-> > > > > --- a/fs/f2fs/f2fs.h
-> > > > > +++ b/fs/f2fs/f2fs.h
-> > > > > @@ -2916,13 +2916,15 @@ static inline void f2fs_change_bit(unsigned int nr, char *addr)
-> > > > >    #define F2FS_NOCOMP_FL			0x00000400 /* Don't compress */
-> > > > >    #define F2FS_INDEX_FL			0x00001000 /* hash-indexed directory */
-> > > > >    #define F2FS_DIRSYNC_FL			0x00010000 /* dirsync behaviour (directories only) */
-> > > > > +#define F2FS_NOCOW_FL			0x00800000 /* Do not cow file */
-> > > > >    #define F2FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
-> > > > >    #define F2FS_CASEFOLD_FL		0x40000000 /* Casefolded file */
-> > > > >    /* Flags that should be inherited by new inodes from their parent. */
-> > > > >    #define F2FS_FL_INHERITED (F2FS_SYNC_FL | F2FS_NODUMP_FL | F2FS_NOATIME_FL | \
-> > > > >    			   F2FS_DIRSYNC_FL | F2FS_PROJINHERIT_FL | \
-> > > > > -			   F2FS_CASEFOLD_FL | F2FS_COMPR_FL | F2FS_NOCOMP_FL)
-> > > > > +			   F2FS_CASEFOLD_FL | F2FS_COMPR_FL | F2FS_NOCOMP_FL | \
-> > > > > +			   F2FS_NOCOW_FL)
-> > > > >    /* Flags that are appropriate for regular files (all but dir-specific ones). */
-> > > > >    #define F2FS_REG_FLMASK		(~(F2FS_DIRSYNC_FL | F2FS_PROJINHERIT_FL | \
-> > > > > @@ -2954,9 +2956,16 @@ static inline void __mark_inode_dirty_flag(struct inode *inode,
-> > > > >    		fallthrough;
-> > > > >    	case FI_DATA_EXIST:
-> > > > >    	case FI_INLINE_DOTS:
-> > > > > -	case FI_PIN_FILE:
-> > > > >    	case FI_COMPRESS_RELEASED:
-> > > > >    		f2fs_mark_inode_dirty_sync(inode, true);
-> > > > > +		break;
-> > > > > +	case FI_PIN_FILE:
-> > > > > +		if (set)
-> > > > > +			F2FS_I(inode)->i_flags |= F2FS_NOCOW_FL;
-> > > > > +		else
-> > > > > +			F2FS_I(inode)->i_flags &= ~F2FS_NOCOW_FL;
-> > > > > +		f2fs_mark_inode_dirty_sync(inode, true);
-> > > > > +		break;
-> > > > >    	}
-> > > > >    }
-> > > > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > > > > index 216081ea8c81..9e71ce8601f9 100644
-> > > > > --- a/fs/f2fs/file.c
-> > > > > +++ b/fs/f2fs/file.c
-> > > > > @@ -1851,6 +1851,20 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
-> > > > >    	if (IS_NOQUOTA(inode))
-> > > > >    		return -EPERM;
-> > > > > +	if ((iflags ^ masked_flags) & F2FS_NOCOW_FL) {
-> > > > > +		int ret;
-> > > > > +
-> > > > > +		if (!S_ISREG(inode->i_mode) && !S_ISDIR(inode->i_mode))
-> > > > > +			return -EINVAL;
-> > > > > +		if (S_ISREG(inode->i_mode)) {
-> > > > > +			if (f2fs_should_update_outplace(inode, NULL))
-> > > > > +				return -EINVAL;
-> > > > > +			ret = f2fs_convert_inline_inode(inode);
-> > > > > +			if (ret)
-> > > > > +				return ret;
-> > > > > +		}
-> > > > > +	}
-> > > > > +
-> > > > >    	if ((iflags ^ masked_flags) & F2FS_CASEFOLD_FL) {
-> > > > >    		if (!f2fs_sb_has_casefold(F2FS_I_SB(inode)))
-> > > > >    			return -EOPNOTSUPP;
-> > > > > @@ -1926,6 +1940,7 @@ static const struct {
-> > > > >    	{ F2FS_NOCOMP_FL,	FS_NOCOMP_FL },
-> > > > >    	{ F2FS_INDEX_FL,	FS_INDEX_FL },
-> > > > >    	{ F2FS_DIRSYNC_FL,	FS_DIRSYNC_FL },
-> > > > > +	{ F2FS_NOCOW_FL,	FS_NOCOW_FL },
-> > > > >    	{ F2FS_PROJINHERIT_FL,	FS_PROJINHERIT_FL },
-> > > > >    	{ F2FS_CASEFOLD_FL,	FS_CASEFOLD_FL },
-> > > > >    };
-> > > > > @@ -1957,7 +1972,8 @@ static const struct {
-> > > > >    		FS_NOCOMP_FL |		\
-> > > > >    		FS_DIRSYNC_FL |		\
-> > > > >    		FS_PROJINHERIT_FL |	\
-> > > > > -		FS_CASEFOLD_FL)
-> > > > > +		FS_CASEFOLD_FL |	\
-> > > > > +		FS_NOCOW_FL)
-> > > > >    /* Convert f2fs on-disk i_flags to FS_IOC_{GET,SET}FLAGS flags */
-> > > > >    static inline u32 f2fs_iflags_to_fsflags(u32 iflags)
-> > > > > -- 
-> > > > > 2.25.1
+Thank you so much.
 
+   f2fs_gc-254:2-1156    [013] ..... 22290.243361: f2fs_lookup_extent_tree_end:
+dev = (254,2), ino = 1409621, pgofs = 234, ext_info(fofs: 0, blk: 0, len: 0) 
+   f2fs_gc-254:2-1156    [013] ..... 22290.243362:
+f2fs_lookup_extent_tree_start: dev = (254,2), ino = 1409621, pgofs = 234
+   f2fs_gc-254:2-1156    [013] ..... 22290.243362: f2fs_lookup_extent_tree_end:
+dev = (254,2), ino = 1409621, pgofs = 234, ext_info(fofs: 0, blk: 0, len: 0) 
+   f2fs_gc-254:2-1156    [013] ..... 22290.243362:
+f2fs_lookup_extent_tree_start: dev = (254,2), ino = 1409621, pgofs = 234
+   f2fs_gc-254:2-1156    [013] ..... 22290.243362: f2fs_lookup_extent_tree_end:
+dev = (254,2), ino = 1409621, pgofs = 234, ext_info(fofs: 0, blk: 0, len: 0) 
+   f2fs_gc-254:2-1156    [013] ..... 22290.243362:
+f2fs_lookup_extent_tree_start: dev = (254,2), ino = 1409621, pgofs = 234
+   f2fs_gc-254:2-1156    [013] ..... 22290.243362: f2fs_lookup_extent_tree_end:
+dev = (254,2), ino = 1409621, pgofs = 234, ext_info(fofs: 0, blk: 0, len: 0) 
+   f2fs_gc-254:2-1156    [013] ..... 22290.243362:
+f2fs_lookup_extent_tree_start: dev = (254,2), ino = 1409621, pgofs = 234
+
+
+It seems this disk is dm-2, since the extent hit count is something below.
+    - Hit Ratio: 0% (38193 / 78044163449)
+
+I'm suspecting this flow, but not sure where it goes into a loop.
+
+f2fs_gc
+ -> gc_data_segment
+  -> f2fs_get_read_data_page
+    -> f2fs_lookup_extent_cache
+
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
