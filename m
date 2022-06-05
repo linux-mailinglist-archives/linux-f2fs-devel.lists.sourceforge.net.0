@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA04553DDE9
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  5 Jun 2022 21:39:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EE7053DDED
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  5 Jun 2022 21:39:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nxw5u-0001au-3r; Sun, 05 Jun 2022 19:39:24 +0000
+	id 1nxw5w-00061t-Fl; Sun, 05 Jun 2022 19:39:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <willy@infradead.org>) id 1nxw5n-0001a0-JZ
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 05 Jun 2022 19:39:18 +0000
+ (envelope-from <willy@infradead.org>) id 1nxw5p-00061Y-W7
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 05 Jun 2022 19:39:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7zHJFf7s+ZSx87nHg6Bs72jjNt/zTHbg4PZc0KhFNBI=; b=DihCWc5mzVHQ7O/ew+WCwFX9N9
- 1NwEdlXhuMvWj9BwkVkqluz2tx+tK97MdTsE1+nNkXN5hmNxK7/YPiC2emcYpIxHITOwDTBwxDqJ3
- e8jL13P7EGIPB8KvFd3sms5i1jnsga+sLLolaKoukv6QqQGo0s6E8rebtiKMUdfzX6MQ=;
+ bh=W0H1cUQxatSgPZ6f11mLW4N05/pdthUaWOiji2r395Q=; b=f5yt6UiXpsbgpPIf5Mwr5O83q7
+ oo8fFtY2oMocY60sHvcnEsKDTnytsurriwutmQvS1rD4BHvg6QVlMVT8uOqy5Ic5wnWhaiIbx3cms
+ HeDkMRSClm1wCAIAXmYm/5B2JHcP4Xv6jscKj8UDYl7/wvM3uHK+e+itfdEeVJtdsKHU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,30 +29,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7zHJFf7s+ZSx87nHg6Bs72jjNt/zTHbg4PZc0KhFNBI=; b=NYzv9XOumbCVjsiP0NwIwS8Oin
- UOtlVVsx/q2+JWmjQP4Pk1KZzOvsacI61btGK1n0sxtRrIayv8D2fJCzjYuTSek3UJaN68Fephk8V
- z4eYRarw0lDKMZJl8UN8q8aqYCVvtHNgk/btpEzTZngw0hM2jbkyaNmTvAmbFtqx6kZs=;
+ bh=W0H1cUQxatSgPZ6f11mLW4N05/pdthUaWOiji2r395Q=; b=GzGFg+Wd5axZNR5mm6p2yZKtkv
+ M6BAFk6qA2/nOJulwHjZPKBrl5+KplEXjXg4d4ET8LKIBbsVbUPCYkMJnBcjD2ajWXSuE+Ivavn7C
+ RtHlIHUH7FfG0c1GkVSVAgjKZEp+e7dPRZk9+6pv8WQU5j2J/Wts7mG4HjUTMXTWG/VU=;
 Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nxw5i-00054v-Oh
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 05 Jun 2022 19:39:17 +0000
+ id 1nxw5p-006MEr-NQ
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 05 Jun 2022 19:39:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=7zHJFf7s+ZSx87nHg6Bs72jjNt/zTHbg4PZc0KhFNBI=; b=EYXV63i9/CEOzD0nHMe1OQHYDc
- mVCuEz0iq05DzWOTfwUUXon7lLclyJcGJZDFVFf36KaefdWNV0pHzAWE/juTBOh3LmOa6/GHAbwsA
- j9SKPw7wOEy++DynzZkxdw6cKJT5aOgxtQMtWaAQNIKZNtcW6JUvraw6AebVxfjYl0uWLN4Tnkrf1
- g5r1qFvxh5lUydZ/EqFXJtmm4X6GU4Pvr6z+zZzlpoy3rKdSu3dVWHKmxHNTzyLs4u7zgx7YRImNZ
- s12tQFfwrO2lznSTczeoD//K1wj12QguV4NYS7DRw7Y1XFPPUFJTnVvqq+s0OPozePCioZdM8Nwv2
- JJEs8DoA==;
+ bh=W0H1cUQxatSgPZ6f11mLW4N05/pdthUaWOiji2r395Q=; b=vuZO7CSb7H6HQ4un97k5YqfJpv
+ WRg4mesPevoGA4XIOIVE2ut/fbhfu85CTaveBcVULnFub7Mfq5oIGpDukf0GFFOtdms/yjo0srNbQ
+ qAmlTagDosQ/iwYURVheI7Qn+0e+JiM35saYHuorbgNvOmwFZTGBSMX9gPqyPwtmqTCUpQrgxt08L
+ zl+fZroMOE3CbrwEnxjVw9xWa9I9OBtn3/LlANUrlXOhUPAwmGVpiC8vKuDk0hB0q5d8Esreir30M
+ qp+56a/8G270ZD18zh3VnRwQbfUZOj9Qy+FiUOVDgrzK9OgPFG3nJ+7PP+FJ4hse3IB4PQ0w6ecGA
+ OfEX515Q==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nxw5Q-009wsT-OG; Sun, 05 Jun 2022 19:38:56 +0000
+ Hat Linux)) id 1nxw5Q-009wsV-Qh; Sun, 05 Jun 2022 19:38:56 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Sun,  5 Jun 2022 20:38:47 +0100
-Message-Id: <20220605193854.2371230-4-willy@infradead.org>
+Date: Sun,  5 Jun 2022 20:38:48 +0100
+Message-Id: <20220605193854.2371230-5-willy@infradead.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220605193854.2371230-1-willy@infradead.org>
 References: <20220605193854.2371230-1-willy@infradead.org>
@@ -64,12 +64,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  If the folio is large, it may overlap the beginning or end
- of the unused range. If it does,
- we need to avoid invalidating it. Signed-off-by:
- Matthew Wilcox (Oracle) <willy@infradead.org> --- fs/ext4/inode.c | 21
- ++++++++++++---------
- 1 file changed, 12 insertions(+), 9 deletions(-) 
+ Content preview:  The called functions all use pages, so just convert back to
+ a page. Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org> ---
+ fs/ext4/inode.c | 19 +++++++++ 1 file changed, 9 insertions(+), 10 deletions(-)
  Content analysis details:   (2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -83,9 +80,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1nxw5i-00054v-Oh
-Subject: [f2fs-dev] [PATCH 03/10] ext4: Convert mpage_release_unused_pages()
- to use filemap_get_folios()
+X-Headers-End: 1nxw5p-006MEr-NQ
+Subject: [f2fs-dev] [PATCH 04/10] ext4: Convert
+ mpage_map_and_submit_buffers() to use filemap_get_folios()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,62 +102,63 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-If the folio is large, it may overlap the beginning or end of the
-unused range.  If it does, we need to avoid invalidating it.
+The called functions all use pages, so just convert back to a page.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 ---
- fs/ext4/inode.c | 21 ++++++++++++---------
- 1 file changed, 12 insertions(+), 9 deletions(-)
+ fs/ext4/inode.c | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
 diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index 3dce7d058985..32a7f5e024d6 100644
+index 32a7f5e024d6..1aaea53e67b5 100644
 --- a/fs/ext4/inode.c
 +++ b/fs/ext4/inode.c
-@@ -1554,9 +1554,9 @@ struct mpage_da_data {
- static void mpage_release_unused_pages(struct mpage_da_data *mpd,
- 				       bool invalidate)
+@@ -2314,8 +2314,8 @@ static int mpage_process_page(struct mpage_da_data *mpd, struct page *page,
+  */
+ static int mpage_map_and_submit_buffers(struct mpage_da_data *mpd)
  {
--	int nr_pages, i;
-+	unsigned nr, i;
- 	pgoff_t index, end;
 -	struct pagevec pvec;
+-	int nr_pages, i;
 +	struct folio_batch fbatch;
++	unsigned nr, i;
  	struct inode *inode = mpd->inode;
- 	struct address_space *mapping = inode->i_mapping;
- 
-@@ -1574,15 +1574,18 @@ static void mpage_release_unused_pages(struct mpage_da_data *mpd,
- 		ext4_es_remove_extent(inode, start, last - start + 1);
- 	}
+ 	int bpp_bits = PAGE_SHIFT - inode->i_blkbits;
+ 	pgoff_t start, end;
+@@ -2329,14 +2329,13 @@ static int mpage_map_and_submit_buffers(struct mpage_da_data *mpd)
+ 	lblk = start << bpp_bits;
+ 	pblock = mpd->map.m_pblk;
  
 -	pagevec_init(&pvec);
 +	folio_batch_init(&fbatch);
- 	while (index <= end) {
--		nr_pages = pagevec_lookup_range(&pvec, mapping, &index, end);
+ 	while (start <= end) {
+-		nr_pages = pagevec_lookup_range(&pvec, inode->i_mapping,
+-						&start, end);
 -		if (nr_pages == 0)
-+		nr = filemap_get_folios(mapping, &index, end, &fbatch);
++		nr = filemap_get_folios(inode->i_mapping, &start, end, &fbatch);
 +		if (nr == 0)
  			break;
 -		for (i = 0; i < nr_pages; i++) {
 -			struct page *page = pvec.pages[i];
--			struct folio *folio = page_folio(page);
 +		for (i = 0; i < nr; i++) {
-+			struct folio *folio = fbatch.folios[i];
++			struct page *page = &fbatch.folios[i]->page;
  
-+			if (folio->index < mpd->first_page)
-+				continue;
-+			if (folio->index + folio_nr_pages(folio) - 1 > end)
-+				continue;
- 			BUG_ON(!folio_test_locked(folio));
- 			BUG_ON(folio_test_writeback(folio));
- 			if (invalidate) {
-@@ -1594,7 +1597,7 @@ static void mpage_release_unused_pages(struct mpage_da_data *mpd,
- 			}
- 			folio_unlock(folio);
+ 			err = mpage_process_page(mpd, page, &lblk, &pblock,
+ 						 &map_bh);
+@@ -2352,14 +2351,14 @@ static int mpage_map_and_submit_buffers(struct mpage_da_data *mpd)
+ 			if (err < 0)
+ 				goto out;
  		}
 -		pagevec_release(&pvec);
 +		folio_batch_release(&fbatch);
  	}
+ 	/* Extent fully mapped and matches with page boundary. We are done. */
+ 	mpd->map.m_len = 0;
+ 	mpd->map.m_flags = 0;
+ 	return 0;
+ out:
+-	pagevec_release(&pvec);
++	folio_batch_release(&fbatch);
+ 	return err;
  }
  
 -- 
