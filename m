@@ -2,99 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D566853DF7B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jun 2022 03:46:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B9C553F048
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jun 2022 22:41:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ny1ox-0007n3-Ol; Mon, 06 Jun 2022 01:46:20 +0000
+	id 1nyJXf-00009P-R7; Mon, 06 Jun 2022 20:41:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <career@aaj.jo>) id 1ny1ow-0007mw-Af
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jun 2022 01:46:18 +0000
+ (envelope-from <willy@infradead.org>)
+ id 1nyJXe-00008X-8O; Mon, 06 Jun 2022 20:41:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:Message-ID:
- To:From:Date:Subject:Sender:Reply-To:Cc:MIME-Version:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1kIVQnEq3tUiqgkWgXApXJNbhTwb8/YXSv5lz9+pXho=; b=DdQwlNLDEJ5nkmhaTNYp9DXa6N
- D4bOAisP9bTFDD0GaEWGmXuKbgmep1Af4bGuyZY2saFPCTI02thJsdNcdzcd8wW5Hj+H7HOTynFZI
- UtzpCZUzx/2wqWrbJ66zaR+FwMXonot+9VPxWqmt2Qgx03f+Z/qYoQDU+R71A7DKH6gM=;
+ bh=52TXjMDH2lUY3R09liZNjO+IjMsaCFATm2t/b+KQCF8=; b=L6iRQH43yZqNiZ/8qO7sYflxhc
+ pPHPOOe1Uxi6UknjD1hmnA/0lxIksX5d7hyYDzY4pnWqOQ6oh4Vu0elL0/A16wPuDpN2PexPmVvX0
+ jJKJs2DgGc/XOwtGPvmzKTrBlxm+qqSVjrZR/7gWE3UhNZ89gyvxYZBN+rCLoyX2ZX6M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:Message-ID:To:From:Date:Subject:
- Sender:Reply-To:Cc:MIME-Version:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=1kIVQnEq3tUiqgkWgXApXJNbhTwb8/YXSv5lz9+pXho=; b=I
- +QYLTX4X67YqZOURNG5guhIcxXgTtN2ZGPjON5NgnkUYTlz3K0J/w6jqfrK/qZ0dQsPwauKutTkud
- ALHqRfUwJ6Mo2/3p5Ka4T/4xQoMTsOL55oFgNXjlIapxqfi7LQvGmz3WKI9pM8pYbNzxRZvL60VsR
- 4kPF+kXMCtd1yrbo=;
-Received: from mx2out5.tmdhosting.com ([96.127.138.118])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=52TXjMDH2lUY3R09liZNjO+IjMsaCFATm2t/b+KQCF8=; b=b
+ iz9GOpKw/VUnxmBbCea2/h8WPsMkPbOZBHhCeNPWwzxlQIoieNS59td9HdIHZqjHIX6f8c88BeLeT
+ VDhkJdy1GTSkkea+DwZz/bQ6X8vtXwMOURNKYc+cjOjrU2sMebzpARDQqtfZfW23ezDr11osfvIxv
+ yNW1r/RJbAw6pwiU=;
+Received: from casper.infradead.org ([90.155.50.34])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1ny1ov-006Z6m-OI
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 06 Jun 2022 01:46:18 +0000
-Received: from win08.tmd.cloud ([207.246.94.224] helo=GUEST.home)
- by mx2.tmdhosting.com with esmtps (TLSv1.2:AES128-GCM-SHA256:128)
- (Exim 4.92) (envelope-from <career@aaj.jo>) id 1ny1Sh-0006sO-4i
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 05 Jun 2022 20:23:21 -0500
-Received: from [127.0.0.1] ([177.130.171.168]) by home with
- MailEnable ESMTPSA (version=TLS1 cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA);
- Mon, 6 Jun 2022 01:23:17 +0000
-Date: Mon, 6 Jun 2022 03:23:18 +0200
-From: career@aaj.jo
-To: linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <5342963865.9986545918@aaj.jo>
-X-Mailgun-Tag: [mailing_type=qxu][sender=ox-xmlback][hhid=41213144]
-X-Originating-IP: 207.246.94.224
-X-SpamExperts-Domain: smtp-out.win08.tmd.cloud
-X-SpamExperts-Username: 207.246.94.224
-Authentication-Results: tmdhosting.com; auth=pass
- smtp.auth=207.246.94.224@smtp-out.win08.tmd.cloud
-X-SpamExperts-Outgoing-Class: unsure
-X-SpamExperts-Outgoing-Evidence: Combined (0.78)
-X-Recommended-Action: accept
-X-Filter-ID: Pt3MvcO5N4iKaDQ5O6lkdGlMVN6RH8bjRMzItlySaT+2UhXb9FnxIwgZyWgLgxoDPUtbdvnXkggZ
- 3YnVId/Y5jcf0yeVQAvfjHznO7+bT5yK/KhRMxX0aT131Jm2Fh0CszYZUxeoE762aCR2BMWArhij
- RIGonHehU4ttI9uxvUKCSzNIuWQJrNBB673AmlSDcvB8uallhxsJtmdxw53jncyF1edjsnoh92FV
- V/dq/cempcAwp8bpABR9GpA5j74SivDtb8u21gIDZCxCQllwwY+LQDa8vBw0SPEaOIISt34TMsTg
- TRkweE800fXt+7og0KYo6kU9Sfqt8wNBfhef/N8cjIN3reG9z0FKKQ5m2Qooa20mCX0fi2bWQ7rT
- SQDxs5srTnb+Mu57A5wjlqYzGz24rQe9+/XtclLOTVMRq9W72rVlokj9CcZZe4NWxmYt/drCsCnO
- nsANN2q4EksvqgUvossjam0/HVDFzCeLVAjI+ht+2XwDC3Hj+WjRz7duP3b6Xvyk68MEHpzIanIQ
- sE1jxABFCjAdqb0oBEIWGuehP7r/qeCcLfNPkwm2lNnsvr3LBR8rUYXJ4jh62pfHaKqsknzQ1WVE
- SSlbgJ6e928BIkUL/j1Y48GvmeURQjjEnjMI8Y9RCSLaut0QC+MQrmfiQrMfScrussttAUc8XwJZ
- 11qnY4wbF7KCDvUZIVFDfj8M4GsHK0/D3oIdUI6fcJRL0i6mhXmJtukpoDVKHf0lC1QqG5wZG0oX
- 2QUKBbmIiwQzKw+6v3CaIMG6s7LqJA8YLAp9plc/GdYJ8EvNBboQZr17DOotrcXcb8uI4xqPpX7w
- 4srUW008mRT/iiVWJWLua3RJ0N4pwp1zcex/7jgpeek/moZhIptYgRclsq4VJ5evPWCjhqsXUbga
- wYOdazcKVNeVJ9BXyu9+ceCqThSX2yfz7w+pE3EJCpxbPklZFjOk+oYG9HSSzX8ii5KOS7N7qYLA
- tCcaTgmnmyZDzqOhzttXT6cT4TBXzjfG6WzXmQV5l3l7LwSdTkQ7lhOUJ7Gxkpi8Jh6krBlxCujh
- yW/2OKHH5lr9xXvSM4nM3avg
-X-Report-Abuse-To: spam@mx1.tmdhosting.com
-X-Spam-Score: 3.5 (+++)
+ id 1nyJXb-0004K1-85; Mon, 06 Jun 2022 20:41:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+ Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:In-Reply-To:References;
+ bh=52TXjMDH2lUY3R09liZNjO+IjMsaCFATm2t/b+KQCF8=; b=SZdEFZWXMJtFPOJuECFsGH4n90
+ q7ier+E1yPXVQU4Nd1lYIGA05aBdagpFc4iTt8PjgeKc8E++hHnQYInhlsw3wbFpf5nxp3H2fcfme
+ 0Xx+q8n2owHljzIVuJKc0MDo+cUizE5viLTjZLfP5xwl/nmCSSlMfDWIQiYSrFSnV+41z2epAxAgz
+ c5hI+6eJnPB8FSW9f2DBRPcvqpAvUVkxshVm7oCqFdrliaskJ+h+S7JjdTqvzkHPpD7vXrhjHIlQV
+ QHRESAfyNVHF1VHQMM7Gir9jrNAHNPAhLTN9Pq43f+cwmm1aYDR8JwDm6N7iYlMQcSUd+o2cWsMba
+ zygq/t9A==;
+Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
+ Hat Linux)) id 1nyJWw-00B19H-IZ; Mon, 06 Jun 2022 20:40:54 +0000
+From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+To: linux-fsdevel@vger.kernel.org
+Date: Mon,  6 Jun 2022 21:40:30 +0100
+Message-Id: <20220606204050.2625949-1-willy@infradead.org>
+X-Mailer: git-send-email 2.31.1
+MIME-Version: 1.0
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: I got terrible information just for you. Earlier Managed to
- get admission to your personal systems. After that, I initiated tracking
- your activities. I mounted a Computer virus on the systems in all devices
- which you utilize to get into the Internet. 
- Content analysis details:   (3.5 points, 6.0 required)
+ Content preview: I plan to submit these patches through my pagecache tree in
+ the upcoming merge window. I'm pretty happy that most filesystems are now
+ using common code for ->migrate_folio; it's not something that mos [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
- 1.0 BITCOIN_SPAM_09        BitCoin spam pattern 09
- 0.5 PDS_BTC_ID             FP reduced Bitcoin ID
- 1.0 BITCOIN_EXTORT_01      Extortion spam, pay via BitCoin
-X-Headers-End: 1ny1ov-006Z6m-OI
-Subject: [f2fs-dev] Here is the last warning! Your information has been
- compromised! The entry in system is completed.
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1nyJXb-0004K1-85
+Subject: [f2fs-dev] [PATCH 00/20] Convert aops->migratepage to
+ aops->migrate_folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,72 +91,91 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-MIME-Version: 1.0
+Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, cluster-devel@redhat.com,
+ linux-ntfs-dev@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-mm@kvack.org, linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com,
+ linux-ext4@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-xfs@vger.kernel.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-I got  terrible  information  just  for you. 
-Earlier  Managed to  get admission to  your personal  systems. 
+I plan to submit these patches through my pagecache tree in the upcoming
+merge window.  I'm pretty happy that most filesystems are now using
+common code for ->migrate_folio; it's not something that most filesystem
+people want to care about.  I'm running xfstests using xfs against it now,
+but it's little more than compile tested for other filesystems.
 
+Matthew Wilcox (Oracle) (20):
+  fs: Add aops->migrate_folio
+  mm/migrate: Convert fallback_migrate_page() to
+    fallback_migrate_folio()
+  mm/migrate: Convert writeout() to take a folio
+  mm/migrate: Convert buffer_migrate_page() to buffer_migrate_folio()
+  mm/migrate: Convert expected_page_refs() to folio_expected_refs()
+  btrfs: Convert btree_migratepage to migrate_folio
+  nfs: Convert to migrate_folio
+  mm/migrate: Convert migrate_page() to migrate_folio()
+  mm/migrate: Add filemap_migrate_folio()
+  btrfs: Convert btrfs_migratepage to migrate_folio
+  ubifs: Convert to filemap_migrate_folio()
+  f2fs: Convert to filemap_migrate_folio()
+  aio: Convert to migrate_folio
+  hugetlb: Convert to migrate_folio
+  balloon: Convert to migrate_folio
+  secretmem: Convert to migrate_folio
+  z3fold: Convert to migrate_folio
+  zsmalloc: Convert to migrate_folio
+  fs: Remove aops->migratepage()
+  mm/folio-compat: Remove migration compatibility functions
 
+ Documentation/filesystems/locking.rst       |   5 +-
+ Documentation/filesystems/vfs.rst           |  13 +-
+ Documentation/vm/page_migration.rst         |  33 +--
+ block/fops.c                                |   2 +-
+ drivers/gpu/drm/i915/gem/i915_gem_userptr.c |   4 +-
+ fs/aio.c                                    |  36 ++--
+ fs/btrfs/disk-io.c                          |  22 +-
+ fs/btrfs/inode.c                            |  26 +--
+ fs/ext2/inode.c                             |   4 +-
+ fs/ext4/inode.c                             |   4 +-
+ fs/f2fs/checkpoint.c                        |   4 +-
+ fs/f2fs/data.c                              |  40 +---
+ fs/f2fs/f2fs.h                              |   4 -
+ fs/f2fs/node.c                              |   4 +-
+ fs/gfs2/aops.c                              |   2 +-
+ fs/hugetlbfs/inode.c                        |  19 +-
+ fs/iomap/buffered-io.c                      |  25 ---
+ fs/nfs/file.c                               |   4 +-
+ fs/nfs/internal.h                           |   6 +-
+ fs/nfs/write.c                              |  16 +-
+ fs/ntfs/aops.c                              |   6 +-
+ fs/ocfs2/aops.c                             |   2 +-
+ fs/ubifs/file.c                             |  29 +--
+ fs/xfs/xfs_aops.c                           |   2 +-
+ fs/zonefs/super.c                           |   2 +-
+ include/linux/buffer_head.h                 |  10 +
+ include/linux/fs.h                          |  18 +-
+ include/linux/iomap.h                       |   6 -
+ include/linux/migrate.h                     |  22 +-
+ include/linux/pagemap.h                     |   6 +
+ mm/balloon_compaction.c                     |  15 +-
+ mm/compaction.c                             |   5 +-
+ mm/folio-compat.c                           |  22 --
+ mm/ksm.c                                    |   2 +-
+ mm/migrate.c                                | 217 ++++++++++++--------
+ mm/migrate_device.c                         |   3 +-
+ mm/secretmem.c                              |   6 +-
+ mm/shmem.c                                  |   2 +-
+ mm/swap_state.c                             |   2 +-
+ mm/z3fold.c                                 |   8 +-
+ mm/zsmalloc.c                               |   8 +-
+ 41 files changed, 287 insertions(+), 379 deletions(-)
 
-After that, I  initiated  tracking your  activities. 
-I mounted a  Computer  virus on  the systems in all  devices which you utilize  to  get into the  Internet. 
-
-
-
-The following software offers  me access  to all of  your gadgets. 
-I've downloaded  all of  your info,  pictures, and  searching history  to my  own hosts. 
-
-
-
-I just  got connection  to all of  your info,  communication messengers, social  network, contact  information, email  and so  forth. 
-
-My  computer virus  updates signatures  and remains  undetectable to  anti virus  applications. 
-
-
-
-Whilst getting  information about  you, I  came across  you're  a good  admirer of  grown-up web  sites and  are watching  intriguing video  clips while  going through a  huge amount  of  fun. 
-
-I was  capable  to record  some of your  filthy scenes  when  you  masturbate  and achieve  orgasmic pleasure. 
-
-
-
-
-
-If there  are  any doubts,  I can make  a couple  of mouse  clicks and  all clips are going  to be  demonstrated to  everyone you  know. 
-
-Plus  I am  able to  publish all  your letters,  personal photos,  and  your private  information on  the net. I  can destroy  your status  forever. 
-
-
-I believe  you really do  not want  this to  happen, given  the character  of the  videos you  adore to  watch,  you know  what  I'm  talking about,  it  will be an  absolute disaster  in  your  case. 
-
-
-Let's  resolve that  by  doing this:  you send  me 1300  DOLLARS (in  bitcoin equivalent  to  the swap rate  at the  time of exchange),  & I  will immediately  remove everything. Then,  we'll  forget about  one  another. 
-
-
-I also promise  to deactivate  & get  rid of  all trojans  from  your gadgets. 
-
-
-
-Remember  that I usually  keep my  own word  of mouth. Here's my  btc address:  bc1qpqum4asxh2rd0twkam3768jgd58v29z6v0gxh7
-
-
-
-You got  Two days from  the moment  you view  this particular  e mail. 
-
-
-
-
-If you  don't forward  cash, your  video clip  and all  your data are going to  be published  on the  web for  all people  as  well as  your family members. I  will ruin your  status  permanently. 
-
-
-
-
-Don't  seek me  and don't contact  the  authorities  along  with other  help,  otherwise  your  computer data will  be published. 
-
-I  know  many secrets about who  you are, therefore  in  case  your reputation  is worthy,  bear  in mind  that  I can ruin  it once  and for all.
+-- 
+2.35.1
 
 
 
