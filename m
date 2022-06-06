@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8341A53F026
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jun 2022 22:41:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75A0353F04B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Jun 2022 22:41:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nyJXO-0004rr-Lo; Mon, 06 Jun 2022 20:41:23 +0000
+	id 1nyJXj-0004U0-0E; Mon, 06 Jun 2022 20:41:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <willy@infradead.org>)
- id 1nyJXM-0004rF-II; Mon, 06 Jun 2022 20:41:21 +0000
+ id 1nyJXf-0004SR-Jv; Mon, 06 Jun 2022 20:41:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2z1jX0yhTDltG7l7TM/WGDPE6d/xoDTeJDDQMbm1wg8=; b=Y++FC+Lu/NN/cMBEUatKAMZQrx
- q1sxZz9IBjnozAFoKp97fc54pF8VMxDg6+nX89HYtqAhuS9qvF5AEuUuWa+XLvH5gl6AjuJ/AyMXh
- bD4NS6qPgxkX/pEcFv8dlpxZWb163wu7a3gySvwqV50qLT7B6dQIqhza/8ThnFLThL7c=;
+ bh=PTb1fSw49y2qxNUUq4k5t2uIOYf1rKQU0qM36b/uqdM=; b=LtZU1RqePKin3tRpOx5rUnu/01
+ Hvr02P/EJ3iiMvQgrTuAoqvF54Kns964Y/jvLIdRgt+6/CI4udnV1zQQXmNGIENk1Mt8EB1VNXIGK
+ 38BCyVnxxMoysHlbsPdksKvhnNADZ93OWN/32EMLLvXmwqdt7V/EVTkRXmUpkckFSelU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,45 +29,46 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2z1jX0yhTDltG7l7TM/WGDPE6d/xoDTeJDDQMbm1wg8=; b=Gr1peX67zJ8Ljh8LnAUg8/RkC7
- feOGEwWyhrv5rgbkHWCBPDsdF0Ie4Xlq5oEsreADo+JpKn+83y+8Hb2Gjk6FgXEzqILLYx33qq7yz
- DYSDmbPBmPqmPZpwOEj/zt3eyDQyuBkSzR67+cezwokAmnCWrmx7XUkTgr8/FRu50YuU=;
-Received: from [90.155.50.34] (helo=casper.infradead.org)
+ bh=PTb1fSw49y2qxNUUq4k5t2uIOYf1rKQU0qM36b/uqdM=; b=ZP1OW2L786OC36CKnxqqeO95oj
+ 40G1HU0smraME9KzcBBdkijglS262HlXAz4ro8V5Mi9VdxNzYbmcMHsGI/zXpjVh4Pf/904f+9Crv
+ p4C0sRxGn+ayzI3+RLbkQOzdcd1gZg7O3D2VAAafmwLCXs1S9hYInxpdI7PtjuJ+0ZtE=;
+Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nyJXL-007Q0A-QQ; Mon, 06 Jun 2022 20:41:20 +0000
+ id 1nyJXc-007Q3T-UQ; Mon, 06 Jun 2022 20:41:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=2z1jX0yhTDltG7l7TM/WGDPE6d/xoDTeJDDQMbm1wg8=; b=Cv8slqe8iqqf4HOlLgutAaOA1A
- aFZHrqpp1ecJXz6/5OQgJaQgKmewa4IH+xNKntZNhPPNG2mq0TdCdUt37Lr1Rlb0d1jJiC5N0NY/k
- MH0U/aTkoMggca8NkpnWB2GfbEv8k3Qmd5IKV0bs9olGVEmGhjFUfhCNRkX82E7h2m4gIdzJIK83s
- bHNkdkHR2JrVCWQENaRdn/efg9EVXp1QQpLyXEb/+OSm01Xpgs6y+Nu8g5hE+zcuMzIc9U7qF5UHc
- CxDD3zjR9BkFUEuw/J+/y4QTlNqlIzj7jIvBLCnybLdxlLB62DbDIFf5GndYJbQZ9TUlgPwmGmbBf
- 0wr7BlYg==;
+ bh=PTb1fSw49y2qxNUUq4k5t2uIOYf1rKQU0qM36b/uqdM=; b=moAsLc7xAe9cCO2yLS/2VDmHEw
+ YBwWTVJr9kJRjwoeFhsNnd8JLuuJjbq0xBtc3hJNd0koz0AzNRiu2y+N5Os1g1/u53LaRvxXW4rdM
+ tHwy5XlETEs430Lov51yIttD+nu/AmMuCt1+6O5d08aKIMBYPTBY0Yt54xqFYELLNo0/O6twSwDnU
+ wa3c1U/y/ETekmwC5gKHpa1nMck5VNxLTjucI7KCgMp9l5cOztmW0nCXmpkBfBeAli7aijjbj7GhC
+ zHPVo0ax+4QE/HagbZZ6pGGOB2yVWmyQYd5p+40+xWsAl8Ab1eGJlEDyjqzfn+/+j35DgUlM4Y7a4
+ FS4d0iCw==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nyJWw-00B19Q-Rb; Mon, 06 Jun 2022 20:40:54 +0000
+ Hat Linux)) id 1nyJWw-00B19S-UW; Mon, 06 Jun 2022 20:40:54 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Mon,  6 Jun 2022 21:40:34 +0100
-Message-Id: <20220606204050.2625949-5-willy@infradead.org>
+Date: Mon,  6 Jun 2022 21:40:35 +0100
+Message-Id: <20220606204050.2625949-6-willy@infradead.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220606204050.2625949-1-willy@infradead.org>
 References: <20220606204050.2625949-1-willy@infradead.org>
 MIME-Version: 1.0
-X-Spam-Score: 1.1 (+)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Use a folio throughout __buffer_migrate_folio(),
- add kernel-doc
- for buffer_migrate_folio() and buffer_migrate_folio_norefs(), move their
- declarations to buffer.h and switch all filesystems that have w [...] 
- Content analysis details:   (1.1 points, 6.0 required)
+ Content preview:  Now that both callers have a folio, convert this function
+ to take a folio & rename it. Signed-off-by: Matthew Wilcox (Oracle)
+ <willy@infradead.org>
+ --- mm/migrate.c | 19 ++++++++++++------- 1 file changed, 12 insertions(+),
+ 7 deletions(-) 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
@@ -79,10 +80,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-X-Headers-End: 1nyJXL-007Q0A-QQ
-Subject: [f2fs-dev] [PATCH 04/20] mm/migrate: Convert buffer_migrate_page()
- to buffer_migrate_folio()
+X-Headers-End: 1nyJXc-007Q3T-UQ
+Subject: [f2fs-dev] [PATCH 05/20] mm/migrate: Convert expected_page_refs()
+ to folio_expected_refs()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,300 +105,59 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Use a folio throughout __buffer_migrate_folio(), add kernel-doc for
-buffer_migrate_folio() and buffer_migrate_folio_norefs(), move their
-declarations to buffer.h and switch all filesystems that have wired
-them up.
+Now that both callers have a folio, convert this function to
+take a folio & rename it.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 ---
- block/fops.c                |  2 +-
- fs/ext2/inode.c             |  4 +-
- fs/ext4/inode.c             |  4 +-
- fs/ntfs/aops.c              |  6 +--
- fs/ocfs2/aops.c             |  2 +-
- include/linux/buffer_head.h | 10 +++++
- include/linux/fs.h          | 12 ------
- mm/migrate.c                | 76 ++++++++++++++++++++++---------------
- 8 files changed, 65 insertions(+), 51 deletions(-)
+ mm/migrate.c | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
 
-diff --git a/block/fops.c b/block/fops.c
-index d6b3276a6c68..743fc46d0aad 100644
---- a/block/fops.c
-+++ b/block/fops.c
-@@ -417,7 +417,7 @@ const struct address_space_operations def_blk_aops = {
- 	.write_end	= blkdev_write_end,
- 	.writepages	= blkdev_writepages,
- 	.direct_IO	= blkdev_direct_IO,
--	.migratepage	= buffer_migrate_page_norefs,
-+	.migrate_folio	= buffer_migrate_folio_norefs,
- 	.is_dirty_writeback = buffer_check_dirty_writeback,
- };
- 
-diff --git a/fs/ext2/inode.c b/fs/ext2/inode.c
-index 360ce3604a2d..84570c6265aa 100644
---- a/fs/ext2/inode.c
-+++ b/fs/ext2/inode.c
-@@ -973,7 +973,7 @@ const struct address_space_operations ext2_aops = {
- 	.bmap			= ext2_bmap,
- 	.direct_IO		= ext2_direct_IO,
- 	.writepages		= ext2_writepages,
--	.migratepage		= buffer_migrate_page,
-+	.migrate_folio		= buffer_migrate_folio,
- 	.is_partially_uptodate	= block_is_partially_uptodate,
- 	.error_remove_page	= generic_error_remove_page,
- };
-@@ -989,7 +989,7 @@ const struct address_space_operations ext2_nobh_aops = {
- 	.bmap			= ext2_bmap,
- 	.direct_IO		= ext2_direct_IO,
- 	.writepages		= ext2_writepages,
--	.migratepage		= buffer_migrate_page,
-+	.migrate_folio		= buffer_migrate_folio,
- 	.error_remove_page	= generic_error_remove_page,
- };
- 
-diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index 1aaea53e67b5..53877ffe3c41 100644
---- a/fs/ext4/inode.c
-+++ b/fs/ext4/inode.c
-@@ -3633,7 +3633,7 @@ static const struct address_space_operations ext4_aops = {
- 	.invalidate_folio	= ext4_invalidate_folio,
- 	.release_folio		= ext4_release_folio,
- 	.direct_IO		= noop_direct_IO,
--	.migratepage		= buffer_migrate_page,
-+	.migrate_folio		= buffer_migrate_folio,
- 	.is_partially_uptodate  = block_is_partially_uptodate,
- 	.error_remove_page	= generic_error_remove_page,
- 	.swap_activate		= ext4_iomap_swap_activate,
-@@ -3668,7 +3668,7 @@ static const struct address_space_operations ext4_da_aops = {
- 	.invalidate_folio	= ext4_invalidate_folio,
- 	.release_folio		= ext4_release_folio,
- 	.direct_IO		= noop_direct_IO,
--	.migratepage		= buffer_migrate_page,
-+	.migrate_folio		= buffer_migrate_folio,
- 	.is_partially_uptodate  = block_is_partially_uptodate,
- 	.error_remove_page	= generic_error_remove_page,
- 	.swap_activate		= ext4_iomap_swap_activate,
-diff --git a/fs/ntfs/aops.c b/fs/ntfs/aops.c
-index 9e3964ea2ea0..5f4fb6ca6f2e 100644
---- a/fs/ntfs/aops.c
-+++ b/fs/ntfs/aops.c
-@@ -1659,7 +1659,7 @@ const struct address_space_operations ntfs_normal_aops = {
- 	.dirty_folio	= block_dirty_folio,
- #endif /* NTFS_RW */
- 	.bmap		= ntfs_bmap,
--	.migratepage	= buffer_migrate_page,
-+	.migrate_folio	= buffer_migrate_folio,
- 	.is_partially_uptodate = block_is_partially_uptodate,
- 	.error_remove_page = generic_error_remove_page,
- };
-@@ -1673,7 +1673,7 @@ const struct address_space_operations ntfs_compressed_aops = {
- 	.writepage	= ntfs_writepage,
- 	.dirty_folio	= block_dirty_folio,
- #endif /* NTFS_RW */
--	.migratepage	= buffer_migrate_page,
-+	.migrate_folio	= buffer_migrate_folio,
- 	.is_partially_uptodate = block_is_partially_uptodate,
- 	.error_remove_page = generic_error_remove_page,
- };
-@@ -1688,7 +1688,7 @@ const struct address_space_operations ntfs_mst_aops = {
- 	.writepage	= ntfs_writepage,	/* Write dirty page to disk. */
- 	.dirty_folio	= filemap_dirty_folio,
- #endif /* NTFS_RW */
--	.migratepage	= buffer_migrate_page,
-+	.migrate_folio	= buffer_migrate_folio,
- 	.is_partially_uptodate	= block_is_partially_uptodate,
- 	.error_remove_page = generic_error_remove_page,
- };
-diff --git a/fs/ocfs2/aops.c b/fs/ocfs2/aops.c
-index 767df51f8657..1d489003f99d 100644
---- a/fs/ocfs2/aops.c
-+++ b/fs/ocfs2/aops.c
-@@ -2462,7 +2462,7 @@ const struct address_space_operations ocfs2_aops = {
- 	.direct_IO		= ocfs2_direct_IO,
- 	.invalidate_folio	= block_invalidate_folio,
- 	.release_folio		= ocfs2_release_folio,
--	.migratepage		= buffer_migrate_page,
-+	.migrate_folio		= buffer_migrate_folio,
- 	.is_partially_uptodate	= block_is_partially_uptodate,
- 	.error_remove_page	= generic_error_remove_page,
- };
-diff --git a/include/linux/buffer_head.h b/include/linux/buffer_head.h
-index c9d1463bb20f..b0366c89d6a4 100644
---- a/include/linux/buffer_head.h
-+++ b/include/linux/buffer_head.h
-@@ -267,6 +267,16 @@ int nobh_truncate_page(struct address_space *, loff_t, get_block_t *);
- int nobh_writepage(struct page *page, get_block_t *get_block,
-                         struct writeback_control *wbc);
- 
-+#ifdef CONFIG_MIGRATION
-+extern int buffer_migrate_folio(struct address_space *,
-+		struct folio *dst, struct folio *src, enum migrate_mode);
-+extern int buffer_migrate_folio_norefs(struct address_space *,
-+		struct folio *dst, struct folio *src, enum migrate_mode);
-+#else
-+#define buffer_migrate_folio NULL
-+#define buffer_migrate_folio_norefs NULL
-+#endif
-+
- void buffer_init(void);
- 
- /*
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 7b380fa66983..5737c92ed286 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -3217,18 +3217,6 @@ extern int generic_check_addressable(unsigned, u64);
- 
- extern void generic_set_encrypted_ci_d_ops(struct dentry *dentry);
- 
--#ifdef CONFIG_MIGRATION
--extern int buffer_migrate_page(struct address_space *,
--				struct page *, struct page *,
--				enum migrate_mode);
--extern int buffer_migrate_page_norefs(struct address_space *,
--				struct page *, struct page *,
--				enum migrate_mode);
--#else
--#define buffer_migrate_page NULL
--#define buffer_migrate_page_norefs NULL
--#endif
--
- int may_setattr(struct user_namespace *mnt_userns, struct inode *inode,
- 		unsigned int ia_valid);
- int setattr_prepare(struct user_namespace *, struct dentry *, struct iattr *);
 diff --git a/mm/migrate.c b/mm/migrate.c
-index f19246c12fe9..77b8c662c9ca 100644
+index 77b8c662c9ca..e0a593e5b5f9 100644
 --- a/mm/migrate.c
 +++ b/mm/migrate.c
-@@ -657,23 +657,23 @@ static bool buffer_migrate_lock_buffers(struct buffer_head *head,
- 	return true;
- }
- 
--static int __buffer_migrate_page(struct address_space *mapping,
--		struct page *newpage, struct page *page, enum migrate_mode mode,
-+static int __buffer_migrate_folio(struct address_space *mapping,
-+		struct folio *dst, struct folio *src, enum migrate_mode mode,
- 		bool check_refs)
- {
- 	struct buffer_head *bh, *head;
- 	int rc;
- 	int expected_count;
- 
--	if (!page_has_buffers(page))
--		return migrate_page(mapping, newpage, page, mode);
-+	head = folio_buffers(src);
-+	if (!head)
-+		return migrate_page(mapping, &dst->page, &src->page, mode);
- 
- 	/* Check whether page does not have extra refs before we do more work */
--	expected_count = expected_page_refs(mapping, page);
--	if (page_count(page) != expected_count)
-+	expected_count = expected_page_refs(mapping, &src->page);
-+	if (folio_ref_count(src) != expected_count)
- 		return -EAGAIN;
- 
--	head = page_buffers(page);
- 	if (!buffer_migrate_lock_buffers(head, mode))
- 		return -EAGAIN;
- 
-@@ -704,23 +704,22 @@ static int __buffer_migrate_page(struct address_space *mapping,
- 		}
- 	}
- 
--	rc = migrate_page_move_mapping(mapping, newpage, page, 0);
-+	rc = folio_migrate_mapping(mapping, dst, src, 0);
- 	if (rc != MIGRATEPAGE_SUCCESS)
- 		goto unlock_buffers;
- 
--	attach_page_private(newpage, detach_page_private(page));
-+	folio_attach_private(dst, folio_detach_private(src));
- 
- 	bh = head;
- 	do {
--		set_bh_page(bh, newpage, bh_offset(bh));
-+		set_bh_page(bh, &dst->page, bh_offset(bh));
- 		bh = bh->b_this_page;
--
- 	} while (bh != head);
- 
- 	if (mode != MIGRATE_SYNC_NO_COPY)
--		migrate_page_copy(newpage, page);
-+		folio_migrate_copy(dst, src);
- 	else
--		migrate_page_states(newpage, page);
-+		folio_migrate_flags(dst, src);
- 
- 	rc = MIGRATEPAGE_SUCCESS;
- unlock_buffers:
-@@ -730,34 +729,51 @@ static int __buffer_migrate_page(struct address_space *mapping,
- 	do {
- 		unlock_buffer(bh);
- 		bh = bh->b_this_page;
--
- 	} while (bh != head);
- 
- 	return rc;
- }
- 
--/*
-- * Migration function for pages with buffers. This function can only be used
-- * if the underlying filesystem guarantees that no other references to "page"
-- * exist. For example attached buffer heads are accessed only under page lock.
-+/**
-+ * buffer_migrate_folio() - Migration function for folios with buffers.
-+ * @mapping: The address space containing @src.
-+ * @dst: The folio to migrate to.
-+ * @src: The folio to migrate from.
-+ * @mode: How to migrate the folio.
-+ *
-+ * This function can only be used if the underlying filesystem guarantees
-+ * that no other references to @src exist. For example attached buffer
-+ * heads are accessed only under the folio lock.  If your filesystem cannot
-+ * provide this guarantee, buffer_migrate_folio_noref() may be more
-+ * appropriate.
-+ *
-+ * Return: 0 on success or a negative errno on failure.
-  */
--int buffer_migrate_page(struct address_space *mapping,
--		struct page *newpage, struct page *page, enum migrate_mode mode)
-+int buffer_migrate_folio(struct address_space *mapping,
-+		struct folio *dst, struct folio *src, enum migrate_mode mode)
- {
--	return __buffer_migrate_page(mapping, newpage, page, mode, false);
-+	return __buffer_migrate_folio(mapping, dst, src, mode, false);
- }
--EXPORT_SYMBOL(buffer_migrate_page);
-+EXPORT_SYMBOL(buffer_migrate_folio);
- 
--/*
-- * Same as above except that this variant is more careful and checks that there
-- * are also no buffer head references. This function is the right one for
-- * mappings where buffer heads are directly looked up and referenced (such as
-- * block device mappings).
-+/**
-+ * buffer_migrate_folio_noref() - Migration function for folios with buffers.
-+ * @mapping: The address space containing @src.
-+ * @dst: The folio to migrate to.
-+ * @src: The folio to migrate from.
-+ * @mode: How to migrate the folio.
-+ *
-+ * Like buffer_migrate_folio() except that this variant is more careful
-+ * and checks that there are also no buffer head references. This function
-+ * is the right one for mappings where buffer heads are directly looked
-+ * up and referenced (such as block device mappings).
-+ *
-+ * Return: 0 on success or a negative errno on failure.
-  */
--int buffer_migrate_page_norefs(struct address_space *mapping,
--		struct page *newpage, struct page *page, enum migrate_mode mode)
-+int buffer_migrate_folio_norefs(struct address_space *mapping,
-+		struct folio *dst, struct folio *src, enum migrate_mode mode)
- {
--	return __buffer_migrate_page(mapping, newpage, page, mode, true);
-+	return __buffer_migrate_folio(mapping, dst, src, mode, true);
+@@ -337,13 +337,18 @@ void pmd_migration_entry_wait(struct mm_struct *mm, pmd_t *pmd)
  }
  #endif
+ 
+-static int expected_page_refs(struct address_space *mapping, struct page *page)
++static int folio_expected_refs(struct address_space *mapping,
++		struct folio *folio)
+ {
+-	int expected_count = 1;
++	int refs = 1;
++	if (!mapping)
++		return refs;
+ 
+-	if (mapping)
+-		expected_count += compound_nr(page) + page_has_private(page);
+-	return expected_count;
++	refs += folio_nr_pages(folio);
++	if (folio_get_private(folio))
++		refs++;
++
++	return refs;;
+ }
+ 
+ /*
+@@ -360,7 +365,7 @@ int folio_migrate_mapping(struct address_space *mapping,
+ 	XA_STATE(xas, &mapping->i_pages, folio_index(folio));
+ 	struct zone *oldzone, *newzone;
+ 	int dirty;
+-	int expected_count = expected_page_refs(mapping, &folio->page) + extra_count;
++	int expected_count = folio_expected_refs(mapping, folio) + extra_count;
+ 	long nr = folio_nr_pages(folio);
+ 
+ 	if (!mapping) {
+@@ -670,7 +675,7 @@ static int __buffer_migrate_folio(struct address_space *mapping,
+ 		return migrate_page(mapping, &dst->page, &src->page, mode);
+ 
+ 	/* Check whether page does not have extra refs before we do more work */
+-	expected_count = expected_page_refs(mapping, &src->page);
++	expected_count = folio_expected_refs(mapping, src);
+ 	if (folio_ref_count(src) != expected_count)
+ 		return -EAGAIN;
  
 -- 
 2.35.1
