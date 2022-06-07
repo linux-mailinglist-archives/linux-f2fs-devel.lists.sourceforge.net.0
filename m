@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F264653F7CB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Jun 2022 10:02:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id C861D53FDA0
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Jun 2022 13:37:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nyUAJ-0007Ht-Am; Tue, 07 Jun 2022 08:02:16 +0000
+	id 1nyXWc-0000hf-IV; Tue, 07 Jun 2022 11:37:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <lkp@intel.com>)
- id 1nyUAI-0007Hj-Bg; Tue, 07 Jun 2022 08:02:15 +0000
+ (envelope-from <brauner@kernel.org>) id 1nyXWb-0000hO-HM
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jun 2022 11:37:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7R6XCRkFYKUBYffbskPwYDyCAZJ0h9xXxXTTH5WBO8A=; b=JgJgru1wOctXNxaefzE+Uv7Zp1
- q56X3/DFMmXjsQBY0XjsZ3MfAXDqn8EF6LEByDD2L+GeHRo5SeGvstCCi3O6gUTzCfCt7aKVMxjzJ
- DjuXHrxlFm1/PDWJUhDLc0UODaoisaCwHrjQC8XUnXuSUf/YEjYHhCjWkjCKL7I7o6wg=;
+ bh=MShwiZglejBMTt37kzCHsuHsQj3zgKLlrjk4RGlH5NU=; b=bg97+WVZ0cZ/O4JJHz0AFdaMMx
+ IbLP2l3e5h/Q8uToZAb8eRvqLmMKzCra3UcBJaEyTR76wbOdz5jZ6ObCwmuEdWaFlHJn9w7F/LNy4
+ x8yExlx9ZwWEhJrwmObHGZeo/7brleCF9Wr6G7TS1QzYwIsP7DKj4Lh6KLn++DlYVwGw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,66 +29,55 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7R6XCRkFYKUBYffbskPwYDyCAZJ0h9xXxXTTH5WBO8A=; b=O04e3YdDm11Ei9GOn+nnmxNt7e
- EVSaUb5gQ+RGljX3nvCovr18grEiXENJsaXlimYC3/hq2E8emVa6uFeHca3QFVyiQ3U43NaOMJ7D6
- QFg1Lkl81egVPalFeRFZ5GSTYj450mohRtP1PNjT1ESJG+HGRCe9p1pYUbwVDV1TEhzI=;
-Received: from mga01.intel.com ([192.55.52.88])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=MShwiZglejBMTt37kzCHsuHsQj3zgKLlrjk4RGlH5NU=; b=lNS2ubzyPmJNH+uq7D2eMjbtyV
+ 3KSMeDFRcMnt5kuIEl3tpC/UdeWhRMjtRz10Y1zKWxDQKQic+FX0jNDseorP1CVwcdKehl0bxtL/x
+ MauM5o2I/22aH9GrINJI9foSYh+4eNMjHjVmbvm3gGoXarGaVYa+kmGnzyqM+GTu/C5Q=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nyUAB-007qH9-FC; Tue, 07 Jun 2022 08:02:14 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1654588927; x=1686124927;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=mQzWEDPxMO7UmRFxluiJ1Ca9g136QsEllPnrNDFo86E=;
- b=XcbnXK52ngy8V1KGh5LFLx2edYD0q5Rl694MdTdFZSG1EgwS+znkDZMe
- Ylv1+RqkAuqIWg3isMi+aKQHqfiUCtN+rJeDp9Ygay4R4NEyW0rekDqdd
- CbQVLJCK1YxYe/HYXCSWs0h0Ux1G/iArbc3s12L145uoptd4vON8cszkJ
- Y37Q17zTnydnz2x7VLq4Sw82Ub/X0mm8v5zkoK/OF8Nx7BGj2NrCb1b3u
- p0fV6NPnsQddCoZlGfYcEC75qwv+07BjQsOwaReXD8+Bl30CpesSjjoq1
- sklToiAbGKco81a5/gEYgbL41OLJ2jJkkMC4RU3IuHn18Yh0CygnCa3so g==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10370"; a="302073765"
-X-IronPort-AV: E=Sophos;i="5.91,283,1647327600"; d="scan'208";a="302073765"
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Jun 2022 01:01:51 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.91,283,1647327600"; d="scan'208";a="709385390"
-Received: from lkp-server01.sh.intel.com (HELO 60dabacc1df6) ([10.239.97.150])
- by orsmga004.jf.intel.com with ESMTP; 07 Jun 2022 01:01:47 -0700
-Received: from kbuild by 60dabacc1df6 with local (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1nyU9q-000DUT-Qe;
- Tue, 07 Jun 2022 08:01:46 +0000
-Date: Tue, 7 Jun 2022 16:01:02 +0800
-From: kernel test robot <lkp@intel.com>
-To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
- linux-fsdevel@vger.kernel.org
-Message-ID: <202206071552.6lOdScLW-lkp@intel.com>
-References: <20220606204050.2625949-5-willy@infradead.org>
+ id 1nyXWZ-00065i-ES
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jun 2022 11:37:29 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id C4713616B0;
+ Tue,  7 Jun 2022 11:37:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B4A4C385A5;
+ Tue,  7 Jun 2022 11:37:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1654601841;
+ bh=8ssLmPCQc0kBEOnMpM83QxMMmjw3G4wZmE/Q52LHRZ0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ulrnZ3VWWAYqxXyKMLlRANtahVN2YqNjS+95EKiyA31F59Kxv56ZxZvJeFNL2v8u2
+ HARW/OKmP9vrlxSdZNnaH3ij+7H8UlnfzOCQ1oxjz9vjsiisWeP8YGHgOUWaKE3RXJ
+ 0Qgq8LuNiEDX/vIkZ2FV2oYFDoYmwavNlOFsB8uPO+joCcntqxsuAWdrO2LcLkXq03
+ 5jcBhpDEojRYyn7qDO7vem729Q325Cpl+yLlRoju9/CWrk0f33UnA9Hak8u2vJNDYY
+ 93upScTvvcZE6v6bgLLYedRNMRE70uLsyv1JUV94v403BBEPVF5OmKnH6DlbYWYvUg
+ /f4lOE8iShQ3Q==
+Date: Tue, 7 Jun 2022 13:37:16 +0200
+From: Christian Brauner <brauner@kernel.org>
+To: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+Message-ID: <20220607113716.aec2o7onzu3re2o4@wittgenstein>
+References: <20220605193854.2371230-1-willy@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220606204050.2625949-5-willy@infradead.org>
-X-Spam-Score: -5.9 (-----)
+In-Reply-To: <20220605193854.2371230-1-willy@infradead.org>
+X-Spam-Score: -3.4 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi "Matthew, I love your patch! Perhaps something to improve:
- [auto build test WARNING on linus/master] [also build test WARNING on
- v5.19-rc1
- next-20220607] [cannot apply to jaegeuk-f2fs/dev-test trondmy-nfs/linux-next
- kdave/for-next xfs-linux/for-next] [If your [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Sun, Jun 05, 2022 at 08:38:44PM +0100,
+ Matthew Wilcox wrote:
+ > This patch series removes find_get_pages_range(), pagevec_lookup() > and
+ pagevec_lookup_range(), converting all callers to use the new [...] 
+ Content analysis details:   (-3.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [192.55.52.88 listed in wl.mailspike.net]
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [192.55.52.88 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -97,11 +86,11 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nyUAB-007qH9-FC
-Subject: Re: [f2fs-dev] [PATCH 04/20] mm/migrate: Convert
- buffer_migrate_page() to buffer_migrate_folio()
+X-Headers-End: 1nyXWZ-00065i-ES
+Subject: Re: [f2fs-dev] [PATCH 00/10] Convert to filemap_get_folios()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,82 +102,50 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, cluster-devel@redhat.com,
- kbuild-all@lists.01.org, linux-ntfs-dev@lists.sourceforge.net,
- llvm@lists.linux.dev, linux-kernel@vger.kernel.org,
- "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- linux-mm@kvack.org, linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com,
- linux-ext4@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-xfs@vger.kernel.org, linux-btrfs@vger.kernel.org
+Cc: linux-nilfs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi "Matthew,
+On Sun, Jun 05, 2022 at 08:38:44PM +0100, Matthew Wilcox wrote:
+> This patch series removes find_get_pages_range(), pagevec_lookup()
+> and pagevec_lookup_range(), converting all callers to use the new
+> filemap_get_folios().  I've only run xfstests over ext4 ... some other
+> testing might be appropriate.
+> 
+> Matthew Wilcox (Oracle) (10):
+>   filemap: Add filemap_get_folios()
+>   buffer: Convert clean_bdev_aliases() to use filemap_get_folios()
+>   ext4: Convert mpage_release_unused_pages() to use filemap_get_folios()
+>   ext4: Convert mpage_map_and_submit_buffers() to use
+>     filemap_get_folios()
+>   f2fs: Convert f2fs_invalidate_compress_pages() to use
+>     filemap_get_folios()
+>   hugetlbfs: Convert remove_inode_hugepages() to use
+>     filemap_get_folios()
+>   nilfs2: Convert nilfs_copy_back_pages() to use filemap_get_folios()
+>   vmscan: Add check_move_unevictable_folios()
+>   shmem: Convert shmem_unlock_mapping() to use filemap_get_folios()
+>   filemap: Remove find_get_pages_range() and associated functions
+> 
+>  fs/buffer.c             | 26 +++++++--------
+>  fs/ext4/inode.c         | 40 ++++++++++++-----------
+>  fs/f2fs/compress.c      | 35 +++++++++-----------
+>  fs/hugetlbfs/inode.c    | 44 ++++++++-----------------
+>  fs/nilfs2/page.c        | 60 +++++++++++++++++-----------------
+>  include/linux/pagemap.h |  5 ++-
+>  include/linux/pagevec.h | 10 ------
+>  include/linux/swap.h    |  3 +-
+>  mm/filemap.c            | 72 +++++++++++++++++------------------------
+>  mm/shmem.c              | 13 ++++----
+>  mm/swap.c               | 29 -----------------
+>  mm/vmscan.c             | 55 ++++++++++++++++++-------------
+>  12 files changed, 166 insertions(+), 226 deletions(-)
 
-I love your patch! Perhaps something to improve:
-
-[auto build test WARNING on linus/master]
-[also build test WARNING on v5.19-rc1 next-20220607]
-[cannot apply to jaegeuk-f2fs/dev-test trondmy-nfs/linux-next kdave/for-next xfs-linux/for-next]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Matthew-Wilcox-Oracle/Convert-aops-migratepage-to-aops-migrate_folio/20220607-044509
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git f2906aa863381afb0015a9eb7fefad885d4e5a56
-config: s390-randconfig-c005-20220606 (https://download.01.org/0day-ci/archive/20220607/202206071552.6lOdScLW-lkp@intel.com/config)
-compiler: clang version 15.0.0 (https://github.com/llvm/llvm-project b92436efcb7813fc481b30f2593a4907568d917a)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # install s390 cross compiling tool for clang build
-        # apt-get install binutils-s390x-linux-gnu
-        # https://github.com/intel-lab-lkp/linux/commit/96e64ba8b1be545885d89f44b1d8b968b22bdb4d
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Matthew-Wilcox-Oracle/Convert-aops-migratepage-to-aops-migrate_folio/20220607-044509
-        git checkout 96e64ba8b1be545885d89f44b1d8b968b22bdb4d
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=s390 SHELL=/bin/bash
-
-If you fix the issue, kindly add following tag where applicable
-Reported-by: kernel test robot <lkp@intel.com>
-
-All warnings (new ones prefixed by >>):
-
->> mm/migrate.c:775: warning: expecting prototype for buffer_migrate_folio_noref(). Prototype was for buffer_migrate_folio_norefs() instead
-
-
-vim +775 mm/migrate.c
-
-89cb0888ca1483 Jan Kara                2018-12-28  758  
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  759) /**
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  760)  * buffer_migrate_folio_noref() - Migration function for folios with buffers.
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  761)  * @mapping: The address space containing @src.
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  762)  * @dst: The folio to migrate to.
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  763)  * @src: The folio to migrate from.
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  764)  * @mode: How to migrate the folio.
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  765)  *
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  766)  * Like buffer_migrate_folio() except that this variant is more careful
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  767)  * and checks that there are also no buffer head references. This function
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  768)  * is the right one for mappings where buffer heads are directly looked
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  769)  * up and referenced (such as block device mappings).
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  770)  *
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  771)  * Return: 0 on success or a negative errno on failure.
-89cb0888ca1483 Jan Kara                2018-12-28  772   */
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  773) int buffer_migrate_folio_norefs(struct address_space *mapping,
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  774) 		struct folio *dst, struct folio *src, enum migrate_mode mode)
-89cb0888ca1483 Jan Kara                2018-12-28 @775  {
-96e64ba8b1be54 Matthew Wilcox (Oracle  2022-06-06  776) 	return __buffer_migrate_folio(mapping, dst, src, mode, true);
-89cb0888ca1483 Jan Kara                2018-12-28  777  }
-9361401eb7619c David Howells           2006-09-30  778  #endif
-1d8b85ccf1ed53 Christoph Lameter       2006-06-23  779  
-
--- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
+The conversion seems fairly straightforward, so looks good to me.
+Acked-by: Christian Brauner (Microsoft) <brauner@kernel.org>
 
 
 _______________________________________________
