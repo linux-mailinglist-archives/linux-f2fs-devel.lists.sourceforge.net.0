@@ -2,134 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B48BE53F75A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Jun 2022 09:36:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A981D53F76E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Jun 2022 09:41:15 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nyTlY-0006TI-0v; Tue, 07 Jun 2022 07:36:40 +0000
+	id 1nyTpw-0006jX-4B; Tue, 07 Jun 2022 07:41:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <david@redhat.com>) id 1nyTlW-0006TB-4R
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jun 2022 07:36:39 +0000
+ (envelope-from <lkp@intel.com>) id 1nyTpr-0006jQ-2X
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jun 2022 07:41:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=poSLf3SQpSQVqGAvfY9ZUAc4mDsdNw09sPQoA12+Xn0=; b=cipwIFo4w2r4Ri95Y98BhXKRTe
- dJMXlc/RcHtCAcITLNyEqZAmyK+bvOaUFvEFr5ZtsAw7qWXwxoCvW51/hwmOpNL25v81xCPsNjUia
- D6ytTTAJbVBp+JyyWMZ7Mgj0PWjjU8g4Z+XnzqYGpcEQmQCxTwRvfpAVg1ZXxmGaPs3E=;
+ bh=1AyLDmVWepWhZ40cNW3RGgLSCsAy0s+ojliK3ufC17I=; b=VWsKAtrUm1J5Ck0VQqFvzeIZw7
+ JWhQ4ApWUS3sng/dKwPca8rde6Y8DYUlqtnsCzRwErA5u9Meao5bMvPsoguHDJbik6uIVphqXZEE5
+ fLH/4vWTql4IYtBxcVmGzTM8qVfkFxzbQjp0m/Baw00Ks+9mg8BYt+iNh/cIKP2wLwgI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=poSLf3SQpSQVqGAvfY9ZUAc4mDsdNw09sPQoA12+Xn0=; b=WlEUh0OJcQNSg0c9+/JcHg3gSz
- UWrlFcNzzWdyr27DqCMO6y7/shZKRp9PZlkgxQtfRCfS9VlyPDL3Dd6gkA3lNWvEZJrJQHIfgm6Am
- SxLrvOoMePLZjUhHAai2TIfaJAH/zqqYf6uK8qNbKPbJ33v9lpZ1fhifKYxR3Jf/uuiA=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=1AyLDmVWepWhZ40cNW3RGgLSCsAy0s+ojliK3ufC17I=; b=K
+ ZUux4t9nbeME7XRULjyif77/mew3qnLsgw5ZjQovksdrWEGcWfqVd7A1yE1uSyVR1QP2alAAQ/lGj
+ j/v9ho7SqNzsu1QK/TGHxgatuA4ES89Q36C+2ge7b9pFsHpryTYeIC3G2rdUACXDmPGk2rP5FiNO8
+ nA81lfhkZDvGwM38=;
+Received: from mga01.intel.com ([192.55.52.88])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nyTlQ-0007qk-Al
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jun 2022 07:36:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1654587386;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=poSLf3SQpSQVqGAvfY9ZUAc4mDsdNw09sPQoA12+Xn0=;
- b=hfSm24hAkAxOtxAdK5RtalOFpv2znDhW0w8uprj18UcuDvaE1104doT8gg0EGQRE7IVVae
- Iv9ibPBqibKHQJSPOIOBqaEpuEYNNXoxMCplEm6QKG0vQjt/Q4MwCr3NAXeroafSH4Hism
- Hc6SSzDGX6eaNpnk8i7CZOns7zf1qCw=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-616-EkWS5u0HM9ilRva_6NPadA-1; Tue, 07 Jun 2022 03:36:25 -0400
-X-MC-Unique: EkWS5u0HM9ilRva_6NPadA-1
-Received: by mail-wr1-f72.google.com with SMTP id
- o18-20020a5d4a92000000b00213b4eebc25so2930460wrq.21
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 07 Jun 2022 00:36:24 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:organization:in-reply-to
- :content-transfer-encoding;
- bh=poSLf3SQpSQVqGAvfY9ZUAc4mDsdNw09sPQoA12+Xn0=;
- b=QtslzK2N99DliqC/Lb/eSR7KwxRqtdGZYyf21arzcL4wzasECDQI475iYjLdeQpw9g
- kNnIG/3tFtNLrQ6wYzUZ5rQNmxuVoFhnYs4srJDT+uG0QweM2qwhup3cjvbXTUYHXmOR
- wz3wsBCXGYIBb5Qt2Lx3WOVHKdSO+IsFmzkbmwTUFD3sE+52REmM+BzSw0sRowejntmg
- 92kJhWOtZM+IBzRGc4CRvG62ZcgJ3VqTkADysk8KmpT9EOT7c/LpFfy6pXThCHmTQdWn
- 5RGxPY1h5bHbxoVpPpfZQHnwuu3eXyudKrr0Zd/c6udLk2ae+yIanzqMi08Rh0SejBwQ
- elPA==
-X-Gm-Message-State: AOAM53393W9upP73IVyFc9ON+TU5zirpUPb8bQYxOcnJdMxrSkxCnmVe
- /Fvx/KdY0F0isvlRtZ9Yr28Yz2KsuMHGonzl7Axqeyr8F2GnUSXMuWlENO8ULAW0iW55ei9lKng
- Goz+5AkyIks6libq9o0hbwYY6FgNhSS0mUxmzig==
-X-Received: by 2002:a05:600c:4ec9:b0:397:750a:798a with SMTP id
- g9-20020a05600c4ec900b00397750a798amr56010315wmq.169.1654587384019; 
- Tue, 07 Jun 2022 00:36:24 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJz/TT1zDaD6ih4ST/0Z6l6/VJexv/LUjWrit9gRiSM2S633qB8aLjqIdjv8Hs+falCUt0H+YA==
-X-Received: by 2002:a05:600c:4ec9:b0:397:750a:798a with SMTP id
- g9-20020a05600c4ec900b00397750a798amr56010293wmq.169.1654587383789; 
- Tue, 07 Jun 2022 00:36:23 -0700 (PDT)
-Received: from ?IPV6:2003:cb:c709:500:4c8d:4886:f874:7b6f?
- (p200300cbc70905004c8d4886f8747b6f.dip0.t-ipconnect.de.
- [2003:cb:c709:500:4c8d:4886:f874:7b6f])
- by smtp.gmail.com with ESMTPSA id
- j37-20020a05600c1c2500b0039c235fb6a5sm19943141wms.8.2022.06.07.00.36.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Jun 2022 00:36:22 -0700 (PDT)
-Message-ID: <e4d017a4-556d-bb5f-9830-a8843591bc8d@redhat.com>
-Date: Tue, 7 Jun 2022 09:36:21 +0200
+ id 1nyTpj-00088w-4j
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jun 2022 07:41:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1654587660; x=1686123660;
+ h=date:from:to:cc:subject:message-id:mime-version;
+ bh=B+WYoP6Zk3TaibE1wctiooiWrRYzinG+AW1DrGNq9DM=;
+ b=jTRPATNbNIzoqdFD6LXY+1CaEizIzudtOFV/DmQ9njo9GAoVC+/qpmdT
+ V3qLbvbqrythA2kzW2S4eQcx6HEIX8RVaR9O9PamzdjDOzUklnyKjcwxV
+ A5Gh8+2KO8/Gf2lYlUTsz4JHcFSIgaVDgxPaw285kkH3l63BCs65IBb12
+ oCFJbsiLbTWpKIhAqZF5QH2qsrsvsp/c8JM3L14xDPVziFzBKB8M3gRhs
+ AOWQnxZkAPhX7uWqAT4qE5cwppK5ni/plcCKH21j5UhRAUu5ODxeDcyYF
+ Clg3mDGjlbdOVsars0v4Y1bKLMyneeQtfmLDzoetSLCBMSsncbmhjKeef g==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10370"; a="302073048"
+X-IronPort-AV: E=Sophos;i="5.91,283,1647327600"; d="scan'208";a="302073048"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 07 Jun 2022 00:40:50 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.91,283,1647327600"; d="scan'208";a="636004037"
+Received: from lkp-server01.sh.intel.com (HELO 60dabacc1df6) ([10.239.97.150])
+ by fmsmga008.fm.intel.com with ESMTP; 07 Jun 2022 00:40:47 -0700
+Received: from kbuild by 60dabacc1df6 with local (Exim 4.95)
+ (envelope-from <lkp@intel.com>) id 1nyTpW-000DTx-Aa;
+ Tue, 07 Jun 2022 07:40:46 +0000
+Date: Tue, 7 Jun 2022 15:40:21 +0800
+From: kernel test robot <lkp@intel.com>
+To: Jack Qiu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Message-ID: <202206071533.vc9l1Css-lkp@intel.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
- linux-fsdevel@vger.kernel.org
-References: <20220606204050.2625949-1-willy@infradead.org>
- <20220606204050.2625949-16-willy@infradead.org>
-From: David Hildenbrand <david@redhat.com>
-Organization: Red Hat
-In-Reply-To: <20220606204050.2625949-16-willy@infradead.org>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=david@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-X-Spam-Score: -2.9 (--)
+Content-Disposition: inline
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 06.06.22 22:40, Matthew Wilcox (Oracle) wrote: > This is
- little more than changing the types over; there's no real work > being done
- in this function. > > Signed-off-by: Matthew Wilcox (Oracle) <wi [...] 
- Content analysis details:   (-2.9 points, 6.0 required)
+ Content preview: tree:
+ https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ dev-test head: 7f7c4d65019e9c82538b92ec5df2e4f0c6765998 commit:
+ 7f7c4d65019e9c82538b92ec5df2e4f0c6765998
+ [2/2] f2fs: optimize err [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.133.124 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [192.55.52.88 listed in wl.mailspike.net]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [192.55.52.88 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nyTlQ-0007qk-Al
-Subject: Re: [f2fs-dev] [PATCH 15/20] balloon: Convert to migrate_folio
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1nyTpj-00088w-4j
+Subject: [f2fs-dev] [jaegeuk-f2fs:dev-test 2/2] fs/f2fs/file.c:3908:15:
+ error: use of undeclared identifier 'sbi'
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -141,74 +110,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, cluster-devel@redhat.com,
- linux-ntfs-dev@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- linux-mm@kvack.org, linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com,
- linux-ext4@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-xfs@vger.kernel.org, linux-btrfs@vger.kernel.org
+Cc: llvm@lists.linux.dev, kbuild-all@lists.01.org, Chao Yu <yuchao0@huawei.com>,
+ linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 06.06.22 22:40, Matthew Wilcox (Oracle) wrote:
-> This is little more than changing the types over; there's no real work
-> being done in this function.
-> 
-> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-> ---
->  mm/balloon_compaction.c | 15 +++++++--------
->  1 file changed, 7 insertions(+), 8 deletions(-)
-> 
-> diff --git a/mm/balloon_compaction.c b/mm/balloon_compaction.c
-> index 4b8eab4b3f45..3f75b876ad76 100644
-> --- a/mm/balloon_compaction.c
-> +++ b/mm/balloon_compaction.c
-> @@ -230,11 +230,10 @@ static void balloon_page_putback(struct page *page)
->  
->  
->  /* move_to_new_page() counterpart for a ballooned page */
-> -static int balloon_page_migrate(struct address_space *mapping,
-> -		struct page *newpage, struct page *page,
-> -		enum migrate_mode mode)
-> +static int balloon_migrate_folio(struct address_space *mapping,
-> +		struct folio *dst, struct folio *src, enum migrate_mode mode)
->  {
-> -	struct balloon_dev_info *balloon = balloon_page_device(page);
-> +	struct balloon_dev_info *balloon = balloon_page_device(&src->page);
->  
->  	/*
->  	 * We can not easily support the no copy case here so ignore it as it
-> @@ -244,14 +243,14 @@ static int balloon_page_migrate(struct address_space *mapping,
->  	if (mode == MIGRATE_SYNC_NO_COPY)
->  		return -EINVAL;
->  
-> -	VM_BUG_ON_PAGE(!PageLocked(page), page);
-> -	VM_BUG_ON_PAGE(!PageLocked(newpage), newpage);
-> +	VM_BUG_ON_FOLIO(!folio_test_locked(src), src);
-> +	VM_BUG_ON_FOLIO(!folio_test_locked(dst), dst);
->  
-> -	return balloon->migratepage(balloon, newpage, page, mode);
-> +	return balloon->migratepage(balloon, &dst->page, &src->page, mode);
->  }
->  
->  const struct address_space_operations balloon_aops = {
-> -	.migratepage = balloon_page_migrate,
-> +	.migrate_folio = balloon_migrate_folio,
->  	.isolate_page = balloon_page_isolate,
->  	.putback_page = balloon_page_putback,
->  };
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
+head:   7f7c4d65019e9c82538b92ec5df2e4f0c6765998
+commit: 7f7c4d65019e9c82538b92ec5df2e4f0c6765998 [2/2] f2fs: optimize error handling in redirty_blocks
+config: i386-randconfig-a002 (https://download.01.org/0day-ci/archive/20220607/202206071533.vc9l1Css-lkp@intel.com/config)
+compiler: clang version 15.0.0 (https://github.com/llvm/llvm-project b92436efcb7813fc481b30f2593a4907568d917a)
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?id=7f7c4d65019e9c82538b92ec5df2e4f0c6765998
+        git remote add jaegeuk-f2fs https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+        git fetch --no-tags jaegeuk-f2fs dev-test
+        git checkout 7f7c4d65019e9c82538b92ec5df2e4f0c6765998
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=i386 SHELL=/bin/bash fs/f2fs/
 
-I assume you're working on conversion of the other callbacks as well,
-because otherwise, this ends up looking a bit inconsistent and confusing :)
+If you fix the issue, kindly add following tag where applicable
+Reported-by: kernel test robot <lkp@intel.com>
 
-Change LGTM.
+All errors (new ones prefixed by >>):
+
+>> fs/f2fs/file.c:3908:15: error: use of undeclared identifier 'sbi'
+                   f2fs_bug_on(sbi, !page);
+                               ^
+   1 error generated.
+
+
+vim +/sbi +3908 fs/f2fs/file.c
+
+  3884	
+  3885	static int redirty_blocks(struct inode *inode, pgoff_t page_idx, int len)
+  3886	{
+  3887		DEFINE_READAHEAD(ractl, NULL, NULL, inode->i_mapping, page_idx);
+  3888		struct address_space *mapping = inode->i_mapping;
+  3889		struct page *page;
+  3890		pgoff_t redirty_idx = page_idx;
+  3891		int i, page_len = 0, ret = 0;
+  3892	
+  3893		page_cache_ra_unbounded(&ractl, len, 0);
+  3894	
+  3895		for (i = 0; i < len; i++, page_idx++) {
+  3896			page = read_cache_page(mapping, page_idx, NULL, NULL);
+  3897			if (IS_ERR(page)) {
+  3898				ret = PTR_ERR(page);
+  3899				break;
+  3900			}
+  3901			page_len++;
+  3902		}
+  3903	
+  3904		for (i = 0; i < page_len; i++, redirty_idx++) {
+  3905			page = find_lock_page(mapping, redirty_idx);
+  3906	
+  3907			/* It will never fail, when page has pinned above */
+> 3908			f2fs_bug_on(sbi, !page);
+  3909	
+  3910			set_page_dirty(page);
+  3911			f2fs_put_page(page, 1);
+  3912			f2fs_put_page(page, 0);
+  3913		}
+  3914	
+  3915		return ret;
+  3916	}
+  3917	
 
 -- 
-Thanks,
-
-David / dhildenb
-
+0-DAY CI Kernel Test Service
+https://01.org/lkp
 
 
 _______________________________________________
