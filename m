@@ -2,95 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C861D53FDA0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Jun 2022 13:37:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C62154004B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Jun 2022 15:42:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nyXWc-0000hf-IV; Tue, 07 Jun 2022 11:37:31 +0000
+	id 1nyZTM-0003yp-20; Tue, 07 Jun 2022 13:42:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <brauner@kernel.org>) id 1nyXWb-0000hO-HM
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jun 2022 11:37:29 +0000
+ (envelope-from <bfoster@redhat.com>) id 1nyZTJ-0003yj-VP
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jun 2022 13:42:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MShwiZglejBMTt37kzCHsuHsQj3zgKLlrjk4RGlH5NU=; b=bg97+WVZ0cZ/O4JJHz0AFdaMMx
- IbLP2l3e5h/Q8uToZAb8eRvqLmMKzCra3UcBJaEyTR76wbOdz5jZ6ObCwmuEdWaFlHJn9w7F/LNy4
- x8yExlx9ZwWEhJrwmObHGZeo/7brleCF9Wr6G7TS1QzYwIsP7DKj4Lh6KLn++DlYVwGw=;
+ bh=U9GWchY9hZYcIJP7lDw5j1KYfu5h/jhdfCsZWPH40Q8=; b=PBDnxqao+2gCJIexxOP+fgA+hK
+ c3iTnYKUZyWgFxclYfNq+bcTE+fE5ujwJChbfPym3nIrX4CQZgIc46Siu+2PWcsaqgAqINHi8CTMe
+ 2QDSEJtPcZnXYgBxeg2pzt87KK6k2bwAYXOfuWby/LL+OFFwAkhHLyGVuDexRkZgRxgc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
  :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MShwiZglejBMTt37kzCHsuHsQj3zgKLlrjk4RGlH5NU=; b=lNS2ubzyPmJNH+uq7D2eMjbtyV
- 3KSMeDFRcMnt5kuIEl3tpC/UdeWhRMjtRz10Y1zKWxDQKQic+FX0jNDseorP1CVwcdKehl0bxtL/x
- MauM5o2I/22aH9GrINJI9foSYh+4eNMjHjVmbvm3gGoXarGaVYa+kmGnzyqM+GTu/C5Q=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=U9GWchY9hZYcIJP7lDw5j1KYfu5h/jhdfCsZWPH40Q8=; b=WbThZ/CdojaAwhOON4qrt9C1SB
+ gQkyUT46u2yuDAthj/EhQnsUKC4EIuKpusjzUu0ikRWDU+A88qZuEmrELWifWPS65B+S4px0Uy2Nj
+ sp2FvjO8D4sYPa1Ag8Z40AKTMJnCpeeDZlGNToTIrq8Vz0ca/PLlE05GFRMEBKfezmQA=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nyXWZ-00065i-ES
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jun 2022 11:37:29 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C4713616B0;
- Tue,  7 Jun 2022 11:37:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B4A4C385A5;
- Tue,  7 Jun 2022 11:37:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1654601841;
- bh=8ssLmPCQc0kBEOnMpM83QxMMmjw3G4wZmE/Q52LHRZ0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ulrnZ3VWWAYqxXyKMLlRANtahVN2YqNjS+95EKiyA31F59Kxv56ZxZvJeFNL2v8u2
- HARW/OKmP9vrlxSdZNnaH3ij+7H8UlnfzOCQ1oxjz9vjsiisWeP8YGHgOUWaKE3RXJ
- 0Qgq8LuNiEDX/vIkZ2FV2oYFDoYmwavNlOFsB8uPO+joCcntqxsuAWdrO2LcLkXq03
- 5jcBhpDEojRYyn7qDO7vem729Q325Cpl+yLlRoju9/CWrk0f33UnA9Hak8u2vJNDYY
- 93upScTvvcZE6v6bgLLYedRNMRE70uLsyv1JUV94v403BBEPVF5OmKnH6DlbYWYvUg
- /f4lOE8iShQ3Q==
-Date: Tue, 7 Jun 2022 13:37:16 +0200
-From: Christian Brauner <brauner@kernel.org>
+ id 1nyZTE-008HLZ-5H
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 07 Jun 2022 13:42:12 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1654609322;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=U9GWchY9hZYcIJP7lDw5j1KYfu5h/jhdfCsZWPH40Q8=;
+ b=GUkPRVvGUaOPnIf6DZL/xbvEbUulIJsi4e84BNLzLRFPmLgR9yyBwuILWOy/L68zsvLQ4W
+ NA/y71u6QOWL/EA35pe1+dB0OyyL1DEoGWD4VkqL9VB2bVAcCe+4zzh+yvw3fhM7WfOxTp
+ wTPxybpsRn/Ze/T5xon5LLk1IlB9AGY=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-591-6X4fui0LOdagZbpkPEbYEg-1; Tue, 07 Jun 2022 09:42:01 -0400
+X-MC-Unique: 6X4fui0LOdagZbpkPEbYEg-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ kk8-20020a056214508800b004645738eff6so7743765qvb.8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 07 Jun 2022 06:42:01 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=U9GWchY9hZYcIJP7lDw5j1KYfu5h/jhdfCsZWPH40Q8=;
+ b=smlfxzGOUzxSDhai/t7JaMf8k1TcrBTYUrnCzfjQGStb25Ac78TwGLzluNv0vUXGY+
+ 7nE7M+Bq+OgkFE2b1Jc+byYpyJqK7jO3KMMaYerzJQsQrBrV9kVmdjbPld4ZGzgxmz7m
+ GOvz//+B8a37sZHgjINw8Jg3fi5sywgXCFgCwB5fIsZuBR+50n8GCWuRzOCSBWcePj+a
+ ipGNy4wQljhbddnW/L3aedOMSLWqbtBYABqEv52r8udE8QPN0Ds/TCmI22EzMNW8uiko
+ doyGzIk+H+cfY2rhXAv41eIskg14hds0Wl6Yf9Nh0IB1PQcD62+OaABLyp3bv4J1RYtp
+ F2Rg==
+X-Gm-Message-State: AOAM533VEmGAE55wMvJzncXXUWxFWuS5FBxS97aw1WbzpLTdPNZqyXe4
+ qN1AE2sdMvY2i+Gefdb8+krkl7QAmmon62jw1sJMlpvRK0WGDO7m0QxtvfIX1qrMkBBGBmy2GtC
+ OQVyrfzrPdNT/Sakev+NauzFTERZtwvK9lzo6Lg==
+X-Received: by 2002:ac8:5acc:0:b0:304:f75a:4a1d with SMTP id
+ d12-20020ac85acc000000b00304f75a4a1dmr3015560qtd.120.1654609320539; 
+ Tue, 07 Jun 2022 06:42:00 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyyavNr4YW+NLtrlTYw3DwYvyx9zxVnBrVGsEoQi3F5ODngxQYCXvCvG44n4ArB8DEsaTyYSw==
+X-Received: by 2002:ac8:5acc:0:b0:304:f75a:4a1d with SMTP id
+ d12-20020ac85acc000000b00304f75a4a1dmr3015540qtd.120.1654609320271; 
+ Tue, 07 Jun 2022 06:42:00 -0700 (PDT)
+Received: from bfoster (c-24-61-119-116.hsd1.ma.comcast.net. [24.61.119.116])
+ by smtp.gmail.com with ESMTPSA id
+ ay33-20020a05620a17a100b006a6f68c8a87sm148860qkb.126.2022.06.07.06.41.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Jun 2022 06:41:59 -0700 (PDT)
+Date: Tue, 7 Jun 2022 09:41:57 -0400
+From: Brian Foster <bfoster@redhat.com>
 To: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-Message-ID: <20220607113716.aec2o7onzu3re2o4@wittgenstein>
-References: <20220605193854.2371230-1-willy@infradead.org>
+Message-ID: <Yp9VpZDsUEAZHEuy@bfoster>
+References: <20220606204050.2625949-1-willy@infradead.org>
+ <20220606204050.2625949-6-willy@infradead.org>
 MIME-Version: 1.0
+In-Reply-To: <20220606204050.2625949-6-willy@infradead.org>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=bfoster@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20220605193854.2371230-1-willy@infradead.org>
-X-Spam-Score: -3.4 (---)
+X-Spam-Score: -1.4 (-)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sun, Jun 05, 2022 at 08:38:44PM +0100,
- Matthew Wilcox wrote:
- > This patch series removes find_get_pages_range(), pagevec_lookup() > and
- pagevec_lookup_range(), converting all callers to use the new [...] 
- Content analysis details:   (-3.4 points, 6.0 required)
+ Content preview:  On Mon, Jun 06, 2022 at 09:40:35PM +0100,
+ Matthew Wilcox (Oracle)
+ wrote: > Now that both callers have a folio, convert this function to > take
+ a folio & rename it. > > Signed-off-by: Matthew Wilcox (O [...] 
+ Content analysis details:   (-1.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [170.10.129.124 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nyXWZ-00065i-ES
-Subject: Re: [f2fs-dev] [PATCH 00/10] Convert to filemap_get_folios()
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -1.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nyZTE-008HLZ-5H
+Subject: Re: [f2fs-dev] [PATCH 05/20] mm/migrate: Convert
+ expected_page_refs() to folio_expected_refs()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,50 +135,86 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-nilfs@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
+Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, cluster-devel@redhat.com,
+ linux-ntfs-dev@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-mm@kvack.org, linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-xfs@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sun, Jun 05, 2022 at 08:38:44PM +0100, Matthew Wilcox wrote:
-> This patch series removes find_get_pages_range(), pagevec_lookup()
-> and pagevec_lookup_range(), converting all callers to use the new
-> filemap_get_folios().  I've only run xfstests over ext4 ... some other
-> testing might be appropriate.
+On Mon, Jun 06, 2022 at 09:40:35PM +0100, Matthew Wilcox (Oracle) wrote:
+> Now that both callers have a folio, convert this function to
+> take a folio & rename it.
 > 
-> Matthew Wilcox (Oracle) (10):
->   filemap: Add filemap_get_folios()
->   buffer: Convert clean_bdev_aliases() to use filemap_get_folios()
->   ext4: Convert mpage_release_unused_pages() to use filemap_get_folios()
->   ext4: Convert mpage_map_and_submit_buffers() to use
->     filemap_get_folios()
->   f2fs: Convert f2fs_invalidate_compress_pages() to use
->     filemap_get_folios()
->   hugetlbfs: Convert remove_inode_hugepages() to use
->     filemap_get_folios()
->   nilfs2: Convert nilfs_copy_back_pages() to use filemap_get_folios()
->   vmscan: Add check_move_unevictable_folios()
->   shmem: Convert shmem_unlock_mapping() to use filemap_get_folios()
->   filemap: Remove find_get_pages_range() and associated functions
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> ---
+>  mm/migrate.c | 19 ++++++++++++-------
+>  1 file changed, 12 insertions(+), 7 deletions(-)
 > 
->  fs/buffer.c             | 26 +++++++--------
->  fs/ext4/inode.c         | 40 ++++++++++++-----------
->  fs/f2fs/compress.c      | 35 +++++++++-----------
->  fs/hugetlbfs/inode.c    | 44 ++++++++-----------------
->  fs/nilfs2/page.c        | 60 +++++++++++++++++-----------------
->  include/linux/pagemap.h |  5 ++-
->  include/linux/pagevec.h | 10 ------
->  include/linux/swap.h    |  3 +-
->  mm/filemap.c            | 72 +++++++++++++++++------------------------
->  mm/shmem.c              | 13 ++++----
->  mm/swap.c               | 29 -----------------
->  mm/vmscan.c             | 55 ++++++++++++++++++-------------
->  12 files changed, 166 insertions(+), 226 deletions(-)
+> diff --git a/mm/migrate.c b/mm/migrate.c
+> index 77b8c662c9ca..e0a593e5b5f9 100644
+> --- a/mm/migrate.c
+> +++ b/mm/migrate.c
+> @@ -337,13 +337,18 @@ void pmd_migration_entry_wait(struct mm_struct *mm, pmd_t *pmd)
+>  }
+>  #endif
+>  
+> -static int expected_page_refs(struct address_space *mapping, struct page *page)
+> +static int folio_expected_refs(struct address_space *mapping,
+> +		struct folio *folio)
+>  {
+> -	int expected_count = 1;
+> +	int refs = 1;
+> +	if (!mapping)
+> +		return refs;
+>  
+> -	if (mapping)
+> -		expected_count += compound_nr(page) + page_has_private(page);
+> -	return expected_count;
+> +	refs += folio_nr_pages(folio);
+> +	if (folio_get_private(folio))
+> +		refs++;
 
-The conversion seems fairly straightforward, so looks good to me.
-Acked-by: Christian Brauner (Microsoft) <brauner@kernel.org>
+Why not folio_has_private() (as seems to be used for later
+page_has_private() conversions) here?
+
+> +
+> +	return refs;;
+
+Nit: extra ;
+
+Brian
+
+>  }
+>  
+>  /*
+> @@ -360,7 +365,7 @@ int folio_migrate_mapping(struct address_space *mapping,
+>  	XA_STATE(xas, &mapping->i_pages, folio_index(folio));
+>  	struct zone *oldzone, *newzone;
+>  	int dirty;
+> -	int expected_count = expected_page_refs(mapping, &folio->page) + extra_count;
+> +	int expected_count = folio_expected_refs(mapping, folio) + extra_count;
+>  	long nr = folio_nr_pages(folio);
+>  
+>  	if (!mapping) {
+> @@ -670,7 +675,7 @@ static int __buffer_migrate_folio(struct address_space *mapping,
+>  		return migrate_page(mapping, &dst->page, &src->page, mode);
+>  
+>  	/* Check whether page does not have extra refs before we do more work */
+> -	expected_count = expected_page_refs(mapping, &src->page);
+> +	expected_count = folio_expected_refs(mapping, src);
+>  	if (folio_ref_count(src) != expected_count)
+>  		return -EAGAIN;
+>  
+> -- 
+> 2.35.1
+> 
+> 
+
 
 
 _______________________________________________
