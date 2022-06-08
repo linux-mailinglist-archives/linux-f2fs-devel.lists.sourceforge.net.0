@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D1135428D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jun 2022 10:02:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 127855428D3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jun 2022 10:03:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nyqeA-0001Mw-Ge; Wed, 08 Jun 2022 08:02:35 +0000
+	id 1nyqeq-00066F-P3; Wed, 08 Jun 2022 08:03:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
  <BATV+ba9ae8ab3d8ecaf97ba4+6863+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1nyqe8-0001Mf-GW
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jun 2022 08:02:33 +0000
+ id 1nyqeq-000669-6C
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jun 2022 08:03:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SX9n5EnTUOKOzk0atnH01/6aCdLXi/kHksLRZ+/slrg=; b=Bb4UwXowKA3xbvKhip0bsToXdD
- S5/H5eYpcfn0V+FlnEFgVOcsyoIHiN/esWpjLEsd9epxo7AfJ9mMIszI6umXbi5dQy0ZvZ9T1sTXH
- 1J0QOlh3BdcNbW9q/HpFajFhTJAr98kxr2F6NMcLj7k6ckTiB48IcPlQ1uwGka3vpoYI=;
+ bh=Lmlll0xHee/vEiVot8MaIaDnFq94X7SQmNxMGuo2kIg=; b=KKO/nM/KcbiN0Rs5MKO54sVOqG
+ 42GUPuuqF1l+/i3Kh63KbQiuAYdcGuXyChOB4L5U/6AQgd0jbNEOqEm0uxHYkFI9Z2/BH+8UVn4ZV
+ 70kmegFUCtGJjoqByPd+n45e/pPGd1Dul4UvN5s/TR6DQYy/PHUkH0OP8Y5fDIDUcq9A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,35 +30,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SX9n5EnTUOKOzk0atnH01/6aCdLXi/kHksLRZ+/slrg=; b=FABiMhGi3hntPlS3gKb+da0zJu
- mm2ntVkG77SeMbyAPIhfDZHfI351O4rCDTdpTDsSzzIvEKbU/0hOXWWDcYGHih+aQe342Crdik8lb
- /2MrZlEbJtM97kxqEYLUhzuiwYghQy2hMmObknc2PX4vP8IptAxmtrcLo1g1iSw3h6w8=;
+ bh=Lmlll0xHee/vEiVot8MaIaDnFq94X7SQmNxMGuo2kIg=; b=Sj2x/wkEvWdZt3H1yW8Icdagca
+ w5U6yWxVHUVkszl3WlPxCpuMjOIifxsvk0MvKnNOKbuppl0Jv4c0f8jwh8+O1w2fULRcSrwNZpRkE
+ VcouldmzErN7SZoRx6ujdWQfA2q2hn6Hfv/yrT2fYDTaxSzfVShXsAcjZF/08ytXzaMo=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nyqe5-009ZsU-E4
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jun 2022 08:02:33 +0000
+ id 1nyqeo-009Zwa-Bh
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 08 Jun 2022 08:03:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=SX9n5EnTUOKOzk0atnH01/6aCdLXi/kHksLRZ+/slrg=; b=jysUfxHITvm5qME5kby7gEknda
- NniSqrjlYB/5FZ0sOB9SGdPN609Xc7Tio/met/HczsNX9IUlMHrvgiUDv4mHlaFTvBucMZTcxWuFM
- aGqA9GeGAxtC3R6lF2w/B87y6Wk6GgZNyLeH3AxjbiUcPe9vcD+G8iLkjHXT78FVtD6XmTe1cYmlt
- ngowBhuCCZ4lWWbh04Jl3QN6dGjrZt3zoJA55lgwd6zmbPrMu2DmXkzmdU0CAIYcq9FAdHR+U6sjS
- kvj5dDbrm/lmbPQZoKx97x7Y9QNcHlDLf2o8pDHQXCZgt2fdrKxTBoK/16KCB/EAF4EZ/7y1pxpfD
- Fds+rOEQ==;
+ bh=Lmlll0xHee/vEiVot8MaIaDnFq94X7SQmNxMGuo2kIg=; b=K99MhL27rbGpyk6oZoCQHDJStN
+ ATHqNPOPl7fmyyQofTDK54G9VDdXR1JVCTiKCNsyr/ha1NjCveZwfyr+ElXb6XTm4WzMWeGZrNqoP
+ 5YXYRBZ/7Jh9lheCch0n+4CO+bhipsSd9uBl3meB+fpXyr3N/vuS+NureIBbTXMUob/JPzY9Ita3n
+ rPGXBOz7FEXZ8SjNR69uDCDib2RwXZNJiLNaSJtWaPlbu5qnHUXq3m6OFZVDMKd1O9sq9xB+VDKM5
+ Dm2DLmp0am4A0lVr3uXzeX8+FPn7RkWsYdGC0GKaalaGr3v/k6XOaJBNnhuKawVGhybCgpknzNBKc
+ BwrsYkgw==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nyqdy-00Bnx0-Jl; Wed, 08 Jun 2022 08:02:22 +0000
-Date: Wed, 8 Jun 2022 01:02:22 -0700
+ Hat Linux)) id 1nyqeh-00Bo4j-Cp; Wed, 08 Jun 2022 08:03:07 +0000
+Date: Wed, 8 Jun 2022 01:03:07 -0700
 From: Christoph Hellwig <hch@infradead.org>
 To: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-Message-ID: <YqBXjjkRZsP8K8fO@infradead.org>
+Message-ID: <YqBXux0cF90xV80C@infradead.org>
 References: <20220605193854.2371230-1-willy@infradead.org>
- <20220605193854.2371230-4-willy@infradead.org>
+ <20220605193854.2371230-5-willy@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220605193854.2371230-4-willy@infradead.org>
+In-Reply-To: <20220605193854.2371230-5-willy@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.0 (/)
@@ -68,10 +68,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sun, Jun 05, 2022 at 08:38:47PM +0100,
+ Content preview:  On Sun, Jun 05, 2022 at 08:38:48PM +0100,
  Matthew Wilcox (Oracle)
- wrote: > If the folio is large, it may overlap the beginning or end of the
- > unused range. If it does, we need to avoid invalidating i [...] 
+ wrote: > The called functions all use pages, so just convert back to a page.
+ Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de> 
  Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -87,9 +87,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1nyqe5-009ZsU-E4
-Subject: Re: [f2fs-dev] [PATCH 03/10] ext4: Convert
- mpage_release_unused_pages() to use filemap_get_folios()
+X-Headers-End: 1nyqeo-009Zwa-Bh
+Subject: Re: [f2fs-dev] [PATCH 04/10] ext4: Convert
+ mpage_map_and_submit_buffers() to use filemap_get_folios()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,12 +108,10 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sun, Jun 05, 2022 at 08:38:47PM +0100, Matthew Wilcox (Oracle) wrote:
-> If the folio is large, it may overlap the beginning or end of the
-> unused range.  If it does, we need to avoid invalidating it.
+On Sun, Jun 05, 2022 at 08:38:48PM +0100, Matthew Wilcox (Oracle) wrote:
+> The called functions all use pages, so just convert back to a page.
 
-It's never going to be larger for ext4, is it?  But either way,
-those precautions looks fine.
+Looks good:
 
 Reviewed-by: Christoph Hellwig <hch@lst.de>
 
