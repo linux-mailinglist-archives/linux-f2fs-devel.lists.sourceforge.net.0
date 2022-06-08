@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 004A35428FE
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jun 2022 10:12:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id CBE7F542905
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jun 2022 10:14:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nyqnb-0004e2-2y; Wed, 08 Jun 2022 08:12:19 +0000
+	id 1nyqpZ-00029l-AB; Wed, 08 Jun 2022 08:14:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
  <BATV+ba9ae8ab3d8ecaf97ba4+6863+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1nyqnZ-0004cZ-Fv; Wed, 08 Jun 2022 08:12:17 +0000
+ id 1nyqpX-00029T-TK; Wed, 08 Jun 2022 08:14:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Szf0A6CRm0TBzxMXL1+4gkRAFMANtEnQnq4pU3N3BDY=; b=bsPwGQwRIM7wXwhxQXlya5Pxx7
- KkwnEaEaZ2M1FnZcmQP2k1mynoFbi11xnIYW+dvlrCRGb1dBSYZapZ/v7sGw1eA0pVSN1tqkzvjlt
- CmJ15BMuWahEbsYzgY8LBr6phvF3CAt4hbdiGgT7sU/MezTHKmd4tgGCPvoGHh0Tk4z4=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=D/4hwIsBIAkQNd3nfI0BX2TFtz
+ ptvzi84L9UJl3GpDcnVHz7HTQCdurkboRVinkR795YCOqI/uj/myV2Q4Atcp+thM/Wk3BkYwnFLC4
+ wBapFCOHiPOShXhbrxLjqKOww+FDj+nQlb/5KZLMN+E1pV/dOXoibEO2SFrGnFSiHmP4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,47 +29,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Szf0A6CRm0TBzxMXL1+4gkRAFMANtEnQnq4pU3N3BDY=; b=YbhFpJB27VE5XHdwn8ztC74pm/
- gjoajTuB8SZ45B5lNxLYLwP7fUdBuS9PIUWjlTNfCBilPSSiTL1Pr3bxmOM7l449BR7dXfzW7zoOT
- bsndfQhR4feMermZT69VTkokreF3NUueWsmp/3jEiSCFGRiXD2ugDUQr9DQ/A/z3uzu8=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=N7aEL4bs8KXwn4TfNPfu2cjcKe
+ i5g/WSxdy91NmvP+NOoO5baOsz+hN6p5SlSOzvvbctzr7CT1zbSNGbWUIdhZkqmq5/XVnCwIL4YSN
+ pMOsLz9vO8FOM7A74AraxXTsdgXqlG3CL3IZ62ZeA9zsLXZtAl+SU6dGDo2sHCs/Irco=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nyqnZ-009aTo-67; Wed, 08 Jun 2022 08:12:17 +0000
+ id 1nyqpV-0004r2-Ty; Wed, 08 Jun 2022 08:14:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Szf0A6CRm0TBzxMXL1+4gkRAFMANtEnQnq4pU3N3BDY=; b=bYF6iw7wjd0y+Z+F/STcPCdMi7
- QSbSyR1GVcGFHB6mUBGkUCvisiY89ZNNX0/Xw7TDYYqDhHEMDOkqpQ78YG7sV4Im0du6F72Z2caY2
- H1v0O8XuuqPMcgOMYc4Efb1MkS92YKtPUeCLJbq9RGFmaygkN6erKP+/0UYxlGLIp8l92hgq4KJ31
- kF5IB4FI7Rq0HgNYKMpkwaCRGuxqr9lQsYWHvQqZ+Vswy62VOxb0dtM/TNE4n9Rus3hm4P1v786GN
- Bu2U9oHHaP3qDEJtlCQFZ55nYDw8n8UvwKtVqn7mGlBP2GXKaLdhKDC9jgMMNKOZ33JSqYzDxDfna
- Md/gh56g==;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=TVP8BYurAveyS5a2ptp5SFIihW
+ BuI5q00/6pN2s3gp5WhksU/P8/P2qUDb/FHcWz8IJGjzMTYhz0TfzpIAse4uKP/IW8h+OuDqK90xM
+ SjRJm7GRWSpMnGR6q4dcVgc/arN1yKbaYlapAgfXlPuc+cbKwGsd3i+ubdgTTNNVXGAb6Nq9WDy8O
+ AiQ7zKq+egS0Fz29IorHKLjedhgdJ1XYLzEJA0nIhqRuWgf4eHgQ8NenhgT9y1HqbXMOSc14U8Nef
+ 0nmBEWbyDsk0TKpJma4NQ+OHTVhznlBOK3CghLojUexldBYZaAgCEfuz2Dt7vGQssU3/GWVDopeI6
+ LKtiBMjA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nyqnR-00Bqhf-Qd; Wed, 08 Jun 2022 08:12:09 +0000
-Date: Wed, 8 Jun 2022 01:12:09 -0700
+ Hat Linux)) id 1nyqpQ-00BrH1-5s; Wed, 08 Jun 2022 08:14:12 +0000
+Date: Wed, 8 Jun 2022 01:14:12 -0700
 From: Christoph Hellwig <hch@infradead.org>
 To: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-Message-ID: <YqBZ2fWTyU9cbyR+@infradead.org>
+Message-ID: <YqBaVJE9aIkK0xs+@infradead.org>
 References: <20220606204050.2625949-1-willy@infradead.org>
- <20220606204050.2625949-5-willy@infradead.org>
+ <20220606204050.2625949-6-willy@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220606204050.2625949-5-willy@infradead.org>
+In-Reply-To: <20220606204050.2625949-6-willy@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Jun 06, 2022 at 09:40:34PM +0100,
- Matthew Wilcox (Oracle)
- wrote: > Use a folio throughout __buffer_migrate_folio(), add kernel-doc
- for > buffer_migrate_folio() and buffer_migrate_folio_norefs( [...] 
+ Content preview:  Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de> 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -77,17 +74,16 @@ X-Spam-Report: Spam detection software,
  medium trust [198.137.202.133 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nyqnZ-009aTo-67
-Subject: Re: [f2fs-dev] [PATCH 04/20] mm/migrate: Convert
- buffer_migrate_page() to buffer_migrate_folio()
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1nyqpV-0004r2-Ty
+Subject: Re: [f2fs-dev] [PATCH 05/20] mm/migrate: Convert
+ expected_page_refs() to folio_expected_refs()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,12 +105,6 @@ Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, cluster-devel@redhat.com,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-
-On Mon, Jun 06, 2022 at 09:40:34PM +0100, Matthew Wilcox (Oracle) wrote:
-> Use a folio throughout __buffer_migrate_folio(), add kernel-doc for
-> buffer_migrate_folio() and buffer_migrate_folio_norefs(), move their
-> declarations to buffer.h and switch all filesystems that have wired
-> them up.
 
 Looks good:
 
