@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 809AD5435D7
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jun 2022 17:03:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6B205435E7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jun 2022 17:03:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nyxDI-0005p2-Ae; Wed, 08 Jun 2022 15:03:17 +0000
+	id 1nyxDc-0003CR-I5; Wed, 08 Jun 2022 15:03:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <willy@infradead.org>)
- id 1nyxDF-0005oi-V4; Wed, 08 Jun 2022 15:03:14 +0000
+ id 1nyxDb-0003Ba-CD; Wed, 08 Jun 2022 15:03:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=q19bl1GOrWdHTjgYDxhLJRg+W/+5czLjAL7VLyDzJ34=; b=DzNVfCAl08IzXb+7vhLX5dhs3T
- qKC7VNkUfsuRs4tvRNj2tervBZq5/OvoCQRBbRM06F5hJvJ7+Ye7p3NGPmyJxGUmQWFoJ3+Hzy7NO
- 70vhLOij3VUCIpwGNwDgKxAg/y0uQGCBGj1Nr1uuKPu2oVXiG0nFIhE341QaXmK9dnyU=;
+ bh=jUHtPvxpwYn/CbCKtCO4gIDrDPVTvyaQoVGtIQShqV8=; b=hVE9naErP2mRgCksZZqPHg/7s2
+ JY7VhL4WdWd448TPr3kedws9Yu1++j8Sf2+hbTLyX8Ip8OPSluxJy6TNwaZSuCuSZWyNqudSZOubw
+ Wk+4n/Lm1PUzNrNoz69yw5ou9DXVgTwcBq3s8Kxaae0brFSmXox5df1mJ6JedkAkK5QI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,29 +29,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=q19bl1GOrWdHTjgYDxhLJRg+W/+5czLjAL7VLyDzJ34=; b=d460Vx3oXgcXz4Jl+8lH7Tlboe
- Yv96XBGBOyNluYpU2TtScD4475tykTtlVG3s6PsaEHnxWnxM2AsUiwF/ELj6+nrEZhgDtdmZ1Enuf
- sPCYac+91wWykMFJcmZ4sLjp4zexF+asALLSkk24BvMVH6pn8hfqXEHIGp+4bYlLI5H0=;
+ bh=jUHtPvxpwYn/CbCKtCO4gIDrDPVTvyaQoVGtIQShqV8=; b=IAq4YlN39JnaCaD/cgWfjDeAoJ
+ gLQVbHlSQoe3ihPeAyXtrHCLP77SeJ6x6bLmZCxh0vRBY3WfF+YYhrz17JkI1xl3/1/FvmBxMCDTx
+ SmOshHiib8Srw7IgHHUKMO/EqzWJY8KPt0q5Mp57LPsSett0pDHvmYzikh/w9GZ7WU64=;
 Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nyxDF-009xyo-VA; Wed, 08 Jun 2022 15:03:14 +0000
+ id 1nyxDY-0005FM-5n; Wed, 08 Jun 2022 15:03:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=q19bl1GOrWdHTjgYDxhLJRg+W/+5czLjAL7VLyDzJ34=; b=mOBypxFOwS2n9s6NktrO3VOYBD
- likaXqlN3jNEex1YWhAf5cX91oZKdOnyG+duJz3qLtijE+NyRnwVurkL0T91QfLi8D9sSQy09sG5r
- Ym9AVhk5LO+yyQVj2g07a7Bn//PUeUxTNML3BWHOIRvkm7UttV7M2QnXImNESMTelDpw59g/UCbxW
- 24KiC0/3GOAODjYTTCyQ55cdTz2s29QYwsetmbpkcxS+y/86CU7jaFgS33h8YpDJnfq8G/cz6blQc
- 9oooMmL5H8ST+2VshTWzwRHw6FgNxJ66MFOCbzmtWOHkd7ciMFL1qsVw/5+BYRyJohk4ptXPd6+0k
- krKUX0Hw==;
+ bh=jUHtPvxpwYn/CbCKtCO4gIDrDPVTvyaQoVGtIQShqV8=; b=F0wkIwdh5JarabWL7s440hCeed
+ JG7M+RAPNvEs0qtJ0odlvedPM5u6UNyXbTmEBm4Hx35BoOjFV1oKCmRWs7a2p1I7DWzzzvlvH7zxb
+ NwAy72/kutKMINfwHD8wNSSOmlkp/ZbcRgANHqqHoyDCAzRFMPKBCLvDG/+pf/SqWyA6xVonIuvPK
+ 3Vo2mRZDOuHUiWFb793CtPIl0KBu+BtlMkUJpzHLOBoi3MTThxjS7QgPBZ4bWXFBqmBv38WY81zoI
+ IOHo+aIWKHbzH55lED0UDiMkvsiu5YHhPck8zRT5hnVZDoeLyNfO5FO+6YtWEQzYK/lnegSOXMkks
+ Gp33NrTQ==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nyxCu-00CjFc-Qs; Wed, 08 Jun 2022 15:02:52 +0000
+ Hat Linux)) id 1nyxCu-00CjFe-U7; Wed, 08 Jun 2022 15:02:52 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Wed,  8 Jun 2022 16:02:42 +0100
-Message-Id: <20220608150249.3033815-13-willy@infradead.org>
+Date: Wed,  8 Jun 2022 16:02:43 +0100
+Message-Id: <20220608150249.3033815-14-willy@infradead.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220608150249.3033815-1-willy@infradead.org>
 References: <20220608150249.3033815-1-willy@infradead.org>
@@ -63,11 +63,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Use filemap_migrate_folio() to do the bulk of the work, and
- then copy the ordered flag across if needed. Signed-off-by: Matthew Wilcox
- (Oracle) <willy@infradead.org> Reviewed-by: Christoph Hellwig <hch@lst.de>
- --- fs/btrfs/inode.c | 26 +++++++++ 1 file changed, 9 insertions(+), 17 deleti
- [...] Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: filemap_migrate_folio() is a little more general than ubifs
+ really needs, but it's better to share the code. Signed-off-by: Matthew Wilcox
+ (Oracle) <willy@infradead.org> --- fs/ubifs/file.c | 29 ++ 1 file changed,
+ 2 insertions(+), 27 deletions(-) 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
@@ -80,9 +80,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nyxDF-009xyo-VA
-Subject: [f2fs-dev] [PATCH v2 12/19] btrfs: Convert btrfs_migratepage to
- migrate_folio
+X-Headers-End: 1nyxDY-0005FM-5n
+Subject: [f2fs-dev] [PATCH v2 13/19] ubifs: Convert to
+ filemap_migrate_folio()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,8 +95,7 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, cluster-devel@redhat.com,
- linux-ntfs-dev@lists.sourceforge.net, Christoph Hellwig <hch@lst.de>,
- linux-kernel@vger.kernel.org,
+ linux-ntfs-dev@lists.sourceforge.net, linux-kernel@vger.kernel.org,
  "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
  linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
  linux-mm@kvack.org, linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com,
@@ -106,69 +105,61 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Use filemap_migrate_folio() to do the bulk of the work, and then copy
-the ordered flag across if needed.
+filemap_migrate_folio() is a little more general than ubifs really needs,
+but it's better to share the code.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-Reviewed-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/btrfs/inode.c | 26 +++++++++-----------------
- 1 file changed, 9 insertions(+), 17 deletions(-)
+ fs/ubifs/file.c | 29 ++---------------------------
+ 1 file changed, 2 insertions(+), 27 deletions(-)
 
-diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
-index 81737eff92f3..5f41d869c648 100644
---- a/fs/btrfs/inode.c
-+++ b/fs/btrfs/inode.c
-@@ -8255,30 +8255,24 @@ static bool btrfs_release_folio(struct folio *folio, gfp_t gfp_flags)
+diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
+index 04ced154960f..f2353dd676ef 100644
+--- a/fs/ubifs/file.c
++++ b/fs/ubifs/file.c
+@@ -1461,29 +1461,6 @@ static bool ubifs_dirty_folio(struct address_space *mapping,
+ 	return ret;
  }
  
- #ifdef CONFIG_MIGRATION
--static int btrfs_migratepage(struct address_space *mapping,
--			     struct page *newpage, struct page *page,
-+static int btrfs_migrate_folio(struct address_space *mapping,
-+			     struct folio *dst, struct folio *src,
- 			     enum migrate_mode mode)
- {
--	int ret;
-+	int ret = filemap_migrate_folio(mapping, dst, src, mode);
- 
--	ret = migrate_page_move_mapping(mapping, newpage, page, 0);
- 	if (ret != MIGRATEPAGE_SUCCESS)
- 		return ret;
- 
--	if (page_has_private(page))
--		attach_page_private(newpage, detach_page_private(page));
+-#ifdef CONFIG_MIGRATION
+-static int ubifs_migrate_page(struct address_space *mapping,
+-		struct page *newpage, struct page *page, enum migrate_mode mode)
+-{
+-	int rc;
 -
--	if (PageOrdered(page)) {
--		ClearPageOrdered(page);
--		SetPageOrdered(newpage);
-+	if (folio_test_ordered(src)) {
-+		folio_clear_ordered(src);
-+		folio_set_ordered(dst);
- 	}
- 
+-	rc = migrate_page_move_mapping(mapping, newpage, page, 0);
+-	if (rc != MIGRATEPAGE_SUCCESS)
+-		return rc;
+-
+-	if (PagePrivate(page)) {
+-		detach_page_private(page);
+-		attach_page_private(newpage, (void *)1);
+-	}
+-
 -	if (mode != MIGRATE_SYNC_NO_COPY)
 -		migrate_page_copy(newpage, page);
 -	else
 -		migrate_page_states(newpage, page);
- 	return MIGRATEPAGE_SUCCESS;
- }
-+#else
-+#define btrfs_migrate_folio NULL
- #endif
- 
- static void btrfs_invalidate_folio(struct folio *folio, size_t offset,
-@@ -11422,9 +11416,7 @@ static const struct address_space_operations btrfs_aops = {
- 	.direct_IO	= noop_direct_IO,
- 	.invalidate_folio = btrfs_invalidate_folio,
- 	.release_folio	= btrfs_release_folio,
--#ifdef CONFIG_MIGRATION
--	.migratepage	= btrfs_migratepage,
+-	return MIGRATEPAGE_SUCCESS;
+-}
 -#endif
-+	.migrate_folio	= btrfs_migrate_folio,
- 	.dirty_folio	= filemap_dirty_folio,
- 	.error_remove_page = generic_error_remove_page,
- 	.swap_activate	= btrfs_swap_activate,
+-
+ static bool ubifs_release_folio(struct folio *folio, gfp_t unused_gfp_flags)
+ {
+ 	struct inode *inode = folio->mapping->host;
+@@ -1649,10 +1626,8 @@ const struct address_space_operations ubifs_file_address_operations = {
+ 	.write_end      = ubifs_write_end,
+ 	.invalidate_folio = ubifs_invalidate_folio,
+ 	.dirty_folio	= ubifs_dirty_folio,
+-#ifdef CONFIG_MIGRATION
+-	.migratepage	= ubifs_migrate_page,
+-#endif
+-	.release_folio    = ubifs_release_folio,
++	.migrate_folio	= filemap_migrate_folio,
++	.release_folio	= ubifs_release_folio,
+ };
+ 
+ const struct inode_operations ubifs_file_inode_operations = {
 -- 
 2.35.1
 
