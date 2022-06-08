@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 655325435EC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jun 2022 17:03:39 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A3B65435ED
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Jun 2022 17:03:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nyxDd-0005ub-2R; Wed, 08 Jun 2022 15:03:37 +0000
+	id 1nyxDe-0004Ku-8s; Wed, 08 Jun 2022 15:03:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <willy@infradead.org>)
- id 1nyxDZ-0005t9-QH; Wed, 08 Jun 2022 15:03:34 +0000
+ id 1nyxDZ-0004J8-PM; Wed, 08 Jun 2022 15:03:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=L/W62gIhDvny0+evT6hKu8mfiF8YLXl9JHSXNMT2CL8=; b=Lv7NuuaCMrNmZlDMt8RLooeLWu
- 3bv3h9ZUjRQL3e2iXen7xM80jIvEoIU00HYCkbS+0Zht9LJLqZIALcJviRN/r5onHpRptkq6TzNWP
- 1G0y4/prTEsSEB5O5HACDKGq4oeHDHTt6mrZdOxPY071S/KdhWKWqMKvIPZmUbhbQu9Q=;
+ bh=ncg84OMjo+AvVLmZPKmxXncRAMSRMDL0v/ScNwY3xFo=; b=PlB2PGFOc2LGZPbgHI930V4OJq
+ dZ/H5Vqxk9/cC0HzG4ReoQAH8TlPz1IRNBO9elw9uEqEyojSmT3yzGT9UsGOwWP2ueNw5kWCnD4Dv
+ jWBfWnm4cbgH0QSny4vOgwP4m7ZRNoKzdLGXp2lwTxvAB6GBmjsWaYDD3LIlt+xWJbk0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,29 +29,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=L/W62gIhDvny0+evT6hKu8mfiF8YLXl9JHSXNMT2CL8=; b=IxhgnYZDDyYPOnX7ilLMueYIpR
- OUM1MvM9Lb0EnFVDKbap82uDySFp+oaSSDx7+AfkfNDD/yBA6emAVCE0MVqnrziKO/yuvI9zjTehA
- diD6v9sZZT+mzORsGuKh/tpLlamtW9mMiz05+QsQyU3p92f3SIAFztzTrD3lSLZL2tls=;
+ bh=ncg84OMjo+AvVLmZPKmxXncRAMSRMDL0v/ScNwY3xFo=; b=OWVKQM4niigD1yUoZjbnC4LM9g
+ HD1lGniepvPANkXz/SyY/Bx4daJg3m9HVwR9Pj3j7Bt/iH1b/MHN2s1DOE/V3MbkIwzEgse7QZzYO
+ RDvOS/ln/f0gAaEjxfNUpZiJ5H0jgkM+p3YlgibY5BLPQTvM30n/w+eec7Gv5OInveL0=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nyxDZ-009y0Q-Fo; Wed, 08 Jun 2022 15:03:34 +0000
+ id 1nyxDZ-009y0O-CI; Wed, 08 Jun 2022 15:03:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=L/W62gIhDvny0+evT6hKu8mfiF8YLXl9JHSXNMT2CL8=; b=E/cR7+jnh4MZjUekK6MX3paPTV
- rpyCm/XiDAOZDdkAxiR6ENBOGDspVwZofRubYVUCyfBG/q0G2P76APSKvJQYDoJJHnpbIZIfvndzv
- b2tINK8pbPtEv8uVgJlVmXLf0Zb7aTLK/Av4cH/ZFWlwIwtyIRzsKjAlUgHGt/pj4W+imiRHLVDU6
- HWs4rwESaohScBPmkWkya7wcDDvYQG1mSEtqOj+cki1hdMlVwH8fFsV0sNL2uKq8yjL+T8WmSb+iF
- zAP5EwizELetbeBerNs7aFo2HX55u2FQyB9sVWH9wzoFE+fXlWb8vKSJpwwQJNZs4KPFu+kaJl/nK
- iSwBCYeA==;
+ bh=ncg84OMjo+AvVLmZPKmxXncRAMSRMDL0v/ScNwY3xFo=; b=ZH1jj5JLt5Huo0hFneWdzgOddm
+ tf5K8ofhIHTgnH+k78szErcZy1qjS4hpsIPzVbNLfB5AIeGJmWMbZktwyBE6yJjNN24hOFdbIWYps
+ 0k5T7kH1RFNzHhpJsupjLqgjCdLqwuWzSZgNhY2n52oP0kMd87dkVgBHfSoFTVS8nt6uZvyuZE06K
+ gHrqY4UgBaz7xm0r/3v2l0jjzdslv1KD0nkS+J0Cbg4WA6mbH+6xsumitM+mTT5Vcrrl3/x0lv80/
+ 61+K0Wy9nZhpfjr/5EC2MG8rMJ90zjUNQarBbpaXsRYondC+xNRnTEkCIjXwjmRbYvVaaccl1uAzH
+ CsHsOp5g==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nyxCu-00CjFS-Ds; Wed, 08 Jun 2022 15:02:52 +0000
+ Hat Linux)) id 1nyxCu-00CjFU-Ga; Wed, 08 Jun 2022 15:02:52 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Wed,  8 Jun 2022 16:02:37 +0100
-Message-Id: <20220608150249.3033815-8-willy@infradead.org>
+Date: Wed,  8 Jun 2022 16:02:38 +0100
+Message-Id: <20220608150249.3033815-9-willy@infradead.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220608150249.3033815-1-willy@infradead.org>
 References: <20220608150249.3033815-1-willy@infradead.org>
@@ -63,12 +63,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Now that both callers have a folio, convert this function
- to take a folio & rename it. Signed-off-by: Matthew Wilcox (Oracle)
+ Content preview:  Use a folio throughout this function. migrate_page() will
+ be converted later. Signed-off-by: Matthew Wilcox (Oracle)
  <willy@infradead.org>
- Reviewed-by: Christoph Hellwig <hch@lst.de> --- mm/migrate.c | 19
- ++++++++++++-------
- 1 file changed, 12 insertions(+), 7 deletions(-) 
+ Reviewed-by: Christoph Hellwig <hch@lst.de> --- fs/btrfs/disk-io.c | 22
+ ++++++++++ 1 file changed, 10 insertions(+), 12 deletio [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -81,9 +80,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1nyxDZ-009y0Q-Fo
-Subject: [f2fs-dev] [PATCH v2 07/19] mm/migrate: Convert
- expected_page_refs() to folio_expected_refs()
+X-Headers-End: 1nyxDZ-009y0O-CI
+Subject: [f2fs-dev] [PATCH v2 08/19] btrfs: Convert btree_migratepage to
+ migrate_folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,61 +106,69 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Now that both callers have a folio, convert this function to
-take a folio & rename it.
+Use a folio throughout this function.  migrate_page() will be converted
+later.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 Reviewed-by: Christoph Hellwig <hch@lst.de>
 ---
- mm/migrate.c | 19 ++++++++++++-------
- 1 file changed, 12 insertions(+), 7 deletions(-)
+ fs/btrfs/disk-io.c | 22 ++++++++++------------
+ 1 file changed, 10 insertions(+), 12 deletions(-)
 
-diff --git a/mm/migrate.c b/mm/migrate.c
-index 2975f0c4d7cf..2e2f41572066 100644
---- a/mm/migrate.c
-+++ b/mm/migrate.c
-@@ -336,13 +336,18 @@ void pmd_migration_entry_wait(struct mm_struct *mm, pmd_t *pmd)
+diff --git a/fs/btrfs/disk-io.c b/fs/btrfs/disk-io.c
+index 12b11e645c14..9ceb73f683af 100644
+--- a/fs/btrfs/disk-io.c
++++ b/fs/btrfs/disk-io.c
+@@ -952,28 +952,28 @@ void btrfs_submit_metadata_bio(struct inode *inode, struct bio *bio, int mirror_
  }
+ 
+ #ifdef CONFIG_MIGRATION
+-static int btree_migratepage(struct address_space *mapping,
+-			struct page *newpage, struct page *page,
+-			enum migrate_mode mode)
++static int btree_migrate_folio(struct address_space *mapping,
++		struct folio *dst, struct folio *src, enum migrate_mode mode)
+ {
+ 	/*
+ 	 * we can't safely write a btree page from here,
+ 	 * we haven't done the locking hook
+ 	 */
+-	if (PageDirty(page))
++	if (folio_test_dirty(src))
+ 		return -EAGAIN;
+ 	/*
+ 	 * Buffers may be managed in a filesystem specific way.
+ 	 * We must have no buffers or drop them.
+ 	 */
+-	if (page_has_private(page) &&
+-	    !try_to_release_page(page, GFP_KERNEL))
++	if (folio_get_private(src) &&
++	    !filemap_release_folio(src, GFP_KERNEL))
+ 		return -EAGAIN;
+-	return migrate_page(mapping, newpage, page, mode);
++	return migrate_page(mapping, &dst->page, &src->page, mode);
+ }
++#else
++#define btree_migrate_folio NULL
  #endif
  
--static int expected_page_refs(struct address_space *mapping, struct page *page)
-+static int folio_expected_refs(struct address_space *mapping,
-+		struct folio *folio)
+-
+ static int btree_writepages(struct address_space *mapping,
+ 			    struct writeback_control *wbc)
  {
--	int expected_count = 1;
-+	int refs = 1;
-+	if (!mapping)
-+		return refs;
+@@ -1073,10 +1073,8 @@ static const struct address_space_operations btree_aops = {
+ 	.writepages	= btree_writepages,
+ 	.release_folio	= btree_release_folio,
+ 	.invalidate_folio = btree_invalidate_folio,
+-#ifdef CONFIG_MIGRATION
+-	.migratepage	= btree_migratepage,
+-#endif
+-	.dirty_folio = btree_dirty_folio,
++	.migrate_folio	= btree_migrate_folio,
++	.dirty_folio	= btree_dirty_folio,
+ };
  
--	if (mapping)
--		expected_count += compound_nr(page) + page_has_private(page);
--	return expected_count;
-+	refs += folio_nr_pages(folio);
-+	if (folio_get_private(folio))
-+		refs++;
-+
-+	return refs;
- }
- 
- /*
-@@ -359,7 +364,7 @@ int folio_migrate_mapping(struct address_space *mapping,
- 	XA_STATE(xas, &mapping->i_pages, folio_index(folio));
- 	struct zone *oldzone, *newzone;
- 	int dirty;
--	int expected_count = expected_page_refs(mapping, &folio->page) + extra_count;
-+	int expected_count = folio_expected_refs(mapping, folio) + extra_count;
- 	long nr = folio_nr_pages(folio);
- 
- 	if (!mapping) {
-@@ -669,7 +674,7 @@ static int __buffer_migrate_folio(struct address_space *mapping,
- 		return migrate_page(mapping, &dst->page, &src->page, mode);
- 
- 	/* Check whether page does not have extra refs before we do more work */
--	expected_count = expected_page_refs(mapping, &src->page);
-+	expected_count = folio_expected_refs(mapping, src);
- 	if (folio_ref_count(src) != expected_count)
- 		return -EAGAIN;
- 
+ struct extent_buffer *btrfs_find_create_tree_block(
 -- 
 2.35.1
 
