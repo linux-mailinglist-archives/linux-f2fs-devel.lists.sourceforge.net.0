@@ -2,27 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AAFB544237
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jun 2022 05:56:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id B473654432D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  9 Jun 2022 07:33:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nz9HV-0000Qk-Hs; Thu, 09 Jun 2022 03:56:26 +0000
+	id 1nzAnQ-0000nr-6W; Thu, 09 Jun 2022 05:33:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
- <BATV+a39afe573ddbd6ff3389+6864+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1nz9HU-0000QY-7H
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jun 2022 03:56:25 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <songmuchun@bytedance.com>) id 1nzAnO-0000nk-NP
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jun 2022 05:33:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=k5NOE2/mOchRWcRvMdsOMX23IRbR4XjJRm5kjerQYfs=; b=PhWy+Z7+RVEMPSnp63mRs6Yo0F
- oYVHt4LOmVCoIV8kvwXdgR/GAGNwcd92xhVVFp8OybGgKJobLaGhYM+BdG5mbLWbXrDii6E7NQXjQ
- kVwClJ3Pc/oVnSIeq8fjfkNBpjfeEZgHYlurW3TAbQIjUVHaHRf22/5eq9CUHme1NpUc=;
+ bh=2koJarmzmGedHyxAL/i+lFQdd0Q5ZAFYaE5poQNe8+A=; b=YWyKHt1rJzyrnL8RJt/gCDhoBX
+ bOCtA1odmNLnQVCDzm15gocTmBIfChHwORmrCpFkr4mxnZlkcR6QGvdAjAKFUUd2wn6rNUGdrLdVg
+ rNHpAXGA3m9LBQzWX1xpB3fLAntA2H9WeCMwl/nKa4vcKpJi2n3VtLAv4xlpc2Nmb3ec=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,67 +29,85 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=k5NOE2/mOchRWcRvMdsOMX23IRbR4XjJRm5kjerQYfs=; b=SlgWH1+j3avNpTS6g4piPz09CJ
- vqaJn2DZrcefY1jN20r1ZK+L2UR0C0HvAkDIjXACu5YIcf5NTzCit1lNkAaePMH60gMeGqkKew0Zu
- nPL/oVnF3mBQPIR7M81Pz9fZNJ1AkFqhhzB2s/FFSzHGqDsKjDKy+2vMeTggfo++JUi8=;
-Received: from bombadil.infradead.org ([198.137.202.133])
+ bh=2koJarmzmGedHyxAL/i+lFQdd0Q5ZAFYaE5poQNe8+A=; b=a1o38KmXf7tHeR9wl7DWcNMlYj
+ XH+JUPRzzWu0XdSKQNHyfQq6MUXP4zEB5ovRIFEoBiVHD97WOzYmE/CCAamGL2y5GxV14R9vN7yto
+ DRMYKMv36Z/KjyAIfAWUNK0/IVxzNEPyTjDE+uCN1PPqehP56++wmKXmpbw7W73HgVQU=;
+Received: from mail-pj1-f49.google.com ([209.85.216.49])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nz9HR-0006v2-RV
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jun 2022 03:56:24 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=k5NOE2/mOchRWcRvMdsOMX23IRbR4XjJRm5kjerQYfs=; b=UMDExU/q7tF8/mqWoSgLYxhOpC
- FkB/nDKRBlAlwMswJxYlpwOD+T9b3fHuzs5Xk9HKsw1RzKM18Nvzmz2zvtMnyPCsG0qy2kU/WHu9X
- mVccNPi9V87DFgmPksbjSq32mvZYh7FU9kikejkUfrcbqMujPYOK4OsnGEYmxwRBuH+8cz929MoC+
- J1L5P254VCbTHcr/3B4+pgfRdz1mWvdV10u33rtAMJjWsHP0HN5sU7QukTrtM4bSJeT0tiNaLZ0sf
- okORJ39zhtNOHmkrX4y3W5zWBlbmRyPPS8qKqjL4e2oY+q3FEDzI+tyRYIGUkaqgz1VdTJg+hKLV8
- s6Jccx+g==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nz9HM-00G0pb-DO; Thu, 09 Jun 2022 03:56:16 +0000
-Date: Wed, 8 Jun 2022 20:56:16 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <YqFvYAlGGWW7ohTZ@infradead.org>
-References: <20220605193854.2371230-1-willy@infradead.org>
- <20220605193854.2371230-9-willy@infradead.org>
- <YqBYxNPu3tLiN5kI@infradead.org>
- <YqDPIv5IgNHK/pJT@casper.infradead.org>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nzAnI-0002Q3-P3
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 09 Jun 2022 05:33:25 +0000
+Received: by mail-pj1-f49.google.com with SMTP id a10so20448927pju.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 08 Jun 2022 22:33:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=2koJarmzmGedHyxAL/i+lFQdd0Q5ZAFYaE5poQNe8+A=;
+ b=RQ0R70N1jS16HKNC0Ol/Snkv+fFPQxMu+sR7KyTPcd0AtJQdfRDJChe//d33ePjW42
+ NUwM+6AWLf4HFFg8nnACUzLphwGwod4E04VS00IvvGGhoglI/uAdn0OmVESO9k7YbA87
+ WXoB0WPSZJwIZQYNTDVCrIBlg3nJFEaNR0URvRoZ6V+qEZfc2gJFc0HlrIL1W1WW+rDF
+ 1/Yc7ng+dbkR+XlDUC9pFMzh9gCVKqODsRZejDoKKLodOa0wkJ1V/grBLEapqp/wFCIH
+ /I5BMumfmT4H9nCNsQOMZJKoI5zjOM9KkgLVSCyM7AwYZxsmplXtAzqYRAkSkI1RVqcd
+ 8nDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=2koJarmzmGedHyxAL/i+lFQdd0Q5ZAFYaE5poQNe8+A=;
+ b=PnNF2GGaJf8Cns9s1saBIfWsMXyuUj9ruwM2av+nJqjyrMnHx9lJssofTrsMM12p4G
+ r6NNxEciAXUZ3lDZTCg03r9DpUYi97Orq8NQ/KyYiIWt+CvCoaXexzP099LnYoUCpffV
+ HIDnyJFdQXDynd8SB2gGOkVHAmUD8h6TfQVsf6b2gBZjXJ/47XDm6QPWeZTfelndXI1z
+ YEe1HYt/ba3P/a/Rso0CHP8Fu9p6ez7me1ZNFKdafsXQy22wu+jGdCB0UGYHGl5+FpUg
+ k/3JtsxlvG3BbiV0qLF5zV8XY0iwGWvmyzWmBlYn8WdGeZY/gqoO8C44rfeZVycEd0iv
+ rIrQ==
+X-Gm-Message-State: AOAM531YGy0G3lIXrMzeQMl6O9ppE4xT+nFJ8cANzPUvGCllBkBsAL+k
+ Kqc9qIuURFXsYH1cqo8thjGeerJjedwh69jg
+X-Google-Smtp-Source: ABdhPJz3/PMx3RZgt3QHHTiA/K9+ZXI01CeV4NC4DLpNFuQQZTFyqHCu1obpFa9lx3Ct5QRSUsQXvQ==
+X-Received: by 2002:a17:902:e748:b0:164:1b1e:28fe with SMTP id
+ p8-20020a170902e74800b001641b1e28femr38251973plf.116.1654746785210; 
+ Wed, 08 Jun 2022 20:53:05 -0700 (PDT)
+Received: from localhost ([139.177.225.238]) by smtp.gmail.com with ESMTPSA id
+ a20-20020a170902b59400b001664ce47e11sm12584649pls.210.2022.06.08.20.53.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Jun 2022 20:53:04 -0700 (PDT)
+Date: Thu, 9 Jun 2022 11:53:00 +0800
+From: Muchun Song <songmuchun@bytedance.com>
+To: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+Message-ID: <YqFunLBBKbZN9uD9@FVFYT0MHHV2J>
+References: <20220608150249.3033815-1-willy@infradead.org>
+ <20220608150249.3033815-17-willy@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <YqDPIv5IgNHK/pJT@casper.infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -2.5 (--)
+In-Reply-To: <20220608150249.3033815-17-willy@infradead.org>
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jun 08, 2022 at 05:32:34PM +0100,
- Matthew Wilcox wrote:
- > On Wed, Jun 08, 2022 at 01:07:32AM -0700, Christoph Hellwig wrote: > >
- On Sun, Jun 05, 2022 at 08:38:52PM +0100, Matthew Wilcox (Oracl [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On Wed, Jun 08, 2022 at 04:02:46PM +0100,
+ Matthew Wilcox (Oracle)
+ wrote: > This involves converting migrate_huge_page_move_mapping(). We also
+ need a > folio variant of hugetlb_set_page_subpool(), but [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [198.137.202.133 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.49 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.49 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
-X-Headers-End: 1nz9HR-0006v2-RV
-Subject: Re: [f2fs-dev] [PATCH 08/10] vmscan: Add
- check_move_unevictable_folios()
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1nzAnI-0002Q3-P3
+Subject: Re: [f2fs-dev] [PATCH v2 16/19] hugetlb: Convert to migrate_folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,31 +119,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-nilfs@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-mm@kvack.org, linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
+Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, cluster-devel@redhat.com,
+ linux-ntfs-dev@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-mm@kvack.org, linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-xfs@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jun 08, 2022 at 05:32:34PM +0100, Matthew Wilcox wrote:
-> On Wed, Jun 08, 2022 at 01:07:32AM -0700, Christoph Hellwig wrote:
-> > On Sun, Jun 05, 2022 at 08:38:52PM +0100, Matthew Wilcox (Oracle) wrote:
-> > > Change the guts of check_move_unevictable_pages() over to use folios
-> > > and add check_move_unevictable_pages() as a wrapper.
-> > 
-> > The changes here look fine, but please also add patches for converting
-> > the two callers (which looks mostly trivial to me).
+On Wed, Jun 08, 2022 at 04:02:46PM +0100, Matthew Wilcox (Oracle) wrote:
+> This involves converting migrate_huge_page_move_mapping().  We also need a
+> folio variant of hugetlb_set_page_subpool(), but that's for a later patch.
 > 
-> I do want to get rid of pagevecs entirely, but that conversion isn't
-> going to happen in time for the next merge window.  for_each_sgt_page()
-> is a little intimidating.
+> Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 
-for_each_sgt_page, just like other creative scatterlist abuse in the gpu
-code is a beast.  But, instead of doing a for_each_sgt_page to add
-pages to the pagevec and then do a loop over the pagevec to add to
-the folio batch it should be pretty trivial to just cut out the
-middle man.
+Acked-by: Muchun Song <songmuchun@bytedance.com>
+
+Thanks.
 
 
 _______________________________________________
