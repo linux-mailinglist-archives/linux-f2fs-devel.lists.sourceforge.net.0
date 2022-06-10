@@ -2,109 +2,118 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B792546B7A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jun 2022 19:12:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46A96546C62
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jun 2022 20:33:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nziBa-0002Yw-BN; Fri, 10 Jun 2022 17:12:37 +0000
+	id 1nzjRX-0004VZ-W9; Fri, 10 Jun 2022 18:33:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bart.vanassche@gmail.com>) id 1nziBY-0002Yq-3m
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jun 2022 17:12:35 +0000
+ (envelope-from <daeho43@gmail.com>) id 1nzjRX-0004VS-K6
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jun 2022 18:33:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kwXtCw17WJllmx5Ao7pJMmgs8rW8H83BvHSWIXWlK/Y=; b=Gdmyvr/+2FQLJj0ENUBw6EN0PI
- o1u3YfQlan2KD9eD4c8OO3MEkUbzSWPPshiBdHGMF4GhddQ9HdUt+xxITL1/mxjoIra11wxI/KZiA
- gq3v42HqeM2n9knLAfJ0Nnmj6bdSdgGQbS+p9t9aGFXKwEGiHgj21uZWnHXbbEcKFHCg=;
+ bh=wBbbnyxAp776PF/MoHr2OTyzExEVGSOzu1ia9Yc3H1I=; b=ZdYGpEI/I8/PCFpR5ucWdRNCCr
+ 0FzEgov5TSDNI3HKt9Rxz11nhbO7soy9CxlFHJbWAvjwhOVbSKxH9sUqT4PAJDlCW1Ve6l1PPcdkn
+ iKjin43uvHRsusgA6Jkv7bGOqJyyFO5s3ERTOOhDn2Jupiguh7bDy4BvI+yiaCOKK2qQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=kwXtCw17WJllmx5Ao7pJMmgs8rW8H83BvHSWIXWlK/Y=; b=QNbkL/8Uv/S8PdI77SOCPOeiTo
- MMjY7j5PHBnfWOUCODnjt+BQx2iWuZgGyfidT7/5WgdhuWVsHWFZJ6KxGitfytyns5o/CsRb/yQCv
- 4UDxQfvL8hDjNCzWwBTIHiD5+veXOEHboM+G3i87TtL7M3wcVPQtbTUoXHCJAHYXsB3Y=;
-Received: from mail-pg1-f182.google.com ([209.85.215.182])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=wBbbnyxAp776PF/MoHr2OTyzExEVGSOzu1ia9Yc3H1I=; b=G
+ jm/qGPb0gatnL1sz4t5CwJkjhc79UbMLF5ZJS9SYreXbEgCnbfJ4sIbRSwvDzAbFNKWzzsGruzuu2
+ z3RPQKlSkQnUUGCyEfJskFZNQJKI2SwwxViS5fE/u802QlUb0jyx45qBAYuiVOhgMVBDYYM90YAZT
+ tlOjjuRE3B7ihQvA=;
+Received: from mail-pl1-f174.google.com ([209.85.214.174])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nziBU-0002iM-RT
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jun 2022 17:12:34 +0000
-Received: by mail-pg1-f182.google.com with SMTP id e66so25336455pgc.8
+ id 1nzjRI-00058P-1h
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jun 2022 18:33:11 +0000
+Received: by mail-pl1-f174.google.com with SMTP id d13so7775671plh.13
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 10 Jun 2022 10:12:34 -0700 (PDT)
+ Fri, 10 Jun 2022 11:32:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=wBbbnyxAp776PF/MoHr2OTyzExEVGSOzu1ia9Yc3H1I=;
+ b=Q5B2LvQMun4KV1/iBHtpnFzF8ZF0cRO+ulZr7uc4CBP6lDhcOHhHZpvnirmdt8SUYQ
+ B/n612LXFpiD5oBtzSVEmggJzllxcE4RLtC1+R5BBsOJIimuG+euZamHED1O37WzcUwM
+ QxYw2NwMHWuQ6NGVB/Vmnn7xP2uKMLJ1zOLcK/zUBVzUrtcglzny7vBmKS3ainZ1DNNF
+ lixEshxk6vsx6SO8N/2aNvpkRbaLmD0GbpJa8Cnd7nnrIOxA2y2tbL9N1p5IGH3YRKPg
+ Y3QmytvOStuLhIHv3NT4Cxgc9wFNnIB5XxZv/VRUq5SxbSGeSXpI4eWyjqGvkx17Do6g
+ VFrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=kwXtCw17WJllmx5Ao7pJMmgs8rW8H83BvHSWIXWlK/Y=;
- b=ILrkXyYXXhYqOrdgQbbpiMYX/DLBGn5imuCut0BS/8xON9pFXtql2E1tbUc1EnO0iv
- mHAHrk/U9U9nGL/KHOgA0ODZWV4g5outzBu8QDF/Gwlz7hM2CrVgzoLDy7leBdXgcjSX
- PbgmBlW2sptjuoxVdE+ZJPbMnTmIT7SFm7lqQcU4zB2E9PheZa78A1Qvyy4WDeo8kzQE
- tARF/5ELtCzBu0HssugthgJV9982YrxX1px6SP6qzmbjR4kC05iGEOV5W+uhc9Bq81pJ
- 2eCiTDYBf5xoy5iGk4G9U5ngDUYE23ulxZe6bjx5lVH9VReBQEzaxusRgVwQJqdl08Va
- dDWA==
-X-Gm-Message-State: AOAM533ZfLyebpCe5h6Wwknh7CTXoAZbKpNHWdDDsWaMY2c7HwFHQTTf
- yU2p+8QtUwgE6DUverQRrNg=
-X-Google-Smtp-Source: ABdhPJymjxEbiUTV+3hjXutmvvnsNgwYdPjJrvjfiZomVNcSlUtbfzD7X6lSGtgK3FGuHOfQhpuVIQ==
-X-Received: by 2002:a63:6985:0:b0:3fe:1929:7d6a with SMTP id
- e127-20020a636985000000b003fe19297d6amr16625457pgc.292.1654881148479; 
- Fri, 10 Jun 2022 10:12:28 -0700 (PDT)
-Received: from ?IPV6:2620:15c:211:201:9eb7:13f0:a1e0:550e?
- ([2620:15c:211:201:9eb7:13f0:a1e0:550e])
+ bh=wBbbnyxAp776PF/MoHr2OTyzExEVGSOzu1ia9Yc3H1I=;
+ b=rwp0k9pP79TQ7KgoMTYQumWobrFqYWvR85Xqcf7jM4zxq2KW6yK9wv4Tohq1Z8APj4
+ vcj1Kwh28IDme4po4sJaG16qI0ZEvycCDEfADHNEvYU8TYEU2yX0feIoWx4sJbHP3lTv
+ him6HCRHLIpzMStLf0Pb7Bti1N55MSNkOiRBRsqxJfK9f4QPQVYgrFB0FQJyqrB6zFtu
+ q85+Tlp7NfVJnaGmbPel6MrT+vAfYpoPAbAwE9OLB2wVweCKb2QAhDMd1muhKYYyvWds
+ N+LMgamuWYMOv7QipDkFklOrV5ebUtJvctJi8+XY4jKrfpEURzzfR7kTb0hHAf6AX0ql
+ 7oYw==
+X-Gm-Message-State: AOAM530gceV7Y3IA6LJTN9JUM1zz2Hq5r3vEXt4qq/rrN+ErVXHFgLCY
+ 5SxIRChyM4UGMzJY9RWkLgb3/2CzqnI=
+X-Google-Smtp-Source: ABdhPJwSAuNuM9jqLVqZXSAsYNlqY0zT0OmxOY2NN+1B/MwSfK6lo2bq+uZCH+VLXZNb6OzPO/5XIA==
+X-Received: by 2002:a17:90a:7841:b0:1ea:3f61:7673 with SMTP id
+ y1-20020a17090a784100b001ea3f617673mr1041199pjl.110.1654885970124; 
+ Fri, 10 Jun 2022 11:32:50 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:15c:211:201:9407:3889:1417:db63])
  by smtp.gmail.com with ESMTPSA id
- f2-20020a17090a288200b001e2afd35791sm1998642pjd.18.2022.06.10.10.12.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Jun 2022 10:12:27 -0700 (PDT)
-Message-ID: <2f40b5ea-b493-bcb9-97ad-612d30a2eedc@acm.org>
-Date: Fri, 10 Jun 2022 10:12:26 -0700
+ w15-20020a1709026f0f00b001677d4a9654sm23086plk.265.2022.06.10.11.32.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Jun 2022 11:32:49 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Fri, 10 Jun 2022 11:32:40 -0700
+Message-Id: <20220610183240.2269085-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.36.1.476.g0c4daa206d-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Content-Language: en-US
-To: Peter Collingbourne <pcc@google.com>
-References: <20220421221836.3935616-1-bvanassche@acm.org>
- <20220421221836.3935616-11-bvanassche@acm.org> <YqKm4wa31ygW8+Ra@google.com>
-From: Bart Van Assche <bvanassche@acm.org>
-In-Reply-To: <YqKm4wa31ygW8+Ra@google.com>
-X-Spam-Score: -1.5 (-)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/9/22 19:05, Peter Collingbourne wrote: > On Thu, Apr
- 21, 2022 at 03:18:15PM -0700,
- Bart Van Assche wrote: >> +static_assert(sizeof(struct
- f2fs_dentry_block) == 4096, ""); > > I noticed that this [...] 
- Content analysis details:   (-1.5 points, 6.0 required)
+ Content preview: From: Daeho Jeong Made iostat related locks safe to be called
+ from irq context again. Signed-off-by: Daeho Jeong --- fs/f2fs/iostat.c |
+ 31 ++++++++++++++++++ 1 file changed, 18 insertions(+), 13 deletions(-) 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [bart.vanassche[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.215.182 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.182 listed in wl.mailspike.net]
+ [209.85.214.174 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.174 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
- EnvelopeFrom freemail headers are different
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1nziBU-0002iM-RT
-Subject: Re: [f2fs-dev] [PATCH 10/31] Verify structure sizes at compile time
+X-Headers-End: 1nzjRI-00058P-1h
+Subject: [f2fs-dev] [PATCH] f2fs: fix iostat related lock protection
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,35 +125,139 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 6/9/22 19:05, Peter Collingbourne wrote:
-> On Thu, Apr 21, 2022 at 03:18:15PM -0700, Bart Van Assche wrote:
->> +static_assert(sizeof(struct f2fs_dentry_block) == 4096, "");
-> 
-> I noticed that this static_assert fails when PAGE_SIZE is defined to
-> a value other than 4096.
-> 
-> I have to admit to being unfamiliar with f2fs. Is this an on-disk
-> data structure? If so, does it mean that non-4K page size kernels
-> are unable to mount f2fs file systems if the f2fs-tools were not
-> built with a matching PAGE_SIZE define?
-> 
-> In any event, maybe s/4096/PAGE_SIZE/g above is the correct fix
-> for now?
+From: Daeho Jeong <daehojeong@google.com>
 
-Hi Peter,
+Made iostat related locks safe to be called from irq context again.
 
-How this issue should be fixed depends on whether or not 
-f2fs_dentry_block is an on-disk data structure. I'm not sure about the 
-answer. Jaegeuk, can you help with answering this question?
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ fs/f2fs/iostat.c | 31 ++++++++++++++++++-------------
+ 1 file changed, 18 insertions(+), 13 deletions(-)
 
-Thanks,
+diff --git a/fs/f2fs/iostat.c b/fs/f2fs/iostat.c
+index be599f31d3c4..d84c5f6cc09d 100644
+--- a/fs/f2fs/iostat.c
++++ b/fs/f2fs/iostat.c
+@@ -91,8 +91,9 @@ static inline void __record_iostat_latency(struct f2fs_sb_info *sbi)
+ 	unsigned int cnt;
+ 	struct f2fs_iostat_latency iostat_lat[MAX_IO_TYPE][NR_PAGE_TYPE];
+ 	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
++	unsigned long flags;
+ 
+-	spin_lock_bh(&sbi->iostat_lat_lock);
++	spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
+ 	for (idx = 0; idx < MAX_IO_TYPE; idx++) {
+ 		for (io = 0; io < NR_PAGE_TYPE; io++) {
+ 			cnt = io_lat->bio_cnt[idx][io];
+@@ -106,7 +107,7 @@ static inline void __record_iostat_latency(struct f2fs_sb_info *sbi)
+ 			io_lat->bio_cnt[idx][io] = 0;
+ 		}
+ 	}
+-	spin_unlock_bh(&sbi->iostat_lat_lock);
++	spin_unlock_irqrestore(&sbi->iostat_lat_lock, flags);
+ 
+ 	trace_f2fs_iostat_latency(sbi, iostat_lat);
+ }
+@@ -115,14 +116,15 @@ static inline void f2fs_record_iostat(struct f2fs_sb_info *sbi)
+ {
+ 	unsigned long long iostat_diff[NR_IO_TYPE];
+ 	int i;
++	unsigned long flags;
+ 
+ 	if (time_is_after_jiffies(sbi->iostat_next_period))
+ 		return;
+ 
+ 	/* Need double check under the lock */
+-	spin_lock_bh(&sbi->iostat_lock);
++	spin_lock_irqsave(&sbi->iostat_lock, flags);
+ 	if (time_is_after_jiffies(sbi->iostat_next_period)) {
+-		spin_unlock_bh(&sbi->iostat_lock);
++		spin_unlock_irqrestore(&sbi->iostat_lock, flags);
+ 		return;
+ 	}
+ 	sbi->iostat_next_period = jiffies +
+@@ -133,7 +135,7 @@ static inline void f2fs_record_iostat(struct f2fs_sb_info *sbi)
+ 				sbi->prev_rw_iostat[i];
+ 		sbi->prev_rw_iostat[i] = sbi->rw_iostat[i];
+ 	}
+-	spin_unlock_bh(&sbi->iostat_lock);
++	spin_unlock_irqrestore(&sbi->iostat_lock, flags);
+ 
+ 	trace_f2fs_iostat(sbi, iostat_diff);
+ 
+@@ -145,25 +147,27 @@ void f2fs_reset_iostat(struct f2fs_sb_info *sbi)
+ 	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
+ 	int i;
+ 
+-	spin_lock_bh(&sbi->iostat_lock);
++	spin_lock_irq(&sbi->iostat_lock);
+ 	for (i = 0; i < NR_IO_TYPE; i++) {
+ 		sbi->rw_iostat[i] = 0;
+ 		sbi->prev_rw_iostat[i] = 0;
+ 	}
+-	spin_unlock_bh(&sbi->iostat_lock);
++	spin_unlock_irq(&sbi->iostat_lock);
+ 
+-	spin_lock_bh(&sbi->iostat_lat_lock);
++	spin_lock_irq(&sbi->iostat_lat_lock);
+ 	memset(io_lat, 0, sizeof(struct iostat_lat_info));
+-	spin_unlock_bh(&sbi->iostat_lat_lock);
++	spin_unlock_irq(&sbi->iostat_lat_lock);
+ }
+ 
+ void f2fs_update_iostat(struct f2fs_sb_info *sbi,
+ 			enum iostat_type type, unsigned long long io_bytes)
+ {
++	unsigned long flags;
++
+ 	if (!sbi->iostat_enable)
+ 		return;
+ 
+-	spin_lock_bh(&sbi->iostat_lock);
++	spin_lock_irqsave(&sbi->iostat_lock, flags);
+ 	sbi->rw_iostat[type] += io_bytes;
+ 
+ 	if (type == APP_BUFFERED_IO || type == APP_DIRECT_IO)
+@@ -172,7 +176,7 @@ void f2fs_update_iostat(struct f2fs_sb_info *sbi,
+ 	if (type == APP_BUFFERED_READ_IO || type == APP_DIRECT_READ_IO)
+ 		sbi->rw_iostat[APP_READ_IO] += io_bytes;
+ 
+-	spin_unlock_bh(&sbi->iostat_lock);
++	spin_unlock_irqrestore(&sbi->iostat_lock, flags);
+ 
+ 	f2fs_record_iostat(sbi);
+ }
+@@ -185,6 +189,7 @@ static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
+ 	struct f2fs_sb_info *sbi = iostat_ctx->sbi;
+ 	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
+ 	int idx;
++	unsigned long flags;
+ 
+ 	if (!sbi->iostat_enable)
+ 		return;
+@@ -202,12 +207,12 @@ static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
+ 			idx = WRITE_ASYNC_IO;
+ 	}
+ 
+-	spin_lock_bh(&sbi->iostat_lat_lock);
++	spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
+ 	io_lat->sum_lat[idx][iotype] += ts_diff;
+ 	io_lat->bio_cnt[idx][iotype]++;
+ 	if (ts_diff > io_lat->peak_lat[idx][iotype])
+ 		io_lat->peak_lat[idx][iotype] = ts_diff;
+-	spin_unlock_bh(&sbi->iostat_lat_lock);
++	spin_unlock_irqrestore(&sbi->iostat_lat_lock, flags);
+ }
+ 
+ void iostat_update_and_unbind_ctx(struct bio *bio, int rw)
+-- 
+2.36.1.476.g0c4daa206d-goog
 
-Bart.
 
 
 _______________________________________________
