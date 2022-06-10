@@ -2,118 +2,132 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46A96546C62
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jun 2022 20:33:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33795546C71
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jun 2022 20:36:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nzjRX-0004VZ-W9; Fri, 10 Jun 2022 18:33:12 +0000
+	id 1nzjUC-00040A-Q3; Fri, 10 Jun 2022 18:35:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <daeho43@gmail.com>) id 1nzjRX-0004VS-K6
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jun 2022 18:33:12 +0000
+ (envelope-from <gerald.schaefer@linux.ibm.com>) id 1nzjUB-000401-6y
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jun 2022 18:35:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wBbbnyxAp776PF/MoHr2OTyzExEVGSOzu1ia9Yc3H1I=; b=ZdYGpEI/I8/PCFpR5ucWdRNCCr
- 0FzEgov5TSDNI3HKt9Rxz11nhbO7soy9CxlFHJbWAvjwhOVbSKxH9sUqT4PAJDlCW1Ve6l1PPcdkn
- iKjin43uvHRsusgA6Jkv7bGOqJyyFO5s3ERTOOhDn2Jupiguh7bDy4BvI+yiaCOKK2qQ=;
+ bh=Ff3S4Dmkc/EDKyt1tbsvQyIpd2d1S9VM2W5+qZ2nG3s=; b=NaSmkCrLoLwnGflUJAIrqTC2JU
+ 3SWV0FLckcBSxJWDlhtP9fbHkkGtLZp+XJncp9XGuUwPPEMrlpoz+CnohSJTCe5Ix7OzgHBaH906O
+ ohALk9nJNW7n8wBbFhsqZmfB1XI4nxyAwa3V77WrL/Hh/sKcT6XAJ6iShhC+lNyaFmYo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=wBbbnyxAp776PF/MoHr2OTyzExEVGSOzu1ia9Yc3H1I=; b=G
- jm/qGPb0gatnL1sz4t5CwJkjhc79UbMLF5ZJS9SYreXbEgCnbfJ4sIbRSwvDzAbFNKWzzsGruzuu2
- z3RPQKlSkQnUUGCyEfJskFZNQJKI2SwwxViS5fE/u802QlUb0jyx45qBAYuiVOhgMVBDYYM90YAZT
- tlOjjuRE3B7ihQvA=;
-Received: from mail-pl1-f174.google.com ([209.85.214.174])
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Ff3S4Dmkc/EDKyt1tbsvQyIpd2d1S9VM2W5+qZ2nG3s=; b=Lt7Zf0x0F5VCzkTn6VIHNUtqMD
+ 8jvICKPkfq2SzCUy2Yd8IMcZv6RtnmpIKAKZZxVufCqch7DcwAnUWOqXK6JWjRcGRlXwc+5M2nE+0
+ DXoK0+dFxsWSkuwjW4dGLYdb0+PCv7oIoExswqtpEZawOyKtlKjFXGEDebRKwjziPQ5s=;
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]
+ helo=mx0a-001b2d01.pphosted.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nzjRI-00058P-1h
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jun 2022 18:33:11 +0000
-Received: by mail-pl1-f174.google.com with SMTP id d13so7775671plh.13
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 10 Jun 2022 11:32:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=wBbbnyxAp776PF/MoHr2OTyzExEVGSOzu1ia9Yc3H1I=;
- b=Q5B2LvQMun4KV1/iBHtpnFzF8ZF0cRO+ulZr7uc4CBP6lDhcOHhHZpvnirmdt8SUYQ
- B/n612LXFpiD5oBtzSVEmggJzllxcE4RLtC1+R5BBsOJIimuG+euZamHED1O37WzcUwM
- QxYw2NwMHWuQ6NGVB/Vmnn7xP2uKMLJ1zOLcK/zUBVzUrtcglzny7vBmKS3ainZ1DNNF
- lixEshxk6vsx6SO8N/2aNvpkRbaLmD0GbpJa8Cnd7nnrIOxA2y2tbL9N1p5IGH3YRKPg
- Y3QmytvOStuLhIHv3NT4Cxgc9wFNnIB5XxZv/VRUq5SxbSGeSXpI4eWyjqGvkx17Do6g
- VFrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=wBbbnyxAp776PF/MoHr2OTyzExEVGSOzu1ia9Yc3H1I=;
- b=rwp0k9pP79TQ7KgoMTYQumWobrFqYWvR85Xqcf7jM4zxq2KW6yK9wv4Tohq1Z8APj4
- vcj1Kwh28IDme4po4sJaG16qI0ZEvycCDEfADHNEvYU8TYEU2yX0feIoWx4sJbHP3lTv
- him6HCRHLIpzMStLf0Pb7Bti1N55MSNkOiRBRsqxJfK9f4QPQVYgrFB0FQJyqrB6zFtu
- q85+Tlp7NfVJnaGmbPel6MrT+vAfYpoPAbAwE9OLB2wVweCKb2QAhDMd1muhKYYyvWds
- N+LMgamuWYMOv7QipDkFklOrV5ebUtJvctJi8+XY4jKrfpEURzzfR7kTb0hHAf6AX0ql
- 7oYw==
-X-Gm-Message-State: AOAM530gceV7Y3IA6LJTN9JUM1zz2Hq5r3vEXt4qq/rrN+ErVXHFgLCY
- 5SxIRChyM4UGMzJY9RWkLgb3/2CzqnI=
-X-Google-Smtp-Source: ABdhPJwSAuNuM9jqLVqZXSAsYNlqY0zT0OmxOY2NN+1B/MwSfK6lo2bq+uZCH+VLXZNb6OzPO/5XIA==
-X-Received: by 2002:a17:90a:7841:b0:1ea:3f61:7673 with SMTP id
- y1-20020a17090a784100b001ea3f617673mr1041199pjl.110.1654885970124; 
- Fri, 10 Jun 2022 11:32:50 -0700 (PDT)
-Received: from daehojeong-desktop.mtv.corp.google.com
- ([2620:15c:211:201:9407:3889:1417:db63])
- by smtp.gmail.com with ESMTPSA id
- w15-20020a1709026f0f00b001677d4a9654sm23086plk.265.2022.06.10.11.32.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jun 2022 11:32:49 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Fri, 10 Jun 2022 11:32:40 -0700
-Message-Id: <20220610183240.2269085-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.36.1.476.g0c4daa206d-goog
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1nzjU9-0005bM-Oi
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jun 2022 18:35:55 +0000
+Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 25AGvIRj017300;
+ Fri, 10 Jun 2022 18:35:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
+ h=date : from : to : cc :
+ subject : message-id : in-reply-to : references : mime-version :
+ content-type : content-transfer-encoding; s=pp1;
+ bh=Ff3S4Dmkc/EDKyt1tbsvQyIpd2d1S9VM2W5+qZ2nG3s=;
+ b=SCN1AstLfBC3fODuKUXKBY6WrlZrz3fThbU1wCedwFT0CaFQD5jJxGOYZdT/ajeMEL/u
+ uANcjk+7qt9eYyJ18VOhHCJV6Df7HaLGzno0nD2f85JtoJBClfxRMcZ+0TT0qn3p8KRZ
+ 7b/8XKkUc83HWO4UeeTgz9FJ7DcRoIi8yuTEHGrN9AKAbC/jeAwZ2+DaIshwH8XCfvpN
+ eOr3ay+BYBuGwNhUvP8p+dn7HgW2witLegMJ1wVQCilvjGKmx1pL3G5i73v9Tb/cXZAK
+ yZKr3reZ12SDFAq1E2OfXbjlgGKDTOmPfnQChktV0nDHmoJ5aBjo3otDWzZNFzIGAHpN Fw== 
+Received: from ppma06ams.nl.ibm.com (66.31.33a9.ip4.static.sl-reverse.com
+ [169.51.49.102])
+ by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3gm9xa9n51-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 10 Jun 2022 18:35:39 +0000
+Received: from pps.filterd (ppma06ams.nl.ibm.com [127.0.0.1])
+ by ppma06ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 25AIK5Pq014728;
+ Fri, 10 Jun 2022 18:35:37 GMT
+Received: from b06cxnps3075.portsmouth.uk.ibm.com
+ (d06relay10.portsmouth.uk.ibm.com [9.149.109.195])
+ by ppma06ams.nl.ibm.com with ESMTP id 3gfxnj0m5f-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 10 Jun 2022 18:35:37 +0000
+Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
+ [9.149.105.62])
+ by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 25AIZXWb22413676
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 10 Jun 2022 18:35:34 GMT
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id DDA7AAE04D;
+ Fri, 10 Jun 2022 18:35:33 +0000 (GMT)
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 4A105AE045;
+ Fri, 10 Jun 2022 18:35:33 +0000 (GMT)
+Received: from thinkpad (unknown [9.171.11.220])
+ by d06av26.portsmouth.uk.ibm.com (Postfix) with SMTP;
+ Fri, 10 Jun 2022 18:35:33 +0000 (GMT)
+Date: Fri, 10 Jun 2022 20:35:30 +0200
+From: Gerald Schaefer <gerald.schaefer@linux.ibm.com>
+To: willy@infradead.org
+Message-ID: <20220610203530.7f84bbc0@thinkpad>
+In-Reply-To: <20220610155205.3111213-1-sumanthk@linux.ibm.com>
+References: <20220605193854.2371230-7-willy@infradead.org>
+ <20220610155205.3111213-1-sumanthk@linux.ibm.com>
+X-Mailer: Claws Mail 4.1.0 (GTK 3.24.34; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-X-Spam-Score: 0.0 (/)
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: 4ZOyDC1ZmZItV06B7HHJoujAuO7lAcg6
+X-Proofpoint-ORIG-GUID: 4ZOyDC1ZmZItV06B7HHJoujAuO7lAcg6
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.874,Hydra:6.0.517,FMLib:17.11.64.514
+ definitions=2022-06-10_07,2022-06-09_02,2022-02-23_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0
+ bulkscore=0 phishscore=0 spamscore=0 mlxscore=0 impostorscore=0
+ mlxlogscore=347 clxscore=1011 suspectscore=0 adultscore=0
+ priorityscore=1501 malwarescore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2204290000 definitions=main-2206100070
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Daeho Jeong Made iostat related locks safe to be called
- from irq context again. Signed-off-by: Daeho Jeong --- fs/f2fs/iostat.c |
- 31 ++++++++++++++++++ 1 file changed, 18 insertions(+), 13 deletions(-) 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  On Fri,
+ 10 Jun 2022 17:52:05 +0200 Sumanth Korikkar <sumanthk@linux.ibm.com>
+ wrote: [...] > > * Bisected the crash to this commit. > > To reproduce: >
+ * clone libhugetlbfs: > * Execute,
+ PATH=$PATH:"obj64/" LD_LIBRARY_PATH=../obj64/
+ alloc-instantiate-race shared > > Crashes on both s3 [...] 
+ Content analysis details:   (-0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [daeho43[at]gmail.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [daeho43[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.174 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.174 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [148.163.158.5 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1nzjRI-00058P-1h
-Subject: [f2fs-dev] [PATCH] f2fs: fix iostat related lock protection
+X-Headers-End: 1nzjU9-0005bM-Oi
+Subject: Re: [f2fs-dev] [PATCH 06/10] hugetlbfs: Convert
+ remove_inode_hugepages() to use filemap_get_folios()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,139 +139,56 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org, gor@linux.ibm.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+ Sumanth Korikkar <sumanthk@linux.ibm.com>, linux-ext4@vger.kernel.org,
+ agordeev@linux.ibm.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+On Fri, 10 Jun 2022 17:52:05 +0200
+Sumanth Korikkar <sumanthk@linux.ibm.com> wrote:
 
-Made iostat related locks safe to be called from irq context again.
+[...]
+> 
+> * Bisected the crash to this commit.
+> 
+> To reproduce:
+> * clone libhugetlbfs:
+> * Execute, PATH=$PATH:"obj64/" LD_LIBRARY_PATH=../obj64/ alloc-instantiate-race shared
+>  
+> Crashes on both s390 and x86. 
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
----
- fs/f2fs/iostat.c | 31 ++++++++++++++++++-------------
- 1 file changed, 18 insertions(+), 13 deletions(-)
+FWIW, not really able to understand the code changes, so I added some
+printks to track the state of inode->i_data.nrpages during
+remove_inode_hugepages().
 
-diff --git a/fs/f2fs/iostat.c b/fs/f2fs/iostat.c
-index be599f31d3c4..d84c5f6cc09d 100644
---- a/fs/f2fs/iostat.c
-+++ b/fs/f2fs/iostat.c
-@@ -91,8 +91,9 @@ static inline void __record_iostat_latency(struct f2fs_sb_info *sbi)
- 	unsigned int cnt;
- 	struct f2fs_iostat_latency iostat_lat[MAX_IO_TYPE][NR_PAGE_TYPE];
- 	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
-+	unsigned long flags;
- 
--	spin_lock_bh(&sbi->iostat_lat_lock);
-+	spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
- 	for (idx = 0; idx < MAX_IO_TYPE; idx++) {
- 		for (io = 0; io < NR_PAGE_TYPE; io++) {
- 			cnt = io_lat->bio_cnt[idx][io];
-@@ -106,7 +107,7 @@ static inline void __record_iostat_latency(struct f2fs_sb_info *sbi)
- 			io_lat->bio_cnt[idx][io] = 0;
- 		}
- 	}
--	spin_unlock_bh(&sbi->iostat_lat_lock);
-+	spin_unlock_irqrestore(&sbi->iostat_lat_lock, flags);
- 
- 	trace_f2fs_iostat_latency(sbi, iostat_lat);
- }
-@@ -115,14 +116,15 @@ static inline void f2fs_record_iostat(struct f2fs_sb_info *sbi)
- {
- 	unsigned long long iostat_diff[NR_IO_TYPE];
- 	int i;
-+	unsigned long flags;
- 
- 	if (time_is_after_jiffies(sbi->iostat_next_period))
- 		return;
- 
- 	/* Need double check under the lock */
--	spin_lock_bh(&sbi->iostat_lock);
-+	spin_lock_irqsave(&sbi->iostat_lock, flags);
- 	if (time_is_after_jiffies(sbi->iostat_next_period)) {
--		spin_unlock_bh(&sbi->iostat_lock);
-+		spin_unlock_irqrestore(&sbi->iostat_lock, flags);
- 		return;
- 	}
- 	sbi->iostat_next_period = jiffies +
-@@ -133,7 +135,7 @@ static inline void f2fs_record_iostat(struct f2fs_sb_info *sbi)
- 				sbi->prev_rw_iostat[i];
- 		sbi->prev_rw_iostat[i] = sbi->rw_iostat[i];
- 	}
--	spin_unlock_bh(&sbi->iostat_lock);
-+	spin_unlock_irqrestore(&sbi->iostat_lock, flags);
- 
- 	trace_f2fs_iostat(sbi, iostat_diff);
- 
-@@ -145,25 +147,27 @@ void f2fs_reset_iostat(struct f2fs_sb_info *sbi)
- 	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
- 	int i;
- 
--	spin_lock_bh(&sbi->iostat_lock);
-+	spin_lock_irq(&sbi->iostat_lock);
- 	for (i = 0; i < NR_IO_TYPE; i++) {
- 		sbi->rw_iostat[i] = 0;
- 		sbi->prev_rw_iostat[i] = 0;
- 	}
--	spin_unlock_bh(&sbi->iostat_lock);
-+	spin_unlock_irq(&sbi->iostat_lock);
- 
--	spin_lock_bh(&sbi->iostat_lat_lock);
-+	spin_lock_irq(&sbi->iostat_lat_lock);
- 	memset(io_lat, 0, sizeof(struct iostat_lat_info));
--	spin_unlock_bh(&sbi->iostat_lat_lock);
-+	spin_unlock_irq(&sbi->iostat_lat_lock);
- }
- 
- void f2fs_update_iostat(struct f2fs_sb_info *sbi,
- 			enum iostat_type type, unsigned long long io_bytes)
- {
-+	unsigned long flags;
-+
- 	if (!sbi->iostat_enable)
- 		return;
- 
--	spin_lock_bh(&sbi->iostat_lock);
-+	spin_lock_irqsave(&sbi->iostat_lock, flags);
- 	sbi->rw_iostat[type] += io_bytes;
- 
- 	if (type == APP_BUFFERED_IO || type == APP_DIRECT_IO)
-@@ -172,7 +176,7 @@ void f2fs_update_iostat(struct f2fs_sb_info *sbi,
- 	if (type == APP_BUFFERED_READ_IO || type == APP_DIRECT_READ_IO)
- 		sbi->rw_iostat[APP_READ_IO] += io_bytes;
- 
--	spin_unlock_bh(&sbi->iostat_lock);
-+	spin_unlock_irqrestore(&sbi->iostat_lock, flags);
- 
- 	f2fs_record_iostat(sbi);
- }
-@@ -185,6 +189,7 @@ static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
- 	struct f2fs_sb_info *sbi = iostat_ctx->sbi;
- 	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
- 	int idx;
-+	unsigned long flags;
- 
- 	if (!sbi->iostat_enable)
- 		return;
-@@ -202,12 +207,12 @@ static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
- 			idx = WRITE_ASYNC_IO;
- 	}
- 
--	spin_lock_bh(&sbi->iostat_lat_lock);
-+	spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
- 	io_lat->sum_lat[idx][iotype] += ts_diff;
- 	io_lat->bio_cnt[idx][iotype]++;
- 	if (ts_diff > io_lat->peak_lat[idx][iotype])
- 		io_lat->peak_lat[idx][iotype] = ts_diff;
--	spin_unlock_bh(&sbi->iostat_lat_lock);
-+	spin_unlock_irqrestore(&sbi->iostat_lat_lock, flags);
- }
- 
- void iostat_update_and_unbind_ctx(struct bio *bio, int rw)
--- 
-2.36.1.476.g0c4daa206d-goog
+Before this commit, we enter with nrpages = 99, and leave with nrpages = 0.
+With this commit we enter with nrpages = 99, and leave with nrpages = 84
+(i.e. 99 - PAGEVEC_SIZE), resulting in the BUG later in fs/inode.c:612.
 
+The difference seems to be that with this commit, the outer
+while(filemap_get_folios) loop is only traversed once, while before
+the corresponding while(pagevec_lookup_range) loop was repeated until
+nrpages reached 0 (in steps of 15 == PAGEVEC_SIZE for the inner loop).
+
+Both before and after the commit, the pagevec_count / folio_batch_count
+for the inner loop starts with 15, but before the pagevec_lookup_range()
+also increased &next in steps of 15, while now the filemap_get_folios()
+moved &next from 0 to 270 in one step, while still only returning
+15 as folio_batch_count for the inner loop. I assume the next index
+of 270 is then too big to find any other folios, so it stops after the
+first iteration, even though only 15 pages have been processed yet with
+remove_huge_page(&folio->page).
+
+I guess it is either wrong to return 15 as folio_batch_count (although
+it seems that would be the maximum possible value), or it is wrong to
+advance &next by 270 instead of 15.
+
+Hope that makes any sense, and might be of help for debugging, to someone
+more familiar with this code.
 
 
 _______________________________________________
