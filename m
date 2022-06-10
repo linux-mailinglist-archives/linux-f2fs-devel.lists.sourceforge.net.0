@@ -2,123 +2,121 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9651454580A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jun 2022 01:09:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 013A75459E8
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jun 2022 04:05:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1nzRHb-0006lY-N9; Thu, 09 Jun 2022 23:09:44 +0000
+	id 1nzU1x-0002UI-GE; Fri, 10 Jun 2022 02:05:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <dsterba@suse.cz>)
- id 1nzRHY-0006lJ-8X; Thu, 09 Jun 2022 23:09:42 +0000
+ (envelope-from <pcc@google.com>) id 1nzU1v-0002UB-G6
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jun 2022 02:05:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qJ6CI0mpfkDIaS/pnwJC/3BIuCFzValbcslJLDqCmdg=; b=WeVXkdjxK13HHqesKCgdhgYkSE
- IXLJnrrb/51jpYZ7eVYVuLMp5lhFssHygnwWDRDfPcA0m8aHKS24rAHrR2xsxYKP8+0EFAWyCjhcx
- j+tkHjvsrZaGVqcyDscczaaSNtAeJyGkPCqd1P3lA16ipsYVhNneuRadqYYkOWUIOhto=;
+ bh=n57nr6XvMdJpxicbPpvMv1otkew923DBxYjQi2K7qUo=; b=ZC0D7Y6pxh6Gxhyl5Csil5wHhY
+ 9Je7zZr/6TJQa6MIzej4aTN+p5fWR6A6T10aMREsomi6rJaUnte4VzpOICjBEJbXoeCJZRXeUDPwS
+ IS2DZLFnV3Bp0s84JcmDAPx1xun1HBRQUc0Ww2R02kw1CvO/n8Aay5m8XNQlFpjslb4w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Reply-To:Message-ID:
- Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qJ6CI0mpfkDIaS/pnwJC/3BIuCFzValbcslJLDqCmdg=; b=hTLOWqlGRSbo4oU4wFagMg2XI7
- TakKHLmiwvmdAYvbgGfL0xqGPD74hNUXp7jVk+MJkCk+aq4wp6i8ja+iD7moNhzPlE3edswLx0RbI
- qIkkWXPOP8i5K5hAjl6LeYPCQjAycAMxj0dC2TMkGF7++JBUEKlTS2tBMPe3uxftAd7o=;
-Received: from smtp-out2.suse.de ([195.135.220.29])
+ bh=n57nr6XvMdJpxicbPpvMv1otkew923DBxYjQi2K7qUo=; b=HO8FfUsY63MwAJn6xzVeB9mBgL
+ jGhILw3bZKqcj0Xo2VVLU5MburEiPxy4oZyZW+A7KQ1OxTdXMcEj5UU2D3kUChTWOG0/yAwVO6Jpo
+ /iTqRSz/NJ98dsS8K9HhQDtjoYG+jpWtmAE0Xm7+Ryk6I8BBVxgk/AZad4Aoz6vdmRbM=;
+Received: from mail-pf1-f180.google.com ([209.85.210.180])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nzRHV-0001pk-Jc; Thu, 09 Jun 2022 23:09:40 +0000
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id A49541FF09;
- Thu,  9 Jun 2022 23:09:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1654816172;
- h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
- cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=qJ6CI0mpfkDIaS/pnwJC/3BIuCFzValbcslJLDqCmdg=;
- b=I4/06b2ltiKrPbL7GgKqUfyrBDeCyX3UBUG59EJr4ULzJeSHMklpbChcFfJ1kbSeucBXix
- La6qOv94FBGz6zARxy9vvZ/rfr+o4fJAO1+4sOg84lO5ESeVeDRRH4GNx2iw82Lzfy4RBp
- n/81rXgBPEK2N99/Wl5n9BN9FjCnnSs=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1654816172;
- h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
- cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=qJ6CI0mpfkDIaS/pnwJC/3BIuCFzValbcslJLDqCmdg=;
- b=L3W4XRXz86YAqVEeWGz5ZqCwllS9CYkUvRzkZLgLEjLQjJDb2qGw16RPUqD736ufsddkqi
- GP6X1OhCsdJk3BBQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 31C9113456;
- Thu,  9 Jun 2022 23:09:32 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id kuItC6x9omLpJgAAMHmgww
- (envelope-from <dsterba@suse.cz>); Thu, 09 Jun 2022 23:09:32 +0000
-Date: Fri, 10 Jun 2022 01:05:01 +0200
-From: David Sterba <dsterba@suse.cz>
-To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20220609230501.GY20633@twin.jikos.cz>
-Mail-Followup-To: dsterba@suse.cz, Matthew Wilcox <willy@infradead.org>,
- linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-block@vger.kernel.org, linux-aio@kvack.org,
- linux-btrfs@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
- linux-mm@kvack.org, linux-xfs@vger.kernel.org,
- linux-nfs@vger.kernel.org, linux-ntfs-dev@lists.sourceforge.net,
- ocfs2-devel@oss.oracle.com, linux-mtd@lists.infradead.org,
- virtualization@lists.linux-foundation.org,
- Christoph Hellwig <hch@lst.de>
-References: <20220608150249.3033815-1-willy@infradead.org>
- <20220608150249.3033815-13-willy@infradead.org>
- <20220609163323.GV20633@twin.jikos.cz>
- <YqIwjEO1a0Sbxbym@casper.infradead.org>
+ id 1nzU1l-0000Q7-6R
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 10 Jun 2022 02:05:38 +0000
+Received: by mail-pf1-f180.google.com with SMTP id bo5so22626247pfb.4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 09 Jun 2022 19:05:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20210112;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=n57nr6XvMdJpxicbPpvMv1otkew923DBxYjQi2K7qUo=;
+ b=gMH0gDr0I7xPrs8FeEhmk3hMquAIQFRgB1/p98W3lXBz6vM1WHDXYi9TTXBsMY1F4J
+ HB9d+tSwLhZFDR6DoSW078blLsiAXc1sJuW+FmrVqD3IcTj12YUL155sqaBiyvLL25Nw
+ OdG4UjYH+tGO8U1NOYueRZSY+9LEDR4ZdpkhUyElm9hoIDpEqv++rWsizGFlwUGqtCDr
+ U1iNz8TuJf6J3hQ9PxLqfKasQ5s/6Zs5zDn0QONvTYV+UeOni3Gx+IGHc0u1DvjI6gCE
+ JbIC5VaHaHaohUBzL/WkvOvdXk3Ne1+rlTwtNhSIP1TGHEfGOU4PlbqkFoqTCGqqwbet
+ qWYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=n57nr6XvMdJpxicbPpvMv1otkew923DBxYjQi2K7qUo=;
+ b=VEDKC7bk2KXz/mZcNG/FDFrPD0FvdyZkpEPtRU+lYsMtK8kCVN5Pc9ZWbza80gjd7Z
+ R00c5pENQlhJAkmTYflGeS1kIJITXQ9NmUTzi4642fdADUXmlUUmtJv9tl3E8z7flAuF
+ rnFrvNu4+B2kDdkQqpsNJWWkZygrrGrI7H0e1epoBq1yUUjlnPLFlg8XSLnxY2jgulHY
+ vPes/BujxgOWQUYRLSySVe+8WwcTW5oXDRiYKf3nCjQX+UJnLieEzwg35I12VQaZKeZC
+ UJAv9wZJLZ/j4nE7CCnQ1BDARiXtES5iNGbc0f8lNw1kxP/jcqY+naQqWn+wuGh/4Vdh
+ 0I4Q==
+X-Gm-Message-State: AOAM531X0X9dXg3NoUlAMrz2BP5crzCVobWLYLhwxcQ7JdCTkzygRaqP
+ FjeGR8pdW/LEFjpUgJnk5ad/Jw==
+X-Google-Smtp-Source: ABdhPJwAAtd3kXYLmu62odbljX5kVxmxdSOL3Li5NYMED1QOfHSdcheJwTPGwKKn2NvkOtARSpyF5A==
+X-Received: by 2002:a63:6cc8:0:b0:3fa:387b:3991 with SMTP id
+ h191-20020a636cc8000000b003fa387b3991mr37358742pgc.19.1654826728645; 
+ Thu, 09 Jun 2022 19:05:28 -0700 (PDT)
+Received: from google.com ([2620:15c:2ce:200:fe27:a345:bcb1:755e])
+ by smtp.gmail.com with ESMTPSA id
+ a15-20020a62e20f000000b0051bac6d2603sm17846748pfi.214.2022.06.09.19.05.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jun 2022 19:05:27 -0700 (PDT)
+Date: Thu, 9 Jun 2022 19:05:23 -0700
+To: Bart Van Assche <bvanassche@acm.org>
+Message-ID: <YqKm4wa31ygW8+Ra@google.com>
+References: <20220421221836.3935616-1-bvanassche@acm.org>
+ <20220421221836.3935616-11-bvanassche@acm.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <YqIwjEO1a0Sbxbym@casper.infradead.org>
-User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
-X-Spam-Score: -2.5 (--)
+In-Reply-To: <20220421221836.3935616-11-bvanassche@acm.org>
+X-Spam-Score: -15.7 (---------------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jun 09, 2022 at 06:40:28PM +0100,
- Matthew Wilcox wrote:
- > On Thu, Jun 09, 2022 at 06:33:23PM +0200, David Sterba wrote: > > On Wed,
- Jun 08, 2022 at 04:02:42PM +0100, Matthew Wilcox (Oracle) wr [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  Hi Bart, On Thu, Apr 21, 2022 at 03:18:15PM -0700, Bart Van
+ Assche wrote: > +static_assert(sizeof(struct f2fs_dentry_block) == 4096,
+ ""); I noticed that this static_assert fails when PAGE_SIZE is defined to
+ a value other than 4096. 
+ Content analysis details:   (-15.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.29 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.180 listed in wl.mailspike.net]
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
+ white-list
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1nzRHV-0001pk-Jc
-Subject: Re: [f2fs-dev] [PATCH v2 12/19] btrfs: Convert btrfs_migratepage to
- migrate_folio
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.180 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
+ Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1nzU1l-0000Q7-6R
+Subject: Re: [f2fs-dev] [PATCH 10/31] Verify structure sizes at compile time
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -130,56 +128,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: dsterba@suse.cz
-Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-ntfs-dev@lists.sourceforge.net,
- Christoph Hellwig <hch@lst.de>, dsterba@suse.cz, linux-kernel@vger.kernel.org,
- linux-block@vger.kernel.org, linux-mm@kvack.org, cluster-devel@redhat.com,
- linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-xfs@vger.kernel.org,
- linux-btrfs@vger.kernel.org
+From: Peter Collingbourne via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Peter Collingbourne <pcc@google.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jun 09, 2022 at 06:40:28PM +0100, Matthew Wilcox wrote:
-> On Thu, Jun 09, 2022 at 06:33:23PM +0200, David Sterba wrote:
-> > On Wed, Jun 08, 2022 at 04:02:42PM +0100, Matthew Wilcox (Oracle) wrote:
-> > > Use filemap_migrate_folio() to do the bulk of the work, and then copy
-> > > the ordered flag across if needed.
-> > > 
-> > > Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-> > > Reviewed-by: Christoph Hellwig <hch@lst.de>
-> > 
-> > Acked-by: David Sterba <dsterba@suse.com>
-> > 
-> > > +static int btrfs_migrate_folio(struct address_space *mapping,
-> > > +			     struct folio *dst, struct folio *src,
-> > >  			     enum migrate_mode mode)
-> > >  {
-> > > -	int ret;
-> > > +	int ret = filemap_migrate_folio(mapping, dst, src, mode);
-> > >  
-> > > -	ret = migrate_page_move_mapping(mapping, newpage, page, 0);
-> > >  	if (ret != MIGRATEPAGE_SUCCESS)
-> > >  		return ret;
-> > >  
-> > > -	if (page_has_private(page))
-> > > -		attach_page_private(newpage, detach_page_private(page));
-> > 
-> > If I'm reading it correctly, the private pointer does not need to be set
-> > like that anymore because it's done somewhere during the
-> > filemap_migrate_folio() call.
-> 
-> That's correct.  Everything except moving the ordered flag across is
-> done for you, and I'm kind of tempted to modify folio_migrate_flags()
-> to copy the ordered flag across as well.  Then you could just use
-> filemap_migrate_folio() directly.
+Hi Bart,
 
-Either way it works for me. If it would mean an unsafe change in folios
-or complicate other code I'm fine with the migration callback that
-does additional work for btrfs that could be changed later.
+On Thu, Apr 21, 2022 at 03:18:15PM -0700, Bart Van Assche wrote:
+> +static_assert(sizeof(struct f2fs_dentry_block) == 4096, "");
+
+I noticed that this static_assert fails when PAGE_SIZE is defined to
+a value other than 4096.
+
+I have to admit to being unfamiliar with f2fs. Is this an on-disk
+data structure? If so, does it mean that non-4K page size kernels
+are unable to mount f2fs file systems if the f2fs-tools were not
+built with a matching PAGE_SIZE define?
+
+In any event, maybe s/4096/PAGE_SIZE/g above is the correct fix
+for now?
+
+Peter
 
 
 _______________________________________________
