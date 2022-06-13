@@ -2,84 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CE0E548110
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jun 2022 10:02:27 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14BD754866E
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jun 2022 17:56:45 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o0f1g-0003we-Sw; Mon, 13 Jun 2022 08:02:21 +0000
+	id 1o0mQe-00070o-J0; Mon, 13 Jun 2022 15:56:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chaoliu719@gmail.com>) id 1o0f1e-0003wU-U4
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jun 2022 08:02:19 +0000
+ (envelope-from <daeho43@gmail.com>) id 1o0mQc-00070h-T5
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jun 2022 15:56:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=p1C8yN+vY8r/BHzAHLXxk073G3pWCMQ/vUB+HuPD1g4=; b=hG3Wvy8hV2QTbfxQOEBmEfCPEW
- 6urgfCmY5rqJN2G7ftB1PCYQHMhUZ4glO7A3XsaF1qJBuR0ds+Xj5TNXmtcdKQK2WE3dYpnGvyc62
- PYGqkwpK7R5ps04U6M9ddWM+UnjVCx3QcOeuvFhMEHfBPEgUvO4kyELz28wIqXndVQcc=;
+ bh=z0y4c6epEM+htJm1IysQ5+YJGTkXEvSBmPhnDnJNDpY=; b=JX6ZlhKjYwVUvp44rCFgcXWiF6
+ QNTaE/M+Ct/uONOGbPfAkG6FmeifLxLG4Xbn+4YSE2rYp2BX5t1o8uDVXYVsrTKpay7L6WoSzMrII
+ /cwRcg5H221bh4oQ2mEF4dqMn+eLsazmfiIv5IDsYTQmoBkBS3UQ2/i5zY8K+lLq2vkQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=p1C8yN+vY8r/BHzAHLXxk073G3pWCMQ/vUB+HuPD1g4=; b=fZrupQDUcGiKgtRKILtW8LOGCn
- gE+J66w7iVeX5Ez2rpjkIbo++5I0UIcqlpifsc5F8qKCmSl3hp7QtcJ2gNVKn2Qoyb7B99pXtfZ6V
- ObUlpSWFV7Wg81S5osBwiy4eRaM8+oKgpk+X/3DxCw9EAEDJGb7UZf+E5J7b/JEDdXXA=;
-Received: from mail-pl1-f169.google.com ([209.85.214.169])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=z0y4c6epEM+htJm1IysQ5+YJGTkXEvSBmPhnDnJNDpY=; b=c
+ kODWJ0iN6qM4qAlMh7ZIHN/zWkBFc/bvK7CmMGpJ/6NXVThzMdbpekqfUK9K5lBJm8NbjIEIKv+Us
+ aDtEaRFS1Fgrroy6Svcl2NIaNI+DSmxdeMsi7B859VcLjdxs5/7aYgawv5aj6JAKXEO7Gn88CJDhK
+ zjLsn0U2TyW9SUhs=;
+Received: from mail-pl1-f176.google.com ([209.85.214.176])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1o0f1b-00HEpO-NY
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jun 2022 08:02:19 +0000
-Received: by mail-pl1-f169.google.com with SMTP id i15so4472156plr.1
+ id 1o0mQY-000Dpd-Tn
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 13 Jun 2022 15:56:35 +0000
+Received: by mail-pl1-f176.google.com with SMTP id h1so5421937plf.11
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 13 Jun 2022 01:02:15 -0700 (PDT)
+ Mon, 13 Jun 2022 08:56:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=p1C8yN+vY8r/BHzAHLXxk073G3pWCMQ/vUB+HuPD1g4=;
- b=aSepHBzqKyR8Qo5Ni0Ko6/WPnq+LpRSeEYfmQngvGmWanOcbzx2aiaaZQa8eQadyJ9
- dDlrjox3fpUosoUz8TVBuRrVDb+97Wl2wvvmZQ5PjWF+MckNqtoF0Yqjfp1JiEGapoH9
- wz1pf8EuHtCVmFBbIXiY9LmPpzE9OQpoIIgx91IYpnQxpyTRTtfb+1GAi3DxhIKrbkKN
- N1NK74nkvvYnOtImC2zpVWDa2FwLrek2i8y6h66bEXMWyg0IOiDQAdHJY5QSIbr2K94S
- gdujIYqPT1xp+21GLpVsPtRLshj81Who+zb4KBxHDhX6J7NLhycAWX+JQaOSSNbDRwf4
- bSxQ==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=z0y4c6epEM+htJm1IysQ5+YJGTkXEvSBmPhnDnJNDpY=;
+ b=bqPAU+rc5ez1db6jGY4ac+dECcnpiJzg22gU34cLwVVqcvEpTt8uF1mFkD0ReAjqSi
+ C+IbjYxBUkcR1156BgHzC/0xcjZcPwL1bzCfvUE/+HnZ3sm6WYO6p3Fc6FlIe0bZZX9W
+ hhZ1BQmjqeN8f7Qw0rt6Ic9x/ByMGbuK0diDPTFwB6HUmOdBM1iesr5dIfB8zGu016/9
+ a69hZ/zywxTZ35XDdJeMm2o8psgemj8lK0MRoGIYbAWPHVcw/1OWZqo7tWRnppEaYkLm
+ g7YgjWsR8ldkhYGRwliVNweWheMsHQy3TP1kIt2Ljc/cTctnlDKsP0intlDgpLddy8Vx
+ tGzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=p1C8yN+vY8r/BHzAHLXxk073G3pWCMQ/vUB+HuPD1g4=;
- b=yJbRNmNCS52upL0fNwjmaswGxaOjUhDR1Tf1/cHW5DjvOG+78V8Eq5cFTnouR6zA1Q
- X0Klz2MOPAEcahsRPGVfYDKSul+CyRijjX/4xlLSTIDjviRHa9EOmRRa3kk8D7SrOCXz
- /bUxb+GRx4jjBdAooSy9A0bItUfRq6RDFxjHKGK8xsB5Iu4oik1uzGJXSDrPkXhct8ob
- KxNcSo10RaLDNBedCpPtrHCtY1ShvKg+gwNW20FQpTjQQqvNL+prnKCrD8CFRy15XOdf
- ebG/JsWW8jKzw+aT8xqy5IoOWhCe7wmcId3lNadqqBz+ydHVgvbGZ9idIvpVjvTXbEH2
- O5Ww==
-X-Gm-Message-State: AOAM530TQo/53+HTUS+QoNeXaopQ8iMyjNdIYf/OsJCpcQ+82aEiopEZ
- ScvyjxMPO02aGuEhWWVXoBZtA1Hbg7kivORjXJk=
-X-Google-Smtp-Source: ABdhPJyvL+v4MFBf2+W3Xz3H2xuY0V3wLF4p+6lH0Y3cve/USE1Poi/owF+J0aydCJ7qDD3UPUlfcA==
-X-Received: by 2002:a17:90b:350f:b0:1e6:94e1:bd17 with SMTP id
- ls15-20020a17090b350f00b001e694e1bd17mr14587004pjb.162.1655107326065; 
- Mon, 13 Jun 2022 01:02:06 -0700 (PDT)
-Received: from liuchao-VM ([156.236.96.165]) by smtp.gmail.com with ESMTPSA id
- ct21-20020a056a000f9500b0051c0784cb45sm4728274pfb.99.2022.06.13.01.02.02
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=z0y4c6epEM+htJm1IysQ5+YJGTkXEvSBmPhnDnJNDpY=;
+ b=J0Kh08uOMyO1+qH/x21F/XquLjFKFJTSsXam5CuXA4t5WDpaMqEAbrlHFmq6owPQP1
+ 2xE53NDm2Lvo4xq0BFiMyyWh+CyQzEvNsu1EF4EuJzgeYdVOGoDDodt3D7IVQdRBnlYf
+ 81yDm1LXdEHXCJuOAhHyY9YU/n2avNz+Kqe+HzkAkAeHYcMU/04W3/lOGdUno1mOAtD5
+ XtjgbcAKDdyhqQINafP5ync+faC3CzY8hUfhF5cA5Hq97bKzhfQjKfExLQSwQBSdgeao
+ Ii3MXQXv2MAED79eQSuvlqZvY5OTxP/oDIQkdz1BwldKSiBoFjxW+mAInPpG1j4ngTkq
+ dThQ==
+X-Gm-Message-State: AJIora8bWsKpppC97olOveE2Sd14RDvUwDCkj8w6/ryxlfqFDP7Gt6On
+ J+e6kKr5p/AV0v/BLAYCspnb2snUF7c=
+X-Google-Smtp-Source: AGRyM1uGQ8i5cpFhy0EMNjRVAsq+KIfTGsSotMWw+jKn+R93RC9Zr/Pmzrjpu+oCHdUWzRLRFt5YUA==
+X-Received: by 2002:a17:902:b610:b0:168:cd85:d7a2 with SMTP id
+ b16-20020a170902b61000b00168cd85d7a2mr300552pls.125.1655135785001; 
+ Mon, 13 Jun 2022 08:56:25 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:15c:211:201:2cd9:fd1f:2142:299c])
+ by smtp.gmail.com with ESMTPSA id
+ t10-20020a17090a6a0a00b001e2f3831102sm5454271pjj.17.2022.06.13.08.56.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jun 2022 01:02:05 -0700 (PDT)
-Date: Mon, 13 Jun 2022 16:02:00 +0800
-From: Chao Liu <chaoliu719@gmail.com>
-To: Matthew Wilcox <willy@infradead.org>, Chao Yu <chao@kernel.org>
-Message-ID: <Yqbu+BArbUNGvft9@liuchao-VM>
-References: <20220613020800.3379482-1-chaoliu719@gmail.com>
- <Yqaw3VTD46PAMN8O@casper.infradead.org>
+ Mon, 13 Jun 2022 08:56:24 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Mon, 13 Jun 2022 08:56:12 -0700
+Message-Id: <20220613155612.402297-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.36.1.476.g0c4daa206d-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Yqaw3VTD46PAMN8O@casper.infradead.org>
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -87,23 +87,23 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Jun 13, 2022 at 04:37:01AM +0100,
- Matthew Wilcox wrote:
- > On Mon, Jun 13, 2022 at 10:08:00AM +0800, Chao Liu wrote: > > v2: > > -
- s/file size/filesize/ > > Why would you change it to be wrong? [...] 
+ Content preview: From: Daeho Jeong Now decompression is being handled in
+ workqueue and it makes read I/O latency non-deterministic,
+ because of the non-deterministic
+ scheduling nature of workqueues. So, I made it handled in softirq cont [...]
  Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [chaoliu719[at]gmail.com]
+ in digit [daeho43[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [chaoliu719[at]gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.169 listed in wl.mailspike.net]
+ provider [daeho43[at]gmail.com]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.169 listed in list.dnswl.org]
+ no trust [209.85.214.176 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.214.176 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -111,10 +111,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1o0f1b-00HEpO-NY
-Subject: Re: [f2fs-dev] [PATCH v2] docs: filesystems: f2fs: fix description
- about compress ioctl
+X-Headers-End: 1o0mQY-000Dpd-Tn
+Subject: [f2fs-dev] [PATCH] f2fs: handle decompress only post processing in
+ softirq
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,71 +125,482 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Liu <liuchao@coolpad.com>, linux-doc@vger.kernel.org,
- Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Yue Hu <huyue2@coolpad.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Wayne Zhang <zhangwen@coolpad.com>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jun 13, 2022 at 04:37:01AM +0100, Matthew Wilcox wrote:
-> On Mon, Jun 13, 2022 at 10:08:00AM +0800, Chao Liu wrote:
-> > v2:
-> > - s/file size/filesize/
->
-> Why would you change it to be wrong?
->
+From: Daeho Jeong <daehojeong@google.com>
 
-This is a suggestion from Chao Yu. Maybe he has some other considerations.
+Now decompression is being handled in workqueue and it makes read I/O
+latency non-deterministic, because of the non-deterministic scheduling
+nature of workqueues. So, I made it handled in softirq context only if
+possible.
 
-Hi Chao,
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ fs/f2fs/compress.c | 145 +++++++++++++++++++++++++--------------------
+ fs/f2fs/data.c     |  50 ++++++++++------
+ fs/f2fs/f2fs.h     |  10 ++--
+ 3 files changed, 119 insertions(+), 86 deletions(-)
 
-Can you help with this question?
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 24824cd96f36..8bc4cd0390dc 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -729,14 +729,13 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
+ 	return ret;
+ }
+ 
+-void f2fs_decompress_cluster(struct decompress_io_ctx *dic)
++void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_softirq)
+ {
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(dic->inode);
+ 	struct f2fs_inode_info *fi = F2FS_I(dic->inode);
+ 	const struct f2fs_compress_ops *cops =
+ 			f2fs_cops[fi->i_compress_algorithm];
+ 	int ret;
+-	int i;
+ 
+ 	trace_f2fs_decompress_pages_start(dic->inode, dic->cluster_idx,
+ 				dic->cluster_size, fi->i_compress_algorithm);
+@@ -746,49 +745,12 @@ void f2fs_decompress_cluster(struct decompress_io_ctx *dic)
+ 		goto out_end_io;
+ 	}
+ 
+-	dic->tpages = page_array_alloc(dic->inode, dic->cluster_size);
+-	if (!dic->tpages) {
+-		ret = -ENOMEM;
+-		goto out_end_io;
+-	}
+-
+-	for (i = 0; i < dic->cluster_size; i++) {
+-		if (dic->rpages[i]) {
+-			dic->tpages[i] = dic->rpages[i];
+-			continue;
+-		}
+-
+-		dic->tpages[i] = f2fs_compress_alloc_page();
+-		if (!dic->tpages[i]) {
+-			ret = -ENOMEM;
+-			goto out_end_io;
+-		}
+-	}
+-
+-	if (cops->init_decompress_ctx) {
+-		ret = cops->init_decompress_ctx(dic);
+-		if (ret)
+-			goto out_end_io;
+-	}
+-
+-	dic->rbuf = f2fs_vmap(dic->tpages, dic->cluster_size);
+-	if (!dic->rbuf) {
+-		ret = -ENOMEM;
+-		goto out_destroy_decompress_ctx;
+-	}
+-
+-	dic->cbuf = f2fs_vmap(dic->cpages, dic->nr_cpages);
+-	if (!dic->cbuf) {
+-		ret = -ENOMEM;
+-		goto out_vunmap_rbuf;
+-	}
+-
+ 	dic->clen = le32_to_cpu(dic->cbuf->clen);
+ 	dic->rlen = PAGE_SIZE << dic->log_cluster_size;
+ 
+ 	if (dic->clen > PAGE_SIZE * dic->nr_cpages - COMPRESS_HEADER_SIZE) {
+ 		ret = -EFSCORRUPTED;
+-		goto out_vunmap_cbuf;
++		goto out_end_io;
+ 	}
+ 
+ 	ret = cops->decompress_pages(dic);
+@@ -809,17 +771,10 @@ void f2fs_decompress_cluster(struct decompress_io_ctx *dic)
+ 		}
+ 	}
+ 
+-out_vunmap_cbuf:
+-	vm_unmap_ram(dic->cbuf, dic->nr_cpages);
+-out_vunmap_rbuf:
+-	vm_unmap_ram(dic->rbuf, dic->cluster_size);
+-out_destroy_decompress_ctx:
+-	if (cops->destroy_decompress_ctx)
+-		cops->destroy_decompress_ctx(dic);
+ out_end_io:
+ 	trace_f2fs_decompress_pages_end(dic->inode, dic->cluster_idx,
+ 							dic->clen, ret);
+-	f2fs_decompress_end_io(dic, ret);
++	f2fs_decompress_end_io(dic, ret, in_softirq);
+ }
+ 
+ /*
+@@ -829,7 +784,7 @@ void f2fs_decompress_cluster(struct decompress_io_ctx *dic)
+  * (or in the case of a failure, cleans up without actually decompressing).
+  */
+ void f2fs_end_read_compressed_page(struct page *page, bool failed,
+-						block_t blkaddr)
++		block_t blkaddr, bool in_softirq)
+ {
+ 	struct decompress_io_ctx *dic =
+ 			(struct decompress_io_ctx *)page_private(page);
+@@ -839,12 +794,12 @@ void f2fs_end_read_compressed_page(struct page *page, bool failed,
+ 
+ 	if (failed)
+ 		WRITE_ONCE(dic->failed, true);
+-	else if (blkaddr)
++	else if (blkaddr && !in_softirq)
+ 		f2fs_cache_compressed_page(sbi, page,
+ 					dic->inode->i_ino, blkaddr);
+ 
+ 	if (atomic_dec_and_test(&dic->remaining_pages))
+-		f2fs_decompress_cluster(dic);
++		f2fs_decompress_cluster(dic, in_softirq);
+ }
+ 
+ static bool is_page_in_cluster(struct compress_ctx *cc, pgoff_t index)
+@@ -1552,12 +1507,14 @@ int f2fs_write_multi_pages(struct compress_ctx *cc,
+ 	return err;
+ }
+ 
+-static void f2fs_free_dic(struct decompress_io_ctx *dic);
++static void f2fs_free_dic(struct decompress_io_ctx *dic,
++		bool bypass_destroy_callback);
+ 
+ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
+ {
+ 	struct decompress_io_ctx *dic;
+ 	pgoff_t start_idx = start_idx_of_cluster(cc);
++	const struct f2fs_compress_ops *cops;
+ 	int i;
+ 
+ 	dic = f2fs_kmem_cache_alloc(dic_entry_slab, GFP_F2FS_ZERO,
+@@ -1602,17 +1559,60 @@ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc)
+ 		dic->cpages[i] = page;
+ 	}
+ 
++	dic->tpages = page_array_alloc(dic->inode, dic->cluster_size);
++	if (!dic->tpages)
++		goto out_free;
++
++	for (i = 0; i < dic->cluster_size; i++) {
++		if (dic->rpages[i]) {
++			dic->tpages[i] = dic->rpages[i];
++			continue;
++		}
++
++		dic->tpages[i] = f2fs_compress_alloc_page();
++		if (!dic->tpages[i])
++			goto out_free;
++	}
++
++	dic->rbuf = f2fs_vmap(dic->tpages, dic->cluster_size);
++	if (!dic->rbuf)
++		goto out_free;
++
++	dic->cbuf = f2fs_vmap(dic->cpages, dic->nr_cpages);
++	if (!dic->cbuf)
++		goto out_free;
++
++	cops = f2fs_cops[F2FS_I(dic->inode)->i_compress_algorithm];
++	if (cops->init_decompress_ctx) {
++		int ret = cops->init_decompress_ctx(dic);
++
++		if (ret)
++			goto out_free;
++	}
++
+ 	return dic;
+ 
+ out_free:
+-	f2fs_free_dic(dic);
++	f2fs_free_dic(dic, true);
+ 	return ERR_PTR(-ENOMEM);
+ }
+ 
+-static void f2fs_free_dic(struct decompress_io_ctx *dic)
++static void f2fs_free_dic(struct decompress_io_ctx *dic,
++		bool bypass_destroy_callback)
+ {
++	const struct f2fs_compress_ops *cops =
++		f2fs_cops[F2FS_I(dic->inode)->i_compress_algorithm];
+ 	int i;
+ 
++	if (!bypass_destroy_callback && cops->destroy_decompress_ctx)
++		cops->destroy_decompress_ctx(dic);
++
++	if (dic->cbuf)
++		vm_unmap_ram(dic->cbuf, dic->nr_cpages);
++
++	if (dic->rbuf)
++		vm_unmap_ram(dic->rbuf, dic->cluster_size);
++
+ 	if (dic->tpages) {
+ 		for (i = 0; i < dic->cluster_size; i++) {
+ 			if (dic->rpages[i])
+@@ -1637,17 +1637,33 @@ static void f2fs_free_dic(struct decompress_io_ctx *dic)
+ 	kmem_cache_free(dic_entry_slab, dic);
+ }
+ 
+-static void f2fs_put_dic(struct decompress_io_ctx *dic)
++static void f2fs_late_free_dic(struct work_struct *work)
+ {
+-	if (refcount_dec_and_test(&dic->refcnt))
+-		f2fs_free_dic(dic);
++	struct decompress_io_ctx *dic =
++		container_of(work, struct decompress_io_ctx, free_work);
++
++	f2fs_free_dic(dic, false);
++}
++
++static void f2fs_put_dic(struct decompress_io_ctx *dic, bool in_softirq)
++{
++	if (refcount_dec_and_test(&dic->refcnt)) {
++		if (in_softirq) {
++			INIT_WORK(&dic->free_work, f2fs_late_free_dic);
++			queue_work(F2FS_I_SB(dic->inode)->post_read_wq,
++					&dic->free_work);
++		} else {
++			f2fs_free_dic(dic, false);
++		}
++	}
+ }
+ 
+ /*
+  * Update and unlock the cluster's pagecache pages, and release the reference to
+  * the decompress_io_ctx that was being held for I/O completion.
+  */
+-static void __f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed)
++static void __f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed,
++				bool in_softirq)
+ {
+ 	int i;
+ 
+@@ -1668,7 +1684,7 @@ static void __f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed)
+ 		unlock_page(rpage);
+ 	}
+ 
+-	f2fs_put_dic(dic);
++	f2fs_put_dic(dic, in_softirq);
+ }
+ 
+ static void f2fs_verify_cluster(struct work_struct *work)
+@@ -1685,14 +1701,15 @@ static void f2fs_verify_cluster(struct work_struct *work)
+ 			SetPageError(rpage);
+ 	}
+ 
+-	__f2fs_decompress_end_io(dic, false);
++	__f2fs_decompress_end_io(dic, false, false);
+ }
+ 
+ /*
+  * This is called when a compressed cluster has been decompressed
+  * (or failed to be read and/or decompressed).
+  */
+-void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed)
++void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed,
++				bool in_softirq)
+ {
+ 	if (!failed && dic->need_verity) {
+ 		/*
+@@ -1704,7 +1721,7 @@ void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed)
+ 		INIT_WORK(&dic->verity_work, f2fs_verify_cluster);
+ 		fsverity_enqueue_verify_work(&dic->verity_work);
+ 	} else {
+-		__f2fs_decompress_end_io(dic, failed);
++		__f2fs_decompress_end_io(dic, failed, in_softirq);
+ 	}
+ }
+ 
+@@ -1713,12 +1730,12 @@ void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed)
+  *
+  * This is called when the page is no longer needed and can be freed.
+  */
+-void f2fs_put_page_dic(struct page *page)
++void f2fs_put_page_dic(struct page *page, bool in_softirq)
+ {
+ 	struct decompress_io_ctx *dic =
+ 			(struct decompress_io_ctx *)page_private(page);
+ 
+-	f2fs_put_dic(dic);
++	f2fs_put_dic(dic, in_softirq);
+ }
+ 
+ /*
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 7fcbcf979737..87455350c9e4 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -119,7 +119,7 @@ struct bio_post_read_ctx {
+ 	block_t fs_blkaddr;
+ };
+ 
+-static void f2fs_finish_read_bio(struct bio *bio)
++static void f2fs_finish_read_bio(struct bio *bio, bool in_softirq)
+ {
+ 	struct bio_vec *bv;
+ 	struct bvec_iter_all iter_all;
+@@ -133,8 +133,9 @@ static void f2fs_finish_read_bio(struct bio *bio)
+ 
+ 		if (f2fs_is_compressed_page(page)) {
+ 			if (bio->bi_status)
+-				f2fs_end_read_compressed_page(page, true, 0);
+-			f2fs_put_page_dic(page);
++				f2fs_end_read_compressed_page(page, true, 0,
++							in_softirq);
++			f2fs_put_page_dic(page, in_softirq);
+ 			continue;
+ 		}
+ 
+@@ -191,7 +192,7 @@ static void f2fs_verify_bio(struct work_struct *work)
+ 		fsverity_verify_bio(bio);
+ 	}
+ 
+-	f2fs_finish_read_bio(bio);
++	f2fs_finish_read_bio(bio, false);
+ }
+ 
+ /*
+@@ -203,7 +204,7 @@ static void f2fs_verify_bio(struct work_struct *work)
+  * can involve reading verity metadata pages from the file, and these verity
+  * metadata pages may be encrypted and/or compressed.
+  */
+-static void f2fs_verify_and_finish_bio(struct bio *bio)
++static void f2fs_verify_and_finish_bio(struct bio *bio, bool in_softirq)
+ {
+ 	struct bio_post_read_ctx *ctx = bio->bi_private;
+ 
+@@ -211,7 +212,7 @@ static void f2fs_verify_and_finish_bio(struct bio *bio)
+ 		INIT_WORK(&ctx->work, f2fs_verify_bio);
+ 		fsverity_enqueue_verify_work(&ctx->work);
+ 	} else {
+-		f2fs_finish_read_bio(bio);
++		f2fs_finish_read_bio(bio, in_softirq);
+ 	}
+ }
+ 
+@@ -224,7 +225,8 @@ static void f2fs_verify_and_finish_bio(struct bio *bio)
+  * that the bio includes at least one compressed page.  The actual decompression
+  * is done on a per-cluster basis, not a per-bio basis.
+  */
+-static void f2fs_handle_step_decompress(struct bio_post_read_ctx *ctx)
++static void f2fs_handle_step_decompress(struct bio_post_read_ctx *ctx,
++		bool in_softirq)
+ {
+ 	struct bio_vec *bv;
+ 	struct bvec_iter_all iter_all;
+@@ -237,7 +239,7 @@ static void f2fs_handle_step_decompress(struct bio_post_read_ctx *ctx)
+ 		/* PG_error was set if decryption failed. */
+ 		if (f2fs_is_compressed_page(page))
+ 			f2fs_end_read_compressed_page(page, PageError(page),
+-						blkaddr);
++						blkaddr, in_softirq);
+ 		else
+ 			all_compressed = false;
+ 
+@@ -262,9 +264,9 @@ static void f2fs_post_read_work(struct work_struct *work)
+ 		fscrypt_decrypt_bio(ctx->bio);
+ 
+ 	if (ctx->enabled_steps & STEP_DECOMPRESS)
+-		f2fs_handle_step_decompress(ctx);
++		f2fs_handle_step_decompress(ctx, false);
+ 
+-	f2fs_verify_and_finish_bio(ctx->bio);
++	f2fs_verify_and_finish_bio(ctx->bio, false);
+ }
+ 
+ static void f2fs_read_end_io(struct bio *bio)
+@@ -281,16 +283,28 @@ static void f2fs_read_end_io(struct bio *bio)
+ 	}
+ 
+ 	if (bio->bi_status) {
+-		f2fs_finish_read_bio(bio);
++		f2fs_finish_read_bio(bio, true);
+ 		return;
+ 	}
+ 
+-	if (ctx && (ctx->enabled_steps & (STEP_DECRYPT | STEP_DECOMPRESS))) {
+-		INIT_WORK(&ctx->work, f2fs_post_read_work);
+-		queue_work(ctx->sbi->post_read_wq, &ctx->work);
+-	} else {
+-		f2fs_verify_and_finish_bio(bio);
++	if (ctx) {
++		unsigned int enabled_steps = ctx->enabled_steps &
++					(STEP_DECRYPT | STEP_DECOMPRESS);
++
++		/*
++		 * If we have only decompression step between decompression and
++		 * decrypt, we don't need post processing for this.
++		 */
++		if (enabled_steps == STEP_DECOMPRESS) {
++			f2fs_handle_step_decompress(ctx, true);
++		} else if (enabled_steps) {
++			INIT_WORK(&ctx->work, f2fs_post_read_work);
++			queue_work(ctx->sbi->post_read_wq, &ctx->work);
++			return;
++		}
+ 	}
++
++	f2fs_verify_and_finish_bio(bio, true);
+ }
+ 
+ static void f2fs_write_end_io(struct bio *bio)
+@@ -2222,7 +2236,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 
+ 		if (f2fs_load_compressed_page(sbi, page, blkaddr)) {
+ 			if (atomic_dec_and_test(&dic->remaining_pages))
+-				f2fs_decompress_cluster(dic);
++				f2fs_decompress_cluster(dic, false);
+ 			continue;
+ 		}
+ 
+@@ -2240,7 +2254,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 					page->index, for_write);
+ 			if (IS_ERR(bio)) {
+ 				ret = PTR_ERR(bio);
+-				f2fs_decompress_end_io(dic, ret);
++				f2fs_decompress_end_io(dic, ret, false);
+ 				f2fs_put_dnode(&dn);
+ 				*bio_ret = NULL;
+ 				return ret;
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index d9bbecd008d2..be118d332536 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1580,6 +1580,7 @@ struct decompress_io_ctx {
+ 	void *private;			/* payload buffer for specified decompression algorithm */
+ 	void *private2;			/* extra payload buffer */
+ 	struct work_struct verity_work;	/* work to verify the decompressed pages */
++	struct work_struct free_work;	/* work for late free this structure itself */
+ };
+ 
+ #define NULL_CLUSTER			((unsigned int)(~0))
+@@ -4158,9 +4159,9 @@ void f2fs_compress_write_end_io(struct bio *bio, struct page *page);
+ bool f2fs_is_compress_backend_ready(struct inode *inode);
+ int f2fs_init_compress_mempool(void);
+ void f2fs_destroy_compress_mempool(void);
+-void f2fs_decompress_cluster(struct decompress_io_ctx *dic);
++void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_softirq);
+ void f2fs_end_read_compressed_page(struct page *page, bool failed,
+-							block_t blkaddr);
++				block_t blkaddr, bool in_softirq);
+ bool f2fs_cluster_is_empty(struct compress_ctx *cc);
+ bool f2fs_cluster_can_merge_page(struct compress_ctx *cc, pgoff_t index);
+ bool f2fs_all_cluster_page_loaded(struct compress_ctx *cc, struct pagevec *pvec,
+@@ -4179,8 +4180,9 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 				unsigned nr_pages, sector_t *last_block_in_bio,
+ 				bool is_readahead, bool for_write);
+ struct decompress_io_ctx *f2fs_alloc_dic(struct compress_ctx *cc);
+-void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed);
+-void f2fs_put_page_dic(struct page *page);
++void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed,
++				bool in_softirq);
++void f2fs_put_page_dic(struct page *page, bool in_softirq);
+ unsigned int f2fs_cluster_blocks_are_contiguous(struct dnode_of_data *dn);
+ int f2fs_init_compress_ctx(struct compress_ctx *cc);
+ void f2fs_destroy_compress_ctx(struct compress_ctx *cc, bool reuse);
+-- 
+2.36.1.476.g0c4daa206d-goog
 
-Thanks.
-
-> >  Documentation/filesystems/f2fs.rst | 13 +++++++------
-> >  1 file changed, 7 insertions(+), 6 deletions(-)
-> >
-> > diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-> > index ad8dc8c040a2..531b0f8a3946 100644
-> > --- a/Documentation/filesystems/f2fs.rst
-> > +++ b/Documentation/filesystems/f2fs.rst
-> > @@ -818,10 +818,11 @@ Compression implementation
-> >    Instead, the main goal is to reduce data writes to flash disk as much as
-> >    possible, resulting in extending disk life time as well as relaxing IO
-> >    congestion. Alternatively, we've added ioctl(F2FS_IOC_RELEASE_COMPRESS_BLOCKS)
-> > -  interface to reclaim compressed space and show it to user after putting the
-> > -  immutable bit. Immutable bit, after release, it doesn't allow writing/mmaping
-> > -  on the file, until reserving compressed space via
-> > -  ioctl(F2FS_IOC_RESERVE_COMPRESS_BLOCKS) or truncating filesize to zero.
-> > +  interface to reclaim compressed space and show it to user after setting a
-> > +  special flag to the inode. Once the compressed space is released, the flag
-> > +  will block writing data to the file until either the compressed space is
-> > +  reserved via ioctl(F2FS_IOC_RESERVE_COMPRESS_BLOCKS) or the filesize is
-> > +  truncated to zero.
-> >
-> >  Compress metadata layout::
-> >
-> > @@ -830,12 +831,12 @@ Compress metadata layout::
-> >  		| cluster 1 | cluster 2 | ......... | cluster N |
-> >  		+-----------------------------------------------+
-> >  		.           .                       .           .
-> > -	.                       .                .                      .
-> > +	  .                      .                .                      .
-> >      .         Compressed Cluster       .        .        Normal Cluster            .
-> >      +----------+---------+---------+---------+  +---------+---------+---------+---------+
-> >      |compr flag| block 1 | block 2 | block 3 |  | block 1 | block 2 | block 3 | block 4 |
-> >      +----------+---------+---------+---------+  +---------+---------+---------+---------+
-> > -	    .                             .
-> > +	       .                             .
-> >  	    .                                           .
-> >  	.                                                           .
-> >  	+-------------+-------------+----------+----------------------------+
-> > --
-> > 2.36.1
-> >
 
 
 _______________________________________________
