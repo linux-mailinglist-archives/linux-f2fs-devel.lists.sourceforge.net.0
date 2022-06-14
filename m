@@ -2,103 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7498A54B8EC
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jun 2022 20:45:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DD0254BE3B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Jun 2022 01:18:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o1BX9-0002A8-6v; Tue, 14 Jun 2022 18:44:59 +0000
+	id 1o1FnI-0006O5-TD; Tue, 14 Jun 2022 23:17:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <lkp@intel.com>) id 1o1BX7-0002A2-Og
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 18:44:58 +0000
+ (envelope-from <bart.vanassche@gmail.com>) id 1o1FnH-0006Ny-UL
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 23:17:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=X0VTpKuk2jWvtpGyZ2sqOvbfiJyTWIV7fW6h0P5HyZI=; b=exqsXTJfmKIhUvX/KquNoxYiIo
- vt+3EWtyUA22Fh5GOo09lm0WlwHOQMJgTL1ftfJQPZyXs5I2AyKX3WrnA2FUaz+XoiEJMFsJz+3GE
- s1HOOxDQ4XaB5g5KLCiOwsizQnaOitP3wU+qx1EQcZRmrtHWxp1i1NjF+xLSQrT9bFFo=;
+ bh=LQUAyBaYn+W9lKPsuozw0s92g7u70y/6TiuYuSfo7Rc=; b=ioP0pQpykXr44f3a+O4pi+UKNm
+ J6EgCeF3wfALIoM9q8vSXrl1bRCIahZMjCz3jgKnnmbUube6r5Y626wC6GK6a4Rvz6IdqQcajYcFo
+ wO8JlaKekO9xegF06A+IyyRg8LlnNmxG9GGyH4YVSuEP1tH3q9+SBwO5OwlAU39noHh8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Subject:Cc
- :To:From:Date:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=X0VTpKuk2jWvtpGyZ2sqOvbfiJyTWIV7fW6h0P5HyZI=; b=g
- bwxGwYPayURQ5V2r+QtohsPpfNGbij/QDpJuQuK+aKWnnWsz9Ufa0gLdrHk8mGb1IJ4zD+pLvwWX8
- I5wQ955ziXSi4kmQqTZU+7WbRoJ30bzzD28t49M2M6JQ7Ym7ET4JJhjh4M2Qm95jEoVLb20gVpqnR
- K1/oady1h4evYuS4=;
-Received: from mga11.intel.com ([192.55.52.93])
+ List-Owner:List-Archive; bh=LQUAyBaYn+W9lKPsuozw0s92g7u70y/6TiuYuSfo7Rc=; b=I
+ HSm9pyAFgkmIdgFVDNMaYPKRmewaNSuX4jxU4s42evTbXN7dFd7S+BAyQjUcZAlYf2BN7vVGM5r5p
+ iCyn6wlYBrPMhNeBKhu+ovD1lIqJj5c4KSZnRsknVA//NslsLxlqoY5taXRx4xAHogGHzu+86Rr9E
+ mZ8rimU+m9N/4oX4=;
+Received: from mail-pf1-f170.google.com ([209.85.210.170])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o1BX5-001gep-A5
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 18:44:57 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1655232295; x=1686768295;
- h=date:from:to:cc:subject:message-id:mime-version:
- content-transfer-encoding;
- bh=Ixr3mhKtmM5RFZXlc02iEkQAHMNIxZ03wnoAUFG9cx8=;
- b=g4tk+dSeX4/3DI1CYsKzlw3MczWTEx6oaXD8pXhvINZmXU/nnP5/DmE8
- ohOS8W2HP3Hak6WVABhJQ/CkdLZTFvCaVWCzG9NQ3jt7aAS+dQlm81XM3
- oAcv0wVFZDkd6Ix99LmY1CT4SVW1byRdBfPomTdw8Tr2m6wPfmBdnaL7+
- ntJwwKf8Jn09mmq/RsJ5VzhVPPw6YbWEZpvZnb1y1S0HabcHkAu+NoMmx
- k7LgF/R7A4cR5NLLSfc3huQVXJZZHCMFaT0mRqiGoCQs95e6XYV56NvFd
- o/hUKh6hrI/S9+Q+GyDJKHP9zCJGYXWwYbV+DakrrmyMKIT/vT1Na24fS w==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10378"; a="276257151"
-X-IronPort-AV: E=Sophos;i="5.91,300,1647327600"; d="scan'208";a="276257151"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Jun 2022 11:44:49 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.91,300,1647327600"; d="scan'208";a="535692441"
-Received: from lkp-server01.sh.intel.com (HELO 60dabacc1df6) ([10.239.97.150])
- by orsmga003.jf.intel.com with ESMTP; 14 Jun 2022 11:44:47 -0700
-Received: from kbuild by 60dabacc1df6 with local (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1o1BWw-000MCp-U1;
- Tue, 14 Jun 2022 18:44:46 +0000
-Date: Wed, 15 Jun 2022 02:44:14 +0800
-From: kernel test robot <lkp@intel.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Message-ID: <62a8d6fe.l9kTY7EU3b9NXYOz%lkp@intel.com>
-User-Agent: Heirloom mailx 12.5 6/20/10
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1o1FnD-001rAo-0x
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 23:17:54 +0000
+Received: by mail-pf1-f170.google.com with SMTP id c196so9891714pfb.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 14 Jun 2022 16:17:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=LQUAyBaYn+W9lKPsuozw0s92g7u70y/6TiuYuSfo7Rc=;
+ b=xDuuznxiFAe2BI8GZPevxIhSGAw3pwmIu3CEfm33xht2gNy6pL/L3FW7OfDMHmLm5H
+ aH7HBKfBd/xVyFdpgwmye2DqvkSwNyhoX1MDHjN6l//ajjyLnCED6B69Bp7uhpzx+LIn
+ uloSqJR54XVHM7HJgMPaDLPXvNy/0jKXYsvvYDiz4vyfTZ5s8ji8OghFR+JITwJrC0wV
+ goIBzP3l5NFmwtPNJn6fUI8UKpydyftqqcr4kstXPJJPOaUt8u8Sp/QFg9jpXbvj3LY8
+ CRtWbWqqsjxuBHolnMCmd2RS9XHmEQ7X/+70tYGO7W+/fZ6PgVB7GUFU9v76rg/M+LRg
+ gnSg==
+X-Gm-Message-State: AOAM531l4hpRj9eHOgQqF2IW2QPAJGEAk9Hy2QOTSKM0U8uHYAEkYF85
+ 8wybOu0OjOaSTpr/jx5VAPs=
+X-Google-Smtp-Source: ABdhPJxLgompnBGrOikX+2U9t9pYLKgpBw99+p56jowd+kA2GHr5uykzdvWwOd0XquQbUp/DuCcKAQ==
+X-Received: by 2002:a05:6a00:4297:b0:51c:2fa8:a5cc with SMTP id
+ bx23-20020a056a00429700b0051c2fa8a5ccmr6986560pfb.37.1655248665319; 
+ Tue, 14 Jun 2022 16:17:45 -0700 (PDT)
+Received: from bvanassche-linux.mtv.corp.google.com
+ ([2620:15c:211:201:ab60:e1ea:e2eb:c1b6])
+ by smtp.gmail.com with ESMTPSA id
+ x2-20020a1709028ec200b001621ce92196sm7769491plo.86.2022.06.14.16.17.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Jun 2022 16:17:44 -0700 (PDT)
+From: Bart Van Assche <bvanassche@acm.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Tue, 14 Jun 2022 16:17:21 -0700
+Message-Id: <20220614231724.776264-1-bvanassche@acm.org>
+X-Mailer: git-send-email 2.36.1.476.g0c4daa206d-goog
 MIME-Version: 1.0
-X-Spam-Score: -3.9 (---)
+X-Spam-Score: 0.5 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: tree/branch:
- https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
- master branch HEAD: 35d872b9ea5b3ad784d7479ea728dcb688df2db7 Add linux-next
- specific files for 20220614 Error/Warning: (recently discovered and may have
- been fixed) 
- Content analysis details:   (-3.9 points, 6.0 required)
+ Content preview:  Hi Jaegeuk, This patch series fixes one issue reported by
+ Peter Collingbourne and two issues I discovered by reading the zoned block
+ device source code. Please consider these patches for inclusion in the
+ official [...] 
+ Content analysis details:   (0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [192.55.52.93 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -1.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1o1BX5-001gep-A5
-Subject: [f2fs-dev] [linux-next:master] BUILD REGRESSION
- 35d872b9ea5b3ad784d7479ea728dcb688df2db7
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [bart.vanassche[at]gmail.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.170 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.170 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
+ EnvelopeFrom freemail headers are different
+X-Headers-End: 1o1FnD-001rAo-0x
+Subject: [f2fs-dev] [PATCH 0/3] Three f2fs patches
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,199 +109,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux Memory Management List <linux-mm@kvack.org>,
- linux-staging@lists.linux.dev, amd-gfx@lists.freedesktop.org,
+Cc: Bart Van Assche <bvanassche@acm.org>,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-branch HEAD: 35d872b9ea5b3ad784d7479ea728dcb688df2db7  Add linux-next specific files for 20220614
+Hi Jaegeuk,
 
-Error/Warning: (recently discovered and may have been fixed)
+This patch series fixes one issue reported by Peter Collingbourne and two
+issues I discovered by reading the zoned block device source code. Please
+consider these patches for inclusion in the official f2fs-tools repository.
 
-drivers/gpu/drm/amd/amdgpu/../display/include/ddc_service_types.h:130:17: warning: 'DP_SINK_BRANCH_DEV_NAME_7580' defined but not used [-Wunused-const-variable=]
+Thanks,
 
-Unverified Error/Warning (likely false positive, please contact us if interested):
+Bart.
 
-drivers/gpu/drm/amd/amdgpu/../display/amdgpu_dm/amdgpu_dm.c:9139:27: warning: variable 'abo' set but not used [-Wunused-but-set-variable]
-drivers/staging/vme_user/vme.c:662:20: warning: dereference of NULL 'bridge' [CWE-476] [-Wanalyzer-null-dereference]
-fs/f2fs/data.c:136:33: error: too many arguments to function 'f2fs_end_read_compressed_page'
-fs/f2fs/data.c:138:25: error: too many arguments to function 'f2fs_put_page_dic'
+Bart Van Assche (3):
+  Fix the struct f2fs_dentry_block size check
+  Fix f2fs_report_zone()
+  Improve compile-time type checking for f2fs_report_zone()
 
-Error/Warning ids grouped by kconfigs:
+ include/f2fs_fs.h   |  6 ++++--
+ lib/libf2fs_zoned.c | 21 +++++++++++++--------
+ 2 files changed, 17 insertions(+), 10 deletions(-)
 
-gcc_recent_errors
-|-- alpha-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- arc-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- arc-randconfig-r015-20220613
-|   `-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|-- arm-allmodconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- arm-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- arm-randconfig-c002-20220612
-|   `-- drivers-staging-vme_user-vme.c:warning:dereference-of-NULL-bridge-CWE
-|-- arm64-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- i386-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- i386-debian-10.3
-|   |-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_end_read_compressed_page
-|   `-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_put_page_dic
-|-- i386-debian-10.3-kselftests
-|   |-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_end_read_compressed_page
-|   `-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_put_page_dic
-|-- ia64-allmodconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- ia64-allyesconfig
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- m68k-allmodconfig
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- m68k-allyesconfig
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- m68k-randconfig-r005-20220613
-|   |-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_end_read_compressed_page
-|   `-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_put_page_dic
-|-- mips-allmodconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- mips-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- nios2-allyesconfig
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- parisc-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- powerpc-allmodconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- powerpc-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- riscv-allmodconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- riscv-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- s390-allyesconfig
-|   `-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|-- sh-allmodconfig
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- sparc-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- x86_64-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-include-ddc_service_types.h:warning:DP_SINK_BRANCH_DEV_NAME_7580-defined-but-not-used
-|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-|-- x86_64-rhel-8.3-kunit
-|   |-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_end_read_compressed_page
-|   `-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_put_page_dic
-`-- xtensa-allyesconfig
-    |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
-    `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
-
-clang_recent_errors
-`-- riscv-randconfig-r035-20220613
-    `-- arch-riscv-kernel-cpufeature.c:warning:variable-cpu_apply_feature-set-but-not-used
-
-elapsed time: 727m
-
-configs tested: 72
-configs skipped: 3
-
-gcc tested configs:
-arm                              allmodconfig
-arm                              allyesconfig
-arm64                            allyesconfig
-arm                                 defconfig
-arm64                               defconfig
-ia64                                defconfig
-ia64                             allmodconfig
-ia64                             allyesconfig
-m68k                             allyesconfig
-m68k                             allmodconfig
-m68k                                defconfig
-alpha                               defconfig
-csky                                defconfig
-alpha                            allyesconfig
-nios2                            allyesconfig
-nios2                               defconfig
-arc                              allyesconfig
-arc                                 defconfig
-h8300                            allyesconfig
-sh                               allmodconfig
-xtensa                           allyesconfig
-parisc                              defconfig
-s390                             allmodconfig
-parisc                           allyesconfig
-parisc64                            defconfig
-s390                                defconfig
-s390                             allyesconfig
-i386                   debian-10.3-kselftests
-i386                              debian-10.3
-i386                                defconfig
-i386                             allyesconfig
-sparc                               defconfig
-sparc                            allyesconfig
-mips                             allmodconfig
-mips                             allyesconfig
-powerpc                           allnoconfig
-powerpc                          allmodconfig
-powerpc                          allyesconfig
-x86_64               randconfig-a014-20220613
-x86_64               randconfig-a012-20220613
-x86_64               randconfig-a011-20220613
-x86_64               randconfig-a015-20220613
-x86_64               randconfig-a013-20220613
-x86_64               randconfig-a016-20220613
-i386                 randconfig-a013-20220613
-i386                 randconfig-a011-20220613
-i386                 randconfig-a012-20220613
-i386                 randconfig-a016-20220613
-i386                 randconfig-a015-20220613
-i386                 randconfig-a014-20220613
-arc                  randconfig-r043-20220613
-riscv                randconfig-r042-20220613
-s390                 randconfig-r044-20220613
-riscv                             allnoconfig
-riscv                            allyesconfig
-riscv                            allmodconfig
-riscv                    nommu_k210_defconfig
-riscv                          rv32_defconfig
-riscv                    nommu_virt_defconfig
-riscv                               defconfig
-um                             i386_defconfig
-um                           x86_64_defconfig
-x86_64                              defconfig
-x86_64                           allyesconfig
-x86_64                                  kexec
-x86_64                               rhel-8.3
-x86_64                          rhel-8.3-func
-x86_64                         rhel-8.3-kunit
-x86_64                    rhel-8.3-kselftests
-x86_64                           rhel-8.3-syz
-
-clang tested configs:
-hexagon              randconfig-r041-20220613
-hexagon              randconfig-r045-20220613
-
--- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
 
 
 _______________________________________________
