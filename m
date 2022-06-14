@@ -2,88 +2,115 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2D3954B76F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jun 2022 19:16:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EAE654B7F1
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jun 2022 19:50:02 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o1A8x-0002Kq-7e; Tue, 14 Jun 2022 17:15:55 +0000
+	id 1o1Afs-0007wM-Gj; Tue, 14 Jun 2022 17:49:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <rdunlap@infradead.org>) id 1o1A8u-0002Kj-LN
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 17:15:53 +0000
+ (envelope-from <daeho43@gmail.com>) id 1o1Afr-0007wG-3a
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 17:49:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1Bzt2bKl4WU2vNDcoULTc+6F61x+SG15/cRuXCESmPo=; b=RPSX5s4uTPnmAjpcdTUlEZXF8i
- zim09xVRTct1n9H16besa/ng0wQH3z64R3E6NBspgWqBHx/Qdw28k8PTFr5yGXnhgZKqGfY/HgoF8
- qvLxv+cxaHIqqyTOfb/5p6MmsPdrAeOlw334+V1S2QN3PFs/EI8yfGwZDNdlD+abkP2c=;
+ bh=9HssQcvv+z8PMOk3w7trm8lob60ctWFcsyzhbTHkSh0=; b=JufhpCha9XgrsVon6W9OepcqrR
+ 8z4nHXilni9I5RifMwKxu2FSH8T1sA6mDeQVhlrUKGjulyN5mEMB6uQbZfcFY54C53jPALUbaefCa
+ WKdG801DsXBFjOxA/JfpPGEzURimMef2zdwJpvMHaoZ5Tkoo6rEJ1lWQHOMqVATrSRLY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=1Bzt2bKl4WU2vNDcoULTc+6F61x+SG15/cRuXCESmPo=; b=i
- VvhbVe7+N7HdQypMwQriu/1tZCwNx9jszDR8eWXGvqfhORGh/TM8XgYFCxmEYrxUGZIe8E72xh1u3
- ZrjW6SMdtKdjEiSdkm0TKoGrPPKIvc3Azl+ZtV2FPwCpxYMqu1M3keazO+3QjkmkoFML4vctsE+E4
- UgrxWmMTetP65qJI=;
-Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o1A8q-001dIZ-Qy
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 17:15:52 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:In-Reply-To:References;
- bh=1Bzt2bKl4WU2vNDcoULTc+6F61x+SG15/cRuXCESmPo=; b=MX2jPZNmmlcx+uQn/6/l3v/tWG
- WJ4Is+63PHvrRPcUVmy1ZbZML4HzypfGHTNpeYGuYeBTbR+95L8udd03n1PxhG7wkQHPQA8akiwVI
- pW4O86PHps+lE8JYA4GqT0tzRSanfiRWiCFd/ubsQXliXN3GIyfoGRvRuFmB5nJc1qoC2Yl3yjPHc
- XAq4sq654iswYy00Q18sXBK26n0D58oRPQYjGc7pbJyoR2TR85WIlLeYecOwbCvTKDPosrdYqBfIS
- JoTWIB6D/FOV0wxe5X2/2596IsZrJ28bxFctWX+TKCaQ+TOsd8TdcadSaWBsZCmNn8AIdeu8c8YNk
- XuN7Py6g==;
-Received: from [2601:1c0:6280:3f0::aa0b] (helo=casper.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1o1A8a-000Lea-0S; Tue, 14 Jun 2022 17:15:33 +0000
-From: Randy Dunlap <rdunlap@infradead.org>
-To: linux-kernel@vger.kernel.org
-Date: Tue, 14 Jun 2022 10:15:26 -0700
-Message-Id: <20220614171526.31756-1-rdunlap@infradead.org>
-X-Mailer: git-send-email 2.35.3
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=9HssQcvv+z8PMOk3w7trm8lob60ctWFcsyzhbTHkSh0=; b=UGr/I5ZSxnnh88SRKwlT4eCsZS
+ dvFjz1xJqE8RNMYvWz4IXZ7MCBjZMrvpPcS5NyDhwmq5YmSgRI4NWfGOgcfsa5+fytuqeqaqFINNX
+ o/+puy/QfrfxEfnS701ClBZFw3Jvl2LGHaMfw+ZTVXj6eAlPE3dtxv5k+zdbysyo/rdE=;
+Received: from mail-yb1-f169.google.com ([209.85.219.169])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1o1Afp-0008Vb-CS
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 17:49:55 +0000
+Received: by mail-yb1-f169.google.com with SMTP id l204so16368857ybf.10
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 14 Jun 2022 10:49:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=9HssQcvv+z8PMOk3w7trm8lob60ctWFcsyzhbTHkSh0=;
+ b=nn/vJ8LnxV4y5b2PuVbbt1J/VBwpoZbFlgmg33sw6MgHr50fS2e9v94ZHMC1UNjj0u
+ YtAChRXlf1KXvkPNjhD5qeqFzNyF397fzsPmUWDCf/0kwSE3ukH3IM43fPPl9s/c8v4V
+ XA7C4RnbnkTWRE94yaKshUFkUGxdfPzmMgCu5RIyxOfuYPjx0Q6x5gMmiFHGYEQeD5pc
+ 54GjSM6KorNdJGP5kLwmI+a0TWdkJMuhsEQ70TNlP70ZMi3d9igKsZL53kcbr5jyNiKQ
+ FG1pKyROK2VDZ7nn7vTocHpthJjf/Y7RM8ER/EViKQ7+tc77I/nSYW3YHKH73SLTtH1I
+ U+xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=9HssQcvv+z8PMOk3w7trm8lob60ctWFcsyzhbTHkSh0=;
+ b=jLx9OY38Tvc9k2O/6K7XzVSYsbda8vH5N/dG5sMlznayjlgirrblkCCDPCF4UaihsK
+ TajhST74dJElTHJvCwHICGJKazhgpUalTjRSQ56ur4W9mTqreVcRPdE9itibDIU7jJga
+ k2w7C2q1zSbPSvleMNMKB1a8gSl5gnecSnqKP48Ajw5PErOUOeMaXf8kiILx4ATD26ke
+ YlN7ULioZz44CMFaBoN9jOO7R0u1iZ2vALePqg8NTh9xAblI3hFYpSd+rIsoe/p6Tmds
+ zzAtFMAQ/lv3ridv6PYgfWzRSEcOJt2BN35mmdlHmvy7/4VYzxSDg09gdYaGPuneiX8P
+ hBTQ==
+X-Gm-Message-State: AJIora+D1rBTRVVqM9yt5YKM12eWN0ZmBpxzpm7SAKFOv7J1HN+QBJs8
+ IFzRuRbgYOyhNzdhi7IgaqYkKl1dKaStr0er3WU=
+X-Google-Smtp-Source: AGRyM1t7eamBoCcTiRk0CAMvHWvlPV/gdt1veg9RZAslhtt8XbZtdUgVF9TI8KMPBJToajZs+i2yQNWe0Eu+3JRYZsI=
+X-Received: by 2002:a25:7209:0:b0:663:f48e:83d6 with SMTP id
+ n9-20020a257209000000b00663f48e83d6mr6158586ybc.76.1655228988939; Tue, 14 Jun
+ 2022 10:49:48 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+References: <20220613155612.402297-1-daeho43@gmail.com>
+ <Yqge0XS7jbSnNWvq@sol.localdomain>
+ <YqhRBZMYPp/kyxoe@B-P7TQMD6M-0146.local>
+ <CACOAw_wjCyTmwusY6S4+NgMuLOZm9fwGfrvCT272GJ01-RP6PQ@mail.gmail.com>
+ <Yqi+vyY4K0mzEdeP@B-P7TQMD6M-0146.local>
+In-Reply-To: <Yqi+vyY4K0mzEdeP@B-P7TQMD6M-0146.local>
+From: Daeho Jeong <daeho43@gmail.com>
+Date: Tue, 14 Jun 2022 10:49:37 -0700
+Message-ID: <CACOAw_xw3jN2KQaiG7AgCttaQr+uqJme=rsj8AT9wdsGWj3iVQ@mail.gmail.com>
+To: Gao Xiang <hsiangkao@linux.alibaba.com>
+X-Spam-Score: 0.1 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Fix build errors when F2FS_FS_COMPRESSION is not set: ../fs/f2fs/data.c:
-    In function ‘f2fs_finish_read_bio’: ../fs/f2fs/data.c:136:5: error: too
-    many arguments to function ‘f2fs_end_read_compressed_page’ f2fs_end_read_compressed_page(page,
-    true, [...] 
- 
- Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  > Yeah, I heard that you folks are really suffered from the
+ scheduling > issues. But for my own previous experience,
+ extra memory footprints
+ are > really critical in Android low memory scenarios (no m [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.219.169 listed in list.dnswl.org]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-X-Headers-End: 1o1A8q-001dIZ-Qy
-Subject: [f2fs-dev] [PATCH] f2fs: fix stubs when F2FS_FS_COMPRESSION is not
- enabled
+ author's domain
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.169 listed in wl.mailspike.net]
+X-Headers-End: 1o1Afp-0008Vb-CS
+Subject: Re: [f2fs-dev] [PATCH] f2fs: handle decompress only post processing
+ in softirq
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,60 +122,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Randy Dunlap <rdunlap@infradead.org>,
- Daeho Jeong <daehojeong@google.com>, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+ Nathan Huckleberry <nhuck@google.com>, kernel-team@android.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Rml4IGJ1aWxkIGVycm9ycyB3aGVuIEYyRlNfRlNfQ09NUFJFU1NJT04gaXMgbm90IHNldDoKCi4u
-L2ZzL2YyZnMvZGF0YS5jOiBJbiBmdW5jdGlvbiDigJhmMmZzX2ZpbmlzaF9yZWFkX2Jpb+KAmToK
-Li4vZnMvZjJmcy9kYXRhLmM6MTM2OjU6IGVycm9yOiB0b28gbWFueSBhcmd1bWVudHMgdG8gZnVu
-Y3Rpb24g4oCYZjJmc19lbmRfcmVhZF9jb21wcmVzc2VkX3BhZ2XigJkKICAgICBmMmZzX2VuZF9y
-ZWFkX2NvbXByZXNzZWRfcGFnZShwYWdlLCB0cnVlLCAwLAogICAgIF5+fn5+fn5+fn5+fn5+fn5+
-fn5+fn5+fn5+fn5+CkluIGZpbGUgaW5jbHVkZWQgZnJvbSAuLi9mcy9mMmZzL2RhdGEuYzoyNTow
-OgouLi9mcy9mMmZzL2YyZnMuaDo0MjI4OjIwOiBub3RlOiBkZWNsYXJlZCBoZXJlCiBzdGF0aWMg
-aW5saW5lIHZvaWQgZjJmc19lbmRfcmVhZF9jb21wcmVzc2VkX3BhZ2Uoc3RydWN0IHBhZ2UgKnBh
-Z2UsCiAgICAgICAgICAgICAgICAgICAgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KLi4v
-ZnMvZjJmcy9kYXRhLmM6MTM4OjQ6IGVycm9yOiB0b28gbWFueSBhcmd1bWVudHMgdG8gZnVuY3Rp
-b24g4oCYZjJmc19wdXRfcGFnZV9kaWPigJkKICAgIGYyZnNfcHV0X3BhZ2VfZGljKHBhZ2UsIGlu
-X3NvZnRpcnEpOwogICAgXn5+fn5+fn5+fn5+fn5+fn4KSW4gZmlsZSBpbmNsdWRlZCBmcm9tIC4u
-L2ZzL2YyZnMvZGF0YS5jOjI1OjA6Ci4uL2ZzL2YyZnMvZjJmcy5oOjQyMzM6MjA6IG5vdGU6IGRl
-Y2xhcmVkIGhlcmUKIHN0YXRpYyBpbmxpbmUgdm9pZCBmMmZzX3B1dF9wYWdlX2RpYyhzdHJ1Y3Qg
-cGFnZSAqcGFnZSkKICAgICAgICAgICAgICAgICAgICBefn5+fn5+fn5+fn5+fn5+fgouLi9mcy9m
-MmZzL2RhdGEuYzogSW4gZnVuY3Rpb24g4oCYZjJmc19oYW5kbGVfc3RlcF9kZWNvbXByZXNz4oCZ
-OgouLi9mcy9mMmZzL2RhdGEuYzoyNDE6NDogZXJyb3I6IHRvbyBtYW55IGFyZ3VtZW50cyB0byBm
-dW5jdGlvbiDigJhmMmZzX2VuZF9yZWFkX2NvbXByZXNzZWRfcGFnZeKAmQogICAgZjJmc19lbmRf
-cmVhZF9jb21wcmVzc2VkX3BhZ2UocGFnZSwgUGFnZUVycm9yKHBhZ2UpLAogICAgXn5+fn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn4KSW4gZmlsZSBpbmNsdWRlZCBmcm9tIC4uL2ZzL2YyZnMvZGF0
-YS5jOjI1OjA6Ci4uL2ZzL2YyZnMvZjJmcy5oOjQyMjg6MjA6IG5vdGU6IGRlY2xhcmVkIGhlcmUK
-IHN0YXRpYyBpbmxpbmUgdm9pZCBmMmZzX2VuZF9yZWFkX2NvbXByZXNzZWRfcGFnZShzdHJ1Y3Qg
-cGFnZSAqcGFnZSwKICAgICAgICAgICAgICAgICAgICBefn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+
-fn5+fgoKLi4vZnMvZjJmcy9kYXRhLmM6IEluIGZ1bmN0aW9uIOKAmGYyZnNfZmluaXNoX3JlYWRf
-Ymlv4oCZOgouLi9mcy9mMmZzL2RhdGEuYzoxMzg6NDogZXJyb3I6IHRvbyBtYW55IGFyZ3VtZW50
-cyB0byBmdW5jdGlvbiDigJhmMmZzX3B1dF9wYWdlX2RpY+KAmQogICAgZjJmc19wdXRfcGFnZV9k
-aWMocGFnZSwgaW5fc29mdGlycSk7CiAgICBefn5+fn5+fn5+fn5+fn5+fgpJbiBmaWxlIGluY2x1
-ZGVkIGZyb20gLi4vZnMvZjJmcy9kYXRhLmM6MjU6MDoKLi4vZnMvZjJmcy9mMmZzLmg6NDIzNDoy
-MDogbm90ZTogZGVjbGFyZWQgaGVyZQogc3RhdGljIGlubGluZSB2b2lkIGYyZnNfcHV0X3BhZ2Vf
-ZGljKHN0cnVjdCBwYWdlICpwYWdlKQogICAgICAgICAgICAgICAgICAgIF5+fn5+fn5+fn5+fn5+
-fn5+CgpGaXhlczogMWI1NjU3MDJkZmZlICgiZjJmczogaGFuZGxlIGRlY29tcHJlc3Mgb25seSBw
-b3N0IHByb2Nlc3NpbmcgaW4gc29mdGlycSIpClNpZ25lZC1vZmYtYnk6IFJhbmR5IER1bmxhcCA8
-cmR1bmxhcEBpbmZyYWRlYWQub3JnPgpDYzogRGFlaG8gSmVvbmcgPGRhZWhvamVvbmdAZ29vZ2xl
-LmNvbT4KQ2M6IEphZWdldWsgS2ltIDxqYWVnZXVrQGtlcm5lbC5vcmc+CkNjOiBDaGFvIFl1IDxj
-aGFvQGtlcm5lbC5vcmc+CkNjOiBsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5l
-dAotLS0KIGZzL2YyZnMvZjJmcy5oIHwgICAgNSArKystLQogMSBmaWxlIGNoYW5nZWQsIDMgaW5z
-ZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCi0tLSBhL2ZzL2YyZnMvZjJmcy5oCisrKyBiL2Zz
-L2YyZnMvZjJmcy5oCkBAIC00MjI2LDExICs0MjI2LDEyIEBAIHN0YXRpYyBpbmxpbmUgaW50IGYy
-ZnNfaW5pdF9jb21wcmVzc19tZW0KIHN0YXRpYyBpbmxpbmUgdm9pZCBmMmZzX2Rlc3Ryb3lfY29t
-cHJlc3NfbWVtcG9vbCh2b2lkKSB7IH0KIHN0YXRpYyBpbmxpbmUgdm9pZCBmMmZzX2RlY29tcHJl
-c3NfY2x1c3RlcihzdHJ1Y3QgZGVjb21wcmVzc19pb19jdHggKmRpYykgeyB9CiBzdGF0aWMgaW5s
-aW5lIHZvaWQgZjJmc19lbmRfcmVhZF9jb21wcmVzc2VkX3BhZ2Uoc3RydWN0IHBhZ2UgKnBhZ2Us
-Ci0JCQkJCQlib29sIGZhaWxlZCwgYmxvY2tfdCBibGthZGRyKQorCQkJCQkJYm9vbCBmYWlsZWQs
-IGJsb2NrX3QgYmxrYWRkciwKKwkJCQkJCWJvb2wgaW5fc29mdGlycSkKIHsKIAlXQVJOX09OX09O
-Q0UoMSk7CiB9Ci1zdGF0aWMgaW5saW5lIHZvaWQgZjJmc19wdXRfcGFnZV9kaWMoc3RydWN0IHBh
-Z2UgKnBhZ2UpCitzdGF0aWMgaW5saW5lIHZvaWQgZjJmc19wdXRfcGFnZV9kaWMoc3RydWN0IHBh
-Z2UgKnBhZ2UsIGJvb2wgaW5fc29mdGlycSkKIHsKIAlXQVJOX09OX09OQ0UoMSk7CiB9CgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1k
-ZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQK
-aHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1k
-ZXZlbAo=
+> Yeah, I heard that you folks are really suffered from the scheduling
+> issues. But for my own previous experience, extra memory footprints are
+> really critical in Android low memory scenarios (no matter low-ended
+> devices or artificial workloads), it tossed me a lot. So I finally
+> ntroduced many inplace I/O to handle/minimize that, including inplace
+> I/O for compressed pages and temporary pages.
+>
+> But I'm not quite sure what's currently happening now, since we once
+> didn't have such non-deterministic workqueues, and I don't hear from
+> other landed vendors.  I think it'd be better to analyse what's going
+> on for these kworkers from scheduling POV and why they don't schedule
+> in time.
+>
+> I also have an idea is much like what I'm doing now for sync
+> decompression, is that just before lock page and ->read_folio, we can
+> trigger some decompression in addition to kworker decompression, but it
+> needs some MM modification, as below:
+>
+>    !PageUptodate(page)
+>
+>    some callback to decompress in addition to kworker
+>
+>    lock_page()
+>    ->read_folio()
+>
+> If mm folks don't like it, I think RT thread is also fine after we
+> analysed the root cause of the kworker delay I think.
+>
+> Thanks,
+> Gao Xiang
+>
+> >
+> > Thanks,
+
+I don't think this is not a problem with most devices, since the
+allocated memory is not too big and it'll be kept just as long as I/O
+processing is on. However, I still understand what you're worried
+about, so I think I can make a new mount option like "memory=low",
+which can be used to give a hint to F2FS to have a priority on as
+little memory as possible. In this mode, we will try to keep minimal
+memory and we can use the previous implementation for decompression.
+
+Thanks,
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
