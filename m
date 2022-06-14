@@ -2,86 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 998B754AF84
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jun 2022 13:50:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C05F54B637
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jun 2022 18:34:13 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o1542-0004yV-PJ; Tue, 14 Jun 2022 11:50:29 +0000
+	id 1o19UW-0004MX-Bx; Tue, 14 Jun 2022 16:34:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <qxy65535@gmail.com>) id 1o1541-0004yP-L0
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 11:50:28 +0000
+ (envelope-from <daeho43@gmail.com>) id 1o19UV-0004MR-3H
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 16:34:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A0t+59JTGCJhzXFr0zxUoQWdhw1kozX+twzUZvLphEI=; b=fNMt6cZU41wLSaIJf2OLCDvx/1
- JpTKdcvuSBhUqlj7rrNezNgyzKd3f3gbeKYXigJL3CbiDOiY+NRLtRasNcFphhnG4Q+nfC5gHD09F
- o+zSnhTTKMKXd3W/SCCVLUltVYc6xgHMJ66jGE6AEPm+8gLnzZHts8yhKwX2X+hB7ROU=;
+ bh=M/kEUFAftetAf2N7yHDHF4JNTzfknxIkkNoqCJfpWV0=; b=VMAGR6FWrssIRv1WVAhwKLWkSd
+ +/2sUysPuPimgBuA76x/XkTolMRBZ82ANGpn9QBrS2En5YOm/Lcc6yZnMsRst7EcP/dGWwLVgKz1W
+ 384WV/AeuMMxi9LWtLqAodipVdO5gj9D9IiynqxCzu9JZbZ+U+8Sop6n86D36Xp80wi0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=A0t+59JTGCJhzXFr0zxUoQWdhw1kozX+twzUZvLphEI=; b=bViV5KJf0d+798lj9fd4mO4kDI
- /PEHlG1dq6nylPtkdkDsfXcJOTmg4ZoZuJV1lcnEizXV6iKNhO/IpuP4KHdY6dsWXDpZy8OQeugr4
- VTgzl3LhIBS40EA7zAE0g1GKwKyTcs8S/AMJK3VWL6pGJAz22vy/M3fogT3Am1W066/0=;
-Received: from mail-pj1-f49.google.com ([209.85.216.49])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=M/kEUFAftetAf2N7yHDHF4JNTzfknxIkkNoqCJfpWV0=; b=Sd6ZEjnhPBB++OcN5UZ6LOeW9B
+ cqa4hyGl68gDEJFYep5ue+/2Oc7N09jo4RhrzxYRHPuNNDA5cfLQDCV+Mxwh++PTD25UDKofySp5T
+ n7q1NGpQzXJZc905qVM/0K7EJca8ussR6pbCQtEkEzH3AKMLjdHXosHklV7iBddFiRDU=;
+Received: from mail-yw1-f175.google.com ([209.85.128.175])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1o153u-0006lp-IX
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 11:50:28 +0000
-Received: by mail-pj1-f49.google.com with SMTP id
- mh16-20020a17090b4ad000b001e8313301f1so1142329pjb.1
+ id 1o19UQ-001ZfV-Dd
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 16:34:05 +0000
+Received: by mail-yw1-f175.google.com with SMTP id
+ 00721157ae682-30c2f288f13so35439277b3.7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 14 Jun 2022 04:50:23 -0700 (PDT)
+ Tue, 14 Jun 2022 09:34:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=A0t+59JTGCJhzXFr0zxUoQWdhw1kozX+twzUZvLphEI=;
- b=F3dA6Eu5MXASMIfexqV07GCk3QkS5c8VuNH6YdrBBkCX8OS6cYMYpuxBWYZpQy9GY2
- Hyj5aQZelm82gUh3a5iqvyGqHzz31LvMjiN58PiDsfnZOpUD0Y4uIfbYSU/Oj6HS+dz/
- 3+ynscwaddW/3z8crG2VjTLFSMxpcSAP4FzPMkEkg5kXrrsGPXiFBHgpJl22bc6Pe23U
- XmI9aWoR+VWXIxye8yexVTe4UKFLSDeLoXMQ2imYdb+gLyf3rUaZUxW84rlNww2HfU2T
- 2tiTaGpRRXzflSECub9VdAzHXVRpWm7oCAtb6IFOYB/CTPsF/sDL5KTCdY6hrSRQLCME
- rEWg==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=M/kEUFAftetAf2N7yHDHF4JNTzfknxIkkNoqCJfpWV0=;
+ b=bQFtbs9YcHpIat+VNMaXN8GfVHbAWCDLkV7fg62QD0yIWV+0uP3jDb6bxCYuRrqEKT
+ khJU61Bk1hb9Uq80iBtZyGFkblrK2wmswiU0/MbDSWcgffqTKuIHptrGMxqOTMIqbcC5
+ sHDPSHsiLF/+5qg30zLjsDKcgknLfGgW1u29wprNjV5IKExT0DSPvuMIv9W8cvVBEDsm
+ 5HJuDD1ugXa43hE611TnQppED/4xi7YH9Yfla859aTKuPPndKZGqDFWWurUyMgqK4jRr
+ xL31Z0Afw/Y6Rb16m9Il0Mtp3STHc2r+MPEzB3OgRTSAFGzSzZ3IIs/HR0OlrSmV8qTK
+ UyLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=A0t+59JTGCJhzXFr0zxUoQWdhw1kozX+twzUZvLphEI=;
- b=61uSvHnXn0A+fHd48EN0rMltO0f9stAVQxK2rEHt4F+ihBWBeD3xZsVifBexU6Zs1o
- wkRPXT/r3HoyJKFWmtRMP+8v7a5MiUaD6zB2hlqgY7+tgTfYQdqQc+xwB5KRTqBOS5/I
- pQfoc6OcicCIJFSoyrGHbWbCdhO3hOGFrnvcnCbK9ofCvSg+IU83EOvToTpnMmIh57yT
- 71szsf1eHhJ4hRRTaZ/tveXA5elOLfqdNy153LGVTDcLk4zH9anbiudUbgqENHdIqfIX
- 05XekBdJJUXKFH73U6QRkGO58XBF7tmis7Z0wNDn735Puw+OO11DZnh8ilUrBOc3ClPO
- P4Hw==
-X-Gm-Message-State: AJIora/rccFiAN2k/ATcrNZY+pDNsdAgIYRzxxFQ1Vj91ZSHUzQ3UxgN
- xX9SAETpUu5PT2n5VP7ZxvM=
-X-Google-Smtp-Source: AGRyM1uvH8uvscKQstVODrvJnevEYuArUZv/5c6h2w0iTRtaH4LPDFGbyxXjDueXCmhu0Sjxlm5uig==
-X-Received: by 2002:a17:902:a704:b0:168:f037:98cd with SMTP id
- w4-20020a170902a70400b00168f03798cdmr1623074plq.87.1655207418352; 
- Tue, 14 Jun 2022 04:50:18 -0700 (PDT)
-Received: from mi-HP-ProDesk-680-G4-MT.mioffice.cn ([43.224.245.250])
- by smtp.gmail.com with ESMTPSA id
- ay21-20020a056a00301500b0051bc3a2355csm7291268pfb.64.2022.06.14.04.50.15
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 14 Jun 2022 04:50:17 -0700 (PDT)
-From: qixiaoyu1 <qxy65535@gmail.com>
-X-Google-Original-From: qixiaoyu1 <qixiaoyu1@xiaomi.com>
-To: jaegeuk@kernel.org
-Date: Tue, 14 Jun 2022 19:49:29 +0800
-Message-Id: <20220614114929.6897-2-qixiaoyu1@xiaomi.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220614114929.6897-1-qixiaoyu1@xiaomi.com>
-References: <20220614114929.6897-1-qixiaoyu1@xiaomi.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=M/kEUFAftetAf2N7yHDHF4JNTzfknxIkkNoqCJfpWV0=;
+ b=yZC2MbcuBgSVel9t3UzT55hFn8nWalKAq9V0mfqB4L3KT/xzSet6Jr3NAHaKFrdHGX
+ sdbOQJovlKuK6zpyMYl+ixebYUr5QTh1jjE0a3ezqlnzjPLb56/duTEJSSTWOsJJMMiy
+ vEgJmyt4r8R1u+z9BwH2EQ0Ks6hqCgox9sKdkZXBsEAsPVCZkXHoNiPdikzDSaa9ak+6
+ 35ul1zzrQ4w1MW2+cMdqxRhkvUtwmB67bigt5v+m7PR3iZLQYUy4rh+JxtBS4MLLVagl
+ y8n3g8jMkbMJfmG6/6+t8S8g+1un6BKgb6Tryd5cDxnFT2+dQmJUyV9Ik3z5vOxfUHZZ
+ hALA==
+X-Gm-Message-State: AJIora8R3yN5WToAcYJqj/olmzuiblQo12fdU0RvOwLdLds8SCR05AH0
+ 85Pu3SjzvjPDlX0RC3qkRG8LL9o5msZk2lwoSLU=
+X-Google-Smtp-Source: AGRyM1stOhRVUmqx6x88uP8qyvJLoxv+aOJ0qkV9zyqBCmiYqcqZF7JCtPygwqiVsQXO2FQ8S8R0hej7Hl8B6obkwRk=
+X-Received: by 2002:a81:78d:0:b0:2e5:d440:d921 with SMTP id
+ 135-20020a81078d000000b002e5d440d921mr6236243ywh.251.1655224436611; Tue, 14
+ Jun 2022 09:33:56 -0700 (PDT)
 MIME-Version: 1.0
+References: <20220613155612.402297-1-daeho43@gmail.com>
+ <Yqge0XS7jbSnNWvq@sol.localdomain>
+In-Reply-To: <Yqge0XS7jbSnNWvq@sol.localdomain>
+From: Daeho Jeong <daeho43@gmail.com>
+Date: Tue, 14 Jun 2022 09:33:45 -0700
+Message-ID: <CACOAw_xZvvJFC8OwDQibtXqyYS7bMRe8CVkkktT_Nd1_EtFw+g@mail.gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -89,25 +82,22 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Otherwise, after grow, kernel may report below error message
- when we mount the image if -o parameter is specified during resize: F2FS-fs
- (loop0): invalid crc_offset: 0 F2FS-fs (loop0): Wrong valid_user_blocks:
- 16404,
- user_block_count: 13312 F2FS-fs (loop0): Failed to get valid F2FS checkpoint
- mount(2) system call failed: Struct [...] 
+ Content preview:  > One question: is this (the bio endio callback) actually
+ guaranteed to be > executed from a softirq? If you look at dm-crypt's support
+ for workqueue-less > decryption, for example, it explicitly chec [...] 
  Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [qxy65535[at]gmail.com]
+ in digit [daeho43[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [qxy65535[at]gmail.com]
+ provider [daeho43[at]gmail.com]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.49 listed in list.dnswl.org]
+ no trust [209.85.128.175 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.49 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.175 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -115,10 +105,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1o153u-0006lp-IX
-Subject: [f2fs-dev] [PATCH 2/2] f2fs-tools: fix to check free space before
- grow
+X-Headers-End: 1o19UQ-001ZfV-Dd
+Subject: Re: [f2fs-dev] [PATCH] f2fs: handle decompress only post processing
+ in softirq
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -130,98 +119,25 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: qixiaoyu1 <qixiaoyu1@xiaomi.com>, linux-kernel@vger.kernel.org,
+Cc: Daeho Jeong <daehojeong@google.com>, Nathan Huckleberry <nhuck@google.com>,
+ kernel-team@android.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Otherwise, after grow, kernel may report below error message
-when we mount the image if -o parameter is specified during resize:
+> One question: is this (the bio endio callback) actually guaranteed to be
+> executed from a softirq?  If you look at dm-crypt's support for workqueue-less
+> decryption, for example, it explicitly checks 'in_hardirq() || irqs_disabled()'
+> and schedules a tasklet if either of those is the case.
+>
+> - Eric
 
-F2FS-fs (loop0): invalid crc_offset: 0
-F2FS-fs (loop0): Wrong valid_user_blocks: 16404, user_block_count: 13312
-F2FS-fs (loop0): Failed to get valid F2FS checkpoint
-mount(2) system call failed: Structure needs cleaning.
+Oh, you're right. Even though it's safe to defer all the release
+process as a work in end_io function, it's better to check the
+condition and process the release process right away if possible.
 
-Signed-off-by: qixiaoyu1 <qixiaoyu1@xiaomi.com>
----
- fsck/resize.c | 36 ++++++++++++++++++++++++------------
- 1 file changed, 24 insertions(+), 12 deletions(-)
-
-diff --git a/fsck/resize.c b/fsck/resize.c
-index d19c6fa..e135b66 100644
---- a/fsck/resize.c
-+++ b/fsck/resize.c
-@@ -599,6 +599,26 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
- 	DBG(0, "Info: Done to rebuild checkpoint blocks\n");
- }
- 
-+static int f2fs_resize_check(struct f2fs_sb_info *sbi, struct f2fs_super_block *new_sb)
-+{
-+	struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
-+	block_t user_block_count;
-+	unsigned int overprov_segment_count;
-+
-+	overprov_segment_count = (get_newsb(segment_count_main) -
-+			c.new_reserved_segments) *
-+			c.new_overprovision / 100;
-+	overprov_segment_count += c.new_reserved_segments;
-+
-+	user_block_count = (get_newsb(segment_count_main) -
-+			overprov_segment_count) * c.blks_per_seg;
-+
-+	if (get_cp(valid_block_count) > user_block_count)
-+		return -1;
-+
-+	return 0;
-+}
-+
- static int f2fs_resize_grow(struct f2fs_sb_info *sbi)
- {
- 	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
-@@ -616,6 +636,9 @@ static int f2fs_resize_grow(struct f2fs_sb_info *sbi)
- 	if (get_new_sb(new_sb))
- 		return -1;
- 
-+	if (f2fs_resize_check(sbi, new_sb) < 0)
-+		return -1;
-+
- 	/* check nat availability */
- 	if (get_sb(segment_count_nat) > get_newsb(segment_count_nat)) {
- 		err = shrink_nats(sbi, new_sb);
-@@ -659,11 +682,8 @@ static int f2fs_resize_shrink(struct f2fs_sb_info *sbi)
- 	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
- 	struct f2fs_super_block new_sb_raw;
- 	struct f2fs_super_block *new_sb = &new_sb_raw;
--	struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
- 	block_t old_end_blkaddr, old_main_blkaddr;
- 	block_t new_end_blkaddr, new_main_blkaddr, tmp_end_blkaddr;
--	block_t user_block_count;
--	unsigned int overprov_segment_count;
- 	unsigned int offset;
- 	int err = -1;
- 
-@@ -674,15 +694,7 @@ static int f2fs_resize_shrink(struct f2fs_sb_info *sbi)
- 	if (get_new_sb(new_sb))
- 		return -1;
- 
--	overprov_segment_count = (get_newsb(segment_count_main) -
--			c.new_reserved_segments) *
--			c.new_overprovision / 100;
--	overprov_segment_count += c.new_reserved_segments;
--
--	user_block_count = (get_newsb(segment_count_main) -
--			overprov_segment_count) * c.blks_per_seg;
--
--	if (get_cp(valid_block_count) > user_block_count)
-+	if (f2fs_resize_check(sbi, new_sb) < 0)
- 		return -1;
- 
- 	/* check nat availability */
--- 
-2.36.1
-
+Thanks,
 
 
 _______________________________________________
