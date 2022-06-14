@@ -2,87 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C74854B854
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jun 2022 20:10:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7498A54B8EC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Jun 2022 20:45:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o1B08-0005uK-QO; Tue, 14 Jun 2022 18:10:53 +0000
+	id 1o1BX9-0002A8-6v; Tue, 14 Jun 2022 18:44:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <hsiangkao@linux.alibaba.com>) id 1o1B07-0005uD-DB
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 18:10:52 +0000
+ (envelope-from <lkp@intel.com>) id 1o1BX7-0002A2-Og
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 18:44:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bBz3egZk858lzZq8bf+M6/0WMD5VLd4laAeM5EInE6w=; b=nH3G8O4bGltJ32DbSITxyHNSIc
- /C39EC9Y+VjInrCxDNlG51z3ix9kYKdWJM3vGC1j5p41tJk37J+D/BfzFgYRIa5qfQBpTOvH4etNS
- FjyVs8LQ2t9C3ZCPe9H52PVuYybspLtfnEHNnbn9iBamvOEiWXyMcB3S5hZb9TRDI59E=;
+ bh=X0VTpKuk2jWvtpGyZ2sqOvbfiJyTWIV7fW6h0P5HyZI=; b=exqsXTJfmKIhUvX/KquNoxYiIo
+ vt+3EWtyUA22Fh5GOo09lm0WlwHOQMJgTL1ftfJQPZyXs5I2AyKX3WrnA2FUaz+XoiEJMFsJz+3GE
+ s1HOOxDQ4XaB5g5KLCiOwsizQnaOitP3wU+qx1EQcZRmrtHWxp1i1NjF+xLSQrT9bFFo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=bBz3egZk858lzZq8bf+M6/0WMD5VLd4laAeM5EInE6w=; b=hI2Qj/TFqWUZixSeEtqrE1xKBa
- z35stYG3Up5uGLkUo47iZve/yxqhlYn6i5zY+4Zks88AwpuUVDiwnMbWLT3H3uNPrfDgCgBv+zYBb
- IE+gh6xFLvzdkQk7R8lGZBMQHFmlJ6j/cmoIy7py/4s7oYxlgahzm/o4Rva0lyP3EUk8=;
-Received: from out30-42.freemail.mail.aliyun.com ([115.124.30.42])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Subject:Cc
+ :To:From:Date:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=X0VTpKuk2jWvtpGyZ2sqOvbfiJyTWIV7fW6h0P5HyZI=; b=g
+ bwxGwYPayURQ5V2r+QtohsPpfNGbij/QDpJuQuK+aKWnnWsz9Ufa0gLdrHk8mGb1IJ4zD+pLvwWX8
+ I5wQ955ziXSi4kmQqTZU+7WbRoJ30bzzD28t49M2M6JQ7Ym7ET4JJhjh4M2Qm95jEoVLb20gVpqnR
+ K1/oady1h4evYuS4=;
+Received: from mga11.intel.com ([192.55.52.93])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o1B02-0000yL-M6
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 18:10:52 +0000
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R741e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
- MF=hsiangkao@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0VGONEUp_1655230234; 
-Received: from B-P7TQMD6M-0146.local(mailfrom:hsiangkao@linux.alibaba.com
- fp:SMTPD_---0VGONEUp_1655230234) by smtp.aliyun-inc.com;
- Wed, 15 Jun 2022 02:10:36 +0800
-Date: Wed, 15 Jun 2022 02:10:34 +0800
-From: Gao Xiang <hsiangkao@linux.alibaba.com>
-To: Daeho Jeong <daeho43@gmail.com>
-Message-ID: <YqjPGpZTUjH4IfZT@B-P7TQMD6M-0146.local>
-References: <20220613155612.402297-1-daeho43@gmail.com>
- <Yqge0XS7jbSnNWvq@sol.localdomain>
- <YqhRBZMYPp/kyxoe@B-P7TQMD6M-0146.local>
- <CACOAw_wjCyTmwusY6S4+NgMuLOZm9fwGfrvCT272GJ01-RP6PQ@mail.gmail.com>
- <Yqi+vyY4K0mzEdeP@B-P7TQMD6M-0146.local>
- <CACOAw_xw3jN2KQaiG7AgCttaQr+uqJme=rsj8AT9wdsGWj3iVQ@mail.gmail.com>
+ id 1o1BX5-001gep-A5
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Jun 2022 18:44:57 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1655232295; x=1686768295;
+ h=date:from:to:cc:subject:message-id:mime-version:
+ content-transfer-encoding;
+ bh=Ixr3mhKtmM5RFZXlc02iEkQAHMNIxZ03wnoAUFG9cx8=;
+ b=g4tk+dSeX4/3DI1CYsKzlw3MczWTEx6oaXD8pXhvINZmXU/nnP5/DmE8
+ ohOS8W2HP3Hak6WVABhJQ/CkdLZTFvCaVWCzG9NQ3jt7aAS+dQlm81XM3
+ oAcv0wVFZDkd6Ix99LmY1CT4SVW1byRdBfPomTdw8Tr2m6wPfmBdnaL7+
+ ntJwwKf8Jn09mmq/RsJ5VzhVPPw6YbWEZpvZnb1y1S0HabcHkAu+NoMmx
+ k7LgF/R7A4cR5NLLSfc3huQVXJZZHCMFaT0mRqiGoCQs95e6XYV56NvFd
+ o/hUKh6hrI/S9+Q+GyDJKHP9zCJGYXWwYbV+DakrrmyMKIT/vT1Na24fS w==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10378"; a="276257151"
+X-IronPort-AV: E=Sophos;i="5.91,300,1647327600"; d="scan'208";a="276257151"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Jun 2022 11:44:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.91,300,1647327600"; d="scan'208";a="535692441"
+Received: from lkp-server01.sh.intel.com (HELO 60dabacc1df6) ([10.239.97.150])
+ by orsmga003.jf.intel.com with ESMTP; 14 Jun 2022 11:44:47 -0700
+Received: from kbuild by 60dabacc1df6 with local (Exim 4.95)
+ (envelope-from <lkp@intel.com>) id 1o1BWw-000MCp-U1;
+ Tue, 14 Jun 2022 18:44:46 +0000
+Date: Wed, 15 Jun 2022 02:44:14 +0800
+From: kernel test robot <lkp@intel.com>
+To: Andrew Morton <akpm@linux-foundation.org>
+Message-ID: <62a8d6fe.l9kTY7EU3b9NXYOz%lkp@intel.com>
+User-Agent: Heirloom mailx 12.5 6/20/10
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CACOAw_xw3jN2KQaiG7AgCttaQr+uqJme=rsj8AT9wdsGWj3iVQ@mail.gmail.com>
-X-Spam-Score: -8.0 (--------)
+X-Spam-Score: -3.9 (---)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Jun 14, 2022 at 10:49:37AM -0700, Daeho Jeong wrote:
- > > Yeah, I heard that you folks are really suffered from the scheduling
- > > issues. But for my own previous experience, extra memory footp [...] 
- Content analysis details:   (-8.0 points, 6.0 required)
+ Content preview: tree/branch:
+ https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git
+ master branch HEAD: 35d872b9ea5b3ad784d7479ea728dcb688df2db7 Add linux-next
+ specific files for 20220614 Error/Warning: (recently discovered and may have
+ been fixed) 
+ Content analysis details:   (-3.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [115.124.30.42 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
- white-list
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [192.55.52.93 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 UNPARSEABLE_RELAY      Informational: message has unparseable relay
- lines
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
- Match
-X-Headers-End: 1o1B02-0000yL-M6
-Subject: Re: [f2fs-dev] [PATCH] f2fs: handle decompress only post processing
- in softirq
+ 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -1.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1o1BX5-001gep-A5
+Subject: [f2fs-dev] [linux-next:master] BUILD REGRESSION
+ 35d872b9ea5b3ad784d7479ea728dcb688df2db7
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,79 +110,199 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
- Nathan Huckleberry <nhuck@google.com>, kernel-team@android.com
+Cc: Linux Memory Management List <linux-mm@kvack.org>,
+ linux-staging@lists.linux.dev, amd-gfx@lists.freedesktop.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jun 14, 2022 at 10:49:37AM -0700, Daeho Jeong wrote:
-> > Yeah, I heard that you folks are really suffered from the scheduling
-> > issues. But for my own previous experience, extra memory footprints are
-> > really critical in Android low memory scenarios (no matter low-ended
-> > devices or artificial workloads), it tossed me a lot. So I finally
-> > ntroduced many inplace I/O to handle/minimize that, including inplace
-> > I/O for compressed pages and temporary pages.
-> >
-> > But I'm not quite sure what's currently happening now, since we once
-> > didn't have such non-deterministic workqueues, and I don't hear from
-> > other landed vendors.  I think it'd be better to analyse what's going
-> > on for these kworkers from scheduling POV and why they don't schedule
-> > in time.
-> >
-> > I also have an idea is much like what I'm doing now for sync
-> > decompression, is that just before lock page and ->read_folio, we can
-> > trigger some decompression in addition to kworker decompression, but it
-> > needs some MM modification, as below:
-> >
-> >    !PageUptodate(page)
-> >
-> >    some callback to decompress in addition to kworker
-> >
-> >    lock_page()
-> >    ->read_folio()
-> >
-> > If mm folks don't like it, I think RT thread is also fine after we
-> > analysed the root cause of the kworker delay I think.
-> >
-> > Thanks,
-> > Gao Xiang
-> >
-> > >
-> > > Thanks,
-> 
-> I don't think this is not a problem with most devices, since the
-> allocated memory is not too big and it'll be kept just as long as I/O
-> processing is on. However, I still understand what you're worried
-> about, so I think I can make a new mount option like "memory=low",
-> which can be used to give a hint to F2FS to have a priority on as
-> little memory as possible. In this mode, we will try to keep minimal
-> memory and we can use the previous implementation for decompression.
+tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+branch HEAD: 35d872b9ea5b3ad784d7479ea728dcb688df2db7  Add linux-next specific files for 20220614
 
-Okay, one of our previous tests was that how many applications are
-still there after many other applications boot. That makes sense since
-most users need to leave as many apps as possible, I know for now we
-have swap-like thing, but once it was done without swap. If you reserve
-too much memory (with page mempool or even for inflight I/O), it will
-impact the alive app numbers compared to uncompressed cases for all
-devices (even high-ended devices).
+Error/Warning: (recently discovered and may have been fixed)
 
-BTW, most crypto algorithms have hardware instructions to boost up,
-actually we have some in-house neon lz4 assembly as well. but it still
-somewhat slow than crypto algorithms, not to mention some algorithms
-like zstd or lzma. Anyway, I personally prefer RT Thread way since it's
-more flexible, also for dm-verity at least try with WQ_HIGHPRI, and I've
-seen:
-https://android-review.googlesource.com/c/kernel/common/+/204421
+drivers/gpu/drm/amd/amdgpu/../display/include/ddc_service_types.h:130:17: warning: 'DP_SINK_BRANCH_DEV_NAME_7580' defined but not used [-Wunused-const-variable=]
 
-But I'm not sure why it wasn't upstreamed though.
+Unverified Error/Warning (likely false positive, please contact us if interested):
 
-Thanks,
-Gao Xiang
+drivers/gpu/drm/amd/amdgpu/../display/amdgpu_dm/amdgpu_dm.c:9139:27: warning: variable 'abo' set but not used [-Wunused-but-set-variable]
+drivers/staging/vme_user/vme.c:662:20: warning: dereference of NULL 'bridge' [CWE-476] [-Wanalyzer-null-dereference]
+fs/f2fs/data.c:136:33: error: too many arguments to function 'f2fs_end_read_compressed_page'
+fs/f2fs/data.c:138:25: error: too many arguments to function 'f2fs_put_page_dic'
 
-> 
-> Thanks,
+Error/Warning ids grouped by kconfigs:
+
+gcc_recent_errors
+|-- alpha-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- arc-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- arc-randconfig-r015-20220613
+|   `-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|-- arm-allmodconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- arm-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- arm-randconfig-c002-20220612
+|   `-- drivers-staging-vme_user-vme.c:warning:dereference-of-NULL-bridge-CWE
+|-- arm64-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- i386-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- i386-debian-10.3
+|   |-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_end_read_compressed_page
+|   `-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_put_page_dic
+|-- i386-debian-10.3-kselftests
+|   |-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_end_read_compressed_page
+|   `-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_put_page_dic
+|-- ia64-allmodconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- ia64-allyesconfig
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- m68k-allmodconfig
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- m68k-allyesconfig
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- m68k-randconfig-r005-20220613
+|   |-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_end_read_compressed_page
+|   `-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_put_page_dic
+|-- mips-allmodconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- mips-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- nios2-allyesconfig
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- parisc-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- powerpc-allmodconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- powerpc-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- riscv-allmodconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- riscv-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- s390-allyesconfig
+|   `-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|-- sh-allmodconfig
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- sparc-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- x86_64-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-include-ddc_service_types.h:warning:DP_SINK_BRANCH_DEV_NAME_7580-defined-but-not-used
+|   `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+|-- x86_64-rhel-8.3-kunit
+|   |-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_end_read_compressed_page
+|   `-- fs-f2fs-data.c:error:too-many-arguments-to-function-f2fs_put_page_dic
+`-- xtensa-allyesconfig
+    |-- drivers-gpu-drm-amd-amdgpu-..-display-amdgpu_dm-amdgpu_dm.c:warning:variable-abo-set-but-not-used
+    `-- drivers-staging-rtl8723bs-hal-hal_btcoex.c:warning:variable-pHalData-set-but-not-used
+
+clang_recent_errors
+`-- riscv-randconfig-r035-20220613
+    `-- arch-riscv-kernel-cpufeature.c:warning:variable-cpu_apply_feature-set-but-not-used
+
+elapsed time: 727m
+
+configs tested: 72
+configs skipped: 3
+
+gcc tested configs:
+arm                              allmodconfig
+arm                              allyesconfig
+arm64                            allyesconfig
+arm                                 defconfig
+arm64                               defconfig
+ia64                                defconfig
+ia64                             allmodconfig
+ia64                             allyesconfig
+m68k                             allyesconfig
+m68k                             allmodconfig
+m68k                                defconfig
+alpha                               defconfig
+csky                                defconfig
+alpha                            allyesconfig
+nios2                            allyesconfig
+nios2                               defconfig
+arc                              allyesconfig
+arc                                 defconfig
+h8300                            allyesconfig
+sh                               allmodconfig
+xtensa                           allyesconfig
+parisc                              defconfig
+s390                             allmodconfig
+parisc                           allyesconfig
+parisc64                            defconfig
+s390                                defconfig
+s390                             allyesconfig
+i386                   debian-10.3-kselftests
+i386                              debian-10.3
+i386                                defconfig
+i386                             allyesconfig
+sparc                               defconfig
+sparc                            allyesconfig
+mips                             allmodconfig
+mips                             allyesconfig
+powerpc                           allnoconfig
+powerpc                          allmodconfig
+powerpc                          allyesconfig
+x86_64               randconfig-a014-20220613
+x86_64               randconfig-a012-20220613
+x86_64               randconfig-a011-20220613
+x86_64               randconfig-a015-20220613
+x86_64               randconfig-a013-20220613
+x86_64               randconfig-a016-20220613
+i386                 randconfig-a013-20220613
+i386                 randconfig-a011-20220613
+i386                 randconfig-a012-20220613
+i386                 randconfig-a016-20220613
+i386                 randconfig-a015-20220613
+i386                 randconfig-a014-20220613
+arc                  randconfig-r043-20220613
+riscv                randconfig-r042-20220613
+s390                 randconfig-r044-20220613
+riscv                             allnoconfig
+riscv                            allyesconfig
+riscv                            allmodconfig
+riscv                    nommu_k210_defconfig
+riscv                          rv32_defconfig
+riscv                    nommu_virt_defconfig
+riscv                               defconfig
+um                             i386_defconfig
+um                           x86_64_defconfig
+x86_64                              defconfig
+x86_64                           allyesconfig
+x86_64                                  kexec
+x86_64                               rhel-8.3
+x86_64                          rhel-8.3-func
+x86_64                         rhel-8.3-kunit
+x86_64                    rhel-8.3-kselftests
+x86_64                           rhel-8.3-syz
+
+clang tested configs:
+hexagon              randconfig-r041-20220613
+hexagon              randconfig-r045-20220613
+
+-- 
+0-DAY CI Kernel Test Service
+https://01.org/lkp
 
 
 _______________________________________________
