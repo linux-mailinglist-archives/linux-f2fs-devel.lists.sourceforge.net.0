@@ -2,100 +2,109 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 448A45508BF
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 19 Jun 2022 07:23:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE961550A65
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 19 Jun 2022 13:55:29 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o2nOu-0005Qw-SH; Sun, 19 Jun 2022 05:23:07 +0000
+	id 1o2tWU-0006BC-A9; Sun, 19 Jun 2022 11:55:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <qkrwngud825@gmail.com>) id 1o2nOt-0005Qp-GJ
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 Jun 2022 05:23:06 +0000
+ (envelope-from <avi@scylladb.com>) id 1o2tWT-0006B6-Cl
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 Jun 2022 11:55:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:Subject:Message-ID:Date:From:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B4cKia+866cgTcRv88SlVAXkzYujoUDJN/Y6pFA+dAs=; b=UGWr3LAPeOikiODhoF4RftFFLR
- qUCZhT6tg2USjhBtB5zHjh+qdtenJKgE0G9sojPunG0jvMh3Hc3JTa9CBbunmxqcC7YbehkUCDF7g
- Io+wEC12TqZtvbDH6bYKHXoiUxMmacaORIdH/sMmchazne/wowE8JqqdnEkcy2l4m/1c=;
+ bh=O2I45PoOglfUqWYYLgh36wUEI38mqN5c3WyJELiYVrQ=; b=SaUkDbujopaL/Wwmq3KtrFyEHg
+ Hx4Z1LU7hLSpaZPVg9OoBWL8o2HPlrkMvgOOcTiYZgjfVKSAT3x8LNA6LI2dJKJaia4X2ZnxZW20I
+ /qoBPVP26HIWqF66dWkOMXWgDIIKXi9g8iY0txtTZVpHtpJISfl+Lms5UEu2z/3xXfXE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:Subject:Message-ID:Date:From:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=B4cKia+866cgTcRv88SlVAXkzYujoUDJN/Y6pFA+dAs=; b=R
- HmX5m3f1zadJ4QsqlhUyLyn5ffwj1ns0TMpcRfBqqi3rarc/Ole9aNzMfO5KFxeeZuqAsoIu/tI0i
- 2J5382ZCHRBImAie5tnNY3704smduD0pjzeDxoQPJBH6o603RpagxBZ45sxlHNvV9sGpRyvSeQ26l
- 3ThcFkN96BV3FcOY=;
-Received: from mail-ed1-f51.google.com ([209.85.208.51])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=O2I45PoOglfUqWYYLgh36wUEI38mqN5c3WyJELiYVrQ=; b=SD+F5iAzLppnQQ8e5HDc5k8e6V
+ 109cKamYvToCugUKyFepGrRk5LO29CZSLeRKc7t7eQugX9B3upsCsfEkDpYu77WDhZ0T+Nwmx8y7X
+ MIu1WKxh2CJCfQ+jAj1OqPyteQCKCoxgw2LQMWvDxMKhHG8vNItzeVs+bDMVIxNac5WQ=;
+Received: from mail-wm1-f52.google.com ([209.85.128.52])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1o2nOq-0073ZB-17
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 Jun 2022 05:23:06 +0000
-Received: by mail-ed1-f51.google.com with SMTP id o10so11002140edi.1
+ id 1o2tWN-0001gn-Ny
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 Jun 2022 11:55:22 +0000
+Received: by mail-wm1-f52.google.com with SMTP id e5so4425270wma.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 18 Jun 2022 22:23:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=B4cKia+866cgTcRv88SlVAXkzYujoUDJN/Y6pFA+dAs=;
- b=fwBVBtX8FCJo93gNfm7oXyUUrFdkcYZpgDETpEw5ZoQesfe2GugbUinHO9ylgZgjBm
- hh43lH1Ky0KAetpM6LvKajcNTMpktHK5Y4ILG5hBk9+NoX4stX+C85GUVTaDsf1ON2V9
- GSSntMXjKKK0iU/0mlayxDSn9bFMneI65Qu15+NHU2+qQgO5BMj/49w6ZxWzRfi0E4v3
- asoEoNvghCPRPjmXfdStpqObzyKYvRdCuuEzH09wgqencjtu8YuUSjA1Yp5FPj2dR7ti
- SZ7hQzDEQmhoWBwfnmk8vmoGJ6QGIZhpxpk2ftiUIvFK+5TtoD4zfVZ1DiNQ5Fz0bNbM
- Jn5A==
+ Sun, 19 Jun 2022 04:55:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=scylladb.com; s=google;
+ h=message-id:date:mime-version:user-agent:subject:content-language:to
+ :cc:references:from:organization:in-reply-to
+ :content-transfer-encoding;
+ bh=O2I45PoOglfUqWYYLgh36wUEI38mqN5c3WyJELiYVrQ=;
+ b=CMDX7ziQVP/ELJCQ2uYixvE/VDY4gI0qJRyGZ6YhB69FGdgWsPUtuQ4ujKYUJOLfr3
+ JecC5hxwQzEatbQfmcHzd4sjCyNFkj1eXcQa2IbP+NPsmH3iuu5a83ukp1hWLtrn+SDp
+ 8gvphAot6Kf3zSzGxxzeUfJ6pluXb1axlJWDmuKfXjXHgxmIa3Ne9GsgU811Ua2tYlrE
+ OA1WN8N/jwauET/7+Xk91P+RwrybwSq+T3UMITLjpWa85tfQOfL/LK5uULCiFGPNytHq
+ /qfUyy4cM4U38c3lRisTyxMFzdqTuYbve/Ij7FcakHP7u3lqBMOhVDG5RpW9uGnPMM9A
+ 3j5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=B4cKia+866cgTcRv88SlVAXkzYujoUDJN/Y6pFA+dAs=;
- b=SbCYwalBAoMq73LSqagzoFFIRKh3G1Qk903rcchf+Jt9JogkzcUDfAvP1ivhwsKuev
- DQtbnFXFUTGzA3hsxSqxfFdDmiHb9gnwrYVVzhK+Zlj+3xsaQebqzxmHvtb4iVmdH2bQ
- OFc7TTVCKHd7PNrj+sNiwkdQ0/CloOw7PQol9+Os3oJzY+D5lnEEUJGv5Jn9sqS4eit8
- 7c8m2/bhY3CbbgC5UsALOC8/mg7SQERgWZjiycLi8tWCx5vyin/Kt9WaqV9d8hwFahWr
- 6+yJFoyLQE02LTAaLmJU0jeMK6ntrPyIrRGIRMlGmrcvI6JK/eW7HPeWKJvv+tiU00xz
- H9cQ==
-X-Gm-Message-State: AJIora9cIWyEibsj3I79aztE3od+JjkhD+x41m0+xOBvbDj9D9uCIng+
- 3xF6ynlZmKrRwVAWxPws6PzFSagb0/9nixOotMJgJlSgL8PnmAl4
-X-Google-Smtp-Source: AGRyM1u6tYKPIPl7yYdOlkUiHQj0gyvQ38A2biOr8Nq6kevDR0plQhE3+CoxpW2uiGE84PI9rJatwKknC3XsGJ9JSEs=
-X-Received: by 2002:aa7:df19:0:b0:435:5eb7:5e31 with SMTP id
- c25-20020aa7df19000000b004355eb75e31mr13448144edy.418.1655616177215; Sat, 18
- Jun 2022 22:22:57 -0700 (PDT)
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:organization:in-reply-to
+ :content-transfer-encoding;
+ bh=O2I45PoOglfUqWYYLgh36wUEI38mqN5c3WyJELiYVrQ=;
+ b=jf4v/nFcPoTr0+mkOcu1zTNnWL9ofwaAqg+vTIiSH7hSm272S6fU/9kCEukqj9wkzB
+ mAt+U5AVIF4iz6D7WWHfPd/YgO7mm/lem8xl4l8zwssALQXy/0DEXW+QuJvbqcH02wE+
+ 3I/BNQupB0Wkr36WyQbISAfAKwCTqU9XtQu9ILrfwEx9JULYJTIGKjlBAIj0qF1s3wQx
+ 5mnIRox3LgRuTPEnEgSQtR5Um1yPjKMZywnWqJkSgSUbc6SAggpszbw0hs4Kvc6LQ205
+ W84Coeb71D7k3GxqnGayMcfLLwxu5zJ6xAtNvi67M4uu5z+6lGE7YKTsxzAzIRC9IFVx
+ lfSQ==
+X-Gm-Message-State: AJIora94o2PLdySj5dpwTt2Z9HnrQJntwrlTnh3dJOSv+U1lYFJ+txfI
+ +k0zO5oF4tlb4IT7EbwBY5QTzbnYoHCbanCh
+X-Google-Smtp-Source: AGRyM1sQr/+BlLCjFYp7YIL2rW66A6O7S/z7a9tjlAuS/44BkYWT2Uw8taLHxSnMG2oypjiTMj2wcg==
+X-Received: by 2002:a05:600c:17cf:b0:39c:4b79:78c9 with SMTP id
+ y15-20020a05600c17cf00b0039c4b7978c9mr19415525wmo.96.1655638251293; 
+ Sun, 19 Jun 2022 04:30:51 -0700 (PDT)
+Received: from [10.0.0.1] (system.cloudius-systems.com. [199.203.229.89])
+ by smtp.gmail.com with ESMTPSA id
+ x1-20020adff0c1000000b002103cfd2fbasm10156755wro.65.2022.06.19.04.30.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 19 Jun 2022 04:30:50 -0700 (PDT)
+Message-ID: <6c06b2d4-2d96-c4a6-7aca-5147a91e7cf2@scylladb.com>
+Date: Sun, 19 Jun 2022 14:30:47 +0300
 MIME-Version: 1.0
-From: Juhyung Park <qkrwngud825@gmail.com>
-Date: Sun, 19 Jun 2022 14:22:46 +0900
-Message-ID: <CAD14+f2U0FcZMEXvCXcwnpg-i5OuBURgd0apkB9voSkDu+CB_g@mail.gmail.com>
-To: linux-f2fs-devel@lists.sourceforge.net
-X-Spam-Score: 1.3 (+)
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Content-Language: en-US
+To: Eric Biggers <ebiggers@kernel.org>, linux-fsdevel@vger.kernel.org
+References: <20220616201506.124209-1-ebiggers@kernel.org>
+ <20220616201506.124209-2-ebiggers@kernel.org>
+From: Avi Kivity <avi@scylladb.com>
+Organization: ScyllaDB
+In-Reply-To: <20220616201506.124209-2-ebiggers@kernel.org>
+X-Spam-Score: -2.2 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi, I'm currently trying out f2fs safe resize / shrink on
- Android. (Size: 98 GiB used out of 221 GiB, 501, 313 nodes, resize to 180 GiB)
- It seems to work surprisingly well, the only improvement that can be made
- seems to be updating quota. 
- Content analysis details:   (1.3 points, 6.0 required)
+ Content preview:  On 16/06/2022 23.14, Eric Biggers wrote: > From: Eric Biggers
+ <ebiggers@google.com> > > Traditionally, the conditions for when DIO (direct
+ I/O) is supported > were fairly simple. For both block device [...] 
+ Content analysis details:   (-2.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 HK_RANDOM_FROM         From username looks random
- 1.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [qkrwngud825[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [qkrwngud825[at]gmail.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.51 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.208.51 listed in list.dnswl.org]
+ no trust [209.85.128.52 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.52 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -103,9 +112,10 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1o2nOq-0073ZB-17
-Subject: [f2fs-dev] f2fs: resize should update quota (w/ general experience
- on Android)
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1o2tWN-0001gn-Ny
+Subject: Re: [f2fs-dev] [PATCH v3 1/8] statx: add direct I/O alignment
+ information
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,269 +127,146 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-block@vger.kernel.org, linux-api@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
+ Keith Busch <kbusch@kernel.org>, linux-ext4@vger.kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
 
-I'm currently trying out f2fs safe resize / shrink on Android.
-(Size: 98 GiB used out of 221 GiB, 501,313 nodes, resize to 180 GiB)
+On 16/06/2022 23.14, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+>
+> Traditionally, the conditions for when DIO (direct I/O) is supported
+> were fairly simple.  For both block devices and regular files, DIO had
+> to be aligned to the logical block size of the block device.
+>
+> However, due to filesystem features that have been added over time (e.g.
+> multi-device support, data journalling, inline data, encryption, verity,
+> compression, checkpoint disabling, log-structured mode), the conditions
+> for when DIO is allowed on a regular file have gotten increasingly
+> complex.  Whether a particular regular file supports DIO, and with what
+> alignment, can depend on various file attributes and filesystem mount
+> options, as well as which block device(s) the file's data is located on.
+>
+> Moreover, the general rule of DIO needing to be aligned to the block
+> device's logical block size is being relaxed to allow user buffers (but
+> not file offsets) aligned to the DMA alignment instead
+> (https://lore.kernel.org/linux-block/20220610195830.3574005-1-kbusch@fb.com/T/#u).
+>
+> XFS has an ioctl XFS_IOC_DIOINFO that exposes DIO alignment information.
+> Uplifting this to the VFS is one possibility.  However, as discussed
+> (https://lore.kernel.org/linux-fsdevel/20220120071215.123274-1-ebiggers@kernel.org/T/#u),
+> this ioctl is rarely used and not known to be used outside of
+> XFS-specific code.  It was also never intended to indicate when a file
+> doesn't support DIO at all, nor was it intended for block devices.
+>
+> Therefore, let's expose this information via statx().  Add the
+> STATX_DIOALIGN flag and two new statx fields associated with it:
+>
+> * stx_dio_mem_align: the alignment (in bytes) required for user memory
+>    buffers for DIO, or 0 if DIO is not supported on the file.
+>
+> * stx_dio_offset_align: the alignment (in bytes) required for file
+>    offsets and I/O segment lengths for DIO, or 0 if DIO is not supported
+>    on the file.  This will only be nonzero if stx_dio_mem_align is
+>    nonzero, and vice versa.
 
-It seems to work surprisingly well, the only improvement that can be
-made seems to be updating quota.
 
-After resize, fsck complains:
-[ERROR] quotaio_v2.c:201:v2_init_io:: Quota inode 4 corrupted: file
-size 73728 does not match page offset 19
-[ERROR] quotaio_v2.c:201:v2_init_io:: Quota inode 5 corrupted: file
-size 120832 does not match page offset 30
-[ERROR] quotaio_v2.c:201:v2_init_io:: Quota inode 6 corrupted: file
-size 27648 does not match page offset 7
+If you consider AIO, this is actually three alignments:
 
-The resize.f2fs process was stuck at 100% CPU usage the whole time.
-Maybe this can be improved with a more efficient algorithm or
-parallelizing, but that's another discussion.
-The whole process took about 5 minutes, when the resize.f2fs was
-pinned at cpu7 (Cortex-X1).
+1. offset alignment for reads (sector size in XFS)
 
-I've also confirmed that the files are exactly the same before and
-after the shrink (checked via rsync -c). This took 25 minutes.
-All in all, I'm glad to find out that shrinking works on f2fs well. No
-error logs on dmesg either.
+2. offset alignment for overwrites (sector size in XFS since 
+ed1128c2d0c87e, block size earlier)
 
-Also, I believe man/resize.f2fs.8 needs to be updated:
-`Current version only supports expanding the prebuilt filesystem.`
+3. offset alignment for appending writes (block size)
 
-Used versions:
-f2fs-tools 1.15.0
-Linux v5.4.197 with 5.19-rc1-5.4 merged
 
-Here's the full commands & outputs that I've used:
----- Snapshot creation ----
-# echo 10G > /sys/block/zram0/disksize
-# dmsetup create snap --table "0 464059800 snapshot
-/dev/block/bootdevice/by-name/userdata /dev/block/zram0 N 256"
+This is critical for linux-aio since violation of these alignments will 
+stall the io_submit system call. Perhaps io_uring handles it better by 
+bouncing to a workqueue, but there is a significant performance and 
+latency penalty for that.
 
----- Initial fsck before resize ----
-# fsck.f2fs -y -f /dev/block/mapper/snap
-Info: Force to fix corruption
-Info: Force to fix corruption
-Info: MKFS version
-  "5.4.179-arter97-gbc35154ef66c"
-Info: FSCK version
-  from "5.4-arter97"
-    to "Linux version 5.4.197-arter97-r21b2-69720-g84bf16de46b9
-(arter97@arter97-dgist) (Android (8508608, based on r450784e) clang
-version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project
-4c603efb0cca074e9238af8b4106c30add4418f6), LLD 14.0.7) #"
-Info: superblock features = 1499 :  encrypt verity extra_attr
-project_quota quota_ino casefold
-Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
-Info: Segments per section = 1
-Info: Sections per zone = 1
-Info: total FS sectors = 58007475 (226591 MB)
-Info: CKPT version = 6b90089a
-Info: checkpoint state = 44 :  crc compacted_summary sudden-power-off
-[FSCK] Check node 1 / 501313 (0.00%)
-[FSCK] Check node 50132 / 501313 (10.00%)
-[FSCK] Check node 100263 / 501313 (20.00%)
-[FSCK] Check node 150394 / 501313 (30.00%)
-[FSCK] Check node 200525 / 501313 (40.00%)
-[FSCK] Check node 250656 / 501313 (50.00%)
-[FSCK] Check node 300787 / 501313 (60.00%)
-[FSCK] Check node 350918 / 501313 (70.00%)
-[FSCK] Check node 401049 / 501313 (80.00%)
-[FSCK] Check node 451180 / 501313 (90.00%)
-[FSCK] Check node 501311 / 501313 (100.00%)
-[fsck_chk_quota_files:2035] Fixing Quota file ([  0] ino [0x4])
-[fsck_chk_quota_files:2035] Fixing Quota file ([  1] ino [0x5])
-[fsck_chk_quota_files:2035] Fixing Quota file ([  2] ino [0x6])
 
-[FSCK] Max image size: 206671 MB, Free space: 126217 MB
-[FSCK] Unreachable nat entries                        [Ok..] [0x0]
-[FSCK] SIT valid block bitmap checking                [Ok..]
-[FSCK] Hard link checking for regular file            [Ok..] [0xa]
-[FSCK] valid_block_count matching with CP             [Ok..] [0x17deab6]
-[FSCK] valid_node_count matching with CP (de lookup)  [Ok..] [0x7a641]
-[FSCK] valid_node_count matching with CP (nat lookup) [Ok..] [0x7a641]
-[FSCK] valid_inode_count matched with CP              [Ok..] [0x76cec]
-[FSCK] free segment_count matched with CP             [Ok..] [0xfa30]
-[FSCK] next block offset is free                      [Ok..]
-[FSCK] fixing SIT types
-[FSCK] other corrupted bugs                           [Ok..]
-Info: Duplicate valid checkpoint to mirror position 1024 -> 512
-Info: Write valid nat_bits in checkpoint
-Info: Write valid nat_bits in checkpoint
+Small appending writes are important for database commit logs (and so 
+it's better to overwrite a pre-formatted file to avoid aligning to block 
+size).
 
-Done: 0.000000 secs
 
----- Resize ----
-# resize.f2fs -s -t 47185920 /dev/block/mapper/snap
-Info: MKFS version
-  "5.4.179-arter97-gbc35154ef66c"
-Info: FSCK version
-  from "5.4-arter97"
-    to "Linux version 5.4.197-arter97-r21b2-69720-g84bf16de46b9
-(arter97@arter97-dgist) (Android (8508608, based on r450784e) clang
-version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project
-4c603efb0cca074e9238af8b4106c30add4418f6), LLD 14.0.7) #"
-Info: superblock features = 1499 :  encrypt verity extra_attr
-project_quota quota_ino casefold
-Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
-Info: Segments per section = 1
-Info: Sections per zone = 1
-Info: total FS sectors = 58007475 (226591 MB)
-Info: CKPT version = 6b90089a
-[FIX] (move_one_curseg_info:2857)  --> Move curseg[0] 70 -> 161cc after 2d00000
+It would be good to expose these differences.
 
-[FIX] (move_one_curseg_info:2857)  --> Move curseg[1] 890 -> 161cb after 2d00000
 
-[FIX] (move_one_curseg_info:2857)  --> Move curseg[2] 8af -> 161cd after 2d00000
-
-[FIX] (move_one_curseg_info:2857)  --> Move curseg[3] a8 -> 161ca after 2d00000
-
-[FIX] (move_one_curseg_info:2857)  --> Move curseg[4] 117 -> 161c9 after 2d00000
-
-[FIX] (move_one_curseg_info:2857)  --> Move curseg[5] 16d9 -> 161c8
-after 2d00000
-
-Info: Write valid nat_bits in checkpoint
-Try to do defragement: Done
-[update_superblock: 701] Info: Done to update superblock
-Info: Write valid nat_bits in checkpoint
-[rebuild_checkpoint: 591] Info: Done to rebuild checkpoint blocks
-
-Done: 0.000000 secs
-
----- 1st fsck after resize ----
-# fsck.f2fs -y -f /dev/block/mapper/snap
-Info: Force to fix corruption
-Info: Force to fix corruption
-Info: MKFS version
-  "5.4.179-arter97-gbc35154ef66c"
-Info: FSCK version
-  from "5.4-arter97"
-    to "Linux version 5.4.197-arter97-r21b2-69720-g84bf16de46b9
-(arter97@arter97-dgist) (Android (8508608, based on r450784e) clang
-version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project
-4c603efb0cca074e9238af8b4106c30add4418f6), LLD 14.0.7) #"
-Info: superblock features = 1499 :  encrypt verity extra_attr
-project_quota quota_ino casefold
-Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
-Info: Segments per section = 1
-Info: Sections per zone = 1
-Info: total FS sectors = 47185920 (184320 MB)
-Invalid CP CRC offset: 0
-Info: CKPT version = 6b90089b
-Info: Checked valid nat_bits in checkpoint
-Info: checkpoint state = 81 :  nat_bits unmount
-[FSCK] Check node 1 / 501313 (0.00%)
-[FSCK] Check node 50132 / 501313 (10.00%)
-[FSCK] Check node 100263 / 501313 (20.00%)
-[FSCK] Check node 150394 / 501313 (30.00%)
-[FSCK] Check node 200525 / 501313 (40.00%)
-[FSCK] Check node 250656 / 501313 (50.00%)
-[FSCK] Check node 300787 / 501313 (60.00%)
-[FSCK] Check node 350918 / 501313 (70.00%)
-[FSCK] Check node 401049 / 501313 (80.00%)
-[FSCK] Check node 451180 / 501313 (90.00%)
-[FSCK] Check node 501311 / 501313 (100.00%)
-[ERROR] quotaio_v2.c:201:v2_init_io:: Quota inode 4 corrupted: file
-size 73728 does not match page offset 19
-[ERROR] quotaio_v2.c:201:v2_init_io:: Quota inode 5 corrupted: file
-size 120832 does not match page offset 30
-[ERROR] quotaio_v2.c:201:v2_init_io:: Quota inode 6 corrupted: file
-size 27648 does not match page offset 7
-
-[FSCK] Max image size: 184108 MB, Free space: 84135 MB
-[FSCK] Unreachable nat entries                        [Ok..] [0x0]
-[FSCK] SIT valid block bitmap checking                [Ok..]
-[FSCK] Hard link checking for regular file            [Ok..] [0xa]
-[FSCK] valid_block_count matching with CP             [Ok..] [0x17deab6]
-[FSCK] valid_node_count matching with CP (de lookup)  [Ok..] [0x7a641]
-[FSCK] valid_node_count matching with CP (nat lookup) [Ok..] [0x7a641]
-[FSCK] valid_inode_count matched with CP              [Ok..] [0x76cec]
-[FSCK] free segment_count matched with CP             [Ok..] [0xa79c]
-[FSCK] next block offset is free                      [Ok..]
-[FSCK] fixing SIT types
-[FSCK] other corrupted bugs                           [Ok..]
-
-Done: 0.000000 secs
-
----- 2nd fsck after resize ----
-# fsck.f2fs -y -f /dev/block/mapper/snap
-Info: Force to fix corruption
-Info: Force to fix corruption
-Info: MKFS version
-  "5.4.179-arter97-gbc35154ef66c"
-Info: FSCK version
-  from "5.4-arter97"
-    to "Linux version 5.4.197-arter97-r21b2-69720-g84bf16de46b9
-(arter97@arter97-dgist) (Android (8508608, based on r450784e) clang
-version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project
-4c603efb0cca074e9238af8b4106c30add4418f6), LLD 14.0.7) #"
-Info: superblock features = 1499 :  encrypt verity extra_attr
-project_quota quota_ino casefold
-Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
-Info: Segments per section = 1
-Info: Sections per zone = 1
-Info: total FS sectors = 47185920 (184320 MB)
-Invalid CP CRC offset: 0
-Info: CKPT version = 6b90089b
-Info: Checked valid nat_bits in checkpoint
-Info: checkpoint state = 81 :  nat_bits unmount
-[FSCK] Check node 1 / 501313 (0.00%)
-[FSCK] Check node 50132 / 501313 (10.00%)
-[FSCK] Check node 100263 / 501313 (20.00%)
-[FSCK] Check node 150394 / 501313 (30.00%)
-[FSCK] Check node 200525 / 501313 (40.00%)
-[FSCK] Check node 250656 / 501313 (50.00%)
-[FSCK] Check node 300787 / 501313 (60.00%)
-[FSCK] Check node 350918 / 501313 (70.00%)
-[FSCK] Check node 401049 / 501313 (80.00%)
-[FSCK] Check node 451180 / 501313 (90.00%)
-[FSCK] Check node 501311 / 501313 (100.00%)
-
-[FSCK] Max image size: 184108 MB, Free space: 84135 MB
-[FSCK] Unreachable nat entries                        [Ok..] [0x0]
-[FSCK] SIT valid block bitmap checking                [Ok..]
-[FSCK] Hard link checking for regular file            [Ok..] [0xa]
-[FSCK] valid_block_count matching with CP             [Ok..] [0x17deab6]
-[FSCK] valid_node_count matching with CP (de lookup)  [Ok..] [0x7a641]
-[FSCK] valid_node_count matching with CP (nat lookup) [Ok..] [0x7a641]
-[FSCK] valid_inode_count matched with CP              [Ok..] [0x76cec]
-[FSCK] free segment_count matched with CP             [Ok..] [0xa79c]
-[FSCK] next block offset is free                      [Ok..]
-[FSCK] fixing SIT types
-[FSCK] other corrupted bugs                           [Ok..]
-
-Done: 0.000000 secs
-
----- Before & after check ----
-# mkdir /tmp/1 /tmp/2
-# losetup -f -r /dev/block/by-name/userdata
-# mount -t f2fs -o ro /dev/block/loop0 /tmp/1
-# mount -t f2fs -o ro /dev/block/mapper/snap /tmp/2
-# rsync -ahxvc --info=progress2 1/ 2/
-sending incremental file list
-              0   0%    0.00kB/s    0:00:00 (xfr#0, to-chk=0/486687)
-
-sent 25.22M bytes  received 90.17K bytes  16.92K bytes/sec
-total size is 101.04G  speedup is 3,991.40
-# dmesg | grep -i f2fs
-[ 2462.787850] F2FS-fs (loop0): Using encoding defined by superblock:
-utf8-12.1.0 with flags 0x0
-[ 2462.929670] F2FS-fs (loop0): recover fsync data on readonly fs
-[ 2462.976133] F2FS-fs (loop0): write access unavailable, skipping recovery
-[ 2462.976135] F2FS-fs (loop0): Mounted with checkpoint version = 6b90089a
-[ 2475.857335] F2FS-fs (dm-0): Using encoding defined by superblock:
-utf8-12.1.0 with flags 0x0
-[ 2475.876950] F2FS-fs (dm-0): Found nat_bits in checkpoint
-[ 2475.913980] F2FS-fs (dm-0): recover fsync data on readonly fs
-[ 2475.940111] F2FS-fs (dm-0): Mounted with checkpoint version = 6b9009b7
-
-After the whole operation, zram0 usage was 3 GiB (uncompressed size).
+>
+> Note that as with other statx() extensions, if STATX_DIOALIGN isn't set
+> in the returned statx struct, then these new fields won't be filled in.
+> This will happen if the file is neither a regular file nor a block
+> device, or if the file is a regular file and the filesystem doesn't
+> support STATX_DIOALIGN.  It might also happen if the caller didn't
+> include STATX_DIOALIGN in the request mask, since statx() isn't required
+> to return unrequested information.
+>
+> This commit only adds the VFS-level plumbing for STATX_DIOALIGN.  For
+> regular files, individual filesystems will still need to add code to
+> support it.  For block devices, a separate commit will wire it up too.
+>
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>   fs/stat.c                 | 2 ++
+>   include/linux/stat.h      | 2 ++
+>   include/uapi/linux/stat.h | 4 +++-
+>   3 files changed, 7 insertions(+), 1 deletion(-)
+>
+> diff --git a/fs/stat.c b/fs/stat.c
+> index 9ced8860e0f35..a7930d7444830 100644
+> --- a/fs/stat.c
+> +++ b/fs/stat.c
+> @@ -611,6 +611,8 @@ cp_statx(const struct kstat *stat, struct statx __user *buffer)
+>   	tmp.stx_dev_major = MAJOR(stat->dev);
+>   	tmp.stx_dev_minor = MINOR(stat->dev);
+>   	tmp.stx_mnt_id = stat->mnt_id;
+> +	tmp.stx_dio_mem_align = stat->dio_mem_align;
+> +	tmp.stx_dio_offset_align = stat->dio_offset_align;
+>   
+>   	return copy_to_user(buffer, &tmp, sizeof(tmp)) ? -EFAULT : 0;
+>   }
+> diff --git a/include/linux/stat.h b/include/linux/stat.h
+> index 7df06931f25d8..ff277ced50e9f 100644
+> --- a/include/linux/stat.h
+> +++ b/include/linux/stat.h
+> @@ -50,6 +50,8 @@ struct kstat {
+>   	struct timespec64 btime;			/* File creation time */
+>   	u64		blocks;
+>   	u64		mnt_id;
+> +	u32		dio_mem_align;
+> +	u32		dio_offset_align;
+>   };
+>   
+>   #endif
+> diff --git a/include/uapi/linux/stat.h b/include/uapi/linux/stat.h
+> index 1500a0f58041a..7cab2c65d3d7f 100644
+> --- a/include/uapi/linux/stat.h
+> +++ b/include/uapi/linux/stat.h
+> @@ -124,7 +124,8 @@ struct statx {
+>   	__u32	stx_dev_minor;
+>   	/* 0x90 */
+>   	__u64	stx_mnt_id;
+> -	__u64	__spare2;
+> +	__u32	stx_dio_mem_align;	/* Memory buffer alignment for direct I/O */
+> +	__u32	stx_dio_offset_align;	/* File offset alignment for direct I/O */
+>   	/* 0xa0 */
+>   	__u64	__spare3[12];	/* Spare space for future expansion */
+>   	/* 0x100 */
+> @@ -152,6 +153,7 @@ struct statx {
+>   #define STATX_BASIC_STATS	0x000007ffU	/* The stuff in the normal stat struct */
+>   #define STATX_BTIME		0x00000800U	/* Want/got stx_btime */
+>   #define STATX_MNT_ID		0x00001000U	/* Got stx_mnt_id */
+> +#define STATX_DIOALIGN		0x00002000U	/* Want/got direct I/O alignment info */
+>   
+>   #define STATX__RESERVED		0x80000000U	/* Reserved for future struct statx expansion */
+>   
 
 
 _______________________________________________
