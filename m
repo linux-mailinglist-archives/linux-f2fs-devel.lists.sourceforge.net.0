@@ -2,69 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BF7A55079F
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 19 Jun 2022 02:11:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1EB25507AA
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 19 Jun 2022 02:21:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o2iWu-0004hd-Q0; Sun, 19 Jun 2022 00:11:05 +0000
+	id 1o2igm-00079e-KR; Sun, 19 Jun 2022 00:21:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1o2iWt-0004hW-3S
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 Jun 2022 00:11:03 +0000
+ (envelope-from <chao@kernel.org>) id 1o2igl-00079Y-Lw
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 Jun 2022 00:21:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3RFnMWfU7UvFmdpe1lIg3TslueidBV9FP28xLQ36xbg=; b=NJYOdf0Tjp+M3v820K6Y37arK0
- +DM8myv7iQHfMWgZHaYsVote48ZDW0pwDEeq0QUzCzlrmltXAsd4fL78hkbdO6/Ofgq6cDrXvcp5s
- 3mgNAIGHDL+UV9zCvqqfuPxlv4ei/uEW6a9w4acbvYtUOq/kDZmEdy+akZWo4MlwgJnY=;
+ bh=h7BbjoMMGvIqkHcYsuwF8s0lnu5U/ZdWplHMYrTmhtY=; b=X/6UMyBWna8o0oe6IYMf5Zo57n
+ 4SoEUnMjoISvnntO96vgyMr/OD53dNwp15HKVaeNYywqhlZkqjeR4K+rXTJZKLXfj1vuVG/y8arIk
+ a1Np991Mc73mUN7+a6mR3XINJsbsN5gBM2YHlcG47gf0hrnhM7qh10ZnPaYvbg1rDhsM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3RFnMWfU7UvFmdpe1lIg3TslueidBV9FP28xLQ36xbg=; b=D6BbMCaxh6Q+P/MCFnp5HKcYdi
- LBQY6Q4O+1bdUkw8IXQWVhojszKYbwwqCCkTQ3M/bcCoC96ZQVuPGbDI8ABClSZmXtXN7MXhy/Ntk
- XkGJknVMdcDLoieQ53PMJHIt3iu9xrdOFC0BPfV9R5xV5hZgdVb0WvQrLdMq+1PnC23I=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=h7BbjoMMGvIqkHcYsuwF8s0lnu5U/ZdWplHMYrTmhtY=; b=NXG6QftNuIDxzB0HJFD27YFoqC
+ V6gQ1zFwTZ+m3IXCCIoZngjUq2uaLPY/Gjuvh7IUMIlVSuoaiky+FO93MP+E0xTEavPmduZfftTYD
+ 6oU6xHyUxaJIQ5a6YAwpx/aKLq04N5xFsn03xubAmt61wS8WBebMMcT6FiCT+aQaOhRw=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o2iWr-000359-4x
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 Jun 2022 00:11:03 +0000
+ id 1o2igf-0003kl-5g
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 19 Jun 2022 00:21:14 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 2C51AB80108;
- Sun, 19 Jun 2022 00:10:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA1FAC3411A;
- Sun, 19 Jun 2022 00:10:53 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 52EFB60DEB
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 19 Jun 2022 00:21:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36E92C3411A;
+ Sun, 19 Jun 2022 00:20:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1655597454;
- bh=pJavzBOpBup2L2XFujyF+W4cOF5r98O8lnH39scpEWM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=PyhtF9Wwm/fzM9VqL4TSKYSYMr/ZpGzFqS8u1mazEehsHuuuOTISzzWLBeXibwTrd
- cMv2p9TdV7k5UUOnxyBnhfVzMuX0UuERo/UrTaPJ9mpGd0Er+KDeMeEpdRTzrU7WI1
- 6X5qFY5P0dULAPEnlBU+kBtsu6DV+Lu0/zYaqN97GiNL5dzaelMLTW0MY8NW8CwWH1
- yLrP+R+0sCQAHLAME/C/E1OxBj33bdL5gcNyp5UACwWxoLkqctZ6xozqgO0r1M/7R3
- WXdM+Ait16ErrahcTmz3+jrEbrdNeVRTRXtI1FTDItaR3kcx9AxYUfLp2zHJPorAbi
- DSiStkGAIsYuw==
-Message-ID: <f3fd41e1-ea76-a7d7-4890-ff66ea87b7ab@kernel.org>
-Date: Sun, 19 Jun 2022 08:10:52 +0800
+ s=k20201202; t=1655598059;
+ bh=09d9MnSyiwLCv++b2rqR06abAhRiHJhBnmH9L7iGKpA=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=u/R5pG6SSNEqLBRU796YUyI7IizLhntu5RIUIfzhsxWyAX6LTy44ex23Vg17crKaz
+ YZwzxKzUhaQOs4AMc587w+tGEG228OVt7tR97XhiyrpoFlb78P2dcvkaSv5czEo31s
+ g+exwN5SjXrSCcuLwUJMZfAASmw0k4RLtpp9feF28dPapd+hZ1AQm2v9twlC73bjWn
+ 88MXfW7kCAojHDJBqlcFAcacqvDb23JkDraWuxRWl4twOzOgozc+nOrzrvgRzIPnvA
+ 62w4O5FGrkmUq4EySOy0EkwwGGDwkGXtmBh2qifumDpo2Gyu/RSKul6MQ3C0wtGff3
+ 3vU2QtiFiiOuQ==
+Message-ID: <ac716cd2-03f0-f9e3-4ff5-95cc8e5333da@kernel.org>
+Date: Sun, 19 Jun 2022 08:20:58 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.10.0
 Content-Language: en-US
-To: qixiaoyu1 <qxy65535@gmail.com>, jaegeuk@kernel.org
-References: <20220614114929.6897-1-qixiaoyu1@xiaomi.com>
- <20220614114929.6897-2-qixiaoyu1@xiaomi.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+References: <20220615165610.1074259-1-jaegeuk@kernel.org>
+ <20220615165610.1074259-2-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220614114929.6897-2-qixiaoyu1@xiaomi.com>
+In-Reply-To: <20220615165610.1074259-2-jaegeuk@kernel.org>
 X-Spam-Score: -7.6 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,15 +73,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/6/14 19:49, qixiaoyu1 wrote: > Otherwise, after grow,
- kernel may report below error message > when we mount the image if -o
- parameter
- is specified during resize: > > F2FS-fs (loop0): invalid c [...] 
+ Content preview:  On 2022/6/16 0:56,
+ Jaegeuk Kim wrote: > Signed-off-by: Jaegeuk
+ Kim <jaegeuk@kernel.org> > --- > tools/f2fs_io/f2fs_io.c | 5 ++++- > 1 file
+ changed, 4 insertions(+), 1 deletion(-) > > diff --git a/tool [...] 
  Content analysis details:   (-7.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -92,9 +93,8 @@ X-Spam-Report: Spam detection software,
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -1.8 NICE_REPLY_A           Looks like a legit reply (A)
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1o2iWr-000359-4x
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs-tools: fix to check free space
- before grow
+X-Headers-End: 1o2igf-0003kl-5g
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs_io: add dsync option for write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,102 +106,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: qixiaoyu1 <qixiaoyu1@xiaomi.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/6/14 19:49, qixiaoyu1 wrote:
-> Otherwise, after grow, kernel may report below error message
-> when we mount the image if -o parameter is specified during resize:
+On 2022/6/16 0:56, Jaegeuk Kim wrote:
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>   tools/f2fs_io/f2fs_io.c | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
 > 
-> F2FS-fs (loop0): invalid crc_offset: 0
-> F2FS-fs (loop0): Wrong valid_user_blocks: 16404, user_block_count: 13312
-> F2FS-fs (loop0): Failed to get valid F2FS checkpoint
-> mount(2) system call failed: Structure needs cleaning.
-> 
-> Signed-off-by: qixiaoyu1 <qixiaoyu1@xiaomi.com>
+> diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+> index 2f0fc7b25d41..e7359836b126 100644
+> --- a/tools/f2fs_io/f2fs_io.c
+> +++ b/tools/f2fs_io/f2fs_io.c
+> @@ -508,7 +508,8 @@ static void do_erase(int argc, char **argv, const struct cmd_desc *cmd)
+>   "  rand          : random numbers\n"			\
+>   "IO can be\n"						\
+>   "  buffered      : buffered IO\n"			\
+> -"  dio           : direct IO\n"				\
+> +"  dio           : O_DIRECT\n"				\
+> +"  dsync         : O_DIRECT | O_DSYNC\n"		\
 
-It looks this patch should be merged into previous one, otherwise
--o option support is broken for resize.f2fs.
+Should update manual as well.
 
 Thanks,
 
-> ---
->   fsck/resize.c | 36 ++++++++++++++++++++++++------------
->   1 file changed, 24 insertions(+), 12 deletions(-)
-> 
-> diff --git a/fsck/resize.c b/fsck/resize.c
-> index d19c6fa..e135b66 100644
-> --- a/fsck/resize.c
-> +++ b/fsck/resize.c
-> @@ -599,6 +599,26 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
->   	DBG(0, "Info: Done to rebuild checkpoint blocks\n");
->   }
+>   "  osync         : O_SYNC\n"				\
+>   "  atomic_commit : atomic write & commit\n"		\
+>   "  atomic_abort  : atomic write & abort\n"		\
+> @@ -552,6 +553,8 @@ static void do_write(int argc, char **argv, const struct cmd_desc *cmd)
 >   
-> +static int f2fs_resize_check(struct f2fs_sb_info *sbi, struct f2fs_super_block *new_sb)
-> +{
-> +	struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
-> +	block_t user_block_count;
-> +	unsigned int overprov_segment_count;
-> +
-> +	overprov_segment_count = (get_newsb(segment_count_main) -
-> +			c.new_reserved_segments) *
-> +			c.new_overprovision / 100;
-> +	overprov_segment_count += c.new_reserved_segments;
-> +
-> +	user_block_count = (get_newsb(segment_count_main) -
-> +			overprov_segment_count) * c.blks_per_seg;
-> +
-> +	if (get_cp(valid_block_count) > user_block_count)
-> +		return -1;
-> +
-> +	return 0;
-> +}
-> +
->   static int f2fs_resize_grow(struct f2fs_sb_info *sbi)
->   {
->   	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
-> @@ -616,6 +636,9 @@ static int f2fs_resize_grow(struct f2fs_sb_info *sbi)
->   	if (get_new_sb(new_sb))
->   		return -1;
->   
-> +	if (f2fs_resize_check(sbi, new_sb) < 0)
-> +		return -1;
-> +
->   	/* check nat availability */
->   	if (get_sb(segment_count_nat) > get_newsb(segment_count_nat)) {
->   		err = shrink_nats(sbi, new_sb);
-> @@ -659,11 +682,8 @@ static int f2fs_resize_shrink(struct f2fs_sb_info *sbi)
->   	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
->   	struct f2fs_super_block new_sb_raw;
->   	struct f2fs_super_block *new_sb = &new_sb_raw;
-> -	struct f2fs_checkpoint *cp = F2FS_CKPT(sbi);
->   	block_t old_end_blkaddr, old_main_blkaddr;
->   	block_t new_end_blkaddr, new_main_blkaddr, tmp_end_blkaddr;
-> -	block_t user_block_count;
-> -	unsigned int overprov_segment_count;
->   	unsigned int offset;
->   	int err = -1;
->   
-> @@ -674,15 +694,7 @@ static int f2fs_resize_shrink(struct f2fs_sb_info *sbi)
->   	if (get_new_sb(new_sb))
->   		return -1;
->   
-> -	overprov_segment_count = (get_newsb(segment_count_main) -
-> -			c.new_reserved_segments) *
-> -			c.new_overprovision / 100;
-> -	overprov_segment_count += c.new_reserved_segments;
-> -
-> -	user_block_count = (get_newsb(segment_count_main) -
-> -			overprov_segment_count) * c.blks_per_seg;
-> -
-> -	if (get_cp(valid_block_count) > user_block_count)
-> +	if (f2fs_resize_check(sbi, new_sb) < 0)
->   		return -1;
->   
->   	/* check nat availability */
+>   	if (!strcmp(argv[5], "dio"))
+>   		flags |= O_DIRECT;
+> +	else if (!strcmp(argv[5], "dsync"))
+> +		flags |= O_DIRECT | O_DSYNC;
+>   	else if (!strcmp(argv[5], "osync"))
+>   		flags |= O_SYNC;
+>   	else if (!strcmp(argv[5], "atomic_commit"))
 
 
 _______________________________________________
