@@ -2,81 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89F95552B45
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Jun 2022 08:46:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4606552B57
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Jun 2022 08:56:00 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o3Xer-00019M-2T; Tue, 21 Jun 2022 06:46:41 +0000
+	id 1o3Xnn-0001MK-6R; Tue, 21 Jun 2022 06:55:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chaoliu719@gmail.com>) id 1o3Xeo-00019F-IR
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Jun 2022 06:46:39 +0000
+ (envelope-from <chaoliu719@gmail.com>) id 1o3Xnm-0001ME-7r
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Jun 2022 06:55:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JI5187A/roVo6JAbOBFXjnebVpVgrehVAoIVRGh0e44=; b=ClvWw4HsM1PsIGe7dWBL3aju7U
- z5PieQNMbSLtWVY49IhbnYYZU4KgCw2blTBRkqoQpwbUtPIbzA5luT1V8mO+aJJIKvQsAytKqdpk5
- heUDOKo29tG9p5ZtWsLEk/yIQwt35hnVRD3xgjMYd7n2Y2meP8Pht9OomiQwpj55h2Yo=;
+ bh=lrtTaXmDH4j2G9DmDgYy3Hx6WoOoJlaM6bssxvYmN/s=; b=eXqEwG+ugZfl4bRPi5X6ifslNb
+ QOjb9U/3/lcBOlcVtxBgWTLaBrhe93L/aNPv5M485qcNEgHjc96YXHRrqQz/Am3TgOFisXIcGsEsZ
+ B7hf7+LDhhGujNiJLvdm45gXYJ06eYJXeKBCFqKHkviLDXJrKs0kqQZAlCkF+WIwbEXc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=JI5187A/roVo6JAbOBFXjnebVpVgrehVAoIVRGh0e44=; b=R
- XOYeVRk/pM27oc4UkjA5UtLRiewnMde5kkC/9eJB1ZilpRy3Y0xbyfN7O/Jou41YwmmmA0muYYAKm
- AkKA1dJTPRouXOYf5KhIncb6G+aJM3VlO0r7GRmGAlZnPwLybJ10JJxgl9FW7loNBYKcpbTpYs4Ou
- jMw2UmxkdHCGxodA=;
-Received: from mail-pg1-f172.google.com ([209.85.215.172])
+ List-Owner:List-Archive; bh=lrtTaXmDH4j2G9DmDgYy3Hx6WoOoJlaM6bssxvYmN/s=; b=k
+ +5fcd0tgb/PG7i+cRIvhytjfvxvJPyntjAr0qcT9+74GMdUl/SVCVsBKkdbSMee5AhtvnR8Iz+x8n
+ +mWdYlyfdWvnJVbmUQYmaxXqAX94xwp2UsPa8J/CWykhP7ZLM6jIhLL2Gr2bDn2hxpSMcE4mb/kZT
+ BJcvCziieEJUlJpE=;
+Received: from mail-pl1-f176.google.com ([209.85.214.176])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1o3Xeo-0095nz-MQ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Jun 2022 06:46:39 +0000
-Received: by mail-pg1-f172.google.com with SMTP id 184so12236407pga.12
+ id 1o3Xni-00966H-OO
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 21 Jun 2022 06:55:54 +0000
+Received: by mail-pl1-f176.google.com with SMTP id i15so11707674plr.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 20 Jun 2022 23:46:38 -0700 (PDT)
+ Mon, 20 Jun 2022 23:55:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=JI5187A/roVo6JAbOBFXjnebVpVgrehVAoIVRGh0e44=;
- b=FrXBiLnBfk7eFPJKW6Gs5IKtpFdUBAPc6uwr6+eSP2SzABCpb7yrfxCn5YRntMh9Kg
- VfQEb4+xfRce7XuCdKObakYlW9+58/BWhmZEJiaXm/YmvOyhWBCcimbvtzn7ywmmbxBd
- ILgZg1pgFC/WEKM154UsesXVjDBOfvtpZbfdio7UlTYbrchMMh5+nJEkP1WnsXbsrTC/
- SubEcYEBYrTVLvtxUD68hcJeDY7xcvzCZrwng2nBwF2cfzKpyRVACqDaufI3Xd+4v1Ix
- JepineKyh+NyAmKYnxZjL4TWGK7keAwOypf/JfNGGhy1JYSrbS3g8UbvB0GwONwdFBYM
- NjgA==
+ bh=lrtTaXmDH4j2G9DmDgYy3Hx6WoOoJlaM6bssxvYmN/s=;
+ b=U/6RCn5/rnlCWPEvZmw/CvlDBd7e7AuS8iDEETwq+hrEH+sdjwYLrsXxea6i48NMrs
+ Us2vRiB6BQRD8MOtGP7RS1KLIB0GU00JbD87+Fsk0BkmrLxxQE2R+0IGo6HfLaVl+15w
+ W7ol69OS3VwQEgHJMGDwVjZQRkVm0tr6EuTz/OKifAyh1KsRlHB5EOEZ0GEz8LnAvNws
+ u2fDrLpN2sOA/dvHcR7+7241kVt3vpHpYnIGGxKY3rJrpYM7iVwImg6BZfwrAxtSnM9m
+ YBqRn5/b8rdrdidYVsr2xvfc/2grb8CTwV39h0O3LDATqjVDB6UMoNNWTgVTSM1Pc48v
+ 5Zpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=JI5187A/roVo6JAbOBFXjnebVpVgrehVAoIVRGh0e44=;
- b=aSTE17lo2LyxPkxMAVAwJLP0ZMtIzi5rhA+aWGN82D4GVFFWFgDeGhyeIbSWC4Su0N
- HwbQbe1sX23il2W+nNaQexsKtbpPeY3M/Z4HWcXfKpe2s7QN00FrLuooeG8v5TGHcFgY
- 3Zsv2lnmslLfTaKGJk3mL1AsL3SaJ4ZKnD422EQdSsNX+JkO7++GWCz+A48kZomMe/ie
- o3Gu1uTe3Btl5HEBFNjNEBrDwZ2pcHFgUvi28r3T7+YMI2B6Vp0lEZi00m1acqg5DwPW
- b1naa+ClkMbP/4KzmzDRB+bmcSNcq1yhH9ceMdoTlK41o8/Vps75FKJX7tBrQwMRiAGt
- pmQA==
-X-Gm-Message-State: AJIora9xWZiWwLGxn7HayQdFf3IGlQJSE6WGKC4Kn4RkkBWYDL7n/xIY
- pEp/trztjXFdSKhFalciJLk=
-X-Google-Smtp-Source: AGRyM1sWxhn1YJDFuMUpYnrb9WUa5XI5GyMrWbeFjTWiF4Ic/BDExoj4a5wCCu0/L6ZPm9rIbGYNMQ==
-X-Received: by 2002:a05:6a00:410a:b0:51e:6fc6:e4da with SMTP id
- bu10-20020a056a00410a00b0051e6fc6e4damr28721999pfb.84.1655793993060; 
- Mon, 20 Jun 2022 23:46:33 -0700 (PDT)
+ bh=lrtTaXmDH4j2G9DmDgYy3Hx6WoOoJlaM6bssxvYmN/s=;
+ b=xHy2VbKBWfDJ4JVKEzd+QGjvftIL5b9MHhrrIjJAePCIiqWdtqIFaNFZ3n8lnBwZ81
+ jEXsApbelcpUzM19sv+6RasmfJKVcq2xS7Ys2mvBC2BRE2xmjPFsgOxWk5wzfRh0Xzz0
+ jghWQop0J+Nc4kX2H6X5mbsUlD0ikfIllOdBYernICQYL1XE5Skv4quJBA8HGHC+2VIt
+ /OVgOiD2f5v0/Y4YpJyEzxwA7qakLSj0uT+vSvMbEkfL5HVfJ7hfvph2kQ5Ln5TBWO42
+ J+CBQP0BzcD/EwO5B15RsNB4W8ktX4/aX17kPVxXzpno+vqOo9xk5eIn9BErQGvDH4S6
+ semw==
+X-Gm-Message-State: AJIora9Tw3IPywBfw13jztnY42rA9D6ieQo0oglW5QwNyArhYXlHZx5o
+ u8OKsNZwnD3TJVTmJZJAh2k=
+X-Google-Smtp-Source: AGRyM1sbObkSlzAr84nXXCiR0sZIUcKAWYxHwt27RpCXoFi8PVJJ46244mVxNRT+sShWIgXpygECKQ==
+X-Received: by 2002:a17:902:d2d0:b0:168:b0b2:f068 with SMTP id
+ n16-20020a170902d2d000b00168b0b2f068mr26766089plc.45.1655794545155; 
+ Mon, 20 Jun 2022 23:55:45 -0700 (PDT)
 Received: from localhost.localdomain ([156.236.96.165])
  by smtp.gmail.com with ESMTPSA id
- d10-20020a170902654a00b0015e8d4eb29csm9709043pln.230.2022.06.20.23.46.28
+ x10-20020a1709028eca00b0016368840c41sm8230471plo.14.2022.06.20.23.55.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jun 2022 23:46:31 -0700 (PDT)
+ Mon, 20 Jun 2022 23:55:43 -0700 (PDT)
 From: Chao Liu <chaoliu719@gmail.com>
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	Chao Yu <chao@kernel.org>
-Date: Tue, 21 Jun 2022 14:42:02 +0800
-Message-Id: <20220621064202.1078536-1-chaoliu719@gmail.com>
+Date: Tue, 21 Jun 2022 14:48:33 +0800
+Message-Id: <20220621064833.1079383-1-chaoliu719@gmail.com>
 X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
@@ -86,9 +86,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chao Liu Files created by truncate have a size but no
- blocks, so they can be allowed to enable compression. Signed-off-by: Chao
- Liu --- fs/f2fs/file.c | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Content preview:  From: Chao Liu If the inode has the compress flag, it will
+ fail to use 'chattr -c +m' to remove its compress flag and tag no compress
+ flag. However, the same command will be successful when executed again, as
+ shown [...] 
  Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -97,7 +98,11 @@ X-Spam-Report: Spam detection software,
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [chaoliu719[at]gmail.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.176 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.214.176 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -105,12 +110,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.215.172 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.215.172 listed in list.dnswl.org]
-X-Headers-End: 1o3Xeo-0095nz-MQ
-Subject: [f2fs-dev] [PATCH] f2fs: allow compression of files without blocks
+X-Headers-End: 1o3Xni-00966H-OO
+Subject: [f2fs-dev] [PATCH] f2fs: fix to remove F2FS_COMPR_FL and tag
+ F2FS_NOCOMP_FL at the same time
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,8 +124,8 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Liu <liuchao@coolpad.com>, Wayne Zhang <zhangwen@coolpad.com>,
- Yue Hu <huyue2@coolpad.com>, linux-kernel@vger.kernel.org,
+Cc: Chao Liu <liuchao@coolpad.com>, linux-kernel@vger.kernel.org,
+ Wayne Zhang <zhangwen@coolpad.com>, Yue Hu <huyue2@coolpad.com>,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -131,30 +133,78 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Liu <liuchao@coolpad.com>
 
-Files created by truncate have a size but no blocks, so
-they can be allowed to enable compression.
+If the inode has the compress flag, it will fail to use
+'chattr -c +m' to remove its compress flag and tag no compress flag.
+However, the same command will be successful when executed again,
+as shown below:
 
+  $ touch foo.txt
+  $ chattr +c foo.txt
+  $ chattr -c +m foo.txt
+  chattr: Invalid argument while setting flags on foo.txt
+  $ chattr -c +m foo.txt
+  $ f2fs_io getflags foo.txt
+  get a flag on foo.txt ret=0, flags=nocompression,inline_data
+
+Fix this by removing some checks in f2fs_setflags_common()
+that do not affect the original logic. I go through all the
+possible scenarios, and the results are as follows. Bold is
+the only thing that has changed.
+
++---------------+-----------+-----------+----------+
+|               |            file flags            |
++ command       +-----------+-----------+----------+
+|               | no flag   | compr     | nocompr  |
++---------------+-----------+-----------+----------+
+| chattr +c     | compr     | compr     | -EINVAL  |
+| chattr -c     | no flag   | no flag   | nocompr  |
+| chattr +m     | nocompr   | -EINVAL   | nocompr  |
+| chattr -m     | no flag   | compr     | no flag  |
+| chattr +c +m  | -EINVAL   | -EINVAL   | -EINVAL  |
+| chattr +c -m  | compr     | compr     | compr    |
+| chattr -c +m  | nocompr   | *nocompr* | nocompr  |
+| chattr -c -m  | no flag   | no flag   | no flag  |
++---------------+-----------+-----------+----------+
+
+Fixes: 4c8ff7095bef ("f2fs: support data compression")
 Signed-off-by: Chao Liu <liuchao@coolpad.com>
 ---
- fs/f2fs/file.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+
+This patch depends on the the patch
+"f2fs: allow compression of files without blocks" sent earlier this day.
+
+ fs/f2fs/file.c | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 2d1114b0ceef..daaa0dfd2d2e 100644
+index daaa0dfd2d2e..0c3ae5993b7a 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -1879,7 +1879,7 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
- 		if (iflags & F2FS_COMPR_FL) {
+@@ -1873,10 +1873,7 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+ 		if (masked_flags & F2FS_COMPR_FL) {
+ 			if (!f2fs_disable_compressed_file(inode))
+ 				return -EINVAL;
+-		}
+-		if (iflags & F2FS_NOCOMP_FL)
+-			return -EINVAL;
+-		if (iflags & F2FS_COMPR_FL) {
++		} else {
  			if (!f2fs_may_compress(inode))
  				return -EINVAL;
--			if (S_ISREG(inode->i_mode) && inode->i_size)
-+			if (S_ISREG(inode->i_mode) && F2FS_HAS_BLOCKS(inode))
- 				return -EINVAL;
- 
+ 			if (S_ISREG(inode->i_mode) && F2FS_HAS_BLOCKS(inode))
+@@ -1885,10 +1882,6 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
  			set_compress_context(inode);
--- 
-2.36.1
+ 		}
+ 	}
+-	if ((iflags ^ masked_flags) & F2FS_NOCOMP_FL) {
+-		if (masked_flags & F2FS_COMPR_FL)
+-			return -EINVAL;
+-	}
 
+ 	fi->i_flags = iflags | (fi->i_flags & ~mask);
+ 	f2fs_bug_on(F2FS_I_SB(inode), (fi->i_flags & F2FS_COMPR_FL) &&
+--
+2.36.1
 
 
 _______________________________________________
