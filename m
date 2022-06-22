@@ -2,86 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BC435543BB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Jun 2022 10:03:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72C3B554A54
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Jun 2022 14:50:56 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o3vKC-00046A-IY; Wed, 22 Jun 2022 08:02:55 +0000
+	id 1o3zon-0003jH-1N; Wed, 22 Jun 2022 12:50:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1o3vKB-000464-KX
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Jun 2022 08:02:54 +0000
+ (envelope-from <chao@kernel.org>) id 1o3zom-0003jB-7S
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Jun 2022 12:50:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=d5Q20aS5c53nkW6taVs9l41cwTh7YMr7Fd/EO0mlgRg=; b=ZSiL8mRd1qFW9ozp3EH3poA7g6
- vsBoM+XWMOcnF5PtZCnJ0qgzHP0xwW94ndYH/DVEhuKuE9hsaWzwA3VK3Cds7WTkA7pnF/esC66nt
- TdL1zUW5U45J1qeegdrqklE7zcPSE9yGjDYvkLhyKsLsA6cMIWCQC6v2CnwjlgDKubtA=;
+ bh=nKjfZVkv31vlj8fjRLrdB6+HAMmb2SOZLqRnnAudKuY=; b=PObd/WHsShkvy6F1dMcTK15n7l
+ 65GCOw7PZzaQ9v6qjJSkvOixXRbbFWNgojG+vNELCX4Ew1ZVzmgk5V8FgFhr5xym4G0VHHvmMxeRH
+ yOoYAyVbrhAfIak11QnzEN5INz+n1r8tBsxJEilHOQ4WEkLQ6jbCAemP/g1GvsgK5AfU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
- Subject:To:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=d5Q20aS5c53nkW6taVs9l41cwTh7YMr7Fd/EO0mlgRg=; b=N
- v0Q6UnQ/vkHNX2wuTNeOOPfAV+P/ujUlAU+HpdIvr4BGSlWBVJb6YNAQE83tT5AQTECHP0PCwtL54
- DPZ2ZxioMu7wgITyhXHEjiL/ZeS4dsD4MoiiJ3vDzZlKwRiGxX6XctDZozikjNkEl+3vYKMuxDcI7
- jN4QaDQvTLtuUKRw=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=nKjfZVkv31vlj8fjRLrdB6+HAMmb2SOZLqRnnAudKuY=; b=PzRq9xfADwTO6ZbOz0xg8oxIpx
+ Mi0lmsWUPt3gG7HbyR8PHiSDvYIUd7cYZ+Zv6ocWDJ23WE7JkeK2++h7MQFZGGFMFdclp7jbbyqd2
+ seKy2zLTcZGg68FRZQqTWiqSPSj9nMZbdlcMNm7z72RrHfJLZecXJmHIiHCacagPFXLM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o3vK6-00A7XH-0V
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Jun 2022 08:02:54 +0000
+ id 1o3zok-0001Gv-Aj
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Jun 2022 12:50:46 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id D122261705
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 22 Jun 2022 08:02:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4499FC34114
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 22 Jun 2022 08:02:39 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 85464619C2;
+ Wed, 22 Jun 2022 12:50:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70E54C34114;
+ Wed, 22 Jun 2022 12:50:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1655884959;
- bh=MxFCkSvFnRp4EvenLTZOHpp8fnufY3grP7701COduPg=;
- h=From:To:Subject:Date:From;
- b=Mtwbgn8LLZH71DEfYTu5B+lVcve9wahQbUsQgjb2UPwdmoY3HYZNg69umYFe0md86
- hwNycCyeMo2LemlmT8mXSBpnsFDB0OkOqAEbxqbJ2v5vFYfZzjzT8kj8coTiQKbIey
- PejFMhMvSuKVh2/FomNm8RR6O/L4ixHTUTyXfxrTWZmQ3Kga0WGQtyEBGu1Tkq5ZUT
- AhFUJ66Ju50XCiCkD/PDXDjovtx4OY1qpvtnrY8IArceL/1tcCM6s3tO/iR9HobjPj
- me53jL3K5WAggxbSIKVPV2lu5aPqwgKllTWdp1XaOPsygPzbc7Kfm0wXYXm4Nc2DgD
- ULqlooJsTHKiA==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 21767C05FD2; Wed, 22 Jun 2022 08:02:39 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 22 Jun 2022 08:02:38 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: new
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: ghtm2@protonmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version
- cf_kernel_version rep_platform op_sys cf_tree bug_status bug_severity
- priority component assigned_to reporter cf_regression
-Message-ID: <bug-216162-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1655902238;
+ bh=LXxV2XdWo9ODoRTaLbjoba11bZZU9SlnRfAgm8n7JzY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=fLZ3mqtYAJa53yiCfNTiRj1aEhHPpsRxRTyyUS3j7nvWZTQETvpeH+NcsscuD0ZSF
+ ZBRmPM252tNBMwjpni8AgN8bi0TmY2KfS62hwVOA47xp6kcqeGSd/uW2LXl/Gdgx9n
+ b+n22ovai8cT4CUN1I3AHrgRojLQ/YZjXPP11+PLypEko5iOv9/1Ti2WiWsidNiJun
+ UevxTFy3LRLL5Av02OEz+N/NQwqBAU/LjUp3Iz4Z86zaTYU4ewURivE4YiL9Oz7BNs
+ Nj7JuCKAfXj+arqj2uEMsPvoAy8j5NP/912yVnaBE3Qnd6aXtHRXP4npLQN2TxyMpq
+ V1qAxU+/OaGPg==
+Message-ID: <7fb689d9-11ba-a173-8ad4-a328a03298a8@kernel.org>
+Date: Wed, 22 Jun 2022 20:50:33 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Content-Language: en-US
+To: Chao Liu <chaoliu719@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20220621064202.1078536-1-chaoliu719@gmail.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20220621064202.1078536-1-chaoliu719@gmail.com>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -89,15 +71,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=216162 Bug ID:
- 216162 Summary: F2FS filesystem with compression broken after kernel version
- 5.18.1 Product: File System Version: 2.5 Kernel Version: 5.18.3+ Hardware:
- All OS: Linux Tree: Mainline Status: NE [...] 
+ Content preview:  On 2022/6/21 14:42,
+ Chao Liu wrote: > From: Chao Liu <liuchao@coolpad.com>
+ > > Files created by truncate have a size but no blocks, so I didn't get
+ it, how can we create file by truncation... Thanks, 
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -106,11 +86,15 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1o3vK6-00A7XH-0V
-Subject: [f2fs-dev] [Bug 216162] New: F2FS filesystem with compression
- broken after kernel version 5.18.1
+X-Headers-End: 1o3zok-0001Gv-Aj
+Subject: Re: [f2fs-dev] [PATCH] f2fs: allow compression of files without
+ blocks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,51 +106,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
+Cc: Chao Liu <liuchao@coolpad.com>, Wayne Zhang <zhangwen@coolpad.com>,
+ Yue Hu <huyue2@coolpad.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216162
+On 2022/6/21 14:42, Chao Liu wrote:
+> From: Chao Liu <liuchao@coolpad.com>
+> 
+> Files created by truncate have a size but no blocks, so
 
-            Bug ID: 216162
-           Summary: F2FS filesystem with compression broken after kernel
-                    version 5.18.1
-           Product: File System
-           Version: 2.5
-    Kernel Version: 5.18.3+
-          Hardware: All
-                OS: Linux
-              Tree: Mainline
-            Status: NEW
-          Severity: high
-          Priority: P1
-         Component: f2fs
-          Assignee: filesystem_f2fs@kernel-bugs.kernel.org
-          Reporter: ghtm2@protonmail.com
-        Regression: No
+I didn't get it, how can we create file by truncation...
 
-I've been unable to boot two of my systems after upgrading past kernel version
-5.18.1.
-Both of them are using F2FS with compression enabled.
+Thanks,
 
-This was the command used to create them back on 5.13.6:
-mkfs.f2fs -l root -O extra_attr,inode_checksum,sb_checksum,compression
-/dev/sda3
+> they can be allowed to enable compression.
+> 
+> Signed-off-by: Chao Liu <liuchao@coolpad.com>
+> ---
+>   fs/f2fs/file.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 2d1114b0ceef..daaa0dfd2d2e 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -1879,7 +1879,7 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+>   		if (iflags & F2FS_COMPR_FL) {
+>   			if (!f2fs_may_compress(inode))
+>   				return -EINVAL;
+> -			if (S_ISREG(inode->i_mode) && inode->i_size)
+> +			if (S_ISREG(inode->i_mode) && F2FS_HAS_BLOCKS(inode))
+>   				return -EINVAL;
+>   
+>   			set_compress_context(inode);
 
-The command used to mount:
-mount -o compress_algorithm=lz4,compress_chksum,atgc,gc_merge,noatime /dev/sda3
-/mnt
-
-A simple 
-ls /mnt/usr/bin will report "Structure needs cleaning" on almost all of the
-critical system files on kernels past 5.18.1.
-Downgrading to 5.18.1 fixes everything.
-
--- 
-You may reply to this email to add a comment.
-
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
