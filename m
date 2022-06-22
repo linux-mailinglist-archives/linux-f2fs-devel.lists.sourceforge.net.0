@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE3995551D5
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Jun 2022 18:58:41 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id A53E055534B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Jun 2022 20:31:44 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o43gY-0004pZ-7b; Wed, 22 Jun 2022 16:58:35 +0000
+	id 1o458e-00070O-20; Wed, 22 Jun 2022 18:31:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1o43gW-0004pT-V3
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Jun 2022 16:58:33 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1o458d-00070I-63
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Jun 2022 18:31:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pLyj4FHkOYdCTm0RLUnb49P5W2d0CbZlblIjkf6bk2A=; b=G0JwfFgyEHXjlq9PC4Yn4bmhCo
- L9eHCNobexxsAzNwS590LFbEa8fi16uZQKcj2izn6xiCqNE4KuZ5pkO1wOh07pWOOmn29YKGslvyQ
- iTqfh7mUrKzu4MVhNIFufLfD4sthZU1JaNtVmdMSh5ZWf77ctAYxwTlzlXsMwZO8moUE=;
+ bh=K+DDqttH4uFS5faWWoIWzWTJvGH1bxqk3YSBsilO3cA=; b=EqKmR7weVmXZz81lzhx2oZ7AMX
+ 2p55LGIencEQNI+tp7fr2vWIXJvJ31RP9+n3CsDMuRByzbuvVMhuLN/H4ruAf30tWOLNKVD3jDq+d
+ 5NpGG9+dmwgijYlAzs5F/x+0J1MSGhh6lEB4c4WPMspxo0qcuJRP2Do6lUvD573b+8a0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,44 +29,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pLyj4FHkOYdCTm0RLUnb49P5W2d0CbZlblIjkf6bk2A=; b=Xfqfzn4daamMhUpjKg6YLnkNBh
- dGmGvTyg4vuvwkNs8D/uhoGTpCtQORjot3ZePcfLw681Qm5ZGF1I9S2ttuNTn9hZSTSgsY2K1M+Au
- xc2w2bNpYuaL4PLB//JsT5d4ogDaKJXhMmuGbbUXKHd7mPbfYFgtH7Ff8zwpVNpL+2ik=;
+ bh=K+DDqttH4uFS5faWWoIWzWTJvGH1bxqk3YSBsilO3cA=; b=YEA2XKhODWFAM6FMr0vz/RVhNT
+ OFvyRMyYQpcUTi38G/uDSiogeTnREzo9qD3RHvAQwJ3YtDwydN7YMdaeNVEFYSBbvtrsmDUKpVJx3
+ LKzKKHBHjgb/xnDU7neBEfTS0jF7g5Il/wGYD32LyijZKDpBFFkeHi5tPcaRcHBofNag=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o43gW-0003Iz-5S
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Jun 2022 16:58:33 +0000
+ id 1o458c-0007BS-Dc
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Jun 2022 18:31:38 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C6929619FC
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 22 Jun 2022 16:58:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19408C34114;
- Wed, 22 Jun 2022 16:58:26 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id A1D0961CD5;
+ Wed, 22 Jun 2022 18:31:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8979C3411D;
+ Wed, 22 Jun 2022 18:31:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1655917106;
- bh=jllQadT4DvrMRtLBTBYBV6S5D+eDKQDPfqSBRBCDFNA=;
+ s=k20201202; t=1655922684;
+ bh=pzH6hj8j/kFXqthSTB8eJImhhYfeX2wo3uou69fArlQ=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=L1ISw55PclMBZPb6nTpyfWY6V110GgKc+EMpt7XWMIfYo6Fd0mXHqhTfA77igZvoF
- fo80oHxO5aQIxqEbznF/FuWRwhnx9lVbq9FKBdWwK8ysvnLzCpN9MxerSlT+3rTakq
- y9U4y56KYzMhf03XoT98uCh1gMx1kqzyRXo/Hzew45H+M9Yquvth1wTGGoqgnMv6/n
- vrGehsiVq53cLtIFEmdh3NrHN+kE+H6Vsvc+cKtZ0s9IzonqzWdLft2fKc5330TKmn
- tS6d/vdRB+wDr9OnnrNmts09Q9/B6o7X3aVP6+zrRyVfQWorsLndR7hrarRjsrbG4G
- PZB5Vk6PH1rJg==
-Date: Wed, 22 Jun 2022 09:58:24 -0700
+ b=Rv6ljAbirYNV2k94rRc26evmnqJIAnJNJoycxA2L5Zlo6narzRjbeOpTv7A/X6xtm
+ 2uFz59QZjmIouAN8kTlT5RfGOJPj5fQc7W+ex6kezvH47KK0x1VCCUuxONAe1oX0TL
+ n/VRBNrevI6g0knfHIHWLJG85wKFjpYNs03TEu/r8lNrH+GRb/BJt8UXiQe6OixWiv
+ JHL4eFjKpgDlgyOTge3E6tgbkkS0pcaSQ4jpn9SO1XJCmrS4ibrZ0dBB7Ttm03iXwZ
+ LpZqG5LGlsWQRAKro3Ci9c+Uk0KNeKSJ/vOGW1LqxQ/jaKRHHr0JLl6dsRAppxyZmy
+ 3xsg7mKkNAOdA==
+Date: Wed, 22 Jun 2022 11:31:22 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <YrNKMDAgB1/vtoxi@google.com>
-References: <20220617223106.3517374-1-jaegeuk@kernel.org>
- <20220617223106.3517374-2-jaegeuk@kernel.org>
- <c45a9c8b-c73a-76bc-6725-5d7e48e7a3f2@kernel.org>
- <Yq+kiXPyBsXgdYb2@google.com>
- <27138a10-a6b2-edad-1985-687a95b9039b@kernel.org>
+Message-ID: <YrNf+lVYFrlenL7L@google.com>
+References: <5627a654-d605-6840-a133-e583c804aadd@kernel.org>
+ <20220620115629.9169-1-qixiaoyu1@xiaomi.com>
+ <20220620115629.9169-2-qixiaoyu1@xiaomi.com>
+ <b4861302-a4bc-9022-c1b3-084f16d8ee87@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <27138a10-a6b2-edad-1985-687a95b9039b@kernel.org>
+In-Reply-To: <b4861302-a4bc-9022-c1b3-084f16d8ee87@kernel.org>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -74,9 +72,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 06/22, Chao Yu wrote: > On 2022/6/20 6:34, Jaegeuk Kim
- wrote: > > On 06/19, Chao Yu wrote: > > > On 2022/6/18 6:31, Jaegeuk Kim wrote:
- > > > > When users set GC_URGENT or GC_MID, they expected to d [...] 
+ Content preview:  Thanks, I combined two patches into one. On 06/22, Chao Yu
+ wrote: > On 2022/6/20 19:56, qixiaoyu1 wrote: > > Signed-off-by: qixiaoyu1
+ <qixiaoyu1@xiaomi.com> > > Reviewed-by: Chao Yu <chao@kernel.org> > > Thanks, 
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,9 +90,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1o43gW-0003Iz-5S
-Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs: run GCs synchronously given user
- requests
+X-Headers-End: 1o458c-0007BS-Dc
+Subject: Re: [f2fs-dev] [PATCH v3 2/2] resize.f2fs: update man page for
+ options -i, -s and -V
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,79 +104,21 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: qixiaoyu1 <qixiaoyu1@xiaomi.com>, liuchao12@xiaomi.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+Thanks, I combined two patches into one.
+
 On 06/22, Chao Yu wrote:
-> On 2022/6/20 6:34, Jaegeuk Kim wrote:
-> > On 06/19, Chao Yu wrote:
-> > > On 2022/6/18 6:31, Jaegeuk Kim wrote:
-> > > > When users set GC_URGENT or GC_MID, they expected to do GCs right away.
-> > > > But, there's a condition to bypass it. Let's indicate we need to do now
-> > > > in the thread.
-> > > 
-> > > .should_migrate_blocks is used to force migrating blocks in full
-> > > section, so what is the condition here? GC should not never select
-> > > a full section, right?
-> > 
-> > I think it'll move a full section given .victim_segno is not NULL_SEGNO,
-> > as __get_victim will give a dirty segment all the time. wdyt?
+> On 2022/6/20 19:56, qixiaoyu1 wrote:
+> > Signed-off-by: qixiaoyu1 <qixiaoyu1@xiaomi.com>
 > 
-> However, in gc_thread_fun() victim_segno is NULL_SEGNO all the time.
-
-What do you mean? The gc_thread thread sets NULL_SEGNO, which prevents
-from selecting the full section. But, f2fs_ioc_flush_device will set the
-segno to move, and f2fs_resize_fs calls do_garbage_collect directly.
-
-> 
-> I guess .should_migrate_blocks should only be set to true for
-> F2FS_IOC_FLUSH_DEVICE/F2FS_IOC_RESIZE_FS case? rather than GC_URGENT or GC_MID
-> case? See commit 7dede88659df ("f2fs: fix to allow migrating fully valid segment").
+> Reviewed-by: Chao Yu <chao@kernel.org>
 > 
 > Thanks,
-> 
-> > 
-> > > 
-> > > Thanks,
-> > > 
-> > > > 
-> > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > > > ---
-> > > >    fs/f2fs/gc.c | 8 ++++++--
-> > > >    1 file changed, 6 insertions(+), 2 deletions(-)
-> > > > 
-> > > > diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> > > > index d5fb426e0747..f4aa3c88118b 100644
-> > > > --- a/fs/f2fs/gc.c
-> > > > +++ b/fs/f2fs/gc.c
-> > > > @@ -37,7 +37,6 @@ static int gc_thread_func(void *data)
-> > > >    	unsigned int wait_ms;
-> > > >    	struct f2fs_gc_control gc_control = {
-> > > >    		.victim_segno = NULL_SEGNO,
-> > > > -		.should_migrate_blocks = false,
-> > > >    		.err_gc_skipped = false };
-> > > >    	wait_ms = gc_th->min_sleep_time;
-> > > > @@ -113,7 +112,10 @@ static int gc_thread_func(void *data)
-> > > >    				sbi->gc_mode == GC_URGENT_MID) {
-> > > >    			wait_ms = gc_th->urgent_sleep_time;
-> > > >    			f2fs_down_write(&sbi->gc_lock);
-> > > > +			gc_control.should_migrate_blocks = true;
-> > > >    			goto do_gc;
-> > > > +		} else {
-> > > > +			gc_control.should_migrate_blocks = false;
-> > > >    		}
-> > > >    		if (foreground) {
-> > > > @@ -139,7 +141,9 @@ static int gc_thread_func(void *data)
-> > > >    		if (!foreground)
-> > > >    			stat_inc_bggc_count(sbi->stat_info);
-> > > > -		sync_mode = F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_SYNC;
-> > > > +		sync_mode = F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_SYNC ||
-> > > > +				sbi->gc_mode == GC_URGENT_HIGH ||
-> > > > +				sbi->gc_mode == GC_URGENT_MID;
-> > > >    		/* foreground GC was been triggered via f2fs_balance_fs() */
-> > > >    		if (foreground)
 
 
 _______________________________________________
