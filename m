@@ -2,81 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A788A5554EA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Jun 2022 21:46:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72BD6557169
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Jun 2022 06:24:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o46JL-0007fF-CZ; Wed, 22 Jun 2022 19:46:46 +0000
+	id 1o4EOB-0005A0-QA; Thu, 23 Jun 2022 04:24:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <krisman@collabora.com>) id 1o46JI-0007eq-KX
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Jun 2022 19:46:43 +0000
+ (envelope-from <chaoliu719@gmail.com>) id 1o4EOA-00059u-OG
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 04:24:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8sc8S8PkK+/Ju5LsEdhaA8edgHjm84xmu0GE51ysTcA=; b=B6FA4pWyPwdesHXJV1Fdfgeks9
- r1Pajt3k61hU+bBs9p0DLd2DD7otCYDZ7tZpgc00GpMOnYjSXmKI2BK/+ozmS3JQFfxdeBV6J/s2G
- uE0CuYn3kTZr23NRsNKAL8Y9Rj9rcCV48dubRd62M1b9k2oiX1SdA7H3rgI68Cl6SKFI=;
+ bh=bekEvBrAwf7ehOt0TA5QrhCy5PmAltJgEblnufPH3EM=; b=HkHVi4PJI9TbQQGElZvC/JWctB
+ jXFRf+Kyp3R7nQQJjAduxhzKQm8ilXVKwI3ieWmFt5eCwhKjXkOP6ZAPXNwJ6vhkTx0JEyHWHm9Qb
+ pk5WicAYPO3PuvwXuM6wyBWvCUWPx2cQP7FuPqPNHdXgdAE5i8oavvdu9NyTzPVnTbpc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8sc8S8PkK+/Ju5LsEdhaA8edgHjm84xmu0GE51ysTcA=; b=OblKU71MugLSDnSSe4TP1Qyh8F
- zxyASsFkbCCHiWIvK+IwxI3usymCxSSfIKLJkQIuuP46/fbHuEAs31tbQnSFmilSle9Coa+QGTl3b
- Fwim7i694h0G4FGTt3p0CbRJQXxnx2iFaTfE5udEpE/AlfNG4UXHsWq5gE4UpaXMXTEE=;
-Received: from madras.collabora.co.uk ([46.235.227.172])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o46JG-0001TT-3L
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 22 Jun 2022 19:46:43 +0000
-Received: from localhost (mtl.collabora.ca [66.171.169.34])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: krisman)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id A968766016F3;
- Wed, 22 Jun 2022 20:46:35 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1655927195;
- bh=Vv3wdcVedOUHth4VcuGI5j9l1Soza4otK3K1St9HAZI=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=cJwD5XfdZRyrlv1x0IqrFHAj50wZ302Sm04Dk7g4/XEE4WSNocAZ5F2jd/vr5Jyl6
- jIrlzHq9l7NpPrjnjV3x/GaTT4dLB21s04itOjJKUmVu3SoER9q5dhpsS1nRnfN8lo
- 0uSqdvxY9kgZUyxI8jOj1weEKrfeJCSsRhmsrqbU/eZ+XoIq7fsebgJfCCt1L3vlZ4
- D/LUe5q3Bly0qOG2mHJZDeoQjiulc2Plqie1WUmCLVdytr3IMQBVLYbQAcARluGxzf
- oVqWHIp+sHc1qAlJBbPMEHMr8ikrB2f896mVu4a2ULNu8007wk5T/odqsEDOAYXltr
- MXzF3jB06Sxdg==
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
-To: viro@zeniv.linux.org.uk,
-	tytso@mit.edu,
-	jaegeuk@kernel.org
-Date: Wed, 22 Jun 2022 15:46:03 -0400
-Message-Id: <20220622194603.102655-8-krisman@collabora.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220622194603.102655-1-krisman@collabora.com>
-References: <20220622194603.102655-1-krisman@collabora.com>
+ bh=bekEvBrAwf7ehOt0TA5QrhCy5PmAltJgEblnufPH3EM=; b=hNVMuOc0+y3wZ1ri6bjMn67DZU
+ gZqrlbXtJeHi5IpZRumDUlfJ9VV2DE92+2cZK9d/Kv82kMF+Rm9ZLwl5SPfjmDWTbQxFCuBWp0zf8
+ 7nMyAuecF+RvFaZJs5KYBJidviEwPm/PQGytaF9GgMd0/7z0OEThEnKe34hcCFu72xEA=;
+Received: from mail-pj1-f41.google.com ([209.85.216.41])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1o4EO7-00AqA7-A6
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 04:24:18 +0000
+Received: by mail-pj1-f41.google.com with SMTP id p5so11930354pjt.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 22 Jun 2022 21:24:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=bekEvBrAwf7ehOt0TA5QrhCy5PmAltJgEblnufPH3EM=;
+ b=KdK//VDD6kx3P/ZIaXk4K6S5ZpICov0tsGYyxei43BtZQKnuyDJxSU0cnYIifkHFzx
+ BKXti9irzZRt0NTnpWEneOktfgc8vg/c3JJzUGg7NpkTgfzaJ6bRsm+hcjjCpGvZM217
+ WcZtWX5NY2NHXn57moxaN6df9Vhca/gICgKM6qIuBIsV2Yyb9xLKBo6xywFHxXJD9JsI
+ k3FFGu6LdvBM73ckEccNe8IZazkeuCpi24N5NTCpR88xbY5xGQkcU1D2VQTqYi6jjeMg
+ 7cZHzaShitlKiM/kpo1E0QJeknFfXoBBZd/knDBKCknfmaogY8RCJms/gwAAbKuaVB8r
+ bbeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=bekEvBrAwf7ehOt0TA5QrhCy5PmAltJgEblnufPH3EM=;
+ b=7iTnTUXvJ8tBri8U5RtHXxZHVDYpydRzJuC0cJLmFByxGgHacEjAa6FqQ2LgqndtWZ
+ jHN+hScSIck8S9egUuV7v8xDcH48Fd0I0U/1YuzDUuJdHoDPqBQUE2Hyo5umjyaOCLaS
+ bkCeVpI9sbHoerweQ7HdU3BS39WDLWRTppYy7W15pEr+ydK34gIaj5Z45Z3YyMC5AxIk
+ nUBSNj3C2WNV2Txfexskcw4tZtN1mYjb6gMBtaSjEarrXRcMPKppJBFhiyBtqer+c84J
+ 6zHZnNNY2L8ZSOsUy5+lmwsu2DadT5uQDkyK/JIfuTQwSqIo+YiXsdfb7ap0niXCJiGH
+ v+lQ==
+X-Gm-Message-State: AJIora/vPqyl/bnvhXMses9eiLUzzIxpgh1G912afUbPExygpIBfiGXa
+ laeSVxIH5GqmA9mmXbfuBQo=
+X-Google-Smtp-Source: AGRyM1vsLWvBZGegv7wcX1GkV0vLTjBiqD54awG+CV1o5P+AD5DBf2qnKRGasNxwEIhUWq2/zkNtgA==
+X-Received: by 2002:a17:903:2585:b0:16a:3c86:c76b with SMTP id
+ jb5-20020a170903258500b0016a3c86c76bmr10134891plb.88.1655958249566; 
+ Wed, 22 Jun 2022 21:24:09 -0700 (PDT)
+Received: from liuchao-VM ([156.236.96.165]) by smtp.gmail.com with ESMTPSA id
+ jb11-20020a170903258b00b0016a18ee30b5sm8208734plb.293.2022.06.22.21.24.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Jun 2022 21:24:08 -0700 (PDT)
+Date: Thu, 23 Jun 2022 12:24:04 +0800
+From: Chao Liu <chaoliu719@gmail.com>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <YrPq5N61W9vFGTub@liuchao-VM>
+References: <20220621064202.1078536-1-chaoliu719@gmail.com>
+ <7fb689d9-11ba-a173-8ad4-a328a03298a8@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <7fb689d9-11ba-a173-8ad4-a328a03298a8@kernel.org>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Instead of invalidating negative dentries during
- case-insensitive
- lookups, mark them as such and let them be added to the dcache. d_ci_revalidate
- is able to properly filter them out if necessary based [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Wed, Jun 22, 2022 at 08:50:33PM +0800, Chao Yu wrote: >
+ On 2022/6/21 14:42, Chao Liu wrote: > > From: Chao Liu > > > > Files created
+ by truncate have a size but no blocks, so > > I didn't get it, [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [chaoliu719[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [chaoliu719[at]gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.41 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.41 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -85,10 +109,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1o46JG-0001TT-3L
-Subject: [f2fs-dev] [PATCH 7/7] f2fs: Enable negative dentries on
- case-insensitive lookup
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1o4EO7-00AqA7-A6
+Subject: Re: [f2fs-dev] [PATCH] f2fs: allow compression of files without
+ blocks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,67 +125,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel@collabora.com, linux-f2fs-devel@lists.sourceforge.net,
- ebiggers@kernel.org, linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: Chao Liu <liuchao@coolpad.com>, linux-kernel@vger.kernel.org,
+ Wayne Zhang <zhangwen@coolpad.com>, Yue Hu <huyue2@coolpad.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Instead of invalidating negative dentries during case-insensitive
-lookups, mark them as such and let them be added to the dcache.
-d_ci_revalidate is able to properly filter them out if necessary based
-on the dentry casefold flag.
+On Wed, Jun 22, 2022 at 08:50:33PM +0800, Chao Yu wrote:
+> On 2022/6/21 14:42, Chao Liu wrote:
+> > From: Chao Liu <liuchao@coolpad.com>
+> >
+> > Files created by truncate have a size but no blocks, so
+>
+> I didn't get it, how can we create file by truncation...
 
-Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
----
- fs/f2fs/namei.c | 23 ++---------------------
- 1 file changed, 2 insertions(+), 21 deletions(-)
+I'm sorry I didn't make it clear. We can create a file
+by passing a FILE parameter that does not exist
+to the user command truncate(1) [1].
 
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index c549acb52ac4..20c3391bb209 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -566,17 +566,8 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
- 		goto out_iput;
- 	}
- out_splice:
--#if IS_ENABLED(CONFIG_UNICODE)
--	if (!inode && IS_CASEFOLDED(dir)) {
--		/* Eventually we want to call d_add_ci(dentry, NULL)
--		 * for negative dentries in the encoding case as
--		 * well.  For now, prevent the negative dentry
--		 * from being cached.
--		 */
--		trace_f2fs_lookup_end(dir, dentry, ino, err);
--		return NULL;
--	}
--#endif
-+	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
-+		d_set_casefold_lookup(dentry);
- 	new = d_splice_alias(inode, dentry);
- 	err = PTR_ERR_OR_ZERO(new);
- 	trace_f2fs_lookup_end(dir, dentry, ino, !new ? -ENOENT : err);
-@@ -627,16 +618,6 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
- 		goto fail;
- 	}
- 	f2fs_delete_entry(de, page, dir, inode);
--#if IS_ENABLED(CONFIG_UNICODE)
--	/* VFS negative dentries are incompatible with Encoding and
--	 * Case-insensitiveness. Eventually we'll want avoid
--	 * invalidating the dentries here, alongside with returning the
--	 * negative dentries at f2fs_lookup(), when it is better
--	 * supported by the VFS for the CI case.
--	 */
--	if (IS_CASEFOLDED(dir))
--		d_invalidate(dentry);
--#endif
- 	f2fs_unlock_op(sbi);
- 
- 	if (IS_DIRSYNC(dir))
--- 
-2.36.1
+How about using truncate(1) instead of truncate
+in the description of the change?
 
+Thanks,
+
+[1] truncate(1): https://man7.org/linux/man-pages/man1/truncate.1.html
 
 
 _______________________________________________
