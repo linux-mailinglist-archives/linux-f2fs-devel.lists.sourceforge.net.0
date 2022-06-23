@@ -2,95 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BA16557FFA
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Jun 2022 18:36:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D3EB558268
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Jun 2022 19:14:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o4Pol-00054M-Dx; Thu, 23 Jun 2022 16:36:31 +0000
+	id 1o4QOx-0002wM-LH; Thu, 23 Jun 2022 17:13:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <krisman@collabora.com>) id 1o4Poj-00054G-Oq
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 16:36:29 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1o4QOx-0002wG-5R
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 17:13:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
- Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NQisR1PM5H6nLeU8Bs6yXgmrXILbvW+nrf6n/qymaRY=; b=WqVZ19hOepD8seTUFZwYFT/dyV
- HqlqoaJXTEUSwwO2ajgiRbTEpEDqFGUfDz23JAfbBCxNKJmqpjIIi4oKEOY7/CkteDrpXL9D42Gwn
- 6NIeHJb7y0k51fBpz2gtM6i/BK+Z5h80txd44bc5z3J+Jsf8n/+F7XpJf13bGzaauU8o=;
+ bh=1ETc9dlt7qvY3W/o1+oMFXzB90afGcGB/u+rWZvbSdw=; b=YwSZvYZQPJpK9p1XrcG6SaC9Rt
+ XPr9tDoe3LKdMv3svyQnY8gEkzcqAgzK4L7zYVbaKRyhe8cyHTxSbfK22NEtCWkiQ9BPGDtMQZnZL
+ u9hBD9ClqGaqyTDDqJC96G13Y9t91RDg46y/axNrHQNo2d1YufQWtNrSOG5bL6n3sJuE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NQisR1PM5H6nLeU8Bs6yXgmrXILbvW+nrf6n/qymaRY=; b=BbA7Xqv/48Lr6NyBQ4ESYiHfiJ
- 6vIBJ8/CpTZCEr3DsOgO+2iu9puvq3qtJ0CCHpgVSbvrinvYLR6LxLQ2xiuc2o+NCQzuIC0OXEUD5
- pKpulnE9zu4+9AoPz4rZC3ehSCFfVYi2G/o6eWMEKNhaVFXtkeKUmJz2sAIwLlgDVdaM=;
-Received: from madras.collabora.co.uk ([46.235.227.172])
+ bh=1ETc9dlt7qvY3W/o1+oMFXzB90afGcGB/u+rWZvbSdw=; b=ik8TZ/7ZKM+E9mAfnZnILqxgUr
+ QfeDbKt9KR3gyVWfYdq77YK9rr5qAJ0zn96zAmrXl1jxbuDX/fW+/an1Ook0I9/dZxWTxbai/W8zP
+ 5z0Zmgony678he0qaDbbmDhpmMRnUOIauCdEonVhvnueqaNLx9mDlADCy2BSCkedkis4=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o4Pog-0001N7-52
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 16:36:29 +0000
-Received: from localhost (modemcable141.102-20-96.mc.videotron.ca
- [96.20.102.141])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: krisman)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 8888066017DF;
- Thu, 23 Jun 2022 17:36:19 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1656002179;
- bh=xBl8A27Ms8S+5lzaIzajGkuNErZevkNTF10THb9C3M0=;
- h=From:To:Cc:Subject:References:Date:In-Reply-To:From;
- b=G3xyWOp1DA3bCpt0o339Cuq7jQstFFo+ddrZn4agrJrh/RHmxxyGzPqEZsgRw7DEb
- lzyw80VcZ5txS+ka5g+VuLOz0fAL2mdPORc7tg5Uy0Yzgn8knfZEGFW4dPy4mbtnrX
- MVQb1C0C6LDhDlyBBa7mtUgjyQRfmBMysO2ug4p+Oc8cTykyCOG0rz0v+Qbiuvhl3a
- NxpD17y570G38p9Xf8iMTQMGY1bePhas7Sd5NNLKG1vLGAaKuAtbijkKAnhcL49EEy
- y7mQqqIYQ9mvd/skaUkR8cxmTSSFP8mZs7frOmFzp6120DMVXoWkzFLKVbugb8y3Ec
- bUXX+Xaag5rMw==
-From: Gabriel Krisman Bertazi <krisman@collabora.com>
-To: kernel test robot <lkp@intel.com>
-Organization: Collabora
-References: <20220622194603.102655-7-krisman@collabora.com>
- <202206231550.0JrilBjp-lkp@intel.com>
-Date: Thu, 23 Jun 2022 12:36:15 -0400
-In-Reply-To: <202206231550.0JrilBjp-lkp@intel.com> (kernel test robot's
- message of "Thu, 23 Jun 2022 15:29:07 +0800")
-Message-ID: <875ykr2v7k.fsf@collabora.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
+ id 1o4QOs-0003Cu-09
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 17:13:55 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 905DB61D18;
+ Thu, 23 Jun 2022 17:13:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00482C3411B;
+ Thu, 23 Jun 2022 17:13:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1656004416;
+ bh=rMClqc3zvDXfYMCOvdBp6CeRJmIcRkGT8/7yt5f5Kj4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=hy8Xfb3CaW83gPTXBez87TKF6HsLY6Vgm+L3dfAfuvodGOX+OUOmbQ/Ghk1w6n2+M
+ 2DV+2gMkStrDZHG0tUAgHCir1JmtSae//xHrbJSV2gG+wwa4uN1WE2Ew04+yShP6x+
+ Wo8Q7FH6WA50N/wiz6O1C6ye8ptPWUlTYD6uObRVS2xQ/Ze/MF5VWCHOxq6jfKo6l0
+ mCqmrUBFwatWgjD3iv0rzwXH1Z/HLaoZYGH27u8U6kOqNS9YP0NtGaBshrq51xY8/4
+ F7Nj+Vat3OIy1SzwGsAmMrhnN50t3L35HZyEIHe3J5ItFl3WXqp5QqxgJxdZ26l/2R
+ 70TYqohWcia9w==
+Date: Thu, 23 Jun 2022 10:13:34 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Andreas Dilger <adilger@dilger.ca>
+Message-ID: <YrSfPmaWCTOfmQ8H@sol.localdomain>
+References: <20220616202141.125079-1-ebiggers@kernel.org>
+ <YrSOm2murB4Bc1RQ@magnolia>
+ <622BA3BB-03EA-4271-8A2E-2ADAFB574155@dilger.ca>
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <622BA3BB-03EA-4271-8A2E-2ADAFB574155@dilger.ca>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  kernel test robot <lkp@intel.com> writes: > Hi Gabriel, >
- > I love your patch! Yet something to improve: > > [auto build test ERROR
- on tytso-ext4/dev] > [also build test ERROR on jaegeuk-f2fs/dev-test
- linus/master v5.19-rc3 next-20220622] > [ [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Thu, Jun 23, 2022 at 10:27:19AM -0600,
+ Andreas Dilger wrote:
+ > On Jun 23, 2022, at 10:02 AM, Darrick J. Wong <djwong@kernel.org> wrote:
+ > > > > On Thu, Jun 16, 2022 at 01:21:41PM -0700, Eric Bigger [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1o4Pog-0001N7-52
-Subject: Re: [f2fs-dev] [PATCH 6/7] ext4: Enable negative dentries on
- case-insensitive lookup
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1o4QOs-0003Cu-09
+Subject: Re: [f2fs-dev] [man-pages RFC PATCH] statx.2,
+ open.2: document STATX_DIOALIGN
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,51 +104,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: kernel@collabora.com, tytso@mit.edu, kbuild-all@lists.01.org,
- linux-f2fs-devel@lists.sourceforge.net, ebiggers@kernel.org,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+Cc: linux-man@vger.kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Keith Busch <kbusch@kernel.org>,
+ linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org,
+ linux-api@vger.kernel.org, linux-fsdevel@vger.kernel.org,
  linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-kernel test robot <lkp@intel.com> writes:
+On Thu, Jun 23, 2022 at 10:27:19AM -0600, Andreas Dilger wrote:
+> On Jun 23, 2022, at 10:02 AM, Darrick J. Wong <djwong@kernel.org> wrote:
+> > 
+> > On Thu, Jun 16, 2022 at 01:21:41PM -0700, Eric Biggers wrote:
+> >> From: Eric Biggers <ebiggers@google.com>
+> >> 
+> >> @@ -244,8 +249,11 @@ STATX_SIZE	Want stx_size
+> >> STATX_BLOCKS	Want stx_blocks
+> >> STATX_BASIC_STATS	[All of the above]
+> >> STATX_BTIME	Want stx_btime
+> >> +STATX_ALL	The same as STATX_BASIC_STATS | STATX_BTIME.
+> >> +         	This is deprecated and should not be used.
+> > 
+> > STATX_ALL is deprecated??  I was under the impression that _ALL meant
+> > all the known bits for that kernel release, but...
+> 
+> For userspace STATX_ALL doesn't make sense, and it isn't used by the kernel.
+> 
+> Firstly, that would be a compile-time value for an application, so it
+> may be incorrect for the kernel the code is actually run on (either too
+> many or too few bits could be set).
+> 
+> Secondly, it isn't really useful for an app to request "all attributes"
+> if it doesn't know what they all mean, as that potentially adds useless
+> overhead.  Better for it to explicitly request the attributes that it
+> needs.  If that is fewer than the kernel could return it is irrelevant,
+> since the app would ignore them anyway.
+> 
+> The kernel will already ignore and mask attributes that *it* doesn't
+> understand, so requesting more is fine and STATX_ALL doesn't help this.
+> 
 
-> Hi Gabriel,
->
-> I love your patch! Yet something to improve:
->
-> [auto build test ERROR on tytso-ext4/dev]
-> [also build test ERROR on jaegeuk-f2fs/dev-test linus/master v5.19-rc3 next-20220622]
-> [If your patch is applied to the wrong git tree, kindly drop us a note.
-> And when submitting patch, we suggest to use '--base' as documented in
-> https://git-scm.com/docs/git-format-patch]
->
-> url:    https://github.com/intel-lab-lkp/linux/commits/Gabriel-Krisman-Bertazi/Support-negative-dentries-on-case-insensitive-directories/20220623-034942
-> base:   https://git.kernel.org/pub/scm/linux/kernel/git/tytso/ext4.git dev
-> config: x86_64-randconfig-a006 (https://download.01.org/0day-ci/archive/20220623/202206231550.0JrilBjp-lkp@intel.com/config)
-> compiler: gcc-11 (Debian 11.3.0-3) 11.3.0
-> reproduce (this is a W=1 build):
->         # https://github.com/intel-lab-lkp/linux/commit/69488ccc517a48af2f1cec0efb84651397edf6f6
->         git remote add linux-review https://github.com/intel-lab-lkp/linux
->         git fetch --no-tags linux-review Gabriel-Krisman-Bertazi/Support-negative-dentries-on-case-insensitive-directories/20220623-034942
->         git checkout 69488ccc517a48af2f1cec0efb84651397edf6f6
->         # save the config file
->         mkdir build_dir && cp config build_dir/.config
->         make W=1 O=build_dir ARCH=x86_64 SHELL=/bin/bash
->
-> If you fix the issue, kindly add following tag where applicable
-> Reported-by: kernel test robot <lkp@intel.com>
->
-> All errors (new ones prefixed by >>, old ones prefixed by <<):
->
->>> ERROR: modpost: "d_set_casefold_lookup" [fs/ext4/ext4.ko] undefined!
+What Andreas said.  Note, this discussion really should be happening on my
+standalone patch that fixes the documentation for STATX_ALL:
+https://lore.kernel.org/r/20220614034459.79889-1-ebiggers@kernel.org.  I folded
+it into this RFC one only so that it applies cleanly without a prerequisite.
 
-Hm, missing the EXPORT_SYMBOL() since this is called from filesystems.
-I will add it for v2.
-
--- 
-Gabriel Krisman Bertazi
+- Eric
 
 
 _______________________________________________
