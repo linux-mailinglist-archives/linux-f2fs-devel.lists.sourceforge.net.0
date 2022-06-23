@@ -2,73 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CC45558665
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E8CF558666
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Jun 2022 20:12:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o4RJa-0004TP-L5; Thu, 23 Jun 2022 18:12:25 +0000
+	id 1o4RJZ-0004SH-TL; Thu, 23 Jun 2022 18:12:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bart.vanassche@gmail.com>) id 1o4RJZ-0004TJ-Ny
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 18:12:24 +0000
+ (envelope-from <bart.vanassche@gmail.com>) id 1o4RJY-0004S6-4l
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 18:12:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KMWv460Wb54wONmzPP5cv9DMKvBsyAs+kVlkOJ0bxi8=; b=Sq1tNAaooPQmP3tYE39m4dWUot
- 6LB3Y6+h8e7UV4rTUzLsm5WH27z+3OE7zZsrNFdGVbobQ67IlL8lhnQ/usTMkEkgVaAjEDoAh4XZj
- H669Koo5ddoa9vqRe3EentsCjS9zD2TWJJ30lWvlB6vpQbqWXqchRradyOtWZgre76E8=;
+ bh=eCmB3u9XWRwc4MCQ9di/1b5idBouY1G1OCm3ls371Kw=; b=QX9VLG4f6bonC1/I0p38eGCxxQ
+ 66GrIp4ln+Qv4/TND8PrLoDAhdgemD1fznwIjax2U9hs7V/YqnPcrL/W4ynVAPEmijWqOVICCvtNl
+ QoiXBNNhbeG/0kExQa1QMLX7hgHtDYxjehmNyHG7fgiTmkfEDOeleawhSHKbBDhUvE8E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=KMWv460Wb54wONmzPP5cv9DMKvBsyAs+kVlkOJ0bxi8=; b=X
- HW59Hlr86XloWWd5SWljYXU++vtG5A4L2bbdYpA0lEVDFyr3M8Vxpr7HUPLnJ45XLrPRjdCXmP7dX
- Oa3p48el0w7ypEq2XHpuAMB91Wz8x/kQNhUSSKabf3xzhQzciKg1QEeOLOoHyDXwBRMXWTXXbXHAJ
- eJD6zxtYo+WN4Q4o=;
-Received: from mail-pj1-f46.google.com ([209.85.216.46])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=eCmB3u9XWRwc4MCQ9di/1b5idBouY1G1OCm3ls371Kw=; b=GNqyPUJ7smmfQ5TlrM0CDBAmfa
+ MjLoX/OZvkmMq4v7fengN4nyWC0LkYxGgIZvrC+PrfLrwfm/fmkVuxvDntIQEEFM7wwCIIW9IeKSX
+ nvIEwa8WCTnyZmxA/IcH2WPi+R3qzoPGLM4Yoi+Z9YO/wSWTES70+g1NPBTNhTqyrLsA=;
+Received: from mail-pl1-f169.google.com ([209.85.214.169])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1o4RJW-00BS7r-Il
+ id 1o4RJY-00BS7t-8A
  for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 18:12:24 +0000
-Received: by mail-pj1-f46.google.com with SMTP id
- 73-20020a17090a0fcf00b001eaee69f600so381689pjz.1
+Received: by mail-pl1-f169.google.com with SMTP id n10so1508727plp.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 23 Jun 2022 11:12:22 -0700 (PDT)
+ Thu, 23 Jun 2022 11:12:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=KMWv460Wb54wONmzPP5cv9DMKvBsyAs+kVlkOJ0bxi8=;
- b=TjeTzvnpneQHIu7YhDTYJeni8Kti1dl1RmM1u/XHVXhFGix1+OvaUoaQlE8+pw3NRl
- ogb+YF1i+KyinLVnjqAsL1Qo+gfZZOtTr6eGOX0CjGU0vLkcglxOvQ1SXxu5+Dnqmyjl
- 6GjcSK0ky8GivL4e2lhlH2l9i9XkLQBLJM2qro9OFc2LkxEk5bqmtOJN34PnXfK6jJ9L
- pBjKnBhlEZODmtvKk6MR/uW7Eu0v0ump5Af3ODd5VEgc5M77OcIUTleXP3hRnIS0zDhs
- 5yqsQPASIjSGccivv/FeAIoY2NiSYTKI0vj79gjTaRv+gCZql1E9KZiaNbwo82pWd8IK
- rr2w==
-X-Gm-Message-State: AJIora8mlL91eP0OxaRFlqKutqAFGmX/vuwyW8ruH3b5EMZIf001skMJ
- vSQm8pZ241D/7xC/3lMFknIJYJWDtVFeFA==
-X-Google-Smtp-Source: AGRyM1tW41AxQDe+woj4wtDofSa5GPmC2UXi8C2jMm322n9K/9epPT/fMzVq1mG0CC0sYoCSmcd4Zg==
-X-Received: by 2002:a17:902:7486:b0:16a:cfc:7f49 with SMTP id
- h6-20020a170902748600b0016a0cfc7f49mr30868893pll.135.1656007936971; 
- Thu, 23 Jun 2022 11:12:16 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=eCmB3u9XWRwc4MCQ9di/1b5idBouY1G1OCm3ls371Kw=;
+ b=jcD4Y2NjbWVQwomsWYvDIqrmDhQQp6C0Ix6kcw8hbeDkE4h3JQUNTU15GyY+pEs/Nt
+ ASLUhbfeg7voDtk6DvENlGxrz3Q4uuStcmWQyHDGYcK3jp8/KGfaCEmCUSAwNv0NyNl9
+ udnJ6EBp6wwFWnFk2ZX0Hv7e0PIKSFZ7spOlZS7wq79P796h30MHXP0ag7EHn+daWvUi
+ TIwzDNoy4b45qi1P84J91TGtPxJH5UyAWpJ+98CDbIPUeZfhZoqZBvMB8FBs+xsgALLE
+ TiBYv4a/2riNCv79fhhg0mTqBc75DvM5Sk9/sLPwtBe2ccokMGbOq4wBue7Oo24K5WSP
+ z8hg==
+X-Gm-Message-State: AJIora9uXPT+fHIkGmJDio5NDkUSyG2tWOtPNVItA4AJd7qolW1oS1R5
+ XP1A4e3LD0L5ZupzUoAX6zY=
+X-Google-Smtp-Source: AGRyM1tFtcNSXSsU9RAmmTDFtjGQzQOaNUjkcaz6M/h1ysLvVtP9FwHR+wEisAlbpfyQ3O41vk+Jtw==
+X-Received: by 2002:a17:903:283:b0:163:be9d:483a with SMTP id
+ j3-20020a170903028300b00163be9d483amr39529820plr.166.1656007938610; 
+ Thu, 23 Jun 2022 11:12:18 -0700 (PDT)
 Received: from bvanassche-linux.mtv.corp.google.com
  ([2620:15c:211:201:70af:1dc5:d20:a563])
  by smtp.gmail.com with ESMTPSA id
- az8-20020a170902a58800b00163d76696e1sm104803plb.102.2022.06.23.11.12.15
+ az8-20020a170902a58800b00163d76696e1sm104803plb.102.2022.06.23.11.12.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jun 2022 11:12:16 -0700 (PDT)
+ Thu, 23 Jun 2022 11:12:17 -0700 (PDT)
 From: Bart Van Assche <bvanassche@acm.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Thu, 23 Jun 2022 11:12:03 -0700
-Message-Id: <20220623181208.3596448-1-bvanassche@acm.org>
+Date: Thu, 23 Jun 2022 11:12:04 -0700
+Message-Id: <20220623181208.3596448-2-bvanassche@acm.org>
 X-Mailer: git-send-email 2.37.0.rc0.161.g10f37bed90-goog
+In-Reply-To: <20220623181208.3596448-1-bvanassche@acm.org>
+References: <20220623181208.3596448-1-bvanassche@acm.org>
 MIME-Version: 1.0
 X-Spam-Score: 0.5 (/)
 X-Spam-Report: Spam detection software,
@@ -77,12 +78,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Jaegeuk, This patch series fixes one issue reported by
- Peter Collingbourne and a few issues I discovered by reading the zoned block
- device source code. Please consider these patches for inclusion in the offici
- [...] Content analysis details:   (0.5 points, 6.0 required)
+ Content preview:  Fix the struct f2fs_dentry_block definition on systems for
+ which PAGE_SIZE != 4096. This patch does not change the struct
+ f2fs_dentry_block
+ definition if PAGE_SIZE == 4096. Cc: Peter Collingbourne <pcc@google.com>
+ Reported-by: Peter Collingbourne <pcc@google.com> Signed-off-by: Bart Van
+ Assche <bvanassche@acm.org> --- include/f2fs_fs.h | 4 ++-- 1 file changed,
+ 2 insertio [...] 
+ Content analysis details:   (0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.169 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
  mail domains are different
@@ -90,15 +97,13 @@ X-Spam-Report: Spam detection software,
  provider [bart.vanassche[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.46 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.46 listed in list.dnswl.org]
+ [209.85.214.169 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
  EnvelopeFrom freemail headers are different
-X-Headers-End: 1o4RJW-00BS7r-Il
-Subject: [f2fs-dev] [PATCH v2 0/5] PAGE_SIZE and zoned storage related
- improvements
+X-Headers-End: 1o4RJY-00BS7t-8A
+Subject: [f2fs-dev] [PATCH v2 1/5] Fix the struct f2fs_dentry_block
+ definition
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,34 +115,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Bart Van Assche <bvanassche@acm.org>,
+Cc: Peter Collingbourne <pcc@google.com>, Bart Van Assche <bvanassche@acm.org>,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Jaegeuk,
+Fix the struct f2fs_dentry_block definition on systems for which
+PAGE_SIZE != 4096. This patch does not change the struct f2fs_dentry_block
+definition if PAGE_SIZE == 4096.
 
-This patch series fixes one issue reported by Peter Collingbourne and a few
-issues I discovered by reading the zoned block device source code. Please
-consider these patches for inclusion in the official f2fs-tools repository.
+Cc: Peter Collingbourne <pcc@google.com>
+Reported-by: Peter Collingbourne <pcc@google.com>
+Signed-off-by: Bart Van Assche <bvanassche@acm.org>
+---
+ include/f2fs_fs.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Thanks,
-
-Bart.
-
-Bart Van Assche (5):
-  Fix the struct f2fs_dentry_block definition
-  Fix f2fs_report_zone()
-  Improve compile-time type checking for f2fs_report_zone()
-  Use F2FS_BLKSIZE for dev_read_block() buffers
-  Use F2FS_BLKSIZE as the size of struct f2fs_summary_block
-
- fsck/mount.c        | 14 +++++++-------
- include/f2fs_fs.h   |  8 +++++---
- lib/libf2fs_zoned.c | 23 +++++++++++++++--------
- 3 files changed, 27 insertions(+), 18 deletions(-)
-
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index 21a7e70d952d..fdbf7c7a0b35 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -1317,7 +1317,7 @@ typedef __le32	f2fs_hash_t;
+ #define SIZE_OF_DIR_ENTRY	11	/* by byte */
+ #define SIZE_OF_DENTRY_BITMAP	((NR_DENTRY_IN_BLOCK + BITS_PER_BYTE - 1) / \
+ 					BITS_PER_BYTE)
+-#define SIZE_OF_RESERVED	(PAGE_SIZE - ((SIZE_OF_DIR_ENTRY + \
++#define SIZE_OF_RESERVED	(F2FS_BLKSIZE - ((SIZE_OF_DIR_ENTRY + \
+ 				F2FS_SLOT_LEN) * \
+ 				NR_DENTRY_IN_BLOCK + SIZE_OF_DENTRY_BITMAP))
+ #define MIN_INLINE_DENTRY_SIZE		40	/* just include '.' and '..' entries */
+@@ -1341,7 +1341,7 @@ struct f2fs_dentry_block {
+ 	__u8 filename[NR_DENTRY_IN_BLOCK][F2FS_SLOT_LEN];
+ };
+ 
+-static_assert(sizeof(struct f2fs_dentry_block) == 4096, "");
++static_assert(sizeof(struct f2fs_dentry_block) == F2FS_BLKSIZE, "");
+ 
+ /* for inline stuff */
+ #define DEF_INLINE_RESERVED_SIZE	1
 
 
 _______________________________________________
