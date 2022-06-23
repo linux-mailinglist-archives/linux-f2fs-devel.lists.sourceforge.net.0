@@ -2,109 +2,114 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C38D55866A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Jun 2022 20:12:41 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0F26558766
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Jun 2022 20:25:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o4RJk-0005XQ-FE; Thu, 23 Jun 2022 18:12:36 +0000
+	id 1o4RW0-0004ot-0v; Thu, 23 Jun 2022 18:25:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bart.vanassche@gmail.com>) id 1o4RJi-0005XK-To
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 18:12:34 +0000
+ (envelope-from <pcc@google.com>) id 1o4RVz-0004on-4g
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 18:25:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yrE/un2nukR43M0z8aCHfwAz4huCkQojpNGfqWE+zm8=; b=lgl8UzYMB5NCiVs5bMFs/QIOHz
- tDVrITFl51vZGsrLl0aavp8Bd05heYRTwhXeDK84Aj2ogtAc7rXEI2nYBq8R6MMh8XApv+016WdSj
- XfL0aIbtWz/u4F1HA+1HmF/p9KwpnOs3dB6/iKvlqnGyC7xbvkhZsn/33UqXMkXzu50E=;
+ bh=fH1nFwhoAjDGUkwMwWllX0sQiawtJf3T39Gf2Rzb+mw=; b=auiswUCxSLShmNndKOvCV1xOB7
+ 4wm1vhE2DRIKZDH+Fl6RcH65HcIh4cgmYXeiTirMQHTwQKBAD2UvhoCTncUSWBzfvCLA6rX/9gbNx
+ ZN9mU0KaKyCX2OLdCLBne6YHEbNQrnQ3QwloabtE6cvHEHCryipbnGZiOTe9b5B0629A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=yrE/un2nukR43M0z8aCHfwAz4huCkQojpNGfqWE+zm8=; b=ltyzIzA1kcNaBvxe6/czzQdoNC
- TK8/y/AzzBO+NZf+9SXMmFwDFL35poMUfvhbrxAQEjHi3ZUlSouIYQGrWwDGpQicCawxoovQWAtOh
- S+nuqCyvfnSPDPk9MmvE68ong/JZXbpvaQLFJkf2IWnax30BEM3YoSQPpCpyAJES27qo=;
-Received: from mail-pj1-f53.google.com ([209.85.216.53])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=fH1nFwhoAjDGUkwMwWllX0sQiawtJf3T39Gf2Rzb+mw=; b=jR2U5xhDVZyuDS+MHCzYDd04Xk
+ +HOoLQ+Z+0jwcI6yCIiaTeWpAM7KqygmC4ic9xPyqGDRy+adTtSpGbhklC9jjXhpW9xAdkiJMQedr
+ tpjebL/xOswlCKwV1wTqu7i+DU0ol0Hn0zTsVtQFZlcVFkhAGT1Yvq+w5LcI4TeL5/WE=;
+Received: from mail-wm1-f47.google.com ([209.85.128.47])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1o4RJd-00BS89-Pb
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 18:12:34 +0000
-Received: by mail-pj1-f53.google.com with SMTP id
- x1-20020a17090abc8100b001ec7f8a51f5so3430882pjr.0
+ id 1o4RVt-00068i-CZ
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 23 Jun 2022 18:25:13 +0000
+Received: by mail-wm1-f47.google.com with SMTP id q15so11500986wmj.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 23 Jun 2022 11:12:29 -0700 (PDT)
+ Thu, 23 Jun 2022 11:25:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fH1nFwhoAjDGUkwMwWllX0sQiawtJf3T39Gf2Rzb+mw=;
+ b=O+rAkBkE9ksOZ3DN5iBpSezsqrN6VTTJzX9b4Trr9YUH7YI2NtJ37x2NV97Pu1bMqY
+ 5hm6baHPiOdEsNaOaqLystFfWaPCbUt0ei/eyfMK2LPVrIcBe8Lw8wJGHdLHz77SKqDh
+ YfSSEX11g8QcsTgTYCEWxGLoqbMTazqPJvqlalZjRZe7HWZb0RVfFf/wyLfHhXzsAWsc
+ cT86PNt3WNNpiaTQUJCR8rGZ0I7XEKg15n96C1nvkfSAj05izOIHkTFKDuXAiXlEj3AW
+ vVw2AoOKXq5HJn0fnTEAL6Pg9uD7g8IhaKv+YF5bB//3LHpNU/JNmawJI4rpdG57uS+W
+ uptA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=yrE/un2nukR43M0z8aCHfwAz4huCkQojpNGfqWE+zm8=;
- b=hC1/3Sup0VzxzVBTLgxFrdGD3dzAI2mtCgpRTZzYvWVqhrHDXNyirZSsScQ4mmYOUn
- 7K/ubMoPOO/NIu8s/8n9vlaHqFOwh/P4u0pa9N5teYV6DGBjxcfFEFKyGuN8Gi291OLF
- ZdaIjzvQIatZg421dMjaB67c/jD8eRB9h0ZGtlRhothGY3Qg3+xUFmRoYC/vp0svzNQo
- XYvXn/WJ/kXhEXEK5lc4WSqwNKksZ475mmdYCuZkhTDAwfHslCjP4D7P0nXhZy1VE1Ew
- ly+Q9dSkDUbYQFZ+qV2ZSCeg7iNnkROq/N1p3hk2sakyRsCe9HjryVrQ1kKk/uuBpLH7
- onGg==
-X-Gm-Message-State: AJIora/C/YHxq+sPdbzlW1HnT3iq2BBbn5dRDbzY7baJbN++uSNrAfbw
- Ltmi+AASPqQtXMBLqM3N/4E=
-X-Google-Smtp-Source: AGRyM1tz3L5T8bH6V+l0/sDQQlPTVNjbJiC4FbeFbVtQzI7ja/3gKTr1HlCDpvJOQi7/3PZ1ryk6FQ==
-X-Received: by 2002:a17:903:2345:b0:16a:28ac:1c1b with SMTP id
- c5-20020a170903234500b0016a28ac1c1bmr20571204plh.106.1656007944114; 
- Thu, 23 Jun 2022 11:12:24 -0700 (PDT)
-Received: from bvanassche-linux.mtv.corp.google.com
- ([2620:15c:211:201:70af:1dc5:d20:a563])
- by smtp.gmail.com with ESMTPSA id
- az8-20020a170902a58800b00163d76696e1sm104803plb.102.2022.06.23.11.12.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jun 2022 11:12:23 -0700 (PDT)
-From: Bart Van Assche <bvanassche@acm.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Thu, 23 Jun 2022 11:12:08 -0700
-Message-Id: <20220623181208.3596448-6-bvanassche@acm.org>
-X-Mailer: git-send-email 2.37.0.rc0.161.g10f37bed90-goog
-In-Reply-To: <20220623181208.3596448-1-bvanassche@acm.org>
-References: <20220623181208.3596448-1-bvanassche@acm.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fH1nFwhoAjDGUkwMwWllX0sQiawtJf3T39Gf2Rzb+mw=;
+ b=gQ4O5ftDTici5JeYEjeVfsC9cNkkAjsIRR9advOdxmg+dzoQQkg/TaJIethgp9pRni
+ a1JBBYLHOina9xJMKzMlNeuLYsreEEOTvojFJsVlg7gsdhXLIdvi/yKJ2CwZTRrhRdJs
+ dgs8otiDUGFuDJEwGWEnwGAaawZIs+6epCF6NpvvZsWOymnRAJbKazOxeivhmsKDI25z
+ fFmpqzOkh7wLWiaCJLxZ/mbesOgFhkgDYy2wywgfPcD5cPHGCbyOvoYipgA0hsZzZl31
+ n7ayaQLRZ5P0v0xWb5aDA4n90LqsOWX5KfdrPW2KK2CQNggpUBxeWVrCP0TLXxy3klZX
+ pMag==
+X-Gm-Message-State: AJIora9rX+FFnU3cxX2ScSiUQnFGsSNZhm5uxIE4JVwHRurdIhtsO8aH
+ OV+rW6OML6tIn6C/oXGqbzsqe8D3XSA3Mj1U9r9uow==
+X-Google-Smtp-Source: AGRyM1ubV8gAQRwi84AFPmVCCxhClUP8OMNGSQTRAOtloQGKSjl86QmhaK7RavIwBoMSczTl+4GbBftUNXFvO+dJbnQ=
+X-Received: by 2002:a1c:7418:0:b0:39c:6ead:321c with SMTP id
+ p24-20020a1c7418000000b0039c6ead321cmr5564035wmc.171.1656008702861; Thu, 23
+ Jun 2022 11:25:02 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Score: 0.5 (/)
+References: <20220623181208.3596448-1-bvanassche@acm.org>
+ <20220623181208.3596448-2-bvanassche@acm.org>
+In-Reply-To: <20220623181208.3596448-2-bvanassche@acm.org>
+Date: Thu, 23 Jun 2022 11:24:51 -0700
+Message-ID: <CAMn1gO7WMngbyi4KrmNv687YoPP0gv4D0s-mvMB-iBNOsT7pug@mail.gmail.com>
+To: Bart Van Assche <bvanassche@acm.org>
+X-Spam-Score: -15.7 (---------------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Since the size of struct f2fs_summary_block equals
- F2FS_BLKSIZE, 
- use F2FS_BLKSIZE instead of PAGE_CACHE_SIZE as the size of struct
- f2fs_summary_block.
- Signed-off-by: Bart Van Assche <bvanassche@acm.org> --- fsck/mount.c | 8
- ++++---- 1 file changed, 4 insertions(+), 4 deletions(-) 
- Content analysis details:   (0.5 points, 6.0 required)
+ Content preview:  On Thu, Jun 23,
+ 2022 at 11:12 AM Bart Van Assche <bvanassche@acm.org>
+ wrote: > > Fix the struct f2fs_dentry_block definition on systems for which
+ > PAGE_SIZE != 4096. This patch does not change the st [...] 
+ Content analysis details:   (-15.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
+ white-list
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [bart.vanassche[at]gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.53 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.47 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.53 listed in list.dnswl.org]
- 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
- EnvelopeFrom freemail headers are different
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1o4RJd-00BS89-Pb
-Subject: [f2fs-dev] [PATCH v2 5/5] Use F2FS_BLKSIZE as the size of struct
- f2fs_summary_block
+ no trust [209.85.128.47 listed in list.dnswl.org]
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
+ Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1o4RVt-00068i-CZ
+Subject: Re: [f2fs-dev] [PATCH v2 1/5] Fix the struct f2fs_dentry_block
+ definition
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,61 +121,33 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Bart Van Assche <bvanassche@acm.org>,
- linux-f2fs-devel@lists.sourceforge.net
+From: Peter Collingbourne via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Peter Collingbourne <pcc@google.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Since the size of struct f2fs_summary_block equals F2FS_BLKSIZE, use
-F2FS_BLKSIZE instead of PAGE_CACHE_SIZE as the size of struct
-f2fs_summary_block.
+On Thu, Jun 23, 2022 at 11:12 AM Bart Van Assche <bvanassche@acm.org> wrote:
+>
+> Fix the struct f2fs_dentry_block definition on systems for which
+> PAGE_SIZE != 4096. This patch does not change the struct f2fs_dentry_block
+> definition if PAGE_SIZE == 4096.
+>
+> Cc: Peter Collingbourne <pcc@google.com>
+> Reported-by: Peter Collingbourne <pcc@google.com>
+> Signed-off-by: Bart Van Assche <bvanassche@acm.org>
 
-Signed-off-by: Bart Van Assche <bvanassche@acm.org>
----
- fsck/mount.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Thanks, this is what I had in mind and it fixes the build on my target
+with PAGE_SIZE != 4096. I also verified that a filesystem created on
+the PAGE_SIZE != 4096 target can be mounted on a machine with
+PAGE_SIZE == 4096.
 
-diff --git a/fsck/mount.c b/fsck/mount.c
-index cc871fea5d10..584e6d1370ae 100644
---- a/fsck/mount.c
-+++ b/fsck/mount.c
-@@ -1854,7 +1854,7 @@ static void read_compacted_summaries(struct f2fs_sb_info *sbi)
- 			curseg->sum_blk->entries[j] = *s;
- 			offset += SUMMARY_SIZE;
- 			if (offset + SUMMARY_SIZE <=
--					PAGE_CACHE_SIZE - SUM_FOOTER_SIZE)
-+					F2FS_BLKSIZE - SUM_FOOTER_SIZE)
- 				continue;
- 			memset(kaddr, 0, F2FS_BLKSIZE);
- 			ret = dev_read_block(kaddr, start++);
-@@ -1914,7 +1914,7 @@ static void read_normal_summaries(struct f2fs_sb_info *sbi, int type)
- 			blk_addr = GET_SUM_BLKADDR(sbi, segno);
- 	}
- 
--	sum_blk = (struct f2fs_summary_block *)malloc(PAGE_SIZE);
-+	sum_blk = malloc(sizeof(*sum_blk));
- 	ASSERT(sum_blk);
- 
- 	ret = dev_read_block(sum_blk, blk_addr);
-@@ -1924,7 +1924,7 @@ static void read_normal_summaries(struct f2fs_sb_info *sbi, int type)
- 		restore_node_summary(sbi, segno, sum_blk);
- 
- 	curseg = CURSEG_I(sbi, type);
--	memcpy(curseg->sum_blk, sum_blk, PAGE_CACHE_SIZE);
-+	memcpy(curseg->sum_blk, sum_blk, sizeof(*sum_blk));
- 	reset_curseg(sbi, type);
- 	free(sum_blk);
- }
-@@ -1990,7 +1990,7 @@ static int build_curseg(struct f2fs_sb_info *sbi)
- 	SM_I(sbi)->curseg_array = array;
- 
- 	for (i = 0; i < NR_CURSEG_TYPE; i++) {
--		array[i].sum_blk = calloc(PAGE_CACHE_SIZE, 1);
-+		array[i].sum_blk = calloc(sizeof(*(array[i].sum_blk)), 1);
- 		if (!array[i].sum_blk) {
- 			MSG(1, "\tError: Calloc failed for build_curseg!!\n");
- 			goto seg_cleanup;
+Reviewed-by: Peter Collingbourne <pcc@google.com>
+Tested-by: Peter Collingbourne <pcc@google.com>
+
+Peter
 
 
 _______________________________________________
