@@ -2,64 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 237C455A599
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 25 Jun 2022 02:41:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C07DD55ABE5
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 25 Jun 2022 20:30:36 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o4trN-0008C7-C6; Sat, 25 Jun 2022 00:41:13 +0000
+	id 1o5AYA-0004zF-Dy; Sat, 25 Jun 2022 18:30:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <jaegeuk@kernel.org>) id 1o4trL-0008C0-JR
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 25 Jun 2022 00:41:11 +0000
+ (envelope-from <pr-tracker-bot@kernel.org>) id 1o5AY8-0004z8-UN
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 25 Jun 2022 18:30:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
+ Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ric6jwY9+Ayjmk1zbLIi03OdqZbi7dzz+ypKZ+unWHU=; b=CTrdHpWmaX1P5DrFOAgIIxubRA
- rDgzL7B21HwHO1VH/P7lrgMzluMIeFSO3bd28VC1p9f69eTFge5ecs2zfbzSFS3V6hC/v2BwUwgX2
- 59TvVZYgMVFLm9I6gkxDox89JGpmH7WNsblnmu1z8vNNHJLvpxSGsonkz9qgeqW8iGDQ=;
+ bh=pvia6WMF9UihaQJWJ8/cG+QDTKLdfe/jLZp8wGf7jc0=; b=FZ4wsT4Qtbq8ZcEwmZNMYxPQpg
+ FLAfue2Ms17EDiHqrBwOXMiQ8uxZqLf5cx/xeXxADcGMbaFsnfT7eo0P+g4CPxX0Otny7paGn43wC
+ SmauaJS9sJdLulLPFGRaD1TEAKCtsxD/sYC1zCTA4WPhmbgf6HGY5BR1jPX8JhQy2GaM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ric6jwY9+Ayjmk1zbLIi03OdqZbi7dzz+ypKZ+unWHU=; b=O
- lse9hv64xCHi0uJZ2K9AYM6gKembCk9sWZxoPpHIybzIt0jTAXN+KwvaiszTnyQ75nWXCz7xYdWgF
- HzNRgKckmlJ5l/GiFLPEmEhWABIutIvzuV0tc/mm1WO1icxQLwwLmF9hWBSx2gJ5HUEAxOu51acqT
- 9VuwRUvdWlMPb1u0=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
+ :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=pvia6WMF9UihaQJWJ8/cG+QDTKLdfe/jLZp8wGf7jc0=; b=g8UarURtuBivx+Blwvuw9QlirM
+ ZSdmitGpGBVLXvCXWQ1OAxdfobZazlczvMVAF82SAix3DdodwHGpfOR8r7x8aSTq5Wc6yB+98fmel
+ dFfJSp/pydsvHq8u+3BKdJOPRiNQNd/iE7UpVvd3F7KFWAIT5N2eXgrQ+moNoQXFCnvk=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o4trK-0008LQ-QU
- for linux-f2fs-devel@lists.sourceforge.net; Sat, 25 Jun 2022 00:41:11 +0000
+ id 1o5AY4-00DZnf-5u
+ for linux-f2fs-devel@lists.sourceforge.net; Sat, 25 Jun 2022 18:30:28 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 971C561BE2;
- Sat, 25 Jun 2022 00:41:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF338C34114;
- Sat, 25 Jun 2022 00:40:59 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 24FD5B80B9D;
+ Sat, 25 Jun 2022 18:30:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E415AC341CA;
+ Sat, 25 Jun 2022 18:30:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1656117660;
- bh=lU23NS8nQUbjGYr2lzn5fx8XEUUBMrQ76dRDXjq9je8=;
- h=Date:From:To:Cc:Subject:From;
- b=DPZaIOLGXmUemkb1VVJqcZO5brXgDTBRmYtI/Sk0XpBS9/btQ750gYD6uV6h/AcmF
- A4rg/Gtz8uNXkPsAU8ac3pGth/vsfCRrrWoHBPe1Oc7MV+FQROs2qX/DBd1YzugyhP
- nXrBR1kXY0zgNjWGhJBo5+meV7vrHza2Q7hKG2nSKx1lPCfogy+VObvX2U/LrhSNGb
- QBHf3y/HT4qW+5N2XVDfBkqFvC/akrJIMA6WbVHW6/e2O+UIrJeNl3AJ/wBhNEPMTA
- fqxaWmjo5xhW/iCwtT0F98KlntsITJJNyVsvOnLEV/DDRfgsZ1G0hN+1M4+LEFvhre
- FcQxNO6erzS0w==
-Date: Fri, 24 Jun 2022 17:40:58 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <YrZZmp8qBSDM28iy@google.com>
-MIME-Version: 1.0
-Content-Disposition: inline
+ s=k20201202; t=1656181805;
+ bh=p5lnAOp8Ka1Nf9m8kWcAqfb5qFPlAkmK//Hiy5DW9Uc=;
+ h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
+ b=gKYKhhN1y05s8T6AirLLQ/bTLm5zqVHxfdRU9ASvHPd3PxKqaEKYx90uIe09hzw5L
+ kLORSOzufLJKKMFywLNE3ONEGmU3zXlUsr6NHnD5V9czyzvcTiPt1NxAzyxmeH2m3J
+ 2906Gaw4ebZ2rUuHgS67f9xohXduAov9UO+RJLcFTU8IHGprIFU1U68yzbc+WcPDQE
+ g/Ngjp67zqanY7Zo6E1Dsul7VKZ3c1HnNBvHY5kYMNpYamF884ZftH3WxHkHvaIDMs
+ 82iX3pmF/gw37X9uddlkhHNq2QCP75wgK8LqnioPJwJR67ipwAeofchGbnBonGjz6O
+ smlsXmNygJ7lQ==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ C9CADE7386C; Sat, 25 Jun 2022 18:30:05 +0000 (UTC)
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <YrZZmp8qBSDM28iy@google.com>
+References: <YrZZmp8qBSDM28iy@google.com>
+X-PR-Tracked-List-Id: <linux-f2fs-devel.lists.sourceforge.net>
+X-PR-Tracked-Message-Id: <YrZZmp8qBSDM28iy@google.com>
+X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ tags/f2fs-for-5.19-rc4
+X-PR-Tracked-Commit-Id: 82c7863ed95d0914f02c7c8c011200a763bc6725
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 29eeafc661f283a7412ecf8d9899a5ffd0c80f59
+Message-Id: <165618180582.26648.18370768969071109222.pr-tracker-bot@kernel.org>
+Date: Sat, 25 Jun 2022 18:30:05 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>
 X-Spam-Score: -5.8 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -67,25 +79,28 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Linus, Could you please consider this pull request? Thanks,
+ Content preview:  The pull request you sent on Fri, 24 Jun 2022 17:40:58 -0700:
+ > git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ tags/f2fs-for-5.19-rc4 has been merged into torvalds/linux.git:
+ https://git.kernel.org/torvalds/c/29eeafc661f283a7412ecf8d9899a5ffd0c80f59
  Content analysis details:   (-5.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1o4trK-0008LQ-QU
-Subject: [f2fs-dev] [GIT PULL] f2fs fix for 5.19-rc4
+X-Headers-End: 1o5AY4-00DZnf-5u
+Subject: Re: [f2fs-dev] [GIT PULL] f2fs fix for 5.19-rc4
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,50 +112,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Linus,
+The pull request you sent on Fri, 24 Jun 2022 17:40:58 -0700:
 
-Could you please consider this pull request?
+> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.19-rc4
 
-Thanks,
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/29eeafc661f283a7412ecf8d9899a5ffd0c80f59
 
-The following changes since commit f2906aa863381afb0015a9eb7fefad885d4e5a56:
+Thank you!
 
-  Linux 5.19-rc1 (2022-06-05 17:18:54 -0700)
-
-are available in the Git repository at:
-
-  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-5.19-rc4
-
-for you to fetch changes up to 82c7863ed95d0914f02c7c8c011200a763bc6725:
-
-  f2fs: do not count ENOENT for error case (2022-06-21 08:29:56 -0700)
-
-----------------------------------------------------------------
-f2fs-fix-5.19
-
-This includes some urgent fixes to avoid generating corrupted inodes
-caused by compressed and inline_data files. In addition, another patch
-tries to avoid wrong error report which prevents a roll-forward
-recovery.
-
-----------------------------------------------------------------
-Daeho Jeong (1):
-      f2fs: fix iostat related lock protection
-
-Jaegeuk Kim (2):
-      f2fs: attach inline_data after setting compression
-      f2fs: do not count ENOENT for error case
-
- fs/f2fs/iostat.c | 31 ++++++++++++++++++-------------
- fs/f2fs/namei.c  | 17 +++++++++++------
- fs/f2fs/node.c   |  4 +++-
- 3 files changed, 32 insertions(+), 20 deletions(-)
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/prtracker.html
 
 
 _______________________________________________
