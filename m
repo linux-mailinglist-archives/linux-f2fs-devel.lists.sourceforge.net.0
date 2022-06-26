@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8797955B003
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 26 Jun 2022 09:48:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 90C5A55B018
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 26 Jun 2022 10:02:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o5N0E-0006V8-SA; Sun, 26 Jun 2022 07:48:18 +0000
+	id 1o5NE1-0005Ub-62; Sun, 26 Jun 2022 08:02:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
  <BATV+65d228a9ba3d1088b97d+6881+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1o5N0D-0006V1-8Z
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 26 Jun 2022 07:48:17 +0000
+ id 1o5NE0-0005UR-6S
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 26 Jun 2022 08:02:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2TZRQN/GrmPBp8ytdnHV7foGFk0sHlg+XtRAmSyt/4I=; b=dqQurq4oK9j2OnLueqf9rpm/1P
- ERE+JNmvByvUUhVbN3ZGvmT3tcvF8qo9khxZ+5LezNasMzPKQboyhrC1Gg6lfiZkNqt0EwkNt6GUS
- 3kRqja5yYF2+0ZZEfiJ+c2yvtsnEl5cwopFgxaV4mwfz+Uam1Fnp03Zz3Et9YdNo5Drg=;
+ bh=SK+swlcj6rLcYyyEH22hFIwnnjq41UijC+puP+o30FM=; b=fuJRB5crjq1yrbl+gmxRSLbmbW
+ N3gCqnfxcyD9grTGUaBWH36GzWLGe2rEwbtUeQCS1BWXbaPszvnhcuyF6hpDOHvtkc8oNaXxP0k4T
+ cWWiFh4tRNpUfc3J8ZR0Ive9NuycqLRnPaAFGK4IdBSH4fxhvyryaOr3GpB7M6E+vwu0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,35 +30,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2TZRQN/GrmPBp8ytdnHV7foGFk0sHlg+XtRAmSyt/4I=; b=Y6BwY1TMOrsnSxXer/OG+ApDkA
- 2+68vBJue/RmNxukUzyQIPe3S5F/56ousfbThOqE19iyYm+2MwUq+/lP067+wlY8W6h8HBNxuSCrS
- VIls3AyeQI54zzeurUwY3VEko755rrWXZsA/nYU8QJ5zqOk42V/dsDYUJzE0AwT4VxLE=;
+ bh=SK+swlcj6rLcYyyEH22hFIwnnjq41UijC+puP+o30FM=; b=jHA2FOKLvOZe+3fMRkKyt53+v9
+ PXNRxiJzMjfmW61RSYlkc+ObmtRQINKMA2bOZ63CeT4mntNfwasTywafNmCmhLR4IjXfRKP44gY9f
+ WNQ4Uva7IPkl7tZILCqsX6noSVBs/1bzACtB0hhl6Nn9jeRLTCwBC4os78wURKvOIjR4=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o5N0B-00EEA5-4C
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 26 Jun 2022 07:48:16 +0000
+ id 1o5NDy-00EEex-B8
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 26 Jun 2022 08:02:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=2TZRQN/GrmPBp8ytdnHV7foGFk0sHlg+XtRAmSyt/4I=; b=saNgYaHV4JuyNL5PDWEhbLb461
- cpore3km28Dk5GZXJzcFYSLbRbmOYeocRHbwrEGyr9+S5T47khW89iOLZftVXqi46r1KQ3Cg5/rJ4
- d5PpypmD2NRXHC+gFeJXhcmWjm70i5QkN97/1WLLts9UYXdcFEDCAGU4eW5S1Ui6cA8Z4qFex+kvn
- VFagNAjta53MDywfJ/+qEfOuqrIPoGgTkiyP7GKNNhLhUG7rl4vn26coquzR3oXccLvoN3E5ZsMgG
- YgiQeq0z2NzkqY82PKJUuycAzTBYGIiH1s/PU4O7ZoX/ocF9uuvIniz+sWxs4lmy97l0uBAKfxUQU
- hGEQZDFg==;
+ bh=SK+swlcj6rLcYyyEH22hFIwnnjq41UijC+puP+o30FM=; b=wN58s+9LPW73zb5DoSpwvMBn9P
+ O/0NbR77FfD6DhAmB+MTVnzTVn8/OfidqNggFO2TJyTP3S4XOhaiKax3LUFsBYb4ecM+vYKuy17ps
+ XfP6jWHbB8eIpF2w9OzL9re1M/XfHRq4g8WaXepqS5sdNIn7YVYWBEAYYTJLYHc0l+orBDSeW/s9Y
+ sDQ9RLe/7W0KZO3jhcRkotRD33Ygde6DunnVQAzX/kqS0jsMFPH6vT/QGaNF6eT31kMkfYYJEiTBN
+ WVYRtwkq2pzsOM6jx/SVS4iEfk0a+8LJxrt8Kf4MHvo8TO86kVLBLNDyjUyEA675JY82UgpOEawTn
+ jEluIU6w==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1o5N04-00AStc-6E; Sun, 26 Jun 2022 07:48:08 +0000
-Date: Sun, 26 Jun 2022 00:48:08 -0700
+ Hat Linux)) id 1o5NDr-00AWLf-UX; Sun, 26 Jun 2022 08:02:23 +0000
+Date: Sun, 26 Jun 2022 01:02:23 -0700
 From: Christoph Hellwig <hch@infradead.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <YrgPOHarxLdMt2m2@infradead.org>
+To: "Darrick J. Wong" <djwong@kernel.org>
+Message-ID: <YrgSj8w+Q3HmSEwv@infradead.org>
 References: <20220616201506.124209-1-ebiggers@kernel.org>
- <20220616201506.124209-3-ebiggers@kernel.org>
+ <20220616201506.124209-2-ebiggers@kernel.org>
+ <YrSNlFgW6X4pUelg@magnolia>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220616201506.124209-3-ebiggers@kernel.org>
+In-Reply-To: <YrSNlFgW6X4pUelg@magnolia>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -2.5 (--)
@@ -68,10 +69,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jun 16, 2022 at 01:15:00PM -0700, Eric Biggers wrote:
- > +/* Handle STATX_DIOALIGN for block devices. */ > +static inline void
- handle_bdev_dioalign(struct
- path *path, u32 request_mask, > + stru [...] 
+ Content preview:  On Thu, Jun 23, 2022 at 08:58:12AM -0700, Darrick J. Wong
+ wrote: > Hmm. Does the XFS port of XFS_IOC_DIOINFO to STATX_DIOALIGN look
+ like > this? > > struct xfs_buftarg *target = xfs_inode_buftarg(ip); [...]
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -87,9 +87,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1o5N0B-00EEA5-4C
-Subject: Re: [f2fs-dev] [PATCH v3 2/8] vfs: support STATX_DIOALIGN on block
- devices
+X-Headers-End: 1o5NDy-00EEex-B8
+Subject: Re: [f2fs-dev] [PATCH v3 1/8] statx: add direct I/O alignment
+ information
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,51 +101,33 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org, linux-api@vger.kernel.org,
+Cc: linux-xfs@vger.kernel.org, linux-api@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, Keith Busch <kbusch@kernel.org>,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org
+ Eric Biggers <ebiggers@kernel.org>, Keith Busch <kbusch@kernel.org>,
+ linux-fscrypt@vger.kernel.org, linux-block@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jun 16, 2022 at 01:15:00PM -0700, Eric Biggers wrote:
-> +/* Handle STATX_DIOALIGN for block devices. */
-> +static inline void handle_bdev_dioalign(struct path *path, u32 request_mask,
-> +					struct kstat *stat)
-> +{
-> +#ifdef CONFIG_BLOCK
-> +	struct inode *inode;
-> +	struct block_device *bdev;
-> +	unsigned int lbs;
-> +
-> +	if (likely(!(request_mask & STATX_DIOALIGN)))
-> +		return;
-> +
-> +	inode = d_backing_inode(path->dentry);
-> +	if (!S_ISBLK(inode->i_mode))
-> +		return;
-> +
-> +	bdev = blkdev_get_no_open(inode->i_rdev);
-> +	if (!bdev)
-> +		return;
-> +
-> +	lbs = bdev_logical_block_size(bdev);
-> +	stat->dio_mem_align = lbs;
-> +	stat->dio_offset_align = lbs;
-> +	stat->result_mask |= STATX_DIOALIGN;
-> +
-> +	blkdev_put_no_open(bdev);
-> +#endif /* CONFIG_BLOCK */
-> +}
+On Thu, Jun 23, 2022 at 08:58:12AM -0700, Darrick J. Wong wrote:
+> Hmm.  Does the XFS port of XFS_IOC_DIOINFO to STATX_DIOALIGN look like
+> this?
+> 
+> 	struct xfs_buftarg	*target = xfs_inode_buftarg(ip);
+> 
+> 	kstat.dio_mem_align = target->bt_logical_sectorsize;
+> 	kstat.dio_offset_align = target->bt_logical_sectorsize;
+> 	kstat.result_mask |= STATX_DIOALIGN;
 
-This helper should go into block/bdev.c with the STATX_DIOALIGN and
-S_ISBLK checks lifted into the caller.  I'd also pass just the inode
-here.
+Yes, I think so.  And it would be very good to include the XFS conversion
+with this series as the only file systems that already supports
+reporting alignment constraints.
 
-Note that this also needs to account for the reduced memory alignment
-that landed in the block tree eventually.
+I also suspect that lifting XFS_IOC_DIOINFO to common code by calling
+->getattr would be useful because now all existing software using that
+will also do the right thing on ext4 and f2fs now.
+
 
 
 _______________________________________________
