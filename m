@@ -2,71 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEA5855BF37
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 28 Jun 2022 09:46:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4359155BF3E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 28 Jun 2022 09:50:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o65vu-0007dG-9g; Tue, 28 Jun 2022 07:46:51 +0000
+	id 1o65zK-0002Vd-Qv; Tue, 28 Jun 2022 07:50:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1o65vs-0007d9-Mn
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jun 2022 07:46:49 +0000
+ (envelope-from <chao@kernel.org>) id 1o65zJ-0002VX-81
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jun 2022 07:50:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ References:Cc:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RTwHiA6B/GD6U4nzn+PFsltloeYuhP+RL/G6JJ/vJlA=; b=IGOGnDyOhKFKshzKlk+ISHiwEE
- NNNqEAmpIAcNr9xKpO1Z2zzpmIOzopvnnyvSdVqD+eM9Ybva6mvkqc4qcxFPTAb6CTENVMy2bScxJ
- TyTbec7VU4B8bP1D/xW1NKxs65Mo6sUopl2EkiYsxOIVfWQ+6cDXxDr3LZpyRGxQ3vcw=;
+ bh=i1ctiOj9P++Pc99uPevo65dP/067UGm2oI+CUyVIsq8=; b=WM86ytFVD1ZcMOjv+3sg1m2mW6
+ pf8qAwQoogemGjiPl9cYGCy4Mh10A4cu4afLNx6NNWS2fM0pKLY9gKh+3sUB3AEBTVtSUd/8JNBvJ
+ way6cQn+3ybXW/hLK9ZK8IdiZJ3kOwJaYvcewzLVmzdm1RESowAtd4f4K34Bpoe2zSqA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:Cc:To:From:
  Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RTwHiA6B/GD6U4nzn+PFsltloeYuhP+RL/G6JJ/vJlA=; b=lU3X/UYE6KYyqkf7KpjQHyym5b
- 2s6/GFlISckgs1JJCMj1QbzKnVL6gaKjPs5LvSmQegjzfXg4xLrBlQNJxxnkwLcW7Mty58M06fHyE
- 6MQPFbATHHLBYAx21Bt69kqtAdTcR95hTT7HHSrBVJleF6Zif3aruOTjeopEyAYVY8to=;
+ bh=i1ctiOj9P++Pc99uPevo65dP/067UGm2oI+CUyVIsq8=; b=EeI2nNH0iq/d1G3AfmqKI7GjA4
+ UXNcwpUoAhp8cbV7mEYonbg+psPca6TGc5t6namV6Rv2KH5yGGhFh4s11J4+QxPqggs8rvzR6YNdC
+ a+OhU/+cZ1Scep8ZfXhIhU74XNwsUFrRumpPYO1Ak7RJUlNXEY67dUg8/+jON0Mri0rQ=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o65vs-0001IJ-Px
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jun 2022 07:46:49 +0000
+ id 1o65zB-00GcXl-OD
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jun 2022 07:50:19 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6880A60C5D
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 61BE860E9D
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 28 Jun 2022 07:46:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EB16C3411D;
- Tue, 28 Jun 2022 07:46:33 +0000 (UTC)
+ Tue, 28 Jun 2022 07:50:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B077C3411D;
+ Tue, 28 Jun 2022 07:50:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1656402394;
- bh=IxHb5Sa8uGIBhk4i91g2SAWF7bvud0Zr0BWDSV74ZO0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Dfp9SRoCENBboDsPPDbzvwsj6X8XtsUzBtWEFVBfwNJW/VkXUWfbgjxhIEGVEhP90
- xXdbRrJSqnxDhQT/24mjLJCO+Qv5JDaO25a+SRlDTRd1qxQWjecqtQY94zTesah4OY
- sP5eD9Nba75z8EH7BbjJl6pykQaAvPKarDQjLBQ0MI1axNxmGuylA2EHOvqjU1o2ed
- FhvESCJ+6yJCwFYgnNuuhY5LQWbypR3hLFhqy4k7/Lf3yK5lRybKfHOn127dHa6EVn
- r4WdJGCGh095JhOTT31ZKhqyrFSlPat8J8+uKRI8c9kTJKfrwFd3F2i0jJ9orERZ0U
- 1/rsKHRFgOz7w==
-Message-ID: <f3484c66-bb5e-b4d6-fc43-95a73c280f1d@kernel.org>
-Date: Tue, 28 Jun 2022 15:46:28 +0800
+ s=k20201202; t=1656402607;
+ bh=B5QIhlbtzECgsRE8EI6Zyf1MuzRiNeg87KIBkcQ7vvU=;
+ h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+ b=uBEY+beYn2AWAxOKCmPu7Pw+1xiYKV0VUre/0qN+Me1NzxYbEo4V+U01T42wdCMI2
+ WivFZE+tGZfl6IKsIFAq+uYSROpIolPF3O3nTjazZoFrk4OwzcxhNWb6hNNvkPCxS2
+ J5T6rJacKk8KDTCbtObsfVOJvPOWH1mt46cTO8gwDSmFfsSkp17r+UA3T8w6tKJqrh
+ qwOPiU13V6z4mQ0/nVbvioRI97P3N8PkTwC6Qqc9JRKDG31aAChLd6BB/ZoSxr7vFM
+ qRWlRyJj9U2irA7pLgXYlRkgzTGt2lgM88LF87u6XLMU8cXD2torMVXCgR0JOkagI1
+ vo0IK3sEeZTsA==
+Message-ID: <ea40fecd-a16f-4ded-a062-21b097d67230@kernel.org>
+Date: Tue, 28 Jun 2022 15:50:04 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.10.0
 Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 References: <20220617223106.3517374-1-jaegeuk@kernel.org>
  <YrNJBMGpjPdtwVY+@google.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <YrNJBMGpjPdtwVY+@google.com>
+ <f3484c66-bb5e-b4d6-fc43-95a73c280f1d@kernel.org>
+In-Reply-To: <f3484c66-bb5e-b4d6-fc43-95a73c280f1d@kernel.org>
 X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -74,9 +75,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/6/23 0:53, Jaegeuk Kim wrote: > This fixes the below
- corruption. > > [345393.335389] F2FS-fs (vdb): sanity_check_inode: inode
- (ino=6d0, mode=33206) should not have inline_data, run fsck to fix [...] 
+ Content preview:  On 2022/6/28 15:46, Chao Yu wrote: > On 2022/6/23 0:53,
+ Jaegeuk
+ Kim wrote: >> This fixes the below corruption. >> >> [345393.335389] F2FS-fs
+ (vdb): sanity_check_inode: inode (ino=6d0, mode=33206) shou [...] 
  Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,7 +96,7 @@ X-Spam-Report: Spam detection software,
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1o65vs-0001IJ-Px
+X-Headers-End: 1o65zB-00GcXl-OD
 Subject: Re: [f2fs-dev] [PATCH 1/3 v2] f2fs: attach inline_data after
  setting compression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -109,79 +111,62 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: stable@vger.kernel.org
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/6/23 0:53, Jaegeuk Kim wrote:
-> This fixes the below corruption.
-> 
-> [345393.335389] F2FS-fs (vdb): sanity_check_inode: inode (ino=6d0, mode=33206) should not have inline_data, run fsck to fix
-> 
-> Cc: <stable@vger.kernel.org>
-> Fixes: 677a82b44ebf ("f2fs: fix to do sanity check for inline inode")
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->   fs/f2fs/namei.c | 17 +++++++++++------
->   1 file changed, 11 insertions(+), 6 deletions(-)
-> 
-> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-> index c549acb52ac4..bf00d5057abb 100644
-> --- a/fs/f2fs/namei.c
-> +++ b/fs/f2fs/namei.c
-> @@ -89,8 +89,6 @@ static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
->   	if (test_opt(sbi, INLINE_XATTR))
->   		set_inode_flag(inode, FI_INLINE_XATTR);
->   
-> -	if (test_opt(sbi, INLINE_DATA) && f2fs_may_inline_data(inode))
-> -		set_inode_flag(inode, FI_INLINE_DATA);
->   	if (f2fs_may_inline_dentry(inode))
->   		set_inode_flag(inode, FI_INLINE_DENTRY);
->   
-> @@ -107,10 +105,6 @@ static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
->   
->   	f2fs_init_extent_tree(inode, NULL);
->   
-> -	stat_inc_inline_xattr(inode);
-> -	stat_inc_inline_inode(inode);
-> -	stat_inc_inline_dir(inode);
-> -
->   	F2FS_I(inode)->i_flags =
->   		f2fs_mask_flags(mode, F2FS_I(dir)->i_flags & F2FS_FL_INHERITED);
->   
-> @@ -127,6 +121,14 @@ static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
->   			set_compress_context(inode);
->   	}
->   
-> +	/* Should enable inline_data after compression set */
-> +	if (test_opt(sbi, INLINE_DATA) && f2fs_may_inline_data(inode))
-> +		set_inode_flag(inode, FI_INLINE_DATA);
-> +
-> +	stat_inc_inline_xattr(inode);
-> +	stat_inc_inline_inode(inode);
-> +	stat_inc_inline_dir(inode);
-> +
->   	f2fs_set_inode_flags(inode);
->   
->   	trace_f2fs_new_inode(inode, 0);
-> @@ -325,6 +327,9 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
->   		if (!is_extension_exist(name, ext[i], false))
->   			continue;
->   
-> +		/* Do not use inline_data with compression */
-> +		stat_dec_inline_inode(inode);
-> +		clear_inode_flag(inode, FI_INLINE_DATA);
-
-It looks we don't need to dirty inode if there is no inline_data flag.
-
-Thanks,
-
->   		set_compress_context(inode);
->   		return;
->   	}
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjAyMi82LzI4IDE1OjQ2LCBDaGFvIFl1IHdyb3RlOgo+IE9uIDIwMjIvNi8yMyAwOjUzLCBK
+YWVnZXVrIEtpbSB3cm90ZToKPj4gVGhpcyBmaXhlcyB0aGUgYmVsb3cgY29ycnVwdGlvbi4KPj4K
+Pj4gWzM0NTM5My4zMzUzODldIEYyRlMtZnMgKHZkYik6IHNhbml0eV9jaGVja19pbm9kZTogaW5v
+ZGUgKGlubz02ZDAsIG1vZGU9MzMyMDYpIHNob3VsZCBub3QgaGF2ZSBpbmxpbmVfZGF0YSwgcnVu
+IGZzY2sgdG8gZml4Cj4+Cj4+IENjOiA8c3RhYmxlQHZnZXIua2VybmVsLm9yZz4KPj4gRml4ZXM6
+IDY3N2E4MmI0NGViZiAoImYyZnM6IGZpeCB0byBkbyBzYW5pdHkgY2hlY2sgZm9yIGlubGluZSBp
+bm9kZSIpCj4+IFNpZ25lZC1vZmYtYnk6IEphZWdldWsgS2ltIDxqYWVnZXVrQGtlcm5lbC5vcmc+
+Cj4+IC0tLQo+PiDCoCBmcy9mMmZzL25hbWVpLmMgfCAxNyArKysrKysrKysrKy0tLS0tLQo+PiDC
+oCAxIGZpbGUgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygrKSwgNiBkZWxldGlvbnMoLSkKPj4KPj4g
+ZGlmZiAtLWdpdCBhL2ZzL2YyZnMvbmFtZWkuYyBiL2ZzL2YyZnMvbmFtZWkuYwo+PiBpbmRleCBj
+NTQ5YWNiNTJhYzQuLmJmMDBkNTA1N2FiYiAxMDA2NDQKPj4gLS0tIGEvZnMvZjJmcy9uYW1laS5j
+Cj4+ICsrKyBiL2ZzL2YyZnMvbmFtZWkuYwo+PiBAQCAtODksOCArODksNiBAQCBzdGF0aWMgc3Ry
+dWN0IGlub2RlICpmMmZzX25ld19pbm9kZShzdHJ1Y3QgdXNlcl9uYW1lc3BhY2UgKm1udF91c2Vy
+bnMsCj4+IMKgwqDCoMKgwqAgaWYgKHRlc3Rfb3B0KHNiaSwgSU5MSU5FX1hBVFRSKSkKPj4gwqDC
+oMKgwqDCoMKgwqDCoMKgIHNldF9pbm9kZV9mbGFnKGlub2RlLCBGSV9JTkxJTkVfWEFUVFIpOwo+
+PiAtwqDCoMKgIGlmICh0ZXN0X29wdChzYmksIElOTElORV9EQVRBKSAmJiBmMmZzX21heV9pbmxp
+bmVfZGF0YShpbm9kZSkpCj4+IC3CoMKgwqDCoMKgwqDCoCBzZXRfaW5vZGVfZmxhZyhpbm9kZSwg
+RklfSU5MSU5FX0RBVEEpOwo+PiDCoMKgwqDCoMKgIGlmIChmMmZzX21heV9pbmxpbmVfZGVudHJ5
+KGlub2RlKSkKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHNldF9pbm9kZV9mbGFnKGlub2RlLCBGSV9J
+TkxJTkVfREVOVFJZKTsKPj4gQEAgLTEwNywxMCArMTA1LDYgQEAgc3RhdGljIHN0cnVjdCBpbm9k
+ZSAqZjJmc19uZXdfaW5vZGUoc3RydWN0IHVzZXJfbmFtZXNwYWNlICptbnRfdXNlcm5zLAo+PiDC
+oMKgwqDCoMKgIGYyZnNfaW5pdF9leHRlbnRfdHJlZShpbm9kZSwgTlVMTCk7Cj4+IC3CoMKgwqAg
+c3RhdF9pbmNfaW5saW5lX3hhdHRyKGlub2RlKTsKPj4gLcKgwqDCoCBzdGF0X2luY19pbmxpbmVf
+aW5vZGUoaW5vZGUpOwo+PiAtwqDCoMKgIHN0YXRfaW5jX2lubGluZV9kaXIoaW5vZGUpOwo+PiAt
+Cj4+IMKgwqDCoMKgwqAgRjJGU19JKGlub2RlKS0+aV9mbGFncyA9Cj4+IMKgwqDCoMKgwqDCoMKg
+wqDCoCBmMmZzX21hc2tfZmxhZ3MobW9kZSwgRjJGU19JKGRpciktPmlfZmxhZ3MgJiBGMkZTX0ZM
+X0lOSEVSSVRFRCk7Cj4+IEBAIC0xMjcsNiArMTIxLDE0IEBAIHN0YXRpYyBzdHJ1Y3QgaW5vZGUg
+KmYyZnNfbmV3X2lub2RlKHN0cnVjdCB1c2VyX25hbWVzcGFjZSAqbW50X3VzZXJucywKPj4gwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2V0X2NvbXByZXNzX2NvbnRleHQoaW5vZGUpOwo+PiDC
+oMKgwqDCoMKgIH0KPj4gK8KgwqDCoCAvKiBTaG91bGQgZW5hYmxlIGlubGluZV9kYXRhIGFmdGVy
+IGNvbXByZXNzaW9uIHNldCAqLwo+PiArwqDCoMKgIGlmICh0ZXN0X29wdChzYmksIElOTElORV9E
+QVRBKSAmJiBmMmZzX21heV9pbmxpbmVfZGF0YShpbm9kZSkpCj4+ICvCoMKgwqDCoMKgwqDCoCBz
+ZXRfaW5vZGVfZmxhZyhpbm9kZSwgRklfSU5MSU5FX0RBVEEpOwo+PiArCj4+ICvCoMKgwqAgc3Rh
+dF9pbmNfaW5saW5lX3hhdHRyKGlub2RlKTsKPj4gK8KgwqDCoCBzdGF0X2luY19pbmxpbmVfaW5v
+ZGUoaW5vZGUpOwo+PiArwqDCoMKgIHN0YXRfaW5jX2lubGluZV9kaXIoaW5vZGUpOwo+PiArCj4+
+IMKgwqDCoMKgwqAgZjJmc19zZXRfaW5vZGVfZmxhZ3MoaW5vZGUpOwo+PiDCoMKgwqDCoMKgIHRy
+YWNlX2YyZnNfbmV3X2lub2RlKGlub2RlLCAwKTsKPj4gQEAgLTMyNSw2ICszMjcsOSBAQCBzdGF0
+aWMgdm9pZCBzZXRfY29tcHJlc3NfaW5vZGUoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpLCBzdHJ1
+Y3QgaW5vZGUgKmlub2RlLAo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKCFpc19leHRlbnNpb25f
+ZXhpc3QobmFtZSwgZXh0W2ldLCBmYWxzZSkpCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IGNvbnRpbnVlOwo+PiArwqDCoMKgwqDCoMKgwqAgLyogRG8gbm90IHVzZSBpbmxpbmVfZGF0YSB3
+aXRoIGNvbXByZXNzaW9uICovCj4+ICvCoMKgwqDCoMKgwqDCoCBzdGF0X2RlY19pbmxpbmVfaW5v
+ZGUoaW5vZGUpOwo+PiArwqDCoMKgwqDCoMKgwqAgY2xlYXJfaW5vZGVfZmxhZyhpbm9kZSwgRklf
+SU5MSU5FX0RBVEEpOwo+IAo+IEl0IGxvb2tzIHdlIGRvbid0IG5lZWQgdG8gZGlydHkgaW5vZGUg
+aWYgdGhlcmUgaXMgbm8gaW5saW5lX2RhdGEgZmxhZy4KCk9oLCBpdCBsb29rcyBzZXRfY29tcHJl
+c3NfY29udGV4dCgpIHdpbGwgZGlydHkgaW5vZGUgYW55d2F5Li4uLiA6UAoKVGhhbmtzLAoKPiAK
+PiBUaGFua3MsCj4gCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBzZXRfY29tcHJlc3NfY29udGV4dChp
+bm9kZSk7Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm47Cj4+IMKgwqDCoMKgwqAgfQo+IAo+
+IAo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTGlu
+dXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJj
+ZWZvcmdlLm5ldAo+IGh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZv
+L2xpbnV4LWYyZnMtZGV2ZWwKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVs
+QGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0
+cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
