@@ -2,115 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43B5B55BDE5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 28 Jun 2022 05:45:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BEA5855BF37
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 28 Jun 2022 09:46:58 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o62AR-0001TB-F9; Tue, 28 Jun 2022 03:45:36 +0000
+	id 1o65vu-0007dG-9g; Tue, 28 Jun 2022 07:46:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <duguoweisz@gmail.com>) id 1o62AQ-0001T5-3N
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jun 2022 03:45:34 +0000
+ (envelope-from <chao@kernel.org>) id 1o65vs-0007d9-Mn
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jun 2022 07:46:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qFS37TBrSuv4gm4FPYmVxuLo1hjFrZ0Wm5eeFGteyXw=; b=WUDyrz4SGdZQ6w74FRXPzc2THp
- 7fBZmkwfm6RqLyMM0Hcwbt+bHqLmurIZE5GwktG3vAsTSN6zTioSM6vNTl8FSSH1VFaFM7LCu46gy
- pWsXkZr9eHwDjnVhxsjg8UuY0DboaNbMzAckGLA4FCE/t8V+OkDGqxtVTYkmqg1VAXWQ=;
+ bh=RTwHiA6B/GD6U4nzn+PFsltloeYuhP+RL/G6JJ/vJlA=; b=IGOGnDyOhKFKshzKlk+ISHiwEE
+ NNNqEAmpIAcNr9xKpO1Z2zzpmIOzopvnnyvSdVqD+eM9Ybva6mvkqc4qcxFPTAb6CTENVMy2bScxJ
+ TyTbec7VU4B8bP1D/xW1NKxs65Mo6sUopl2EkiYsxOIVfWQ+6cDXxDr3LZpyRGxQ3vcw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=qFS37TBrSuv4gm4FPYmVxuLo1hjFrZ0Wm5eeFGteyXw=; b=A
- uDC9buAMYJi7hRnTu3wZgDK3m3ITpNDdLymaRZX0l6+tML4UmbA6BaMns/4jd1zbIT5URsn0k11SM
- m1lnfq7Ttr8mVlCuaT2K4z0BDgSaY0jGFAsuLs654WWBl9YDt1o+Ms+wlOIBoDo7445jZG7KDGWqw
- JPP8evtKprT96h9k=;
-Received: from mail-pj1-f46.google.com ([209.85.216.46])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1o62AQ-00GOUJ-6t
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jun 2022 03:45:34 +0000
-Received: by mail-pj1-f46.google.com with SMTP id w24so11288039pjg.5
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=RTwHiA6B/GD6U4nzn+PFsltloeYuhP+RL/G6JJ/vJlA=; b=lU3X/UYE6KYyqkf7KpjQHyym5b
+ 2s6/GFlISckgs1JJCMj1QbzKnVL6gaKjPs5LvSmQegjzfXg4xLrBlQNJxxnkwLcW7Mty58M06fHyE
+ 6MQPFbATHHLBYAx21Bt69kqtAdTcR95hTT7HHSrBVJleF6Zif3aruOTjeopEyAYVY8to=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1o65vs-0001IJ-Px
+ for linux-f2fs-devel@lists.sourceforge.net; Tue, 28 Jun 2022 07:46:49 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6880A60C5D
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 27 Jun 2022 20:45:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=qFS37TBrSuv4gm4FPYmVxuLo1hjFrZ0Wm5eeFGteyXw=;
- b=JC9nSS5Tq4Gicto+oCAVO9AjdLFnqt1m2EMjxTe1JGxXt9oVMisCLdp+EGQ/OoV8NB
- VXvt80Rv800N3gLg3gx48oy9LVspCARgrr3Riq6Duet+rwlCy2VHOvkXqSoiX4RAhYcc
- KWOV+ZaorEDDbu04MRfLr2VPoE+GBySLxn+g9PkSukcgC5EZYJ4B3FesRyMD3ch1ZlmM
- JcmiLolycDnAvm6ZNat2erb9XJ4HZ4pq6mClfm+MF8AcarcCz9IWYPOzMStCCrigwpCc
- voyqqb9CAbD8tajMZAG4ubIX1tJ4Clbly99S88tS0tHTxYk5brSPAg7uGYXakau++w7c
- z8Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=qFS37TBrSuv4gm4FPYmVxuLo1hjFrZ0Wm5eeFGteyXw=;
- b=elJqumkEezu3/ANgMPk/rARMfpE887GZjqk9+rcNcMfjO90NShsEuk+N9zvaeE3aXH
- VUCxtgYIPmBYxym99XWrCQtPURaUrYE4RGK26QftSC+Rs37ay6+dqIZ5b69zZlwufAOY
- ip4PJhByYVFCWxiBXIsSCCI63kwErYdprcPp/TCHm77RxXgr4/KoTmYME3+c4Kce316S
- WPkrzaODCJd5GAlZwiyG1s0PT67tGNkGhMmnW6PS3jsOLSKc6l6GzexWeeMfUnO5nFQ9
- +XfMK/HqymZPLXCkKus6YOm8uL1ocwlmwDQiGqd3XOyrr1UeSt6golJScGOGhDruAG00
- fP+A==
-X-Gm-Message-State: AJIora+OVgW+a3aoy9A+g4fbquytHg6ES5kB69/WJOK5ZdN3sBf/GYQR
- s8UF/aRvQxeNQ3Sxdt/NF+/phOglvTBCGyC9
-X-Google-Smtp-Source: AGRyM1sO8dYuMdlGVja1BTXMaxZHbyElAyhc2WdhqkpoHmjePg9xedPrldC2JDeHOqzgnBAL98FP+g==
-X-Received: by 2002:a17:902:f652:b0:156:701b:9a2a with SMTP id
- m18-20020a170902f65200b00156701b9a2amr2831998plg.14.1656387928697; 
- Mon, 27 Jun 2022 20:45:28 -0700 (PDT)
-Received: from mi-HP-ProDesk-680-G4-MT.mioffice.cn ([43.224.245.232])
- by smtp.gmail.com with ESMTPSA id
- bl21-20020a056a00281500b005251c6fbd0csm8068208pfb.29.2022.06.27.20.45.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jun 2022 20:45:28 -0700 (PDT)
-From: Guowei Du <duguoweisz@gmail.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Tue, 28 Jun 2022 11:45:17 +0800
-Message-Id: <20220628034517.24861-1-duguoweisz@gmail.com>
-X-Mailer: git-send-email 2.36.1
+ Tue, 28 Jun 2022 07:46:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EB16C3411D;
+ Tue, 28 Jun 2022 07:46:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1656402394;
+ bh=IxHb5Sa8uGIBhk4i91g2SAWF7bvud0Zr0BWDSV74ZO0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Dfp9SRoCENBboDsPPDbzvwsj6X8XtsUzBtWEFVBfwNJW/VkXUWfbgjxhIEGVEhP90
+ xXdbRrJSqnxDhQT/24mjLJCO+Qv5JDaO25a+SRlDTRd1qxQWjecqtQY94zTesah4OY
+ sP5eD9Nba75z8EH7BbjJl6pykQaAvPKarDQjLBQ0MI1axNxmGuylA2EHOvqjU1o2ed
+ FhvESCJ+6yJCwFYgnNuuhY5LQWbypR3hLFhqy4k7/Lf3yK5lRybKfHOn127dHa6EVn
+ r4WdJGCGh095JhOTT31ZKhqyrFSlPat8J8+uKRI8c9kTJKfrwFd3F2i0jJ9orERZ0U
+ 1/rsKHRFgOz7w==
+Message-ID: <f3484c66-bb5e-b4d6-fc43-95a73c280f1d@kernel.org>
+Date: Tue, 28 Jun 2022 15:46:28 +0800
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20220617223106.3517374-1-jaegeuk@kernel.org>
+ <YrNJBMGpjPdtwVY+@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <YrNJBMGpjPdtwVY+@google.com>
+X-Spam-Score: -5.6 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: duguowei If device enables swap file, enlarging the
- memory usage for each monitored item. It can be adjusted by ram_thresh sysfs
- node. Signed-off-by: duguowei --- fs/f2fs/node.c | 5 ++++- 1 file changed,
- 4 insertions(+), 1 deletion(-) 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 2022/6/23 0:53, Jaegeuk Kim wrote: > This fixes the below
+ corruption. > > [345393.335389] F2FS-fs (vdb): sanity_check_inode: inode
+ (ino=6d0, mode=33206) should not have inline_data, run fsck to fix [...] 
+ Content analysis details:   (-5.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.46 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [duguoweisz[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.46 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1o62AQ-00GOUJ-6t
-Subject: [f2fs-dev] [PATCH 4/4] f2fs: add swap space for memory using
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1o65vs-0001IJ-Px
+Subject: Re: [f2fs-dev] [PATCH 1/3 v2] f2fs: attach inline_data after
+ setting compression
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,51 +108,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, duguowei <duguowei@xiaomi.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: stable@vger.kernel.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: duguowei <duguowei@xiaomi.com>
+On 2022/6/23 0:53, Jaegeuk Kim wrote:
+> This fixes the below corruption.
+> 
+> [345393.335389] F2FS-fs (vdb): sanity_check_inode: inode (ino=6d0, mode=33206) should not have inline_data, run fsck to fix
+> 
+> Cc: <stable@vger.kernel.org>
+> Fixes: 677a82b44ebf ("f2fs: fix to do sanity check for inline inode")
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>   fs/f2fs/namei.c | 17 +++++++++++------
+>   1 file changed, 11 insertions(+), 6 deletions(-)
+> 
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index c549acb52ac4..bf00d5057abb 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+> @@ -89,8 +89,6 @@ static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
+>   	if (test_opt(sbi, INLINE_XATTR))
+>   		set_inode_flag(inode, FI_INLINE_XATTR);
+>   
+> -	if (test_opt(sbi, INLINE_DATA) && f2fs_may_inline_data(inode))
+> -		set_inode_flag(inode, FI_INLINE_DATA);
+>   	if (f2fs_may_inline_dentry(inode))
+>   		set_inode_flag(inode, FI_INLINE_DENTRY);
+>   
+> @@ -107,10 +105,6 @@ static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
+>   
+>   	f2fs_init_extent_tree(inode, NULL);
+>   
+> -	stat_inc_inline_xattr(inode);
+> -	stat_inc_inline_inode(inode);
+> -	stat_inc_inline_dir(inode);
+> -
+>   	F2FS_I(inode)->i_flags =
+>   		f2fs_mask_flags(mode, F2FS_I(dir)->i_flags & F2FS_FL_INHERITED);
+>   
+> @@ -127,6 +121,14 @@ static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
+>   			set_compress_context(inode);
+>   	}
+>   
+> +	/* Should enable inline_data after compression set */
+> +	if (test_opt(sbi, INLINE_DATA) && f2fs_may_inline_data(inode))
+> +		set_inode_flag(inode, FI_INLINE_DATA);
+> +
+> +	stat_inc_inline_xattr(inode);
+> +	stat_inc_inline_inode(inode);
+> +	stat_inc_inline_dir(inode);
+> +
+>   	f2fs_set_inode_flags(inode);
+>   
+>   	trace_f2fs_new_inode(inode, 0);
+> @@ -325,6 +327,9 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
+>   		if (!is_extension_exist(name, ext[i], false))
+>   			continue;
+>   
+> +		/* Do not use inline_data with compression */
+> +		stat_dec_inline_inode(inode);
+> +		clear_inode_flag(inode, FI_INLINE_DATA);
 
-If device enables swap file, enlarging the memory usage for each
-monitored item. It can be adjusted by ram_thresh sysfs node.
+It looks we don't need to dirty inode if there is no inline_data flag.
 
-Signed-off-by: duguowei <duguowei@xiaomi.com>
----
- fs/f2fs/node.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+Thanks,
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 836c79a20afc..f1cf3d2bc7c2 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -54,9 +54,12 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
- 		return true;
- 
- 	si_meminfo(&val);
-+	si_swapinfo(&val);
- 
- 	/* only uses low memory */
- 	avail_ram = val.totalram - val.totalhigh;
-+	/* if there is swap space, use it too.*/
-+	avail_ram += val.totalswap;
- 
- 	/*
- 	 * give 25%, 25%, 50%, 50%, 50% memory for each components respectively
-@@ -96,7 +99,7 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
- 		res = mem_size < (avail_ram * nm_i->ram_thresh / 100);
- 	} else if (type == COMPRESS_PAGE) {
- #ifdef CONFIG_F2FS_FS_COMPRESSION
--		unsigned long free_ram = val.freeram;
-+		unsigned long free_ram = val.freeram + val.freeswap;
- 
- 		/*
- 		 * free memory is lower than watermark or cached page count
--- 
-2.36.1
-
+>   		set_compress_context(inode);
+>   		return;
+>   	}
 
 
 _______________________________________________
