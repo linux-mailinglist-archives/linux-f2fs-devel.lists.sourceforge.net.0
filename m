@@ -2,82 +2,117 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACF575645ED
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  3 Jul 2022 10:49:12 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7505A564865
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  3 Jul 2022 17:29:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o7vHu-0008FI-9h; Sun, 03 Jul 2022 08:49:05 +0000
+	id 1o81Xd-0004bj-7S; Sun, 03 Jul 2022 15:29:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <vincent@systemli.org>) id 1o7vHt-0008FC-I3
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 03 Jul 2022 08:49:04 +0000
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1o81XU-0004aw-6y
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 03 Jul 2022 15:29:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DbQTWIwb0+UVf/obZo5jtKDw6+ruaErxCaqmChNEVfQ=; b=UiMEAnQGpaip/uxyq0VHwf1YcJ
- WWnTBnOUt9L6Dh+BRV7d17x/4fEfv+9oBcjmwCoiPZ9YicpBuD1Sbc7RRcOygln120/tZhVOsyi06
- TapQKjsohKBMPQYM3VUXmrmbCQHG6wGxXrqEr8dq1HbAjj4YhwqopYdZJgQI/Kblto6U=;
+ bh=Pg0PFT/MXXz2zAW/nkxLWdlbtd/md6E1gJphvMTXEo4=; b=IRR/HWNIZNT27wQpFcs+2+eimm
+ IDo5lIv74D54F3fe5Qq98qwVlMMFheXTBQUcoZR5HFSaKk4wV5MYnGfg62GXPP+K8ZtbKELFoN/B2
+ rjM6jCEqakYgeaKZIFXRD5kFpYcYSSofqzWFRBhnbIW2iQ3pTwcFO63Zgbse+w4k6rGQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DbQTWIwb0+UVf/obZo5jtKDw6+ruaErxCaqmChNEVfQ=; b=f
- V+2tlVMMBwpaotp378nx8FCDRmWe8vy3kTEWIrTGvnXH0xukoFHgHUD182N+vpCCz86mnhL11/dnI
- 2gNWSr9l4iOfXbd7bXgrwEKyu9sqzW7qlRuHWsM/ewvvneG0UyIRvpAbm7uQkRqzSpAUt0yzBX3wo
- 6/xgFiaNy9uZ1wrc=;
-Received: from mail1.systemli.org ([93.190.126.36])
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Pg0PFT/MXXz2zAW/nkxLWdlbtd/md6E1gJphvMTXEo4=; b=kLmqvnkyx+7k9liNMPJrPqlUSg
+ zTuGbQjhAcc8kHqlNfAuegxChV8zXKi+EwjCMt0xSFpKHP7XCUmVGAWtU078KR1hgIkMD26RNlmNp
+ JmXItzaQ0i8O5E0ACSDM9pXgZ1Z6Qg6Z8p3ZFh9t0eg3OTEu6Hud29rViKMkBx26PCuc=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o7vHl-005Z2K-QX
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 03 Jul 2022 08:49:04 +0000
-From: vincent@systemli.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=systemli.org;
- s=default; t=1656838124;
- bh=DbQTWIwb0+UVf/obZo5jtKDw6+ruaErxCaqmChNEVfQ=;
- h=From:To:Cc:Subject:Date:From;
- b=D32kCTLLNwgUshk7yZtqE6Qo4clroVzTBOZH/OxgfHgm2S4mf7zygfZDz9Dd7BWHT
- tw18kF/jPN5prQRgMGVe5x9djByxUb6v2hr1+V93WWLrh3shQxHkGSR/GHG/qUaKnS
- PGupg54R05qPPJ/0TA8QgIBwM+ihv6ICVH7wzfEa1Uezu1SBMxrxPB9sHwJHZI7OEv
- Ue8Ktnv2QHJqzvbknsswcQ/5hSGNONO1uB1Dcnvy4h61cd/W8ovbjgdZC4jmxXbI4U
- u90Hy/U+gp64lneeqLHYzIGzyX/5ic/jQ6OqNTAmgAYnU1GSOw2Uzz7sy/wN5ooh40
- KatHgAm3/aK0w==
+ id 1o81XS-005wgt-8s
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 03 Jul 2022 15:29:35 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id F3DACB80B71
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun,  3 Jul 2022 15:29:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id AB2AEC341C6
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun,  3 Jul 2022 15:29:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1656862158;
+ bh=Pg0PFT/MXXz2zAW/nkxLWdlbtd/md6E1gJphvMTXEo4=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=AKD7tuR4/ksHyRK+zWfbcZT1RnimB88l5EtN+nFmIuahQJINWfAfu4eH408ecq7iu
+ q9t/Kd/+g36xAPvHreU9C2A/i/FLsyOk85LNF0yiVK/sQtMxlk9YL1m/6nXwGLq2kv
+ pamrFGuviEPxHWJo4sAn8vQr02IrWOQP7lBr4hiPMkXTOQoqWieXwrHidWBbRZwppt
+ +9xxi15j4nRpcjDuWR84rsgmn9Rq9OjDk5hamxjn92AjFjXcwpmniPLEFd/RyL33N4
+ qJ3YqzGssHXmYvsB0Pv9QTOEg4u3YK08AAwPmAmaSI+CW2Mf2xFRH5DGDJbux9MYPh
+ ai5FcVZGLAQhg==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 8F0CEC05FD5; Sun,  3 Jul 2022 15:29:18 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Sun,  3 Jul 2022 10:48:37 +0200
-Message-Id: <20220703084837.788372-1-vincent@systemli.org>
+Date: Sun, 03 Jul 2022 15:29:18 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: high
+X-Bugzilla-Who: ghtm2@protonmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-216162-202145-qF6rphkm67@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-216162-202145@https.bugzilla.kernel.org/>
+References: <bug-216162-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Nick Hainke <vincent@systemli.org> In the new version
- the configuration no longer respects the --without/--with blkid/selinux
- parameters.
- Add the tests for "with_blkid" and "with_selinux" back to configure.ac as
- described in the manual [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216162 ---
+ Comment
+ #4 from ghtm2@protonmail.com --- I did compile and run f2fs-tools-git just
+ now, it doesn't do anything unfortunately. The mentioned patch is in the
+ stable tree as of 5.18.8 and doesn't fix this problem either. 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1o7vHl-005Z2K-QX
-Subject: [f2fs-dev] [PATCH] configure.ac: fix AC_ARG_WITH
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1o81XS-005wgt-8s
+Subject: [f2fs-dev] [Bug 216162] F2FS filesystem with compression broken
+ after kernel version 5.18.1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,97 +128,20 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Nick Hainke <vincent@systemli.org>
+https://bugzilla.kernel.org/show_bug.cgi?id=216162
 
-In the new version the configuration no longer respects the
---without/--with blkid/selinux parameters. Add the tests for
-"with_blkid" and "with_selinux" back to configure.ac as described
-in the manual.
+--- Comment #4 from ghtm2@protonmail.com ---
+I did compile and run f2fs-tools-git just now, it doesn't do anything
+unfortunately.
 
-Link: https://www.gnu.org/software/autoconf/manual/autoconf-2.60/html_node/External-Software.html
+The mentioned patch is in the stable tree as of 5.18.8 and doesn't fix this
+problem either.
 
-Fixes: c48335416a09 ("configure.ac: Enable cross-compilation")
-
-Signed-off-by: Nick Hainke <vincent@systemli.org>
----
- configure.ac | 44 ++++++++++++++++++++++++++++++--------------
- 1 file changed, 30 insertions(+), 14 deletions(-)
-
-diff --git a/configure.ac b/configure.ac
-index 91bf7ff..ea39461 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -39,12 +39,16 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign tar-pax dist-xz])
- 
- # Test configure options.
- AC_ARG_WITH([selinux],
--	AS_HELP_STRING([--without-selinux],
--	  [Ignore presence of libselinux and disable selinux support]))
-+	[AS_HELP_STRING([--without-selinux],
-+	  [Ignore presence of libselinux and disable selinux support])],
-+	[],
-+	[with_selinux=check])
- 
- AC_ARG_WITH([blkid],
--	AS_HELP_STRING([--without-blkid],
--	  [Ignore presence of libblkid and disable blkid support]))
-+	[AS_HELP_STRING([--without-blkid],
-+	  [Ignore presence of libblkid and disable blkid support])],
-+	[],
-+	[with_blkid=check])
- 
- # Checks for programs.
- AC_PROG_CC
-@@ -55,11 +59,17 @@ AC_PATH_PROG([LDCONFIG], [ldconfig],
-        [$PATH:/sbin])
- 
- # Checks for libraries.
--AC_CHECK_LIB([blkid], [blkid_probe_all],
--	[AC_SUBST([libblkid_LIBS], ["-lblkid"])
--		AC_DEFINE([HAVE_LIBBLKID], [1],
--		[Define if you have libblkid])
--	], [], [])
-+AS_IF([test "x$with_blkid" != xno],
-+	[AC_CHECK_LIB([blkid], [blkid_probe_all],
-+		[AC_SUBST([libblkid_LIBS], ["-lblkid"])
-+			AC_DEFINE([HAVE_LIBBLKID], [1],
-+			[Define if you have libblkid])
-+		],
-+		[if test "x$with_blkid" != xcheck; then
-+			AC_MSG_FAILURE(
-+                [--with-blkid was given, but test for blkid failed])
-+        fi
-+	], -lblkid)])
- 
- AC_CHECK_LIB([lzo2], [main],
- 	[AC_SUBST([liblzo2_LIBS], ["-llzo2"])
-@@ -73,11 +83,17 @@ AC_CHECK_LIB([lz4], [main],
- 		[Define if you have liblz4])
- 	], [], [])
- 
--AC_CHECK_LIB([selinux], [getcon],
--	[AC_SUBST([libselinux_LIBS], ["-lselinux"])
--		AC_DEFINE([HAVE_LIBSELINUX], [1],
--		[Define if you have libselinux])
--	], [], [])
-+AS_IF([test "x$with_selinux" != xno],
-+	[AC_CHECK_LIB([selinux], [getcon],
-+		[AC_SUBST([libselinux_LIBS], ["-lselinux"])
-+			AC_DEFINE([HAVE_LIBSELINUX], [1],
-+			[Define if you have libselinux])
-+		],
-+		[if test "x$with_selinux" != xcheck; then
-+			AC_MSG_FAILURE(
-+				[--with-selinux was given, but test for selinux failed])
-+		fi
-+	], -lselinux)])
- 
- AC_CHECK_LIB([uuid], [uuid_clear],
- 	[AC_SUBST([libuuid_LIBS], ["-luuid"])
 -- 
-2.37.0
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
