@@ -2,95 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34A65567E92
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 Jul 2022 08:30:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB29B5686AB
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  6 Jul 2022 13:23:07 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1o8yYd-0006ZT-Nb; Wed, 06 Jul 2022 06:30:43 +0000
+	id 1o937V-0001nd-8J; Wed, 06 Jul 2022 11:23:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1o8yYc-0006ZF-1o
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 Jul 2022 06:30:42 +0000
+ (envelope-from <vincent@systemli.org>) id 1o937U-0001nO-2H
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 Jul 2022 11:23:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Subject:From
+ :To:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Dns421vBMVBdKK5rIATWvC7h7IS2N6achgUTFfGjuaM=; b=TNVdZKFhBwqvQAGKLAH/o3tFWP
- J4nw0SQ+0P0kZfFyo5C++kJDG9lljY2S2i/mP4DyWAfKQ6dcgY42k/9RsO6aBhCH/7qDIm4rn31sU
- GzikG6LY/EtUhJO2EBuASku+gay1vYnEqSFCdpJvfsVuGzhYPdG0BbDc4CBk+l9lJYs0=;
+ bh=TOAO7BIiA0lfAS9E5FkdWtBFiMrFIIxXe8WZ6H18TH4=; b=EQATq6GYWEVwu1ASRX7WQ9xJP3
+ e4k2Ge1HGkPHw3J9vbMx6g+9kI+8F3f7XjOhhGSWMJy7KuECvt3HA6aBFaLSEmkQ6x1Xg85UzoVZJ
+ wI4kUdYCjxcxmhkEKRYFV9w51ptj5w35KrffwBCeUtpIOA5cJ+UiM8O7sDkkbhGKi+NM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:Content-Type:Subject:From:To:MIME-Version:Date:
+ Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Dns421vBMVBdKK5rIATWvC7h7IS2N6achgUTFfGjuaM=; b=Z
- eXcIWl/InP1EMx2827MJc0JYP2xZxndVDS3IjJm8ZB5zExCOFCqdrcJBQzONcnoUpu0xKuuotczGg
- eTKAE8QREbV58BPixE/DvbkAqrSZVQ03AvMOTLlkyu2K5Jeym6B+a5+4YbDM/NAsI5+dRcBXQYAcX
- 1xBdKpRReYhLJNB8=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ List-Owner:List-Archive; bh=TOAO7BIiA0lfAS9E5FkdWtBFiMrFIIxXe8WZ6H18TH4=; b=d
+ kKz01DPP/MQlIIOdSY/wO+G51ymiVpE4trwIyTdjP0/PqIbUjRykMm9oe9foKO/2NWPmsArudF2Aw
+ eMP8+gDuuvpsdqflDDvCNbTLEf0THrtH30v1dj+C6/q6kjC7Cnf/WldHJuGePVCyfXbcrRh5JieRl
+ 0HIXoYmhL/cy3jqs=;
+Received: from mail1.systemli.org ([93.190.126.36])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1o8yYa-0003Qu-Na
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 Jul 2022 06:30:41 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 709CBB81A61;
- Wed,  6 Jul 2022 06:30:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A4DAC3411C;
- Wed,  6 Jul 2022 06:30:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1657089025;
- bh=PTwnVLqCKTknxTFPAXpZG38/BbOEsnQ5HZjLPj6vgEs=;
- h=From:To:Cc:Subject:Date:From;
- b=gstNkweOe/7+xVYqNE9xStimSVujj9AmDdhf5JgNcY5MCoHU+lKImBc2a262m+QrI
- hEDZUnc4ayavXp2ngUY6KKKAdX7DnEROSBPN1e1YXy8dTLwJioeHX0uMQkHwodNRQV
- YEOXPjgIX1wBqEMsWUicf9kFm7esDf1ZlvdlvLYxVqyRP2HjUtEx8dPt0hNTnBtoHJ
- vZh3YWduf+didN2wppVq7rBH7GzYrJicp5xkUYbYoFdHw29KLPDmBSbJ/c/PdQh2WE
- xn/seLHvCSW3ZkCSAc4UtyWZVhjHRE8FleBkC+u6N6aTVGSVUpyBrmOxHV8+Sd66kc
- buJSafA3cxPIQ==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Wed,  6 Jul 2022 14:30:15 +0800
-Message-Id: <20220706063015.29727-1-chao@kernel.org>
-X-Mailer: git-send-email 2.25.1
+ id 1o937P-0003VM-QN
+ for linux-f2fs-devel@lists.sourceforge.net; Wed, 06 Jul 2022 11:22:59 +0000
+Message-ID: <44ab9f62-3b4f-428e-0531-8bc87e6d7c05@systemli.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=systemli.org;
+ s=default; t=1657106562;
+ bh=TOAO7BIiA0lfAS9E5FkdWtBFiMrFIIxXe8WZ6H18TH4=;
+ h=Date:To:From:Subject:From;
+ b=m4OTvrr01a97f8auD9Loe23gUk6iGq18HIi8bEyN4c8Kvrq4O17Ftw3eBCNywRD7b
+ rye2vaZnbFrsD/K1wxQ7Xf7sDRevE7JbZFs5dBuI/65kD82A+myiy2K1r3raqEHPa3
+ dizyyHpAZnioOOJ+QHj6q811rPw6gcOO8ugmZjIb4xZ9LAe3/4pvgB3QOUvlIxqAIU
+ FgOPaFP5BWw0hiahqRq9TIpsEunYrcOVH52Q34QWRfbr1GVW/y52ykpVpTjAjTJiGU
+ S21RomiLkV9wPS9TxPfHFFYb84iMaS2/T8S9qgv1RajwN+72z/To5GtTSj1l9GY7zl
+ a+wKyDPPj2WwA==
+Date: Wed, 6 Jul 2022 13:22:40 +0200
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+Content-Language: en-US
+To: linux-f2fs-devel@lists.sourceforge.net
+From: Nick <vincent@systemli.org>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Quoted from commit e3b49ea36802 ("f2fs: invalidate
- META_MAPPING
- before IPU/DIO write") " Encrypted pages during GC are read and cached in
- META_MAPPING. However, due to cached pages in META_MAPPING, there is an issue
- where newly written pages are lost by IPU or DIO writes. 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview: The configure.ac is broken using OpenWrt. It wrongly detect
+ libs that are not present. Both patches [0,1] are now applied to OpenWrt
+ Master and work as they should: - https://github.com/openwrt/openwr [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1o8yYa-0003Qu-Na
-Subject: [f2fs-dev] [PATCH] f2fs: fix to invalidate META_MAPPING before DIO
- write
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1o937P-0003VM-QN
+Subject: [f2fs-dev] OpenWrt fixes for autotools
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,88 +88,29 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Hyeong-Jun Kim <hj514.kim@samsung.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Quoted from commit e3b49ea36802 ("f2fs: invalidate META_MAPPING before
-IPU/DIO write")
+The configure.ac is broken using OpenWrt. It wrongly detect libs that 
+are not present.
+Both patches [0,1] are now applied to OpenWrt Master and work as they 
+should:
+- 
+https://github.com/openwrt/openwrt/commit/a0c5b03e02528b938f1c6d411a582b67b7e9fe7b
+- 
+https://github.com/openwrt/openwrt/commit/a0c5b03e02528b938f1c6d411a582b67b7e9fe7b
 
-"
-Encrypted pages during GC are read and cached in META_MAPPING.
-However, due to cached pages in META_MAPPING, there is an issue where
-newly written pages are lost by IPU or DIO writes.
+I would appreciate if we could merge those upstream or find another 
+solution.
 
-Thread A - f2fs_gc()            Thread B
-/* phase 3 */
-down_write(i_gc_rwsem)
-ra_data_block()       ---- (a)
-up_write(i_gc_rwsem)
-                                f2fs_direct_IO() :
-                                 - down_read(i_gc_rwsem)
-                                 - __blockdev_direct_io()
-                                 - get_data_block_dio_write()
-                                 - f2fs_dio_submit_bio()  ---- (b)
-                                 - up_read(i_gc_rwsem)
-/* phase 4 */
-down_write(i_gc_rwsem)
-move_data_block()     ---- (c)
-up_write(i_gc_rwsem)
+[0] - 
+https://lore.kernel.org/linux-f2fs-devel/20220704092919.1420469-1-vincent@systemli.org/
+[1] - 
+https://lore.kernel.org/linux-f2fs-devel/20220703084837.788372-1-vincent@systemli.org/
 
-(a) In phase 3 of f2fs_gc(), up-to-date page is read from storage and
-    cached in META_MAPPING.
-(b) In thread B, writing new data by IPU or DIO write on same blkaddr as
-    read in (a). cached page in META_MAPPING become out-dated.
-(c) In phase 4 of f2fs_gc(), out-dated page in META_MAPPING is copied to
-    new blkaddr. In conclusion, the newly written data in (b) is lost.
-
-To address this issue, invalidating pages in META_MAPPING before IPU or
-DIO write.
-"
-
-In previous commit, we missed to cover extent cache hit case, and passed
-wrong value for parameter @end of invalidate_mapping_pages(), fix both
-issues.
-
-Fixes: 6aa58d8ad20a ("f2fs: readahead encrypted block during GC")
-Fixes: e3b49ea36802 ("f2fs: invalidate META_MAPPING before IPU/DIO write")
-Cc: Hyeong-Jun Kim <hj514.kim@samsung.com>
-Signed-off-by: Chao Yu <chao.yu@oppo.com>
----
- fs/f2fs/data.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index c448c3ee7ac3..2d027505d5f6 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1479,9 +1479,12 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 			*map->m_next_extent = pgofs + map->m_len;
- 
- 		/* for hardware encryption, but to avoid potential issue in future */
--		if (flag == F2FS_GET_BLOCK_DIO)
-+		if (flag == F2FS_GET_BLOCK_DIO) {
- 			f2fs_wait_on_block_writeback_range(inode,
- 						map->m_pblk, map->m_len);
-+			invalidate_mapping_pages(META_MAPPING(sbi),
-+				map->m_pblk, map->m_pblk + map->m_len - 1);
-+		}
- 
- 		if (map->m_multidev_dio) {
- 			block_t blk_addr = map->m_pblk;
-@@ -1698,7 +1701,7 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 		f2fs_wait_on_block_writeback_range(inode,
- 						map->m_pblk, map->m_len);
- 		invalidate_mapping_pages(META_MAPPING(sbi),
--						map->m_pblk, map->m_pblk);
-+				map->m_pblk, map->m_pblk + map->m_len - 1);
- 
- 		if (map->m_multidev_dio) {
- 			block_t blk_addr = map->m_pblk;
--- 
-2.25.1
+Bests
+Nick
 
 
 
