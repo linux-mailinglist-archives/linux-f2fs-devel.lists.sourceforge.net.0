@@ -2,99 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 786415773F0
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 Jul 2022 06:04:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 466665774B2
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 Jul 2022 07:32:44 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oCvVe-0003h6-PC; Sun, 17 Jul 2022 04:03:57 +0000
+	id 1oCwtU-0005WO-2b; Sun, 17 Jul 2022 05:32:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1oCvVR-0003gu-1r
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Jul 2022 04:03:43 +0000
+ (envelope-from <fengnanchang@gmail.com>) id 1oCwtR-0005WH-Pm
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Jul 2022 05:32:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pJn6BtaJQ2LjRv5Tt0BZumKFAsqRACbvfhnOmvR5Pcc=; b=NgalEj/iNGS8Q8TukYCpn831VG
- u+YIIoy+fu7YasAjarYmAldbAnsoTGZOETh+sy7K/qMjHVhmv8VI+tlrzGPpLJUTeUMPRvq8ncWEV
- BQrWTgIleFPvEka3l3iI9wc031elTeif+671gF4ygmhlPvqGYnIhYCrh+pi8HKGsQDnQ=;
+ bh=tzk0OdsnzbcvBwKxu7XPQEWS95T6VDWn/TH2lZTIbDo=; b=LIpH4N5v3JS+2FgHMY+Z791hqz
+ YzZ5Kn9L4hQXPSjKFg/33kuJuS3q9UJ/ABPp+98WutNxuboZ6hr0j5pwE/6UtG5Wbad5eWdJsa6hj
+ QtLFLrqc9iwaQg+J+tB82tV+2b10nPsfhc1G+WtXSVvhEpG1jnf+Iey3pG0R6xAhyf2o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=pJn6BtaJQ2LjRv5Tt0BZumKFAsqRACbvfhnOmvR5Pcc=; b=kmEnnW76mB94aZLruHL/OUj6q+
- FcDZQ8bgAF9m6+jhWM4ZIUSnM1FDku002YxNY85uuPuJVThyikdg0cLfuXDE0j3eHcexMpnkoItlz
- sjiWzQ1wOQHLJ9nHfqsNfDxgvMDAIkXlgIQ/4ozzzM7t5L/Lg5VkCgN9XDqK/yyGwNo0=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=tzk0OdsnzbcvBwKxu7XPQEWS95T6VDWn/TH2lZTIbDo=; b=T
+ X5lEsRv5gXobGkZZoLLt4g49Zxp2WdvbwQgiEaH5DQ3p921kTrEC+i/vykzviT0GN+maNDBxdkNF8
+ 5Q1uvPARy7iFS+62/uXqdtO8JCSswq00boi9R9NLsbywRvf2xFDULKYDpsfuJF4Gl5iNlMEjUZ/SQ
+ 4oUjxOyF7Tdxnvi0=;
+Received: from mail-pg1-f180.google.com ([209.85.215.180])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1oCvVP-001XoK-1N
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Jul 2022 04:03:43 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A813860F98
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1oCwtO-001ZvJ-4Z
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Jul 2022 05:32:37 +0000
+Received: by mail-pg1-f180.google.com with SMTP id 72so7959819pge.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 17 Jul 2022 04:03:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 10BFBC341CA
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 17 Jul 2022 04:03:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1658030617;
- bh=VhZWgnI6Sl64SyVEUySnwBJehn28ngX2rH5r8Dd9OdA=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=QzacU8DUvSw/PbtScQB4AZJspBwhMh5xuv8LId0CQ006KEfwiglRmFdfKrn0IeS5C
- GS2Wuojb6um9dQ0hSOX9hs/uVCmSTTR/1TxoCxTyIvtZ0WueEPN0yOKxc+N25quHfx
- yemSEYGUriac06vRpZFix21sURdeXSAFeTbTubjM9U0Ko7X0fSFr5Wyp4GuNn11YAr
- PCmXykONzmYORUFGh1k/kdneVsJZCqIHcob8ulVkAEalTcGfwnQH9NV9gKkJYY77mi
- K3ZhMORn9sso2Hm+Q7akOIgSRz+BiCC3ePvmBGU1MlULRUtC4PzgAGH7eU6E5VAnPf
- Gqbqo90vFV02A==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id EC7CCCC13B7; Sun, 17 Jul 2022 04:03:36 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Sun, 17 Jul 2022 04:03:36 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: cc
-Message-ID: <bug-216162-202145-wOHtfuePvW@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216162-202145@https.bugzilla.kernel.org/>
-References: <bug-216162-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ Sat, 16 Jul 2022 22:32:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=tzk0OdsnzbcvBwKxu7XPQEWS95T6VDWn/TH2lZTIbDo=;
+ b=T3QeSrnmzmzdVYwLnx5tXBuprIE8EuctSOcSbE+IoaDgyYl3KldtM1CNdIzzPBudtS
+ 2NAPulod/pL4kDyJpcRzZaliLjlAxB0KupCuOWJSu+uJ5aevHG9R8ozQkp3/VrVR6web
+ HJ06QdL0yCyQodORKF21AWYzJKzzB2+Sw0PHjFdn0gf46tOx5ftfY4AKKoTniKeSKtep
+ kd0IWI1m8rWh60AVin2LgWhtNGjIzW3/NLTjzKIqBstLRmJoxT9csS69M3IfpAJECLfX
+ rtBAzEFCnaI0ynIxcoHDGrqSZaiY4OG7uSupYRnZcq47ufnYY6CmlDwFN8Yi/QUkYJ9j
+ bpGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=tzk0OdsnzbcvBwKxu7XPQEWS95T6VDWn/TH2lZTIbDo=;
+ b=2hnr4I8X47qFXT+uHlGQGJsOtmQ4cXdNAgnH9RPvIEkd5wCakovnKlT1yk0LJxIGWT
+ +y/4qTTHJ3Cq+el+iHE6+E7XBfHOuDJ5Oz2sm5y9flAbcwp8PSxWOiAh4tUR9CcupzIG
+ K4OXxbGzFGMdF7rGtk56H+tFs+I3hB6Gk98d+Ym+yC4r9mCoeJs0ahjfCQ1yHFz2+I7Z
+ 9VrL8rQWub0ttqcTEI3zTB9+tFTPnH2mTN+k/Nb+J0CfmZ5cBmjN0e9hjiBi0eh0CEYj
+ 15unMLC38W4DnOeJNDm+hc4DrJ3kq/7GTneeJywTFdhHQFVXYp4jfVsDfcpsXYdE02KQ
+ xfKA==
+X-Gm-Message-State: AJIora89zz3iBpi2NbHkU/C0S8w7L3U61f7LZx5erEGPsAHAyXYF9qLJ
+ jjx4TkFRQ0kSQUWM3JYdqxNxXyM83tk=
+X-Google-Smtp-Source: AGRyM1sN4+Gk1VwV4jSPYFzwS4Ou9k+/1b4uAmjrsKi9vTM361UjzWsJ3WUyltbuem3pKn6pMfin7A==
+X-Received: by 2002:a63:f910:0:b0:419:d6c0:c969 with SMTP id
+ h16-20020a63f910000000b00419d6c0c969mr11195534pgi.624.1658035948594; 
+ Sat, 16 Jul 2022 22:32:28 -0700 (PDT)
+Received: from localhost.localdomain ([205.198.104.202])
+ by smtp.googlemail.com with ESMTPSA id
+ n8-20020a170902968800b0015e8d4eb1d3sm6488814plp.29.2022.07.16.22.32.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 16 Jul 2022 22:32:27 -0700 (PDT)
+From: Fengnan Chang <fengnanchang@gmail.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Sun, 17 Jul 2022 13:32:04 +0800
+Message-Id: <20220717053207.192372-1-fengnanchang@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=216162 Chao Yu
- (chao@kernel.org) changed: What |Removed |Added CC| |chao@kernel.org 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  From: Fengnan Chang Optimise f2fs_write_cache_pages,
+ and support
+ compressed file write/read amplifiction accounting. Fengnan Chang (3): f2fs:
+ intorduce f2fs_all_cluster_page_ready f2fs: use onstack pages instead of
+ pvec f2fs: support compressed file write/read amplifiction 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [fengnanchang[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -103,12 +105,14 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oCvVP-001XoK-1N
-Subject: [f2fs-dev] [Bug 216162] F2FS filesystem with compression broken
- after kernel version 5.18.1
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.180 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.215.180 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1oCwtO-001ZvJ-4Z
+Subject: [f2fs-dev] [PATCH v3 0/3] support compressed file write/read
+ amplifiction
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,79 +124,32 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Fengnan Chang <changfengnan@vivo.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216162
+From: Fengnan Chang <changfengnan@vivo.com>
 
-Chao Yu (chao@kernel.org) changed:
+Optimise f2fs_write_cache_pages, and support compressed file write/read
+amplifiction accounting.
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-                 CC|                            |chao@kernel.org
+Fengnan Chang (3):
+  f2fs: intorduce f2fs_all_cluster_page_ready
+  f2fs: use onstack pages instead of pvec
+  f2fs: support compressed file write/read amplifiction
 
---- Comment #8 from Chao Yu (chao@kernel.org) ---
-(In reply to ghtm2 from comment #5)
-> According to git bisect that I just ran,
-> 198fd9faa271dd54dca6fc8eb6873f42dfd3b4d8 is the first bad commit.
-> "f2fs: fix to do sanity check for inline inode"
-> 
-> I reverted that on linux-stable v5.18.9 and the problem is indeed no longer
-> present.
-> 
-> Wile doing that I've found that my initial description as well es the
-> attached image were missing a command:
->     chattr -R +c /mnt/etc
-> Without it the compression wouldn't be enabled and the errors wouldn't be
-> visible.
-
-I can reproduce your issue and repair this w/ last f2fs-tools:
-
-[reproduce]
-mount -o loop ./broken.img /mnt/f2fs/
-touch /mnt/f2fs/file
-lsattr /mnt/f2fs/file 
------------------N-- /mnt/f2fs/file
-chattr +c /mnt/f2fs/file 
-lsattr /mnt/f2fs/file 
---------c--------N-- /mnt/f2fs/file
-umount /mnt/f2fs 
-mount -o loop ./broken.img /mnt/f2fs/
-lsattr /mnt/f2fs/file 
-lsattr: Structure needs cleaning while trying to stat /mnt/f2fs/file
-
-[repair]
-fsck.f2fs ./broken.img
-
-output:
-
-[FIX] (fsck_chk_inode_blk: 728)  --> [0x505] i_flags=0x4 -> 0x0
-[ASSERT] (fsck_chk_inode_blk:1182)  --> ino: 0x505 chksum:0xe7b707a8, but
-calculated one is: 0x3f6daf58
-[FIX] (fsck_chk_inode_blk:1188)  --> ino: 0x505 recover, i_inode_checksum=
-0xe7b707a8 -> 0x3f6daf58
-
-[verify]
-mount -o loop ./broken.img /mnt/f2fs/
-stat /mnt/f2fs/file 
-  File: /mnt/f2fs/file
-  Size: 0               Blocks: 0          IO Block: 4096   regular empty file
-Device: 70fh/1807d      Inode: 1285        Links: 1
-Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
-Access: 2022-07-17 11:51:41.705230802 +0800
-Modify: 2022-07-17 11:51:41.705230802 +0800
-Change: 2022-07-17 11:51:57.641110482 +0800
- Birth: -
-lsattr /mnt/f2fs/file 
------------------N-- /mnt/f2fs/file         ---- compressed flag was removed by
-fsck.
+ fs/f2fs/compress.c | 21 +++++++++++++++------
+ fs/f2fs/data.c     | 46 ++++++++++++++++++++++++++++++++--------------
+ fs/f2fs/debug.c    |  7 +++++--
+ fs/f2fs/f2fs.h     | 40 ++++++++++++++++++++++++++++++++++++++--
+ 4 files changed, 90 insertions(+), 24 deletions(-)
 
 -- 
-You may reply to this email to add a comment.
+2.25.1
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
