@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE93E5773C6
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 Jul 2022 05:37:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CD6B5773C9
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 Jul 2022 05:40:06 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oCv6N-0003Ag-6m; Sun, 17 Jul 2022 03:37:50 +0000
+	id 1oCv8W-0003I6-Gc; Sun, 17 Jul 2022 03:40:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1oCv6L-0003AS-BW
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Jul 2022 03:37:48 +0000
+ (envelope-from <chao@kernel.org>) id 1oCv8U-0003Hz-QL
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Jul 2022 03:40:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZTFNDnKrai3jK8KQHazHGiHBuqZwe6HD30qPXHguMQk=; b=F8ERwRzuEBFBYD/dP6aGBYI51H
- Aoedou6YzBYGjIkMe8hS0o3t663VUhG176JNr63C9graERpZI6v66hNBsurt6j0IJGjLTIk1iFFm/
- Ofdmtnp8V+fs4R0Xp4wckm57mnKQgKEnO1q2NMi4vSjTIY22ooSD+zCVEuo22NlliLOY=;
+ bh=8gR5VQzRGjigdkQY3erLDRw8IhQPWcNDUplQ2FcOGU8=; b=hTIlWidnxRyNT5TkGJ2ADjUjBa
+ PnYZFglb4N3Eq+cMhU5s5p0yT4nHZn1b4crP2rON4Ge83jszj5z25g0iQSXJyBJKEUOH4p8RlSCQJ
+ FcVZJ5Hi3B0UPsR8NRT1grjiEKUN4b5gBM2cniJd9vlDiD9IItQgpKFnvMZ5I6Tlkz7g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,42 +29,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZTFNDnKrai3jK8KQHazHGiHBuqZwe6HD30qPXHguMQk=; b=KckdJXOMt7PusnnRQGhIgXgRy6
- DfG2fpGIbP7uCRimPb60zIAc28PXItkXNgwASsUVEvRrcxDCCLEsZZR0RImst5s69QtE23GIUHvXZ
- Ji73moac3gw4FvI2uazwLqOjeiPmRzji9ifxXWqahpThnUoeSJcb1/zr/dBLMooGn8lE=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=8gR5VQzRGjigdkQY3erLDRw8IhQPWcNDUplQ2FcOGU8=; b=VpEQCNwY02qBM0YDz5VRZyKmvx
+ UMONY3/of3enL/jp665WN18EoWLSRuS1tFtPh2uUyxOjlQsW8zOSgAgKjc3KpOIC51NiO36qACpoM
+ L3Nw6KR3DSfD3G0mMVI4crkBOZmPji1suQNJQa14UIkDaF24FC8FSdQ1F3qtAhpdAeC4=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1oCv6G-001XAm-NW
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Jul 2022 03:37:47 +0000
+ id 1oCv8S-0005RZ-49
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 17 Jul 2022 03:40:00 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5841560F8D;
- Sun, 17 Jul 2022 03:37:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC424C3411E;
- Sun, 17 Jul 2022 03:37:37 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id CDD6BB80861;
+ Sun, 17 Jul 2022 03:39:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1921C3411E;
+ Sun, 17 Jul 2022 03:39:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1658029058;
- bh=pRIWF3RbvpGBU+NBKLS7yBuX3WRUaO5aXilcEQeOxfI=;
+ s=k20201202; t=1658029192;
+ bh=nZ+2A8d7tClOSNbCmHjm5CM73z9/azEyC+Joef9ZTiY=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=aPpj0AVqaMuQ14f/C0CFwwY6JiaG/WR6x1gPYpuidJzbxtBHgFlWty/d65DuOjP4Y
- BWicTCELGZhf8x81cyCDmf+RAV2gZhgkRctJE2mvh/FUJfk61tt1nMzO9NitxaAHdz
- etbyjYWlGrJRfa2talX1fNNgB9N/LIDLe7ogEDTe5jRQOqjbn0WKUnKXOGP0I0cVTU
- RQmHV3sXAMhzCPQswRHxcxpwKhfwfHuBptT6xirFc1KkAbOtLcFJgu3ZKdbCOdykoC
- h/JCmFjHNTupAFcyajQgqBdQ9hH5TytF1n78B1T1S1LMf5Oxtcp/RqeWu6ZlG53w73
- cX/SihXvXhlyw==
-Message-ID: <f0c4af4f-e624-1b70-7640-689df98b4f66@kernel.org>
-Date: Sun, 17 Jul 2022 11:37:36 +0800
+ b=nZbZg85U+Q5nNyVfZhrycaSQvJL+a2BAlqU6B5s38Gmngu0n90m3ZhjL6zVg/eb4t
+ 3rv7fKDPLAg7zhAOGIJmtbIg5BqxLxkAMF8vM7G5/5zGoo8b4xN/t0wa82fArjcY0x
+ Yki9f07jDuPrZbneMN/KGTlyrWiYefxYrAgEJdXjsl68uOmDbObzycRxEir8MvNGLo
+ mKlcl06CcHrrljEI2Va8KLk5YwLkJMTVLw4nrmAzxi02b2D1wdZLgKhZzJlqkqNsXg
+ M/eTJC6M8dsWatgBBMlkOghNI6ZMcl/EAag1+1Wt2WS29WRskB7tqb2ngZJlPWWVNK
+ 6DnqBSZmdv2Uw==
+Message-ID: <a0a66c6e-3d29-25e8-ea28-4b7bb4e36071@kernel.org>
+Date: Sun, 17 Jul 2022 11:39:49 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
 Content-Language: en-US
 To: Bart Van Assche <bvanassche@acm.org>, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20220623181208.3596448-1-bvanassche@acm.org>
- <20220623181208.3596448-5-bvanassche@acm.org>
+ <20220623181208.3596448-6-bvanassche@acm.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220623181208.3596448-5-bvanassche@acm.org>
+In-Reply-To: <20220623181208.3596448-6-bvanassche@acm.org>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,14 +72,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/6/24 2:12, Bart Van Assche wrote: > Use F2FS_BLKSIZE
- instead of PAGE_SIZE for dev_read_block() buffers since > dev_read_block()
- reads F2FS_BLKSIZE bytes. > > Signed-off-by: Bart Van Assche <bv [...] 
+ Content preview:  On 2022/6/24 2:12, Bart Van Assche wrote: > Since the size
+ of struct f2fs_summary_block equals F2FS_BLKSIZE, use > F2FS_BLKSIZE instead
+ of PAGE_CACHE_SIZE as the size of struct > f2fs_summary_block. > [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -91,9 +91,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oCv6G-001XAm-NW
-Subject: Re: [f2fs-dev] [PATCH v2 4/5] Use F2FS_BLKSIZE for dev_read_block()
- buffers
+X-Headers-End: 1oCv8S-0005RZ-49
+Subject: Re: [f2fs-dev] [PATCH v2 5/5] Use F2FS_BLKSIZE as the size of
+ struct f2fs_summary_block
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,8 +111,9 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2022/6/24 2:12, Bart Van Assche wrote:
-> Use F2FS_BLKSIZE instead of PAGE_SIZE for dev_read_block() buffers since
-> dev_read_block() reads F2FS_BLKSIZE bytes.
+> Since the size of struct f2fs_summary_block equals F2FS_BLKSIZE, use
+> F2FS_BLKSIZE instead of PAGE_CACHE_SIZE as the size of struct
+> f2fs_summary_block.
 > 
 > Signed-off-by: Bart Van Assche <bvanassche@acm.org>
 
