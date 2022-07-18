@@ -2,105 +2,118 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34B7A578927
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Jul 2022 20:02:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57ED1578E00
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 19 Jul 2022 01:03:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oDV4u-0005nX-HX; Mon, 18 Jul 2022 18:02:43 +0000
+	id 1oDZlX-0002bC-GK; Mon, 18 Jul 2022 23:03:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <mcroce@linux.microsoft.com>) id 1oDV4t-0005nR-Di
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jul 2022 18:02:42 +0000
+ (envelope-from <daeho43@gmail.com>) id 1oDZlW-0002az-AA
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jul 2022 23:03:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NWpc2uo6Ue/xII6Anu98LXQW9gYITJWvYlQHSmXzrwc=; b=e/y1bgwRrL9IXqGvg7jBPJdZ3u
- oSeOT1E4tfzRDJOL8wluGV8REDKA0WFDRuYSmRvGuT0UPeO9tDBTF0nMOc9nfnZVlU8IC7ejuROMo
- 7Pc/yq2gou0umVUWRZX/BR41Qc/EvkclKGckpaPZio1eQX0ojyOIh8n/02D1grgk9AEA=;
+ bh=YhbyvF2560CrN/uHVk5GP1DJRcLB2iUBdTbsGNA6XJo=; b=Iqnu/BqlcRx9/WaAdvy0/rJAvp
+ PWb9b/oTsEDF2biFpCJA5m0Wbr8SJBG8wMXa6dP03qqQmAAcELZBOPPHbtAR9kCIClqoLuwkbACqE
+ zdiStqXhZHgNihCeA/pkA0yKvsBmUHKfhssfRXnU54gwdJ72AgOJWoev2qOJQppiOXTA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=NWpc2uo6Ue/xII6Anu98LXQW9gYITJWvYlQHSmXzrwc=; b=KplibRZmklYxZQcZxadGRDdPFb
- oiu347xWmNdgQ9uFWtyC9EFdnCGDk/VmjhGWAbR3aG/DZTamtQyO/cHiRwIHlXwco+P8lrtN80P2U
- 9aFbyxjEp3OVGD+VvPXJucNuUIVLmILM3GCuRGnVnf2/zAuxmGMk3LQjfkYQrshQYvpE=;
-Received: from linux.microsoft.com ([13.77.154.182])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.94.2)
- id 1oDV4o-0003mi-7U
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jul 2022 18:02:42 +0000
-Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com
- [209.85.160.49])
- by linux.microsoft.com (Postfix) with ESMTPSA id A276520FD8AC
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=YhbyvF2560CrN/uHVk5GP1DJRcLB2iUBdTbsGNA6XJo=; b=F
+ ihSZPzjOvB2Zvu47gRsL2IuEdnxnwhMP1ZK17sRDqgNmicdxlQ84jfUyQXb0sDAvY5A4iZm2Z0WPJ
+ ldg4zuG0SwXqrYHBYaM42fAAVUa4BN0EW0oRkFK/ueyCGNTZwGiZcXmrTw2VO8FJoPGM8ZonTdQC7
+ 4cfpPuiwA3WCleeU=;
+Received: from mail-pl1-f174.google.com ([209.85.214.174])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1oDZlS-00082G-HF
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jul 2022 23:03:02 +0000
+Received: by mail-pl1-f174.google.com with SMTP id w7so10380622ply.12
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 18 Jul 2022 11:02:28 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com A276520FD8AC
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1658167348;
- bh=NWpc2uo6Ue/xII6Anu98LXQW9gYITJWvYlQHSmXzrwc=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=HrDQ/mfbbXMiSubCvznN1exKm+MpHQFQucnSCQU4x5k3rTELKoQnMJWADM94IWDhw
- c6E+cgnDnUA/o4l8v2T5K3Wh0iWc0LlzO8Zis7ivo9XPMXOMV+GXTXiVBeqcuy1BOC
- 4nBJZXT2sEZ8BRLkVvD8ExC0dblAeVsIOwKX7cM0=
-Received: by mail-oa1-f49.google.com with SMTP id
- 586e51a60fabf-10bf634bc50so25830511fac.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 18 Jul 2022 11:02:28 -0700 (PDT)
-X-Gm-Message-State: AJIora+wlQMYpR6I8zRvpdj/hNWUK31SMhvb1YalwuXcXLUGB4vA+2sl
- Q1h8YOf8sudaM7lBAnsED+hu+m3sNSkIMStaAoM=
-X-Google-Smtp-Source: AGRyM1sdWBvJlONn7aD5Z6jUDYoTzbFn/hfo+DHfxMFd2MkUWhgvZK9tRYsYHJlAx8an94QaDK7dw104Ultb5FmqdEs=
-X-Received: by 2002:a05:6808:9b2:b0:33a:84ce:f363 with SMTP id
- e18-20020a05680809b200b0033a84cef363mr1539836oig.15.1658167347582; Mon, 18
- Jul 2022 11:02:27 -0700 (PDT)
+ Mon, 18 Jul 2022 16:02:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=YhbyvF2560CrN/uHVk5GP1DJRcLB2iUBdTbsGNA6XJo=;
+ b=nFbyzfdTuOTDQrLak2iGUJB1tB0HESUtwy27GUd80D7xmaZ+R+aE/fVCmPgaoEsgJK
+ 7LIiZpeQhUZAHXAP3urmDRhqbjj/pfhpM12X96QI8vSpOYqD8lm8JzIw9fO/9QVbruof
+ NPdPJXN1fWWuJksmZoQRrgh/Yl0u7YSqC8cidxjhJuonTU6yN50/XU8DIfwFCJmkBURQ
+ iVuahQ2eepVbY0qTzOUiSlZmOoZv7mRyRDwvqTidOvlrO9v0ewasLMOergTKU/FqBMfk
+ slnunM8CWKzqcg7R1Xla45F00ZztGrqXfPOPQEj/Q9Ndm8ZI1xQg+kPz1IBDV6wooyea
+ oNpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=YhbyvF2560CrN/uHVk5GP1DJRcLB2iUBdTbsGNA6XJo=;
+ b=t7qSTnzD/LaU8j2LiUH0UC3XiDpeQvDFzuBbIjRPJ43hKhxhyI432fl+ffzgR7Ktsn
+ aaxTPbuMUqYBWKw9PGMsOUTt5VJQOzMivae5l5PGUBpfO3OdwL8iqtIalsVNfyK7WAae
+ 25cHafiAqj0S4vMmpqQr4YsxyHw10qzMfMw7MGBLuU0tcfzZMQ1dEIbj11oQplP5iWh2
+ fIRk4+2v5jQ9r262T2TZTFcGfz/GXcZzosHNHnM4th1e0Hvd+bLauhklNXhc46sk8Rdu
+ JaCwOEVD8/GLSCVfBM/MjKLrZUXTU3zdvnjktsJEngHZ63PzFb6u/2FAFD2VP4/K0QWq
+ Yegg==
+X-Gm-Message-State: AJIora9XC4/zQFzDk9NK92BVKCkmNVrGkibrehUbH45UEvIm7pkJIsYT
+ AWv0cYxcdySkYQsjYyXEEic=
+X-Google-Smtp-Source: AGRyM1v1la4KV7gGQYSHFEtqr12Po850VE+8GhhiZ60oO0virr++MzdE4J6KAWXcMgXfdjp23nv/8g==
+X-Received: by 2002:a17:90a:590e:b0:1f1:afeb:996 with SMTP id
+ k14-20020a17090a590e00b001f1afeb0996mr12474099pji.205.1658185372678; 
+ Mon, 18 Jul 2022 16:02:52 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:15c:211:201:d2fc:81d3:e812:8c86])
+ by smtp.gmail.com with ESMTPSA id
+ n4-20020a170903110400b0016ce31d1d97sm5011590plh.114.2022.07.18.16.02.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Jul 2022 16:02:52 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Mon, 18 Jul 2022 16:02:48 -0700
+Message-Id: <20220718230248.3791635-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.37.0.170.g444d1eabd0-goog
 MIME-Version: 1.0
-References: <20220506013306.3563504-1-chao@kernel.org>
- <20220713012218.292a3816@t490s>
- <a2c4e03c-e137-887f-bd7a-fdacffcb1ee9@kernel.org>
-In-Reply-To: <a2c4e03c-e137-887f-bd7a-fdacffcb1ee9@kernel.org>
-From: Matteo Croce <mcroce@linux.microsoft.com>
-Date: Mon, 18 Jul 2022 20:01:51 +0200
-X-Gmail-Original-Message-ID: <CAFnufp0-3=-=_TkQLEV33u3R4AZJu5V42jYy7=5pB9eCqo1JgA@mail.gmail.com>
-Message-ID: <CAFnufp0-3=-=_TkQLEV33u3R4AZJu5V42jYy7=5pB9eCqo1JgA@mail.gmail.com>
-To: Chao Yu <chao@kernel.org>
-X-Spam-Score: -17.9 (-----------------)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jul 13, 2022 at 4:15 AM Chao Yu <chao@kernel.org>
- wrote: > > On 2022/7/13 7:22, Matteo Croce wrote: > > On Fri,
- 6 May 2022 09:33:06
- +0800 > > Chao Yu <chao@kernel.org> wrote: > > > >> As Yanmi [...] 
- Content analysis details:   (-17.9 points, 6.0 required)
+ Content preview:  From: Daeho Jeong introduce the below 4 new sysfs node for
+ atomic write statistics. - current_atomic_write: the total current atomic
+ write block count, which is not committed yet. - peak_atomic_write: the peak
+ value of [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.174 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.174 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
- welcome-list
- -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
- welcome-list
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [13.77.154.182 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
- Match
-X-Headers-End: 1oDV4o-0003mi-7U
-Subject: Re: [f2fs-dev] [PATCH v4] f2fs: fix to do sanity check on
- total_data_blocks
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1oDZlS-00082G-HF
+Subject: [f2fs-dev] [PATCH] f2fs: introduce sysfs atomic write statistics
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,564 +125,283 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, Ming Yan <yanming@tju.edu.cn>,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jul 13, 2022 at 4:15 AM Chao Yu <chao@kernel.org> wrote:
->
-> On 2022/7/13 7:22, Matteo Croce wrote:
-> > On Fri,  6 May 2022 09:33:06 +0800
-> > Chao Yu <chao@kernel.org> wrote:
-> >
-> >> As Yanming reported in bugzilla:
-> >>
-> >> https://bugzilla.kernel.org/show_bug.cgi?id=215916
-> >>
-> >> The kernel message is shown below:
-> >>
-> >> kernel BUG at fs/f2fs/segment.c:2560!
-> >> Call Trace:
-> >>   allocate_segment_by_default+0x228/0x440
-> >>   f2fs_allocate_data_block+0x13d1/0x31f0
-> >>   do_write_page+0x18d/0x710
-> >>   f2fs_outplace_write_data+0x151/0x250
-> >>   f2fs_do_write_data_page+0xef9/0x1980
-> >>   move_data_page+0x6af/0xbc0
-> >>   do_garbage_collect+0x312f/0x46f0
-> >>   f2fs_gc+0x6b0/0x3bc0
-> >>   f2fs_balance_fs+0x921/0x2260
-> >>   f2fs_write_single_data_page+0x16be/0x2370
-> >>   f2fs_write_cache_pages+0x428/0xd00
-> >>   f2fs_write_data_pages+0x96e/0xd50
-> >>   do_writepages+0x168/0x550
-> >>   __writeback_single_inode+0x9f/0x870
-> >>   writeback_sb_inodes+0x47d/0xb20
-> >>   __writeback_inodes_wb+0xb2/0x200
-> >>   wb_writeback+0x4bd/0x660
-> >>   wb_workfn+0x5f3/0xab0
-> >>   process_one_work+0x79f/0x13e0
-> >>   worker_thread+0x89/0xf60
-> >>   kthread+0x26a/0x300
-> >>   ret_from_fork+0x22/0x30
-> >> RIP: 0010:new_curseg+0xe8d/0x15f0
-> >>
-> >> The root cause is: ckpt.valid_block_count is inconsistent with SIT
-> >> table, stat info indicates filesystem has free blocks, but SIT table
-> >> indicates filesystem has no free segment.
-> >>
-> >> So that during garbage colloection, it triggers panic when LFS
-> >> allocator fails to find free segment.
-> >>
-> >> This patch tries to fix this issue by checking consistency in between
-> >> ckpt.valid_block_count and block accounted from SIT.
-> >>
-> >> Cc: stable@vger.kernel.org
-> >> Reported-by: Ming Yan <yanming@tju.edu.cn>
-> >> Signed-off-by: Chao Yu <chao.yu@oppo.com>
-> >> ---
-> >> v4:
-> >> - fix to set data/node type correctly.
-> >>   fs/f2fs/segment.c | 37 ++++++++++++++++++++++++++-----------
-> >>   1 file changed, 26 insertions(+), 11 deletions(-)
-> >>
-> >> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> >> index 3a3e2cec2ac4..4735d477059d 100644
-> >> --- a/fs/f2fs/segment.c
-> >> +++ b/fs/f2fs/segment.c
-> >> @@ -4461,7 +4461,8 @@ static int build_sit_entries(struct
-> >> f2fs_sb_info *sbi) unsigned int i, start, end;
-> >>      unsigned int readed, start_blk = 0;
-> >>      int err = 0;
-> >> -    block_t total_node_blocks = 0;
-> >> +    block_t sit_valid_blocks[2] = {0, 0};
-> >> +    int type;
-> >>
-> >>      do {
-> >>              readed = f2fs_ra_meta_pages(sbi, start_blk,
-> >> BIO_MAX_VECS, @@ -4486,8 +4487,9 @@ static int
-> >> build_sit_entries(struct f2fs_sb_info *sbi) if (err)
-> >>                              return err;
-> >>                      seg_info_from_raw_sit(se, &sit);
-> >> -                    if (IS_NODESEG(se->type))
-> >> -                            total_node_blocks +=
-> >> se->valid_blocks; +
-> >> +                    type = IS_NODESEG(se->type) ? NODE : DATA;
-> >> +                    sit_valid_blocks[type] += se->valid_blocks;
-> >>
-> >>                      if (f2fs_block_unit_discard(sbi)) {
-> >>                              /* build discard map only one time */
-> >> @@ -4527,15 +4529,17 @@ static int build_sit_entries(struct
-> >> f2fs_sb_info *sbi) sit = sit_in_journal(journal, i);
-> >>
-> >>              old_valid_blocks = se->valid_blocks;
-> >> -            if (IS_NODESEG(se->type))
-> >> -                    total_node_blocks -= old_valid_blocks;
-> >> +
-> >> +            type = IS_NODESEG(se->type) ? NODE : DATA;
-> >> +            sit_valid_blocks[type] -= old_valid_blocks;
-> >>
-> >>              err = check_block_count(sbi, start, &sit);
-> >>              if (err)
-> >>                      break;
-> >>              seg_info_from_raw_sit(se, &sit);
-> >> -            if (IS_NODESEG(se->type))
-> >> -                    total_node_blocks += se->valid_blocks;
-> >> +
-> >> +            type = IS_NODESEG(se->type) ? NODE : DATA;
-> >> +            sit_valid_blocks[type] += se->valid_blocks;
-> >>
-> >>              if (f2fs_block_unit_discard(sbi)) {
-> >>                      if (is_set_ckpt_flags(sbi, CP_TRIMMED_FLAG))
-> >> { @@ -4557,13 +4561,24 @@ static int build_sit_entries(struct
-> >> f2fs_sb_info *sbi) }
-> >>      up_read(&curseg->journal_rwsem);
-> >>
-> >> -    if (!err && total_node_blocks != valid_node_count(sbi)) {
-> >> +    if (err)
-> >> +            return err;
-> >> +
-> >> +    if (sit_valid_blocks[NODE] != valid_node_count(sbi)) {
-> >>              f2fs_err(sbi, "SIT is corrupted node# %u vs %u",
-> >> -                     total_node_blocks, valid_node_count(sbi));
-> >> -            err = -EFSCORRUPTED;
-> >> +                     sit_valid_blocks[NODE],
-> >> valid_node_count(sbi));
-> >> +            return -EFSCORRUPTED;
-> >>      }
-> >>
-> >> -    return err;
-> >> +    if (sit_valid_blocks[DATA] + sit_valid_blocks[NODE] >
-> >> +                            valid_user_blocks(sbi)) {
-> >> +            f2fs_err(sbi, "SIT is corrupted data# %u %u vs %u",
-> >> +                     sit_valid_blocks[DATA],
-> >> sit_valid_blocks[NODE],
-> >> +                     valid_user_blocks(sbi));
-> >> +            return -EFSCORRUPTED;
-> >> +    }
-> >> +
-> >> +    return 0;
-> >>   }
-> >>
-> >>   static void init_free_segmap(struct f2fs_sb_info *sbi)
-> >
-> > Hi all,
-> >
-> > I'm experiencing this with kernel 5.18.5:
->
-> Hi Matteo,
->
-> It looks in your attached log there is no similar stack as below?
->
->  >> kernel BUG at fs/f2fs/segment.c:2560!
->  >> Call Trace:
->  >>   allocate_segment_by_default+0x228/0x440
->  >>   f2fs_allocate_data_block+0x13d1/0x31f0
->  >>   do_write_page+0x18d/0x710
->
-> Could you please check cpu usage when the bug reproduces?
->
-> Thanks,
+From: Daeho Jeong <daehojeong@google.com>
 
-Hi,
+introduce the below 4 new sysfs node for atomic write statistics.
+- current_atomic_write: the total current atomic write block count,
+                        which is not committed yet.
+- peak_atomic_write: the peak value of total current atomic write block
+                     count after boot.
+- committed_atomic_block: the accumulated total committed atomic write
+                          block count after boot.
+- revoked_atomic_block: the accumulated total revoked atomic write block
+                        count after boot.
 
-This happens when the bug happens:
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ Documentation/ABI/testing/sysfs-fs-f2fs | 25 ++++++++++++++
+ fs/f2fs/data.c                          |  7 ++--
+ fs/f2fs/f2fs.h                          | 30 ++++++++++++++++
+ fs/f2fs/file.c                          |  1 +
+ fs/f2fs/segment.c                       |  6 ++++
+ fs/f2fs/super.c                         |  1 +
+ fs/f2fs/sysfs.c                         | 46 +++++++++++++++++++++++++
+ 7 files changed, 113 insertions(+), 3 deletions(-)
 
-  PID USER   PR  NI    S  %CPU  %MEM     TIME+ COMMAND
-  398 root   20   0    R 100,0   0,0   2:05.80 f2fs_gc-179:130
+diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+index 22c1efd49773..ed43d589354d 100644
+--- a/Documentation/ABI/testing/sysfs-fs-f2fs
++++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+@@ -586,3 +586,28 @@ Date:		June 2022
+ Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
+ Description:	Shows the number of unusable blocks in a section which was defined by
+ 		the zone capacity reported by underlying zoned device.
++
++What:		/sys/fs/f2fs/<disk>/current_atomic_write
++Date:		July 2022
++Contact:	"Daeho Jeong" <daehojeong@google.com>
++Description:	Show the total current atomic write block count, which is not committed yet.
++		This is a read-only entry.
++
++What:		/sys/fs/f2fs/<disk>/peak_atomic_write
++Date:		July 2022
++Contact:	"Daeho Jeong" <daehojeong@google.com>
++Description:	Show the peak value of total current atomic write block count after boot.
++		If you write "0" here, you can initialize to "0".
++
++What:		/sys/fs/f2fs/<disk>/committed_atomic_block
++Date:		July 2022
++Contact:	"Daeho Jeong" <daehojeong@google.com>
++Description:	Show the accumulated total committed atomic write block count after boot.
++		If you write "0" here, you can initialize to "0".
++
++What:		/sys/fs/f2fs/<disk>/revoked_atomic_block
++Date:		July 2022
++Contact:	"Daeho Jeong" <daehojeong@google.com>
++Description:	Show the accumulated total revoked atomic write block count after boot.
++		If you write "0" here, you can initialize to "0".
++
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index c448c3ee7ac3..42eb694685cc 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -3423,12 +3423,11 @@ static int prepare_atomic_write_begin(struct f2fs_sb_info *sbi,
+ 	struct inode *cow_inode = F2FS_I(inode)->cow_inode;
+ 	pgoff_t index = page->index;
+ 	int err = 0;
+-	block_t ori_blk_addr;
++	block_t ori_blk_addr = NULL_ADDR;
+ 
+ 	/* If pos is beyond the end of file, reserve a new block in COW inode */
+ 	if ((pos & PAGE_MASK) >= i_size_read(inode))
+-		return __reserve_data_block(cow_inode, index, blk_addr,
+-					node_changed);
++		goto reserve_block;
+ 
+ 	/* Look for the block in COW inode first */
+ 	err = __find_data_block(cow_inode, index, blk_addr);
+@@ -3442,10 +3441,12 @@ static int prepare_atomic_write_begin(struct f2fs_sb_info *sbi,
+ 	if (err)
+ 		return err;
+ 
++reserve_block:
+ 	/* Finally, we should reserve a new block in COW inode for the update */
+ 	err = __reserve_data_block(cow_inode, index, blk_addr, node_changed);
+ 	if (err)
+ 		return err;
++	inc_atomic_write_cnt(inode);
+ 
+ 	if (ori_blk_addr != NULL_ADDR)
+ 		*blk_addr = ori_blk_addr;
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 1d97d06e0d87..8e0f9e867e86 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -813,6 +813,8 @@ struct f2fs_inode_info {
+ 	unsigned char i_compress_level;		/* compress level (lz4hc,zstd) */
+ 	unsigned short i_compress_flag;		/* compress flag */
+ 	unsigned int i_cluster_size;		/* cluster size */
++
++	unsigned int atomic_write_cnt;
+ };
+ 
+ static inline void get_extent_info(struct extent_info *ext,
+@@ -1813,6 +1815,12 @@ struct f2fs_sb_info {
+ 	int max_fragment_chunk;			/* max chunk size for block fragmentation mode */
+ 	int max_fragment_hole;			/* max hole size for block fragmentation mode */
+ 
++	/* For atomic write statistics */
++	atomic64_t current_atomic_write;
++	s64 peak_atomic_write;
++	u64 committed_atomic_block;
++	u64 revoked_atomic_block;
++
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ 	struct kmem_cache *page_array_slab;	/* page array entry */
+ 	unsigned int page_array_slab_size;	/* default page array slab size */
+@@ -2427,6 +2435,28 @@ static inline void inode_dec_dirty_pages(struct inode *inode)
+ 		dec_page_count(F2FS_I_SB(inode), F2FS_DIRTY_QDATA);
+ }
+ 
++static inline void inc_atomic_write_cnt(struct inode *inode)
++{
++	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
++	struct f2fs_inode_info *fi = F2FS_I(inode);
++	u64 current_write;
++
++	fi->atomic_write_cnt++;
++	atomic64_inc(&sbi->current_atomic_write);
++	current_write = atomic64_read(&sbi->current_atomic_write);
++	if (current_write > sbi->peak_atomic_write)
++		sbi->peak_atomic_write = current_write;
++}
++
++static inline void release_atomic_write_cnt(struct inode *inode)
++{
++	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
++	struct f2fs_inode_info *fi = F2FS_I(inode);
++
++	atomic64_sub(fi->atomic_write_cnt, &sbi->current_atomic_write);
++	fi->atomic_write_cnt = 0;
++}
++
+ static inline s64 get_pages(struct f2fs_sb_info *sbi, int count_type)
+ {
+ 	return atomic_read(&sbi->nr_pages[count_type]);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 0f29af7876a6..49a62d134884 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2075,6 +2075,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
+ 	f2fs_update_time(sbi, REQ_TIME);
+ 	fi->atomic_write_task = current;
+ 	stat_update_max_atomic_write(inode);
++	fi->atomic_write_cnt = 0;
+ out:
+ 	inode_unlock(inode);
+ 	mnt_drop_write_file(filp);
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index ce571c0d7126..17cb518f88b3 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -196,6 +196,7 @@ void f2fs_abort_atomic_write(struct inode *inode, bool clean)
+ 		clear_inode_flag(fi->cow_inode, FI_ATOMIC_FILE);
+ 		iput(fi->cow_inode);
+ 		fi->cow_inode = NULL;
++		release_atomic_write_cnt(inode);
+ 		clear_inode_flag(inode, FI_ATOMIC_FILE);
+ 
+ 		spin_lock(&sbi->inode_lock[ATOMIC_FILE]);
+@@ -335,6 +336,11 @@ static int __f2fs_commit_atomic_write(struct inode *inode)
+ 	}
+ 
+ out:
++	if (ret)
++		sbi->revoked_atomic_block += fi->atomic_write_cnt;
++	else
++		sbi->committed_atomic_block += fi->atomic_write_cnt;
++
+ 	__complete_revoke_list(inode, &revoke_list, ret ? true : false);
+ 
+ 	return ret;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index faf9a767d05a..1c6203798fb4 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -3615,6 +3615,7 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
+ 	sbi->max_fragment_chunk = DEF_FRAGMENT_SIZE;
+ 	sbi->max_fragment_hole = DEF_FRAGMENT_SIZE;
+ 	spin_lock_init(&sbi->gc_urgent_high_lock);
++	atomic64_set(&sbi->current_atomic_write, 0);
+ 
+ 	sbi->dir_level = DEF_DIR_LEVEL;
+ 	sbi->interval_time[CP_TIME] = DEF_CP_INTERVAL;
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 6eeefe60a7af..eba5fb1629d7 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -339,6 +339,21 @@ static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
+ 			sbi->gc_reclaimed_segs[sbi->gc_segment_mode]);
+ 	}
+ 
++	if (!strcmp(a->attr.name, "current_atomic_write")) {
++		s64 current_write = atomic64_read(&sbi->current_atomic_write);
++
++		return sysfs_emit(buf, "%lld\n", current_write);
++	}
++
++	if (!strcmp(a->attr.name, "peak_atomic_write"))
++		return sysfs_emit(buf, "%lld\n", sbi->peak_atomic_write);
++
++	if (!strcmp(a->attr.name, "committed_atomic_block"))
++		return sysfs_emit(buf, "%llu\n", sbi->committed_atomic_block);
++
++	if (!strcmp(a->attr.name, "revoked_atomic_block"))
++		return sysfs_emit(buf, "%llu\n", sbi->revoked_atomic_block);
++
+ 	ui = (unsigned int *)(ptr + a->offset);
+ 
+ 	return sprintf(buf, "%u\n", *ui);
+@@ -608,6 +623,27 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 		return count;
+ 	}
+ 
++	if (!strcmp(a->attr.name, "peak_atomic_write")) {
++		if (t != 0)
++			return -EINVAL;
++		sbi->peak_atomic_write = 0;
++		return count;
++	}
++
++	if (!strcmp(a->attr.name, "committed_atomic_block")) {
++		if (t != 0)
++			return -EINVAL;
++		sbi->committed_atomic_block = 0;
++		return count;
++	}
++
++	if (!strcmp(a->attr.name, "revoked_atomic_block")) {
++		if (t != 0)
++			return -EINVAL;
++		sbi->revoked_atomic_block = 0;
++		return count;
++	}
++
+ 	*ui = (unsigned int)t;
+ 
+ 	return count;
+@@ -855,6 +891,12 @@ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_reclaimed_segments, gc_reclaimed_segs);
+ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_fragment_chunk, max_fragment_chunk);
+ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_fragment_hole, max_fragment_hole);
+ 
++/* For atomic write */
++F2FS_RO_ATTR(F2FS_SBI, f2fs_sb_info, current_atomic_write, current_atomic_write);
++F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, peak_atomic_write, peak_atomic_write);
++F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, committed_atomic_block, committed_atomic_block);
++F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, revoked_atomic_block, revoked_atomic_block);
++
+ #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
+ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(gc_urgent_sleep_time),
+@@ -944,6 +986,10 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(gc_reclaimed_segments),
+ 	ATTR_LIST(max_fragment_chunk),
+ 	ATTR_LIST(max_fragment_hole),
++	ATTR_LIST(current_atomic_write),
++	ATTR_LIST(peak_atomic_write),
++	ATTR_LIST(committed_atomic_block),
++	ATTR_LIST(revoked_atomic_block),
+ 	NULL,
+ };
+ ATTRIBUTE_GROUPS(f2fs);
+-- 
+2.37.0.170.g444d1eabd0-goog
 
-
-
->
-> >
-> > [1774085.200363] rcu: INFO: rcu_sched self-detected stall on CPU
-> > [1774085.206139] rcu:   1-....: (2099 ticks this GP) idle=a7f/1/0x4000000000000000 softirq=6435692/6435692 fqs=977
-> > [1774085.216272]        (t=2101 jiffies g=30461565 q=289)
-> > [1774085.216276] Task dump for CPU 1:
-> > [1774085.216278] task:f2fs_gc-179:130 state:R  running task     stack:    0 pid:  400 ppid:     2 flags:0x0000000a
-> > [1774085.216285] Call trace:
-> > [1774085.216287]  dump_backtrace.part.0+0xb4/0xc0
-> > [1774085.216299]  show_stack+0x14/0x30
-> > [1774085.216304]  sched_show_task+0x130/0x160
-> > [1774085.216309]  dump_cpu_task+0x40/0x4c
-> > [1774085.216313]  rcu_dump_cpu_stacks+0xec/0x130
-> > [1774085.216317]  rcu_sched_clock_irq+0x8f8/0xaa0
-> > [1774085.216321]  update_process_times+0x98/0x180
-> > [1774085.216324]  tick_sched_timer+0x54/0xd0
-> > [1774085.216329]  __hrtimer_run_queues+0x134/0x2d0
-> > [1774085.216333]  hrtimer_interrupt+0x110/0x2c0
-> > [1774085.216336]  arch_timer_handler_phys+0x28/0x40
-> > [1774085.216342]  handle_percpu_devid_irq+0x84/0x1c0
-> > [1774085.216348]  generic_handle_domain_irq+0x28/0x40
-> > [1774085.216352]  gic_handle_irq+0x58/0x80
-> > [1774085.216357]  call_on_irq_stack+0x2c/0x3c
-> > [1774085.216360]  do_interrupt_handler+0x78/0x84
-> > [1774085.216364]  el1_interrupt+0x30/0x50
-> > [1774085.216368]  el1h_64_irq_handler+0x14/0x20
-> > [1774085.216371]  el1h_64_irq+0x64/0x68
-> > [1774085.216374]  __filemap_get_folio+0xa0/0x3b0
-> > [1774085.216378]  pagecache_get_page+0x18/0x70
-> > [1774085.216383]  grab_cache_page_write_begin+0x20/0x30
-> > [1774085.216388]  f2fs_get_read_data_page+0x3c/0x480
-> > [1774085.216392]  f2fs_get_lock_data_page+0x3c/0x260
-> > [1774085.216395]  move_data_page+0x34/0x530
-> > [1774085.216398]  do_garbage_collect+0xc54/0x12e0
-> > [1774085.216401]  f2fs_gc+0x3b4/0x800
-> > [1774085.216404]  gc_thread_func+0x4c8/0x640
-> > [1774085.216407]  kthread+0xd0/0xe0
-> > [1774085.216411]  ret_from_fork+0x10/0x20
-> > [1774115.558533] rcu: INFO: rcu_sched self-detected stall on CPU
-> > [1774115.564309] rcu:   1-....: (2099 ticks this GP) idle=be7/1/0x4000000000000000 softirq=6435694/6435694 fqs=1016
-> > [1774115.574528]        (t=2101 jiffies g=30461569 q=847)
-> > [1774115.574532] Task dump for CPU 1:
-> > [1774115.574534] task:f2fs_gc-179:130 state:R  running task     stack:    0 pid:  400 ppid:     2 flags:0x0000000a
-> > [1774115.574541] Call trace:
-> > [1774115.574543]  dump_backtrace.part.0+0xb4/0xc0
-> > [1774115.574555]  show_stack+0x14/0x30
-> > [1774115.574559]  sched_show_task+0x130/0x160
-> > [1774115.574564]  dump_cpu_task+0x40/0x4c
-> > [1774115.574569]  rcu_dump_cpu_stacks+0xec/0x130
-> > [1774115.574572]  rcu_sched_clock_irq+0x8f8/0xaa0
-> > [1774115.574576]  update_process_times+0x98/0x180
-> > [1774115.574580]  tick_sched_timer+0x54/0xd0
-> > [1774115.574584]  __hrtimer_run_queues+0x134/0x2d0
-> > [1774115.574587]  hrtimer_interrupt+0x110/0x2c0
-> > [1774115.574590]  arch_timer_handler_phys+0x28/0x40
-> > [1774115.574596]  handle_percpu_devid_irq+0x84/0x1c0
-> > [1774115.574603]  generic_handle_domain_irq+0x28/0x40
-> > [1774115.574606]  gic_handle_irq+0x58/0x80
-> > [1774115.574611]  call_on_irq_stack+0x2c/0x3c
-> > [1774115.574615]  do_interrupt_handler+0x78/0x84
-> > [1774115.574618]  el1_interrupt+0x30/0x50
-> > [1774115.574623]  el1h_64_irq_handler+0x14/0x20
-> > [1774115.574626]  el1h_64_irq+0x64/0x68
-> > [1774115.574629]  f2fs_is_valid_blkaddr+0x184/0x310
-> > [1774115.574633]  f2fs_get_read_data_page+0x80/0x480
-> > [1774115.574637]  f2fs_get_lock_data_page+0x3c/0x260
-> > [1774115.574640]  move_data_page+0x34/0x530
-> > [1774115.574643]  do_garbage_collect+0xc54/0x12e0
-> > [1774115.574646]  f2fs_gc+0x3b4/0x800
-> > [1774115.574649]  gc_thread_func+0x4c8/0x640
-> > [1774115.574652]  kthread+0xd0/0xe0
-> > [1774115.574655]  ret_from_fork+0x10/0x20
-> > [1774178.604732] rcu: INFO: rcu_sched self-detected stall on CPU
-> > [1774178.610507] rcu:   1-....: (8404 ticks this GP) idle=be7/1/0x4000000000000000 softirq=6435694/6435694 fqs=3918
-> > [1774178.620727]        (t=8406 jiffies g=30461569 q=2117)
-> > [1774178.620730] Task dump for CPU 1:
-> > [1774178.620732] task:f2fs_gc-179:130 state:R  running task     stack:    0 pid:  400 ppid:     2 flags:0x0000000a
-> > [1774178.620739] Call trace:
-> > [1774178.620741]  dump_backtrace.part.0+0xb4/0xc0
-> > [1774178.620750]  show_stack+0x14/0x30
-> > [1774178.620754]  sched_show_task+0x130/0x160
-> > [1774178.620762]  dump_cpu_task+0x40/0x4c
-> > [1774178.620766]  rcu_dump_cpu_stacks+0xec/0x130
-> > [1774178.620769]  rcu_sched_clock_irq+0x8f8/0xaa0
-> > [1774178.620774]  update_process_times+0x98/0x180
-> > [1774178.620777]  tick_sched_timer+0x54/0xd0
-> > [1774178.620781]  __hrtimer_run_queues+0x134/0x2d0
-> > [1774178.620785]  hrtimer_interrupt+0x110/0x2c0
-> > [1774178.620788]  arch_timer_handler_phys+0x28/0x40
-> > [1774178.620793]  handle_percpu_devid_irq+0x84/0x1c0
-> > [1774178.620798]  generic_handle_domain_irq+0x28/0x40
-> > [1774178.620801]  gic_handle_irq+0x58/0x80
-> > [1774178.620806]  call_on_irq_stack+0x2c/0x3c
-> > [1774178.620810]  do_interrupt_handler+0x78/0x84
-> > [1774178.620813]  el1_interrupt+0x30/0x50
-> > [1774178.620818]  el1h_64_irq_handler+0x14/0x20
-> > [1774178.620821]  el1h_64_irq+0x64/0x68
-> > [1774178.620823]  f2fs_lookup_extent_cache+0x18c/0x310
-> > [1774178.620828]  f2fs_get_read_data_page+0x54/0x480
-> > [1774178.620832]  f2fs_get_lock_data_page+0x3c/0x260
-> > [1774178.620835]  move_data_page+0x34/0x530
-> > [1774178.620838]  do_garbage_collect+0xc54/0x12e0
-> > [1774178.620842]  f2fs_gc+0x3b4/0x800
-> > [1774178.620844]  gc_thread_func+0x4c8/0x640
-> > [1774178.620848]  kthread+0xd0/0xe0
-> > [1774178.620851]  ret_from_fork+0x10/0x20
-> > [1774260.049828] rcu: INFO: rcu_sched self-detected stall on CPU
-> > [1774260.055605] rcu:   0-....: (2099 ticks this GP) idle=915/1/0x4000000000000000 softirq=6031130/6031130 fqs=1015
-> > [1774260.065826]        (t=2101 jiffies g=30461577 q=931)
-> > [1774260.065830] Task dump for CPU 0:
-> > [1774260.065832] task:f2fs_gc-179:130 state:R  running task     stack:    0 pid:  400 ppid:     2 flags:0x0000000a
-> > [1774260.065839] Call trace:
-> > [1774260.065841]  dump_backtrace.part.0+0xb4/0xc0
-> > [1774260.065854]  show_stack+0x14/0x30
-> > [1774260.065858]  sched_show_task+0x130/0x160
-> > [1774260.065863]  dump_cpu_task+0x40/0x4c
-> > [1774260.065868]  rcu_dump_cpu_stacks+0xec/0x130
-> > [1774260.065871]  rcu_sched_clock_irq+0x8f8/0xaa0
-> > [1774260.065875]  update_process_times+0x98/0x180
-> > [1774260.065879]  tick_sched_timer+0x54/0xd0
-> > [1774260.065883]  __hrtimer_run_queues+0x134/0x2d0
-> > [1774260.065887]  hrtimer_interrupt+0x110/0x2c0
-> > [1774260.065890]  arch_timer_handler_phys+0x28/0x40
-> > [1774260.065896]  handle_percpu_devid_irq+0x84/0x1c0
-> > [1774260.065901]  generic_handle_domain_irq+0x28/0x40
-> > [1774260.065904]  gic_handle_irq+0x58/0x80
-> > [1774260.065909]  call_on_irq_stack+0x2c/0x3c
-> > [1774260.065913]  do_interrupt_handler+0x78/0x84
-> > [1774260.065916]  el1_interrupt+0x30/0x50
-> > [1774260.065922]  el1h_64_irq_handler+0x14/0x20
-> > [1774260.065925]  el1h_64_irq+0x64/0x68
-> > [1774260.065928]  folio_wait_stable+0x8/0x30
-> > [1774260.065933]  pagecache_get_page+0x18/0x70
-> > [1774260.065938]  grab_cache_page_write_begin+0x20/0x30
-> > [1774260.065943]  f2fs_get_read_data_page+0x3c/0x480
-> > [1774260.065947]  f2fs_get_lock_data_page+0x3c/0x260
-> > [1774260.065950]  move_data_page+0x34/0x530
-> > [1774260.065954]  do_garbage_collect+0xc54/0x12e0
-> > [1774260.065957]  f2fs_gc+0x3b4/0x800
-> > [1774260.065960]  gc_thread_func+0x4c8/0x640
-> > [1774260.065963]  kthread+0xd0/0xe0
-> > [1774260.065966]  ret_from_fork+0x10/0x20
-> > [1774323.086033] rcu: INFO: rcu_sched self-detected stall on CPU
-> > [1774323.091808] rcu:   0-....: (8403 ticks this GP) idle=915/1/0x4000000000000000 softirq=6031130/6031130 fqs=4088
-> > [1774323.102028]        (t=8405 jiffies g=30461577 q=1422)
-> > [1774323.102031] Task dump for CPU 0:
-> > [1774323.102033] task:f2fs_gc-179:130 state:R  running task     stack:    0 pid:  400 ppid:     2 flags:0x0000000a
-> > [1774323.102040] Call trace:
-> > [1774323.102042]  dump_backtrace.part.0+0xb4/0xc0
-> > [1774323.102052]  show_stack+0x14/0x30
-> > [1774323.102055]  sched_show_task+0x130/0x160
-> > [1774323.102060]  dump_cpu_task+0x40/0x4c
-> > [1774323.102065]  rcu_dump_cpu_stacks+0xec/0x130
-> > [1774323.102068]  rcu_sched_clock_irq+0x8f8/0xaa0
-> > [1774323.102073]  update_process_times+0x98/0x180
-> > [1774323.102076]  tick_sched_timer+0x54/0xd0
-> > [1774323.102080]  __hrtimer_run_queues+0x134/0x2d0
-> > [1774323.102084]  hrtimer_interrupt+0x110/0x2c0
-> > [1774323.102087]  arch_timer_handler_phys+0x28/0x40
-> > [1774323.102092]  handle_percpu_devid_irq+0x84/0x1c0
-> > [1774323.102097]  generic_handle_domain_irq+0x28/0x40
-> > [1774323.102100]  gic_handle_irq+0x58/0x80
-> > [1774323.102105]  call_on_irq_stack+0x2c/0x3c
-> > [1774323.102109]  do_interrupt_handler+0x78/0x84
-> > [1774323.102112]  el1_interrupt+0x30/0x50
-> > [1774323.102118]  el1h_64_irq_handler+0x14/0x20
-> > [1774323.102120]  el1h_64_irq+0x64/0x68
-> > [1774323.102123]  folio_unlock+0x8/0x40
-> > [1774323.102127]  f2fs_get_lock_data_page+0xf4/0x260
-> > [1774323.102131]  move_data_page+0x34/0x530
-> > [1774323.102135]  do_garbage_collect+0xc54/0x12e0
-> > [1774323.102138]  f2fs_gc+0x3b4/0x800
-> > [1774323.102141]  gc_thread_func+0x4c8/0x640
-> > [1774323.102144]  kthread+0xd0/0xe0
-> > [1774323.102147]  ret_from_fork+0x10/0x20
-> > [1774386.122242] rcu: INFO: rcu_sched self-detected stall on CPU
-> > [1774386.128015] rcu:   0-....: (14707 ticks this GP) idle=915/1/0x4000000000000000 softirq=6031130/6031130 fqs=7133
-> > [1774386.138322]        (t=14709 jiffies g=30461577 q=1895)
-> > [1774386.138325] Task dump for CPU 0:
-> > [1774386.138327] task:f2fs_gc-179:130 state:R  running task     stack:    0 pid:  400 ppid:     2 flags:0x0000000a
-> > [1774386.138334] Call trace:
-> > [1774386.138335]  dump_backtrace.part.0+0xb4/0xc0
-> > [1774386.138345]  show_stack+0x14/0x30
-> > [1774386.138349]  sched_show_task+0x130/0x160
-> > [1774386.138354]  dump_cpu_task+0x40/0x4c
-> > [1774386.138358]  rcu_dump_cpu_stacks+0xec/0x130
-> > [1774386.138361]  rcu_sched_clock_irq+0x8f8/0xaa0
-> > [1774386.138365]  update_process_times+0x98/0x180
-> > [1774386.138369]  tick_sched_timer+0x54/0xd0
-> > [1774386.138373]  __hrtimer_run_queues+0x134/0x2d0
-> > [1774386.138376]  hrtimer_interrupt+0x110/0x2c0
-> > [1774386.138380]  arch_timer_handler_phys+0x28/0x40
-> > [1774386.138384]  handle_percpu_devid_irq+0x84/0x1c0
-> > [1774386.138389]  generic_handle_domain_irq+0x28/0x40
-> > [1774386.138393]  gic_handle_irq+0x58/0x80
-> > [1774386.138397]  call_on_irq_stack+0x2c/0x3c
-> > [1774386.138401]  do_interrupt_handler+0x78/0x84
-> > [1774386.138405]  el1_interrupt+0x30/0x50
-> > [1774386.138410]  el1h_64_irq_handler+0x14/0x20
-> > [1774386.138413]  el1h_64_irq+0x64/0x68
-> > [1774386.138416]  f2fs_lookup_extent_cache+0x18c/0x310
-> > [1774386.138420]  f2fs_get_read_data_page+0x54/0x480
-> > [1774386.138424]  f2fs_get_lock_data_page+0x3c/0x260
-> > [1774386.138427]  move_data_page+0x34/0x530
-> > [1774386.138431]  do_garbage_collect+0xc54/0x12e0
-> > [1774386.138434]  f2fs_gc+0x3b4/0x800
-> > [1774386.138437]  gc_thread_func+0x4c8/0x640
-> > [1774386.138440]  kthread+0xd0/0xe0
-> > [1774386.138443]  ret_from_fork+0x10/0x20
-> > [1774449.158452] rcu: INFO: rcu_sched self-detected stall on CPU
-> > [1774449.164226] rcu:   0-....: (21011 ticks this GP) idle=915/1/0x4000000000000000 softirq=6031130/6031130 fqs=10163
-> > [1774449.174619]        (t=21013 jiffies g=30461577 q=2392)
-> > [1774449.174622] Task dump for CPU 0:
-> > [1774449.174624] task:f2fs_gc-179:130 state:R  running task     stack:    0 pid:  400 ppid:     2 flags:0x0000000a
-> > [1774449.174630] Call trace:
-> > [1774449.174632]  dump_backtrace.part.0+0xb4/0xc0
-> > [1774449.174641]  show_stack+0x14/0x30
-> > [1774449.174645]  sched_show_task+0x130/0x160
-> > [1774449.174650]  dump_cpu_task+0x40/0x4c
-> > [1774449.174654]  rcu_dump_cpu_stacks+0xec/0x130
-> > [1774449.174657]  rcu_sched_clock_irq+0x8f8/0xaa0
-> > [1774449.174661]  update_process_times+0x98/0x180
-> > [1774449.174664]  tick_sched_timer+0x54/0xd0
-> > [1774449.174668]  __hrtimer_run_queues+0x134/0x2d0
-> > [1774449.174672]  hrtimer_interrupt+0x110/0x2c0
-> > [1774449.174675]  arch_timer_handler_phys+0x28/0x40
-> > [1774449.174680]  handle_percpu_devid_irq+0x84/0x1c0
-> > [1774449.174685]  generic_handle_domain_irq+0x28/0x40
-> > [1774449.174688]  gic_handle_irq+0x58/0x80
-> > [1774449.174693]  call_on_irq_stack+0x2c/0x3c
-> > [1774449.174696]  do_interrupt_handler+0x78/0x84
-> > [1774449.174700]  el1_interrupt+0x30/0x50
-> > [1774449.174705]  el1h_64_irq_handler+0x14/0x20
-> > [1774449.174708]  el1h_64_irq+0x64/0x68
-> > [1774449.174711]  __filemap_get_folio+0x20/0x3b0
-> > [1774449.174715]  pagecache_get_page+0x18/0x70
-> > [1774449.174720]  grab_cache_page_write_begin+0x20/0x30
-> > [1774449.174725]  f2fs_get_read_data_page+0x3c/0x480
-> > [1774449.174729]  f2fs_get_lock_data_page+0x3c/0x260
-> > [1774449.174732]  move_data_page+0x34/0x530
-> > [1774449.174735]  do_garbage_collect+0xc54/0x12e0
-> > [1774449.174738]  f2fs_gc+0x3b4/0x800
-> > [1774449.174741]  gc_thread_func+0x4c8/0x640
-> > [1774449.174744]  kthread+0xd0/0xe0
-> > [1774449.174748]  ret_from_fork+0x10/0x20
-> > [1774512.194663] rcu: INFO: rcu_sched self-detected stall on CPU
-> > [1774512.200436] rcu:   0-....: (27315 ticks this GP) idle=915/1/0x4000000000000000 softirq=6031130/6031130 fqs=13122
-> > [1774512.210828]        (t=27317 jiffies g=30461577 q=2781)
-> > [1774512.210831] Task dump for CPU 0:
-> > [1774512.210834] task:f2fs_gc-179:130 state:R  running task     stack:    0 pid:  400 ppid:     2 flags:0x0000000a
-> > [1774512.210841] Call trace:
-> > [1774512.210842]  dump_backtrace.part.0+0xb4/0xc0
-> > [1774512.210852]  show_stack+0x14/0x30
-> > [1774512.210856]  sched_show_task+0x130/0x160
-> > [1774512.210860]  dump_cpu_task+0x40/0x4c
-> > [1774512.210864]  rcu_dump_cpu_stacks+0xec/0x130
-> > [1774512.210868]  rcu_sched_clock_irq+0x8f8/0xaa0
-> > [1774512.210872]  update_process_times+0x98/0x180
-> > [1774512.210875]  tick_sched_timer+0x54/0xd0
-> > [1774512.210879]  __hrtimer_run_queues+0x134/0x2d0
-> > [1774512.210882]  hrtimer_interrupt+0x110/0x2c0
-> > [1774512.210886]  arch_timer_handler_phys+0x28/0x40
-> > [1774512.210891]  handle_percpu_devid_irq+0x84/0x1c0
-> > [1774512.210896]  generic_handle_domain_irq+0x28/0x40
-> > [1774512.210899]  gic_handle_irq+0x58/0x80
-> > [1774512.210904]  call_on_irq_stack+0x2c/0x3c
-> > [1774512.210907]  do_interrupt_handler+0x78/0x84
-> > [1774512.210911]  el1_interrupt+0x30/0x50
-> > [1774512.210916]  el1h_64_irq_handler+0x14/0x20
-> > [1774512.210918]  el1h_64_irq+0x64/0x68
-> > [1774512.210921]  __filemap_get_folio+0x8c/0x3b0
-> > [1774512.210925]  pagecache_get_page+0x18/0x70
-> > [1774512.210930]  grab_cache_page_write_begin+0x20/0x30
-> > [1774512.210935]  f2fs_get_read_data_page+0x3c/0x480
-> > [1774512.210939]  f2fs_get_lock_data_page+0x3c/0x260
-> > [1774512.210942]  move_data_page+0x34/0x530
-> > [1774512.210945]  do_garbage_collect+0xc54/0x12e0
-> > [1774512.210948]  f2fs_gc+0x3b4/0x800
-> > [1774512.210951]  gc_thread_func+0x4c8/0x640
-> > [1774512.210954]  kthread+0xd0/0xe0
-> > [1774512.210957]  ret_from_fork+0x10/0x20
-> > [1774560.785116] INFO: task f2fs_ckpt-179:1:401 blocked for more than 404 seconds.
-> > [1774560.792572]       Not tainted 5.18.5-matteo #107
-> > [1774560.797401] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> > [1774560.805445] task:f2fs_ckpt-179:1 state:D stack:    0 pid:  401 ppid:     2 flags:0x00000008
-> > [1774560.805453] Call trace:
-> > [1774560.805456]  __switch_to+0xc0/0x100
-> > [1774560.805465]  __schedule+0x258/0x620
-> > [1774560.805469]  schedule+0x44/0xb0
-> > [1774560.805472]  rwsem_down_write_slowpath+0x314/0x5a0
-> > [1774560.805478]  down_write+0x44/0x50
-> > [1774560.805482]  __checkpoint_and_complete_reqs+0x6c/0x1c0
-> > [1774560.805487]  issue_checkpoint_thread+0x34/0xc0
-> > [1774560.805490]  kthread+0xd0/0xe0
-> > [1774560.805494]  ret_from_fork+0x10/0x20
-> > [1774560.805504] INFO: task NetworkManager:1061 blocked for more than 404 seconds.
-> > [1774560.812854]       Not tainted 5.18.5-matteo #107
-> > [1774560.817667] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> > [1774560.825708] task:NetworkManager  state:D stack:    0 pid: 1061 ppid:     1 flags:0x00000000
-> > [1774560.825714] Call trace:
-> > [1774560.825716]  __switch_to+0xc0/0x100
-> > [1774560.825720]  __schedule+0x258/0x620
-> > [1774560.825723]  schedule+0x44/0xb0
-> > [1774560.825726]  schedule_timeout+0x114/0x150
-> > [1774560.825730]  __wait_for_common+0xc8/0x200
-> > [1774560.825733]  wait_for_completion+0x1c/0x30
-> > [1774560.825736]  f2fs_issue_checkpoint+0xd0/0x190
-> > [1774560.825740]  f2fs_sync_fs+0x48/0xd0
-> > [1774560.825745]  f2fs_do_sync_file+0x178/0x8a0
-> > [1774560.825749]  f2fs_sync_file+0x28/0x40
-> > [1774560.825753]  vfs_fsync_range+0x30/0x80
-> > [1774560.825758]  do_fsync+0x38/0x80
-> > [1774560.825762]  __arm64_sys_fsync+0x14/0x20
-> > [1774560.825767]  invoke_syscall.constprop.0+0x4c/0xe0
-> > [1774560.825771]  do_el0_svc+0x40/0xd0
-> > [1774560.825775]  el0_svc+0x14/0x50
-> > [1774560.825779]  el0t_64_sync_handler+0xa8/0xb0
-> > [1774560.825782]  el0t_64_sync+0x148/0x14c
-> > [1774560.825803] INFO: task kworker/u8:4:335638 blocked for more than 404 seconds.
-> > [1774560.833149]       Not tainted 5.18.5-matteo #107
-> > [1774560.837962] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> > [1774560.846002] task:kworker/u8:4    state:D stack:    0 pid:335638 ppid:     2 flags:0x00000008
-> > [1774560.846009] Workqueue: writeback wb_workfn (flush-179:128)
-> > [1774560.846016] Call trace:
-> > [1774560.846017]  __switch_to+0xc0/0x100
-> > [1774560.846021]  __schedule+0x258/0x620
-> > [1774560.846024]  schedule+0x44/0xb0
-> > [1774560.846027]  schedule_timeout+0x114/0x150
-> > [1774560.846031]  __wait_for_common+0xc8/0x200
-> > [1774560.846034]  wait_for_completion+0x1c/0x30
-> > [1774560.846037]  f2fs_issue_checkpoint+0xd0/0x190
-> > [1774560.846040]  f2fs_sync_fs+0x48/0xd0
-> > [1774560.846044]  f2fs_balance_fs_bg+0x114/0x2b0
-> > [1774560.846048]  f2fs_write_node_pages+0x38/0x1f0
-> > [1774560.846053]  do_writepages+0x68/0x1e0
-> > [1774560.846058]  __writeback_single_inode+0x3c/0x3c0
-> > [1774560.846062]  writeback_sb_inodes+0x230/0x520
-> > [1774560.846065]  __writeback_inodes_wb+0x50/0x130
-> > [1774560.846069]  wb_writeback+0x244/0x340
-> > [1774560.846073]  wb_workfn+0x308/0x560
-> > [1774560.846077]  process_one_work+0x1dc/0x420
-> > [1774560.846081]  worker_thread+0x170/0x4c0
-> > [1774560.846084]  kthread+0xd0/0xe0
-> > [1774560.846086]  ret_from_fork+0x10/0x20
-> > [1774623.467979] rcu: INFO: rcu_sched self-detected stall on CPU
-> > [1774623.473755] rcu:   0-....: (2099 ticks this GP) idle=643/1/0x4000000000000000 softirq=6031246/6031247 fqs=1028
-> > [1774623.483976]        (t=2101 jiffies g=30461613 q=633)
-> > [1774623.483979] Task dump for CPU 0:
-> > [1774623.483982] task:f2fs_gc-179:130 state:R  running task     stack:    0 pid:  400 ppid:     2 flags:0x0000000a
-> > [1774623.483989] Call trace:
-> > [1774623.483991]  dump_backtrace.part.0+0xb4/0xc0
-> > [1774623.484003]  show_stack+0x14/0x30
-> > [1774623.484007]  sched_show_task+0x130/0x160
-> > [1774623.484013]  dump_cpu_task+0x40/0x4c
-> > [1774623.484018]  rcu_dump_cpu_stacks+0xec/0x130
-> > [1774623.484021]  rcu_sched_clock_irq+0x8f8/0xaa0
-> > [1774623.484025]  update_process_times+0x98/0x180
-> > [1774623.484028]  tick_sched_timer+0x54/0xd0
-> > [1774623.484033]  __hrtimer_run_queues+0x134/0x2d0
-> > [1774623.484036]  hrtimer_interrupt+0x110/0x2c0
-> > [1774623.484040]  arch_timer_handler_phys+0x28/0x40
-> > [1774623.484045]  handle_percpu_devid_irq+0x84/0x1c0
-> > [1774623.484050]  generic_handle_domain_irq+0x28/0x40
-> > [1774623.484054]  gic_handle_irq+0x58/0x80
-> > [1774623.484059]  call_on_irq_stack+0x2c/0x3c
-> > [1774623.484062]  do_interrupt_handler+0x78/0x84
-> > [1774623.484066]  el1_interrupt+0x30/0x50
-> > [1774623.484071]  el1h_64_irq_handler+0x14/0x20
-> > [1774623.484074]  el1h_64_irq+0x64/0x68
-> > [1774623.484077]  folio_unlock+0x18/0x40
-> > [1774623.484081]  f2fs_get_lock_data_page+0xf4/0x260
-> > [1774623.484085]  move_data_page+0x34/0x530
-> > [1774623.484089]  do_garbage_collect+0xc54/0x12e0
-> > [1774623.484092]  f2fs_gc+0x3b4/0x800
-> > [1774623.484095]  gc_thread_func+0x4c8/0x640
-> > [1774623.484098]  kthread+0xd0/0xe0
-> > [1774623.484101]  ret_from_fork+0x10/0x20
-> >
-> > root@macchiatobin:~# uname -a
-> > Linux macchiatobin 5.18.5-matteo #107 SMP Fri Jun 17 17:58:26 CEST 2022 aarch64 GNU/Linux
-> >
-> >
-
-
-
---
-per aspera ad upstream
 
 
 _______________________________________________
