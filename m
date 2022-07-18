@@ -2,116 +2,114 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73DD7577CB8
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Jul 2022 09:42:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD35C577D35
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 18 Jul 2022 10:11:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oDLOS-00086n-8I; Mon, 18 Jul 2022 07:42:17 +0000
+	id 1oDLqf-0002UP-93; Mon, 18 Jul 2022 08:11:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1oDLOR-00086h-9U
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jul 2022 07:42:16 +0000
+ (envelope-from <duguoweisz@gmail.com>) id 1oDLqP-0002RU-5q
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jul 2022 08:11:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=e4UmK0asEzdhWt8tSX2+YSfNmsdZpxCYfAri6+myDRo=; b=G/761u6tBuwEDuleweZpJ3t34l
- nN3qwM/c4jYti3163RbH1Ba2OVP4IcgnT8dnWh+GMvSLCDqDfR3yPseW31Ehl4+Kpl+1Oee6Sogs5
- F9i5eAKIOf0Dj5THJA5cWlB308JR6HjW3hcJoOOKcNdGG1J0ly0K1WyRTGWLGumZWP2Y=;
+ bh=koJtdu2xGKY/BDY+kAcaq9hS2IfMj226ck1h8XVx8nc=; b=KP0ZCALCNG2/QFe1cL93ZhFp93
+ NomT/s4PcyA49UxT8qasl31fLEdTX8IJd+cEVvKUm2+aWGZpCgcvTz/Qc8Ux8xpMjDSpdJ5P2B3o7
+ +MzyDcDRHpdUwswfzGQqlUQvECse8ZMsL8X2fF6dDuisJpHULHryfONg168MUV8SCTao=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=e4UmK0asEzdhWt8tSX2+YSfNmsdZpxCYfAri6+myDRo=; b=KDGvmFIs6sDy8xk6LNy11gr607
- smINui6nCCArE6c4DRy10Xr+KdTJQCh5M/Mt9WXmV3lVotvasmDDTEyvh60LD2vux9CfN2fhHNk31
- mBtsarStQQP19OPgxOduwOYs+KRBTiekJT8AYy63/P3JQEerykJ8r1vt3obym+KqA9Tw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=koJtdu2xGKY/BDY+kAcaq9hS2IfMj226ck1h8XVx8nc=; b=O
+ mrh7W+juDtxZN9wGyRyJpt8CpEaNFLIGIkUmThf4oHIfpbOt5GgmeeB3QxARWAGSFxdUUqDvw0mqY
+ 3IuZiRfvVJqfV7/6bfdRt/21F/1IlauWVhcpLuDlqGE38KfHzaIwTL30FSDzrW/AzAHNZBThNHGkS
+ s5pM1t8j+mC1hkTs=;
+Received: from mail-pg1-f180.google.com ([209.85.215.180])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1oDLOR-002SP4-CS
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jul 2022 07:42:15 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2EC1E6137C
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1oDLqK-002U7B-OC
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 18 Jul 2022 08:11:08 +0000
+Received: by mail-pg1-f180.google.com with SMTP id 72so9937624pge.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 18 Jul 2022 07:42:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 9504EC341C8
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 18 Jul 2022 07:42:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1658130128;
- bh=e4UmK0asEzdhWt8tSX2+YSfNmsdZpxCYfAri6+myDRo=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=CTCP6qwN9owH73BHKK+TS9xBkgjuHfasvjQoxO3O/D2hAN3VRi3vkypM7QdXqzbTG
- 6HgLeYHbTD20iBDY1wZIdBCpFXoOXUt2ZilOyTS5XCHh8Tx7MG3X4a9MuF6Jx9SMEk
- sROCELFnC9+Owyaox/oBzcRYagZqE2DgLdu0G+ANtxen3Z4Nb30AIevioU+NGjA1fg
- oE5KNAS6/gzrH+wh3wFiped8neIa4Z/Qug3uBTOqKgr8RFo3TzTDZvM0DI6hEURSyb
- knkCciX3xIRA3VwMDMpWyZWDc27596Fu0PbuEbu2BZjRfW88+t8vtyEFPEBU6VuDdh
- PI6pCB3L6iz5Q==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 814FACC13B5; Mon, 18 Jul 2022 07:42:08 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 18 Jul 2022 07:42:08 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: ghtm2@protonmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216162-202145-qr2ad79moz@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216162-202145@https.bugzilla.kernel.org/>
-References: <bug-216162-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ Mon, 18 Jul 2022 01:11:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=koJtdu2xGKY/BDY+kAcaq9hS2IfMj226ck1h8XVx8nc=;
+ b=YPfCzd+LWX6tGDrhIg8VyeRtxSwuQnIytXKBmgqlJU+EP1t3GV3USjvadSwh21GTWn
+ bIxC9/uswSeopFMkbYMOtzFJVtEA3ZGrZBZC69To+Tp+or9+gD9lUJJ3MIahxw+6p7Gx
+ r0ogkc0Ppp4Pv8PTWZmNkCDUCuyjHUVHeVFiqx5Y9FHWpGQrfLEyaZXSkfaAASPZ/lgH
+ vYj3As3RcWhFUBLOB/naxgsoKzkpo54qn/TWlDqmuOe7+TgtZqKkPU9F2fFjnOlOLkcM
+ LsK/QN+01r/wML+H8xKfxZyYepasaICMvcZr4oF7lS7S3Hj1r8jyPeeadjNbz1FrzRxL
+ 5IhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=koJtdu2xGKY/BDY+kAcaq9hS2IfMj226ck1h8XVx8nc=;
+ b=7KCA7vajpTp/LIh0FgFC3CIEvlxY0/Uxm8ialwn/0bORa3dsN9aF59fW0LCcm13Zui
+ 3V6+DMSTEc58jRPUCh4VQ9Hh/DpCC0rs/e223x8jPDyIE/eDYjt8usqjEvkqAx2a7Ajs
+ ND7rrwhTefaZSUBJfqoMsmI/dP3BuruhWEiwICX+xXffVbXDnftXCMXAifDMfzhgSLSS
+ 8diHSbl5aCFJ5NA3YbYOQ9sKPYu6hBpsIa5khEmHS06et4c/KUCt7+bmnRLAZu7H66Ne
+ TWLOqGmN5U1bmP4c56w/rgKuP6wfWsOmm7oVXUl8bifxp53DEzPdvvXI9Djussk1x5a4
+ 9Vgg==
+X-Gm-Message-State: AJIora/kvMtKNnVA+9PKLmaKG29+FM4v4aidXCt1ss4sDwlFgnHfGfxM
+ R+cCgA8iTn1uBPcyW2GG3yc=
+X-Google-Smtp-Source: AGRyM1s1EKjylolsXMIuvJO65KwmrcIJ8rMJh/CjiItqMsskcy1K0pyvsDM0UwUrI7oSMmx+Ha9VmQ==
+X-Received: by 2002:a63:6a82:0:b0:419:de8c:8ca with SMTP id
+ f124-20020a636a82000000b00419de8c08camr14123782pgc.467.1658131859151; 
+ Mon, 18 Jul 2022 01:10:59 -0700 (PDT)
+Received: from mi-HP-ProDesk-680-G4-MT.mioffice.cn ([43.224.245.232])
+ by smtp.gmail.com with ESMTPSA id
+ ng8-20020a17090b1a8800b001ef9479373fsm11047865pjb.4.2022.07.18.01.10.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Jul 2022 01:10:58 -0700 (PDT)
+From: Guowei Du <duguoweisz@gmail.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Mon, 18 Jul 2022 16:10:38 +0800
+Message-Id: <20220718081038.2279-1-duguoweisz@gmail.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216162 ---
- Comment
- #12 from ghtm2@protonmail.com --- Ah, I somehow completely missed that the
- dev branched was linked before in comment 3, sorry. That branch does indeed
- fix the issue, thanks for the hint. 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  From: duguowei If there are more than one f2fs sbi, there
+ will be more discard threads. But the comm is too long to show dev minor.
+ So, change the default prefix of thread from "f2fs_discard" to "f2fs_dcd".
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.215.180 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [duguoweisz[at]gmail.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oDLOR-002SP4-CS
-Subject: [f2fs-dev] [Bug 216162] F2FS filesystem with compression broken
- after kernel version 5.18.1
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.180 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1oDLqK-002U7B-OC
+Subject: [f2fs-dev] [PATCH] f2fs: modify task name prefix
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,26 +121,63 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, duguowei <duguowei@xiaomi.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216162
+From: duguowei <duguowei@xiaomi.com>
 
---- Comment #12 from ghtm2@protonmail.com ---
-Ah, I somehow completely missed that the dev branched was linked before in
-comment 3, sorry.
-That branch does indeed fix the issue, thanks for the hint.
+If there are more than one f2fs sbi, there will be more
+discard threads. But the comm is too long to show dev
+minor. So, change the default prefix of thread from
+"f2fs_discard" to "f2fs_dcd".
 
-Maybe the fix warrants a push to master and a new release?
-Most distros aren't exactly fast in packaging up new releases, the majority are
-still on f2fs-tools-1. 14 or older...
+Before:
+$ ps -e | grep f2fs
+1628 ?        00:00:00 f2fs_ckpt-7:10
+1629 ?        00:00:00 f2fs_flush-7:10
+1630 ?        00:00:00 f2fs_discard-7:
+1631 ?        00:00:00 f2fs_gc-7:10
+2030 ?        00:00:00 f2fs_ckpt-7:27
+2031 ?        00:00:00 f2fs_flush-7:27
+2032 ?        00:00:00 f2fs_discard-7:
+2033 ?        00:00:00 f2fs_gc-7:27
 
+After:
+$ ps -e | grep f2fs
+1628 ?        00:00:00 f2fs_ckpt-7:10
+1629 ?        00:00:00 f2fs_flush-7:10
+1630 ?        00:00:00 f2fs_dcd-7:10
+1631 ?        00:00:00 f2fs_gc-7:10
+2030 ?        00:00:00 f2fs_ckpt-7:27
+2031 ?        00:00:00 f2fs_flush-7:27
+2032 ?        00:00:00 f2fs_dcd-7:27
+2033 ?        00:00:00 f2fs_gc-7:27
+
+Signed-off-by: duguowei <duguowei@xiaomi.com>
+---
+ fs/f2fs/segment.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 874c1b9c41a2..2eeefcbe62db 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -2018,7 +2018,7 @@ int f2fs_start_discard_thread(struct f2fs_sb_info *sbi)
+ 		return 0;
+ 
+ 	dcc->f2fs_issue_discard = kthread_run(issue_discard_thread, sbi,
+-				"f2fs_discard-%u:%u", MAJOR(dev), MINOR(dev));
++				"f2fs_dcd-%u:%u", MAJOR(dev), MINOR(dev));
+ 	if (IS_ERR(dcc->f2fs_issue_discard))
+ 		err = PTR_ERR(dcc->f2fs_issue_discard);
+ 
 -- 
-You may reply to this email to add a comment.
+2.36.1
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
