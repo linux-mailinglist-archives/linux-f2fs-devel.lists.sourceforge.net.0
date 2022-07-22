@@ -2,118 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA2AE57D90C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Jul 2022 05:40:12 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 090CA57DAAD
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Jul 2022 09:14:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oEjWJ-0007xc-9i; Fri, 22 Jul 2022 03:40:08 +0000
+	id 1oEmra-0002gx-Kk; Fri, 22 Jul 2022 07:14:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <qxy65535@gmail.com>) id 1oEjWG-0007xV-T4
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jul 2022 03:40:05 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1oEmrY-0002gg-PZ
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jul 2022 07:14:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8yiAGQE/qJl8oC8JosxyZbmVIi6xV2flByC1cOQGIuU=; b=eKMhG4bLMG4/E1lycvOu5RanTt
- C3XpYV7fiJNHcPhNMqQnXyC+arlmAOJVfv46Zc5yuGnKi36V1psdPCzGGvVvs6NED9IULihS/qJqT
- oSnu7nt0T6AKS8E3MSvjEDW1/emDCQDBEC6Z2iFcAoUSWDf6N+IEBsqEgywshbR6sjIk=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=8yiAGQE/qJl8oC8JosxyZbmVIi6xV2flByC1cOQGIuU=; b=HEjCdIhq7qx4+XPBtZluz45naB
- sTRWc1ENed22iu5mEyNKkQvF61XWTdjx4RZX/LpCMLYTCkO6ffx7FdBaxq19ZTF1jzsrBY1Im96TF
- VLocerVfSM9IMd1PojJjik8rXelJXUKq99/exKf6NtxnBjotbi1bUNLlPg+PIbiwcvx8=;
-Received: from mail-pj1-f49.google.com ([209.85.216.49])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1oEjWD-006UHt-9r
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jul 2022 03:40:05 +0000
-Received: by mail-pj1-f49.google.com with SMTP id
- bk6-20020a17090b080600b001f2138a2a7bso5587837pjb.1
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=PVf8tXYkAcmjL30UR6cGyERuLqU/MCJiFDIJlJDVhJ4=; b=izUz4g5LwjCfg/bEaJSw3xlRmo
+ wYLRoXf0tvOA9t5aWr73q3GjncHv7tMBPEIcQyXYOtie82pFfVBmtdbEDAqcIsBJ0TLlh35Q7CLZW
+ u3H9bwJLsia9jWmarGkUSNnG+skJyokzpQ+l+vYtEfctN7w2aDXh7yrC7bSKbRlTWPIE=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=PVf8tXYkAcmjL30UR6cGyERuLqU/MCJiFDIJlJDVhJ4=; b=C
+ r/gIlK7DXL77LQLQIWf6arlUVJomlAJXOdQoWhCWOvQNwFe/Xox3j4TrmeOidja8pcUYAQoEquHVR
+ wxwD0tnmtyl1zd6vlGir8umGWZ3yATf1aEgN1E2Hd/DTGAxUYVugDTJ6NzdOis/w+l/Ru0PJEu8Xq
+ FAL5HMhVxG9Dtvp4=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
+ id 1oEmrW-0000qX-Gp
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jul 2022 07:14:15 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 6B679B82710
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 21 Jul 2022 20:40:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=8yiAGQE/qJl8oC8JosxyZbmVIi6xV2flByC1cOQGIuU=;
- b=M/1VvF4Ovd3iUN9CD4ktumZWJBlRtuhjKyq7qK0unIRNyFWx3tDBXTXtae335GAtS8
- XwkhcrSYXnCF8yLLoPPT4JgaCfF5fvh6xMXo9lGikywR8Xm1kACabRtoBOYTVONilm4i
- F9BVEI+pO50C8U4ED/tLtWxWDDkt3qGLm2GzzRRXhZ31TiwuY9rg+OPCzgRYz86JhUFO
- w99TXH+xKUvAN8d5WqozvZrvsGIuX1+K0/8Wl8jCo9Y/H/e2VEHJ7afiwVSUGFTAVQOA
- OM/pnamG8KOGBkuIn2G/f7ajo7sMhc6woBc6kIin2EOYjOrWSl/F77ebceHxLGk4ylSZ
- XgWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=8yiAGQE/qJl8oC8JosxyZbmVIi6xV2flByC1cOQGIuU=;
- b=6ErFimu0+BaATzDXHop8qpYGoAqeF8r0EcydhmfavEII7DAIsN28GNEvHcRvxBxkHI
- erTIS9KxojRzsMGH0qQ1S5bI22Jlg3L70Finyc4V9UQSOJQ5xAdV/N8CUGxBWOwePvI0
- IQfC/9N1fL3u/PK+Re6DCjKAZFVKFTa/eB0Kvwczt9B7WOXoVPOCtDQvIqJpl0BnW+3N
- V7xqyNlKezLyhEVWEt4WYn+OujvsFtf3gbMkO8YP4UyEb2+RRkBRTC3QVTzhGzj8eu95
- Y1iaTVxhGClcQC+TpnKw7KzNFf5euAGZJHem++4IyNYRqOA46p0Gc85hnIJWimn3wRl4
- d6Mw==
-X-Gm-Message-State: AJIora8tHmAQxbkP3kLC1BPhyXaqMacf03+eVREx08U6mMHs8ZaztHWq
- 1EL5mqgkv4TDZKhIEtWLTPw=
-X-Google-Smtp-Source: AGRyM1sAz4kl6alB174O+R5oWH69AtL/ImQve7dAQ5sAXtF4urr2AU4MlHxt7rSxHSTLq78PnudYlw==
-X-Received: by 2002:a17:902:8a94:b0:16d:400a:797 with SMTP id
- p20-20020a1709028a9400b0016d400a0797mr1171146plo.174.1658461195601; 
- Thu, 21 Jul 2022 20:39:55 -0700 (PDT)
-Received: from mi-HP-ProDesk-680-G4-MT.mioffice.cn ([43.224.245.252])
- by smtp.gmail.com with ESMTPSA id
- h4-20020a170902f54400b0016be8da658fsm2508311plf.130.2022.07.21.20.39.53
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 21 Jul 2022 20:39:55 -0700 (PDT)
-From: qixiaoyu1 <qxy65535@gmail.com>
-X-Google-Original-From: qixiaoyu1 <qixiaoyu1@xiaomi.com>
-To: jaegeuk@kernel.org
-Date: Fri, 22 Jul 2022 11:39:10 +0800
-Message-Id: <20220722033910.25442-1-qixiaoyu1@xiaomi.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <YtoOGu/wyqKBJd1v@google.com>
-References: <YtoOGu/wyqKBJd1v@google.com>
+ Fri, 22 Jul 2022 07:14:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8F25C341C6;
+ Fri, 22 Jul 2022 07:14:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1658474042;
+ bh=9mq8X3BGsuBzR6Ln4xciUKT8RQwcULSFGtUPi9jeosE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=FLVRrpieLDHN39FkoGOUIAkHKLGpScI1ahdV3AgjGwfrcluvepuBzBT6F2984u3pe
+ YxdD4BK8sy57CBvIm0XSdTFHQJcTcxNfBuwIZ22bE+QsqIcWOa3jZVywdVcsgMnYMl
+ P8eZPra5KWYWA4zPs0rDJwnuri0qsYj5L/yrWJbb40slzWXWuRwOl/sdNhOL0RjjiZ
+ t3hdZX2Thct6y6Piv8vzHp2E9U66v9l12USihLfnS30azOvbROyOeiNtaOmUZhk+ya
+ QY9fg85OhHr4fbM1wBBORT+kBwT4kVrxB6luu3IFOzwg+6fTek78HFSblPNzVzfX+z
+ MqEM0tbLisn/Q==
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fsdevel@vger.kernel.org
+Date: Fri, 22 Jul 2022 00:12:19 -0700
+Message-Id: <20220722071228.146690-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.37.0
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+X-Spam-Score: -3.4 (---)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  f2fs_gc returns -EINVAL via f2fs_balance_fs when there is
- enough free secs after write checkpoint, but with gc_merge enabled, it will
- cause the sleep time of gc thread to be set to no_gc_sleep_time ev [...] 
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview:  This patchset makes the statx() system call return direct
+ I/O (DIO) alignment information. This allows userspace to easily determine
+ whether a file supports DIO, and if so with what alignment restrict [...]
+ Content analysis details:   (-3.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [qxy65535[at]gmail.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [qxy65535[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.49 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.49 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1oEjWD-006UHt-9r
-Subject: [f2fs-dev] [PATCH v2] f2fs: don't bother wait_ms by foreground gc
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oEmrW-0000qX-Gp
+Subject: [f2fs-dev] [PATCH v4 0/9] make statx() return DIO alignment
+ information
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,42 +101,88 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: qixiaoyu1@xiaomi.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-block@vger.kernel.org, linux-api@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
+ Keith Busch <kbusch@kernel.org>, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-f2fs_gc returns -EINVAL via f2fs_balance_fs when there is enough free
-secs after write checkpoint, but with gc_merge enabled, it will cause
-the sleep time of gc thread to be set to no_gc_sleep_time even if there
-are many dirty segments can be selected.
+This patchset makes the statx() system call return direct I/O (DIO)
+alignment information.  This allows userspace to easily determine
+whether a file supports DIO, and if so with what alignment restrictions.
 
-Signed-off-by: qixiaoyu1 <qixiaoyu1@xiaomi.com>
----
- fs/f2fs/gc.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+Patch 1 adds the basic VFS support for STATX_DIOALIGN.  Patch 2 wires it
+up for all block device files.  The remaining patches wire it up for
+regular files on ext4, f2fs, and xfs.  Support for regular files on
+other filesystems can be added later.
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index d5fb426e0747..e2f8a2dae908 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -150,8 +150,11 @@ static int gc_thread_func(void *data)
- 		gc_control.nr_free_secs = foreground ? 1 : 0;
- 
- 		/* if return value is not zero, no victim was selected */
--		if (f2fs_gc(sbi, &gc_control))
--			wait_ms = gc_th->no_gc_sleep_time;
-+		if (f2fs_gc(sbi, &gc_control)) {
-+			/* don't bother wait_ms by foreground gc */
-+			if (!foreground)
-+				wait_ms = gc_th->no_gc_sleep_time;
-+		}
- 
- 		if (foreground)
- 			wake_up_all(&gc_th->fggc_wq);
+I've also written a man-pages patch, which I'm sending separately.
+
+Note, f2fs has one corner case where DIO reads are allowed but not DIO
+writes.  The proposed statx fields can't represent this.  My proposal
+(patch 6) is to just eliminate this case, as it seems much too weird.
+But I'd appreciate any feedback on that part.
+
+This patchset applies to v5.19-rc7.
+
+Changed v3 => v4:
+   - Added xfs support.
+
+   - Moved the helper function for block devices into block/bdev.c.
+   
+   - Adjusted the ext4 patch to not introduce a bug where misaligned DIO
+     starts being allowed on encrypted files when it gets combined with
+     the patch "iomap: add support for dma aligned direct-io" that is
+     queued in the block tree for 5.20.
+
+   - Made a simplification in fscrypt_dio_supported().
+
+Changed v2 => v3:
+   - Dropped the stx_offset_align_optimal field, since its purpose
+     wasn't clearly distinguished from the existing stx_blksize.
+
+   - Renamed STATX_IOALIGN to STATX_DIOALIGN, to reflect the new focus
+     on DIO only.
+
+   - Similarly, renamed stx_{mem,offset}_align_dio to
+     stx_dio_{mem,offset}_align, to reflect the new focus on DIO only.
+
+   - Wired up STATX_DIOALIGN on block device files.
+
+Changed v1 => v2:
+   - No changes.
+
+Eric Biggers (9):
+  statx: add direct I/O alignment information
+  vfs: support STATX_DIOALIGN on block devices
+  fscrypt: change fscrypt_dio_supported() to prepare for STATX_DIOALIGN
+  ext4: support STATX_DIOALIGN
+  f2fs: move f2fs_force_buffered_io() into file.c
+  f2fs: don't allow DIO reads but not DIO writes
+  f2fs: simplify f2fs_force_buffered_io()
+  f2fs: support STATX_DIOALIGN
+  xfs: support STATX_DIOALIGN
+
+ block/bdev.c              | 25 ++++++++++++++++++++
+ fs/crypto/inline_crypt.c  | 49 +++++++++++++++++++--------------------
+ fs/ext4/ext4.h            |  1 +
+ fs/ext4/file.c            | 37 ++++++++++++++++++++---------
+ fs/ext4/inode.c           | 36 ++++++++++++++++++++++++++++
+ fs/f2fs/f2fs.h            | 45 -----------------------------------
+ fs/f2fs/file.c            | 45 ++++++++++++++++++++++++++++++++++-
+ fs/stat.c                 | 14 +++++++++++
+ fs/xfs/xfs_iops.c         |  9 +++++++
+ include/linux/blkdev.h    |  4 ++++
+ include/linux/fscrypt.h   |  7 ++----
+ include/linux/stat.h      |  2 ++
+ include/uapi/linux/stat.h |  4 +++-
+ 13 files changed, 190 insertions(+), 88 deletions(-)
+
+base-commit: ff6992735ade75aae3e35d16b17da1008d753d28
 -- 
-2.36.1
+2.37.0
 
 
 
