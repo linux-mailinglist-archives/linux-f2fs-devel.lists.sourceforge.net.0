@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A12A57E62E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Jul 2022 20:01:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CCC057E657
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 Jul 2022 20:12:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oEwyF-0007Je-KN; Fri, 22 Jul 2022 18:01:51 +0000
+	id 1oEx8y-0006EB-69; Fri, 22 Jul 2022 18:12:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ebiggers@kernel.org>) id 1oEwyE-0007JY-Et
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jul 2022 18:01:50 +0000
+ (envelope-from <ebiggers@kernel.org>) id 1oEx8w-0006E5-LT
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jul 2022 18:12:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UE2SWZ2sFwWhMvaaUBgTFpKTAm6g6UxtGH9gIlpyzRg=; b=PtI9cYihaU9a4XpF4Ua/mm2MGj
- diGUYi1F4FlSbUu4/j+hPyXXP+OZLyi6+1xO0sFEJDZlfhly3pQ5RPPUbdijvr3v2BkBnNPNmMB01
- KWeZmRBfY4eqQnrVmBCz6m7FHGQMSUv1oui3D0Cvxr3nT5zk2/6SyAkUXyWUgtP8QT2s=;
+ bh=5iPBleV2UrfDaZPMMg4QczBWZh05BtXe3QutunZ70qE=; b=NY+6n9aklKfEfpA6ngctoKiZhi
+ B+aHemQVSe12/34Trk+wUMhK36boDajnxSrLYWJKyIfMnCe94LsHsP/iU2gekgSUaoyVWJLoD9jB/
+ HA/YGBvTSOjsgit2uB6fP8SK8b0f8m5F6s2e2zNEIVbqfb/re2b4wKWFNugb48uu1YhQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -29,68 +29,67 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=UE2SWZ2sFwWhMvaaUBgTFpKTAm6g6UxtGH9gIlpyzRg=; b=RxbQZsGnmp1vBEXWAJmBzM2DiS
- 28O5x60K5HZjZac4rKGG1tRfHI9onyiEpr+vHGsVJcEeaA/ZseEIwfiFkVozbWI5c74frjLMkbim9
- Orz8DH7VLT43OG/I9pL4eVNx2qY2Cxb8yPl45efasf00V//UJXNrayLeVxA6OjKqa9lo=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=5iPBleV2UrfDaZPMMg4QczBWZh05BtXe3QutunZ70qE=; b=eWRsHhLtBjuMQFJ719YhEr/Qp9
+ S2HTAJNir/Zqs0Wvpl72a9aWzEhBlWj/o0TVQz4o0sFXKH7COLqKlQ/gXNeh4Fszh3SnUaXKMwtFA
+ FFnoeknxZV4fQWibT70VI/WHpqBZJmsriJzT7+hrOoM/Vnk5Rg1HH/t53pfi2qXBjH5Q=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1oEwy8-0004x1-Oc
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jul 2022 18:01:48 +0000
+ id 1oEx8q-0005Hj-3a
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 22 Jul 2022 18:12:53 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 78338B82977;
- Fri, 22 Jul 2022 18:01:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0BD37C341C6;
- Fri, 22 Jul 2022 18:01:36 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id ACB51622E2;
+ Fri, 22 Jul 2022 18:12:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3060C341C7;
+ Fri, 22 Jul 2022 18:12:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1658512897;
- bh=eZLmaZ6G6g5lqte/Ys+R+WbUlvjke0UdT436JFR7AIM=;
+ s=k20201202; t=1658513562;
+ bh=SXPNOONZxoOFfrmPhLGGVYznyVMyiqiQEmogruZ0f5k=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Nb+MLDqg88rYpbxrrfNfRc3ai+Ysgc0CNPh7FHGrlUDATD+ocIqvXJ35tQf8Bmawh
- fE/cI36MPvhsPcQIEhiw3qEsB4d7Dp6H4DbdzLuTBavZPesmUF+6OFjJd9AFdAJqGO
- B/XHy9HhApKhY4eZZy36dUhtt1FI6m6yNjJRjYWQtdQZ/5tYk42FDjBb4DssM3uIul
- hQ0LWohGSZnoZuTya3nHC378UU7PqhPSOwIAFbotzkmPb6lPPW2Er35I/Sf2szA2Z7
- miaWI/J/IP25LAYqpG5O/gmsdoXc2D+QzitWgWXBRjCgDsKcNTpveYwNeye2N76blH
- qv3frkibWXyxw==
-Date: Fri, 22 Jul 2022 18:01:35 +0000
+ b=BDmaxFrpcwMbt5VIMHUiAVjCWcU4o7lcqAfQ5IgmvUvBYcnYCHkaixWZo4y6wPZUp
+ JbLzrfPnOGqWMO4KBF8PNKiyZKfXAyk7ejCOIi42se9wOgWRTvj/MOn/z76bu4Vugf
+ edPq0KXLmyeXgP7SoxA4OQrENNzK5dn6qcrXy5hGovzBrXl5Ajd3ajkiN/pRSiqFpi
+ bpiblTmMpLOHY792no6R7uCY5jtaB/ZZd5LvGkdzd6WXPw8auWKDbkfb9bS5nQv/Eg
+ oiiuSkLzAJhQz/VsCfdc7CwantT0+epSWV2z+Zwph7rIi8+EU0Szzp5eiMRUu3CSxL
+ IKSLzxZpxe1pg==
+Date: Fri, 22 Jul 2022 18:12:40 +0000
 From: Eric Biggers <ebiggers@kernel.org>
-To: Keith Busch <kbusch@kernel.org>
-Message-ID: <Ytrl/1YEg9M0fb+i@gmail.com>
+To: "Darrick J. Wong" <djwong@kernel.org>
+Message-ID: <YtromC4cR5a0mog8@gmail.com>
 References: <20220610195830.3574005-1-kbusch@fb.com>
  <20220610195830.3574005-12-kbusch@fb.com>
- <YtpTYSNUCwPelNgL@sol.localdomain>
- <Ytq3qwTBTRRxBfXv@kbusch-mbp.dhcp.thefacebook.com>
+ <YtpTYSNUCwPelNgL@sol.localdomain> <YtrkJgwOmCGqPO3E@magnolia>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <Ytq3qwTBTRRxBfXv@kbusch-mbp.dhcp.thefacebook.com>
+In-Reply-To: <YtrkJgwOmCGqPO3E@magnolia>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jul 22, 2022 at 08:43:55AM -0600, Keith Busch wrote:
- > On Fri, Jul 22, 2022 at 12:36:01AM -0700, Eric Biggers wrote: > > [+f2fs
- list and maintainers] > > > > On Fri, Jun 10, 2022 at 12:58:30PM [...] 
+ Content preview:  On Fri, Jul 22, 2022 at 10:53:42AM -0700, Darrick J. Wong
+ wrote: > On Fri, Jul 22, 2022 at 12:36:01AM -0700, Eric Biggers wrote: > >
+ [+f2fs list and maintainers] > > > > On Fri, Jun 10, 2022 at 12:58: [...]
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oEwy8-0004x1-Oc
+X-Headers-End: 1oEx8q-0005Hj-3a
 Subject: Re: [f2fs-dev] [PATCHv6 11/11] iomap: add support for dma aligned
  direct-io
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -107,13 +106,14 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: axboe@kernel.dk, bvanassche@acm.org, pankydev8@gmail.com,
  damien.lemoal@opensource.wdc.com, linux-nvme@lists.infradead.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- Keith Busch <kbusch@fb.com>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, Kernel Team <Kernel-team@fb.com>, hch@lst.de
+ Keith Busch <kbusch@kernel.org>, Keith Busch <kbusch@fb.com>,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Kernel Team <Kernel-team@fb.com>, hch@lst.de
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jul 22, 2022 at 08:43:55AM -0600, Keith Busch wrote:
+On Fri, Jul 22, 2022 at 10:53:42AM -0700, Darrick J. Wong wrote:
 > On Fri, Jul 22, 2022 at 12:36:01AM -0700, Eric Biggers wrote:
 > > [+f2fs list and maintainers]
 > > 
@@ -148,63 +148,21 @@ On Fri, Jul 22, 2022 at 08:43:55AM -0600, Keith Busch wrote:
 > > > -	if ((pos | length | align) & ((1 << blkbits) - 1))
 > > > +	if ((pos | length) & ((1 << blkbits) - 1) ||
 > > > +	    !bdev_iter_is_aligned(iomap->bdev, dio->submit.iter))
-> > >  		return -EINVAL;
-> > >  
-> > >  	if (iomap->type == IOMAP_UNWRITTEN) {
-> > 
-> > I noticed that this patch is going to break the following logic in
-> > f2fs_should_use_dio() in fs/f2fs/file.c:
-> > 
-> > 	/*
-> > 	 * Direct I/O not aligned to the disk's logical_block_size will be
-> > 	 * attempted, but will fail with -EINVAL.
-> > 	 *
-> > 	 * f2fs additionally requires that direct I/O be aligned to the
-> > 	 * filesystem block size, which is often a stricter requirement.
-> > 	 * However, f2fs traditionally falls back to buffered I/O on requests
-> > 	 * that are logical_block_size-aligned but not fs-block aligned.
-> > 	 *
-> > 	 * The below logic implements this behavior.
-> > 	 */
-> > 	align = iocb->ki_pos | iov_iter_alignment(iter);
-> > 	if (!IS_ALIGNED(align, i_blocksize(inode)) &&
-> > 	    IS_ALIGNED(align, bdev_logical_block_size(inode->i_sb->s_bdev)))
-> > 		return false;
-> > 
-> > 	return true;
-> > 
-> > So, f2fs assumes that __iomap_dio_rw() returns an error if the I/O isn't logical
-> > block aligned.  This patch changes that.  The result is that DIO will sometimes
-> > proceed in cases where the I/O doesn't have the fs block alignment required by
-> > f2fs for all DIO.
-> > 
-> > Does anyone have any thoughts about what f2fs should be doing here?  I think
-> > it's weird that f2fs has different behaviors for different degrees of
-> > misalignment: fail with EINVAL if not logical block aligned, else fallback to
-> > buffered I/O if not fs block aligned.  I think it should be one convention or
-> > the other.  Any opinions about which one it should be?
 > 
-> It looks like f2fs just falls back to buffered IO for this condition without
-> reaching the new code in iomap_dio_bio_iter().
+> How does this change intersect with "make statx() return DIO alignment
+> information" ?  Will the new STATX_DIOALIGN implementations have to be
+> adjusted to set stx_dio_mem_align = bdev_dma_alignment(...)?
+> 
+> I'm guessing the answer is yes, but I haven't seen any patches on the
+> list to do that, but more and more these days email behaves like a flood
+> of UDP traffic... :(
+> 
 
-No.  It's a bit subtle, so read the code and what I'm saying carefully.  f2fs
-only supports 4K aligned DIO and normally falls back to buffered I/O; however,
-for DIO that is *very* misaligned (not even LBS aligned) it returns EINVAL
-instead.  And it relies on __iomap_dio_rw() returning that EINVAL.
-
-Relying on __iomap_dio_rw() in that way is definitely a bad design on f2fs's
-part (and I messed that up when switching f2fs from fs/direct-io.c to iomap).
-The obvious fix is to just have f2fs do the LBS alignment check itself.
-
-But I think that f2fs shouldn't have different behavior for different levels of
-misalignment in the first place, so I was wondering if anyone had any thoughts
-on which behavior (EINVAL or fallback to buffered I/O) should be standardized on
-in all cases, at least for f2fs.  There was some discussion about this sort of
-thing for ext4 several years ago on the thread
-https://lore.kernel.org/linux-ext4/1461472078-20104-1-git-send-email-tytso@mit.edu/T/#u,
-but it didn't really reach a conclusion.  I'm wondering if the f2fs maintainers
-have any thoughts about why the f2fs behavior is as it is.  I.e. is it just
-accidental, or are there specific reasons...
+Yes.  I haven't done that in the STATX_DIOALIGN patchset yet because I've been
+basing it on upstream, which doesn't yet have this iomap patch.  I haven't been
+expecting STATX_DIOALIGN to make 5.20, given that it's a new UAPI that needs
+time to be properly reviewed, plus I've just been busy with other things.  So
+I've been planning to make the above change after this patch lands upstream.
 
 - Eric
 
