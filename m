@@ -2,26 +2,26 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77CFB57F49B
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 24 Jul 2022 12:00:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id DECE757F4A9
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 24 Jul 2022 12:21:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oFYPq-0002kj-HY; Sun, 24 Jul 2022 10:00:49 +0000
+	id 1oFYjX-0000Gt-Gv; Sun, 24 Jul 2022 10:21:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1oFYPp-0002kd-9J
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 24 Jul 2022 10:00:48 +0000
+ (envelope-from <chao@kernel.org>) id 1oFYjW-0000Gd-3e
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 24 Jul 2022 10:21:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ADvPD0I29Jhmj4LK8NZk3MT3Dfj0tmGy9tggGOZWVh8=; b=Pvy/ahToirLCfY2e9855FKh4ae
- rD4D+aB1XtHOjwh8TxJ/1qex/usGGU+UjWk1U+8e1RbmUSeVXcS27hYyAnHkBMH5HTkfBUQLhsfCK
- HUBb/MmhbdnI30AoFb6Q5oiiVdJI+V0cj3coEOko/d9ahYOC1fysmS2FEadj3OvpCWtU=;
+ bh=sYKUVhtTmPFnUlHNPCswEEkWqIHbaJAQRWK7vkU/NF0=; b=UhoPMM8fE00Mc7tHNnstoCyNky
+ U+qGzQ5Gi7EnwufXWZEu626PE+Hd0DLGarr71WNIZX4Z0S95yEFbqY12jl9ORdxOex9/WNyJwWKxP
+ FdWvlyClgjIS4F/2oLPNw/mp2p/yyvduKAg0IqNR0JwOABjGBNVPpx/5tuqnSnavb+zk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,42 +29,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ADvPD0I29Jhmj4LK8NZk3MT3Dfj0tmGy9tggGOZWVh8=; b=XcwHO24QvUTZ96P7HecmpRSLDR
- 71rmhEELHAmMOClgCEw0sfnkFotcssSkfctFeFj9jD0/w+cqjLxWtZCznh2jXzgxFY7XJbibBGn1p
- 7V1TSA1+JpXxpiP3Gk4/lYpcrh8Rko8/U6/luQC6RL4zieEKpq+GkxcH4+wSbrnLmlhg=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=sYKUVhtTmPFnUlHNPCswEEkWqIHbaJAQRWK7vkU/NF0=; b=Fp86A8I0L7H8u2w2C/OU+We55h
+ fN7GOlwI8sP9BdI9kqnenc+Hnt2BDVjnvEfVasgGtSRlAkeKqwJprKYumrOsMVGA/0QpX3uFid8tR
+ wl0RGjkc/bSwwgqQaNmwwf61IRI6woOJGpFsxZh45YHjzMIJQ6OvKunsf0NYs4+U250c=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1oFYPn-0005T2-7u
- for linux-f2fs-devel@lists.sourceforge.net; Sun, 24 Jul 2022 10:00:47 +0000
+ id 1oFYjU-0006JD-36
+ for linux-f2fs-devel@lists.sourceforge.net; Sun, 24 Jul 2022 10:21:09 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id ED985B80D5A;
- Sun, 24 Jul 2022 10:00:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5F93C3411E;
- Sun, 24 Jul 2022 10:00:38 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id BAAAC60C88;
+ Sun, 24 Jul 2022 10:21:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B791CC3411E;
+ Sun, 24 Jul 2022 10:21:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1658656839;
- bh=A4FHc+P9y/UxGoatQYWWeSdTQMu+VX8oS36oBmrynAo=;
+ s=k20201202; t=1658658062;
+ bh=N/BRF6ybrbTj/8aBJzvPdT6j6K1TWBKn2MYdG1LcXhs=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=mGqwt1OzRK2G0vTIgC026+s1UGmIMTpZtc++EhtzGRx5FUPu9VvBJ4xDxeiRiiSJN
- j+umsZvRUBYCHTIqaGqnkgVuYT2p/hLDhTIP3FQIwewSDXC+mZzfH9k2w5CFkpcIhh
- 1xOyqBpOF14wtB4hGlcfWGJKWXZquHYWE9KsKzzNGv375W5p+d9C/CtO48YmGA34+y
- 0AHA2HzBX9TLGOFKqoiWrBTs1QstMJBnihEx1rFoDojOzfVOjExZEJ0nQ+6Pe94XFu
- q/7/RPBARxrhD64DrLdv2gwpAcXxOzBMHEhPnGavegGndXLl6r/VB4EfZFpat6U3lm
- w1B/BPPKW/vJg==
-Message-ID: <ebd98d0a-09c2-311f-0e82-ed87b3b7d66b@kernel.org>
-Date: Sun, 24 Jul 2022 18:00:36 +0800
+ b=nkPCu9vSElkTL6Yk01gNIGAoF1F23y9wHIbO5pL5VkjftLiXMZOsSdRarudGN+djJ
+ 6kHeWUJJRc6erQuqoFDn8bZebY6MFRY9Y9mZqACC/bK2H4U1GFCP+Y5VykanijGbH/
+ ZKLdAZjwP1jACgFJuomG5PiAwS/roRqnQgat0wHgNKlRWjH1cHbFq5yAivm616u/NP
+ kw/HxBEcm2ef7rfb2h2QDVVQ8w0Glgh9GEBYeLAHIRV8n0Zx7qzQhfIMOVzgf0HlbX
+ b3n+vbw0vOOK+D11Ayystysy/vlKcUnAEFrdjVEbPdu/7BFa0Ouosm2fTPfpx1jDRC
+ HKOn5abbj7Ovg==
+Message-ID: <e82f0d90-7fda-c944-149f-d18491008f3f@kernel.org>
+Date: Sun, 24 Jul 2022 18:20:58 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, qixiaoyu1 <qxy65535@gmail.com>
-References: <20220718032840.9653-1-qixiaoyu1@xiaomi.com>
- <YtoOGu/wyqKBJd1v@google.com>
+To: Ye Bin <yebin10@huawei.com>, jaegeuk@kernel.org,
+ Daeho Jeong <daeho43@gmail.com>
+References: <20220718113609.154371-1-yebin10@huawei.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <YtoOGu/wyqKBJd1v@google.com>
+In-Reply-To: <20220718113609.154371-1-yebin10@huawei.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,14 +72,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/7/22 10:40, Jaegeuk Kim wrote: > On 07/18, qixiaoyu1
- wrote: >> f2fs_gc returns -EINVAL via f2fs_balance_fs when there is enough
- free >> secs after write checkpoint, but with gc_merge enabled, [...] 
+ Content preview:  On 2022/7/18 19:36, Ye Bin wrote: > There is issue as follows
+ when test f2fs atomic write: > F2FS-fs (loop0): Can't find valid F2FS
+ filesystem
+ in 2th superblock > F2FS-fs (loop0): invalid crc_offset: [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -91,8 +92,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oFYPn-0005T2-7u
-Subject: Re: [f2fs-dev] [PATCH] f2fs: don't bother wait_ms by foreground gc
+X-Headers-End: 1oFYjU-0006JD-36
+Subject: Re: [f2fs-dev] [PATCH -next RFC] f2fs: fix null-ptr-deref in
+ f2fs_get_dnode_of_data
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,27 +106,81 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: qixiaoyu1 <qixiaoyu1@xiaomi.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/7/22 10:40, Jaegeuk Kim wrote:
-> On 07/18, qixiaoyu1 wrote:
->> f2fs_gc returns -EINVAL via f2fs_balance_fs when there is enough free
->> secs after write checkpoint, but with gc_merge enabled, it will cause
->> the sleep time of gc thread to be set to no_gc_sleep_time even if there
->> are many dirty segments can be selected.
->>
->> Signed-off-by: qixiaoyu1 <qixiaoyu1@xiaomi.com>
-
+On 2022/7/18 19:36, Ye Bin wrote:
+> There is issue as follows when test f2fs atomic write:
+> F2FS-fs (loop0): Can't find valid F2FS filesystem in 2th superblock
+> F2FS-fs (loop0): invalid crc_offset: 0
+> F2FS-fs (loop0): f2fs_check_nid_range: out-of-range nid=1, run fsck to fix.
+> F2FS-fs (loop0): f2fs_check_nid_range: out-of-range nid=2, run fsck to fix.
+> ==================================================================
+> BUG: KASAN: null-ptr-deref in f2fs_get_dnode_of_data+0xac/0x16d0
+> Read of size 8 at addr 0000000000000028 by task rep/1990
 > 
-> I applied without {} to match the coding style.
+> CPU: 4 PID: 1990 Comm: rep Not tainted 5.19.0-rc6-next-20220715 #266
+> Call Trace:
+>   <TASK>
+>   dump_stack_lvl+0x6e/0x91
+>   print_report.cold+0x49a/0x6bb
+>   kasan_report+0xa8/0x130
+>   f2fs_get_dnode_of_data+0xac/0x16d0
+>   f2fs_do_write_data_page+0x2a5/0x1030
+>   move_data_page+0x3c5/0xdf0
+>   do_garbage_collect+0x2015/0x36c0
+>   f2fs_gc+0x554/0x1d30
+>   f2fs_balance_fs+0x7f5/0xda0
+>   f2fs_write_single_data_page+0xb66/0xdc0
+>   f2fs_write_cache_pages+0x716/0x1420
+>   f2fs_write_data_pages+0x84f/0x9a0
+>   do_writepages+0x130/0x3a0
+>   filemap_fdatawrite_wbc+0x87/0xa0
+>   file_write_and_wait_range+0x157/0x1c0
+>   f2fs_do_sync_file+0x206/0x12d0
+>   f2fs_sync_file+0x99/0xc0
+>   vfs_fsync_range+0x75/0x140
+>   f2fs_file_write_iter+0xd7b/0x1850
+>   vfs_write+0x645/0x780
+>   ksys_write+0xf1/0x1e0
+>   do_syscall_64+0x3b/0x90
+>   entry_SYSCALL_64_after_hwframe+0x63/0xcd
+> 
+> As 3db1de0e582c commit changed atomic write way which new a cow_inode for
+> atomic write file, and also mark cow_inode as FI_ATOMIC_FILE.
+> When f2fs_do_write_data_page write cow_inode will use cow_inode's cow_inode
+> which is NULL. Then will trigger null-ptr-deref.
+> To solve above issue, don't mark cow_inode as FI_ATOMIC_FILE.
+> 
+> Fiexes: 3db1de0e582c("f2fs: change the current atomic write way")
+> Signed-off-by: Ye Bin <yebin10@huawei.com>
+> ---
+>   fs/f2fs/file.c | 1 -
+>   1 file changed, 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 466eb00aa516..735802b6b754 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -2062,7 +2062,6 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
+>   	spin_unlock(&sbi->inode_lock[ATOMIC_FILE]);
+>   
+>   	set_inode_flag(inode, FI_ATOMIC_FILE);
+> -	set_inode_flag(fi->cow_inode, FI_ATOMIC_FILE);
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+It needs to remove clear_inode_flag(fi->cow_inode, FI_ATOMIC_FILE) in
+f2fs_abort_atomic_write()?
+
+To Daeho, could you please review this patch? IIUC, cow_inode doesn't
+need to be set as atomic file?
 
 Thanks,
+
+>   	clear_inode_flag(fi->cow_inode, FI_INLINE_DATA);
+>   	f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
+>   
 
 
 _______________________________________________
