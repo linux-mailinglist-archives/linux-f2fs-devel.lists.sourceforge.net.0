@@ -2,103 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EED35849EF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Jul 2022 04:51:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBD925850E4
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Jul 2022 15:27:27 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oHG60-0005DO-AF; Fri, 29 Jul 2022 02:51:25 +0000
+	id 1oHQ1S-0007ry-Ao; Fri, 29 Jul 2022 13:27:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1oHG5y-0005DI-F7
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Jul 2022 02:51:23 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2) (envelope-from
+ <BATV+6b4ca9ee961ef62048b6+6914+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1oHQ1Q-0007rr-Hj
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Jul 2022 13:27:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nPeIeKssccgcymXfSwb89sxYDS8GKFleGsJMeAUBMhg=; b=K2v2fcJWbftbrqFM/hsfJNuWPn
- uhku0TAukqk+rwN/qJjc5wp5MRT1FVb4GiQW/6yroEHyGw6kRsGZOQIoPezzqG9MBnVikA61Rvzrs
- pqej/3tr2vm6Tv8srqb3oSbmycoa3J9bKs3p6NFa8Tff8RNdGkIuF3Flca9bHSuNVViw=;
+ bh=eCHNh6LIA9gROqbDgmH+94ZUhQ9hP1NXx31IFuMdPWs=; b=BvlzmQHNBYlAgCDoNM9AmnoKPO
+ bPO12Tiu+KfYAKlmkNo0WzfuFmJ3RJTqV8EqUPY4fna0ctdT1/oDI8BiABlMVKoIjTtZpq/AhjdiQ
+ GJGmmwUqMSABAi6nX1gkGit7+XhcUpwC6Pb89sSHt/P+gThYxyKWg3NRCfMkt1DvZohw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nPeIeKssccgcymXfSwb89sxYDS8GKFleGsJMeAUBMhg=; b=bCbWUSTZysuF3j/+LrO9pyNj2d
- KevbNyX/IPO4x0QSDejtENcylAkbwIhSXgSWV8845pPpy1NN8u2RPDlHu8GApoGG1ABWWBcdVhw5r
- D1PnnCBnMIqVT0xyQ0nyg4oHGerr1mtBbwxq84jpbmtTDH6Lxkwqb5bukGE45p/FlITs=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=eCHNh6LIA9gROqbDgmH+94ZUhQ9hP1NXx31IFuMdPWs=; b=YUpZ1uAkEBPpQgtDKcQoHkBxvu
+ dJDMQkyn0VbK5AQp9S9N9ydR54Vnx5uThUgYetRi8IbIdjJ18c0t3cowfKHHBrClrtvKPIu2cbvSx
+ 1yHVYhcPD62O+9GIDSNCR9i0idi9xNHKG5Vqp3+DiycNGJjPB3nJEDBiH8zL/W7GbgGw=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1oHG5v-0002bd-8B
- for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Jul 2022 02:51:23 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id D6B4361DEC
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 29 Jul 2022 02:51:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A7F24C433D6
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 29 Jul 2022 02:51:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1659063069;
- bh=nPeIeKssccgcymXfSwb89sxYDS8GKFleGsJMeAUBMhg=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=aB1unUSHimXYdPthPMC0UTiirHe9WOH0fQxuRKQ69emelfiNK3OrMLcuaN2OMP43a
- P/10PsyhsBEpybjGvKp038q9RdWNfVZbwS1WH7Uk/+OYMghtv9TCf/2DJJXvg5lps5
- hZA6LDFuU299BEbxG+GxspZCs4Iu9cHH7+Xv7rkcZzhEMB8y/GTLtm3guNiJtXkwqk
- ZFUEkKOQARFaqCH9zQsFoSObvqDzBKWExbNiouwE0Cddnb4kMJwlt338zF7k4C/Jth
- cWKrUa89i1TyrpjBxkCzZWI1aEXrcMbjR+38Ogsx5Bj0QlbQRiVVk9VeOerf+qUycR
- aY4rsu7k91COQ==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 8BD8CC433E6; Fri, 29 Jul 2022 02:51:09 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 29 Jul 2022 02:51:09 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-vLCrUGANqn@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1oHQ1L-00027r-F4
+ for linux-f2fs-devel@lists.sourceforge.net; Fri, 29 Jul 2022 13:27:19 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=eCHNh6LIA9gROqbDgmH+94ZUhQ9hP1NXx31IFuMdPWs=; b=YG0E8TX0Hjc5KOEydvltqdXoI7
+ MxeSDaw5iUawZAp0Ro9zRcqvwAvICwC2vtcMbH+8AIw2zVvxJK42HEW1LFuwsZlhymKVgmvZ8e/z3
+ 7oChMqWHO6rmpbqlV05cTfb354oLhilwEaNI8JmfVxoicyfJp9zDI9smPAiZAMdj+owm5nsccPD+X
+ bb+dvxcElbxtXB1y5qpV5NYEo1tChNpmhkRM4/6WmlkVg8nQdnJY6CBQD+c5bsJ/FLE0shF81dzvm
+ 1xpvAP2eWPoNh2oxeWJ2II4w/BLMWW0J0ewVIMjYA7xQ4aRAu7b2Bb3zgg9IsXjOsbK3mtUG/YOs4
+ vJ2+Kw0Q==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
+ Hat Linux)) id 1oHQ12-0059BM-RJ; Fri, 29 Jul 2022 13:26:56 +0000
+Date: Fri, 29 Jul 2022 06:26:56 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Eunhee Rho <eunhee83.rho@samsung.com>
+Message-ID: <YuPgIByYgc6WSPDE@infradead.org>
+References: <CGME20220729002517epcms2p35eed262c3349287436c1848ab350c2d4@epcms2p3>
+ <20220729002517epcms2p35eed262c3349287436c1848ab350c2d4@epcms2p3>
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+Content-Disposition: inline
+In-Reply-To: <20220729002517epcms2p35eed262c3349287436c1848ab350c2d4@epcms2p3>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
- Comment
- #43 from Chao Yu (chao@kernel.org) --- (In reply to bernd_b from comment
- #42) > I added the dmesg output in the attachment but I fear there is nothing
- > useful to be found. 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Fri, Jul 29, 2022 at 09:25:17AM +0900, Eunhee Rho wrote:
+ > For zoned devices,
+ f2fs forbids direct IO and forces buffered IO > to serialize
+ write IOs. However, the constraint does not apply to > rea [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [198.137.202.133 listed in list.dnswl.org]
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: infradead.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -106,11 +90,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oHG5v-0002bd-8B
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+X-Headers-End: 1oHQ1L-00027r-F4
+Subject: Re: [f2fs-dev] [PATCH v0] f2fs: allow direct read for zoned device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,34 +103,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+On Fri, Jul 29, 2022 at 09:25:17AM +0900, Eunhee Rho wrote:
+> For zoned devices, f2fs forbids direct IO and forces buffered IO
+> to serialize write IOs. However, the constraint does not apply to
+> read IOs.
 
---- Comment #43 from Chao Yu (chao@kernel.org) ---
-(In reply to bernd_b from comment #42)
-> I added the dmesg output in the attachment but I fear there is nothing
-> useful to be found.
+Asymetric capabilitis will cause a whole lot of problems for us.  Can
+we figure out why direct writes to zoned devices are not supported and
+just fix that instead?
 
-[ 2443.069033] f2fs_get_lock_data_page i:205012000
-[ 2443.069688] f2fs_get_lock_data_page i:205014000
-[ 2443.070016] f2fs_get_lock_data_page i:205015000
-[ 2443.070344] f2fs_get_lock_data_page i:205016000
-[ 2443.070672] f2fs_get_lock_data_page i:205017000
-[ 2443.071000] f2fs_get_lock_data_page i:205018000
-
-Thanks a lot for helping to debug this bug, I guess the output looks useful,
-since at least we have found where it loops at. I have no idea why it loops
-here since it's an impossible case, I can make a patch to skip this loop, but
-I'm afraid that won't fix root cause... :(
-
--- 
-You may reply to this email to add a comment.
-
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
