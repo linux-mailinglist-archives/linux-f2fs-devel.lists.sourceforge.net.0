@@ -2,130 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 816A4586394
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Aug 2022 06:40:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8843E5866EB
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 Aug 2022 11:39:10 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oINE3-0004LE-Ko; Mon, 01 Aug 2022 04:40:20 +0000
+	id 1oIRtA-000363-3B; Mon, 01 Aug 2022 09:39:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <eunhee83.rho@samsung.com>) id 1oINE1-0004L8-SI
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Aug 2022 04:40:18 +0000
+ (envelope-from <studentxswpy@163.com>) id 1oIRsd-00035f-9T
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Aug 2022 09:38:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- Date:Message-ID:In-Reply-To:To:From:Sender:Reply-To:Subject:Mime-Version:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hzbhYOqkA0ybVjCJXM7h/bXExcppfaT3rHZaniOrLxw=; b=B7q5803Bi9pBHWCPlFUU7hSgyF
- jzVZYuU5BgL2d3H7ez89IYsbGXw0ijW/ParSu/iu8o/LPkwb9fdmuwFmxJ4/wOpaghbWUWbRSMt7y
- qfIi+awWHxpEklX/K7txsRxOrNc9k0YHZjBztms1M/S7fM3lZTeEkENIVI/Cg9cWsGTc=;
+ bh=aUlPur86Uq5+zhGr0WKOjZ356tSLa5JuFMCfmHLR1uA=; b=efpk+k+CLRTJf2qicGN1iUXryS
+ dkKicZ2Xa4fNZd01+nnP22BkD0r2yFK56htsNgaF/yfMda6mvUI1tfPZKT8z1XhyMKpC7q1up5O1v
+ nm28svRCI6kUs4zmIA+sE+vFhpjB2qDPKNyPu5zzpo/qqBbbyVVwQD26GSyQ+Da8LKgg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:
- In-Reply-To:To:From:Sender:Reply-To:Subject:Mime-Version:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=hzbhYOqkA0ybVjCJXM7h/bXExcppfaT3rHZaniOrLxw=; b=gg7ZKIryCAO92sBozxzugCITiy
- G2Kf7MyZtvNTfcxn6WS4Z0jv3MqPwsRneKticiiui2p5wmywjZLt+0lxFZ5w7NhxEpGSJknuFUuv3
- XYT25UanGXBFjLTlasV9GvWzkrZ+6giq0LPmeJk0fKA6aJX1HqloMH1oThYTTmJ7uhKQ=;
-Received: from mailout3.samsung.com ([203.254.224.33])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1oINDx-0002OZ-Ar
- for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Aug 2022 04:40:18 +0000
-Received: from epcas2p1.samsung.com (unknown [182.195.41.53])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20220801044003epoutp0348de0694c108325dcbbd6dd683bbdc45~HHsFaEliV1964619646epoutp03k
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  1 Aug 2022 04:40:03 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20220801044003epoutp0348de0694c108325dcbbd6dd683bbdc45~HHsFaEliV1964619646epoutp03k
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1659328803;
- bh=hzbhYOqkA0ybVjCJXM7h/bXExcppfaT3rHZaniOrLxw=;
- h=Subject:Reply-To:From:To:In-Reply-To:Date:References:From;
- b=aNXycnH/j+wLhJf8VcZHc0w8lW51psbMR+xmQum32mTx2jyqjMKQqRhnuORMsZfGc
- VqUrl3P8FY31eV+npfYxvguVcsMcTmfVyFe68LQKPdc6MIybAza0+KRsMeY5iyaplE
- DT9x5l4gLQOoRU+V5nVwQGBiEGI0S78521NAX/48=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTP id
- 20220801044002epcas2p25ff9d7be2d3e639947b880e93769a660~HHsEydK4h1270312703epcas2p2f;
- Mon,  1 Aug 2022 04:40:02 +0000 (GMT)
-Received: from epsmges2p1.samsung.com (unknown [182.195.36.68]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4Lx55G3gZWz4x9QZ; Mon,  1 Aug
- 2022 04:40:02 +0000 (GMT)
-X-AuditID: b6c32a45-45bff700000025c2-ce-62e7592258dc
-Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
- epsmges2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 3E.C5.09666.22957E26; Mon,  1 Aug 2022 13:40:02 +0900 (KST)
-Mime-Version: 1.0
-From: Eunhee Rho <eunhee83.rho@samsung.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, "chao@kernel.org" <chao@kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>
-X-Priority: 3
-X-Content-Kind-Code: NORMAL
-In-Reply-To: <20220801040607epcms2p82da0594039ba5f1ed77c451e2d13c965@epcms2p8>
-X-CPGS-Detection: blocking_info_exchange
-X-Drm-Type: N,general
-X-Msg-Generator: Mail
-X-Msg-Type: PERSONAL
-X-Reply-Demand: N
-Message-ID: <20220801044002epcms2p5a832b87ab1e6c8f0391d8d26f33c042c@epcms2p5>
-Date: Mon, 01 Aug 2022 13:40:02 +0900
-X-CMS-MailID: 20220801044002epcms2p5a832b87ab1e6c8f0391d8d26f33c042c
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-X-CPGSPASS: Y
-X-CPGSPASS: Y
-CMS-TYPE: 102P
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrCKsWRmVeSWpSXmKPExsWy7bCmha5S5PMkgzmzJC1OTz3LZPHykKbF
- k/WzmC0uLXK3uLxrDpsDq8emVZ1sHrsXfGby6NuyitHj8ya5AJaobJuM1MSU1CKF1Lzk/JTM
- vHRbJe/geOd4UzMDQ11DSwtzJYW8xNxUWyUXnwBdt8wcoK1KCmWJOaVAoYDE4mIlfTubovzS
- klSFjPziElul1IKUnALzAr3ixNzi0rx0vbzUEitDAwMjU6DChOyMI68TCxawV/ya/4W5gfED
- axcjJ4eEgInE1jPvWLoYuTiEBHYwSny+fYi9i5GDg1dAUOLvDmGQGmEBB4kTUzczgdhCAkoS
- fw/eZ4KI60pM2TKJEcRmE9CWuHK8nRVkjojAQ0aJD0e2MUEs4JWY0f6UBcKWlti+fCtYA6eA
- n8SyrodQNRoSP5b1MkPYohI3V79lh7HfH5vPCGGLSLTeOwtVIyjx4OduqLiExN2NLWwQdr5E
- z5OjUDMrJHauuApVoy9xrWMj2A28Ar4Sn45OAJvPIqAqsWfNHqhdLhKb5rwHm8MsIC+x/e0c
- ZlA4MAtoSqzfpQ9iSggoSxy5xQLzVcPG3+zobGYBPomOw3/h4jvmPYG6Rk1i8ccF0CCXkbix
- 4T7TBEalWYiAnoVk7yyEvQsYmVcxiqUWFOempxYbFRjCozY5P3cTIzj5abnuYJz89oPeIUYm
- DsZDjBIczEoivHdcnicJ8aYkVlalFuXHF5XmpBYfYjQF+ngis5Rocj4w/eaVxBuaWBqYmJkZ
- mhuZGpgrifN6pWxIFBJITyxJzU5NLUgtgulj4uCUamASk5vSddz9fiif9pYWgadGzjv/Bqs9
- U7/ntKfqy5G9zevvPHh/9eHVB9MLv/g+Zk9/KnJt8Uoz9i/nf4Rv9ks40N0dfKTsXW+gmQ93
- yps5gdEd9bzpC9boLqsQPWAwp4L5/IRO79uJHnG5kzPueFwtnhEU5bvsQ1/wL9viFbnnJZgy
- fJ4kMTsyt+/hFDmhsaxQdOOyea4Ls2u/3KoWm6J2/JHJ6lMX1GSq1/aw+jdsbXGUnvOD+6jD
- kqBSc58Pmgty7e4ox62tKnS1Wft5DY81/9cq/2t1X3Kb/RhfTI9MmLshNT5O/NORbxZNJyvC
- M2ZV3ua+IVdaz/g5863W0p2nbb7zMaXLmPmzNjrHGCmxFGckGmoxFxUnAgDxZxfnBwQAAA==
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20220729002517epcms2p35eed262c3349287436c1848ab350c2d4
-References: <20220801040607epcms2p82da0594039ba5f1ed77c451e2d13c965@epcms2p8>
- <YuXZSTw4reBDtLgk@google.com>
- <20220729002517epcms2p35eed262c3349287436c1848ab350c2d4@epcms2p3>
- <CGME20220729002517epcms2p35eed262c3349287436c1848ab350c2d4@epcms2p5>
-X-Spam-Score: -3.2 (---)
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=aUlPur86Uq5+zhGr0WKOjZ356tSLa5JuFMCfmHLR1uA=; b=D
+ qn1tBEzXKX3QqZEUkiAMSoWVBSkn32gvOKM25AwewWfXQDXnaPKrYhHfhq1sjIhGtFzX1CRLxzZBJ
+ R+TywwKtAeMfaQBfm0Ss/s/MHf/toe9UMRmJvEFROHgg4VPG09PNg3T3tdkSNEm00zFG/ArHXQ79G
+ Y6bPw4GzsjII48Ck=;
+Received: from mail-m974.mail.163.com ([123.126.97.4])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.94.2)
+ id 1oIRsb-0001X6-6l
+ for linux-f2fs-devel@lists.sourceforge.net; Mon, 01 Aug 2022 09:38:31 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=aUlPu
+ r86Uq5+zhGr0WKOjZ356tSLa5JuFMCfmHLR1uA=; b=lMsIuqNOTVuG/f1PeVWI5
+ VhbKZwX3T/ymV/gf2IKIp52lKWoRwexHpUYyDANv1BrD4HY3u73e4WWZ0j0Yj/fS
+ IV/8M6aPmrezVY9NNcW34BL7cXTbV0AjmI29E95T4+69/0gdxTzY3JXyUUtvxHha
+ 7h/E5Xpago5amflLhlgF4w=
+Received: from localhost.localdomain (unknown [123.58.221.99])
+ by smtp4 (Coremail) with SMTP id HNxpCgB35+M_m+di06X6SA--.6070S2;
+ Mon, 01 Aug 2022 17:22:09 +0800 (CST)
+From: studentxswpy@163.com
+To: jaegeuk@kernel.org, chao@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
+Date: Mon,  1 Aug 2022 17:22:02 +0800
+Message-Id: <20220801092202.3134668-1-studentxswpy@163.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+X-CM-TRANSID: HNxpCgB35+M_m+di06X6SA--.6070S2
+X-Coremail-Antispam: 1Uf129KBjvdXoW7Xry5XFW8trW7ur4rCr4DJwb_yoWfGwc_Wa
+ 48J3y0kry7JFZ3K3srCa9YqFyqqw1rJrn09FyaqF43K34rWrW3W3ZruF13A3y2vrW8Wry3
+ Crs5XrWjyr17ujkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7IU1IzutUUUUU==
+X-Originating-IP: [123.58.221.99]
+X-CM-SenderInfo: xvwxvv5qw024ls16il2tof0z/xtbB3wlQJGBHLN29uAAAsx
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  To ensure serialized IOs, f2fs allows only LFS mode for zoned
- device. Remove redundant check for direct IO. Signed-off-by: Eunhee Rho
- <eunhee83.rho@samsung.com>
- --- fs/f2fs/f2fs.h | 7 +------ 1 file changed, 1 insertion(+), 6 deletions(-)
- Content analysis details:   (-3.2 points, 6.0 required)
+ Content preview: From: Xie Shaowen replace kmalloc with f2fs_kmalloc to keep
+ f2fs code consistency. Reported-by: Hacash Robot Signed-off-by: Xie Shaowen
+ --- fs/f2fs/dir.c | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.33 listed in wl.mailspike.net]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [203.254.224.33 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [123.126.97.4 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [studentxswpy[at]163.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -134,10 +85,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oINDx-0002OZ-Ar
-Subject: [f2fs-dev] [PATCH v1] f2fs: remove device type check for direct IO
+X-Headers-End: 1oIRsb-0001X6-6l
+Subject: [f2fs-dev] [PATCH -next] f2fs: Replace kmalloc() with f2fs_kmalloc
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -149,37 +98,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: eunhee83.rho@samsung.com
+Cc: Hacash Robot <hacashRobot@santino.com>, Xie Shaowen <studentxswpy@163.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-To ensure serialized IOs, f2fs allows only LFS mode for zoned
-device. Remove redundant check for direct IO.
+From: Xie Shaowen <studentxswpy@163.com>
 
-Signed-off-by: Eunhee Rho <eunhee83.rho@samsung.com>
+replace kmalloc with f2fs_kmalloc to keep f2fs code consistency.
+
+Reported-by: Hacash Robot <hacashRobot@santino.com>
+Signed-off-by: Xie Shaowen <studentxswpy@163.com>
 ---
- fs/f2fs/f2fs.h | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ fs/f2fs/dir.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index ecd870e5d6da..ca9354746eec 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4496,12 +4496,7 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
- 	/* disallow direct IO if any of devices has unaligned blksize */
- 	if (f2fs_is_multi_device(sbi) && !sbi->aligned_blksize)
- 		return true;
--	/*
--	 * for blkzoned device, fallback direct IO to buffered IO, so
--	 * all IOs can be serialized by log-structured write.
--	 */
--	if (f2fs_sb_has_blkzoned(sbi))
--		return true;
-+
- 	if (f2fs_lfs_mode(sbi) && (rw == WRITE)) {
- 		if (block_unaligned_IO(inode, iocb, iter))
- 			return true;
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index d5bd7932fb64..712b51f69c04 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -232,7 +232,7 @@ static int f2fs_match_ci_name(const struct inode *dir, const struct qstr *name,
+ 		if (WARN_ON_ONCE(!fscrypt_has_encryption_key(dir)))
+ 			return -EINVAL;
+ 
+-		decrypted_name.name = kmalloc(de_name_len, GFP_KERNEL);
++		decrypted_name.name = f2fs_kmalloc(de_name_len, GFP_KERNEL);
+ 		if (!decrypted_name.name)
+ 			return -ENOMEM;
+ 		res = fscrypt_fname_disk_to_usr(dir, 0, 0, &encrypted_name,
 -- 
 2.25.1
 
