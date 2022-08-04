@@ -2,78 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7738A589CFB
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 Aug 2022 15:43:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id E00B7589CFC
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 Aug 2022 15:43:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oJb7x-0000W0-IC; Thu, 04 Aug 2022 13:43:06 +0000
+	id 1oJb7z-0003YB-Qo; Thu, 04 Aug 2022 13:43:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <chao@kernel.org>) id 1oJb70-0000Ul-Dg
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Aug 2022 13:42:07 +0000
+ (envelope-from <chao@kernel.org>) id 1oJb7S-0003Xb-VL
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Aug 2022 13:42:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OU3Wl7jtOHaegOXRHCMxrdSLmXGQRU13HA9s5Rsnip8=; b=D/bRv7cmyofsQoIsKo70SjOmiP
- fuQduc49aWeN8ighlTrKaIn2gjOO3fEDMREes4fwuKoXInARbrEQsmRXgIE+yU7E+41WSBAPxYKu5
- lSlbmTZfBYVbnnvug0AHEMEMoqEsB0/Kc3YpF1YHuuwq0qXZcTYa0yyg2Lan7CMwJbOg=;
+ bh=Tg5Eqz20TkF2BryKveXO0kvsckn7+wa3W0rFC2WWfyY=; b=bbYUNVQNUWEjRSa/gjp+4Xld40
+ ptn5GH9vR9Ij03Zdg/F2Y8LiKsMl/1d9UQIoOkBTtRP/7fjncIBh+N+Q5CY+knp3Uc3JYTIrQbn3L
+ HbnQH0I2PkmpkZpcrkoGMjQg57gqzRAEfvgv+0CUnXRHqbSISzQVeDRIpfwKhCy3Wc0g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=OU3Wl7jtOHaegOXRHCMxrdSLmXGQRU13HA9s5Rsnip8=; b=T
- RLOOyM+x0qDKsx6Z1coHmuAPMARgNr35e8prxsXYeFQMGco5OiXUrtqfqzGeecDKicC7ozelG2VCi
- 2NQAadpZFb/J3lcllZutTgMb7lO/hzHJoJuwBiYnNwDQr0iheezHGV+RXd60PChs1/4f6lH0impdG
- dCm4lsbIH7swV2cw=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Tg5Eqz20TkF2BryKveXO0kvsckn7+wa3W0rFC2WWfyY=; b=Z+6KlQbzPLD41HIqlL4GGRB+S8
+ x8RoqlQzCbgYU3ae6cdt0TCPInEXx0N63m3/XMCz3osTHQ/gRc+6+J7/kHCRMwX8jG4w3qrfcrgdY
+ nK4Nw+2xlEoMrSf6N0kxIBV2vFpfg5Fl6gdfB8P/1/GsCtYLe/yzt/YdV/jh0ixgD2EI=;
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1oJb6w-003Dva-PQ
- for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Aug 2022 13:42:07 +0000
+ id 1oJb7G-003DwP-IO
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Aug 2022 13:42:33 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id B2AACB824B3;
- Thu,  4 Aug 2022 13:41:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 35B73C433B5;
- Thu,  4 Aug 2022 13:41:49 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 555D7B824B3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  4 Aug 2022 13:42:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77679C433C1;
+ Thu,  4 Aug 2022 13:42:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1659620510;
- bh=tft2ehdcPlqOGOhqquXqJ/QmYEfBenOXGUYgu/c2XrI=;
- h=From:To:Cc:Subject:Date:From;
- b=PP1IwDFDTjFeeOeQNo7hGlCkVvepWKehYd/CgEIL+ybGrIQoWxvQo1U+aYGXu3Ih9
- SJCR6pJxGtP3vgO53tFYIrmLk5xbxbiCchaQLFUmxDER5zh3NI3IkuuCC/6iqTKMII
- bPNxMiJJ8ulJgOILmzQ7GzRElWpLTsNCMy9V3ZwHSxME4gL/GOEGaQEMTTj4qCfRmn
- rMIWlrdMmgv/LpU//u0NVq1rWW5oONeY17+xQf6ecDsSpq1N3cwOzJ/DDAyMnUHp51
- aLHmC2Rnss5oC2NiUADSN+p4Gycy9sKt2Gb8hRJiHE/G5LxTB75IhVqM34mL9B9KGi
- TbbOJiRvIdHsw==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Thu,  4 Aug 2022 21:41:40 +0800
-Message-Id: <20220804134140.14455-1-chao@kernel.org>
-X-Mailer: git-send-email 2.36.1
+ s=k20201202; t=1659620535;
+ bh=/XC5S4YiMuClwldjj+UXqlc4TOiJVqClkgdfFwzoNSo=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=me97mjwwtm8931nbsJzE5o4eIJ/uGRgfJEEh72ynWwhWgzLUHhEVSZjqrQcIM4BFC
+ rKGV6yDH1JgIWmE3ogCBThjOSbZsGD3MVMQVnauR2IKajnk9huT/gQPTUmkKeDTpwR
+ O78L7WlAyEprpkIyaZ7o0PFbS1AYB0GE2plcbRn9+ACx+fSRc0DF7BwwLwToR0l+7F
+ BEOItp4getVa226gkMY0V+zqEoU6bbIEzbBXIzoTZ18wxW3+ZafVUCMT7AB/h8Xt7h
+ XXnbU6mGdw/UhlZIDMhhA12WahtnUWP8iGiSxzqjdTswcYo5K6KOiLhIsSljq1rt6m
+ FHk/rifJkiDew==
+Message-ID: <0b07d2ae-b3c0-1b13-37d0-068a342c7b8f@kernel.org>
+Date: Thu, 4 Aug 2022 21:42:11 +0800
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20220804034146.3357114-1-jaegeuk@kernel.org>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20220804034146.3357114-1-jaegeuk@kernel.org>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chao Yu <chao.yu@oppo.com> This patch disallow to
- enable
- file compression in image which doesn't support compression feature.
- Signed-off-by:
- Chao Yu <chao.yu@oppo.com> --- fs/f2fs/file.c | 2 ++ 1 file changed,
- 2 insertions(+)
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 2022/8/4 11:41, Jaegeuk Kim wrote: > If kernel doesn't
+ have CONFIG_F2FS_FS_COMPRESSION,
+ a file having FS_COMPR_FL via > ioctl(FS_IOC_SETFLAGS)
+ is unaccessible due to f2fs_is_compress_backend_ready( [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -87,10 +91,11 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oJb6w-003Dva-PQ
-Subject: [f2fs-dev] [PATCH] f2fs: fix to check compression feature before
- enabling file compression
+X-Headers-End: 1oJb7G-003DwP-IO
+Subject: Re: [f2fs-dev] [PATCH] f2fs: do not set compression bit if kernel
+ doesn't support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,37 +107,20 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <chao.yu@oppo.com>
+On 2022/8/4 11:41, Jaegeuk Kim wrote:
+> If kernel doesn't have CONFIG_F2FS_FS_COMPRESSION, a file having FS_COMPR_FL via
+> ioctl(FS_IOC_SETFLAGS) is unaccessible due to f2fs_is_compress_backend_ready().
+> Let's avoid it.
+> 
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-This patch disallow to enable file compression in image which doesn't
-support compression feature.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-Signed-off-by: Chao Yu <chao.yu@oppo.com>
----
- fs/f2fs/file.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 24f5b02c78e7..4a3f4eaa3fc5 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -1872,6 +1872,8 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
- 			if (!f2fs_disable_compressed_file(inode))
- 				return -EINVAL;
- 		} else {
-+			if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
-+				return -EOPNOTSUPP;
- 			if (!f2fs_may_compress(inode))
- 				return -EINVAL;
- 			if (S_ISREG(inode->i_mode) && F2FS_HAS_BLOCKS(inode))
--- 
-2.36.1
-
+Thanks,
 
 
 _______________________________________________
