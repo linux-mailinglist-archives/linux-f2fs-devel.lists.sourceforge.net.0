@@ -2,85 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 744565892ED
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  3 Aug 2022 21:55:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D1735896AD
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 Aug 2022 05:42:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oJKSp-0006wD-Bp; Wed, 03 Aug 2022 19:55:31 +0000
+	id 1oJRkR-0004M3-4B; Thu, 04 Aug 2022 03:42:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1oJKSp-0006w7-0l
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Aug 2022 19:55:31 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1oJRkQ-0004Lx-2Y
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Aug 2022 03:42:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5qfrPxr3ZrqWmKrWnpHwbA12sDWBzb0DjS25t7Dl/8E=; b=DBO60LMQOyiX9y4nEYCmtQU6g8
- Yhrc0pVIVR+GJd4+85zu39wgcb6AIC8ECSPsZn6ruWQfShXd0HS5AXOfV4YbarezBvBE8mW/dHzmk
- 8r+lkOz1/2l8bGw3opITcy90Qd/cSqyEEoq8ozijZMUOBvn8LMYoxayDeLPVWbB7Y/C8=;
+ bh=GiOyjfSp2HgfNLOy7osefeeSYulrbMZc2/kJxjQ4/N4=; b=CiAEjh2eUuRd0WO0/ilBfLY7OI
+ 5fVYpYW7Xen6+vskcbgJ1aCEeEwi1vRw843RjDUcIAQGVE2jlg8jlAYhWvmVwZhEK08j3Jf7Zg07d
+ 1CroVVRKYGIIHKEQE3jrvm6zT+mwIwAemPY7bMOz6ptItvTyjy9vMsjMOZRPrhHomsp8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=5qfrPxr3ZrqWmKrWnpHwbA12sDWBzb0DjS25t7Dl/8E=; b=YhXOZayo+FAPyAdiph84zhTpWc
- fC1FjZwhBUQCrTiMwreGq/PhoGi52bbW9zVAuXcNqxIRtMPb33AMlYDba26Csm54PWrRIznczbo67
- DXzkmeNl68NxepVF/HhcyC8R+9kkxOWhfYYIEgTzApD16SKtF26D6gFDqaU4A/f1S0UQ=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=GiOyjfSp2HgfNLOy7osefeeSYulrbMZc2/kJxjQ4/N4=; b=S
+ yF7P3q5t+FZQOwokFKlZ+auU7RIaA7T/pAGo3SKrYVY4jeOlVg7/jmFTzhrJJPEMOYX5BRsgQ60Q/
+ T5vNm+GsN+Hze30NPYiCaRVObqKXZa8WeOGcHUVU2cFaBR8+FYUs8E/Rw1Aat4YAZIo3clQFhTKkL
+ zqQZqZE8KxvW/mg0=;
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1oJKSe-002AfE-Jz
- for linux-f2fs-devel@lists.sourceforge.net; Wed, 03 Aug 2022 19:55:30 +0000
+ id 1oJRkI-002jqd-DX
+ for linux-f2fs-devel@lists.sourceforge.net; Thu, 04 Aug 2022 03:42:08 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 582F4B82311
+ by ams.source.kernel.org (Postfix) with ESMTPS id 5044AB82471
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  3 Aug 2022 19:55:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 18962C433D6
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  3 Aug 2022 19:55:13 +0000 (UTC)
+ Thu,  4 Aug 2022 03:41:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FFBEC433D6;
+ Thu,  4 Aug 2022 03:41:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1659556513;
- bh=5qfrPxr3ZrqWmKrWnpHwbA12sDWBzb0DjS25t7Dl/8E=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=bCB0+SKHzD+YKORg9d9nui8Tb6iIwtDTp9/jd9KseUDILGpeNpM4RzRovXzRXCpL2
- uOnPYKnuOC8qx2teSKwic6pkjvPEUKgmu5AzkNfdFamAAXehFdflK+EATp6wjO5GW+
- ZTWZRNhoToQHXMfe6iui0I6DnH4KA2ymNAAuBwlIiq8YcKL+Xhr/9dvjnjoonsDB83
- SCYlfB/ZO8utiD5QCQ3CaiekoZWSasthXvRN1Gc0LUQllSw6nn6pz2+YULlNt6n3zU
- 5t4vNK6qzBehJghQq3uBS+CMIvd4SMxihhNnoe3x0kkOJNB0ZW1MXnRa+5FpmbU4dN
- aOeZnovv53Llg==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id F0FE1C433E4; Wed,  3 Aug 2022 19:55:12 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 03 Aug 2022 19:55:12 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: bbutscheidt@yahoo.de
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-9FktSKWu5L@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1659584510;
+ bh=S8s5z1x3ID9OVqTTN45HZoXxESI7Zk4SGH+wg8AEPjA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ZiqwPPMwnfQ7aY1aeRE5SKLlWmnmo9H9WVkOuDp50PiPuD1JQ03kf44hA8pdYGTZH
+ MRebCDpy2rwtSrz3LhwzUaLRRNRB1lnd8TS3A8BrnNGzZjYHyYlxgXED4Fmfcy0ddI
+ ywR3AXGw+BdB19oS5DKZksVKiWqP14WSx8uvy7B//HU+oebmTeOH/z/hpXfQnYeC/5
+ HAd+lbFIVuJFiN0wHgzJKM3rL6UvVRSL9FZy8oIy/ZwoBsmk21zDoNFcBMfpQarSLM
+ QdGngn9ibV5HW7Vs4b5wHYT0OZVsSywK6EODUFlkUkDyZCiV+hrv1g6jKR5s2h9A3U
+ 5/0v41w5XxVMw==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Wed,  3 Aug 2022 20:41:46 -0700
+Message-Id: <20220804034146.3357114-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.37.1.455.g008518b4e5-goog
 MIME-Version: 1.0
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
@@ -89,16 +69,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
- Comment
- #48 from bernd_b (bbutscheidt@yahoo.de) --- (In reply to Yuriy Garin from
- comment #47) > > First time I had this problem was ~2022-06-15, at that time
- I was probably > on > kernel 5.18.3 o [...] 
+ Content preview:  If kernel doesn't have CONFIG_F2FS_FS_COMPRESSION, a file
+ having FS_COMPR_FL via ioctl(FS_IOC_SETFLAGS) is unaccessible due to
+ f2fs_is_compress_backend_ready().
+ Let's avoid it. Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> ---
+ fs/f2fs/f2fs.h
+ | 7 ++++++- fs/f2fs/file.c | 4 ++-- 2 files changed, 8 insertions(+),
+ 3 deletions(-)
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -108,9 +88,12 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oJKSe-002AfE-Jz
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+X-Headers-End: 1oJRkI-002jqd-DX
+Subject: [f2fs-dev] [PATCH] f2fs: do not set compression bit if kernel
+ doesn't support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,33 +105,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+If kernel doesn't have CONFIG_F2FS_FS_COMPRESSION, a file having FS_COMPR_FL via
+ioctl(FS_IOC_SETFLAGS) is unaccessible due to f2fs_is_compress_backend_ready().
+Let's avoid it.
 
---- Comment #48 from bernd_b (bbutscheidt@yahoo.de) ---
-(In reply to Yuriy Garin from comment #47)
-> 
-> First time I had this problem was ~2022-06-15, at that time I was probably
-> on 
-> kernel 5.18.3 or 5.18.4. I had it on 5.18.6, see #25.
-> 
-> After next upgrade and up to now, kernel 5.18.13, I did not had this problem.
-> 
-I used 5.18.14 when receiving the debug output I posted here.
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/f2fs.h | 7 ++++++-
+ fs/f2fs/file.c | 4 ++--
+ 2 files changed, 8 insertions(+), 3 deletions(-)
 
-Questions remaining:
-- Better to apply debug_v2 patch to the newest kernel or stick with 5.18.14?
-- I would like to start to only apply the new debug part. Therefore, I leave
-out everything from line 43?
-
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 4e274c91360b..2f3c4eef89c2 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -4295,8 +4295,9 @@ static inline void f2fs_update_extent_tree_range_compressed(struct inode *inode,
+ 				unsigned int c_len) { }
+ #endif
+ 
+-static inline void set_compress_context(struct inode *inode)
++static inline int set_compress_context(struct inode *inode)
+ {
++#ifdef CONFIG_F2FS_FS_COMPRESSION
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 
+ 	F2FS_I(inode)->i_compress_algorithm =
+@@ -4319,6 +4320,10 @@ static inline void set_compress_context(struct inode *inode)
+ 	stat_inc_compr_inode(inode);
+ 	inc_compr_inode_stat(inode);
+ 	f2fs_mark_inode_dirty_sync(inode, true);
++	return 0;
++#else
++	return -EOPNOTSUPP;
++#endif
+ }
+ 
+ static inline bool f2fs_disable_compressed_file(struct inode *inode)
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index d2159d6880d6..67e5a6cd25e8 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1878,8 +1878,8 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+ 				return -EINVAL;
+ 			if (S_ISREG(inode->i_mode) && F2FS_HAS_BLOCKS(inode))
+ 				return -EINVAL;
+-
+-			set_compress_context(inode);
++			if (set_compress_context(inode))
++				return -EOPNOTSUPP;
+ 		}
+ 	}
+ 
 -- 
-You may reply to this email to add a comment.
+2.37.1.455.g008518b4e5-goog
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
