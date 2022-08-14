@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F18B5923FF
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 14 Aug 2022 18:27:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 049A7592400
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 14 Aug 2022 18:27:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oNGSd-0004bE-IK;
-	Sun, 14 Aug 2022 16:27:35 +0000
+	id 1oNGSf-00012U-Nj;
+	Sun, 14 Aug 2022 16:27:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1oNGSc-0004b7-3n
+ (envelope-from <sashal@kernel.org>) id 1oNGSb-000125-V3
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 14 Aug 2022 16:27:34 +0000
+ Sun, 14 Aug 2022 16:27:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Xzx7zJRhLf1PG6hnk6eh5JK5DhdjeFEdcEqQAp8LaKA=; b=cehpp+SQ4QxjDRuZvIZJrCRjz8
- ym52Ru50upkazzrWJdb/yQK+fTrFhTP2bSqceagprRr3BEZaMmx/3FJmOf2HpMPlb6A02HnT5SOnP
- FZz9Xfpx4uzHBVxaH1WbMHlFObzMUoCyI07gQ3jMQnAbqdHRiJ+rszG1DUi9uuuw+U30=;
+ bh=W4jZhG1xhgo4OcL2uaMwy+cGx+p91T/6DIHoxmljd5M=; b=GU9e9hGA5reRpLrqHuKvdoo5kU
+ RmNkq3YjM7sIPhCadxYD5TgNVP8htXcI+i88+5Zt5PDwriLFQjpLWHRWEZyssBAHMnDJxVYlt/FjQ
+ oL4kHOvw0kPE6hjrO5hF5qVxoXS5iIa1bnXUCw/CuQA+NXu00i4CQohSHMt1P7QQEmrc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,36 +31,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Xzx7zJRhLf1PG6hnk6eh5JK5DhdjeFEdcEqQAp8LaKA=; b=DX4ehWX/6FUZgD/vbQaO3Tb9lM
- XlV8lY6erEqk4zLtAcDYNwBgN+ATAUOenyN53kaxgH0WRI3biK4oPzLn86DiYvh2KPc6lSUG3oyx2
- DVHOZSPJHiKKH6sfgDlh/P03wjmlWCovLZ8uweVDCbPiCk2JaRd5oaY7W843YwqqQ68I=;
+ bh=W4jZhG1xhgo4OcL2uaMwy+cGx+p91T/6DIHoxmljd5M=; b=LXI8Ril1pHYW8zSxUKQRMIO3x0
+ rX/4jSaRKpltoUr+SZ2wdvStYTFBX4mFv+kwEiP0tMDQJHKAECjw8+6+Kao6HDpqlZIpvPq+MoIAC
+ kcOc1TqIPzRYw6iR742ILwMPBdrKfabnbZiXwPe9r6ub9Gu7MpU5tu+fwE9B3XwOg238=;
 Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oNGSb-00007m-DE for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 14 Aug 2022 16:27:34 +0000
+ id 1oNGSb-0029Sv-5u for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 14 Aug 2022 16:27:33 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 85940B80B79;
- Sun, 14 Aug 2022 16:27:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5FAA8C433C1;
- Sun, 14 Aug 2022 16:27:23 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id E294FB80B87;
+ Sun, 14 Aug 2022 16:27:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3B76C433D6;
+ Sun, 14 Aug 2022 16:27:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1660494444;
- bh=/jfp8U8V850bZODnU1RZhL/AMJJd513LUtYsEK6JinA=;
+ s=k20201202; t=1660494445;
+ bh=iX9bfe+ORv3IQGMdd+YgIjHQjRAB9HYr5kNWTyjhKAA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=UNaW8HHtR4Q/eV4ogm6ByyLdtOVK1h+7H4rY8ngbtDF9DJv0QWIvSnM7dZUbhSMUY
- rJBxKX2XTkyJvbkMuhJ433t8r1MmtOc5qyi1abfkvTftzd/qMPMtUDTyNMBV+LI8jY
- B3vYZeAD0ss5NFR6+gPMeBzGSGX2+yiEdwb5OXCsFqc47h3n2pPck4JZrzpJJgrM09
- DfLkd8TXmjUJgOyK+0XHk+cysGfqjJwsRrmG6jRCVRS7tpEyIavI9gUCPmiFubxoKB
- /SLrajnzjEkDsWUEBO2balb3yHzj3sefpwBJXfsfvS2lYwoQ3jH+c08wWC4w62nU7V
- td2t+vYQNwkKg==
+ b=C9XNgRJ6ppXj6ywh/fTT7u9/x/Ry6HubDxkEkRfTYV7X9JKXB0Qt03fBke/+w4qNs
+ XHSFfakJj6LTENl1Jk2hsOcZRgm/cHOBhdwK4AbHMiFKi1zEnLAgXHmQ7zYqym+uCY
+ wn7aTWjmQMFM17N0KFwMu4MTN8+J0+41IQS5ukDiieGeisLDo1qEqFd0PvxsO4BliQ
+ 6tQd85Y/hpSTC3UElg09XkrOCPlRpgPA3XHtUeQ/BfbOQAsfuiDgOEjwhoxszJ9Mag
+ i29PLTnOJgZqLXahKNtT00OjUkBf+BeFjVWf+Jds1Yu5GmE5s20t6gjBPHtqVh9njK
+ /6UrHNiIROyYQ==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sun, 14 Aug 2022 12:26:02 -0400
-Message-Id: <20220814162610.2397644-22-sashal@kernel.org>
+Date: Sun, 14 Aug 2022 12:26:03 -0400
+Message-Id: <20220814162610.2397644-23-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220814162610.2397644-1-sashal@kernel.org>
 References: <20220814162610.2397644-1-sashal@kernel.org>
@@ -75,9 +75,8 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: From: Chao Yu <chao.yu@oppo.com> [ Upstream commit
- 141170b759e03958f296033bb7001be62d1d363b
- ] As Dipanjan Das <mail.dipanjan.das@gmail.com> reported, syzkaller found
- a f2fs bug as below: 
+ 09beadf289d6e300553e60d6e76f13c0427ecab3
+ ] As Wenqing Liu <wenqingliu0120@gmail.com> reported in bugzilla: 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oNGSb-00007m-DE
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.15 22/28] f2fs: fix to avoid use
- f2fs_bug_on() in f2fs_new_node_page()
+X-Headers-End: 1oNGSb-0029Sv-5u
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.15 23/28] f2fs: fix to do sanity check
+ on segment type in build_sit_entries()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,67 +106,82 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- Dipanjan Das <mail.dipanjan.das@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Sasha Levin <sashal@kernel.org>, Wenqing Liu <wenqingliu0120@gmail.com>,
+ linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <chao.yu@oppo.com>
 
-[ Upstream commit 141170b759e03958f296033bb7001be62d1d363b ]
+[ Upstream commit 09beadf289d6e300553e60d6e76f13c0427ecab3 ]
 
-As Dipanjan Das <mail.dipanjan.das@gmail.com> reported, syzkaller
-found a f2fs bug as below:
+As Wenqing Liu <wenqingliu0120@gmail.com> reported in bugzilla:
 
-RIP: 0010:f2fs_new_node_page+0x19ac/0x1fc0 fs/f2fs/node.c:1295
-Call Trace:
- write_all_xattrs fs/f2fs/xattr.c:487 [inline]
- __f2fs_setxattr+0xe76/0x2e10 fs/f2fs/xattr.c:743
- f2fs_setxattr+0x233/0xab0 fs/f2fs/xattr.c:790
- f2fs_xattr_generic_set+0x133/0x170 fs/f2fs/xattr.c:86
- __vfs_setxattr+0x115/0x180 fs/xattr.c:182
- __vfs_setxattr_noperm+0x125/0x5f0 fs/xattr.c:216
- __vfs_setxattr_locked+0x1cf/0x260 fs/xattr.c:277
- vfs_setxattr+0x13f/0x330 fs/xattr.c:303
- setxattr+0x146/0x160 fs/xattr.c:611
- path_setxattr+0x1a7/0x1d0 fs/xattr.c:630
- __do_sys_lsetxattr fs/xattr.c:653 [inline]
- __se_sys_lsetxattr fs/xattr.c:649 [inline]
- __x64_sys_lsetxattr+0xbd/0x150 fs/xattr.c:649
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x35/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x46/0xb0
+https://bugzilla.kernel.org/show_bug.cgi?id=216285
 
-NAT entry and nat bitmap can be inconsistent, e.g. one nid is free
-in nat bitmap, and blkaddr in its NAT entry is not NULL_ADDR, it
-may trigger BUG_ON() in f2fs_new_node_page(), fix it.
+RIP: 0010:memcpy_erms+0x6/0x10
+ f2fs_update_meta_page+0x84/0x570 [f2fs]
+ change_curseg.constprop.0+0x159/0xbd0 [f2fs]
+ f2fs_do_replace_block+0x5c7/0x18a0 [f2fs]
+ f2fs_replace_block+0xeb/0x180 [f2fs]
+ recover_data+0x1abd/0x6f50 [f2fs]
+ f2fs_recover_fsync_data+0x12ce/0x3250 [f2fs]
+ f2fs_fill_super+0x4459/0x6190 [f2fs]
+ mount_bdev+0x2cf/0x3b0
+ legacy_get_tree+0xed/0x1d0
+ vfs_get_tree+0x81/0x2b0
+ path_mount+0x47e/0x19d0
+ do_mount+0xce/0xf0
+ __x64_sys_mount+0x12c/0x1a0
+ do_syscall_64+0x38/0x90
+ entry_SYSCALL_64_after_hwframe+0x63/0xcd
 
-Reported-by: Dipanjan Das <mail.dipanjan.das@gmail.com>
+The root cause is segment type is invalid, so in f2fs_do_replace_block(),
+f2fs accesses f2fs_sm_info::curseg_array with out-of-range segment type,
+result in accessing invalid curseg->sum_blk during memcpy in
+f2fs_update_meta_page(). Fix this by adding sanity check on segment type
+in build_sit_entries().
+
+Reported-by: Wenqing Liu <wenqingliu0120@gmail.com>
 Signed-off-by: Chao Yu <chao.yu@oppo.com>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/node.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ fs/f2fs/segment.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 69c6bcaf5aae..0e6e73bc42d4 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -1291,7 +1291,11 @@ struct page *f2fs_new_node_page(struct dnode_of_data *dn, unsigned int ofs)
- 		dec_valid_node_count(sbi, dn->inode, !ofs);
- 		goto fail;
- 	}
--	f2fs_bug_on(sbi, new_ni.blk_addr != NULL_ADDR);
-+	if (unlikely(new_ni.blk_addr != NULL_ADDR)) {
-+		err = -EFSCORRUPTED;
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
-+		goto fail;
-+	}
- #endif
- 	new_ni.nid = dn->nid;
- 	new_ni.ino = dn->inode->i_ino;
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 841a978da083..e98c90bd8ef6 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -4537,6 +4537,12 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
+ 				return err;
+ 			seg_info_from_raw_sit(se, &sit);
+ 
++			if (se->type >= NR_PERSISTENT_LOG) {
++				f2fs_err(sbi, "Invalid segment type: %u, segno: %u",
++							se->type, start);
++				return -EFSCORRUPTED;
++			}
++
+ 			sit_valid_blocks[SE_PAGETYPE(se)] += se->valid_blocks;
+ 
+ 			if (f2fs_block_unit_discard(sbi)) {
+@@ -4585,6 +4591,13 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
+ 			break;
+ 		seg_info_from_raw_sit(se, &sit);
+ 
++		if (se->type >= NR_PERSISTENT_LOG) {
++			f2fs_err(sbi, "Invalid segment type: %u, segno: %u",
++							se->type, start);
++			err = -EFSCORRUPTED;
++			break;
++		}
++
+ 		sit_valid_blocks[SE_PAGETYPE(se)] += se->valid_blocks;
+ 
+ 		if (f2fs_block_unit_discard(sbi)) {
 -- 
 2.35.1
 
