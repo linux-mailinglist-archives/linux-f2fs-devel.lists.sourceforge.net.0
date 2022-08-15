@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E58EC592835
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Aug 2022 05:38:41 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC26D592847
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Aug 2022 05:52:45 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oNQw4-0007Za-HR;
-	Mon, 15 Aug 2022 03:38:40 +0000
+	id 1oNR9d-0002zf-TI;
+	Mon, 15 Aug 2022 03:52:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1oNQw3-0007ZT-6T
+ (envelope-from <chao@kernel.org>) id 1oNR9c-0002zY-2L
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Aug 2022 03:38:39 +0000
+ Mon, 15 Aug 2022 03:52:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jzbfmeMfkixPPUNHLeCd1olh4Bdf2ComQ3IphUoKC+A=; b=PmoP1djvgFByTyU8vei6W+uppP
- IVckpWh1iIIiACZdeOxeGEYpMI7qiZ3t1Mbn1qqS63Nr5etSLZqQUmyZig01FEBmIOMoJ6xQzWDpB
- SaTR6fToeWCby8kGUiV1Ym3NNGRiAJ686W2Ptwfjr9Hb3xsgG+pE91dHAcG9wEKTm9Rg=;
+ bh=si+yP/cAPX61+BKFdf43zy7PI169kxeZSBXYu+A0pes=; b=iEvfOTwBI96rQtw79Xso5yhK8F
+ waYSlmcco/6zLJ95ZceROeUegExi7OcFANx6vb7HnjBah7sT60wf3c+ctGTwt/S78oSOtYkY1GUI1
+ VWW+9FItljnB38cQmDvx+zgH7TzvMqhVjXlM9F2z5/LoJreDv9LLohKTnR9IA0pfcp5c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,41 +31,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jzbfmeMfkixPPUNHLeCd1olh4Bdf2ComQ3IphUoKC+A=; b=Wd0Qbstr1WMkZ6CPDeT6ZbkxJL
- XDS6467sAGXBcC+NJxSLKLM4TDRSDO4t5M/XSftoOECvbv+5+zkwJzbA1/gS8uwTIeS3Q3Gs2RD6m
- hEuRdA61objMoTLBsgFvdjf3OJRj64L3qOH0FO4GXV3xl2S1B7XUVue8mfXp3A2qLPgw=;
+ bh=si+yP/cAPX61+BKFdf43zy7PI169kxeZSBXYu+A0pes=; b=TkD5QkvOrqyl6astpxhb3uRX19
+ FBRRi9MzrqYOumsTd3GKZjTAsaW8IQx0e2SbR7HNkn1XZymgworxJTO2FVBCJuMAkBb9cPUSXzGf7
+ 9W5EDVpeShDt72Rgsvn8jJy5ouaTUPdKhbZ1cMRR9wZoACx4hkIBie37OhkFiyG+SPvg=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oNQw2-002cJA-Ea for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Aug 2022 03:38:38 +0000
+ id 1oNR9a-002csY-89 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 15 Aug 2022 03:52:39 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4856461005;
- Mon, 15 Aug 2022 03:38:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C068C433D6;
- Mon, 15 Aug 2022 03:38:30 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D984F61019
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 15 Aug 2022 03:52:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32E67C433D6;
+ Mon, 15 Aug 2022 03:52:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1660534711;
- bh=x6Ufi6V+zV+UUHpBPP6UaIyCon1vDe5ntCtT10dbDSg=;
+ s=k20201202; t=1660535552;
+ bh=x8mswgoGqL/z1c3stv7WymTX1bkbDAeAwck9N1MfYS0=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=T/vcgrY82TaK0Bu2sjuWgNHP1OpAsCtbX1NZ0T3Hc5UpKj116Wx11HGkSKmDUfcDj
- iU0ps796psBgVH7kvqBjAsoK515JLdUZPQ9rpdiy6NF25XRKutYYman4GwgUcwFUGz
- UlgkjqBGqi84+bUAkCNUGjaEnFe1p1r9aSuhQS3FNOuYHm6Bn2YIUe8fXDwMcNr5cx
- mk/26xk/xOAVCwTU/W2Q/HJvdz8w+9Iz5AIfPRAOhM69XnHwpR26RwWlEdYYn+LMDS
- xBjpHfxZtObq7J6LzL5ADQePmtG4jeaiC04/k+rwd5e9GNpdErV4Z/6A1RQ4+yq4dE
- V0uGUPqeeXKxA==
-Message-ID: <e1e012c5-fad9-cad5-9b86-cb504db71751@kernel.org>
-Date: Mon, 15 Aug 2022 11:38:28 +0800
+ b=cGj6y/eJLhf7nsTgC7aSqktLSsEdswIC18PEZUrpeELK4uChjmCRTernzEtYJfczD
+ zcHGxIqyIOG2DR6+Q+z0gLM6QVMw0rUr8u88f6eHt4wdD8G9cpojJ78ij2/FJs1bDG
+ 42xq8vbVpILU76o+m/NyGbp/WSuj/u5AiM36GFh5ucLLqsvycpPnx0DJKtlyp/OgDA
+ OjiczQKGG/PHQO6VI2SW8AZxe90myMJSW8YJBvZRqfspOog0IFKC2gqJxaEfNMdYnN
+ /I1YHBOecfiDbZ1qktoNtAvZiirc4Z05vXkDlGYL5TrOxwxgNuhfZH0j0vCPhvQmTh
+ KK4lfYKUt1pfw==
+Message-ID: <65562b32-505f-796e-305a-d1b03baeb388@kernel.org>
+Date: Mon, 15 Aug 2022 11:52:28 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
 Content-Language: en-US
-To: Weichao Guo <guoweichao@oppo.com>, jaegeuk@kernel.org
-References: <1660281825-9623-1-git-send-email-guoweichao@oppo.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20220813143709.11909-1-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <1660281825-9623-1-git-send-email-guoweichao@oppo.com>
+In-Reply-To: <20220813143709.11909-1-jaegeuk@kernel.org>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -73,9 +75,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/8/12 13:23, Weichao Guo wrote: > We now use walltime
- for monthly period check. However the walltime is: > * unstable(timestamp
- register reset) and settable(modified by user) > * unreasonable(e [...] 
+ Content preview:  On 2022/8/13 22:37, Jaegeuk Kim wrote: > We should decrease
+ the frozen counter. > > Cc: stable@kernel.org > Fixes: 325163e9892b ("f2fs:
+ add gc_urgent_high_remaining sysfs node") > Signed-off-by: Jaege [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +95,8 @@ X-Spam-Report: Spam detection software,
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oNQw2-002cJA-Ea
-Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: use elapsed_time in checkpoint
- for period check
+X-Headers-End: 1oNR9a-002csY-89
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix wrong continue condition in GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,25 +108,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: zhangshiming@oppo.com, linux-f2fs-devel@lists.sourceforge.net
+Cc: stable@kernel.org
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/8/12 13:23, Weichao Guo wrote:
-> We now use walltime for monthly period check. However the walltime is:
-> * unstable(timestamp register reset) and settable(modified by user)
-> * unreasonable(e.g: device power-off for one month, no data changed)
+On 2022/8/13 22:37, Jaegeuk Kim wrote:
+> We should decrease the frozen counter.
 > 
-> When the walltime changes to the past before one month or the future
-> after one month, the period check in next fsck will fail to skip or
-> start a full scan. So, let's use the elapsed_time in checkpoint as
-> current time for period check.
+> Cc: stable@kernel.org
+> Fixes: 325163e9892b ("f2fs: add gc_urgent_high_remaining sysfs node")
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>   fs/f2fs/gc.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> Signed-off-by: Weichao Guo <guoweichao@oppo.com>
-> Signed-off-by: Chao Yu <chao@kernel.org>
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 6da21d405ce1..7e4b41240d59 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -102,7 +102,7 @@ static int gc_thread_func(void *data)
+>   					sbi->gc_urgent_high_limited = false;
+>   					spin_unlock(&sbi->gc_urgent_high_lock);
+>   					sbi->gc_mode = GC_NORMAL;
+> -					continue;
+> +					goto next;
+>   				}
+>   				sbi->gc_urgent_high_remaining--;
+>   			}
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Why not:
+
+	if (!sbi->gc_urgent_high_remaining) {
+		sbi->gc_urgent_high_limited = false;
+		spin_unlock(&sbi->gc_urgent_high_lock);
+		sbi->gc_mode = GC_NORMAL;
+	} else {
+		sbi->gc_urgent_high_remaining--;
+	}
 
 Thanks,
 
