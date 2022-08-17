@@ -2,86 +2,118 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE670595652
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Aug 2022 11:31:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE85B596851
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Aug 2022 06:54:21 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oNsvG-00010Q-Lm;
-	Tue, 16 Aug 2022 09:31:42 +0000
+	id 1oOB4I-0002Zz-96;
+	Wed, 17 Aug 2022 04:54:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <david@fromorbit.com>) id 1oNsvF-00010J-Sq
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1oOB4G-0002Zt-KE
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 16 Aug 2022 09:31:41 +0000
+ Wed, 17 Aug 2022 04:54:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ez1qmC7ExMnT+w0jTyQHoecbYQMuIA6BfS1nbjNkRwA=; b=P3fUWXziyczoinoUGmgpzItVVw
- CIKbiJSKiCkov5/u0JmuwnsNXvUGJZ8QqjXV4z3ZO1FcECllGnSQZWyC0jo9HPbMExyPnlgjRrUzb
- i5MVZqAnO7aF3Z6nPQXiDj8aEEPCs7Z4XS3bW4Cls1qLAkNhGEiWXL55BUTOWSaImGKc=;
+ bh=8l3LOn7PGB/CEulnFFuDdoSvomhGkegztvRvDBF9NUE=; b=VM07E/VcZafcpad4HhCZPUhAY3
+ 5mlYoTCAHrWddZPLiohrdBDWTeeufYC3w37Ga2W2kk5iuzWnSNP3PgGiD1KVH4tro/DrMpTe0+wgA
+ IBL2I49NFFwQ6RRt4gW6a5i9qs3dv2Sr4z7geUBD3trbjPNjgZuwkNiB2n887KzwP00o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ez1qmC7ExMnT+w0jTyQHoecbYQMuIA6BfS1nbjNkRwA=; b=RYascPOp6sG+xIsnm7U1S32LoZ
- oKtIneub3ghNdqutGjlqVEiyrqV3aXk/XfimM/PhyppQoEvl7QgTH71KVN+KnnLQEi9ZUTF+Y6mBf
- Mg892FVt81uXwDzfPvf6UpHO2EsL6rWTC8g5mhV8Dex6vZfz2sUajIOiFbY4ZiMvQ32A=;
-Received: from mail104.syd.optusnet.com.au ([211.29.132.246])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1oNsvD-004EeO-OM for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 16 Aug 2022 09:31:41 +0000
-Received: from dread.disaster.area (pa49-181-52-176.pa.nsw.optusnet.com.au
- [49.181.52.176])
- by mail104.syd.optusnet.com.au (Postfix) with ESMTPS id 7B45B62D403;
- Tue, 16 Aug 2022 19:03:13 +1000 (AEST)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1oNsTg-00Dk22-Ca; Tue, 16 Aug 2022 19:03:12 +1000
-Date: Tue, 16 Aug 2022 19:03:12 +1000
-From: Dave Chinner <david@fromorbit.com>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20220816090312.GU3600936@dread.disaster.area>
-References: <20220722071228.146690-1-ebiggers@kernel.org>
- <20220722071228.146690-7-ebiggers@kernel.org>
- <YtyoF89iOg8gs7hj@google.com> <Yt7dCcG0ns85QqJe@sol.localdomain>
- <YuXyKh8Zvr56rR4R@google.com> <YvrrEcw4E+rpDLwM@sol.localdomain>
+ bh=8l3LOn7PGB/CEulnFFuDdoSvomhGkegztvRvDBF9NUE=; b=GJsS/QxdiwsGzggd3zsxJ9Wt3r
+ U9mnjolKv/Fk6AKL9JSTNOwelxvRb77nCcZM7Q46180gcxA6keoji3mGKhYbrBK7pJDr8S+Z0oXT3
+ 62YZlyUoiuHjLNncZwkAGogFTjiaXt5KIY6B9tKHwmXWEWB8mOO+1DeWgrbqi+TF0GYU=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1oOB4F-0004aU-3G for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 17 Aug 2022 04:54:12 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by sin.source.kernel.org (Postfix) with ESMTPS id 2F239CE1A9C
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 17 Aug 2022 04:53:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5CE62C433D7
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 17 Aug 2022 04:53:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1660712034;
+ bh=8l3LOn7PGB/CEulnFFuDdoSvomhGkegztvRvDBF9NUE=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=TmPmLkKahSFREEwZpvOUml+2658OYbglT4fMhSXRzJg2hXt0V3rO0Vyul7QvZJ8gU
+ 7Hq6+hs3rN2UvMwO+Hxf5CF/oFkIjCmz5nOP+9Cnz04p1bpPEhfNH9A67uSgT3GQ27
+ /sffl+kdEwCUPlv86ih2Y3PFQa33zh5IOc9bpQ5pUWmjQsWIuJRpRpF8ijeX3jC3aU
+ GT8ZqlFW+2okO9aGnWRL7X7PjbCgUC+n506LFL3nGIjFgsQhOf6ihS6uiZlJQ4tKmR
+ 1c8/bWgheWmK30nLMYMdAVRFRhB0Mr1WDwySZXqlWMb0t+2835h+SNEEQUhqupK3yi
+ CTf3t9tOHKXjQ==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 35A60C433E6; Wed, 17 Aug 2022 04:53:54 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 17 Aug 2022 04:53:53 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: yuriy.garin@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-216050-202145-ooGbXkSq3y@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
+References: <bug-216050-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YvrrEcw4E+rpDLwM@sol.localdomain>
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.4 cv=e9dl9Yl/ c=1 sm=1 tr=0 ts=62fb5d51
- a=O3n/kZ8kT9QBBO3sWHYIyw==:117 a=O3n/kZ8kT9QBBO3sWHYIyw==:17
- a=kj9zAlcOel0A:10 a=biHskzXt2R4A:10 a=1XWaLZrsAAAA:8 a=7-415B0cAAAA:8
- a=0f_GdJSvYQN_4D2ffm4A:9 a=CjuIK1q_8ugA:10 a=biEYGPWJfzWAr4FL6Ov7:22
-X-Spam-Score: -0.7 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Aug 15, 2022 at 05:55:45PM -0700, Eric Biggers wrote:
- > On Sat, Jul 30, 2022 at 08:08:26PM -0700, Jaegeuk Kim wrote: > > On 07/25,
- Eric Biggers wrote: > > > On Sat, Jul 23, 2022 at 07:01:59PM [...] 
- Content analysis details:   (-0.7 points, 6.0 required)
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
+ Comment
+ #51 from Yuriy Garin (yuriy.garin@gmail.com) --- Today f2fs_gc got it again
+ just few hours after upgrade to fresh Arch: Linux xxx 5.19.1-arch2-1 #1 SMP
+ PREEMPT_DYNAMIC Thu, 11 Aug 2022 16:06:13 +0000 x86_64 GNU/Linux 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [211.29.132.246 listed in list.dnswl.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1oNsvD-004EeO-OM
-Subject: Re: [f2fs-dev] [PATCH v4 6/9] f2fs: don't allow DIO reads but not
- DIO writes
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oOB4F-0004aU-3G
+Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,85 +125,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org, linux-api@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, Keith Busch <kbusch@kernel.org>,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Aug 15, 2022 at 05:55:45PM -0700, Eric Biggers wrote:
-> On Sat, Jul 30, 2022 at 08:08:26PM -0700, Jaegeuk Kim wrote:
-> > On 07/25, Eric Biggers wrote:
-> > > On Sat, Jul 23, 2022 at 07:01:59PM -0700, Jaegeuk Kim wrote:
-> > > > On 07/22, Eric Biggers wrote:
-> > > > > From: Eric Biggers <ebiggers@google.com>
-> > > > > 
-> > > > > Currently, if an f2fs filesystem is mounted with the mode=lfs and
-> > > > > io_bits mount options, DIO reads are allowed but DIO writes are not.
-> > > > > Allowing DIO reads but not DIO writes is an unusual restriction, which
-> > > > > is likely to be surprising to applications, namely any application that
-> > > > > both reads and writes from a file (using O_DIRECT).  This behavior is
-> > > > > also incompatible with the proposed STATX_DIOALIGN extension to statx.
-> > > > > Given this, let's drop the support for DIO reads in this configuration.
-> > > > 
-> > > > IIRC, we allowed DIO reads since applications complained a lower performance.
-> > > > So, I'm afraid this change will make another confusion to users. Could
-> > > > you please apply the new bahavior only for STATX_DIOALIGN?
-> > > > 
-> > > 
-> > > Well, the issue is that the proposed STATX_DIOALIGN fields cannot represent this
-> > > weird case where DIO reads are allowed but not DIO writes.  So the question is
-> > > whether this case actually matters, in which case we should make STATX_DIOALIGN
-> > > distinguish between DIO reads and DIO writes, or whether it's some odd edge case
-> > > that doesn't really matter, in which case we could just fix it or make
-> > > STATX_DIOALIGN report that DIO is unsupported.  I was hoping that you had some
-> > > insight here.  What sort of applications want DIO reads but not DIO writes?
-> > > Is this common at all?
-> > 
-> > I think there's no specific application to use the LFS mode at this
-> > moment, but I'd like to allow DIO read for zoned device which will be
-> > used for Android devices.
-> > 
-> 
-> So if the zoned device feature becomes widely adopted, then STATX_DIOALIGN will
-> be useless on all Android devices?  That sounds undesirable.  Are you sure that
-> supporting DIO reads but not DIO writes actually works?  Does it not cause
-> problems for existing applications?
+https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
-What purpose does DIO in only one direction actually serve? All it
-means is that we're forcibly mixing buffered and direct IO to the
-same file and that simply never ends well from a data coherency POV.
+--- Comment #51 from Yuriy Garin (yuriy.garin@gmail.com) ---
+Today f2fs_gc got it again just few hours after upgrade to fresh Arch:
 
-Hence I'd suggest that mixing DIO reads and buffered writes like
-this ends up exposing uses to the worst of both worlds - all of the
-problems with none of the benefits...
+Linux xxx 5.19.1-arch2-1 #1 SMP PREEMPT_DYNAMIC Thu, 11 Aug 2022 16:06:13 +0000
+x86_64 GNU/Linux
 
-> What we need to do is make a decision about whether this means we should build
-> in a stx_dio_direction field (indicating no support / readonly support /
-> writeonly support / readwrite support) into the API from the beginning.  If we
-> don't do that, then I don't think we could simply add such a field later, as the
-> statx_dio_*_align fields will have already been assigned their meaning.  I think
-> we'd instead have to "duplicate" the API, with STATX_DIOROALIGN and
-> statx_dio_ro_*_align fields.  That seems uglier than building a directional
-> indicator into the API from the beginning.  On the other hand, requiring all
-> programs to check stx_dio_direction would add complexity to using the API.
-> 
-> Any thoughts on this?
+What I have noticed is that I've left few instances of some custom application
+with open modified, but unsaved files.
 
-Decide whether partial, single direction DIO serves a useful purpose
-before trying to work out what is needed in the API to indicate that
-this sort of crazy will be supported....
+Is it a way to trigger the problem?
 
-Cheers,
-
-Dave.
 -- 
-Dave Chinner
-david@fromorbit.com
+You may reply to this email to add a comment.
 
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
