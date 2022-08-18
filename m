@@ -2,106 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DA8A596D1B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Aug 2022 12:56:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C30F5598E5B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 Aug 2022 22:55:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oOGjB-0000Ce-2Y;
-	Wed, 17 Aug 2022 10:56:49 +0000
+	id 1oOmYA-0005gJ-AT;
+	Thu, 18 Aug 2022 20:55:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1oOGj9-0000CP-UF
- for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Aug 2022 10:56:47 +0000
+ (envelope-from <john.kehayias@protonmail.com>) id 1oOmY8-0005gC-Kk
+ for Linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 18 Aug 2022 20:55:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:In-Reply-To:Message-ID:Subject:Reply-To:Cc:From:To:Date:Sender:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DJR3SuiPzd2IWnk9VN5sKzvxTOCGeaJdgfxHJBO0kdw=; b=VFiao9l6fzXft78yYVWU9GXpZH
- Hhw+HqQ0YZG3wKzzJn60k2SmAbKdBw3vc74s+7uGrYZK3fN1r04RXVtUPNp7Bm5cWDaQBpX620dvw
- Spjrgg5dSwtQj4C/XDRHUOwOgOLZqxJ1j0BdR0P3A5XF2N8+C9/g9ryGt3E/v3kiTCXs=;
+ bh=UxPi9xcFUWqL5oPXXwfPUAhrAXEvbYiLVydrzOXiEeM=; b=m2exBJBnDmvqIk7518Iszqg8g2
+ r1kguXKTBwrAfLowLGPPNa6GqbNQjrACHAxIiTjRnlntpsZnkUx7UBg2rKxdQW27qHAyIUMPvWSS+
+ xWLzytVORO7u3jtmiTZVzunbZ5YiO+SehrxVWu++4LF0eSiGgPcG/ej8ySHT+Z1B4mVY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ In-Reply-To:Message-ID:Subject:Reply-To:Cc:From:To:Date:Sender:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DJR3SuiPzd2IWnk9VN5sKzvxTOCGeaJdgfxHJBO0kdw=; b=aKZlpjsOWlEZEcVMeQPSi+OYO8
- aUcYldEynpYUfTjfd1+Y142/BDf72aE4CgO+58+m9AC+YaVLtKxZvXHASY4O3vdEorAJXcWwRd7N/
- ZfLkJSBO/Bgy6+Dp3pcXgR+Sak5FSx1rlTlDuMSpVUyhRSGlLVfPvTS4a4457yCnC7Wk=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=UxPi9xcFUWqL5oPXXwfPUAhrAXEvbYiLVydrzOXiEeM=; b=L3wLYIOBy/O4x/qp9kxGPp9xCp
+ VqByKf+g0e6JeKZfxPxzvK8cLD7/WSryCVcdufmZsbNAdlrNJ1V+bo2XpxxauP3xjZGjTk91dpYhu
+ OQBiVYvx75z1yhHarVfETuoSoVMgEguAy3yaKLKAOSqCoSw3xUS9C7PEpf5zsfWOFPBk=;
+Received: from mail-40131.protonmail.ch ([185.70.40.131])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oOGj9-005qEL-5x for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Aug 2022 10:56:47 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id E79D8B81CCF
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 17 Aug 2022 10:56:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id AFF58C433C1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 17 Aug 2022 10:56:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1660733799;
- bh=DJR3SuiPzd2IWnk9VN5sKzvxTOCGeaJdgfxHJBO0kdw=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=LXu2NPYnpQt4FajYpb+z6w+eHFtGIYp5p3clMI2fg2MEyBxn/ZCpREd6ZbBcuTRw+
- JMb+lUqgYNkeskz6qbSiWFUmnnLo+9QCcGwvhuke+hO4ZyFsY5foirjyfA/7Q9CY/I
- qapI8442U14G6m5chcg4Q4+fA/vnuk50j4NDdBYFgfVKIMIIbVjGiBZlrZrkn7ArD3
- B//MVIYs8Cg5IxgzNqVJsquCOnbpNJ4D9hYmrklGIJ6mFaqPyNHZT9k3WRK0ple8eJ
- hOGjVjfh526JdXxlDPsbWAKKh6Jd6Ai/SMwQElhXrGhPGbU0yeUAv5130HbXrLlCwL
- yGP4iLBE1EuNQ==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 76C47C433E4; Wed, 17 Aug 2022 10:56:39 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 17 Aug 2022 10:56:38 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: bbutscheidt@yahoo.de
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-jtcJc7IgNM@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1oOmY6-008N4q-20 for Linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 18 Aug 2022 20:55:32 +0000
+Date: Thu, 18 Aug 2022 20:55:18 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=protonmail3; t=1660856123; x=1661115323;
+ bh=UxPi9xcFUWqL5oPXXwfPUAhrAXEvbYiLVydrzOXiEeM=;
+ h=Date:To:From:Cc:Reply-To:Subject:Message-ID:In-Reply-To:
+ References:Feedback-ID:From:To:Cc:Date:Subject:Reply-To:
+ Feedback-ID:Message-ID;
+ b=LTUeuGrgokTCopTAwdxPJzaBtUdPsovFY/kYyo6bWtad56pX7Yc872Fh0lJc65A2f
+ 0cip4bxeUbMXTpeFI4n9MkgZf5e9t24yUEX6URDUUR29pzj5mw239i+/NFIAx2eN6T
+ AAPaQLO8C4R1Ph2tBtDKDrBca+rQWqfoMljBAcApSnOVLPdb3naRbVdigHEvK4xBAW
+ G6Bw/c/EAtCrSZWxupEh7FvTUZcV+h8ha9aY+NcsUFiomGp1PXcCR++F1rnApddBky
+ e/GGWVcg13Y2fEW5CbY6kcmCY9+o291iP6f57FLwAB+IjkENs4uGVyhiCVQi5QFtuF
+ zCzu9YrrzLsNQ==
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <_Fg58ryHmMtqdzH09uAJMFMIXCB58dGTmH7nzXd5HwT_bbxrC0WYg4OO0_N1VS7LYTjeiCzwnNhsvCeLjNV4Eu9tuuHNyWxdxfFig0o5xes=@protonmail.com>
+In-Reply-To: <YvaYQI4/ZJgOW6sb@google.com>
+References: <z1RSWUWvfCmbB3L_utbn1krfKRIw9T0dlzsLmT2h9615ny3oIgP80mJBL-L58og28AYHPIZdcAOBU9Ok7ao00tJUN9KNFM2K_owrSflLUWk=@protonmail.com>
+ <FzLKsvvLk49Fv4JSwZzQkszOSWRKa1nO9bzhwRApQHDtjmz-qYPvdMHOA2KQa1sMod4oFZfYHXE-WSokABljrpT_9UY6pD6NzY5rVGAoGLQ=@protonmail.com>
+ <YvaYQI4/ZJgOW6sb@google.com>
+Feedback-ID: 7805494:user:proton
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
- Comment
- #53 from bernd_b (bbutscheidt@yahoo.de) --- I'll patch kernel 4.19.1 with
- debug patch v2 and see if I'll get new debug info. So far, the safest for
- me is to run my system with kernel < 4.18.x 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  Hi, ------- Original Message ------- On Friday, August 12th, 
+ 2022 at 2:13 PM, Jaegeuk Kim wrote: > > On 08/12,
+ John Kehayias via Linux-f2fs-devel
+ wrote: > > > Hello again, > > > > As this is the main disk for a homeserver,
+ I was anxious to get it working again. After reading about what seemed lik
+ [...] Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [john.kehayias[at]protonmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -110,9 +86,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oOGj9-005qEL-5x
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+X-Headers-End: 1oOmY6-008N4q-20
+Subject: Re: [f2fs-dev] How to recover from "Wrong valid_user_blocks"?
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,23 +99,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: John Kehayias via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: John Kehayias <john.kehayias@protonmail.com>
+Cc: "Linux-f2fs-devel@lists.sourceforge.net"
+ <Linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+Hi,
 
---- Comment #53 from bernd_b (bbutscheidt@yahoo.de) ---
-I'll patch kernel 4.19.1 with debug patch v2 and see if I'll get new debug
-info.
+------- Original Message -------
+On Friday, August 12th, 2022 at 2:13 PM, Jaegeuk Kim wrote:
 
-So far, the safest for me is to run my system with kernel < 4.18.x
+> 
+> On 08/12, John Kehayias via Linux-f2fs-devel wrote:
+> 
+> > Hello again,
+> > 
+> > As this is the main disk for a homeserver, I was anxious to get it working again. After reading about what seemed like the same exact problem here: https://old.reddit.com/r/linuxquestions/comments/whomdc/expanded_f2fs_cant_mount/ I thought using a newer f2fs-tools would help (I think I ended up with latest git commit). As I reported earlier though, resize won't do anything (already resized). So I thought about shrinking, though it might be risky.
+> > 
+> > First, I tested with a disk image, made with dd and mounted with sudo udisksctl loop-setup -f disk.img. Then I could operate on the loop device with that partition, /dev/loop0p2 in my case. So I tried shrinking, bolstered by the good experiences reported in https://www.mail-archive.com/linux-f2fs-devel@lists.sourceforge.net/msg23214.html Since the size was something like twice the data on it, I didn't worry too much about how much smaller I made it. That was then mountable! So I resized back to the full size, and that still worked. Bonus: working on the disk image was much faster on my SSD than the original memory card.
+> > 
+> > I made another fresh image for backup and then repeated these steps on the actual disk (memory card): resize.f2fs to shrink slightly (with -t <some sector amount less than max>) and then resize it fully. Everything worked!
+> > 
+> > I have logs of the resizes and fscks happy to share though I know this has been reported and seems fixed in current versions.
+> 
+> 
+> Ah, so the recent f2fs-tools addressed your problem, right?
+> 
 
--- 
-You may reply to this email to add a comment.
+Yes, that's correct. I used the latest (git version I believe, not just 1.15) of f2fs-tools to shrink and re-expand the partition which seems to have fixed it up. If I didn't change the size then resize wouldn't do anything, while fsck did not find or correct any problems. I would have though fsck would be able to fix this, at least with the latest version after this bug was first pointed out and fixed in the resizing.
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+Anyway, happy to have the partition working again with no ill effects I can see.
+
+John
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
