@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2598359A893
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 20 Aug 2022 00:36:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B3D659A90B
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 20 Aug 2022 01:10:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oPAba-00035V-LQ;
-	Fri, 19 Aug 2022 22:36:42 +0000
+	id 1oPB7t-0007ct-Fd;
+	Fri, 19 Aug 2022 23:10:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1oPAbZ-00035P-L1
+ (envelope-from <ebiggers@kernel.org>) id 1oPB7s-0007cm-0T
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 19 Aug 2022 22:36:41 +0000
+ Fri, 19 Aug 2022 23:10:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dxVRtig+EM4NPYxfPnemijrkgg65AT6bDiPOUJMwc9w=; b=FwCkQbgN/vXmqvUYJuTqvuw7tN
- jp+H2M+lPuldOtoqvaW3StOACAmuhLrLg3HsmA5OIVzaVNmjxGALiecUEJekQl/uENV8WbvwMEhy8
- TYKK2/HY2/Si2iC6EtOL0A41qSGDBBI0e9c6N5ZivANOM/T4v++aujOSOy411ANfyFm8=;
+ bh=/YRGxkqHSLLsDGMtIChnYKj97ZLW6WRE354eChmvAlM=; b=Aj/9+6QXW0h3+wuPP5kFLkqwQd
+ wq7JIZV8IUvOhzCQjtDqU7ZhdjXS4x0coGp1zpi4V9QU/DOGwjDtNlcaBDEg4RQssVMqkIGO3e6nD
+ uQffKZlPjsL+tkbQTxP62mwIa9iz64itl7kzgEAwCun+UdHr18mE1rsifcVoWOufvEI0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,40 +31,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dxVRtig+EM4NPYxfPnemijrkgg65AT6bDiPOUJMwc9w=; b=c0aOerOFhRp9OkLBME0tVFDvLF
- f9IMs/doWzj1FgRyJzjyQd5JnoUu7Uk5977SMsDhS4aR0i8oNBeEFm1gjo//g7iGL0+mPbHdLQ6Ci
- hTTxnWpY4Wo73cdI0C95+gKcAbyP79u5EucX9aeb9wIpoS41J5u45kvwJYmOe2A5LeaQ=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=/YRGxkqHSLLsDGMtIChnYKj97ZLW6WRE354eChmvAlM=; b=mieHAGIrC+lon6CezQOqbiv5PS
+ KEPRizNyyr3iUYrQ1mWiOjddbFCtwD7SOpYWroyzBwprndU9PcE1ZV7DVCKSZM1YftTxsYw4SBoEY
+ eeSP1XBttVSHFrwDFkoK0cOY76/mGqSsM0R+NZZHAPB0DUTvN8yggWmnQWD17iV0nfuI=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oPAbY-00009I-Ui for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 19 Aug 2022 22:36:41 +0000
+ id 1oPB7p-00054z-OH for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 19 Aug 2022 23:10:03 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id B0524B82922;
- Fri, 19 Aug 2022 22:36:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E384C433C1;
- Fri, 19 Aug 2022 22:36:33 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9201C61842;
+ Fri, 19 Aug 2022 23:09:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93BD3C433C1;
+ Fri, 19 Aug 2022 23:09:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1660948593;
- bh=kpK5eC8bTRHQNDpZySZTMewfQlwFe4s77+Dm8dzizJM=;
+ s=k20201202; t=1660950591;
+ bh=jyQMlfDyLfQswfrcmubQj7ukvdgCEoTA8LhJP39mZNY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=SCx44mu5hKk00BK3uwf0FoDeHM87V/ahSAmRx8/yzU1OJqF6KaYGyfA9CGMseZzse
- 5VPOUzUXq+kXd5uQWOEyYS8BJn6oaiQkWgPpKIKx4qCukbSHj2qZmkcTRoIiMxwX11
- yN0ycIWRBR/jnZOii6Sh+DVfp2Stsr597R9GIXbFZxCpxyiDGgimVV28rRG6kt2rFR
- DJGyv/3EqF3HVe5g0D8aciApXQvCNClUB/uYuQYMTdv6RIrfBO0VG3n4CDIJvLi8B0
- kKpULZTFTzv8I4rdVSQ268mlV121+/PXTjKKSs3vr3PuATdDsmvUJFmVKHKEqFhilP
- X3fwG42pnMZhA==
-Date: Fri, 19 Aug 2022 15:36:31 -0700
+ b=QuOfKLcTLqSxarEIMozH41HlKKSXIw1Ha5z+iGobBTp0XC/190sxrbX4xymxeQZFF
+ 3WudYVrb63Ic60WpCeWYRRbbMC6sNiKGVAznV8UysIUN6uVjyi5NDY0XFhaprIuD8A
+ pF59daiDM0+L9HkOjVyll+2uPITOtrvjzgrPS16r1XJmBV5ma+KvcLc+BHhqr03upy
+ fMsLt1xcBM7/2jnJiXFv+FJPXeiiS+0sz7tw4jOhLuKIjQw+8yi7bYCZL/cqb3a2bJ
+ OHxlSv4rJUDd6AvnKU3c4q61YHoNXW9ZdFJr7Qw7jTpstVUaoUe5id8DJL1pk0juet
+ AgN1uJU3z9Rkg==
+Date: Fri, 19 Aug 2022 16:09:48 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: "Fabio M. De Francesco" <fmdefrancesco@gmail.com>
-Message-ID: <YwAQb2GQ4GFl3mvz@sol.localdomain>
-References: <20220818225450.84090-1-ebiggers@kernel.org>
- <4743896.GXAFRqVoOG@localhost.localdomain>
+To: Andreas Dilger <adilger@dilger.ca>
+Message-ID: <YwAYPFxW7VV4M9D1@sol.localdomain>
+References: <20220722071228.146690-1-ebiggers@kernel.org>
+ <20220722071228.146690-7-ebiggers@kernel.org>
+ <YtyoF89iOg8gs7hj@google.com> <Yt7dCcG0ns85QqJe@sol.localdomain>
+ <YuXyKh8Zvr56rR4R@google.com> <YvrrEcw4E+rpDLwM@sol.localdomain>
+ <20220816090312.GU3600936@dread.disaster.area>
+ <D1CDACE3-EC7E-43E4-8F49-EEA2B6E71A41@dilger.ca>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <4743896.GXAFRqVoOG@localhost.localdomain>
+In-Reply-To: <D1CDACE3-EC7E-43E4-8F49-EEA2B6E71A41@dilger.ca>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,17 +76,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Aug 19, 2022 at 01:11:41PM +0200,
- Fabio M. De Francesco
- wrote: > > - src_addr = inline_data_addr(inode, ipage); > > - dst_addr =
- kmap_atomic(page); > > - memcpy(dst_addr, src_addr, MAX_INLINE_ [...] 
+ Content preview:  On Tue, Aug 16, 2022 at 10:42:29AM -0600,
+ Andreas Dilger wrote: > > IMHO,
+ this whole discussion is putting the cart before the horse. > Changing
+ existing (and useful) IO behavior to accommodate an API [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -92,9 +96,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oPAbY-00009I-Ui
-Subject: Re: [f2fs-dev] [PATCH] f2fs: use memcpy_{to,
- from}_page() where possible
+X-Headers-End: 1oPB7p-00054z-OH
+Subject: Re: [f2fs-dev] [PATCH v4 6/9] f2fs: don't allow DIO reads but not
+ DIO writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,40 +110,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-block <linux-block@vger.kernel.org>, linux-api@vger.kernel.org,
+ Dave Chinner <david@fromorbit.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, xfs <linux-xfs@vger.kernel.org>,
+ Keith Busch <kbusch@kernel.org>, linux-fscrypt@vger.kernel.org,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ Jaegeuk Kim <jaegeuk@kernel.org>,
+ Ext4 Developers List <linux-ext4@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Aug 19, 2022 at 01:11:41PM +0200, Fabio M. De Francesco wrote:
-> > -	src_addr = inline_data_addr(inode, ipage);
-> > -	dst_addr = kmap_atomic(page);
-> > -	memcpy(dst_addr, src_addr, MAX_INLINE_DATA(inode));
-> > +	memcpy_to_page(page, 0, inline_data_addr(inode, ipage),
-> > +		       MAX_INLINE_DATA(inode));
-> >  	flush_dcache_page(page);
+On Tue, Aug 16, 2022 at 10:42:29AM -0600, Andreas Dilger wrote:
 > 
-> flush_dcache_page() is redundant here. memcpy_to_page() takes care to call it.
-
-Done in v2.
-
-> > -		kaddr = kmap_atomic(page);
-> > -		memcpy(kaddr + offset, data, tocopy);
-> > -		kunmap_atomic(kaddr);
-> > +		memcpy_to_page(page, offset, data, tocopy);
-> >  		flush_dcache_page(page);
+> IMHO, this whole discussion is putting the cart before the horse.
+> Changing existing (and useful) IO behavior to accommodate an API that
+> nobody has ever used, and is unlikely to even be widely used, doesn't
+> make sense to me.  Most applications won't check or care about the new
+> DIO size fields, since they've lived this long without statx() returning
+> this info, and will just pick a "large enough" size (4KB, 1MB, whatever)
+> that gives them the performance they need.  They *WILL* care if the app
+> is suddenly unable to read data from a file in ways that have worked for
+> a long time.
 > 
-> Same here.
-
-Likewise.
-
+> Even if apps are modified to check these new DIO size fields, and then
+> try to DIO write to a file in f2fs that doesn't allow it, then f2fs will
+> return an error, which is what it would have done without the statx()
+> changes, so no harm done AFAICS.
 > 
-> It looks like you forgot a conversion from kmap_atomic() in fs/f2fs/inline.c 
-> at line 266.
+> Even with a more-complex DIO status return that handles a "direction"
+> field (which IMHO is needlessly complex), there is always the potential
+> for a TOCTOU race where a file changes between checking and access, so
+> the userspace code would need to handle this.
+> 
 
-Also done in v2.  I think I had skipped that one intentionally, but I must not
-have looked closely because it converts just fine.  Thanks!
+I'm having trouble making sense of your argument here; you seem to be saying
+that STATX_DIOALIGN isn't useful, so it doesn't matter if we design it
+correctly?  That line of reasoning is concerning, as it's certainly intended to
+be useful, and if it's not useful there's no point in adding it.
+
+Are there any specific concerns that you have, besides TOCTOU races and the lack
+of support for read-only DIO?
+
+I don't think that TOCTOU races are a real concern here.  Generally DIO
+constraints would only change if the application doing DIO intentionally does
+something to the file, or if there are changes that involve the filesystem being
+taken offline, e.g. the filesystem being mounted with significantly different
+options or being moved to a different block device.  And, well, everything else
+in stat()/statx() is subject to TOCTOU as well, but is still used...
 
 - Eric
 
