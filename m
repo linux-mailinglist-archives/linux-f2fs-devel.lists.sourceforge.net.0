@@ -2,85 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9C7B59C61C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Aug 2022 20:27:34 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C228C59C81A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Aug 2022 21:09:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oQC93-0000EG-D4;
-	Mon, 22 Aug 2022 18:27:29 +0000
+	id 1oQCnu-0003P9-Ig;
+	Mon, 22 Aug 2022 19:09:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1oQC92-0000E6-Dc
+ (envelope-from <ebiggers@kernel.org>) id 1oQCnY-0003Oi-2L
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 Aug 2022 18:27:28 +0000
+ Mon, 22 Aug 2022 19:09:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/e/0bkiMVZA4z+ASN+JFT5lrRY0Mu6JRXxwaT8HgUsI=; b=E/+HXTSSyqY/zMWQz6EW39tolG
- 9XLhEqFuvt3ZUkIz6/NeoUHZuqLnZ1pSBD3W9TxhHSxXl+zX203lufpb9SdHYj6IlQ/YUAtJ3IrK8
- iCaolH6UBSVSwihdhpa7nqQp+AFHPav1fZ9+2eLt3n80+TCE/8FOPH+mIiX2IOnxVuHQ=;
+ bh=A8j5s+vDbA8saaVOoFjeQcS9bmFwFmOZeLHnjU1o2Uk=; b=O79WnYTrMBoMDEbKZB7E2qST2X
+ aWEE7Dr81WiFnpU3JC6rcgLjWNjqdzN6tRTtHiihLraz6UWKK5hNmaJw+jM/Pw7/UlRcKN96I2sX1
+ uRU2W7YbYnzb20q4O0igbM6+HnuMr7n8X1VIFXQg8ApAJZwLQ8AEGSKX/HDdXmR+AtbQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=/e/0bkiMVZA4z+ASN+JFT5lrRY0Mu6JRXxwaT8HgUsI=; b=dnVQGLtfj9+tNqApo0OmuNZaS/
- FySb5VUuH0MK6NxwIU/shxRsAMCGgMQ/x5rRCy7p8eZLEhe3s91ImUbEBKtmf+7TIAxdNHbNAfvJR
- qC7vootHRDSwWzuaLFlZjLnqpjv9Fm6LGvAkluzd5t0+6MQ/8PDbw+T4aQ3Zls5BNT8k=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=A8j5s+vDbA8saaVOoFjeQcS9bmFwFmOZeLHnjU1o2Uk=; b=O
+ A4fGX/H0graWo3u9s1SNBYtzhPjYqEsNL07bcHDdZ/GRe4vgN3aJ5TDhFlkpABkOKogUYUVCF33YV
+ XFq8XoJRi0kRTfZUO3kUZywSU9qhIUnw0AfHIgD5mIiIYDIFD8YWFavMAY3XFHhfYTUjqCfecrqZ8
+ KApQBZ+RUQU7+k6Y=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oQC91-00DQ93-P6 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 Aug 2022 18:27:28 +0000
+ id 1oQCnT-00DRya-QL for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 22 Aug 2022 19:09:19 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 684C9612DA;
- Mon, 22 Aug 2022 18:27:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F3CBC433D6;
- Mon, 22 Aug 2022 18:27:21 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6F70A611D9;
+ Mon, 22 Aug 2022 19:09:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FDA6C433D7;
+ Mon, 22 Aug 2022 19:09:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1661192841;
- bh=Gh6irQCwtsKJ6eFKCfceqRMjx+rmz6M385gr7IrGoEk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=huOKrEA5mAlbzWgfvLn+VqRshn8OpPAHYhDTxEDynERxlmvcaSI3WtGM1asCy+ca3
- z3TbWV2YoqflNyuA5fCnQGXkNhfvFB5CK0HLqSqQWbu0VfxJAoTnRzNJfs+tJaFELc
- PXlG3bqP/YWzlUMyq0UMO4r7l778/b7RwdYEqIxxNftqqCNf44mU9reP/VLBiQncfk
- tvCLkZHFQFrMQZqQuqsffn0Q/fYb8+fDBcfVCUFsGYUGQXZEb6RBy5BBI44dJ32SX7
- VAXKH4EI3h5wanmVvEV1wIRcnuL0HZes0VDiLp7TgaBcGF7/zDfWrl+poZ6EyUOvng
- 85wGjO2B7Qi+w==
-Date: Mon, 22 Aug 2022 11:27:19 -0700
+ s=k20201202; t=1661195350;
+ bh=WWCjwf+JxkZw6WU1iL1hmp/k5Wm7uGOBx3r+Y2H6l1Y=;
+ h=From:To:Cc:Subject:Date:From;
+ b=mnLUtKYQ+K0xS88by5TxE4Sr1PYVXcwBR2AyrI6v3NsyYaqFjcCvaY2qPRMNd93EW
+ CLNY3vCy+qq3Unkhhi1WLrbq94ni40doG9rjTPMRReXQOuo2+hjpjWU9QAUtkfu0pZ
+ WQl4XcZ8U/uMRTJ4fxjjUY1KuwqrH8tghMr1kZUARVjknalAiLdEMMbGTn14oIhTsE
+ GDYOuxv5G1modgBVW/a760YFTqaXKWzub0sBO/yBjPAMzO3YTm/lPJgDdquf3r51Cb
+ 8+VF6noBrzCVwHOaXI+HcjfIAvuJYMZP9rkTmPRHN+Fk93mqqR3lQaJpj/yoko0dWS
+ S4eO1KMCDkLBg==
 From: Eric Biggers <ebiggers@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net,
- Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
-Message-ID: <YwPKh9fWUJLnSEF/@sol.localdomain>
-References: <20220815235052.86545-1-ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Date: Mon, 22 Aug 2022 12:08:09 -0700
+Message-Id: <20220822190812.54581-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220815235052.86545-1-ebiggers@kernel.org>
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -3.4 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Aug 15, 2022 at 04:50:50PM -0700, Eric Biggers wrote:
- > This series changes ext4 and f2fs to stop using PG_error to track >
- decryption
- and verity errors. This is a step towards freeing up > PG [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview: Patch 1 of this series reworks the fscrypt filesystem-level
+ keyring to not use the keyrings subsystem as part of its internal
+ implementation
+ (except for ->mk_users, which remains unchanged for now). T [...] 
+ Content analysis details:   (-3.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
+ 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -91,9 +89,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oQC91-00DQ93-P6
-Subject: Re: [f2fs-dev] [PATCH v2 0/2] ext4,
- f2fs: stop using PG_error for fscrypt and fsverity
+X-Headers-End: 1oQCnT-00DRya-QL
+Subject: [f2fs-dev] [PATCH v3 0/3] fscrypt: rework keyring and stop using
+ request_queue
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,45 +103,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- linux-ext4@vger.kernel.org, Matthew Wilcox <willy@infradead.org>
+Cc: linux-fsdevel@vger.kernel.org, linux-block@vger.kernel.org,
+ linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Aug 15, 2022 at 04:50:50PM -0700, Eric Biggers wrote:
-> This series changes ext4 and f2fs to stop using PG_error to track
-> decryption and verity errors.  This is a step towards freeing up
-> PG_error for other uses, as discussed at
-> https://lore.kernel.org/linux-fsdevel/Yn10Iz1mJX1Mu1rv@casper.infradead.org
-> 
-> Note: due to the interdependencies with fs/crypto/ and fs/verity/,
-> I couldn't split this up into separate patches for each filesystem.
-> I'd appreciate Acks from the ext4 and f2fs maintainers so that I can
-> take these patches.  Otherwise I'm not sure how to move them forward.
-> 
-> Changed v1 => v2:
->    - Rebased onto v6.0-rc1 and resolved conflicts in f2fs.
-> 
-> Eric Biggers (2):
->   fscrypt: stop using PG_error to track error status
->   fsverity: stop using PG_error to track error status
-> 
->  fs/crypto/bio.c         | 16 +++++++----
->  fs/ext4/readpage.c      | 16 +++++------
->  fs/f2fs/compress.c      | 64 ++++++++++++++++++++---------------------
->  fs/f2fs/data.c          | 64 +++++++++++++++++++++++------------------
->  fs/verity/verify.c      | 12 ++++----
->  include/linux/fscrypt.h |  5 ++--
->  6 files changed, 93 insertions(+), 84 deletions(-)
-> 
-> 
-> base-commit: 568035b01cfb107af8d2e4bd2fb9aea22cf5b868
+Patch 1 of this series reworks the fscrypt filesystem-level keyring to
+not use the keyrings subsystem as part of its internal implementation
+(except for ->mk_users, which remains unchanged for now).  This fixes
+several issues, described in the patch itself.  This is also a
+prerequisite for eliminating the direct use of struct request_queue from
+filesystem code, as discussed at
+https://lore.kernel.org/linux-fscrypt/20220721125929.1866403-1-hch@lst.de/T/#u
 
-I'd appreciate review from the f2fs folks on this series, as that's where the
-most complex changes are.
+Patches 2-3 eliminate the direct uses of struct request_queue from
+fs/crypto/ that don't require block layer changes.  (The remaining uses
+will be eliminated later by changing some of the blk-crypto functions.)
 
-- Eric
+Changed in v3:
+    - Added patch "fscrypt: work on block_devices instead of request_queues"
+
+Changed in v2:
+    - Don't compare uninitialized bytes of struct fscrypt_key_specifier
+    - Don't use refcount_dec_and_lock() unnecessarily
+    - Other minor cleanups
+
+Christoph Hellwig (1):
+  fscrypt: work on block_devices instead of request_queues
+
+Eric Biggers (2):
+  fscrypt: stop using keyrings subsystem for fscrypt_master_key
+  fscrypt: stop holding extra request_queue references
+
+ fs/crypto/fscrypt_private.h |  74 ++++--
+ fs/crypto/hooks.c           |  10 +-
+ fs/crypto/inline_crypt.c    | 150 ++++++-----
+ fs/crypto/keyring.c         | 495 +++++++++++++++++++-----------------
+ fs/crypto/keysetup.c        |  89 +++----
+ fs/crypto/keysetup_v1.c     |   4 +-
+ fs/crypto/policy.c          |   8 +-
+ fs/f2fs/super.c             |  24 +-
+ fs/super.c                  |   2 +-
+ include/linux/fs.h          |   2 +-
+ include/linux/fscrypt.h     |  25 +-
+ 11 files changed, 462 insertions(+), 421 deletions(-)
+
+
+base-commit: 1c23f9e627a7b412978b4e852793c5e3c3efc555
+-- 
+2.37.2
+
 
 
 _______________________________________________
