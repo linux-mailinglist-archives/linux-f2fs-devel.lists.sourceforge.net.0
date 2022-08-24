@@ -2,89 +2,124 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16B1D59F181
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Aug 2022 04:48:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AC2059F2BA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Aug 2022 06:41:29 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oQgRa-0001hH-GL;
-	Wed, 24 Aug 2022 02:48:38 +0000
+	id 1oQiCi-0003d1-44;
+	Wed, 24 Aug 2022 04:41:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhangshuqi3@huawei.com>) id 1oQgRY-0001hA-GV
+ (envelope-from <qkrwngud825@gmail.com>) id 1oQiCa-0003ct-6B
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Aug 2022 02:48:36 +0000
+ Wed, 24 Aug 2022 04:41:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:CC:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=E8D83LS5yDXUJ+X+0M8u3GYPJIS+1S82cw7Oi63V1YI=; b=bXtCfV9P+qFDWVjoMpV6IUSlAH
- 1cXbA+0AELrIm40wVH7G9neyHH7CLeNy19SkIOCtzEQ2FdBxLRJ/eNSIT5+A5jj8lJB40V4bjF9ID
- bsN1mlc2KU6Uyimt9G/fh9R17artgSnsfRXM8Z/gQna/q1AyVIgKfBLtOpbtDJDiNNSg=;
+ bh=Jt/G83ni7I/FU67eFbWq1WL9BdjfSCuvjzHq4MUmPEs=; b=S4tXQeHQdt9InNWbNTAfTskJPx
+ 0AR94+4Fd5eiSTgxAr1NJ49kv2tEkr6zWJZONdohffVVtAYAMeZFMEJ/9JDh3nBcblCpGxnwnfwDP
+ wpJeJOj7en7Fgb9zMrSmcfT50TjFjwii4sXged2GSbGnu4A93L6lqmOamfa6lWfdl8gA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:CC:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=E8D83LS5yDXUJ+X+0M8u3GYPJIS+1S82cw7Oi63V1YI=; b=APm5SZbi5XuVCRcbuAwRUvLSwA
- Y/QhElYme/s/tkHYRZnBS057EB+E9R/D7v8szRDkOgg5zDdR5Ra+b9YiEJQUrFNGVwSyNn7qHjBf+
- PXT76F2OcNGRMD22fRKd6jF3IKIGw2+UFgk7lhcgxXIjkm9Sf+Qat1K35pAcCffzxT/0=;
-Received: from szxga02-in.huawei.com ([45.249.212.188])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Jt/G83ni7I/FU67eFbWq1WL9BdjfSCuvjzHq4MUmPEs=; b=X
+ iwYmw5p33IqGZaQTO3YVVa/1pfuGCIYrQZOFZJ9CtI/Lgm12I4Z48AprqcLrxu61vXu1gS7zJ8kW4
+ glSGjb6jeqQOP+xJjBOulMxEt2QQrNVzUJHes0KHxcAAWCE4+HEmEKOhSLgW961W8wgk/GRSuWb5/
+ iI2mNAr+EdzT34yw=;
+Received: from mail-pj1-f43.google.com ([209.85.216.43])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oQgRW-00F6UA-QM for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Aug 2022 02:48:36 +0000
-Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.54])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4MC9Qv6qnczXdsj;
- Wed, 24 Aug 2022 10:44:07 +0800 (CST)
-Received: from kwepemm600016.china.huawei.com (7.193.23.20) by
- dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Wed, 24 Aug 2022 10:48:25 +0800
-Received: from [10.174.177.86] (10.174.177.86) by
- kwepemm600016.china.huawei.com (7.193.23.20) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Wed, 24 Aug 2022 10:48:24 +0800
-Message-ID: <93f9d06b-c557-b489-d5d4-0433419c73a1@huawei.com>
-Date: Wed, 24 Aug 2022 10:48:23 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1oQiCU-00FB5l-Kr for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 24 Aug 2022 04:41:16 +0000
+Received: by mail-pj1-f43.google.com with SMTP id bf22so15902501pjb.4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 23 Aug 2022 21:41:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc;
+ bh=Jt/G83ni7I/FU67eFbWq1WL9BdjfSCuvjzHq4MUmPEs=;
+ b=q1XIf8ztW5mT9Sh2FdsF9dkp7at9wmuUtHs7Av1YAgmiTtmG6WZUs0+SUrfEYPDpQo
+ 6oe6YnWx7Sk6v2rJg79rpBc2hQ9108SMJMziJ7P6rzmg4MrA9I220VYwz+6YrC3GSVsE
+ f1MZnUr6IiM22JgngydNpGMo7q6vWG0ZQNT29sEOKTnZqrMEMfRATKwK9dQWf4wwKkrg
+ rOZ4cbprq7pmkkCghzJu5CB+Bwzt9z+H6lpGFJXov6GbtI3cUGwDWcus9hYkmVVX9prB
+ XKtVmeL3guur/Xp+a+XpxgZaGFV4Ykx1D/a37yZqeBprGDQCiK26FGmLlurP9ep6WqDS
+ D8bg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc;
+ bh=Jt/G83ni7I/FU67eFbWq1WL9BdjfSCuvjzHq4MUmPEs=;
+ b=ovsDmhwUpn+aZxj2mgVsmGFSvnYCHB4C5du/K9XRaAEq7jd4Qb/JI9xPVz04u72oRi
+ TBFSsMYU2aVzOC/eKxYS4Wrz1JkNm0d1Hf0CLlWHKkjwgwdWjyC8UuYK6QS26UIuemAr
+ Rb50vb5s3321LJvTsmxThXHSJh5zzG6HRQM46RaF1SXUM7HYw520nvhC3jvkpD7+vcAQ
+ up9tT8MuDQpbnrMcntnttjeo3l4A8/QirC5Uro949SODuqgE0qmoSHjrk/2WOLGaYW8a
+ CRbg6QazDp8fC+U/BMdZMiYcZGeFz9yaFqaHnTr+SmsGu7WKniTxc5/bz7T3/xd3oij5
+ VF5Q==
+X-Gm-Message-State: ACgBeo2TWnqQTtJH6iOtWNJ/iqB4VJmblC9loOz/JjS6xOTCkVfZOADw
+ QCrQjud5+ttr1DHWkTsQywk=
+X-Google-Smtp-Source: AA6agR4y83+GFBiVnDjmvYo0cbNHn+OGbaSKsWoLdo6c8JA1AqWsywufMRb7rrB6FtrkxBmKBkYVfQ==
+X-Received: by 2002:a17:902:c94a:b0:16f:81c1:255a with SMTP id
+ i10-20020a170902c94a00b0016f81c1255amr26475771pla.35.1661316064937; 
+ Tue, 23 Aug 2022 21:41:04 -0700 (PDT)
+Received: from localhost.localdomain ([218.150.75.42])
+ by smtp.gmail.com with ESMTPSA id
+ p7-20020a170902ebc700b00172b27404a2sm7551512plg.120.2022.08.23.21.41.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Aug 2022 21:41:04 -0700 (PDT)
+From: Juhyung Park <qkrwngud825@gmail.com>
+To: linux-pm@vger.kernel.org
+Date: Wed, 24 Aug 2022 13:40:13 +0900
+Message-Id: <20220824044013.29354-1-qkrwngud825@gmail.com>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.0
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
-References: <20220815081555.2961943-1-zhangshuqi3@huawei.com>
- <a364da58-f476-69fd-3f90-448f35c8e151@kernel.org>
- <YwFaTprvOf8ckGsP@google.com> <YwFd/+YPfPz60uWg@google.com>
-In-Reply-To: <YwFd/+YPfPz60uWg@google.com>
-X-Originating-IP: [10.174.177.86]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- kwepemm600016.china.huawei.com (7.193.23.20)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -4.3 (----)
+X-Spam-Score: 1.3 (+)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 08/21, Jaegeuk Kim wrote: > On 08/20, Jaegeuk Kim wrote:
- >> On 08/20, Chao Yu wrote: >>> On 2022/8/15 16:15, Shuqi Zhang wrote: >>>>
- This is a BUG_ON issue as follows when running xfstest-generic-5 [...] 
- Content analysis details:   (-4.3 points, 6.0 required)
+ Content preview: Commit 2fd77fff4b44 ("PM / suspend: make sync() on
+ suspend-to-RAM
+ build-time optional") added an option to skip sync() on suspend entry to
+ avoid heavy overhead on platforms with frequent suspends. Years later, commit
+ 261e224d6a5c ("pm/sleep: Add PM_USERSPACE_AUTOSLEEP Kconfig") added a
+ dedicated
+ config for indicating that the kernel is subject to frequent suspends. 
+ Content analysis details:   (1.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.188 listed in list.dnswl.org]
+ 1.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
+ 0.3 HK_RANDOM_FROM         From username looks random
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [qkrwngud825[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [qkrwngud825[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1oQgRW-00F6UA-QM
-Subject: Re: [f2fs-dev] [PATCH -next] f2fs: fix wrong dirty page count when
- race between mmap and fallocate.
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.43 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.43 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1oQiCU-00FB5l-Kr
+Subject: [f2fs-dev] [PATCH] PM: suspend: select SUSPEND_SKIP_SYNC too if
+ PM_USERSPACE_AUTOSLEEP is selected
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,175 +131,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Shuqi Zhang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Shuqi Zhang <zhangshuqi3@huawei.com>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: chrome-platform@lists.linux.dev, len.brown@intel.com,
+ linux-f2fs-devel@lists.sourceforge.net, kaleshsingh@google.com,
+ linux-fsdevel@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+Commit 2fd77fff4b44 ("PM / suspend: make sync() on suspend-to-RAM build-time
+optional") added an option to skip sync() on suspend entry to avoid heavy
+overhead on platforms with frequent suspends.
 
-On 08/21, Jaegeuk Kim wrote:
-> On 08/20, Jaegeuk Kim wrote:
->> On 08/20, Chao Yu wrote:
->>> On 2022/8/15 16:15, Shuqi Zhang wrote:
->>>> This is a BUG_ON issue as follows when running xfstest-generic-503:
->>>> WARNING: CPU: 21 PID: 1385 at fs/f2fs/inode.c:762 f2fs_evict_inode+0x847/0xaa0
->>>> Modules linked in:
->>>> CPU: 21 PID: 1385 Comm: umount Not tainted 5.19.0-rc5+ #73
->>>> Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.14.0-4.fc34 04/01/2014
->>>>
->>>> Call Trace:
->>>> evict+0x129/0x2d0
->>>> dispose_list+0x4f/0xb0
->>>> evict_inodes+0x204/0x230
->>>> generic_shutdown_super+0x5b/0x1e0
->>>> kill_block_super+0x29/0x80
->>>> kill_f2fs_super+0xe6/0x140
->>>> deactivate_locked_super+0x44/0xc0
->>>> deactivate_super+0x79/0x90
->>>> cleanup_mnt+0x114/0x1a0
->>>> __cleanup_mnt+0x16/0x20
->>>> task_work_run+0x98/0x100
->>>> exit_to_user_mode_prepare+0x3d0/0x3e0
->>>> syscall_exit_to_user_mode+0x12/0x30
->>>> do_syscall_64+0x42/0x80
->>>> entry_SYSCALL_64_after_hwframe+0x46/0xb0
->>>>
->>>> Function flow analysis when BUG occurs:
->>>> f2fs_fallocate                    mmap
->>>>                                     do_page_fault
->>>>                                       pte_spinlock  // ---lock_pte
->>>>                                       do_wp_page
->>>>                                         wp_page_shared
->>>>                                           pte_unmap_unlock   // unlock_pte
->>>>                                             do_page_mkwrite
->>>>                                             f2fs_vm_page_mkwrite
->>>>                                               down_read(i_mmap_sem)
->>>>                                               lock_page
->>>>                                               if (PageMappedToDisk(page))
->>>>                                                 goto out;
->>>>                                               // set_page_dirty  --NOT RUN
->>>>                                               out: up_read(i_mmap_sem)
->>>>                                             lock_page
->>>>                                           finish_mkwrite_fault // unlock_pte
->>>> f2fs_collapse_range
->>>>     down_write(i_mmap_sem)
->>>>     truncate_pagecache
->>>>       unmap_mapping_pages
->>>>         i_mmap_lock_write // down_write(i_mmap_rwsem)
->>>>           ......
->>>>           zap_pte_range
->>>>             pte_offset_map_lock // ---lock_pte
->>>>             f2fs_set_data_page_dirty
->>> I didn't get it, why zap_pte_range() can set page dirty w/o lock_page?
->>>
->>> I found it's very easy to reproduce this bug, but previously I never saw this...
->>> is there any code udpate around truncate_pagecache()?
->> Found this.
->>
->> 2637  * The caller must ensure this doesn't race with truncation.  Most will
->> 2638  * simply hold the folio lock, but e.g. zap_pte_range() calls with the
->> 2639  * folio mapped and the pte lock held, which also locks out truncation.
->> 2640  */
->> 2641 bool filemap_dirty_folio(struct address_space *mapping, struct folio *folio)
->> 2642 {
->>
->>> Thanks,
->>>
->>>>               if (!PageDirty(page)) {
->>>>                                           fault_dirty_shared_page
->>>>                                             f2fs_set_data_page_dirty
->>>>                                               if (!PageDirty(page)) {
->>>>                                                 __set_page_dirty_nobuffer
->>>>                                                 f2fs_update_dirty_page // ++
->>>>                                               }
->>>>                                             unlock_page
->>>>                 __set_page_dirty_nobuffers
->>>>                 f2fs_update_dirty_page // page count++
->>>>               }
->>>>             pte_unmap_unlock  // --unlock_pte
->>>>         i_mmap_unlock_write  // up_write(i_mmap_rwsem)
->>>>     truncate_inode_pages
->>>>     up_write(i_mmap_sem)
->>>>
->>>> When race happens between mmap-do_page_fault-wp_page_shared and
->>>> fallocate-truncate_pagecache-zap_pte_range, the zap_pte_range calls
->>>> function set_page_dirty without page lock. Besides, though
->>>> truncate_pagecache has immap and pte lock, wp_page_shared calls
->>>> fault_dirty_shared_page without any. In this case, two threads race
->>>> in f2fs_set_data_page_dirty function. Page is set to dirty only ONCE,
->>>> but the count is added TWICE by calling f2fs_update_dirty_page.
->>>> Thus the count of dirty page cannot accord with the real dirty pages.
->>>>
->>>> Following is the solution to in case of race happens without any lock.
->>>> If making sure f2fs_vm_page_mkwrite calls set_page_dirty within immap
->>>> lock area, page will already be dirtied when running into
->>>> fault_dirty_shared_page-f2fs_set_data_page_dirty.
->>>> The count of dirty page will not be increased wrong times.
->>>>
->>>> Signed-off-by: Shuqi Zhang <zhangshuqi3@huawei.com>
->>>> ---
->>>>    fs/f2fs/file.c | 11 ++++++-----
->>>>    1 file changed, 6 insertions(+), 5 deletions(-)
->>>>
->>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
->>>> index ce4905a073b3..d837359a9c00 100644
->>>> --- a/fs/f2fs/file.c
->>>> +++ b/fs/f2fs/file.c
->>>> @@ -140,7 +140,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
->>>>    	 * check to see if the page is mapped already (no holes)
->>>>    	 */
->>>>    	if (PageMappedToDisk(page))
->>>> -		goto out_sem;
->>>> +		goto set_dirty;
->>>>    	/* page is wholly or partially inside EOF */
->>>>    	if (((loff_t)(page->index + 1) << PAGE_SHIFT) >
->>>> @@ -150,14 +150,15 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
->>>>    		offset = i_size_read(inode) & ~PAGE_MASK;
->>>>    		zero_user_segment(page, offset, PAGE_SIZE);
->>>>    	}
->>>> -	set_page_dirty(page);
->>>> -	if (!PageUptodate(page))
->>>> -		SetPageUptodate(page);
->>>>    	f2fs_update_iostat(sbi, APP_MAPPED_IO, F2FS_BLKSIZE);
->>>> -	f2fs_update_time(sbi, REQ_TIME);
->>>> +set_dirty:
->>>>    	trace_f2fs_vm_page_mkwrite(page, DATA);
->>>> +	set_page_dirty(page);
->>>> +	if (!PageUptodate(page))
->>>> +		SetPageUptodate(page);
-> Actually we don't need to call SetPageUptodate() since set_page_dirty() should
-> do? And, it seems the call stack is out-dated as well.
->
-> By the way, do we just need to get the right count by this?
->
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -3697,8 +3697,7 @@ static bool f2fs_dirty_data_folio(struct address_space *mapping,
->                  folio_mark_uptodate(folio);
->          BUG_ON(folio_test_swapcache(folio));
->
-> -       if (!folio_test_dirty(folio)) {
-> -               filemap_dirty_folio(mapping, folio);
-> +       if (filemap_dirty_folio(mapping, folio)) {
->                  f2fs_update_dirty_folio(inode, folio);
->                  return true;
->          }
+Years later, commit 261e224d6a5c ("pm/sleep: Add PM_USERSPACE_AUTOSLEEP
+Kconfig") added a dedicated config for indicating that the kernel is subject to
+frequent suspends.
 
-Yes, this patch seems a better one. I will send a PATCH-v2 about it.
+While SUSPEND_SKIP_SYNC is also available as a knob that the userspace can
+configure, it makes sense to enable this by default if PM_USERSPACE_AUTOSLEEP
+is selected already.
 
+Signed-off-by: Juhyung Park <qkrwngud825@gmail.com>
+---
+ kernel/power/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-Thanks,
+diff --git a/kernel/power/Kconfig b/kernel/power/Kconfig
+index 60a1d3051cc7..5725df6c573b 100644
+--- a/kernel/power/Kconfig
++++ b/kernel/power/Kconfig
+@@ -23,6 +23,7 @@ config SUSPEND_SKIP_SYNC
+ 	bool "Skip kernel's sys_sync() on suspend to RAM/standby"
+ 	depends on SUSPEND
+ 	depends on EXPERT
++	default PM_USERSPACE_AUTOSLEEP
+ 	help
+ 	  Skip the kernel sys_sync() before freezing user processes.
+ 	  Some systems prefer not to pay this cost on every invocation
+-- 
+2.37.2
 
->>>> +	f2fs_update_time(sbi, REQ_TIME);
->>>>    out_sem:
->>>>    	filemap_invalidate_unlock_shared(inode->i_mapping);
->>
->> _______________________________________________
->> Linux-f2fs-devel mailing list
->> Linux-f2fs-devel@lists.sourceforge.net
->> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
