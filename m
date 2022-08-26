@@ -2,102 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E65805A2F87
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Aug 2022 21:02:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E8725A3231
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Aug 2022 00:45:58 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oRebO-0007xx-He;
-	Fri, 26 Aug 2022 19:02:46 +0000
+	id 1oRi5J-0003SE-OD;
+	Fri, 26 Aug 2022 22:45:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3yhgJYwkbAD8tz0lbmmfsbqqje.hpphmfvtfsdpoufou.dpn@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1oRebN-0007xr-6s for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Aug 2022 19:02:45 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <bart.vanassche@gmail.com>) id 1oRi5I-0003S7-1p
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Aug 2022 22:45:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dq5VkqjfDnwWLl/bsXasVEegglasUUDpYrJ8qiZGvfU=; b=kVIm65pBij9MpIQAdy+aI04h0W
- LT9Jrx4Co6YULk+CWEt00BAOrdmxz6NxhbufzZYVnKlkMt7ICteJYglvpy3/C4f1lbnxrCfe82Xe4
- V2wm59bwLXZcenFfZZ1ehRaWnIgDELiwWM2yC54cTsaKT65RfWFcZEGlEJuIDm+FqHA8=;
+ bh=KI98Xpl0ogAKDeYiBm6UL6xwzn3nyWMocDGKL5WJTq8=; b=ZgMsiNjAa/x/B+65vwC67RIviY
+ XBWqPhf6PIBIEJEUrlRIlAn1beRRLDuxG9cnVfx0DIYc0E7ToOEgwoWXilEeITJhD0UOxCRpkQssP
+ ycdsEYpQXTdN1ePV/uDA1d8xNjCyU3Gg7hzgfPJIFB21UZWf62YapxW17GI+lpYqw7b0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=dq5VkqjfDnwWLl/bsXasVEegglasUUDpYrJ8qiZGvfU=; b=f
- lmbOfCE/lRUOcVjppMDM6sNjn/Qz96zIE4xWPcOstQynZU360Q76xVZhJi4mwtG0AP2jn5zrJYjMD
- Vl8Qzf1BWV4vV0g9P7ZHbUnIgRdgH5d9xUajvXqZX49dRVeDlrfJdfc9z5LKgEwZgbGd6eH+ukwMA
- PSclmJBlMrvUmX6o=;
-Received: from mail-io1-f69.google.com ([209.85.166.69])
+ List-Owner:List-Archive; bh=KI98Xpl0ogAKDeYiBm6UL6xwzn3nyWMocDGKL5WJTq8=; b=C
+ wzM5ydakN4cWxJqysIEYGYDL5YwFoY/YyBmJv3BxYbiF9lrtCtIQTAmIItQNgjr/oAmIxfmHrWyKn
+ +XKg38Mfh/19zKVIc7pPLMf8k3MsvJZy7y91NaSSQS4hdYjWj5U0S/B6FMHqRdsr9LFV7qNnqiTIC
+ SAWtgdxB+RDig6BI=;
+Received: from mail-pj1-f47.google.com ([209.85.216.47])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1oRebI-0002RI-Bj for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Aug 2022 19:02:45 +0000
-Received: by mail-io1-f69.google.com with SMTP id
- v14-20020a6b5b0e000000b0067bc967a6c0so1414011ioh.5
+ id 1oRi5D-0005qU-4U for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Aug 2022 22:45:47 +0000
+Received: by mail-pj1-f47.google.com with SMTP id bg22so2862070pjb.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 26 Aug 2022 12:02:40 -0700 (PDT)
+ Fri, 26 Aug 2022 15:45:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc;
- bh=dq5VkqjfDnwWLl/bsXasVEegglasUUDpYrJ8qiZGvfU=;
- b=YJClm0t50jMVa5GB18qBy21RFFcxhaRo6+f8EVpryBQvbKhO77PqSljoC80GE2mtju
- rBeeXJCj3f5P7hOVdOz3pE4BWvr52uCA0gqXlwGkr8NsbeXQkx1Qf6mOU3nvazBT4mDG
- wmdYpWkTPGLJh3aVUyG5b+Pl8dUqPJbKqKPz8P4E3RN0MUtPwVAxfzZkYb4+a3TaarsC
- KeEoJasg4E0KR96J9B9e/h1FBLz0kDPJfdnoRj6jEJwKNYb+Z37a4u+8BtVCFEwS6AB+
- NdSU0dSFEV/DxRDAZ2I+jpRbNt1tYR3iA1zzojAhUsvuvzDMAbQK9067gTL+59c5Mgxd
- lzCA==
-X-Gm-Message-State: ACgBeo08wxoKRwacLpA5uDx4fHvbAx2Vv2aKazYIARncGvUF+JL9V1nU
- g9p7EKrw2vDNEXgMctLzyVPJaQgs2XEprALhnDhZlZmKR81c
-X-Google-Smtp-Source: AA6agR7sf7ZBSqvlIc2tOb7t/wHMmhB/lfBoygiWWaHxWN7e36f0wmiKls7yee9YOFkHWyaDrSb2MeNbK2RPW4n+4wvc/RgZ6rR0
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc;
+ bh=KI98Xpl0ogAKDeYiBm6UL6xwzn3nyWMocDGKL5WJTq8=;
+ b=0TozFIc0OxHdM8sszsMqMT2BnVTiRPSusumniIHxubjSOCQGLTZILn08XgVSiQeqHs
+ AIKNku3bhAA2fYBY81+FOODvT5Bn/hYEE3uFIqvJy8MjXlEhkC6djpK8WFM3XgrQDVUZ
+ GoH38CIEUe1sR908RzNaJqc8A14UqT1NMZ2HQEC01kiMYQXZ6vyO+vRJvaL2u9C3R0in
+ TQPg6akD+f8URT5v58qKkGqr0tXskTxG07g+zukL1QiAMfYrYpi+ed3ZsD4hyCjTlFWy
+ UwMYVxds6ObU3q9X1uOk/vPNCRu1AntW7KtTbuo/WEnUGl7zBcdl+clcqEJbvVMdIgK0
+ fX4g==
+X-Gm-Message-State: ACgBeo3QRGqDB2KisEP+yhMwqqZQA7bBNSMCfuoCXbq0tWyn1kDK7QD+
+ eHPe4upE9A2fopDITWKjXJNM81NtxHHkwA==
+X-Google-Smtp-Source: AA6agR5g+yZWVg5QzqQSOg493lmbsmAvnh5B3fdzIIW3HNxCZP1ZIefCNG5K7sMpfThHqDDxcGclvA==
+X-Received: by 2002:a17:902:8ec6:b0:172:dc2c:306d with SMTP id
+ x6-20020a1709028ec600b00172dc2c306dmr5786953plo.104.1661553941457; 
+ Fri, 26 Aug 2022 15:45:41 -0700 (PDT)
+Received: from bvanassche-linux.mtv.corp.google.com
+ ([2620:15c:211:201:a12:b4b9:f1b3:ec63])
+ by smtp.gmail.com with ESMTPSA id
+ t12-20020a62d14c000000b0052f3a7bc29fsm2275163pfl.202.2022.08.26.15.45.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Aug 2022 15:45:40 -0700 (PDT)
+From: Bart Van Assche <bvanassche@acm.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Fri, 26 Aug 2022 15:45:34 -0700
+Message-Id: <20220826224534.1445555-1-bvanassche@acm.org>
+X-Mailer: git-send-email 2.37.2.672.g94769d06f0-goog
 MIME-Version: 1.0
-X-Received: by 2002:a92:cd8f:0:b0:2df:ff82:2e5f with SMTP id
- r15-20020a92cd8f000000b002dfff822e5fmr4777330ilb.72.1661540554818; Fri, 26
- Aug 2022 12:02:34 -0700 (PDT)
-Date: Fri, 26 Aug 2022 12:02:34 -0700
-In-Reply-To: <000000000000d5b4fe05e7127662@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <0000000000008cccea05e7298e1f@google.com>
-From: syzbot <syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com>
-To: akpm@linux-foundation.org, chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
- syzkaller-bugs@googlegroups.com, willy@infradead.org
-X-Spam-Score: 3.1 (+++)
+X-Spam-Score: 0.5 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  syzbot has found a reproducer for the following issue on:
- HEAD commit: a41a877bc12d Merge branch 'for-next/fixes' into for-kernelci
- git tree: git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
- for-kernelci console output: https://syzkaller.appspot [...] 
- Content analysis details:   (3.1 points, 6.0 required)
+ Content preview:  Make the argument list match the format string. Use PRIu64
+ for uint64_t and %zu for size_t. Signed-off-by: Bart Van Assche
+ <bvanassche@acm.org>
+ --- fsck/sload.c | 2 +- lib/libf2fs.c | 6 +++--- 2 files changed,
+ 4 insertions(+), 4 deletions(-) 
+ Content analysis details:   (0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.47 listed in list.dnswl.org]
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
  mail domains are different
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.69 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [bart.vanassche[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.69 listed in wl.mailspike.net]
-X-Headers-End: 1oRebI-0002RI-Bj
-Subject: Re: [f2fs-dev] [syzbot] BUG: unable to handle kernel NULL pointer
- dereference in set_page_dirty
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.47 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
+ EnvelopeFrom freemail headers are different
+X-Headers-End: 1oRi5D-0005qU-4U
+Subject: [f2fs-dev] [PATCH] Fix format strings in log messages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,79 +112,60 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Bart Van Assche <bvanassche@acm.org>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-syzbot has found a reproducer for the following issue on:
+Make the argument list match the format string. Use PRIu64 for uint64_t
+and %zu for size_t.
 
-HEAD commit:    a41a877bc12d Merge branch 'for-next/fixes' into for-kernelci
-git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
-console output: https://syzkaller.appspot.com/x/log.txt?x=104eb875080000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=5cea15779c42821c
-dashboard link: https://syzkaller.appspot.com/bug?extid=775a3440817f74fddb8c
-compiler:       Debian clang version 13.0.1-++20220126092033+75e33f71c2da-1~exp1~20220126212112.63, GNU ld (GNU Binutils for Debian) 2.35.2
-userspace arch: arm64
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=15aebce7080000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=167b5e33080000
+Signed-off-by: Bart Van Assche <bvanassche@acm.org>
+---
+ fsck/sload.c  | 2 +-
+ lib/libf2fs.c | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com
-
-Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
-Mem abort info:
-  ESR = 0x0000000086000004
-  EC = 0x21: IABT (current EL), IL = 32 bits
-  SET = 0, FnV = 0
-  EA = 0, S1PTW = 0
-  FSC = 0x04: level 0 translation fault
-user pgtable: 4k pages, 48-bit VAs, pgdp=0000000109ee4000
-[0000000000000000] pgd=0000000000000000, p4d=0000000000000000
-Internal error: Oops: 86000004 [#1] PREEMPT SMP
-Modules linked in:
-CPU: 1 PID: 3045 Comm: syz-executor330 Not tainted 6.0.0-rc2-syzkaller-16455-ga41a877bc12d #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/22/2022
-pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-pc : 0x0
-lr : folio_mark_dirty+0xbc/0x208 mm/page-writeback.c:2748
-sp : ffff800012783970
-x29: ffff800012783970 x28: 0000000000000000 x27: ffff800012783b08
-x26: 0000000000000001 x25: 0000000000000400 x24: 0000000000000001
-x23: ffff0000c736e000 x22: 0000000000000045 x21: 05ffc00000000015
-x20: ffff0000ca7403b8 x19: fffffc00032ec600 x18: 0000000000000181
-x17: ffff80000c04d6bc x16: ffff80000dbb8658 x15: 0000000000000000
-x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
-x11: ff808000083e9814 x10: 0000000000000000 x9 : ffff8000083e9814
-x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
-x5 : ffff0000cbb19000 x4 : ffff0000cb3d2000 x3 : ffff0000cbb18f80
-x2 : fffffffffffffff0 x1 : fffffc00032ec600 x0 : ffff0000ca7403b8
-Call trace:
- 0x0
- set_page_dirty+0x38/0xbc mm/folio-compat.c:62
- f2fs_update_meta_page+0x80/0xa8 fs/f2fs/segment.c:2369
- do_checkpoint+0x794/0xea8 fs/f2fs/checkpoint.c:1522
- f2fs_write_checkpoint+0x3b8/0x568 fs/f2fs/checkpoint.c:1679
- f2fs_issue_checkpoint+0x1b0/0x234
- f2fs_sync_fs+0x8c/0xc8 fs/f2fs/super.c:1651
- sync_filesystem+0xe0/0x134 fs/sync.c:66
- generic_shutdown_super+0x38/0x190 fs/super.c:474
- kill_block_super+0x30/0x78 fs/super.c:1427
- kill_f2fs_super+0x140/0x184 fs/f2fs/super.c:4544
- deactivate_locked_super+0x70/0xd4 fs/super.c:332
- deactivate_super+0xb8/0xbc fs/super.c:363
- cleanup_mnt+0x1f8/0x234 fs/namespace.c:1186
- __cleanup_mnt+0x20/0x30 fs/namespace.c:1193
- task_work_run+0xc4/0x208 kernel/task_work.c:177
- resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
- do_notify_resume+0x174/0x1d0 arch/arm64/kernel/signal.c:1127
- prepare_exit_to_user_mode arch/arm64/kernel/entry-common.c:137 [inline]
- exit_to_user_mode arch/arm64/kernel/entry-common.c:142 [inline]
- el0_svc+0x9c/0x150 arch/arm64/kernel/entry-common.c:625
- el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:642
- el0t_64_sync+0x18c/0x190
-Code: bad PC value
----[ end trace 0000000000000000 ]---
-
+diff --git a/fsck/sload.c b/fsck/sload.c
+index 00c3403dace0..ae18c046d567 100644
+--- a/fsck/sload.c
++++ b/fsck/sload.c
+@@ -318,7 +318,7 @@ static int configure_files(void)
+ #else
+ 	sehnd = selinux_android_file_context_handle();
+ 	if (!sehnd) {
+-		ERR_MSG("Failed to get android file_contexts\n", c.mount_point);
++		ERR_MSG("Failed to get android file_contexts\n");
+ 		return -EINVAL;
+ 	}
+ #endif
+diff --git a/lib/libf2fs.c b/lib/libf2fs.c
+index ecaa2e9d1ad5..f63307a42a08 100644
+--- a/lib/libf2fs.c
++++ b/lib/libf2fs.c
+@@ -1046,7 +1046,7 @@ int get_device_info(int i)
+ 		}
+ 
+ 		if (!is_power_of_2(dev->zone_size)) {
+-			MSG(0, "\tError: zoned: illegal zone size %lu (not a power of 2)\n",
++			MSG(0, "\tError: zoned: illegal zone size %" PRIu64 "u (not a power of 2)\n",
+ 					dev->zone_size);
+ 			free(stat_buf);
+ 			return -1;
+@@ -1064,10 +1064,10 @@ int get_device_info(int i)
+ 		MSG(0, "Info: Host-%s zoned block device:\n",
+ 				(dev->zoned_model == F2FS_ZONED_HA) ?
+ 					"aware" : "managed");
+-		MSG(0, "      %u zones, %lu zone size(bytes), %u randomly writeable zones\n",
++		MSG(0, "      %u zones, %" PRIu64 "u zone size(bytes), %u randomly writeable zones\n",
+ 				dev->nr_zones, dev->zone_size,
+ 				dev->nr_rnd_zones);
+-		MSG(0, "      %lu blocks per zone\n",
++		MSG(0, "      %zu blocks per zone\n",
+ 				dev->zone_blocks);
+ 	}
+ #endif
 
 
 _______________________________________________
