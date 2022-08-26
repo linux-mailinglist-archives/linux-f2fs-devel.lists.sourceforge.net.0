@@ -2,97 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 840FE5A2D4F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Aug 2022 19:20:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E65805A2F87
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Aug 2022 21:02:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oRczq-0002kf-Vq;
-	Fri, 26 Aug 2022 17:19:54 +0000
+	id 1oRebO-0007xx-He;
+	Fri, 26 Aug 2022 19:02:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1oRczp-0002kZ-GK
- for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Aug 2022 17:19:53 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3yhgJYwkbAD8tz0lbmmfsbqqje.hpphmfvtfsdpoufou.dpn@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1oRebN-0007xr-6s for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Aug 2022 19:02:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
+ :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=O647hDHVHlGHlXHr+NPoi3ojRiR8qSxK27+WnVTYW4c=; b=Wj8Gd0oWyQnVsT68sTXdrqvkNr
- SMiRAsgQmneOTE2atV5UrTZE9lTg6Tkxw3/8mjRI1V8DaP4ajoitvxnzZdsTTud9ql71p0EEObqaf
- NDiHioIE/2gxcq5iLK9bxqOyk3xYCGmAGIkYoRaYhHGucLegNg8csv05gUta3aas9Nrg=;
+ bh=dq5VkqjfDnwWLl/bsXasVEegglasUUDpYrJ8qiZGvfU=; b=kVIm65pBij9MpIQAdy+aI04h0W
+ LT9Jrx4Co6YULk+CWEt00BAOrdmxz6NxhbufzZYVnKlkMt7ICteJYglvpy3/C4f1lbnxrCfe82Xe4
+ V2wm59bwLXZcenFfZZ1ehRaWnIgDELiwWM2yC54cTsaKT65RfWFcZEGlEJuIDm+FqHA8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=O647hDHVHlGHlXHr+NPoi3ojRiR8qSxK27+WnVTYW4c=; b=Y+skAvyK43SJEoKBvZ0N8cFAsY
- WKfQ5A+ro+mlu/9JkJZw8eFi2RQwBoOUVAC4TigEL6MlUoexLcFRk6GTYEJIESeabT5bo09If1/k1
- PYWS7NsVj8WequkoYdMkvRZ29Zz8JPMDmBzaN5xS+d1lx8c85wWIlLqdaktpRua9CXyE=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
+ Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=dq5VkqjfDnwWLl/bsXasVEegglasUUDpYrJ8qiZGvfU=; b=f
+ lmbOfCE/lRUOcVjppMDM6sNjn/Qz96zIE4xWPcOstQynZU360Q76xVZhJi4mwtG0AP2jn5zrJYjMD
+ Vl8Qzf1BWV4vV0g9P7ZHbUnIgRdgH5d9xUajvXqZX49dRVeDlrfJdfc9z5LKgEwZgbGd6eH+ukwMA
+ PSclmJBlMrvUmX6o=;
+Received: from mail-io1-f69.google.com ([209.85.166.69])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oRczo-0005bC-Ii for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Aug 2022 17:19:53 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 9BB51B831BD
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1oRebI-0002RI-Bj for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Aug 2022 19:02:45 +0000
+Received: by mail-io1-f69.google.com with SMTP id
+ v14-20020a6b5b0e000000b0067bc967a6c0so1414011ioh.5
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 26 Aug 2022 17:19:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C497C433D6;
- Fri, 26 Aug 2022 17:19:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1661534379;
- bh=vuEokndF506qRdyhDYmaWg4LZphgo/7UF9f2EnSu4xo=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=uRV4ZO47e1JugjRw4RVdrrpCHpR5bO4DvYgEkHIvcIjZ+lXuT1cBKl/AuPb6guZUs
- QDU296S9F4xsGChwu2sswCDeANzItTmyiRPDt6L/ni7NfFynjd6RN0vlCwH3F/fc3f
- Z7QIZ8FofXlaZRyedQNWiiJWSr7mo/69bslYAgkEK6/ZTwfbW5WEqidCS4+rh06SXl
- uR6fLYO46w9SsnXWQkpOf/CXGbw+yUMdxsKsyu7+e2IoLr1PpifubP3Z7lS5cInr3b
- lCgvHJstqBOvz0YgwjFkINWO/qDNOg0Bsi4POKI573SdJdMEwyHTJNhufBaI8tlffl
- iZpkxUmjkk3jw==
-Message-ID: <3543250c8157c3e0e7e410b268121e4d7d3e9bc2.camel@kernel.org>
-From: Jeff Layton <jlayton@kernel.org>
-To: Eric Biggers <ebiggers@kernel.org>, linux-fsdevel@vger.kernel.org
-Date: Fri, 26 Aug 2022 13:19:37 -0400
-In-Reply-To: <20220722071228.146690-1-ebiggers@kernel.org>
-References: <20220722071228.146690-1-ebiggers@kernel.org>
-User-Agent: Evolution 3.44.4 (3.44.4-1.fc36) 
+ Fri, 26 Aug 2022 12:02:40 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=to:from:subject:message-id:in-reply-to:date:mime-version
+ :x-gm-message-state:from:to:cc;
+ bh=dq5VkqjfDnwWLl/bsXasVEegglasUUDpYrJ8qiZGvfU=;
+ b=YJClm0t50jMVa5GB18qBy21RFFcxhaRo6+f8EVpryBQvbKhO77PqSljoC80GE2mtju
+ rBeeXJCj3f5P7hOVdOz3pE4BWvr52uCA0gqXlwGkr8NsbeXQkx1Qf6mOU3nvazBT4mDG
+ wmdYpWkTPGLJh3aVUyG5b+Pl8dUqPJbKqKPz8P4E3RN0MUtPwVAxfzZkYb4+a3TaarsC
+ KeEoJasg4E0KR96J9B9e/h1FBLz0kDPJfdnoRj6jEJwKNYb+Z37a4u+8BtVCFEwS6AB+
+ NdSU0dSFEV/DxRDAZ2I+jpRbNt1tYR3iA1zzojAhUsvuvzDMAbQK9067gTL+59c5Mgxd
+ lzCA==
+X-Gm-Message-State: ACgBeo08wxoKRwacLpA5uDx4fHvbAx2Vv2aKazYIARncGvUF+JL9V1nU
+ g9p7EKrw2vDNEXgMctLzyVPJaQgs2XEprALhnDhZlZmKR81c
+X-Google-Smtp-Source: AA6agR7sf7ZBSqvlIc2tOb7t/wHMmhB/lfBoygiWWaHxWN7e36f0wmiKls7yee9YOFkHWyaDrSb2MeNbK2RPW4n+4wvc/RgZ6rR0
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Received: by 2002:a92:cd8f:0:b0:2df:ff82:2e5f with SMTP id
+ r15-20020a92cd8f000000b002dfff822e5fmr4777330ilb.72.1661540554818; Fri, 26
+ Aug 2022 12:02:34 -0700 (PDT)
+Date: Fri, 26 Aug 2022 12:02:34 -0700
+In-Reply-To: <000000000000d5b4fe05e7127662@google.com>
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <0000000000008cccea05e7298e1f@google.com>
+From: syzbot <syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com>
+To: akpm@linux-foundation.org, chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
+ syzkaller-bugs@googlegroups.com, willy@infradead.org
+X-Spam-Score: 3.1 (+++)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, 2022-07-22 at 00:12 -0700, Eric Biggers wrote: > This
- patchset makes the statx() system call return direct I/O (DIO) > alignment
- information. This allows userspace to easily determine > whethe [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  syzbot has found a reproducer for the following issue on:
+ HEAD commit: a41a877bc12d Merge branch 'for-next/fixes' into for-kernelci
+ git tree: git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
+ for-kernelci console output: https://syzkaller.appspot [...] 
+ Content analysis details:   (3.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 2.5 SORTED_RECIPS          Recipient list is sorted by address
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.69 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oRczo-0005bC-Ii
-Subject: Re: [f2fs-dev] [PATCH v4 0/9] make statx() return DIO alignment
- information
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.69 listed in wl.mailspike.net]
+X-Headers-End: 1oRebI-0002RI-Bj
+Subject: Re: [f2fs-dev] [syzbot] BUG: unable to handle kernel NULL pointer
+ dereference in set_page_dirty
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,98 +109,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org, linux-api@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- Keith Busch <kbusch@kernel.org>, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, 2022-07-22 at 00:12 -0700, Eric Biggers wrote:
-> This patchset makes the statx() system call return direct I/O (DIO)
-> alignment information.  This allows userspace to easily determine
-> whether a file supports DIO, and if so with what alignment restrictions.
-> 
-> Patch 1 adds the basic VFS support for STATX_DIOALIGN.  Patch 2 wires it
-> up for all block device files.  The remaining patches wire it up for
-> regular files on ext4, f2fs, and xfs.  Support for regular files on
-> other filesystems can be added later.
-> 
-> I've also written a man-pages patch, which I'm sending separately.
-> 
-> Note, f2fs has one corner case where DIO reads are allowed but not DIO
-> writes.  The proposed statx fields can't represent this.  My proposal
-> (patch 6) is to just eliminate this case, as it seems much too weird.
-> But I'd appreciate any feedback on that part.
-> 
-> This patchset applies to v5.19-rc7.
-> 
-> Changed v3 => v4:
->    - Added xfs support.
-> 
->    - Moved the helper function for block devices into block/bdev.c.
->    
->    - Adjusted the ext4 patch to not introduce a bug where misaligned DIO
->      starts being allowed on encrypted files when it gets combined with
->      the patch "iomap: add support for dma aligned direct-io" that is
->      queued in the block tree for 5.20.
-> 
->    - Made a simplification in fscrypt_dio_supported().
-> 
-> Changed v2 => v3:
->    - Dropped the stx_offset_align_optimal field, since its purpose
->      wasn't clearly distinguished from the existing stx_blksize.
-> 
->    - Renamed STATX_IOALIGN to STATX_DIOALIGN, to reflect the new focus
->      on DIO only.
-> 
->    - Similarly, renamed stx_{mem,offset}_align_dio to
->      stx_dio_{mem,offset}_align, to reflect the new focus on DIO only.
-> 
->    - Wired up STATX_DIOALIGN on block device files.
-> 
-> Changed v1 => v2:
->    - No changes.
-> 
-> Eric Biggers (9):
->   statx: add direct I/O alignment information
->   vfs: support STATX_DIOALIGN on block devices
->   fscrypt: change fscrypt_dio_supported() to prepare for STATX_DIOALIGN
->   ext4: support STATX_DIOALIGN
->   f2fs: move f2fs_force_buffered_io() into file.c
->   f2fs: don't allow DIO reads but not DIO writes
->   f2fs: simplify f2fs_force_buffered_io()
->   f2fs: support STATX_DIOALIGN
->   xfs: support STATX_DIOALIGN
-> 
->  block/bdev.c              | 25 ++++++++++++++++++++
->  fs/crypto/inline_crypt.c  | 49 +++++++++++++++++++--------------------
->  fs/ext4/ext4.h            |  1 +
->  fs/ext4/file.c            | 37 ++++++++++++++++++++---------
->  fs/ext4/inode.c           | 36 ++++++++++++++++++++++++++++
->  fs/f2fs/f2fs.h            | 45 -----------------------------------
->  fs/f2fs/file.c            | 45 ++++++++++++++++++++++++++++++++++-
->  fs/stat.c                 | 14 +++++++++++
->  fs/xfs/xfs_iops.c         |  9 +++++++
->  include/linux/blkdev.h    |  4 ++++
->  include/linux/fscrypt.h   |  7 ++----
->  include/linux/stat.h      |  2 ++
->  include/uapi/linux/stat.h |  4 +++-
->  13 files changed, 190 insertions(+), 88 deletions(-)
-> 
-> base-commit: ff6992735ade75aae3e35d16b17da1008d753d28
+syzbot has found a reproducer for the following issue on:
 
-Hi Eric,
+HEAD commit:    a41a877bc12d Merge branch 'for-next/fixes' into for-kernelci
+git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
+console output: https://syzkaller.appspot.com/x/log.txt?x=104eb875080000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=5cea15779c42821c
+dashboard link: https://syzkaller.appspot.com/bug?extid=775a3440817f74fddb8c
+compiler:       Debian clang version 13.0.1-++20220126092033+75e33f71c2da-1~exp1~20220126212112.63, GNU ld (GNU Binutils for Debian) 2.35.2
+userspace arch: arm64
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=15aebce7080000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=167b5e33080000
 
-Can I ask what your plans are with this set? I didn't see it in
-linux-next yet, so I wasn't sure when you were looking to get it merged.
-I'm working on patches to add a new statx field for the i_version
-counter as well and I want to make sure that our work doesn't collide.
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com
 
-Thanks,
--- 
-Jeff Layton <jlayton@kernel.org>
+Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
+Mem abort info:
+  ESR = 0x0000000086000004
+  EC = 0x21: IABT (current EL), IL = 32 bits
+  SET = 0, FnV = 0
+  EA = 0, S1PTW = 0
+  FSC = 0x04: level 0 translation fault
+user pgtable: 4k pages, 48-bit VAs, pgdp=0000000109ee4000
+[0000000000000000] pgd=0000000000000000, p4d=0000000000000000
+Internal error: Oops: 86000004 [#1] PREEMPT SMP
+Modules linked in:
+CPU: 1 PID: 3045 Comm: syz-executor330 Not tainted 6.0.0-rc2-syzkaller-16455-ga41a877bc12d #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/22/2022
+pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : 0x0
+lr : folio_mark_dirty+0xbc/0x208 mm/page-writeback.c:2748
+sp : ffff800012783970
+x29: ffff800012783970 x28: 0000000000000000 x27: ffff800012783b08
+x26: 0000000000000001 x25: 0000000000000400 x24: 0000000000000001
+x23: ffff0000c736e000 x22: 0000000000000045 x21: 05ffc00000000015
+x20: ffff0000ca7403b8 x19: fffffc00032ec600 x18: 0000000000000181
+x17: ffff80000c04d6bc x16: ffff80000dbb8658 x15: 0000000000000000
+x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+x11: ff808000083e9814 x10: 0000000000000000 x9 : ffff8000083e9814
+x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+x5 : ffff0000cbb19000 x4 : ffff0000cb3d2000 x3 : ffff0000cbb18f80
+x2 : fffffffffffffff0 x1 : fffffc00032ec600 x0 : ffff0000ca7403b8
+Call trace:
+ 0x0
+ set_page_dirty+0x38/0xbc mm/folio-compat.c:62
+ f2fs_update_meta_page+0x80/0xa8 fs/f2fs/segment.c:2369
+ do_checkpoint+0x794/0xea8 fs/f2fs/checkpoint.c:1522
+ f2fs_write_checkpoint+0x3b8/0x568 fs/f2fs/checkpoint.c:1679
+ f2fs_issue_checkpoint+0x1b0/0x234
+ f2fs_sync_fs+0x8c/0xc8 fs/f2fs/super.c:1651
+ sync_filesystem+0xe0/0x134 fs/sync.c:66
+ generic_shutdown_super+0x38/0x190 fs/super.c:474
+ kill_block_super+0x30/0x78 fs/super.c:1427
+ kill_f2fs_super+0x140/0x184 fs/f2fs/super.c:4544
+ deactivate_locked_super+0x70/0xd4 fs/super.c:332
+ deactivate_super+0xb8/0xbc fs/super.c:363
+ cleanup_mnt+0x1f8/0x234 fs/namespace.c:1186
+ __cleanup_mnt+0x20/0x30 fs/namespace.c:1193
+ task_work_run+0xc4/0x208 kernel/task_work.c:177
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ do_notify_resume+0x174/0x1d0 arch/arm64/kernel/signal.c:1127
+ prepare_exit_to_user_mode arch/arm64/kernel/entry-common.c:137 [inline]
+ exit_to_user_mode arch/arm64/kernel/entry-common.c:142 [inline]
+ el0_svc+0x9c/0x150 arch/arm64/kernel/entry-common.c:625
+ el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:642
+ el0t_64_sync+0x18c/0x190
+Code: bad PC value
+---[ end trace 0000000000000000 ]---
+
 
 
 _______________________________________________
