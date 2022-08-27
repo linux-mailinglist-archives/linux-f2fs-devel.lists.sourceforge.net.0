@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F7D35A3553
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Aug 2022 09:01:57 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33B935A3545
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 Aug 2022 09:01:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oRppF-0005pU-C9;
-	Sat, 27 Aug 2022 07:01:49 +0000
+	id 1oRppH-0000GP-VE;
+	Sat, 27 Aug 2022 07:01:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1oRppD-0005pE-IB
+ (envelope-from <ebiggers@kernel.org>) id 1oRppD-0000G0-U7
  for linux-f2fs-devel@lists.sourceforge.net;
  Sat, 27 Aug 2022 07:01:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7F77Hg8B5efBScv94qrKy04o4aZE+FGgcEhsq71bsZE=; b=Pq1gdhUMspSF1o5wrMpwMpZGCL
- D5BKVzULHZnABoD6kg78vweVSglEMumd9b5f8daTXje1gGZl9cikZykQZSbxkPI1egv/OmGtZstlc
- q/Rs/IKGQon8uIFvdyrrJ0N5k5tUll41AOiKgivD9MVtWJTAWdIv6pUXpF38woCg8Qb4=;
+ bh=aUUkol97LIieLuW9B5d1ZsS0F0W1SLQ6iCEZLOhG0XE=; b=Xeuj/ll64xqoPXPRGngll3e9ig
+ iHlkDlWTpGxuj31as1wfKxytrcn7RSza670g4GQrV5xauHy6ni6Mk4KIsEcaDOOwQS1id9Pnt8pJ+
+ RuySjFmhVfF9YK+lFFvvuCBl4INxTRnpNpjAIe/1xAyTAB4GWgc5aXdtAb8vwYtdMvJw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,62 +31,60 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7F77Hg8B5efBScv94qrKy04o4aZE+FGgcEhsq71bsZE=; b=RMUfHMvfl79x1TDfa9HupYuPC5
- D9iRzU/yb+adJrcfT0G1PDW7atjnkJa75OGuq7uTvP7yg+rTcL9jM+Rt7RljZPmordcBAz6li3K7t
- rsEaQdhoMGFnu+2qub2BXNsHTxJLXrPllsPV1+nmr6GGM3B+eY/0CwIj4im3jjLXS3Hc=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=aUUkol97LIieLuW9B5d1ZsS0F0W1SLQ6iCEZLOhG0XE=; b=ZrLv3O6XV7Us/YQ6nMAg44fGUI
+ F4VCOkWk2qzXQNnHwjxhaXvE1vQuOGdVBH1BPpKVgF9cc4WKfnkxEhTHgfKTwUjzdlPHi0HGoWOp+
+ ElgSGpr/lTNCkIsK7hVYKjbeH4DGUSUKsESyY6GIWdERvLBc/Gotp+QeFjCsfFcJdsNs=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oRppB-0006oS-Qt for linux-f2fs-devel@lists.sourceforge.net;
+ id 1oRppA-002PRY-Aj for linux-f2fs-devel@lists.sourceforge.net;
  Sat, 27 Aug 2022 07:01:47 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 59B71B82741
- for <linux-f2fs-devel@lists.sourceforge.net>;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 30ED661074;
  Sat, 27 Aug 2022 07:01:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CFFBEC43470;
- Sat, 27 Aug 2022 07:01:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 47D5AC433D7;
+ Sat, 27 Aug 2022 07:01:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1661583691;
- bh=/jfuS15hStMnpPV1JCJsBTOyuHhx2Au7mlZgnZnCDk4=;
+ bh=t71ES1YnK8ZvdIpsL6806kD5NdIj707sDDhTCEMW1ls=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=tk8MR2jqxzcI6Z/DtHV20OwpdVkX7XRj2jaKlNofUBIxuGMJGzu97VGo9dwQ/tR7v
- 0Jt/IXU//m55YomHShR07pVXCz9Z2GCkmNxcLtIu6leHOB0DJ284sbZxKhRtPLMOnX
- PAAhC164epKLu5NPPd/KXRYRqIISSuoO66I69VpEVVATEP9uOp3Tgnb1Q5vqqWcjkr
- 7RcdLWHYGIP4OhaSoy4hyMalRdxYLkK5ZwVo+M80Liz0G/cAxYh/zwx/jSuTtGWiQ/
- EnqY4St20g4OlKR/z0WAd6AcnpumqrKgzs3MCjiz5RC0/3QI6S8cQi53PMQkX9T/uE
- NMG+YgymZmAzg==
+ b=OL4a6u9QZmOvZNwraAGup/WYFCcH9t8v3R3qde4moQuG7Ra6M84Obxo2y10N1WUg4
+ spfmdccgz7qfwC6RAiX+wIJeI8TRRzYo3xRAyg5KFm0gpZQhUd9j8XtM/Js1/RgTGw
+ upcAl6TrrCocIqjlVLaeCmniTwVNTS2VezCkUz+hONpwSV/pX+pYdY9pdPP8Iuwupn
+ ZEbpUp05i/yRZ6ZDmPfkfJVe4yVFnLnCUW4I85pJndXkvuTNeARV+l1zu50uz/hs1r
+ J1nB/m/LTB7wP9wLPCeaZG977No8/z/txa6cj4WqTOKQegxyhh3Wqtm0vmeTwTP0FC
+ UIlli3Cho5yTA==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fsdevel@vger.kernel.org
-Date: Fri, 26 Aug 2022 23:58:45 -0700
-Message-Id: <20220827065851.135710-3-ebiggers@kernel.org>
+Date: Fri, 26 Aug 2022 23:58:46 -0700
+Message-Id: <20220827065851.135710-4-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20220827065851.135710-1-ebiggers@kernel.org>
 References: <20220827065851.135710-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -3.4 (---)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> Add support for
+ Content preview: From: Eric Biggers <ebiggers@google.com> To prepare for
  STATX_DIOALIGN
- to block devices, so that direct I/O alignment restrictions are exposed to
- userspace in a generic way. Note that this breaks the tradition of stat
- operating
- only on the block device node, not the block device itself. However, it was
- felt that doing this is preferable, in order to make the interface use [...]
- Content analysis details:   (-3.4 points, 6.0 required)
+ support, make two changes to fscrypt_dio_supported(). First,
+ remove the filesystem-block-alignment
+ check and make the filesystems handle it instead. It previously made sense
+ to have it in fs/crypto/; however, to support STATX_DIOALIGN the alignment
+ restr [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -95,9 +93,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oRppB-0006oS-Qt
-Subject: [f2fs-dev] [PATCH v5 2/8] vfs: support STATX_DIOALIGN on block
- devices
+X-Headers-End: 1oRppA-002PRY-Aj
+Subject: [f2fs-dev] [PATCH v5 3/8] fscrypt: change fscrypt_dio_supported()
+ to prepare for STATX_DIOALIGN
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,123 +110,171 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: linux-block@vger.kernel.org, linux-api@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  linux-xfs@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- Keith Busch <kbusch@kernel.org>, linux-ext4@vger.kernel.org
+ Keith Busch <kbusch@kernel.org>, linux-ext4@vger.kernel.org,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Add support for STATX_DIOALIGN to block devices, so that direct I/O
-alignment restrictions are exposed to userspace in a generic way.
+To prepare for STATX_DIOALIGN support, make two changes to
+fscrypt_dio_supported().
 
-Note that this breaks the tradition of stat operating only on the block
-device node, not the block device itself.  However, it was felt that
-doing this is preferable, in order to make the interface useful and
-avoid needing separate interfaces for regular files and block devices.
+First, remove the filesystem-block-alignment check and make the
+filesystems handle it instead.  It previously made sense to have it in
+fs/crypto/; however, to support STATX_DIOALIGN the alignment restriction
+would have to be returned to filesystems.  It ends up being simpler if
+filesystems handle this part themselves, especially for f2fs which only
+allows fs-block-aligned DIO in the first place.
 
+Second, make fscrypt_dio_supported() work on inodes whose encryption key
+hasn't been set up yet, by making it set up the key if needed.  This is
+required for statx(), since statx() doesn't require a file descriptor.
+
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- block/bdev.c           | 23 +++++++++++++++++++++++
- fs/stat.c              | 12 ++++++++++++
- include/linux/blkdev.h |  4 ++++
- 3 files changed, 39 insertions(+)
+ fs/crypto/inline_crypt.c | 49 ++++++++++++++++++++--------------------
+ fs/ext4/file.c           |  9 ++++++--
+ fs/f2fs/f2fs.h           |  2 +-
+ include/linux/fscrypt.h  |  7 ++----
+ 4 files changed, 34 insertions(+), 33 deletions(-)
 
-diff --git a/block/bdev.c b/block/bdev.c
-index ce05175e71cea4..d699ecdb32604e 100644
---- a/block/bdev.c
-+++ b/block/bdev.c
-@@ -26,6 +26,7 @@
- #include <linux/namei.h>
- #include <linux/part_stat.h>
- #include <linux/uaccess.h>
-+#include <linux/stat.h>
- #include "../fs/internal.h"
- #include "blk.h"
+diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
+index 90f3e68f166e39..8d4bee5bccbf42 100644
+--- a/fs/crypto/inline_crypt.c
++++ b/fs/crypto/inline_crypt.c
+@@ -401,46 +401,45 @@ bool fscrypt_mergeable_bio_bh(struct bio *bio,
+ EXPORT_SYMBOL_GPL(fscrypt_mergeable_bio_bh);
  
-@@ -1069,3 +1070,25 @@ void sync_bdevs(bool wait)
- 	spin_unlock(&blockdev_superblock->s_inode_list_lock);
- 	iput(old_inode);
- }
-+
-+/*
-+ * Handle STATX_DIOALIGN for block devices.
-+ *
-+ * Note that the inode passed to this is the inode of a block device node file,
-+ * not the block device's internal inode.  Therefore it is *not* valid to use
-+ * I_BDEV() here; the block device has to be looked up by i_rdev instead.
-+ */
-+void bdev_statx_dioalign(struct inode *inode, struct kstat *stat)
-+{
-+	struct block_device *bdev;
-+
-+	bdev = blkdev_get_no_open(inode->i_rdev);
-+	if (!bdev)
-+		return;
-+
-+	stat->dio_mem_align = bdev_dma_alignment(bdev) + 1;
-+	stat->dio_offset_align = bdev_logical_block_size(bdev);
-+	stat->result_mask |= STATX_DIOALIGN;
-+
-+	blkdev_put_no_open(bdev);
-+}
-diff --git a/fs/stat.c b/fs/stat.c
-index a7930d74448304..ef50573c72a269 100644
---- a/fs/stat.c
-+++ b/fs/stat.c
-@@ -5,6 +5,7 @@
-  *  Copyright (C) 1991, 1992  Linus Torvalds
+ /**
+- * fscrypt_dio_supported() - check whether a DIO (direct I/O) request is
+- *			     supported as far as encryption is concerned
+- * @iocb: the file and position the I/O is targeting
+- * @iter: the I/O data segment(s)
++ * fscrypt_dio_supported() - check whether DIO (direct I/O) is supported on an
++ *			     inode, as far as encryption is concerned
++ * @inode: the inode in question
+  *
+  * Return: %true if there are no encryption constraints that prevent DIO from
+  *	   being supported; %false if DIO is unsupported.  (Note that in the
+  *	   %true case, the filesystem might have other, non-encryption-related
+- *	   constraints that prevent DIO from actually being supported.)
++ *	   constraints that prevent DIO from actually being supported.  Also, on
++ *	   encrypted files the filesystem is still responsible for only allowing
++ *	   DIO when requests are filesystem-block-aligned.)
   */
+-bool fscrypt_dio_supported(struct kiocb *iocb, struct iov_iter *iter)
++bool fscrypt_dio_supported(struct inode *inode)
+ {
+-	const struct inode *inode = file_inode(iocb->ki_filp);
+-	const unsigned int blocksize = i_blocksize(inode);
++	int err;
  
-+#include <linux/blkdev.h>
- #include <linux/export.h>
- #include <linux/mm.h>
- #include <linux/errno.h>
-@@ -230,11 +231,22 @@ static int vfs_statx(int dfd, struct filename *filename, int flags,
- 		goto out;
+ 	/* If the file is unencrypted, no veto from us. */
+ 	if (!fscrypt_needs_contents_encryption(inode))
+ 		return true;
  
- 	error = vfs_getattr(&path, stat, request_mask, flags);
-+
- 	stat->mnt_id = real_mount(path.mnt)->mnt_id;
- 	stat->result_mask |= STATX_MNT_ID;
-+
- 	if (path.mnt->mnt_root == path.dentry)
- 		stat->attributes |= STATX_ATTR_MOUNT_ROOT;
- 	stat->attributes_mask |= STATX_ATTR_MOUNT_ROOT;
-+
-+	/* Handle STATX_DIOALIGN for block devices. */
-+	if (request_mask & STATX_DIOALIGN) {
-+		struct inode *inode = d_backing_inode(path.dentry);
-+
-+		if (S_ISBLK(inode->i_mode))
-+			bdev_statx_dioalign(inode, stat);
+-	/* We only support DIO with inline crypto, not fs-layer crypto. */
+-	if (!fscrypt_inode_uses_inline_crypto(inode))
+-		return false;
+-
+ 	/*
+-	 * Since the granularity of encryption is filesystem blocks, the file
+-	 * position and total I/O length must be aligned to the filesystem block
+-	 * size -- not just to the block device's logical block size as is
+-	 * traditionally the case for DIO on many filesystems.
++	 * We only support DIO with inline crypto, not fs-layer crypto.
+ 	 *
+-	 * We require that the user-provided memory buffers be filesystem block
+-	 * aligned too.  It is simpler to have a single alignment value required
+-	 * for all properties of the I/O, as is normally the case for DIO.
+-	 * Also, allowing less aligned buffers would imply that data units could
+-	 * cross bvecs, which would greatly complicate the I/O stack, which
+-	 * assumes that bios can be split at any bvec boundary.
++	 * To determine whether the inode is using inline crypto, we have to set
++	 * up the key if it wasn't already done.  This is because in the current
++	 * design of fscrypt, the decision of whether to use inline crypto or
++	 * not isn't made until the inode's encryption key is being set up.  In
++	 * the DIO read/write case, the key will always be set up already, since
++	 * the file will be open.  But in the case of statx(), the key might not
++	 * be set up yet, as the file might not have been opened yet.
+ 	 */
+-	if (!IS_ALIGNED(iocb->ki_pos | iov_iter_alignment(iter), blocksize))
++	err = fscrypt_require_key(inode);
++	if (err) {
++		/*
++		 * Key unavailable or couldn't be set up.  This edge case isn't
++		 * worth worrying about; just report that DIO is unsupported.
++		 */
+ 		return false;
+-
+-	return true;
 +	}
-+
- 	path_put(&path);
- 	if (retry_estale(error, lookup_flags)) {
- 		lookup_flags |= LOOKUP_REVAL;
-diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
-index 84b13fdd34a716..8038c5fbde4099 100644
---- a/include/linux/blkdev.h
-+++ b/include/linux/blkdev.h
-@@ -1498,6 +1498,7 @@ int sync_blockdev(struct block_device *bdev);
- int sync_blockdev_range(struct block_device *bdev, loff_t lstart, loff_t lend);
- int sync_blockdev_nowait(struct block_device *bdev);
- void sync_bdevs(bool wait);
-+void bdev_statx_dioalign(struct inode *inode, struct kstat *stat);
- void printk_all_partitions(void);
- #else
- static inline void invalidate_bdev(struct block_device *bdev)
-@@ -1514,6 +1515,9 @@ static inline int sync_blockdev_nowait(struct block_device *bdev)
- static inline void sync_bdevs(bool wait)
- {
++	return fscrypt_inode_uses_inline_crypto(inode);
  }
-+static inline void bdev_statx_dioalign(struct inode *inode, struct kstat *stat)
-+{
-+}
- static inline void printk_all_partitions(void)
+ EXPORT_SYMBOL_GPL(fscrypt_dio_supported);
+ 
+diff --git a/fs/ext4/file.c b/fs/ext4/file.c
+index 109d07629f81fb..26d7426208970d 100644
+--- a/fs/ext4/file.c
++++ b/fs/ext4/file.c
+@@ -40,8 +40,13 @@ static bool ext4_dio_supported(struct kiocb *iocb, struct iov_iter *iter)
  {
+ 	struct inode *inode = file_inode(iocb->ki_filp);
+ 
+-	if (!fscrypt_dio_supported(iocb, iter))
+-		return false;
++	if (IS_ENCRYPTED(inode)) {
++		if (!fscrypt_dio_supported(inode))
++			return false;
++		if (!IS_ALIGNED(iocb->ki_pos | iov_iter_alignment(iter),
++				i_blocksize(inode)))
++			return false;
++	}
+ 	if (fsverity_active(inode))
+ 		return false;
+ 	if (ext4_should_journal_data(inode))
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 3c7cdb70fe2efc..0759da1919f4ad 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -4498,7 +4498,7 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	int rw = iov_iter_rw(iter);
+ 
+-	if (!fscrypt_dio_supported(iocb, iter))
++	if (!fscrypt_dio_supported(inode))
+ 		return true;
+ 	if (fsverity_active(inode))
+ 		return true;
+diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
+index 7d2f1e0f23b1fe..13598859d5b394 100644
+--- a/include/linux/fscrypt.h
++++ b/include/linux/fscrypt.h
+@@ -768,7 +768,7 @@ bool fscrypt_mergeable_bio(struct bio *bio, const struct inode *inode,
+ bool fscrypt_mergeable_bio_bh(struct bio *bio,
+ 			      const struct buffer_head *next_bh);
+ 
+-bool fscrypt_dio_supported(struct kiocb *iocb, struct iov_iter *iter);
++bool fscrypt_dio_supported(struct inode *inode);
+ 
+ u64 fscrypt_limit_io_blocks(const struct inode *inode, u64 lblk, u64 nr_blocks);
+ 
+@@ -801,11 +801,8 @@ static inline bool fscrypt_mergeable_bio_bh(struct bio *bio,
+ 	return true;
  }
+ 
+-static inline bool fscrypt_dio_supported(struct kiocb *iocb,
+-					 struct iov_iter *iter)
++static inline bool fscrypt_dio_supported(struct inode *inode)
+ {
+-	const struct inode *inode = file_inode(iocb->ki_filp);
+-
+ 	return !fscrypt_needs_contents_encryption(inode);
+ }
+ 
 -- 
 2.37.2
 
