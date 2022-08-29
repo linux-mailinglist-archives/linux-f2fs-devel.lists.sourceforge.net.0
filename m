@@ -2,100 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40F3E5A57A6
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Aug 2022 01:33:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74BEB5A583D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Aug 2022 01:55:03 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oSoGF-0007h7-20;
-	Mon, 29 Aug 2022 23:33:43 +0000
+	id 1oSoap-0007zi-Ix;
+	Mon, 29 Aug 2022 23:54:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3zEwNYwkbALkrxyjZkkdqZoohc.fnnfkdtrdqbnmsdms.bnl@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1oSoGD-0007gx-Rb for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Aug 2022 23:33:41 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <rdunlap@infradead.org>) id 1oSoao-0007zc-I0
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 29 Aug 2022 23:54:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+R+0POhYwWHNdAeI2INPDZ+vmXYXil0g1qA/NRpeirA=; b=AIRFMpWk4PGBpamycd+/eYibOo
- MtvUXwOQvWYjWXdebwCvUDTBtZSrgFd+0h5F2U4sAmNnTQamTGr+LkqLhf1XmjwIY7zTnEMXZxoMW
- s7XFZgvVx++pdJQWTJ5cEZAM4i4oyvwlSHxuRXJQSSaKg702JQRBOIttpDNUEOyVaz5c=;
+ bh=9jNTVvjMRAW6grFHfLBzo2F+51I1/cIt+X3djvXT2II=; b=lLM8DEfB99XGipAgcKP7vZc7lK
+ Uwc85YPAGa0EpndjJQR8b6TP1kMF4FMh4CRZTtcJIpDFjRULQQF9sCsxZH1NDNQQmwPac3E3Cnxz/
+ UdtUqJYIQs57ErEaIbQzPfxAVaZ+o8t50K9gan6Sv3JiPxM2oMU3Qo8TJL0EbSUjfY6M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=+R+0POhYwWHNdAeI2INPDZ+vmXYXil0g1qA/NRpeirA=; b=O
- YTyctfiEAZUfQ7eerN20xIrFF/vaDjroTPgS+9Io10VdtyHrQbxSPVni8k2xPJyD2xdJGt90Q1uGf
- upGXbHhLRcLzRkC8oL8To5zhNnesaA3oTz1IErJ5PHxxPk+9P9wEiwjv4bdnCydXFNcLMvH6jaHhc
- jT+ijTdmwZ195KTM=;
-Received: from mail-io1-f71.google.com ([209.85.166.71])
+ List-Owner:List-Archive; bh=9jNTVvjMRAW6grFHfLBzo2F+51I1/cIt+X3djvXT2II=; b=l
+ /jfFOR6zm8mWxk8vOMdTdfsousQZbEOrE0dvlr6M2FeyagSUIi0b2eAP0X5EZmG+Fj6KnFQTnWoK/
+ cMKzHy811pORex47fXNmtWqFSDvVF4BpGlMe+mOesfIflMZEE65HJztIwTgEVpdEg0RUnYIAnLOx1
+ 9H5+NtJhBOLLrbBs=;
+Received: from [90.155.50.34] (helo=casper.infradead.org)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1oSoGB-006u5O-C1 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Aug 2022 23:33:41 +0000
-Received: by mail-io1-f71.google.com with SMTP id
- g12-20020a5d8c8c000000b006894fb842e3so5666263ion.21
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 29 Aug 2022 16:33:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc;
- bh=+R+0POhYwWHNdAeI2INPDZ+vmXYXil0g1qA/NRpeirA=;
- b=JzPbZ+evu7uHpTcwTuP/+fUo8y+a4pme6swaO8+Z0P3irS4Gnn6UkUf8ptFgIGmUWI
- 9i7IRGvLqCOGC63ro2Jl/DTxG4M7IPEq4VZJvwwEvxzJUVCh5I4FKuEYn3GhDjt2zVai
- zWMqLCJ5oqHMO8Q19JW+AZmIYu2VdCgX0EAAehNhTnPGHsc+Hus1D45zgGs6wkVOhzKQ
- sIL3GSSEYMBkOMjR2Jf4qAP9PSRU4BuMq1Y4dVRKzrkHQeKD6DxxlMdt8cQlPcXo86O3
- F7GXvdS+TiLkZ5Vsnv3DoN2IL9/t32nBRGXlYT256U+dwTEned5H8GXUrlm3lCltDtF8
- zmbA==
-X-Gm-Message-State: ACgBeo2MbF5QzjpOs+8Sk9xD9BAL8DsEQ9yFyW0ZTsnwS2aIYb/81SN+
- sv8Hx4RqJKfcfdObEhtIeT06+r0ynEBcPRKw+lMlmrocJW8h
-X-Google-Smtp-Source: AA6agR76/ewUy/7FdUKWGxvetl2NLw9y3QxJ5/AYU0oDq6bhMKrKOp6UUn5+ZCUuiTKrblwx5vbCaze5AQefABcZycNQYHVckGbK
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1oSoaj-006v9Q-AH for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 29 Aug 2022 23:54:58 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+ Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:In-Reply-To:References;
+ bh=9jNTVvjMRAW6grFHfLBzo2F+51I1/cIt+X3djvXT2II=; b=T58qP97pKEyA1GKZgxVdQ9glHA
+ MPSrOCjD6FQsyq1DA/MJj+EGg1/rMoM3bKlxfpiR4QsXgR1tTGxyh8g+y/brA4Ae0AYNkkrfGaL53
+ E7bIR/mKnk+FMW1U6/1RVBZk1nORPnbrd9xs7eJkAXfO6kmTZbaCzQcA1FcAm5GMMzfg7wmA4cO8c
+ oFSejiPfXIp4DDOF5SywFtc2LMlpzJZh08RV4SV+POPKIxRWSAlg9HRglc9QXZMQ5yKjuiBquWagV
+ iyVRDuaE5VMr+pGTGlyVxmtvgALJUSmbc/WujflaVOdJNGDGF6Lsx1MgSASyuNEDoVAqQJJ08Lrwx
+ 5XjzLG0g==;
+Received: from [2601:1c0:6280:3f0::a6b3] (helo=casper.infradead.org)
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1oSoaQ-003WLW-OL; Mon, 29 Aug 2022 23:54:35 +0000
+From: Randy Dunlap <rdunlap@infradead.org>
+To: linux-doc@vger.kernel.org
+Date: Mon, 29 Aug 2022 16:54:29 -0700
+Message-Id: <20220829235429.17902-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-X-Received: by 2002:a92:c569:0:b0:2eb:5c94:9a1c with SMTP id
- b9-20020a92c569000000b002eb5c949a1cmr186312ilj.135.1661816012188; Mon, 29 Aug
- 2022 16:33:32 -0700 (PDT)
-Date: Mon, 29 Aug 2022 16:33:32 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <00000000000016b90805e769b1d2@google.com>
-From: syzbot <syzbot+81684812ea68216e08c5@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+X-Spam-Score: 1.1 (+)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: a41a877bc12d
- Merge branch 'for-next/fixes' into for-kernelci git tree:
- git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
- for-kernelci console output: https://syzkaller.appspot [...] 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  Change occurrences of "it's" that are possessive to "its"
+ so that they don't read as "it is". Signed-off-by: Randy Dunlap
+ <rdunlap@infradead.org>
+ Cc: Jonathan Corbet <corbet@lwn.net> Cc: linux-fsdevel@vger.kernel.org Cc:
+ linux-f2fs-devel@lists.sourceforge.net Cc: linux-xfs@vger.kernel.org Cc:
+ [...] Content analysis details:   (1.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.71 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.71 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1oSoGB-006u5O-C1
-Subject: [f2fs-dev] [syzbot] kernel BUG in f2fs_init_xattr_caches
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
+X-Headers-End: 1oSoaj-006v9Q-AH
+Subject: [f2fs-dev] [PATCH] Documentation: filesystems: correct possessive
+ "its"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,94 +97,92 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Christian Brauner <brauner@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Randy Dunlap <rdunlap@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Seth Forshee <sforshee@kernel.org>,
+ linux-fsdevel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+Change occurrences of "it's" that are possessive to "its"
+so that they don't read as "it is".
 
-syzbot found the following issue on:
-
-HEAD commit:    a41a877bc12d Merge branch 'for-next/fixes' into for-kernelci
-git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
-console output: https://syzkaller.appspot.com/x/log.txt?x=13a4e48b080000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=5cea15779c42821c
-dashboard link: https://syzkaller.appspot.com/bug?extid=81684812ea68216e08c5
-compiler:       Debian clang version 13.0.1-++20220126092033+75e33f71c2da-1~exp1~20220126212112.63, GNU ld (GNU Binutils for Debian) 2.35.2
-userspace arch: arm64
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=114f2fa3080000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=17cd7fa3080000
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+81684812ea68216e08c5@syzkaller.appspotmail.com
-
-loop0: detected capacity change from 0 to 20
- loop0: unable to read partition table
-loop0: partition table beyond EOD, truncated
-F2FS-fs (loop0): Magic Mismatch, valid(0xf2f52010) - read(0x0)
-F2FS-fs (loop0): Can't find valid F2FS filesystem in 1th superblock
-------------[ cut here ]------------
-kernel BUG at mm/slub.c:5893!
-Internal error: Oops - BUG: 0 [#1] PREEMPT SMP
-Modules linked in:
-CPU: 1 PID: 3038 Comm: syz-executor368 Not tainted 6.0.0-rc2-syzkaller-16455-ga41a877bc12d #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/22/2022
-pstate: 60400005 (nZCv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-pc : create_unique_id mm/slub.c:5973 [inline]
-pc : sysfs_slab_add+0x258/0x260 mm/slub.c:5950
-lr : kmalloc include/linux/slab.h:600 [inline]
-lr : create_unique_id mm/slub.c:5890 [inline]
-lr : sysfs_slab_add+0xa0/0x260 mm/slub.c:5950
-sp : ffff80001288b990
-x29: ffff80001288b990 x28: ffff0000c9717380 x27: ffff0000c376cd00
-x26: 0000000000020000 x25: ffff80000eee7000 x24: ffff80000eef6000
-x23: 0000000000000000 x22: ffff0000c1be5b00 x21: 0000000000000008
-x20: ffff0000c376cd00 x19: ffff0000c376cd00 x18: 0000000000000000
-x17: 0000000000000000 x16: ffff80000dbb8658 x15: ffff0000c6ae4f80
-x14: 0000000000000010 x13: 0000000000000000 x12: ffff0000c6ae4f80
-x11: ff808000095ee038 x10: 0000000000000000 x9 : 0cbee7d022858900
-x8 : 0cbee7d022858900 x7 : ffff8000084b7280 x6 : 0000000000000000
-x5 : 0000000000000cc0 x4 : 0000000000000080 x3 : 0000000000000040
-x2 : ffff0000c0001200 x1 : ffff80000cb90cf9 x0 : 0000000000000000
-Call trace:
- sysfs_slab_add+0x258/0x260 mm/slub.c:5973
- __kmem_cache_create+0x60/0x118 mm/slub.c:4899
- create_cache mm/slab_common.c:229 [inline]
- kmem_cache_create_usercopy+0x19c/0x31c mm/slab_common.c:335
- kmem_cache_create+0x1c/0x28 mm/slab_common.c:390
- f2fs_kmem_cache_create fs/f2fs/f2fs.h:2766 [inline]
- f2fs_init_xattr_caches+0x78/0xb4 fs/f2fs/xattr.c:808
- f2fs_fill_super+0x1050/0x1e0c fs/f2fs/super.c:4149
- mount_bdev+0x1b8/0x210 fs/super.c:1400
- f2fs_mount+0x44/0x58 fs/f2fs/super.c:4512
- legacy_get_tree+0x30/0x74 fs/fs_context.c:610
- vfs_get_tree+0x40/0x140 fs/super.c:1530
- do_new_mount+0x1dc/0x4e4 fs/namespace.c:3040
- path_mount+0x358/0x914 fs/namespace.c:3370
- do_mount fs/namespace.c:3383 [inline]
- __do_sys_mount fs/namespace.c:3591 [inline]
- __se_sys_mount fs/namespace.c:3568 [inline]
- __arm64_sys_mount+0x2f8/0x408 fs/namespace.c:3568
- __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
- invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
- el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
- do_el0_svc+0x48/0x154 arch/arm64/kernel/syscall.c:206
- el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:624
- el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:642
- el0t_64_sync+0x18c/0x190
-Code: a9415ff8 a8c47bfd d50323bf d65f03c0 (d4210000) 
----[ end trace 0000000000000000 ]---
-
-
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-fsdevel@vger.kernel.org
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-xfs@vger.kernel.org
+Cc: Christian Brauner <brauner@kernel.org>
+Cc: Seth Forshee <sforshee@kernel.org>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ Documentation/filesystems/f2fs.rst                       |    2 +-
+ Documentation/filesystems/idmappings.rst                 |    2 +-
+ Documentation/filesystems/qnx6.rst                       |    2 +-
+ Documentation/filesystems/xfs-delayed-logging-design.rst |    6 +++---
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-syzbot can test patches for this issue, for details see:
-https://goo.gl/tpsmEJ#testing-patches
+--- a/Documentation/filesystems/f2fs.rst
++++ b/Documentation/filesystems/f2fs.rst
+@@ -287,7 +287,7 @@ compress_algorithm=%s:%d Control compres
+ 			 lz4		3 - 16
+ 			 zstd		1 - 22
+ compress_log_size=%u	 Support configuring compress cluster size, the size will
+-			 be 4KB * (1 << %u), 16KB is minimum size, also it's
++			 be 4KB * (1 << %u), 16KB is minimum size, also its
+ 			 default size.
+ compress_extension=%s	 Support adding specified extension, so that f2fs can enable
+ 			 compression on those corresponding files, e.g. if all files
+--- a/Documentation/filesystems/idmappings.rst
++++ b/Documentation/filesystems/idmappings.rst
+@@ -661,7 +661,7 @@ idmappings::
+  mount idmapping:      u0:k10000:r10000
+ 
+ Assume a file owned by ``u1000`` is read from disk. The filesystem maps this id
+-to ``k21000`` according to it's idmapping. This is what is stored in the
++to ``k21000`` according to its idmapping. This is what is stored in the
+ inode's ``i_uid`` and ``i_gid`` fields.
+ 
+ When the caller queries the ownership of this file via ``stat()`` the kernel
+--- a/Documentation/filesystems/qnx6.rst
++++ b/Documentation/filesystems/qnx6.rst
+@@ -176,7 +176,7 @@ Then userspace.
+ The requirement for a static, fixed preallocated system area comes from how
+ qnx6fs deals with writes.
+ 
+-Each superblock got it's own half of the system area. So superblock #1
++Each superblock got its own half of the system area. So superblock #1
+ always uses blocks from the lower half while superblock #2 just writes to
+ blocks represented by the upper half bitmap system area bits.
+ 
+--- a/Documentation/filesystems/xfs-delayed-logging-design.rst
++++ b/Documentation/filesystems/xfs-delayed-logging-design.rst
+@@ -551,14 +551,14 @@ Essentially, this shows that an item tha
+ and relogged, so any tracking must be separate to the AIL infrastructure. As
+ such, we cannot reuse the AIL list pointers for tracking committed items, nor
+ can we store state in any field that is protected by the AIL lock. Hence the
+-committed item tracking needs it's own locks, lists and state fields in the log
++committed item tracking needs its own locks, lists and state fields in the log
+ item.
+ 
+ Similar to the AIL, tracking of committed items is done through a new list
+ called the Committed Item List (CIL).  The list tracks log items that have been
+ committed and have formatted memory buffers attached to them. It tracks objects
+ in transaction commit order, so when an object is relogged it is removed from
+-it's place in the list and re-inserted at the tail. This is entirely arbitrary
++its place in the list and re-inserted at the tail. This is entirely arbitrary
+ and done to make it easy for debugging - the last items in the list are the
+ ones that are most recently modified. Ordering of the CIL is not necessary for
+ transactional integrity (as discussed in the next section) so the ordering is
+@@ -884,7 +884,7 @@ pin the object the first time it is inse
+ the CIL during a transaction commit, then we do not pin it again. Because there
+ can be multiple outstanding checkpoint contexts, we can still see elevated pin
+ counts, but as each checkpoint completes the pin count will retain the correct
+-value according to it's context.
++value according to its context.
+ 
+ Just to make matters more slightly more complex, this checkpoint level context
+ for the pin count means that the pinning of an item must take place under the
 
 
 _______________________________________________
