@@ -2,84 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C18525A5688
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Aug 2022 23:52:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE0125A56EE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Aug 2022 00:16:24 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oSmgB-0003hK-9R;
-	Mon, 29 Aug 2022 21:52:23 +0000
+	id 1oSn3K-00045N-9k;
+	Mon, 29 Aug 2022 22:16:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1oSmg9-0003hE-6A
+ (envelope-from <jaegeuk@kernel.org>) id 1oSn3J-00045G-3K
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Aug 2022 21:52:21 +0000
+ Mon, 29 Aug 2022 22:16:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sipA4Bl6qZCNqNt7HIBeH1q0sfD0CXnhVp7xO476/uw=; b=Pvaoty48VR0OTbcLlyWKmOIjbu
- HjwpuxU6NiX/wR8kBQ8Pc5OpnfD6gXNu6HjTcoLeuu78RrS3nRh3NYUW6KrodnHqoxwY1blMrwRJI
- sgzt7i1ZOVPaPLWbT/gVaqb+b+f1ZxXCYzOCWtD0XPheTfnYPoXRFMRpVXiInN2CD9qA=;
+ bh=KI4qVcTxfFxO7G9po6MxhhknBX4muiT4/7YCdHw0QYU=; b=cELewWgBPFDW8Irg5sU2V4Rjht
+ apIlZFjctgS5qcIi1Zorr+1gfD9A+ao+tLPs6sedvfAWzvb5Q45P2rX2VdFgXUwIZ/S+aypvGzsnD
+ o9mci8Z6eYEKp/ImkRhyCLMqsEY/1xhKOYyNHDDPCLGgWp2mTcoVtDNPMOvwWahXNgU8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=sipA4Bl6qZCNqNt7HIBeH1q0sfD0CXnhVp7xO476/uw=; b=f
- OThrffuxxuM4EkkVNFYlnESoNsNZefSS/NmPRPv9LS73zZVBuf7/xh8xqws9rYCspIKhP91FoVX92
- A5++lSxZzoTq+iyr4jKKthIHEvUYReBvF+wemSeOfF61rnjDi5yKNoJTJKYmp861XLog/gNCmVGyf
- elFhVlv2O12VKZvQ=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=KI4qVcTxfFxO7G9po6MxhhknBX4muiT4/7YCdHw0QYU=; b=cM0HIkqeszDZDImbPNmxYlagq7
+ RgSgNi7AcPB6/Wjn8Kc0hY682utAS7FwzP0O+1NcBOUBbyTsJBUu6Wh088FLM359v9f56P5UHCceX
+ NkMc3srGHO4FDp0VDLqP9HeZWMfGUFDuzsN+m7+PBe0NHluzu+08RK62X0OT2bQ7Nqvo=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oSmg7-00073m-Fa for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Aug 2022 21:52:20 +0000
+ id 1oSn3F-0007xK-2X for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 29 Aug 2022 22:16:15 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 452D4612A4;
- Mon, 29 Aug 2022 21:52:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 031F3C433D7;
- Mon, 29 Aug 2022 21:52:08 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id A2E86612D8;
+ Mon, 29 Aug 2022 22:16:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3956C433D6;
+ Mon, 29 Aug 2022 22:16:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1661809929;
- bh=7Jc9lfPSa/RKCHMNGaoGKZTxV4IfoIxki5b/Q03tyDQ=;
- h=From:To:Cc:Subject:Date:From;
- b=SBNcYUJCWANaShZsh03IOumNVt1m4+Oo46saZ+khMm3JsraoWL8gGyWo5X8JzfRDB
- d8zeBvX4xqy65EX/AkiqwhQNjaC7E6i2aki4h51ll8ahHjzsaJ0JsQ5SF9CFm6Tb1K
- OFS+E+bQlebrJ72yPfWdBlR5l0hoKbPaIle8GrvQT96lcYWkfrp9strViU+yWHb8MX
- D1rTO5n25wRZr4mqabXFyYdc9iC1TdjKNVdBfHaBTl6T1UBxpFfLx4B/rp7oCj13bK
- DPXO5AV8VXi6OTuSOBJ41rzZQYftVdpyzNSgEXT3PlQlPE8ixfoiqF/NWjOMxuxzlY
- FQDlek4I0o54A==
+ s=k20201202; t=1661811367;
+ bh=SbZY2Ettf4LTcLHy4RTiGfA66pT4iGgGVNZvttK6X6A=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=hberr4MnAwZ0BIarQ4lOME0fhde2cfRAc5LiGXmEEuGsD56s2AeRPZhNOStncM8OB
+ WdqdBUj2p05xZqErxqtD4Te6U0Ui/rpLKlhGJiKgTGb+RYTlSX6wF4BhWJz4/r4HWn
+ TTjnZsG6574vq0cqGmtEQ78VsGQvjaCnN994SMGOjwdMcRw4HUc797tf/+c588oGNb
+ HMlTwBeJk2AHKHblLMFQn7vllDj6GftUYdeCvzNUJc7+BIeUoVv73jcAa92ILTPbqC
+ txgN/g/OGCtnLOJKsx0SBT/SONzi0JPY23NQi2chuIA2kkT4XboWm9w0kSqGGfZruh
+ GP56mz5a8OMwg==
+Date: Mon, 29 Aug 2022 15:16:05 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 29 Aug 2022 14:52:06 -0700
-Message-Id: <20220829215206.3082124-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.37.2.672.g94769d06f0-goog
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <Yw06paMIdn04pM5p@google.com>
+References: <000000000000d5b4fe05e7127662@google.com>
+ <20220825183734.0b08ae10a2e9e1bd156a19cd@linux-foundation.org>
+ <Ywz8+WUhypEiUfvk@google.com>
+ <Ywz/ZLYqoq85Yrhc@casper.infradead.org>
+ <Yw0Gpn8D3cWr/U95@google.com>
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+Content-Disposition: inline
+In-Reply-To: <Yw0Gpn8D3cWr/U95@google.com>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Sometimes we can get a cached meta_inode which has no aops
- yet. Let's set it all the time to fix the below panic. Unable to handle kernel
- NULL pointer dereference at virtual address 0000000000000000 Mem abort info:
- ESR = 0x0000000086000004 EC = 0x21: IABT (current EL), IL = 32 bits SET =
- 0, FnV = 0 EA = 0, S1PTW [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 08/29, Jaegeuk Kim wrote: > On 08/29,
+ Matthew Wilcox wrote:
+ > > On Mon, Aug 29, 2022 at 10:52:57AM -0700, Jaegeuk Kim wrote: > > > On
+ 08/25, Andrew Morton wrote: > > > > (cc fsf2 developers) > > > [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -89,10 +93,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oSmg7-00073m-Fa
-Subject: [f2fs-dev] [PATCH] f2fs: fix missing mapping caused by the
- mount/umount race
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oSn3F-0007xK-2X
+Subject: Re: [f2fs-dev] [syzbot] BUG: unable to handle kernel NULL pointer
+ dereference in set_page_dirty
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,97 +109,109 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>,
- syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com, stable@vger.kernel.org
+Cc: syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
+ syzbot <syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Sometimes we can get a cached meta_inode which has no aops yet. Let's set it
-all the time to fix the below panic.
+On 08/29, Jaegeuk Kim wrote:
+> On 08/29, Matthew Wilcox wrote:
+> > On Mon, Aug 29, 2022 at 10:52:57AM -0700, Jaegeuk Kim wrote:
+> > > On 08/25, Andrew Morton wrote:
+> > > > (cc fsf2 developers)
+> > > > 
+> > > > On Thu, 25 Aug 2022 08:29:32 -0700 syzbot <syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com> wrote:
+> > > > 
+> > > > > Hello,
+> > > > > 
+> > > > > syzbot found the following issue on:
+> > > > > 
+> > > > > HEAD commit:    a41a877bc12d Merge branch 'for-next/fixes' into for-kernelci
+> > > > > git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
+> > > > > console output: https://syzkaller.appspot.com/x/log.txt?x=175def47080000
+> > > > > kernel config:  https://syzkaller.appspot.com/x/.config?x=5cea15779c42821c
+> > > > > dashboard link: https://syzkaller.appspot.com/bug?extid=775a3440817f74fddb8c
+> > > > > compiler:       Debian clang version 13.0.1-++20220126092033+75e33f71c2da-1~exp1~20220126212112.63, GNU ld (GNU Binutils for Debian) 2.35.2
+> > > > > userspace arch: arm64
+> > > > > 
+> > > > > Unfortunately, I don't have any reproducer for this issue yet.
+> > > > > 
+> > > > > IMPORTANT: if you fix the issue, please add the following tag to the commit:
+> > > > > Reported-by: syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com
+> > > > > 
+> > > > > Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
+> > > > > Mem abort info:
+> > > > >   ESR = 0x0000000086000005
+> > > > >   EC = 0x21: IABT (current EL), IL = 32 bits
+> > > > >   SET = 0, FnV = 0
+> > > > >   EA = 0, S1PTW = 0
+> > > > >   FSC = 0x05: level 1 translation fault
+> > > > > user pgtable: 4k pages, 48-bit VAs, pgdp=00000001249cc000
+> > > > > [0000000000000000] pgd=080000012ee65003, p4d=080000012ee65003, pud=0000000000000000
+> > > > > Internal error: Oops: 86000005 [#1] PREEMPT SMP
+> > > > > Modules linked in:
+> > > > > CPU: 0 PID: 3044 Comm: syz-executor.0 Not tainted 6.0.0-rc2-syzkaller-16455-ga41a877bc12d #0
+> > > > > Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 06/20/2022
+> > > > > pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+> > > > > pc : 0x0
+> > > > > lr : folio_mark_dirty+0xbc/0x208 mm/page-writeback.c:2748
+> > > > > sp : ffff800012803830
+> > > > > x29: ffff800012803830 x28: ffff0000d02c8000 x27: 0000000000000009
+> > > > > x26: 0000000000000001 x25: 0000000000000a00 x24: 0000000000000080
+> > > > > x23: 0000000000000000 x22: ffff0000ef276c00 x21: 05ffc00000000007
+> > > > > x20: ffff0000f14b83b8 x19: fffffc00036409c0 x18: fffffffffffffff5
+> > > > > x17: ffff80000dd7a698 x16: ffff80000dbb8658 x15: 0000000000000000
+> > > > > x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+> > > > > x11: ff808000083e9814 x10: 0000000000000000 x9 : ffff8000083e9814
+> > > > > x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+> > > > > x5 : ffff0000d9028000 x4 : ffff0000d5c31000 x3 : ffff0000d9027f80
+> > > > > x2 : fffffffffffffff0 x1 : fffffc00036409c0 x0 : ffff0000f14b83b8
+> > > > > Call trace:
+> > > > >  0x0
+> > > > >  set_page_dirty+0x38/0xbc mm/folio-compat.c:62
+> > > 
+> > > 2363 void f2fs_update_meta_page(struct f2fs_sb_info *sbi,
+> > > 2364                                         void *src, block_t blk_addr)
+> > > 2365 {       
+> > > 2366         struct page *page = f2fs_grab_meta_page(sbi, blk_addr);
+> > > 
+> > > --> f2fs_grab_meta_page() gives a locked page by grab_cache_page().
+> > > 
+> > > 2367                                                         
+> > > 2368         memcpy(page_address(page), src, PAGE_SIZE);
+> > > 2369         set_page_dirty(page);
+> > > 2370         f2fs_put_page(page, 1);
+> > > 2371 } 
+> > > 
+> > > Is there a change in folio?
+> > 
+> > Not directly, but there was a related change, 0af573780b0b which
+> > requires aops->set_page_dirty to be set; is that perhaps missing?
+> > I don't see one in the f2fs_compress_aops, for example.
+> 
+> Do you mean dirty_folio? I think all aops have it except the compressed one
+> that we don't make it dirty.
+> 
+> > 
+> > The other possibiity is that it's a mapping that is missing an ->a_ops.
+> > Is that something f2fs ever does?
+> 
+> Hmm, no, I haven't seen this before, and we set aops when mounting the
+> file system. Ah, if this happens on the corrupted image, yeah, maybe.. I need
+> to check the error path in f2fs_fill_super.
 
-Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
-Mem abort info:
-  ESR = 0x0000000086000004
-  EC = 0x21: IABT (current EL), IL = 32 bits
-  SET = 0, FnV = 0
-  EA = 0, S1PTW = 0
-  FSC = 0x04: level 0 translation fault
-user pgtable: 4k pages, 48-bit VAs, pgdp=0000000109ee4000
-[0000000000000000] pgd=0000000000000000, p4d=0000000000000000
-Internal error: Oops: 86000004 [#1] PREEMPT SMP
-Modules linked in:
-CPU: 1 PID: 3045 Comm: syz-executor330 Not tainted 6.0.0-rc2-syzkaller-16455-ga41a877bc12d #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/22/2022
-pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-pc : 0x0
-lr : folio_mark_dirty+0xbc/0x208 mm/page-writeback.c:2748
-sp : ffff800012783970
-x29: ffff800012783970 x28: 0000000000000000 x27: ffff800012783b08
-x26: 0000000000000001 x25: 0000000000000400 x24: 0000000000000001
-x23: ffff0000c736e000 x22: 0000000000000045 x21: 05ffc00000000015
-x20: ffff0000ca7403b8 x19: fffffc00032ec600 x18: 0000000000000181
-x17: ffff80000c04d6bc x16: ffff80000dbb8658 x15: 0000000000000000
-x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
-x11: ff808000083e9814 x10: 0000000000000000 x9 : ffff8000083e9814
-x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
-x5 : ffff0000cbb19000 x4 : ffff0000cb3d2000 x3 : ffff0000cbb18f80
-x2 : fffffffffffffff0 x1 : fffffc00032ec600 x0 : ffff0000ca7403b8
-Call trace:
- 0x0
- set_page_dirty+0x38/0xbc mm/folio-compat.c:62
- f2fs_update_meta_page+0x80/0xa8 fs/f2fs/segment.c:2369
- do_checkpoint+0x794/0xea8 fs/f2fs/checkpoint.c:1522
- f2fs_write_checkpoint+0x3b8/0x568 fs/f2fs/checkpoint.c:1679
+Fixed by https://lore.kernel.org/linux-f2fs-devel/20220829215206.3082124-1-jaegeuk@kernel.org/T/#u
 
-Cc: stable@vger.kernel.org
-Reported-by: syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/inode.c | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
-
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 6d11c365d7b4..1feb0a8a699e 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -490,10 +490,7 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
- 	if (!inode)
- 		return ERR_PTR(-ENOMEM);
- 
--	if (!(inode->i_state & I_NEW)) {
--		trace_f2fs_iget(inode);
--		return inode;
--	}
-+	/* We can see an old cached inode. Let's set the aops all the time. */
- 	if (ino == F2FS_NODE_INO(sbi) || ino == F2FS_META_INO(sbi))
- 		goto make_now;
- 
-@@ -502,6 +499,11 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
- 		goto make_now;
- #endif
- 
-+	if (!(inode->i_state & I_NEW)) {
-+		trace_f2fs_iget(inode);
-+		return inode;
-+	}
-+
- 	ret = do_read_inode(inode);
- 	if (ret)
- 		goto bad_inode;
-@@ -557,7 +559,8 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
- 		file_dont_truncate(inode);
- 	}
- 
--	unlock_new_inode(inode);
-+	if (inode->i_state & I_NEW)
-+		unlock_new_inode(inode);
- 	trace_f2fs_iget(inode);
- 	return inode;
- 
--- 
-2.37.2.672.g94769d06f0-goog
-
+> 
+> > 
+> > I only managed to narrow down the crash to the line:
+> >                 return mapping->a_ops->dirty_folio(mapping, folio);
+> > so either mapping->a_ops is NULL or mapping->a_ops->dirty_folio is
+> > NULL.  The reproducer was on ARM and ARM doesn't emit a 'Code:' line,
+> > unlike x86.
 
 
 _______________________________________________
