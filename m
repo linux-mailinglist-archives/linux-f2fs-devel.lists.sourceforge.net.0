@@ -2,88 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A28B45A4E0B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Aug 2022 15:28:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BD275A5348
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 Aug 2022 19:36:30 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oSeo3-0002P0-BC;
-	Mon, 29 Aug 2022 13:27:59 +0000
+	id 1oSigR-0004fn-Sl;
+	Mon, 29 Aug 2022 17:36:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhangqilong3@huawei.com>) id 1oSeo1-0002Ou-Ga
+ (envelope-from <jaegeuk@kernel.org>) id 1oSigQ-0004fg-3f
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Aug 2022 13:27:57 +0000
+ Mon, 29 Aug 2022 17:36:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=p3Z4XCtJFdFSPoD+jyFBEnQNjWdIe1+Yhr+43rv48nE=; b=B8SV49rik7ar0zWHrmav2fudIs
- XPsNsqoU/yA5QMYCaM97ZGb4v2NpXLfY5qtoLOF26p2lAMupbRI/krDxlGC9rYeObq+NrqovHU7t+
- 8RA//tdaH12gmDKd7o7+7MHw3djGDtvCycGCQR9jzj0bawhAMaqxeBhf310Bb2thZWj8=;
+ bh=cCoDmPPGUWi2TaE2u+WE8+bOYVsn1a40EouY9fKWml8=; b=j7Db5iotx4Jj8kK/HeWL5zVUT1
+ eyVuUytxTh1sa49F6GUiHh2dRZPrMiycRMLjO4Ht/1b6OOJKma9LV5iAAHqjE7dJHraGchqBKmbSx
+ y3hZ0uFVriOpq5FKW35D6rDAwkpgBsk+tFXlyv2X0jzQdnIrSzi23cfcsVVbfNFXDSQQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=p3Z4XCtJFdFSPoD+jyFBEnQNjWdIe1+Yhr+43rv48nE=; b=Y
- j0GyTNvDAmhxBL9cubgQVx90v/QoGUgP5xN/LyokftnVbEAz7wMH/d8QWlKg3X8lW5RRCAC09RAJp
- ZZZC/hPWQyzUeWXFsuMT2JM5uyjPNGKTzGZO4m02ZGmvJ1G7VOe2ehGdS/RzoDFWXAU7BFqT504h5
- Cpgxy93BM9MBn9EY=;
-Received: from szxga02-in.huawei.com ([45.249.212.188])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=cCoDmPPGUWi2TaE2u+WE8+bOYVsn1a40EouY9fKWml8=; b=Zd2NfyTD7mNjmWW5jANCO2cmVV
+ UwTy2/ZNmt0WLnFSyzn+4f2+nSzp7ChjQNt50pvuhujHxXfbXpQ1i797kBb6pmTysbk+7WFUikwS7
+ LJeo21ZLE/eymNZf3Ak1au4HxW/0RJoP6ACEukOUV2jEO1PcsnW5atcQmh9np4RzrsrY=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oSenz-006RSF-JR for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 Aug 2022 13:27:57 +0000
-Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.54])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4MGWPN6pG4zlWXK;
- Mon, 29 Aug 2022 21:24:24 +0800 (CST)
-Received: from kwepemm600014.china.huawei.com (7.193.23.54) by
- dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Mon, 29 Aug 2022 21:27:46 +0800
-Received: from huawei.com (10.90.53.225) by kwepemm600014.china.huawei.com
- (7.193.23.54) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Mon, 29 Aug
- 2022 21:27:46 +0800
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Mon, 29 Aug 2022 21:31:20 +0800
-Message-ID: <20220829133120.100373-1-zhangqilong3@huawei.com>
-X-Mailer: git-send-email 2.26.0.106.g9fadedd
+ id 1oSigP-006duS-5o for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 29 Aug 2022 17:36:21 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 21523B8119D
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 29 Aug 2022 17:36:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 862B4C433B5;
+ Mon, 29 Aug 2022 17:36:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1661794572;
+ bh=rsrie5xAIPERRfy5hV2/lMm7+uIPsinOty7KExwvFfI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=OZI38IqpeQLjkNktjbjkZgbz8ZZ7HJoB8Tea+n9Y1xRKTO/HyDpMNuAzHVsLOMW75
+ y7XmNUll7k9IlOpkFVIKUPeVhQTzXE7bA7F3FiNVjDZAcG1AoivaphkxETl1B+Cq7x
+ T5mDVb1ehKN6HDtTLZKJjHI/j9A37GVoqSezA4k2ffmkzvg3U4x12+5R57HMHDPY+i
+ RgVGOf9pfgD26/6OJcurpLwBP4+nLfqbkfgUY7WkfyKsmiTThx7Bz4pfjhv7vKRD4v
+ 8nwYlpYJ24uSsiO0U345SWUqnGRZDyIj60mpCctnusSQkdS30E1uNNDZILEC0ABtIk
+ xM/Sy+JrekpnA==
+Date: Mon, 29 Aug 2022 10:36:10 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <Ywz5CrBg6udTMnW/@google.com>
+References: <20220827065851.135710-1-ebiggers@kernel.org>
+ <20220827065851.135710-7-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Originating-IP: [10.90.53.225]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- kwepemm600014.china.huawei.com (7.193.23.54)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.3 (--)
+Content-Disposition: inline
+In-Reply-To: <20220827065851.135710-7-ebiggers@kernel.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The "true" is not match the parametera type "int", and we
- modify it. Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com> ---
- fs/f2fs/segment.c | 2 +- 1 file changed, 1 insertion(+),
- 1 deletion(-) diff --git a/fs/f2fs/segment.c
- b/fs/f2fs/segment.c index a5054725d0b6..460048f3c850 100644 ---
- a/fs/f2fs/segment.c
- +++ b/fs/f2fs/segment.c @@ -481,7 +481,7 @@ void f2fs_balance_fs_bg(struct
- f2fs_sb_in [...] 
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  On 08/26,
+ Eric Biggers wrote: > From: Eric Biggers <ebiggers@google.com>
+ > > f2fs only allows direct I/O that is aligned to the filesystem block >
+ size. Given that fact, simplify f2fs_force_buffered_i [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.188 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1oSenz-006RSF-JR
-Subject: [f2fs-dev] [PATCH -next] f2fs: replace logical value "true" with a
- int number
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oSigP-006duS-5o
+Subject: Re: [f2fs-dev] [PATCH v5 6/8] f2fs: simplify
+ f2fs_force_buffered_io()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,38 +107,88 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Zhang Qilong via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Zhang Qilong <zhangqilong3@huawei.com>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-block@vger.kernel.org, linux-api@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Keith Busch <kbusch@kernel.org>,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The "true" is not match the parametera type "int", and
-we modify it.
+On 08/26, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+> 
+> f2fs only allows direct I/O that is aligned to the filesystem block
+> size.  Given that fact, simplify f2fs_force_buffered_io() by removing
+> the redundant call to block_unaligned_IO().
+> 
+> This makes it easier to reuse this code for STATX_DIOALIGN.
+> 
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
 
-Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
----
- fs/f2fs/segment.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Acked-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index a5054725d0b6..460048f3c850 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -481,7 +481,7 @@ void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
- 
- 		mutex_unlock(&sbi->flush_lock);
- 	}
--	f2fs_sync_fs(sbi->sb, true);
-+	f2fs_sync_fs(sbi->sb, 1);
- 	stat_inc_bg_cp_count(sbi->stat_info);
- }
- 
--- 
-2.25.1
-
+> ---
+>  fs/f2fs/file.c | 27 +++++----------------------
+>  1 file changed, 5 insertions(+), 22 deletions(-)
+> 
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 8a9455bf956f16..8e11311db21060 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -808,22 +808,9 @@ int f2fs_truncate(struct inode *inode)
+>  	return 0;
+>  }
+>  
+> -static int block_unaligned_IO(struct inode *inode, struct kiocb *iocb,
+> -			      struct iov_iter *iter)
+> -{
+> -	unsigned int i_blkbits = READ_ONCE(inode->i_blkbits);
+> -	unsigned int blocksize_mask = (1 << i_blkbits) - 1;
+> -	loff_t offset = iocb->ki_pos;
+> -	unsigned long align = offset | iov_iter_alignment(iter);
+> -
+> -	return align & blocksize_mask;
+> -}
+> -
+> -static bool f2fs_force_buffered_io(struct inode *inode,
+> -				   struct kiocb *iocb, struct iov_iter *iter)
+> +static bool f2fs_force_buffered_io(struct inode *inode, int rw)
+>  {
+>  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> -	int rw = iov_iter_rw(iter);
+>  
+>  	if (!fscrypt_dio_supported(inode))
+>  		return true;
+> @@ -836,13 +823,9 @@ static bool f2fs_force_buffered_io(struct inode *inode,
+>  	if (f2fs_is_multi_device(sbi) && !sbi->aligned_blksize)
+>  		return true;
+>  
+> -	if (f2fs_lfs_mode(sbi) && (rw == WRITE)) {
+> -		if (block_unaligned_IO(inode, iocb, iter))
+> -			return true;
+> -		if (F2FS_IO_ALIGNED(sbi))
+> -			return true;
+> -	}
+> -	if (is_sbi_flag_set(F2FS_I_SB(inode), SBI_CP_DISABLED))
+> +	if (f2fs_lfs_mode(sbi) && rw == WRITE && F2FS_IO_ALIGNED(sbi))
+> +		return true;
+> +	if (is_sbi_flag_set(sbi, SBI_CP_DISABLED))
+>  		return true;
+>  
+>  	return false;
+> @@ -4222,7 +4205,7 @@ static bool f2fs_should_use_dio(struct inode *inode, struct kiocb *iocb,
+>  	if (!(iocb->ki_flags & IOCB_DIRECT))
+>  		return false;
+>  
+> -	if (f2fs_force_buffered_io(inode, iocb, iter))
+> +	if (f2fs_force_buffered_io(inode, iov_iter_rw(iter)))
+>  		return false;
+>  
+>  	/*
+> -- 
+> 2.37.2
 
 
 _______________________________________________
