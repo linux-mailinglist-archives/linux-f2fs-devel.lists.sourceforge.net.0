@@ -2,100 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFB905A5A6C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Aug 2022 05:47:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E2565A5CD8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Aug 2022 09:25:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oSsDb-0001Ji-BA;
-	Tue, 30 Aug 2022 03:47:15 +0000
+	id 1oSvcJ-00072I-RY;
+	Tue, 30 Aug 2022 07:24:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1oSsDO-0001JS-Kc
+ (envelope-from <zhangqilong3@huawei.com>) id 1oSvcI-00071v-Aq
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 Aug 2022 03:47:02 +0000
+ Tue, 30 Aug 2022 07:24:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nsfAYM+HmtjLMt47bmOLGBKBDg2/G/9B9xwrlHSoq7I=; b=A10qzW18TsLpKxfVTa3wXHFKaT
- jsa9ONC347r/kcytv69ireLa+csHeFVTK4Vfw4PFk+wWS18wrq3neRxhHfs2fUJLK12WHgtIxsZYC
- DNpdNDHUHDKQXQ/T4iZrLrv/38bGbrkD3D1YU56go+pZjXxLRm+vHTVjJ4tEWuBLJXs0=;
+ bh=BxMDjlyn5JFirFkchBcYzLeZTr1jth0+imndIsVLaHo=; b=lO4PrK3qo53qLz81rEWXqmIcz7
+ hTOEB410g/iniMH5P07ItsRqr/lsIF747HCWEOvv1b9orosBMZQLs9e6POCWW/qWJdQU34gFNPA2E
+ Mhp3IQTqsC6CPhTybTp4d4LnMt9nB3PwgLatiUtEum8zSiulKUJ7Ti+3b5hC+3YShQHY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=nsfAYM+HmtjLMt47bmOLGBKBDg2/G/9B9xwrlHSoq7I=; b=h+0mZFx6eM/bSzpA+r0Q7eW5hI
- LhPdHgPE75erZKrMMjgPxn21Oay6znPHzjAsofNw+f6fdlobpbQqRislVigbbPd/6LQGTZ5j4Ih2P
- ar7D5OIdME5TjyloBEfKAKQtYW/vX86tUVLcYCgw0a/XWkVacXOC3qmHbd5iH1PgsXTM=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=BxMDjlyn5JFirFkchBcYzLeZTr1jth0+imndIsVLaHo=; b=j
+ 8xTuWfA6AdzKWQYF3Cu1P7KODTZx1BbJfPV0QMHRCe+pGw1ns42NczW39iIJRPQzq5R4okGSK+gLJ
+ rLDV1iBhWTlbbPQntZ1wEF1XOeBZtmvX3Wnz6eR8I30+1musLxVR2nin5TEGCTXskaal1SK3SJvG4
+ saLyrsxPYeB3E0CE=;
+Received: from szxga08-in.huawei.com ([45.249.212.255])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oSsDN-0074CG-Mv for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 Aug 2022 03:47:02 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 6335EB81632;
- Tue, 30 Aug 2022 03:46:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4193C433C1;
- Tue, 30 Aug 2022 03:46:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1661831210;
- bh=mUnVB81vCce6m7OfZt7TrDrPDZqYmD/JX2n989MKdws=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ODGV04xUfpKrwFYHazoWe+IjxbqgDMXmiHf4Gq39mVt81mPQypSVnH0I4QBqoWyu4
- dYvUKBFmaPTkKAg+6ui6+Tu1J0j00+Ls31ZJYnRaBaaZA/Sv2X7e5kb2gbxvMUMDHq
- AwmlAIAtqqqVospIZCYjvhshBgiH51i0KHaFZmi3vXTaF+gpTb8m12qbjpgezORSh0
- sx2y1NX1PZbzGEeHKuFko9a9WZApDbzzTupF2Nz43+O1zRlVFOtlceXbpIXv28boTY
- UT3P1f1hQ75dGShUQ15AXotQv9dsT7YnGRNYDDAwDin0ToC5ilNoUt2MBgGdsuuzk/
- ErovymCilNn+A==
-Message-ID: <cbc4bfe5-14f9-a4e0-c9c5-6b6b06437d5d@kernel.org>
-Date: Tue, 30 Aug 2022 11:46:45 +0800
+ id 1oSv6F-007DIa-I3 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 30 Aug 2022 06:51:56 +0000
+Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.57])
+ by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4MGyYd06P9z1N7dN;
+ Tue, 30 Aug 2022 14:48:05 +0800 (CST)
+Received: from kwepemm600014.china.huawei.com (7.193.23.54) by
+ dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Tue, 30 Aug 2022 14:51:42 +0800
+Received: from huawei.com (10.90.53.225) by kwepemm600014.china.huawei.com
+ (7.193.23.54) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Tue, 30 Aug
+ 2022 14:51:41 +0800
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Tue, 30 Aug 2022 14:55:15 +0800
+Message-ID: <20220830065515.101583-1-zhangqilong3@huawei.com>
+X-Mailer: git-send-email 2.26.0.106.g9fadedd
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20220829215206.3082124-1-jaegeuk@kernel.org>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220829215206.3082124-1-jaegeuk@kernel.org>
-X-Spam-Score: -7.9 (-------)
+X-Originating-IP: [10.90.53.225]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ kwepemm600014.china.huawei.com (7.193.23.54)
+X-CFilter-Loop: Reflected
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/8/30 5:52, Jaegeuk Kim wrote: > Sometimes we can get
- a cached meta_inode which has no aops yet. Let's set it > all the time to
- fix the below panic. > > Unable to handle kernel NULL pointer der [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview: Just use the defined COMPRESS_MAPPING to get compress cache
+ mapping instaed of direct accessing name. Signed-off-by: Zhang Qilong
+ <zhangqilong3@huawei.com>
+ --- fs/f2fs/compress.c | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [45.249.212.255 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oSsDN-0074CG-Mv
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix missing mapping caused by the
- mount/umount race
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1oSv6F-007DIa-I3
+Subject: [f2fs-dev] [PATCH -next] f2fs: use COMPRESS_MAPPING to get compress
+ cache mapping
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,101 +92,38 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com,
- stable@vger.kernel.org
+From: Zhang Qilong via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Zhang Qilong <zhangqilong3@huawei.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/8/30 5:52, Jaegeuk Kim wrote:
-> Sometimes we can get a cached meta_inode which has no aops yet. Let's set it
-> all the time to fix the below panic.
-> 
-> Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
-> Mem abort info:
->    ESR = 0x0000000086000004
->    EC = 0x21: IABT (current EL), IL = 32 bits
->    SET = 0, FnV = 0
->    EA = 0, S1PTW = 0
->    FSC = 0x04: level 0 translation fault
-> user pgtable: 4k pages, 48-bit VAs, pgdp=0000000109ee4000
-> [0000000000000000] pgd=0000000000000000, p4d=0000000000000000
-> Internal error: Oops: 86000004 [#1] PREEMPT SMP
-> Modules linked in:
-> CPU: 1 PID: 3045 Comm: syz-executor330 Not tainted 6.0.0-rc2-syzkaller-16455-ga41a877bc12d #0
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/22/2022
-> pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-> pc : 0x0
-> lr : folio_mark_dirty+0xbc/0x208 mm/page-writeback.c:2748
-> sp : ffff800012783970
-> x29: ffff800012783970 x28: 0000000000000000 x27: ffff800012783b08
-> x26: 0000000000000001 x25: 0000000000000400 x24: 0000000000000001
-> x23: ffff0000c736e000 x22: 0000000000000045 x21: 05ffc00000000015
-> x20: ffff0000ca7403b8 x19: fffffc00032ec600 x18: 0000000000000181
-> x17: ffff80000c04d6bc x16: ffff80000dbb8658 x15: 0000000000000000
-> x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
-> x11: ff808000083e9814 x10: 0000000000000000 x9 : ffff8000083e9814
-> x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
-> x5 : ffff0000cbb19000 x4 : ffff0000cb3d2000 x3 : ffff0000cbb18f80
-> x2 : fffffffffffffff0 x1 : fffffc00032ec600 x0 : ffff0000ca7403b8
-> Call trace:
->   0x0
->   set_page_dirty+0x38/0xbc mm/folio-compat.c:62
->   f2fs_update_meta_page+0x80/0xa8 fs/f2fs/segment.c:2369
->   do_checkpoint+0x794/0xea8 fs/f2fs/checkpoint.c:1522
->   f2fs_write_checkpoint+0x3b8/0x568 fs/f2fs/checkpoint.c:1679
-> 
-> Cc: stable@vger.kernel.org
-> Reported-by: syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->   fs/f2fs/inode.c | 13 ++++++++-----
->   1 file changed, 8 insertions(+), 5 deletions(-)
-> 
-> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> index 6d11c365d7b4..1feb0a8a699e 100644
-> --- a/fs/f2fs/inode.c
-> +++ b/fs/f2fs/inode.c
-> @@ -490,10 +490,7 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
->   	if (!inode)
->   		return ERR_PTR(-ENOMEM);
->   
-> -	if (!(inode->i_state & I_NEW)) {
-> -		trace_f2fs_iget(inode);
-> -		return inode;
-> -	}
-> +	/* We can see an old cached inode. Let's set the aops all the time. */
+Just use the defined COMPRESS_MAPPING to get compress cache
+mapping instaed of direct accessing name.
 
-Why an old cached inode (has no I_NEW flag) has NULL a_ops pointer? If it is a bad
-inode, it should be unhashed before unlock_new_inode().
+Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
+---
+ fs/f2fs/compress.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks,
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 70e97075e535..06c3629a2597 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1905,7 +1905,7 @@ bool f2fs_load_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
+ 
+ void f2fs_invalidate_compress_pages(struct f2fs_sb_info *sbi, nid_t ino)
+ {
+-	struct address_space *mapping = sbi->compress_inode->i_mapping;
++	struct address_space *mapping = COMPRESS_MAPPING(sbi);
+ 	struct folio_batch fbatch;
+ 	pgoff_t index = 0;
+ 	pgoff_t end = MAX_BLKADDR(sbi);
+-- 
+2.25.1
 
->   	if (ino == F2FS_NODE_INO(sbi) || ino == F2FS_META_INO(sbi))
->   		goto make_now;
->   
-> @@ -502,6 +499,11 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
->   		goto make_now;
->   #endif
->   
-> +	if (!(inode->i_state & I_NEW)) {
-> +		trace_f2fs_iget(inode);
-> +		return inode;
-> +	}
-> +
->   	ret = do_read_inode(inode);
->   	if (ret)
->   		goto bad_inode;
-> @@ -557,7 +559,8 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
->   		file_dont_truncate(inode);
->   	}
->   
-> -	unlock_new_inode(inode);
-> +	if (inode->i_state & I_NEW)
-> +		unlock_new_inode(inode);
->   	trace_f2fs_iget(inode);
->   	return inode;
->   
 
 
 _______________________________________________
