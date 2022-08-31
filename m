@@ -2,99 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E7E45A73FE
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Aug 2022 04:40:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D36535A73CA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Aug 2022 04:07:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oTDeg-0001we-T6;
-	Wed, 31 Aug 2022 02:40:38 +0000
+	id 1oTD8O-00065J-RK;
+	Wed, 31 Aug 2022 02:07:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <rdunlap@infradead.org>) id 1oTDee-0001wY-0X
+ (envelope-from <zhangshuqi3@huawei.com>) id 1oTD8N-00065C-0F
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 31 Aug 2022 02:40:36 +0000
+ Wed, 31 Aug 2022 02:07:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vkC7YbGzcZlYm9RaWlAt34O4KbVTqpqAYy7ynMzo02g=; b=V93FBh6uzcqXKz2louhTNadGiz
- O5HPI8YxiJOJjOfUt7f4Mhw/TR+vCKMS8a0Y/ZMYQoyZfHYGFN5lsOEroId/xvp1J/JSci0ARttiW
- KBPCov9aYgDhIdrxvkBCpfmYFy/rOJqlKLzUZJ4A0xJ1iXSLSSwQ2bo6kYve4RvYNZcY=;
+ bh=0r2EPubHrYSjZ/iqgxEW5HeJQfNv9lx3obDxlGJw2+w=; b=Il1RlyDvg1DCS0u3cFhMBN+oCt
+ Ze40F2I6R0bwFDZcEVzFTbruqtk774Mx8J9c9hIuMUtUBU2wKckNieSGEV5uQqSAvM2z8zosf/H0l
+ eZdZ6JLEn8ZLfiIgdMoBdkcQymRmTtSSS4o4VYYqZRhXVMK7eTmrlRjSifY0fk3FSwxE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=vkC7YbGzcZlYm9RaWlAt34O4KbVTqpqAYy7ynMzo02g=; b=VuPNaMT0pMnd7N8QaqxjqZzKRV
- PPGLN1iArsS9buF9k/OiuYgKXapWh7WU/8hIwrJQgY8IhZpoQUYJBMAfuthz3MgnxciHuFnDmupjb
- rhjiKp3zkgeJWj+oLcHliaP+1LqvyRq8TeFcC6CHkob/FT0G+VM5OOZg92SX9vSdGjF8=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=0r2EPubHrYSjZ/iqgxEW5HeJQfNv9lx3obDxlGJw2+w=; b=V
+ 9esNKiakxiIRsGe2khoukrObnWUmJEmu1qMNItTP3bT0wL+gbkXh3DtV24ux4UKQVqiuSD+DF+OuE
+ cJmi7zQLxX9HAAkQoPwit6a3Yjk+9q/+dXQ1c5bLINiYGp93TczqMj2WqYDxeOORD+F4bGBJRjJLP
+ Y5PMPbFPK1uySl5E=;
+Received: from szxga02-in.huawei.com ([45.249.212.188])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oTDeZ-0004HG-Md for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 31 Aug 2022 02:40:35 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
- Message-ID:Sender:Reply-To:Content-ID:Content-Description;
- bh=vkC7YbGzcZlYm9RaWlAt34O4KbVTqpqAYy7ynMzo02g=; b=mfp/bZ3g9+9Ju4lllH4EyuLxsq
- XiHrpf3oC7uydhxIXrb1d20M9XXEMoN7cxOttnon7E9HOdiMUEXRbZFVls0AtN3n6IZQjPJDWWKaw
- HCwC1U8YtykW1o8aBsw22nbmSdFnLKWg/L4gRxTmR/KljgI5EA39pDSQcs2BCg/x8r2FJPoFF37zm
- kFAMakiv6ePHxSPVIQo/RJmggB2oXMMO1398z+2VMW3eJSf4/k3l/cEaFpCVO5l2OoUJ1HtXbUU23
- x79TJGuNsC6UhlGGREjxC9RxquEzfjNqlRcMvhZE2nhk+1n7dwr+9wsADFtBi/G70U0U1dq8vJjHq
- 8XBjFtow==;
-Received: from [2601:1c0:6280:3f0::a6b3]
- by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1oTCQy-002ydd-FD; Wed, 31 Aug 2022 01:22:24 +0000
-Message-ID: <ab1a33e5-01b9-79d4-662e-44c6e0e74113@infradead.org>
-Date: Tue, 30 Aug 2022 18:22:22 -0700
+ id 1oTD8K-008FF2-LJ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 31 Aug 2022 02:07:14 +0000
+Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.53])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4MHSBT0xwVzlWdH;
+ Wed, 31 Aug 2022 10:03:13 +0800 (CST)
+Received: from kwepemm600016.china.huawei.com (7.193.23.20) by
+ dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Wed, 31 Aug 2022 10:06:32 +0800
+Received: from huawei.com (10.175.124.27) by kwepemm600016.china.huawei.com
+ (7.193.23.20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Wed, 31 Aug
+ 2022 10:06:31 +0800
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Wed, 31 Aug 2022 10:24:40 +0800
+Message-ID: <20220831022440.2985736-1-zhangshuqi3@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.1.2
-Content-Language: en-US
-To: Theodore Ts'o <tytso@mit.edu>, Al Viro <viro@zeniv.linux.org.uk>
-References: <20220829235429.17902-1-rdunlap@infradead.org>
- <Yw56rVwBRg0LbC41@ZenIV> <Yw6Hp8l/7p3wbiGq@mit.edu>
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <Yw6Hp8l/7p3wbiGq@mit.edu>
-X-Spam-Score: -4.5 (----)
+X-Originating-IP: [10.175.124.27]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ kwepemm600016.china.huawei.com (7.193.23.20)
+X-CFilter-Loop: Reflected
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 8/30/22 14:56, Theodore Ts'o wrote: > On Tue, Aug 30, 2022
- at 10:01:33PM +0100, Al Viro wrote: >> On Mon, Aug 29, 2022 at 04:54:29PM
- -0700, Randy Dunlap wrote: >>> compress_log_size=%u Support conf [...] 
- Content analysis details:   (-4.5 points, 6.0 required)
+ Content preview: This is a BUG_ON issue as follows when running
+ xfstest-generic-503:
+ WARNING: CPU: 21 PID: 1385 at fs/f2fs/inode.c:762 f2fs_evict_inode+0x847/0xaa0
+ Modules linked in: CPU: 21 PID: 1385 Comm: umount Not [...] 
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [198.137.202.133 listed in list.dnswl.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ medium trust [45.249.212.188 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1oTDeZ-0004HG-Md
-Subject: Re: [f2fs-dev] [PATCH] Documentation: filesystems: correct
- possessive "its"
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1oTD8K-008FF2-LJ
+Subject: [f2fs-dev] [PATCH v2 -next] f2fs: fix wrong dirty page count when
+ race between mmap and fallocate.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,37 +92,145 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christian Brauner <brauner@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- linux-doc@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, Seth Forshee <sforshee@kernel.org>,
- linux-fsdevel@vger.kernel.org
+From: Shuqi Zhang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Shuqi Zhang <zhangshuqi3@huawei.com>
+Cc: zhangshuqi3@huawei.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+This is a BUG_ON issue as follows when running xfstest-generic-503:
+WARNING: CPU: 21 PID: 1385 at fs/f2fs/inode.c:762 f2fs_evict_inode+0x847/0xaa0
+Modules linked in:
+CPU: 21 PID: 1385 Comm: umount Not tainted 5.19.0-rc5+ #73
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.14.0-4.fc34 04/01/2014
 
+Call Trace:
+evict+0x129/0x2d0
+dispose_list+0x4f/0xb0
+evict_inodes+0x204/0x230
+generic_shutdown_super+0x5b/0x1e0
+kill_block_super+0x29/0x80
+kill_f2fs_super+0xe6/0x140
+deactivate_locked_super+0x44/0xc0
+deactivate_super+0x79/0x90
+cleanup_mnt+0x114/0x1a0
+__cleanup_mnt+0x16/0x20
+task_work_run+0x98/0x100
+exit_to_user_mode_prepare+0x3d0/0x3e0
+syscall_exit_to_user_mode+0x12/0x30
+do_syscall_64+0x42/0x80
+entry_SYSCALL_64_after_hwframe+0x46/0xb0
 
-On 8/30/22 14:56, Theodore Ts'o wrote:
-> On Tue, Aug 30, 2022 at 10:01:33PM +0100, Al Viro wrote:
->> On Mon, Aug 29, 2022 at 04:54:29PM -0700, Randy Dunlap wrote:
->>>  compress_log_size=%u	 Support configuring compress cluster size, the size will
->>> -			 be 4KB * (1 << %u), 16KB is minimum size, also it's
->>> +			 be 4KB * (1 << %u), 16KB is minimum size, also its
->>>  			 default size.
->>
->> That one doesn't look like possesive to me - more like "default size is 16KB and
->> values below that are not allowed"...
+Function flow analysis when BUG occurs:
+f2fs_fallocate                    mmap
+                                  do_page_fault
+                                    pte_spinlock  // ---lock_pte
+                                    do_wp_page
+                                      wp_page_shared
+                                        pte_unmap_unlock   // unlock_pte
+                                          do_page_mkwrite
+                                          f2fs_vm_page_mkwrite
+                                            down_read(invalidate_lock)
+                                            lock_page
+                                            if (PageMappedToDisk(page))
+                                              goto out;
+                                            // set_page_dirty  --NOT RUN
+                                            out: up_read(invalidate_lock);
+                                        finish_mkwrite_fault // unlock_pte
+f2fs_collapse_range
+  down_write(i_mmap_sem)
+  truncate_pagecache
+    unmap_mapping_pages
+      i_mmap_lock_write // down_write(i_mmap_rwsem)
+        ......
+        zap_pte_range
+          pte_offset_map_lock // ---lock_pte
+           set_page_dirty
+            f2fs_dirty_data_folio
+              if (!folio_test_dirty(folio)) {
+                                        fault_dirty_shared_page
+                                          set_page_dirty
+                                            f2fs_dirty_data_folio
+                                              if (!folio_test_dirty(folio)) {
+                                                filemap_dirty_folio
+                                                f2fs_update_dirty_folio // ++
+                                              }
+                                            unlock_page
+                filemap_dirty_folio
+                f2fs_update_dirty_folio // page count++
+              }
+          pte_unmap_unlock  // --unlock_pte
+      i_mmap_unlock_write  // up_write(i_mmap_rwsem)
+  truncate_inode_pages
+  up_write(i_mmap_sem)
 
-I have to disagree about the possessive part...
+When race happens between mmap-do_page_fault-wp_page_shared and
+fallocate-truncate_pagecache-zap_pte_range, the zap_pte_range calls
+function set_page_dirty without page lock. Besides, though
+truncate_pagecache has immap and pte lock, wp_page_shared calls
+fault_dirty_shared_page without any. In this case, two threads race
+in f2fs_dirty_data_folio function. Page is set to dirty only ONCE,
+but the count is added TWICE by calling filemap_dirty_folio.
+Thus the count of dirty page cannot accord with the real dirty pages.
 
-> That being said, it could also be rewritten to be easier to
-> understand.  e.g., "The default and minimum size is 16kb."
+Following is the solution to in case of race happens without any lock.
+Since folio_test_set_dirty in filemap_dirty_folio is atomic, judge return
+value will not be at risk of race.
 
-but sure, it can be rewritten.
+Signed-off-by: Shuqi Zhang <zhangshuqi3@huawei.com>
+---
+ fs/f2fs/checkpoint.c | 3 +--
+ fs/f2fs/data.c       | 3 +--
+ fs/f2fs/node.c       | 3 +--
+ 3 files changed, 3 insertions(+), 6 deletions(-)
 
-thanks.
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 8259e0fa97e1..3a3329bf1033 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -448,8 +448,7 @@ static bool f2fs_dirty_meta_folio(struct address_space *mapping,
+ 
+ 	if (!folio_test_uptodate(folio))
+ 		folio_mark_uptodate(folio);
+-	if (!folio_test_dirty(folio)) {
+-		filemap_dirty_folio(mapping, folio);
++	if (filemap_dirty_folio(mapping, folio)) {
+ 		inc_page_count(F2FS_M_SB(mapping), F2FS_DIRTY_META);
+ 		set_page_private_reference(&folio->page);
+ 		return true;
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index aa3ccddfa037..16c39bd948a0 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -3697,8 +3697,7 @@ static bool f2fs_dirty_data_folio(struct address_space *mapping,
+ 		folio_mark_uptodate(folio);
+ 	BUG_ON(folio_test_swapcache(folio));
+ 
+-	if (!folio_test_dirty(folio)) {
+-		filemap_dirty_folio(mapping, folio);
++	if (filemap_dirty_folio(mapping, folio)) {
+ 		f2fs_update_dirty_folio(inode, folio);
+ 		return true;
+ 	}
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index e06a0c478b39..3506ffcb31f8 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -2147,8 +2147,7 @@ static bool f2fs_dirty_node_folio(struct address_space *mapping,
+ 	if (IS_INODE(&folio->page))
+ 		f2fs_inode_chksum_set(F2FS_M_SB(mapping), &folio->page);
+ #endif
+-	if (!folio_test_dirty(folio)) {
+-		filemap_dirty_folio(mapping, folio);
++	if (filemap_dirty_folio(mapping, folio)) {
+ 		inc_page_count(F2FS_M_SB(mapping), F2FS_DIRTY_NODES);
+ 		set_page_private_reference(&folio->page);
+ 		return true;
 -- 
-~Randy
+2.25.1
+
 
 
 _______________________________________________
