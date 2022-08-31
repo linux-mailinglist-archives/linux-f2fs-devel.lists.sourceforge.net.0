@@ -2,85 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D36535A73CA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Aug 2022 04:07:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 655DB5A7441
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 Aug 2022 05:05:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oTD8O-00065J-RK;
-	Wed, 31 Aug 2022 02:07:16 +0000
+	id 1oTE2l-0004gl-3G;
+	Wed, 31 Aug 2022 03:05:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhangshuqi3@huawei.com>) id 1oTD8N-00065C-0F
+ (envelope-from <jaegeuk@kernel.org>) id 1oTE2k-0004ge-6F
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 31 Aug 2022 02:07:15 +0000
+ Wed, 31 Aug 2022 03:05:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0r2EPubHrYSjZ/iqgxEW5HeJQfNv9lx3obDxlGJw2+w=; b=Il1RlyDvg1DCS0u3cFhMBN+oCt
- Ze40F2I6R0bwFDZcEVzFTbruqtk774Mx8J9c9hIuMUtUBU2wKckNieSGEV5uQqSAvM2z8zosf/H0l
- eZdZ6JLEn8ZLfiIgdMoBdkcQymRmTtSSS4o4VYYqZRhXVMK7eTmrlRjSifY0fk3FSwxE=;
+ bh=fiU+T4aq9Zqm/GX0PZIUwWGsMdUHVXCSO6SbM+9PwdI=; b=A1A3xX4zSQSkiCxk4Uinkec6He
+ q62uAxV5i16Ny/7OyM8FJfuLp1FG3uDU4eVGVvpVDQxjKhne/bQlwLRgnmzzEWFYYWuaVFpY+i1US
+ A9hUV9HyRSfv+foPv25sS6ZntzP5lrvbOZWV6xr2x0yk4oZYvKvn2KtF1YSNShpRvAb0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=0r2EPubHrYSjZ/iqgxEW5HeJQfNv9lx3obDxlGJw2+w=; b=V
- 9esNKiakxiIRsGe2khoukrObnWUmJEmu1qMNItTP3bT0wL+gbkXh3DtV24ux4UKQVqiuSD+DF+OuE
- cJmi7zQLxX9HAAkQoPwit6a3Yjk+9q/+dXQ1c5bLINiYGp93TczqMj2WqYDxeOORD+F4bGBJRjJLP
- Y5PMPbFPK1uySl5E=;
-Received: from szxga02-in.huawei.com ([45.249.212.188])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=fiU+T4aq9Zqm/GX0PZIUwWGsMdUHVXCSO6SbM+9PwdI=; b=DaozGKgUBzgIwUwpVNjZoRPnP1
+ kLnNxU8ff/f9F41/kAeCjDTiQs54afayCI1xSJXs6r1aNW6rAUQAAsQ+uJ7zmZS2zrlIEL+4YfKyD
+ C5xb844/eZs88riS5iAv6oQNe2EwMw9z/d+d9UzT2FoyU5i7rjH5aN/h/SUeQ49H/9gU=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oTD8K-008FF2-LJ for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 31 Aug 2022 02:07:14 +0000
-Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.53])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4MHSBT0xwVzlWdH;
- Wed, 31 Aug 2022 10:03:13 +0800 (CST)
-Received: from kwepemm600016.china.huawei.com (7.193.23.20) by
- dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Wed, 31 Aug 2022 10:06:32 +0800
-Received: from huawei.com (10.175.124.27) by kwepemm600016.china.huawei.com
- (7.193.23.20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Wed, 31 Aug
- 2022 10:06:31 +0800
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Wed, 31 Aug 2022 10:24:40 +0800
-Message-ID: <20220831022440.2985736-1-zhangshuqi3@huawei.com>
-X-Mailer: git-send-email 2.25.1
+ id 1oTE2e-0005Me-TH for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 31 Aug 2022 03:05:30 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B468761927;
+ Wed, 31 Aug 2022 03:05:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00040C433D6;
+ Wed, 31 Aug 2022 03:05:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1661915114;
+ bh=dVup0T/Gm724oVjCg6gv0zTexmWsoNH4XnK67lgI7vE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=bQ30ftyUYj4WNesdVZUK9vAqMkE3skgwTYdXxXPOBfBzazE8a93xVE4JGmbGcPvEb
+ PB6qBqbBZaTTb21dHtzVekH9LPpziKxNQF9fLI9dQFsVqicqg3Hly3XL95+KA6dLp+
+ brMfAWgTDhPNB8aogrWkaTA/qO5fXLC5/7+qk8SuoVzSY9nUqYkywc5Cu+hkKNkI4v
+ NOV5W8zpZ47zcxAtHwfkyICuzMvzhGLdOpy9eR2RgH5hR8qsRYmYroiEUvX5P8Hyqc
+ Rl2XWH8wLl4ivgj/a3Z7tepiOmLG7lhvBr98cOs7BaxVL5B42V5xi9NkbXu9kmtH7M
+ Su6HC6623/5mQ==
+Date: Tue, 30 Aug 2022 20:05:12 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <Yw7P6BkNZmqxji3B@google.com>
+References: <20220829215206.3082124-1-jaegeuk@kernel.org>
+ <cbc4bfe5-14f9-a4e0-c9c5-6b6b06437d5d@kernel.org>
+ <Yw55Ebk8zLIgBFfn@google.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.175.124.27]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- kwepemm600016.china.huawei.com (7.193.23.20)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.3 (--)
+Content-Disposition: inline
+In-Reply-To: <Yw55Ebk8zLIgBFfn@google.com>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This is a BUG_ON issue as follows when running
- xfstest-generic-503:
- WARNING: CPU: 21 PID: 1385 at fs/f2fs/inode.c:762 f2fs_evict_inode+0x847/0xaa0
- Modules linked in: CPU: 21 PID: 1385 Comm: umount Not [...] 
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  On 08/30, Jaegeuk Kim wrote: > On 08/30, Chao Yu wrote: >
+ > On 2022/8/30 5:52, Jaegeuk Kim wrote: > > > Sometimes we can get a cached
+ meta_inode which has no aops yet. Let's set it > > > all the time [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.188 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1oTD8K-008FF2-LJ
-Subject: [f2fs-dev] [PATCH v2 -next] f2fs: fix wrong dirty page count when
- race between mmap and fallocate.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oTE2e-0005Me-TH
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix missing mapping caused by the
+ mount/umount race
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,145 +106,127 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Shuqi Zhang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Shuqi Zhang <zhangshuqi3@huawei.com>
-Cc: zhangshuqi3@huawei.com, linux-kernel@vger.kernel.org,
+Cc: syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This is a BUG_ON issue as follows when running xfstest-generic-503:
-WARNING: CPU: 21 PID: 1385 at fs/f2fs/inode.c:762 f2fs_evict_inode+0x847/0xaa0
-Modules linked in:
-CPU: 21 PID: 1385 Comm: umount Not tainted 5.19.0-rc5+ #73
-Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.14.0-4.fc34 04/01/2014
+On 08/30, Jaegeuk Kim wrote:
+> On 08/30, Chao Yu wrote:
+> > On 2022/8/30 5:52, Jaegeuk Kim wrote:
+> > > Sometimes we can get a cached meta_inode which has no aops yet. Let's set it
+> > > all the time to fix the below panic.
+> > > 
+> > > Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
+> > > Mem abort info:
+> > >    ESR = 0x0000000086000004
+> > >    EC = 0x21: IABT (current EL), IL = 32 bits
+> > >    SET = 0, FnV = 0
+> > >    EA = 0, S1PTW = 0
+> > >    FSC = 0x04: level 0 translation fault
+> > > user pgtable: 4k pages, 48-bit VAs, pgdp=0000000109ee4000
+> > > [0000000000000000] pgd=0000000000000000, p4d=0000000000000000
+> > > Internal error: Oops: 86000004 [#1] PREEMPT SMP
+> > > Modules linked in:
+> > > CPU: 1 PID: 3045 Comm: syz-executor330 Not tainted 6.0.0-rc2-syzkaller-16455-ga41a877bc12d #0
+> > > Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/22/2022
+> > > pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+> > > pc : 0x0
+> > > lr : folio_mark_dirty+0xbc/0x208 mm/page-writeback.c:2748
+> > > sp : ffff800012783970
+> > > x29: ffff800012783970 x28: 0000000000000000 x27: ffff800012783b08
+> > > x26: 0000000000000001 x25: 0000000000000400 x24: 0000000000000001
+> > > x23: ffff0000c736e000 x22: 0000000000000045 x21: 05ffc00000000015
+> > > x20: ffff0000ca7403b8 x19: fffffc00032ec600 x18: 0000000000000181
+> > > x17: ffff80000c04d6bc x16: ffff80000dbb8658 x15: 0000000000000000
+> > > x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+> > > x11: ff808000083e9814 x10: 0000000000000000 x9 : ffff8000083e9814
+> > > x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+> > > x5 : ffff0000cbb19000 x4 : ffff0000cb3d2000 x3 : ffff0000cbb18f80
+> > > x2 : fffffffffffffff0 x1 : fffffc00032ec600 x0 : ffff0000ca7403b8
+> > > Call trace:
+> > >   0x0
+> > >   set_page_dirty+0x38/0xbc mm/folio-compat.c:62
+> > >   f2fs_update_meta_page+0x80/0xa8 fs/f2fs/segment.c:2369
+> > >   do_checkpoint+0x794/0xea8 fs/f2fs/checkpoint.c:1522
+> > >   f2fs_write_checkpoint+0x3b8/0x568 fs/f2fs/checkpoint.c:1679
+> > > 
+> > > Cc: stable@vger.kernel.org
+> > > Reported-by: syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com
+> > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > > ---
+> > >   fs/f2fs/inode.c | 13 ++++++++-----
+> > >   1 file changed, 8 insertions(+), 5 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> > > index 6d11c365d7b4..1feb0a8a699e 100644
+> > > --- a/fs/f2fs/inode.c
+> > > +++ b/fs/f2fs/inode.c
+> > > @@ -490,10 +490,7 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+> > >   	if (!inode)
+> > >   		return ERR_PTR(-ENOMEM);
+> > > -	if (!(inode->i_state & I_NEW)) {
+> > > -		trace_f2fs_iget(inode);
+> > > -		return inode;
+> > > -	}
+> > > +	/* We can see an old cached inode. Let's set the aops all the time. */
+> > 
+> > Why an old cached inode (has no I_NEW flag) has NULL a_ops pointer? If it is a bad
+> > inode, it should be unhashed before unlock_new_inode().
+> 
+> I'm trying to dig further tho, it's not a bad inode, nor I_FREEING | I_CLEAR.
+> It's very werid that thie meta inode is found in newly created superblock by
+> the global hash table. I've checked that the same superblock pointer was used
+> in the previous tests, but inode was evictied all the time.
 
-Call Trace:
-evict+0x129/0x2d0
-dispose_list+0x4f/0xb0
-evict_inodes+0x204/0x230
-generic_shutdown_super+0x5b/0x1e0
-kill_block_super+0x29/0x80
-kill_f2fs_super+0xe6/0x140
-deactivate_locked_super+0x44/0xc0
-deactivate_super+0x79/0x90
-cleanup_mnt+0x114/0x1a0
-__cleanup_mnt+0x16/0x20
-task_work_run+0x98/0x100
-exit_to_user_mode_prepare+0x3d0/0x3e0
-syscall_exit_to_user_mode+0x12/0x30
-do_syscall_64+0x42/0x80
-entry_SYSCALL_64_after_hwframe+0x46/0xb0
+I'll drop this patch, since it turned out there is a bug in reiserfs which
+doesn't free the root inode (ino=2). That leads f2fs to find an ino=2 with
+the previous superblock point used by reiserfs. That stale inode has no valid
+inode that f2fs can use. I tried to find where the root cause is in reiserfs,
+but it seems quite hard to catch one.
 
-Function flow analysis when BUG occurs:
-f2fs_fallocate                    mmap
-                                  do_page_fault
-                                    pte_spinlock  // ---lock_pte
-                                    do_wp_page
-                                      wp_page_shared
-                                        pte_unmap_unlock   // unlock_pte
-                                          do_page_mkwrite
-                                          f2fs_vm_page_mkwrite
-                                            down_read(invalidate_lock)
-                                            lock_page
-                                            if (PageMappedToDisk(page))
-                                              goto out;
-                                            // set_page_dirty  --NOT RUN
-                                            out: up_read(invalidate_lock);
-                                        finish_mkwrite_fault // unlock_pte
-f2fs_collapse_range
-  down_write(i_mmap_sem)
-  truncate_pagecache
-    unmap_mapping_pages
-      i_mmap_lock_write // down_write(i_mmap_rwsem)
-        ......
-        zap_pte_range
-          pte_offset_map_lock // ---lock_pte
-           set_page_dirty
-            f2fs_dirty_data_folio
-              if (!folio_test_dirty(folio)) {
-                                        fault_dirty_shared_page
-                                          set_page_dirty
-                                            f2fs_dirty_data_folio
-                                              if (!folio_test_dirty(folio)) {
-                                                filemap_dirty_folio
-                                                f2fs_update_dirty_folio // ++
-                                              }
-                                            unlock_page
-                filemap_dirty_folio
-                f2fs_update_dirty_folio // page count++
-              }
-          pte_unmap_unlock  // --unlock_pte
-      i_mmap_unlock_write  // up_write(i_mmap_rwsem)
-  truncate_inode_pages
-  up_write(i_mmap_sem)
+- reiserfs_fill_super
+ - reiserfs_xattr_init
+  - create_privroot
+   - xattr_mkdir
+    - reiserfs_new_inode
+     - reiserfs_get_unused_objectid returned 0 due to map crash
 
-When race happens between mmap-do_page_fault-wp_page_shared and
-fallocate-truncate_pagecache-zap_pte_range, the zap_pte_range calls
-function set_page_dirty without page lock. Besides, though
-truncate_pagecache has immap and pte lock, wp_page_shared calls
-fault_dirty_shared_page without any. In this case, two threads race
-in f2fs_dirty_data_folio function. Page is set to dirty only ONCE,
-but the count is added TWICE by calling filemap_dirty_folio.
-Thus the count of dirty page cannot accord with the real dirty pages.
+It seems the error path doesn't handle the root inode properly.
 
-Following is the solution to in case of race happens without any lock.
-Since folio_test_set_dirty in filemap_dirty_folio is atomic, judge return
-value will not be at risk of race.
-
-Signed-off-by: Shuqi Zhang <zhangshuqi3@huawei.com>
----
- fs/f2fs/checkpoint.c | 3 +--
- fs/f2fs/data.c       | 3 +--
- fs/f2fs/node.c       | 3 +--
- 3 files changed, 3 insertions(+), 6 deletions(-)
-
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 8259e0fa97e1..3a3329bf1033 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -448,8 +448,7 @@ static bool f2fs_dirty_meta_folio(struct address_space *mapping,
- 
- 	if (!folio_test_uptodate(folio))
- 		folio_mark_uptodate(folio);
--	if (!folio_test_dirty(folio)) {
--		filemap_dirty_folio(mapping, folio);
-+	if (filemap_dirty_folio(mapping, folio)) {
- 		inc_page_count(F2FS_M_SB(mapping), F2FS_DIRTY_META);
- 		set_page_private_reference(&folio->page);
- 		return true;
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index aa3ccddfa037..16c39bd948a0 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -3697,8 +3697,7 @@ static bool f2fs_dirty_data_folio(struct address_space *mapping,
- 		folio_mark_uptodate(folio);
- 	BUG_ON(folio_test_swapcache(folio));
- 
--	if (!folio_test_dirty(folio)) {
--		filemap_dirty_folio(mapping, folio);
-+	if (filemap_dirty_folio(mapping, folio)) {
- 		f2fs_update_dirty_folio(inode, folio);
- 		return true;
- 	}
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index e06a0c478b39..3506ffcb31f8 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -2147,8 +2147,7 @@ static bool f2fs_dirty_node_folio(struct address_space *mapping,
- 	if (IS_INODE(&folio->page))
- 		f2fs_inode_chksum_set(F2FS_M_SB(mapping), &folio->page);
- #endif
--	if (!folio_test_dirty(folio)) {
--		filemap_dirty_folio(mapping, folio);
-+	if (filemap_dirty_folio(mapping, folio)) {
- 		inc_page_count(F2FS_M_SB(mapping), F2FS_DIRTY_NODES);
- 		set_page_private_reference(&folio->page);
- 		return true;
--- 
-2.25.1
-
+> 
+> > 
+> > Thanks,
+> > 
+> > >   	if (ino == F2FS_NODE_INO(sbi) || ino == F2FS_META_INO(sbi))
+> > >   		goto make_now;
+> > > @@ -502,6 +499,11 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+> > >   		goto make_now;
+> > >   #endif
+> > > +	if (!(inode->i_state & I_NEW)) {
+> > > +		trace_f2fs_iget(inode);
+> > > +		return inode;
+> > > +	}
+> > > +
+> > >   	ret = do_read_inode(inode);
+> > >   	if (ret)
+> > >   		goto bad_inode;
+> > > @@ -557,7 +559,8 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+> > >   		file_dont_truncate(inode);
+> > >   	}
+> > > -	unlock_new_inode(inode);
+> > > +	if (inode->i_state & I_NEW)
+> > > +		unlock_new_inode(inode);
+> > >   	trace_f2fs_iget(inode);
+> > >   	return inode;
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
