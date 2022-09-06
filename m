@@ -2,114 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEC935AE56B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Sep 2022 12:33:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E7505AED98
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Sep 2022 16:50:37 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oVVt1-0000BE-NC;
-	Tue, 06 Sep 2022 10:32:55 +0000
+	id 1oVZuL-0006Sm-UO;
+	Tue, 06 Sep 2022 14:50:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1oVVt0-0000B7-73
+ (envelope-from <zhangqilong3@huawei.com>) id 1oVZuI-0006SR-G9
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Sep 2022 10:32:54 +0000
+ Tue, 06 Sep 2022 14:50:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ByCrgYSvV5rK109QSaug+H1CHfQ/CtgE19e4KB7BV+c=; b=b97KIZzaRD+Bx54nVwg71JY8re
- yW4+db47FonycTYYsSqnAgTt2n46UDwX2/e8XNRk/jiJp15PQb2uO0PFpUnPNgSnUUm47iROf5VKP
- vMsLii4rHGQj0XRR8infuD8HZugtriorAyXKgTzzDmC8md00mlIsu3Nh+JC1D7meVI44=;
+ bh=Pxo3C1FbQBiFVVk4I4XW4JIUkLRkto8SdyzakI4fvIQ=; b=hdI3YGx6gT0YDlWwBGLqshqQ1L
+ 5CWrdqWy0BMYqDu9G0S+fortQr9s84YcOh/yt5F+AV6hiUZjhs+wXHJjvdqRvllZBiGLIko2u1G3m
+ FTpbC+OeboEimRC0uLbB/LYTgz34nbbhhIll/FBobKwLHmf+6oJLLnqDU6tOEsqJ7BD8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ByCrgYSvV5rK109QSaug+H1CHfQ/CtgE19e4KB7BV+c=; b=S8z8rbeHmz50+DTBIqwsoDTCVc
- j1+lqi96+9QgcGvUsJtRwBPKOVkoFjmWBVBOSBMzO0j/Z1lLr+YQbxMJkxIWWDVFiPETno7v2aWrI
- qUTCwaWFkAfWwMm09ITsiZ5kP/4yClmb8/nr3YdD06dXiWrdHcyNm4CTNz7aNI0FDW/U=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Pxo3C1FbQBiFVVk4I4XW4JIUkLRkto8SdyzakI4fvIQ=; b=L
+ cwq4YJNkgACmMMFwuD7Ar9A+o4s7yOLIsDkkP6y8lg5cT5dI6eBolHbfp6wUMlUy0w0X03LYhhMR3
+ 3gbVZDd7zhNoK72XFpNDMzgDCDYgFeWwRWn+ZXDRxT0cw28nlUcPoXiVX55vvgYRMSvhNpAbuoipO
+ 37zaX07x9jpYPH08=;
+Received: from szxga02-in.huawei.com ([45.249.212.188])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oVVsz-0003Rb-A1 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Sep 2022 10:32:54 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 3E754B81630
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  6 Sep 2022 10:32:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0BA6BC433D6
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  6 Sep 2022 10:32:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1662460365;
- bh=nQsmEabX17kN3iNETfIT90cAyKjiksPt5ykWelSElkI=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=l2lSNKKniIwjDmYFxei34ZLrCdA22udwhDInQVHnYqggwPixzqk10uXcSxpM3sCT7
- 0X0kMCkS3fYRStU0zVVoNT16vJyp+XVlwcK8MRyTxWv/ESdgqbHP2paXqFO7206LfD
- TOWHv4wGFpKZAXwsxTBMM5B0CZ263AtScBhOMxOIuJp99bejbYJNII3IKTsQOiw1n/
- 4Bj1c/t5FoDEpXayEPPPEEXvehBQWBL0v70//iKqIITdWpImK3I/4pmDBR0FLnyrm/
- wKFFPFsJsY92AzAtfQLAmTD/yc+WGLC8LRXO/EWvWPbjkpVDnooGXU5bbH7lr7++xj
- QTRzMFhLiAOiA==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id B987BC433E4; Tue,  6 Sep 2022 10:32:44 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 06 Sep 2022 10:32:44 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: linux@sgoth.de
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: cc
-Message-ID: <bug-216050-202145-rQZo4yH4N9@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1oVZuE-00HU2Q-1g for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Sep 2022 14:50:30 +0000
+Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.56])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4MMSrd3RL7zmVDC;
+ Tue,  6 Sep 2022 22:46:41 +0800 (CST)
+Received: from kwepemm600014.china.huawei.com (7.193.23.54) by
+ dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Tue, 6 Sep 2022 22:50:15 +0800
+Received: from huawei.com (10.90.53.225) by kwepemm600014.china.huawei.com
+ (7.193.23.54) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Tue, 6 Sep
+ 2022 22:50:14 +0800
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Tue, 6 Sep 2022 22:53:46 +0800
+Message-ID: <20220906145347.87915-1-zhangqilong3@huawei.com>
+X-Mailer: git-send-email 2.26.0.106.g9fadedd
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+X-Originating-IP: [10.90.53.225]
+X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
+ kwepemm600014.china.huawei.com (7.193.23.54)
+X-CFilter-Loop: Reflected
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 Sebastian
- Goth (linux@sgoth.de) changed: What |Removed |Added CC| |linux@sgoth.de 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  Because the set/clear SBI_IS_RESIZEFS flag not between any
+ locks, there is a race: thread1 thread2 ioctl(resizefs) set RESIZEFS flag
+ ioctl(resizefs) ... set RESIZEFS flag ... clear RESIZEFS flag # the [...]
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [45.249.212.188 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oVVsz-0003Rb-A1
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+X-Headers-End: 1oVZuE-00HU2Q-1g
+Subject: [f2fs-dev] [PATCH -next] f2fs:fix the race condition of resize flag
+ between resizefs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,89 +90,76 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Zhang Qilong via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Zhang Qilong <zhangqilong3@huawei.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+Because the set/clear SBI_IS_RESIZEFS flag not between any locks,
+there is a race:
+  thread1               thread2
+  ioctl(resizefs)
+  set RESIZEFS flag     ioctl(resizefs)
+  ...                   set RESIZEFS flag
+                        ...
+  clear RESIZEFS flag # then no RESIZEFS flag on thread2.
 
-Sebastian Goth (linux@sgoth.de) changed:
+Also before freeze_super, the resizefs not started, we should not set
+the SBI_IS_RESIZEFS flag.
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-                 CC|                            |linux@sgoth.de
+So move the set/clear SBI_IS_RESIZEFS flag between the cp_mutex and
+gc_lock.
 
---- Comment #57 from Sebastian Goth (linux@sgoth.de) ---
-I started to see this on 5.19.6-arch1-1 out of the blue. Noticed the first time
-while processing pacman post-install hooks hanging, so actually working on the
-FS.
-Now the system was essentially idle when f2fs_gc grabbed a core again. 
+Fixes: b4b10061ef98 ("f2fs: refactor resize_fs to avoid meta updates in progress")
+Signed-off-by: Zhang Xiaoxu <zhangxiaoxu5@huawei.com>
+Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
+---
+ fs/f2fs/gc.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-
-INFO: task f2fs_ckpt-259:2:377 blocked for more than 122 seconds.
-      Tainted: P           OE     5.19.6-arch1-1 #1
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:f2fs_ckpt-259:2 state:D stack:    0 pid:  377 ppid:     2 flags:0x00004000
-Call Trace:
- <TASK>
- __schedule+0x356/0x11a0
- ? preempt_schedule+0x43/0x60
- schedule+0x5e/0xd0
- rwsem_down_write_slowpath+0x335/0x720
- ? __schedule+0x35e/0x11a0
- ? __checkpoint_and_complete_reqs+0x1b0/0x1b0 [f2fs
-9fac87d5629570e172d2b77a90a74b98e0678f12]
- __checkpoint_and_complete_reqs+0x7a/0x1b0 [f2fs
-9fac87d5629570e172d2b77a90a74b98e0678f12]
- ? __checkpoint_and_complete_reqs+0x1b0/0x1b0 [f2fs
-9fac87d5629570e172d2b77a90a74b98e0678f12]
- issue_checkpoint_thread+0x4c/0x110 [f2fs
-9fac87d5629570e172d2b77a90a74b98e0678f12]
- ? cpuacct_percpu_seq_show+0x20/0x20
- kthread+0xdb/0x110
- ? kthread_complete_and_exit+0x20/0x20
- ret_from_fork+0x1f/0x30
- </TASK>
-INFO: task kworker/u64:0:5076 blocked for more than 122 seconds.
-      Tainted: P           OE     5.19.6-arch1-1 #1
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:kworker/u64:0   state:D stack:    0 pid: 5076 ppid:     2 flags:0x00004000
-Workqueue: writeback wb_workfn (flush-259:0)
-Call Trace:
- <TASK>
- __schedule+0x356/0x11a0
- ? ttwu_queue_wakelist+0xef/0x110
- schedule+0x5e/0xd0
- schedule_timeout+0x11c/0x150
- __wait_for_common+0x91/0x1d0
- ? usleep_range_state+0x90/0x90
- f2fs_issue_checkpoint+0x11f/0x200 [f2fs
-9fac87d5629570e172d2b77a90a74b98e0678f12]
- f2fs_balance_fs_bg+0x119/0x370 [f2fs 9fac87d5629570e172d2b77a90a74b98e0678f12]
- f2fs_write_node_pages+0x78/0x240 [f2fs
-9fac87d5629570e172d2b77a90a74b98e0678f12]
- do_writepages+0xc1/0x1d0
- ? __percpu_counter_sum+0x5b/0x70
- ? sched_clock_cpu+0xd/0xb0
- __writeback_single_inode+0x3d/0x360
- writeback_sb_inodes+0x1ed/0x4a0
- ? pollwake+0x78/0xa0
- __writeback_inodes_wb+0x4c/0xf0
- wb_writeback+0x204/0x2f0
- wb_workfn+0x36f/0x520
- process_one_work+0x1c4/0x380
- worker_thread+0x51/0x390
- ? rescuer_thread+0x3b0/0x3b0
- kthread+0xdb/0x110
- ? kthread_complete_and_exit+0x20/0x20
- ret_from_fork+0x1f/0x30
- </TASK>
-
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index fd400d148afb..e13aa080ae00 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -2121,8 +2121,6 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 	if (err)
+ 		return err;
+ 
+-	set_sbi_flag(sbi, SBI_IS_RESIZEFS);
+-
+ 	freeze_super(sbi->sb);
+ 	f2fs_down_write(&sbi->gc_lock);
+ 	f2fs_down_write(&sbi->cp_global_sem);
+@@ -2138,6 +2136,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 	if (err)
+ 		goto out_err;
+ 
++	set_sbi_flag(sbi, SBI_IS_RESIZEFS);
+ 	err = free_segment_range(sbi, secs, false);
+ 	if (err)
+ 		goto recover_out;
+@@ -2161,6 +2160,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 		f2fs_commit_super(sbi, false);
+ 	}
+ recover_out:
++	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
+ 	if (err) {
+ 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_err(sbi, "resize_fs failed, should run fsck to repair!");
+@@ -2173,6 +2173,5 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 	f2fs_up_write(&sbi->cp_global_sem);
+ 	f2fs_up_write(&sbi->gc_lock);
+ 	thaw_super(sbi->sb);
+-	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
+ 	return err;
+ }
 -- 
-You may reply to this email to add a comment.
+2.25.1
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
