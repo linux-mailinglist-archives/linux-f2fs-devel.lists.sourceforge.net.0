@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E60115ADD9B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Sep 2022 04:55:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C0E75ADD9D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Sep 2022 04:55:20 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oVOjv-0006l9-CL;
-	Tue, 06 Sep 2022 02:55:03 +0000
+	id 1oVOkA-0006m8-T7;
+	Tue, 06 Sep 2022 02:55:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1oVOjl-0006kv-Gv
+ (envelope-from <chao@kernel.org>) id 1oVOkA-0006ly-4q
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Sep 2022 02:54:53 +0000
+ Tue, 06 Sep 2022 02:55:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1X8SRWDZUo+S/MDa9FwuGplAPL7yn/VXH/J/Yg+0nPM=; b=Jmv/do9v20/Wb1BxBF9u051Gqc
- sNlwGPjQ9qO3SP/761ehZVVlhpa6h8Kv+mK2ONPSD4yTsBxsVn19WMkffYWqkX69330VHRv/+dZMB
- HvZcSsh6tJM9UkSqBE/Z5K4hjKWe0F7ngYiwmezcDdcqP0HSHfQZUPU4l4K/vFMXf/Eg=;
+ bh=8IoBRdwXmp7h+okYlIIUoD8rKaXxRVKQUjSoz7j6qsA=; b=cT2W98erFa+ONsIV895InBpBE4
+ 1ykoaiHgolFr3iusllrcFC7G9Ahk3tELQmJ4yXlkcycYDbzVJ82WSCihuD9kFraZmwVTjh3L2v12P
+ UfIl07ecKTvWQ3TQAZ9K9AcXAGy0Po0GJ8UiVNaAvjf5tsKmGIFJ7IMhGxLCL+g2YaD0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,41 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1X8SRWDZUo+S/MDa9FwuGplAPL7yn/VXH/J/Yg+0nPM=; b=M+ptg+dgpqrQ2O27MfWVwbIeDc
- eP3UenHBTt7wx4cb6xImytA5GS1QhhBdOgkG0d8Y06hC2vHmoLhGGG1C+7ntvAOTUFzWMLZ055a6h
- RvlXFojNCqaDT8N0nzB2Hdzz35Fbpx22vbMcCNjn1lVIFYFsUhN43RY66vMGYTg0+V5s=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=8IoBRdwXmp7h+okYlIIUoD8rKaXxRVKQUjSoz7j6qsA=; b=JfD4yngdMZIAgp/NdNCmPJs5nz
+ zZnERjzH2RLvdhJ6ZQySDgIAOe97yuJSkz0Njo1fpIfKWDKN/8pzgldD1f8VhFGOdt3MnVFiaVZxA
+ z5O/MFbpoIio3EwmbPZrSuSULeh+lFeFJ9ehGBYsXP3LtbANbQMii81ITvHSImlmZFpI=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oVOjk-0006jO-Pp for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Sep 2022 02:54:53 +0000
+ id 1oVOk6-0006ky-O2 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Sep 2022 02:55:16 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id B2220B815AE;
- Tue,  6 Sep 2022 02:54:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64E01C433D6;
- Tue,  6 Sep 2022 02:54:43 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5ADD061298;
+ Tue,  6 Sep 2022 02:55:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A187FC433D6;
+ Tue,  6 Sep 2022 02:55:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1662432884;
- bh=6WIcMluyxNjE8x3fl2dFmcG7nSMpoSTJHkESgINOdr8=;
+ s=k20201202; t=1662432908;
+ bh=3vu7/BadoUfwKE+Cvj2EsCAKeAsqTH+1Me+qR/zjgVk=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=H+JHwTKdBxD4mxBXYK59TMtJ+f6nu0TbR1pTMO0wYh6wkXmix/k2HIbx/FQLESrtL
- 7rVwc7sRn1R11N3ZaC/3mVacSfwV62MwJprc4PDOLU+G4MQtYioYpPgJZqE9dT9kJ7
- LzD2sJuMpP6NUiL6nUPA2shAeiQszqsuHcofP400DcAyDYbXD/tZOjrhxs9vIdouVX
- pEetbCuUV5XIIauS36k3ZXfWvMELuG8VCQsYHtZFdKnTpibEdbLTm73CbtsfXo76fS
- m/6IcmTD0dcwkFIDe2d5XUQxgpfR/0lDh3OmrE2Pq976c4qt5lVmvt89WP//bfpICk
- mF9yBI8QFqptg==
-Message-ID: <ecca60df-8932-7d6d-7bcd-e415e29d7c93@kernel.org>
-Date: Tue, 6 Sep 2022 10:54:41 +0800
+ b=k8PE9kt6sUbSPfAfxrovGYWIW67Vr1Vr3PH+BADB7UWWRCV96K2w5jS57g5WjXeVI
+ wziydIX4y4RkJ/MCUneYumzbkUDGNaiVv/S//H9CnlOSHp1LIdGnlSE7s8xQ3coAsy
+ tvb6ZhILBUDaJ5zDvzRboKEGKzcMV02AOre+c1VSqEJ6z88qFee2McA3KcVpT51C7r
+ oPak2593AGs27fHwFH/aGhtneqRjKr1ilGHBKIKdx7MebZKIuHUHP82DsH2TRitI4M
+ kq2+FXdAvkKu2kitU5Sp81+MCReY58enAY+ldSe3uscAMBGjwTrDNYhiSTP7/L5JOJ
+ yKq5NHNErycTA==
+Message-ID: <de4c9f24-7443-5c07-6fa0-e61d234035f0@kernel.org>
+Date: Tue, 6 Sep 2022 10:55:05 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
 Content-Language: en-US
 To: Zhang Qilong <zhangqilong3@huawei.com>, jaegeuk@kernel.org
-References: <20220829133120.100373-1-zhangqilong3@huawei.com>
+References: <20220830065515.101583-1-zhangqilong3@huawei.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220829133120.100373-1-zhangqilong3@huawei.com>
+In-Reply-To: <20220830065515.101583-1-zhangqilong3@huawei.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -73,14 +73,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/8/29 21:31, Zhang Qilong wrote: > The "true" is not
- match the parametera type "int", and > we modify it. > > Signed-off-by: Zhang
- Qilong <zhangqilong3@huawei.com> Reviewed-by: Chao Yu <chao@kernel.org> 
+ Content preview:  On 2022/8/30 14:55,
+ Zhang Qilong wrote: > Just use the defined
+ COMPRESS_MAPPING to get compress cache > mapping instaed of direct accessing
+ name. > > Signed-off-by: Zhang Qilong <zhangqilong3@huawei.c [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -92,9 +93,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oVOjk-0006jO-Pp
-Subject: Re: [f2fs-dev] [PATCH -next] f2fs: replace logical value "true"
- with a int number
+X-Headers-End: 1oVOk6-0006ky-O2
+Subject: Re: [f2fs-dev] [PATCH -next] f2fs: use COMPRESS_MAPPING to get
+ compress cache mapping
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,9 +112,9 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/8/29 21:31, Zhang Qilong wrote:
-> The "true" is not match the parametera type "int", and
-> we modify it.
+On 2022/8/30 14:55, Zhang Qilong wrote:
+> Just use the defined COMPRESS_MAPPING to get compress cache
+> mapping instaed of direct accessing name.
 > 
 > Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
 
