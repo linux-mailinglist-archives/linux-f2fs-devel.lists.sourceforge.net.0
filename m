@@ -2,82 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5470D5B0000
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Sep 2022 11:10:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 827A25B00D7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Sep 2022 11:47:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oVr4u-0000xL-Q2;
-	Wed, 07 Sep 2022 09:10:36 +0000
+	id 1oVreZ-0005GN-Kk;
+	Wed, 07 Sep 2022 09:47:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1oVr4Z-0000x3-CC
+ (envelope-from <chao@kernel.org>) id 1oVreU-0005Fe-JL
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Sep 2022 09:10:15 +0000
+ Wed, 07 Sep 2022 09:47:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Xpj2U7r7NjexOSS9xVf5PrWGymrSCyPJQhceOLJbhrs=; b=YtGF8uq/1oCEDbBY8D1EmiWpxF
- bs3nqc7WvtnVE/X2SeZG/416zEjUr2psnCIUAz9aa9S3UZ3UqUJ1wlc0OM+p+0JIcYHQ1Ypg8zC/n
- bSKBDiG6Ru8KpHJHfvErNtxTXbIU2QJjpFfrD/7IHEL2JJicOHSXx+2JsPu3EBdMk9UY=;
+ bh=P2lJknDV5Pyx7S0drpWKi7TBL4jWnWHWzzqwVuRm8Q8=; b=HFRid7E3HeWqlmUahLIvCvU9Ba
+ ov+rtErp0IZCkhMRmfsy4JdconkMKPblGbOzQ1kXy9AqrajwVKxGJXstiSlCJoR9h62gcrKFYj/r9
+ 9ZispoN9FWwXKQLO6MQUGjVkCMZSFKd6ZFzkpSqPphaG6JMasu348RHhuQSWph6lUNZA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Xpj2U7r7NjexOSS9xVf5PrWGymrSCyPJQhceOLJbhrs=; b=Nx+pdTIs11VudRCVQQG3UgIR8u
- lbbJYEszHaCSE1hrXCHtGNkQe7LEAel8bNuurSf1HI0adIyXlxt+jW2JYa1EQHAcM/nzf82MlLLAY
- /h6U3j059uGyZzGo8xQ63csp4x6554Z2+EiPPXiiUPJdV7eaN2/SYXQQZ+N+YEZB34tE=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=P2lJknDV5Pyx7S0drpWKi7TBL4jWnWHWzzqwVuRm8Q8=; b=i
+ gK35yB9C+d2uTSZdoYqj4aadA2nidUo7muB/SiuBV6/z8zV9THEyV1o9a5f9vJ4s71pxmKnG/v5ef
+ zXKJQLPzXRvebSb9N+w4zADqTV7Ts+PEL9+M5McSl01/bWA4/vqcef/6F+6+zcfQ4maVidC0HuCfq
+ 60ynWnVk0Cy3Qq2Y=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oVr4Y-00012j-Lp for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Sep 2022 09:10:15 +0000
+ id 1oVreT-000qXL-Rj for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Sep 2022 09:47:22 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3D1E4617FE;
- Wed,  7 Sep 2022 09:10:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9BFE0C433C1;
- Wed,  7 Sep 2022 09:10:05 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7DC3B6184B
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  7 Sep 2022 09:47:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AA80C433C1;
+ Wed,  7 Sep 2022 09:47:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1662541808;
- bh=a6rxNDyNfNYsftFOTgasxTViBPk+jSbvU4105tQOkhw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=WbUGnYmnyFUJoHmUJJNdkTfTbKlPdXgHPr6kq8a5AS52w8H4F2fLqyyuPqnpfXV8k
- 37Zvs4OH5t6Hisr1Kr1ar+Srb4OFC2sceheTmucJeYWHEk0UabmunmqGt+Rmk/BZA+
- MIBjoqwWGIc1EU3fa/Pn7cfW3nZvtyCJNLWYMQY+jxycJNzGnHvEuiUs0DKarv6FSg
- XcNIBcxLDyRBP1Qbu0guN/v1Kfnb3RRqgCT2UJ3oHI7Yc1I2V8NTb8eTLSB5xrknjZ
- ATDIZfsT+DqdOdZMjCbb2DP99VSiZ1Mj/Xnsu3jHmWSU81XAYsNmH/NaXvzC45Ug5c
- w/N7bwzH1xjJw==
-Date: Wed, 7 Sep 2022 11:10:02 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20220907091002.6ay72r4tgk5g6rma@wittgenstein>
-References: <20220827065851.135710-1-ebiggers@kernel.org>
- <20220827065851.135710-2-ebiggers@kernel.org>
+ s=k20201202; t=1662544035;
+ bh=wxDlJ0c4hKUVZs9suWhzzgYGQD2Bvgrvh0QGKG1hKb0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=KzWTPFGlB0P12wKBjBa0PAsUsgQmI+XWbylhGg2ID3BaFeW+8gAMJxPyjMHw/G6M8
+ hKWBXYwaVtUWIYMffQlH9KQsCNPVTLmrDUVe4jF5uayxgTvhwWITUrGXEDRTEzLKn2
+ PzYybZytft/jRhtY38w3yviwzoCF7ij2E/gqgoH/SaBVQ+culyJ40YOJieRJHEpdmY
+ 7uEM9me+FXZjju3kW8rjTrqfdUfM1sxQw0BZia9VGkj05eLtekZRnUSEtyPeU1bNMA
+ x42tYBDiR+NmJmF9BalC781hveOE0AKOTbBi693J0/Q/wx9NLwmyr9GSi4Z/5srRgQ
+ BJkNt/w7e21uA==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Wed,  7 Sep 2022 17:47:08 +0800
+Message-Id: <20220907094708.3679424-1-chao@kernel.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220827065851.135710-2-ebiggers@kernel.org>
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Aug 26, 2022 at 11:58:44PM -0700, Eric Biggers wrote:
- > From: Eric Biggers <ebiggers@google.com> > > Traditionally, the conditions
- for when DIO (direct I/O) is supported > were fairly simple. [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview: As Wenqing Liu reported in bugzilla:
+ https://bugzilla.kernel.org/show_bug.cgi?id=216456
+ loop5: detected capacity change from 0 to 131072 F2FS-fs (loop5):
+ recover_inode:
+ ino = 6, name = hln, inline = 1 F2FS-fs (loop5): recover_data: ino = 6 (i_size:
+ recover) err = 0 F2FS-fs (loop5): recov [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -87,13 +90,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oVr4Y-00012j-Lp
-Subject: Re: [f2fs-dev] [PATCH v5 1/8] statx: add direct I/O alignment
- information
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oVreT-000qXL-Rj
+Subject: [f2fs-dev] [PATCH] f2fs: fix to do sanity on destination blkaddr
+ during recovery
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,75 +105,131 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org,
- "Martin K. Petersen" <martin.petersen@oracle.com>, linux-api@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, Keith Busch <kbusch@kernel.org>,
- linux-fscrypt@vger.kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Christoph Hellwig <hch@lst.de>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Aug 26, 2022 at 11:58:44PM -0700, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
-> 
-> Traditionally, the conditions for when DIO (direct I/O) is supported
-> were fairly simple.  For both block devices and regular files, DIO had
-> to be aligned to the logical block size of the block device.
-> 
-> However, due to filesystem features that have been added over time (e.g.
-> multi-device support, data journalling, inline data, encryption, verity,
-> compression, checkpoint disabling, log-structured mode), the conditions
-> for when DIO is allowed on a regular file have gotten increasingly
-> complex.  Whether a particular regular file supports DIO, and with what
-> alignment, can depend on various file attributes and filesystem mount
-> options, as well as which block device(s) the file's data is located on.
-> 
-> Moreover, the general rule of DIO needing to be aligned to the block
-> device's logical block size was recently relaxed to allow user buffers
-> (but not file offsets) aligned to the DMA alignment instead.  See
-> commit bf8d08532bc1 ("iomap: add support for dma aligned direct-io").
-> 
-> XFS has an ioctl XFS_IOC_DIOINFO that exposes DIO alignment information.
-> Uplifting this to the VFS is one possibility.  However, as discussed
-> (https://lore.kernel.org/linux-fsdevel/20220120071215.123274-1-ebiggers@kernel.org/T/#u),
-> this ioctl is rarely used and not known to be used outside of
-> XFS-specific code.  It was also never intended to indicate when a file
-> doesn't support DIO at all, nor was it intended for block devices.
-> 
-> Therefore, let's expose this information via statx().  Add the
-> STATX_DIOALIGN flag and two new statx fields associated with it:
-> 
-> * stx_dio_mem_align: the alignment (in bytes) required for user memory
->   buffers for DIO, or 0 if DIO is not supported on the file.
-> 
-> * stx_dio_offset_align: the alignment (in bytes) required for file
->   offsets and I/O segment lengths for DIO, or 0 if DIO is not supported
->   on the file.  This will only be nonzero if stx_dio_mem_align is
->   nonzero, and vice versa.
-> 
-> Note that as with other statx() extensions, if STATX_DIOALIGN isn't set
-> in the returned statx struct, then these new fields won't be filled in.
-> This will happen if the file is neither a regular file nor a block
-> device, or if the file is a regular file and the filesystem doesn't
-> support STATX_DIOALIGN.  It might also happen if the caller didn't
-> include STATX_DIOALIGN in the request mask, since statx() isn't required
-> to return unrequested information.
-> 
-> This commit only adds the VFS-level plumbing for STATX_DIOALIGN.  For
-> regular files, individual filesystems will still need to add code to
-> support it.  For block devices, a separate commit will wire it up too.
-> 
-> Reviewed-by: Christoph Hellwig <hch@lst.de>
-> Reviewed-by: Darrick J. Wong <djwong@kernel.org>
-> Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> ---
+As Wenqing Liu reported in bugzilla:
 
-Looks good to me,
-Reviewed-by: Christian Brauner (Microsoft) <brauner@kernel.org>
+https://bugzilla.kernel.org/show_bug.cgi?id=216456
+
+loop5: detected capacity change from 0 to 131072
+F2FS-fs (loop5): recover_inode: ino = 6, name = hln, inline = 1
+F2FS-fs (loop5): recover_data: ino = 6 (i_size: recover) err = 0
+F2FS-fs (loop5): recover_inode: ino = 6, name = hln, inline = 1
+F2FS-fs (loop5): recover_data: ino = 6 (i_size: recover) err = 0
+F2FS-fs (loop5): recover_inode: ino = 6, name = hln, inline = 1
+F2FS-fs (loop5): recover_data: ino = 6 (i_size: recover) err = 0
+F2FS-fs (loop5): Bitmap was wrongly set, blk:5634
+------------[ cut here ]------------
+WARNING: CPU: 3 PID: 1013 at fs/f2fs/segment.c:2198
+RIP: 0010:update_sit_entry+0xa55/0x10b0 [f2fs]
+Call Trace:
+ <TASK>
+ f2fs_do_replace_block+0xa98/0x1890 [f2fs]
+ f2fs_replace_block+0xeb/0x180 [f2fs]
+ recover_data+0x1a69/0x6ae0 [f2fs]
+ f2fs_recover_fsync_data+0x120d/0x1fc0 [f2fs]
+ f2fs_fill_super+0x4665/0x61e0 [f2fs]
+ mount_bdev+0x2cf/0x3b0
+ legacy_get_tree+0xed/0x1d0
+ vfs_get_tree+0x81/0x2b0
+ path_mount+0x47e/0x19d0
+ do_mount+0xce/0xf0
+ __x64_sys_mount+0x12c/0x1a0
+ do_syscall_64+0x38/0x90
+ entry_SYSCALL_64_after_hwframe+0x63/0xcd
+
+If we enable CONFIG_F2FS_CHECK_FS config, it will trigger a kernel panic
+instead of warning.
+
+The root cause is: in fuzzed image, SIT table is inconsistent with inode
+mapping table, result in triggering such warning during SIT table update.
+
+This patch introduces a new flag DATA_GENERIC_ENHANCE_UPDATE, w/ this
+flag, data block recovery flow can check destination blkaddr's validation
+in SIT table, and skip f2fs_replace_block() to avoid inconsistent status.
+
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/checkpoint.c | 10 +++++++++-
+ fs/f2fs/f2fs.h       |  4 ++++
+ fs/f2fs/recovery.c   |  8 ++++++++
+ 3 files changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 7bf1feb5ac78..dd7c7e7f2f4a 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -140,7 +140,7 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
+ 	unsigned int segno, offset;
+ 	bool exist;
+ 
+-	if (type != DATA_GENERIC_ENHANCE && type != DATA_GENERIC_ENHANCE_READ)
++	if (type == DATA_GENERIC)
+ 		return true;
+ 
+ 	segno = GET_SEGNO(sbi, blkaddr);
+@@ -148,6 +148,13 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
+ 	se = get_seg_entry(sbi, segno);
+ 
+ 	exist = f2fs_test_bit(offset, se->cur_valid_map);
++	if (exist && type == DATA_GENERIC_ENHANCE_UPDATE) {
++		f2fs_err(sbi, "Inconsistent error blkaddr:%u, sit bitmap:%d",
++			 blkaddr, exist);
++		set_sbi_flag(sbi, SBI_NEED_FSCK);
++		return exist;
++	}
++
+ 	if (!exist && type == DATA_GENERIC_ENHANCE) {
+ 		f2fs_err(sbi, "Inconsistent error blkaddr:%u, sit bitmap:%d",
+ 			 blkaddr, exist);
+@@ -185,6 +192,7 @@ bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+ 	case DATA_GENERIC:
+ 	case DATA_GENERIC_ENHANCE:
+ 	case DATA_GENERIC_ENHANCE_READ:
++	case DATA_GENERIC_ENHANCE_UPDATE:
+ 		if (unlikely(blkaddr >= MAX_BLKADDR(sbi) ||
+ 				blkaddr < MAIN_BLKADDR(sbi))) {
+ 			f2fs_warn(sbi, "access invalid blkaddr:%u",
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 35f9e1a6a1bf..baf621ca2fe7 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -266,6 +266,10 @@ enum {
+ 					 * condition of read on truncated area
+ 					 * by extent_cache
+ 					 */
++	DATA_GENERIC_ENHANCE_UPDATE,	/*
++					 * strong check on range and segment
++					 * bitmap for update case
++					 */
+ 	META_GENERIC,
+ };
+ 
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index dcd0a1e35095..8326003e6918 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -698,6 +698,14 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
+ 				goto err;
+ 			}
+ 
++			if (f2fs_is_valid_blkaddr(sbi, dest,
++					DATA_GENERIC_ENHANCE_UPDATE)) {
++				f2fs_err(sbi, "Inconsistent dest blkaddr:%u, ino:%lu, ofs:%u",
++					dest, inode->i_ino, dn.ofs_in_node);
++				err = -EFSCORRUPTED;
++				goto err;
++			}
++
+ 			/* write dummy data page */
+ 			f2fs_replace_block(sbi, &dn, src, dest,
+ 						ni.version, false, false);
+-- 
+2.25.1
+
 
 
 _______________________________________________
