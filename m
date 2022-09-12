@@ -2,98 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA3E65B525A
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Sep 2022 02:54:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54C335B5738
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Sep 2022 11:31:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oXXie-0002mc-4O;
-	Mon, 12 Sep 2022 00:54:36 +0000
+	id 1oXfmV-0006zf-Tv;
+	Mon, 12 Sep 2022 09:31:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1oXXic-0002mW-Ib
+ (envelope-from <zhangqilong3@huawei.com>) id 1oXfm3-0006yO-Fo
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Sep 2022 00:54:34 +0000
+ Mon, 12 Sep 2022 09:30:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BJtnBsrJ6PFSqYFNEgfKJ7NF+9T6DiCRBeZfcGHjna0=; b=BkzxIgWpQC1Ubn9/Y6okl8VY6+
- nyWpMypwcXGTSwkaoCl1/fd2qFOrjDk1KxeqGkk8BjQYEUcWRl8+NAJ82Wg0NaIGFqKQdnSdUKv9P
- K3pZhp468cRWVAn/kd43g6i7TOgRKX0uPs/FbMMdyUIOxSYGIpiDBGRYtR/WMwf3BdxE=;
+ bh=K1k971ZQgZFYYqy5OZOhSUTMMezU4EEkDKOmtCeyxcg=; b=M4CnHxMrYXuilD9RBJb0gWslS7
+ ogzlzA774TnTrxJqNtfHrgnaotz9ozpSNeZufQ76bcc0HLX4Zkt3yBFQVEpHJSxhX3jGgTu8uk7YC
+ K5mwO5X0FJYIHxW/mmvFdNyElFK1xnXsGEkln6FZfXx2lIGDJxiUERxGlZhDYda83L0k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BJtnBsrJ6PFSqYFNEgfKJ7NF+9T6DiCRBeZfcGHjna0=; b=bsKd9vmK6sCbWrQBe3g5qVii6A
- Yv5jfzF0VmRXCQficzfpXTzwPaDvxElOz5m3gxmvuFCgKa7FUpzXAoCIn2VHJ4awyaOWd9tdQwyHW
- FtbZ3w0DJXcTZV9TLgTi23I59Ot9nDjrpDUORx+VDxK9AaMBYMcuTfTzciwVtyfl6uGg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=K1k971ZQgZFYYqy5OZOhSUTMMezU4EEkDKOmtCeyxcg=; b=FUX5xrU+r+Eg7kGm+SrSAomgpL
+ ikepVdyFwprAwNYtq2hbGrJjgkPs62/c8jBH5g4rYr7kBbZS3k3UaLHxtsqPbOKL2arvIVIhCgTPn
+ EoB1o0b6Lp3/jaf46tdLc5a0FC8IDPW80k9LroJoIbaqFIMkPPkBvIMo69DUN+4r25wI=;
+Received: from szxga08-in.huawei.com ([45.249.212.255])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oXXiX-005OAB-1Q for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Sep 2022 00:54:34 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6578161149;
- Mon, 12 Sep 2022 00:54:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09F45C433D6;
- Mon, 12 Sep 2022 00:54:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1662944059;
- bh=WDVtmnzEsaEU55TuvLxBRymxTuYaVUC9hgjRIe0bHt0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ZoxnvrqSSY20wV65g7z6/rwjE02vykYR2j0xgsMFiTFS3wcFoXQgc7ddRv8HVfb3f
- Kwr6X2fw2mafz42Qbx5YdEIQQnsRulU5GDprmsG01tejmSwgFvr4Jx1B47ZL2SiCcG
- Eyn7qIRIzb0YqpOmcociLL5XyxfDzbh0zkynyL7M0TA1icIoVgkGtGXOVtBvjI1oIN
- Iw8cbqxwN+hQUZueBTkmVgQV2RAaCxx5KdzDrA5EkbLK7xfUqnQisUx0ldrLzg3M1r
- oaH/BIP5FZbUDfOMoORvOPkiaFMoOUQT1g/YGC/jN8fIFwm06y/Lc3y+CcDBzZnAwH
- 78iOtWwzF2Ivg==
-Date: Sun, 11 Sep 2022 19:54:12 -0500
-From: Eric Biggers <ebiggers@kernel.org>
-To: Stephen Rothwell <sfr@canb.auug.org.au>, linux-next@vger.kernel.org
-Message-ID: <Yx6DNIorJ86IWk5q@quark>
-References: <20220827065851.135710-1-ebiggers@kernel.org>
- <YxfE8zjqkT6Zn+Vn@quark>
+ id 1oXflx-0006Mp-Vy for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 12 Sep 2022 09:30:35 +0000
+Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.56])
+ by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4MR1SQ3bkQz14QNW;
+ Mon, 12 Sep 2022 17:26:30 +0800 (CST)
+Received: from kwepemm000014.china.huawei.com (7.193.23.6) by
+ dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Mon, 12 Sep 2022 17:30:25 +0800
+Received: from kwepemm600014.china.huawei.com (7.193.23.54) by
+ kwepemm000014.china.huawei.com (7.193.23.6) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Mon, 12 Sep 2022 17:30:24 +0800
+Received: from kwepemm600014.china.huawei.com ([7.193.23.54]) by
+ kwepemm600014.china.huawei.com ([7.193.23.54]) with mapi id 15.01.2375.031;
+ Mon, 12 Sep 2022 17:30:24 +0800
+To: Chao Yu <chao@kernel.org>, "jaegeuk@kernel.org" <jaegeuk@kernel.org>
+Thread-Topic: [PATCH -next] f2fs: add flush_dcache_page after page was written
+Thread-Index: AQHYwZvdHfXKu6+yHk+rNkFeNZ6jq63bgVBw
+Date: Mon, 12 Sep 2022 09:30:24 +0000
+Message-ID: <acfb1d9c7879402dae6fe4b70a46303b@huawei.com>
+References: <20220825024102.120651-1-zhangqilong3@huawei.com>
+ <bf003c19-7d0b-9045-0df5-baf423bdb8e9@kernel.org>
+In-Reply-To: <bf003c19-7d0b-9045-0df5-baf423bdb8e9@kernel.org>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.174.177.246]
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YxfE8zjqkT6Zn+Vn@quark>
-X-Spam-Score: -5.2 (-----)
+X-CFilter-Loop: Reflected
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Sep 06, 2022 at 03:08:51PM -0700, Eric Biggers wrote:
- > On Fri, Aug 26, 2022 at 11:58:43PM -0700, Eric Biggers wrote: > > This
- patchset makes the statx() system call return direct I/O (DIO) > [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  > > On 2022/8/25 10:41,
+ Zhang Qilong wrote: > > If the written
+ page was mapped more than twice, the written data here > > will not be seen
+ by others. We add the flush_dcache_page to fix it. > > > > Fi [...] 
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [45.249.212.255 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oXXiX-005OAB-1Q
-Subject: Re: [f2fs-dev] [PATCH v5 0/8] make statx() return DIO alignment
- information
+X-Headers-End: 1oXflx-0006Mp-Vy
+Subject: [f2fs-dev] =?utf-8?b?562U5aSNOiBbUEFUQ0ggLW5leHRdIGYyZnM6IGFkZCBm?=
+ =?utf-8?q?lush=5Fdcache=5Fpage_after_page_was_written?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,40 +101,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-api@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>,
- Keith Busch <kbusch@kernel.org>, linux-ext4@vger.kernel.org
+From: zhangqilong via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: zhangqilong <zhangqilong3@huawei.com>
+Cc: "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Sep 06, 2022 at 03:08:51PM -0700, Eric Biggers wrote:
-> On Fri, Aug 26, 2022 at 11:58:43PM -0700, Eric Biggers wrote:
-> > This patchset makes the statx() system call return direct I/O (DIO)
-> > alignment information.  This allows userspace to easily determine
-> > whether a file supports DIO, and if so with what alignment restrictions.
 > 
-> Al, any thoughts on this patchset, and do you plan to apply it for 6.1?  Ideally
-> this would go through the VFS tree.  If not, I suppose I'll need to have it
-> added to linux-next and send the pull request myself.
+> On 2022/8/25 10:41, Zhang Qilong wrote:
+> > If the written page was mapped more than twice, the written data here
+> > will not be seen by others. We add the flush_dcache_page to fix it.
+> >
+> > Fixes:0a2aa8fbb9693 ("f2fs: refactor __exchange_data_block for speed
+> > up")
+> > Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
+> > ---
+> >   fs/f2fs/file.c | 1 +
+> >   1 file changed, 1 insertion(+)
+> >
+> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c index
+> > ab9844eaa62c..b593e41dbfb3 100644
+> > --- a/fs/f2fs/file.c
+> > +++ b/fs/f2fs/file.c
+> > @@ -1273,6 +1273,7 @@ static int __clone_blkaddrs(struct inode
+> *src_inode, struct inode *dst_inode,
+> >   				return PTR_ERR(pdst);
+> >   			}
+> >   			memcpy_page(pdst, 0, psrc, 0, PAGE_SIZE);
+> > +			flush_dcache_page(pdst);
 > 
-> - Eric
+> __clone_blkaddrs() was introduced for fallocate() w/
+> FALLOC_FL_COLLAPSE_RANGE and FALLOC_FL_INSERT_RANGE cases, they
+> are both covered w/ invalidate_lock, and before __clone_blkaddrs(), it
+> will call truncate_pagecache() to drop all mapping of pagecache, so it's
+> safe here?
+> 
+> Instead, in f2fs_move_file_range(), we need to cover
+> __exchange_data_block() w/ invalidate_lock and drop pagecache as well
+> as fallocate() does?
 
-Seems that it's up to me, then.
+Yes ,it seems has the problem. I test it just now through the POC( ioctl(fd1, F2FS_IOC_MOVE_RANGE, &arg). I read the old data before dropping the cache. It refreshes the source file data after manually dropping cache. I will propose a new patch to solve this problem.
 
-Stephen, can you add my git branch for this patchset to linux-next?
+Thanks,
 
-URL: https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git
-Branch: statx-dioalign
-
-This is targeting the 6.1 merge window with a pull request to Linus.
-
-Thanks!
-
-- Eric
-
+> 
+> Thanks,
+> 
+> >   			set_page_dirty(pdst);
+> >   			f2fs_put_page(pdst, 1);
+> >   			f2fs_put_page(psrc, 1);
 
 _______________________________________________
 Linux-f2fs-devel mailing list
