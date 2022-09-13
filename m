@@ -2,86 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61EB65B73D0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Sep 2022 17:16:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 436E25B75A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Sep 2022 17:52:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oY7eB-0000DZ-QF;
-	Tue, 13 Sep 2022 15:16:23 +0000
+	id 1oY8DQ-00010v-Le;
+	Tue, 13 Sep 2022 15:52:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1oY7eA-0000DM-Lr
+ (envelope-from <jaegeuk@kernel.org>) id 1oY8DO-00010p-UJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Sep 2022 15:16:22 +0000
+ Tue, 13 Sep 2022 15:52:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PyNkXQj9csRFSISCiW7phBUcxUkMrhX7zaPlsbO12y0=; b=iCu+xloEVuVWkIGa9D4YGJd1WP
- akSOMzDje4Kblv6jQLv/UEzpx+/9M8rY+Xc3ktyGNNuioLaRVgUB02ZjtFzxziT9AdpiB2IcyJYKH
- pH4SNvia+urtV4ejgXncmJHkNsY0hGyAiA8oApCVIBDd59tjUqv+gRbyWuiFXvdPn3cU=;
+ bh=GXdLgvskMBEj8Bwf1bmyU6kZBFlNXXaoRR/bUNcvDM0=; b=mUcBVhJSbl0tS8iopSdrO/WPRm
+ srj5RYs//QpGtvszUkbpMu0PdW6yRvEjA+V1DlP5xtUrl7vHFII68DJ+FgOiBDLtM+zE7LW+oQ2pA
+ W7qua6GsWVXVUYRW/7MqHbd1OA+xz8fg7SLoHsIqX0Z8suk99Go48TUqd0SgH0r/L+LA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PyNkXQj9csRFSISCiW7phBUcxUkMrhX7zaPlsbO12y0=; b=cBL77npavSaNRfYnZpzYRgJt4D
- uyyRGPMF7q6ZOzrz74Dwo8YZ5gyr37aYHxhW08vZoI+yYo+QKjsKnjm9YuaY6VDHo+WxHms8GQmo/
- FzXSui6myehJrSWTNN8BbjvlX7O8ZEJzgvd8fJizExNuEk9YpL3d62QY1Ind6qqUDuEQ=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=GXdLgvskMBEj8Bwf1bmyU6kZBFlNXXaoRR/bUNcvDM0=; b=dNLDqLoukm/JsihwdktdFOWsPL
+ zi+/a8V3/n4IpcZuzr0O78/RZPjAAVL8wwMwvVTqP03oGr9GfIOqhmZOr0DZh6M3BHC6hOAs7EL9A
+ 1Eq7PqybujEP9HYx0bVL8TqPZ5kq9xU/fiD+grNBR3TMUZM7xx4YMVG90JE1apoUKOM8=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oY7e9-0071PT-Ug for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Sep 2022 15:16:22 +0000
+ id 1oY8DI-0006tH-VN for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Sep 2022 15:52:46 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id BC303614D9;
- Tue, 13 Sep 2022 15:16:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A92F3C433C1;
- Tue, 13 Sep 2022 15:16:10 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id DE357B80F63;
+ Tue, 13 Sep 2022 15:52:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AFE7C433C1;
+ Tue, 13 Sep 2022 15:52:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1663082171;
- bh=TRhvgutL1EySgBuRhk+eWZqDTQ6EUt1+sn/lznv941g=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ofkihlTBHgCdomNj8pb8NwGEH7Y/t3+ooCNDQyviFGE0Nr/2lyntvE5qU2AYpUgf9
- AFA48V7CdFyqYe+bwRlbOl/0JwPBr+PuHyeM72yjvkMummAjFMDgqVKaLhXN3p9PXV
- 4qnf77IPa0jrt+Oj0IkMY7Ze9Flvdcv1BBbLVDz2nI1mzePBdr1u0No74duRJbIUZh
- ZjOzp+8hSX89XKzI/XNaZ+R6fsTYxdkv5MSvZ6UAgo5Dxyb+mnRinnKo2M0v9+cxaf
- 8NgZs4p25yuCAY/q5Aauj8RJhUnfgT19FTNuAmnQaFWzaq36rQ4vCC+an/yIPQ9U1e
- IZ69lN10wwpLA==
-Message-ID: <f7f780c3-a414-f198-95de-08362bfa5257@kernel.org>
-Date: Tue, 13 Sep 2022 23:16:09 +0800
+ s=k20201202; t=1663084348;
+ bh=Qbso1G7bFMbOOqDnPgb364wGEcLd5pXd8sBZhrc/NBs=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=REdQHWf7iue+vsbo9b1g7grpGR41pnc3SQ7uAinKUglxQ9tTMCMy5AP4o60k6tbcz
+ Xp9qhNZ6ydGQ4D7RbCKR6k9hlzPhcWGfWPlUcEB250grWkSZ5EPT5+1GH8IF2TT7+W
+ WxE43BCf7E4CMmCKaCwahgJoBNn/SQADNEyk7ic3Ygk0RyvnUdLMk31mnwgKz7Q3R/
+ +Wj7uxtECdehURN32WATHtSP8LW/Z+BFcZu2H7ytJtmSwKsZ/FSyR8jmpVM+/5h0Rf
+ beeRKzanuHZUzhrd+GdZ3bPReasBTohMmfZ1mO8/hFelmdU7o9cDshyuH3wwlQqyTk
+ pTlHtz1yjfH5A==
+Date: Tue, 13 Sep 2022 08:52:26 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Zhang Qilong <zhangqilong3@huawei.com>
+Message-ID: <YyCnOsjAmWCsP9G9@google.com>
+References: <20220913150604.45447-1-zhangqilong3@huawei.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.0
-Content-Language: en-US
-To: Christian Brauner <brauner@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20220909091744.933297-1-brauner@kernel.org>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220909091744.933297-1-brauner@kernel.org>
-X-Spam-Score: -7.9 (-------)
+Content-Disposition: inline
+In-Reply-To: <20220913150604.45447-1-zhangqilong3@huawei.com>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/9/9 17:17, Christian Brauner wrote: > A while ago
- we introduced a dedicated vfs{g,
- u}id_t type in commit > 1e5267cd0895 ("mnt_idmapping:
- add vfs{g,u}id_t"). We already switched > over a good pa [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  On 09/13,
+ Zhang Qilong wrote: > Found serveral code type errors
+ when review the code and fix it. > There is no function change. Could you
+ please combine them into single patch? Thanks, > > Zhang Qilong (3): > f2fs:
+ insert a space around colon > f2fs: replace spaces with tabs > f2fs: fix
+ a stype error in f2fs_update_extent_tree_range > > fs/f2fs/data.c | 2 +- >
+ fs/f2fs/debug.c | 2 +- [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -91,11 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oY7e9-0071PT-Ug
-Subject: Re: [f2fs-dev] [PATCH] f2fs: port to vfs{g,
- u}id_t and associated helpers
+X-Headers-End: 1oY8DI-0006tH-VN
+Subject: Re: [f2fs-dev] [PATCH -next 0/3] f2fs: clean code and fix type error
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,29 +106,33 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net, Seth Forshee <sforshee@kernel.org>,
- Christoph Hellwig <hch@lst.de>
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/9/9 17:17, Christian Brauner wrote:
-> A while ago we introduced a dedicated vfs{g,u}id_t type in commit
-> 1e5267cd0895 ("mnt_idmapping: add vfs{g,u}id_t"). We already switched
-> over a good part of the VFS. Ultimately we will remove all legacy
-> idmapped mount helpers that operate only on k{g,u}id_t in favor of the
-> new type safe helpers that operate on vfs{g,u}id_t.
-> 
-> Cc: Seth Forshee (Digital Ocean) <sforshee@kernel.org>
-> Cc: Christoph Hellwig <hch@lst.de>
-> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-> Cc: Chao Yu <chao@kernel.org>
-> Cc: linux-f2fs-devel@lists.sourceforge.net
-> Signed-off-by: Christian Brauner (Microsoft) <brauner@kernel.org>
+On 09/13, Zhang Qilong wrote:
+> Found serveral code type errors when review the code and fix it.
+> There is no function change.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
-
+Could you please combine them into single patch?
 Thanks,
+
+> 
+> Zhang Qilong (3):
+>   f2fs: insert a space around colon
+>   f2fs: replace spaces with tabs
+>   f2fs: fix a stype error in f2fs_update_extent_tree_range
+> 
+>  fs/f2fs/data.c         | 2 +-
+>  fs/f2fs/debug.c        | 2 +-
+>  fs/f2fs/extent_cache.c | 2 +-
+>  fs/f2fs/file.c         | 2 +-
+>  fs/f2fs/node.c         | 2 +-
+>  5 files changed, 5 insertions(+), 5 deletions(-)
+> 
+> -- 
+> 2.25.1
 
 
 _______________________________________________
