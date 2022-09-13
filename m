@@ -2,73 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88C015B7D53
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Sep 2022 01:05:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 654CF5B7DB3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Sep 2022 01:59:27 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oYExj-0001Mm-Fa;
-	Tue, 13 Sep 2022 23:05:03 +0000
+	id 1oYFoL-0002O2-L7;
+	Tue, 13 Sep 2022 23:59:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <phdm@macqel.be>) id 1oYExh-0001MU-7h
+ (envelope-from <krisman@collabora.com>) id 1oYFoC-0002NW-F5
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Sep 2022 23:05:01 +0000
+ Tue, 13 Sep 2022 23:59:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KmKY4H5hjDAqrgHPX6aEmgmlnao3PFGaIetaaGFiisg=; b=L5ri9bkMrudM5e58pQkeXXIZEV
- SH0RyduaMghxr7x5YvosjAmgAXMse3Xea90dEEdJ7AVAFp6qfOrhFLMeuPmNfOd/iEGcPNW7QrKzv
- WFRgpNKu5BYYDZBNC/p74Fca16JRLgL71wIH76pZTIlAjQHWG+hRsHGJulmfHHaLrJN0=;
+ bh=Me7nQ7Qt+8UkL7nbZD5XTfeD2SYCxvRRo8RPBs6XHhQ=; b=L+WRsb5hO2whRZBuyG6Zvs8UhA
+ ELOURZMXJfcEzXtm36H0+TVu4NL+gPRE/o7nsD2neyw9UTeyjCmoUAEu5uibxDPihGcrjiJhf3Kty
+ pljMcNYjGnfmH18eWwGC5v8BIWo8hHSSIM6Uwdas1s4xItSoP8rPWhIapJsi3udHLBKY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:To:From:Date:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=KmKY4H5hjDAqrgHPX6aEmgmlnao3PFGaIetaaGFiisg=; b=U
- N2xZ1QBukuASU8TnHfZUa56nbGkPl459tWGkD5gP3nM4YF3zes1nbTluUsliVa6fDg9oXwVnnecsS
- YGqzzUDqZrld8QIVQiQKypW5dJtkocBnpDiP9Lr9yvK6fV2HEe8tbtaRJ7MbKg9cFXBqMxhsxpKLx
- DerK54YWarcJyaaU=;
-Received: from smtp2.macqel.be ([109.135.2.61] helo=frolo.macqel.be)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1oYExe-007LAM-MD for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Sep 2022 23:05:01 +0000
-Received: by frolo.macqel.be (Postfix, from userid 1000)
- id 1D40FDF00AC; Wed, 14 Sep 2022 00:49:08 +0200 (CEST)
-Date: Wed, 14 Sep 2022 00:49:08 +0200
-From: Philippe De Muyter <phdm@macq.eu>
-To: linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <20220913224908.GA25100@172.21.0.10>
+ List-Owner:List-Archive; bh=Me7nQ7Qt+8UkL7nbZD5XTfeD2SYCxvRRo8RPBs6XHhQ=; b=n
+ DuLI9B3eTHMxcH1L9ffBm0RreZEBDZ31IPagOp/BeV7+/MVxSPzRPblOu7bASKghTIKbRjGoZ4Kwl
+ 97kBnq9v4WB2tgMqqhNBy1ANDML4kMRPRusKpm6gnBs90Bv7lky7fyuKyidoQjPjb7a0eZb6iCCYc
+ BD6b3Y8jQeKuaTs4=;
+Received: from madras.collabora.co.uk ([46.235.227.172])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1oYFo8-00035Q-6s for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Sep 2022 23:59:16 +0000
+Received: from localhost (modemcable141.102-20-96.mc.videotron.ca
+ [96.20.102.141])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: krisman)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 5CB626601FB9;
+ Wed, 14 Sep 2022 00:41:59 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1663112519;
+ bh=NkYVyeuwI/2gBd1BQe2j2SOPCFHneHhCTKmec17TYMo=;
+ h=From:To:Cc:Subject:Date:From;
+ b=g+iniuRQu5VXHNund2XMCfZ2vMLAqfVZ2Ls+dexJ2CwAzNMjXu9EGk/8Y5+Rv7AQn
+ fKCXKFPH4GMCEAAZkAHBvXZScoOdOyCn2/OBA4kMC/GrSxAJOnIJUekA5DWpb5HAlY
+ xRbStlOQPcULVG8KAtl8oi5mLlGNN1/VBwI7NedFrgdjKlngOD1tg+qEHGCymSAEyp
+ 1HDjulkiZ7a2G5dqyvpmmbIEgFeCj8rQ/Y5CDW2ybqFbfQ6qtu+qCEefk/CRWsiwWd
+ HaSMRO02UFmpahzjKOuvbriBn+tmdIYuKcxIo78Leck8iROr9PaJUUFN6+LesOyF4w
+ ZqLedh7gaqocg==
+From: Gabriel Krisman Bertazi <krisman@collabora.com>
+To: tytso@mit.edu, adilger.kernel@dilger.ca, jaegeuk@kernel.org,
+ ebiggers@kernel.org
+Date: Tue, 13 Sep 2022 19:41:42 -0400
+Message-Id: <20220913234150.513075-1-krisman@collabora.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-Spam-Score: 0.2 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello, I use the f2fs version from linux 4.1.15 for the root
- partition of our product. At that time, fsck.f2fs did nothing. But now I
- feel the need to run fsck.f2fs in a initramfs at startup. I have cloned
- f2fs-tools and compiled version 1.14 of f2fs.fsck,
- and used it to check and fix automatically, 
- with option '-y', my root partition. 
- Content analysis details:   (0.2 points, 6.0 required)
+ Content preview:  Hi, I'm resubmitting this as v9 since I think it has fallen
+ through the cracks :). It is a collection of trivial fixes for casefold
+ support
+ on ext4/f2fs. More details below. It has been sitting on the list for a while
+ and most of it is r-b already. I'm keeping the tags for this submission,
+ since there is no modifications from previous submissions, apart from a minor
+ confl [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1oYExe-007LAM-MD
-Subject: [f2fs-dev] concern about f2fs and fsck.f2fs
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1oYFo8-00035Q-6s
+Subject: [f2fs-dev] [PATCH v9 0/8] Clean up the case-insensitive lookup path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -80,152 +102,69 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>,
+ kernel@collabora.com, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+Hi,
 
-I use the f2fs version from linux 4.1.15 for the root partition of our product.
-At that time, fsck.f2fs did nothing.  But now I feel the need to run fsck.f2fs
-in a initramfs at startup.
+I'm resubmitting this as v9 since I think it has fallen through the
+cracks :).  It is a collection of trivial fixes for casefold support on
+ext4/f2fs. More details below.
 
-I have cloned f2fs-tools and compiled version 1.14 of f2fs.fsck, and used
-it to check and fix automatically, with option '-y', my root partition.
+It has been sitting on the list for a while and most of it is r-b
+already. I'm keeping the tags for this submission, since there is no
+modifications from previous submissions, apart from a minor conflict
+resolution when merging to linus/master.
 
-When running it on a previously fsck'd partition, where I had installed
-new files and shutdown the system properly, I have run fsck.f2fs and
-it gave me thousands of messages
+Thanks,
 
- [FIX] (fsck_chk_inode_blk:1141)  --> Regular: 0x13cc1 reset i_gc_failures from 0x1 to 0x00
- ...
- [FIX] (fsck_chk_inode_blk:1141)  --> Regular: 0x81b4 reset i_gc_failures from 0x1 to 0x00
+v8: https://patchwork.ozlabs.org/project/linux-ext4/cover/20220519212359.19442-1-krisman@collabora.com/
 
-and finished with :
+* Original commit letter
 
- [FSCK] Check node 76051 / 76058 (100.00%)
- 
- [FSCK] Max image size: 3600 MB, Free space: 887 MB
- [FSCK] Unreachable nat entries                        [Ok..] [0x0]
- [FSCK] SIT valid block bitmap checking                [Ok..]
- [FSCK] Hard link checking for regular file            [Ok..] [0x956]
- [FSCK] valid_block_count matching with CP             [Ok..] [0x96a9c]
- [FSCK] valid_node_count matching with CP (de lookup)  [Ok..] [0x1291a]
- [FSCK] valid_node_count matching with CP (nat lookup) [Ok..] [0x1291a]
- [FSCK] valid_inode_count matched with CP              [Ok..] [0x1280b]
- [FSCK] free segment_count matched with CP             [Ok..] [0x217]
- [FSCK] next block offset is free                      [Ok..]
- [FSCK] fixing SIT types
- [FSCK] other corrupted bugs                           [Ok..]
- Info: Duplicate valid checkpoint to mirror position 1024 -> 512
- Info: Write valid nat_bits in checkpoint
- Info: Write valid nat_bits in checkpoint
- 
- Done: 288.437391 secs
- 
-But, afterwards, when the f2fs driver in the kernel worked with the fixed file
-system, it complained, only once, with :
+The case-insensitive implementations in f2fs and ext4 have quite a bit
+of duplicated code.  This series simplifies the ext4 version, with the
+goal of extracting ext4_ci_compare into a helper library that can be
+used by both filesystems.  It also reduces the clutter from many
+codeguards for CONFIG_UNICODE; as requested by Linus, they are part of
+the codeflow now.
 
- [ 2349.673407] ------------[ cut here ]------------
- [ 2349.676777] WARNING: CPU: 0 PID: 2359 at fs/f2fs/node.c:1863 flush_nat_entries+0x734/0x7c4()
- [ 2349.683996] Modules linked in:
- [ 2349.685796] CPU: 0 PID: 2359 Comm: python3 Not tainted 4.1.15-02177-gcef0cbe-dirty #166
- [ 2349.692527] Hardware name: Freescale i.MX6 Quad/DualLite (Device Tree)
- [ 2349.697780] [<80015f58>] (unwind_backtrace) from [<80012020>] (show_stack+0x10/0x14)
- [ 2349.704273] [<80012020>] (show_stack) from [<80732e64>] (dump_stack+0x68/0xb8)
- [ 2349.710205] [<80732e64>] (dump_stack) from [<8002b694>] (warn_slowpath_common+0x74/0xac)
- [ 2349.717031] [<8002b694>] (warn_slowpath_common) from [<8002b6e8>] (warn_slowpath_null+0x1c/0x24)
- [ 2349.724545] [<8002b6e8>] (warn_slowpath_null) from [<8024f8dc>] (flush_nat_entries+0x734/0x7c4)
- [ 2349.731950] [<8024f8dc>] (flush_nat_entries) from [<8024456c>] (write_checkpoint+0x208/0xe68)
- [ 2349.739207] [<8024456c>] (write_checkpoint) from [<802400c4>] (f2fs_sync_fs+0x50/0x70)
- [ 2349.745859] [<802400c4>] (f2fs_sync_fs) from [<8010436c>] (sync_fs_one_sb+0x28/0x2c)
- [ 2349.752315] [<8010436c>] (sync_fs_one_sb) from [<800df9e0>] (iterate_supers+0xac/0xd4)
- [ 2349.758960] [<800df9e0>] (iterate_supers) from [<80104414>] (sys_sync+0x48/0x98)
- [ 2349.765094] [<80104414>] (sys_sync) from [<8000f440>] (ret_fast_syscall+0x0/0x3c)
- [ 2349.771296] ---[ end trace 5d91f10cd7a61715 ]---
+While there, I noticed we can leverage the utf8 functions to detect
+encoded names that are corrupted in the filesystem. Therefore, it also
+adds an ext4 error on that scenario, to mark the filesystem as
+corrupted.
 
-fs/f2fs/node.c:1863 is here :
+This series survived passes of xfstests -g quick.
 
-        /* flush dirty nats in nat entry set */
-        list_for_each_entry_safe(ne, cur, &set->entry_list, list) {
-                struct f2fs_nat_entry *raw_ne;
-                nid_t nid = nat_get_nid(ne);
-                int offset;
+Gabriel Krisman Bertazi (8):
+  ext4: Simplify the handling of cached insensitive names
+  f2fs: Simplify the handling of cached insensitive names
+  libfs: Introduce case-insensitive string comparison helper
+  ext4: Reuse generic_ci_match for ci comparisons
+  f2fs: Reuse generic_ci_match for ci comparisons
+  ext4: Log error when lookup of encoded dentry fails
+  ext4: Move CONFIG_UNICODE defguards into the code flow
+  f2fs: Move CONFIG_UNICODE defguards into the code flow
 
-                if (nat_get_blkaddr(ne) == NEW_ADDR)
-                        continue;
+ fs/ext4/crypto.c   |  15 ++----
+ fs/ext4/ext4.h     |  34 +++++++-----
+ fs/ext4/namei.c    | 130 ++++++++++++++++-----------------------------
+ fs/ext4/super.c    |   4 +-
+ fs/f2fs/dir.c      | 105 +++++++++++-------------------------
+ fs/f2fs/f2fs.h     |  15 +++++-
+ fs/f2fs/namei.c    |  11 ++--
+ fs/f2fs/recovery.c |   5 +-
+ fs/f2fs/super.c    |   8 +--
+ fs/libfs.c         |  68 ++++++++++++++++++++++++
+ include/linux/fs.h |   4 ++
+ 11 files changed, 198 insertions(+), 201 deletions(-)
 
-                if (to_journal) {
-                        offset = lookup_journal_in_cursum(sum,
-                                                        NAT_JOURNAL, nid, 1);
-HERE >>>>>>>>>>         f2fs_bug_on(sbi, offset < 0);
-                        raw_ne = &nat_in_journal(sum, offset);
-                        nid_in_journal(sum, offset) = cpu_to_le32(nid);
-                } else {
-                        raw_ne = &nat_blk->entries[nid - start_nid];
-                }
-                raw_nat_from_node_info(raw_ne, &ne->ni);
+-- 
+2.37.3
 
-                down_write(&NM_I(sbi)->nat_tree_lock);
-                nat_reset_flag(ne);
-                __clear_nat_cache_dirty(NM_I(sbi), ne);
-                up_write(&NM_I(sbi)->nat_tree_lock);
-
-                if (nat_get_blkaddr(ne) == NULL_ADDR)
-                        add_free_nid(sbi, nid, false);
-        }
-
-Is that 'offset < 0', probably '-1' as error return, really unexpected ?
-Is it caused by the fsck run on the filesystem ?
-Why does the driver continue with the negative offet instead of taking
-an error path ?
-Crashing the kernel is not an option as this runs on unattended devices,
-and consequently F2FS_CHECK_FS is not set.
-
-Afterwards, the kernel continued to run but issued those messages
-
- attempt to access beyond end of device
- mmcblk0p2: rw=16384, want=5798631936, limit=7372800
-
-with various rw and want values.
-
-After a second clean shutdown and reboot, initramfs ran again fsck.f2fs, and
-this time I had much less 'reset i_gc_failures' messages, but many 'Set node summary'
-and some 'Set data summary 0x6b1' messages, and a summary with 'Fail' reports.
-
- [FIX] (is_valid_ssa_node_blk: 201)  --> Set node summary 0x67a -> [0x9428] [0xd165c]
- [FIX] (is_valid_ssa_node_blk: 201)  --> Set node summary 0x67a -> [0x9429] [0xd165d]
- [FIX] (is_valid_ssa_node_blk: 201)  --> Set node summary 0x67a -> [0x95aa] [0xd168a]
- [FIX] (is_valid_ssa_node_blk: 201)  --> Set node summary 0x67a -> [0x95ab] [0xd168b]
- [FSCK] Check node 76051 / 76058 (100.00%)
- 
- NID[0x9f4d] is unreachable, blkaddr:0xcd353
- [FSCK] Max image size: 3600 MB, Free space: 887 MB
- [FSCK] Unreachable nat entries                        [Fail] [0x1]
- [FSCK] SIT valid block bitmap checking                [Ok..]
- [FSCK] Hard link checking for regular file            [Ok..] [0x956]
- [FSCK] valid_block_count matching with CP             [Ok..] [0x96a9c]
- [FSCK] valid_node_count matching with CP (de lookup)  [Ok..] [0x1291a]
- [FSCK] valid_node_count matching with CP (nat lookup) [Fail] [0x1291b]
- [FSCK] valid_inode_count matched with CP              [Ok..] [0x1280b]
- [FSCK] free segment_count matched with CP             [Ok..] [0x23a]
- [FSCK] next block offset is free                      [Ok..]
- [FSCK] fixing SIT types
- [FSCK] other corrupted bugs                           [Ok..]
-
-Thereafter, while running linux I haven't received any warning about 'offset < 0',
-nor about 'attempt to access beyond end of device'.
-
-But now I feel unsecure about my filesystem,
-
-Should I use an older version of fsck.f2fs (which one) or 1.15 ?
-
-Is there a patch to do something more than spit a warning but still continue
-with that negative offset ?
-
-Best regards
-
-Philippe
 
 
 _______________________________________________
