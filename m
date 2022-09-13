@@ -2,67 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27A945B6566
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Sep 2022 04:09:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D1355B6590
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Sep 2022 04:25:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oXvML-0005On-67;
-	Tue, 13 Sep 2022 02:09:09 +0000
+	id 1oXvcB-0003U6-46;
+	Tue, 13 Sep 2022 02:25:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1oXvMI-0005Og-A0
+ (envelope-from <chao@kernel.org>) id 1oXvc9-0003Tz-PB
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Sep 2022 02:09:06 +0000
+ Tue, 13 Sep 2022 02:25:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xF1f1FA/dQeGKdilekDl2zHMbSd+KfOWui2oeLzQUvE=; b=XZOJ+vPHhGrHp5SBZjscIpCa3G
- CBTxWdSqGUOmTnbgRdcgr3YZQ5IJvttCGDKLxOn6qEYRY3c64HQ2uzQ0AIVXAaDMW0DcRIVvLWT8Q
- 6Mce6xXUeVYRWjMmlRU7KCAzcWT3tZkQzI5lpk6YrKl4aFh0zJJgfU+iZCttOEo55s10=;
+ bh=WQLVrOhldhokKa0xyQt4L6wzS0XneQ8v+cnci/BxYU0=; b=WpAWwlVgkfuXJfO8ML8j9af1jU
+ twv1H6Czxof/4jozCYdMR+AJU5XjBy2KWskq8Qnw/PvjD1k6QzSMB9MkdyEdthvYMM8uRitGezpzX
+ Fg6Y+h+lphUyvFbsVsloTHCFVcIwF/qevx6g2j7gGUPDcBC4sr0Q6xsBXmhm3YUQbbt8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=xF1f1FA/dQeGKdilekDl2zHMbSd+KfOWui2oeLzQUvE=; b=H
- 4O440mEY5nWgUAzcwRN7Czh0J1sfxbJxItkjEh+6c1NpA6RBh2zd1KlRiK/KB93YeGWBMC3BivOiZ
- dQQzRZhB9vyjAJtzxuA5p0ms++h6+Wky+Vk+SlNlvz7/rzLoXitr0c6w7NGm2vYTKMAdGmdK7Csui
- 8UbD9lTvHsXIxo+g=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=WQLVrOhldhokKa0xyQt4L6wzS0XneQ8v+cnci/BxYU0=; b=j
+ CWT98jdupJs/rIKC3Wja79r/wdl3/OTXeF2Y521X/+ssz87QJjKQNMThFVCgdYc4Lsi+VFsM042gT
+ 8ruUhI+M8v4aoKr7nARP1M5Ua4i4EjTIs6vplU3LwlgpHmXqGQD+tjW234RYNQEMldnwJR9V4F2xl
+ sVoUkQ60vL9zy6a8=;
+Received: from [145.40.68.75] (helo=ams.source.kernel.org)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oXvMG-006S2m-At for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Sep 2022 02:09:06 +0000
+ id 1oXvcL-0002gl-DQ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Sep 2022 02:25:42 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 3BD14B80E06;
- Tue, 13 Sep 2022 02:08:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A665C433D7;
- Tue, 13 Sep 2022 02:08:45 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 279A2B80920;
+ Tue, 13 Sep 2022 02:25:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 12935C433D6;
+ Tue, 13 Sep 2022 02:25:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1663034931;
- bh=vjt6qr7Rif2FDbRud6yiPxuhZbxX0Q+EsxZ+L+zGtb8=;
+ s=k20201202; t=1663035923;
+ bh=n7s2YM0FbSs9gTxsnZ/8IzTSbkACg4whGgnweAhPvw8=;
  h=From:To:Cc:Subject:Date:From;
- b=oWPxDTyw/h1EIZe6A8MJ4e4XMJcFDwm8WwTHucCaeqYYzgyreTq0XMOHSDWiUVt9s
- Pau1kaDvr7QLIGk1J0iblSVgdt7Te8DCZ1VLCocjkHMLTdGLsodDAlUxNUA6VFMRje
- cYJ+YuvsfINYWb8aJspiELlNKQugO4HWC0/y99uYKXbpVoHZxguGcYdsJnUVPG2hyq
- yeldrma9fE/TCDHn+Gho89oewSCMKcNriE8ZqgzUcS/osS1MYGhd2eFQ3aXnkDiPDF
- ufmDA+2Rw2lJnTN3Oe3QHUwx4rfaUJvY3FNFYWNtm3lOT9BXI/yzBGzJH6wES6TiTH
- j3EnAWn4DD+8A==
+ b=DPPo//cr8RapvpQvsM/jlU7VI9ukvcTwr/I5lMieKw7ADjVdv6kvqfIXwvz2oa1ZU
+ 4zOkYQNvY39IGCNWN3P/RpEOblKPJ7QgxVkzkDX8eDywqSnMHx+GZKKnBFKbCTZOdV
+ VIH2uqpxa11AaZ2gEefpisQKvc6IOq6oLH0rA687MY7qljYMSfpL3/EuEun7bqiF3F
+ XK8WEqYRI636YoCrCFrV1SUfZSKRsfNmXug5L9+T625/1baU6MXlhuvDpeO1Si25c8
+ +kDErdWkIE+F9tiMoRzQlSzuhNMzLg35fZ/PDkdroduJXhbslJv4Y5LQ6Et3gBeAWf
+ UCNlS5/9logbw==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Tue, 13 Sep 2022 10:08:41 +0800
-Message-Id: <20220913020841.2072608-1-chao@kernel.org>
+Date: Tue, 13 Sep 2022 10:25:13 +0800
+Message-Id: <20220913022513.2162885-1-chao@kernel.org>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -3.9 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
@@ -71,11 +71,9 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview: As Wenqing Liu reported in bugzilla:
  https://bugzilla.kernel.org/show_bug.cgi?id=216456
- loop5: detected capacity change from 0 to 131072 F2FS-fs (loop5):
- recover_inode:
- ino = 6, name = hln, inline = 1 F2FS-fs (loop5): recover_data: ino = 6 (i_size:
- recover) err = 0 F2FS-fs (loop5): recov [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ BUG: KASAN: use-after-free in recover_data+0x63ae/0x6ae0 [f2fs] Read of size
+ 4 at addr ffff8881464dcd80 by task mount/1013 
+ Content analysis details:   (-3.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -88,11 +86,12 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ valid
+ 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oXvMG-006S2m-At
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix to do sanity check on destination
- blkaddr during recovery
+X-Headers-End: 1oXvcL-0002gl-DQ
+Subject: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on summary info
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,22 +113,16 @@ As Wenqing Liu reported in bugzilla:
 
 https://bugzilla.kernel.org/show_bug.cgi?id=216456
 
-loop5: detected capacity change from 0 to 131072
-F2FS-fs (loop5): recover_inode: ino = 6, name = hln, inline = 1
-F2FS-fs (loop5): recover_data: ino = 6 (i_size: recover) err = 0
-F2FS-fs (loop5): recover_inode: ino = 6, name = hln, inline = 1
-F2FS-fs (loop5): recover_data: ino = 6 (i_size: recover) err = 0
-F2FS-fs (loop5): recover_inode: ino = 6, name = hln, inline = 1
-F2FS-fs (loop5): recover_data: ino = 6 (i_size: recover) err = 0
-F2FS-fs (loop5): Bitmap was wrongly set, blk:5634
-------------[ cut here ]------------
-WARNING: CPU: 3 PID: 1013 at fs/f2fs/segment.c:2198
-RIP: 0010:update_sit_entry+0xa55/0x10b0 [f2fs]
+BUG: KASAN: use-after-free in recover_data+0x63ae/0x6ae0 [f2fs]
+Read of size 4 at addr ffff8881464dcd80 by task mount/1013
+
+CPU: 3 PID: 1013 Comm: mount Tainted: G        W          6.0.0-rc4 #1
+Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.15.0-1 04/01/2014
 Call Trace:
- <TASK>
- f2fs_do_replace_block+0xa98/0x1890 [f2fs]
- f2fs_replace_block+0xeb/0x180 [f2fs]
- recover_data+0x1a69/0x6ae0 [f2fs]
+ dump_stack_lvl+0x45/0x5e
+ print_report.cold+0xf3/0x68d
+ kasan_report+0xa8/0x130
+ recover_data+0x63ae/0x6ae0 [f2fs]
  f2fs_recover_fsync_data+0x120d/0x1fc0 [f2fs]
  f2fs_fill_super+0x4665/0x61e0 [f2fs]
  mount_bdev+0x2cf/0x3b0
@@ -141,98 +134,97 @@ Call Trace:
  do_syscall_64+0x38/0x90
  entry_SYSCALL_64_after_hwframe+0x63/0xcd
 
-If we enable CONFIG_F2FS_CHECK_FS config, it will trigger a kernel panic
-instead of warning.
+The root cause is: in fuzzed image, SSA table is corrupted: ofs_in_node
+is larger than ADDRS_PER_PAGE(), result in out-of-range access on 4k-size
+page.
 
-The root cause is: in fuzzed image, SIT table is inconsistent with inode
-mapping table, result in triggering such warning during SIT table update.
+- recover_data
+ - do_recover_data
+  - check_index_in_prev_nodes
+   - f2fs_data_blkaddr
 
-This patch introduces a new flag DATA_GENERIC_ENHANCE_UPDATE, w/ this
-flag, data block recovery flow can check destination blkaddr's validation
-in SIT table, and skip f2fs_replace_block() to avoid inconsistent status.
+This patch adds sanity check on summary info in recovery and GC flow
+in where the flows rely on them.
+
+After patch:
+[   29.310883] F2FS-fs (loop0): Inconsistent ofs_in_node:65286 in summary, ino:0, nid:6, max:1018
 
 Cc: <stable@kernel.org>
 Reported-by: Wenqing Liu <wenqingliu0120@gmail.com>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
-v2:
-- Cc stable kernel mailing list
-- add reported-by tag
-- update commit title
- fs/f2fs/checkpoint.c | 10 +++++++++-
- fs/f2fs/f2fs.h       |  4 ++++
- fs/f2fs/recovery.c   |  8 ++++++++
- 3 files changed, 21 insertions(+), 1 deletion(-)
+ fs/f2fs/gc.c       | 10 +++++++++-
+ fs/f2fs/recovery.c | 15 ++++++++++++---
+ 2 files changed, 21 insertions(+), 4 deletions(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index cf315e3d244c..c3119e4c890c 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -140,7 +140,7 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
- 	unsigned int segno, offset;
- 	bool exist;
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index fd400d148afb..3a820e5cdaee 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -1078,7 +1078,7 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ {
+ 	struct page *node_page;
+ 	nid_t nid;
+-	unsigned int ofs_in_node;
++	unsigned int ofs_in_node, max_addrs;
+ 	block_t source_blkaddr;
  
--	if (type != DATA_GENERIC_ENHANCE && type != DATA_GENERIC_ENHANCE_READ)
-+	if (type == DATA_GENERIC)
- 		return true;
+ 	nid = le32_to_cpu(sum->nid);
+@@ -1104,6 +1104,14 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 		return false;
+ 	}
  
- 	segno = GET_SEGNO(sbi, blkaddr);
-@@ -148,6 +148,13 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
- 	se = get_seg_entry(sbi, segno);
- 
- 	exist = f2fs_test_bit(offset, se->cur_valid_map);
-+	if (exist && type == DATA_GENERIC_ENHANCE_UPDATE) {
-+		f2fs_err(sbi, "Inconsistent error blkaddr:%u, sit bitmap:%d",
-+			 blkaddr, exist);
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
-+		return exist;
++	max_addrs = IS_INODE(node_page) ? DEF_ADDRS_PER_INODE :
++						DEF_ADDRS_PER_BLOCK;
++	if (ofs_in_node >= max_addrs) {
++		f2fs_err(sbi, "Inconsistent ofs_in_node:%u in summary, ino:%u, nid:%u, max:%u",
++			ofs_in_node, dni->ino, dni->nid, max_addrs);
++		return false;
 +	}
 +
- 	if (!exist && type == DATA_GENERIC_ENHANCE) {
- 		f2fs_err(sbi, "Inconsistent error blkaddr:%u, sit bitmap:%d",
- 			 blkaddr, exist);
-@@ -185,6 +192,7 @@ bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
- 	case DATA_GENERIC:
- 	case DATA_GENERIC_ENHANCE:
- 	case DATA_GENERIC_ENHANCE_READ:
-+	case DATA_GENERIC_ENHANCE_UPDATE:
- 		if (unlikely(blkaddr >= MAX_BLKADDR(sbi) ||
- 				blkaddr < MAIN_BLKADDR(sbi))) {
- 			f2fs_warn(sbi, "access invalid blkaddr:%u",
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 80c0ae6196db..dee7b67a17a6 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -266,6 +266,10 @@ enum {
- 					 * condition of read on truncated area
- 					 * by extent_cache
- 					 */
-+	DATA_GENERIC_ENHANCE_UPDATE,	/*
-+					 * strong check on range and segment
-+					 * bitmap for update case
-+					 */
- 	META_GENERIC,
- };
- 
+ 	*nofs = ofs_of_node(node_page);
+ 	source_blkaddr = data_blkaddr(NULL, node_page, ofs_in_node);
+ 	f2fs_put_page(node_page, 1);
 diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index dcd0a1e35095..8326003e6918 100644
+index 8326003e6918..9b361fff30aa 100644
 --- a/fs/f2fs/recovery.c
 +++ b/fs/f2fs/recovery.c
-@@ -698,6 +698,14 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 				goto err;
- 			}
+@@ -474,7 +474,7 @@ static int check_index_in_prev_nodes(struct f2fs_sb_info *sbi,
+ 	struct dnode_of_data tdn = *dn;
+ 	nid_t ino, nid;
+ 	struct inode *inode;
+-	unsigned int offset;
++	unsigned int offset, ofs_in_node, max_addrs;
+ 	block_t bidx;
+ 	int i;
  
-+			if (f2fs_is_valid_blkaddr(sbi, dest,
-+					DATA_GENERIC_ENHANCE_UPDATE)) {
-+				f2fs_err(sbi, "Inconsistent dest blkaddr:%u, ino:%lu, ofs:%u",
-+					dest, inode->i_ino, dn.ofs_in_node);
-+				err = -EFSCORRUPTED;
-+				goto err;
-+			}
+@@ -501,15 +501,24 @@ static int check_index_in_prev_nodes(struct f2fs_sb_info *sbi,
+ got_it:
+ 	/* Use the locked dnode page and inode */
+ 	nid = le32_to_cpu(sum.nid);
++	ofs_in_node = le16_to_cpu(sum.ofs_in_node);
 +
- 			/* write dummy data page */
- 			f2fs_replace_block(sbi, &dn, src, dest,
- 						ni.version, false, false);
++	max_addrs = ADDRS_PER_PAGE(dn->node_page, dn->inode);
++	if (ofs_in_node >= max_addrs) {
++		f2fs_err(sbi, "Inconsistent ofs_in_node:%u in summary, ino:%u, nid:%u, max:%u",
++			ofs_in_node, ino, nid, max_addrs);
++		return -EFSCORRUPTED;
++	}
++
+ 	if (dn->inode->i_ino == nid) {
+ 		tdn.nid = nid;
+ 		if (!dn->inode_page_locked)
+ 			lock_page(dn->inode_page);
+ 		tdn.node_page = dn->inode_page;
+-		tdn.ofs_in_node = le16_to_cpu(sum.ofs_in_node);
++		tdn.ofs_in_node = ofs_in_node;
+ 		goto truncate_out;
+ 	} else if (dn->nid == nid) {
+-		tdn.ofs_in_node = le16_to_cpu(sum.ofs_in_node);
++		tdn.ofs_in_node = ofs_in_node;
+ 		goto truncate_out;
+ 	}
+ 
 -- 
 2.25.1
 
