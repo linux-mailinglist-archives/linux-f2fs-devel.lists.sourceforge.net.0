@@ -2,112 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 715FF5B64F3
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Sep 2022 03:11:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8FAA5B6515
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Sep 2022 03:26:37 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oXuRz-0000FW-Bc;
-	Tue, 13 Sep 2022 01:10:55 +0000
+	id 1oXuh3-0000h4-Uv;
+	Tue, 13 Sep 2022 01:26:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <konishi.ryusuke@gmail.com>) id 1oXuQh-0000EM-UB
+ (envelope-from <chao@kernel.org>) id 1oXuh2-0000gx-Th
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Sep 2022 01:09:38 +0000
+ Tue, 13 Sep 2022 01:26:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/XsoyqrT3QB1JAOnynnNk+cD1xAIdvUlxSJ4ed6XIdU=; b=YdN0ZqFWIAcEpjE5OT8UTx8eoa
- TeeTlowMh1yhsVpgcmUPM60mdT18KJ/Mk4C2s24sqayUmpnBd7GHMbctDP0jrMRXfiFRxsxzkIJZ9
- meHEDbY7ZVmTqbfkUlLVMdEUqlZC977I9ou7jLUD8cb8q5tJxHwy2ByQW9XEsiiWlYcE=;
+ bh=sGKqzsX+wlO+Eh4jFs3zBe7IGKhPOrPL+veA1daWb4A=; b=hwRq2apglAGWFExJl3o7KFCF4E
+ gdE0YyCT/orVBT0i1MN+HPyi2FDAOfySACWF3NHPn/6Ht/35l4yLNSiUigRDM9R0losKLLFs8+0kq
+ mHRa2oafzzm10A0g7t2VvDhDcDbmoy0+YYJd69BgVxxyblUtzaBW4PDuEy9wZFplLo7s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/XsoyqrT3QB1JAOnynnNk+cD1xAIdvUlxSJ4ed6XIdU=; b=eX52ufOk4CakJMUgQvr0CSFzqv
- mC+nb0J6MoqWkPvdIDhQZ8/7Mt7LTmo68Ua/OGhu3+QXmRV7P2DGPXJjKMnrNHkxFbbxfbyGuKekD
- Myc7qooiLt8IELT0nIpKbZ8bqWHnRZxBveXbAYR374mWkfqHzNGA8qfb8Y6oZLDyfgt4=;
-Received: from mail-vs1-f45.google.com ([209.85.217.45])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1oXuQd-006PUW-Gp for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Sep 2022 01:09:35 +0000
-Received: by mail-vs1-f45.google.com with SMTP id o123so10835392vsc.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 12 Sep 2022 18:09:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=/XsoyqrT3QB1JAOnynnNk+cD1xAIdvUlxSJ4ed6XIdU=;
- b=LCh/26aAbGHkKGewKjn73gLlX++zCf8OLBwVxFWLa64tYPDq/i2er1PmrVmMkGAwOI
- L2JRUzDqv2lK9NaVniFYm7FpYuNBfqGBIhKFyEiUvFh3AU/Pe1+xUEezdDuC7oEtVTzK
- z4RnpgRLFEs/kpx/XTpDhcz1YZja3m4TBuvwqk20rCqQfNxg0OTn6cKh89klQ8JdP/d5
- mnV6dtRYDuEjIzD+gV8Sy+Z00atObjJcdT1rQhqSoQ9ZBHA1slMzLmqb42wvp3Fbbjrj
- PcbYe5zgwlygD5zetriqBhKy83A9Y3Tj1nqXRBKeJ829uuOZ6L5Y1UNj+nuZ18uhaFr1
- 0FCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=/XsoyqrT3QB1JAOnynnNk+cD1xAIdvUlxSJ4ed6XIdU=;
- b=A1v2n+v/J/t2DZpVRgTmrR9+lbygkIccPk58WqifcYdOnbrmKesT88UHonVlyh/t8/
- nlRJMPZFDN4+TTa2OQAdkYZWhswzyzJsSm0QEY0fc8Eo1i+wFzqmo7Dck6BXQLN+7jQH
- FXNr1DC0mcYrRsOO2qPDBfXsOePh8dd0jRoAO0I8gMyOHnFJn4Kxdn6nNz+iS7KsFlwp
- Q7zItac+1Mt/Fg8gL/yP6aEQwyPjjweQc95qzccGEeShd69cRbdibsAeOR/6kmv2h58N
- yVXyzZapFEi8cRYw6N8DOPt6lgwCB2oBQGvzD5Zt3JZA7/zppnfSt1wBtUpwRep7xLpa
- Xxuw==
-X-Gm-Message-State: ACgBeo3xERGLcs4LB6bFszrc6BxrumVonBsMujgVMLnRJhv0P/t9awz0
- 9Izojtka/3Aq4Kowd3+2fN3ZeJBK5msaeOt+lUk=
-X-Google-Smtp-Source: AA6agR4EqnqQ8u4MAgskdLzYc7FBqMGiJOS2HCVnpmnuXUvK+QJK2TMCY2lWLmDeQ8q/znqGKGcFd82tz2HFf86kF7E=
-X-Received: by 2002:a05:6102:5709:b0:390:e360:88e8 with SMTP id
- dg9-20020a056102570900b00390e36088e8mr9131856vsb.22.1663031365543; Mon, 12
- Sep 2022 18:09:25 -0700 (PDT)
+ bh=sGKqzsX+wlO+Eh4jFs3zBe7IGKhPOrPL+veA1daWb4A=; b=I+bS483egoyrX9I+X0WliEzMrD
+ Vln7ZWyhwQkTtUo1z/RCIyOOLai01wrnTOWMrvZV1cxcu7H2p/BGaQzDtdH9sPy2TFQjTU15az7Hq
+ /NIglTkg0sGR+hLdfsSDEbiETrb5YCIWIPqg0xMX8Y4YcvcnuFrEva8HaFP971IG0rNo=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1oXuh1-0008UC-3C for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Sep 2022 01:26:28 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5085B60F21;
+ Tue, 13 Sep 2022 01:26:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3428C433D6;
+ Tue, 13 Sep 2022 01:26:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1663032373;
+ bh=ahK3Hn9gj376IQfXm5Ze9rTSg34hVz4QwVp7njYLSnA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=NR8E5EHYMVDxlO6TR0DAqqJSO2oHvfFZQHYaX9ci/icVlWM6i3keHzAIB7tgArR4/
+ qfmYpiYHdVOqpP/V5ETk0OsxudzvHQ0cdhlS3HedyJE6Zb54JUdSuPiKpd6jbGIMoI
+ 6cRhMJ4SxIjYJJrFCTRLwffKj9vs9n8+cu6Q/xgw662N7fhGRrW5gODuNx2JM0jfJP
+ 4LdGvdtBPLsinVGnjFDeNDcmDOrhLUFfNRL4VcMZ21UBQtiC0nYcNpNDN09pjLnUvL
+ rqRvjfyLMaisSqR2gF7MbVkq7jlINiAyDqXohRZBUDSl1nToyLuZR9OlZN2NMdVQO9
+ ETjju1DffZ0cw==
+Message-ID: <6c54e0b1-9c75-af90-565b-61174ddb5cbc@kernel.org>
+Date: Tue, 13 Sep 2022 09:26:01 +0800
 MIME-Version: 1.0
-References: <20220912182224.514561-1-vishal.moola@gmail.com>
- <20220912182224.514561-19-vishal.moola@gmail.com>
-In-Reply-To: <20220912182224.514561-19-vishal.moola@gmail.com>
-From: Ryusuke Konishi <konishi.ryusuke@gmail.com>
-Date: Tue, 13 Sep 2022 10:09:08 +0900
-Message-ID: <CAKFNMokZ02Ax9J3Ns_Q2PO8oeg+G7kgqQS7kMJMxSiX92_Vwzg@mail.gmail.com>
-To: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-X-Spam-Score: -0.2 (/)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20220830225358.300027-1-chao@kernel.org>
+ <YxlNGeh6Sr4isEFf@google.com>
+ <0af788ed-8797-22a2-ae0c-433fdd6a2188@kernel.org>
+ <YxlRMRA7AVIusfav@google.com>
+ <e5abac5f-433b-62d4-b2fa-974b5f978d61@kernel.org>
+ <Yx9SulcDlMfO/hiW@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <Yx9SulcDlMfO/hiW@google.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Sep 13, 2022 at 3:30 AM Vishal Moola (Oracle) wrote:
- > > Convert function to use folios throughout. This is in preparation for
- > the removal of find_get_pages_range_tag(). > > Signed-off-by: V [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 2022/9/12 23:39, Jaegeuk Kim wrote: > On 09/08, Chao Yu
+ wrote: >> On 2022/9/8 10:19, Jaegeuk Kim wrote: >>> On 09/08, Chao Yu wrote:
+ >>>> On 2022/9/8 10:02, Jaegeuk Kim wrote: >>>>> On 08/31, Chao [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [konishi.ryusuke[at]gmail.com]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.217.45 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.217.45 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1oXuQd-006PUW-Gp
-Subject: Re: [f2fs-dev] [PATCH v2 18/23] nilfs2: Convert
- nilfs_lookup_dirty_data_buffers() to use filemap_get_folios_tag()
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oXuh1-0008UC-3C
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to disallow getting inner inode
+ via f2fs_iget()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,30 +111,70 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com, linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
- ceph-devel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-afs@lists.infradead.org, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Sep 13, 2022 at 3:30 AM Vishal Moola (Oracle) wrote:
->
-> Convert function to use folios throughout. This is in preparation for
-> the removal of find_get_pages_range_tag().
->
-> Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
-> ---
->  fs/nilfs2/segment.c | 29 ++++++++++++++++-------------
->  1 file changed, 16 insertions(+), 13 deletions(-)
+On 2022/9/12 23:39, Jaegeuk Kim wrote:
+> On 09/08, Chao Yu wrote:
+>> On 2022/9/8 10:19, Jaegeuk Kim wrote:
+>>> On 09/08, Chao Yu wrote:
+>>>> On 2022/9/8 10:02, Jaegeuk Kim wrote:
+>>>>> On 08/31, Chao Yu wrote:
+>>>>>> From: Chao Yu <chao.yu@oppo.com>
+>>>>>>
+>>>>>> Introduce f2fs_iget_inner() for f2fs_fill_super() to get inner inode:
+>>>>>> meta inode, node inode or compressed inode, and add f2fs_check_nid_range()
+>>>>>> in f2fs_iget() to avoid getting inner inode from external interfaces.
+>>>>>
+>>>>> So, we don't want to check the range of inner inode numbers? What'd be the
+>>>>> way to check it's okay?
+>>>>
+>>>> For node_ino, meta_ino, root_ino, we have checked them in sanity_check_raw_super()
+>>>> as below:
+>>>>
+>>>> 	/* check reserved ino info */
+>>>> 	if (le32_to_cpu(raw_super->node_ino) != 1 ||
+>>>> 		le32_to_cpu(raw_super->meta_ino) != 2 ||
+>>>> 		le32_to_cpu(raw_super->root_ino) != 3) {
+>>>> 		f2fs_info(sbi, "Invalid Fs Meta Ino: node(%u) meta(%u) root(%u)",
+>>>> 			  le32_to_cpu(raw_super->node_ino),
+>>>> 			  le32_to_cpu(raw_super->meta_ino),
+>>>> 			  le32_to_cpu(raw_super->root_ino));
+>>>> 		return -EFSCORRUPTED;
+>>>> 	}
+>>>>
+>>>> compressed_ino should always be NM_I(sbi)->max_nid, it can be checked in
+>>>> f2fs_init_compress_inode()?
+>>>
+>>> Hmm, I'm not sure whether we really need this patch, since it'd look better
+>>> to handle all the iget with single f2fs_iget?
+>>
+>> Well, the main concern is previously f2fs_iget() won't check validation for inner
+>> inode due to it will skip do_read_inode() - f2fs_check_nid_range(), so that in a
+>> fuzzed image, caller may pass inner ino into f2fs_iget(), result in incorrect use
+>> of inner inode. So I add f2fs_check_nid_range() in prior to f2fs_iget_inner() in
+>> f2fs_iget() as below to detect and avoid this case.
+> 
+> FWIW, sanity_check_raw_super() checked the inode numbers.
 
-Acked-by: Ryusuke Konishi <konishi.ryusuke@gmail.com>
+However, previously, f2fs_iget() will return inner inode to caller directly, if caller
+passes meta_ino, node_ino or compress_ino to f2fs_iget()?
 
-Looks good.   Thank you for reflecting the previous comment.
+Thanks,
 
-Ryusuke Konishi
+> 
+>>
+>>>>>> +struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+>>>>>> +{
+>>>>>> +	int ret;
+>>>>>> +
+>>>>>> +	ret = f2fs_check_nid_range(F2FS_SB(sb), ino);
+>>>>>> +	if (ret)
+>>>>>> +		return ERR_PTR(ret);
+>>>>>> +
+>>>>>> +	return f2fs_iget_inner(sb, ino);
 
 
 _______________________________________________
