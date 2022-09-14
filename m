@@ -2,119 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FDE15B879F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Sep 2022 13:55:16 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6499A5B87AD
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Sep 2022 13:58:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oYQz4-00084y-4i;
-	Wed, 14 Sep 2022 11:55:14 +0000
+	id 1oYR2Z-0000BP-RJ;
+	Wed, 14 Sep 2022 11:58:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sudipm.mukherjee@gmail.com>) id 1oYQz2-00084s-Ri
+ (envelope-from <chao@kernel.org>) id 1oYR2Y-0000BI-SE
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Sep 2022 11:55:12 +0000
+ Wed, 14 Sep 2022 11:58:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SyPBTrJvHzMyaHLtvwyxvW+j90fbMR931wFMQdu37/o=; b=Kaa9yGu2xphdSIemP/7hfi2GNn
- I085W1/T9p0AqPzyUWFmmB39ayIrFBovluVbnIps1CmvzyXaSdYSoW3/HhnG3AKkAuzN7cCm8SH7t
- I69e9A/acut3KmFInJ0k75oXTxr6B58eqFfLj1PBEFrzyjUApYKOCcIWea6deQ3RZVMc=;
+ bh=ysbzNeM5dBSWtJJKsq2Swoiwiz1BFCRgVwF1qKm8ZKs=; b=bZa7xaJkgJyHEb1UqhFUFEIEbv
+ D2X/W9ib4gdRby+YDMBQaUAjxsAh8mOJg8YFpNVEqWfR2V83bIHgyEUou5dOXIaO+wXpd0QXrnrkE
+ j5Xpqj+FixOyzgtUn8c6ufDtdKyXUxK1ZHYQpKRfHhc+52WLhxEtm2j5feOq6YJnNawA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=SyPBTrJvHzMyaHLtvwyxvW+j90fbMR931wFMQdu37/o=; b=C
- igeMRWborR+Gd8jm60nZQVzXLSSOfqrSSwMALWmXhYNPHkN6PGFYvlp+0wr2NWiAOlOmmWPcJQKxr
- zAbQFo7sC253zieh5vHzvwQ98Yz6jlB8LYvrEGR13cZPVf/TGjnRr/COWZ8pZkBDalSiCzk4cuG6k
- BMaQobaib4pfpbm4=;
-Received: from mail-wm1-f41.google.com ([209.85.128.41])
+ List-Owner:List-Archive; bh=ysbzNeM5dBSWtJJKsq2Swoiwiz1BFCRgVwF1qKm8ZKs=; b=D
+ jlNHd/PyDwc0mijn/Qlgs6rGNELX/ttPLMrsfmS4l1NGfZhyX1lFPTb2ZgmIFoxyrueQU8gcCi71U
+ 2FGLZePHF77wsa5q6Unral+OrkLY2NaGgTtG8wtZwTUFCZS9KnUadBbNR/6imRLkZvTNXnqbt0VGY
+ U19yE0mEo9oXaQeQ=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1oYQz2-0007Ze-8w for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 14 Sep 2022 11:55:12 +0000
-Received: by mail-wm1-f41.google.com with SMTP id
- n23-20020a7bc5d7000000b003a62f19b453so15328939wmk.3
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1oYR2X-0007j9-Ue for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 14 Sep 2022 11:58:50 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id D99F6B81A7A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 14 Sep 2022 04:55:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date;
- bh=SyPBTrJvHzMyaHLtvwyxvW+j90fbMR931wFMQdu37/o=;
- b=BWHcjgqBlG2T3NBIzOfGGpZmejALUegR++FTvrF6X0D3HK8XJD04xKg9SN/VicszsD
- yEu18tlS4LVLHvsP+1+w1ZSlWCCUft/xk38vFKFomHB55CPeQFzJd8wFJYJNGGrWJAui
- 6ifXPxDExUaYiYRJZhpgZlFeObvj76DWwHt/E8a/Y4mUKRuuGL0CubY3N2FItO5r4284
- UFg4UEtGnJ6hLWVZ3S3h4RH9QiLA6xfqgvdM+82GhScwlbi22Pt5OxofzGDwVAuhT2a9
- psCrmRLCu8NB0xZZyP1IONNj91J3WvPeRAruZkXvd43nEoHMVzDQQf47dLsZvvlFuepb
- zEXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date;
- bh=SyPBTrJvHzMyaHLtvwyxvW+j90fbMR931wFMQdu37/o=;
- b=XmeDpBd0zvuTRK1Vj8HWzPah2U+duZ71IdiKh3uyXG5KngXRQATz1VZiIiwYAbrOvl
- YERi2ocmpPO3Q5mOcUuXQAcHuJeJNcdMkKeb1hvCN+FIqq7rZ7IfuqsDefD6MO3q/1pG
- G0Z8syP2CHbLpw7bQGQL4rkktX3XrjdfRXfIFOAY/8EcxM/RGfvHMcMCIOmhmu1LwqlW
- nZ2I/xgxjMoQnCji0spFccxRbPyEYLD29m6V/MJxZnD0XEwa+Zdr8nfey56R/kJYA+LE
- XnK+HCngnflzzXySOHqdZLaITF+/ED718xtaAa/GxjuTzH85lAeV8lwAy9wts0sEhdH+
- u4Tg==
-X-Gm-Message-State: ACgBeo1UrXsPuffXFDx7ucsTo9WzKPs2xW/V8KsGdcX9NF62+PFV9YPQ
- iP0g1frZblzXP0rUUKvDVgWjwh6z7e8=
-X-Google-Smtp-Source: AA6agR7HMGDwDBAbBTgUT/pwa8dlEi72q6ixKfarSZZfGWkX7uH9vOdKskGexIeULnCicwW5B9SFbg==
-X-Received: by 2002:a05:600c:4a9a:b0:3b4:78ab:bae5 with SMTP id
- b26-20020a05600c4a9a00b003b478abbae5mr2918176wmp.114.1663156505798; 
- Wed, 14 Sep 2022 04:55:05 -0700 (PDT)
-Received: from debian ([167.98.27.226]) by smtp.gmail.com with ESMTPSA id
- l4-20020a05600c47c400b003a541d893desm15968258wmo.38.2022.09.14.04.55.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Sep 2022 04:55:04 -0700 (PDT)
-Date: Wed, 14 Sep 2022 12:55:03 +0100
-From: "Sudip Mukherjee (Codethink)" <sudipm.mukherjee@gmail.com>
-To: Chao Yu <chao@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <YyHBF99sC/vQdI3v@debian>
+ Wed, 14 Sep 2022 11:58:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3FAB7C433C1;
+ Wed, 14 Sep 2022 11:58:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1663156721;
+ bh=VeMXpngMhmJhAzTQAASry9H1oAnhvGB+HbWm7AidMcg=;
+ h=From:To:Cc:Subject:Date:From;
+ b=QPU7V2T1Twks/19Ouj4VBP41UknWBzCtHMQwaN6bT0rxjJaEXre25NvGrYZsd+Y+q
+ wQdYlRNHdvTpaFq0YMEpbJartNehfF0SUOBP9l8nhM5sEs0KylYHonHTVeqecTjYcx
+ NI7yp8juFObkq5bV6L0YCNWCwCauyGmnkGvLu4lzgnclLyzN24MJHUcJ5YyDwBykmf
+ hMxviZdfGCifaf15lxgLacZhKbNdg5CLyvovpPKz5g9eN670H4ucSFloJ+a5r6t7qg
+ LBPItb7L8TtIOahLO7/DPCO/G5I1pjm3/HQOOAweSefsQ+Dv91rWvPb7ontPOYlj8Z
+ peBfHMxPHoA+A==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Wed, 14 Sep 2022 19:58:35 +0800
+Message-Id: <20220914115835.2998424-1-chao@kernel.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi All,
- The builds of arm64 allmodconfig with clang have failed
- to build next-20220914 with the error: fs/f2fs/recovery.c:509:17: error:
- variable 'ino' is uninitialized when used here [-Werror,
- -Wuninitialized] ofs_in_node, 
- ino, nid, max_addrs); ^~~ fs/f2fs/f2fs.h:2376:35: note: expanded from macro
- 'f2f [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  Once CP_ERROR_FLAG is set, checkpoint is disallowed to be
+ triggered to persist CP_FSCK_FLAG, fsck won't repair the image due to lack
+ of CP_FSCK_FLAG. This patch proposes to persist newly introduced SB_NEED_FSCK
+ flag into super block if CP_ERROR_FLAG and SBI_NEED_FSCK is set, later, once
+ fsck detect this flag, it can check and repair corrupted image [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.128.41 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [sudipm.mukherjee[at]gmail.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.41 listed in wl.mailspike.net]
-X-Headers-End: 1oYQz2-0007Ze-8w
-Subject: [f2fs-dev] build failure of next-20220914 due to 64c11570d64d
- ("f2fs: fix to do sanity check on summary info")
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oYR2X-0007j9-Ue
+Subject: [f2fs-dev] [RFC PATCH v3] f2fs: record need_fsck in super_block
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,37 +104,122 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-next@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi All,
+Once CP_ERROR_FLAG is set, checkpoint is disallowed to be triggered to
+persist CP_FSCK_FLAG, fsck won't repair the image due to lack of
+CP_FSCK_FLAG.
 
-The builds of arm64 allmodconfig with clang have failed to build
-next-20220914 with the error:
+This patch proposes to persist newly introduced SB_NEED_FSCK flag into
+super block if CP_ERROR_FLAG and SBI_NEED_FSCK is set, later, once fsck
+detect this flag, it can check and repair corrupted image in time.
 
-fs/f2fs/recovery.c:509:17: error: variable 'ino' is uninitialized when used here [-Werror,-Wuninitialized]
-                        ofs_in_node, ino, nid, max_addrs);
-                                     ^~~
-fs/f2fs/f2fs.h:2376:35: note: expanded from macro 'f2fs_err'
-        f2fs_printk(sbi, KERN_ERR fmt, ##__VA_ARGS__)
-                                         ^~~~~~~~~~~
-fs/f2fs/recovery.c:475:11: note: initialize the variable 'ino' to silence this warning
-        nid_t ino, nid;
-                 ^
-                  = 0
-1 error generated.
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v3:
+- fix to add missing cpu_to_le16()
+ fs/f2fs/checkpoint.c    |  6 +++++-
+ fs/f2fs/f2fs.h          |  1 +
+ fs/f2fs/super.c         | 26 ++++++++++++++++++++++++++
+ include/linux/f2fs_fs.h |  5 ++++-
+ 4 files changed, 36 insertions(+), 2 deletions(-)
 
-git bisect pointed to 64c11570d64d ("f2fs: fix to do sanity check on summary info").
-
-I will be happy to test any patch or provide any extra log if needed.
-
-
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index c3119e4c890c..0836fce40394 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -30,8 +30,12 @@ void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io)
+ {
+ 	f2fs_build_fault_attr(sbi, 0, 0);
+ 	set_ckpt_flags(sbi, CP_ERROR_FLAG);
+-	if (!end_io)
++	if (!end_io) {
+ 		f2fs_flush_merged_writes(sbi);
++
++		if (is_sbi_flag_set(sbi, SBI_NEED_FSCK))
++			f2fs_update_sb_flags(sbi, SB_NEED_FSCK);
++	}
+ }
+ 
+ /*
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index dee7b67a17a6..1960a98c7555 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3556,6 +3556,7 @@ int f2fs_enable_quota_files(struct f2fs_sb_info *sbi, bool rdonly);
+ int f2fs_quota_sync(struct super_block *sb, int type);
+ loff_t max_file_blocks(struct inode *inode);
+ void f2fs_quota_off_umount(struct super_block *sb);
++void f2fs_update_sb_flags(struct f2fs_sb_info *sbi, unsigned int flag);
+ int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover);
+ int f2fs_sync_fs(struct super_block *sb, int sync);
+ int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index b8e5fe244596..fe9a6e02d81f 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -3846,6 +3846,32 @@ int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover)
+ 	return err;
+ }
+ 
++void f2fs_update_sb_flags(struct f2fs_sb_info *sbi, unsigned int flag)
++{
++	unsigned short s_flags;
++	int err;
++
++	if (le16_to_cpu(F2FS_RAW_SUPER(sbi)->s_flags) & SB_NEED_FSCK)
++		return;
++
++	f2fs_down_write(&sbi->sb_lock);
++
++	s_flags = le16_to_cpu(F2FS_RAW_SUPER(sbi)->s_flags);
++
++	if (s_flags & SB_NEED_FSCK)
++		goto out_unlock;
++
++	F2FS_RAW_SUPER(sbi)->s_flags = cpu_to_le16(s_flags | SB_NEED_FSCK);
++
++	err = f2fs_commit_super(sbi, false);
++	if (err) {
++		f2fs_warn(sbi, "f2fs_commit_super fails to persist flag: %u, err:%d", flag, err);
++		F2FS_RAW_SUPER(sbi)->s_flags = cpu_to_le16(s_flags);
++	}
++out_unlock:
++	f2fs_up_write(&sbi->sb_lock);
++}
++
+ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+ {
+ 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
+diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+index d445150c5350..124176e2a42c 100644
+--- a/include/linux/f2fs_fs.h
++++ b/include/linux/f2fs_fs.h
+@@ -73,6 +73,8 @@ struct f2fs_device {
+ 	__le32 total_segments;
+ } __packed;
+ 
++#define SB_NEED_FSCK			0x00000001	/* need fsck */
++
+ struct f2fs_super_block {
+ 	__le32 magic;			/* Magic Number */
+ 	__le16 major_ver;		/* Major Version */
+@@ -116,7 +118,8 @@ struct f2fs_super_block {
+ 	__u8 hot_ext_count;		/* # of hot file extension */
+ 	__le16  s_encoding;		/* Filename charset encoding */
+ 	__le16  s_encoding_flags;	/* Filename charset encoding flags */
+-	__u8 reserved[306];		/* valid reserved region */
++	__le16 s_flags;			/* super block flags */
++	__u8 reserved[304];		/* valid reserved region */
+ 	__le32 crc;			/* checksum of superblock */
+ } __packed;
+ 
 -- 
-Regards
-Sudip
+2.25.1
+
 
 
 _______________________________________________
