@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 331745BAFCA
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Sep 2022 16:59:33 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E9AA5BB203
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Sep 2022 20:21:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oZCoM-00005l-TV;
-	Fri, 16 Sep 2022 14:59:22 +0000
+	id 1oZFxw-0000U6-Iw;
+	Fri, 16 Sep 2022 18:21:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <phdm@macqel.be>) id 1oZCoK-00005L-DN
+ (envelope-from <jaegeuk@kernel.org>) id 1oZFxv-0000U0-BG
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 16 Sep 2022 14:59:20 +0000
+ Fri, 16 Sep 2022 18:21:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LoDXDsXK1/lPoI8yb3Am9kFdZcz9aqaJ4o0MFEKz8t0=; b=RxXMdIAiVCPVvX5gZ8jIqr6HTH
- r7ExES94bpOoWvBtXheLj7YO0QzlFU/7YaFLXAt9mTYAJnikc7xJ+lUOtIhgni9FThEHLff/6ymzH
- K/WCj8PZNAoqva92YTNYEM/hffvy9gmWJmY8tmC/58T6T24zApij0xGwUE63ZLFqrQ4g=;
+ bh=fIH4HCpzV0laRitUSMuYPq4sWYTcEKokRLxc6URwsH8=; b=bONRmS4mM8IVUiQLkwyN1S5l0Z
+ zJs2JtthjAYyQfpF+zZDK6hkdB6jIHQ0QtFl48Z4Hi25/NOiNd0Di8yDKJsMu8bB96MzKtznEZIcy
+ P4/tEZYvimuBiYGNOGii6I72/2gYP69Zj4UR5aLAO+KQXSlQj51P0ghoWsZo8Bhj86RA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,48 +31,71 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LoDXDsXK1/lPoI8yb3Am9kFdZcz9aqaJ4o0MFEKz8t0=; b=W6KI1wOmXUjBPa/McYdwuSooFT
- DBx5ar74Y9giDbbtNAJq7BUmezaXqz1c+yF3TY/ydEGG/v5KY2rSVfEG39NTJci79iRmSdmq8ULIu
- TpAcqSXYy7jWIsdYkkBJHf0pbtM3upwM41hoLcuPi1NcRvX5arOrg0Aq+KtQ2iXF0xPE=;
-Received: from smtp2.macqel.be ([109.135.2.61] helo=frolo.macqel.be)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1oZCoD-00AIpi-GA for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 16 Sep 2022 14:59:18 +0000
-Received: by frolo.macqel.be (Postfix, from userid 1000)
- id F15ECDF00AC; Fri, 16 Sep 2022 16:59:06 +0200 (CEST)
-Date: Fri, 16 Sep 2022 16:59:06 +0200
-From: Philippe De Muyter <phdm@macq.eu>
-To: Wu Bo <bo.wu@vivo.com>
-Message-ID: <20220916145906.GA6753@172.21.0.10>
-References: <20220914080839.GA19067@172.21.0.10>
- <20220915071004.23550-1-bo.wu@vivo.com>
+ bh=fIH4HCpzV0laRitUSMuYPq4sWYTcEKokRLxc6URwsH8=; b=ZUO/khlGjHulQiSWnEA2BUtuM6
+ fAzeGP878pHeRzNpHXTwsezhhKEyvnuOhJjFpytzRl+f+GGh0f5B6DqdRQdma9ZKUIQGnVB6cQgxD
+ 8E7YvVuFX6V32X7RobfPMEuzaCoGE5pZpd780wU79hGSTX0YBjhtYgX4q4o5K8oHmaOg=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1oZFy5-0007Nw-Ca for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 16 Sep 2022 18:21:39 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 47447B828DE;
+ Fri, 16 Sep 2022 18:21:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8DF5C433C1;
+ Fri, 16 Sep 2022 18:21:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1663352484;
+ bh=QSRaazKnpcvj8AxVHtAgH0r/tpYN7JP98ko1Eco340g=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=SYClVRLMluzxvlhl+T6Z19t/cHoFOz/nTO/jP1ibjBU/p3HOaNZsj9TJPklk+t7K4
+ TrMbeMfHm7rACu5nSrHWVP1HEgAf29EdqUinVTlJSfKmeHIeRyQAMON6sVCbB6FFuz
+ vTPugeEestxXSFdH3A9UCJqdaf8VuFjTc3jRNaqzOLnqHPdrGcQhmnmagVNSto9BER
+ rDlUrP8I2K3T9hPMHvU1ib4/U4evB544YMdY6SlLgZUDeBORhSgM3EZB3sKozccx8X
+ ekFBviH9LQCh8gVSb9SKF4F0dE9yiGOG7O2BKhBCYQewlIeRE9/+eABCSP/34zXcV4
+ 5KHFQtc2Nu0EA==
+Date: Fri, 16 Sep 2022 11:21:22 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <YyS+otPNtdnztfao@google.com>
+References: <20220908105334.98572-1-chao@kernel.org>
+ <Yx9SVsxVzNErMDpv@google.com>
+ <a03417f6-e4fa-2b1a-34f8-bd5d52c1e853@kernel.org>
+ <YyAdapWpgTIXa2R5@google.com>
+ <c29df38b-18d7-506b-59a1-d471f2769667@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220915071004.23550-1-bo.wu@vivo.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-Spam-Score: 0.2 (/)
+In-Reply-To: <c29df38b-18d7-506b-59a1-d471f2769667@kernel.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Tnank you for your patch. I have applied it and also applied
- f2fs patches from 4.1.54 to my driver which was in the 4.1.5 state, but I
- still get sometimes [ cut here ] WARNING: CPU: 0 PID: 2333 at
- fs/f2fs/node.c:1863
- flush_nat_entries+0x74c/0x7d8() Modules linked in: CPU: 0 PID: 2333 Comm:
- python3 Not tainted 4.1.15-02187-g7bc727 [...] 
- Content analysis details:   (0.2 points, 6.0 required)
+ Content preview:  On 09/14, Chao Yu wrote: > On 2022/9/13 14:04, Jaegeuk Kim
+ wrote: > > On 09/13, Chao Yu wrote: > > > On 2022/9/12 23:37, Jaegeuk Kim
+ wrote: > > > > On 09/08, Chao Yu wrote: > > > > > Sometimes we can [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1oZCoD-00AIpi-GA
-Subject: Re: [f2fs-dev] [PATCH 1/1] f2fs: fix to check space of
-	current	segment journal
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oZFy5-0007Nw-Ca
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to detect obsolete inner inode
+ during fill_super()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -84,189 +107,128 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: wubo.oduw@gmail.com, jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+Cc: syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Tnank you for your patch.
-
-I have applied it and also applied f2fs patches from 4.1.54 to my driver
-which was in the 4.1.5 state, but I still get sometimes 
-
-------------[ cut here ]------------
-WARNING: CPU: 0 PID: 2333 at fs/f2fs/node.c:1863 flush_nat_entries+0x74c/0x7d8()
-Modules linked in:
-CPU: 0 PID: 2333 Comm: python3 Not tainted 4.1.15-02187-g7bc7275 #173
-Hardware name: Freescale i.MX6 Quad/DualLite (Device Tree)
-[<80015f58>] (unwind_backtrace) from [<80012020>] (show_stack+0x10/0x14)
-[<80012020>] (show_stack) from [<80733454>] (dump_stack+0x68/0xb8)
-[<80733454>] (dump_stack) from [<8002b694>] (warn_slowpath_common+0x74/0xac)
-[<8002b694>] (warn_slowpath_common) from [<8002b6e8>] (warn_slowpath_null+0x1c/0x24)
-[<8002b6e8>] (warn_slowpath_null) from [<8024fef8>] (flush_nat_entries+0x74c/0x7d8)
-[<8024fef8>] (flush_nat_entries) from [<80244b6c>] (write_checkpoint+0x208/0xe68)
-[<80244b6c>] (write_checkpoint) from [<80240138>] (f2fs_sync_fs+0x50/0x70)
-[<80240138>] (f2fs_sync_fs) from [<8010436c>] (sync_fs_one_sb+0x28/0x2c)
-[<8010436c>] (sync_fs_one_sb) from [<800df9e0>] (iterate_supers+0xac/0xd4)
-[<800df9e0>] (iterate_supers) from [<80104414>] (sys_sync+0x48/0x98)
-[<80104414>] (sys_sync) from [<8000f440>] (ret_fast_syscall+0x0/0x3c)
----[ end trace a1c261161013ae57 ]---
-
-even after a almost silent fsck :
-
-Info: Force to fix corruption
-Info: Segments per section = 1
-Info: Sections per zone = 1
-Info: sector size = 512
-Info: total sectors = 7372800 (3600 MB)
-Info: MKFS version
-  ""
-Info: FSCK version
-  from ""
-    to "Linux version 4.1.15-02187-g7bc7275 (phdm@perdita) (gcc version 4.6.2 20110630 (prerelease) (Freescale MAD -- Linaro 2011.07 -- Built at 2011/08/10 09:20) ) #173 SMP PREEMPT Thu Sep 15 18:15:41 CEST 2022"
-Info: superblock features = 0 : 
-Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
-Info: total FS sectors = 7372800 (3600 MB)
-Info: CKPT version = c68
-Info: Corrupted valid nat_bits in checkpoint
-Info: Write valid nat_bits in checkpoint
-Info: checkpoint state = 284 :  allow_nocrc nat_bits compacted_summary sudden-power-off
-[FSCK] Check node 1 / 97426 (0.00%)
-random: nonblocking pool is initialized
-[FSCK] Check node 9743 / 97426 (10.00%)
-[FIX] (fsck_chk_inode_blk:1141)  --> Regular: 0x2387d reset i_gc_failures from 0x1 to 0x00
-[FSCK] Check node 19485 / 97426 (20.00%)
-[FSCK] Check node 29227 / 97426 (30.00%)
-[FSCK] Check node 38969 / 97426 (40.00%)
-[FSCK] Check node 48711 / 97426 (50.00%)
-[FSCK] Check node 58453 / 97426 (60.00%)
-[FSCK] Check node 68195 / 97426 (70.00%)
-[FSCK] Check node 77937 / 97426 (80.00%)
-[FSCK] Check node 87679 / 97426 (90.00%)
-[FSCK] Check node 97421 / 97426 (100.00%)
-[FIX] (fsck_chk_inode_blk:1141)  --> Regular: 0x23880 reset i_gc_failures from 0x1 to 0x00
-[FIX] (fsck_chk_inode_blk:1141)  --> Regular: 0x23898 reset i_gc_failures from 0x1 to 0x00
-
-[FSCK] Max image size: 3588 MB, Free space: 277 MB
-[FSCK] Unreachable nat entries                        [Ok..] [0x0]
-[FSCK] SIT valid block bitmap checking                [Ok..]
-[FSCK] Hard link checking for regular file            [Ok..] [0xa61]
-[FSCK] valid_block_count matching with CP             [Ok..] [0xbccff]
-[FSCK] valid_node_count matching with CP (de lookup)  [Ok..] [0x17c92]
-[FSCK] valid_node_count matching with CP (nat lookup) [Ok..] [0x17c92]
-[FSCK] valid_inode_count matched with CP              [Ok..] [0x17ac4]
-[FSCK] free segment_count matched with CP             [Ok..] [0x10b]
-[FSCK] next block offset is free                      [Ok..]
-[FSCK] fixing SIT types
-[FSCK] other corrupted bugs                           [Ok..]
-Info: Duplicate valid checkpoint to mirror position 1024 -> 512
-Info: Write valid nat_bits in checkpoint
-Info: Write valid nat_bits in checkpoint
-
-Done: 47.791824 secs
-
-And here is the current fs/f2fs/node.c:
-
-        /* flush dirty nats in nat entry set */
-        list_for_each_entry_safe(ne, cur, &set->entry_list, list) {
-                struct f2fs_nat_entry *raw_ne;
-                nid_t nid = nat_get_nid(ne);
-                int offset;
-
-                if (nat_get_blkaddr(ne) == NEW_ADDR)
-                        continue;
-
-                if (to_journal) {
-                        offset = lookup_journal_in_cursum(sum,
-                                                        NAT_JOURNAL, nid, 1);
-LINE 1863               f2fs_bug_on(sbi, offset < 0);
-                        raw_ne = &nat_in_journal(sum, offset);
-                        nid_in_journal(sum, offset) = cpu_to_le32(nid);
-                } else {
-                        raw_ne = &nat_blk->entries[nid - start_nid];
-                }
-                raw_nat_from_node_info(raw_ne, &ne->ni);
-
-                down_write(&NM_I(sbi)->nat_tree_lock);
-                nat_reset_flag(ne);
-                __clear_nat_cache_dirty(NM_I(sbi), ne);
-                up_write(&NM_I(sbi)->nat_tree_lock);
-
-                if (nat_get_blkaddr(ne) == NULL_ADDR)
-                        add_free_nid(sbi, nid, false);
-        }
-
-Best Regards
-
-Philippe
-
-On Thu, Sep 15, 2022 at 03:10:04PM +0800, Wu Bo wrote:
-> On 2022/9/14 16:08, Philippe De Muyter wrote:
+On 09/14, Chao Yu wrote:
+> On 2022/9/13 14:04, Jaegeuk Kim wrote:
+> > On 09/13, Chao Yu wrote:
+> > > On 2022/9/12 23:37, Jaegeuk Kim wrote:
+> > > > On 09/08, Chao Yu wrote:
+> > > > > Sometimes we can get a cached meta_inode which has no aops yet. Let's set it
+> > > > > all the time to fix the below panic.
+> > > > > 
+> > > > > Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
+> > > > > Mem abort info:
+> > > > >     ESR = 0x0000000086000004
+> > > > >     EC = 0x21: IABT (current EL), IL = 32 bits
+> > > > >     SET = 0, FnV = 0
+> > > > >     EA = 0, S1PTW = 0
+> > > > >     FSC = 0x04: level 0 translation fault
+> > > > > user pgtable: 4k pages, 48-bit VAs, pgdp=0000000109ee4000
+> > > > > [0000000000000000] pgd=0000000000000000, p4d=0000000000000000
+> > > > > Internal error: Oops: 86000004 [#1] PREEMPT SMP
+> > > > > Modules linked in:
+> > > > > CPU: 1 PID: 3045 Comm: syz-executor330 Not tainted 6.0.0-rc2-syzkaller-16455-ga41a877bc12d #0
+> > > > > Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/22/2022
+> > > > > pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+> > > > > pc : 0x0
+> > > > > lr : folio_mark_dirty+0xbc/0x208 mm/page-writeback.c:2748
+> > > > > sp : ffff800012783970
+> > > > > x29: ffff800012783970 x28: 0000000000000000 x27: ffff800012783b08
+> > > > > x26: 0000000000000001 x25: 0000000000000400 x24: 0000000000000001
+> > > > > x23: ffff0000c736e000 x22: 0000000000000045 x21: 05ffc00000000015
+> > > > > x20: ffff0000ca7403b8 x19: fffffc00032ec600 x18: 0000000000000181
+> > > > > x17: ffff80000c04d6bc x16: ffff80000dbb8658 x15: 0000000000000000
+> > > > > x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+> > > > > x11: ff808000083e9814 x10: 0000000000000000 x9 : ffff8000083e9814
+> > > > > x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+> > > > > x5 : ffff0000cbb19000 x4 : ffff0000cb3d2000 x3 : ffff0000cbb18f80
+> > > > > x2 : fffffffffffffff0 x1 : fffffc00032ec600 x0 : ffff0000ca7403b8
+> > > > > Call trace:
+> > > > >    0x0
+> > > > >    set_page_dirty+0x38/0xbc mm/folio-compat.c:62
+> > > > >    f2fs_update_meta_page+0x80/0xa8 fs/f2fs/segment.c:2369
+> > > > >    do_checkpoint+0x794/0xea8 fs/f2fs/checkpoint.c:1522
+> > > > >    f2fs_write_checkpoint+0x3b8/0x568 fs/f2fs/checkpoint.c:1679
+> > > > > 
+> > > > > The root cause is, quoted from Jaegeuk:
+> > > > > 
+> > > > > It turned out there is a bug in reiserfs which doesn't free the root
+> > > > > inode (ino=2). That leads f2fs to find an ino=2 with the previous
+> > > > > superblock point used by reiserfs. That stale inode has no valid
+> > > > > mapping that f2fs can use, result in kernel panic.
+> > > > > 
+> > > > > This patch adds sanity check in f2fs_iget() to avoid finding stale
+> > > > > inode during inner inode initialization.
+> > > > > 
+> > > > > Cc: stable@vger.kernel.org
+> > > > > Reported-by: syzbot+775a3440817f74fddb8c@syzkaller.appspotmail.com
+> > > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > > > > Signed-off-by: Chao Yu <chao@kernel.org>
+> > > > > ---
+> > > > >    fs/f2fs/inode.c | 11 +++++++++++
+> > > > >    1 file changed, 11 insertions(+)
+> > > > > 
+> > > > > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> > > > > index ccb29034af59..df1a82fbfaf2 100644
+> > > > > --- a/fs/f2fs/inode.c
+> > > > > +++ b/fs/f2fs/inode.c
+> > > > > @@ -493,6 +493,17 @@ struct inode *f2fs_iget_inner(struct super_block *sb, unsigned long ino)
+> > > > >    	struct inode *inode;
+> > > > >    	int ret = 0;
+> > > > > +	if (ino == F2FS_NODE_INO(sbi) || ino == F2FS_META_INO(sbi) ||
+> > > > > +					ino == F2FS_COMPRESS_INO(sbi)) {
+> > > > > +		inode = ilookup(sb, ino);
+> > > > > +		if (inode) {
+> > > > > +			iput(inode);
+> > > > > +			f2fs_err(sbi, "there is obsoleted inner inode %lu cached in hash table",
+> > > > > +					ino);
+> > > > > +			return ERR_PTR(-EFSCORRUPTED);
+> > > > 
+> > > > Well, this does not indicate f2fs is corrupted. I'd rather expect to fix
+> > > > reiserfs instead of f2fs workaround which hides the bug.
+> > > 
+> > > Well, is there a fixing patch for reiserfs? If not, how about applying this
+> > > patch first, later, we can revert it after reiserfs has been fixed.
+> > 
+> > I don't feel this is a right way to deal with that. If we think it'd be worth
+> > checking any stale inode object during f2fs_fill_super, we'd better check any
+> > cached inode given superblock pointer rather than our inner inodes only.
 > 
-> > Hello Wu Bo,
-> >
-> > On Wed, Sep 14, 2022 at 12:04:23PM +0800, Wu Bo wrote:
-> >> As Philippe De Muyter reported:
-> >> https://lore.kernel.org/linux-f2fs-devel/20220913224908.GA25100@172.21.0.10/T/#u
-> >>
-> >> The warning log showed that when finding a new space for nat the journal
-> >> space turned out to be full. This because the journal_rwsem is not
-> >> locked before the journal space checking. The journal space may become
-> >> full just after we check it.
-> >>
-> >> Reported-by: Philippe De Muyter <phdm@macq.eu>
-> >> Signed-off-by: Wu Bo <bo.wu@vivo.com>
-> >> ---
-> >>  fs/f2fs/node.c    |  6 +++---
-> >>  fs/f2fs/segment.c | 10 +++++-----
-> >>  2 files changed, 8 insertions(+), 8 deletions(-)
-> >>
-> >
-> > Thank you for your patch.
-> >
-> > Unfortunately it does not apply to my 4.1.15 or newer 4.1.y sources,
-> > and I do not have the knowledge of f2fs internals to modify your
-> > patch myself.  E.g. 4.1.y lacks the '.journal' field in the
-> > 'struct curseg_info'.
-> >
-> > Could you make a version suitable for 4.1.y ?
-> 
-> My patch is just try to fix the 'offset < 0' warning you have meet. The
-> probability of this is very low.
-> 
-> 
-> 
-> To the fsck fixed report you found when doing fsck.f2fs, 'reset
-> i_gc_failures' log seems normal. And 'Unreachable nat entries' maybe
-> caused by the 'offset < 0' exception.
-> 
-> If your filesystem doesn't report fsck failures after these 2 cases, I
-> think you don't need to worry about it too much.
-> 
-> Here is the patch for v4.1.y:
-> 
-> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> index 8ab0cf1930bd..fc4d87a1ddf0 100644
-> --- a/fs/f2fs/node.c
-> +++ b/fs/f2fs/node.c
-> @@ -1837,12 +1837,12 @@ static void __flush_nat_entry_set(struct f2fs_sb_info *sbi,
->          * #1, flush nat entries to journal in current hot data summary block.
->          * #2, flush nat entries to nat page.
->          */
-> +       mutex_lock(&curseg->curseg_mutex);
->         if (!__has_cursum_space(sum, set->entry_cnt, NAT_JOURNAL))
->                 to_journal = false;
-> 
-> -       if (to_journal) {
-> -               mutex_lock(&curseg->curseg_mutex);
-> -       } else {
-> +       if (!to_journal) {
-> +               mutex_unlock(&curseg->curseg_mutex);
->                 page = get_next_nat_page(sbi, start_nid);
->                 nat_blk = page_address(page);
->                 f2fs_bug_on(sbi, !nat_blk);
+> Well, something like this?
 
+Any chance to get a better way?
+
+> 
+> f2fs_fill_super()
+> 
+> 	for (ino = root_ino; ino < max_nid; ino++) {
+> 		inode = iget_locked(sb, ino);
+> 		if (!inode)
+> 			continue;
+> 		iput(inode);
+> 		ret = -EFSCORRUPTED;
+> 		goto error_handling;
+> 	}
+> 
+> > 
+> > > 
+> > > Thanks,
+> > > 
+> > > > 
+> > > > > +		}
+> > > > > +	}
+> > > > > +
+> > > > >    	inode = iget_locked(sb, ino);
+> > > > >    	if (!inode)
+> > > > >    		return ERR_PTR(-ENOMEM);
+> > > > > -- 
+> > > > > 2.25.1
 
 
 _______________________________________________
