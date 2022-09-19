@@ -2,88 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAE5B5BBD7B
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 18 Sep 2022 12:48:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29B235BC165
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Sep 2022 04:32:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oZrqr-0001WI-61;
-	Sun, 18 Sep 2022 10:48:53 +0000
+	id 1oa6a3-0004ZQ-Tu;
+	Mon, 19 Sep 2022 02:32:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1oZrqa-0001W6-U1
+ (envelope-from <yonggil.song@samsung.com>) id 1oa6a1-0004ZJ-9r
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 18 Sep 2022 10:48:37 +0000
+ Mon, 19 Sep 2022 02:32:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ Date:Message-ID:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Hav2ja+QwUqwe/fS9SSclF4glzknk/fmFFpOa+7eAd4=; b=L2zpFLfCLfBb4oW3ImIt/NPDV0
- un6yPO5Ekqmgt3XmNO5ON+QdyMbM3FRiL8OU52vtZ49B7ly5pup03/h7845fjQ0mN9jlgLx4Jvz4G
- sVbNZGaEx9KfVgEUQBpUJNtRppjaB2KdIs6aqexsMqvc1K+14zhbHgAtOfm2Te9oblrA=;
+ bh=zPbJipuVGWci7Qgh4gwml2SBskXo8M9wUc+7sD7FCgo=; b=EIFOnbik9/o9PNDKgpmkKI1w9m
+ uG/OZeZ1TgPmzJCfLsz9Eqf3uRLL8b2mNUx1n2quE+DZ0RrxBFET7ASNi89On1wxkggGYBZZcl7+L
+ YIVQs/B1QhW+YXewRh9jQsuqvbAHHoolm2xcwMqOMaCo/IKwjdLMf3mIQIg9KuWBQgVg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Hav2ja+QwUqwe/fS9SSclF4glzknk/fmFFpOa+7eAd4=; b=VrDtMKSNm9v/FuddZiQ7bLqR7d
- rPBBmnj8J7kfJu/mYn3h61hEkcVu7jTDjant6amXasbF4a+AthY0Mo9P2v657RXMn41T1Bl+OVVe7
- XSupfOUcHsZdUx2f52kVkQXdeSM9AJx2ABUxZQgMcUnWK2pRZC8G/2idwUh+HNbjj4q8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:CC:To:
+ From:Sender:Reply-To:Subject:Mime-Version:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=zPbJipuVGWci7Qgh4gwml2SBskXo8M9wUc+7sD7FCgo=; b=J
+ Y+3pfASm3YagElSaJozXQ6k2RFZPBFnkF0j5hmkh+JCnFlFDgses5nXYdxWHzWEECY/l5bxUE2yHR
+ 7S/1UjEe/N0sV0m3El6HQVyCWwXtUaZrbTHiId0wYGe57zzKIJ7D0XgIc+CNqJwM9ReD/iHhptRPX
+ vZ58oAKU2/8mwcxM=;
+Received: from mailout3.samsung.com ([203.254.224.33])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oZrqm-00C6nj-Ti for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 18 Sep 2022 10:48:37 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7621260BEF;
- Sun, 18 Sep 2022 10:48:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34C6CC433C1;
- Sun, 18 Sep 2022 10:48:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1663498110;
- bh=mHXwss8AvGFfzH1zbrAtSDXL0mmfUrttukh+3azXyns=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=df6eT4BkNlPT+ttFY6HGanIjPyTCofRqoN8uQPfX5ji++fXtDqsWUuhVlKArcpZZg
- wPp3HsdHzaq88ZOV0IS+BQwgT+JaSG0/f4PR2hbKITd1y60csjA24BfHLs3jeTNme8
- NFOojeMwZLsi1sLCW2liJvNi7wgLGtp8xG6iSwXR32WbrXvgrKvbQvs4TCD1FwkmEg
- S+5TYlk/LgcU+afRDv9OJY9IPTecx5oFqHNM/nwULKqs+9ZBKZVyEmGX3A7ei4uBR7
- h/Gv8Vs9N5v+mh9Jfo3fv85IoVLGVuvHq3bpEHeJsttjL6ur0dWrtJvxNZZSVY6H2t
- 0rrGMfuFt3y5Q==
-Message-ID: <2f5e8d93-ea68-70cf-4c9b-07a8bbc3220b@kernel.org>
-Date: Sun, 18 Sep 2022 18:48:28 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.0
-Content-Language: en-US
-To: Zhang Qilong <zhangqilong3@huawei.com>, jaegeuk@kernel.org
-References: <20220915134408.69886-1-zhangqilong3@huawei.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20220915134408.69886-1-zhangqilong3@huawei.com>
-X-Spam-Score: -8.9 (--------)
+ id 1oa6Zs-00CmQY-WA for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Sep 2022 02:32:17 +0000
+Received: from epcas2p1.samsung.com (unknown [182.195.41.53])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20220919023157epoutp03ae435c52a354ab5aaf9c70f24500a7a7~WIjOZpUNk0265102651epoutp03f
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 19 Sep 2022 02:31:57 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20220919023157epoutp03ae435c52a354ab5aaf9c70f24500a7a7~WIjOZpUNk0265102651epoutp03f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1663554717;
+ bh=zPbJipuVGWci7Qgh4gwml2SBskXo8M9wUc+7sD7FCgo=;
+ h=Subject:Reply-To:From:To:CC:Date:References:From;
+ b=dwGiInkf1EuARgYT44vRuhSRB08FWLeeohQzDrEa3JnWxfQibs7zFzr5eNoNB0Bhb
+ pY3zjyYacWuDensgurxhCiHJPrCDz0Ru9da6MncpeqZWRlQHs1T+aCy1o4NyZMUPDT
+ 3MPem6ysqiweFlUneyVZUS4NDo7K1HjjmwSHrGD0=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas2p3.samsung.com (KnoxPortal) with ESMTP id
+ 20220919023155epcas2p3ea3da8c2a7eef4e7f003f01970db5158~WIjNCn3M82051320513epcas2p3B;
+ Mon, 19 Sep 2022 02:31:55 +0000 (GMT)
+Received: from epsmges2p2.samsung.com (unknown [182.195.36.99]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4MW7wq4N5Sz4x9QG; Mon, 19 Sep
+ 2022 02:31:55 +0000 (GMT)
+X-AuditID: b6c32a46-36bff70000004e8a-47-6327d49bae37
+Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
+ epsmges2p2.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 1A.D4.20106.B94D7236; Mon, 19 Sep 2022 11:31:55 +0900 (KST)
+Mime-Version: 1.0
+From: Yonggil Song <yonggil.song@samsung.com>
+To: "jaegeuk@kernel.org" <jaegeuk@kernel.org>, "chao@kernel.org"
+ <chao@kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
+X-Priority: 3
+X-Content-Kind-Code: NORMAL
+X-CPGS-Detection: blocking_info_exchange
+X-Drm-Type: N,general
+X-Msg-Generator: Mail
+X-Msg-Type: PERSONAL
+X-Reply-Demand: N
+Message-ID: <20220919023155epcms2p3f7040c348b5351a731f98c3f9c3a6847@epcms2p3>
+Date: Mon, 19 Sep 2022 11:31:55 +0900
+X-CMS-MailID: 20220919023155epcms2p3f7040c348b5351a731f98c3f9c3a6847
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrNKsWRmVeSWpSXmKPExsWy7bCmhe7sK+rJBle/ylucnnqWyeLJ+lnM
+ FpcWuVtMPX+EyYHFY9OqTjaP3Qs+M3n0bVnFGMAclW2TkZqYklqkkJqXnJ+SmZduq+QdHO8c
+ b2pmYKhraGlhrqSQl5ibaqvk4hOg65aZA7RNSaEsMacUKBSQWFyspG9nU5RfWpKqkJFfXGKr
+ lFqQklNgXqBXnJhbXJqXrpeXWmJlaGBgZApUmJCd8erfdvaCPtaKBd/3MjUwNrJ0MXJySAiY
+ SPy50cXcxcjFISSwg1Hi16d+ti5GDg5eAUGJvzuEQWqEBeQlTk3sYQaxhQSUJK4d6GWBiOtL
+ bF68jB3EZhPQlfi7YTmYLSKwklGi5Uk4iM0soC2xcfZZJohdvBIz2p9C7ZWW2L58KyOErSHx
+ Y1kvM4QtKnFz9Vt2GPv9sflQNSISrffOQtUISjz4uRsqLimx6NB5qPn5En9XXGeDsGsktja0
+ QcX1Ja51bATbyyvgK/H5yXKwOSwCqhIvnoDM5ACqcZFYvz0B4mR5ie1v54CFmQU0Jdbv0oeo
+ UJY4cosFooJPouPwX3aYp3bMewK1SE1i86bNrBC2jMSFx21QR3pIfPjykhUSgIESt5t+ME1g
+ VJiFCOZZSPbOQti7gJF5FaNYakFxbnpqsVGBETxmk/NzNzGCU52W2w7GKW8/6B1iZOJgPMQo
+ wcGsJMKr6qmSLMSbklhZlVqUH19UmpNafIjRFOjhicxSosn5wGSbVxJvaGJpYGJmZmhuZGpg
+ riTO66LNmCwkkJ5YkpqdmlqQWgTTx8TBKdXANPedj8e0pVoZvDuqFnlPveya/eKdgZ3s5LWv
+ As/p9m/r+8V3RLT+YoHExJMMNlEsl1+HB+1u4//9cfPSSwsebL+426PI8przqdCUY/1uq+eZ
+ uk20O9owR1+KLeTHnwfpDOoZSycVH3G8FtH9q8rq0/uEH0Ve2b5MNb57uatvHJXYeXvzFeO8
+ Xz5hn4S5tY8WT383ab3QhxkrT23K28Zbe2HiE3YW2cORah/cFnMfWJ95MN36iYoPS39JeNQj
+ PtPya0eLPAXrLwtwnp0hseE362X2/Ld77GS8em90PdXdFNq+ePWXHdm9WoEyYhHZnk69v5oP
+ X1wruzNPtS3k6nVpZfUtT3uWtsYFOX3dfn9tpBJLcUaioRZzUXEiAF9si8n+AwAA
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20220919023155epcms2p3f7040c348b5351a731f98c3f9c3a6847
+References: <CGME20220919023155epcms2p3f7040c348b5351a731f98c3f9c3a6847@epcms2p3>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/9/15 21:44,
- Zhang Qilong wrote: > For f2fs_update_extent_tree_range_compressed, 
- keeping > the trace and function name consistent to distinguish > from trace
- of f2fs_update_extent_tree_range. A [...] 
- Content analysis details:   (-8.9 points, 6.0 required)
+ Content preview:  Fix typo in f2fs.h Detected by Jaeyoon Choi Signed-off-by:
+ Yonggil Song --- fs/f2fs/f2fs.h | 2 +- 1 file changed, 1 insertion(+), 1
+ deletion(-) diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h index
+ eddfd35eadb6..661096be59d1
+ 100644 --- a/fs/f2fs/f2fs.h +++ b/fs/f2fs/f2fs.h @@ -274,7 +274,7 @@ enum
+ { ORPHAN_INO, /* for orphan ino list */ APPEND_I [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [203.254.224.33 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.33 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -91,11 +131,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -3.7 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oZrqm-00C6nj-Ti
-Subject: Re: [f2fs-dev] [PATCH -next] f2fs: add a trace interface for
- f2fs_update_extent_tree_range_compressed
+X-Headers-End: 1oa6Zs-00CmQY-WA
+Subject: [f2fs-dev] [PATCH] f2fs: fix typo
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,93 +146,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Reply-To: yonggil.song@samsung.com
+Cc: Yonggil Song <yonggil.song@samsung.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/9/15 21:44, Zhang Qilong wrote:
-> For f2fs_update_extent_tree_range_compressed, keeping
-> the trace and function name consistent to distinguish
-> from trace of f2fs_update_extent_tree_range. And we add
-> "c_len" into the trace, result like:
-> 
->    [003] .....   228.568157: f2fs_update_extent_tree_range_compressed:
->                  dev = (8,0), ino = 5, pgofs = 96, blkaddr = 2548760,
->                  len = 4, c_len = 1
-> 
-> Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
-> ---
->   fs/f2fs/extent_cache.c      |  2 +-
->   include/trace/events/f2fs.h | 36 ++++++++++++++++++++++++++++++++++++
->   2 files changed, 37 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-> index 761fd42c93f2..df41eca6386a 100644
-> --- a/fs/f2fs/extent_cache.c
-> +++ b/fs/f2fs/extent_cache.c
-> @@ -675,7 +675,7 @@ void f2fs_update_extent_tree_range_compressed(struct inode *inode,
->   	struct rb_node **insert_p = NULL, *insert_parent = NULL;
->   	bool leftmost = false;
->   
-> -	trace_f2fs_update_extent_tree_range(inode, fofs, blkaddr, llen);
-> +	trace_f2fs_update_extent_tree_range_compressed(inode, fofs, blkaddr, llen, c_len);
->   
->   	/* it is safe here to check FI_NO_EXTENT w/o et->lock in ro image */
->   	if (is_inode_flag_set(inode, FI_NO_EXTENT))
-> diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-> index b262985f0c3a..54a9f6feca1b 100644
-> --- a/include/trace/events/f2fs.h
-> +++ b/include/trace/events/f2fs.h
-> @@ -1606,6 +1606,42 @@ TRACE_EVENT(f2fs_update_extent_tree_range,
->   		__entry->len)
->   );
->   
-> +TRACE_EVENT(f2fs_update_extent_tree_range_compressed,
 
-Why not adding parameter c_len in trace_f2fs_update_extent_tree_range()
-to avoid duplicated codes...
 
-Thanks,
+Fix typo in f2fs.h
+Detected by Jaeyoon Choi
 
-> +
-> +	TP_PROTO(struct inode *inode, unsigned int pgofs, block_t blkaddr,
-> +						unsigned int len,
-> +						unsigned int c_len),
-> +
-> +	TP_ARGS(inode, pgofs, blkaddr, len, c_len),
-> +
-> +	TP_STRUCT__entry(
-> +		__field(dev_t,	dev)
-> +		__field(ino_t,	ino)
-> +		__field(unsigned int, pgofs)
-> +		__field(u32, blk)
-> +		__field(unsigned int, len)
-> +		__field(unsigned int, c_len)
-> +	),
-> +
-> +	TP_fast_assign(
-> +		__entry->dev = inode->i_sb->s_dev;
-> +		__entry->ino = inode->i_ino;
-> +		__entry->pgofs = pgofs;
-> +		__entry->blk = blkaddr;
-> +		__entry->len = len;
-> +		__entry->c_len = c_len;
-> +	),
-> +
-> +	TP_printk("dev = (%d,%d), ino = %lu, pgofs = %u, "
-> +					"blkaddr = %u, len = %u, "
-> +					"c_len = %u",
-> +		show_dev_ino(__entry),
-> +		__entry->pgofs,
-> +		__entry->blk,
-> +		__entry->len,
-> +		__entry->c_len)
-> +);
-> +
->   TRACE_EVENT(f2fs_shrink_extent_tree,
->   
->   	TP_PROTO(struct f2fs_sb_info *sbi, unsigned int node_cnt,
+Signed-off-by: Yonggil Song 
+---
+ fs/f2fs/f2fs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index eddfd35eadb6..661096be59d1 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -274,7 +274,7 @@ enum {
+ 	ORPHAN_INO,		/* for orphan ino list */
+ 	APPEND_INO,		/* for append ino list */
+ 	UPDATE_INO,		/* for update ino list */
+-	TRANS_DIR_INO,		/* for trasactions dir ino list */
++	TRANS_DIR_INO,		/* for transactions dir ino list */
+ 	FLUSH_INO,		/* for multiple device flushing */
+ 	MAX_INO_ENTRY,		/* max. list */
+ };
+-- 
+2.34.1
 
 
 _______________________________________________
