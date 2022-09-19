@@ -2,80 +2,117 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 910F75BC2A7
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Sep 2022 08:02:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 588E95BC4F6
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Sep 2022 11:05:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oa9qn-0006qS-ED;
-	Mon, 19 Sep 2022 06:02:02 +0000
+	id 1oaCir-0006wH-1b;
+	Mon, 19 Sep 2022 09:05:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1oa9qm-0006qE-Je
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1oaChm-0006v1-Dd
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Sep 2022 06:02:01 +0000
+ Mon, 19 Sep 2022 09:04:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uUNrUwW6aGTkNv5R8wz2RoH/jwcu8ORGkBQQOXM7XrY=; b=SH+AoFZ/jpkYVJZnaGl9KmXsnP
- 3/yhxnBsnFJxirQkAXjVGR3Mr9ka9cYqHwu6IR5+q+TOimvxeKIlg5e8g7C1msC8aSZ+dcAVcUoHM
- Zk3jSTzoW+Z1VTNQ5T9vCDHS5jQoaG9uStfiM5fFo3CC9d7TyMmWHhVe8AYWA6HEpKjE=;
+ bh=/h7odZb9dxgyM4W3k6FoaEQHK+OxgpHkDVczSMJYx/w=; b=l31c+D+TJpCfB2SBE/xORVF0+E
+ AKy7pQP1XuvUqBu+vEayrHxNDrcPdXEm9aoypFUTL4B9gODS1ne02JoS9wkAAgM/ksYR3hAq+hVgx
+ 7RSeOtmwvgPV80msxU15eyB+qRxeLD9nK75DYKOGJD19ln0YvPbZLhovlmJmMFe0Ngac=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=uUNrUwW6aGTkNv5R8wz2RoH/jwcu8ORGkBQQOXM7XrY=; b=D
- zEy3/wTLCj48ZOSeiSg83aNHOXuHnqzPywruR8Z0TrfbeXKjn3eKXKDO9LDmOmMTc9KlKQXQmpevo
- SCk1Q+ozlM83Q7M4u6EHaKNFS6u7kdjKPGMjCOrFc0ic09vWTsDWhoon8MOgdJ3HtBXZ3PcnchPRZ
- YgwUgTk9wO4Qb640=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=/h7odZb9dxgyM4W3k6FoaEQHK+OxgpHkDVczSMJYx/w=; b=gT/orhRRH+djR1gNHzFzbHmrnB
+ metSrjjChVxv2y5qO/qBNrgSWAr4OHsBiW/caYk/mNY4D+JFEIX35y+CKt7qsV2XQUBT2ZNhktBoI
+ Gb2V2E0kmw7jghO78BluqFNnwpSOejXDUP7o+bCj/etp5eygG1LG6oz0naQCcUXGZ1ss=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oa9qx-0002Hr-Rt for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Sep 2022 06:02:01 +0000
-Received: from SHSend.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by SHSQR01.spreadtrum.com with ESMTPS id 28J611ob064546
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NO);
- Mon, 19 Sep 2022 14:01:01 +0800 (CST)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from bj08434pcu.spreadtrum.com (10.0.74.109) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Mon, 19 Sep 2022 14:01:00 +0800
-From: "zhiguo.niu" <zhiguo.niu@unisoc.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <linux-kernel@vger.kernel.org>
-Date: Mon, 19 Sep 2022 14:00:54 +0800
-Message-ID: <1663567254-12338-1-git-send-email-zhiguo.niu@unisoc.com>
-X-Mailer: git-send-email 1.9.1
+ id 1oaChj-00DAIW-Bo for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Sep 2022 09:04:39 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 1ECDDB81624
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 19 Sep 2022 09:04:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id CA399C433D7
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 19 Sep 2022 09:04:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1663578271;
+ bh=s0KnnjNuRPavPdmG8RPKMUpYeEpwQFxaJ44chyWoP8k=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=A7ixsz4ocDNL+LECBNFlzI11riM/W3wLkBBxvjveDyl1cvS7O3y/+/CJF4rz8zluL
+ uOX++GZZpEgQYkxF2rXTo8DlnFx1uw8bRdRxI1a1e+j2vk4aEgufaC7Y5D8KD8Gpa5
+ vc4Of4BPzFwqe7mNeD3TWxzwTcOvGkiUisIrRBR+pClaHaDDtjXYZoI8JYzPP57z+4
+ DmQ1SuiMwnoF070EK59FqAjTOp5qjpS2oHKGh0urVS+CexTdr731Vqrox8qG+dGBoh
+ b3cUaDr9/A8e3x1GoUey8yWC8dJdPa9dX374Qw+AP7FN4Z37CxaHeIfh609Gm07mHf
+ Mqc3r2qCRdIpg==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id B9793C433E4; Mon, 19 Sep 2022 09:04:31 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 19 Sep 2022 09:04:31 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: chao@kernel.org
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: CODE_FIX
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-216285-202145-twzfJJa5xX@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-216285-202145@https.bugzilla.kernel.org/>
+References: <bug-216285-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Originating-IP: [10.0.74.109]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 28J611ob064546
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  During GC,
- if segment type stored in SSA and SIT is inconsistent, 
- we set SBI_NEED_FSCK first and then stop checkpoint, this will cause the
- following issues: 1. SBI_NEED_FSCK can not be set to flash tr [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=216285 Chao Yu
+ (chao@kernel.org) changed: What |Removed |Added Status|ASSIGNED |RESOLVED
+ Resolution|--- |CODE_FIX 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1oa9qx-0002Hr-Rt
-Subject: [f2fs-dev] [PATCH V2] f2fs: fix some error handling case in gc
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oaChj-00DAIW-Bo
+Subject: [f2fs-dev] [Bug 216285] KASAN: slab-out-of-bounds in mutex_lock and
+ NULL pointer dereference at fs/f2fs/segment.c: f2fs_update_meta_page() when
+ mount a crafted f2fs image
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,63 +124,24 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: xiuhong.wang@unisoc.com, zhiguo.niu@unisoc.com, niuzhiguo84@gmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-During GC, if segment type stored in SSA and SIT is inconsistent,
-we set SBI_NEED_FSCK first and then stop checkpoint, this will
-cause the following issues:
-1. SBI_NEED_FSCK can not be set to flash truly because of checkpoint
-has been stopped.
-2. Will cause more EIO error if user use f2fs because of CP_ERROR_FLAG
-has been set in f2fs_stop_checkpoint, this is not reasonable.
+https://bugzilla.kernel.org/show_bug.cgi?id=216285
 
-So we fix this error handling case by recording current victim segment
-as invalid for gc and do not stop checkpoint.
-1. SBI_NEED_FSCK will still be set but not do f2fs_stop_checkpoint for
-f2fs.fsck to have opportunity to fix the inconsistent segment type
-in SSA and SIT.
-2. Let user can still use fs, avoid EIO error for some operations such
-as read and write,etc
-3. If current segment has inconsistent segment type in SSA and SIT,
-we add this segment segno in SIT_I(sbi)->invalid_segmap to skip this
-segment to avoid deadloop in gc,similar as commit bbf9f7d90f21 ("f2fs:
-Fix indefinite loop in f2fs_gc()")
+Chao Yu (chao@kernel.org) changed:
 
-Fixes: 793ab1c8a792 ("f2fs: fix to avoid deadloop in foreground GC")
-Signed-off-by: zhiguo.niu <zhiguo.niu@unisoc.com>
----
- fs/f2fs/gc.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|ASSIGNED                    |RESOLVED
+         Resolution|---                         |CODE_FIX
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index d5fb426e0747..66bdf2678b5e 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1700,10 +1700,13 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 
- 		sum = page_address(sum_page);
- 		if (type != GET_SUM_TYPE((&sum->footer))) {
--			f2fs_err(sbi, "Inconsistent segment (%u) type [%d, %d] in SSA and SIT",
--				 segno, type, GET_SUM_TYPE((&sum->footer)));
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
--			f2fs_stop_checkpoint(sbi, false);
-+#ifdef CONFIG_F2FS_CHECK_FS
-+			if (!test_and_set_bit(segno, SIT_I(sbi)->invalid_segmap)) {
-+				f2fs_err(sbi, "Inconsistent segment (%u) type [%d, %d] in SSA and SIT",
-+					segno, type, GET_SUM_TYPE((&sum->footer)));
-+				set_sbi_flag(sbi, SBI_NEED_FSCK);
-+			}
-+#endif
- 			goto skip;
- 		}
- 
 -- 
-2.17.1
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
