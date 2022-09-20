@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3DBA5BEA39
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Sep 2022 17:29:26 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38F9A5BEA73
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Sep 2022 17:44:17 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oafBX-0008EY-CI;
-	Tue, 20 Sep 2022 15:29:19 +0000
+	id 1oafPx-00053c-LX;
+	Tue, 20 Sep 2022 15:44:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1oafBV-0008ES-D9
+ (envelope-from <chao@kernel.org>) id 1oafPi-00052B-Q8
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Sep 2022 15:29:17 +0000
+ Tue, 20 Sep 2022 15:43:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pJ5RkueB0IgU3U95U8K4nSzEPRe+AQrCzUK1dc72z0A=; b=gheUs3b+9tk4PUp7fq29K7jztF
- Qi0tVmQa2Tk3FhWcQIDc47WSif4AXCDxK+n/Sh3n4wKPOUaZdgGLWTMHX8tnqswwabEcuYtfIpubL
- 38wijh+WwQrvQR/DNEgIddA5fJqHG7iXAYqlGtLTHHZp1w+CDffPArDBofwp9it153vc=;
+ bh=qd0DKju5t4W8TinRrnflgvakASixa7EdHGubE0AG4SA=; b=J+/yMUlmjuGzuA46jbabk5+NlB
+ cGXe2CMOnolGLJ7NVFE0/FaIY3NPZglFLvSpgalC3zXqI/E0vvoIIctATbA9STzDiE0md8yoK5GAa
+ T2X1rGm22uWILNloyyrnsWoQVWvs1I7LSOd1MhQd8ICrpqgDAad6MJZBpDs0fuhqr8g8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,42 +31,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pJ5RkueB0IgU3U95U8K4nSzEPRe+AQrCzUK1dc72z0A=; b=gDVr3A+xwD7pBsVv6346HWi2M3
- ZEcz+E0F4wYIB0U0hLY7xIsaF6XUtd5YYZOdbBAxY3fC8n5nLwEuE88u8yF6SMxSt0NoQRMhMEisq
- 8LV2eP2tKn+UR9h1xV2tDQtDJG3SPz6tqFOoe/yGTzR5naWcdywGwJhg4tKLuFhfgTx4=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=qd0DKju5t4W8TinRrnflgvakASixa7EdHGubE0AG4SA=; b=Lqb+MwFnAtcE20Bmldj/13bYpE
+ 627lUB270RUyfHhDp6L1sO5drq+AdGF4px7GWcVtMZoOgqCiPgUQPdJRbPuJfEohg0+BQ6R42shEg
+ cBHCFIolXXCPnsMiHSR1kUYgiEBOOvgU4THQkINyREWFlY5QBDIZSTL6mGQN1+8ZLtLk=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oafBU-00Ebpv-OV for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Sep 2022 15:29:17 +0000
+ id 1oafPh-0006U2-SV for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Sep 2022 15:43:58 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2E33B624D0;
- Tue, 20 Sep 2022 15:29:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5DCBAC433C1;
- Tue, 20 Sep 2022 15:29:06 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 8E86FB82ACF
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 20 Sep 2022 15:43:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8C66C433D6;
+ Tue, 20 Sep 2022 15:43:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1663687747;
- bh=iemDLGibnYPEk7i75AVZGHMGMYVcXO83jgs70f+7FdQ=;
+ s=k20201202; t=1663688625;
+ bh=PFeHKUWcPvwy22Jq4szgPP8OXgzETyMzB2Jnk5fW8og=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=VAxAfo7Fi/OX46FTZhU+eAZJohoeaIbR3adQU2skZk43WqBOx9C0byz1p7r5TYDPR
- VBb2iS6ApBX6Ld/BIbTFba+t9pMLwYJDDVFSzgh/ytaIfv9cFWV+tF/vb9H02lpkeW
- A5VBd4N+3SkrBmh01BK2Sqch0oagthB/XE0IpCy3mVCMTaBGorh0ohJySjmvzQc6b4
- 1WiNXIjLy3MXKLakH8dC3IKJ5jHVTjeogMx6mk6/rVtwkGzKZT/i46ILng19BLWX9e
- 5yvYC3zD8YjvIp0DRbeKbmRJLvamsKcOUDVdBrjKmeGHRRkbvJGJYflVBB5+L4b57y
- IaWxm6LlDhEzg==
-Message-ID: <fadeeb4e-2769-a0c9-aee5-612de712aec6@kernel.org>
-Date: Tue, 20 Sep 2022 23:29:02 +0800
+ b=hC99t0npwAV6QO4/MiR2h5zGbZhrFsBoZLJYXEAxowZ+kCdJRprW5sD3Qm3z5HxNz
+ LO4+S037ZBZd43NapyFnLaFxXjSg/P5+11l13v24Ugo88PipAuXs9XLDO/5MIEW+Wv
+ egoISRYYUMvxdXNQLlq3rN2oyI+Hh+MeWXHZIIE5ccPJXQ9CHePyuLbg6WC0NOxQch
+ k6T6dwD/C48KzLtt+Ri+Gf/h3naWWWtXmzTfX1VgvGRL+q8uf66jvnZrJpoyExloAP
+ I3UbOkMT8g82cL47eOUQr5Tvzx6gnAFc2/N8MCoIiBzLf6dq6VqU/EyfSkH697CMIS
+ vH8Q+UAzJKnbQ==
+Message-ID: <b22657e3-df59-46ff-81c5-be22e422a576@kernel.org>
+Date: Tue, 20 Sep 2022 23:43:43 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.13.0
 Content-Language: en-US
-To: "zhiguo.niu" <zhiguo.niu@unisoc.com>, jaegeuk@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
-References: <1663637258-21987-1-git-send-email-zhiguo.niu@unisoc.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20220913135919.2445544-1-chao@kernel.org>
+ <YykPzeC4lk+F/U/2@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <1663637258-21987-1-git-send-email-zhiguo.niu@unisoc.com>
+In-Reply-To: <YykPzeC4lk+F/U/2@google.com>
 X-Spam-Score: -7.4 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -74,14 +75,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/9/20 9:27, zhiguo.niu wrote: > During GC, if segment
- type stored in SSA and SIT is inconsistent, > we set SBI_NEED_FSCK first
- and then stop checkpoint, this will > cause the following issues: [...] 
+ Content preview:  On 2022/9/20 8:56, Jaegeuk Kim wrote: > On 09/13, Chao Yu
+ wrote: >> Once CP_ERROR_FLAG is set, checkpoint is disallowed to be triggered
+ to >> persist CP_FSCK_FLAG, fsck won't repair the image due to l [...] 
  Content analysis details:   (-7.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -93,8 +94,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -2.2 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oafBU-00Ebpv-OV
-Subject: Re: [f2fs-dev] [PATCH V3] f2fs: fix some error handling case in gc
+X-Headers-End: 1oafPh-0006U2-SV
+Subject: Re: [f2fs-dev] [RFC PATCH v2] f2fs: record need_fsck in super_block
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,71 +107,136 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: xiuhong.wang@unisoc.com, niuzhiguo84@gmail.com
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/9/20 9:27, zhiguo.niu wrote:
-> During GC, if segment type stored in SSA and SIT is inconsistent,
-> we set SBI_NEED_FSCK first and then stop checkpoint, this will
-> cause the following issues:
-> 1. SBI_NEED_FSCK can not be set to flash truly because of checkpoint
-> has been stopped.
-> 2. Will cause more EIO error if user use f2fs because of CP_ERROR_FLAG
-> has been set in f2fs_stop_checkpoint, this is not reasonable.
+On 2022/9/20 8:56, Jaegeuk Kim wrote:
+> On 09/13, Chao Yu wrote:
+>> Once CP_ERROR_FLAG is set, checkpoint is disallowed to be triggered to
+>> persist CP_FSCK_FLAG, fsck won't repair the image due to lack of
+>> CP_FSCK_FLAG.
+>>
+>> This patch proposes to persist newly introduced SB_NEED_FSCK flag into
+>> super block if CP_ERROR_FLAG and SBI_NEED_FSCK is set, later, once fsck
+>> detect this flag, it can check and repair corrupted image in time.
+>>
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>> v2:
+>> - remove unneeded codes.
+>>   fs/f2fs/checkpoint.c    |  6 +++++-
+>>   fs/f2fs/f2fs.h          |  1 +
+>>   fs/f2fs/super.c         | 26 ++++++++++++++++++++++++++
+>>   include/linux/f2fs_fs.h |  5 ++++-
+>>   4 files changed, 36 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+>> index c3119e4c890c..0836fce40394 100644
+>> --- a/fs/f2fs/checkpoint.c
+>> +++ b/fs/f2fs/checkpoint.c
+>> @@ -30,8 +30,12 @@ void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io)
+>>   {
+>>   	f2fs_build_fault_attr(sbi, 0, 0);
+>>   	set_ckpt_flags(sbi, CP_ERROR_FLAG);
+>> -	if (!end_io)
+>> +	if (!end_io) {
+>>   		f2fs_flush_merged_writes(sbi);
+>> +
+>> +		if (is_sbi_flag_set(sbi, SBI_NEED_FSCK))
+>> +			f2fs_update_sb_flags(sbi, SB_NEED_FSCK);
 > 
-> So we fix this error handling case by recording current victim segment
-> as invalid for gc and do not stop checkpoint.
-> 1. SBI_NEED_FSCK will still be set but not do f2fs_stop_checkpoint for
-> f2fs.fsck to have opportunity to fix the inconsistent segment type
-> in SSA and SIT.
-> 2. Let user can still use fs, avoid EIO error for some operations such
-> as read and write,etc.
-> 3. If current segment has inconsistent segment type in SSA and SIT,
-> we add this segment segno in SIT_I(sbi)->invalid_segmap to skip this
-> segment to avoid deadloop in gc,similar as commit bbf9f7d90f21 ("f2fs:
-> Fix indefinite loop in f2fs_gc()")
+> Let's think of putting some more context in superblock, if we want to overwrite
+> it. E.g., a reason to stop checkpoint?
+
+Good idea, maybe:
+Bit	Value				max number of type
+[0]	need fsck flag			1
+[1-5]	reason to stop checkpoint	32
+[6-13]	reason to fsck			256
+
+Thanks
+
 > 
-> Fixes: 793ab1c8a792 ("f2fs: fix to avoid deadloop in foreground GC")
-> Signed-off-by: zhiguo.niu <zhiguo.niu@unisoc.com>
-> ---
-> changes of v3: keep "set SBI_NEED_FSCK and f2fs_err()" as before and
-> do not depend on CONFIG_F2FS_CHECK_FS as Chao's suggestion.
-> ---
-> ---
->   fs/f2fs/gc.c | 5 ++++-
->   1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> index d5fb426e0747..f354883872f6 100644
-> --- a/fs/f2fs/gc.c
-> +++ b/fs/f2fs/gc.c
-> @@ -1703,7 +1703,10 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
->   			f2fs_err(sbi, "Inconsistent segment (%u) type [%d, %d] in SSA and SIT",
->   				 segno, type, GET_SUM_TYPE((&sum->footer)));
->   			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> -			f2fs_stop_checkpoint(sbi, false);
-
-f2fs_stop_checkpoint() was added in commit 793ab1c8a792 ("f2fs: fix to avoid
-deadloop in foreground GC"), in order to avoid deadlock issue reported in
-bugzilla, it needs to check this patch w/ the fuzzed image.
-
-Bug 203211:
-https://bugzilla.kernel.org/show_bug.cgi?id=203211
-
-Fuzzed image:
-https://bugzilla.kernel.org/attachment.cgi?id=282203
-
-Thanks,
-
-> +#ifdef CONFIG_F2FS_CHECK_FS
-> +			if (!test_bit(segno, SIT_I(sbi)->invalid_segmap))
-> +				set_bit(segno, SIT_I(sbi)->invalid_segmap);
-> +#endif
->   			goto skip;
->   		}
->   
+>> +	}
+>>   }
+>>   
+>>   /*
+>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>> index dee7b67a17a6..1960a98c7555 100644
+>> --- a/fs/f2fs/f2fs.h
+>> +++ b/fs/f2fs/f2fs.h
+>> @@ -3556,6 +3556,7 @@ int f2fs_enable_quota_files(struct f2fs_sb_info *sbi, bool rdonly);
+>>   int f2fs_quota_sync(struct super_block *sb, int type);
+>>   loff_t max_file_blocks(struct inode *inode);
+>>   void f2fs_quota_off_umount(struct super_block *sb);
+>> +void f2fs_update_sb_flags(struct f2fs_sb_info *sbi, unsigned int flag);
+>>   int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover);
+>>   int f2fs_sync_fs(struct super_block *sb, int sync);
+>>   int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi);
+>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>> index b8e5fe244596..c99ba840593d 100644
+>> --- a/fs/f2fs/super.c
+>> +++ b/fs/f2fs/super.c
+>> @@ -3846,6 +3846,32 @@ int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover)
+>>   	return err;
+>>   }
+>>   
+>> +void f2fs_update_sb_flags(struct f2fs_sb_info *sbi, unsigned int flag)
+>> +{
+>> +	unsigned short s_flags;
+>> +	int err;
+>> +
+>> +	if (le16_to_cpu(F2FS_RAW_SUPER(sbi)->s_flags) & SB_NEED_FSCK)
+>> +		return;
+>> +
+>> +	f2fs_down_write(&sbi->sb_lock);
+>> +
+>> +	s_flags = le16_to_cpu(F2FS_RAW_SUPER(sbi)->s_flags);
+>> +
+>> +	if (s_flags & SB_NEED_FSCK)
+>> +		goto out_unlock;
+>> +
+>> +	F2FS_RAW_SUPER(sbi)->s_flags = cpu_to_le16(s_flags | SB_NEED_FSCK);
+>> +
+>> +	err = f2fs_commit_super(sbi, false);
+>> +	if (err) {
+>> +		f2fs_warn(sbi, "f2fs_commit_super fails to persist flag: %u, err:%d", flag, err);
+>> +		F2FS_RAW_SUPER(sbi)->s_flags = s_flags;
+>> +	}
+>> +out_unlock:
+>> +	f2fs_up_write(&sbi->sb_lock);
+>> +}
+>> +
+>>   static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+>>   {
+>>   	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
+>> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+>> index d445150c5350..124176e2a42c 100644
+>> --- a/include/linux/f2fs_fs.h
+>> +++ b/include/linux/f2fs_fs.h
+>> @@ -73,6 +73,8 @@ struct f2fs_device {
+>>   	__le32 total_segments;
+>>   } __packed;
+>>   
+>> +#define SB_NEED_FSCK			0x00000001	/* need fsck */
+>> +
+>>   struct f2fs_super_block {
+>>   	__le32 magic;			/* Magic Number */
+>>   	__le16 major_ver;		/* Major Version */
+>> @@ -116,7 +118,8 @@ struct f2fs_super_block {
+>>   	__u8 hot_ext_count;		/* # of hot file extension */
+>>   	__le16  s_encoding;		/* Filename charset encoding */
+>>   	__le16  s_encoding_flags;	/* Filename charset encoding flags */
+>> -	__u8 reserved[306];		/* valid reserved region */
+>> +	__le16 s_flags;			/* super block flags */
+>> +	__u8 reserved[304];		/* valid reserved region */
+>>   	__le32 crc;			/* checksum of superblock */
+>>   } __packed;
+>>   
+>> -- 
+>> 2.25.1
 
 
 _______________________________________________
