@@ -2,111 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 683395BD653
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Sep 2022 23:25:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 069855BD8E7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Sep 2022 02:51:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oaOGE-00035y-5J;
-	Mon, 19 Sep 2022 21:25:02 +0000
+	id 1oaRTm-0008Lg-5v;
+	Tue, 20 Sep 2022 00:51:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daniel.santos@pobox.com>) id 1oaOFw-00035T-DG
+ (envelope-from <jaegeuk@kernel.org>) id 1oaRTl-0008La-AE
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Sep 2022 21:24:44 +0000
+ Tue, 20 Sep 2022 00:51:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RdnGLNKCh9KRkDq3DITV2n7BWXPzOCdylObA9ftkmR4=; b=FkcX8Eohv2iCUzbUeSYW4bceJQ
- WdVAFV64wbUcJbYSxPH7tnB1LwCfGOXC8YtFB5btheCc+550L6FPg3ZT4Dc+YtOlFlWW1TNyX6M2l
- 86XAkSbgE1f00wYoMQozf3uFcUbAN+KifS+19DIPoYX0GROiL2gCIiK3nx3QFNHoXC3o=;
+ bh=ToPfnxF2NxQ2HGUaHBvaCuziGYRm0Sf9SFgkXvvGB3Q=; b=OVxmveaGwqLGFmVgDPJ5pFLdv7
+ U9DJeKrdy0poJOyW369N1iWqquVKjcQYFBU2vqsp+8d0HrgjjbvOS5gXpT3puncPQqdHgsOWAHJNS
+ rYahZzFLAm7tY/3vPX/sh81tO/oD9M+0XfT4wVCdZ8dNyiE+rhCLb1WYn+aqje1qt3h0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RdnGLNKCh9KRkDq3DITV2n7BWXPzOCdylObA9ftkmR4=; b=cMDTk7Ll+4JESzfi5Tes6eDsxn
- mh7gMfPTeTxOR61vXiVBG3bdQcoQer436VgGf6T1VLrChEOR3UCx89FlMFKOacujRbwDB2tHRMQVZ
- FwUq8iOIF6J35uDD3Z6XMhHGo3CEom+SoLATEMjgo0NZhhfCYGdecKf4VpVVNFgD5I24=;
-Received: from pb-smtp2.pobox.com ([64.147.108.71])
+ bh=ToPfnxF2NxQ2HGUaHBvaCuziGYRm0Sf9SFgkXvvGB3Q=; b=SZL4mGnMQ77wO8p2nuZIoy+27X
+ 9IjLctTKrQISGK6+7YHpOIO6FWibEwGEhxgFNxMCUMDTKJaapJt5ilj9jRYIakF+T0BV9fvfqxxva
+ 9NKH288XcDIEJ16jYbJmynD6uQcyaI3krhOjaLJ/KQL+MpE3f4w5MklG6+hvzr+uuqek=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oaOFv-0001iJ-MT for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Sep 2022 21:24:44 +0000
-Received: from pb-smtp2.pobox.com (unknown [127.0.0.1])
- by pb-smtp2.pobox.com (Postfix) with ESMTP id E61BC141DF8
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 19 Sep 2022 17:06:23 -0400 (EDT)
- (envelope-from daniel.santos@pobox.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=pobox.com; h=message-id
- :date:mime-version:subject:to:references:from:in-reply-to
- :content-type:content-transfer-encoding; s=sasl; bh=RdnGLNKCh9KR
- kDq3DITV2n7BWXPzOCdylObA9ftkmR4=; b=sqb/8CLCD+Xmjn1ioxLNtDSi4Fwl
- /GgB2s/GT2kPXxfwcgc21nshFAdKMHkpQFl3vSfv1O8IBpMLQgZ51ZX8pJygOz5U
- 4emCwdCFvmRVFkNYADTGBza1bL6YxobmZwbwss+rIvM7RLcfAKnFvpQ6rdscSFjb
- fwbwoUDkU7dgweI=
-Received: from pb-smtp2.nyi.icgroup.com (unknown [127.0.0.1])
- by pb-smtp2.pobox.com (Postfix) with ESMTP id DD573141DF7
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 19 Sep 2022 17:06:23 -0400 (EDT)
- (envelope-from daniel.santos@pobox.com)
-Received: from [192.168.0.8] (unknown [70.122.34.157])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id 1oaRTg-0002Ya-No for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Sep 2022 00:51:13 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by pb-smtp2.pobox.com (Postfix) with ESMTPSA id 59A40141DF6
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 19 Sep 2022 17:06:23 -0400 (EDT)
- (envelope-from daniel.santos@pobox.com)
-Message-ID: <8e752829-ead3-c342-d5fd-94eef044be53@pobox.com>
-Date: Mon, 19 Sep 2022 16:06:21 -0500
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5917561949;
+ Tue, 20 Sep 2022 00:50:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94D37C433D6;
+ Tue, 20 Sep 2022 00:50:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1663635054;
+ bh=yOberSEUqwdenP4n+exju7j3AQ6fgojCHFFpQfJqfKk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Je46AiyUGmzY04wq9Golwz6HFn+OrAQtxFRzSKNyTFGArWtb7ykqgHE7oIGhNFS2G
+ 4Unv8apLY8M+VxzCmLlw8sT0TVljgLcZ5NQG6JuzUGeOwh8cgazsinaxP7jiFKnNOP
+ ACh2b6ffK2p1tVTVqn8zhyKkPIHIS78EyaQxVkQdV3eDZ0u3RZBH4yCKHoknUg7z1x
+ sh679JxGCwq+blNutBoUwu8svYvi68eZbhhqVuL3fBlmDALkUCHQSu/2G/ipxUKLPD
+ 0vcW3bYsUrhKrwpOaRrGnDUGfnm23p+P3sgLbwIxMylQCs9e9TVRQdaDoOZ2wC23J3
+ qWmwYh5sUdc8w==
+Date: Mon, 19 Sep 2022 17:50:52 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Wu Bo <bo.wu@vivo.com>
+Message-ID: <YykObKyz+XT1QCyh@google.com>
+References: <20220914040423.539-1-bo.wu@vivo.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: linux-f2fs-devel@lists.sourceforge.net
-References: <E1oaIZQ-0004LJ-6v@sfs-ml-1.v29.lw.sourceforge.com>
-From: Daniel Santos <daniel.santos@pobox.com>
-In-Reply-To: <E1oaIZQ-0004LJ-6v@sfs-ml-1.v29.lw.sourceforge.com>
-X-Pobox-Relay-ID: EAB7EC36-385E-11ED-8CF6-307A8E0A682E-06139138!pb-smtp2.pobox.com
-X-Spam-Score: -1.9 (-)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+Content-Disposition: inline
+In-Reply-To: <20220914040423.539-1-bo.wu@vivo.com>
+X-Spam-Score: -5.2 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  Awesome!  Now we can afford to develop that new additive,
-    background compression optimization with the shared dictionary objects! On
-    9/19/22 09:39, Christine Weir wrote: > Make use of this $640,000 donation
-    offer from me to you. Email me for more details: > > I anticipate your earliest
-    response. > Christine Weir > Chairman Weir [...] 
- 
- Content analysis details:   (-1.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 09/14, Wu Bo wrote: > As Philippe De Muyter reported: >
+ https://lore.kernel.org/linux-f2fs-devel/20220913224908.GA25100@172.21.0.10/T/#u
+ > > The warning log showed that when finding a new space for [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
-                             low trust
-                             [64.147.108.71 listed in list.dnswl.org]
-  0.0 LOTS_OF_MONEY          Huge... sums of money
- -1.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1oaOFv-0001iJ-MT
-Subject: Re: [f2fs-dev] [SPAM] Congratulations you won $640,000!!!!
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oaRTg-0002Ya-No
+Subject: Re: [f2fs-dev] [PATCH 1/1] f2fs: fix to check space of current
+ segment journal
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,20 +103,95 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Philippe De Muyter <phdm@macq.eu>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-QXdlc29tZSHCoCBOb3cgd2UgY2FuIGFmZm9yZCB0byBkZXZlbG9wIHRoYXQgbmV3IGFkZGl0aXZl
-LCBiYWNrZ3JvdW5kCmNvbXByZXNzaW9uIG9wdGltaXphdGlvbiB3aXRoIHRoZSBzaGFyZWQgZGlj
-dGlvbmFyeSBvYmplY3RzIQoKT24gOS8xOS8yMiAwOTozOSwgQ2hyaXN0aW5lIFdlaXIgd3JvdGU6
-Cj4gTWFrZSB1c2Ugb2YgdGhpcyAkNjQwLDAwMCBkb25hdGlvbiBvZmZlciBmcm9tIG1lIHRvIHlv
-dS4gRW1haWwgbWUgZm9yIG1vcmUgZGV0YWlsczoKPgo+IEkgYW50aWNpcGF0ZSB5b3VyIGVhcmxp
-ZXN0IHJlc3BvbnNlLgo+IENocmlzdGluZSBXZWlyCj4gQ2hhaXJtYW4gV2VpciBGb3VuZGF0aW9u
-L1RydXN0Cj4KPiBSZWdhcmRzCj4KPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fCj4gTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPiBMaW51eC1m
-MmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+IGh0dHBzOi8vbGlzdHMuc291cmNlZm9y
-Z2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwKCgoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5n
-IGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0
-cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On 09/14, Wu Bo wrote:
+> As Philippe De Muyter reported:
+> https://lore.kernel.org/linux-f2fs-devel/20220913224908.GA25100@172.21.0.10/T/#u
+> 
+> The warning log showed that when finding a new space for nat the journal
+> space turned out to be full. This because the journal_rwsem is not
+> locked before the journal space checking. The journal space may become
+> full just after we check it.
+> 
+> Reported-by: Philippe De Muyter <phdm@macq.eu>
+> Signed-off-by: Wu Bo <bo.wu@vivo.com>
+> ---
+>  fs/f2fs/node.c    |  6 +++---
+>  fs/f2fs/segment.c | 10 +++++-----
+>  2 files changed, 8 insertions(+), 8 deletions(-)
+> 
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index e06a0c478b39..971d8b9ccdf1 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -2995,13 +2995,13 @@ static int __flush_nat_entry_set(struct f2fs_sb_info *sbi,
+>  	 * #1, flush nat entries to journal in current hot data summary block.
+>  	 * #2, flush nat entries to nat page.
+>  	 */
+> +	down_write(&curseg->journal_rwsem);
+>  	if ((cpc->reason & CP_UMOUNT) ||
+>  		!__has_cursum_space(journal, set->entry_cnt, NAT_JOURNAL))
+
+I think this is for NAT which was covered by nat_tree_lock. So, we don't need
+this under journal_rwsem.
+
+>  		to_journal = false;
+>  
+> -	if (to_journal) {
+> -		down_write(&curseg->journal_rwsem);
+> -	} else {
+> +	if (!to_journal) {
+> +		up_write(&curseg->journal_rwsem);
+>  		page = get_next_nat_page(sbi, start_nid);
+>  		if (IS_ERR(page))
+>  			return PTR_ERR(page);
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 0de21f82d7bc..d545032d2f6f 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -3914,13 +3914,13 @@ int f2fs_lookup_journal_in_cursum(struct f2fs_journal *journal, int type,
+>  			if (le32_to_cpu(nid_in_journal(journal, i)) == val)
+>  				return i;
+>  		}
+> -		if (alloc && __has_cursum_space(journal, 1, NAT_JOURNAL))
+> +		if (alloc)
+>  			return update_nats_in_cursum(journal, 1);
+>  	} else if (type == SIT_JOURNAL) {
+>  		for (i = 0; i < sits_in_cursum(journal); i++)
+>  			if (le32_to_cpu(segno_in_journal(journal, i)) == val)
+>  				return i;
+> -		if (alloc && __has_cursum_space(journal, 1, SIT_JOURNAL))
+> +		if (alloc)
+>  			return update_sits_in_cursum(journal, 1);
+>  	}
+>  	return -1;
+> @@ -4085,13 +4085,13 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
+>  						(unsigned long)MAIN_SEGS(sbi));
+>  		unsigned int segno = start_segno;
+>  
+> +		down_write(&curseg->journal_rwsem);
+>  		if (to_journal &&
+>  			!__has_cursum_space(journal, ses->entry_cnt, SIT_JOURNAL))
+>  			to_journal = false;
+>  
+> -		if (to_journal) {
+> -			down_write(&curseg->journal_rwsem);
+> -		} else {
+> +		if (!to_journal) {
+> +			up_write(&curseg->journal_rwsem);
+>  			page = get_next_sit_page(sbi, start_segno);
+>  			raw_sit = page_address(page);
+>  		}
+> -- 
+> 2.36.1
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
