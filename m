@@ -2,89 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D54025BD975
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Sep 2022 03:40:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0A145BD97F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Sep 2022 03:40:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oaSF1-00059h-5i;
-	Tue, 20 Sep 2022 01:40:15 +0000
+	id 1oaSFl-0007FK-MM;
+	Tue, 20 Sep 2022 01:40:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1oaSF0-00059b-Ca
+ (envelope-from <daeho43@gmail.com>) id 1oaSFk-0007FE-MK
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Sep 2022 01:40:14 +0000
+ Tue, 20 Sep 2022 01:40:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=z/jZBVKHrf7HtYZLUnYAd+Pe60b/PHa+auZtuaqhfT8=; b=ksHH5SrwJ1chTiUeSuf9AmO6CE
- BiM50AD+i3WN9f9dUy79M+7Z0uG9CABEYgOeGEOnHGl1q/yfOrv6JLBMiq/Wg7WaNwtXlFl6EYStA
- GB+O5pFDWTn8C2Kc+AVSaHUnBoAqlcpuNSJDycINaRcyIs37NwnygJatqXqmriM/K37s=;
+ bh=z/jZBVKHrf7HtYZLUnYAd+Pe60b/PHa+auZtuaqhfT8=; b=O9DM8tdS8k7gAl4L4/JtUWBlir
+ w46K7+WTZPpbu9NmX5xjKRO48k4aJd/isTj8NSQpF9z8xb0DaW/B3Jc5DzzNboQl189jnVGPa4Wwz
+ nL4/XjY+0oEpKrWp5HVkonwc7Vx69KCA7w1W1wtPUJIJjC62CZvf+T2GBGffNV1sEfnc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=z/jZBVKHrf7HtYZLUnYAd+Pe60b/PHa+auZtuaqhfT8=; b=O
- 5kD/Oyh+fwQ+Mz19mLkmQijcRcfYmTfjbs1LPa4+IOSxXpG4Z9POWXEze0GStGNZCnLUBK1/ifvgt
- WABzlzn9Mxi0DZaIGUf0L/ShROxpGAkuEtWIA7ieJ2YHTitSvRMcg9fxx7LLxu2iujvKUdrOy1cCN
- KGJOdv9QK37GSZ+g=;
-Received: from mail-pl1-f178.google.com ([209.85.214.178])
+ List-Owner:List-Archive; bh=z/jZBVKHrf7HtYZLUnYAd+Pe60b/PHa+auZtuaqhfT8=; b=Q
+ 5/QgLWnkEF5/JzEYxfavQrqqHGQ8L3TngNSkYa15QfbE4gZ14kia+uENmvyGAbFsnJLxkW4W4VwQa
+ a2pkp5Jb7Fm3zmoP8d+PURTyRVruU72TFRsYeSXhJHD9fBrX64FOcKbv3jMUWPrOAQFWlFocSBpPA
+ o0HEA22ov1iI3ei4=;
+Received: from mail-pj1-f50.google.com ([209.85.216.50])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1oaSFC-00DwM3-7R for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Sep 2022 01:40:14 +0000
-Received: by mail-pl1-f178.google.com with SMTP id b21so912559plz.7
+ id 1oaSFi-00DwV8-Ja for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Sep 2022 01:40:48 +0000
+Received: by mail-pj1-f50.google.com with SMTP id fs14so1448589pjb.5
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 19 Sep 2022 18:40:14 -0700 (PDT)
+ Mon, 19 Sep 2022 18:40:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date;
  bh=z/jZBVKHrf7HtYZLUnYAd+Pe60b/PHa+auZtuaqhfT8=;
- b=GELw6kxnmMIS54piuXw1D2jHzquqtEbGgnBs1BoRuUm/1Xl0oB9ap2tJJB/hxxTv1B
- SNAg8ndEWyfQ523jqnXCxak6uTgDRMv5IjZGLDRRrxB07tS2RGhAnRp8i0mGU4JyPtDm
- uu+kzt5BgQhpGe9g7hyoEXVP57PHv1aILausGS8gM/xxdLELmLWx2LU1c83GXwGNkXVA
- SkdsjhH+R5BDrl+flKUj8j2LmOzBqNmyRJ7GQ9kxtoBZRYIPprRsz5UAyJF6gslGxhCS
- X/RR7wdmt4qZqZKqmGtWZ6YeN9MOF1D6eKRO3aLGYt82foLuIXD/ret3zOn1/gVOn+dS
- LLow==
+ b=YfVBV3dzuD1D5wySYoRuLCSCFHAgvMu/0oUEoW8E5EGy1bi9bK/3Wo4IDRHrseDcDv
+ W/BnA7LUSPjgN8CJQbNwANEPbw2Mmj8vPBXDDiYFm/y2fVdO1NjWULHz9+uLG7bSgK0W
+ dE6UodGr9fxTNpSLBdsU+2gOHlLEH+yAW3ClkccRisO23vA0LoMFo3LbFc6lrN/zI8iF
+ CRlFfRLPN/OGFDMO8qkoI1mqysNjROyiMxTAwFRkgCtAHHO5vl7Di03zcoLVmQKzUuhX
+ ccya3Wf/L/Kf3h4H62q03Dtc37vCntslevOgjDV5k68MnZ0/WuhMMv4uZfPP9yjzB/ep
+ Or0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date;
  bh=z/jZBVKHrf7HtYZLUnYAd+Pe60b/PHa+auZtuaqhfT8=;
- b=SbUOMQtrCcK7ezf1TD5fBNOfJf4XajTWu6jZPDEmUo6iEN45OFlbMMiz+B65NMCrb1
- 2IXxba7E2R/nIiySafRJEh/GfuLkLQkYlpLkRosWxQjvC+LNgVqMug3tZGGaaas5RQLJ
- 7yQY3NXczjW2pnMMAE1D4jn/53DA4ZLjdJhE5AqnS/J1RYDCa7yZtwf+WliCkCW+QuGn
- 0VTXhb55q7TEY5BoXE7nSrZV70xodNCanOWmk9jkxy46FwzSlfbAe8ss21Cy5Hhn2I7b
- rRbM9jh0Rt+t6dwTRxGnJ7JfZvhpyQKnfbfkcbPu0VTWJa68wyCdlCBa1bbHgDjm+n2N
- q9yQ==
-X-Gm-Message-State: ACrzQf2LbKwhXpwfWkHvZJ1rouvNMefmJXqb4UGoa6IakEPDknIycf8A
- RSB88kncZIwQIu018+0t8qXtnzXy7fY=
-X-Google-Smtp-Source: AMsMyM4ETgQztLEpmaQaOo8LEKK4XfhB73+RL6w9h0K4bSCtQwNdDamzeXqbSejusoWT0rH3Xnw0oA==
-X-Received: by 2002:a17:902:f550:b0:178:5b6a:3a1c with SMTP id
- h16-20020a170902f55000b001785b6a3a1cmr2540647plf.36.1663638008472; 
- Mon, 19 Sep 2022 18:40:08 -0700 (PDT)
+ b=0H1bkHv9J/wshkjSwIZayy+VklEHHv8T8NEwEDZC2dWCJsThOeupwsTbXD+8cfB0Sp
+ /gbOxui8jeBv2fJR+MNwFozKb8WcBOlDXq0uXB2tRhZUPNZ4cd7TdLmTvJ/2elBz64Mg
+ a7unkzJDY7DZzJGThrwdygK2y1+ougk5df4F4OezIclSW2STmpKBpVS0u29fQNbZpF/5
+ Wy/VMlvoN6xQgBrcLeTmP98jnl3UUvZ91vKwcPr2QufvpN9ERmxZhkaQ0FLmXVCN1Iov
+ olEUn4EtMED6WVhZlp/z4yLL3+C/r6K6//OpXDbyDbKiJzo+yvoX1N6TEF33kHjbsftp
+ zlgA==
+X-Gm-Message-State: ACrzQf3Etik7h9gJK9Zr9kT5n+E1kcGOH2q7PzjX5eQ9QGau9uytN9ET
+ C9WFoMno7hnaXb2G9coKDa3OwLeWhAg=
+X-Google-Smtp-Source: AMsMyM6puk5qGOPpKHFJRYzBm3Kjz6m8fNSBs5uZYPPpy5nnA9/uOibSQbmN3KwPCAK1kEtTHF+hew==
+X-Received: by 2002:a17:902:ab01:b0:178:fee:c607 with SMTP id
+ ik1-20020a170902ab0100b001780feec607mr2497889plb.20.1663638041017; 
+ Mon, 19 Sep 2022 18:40:41 -0700 (PDT)
 Received: from daehojeong-desktop.mtv.corp.google.com
  ([2620:15c:211:201:720f:7de4:678:7fcb])
  by smtp.gmail.com with ESMTPSA id
- m67-20020a633f46000000b00439c6a4e1ccsm54809pga.62.2022.09.19.18.40.07
+ x7-20020a170902ec8700b00177e5d83d3esm62184plg.88.2022.09.19.18.40.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Sep 2022 18:40:08 -0700 (PDT)
+ Mon, 19 Sep 2022 18:40:40 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  kernel-team@android.com
-Date: Mon, 19 Sep 2022 18:40:03 -0700
-Message-Id: <20220920014003.2295811-1-daeho43@gmail.com>
+Date: Mon, 19 Sep 2022 18:40:36 -0700
+Message-Id: <20220920014036.2295853-1-daeho43@gmail.com>
 X-Mailer: git-send-email 2.37.3.968.ga6b4b080e4-goog
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -102,20 +102,20 @@ X-Spam-Report: Spam detection software,
  in digit [daeho43[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.178 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.178 listed in wl.mailspike.net]
+ [209.85.216.50 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.50 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1oaSFC-00DwM3-7R
-Subject: [f2fs-dev] [PATCH] f2fs: introduce F2FS_IOC_START_ATOMIC_REPLACE
+X-Headers-End: 1oaSFi-00DwV8-Ja
+Subject: [f2fs-dev] [PATCH v2] f2fs: introduce F2FS_IOC_START_ATOMIC_REPLACE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
