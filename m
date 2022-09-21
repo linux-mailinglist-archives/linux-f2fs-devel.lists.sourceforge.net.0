@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A245F5BF857
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C0825BF855
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Sep 2022 09:54:26 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oauYo-0000mC-Rc;
-	Wed, 21 Sep 2022 07:54:22 +0000
+	id 1oauYp-0000mL-7s;
+	Wed, 21 Sep 2022 07:54:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhangqilong3@huawei.com>) id 1oauYk-0000lu-Hj
+ (envelope-from <zhangqilong3@huawei.com>) id 1oauYk-0000m0-UL
  for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 21 Sep 2022 07:54:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=o+HziZNQMxAMCJfJHcphrhOgTMTtsbTwOoRIwzG0B3g=; b=Uo/u/5Obw6DTtNdYrnUTVGaqcH
- 9hIG6bQ4GEaIe8pCBHcl2Ro079wpAeJkT9G8bzgiZf5QkCqYezHTVrVseFBdIUNp/z7owcs8tq5gy
- 7Z2zLs/9XXH8hb+Coup6Nij1lT07/BHXys4zthGfFHSCUy5SENtqhtkkEbbsWVymNkis=;
+ bh=q9yfUnf33cy+dYyL8ffNdNgP8hGTNO/WLENGqSVGZqA=; b=iAHA/6M9OIjizzMB5l8Lyfm1yo
+ GQPiQ7IxZB2pKfHweCzZjz+Bc1kOWYHPu7TmnhaOzHuIaYmVhfhU29CH5QIugFvcmzg/y7+ffogOa
+ 7e8Ce4sCfBtiktMRoZF6xM7nBfbEstkUf4gboNyk7r6MykxJMOYKqT+jQJZwy2rNZyVE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
@@ -31,19 +31,19 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=o+HziZNQMxAMCJfJHcphrhOgTMTtsbTwOoRIwzG0B3g=; b=KYThm+uJCg9BYMBMnc0gikBJSL
- TRKyNqlJ0SAs9yn6YkYwPfNZREUX0CPONH5TIfeiiG6uJWaE2Pu476u4D+TLc/ElEEYvnap+OncUt
- K3my0yf3GLy41+jmpRvD7moKX1DeYUNooz83s2CVvpGyq3lF+5H4VI09sLMET1QDXr3A=;
-Received: from szxga02-in.huawei.com ([45.249.212.188])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=q9yfUnf33cy+dYyL8ffNdNgP8hGTNO/WLENGqSVGZqA=; b=RwSroCF2vI/wMHqoT+zQRBrngW
+ P+rWa0NAyuDzlmJm1TgyBFRIGQQS0SsF3W7GrWSCE/D11SOLhK3q3HHoHxAsF115htJMkJpbMCWpl
+ R4lsrcHZ4CwM6UvYLU60t9/89V2seEsISrTBjG0N9I4o9oydcqdHwADDgyePiy3jXKSw=;
+Received: from szxga03-in.huawei.com ([45.249.212.189])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oauYh-0004ga-Vs for linux-f2fs-devel@lists.sourceforge.net;
+ id 1oauYi-00FFB4-FW for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 21 Sep 2022 07:54:18 +0000
-Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.56])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4MXVtF6BbYzMnvf;
- Wed, 21 Sep 2022 15:49:25 +0800 (CST)
+Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.56])
+ by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4MXVxB3L1mzHpkL;
+ Wed, 21 Sep 2022 15:51:58 +0800 (CST)
 Received: from kwepemm600014.china.huawei.com (7.193.23.54) by
- dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
+ dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
  15.1.2375.31; Wed, 21 Sep 2022 15:54:07 +0800
 Received: from huawei.com (10.90.53.225) by kwepemm600014.china.huawei.com
@@ -51,8 +51,8 @@ Received: from huawei.com (10.90.53.225) by kwepemm600014.china.huawei.com
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Wed, 21 Sep
  2022 15:54:07 +0800
 To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Wed, 21 Sep 2022 15:57:35 +0800
-Message-ID: <20220921075737.36708-3-zhangqilong3@huawei.com>
+Date: Wed, 21 Sep 2022 15:57:36 +0800
+Message-ID: <20220921075737.36708-4-zhangqilong3@huawei.com>
 X-Mailer: git-send-email 2.26.0.106.g9fadedd
 In-Reply-To: <20220921075737.36708-1-zhangqilong3@huawei.com>
 References: <20220921075737.36708-1-zhangqilong3@huawei.com>
@@ -63,25 +63,25 @@ X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
 X-CFilter-Loop: Reflected
 X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: No-compressed file may suffer read performance issue due to
- it can't use extent cache or the largest extent in inode can't covered other
- parts of continuous blocks in readonly format f2fs image. Now it won't build
- extent cacge tree for no-compressed file in readonly format f2fs image. 
+ Content preview: f2fs_update_extent_tree_range_compressed caches both of
+ compressed
+ and no-compressed extent entry, so we should getting rid of the "compressed"
+ word will be more appropriate. And we just rename it to [...] 
  Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.188 listed in list.dnswl.org]
+ medium trust [45.249.212.189 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1oauYh-0004ga-Vs
-Subject: [f2fs-dev] [PATCH -next 2/4] f2fs: extent cache: support extent for
- no-compressed file
+X-Headers-End: 1oauYi-00FFB4-FW
+Subject: [f2fs-dev] [PATCH -next 3/4] f2fs: rename
+ f2fs_update_extent_tree_range_compressed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,105 +101,37 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-No-compressed file may suffer read performance issue due to it can't
-use extent cache or the largest extent in inode can't covered other
-parts of continuous blocks in readonly format f2fs image.
-
-Now it won't build extent cacge tree for no-compressed file in
-readonly format f2fs image.
-
-For readonly format f2fs image, maybe the no-compressed file don't
-have the largest extent, or it have more than one part which have
-internally continuous blocks. So we add extent cache tree for the
-no-compressed file in readonly format f2fs image.
-
-The cache policy is almost same with compressed file. The difference
-is that, the no-compressed file part will set min-number of continuous
-blocks F2FS_MIN_EXTENT_LEN in order to reduce cache fragmentation.
+f2fs_update_extent_tree_range_compressed caches both of compressed
+and no-compressed extent entry, so we should getting rid of the
+"compressed" word will be more appropriate. And we just rename it to
+f2fs_readonly_update_extent_tree_range.
 
 Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
 ---
- fs/f2fs/extent_cache.c | 52 ++++++++++++++++++++++++++++++++++--------
- 1 file changed, 42 insertions(+), 10 deletions(-)
+ fs/f2fs/extent_cache.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 387d53a61270..7e39381edca0 100644
+index 7e39381edca0..c59a0ec41e69 100644
 --- a/fs/f2fs/extent_cache.c
 +++ b/fs/f2fs/extent_cache.c
-@@ -695,9 +695,12 @@ static void f2fs_update_extent_tree_range_compressed(struct inode *inode,
- 	set_extent_info(&ei, fofs, blkaddr, llen);
- 	ei.c_len = c_len;
- 
--	if (!__try_merge_extent_node(sbi, et, &ei, prev_en, next_en))
-+	if (!__try_merge_extent_node(sbi, et, &ei, prev_en, next_en)) {
-+		if (!c_len && llen < F2FS_MIN_EXTENT_LEN)
-+			goto unlock_out;
- 		__insert_extent_tree(sbi, et, &ei,
- 				insert_p, insert_parent, leftmost);
-+	}
- unlock_out:
- 	write_unlock(&et->lock);
- }
-@@ -726,24 +729,53 @@ static unsigned int f2fs_cluster_blocks_are_contiguous(struct dnode_of_data *dn)
- 	return compressed ? i - 1 : i;
+@@ -663,7 +663,7 @@ static void f2fs_update_extent_tree_range(struct inode *inode,
  }
  
-+/*
-+ * check whether normal file blocks are contiguous, and add extent cache
-+ * entry only if remained blocks are logically and physically contiguous.
-+ */
-+static unsigned int f2fs_normal_blocks_are_contiguous(struct dnode_of_data *dn)
-+{
-+	int i = 0;
-+	struct inode *inode = dn->inode;
-+	block_t first_blkaddr = data_blkaddr(inode, dn->node_page,
-+						dn->ofs_in_node);
-+	unsigned int max_blocks = ADDRS_PER_PAGE(dn->node_page, inode)
-+					- dn->ofs_in_node;
-+
-+	for (i = 1; i < max_blocks; i++) {
-+		block_t blkaddr = data_blkaddr(inode, dn->node_page,
-+				dn->ofs_in_node + i);
-+
-+		if (!__is_valid_data_blkaddr(blkaddr) ||
-+				first_blkaddr + i != blkaddr)
-+			return i;
-+	}
-+
-+	return i;
-+}
-+
- void f2fs_readonly_update_extent_cache(struct dnode_of_data *dn,
- 					pgoff_t index)
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+-static void f2fs_update_extent_tree_range_compressed(struct inode *inode,
++static void f2fs_readonly_update_extent_tree_range(struct inode *inode,
+ 				pgoff_t fofs, block_t blkaddr, unsigned int llen,
+ 				unsigned int c_len)
  {
--	unsigned int c_len = f2fs_cluster_blocks_are_contiguous(dn);
-+	unsigned int c_len = 0;
-+	unsigned int llen = 0;
- 	block_t blkaddr;
+@@ -774,8 +774,8 @@ void f2fs_readonly_update_extent_cache(struct dnode_of_data *dn,
+ 		llen = f2fs_normal_blocks_are_contiguous(dn);
+ 	}
  
--	if (!c_len)
--		return;
--
- 	blkaddr = f2fs_data_blkaddr(dn);
--	if (blkaddr == COMPRESS_ADDR)
--		blkaddr = data_blkaddr(dn->inode, dn->node_page,
-+	if (f2fs_compressed_file(dn->inode)) {
-+		c_len = f2fs_cluster_blocks_are_contiguous(dn);
-+		if (!c_len)
-+			return;
-+		llen = F2FS_I(dn->inode)->i_cluster_size;
-+		if (blkaddr == COMPRESS_ADDR)
-+			blkaddr = data_blkaddr(dn->inode, dn->node_page,
- 					dn->ofs_in_node + 1);
-+	} else {
-+		llen = f2fs_normal_blocks_are_contiguous(dn);
-+	}
- 
- 	f2fs_update_extent_tree_range_compressed(dn->inode,
--				index, blkaddr,
--				F2FS_I(dn->inode)->i_cluster_size,
--				c_len);
-+				index, blkaddr, llen, c_len);
+-	f2fs_update_extent_tree_range_compressed(dn->inode,
+-				index, blkaddr, llen, c_len);
++	f2fs_readonly_update_extent_tree_range(dn->inode, index,
++						blkaddr, llen, c_len);
  }
  #endif
  
