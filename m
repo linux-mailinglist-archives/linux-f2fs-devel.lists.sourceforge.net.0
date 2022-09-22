@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17EC55E5845
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Sep 2022 03:52:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A71D55E584C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Sep 2022 03:54:39 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1obBOM-0007Tp-Cg;
-	Thu, 22 Sep 2022 01:52:42 +0000
+	id 1obBQC-0007Wd-Ur;
+	Thu, 22 Sep 2022 01:54:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1obBOK-0007Ti-PM
+ (envelope-from <chao@kernel.org>) id 1obBQB-0007WW-Ag
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 Sep 2022 01:52:40 +0000
+ Thu, 22 Sep 2022 01:54:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vQBYHmLhnhQFBGLz72tDHW9mlnmIJRMlqCl8533zsAk=; b=JvcbwQIhItgCUD36eArZevSi+O
- OB8HDclZ9m8cr+fzoT9fdV8Rk+c51wRoAzkOJQqncPHDyKu99Lt9pVFLWyMISOBmb8docgX23FTDV
- cW08JIN6CbgmbcJsLrBAqzYHOaalqExdAyPwOqQ9hcwj931yqrFBsz9CCpMbWLSzkuLU=;
+ bh=Ny+q5DoJI/hBJoiZgUrJz7sNYbSXBW4CVRac03vjAOE=; b=CArODcpwinnBFCXZ7/pC6mg19F
+ zYh2E3YN9NQhYAQ51yD19fLRkoh5awfy+4ndjbUtMbI92x7pU7a2IyHlLP+stVBBiy18lxrP0Vq+0
+ 4D3VWiipuVJs95svTtnVIFVQdpXrRHAhPdPfbwYbiB5BdcenyDrJMlbzikgFsxJk346Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,71 +31,71 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vQBYHmLhnhQFBGLz72tDHW9mlnmIJRMlqCl8533zsAk=; b=KQ8FbwAu4Pkdm5p18jhQaCV0Sa
- QAgOYEyF8JitDQ/VN2xcM8gZVrDezV+oc3YWAnHMgvyCTzva1SIEspoBHs89pWjUKLcFuRzyk0Lth
- a+fLYscOEaJv45ZfHI2ab5h6p/37kMW1wWRQuQAsUrZaJGTeXx6hsgUPORODLJnIuzF4=;
+ bh=Ny+q5DoJI/hBJoiZgUrJz7sNYbSXBW4CVRac03vjAOE=; b=FyAljfVStgpIG04aqqBgPMe9fk
+ 6LSbqyuAo9PonuyWpAmVuaT8J+FWMQq2JjKObMC89FrG/sQdH5/b8kZywBp+Pq0owbm/OfOzvouxn
+ vRhuMwjsV0vCgGHBfU3fUl3q/DXxXSDyRdTl6BbJ0UpGIpUnG/rpCqzbRxcZAArUXzNU=;
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1obBNy-0005xz-W1 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 Sep 2022 01:52:24 +0000
+ id 1obBQ4-00064f-MY for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 22 Sep 2022 01:54:33 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 7B15BB819F6;
- Thu, 22 Sep 2022 01:52:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66417C433C1;
- Thu, 22 Sep 2022 01:52:04 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id D3C07B819F6
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 22 Sep 2022 01:54:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E545C433D6;
+ Thu, 22 Sep 2022 01:54:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1663811526;
- bh=L9IoCqed8K4vCJcIGeTs/oOGo8/QELi4WTLjq4EomrA=;
+ s=k20201202; t=1663811660;
+ bh=daKmN7uJuDeH1R9QVXhts08inJKQ5l61NyNLAVl0mw8=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=NZb5oFTxCYLVaFOp6ZpS/3FtBmpJi01BXnV5gHyXfKMvR6ARpATp4vHyOKeEUihzZ
- Y8PcN5QP19sutAYnSzYCrLtha7TdpxjYF4LUpiq3D7SJRbNOt3z6lWn8NOMqcaQPFe
- T6asftwGa8Ze7XYzxBWBFjFW/SmzbtrxgZu2+zBeLL/Vaf7xPRY160ke3nKCeqQKf5
- OdcdAbOk4OD5l1btXI3LjUBZupHO0323H8zK22B6VmRy8O8jP/WmWwgooDpagvQq+/
- s+6rYsFl2SilRupYZAAJUM+/xDmAEnufqQGZB6wWQ1drbmDTB0WXGs/dZPcN2WgzWH
- +upKoxIr4+SRg==
-Message-ID: <de0dbba1-148f-00ac-d0e1-d653806eb226@kernel.org>
-Date: Thu, 22 Sep 2022 09:51:59 +0800
+ b=P2BbwMgGbIs43cgBkNNo0FkR8WQutLBQUetMagrS+69fFNB11WgGFnCchJ3YWd3c1
+ jvhTnp5j4u6fQrPODLUgmdpe3VdY0S8vexR7eoQbKpMy++YSfAhoPi1vSBdwCO7M3D
+ qPkZPQ/5MnRy1KoUJL13g39/9HY8rKPWA7PftAYKIGNIAMgcD2wQREmlIk/Y7oT6ci
+ JGMgDxaIpd75TtxD/xz7E5aenj2kwR6ftOvRVnVtgD4P2/ilCOISRSyAFoM6A8DEur
+ TOvX33449C40W6rKb3q7kYC0ETljarGWcl/rOI6JFIfi7e8nUV9QJitfmAGQpZb3ps
+ RiCY75RhVNw8A==
+Message-ID: <44a1eca6-568b-a752-ef01-06de489eb466@kernel.org>
+Date: Thu, 22 Sep 2022 09:54:16 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.13.0
 Content-Language: en-US
-To: zhangqilong <zhangqilong3@huawei.com>,
- "jaegeuk@kernel.org" <jaegeuk@kernel.org>
-References: <8b5066f4650d472ca4eec6ee833f821a@huawei.com>
+To: jaegeuk@kernel.org
+References: <20220913074812.2300528-1-chao@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <8b5066f4650d472ca4eec6ee833f821a@huawei.com>
-X-Spam-Score: -8.9 (--------)
+In-Reply-To: <20220913074812.2300528-1-chao@kernel.org>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/9/22 0:00, zhangqilong wrote: >> On 2022/9/21 21:57, 
- zhangqilong wrote: >>>> On 2022/9/21 20:14, zhangqilong wrote: >>>>>> On
- 2022/9/21 15:57, Zhang Qilong wrote: >>>>>>> No-compressed file ma [...] 
- Content analysis details:   (-8.9 points, 6.0 required)
+ Content preview:  Ping, On 2022/9/13 15:48, Chao Yu wrote: > It is possible
+ that ino of dirent or orphan inode is corrupted in a > fuzzed image,
+ occasionally, 
+ if corrupted ino is equal to meta ino: > meta_ino, node_ino or co [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [145.40.68.75 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -3.7 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1obBNy-0005xz-W1
-Subject: Re: [f2fs-dev] Reply: Reply: Reply: [PATCH -next 2/4] f2fs: extent
- cache: support extent for no-compressed file
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1obBQ4-00064f-MY
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix to detect corrupted meta ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,206 +107,84 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/9/22 0:00, zhangqilong wrote:
->> On 2022/9/21 21:57, zhangqilong wrote:
->>>> On 2022/9/21 20:14, zhangqilong wrote:
->>>>>> On 2022/9/21 15:57, Zhang Qilong wrote:
->>>>>>> No-compressed file may suffer read performance issue due to it
->>>>>>> can't use extent cache or the largest extent in inode can't
->>>>>>> covered other parts of continuous blocks in readonly format f2fs
->> image.
->>>>>>>
->>>>>>> Now it won't build extent cacge tree for no-compressed file in
->>>>>>> readonly format f2fs image.
->>>>>>>
->>>>>>> For readonly format f2fs image, maybe the no-compressed file
->> don't
->>>>>>> have the largest extent, or it have more than one part which have
->>>>>>
->>>>>> Why it can not have largest extent in f2fs_inode?
->>>>>
->>>>> The following several situations may occur:
->>>>> 	1) Wrote w/o the extent when the filesystem is read-write fs.
->>>>>
->>>>>        2) Largest extent have been drop after being re-wrote, or it
->>>>> have
->>>> been split to smaller parts.
->>>>>
->>>>>        3) The largest extent only covered one part of continuous
->>>>> blocks,
->>>> like:
->>>>>          |------parts 1(continuous blocks)-----|----not
->>>> continuous---|---------------------parts 2 (continuous
->>>> continuous---|blocks)-----------|---------|
->>>>>          The largest extent is part 2, but other parts (like part1, )
->>>>> can't be
->>>> mapped in readonly format f2fs image which should have been
->> mapped.
->>>>
->>>> largest extent of non-compressed file should be updated during sload
->>>> in a ro f2fs image?
->>>
->>> Hi,
->>>
->>> I am sorry, I don't fully understand what you mean. I want to show
->>> that the extent of file in readonly format f2fs image could not existed or
->> can't covered other parts that contain continuous blocks.
->>
->> Well, I mean the extent should be updated due to below flow? during the
->> file was loaded into a formated f2fs image w/ ro feature.
->>
->> - f2fs_sload
->>    - build_directory
->>     - f2fs_build_file
->>
->> 	if (!c.compress.enabled || (c.feature &
->> cpu_to_le32(F2FS_FEATURE_RO)))
->> 		update_largest_extent(sbi, de->ino);
->>
-> 
-> Hi,
-> 
-> I get it. I think we could consider this flow.
-> But it will change the metadata of the file, is it was a little inappropriate?
-> Maybe users does not want to do that during being loaded and will refuse this change.
+Ping,
 
-I don't get it.
-
-IIUC, we can only load files into ro f2fs image w/ sload, and sload has updated
-largest extent for file, or am I missing something?
-
-Thanks,
-
+On 2022/9/13 15:48, Chao Yu wrote:
+> It is possible that ino of dirent or orphan inode is corrupted in a
+> fuzzed image, occasionally, if corrupted ino is equal to meta ino:
+> meta_ino, node_ino or compress_ino, caller of f2fs_iget() from below
+> call paths will get meta inode directly, it's not allowed, let's
+> add sanity check to detect such cases.
 > 
-> Thanks,
+> case #1
+> - recover_dentry
+>   - __f2fs_find_entry
+>   - f2fs_iget_retry
 > 
->> Thanks,
->>
->>> Whether it exists or not, we will not change or update largest extent
->> during sload in a ro f2fs image.
->>>
->>> Thanks,
->>>
->>>>
->>>> Thanks,
->>>>
->>>>>
->>>>>
->>>>> Thanks,
->>>>>
->>>>>>
->>>>>> Thanks,
->>>>>>
->>>>>>> internally continuous blocks. So we add extent cache tree for the
->>>>>>> no-compressed file in readonly format f2fs image.
->>>>>>>
->>>>>>> The cache policy is almost same with compressed file. The
->>>>>>> difference is that, the no-compressed file part will set
->>>>>>> min-number of continuous blocks F2FS_MIN_EXTENT_LEN in order
->> to
->>>>>>> reduce cache
->>>> fragmentation.
->>>>>>>
->>>>>>> Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
->>>>>>> ---
->>>>>>>      fs/f2fs/extent_cache.c | 52
->>>>>> ++++++++++++++++++++++++++++++++++--------
->>>>>>>      1 file changed, 42 insertions(+), 10 deletions(-)
->>>>>>>
->>>>>>> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c index
->>>>>>> 387d53a61270..7e39381edca0 100644
->>>>>>> --- a/fs/f2fs/extent_cache.c
->>>>>>> +++ b/fs/f2fs/extent_cache.c
->>>>>>> @@ -695,9 +695,12 @@ static void
->>>>>> f2fs_update_extent_tree_range_compressed(struct inode *inode,
->>>>>>>      	set_extent_info(&ei, fofs, blkaddr, llen);
->>>>>>>      	ei.c_len = c_len;
->>>>>>>
->>>>>>> -	if (!__try_merge_extent_node(sbi, et, &ei, prev_en, next_en))
->>>>>>> +	if (!__try_merge_extent_node(sbi, et, &ei, prev_en, next_en)) {
->>>>>>> +		if (!c_len && llen < F2FS_MIN_EXTENT_LEN)
->>>>>>> +			goto unlock_out;
->>>>>>>      		__insert_extent_tree(sbi, et, &ei,
->>>>>>>      				insert_p, insert_parent, leftmost);
->>>>>>> +	}
->>>>>>>      unlock_out:
->>>>>>>      	write_unlock(&et->lock);
->>>>>>>      }
->>>>>>> @@ -726,24 +729,53 @@ static unsigned int
->>>>>> f2fs_cluster_blocks_are_contiguous(struct dnode_of_data *dn)
->>>>>>>      	return compressed ? i - 1 : i;
->>>>>>>      }
->>>>>>>
->>>>>>> +/*
->>>>>>> + * check whether normal file blocks are contiguous, and add
->>>>>>> +extent cache
->>>>>>> + * entry only if remained blocks are logically and physically
->>>> contiguous.
->>>>>>> + */
->>>>>>> +static unsigned int f2fs_normal_blocks_are_contiguous(struct
->>>>>>> +dnode_of_data *dn) {
->>>>>>> +	int i = 0;
->>>>>>> +	struct inode *inode = dn->inode;
->>>>>>> +	block_t first_blkaddr = data_blkaddr(inode, dn->node_page,
->>>>>>> +						dn->ofs_in_node);
->>>>>>> +	unsigned int max_blocks = ADDRS_PER_PAGE(dn->node_page,
->>>> inode)
->>>>>>> +					- dn->ofs_in_node;
->>>>>>> +
->>>>>>> +	for (i = 1; i < max_blocks; i++) {
->>>>>>> +		block_t blkaddr = data_blkaddr(inode, dn->node_page,
->>>>>>> +				dn->ofs_in_node + i);
->>>>>>> +
->>>>>>> +		if (!__is_valid_data_blkaddr(blkaddr) ||
->>>>>>> +				first_blkaddr + i != blkaddr)
->>>>>>> +			return i;
->>>>>>> +	}
->>>>>>> +
->>>>>>> +	return i;
->>>>>>> +}
->>>>>>> +
->>>>>>>      void f2fs_readonly_update_extent_cache(struct
->> dnode_of_data
->>>> *dn,
->>>>>>>      					pgoff_t index)
->>>>>>>      {
->>>>>>> -	unsigned int c_len = f2fs_cluster_blocks_are_contiguous(dn);
->>>>>>> +	unsigned int c_len = 0;
->>>>>>> +	unsigned int llen = 0;
->>>>>>>      	block_t blkaddr;
->>>>>>>
->>>>>>> -	if (!c_len)
->>>>>>> -		return;
->>>>>>> -
->>>>>>>      	blkaddr = f2fs_data_blkaddr(dn);
->>>>>>> -	if (blkaddr == COMPRESS_ADDR)
->>>>>>> -		blkaddr = data_blkaddr(dn->inode, dn->node_page,
->>>>>>> +	if (f2fs_compressed_file(dn->inode)) {
->>>>>>> +		c_len = f2fs_cluster_blocks_are_contiguous(dn);
->>>>>>> +		if (!c_len)
->>>>>>> +			return;
->>>>>>> +		llen = F2FS_I(dn->inode)->i_cluster_size;
->>>>>>> +		if (blkaddr == COMPRESS_ADDR)
->>>>>>> +			blkaddr = data_blkaddr(dn->inode, dn->node_page,
->>>>>>>      					dn->ofs_in_node + 1);
->>>>>>> +	} else {
->>>>>>> +		llen = f2fs_normal_blocks_are_contiguous(dn);
->>>>>>> +	}
->>>>>>>
->>>>>>>      	f2fs_update_extent_tree_range_compressed(dn->inode,
->>>>>>> -				index, blkaddr,
->>>>>>> -				F2FS_I(dn->inode)->i_cluster_size,
->>>>>>> -				c_len);
->>>>>>> +				index, blkaddr, llen, c_len);
->>>>>>>      }
->>>>>>>      #endif
->>>>>>>
+> case #2
+> - recover_orphan_inode
+>   - f2fs_iget_retry
+> 
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+> v3:
+> - update commit title/message
+> - change logic inside f2fs_iget() rather than its caller
+>   fs/f2fs/inode.c | 25 ++++++++++++++++++-------
+>   1 file changed, 18 insertions(+), 7 deletions(-)
+> 
+> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> index cde0a3dc80c3..1baac6056733 100644
+> --- a/fs/f2fs/inode.c
+> +++ b/fs/f2fs/inode.c
+> @@ -487,6 +487,12 @@ static int do_read_inode(struct inode *inode)
+>   	return 0;
+>   }
+>   
+> +static bool is_meta_ino(struct f2fs_sb_info *sbi, unsigned int ino)
+> +{
+> +	return ino == F2FS_NODE_INO(sbi) || ino == F2FS_META_INO(sbi) ||
+> +		ino == F2FS_COMPRESS_INO(sbi);
+> +}
+> +
+>   struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+>   {
+>   	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+> @@ -497,17 +503,22 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+>   	if (!inode)
+>   		return ERR_PTR(-ENOMEM);
+>   
+> +	if (is_meta_ino(sbi, ino)) {
+> +		if (!(inode->i_state & I_NEW)) {
+> +			f2fs_err(sbi, "detect corrupted inode no:%lu, run fsck to repair", ino);
+> +			set_sbi_flag(sbi, SBI_NEED_FSCK);
+> +			ret = -EFSCORRUPTED;
+> +			trace_f2fs_iget_exit(inode, ret);
+> +			iput(inode);
+> +			return ERR_PTR(ret);
+> +		}
+> +		goto make_now;
+> +	}
+> +
+>   	if (!(inode->i_state & I_NEW)) {
+>   		trace_f2fs_iget(inode);
+>   		return inode;
+>   	}
+> -	if (ino == F2FS_NODE_INO(sbi) || ino == F2FS_META_INO(sbi))
+> -		goto make_now;
+> -
+> -#ifdef CONFIG_F2FS_FS_COMPRESSION
+> -	if (ino == F2FS_COMPRESS_INO(sbi))
+> -		goto make_now;
+> -#endif
+>   
+>   	ret = do_read_inode(inode);
+>   	if (ret)
 
 
 _______________________________________________
