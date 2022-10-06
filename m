@@ -2,65 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 166275F6A5D
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 17:14:45 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E47775F6A61
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 17:16:32 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ogSaB-0002mc-0h;
-	Thu, 06 Oct 2022 15:14:43 +0000
+	id 1ogSbu-0004Y7-G6;
+	Thu, 06 Oct 2022 15:16:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ogSa9-0002mM-Gg
+ (envelope-from <chao@kernel.org>) id 1ogSbt-0004Y0-IK
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 15:14:41 +0000
+ Thu, 06 Oct 2022 15:16:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tVZNbjbAFyOq3f3u6PzK5DhF687jpZdTNELUXxxTZwI=; b=iRURBDr5xUATBxIqJVJIxFwyQ1
- kPeWJXEM71W7j/fBb6rIwB83LxxMsznNpVRHVRk2Xf3D+vANAgCgvjzlT5IM2joQBc0/wC5OoRc+G
- EfZd0o6uFU2mfFCYD4asi9rtgnUxtxpPREeyULzftxNuimfpAjlRcGYkjkOwfOLr4w6U=;
+ bh=T20xZ2Id0fWfr9mHqukHXhubwI/1d7WeQeLLi3OVE8Y=; b=MeI5xtB1LVvbohNYmntxdQIJqw
+ UnWp5KrJSZsxgehjbexnOmkGxyzEAuyZSwLKNd1BLkpi9vKwHf1tmhQiaswgOoSA5jDkUN5wgt7SX
+ AG7gPz+UEGdhw3DK6j7TCVRBIFUSxPlQFSKhj7DV1qy+jBgvEESzqa1/qhi88h74Asxw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=tVZNbjbAFyOq3f3u6PzK5DhF687jpZdTNELUXxxTZwI=; b=I
- iVth1XU20rpO5TuYWnKJ9fUcQYYh7g3md4CcMzmRoNwcSlEZlvOs4RQJq00du3qZY1x79rLbvC2Ed
- 21iW/0HoEDr11PH4uiHFp/MLEOHDKUFT5H1TGmjgqfZIOBzvd2EwABpl4MayK+uVRSsA5wet9/TjN
- 0KjsXvW7KbPkSsbk=;
+ List-Owner:List-Archive; bh=T20xZ2Id0fWfr9mHqukHXhubwI/1d7WeQeLLi3OVE8Y=; b=J
+ Ld272rC7wBuxY+H9BZhe94i92hjHF6EjqmaPyQuLBtEAMS9RFUEi2Focvse+uFe3R+OS5Vj8Xicyl
+ V1BTaZaTgm/Hg5TZqBOB3lwnn6HeYXjTr8Hfa0SroDBmqAGU+UqSy8w2hMXKnJ5J5BvRZZXKAcpYi
+ DIAcEQQqP0fTxvxg=;
 Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ogSa8-0006qb-TH for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 15:14:41 +0000
+ id 1ogSbp-00Ep3m-8H for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 06 Oct 2022 15:16:29 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id A24DFB820D6
+ by ams.source.kernel.org (Postfix) with ESMTPS id 2BB6DB820C0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  6 Oct 2022 15:14:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CAD4C433D6;
- Thu,  6 Oct 2022 15:14:32 +0000 (UTC)
+ Thu,  6 Oct 2022 15:16:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 385B6C433C1;
+ Thu,  6 Oct 2022 15:16:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1665069273;
- bh=iWa1rm6SdQ2WK8Wust6X3A7TVGiD5e+VeSaAdtLkQuw=;
+ s=k20201202; t=1665069372;
+ bh=8SKqFBIYeThVUNjbIA0cdqEp2mrz/RMJNmMZ+5F8OOs=;
  h=From:To:Cc:Subject:Date:From;
- b=MEYApFcs7c2zP6aIDq3MKt+SQH8lpFSTZ6LLi8pk5mjmYUCKDrHbW8n5txPc6acX5
- oZS1LD/Ap+jhUnluF4fMv8yYgu+5uD3ZXORGDAu7WpwQusnT2qO4TzvadBkpQAis/V
- ecIPCWRnsGUri4dnBsubtl0eKJA3hNqki5WhXmxJ70ICvrYUEHlyazXb7HCX+J0d51
- GYE6XlBSTXD5Kv4h+JGQf7XTcA+2nOgmKONnmhF7LWeZfVIfIOlzMX8Maq9dO84FiR
- vDz2jXtb1dRZSjl0KZiXHzMQWBs1c1S+uleAsW3020b2zbDcR0jznefmUigdrG+tUM
- NcV8nHgXKMvng==
+ b=XQaOXXXy4SwGcbRfG8TYy5f5OmPewnH9LCPMyOj4VI8WZtookkwAdYlcWO6Q29WW6
+ Y/SC/QRIfJYTYairRXDdw+Rp+1owutkJZjhBQF+upoi4tO1swjV6j2swTlB6lSxOzE
+ L0jMwrhlXtsc2xvcLC1i6t6I+BFKEmLfEX+3myclUNk3DOi1vRAPXrGbl1vU0nAmLK
+ 5dzma3nYfO3nMacJP+YBZ/hL51Wfk/8VlHscKC1To/9WGWwdtobef4OJ80JtMDr3+X
+ Vo+mlHa3Ch468z9Xca+PheKkOcNUuSeKus6HE6CmYKZnkwUF2cYF+eX4IWZ1AVs5ja
+ p5h2GtTZYe4ew==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Thu,  6 Oct 2022 23:14:28 +0800
-Message-Id: <20221006151428.57561-1-chao@kernel.org>
+Date: Thu,  6 Oct 2022 23:16:06 +0800
+Message-Id: <20221006151606.58288-1-chao@kernel.org>
 X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
 X-Spam-Score: -5.2 (-----)
@@ -70,10 +70,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  fs/f2fs/super.c:3886:6: warning: no previous prototype for
- 'f2fs_record_stop_reason' [-Wmissing-prototypes] Signed-off-by: Chao Yu
- <chao@kernel.org>
- --- fs/f2fs/super.c | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
+ Content preview:  The calculation is wrong,
+ fix it. Signed-off-by: Chao Yu <chao@kernel.org>
+ --- fsck/f2fs.h | 5 +++-- 1 file changed, 3 insertions(+), 2 deletions(-)
+ diff --git a/fsck/f2fs.h b/fsck/f2fs.h index 030d750..2fd241f 100644 ---
+ a/fsck/f2fs.h +++ b/fsck/f2fs.h @@ -416,8 +416,9 @@ static inline block_t
+ __start_sum_addr(struct f2fs_sb_info *sbi) 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,8 +90,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ogSa8-0006qb-TH
-Subject: [f2fs-dev] [PATCH] f2fs: fix compile warning
+X-Headers-End: 1ogSbp-00Ep3m-8H
+Subject: [f2fs-dev] [PATCH] fsck.f2fs: fix __end_block_addr()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,31 +103,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-fs/f2fs/super.c:3886:6: warning: no previous prototype for 'f2fs_record_stop_reason' [-Wmissing-prototypes]
+The calculation is wrong, fix it.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/super.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fsck/f2fs.h | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index fad333881ea2..2908d41ed462 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3884,7 +3884,7 @@ static void save_stop_reason(struct f2fs_sb_info *sbi, unsigned char reason)
- 	spin_unlock(&sbi->error_lock);
+diff --git a/fsck/f2fs.h b/fsck/f2fs.h
+index 030d750..2fd241f 100644
+--- a/fsck/f2fs.h
++++ b/fsck/f2fs.h
+@@ -416,8 +416,9 @@ static inline block_t __start_sum_addr(struct f2fs_sb_info *sbi)
+ 
+ static inline block_t __end_block_addr(struct f2fs_sb_info *sbi)
+ {
+-	block_t end = SM_I(sbi)->main_blkaddr;
+-	return end + le64_to_cpu(F2FS_RAW_SUPER(sbi)->block_count);
++	return SM_I(sbi)->main_blkaddr +
++		(le32_to_cpu(F2FS_RAW_SUPER(sbi)->segment_count_main) <<
++		sbi->log_blocks_per_seg);
  }
  
--void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
-+static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
- {
- 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
- 	int err;
+ #define GET_ZONENO_FROM_SEGNO(sbi, segno)                               \
 -- 
 2.36.1
 
