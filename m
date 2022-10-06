@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4571D5F6037
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 06:39:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D8CE5F6041
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 06:45:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ogIfG-0000xU-Gp;
-	Thu, 06 Oct 2022 04:39:18 +0000
+	id 1ogIlK-0001a7-0x;
+	Thu, 06 Oct 2022 04:45:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <keescook@chromium.org>) id 1ogIfF-0000xK-5O
+ (envelope-from <keescook@chromium.org>) id 1ogIlJ-0001a1-68
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 04:39:17 +0000
+ Thu, 06 Oct 2022 04:45:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=y1Ewt823HoXUJ+RVCiU5hfekdC+9m7ghxyBCLtj1eUk=; b=C1xX60D4b5etIf/gbVDwsRdCR4
- rhKw2CCz+PNJq0YDO9Ui92Be8KGq5YWtI3Wev/mfjBAbKQPVbrSOc5FtYqGR3XWv0InLlg0g1Dhjk
- uxwCFwy9dIjHsnZM1c+Dfq+njQPi2rgGap7y2q9SjmPAvG3xgcfnLgWGeP0o4lprYWDo=;
+ bh=BXKZz/gOYpFYEK/kvAD1ks5ZMqdWWvWPR9euDTlMinY=; b=YfMKQNNiRHqzUWZA0vmarUWN6y
+ +BdhXfmE8ArjsMKknNaBeYZNn5VjN0hJATxAIkx/fUmRWtvGKnTjk/jwtmZmU/DGCRMWzNPLcGw4C
+ 7y2+0lcW5CztTXneGfbMNFfI6ZKOHjui6jrevoxTYySdwSg7IcRh8Tlxt8K8+ZocktEA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,86 +31,85 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=y1Ewt823HoXUJ+RVCiU5hfekdC+9m7ghxyBCLtj1eUk=; b=E1o0cKyBmtCavCoGDNd0m80c+Z
- MnUVdTMRS8fLk14m/P+7m5wt6y20VW76MI5P2NL7oBJKNjNV/cWJnNe+I9T7JMHPPXv2PrBZvUNI4
- ncjMskibSWS67v00ojIa9qRnCJZe2sCaLGr3Zg1gJ7ZnSH1ei2/ItKCEFqGcOf0ZTAto=;
-Received: from mail-pj1-f43.google.com ([209.85.216.43])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=BXKZz/gOYpFYEK/kvAD1ks5ZMqdWWvWPR9euDTlMinY=; b=he1NcgT/vp8EbpIObf+i8QgNq6
+ AWjsmtfyrwWgIMyYeXtjwOhaCkcNzDJXHSb8IzZN/7psrJlZxTFJSG2+WIFg6dk4mpC+crT48mXox
+ JzVeqF7HczzG/ZZ3rokDLyk48PGOJBA84yMhKNxsK+dYGH6Rd4ZpSo81vCTnM0Dk9h7Q=;
+Received: from mail-pj1-f52.google.com ([209.85.216.52])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ogIfB-00077U-Fj for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 04:39:17 +0000
-Received: by mail-pj1-f43.google.com with SMTP id
- v10-20020a17090a634a00b00205e48cf845so3260448pjs.4
+ id 1ogIlI-00EJBJ-K7 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 06 Oct 2022 04:45:33 +0000
+Received: by mail-pj1-f52.google.com with SMTP id pq16so764754pjb.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 05 Oct 2022 21:39:13 -0700 (PDT)
+ Wed, 05 Oct 2022 21:45:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date;
- bh=y1Ewt823HoXUJ+RVCiU5hfekdC+9m7ghxyBCLtj1eUk=;
- b=Fcbv6b+yCuol0AU1mIs9HnAOz2/wjXtHru3VW95DL3V7mKymOrKADEfZ1NfF0xLiTB
- LkCGzY8eutuXPS5+afbW7jf6o9DhcYADtCDqs8Qo8xeP+lYFZISv7p7XEeNAqavCs9/t
- xtqe21TFW/x7aAqkAHw+ftHWXMel86ys26msI=
+ bh=BXKZz/gOYpFYEK/kvAD1ks5ZMqdWWvWPR9euDTlMinY=;
+ b=Pa5J7iVIfOPPpc5FnD+VCPFKYUv3DdEsBgX8F3veGLnr0MqCAKKnFqdt9Zn7I1vA4a
+ hp/m/n+zFRiftLounW3GI1Yh9t5CRw9Qy1PoS1A+KhEfND0rtCnNn/VAYMO7oSLOURb7
+ x/xHspG9KrvXOaDvidgpTqZEY9MLlutH21Sdk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
- bh=y1Ewt823HoXUJ+RVCiU5hfekdC+9m7ghxyBCLtj1eUk=;
- b=3+brRujfn/qRhSVdhlzsFuVqADbTwQUhpHy2pjRKOpeMP4vtS2cthmK5j+G9rGzCs+
- 0ERAv3dVNyDtjTenD0LbMiYhMOnf5dst63Q31uxz0VxW4GPnF83jaao4T2CTwTwfxEZ8
- wiejWfHmu9lo6LTGABfXZScKKuegd3X11kLEl5Q742nMNYe4T6vIIRcIbfMjbgjOQERm
- V4oAzs+JbwS/ZN+Prh9RrdjDsnk51Ka4Kn9c9QfSN4yYsmIvzidAYnNdj8Xhu7q/R99x
- 6UXjCFWEvgeX78URMYh1+T7FAc4MEF1oBdHkm0D4RIm26u0Mf1DahlojaJQEBy1Rg3bX
- Zchg==
-X-Gm-Message-State: ACrzQf0C6WTa2ajQp/esepscVG28BjTYt4d9LQROSbrvpoU5KP1RUWS3
- c9bemVg79qCTdL+x3mIbAKzTNA==
-X-Google-Smtp-Source: AMsMyM60ELYmxh+A5d0x30z3COx8LaynKqt9bJxGAbjfrLwodOIKXzOKJgIYAS8Aw4fmck7UQns81A==
-X-Received: by 2002:a17:902:db0f:b0:176:e70f:6277 with SMTP id
- m15-20020a170902db0f00b00176e70f6277mr2639160plx.13.1665031147915; 
- Wed, 05 Oct 2022 21:39:07 -0700 (PDT)
+ bh=BXKZz/gOYpFYEK/kvAD1ks5ZMqdWWvWPR9euDTlMinY=;
+ b=kw5WiZ83Um+HZ/Q4sWxRrcuYsVDLRm3/DkVVhs6hjMtdyOXua+5qET44wAyzTmkT/d
+ l9npilNh1s87/jQZmKQZWAewmEEk8pt5HT+FmbZ44hUcvpe1FDMc6k9eCYpI5m6DYmmh
+ DUq+5n20ifO5GAGxmyLxoJYowznAmp0CpcAlhZ0t0CS6Q5hONfQKyvuOzdEgoEcZ+zDz
+ +V7f8alDDIF7/quF1qmH65Abiz4dsbgjvKejzhhFDudMj0is7Lda8w5xiBMl8B44erzQ
+ /cugE4MFP2JXML+AAGgovFoO8I6mZRFx+Vft2ycdm6OedWOWcR4DFKBfPDUO3T72c0A4
+ sYzg==
+X-Gm-Message-State: ACrzQf0Q6L1WX+X7t3A0ShfPgE9gyVREpWd7Gps8oTq6516AplrTq2hg
+ mOhz5cDYXeFdT/BNtDwtOxdVhznc1PXcnhtk
+X-Google-Smtp-Source: AMsMyM7BFOiJDjGZF65COEMp2Clzr5vtXi0588PB1vqUCkCeq9oCGZAqcRbRAS5gmL3ROlmwc9XhOA==
+X-Received: by 2002:a17:90b:384a:b0:203:7388:64bf with SMTP id
+ nl10-20020a17090b384a00b00203738864bfmr8697904pjb.115.1665031527009; 
+ Wed, 05 Oct 2022 21:45:27 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
  by smtp.gmail.com with ESMTPSA id
- d12-20020a634f0c000000b00439d071c110sm673132pgb.43.2022.10.05.21.39.05
+ d5-20020a62f805000000b0054124008c14sm11733797pfh.154.2022.10.05.21.45.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Oct 2022 21:39:06 -0700 (PDT)
-Date: Wed, 5 Oct 2022 21:39:03 -0700
+ Wed, 05 Oct 2022 21:45:24 -0700 (PDT)
+Date: Wed, 5 Oct 2022 21:45:22 -0700
 From: Kees Cook <keescook@chromium.org>
 To: "Jason A. Donenfeld" <Jason@zx2c4.com>
-Message-ID: <202210052138.A585E4CC@keescook>
+Message-ID: <202210052144.5DA3690D@keescook>
 References: <20221005214844.2699-1-Jason@zx2c4.com>
- <20221005214844.2699-6-Jason@zx2c4.com>
+ <20221005214844.2699-5-Jason@zx2c4.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20221005214844.2699-6-Jason@zx2c4.com>
-X-Spam-Score: -0.9 (/)
+In-Reply-To: <20221005214844.2699-5-Jason@zx2c4.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Oct 05, 2022 at 11:48:44PM +0200, Jason A. Donenfeld
- wrote: > With no callers left of prandom_u32() and prandom_bytes(), remove
- these > deprecated wrappers. > > Signed-off-by: Jason A. Donenfe [...] 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview:  On Wed, Oct 05, 2022 at 11:48:43PM +0200, Jason A. Donenfeld
+ wrote: > The prandom_bytes() function has been a deprecated inline wrapper
+ around > get_random_bytes() for several releases now, and compil [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.43 listed in list.dnswl.org]
+ no trust [209.85.216.52 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.43 listed in wl.mailspike.net]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ [209.85.216.52 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ogIfB-00077U-Fj
-Subject: Re: [f2fs-dev] [PATCH v1 5/5] prandom: remove unused functions
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ogIlI-00EJBJ-K7
+Subject: Re: [f2fs-dev] [PATCH v1 4/5] treewide: use get_random_bytes when
+ possible
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -235,11 +234,13 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Oct 05, 2022 at 11:48:44PM +0200, Jason A. Donenfeld wrote:
-> With no callers left of prandom_u32() and prandom_bytes(), remove these
-> deprecated wrappers.
-> 
-> Signed-off-by: Jason A. Donenfeld <Jason@zx2c4.com>
+On Wed, Oct 05, 2022 at 11:48:43PM +0200, Jason A. Donenfeld wrote:
+> The prandom_bytes() function has been a deprecated inline wrapper around
+> get_random_bytes() for several releases now, and compiles down to the
+> exact same code. Replace the deprecated wrapper with a direct call to
+> the real function.
+
+Global search/replace matches. :)
 
 Reviewed-by: Kees Cook <keescook@chromium.org>
 
