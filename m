@@ -2,65 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE8FE5F6A4B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 17:09:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 166275F6A5D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 17:14:45 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ogSVR-0006GV-7y;
-	Thu, 06 Oct 2022 15:09:49 +0000
+	id 1ogSaB-0002mc-0h;
+	Thu, 06 Oct 2022 15:14:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ogSVP-0006GL-Ng
+ (envelope-from <chao@kernel.org>) id 1ogSa9-0002mM-Gg
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 15:09:47 +0000
+ Thu, 06 Oct 2022 15:14:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BMn/8U3P0yRacWrCOoo4PGi+s4fJbwpb1MybzING9cw=; b=XWAodPLMFfcz0cwX+VgcoevnbS
- fy5qeucqQ+7mixgk36pUjrQvyG2N4K2AkWe4RABlxwNGZeNfVHA8nnFGzcjiOhwQd02oinREAFvp1
- CesE6daSQaZLBFDkr2IvfGPuRpNGLkgydmzTLrpvfD6gJcnUv4AJbxvaMx6ffBCeYTr8=;
+ bh=tVZNbjbAFyOq3f3u6PzK5DhF687jpZdTNELUXxxTZwI=; b=iRURBDr5xUATBxIqJVJIxFwyQ1
+ kPeWJXEM71W7j/fBb6rIwB83LxxMsznNpVRHVRk2Xf3D+vANAgCgvjzlT5IM2joQBc0/wC5OoRc+G
+ EfZd0o6uFU2mfFCYD4asi9rtgnUxtxpPREeyULzftxNuimfpAjlRcGYkjkOwfOLr4w6U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=BMn/8U3P0yRacWrCOoo4PGi+s4fJbwpb1MybzING9cw=; b=h
- 6Ww+yNX3wPNzPMhtt+xFaasYTxcQ4aETGQbkNLOsrVpkEwRHJsX7OmgR7ItPQ2E/mYXgy8xG1fBMg
- jqoxJL7Ihx/E7i8r4KUmECZoao9cRl0aCz3pDrhixN8PXnFuqv26VnraP2RuQCOYfLHpE0pMe4BOj
- ruqvpOcbVn1DsYu0=;
+ List-Owner:List-Archive; bh=tVZNbjbAFyOq3f3u6PzK5DhF687jpZdTNELUXxxTZwI=; b=I
+ iVth1XU20rpO5TuYWnKJ9fUcQYYh7g3md4CcMzmRoNwcSlEZlvOs4RQJq00du3qZY1x79rLbvC2Ed
+ 21iW/0HoEDr11PH4uiHFp/MLEOHDKUFT5H1TGmjgqfZIOBzvd2EwABpl4MayK+uVRSsA5wet9/TjN
+ 0KjsXvW7KbPkSsbk=;
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ogSVP-0006XE-0r for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 15:09:47 +0000
+ id 1ogSa8-0006qb-TH for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 06 Oct 2022 15:14:41 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id BF4C0B820C0
+ by ams.source.kernel.org (Postfix) with ESMTPS id A24DFB820D6
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  6 Oct 2022 15:09:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BF558C433C1;
- Thu,  6 Oct 2022 15:09:38 +0000 (UTC)
+ Thu,  6 Oct 2022 15:14:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CAD4C433D6;
+ Thu,  6 Oct 2022 15:14:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1665068979;
- bh=wXqoiRqvOOsXHSVgafb2mnLDBiY/qtfZwDyNj7iYQcY=;
+ s=k20201202; t=1665069273;
+ bh=iWa1rm6SdQ2WK8Wust6X3A7TVGiD5e+VeSaAdtLkQuw=;
  h=From:To:Cc:Subject:Date:From;
- b=Ky+/zJFHFPIJO5ycxxNUg/8qpGmI1yL0vxQHqYUnzfN/CCj0tohff9XmWgwpvge/p
- qttC97fafocV1WDCCoUhwDsrEkCZ+uIRTln5s0gtz7UwqAKlvltVixIPdonPzqg319
- durwBHcpH/K2LWupSuTrmLVrbSzlNnEY1qBygKQSZH4eARfsRgHXc0p3IFuTB3+Apg
- GA5r3NFg3qQXL303ikBYrZslXvd1ihjJwDvuvv8wXQ2VoxQW+HKtnq7mhJSvNMDAjm
- fN2+1AiMl+yt8gv4JNlzP9SbJWwCy25OXb0DnzejOWeqcYj91siLrEePuU/l0woL0c
- scQn6QFLHVoAA==
+ b=MEYApFcs7c2zP6aIDq3MKt+SQH8lpFSTZ6LLi8pk5mjmYUCKDrHbW8n5txPc6acX5
+ oZS1LD/Ap+jhUnluF4fMv8yYgu+5uD3ZXORGDAu7WpwQusnT2qO4TzvadBkpQAis/V
+ ecIPCWRnsGUri4dnBsubtl0eKJA3hNqki5WhXmxJ70ICvrYUEHlyazXb7HCX+J0d51
+ GYE6XlBSTXD5Kv4h+JGQf7XTcA+2nOgmKONnmhF7LWeZfVIfIOlzMX8Maq9dO84FiR
+ vDz2jXtb1dRZSjl0KZiXHzMQWBs1c1S+uleAsW3020b2zbDcR0jznefmUigdrG+tUM
+ NcV8nHgXKMvng==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Thu,  6 Oct 2022 23:09:28 +0800
-Message-Id: <20221006150928.56627-1-chao@kernel.org>
+Date: Thu,  6 Oct 2022 23:14:28 +0800
+Message-Id: <20221006151428.57561-1-chao@kernel.org>
 X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
 X-Spam-Score: -5.2 (-----)
@@ -70,11 +70,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch supports to inject fault into
- f2fs_is_valid_blkaddr()
- to simulate accessing inconsistent data/meta block addressses from caller.
- Usage: a) echo 262144 > /sys/fs/f2fs/<dev>/inject_type or b) mount -o
- fault_type=262144 <dev> <mountpoint> 
+ Content preview:  fs/f2fs/super.c:3886:6: warning: no previous prototype for
+ 'f2fs_record_stop_reason' [-Wmissing-prototypes] Signed-off-by: Chao Yu
+ <chao@kernel.org>
+ --- fs/f2fs/super.c | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,9 +88,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ogSVP-0006XE-0r
-Subject: [f2fs-dev] [PATCH] f2fs: support fault injection for
- f2fs_is_valid_blkaddr()
+X-Headers-End: 1ogSa8-0006qb-TH
+Subject: [f2fs-dev] [PATCH] f2fs: fix compile warning
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,73 +106,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch supports to inject fault into f2fs_is_valid_blkaddr() to
-simulate accessing inconsistent data/meta block addressses from caller.
-
-Usage:
-a) echo 262144 > /sys/fs/f2fs/<dev>/inject_type or
-b) mount -o fault_type=262144 <dev> <mountpoint>
+fs/f2fs/super.c:3886:6: warning: no previous prototype for 'f2fs_record_stop_reason' [-Wmissing-prototypes]
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- Documentation/filesystems/f2fs.rst | 1 +
- fs/f2fs/checkpoint.c               | 5 +++++
- fs/f2fs/f2fs.h                     | 1 +
- fs/f2fs/super.c                    | 1 +
- 4 files changed, 8 insertions(+)
+ fs/f2fs/super.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index 6f19e7f9e908..3bca70fff5ea 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -199,6 +199,7 @@ fault_type=%d		 Support configuring fault injection type, should be
- 			 FAULT_SLAB_ALLOC	  0x000008000
- 			 FAULT_DQUOT_INIT	  0x000010000
- 			 FAULT_LOCK_OP		  0x000020000
-+			 FAULT_BLKADDR		  0x000040000
- 			 ===================	  ===========
- mode=%s			 Control block allocation mode which supports "adaptive"
- 			 and "lfs". In "lfs" mode, there should be no random
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 109e96c15b84..2a5d9256a6f4 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -168,6 +168,11 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
- bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
- 					block_t blkaddr, int type)
- {
-+	if (time_to_inject(sbi, FAULT_BLKADDR)) {
-+		f2fs_show_injection_info(sbi, FAULT_BLKADDR);
-+		return false;
-+	}
-+
- 	switch (type) {
- 	case META_NAT:
- 		break;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 3a63125ffdfd..fa9ac681f71c 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -60,6 +60,7 @@ enum {
- 	FAULT_SLAB_ALLOC,
- 	FAULT_DQUOT_INIT,
- 	FAULT_LOCK_OP,
-+	FAULT_BLKADDR,
- 	FAULT_MAX,
- };
- 
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 787010893a12..fad333881ea2 100644
+index fad333881ea2..2908d41ed462 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -61,6 +61,7 @@ const char *f2fs_fault_name[FAULT_MAX] = {
- 	[FAULT_SLAB_ALLOC]	= "slab alloc",
- 	[FAULT_DQUOT_INIT]	= "dquot initialize",
- 	[FAULT_LOCK_OP]		= "lock_op",
-+	[FAULT_BLKADDR]		= "invalid blkaddr",
- };
+@@ -3884,7 +3884,7 @@ static void save_stop_reason(struct f2fs_sb_info *sbi, unsigned char reason)
+ 	spin_unlock(&sbi->error_lock);
+ }
  
- void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
+-void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
++static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
+ {
+ 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
+ 	int err;
 -- 
 2.36.1
 
