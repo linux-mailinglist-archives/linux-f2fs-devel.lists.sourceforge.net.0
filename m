@@ -2,102 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 657015F603D
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 06:42:26 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A28245F600A
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 06:23:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ogIiF-00011L-0S;
-	Thu, 06 Oct 2022 04:42:23 +0000
+	id 1ogIPT-0001IQ-PK;
+	Thu, 06 Oct 2022 04:22:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <keescook@chromium.org>) id 1ogIiD-00011F-L3
+ (envelope-from <kpsingh@kernel.org>) id 1ogIPR-0001IK-4W
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 04:42:21 +0000
+ Thu, 06 Oct 2022 04:22:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WbAjddv7dJAWgX74vxMdFtfHq8KnIvmUd6IHydPVZWw=; b=Qug9li2ezyfdBx/Qon8SuLPvbo
- HC+HkJrK1PM+gR2lzJ/eJjw0qpN0kerm+7wkFSO7vJmU8npIABp3x509erDC+8EYppSPQ921jTCDf
- BpJ/n9jdbEdFeJQ0OtkbtYsWIXQILYW/Yx1Ml4eDCPyW9QOemcMUEV2F9q/zDrVy5bxg=;
+ bh=79D/+k/bRZXhGBAaempdgng3l68Zp7pbnLAWamJJEQU=; b=WGfYxA9/nmrVAss6aZJBbVO+jc
+ 7EFgdl51lzyuU+88/vDWeQ/yKL5PRdu2R9qVQ3whO9DttAtbbSn42q9byMizGU3ZBmPKp37aRQbEP
+ iVMJOke/TyEOn3r8Z++PkMi0oLcs/eeD+XZioaNoED1t/u9OmCa5ewPWiUdmsW9eLZ0c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=WbAjddv7dJAWgX74vxMdFtfHq8KnIvmUd6IHydPVZWw=; b=eUnbR0uNcmt75MLrcfN1YGIPbF
- LXwpw5zSVi6LLSBfu/OUQBKcd7PgpMRGKE/7wtuB8/jWk9wsam65TnlYmB6fdTig87i5stN3HOOm/
- 6sgvX+QMttZc3tCw5KmihZsbItOmAJre4daEQn5k95lmBdX8DTj3DbeqQX6jZvyigjAU=;
-Received: from mail-oa1-f50.google.com ([209.85.160.50])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ogIi6-0007Kt-UL for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 04:42:21 +0000
-Received: by mail-oa1-f50.google.com with SMTP id
- 586e51a60fabf-1322d768ba7so986042fac.5
+ bh=79D/+k/bRZXhGBAaempdgng3l68Zp7pbnLAWamJJEQU=; b=WT/5yR/BPSi1bA1AIqVBTOgs2g
+ VOqERgCNjEzYRAj6xE96b+rOqswolwoaQvHTJmEhUwrTd3upB8bVo++nV3u3b7cZ0YzuUPNqK8y6X
+ ztqSJeguIJQg8fG9idx55CkA59B+1LH+1VKXtgh3EtNPFfgG62MyTq/ZIEeBAeTtXppY=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1ogIPQ-00EI7K-39 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 06 Oct 2022 04:22:57 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id F107EB82002
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 05 Oct 2022 21:42:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date;
- bh=WbAjddv7dJAWgX74vxMdFtfHq8KnIvmUd6IHydPVZWw=;
- b=WgCBVOxTCY3r6hnjb6DkPXMWKhTpJd2tJ8grQVy4FqddmqNDeeFgajag3lajOwT2v4
- a87IfTIAA5TCPftGBNiy4cY7xnOoxUEfMiQjvrPT/rt/xjKxauu3MOYhjJEXssFW35Ee
- /z+9ItQjm7QhlvSxza54MmNIb/ZuYs/f028rM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
- bh=WbAjddv7dJAWgX74vxMdFtfHq8KnIvmUd6IHydPVZWw=;
- b=Gm1SGg4iGa+RXMqcGxwfV+sZLVxVdmN7+PowdqCT+/930BcJeFi3U0UfbzVBqQJpQL
- /D9KqnftHEagjTTNX8idSFeTWFIHWZpYGiheuBefqiu4obnlRqZTalpvz5Jbz/WPSBPs
- ojoFpJgel/szy2IS6qHpWeFswDxS4BsAEnvafWywQW18zUxKij5r2YCLU48uWETai5u8
- g0ZHukXd2GgLh+YzdkF5H/5Xgn/sPTkctQn7+Royelfpk9/2g4G6TTSimQJI4BQU4W03
- b60bQsBrdocT0eAcGZOaXU9aEBFt+KQefJ2Hv0pJCAnCX1sPxOGhj/k6ULsKGAIJmCEY
- 6wRg==
-X-Gm-Message-State: ACrzQf2i6gddZ/R+d8O91BgqQtElKBF0QN3GojWQ5zU5mFA9jnge0Gf5
- 7TaBa1EhZXPQ1zwYrgETVP8IsTfX5F+NrMMW
-X-Google-Smtp-Source: AMsMyM4cCCHH4sm8YdThV49cVWVDAgPzqhkhh6i7+17PaqDM+DNwRTUS7Um0Z/zO228Kkrjqlqz/Cg==
-X-Received: by 2002:a17:90a:ea95:b0:20a:f65b:143b with SMTP id
- h21-20020a17090aea9500b0020af65b143bmr3218311pjz.230.1665029812504; 
- Wed, 05 Oct 2022 21:16:52 -0700 (PDT)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
- by smtp.gmail.com with ESMTPSA id
- je12-20020a170903264c00b00176d347e9a7sm11219825plb.233.2022.10.05.21.16.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Oct 2022 21:16:51 -0700 (PDT)
-Date: Wed, 5 Oct 2022 21:16:50 -0700
-From: Kees Cook <keescook@chromium.org>
-To: "Jason A. Donenfeld" <Jason@zx2c4.com>
-Message-ID: <202210052035.A1020E3@keescook>
+ Thu,  6 Oct 2022 04:22:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A7630C4FF6F
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  6 Oct 2022 04:22:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1665030162;
+ bh=HB4K7E86nsfwh8pjE5w4FJpZB/dXbKFz0OtI2RFCH+s=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=U243XDpeQtdzP8OLbjBO8J34oe/T3rthPl2gsNKiT9xCqeUnUTBzfbdZR0oEbv8Mp
+ lPUf13U9HZtldKkHu3hieQy1ooxgGr3je2Iyuov29SulKcYwRSQg8aT8ndxjKkrBm9
+ yYZ1Uq8szapDDqaY77n9nTr7uQ/9X9WvUHPII0+TEdYCoMzEYZVnUy1SDg92Dq0uG2
+ Ju8aaYT1AhIsd8qi8oF6wIzJ677pb+rbuaKAcxpTVzA4yhtL+83XMe6/9hKeCfKjTB
+ mL7xYFl5DTW4GpUcX5w0ZJgJfMNDJ8SLOXyfnOzTwGam4VqrQ51ift8aGqYZ18csob
+ aXa7zsdW2FHNQ==
+Received: by mail-lf1-f44.google.com with SMTP id g1so915657lfu.12
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 05 Oct 2022 21:22:42 -0700 (PDT)
+X-Gm-Message-State: ACrzQf2Htpnemga9BGGzle2bDmGkUphyPmS5pG0YrQMJfJDKM8858XQ6
+ Tlv3xsl4uY/pFKGkKbUX3lOQlJx1hJl18ceWzNwGWA==
+X-Google-Smtp-Source: AMsMyM4buFniz46ZSiVKh/+EZ3E6CrEv7WC+W0XWrOZd99wlz7Q68ThxnzcjqPbpKa49LlF82wYrc2S5syRYJ4jy1zU=
+X-Received: by 2002:a2e:7318:0:b0:26d:fdd9:6b2 with SMTP id
+ o24-20020a2e7318000000b0026dfdd906b2mr1076019ljc.156.1665030148829; Wed, 05
+ Oct 2022 21:22:28 -0700 (PDT)
+MIME-Version: 1.0
 References: <20221005214844.2699-1-Jason@zx2c4.com>
  <20221005214844.2699-2-Jason@zx2c4.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20221005214844.2699-2-Jason@zx2c4.com>
-X-Spam-Score: -0.9 (/)
+ <202210052035.A1020E3@keescook>
+In-Reply-To: <202210052035.A1020E3@keescook>
+From: KP Singh <kpsingh@kernel.org>
+Date: Wed, 5 Oct 2022 21:22:17 -0700
+X-Gmail-Original-Message-ID: <CACYkzJ6w6DitDk9uoEyyNeg+HmNHZx_tckJ_=EroqmT=CN3VBA@mail.gmail.com>
+Message-ID: <CACYkzJ6w6DitDk9uoEyyNeg+HmNHZx_tckJ_=EroqmT=CN3VBA@mail.gmail.com>
+To: Kees Cook <keescook@chromium.org>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Oct 05, 2022 at 11:48:40PM +0200, Jason A. Donenfeld
- wrote: > Rather than incurring a division or requesting too many random bytes
- for > the given range, use the prandom_u32_max() function, wh [...] 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview:  On Wed, Oct 5,
+ 2022 at 9:16 PM Kees Cook <keescook@chromium.org>
+ wrote: > > On Wed, Oct 05, 2022 at 11:48:40PM +0200, Jason A. Donenfeld wrote:
+ > > Rather than incurring a division or requesting too m [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.160.50 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -105,11 +102,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.160.50 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ogIi6-0007Kt-UL
+X-Headers-End: 1ogIPQ-00EI7K-39
 Subject: Re: [f2fs-dev] [PATCH v1 1/5] treewide: use prandom_u32_max() when
  possible
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -148,11 +142,12 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  Jiri Olsa <jolsa@kernel.org>, Jan Kara <jack@suse.com>,
  linux-fsdevel@vger.kernel.org, Lars Ellenberg <lars.ellenberg@linbit.com>,
  linux-media@vger.kernel.org, Claudiu Beznea <claudiu.beznea@microchip.com>,
- Sharvari Harisangam <sharvari.harisangam@nxp.com>, linux-fbdev@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-mmc@vger.kernel.org,
- Dave Hansen <dave.hansen@linux.intel.com>, Song Liu <song@kernel.org>,
- Eric Dumazet <edumazet@google.com>, target-devel@vger.kernel.org,
- John Stultz <jstultz@google.com>, Stanislav Fomichev <sdf@google.com>,
+ Sharvari Harisangam <sharvari.harisangam@nxp.com>,
+ "Jason A. Donenfeld" <Jason@zx2c4.com>, linux-doc@vger.kernel.org,
+ linux-mmc@vger.kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
+ Song Liu <song@kernel.org>, Eric Dumazet <edumazet@google.com>,
+ target-devel@vger.kernel.org, John Stultz <jstultz@google.com>,
+ Stanislav Fomichev <sdf@google.com>,
  Gregory Greenman <gregory.greenman@intel.com>, drbd-dev@lists.linbit.com,
  dev@openvswitch.org, Leon Romanovsky <leon@kernel.org>,
  Helge Deller <deller@gmx.de>, Hugh Dickins <hughd@google.com>,
@@ -170,16 +165,16 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  Theodore Ts'o <tytso@mit.edu>, Stephen Boyd <sboyd@kernel.org>,
  Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>,
  Florian Westphal <fw@strlen.de>,
- Andreas =?iso-8859-1?Q?F=E4rber?= <afaerber@suse.de>,
+ =?UTF-8?Q?Andreas_F=C3=A4rber?= <afaerber@suse.de>,
  Jon Maloy <jmaloy@redhat.com>, Vlad Yasevich <vyasevich@gmail.com>,
  Anna Schumaker <anna@kernel.org>, Yehezkel Bernat <YehezkelShB@gmail.com>,
  Haoyue Xu <xuhaoyue1@hisilicon.com>, Heiner Kallweit <hkallweit1@gmail.com>,
  linux-wireless@vger.kernel.org,
  Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>, linux-nvme@lists.infradead.org,
- Michal Januszewski <spock@gentoo.org>, linux-mtd@lists.infradead.org,
- kasan-dev@googlegroups.com, Cong Wang <xiyou.wangcong@gmail.com>,
- Thomas Sailer <t.sailer@alumni.ethz.ch>,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>, linux-fbdev@vger.kernel.org,
+ linux-nvme@lists.infradead.org, Michal Januszewski <spock@gentoo.org>,
+ linux-mtd@lists.infradead.org, kasan-dev@googlegroups.com,
+ Cong Wang <xiyou.wangcong@gmail.com>, Thomas Sailer <t.sailer@alumni.ethz.ch>,
  Ajay Singh <ajay.kathat@microchip.com>, Xiubo Li <xiubli@redhat.com>,
  Sagi Grimberg <sagi@grimberg.me>, Daniel Borkmann <daniel@iogearbox.net>,
  Jonathan Corbet <corbet@lwn.net>, linux-rdma@vger.kernel.org,
@@ -189,9 +184,8 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  Pablo Neira Ayuso <pablo@netfilter.org>, Marco Elver <elver@google.com>,
  Yury Norov <yury.norov@gmail.com>,
  "James E . J . Bottomley" <jejb@linux.ibm.com>,
- Jamal Hadi Salim <jhs@mojatatu.com>, KP Singh <kpsingh@kernel.org>,
- Borislav Petkov <bp@alien8.de>, Keith Busch <kbusch@kernel.org>,
- Dan Williams <dan.j.williams@intel.com>,
+ Jamal Hadi Salim <jhs@mojatatu.com>, Borislav Petkov <bp@alien8.de>,
+ Keith Busch <kbusch@kernel.org>, Dan Williams <dan.j.williams@intel.com>,
  Mauro Carvalho Chehab <mchehab@kernel.org>,
  Franky Lin <franky.lin@broadcom.com>, Arend van Spriel <aspriel@gmail.com>,
  linux-ext4@vger.kernel.org, Wenpeng Liang <liangwenpeng@huawei.com>,
@@ -201,7 +195,7 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  netdev@vger.kernel.org, Ying Xue <ying.xue@windriver.com>,
  Manish Rangankar <mrangankar@marvell.com>,
  "David S . Miller" <davem@davemloft.net>,
- Toke =?iso-8859-1?Q?H=F8iland-J=F8rgensen?= <toke@toke.dk>,
+ =?UTF-8?B?VG9rZSBIw7hpbGFuZC1Kw7hyZ2Vuc2Vu?= <toke@toke.dk>,
  Vignesh Raghavendra <vigneshr@ti.com>, Peter Zijlstra <peterz@infradead.org>,
  "H . Peter Anvin" <hpa@zytor.com>,
  Alexandre Torgue <alexandre.torgue@foss.st.com>,
@@ -228,7 +222,7 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  linuxppc-dev@lists.ozlabs.org, David Ahern <dsahern@kernel.org>,
  Philipp Reisner <philipp.reisner@linbit.com>,
  Stephen Hemminger <stephen@networkplumber.org>,
- Christoph =?iso-8859-1?Q?B=F6hmwalder?= <christoph.boehmwalder@linbit.com>,
+ =?UTF-8?Q?Christoph_B=C3=B6hmwalder?= <christoph.boehmwalder@linbit.com>,
  Vinod Koul <vkoul@kernel.org>, tipc-discussion@lists.sourceforge.net,
  Thomas Graf <tgraf@suug.ch>, Johannes Berg <johannes@sipsolutions.net>,
  Sungjong Seo <sj1557.seo@samsung.com>, Martin KaFai Lau <martin.lau@linux.dev>
@@ -236,64 +230,72 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Oct 05, 2022 at 11:48:40PM +0200, Jason A. Donenfeld wrote:
-> Rather than incurring a division or requesting too many random bytes for
-> the given range, use the prandom_u32_max() function, which only takes
-> the minimum required bytes from the RNG and avoids divisions.
+On Wed, Oct 5, 2022 at 9:16 PM Kees Cook <keescook@chromium.org> wrote:
+>
+> On Wed, Oct 05, 2022 at 11:48:40PM +0200, Jason A. Donenfeld wrote:
+> > Rather than incurring a division or requesting too many random bytes for
+> > the given range, use the prandom_u32_max() function, which only takes
+> > the minimum required bytes from the RNG and avoids divisions.
+>
+> Yes please!
+>
+> Since this is a treewide patch, it's helpful for (me at least) doing
+> reviews to detail the mechanism of the transformation.
+>
+> e.g. I imagine this could be done with something like Coccinelle and
+>
+> @no_modulo@
+> expression E;
+> @@
+>
+> -       (prandom_u32() % (E))
+> +       prandom_u32_max(E)
+>
+> > diff --git a/drivers/mtd/ubi/debug.h b/drivers/mtd/ubi/debug.h
+> > index 118248a5d7d4..4236c799a47c 100644
+> > --- a/drivers/mtd/ubi/debug.h
+> > +++ b/drivers/mtd/ubi/debug.h
+> > @@ -73,7 +73,7 @@ static inline int ubi_dbg_is_bgt_disabled(const struct ubi_device *ubi)
+> >  static inline int ubi_dbg_is_bitflip(const struct ubi_device *ubi)
+> >  {
+> >       if (ubi->dbg.emulate_bitflips)
+> > -             return !(prandom_u32() % 200);
+> > +             return !(prandom_u32_max(200));
+> >       return 0;
+> >  }
+> >
+>
+> Because some looks automated (why the parens?)
+>
+> > @@ -393,14 +387,11 @@ static struct test_driver {
+> >
+> >  static void shuffle_array(int *arr, int n)
+> >  {
+> > -     unsigned int rnd;
+> >       int i, j;
+> >
+> >       for (i = n - 1; i > 0; i--)  {
+> > -             rnd = prandom_u32();
+> > -
+> >               /* Cut the range. */
+> > -             j = rnd % i;
+> > +             j = prandom_u32_max(i);
+> >
+> >               /* Swap indexes. */
+> >               swap(arr[i], arr[j]);
+>
+> And some by hand. :)
+>
+> Reviewed-by: Kees Cook <keescook@chromium.org>
 
-Yes please!
+Thanks!
 
-Since this is a treewide patch, it's helpful for (me at least) doing
-reviews to detail the mechanism of the transformation.
+Reviewed-by: KP Singh <kpsingh@kernel.org>
 
-e.g. I imagine this could be done with something like Coccinelle and
 
-@no_modulo@
-expression E;
-@@
-
--	(prandom_u32() % (E))
-+	prandom_u32_max(E)
-
-> diff --git a/drivers/mtd/ubi/debug.h b/drivers/mtd/ubi/debug.h
-> index 118248a5d7d4..4236c799a47c 100644
-> --- a/drivers/mtd/ubi/debug.h
-> +++ b/drivers/mtd/ubi/debug.h
-> @@ -73,7 +73,7 @@ static inline int ubi_dbg_is_bgt_disabled(const struct ubi_device *ubi)
->  static inline int ubi_dbg_is_bitflip(const struct ubi_device *ubi)
->  {
->  	if (ubi->dbg.emulate_bitflips)
-> -		return !(prandom_u32() % 200);
-> +		return !(prandom_u32_max(200));
->  	return 0;
->  }
->  
-
-Because some looks automated (why the parens?)
-
-> @@ -393,14 +387,11 @@ static struct test_driver {
->  
->  static void shuffle_array(int *arr, int n)
->  {
-> -	unsigned int rnd;
->  	int i, j;
->  
->  	for (i = n - 1; i > 0; i--)  {
-> -		rnd = prandom_u32();
-> -
->  		/* Cut the range. */
-> -		j = rnd % i;
-> +		j = prandom_u32_max(i);
->  
->  		/* Swap indexes. */
->  		swap(arr[i], arr[j]);
-
-And some by hand. :)
-
-Reviewed-by: Kees Cook <keescook@chromium.org>
-
--- 
-Kees Cook
+>
+> --
+> Kees Cook
 
 
 _______________________________________________
