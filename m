@@ -2,86 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A48175F6A67
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 17:17:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 376B15F6A76
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 17:22:28 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ogSd2-00036F-92;
-	Thu, 06 Oct 2022 15:17:40 +0000
+	id 1ogShd-0003Yf-CO;
+	Thu, 06 Oct 2022 15:22:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ogSd0-000362-Qc
+ (envelope-from <chao@kernel.org>) id 1ogSha-0003YP-6n
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 15:17:38 +0000
+ Thu, 06 Oct 2022 15:22:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tPHfBPMVKqL9RJasHX5sx62xeQc9qphco+V5g7LrSws=; b=lHRP28Dgv6aY+EPQ6P2i2ERTF9
- ykTuEKMVjcdIig0z/qxblh1Z/Z6L0fY621p26jl4aCjdftGwcJ2IpEOJ1yCVYFZBFmjQSie/qoVoe
- KGhipTszEerCC5bisySmoP1ebILQ1tCshOXxHMu9MGtJ4iQeFuXhkcLoN0Yhc5M24hWk=;
+ bh=EevDX70sTVhhnB6lZ/n6j0KvCHOFLDFUNS+/rHz8LQw=; b=L4YSIr8OBvu6kZ1oD+1oos2TVC
+ 11aNS4+ONCCUrI/i9kfZtZvWW+s3GKFD/IlrGq/FzM/fMQJeypvO4pQCsnkrs2TuMFdo9RwTq3kQX
+ AhMqeNpTUTGm5O39vRXFKG4SVSdhbVZjIcWQ8aa3atywwUt9TMwfOOI/sWLHMoM0RnEo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tPHfBPMVKqL9RJasHX5sx62xeQc9qphco+V5g7LrSws=; b=bI+/2tdTJCP5X0ra27YPeJAo0p
- Lhy9HCoFc4tVz+JmIEWu3lmdsQDGrohh3Lt1RGB8R0NSL3XZ6pn1YVCPKnuSYN6PYsxy1sb3JpdlQ
- S8/IZsImnBZm9hnXvLWwPOlhiBVJ2AePxV0OWqSZ7i5V62wilCrcKKIqJvtYn7mQ2LmI=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=EevDX70sTVhhnB6lZ/n6j0KvCHOFLDFUNS+/rHz8LQw=; b=Su5Ebe4r+Y+tAA429Scz7OShnP
+ p6hdi+ZBS/9WT7PVWzS1hpCHGi0n6J+TEyF6It36LiHS1S9EGYIXguy9i3aRHcpJEiNcdt9Z5EVpz
+ iZWEiVYjcx4dcU/QMYwGxHPPeAs3axyj9xwfvD8at0lw339ziZmjeN3M74MS38892h+g=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ogSd0-00EpD3-6f for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 15:17:38 +0000
+ id 1ogShZ-0007PQ-6Q for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 06 Oct 2022 15:22:22 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C8C226189D
+ by ams.source.kernel.org (Postfix) with ESMTPS id E80E2B820D6
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  6 Oct 2022 15:17:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 985A3C433D7;
- Thu,  6 Oct 2022 15:17:31 +0000 (UTC)
+ Thu,  6 Oct 2022 15:22:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FE2AC433D6;
+ Thu,  6 Oct 2022 15:22:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1665069452;
- bh=KegCTwo0J1NmVSUHYJsrfkLuZMLue/5Q/BnCKiVzIG4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=iv+t+pJV/ZO10pEjAgPvNfl170kGQjrQT6qUOel3yoUri9wZUrzU6VAIg0AW4QLsT
- 7Hi9WNBv468mKZQ8QXY4MUhZQi56qtbGCqlJ/JrZ/gM+eq7gzyLl2W69eTmcFzHpD8
- BLWK+SZbQBgsePXxJ7YUMCcCsOBlSPB88OKmBGI7PNRL1V+HxKqq7hD0l2IpNc5gZW
- 50DIoCg4HzCQb2705YZ4kKAg0a5nN0vtyFMoLdQcLs6lojUjn5AqoJkU0uMCiHGFdJ
- 75PyXhz6ZyzfQoB0x0MCZvXkHBubP+WQjWeddT9bCC4pCna4zVjt9dEBz1zruUWSJx
- u2S3Fk8y2L18w==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Thu,  6 Oct 2022 23:17:27 +0800
-Message-Id: <20221006151727.58380-2-chao@kernel.org>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20221006151727.58380-1-chao@kernel.org>
-References: <20221006151727.58380-1-chao@kernel.org>
+ s=k20201202; t=1665069733;
+ bh=CModKETgYOkafd4EANscH8/Tpa5llX0IY6NQ27y7+Kk=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=VGet30b3RjlQiI7T0SQAhuRJybLu8POV5c/gm9zW8xjBLq8BMpDtiMWSqLKUP54tV
+ FnLkw4IGRasubvbsbccx9Q/qW1u0jvpTNJrUr02gjlg6ZAx1H4jv+sMq8o8qwZe6oN
+ CUqvkEb/T5fdIk7sJeS3mtbaVBb1FyKfbC22QRxxsX842wDM86BoiW3i12pnr5+dvH
+ Yk7jFrSHfsh5fJ04qpeF7a8frJFWDZ70gHKn9Vt6F7TqqegbZa6//6h3DCv8V4qfA4
+ +bhyx7mkJQe/ZhtInSu4Ps013XKmYqrp0PICU9x7Tyz7hij/XFgx6DtYeLzF6KDrU4
+ VwKuGVn8RDqrA==
+Message-ID: <a7f3c427-f312-1f80-e989-243a49b7eab9@kernel.org>
+Date: Thu, 6 Oct 2022 23:22:10 +0800
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20220925055802.11955-1-chao@kernel.org>
+ <YzMnm4vx7dxb+vAA@google.com>
+ <f8be286d-a3d9-2426-ab79-34d5c6e80a9c@kernel.org>
+ <YzO8P7/XM4OckVSp@google.com>
+ <7387ba71-46bd-aed9-d435-f234f486a7a0@kernel.org>
+ <YzXjrn7oZzVmUz/n@google.com>
+ <45e56fa9-de7a-7858-f032-4433adb2b021@kernel.org>
+ <YzduzKQN3xTg1cqh@google.com>
+ <d42b88ab-39b6-71ba-a891-5d3a82b486d9@kernel.org>
+ <Yzo1krmcr4N58mg+@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <Yzo1krmcr4N58mg+@google.com>
+X-Spam-Score: -6.6 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In auto/preen mode, let's trigger repairing if filesystem
- has inconsistent errors. Signed-off-by: Chao Yu <chao@kernel.org> ---
- fsck/fsck.c | 8 ++++++-- fsck/fsck.h | 1 + fsck/mount.c | 52
- ++++++++++++++++++++++++++++++++++++++++++++++-
- include/f2fs_fs.h | 26 +++++++++++++++++++++++ [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 2022/10/3 9:06, Jaegeuk Kim wrote: > On 10/01, Chao Yu
+ wrote: >> On 2022/10/1 6:33, Jaegeuk Kim wrote: >>> On 09/30, Chao Yu wrote:
+ >>>> On 2022/9/30 2:27, Jaegeuk Kim wrote: >>>>> On 09/28, Chao Y [...] 
+ Content analysis details:   (-6.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -90,10 +99,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ogSd0-00EpD3-6f
-Subject: [f2fs-dev] [PATCH 2/2] fsck.f2fs: trigger repairing if filesystem
- has inconsistent errors
+ valid -1.4 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ogShZ-0007PQ-6Q
+Subject: Re: [f2fs-dev] [PATCH] mkfs.f2fs: update allocation policy for ro
+ feature
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,198 +116,208 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In auto/preen mode, let's trigger repairing if filesystem has
-inconsistent errors.
+On 2022/10/3 9:06, Jaegeuk Kim wrote:
+> On 10/01, Chao Yu wrote:
+>> On 2022/10/1 6:33, Jaegeuk Kim wrote:
+>>> On 09/30, Chao Yu wrote:
+>>>> On 2022/9/30 2:27, Jaegeuk Kim wrote:
+>>>>> On 09/28, Chao Yu wrote:
+>>>>>> On 2022/9/28 11:15, Jaegeuk Kim wrote:
+>>>>>>> On 09/28, Chao Yu wrote:
+>>>>>>>> On 2022/9/28 0:40, Jaegeuk Kim wrote:
+>>>>>>>>> On 09/25, Chao Yu wrote:
+>>>>>>>>>> Update allocation policy for ro feature:
+>>>>>>>>>> - hot_data: allocating blocks by LBA ascending order
+>>>>>>>>>> - hot_node: allocating blocks by LBA descending order
+>>>>>>>>>
+>>>>>>>>> This will increase the RO image size.
+>>>>>>>>
+>>>>>>>> Shouldn't RO image has fixed-size during mkfs?
+>>>>>>>
+>>>>>>> First run gives the reduced size information, and second round makes the image
+>>>>>>> with the required size.
+>>>>>>
+>>>>>> I didn't get it, in which step it may increase the RO image size?
+>>>>>>
+>>>>>> IIUC, after we apply this patch, reduced size information won't change due
+>>>>>> to that after sload in first run, total used block count should be fixed?
+>>>>>
+>>>>> First run fills the data and leaves the maximum LBA touched in the image. Then,
+>>>>
+>>>> How about caclulating required size w/ total used blocks rather than maximum LBA?
+>>>
+>>> Do you think that can give the smallest size for the image?
+>>
+>> I guess so, but let me do some tests to check that.
+>>
+>> Segments for data block and node block should be calculated separately:
+>> required_blks = roundup(data_blks, blks_per_seg) + roundup(node_blks, blks_per_seg)
+>>
+>> Am I missing something?
+> 
+> I think that'd be fine tho, please test first.
+
+I did some tests, seems above method works... but original implementation
+may have bug, could you please check below patch:
+
+ From 757d8f5191e21065f0c914512c17f963e5a17945 Mon Sep 17 00:00:00 2001
+From: Chao Yu <chao@kernel.org>
+Date: Thu, 6 Oct 2022 22:09:38 +0800
+Subject: [PATCH] sload.f2fs: fix to calculate max size correctly
+
+Max image size should be calculated with round_up().
+
+- dd if=/dev/zero of=img bs=1M count=512
+- mkfs.f2fs -O ro -f img
+
+a) sload.f2fs -f <kernel_path>/kernel/ img
+b) sload.f2fs -f <kernel_path>/mm/ img
+c) sload.f2fs -f <kernel_path>/include/ img
+
+Before:
+[FSCK] Max image size: 48 MB, Free space: 462 MB
+[FSCK] Max image size: 25 MB, Free space: 485 MB
+[FSCK] Max image size: 112 MB, Free space: 398 MB
+
+After:
+[FSCK] Max image size: 50 MB, Free space: 460 MB
+[FSCK] Max image size: 26 MB, Free space: 484 MB
+[FSCK] Max image size: 114 MB, Free space: 396 MB
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fsck/fsck.c       |  8 ++++++--
- fsck/fsck.h       |  1 +
- fsck/mount.c      | 52 ++++++++++++++++++++++++++++++++++++++++++++++-
- include/f2fs_fs.h | 26 +++++++++++++++++++++++-
- 4 files changed, 83 insertions(+), 4 deletions(-)
+  fsck/f2fs.h        | 2 ++
+  fsck/fsck.c        | 9 ++++++---
+  include/f2fs_fs.h  | 6 ++++--
+  mkfs/f2fs_format.c | 3 ++-
+  4 files changed, 14 insertions(+), 6 deletions(-)
+
+diff --git a/fsck/f2fs.h b/fsck/f2fs.h
+index 030d750..88b98f9 100644
+--- a/fsck/f2fs.h
++++ b/fsck/f2fs.h
+@@ -420,6 +420,8 @@ static inline block_t __end_block_addr(struct f2fs_sb_info *sbi)
+  	return end + le64_to_cpu(F2FS_RAW_SUPER(sbi)->block_count);
+  }
+
++#define BLKS_PER_SEC(sbi)						\
++		((sbi)->segs_per_sec * (sbi)->blocks_per_seg)
+  #define GET_ZONENO_FROM_SEGNO(sbi, segno)                               \
+  	((segno / sbi->segs_per_sec) / sbi->secs_per_zone)
 
 diff --git a/fsck/fsck.c b/fsck/fsck.c
-index db14859..036a834 100644
+index b1b6722..f6ff986 100644
 --- a/fsck/fsck.c
 +++ b/fsck/fsck.c
-@@ -3368,10 +3368,14 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 			write_checkpoints(sbi);
- 		}
- 
--		if (c.abnormal_stop) {
-+		if (c.abnormal_stop)
- 			memset(sb->s_stop_reason, 0, MAX_STOP_REASON);
+@@ -3179,6 +3179,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+  	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
+  	struct hard_link_node *node = NULL;
+  	bool verify_failed = false;
++	uint64_t max_size, free_size;
+
+  	if (c.show_file_map)
+  		return 0;
+@@ -3229,10 +3230,12 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+  		}
+  		c.bug_on = 1;
+  	}
 +
-+		if (c.fs_errors)
-+			memset(sb->s_errors, 0, MAX_F2FS_ERRORS);
-+
-+		if (c.abnormal_stop || c.fs_errors)
- 			update_superblock(sb, SB_MASK_ALL);
--		}
- 
- 		/* to return FSCK_ERROR_CORRECTED */
- 		ret = 0;
-diff --git a/fsck/fsck.h b/fsck/fsck.h
-index 6f0b019..939450f 100644
---- a/fsck/fsck.h
-+++ b/fsck/fsck.h
-@@ -238,6 +238,7 @@ extern void update_nat_blkaddr(struct f2fs_sb_info *, nid_t, nid_t, block_t);
- 
- extern void print_raw_sb_info(struct f2fs_super_block *);
- extern bool is_checkpoint_stop(struct f2fs_super_block *, bool);
-+extern bool is_inconsistent_error(struct f2fs_super_block *);
- extern pgoff_t current_nat_addr(struct f2fs_sb_info *, nid_t, int *);
- 
- extern u32 get_free_segments(struct f2fs_sb_info *);
-diff --git a/fsck/mount.c b/fsck/mount.c
-index 6b21625..0597220 100644
---- a/fsck/mount.c
-+++ b/fsck/mount.c
-@@ -611,6 +611,42 @@ void print_sb_stop_reason(struct f2fs_super_block *sb)
- 	MSG(0, "\n");
- }
- 
-+static char *errors_str[] = {
-+	[ERROR_CORRUPTED_CLUSTER]		= "corrupted_cluster",
-+	[ERROR_FAIL_DECOMPRESSION]		= "fail_decompression",
-+	[ERROR_INVALID_BLKADDR]			= "invalid_blkaddr",
-+	[ERROR_CORRUPTED_DIRENT]		= "corrupted_dirent",
-+	[ERROR_CORRUPTED_INODE]			= "corrupted_inode",
-+	[ERROR_INCONSISTENT_SUMMARY]		= "inconsistent_summary",
-+	[ERROR_INCONSISTENT_FOOTER]		= "inconsistent_footer",
-+	[ERROR_INCONSISTENT_SUM_TYPE]		= "inconsistent_sum_type",
-+	[ERROR_CORRUPTED_JOURNAL]		= "corrupted_journal",
-+	[ERROR_INCONSISTENT_NODE_COUNT]		= "inconsistent_node_count",
-+	[ERROR_INCONSISTENT_BLOCK_COUNT]	= "inconsistent_block_count",
-+	[ERROR_INVALID_CURSEG]			= "invalid_curseg",
-+	[ERROR_INCONSISTENT_SIT]		= "inconsistent_sit",
-+	[ERROR_CORRUPTED_VERITY_XATTR]		= "corrupted_verity_xattr",
-+	[ERROR_CORRUPTED_XATTR]			= "corrupted_xattr",
-+};
-+
-+void print_sb_errors(struct f2fs_super_block *sb)
-+{
-+	u8 *errors = sb->s_errors;
-+	int i;
-+
-+	if (!c.fs_errors)
-+		return;
-+
-+	MSG(0, "Info: fs errors: ");
-+
-+	for (i = 0; i < ERROR_MAX; i++) {
-+		if (test_bit_le(i, errors))
-+			MSG(0, "%s ",  errors_str[i]);
-+	}
-+
-+	MSG(0, "\n");
-+}
-+
- bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
- 					block_t blkaddr, int type)
- {
-@@ -996,12 +1032,14 @@ int validate_super_block(struct f2fs_sb_info *sbi, enum SB_ADDR sb_addr)
- 
- 		c.force_stop = is_checkpoint_stop(sbi->raw_super, false);
- 		c.abnormal_stop = is_checkpoint_stop(sbi->raw_super, true);
-+		c.fs_errors = is_inconsistent_error(sbi->raw_super);
- 
- 		MSG(0, "Info: MKFS version\n  \"%s\"\n", c.init_version);
- 		MSG(0, "Info: FSCK version\n  from \"%s\"\n    to \"%s\"\n",
- 					c.sb_version, c.version);
- 		print_sb_state(sbi->raw_super);
- 		print_sb_stop_reason(sbi->raw_super);
-+		print_sb_errors(sbi->raw_super);
- 		return 0;
- 	}
- 
-@@ -1247,6 +1285,18 @@ bool is_checkpoint_stop(struct f2fs_super_block *sb, bool abnormal)
- 	return false;
- }
- 
-+bool is_inconsistent_error(struct f2fs_super_block *sb)
-+{
-+	int i;
-+
-+	for (i = 0; i < MAX_F2FS_ERRORS; i++) {
-+		if (sb->s_errors[i])
-+			return true;
-+	}
-+
-+	return false;
-+}
-+
- /*
-  * For a return value of 1, caller should further check for c.fix_on state
-  * and take appropriate action.
-@@ -1256,7 +1306,7 @@ static int f2fs_should_proceed(struct f2fs_super_block *sb, u32 flag)
- 	if (!c.fix_on && (c.auto_fix || c.preen_mode)) {
- 		if (flag & CP_FSCK_FLAG ||
- 			flag & CP_QUOTA_NEED_FSCK_FLAG ||
--			c.abnormal_stop ||
-+			c.abnormal_stop || c.fs_errors ||
- 			(exist_qf_ino(sb) && (flag & CP_ERROR_FLAG))) {
- 			c.fix_on = 1;
- 		} else if (!c.preen_mode) {
++	max_size = round_up(c.max_size, sbi->blocksize * BLKS_PER_SEC(sbi));
++	free_size = SM_I(sbi)->segment_count * sbi->blocks_per_seg *
++				sbi->blocksize - max_size;
+  	printf("[FSCK] Max image size: %"PRIu64" MB, Free space: %u MB\n",
+-		c.max_size >> 20,
+-		(sbi->user_block_count - sbi->total_valid_block_count) >>
+-		(20 - F2FS_BLKSIZE_BITS));
++					max_size >> 20, free_size >> 20);
+  	printf("[FSCK] Unreachable nat entries                       ");
+  	if (nr_unref_nid == 0x0) {
+  		printf(" [Ok..] [0x%x]\n", nr_unref_nid);
 diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 424eaad..5fa9931 100644
+index 509d75a..0a99717 100644
 --- a/include/f2fs_fs.h
 +++ b/include/f2fs_fs.h
-@@ -510,6 +510,7 @@ struct f2fs_configuration {
- 	int bug_on;
- 	int force_stop;
- 	int abnormal_stop;
-+	int fs_errors;
- 	int bug_nat_bits;
- 	bool quota_fixed;
- 	int alloc_failed;
-@@ -773,6 +774,28 @@ enum stop_cp_reason {
- 
- #define	MAX_STOP_REASON			32
- 
-+/* detail reason for EFSCORRUPTED */
-+enum f2fs_error {
-+	ERROR_CORRUPTED_CLUSTER,
-+	ERROR_FAIL_DECOMPRESSION,
-+	ERROR_INVALID_BLKADDR,
-+	ERROR_CORRUPTED_DIRENT,
-+	ERROR_CORRUPTED_INODE,
-+	ERROR_INCONSISTENT_SUMMARY,
-+	ERROR_INCONSISTENT_FOOTER,
-+	ERROR_INCONSISTENT_SUM_TYPE,
-+	ERROR_CORRUPTED_JOURNAL,
-+	ERROR_INCONSISTENT_NODE_COUNT,
-+	ERROR_INCONSISTENT_BLOCK_COUNT,
-+	ERROR_INVALID_CURSEG,
-+	ERROR_INCONSISTENT_SIT,
-+	ERROR_CORRUPTED_VERITY_XATTR,
-+	ERROR_CORRUPTED_XATTR,
-+	ERROR_MAX,
-+};
-+
-+#define MAX_F2FS_ERRORS			16
-+
- struct f2fs_super_block {
- 	__le32 magic;			/* Magic Number */
- 	__le16 major_ver;		/* Major Version */
-@@ -818,7 +841,8 @@ struct f2fs_super_block {
- 	__le16  s_encoding;		/* Filename charset encoding */
- 	__le16  s_encoding_flags;	/* Filename charset encoding flags */
- 	__u8 s_stop_reason[MAX_STOP_REASON];	/* stop checkpoint reason */
--	__u8 reserved[274];		/* valid reserved region */
-+	__u8 s_errors[MAX_F2FS_ERRORS];		/* reason of image corrupts */
-+	__u8 reserved[258];		/* valid reserved region */
- 	__le32 crc;			/* checksum of superblock */
- };
- 
+@@ -663,7 +663,8 @@ struct f2fs_configuration {
+  	(void) (&_max1 == &_max2);		\
+  	_max1 > _max2 ? _max1 : _max2; })
+
+-#define round_up(x, y)		(((x) + (y) - 1) / (y))
++#define div_round_up(x, y)		(((x) + (y) - 1) / (y))
++#define round_up(x, y)			(div_round_up(x, y) * (y))
+  /*
+   * Copied from fs/f2fs/f2fs.h
+   */
+@@ -1592,7 +1593,8 @@ static inline double get_best_overprovision(struct f2fs_super_block *sb)
+
+  	for (; candidate <= end; candidate += diff) {
+  		reserved = (2 * (100 / candidate + 1) + 6) *
+-				round_up(usable_main_segs, get_sb(section_count));
++				div_round_up(usable_main_segs,
++						get_sb(section_count));
+  		ovp = (usable_main_segs - reserved) * candidate / 100;
+  		space = usable_main_segs - reserved - ovp;
+  		if (max_space < space) {
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index 40ac589..14f5534 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -485,7 +485,8 @@ static int f2fs_prepare_super_block(void)
+
+  	c.reserved_segments =
+  			(2 * (100 / c.overprovision + 1) + NR_CURSEG_TYPE) *
+-			round_up(f2fs_get_usable_segments(sb), get_sb(section_count));
++			div_round_up(f2fs_get_usable_segments(sb),
++						get_sb(section_count));
+
+  	if (c.feature & cpu_to_le32(F2FS_FEATURE_RO)) {
+  		c.overprovision = 0;
 -- 
 2.36.1
 
+> 
+>>
+>> Thanks,
+>>
+>>>
+>>>>
+>>>> Thanks,
+>>>>
+>>>>> it'll resize the image file and run again with the smallest image.
+>>>>>
+>>>>>>
+>>>>>> Thanks,
+>>>>>>
+>>>>>>>
+>>>>>>>>
+>>>>>>>>>
+>>>>>>>>>>
+>>>>>>>>>> Signed-off-by: Chao Yu <chao@kernel.org>
+>>>>>>>>>> ---
+>>>>>>>>>>       mkfs/f2fs_format.c | 4 ++--
+>>>>>>>>>>       1 file changed, 2 insertions(+), 2 deletions(-)
+>>>>>>>>>>
+>>>>>>>>>> diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+>>>>>>>>>> index 40ac589..8d0f410 100644
+>>>>>>>>>> --- a/mkfs/f2fs_format.c
+>>>>>>>>>> +++ b/mkfs/f2fs_format.c
+>>>>>>>>>> @@ -544,10 +544,10 @@ static int f2fs_prepare_super_block(void)
+>>>>>>>>>>       	}
+>>>>>>>>>>       	if (c.feature & cpu_to_le32(F2FS_FEATURE_RO)) {
+>>>>>>>>>> -		c.cur_seg[CURSEG_HOT_NODE] = 0;
+>>>>>>>>>> +		c.cur_seg[CURSEG_HOT_NODE] = last_section(last_zone(total_zones));
+>>>>>>>>>>       		c.cur_seg[CURSEG_WARM_NODE] = 0;
+>>>>>>>>>>       		c.cur_seg[CURSEG_COLD_NODE] = 0;
+>>>>>>>>>> -		c.cur_seg[CURSEG_HOT_DATA] = 1;
+>>>>>>>>>> +		c.cur_seg[CURSEG_HOT_DATA] = 0;
+>>>>>>>>>>       		c.cur_seg[CURSEG_COLD_DATA] = 0;
+>>>>>>>>>>       		c.cur_seg[CURSEG_WARM_DATA] = 0;
+>>>>>>>>>>       	} else if (c.heap) {
+>>>>>>>>>> -- 
+>>>>>>>>>> 2.36.1
 
 
 _______________________________________________
