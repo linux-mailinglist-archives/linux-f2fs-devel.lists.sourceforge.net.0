@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6194E5F609B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 07:29:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4571D5F6037
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 06:39:24 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ogJRK-0001vv-Qo;
-	Thu, 06 Oct 2022 05:28:58 +0000
+	id 1ogIfG-0000xU-Gp;
+	Thu, 06 Oct 2022 04:39:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <keescook@chromium.org>) id 1ogJRH-0001vh-PQ
+ (envelope-from <keescook@chromium.org>) id 1ogIfF-0000xK-5O
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 05:28:55 +0000
+ Thu, 06 Oct 2022 04:39:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+S5GQGZ6/D/Mg+joUObE0SvwDFyqkvRT2sP5/5vRQvk=; b=gJ2s6yL9xY5hg8+Gn/cBsX8M5a
- jyy4Ntc1uaGhaejNHZey8NF/Idhh8jo4YOGYGYikepAZodN9lwAHl/mlRWH5P4mnDaiVXABmgLaTT
- saEd/ZHj4QxV07Bj9DG8pMchDJucU1qSLVJT4umBuqMYjncPJXF0gqq1BVzVEn2LWkik=;
+ bh=y1Ewt823HoXUJ+RVCiU5hfekdC+9m7ghxyBCLtj1eUk=; b=C1xX60D4b5etIf/gbVDwsRdCR4
+ rhKw2CCz+PNJq0YDO9Ui92Be8KGq5YWtI3Wev/mfjBAbKQPVbrSOc5FtYqGR3XWv0InLlg0g1Dhjk
+ uxwCFwy9dIjHsnZM1c+Dfq+njQPi2rgGap7y2q9SjmPAvG3xgcfnLgWGeP0o4lprYWDo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,55 +31,56 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+S5GQGZ6/D/Mg+joUObE0SvwDFyqkvRT2sP5/5vRQvk=; b=UU5aLFLjfG73CUNaZGH0zF55vS
- HCWkQc7VvTOyKqvb33e/yV9bEcFrqqnkVLf9F+iB1kczT2neoVJu5o6Os1cpxsS12g275WtDY0eh2
- mLNueIkEGZTqv3VDO+32lPocM4lrrVcdJVrr4czP5JK/S/IoOjRaZQai660qG1eibg1E=;
-Received: from mail-qv1-f46.google.com ([209.85.219.46])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=y1Ewt823HoXUJ+RVCiU5hfekdC+9m7ghxyBCLtj1eUk=; b=E1o0cKyBmtCavCoGDNd0m80c+Z
+ MnUVdTMRS8fLk14m/P+7m5wt6y20VW76MI5P2NL7oBJKNjNV/cWJnNe+I9T7JMHPPXv2PrBZvUNI4
+ ncjMskibSWS67v00ojIa9qRnCJZe2sCaLGr3Zg1gJ7ZnSH1ei2/ItKCEFqGcOf0ZTAto=;
+Received: from mail-pj1-f43.google.com ([209.85.216.43])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ogJRD-00ELMV-Rc for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 05:28:55 +0000
-Received: by mail-qv1-f46.google.com with SMTP id df9so566187qvb.9
+ id 1ogIfB-00077U-Fj for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 06 Oct 2022 04:39:17 +0000
+Received: by mail-pj1-f43.google.com with SMTP id
+ v10-20020a17090a634a00b00205e48cf845so3260448pjs.4
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 05 Oct 2022 22:28:51 -0700 (PDT)
+ Wed, 05 Oct 2022 21:39:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date;
- bh=+S5GQGZ6/D/Mg+joUObE0SvwDFyqkvRT2sP5/5vRQvk=;
- b=FnhfzhzYXlNcl6IxqwADyyzc747mTy8MU4rkgJN+LmLi1BBuM+8meOEr2rKBNA5cdb
- UV5cg1R4d2Z6xBRg09lXiXAPPCtiRk0FnLoDXMxi1ZwCUSCYDye4OaZgSAusHDiISi0X
- vF5wP8hNjXz8Z2pcn3GjqjTxVus9QcfOT5k48=
+ bh=y1Ewt823HoXUJ+RVCiU5hfekdC+9m7ghxyBCLtj1eUk=;
+ b=Fcbv6b+yCuol0AU1mIs9HnAOz2/wjXtHru3VW95DL3V7mKymOrKADEfZ1NfF0xLiTB
+ LkCGzY8eutuXPS5+afbW7jf6o9DhcYADtCDqs8Qo8xeP+lYFZISv7p7XEeNAqavCs9/t
+ xtqe21TFW/x7aAqkAHw+ftHWXMel86ys26msI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
- bh=+S5GQGZ6/D/Mg+joUObE0SvwDFyqkvRT2sP5/5vRQvk=;
- b=t1KFAGovr1gn7jLI6JAD3XwFozS9B8BNMyVLZmLdCkrsiJ6m2S03p7+pR0WOFhlImf
- J5Lp1WfGa4VnZ4C+WfdcdDucrhL7crAAAva3rzaYgSWPp8U2L1ehN9Wcgwvz2/WuTZv5
- jAJHUe/uz1bmfVuQ0vUZs/x9JdUHtYO0HJ2+etTYOc2NhBWSMbTopP79eCrapIAfA+3T
- 3Xq3/5AwaMr+pG8bdFluaRLArwrvwXhLN/AjhrFymeM3RLg9R7cffVSfYU5X0VjNMlsP
- E2qH83k1dhCV4weA6y3rOfDuR31QhPCxwQTW2RWoy6+fdV9Ac3sG9bTdRXJlprUbK1EW
- dHhg==
-X-Gm-Message-State: ACrzQf2pyQOY24ZXc2l0/reuLvT+1CtHekq9M+m/SfWfZtkZ6WmxfD+1
- /tk6nXM8UMzPGLKbwoQXOFErFp7P08Fvg8Uf
-X-Google-Smtp-Source: AMsMyM5wQShENjZofrpCE9JXF1y8+Mj33eJ2Bpuqg3wBtAV3umQgBeXMs02cH4EGpzIndWjF3gW38w==
-X-Received: by 2002:a17:902:db0a:b0:178:2636:b6de with SMTP id
- m10-20020a170902db0a00b001782636b6demr2822346plx.58.1665031085103; 
- Wed, 05 Oct 2022 21:38:05 -0700 (PDT)
+ bh=y1Ewt823HoXUJ+RVCiU5hfekdC+9m7ghxyBCLtj1eUk=;
+ b=3+brRujfn/qRhSVdhlzsFuVqADbTwQUhpHy2pjRKOpeMP4vtS2cthmK5j+G9rGzCs+
+ 0ERAv3dVNyDtjTenD0LbMiYhMOnf5dst63Q31uxz0VxW4GPnF83jaao4T2CTwTwfxEZ8
+ wiejWfHmu9lo6LTGABfXZScKKuegd3X11kLEl5Q742nMNYe4T6vIIRcIbfMjbgjOQERm
+ V4oAzs+JbwS/ZN+Prh9RrdjDsnk51Ka4Kn9c9QfSN4yYsmIvzidAYnNdj8Xhu7q/R99x
+ 6UXjCFWEvgeX78URMYh1+T7FAc4MEF1oBdHkm0D4RIm26u0Mf1DahlojaJQEBy1Rg3bX
+ Zchg==
+X-Gm-Message-State: ACrzQf0C6WTa2ajQp/esepscVG28BjTYt4d9LQROSbrvpoU5KP1RUWS3
+ c9bemVg79qCTdL+x3mIbAKzTNA==
+X-Google-Smtp-Source: AMsMyM60ELYmxh+A5d0x30z3COx8LaynKqt9bJxGAbjfrLwodOIKXzOKJgIYAS8Aw4fmck7UQns81A==
+X-Received: by 2002:a17:902:db0f:b0:176:e70f:6277 with SMTP id
+ m15-20020a170902db0f00b00176e70f6277mr2639160plx.13.1665031147915; 
+ Wed, 05 Oct 2022 21:39:07 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
  by smtp.gmail.com with ESMTPSA id
- l18-20020a17090aaa9200b001fd8316db51sm1928521pjq.7.2022.10.05.21.38.03
+ d12-20020a634f0c000000b00439d071c110sm673132pgb.43.2022.10.05.21.39.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Oct 2022 21:38:03 -0700 (PDT)
-Date: Wed, 5 Oct 2022 21:38:02 -0700
+ Wed, 05 Oct 2022 21:39:06 -0700 (PDT)
+Date: Wed, 5 Oct 2022 21:39:03 -0700
 From: Kees Cook <keescook@chromium.org>
 To: "Jason A. Donenfeld" <Jason@zx2c4.com>
-Message-ID: <202210052126.B34A2C62@keescook>
+Message-ID: <202210052138.A585E4CC@keescook>
 References: <20221005214844.2699-1-Jason@zx2c4.com>
- <20221005214844.2699-3-Jason@zx2c4.com>
+ <20221005214844.2699-6-Jason@zx2c4.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20221005214844.2699-3-Jason@zx2c4.com>
+In-Reply-To: <20221005214844.2699-6-Jason@zx2c4.com>
 X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -87,16 +88,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Oct 05, 2022 at 11:48:41PM +0200, Jason A. Donenfeld
- wrote: > Rather than truncate a 32-bit value to a 16-bit value or an 8-bit
- value, > simply use the get_random_{u8,u16}() functions, which a [...] 
+ Content preview:  On Wed, Oct 05, 2022 at 11:48:44PM +0200, Jason A. Donenfeld
+ wrote: > With no callers left of prandom_u32() and prandom_bytes(), remove
+ these > deprecated wrappers. > > Signed-off-by: Jason A. Donenfe [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.219.46 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.219.46 listed in list.dnswl.org]
+ no trust [209.85.216.43 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.43 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -106,10 +107,10 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ogJRD-00ELMV-Rc
-Subject: Re: [f2fs-dev] [PATCH v1 2/5] treewide: use get_random_{u8,
- u16}() when possible
+X-Headers-End: 1ogIfB-00077U-Fj
+Subject: Re: [f2fs-dev] [PATCH v1 5/5] prandom: remove unused functions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -234,78 +235,11 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Oct 05, 2022 at 11:48:41PM +0200, Jason A. Donenfeld wrote:
-> Rather than truncate a 32-bit value to a 16-bit value or an 8-bit value,
-> simply use the get_random_{u8,u16}() functions, which are faster than
-> wasting the additional bytes from a 32-bit value.
+On Wed, Oct 05, 2022 at 11:48:44PM +0200, Jason A. Donenfeld wrote:
+> With no callers left of prandom_u32() and prandom_bytes(), remove these
+> deprecated wrappers.
 > 
 > Signed-off-by: Jason A. Donenfeld <Jason@zx2c4.com>
-
-Same question about "mechanism of transformation".
-
-> diff --git a/drivers/net/ethernet/chelsio/inline_crypto/chtls/chtls_cm.c b/drivers/net/ethernet/chelsio/inline_crypto/chtls/chtls_cm.c
-> index ddfe9208529a..ac452a0111a9 100644
-> --- a/drivers/net/ethernet/chelsio/inline_crypto/chtls/chtls_cm.c
-> +++ b/drivers/net/ethernet/chelsio/inline_crypto/chtls/chtls_cm.c
-> @@ -1467,7 +1467,7 @@ static void make_established(struct sock *sk, u32 snd_isn, unsigned int opt)
->  	tp->write_seq = snd_isn;
->  	tp->snd_nxt = snd_isn;
->  	tp->snd_una = snd_isn;
-> -	inet_sk(sk)->inet_id = prandom_u32();
-> +	inet_sk(sk)->inet_id = get_random_u16();
->  	assign_rxopt(sk, opt);
->  
->  	if (tp->rcv_wnd > (RCV_BUFSIZ_M << 10))
-
-This one I had to go look at -- inet_id is u16, so yeah. :)
-
-> diff --git a/lib/test_vmalloc.c b/lib/test_vmalloc.c
-> index 56ffaa8dd3f6..0131ed2cd1bd 100644
-> --- a/lib/test_vmalloc.c
-> +++ b/lib/test_vmalloc.c
-> @@ -80,7 +80,7 @@ static int random_size_align_alloc_test(void)
->  	int i;
->  
->  	for (i = 0; i < test_loop_count; i++) {
-> -		rnd = prandom_u32();
-> +		rnd = get_random_u8();
->  
->  		/*
->  		 * Maximum 1024 pages, if PAGE_SIZE is 4096.
-
-This wasn't obvious either, but it looks like it's because it never
-consumes more than u8?
-
-> diff --git a/net/netfilter/nf_nat_core.c b/net/netfilter/nf_nat_core.c
-> index 7981be526f26..57c7686ac485 100644
-> --- a/net/netfilter/nf_nat_core.c
-> +++ b/net/netfilter/nf_nat_core.c
-> @@ -468,7 +468,7 @@ static void nf_nat_l4proto_unique_tuple(struct nf_conntrack_tuple *tuple,
->  	if (range->flags & NF_NAT_RANGE_PROTO_OFFSET)
->  		off = (ntohs(*keyptr) - ntohs(range->base_proto.all));
->  	else
-> -		off = prandom_u32();
-> +		off = get_random_u16();
->  
->  	attempts = range_size;
-
-Yup, u16 off;
-
-> diff --git a/net/sched/sch_sfb.c b/net/sched/sch_sfb.c
-> index 2829455211f8..7eb70acb4d58 100644
-> --- a/net/sched/sch_sfb.c
-> +++ b/net/sched/sch_sfb.c
-> @@ -379,7 +379,7 @@ static int sfb_enqueue(struct sk_buff *skb, struct Qdisc *sch,
->  		goto enqueue;
->  	}
->  
-> -	r = prandom_u32() & SFB_MAX_PROB;
-> +	r = get_random_u16() & SFB_MAX_PROB;
->  
->  	if (unlikely(r < p_min)) {
->  		if (unlikely(p_min > SFB_MAX_PROB / 2)) {
-
-include/uapi/linux/pkt_sched.h:#define SFB_MAX_PROB 0xFFFF
 
 Reviewed-by: Kees Cook <keescook@chromium.org>
 
