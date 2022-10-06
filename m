@@ -2,102 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF39F5F673B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 15:06:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A239B5F6740
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 15:06:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ogQZq-0001jo-Dd;
-	Thu, 06 Oct 2022 13:06:14 +0000
+	id 1ogQaK-0003O8-BD;
+	Thu, 06 Oct 2022 13:06:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <andriy.shevchenko@linux.intel.com>)
- id 1ogQZe-0001jT-DA; Thu, 06 Oct 2022 13:06:07 +0000
+ (envelope-from <SRS0=tIOp=2H=zx2c4.com=Jason@kernel.org>)
+ id 1ogQaI-0003Nz-H2; Thu, 06 Oct 2022 13:06:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0ENsN90teNsuQpmekN7b+hdYLbg48hC1jdG1eR+cyBQ=; b=KcQYDmMwVEc4O6qGR2weV+w8Zx
- A5GhrtJbClpcTuDsdENxmLzNWWW50r1qHEoAIophu26tpsCfT7aFxzG6RF3idRbExRYYUDK8UvCe3
- 7PlY/oA4J4+MVDP4KweuFhTET9qWl7r5ZKL+J3hKIgIoXKaTkT7lyD1T9w+XI1SAY0YY=;
+ bh=pA8UwcaEH1EIaWBd+j+3kMQvSGVLEaIn/zvGprOy4bY=; b=d952pxw/AmDWAbcnLv1BVbpsP8
+ Bk5MG1tZVXiX2i+JdnhvcRwbLEmVVX7CczMmtBWvOWmMef9G+0Yi/C+EbxAAKH/wkvC8PMm/dI7Hn
+ AMD4KcNHwNlUsC+hBQibIk7BXNq8dJQTS+/Kjfkh9UAkZSQ8n3asc4WEhbvaKeDZAtNQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0ENsN90teNsuQpmekN7b+hdYLbg48hC1jdG1eR+cyBQ=; b=i2W1GFAXX5h/gBVwQFPAY2+wg4
- rW+ZvWzdvdZwaHomboYshI5gxToT4K2xrj9v/YNHGcBEmAaJLzPm5Cpij5UuVfPOCd2TzoiAPfEM8
- Vz76BVv+ad5UnCUZENttCQFsHymIK044gHaTa6x+ThJkmH3F0cLSmN4H/o11dvknl2Rs=;
-Received: from mga03.intel.com ([134.134.136.65])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=pA8UwcaEH1EIaWBd+j+3kMQvSGVLEaIn/zvGprOy4bY=; b=F4/VWD8VnL+SZikGeDrU4w9X5q
+ ZPfMKkwjfCtqIvALf2QNwBSKFZ4VcCGXCd/qsNjAika71o85DfkfqSoHjzrtGVVt/Heddo+nIjWyq
+ XK7GgmqlG0IjJ158qRM6e4FUV4zvfBJsb8OHsvQawHjWxOI3wkJE7dMrBYPghUTQc1t4=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ogQZd-00EiVu-8A; Thu, 06 Oct 2022 13:06:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1665061561; x=1696597561;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=FGTLdaiXSBCapn2JjYMa8Pm3byrwndmRCKrokbx26S8=;
- b=RJ4xz9xJXLhCVBiqAIf0QUhbMeuRW4kmqo0D2fUDgDiNO/551/oMPh4/
- 7Gs9NHulGrbI/j97CJaxqPgJPcjC4qViSrKaGg6KKfwOvCnbceWby/bmf
- TX8i5mEUraEgTYrWx1ZuPGccqzMhlmccEPpdZdpIkwfp6I8cjkAMB82jh
- z828S2ZLUo1Gfjk7ZynLBuvff/tNleSBiNvn7rp6pvfDBW7fFLaezMP07
- yl4OV+HqZjLLj8MYv0FdztpflBf7eM2PFT8Pv6DXGBrMkr98m9qNPyTWa
- Z9wDYH42I+Z96Hb8xPAc414gdD0K5CesH2usSF4YqX5HluC3MOUixVm8l Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10491"; a="305015846"
-X-IronPort-AV: E=Sophos;i="5.95,163,1661842800"; d="scan'208";a="305015846"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 06 Oct 2022 06:05:55 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10491"; a="575816142"
-X-IronPort-AV: E=Sophos;i="5.95,163,1661842800"; d="scan'208";a="575816142"
-Received: from smile.fi.intel.com ([10.237.72.54])
- by orsmga003.jf.intel.com with ESMTP; 06 Oct 2022 06:05:33 -0700
-Received: from andy by smile.fi.intel.com with local (Exim 4.96)
- (envelope-from <andriy.shevchenko@linux.intel.com>)
- id 1ogQZ0-0039VB-0C; Thu, 06 Oct 2022 16:05:22 +0300
-Date: Thu, 6 Oct 2022 16:05:21 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-Message-ID: <Yz7SkWBbabFQrecB@smile.fi.intel.com>
-References: <20221005214844.2699-1-Jason@zx2c4.com>
- <20221005214844.2699-2-Jason@zx2c4.com>
- <202210052035.A1020E3@keescook> <Yz7N5WsqmKiUl+6b@zx2c4.com>
- <Yz7QN3cbKABexzoB@ziepe.ca>
+ id 1ogQaG-0000IO-J6; Thu, 06 Oct 2022 13:06:41 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2569E61910;
+ Thu,  6 Oct 2022 13:06:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42354C433D7;
+ Thu,  6 Oct 2022 13:06:34 +0000 (UTC)
+Authentication-Results: smtp.kernel.org;
+ dkim=pass (1024-bit key) header.d=zx2c4.com header.i=@zx2c4.com
+ header.b="AuLKX8Dr"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zx2c4.com; s=20210105; 
+ t=1665061583;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=pA8UwcaEH1EIaWBd+j+3kMQvSGVLEaIn/zvGprOy4bY=;
+ b=AuLKX8DrexCaNcujtUc0wUOn6ZKYPxocCGUtsQ/xLo5zn9UlWE+se5mcJ1GdJKakmd68Cu
+ zFNfO+H4CDBOx88U2U8iDMf5m8nlkrM8e7vsoJOojyzr28eChFXzvAHcN4AVzZnJW4K0oJ
+ BdT+U8NEjgfOf1F1bQBHV1MnZd+JA8E=
+Received: by mail.zx2c4.com (ZX2C4 Mail Server) with ESMTPSA id d03c1642
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Thu, 6 Oct 2022 13:06:23 +0000 (UTC)
+Received: by mail-pj1-f54.google.com with SMTP id
+ o9-20020a17090a0a0900b0020ad4e758b3so1652247pjo.4; 
+ Thu, 06 Oct 2022 06:06:18 -0700 (PDT)
+X-Gm-Message-State: ACrzQf1qjgq+85Uas3cH5J6SGyDASfyfGlu982/sMWNiADRwLIFw5Z95
+ xH2UMFayOa65lEgxGxjRS9wIwJTTmTHQFQDib1g=
+X-Google-Smtp-Source: AMsMyM6FGZA2PC9dWVIDS+xWc3c+LtiQF9tezH4UggVMiZNKZxhMdBw8vpoz5pzuUaEI5CnlY9d0+H7OwJQF18qhy/U=
+X-Received: by 2002:a1f:e0c4:0:b0:3ab:191d:e135 with SMTP id
+ x187-20020a1fe0c4000000b003ab191de135mr2112405vkg.41.1665061560263; Thu, 06
+ Oct 2022 06:06:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Yz7QN3cbKABexzoB@ziepe.ca>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-X-Spam-Score: -2.4 (--)
+References: <20221005214844.2699-1-Jason@zx2c4.com>
+ <20221005214844.2699-4-Jason@zx2c4.com> <Yz7OdfKZeGkpZSKb@ziepe.ca>
+In-Reply-To: <Yz7OdfKZeGkpZSKb@ziepe.ca>
+Date: Thu, 6 Oct 2022 07:05:48 -0600
+X-Gmail-Original-Message-ID: <CAHmME9r_vNRFFjUvqx8QkBddg_kQU=FMgpk9TqOVZdvX6zXHNg@mail.gmail.com>
+Message-ID: <CAHmME9r_vNRFFjUvqx8QkBddg_kQU=FMgpk9TqOVZdvX6zXHNg@mail.gmail.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+X-Spam-Score: -4.9 (----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Oct 06, 2022 at 09:55:19AM -0300, Jason Gunthorpe
- wrote: > On Thu, Oct 06, 2022 at 06:45:25AM -0600, Jason A. Donenfeld wrote:
- > > On Wed, Oct 05, 2022 at 09:16:50PM -0700, Kees Cook wrote: > [...] 
- Content analysis details:   (-2.4 points, 6.0 required)
+ Content preview:  On Thu, Oct 6, 2022 at 6:47 AM Jason Gunthorpe <jgg@ziepe.ca>
+ wrote: > > On Wed, Oct 05, 2022 at 11:48:42PM +0200, Jason A. Donenfeld wrote:
+ > > > index 14392c942f49..499a425a3379 100644 > > --- a/dri [...] 
+ Content analysis details:   (-4.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [134.134.136.65 listed in list.dnswl.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ogQZd-00EiVu-8A
-Subject: Re: [f2fs-dev] [PATCH v1 1/5] treewide: use prandom_u32_max() when
+ valid
+X-Headers-End: 1ogQaG-0000IO-J6
+Subject: Re: [f2fs-dev] [PATCH v1 3/5] treewide: use get_random_u32() when
  possible
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -110,6 +114,9 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: "Jason A. Donenfeld via Linux-f2fs-devel"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: "Jason A. Donenfeld" <Jason@zx2c4.com>
 Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  Ulf Hansson <ulf.hansson@linaro.org>, dri-devel@lists.freedesktop.org,
  Andrii Nakryiko <andrii@kernel.org>, Hans Verkuil <hverkuil@xs4all.nl>,
@@ -135,12 +142,11 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  Jiri Olsa <jolsa@kernel.org>, Jan Kara <jack@suse.com>,
  linux-fsdevel@vger.kernel.org, Lars Ellenberg <lars.ellenberg@linbit.com>,
  linux-media@vger.kernel.org, Claudiu Beznea <claudiu.beznea@microchip.com>,
- Sharvari Harisangam <sharvari.harisangam@nxp.com>,
- "Jason A. Donenfeld" <Jason@zx2c4.com>, linux-doc@vger.kernel.org,
- linux-mmc@vger.kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
- Song Liu <song@kernel.org>, Eric Dumazet <edumazet@google.com>,
- target-devel@vger.kernel.org, John Stultz <jstultz@google.com>,
- Stanislav Fomichev <sdf@google.com>,
+ Sharvari Harisangam <sharvari.harisangam@nxp.com>, linux-fbdev@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-mmc@vger.kernel.org,
+ Dave Hansen <dave.hansen@linux.intel.com>, Song Liu <song@kernel.org>,
+ Eric Dumazet <edumazet@google.com>, target-devel@vger.kernel.org,
+ John Stultz <jstultz@google.com>, Stanislav Fomichev <sdf@google.com>,
  Gregory Greenman <gregory.greenman@intel.com>, drbd-dev@lists.linbit.com,
  dev@openvswitch.org, Leon Romanovsky <leon@kernel.org>,
  Helge Deller <deller@gmx.de>, Hugh Dickins <hughd@google.com>,
@@ -158,20 +164,20 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  Theodore Ts'o <tytso@mit.edu>, Stephen Boyd <sboyd@kernel.org>,
  Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>,
  Florian Westphal <fw@strlen.de>,
- Andreas =?iso-8859-1?Q?F=E4rber?= <afaerber@suse.de>,
+ =?UTF-8?Q?Andreas_F=C3=A4rber?= <afaerber@suse.de>,
  Jon Maloy <jmaloy@redhat.com>, Vlad Yasevich <vyasevich@gmail.com>,
  Anna Schumaker <anna@kernel.org>, Yehezkel Bernat <YehezkelShB@gmail.com>,
  Haoyue Xu <xuhaoyue1@hisilicon.com>, Heiner Kallweit <hkallweit1@gmail.com>,
  linux-wireless@vger.kernel.org,
  Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>, linux-fbdev@vger.kernel.org,
- linux-nvme@lists.infradead.org, Michal Januszewski <spock@gentoo.org>,
- linux-mtd@lists.infradead.org, kasan-dev@googlegroups.com,
- Cong Wang <xiyou.wangcong@gmail.com>, Thomas Sailer <t.sailer@alumni.ethz.ch>,
- Ajay Singh <ajay.kathat@microchip.com>, Sagi Grimberg <sagi@grimberg.me>,
- Daniel Borkmann <daniel@iogearbox.net>, Jonathan Corbet <corbet@lwn.net>,
- linux-rdma@vger.kernel.org, lvs-devel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>, linux-nvme@lists.infradead.org,
+ Michal Januszewski <spock@gentoo.org>, linux-mtd@lists.infradead.org,
+ kasan-dev@googlegroups.com, Cong Wang <xiyou.wangcong@gmail.com>,
+ Thomas Sailer <t.sailer@alumni.ethz.ch>,
+ Ajay Singh <ajay.kathat@microchip.com>, Xiubo Li <xiubli@redhat.com>,
+ Sagi Grimberg <sagi@grimberg.me>, Daniel Borkmann <daniel@iogearbox.net>,
+ Jonathan Corbet <corbet@lwn.net>, linux-rdma@vger.kernel.org,
+ lvs-devel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
  "Naveen N . Rao" <naveen.n.rao@linux.ibm.com>,
  Ilya Dryomov <idryomov@gmail.com>, Paolo Abeni <pabeni@redhat.com>,
  Pablo Neira Ayuso <pablo@netfilter.org>, Marco Elver <elver@google.com>,
@@ -189,7 +195,7 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  netdev@vger.kernel.org, Ying Xue <ying.xue@windriver.com>,
  Manish Rangankar <mrangankar@marvell.com>,
  "David S . Miller" <davem@davemloft.net>,
- Toke =?iso-8859-1?Q?H=F8iland-J=F8rgensen?= <toke@toke.dk>,
+ =?UTF-8?B?VG9rZSBIw7hpbGFuZC1Kw7hyZ2Vuc2Vu?= <toke@toke.dk>,
  Vignesh Raghavendra <vigneshr@ti.com>, Peter Zijlstra <peterz@infradead.org>,
  "H . Peter Anvin" <hpa@zytor.com>,
  Alexandre Torgue <alexandre.torgue@foss.st.com>,
@@ -209,13 +215,14 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  Michael Jamet <michael.jamet@intel.com>, Kalle Valo <kvalo@kernel.org>,
  Akinobu Mita <akinobu.mita@gmail.com>, linux-block@vger.kernel.org,
  dmaengine@vger.kernel.org, Hannes Reinecke <hare@suse.de>,
- Xiubo Li <xiubli@redhat.com>, Dmitry Vyukov <dvyukov@google.com>,
- Jens Axboe <axboe@kernel.dk>, cake@lists.bufferbloat.net,
- brcm80211-dev-list.pdl@broadcom.com, Yishai Hadas <yishaih@nvidia.com>,
- Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>, linuxppc-dev@lists.ozlabs.org,
- David Ahern <dsahern@kernel.org>, Philipp Reisner <philipp.reisner@linbit.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Dmitry Vyukov <dvyukov@google.com>, Jens Axboe <axboe@kernel.dk>,
+ cake@lists.bufferbloat.net, brcm80211-dev-list.pdl@broadcom.com,
+ Yishai Hadas <yishaih@nvidia.com>, Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>,
+ linuxppc-dev@lists.ozlabs.org, David Ahern <dsahern@kernel.org>,
+ Philipp Reisner <philipp.reisner@linbit.com>,
  Stephen Hemminger <stephen@networkplumber.org>,
- Christoph =?iso-8859-1?Q?B=F6hmwalder?= <christoph.boehmwalder@linbit.com>,
+ =?UTF-8?Q?Christoph_B=C3=B6hmwalder?= <christoph.boehmwalder@linbit.com>,
  Vinod Koul <vkoul@kernel.org>, tipc-discussion@lists.sourceforge.net,
  Thomas Graf <tgraf@suug.ch>, Johannes Berg <johannes@sipsolutions.net>,
  Sungjong Seo <sj1557.seo@samsung.com>, Martin KaFai Lau <martin.lau@linux.dev>
@@ -223,51 +230,48 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Oct 06, 2022 at 09:55:19AM -0300, Jason Gunthorpe wrote:
-> On Thu, Oct 06, 2022 at 06:45:25AM -0600, Jason A. Donenfeld wrote:
-> > On Wed, Oct 05, 2022 at 09:16:50PM -0700, Kees Cook wrote:
-> > > On Wed, Oct 05, 2022 at 11:48:40PM +0200, Jason A. Donenfeld wrote:
-> > > > Rather than incurring a division or requesting too many random bytes for
-> > > > the given range, use the prandom_u32_max() function, which only takes
-> > > > the minimum required bytes from the RNG and avoids divisions.
-> > > 
-> > > Yes please!
-> > > 
-> > > Since this is a treewide patch, it's helpful for (me at least) doing
-> > > reviews to detail the mechanism of the transformation.
-> > 
-> > This is hand done. There were also various wrong seds done. And then I'd
-> > edit the .diff manually, and then reapply it, as an iterative process.
-> > No internet on the airplane, and oddly no spatch already on my laptop (I
-> > think I had some Gentoo ocaml issues at some point and removed it?).
-> > 
-> > > e.g. I imagine this could be done with something like Coccinelle and
-> > 
-> > Feel free to check the work here by using Coccinelle if you're into
-> > that.
-> 
-> Generally these series are a lot easier to review if it is structured
-> as a patches doing all the unusual stuff that had to be by hand
-> followed by an unmodified Coccinelle/sed/etc handling the simple
-> stuff.
-> 
-> Especially stuff that is reworking the logic beyond simple
-> substitution should be one patch per subsystem not rolled into a giant
-> one patch conversion.
-> 
-> This makes the whole workflow better because the hand-done stuff can
-> have a chance to flow through subsystem trees.
+On Thu, Oct 6, 2022 at 6:47 AM Jason Gunthorpe <jgg@ziepe.ca> wrote:
+>
+> On Wed, Oct 05, 2022 at 11:48:42PM +0200, Jason A. Donenfeld wrote:
+>
+> > index 14392c942f49..499a425a3379 100644
+> > --- a/drivers/infiniband/hw/cxgb4/cm.c
+> > +++ b/drivers/infiniband/hw/cxgb4/cm.c
+> > @@ -734,7 +734,7 @@ static int send_connect(struct c4iw_ep *ep)
+> >                                  &ep->com.remote_addr;
+> >       int ret;
+> >       enum chip_type adapter_type = ep->com.dev->rdev.lldi.adapter_type;
+> > -     u32 isn = (prandom_u32() & ~7UL) - 1;
+> > +     u32 isn = (get_random_u32() & ~7UL) - 1;
+>
+> Maybe this wants to be written as
+>
+> (prandom_max(U32_MAX >> 7) << 7) | 7
+>
+> ?
 
-+1 to all arguments for the splitting.
+Holy smokes. Yea I guess maybe? It doesn't exactly gain anything or
+make the code clearer though, and is a little bit more magical than
+I'd like on a first pass.
 
-I looked a bit into the code I have the interest to, but I won't spam people
-with not-so-important questions / comments / tags, etc.
+>
+> > diff --git a/drivers/infiniband/ulp/ipoib/ipoib_cm.c b/drivers/infiniband/ulp/ipoib/ipoib_cm.c
+> > index fd9d7f2c4d64..a605cf66b83e 100644
+> > --- a/drivers/infiniband/ulp/ipoib/ipoib_cm.c
+> > +++ b/drivers/infiniband/ulp/ipoib/ipoib_cm.c
+> > @@ -465,7 +465,7 @@ static int ipoib_cm_req_handler(struct ib_cm_id *cm_id,
+> >               goto err_qp;
+> >       }
+> >
+> > -     psn = prandom_u32() & 0xffffff;
+> > +     psn = get_random_u32() & 0xffffff;
+>
+>  prandom_max(0xffffff + 1)
 
--- 
-With Best Regards,
-Andy Shevchenko
+That'd work, but again it's not more clear. Authors here are going for
+a 24-bit number, and masking seems like a clear way to express that.
 
-
+Jason
 
 
 _______________________________________________
