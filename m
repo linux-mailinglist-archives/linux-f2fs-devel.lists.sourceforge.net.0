@@ -2,28 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFC9B5F685C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 15:40:56 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CC725F66EA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Oct 2022 14:54:06 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ogR7N-0002Np-34;
-	Thu, 06 Oct 2022 13:40:53 +0000
+	id 1ogQO1-00034D-7G;
+	Thu, 06 Oct 2022 12:54:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jgg@ziepe.ca>) id 1ogR7M-0002Nj-1A
- for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 13:40:52 +0000
+ (envelope-from <SRS0=tIOp=2H=zx2c4.com=Jason@kernel.org>)
+ id 1ogQO0-000344-5X; Thu, 06 Oct 2022 12:54:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eLAvQxPTrW61bFz1sANG5Y81u18aSgNqwRKiQkasIrQ=; b=Zs4PMNWUJ8Gt2N929ZMYSypF0a
- 34CSqGZTg+hN99W5bNcUifDKI0Sz/JB+GI6jDxUXNYoRQH0vm0cGlxVhGSi76m3BCsyDpPj4Dqmpz
- 2hsIXICsi1XhcufndzsXWOtb+A4RsL1TjxcCX3rh9UmfQAnQqpYP7rKtcvW1dBNw3KVA=;
+ bh=+Hkd+03ZPFCZHL4SytFYjQxSlVLh/tCnsKNFxa5wK+g=; b=V8GTqRWKWCIoC+KdfabTpHAUXQ
+ Cws0oy+5JXTVw2HipUZY2nG0kzw/6+48Qt0sEIUx5AXKeJXD2C8s2apDhgD7D5GqcAFlMd2vu2/YQ
+ 3OCq8zzvk8oft9RX/PvxdaxIRndTVQKWh4IVigjOwEyAVtfttFu1m9OX86ieyd5mv4wU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,94 +30,71 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eLAvQxPTrW61bFz1sANG5Y81u18aSgNqwRKiQkasIrQ=; b=Vczi0vlgFScmwia5W4D0PNoZ7i
- 0iN3Do2nWQVl6iTOmeV4pA5ik+EtEw302iGfeaqjFAPcpBeiR4UYiuX5qaCZRUjYoDCQeoEeRM68z
- MK9Xh3cPaEX1NrEMpNwPdmavChcvjUf60QV3WFCLAFRkS+Q0zlvPwlQdZ4VK+bUWIt0U=;
-Received: from mail-pl1-f174.google.com ([209.85.214.174])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ogR7L-0001vV-Bm for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 06 Oct 2022 13:40:51 +0000
-Received: by mail-pl1-f174.google.com with SMTP id h10so1763003plb.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 06 Oct 2022 06:40:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date;
- bh=eLAvQxPTrW61bFz1sANG5Y81u18aSgNqwRKiQkasIrQ=;
- b=Mjk55TEbLntyF5lT9fSI68nVndM1Msdjat/gJGZygPgfzU+WkmD3YJi9WXVGaCzM6v
- GxLLpAA6PXTqzjvO06yw50CV42lW4n/vIEByFS591YiP94BQoBhbbWQVP56HTGxk5Zgr
- BOk05yP29axd7oq4HdYwQK9SI5EUWt7gxVDMFJ+wkOreCPIVeriBrHDtpGfIe2ngJppN
- JQryL8z0uIEMfGv9GgcIhdNpUKCWmtH1vAJbOQzYFsOAjpmcoQIxgv9D+phyeqT1BAZz
- 6oBo+rhyLIIlr94eqFOQOrHm5nD105nysrFzzWFdbvZC9hK7I+vgzgKfrpoAG3/bFvxl
- ry9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
- bh=eLAvQxPTrW61bFz1sANG5Y81u18aSgNqwRKiQkasIrQ=;
- b=1EKTrXv5WiC5iZ9+0+io1Q5DbBaiHQ+lrvQigP79+HnAF4aYPdxyqseVmXcT2oY4xm
- npA2rtuAtZ/4zGxquH18EVOOuF5qGr+rSwdAARc1+dLyo6I1J0dyznxzHs4+jui30n19
- bDtCjf9muuh5UBt35XVCRESVOohBcmqCpksKaZ6gdGspSWMAUaHMwgKVKvbAvIYRRm3f
- vsjP9o907O+MNuKGMHpIJcMmoj55X/i4zFEePnePAsHjtIdCM3FFncBitCAcN+V//KKt
- JmTr0azQNFr7kVIscxdICnDtZoOu5F5Ge24UvNdlz87tA/7K8+gHB5Pe/gkDgxpRGaBl
- vClQ==
-X-Gm-Message-State: ACrzQf0lc+kJG6Gm7cVJ40rQtR05Y0qBGTRDz0hHHXVxaWzDZE4o98cE
- OEsOn3NklcVTzzl8aZQde2YxX7vVMsPo96RI
-X-Google-Smtp-Source: AMsMyM6E3yRYr1dTGqd6nAazsF/RtsoaWoD6R93kcYIR9nUQ6R8mMrLb2v1joGjgdIDD15O6MaD6sg==
-X-Received: by 2002:a05:6214:d06:b0:4ad:1fe1:9b49 with SMTP id
- 6-20020a0562140d0600b004ad1fe19b49mr3536957qvh.57.1665060472470; 
- Thu, 06 Oct 2022 05:47:52 -0700 (PDT)
-Received: from ziepe.ca
- (hlfxns017vw-47-55-122-23.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [47.55.122.23]) by smtp.gmail.com with ESMTPSA id
- j3-20020a05620a410300b006b5bf5d45casm20676675qko.27.2022.10.06.05.47.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Oct 2022 05:47:50 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.95)
- (envelope-from <jgg@ziepe.ca>) id 1ogQI1-00A0xr-QZ;
- Thu, 06 Oct 2022 09:47:49 -0300
-Date: Thu, 6 Oct 2022 09:47:49 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: "Jason A. Donenfeld" <Jason@zx2c4.com>
-Message-ID: <Yz7OdfKZeGkpZSKb@ziepe.ca>
+ bh=+Hkd+03ZPFCZHL4SytFYjQxSlVLh/tCnsKNFxa5wK+g=; b=VKxAdvTEB6tBAOOHIl5L2Xb1FQ
+ J2BfMQ6lnjnn6ZLq4tIvxWFYsEycb05QEmMmY5PAiPNNrf2L8dCsPaXf3I+wTKv5+HpyiNSZHKphD
+ i6y4kGRikJunyDGfdped/+uSji+ZsYp7kRzH0KUnyaR6k2EWDaMiWHbpbcgQC8AJX9FQ=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1ogQNz-00Ehzc-AP; Thu, 06 Oct 2022 12:54:00 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 90876B82089;
+ Thu,  6 Oct 2022 12:53:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65819C433D6;
+ Thu,  6 Oct 2022 12:53:28 +0000 (UTC)
+Authentication-Results: smtp.kernel.org;
+ dkim=pass (1024-bit key) header.d=zx2c4.com header.i=@zx2c4.com
+ header.b="JFNs4Haz"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zx2c4.com; s=20210105; 
+ t=1665060806;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=+Hkd+03ZPFCZHL4SytFYjQxSlVLh/tCnsKNFxa5wK+g=;
+ b=JFNs4Hazt/h3DVxpbrAbzMPE9whooDcKk8uIX5aTYNyaQ0ww6ONDZEpvj0pBCk5Bkl2DLt
+ ktmEJcNw1Kn2Ot/YdbAehCwxq7qPZvj6WGsUyAnJyfFHg6BU5H6pbom+jt+FBFixHsfFyw
+ FXN6BTv1V4qGzBVuWo2f1r2ZOkBYL5M=
+Received: by mail.zx2c4.com (ZX2C4 Mail Server) with ESMTPSA id 82a088b4
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Thu, 6 Oct 2022 12:53:26 +0000 (UTC)
+Date: Thu, 6 Oct 2022 06:53:14 -0600
+To: Kees Cook <keescook@chromium.org>
+Message-ID: <Yz7PusEN5TG1PvJZ@zx2c4.com>
 References: <20221005214844.2699-1-Jason@zx2c4.com>
- <20221005214844.2699-4-Jason@zx2c4.com>
+ <202210052148.B11CBC60@keescook>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20221005214844.2699-4-Jason@zx2c4.com>
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <202210052148.B11CBC60@keescook>
+X-Spam-Score: -4.9 (----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Oct 05, 2022 at 11:48:42PM +0200, Jason A. Donenfeld
- wrote: > index 14392c942f49..499a425a3379 100644 > ---
- a/drivers/infiniband/hw/cxgb4/cm.c
- > +++ b/drivers/infiniband/hw/cxgb4/cm.c > @@ -734,7 +734,7 @@ static int
- send_connect(struct c4iw_ep *ep) > &ep->com [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Wed, Oct 05, 2022 at 09:55:43PM -0700, Kees Cook wrote:
+ > It'd be nice to capture some (all?) of the above somewhere. Perhaps just
+ > a massive comment in the header? I'll include (something like) this in
+ some "how to use" documentation I'm working on separately. 
+ Content analysis details:   (-4.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.174 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.174 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1ogR7L-0001vV-Bm
-Subject: Re: [f2fs-dev] [PATCH v1 3/5] treewide: use get_random_u32() when
- possible
+X-Headers-End: 1ogQNz-00Ehzc-AP
+Subject: Re: [f2fs-dev] [PATCH v1 0/5] treewide cleanup of random integer
+ usage
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -130,6 +106,9 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: "Jason A. Donenfeld via Linux-f2fs-devel"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: "Jason A. Donenfeld" <Jason@zx2c4.com>
 Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  Ulf Hansson <ulf.hansson@linaro.org>, dri-devel@lists.freedesktop.org,
  Andrii Nakryiko <andrii@kernel.org>, Hans Verkuil <hverkuil@xs4all.nl>,
@@ -194,7 +173,7 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  "Naveen N . Rao" <naveen.n.rao@linux.ibm.com>,
  Ilya Dryomov <idryomov@gmail.com>, Paolo Abeni <pabeni@redhat.com>,
  Pablo Neira Ayuso <pablo@netfilter.org>, Marco Elver <elver@google.com>,
- Kees Cook <keescook@chromium.org>, Yury Norov <yury.norov@gmail.com>,
+ Yury Norov <yury.norov@gmail.com>,
  "James E . J . Bottomley" <jejb@linux.ibm.com>,
  Jamal Hadi Salim <jhs@mojatatu.com>, KP Singh <kpsingh@kernel.org>,
  Borislav Petkov <bp@alien8.de>, Keith Busch <kbusch@kernel.org>,
@@ -220,9 +199,9 @@ Cc: Andrew Lunn <andrew@lunn.ch>, "Darrick J . Wong" <djwong@kernel.org>,
  Steffen Klassert <steffen.klassert@secunet.com>, rds-devel@oss.oracle.com,
  Herbert Xu <herbert@gondor.apana.org.au>, linux-scsi@vger.kernel.org,
  dccp@vger.kernel.org, Richard Weinberger <richard@nod.at>,
- Russell King <linux@armlinux.org.uk>, SHA-cyfmac-dev-list@infineon.com,
- Ingo Molnar <mingo@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
- John Fastabend <john.fastabend@gmail.com>,
+ Russell King <linux@armlinux.org.uk>, Jason Gunthorpe <jgg@ziepe.ca>,
+ SHA-cyfmac-dev-list@infineon.com, Ingo Molnar <mingo@redhat.com>,
+ Jakub Kicinski <kuba@kernel.org>, John Fastabend <john.fastabend@gmail.com>,
  Maxime Coquelin <mcoquelin.stm32@gmail.com>,
  Manivannan Sadhasivam <mani@kernel.org>,
  Michael Jamet <michael.jamet@intel.com>, Kalle Valo <kvalo@kernel.org>,
@@ -243,38 +222,37 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Oct 05, 2022 at 11:48:42PM +0200, Jason A. Donenfeld wrote:
+On Wed, Oct 05, 2022 at 09:55:43PM -0700, Kees Cook wrote:
+> It'd be nice to capture some (all?) of the above somewhere. Perhaps just
+> a massive comment in the header?
 
-> index 14392c942f49..499a425a3379 100644
-> --- a/drivers/infiniband/hw/cxgb4/cm.c
-> +++ b/drivers/infiniband/hw/cxgb4/cm.c
-> @@ -734,7 +734,7 @@ static int send_connect(struct c4iw_ep *ep)
->  				   &ep->com.remote_addr;
->  	int ret;
->  	enum chip_type adapter_type = ep->com.dev->rdev.lldi.adapter_type;
-> -	u32 isn = (prandom_u32() & ~7UL) - 1;
-> +	u32 isn = (get_random_u32() & ~7UL) - 1;
+I'll include (something like) this in some "how to use" documentation
+I'm working on separately.
 
-Maybe this wants to be written as
+> > I've CC'd get_maintainers.pl, which is a pretty big list. Probably some
+> > portion of those are going to bounce, too, and everytime you reply to
+> > this thread, you'll have to deal with a bunch of bounces coming
+> > immediately after. And a recipient list this big will probably dock my
+> > email domain's spam reputation, at least temporarily. Sigh. I think
+> > that's just how it goes with treewide cleanups though. Again, let me
+> > know if I'm doing it wrong.
+> 
+> I usually stick to just mailing lists and subsystem maintainers.
 
-(prandom_max(U32_MAX >> 7) << 7) | 7
+Lord have mercy I really wish I had done that. I supremely butchered the
+sending of this, and then tried to save it by resubmitting directly to
+vger with the same message ID but truncated CC, which mostly worked, but
+the whole thing is a mess. I'll trim this to subsystem maintainers and
+resubmit a v2 right away, rather than having people wade through the
+mess.
 
-?
+To any one who's reading this: no more replies to v1! It clogs the
+tubes.
 
-> diff --git a/drivers/infiniband/ulp/ipoib/ipoib_cm.c b/drivers/infiniband/ulp/ipoib/ipoib_cm.c
-> index fd9d7f2c4d64..a605cf66b83e 100644
-> --- a/drivers/infiniband/ulp/ipoib/ipoib_cm.c
-> +++ b/drivers/infiniband/ulp/ipoib/ipoib_cm.c
-> @@ -465,7 +465,7 @@ static int ipoib_cm_req_handler(struct ib_cm_id *cm_id,
->  		goto err_qp;
->  	}
->  
-> -	psn = prandom_u32() & 0xffffff;
-> +	psn = get_random_u32() & 0xffffff;
+> If any of the subsystems ask you to break this up (I hope not), I've got
 
- prandom_max(0xffffff + 1) 
-
-?
+Oh god I surely hope not. Sounds like a massive waste of time and
+paperwork.
 
 Jason
 
