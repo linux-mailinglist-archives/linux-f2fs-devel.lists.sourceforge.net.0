@@ -2,66 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E7B75FA2BA
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Oct 2022 19:27:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 725665FA798
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Oct 2022 00:16:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ohwYg-00015h-70;
-	Mon, 10 Oct 2022 17:27:18 +0000
+	id 1oi142-0007NJ-I4;
+	Mon, 10 Oct 2022 22:15:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1ohwYf-00015b-23
+ (envelope-from <jaegeuk@kernel.org>) id 1oi141-0007NC-1Q
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Oct 2022 17:27:17 +0000
+ Mon, 10 Oct 2022 22:15:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QZhcOMYgVwDONGT1q/V9oOUXNPdePrcmkYsAihsxkPA=; b=Jtmrqoe4jejv4HYKPpXp9COjHk
- lHgX5BZxplzP4cUB+1jsZ8KZy9XvaYCotUkt39azJZ18a+GOSoy1hwCHCLAnTXW5PwD8I1qbuJXQ6
- MXOTv96QWHC+cFLyhBCnNJ0li1IRo0QVi2RNhPxVZWM6M/L2K1f7yv6wqy16LTs/mxa4=;
+ bh=YrE5MTYJQKbKVrV0dNPfwimBQ/yEyWEfCRZhjiOkbig=; b=I+cd+gnNGvjdgbZwJEjVN3TNPb
+ DpRAJuhKrr97WWHh+L6hOSa8MqC/ZoxFdNarU51Gij6NCICXg2cxLW5SbtIq0KE4zZ8+teeK4BTBN
+ CdzEturxb5GLYG2Tiommo0jdK6nRW1St2ZXZEeep+p4oVFMHLaMto9sRZLpiOONjjL68=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=QZhcOMYgVwDONGT1q/V9oOUXNPdePrcmkYsAihsxkPA=; b=T
- 3FLlKuHNRtBZt8v6APTQWNXfxkgih3Oxigt8WRSmDDDT89WDeK8lfOfeISoq0J4qKZDZ3Ecptt5Rf
- P/XBRz/NfJNhGIZzusEzFGsZuoe9QSBmS6Z3IZ+hSSPLOXskzQno1SwNLVQDYllZu+jJQUYNZIrZ4
- VcCGNc8TcInIUOj0=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=YrE5MTYJQKbKVrV0dNPfwimBQ/yEyWEfCRZhjiOkbig=; b=U
+ Neo5Q/niB6ggKBx9xANXnX9H94v8vNyXNOWGUAxxtS2zTeQd8DavC+JiA4Q1LTIi803UzG6UXN15E
+ K/BKcpKe7LRNgIgivKODBx2cAUcIIEb4ffJJZ9Ezry2uNt7ytwnEU6DxU1OSLqX/JNYO+QRTMAUNt
+ ahE9/aOX9LlN/4G4=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ohwYe-0002Xq-5C for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Oct 2022 17:27:16 +0000
+ id 1oi140-001Qqj-4x for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Oct 2022 22:15:56 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id DE34CB81056;
- Mon, 10 Oct 2022 17:27:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FAD7C433C1;
- Mon, 10 Oct 2022 17:27:08 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B9B4C61035
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 10 Oct 2022 22:15:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1A376C433D6;
+ Mon, 10 Oct 2022 22:15:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1665422828;
- bh=/lt8gfU9Y3wxLQTDMNaW8hT50rVcAlBaCz5iuLdDG9c=;
- h=Date:From:To:Cc:Subject:From;
- b=fPChqg/JUvc/VQr1cJLuF6NvniyAWrUrQMKS2Su4eiAT2u84Iqt1ZgVc47EUem+9x
- ocggm5+x16xob6OVX9H7+41KvzIynf2x9KcQxpLF1I8X9pIkpPfHLW0dUpvs5S+ys9
- +5/0WJmqGbAZ8ZlPNJjuaAg4v0XUWIiiSnaQZvjhA3syD2187CBYw+g5NmkXRxj1M1
- 3GnQHrZKteoWJoYuwtiMjtH62LeB3ETZ/g0rTgaB7MSUOF29B6O2kEWlzHy8rOBGEp
- fJaGdaB9I58/iRSybpBrOq2y6EeyMjp6zL+KA0wOElBB/fyoAWqvS+6fdvjIh8BELS
- AEhRQdTlgy3Fg==
-Date: Mon, 10 Oct 2022 10:27:06 -0700
+ s=k20201202; t=1665440150;
+ bh=T7d/Lk1p3bpEMjqFqlLDQQoMrHQ8pCgJmNYnAdOscw4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=FhClyaxNiudotiPb5GqiTQqMJlG5tL/tlaNu+bMQ2DjhB9oeIEVJOFxryiErflREj
+ TLGtW7iv2bgeVS/p8SxLrz3RGN0OHLZVTJt4mBOHx5GJKf781WsgNr49ZFFOrKVYTD
+ /SPWUembpkWyTOH2gvC7sYO+4BNsKt6YYmRp/26SSiL+UbpG8awRF6g2/PKyV5LK1a
+ ODmWvz0MDvXKATF9/6ETUGXS31V1vDLspnVVSJ1dJSKfJcFBLMuj7b02pRs+D19vat
+ v7jjY0RRgQIkH9U1kSTzEeraz/NbPfaw4uYNjAEnqKr0qApnSvPmoRGtuxwMqUrEFd
+ 5jW/RTPA3G5kA==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <Y0RV6kXCyXtqYuS4@google.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 10 Oct 2022 15:15:46 -0700
+Message-Id: <20221010221548.2728860-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.38.0.rc1.362.ged0d419d3c-goog
 MIME-Version: 1.0
-Content-Disposition: inline
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -69,14 +70,19 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Linus, Could you please consider this pull request? Thanks,
+ Content preview:  As f2fs becomes more resilient for GCs,
+ let's give the marginal
+ overprovision space back to user. Signed-off-by: Jaegeuk Kim
+ <jaegeuk@kernel.org>
+ --- fsck/resize.c | 8 ++++---- include/f2fs_fs.h | 6 ++++-- mkfs/f2fs_format.c
+ | 9 ++++++--- 3 files changed, 14 insertions(+), 9 deletions(-) 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -85,8 +91,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ohwYe-0002Xq-5C
-Subject: [f2fs-dev] [GIT PULL] f2fs update for 6.1-rc1
+X-Headers-End: 1oi140-001Qqj-4x
+Subject: [f2fs-dev] [PATCH 1/3] f2fs-tools: give less overprovisioning space
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,130 +104,103 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Linus,
+As f2fs becomes more resilient for GCs, let's give the marginal overprovision
+space back to user.
 
-Could you please consider this pull request?
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fsck/resize.c      | 8 ++++----
+ include/f2fs_fs.h  | 6 ++++--
+ mkfs/f2fs_format.c | 9 ++++++---
+ 3 files changed, 14 insertions(+), 9 deletions(-)
 
-Thanks,
+diff --git a/fsck/resize.c b/fsck/resize.c
+index 3d8ea466dacd..c048b16e76fb 100644
+--- a/fsck/resize.c
++++ b/fsck/resize.c
+@@ -150,7 +150,7 @@ safe_resize:
+ 		c.new_overprovision = get_best_overprovision(sb);
+ 
+ 	c.new_reserved_segments =
+-		(2 * (100 / c.new_overprovision + 1) + 6) *
++		(100 / c.new_overprovision + 1 + NR_CURSEG_TYPE) *
+ 						get_sb(segs_per_sec);
+ 
+ 	if ((get_sb(segment_count_main) - 2) < c.new_reserved_segments ||
+@@ -475,8 +475,9 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
+ 	set_cp(overprov_segment_count, (get_newsb(segment_count_main) -
+ 			get_cp(rsvd_segment_count)) *
+ 			c.new_overprovision / 100);
+-	set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
+-						get_cp(rsvd_segment_count));
++
++	if (get_cp(rsvd_segment_count) > get_cp(overprov_segment_count))
++		ASSERT_MSG("Cannot support wrong overprovision ratio\n");
+ 
+ 	DBG(0, "Info: Overprovision ratio = %.3lf%%\n", c.new_overprovision);
+ 	DBG(0, "Info: Overprovision segments = %u (GC reserved = %u)\n",
+@@ -607,7 +608,6 @@ static int f2fs_resize_check(struct f2fs_sb_info *sbi, struct f2fs_super_block *
+ 	overprov_segment_count = (get_newsb(segment_count_main) -
+ 			c.new_reserved_segments) *
+ 			c.new_overprovision / 100;
+-	overprov_segment_count += c.new_reserved_segments;
+ 
+ 	user_block_count = (get_newsb(segment_count_main) -
+ 			overprov_segment_count) * c.blks_per_seg;
+diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+index 5fa9931648cf..8ca574aeba0f 100644
+--- a/include/f2fs_fs.h
++++ b/include/f2fs_fs.h
+@@ -1631,10 +1631,12 @@ static inline double get_best_overprovision(struct f2fs_super_block *sb)
+ 	}
+ 
+ 	for (; candidate <= end; candidate += diff) {
+-		reserved = (2 * (100 / candidate + 1) + 6) *
++		reserved = (100 / candidate + 1 + NR_CURSEG_TYPE) *
+ 				round_up(usable_main_segs, get_sb(section_count));
+ 		ovp = (usable_main_segs - reserved) * candidate / 100;
+-		space = usable_main_segs - reserved - ovp;
++		if (reserved >= ovp)
++			continue;
++		space = usable_main_segs - ovp;
+ 		if (max_space < space) {
+ 			max_space = space;
+ 			max_ovp = candidate;
+diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+index 8d0f41063458..5daf1a17c77d 100644
+--- a/mkfs/f2fs_format.c
++++ b/mkfs/f2fs_format.c
+@@ -484,7 +484,7 @@ static int f2fs_prepare_super_block(void)
+ 		c.overprovision = get_best_overprovision(sb);
+ 
+ 	c.reserved_segments =
+-			(2 * (100 / c.overprovision + 1) + NR_CURSEG_TYPE) *
++			(100 / c.overprovision + 1 + NR_CURSEG_TYPE) *
+ 			round_up(f2fs_get_usable_segments(sb), get_sb(section_count));
+ 
+ 	if (c.feature & cpu_to_le32(F2FS_FEATURE_RO)) {
+@@ -764,8 +764,11 @@ static int f2fs_write_check_point_pack(void)
+ 	set_cp(overprov_segment_count, (f2fs_get_usable_segments(sb) -
+ 			get_cp(rsvd_segment_count)) *
+ 			c.overprovision / 100);
+-	set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
+-			get_cp(rsvd_segment_count));
++
++	if (get_cp(rsvd_segment_count) > get_cp(overprov_segment_count)) {
++		MSG(0, "\tError: Wrong overprovision ratio\n");
++		goto free_cp_payload;
++	}
+ 
+ 	if (f2fs_get_usable_segments(sb) <= get_cp(overprov_segment_count)) {
+ 		MSG(0, "\tError: Not enough segments to create F2FS Volume\n");
+-- 
+2.38.0.rc1.362.ged0d419d3c-goog
 
-The following changes since commit dcf8e5633e2e69ad60b730ab5905608b756a032f:
-
-  tracing: Define the is_signed_type() macro once (2022-08-29 13:29:40 -0700)
-
-are available in the Git repository at:
-
-  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-6.1-rc1
-
-for you to fetch changes up to b4dac1203f39821c6119033cdeebcea83cf45786:
-
-  f2fs: change to use atomic_t type form sbi.atomic_files (2022-10-07 12:57:26 -0700)
-
-----------------------------------------------------------------
-f2fs-for-6.1-rc1
-
-This round looks fairly small comparing to the previous updates which includes
-mostly minor bug fixes. Nevertheless, as we've still interested in improving
-the stability, Chao added some debugging methods to diagnoze subtle runtime
-inconsistency problem.
-
-Enhancement
- - store all the corruption or failure reasons in superblock
- - detect meta inode, summary info, and block address inconsistency
- - increase the limit for reserve_root for low-end devices
- - add the number of compressed IO in iostat
-
-Bug fix
- - DIO write fix for zoned devices
- - do out-of-place writes for cold files
- - fix some stat updates (FS_CP_DATA_IO, dirty page count)
- - fix race condition on setting FI_NO_EXTENT flag
- - fix data races when freezing super
- - fix wrong continue condition check in GC
- - do not allow ATGC for LFS mode
-
-In addition, there're some code enhancement and clean-ups as usual.
-
-----------------------------------------------------------------
-Chao Yu (11):
-      f2fs: iostat: support accounting compressed IO
-      f2fs: remove gc_urgent_high_limited for cleanup
-      f2fs: fix to do sanity check on destination blkaddr during recovery
-      f2fs: fix to do sanity check on summary info
-      f2fs: fix to account FS_CP_DATA_IO correctly
-      f2fs: fix to detect corrupted meta ino
-      f2fs: introduce cp_status sysfs entry
-      f2fs: support recording stop_checkpoint reason into super_block
-      f2fs: support recording errors into superblock
-      f2fs: account swapfile inodes
-      f2fs: change to use atomic_t type form sbi.atomic_files
-
-Christian Brauner (1):
-      f2fs: port to vfs{g,u}id_t and associated helpers
-
-Eric Biggers (1):
-      f2fs: use memcpy_{to,from}_page() where possible
-
-Jaegeuk Kim (6):
-      f2fs: LFS mode does not support ATGC
-      f2fs: fix wrong continue condition in GC
-      f2fs: flush pending checkpoints when freezing super
-      f2fs: complete checkpoints during remount
-      f2fs: increase the limit for reserve_root
-      f2fs: allow direct read for zoned device
-
-Shuqi Zhang (1):
-      f2fs: fix wrong dirty page count when race between mmap and fallocate.
-
-Weichao Guo (1):
-      f2fs: let FI_OPU_WRITE override FADVISE_COLD_BIT
-
-Yonggil Song (1):
-      f2fs: fix typo
-
-Zhang Qilong (10):
-      f2fs: replace logical value "true" with a int number
-      f2fs: simplify code in f2fs_prepare_decomp_mem
-      f2fs: return the tmp_ptr directly in __bitmap_ptr
-      f2fs: use COMPRESS_MAPPING to get compress cache mapping
-      f2fs: add static init_idisk_time function to reduce the code
-      f2fs: remove redundant check in f2fs_sanity_check_cluster
-      f2fs: fix race condition on setting FI_NO_EXTENT flag
-      f2fs: add "c_len" into trace_f2fs_update_extent_tree_range for compressed file
-      f2fs: code clean and fix a type error
-      f2fs: remove the unnecessary check in f2fs_xattr_fiemap
-
- Documentation/ABI/testing/sysfs-fs-f2fs | 24 +++++++++
- fs/f2fs/acl.c                           |  2 +-
- fs/f2fs/checkpoint.c                    | 65 +++++++++++++++-------
- fs/f2fs/compress.c                      | 32 +++++------
- fs/f2fs/data.c                          | 53 ++++++++++++------
- fs/f2fs/debug.c                         |  9 +++-
- fs/f2fs/dir.c                           |  1 +
- fs/f2fs/extent_cache.c                  |  9 ++--
- fs/f2fs/f2fs.h                          | 55 +++++++++++++++----
- fs/f2fs/file.c                          | 50 ++++++++++-------
- fs/f2fs/gc.c                            | 40 ++++++++------
- fs/f2fs/inline.c                        | 17 +++---
- fs/f2fs/inode.c                         | 51 ++++++++++++------
- fs/f2fs/iostat.c                        | 74 +++++++++++++++++--------
- fs/f2fs/iostat.h                        |  4 +-
- fs/f2fs/node.c                          |  9 ++--
- fs/f2fs/recovery.c                      | 29 ++++++++--
- fs/f2fs/segment.c                       | 37 ++++++++-----
- fs/f2fs/segment.h                       |  2 +
- fs/f2fs/super.c                         | 96 ++++++++++++++++++++++++++++-----
- fs/f2fs/sysfs.c                         |  9 +++-
- fs/f2fs/verity.c                        | 12 ++---
- fs/f2fs/xattr.c                         |  8 +++
- include/linux/f2fs_fs.h                 | 40 +++++++++++++-
- include/trace/events/f2fs.h             | 37 +++++++++----
- 25 files changed, 556 insertions(+), 209 deletions(-)
 
 
 _______________________________________________
