@@ -2,97 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 725665FA798
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Oct 2022 00:16:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26D6B5FA79A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Oct 2022 00:16:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oi142-0007NJ-I4;
-	Mon, 10 Oct 2022 22:15:58 +0000
+	id 1oi14M-0006Zc-UC;
+	Mon, 10 Oct 2022 22:16:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1oi141-0007NC-1Q
+ (envelope-from <jaegeuk@kernel.org>) id 1oi147-0006ZG-CV
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Oct 2022 22:15:57 +0000
+ Mon, 10 Oct 2022 22:16:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YrE5MTYJQKbKVrV0dNPfwimBQ/yEyWEfCRZhjiOkbig=; b=I+cd+gnNGvjdgbZwJEjVN3TNPb
- DpRAJuhKrr97WWHh+L6hOSa8MqC/ZoxFdNarU51Gij6NCICXg2cxLW5SbtIq0KE4zZ8+teeK4BTBN
- CdzEturxb5GLYG2Tiommo0jdK6nRW1St2ZXZEeep+p4oVFMHLaMto9sRZLpiOONjjL68=;
+ bh=TSnfmV5MJSfmBT33PUGaa9/Vml2+SENXFc4nbxU0++4=; b=TK69/S/6UO61CEYzg3O8R06GKO
+ 4EEYI4DKy5Sc7BXNG38uP9xHDyb7n8mxhxtIPQaOBhDVeLvMytHKdH/bB22WyJBVYR71iNtEWf458
+ F12Cux7pDjXOx2gmiJ3emXskEZr+taM+I3ccDp4/TUNW7zcy1P42N5icMEiwT79Q90SE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=YrE5MTYJQKbKVrV0dNPfwimBQ/yEyWEfCRZhjiOkbig=; b=U
- Neo5Q/niB6ggKBx9xANXnX9H94v8vNyXNOWGUAxxtS2zTeQd8DavC+JiA4Q1LTIi803UzG6UXN15E
- K/BKcpKe7LRNgIgivKODBx2cAUcIIEb4ffJJZ9Ezry2uNt7ytwnEU6DxU1OSLqX/JNYO+QRTMAUNt
- ahE9/aOX9LlN/4G4=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=TSnfmV5MJSfmBT33PUGaa9/Vml2+SENXFc4nbxU0++4=; b=F2xlMwwYw6yncyR+Q/LV2HtKGr
+ kckgQi21DtdKI+JQ38IW9CRD1wVlvOtNMXuEf5OLyKTn3Enx+E6V1Yv00jaqEPIg/wraxRsHEUFVF
+ Df9145UOvz704kpm4E5StFTDHWywVgwJktwCFPrfS6zIFrbeiYRWFiD2Y99EOWmKaY5k=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oi140-001Qqj-4x for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Oct 2022 22:15:56 +0000
+ id 1oi145-0008Av-VH for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Oct 2022 22:16:03 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B9B4C61035
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 8E3276103E
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 10 Oct 2022 22:15:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1A376C433D6;
+ Mon, 10 Oct 2022 22:15:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF066C433D6;
  Mon, 10 Oct 2022 22:15:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1665440150;
- bh=T7d/Lk1p3bpEMjqFqlLDQQoMrHQ8pCgJmNYnAdOscw4=;
- h=From:To:Cc:Subject:Date:From;
- b=FhClyaxNiudotiPb5GqiTQqMJlG5tL/tlaNu+bMQ2DjhB9oeIEVJOFxryiErflREj
- TLGtW7iv2bgeVS/p8SxLrz3RGN0OHLZVTJt4mBOHx5GJKf781WsgNr49ZFFOrKVYTD
- /SPWUembpkWyTOH2gvC7sYO+4BNsKt6YYmRp/26SSiL+UbpG8awRF6g2/PKyV5LK1a
- ODmWvz0MDvXKATF9/6ETUGXS31V1vDLspnVVSJ1dJSKfJcFBLMuj7b02pRs+D19vat
- v7jjY0RRgQIkH9U1kSTzEeraz/NbPfaw4uYNjAEnqKr0qApnSvPmoRGtuxwMqUrEFd
- 5jW/RTPA3G5kA==
+ s=k20201202; t=1665440151;
+ bh=wZ/EOWz6nhcKq0ueJZs/TIumez1AxffY2Ws7JHLZD+o=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Iq1Tvt0gvQCIFVGz5MOACY/MIYxvdJxjOTZyGDw1vEldNc2y/XhqR8DXCow2TSzUy
+ 2dwUoIiP9m9JNy0ISKAONTS+9mXQTYOsqRdU9sn1McP3GrU0Qq97kgv9I3d6TKGk5E
+ LgRuYehXIkGwqQ7BjY9eFeQ5ligoAl08R2FZD1Zz9bapb8ZBD+WtlQVrz1CvFbXvlg
+ aMzdnXPP43UdE0oSC4hslGkNFJkO154Odd/QLHAzwb1O3kKk6quXZpESVxQaoMtRHI
+ Elu5Pk8bGFMgrmp5dboc2URlI1ez465ldmL7sUNZJrAnhK6+lAOecwpHTmwG/FSXA7
+ K95OCptqEYPug==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 10 Oct 2022 15:15:46 -0700
-Message-Id: <20221010221548.2728860-1-jaegeuk@kernel.org>
+Date: Mon, 10 Oct 2022 15:15:47 -0700
+Message-Id: <20221010221548.2728860-2-jaegeuk@kernel.org>
 X-Mailer: git-send-email 2.38.0.rc1.362.ged0d419d3c-goog
+In-Reply-To: <20221010221548.2728860-1-jaegeuk@kernel.org>
+References: <20221010221548.2728860-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  As f2fs becomes more resilient for GCs,
- let's give the marginal
- overprovision space back to user. Signed-off-by: Jaegeuk Kim
- <jaegeuk@kernel.org>
- --- fsck/resize.c | 8 ++++---- include/f2fs_fs.h | 6 ++++-- mkfs/f2fs_format.c
- | 9 ++++++--- 3 files changed, 14 insertions(+), 9 deletions(-) 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  We need to set the c.zoned_model appropriately for further
+ usages. Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> --- fsck/mount.c
+ | 8 ++++++++ 1 file changed,
+ 8 insertions(+) diff --git a/fsck/mount.c b/fsck/mount.c
+ index 0597220b3bc0..cd8a07538150 100644 --- a/fsck/mount.c +++ b/fsck/mount.c
+ @@ -1095,6 +1095,14 @@ int init_sb_info(struct f2fs_sb_info *sbi) if (i ==
+ 0) c.d [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oi140-001Qqj-4x
-Subject: [f2fs-dev] [PATCH 1/3] f2fs-tools: give less overprovisioning space
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oi145-0008Av-VH
+Subject: [f2fs-dev] [PATCH 2/3] fsck.f2fs: fix missing to assign
+ c.zoned_model
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,95 +113,32 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As f2fs becomes more resilient for GCs, let's give the marginal overprovision
-space back to user.
+We need to set the c.zoned_model appropriately for further usages.
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fsck/resize.c      | 8 ++++----
- include/f2fs_fs.h  | 6 ++++--
- mkfs/f2fs_format.c | 9 ++++++---
- 3 files changed, 14 insertions(+), 9 deletions(-)
+ fsck/mount.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/fsck/resize.c b/fsck/resize.c
-index 3d8ea466dacd..c048b16e76fb 100644
---- a/fsck/resize.c
-+++ b/fsck/resize.c
-@@ -150,7 +150,7 @@ safe_resize:
- 		c.new_overprovision = get_best_overprovision(sb);
+diff --git a/fsck/mount.c b/fsck/mount.c
+index 0597220b3bc0..cd8a07538150 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -1095,6 +1095,14 @@ int init_sb_info(struct f2fs_sb_info *sbi)
+ 		if (i == 0)
+ 			c.devices[i].end_blkaddr += get_sb(segment0_blkaddr);
  
- 	c.new_reserved_segments =
--		(2 * (100 / c.new_overprovision + 1) + 6) *
-+		(100 / c.new_overprovision + 1 + NR_CURSEG_TYPE) *
- 						get_sb(segs_per_sec);
- 
- 	if ((get_sb(segment_count_main) - 2) < c.new_reserved_segments ||
-@@ -475,8 +475,9 @@ static void rebuild_checkpoint(struct f2fs_sb_info *sbi,
- 	set_cp(overprov_segment_count, (get_newsb(segment_count_main) -
- 			get_cp(rsvd_segment_count)) *
- 			c.new_overprovision / 100);
--	set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
--						get_cp(rsvd_segment_count));
++		if (c.zoned_model == F2FS_ZONED_NONE) {
++			if (c.devices[i].zoned_model == F2FS_ZONED_HM)
++				c.zoned_model = F2FS_ZONED_HM;
++			else if (c.devices[i].zoned_model == F2FS_ZONED_HA &&
++					c.zoned_model != F2FS_ZONED_HM)
++				c.zoned_model = F2FS_ZONED_HA;
++		}
 +
-+	if (get_cp(rsvd_segment_count) > get_cp(overprov_segment_count))
-+		ASSERT_MSG("Cannot support wrong overprovision ratio\n");
- 
- 	DBG(0, "Info: Overprovision ratio = %.3lf%%\n", c.new_overprovision);
- 	DBG(0, "Info: Overprovision segments = %u (GC reserved = %u)\n",
-@@ -607,7 +608,6 @@ static int f2fs_resize_check(struct f2fs_sb_info *sbi, struct f2fs_super_block *
- 	overprov_segment_count = (get_newsb(segment_count_main) -
- 			c.new_reserved_segments) *
- 			c.new_overprovision / 100;
--	overprov_segment_count += c.new_reserved_segments;
- 
- 	user_block_count = (get_newsb(segment_count_main) -
- 			overprov_segment_count) * c.blks_per_seg;
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 5fa9931648cf..8ca574aeba0f 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -1631,10 +1631,12 @@ static inline double get_best_overprovision(struct f2fs_super_block *sb)
- 	}
- 
- 	for (; candidate <= end; candidate += diff) {
--		reserved = (2 * (100 / candidate + 1) + 6) *
-+		reserved = (100 / candidate + 1 + NR_CURSEG_TYPE) *
- 				round_up(usable_main_segs, get_sb(section_count));
- 		ovp = (usable_main_segs - reserved) * candidate / 100;
--		space = usable_main_segs - reserved - ovp;
-+		if (reserved >= ovp)
-+			continue;
-+		space = usable_main_segs - ovp;
- 		if (max_space < space) {
- 			max_space = space;
- 			max_ovp = candidate;
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index 8d0f41063458..5daf1a17c77d 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -484,7 +484,7 @@ static int f2fs_prepare_super_block(void)
- 		c.overprovision = get_best_overprovision(sb);
- 
- 	c.reserved_segments =
--			(2 * (100 / c.overprovision + 1) + NR_CURSEG_TYPE) *
-+			(100 / c.overprovision + 1 + NR_CURSEG_TYPE) *
- 			round_up(f2fs_get_usable_segments(sb), get_sb(section_count));
- 
- 	if (c.feature & cpu_to_le32(F2FS_FEATURE_RO)) {
-@@ -764,8 +764,11 @@ static int f2fs_write_check_point_pack(void)
- 	set_cp(overprov_segment_count, (f2fs_get_usable_segments(sb) -
- 			get_cp(rsvd_segment_count)) *
- 			c.overprovision / 100);
--	set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
--			get_cp(rsvd_segment_count));
-+
-+	if (get_cp(rsvd_segment_count) > get_cp(overprov_segment_count)) {
-+		MSG(0, "\tError: Wrong overprovision ratio\n");
-+		goto free_cp_payload;
-+	}
- 
- 	if (f2fs_get_usable_segments(sb) <= get_cp(overprov_segment_count)) {
- 		MSG(0, "\tError: Not enough segments to create F2FS Volume\n");
+ 		c.ndevs = i + 1;
+ 		MSG(0, "Info: Device[%d] : %s blkaddr = %"PRIx64"--%"PRIx64"\n",
+ 				i, c.devices[i].path,
 -- 
 2.38.0.rc1.362.ged0d419d3c-goog
 
