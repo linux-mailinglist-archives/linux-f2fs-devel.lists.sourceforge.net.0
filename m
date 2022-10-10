@@ -2,71 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A69E5FA2B4
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Oct 2022 19:23:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E7B75FA2BA
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Oct 2022 19:27:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ohwUg-0007Ff-LZ;
-	Mon, 10 Oct 2022 17:23:10 +0000
+	id 1ohwYg-00015h-70;
+	Mon, 10 Oct 2022 17:27:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1ohwUd-0007FZ-OJ
+ (envelope-from <jaegeuk@kernel.org>) id 1ohwYf-00015b-23
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Oct 2022 17:23:07 +0000
+ Mon, 10 Oct 2022 17:27:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MJUXtA/CRiKOSxIu7Wp+HVwh+Q8GE4zPwnJ3PLj2G50=; b=lGruoZzybo67SGzfkd+xsebCve
- RwA2EcNy79ojo0QmXizLRT7iaDJj7238JGsV5St9k/0RZQJenKXxDxSs+jMS42jSIjrNu5+iDFFIQ
- +pMr85tAEHL6en03jO9wU6RqPt08Isshp19Xx7W0/XheMe7Pp4LafLMDDLaFkIIPIymQ=;
+ bh=QZhcOMYgVwDONGT1q/V9oOUXNPdePrcmkYsAihsxkPA=; b=Jtmrqoe4jejv4HYKPpXp9COjHk
+ lHgX5BZxplzP4cUB+1jsZ8KZy9XvaYCotUkt39azJZ18a+GOSoy1hwCHCLAnTXW5PwD8I1qbuJXQ6
+ MXOTv96QWHC+cFLyhBCnNJ0li1IRo0QVi2RNhPxVZWM6M/L2K1f7yv6wqy16LTs/mxa4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=MJUXtA/CRiKOSxIu7Wp+HVwh+Q8GE4zPwnJ3PLj2G50=; b=TZQDgL5msOMzTNuuG+8oNR646c
- SIUq8luWIklJsXZ6Q0WjFfFmCZegqUvnulxCjgZUk6zq4gb1wB0OAZ/Uyw+DxmO164FDocQ15oyrp
- TnxbRtv0bGRQ/kvvP1WMAJcIRCbyuJsYOa46ZZMhBeKms/S7LBDZepg1srNB3F6al7KI=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=QZhcOMYgVwDONGT1q/V9oOUXNPdePrcmkYsAihsxkPA=; b=T
+ 3FLlKuHNRtBZt8v6APTQWNXfxkgih3Oxigt8WRSmDDDT89WDeK8lfOfeISoq0J4qKZDZ3Ecptt5Rf
+ P/XBRz/NfJNhGIZzusEzFGsZuoe9QSBmS6Z3IZ+hSSPLOXskzQno1SwNLVQDYllZu+jJQUYNZIrZ4
+ VcCGNc8TcInIUOj0=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ohwUb-0002Ny-IV for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Oct 2022 17:23:07 +0000
+ id 1ohwYe-0002Xq-5C for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Oct 2022 17:27:16 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2196560FB2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 10 Oct 2022 17:22:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68665C433D6;
- Mon, 10 Oct 2022 17:22:54 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id DE34CB81056;
+ Mon, 10 Oct 2022 17:27:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FAD7C433C1;
+ Mon, 10 Oct 2022 17:27:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1665422574;
- bh=sTmASzYKfJzVNadyE54t+nuZVthL8wB7zBryW4ZrKDc=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=IcariJu3eA4iPPpWNv2HLkgAso3MRgC43VnFbE18E1PVVLa/75R3fys+BoSOdvjb0
- wDH06hl+SEQBKbkgTJ4Hc4JMM9W2aa9TBT+m4bdMXKbgzFelZ9EB97AH5DskcesW81
- Np7GpyzFlxTB/P8OLPDBUUCVyv8zwgwKKYd2C8tmtod6M6nOIfm1MIQ8tgijgpwU0l
- uk7LgkeoT5lVlUZyztdgzHszltAeT68Etss+UeoLJwBAXx9VELHUmiUBpa8PuR2CZO
- dtqpfIDY30Plukh80T7QRBOKBCgQHZhD+CF3t+ZBMpJKROlKAzhOHhCdxQA8SOfrBH
- 4RAuUUF+/9OHg==
-Date: Mon, 10 Oct 2022 10:22:52 -0700
+ s=k20201202; t=1665422828;
+ bh=/lt8gfU9Y3wxLQTDMNaW8hT50rVcAlBaCz5iuLdDG9c=;
+ h=Date:From:To:Cc:Subject:From;
+ b=fPChqg/JUvc/VQr1cJLuF6NvniyAWrUrQMKS2Su4eiAT2u84Iqt1ZgVc47EUem+9x
+ ocggm5+x16xob6OVX9H7+41KvzIynf2x9KcQxpLF1I8X9pIkpPfHLW0dUpvs5S+ys9
+ +5/0WJmqGbAZ8ZlPNJjuaAg4v0XUWIiiSnaQZvjhA3syD2187CBYw+g5NmkXRxj1M1
+ 3GnQHrZKteoWJoYuwtiMjtH62LeB3ETZ/g0rTgaB7MSUOF29B6O2kEWlzHy8rOBGEp
+ fJaGdaB9I58/iRSybpBrOq2y6EeyMjp6zL+KA0wOElBB/fyoAWqvS+6fdvjIh8BELS
+ AEhRQdTlgy3Fg==
+Date: Mon, 10 Oct 2022 10:27:06 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Y0RU7G05vIEhUOYB@google.com>
-References: <20221006151428.57561-1-chao@kernel.org>
- <Y0CDoWiaGKHkmnzQ@google.com>
- <6d45ea3a-5a71-b760-b60d-9e3e7dda3be4@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <Y0RV6kXCyXtqYuS4@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <6d45ea3a-5a71-b760-b60d-9e3e7dda3be4@kernel.org>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -74,14 +69,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 10/08, Chao Yu wrote: > On 2022/10/8 3:53, Jaegeuk Kim
- wrote: > > Merged into the original patch. > > Thanks, so it looks it's not
- too later to update commit id of original > patch since it's close [...] 
+ Content preview:  Hi Linus, Could you please consider this pull request? Thanks,
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -92,8 +85,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ohwUb-0002Ny-IV
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix compile warning
+X-Headers-End: 1ohwYe-0002Xq-5C
+Subject: [f2fs-dev] [GIT PULL] f2fs update for 6.1-rc1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,46 +98,130 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 10/08, Chao Yu wrote:
-> On 2022/10/8 3:53, Jaegeuk Kim wrote:
-> > Merged into the original patch.
-> 
-> Thanks, so it looks it's not too later to update commit id of original
-> patch since it's close to the end of merge window.
+Hi Linus,
 
-I put this in the next pull request.
+Could you please consider this pull request?
 
-> 
-> Thanks,
-> 
-> > 
-> > On 10/06, Chao Yu wrote:
-> > > fs/f2fs/super.c:3886:6: warning: no previous prototype for 'f2fs_record_stop_reason' [-Wmissing-prototypes]
-> > > 
-> > > Signed-off-by: Chao Yu <chao@kernel.org>
-> > > ---
-> > >   fs/f2fs/super.c | 2 +-
-> > >   1 file changed, 1 insertion(+), 1 deletion(-)
-> > > 
-> > > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> > > index fad333881ea2..2908d41ed462 100644
-> > > --- a/fs/f2fs/super.c
-> > > +++ b/fs/f2fs/super.c
-> > > @@ -3884,7 +3884,7 @@ static void save_stop_reason(struct f2fs_sb_info *sbi, unsigned char reason)
-> > >   	spin_unlock(&sbi->error_lock);
-> > >   }
-> > > -void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
-> > > +static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
-> > >   {
-> > >   	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
-> > >   	int err;
-> > > -- 
-> > > 2.36.1
+Thanks,
+
+The following changes since commit dcf8e5633e2e69ad60b730ab5905608b756a032f:
+
+  tracing: Define the is_signed_type() macro once (2022-08-29 13:29:40 -0700)
+
+are available in the Git repository at:
+
+  git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-6.1-rc1
+
+for you to fetch changes up to b4dac1203f39821c6119033cdeebcea83cf45786:
+
+  f2fs: change to use atomic_t type form sbi.atomic_files (2022-10-07 12:57:26 -0700)
+
+----------------------------------------------------------------
+f2fs-for-6.1-rc1
+
+This round looks fairly small comparing to the previous updates which includes
+mostly minor bug fixes. Nevertheless, as we've still interested in improving
+the stability, Chao added some debugging methods to diagnoze subtle runtime
+inconsistency problem.
+
+Enhancement
+ - store all the corruption or failure reasons in superblock
+ - detect meta inode, summary info, and block address inconsistency
+ - increase the limit for reserve_root for low-end devices
+ - add the number of compressed IO in iostat
+
+Bug fix
+ - DIO write fix for zoned devices
+ - do out-of-place writes for cold files
+ - fix some stat updates (FS_CP_DATA_IO, dirty page count)
+ - fix race condition on setting FI_NO_EXTENT flag
+ - fix data races when freezing super
+ - fix wrong continue condition check in GC
+ - do not allow ATGC for LFS mode
+
+In addition, there're some code enhancement and clean-ups as usual.
+
+----------------------------------------------------------------
+Chao Yu (11):
+      f2fs: iostat: support accounting compressed IO
+      f2fs: remove gc_urgent_high_limited for cleanup
+      f2fs: fix to do sanity check on destination blkaddr during recovery
+      f2fs: fix to do sanity check on summary info
+      f2fs: fix to account FS_CP_DATA_IO correctly
+      f2fs: fix to detect corrupted meta ino
+      f2fs: introduce cp_status sysfs entry
+      f2fs: support recording stop_checkpoint reason into super_block
+      f2fs: support recording errors into superblock
+      f2fs: account swapfile inodes
+      f2fs: change to use atomic_t type form sbi.atomic_files
+
+Christian Brauner (1):
+      f2fs: port to vfs{g,u}id_t and associated helpers
+
+Eric Biggers (1):
+      f2fs: use memcpy_{to,from}_page() where possible
+
+Jaegeuk Kim (6):
+      f2fs: LFS mode does not support ATGC
+      f2fs: fix wrong continue condition in GC
+      f2fs: flush pending checkpoints when freezing super
+      f2fs: complete checkpoints during remount
+      f2fs: increase the limit for reserve_root
+      f2fs: allow direct read for zoned device
+
+Shuqi Zhang (1):
+      f2fs: fix wrong dirty page count when race between mmap and fallocate.
+
+Weichao Guo (1):
+      f2fs: let FI_OPU_WRITE override FADVISE_COLD_BIT
+
+Yonggil Song (1):
+      f2fs: fix typo
+
+Zhang Qilong (10):
+      f2fs: replace logical value "true" with a int number
+      f2fs: simplify code in f2fs_prepare_decomp_mem
+      f2fs: return the tmp_ptr directly in __bitmap_ptr
+      f2fs: use COMPRESS_MAPPING to get compress cache mapping
+      f2fs: add static init_idisk_time function to reduce the code
+      f2fs: remove redundant check in f2fs_sanity_check_cluster
+      f2fs: fix race condition on setting FI_NO_EXTENT flag
+      f2fs: add "c_len" into trace_f2fs_update_extent_tree_range for compressed file
+      f2fs: code clean and fix a type error
+      f2fs: remove the unnecessary check in f2fs_xattr_fiemap
+
+ Documentation/ABI/testing/sysfs-fs-f2fs | 24 +++++++++
+ fs/f2fs/acl.c                           |  2 +-
+ fs/f2fs/checkpoint.c                    | 65 +++++++++++++++-------
+ fs/f2fs/compress.c                      | 32 +++++------
+ fs/f2fs/data.c                          | 53 ++++++++++++------
+ fs/f2fs/debug.c                         |  9 +++-
+ fs/f2fs/dir.c                           |  1 +
+ fs/f2fs/extent_cache.c                  |  9 ++--
+ fs/f2fs/f2fs.h                          | 55 +++++++++++++++----
+ fs/f2fs/file.c                          | 50 ++++++++++-------
+ fs/f2fs/gc.c                            | 40 ++++++++------
+ fs/f2fs/inline.c                        | 17 +++---
+ fs/f2fs/inode.c                         | 51 ++++++++++++------
+ fs/f2fs/iostat.c                        | 74 +++++++++++++++++--------
+ fs/f2fs/iostat.h                        |  4 +-
+ fs/f2fs/node.c                          |  9 ++--
+ fs/f2fs/recovery.c                      | 29 ++++++++--
+ fs/f2fs/segment.c                       | 37 ++++++++-----
+ fs/f2fs/segment.h                       |  2 +
+ fs/f2fs/super.c                         | 96 ++++++++++++++++++++++++++++-----
+ fs/f2fs/sysfs.c                         |  9 +++-
+ fs/f2fs/verity.c                        | 12 ++---
+ fs/f2fs/xattr.c                         |  8 +++
+ include/linux/f2fs_fs.h                 | 40 +++++++++++++-
+ include/trace/events/f2fs.h             | 37 +++++++++----
+ 25 files changed, 556 insertions(+), 209 deletions(-)
 
 
 _______________________________________________
