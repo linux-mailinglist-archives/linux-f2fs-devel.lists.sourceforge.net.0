@@ -2,73 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 422775FD5C6
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 Oct 2022 09:54:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AA0F5FD5E3
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 Oct 2022 10:05:56 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oit3G-00032l-4k;
-	Thu, 13 Oct 2022 07:54:46 +0000
+	id 1oitDz-0004MQ-Jr;
+	Thu, 13 Oct 2022 08:05:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3O8RHYwkbAAQw23oeppivettmh.ksskpiywivgsrxirx.gsq@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1oit3E-00032d-54 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Oct 2022 07:54:44 +0000
+ <31MZHYwkbAKETZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1oitDx-0004LZ-Hb for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 13 Oct 2022 08:05:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
  MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pBB2JfHD6BC1GAkdvMOikiHG2EgwxF6IhXOcrtnyG/E=; b=T8vjjtZ+mgntN/Pz1hQRO+zwLO
- P/m2Zm5RC2h1r8tH42dhG2NNi/lLNE1caIvoeF8nFNML4aarkG7Y+6ld2SwXx2PexwaKih3gXw8XS
- yq7+GPDOfVNCSdIeOFmYg9ytkjfj4gB36pbv9abn4k9FyWQHSI1rYb/xmJnON3/SZ56g=;
+ bh=I51KfTKbgk4rY8YSX6F/YmYNBXk8I8h6VSzhs8RfJc4=; b=GtrfJobOSzuahY7IYFVC22Xq2M
+ du2lWoHIKNodw6GjL5UI0SajqhE1/IRP7/Rzr2XdPW+ci3qwrc797BcpEgx4Da9UljMzG3ycgZnkr
+ VvwtmAjzHUU/sk44uP5cvkZF/lRAXQdVm+CncFL/hcGy2N8BJlHGmaVXO+IxtVD62wZw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
  :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=pBB2JfHD6BC1GAkdvMOikiHG2EgwxF6IhXOcrtnyG/E=; b=N
- tWrPKAinjuUFxrGi97V1HocUqUmQ1W/C3hTSfIeSfCHtL2aW61TxVjNsCgwlvqu1dVXaZ3VYCN6m+
- P+XjJA4pdlfLwA7lAfBLToKDujrQy+gvavO/rOboo4aFsNWZqTie/GEjERjPHOWh4dx/WDTYZGque
- 4+UxF8Kh10ohkOZ4=;
-Received: from mail-il1-f197.google.com ([209.85.166.197])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=I51KfTKbgk4rY8YSX6F/YmYNBXk8I8h6VSzhs8RfJc4=; b=k
+ fmhUSXA4ogOQ0ikpJ6rilhivBsxOyXaR3KFjWmY/aHvcpYoBPfjYEw+ihSmzpbM/+wt5OjjWcF+2K
+ i8mzEBwq9D7F7jT98ecj73vBOPJkWTyoSCbTH+FsVBI+8iVFFgBRW8uy3h8KVokSuBa9/W+7EG+ll
+ 2J4aunKNW94g4Zdk=;
+Received: from mail-il1-f199.google.com ([209.85.166.199])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1oit39-0004a8-Vv for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Oct 2022 07:54:44 +0000
-Received: by mail-il1-f197.google.com with SMTP id
- a17-20020a921a11000000b002fadf952565so964207ila.0
+ id 1oitDt-001yGC-UU for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 13 Oct 2022 08:05:49 +0000
+Received: by mail-il1-f199.google.com with SMTP id
+ x6-20020a056e021bc600b002fc96f780e7so945600ilv.10
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 13 Oct 2022 00:54:40 -0700 (PDT)
+ Thu, 13 Oct 2022 01:05:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=to:from:subject:message-id:date:mime-version:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=pBB2JfHD6BC1GAkdvMOikiHG2EgwxF6IhXOcrtnyG/E=;
- b=AyZZpWkJ4jZHtGQirdDFT0a6mYGF7zx0VD4xfvjMbk8Q8Ly0Cq/98N6Zff+QVTtI37
- jAd6R8khG0glL+nCG5bXxFCNRUoFQpGEUqg2TVEPYGQ29/WAZhfWXuxAxXumctUsrWUZ
- OWkHqj1z6CU8E7jyNgB7qrZNhbPf7TtRcKazRojyKldJ95P67ljl5s5kdV8On8Loej1x
- z6BElCGUz+Ta46OlidxFWx6hM200WDi5ra6u17rm52X9jBWJRWIdzYV/nq3lrivPIy3P
- R6hdK4xs7fn5hQA2Gj1jypHWdF2cAOmYePMWqgbUNzldQ9u0DKewsnKxmw7Q6zLMTXe+
- e2rA==
-X-Gm-Message-State: ACrzQf1O6jgz8miSApXpAE/6zxZDMVM+nQ1m3BuPIrBfEsoQbgZt7G25
- PhnX1Ln6rlmsgheJiy2BDokhySD8B79by6QNcTmP6go0bDaO
-X-Google-Smtp-Source: AMsMyM5BbBlIIjS2Mees0N/qPO9/79u+sdFa9hsrt87xuSU3KkvAUltoXw2DrhLqjg6r2hBsRGHVoxNPaAwfL2fjfANm5ftOXdwE
+ bh=I51KfTKbgk4rY8YSX6F/YmYNBXk8I8h6VSzhs8RfJc4=;
+ b=A35c0xkDTpGX6138OyWKbQ7VX9BkmrQwOHiZ/Ry91kMWKPxWGQrO7HsU+Jjfndfhp6
+ 6L6A2kPyTLFJkjNspFpLZFmMXaIVcjgbTCjbEroSrE9ijHIum1RgWQOOCVMuNVl6meXu
+ K2wo4vdG6zz/o7vNoPsWgkMltzW0ukcS1XE455PkpZDXwvE6GKA7whMRO9ni0C8wdKrx
+ TC6UGDgDRSYE7vWEbywwyDfYbJv1wKMR6ncsrdSbRh4BTtmHh46MQ5AGaZbbWET/31xG
+ UgY+VPVd4Z0/lGW+7PLF0zuVz/Epumx+uxfKJT6LJ4HnMPY6KV23a+Vm3l1/zp4TOI7k
+ VbmA==
+X-Gm-Message-State: ACrzQf18R0xUHINQn2Wywt+1UQBIDQ1QkF1R7lDwpzN/lE1MLRkba0A0
+ neeWUvpwaEtIHyKdwdi9wEJy06J3r9wqBInE1WojWq1idTkt
+X-Google-Smtp-Source: AMsMyM4vvevbmpgx/vNPnuT2rCItgWUCeOmv/TzQnNComfB1jafI5+1ktBpXRHXqCZBD7PV4djBa1yzqvOHy6XMCJdN4qdlnCj5y
 MIME-Version: 1.0
-X-Received: by 2002:a92:c265:0:b0:2f9:ec63:2e3e with SMTP id
- h5-20020a92c265000000b002f9ec632e3emr16809676ild.275.1665647675034; Thu, 13
- Oct 2022 00:54:35 -0700 (PDT)
-Date: Thu, 13 Oct 2022 00:54:35 -0700
+X-Received: by 2002:a05:6638:2103:b0:35a:75b6:9992 with SMTP id
+ n3-20020a056638210300b0035a75b69992mr16913367jaj.244.1665648340435; Thu, 13
+ Oct 2022 01:05:40 -0700 (PDT)
+Date: Thu, 13 Oct 2022 01:05:40 -0700
 X-Google-Appengine-App-Id: s~syzkaller
 X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000fdd5dc05eae5d1af@google.com>
-From: syzbot <syzbot+729c925c2d9fc495ddee@syzkaller.appspotmail.com>
+Message-ID: <000000000000a7077705eae5f90c@google.com>
+From: syzbot <syzbot+035a381ea1afb63f098d@syzkaller.appspotmail.com>
 To: chao@kernel.org, jaegeuk@kernel.org, 
  linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com, terrelln@fb.com
+ syzkaller-bugs@googlegroups.com
 X-Spam-Score: 0.6 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -77,25 +77,25 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 493ffd6605b2
- Merge tag 'ucount-rlimits-cleanups-for-v5.19'.. git tree: upstream
- console+strace:
- https://syzkaller.appspot.com/x/log.txt?x=15fc0252880000 kernel config:
- https://syzkaller.a [...] 
+ syzbot found the following issue on: HEAD commit: bbed346d5a96
+ Merge branch 'for-next/core' into for-kernelci git tree:
+ git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
+ for-kernelci console output: https://syzkaller.appspot. [...] 
  Content analysis details:   (0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.197 listed in list.dnswl.org]
+ no trust [209.85.166.199 listed in list.dnswl.org]
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.197 listed in wl.mailspike.net]
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
  mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1oit39-0004a8-Vv
-Subject: [f2fs-dev] [syzbot] KASAN: null-ptr-deref Write in kill_f2fs_super
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.199 listed in wl.mailspike.net]
+X-Headers-End: 1oitDt-001yGC-UU
+Subject: [f2fs-dev] [syzbot] BUG: unable to handle kernel NULL pointer
+ dereference in f2fs_stop_discard_thread
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,76 +115,104 @@ Hello,
 
 syzbot found the following issue on:
 
-HEAD commit:    493ffd6605b2 Merge tag 'ucount-rlimits-cleanups-for-v5.19'..
-git tree:       upstream
-console+strace: https://syzkaller.appspot.com/x/log.txt?x=15fc0252880000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=d19f5d16783f901
-dashboard link: https://syzkaller.appspot.com/bug?extid=729c925c2d9fc495ddee
+HEAD commit:    bbed346d5a96 Merge branch 'for-next/core' into for-kernelci
+git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
+console output: https://syzkaller.appspot.com/x/log.txt?x=13615406880000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=3a4a45d2d827c1e
+dashboard link: https://syzkaller.appspot.com/bug?extid=035a381ea1afb63f098d
 compiler:       Debian clang version 13.0.1-++20220126092033+75e33f71c2da-1~exp1~20220126212112.63, GNU ld (GNU Binutils for Debian) 2.35.2
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=15714978880000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=1152f7cc880000
+userspace arch: arm64
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=15281162880000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=137aa942880000
 
 Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/f1ff6481e26f/disk-493ffd66.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/101bd3c7ae47/vmlinux-493ffd66.xz
-mounted in repro: https://storage.googleapis.com/syzbot-assets/dd1108445544/mount_0.gz
+disk image: https://storage.googleapis.com/syzbot-assets/e8e91bc79312/disk-bbed346d.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/c1cb3fb3b77e/vmlinux-bbed346d.xz
+mounted in repro: https://storage.googleapis.com/syzbot-assets/eb56ba4877e7/mount_0.gz
 
 IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+729c925c2d9fc495ddee@syzkaller.appspotmail.com
+Reported-by: syzbot+035a381ea1afb63f098d@syzkaller.appspotmail.com
 
 loop0: detected capacity change from 0 to 264192
 F2FS-fs (loop0): invalid crc_offset: 0
 F2FS-fs (loop0): Found nat_bits in checkpoint
 F2FS-fs (loop0): Mounted with checkpoint version = 3651456e
-==================================================================
-BUG: KASAN: null-ptr-deref in instrument_atomic_read_write include/linux/instrumented.h:101 [inline]
-BUG: KASAN: null-ptr-deref in atomic_fetch_add_relaxed include/linux/atomic/atomic-instrumented.h:116 [inline]
-BUG: KASAN: null-ptr-deref in __refcount_add include/linux/refcount.h:193 [inline]
-BUG: KASAN: null-ptr-deref in __refcount_inc include/linux/refcount.h:250 [inline]
-BUG: KASAN: null-ptr-deref in refcount_inc include/linux/refcount.h:267 [inline]
-BUG: KASAN: null-ptr-deref in get_task_struct include/linux/sched/task.h:110 [inline]
-BUG: KASAN: null-ptr-deref in kthread_stop+0x2a/0x210 kernel/kthread.c:703
-Write of size 4 at addr 000000000000001c by task syz-executor364/3613
-
-CPU: 1 PID: 3613 Comm: syz-executor364 Not tainted 6.0.0-syzkaller-09423-g493ffd6605b2 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/22/2022
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:88 [inline]
- dump_stack_lvl+0x1b1/0x28e lib/dump_stack.c:106
- print_report+0xf1/0x1f0 mm/kasan/report.c:436
- kasan_report+0xc3/0xf0 mm/kasan/report.c:495
- kasan_check_range+0x2a7/0x2e0 mm/kasan/generic.c:189
- instrument_atomic_read_write include/linux/instrumented.h:101 [inline]
- atomic_fetch_add_relaxed include/linux/atomic/atomic-instrumented.h:116 [inline]
+Unable to handle kernel NULL pointer dereference at virtual address 000000000000001c
+Mem abort info:
+  ESR = 0x0000000096000004
+  EC = 0x25: DABT (current EL), IL = 32 bits
+  SET = 0, FnV = 0
+  EA = 0, S1PTW = 0
+  FSC = 0x04: level 0 translation fault
+Data abort info:
+  ISV = 0, ISS = 0x00000004
+  CM = 0, WnR = 0
+user pgtable: 4k pages, 48-bit VAs, pgdp=000000010899a000
+[000000000000001c] pgd=0000000000000000, p4d=0000000000000000
+Internal error: Oops: 0000000096000004 [#1] PREEMPT SMP
+Modules linked in:
+CPU: 1 PID: 3029 Comm: syz-executor654 Not tainted 6.0.0-rc7-syzkaller-18095-gbbed346d5a96 #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/30/2022
+pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+pc : __lse_atomic_fetch_add_relaxed arch/arm64/include/asm/atomic_lse.h:62 [inline]
+pc : arch_atomic_fetch_add_relaxed arch/arm64/include/asm/atomic.h:49 [inline]
+pc : atomic_fetch_add_relaxed include/linux/atomic/atomic-instrumented.h:117 [inline]
+pc : __refcount_add include/linux/refcount.h:193 [inline]
+pc : __refcount_inc include/linux/refcount.h:250 [inline]
+pc : refcount_inc include/linux/refcount.h:267 [inline]
+pc : get_task_struct include/linux/sched/task.h:110 [inline]
+pc : kthread_stop+0x34/0x1c0 kernel/kthread.c:703
+lr : __refcount_add include/linux/refcount.h:193 [inline]
+lr : __refcount_inc include/linux/refcount.h:250 [inline]
+lr : refcount_inc include/linux/refcount.h:267 [inline]
+lr : get_task_struct include/linux/sched/task.h:110 [inline]
+lr : kthread_stop+0x30/0x1c0 kernel/kthread.c:703
+sp : ffff8000128abb60
+x29: ffff8000128abb60 x28: 0000000000000000 x27: 000000000000007e
+x26: ffff80000d30cf28 x25: ffff80000d309000 x24: 0000000000000008
+x23: ffffffffffffffff x22: 0000000000000000 x21: 0000000000000000
+x20: fffffffffffffff4 x19: 000000000000001c x18: 00000000000000c0
+x17: ffff80000dd0b198 x16: ffff80000db49158 x15: ffff0000c665cf80
+x14: 0000000000000000 x13: 00000000ffffffff x12: ffff0000c665cf80
+x11: ff808000081403c0 x10: 0000000000000000 x9 : ffff8000081403c0
+x8 : 0000000000000001 x7 : ffff8000095d331c x6 : 0000000000000000
+x5 : 000000008010000f x4 : fffffc00032f6a20 x3 : 000000008010000f
+x2 : ffff0000cbda8100 x1 : 0000000100000000 x0 : 0000000000000000
+Call trace:
  __refcount_add include/linux/refcount.h:193 [inline]
  __refcount_inc include/linux/refcount.h:250 [inline]
  refcount_inc include/linux/refcount.h:267 [inline]
  get_task_struct include/linux/sched/task.h:110 [inline]
- kthread_stop+0x2a/0x210 kernel/kthread.c:703
- kill_f2fs_super+0xe6/0x3c0 fs/f2fs/super.c:4522
- deactivate_locked_super+0xa7/0xf0 fs/super.c:331
- cleanup_mnt+0x4ce/0x560 fs/namespace.c:1186
- task_work_run+0x146/0x1c0 kernel/task_work.c:177
+ kthread_stop+0x34/0x1c0 kernel/kthread.c:703
+ f2fs_stop_discard_thread+0x3c/0x5c fs/f2fs/segment.c:1638
+ kill_f2fs_super+0x5c/0x194 fs/f2fs/super.c:4522
+ deactivate_locked_super+0x70/0xe8 fs/super.c:332
+ deactivate_super+0xd0/0xd4 fs/super.c:363
+ cleanup_mnt+0x1f8/0x234 fs/namespace.c:1186
+ __cleanup_mnt+0x20/0x30 fs/namespace.c:1193
+ task_work_run+0xc4/0x14c kernel/task_work.c:177
  exit_task_work include/linux/task_work.h:38 [inline]
- do_exit+0x6b2/0x2280 kernel/exit.c:813
- do_group_exit+0x1fd/0x2b0 kernel/exit.c:943
- __do_sys_exit_group kernel/exit.c:954 [inline]
- __se_sys_exit_group kernel/exit.c:952 [inline]
- __x64_sys_exit_group+0x3b/0x40 kernel/exit.c:952
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x3d/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7f8264e76359
-Code: Unable to access opcode bytes at 0x7f8264e7632f.
-RSP: 002b:00007fffe8489448 EFLAGS: 00000246 ORIG_RAX: 00000000000000e7
-RAX: ffffffffffffffda RBX: 00007f8264eee410 RCX: 00007f8264e76359
-RDX: 000000000000003c RSI: 00000000000000e7 RDI: 0000000000000001
-RBP: 0000000000000001 R08: ffffffffffffffc0 R09: 0000000000000000
-R10: 0000000000180020 R11: 0000000000000246 R12: 00007f8264eee410
-R13: 0000000000000001 R14: 0000000000000000 R15: 0000000000000001
- </TASK>
-==================================================================
+ do_exit+0x26c/0xbe0 kernel/exit.c:795
+ do_group_exit+0x60/0xe8 kernel/exit.c:925
+ __do_sys_exit_group kernel/exit.c:936 [inline]
+ __se_sys_exit_group kernel/exit.c:934 [inline]
+ __wake_up_parent+0x0/0x40 kernel/exit.c:934
+ __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
+ el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x48/0x164 arch/arm64/kernel/syscall.c:206
+ el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:636
+ el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:654
+ el0t_64_sync+0x18c/0x190 arch/arm64/kernel/entry.S:581
+Code: 9100a293 d503201f 94057e16 52800028 (b8280275) 
+---[ end trace 0000000000000000 ]---
+----------------
+Code disassembly (best guess):
+   0:	9100a293 	add	x19, x20, #0x28
+   4:	d503201f 	nop
+   8:	94057e16 	bl	0x15f860
+   c:	52800028 	mov	w8, #0x1                   	// #1
+* 10:	b8280275 	ldadd	w8, w21, [x19] <-- trapping instruction
 
 
 ---
