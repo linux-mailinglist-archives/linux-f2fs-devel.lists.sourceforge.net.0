@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CE8D5FEB12
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Oct 2022 10:50:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 928CF5FEAFF
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Oct 2022 10:50:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ojGOd-0006wP-4j;
-	Fri, 14 Oct 2022 08:50:23 +0000
+	id 1ojGON-0006WQ-Bg;
+	Fri, 14 Oct 2022 08:50:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hrkanabar@gmail.com>) id 1ojGOI-0006tD-UN;
+ (envelope-from <hrkanabar@gmail.com>) id 1ojGOI-0006Vg-Uw;
  Fri, 14 Oct 2022 08:50:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -20,9 +20,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Gi1PiA14Xvf0/+DfXuVtXD45G5BgebCQf9p57BfhR6s=; b=OTUXksm3JLO661CIo09R23K6K9
- 551u9NFKgGkocPyiPMjSwyXGlpLhpAnZxXk3rgljXMiE4RRQFrP+XUvGS9lBZQEgR2mUE+WfweiRI
- K18+jWRJnxaVuDnayrtjDf5MB9AH8B3oBLbOia32I8Qg5heDtFetLZaby776SiQLnuiE=;
+ bh=uiJoxGZJlGz3xwdy8ebCPccYWzJULAWBypBIpnExuaw=; b=IehNM/mu5d6gxgkmkiXnhJSZjo
+ 7mft5G97f+n+OTH84NNRhDR3pqP+ZTxoOb3HVHlwc+X1/m1F5QgTIiRFv6XbbK5LjwEN8t6arpO8w
+ qJc4QMO/TzPEXrALgVkL/yrxWIo7xB45i+RPYnV6HG0UcVdrPbwG0nDDdKE3XaZ2VfFQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -30,55 +30,55 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Gi1PiA14Xvf0/+DfXuVtXD45G5BgebCQf9p57BfhR6s=; b=BKyDcfKxFjVw7EVpGlSVtUVojO
- epRv/MdqsJ/RHQDf/S7UjMWE7XPsANTXGz5pxkksQfQ9CIkoPzyfHt+mbS4NBzZZ9N2gVKdqk2WJd
- F5Ez4EHvM6c1Ki8jaKEQq1dYf7ivvk9QbgqstgdvfgEQJwEKZ1ZjkoWNyn2h27ZY5Jhk=;
-Received: from mail-wm1-f53.google.com ([209.85.128.53])
+ bh=uiJoxGZJlGz3xwdy8ebCPccYWzJULAWBypBIpnExuaw=; b=fHmh3F+VpmS1S0Iz1ga8jlEU4m
+ 2/bziRNOqoYvadfysf6nbEPoaz/aMqWvYuJrcorlkc65/YImM2aYyL1KPRys5AkCtjJXqN8oKpqnl
+ YnD8uTQoQ/zWWmVdTE24hnYvOdNX2iCLgtBlwkVGGwR0NWaceVQ2kK1/vxP+vUaxugOA=;
+Received: from mail-wm1-f50.google.com ([209.85.128.50])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ojGOE-003OLf-5s; Fri, 14 Oct 2022 08:49:59 +0000
-Received: by mail-wm1-f53.google.com with SMTP id
- bg9-20020a05600c3c8900b003bf249616b0so3060569wmb.3; 
- Fri, 14 Oct 2022 01:49:58 -0700 (PDT)
+ id 1ojGOF-003OLq-Db; Fri, 14 Oct 2022 08:49:59 +0000
+Received: by mail-wm1-f50.google.com with SMTP id
+ v130-20020a1cac88000000b003bcde03bd44so4899768wme.5; 
+ Fri, 14 Oct 2022 01:49:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Gi1PiA14Xvf0/+DfXuVtXD45G5BgebCQf9p57BfhR6s=;
- b=UxT7gVP8q9ze5Ggh2xvvktN6Ml02oBmfbyNFVTxcbcy6qgnZqVwI+fd54u0LJL+LjK
- y9EfYIAWCha0O2HVLdo55pAxb/IFOyVB4eHwuuXfLb3Q+WnwPgMtjSKPzu2oQKEhgIW1
- 8w0WFdRg+RSJnOotAcs1Y+eSeMLVjAcWDFJda2lYZblubtGGGkakV9MIfwsDN7apZ3yC
- Rg00X0lJRAafbj8ZJHp9DjnqhMJlcm3+NYiLzY/y+FmG8gOcaLVVoEvJhhCVshISMbUn
- 79bKI/g91GDk/8Ucsg8DPhwD6is+bLLgsNqiPgi18MPBUAdCAjxbT3q7n7tlSgWXhmL1
- RzAw==
+ bh=uiJoxGZJlGz3xwdy8ebCPccYWzJULAWBypBIpnExuaw=;
+ b=aQXy8rp4jlY1YgDvBq1bWyBZHXn7pusOKrg/5bG7Ec06kepOaaMYlnWN31PAE1PhO0
+ TiKU6+usEJZY4E0qpN1rIEdfB92GVvNMKknsSFgjYfgeV3g+pzSFATmKMeE04UQL4scQ
+ XjyUVRGfqMnFvZ7+ekfDI2ipLglMQJSCdWubbw9vB3pWX5ZABwG8+g26g3rlQoNdpz27
+ C/0CQ6oChQqs+ufVKybV/tfloQQhEVBx2g+7BsjAS96KG2vlZDeo1BThWz9v5Fe5Xwvi
+ Sf8I1muhzR3/vs9pECQZgEQhe44GnS7aptOVx0dr6ahIvicPhqcmhnIlZ5BnWfoJOlSa
+ FNvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Gi1PiA14Xvf0/+DfXuVtXD45G5BgebCQf9p57BfhR6s=;
- b=k8DIg8RRpq4OUBJq0KuhZp6ToQu3s0TcGNtF0Rc2YmGWOhUiOy4V5TpKYP77B9nZC4
- BBWFB/MqbYdRK+KKjOiM3eGCAWRUIxyBfRzShEPhRm+7C9OnP4aRoMF+5TrsHK9AU5uG
- x2kVB5SYW54HCSBYkEgkCb/MRrROl0pwgKwaNSj+DG+tBtyngaWubyPXdSFxQQjHiO6A
- jkhU7JCnEEUMs4AKh+2mQIIZAfzFZWhPrpjGeU4CcQ9klHvgTnZFA/kijFseU8jXdv4c
- HWnsqksZyQP4/oH0hbfVWY9b45X2rrWQL3hEVX3QctswpfUjJIeMxOGrvc/g+N5j+20g
- i+Dw==
-X-Gm-Message-State: ACrzQf1MdLAMKBhg2GE91Iph/1yh+aKF0TaE6d51qUNlegIfKgWi6PyF
- lvBPdEAXqxdBKiYlmtbDHCQ=
-X-Google-Smtp-Source: AMsMyM4fbdkajcL2g53Tyvy1JDbblSDeQm14FaYqXK6zLbEPkMD7/YmebYTcS//ZYjYNy+t3nI8G6Q==
-X-Received: by 2002:a05:600c:3044:b0:3c4:8af4:ecc5 with SMTP id
- n4-20020a05600c304400b003c48af4ecc5mr2758757wmh.52.1665737391668; 
- Fri, 14 Oct 2022 01:49:51 -0700 (PDT)
+ bh=uiJoxGZJlGz3xwdy8ebCPccYWzJULAWBypBIpnExuaw=;
+ b=f2bPl3rCWsunjeR+42Ok5Pft9Ltc5J1Vez0ulBaMdpU5bWp2auBcaZTXfNzRwxOvSP
+ ugsLkJVSHXXFpl3YkAvg1FbxIOyXO7t+zeQ6SY707L+pbo6WHTQ7UGvk0IeB+pm8PB+o
+ 65avymLELkT/792SsJuXgT7HvAZpnmzZsc8I/9smWC6n+P1AdyUgMKDDG0ZapLhO5iYm
+ AOfBNJiK0PlP7YTxIy5XziTNtM4Xd8S/ZBUfAg0m1KVH0O5rDfn/mUKUz2Y37de3in1Y
+ ym4jmtYYmdp1Ea+40WpMQRJFp0MWKhUN+XjceEAQv3JqBKiABwb9cgN1d3P/FcGRdLS4
+ l32Q==
+X-Gm-Message-State: ACrzQf1wUMfbOw/7djuOnc7QQCjUzMolkIwfC6quEwF8xahDE1sfIpOm
+ 2qAICu0q0V9Sr5WMv97bdUw=
+X-Google-Smtp-Source: AMsMyM4FolkT2bmNfdD1h/uAXB6K9stO6Eab/O3lUst48zrWp4fgQUhR7yOOFojOx5Y9yQD+bCbQ2g==
+X-Received: by 2002:a05:600c:3c8e:b0:3b4:d224:addf with SMTP id
+ bg14-20020a05600c3c8e00b003b4d224addfmr9435669wmb.132.1665737392984; 
+ Fri, 14 Oct 2022 01:49:52 -0700 (PDT)
 Received: from hrutvik.c.googlers.com.com
  (120.142.205.35.bc.googleusercontent.com. [35.205.142.120])
  by smtp.gmail.com with ESMTPSA id
- 123-20020a1c1981000000b003c6c4639ac6sm1547372wmz.34.2022.10.14.01.49.51
+ 123-20020a1c1981000000b003c6c4639ac6sm1547372wmz.34.2022.10.14.01.49.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Oct 2022 01:49:51 -0700 (PDT)
+ Fri, 14 Oct 2022 01:49:52 -0700 (PDT)
 From: Hrutvik Kanabar <hrkanabar@gmail.com>
 To: Hrutvik Kanabar <hrutvik@google.com>
-Date: Fri, 14 Oct 2022 08:48:35 +0000
-Message-Id: <20221014084837.1787196-6-hrkanabar@gmail.com>
+Date: Fri, 14 Oct 2022 08:48:36 +0000
+Message-Id: <20221014084837.1787196-7-hrkanabar@gmail.com>
 X-Mailer: git-send-email 2.38.0.413.g74048e4d9e-goog
 In-Reply-To: <20221014084837.1787196-1-hrkanabar@gmail.com>
 References: <20221014084837.1787196-1-hrkanabar@gmail.com>
@@ -91,16 +91,13 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  From: Hrutvik Kanabar When `DISABLE_FS_CSUM_VERIFICATION`
- is enabled, return truthy value for `xfs_verify_cksum`,
- which is the key function
- implementing checksum verification for XFS. Signed-off-by: Hrutvik Kanabar
- --- fs/xfs/libxfs/xfs_cksum.h | 5 ++++- 1 file changed, 4 insertions(+),
+ is enabled,
+ bypass checksum verification in `is_boot_sector_ntfs`. Signed-off-by:
+ Hrutvik Kanabar --- fs/ntfs/super.c | 3 ++- 1 file changed, 2 insertions(+),
  1 deletion(-) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.128.53 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [hrkanabar[at]gmail.com]
@@ -112,9 +109,11 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.53 listed in wl.mailspike.net]
-X-Headers-End: 1ojGOE-003OLf-5s
-Subject: [f2fs-dev] [PATCH RFC 5/7] fs/xfs: support
+ [209.85.128.50 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.128.50 listed in list.dnswl.org]
+X-Headers-End: 1ojGOF-003OLq-Db
+Subject: [f2fs-dev] [PATCH RFC 6/7] fs/ntfs: support
  `DISABLE_FS_CSUM_VERIFICATION` config option
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -144,31 +143,28 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Hrutvik Kanabar <hrutvik@google.com>
 
-When `DISABLE_FS_CSUM_VERIFICATION` is enabled, return truthy value for
-`xfs_verify_cksum`, which is the key function implementing checksum
-verification for XFS.
+When `DISABLE_FS_CSUM_VERIFICATION` is enabled, bypass checksum
+verification in `is_boot_sector_ntfs`.
 
 Signed-off-by: Hrutvik Kanabar <hrutvik@google.com>
 ---
- fs/xfs/libxfs/xfs_cksum.h | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ fs/ntfs/super.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/fs/xfs/libxfs/xfs_cksum.h b/fs/xfs/libxfs/xfs_cksum.h
-index 999a290cfd72..ba55b1afa382 100644
---- a/fs/xfs/libxfs/xfs_cksum.h
-+++ b/fs/xfs/libxfs/xfs_cksum.h
-@@ -76,7 +76,10 @@ xfs_verify_cksum(char *buffer, size_t length, unsigned long cksum_offset)
- {
- 	uint32_t crc = xfs_start_cksum_safe(buffer, length, cksum_offset);
+diff --git a/fs/ntfs/super.c b/fs/ntfs/super.c
+index 001f4e053c85..428c65ce9a80 100644
+--- a/fs/ntfs/super.c
++++ b/fs/ntfs/super.c
+@@ -582,7 +582,8 @@ static bool is_boot_sector_ntfs(const struct super_block *sb,
  
--	return *(__le32 *)(buffer + cksum_offset) == xfs_end_cksum(crc);
-+	if (IS_ENABLED(CONFIG_DISABLE_FS_CSUM_VERIFICATION))
-+		return 1;
-+	else
-+		return *(__le32 *)(buffer + cksum_offset) == xfs_end_cksum(crc);
- }
- 
- #endif /* _XFS_CKSUM_H */
+ 		for (i = 0, u = (le32*)b; u < (le32*)(&b->checksum); ++u)
+ 			i += le32_to_cpup(u);
+-		if (le32_to_cpu(b->checksum) != i)
++		if (!IS_ENABLED(CONFIG_DISABLE_FS_CSUM_VERIFICATION) &&
++		    le32_to_cpu(b->checksum) != i)
+ 			ntfs_warning(sb, "Invalid boot sector checksum.");
+ 	}
+ 	/* Check OEMidentifier is "NTFS    " */
 -- 
 2.38.0.413.g74048e4d9e-goog
 
