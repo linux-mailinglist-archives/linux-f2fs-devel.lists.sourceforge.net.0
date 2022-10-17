@@ -2,104 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C9E1600BE8
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Oct 2022 12:05:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ADD90600E80
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Oct 2022 14:03:23 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1okMzR-0002zU-FY;
-	Mon, 17 Oct 2022 10:04:57 +0000
+	id 1okOpz-0005Ss-1b;
+	Mon, 17 Oct 2022 12:03:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wuhoipok@gmail.com>) id 1okMzP-0002zM-Ne
- for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Oct 2022 10:04:55 +0000
+ (envelope-from <dsterba@suse.cz>) id 1okOpx-0005Si-3G;
+ Mon, 17 Oct 2022 12:03:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RuPi2kJWnTKaT4aVfokzpN9MYv+IdW9MQr50PHecKpc=; b=RAZ6CiLVkktpmB/LyidYsqFpp0
- XtjE0FL94rEbMhVWmg02RPHlrOtNvILzttN6WtrUY052mwmhGnvTyDpoW3UC76uUqFMtBo9+PI5Em
- QNdzbSFvwru72btfuXmSC+nPZ8o7/6mtXfxCkxq8Ev4lc7GqcviREgvVym8dJqfHo98o=;
+ bh=H9rmmj8x9/pRGSP0rhWzAN2XdXyBU8aire6+hcOWaqg=; b=gcXY6vBh15pHoSW5GarnIeEBt2
+ eUlEGAburEPTG/l4gpX50yncmp2aJHT+VX/NELGkgiQ8QTazvx33i4+5B4KPfW20REqjeN35B7EbI
+ dYLmHTEUWkdgkchF2kRkiTXwmFi4R9UDO86TkZEab7NkBVsdailIJdUfP6ODY8NAZpgA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=RuPi2kJWnTKaT4aVfokzpN9MYv+IdW9MQr50PHecKpc=; b=N
- isBazJWqBi2m5BThpW64M5ssnirOq6/bSKCUDRudlvKYEWwLGO2TwR+MogZJERp2KML7u9aDQRsDm
- 3A7Zv7gkZrJyootHGU6CdMmsyj1Vnbobxrcyf7f7soGnIzeqdpqGclNrU00Bw0WR64rIEVU9x6cHx
- RzzyQMUoKm+/wWkY=;
-Received: from mail-pf1-f170.google.com ([209.85.210.170])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Reply-To:Message-ID:
+ Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=H9rmmj8x9/pRGSP0rhWzAN2XdXyBU8aire6+hcOWaqg=; b=hO53b/j71p0mAeVZFcagJ52UYj
+ 2ORgA12kKveEY2SPe5XLZTU0KWfCGllDLCwBmElHleb1Xpc4ochrB4snzBEq0Hw/tfK/66SdX0ElC
+ 9jC3Ti09/gyjuZN0dKQQYgZtw0SshSa2v6ss2M9zBzRu/32VH35wQF4FLSHqjXkdVqdU=;
+Received: from smtp-out2.suse.de ([195.135.220.29])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1okMzP-006qiI-4z for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Oct 2022 10:04:55 +0000
-Received: by mail-pf1-f170.google.com with SMTP id i3so10607148pfk.9
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 17 Oct 2022 03:04:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RuPi2kJWnTKaT4aVfokzpN9MYv+IdW9MQr50PHecKpc=;
- b=YqrS+attN7r6MY97eZcauP2HvFXu4WYJG9YWeF68qJKfCeX4QvaDqnSIf7HRVaCGBu
- dyfX63Th9wv9ekjiN4sNRwIFAJOIH8V4CW4DoGjI3E7NrGgyqpxqX+Gb5LVgxMrT5iph
- kp6diM4a3u4zvnIh9+qT9M+bISfNBPi8ilhCdN3gfZRoX92oalbeY8NOo61j4icEA/LU
- TUl+caQH8o+IfOQx/Gr6iJFRzWFJPl+UVKH7dEsC69z1Fe5CI6CfnwEUnXtLFS62gjmj
- I6WvoOaJkOq2dj2Tj2qjCVWcvVNYoBZLQd7VkGTI0YotieAGsHB8qRroUGsYyI6JNS3Q
- 9Lrg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RuPi2kJWnTKaT4aVfokzpN9MYv+IdW9MQr50PHecKpc=;
- b=6KXHZsYrMYiMiv3wRDTnhxGoiNvjOTIHlwqW1oMw9GhYLyKZOWPvtvKrHQJf1ENX25
- w7NsNJyb10xPDM1WGwSQBSdr1NBZeZQArX+QTF9YcftSNHeDcFqVn5SACCPyjF/2lebw
- 6iSRxq1xFczJM4u4d1YgYvoZmxwBzTDBi9R6yeVLl4g3TK+YiTopJugZ/6JDJGDyEyXU
- LsZafTPiN/WQlCAJvN0feULZM2MKhVUt6v200UesTwXB8dInXW4TR52aKRsNZuV/+p3R
- J+sUMsBeXsmE8pLXUlxPHug1A8obQ2dzQAe8DaAJyWKKi3nKLvbN8dwmXY+LJpCXHcPN
- 3JIg==
-X-Gm-Message-State: ACrzQf0XOe0yxRkyqxhn8gHsxb04SGue/jbhrV4k5tGQB2wFowYpEuG4
- +YBkMM4pmopK8DxzDwI8mLU=
-X-Google-Smtp-Source: AMsMyM7eZofAjeHWzJ94vO88RDrBbxJwmqGvA2+l5nKX+AFUaM4MF83Mofo0oOBLql0h1YnbJ4S/fg==
-X-Received: by 2002:a63:5658:0:b0:43c:dac:9e24 with SMTP id
- g24-20020a635658000000b0043c0dac9e24mr9915160pgm.562.1666001089618; 
- Mon, 17 Oct 2022 03:04:49 -0700 (PDT)
-Received: from localhost.localdomain (124244014158.ctinets.com.
- [124.244.14.158]) by smtp.gmail.com with ESMTPSA id
- d8-20020a170902cec800b0017f7b6e970esm6248454plg.146.2022.10.17.03.04.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Oct 2022 03:04:49 -0700 (PDT)
-From: Hoi Pok Wu <wuhoipok@gmail.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Mon, 17 Oct 2022 18:04:37 +0800
-Message-Id: <20221017100437.618363-1-wuhoipok@gmail.com>
-X-Mailer: git-send-email 2.38.0
+ id 1okOpv-0000Ni-Mh; Mon, 17 Oct 2022 12:03:17 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 22E24205DF;
+ Mon, 17 Oct 2022 12:03:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1666008185;
+ h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+ cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=H9rmmj8x9/pRGSP0rhWzAN2XdXyBU8aire6+hcOWaqg=;
+ b=EinRM8cmED2AkAp5rHQ9Q/lhD8djKWOsD88oc+NtD13fI7XxVo1WUUyzmKt/GVSI6gbzAB
+ avLzqrApgtjFLBBG/xJ+AFWnU8r7YZVrpEWdvAM7p60Y5lEedj8arNYOaEbKzaLwxt/Hc/
+ U1NJTeEZ2sDSl3Q+1AEau/ybC7ZtAR8=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1666008185;
+ h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+ cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=H9rmmj8x9/pRGSP0rhWzAN2XdXyBU8aire6+hcOWaqg=;
+ b=+HpnUQkgMm3dqcglnnoPcbVqtG7gqDj2H/lOtRIyBB+kZhaON0Kk1MTD50LMU/hFLdJhAr
+ f8WVAuBtfTzw7QAw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 9608D13398;
+ Mon, 17 Oct 2022 12:03:04 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id ovthI3hETWM0JQAAMHmgww
+ (envelope-from <dsterba@suse.cz>); Mon, 17 Oct 2022 12:03:04 +0000
+Date: Mon, 17 Oct 2022 14:02:55 +0200
+From: David Sterba <dsterba@suse.cz>
+To: Dmitry Vyukov <dvyukov@google.com>
+Message-ID: <20221017120255.GM13389@twin.jikos.cz>
+References: <20221014084837.1787196-1-hrkanabar@gmail.com>
+ <20221014091503.GA13389@twin.jikos.cz>
+ <CACT4Y+as3SA6C_QFLSeb5JYY30O1oGAh-FVMLCS2NrNahycSoQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <CACT4Y+as3SA6C_QFLSeb5JYY30O1oGAh-FVMLCS2NrNahycSoQ@mail.gmail.com>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Pointer discard_thread is pointing to nowhere, using IS_ERR
- prevents the situation. IS_ERR also seen being used throughout the file.
- Link:
- https://syzkaller.appspot.com/bug?id=9499bc6574cea5940e48199c2fd0732d9b11e5e1
- Reported-by: syzbot+035a381ea1afb63f098d@syzkaller.appspotmail.com
- Signed-off-by: Hoi Pok Wu --- fs/f2fs/segment.c [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Mon, Oct 17, 2022 at 10:31:03AM +0200,
+ Dmitry Vyukov wrote:
+ > On Fri, 14 Oct 2022 at 11:15, David Sterba <dsterba@suse.cz> wrote: > >
+ On Fri, Oct 14, 2022 at 08:48:30AM +0000, Hrutvik Kanabar wrote [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [wuhoipok[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -109,14 +103,11 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.170 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.170 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1okMzP-006qiI-4z
-Subject: [f2fs-dev] [PATCH] fs: f2fs: fix kernel discard_thread NULL
- dereference
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.29 listed in list.dnswl.org]
+X-Headers-End: 1okOpv-0000Ni-Mh
+Subject: Re: [f2fs-dev] [PATCH RFC 0/7] fs: Debug config option to disable
+ filesystem checksum verification for fuzzing
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -128,41 +119,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Hoi Pok Wu <wuhoipok@gmail.com>, syzkaller-bugs@googlegroups.com,
- linux-kernel@vger.kernel.org,
- syzbot+035a381ea1afb63f098d@syzkaller.appspotmail.com,
- linux-f2fs-devel@lists.sourceforge.net
+Reply-To: dsterba@suse.cz
+Cc: "Darrick J . Wong" <djwong@kernel.org>, linux-kernel@vger.kernel.org,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Hrutvik Kanabar <hrutvik@google.com>, kasan-dev@googlegroups.com,
+ Hrutvik Kanabar <hrkanabar@gmail.com>, linux-ext4@vger.kernel.org,
+ Namjae Jeon <linkinjeon@kernel.org>, Marco Elver <elver@google.com>,
+ Josef Bacik <josef@toxicpanda.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Anton Altaparmakov <anton@tuxera.com>, Theodore Ts'o <tytso@mit.edu>,
+ linux-ntfs-dev@lists.sourceforge.net, dsterba@suse.cz,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ Aleksandr Nogikh <nogikh@google.com>, linux-fsdevel@vger.kernel.org,
+ Sungjong Seo <sj1557.seo@samsung.com>, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Pointer discard_thread is pointing to nowhere, using IS_ERR prevents the
-situation. IS_ERR also seen being used throughout the file.
+On Mon, Oct 17, 2022 at 10:31:03AM +0200, Dmitry Vyukov wrote:
+> On Fri, 14 Oct 2022 at 11:15, David Sterba <dsterba@suse.cz> wrote:
+> > On Fri, Oct 14, 2022 at 08:48:30AM +0000, Hrutvik Kanabar wrote:
+> > > From: Hrutvik Kanabar <hrutvik@google.com>
+> > I think the build-time option inflexible, but I see the point when
+> > you're testing several filesystems that it's one place to set up the
+> > environment. Alternatively I suggest to add sysfs knob available in
+> > debuging builds to enable/disable checksum verification per filesystem.
+> 
+> What usage scenarios do you have in mind for runtime changing of this option?
+> I see this option intended only for very narrow use cases which
+> require a specially built kernel in a number of other ways (lots of
+> which are not tunable at runtime, e.g. debugging configs).
 
-Link: https://syzkaller.appspot.com/bug?id=9499bc6574cea5940e48199c2fd0732d9b11e5e1
-Reported-by: syzbot+035a381ea1afb63f098d@syzkaller.appspotmail.com
-Signed-off-by: Hoi Pok Wu <wuhoipok@gmail.com>
----
- fs/f2fs/segment.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index acf3d3fa4363..79978b7206b5 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -1634,7 +1634,8 @@ void f2fs_stop_discard_thread(struct f2fs_sb_info *sbi)
- 		struct task_struct *discard_thread = dcc->f2fs_issue_discard;
- 
- 		dcc->f2fs_issue_discard = NULL;
--		kthread_stop(discard_thread);
-+		if (!IS_ERR(discard_thread))
-+			kthread_stop(discard_thread);
- 	}
- }
- 
--- 
-2.38.0
-
+For my own development and testing usecase I'd like to build the kernel
+from the same config all the time, then start a VM and run random tests
+that do not skip the checksum verification. Then as the last also run
+fuzzing with checksums skipped. The debugging (lockdep, various sanity
+checks, ...) config options are enabled. We both have a narrow usecase,
+what I'm suggesting is a common way to enable them.
 
 
 _______________________________________________
