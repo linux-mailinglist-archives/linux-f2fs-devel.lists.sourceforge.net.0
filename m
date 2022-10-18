@@ -2,85 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E00FF602146
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 04:41:16 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D18A7602508
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 09:08:13 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1okcXY-00063q-T5;
-	Tue, 18 Oct 2022 02:41:12 +0000
+	id 1okghs-00035N-FN;
+	Tue, 18 Oct 2022 07:08:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhangqilong3@huawei.com>) id 1okcXY-00063f-9S
+ (envelope-from <ebiggers@kernel.org>) id 1okghr-00035H-9M
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 02:41:12 +0000
+ Tue, 18 Oct 2022 07:08:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=woTU1vTaasVCB49S87a8lgHW8KVFlWEuHp+ourE+QXw=; b=GSzMtCLX4i2z5VVWTvQNX/k8CD
- /idDMgqr34iQ7/rKuvVJPFJiRnv+Aski9JpaBIrjs2KQultHTOB593QRuR8qgqG2MbCkCw7jXXwrT
- Ey3D1eUkkY4h18t02QOCz0oQivcouPhnJd3oqAbxeM9hBSbJRhsoS7aTQTNisoqmZfQw=;
+ bh=FmHH6j3GReoHi/aYqYsEJlSZeZNHdbNlNcSRvN58v7M=; b=KiZVwPTqVuwUJRK2td8GaZYCJ/
+ uP11NL8CqimApBb+yQwOQZzKeYjY0dHC50IDFHyqEwSY92201SQLBlCyKEhSFEedhFPUhdg2hdt1a
+ hv+SHy2Ow8XwkVth7f6yTGImsokeS8rh9AL4X6sGqDp8cJ3yRq4IC3sS/LLIlYZZCp1M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=woTU1vTaasVCB49S87a8lgHW8KVFlWEuHp+ourE+QXw=; b=H5MMesv7txU7xriG3+T+FfEccJ
- WK1QKzLqyV1piEb49y5KLGMl9Njinc3ghBvdtXt6ezTqfbVzsCJqAqhDnf+4nbgTaHh1VntaS6/3K
- ESRnidsCPxjfAgOTKLDxPx92H35FZ/jq02d+g61RVH1tRW0SKcXIwRCQBFp3h31FmVuU=;
-Received: from szxga01-in.huawei.com ([45.249.212.187])
+ bh=FmHH6j3GReoHi/aYqYsEJlSZeZNHdbNlNcSRvN58v7M=; b=frf5zJQ9iqfrjMOGBF23xOg+Tl
+ lgfjNBt+ny/G9OgC1L1fAcXqebxvsgo7NbtFskPQQ3hljgLKw9cBDuBK2NKIMK03uXDkz7CXfdd86
+ jhA+I8z+c0kVZy2zCP7p8EFG83f04dtd18cjh9oja3klDuNip6noBQksLdvTo/z1u22s=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1okcXS-0002gT-6p for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 02:41:12 +0000
-Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.53])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4MryfN5v7lzmVFS;
- Tue, 18 Oct 2022 10:36:12 +0800 (CST)
-Received: from kwepemm600014.china.huawei.com (7.193.23.54) by
- dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Tue, 18 Oct 2022 10:40:27 +0800
-Received: from huawei.com (10.90.53.225) by kwepemm600014.china.huawei.com
- (7.193.23.54) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Tue, 18 Oct
- 2022 10:40:27 +0800
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Tue, 18 Oct 2022 10:45:32 +0800
-Message-ID: <20221018024532.44184-2-zhangqilong3@huawei.com>
-X-Mailer: git-send-email 2.26.0.106.g9fadedd
-In-Reply-To: <20221018024532.44184-1-zhangqilong3@huawei.com>
-References: <20221018024532.44184-1-zhangqilong3@huawei.com>
+ id 1okghq-0006Mc-K1 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Oct 2022 07:08:07 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 5C5DEB81D55;
+ Tue, 18 Oct 2022 07:08:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA899C433C1;
+ Tue, 18 Oct 2022 07:07:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1666076879;
+ bh=Fj9VdPapWV4U5Y1IbjLNZkEft7nk+xSTK0xPlMf5QSE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=uqiiypT/X4Mi6+oIg09YWnzQ1pcaPbHl6AtT7QUP0efAmdx4C87r8NdT83fk3rk24
+ 7bhbddb7xXglJZbhIRye0aeEQA1B3zTiEXb8shIkDsb9dgPF9QfJagb4uKzlbn2X/1
+ jmLH4Kl4MQp3+ThgwiSTe+NkLViqj5d0DlvKmnEEeSHxJjcDMAG5HyZRVoOFRXhTdG
+ GC54LvENZti2NWaPoQ+rQJB9o7ZIBVD6mtNZwm6Xe/7D644PscfKsxdBBwLhf+ovk7
+ dNDVuNxvRRFFEn51EOVnjJRh4uu+6SmuV+fUKqILHpF1eJKH6sfMfWpqIDijKPZncb
+ e6FkMYGLds4hw==
+Date: Tue, 18 Oct 2022 00:07:57 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Stephen Rothwell <sfr@canb.auug.org.au>
+Message-ID: <Y05QzQM2ed8sOJxC@sol.localdomain>
+References: <20220827065851.135710-1-ebiggers@kernel.org>
+ <YxfE8zjqkT6Zn+Vn@quark> <Yx6DNIorJ86IWk5q@quark>
+ <20220913063025.4815466c@canb.auug.org.au>
+ <20221018155524.5fc4e421@canb.auug.org.au>
 MIME-Version: 1.0
-X-Originating-IP: [10.90.53.225]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- kwepemm600014.china.huawei.com (7.193.23.54)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.3 (--)
+Content-Disposition: inline
+In-Reply-To: <20221018155524.5fc4e421@canb.auug.org.au>
+X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Because the set/clear SBI_IS_RESIZEFS flag not between any
- locks, In the following case: thread1 thread2 ->ioctl(resizefs) ->set RESIZEFS
- flag ->ioctl(resizefs) ... ->set RESIZEFS flag ->clear RESIZEF [...] 
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  On Tue, Oct 18, 2022 at 03:55:24PM +1100, Stephen Rothwell
+ wrote: > Hi Eric, > > On Tue, 13 Sep 2022 06:30:25 +1000 Stephen Rothwell
+ <sfr@canb.auug.org.au> wrote: > > > > On Sun, 11 Sep 2022 19:54:12 [...] 
+ Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.187 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1okcXS-0002gT-6p
-Subject: [f2fs-dev] [PATCH] f2fs: Fix the race condition of resize flag
- between resizefs
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1okghq-0006Mc-K1
+Subject: Re: [f2fs-dev] [PATCH v5 0/8] make statx() return DIO alignment
+ information
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,79 +106,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Zhang Qilong via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Zhang Qilong <zhangqilong3@huawei.com>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-xfs@vger.kernel.org, linux-api@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-next@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, Keith Busch <kbusch@kernel.org>,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Because the set/clear SBI_IS_RESIZEFS flag not between any locks,
-In the following case:
-  thread1			thread2
-   ->ioctl(resizefs)
-    ->set RESIZEFS flag		 ->ioctl(resizefs)
-    ...                   	  ->set RESIZEFS flag
-    ->clear RESIZEFS flag
-    				  ->resizefs stream
-				    # No RESIZEFS flag in the stream
+On Tue, Oct 18, 2022 at 03:55:24PM +1100, Stephen Rothwell wrote:
+> Hi Eric,
+> 
+> On Tue, 13 Sep 2022 06:30:25 +1000 Stephen Rothwell <sfr@canb.auug.org.au> wrote:
+> > 
+> > On Sun, 11 Sep 2022 19:54:12 -0500 Eric Biggers <ebiggers@kernel.org> wrote:
+> > >
+> > > Stephen, can you add my git branch for this patchset to linux-next?
+> > > 
+> > > URL: https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git
+> > > Branch: statx-dioalign
+> > > 
+> > > This is targeting the 6.1 merge window with a pull request to Linus.  
+> > 
+> > Added from today.
+> 
+> I notice that this branch has been removed.  Are you finished with it
+> (i.e. should I remove it from linux-next)?
+> 
 
-Also before freeze_super, the resizefs not started, we should not set
-the SBI_IS_RESIZEFS flag.
+Yes, I think so.  This patchset has been merged upstream.  Any more patches
+related to STATX_DIOALIGN should go in through the VFS or filesystem-specific
+trees.
 
-So move the set/clear SBI_IS_RESIZEFS flag between the cp_mutex and
-gc_lock.
-
-Fixes: b4b10061ef98 ("f2fs: refactor resize_fs to avoid meta updates in progress")
-Signed-off-by: Zhang Xiaoxu <zhangxiaoxu5@huawei.com>
-Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
----
-v2:
-- modify commit message
----
- fs/f2fs/gc.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
-
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 4546e01b2ee0..2a9d825b84f7 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -2133,8 +2133,6 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
- 	if (err)
- 		return err;
- 
--	set_sbi_flag(sbi, SBI_IS_RESIZEFS);
--
- 	freeze_super(sbi->sb);
- 	f2fs_down_write(&sbi->gc_lock);
- 	f2fs_down_write(&sbi->cp_global_sem);
-@@ -2150,6 +2148,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
- 	if (err)
- 		goto out_err;
- 
-+	set_sbi_flag(sbi, SBI_IS_RESIZEFS);
- 	err = free_segment_range(sbi, secs, false);
- 	if (err)
- 		goto recover_out;
-@@ -2173,6 +2172,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
- 		f2fs_commit_super(sbi, false);
- 	}
- recover_out:
-+	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
- 	if (err) {
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_err(sbi, "resize_fs failed, should run fsck to repair!");
-@@ -2185,6 +2185,5 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
- 	f2fs_up_write(&sbi->cp_global_sem);
- 	f2fs_up_write(&sbi->gc_lock);
- 	thaw_super(sbi->sb);
--	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
- 	return err;
- }
--- 
-2.25.1
-
+- Eric
 
 
 _______________________________________________
