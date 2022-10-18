@@ -2,99 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D18A7602508
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 09:08:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 120A56025D2
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 09:34:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1okghs-00035N-FN;
-	Tue, 18 Oct 2022 07:08:08 +0000
+	id 1okh6w-00031j-LD;
+	Tue, 18 Oct 2022 07:34:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1okghr-00035H-9M
+ (envelope-from <yangyingliang@huawei.com>) id 1okh6r-00031L-5P
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 07:08:07 +0000
+ Tue, 18 Oct 2022 07:33:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FmHH6j3GReoHi/aYqYsEJlSZeZNHdbNlNcSRvN58v7M=; b=KiZVwPTqVuwUJRK2td8GaZYCJ/
- uP11NL8CqimApBb+yQwOQZzKeYjY0dHC50IDFHyqEwSY92201SQLBlCyKEhSFEedhFPUhdg2hdt1a
- hv+SHy2Ow8XwkVth7f6yTGImsokeS8rh9AL4X6sGqDp8cJ3yRq4IC3sS/LLIlYZZCp1M=;
+ bh=u3iFX+780q70M5iAXRXrNHK6k0G09l3NwcIwK2MnBzo=; b=lB9bWVIU98W8RVYAqEQxxphND9
+ CpTj99u0rqXDnnlSpn3JneGt/z7RiObVTf0GTxwUBPFQMC4dORcN/lpRrbxJB3nXM7k5vXtEquYHU
+ eHwEeGpS/oPGmY2j/xUfRKiIklAxnfGcqd26ei4gBvghxn454V0VnmOKQCkewq00+lJs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=FmHH6j3GReoHi/aYqYsEJlSZeZNHdbNlNcSRvN58v7M=; b=frf5zJQ9iqfrjMOGBF23xOg+Tl
- lgfjNBt+ny/G9OgC1L1fAcXqebxvsgo7NbtFskPQQ3hljgLKw9cBDuBK2NKIMK03uXDkz7CXfdd86
- jhA+I8z+c0kVZy2zCP7p8EFG83f04dtd18cjh9oja3klDuNip6noBQksLdvTo/z1u22s=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=u3iFX+780q70M5iAXRXrNHK6k0G09l3NwcIwK2MnBzo=; b=W
+ HRktRz5vsLsHDQKu4IXFDQdm7r+nYtkrmLaJXIcQvbSyU4qAI+GhyVVNx+em1VkV2Dlc6poFaqsqF
+ VmF5sbE8CFUUifDR+Par8AnQzMOOlOEU2m6seCI4pyumpJfOQfvq3WSVT02WccJCYzM0Ppo6YTkIp
+ GQ6bQMdx2VbIctSI=;
+Received: from szxga02-in.huawei.com ([45.249.212.188])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1okghq-0006Mc-K1 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 07:08:07 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 5C5DEB81D55;
- Tue, 18 Oct 2022 07:08:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA899C433C1;
- Tue, 18 Oct 2022 07:07:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666076879;
- bh=Fj9VdPapWV4U5Y1IbjLNZkEft7nk+xSTK0xPlMf5QSE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=uqiiypT/X4Mi6+oIg09YWnzQ1pcaPbHl6AtT7QUP0efAmdx4C87r8NdT83fk3rk24
- 7bhbddb7xXglJZbhIRye0aeEQA1B3zTiEXb8shIkDsb9dgPF9QfJagb4uKzlbn2X/1
- jmLH4Kl4MQp3+ThgwiSTe+NkLViqj5d0DlvKmnEEeSHxJjcDMAG5HyZRVoOFRXhTdG
- GC54LvENZti2NWaPoQ+rQJB9o7ZIBVD6mtNZwm6Xe/7D644PscfKsxdBBwLhf+ovk7
- dNDVuNxvRRFFEn51EOVnjJRh4uu+6SmuV+fUKqILHpF1eJKH6sfMfWpqIDijKPZncb
- e6FkMYGLds4hw==
-Date: Tue, 18 Oct 2022 00:07:57 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Stephen Rothwell <sfr@canb.auug.org.au>
-Message-ID: <Y05QzQM2ed8sOJxC@sol.localdomain>
-References: <20220827065851.135710-1-ebiggers@kernel.org>
- <YxfE8zjqkT6Zn+Vn@quark> <Yx6DNIorJ86IWk5q@quark>
- <20220913063025.4815466c@canb.auug.org.au>
- <20221018155524.5fc4e421@canb.auug.org.au>
+ id 1okh6n-007z2U-HQ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Oct 2022 07:33:57 +0000
+Received: from dggpemm500023.china.huawei.com (unknown [172.30.72.53])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Ms58N5jF0zVhwC;
+ Tue, 18 Oct 2022 15:29:08 +0800 (CST)
+Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
+ dggpemm500023.china.huawei.com (7.185.36.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Tue, 18 Oct 2022 15:33:16 +0800
+Received: from huawei.com (10.175.103.91) by dggpemm500007.china.huawei.com
+ (7.185.36.183) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Tue, 18 Oct
+ 2022 15:33:16 +0800
+To: <linux-f2fs-devel@lists.sourceforge.net>
+Date: Tue, 18 Oct 2022 15:32:40 +0800
+Message-ID: <20221018073240.666374-1-yangyingliang@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20221018155524.5fc4e421@canb.auug.org.au>
-X-Spam-Score: -5.5 (-----)
+X-Originating-IP: [10.175.103.91]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ dggpemm500007.china.huawei.com (7.185.36.183)
+X-CFilter-Loop: Reflected
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Oct 18, 2022 at 03:55:24PM +1100, Stephen Rothwell
- wrote: > Hi Eric, > > On Tue, 13 Sep 2022 06:30:25 +1000 Stephen Rothwell
- <sfr@canb.auug.org.au> wrote: > > > > On Sun, 11 Sep 2022 19:54:12 [...] 
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content preview:  Inject fault while probing module, kset_register() may fail, 
+ if it fails, but the refcount of kobject is not decreased to 0, the name
+ allocated in kobject_set_name() is leaked. Fix this by calling kse [...] 
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [45.249.212.188 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1okghq-0006Mc-K1
-Subject: Re: [f2fs-dev] [PATCH v5 0/8] make statx() return DIO alignment
- information
+X-Headers-End: 1okh6n-007z2U-HQ
+Subject: [f2fs-dev] [PATCH] f2fs: fix possible memory leak in
+ f2fs_init_sysfs()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,41 +90,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-api@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-next@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>, Keith Busch <kbusch@kernel.org>,
- linux-ext4@vger.kernel.org
+From: Yang Yingliang via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Yang Yingliang <yangyingliang@huawei.com>
+Cc: jaegeuk@kernel.org, yangyingliang@huawei.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Oct 18, 2022 at 03:55:24PM +1100, Stephen Rothwell wrote:
-> Hi Eric,
-> 
-> On Tue, 13 Sep 2022 06:30:25 +1000 Stephen Rothwell <sfr@canb.auug.org.au> wrote:
-> > 
-> > On Sun, 11 Sep 2022 19:54:12 -0500 Eric Biggers <ebiggers@kernel.org> wrote:
-> > >
-> > > Stephen, can you add my git branch for this patchset to linux-next?
-> > > 
-> > > URL: https://git.kernel.org/pub/scm/linux/kernel/git/ebiggers/linux.git
-> > > Branch: statx-dioalign
-> > > 
-> > > This is targeting the 6.1 merge window with a pull request to Linus.  
-> > 
-> > Added from today.
-> 
-> I notice that this branch has been removed.  Are you finished with it
-> (i.e. should I remove it from linux-next)?
-> 
+Inject fault while probing module, kset_register() may fail,
+if it fails, but the refcount of kobject is not decreased to
+0, the name allocated in kobject_set_name() is leaked. Fix
+this by calling kset_put(), so that name can be freed in
+callback function kobject_cleanup().
 
-Yes, I think so.  This patchset has been merged upstream.  Any more patches
-related to STATX_DIOALIGN should go in through the VFS or filesystem-specific
-trees.
+unreferenced object 0xffff888101b7cc80 (size 8):
+  comm "modprobe", pid 252, jiffies 4294691378 (age 31.760s)
+  hex dump (first 8 bytes):
+    66 32 66 73 00 88 ff ff                          f2fs....
+  backtrace:
+    [<000000001db5b408>] __kmalloc_node_track_caller+0x44/0x1b0
+    [<000000002783a073>] kstrdup+0x3a/0x70
+    [<00000000ead2b281>] kstrdup_const+0x63/0x80
+    [<000000003e5cf8f7>] kvasprintf_const+0x149/0x180
+    [<00000000c4d949ff>] kobject_set_name_vargs+0x56/0x150
+    [<0000000044611660>] kobject_set_name+0xab/0xe0
 
-- Eric
+Fixes: bf9e697ecd42 ("f2fs: expose features to sysfs entry")
+Signed-off-by: Yang Yingliang <yangyingliang@huawei.com>
+---
+ fs/f2fs/sysfs.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index df27afd71ef4..2ef7a48967be 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -1250,8 +1250,10 @@ int __init f2fs_init_sysfs(void)
+ 	kobject_set_name(&f2fs_kset.kobj, "f2fs");
+ 	f2fs_kset.kobj.parent = fs_kobj;
+ 	ret = kset_register(&f2fs_kset);
+-	if (ret)
++	if (ret) {
++		kset_put(&f2fs_kset);
+ 		return ret;
++	}
+ 
+ 	ret = kobject_init_and_add(&f2fs_feat, &f2fs_feat_ktype,
+ 				   NULL, "features");
+-- 
+2.25.1
+
 
 
 _______________________________________________
