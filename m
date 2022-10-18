@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45DBA601E67
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 02:09:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D845601E6F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 02:10:31 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1okaB7-0003S8-81;
-	Tue, 18 Oct 2022 00:09:53 +0000
+	id 1okaBh-0003UO-Mf;
+	Tue, 18 Oct 2022 00:10:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1okaB1-0003Rc-Vt
+ (envelope-from <sashal@kernel.org>) id 1okaBg-0003UG-A8
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 00:09:48 +0000
+ Tue, 18 Oct 2022 00:10:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/iGyvG+uM0EMWcvSKmqWPND9sNutvarLbJkz6rzkO4E=; b=J+jJY95dAczcGEfz4kT1AhNThm
- gM+lcbO49L9I3WrWjipFIhbOWBzCTflh8S4GGWHL82n44YOWE0RkkeptY0QDiVe70qMiNcGbUdW58
- Bw1qGUqqmdp3UIrxkrSMrPp7uLs2selKPncUdP7NB9vKraBdbfrIY+tenO9eNitxiUj4=;
+ bh=rqDbqGG2gkXtZ7z2HApttnlupuvSZKAANM5OQBT5DOE=; b=LLc8NARcrUug4Dxu681yAAT1ZH
+ PpjkDROhSmc9bOaUEqmBeLZK+jL/HZw+FIt+S1Y3jSE299mjkbk4onGqetLtk7b35u5aRIaApX9Br
+ 4FhYijchT7AHK3b7b681rFX467ssgrNXnP1bEND50V9/p3Ox5LI02monwySTVvzGqPOU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,40 +31,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/iGyvG+uM0EMWcvSKmqWPND9sNutvarLbJkz6rzkO4E=; b=mQU71SFB+Dw7xc+TPV/hm7dLY0
- NsvehzpkUshbvtLWTaL5Jn4CntUcXjwuYLtIaC2BvI0a9kNOFfZjYTp1ACS2BnJL/dMK5lMa19qMX
- TC0IkSEqmEMdB/HmmcVj6bPb9+putKwukkHZEeM8wJjEB1zl+kZ29WFVIuSTSAo34ZkE=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=rqDbqGG2gkXtZ7z2HApttnlupuvSZKAANM5OQBT5DOE=; b=mslDPoP54ouk315RqU3icRUcEa
+ p9VOQX+4ocDOtIbK85zQqLap052pm4VpzRJ6VwLRVAfvCmQJno6LeZticY6o8nFaRzE+jWczRB2Sg
+ esDku0qd81IZs0HC5M3gLmUoFl6F4OUG+nEm95+nSXv2oSpANmm8K9oSsNGWBqXJj0cU=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1okaAw-00025H-MT for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 00:09:44 +0000
+ id 1okaBf-007dxM-OU for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Oct 2022 00:10:28 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 53215B81BFF
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5EEAB61325
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 Oct 2022 00:09:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A9654C4314A;
- Tue, 18 Oct 2022 00:09:30 +0000 (UTC)
+ Tue, 18 Oct 2022 00:10:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15856C43143;
+ Tue, 18 Oct 2022 00:10:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666051771;
- bh=lRG6okBk2+KDYke/MRFxCZVkNOSpTFrh9c1zlEwFTvo=;
+ s=k20201202; t=1666051821;
+ bh=1ZYxHUyU9NpGZtKaFDyP0j06ZoEkHo2aD97zSqyG0gU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=JJaIfbnIaopG9lwW92BVBIh5s3Exz+mJ5IZxklWkTj18CekCrL9M+UauD8wsVLkrM
- g4TVVfoP7WGqhcyMfAgjmrsBJ6TrIcxwMGMcDydthd/boxDnyyl1mcmhZkh4orkrq5
- ulHlHtMDf5uBiFog0dr5I60SvvwchaJkuxtJ1EGUx3mts9n2X5vJkF4C/FWUTfoa0q
- 71Ozf49iiVvADjZVCLRQ3P0KRfySpi4X9LSPQEaT3AxaqoRLJpI0jghaA2zx7MrEEs
- bBVzZJ8TwF7D+oE4NHBu1asFFAFdlm+lQ85YPiBubFF64uNTPsSTS3DJDA7T3MR4HA
- +d/mGtlJAPvdA==
+ b=fmojT7R+ukzv97BLMmoabXJoDXShQvOclPgBAnEZZuvQYRGj8yNtncj4tTSWzVj8c
+ AFhGrfdzVhbyTZgCb3mFhCz2/65h4tbU2yhDMGBYRoBV9sNrDS3rpLnlgkt6jRFJvJ
+ N2nAIiiQtw/LgUmWAzjG0I1mZIrPZcXSLZHA6Ho6xm35SCZjhXLnVgKX21cuV41w3n
+ yxsVZ/K6NFMe060qr/PtsM+0k0ZgNXNBRxth/BX78GoH4QKD2TC0BunV0Z6o4nNxy8
+ HslKmdg86ksTJh4JZO++heDk59Z2LjNsP8xq2MLGq1027eDZ0uovlSZy6ZUaUuJJcH
+ fgOS2K8bH2pNA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 17 Oct 2022 20:08:33 -0400
-Message-Id: <20221018000839.2730954-24-sashal@kernel.org>
+Date: Mon, 17 Oct 2022 20:09:36 -0400
+Message-Id: <20221018000940.2731329-17-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20221018000839.2730954-1-sashal@kernel.org>
-References: <20221018000839.2730954-1-sashal@kernel.org>
+In-Reply-To: <20221018000940.2731329-1-sashal@kernel.org>
+References: <20221018000940.2731329-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -84,7 +84,7 @@ X-Spam-Report: Spam detection software,
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -94,8 +94,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1okaAw-00025H-MT
-Subject: [f2fs-dev] [PATCH AUTOSEL 5.19 24/29] f2fs: fix to detect corrupted
+X-Headers-End: 1okaBf-007dxM-OU
+Subject: [f2fs-dev] [PATCH AUTOSEL 5.15 17/21] f2fs: fix to detect corrupted
  meta ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -141,7 +141,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 16 insertions(+), 5 deletions(-)
 
 diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index fc55f5bd1fcc..e27968661bd7 100644
+index bd8960f4966b..cc91bcebd2ca 100644
 --- a/fs/f2fs/inode.c
 +++ b/fs/f2fs/inode.c
 @@ -480,6 +480,12 @@ static int do_read_inode(struct inode *inode)
