@@ -2,45 +2,45 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16A15602147
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 04:41:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E00FF602146
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 04:41:16 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1okcXX-0004zw-WC;
+	id 1okcXY-00063q-T5;
 	Tue, 18 Oct 2022 02:41:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhangqilong3@huawei.com>) id 1okcXW-0004zq-QR
+ (envelope-from <zhangqilong3@huawei.com>) id 1okcXY-00063f-9S
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 02:41:10 +0000
+ Tue, 18 Oct 2022 02:41:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ADllmvyb7NPWxp1dy6NQsaxgvtX3ApXmFCMVKW311wI=; b=I4DmJVVpU49DxiAck4BWKhAVLX
- pNq+tG7zlrSaWdBPcLo/20FMldL+c60ZyI5ARd/82dwhaCP2pdu8DGGCVdUQYIWN9dSV3YGwww1h+
- cDOVfxtWQath5BK84o6DGIASaK48XFxHqIheEKOOt/0gX2UpPRn65W558SUdLY9BYSck=;
+ bh=woTU1vTaasVCB49S87a8lgHW8KVFlWEuHp+ourE+QXw=; b=GSzMtCLX4i2z5VVWTvQNX/k8CD
+ /idDMgqr34iQ7/rKuvVJPFJiRnv+Aski9JpaBIrjs2KQultHTOB593QRuR8qgqG2MbCkCw7jXXwrT
+ Ey3D1eUkkY4h18t02QOCz0oQivcouPhnJd3oqAbxeM9hBSbJRhsoS7aTQTNisoqmZfQw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ADllmvyb7NPWxp1dy6NQsaxgvtX3ApXmFCMVKW311wI=; b=n
- DAPS6aDGQToLncKBW5rhGE2kEFEHNIayK3ERUHDsuy+tjtH0+j1/SEC3/AFv9Jgytgl/9iIG4On+D
- M/l5cl7hkxz2eVhQa0+eZsydL/NDGLbKPNlZhKYyeLgcWnqXAmTBz00xWHG9QRWOlGAp6zhYn1HfA
- M16xzQ2jYOGNdZkY=;
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=woTU1vTaasVCB49S87a8lgHW8KVFlWEuHp+ourE+QXw=; b=H5MMesv7txU7xriG3+T+FfEccJ
+ WK1QKzLqyV1piEb49y5KLGMl9Njinc3ghBvdtXt6ezTqfbVzsCJqAqhDnf+4nbgTaHh1VntaS6/3K
+ ESRnidsCPxjfAgOTKLDxPx92H35FZ/jq02d+g61RVH1tRW0SKcXIwRCQBFp3h31FmVuU=;
 Received: from szxga01-in.huawei.com ([45.249.212.187])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1okcXR-007mYA-7R for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 02:41:10 +0000
+ id 1okcXS-0002gT-6p for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Oct 2022 02:41:12 +0000
 Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.53])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4MryfN5hVPzmVFN;
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4MryfN5v7lzmVFS;
  Tue, 18 Oct 2022 10:36:12 +0800 (CST)
 Received: from kwepemm600014.china.huawei.com (7.193.23.54) by
  dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
@@ -51,9 +51,11 @@ Received: from huawei.com (10.90.53.225) by kwepemm600014.china.huawei.com
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Tue, 18 Oct
  2022 10:40:27 +0800
 To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Tue, 18 Oct 2022 10:45:31 +0800
-Message-ID: <20221018024532.44184-1-zhangqilong3@huawei.com>
+Date: Tue, 18 Oct 2022 10:45:32 +0800
+Message-ID: <20221018024532.44184-2-zhangqilong3@huawei.com>
 X-Mailer: git-send-email 2.26.0.106.g9fadedd
+In-Reply-To: <20221018024532.44184-1-zhangqilong3@huawei.com>
+References: <20221018024532.44184-1-zhangqilong3@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.90.53.225]
 X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
@@ -61,16 +63,14 @@ X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
 X-CFilter-Loop: Reflected
 X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In the following case: process 1 process 2 ->open A ->mmap
- ->read # the first time ->ioctl w/h F2FS_IOC_MOVE_RANGE # (range A->B) ->read
- # the second time We will read old data at the second time. The root cause
- is that user still can see the previous source data after being moved. We
- fix it by adding truncating after __exchange_data_block. 
+ Content preview:  Because the set/clear SBI_IS_RESIZEFS flag not between any
+ locks, In the following case: thread1 thread2 ->ioctl(resizefs) ->set RESIZEFS
+ flag ->ioctl(resizefs) ... ->set RESIZEFS flag ->clear RESIZEF [...] 
  Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -78,9 +78,9 @@ X-Spam-Report: Spam detection software,
  medium trust [45.249.212.187 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1okcXR-007mYA-7R
-Subject: [f2fs-dev] [PATCH] f2fs: Fix data consistency in
- f2fs_move_file_range()
+X-Headers-End: 1okcXS-0002gT-6p
+Subject: [f2fs-dev] [PATCH] f2fs: Fix the race condition of resize flag
+ between resizefs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,53 +100,68 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+Because the set/clear SBI_IS_RESIZEFS flag not between any locks,
 In the following case:
-process 1			process 2
- ->open A
-  ->mmap
-   ->read # the first time
-   				 ->ioctl w/h F2FS_IOC_MOVE_RANGE
-				        	# (range A->B)
-   ->read # the second time
+  thread1			thread2
+   ->ioctl(resizefs)
+    ->set RESIZEFS flag		 ->ioctl(resizefs)
+    ...                   	  ->set RESIZEFS flag
+    ->clear RESIZEFS flag
+    				  ->resizefs stream
+				    # No RESIZEFS flag in the stream
 
-We will read old data at the second time. The root cause is that
-user still can see the previous source data after being moved. We
-fix it by adding truncating after __exchange_data_block.
+Also before freeze_super, the resizefs not started, we should not set
+the SBI_IS_RESIZEFS flag.
 
-Fixes: 4dd6f977fc77 ("f2fs: support an ioctl to move a range of data blocks")
+So move the set/clear SBI_IS_RESIZEFS flag between the cp_mutex and
+gc_lock.
+
+Fixes: b4b10061ef98 ("f2fs: refactor resize_fs to avoid meta updates in progress")
+Signed-off-by: Zhang Xiaoxu <zhangxiaoxu5@huawei.com>
 Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
 ---
 v2:
-- moving truncating to the range of f2fs_lock_op()
-
-v3:
-- modify the title and commit message
+- modify commit message
 ---
- fs/f2fs/file.c | 3 +++
- 1 file changed, 3 insertions(+)
+ fs/f2fs/gc.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 82cda1258227..e9dfa41baf9e 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2824,6 +2824,7 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
- 			goto out_src;
- 	}
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 4546e01b2ee0..2a9d825b84f7 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -2133,8 +2133,6 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 	if (err)
+ 		return err;
  
-+	filemap_invalidate_lock(src->i_mapping);
- 	f2fs_lock_op(sbi);
- 	ret = __exchange_data_block(src, dst, pos_in >> F2FS_BLKSIZE_BITS,
- 				pos_out >> F2FS_BLKSIZE_BITS,
-@@ -2835,7 +2836,9 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
- 		else if (dst_osize != dst->i_size)
- 			f2fs_i_size_write(dst, dst_osize);
- 	}
-+	truncate_pagecache_range(src, pos_in, pos_in + len - 1);
- 	f2fs_unlock_op(sbi);
-+	filemap_invalidate_unlock(src->i_mapping);
+-	set_sbi_flag(sbi, SBI_IS_RESIZEFS);
+-
+ 	freeze_super(sbi->sb);
+ 	f2fs_down_write(&sbi->gc_lock);
+ 	f2fs_down_write(&sbi->cp_global_sem);
+@@ -2150,6 +2148,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 	if (err)
+ 		goto out_err;
  
- 	if (src != dst)
- 		f2fs_up_write(&F2FS_I(dst)->i_gc_rwsem[WRITE]);
++	set_sbi_flag(sbi, SBI_IS_RESIZEFS);
+ 	err = free_segment_range(sbi, secs, false);
+ 	if (err)
+ 		goto recover_out;
+@@ -2173,6 +2172,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 		f2fs_commit_super(sbi, false);
+ 	}
+ recover_out:
++	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
+ 	if (err) {
+ 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_err(sbi, "resize_fs failed, should run fsck to repair!");
+@@ -2185,6 +2185,5 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
+ 	f2fs_up_write(&sbi->cp_global_sem);
+ 	f2fs_up_write(&sbi->gc_lock);
+ 	thaw_super(sbi->sb);
+-	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
+ 	return err;
+ }
 -- 
 2.25.1
 
