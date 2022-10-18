@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54F0D6034E5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 23:28:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD6BB603518
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 23:46:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oku88-0004Qx-FO;
-	Tue, 18 Oct 2022 21:28:08 +0000
+	id 1okuPT-0004BS-BV;
+	Tue, 18 Oct 2022 21:46:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <david@fromorbit.com>) id 1oku87-0004Qn-8K
+ (envelope-from <david@fromorbit.com>) id 1okuPS-0004BM-8C
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 21:28:07 +0000
+ Tue, 18 Oct 2022 21:46:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9c0MfmDDMiDyFxs6faLvTsiA3nu/af5/TaXNlBhXaNQ=; b=K6QE5xhaMWfGZUD3WiTPsJYuxI
- VShKxosvZtLftAcjYSxteGgI22GZA5542aam0bD/4aaH9tBnY80WneR6Kf7jfa5mEdBNFnqz+msDN
- M2UzvQgRdRappi8GD2GM/Dgo2G9MfwAy5ryi96MueiwWHUdEY4sBMzbvwlViqCmslT+w=;
+ bh=rdhpXUGCkMu8VcqIxNAyDKuYCRrF5O3PB114YzTZo88=; b=fRd2/VZoJaTtAUnLaVjEEUrrm1
+ 9glA89pD5mvGKNOMKY1pDjiu6bsBs/3KDdkGTdC2yGlPwglV2Ftr1xoj0oAcE5bABxGBQcA8K0PgG
+ GnlKW+YgjHzQt3OJearWy8uwHn/GSgf9eCkZ+EmcHDWAnGkDB+aEAnoJK5AcSexdHJZ8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,34 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9c0MfmDDMiDyFxs6faLvTsiA3nu/af5/TaXNlBhXaNQ=; b=mLcHafLvUNcSrkf6JqFIu48aU3
- Zc0WTnWYvZEFt09IZ+ixXG5ri4mLKiSLnVAvXqU8Vtj1f3KsvWwii3bUobLuUylChGoscIIEKv/NX
- 98jnl4ZOT2y3QhB+dhYYBP3PN3F2eQY2F5jGLHjCNt0PESWvcqJPBowWbY1H7S7avAzM=;
-Received: from mail104.syd.optusnet.com.au ([211.29.132.246])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1oku86-0005mt-94 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 21:28:07 +0000
+ bh=rdhpXUGCkMu8VcqIxNAyDKuYCRrF5O3PB114YzTZo88=; b=HQnb0iEgDXe+ouVuRgtFOLST46
+ JEWYyiH4bSX7vgoOa2HC+3S8wedaVDe3C5mt/6I8HYbjt7GDdyHGo6IsOtDyu5/68NK7he6DfoTp9
+ WAbgZmDo6JxKSCIyMBg0hXh+ay+CHXxWVUujFhUas5828ntNjgd1H3TT66Fk0DP39Ihs=;
+Received: from mail105.syd.optusnet.com.au ([211.29.132.249])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1okuPO-008sS5-HC for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Oct 2022 21:46:02 +0000
 Received: from dread.disaster.area (pa49-181-106-210.pa.nsw.optusnet.com.au
  [49.181.106.210])
- by mail104.syd.optusnet.com.au (Postfix) with ESMTPS id 967678AE0CC;
- Wed, 19 Oct 2022 08:01:53 +1100 (AEDT)
+ by mail105.syd.optusnet.com.au (Postfix) with ESMTPS id 3E48911021F6;
+ Wed, 19 Oct 2022 08:45:46 +1100 (AEDT)
 Received: from dave by dread.disaster.area with local (Exim 4.92.3)
  (envelope-from <david@fromorbit.com>)
- id 1oktii-003bE7-4J; Wed, 19 Oct 2022 08:01:52 +1100
-Date: Wed, 19 Oct 2022 08:01:52 +1100
+ id 1okuPA-003bsw-Bg; Wed, 19 Oct 2022 08:45:44 +1100
+Date: Wed, 19 Oct 2022 08:45:44 +1100
 From: Dave Chinner <david@fromorbit.com>
 To: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-Message-ID: <20221018210152.GH2703033@dread.disaster.area>
+Message-ID: <20221018214544.GI2703033@dread.disaster.area>
 References: <20220901220138.182896-1-vishal.moola@gmail.com>
- <20220901220138.182896-5-vishal.moola@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220901220138.182896-5-vishal.moola@gmail.com>
+In-Reply-To: <20220901220138.182896-1-vishal.moola@gmail.com>
 X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.4 cv=e9dl9Yl/ c=1 sm=1 tr=0 ts=634f1443
+X-Optus-CM-Analysis: v=2.4 cv=VuxAv86n c=1 sm=1 tr=0 ts=634f1e8b
  a=j6JUzzrSC7wlfFge/rmVbg==:117 a=j6JUzzrSC7wlfFge/rmVbg==:17
- a=kj9zAlcOel0A:10 a=Qawa6l4ZSaYA:10 a=pGLkceISAAAA:8 a=7-415B0cAAAA:8
- a=K-JhRxFi-CGouRt9WdAA:9 a=CjuIK1q_8ugA:10 a=biEYGPWJfzWAr4FL6Ov7:22
+ a=kj9zAlcOel0A:10 a=Qawa6l4ZSaYA:10 a=7-415B0cAAAA:8
+ a=A9Ajo3xi_aTsyj5e4eYA:9 a=CjuIK1q_8ugA:10 a=biEYGPWJfzWAr4FL6Ov7:22
 X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -66,22 +65,22 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Sep 01, 2022 at 03:01:19PM -0700,
+ Content preview:  On Thu, Sep 01, 2022 at 03:01:15PM -0700,
  Vishal Moola (Oracle)
- wrote: > Converted function to use folios throughout. This is in preparation
- for > the removal of find_get_pages_range_tag(). > > Signed [...] 
+ wrote: > This patch series replaces find_get_pages_range_tag() with >
+ filemap_get_folios_tag().
+ This also allows the removal of multiple [...] 
  Content analysis details:   (-0.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [211.29.132.246 listed in list.dnswl.org]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [211.29.132.246 listed in wl.mailspike.net]
-X-Headers-End: 1oku86-0005mt-94
-Subject: Re: [f2fs-dev] [PATCH 04/23] page-writeback: Convert
- write_cache_pages() to use filemap_get_folios_tag()
+ [211.29.132.249 listed in wl.mailspike.net]
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [211.29.132.249 listed in list.dnswl.org]
+X-Headers-End: 1okuPO-008sS5-HC
+Subject: Re: [f2fs-dev] [PATCH 00/23] Convert to filemap_get_folios_tag()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,113 +101,47 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Sep 01, 2022 at 03:01:19PM -0700, Vishal Moola (Oracle) wrote:
-> Converted function to use folios throughout. This is in preparation for
-> the removal of find_get_pages_range_tag().
+On Thu, Sep 01, 2022 at 03:01:15PM -0700, Vishal Moola (Oracle) wrote:
+> This patch series replaces find_get_pages_range_tag() with
+> filemap_get_folios_tag(). This also allows the removal of multiple
+> calls to compound_head() throughout.
+> It also makes a good chunk of the straightforward conversions to folios,
+> and takes the opportunity to introduce a function that grabs a folio
+> from the pagecache.
 > 
-> Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
-> ---
->  mm/page-writeback.c | 44 +++++++++++++++++++++++---------------------
->  1 file changed, 23 insertions(+), 21 deletions(-)
+> F2fs and Ceph have quite alot of work to be done regarding folios, so
+> for now those patches only have the changes necessary for the removal of
+> find_get_pages_range_tag(), and only support folios of size 1 (which is
+> all they use right now anyways).
 > 
-> diff --git a/mm/page-writeback.c b/mm/page-writeback.c
-> index 032a7bf8d259..087165357a5a 100644
-> --- a/mm/page-writeback.c
-> +++ b/mm/page-writeback.c
-> @@ -2285,15 +2285,15 @@ int write_cache_pages(struct address_space *mapping,
->  	int ret = 0;
->  	int done = 0;
->  	int error;
-> -	struct pagevec pvec;
-> -	int nr_pages;
-> +	struct folio_batch fbatch;
-> +	int nr_folios;
->  	pgoff_t index;
->  	pgoff_t end;		/* Inclusive */
->  	pgoff_t done_index;
->  	int range_whole = 0;
->  	xa_mark_t tag;
->  
-> -	pagevec_init(&pvec);
-> +	folio_batch_init(&fbatch);
->  	if (wbc->range_cyclic) {
->  		index = mapping->writeback_index; /* prev offset */
->  		end = -1;
-> @@ -2313,17 +2313,18 @@ int write_cache_pages(struct address_space *mapping,
->  	while (!done && (index <= end)) {
->  		int i;
->  
-> -		nr_pages = pagevec_lookup_range_tag(&pvec, mapping, &index, end,
-> -				tag);
-> -		if (nr_pages == 0)
-> +		nr_folios = filemap_get_folios_tag(mapping, &index, end,
-> +				tag, &fbatch);
+> I've run xfstests on btrfs, ext4, f2fs, and nilfs2, but more testing may be
+> beneficial.
 
-This can find and return dirty multi-page folios if the filesystem
-enables them in the mapping at instantiation time, right?
+Well, that answers my question about how filesystems that enable
+multi-page folios were tested: they weren't. 
 
-> +
-> +		if (nr_folios == 0)
->  			break;
->  
-> -		for (i = 0; i < nr_pages; i++) {
-> -			struct page *page = pvec.pages[i];
-> +		for (i = 0; i < nr_folios; i++) {
-> +			struct folio *folio = fbatch.folios[i];
->  
-> -			done_index = page->index;
-> +			done_index = folio->index;
->  
-> -			lock_page(page);
-> +			folio_lock(folio);
->  
->  			/*
->  			 * Page truncated or invalidated. We can freely skip it
-> @@ -2333,30 +2334,30 @@ int write_cache_pages(struct address_space *mapping,
->  			 * even if there is now a new, dirty page at the same
->  			 * pagecache address.
->  			 */
-> -			if (unlikely(page->mapping != mapping)) {
-> +			if (unlikely(folio->mapping != mapping)) {
->  continue_unlock:
-> -				unlock_page(page);
-> +				folio_unlock(folio);
->  				continue;
->  			}
->  
-> -			if (!PageDirty(page)) {
-> +			if (!folio_test_dirty(folio)) {
->  				/* someone wrote it for us */
->  				goto continue_unlock;
->  			}
->  
-> -			if (PageWriteback(page)) {
-> +			if (folio_test_writeback(folio)) {
->  				if (wbc->sync_mode != WB_SYNC_NONE)
-> -					wait_on_page_writeback(page);
-> +					folio_wait_writeback(folio);
->  				else
->  					goto continue_unlock;
->  			}
->  
-> -			BUG_ON(PageWriteback(page));
-> -			if (!clear_page_dirty_for_io(page))
-> +			BUG_ON(folio_test_writeback(folio));
-> +			if (!folio_clear_dirty_for_io(folio))
->  				goto continue_unlock;
->  
->  			trace_wbc_writepage(wbc, inode_to_bdi(mapping->host));
-> -			error = (*writepage)(page, wbc, data);
-> +			error = writepage(&folio->page, wbc, data);
+I'd suggest that anyone working on further extending the
+filemap/folio infrastructure really needs to be testing XFS as a
+first priority, and then other filesystems as a secondary concern.
 
-Yet, IIUC, this treats all folios as if they are single page folios.
-i.e. it passes the head page of a multi-page folio to a callback
-that will treat it as a single PAGE_SIZE page, because that's all
-the writepage callbacks are currently expected to be passed...
+That's because XFS (via the fs/iomap infrastructure) is one of only
+3 filesystems in the kernel (AFS and tmpfs are the others) that
+interact with the page cache and page cache "pages" solely via folio
+interfaces. As such they are able to support multi-page folios in
+the page cache. All of the tested filesystems still use the fixed
+PAGE_SIZE page interfaces to interact with the page cache, so they
+don't actually exercise interactions with multi-page folios at all.
 
-So won't this break writeback of dirty multipage folios?
+Hence if you are converting generic infrastructure that looks up
+pages in the page cache to look up folios in the page cache, the
+code that processes the returned folios also needs to be updated and
+validated to ensure that it correctly handles multi-page folios. And
+the only way you can do that fully at this point in time is via
+testing XFS or AFS...
 
--Dave.
+Cheers,
+
+Dave.
 -- 
 Dave Chinner
 david@fromorbit.com
