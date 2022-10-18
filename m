@@ -2,160 +2,123 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29B28602616
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 09:46:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FE16603142
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Oct 2022 19:00:44 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1okhJL-0003mM-5H;
-	Tue, 18 Oct 2022 07:46:51 +0000
+	id 1okpxE-0006rN-0N;
+	Tue, 18 Oct 2022 17:00:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1okhJH-0003mB-VV
+ (envelope-from <daeho43@gmail.com>) id 1okpxC-0006rF-7s
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 07:46:47 +0000
+ Tue, 18 Oct 2022 17:00:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A7ulRy0s/oUODbUjSm4inAeZIy1XgU44aubn9hGnGZI=; b=T1JUgqsuBgpYm5ewpVjP18ZdYF
- cm1vTYJQL3thbiTwc2xIOdbSn2NhFumvEcbsnIFgfa7Y/cz3wetlkIIsZupNodUyHDA7L4ZSlrsj+
- +O7bvYp9x8REp5VvhQz5wd5vo8bns9BasTv5NdzrOepd5wawkpgTOrspDz7Xtw+tCyfU=;
+ bh=wLtaH1AYltb6sVoVsKrg3UUMo7fbz4xDcrohkdzNMMQ=; b=Q5xNHRonIGTzBWyPGr26SI9bJ5
+ VzgCVpySzmmPKnmFYJoxdoDkQEcf4JQl+RnrlXl03aiEFKa9W1v3+WTfeX2yFJmYb6pIPXvH3Prmc
+ dZ7KVlfWb3LIJ/ayymKrzVaolqpdrNh1bG5x5W/TlToN3y12AVe0WuPioDwJPrSAOaSA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=A7ulRy0s/oUODbUjSm4inAeZIy1XgU44aubn9hGnGZI=; b=Y
- Tj77Jp+DV5FzkrJqPlQ8q3HiiR/7AIj+cjV3jgLcxgQQcpJwTeFIvHNjAaC5/1bLJ5t9S6FCZ066p
- /OBDZ1Mvi1dmKNUtuFCR+4MrQrqli5Ne6niAlYaAhj63bbCJMjGAOSHauZExktnJwsc41bUHKBTe/
- FpJKcMiPWVLVSyv8=;
-Received: from mail-psaapc01on2091.outbound.protection.outlook.com
- ([40.107.255.91] helo=APC01-PSA-obe.outbound.protection.outlook.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1okhJA-00008U-4M for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Oct 2022 07:46:47 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fGijX5cdBsLQ0HeqsyUFr+ZTLOsSbMngAp9fWtmvay+4S0STDXWMYg/nj7+zij2x6pCFGD0+cteH3oyrJeY0dJ3Qr7/ftImaXu8T9fbGRHwYwyNKEVS1ZxLgPudguPq7YEVZWyc2gIlG1V4+gTmFLSDR2sojrwFFWpkwlzWkhKzmDyj9HW9nBKUB0O8hXAUwP1Q68d5WSYeRy/b40fiXDC0tE4f3kGBBruRHfUSwsl6HW1ppWq92qeFMg4JrAPtTim58Pwccn2Jigtsc2A9G3HRXIKSWOpk8I/yi8mSl6NVUfboPRHpAAYTJC+WfFWZNUXAmXurCXs7t3ME5Vgy1vg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A7ulRy0s/oUODbUjSm4inAeZIy1XgU44aubn9hGnGZI=;
- b=kIeFdXFFJa0qn4WkIGX8I4t/SAqrHrimx3RjQZgc1m4u2MSqOWVjA/o/7QARWNiV5Z0lZNaBL+dnpMpiyy7SPfSEKGuOz77hmjbg+SM1U2HA8ajWWaD2C1Xcv3lmmsRdFvsUiin5YW27eV3d8dCcTOzgbX9VVTJ5/xwLLao4s/VuHtG1XxiNhx7ANV91PMNUVBtuilD6cM2ovtaXr6ppM+SxVgn5PfJVQz9Lr5Qfd+IyPL+Aqc4kD4YLbZWPZOUVDJK2cZVuqNWsbJgvV3mNl3ttVTrkpuS97OrJ6bPxsc+qbbaigqS4O0wSPctoSByuZDYgAVWvdTW7LrYigCHu9A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A7ulRy0s/oUODbUjSm4inAeZIy1XgU44aubn9hGnGZI=;
- b=hqvQGb8nTl2LGWv1udgWy1ZeVu7CP5HJDDtPvwjMUnFEkcRVEXMHUgq0C8jUuVFyPO20eOYSguDskbwXL9OiA/7zZAlmnoqsJvlK5YGHPATVEHSijuX5X2lrexu+hmwwAeL1eshxK68XM/S+dX0aVq+Kn61ELtDeA667lWaCBHChyNePt6WH4rCwQ38L/K+PzhE1SAHg5QbHhlOB5d1KE5DXlVnButo5MN5Ax6Bmcs8KZsPCIOK6IAqotd4S6pdun1XPLkGuOonNcgi/sgIigce7APlptSTXpbdTGSj+PH+ReHJ8wFJTnbf2UtMS7jV2kgeC1jx79L0TlUDrcXHMjw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by PUZPR06MB4604.apcprd06.prod.outlook.com (2603:1096:301:b0::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.30; Tue, 18 Oct
- 2022 07:46:30 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::c84b:5a6c:d66f:c0fd]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::c84b:5a6c:d66f:c0fd%3]) with mapi id 15.20.5723.033; Tue, 18 Oct 2022
- 07:46:30 +0000
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Tue, 18 Oct 2022 15:46:21 +0800
-Message-Id: <20221018074621.16019-1-frank.li@vivo.com>
-X-Mailer: git-send-email 2.35.1
-X-ClientProxiedBy: SI2PR02CA0015.apcprd02.prod.outlook.com
- (2603:1096:4:194::16) To SEZPR06MB5269.apcprd06.prod.outlook.com
- (2603:1096:101:78::6)
+ List-Owner:List-Archive; bh=wLtaH1AYltb6sVoVsKrg3UUMo7fbz4xDcrohkdzNMMQ=; b=g
+ n+d78DMK8I68ftQpX46DwwQF5tKrTHG7Ft8tKdSWbg4kOdSrdavJHqx4FdpTx1boCuoukg+wS7Ztm
+ PoU0e9cVd+emFrpgIMj8z9uHZenZZ/qLYRCuwrKH3iXNLt/dI0H9kqqsJDHv/9x2KJizQAYjHQwxP
+ LoTdvZstiEoHlJtw=;
+Received: from mail-pj1-f41.google.com ([209.85.216.41])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1okpxA-008bxc-Go for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Oct 2022 17:00:34 +0000
+Received: by mail-pj1-f41.google.com with SMTP id
+ p3-20020a17090a284300b0020a85fa3ffcso17972202pjf.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 18 Oct 2022 10:00:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wLtaH1AYltb6sVoVsKrg3UUMo7fbz4xDcrohkdzNMMQ=;
+ b=FHM4oKzsRWWTak3Lk2SX+kT1E72HcBSfxmQct9wf42qL1p2yVlEej21iSp4w+99xiF
+ tqVxXazzZaf9nsyYYolrLbDKrD6uyzgvzs0QeddtBEKGCsajo4R4q3fOLFx3Nu6U5aPH
+ i4wiojsSAh+vSP+77e4eomEDkm26s+FrJU5yd7ejeEyQCuvVAW/dguOvej9d2gU/V/Ia
+ YctjH9CpWwp/gN/4nnxacAzaSzNL151EZPqAAxK4pKvtKBbGYmekjzU90PikMjHEhIg9
+ 2NFvh96hs3wx9roaQOi1Qnn05KzvG5Zh5lCc6dx+73qwgqmeI0e/wAGvU268LrjV2E0G
+ UbdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wLtaH1AYltb6sVoVsKrg3UUMo7fbz4xDcrohkdzNMMQ=;
+ b=PooOuBtus1rUlU7mgS5iRQRtoFBmHKVrql04XZTf/PgARo5NxYvtOUvZZIhRnPUzKY
+ H5M+Ramjfe+f+ROrbEqp5Wl82D4LM6gWr5CZJmeGjdJUGNGME0BzXSBwtJkFAkTUnXxz
+ wtWXQnw9oFLf0A8Or4ArXBcs+Iv0b7aiJ47iQENDF42HtBox49Viv1CT41OaQZcTYrtD
+ VUVh2kGGrzpiCXN6/S6+QIrMzxrjB1Q6gV4Jiy+igkrHBIAhzJ5Vk/QPp1Td5iYKYG8Z
+ SGip4IhWXoGdcYgIhhJUK9O2suIohvAUhI0GOJe8vMrAES1SWT2QRWlTPHyV0Qn+aBks
+ s+Hg==
+X-Gm-Message-State: ACrzQf0cA89iAAksocKARYKS4r091VEBZQO4ZXuoHmI40wyvO815Zm0J
+ 0bWxOkvDMfjhBiNjIzsFSXIdt788XtI=
+X-Google-Smtp-Source: AMsMyM5XXIfUiJh4qYd/pI/1JWeakOnLsBWIuvXEuZDK8yTUoXjXJhloYv28EKIhSPui5+vX6VLBBw==
+X-Received: by 2002:a17:90b:4f4d:b0:20d:a08e:3876 with SMTP id
+ pj13-20020a17090b4f4d00b0020da08e3876mr34584399pjb.0.1666112426711; 
+ Tue, 18 Oct 2022 10:00:26 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:15c:211:201:4968:cc70:9889:c198])
+ by smtp.gmail.com with ESMTPSA id
+ z10-20020a170902d54a00b00172951ddb12sm8951375plf.42.2022.10.18.10.00.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Oct 2022 10:00:26 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Tue, 18 Oct 2022 10:00:16 -0700
+Message-Id: <20221018170017.672824-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.38.0.413.g74048e4d9e-goog
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|PUZPR06MB4604:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4fd70b47-acd1-4e80-eafb-08dab0dcde6c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: SvZdx3/BtJV/oLFYcrqj1AjVGpdNJXkWx3fF24F/uOHXgDjkkNJNxsNMUhbTpG/DSpkiAvQy/R8Xh3k2PVbJbJgKgEneJB41r5vFo+DCC4u/92lNHfLe07hlZ/6tug8BHDCtmhYO4xq0pIcSJl8Oa6JK1mvcCUIH2gGZ4I/cokN5qIOCUrbMPKe5JTDFirD+Inczb0HAa/f6qJcGFRc+ZegwtAT/OOEJIXNSyNhfpof2X42rLbTBJ6jb9OD0s0J820jEaWv1OV6sgGPo7e3GoxaghmggkzhSTlk09laug9guoMS0G9xj2JfsTgyJ+xREApGL8n2KTIHjeVzi1fmq8enStqzuPsbakFdHI9xB67QvMhlHj4ikkhjMJ9g4dAN0Iw7giD+PBzNCl9MnaSwlnEr+SzSUD5mLuL5evSrY29Z86ZdFzTWIePurRmuiF097EFEQxf4T/rR4JFnM7jphAc3VS5zeLd1q4+dSM565+57Gkto5bLmP505PRni+7l79wP2HkPxTa4V7NFsK6iLEVKml1Kv4DPng3rx7/+0fO4a/nvaZ5pTQIuQLVnTvGSp6asl2uP+csgvkgvrAWfrlUADNPQ/i2QQKXVOH9Y+/mO9vBZQHoRWxcEA6ULOooa4Y91JYNqXXysLzPfP0lq5oSXBOq40Pr85wqMfTHHVgUhHQ1R2ie+lSLj4CjdvOC1u/hcFUDfmpKkeKd+aad4xT6i1PeuM1h07GmA0KyMy2cc676vFeT0FadtlXT2roHv+TWLvKMdO3TuN15bAquv/15hRTUxTIS0HbIDUlYx6iiN0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(39860400002)(366004)(396003)(376002)(136003)(346002)(451199015)(36756003)(38350700002)(38100700002)(5660300002)(83380400001)(86362001)(8936002)(26005)(6512007)(6666004)(107886003)(186003)(19627235002)(2616005)(1076003)(478600001)(6486002)(316002)(66556008)(4326008)(41300700001)(66946007)(8676002)(52116002)(6506007)(66476007)(2906002)(309714004);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gu4kY60G462yfkhw37aRxn221NxKb0w7UuQrF67bs+z+hBLD7f3TJO4qWZ2J?=
- =?us-ascii?Q?c67bhdrCfgy7KLPGVGNgZEQo3+RvefKurz4LDYZyH+uVAKLpuynFY7cx/zN6?=
- =?us-ascii?Q?hFnMXhlp3S/dIC0MJIobFXSQaXtgepdw2TLArfDYxRx10SPTnyB2NIUh/JHr?=
- =?us-ascii?Q?Pxq/jKzdx4R56W/tHeJNOQrPUP1zvFujAojYGHptUUnSjY6hwn60SMumxqk2?=
- =?us-ascii?Q?FSAGVGe+dpWhZAt6V1RA62LfDPaCrR79ro9+VnMqNEXMJDvWA3z2kY+vHdqc?=
- =?us-ascii?Q?FmqoRA54GXo5usJC5syfZCt2jwcVSjAbFEoP+hAqKiLM4B44l2dc6/eE1IhJ?=
- =?us-ascii?Q?u2TOFGtGLKfOl4TTIE8hX7j0PJD2k0Lo5qWu6IUk8i48BSHNxFzTajA8sipJ?=
- =?us-ascii?Q?mVHGsPTrI3XXzpwa70euiOWhD1Oep0ISOzkFJmzSmW+Ng/NqsTz8AKaFdqpC?=
- =?us-ascii?Q?WkxgdbcNS2uqDTb7wVGrzQPsokQQQ6VzaKKqz0egkSgBnDrnXNnu/m7/usDd?=
- =?us-ascii?Q?ClOuzHSdFMH7bAWJGDyLWdKvnNg3CIrkkTcEu0Fny0S710JsrdSTzauN9A0s?=
- =?us-ascii?Q?M3f0w/WiYY13pokfDeMi3rhahqkju4Pk/FwoB4NZSQsx/paDghR5B4mLHRb0?=
- =?us-ascii?Q?Frl5vlYRqihvKd/GQSexNKwp5DFrD+cd2X9bD4owIQVhcslD8L3Wsm2W2sup?=
- =?us-ascii?Q?0z0DV5teCGBn+a9HUeXxnKBK1Go1n1XH/5ae6QZ+dfAMxOEhOXwd5EoR1bxf?=
- =?us-ascii?Q?Dn5+juNgYW6DtU+lJdyWL8FBqJB5TQGx6RZrXxYiV/Bxzk0oL5S7GA+hmDk+?=
- =?us-ascii?Q?gscNJi6dS4OyBQyVPxApAjRVtB7VksVsOYYdz41MHZa5cS6vKqBqtQ8ZCBPt?=
- =?us-ascii?Q?+PCkXvad4NY1CppyCahi2XU2rNa622kyPrI10jxW8N3J4pEv7Fm7mSrfr9PG?=
- =?us-ascii?Q?hbbHGMjS5mQnoTYswewH2yBOsvvgbqkNd5Ss8qRXeGXZ8zFkPLLJtm2s/+31?=
- =?us-ascii?Q?uOYdhcbLdrWJ17DmYr5Vj2nfDqpzObDrmtYYfum71AgiP0AjKBadmzi/9Ftb?=
- =?us-ascii?Q?Y+svm3WR7LUUlwtJxg/0TClw8HSW1TDZivpps5fl7eKlbccAA3cKGTsmORRR?=
- =?us-ascii?Q?bofMDylOsJg2qpjdF1qLGXD2C+rg2p2hvagRCgpaGPD4UQOBKljlI12A3xv8?=
- =?us-ascii?Q?dmgjLY4B1qtWpnv83NZC0g2Ur1zOhMO3ov+gqvGkKiSG6Bw5z5H716R09vb9?=
- =?us-ascii?Q?R8/FQFj8+SIhxAsq0DPoW29kOgw3XEDiZmhZIbPQI9M7SMps4IYjDjiFGHVr?=
- =?us-ascii?Q?FMIaDpuMxdHLAHxtuvrO8htzEd33MP2GK2ItH0yUwtPKiyP063a41BHRxOSB?=
- =?us-ascii?Q?r8zvhBUCSleqq6YNT/ZffD64yM6uZj9L9qpwahdrLu3jKenMGLSVF2iNErHy?=
- =?us-ascii?Q?KXjeBjG7XmEbljfWhIjwgeIVKjomLQRPdNqEOu3seuY6V9jdRK58l5O+kjE9?=
- =?us-ascii?Q?Md1CLn1Cocos7V6+WJk8TxxUjwTES2Hj5GOgExhp2KA7mmtrtkZp6nyTb3D6?=
- =?us-ascii?Q?pV+9+/VFhHv5Zuoy41P6Uf/jlsftNNMMc89s6FCO?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4fd70b47-acd1-4e80-eafb-08dab0dcde6c
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Oct 2022 07:46:29.9363 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 57Xz/shAH9wqkKCNv2S4rmEVaLPnJFi5l7y7HfSWtX8r8rCwysuahHL6ho8uxx2k3geYTGueg+dHI6z8e1lpeg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PUZPR06MB4604
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Added a new sysfs node called gc_urgent_mid_remaining. The
- user can set the trial count limit for GC urgent mid mode with this value.
- If GC thread gets to the limit, the mode will turn back to GC norm [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: From: Daeho Jeong We need to make sure i_size doesn't change
+ until atomic write commit is successful and restore it when commit is failed.
+ Signed-off-by: Daeho Jeong --- v5: prevent only i_size update for atomic
+ files when dirtying inode v4: move i_size update after clearing atomic file
+ flag in f2fs_abort_atomic_write() v3: make sure i [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.255.91 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.255.91 listed in wl.mailspike.net]
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: vivo.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.41 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.41 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1okhJA-00008U-4M
-Subject: [f2fs-dev] [PATCH] f2fs: introduce gc_urgent_mid_remaining sysfs
- node
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1okpxA-008bxc-Go
+Subject: [f2fs-dev] [PATCH v5 1/2] f2fs: correct i_size change for atomic
+ writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -167,126 +130,176 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yangtao Li <frank.li@vivo.com>
-Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Added a new sysfs node called gc_urgent_mid_remaining. The user can
-set the trial count limit for GC urgent mid mode with this value. If
-GC thread gets to the limit, the mode will turn back to GC normal mode.
+From: Daeho Jeong <daehojeong@google.com>
 
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
+We need to make sure i_size doesn't change until atomic write commit is
+successful and restore it when commit is failed.
+
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs |  7 +++++++
- fs/f2fs/f2fs.h                          |  2 ++
- fs/f2fs/gc.c                            |  8 ++++++++
- fs/f2fs/super.c                         |  1 +
- fs/f2fs/sysfs.c                         | 10 ++++++++++
- 5 files changed, 28 insertions(+)
+v5: prevent only i_size update for atomic files when dirtying inode
+v4: move i_size update after clearing atomic file flag in
+    f2fs_abort_atomic_write()
+v3: make sure inode is clean while atomic writing
+---
+ fs/f2fs/f2fs.h    |  8 ++++++++
+ fs/f2fs/file.c    | 18 +++++++++++-------
+ fs/f2fs/inode.c   |  5 ++++-
+ fs/f2fs/segment.c | 14 ++++++++++----
+ 4 files changed, 33 insertions(+), 12 deletions(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 483639fb727b..11ce4a8bdacd 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -599,6 +599,13 @@ Description:	You can set the trial count limit for GC urgent high mode with this
- 		If GC thread gets to the limit, the mode will turn back to GC normal mode.
- 		By default, the value is zero, which means there is no limit like before.
- 
-+What:		/sys/fs/f2fs/<disk>/gc_urgent_mid_remaining
-+Date:		October 2022
-+Contact:	"Yangtao Li" <frank.li@vivo.com>
-+Description:	You can set the trial count limit for GC urgent mid mode with this value.
-+		If GC thread gets to the limit, the mode will turn back to GC normal mode.
-+		By default, the value is zero.
-+
- What:		/sys/fs/f2fs/<disk>/max_roll_forward_node_blocks
- Date:		January 2022
- Contact:	"Jaegeuk Kim" <jaegeuk@kernel.org>
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index e6355a5683b7..2f33d6f23a26 100644
+index e7e750e6b332..68d2a3383c38 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -1736,6 +1736,8 @@ struct f2fs_sb_info {
- 	unsigned int next_victim_seg[2];	/* next segment in victim section */
- 	spinlock_t gc_urgent_high_lock;
- 	unsigned int gc_urgent_high_remaining;	/* remaining trial count for GC_URGENT_HIGH */
-+	spinlock_t gc_urgent_mid_lock;
-+	unsigned int gc_urgent_mid_remaining;	/* remaining trial count for GC_URGENT_MID */
+@@ -764,6 +764,7 @@ enum {
+ 	FI_COMPRESS_RELEASED,	/* compressed blocks were released */
+ 	FI_ALIGNED_WRITE,	/* enable aligned write */
+ 	FI_COW_FILE,		/* indicate COW file */
++	FI_ATOMIC_COMMIT,	/* indicate atomic commit completed except disk sync */
+ 	FI_MAX,			/* max flag, never be used */
+ };
  
- 	/* for skip statistic */
- 	unsigned long long skipped_gc_rwsem;		/* FG_GC only */
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 4546e01b2ee0..39d794b33d27 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -104,6 +104,14 @@ static int gc_thread_func(void *data)
- 					sbi->gc_mode = GC_NORMAL;
- 			}
- 			spin_unlock(&sbi->gc_urgent_high_lock);
-+		} else if (sbi->gc_mode == GC_URGENT_MID) {
-+			spin_lock(&sbi->gc_urgent_mid_lock);
-+			if (sbi->gc_urgent_mid_remaining) {
-+				sbi->gc_urgent_mid_remaining--;
-+				if (!sbi->gc_urgent_mid_remaining)
-+					sbi->gc_mode = GC_NORMAL;
-+			}
-+			spin_unlock(&sbi->gc_urgent_mid_lock);
- 		}
+@@ -822,6 +823,7 @@ struct f2fs_inode_info {
+ 	unsigned int i_cluster_size;		/* cluster size */
  
- 		if (sbi->gc_mode == GC_URGENT_HIGH ||
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 3834ead04620..13919ad152b7 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3617,6 +3617,7 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
- 	sbi->max_fragment_chunk = DEF_FRAGMENT_SIZE;
- 	sbi->max_fragment_hole = DEF_FRAGMENT_SIZE;
- 	spin_lock_init(&sbi->gc_urgent_high_lock);
-+	spin_lock_init(&sbi->gc_urgent_mid_lock);
- 	atomic64_set(&sbi->current_atomic_write, 0);
+ 	unsigned int atomic_write_cnt;
++	loff_t original_i_size;		/* original i_size before atomic write */
+ };
  
- 	sbi->dir_level = DEF_DIR_LEVEL;
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index df27afd71ef4..b4476adea776 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -539,6 +539,14 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 		return count;
+ static inline void get_extent_info(struct extent_info *ext,
+@@ -3072,6 +3074,8 @@ static inline void f2fs_i_blocks_write(struct inode *inode,
+ 		set_inode_flag(inode, FI_AUTO_RECOVER);
+ }
+ 
++static inline bool f2fs_is_atomic_file(struct inode *inode);
++
+ static inline void f2fs_i_size_write(struct inode *inode, loff_t i_size)
+ {
+ 	bool clean = !is_inode_flag_set(inode, FI_DIRTY_INODE);
+@@ -3081,6 +3085,10 @@ static inline void f2fs_i_size_write(struct inode *inode, loff_t i_size)
+ 		return;
+ 
+ 	i_size_write(inode, i_size);
++
++	if (f2fs_is_atomic_file(inode))
++		return;
++
+ 	f2fs_mark_inode_dirty_sync(inode, true);
+ 	if (clean || recover)
+ 		set_inode_flag(inode, FI_AUTO_RECOVER);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index ec9ee0f6d502..7ce629c95f4a 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -1991,6 +1991,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
+ 	struct f2fs_inode_info *fi = F2FS_I(inode);
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	struct inode *pinode;
++	loff_t isize;
+ 	int ret;
+ 
+ 	if (!inode_owner_or_capable(mnt_userns, inode))
+@@ -2049,7 +2050,12 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
+ 		f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
+ 		goto out;
+ 	}
+-	f2fs_i_size_write(fi->cow_inode, i_size_read(inode));
++
++	f2fs_write_inode(inode, NULL);
++
++	isize = i_size_read(inode);
++	fi->original_i_size = isize;
++	f2fs_i_size_write(fi->cow_inode, isize);
+ 
+ 	stat_inc_atomic_inode(inode);
+ 
+@@ -2087,16 +2093,14 @@ static int f2fs_ioc_commit_atomic_write(struct file *filp)
+ 
+ 	if (f2fs_is_atomic_file(inode)) {
+ 		ret = f2fs_commit_atomic_write(inode);
+-		if (ret)
+-			goto unlock_out;
+-
+-		ret = f2fs_do_sync_file(filp, 0, LLONG_MAX, 0, true);
+ 		if (!ret)
+-			f2fs_abort_atomic_write(inode, false);
++			ret = f2fs_do_sync_file(filp, 0, LLONG_MAX, 0, true);
++
++		f2fs_abort_atomic_write(inode, ret);
+ 	} else {
+ 		ret = f2fs_do_sync_file(filp, 0, LLONG_MAX, 1, false);
+ 	}
+-unlock_out:
++
+ 	inode_unlock(inode);
+ 	mnt_drop_write_file(filp);
+ 	return ret;
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index 9f0d3864d9f1..044f132b87bc 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -621,9 +621,12 @@ void f2fs_update_inode(struct inode *inode, struct page *node_page)
+ 	ri->i_uid = cpu_to_le32(i_uid_read(inode));
+ 	ri->i_gid = cpu_to_le32(i_gid_read(inode));
+ 	ri->i_links = cpu_to_le32(inode->i_nlink);
+-	ri->i_size = cpu_to_le64(i_size_read(inode));
+ 	ri->i_blocks = cpu_to_le64(SECTOR_TO_BLOCK(inode->i_blocks) + 1);
+ 
++	if (!f2fs_is_atomic_file(inode) ||
++			is_inode_flag_set(inode, FI_ATOMIC_COMMIT))
++		ri->i_size = cpu_to_le64(i_size_read(inode));
++
+ 	if (et) {
+ 		read_lock(&et->lock);
+ 		set_raw_extent(&et->largest, &ri->i_ext);
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 289bcb7ca300..264b4e352319 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -192,14 +192,18 @@ void f2fs_abort_atomic_write(struct inode *inode, bool clean)
+ 	if (!f2fs_is_atomic_file(inode))
+ 		return;
+ 
+-	if (clean)
+-		truncate_inode_pages_final(inode->i_mapping);
+ 	clear_inode_flag(fi->cow_inode, FI_COW_FILE);
+ 	iput(fi->cow_inode);
+ 	fi->cow_inode = NULL;
+ 	release_atomic_write_cnt(inode);
++	clear_inode_flag(inode, FI_ATOMIC_COMMIT);
+ 	clear_inode_flag(inode, FI_ATOMIC_FILE);
+ 	stat_dec_atomic_inode(inode);
++
++	if (clean) {
++		truncate_inode_pages_final(inode->i_mapping);
++		f2fs_i_size_write(inode, fi->original_i_size);
++	}
+ }
+ 
+ static int __replace_atomic_write_block(struct inode *inode, pgoff_t index,
+@@ -335,10 +339,12 @@ static int __f2fs_commit_atomic_write(struct inode *inode)
  	}
  
-+	if (!strcmp(a->attr.name, "gc_urgent_mid_remaining")) {
-+		spin_lock(&sbi->gc_urgent_mid_lock);
-+		sbi->gc_urgent_mid_remaining = t;
-+		spin_unlock(&sbi->gc_urgent_mid_lock);
-+
-+		return count;
+ out:
+-	if (ret)
++	if (ret) {
+ 		sbi->revoked_atomic_block += fi->atomic_write_cnt;
+-	else
++	} else {
+ 		sbi->committed_atomic_block += fi->atomic_write_cnt;
++		set_inode_flag(inode, FI_ATOMIC_COMMIT);
 +	}
-+
- #ifdef CONFIG_F2FS_IOSTAT
- 	if (!strcmp(a->attr.name, "iostat_enable")) {
- 		sbi->iostat_enable = !!t;
-@@ -826,6 +834,7 @@ F2FS_RW_ATTR(FAULT_INFO_TYPE, f2fs_fault_info, inject_type, inject_type);
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, data_io_flag, data_io_flag);
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, node_io_flag, node_io_flag);
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent_high_remaining, gc_urgent_high_remaining);
-+F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent_mid_remaining, gc_urgent_mid_remaining);
- F2FS_RW_ATTR(CPRC_INFO, ckpt_req_control, ckpt_thread_ioprio, ckpt_thread_ioprio);
- F2FS_GENERAL_RO_ATTR(dirty_segments);
- F2FS_GENERAL_RO_ATTR(free_segments);
-@@ -953,6 +962,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(data_io_flag),
- 	ATTR_LIST(node_io_flag),
- 	ATTR_LIST(gc_urgent_high_remaining),
-+	ATTR_LIST(gc_urgent_mid_remaining),
- 	ATTR_LIST(ckpt_thread_ioprio),
- 	ATTR_LIST(dirty_segments),
- 	ATTR_LIST(free_segments),
+ 
+ 	__complete_revoke_list(inode, &revoke_list, ret ? true : false);
+ 
 -- 
-2.25.1
+2.38.0.413.g74048e4d9e-goog
 
 
 
