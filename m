@@ -2,72 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D92936054BC
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Oct 2022 03:14:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C952C6054EF
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Oct 2022 03:19:35 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1olK8N-0001VD-NQ;
-	Thu, 20 Oct 2022 01:14:07 +0000
+	id 1olKDc-0001bp-V7;
+	Thu, 20 Oct 2022 01:19:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1olK8L-0001V7-PW
+ (envelope-from <chao@kernel.org>) id 1olKDb-0001bj-7N
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 20 Oct 2022 01:14:05 +0000
+ Thu, 20 Oct 2022 01:19:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LJfPZMEyo6shCgyFI9rCSlxmeEmbK7huBnNToJCfE0U=; b=UXHnvulm5Z0zsZBQdSIPe+roJ6
- mzm2fMx4JKG5uKIVYWsYDHV7jteenOmVggAIf66+MojfGLo/9OK3BvcLLmVtgHQaxVnOk0TKBY+Rd
- YUnsX5IisMxynXhHymQda0ZFZpeHvFmQaD/WVL4TK3oF6EtypFgyiRPLLoF/VZEw6EmI=;
+ bh=vYr2FMXZij9VagGh8wMCYT5znCRCn0ZzU9YrFNSoUU8=; b=nRuXN3DC5yle3iY2ifXhjD3MZq
+ vHPAYB5BeNkKdLqa3DujK6QfAUKv3++ztW//htBlaJ+p2dqv8OwFA2ZHNqQ2Gf7hx/jOE7Wesb9rA
+ kc+aeOonWap4S7LhVaf8cj9I2iLzsZRkrDN3qTiCFL+z18faT+DZf9jHN+UsCadnoEkY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=LJfPZMEyo6shCgyFI9rCSlxmeEmbK7huBnNToJCfE0U=; b=ZOMKu/McARCG1qHezZNJHaTJUV
- jU6P/U23FV45ORJkT7rw8Wa4iwKJ5BSjQgYBCmC1I9FlCxf98n7E7AnxG5dsMiEIVlEeoOcz19IGl
- NaWvcpoQMByJJsLRgok0bvUE0t1wVWr24Ytf+7w5efgj4x94rz4GsJmpHZE9LPoEDZ+s=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=vYr2FMXZij9VagGh8wMCYT5znCRCn0ZzU9YrFNSoUU8=; b=XDfqSdh3EfWxo9VrRTKEEH5DCM
+ nS6MxHA/H+34FhyQClWpeVxfvX5OPbJLDuS07tdAroGF1Sr0yB/lRdKqM68lf1qEKrlxh8kA0gUdX
+ ydBxVhDSWqv3o9qDmC4JPlFLGmBOYrxabSMump8pNiD0kUoMqUKMj4sLfGxKEDQoZIYc=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1olK8H-00AMbZ-Fm for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 20 Oct 2022 01:14:05 +0000
+ id 1olKDa-00AMtx-LQ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 20 Oct 2022 01:19:31 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 09E98B825A9
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 20 Oct 2022 01:13:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E67C0C433D6;
- Thu, 20 Oct 2022 01:13:49 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 476DC61962;
+ Thu, 20 Oct 2022 01:19:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3DE9C4314B;
+ Thu, 20 Oct 2022 01:19:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666228430;
- bh=Cw8qrt3ip8gdBceNfL9nXfoDDLcgJOWUQORT9U0OgmY=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=IQUwkQjFOTCfLM8HbhUEy4XKNP9Jua0cFIHTDSKL7E+HSUUU6BqJdrw1o4ABHxkuj
- G/Znji3mQIAyUupvJbUAwgzn36pWrA3yO4/mOAxewL0xcp+9Myzk+ZEahVPCs3rRgD
- SZpoQ6oFys+3LBS0CzU7QPMA2TItQEkrzg23J0EEX2qZlAl4Sfo8lIxPpJLqmSFvUu
- 8YtZh5KZS5aZIAYn39v+f+68Sbh1p5ju+KJXDQlUfiai1FnNjAp1qlNtvCcTeGfyt8
- W84XVmKayITrKeTd0O0hxV/Oqr9BxGT8nXCvszXxhYwoFzu0gtQabRd2DVx5G2WVZm
- ROJFg2GzF9TYg==
-Message-ID: <b578c945-f695-d505-1e97-fcfbcef6e670@kernel.org>
-Date: Thu, 20 Oct 2022 09:13:44 +0800
+ s=k20201202; t=1666228765;
+ bh=C7m/IUz8KNYr2uHcKnT+9drGPURTff7VmWTKPAKBvLw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=DXEw57lUOcymEInxZIqsH8AoaDvbklDWzBf34CiEynfXLEi7L2abi6F1v5HsYmu8i
+ 0mppkqkDbdpW6so4w5yJASfVoNwwn5RsX2GTJGRcLoUoYtblUmiNUNMbpSrOz0ABLX
+ zY8B5vxtbkLVI1wWYmTLOnyRg+R6nl5A+Cfw7mFWIX9uEgK+7/P0RUJP9iDGFXkLpT
+ UiZs6GEOt8tT2N5/YI1cT+VZb5gzCqGLPyEOtszKfPQQDKlIUha72iC7ZD0SXof3rs
+ tTwKZmeOJE6BYpYjp5CrJoqRlxjNzYz0NSlPN/81wYpsCdi6ThZcTmHfYFcj21Gdsx
+ atLeEjNaTqupg==
+Message-ID: <0f435090-f75c-08c8-a8e5-567be7225974@kernel.org>
+Date: Thu, 20 Oct 2022 09:19:19 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20221018005806.892778-1-jaegeuk@kernel.org>
+To: Zhang Qilong <zhangqilong3@huawei.com>, jaegeuk@kernel.org
+References: <20221018024532.44184-1-zhangqilong3@huawei.com>
+ <20221018024532.44184-2-zhangqilong3@huawei.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221018005806.892778-1-jaegeuk@kernel.org>
+In-Reply-To: <20221018024532.44184-2-zhangqilong3@huawei.com>
 X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -75,12 +74,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/10/18 8:58, Jaegeuk Kim wrote: > f2fs_unlink > ->
- f2fs_lock_op > -> d_invalidate > -> shrink_dentry_list > -> iput_final > ->
- f2fs_evict_inode > -> f2fs_lock_op > > Signed-off-by: Jaegeuk Kim [...] 
+ Content preview:  On 2022/10/18 10:45,
+ Zhang Qilong wrote: > Because the set/clear
+ SBI_IS_RESIZEFS flag not between any locks, > In the following case: > thread1
+ thread2 > ->ioctl(resizefs) > ->set RESIZEFS flag ->ioct [...] 
  Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -89,14 +91,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+ valid -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1olK8H-00AMbZ-Fm
-Subject: Re: [f2fs-dev] [PATCH] f2fs: let's avoid to get cp_rwsem twice by
- f2fs_evict_inode by d_invalidate
+X-Headers-End: 1olKDa-00AMtx-LQ
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix the race condition of resize flag
+ between resizefs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,20 +107,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/10/18 8:58, Jaegeuk Kim wrote:
-> f2fs_unlink
->   -> f2fs_lock_op
->   -> d_invalidate
->    -> shrink_dentry_list
->     -> iput_final
->      -> f2fs_evict_inode
->       -> f2fs_lock_op
+On 2022/10/18 10:45, Zhang Qilong wrote:
+> Because the set/clear SBI_IS_RESIZEFS flag not between any locks,
+> In the following case:
+>    thread1			thread2
+>     ->ioctl(resizefs)
+>      ->set RESIZEFS flag		 ->ioctl(resizefs)
+>      ...                   	  ->set RESIZEFS flag
+>      ->clear RESIZEFS flag
+>      				  ->resizefs stream
+> 				    # No RESIZEFS flag in the stream
 > 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> Also before freeze_super, the resizefs not started, we should not set
+> the SBI_IS_RESIZEFS flag.
+> 
+> So move the set/clear SBI_IS_RESIZEFS flag between the cp_mutex and
+> gc_lock.
+> 
+> Fixes: b4b10061ef98 ("f2fs: refactor resize_fs to avoid meta updates in progress")
+> Signed-off-by: Zhang Xiaoxu <zhangxiaoxu5@huawei.com>
+> Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 
