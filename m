@@ -2,92 +2,169 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA550607486
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Oct 2022 11:56:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 650DD60758C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Oct 2022 12:58:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ololn-0000PA-Tw;
-	Fri, 21 Oct 2022 09:56:51 +0000
+	id 1olpjH-0002xb-11;
+	Fri, 21 Oct 2022 10:58:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yangyingliang@huawei.com>) id 1olole-0000Ox-Af
+ (envelope-from <Luben.Tuikov@amd.com>) id 1olpjF-0002xR-CW
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Oct 2022 09:56:42 +0000
+ Fri, 21 Oct 2022 10:58:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TRnSBV+L+nH4U6+3XNJM6jZhEQAehli86W+oOpm0+EY=; b=CydjiiaGB3NO7b2BvKeERUwlBw
- QkHl/AhTOgOwU5B9phIuVfWVMVBsE4PlkpMQ/eHAjB6i9Kaa2KiMnMN+J1/yIP8SryhF0dhkgq+YD
- bO31inhb4EpAVFWigu8PMrjUtaLU8BnjTbpa9Lz0/6oZraZTUSX6+Nb7KT4cVyslaZ08=;
+ bh=jm07VsSBrPUaMVoSP5/z4wtVUIt6SaNnSvMM79M3Wug=; b=VQCb5fe78H3GIDq8pSzb8p9G7C
+ /fIiFS5t63V757ztladVqeXTpzaJYrql8WFjpYMWS95HRf2ogVorx7JLM0a9j8XnTlX5Tdsv9zz7m
+ leA2G8PRZrpdjSCRDg+NgtADRfhw1CtYe11mf31p8OtH9Nva4gJkk81g+jrVheX/hjMA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TRnSBV+L+nH4U6+3XNJM6jZhEQAehli86W+oOpm0+EY=; b=Qf76Y+5k3GgdG/noTQL8bReOdw
- GXwRnoO2p87B5FpgVIbxJisK8wOwl/sQExwLtcbFuYUF7pd9M4BSRgvlpDJ2pzqZV9lrHmKN7tphl
- lDSBqSl36zTneTXwkGiqQlgoZ1NkcPAWfQkwKKkQuC83VIVEMfvfSC7l+gQdYZE7Wsb4=;
-Received: from szxga01-in.huawei.com ([45.249.212.187])
+ bh=jm07VsSBrPUaMVoSP5/z4wtVUIt6SaNnSvMM79M3Wug=; b=JdqB3KMdPhWzzWRJfKF09VPp6k
+ 9M8noCyTR1AM81JXgkAqNoSfRwya7qVuSQqgUeAwrdxZrVj55M67i50H7cgMIpU49bxPimc79o1hl
+ g+Hiqc+l/4QvUUW+2fDz7adDgX0srZDRUPWOcFBVYVAGQAJghvEmfb1jRr9GVj1g6YJw=;
+Received: from mail-mw2nam12on2070.outbound.protection.outlook.com
+ ([40.107.244.70] helo=NAM12-MW2-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ololZ-0001Tp-0q for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Oct 2022 09:56:42 +0000
-Received: from dggpemm500021.china.huawei.com (unknown [172.30.72.55])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4Mv09R6B5NzmVJg;
- Fri, 21 Oct 2022 17:51:39 +0800 (CST)
-Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
- dggpemm500021.china.huawei.com (7.185.36.109) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Fri, 21 Oct 2022 17:56:21 +0800
-Received: from [10.174.178.174] (10.174.178.174) by
- dggpemm500007.china.huawei.com (7.185.36.183) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Fri, 21 Oct 2022 17:56:20 +0800
-To: Luben Tuikov <luben.tuikov@amd.com>, Greg KH <gregkh@linuxfoundation.org>
+ id 1olpj1-0005QW-OS for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Oct 2022 10:58:17 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=k8LvNUk9Q6pOhpphnuTNwUeYu09d8YUuPgDXbDg+ze/uKcbDlzFy/JuTASwD9bSFspUg+V5JoXYmEYEb2r4B6NPxc8enBnrjv/k5FRbn0YuKPsSMcvB5wOOnCVJibkws5STK7al5iLZqtowyK6e/goVn40hfNchm0hEEMUdHHWttMrj8d/TZB0IPfCcsi+pXK9TN+ZMxqlBNZg/U9ssM4hrSNgtQg62Oyys0ZcugEvuDcmW6ZI94J4B4Qal0EcJzBlgNkNwxGNkH+4m9N4naH/6Nqkwd/ePqomCyaMxydwWpQN5nKeAs6+OcdN7w/a1/1MESlIUHwqfXt56KEbuKkQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jm07VsSBrPUaMVoSP5/z4wtVUIt6SaNnSvMM79M3Wug=;
+ b=Z0FUYYOrA1t0EmfLjxL+FeOHNEAFy1h/aazisGg7BdWet3zvDU5PHmHKswdMQlRpy6nNkmwU5PdcchOOnrBBuIkRgjH33XH4/p/te2k0ebDZ7uRrzkkb8rnu9PqKeaCXLWMuk55ITRrSwvm8SwQhyfAwM9KQVLYYMXjpwNVjglTwRrywzga+zEqtEymbgZNYka6nQELCMZY2QbsLbNLQty4noGbpOM3y0CFhQo0lXHHU1g0ahZZIBHDBZ1a0jfV6378O7JU/8cDpFHTadAZZh6NiMGBtA30DkE3mKKe5/JiyGwD6ZqXUTrWpAXWEYQvcr/8Nocu7GAwOp9HmbwFdHw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jm07VsSBrPUaMVoSP5/z4wtVUIt6SaNnSvMM79M3Wug=;
+ b=X6QGUtbyJpVA3BvaL0EMBrYgvJt21z9pkjoiW5fMzSOR4rrkSsvBUgSYuxZF88/+/5BH9APvwzg+1Sy/2Lz/mfrUZubw32L3iZKZHDg6x1tynt39ndqlFNdOoO91lbpK0Aot2UQwrRtAzIhtpSOyaM7yvTG0CTeK6BBjbgUG2KQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from DM6PR12MB3370.namprd12.prod.outlook.com (2603:10b6:5:38::25) by
+ BL1PR12MB5175.namprd12.prod.outlook.com (2603:10b6:208:318::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5723.30; Fri, 21 Oct 2022 08:24:40 +0000
+Received: from DM6PR12MB3370.namprd12.prod.outlook.com
+ ([fe80::d309:77d2:93d8:2425]) by DM6PR12MB3370.namprd12.prod.outlook.com
+ ([fe80::d309:77d2:93d8:2425%7]) with mapi id 15.20.5723.035; Fri, 21 Oct 2022
+ 08:24:40 +0000
+Message-ID: <35e66c7c-ff25-efd3-cfbc-d06130687aa7@amd.com>
+Date: Fri, 21 Oct 2022 04:24:37 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.3
+Content-Language: en-CA
+To: Greg KH <gregkh@linuxfoundation.org>
 References: <20221021022102.2231464-1-yangyingliang@huawei.com>
  <d559793a-0ce4-3384-e74e-19855aa31f31@amd.com> <Y1IwLOUGayjT9p6d@kroah.com>
- <0591e66f-731a-5f81-fc9d-3a6d80516c65@huawei.com>
- <Y1JZ9IUPL6jZIQ8E@kroah.com>
- <f1210e20-d167-26c4-7aba-490d8fb7241e@huawei.com>
- <78f84006-955f-6209-1cae-024e4f199b97@amd.com>
-Message-ID: <9ee10048-f3fe-533b-5f00-8e5dd176808e@huawei.com>
-Date: Fri, 21 Oct 2022 17:56:19 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ <5efd73b0-d634-d34f-3d7a-13d674e40d04@amd.com> <Y1JV1wxf/7ERAMhl@kroah.com>
+In-Reply-To: <Y1JV1wxf/7ERAMhl@kroah.com>
+X-ClientProxiedBy: YT1PR01CA0053.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2e::22) To DM6PR12MB3370.namprd12.prod.outlook.com
+ (2603:10b6:5:38::25)
 MIME-Version: 1.0
-In-Reply-To: <78f84006-955f-6209-1cae-024e4f199b97@amd.com>
-Content-Language: en-US
-X-Originating-IP: [10.174.178.174]
-X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
- dggpemm500007.china.huawei.com (7.185.36.183)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.3 (--)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3370:EE_|BL1PR12MB5175:EE_
+X-MS-Office365-Filtering-Correlation-Id: f866f92f-57b1-4b96-bbc8-08dab33db330
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: xMD/NPDP5VNlWVO8L/gKv33XptDJaT7her++bV0tVoGEmz1yUeMty5TG8n1K2gXde+W7EkiEN367m2gEgvBNwUMcuME58RiNPUsvFsAMDCERpj5UdNMz6NWLV4e5Gj7E1BE37qnz+1ztjG5WdXt2lym4x+cg2mFVjwHxx+igkbFOq9+RuNd81hvfbRjQtHbt3e5zXMZ5hdYVRUofamvKQTkkaZkPID3UYgV00NysiYGQM9eIOyv63rw+PgjoEaUiz6qyDmiDfIcIE6C34sMBzh58uKxqdSPNAXMiEpidUcOmC0qF97OU/OvDI3HgzYyf7owUf06pjr1SMsm+RUla8/zsZBA0Oy5fTiifPwdiNsSf5z3/loaGhoRUMFU0O8cwHPXp7hdfyvgQpqNT2/7tUt2set78I1ZpTZDxElHLKi6sxhycjy53ckTJX6iN5VF8J6YzXFzLLmHqd2DtlRkOVhd5Z2Fr2+opSkAzCRqIiPZlAkVHDEKjRfSW+eWSilEdJgt4nL1whJlYp4PSgkCYmUFbG0jNfcm2oF5SlYGul3GP2/uKMMRjAnEQ0BatPbZG9j/zqBuGZvAO69umJ4rOCMPuFvHkJrt8qHetYl6FLi2Vu4izx9ZzWt/7+iDqKYGdWJeAaV2qoks8hEfFUHHOQiSV9XVOzLJI/CX1833wk2d47H0vws1XT2Dm+0DCShnfKKgZDkUo92rJsiglJgfUK7r4BbOrXxf/6rGpzvvlzutJXgcrsK11XaOgQ+fPn9R9AZRF851kdKYID+pQ3SgEeJ0u2KizzRmlpvXJqtuqAN/HMim9WpTsnW1vEjGDfyDNqQRnrxKPL+R4r45sUMVigg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR12MB3370.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230022)(4636009)(376002)(346002)(136003)(366004)(39860400002)(396003)(451199015)(41300700001)(53546011)(66946007)(6666004)(8676002)(66556008)(36756003)(31696002)(6916009)(7416002)(4326008)(316002)(6506007)(2906002)(6512007)(86362001)(26005)(5660300002)(66476007)(8936002)(66899015)(186003)(4001150100001)(2616005)(38100700002)(478600001)(45080400002)(44832011)(31686004)(6486002)(966005)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cHMzQS9wSFdaZGFqUlFUMC9weW9oMjlKaHpBNEJPcGVyOFNDejdEdVhSbmZm?=
+ =?utf-8?B?QisxYTlpUGRZTUdSUmFQTkhZM25MQ1hNaDZaRmc2S05nQ1pteUlHRVg5QnVS?=
+ =?utf-8?B?cHJYbFJRWFdqajBEVnllWTFDdk5IMkNMSDcyMEhnMXZ4V2dNYkRtQ1JwVkhj?=
+ =?utf-8?B?WjhyNDJRaWxBdm0xV0dpbXBBV1B1ZHROWEJMOEtFOUJiM1JiekM1cW9KTjBF?=
+ =?utf-8?B?V3ZTSVJCZ1VucGRxblVLZjhkZGpOMGdRQ1FxdXFUd3lvZU14cWY4aTVCc2F5?=
+ =?utf-8?B?ZHhBNnZZTDBLMjNFaVVDTm1pSThid0hEZzVoblZwL05JNnFTVmJHMnVYTDJS?=
+ =?utf-8?B?eDEycnc4V2wvRnpsOVBkdU1UcUpDZnhJWWlDbjZaVVA4bW1mSzBKcWU2NzRX?=
+ =?utf-8?B?K2x4aURmRU5NalQvMGdqakRIWHlkMEgzVzhTRjRmZUhRam40NzgxcjlteFpB?=
+ =?utf-8?B?Nk1EMHpqQm14ZklhOS9DZVNFV1VINWJwSzl3Y2lsMmpMa3RObjdzdEU3YTk3?=
+ =?utf-8?B?VklMZWhWQzIraXZBVnc0L2lHNlY5MmdHMXY2K0dLTGpyQTlQWkt2eU1xQnRJ?=
+ =?utf-8?B?a3hNUnVOUkcxNERRYUJQbnpSTlNJTlhGeVg2K0dCM2JhRTZWUzRCUy9tRll2?=
+ =?utf-8?B?dGtHM0E0TUVDSXoyV3lmU3NoLzhPOGFDYlM3dmwrcE44cXAvSXBJWUF4QWRP?=
+ =?utf-8?B?RnFmRzEwWXV4c3l4T2NMYWVFNWpJelR3SzN0Z3poVXhBbHhDYjJESXZWaEhl?=
+ =?utf-8?B?NVJpY0xweWZiTkhMT1pmL0ExK2dIcFAxaE9jUWFiU1FQSWh5bkltSHc0di9V?=
+ =?utf-8?B?dVhUS2YxU1dxWCtWZEFIbFBEWHpjUElkZGpDM2l2RThMSzg5L0s3WFdIVENI?=
+ =?utf-8?B?K3c3ZCtYdm5oQytCUU1rQ3BCaEdxL2dhZXF2VWkvN3Fpb0M4WEFNL1JSVklu?=
+ =?utf-8?B?KzVmMDhONXNlbjBUdEwzRTliMFdwbll4YXVaMEJJc2RBWWppWFRPdVRmSVhN?=
+ =?utf-8?B?WERkZTRwd0tFck13Q3RDY0JmY1lMMVV0YnMzZ1NYRCswK2w3c2djS0xhYllD?=
+ =?utf-8?B?eSs2Ym9uSklnUmNyRlZhbkFhUHFrK3JjRnNPZkIyK1dhaHo5d09BaXZOQlM2?=
+ =?utf-8?B?amtEaWl0RVRpNlNPMHVramgwR21PRVdhZCs2NFZ0UHdwV2hkUENGdnFLa1VY?=
+ =?utf-8?B?MkI4RGwwK3pGWXdOdmpCanV2THRFNkZnTURvT1FnRE95QVMwSFZMWDR4VFJp?=
+ =?utf-8?B?R1NMS2htNWhJWGMvM2RzY2dqK0x0MTdXSStFZlJsSEFNMkNSVXNLeXdPU2tC?=
+ =?utf-8?B?d2E5cjI4SldlWFhUcVYxU3cyRkF4cW1RNTdLbFV6ZTBNMlJBNWlQTEZaNlds?=
+ =?utf-8?B?K1ZVeFAxQmp0Z1dra3hRNXJka29nVjFuU3JtWENoTkJQWlhmS25ET3FaZmFl?=
+ =?utf-8?B?aFBHWFBsWkh2RkY4ZXJBaDhaekxZd3RIam52SGMvOVBrMmFIbUMyVWZwSDAy?=
+ =?utf-8?B?LzFudDJKc0NRRHk3R2Y3Rkt0MnI3N3Bsak04T2NiS2ZqWTR1VW1CMk5xdVFn?=
+ =?utf-8?B?OUk1WmJReTBMSXpIMDZwZEpBSzcwU2dUZGFWT2MwV1NaNkhvTndaWDJoMFd4?=
+ =?utf-8?B?cFR0KzNIM3JNa3p3WXBpZU1DaDBBdHBLa0Zvall3Ni9aL2lYUUo0K3NVWFg4?=
+ =?utf-8?B?WjRWQWNNblFSNFV6TVIxbFJvcWZFRFlPY00yMldkY1hnMGhGRnpVZkhyUlFZ?=
+ =?utf-8?B?dHlJYWdrcHM3V2prNlpUcjZwaXkySi96ZVlkY3VsYU9RRThpZTRWUW96MW8r?=
+ =?utf-8?B?c0owUUpZL2N2YmI3dmRiSjN3V2I0L3l5ZFlFY2dzaS9WWmEzR3VvNU9NeWgy?=
+ =?utf-8?B?eVFoMTlFQWdYVCtGVU93UFA2ZHdZNkNhM1hIcHBseWN2T0lUN2tJOFhzWUF1?=
+ =?utf-8?B?c2NYS29QejFSU2FOU2dUblREZHoreE92T2I1MDNGMWVBVU5sODlZRGZvZ2ov?=
+ =?utf-8?B?V0VQd2Z1UlRRREJNWXVGSmhYeU41ckxoQkhZN2tTbnlaclprZmVOSk0xUXRR?=
+ =?utf-8?B?by9sUkNEWlVEQ2pXVjIyTDBpTlp1dGIwb25MUXIxT3lTam1yL1ROeUx4cjdR?=
+ =?utf-8?Q?Xbr5c0oknzn1MGy5QBaxVnPxS?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f866f92f-57b1-4b96-bbc8-08dab33db330
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3370.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2022 08:24:40.8913 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wYZHP5R30SRzVYiONYOV1e9prBEC9BTN2tK4W+nm7fRGf63YHyP6c1SQ2i5S282d
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5175
+X-Spam-Score: -2.2 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/10/21 17:08,
- Luben Tuikov wrote: > On 2022-10-21 04:59, 
- Yang Yingliang wrote: >> On 2022/10/21 16:36, Greg KH wrote: >>> On Fri,
- Oct 21, 2022 at 04:24:23PM +0800, Yang Yingliang wrote: >>>> On [...] 
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  On 2022-10-21 04:18, Greg KH wrote: > On Fri, Oct 21, 2022
+ at 03:55:18AM -0400, Luben Tuikov wrote: >> On 2022-10-21 01:37, Greg KH
+ wrote: >>> On Fri, Oct 21, 2022 at 01:29:31AM -0400, Luben Tuikov wr [...]
+ Content analysis details:   (-2.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.187 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.244.70 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.244.70 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1ololZ-0001Tp-0q
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1olpj1-0005QW-OS
 Subject: Re: [f2fs-dev] [PATCH 00/11] fix memory leak while kset_register()
  fails
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -101,103 +178,92 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yang Yingliang via Linux-f2fs-devel
+From: Luben Tuikov via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yang Yingliang <yangyingliang@huawei.com>
-Cc: rafael@kernel.org, qemu-devel@nongnu.org, richard@nod.at, somlo@cmu.edu,
- mst@redhat.com, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- linux-f2fs-devel@lists.sourceforge.net, liushixin2@huawei.com,
- joseph.qi@linux.alibaba.com, linux-mtd@lists.infradead.org, jlbec@evilplan.org,
- hsiangkao@linux.alibaba.com, alexander.deucher@amd.com, jaegeuk@kernel.org,
- akpm@linux-foundation.org, linux-erofs@lists.ozlabs.org, mark@fasheh.com,
- ocfs2-devel@oss.oracle.com
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Reply-To: Luben Tuikov <luben.tuikov@amd.com>
+Cc: rafael@kernel.org, qemu-devel@nongnu.org, liushixin2@huawei.com,
+ joseph.qi@linux.alibaba.com, linux-mtd@lists.infradead.org, richard@nod.at,
+ mark@fasheh.com, mst@redhat.com, amd-gfx@lists.freedesktop.org,
+ Yang Yingliang <yangyingliang@huawei.com>, hsiangkao@linux.alibaba.com,
+ somlo@cmu.edu, jlbec@evilplan.org, jaegeuk@kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ alexander.deucher@amd.com, akpm@linux-foundation.org,
+ linux-erofs@lists.ozlabs.org, ocfs2-devel@oss.oracle.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Ck9uIDIwMjIvMTAvMjEgMTc6MDgsIEx1YmVuIFR1aWtvdiB3cm90ZToKPiBPbiAyMDIyLTEwLTIx
-IDA0OjU5LCBZYW5nIFlpbmdsaWFuZyB3cm90ZToKPj4gT24gMjAyMi8xMC8yMSAxNjozNiwgR3Jl
-ZyBLSCB3cm90ZToKPj4+IE9uIEZyaSwgT2N0IDIxLCAyMDIyIGF0IDA0OjI0OjIzUE0gKzA4MDAs
-IFlhbmcgWWluZ2xpYW5nIHdyb3RlOgo+Pj4+IE9uIDIwMjIvMTAvMjEgMTM6MzcsIEdyZWcgS0gg
-d3JvdGU6Cj4+Pj4+IE9uIEZyaSwgT2N0IDIxLCAyMDIyIGF0IDAxOjI5OjMxQU0gLTA0MDAsIEx1
-YmVuIFR1aWtvdiB3cm90ZToKPj4+Pj4+IE9uIDIwMjItMTAtMjAgMjI6MjAsIFlhbmcgWWluZ2xp
-YW5nIHdyb3RlOgo+Pj4+Pj4+IFRoZSBwcmV2aW91cyBkaXNjdXNzaW9uIGxpbms6Cj4+Pj4+Pj4g
-aHR0cHM6Ly9uYW0xMS5zYWZlbGlua3MucHJvdGVjdGlvbi5vdXRsb29rLmNvbS8/dXJsPWh0dHBz
-JTNBJTJGJTJGbG9yZS5rZXJuZWwub3JnJTJGbGttbCUyRjBkYjQ4NmViLTY5MjctOTI3ZS0zNjI5
-LTk1OGY4ZjIxMTE5NCU0MGh1YXdlaS5jb20lMkZUJTJGJmFtcDtkYXRhPTA1JTdDMDElN0NsdWJl
-bi50dWlrb3YlNDBhbWQuY29tJTdDNzRhYTliNTcxOTJiNDA2ZWYyNzQwOGRhYjM0MjlkYjQlN0Mz
-ZGQ4OTYxZmU0ODg0ZTYwOGUxMWE4MmQ5OTRlMTgzZCU3QzAlN0MwJTdDNjM4MDE5Mzk1OTc5ODY4
-MTAzJTdDVW5rbm93biU3Q1RXRnBiR1pzYjNkOGV5SldJam9pTUM0d0xqQXdNREFpTENKUUlqb2lW
-Mmx1TXpJaUxDSkJUaUk2SWsxaGFXd2lMQ0pYVkNJNk1uMCUzRCU3QzMwMDAlN0MlN0MlN0MmYW1w
-O3NkYXRhPVJjSzA1Y1htMUo1JTJCdFljTE8yU01HN2s2c2pleW1RemRCek1DREpTemZkRSUzRCZh
-bXA7cmVzZXJ2ZWQ9MAo+Pj4+Pj4gVGhlIHZlcnkgZmlyc3QgZGlzY3Vzc2lvbiBvbiB0aGlzIHdh
-cyBoZXJlOgo+Pj4+Pj4KPj4+Pj4+IGh0dHBzOi8vbmFtMTEuc2FmZWxpbmtzLnByb3RlY3Rpb24u
-b3V0bG9vay5jb20vP3VybD1odHRwcyUzQSUyRiUyRnd3dy5zcGluaWNzLm5ldCUyRmxpc3RzJTJG
-ZHJpLWRldmVsJTJGbXNnMzY4MDc3Lmh0bWwmYW1wO2RhdGE9MDUlN0MwMSU3Q2x1YmVuLnR1aWtv
-diU0MGFtZC5jb20lN0M3NGFhOWI1NzE5MmI0MDZlZjI3NDA4ZGFiMzQyOWRiNCU3QzNkZDg5NjFm
-ZTQ4ODRlNjA4ZTExYTgyZDk5NGUxODNkJTdDMCU3QzAlN0M2MzgwMTkzOTU5Nzk4NjgxMDMlN0NV
-bmtub3duJTdDVFdGcGJHWnNiM2Q4ZXlKV0lqb2lNQzR3TGpBd01EQWlMQ0pRSWpvaVYybHVNeklp
-TENKQlRpSTZJazFoYVd3aUxDSlhWQ0k2TW4wJTNEJTdDMzAwMCU3QyU3QyU3QyZhbXA7c2RhdGE9
-c0haNmtmTEY4SHhyTlhWNiUyRlZqZ2RIJTJCbVFNNFQzWnYwVSUyRkF3ZGRUOTdjRSUzRCZhbXA7
-cmVzZXJ2ZWQ9MAo+Pj4+Pj4KPj4+Pj4+IFBsZWFzZSB1c2UgdGhpcyBsaW5rLCBhbmQgbm90IHRo
-ZSB0aGF0IG9uZSB1cCB0aGVyZSB5b3Ugd2hpY2ggcXVvdGVkIGFib3ZlLAo+Pj4+Pj4gYW5kIHdo
-b3NlIGNvbW1pdCBkZXNjcmlwdGlvbiBpcyB0YWtlbiB2ZXJiYXRpbSBmcm9tIHRoZSB0aGlzIGxp
-bmsuCj4+Pj4+Pgo+Pj4+Pj4+IGtzZXRfcmVnaXN0ZXIoKSBpcyBjdXJyZW50bHkgdXNlZCBpbiBz
-b21lIHBsYWNlcyB3aXRob3V0IGNhbGxpbmcKPj4+Pj4+PiBrc2V0X3B1dCgpIGluIGVycm9yIHBh
-dGgsIGJlY2F1c2UgdGhlIGNhbGxlcnMgdGhpbmsgaXQgc2hvdWxkIGJlCj4+Pj4+Pj4ga3NldCBp
-bnRlcm5hbCB0aGluZyB0byBkbywgYnV0IHRoZSBkcml2ZXIgY29yZSBjYW4gbm90IGtub3cgd2hh
-dAo+Pj4+Pj4+IGNhbGxlciBkb2luZyB3aXRoIHRoYXQgbWVtb3J5IGF0IHRpbWVzLiBUaGUgbWVt
-b3J5IGNvdWxkIGJlIGZyZWVkCj4+Pj4+Pj4gYm90aCBpbiBrc2V0X3B1dCgpIGFuZCBlcnJvciBw
-YXRoIG9mIGNhbGxlciwgaWYgaXQgaXMgY2FsbGVkIGluCj4+Pj4+Pj4ga3NldF9yZWdpc3Rlcigp
-Lgo+Pj4+Pj4gQXMgSSBleHBsYWluZWQgaW4gdGhlIGxpbmsgYWJvdmUsIHRoZSByZWFzb24gdGhl
-cmUncwo+Pj4+Pj4gYSBtZW1vcnkgbGVhayBpcyB0aGF0IG9uZSBjYW5ub3QgY2FsbCBrc2V0X3Jl
-Z2lzdGVyKCkgd2l0aG91dAo+Pj4+Pj4gdGhlIGtzZXQtPmtvYmoubmFtZSBiZWluZyBzZXQtLWtv
-YmpfYWRkX2ludGVybmFsKCkgcmV0dXJucyAtRUlOVkFMLAo+Pj4+Pj4gaW4gdGhpcyBjYXNlLCBp
-LmUuIGtzZXRfcmVnaXN0ZXIoKSBmYWlscyB3aXRoIC1FSU5WQUwuCj4+Pj4+Pgo+Pj4+Pj4gVGh1
-cywgdGhlIG1vc3QgY29tbW9uIHVzYWdlIGlzIHNvbWV0aGluZyBsaWtlIHRoaXM6Cj4+Pj4+Pgo+
-Pj4+Pj4gCWtvYmpfc2V0X25hbWUoJmtzZXQtPmtvYmosIGZvcm1hdCwgLi4uKTsKPj4+Pj4+IAlr
-c2V0LT5rb2JqLmtzZXQgPSBwYXJlbnRfa3NldDsKPj4+Pj4+IAlrc2V0LT5rb2JqLmt0eXBlID0g
-a3R5cGU7Cj4+Pj4+PiAJcmVzID0ga3NldF9yZWdpc3Rlcihrc2V0KTsKPj4+Pj4+Cj4+Pj4+PiBT
-bywgd2hhdCBpcyBiZWluZyBsZWFrZWQsIGlzIHRoZSBtZW1vcnkgYWxsb2NhdGVkIGluIGtvYmpf
-c2V0X25hbWUoKSwKPj4+Pj4+IGJ5IHRoZSBjb21tb24gaWRpb20gc2hvd24gYWJvdmUuIFRoaXMg
-bmVlZHMgdG8gYmUgbWVudGlvbmVkIGluCj4+Pj4+PiB0aGUgZG9jdW1lbnRhdGlvbiwgYXQgbGVh
-c3QsIGluIGNhc2UsIGluIHRoZSBmdXR1cmUgdGhpcyBpcyBhYnNvbHZlZAo+Pj4+Pj4gaW4ga3Nl
-dF9yZWdpc3RlcigpIHJlZGVzaWduLCBldGMuCj4+Pj4+IEJhc2VkIG9uIHRoaXMsIGNhbiBrc2V0
-X3JlZ2lzdGVyKCkganVzdCBjbGVhbiB1cCBmcm9tIGl0c2VsZiB3aGVuIGFuCj4+Pj4+IGVycm9y
-IGhhcHBlbnM/ICBJZGVhbGx5IHRoYXQgd291bGQgYmUgdGhlIGNhc2UsIGFzIHRoZSBvZGRzIG9m
-IGEga3NldAo+Pj4+PiBiZWluZyBlbWJlZGRlZCBpbiBhIGxhcmdlciBzdHJ1Y3R1cmUgaXMgcHJv
-YmFibHkgc2xpbSwgYnV0IHdlIHdvdWxkIGhhdmUKPj4+Pj4gdG8gc2VhcmNoIHRoZSB0cmVlIHRv
-IG1ha2Ugc3VyZS4KPj4+PiBJIGhhdmUgc2VhcmNoIHRoZSB3aG9sZSB0cmVlLCB0aGUga3NldCB1
-c2VkIGluIGJ1c19yZWdpc3RlcigpIC0gcGF0Y2ggIzMsCj4+Pj4ga3NldF9jcmVhdGVfYW5kX2Fk
-ZCgpIC0gcGF0Y2ggIzQKPj4+PiBfX2NsYXNzX3JlZ2lzdGVyKCkgLSBwYXRjaCAjNSzCoCBmd19j
-ZmdfYnVpbGRfc3ltbGluaygpIC0gcGF0Y2ggIzYgYW5kCj4+Pj4gYW1kZ3B1X2Rpc2NvdmVyeS5j
-IC0gcGF0Y2ggIzEwCj4+Pj4gaXMgZW1iZWRkZWQgaW4gYSBsYXJnZXIgc3RydWN0dXJlLiBJbiB0
-aGVzZSBjYXNlcywgd2UgY2FuIG5vdCBjYWxsCj4+Pj4ga3NldF9wdXQoKSBpbiBlcnJvciBwYXRo
-IGluIGtzZXRfcmVnaXN0ZXIoKQo+Pj4gWWVzIHlvdSBjYW4gYXMgdGhlIGtvYmplY3QgaW4gdGhl
-IGtzZXQgc2hvdWxkIE5PVCBiZSBjb250cm9saW5nIHRoZQo+Pj4gbGlmZXNwYW4gb2YgdGhvc2Ug
-bGFyZ2VyIG9iamVjdHMuCj4+Pgo+Pj4gSWYgaXQgaXMsIHBsZWFzZSBwb2ludCBvdXQgdGhlIGNh
-bGwgY2hhaW4gaGVyZSBhcyBJIGRvbid0IHRoaW5rIHRoYXQKPj4+IHNob3VsZCBiZSBwb3NzaWJs
-ZS4KPj4+Cj4+PiBOb3RlIGFsbCBvZiB0aGlzIGlzIGEgbWVzcyBiZWNhdXNlIHRoZSBrb2JqZWN0
-IG5hbWUgc3R1ZmYgd2FzIGFkZGVkIG11Y2gKPj4+IGxhdGVyLCBhZnRlciB0aGUgZHJpdmVyIG1v
-ZGVsIGhhZCBiZWVuIGNyZWF0ZWQgYW5kIHJ1bm5pbmcgZm9yIGEgd2hpbGUuCj4+PiBXZSBtaXNz
-ZWQgdGhpcyBlcnJvciBwYXRoIHdoZW4gYWRkaW5nIHRoZSBkeW5hbWljIGtvYmplY3QgbmFtZSBs
-b2dpYywKPj4+IHRoYW5rIGZvciBsb29raW5nIGludG8gdGhpcy4KPj4+Cj4+PiBJZiB5b3UgY291
-bGQgdGVzdCB0aGUgcGF0Y2ggcG9zdGVkIHdpdGggeW91ciBlcnJvciBpbmplY3Rpb24gc3lzdGVt
-cywKPj4+IHRoYXQgY291bGQgbWFrZSB0aGlzIGFsbCBtdWNoIHNpbXBsZXIgdG8gc29sdmUuCj4+
-IFRoZSBwYXRjaCBwb3N0ZWQgYnkgTHViZW4gd2lsbCBjYXVzZSBkb3VibGUgZnJlZSBpbiBzb21l
-IGNhc2VzLgo+IFllcywgSSBmaWd1cmVkIHRoaXMgb3V0IGluIHRoZSBvdGhlciBlbWFpbCBhbmQg
-cG9zdGVkIHRoZSBzY2VuYXJpbyBHcmVnCj4gd2FzIGFza2luZyBhYm91dC4KPgo+IEJ1dCBJIGJl
-bGlldmUgdGhlIHF1ZXN0aW9uIHN0aWxsIHN0YW5kcyBpZiB3ZSBjYW4gZG8ga3NldF9wdXQoKQo+
-IGFmdGVyIGEgKmZhaWxlZCoga3NldF9yZWdpc3RlcigpLCBuYW1lbHkgaWYgbW9yZSBpcyBiZWlu
-ZyBkb25lIHRoYW4KPiBuZWNlc3NhcnksIHdoaWNoIGlzIGp1c3QgdG8gZnJlZSB0aGUgbWVtb3J5
-IGFsbG9jYXRlZCBieQo+IGtvYmplY3Rfc2V0X25hbWUoKS4KVGhlIG5hbWUgbWVtb3J5IGlzIGFs
-bG9jYXRlZCBpbiBrb2JqZWN0X3NldF9uYW1lKCkgaW4gY2FsbGVyLMKgIGFuZCBJIAp0aGluayBj
-YWxsZXIKZnJlZSB0aGUgbWVtb3J5IHRoYXQgaXQgYWxsb2NhdGVkIGlzIHJlYXNvbmFibGUsIGl0
-J3Mgd2VpcmQgdGhhdCBzb21lIApjYWxsZXJzIGFsbG9jYXRlCnNvbWUgbWVtb3J5IGFuZCB1c2Ug
-ZnVuY3Rpb24gKGtzZXRfcmVnaXN0ZXIpIGZhaWxlZCwgdGhlbiBpdCBmcmVlIHRoZSAKbWVtb3J5
-IGFsbG9jYXRlZAppbiBjYWxsZXJzLMKgIEkgdGhpbmsgdXNlIGtzZXRfcHV0KCkva2ZyZWVfY29u
-c3QobmFtZSkgaW4gY2FsbGVyIHNlZW1zIAptb3JlIHJlYXNvbmFibGUuCgpUaGFua3MsCllhbmcK
-Pgo+IFJlZ2FyZHMsCj4gTHViZW4KPiAuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJm
-cy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5u
-ZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On 2022-10-21 04:18, Greg KH wrote:
+> On Fri, Oct 21, 2022 at 03:55:18AM -0400, Luben Tuikov wrote:
+>> On 2022-10-21 01:37, Greg KH wrote:
+>>> On Fri, Oct 21, 2022 at 01:29:31AM -0400, Luben Tuikov wrote:
+>>>> On 2022-10-20 22:20, Yang Yingliang wrote:
+>>>>> The previous discussion link:
+>>>>> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Flore.kernel.org%2Flkml%2F0db486eb-6927-927e-3629-958f8f211194%40huawei.com%2FT%2F&amp;data=05%7C01%7Cluben.tuikov%40amd.com%7Cd41da3fd6449492d01f808dab33cdb75%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638019371236833115%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=C%2Bj1THkHpzVGks5eqB%2Fm%2FPAkMRohR7CYvRnOCqUqdcM%3D&amp;reserved=0
+>>>>
+>>>> The very first discussion on this was here:
+>>>>
+>>>> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.spinics.net%2Flists%2Fdri-devel%2Fmsg368077.html&amp;data=05%7C01%7Cluben.tuikov%40amd.com%7Cd41da3fd6449492d01f808dab33cdb75%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638019371236833115%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=pSR10abmK8nAMvKSezqWC0SPUBL4qEwtCCizyIKW7Dc%3D&amp;reserved=0
+>>>>
+>>>> Please use this link, and not the that one up there you which quoted above,
+>>>> and whose commit description is taken verbatim from the this link.
+>>>>
+>>>>>
+>>>>> kset_register() is currently used in some places without calling
+>>>>> kset_put() in error path, because the callers think it should be
+>>>>> kset internal thing to do, but the driver core can not know what
+>>>>> caller doing with that memory at times. The memory could be freed
+>>>>> both in kset_put() and error path of caller, if it is called in
+>>>>> kset_register().
+>>>>
+>>>> As I explained in the link above, the reason there's
+>>>> a memory leak is that one cannot call kset_register() without
+>>>> the kset->kobj.name being set--kobj_add_internal() returns -EINVAL,
+>>>> in this case, i.e. kset_register() fails with -EINVAL.
+>>>>
+>>>> Thus, the most common usage is something like this:
+>>>>
+>>>> 	kobj_set_name(&kset->kobj, format, ...);
+>>>> 	kset->kobj.kset = parent_kset;
+>>>> 	kset->kobj.ktype = ktype;
+>>>> 	res = kset_register(kset);
+>>>>
+>>>> So, what is being leaked, is the memory allocated in kobj_set_name(),
+>>>> by the common idiom shown above. This needs to be mentioned in
+>>>> the documentation, at least, in case, in the future this is absolved
+>>>> in kset_register() redesign, etc.
+>>>
+>>> Based on this, can kset_register() just clean up from itself when an
+>>> error happens?  Ideally that would be the case, as the odds of a kset
+>>> being embedded in a larger structure is probably slim, but we would have
+>>> to search the tree to make sure.
+>>
+>> Looking at kset_register(), we can add kset_put() in the error path,
+>> when kobject_add_internal(&kset->kobj) fails.
+>>
+>> See the attached patch. It needs to be tested with the same error injection
+>> as Yang has been doing.
+>>
+>> Now, struct kset is being embedded in larger structs--see amdgpu_discovery.c
+>> starting at line 575. If you're on an AMD system, it gets you the tree
+>> structure you'll see when you run "tree /sys/class/drm/card0/device/ip_discovery/".
+>> That shouldn't be a problem though.
+> 
+> Yes, that shouldn't be an issue as the kobject embedded in a kset is
+> ONLY for that kset itself, the kset structure should not be controling
+> the lifespan of the object it is embedded in, right?
+
+Yes, and it doesn't. It only does a kobject_get(parent) and kobject_put(parent).
+So that's fine and natural.
+
+Yang, do you want to try the patch in my previous email in this thread, since you've
+got the error injection set up already?
+
+Regards,
+Luben
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
