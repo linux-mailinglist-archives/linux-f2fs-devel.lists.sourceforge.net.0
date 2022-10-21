@@ -2,93 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03F916071F3
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Oct 2022 10:19:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A88E607216
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Oct 2022 10:25:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1olnF5-0000hQ-Ot;
-	Fri, 21 Oct 2022 08:18:59 +0000
+	id 1olnKy-0006ij-G5;
+	Fri, 21 Oct 2022 08:25:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <gregkh@linuxfoundation.org>) id 1olnF3-0000ga-QP
+ (envelope-from <yangyingliang@huawei.com>) id 1olnKw-0006id-LV
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Oct 2022 08:18:57 +0000
+ Fri, 21 Oct 2022 08:25:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xBaO0y3ovENdfCH8ef+W4RQJqPyEoL/a6Kwsa84n1W4=; b=OolhhKI/tbYZVBCLVGBsnh8vfO
- hPaAe9v8B0H7b+Pz89Vv36hnAlKchEnMPIclDMo0Cli0w59VRzvAHnju41wD0i4liICK8rsMLnjIU
- p6ioy0zBH37IGa5u1b9+Mz1JTH5j0X+SXN/XsIjVjUNxoiPQGNCYGDpzZfkKAe4g2qC0=;
+ bh=4tpxnqik1XAnrGlJyGCwUtdkI9g+xhisCqPaAlOGh3M=; b=AG5m9J63HKbxNzdCdefw4vvpQl
+ s980i5yedN0jhHsDz88Ze8kADVdhe3wKSIFw1+bjbnnx2ZiMDjnZ5zvOsI4bXryKC5AFJGlGaCIE9
+ 4573FkTPkkiswbj3FuSkzN9ASrdKsHO8cuIJIQNhmjQapER+loq2mFopIKp/6dmZoG78=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xBaO0y3ovENdfCH8ef+W4RQJqPyEoL/a6Kwsa84n1W4=; b=ikPSDdBlaMScCtLZ0RHgzVSpQ6
- 2W1xD6wmoDDrdjR+eZparf7U4A/jX9ksCoEKrfJ2GipnToqrokVER+q/ZutYNTwAWPmNgaAstNYF3
- xW8gFoXtIDMJ9vNQKZC0w0o3Q9HPgLt2onvzhqVXdZVOUMTkO5wJ16kZeKTXFRaNYWnI=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=4tpxnqik1XAnrGlJyGCwUtdkI9g+xhisCqPaAlOGh3M=; b=febCftTlyWEHqm6SBBc3yphw6L
+ 0s6M/ht5vyGU7sv4B2IBOQLWTX33Rgooxs8JAseHWGX64tfjpKJRMWr+0tEuGhfeeLgUNjSmWMxwA
+ 2etI2F2hrfSgHOfhO+SLsSx69PovTPLBgesGn6+AnMwJ3/0eTiVBrHHNRgS0RhZ53KFo=;
+Received: from szxga02-in.huawei.com ([45.249.212.188])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1olnF0-0000cf-JT for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Oct 2022 08:18:57 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 0B7F2B82B49;
- Fri, 21 Oct 2022 08:18:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C09FC433D7;
- Fri, 21 Oct 2022 08:18:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1666340313;
- bh=8++5V96CRoT3offEW1sfGPjlBhG5kCvkZ9nTWWOETBI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=jgzWKnVMDL4jjfh3rpyIZnQ6lzYGvVQFOfB2Sz0ckbK8TSaMML0PB6ejva6LPIpVh
- ec2TKJYGoaFx30SX5W4+m5zVlvfmFnd1+qS08e2EpH9AWzJBI41sDGDR+b9qaC68rY
- UySyAc400Lqb6/UqLIyGB/GHeIBa76ZzCFASzYBo=
-Date: Fri, 21 Oct 2022 10:18:31 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Luben Tuikov <luben.tuikov@amd.com>
-Message-ID: <Y1JV1wxf/7ERAMhl@kroah.com>
+ id 1olnKs-00C2x9-PK for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Oct 2022 08:25:02 +0000
+Received: from dggpemm500023.china.huawei.com (unknown [172.30.72.55])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Mty7v25HnzVj06;
+ Fri, 21 Oct 2022 16:20:11 +0800 (CST)
+Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
+ dggpemm500023.china.huawei.com (7.185.36.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Fri, 21 Oct 2022 16:24:25 +0800
+Received: from [10.174.178.174] (10.174.178.174) by
+ dggpemm500007.china.huawei.com (7.185.36.183) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Fri, 21 Oct 2022 16:24:24 +0800
+To: Greg KH <gregkh@linuxfoundation.org>, Luben Tuikov <luben.tuikov@amd.com>
 References: <20221021022102.2231464-1-yangyingliang@huawei.com>
- <d559793a-0ce4-3384-e74e-19855aa31f31@amd.com>
- <Y1IwLOUGayjT9p6d@kroah.com>
- <5efd73b0-d634-d34f-3d7a-13d674e40d04@amd.com>
+ <d559793a-0ce4-3384-e74e-19855aa31f31@amd.com> <Y1IwLOUGayjT9p6d@kroah.com>
+Message-ID: <0591e66f-731a-5f81-fc9d-3a6d80516c65@huawei.com>
+Date: Fri, 21 Oct 2022 16:24:23 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <5efd73b0-d634-d34f-3d7a-13d674e40d04@amd.com>
-X-Spam-Score: -5.5 (-----)
+In-Reply-To: <Y1IwLOUGayjT9p6d@kroah.com>
+Content-Language: en-US
+X-Originating-IP: [10.174.178.174]
+X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
+ dggpemm500007.china.huawei.com (7.185.36.183)
+X-CFilter-Loop: Reflected
+X-Spam-Score: -4.3 (----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Oct 21, 2022 at 03:55:18AM -0400, Luben Tuikov wrote:
- > On 2022-10-21 01:37, Greg KH wrote: > > On Fri, Oct 21, 2022 at 01:29:31AM
- -0400, Luben Tuikov wrote: > >> On 2022-10-20 22:20, Yang Yin [...] 
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content preview:  On 2022/10/21 13:37, Greg KH wrote: > On Fri, Oct 21, 2022
+ at 01:29:31AM -0400, Luben Tuikov wrote: >> On 2022-10-20 22:20, Yang Yingliang
+ wrote: >>> The previous discussion link: >>> https://lore.ker [...] 
+ Content analysis details:   (-4.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [45.249.212.188 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1olnF0-0000cf-JT
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1olnKs-00C2x9-PK
 Subject: Re: [f2fs-dev] [PATCH 00/11] fix memory leak while kset_register()
  fails
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -102,88 +96,60 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: rafael@kernel.org, qemu-devel@nongnu.org, liushixin2@huawei.com,
- joseph.qi@linux.alibaba.com, linux-mtd@lists.infradead.org, richard@nod.at,
- mark@fasheh.com, mst@redhat.com, amd-gfx@lists.freedesktop.org,
- Yang Yingliang <yangyingliang@huawei.com>, hsiangkao@linux.alibaba.com,
- somlo@cmu.edu, jlbec@evilplan.org, jaegeuk@kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- alexander.deucher@amd.com, akpm@linux-foundation.org,
- linux-erofs@lists.ozlabs.org, ocfs2-devel@oss.oracle.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: Yang Yingliang via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Yang Yingliang <yangyingliang@huawei.com>
+Cc: rafael@kernel.org, qemu-devel@nongnu.org, richard@nod.at, somlo@cmu.edu,
+ mst@redhat.com, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ linux-f2fs-devel@lists.sourceforge.net, liushixin2@huawei.com,
+ joseph.qi@linux.alibaba.com, linux-mtd@lists.infradead.org, jlbec@evilplan.org,
+ hsiangkao@linux.alibaba.com, alexander.deucher@amd.com, jaegeuk@kernel.org,
+ akpm@linux-foundation.org, linux-erofs@lists.ozlabs.org, mark@fasheh.com,
+ ocfs2-devel@oss.oracle.com
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Oct 21, 2022 at 03:55:18AM -0400, Luben Tuikov wrote:
-> On 2022-10-21 01:37, Greg KH wrote:
-> > On Fri, Oct 21, 2022 at 01:29:31AM -0400, Luben Tuikov wrote:
-> >> On 2022-10-20 22:20, Yang Yingliang wrote:
-> >>> The previous discussion link:
-> >>> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Flore.kernel.org%2Flkml%2F0db486eb-6927-927e-3629-958f8f211194%40huawei.com%2FT%2F&amp;data=05%7C01%7Cluben.tuikov%40amd.com%7C65b33f087ef245a9f23708dab3264840%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638019274318153227%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=1ZoieEob62iU9kI8fvpp20qGut9EeHKIHtCAT01t%2Bz8%3D&amp;reserved=0
-> >>
-> >> The very first discussion on this was here:
-> >>
-> >> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.spinics.net%2Flists%2Fdri-devel%2Fmsg368077.html&amp;data=05%7C01%7Cluben.tuikov%40amd.com%7C65b33f087ef245a9f23708dab3264840%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638019274318153227%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=9joWxGLUxZZMvrfkxCR8KbkoXifsqoMK0vGR%2FyEG62w%3D&amp;reserved=0
-> >>
-> >> Please use this link, and not the that one up there you which quoted above,
-> >> and whose commit description is taken verbatim from the this link.
-> >>
-> >>>
-> >>> kset_register() is currently used in some places without calling
-> >>> kset_put() in error path, because the callers think it should be
-> >>> kset internal thing to do, but the driver core can not know what
-> >>> caller doing with that memory at times. The memory could be freed
-> >>> both in kset_put() and error path of caller, if it is called in
-> >>> kset_register().
-> >>
-> >> As I explained in the link above, the reason there's
-> >> a memory leak is that one cannot call kset_register() without
-> >> the kset->kobj.name being set--kobj_add_internal() returns -EINVAL,
-> >> in this case, i.e. kset_register() fails with -EINVAL.
-> >>
-> >> Thus, the most common usage is something like this:
-> >>
-> >> 	kobj_set_name(&kset->kobj, format, ...);
-> >> 	kset->kobj.kset = parent_kset;
-> >> 	kset->kobj.ktype = ktype;
-> >> 	res = kset_register(kset);
-> >>
-> >> So, what is being leaked, is the memory allocated in kobj_set_name(),
-> >> by the common idiom shown above. This needs to be mentioned in
-> >> the documentation, at least, in case, in the future this is absolved
-> >> in kset_register() redesign, etc.
-> > 
-> > Based on this, can kset_register() just clean up from itself when an
-> > error happens?  Ideally that would be the case, as the odds of a kset
-> > being embedded in a larger structure is probably slim, but we would have
-> > to search the tree to make sure.
-> 
-> Looking at kset_register(), we can add kset_put() in the error path,
-> when kobject_add_internal(&kset->kobj) fails.
-> 
-> See the attached patch. It needs to be tested with the same error injection
-> as Yang has been doing.
-> 
-> Now, struct kset is being embedded in larger structs--see amdgpu_discovery.c
-> starting at line 575. If you're on an AMD system, it gets you the tree
-> structure you'll see when you run "tree /sys/class/drm/card0/device/ip_discovery/".
-> That shouldn't be a problem though.
-
-Yes, that shouldn't be an issue as the kobject embedded in a kset is
-ONLY for that kset itself, the kset structure should not be controling
-the lifespan of the object it is embedded in, right?
-
-Note, the use of ksets by a device driver like you are doing here in the
-amd driver is BROKEN and will cause problems by userspace tools.  Don't
-do that please, just use a single subdirectory for an attribute.  Doing
-deeper stuff like this is sure to cause problems and be a headache.
-
-thanks,
-
-greg k-h
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Ck9uIDIwMjIvMTAvMjEgMTM6MzcsIEdyZWcgS0ggd3JvdGU6Cj4gT24gRnJpLCBPY3QgMjEsIDIw
+MjIgYXQgMDE6Mjk6MzFBTSAtMDQwMCwgTHViZW4gVHVpa292IHdyb3RlOgo+PiBPbiAyMDIyLTEw
+LTIwIDIyOjIwLCBZYW5nIFlpbmdsaWFuZyB3cm90ZToKPj4+IFRoZSBwcmV2aW91cyBkaXNjdXNz
+aW9uIGxpbms6Cj4+PiBodHRwczovL2xvcmUua2VybmVsLm9yZy9sa21sLzBkYjQ4NmViLTY5Mjct
+OTI3ZS0zNjI5LTk1OGY4ZjIxMTE5NEBodWF3ZWkuY29tL1QvCj4+IFRoZSB2ZXJ5IGZpcnN0IGRp
+c2N1c3Npb24gb24gdGhpcyB3YXMgaGVyZToKPj4KPj4gaHR0cHM6Ly93d3cuc3Bpbmljcy5uZXQv
+bGlzdHMvZHJpLWRldmVsL21zZzM2ODA3Ny5odG1sCj4+Cj4+IFBsZWFzZSB1c2UgdGhpcyBsaW5r
+LCBhbmQgbm90IHRoZSB0aGF0IG9uZSB1cCB0aGVyZSB5b3Ugd2hpY2ggcXVvdGVkIGFib3ZlLAo+
+PiBhbmQgd2hvc2UgY29tbWl0IGRlc2NyaXB0aW9uIGlzIHRha2VuIHZlcmJhdGltIGZyb20gdGhl
+IHRoaXMgbGluay4KPj4KPj4+IGtzZXRfcmVnaXN0ZXIoKSBpcyBjdXJyZW50bHkgdXNlZCBpbiBz
+b21lIHBsYWNlcyB3aXRob3V0IGNhbGxpbmcKPj4+IGtzZXRfcHV0KCkgaW4gZXJyb3IgcGF0aCwg
+YmVjYXVzZSB0aGUgY2FsbGVycyB0aGluayBpdCBzaG91bGQgYmUKPj4+IGtzZXQgaW50ZXJuYWwg
+dGhpbmcgdG8gZG8sIGJ1dCB0aGUgZHJpdmVyIGNvcmUgY2FuIG5vdCBrbm93IHdoYXQKPj4+IGNh
+bGxlciBkb2luZyB3aXRoIHRoYXQgbWVtb3J5IGF0IHRpbWVzLiBUaGUgbWVtb3J5IGNvdWxkIGJl
+IGZyZWVkCj4+PiBib3RoIGluIGtzZXRfcHV0KCkgYW5kIGVycm9yIHBhdGggb2YgY2FsbGVyLCBp
+ZiBpdCBpcyBjYWxsZWQgaW4KPj4+IGtzZXRfcmVnaXN0ZXIoKS4KPj4gQXMgSSBleHBsYWluZWQg
+aW4gdGhlIGxpbmsgYWJvdmUsIHRoZSByZWFzb24gdGhlcmUncwo+PiBhIG1lbW9yeSBsZWFrIGlz
+IHRoYXQgb25lIGNhbm5vdCBjYWxsIGtzZXRfcmVnaXN0ZXIoKSB3aXRob3V0Cj4+IHRoZSBrc2V0
+LT5rb2JqLm5hbWUgYmVpbmcgc2V0LS1rb2JqX2FkZF9pbnRlcm5hbCgpIHJldHVybnMgLUVJTlZB
+TCwKPj4gaW4gdGhpcyBjYXNlLCBpLmUuIGtzZXRfcmVnaXN0ZXIoKSBmYWlscyB3aXRoIC1FSU5W
+QUwuCj4+Cj4+IFRodXMsIHRoZSBtb3N0IGNvbW1vbiB1c2FnZSBpcyBzb21ldGhpbmcgbGlrZSB0
+aGlzOgo+Pgo+PiAJa29ial9zZXRfbmFtZSgma3NldC0+a29iaiwgZm9ybWF0LCAuLi4pOwo+PiAJ
+a3NldC0+a29iai5rc2V0ID0gcGFyZW50X2tzZXQ7Cj4+IAlrc2V0LT5rb2JqLmt0eXBlID0ga3R5
+cGU7Cj4+IAlyZXMgPSBrc2V0X3JlZ2lzdGVyKGtzZXQpOwo+Pgo+PiBTbywgd2hhdCBpcyBiZWlu
+ZyBsZWFrZWQsIGlzIHRoZSBtZW1vcnkgYWxsb2NhdGVkIGluIGtvYmpfc2V0X25hbWUoKSwKPj4g
+YnkgdGhlIGNvbW1vbiBpZGlvbSBzaG93biBhYm92ZS4gVGhpcyBuZWVkcyB0byBiZSBtZW50aW9u
+ZWQgaW4KPj4gdGhlIGRvY3VtZW50YXRpb24sIGF0IGxlYXN0LCBpbiBjYXNlLCBpbiB0aGUgZnV0
+dXJlIHRoaXMgaXMgYWJzb2x2ZWQKPj4gaW4ga3NldF9yZWdpc3RlcigpIHJlZGVzaWduLCBldGMu
+Cj4gQmFzZWQgb24gdGhpcywgY2FuIGtzZXRfcmVnaXN0ZXIoKSBqdXN0IGNsZWFuIHVwIGZyb20g
+aXRzZWxmIHdoZW4gYW4KPiBlcnJvciBoYXBwZW5zPyAgSWRlYWxseSB0aGF0IHdvdWxkIGJlIHRo
+ZSBjYXNlLCBhcyB0aGUgb2RkcyBvZiBhIGtzZXQKPiBiZWluZyBlbWJlZGRlZCBpbiBhIGxhcmdl
+ciBzdHJ1Y3R1cmUgaXMgcHJvYmFibHkgc2xpbSwgYnV0IHdlIHdvdWxkIGhhdmUKPiB0byBzZWFy
+Y2ggdGhlIHRyZWUgdG8gbWFrZSBzdXJlLgpJIGhhdmUgc2VhcmNoIHRoZSB3aG9sZSB0cmVlLCB0
+aGUga3NldCB1c2VkIGluIGJ1c19yZWdpc3RlcigpIC0gcGF0Y2ggCiMzLCBrc2V0X2NyZWF0ZV9h
+bmRfYWRkKCkgLSBwYXRjaCAjNApfX2NsYXNzX3JlZ2lzdGVyKCkgLSBwYXRjaCAjNSzCoCBmd19j
+ZmdfYnVpbGRfc3ltbGluaygpIC0gcGF0Y2ggIzYgYW5kIAphbWRncHVfZGlzY292ZXJ5LmMgLSBw
+YXRjaCAjMTAKaXMgZW1iZWRkZWQgaW4gYSBsYXJnZXIgc3RydWN0dXJlLiBJbiB0aGVzZSBjYXNl
+cywgd2UgY2FuIG5vdCBjYWxsIAprc2V0X3B1dCgpIGluIGVycm9yIHBhdGggaW4ga3NldF9yZWdp
+c3RlcigpCml0c2VsZi4KClRoYW5rcywKWWFuZwo+Cj4gdGhhbmtzLAo+Cj4gZ3JlZyBrLWgKPiAu
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgt
+ZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3Jn
+ZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgt
+ZjJmcy1kZXZlbAo=
