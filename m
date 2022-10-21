@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CA7A606D91
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Oct 2022 04:22:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F42B606D94
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Oct 2022 04:23:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1olhgV-000886-26;
-	Fri, 21 Oct 2022 02:22:55 +0000
+	id 1olhgZ-0003M8-TE;
+	Fri, 21 Oct 2022 02:22:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yangyingliang@huawei.com>) id 1olhgR-00087z-Uz
+ (envelope-from <yangyingliang@huawei.com>) id 1olhgW-0003Li-Vy
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Oct 2022 02:22:51 +0000
+ Fri, 21 Oct 2022 02:22:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
  :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1tpP1hkNdWvN34AYxj6RVP7WehDDZKUj72Nls7FxEGk=; b=Ydjqpeu366eLpwZ7QMlPT+pQIi
- CMoiJP2NZ5QLyB7eXoGzgVJvBLOjTx9mbBng93/T3lnVvNFQPx5EzHDoqlVol/trJIZs2ZVnofzHd
- 3UZPmE0RQOpeVPYxncNMEFS/sRmYJjzp4LYmQY5aklmZckjy8Kf4qd6O9yUwXYAInq9Q=;
+ bh=anE6kFKk4KL8osB9HOW0knNDcuVxgwcI8Ym8jD8Lx2Y=; b=cb0BP+r06csqoA4aMxn8xjsRYu
+ RRt7ddEomgTAOezMaiDX1rs7cdlzf17m25B8noViJn5onGBxS2bge8yltRVPreJnOC1ldCxtzpxoY
+ LQBPJ1jX8KP5csBn+5431rVvyLgqUUyvFgpSJpF7yCVKN8vfuLUa8RvxYHS6LHHXQdCE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1tpP1hkNdWvN34AYxj6RVP7WehDDZKUj72Nls7FxEGk=; b=jtdnVtE8y7zQZydSVCX5WteERl
- wLE+AEwzQkToevE07xJTONcL1wsMK8Q0tZUBRTCnGJoUs2+eP3SmDHbUyUtLi+IJYP6QcgLTSvBYv
- bXu/Ur+TWGGOdK2giKQVKQQ4OjthBI0MuCeISgTc6wahmLHslGoCKOyp/SrQ6PmC/xG4=;
-Received: from szxga01-in.huawei.com ([45.249.212.187])
+ bh=anE6kFKk4KL8osB9HOW0knNDcuVxgwcI8Ym8jD8Lx2Y=; b=eDVczbik9Y+Bifg+16bDDktKQ5
+ 55EEwOL5VdrBf6xVJgisnFaRkB6jcYaAk7Z0W8Xsuy9w81WjgvdkFSC21LACwgsaX8+ROuCPcHoQX
+ lJACA+a0/nxfJYyKRRXlEKEA3AIbYdccJlWxZzfd9qkyDemTOliJkxrUmN8d0tHamhJY=;
+Received: from szxga02-in.huawei.com ([45.249.212.188])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1olhgP-0001re-T6 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Oct 2022 02:22:51 +0000
-Received: from dggpemm500020.china.huawei.com (unknown [172.30.72.54])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4Mtp7b16HRzpVdt;
- Fri, 21 Oct 2022 10:19:23 +0800 (CST)
+ id 1olhgW-0001rw-4q for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Oct 2022 02:22:56 +0000
+Received: from dggpemm500022.china.huawei.com (unknown [172.30.72.57])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4MtpCN18FmzHvCF;
+ Fri, 21 Oct 2022 10:22:40 +0800 (CST)
 Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
- dggpemm500020.china.huawei.com (7.185.36.49) with Microsoft SMTP Server
+ dggpemm500022.china.huawei.com (7.185.36.162) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Fri, 21 Oct 2022 10:22:43 +0800
+ 15.1.2375.31; Fri, 21 Oct 2022 10:22:44 +0800
 Received: from huawei.com (10.175.103.91) by dggpemm500007.china.huawei.com
  (7.185.36.183) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Fri, 21 Oct
- 2022 10:22:42 +0800
+ 2022 10:22:43 +0800
 To: <linux-kernel@vger.kernel.org>, <qemu-devel@nongnu.org>,
  <linux-f2fs-devel@lists.sourceforge.net>, <linux-erofs@lists.ozlabs.org>,
  <ocfs2-devel@oss.oracle.com>, <linux-mtd@lists.infradead.org>,
  <amd-gfx@lists.freedesktop.org>
-Date: Fri, 21 Oct 2022 10:20:58 +0800
-Message-ID: <20221021022102.2231464-8-yangyingliang@huawei.com>
+Date: Fri, 21 Oct 2022 10:20:59 +0800
+Message-ID: <20221021022102.2231464-9-yangyingliang@huawei.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221021022102.2231464-1-yangyingliang@huawei.com>
 References: <20221021022102.2231464-1-yangyingliang@huawei.com>
@@ -66,7 +66,7 @@ X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
 X-CFilter-Loop: Reflected
 X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -78,12 +78,12 @@ X-Spam-Report: Spam detection software,
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.187 listed in list.dnswl.org]
+ medium trust [45.249.212.188 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1olhgP-0001re-T6
-Subject: [f2fs-dev] [PATCH 07/11] f2fs: fix possible memory leak in
- f2fs_init_sysfs()
+X-Headers-End: 1olhgW-0001rw-4q
+Subject: [f2fs-dev] [PATCH 08/11] erofs: fix possible memory leak in
+ erofs_init_sysfs()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,40 +113,39 @@ if it fails, but the refcount of kobject is not decreased to
 this by calling kset_put(), so that name can be freed in
 callback function kobject_cleanup().
 
-unreferenced object 0xffff888101b7cc80 (size 8):
-  comm "modprobe", pid 252, jiffies 4294691378 (age 31.760s)
+unreferenced object 0xffff888101d228c0 (size 8):
+  comm "modprobe", pid 276, jiffies 4294722700 (age 13.151s)
   hex dump (first 8 bytes):
-    66 32 66 73 00 88 ff ff                          f2fs....
+    65 72 6f 66 73 00 ff ff                          erofs...
   backtrace:
-    [<000000001db5b408>] __kmalloc_node_track_caller+0x44/0x1b0
-    [<000000002783a073>] kstrdup+0x3a/0x70
-    [<00000000ead2b281>] kstrdup_const+0x63/0x80
-    [<000000003e5cf8f7>] kvasprintf_const+0x149/0x180
-    [<00000000c4d949ff>] kobject_set_name_vargs+0x56/0x150
-    [<0000000044611660>] kobject_set_name+0xab/0xe0
+    [<00000000e2a9a4a6>] __kmalloc_node_track_caller+0x44/0x1b0
+    [<00000000b8ce02de>] kstrdup+0x3a/0x70
+    [<000000004a0e01d2>] kstrdup_const+0x63/0x80
+    [<00000000051b6cda>] kvasprintf_const+0x149/0x180
+    [<000000004dc51dad>] kobject_set_name_vargs+0x56/0x150
+    [<00000000b30f0bad>] kobject_set_name+0xab/0xe0
 
-Fixes: bf9e697ecd42 ("f2fs: expose features to sysfs entry")
+Fixes: 168e9a76200c ("erofs: add sysfs interface")
 Signed-off-by: Yang Yingliang <yangyingliang@huawei.com>
-Reviewed-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/sysfs.c | 4 +++-
+ fs/erofs/sysfs.c | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index df27afd71ef4..2ef7a48967be 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -1250,8 +1250,10 @@ int __init f2fs_init_sysfs(void)
- 	kobject_set_name(&f2fs_kset.kobj, "f2fs");
- 	f2fs_kset.kobj.parent = fs_kobj;
- 	ret = kset_register(&f2fs_kset);
+diff --git a/fs/erofs/sysfs.c b/fs/erofs/sysfs.c
+index 783bb7b21b51..653b35001bc5 100644
+--- a/fs/erofs/sysfs.c
++++ b/fs/erofs/sysfs.c
+@@ -254,8 +254,10 @@ int __init erofs_init_sysfs(void)
+ 	kobject_set_name(&erofs_root.kobj, "erofs");
+ 	erofs_root.kobj.parent = fs_kobj;
+ 	ret = kset_register(&erofs_root);
 -	if (ret)
 +	if (ret) {
-+		kset_put(&f2fs_kset);
- 		return ret;
++		kset_put(&erofs_root);
+ 		goto root_err;
 +	}
  
- 	ret = kobject_init_and_add(&f2fs_feat, &f2fs_feat_ktype,
+ 	ret = kobject_init_and_add(&erofs_feat, &erofs_feat_ktype,
  				   NULL, "features");
 -- 
 2.25.1
