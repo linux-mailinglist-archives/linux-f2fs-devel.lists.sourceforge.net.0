@@ -2,122 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1635606F17
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Oct 2022 07:01:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C4EE606F80
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 21 Oct 2022 07:37:16 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1olk9k-0001sC-Eg;
-	Fri, 21 Oct 2022 05:01:16 +0000
+	id 1olkiW-0004Q0-FQ;
+	Fri, 21 Oct 2022 05:37:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <quic_pkondeti@quicinc.com>) id 1olk9h-0001s6-Rm
+ (envelope-from <gregkh@linuxfoundation.org>) id 1olkiV-0004Pu-HG
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Oct 2022 05:01:13 +0000
+ Fri, 21 Oct 2022 05:37:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:CC:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4zR0bo5/TVeqLfecs2ICyveGAJFJeQXIbSWmGTzTSVg=; b=VWku01hCR4Q7V7VL7IbiKkH+qw
- s2pDUT6xL1gJhqepm6kEUgmW8WOCAUptw9hlWABnSysD9TBrmUlgQNYosdUnerBP9yQOABJUyd2Fm
- xKFaPRymV4FZAydjPdRUGr0kmuRKscl3Bby3PoMQg4okju5+AM0tkbrhXPTmwyl0Bbyk=;
+ bh=NrN7Cc7Gvh/oOU9HkjQvYGuIhhtsYZszA1Bk7VtlSJg=; b=DTNzm1XcMzFme6HgYtcwLNXRsp
+ oOmZ9ibVnmg9jzL1l1S38d2qOO3IUtFni1ymEJzACRkFPMxqQxaFnAve8uzHWQSNPKFZgo7dvMneh
+ 2sFbgFuMncmU9I7+K73lIiNzOhj1gE9A5PXO9knJUyK5X8HfNDR0Gv+NYDUyNCHTfsSw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:CC:To
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
  :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4zR0bo5/TVeqLfecs2ICyveGAJFJeQXIbSWmGTzTSVg=; b=MyCi3XEWkx07KRzTu6nJvfFfZt
- 7M+OPT192BOcEMZVMo/QJ1BZKamgLLfVwjfyaPnVNasYzjp+5a/l4LVuuZ21e8DUMI41Iafy9SBpJ
- rba5B4NTp0Lrrd0XBVpLA8SY2kU7sVX334fZZv45Pnak9sGKdstduBcgvwYoNNifYGMk=;
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=NrN7Cc7Gvh/oOU9HkjQvYGuIhhtsYZszA1Bk7VtlSJg=; b=Yhqut7u3kiQRl9fQFwaF2unWe+
+ +sXs9bPA7yauU+L3EeoiEiHcD91UYXS/sQW+HjHhjYYIrIP9dQAM9sBb3m/TYNuDiC7IPIb14gEGL
+ PQXnELZ2h4XW3FaQZPE+m59Z/4008tGoh361/zplEXNTw/PTzs9nIputGDZv8W4EbuvE=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1olk9X-0001bG-2m for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 21 Oct 2022 05:01:08 +0000
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29L4we9K000890;
- Fri, 21 Oct 2022 05:00:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com;
- h=date : from : to :
- cc : subject : message-id : references : mime-version : content-type :
- in-reply-to; s=qcppdkim1; bh=4zR0bo5/TVeqLfecs2ICyveGAJFJeQXIbSWmGTzTSVg=;
- b=M/Sv53M3aL9f6R0vYkh4giQJTodFu7nsUfdA6kzgpMV6pWdyOqwWGohT0yGp41sJ+6Tr
- VEwOMkSYey4HvMd3PyMcraBeVVOiReLEHYiU5q85QmwjUqjcQ4d47Q7PeOg6O1/Frquy
- EOemlQ+O7Ekev/dXaD+wBEdNyHqSnHtM5hW/HKka7Nt0xUtm2ItGIaudcOvBKRef8M5c
- mLAeScgiNWyddXIB3ugXhzO2hiyDnqmnw4ylGC2xgEv4NUOrirtExlc845gsALEkz0x9
- +fXvFinWsHDBSw8HwcSw9nX6hwr1KYbWt6pPl9YeZc6w8wYuxeTgf93xPoMGZ7JLoPO2 UQ== 
-Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com
- [129.46.96.20])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3kb8ckj2sf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 21 Oct 2022 05:00:53 +0000
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
- [10.47.209.196])
- by NALASPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 29L50qXC030997
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 21 Oct 2022 05:00:52 GMT
-Received: from hu-pkondeti-hyd.qualcomm.com (10.80.80.8) by
- nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.29; Thu, 20 Oct 2022 22:00:50 -0700
-Date: Fri, 21 Oct 2022 10:30:46 +0530
-From: Pavan Kondeti <quic_pkondeti@quicinc.com>
-To: Mukesh Ojha <quic_mojha@quicinc.com>
-Message-ID: <20221021050046.GA31858@hu-pkondeti-hyd.qualcomm.com>
-References: <1666196277-27014-1-git-send-email-quic_mojha@quicinc.com>
+ id 1olkiP-00BoSY-HS for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 21 Oct 2022 05:37:11 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 0B01061D9D;
+ Fri, 21 Oct 2022 05:37:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD180C433C1;
+ Fri, 21 Oct 2022 05:36:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1666330619;
+ bh=C4x6hYFDAWi4DXcimrF67aLQPsZW93Mx96V0amCnWn8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=QlbKpgGx1qrMgSdaJyivXXf5qor/X961lpc0yRR+woSzH3tCcgiu1gmz/NBYEXQfe
+ K4vsmjcCVpegODndBu2vg9R9eT4zstEkXIb1SfoFeTNCPoQOhnVD+4siGARAhiytQw
+ tUVK0o7ipMo473nLX2GyW5d8TYlaC0oYKW+aMHhw=
+Date: Fri, 21 Oct 2022 07:37:48 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Luben Tuikov <luben.tuikov@amd.com>
+Message-ID: <Y1IwLOUGayjT9p6d@kroah.com>
+References: <20221021022102.2231464-1-yangyingliang@huawei.com>
+ <d559793a-0ce4-3384-e74e-19855aa31f31@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1666196277-27014-1-git-send-email-quic_mojha@quicinc.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-GUID: shzaNGHJGwuhp0zB50xCc0wIJ3yRTYjg
-X-Proofpoint-ORIG-GUID: shzaNGHJGwuhp0zB50xCc0wIJ3yRTYjg
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-10-21_01,2022-10-20_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- suspectscore=0 adultscore=0 mlxlogscore=999 malwarescore=0 spamscore=0
- bulkscore=0 phishscore=0 mlxscore=0 lowpriorityscore=0 clxscore=1011
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2209130000 definitions=main-2210210028
-X-Spam-Score: -0.9 (/)
+In-Reply-To: <d559793a-0ce4-3384-e74e-19855aa31f31@amd.com>
+X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Mukesh, On Wed, Oct 19, 2022 at 09:47:57PM +0530, Mukesh
- Ojha wrote: > commit 18ae8d12991b ("f2fs: show more DIO information in
- tracepoint")
- > introduces iocb field in 'f2fs_direct_IO_enter' trace event > And [...]
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview:  On Fri, Oct 21, 2022 at 01:29:31AM -0400, Luben Tuikov wrote:
+ > On 2022-10-20 22:20, Yang Yingliang wrote: > > The previous discussion
+ link: > > https://lore.kernel.org/lkml/0db486eb-6927-927e-3629-95 [...] 
+ Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [205.220.168.131 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1olk9X-0001bG-2m
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix the assign logic of iocb
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1olkiP-00BoSY-HS
+Subject: Re: [f2fs-dev] [PATCH 00/11] fix memory leak while kset_register()
+ fails
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -129,57 +101,63 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, mhiramat@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: rafael@kernel.org, qemu-devel@nongnu.org, liushixin2@huawei.com,
+ joseph.qi@linux.alibaba.com, linux-mtd@lists.infradead.org, richard@nod.at,
+ mark@fasheh.com, mst@redhat.com, amd-gfx@lists.freedesktop.org,
+ Yang Yingliang <yangyingliang@huawei.com>, hsiangkao@linux.alibaba.com,
+ somlo@cmu.edu, jlbec@evilplan.org, jaegeuk@kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ alexander.deucher@amd.com, akpm@linux-foundation.org,
+ linux-erofs@lists.ozlabs.org, ocfs2-devel@oss.oracle.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Mukesh,
-
-On Wed, Oct 19, 2022 at 09:47:57PM +0530, Mukesh Ojha wrote:
-> commit 18ae8d12991b ("f2fs: show more DIO information in tracepoint")
-> introduces iocb field in 'f2fs_direct_IO_enter' trace event
-> And it only assigns the pointer and later it accesses its field
-> in trace print log.
+On Fri, Oct 21, 2022 at 01:29:31AM -0400, Luben Tuikov wrote:
+> On 2022-10-20 22:20, Yang Yingliang wrote:
+> > The previous discussion link:
+> > https://lore.kernel.org/lkml/0db486eb-6927-927e-3629-958f8f211194@huawei.com/T/
 > 
-> Fix it by correcting data type and memcpy the content of iocb.
+> The very first discussion on this was here:
 > 
-> Fixes: 18ae8d12991b ("f2fs: show more DIO information in tracepoint")
-> Signed-off-by: Mukesh Ojha <quic_mojha@quicinc.com>
-> ---
->  include/trace/events/f2fs.h | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
+> https://www.spinics.net/lists/dri-devel/msg368077.html
 > 
-> diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-> index c6b3724..7727ec9 100644
-> --- a/include/trace/events/f2fs.h
-> +++ b/include/trace/events/f2fs.h
-> @@ -940,7 +940,7 @@ TRACE_EVENT(f2fs_direct_IO_enter,
->  	TP_STRUCT__entry(
->  		__field(dev_t,	dev)
->  		__field(ino_t,	ino)
-> -		__field(struct kiocb *,	iocb)
-> +		__field_struct(struct kiocb,	iocb)
->  		__field(unsigned long,	len)
->  		__field(int,	rw)
->  	),
-> @@ -948,17 +948,17 @@ TRACE_EVENT(f2fs_direct_IO_enter,
->  	TP_fast_assign(
->  		__entry->dev	= inode->i_sb->s_dev;
->  		__entry->ino	= inode->i_ino;
-> -		__entry->iocb	= iocb;
-> +		 memcpy(&__entry->iocb, iocb, sizeof(*iocb));
->  		__entry->len	= len;
->  		__entry->rw	= rw;
->  	),
->  
+> Please use this link, and not the that one up there you which quoted above,
+> and whose commit description is taken verbatim from the this link.
+> 
+> > 
+> > kset_register() is currently used in some places without calling
+> > kset_put() in error path, because the callers think it should be
+> > kset internal thing to do, but the driver core can not know what
+> > caller doing with that memory at times. The memory could be freed
+> > both in kset_put() and error path of caller, if it is called in
+> > kset_register().
+> 
+> As I explained in the link above, the reason there's
+> a memory leak is that one cannot call kset_register() without
+> the kset->kobj.name being set--kobj_add_internal() returns -EINVAL,
+> in this case, i.e. kset_register() fails with -EINVAL.
+> 
+> Thus, the most common usage is something like this:
+> 
+> 	kobj_set_name(&kset->kobj, format, ...);
+> 	kset->kobj.kset = parent_kset;
+> 	kset->kobj.ktype = ktype;
+> 	res = kset_register(kset);
+> 
+> So, what is being leaked, is the memory allocated in kobj_set_name(),
+> by the common idiom shown above. This needs to be mentioned in
+> the documentation, at least, in case, in the future this is absolved
+> in kset_register() redesign, etc.
 
-Why copy the whole structure (48 bytes)? cache the three members you
-need.
+Based on this, can kset_register() just clean up from itself when an
+error happens?  Ideally that would be the case, as the odds of a kset
+being embedded in a larger structure is probably slim, but we would have
+to search the tree to make sure.
 
-Thanks,
-Pavan
+thanks,
+
+greg k-h
 
 
 _______________________________________________
