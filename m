@@ -2,110 +2,156 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAF7960C5E2
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Oct 2022 09:54:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67A9260C5E6
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Oct 2022 09:56:50 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1onElh-000688-1t;
-	Tue, 25 Oct 2022 07:54:37 +0000
+	id 1onEnn-0006Bt-KJ;
+	Tue, 25 Oct 2022 07:56:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1onElf-000681-P9
+ (envelope-from <frank.li@vivo.com>) id 1onEnk-0006Bm-1s
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Oct 2022 07:54:35 +0000
+ Tue, 25 Oct 2022 07:56:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AdjkH5vIbq5kUUoNhzBkJvEkyj+zaEzN6r+YAFb8FX4=; b=CLQKOAXsZxEsx4zSsvlsswD5Is
- uhFNx9dZx4Mp47TxrC3WO0zwswqEbOsZbx6rdPb8H81xWm7ZMYg4BWGC4bOH0IMOP+nKHoZxye3kI
- 5oXb2Bht1FR2jmTtwSHt+xfAx/ZcwlRyrKkw7Gv4uiWGDxb+aYY3IqF3MA9Gz8kDns1Y=;
+ bh=piKQPwu+RdRGaBq/FepwcAEu/irtK7ZeUzcxyAT0eR0=; b=QAC2HxbHkE5XbEaLHt/+6OAewr
+ T83Lt33MsWKdp/U/bCL+rZglGDAu6K85iy//mDNC49YCSmzozbv6255OauSLAS9+FxJ/UQDtRbzNs
+ IZ7KNtH0V/AjK4s+UduBZJhzVV9hEmT+Mk0CSG0IrPaDhQcso88996NM8T+WO/8jSpm8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=AdjkH5vIbq5kUUoNhzBkJvEkyj+zaEzN6r+YAFb8FX4=; b=b5W2nN1W1qPhKu8lNgdo3GJMcL
- 5rNpGAbTgfvAJFkS6kYZ0oX/AUZ9Vhr+GUBLwv3bSTMcEiaXFA51RxtRliSWYwiI9qyq26rOpmPZ+
- 0lYxWRCDsVIvf1JJcT3BL2A+0Dmqi7W3q6LrkJlrLgCK/DccD7VNUet/o+PkUGlx+NGA=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=piKQPwu+RdRGaBq/FepwcAEu/irtK7ZeUzcxyAT0eR0=; b=M
+ ff18v70H+FnoGh9bYS9GMMlC0+pjhj3s5rdwoFgXST9kJqdZ+fTYx8LDMkSGTjOnazFKe09cABWUN
+ yZrUcsPGTG9D0EnxafsGaXa5VGV/KG8i76PP6LZ5/corfxEhkzkw49pKr15lkj4YuHtES1PCJ70eJ
+ fc2uz+mgr33/cpzw=;
+Received: from mail-sgaapc01on2097.outbound.protection.outlook.com
+ ([40.107.215.97] helo=APC01-SG2-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1onEle-0004t8-Og for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Oct 2022 07:54:35 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 7A5ADB81BB2;
- Tue, 25 Oct 2022 07:54:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4026AC433D6;
- Tue, 25 Oct 2022 07:54:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666684467;
- bh=iWATKRj2EUwaOZzm4A1vDM7arMcE54kfqhx6O7HF+jw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=C7IdwtNGU2OWMgxcfVkRk4RrYiHPHjvHsZNF20FT7TLF8SHULp2RdEvUuaKgnbi52
- g8yfIh7XIdw45gH78DaZ5vjgoP13/MLr64Kao5sYHnvi6Kx1dMxXMAX6nqZfY6kI5f
- ELd7/djqbXv2gQ8M/nx5gVeq0SO9OHwVJ5mo2t+1tGGL0Br/bDzzRnP6TQ0zW+A9Gp
- Z0kzB0sfu1w3DoV2cG/2qqVMpld7xwYBbXfZiFKstVj0ju0QiwQb0euyUWxPM7NuFv
- e699YNqkS+uw0BnK2z5ChNmpzGAYy3SxhSaWsp5ce6DwxX/6l8izRWUgUADYM4f6wu
- eNEeQ/ZE4J32Q==
-Message-ID: <aa2e1108-9b11-7358-94c7-bf83e41e02ff@kernel.org>
-Date: Tue, 25 Oct 2022 15:54:23 +0800
+ id 1onEni-0005ES-8x for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Oct 2022 07:56:43 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BHYAMOINhaMnSb4bmpgROKoPYJ+66K3YrNFdAKd3Fs2VlSWKvlrN8OBunMgiwPvH2VVOu0SnKLzIZFHAJK+2cZXmCPs9Ms5FmKgww+POqH7FN/odaFYSYr355+kHbV2nDG4W45EGhdKX2JT99d1UUY+TH90UIbwJRyhfuLTxOGR4rtilx1YwY2OEfg1yHe4HrcSti4qJ8blOE83qbfs47N2dC0tloDxSg/iQZNXrP/KTa5EmYulM0JwVmJvqoBLmmu9cM89+yuC9NyRfG+wjFpSik4Jfso++EfnpfdHKkFMAnJB2kdOGmsVTFGTMZKbCd2iUkIYVx1eNRc7xbuCfRg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=piKQPwu+RdRGaBq/FepwcAEu/irtK7ZeUzcxyAT0eR0=;
+ b=UrYSuoRtErQJXdwzrFNmqsk3y4zXP9vvx4CEuol7Iav7+wLTPdg1BtGVkpyNYtH518ADAdkFRbLkdvOypdfXssl+DFVHs//0XnLNd8Okx8Ki9QqV48SeSkbLN4FmeFPezqfa3qNaO2y2fXLRoiBWK1HINUkx7I387lFhj/J73Qav/hWoinhcZIDIS2hkUQCZDIo/mDSXA37RtqofH/PH4WIr/Pa7CsS9xXot0oXsJ9MrJq7ALL8QRROrTo//DGu5Ba9Yzw9SvYpwRJK9EutMnglnWVYxkmVwaTBA1MJiajJprAdN9IPn98mOjGoKKGpmxIsG1I1cFmXqWblcbHqQZQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=piKQPwu+RdRGaBq/FepwcAEu/irtK7ZeUzcxyAT0eR0=;
+ b=Ofo19P3f4rp2WoNifGAUKi7Xh8blGF+4a11FBLX29OaQ+nRU4AWD+o5wxmid0viBdtHAU1L9vmd8rxcQTBEBaIhc2f+byWG6al1HMJaRN9HY3PWRp2R+S+nI4RyKoly907MSJ/BC7dSRE9BM4fdiiGMDjFAxZmXd61151VL7jlBt5MqMKQP6fMLvQENKFpZ16SbMcNgo1bySFVgmMgA2zGqjjVOqxDdgc0VsjZB3hE+OuFGEzMwlzKRzfuuhc+IjESLpnSsIlugfC+AHMNwUo5xIIeR15gKl99CgaEI0AAs2FjsGBZHsUV+nZLHL/60wD7JOzDoModqtVWIyzU/Afg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
+ by TY0PR06MB5284.apcprd06.prod.outlook.com (2603:1096:400:211::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5746.21; Tue, 25 Oct
+ 2022 07:56:31 +0000
+Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
+ ([fe80::c84b:5a6c:d66f:c0fd]) by SEZPR06MB5269.apcprd06.prod.outlook.com
+ ([fe80::c84b:5a6c:d66f:c0fd%3]) with mapi id 15.20.5746.023; Tue, 25 Oct 2022
+ 07:56:31 +0000
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Tue, 25 Oct 2022 15:56:23 +0800
+Message-Id: <20221025075623.7958-1-frank.li@vivo.com>
+X-Mailer: git-send-email 2.35.1
+X-ClientProxiedBy: SG2PR06CA0233.apcprd06.prod.outlook.com
+ (2603:1096:4:ac::17) To SEZPR06MB5269.apcprd06.prod.outlook.com
+ (2603:1096:101:78::6)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.1
-Content-Language: en-US
-To: zhangqilong <zhangqilong3@huawei.com>,
- "jaegeuk@kernel.org" <jaegeuk@kernel.org>
-References: <20221018024532.44184-1-zhangqilong3@huawei.com>
- <35811a40-cc69-a50d-b348-62eed5ed1227@kernel.org>
- <1e8cf37922cc4c87aff770449bbba4ab@huawei.com>
- <07348e12-142b-228c-e5fe-6f4fc9a74421@kernel.org>
- <d1d56450ccd24c1091ae67894ce8cc69@huawei.com>
- <959ca5cb-947c-d693-5e6f-79736ada7664@kernel.org>
- <411daf4a5ff94907bc298579f1e99d49@huawei.com>
- <702be2cb-0af5-f47d-486c-f3b032bdb8cd@kernel.org>
- <bfc29caa1371487aba9e99640b14055a@huawei.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <bfc29caa1371487aba9e99640b14055a@huawei.com>
-X-Spam-Score: -7.9 (-------)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|TY0PR06MB5284:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8ae866d2-09e8-4ebe-b3b2-08dab65e6e03
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: tf2I19c9U1H/oT49INOaoDuL+TIqH9BOSoPoqx/occ0O14WhTbM6mFKaRR9Z3hZtqm7KL52n/SY2DiZ0TUcpW90OiSGLU16ajRR1tjAUSG7/dbiSFAmoOGUQnDTACR4aw118IcXCef3O4zAkI3xrybyR0hnST4wbQoNniFCCsoTBIKRrnoFyMvbfO6SwzNPb8nmQnhHTwrp94qCx9YjNz++5nvjdSQDztQ/6v0/tMlaBUijQeyvSSSnSLfd5f0OcueIRJ6H/1Ure0dOVXrs6Mwey3ies44GgUoP53gT9kinuqmr/2n/920jwB5r4xwo9iejSFBo/ok7laBW1VAYb5g7n6wDIC5032Sg6YIfBgAokIh84UZ11hUkaICVcazq3JmvfYv9PB3ITNySGcmBWe9LOzsFQzilV2/iZnUM6HjIhyGdZFEiDH2gDQOmWFhieTxA6xEZF96A0rZUI424Sd6K+ZuixWR4o6/HcRImiFTsSqCFN8qsPbv8Dc76Xcc8VrZZPtiu8QDrbGsipMa1H0+lixyIO/0d5T2/o+Vc2nJpDMtKtZ/ZyZEZrlgB1kbXPhAORJGAVrHKfG/eZXTLwWP1rPVda4ggc5UvE0ytRuqM+fWgnw1qIGP6odXHlBEAT5x92eyI7nanMNJQpmUutFoXpqlE90E5OSriDp5BIt2usLWnKzF3v5X0GbUF2y++r+4nX4wm6mOdhboeqg6vT32TmmRdeYtVvAc5fsgYkBt2J6qGjhht0BlRM6eOSeWV2FM/RUpmwFBx1XnC6QGvAGA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230022)(4636009)(366004)(346002)(376002)(136003)(39860400002)(396003)(451199015)(6486002)(478600001)(107886003)(6666004)(316002)(6506007)(2906002)(36756003)(66556008)(8676002)(4326008)(66946007)(66476007)(6512007)(186003)(26005)(41300700001)(38350700002)(86362001)(38100700002)(1076003)(52116002)(2616005)(83380400001)(8936002)(5660300002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kayqiZdHoYunMIJX08fPJD0B2XuAYA1laKn3ISNmJlE0vF8gKmQgwloF+IuX?=
+ =?us-ascii?Q?A9NFl2IG60hfQdVTv0ZdPyxaFz/XbyXBBKRzxPilc+wmnNgKzsDV4yYuYDNW?=
+ =?us-ascii?Q?fNqtSOcKFLfHIQumf3lRmVrH198RTcN7RN6yAokY7zRGszSCgNP05j+JGPv3?=
+ =?us-ascii?Q?SSJSOqpistkk7Uoe9gN9DYmm/JTyvxL0LGGdLfQ1xUOHfbP2RlG733FHoP/d?=
+ =?us-ascii?Q?QSA9JDcnRcHLNGeUE15MKplokhLeORqYbd7AKsUUBoQrPGabvGE6qNSCSGEr?=
+ =?us-ascii?Q?Fm3/OoWywOj9ggy3maAWHgryXBWwBYphQw9oJfj3FCJm4alXdptquozNdm+D?=
+ =?us-ascii?Q?DilDaedbVL+9j1wC8RsvzF2RrCRFD5bQ1vvR441NdAM/C929dv9dRMcTHK4d?=
+ =?us-ascii?Q?AXD+9NanhQs7WyBHgAHrGqtJRhvBe39Ate9lnj4J9OGLUP8ZhKMpSdjMKLPP?=
+ =?us-ascii?Q?+n/UVh6pf/qVmo2r5TbIHx/8QLFbMKWFU7wraxmn1TxPKlPOPceKegu7AKts?=
+ =?us-ascii?Q?2mQx3Jt8QxWeMKxXKF5FlGtDA2RzMTsEb/7ee4ObqxW9RwoQLDktR9sRizEE?=
+ =?us-ascii?Q?8lSbiRIk/rtLMxyYS2sH2vC0VNY8L5DNr1dHMffg41K488XYqzE4JCo8Ud5b?=
+ =?us-ascii?Q?Oule6y2ZHASsSQXQHWGkm0hJ56fSptN6RO016tOo0BQ5oGPFs0hHxa0DGHU8?=
+ =?us-ascii?Q?5K+wB8n51FNh63vp1sE74vPac/yaEKPF2EnXCbYaTnG0Gj4Ay3CyR5uCz4f3?=
+ =?us-ascii?Q?NZGj7narZp4RdDANKgym6CarOccflyoyB3b06bla/gJxXqI3rhjpX+afHdCe?=
+ =?us-ascii?Q?cRV7zXvpITCV7CnbgqUSF5XtJytHrQkME+4S7yltrZS7fcnRUHBCPLaXJ5+M?=
+ =?us-ascii?Q?zKKb4PhiBfIRSuqR9dGKZCQok9AbG36uGeqprRg+EE+ND6+qerJ0Vw27QFtj?=
+ =?us-ascii?Q?EQm8wcssjiKulM9VNDj+L5IB32GOjbWMfU0XzYa5yiJk8+LsLdD5nvRFF7QP?=
+ =?us-ascii?Q?h+PY0hd1aC2Rlvq5up8nw4kZUTOdNon+9MeNNP1n8yVvZufYxXapCXpG05XB?=
+ =?us-ascii?Q?/g/0utd2IMfsj6wViDXChWoXFj73n9QJ4ykam+vGMR1QacE/FsUATgIPidUC?=
+ =?us-ascii?Q?yWr6Df+TnRc6y6GA2+E9mmdHiJTP943t/VelWw3MjxFImDPszwyd9ZPZGmyc?=
+ =?us-ascii?Q?rqDsGp7enwQ1K4455E2l6fBXQPHHGaHzJ+IYzPgJp+75IfdTMp1xYS727ePC?=
+ =?us-ascii?Q?UEmX+QIeqz6wgXs3Hxb3KVIW24bxkHXa0EQoRL27fvHB9AL6oks57AyCdAFP?=
+ =?us-ascii?Q?fUISMmn1H+4VmpDKHyH21fR8gVoUg0Jj/Tv4rWPUgvC9A6o8943Pn5sEYE/o?=
+ =?us-ascii?Q?/vMppKK0DUGMZ8vi5MMS2SiZpK6xu4WnRcRLC5HGEQCtJnl3P8Ei7Tl3DT3+?=
+ =?us-ascii?Q?6kULUM5oErqiM75VgRuf27ZcgyFt9SScMjMrMaweNs5mWNc5GjvxOdWNtWDs?=
+ =?us-ascii?Q?w5nfT3eNMdZQDLkJ+Qi2QIc3ErL1Sj5LK9TXIt0ZFZ28s2nONTCCsoDPiJMr?=
+ =?us-ascii?Q?D/BJ0cnZYiMUpFs4zYu77TwA/4NU0p3R5SmPkQrb?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8ae866d2-09e8-4ebe-b3b2-08dab65e6e03
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2022 07:56:31.7230 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3HFUeRK/LkCFnKhTeg8bIYrbzK3embcSEeWnrdVUpM4uRO7dvip8HmOqC/PMdLxDZhH7FTa1cK+89DuQE3WZDg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR06MB5284
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/10/25 15:36,
- zhangqilong wrote: >> On 2022/10/25 15:01, 
- zhangqilong wrote: >>>> On 2022/10/25 14:27, zhangqilong wrote: >>>>>> On
- 2022/10/20 15:27, zhangqilong via Linux-f2fs-devel wrote: >>>> [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  Remove the local 'err' variable for readable, no functional
+ changes. Signed-off-by: Yangtao Li <frank.li@vivo.com> --- fs/f2fs/segment.c
+ | 10 ++++------ 1 file changed, 4 insertions(+), 6 deletions(-) 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.215.97 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.215.97 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1onEle-0004t8-Og
-Subject: Re: [f2fs-dev] =?utf-8?b?562U5aSNOiDnrZTlpI06IOetlOWkjTogIOetlA==?=
- =?utf-8?q?=E5=A4=8D=3A_=5BPATCH=5D_f2fs=3A_Fix_data_consistency_in_f2fs?=
- =?utf-8?b?X21vdmVfZmlsZV9yYW5nZSgp?=
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+X-Headers-End: 1onEni-0005ES-8x
+Subject: [f2fs-dev] [PATCH v2] f2fs: cleanup in
+ f2fs_create_flush_cmd_control()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,190 +163,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
+From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Yangtao Li <frank.li@vivo.com>
+Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/10/25 15:36, zhangqilong wrote:
->> On 2022/10/25 15:01, zhangqilong wrote:
->>>> On 2022/10/25 14:27, zhangqilong wrote:
->>>>>> On 2022/10/20 15:27, zhangqilong via Linux-f2fs-devel wrote:
->>>>>>>> On 2022/10/18 10:45, Zhang Qilong wrote:
->>>>>>>>> In the following case:
->>>>>>>>> process 1			process 2
->>>>>>>>>       ->open A
->>>>>>>>>        ->mmap
->>>>>>>>>         ->read # the first time
->>>>>>>>>         				 ->ioctl w/h F2FS_IOC_MOVE_RANGE
->>>>>>>>> 				        	# (range A->B)
->>>>>>>>>         ->read # the second time
->>>>>>>>
->>>>>>>> How about checking B as well? Previous mapped data can still be
->>>>>>>> accessed after F2FS_IOC_MOVE_RANGE?
->>>>>>>>
->>>>>>>
->>>>>>> Hi
->>>>>>>
->>>>>>> I have checked B as well. Previous mapped data can't be accessed
->>>>>>> after F2FS_IOC_MOVE_RANGE.
->>>>>>
->>>>>> I doubt that we didn't call flush_dcache_page() in below branch, so
->>>>>> user may see stall data after F2FS_IOC_MOVE_RANGE? Am I missing
->>>> something?
->>>>>>
->>>>>
->>>>> Hi,
->>>>>
->>>>> You are right, it needs flush_dcache_page, but it is unnecessary
->>>>> here, the __clone_blkaddrs() is called by
->> FALLOC_FL_COLLAPSE_RANGE/
->>>> FALLOC_FL_INSERT_RANGE /F2FS_IOC_MOVE_RANGE.
->>>>> ->__exchange_data_block()
->>>>>     ->__clone_blkaddrs()
->>>>>
->>>>> f2fs_do_collapse()  and f2fs_insert_range() have truncate_pagecache
->>>>> after __exchange_data_block() It seem we have analyzed before. So we
->>>> only need to add a truncate operation for F2FS_IOC_MOVE_RANGE.
->>>>
->>>> I mean it needs to call truncate_pagecache_range(dst, ...) in
->>>> f2fs_move_file_range() as well, right?
->>>
->>> Yes, I think it should call truncate_pagecache_range(dst, ...) or
->> flush_dcache_page() here.
->>> I submitted a patch before, it seems to be forgetten.
->>>
->>> https://lore.kernel.org/linux-f2fs-devel/20220825024102.120651-1-zhang
->>> qilong3@huawei.com/
->>>
->>> But, I test it w/o truncate_pagecache_range(dst, ...) or
->>> flush_dcache_page(), user can not see stall dst data, maybe It is a bit
->> difficult to construct the scene for me.
->>
->> Please check the condition how can we run into below else branch. I guess
->> you need to persist data blocks of src into a checkpoint w/ SYNC(2), then
->> __clone_blkaddrs() will copy data from page cache directly instead of
->> exchanging metadatas.
->>
-> 
-> Thanks for your suggestion, I try it later for this point. If I have any progress,
-> I will notify you immediately.
-> 
-> Do you have any suggestion for this patch? :)
->          f2fs: Fix data consistency in f2fs_move_file_range()
+Remove the local 'err' variable for readable,
+no functional changes.
 
-No objection from my side... :)
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
+---
+ fs/f2fs/segment.c | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
-I think it needs to test/verify the case I mentioned before merging
-this patch.
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index acf3d3fa4363..ed247195a20c 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -620,12 +620,11 @@ int f2fs_create_flush_cmd_control(struct f2fs_sb_info *sbi)
+ {
+ 	dev_t dev = sbi->sb->s_bdev->bd_dev;
+ 	struct flush_cmd_control *fcc;
+-	int err = 0;
+ 
+ 	if (SM_I(sbi)->fcc_info) {
+ 		fcc = SM_I(sbi)->fcc_info;
+ 		if (fcc->f2fs_issue_flush)
+-			return err;
++			return 0;
+ 		goto init_thread;
+ 	}
+ 
+@@ -638,19 +637,18 @@ int f2fs_create_flush_cmd_control(struct f2fs_sb_info *sbi)
+ 	init_llist_head(&fcc->issue_list);
+ 	SM_I(sbi)->fcc_info = fcc;
+ 	if (!test_opt(sbi, FLUSH_MERGE))
+-		return err;
++		return 0;
+ 
+ init_thread:
+ 	fcc->f2fs_issue_flush = kthread_run(issue_flush_thread, sbi,
+ 				"f2fs_flush-%u:%u", MAJOR(dev), MINOR(dev));
+ 	if (IS_ERR(fcc->f2fs_issue_flush)) {
+-		err = PTR_ERR(fcc->f2fs_issue_flush);
+ 		kfree(fcc);
+ 		SM_I(sbi)->fcc_info = NULL;
+-		return err;
++		return PTR_ERR(fcc->f2fs_issue_flush);
+ 	}
+ 
+-	return err;
++	return 0;
+ }
+ 
+ void f2fs_destroy_flush_cmd_control(struct f2fs_sb_info *sbi, bool free)
+-- 
+2.25.1
 
-Thanks,
-
-> 
-> Thanks,
-> 
->> Thanks,
->>
->>
->>>
->>> Thanks,
->>>>
->>>> Thanks,
->>>>
->>>>>
->>>>>> __clone_blkaddrs()
->>>>>> {
->>>>>> ...
->>>>>> 		} else {
->>>>>> 			struct page *psrc, *pdst;
->>>>>>
->>>>>> 			psrc = f2fs_get_lock_data_page(src_inode,
->>>>>> 							src + i, true);
->>>>>> 			if (IS_ERR(psrc))
->>>>>> 				return PTR_ERR(psrc);
->>>>>> 			pdst = f2fs_get_new_data_page(dst_inode, NULL,
->>>> dst + i,
->>>>>> 								true);
->>>>>> 			if (IS_ERR(pdst)) {
->>>>>> 				f2fs_put_page(psrc, 1);
->>>>>> 				return PTR_ERR(pdst);
->>>>>> 			}
->>>>>> 			memcpy_page(pdst, 0, psrc, 0, PAGE_SIZE);
->>>>>> 			set_page_dirty(pdst);
->>>>>> 			f2fs_put_page(pdst, 1);
->>>>>> 			f2fs_put_page(psrc, 1);
->>>>>>
->>>>>> 			ret = f2fs_truncate_hole(src_inode,
->>>>>> 						src + i, src + i + 1);
->>>>>> 			if (ret)
->>>>>> 				return ret;
->>>>>> 			i++;
->>>>>> 		}
->>>>>> ...
->>>>>> }
->>>>>>
->>>>>> Thanks,
->>>>>>
->>>>>>>
->>>>>>> In addition, this patch could be applied to mainline if possible?
->>>>>>>
->>>>>>> Thanks
->>>>>>>
->>>>>>>> Thanks,
->>>>>>>>
->>>>>>>>>
->>>>>>>>> We will read old data at the second time. The root cause is that
->>>>>>>>> user still can see the previous source data after being moved.
->>>>>>>>> We fix it by adding truncating after __exchange_data_block.
->>>>>>>>>
->>>>>>>>> Fixes: 4dd6f977fc77 ("f2fs: support an ioctl to move a range of
->>>>>>>>> data
->>>>>>>>> blocks")
->>>>>>>>> Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
->>>>>>>>> ---
->>>>>>>>> v2:
->>>>>>>>> - moving truncating to the range of f2fs_lock_op()
->>>>>>>>>
->>>>>>>>> v3:
->>>>>>>>> - modify the title and commit message
->>>>>>>>> ---
->>>>>>>>>       fs/f2fs/file.c | 3 +++
->>>>>>>>>       1 file changed, 3 insertions(+)
->>>>>>>>>
->>>>>>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c index
->>>>>>>>> 82cda1258227..e9dfa41baf9e 100644
->>>>>>>>> --- a/fs/f2fs/file.c
->>>>>>>>> +++ b/fs/f2fs/file.c
->>>>>>>>> @@ -2824,6 +2824,7 @@ static int f2fs_move_file_range(struct
->>>>>>>>> file *file_in,
->>>>>>>> loff_t pos_in,
->>>>>>>>>       			goto out_src;
->>>>>>>>>       	}
->>>>>>>>>
->>>>>>>>> +	filemap_invalidate_lock(src->i_mapping);
->>>>>>>>>       	f2fs_lock_op(sbi);
->>>>>>>>>       	ret = __exchange_data_block(src, dst, pos_in >>
->>>> F2FS_BLKSIZE_BITS,
->>>>>>>>>       				pos_out >> F2FS_BLKSIZE_BITS, @@
->>>> -2835,7
->>>>>> +2836,9 @@ static
->>>>>>>>> int f2fs_move_file_range(struct file *file_in,
->>>>>>>> loff_t pos_in,
->>>>>>>>>       		else if (dst_osize != dst->i_size)
->>>>>>>>>       			f2fs_i_size_write(dst, dst_osize);
->>>>>>>>>       	}
->>>>>>>>> +	truncate_pagecache_range(src, pos_in, pos_in + len - 1);
->>>>>>>>>       	f2fs_unlock_op(sbi);
->>>>>>>>> +	filemap_invalidate_unlock(src->i_mapping);
->>>>>>>>>
->>>>>>>>>       	if (src != dst)
->>>>>>>>>       		f2fs_up_write(&F2FS_I(dst)->i_gc_rwsem[WRITE]);
->>>>>>>
->>>>>>> _______________________________________________
->>>>>>> Linux-f2fs-devel mailing list
->>>>>>> Linux-f2fs-devel@lists.sourceforge.net
->>>>>>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
