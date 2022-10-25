@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1595160C523
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Oct 2022 09:29:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2097F60C54A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Oct 2022 09:34:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1onENC-0001ep-1j;
-	Tue, 25 Oct 2022 07:29:18 +0000
+	id 1onERu-00046Q-SP;
+	Tue, 25 Oct 2022 07:34:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1onENA-0001ei-LO
+ (envelope-from <chao@kernel.org>) id 1onERu-00046K-3L
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Oct 2022 07:29:16 +0000
+ Tue, 25 Oct 2022 07:34:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=q1RyvoOcymfIySYcgs9ulA134LQcv1LmgCsjKiI382Y=; b=ibhxkXabeHAVDvPd4PqtdWSRor
- KR/lZjBKMbG8/sg12GtvaOt3cVAuRahEq6Rk559HPtaj2AG9dM/REHTL0qnNFFpDH2YMGKFYSJiW8
- +UvV6kMHrX0S73uNpLb4bD8XphUJ23jbDmYZ+ZpFEz7c1C/BFWdlwN0ujiSf9d8fZqiY=;
+ bh=Ehi+LvsD9YUDzqPNOcSLLhdfiTtrCCKmSx1ajcATEyY=; b=IXzgi5qyb2K87Ki8FdSSlmsXkt
+ yXodBEu7oyGp8tqoMhlb2PoqeRXA+BHav86QLXDndFau4jZ7yBUVfcTJ/0G1S3oYMO7fAcZBaLncv
+ 84Y/gUjoU6R1U9ttV3DMzD1BYDmtUlaNRTJ7+ADE5wUbdz94UA6ixTJlA7pnXDFF7b1Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,42 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=q1RyvoOcymfIySYcgs9ulA134LQcv1LmgCsjKiI382Y=; b=bBo3ZfX+OygLRpVX9d5eiSYAeC
- YzKLQ2vEpQRkwwCGB1H4bj56c5eNMYY7ioB8QGyRtSDBf5hYJOcVNwXtfwH7Lal4qjrgqivcpoqVG
- DPfHYHSP35LjttxfBAgMoMiP9wQoiONoLx2cPwR06qaAvA+JxBtrafrlGbfbibbeJx1E=;
+ bh=Ehi+LvsD9YUDzqPNOcSLLhdfiTtrCCKmSx1ajcATEyY=; b=m2wETP8NCrVnKJifbrzD6ejveZ
+ WTJ+dyf2O5pbtI9hyWZd1lpoAXP0PP+PFJaZaO9uxBpbhLuqaEIQyWV+8U+1wAElbUfgCcHHwnQk/
+ xzxG6CMMVZg7sTEcTjURO/rtJoqjyR6mcBuSNo7H69aTzkQH+Dzlfey5legG2kvSJVKY=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1onEN9-00034w-Pv for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Oct 2022 07:29:16 +0000
+ id 1onERt-00GcWc-JR for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Oct 2022 07:34:10 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 69D4461783;
- Tue, 25 Oct 2022 07:29:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B00D7C433C1;
- Tue, 25 Oct 2022 07:29:08 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 37457617B6;
+ Tue, 25 Oct 2022 07:34:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B9BFC433C1;
+ Tue, 25 Oct 2022 07:34:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666682949;
- bh=Gv+wL2UYnkvCCSfsrxAR0k2V1PI7nMZ5YN27pTjKFDs=;
+ s=k20201202; t=1666683243;
+ bh=NcRaNLmBZOsJOGIc24y8WcRzr4vKPzeQM9yCUXgw2n4=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=NkYcHkrAiFGBHaDCZbtg2xV4WxvmHEhemBJcYL1zXrnRa5GJxUW2QhIxFYaAuIjsS
- S7sipVaLzJMCSBkGh/P0cySaBCCBWQbjCTXqmuSxUf0yHV/NPPEBYh6zdODRseQ6K/
- JTKibZXeX6mpZCceolxI0GWSQYN0atY6CegWnpCoIdxcpwyFKRzzxBZS466AFa0z1w
- XAsFJT34HBo+QNa0IBKz22tK13lq0ujS0zf6JnVhjY1NV9iJtnz/SPfXRFWJ0cxOMA
- R+XG4VY7ZcqLSQWTsu5THL1NcJ1jkyV73+0xdi54KEGlmji0DmguWHpNoOAP3w8vhR
- Hm8ddZkNAtYNA==
-Message-ID: <b19175cf-7f87-03c0-a129-716f9bb5e16d@kernel.org>
-Date: Tue, 25 Oct 2022 15:29:06 +0800
+ b=UbBtBHL84PpfTDG2QTFSgIKReaZiBNj0KWsHDbn0nYUxeEQcLRDeboq7qyiuDcE6K
+ QapIbFjKuNwJwkUfoWO1Az1MBvAPtEWTaN7exsnjNJkdyu/1J9/jOjfMEVGr2JujIp
+ ybZdVZFAPnwdnJLQujtaKz5r1jwDgjX67PV1CYbR80d3z2Ez/Du3zHzZlAtZ4hWtEQ
+ lzV1Uv+KzyPjBgfJW53cmRiT3nXViKsIKFTlkjl/Zqcyk9Eq26zhqPpfO/1FbJhH6/
+ X2ji6qFTJzExLDPgvAHdk/XzEWFc5D5Bm7UpZJKRoflp6JzExdcG2JDfTEukKXhIxe
+ YbDLH14/4w7JQ==
+Message-ID: <a5744cfc-8c00-02bb-8518-6e86380557c4@kernel.org>
+Date: Tue, 25 Oct 2022 15:33:59 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
 Content-Language: en-US
 To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
-References: <bfae3198-7557-f984-200c-2c677881f462@kernel.org>
- <20221025070817.37391-1-frank.li@vivo.com>
+References: <20221025065025.35017-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221025070817.37391-1-frank.li@vivo.com>
+In-Reply-To: <20221025065025.35017-1-frank.li@vivo.com>
 X-Spam-Score: -5.7 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -74,10 +73,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/10/25 15:08, Yangtao Li wrote: > Hi Chao, > > In my
- point of view, it should not return 0. Because calling kthread_run() > to
- create a kernel thread may fails, and err is assigned a value. I commented
- on last 'return err' rather than the one in error path... 
+ Content preview:  On 2022/10/25 14:50, Yangtao Li wrote: > Under the current
+ logic, when gc_urgent_high_remaining is set to 1, > the mode will be switched
+ to normal at the beginning, instead of > running in gc_urgent m [...] 
  Content analysis details:   (-5.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +92,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1onEN9-00034w-Pv
-Subject: Re: [f2fs-dev] [PATCH] f2fs: remove redundant return in
- f2fs_create_flush_cmd_control()
+X-Headers-End: 1onERt-00GcWc-JR
+Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: fix gc mode when
+ gc_urgent_high_remaining is 1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,64 +111,23 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/10/25 15:08, Yangtao Li wrote:
-> Hi Chao,
+On 2022/10/25 14:50, Yangtao Li wrote:
+> Under the current logic, when gc_urgent_high_remaining is set to 1,
+> the mode will be switched to normal at the beginning, instead of
+> running in gc_urgent mode.
 > 
-> In my point of view, it should not return 0. Because calling kthread_run()
-> to create a kernel thread may fails, and err is assigned a value.
-
-I commented on last 'return err' rather than the one in error path...
-
-Maybe:
-
----
-  fs/f2fs/segment.c | 8 ++++----
-  1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 81aadfc06c89..25ee8c8cb2cf 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -634,12 +634,12 @@ int f2fs_create_flush_cmd_control(struct f2fs_sb_info *sbi)
-  {
-  	dev_t dev = sbi->sb->s_bdev->bd_dev;
-  	struct flush_cmd_control *fcc;
--	int err = 0;
-+	int err;
-
-  	if (SM_I(sbi)->fcc_info) {
-  		fcc = SM_I(sbi)->fcc_info;
-  		if (fcc->f2fs_issue_flush)
--			return err;
-+			return 0;
-  		goto init_thread;
-  	}
-
-@@ -652,7 +652,7 @@ int f2fs_create_flush_cmd_control(struct f2fs_sb_info *sbi)
-  	init_llist_head(&fcc->issue_list);
-  	SM_I(sbi)->fcc_info = fcc;
-  	if (!test_opt(sbi, FLUSH_MERGE))
--		return err;
-+		return 0;
-
-  init_thread:
-  	fcc->f2fs_issue_flush = kthread_run(issue_flush_thread, sbi,
-@@ -664,7 +664,7 @@ int f2fs_create_flush_cmd_control(struct f2fs_sb_info *sbi)
-  		return err;
-  	}
-
--	return err;
-+	return 0;
-  }
-
-  void f2fs_destroy_flush_cmd_control(struct f2fs_sb_info *sbi, bool free)
--- 
-2.25.1
-
-
-
+> Let's switch the gc mode back to normal when the gc ends.
 > 
-> Thanks,
+> Fixes: 265576181b4a ("f2fs: remove gc_urgent_high_limited for cleanup")
+> 
+
+Unneeded empty line here, it's trivial though...
+
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+
+Reviewed-by: Chao Yu <chao@kernel.org>
+
+Thanks,
 
 
 _______________________________________________
