@@ -2,86 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7495F60C4D6
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Oct 2022 09:17:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B9B660C4E8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Oct 2022 09:20:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1onEBF-0005VH-EH;
-	Tue, 25 Oct 2022 07:16:57 +0000
+	id 1onEEd-0001XR-Bl;
+	Tue, 25 Oct 2022 07:20:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yangyingliang@huawei.com>) id 1onEBC-0005VA-Ay
+ (envelope-from <chao@kernel.org>) id 1onEEZ-0001XK-Oj
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Oct 2022 07:16:54 +0000
+ Tue, 25 Oct 2022 07:20:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wRTSFlr55ch9LuRQISuy1nxKwJSSQ/4GOUCz44Bq18k=; b=AhYFx9vr16au2hAheqpY6c3F8+
- fHA7rqNeIlU9Pc0ltlSiSPW4K1b6faUgb9K2Q7pqpsHNVpHkckl9alOAuOfLIkYfzp4/XInGvdqLg
- mPAfn964P43TDD2LAG2+UvEyLSlYKC4jzrnEJ2fESNF7wMhM2SHSKixwXiqae2YJqS6o=;
+ bh=rUiOj06881zr0lUkgjqz09G3WL0mIm9MGj/mHjq//zw=; b=GfxK9GhoF9pzpbhH3dMiYJzYN2
+ 8Ptd1kH4btbVoJI77I1fNuKIjr6XbmXa9UiofhJ52QxxsttgxbCNNdoWkza1T92v6n9V0Eu+NKlCa
+ ZamPYHMWExaUCgdaMGX3yEP5Kgrdx9rNilrYDVglSAVY1i4QnvQY+opTZHLIMmOQUDLs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=wRTSFlr55ch9LuRQISuy1nxKwJSSQ/4GOUCz44Bq18k=; b=b
- eAtnrQmLdCA6jp8vM19ZDINzw4C1LjMi19cFNZBMJR8xyOIOf2mkf1FZa8Q7mXKPHjtmqhLkpMogw
- hvIPm+7rX3UQMnjo5OZgIClOR07YGjr5qP4gU2AlmhVYxos9s2KJXCKua+MmcKryhTo8R4RvqmDjF
- tytBZV/GblB+OYRc=;
-Received: from szxga01-in.huawei.com ([45.249.212.187])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=rUiOj06881zr0lUkgjqz09G3WL0mIm9MGj/mHjq//zw=; b=V9tJUSF154UCS1VzQXKwdNB2gY
+ 73WW4w6CIoe89nWE5RbT4Mq85Q8n0ppLA2J/PvhOP9vtcn2RSwFBGLJr8tt0BPwXNbp+wtEGhCcz7
+ Cf9AjE8CYwQxk1DjhpMWRb9+GbECcC4QYMquOaVzj02I8k7Jmxyd8NX8ZdEf0tN9VVBk=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1onEB8-00Gbb7-HG for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Oct 2022 07:16:54 +0000
-Received: from dggpemm500022.china.huawei.com (unknown [172.30.72.54])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4MxNR81GpYzmVK5;
- Tue, 25 Oct 2022 15:11:48 +0800 (CST)
-Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
- dggpemm500022.china.huawei.com (7.185.36.162) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Tue, 25 Oct 2022 15:16:39 +0800
-Received: from huawei.com (10.175.103.91) by dggpemm500007.china.huawei.com
- (7.185.36.183) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Tue, 25 Oct
- 2022 15:16:38 +0800
-To: <linux-kernel@vger.kernel.org>, <qemu-devel@nongnu.org>,
- <linux-f2fs-devel@lists.sourceforge.net>, <linux-erofs@lists.ozlabs.org>,
- <ocfs2-devel@oss.oracle.com>, <linux-mtd@lists.infradead.org>,
- <amd-gfx@lists.freedesktop.org>
-Date: Tue, 25 Oct 2022 15:15:49 +0800
-Message-ID: <20221025071549.1280528-1-yangyingliang@huawei.com>
-X-Mailer: git-send-email 2.25.1
+ id 1onEEY-00GbsZ-Sg for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Oct 2022 07:20:23 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7DBBD61701;
+ Tue, 25 Oct 2022 07:20:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00529C433C1;
+ Tue, 25 Oct 2022 07:20:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1666682416;
+ bh=lHe/4u47VjgyqS/qKPddIt0lVjDsU+LlWcVX4qqtXJo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=XCDCRE74MQPISejkvyMsMwnDw5O9axuZCB0YvCXtq7N+1kep98u0zjn32x+dkqyPM
+ FnENvdPa5ye4v61yOeaLpZTE0WYzj5rhU76+LaRt4xn8UAeTFramMwpbBbxdNJ6zGd
+ y6xYR2CUvIDto2dL9Y0HsVVJg6Q3O/jSM5VPpN/9XXXFCwLzSjOu48cQTyfeAk3lCa
+ yW5bP9jtix4C6Fe1Olc5KdvgqxrKmug67KpkwuHfAYl3I5gKbLK3pH+UZgy8JXaNZB
+ SqJ3848/AjeWh13DjbCxBjC59A1h50Ly7+SwGfzRFU1nds1/fShKISrQ/rm1gjvhXg
+ gR7+p/oFYZ2rw==
+Message-ID: <702be2cb-0af5-f47d-486c-f3b032bdb8cd@kernel.org>
+Date: Tue, 25 Oct 2022 15:20:13 +0800
 MIME-Version: 1.0
-X-Originating-IP: [10.175.103.91]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- dggpemm500007.china.huawei.com (7.185.36.183)
-X-CFilter-Loop: Reflected
-X-Spam-Score: -2.3 (--)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+Content-Language: en-US
+To: zhangqilong <zhangqilong3@huawei.com>,
+ "jaegeuk@kernel.org" <jaegeuk@kernel.org>
+References: <20221018024532.44184-1-zhangqilong3@huawei.com>
+ <35811a40-cc69-a50d-b348-62eed5ed1227@kernel.org>
+ <1e8cf37922cc4c87aff770449bbba4ab@huawei.com>
+ <07348e12-142b-228c-e5fe-6f4fc9a74421@kernel.org>
+ <d1d56450ccd24c1091ae67894ce8cc69@huawei.com>
+ <959ca5cb-947c-d693-5e6f-79736ada7664@kernel.org>
+ <411daf4a5ff94907bc298579f1e99d49@huawei.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <411daf4a5ff94907bc298579f1e99d49@huawei.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Inject fault while loading module, kset_register() may fail.
- If it fails, the kset.kobj.name allocated by kobject_set_name() which must
- be called before a call to kset_register() may be leaked, since [...] 
- Content analysis details:   (-2.3 points, 6.0 required)
+ Content preview:  On 2022/10/25 15:01,
+ zhangqilong wrote: >> On 2022/10/25 14:27, 
+ zhangqilong wrote: >>>> On 2022/10/20 15:27, zhangqilong via Linux-f2fs-devel
+ wrote: >>>>>> On 2022/10/18 10:45, Zhang Qilong wrote: >>> [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [45.249.212.187 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-X-Headers-End: 1onEB8-00Gbb7-HG
-Subject: [f2fs-dev] [PATCH v3] kset: fix memory leak when kset_register()
- returns error
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1onEEY-00GbsZ-Sg
+Subject: Re: [f2fs-dev] =?utf-8?b?562U5aSNOiDnrZTlpI06ICDnrZTlpI06IFtQQVRD?=
+ =?utf-8?q?H=5D_f2fs=3A_Fix_data_consistency_in_f2fs=5Fmove=5Ffile=5Frange?=
+ =?utf-8?b?KCk=?=
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -93,79 +115,168 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yang Yingliang via Linux-f2fs-devel
+Cc: "linux-f2fs-devel@lists.sourceforge.net"
  <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yang Yingliang <yangyingliang@huawei.com>
-Cc: yangyingliang@huawei.com, alexander.deucher@amd.com, richard@nod.at,
- mst@redhat.com, gregkh@linuxfoundation.org, somlo@cmu.edu,
- liushixin2@huawei.com, joseph.qi@linux.alibaba.com, luben.tuikov@amd.com,
- jlbec@evilplan.org, hsiangkao@linux.alibaba.com, rafael@kernel.org,
- jaegeuk@kernel.org, akpm@linux-foundation.org, mark@fasheh.com
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Inject fault while loading module, kset_register() may fail.
-If it fails, the kset.kobj.name allocated by kobject_set_name()
-which must be called before a call to kset_register() may be
-leaked, since refcount of kobj was set in kset_init().
+On 2022/10/25 15:01, zhangqilong wrote:
+>> On 2022/10/25 14:27, zhangqilong wrote:
+>>>> On 2022/10/20 15:27, zhangqilong via Linux-f2fs-devel wrote:
+>>>>>> On 2022/10/18 10:45, Zhang Qilong wrote:
+>>>>>>> In the following case:
+>>>>>>> process 1			process 2
+>>>>>>>      ->open A
+>>>>>>>       ->mmap
+>>>>>>>        ->read # the first time
+>>>>>>>        				 ->ioctl w/h F2FS_IOC_MOVE_RANGE
+>>>>>>> 				        	# (range A->B)
+>>>>>>>        ->read # the second time
+>>>>>>
+>>>>>> How about checking B as well? Previous mapped data can still be
+>>>>>> accessed after F2FS_IOC_MOVE_RANGE?
+>>>>>>
+>>>>>
+>>>>> Hi
+>>>>>
+>>>>> I have checked B as well. Previous mapped data can't be accessed
+>>>>> after F2FS_IOC_MOVE_RANGE.
+>>>>
+>>>> I doubt that we didn't call flush_dcache_page() in below branch, so
+>>>> user may see stall data after F2FS_IOC_MOVE_RANGE? Am I missing
+>> something?
+>>>>
+>>>
+>>> Hi,
+>>>
+>>> You are right, it needs flush_dcache_page, but it is unnecessary here,
+>>> the __clone_blkaddrs() is called by FALLOC_FL_COLLAPSE_RANGE/
+>> FALLOC_FL_INSERT_RANGE /F2FS_IOC_MOVE_RANGE.
+>>> ->__exchange_data_block()
+>>>    ->__clone_blkaddrs()
+>>>
+>>> f2fs_do_collapse()  and f2fs_insert_range() have truncate_pagecache
+>>> after __exchange_data_block() It seem we have analyzed before. So we
+>> only need to add a truncate operation for F2FS_IOC_MOVE_RANGE.
+>>
+>> I mean it needs to call truncate_pagecache_range(dst, ...) in
+>> f2fs_move_file_range() as well, right?
+> 
+> Yes, I think it should call truncate_pagecache_range(dst, ...) or flush_dcache_page() here.
+> I submitted a patch before, it seems to be forgetten.
+> 
+> https://lore.kernel.org/linux-f2fs-devel/20220825024102.120651-1-zhangqilong3@huawei.com/
+> 
+> But, I test it w/o truncate_pagecache_range(dst, ...) or flush_dcache_page(), user can not
+> see stall dst data, maybe It is a bit difficult to construct the scene for me.
 
-To mitigate this, we free the name in kset_register() when an
-error is encountered, i.e. when kset_register() returns an error.
+Please check the condition how can we run into below else branch. I guess you
+need to persist data blocks of src into a checkpoint w/ SYNC(2), then
+__clone_blkaddrs() will copy data from page cache directly instead of exchanging
+metadatas.
 
-A kset may be embedded in a larger structure which may be dynamically
-allocated in callers, it needs to be freed in ktype.release() or error
-path in callers, in this case, we can not call kset_put() in kset_register(),
-or it will cause double free, so just call kfree_const() to free the
-name and set it to NULL to avoid accessing bad pointer in callers.
+Thanks,
 
-With this fix, the callers don't need care about freeing the name
-and may call kset_put() if kset_register() fails.
 
-Suggested-by: Luben Tuikov <luben.tuikov@amd.com>
-Signed-off-by: Yang Yingliang <yangyingliang@huawei.com>
----
-v2 -> v3:
-  Update commit message and comment of kset_register().
-
-v1 -> v2:
-  Free name inside of kset_register() instead of calling kset_put()
-  in drivers.
----
- lib/kobject.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/lib/kobject.c b/lib/kobject.c
-index a0b2dbfcfa23..3cd19b9ca5ab 100644
---- a/lib/kobject.c
-+++ b/lib/kobject.c
-@@ -834,6 +834,9 @@ EXPORT_SYMBOL_GPL(kobj_sysfs_ops);
- /**
-  * kset_register() - Initialize and add a kset.
-  * @k: kset.
-+ *
-+ * NOTE: On error, the kset.kobj.name allocated by() kobj_set_name()
-+ * is freed, it can not be used any more.
-  */
- int kset_register(struct kset *k)
- {
-@@ -844,8 +847,12 @@ int kset_register(struct kset *k)
- 
- 	kset_init(k);
- 	err = kobject_add_internal(&k->kobj);
--	if (err)
-+	if (err) {
-+		kfree_const(k->kobj.name);
-+		/* Set it to NULL to avoid accessing bad pointer in callers. */
-+		k->kobj.name = NULL;
- 		return err;
-+	}
- 	kobject_uevent(&k->kobj, KOBJ_ADD);
- 	return 0;
- }
--- 
-2.25.1
-
+> 
+> Thanks,
+>>
+>> Thanks,
+>>
+>>>
+>>>> __clone_blkaddrs()
+>>>> {
+>>>> ...
+>>>> 		} else {
+>>>> 			struct page *psrc, *pdst;
+>>>>
+>>>> 			psrc = f2fs_get_lock_data_page(src_inode,
+>>>> 							src + i, true);
+>>>> 			if (IS_ERR(psrc))
+>>>> 				return PTR_ERR(psrc);
+>>>> 			pdst = f2fs_get_new_data_page(dst_inode, NULL,
+>> dst + i,
+>>>> 								true);
+>>>> 			if (IS_ERR(pdst)) {
+>>>> 				f2fs_put_page(psrc, 1);
+>>>> 				return PTR_ERR(pdst);
+>>>> 			}
+>>>> 			memcpy_page(pdst, 0, psrc, 0, PAGE_SIZE);
+>>>> 			set_page_dirty(pdst);
+>>>> 			f2fs_put_page(pdst, 1);
+>>>> 			f2fs_put_page(psrc, 1);
+>>>>
+>>>> 			ret = f2fs_truncate_hole(src_inode,
+>>>> 						src + i, src + i + 1);
+>>>> 			if (ret)
+>>>> 				return ret;
+>>>> 			i++;
+>>>> 		}
+>>>> ...
+>>>> }
+>>>>
+>>>> Thanks,
+>>>>
+>>>>>
+>>>>> In addition, this patch could be applied to mainline if possible?
+>>>>>
+>>>>> Thanks
+>>>>>
+>>>>>> Thanks,
+>>>>>>
+>>>>>>>
+>>>>>>> We will read old data at the second time. The root cause is that
+>>>>>>> user still can see the previous source data after being moved. We
+>>>>>>> fix it by adding truncating after __exchange_data_block.
+>>>>>>>
+>>>>>>> Fixes: 4dd6f977fc77 ("f2fs: support an ioctl to move a range of
+>>>>>>> data
+>>>>>>> blocks")
+>>>>>>> Signed-off-by: Zhang Qilong <zhangqilong3@huawei.com>
+>>>>>>> ---
+>>>>>>> v2:
+>>>>>>> - moving truncating to the range of f2fs_lock_op()
+>>>>>>>
+>>>>>>> v3:
+>>>>>>> - modify the title and commit message
+>>>>>>> ---
+>>>>>>>      fs/f2fs/file.c | 3 +++
+>>>>>>>      1 file changed, 3 insertions(+)
+>>>>>>>
+>>>>>>> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c index
+>>>>>>> 82cda1258227..e9dfa41baf9e 100644
+>>>>>>> --- a/fs/f2fs/file.c
+>>>>>>> +++ b/fs/f2fs/file.c
+>>>>>>> @@ -2824,6 +2824,7 @@ static int f2fs_move_file_range(struct file
+>>>>>>> *file_in,
+>>>>>> loff_t pos_in,
+>>>>>>>      			goto out_src;
+>>>>>>>      	}
+>>>>>>>
+>>>>>>> +	filemap_invalidate_lock(src->i_mapping);
+>>>>>>>      	f2fs_lock_op(sbi);
+>>>>>>>      	ret = __exchange_data_block(src, dst, pos_in >>
+>> F2FS_BLKSIZE_BITS,
+>>>>>>>      				pos_out >> F2FS_BLKSIZE_BITS, @@
+>> -2835,7
+>>>> +2836,9 @@ static
+>>>>>>> int f2fs_move_file_range(struct file *file_in,
+>>>>>> loff_t pos_in,
+>>>>>>>      		else if (dst_osize != dst->i_size)
+>>>>>>>      			f2fs_i_size_write(dst, dst_osize);
+>>>>>>>      	}
+>>>>>>> +	truncate_pagecache_range(src, pos_in, pos_in + len - 1);
+>>>>>>>      	f2fs_unlock_op(sbi);
+>>>>>>> +	filemap_invalidate_unlock(src->i_mapping);
+>>>>>>>
+>>>>>>>      	if (src != dst)
+>>>>>>>      		f2fs_up_write(&F2FS_I(dst)->i_gc_rwsem[WRITE]);
+>>>>>
+>>>>> _______________________________________________
+>>>>> Linux-f2fs-devel mailing list
+>>>>> Linux-f2fs-devel@lists.sourceforge.net
+>>>>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
