@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 604C760C200
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Oct 2022 04:55:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 173CE60C207
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Oct 2022 05:03:24 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1onA6H-0000iI-6L;
-	Tue, 25 Oct 2022 02:55:33 +0000
+	id 1onADo-0000tJ-ST;
+	Tue, 25 Oct 2022 03:03:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1onA6E-0000i7-Rs
+ (envelope-from <chao@kernel.org>) id 1onADn-0000tC-Np
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Oct 2022 02:55:30 +0000
+ Tue, 25 Oct 2022 03:03:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hlpO2LbgeRhrFV2aUVRz6OA7uNLkV67LOhGzbiTXix0=; b=E3v/oJiZMT8hlPLAIW7UY3pXyJ
- vBcBcGYkdr5U9L1v2aJIi3CkEILNk+7+vfl8OD3pbhH8QGROMxny5eJuv+q1DjX95tio9E9cMQReV
- NPnPqfFjjbcvYoQ/wzT+fh/7DtyleSCGzgSTkcmFcOLGu1HXeGJEuXulViSYxwWoekns=;
+ bh=vWYwVHs5tmRMB04hZfpiJ2gPP1zHDGWy4KARrVfDXqk=; b=CZIDj+C3XiqtmrTey4VHSoPFcj
+ oZh4j22wQsi4WoFmGgQr3pMNFJxF1p9uhjjfo4JgNwyT+1cLjqnnL6iE3EWa1F5ZX620H0TrNnTQc
+ rGg7O/YmOzRkWoyDLR7FHCjEfV7U/3Sh7Zc4Xk9HXs2953Xg0YYzYY8w7y+BuPO01/E4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,42 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hlpO2LbgeRhrFV2aUVRz6OA7uNLkV67LOhGzbiTXix0=; b=ah3nn+3XAOYFUOXSDggDXTewxm
- eDLTH71TIDF0HVV/30ePvHNLYNfWPGsbzd6GufjPu7+mmzhdetwwc+FJad6J0vT8tnkKIj5pEf3wq
- ltWyO3bm680KIiZz67hOYSQq5UEatr5BocE3nGdKe+QaAPhMnIGv8xUoEnN5mTkwp6JA=;
+ bh=vWYwVHs5tmRMB04hZfpiJ2gPP1zHDGWy4KARrVfDXqk=; b=DtS8woXN6LjB8tjgRQaT29BrlJ
+ kDY5z0HOTf4ysZc3WUDHubJLonRYbF38egkhCO3bDUmbBHseqS22KrVF0mi33X+uBkkjdPgIYsieN
+ qqSQQwgitG8126ZWPQDbYJl0cmgVDQTeDgHXzhJLauukTRp/mI3g7hu8eRem54PTSfu0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1onA6E-00GJVG-9W for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Oct 2022 02:55:30 +0000
+ id 1onADn-0000sq-53 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Oct 2022 03:03:19 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4B4A4616FE;
- Tue, 25 Oct 2022 02:55:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7FE55C433D7;
- Tue, 25 Oct 2022 02:55:17 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id BE527616CE;
+ Tue, 25 Oct 2022 03:03:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02D1DC433D6;
+ Tue, 25 Oct 2022 03:03:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666666518;
- bh=Muo9o2epnSLH7SzCZQsP556aks1UdauUOFGhRbrdGo0=;
+ s=k20201202; t=1666666993;
+ bh=C0BzoxkThe4sl0x6SHLn0j8oqMtjmakTknJ4uj7PQTI=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ppmycjqVUF3ze848ZhKyx4+YzVUHg3kN6VNFcAS1lZxhmXOeP3cLOuQuSkDEBRQv0
- Ru7Aqr80r68MK/BiNXz7+SRjwjyfjaSVJn1yRw6iM6DO9T6QV1INpbh6htCPo/QHY6
- 3D/GpvZZHUQaQtlEU5AOfhD5bZJnLB2oH28ygn7kBHGtktRhSkrgj65Pl83gqGTa/k
- ew0w5THqCfiI6UE6UYTXA1yAp54hgMd9oLTDycd+qq5WOi3/wIf5UyOGY8BXkizn7n
- dkRZT2G7M21AHNuHOYIPH5RW9wSmB/Z+/N8HhAu7sB+kNEapsS55UOgV3Qn4G22TvL
- 1hw9LikDwmmdQ==
-Message-ID: <a3644a20-731f-70b8-a21f-de6ab6e7bb6c@kernel.org>
-Date: Tue, 25 Oct 2022 10:55:15 +0800
+ b=WhOyePJz7tW6yocb59ISNSqfnILjY6mCjKZ209fPxjxprTu70KVjuJvAMcOA12pE6
+ Ncz12n+2S2bZMYwqifAIcgGjGhbRJ/f63Xiv07gqs89xoVnPEBzPVSsQ1Gige+1ffM
+ hVdq/qaNjVfos5hS55HOXcPnkbeU/0lFa3s8NUxSm65745aZRJE3OaVNfSQQkclNdJ
+ s5VMhHAtxtlcfl9trvpDhdmmsXoeA4RgZuq5cmI9KJ6x+Cn0aLrgQm8CVD/Xm2QRV3
+ 2flOFndoW1FJnjd4POGuPSmvp92dpk8DgCMwmzLjlc0RBwQEDiegxI3iCAGhbkj0ft
+ d3nlsQmLtIdxw==
+Message-ID: <5f0e2e43-1167-7fb7-9dc6-02ed0fc1858b@kernel.org>
+Date: Tue, 25 Oct 2022 11:03:09 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
 Content-Language: en-US
 To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
-References: <20221021153825.79614-1-frank.li@vivo.com>
- <20221021153825.79614-2-frank.li@vivo.com>
+References: <20221021174633.12541-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221021153825.79614-2-frank.li@vivo.com>
+In-Reply-To: <20221021174633.12541-1-frank.li@vivo.com>
 X-Spam-Score: -5.7 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -74,10 +73,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/10/21 23:38, Yangtao Li wrote: > This testing sysfs
- node has been deprecated for a long time, > let's remove it. Can you please
- merge this patch w/ [PATCH 1/2] f2fs: fix to correct invalid
- batched_trim_sections node 
+ Content preview:  On 2022/10/22 1:46, Yangtao Li wrote: > Under the current
+ logic, when gc_urgent_high_remaining is set to 1, > the mode will be switched
+ to normal at the beginning, instead of > running in gc_urgent mo [...] 
  Content analysis details:   (-5.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,8 +92,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1onA6E-00GJVG-9W
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: remove batched_trim_sections node
+X-Headers-End: 1onADn-0000sq-53
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: fix gc mode when
+ gc_urgent_high_remaining is 1
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,65 +111,55 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/10/21 23:38, Yangtao Li wrote:
-> This testing sysfs node has been deprecated for a long time,
-> let's remove it.
-
-Can you please merge this patch w/
-
-[PATCH 1/2] f2fs: fix to correct invalid batched_trim_sections node
-
+On 2022/10/22 1:46, Yangtao Li wrote:
+> Under the current logic, when gc_urgent_high_remaining is set to 1,
+> the mode will be switched to normal at the beginning, instead of
+> running in gc_urgent mode.
+> 
+> Let's switch the gc mode back to normal when the gc ends.
+> 
+> Fixes: 265576181b4a ("f2fs: remove gc_urgent_high_limited for cleanup")
 > 
 > Signed-off-by: Yangtao Li <frank.li@vivo.com>
 > ---
->   fs/f2fs/f2fs.h  | 3 ---
->   fs/f2fs/sysfs.c | 5 -----
->   2 files changed, 8 deletions(-)
+>   fs/f2fs/gc.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
 > 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index e6355a5683b7..9c480835adab 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1062,9 +1062,6 @@ struct f2fs_sm_info {
->   	/* a threshold to reclaim prefree segments */
->   	unsigned int rec_prefree_segments;
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 4546e01b2ee0..2f113fbcb85c 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -45,6 +45,7 @@ static int gc_thread_func(void *data)
+>   	set_freezable();
+>   	do {
+>   		bool sync_mode, foreground = false;
+> +		bool gc_normal_mode = false;
 >   
-> -	/* for batched trimming */
-> -	unsigned int trim_sections;		/* # of sections to trim */
-> -
->   	struct list_head sit_entry_set;	/* sit entry set list */
+>   		wait_event_interruptible_timeout(*wq,
+>   				kthread_should_stop() || freezing(current) ||
+> @@ -101,7 +102,7 @@ static int gc_thread_func(void *data)
+>   			if (sbi->gc_urgent_high_remaining) {
+>   				sbi->gc_urgent_high_remaining--;
+>   				if (!sbi->gc_urgent_high_remaining)
+> -					sbi->gc_mode = GC_NORMAL;
+> +					gc_normal_mode = true;
+>   			}
+>   			spin_unlock(&sbi->gc_urgent_high_lock);
+
+So, can we move above logic to the end of loop?
+
+>   		}
+> @@ -162,6 +163,10 @@ static int gc_thread_func(void *data)
+>   		/* balancing f2fs's metadata periodically */
+>   		f2fs_balance_fs_bg(sbi, true);
+>   next:
+> +		if (gc_normal_mode) {
+> +			sbi->gc_mode = GC_NORMAL;
+> +			gc_normal_mode = false;
+> +		}
+>   		sb_end_write(sbi->sb);
 >   
->   	unsigned int ipu_policy;	/* in-place-update policy */
-> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-> index 3005e2783a25..926b7a844362 100644
-> --- a/fs/f2fs/sysfs.c
-> +++ b/fs/f2fs/sysfs.c
-> @@ -488,9 +488,6 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
->   			return -EINVAL;
->   	}
->   
-> -	if (!strcmp(a->attr.name, "batched_trim_sections"))
-> -		return -EINVAL;
-> -
->   	if (!strcmp(a->attr.name, "gc_urgent")) {
->   		if (t == 0) {
->   			sbi->gc_mode = GC_NORMAL;
-> @@ -790,7 +787,6 @@ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, mid_discard_issue_time, mid_discard_
->   F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_issue_time, max_discard_issue_time);
->   F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_granularity, discard_granularity);
->   F2FS_RW_ATTR(RESERVED_BLOCKS, f2fs_sb_info, reserved_blocks, reserved_blocks);
-> -F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, batched_trim_sections, trim_sections);
->   F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, ipu_policy, ipu_policy);
->   F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, min_ipu_util, min_ipu_util);
->   F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, min_fsync_blocks, min_fsync_blocks);
-> @@ -919,7 +915,6 @@ static struct attribute *f2fs_attrs[] = {
->   	ATTR_LIST(max_discard_issue_time),
->   	ATTR_LIST(discard_granularity),
->   	ATTR_LIST(pending_discard),
-> -	ATTR_LIST(batched_trim_sections),
->   	ATTR_LIST(ipu_policy),
->   	ATTR_LIST(min_ipu_util),
->   	ATTR_LIST(min_fsync_blocks),
+>   	} while (!kthread_should_stop());
 
 
 _______________________________________________
