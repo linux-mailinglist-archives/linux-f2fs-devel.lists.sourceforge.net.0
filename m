@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F120260F8F5
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Oct 2022 15:24:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83EFA60F90F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Oct 2022 15:31:31 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oo2rt-0006MN-F8;
-	Thu, 27 Oct 2022 13:24:21 +0000
+	id 1oo2yl-0006XW-I8;
+	Thu, 27 Oct 2022 13:31:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1oo2rs-0006MH-B3
+ (envelope-from <chao@kernel.org>) id 1oo2yj-0006XQ-RD
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 27 Oct 2022 13:24:20 +0000
+ Thu, 27 Oct 2022 13:31:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1mdPqskYbsxR3iHPjQZMmU86pt94ACGf6lR2K6f+iRs=; b=eN3U84+70ZQWqF5IYoUWnkaqd8
- 7XnNUsiC/+qPZSKaQcsYZOZB00kby7VGm1lyb/oiEMKzZi2/VW/Fyj7R9D6vowv6pX1CsLmIBPW/J
- 797p92pgn78mYAEh0MouKOpKA0ggt5FOL0bLLi/78yVujwGXrXZ0YVp13LPJQZJqT3g4=;
+ bh=wEpySnLW/MvRBgp5LE3fVQs4KPlJQQ1HndXIlHoJn6Q=; b=lOxn8MAn5G/NI7JsPOoDQSy1iv
+ lV7X/e1LXoyQuQ1fROvzCF4PNZa0t0vn95oeuUFGRx5Z9h6gecDgXca6M1387vXFSrm7MvngTviF1
+ YLpId3wqS+kVzwFu3bQSECSZIhdIR2uZRa0uEjijdKMuskUznmoK/Y0OEo79F/KIR4Rg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,69 +31,71 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1mdPqskYbsxR3iHPjQZMmU86pt94ACGf6lR2K6f+iRs=; b=NAnu1FYOlDiEXdRMxdq/I4sKfa
- oJNgiL18l/PIfoGtG/yjX1G+uN4KpCVCOhnTZCAol4Gb0TMyhjKjCHUA7lOjAEXJrAtpjjVDCYz1L
- BuynJqEURxSUsh4Fbrkuhfr/iCr4FW6B7Q6YN7Yeutv6E1J4spJrtZpqyRzClBHDVKlM=;
-Received: from sin.source.kernel.org ([145.40.73.55])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=wEpySnLW/MvRBgp5LE3fVQs4KPlJQQ1HndXIlHoJn6Q=; b=JvpjHN34ka7s7OEUIn7/p7xGlG
+ 0gan9MyQPY7jgs0DbsOSsXSlm8S22WdeG1EndfXA+QbaK/2/uomFGWPtn0ISFmL0HmVyioUisRdAQ
+ 8XZkczHXgr5FYub8oD7R92mE5953MZO0wH82Bqfxwia/KPPy4L8SAsuTqVM1rfq3bQFc=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oo2ro-0008I2-NZ for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 27 Oct 2022 13:24:20 +0000
+ id 1oo2yd-001zJy-Kj for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 27 Oct 2022 13:31:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id D5C58CE264E;
- Thu, 27 Oct 2022 13:24:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23476C433D6;
- Thu, 27 Oct 2022 13:24:03 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6DC39622FB;
+ Thu, 27 Oct 2022 13:31:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68757C433C1;
+ Thu, 27 Oct 2022 13:31:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666877045;
- bh=rcl0QpMk9vrgc+zfC7BBi5aKHO8WAR1sc8YjGavKyNM=;
+ s=k20201202; t=1666877468;
+ bh=nYDbxu1bhOneACR7AmCTTyuASVG29Q2OMg11MLfO52o=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=WeNfr1pPzbmcG2AxJ7St2fBchXUO9ILLCEDSP1H3ws3zvAXF24sSuJgRtrQd9M/hP
- Ox4qG/N9+eS6gqqm9AXg9azq1hHGvGMJqzU8LRbuUgtidYLT7H0Se+Llp4YMGp8AnJ
- E+6pe/0gdj+I/WOcJfKaJV/2WU9exs+5YfDO6hjQlXNMKeYLnLB3POCtTHFar8UQbx
- 3GgRfIWNP5iMHQz2sNokvtWPT/35lVZaMP+cfap7WxwA8QDoGu/s7KPDPUcRLOU0uu
- Dvaq9qgOmccvHaexynaurN2V5r5C8Th8sDdLhbfm1FsKzhRhp/QH1tKSFW3UWrGVId
- s3+sSw8Ww3bkw==
-Message-ID: <d0e09d40-89be-8f62-dfbb-1053405ad5d7@kernel.org>
-Date: Thu, 27 Oct 2022 21:24:02 +0800
+ b=WPkFQFaXci1RVAACJDfVHY3yKsUP+t6tRQnDQRNaNw76u/C8uX5gwAlHUM4cTAaXk
+ D2glN7dj1PEv3xnMbMQTiKrOEvAZz/L1AFEUmFpapoFSdchpYuRYBN8zADwmpHII+3
+ pOgTehG+K/EVkejcznDUvS6o89A19dDwCpAAOMImIhvOhpzMXoqldjxCMSTuE0Z4cg
+ m8lRaIhc3/GlDvNTZ/mHJsRg2OR1wCobzVBEHeuEFgsIEqYr23dzEslgRb8jhDYs6t
+ s/nI6GzWkRFzUopiFH9bnxjEDQcb45y2mpW1p+ELP2DRcCZAVZb+qyS9NvL4xdXpKh
+ Iw1bfWqdIPUwg==
+Message-ID: <ab2f3576-bedd-8c27-5549-f9ff5462aee3@kernel.org>
+Date: Thu, 27 Oct 2022 21:31:05 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
 Content-Language: en-US
 To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
 References: <20221027120807.6337-1-frank.li@vivo.com>
+ <20221027120807.6337-3-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221027120807.6337-1-frank.li@vivo.com>
-X-Spam-Score: -5.7 (-----)
+In-Reply-To: <20221027120807.6337-3-frank.li@vivo.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/10/27 20:08, Yangtao Li wrote: > Since it is an f2fs
- module, it is best to prefix function names > with f2fs_. At the same time,
- there is already a flush thread > and related functions in the [...] 
- Content analysis details:   (-5.7 points, 6.0 required)
+ Content preview:  On 2022/10/27 20:08, Yangtao Li wrote: > When a fatal error
+ occurs in the file system and it is > remounted to ro mode, the flush thread
+ needs to be stopped. > > Fixes: d81ab30e85a5 ("f2fs: support er [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.73.55 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oo2ro-0008I2-NZ
-Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs: rename flush_error_work() to
- f2fs_record_error_work()
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oo2yd-001zJy-Kj
+Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: fix to f2fs_handle_critical_error
+ when errors=remount-ro
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,42 +113,35 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2022/10/27 20:08, Yangtao Li wrote:
-> Since it is an f2fs module, it is best to prefix function names
-> with f2fs_. At the same time, there is already a flush thread
-> and related functions in the system, rename flush_error_work()
-> to f2fs_record_error_work().
-
-It won't pollute global namespace since it's a static function just be
-used in f2fs/super.c...
-
+> When a fatal error occurs in the file system and it is
+> remounted to ro mode, the flush thread needs to be stopped.
 > 
+> Fixes: d81ab30e85a5 ("f2fs: support errors=remount-ro|continue|panic mountoption")
+
+Do you mind letting me merge these two patches into original patch?
+since original patch is still in dev branch, rather than mainline.
+
+I guess it needs to stop ckpt thread as well...
+
+Thanks,
+
 > Signed-off-by: Yangtao Li <frank.li@vivo.com>
 > ---
->   fs/f2fs/super.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>   fs/f2fs/super.c | 1 +
+>   1 file changed, 1 insertion(+)
 > 
 > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index a241e4073f1d..fc220b5c5599 100644
+> index fc220b5c5599..3a1238a82dc9 100644
 > --- a/fs/f2fs/super.c
 > +++ b/fs/f2fs/super.c
-> @@ -4019,7 +4019,7 @@ void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
+> @@ -4017,6 +4017,7 @@ void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
+>   
+>   	f2fs_stop_gc_thread(sbi);
 >   	f2fs_stop_discard_thread(sbi);
+> +	f2fs_stop_flush_thread(sbi);
 >   }
 >   
-> -static void flush_error_work(struct work_struct *work)
-> +static void f2fs_record_error_work(struct work_struct *work)
->   {
->   	struct f2fs_sb_info *sbi = container_of(work,
->   					struct f2fs_sb_info, s_error_work);
-> @@ -4374,7 +4374,7 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
->   		goto free_devices;
->   	}
->   
-> -	INIT_WORK(&sbi->s_error_work, flush_error_work);
-> +	INIT_WORK(&sbi->s_error_work, f2fs_record_error_work);
->   	spin_lock_init(&sbi->error_lock);
->   	memcpy(sbi->errors, raw_super->s_errors, MAX_F2FS_ERRORS);
->   	memcpy(sbi->stop_reason, raw_super->s_stop_reason, MAX_STOP_REASON);
+>   static void f2fs_record_error_work(struct work_struct *work)
 
 
 _______________________________________________
