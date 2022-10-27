@@ -2,97 +2,117 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9C7B60FFCF
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Oct 2022 20:04:40 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3ED361060D
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Oct 2022 00:58:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oo7F6-0003pa-B7;
-	Thu, 27 Oct 2022 18:04:36 +0000
+	id 1ooBpu-0002wU-BW;
+	Thu, 27 Oct 2022 22:58:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1oo7F4-0003pT-BV
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1ooBps-0002wO-JJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 27 Oct 2022 18:04:34 +0000
+ Thu, 27 Oct 2022 22:58:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=m20hTtdUThw/zYfR0fqpTwjLETyCpqaFhpxjItmFmh0=; b=fG8kSOWa5Lm8iC+VPKZ6A/VDTV
- WFf/ngeWnz8xVUTaWSm8yG9mMMmwAiWgyuj+3v+DVe+5dQpzDx4fSCWBPF0qMX7dBWTsbVld1oF6i
- xzfig6zIRR7dXXIpU7nepmP1yV4CdEc3xahPSPKdffg/jPzY/P20DqMPpCOMXQhuBByg=;
+ bh=oRjlIGhy+ljmiqBOy5xGGitpHvkG3VjPNAmUZJmeM8I=; b=eZIrEo6fkxewZ3oW99PAkCMUlz
+ xioWuxqnVmpkGCa1EkSQLWmaelprKVMGF1U5hmsMq+tFFC11dykdw4mXKiwaDn9dISBe9H4FnUeYj
+ tfGJcQ6aKSwh1LQFn+g9p3JtbO49F6T6+975sExC1p+40SOfw7whFYbuy3k8IQdMY1VE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=m20hTtdUThw/zYfR0fqpTwjLETyCpqaFhpxjItmFmh0=; b=g
- zHF5cY5yIQw5xzcidgGUZRyEYT+xrmVLZxQvo58PfLFokZGKqIn2c30pGdy1ppKTZKKudips/q8ks
- EVdZ7cUqSK0Z9V2n02msbRaJ0k+ji/pYB5oERq7Oi97OiHFcaT8kLDIl6u8+LvoXiG4qc327PuNki
- nB/NvwWxwxap5ha4=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=oRjlIGhy+ljmiqBOy5xGGitpHvkG3VjPNAmUZJmeM8I=; b=Cnp9syHT0FD3P78J5kyX9N7Vg+
+ x5e864G0PEm1XFmAUorUe7TbH73hiJ8EDXX/o+KdcDYDDtYtR+a/S9elbfnKsE0U3hqAssJU8lTf4
+ BY+xmkPCvavcneIfkZdDwsLWW0sH+tAUWb/QXVn1eGwZhA5L7WBgstW0dni8oormywBY=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oo7F3-002Flp-RB for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 27 Oct 2022 18:04:34 +0000
+ id 1ooBpr-002lL7-0Y for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 27 Oct 2022 22:58:52 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6A9B7623ED
+ by ams.source.kernel.org (Postfix) with ESMTPS id 19CEFB82820
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 27 Oct 2022 18:04:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0B8EC433C1;
- Thu, 27 Oct 2022 18:04:19 +0000 (UTC)
+ Thu, 27 Oct 2022 22:58:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id BEF8BC43140
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 27 Oct 2022 22:58:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666893859;
- bh=Re061QOM1zSa4SDCeCrNjsAINlsDxks5xlguK2smzZM=;
- h=From:To:Cc:Subject:Date:From;
- b=MAnB/3Kscb3IH5sMmjEndAtFL5eaFb6jyqsw4Chj4n52vle3fXSVrnPIjuT/KFpq9
- 1tDMeF7EXE6QVvQ9/Lr6c78DUwwS/pJXpYBGqxI3Ody5kr0+btddiyB8YyYSbR/4Kc
- khArmFkwnpoi8QSdZlJRm/4GhiEqBrZdX8QpkVprrCpmNn8YZ9+rcFHKSE6l96X4kT
- ITLxNn5bZfEy5DtSbwAI0t/MT5N5g979aXhAgZqPZ0MMKqAv2q3/ojimU9bKM6yu+a
- VS6+D6pYs9kSlC8hWUCBk83xfcs4I/CtH1sju0ekXEYnOhIwI+KKo3A3rbRhm8nfYJ
- /eQ9uFQik5Oig==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 27 Oct 2022 11:04:16 -0700
-Message-Id: <20221027180416.3786792-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.38.1.273.g43a17bfeac-goog
+ s=k20201202; t=1666911516;
+ bh=oRjlIGhy+ljmiqBOy5xGGitpHvkG3VjPNAmUZJmeM8I=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=mHE8Ff6/FPSjoib9xzU4vvpzFDaJVDpm6RwnuLTJwaGVG2XGT6hKqDZuKX703EZgc
+ MCp4a0+rbkmLteFO9AUfDwi2ZkQMVL2kPpcqg/6k7Yr8G1ebz0DU4q63MJGbvBoCgC
+ /hCrncbnOJu8QgAtkMQKab4+DPRurQ6NYBbnDLF4j564+skmXDbGcXnpXydnfnP9j8
+ kNXHRiO9xX/OwJGZlSWSbmKXzsqAnnTxr5LEqVH2d47RjWZXhkXpYK1Fum6ghNtAhT
+ u3jJZRooa9jGKIZz+mN01TLM0bruz3LOHHmRolw7cQNpu+l1mlVIca7MKLGr0FNAuG
+ MI7Z+HjxUPYIQ==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 94295C433E4; Thu, 27 Oct 2022 22:58:36 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 27 Oct 2022 22:58:36 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: bogdan.nicolae@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-216050-202145-JetCHCFYyL@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
+References: <bug-216050-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Spam-Score: -5.7 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Let's stop threads first to avoid irq context. Signed-off-by:
- Jaegeuk Kim <jaegeuk@kernel.org> --- fs/f2fs/super.c | 6 +++--- 1 file changed,
- 3 insertions(+), 3 deletions(-) diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
- index a241e4073f1d..14b4bb0f8ce6 100644 --- a/fs/f2fs/super.c +++
- b/fs/f2fs/super.c
- @@ -3905,6 +3905,9 @@ static void f2fs_record_stop_reason(struct f2fs [...]
- Content analysis details:   (-5.7 points, 6.0 required)
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
+ Comment
+ #68 from bogdan.nicolae@gmail.com --- The only reasonable solution that works
+ for me in everyday use is to deactivate the background garbage collector
+ entirely. For reference, this can be [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oo7F3-002Flp-RB
-Subject: [f2fs-dev] [PATCH] f2fs: do not stop threads in irq context
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ooBpr-002lL7-0Y
+Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,46 +124,22 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Let's stop threads first to avoid irq context.
+https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/super.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+--- Comment #68 from bogdan.nicolae@gmail.com ---
+The only reasonable solution that works for me in everyday use is to deactivate
+the background garbage collector entirely. For reference, this can be done
+using the background_gc=off mount option (which can be added to /etc/fstab).
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index a241e4073f1d..14b4bb0f8ce6 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3905,6 +3905,9 @@ static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
- 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
- 	int err;
- 
-+	f2fs_stop_gc_thread(sbi);
-+	f2fs_stop_discard_thread(sbi);
-+
- 	f2fs_down_write(&sbi->sb_lock);
- 
- 	spin_lock(&sbi->error_lock);
-@@ -4014,9 +4017,6 @@ void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
- 	 */
- 	smp_wmb();
- 	sb->s_flags |= SB_RDONLY;
--
--	f2fs_stop_gc_thread(sbi);
--	f2fs_stop_discard_thread(sbi);
- }
- 
- static void flush_error_work(struct work_struct *work)
 -- 
-2.38.1.273.g43a17bfeac-goog
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
