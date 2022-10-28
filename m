@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B0366108CF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Oct 2022 05:39:07 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5B17610904
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Oct 2022 05:46:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ooGD2-0005p3-VH;
-	Fri, 28 Oct 2022 03:39:04 +0000
+	id 1ooGKU-0000mk-J0;
+	Fri, 28 Oct 2022 03:46:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ooGCz-0005op-B5
+ (envelope-from <chao@kernel.org>) id 1ooGKT-0000me-0t
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Oct 2022 03:39:01 +0000
+ Fri, 28 Oct 2022 03:46:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=N0Frx5jnm/3u/6oiT7Vm9MzAhuCX5AMpIeiPUw4BVjs=; b=KNbXhZLEb8B6ZlUBIU/b2IFtN/
- PsBVy+SDbAL8jcUGsjUQIjT8lA16Ez0U+dBUfjkF8hXlAMBfGw9JC0fCHyOomY3Z/lz6K4b6u1g5Q
- Wxcg7HY/FU/HLVe+zERGEhUDd39MrTckgvxGZnTfqiS/klDVtJS6gOy4tcywqruInfYQ=;
+ bh=ycO/rgbJYLuIG0sgumGEXsQNqWf9r+nzyYU9GhSvzWk=; b=KVGB0DurJfk/jS0wPOrx81DKx0
+ 27N1aWCdkrjsW9cKLpTj6MFkNPE9Ehk1b4UUi0jdeSnpxh6wcjFS2kFiyNtT6UsQrW83h8BFmslBo
+ YdAuSiexX89i6bh5zBtFBnsu+qY0ibfvkGcEDIO3X9Vj8hR7/iTuc8bi7aZe3je+/MFw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,72 +31,74 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=N0Frx5jnm/3u/6oiT7Vm9MzAhuCX5AMpIeiPUw4BVjs=; b=MoKqgPYf3NPcS4N7A6aZLJLa3e
- mcvxJF4UHYUeTDHFeadh0TxHSc5q6p4vZ+uljcWhUq8wGJkHYDBDsrNnv2BVfMclo+v/YNXhjq/XI
- V2716eG3K/iVTJdRdaZYP4U8ekT5FlL8il/PDQp07FyJ1tAf9zk/5k5HbssEvyP9hRls=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=ycO/rgbJYLuIG0sgumGEXsQNqWf9r+nzyYU9GhSvzWk=; b=mxY+9rpPvxgncyJUxZ5AghPTpx
+ tuchxvCU74e8dQriQ/FPytAOLxty5lKQcHb59BpuctgEmH1UXSgG6tKzaK55LtWLwhwPmTNjl/CSb
+ P/jxYCMiy/J2G/qjEctCsu5+xjohUkOCKuP/wLbESLqbnJoWUokT/qhyuNFL47e1OnYc=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ooGCy-0004Jr-Oi for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Oct 2022 03:39:01 +0000
+ id 1ooGKO-002yn0-Vy for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 28 Oct 2022 03:46:44 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 59D20625AF;
- Fri, 28 Oct 2022 03:38:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C884C43143;
- Fri, 28 Oct 2022 03:38:49 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 8A575B81FC3;
+ Fri, 28 Oct 2022 03:46:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E4FDC433C1;
+ Fri, 28 Oct 2022 03:46:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666928330;
- bh=LlaI4t3FOeyLoIjMSrcnwjGr/jnLctc2/+mhw1nvwvw=;
+ s=k20201202; t=1666928793;
+ bh=j7KPU/fq3RiXoazWMj0BCPjZoCBqsdxGN8sX2nCt5/M=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=hhxzI6gTbO/hJXBbU7Jg9pg0rFmgnnSa7QMZs29ycIObFnUxzdmQBfKlYV4peGvMv
- rI0nZPSIXRDa/jFSxmvWfv4PjAml4mGt+s8piyNpxuK8DPRdOSP032ZA1ne1z31eN6
- fwl9HCp2nNS4zV3T96y+nroFqa6c8uzfNzVAKbWVq1pfD46pmre3aWHr8+kTiurNW9
- b7ITK0pTB/wTUT0QQvAvVJf1WSmNE6Mcpl2AwPIhvR+5WCHWEY/L+k7CSHozLtiyU1
- fcHP1sKy6//NR5oGIKCWvO8STaJBNoeQyWeTy2sTsSKMwBfct0noimqNZuWboYfFw0
- P7g+C5UcnTVsg==
-Message-ID: <9b7357f3-5e5e-c1db-fdf8-613b6ad7bac3@kernel.org>
-Date: Fri, 28 Oct 2022 11:38:46 +0800
+ b=OJRKzsJ/wqUTfN6vYcngeIwiyc+BxQF4y9Q4X1apzABBY75X1ZYtdsCMWnLE9w93s
+ YqufvM2cabCXGh0thxqT1oFkWJxgC6USnqSTW2vioYReQDN4FJEQHnCNtlff3Cx0MB
+ M0z70g+Wy5w0LC/ao2INt4OrEmTIDtIYEv3clLt1qu3Z5YtT2rtcZVvtLiko0N5FIp
+ xTV5EbZbxxerPMmrpI9nh0hDZS1BVfXwe/PvyGtyeV7EaGPWwczbg75uYvSac4j++i
+ BoggPslETiUNo2xvaTc64J23N8XfCzCFc755/+dVpU6fStDZF2YCydS5MjQmHY8DRI
+ Ic8jCNZ1g/InA==
+Message-ID: <5128189c-a90c-717e-45e1-9c05f51e50a6@kernel.org>
+Date: Fri, 28 Oct 2022 11:46:30 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
 Content-Language: en-US
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <ab2f3576-bedd-8c27-5549-f9ff5462aee3@kernel.org>
- <20221028023303.28020-1-frank.li@vivo.com>
- <85b6be9b-5c5b-ace0-8084-4bd52ef64996@kernel.org>
- <Y1tJ4uKBa0ItHCBw@google.com>
+References: <20221025065025.35017-1-frank.li@vivo.com>
+ <20221025065025.35017-2-frank.li@vivo.com>
+ <cd6d15e3-b692-d3c1-0f01-33e632f5f94c@kernel.org>
+ <Y1tLEVYQjj2qC3I7@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <Y1tJ4uKBa0ItHCBw@google.com>
-X-Spam-Score: -5.7 (-----)
+In-Reply-To: <Y1tLEVYQjj2qC3I7@google.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/10/28 11:17, Jaegeuk Kim wrote: > On 10/28, Chao Yu
- wrote: >> On 2022/10/28 10:33, Yangtao Li wrote: >>>> It won't pollute global
- namespace since it's a static function just be used in f2fs/su [...] 
- Content analysis details:   (-5.7 points, 6.0 required)
+ Content preview:  On 2022/10/28 11:22, Jaegeuk Kim wrote: > On 10/28, Chao Yu
+ wrote: >> On 2022/10/25 14:50, Yangtao Li wrote: >>> Added a new sysfs node
+ called gc_urgent_idle_remaining. >>> The user can set the trial [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ooGCy-0004Jr-Oi
-Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: fix to f2fs_handle_critical_error
- when errors=remount-ro
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ooGKO-002yn0-Vy
+Subject: Re: [f2fs-dev] [PATCH v2 2/2] f2fs: introducr
+ gc_urgent_idle_remaining sysfs node and mark gc_urgent_high_remaining node
+ deprecated
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,44 +116,166 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/10/28 11:17, Jaegeuk Kim wrote:
+On 2022/10/28 11:22, Jaegeuk Kim wrote:
 > On 10/28, Chao Yu wrote:
->> On 2022/10/28 10:33, Yangtao Li wrote:
->>>> It won't pollute global namespace since it's a static function just be used in f2fs/super.c...
+>> On 2022/10/25 14:50, Yangtao Li wrote:
+>>> Added a new sysfs node called gc_urgent_idle_remaining.
+>>> The user can set the trial count limit for GC urgent and
+>>> idle mode with this value. If GC thread gets to the limit,
+>>> the mode will turn back to GC normal mode finally.
 >>>
->>> emm, I think it would be nice to see the f2fs_record_error_work symbol
->>> in the stack, it can be explicitly a function of f2fs. personal opinion for reference only.
+>>> This method is not only applicable to gc_urgent_high,
+>>> but applicable to all gc modes. Also mark
+>>> gc_urgent_high_remaining as deprecated, so that the node
+>>> can be removed in the future.
+>>>
+>>> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+>>> ---
+>>>    Documentation/ABI/testing/sysfs-fs-f2fs |  8 ++++++++
+>>>    fs/f2fs/f2fs.h                          |  6 ++++--
+>>>    fs/f2fs/gc.c                            | 12 ++++++------
+>>>    fs/f2fs/super.c                         |  2 +-
+>>>    fs/f2fs/sysfs.c                         | 14 ++++++++++----
+>>>    5 files changed, 29 insertions(+), 13 deletions(-)
+>>>
+>>> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+>>> index 483639fb727b..859c4e53a846 100644
+>>> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+>>> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+>>> @@ -598,6 +598,14 @@ Contact:	"Daeho Jeong" <daehojeong@google.com>
+>>>    Description:	You can set the trial count limit for GC urgent high mode with this value.
+>>>    		If GC thread gets to the limit, the mode will turn back to GC normal mode.
+>>>    		By default, the value is zero, which means there is no limit like before.
+>>> +		<deprecated>
+>>> +
+>>> +What:		/sys/fs/f2fs/<disk>/gc_urgent_idle_remaining
+>>> +Date:		October 2022
+>>> +Contact:	"Yangtao Li" <frank.li@vivo.com>
+>>> +Description:	You can set the trial count limit for GC urgent and idle mode with this value.
+>>> +		If GC thread gets to the limit, the mode will turn back to GC normal mode.
+>>> +		By default, the value is zero, which means there is no limit like before.
+>>>    What:		/sys/fs/f2fs/<disk>/max_roll_forward_node_blocks
+>>>    Date:		January 2022
+>>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>>> index e6355a5683b7..2bad69cf9fd9 100644
+>>> --- a/fs/f2fs/f2fs.h
+>>> +++ b/fs/f2fs/f2fs.h
+>>> @@ -1734,8 +1734,10 @@ struct f2fs_sb_info {
+>>>    	unsigned int cur_victim_sec;		/* current victim section num */
+>>>    	unsigned int gc_mode;			/* current GC state */
+>>>    	unsigned int next_victim_seg[2];	/* next segment in victim section */
+>>> -	spinlock_t gc_urgent_high_lock;
+>>> -	unsigned int gc_urgent_high_remaining;	/* remaining trial count for GC_URGENT_HIGH */
+>>> +	spinlock_t gc_urgent_idle_lock;
+>>> +	/* remaining trial count for GC_URGENT_* and GC_IDLE_* */
+>>> +	unsigned int gc_urgent_idle_remaining;
+>>> +	unsigned int gc_urgent_high_remaining;	/* deprecated */
+>>>    	/* for skip statistic */
+>>>    	unsigned long long skipped_gc_rwsem;		/* FG_GC only */
+>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>>> index e0ff99c7e3f2..0ed5b3c5922c 100644
+>>> --- a/fs/f2fs/gc.c
+>>> +++ b/fs/f2fs/gc.c
+>>> @@ -152,14 +152,14 @@ static int gc_thread_func(void *data)
+>>>    		/* balancing f2fs's metadata periodically */
+>>>    		f2fs_balance_fs_bg(sbi, true);
+>>>    next:
+>>> -		if (sbi->gc_mode == GC_URGENT_HIGH) {
+>>> -			spin_lock(&sbi->gc_urgent_high_lock);
+>>> -			if (sbi->gc_urgent_high_remaining) {
+>>> -				sbi->gc_urgent_high_remaining--;
+>>> -				if (!sbi->gc_urgent_high_remaining)
+>>> +		if (sbi->gc_mode != GC_NORMAL) {
+>>> +			spin_lock(&sbi->gc_urgent_idle_lock);
+>>> +			if (sbi->gc_urgent_idle_remaining) {
+>>> +				sbi->gc_urgent_idle_remaining--;
+>>> +				if (!sbi->gc_urgent_idle_remaining)
+>>>    					sbi->gc_mode = GC_NORMAL;
+>>>    			}
+>>> -			spin_unlock(&sbi->gc_urgent_high_lock);
+>>> +			spin_unlock(&sbi->gc_urgent_idle_lock);
+>>>    		}
+>>>    		sb_end_write(sbi->sb);
+>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+>>> index 3834ead04620..f90a8c0a53ec 100644
+>>> --- a/fs/f2fs/super.c
+>>> +++ b/fs/f2fs/super.c
+>>> @@ -3616,7 +3616,7 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
+>>>    	sbi->seq_file_ra_mul = MIN_RA_MUL;
+>>>    	sbi->max_fragment_chunk = DEF_FRAGMENT_SIZE;
+>>>    	sbi->max_fragment_hole = DEF_FRAGMENT_SIZE;
+>>> -	spin_lock_init(&sbi->gc_urgent_high_lock);
+>>> +	spin_lock_init(&sbi->gc_urgent_idle_lock);
+>>>    	atomic64_set(&sbi->current_atomic_write, 0);
+>>>    	sbi->dir_level = DEF_DIR_LEVEL;
+>>> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+>>> index df27afd71ef4..2b1c653b37cf 100644
+>>> --- a/fs/f2fs/sysfs.c
+>>> +++ b/fs/f2fs/sysfs.c
+>>> @@ -531,10 +531,14 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>>>    		return count;
+>>>    	}
+>>> -	if (!strcmp(a->attr.name, "gc_urgent_high_remaining")) {
+>>> -		spin_lock(&sbi->gc_urgent_high_lock);
+>>> -		sbi->gc_urgent_high_remaining = t;
+>>> -		spin_unlock(&sbi->gc_urgent_high_lock);
+>>> +	/* deprecated */
+>>> +	if (!strcmp(a->attr.name, "gc_urgent_high_remaining"))
+>>> +		return -EINVAL;
 >>
->> Oh, yes, let me update in original patch as well.
+>> How about those users who has already used these interface... it breaks
+>> the usage.
+>>
+>> It needs to keep old interface and tag as deprecated, and recommend user
+>> to use new interface you introduced.
 > 
-> Chao,
-> 
-> It seems there're multiple bugs. Please apply this as well.
-> 
-> https://lore.kernel.org/linux-f2fs-devel/20221027180416.3786792-1-jaegeuk@kernel.org/T/#u
+> I feel that this is not a super critical node, so how about just removing it?
 
-Jaegeuk,
+Only Android is using this inferface, right?
 
-Thanks, let me merge all those patches and do the test.
+Any plan to adjust related code from Android side?
 
 Thanks,
 
 > 
 >>
->>>
->>>> Do you mind letting me merge these two patches into original patch?
->>>> since original patch is still in dev branch, rather than mainline.
->>>
->>> Glad to see, if resend.
+>> e.g.:
 >>
->> Thanks, :)
+>> What:           /sys/fs/f2fs/<disk>/features
+>> Date:           July 2017
+>> Contact:        "Jaegeuk Kim" <jaegeuk@kernel.org>
+>> Description:    <deprecated: should use /sys/fs/f2fs/<disk>/feature_list/
+>>                  Shows all enabled features in current device.
+>>                  Supported features:
+>>                  encryption, blkzoned, extra_attr, projquota, inode_checksum,
+>>                  flexible_inline_xattr, quota_ino, inode_crtime, lost_found,
+>>                  verity, sb_checksum, casefold, readonly, compression, pin_file.
 >>
->>>
->>>> I guess it needs to stop ckpt thread as well...
->>>
->>> agree, :)
->>>
->>> Thanks,
+>> Thanks,
+>>
+>>> +
+>>> +	if (!strcmp(a->attr.name, "gc_urgent_idle_remaining")) {
+>>> +		spin_lock(&sbi->gc_urgent_idle_lock);
+>>> +		sbi->gc_urgent_idle_remaining = t;
+>>> +		spin_unlock(&sbi->gc_urgent_idle_lock);
+>>>    		return count;
+>>>    	}
+>>> @@ -826,6 +830,7 @@ F2FS_RW_ATTR(FAULT_INFO_TYPE, f2fs_fault_info, inject_type, inject_type);
+>>>    F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, data_io_flag, data_io_flag);
+>>>    F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, node_io_flag, node_io_flag);
+>>>    F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent_high_remaining, gc_urgent_high_remaining);
+>>> +F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent_idle_remaining, gc_urgent_idle_remaining);
+>>>    F2FS_RW_ATTR(CPRC_INFO, ckpt_req_control, ckpt_thread_ioprio, ckpt_thread_ioprio);
+>>>    F2FS_GENERAL_RO_ATTR(dirty_segments);
+>>>    F2FS_GENERAL_RO_ATTR(free_segments);
+>>> @@ -953,6 +958,7 @@ static struct attribute *f2fs_attrs[] = {
+>>>    	ATTR_LIST(data_io_flag),
+>>>    	ATTR_LIST(node_io_flag),
+>>>    	ATTR_LIST(gc_urgent_high_remaining),
+>>> +	ATTR_LIST(gc_urgent_idle_remaining),
+>>>    	ATTR_LIST(ckpt_thread_ioprio),
+>>>    	ATTR_LIST(dirty_segments),
+>>>    	ATTR_LIST(free_segments),
 
 
 _______________________________________________
