@@ -2,99 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 391766134F5
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 31 Oct 2022 12:54:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33DD4613D70
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 31 Oct 2022 19:37:30 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1opTMi-0008I7-7B;
-	Mon, 31 Oct 2022 11:54:04 +0000
+	id 1opZf3-0007bl-8X;
+	Mon, 31 Oct 2022 18:37:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3UbdfYwkbAGAQWXI8JJCP8NNGB.EMMEJCSQCPAMLRCLR.AMK@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1opTMh-0008Hq-2A for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 31 Oct 2022 11:54:03 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <daeho43@gmail.com>) id 1opZf2-0007bf-PL
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 31 Oct 2022 18:37:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yAFMAvxlxMoFnG+XfsZSIIGrHwoTQNmkec9dxETMnqg=; b=RcX9mG26ufty57ONQ2Kh+/77ZO
- vjW5NC3WVcrNC61CcbyrwdQ7nPEpN57rFZ8dlkXdoxZ8M7P3aYqt9ZLxFtW18G8fgwik+gNXORJud
- ieOzM1dGxAZgfkQsJC0q8WC/LtI3FLBFAU+Z4Jvf6NgIUtuM9r3GUjrCZ4CktWGV5OeU=;
+ bh=uYvB3MdHGb4WqcG5KWsuFiuDCNd6Mkda7w7kVNhi+P8=; b=Y6S6wsm9GuUKztYq20lgmVPRGb
+ LRYt4SnrWh3tZgycIOjX+siRB9vXVTDmgCz3J/Fot8c4XoTvyQHKmlp7HPOPthwbom21NOPjMTVf+
+ 2K5Cfuw37EafyVy3G2Fh0VAvghbt1sxQL+hzAVULCGjtG5wxxy2w2j1sCK4bva3Fti9M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=yAFMAvxlxMoFnG+XfsZSIIGrHwoTQNmkec9dxETMnqg=; b=b
- wMvVEOht5klMSbjJUDLX04fBuDHtAyVOwyAVWots+98idJ6U8oPi9s5txGOZyBcdd+8tMaUay1hrr
- VTBzwiCCgnuWwUaLktSskbuR7Mf0R4YIhvoOPKyFnGL/2lUEyq6vyEOtvTQw56Cx3mqT/eeGKhR7c
- SFLsQnsXYPkKkZQg=;
-Received: from mail-io1-f70.google.com ([209.85.166.70])
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=uYvB3MdHGb4WqcG5KWsuFiuDCNd6Mkda7w7kVNhi+P8=; b=YTeQ7X2bDbMSMX3fLdjfBTBNL3
+ cPEflxzvRT6Pv5sfFLMeLNkGrIOMEkTLdJdbGQ1NSGqr6ViHX69ih8BiWQ9rOk55VaWFmya3HJdXJ
+ rSCoaPjfxH+bcbYioQzXuLxRNFrmbSKwCI7YGYpEVlk2Js1tew31DkQ+Ok0AD9t0sD1U=;
+Received: from mail-yb1-f181.google.com ([209.85.219.181])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1opTMc-006lnM-UC for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 31 Oct 2022 11:54:02 +0000
-Received: by mail-io1-f70.google.com with SMTP id
- j17-20020a5d93d1000000b006bcdc6b49cbso7848143ioo.22
+ id 1opZf1-0077IZ-VV for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 31 Oct 2022 18:37:24 +0000
+Received: by mail-yb1-f181.google.com with SMTP id i127so14668773ybc.11
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 31 Oct 2022 04:53:58 -0700 (PDT)
+ Mon, 31 Oct 2022 11:37:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uYvB3MdHGb4WqcG5KWsuFiuDCNd6Mkda7w7kVNhi+P8=;
+ b=a4U2ZgrYOij8m1lXlDkkiecnJRNlYfS96MWm78NAox/Il5678GohDKdDHWGlszW6Iy
+ plnq8tYSj8qcrvVPxEjYuavvrrWSiB4hqZFoMYJ/+wntH+Zfy0ckC1zSnZ4gIwqIDUgr
+ Mg2QJEv5YGQlOzK7ipb3qzTw3vjLGT3zvyOBgWChzydA4doJ35ralelspo5luQhYajD+
+ nevuDjxyB7ECVPY/NeXEj08d3eWoAmsKrh9qA7SSCid0pJnLoTyOb3/Uu5MRq6KOihJU
+ PTrNnBn3FsUgjI59Shlh6YpqekBUwAELSNBg8DJePwd+EoLwpyk/OVaxK8+R/3uCjLsq
+ Bf3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=yAFMAvxlxMoFnG+XfsZSIIGrHwoTQNmkec9dxETMnqg=;
- b=NvSjRvaWkkrCocV84Lr5Qm5MjVVI5ML5dzp1eK82BNEk4AtWAtAEJ/lkvJkubtodKX
- JBPfQTEVE8HLyuFW+5zET7QQb02KyGjUW4KaMsuUpz0jXws+4DvbHEqHIqP/cSF3bAyM
- GXa3nmgJMQxQKJvD48fGVC8Af97Cc1T5xsFEcOM9aDzwZ8zCuSf8kIWX+fn8T9rp8pWS
- v0iXJeArx+Sg6ZNot8cjjPV8aKLjh0ICwpvP1n7jO8gpKw7r0BivlnzC3gPHU8pZh25S
- PkN/8VE2wYnhwOiFoml1Jucb3Vjj2r7wPtnpDBrf6FADbLHeFLk13FWPVEbI6YhOVThL
- 1B8Q==
-X-Gm-Message-State: ACrzQf0JCv8+s7nioNbBbFLoXe5OXlP647jrUDV8HTTaZM+hIP29MY9u
- PscOeWdo5oa5wegiKiMXjdDETobascnTZ9XvzrAihq2zWa0A
-X-Google-Smtp-Source: AMsMyM49tlFv28uXTo2fsgxAWnme+TK3gmDlYPlvAU8F9RaO83DOKQFXKH4yBGTt1MQ8KgsG/zYIpHxg7WUn5vIjASQhNFhXbu3C
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uYvB3MdHGb4WqcG5KWsuFiuDCNd6Mkda7w7kVNhi+P8=;
+ b=dT5oxfkNmE4UOj2Mrm570GjYWYw+e9quQnUAsc+kHZsIfBl1Upp25Jb1IVbDww/Waj
+ PbHB7be4YtChqVkH9Ok1avoSxy57fndolVBP8+DyLCsfb4OIwoHhU6IpS/Lp1DSCCRt/
+ w8T9B5wOwUv3jZU2mN1HtSmirEZwrfVcGn25HfTmxqQBnjilsYfL+eyvaP62KPwaTrh7
+ WTvgaoB+CxOMMFjETCIZhEgqfPMq4QxzP85O284F4SZ94xAbVFAItqDe2S5GyCAwW+Ku
+ fAA4c0wMb7DdvIwddHWY9GVpY2M+DlZ5yPwVioaKeaBnh4YLyqccsCNM3F1JY1Xzm7bq
+ SqSg==
+X-Gm-Message-State: ACrzQf3GKWnaKqVlAooi8B85Y5QHJvp++sGfe7jzlCkrs6RSPIcB0AXl
+ 6JuaT3ovjOe0Rg2k1g1KttbGrNs7AmBVZyx+6kOHusyJsfo=
+X-Google-Smtp-Source: AMsMyM40F+9hLV6kHwc6e4BnozkJVXLAS8bG+Kzkej67VudzhaWzpSLx4XJzBD0tB7NAfLUY4XtqCshm6RjHB6CRvmw=
+X-Received: by 2002:a5b:842:0:b0:6a3:cf26:755d with SMTP id
+ v2-20020a5b0842000000b006a3cf26755dmr13030281ybq.608.1667241438095; Mon, 31
+ Oct 2022 11:37:18 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 2002:a05:6638:3795:b0:375:cca:7024 with SMTP id
- w21-20020a056638379500b003750cca7024mr7142594jal.103.1667217233315; Mon, 31
- Oct 2022 04:53:53 -0700 (PDT)
-Date: Mon, 31 Oct 2022 04:53:53 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000f48ffe05ec534218@google.com>
-From: syzbot <syzbot+8c1c6ffb39e290968f8d@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+References: <20221018170017.672824-1-daeho43@gmail.com>
+ <4bbefd79-7f01-efc3-7c7e-339a8d5d9952@kernel.org>
+In-Reply-To: <4bbefd79-7f01-efc3-7c7e-339a8d5d9952@kernel.org>
+From: Daeho Jeong <daeho43@gmail.com>
+Date: Mon, 31 Oct 2022 11:37:07 -0700
+Message-ID: <CACOAw_x+FNUAoYPw4BoRd+SHErV0QZi=UTgDDNPRkeS3n6P6wA@mail.gmail.com>
+To: Chao Yu <chao@kernel.org>
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: b229b6ca5abb
- Merge tag 'perf-tools-fixes-for-v6.1-2022-10-.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=133b675a880000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  On Fri, Oct 28,
+ 2022 at 7:48 PM Chao Yu wrote: > > On 2022/10/19
+ 1:00, Daeho Jeong wrote: > > From: Daeho Jeong > > > > We need to make sure
+ i_size doesn't change until atomic write commit is > > [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.70 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.219.181 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.70 listed in wl.mailspike.net]
-X-Headers-End: 1opTMc-006lnM-UC
-Subject: [f2fs-dev] [syzbot] INFO: task hung in f2fs_issue_checkpoint
+ [209.85.219.181 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1opZf1-0077IZ-VV
+Subject: Re: [f2fs-dev] [PATCH v5 1/2] f2fs: correct i_size change for
+ atomic writes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,117 +123,202 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+On Fri, Oct 28, 2022 at 7:48 PM Chao Yu <chao@kernel.org> wrote:
+>
+> On 2022/10/19 1:00, Daeho Jeong wrote:
+> > From: Daeho Jeong <daehojeong@google.com>
+> >
+> > We need to make sure i_size doesn't change until atomic write commit is
+> > successful and restore it when commit is failed.
+> >
+> > Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> > ---
+> > v5: prevent only i_size update for atomic files when dirtying inode
+> > v4: move i_size update after clearing atomic file flag in
+> >      f2fs_abort_atomic_write()
+> > v3: make sure inode is clean while atomic writing
+> > ---
+> >   fs/f2fs/f2fs.h    |  8 ++++++++
+> >   fs/f2fs/file.c    | 18 +++++++++++-------
+> >   fs/f2fs/inode.c   |  5 ++++-
+> >   fs/f2fs/segment.c | 14 ++++++++++----
+> >   4 files changed, 33 insertions(+), 12 deletions(-)
+> >
+> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > index e7e750e6b332..68d2a3383c38 100644
+> > --- a/fs/f2fs/f2fs.h
+> > +++ b/fs/f2fs/f2fs.h
+> > @@ -764,6 +764,7 @@ enum {
+> >       FI_COMPRESS_RELEASED,   /* compressed blocks were released */
+> >       FI_ALIGNED_WRITE,       /* enable aligned write */
+> >       FI_COW_FILE,            /* indicate COW file */
+> > +     FI_ATOMIC_COMMIT,       /* indicate atomic commit completed except disk sync */
+>
+> How about FI_ATOMIC_WRITTEN or FI_ATOMIC_COMMITTED? which may be
+> more readable?
 
-syzbot found the following issue on:
+Sounds reasonable. I will take FI_ATOMIC_COMMITTED.
 
-HEAD commit:    b229b6ca5abb Merge tag 'perf-tools-fixes-for-v6.1-2022-10-..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=133b675a880000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=a66c6c673fb555e8
-dashboard link: https://syzkaller.appspot.com/bug?extid=8c1c6ffb39e290968f8d
-compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
+>
+> >       FI_MAX,                 /* max flag, never be used */
+> >   };
+> >
+> > @@ -822,6 +823,7 @@ struct f2fs_inode_info {
+> >       unsigned int i_cluster_size;            /* cluster size */
+> >
+> >       unsigned int atomic_write_cnt;
+> > +     loff_t original_i_size;         /* original i_size before atomic write */
+> >   };
+> >
+> >   static inline void get_extent_info(struct extent_info *ext,
+> > @@ -3072,6 +3074,8 @@ static inline void f2fs_i_blocks_write(struct inode *inode,
+> >               set_inode_flag(inode, FI_AUTO_RECOVER);
+> >   }
+> >
+> > +static inline bool f2fs_is_atomic_file(struct inode *inode);
+> > +
+> >   static inline void f2fs_i_size_write(struct inode *inode, loff_t i_size)
+> >   {
+> >       bool clean = !is_inode_flag_set(inode, FI_DIRTY_INODE);
+> > @@ -3081,6 +3085,10 @@ static inline void f2fs_i_size_write(struct inode *inode, loff_t i_size)
+> >               return;
+> >
+> >       i_size_write(inode, i_size);
+> > +
+> > +     if (f2fs_is_atomic_file(inode))
+> > +             return;
+> > +
+> >       f2fs_mark_inode_dirty_sync(inode, true);
+> >       if (clean || recover)
+> >               set_inode_flag(inode, FI_AUTO_RECOVER);
+> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > index ec9ee0f6d502..7ce629c95f4a 100644
+> > --- a/fs/f2fs/file.c
+> > +++ b/fs/f2fs/file.c
+> > @@ -1991,6 +1991,7 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
+> >       struct f2fs_inode_info *fi = F2FS_I(inode);
+> >       struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> >       struct inode *pinode;
+> > +     loff_t isize;
+> >       int ret;
+> >
+> >       if (!inode_owner_or_capable(mnt_userns, inode))
+> > @@ -2049,7 +2050,12 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
+> >               f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
+> >               goto out;
+> >       }
+> > -     f2fs_i_size_write(fi->cow_inode, i_size_read(inode));
+> > +
+> > +     f2fs_write_inode(inode, NULL);
+> > +
+> > +     isize = i_size_read(inode);
+> > +     fi->original_i_size = isize;
+> > +     f2fs_i_size_write(fi->cow_inode, isize);
+> >
+> >       stat_inc_atomic_inode(inode);
+> >
+> > @@ -2087,16 +2093,14 @@ static int f2fs_ioc_commit_atomic_write(struct file *filp)
+> >
+> >       if (f2fs_is_atomic_file(inode)) {
+> >               ret = f2fs_commit_atomic_write(inode);
+> > -             if (ret)
+> > -                     goto unlock_out;
+> > -
+> > -             ret = f2fs_do_sync_file(filp, 0, LLONG_MAX, 0, true);
+> >               if (!ret)
+> > -                     f2fs_abort_atomic_write(inode, false);
+> > +                     ret = f2fs_do_sync_file(filp, 0, LLONG_MAX, 0, true);
+> > +
+> > +             f2fs_abort_atomic_write(inode, ret);
+> >       } else {
+> >               ret = f2fs_do_sync_file(filp, 0, LLONG_MAX, 1, false);
+> >       }
+> > -unlock_out:
+> > +
+> >       inode_unlock(inode);
+> >       mnt_drop_write_file(filp);
+> >       return ret;
+> > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> > index 9f0d3864d9f1..044f132b87bc 100644
+> > --- a/fs/f2fs/inode.c
+> > +++ b/fs/f2fs/inode.c
+> > @@ -621,9 +621,12 @@ void f2fs_update_inode(struct inode *inode, struct page *node_page)
+> >       ri->i_uid = cpu_to_le32(i_uid_read(inode));
+> >       ri->i_gid = cpu_to_le32(i_gid_read(inode));
+> >       ri->i_links = cpu_to_le32(inode->i_nlink);
+> > -     ri->i_size = cpu_to_le64(i_size_read(inode));
+> >       ri->i_blocks = cpu_to_le64(SECTOR_TO_BLOCK(inode->i_blocks) + 1);
+> >
+> > +     if (!f2fs_is_atomic_file(inode) ||
+> > +                     is_inode_flag_set(inode, FI_ATOMIC_COMMIT))
+> > +             ri->i_size = cpu_to_le64(i_size_read(inode));
+>
+> So we expect that below flow can update i_size correctly, right?
 
-Unfortunately, I don't have any reproducer for this issue yet.
+Yes, right.
 
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/ba5b49fa77de/disk-b229b6ca.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/7c061f2ae4dc/vmlinux-b229b6ca.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/bc45c1300e9b/bzImage-b229b6ca.xz
+Thanks,
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+8c1c6ffb39e290968f8d@syzkaller.appspotmail.com
-
-INFO: task syz-executor.0:4475 blocked for more than 143 seconds.
-      Not tainted 6.1.0-rc2-syzkaller-00105-gb229b6ca5abb #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.0  state:D stack:27384 pid:4475  ppid:3641   flags:0x00004004
-Call Trace:
- <TASK>
- context_switch kernel/sched/core.c:5191 [inline]
- __schedule+0xae9/0x53f0 kernel/sched/core.c:6503
- schedule+0xda/0x1b0 kernel/sched/core.c:6579
- schedule_timeout+0x1db/0x2a0 kernel/time/timer.c:1911
- do_wait_for_common kernel/sched/completion.c:85 [inline]
- __wait_for_common+0x1ca/0x5c0 kernel/sched/completion.c:106
- f2fs_issue_checkpoint+0x358/0x460 fs/f2fs/checkpoint.c:1882
- f2fs_sync_fs+0x240/0x4c0 fs/f2fs/super.c:1656
- sync_fs_one_sb fs/sync.c:84 [inline]
- sync_fs_one_sb+0x107/0x140 fs/sync.c:80
- iterate_supers+0x13c/0x290 fs/super.c:723
- ksys_sync+0xa8/0x150 fs/sync.c:104
- __do_sys_sync+0xa/0x10 fs/sync.c:113
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x35/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7fc11668b5a9
-RSP: 002b:00007fc1173be168 EFLAGS: 00000246 ORIG_RAX: 00000000000000a2
-RAX: ffffffffffffffda RBX: 00007fc1167abf80 RCX: 00007fc11668b5a9
-RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
-RBP: 00007fc1166e67b0 R08: 0000000000000000 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
-R13: 00007ffd5b7e66ff R14: 00007fc1173be300 R15: 0000000000022000
- </TASK>
-INFO: lockdep is turned off.
-NMI backtrace for cpu 1
-CPU: 1 PID: 27 Comm: khungtaskd Not tainted 6.1.0-rc2-syzkaller-00105-gb229b6ca5abb #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/11/2022
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:88 [inline]
- dump_stack_lvl+0xcd/0x134 lib/dump_stack.c:106
- nmi_cpu_backtrace.cold+0x24/0x18a lib/nmi_backtrace.c:111
- nmi_trigger_cpumask_backtrace+0x32f/0x3c0 lib/nmi_backtrace.c:62
- trigger_all_cpu_backtrace include/linux/nmi.h:148 [inline]
- check_hung_uninterruptible_tasks kernel/hung_task.c:220 [inline]
- watchdog+0xc71/0xfc0 kernel/hung_task.c:377
- kthread+0x2e4/0x3a0 kernel/kthread.c:376
- ret_from_fork+0x1f/0x30 arch/x86/entry/entry_64.S:306
- </TASK>
-Sending NMI from CPU 1 to CPUs 0:
-NMI backtrace for cpu 0
-CPU: 0 PID: 9 Comm: kworker/u4:0 Not tainted 6.1.0-rc2-syzkaller-00105-gb229b6ca5abb #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/11/2022
-Workqueue: phy10 ieee80211_iface_work
-RIP: 0010:_compound_head include/linux/page-flags.h:255 [inline]
-RIP: 0010:virt_to_folio include/linux/mm.h:892 [inline]
-RIP: 0010:kfree+0x61/0x1a0 mm/slab_common.c:999
-Code: 0f 86 33 01 00 00 4c 89 e7 e8 ab 13 86 ff 48 bf 00 00 00 00 00 ea ff ff 48 c1 e8 0c 48 89 c5 48 c1 e5 06 48 01 fd 48 8b 45 08 <a8> 01 0f 85 19 01 00 00 66 90 48 89 ef e8 ad f2 ff ff 48 8b 00 f6
-RSP: 0018:ffffc900000e7960 EFLAGS: 00000282
-RAX: ffffea000073f401 RBX: ffff8880888af874 RCX: 0000000000000000
-RDX: ffff888011a50000 RSI: ffffffff8136c4f4 RDI: ffffea0000000000
-RBP: ffffea000073f480 R08: 0000000000000007 R09: 0000000000000000
-R10: 0000000000000000 R11: 000000000008c07e R12: ffff88801cfd2800
-R13: 0000000000000028 R14: ffff88801d0b0de0 R15: ffff88801cfd2800
-FS:  0000000000000000(0000) GS:ffff8880b9a00000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f110a37f1b8 CR3: 000000002118d000 CR4: 0000000000350ef0
-Call Trace:
- <TASK>
- ieee80211_bss_info_update+0x49e/0xaf0 net/mac80211/scan.c:223
- ieee80211_rx_bss_info net/mac80211/ibss.c:1120 [inline]
- ieee80211_rx_mgmt_probe_beacon net/mac80211/ibss.c:1609 [inline]
- ieee80211_ibss_rx_queued_mgmt+0x1a31/0x3190 net/mac80211/ibss.c:1638
- ieee80211_iface_process_skb net/mac80211/iface.c:1630 [inline]
- ieee80211_iface_work+0xa47/0xd30 net/mac80211/iface.c:1684
- process_one_work+0x9bf/0x1710 kernel/workqueue.c:2289
- worker_thread+0x665/0x1080 kernel/workqueue.c:2436
- kthread+0x2e4/0x3a0 kernel/kthread.c:376
- ret_from_fork+0x1f/0x30 arch/x86/entry/entry_64.S:306
- </TASK>
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+>
+> - f2fs_ioc_commit_atomic_write
+>   - f2fs_do_sync_file
+>    - f2fs_skip_inode_update
+>    - f2fs_write_inode
+>     - f2fs_update_inode_page
+>      - f2fs_update_inode
+>
+> Thanks,
+>
+> > +
+> >       if (et) {
+> >               read_lock(&et->lock);
+> >               set_raw_extent(&et->largest, &ri->i_ext);
+> > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> > index 289bcb7ca300..264b4e352319 100644
+> > --- a/fs/f2fs/segment.c
+> > +++ b/fs/f2fs/segment.c
+> > @@ -192,14 +192,18 @@ void f2fs_abort_atomic_write(struct inode *inode, bool clean)
+> >       if (!f2fs_is_atomic_file(inode))
+> >               return;
+> >
+> > -     if (clean)
+> > -             truncate_inode_pages_final(inode->i_mapping);
+> >       clear_inode_flag(fi->cow_inode, FI_COW_FILE);
+> >       iput(fi->cow_inode);
+> >       fi->cow_inode = NULL;
+> >       release_atomic_write_cnt(inode);
+> > +     clear_inode_flag(inode, FI_ATOMIC_COMMIT);
+> >       clear_inode_flag(inode, FI_ATOMIC_FILE);
+> >       stat_dec_atomic_inode(inode);
+> > +
+> > +     if (clean) {
+> > +             truncate_inode_pages_final(inode->i_mapping);
+> > +             f2fs_i_size_write(inode, fi->original_i_size);
+> > +     }
+> >   }
+> >
+> >   static int __replace_atomic_write_block(struct inode *inode, pgoff_t index,
+> > @@ -335,10 +339,12 @@ static int __f2fs_commit_atomic_write(struct inode *inode)
+> >       }
+> >
+> >   out:
+> > -     if (ret)
+> > +     if (ret) {
+> >               sbi->revoked_atomic_block += fi->atomic_write_cnt;
+> > -     else
+> > +     } else {
+> >               sbi->committed_atomic_block += fi->atomic_write_cnt;
+> > +             set_inode_flag(inode, FI_ATOMIC_COMMIT);
+> > +     }
+> >
+> >       __complete_revoke_list(inode, &revoke_list, ret ? true : false);
+> >
 
 
 _______________________________________________
