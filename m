@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 198C7614DC9
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Nov 2022 16:06:59 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 397E8614E11
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Nov 2022 16:15:29 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1opsqr-000798-1D;
-	Tue, 01 Nov 2022 15:06:53 +0000
+	id 1opsz7-0004sH-73;
+	Tue, 01 Nov 2022 15:15:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1opsqp-00078v-6v
+ (envelope-from <chao@kernel.org>) id 1opsyr-0004s4-AY
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 01 Nov 2022 15:06:51 +0000
+ Tue, 01 Nov 2022 15:15:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uUlhbLoa+5FNVXcP58mc7VzMk3Vxk9jyXYac1xw+2oU=; b=F/qdC4GQPsUZvqpuMv3za/iGC9
- w7Smozb6BsHxyOSitkbcquAcvbTceRA9magKhG2LykqmPOGkU9u7h34ERwkduCJFSiTx7+uqgjZEx
- TyxRN4Wi5RUq2QpJMfKDwwO09+df2hweujzRYNldmsYxfSe/ifQDd9XX/VzGB8jy8YTc=;
+ bh=/kuUJC2mI+fKkTEVjFb2OgMTlWwHvNf8VjkQ1rMO1Uo=; b=dkMGsaKkmFWtv+6c1hFzImOSwD
+ SneD53i4lA+P+48qSqCSvXUZIkAkKjmzR5ZPmaIkN0TZ8tpMrpDkTh8KKHwgEXVFCwU9wQlGOyxBO
+ Ljqtgu7/cIrLe+sgSqHcBdD0bEhcXdb1WZ+LPXO9KYmNfwl50dpRdfSkXEDDMuucr7Kg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
@@ -31,71 +31,70 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uUlhbLoa+5FNVXcP58mc7VzMk3Vxk9jyXYac1xw+2oU=; b=gUdzswOWczowthQCw7bMwQkmKE
- M+HJ+TBYHTG3SKRxFnnMhEByhcMlr+IdVgVhA6jr3czho+lGDVMNAfgXq9E7QSzZxuGhr/s0wRzAg
- 8LgEBg9e1wnjKEMESkKw8AV09AA4sQgH2gxbRIdLsd800uqex9ST5iS7CQu4E1zA1vGU=;
+ bh=/kuUJC2mI+fKkTEVjFb2OgMTlWwHvNf8VjkQ1rMO1Uo=; b=aCBbXQ975FlOqjy7+9PpHpfS8E
+ AjuKqhGuRw27troDxfINmtL82hwowSNIsX5MvEJIaBsWICeRPUiKVIpx44YyoXXmA0IRU5W36lRvs
+ 1chQL5SssZEjv6HaLdVNuhusuDaKo/eM3MFBTFXlTLAcFxT66Hq8hrpq4VQiWZBKP0uE=;
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1opsqn-000186-Tc for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 01 Nov 2022 15:06:51 +0000
+ id 1opsym-0001TK-V7 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 01 Nov 2022 15:15:09 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id CE644B81E65;
- Tue,  1 Nov 2022 15:06:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B4BE9C433C1;
- Tue,  1 Nov 2022 15:06:36 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id AD658B81E6C;
+ Tue,  1 Nov 2022 15:14:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37745C433D6;
+ Tue,  1 Nov 2022 15:14:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1667315197;
- bh=rz4eFCHSGMuLuHIxQQe4wiL+S8qSJ6MrWWgMOv+E718=;
+ s=k20201202; t=1667315697;
+ bh=K8l71rqgkflfcqzq6zpcUJabx7k/R95mzZKRenQ/V7E=;
  h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
- b=IvSZ8adnXPf5RbAm+lHWs3Cz2+Htl28kD74qHfRCtgAOTXY98x5rcWbCPmD9rjMnE
- u4mvlMnMeh3LeWs4NAgbsW4ZiFiIC/iHc3CC67WK1sTVOQb0xHZlC+dcdxLGBL7Mi3
- WmZM92Qr4Cpe7BJjD70ocha80WtXFQZl23zXSL77EbRdpvmzKvG0Sq+j1I7EZVruGN
- S5yNQID8dNJZTUoVFu6t8qPtZdq3ZNAHSw9njetLd54tNC69qCSK9i7dZhMEfEp0gH
- GFgmZLKnkuhVCVbBuWXlc1agnVhcYvgUY6Ry7qamMOzV2VTaA6PJDThRwQetbVZ3lx
- iWzkqlU+5zIRw==
-Message-ID: <cae1e1e9-d528-496e-d89d-be47c4b8d0cb@kernel.org>
-Date: Tue, 1 Nov 2022 23:06:35 +0800
+ b=CEApPlBaOEfvrN+B5Y/YD+KhxDbZyu5IKXn1LsohCm/9EHmCJ11tswKkahg5g/0Dy
+ Ursqdi8IgdjtQOFw1Ve40wg7hNMbjTGqfeYPTYNbkXOX6PjG5RUNqh+Hrg4vmCv5hO
+ RIw3JWBUGlXbMpT6PklTqFAAxAtbNp0Y238qv9ZMeY8GWxD6MmyHb0OzJFQLPrjzdN
+ 500I3zcQHm+FOZDgSmOGbqsAQ5QxjaLhc4Eitfl2Q9hmwUghk6eIJ+eSZgE4fMo4gr
+ sGbLxItM9EpYjRTbq1izCxR6pGZfwuAXSl0u7AEVtwfUOEGffPqlUhaGp5GS4xfxde
+ WKgaoNWKV5ODQ==
+Message-ID: <af41e68c-4f78-0934-1041-974e44bd3825@kernel.org>
+Date: Tue, 1 Nov 2022 23:14:55 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.0
-To: fengnan chang <fengnanchang@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20220608134852.476876-1-fengnanchang@gmail.com>
- <96CE38DF-C3E7-4284-8C36-6F51D355343E@gmail.com>
- <CALWNXx9F+pZa9b7Bui=A9L66pO=64H6kwzNUtSfJsbLsvPBLMQ@mail.gmail.com>
 Content-Language: en-US
+To: qixiaoyu1 <qxy65535@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20221021023136.22863-1-qixiaoyu1@xiaomi.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <CALWNXx9F+pZa9b7Bui=A9L66pO=64H6kwzNUtSfJsbLsvPBLMQ@mail.gmail.com>
-X-Spam-Score: -6.3 (------)
+In-Reply-To: <20221021023136.22863-1-qixiaoyu1@xiaomi.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Fengnan, Sorry for the delay. I guess we can merge this
- patch, but let me check whether there is another solution, since mm guys
- want to remove PG_error usage to save one bit slot in page.flags. 
- Content analysis details:   (-6.3 points, 6.0 required)
+ Content preview:  On 2022/10/21 10:31, qixiaoyu1 wrote: > Currently IPU policy
+ for fdatasync is coupled with F2FS_IPU_FSYNC. > Fix to apply it to all IPU
+ policy. Xiaoyu, Sorry for the delay. 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -1.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1opsqn-000186-Tc
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix hungtask when decompressed fail
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1opsym-0001TK-V7
+Subject: Re: [f2fs-dev] [PATCH] f2fs: separate IPU policy for fdatasync from
+ F2FS_IPU_FSYNC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,66 +106,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: qixiaoyu1 <qixiaoyu1@xiaomi.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SGkgRmVuZ25hbiwKClNvcnJ5IGZvciB0aGUgZGVsYXkuCgpJIGd1ZXNzIHdlIGNhbiBtZXJnZSB0
-aGlzIHBhdGNoLCBidXQgbGV0IG1lIGNoZWNrIHdoZXRoZXIgdGhlcmUKaXMgYW5vdGhlciBzb2x1
-dGlvbiwgc2luY2UgbW0gZ3V5cyB3YW50IHRvIHJlbW92ZSBQR19lcnJvciB1c2FnZQp0byBzYXZl
-IG9uZSBiaXQgc2xvdCBpbiBwYWdlLmZsYWdzLgoKT24gMjAyMi8xMS8xIDE3OjQxLCBmZW5nbmFu
-IGNoYW5nIHdyb3RlOgo+IGZyaWVuZGx5IHBpbmcuLi4KPiAKPiBmZW5nbmFuIGNoYW5nIDxmZW5n
-bmFuY2hhbmdAZ21haWwuY29tPiDkuo4yMDIy5bm0MTDmnIgxNOaXpeWRqOS6lCAxNjo0NuWGmemB
-k++8mgo+Pgo+PiBwaW5nLCAgaXQgc2VlbXMgdGhpcyBoYWQgYmVlbiBmb3Jnb3R0ZW4uCj4+Cj4+
-PiAyMDIy5bm0NuaciDjml6UgMjE6NDjvvIxGZW5nbmFuIENoYW5nIDxmZW5nbmFuY2hhbmdAZ21h
-aWwuY29tPiDlhpnpgZPvvJoKPj4+Cj4+PiBXaGVuIGRlY29tcHJlc3NlZCBmYWlsZWQsIGYyZnNf
-cHJlcGFyZV9jb21wcmVzc19vdmVyd3JpdGUgd2lsbCBlbnRlcgo+Pj4gZW5kbGVzcyBsb29wLCBt
-YXkgY2FzdWUgaHVuZ3Rhc2suCj4+Pgo+Pj4gWyAgIDE0LjA4ODY2NV0gRjJGUy1mcyAobnZtZTBu
-MSk6IGx6NCBkZWNvbXByZXNzIGZhaWxlZCwgcmV0Oi00MTU1Cj4+PiBbICAgMTQuMDg5ODUxXSBG
-MkZTLWZzIChudm1lMG4xKTogbHo0IGRlY29tcHJlc3MgZmFpbGVkLCByZXQ6LTQxNTUKPj4+Cj4+
-PiBTaWduZWQtb2ZmLWJ5OiBGZW5nbmFuIENoYW5nIDxmZW5nbmFuY2hhbmdAZ21haWwuY29tPgo+
-Pj4gLS0tCj4+PiBmcy9mMmZzL2NvbXByZXNzLmMgfCAyMSArKysrKysrKysrKysrKysrLS0tLS0K
-Pj4+IDEgZmlsZSBjaGFuZ2VkLCAxNiBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQo+Pj4K
-Pj4+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2NvbXByZXNzLmMgYi9mcy9mMmZzL2NvbXByZXNzLmMK
-Pj4+IGluZGV4IDI0ODI0Y2Q5NmYzNi4uMTc2NGUzODU5MjYyIDEwMDY0NAo+Pj4gLS0tIGEvZnMv
-ZjJmcy9jb21wcmVzcy5jCj4+PiArKysgYi9mcy9mMmZzL2NvbXByZXNzLmMKPj4+IEBAIC0xMDYw
-LDcgKzEwNjAsNyBAQCBzdGF0aWMgaW50IHByZXBhcmVfY29tcHJlc3Nfb3ZlcndyaXRlKHN0cnVj
-dCBjb21wcmVzc19jdHggKmNjLAo+Pj4gICAgICAgIHNlY3Rvcl90IGxhc3RfYmxvY2tfaW5fYmlv
-Owo+Pj4gICAgICAgIHVuc2lnbmVkIGZncF9mbGFnID0gRkdQX0xPQ0sgfCBGR1BfV1JJVEUgfCBG
-R1BfQ1JFQVQ7Cj4+PiAgICAgICAgcGdvZmZfdCBzdGFydF9pZHggPSBzdGFydF9pZHhfb2ZfY2x1
-c3RlcihjYyk7Cj4+PiAtICAgICBpbnQgaSwgcmV0Owo+Pj4gKyAgICAgaW50IGksIHJldCwgcmV0
-cnlfY291bnQgPSAzOwoKV3JhcCBtYWdpYyBudW1iZXIgdy8gbWFjcm8/Cgo+Pj4KPj4+IHJldHJ5
-Ogo+Pj4gICAgICAgIHJldCA9IGYyZnNfaXNfY29tcHJlc3NlZF9jbHVzdGVyKGNjLT5pbm9kZSwg
-c3RhcnRfaWR4KTsKPj4+IEBAIC0xMTIwLDcgKzExMjAsMTIgQEAgc3RhdGljIGludCBwcmVwYXJl
-X2NvbXByZXNzX292ZXJ3cml0ZShzdHJ1Y3QgY29tcHJlc3NfY3R4ICpjYywKPj4+ICAgICAgICAg
-ICAgICAgICAgICAgICAgZjJmc19wdXRfcnBhZ2VzKGNjKTsKPj4+ICAgICAgICAgICAgICAgICAg
-ICAgICAgZjJmc191bmxvY2tfcnBhZ2VzKGNjLCBpICsgMSk7Cj4+PiAgICAgICAgICAgICAgICAg
-ICAgICAgIGYyZnNfZGVzdHJveV9jb21wcmVzc19jdHgoY2MsIHRydWUpOwo+Pj4gLSAgICAgICAg
-ICAgICAgICAgICAgIGdvdG8gcmV0cnk7Cj4+PiArICAgICAgICAgICAgICAgICAgICAgcmV0cnlf
-Y291bnQtLTsKPj4+ICsgICAgICAgICAgICAgICAgICAgICBpZiAoUGFnZUVycm9yKHBhZ2UpICYm
-ICFyZXRyeV9jb3VudCkgewo+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0ID0g
-LUVJTzsKPj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdvdG8gb3V0Owo+Pj4gKyAg
-ICAgICAgICAgICAgICAgICAgIH0gZWxzZQo+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgZ290byByZXRyeTsKCn0gZWxzZSB7Cglnb3RvIHJldHJ5Owp9Cgo+Pj4gICAgICAgICAgICAg
-ICAgfQo+Pj4gICAgICAgIH0KPj4+Cj4+PiBAQCAtMTY1NywxMCArMTY2MiwxNiBAQCBzdGF0aWMg
-dm9pZCBfX2YyZnNfZGVjb21wcmVzc19lbmRfaW8oc3RydWN0IGRlY29tcHJlc3NfaW9fY3R4ICpk
-aWMsIGJvb2wgZmFpbGVkKQo+Pj4gICAgICAgICAgICAgICAgaWYgKCFycGFnZSkKPj4+ICAgICAg
-ICAgICAgICAgICAgICAgICAgY29udGludWU7Cj4+Pgo+Pj4gLSAgICAgICAgICAgICAvKiBQR19l
-cnJvciB3YXMgc2V0IGlmIHZlcml0eSBmYWlsZWQuICovCj4+PiAtICAgICAgICAgICAgIGlmIChm
-YWlsZWQgfHwgUGFnZUVycm9yKHJwYWdlKSkgewo+Pj4gKyAgICAgICAgICAgICBpZiAoZmFpbGVk
-KSB7Cj4+PiArICAgICAgICAgICAgICAgICAgICAgLyogZGVjb21wcmVzcyBwYWdlIGZhaWxlZCAq
-Lwo+Pj4gKyAgICAgICAgICAgICAgICAgICAgIENsZWFyUGFnZVVwdG9kYXRlKHJwYWdlKTsKPj4+
-ICsgICAgICAgICAgICAgICAgICAgICBTZXRQYWdlRXJyb3IocnBhZ2UpOwo+Pj4gKyAgICAgICAg
-ICAgICB9IGVsc2UgaWYgKFBhZ2VFcnJvcihycGFnZSkpIHsKPj4+ICsgICAgICAgICAgICAgICAg
-ICAgICAvKgo+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAqIFBHX2Vycm9yIHdhcyBzZXQgaWYg
-dmVyaXR5IGZhaWxlZC4KPj4+ICsgICAgICAgICAgICAgICAgICAgICAgKiB3aWxsIHJlLXJlYWQg
-YWdhaW4gbGF0ZXIuCj4+PiArICAgICAgICAgICAgICAgICAgICAgICovCj4+PiAgICAgICAgICAg
-ICAgICAgICAgICAgIENsZWFyUGFnZVVwdG9kYXRlKHJwYWdlKTsKPj4+IC0gICAgICAgICAgICAg
-ICAgICAgICAvKiB3aWxsIHJlLXJlYWQgYWdhaW4gbGF0ZXIgKi8KPj4+ICAgICAgICAgICAgICAg
-ICAgICAgICAgQ2xlYXJQYWdlRXJyb3IocnBhZ2UpOwo+Pj4gICAgICAgICAgICAgICAgfSBlbHNl
-IHsKPj4+ICAgICAgICAgICAgICAgICAgICAgICAgU2V0UGFnZVVwdG9kYXRlKHJwYWdlKTsKPj4+
-IC0tCj4+PiAyLjI1LjEKPj4+Cj4+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1k
-ZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQv
-bGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On 2022/10/21 10:31, qixiaoyu1 wrote:
+> Currently IPU policy for fdatasync is coupled with F2FS_IPU_FSYNC.
+> Fix to apply it to all IPU policy.
+
+Xiaoyu,
+
+Sorry for the delay.
+
+I didn't get the point, can you please explain more about the
+issue?
+
+Thanks,
+
+> 
+> Signed-off-by: qixiaoyu1 <qixiaoyu1@xiaomi.com>
+> ---
+>   fs/f2fs/data.c | 8 +++-----
+>   fs/f2fs/file.c | 4 +++-
+>   2 files changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index a71e818cd67b..fec8e15fe820 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -2518,6 +2518,9 @@ static inline bool check_inplace_update_policy(struct inode *inode,
+>   	if (policy & (0x1 << F2FS_IPU_HONOR_OPU_WRITE) &&
+>   			is_inode_flag_set(inode, FI_OPU_WRITE))
+>   		return false;
+> +	/* this is set by fdatasync or F2FS_IPU_FSYNC policy */
+> +	if (is_inode_flag_set(inode, FI_NEED_IPU))
+> +		return true;
+>   	if (policy & (0x1 << F2FS_IPU_FORCE))
+>   		return true;
+>   	if (policy & (0x1 << F2FS_IPU_SSR) && f2fs_need_SSR(sbi))
+> @@ -2538,11 +2541,6 @@ static inline bool check_inplace_update_policy(struct inode *inode,
+>   			!IS_ENCRYPTED(inode))
+>   		return true;
+>   
+> -	/* this is only set during fdatasync */
+> -	if (policy & (0x1 << F2FS_IPU_FSYNC) &&
+> -			is_inode_flag_set(inode, FI_NEED_IPU))
+> -		return true;
+> -
+>   	if (unlikely(fio && is_sbi_flag_set(sbi, SBI_CP_DISABLED) &&
+>   			!f2fs_is_checkpointed_data(sbi, fio->old_blkaddr)))
+>   		return true;
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 82cda1258227..08091550cdf2 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -270,8 +270,10 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
+>   		goto go_write;
+>   
+>   	/* if fdatasync is triggered, let's do in-place-update */
+> -	if (datasync || get_dirty_pages(inode) <= SM_I(sbi)->min_fsync_blocks)
+> +	if (datasync || (SM_I(sbi)->ipu_policy & (0x1 << F2FS_IPU_FSYNC) &&
+> +			get_dirty_pages(inode) <= SM_I(sbi)->min_fsync_blocks))
+>   		set_inode_flag(inode, FI_NEED_IPU);
+> +
+>   	ret = file_write_and_wait_range(file, start, end);
+>   	clear_inode_flag(inode, FI_NEED_IPU);
+>   
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
