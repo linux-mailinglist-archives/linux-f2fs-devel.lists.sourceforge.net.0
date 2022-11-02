@@ -2,84 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42E60614E80
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  1 Nov 2022 16:39:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79E05615750
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Nov 2022 03:06:08 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1optMl-000467-2C;
-	Tue, 01 Nov 2022 15:39:51 +0000
+	id 1oq38j-000706-Se;
+	Wed, 02 Nov 2022 02:06:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1optMT-00045t-Gc
+ (envelope-from <ebiggers@kernel.org>) id 1oq38i-0006zt-I7
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 01 Nov 2022 15:39:36 +0000
+ Wed, 02 Nov 2022 02:06:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Hlk9UOy/BX3buFo+iHpDS65qb5fC3EpeGTg6ClktIi0=; b=bIvTxCf+ir7vpof8nGcrNLevBe
- bev/xFf8OqPiY0pGge6a+oxDoaUI/KWFCqxcoezXnJhyUcrrDbH8UM1pydiEldxf8JomRXhr7mR0a
- k+JuFVbhDxtgk/CZTK8t8HbTI4JLEd0jEeyuGHsw7nPz76l5WVHfydmXrEK0+0Z7xM9I=;
+ bh=D7gi26O4qjVhs3o9RNmANM2exJ3Bov+rY/4aFA8be8s=; b=N5NO31LvkemhSen2YUFpxtNYRX
+ DJxVvmusuvEZSM0imVJhk2OCYprhf0RujwHUCkDcRgzRs/ataRJUGlYuJ7fErOydOPTCGbBMJr99M
+ W2BGfgo2Fqj/G4wexFVec9k8AsyzG9SDx6CgqQY0BeK2OKIxfDsfwVVo+qcDkMT06fk8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Hlk9UOy/BX3buFo+iHpDS65qb5fC3EpeGTg6ClktIi0=; b=FOEe2WCEbDAUPimtRrAF6GW5rY
- 44lgaaZPNTit2GqMMgTNYGprO9AJXL/U67IMEq2UIAXVe4FgHTxn4o8VwZVTrlv5UHAotgx1D4T+z
- R/IfOhaUN/bS1UqsoykYbMXvlQ0j4/Z0hh+aljCvzqfKrcAIn15x6VQF7XgiySk7ZT1I=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=D7gi26O4qjVhs3o9RNmANM2exJ3Bov+rY/4aFA8be8s=; b=FTjkPxOrqn4bNcG1/hH9NaBvx5
+ 1wPY7e5/uGCRBKHGqgae4Zow5L3Zpi35I7GQRLeKWixCCX8RHiiNFJjvVVSLVm2ySuXHTE8feHGad
+ kuAkJ89+KAR0mMzqApnWA37kj1l0RpsKIDbcY3N/Bz/m33yALEBl2vBUBhZ0Lwt4gcOI=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1optML-008Eaq-3h for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 01 Nov 2022 15:39:29 +0000
+ id 1oq38h-00051W-Om for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 02 Nov 2022 02:06:00 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id AF31A61644
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  1 Nov 2022 15:39:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 814D7C433D6;
- Tue,  1 Nov 2022 15:39:18 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 6E307B8205E;
+ Wed,  2 Nov 2022 02:05:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00649C433D7;
+ Wed,  2 Nov 2022 02:05:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1667317159;
- bh=65CZL2l1IBOmMGUelHQiR1wpkyHLMFLr7kZuNM7OCGE=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=pUk9QZid7zs08/+OcIlt14B3aGnShZLGKET+sTGEI7U9P0jO4rnFZG1wIkgULUGbk
- R+yjtmEHm/roUpUgnxQ1GsyuRM2wRZnGP+Rz/33f3AGCVEL9G7gyq5q2pAsqDouHT+
- ZMhjM72Nc3OoC3m/6K21uJJyiaz0VbqVirHYBfHqicsFKe2FTtWVtCFq9KOIEM35cX
- 4S07QuKnNO+7QfwMujpV8UW5V3AxIBV6PCZ9aPztAYgjYJu8manD7Qnw6uQwIU3X25
- xHUeaRe/NmhCe9ZR4dEE4drjram1n1zua00M4Ffj540cC8Rdc+6xV8OJ1lJXjU0zvk
- PoxcpYZbYlCyA==
-Message-ID: <e4ae8a72-3e29-637f-2cbb-0e81020da1d5@kernel.org>
-Date: Tue, 1 Nov 2022 23:39:17 +0800
+ s=k20201202; t=1667354752;
+ bh=Hn3Dot0ItNUymZHcHEbaJ3rd5VUjYwb+4Y5AN8Tl5KA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=hQU1kXD17dO+n4EkUjsQfEBaNk6ZKUVTL8g1b7GIMPdVjRJUqUNaasU2uvfFQRmU3
+ WQhxlUdBtcC1kWJUoPxl7tiXuQB11B1p9791Y31e1e6FEMEYQTe+ML0XurvvM80qjR
+ /UZ4vLlzYsPVV7qsRvHYH4xboeExkqhBYEF6L1QOeHvWYDv83FAV5MOWaPcrR9fv9y
+ OuDCuoVs057l2VN8PS2nI+YZFFDpyJYg9J7bWzTwlK3Piq8YGOIpfpgLXDK2Tz4xnr
+ 0r04VLX4q3arHOYUhHWSlsbQT2VLpmBnqCp1G7sQnGkLgDhWUvGRS4BR6mMS2SJynf
+ 6bgcwARaEbfaA==
+Date: Tue, 1 Nov 2022 19:05:50 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Fengnan Chang <fengnanchang@gmail.com>
+Message-ID: <Y2HQftXirAxvab6M@sol.localdomain>
+References: <20220608134852.476876-1-fengnanchang@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.0
-Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20221028165827.11558-1-jaegeuk@kernel.org>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221028165827.11558-1-jaegeuk@kernel.org>
-X-Spam-Score: -7.9 (-------)
+Content-Disposition: inline
+In-Reply-To: <20220608134852.476876-1-fengnanchang@gmail.com>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/10/29 0:58,
- Jaegeuk Kim wrote: > Let's use sysfs_emit.
- > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> Reviewed-by: Chao Yu
- <chao@kernel.org> Thanks, 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  On Wed, Jun 08, 2022 at 09:48:52PM +0800,
+ Fengnan Chang wrote:
+ > When decompressed failed, f2fs_prepare_compress_overwrite will enter >
+ endless loop, may casue hungtask. > > [ 14.088665] F2FS-fs (nvme [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
@@ -92,11 +88,10 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1optML-008Eaq-3h
-Subject: Re: [f2fs-dev] [PATCH] f2fs: use sysfs_emit instead of sprintf
+X-Headers-End: 1oq38h-00051W-Om
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix hungtask when decompressed fail
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,18 +103,52 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/10/29 0:58, Jaegeuk Kim wrote:
-> Let's use sysfs_emit.
+On Wed, Jun 08, 2022 at 09:48:52PM +0800, Fengnan Chang wrote:
+> When decompressed failed, f2fs_prepare_compress_overwrite will enter
+> endless loop, may casue hungtask.
 > 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> [   14.088665] F2FS-fs (nvme0n1): lz4 decompress failed, ret:-4155
+> [   14.089851] F2FS-fs (nvme0n1): lz4 decompress failed, ret:-4155
+> 
+> Signed-off-by: Fengnan Chang <fengnanchang@gmail.com>
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+This commit message only explains the problem, not the solution.  It should
+explain the solution too.
 
-Thanks,
+Also, if it's fixing a bug, it needs 'Fixes' and 'Cc stable' tags.
+
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index 24824cd96f36..1764e3859262 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -1060,7 +1060,7 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>  	sector_t last_block_in_bio;
+>  	unsigned fgp_flag = FGP_LOCK | FGP_WRITE | FGP_CREAT;
+>  	pgoff_t start_idx = start_idx_of_cluster(cc);
+> -	int i, ret;
+> +	int i, ret, retry_count = 3;
+>  
+>  retry:
+>  	ret = f2fs_is_compressed_cluster(cc->inode, start_idx);
+> @@ -1120,7 +1120,12 @@ static int prepare_compress_overwrite(struct compress_ctx *cc,
+>  			f2fs_put_rpages(cc);
+>  			f2fs_unlock_rpages(cc, i + 1);
+>  			f2fs_destroy_compress_ctx(cc, true);
+> -			goto retry;
+> +			retry_count--;
+> +			if (PageError(page) && !retry_count) {
+> +				ret = -EIO;
+> +				goto out;
+> +			} else
+
+What is the purpose of using PG_error here?
+
+- Eric
 
 
 _______________________________________________
