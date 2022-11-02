@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41DC0615B22
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Nov 2022 04:48:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4BCA615C28
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Nov 2022 07:18:26 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oq4jl-0001fk-IV;
-	Wed, 02 Nov 2022 03:48:21 +0000
+	id 1oq74v-0004Si-E3;
+	Wed, 02 Nov 2022 06:18:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1oq4jk-0001fc-DE
+ (envelope-from <ebiggers@kernel.org>) id 1oq74u-0004Sc-3V
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 02 Nov 2022 03:48:20 +0000
+ Wed, 02 Nov 2022 06:18:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5tRLwY3E0qzFtTcoXJPe/iUoVaVKJzqHPA2RCKxvUh4=; b=H5CddWOtHYWEySRalRFILL+ATt
- BNP+wNkj0EXZCm5u+uuxqVe3Sud/IB7KA6VwMngblnihfaBiVLXKu9c6EhYjv3TBKDwexU56TRrhL
- DnjDHOJAGSUF/r3TrkQj2gus8bsMQOSXQ9Y6GHAXX8gkXD0baXcQI2UdWtinKFi8VYOo=;
+ bh=nn+ZB23ZZP04afdDMkMaltNgOC8xmyMuVhjh3tJsnVo=; b=I0Vcu/85pHgp3p68hmyXKLgNlC
+ Ca7dU/7IxBDsp0SaqvE/3ctGTtPUy3T3JSDzjoN+rbz3KNcIndW/Z9Dex2VcAuWwf+iS2fUAk/uzn
+ f4IG9FZO/e4FNLnUpSwJ5O+CWtCixpvoJllN1CKZZa1ZWt5jm7hHdteh9XWKNCPBcZMY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,43 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5tRLwY3E0qzFtTcoXJPe/iUoVaVKJzqHPA2RCKxvUh4=; b=Qp7jPxjg290lxVDXTln8/R2Wpm
- Kyp844t1ZtUbUGiABz+oa/rX3b9j13+V2wPi4C1GLvT4a1ErPshhwmct8mulzx9gHKzyFVwmzuMJq
- e0xP4D0aH2W8w41vW/a3f34O8PaKa/nusKfcZ7T6iilldiu3wMqG27wSO10BaIEZ1fBM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=nn+ZB23ZZP04afdDMkMaltNgOC8xmyMuVhjh3tJsnVo=; b=M3jUaO1s/Spw6Pe0GhSG/3USZO
+ QIX7XywTyde9a/qOyymGWCgjJ2+q1WBLqlyxx7K76HxQQPWp/PXPdPNliJH30UOe/4RiBOv1F1nlP
+ DzkVGm9hA2j1EsS4W/XnzRUt2DdY2GV2vYk6Ohh6RRHASdnVJCoeCS9F5ZuGXgg8IfEU=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oq4jj-008zl6-P7 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 02 Nov 2022 03:48:20 +0000
+ id 1oq74q-0006TP-UY for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 02 Nov 2022 06:18:20 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2C2FE617D4;
- Wed,  2 Nov 2022 03:48:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0176C433D7;
- Wed,  2 Nov 2022 03:48:06 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTPS id AD2BDCE1F4F;
+ Wed,  2 Nov 2022 06:18:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6BF9C433C1;
+ Wed,  2 Nov 2022 06:18:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1667360887;
- bh=DVsfDqSlq0vXEg3sD1bl/7jqPk7Ia5VVtAhLAgbiM3Q=;
+ s=k20201202; t=1667369881;
+ bh=2OIjHvL54t1DXYOXYxp6qJOT614me6QcO9DL4rk9VrU=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=NlyYLxTzx04JUEAtq0KE+9TlYmVVi/ytZDLmf71z6YD3V50qBGq475cz5LoWX3Liw
- YPcCUM7MpM9+1oXNkIHZsko0rGiB3qblcEVZ84pkAcw/ldPFl0Pv6aRnRKTFfOxwwm
- m5fPd7bSd5KAdfqS/CUMRI3r4CGS9OONih5tCaPA7wBzQ+x7JbnTnmcJgEZ2c8nYHZ
- aho7y/5K5GmNlGHmO7YWSOSa145CMqkTxnVFhDCYaN6uetccqAAcBpPdaVs/uwj6Bj
- cvFhn1nBDmcFDSSVmWNEH1IkSM9rEsclh4sbIR2AlSAcXPWk2/CfCzg+IYV7znj/jD
- FDp4iEJKp0iVw==
-Date: Tue, 1 Nov 2022 20:48:05 -0700
+ b=dU78BYohrAV0o2uZcHI1mnzDPyPziGY2J8TNpdf7qa+Akf5WnUHu5PJmHKL6z558Z
+ LWA3SSiessnH5waINDt9RJSa4akWUhCMtqAaiQXXkyfWsnhnTeminjdIZgKTJ5L3FT
+ 40svmK4tGVUUMyRYktBwooTBoPD/gQccwMd0rmsi1lE2q7HDAnXVk4YVX7nhqjSjrc
+ EQQL4aWLVojoXIvNwN4O1R4Fg+bGGakJ7p5iwntdFJSeGiYE3BYRj97GewN1VDXkaQ
+ R2AC/KWUiGoHsWO84OPzKWvwG+1IwK1/+V22mMrOzUfWtY/kMEwAcFvRBo3Ha7IVJO
+ 5n7+wkh0payQQ==
+Date: Tue, 1 Nov 2022 23:17:58 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: fengnan chang <fengnanchang@gmail.com>
-Message-ID: <Y2HodQZHpNupi+l9@sol.localdomain>
-References: <20220608134852.476876-1-fengnanchang@gmail.com>
- <Y2HQftXirAxvab6M@sol.localdomain>
- <694663F8-701D-4318-94D0-A1F532DDF6F9@gmail.com>
- <Y2HhoBnocFff1WFB@sol.localdomain>
- <CALWNXx9-EtdXpGJONESQAQ9aOK9=Ggk9n0U+wxy-Wxq+sBcXkg@mail.gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <Y2ILlpqFQVO9fH8B@sol.localdomain>
+References: <CAO4mrfc3sbZVj3QOdAVFqrZp+mEuPQTtQCQsQy-07W_BEFqZ2Q@mail.gmail.com>
+ <CAO4mrfexzxeYwAkvWGfg=tEiczUWarO6y68KFD9EG9qZtGejng@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CALWNXx9-EtdXpGJONESQAQ9aOK9=Ggk9n0U+wxy-Wxq+sBcXkg@mail.gmail.com>
+In-Reply-To: <CAO4mrfexzxeYwAkvWGfg=tEiczUWarO6y68KFD9EG9qZtGejng@mail.gmail.com>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -75,18 +73,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Nov 02, 2022 at 11:43:11AM +0800,
- fengnan chang wrote:
- > > > > What is the purpose of using PG_error here? > > > > > > In this
- version, 
- we set PG_error when compressed failed, so check PG_erro [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  [+f2fs list and maintainers] [changed subject from "INFO:
+ task hung in fscrypt_ioctl_set_policy"] On Mon, Oct 31, 2022 at 10:18:02PM
+ +0800, Wei Chen wrote: > Dear Linux developers, > > Here is the link to the
+ reproducers. > > C reproducer:
+ https://drive.google.com/file/d/1mduYsYuoOKemH3qkvpDQwnAHA
+ [...] Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -95,8 +93,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oq4jj-008zl6-P7
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix hungtask when decompressed fail
+X-Headers-End: 1oq74q-0006TP-UY
+Subject: [f2fs-dev] f2fs_empty_dir() can be extremely slow on malicious disk
+ images
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,62 +107,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Wei Chen <harperchen1110@gmail.com>, jaegeuk@kernel.org,
+ linux-fscrypt@vger.kernel.org, tytso@mit.edu, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Nov 02, 2022 at 11:43:11AM +0800, fengnan chang wrote:
-> > > > What is the purpose of using PG_error here?
-> > >
-> > > In this version, we set PG_error when compressed failed, so check PG_error here.
-> > > Maybe we can remove PG_error in later?
-> > >
-> >
-> > Read I/O errors can be detected via PG_uptodate not being set.  There shouldn't
-> > be any need for PG_error here.
-> 
-> Yeah, I get it now. Maybe we can remove PG_error in f2fs_verify_cluster too.
-> 
-> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index d315c2de136f..13c0bfe45804 100644
-> --- a/fs/f2fs/compress.c
-> +++ b/fs/f2fs/compress.c
-> @@ -1727,10 +1727,9 @@ static void __f2fs_decompress_end_io(struct
-> decompress_io_ctx *dic, bool failed,
->                         continue;
-> 
->                 /* PG_error was set if verity failed. */
-> -               if (failed || PageError(rpage)) {
-> -                       ClearPageUptodate(rpage);
-> +               if (failed) {
->                         /* will re-read again later */
-> -                       ClearPageError(rpage);
-> +                       ClearPageUptodate(rpage);
->                 } else {
->                         SetPageUptodate(rpage);
->                 }
-> @@ -1745,13 +1744,14 @@ static void f2fs_verify_cluster(struct
-> work_struct *work)
->         struct decompress_io_ctx *dic =
->                 container_of(work, struct decompress_io_ctx, verity_work);
->         int i;
-> +       bool failed = false;
-> 
->         /* Verify the cluster's decompressed pages with fs-verity. */
->         for (i = 0; i < dic->cluster_size; i++) {
->                 struct page *rpage = dic->rpages[i];
-> 
->                 if (rpage && !fsverity_verify_page(rpage))
-> -                       SetPageError(rpage);
-> +                       failed = true;
->         }
+[+f2fs list and maintainers]
+[changed subject from "INFO: task hung in fscrypt_ioctl_set_policy"]
 
-No, PG_error is still used to notify f2fs_finish_read_bio() and
-__f2fs_decompress_end_io() of verity errors.  My patch
-https://lore.kernel.org/r/20221028175807.55495-1-ebiggers@kernel.org changes
-that.  Please leave that to my patch.  For your patch, please just don't add a
-new use of PG_error, as it doesn't seem to be necessary.
+On Mon, Oct 31, 2022 at 10:18:02PM +0800, Wei Chen wrote:
+> Dear Linux developers,
+> 
+> Here is the link to the reproducers.
+> 
+> C reproducer: https://drive.google.com/file/d/1mduYsYuoOKemH3qkvpDQwnAHAaaLUp0Y/view?usp=share_link
+> Syz reproducer:
+> https://drive.google.com/file/d/1mu-_w7dy_562vWRlQvTRbcBjG4_G7b2L/view?usp=share_link
+> 
+> The bug persists in the latest commit, v5.15.76 (4f5365f77018). I hope
+> it is helpful to you.
+> 
+> [ 1782.137186][   T30] INFO: task a.out:6910 blocked for more than 143 seconds.
+> [ 1782.139217][   T30]       Not tainted 5.15.76 #5
+> [ 1782.140388][   T30] "echo 0 >
+> /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+> [ 1782.142524][   T30] task:a.out           state:D stack:14296 pid:
+> 6910 ppid:  6532 flags:0x00004004
+> [ 1782.144799][   T30] Call Trace:
+> [ 1782.145623][   T30]  <TASK>
+> [ 1782.146316][   T30]  __schedule+0x3e8/0x1850
+> [ 1782.152029][   T30]  ? mark_held_locks+0x49/0x70
+> [ 1782.153533][   T30]  ? mark_held_locks+0x10/0x70
+> [ 1782.154759][   T30]  ? __down_write_common.part.14+0x31f/0x7b0
+> [ 1782.156159][   T30]  schedule+0x4e/0xe0
+> [ 1782.158314][   T30]  __down_write_common.part.14+0x324/0x7b0
+> [ 1782.159704][   T30]  ? fscrypt_ioctl_set_policy+0xe0/0x200
+> [ 1782.161050][   T30]  fscrypt_ioctl_set_policy+0xe0/0x200
+> [ 1782.162330][   T30]  __f2fs_ioctl+0x9d6/0x45e0
+> [ 1782.163417][   T30]  f2fs_ioctl+0x64/0x240
+> [ 1782.164404][   T30]  ? __f2fs_ioctl+0x45e0/0x45e0
+> [ 1782.165554][   T30]  __x64_sys_ioctl+0xb6/0x100
+> [ 1782.166662][   T30]  do_syscall_64+0x34/0xb0
+> [ 1782.169947][   T30]  entry_SYSCALL_64_after_hwframe+0x61/0xcb
+
+Well, the quality of this bug report has a lot to be desired (not on upstream
+kernel, reproducer is full of totally irrelevant stuff, not sent to the mailing
+list of the filesystem whose disk image is being fuzzed, etc.).  But what is
+going on is that f2fs_empty_dir() doesn't consider the case of a directory with
+an extremely large i_size on a malicious disk image.
+
+Specifically, the reproducer mounts an f2fs image with a directory that has an
+i_size of 14814520042850357248, then calls FS_IOC_SET_ENCRYPTION_POLICY on it.
+That results in a call to f2fs_empty_dir() to check whether the directory is
+empty.  f2fs_empty_dir() then iterates through all 3616826182336513 blocks the
+directory allegedly contains to check whether any contain anything.  i_rwsem is
+held during this, so anything else that tries to take it will hang.
+
+I'll look into this more if needed, but Jaegeuk and Chao, do you happen to have
+any ideas for how f2fs_empty_dir() should be fixed?  Is there an easy way to
+just iterate through the blocks that are actually allocated?
 
 - Eric
 
