@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CBB36167A2
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Nov 2022 17:11:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6956B61679B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Nov 2022 17:11:55 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oqGLN-0000VG-4i;
-	Wed, 02 Nov 2022 16:11:57 +0000
+	id 1oqGLK-00069E-3a;
+	Wed, 02 Nov 2022 16:11:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <vishal.moola@gmail.com>) id 1oqGLH-0000Sp-6T
+ (envelope-from <vishal.moola@gmail.com>) id 1oqGLH-00067J-ID
  for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 02 Nov 2022 16:11:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zdjIiLbt6NZs/+ugsh8p0DToyI6+NA6EFXmKyQS/uaI=; b=NCLoehlA8KWWq4ihg5LMYfmOa8
- KYVpqg+Y6TyJ20ppThrzUCo2y6Pau8Pz17Vx6OSDSPcq5a4qj8WLXbloidx9aMZyFFgoWoi8q+snI
- sQrgG52pGGeKw27r/cqWE7gclRJYOHcuoEhJkrRndBFdh5U43ASvxZiPraKJTb9sa+90=;
+ bh=T3e61Fb9Dqh0rLEzgpxaQ/B901JahzW9QwTImcYRDNk=; b=gypKNMzni2WmboLzrEVSh/Pdcl
+ oVALVu6D6vag0QNwq9Y9cfTJSBbhn/jpvk/8fWBbw28Wo8n/ZuR6T8nMIgE1XlppXYsrkxZwRcsGl
+ /AP7da6tDwzGI+ej/FkRcwtzTsYf9K0Qi/P4ySmg0vGCmSf35DuJrji5mSfkoUPP76xw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,55 +31,56 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zdjIiLbt6NZs/+ugsh8p0DToyI6+NA6EFXmKyQS/uaI=; b=ldKLPq8Gxac/H/AqgcxFkHNdsz
- 8D2A8lzQbbJat5qXvqweV7K1gAGw6XD7BPUTlhQWIyLYGAda5q1zOofB/AbtCI6Y74ohczrC7Tc+q
- D7LVj2Ox18ED03XxZ4ePRfegx+Oc7EpDwHqTipwby93s6GJyKFnDDuZiuFnbrioAn7IQ=;
-Received: from mail-pf1-f171.google.com ([209.85.210.171])
+ bh=T3e61Fb9Dqh0rLEzgpxaQ/B901JahzW9QwTImcYRDNk=; b=Ks/Y39j4gNwZUR8nU0Vmq7xCjW
+ rP1moiWEZTffy9e/xCNPncFgXE0thUYNJGQVsi0wTenCZRuQmM/LIWJnJXbIBGVJ7F0qjxctni0m7
+ DgaHGUgQ52mQm+MNnFhe/728bITXAI08qHttMWWB7/TQngv8gM+VyRxw05D51SBR7LTI=;
+Received: from mail-pj1-f44.google.com ([209.85.216.44])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1oqGLA-00059y-8e for linux-f2fs-devel@lists.sourceforge.net;
+ id 1oqGLB-0005A3-Iq for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 02 Nov 2022 16:11:51 +0000
-Received: by mail-pf1-f171.google.com with SMTP id k15so8767755pfg.2
+Received: by mail-pj1-f44.google.com with SMTP id
+ b1-20020a17090a7ac100b00213fde52d49so2314777pjl.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 02 Nov 2022 09:11:44 -0700 (PDT)
+ Wed, 02 Nov 2022 09:11:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zdjIiLbt6NZs/+ugsh8p0DToyI6+NA6EFXmKyQS/uaI=;
- b=dnw/Y7Sdt/2yswLfUwe7rf3FamG1uOa+Cme4BQysz6O5GJju2KxY/lGLFeRfg3fP7F
- gusz6QFWiXK3Emskoxdh85TotdaoyDyH+kDkBo55CuXGPS5jgjmyY15TzCw5SJdm/Und
- Pe28CM7DVUvGUwOIf1oO6mSePnJQCQlGwEwLCjujRil72gYP2VXxqrNEY2Y2A8eBJRNr
- 6SM+6en5d7DcLIdBgiDQSKo8zoKuWtwZRdiHWF+RAAgco3tzrrCbCJhmkzEEdqzxvKka
- gMha+qpnNfslZTnKojM1KOTJPxVbBbMJ8BYFTrGc9EfVhhAKpe6HIgIjjlnkj/wKgw8P
- /0BA==
+ bh=T3e61Fb9Dqh0rLEzgpxaQ/B901JahzW9QwTImcYRDNk=;
+ b=pqx1PJqOgEaKfUss0nxJak4n84vFKOvzq3ESyrjGFD8v8ROxU3CQGdvwQuKFd1I/w3
+ dCJ41EX/Bok9xslgktz6xXZZB5vDFu5BXOoWGO34UzLTcVVzuhGdIGcQHvEi5gNg3GSQ
+ gscxO1Gb4psr/vsFsU/1JpKGLnKfg3l6eDymWIA8qk7+XrNzqRLz/vgtPRF4DPnVnb4T
+ PW63xls+m/+8H/fBE5siUOyqDVnX5GNrTviD0Y18uYcvd2toxW0MDmiLDFy+p7D7UQQ6
+ IBU8URj3sypjIFT2nA8r21p6YwsgewrtbGGcm7sfWsWRu0sZsqZoVeMOaVhnUYxkI+jf
+ hvVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zdjIiLbt6NZs/+ugsh8p0DToyI6+NA6EFXmKyQS/uaI=;
- b=kL8xq90qoWFst5pVj2pC5IAOi1xWk5U7NOxi7RP04vUJSC6td74+Pl96g99orgahDa
- cxgEVd+NOO5VLoWTjCU+h9Np0D32AT9aVKfA1+gZRtKseDBHTPYBDF9TuhhAUlXOrBby
- OJLRu5SYhHH9yz9H+znSaxxKT8ldXWQpoFLKqlKFpyzdFK+GoqWd6TUPvqFcDVRWpgee
- L7Pu+phlPRqSi+5EgJRWLhJSwd60s48RibBhkuYNfyolmOb0wLLw0MWTiRZUHTflekag
- V683/Hd+O7vPm5VL/fJj9ASa+f2eJ71/+g/yqeulfyuUTd0hzJidHdPrvNCNNATva3LQ
- sZ2g==
-X-Gm-Message-State: ACrzQf3njDqywN0QH6y+Y1fZreUqQIVBVsSt+nSjBmrNZBOE84d2mQZq
- krlsCl1LJmV4X3uwWouJhDs=
-X-Google-Smtp-Source: AMsMyM6UoiV9uoEH+iCRydb6hjhh6rPd9RFTtERjNNbqJAcKqXBBASl63Y5A88aqGJTBtO3widxxqQ==
-X-Received: by 2002:a63:4949:0:b0:442:b733:2fae with SMTP id
- y9-20020a634949000000b00442b7332faemr21682136pgk.424.1667405498578; 
- Wed, 02 Nov 2022 09:11:38 -0700 (PDT)
+ bh=T3e61Fb9Dqh0rLEzgpxaQ/B901JahzW9QwTImcYRDNk=;
+ b=f5zVJ/sP9LFsHPZ8bGj5ku7ScKDSIe1DAKyz1G/onKXGTbgy+zzZ/o2kFzs1DOdith
+ lColI0ef9PsiI/gODsrFAL12BAtJ1RB2Me9FlqX/8c1jVWrtxPZhYSvP7ptHC7nAZfx/
+ 4fptQHWK8ZdKZtXyAHD6nXMG6pAaYJel7TADEX8LSe4hmJF6ZeJSztw5ntcIKH2n++B7
+ ZPkH/p5YJ3HDYHuMxniUVE2xiPXaAJdYmberD0EHwBhsODESlssoxGx+gD4aIW4SOUV6
+ ImeVBKsFJxJQ6mItwcAqa2ADmLmFWf0ng9iwNiEKowIf9HcJV5yxdG26u61zKxmrVvhW
+ k9/A==
+X-Gm-Message-State: ACrzQf3bD6vq2IDyfyozFFrWymxZSPBVECM8WSQBV8ss0Uqo/ZNKgxZ2
+ X3TEHhjv225SAEdu77Fvb+8=
+X-Google-Smtp-Source: AMsMyM4+pj++Af4Edyb2QUG36sMaov5LKSRDOi2tknVjdB5MdIhE6lghLouhN9qeqBdhiOHeQb9nDw==
+X-Received: by 2002:a17:90a:9a8f:b0:212:ea8d:dc34 with SMTP id
+ e15-20020a17090a9a8f00b00212ea8ddc34mr45089840pjp.30.1667405500003; 
+ Wed, 02 Nov 2022 09:11:40 -0700 (PDT)
 Received: from fedora.hsd1.ca.comcast.net ([2601:644:8002:1c20::8080])
  by smtp.googlemail.com with ESMTPSA id
- ms4-20020a17090b234400b00210c84b8ae5sm1632101pjb.35.2022.11.02.09.11.37
+ ms4-20020a17090b234400b00210c84b8ae5sm1632101pjb.35.2022.11.02.09.11.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Nov 2022 09:11:38 -0700 (PDT)
+ Wed, 02 Nov 2022 09:11:39 -0700 (PDT)
 From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
 To: linux-fsdevel@vger.kernel.org
-Date: Wed,  2 Nov 2022 09:10:29 -0700
-Message-Id: <20221102161031.5820-22-vishal.moola@gmail.com>
+Date: Wed,  2 Nov 2022 09:10:30 -0700
+Message-Id: <20221102161031.5820-23-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221102161031.5820-1-vishal.moola@gmail.com>
 References: <20221102161031.5820-1-vishal.moola@gmail.com>
@@ -93,15 +94,17 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview: Convert function to use folios throughout. This is in
  preparation
- for the removal of find_get_pages_range_tag(). This change removes 8 calls
+ for the removal of find_get_pages_range_tag(). This change removes 2 calls
  to compound_head(). Signed-off-by: Vishal Moola (Oracle) Acked-by: Ryusuke
- Konishi --- fs/nilfs2/page.c | 39 ++++++++++++++++++++ 1 file changed, 20
- insertions(+), 19 deletions(-) 
+ Konishi --- fs/nilfs2/page.c | 20 ++++++++++ 1 file changed, 10 insertions(+), 
+ 10 deletions(-) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.44 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.171 listed in list.dnswl.org]
+ no trust [209.85.216.44 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
@@ -113,11 +116,10 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.171 listed in wl.mailspike.net]
-X-Headers-End: 1oqGLA-00059y-8e
-Subject: [f2fs-dev] [PATCH v4 21/23] nilfs2: Convert
- nilfs_copy_dirty_pages() to use filemap_get_folios_tag()
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1oqGLB-0005A3-Iq
+Subject: [f2fs-dev] [PATCH v4 22/23] nilfs2: Convert
+ nilfs_clear_dirty_pages() to use filemap_get_folios_tag()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -140,82 +142,52 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Convert function to use folios throughout. This is in preparation for
-the removal of find_get_pages_range_tag(). This change removes 8 calls
+the removal of find_get_pages_range_tag(). This change removes 2 calls
 to compound_head().
 
 Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
 Acked-by: Ryusuke Konishi <konishi.ryusuke@gmail.com>
 ---
- fs/nilfs2/page.c | 39 ++++++++++++++++++++-------------------
- 1 file changed, 20 insertions(+), 19 deletions(-)
+ fs/nilfs2/page.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/fs/nilfs2/page.c b/fs/nilfs2/page.c
-index 39b7eea2642a..d921542a9593 100644
+index d921542a9593..41ccd43cd979 100644
 --- a/fs/nilfs2/page.c
 +++ b/fs/nilfs2/page.c
-@@ -240,42 +240,43 @@ static void nilfs_copy_page(struct page *dst, struct page *src, int copy_dirty)
- int nilfs_copy_dirty_pages(struct address_space *dmap,
- 			   struct address_space *smap)
+@@ -358,22 +358,22 @@ void nilfs_copy_back_pages(struct address_space *dmap,
+  */
+ void nilfs_clear_dirty_pages(struct address_space *mapping, bool silent)
  {
 -	struct pagevec pvec;
 +	struct folio_batch fbatch;
  	unsigned int i;
  	pgoff_t index = 0;
- 	int err = 0;
  
 -	pagevec_init(&pvec);
 +	folio_batch_init(&fbatch);
- repeat:
--	if (!pagevec_lookup_tag(&pvec, smap, &index, PAGECACHE_TAG_DIRTY))
-+	if (!filemap_get_folios_tag(smap, &index, (pgoff_t)-1,
-+				PAGECACHE_TAG_DIRTY, &fbatch))
- 		return 0;
  
--	for (i = 0; i < pagevec_count(&pvec); i++) {
--		struct page *page = pvec.pages[i], *dpage;
-+	for (i = 0; i < folio_batch_count(&fbatch); i++) {
-+		struct folio *folio = fbatch.folios[i], *dfolio;
+-	while (pagevec_lookup_tag(&pvec, mapping, &index,
+-					PAGECACHE_TAG_DIRTY)) {
+-		for (i = 0; i < pagevec_count(&pvec); i++) {
+-			struct page *page = pvec.pages[i];
++	while (filemap_get_folios_tag(mapping, &index, (pgoff_t)-1,
++				PAGECACHE_TAG_DIRTY, &fbatch)) {
++		for (i = 0; i < folio_batch_count(&fbatch); i++) {
++			struct folio *folio = fbatch.folios[i];
  
--		lock_page(page);
--		if (unlikely(!PageDirty(page)))
--			NILFS_PAGE_BUG(page, "inconsistent dirty state");
-+		folio_lock(folio);
-+		if (unlikely(!folio_test_dirty(folio)))
-+			NILFS_PAGE_BUG(&folio->page, "inconsistent dirty state");
- 
--		dpage = grab_cache_page(dmap, page->index);
--		if (unlikely(!dpage)) {
-+		dfolio = filemap_grab_folio(dmap, folio->index);
-+		if (unlikely(!dfolio)) {
- 			/* No empty page is added to the page cache */
- 			err = -ENOMEM;
+-			lock_page(page);
+-			nilfs_clear_dirty_page(page, silent);
 -			unlock_page(page);
++			folio_lock(folio);
++			nilfs_clear_dirty_page(&folio->page, silent);
 +			folio_unlock(folio);
- 			break;
  		}
--		if (unlikely(!page_has_buffers(page)))
--			NILFS_PAGE_BUG(page,
-+		if (unlikely(!folio_buffers(folio)))
-+			NILFS_PAGE_BUG(&folio->page,
- 				       "found empty page in dat page cache");
- 
--		nilfs_copy_page(dpage, page, 1);
--		__set_page_dirty_nobuffers(dpage);
-+		nilfs_copy_page(&dfolio->page, &folio->page, 1);
-+		filemap_dirty_folio(folio_mapping(dfolio), dfolio);
- 
--		unlock_page(dpage);
--		put_page(dpage);
--		unlock_page(page);
-+		folio_unlock(dfolio);
-+		folio_put(dfolio);
-+		folio_unlock(folio);
+-		pagevec_release(&pvec);
++		folio_batch_release(&fbatch);
+ 		cond_resched();
  	}
--	pagevec_release(&pvec);
-+	folio_batch_release(&fbatch);
- 	cond_resched();
- 
- 	if (likely(!err))
+ }
 -- 
 2.38.1
 
