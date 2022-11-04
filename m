@@ -2,122 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D871618F1F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Nov 2022 04:37:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id F259361929E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Nov 2022 09:19:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oqnWO-00065M-VN;
-	Fri, 04 Nov 2022 03:37:32 +0000
+	id 1oqrun-0001ib-T1;
+	Fri, 04 Nov 2022 08:19:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <david@fromorbit.com>) id 1oqnW9-000658-AG
+ (envelope-from <Zhiguo.Niu@unisoc.com>) id 1oqruj-0001gt-7S
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Nov 2022 03:37:17 +0000
+ Fri, 04 Nov 2022 08:18:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
+ CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kCztCif6DGnUVPea69d1j6HBte1tInJ//NGbT2adCtA=; b=QhXx+Ok9nQeadwejoyJllrzFPV
- O+j0MSYgjQPpDaLchB3/uyUif36dH10PYWCIg6ypgySM8Jpr1hkfLbHL4DKtdu9PYXd93dAqvfiIP
- WNFkK9K6e1GPa6rPp06/waRIERK7qpvRP/C9TDx1nL0vHXIXhrZDAZNkZFIvj5HlipPk=;
+ bh=AihrJqgoVd3c0h3fHGKr/hWXiMuYzumF5CStDRHPXeo=; b=ZzApQNfOIKEvxTM7PkI22NceAf
+ Zddzpehi2yYNsI9/VL1as1thqVfQSs63ZM+vZIhxkuEgcN6WCs+ZlDa3MB9/8sZVslZywwcN1nhUP
+ eZgVIdXquaUhsrCfgUE7JRMqA2OPNOlB8CrWBzG/KM+59Gm3HgR1yo+bs7TWKxEfmPp8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=kCztCif6DGnUVPea69d1j6HBte1tInJ//NGbT2adCtA=; b=ip0/zPOyXCVsdpkwrl75kL1dts
- N4M4uju19U/0FaMaO08AhLTBKJ82qPk86Sro4b5vT1v98ydgxJFGatWgbeIvjSDegCZ8wmzJKZ3dn
- G21tum2skrTwoMpoL7+Rz6QwkChK7JDCm8mXk4g9JsGwnfdyoRu0wgIP0QiW3BOVYu6E=;
-Received: from mail-pg1-f169.google.com ([209.85.215.169])
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=AihrJqgoVd3c0h3fHGKr/hWXiMuYzumF5CStDRHPXeo=; b=j
+ 0DSdEATwfuvyEr1CQfSzxHrUq08kFRGfqZpgQOOxyoN/IKqeCzcpMjc2Eq5ATr7OhbODNOj8cg+d0
+ qluGX9FaHA6DuIwbc7X5v3kYhxzhqRv059NtaomRhbD7brBtIUoUX2qB0Hf6Uv8pY75pq0Nte09mi
+ Ho4dHm/qROI4xj1E=;
+Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.unisoc.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1oqnW0-00BHCo-SZ for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Nov 2022 03:37:17 +0000
-Received: by mail-pg1-f169.google.com with SMTP id f63so3373061pgc.2
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1oqruh-00BSaa-Oa for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 04 Nov 2022 08:18:57 +0000
+Received: from SHSQR01.spreadtrum.com (localhost [127.0.0.2] (may be forged))
+ by SHSQR01.unisoc.com with ESMTP id 2A47fopi019002
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 03 Nov 2022 20:37:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fromorbit-com.20210112.gappssmtp.com; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kCztCif6DGnUVPea69d1j6HBte1tInJ//NGbT2adCtA=;
- b=uj2thbHtG/d+GBBCufhO7rN+QkuEm7zsR1utnZpf1jQ6jQI6apkQTpUS2wcEmA9aNC
- VnDMe2rmlwjjtPUJR6RVdf+UJIK/YCtwiDAFrNIV7Nt++fXhl9nREiFkHf0RyMEPfvfO
- onGWmNN1ovJwkvkYC6fzzHZz7zyvVev9H3OguSEusghpv0YPPtdfeKpV8TCgCnMYqtfc
- Ksic71C8032fBMagPD7RLDMZgSbzkcCWA6HBFsZEVIK8PskhHmcNukEVkFYsBkmvmeoC
- g/qCQdT1fcwEOyEG1ZYfH8GugnyK0CKLKk6hzKwIFkwwhNd+ojc6bS3gdGaV6YzySSoe
- prLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kCztCif6DGnUVPea69d1j6HBte1tInJ//NGbT2adCtA=;
- b=Hs8JDkO9ckJgzKb0x09qVk8t/xtGpHtLV3+xS4RgMg7QAAnD7sGlBEyNvaSp64wC9C
- tEZS5qfJqDZLdhsFC+rZJ5XiD5XZISRG3w2MQMLx2rfE04NmhZFpkRN6pQ0m0OhHptZD
- DA8OMuVKLS7zyCL9GiObbEJ1JH7ut5yk6rMuvNgGnjXwCT5RfM6AE/PbsGn+kLI22T7b
- FVaO+u5IheHfpOzzW8CBPAFzrxPk0l+F5HHtqDWXhFZOtSATqLa5qm6mb9uNuF6Pk0Ef
- xMOy4417bzXw7+aBq/ozCkNxVDwvauo8BdlixDMtjmKtlTCNHPYhpvuuiMN/h2JeBkj1
- OvjA==
-X-Gm-Message-State: ACrzQf3fB2QF6bKd6tk7JIsRFlnNJ30PGwcJNyOZ5BzJH4xR+RxUYDWm
- sMhCL/qmAYdncqmeeHZzjArF0g==
-X-Google-Smtp-Source: AMsMyM7NwhgMGw/Ejg/10+QrYuOi1WfTIe60hww1ZNfzsfJwCZnIyT2jB8JwYZIzMahLdSnJ6wzgKQ==
-X-Received: by 2002:a05:6a00:2396:b0:56c:b770:eda6 with SMTP id
- f22-20020a056a00239600b0056cb770eda6mr33239633pfc.38.1667533023291; 
- Thu, 03 Nov 2022 20:37:03 -0700 (PDT)
-Received: from dread.disaster.area (pa49-181-106-210.pa.nsw.optusnet.com.au.
- [49.181.106.210]) by smtp.gmail.com with ESMTPSA id
- x13-20020a170902a38d00b001830ed575c3sm1430190pla.117.2022.11.03.20.37.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Nov 2022 20:37:02 -0700 (PDT)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1oqnVr-00A1XB-Bm; Fri, 04 Nov 2022 14:36:59 +1100
-Date: Fri, 4 Nov 2022 14:36:59 +1100
-From: Dave Chinner <david@fromorbit.com>
-To: "Darrick J. Wong" <djwong@kernel.org>
-Message-ID: <20221104033659.GA2703033@dread.disaster.area>
-References: <20220901220138.182896-1-vishal.moola@gmail.com>
- <20220901220138.182896-5-vishal.moola@gmail.com>
- <20221018210152.GH2703033@dread.disaster.area>
- <Y2RAdUtJrOJmYU4L@fedora>
- <20221104003235.GZ2703033@dread.disaster.area>
- <Y2R8rRr0ZdrlT32m@magnolia>
+ Fri, 4 Nov 2022 15:41:50 +0800 (CST)
+ (envelope-from Zhiguo.Niu@unisoc.com)
+Received: from SHSend.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
+ by SHSQR01.spreadtrum.com with ESMTPS id 2A47epYA004466
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NO);
+ Fri, 4 Nov 2022 15:40:51 +0800 (CST)
+ (envelope-from Zhiguo.Niu@unisoc.com)
+Received: from bj08434pcu.spreadtrum.com (10.0.74.109) by
+ BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.23; Fri, 4 Nov 2022 15:40:51 +0800
+From: "zhiguo.niu" <zhiguo.niu@unisoc.com>
+To: <jaegeuk@kernel.org>, <chao@kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>, <linux-kernel@vger.kernel.org>
+Date: Fri, 4 Nov 2022 15:40:21 +0800
+Message-ID: <1667547621-26175-1-git-send-email-zhiguo.niu@unisoc.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Y2R8rRr0ZdrlT32m@magnolia>
+X-Originating-IP: [10.0.74.109]
+X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
+ BJMBX02.spreadtrum.com (10.0.64.8)
+X-MAIL: SHSQR01.spreadtrum.com 2A47epYA004466
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Nov 03, 2022 at 07:45:01PM -0700, Darrick J. Wong
- wrote: > On Fri, Nov 04, 2022 at 11:32:35AM +1100, Dave Chinner wrote: > >
- On Thu, Nov 03, 2022 at 03:28:05PM -0700, Vishal Moola wrote: > > > [...]
+ Content preview: From: Zhiguo Niu <zhiguo.niu@unisoc.com> There is bug on
+ issue
+ after atgc feature is enabled in 32bits platform as the following log: F2FS-fs
+ (dm-x): inconsistent rbtree, cur(3470333575168) next(3320009719808) [ cut
+ here ] kernel BUG at fs/f2fs/gc.c:602! Internal error: Oops - BUG: 0 [#1]
+ PREEMPT SMP ARM PC i [...] 
  Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.215.169 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.169 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1oqnW0-00BHCo-SZ
-Subject: Re: [f2fs-dev] [PATCH 04/23] page-writeback: Convert
- write_cache_pages() to use filemap_get_folios_tag()
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+X-Headers-End: 1oqruh-00BSaa-Oa
+Subject: [f2fs-dev] [PATCH] f2fs: fix atgc bug on issue in 32bits platform
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -129,77 +94,73 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, cluster-devel@redhat.com,
- linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, Vishal Moola <vishal.moola@gmail.com>,
- linux-mm@kvack.org, linux-nilfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- ceph-devel@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-afs@lists.infradead.org, linux-btrfs@vger.kernel.org
+Cc: zhiguo.niu@unisoc.com, niuzhiguo84@gmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Nov 03, 2022 at 07:45:01PM -0700, Darrick J. Wong wrote:
-> On Fri, Nov 04, 2022 at 11:32:35AM +1100, Dave Chinner wrote:
-> > On Thu, Nov 03, 2022 at 03:28:05PM -0700, Vishal Moola wrote:
-> > > On Wed, Oct 19, 2022 at 08:01:52AM +1100, Dave Chinner wrote:
-> > > > On Thu, Sep 01, 2022 at 03:01:19PM -0700, Vishal Moola (Oracle) wrote:
-> > > > > -			BUG_ON(PageWriteback(page));
-> > > > > -			if (!clear_page_dirty_for_io(page))
-> > > > > +			BUG_ON(folio_test_writeback(folio));
-> > > > > +			if (!folio_clear_dirty_for_io(folio))
-> > > > >  				goto continue_unlock;
-> > > > >  
-> > > > >  			trace_wbc_writepage(wbc, inode_to_bdi(mapping->host));
-> > > > > -			error = (*writepage)(page, wbc, data);
-> > > > > +			error = writepage(&folio->page, wbc, data);
-> > > > 
-> > > > Yet, IIUC, this treats all folios as if they are single page folios.
-> > > > i.e. it passes the head page of a multi-page folio to a callback
-> > > > that will treat it as a single PAGE_SIZE page, because that's all
-> > > > the writepage callbacks are currently expected to be passed...
-> > > > 
-> > > > So won't this break writeback of dirty multipage folios?
-> > > 
-> > > Yes, it appears it would. But it wouldn't because its already 'broken'.
-> > 
-> > It is? Then why isn't XFS broken on existing kernels? Oh, we don't
-> > know because it hasn't been tested?
-> > 
-> > Seriously - if this really is broken, and this patchset further
-> > propagating the brokeness, then somebody needs to explain to me why
-> > this is not corrupting data in XFS.
-> 
-> It looks like iomap_do_writepage finds the folio size correctly
-> 
-> 	end_pos = folio_pos(folio) + folio_size(folio);
-> 
-> and iomap_writpage_map will map out the correct number of blocks
-> 
-> 	unsigned nblocks = i_blocks_per_folio(inode, folio);
-> 
-> 	for (i = 0; i < nblocks && pos < end_pos; i++, pos += len) {
-> 
-> right?
+From: Zhiguo Niu <zhiguo.niu@unisoc.com>
 
-Yup, that's how I read it, too.
+There is bug on issue after atgc feature is enabled in
+32bits platform as the following log:
 
-But my recent experience with folios involved being repeatedly
-burnt by edge case corruptions due to multipage folios showing up
-when and where I least expected them.
+F2FS-fs (dm-x): inconsistent rbtree, cur(3470333575168) next(3320009719808)
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/gc.c:602!
+Internal error: Oops - BUG: 0 [#1] PREEMPT SMP ARM
+PC is at get_victim_by_default+0x13c0/0x1498
+LR is at f2fs_check_rb_tree_consistence+0xc4/0xd4
+....
+[<c04d98b0>] (get_victim_by_default) from [<c04d4f44>] (f2fs_gc+0x220/0x6cc)
+[<c04d4f44>] (f2fs_gc) from [<c04d4780>] (gc_thread_func+0x2ac/0x708)
+[<c04d4780>] (gc_thread_func) from [<c015c774>] (kthread+0x1a8/0x1b4)
+[<c015c774>] (kthread) from [<c01010b4>] (ret_from_fork+0x14/0x20)
 
-Hence doing a 1:1 conversion of page based code to folio based code
-and just assuming large folios will work without any testing seems
-akin to playing russian roulette with loose cannons that have been
-doused with napalm and then set on fire by an air-dropped barrel
-bomb...
+The reason is the 64bits key in struct rb_entry has __packed attibute
+but has not in struct victim_entry, so the wrong key value got by
+in f2fs_check_rb_tree_consistence, the following are the memory layouts
+of struct rb_entry and struct victim_entry in 32bits platform:
 
-Cheers,
+struct rb_entry {
+   [0] struct rb_node rb_node;
+       union {
+           struct {...};
+  [12]     unsigned long long key;
+       };
+}
+struct victim_entry {
+   [0] struct rb_node rb_node;
+       union {
+           struct {...};
+  [16]     struct victim_info vi;
+       };
+  [32] struct list_head list;
+}
 
-Dave.
+This patch fix this inconsistence layout of 64bits key between
+struct rb_entry and struct victim_entry.
+
+Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
+---
+ fs/f2fs/gc.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+index 19b956c2d697..9a03c6502b39 100644
+--- a/fs/f2fs/gc.h
++++ b/fs/f2fs/gc.h
+@@ -68,7 +68,7 @@ struct victim_entry {
+ 			unsigned int segno;		/* segment No. */
+ 		};
+ 		struct victim_info vi;	/* victim info */
+-	};
++	} __packed;
+ 	struct list_head list;
+ };
+ 
 -- 
-Dave Chinner
-david@fromorbit.com
+2.17.1
+
 
 
 _______________________________________________
