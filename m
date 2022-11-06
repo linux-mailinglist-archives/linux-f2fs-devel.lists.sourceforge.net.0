@@ -2,64 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ADD561E142
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  6 Nov 2022 10:19:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 154AE61E167
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  6 Nov 2022 10:49:28 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1orboK-0000Q4-6K;
-	Sun, 06 Nov 2022 09:19:24 +0000
+	id 1orcHL-0000zy-Tc;
+	Sun, 06 Nov 2022 09:49:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1orbo7-0000Pr-KP
+ (envelope-from <chao@kernel.org>) id 1orcHI-0000zj-23
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 06 Nov 2022 09:19:11 +0000
+ Sun, 06 Nov 2022 09:49:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=I9flChWNWVzCUtL+SBqufmVQDLpOkPiIIQ4QL0HuSIk=; b=Aga2pO8UwRZnMjWYIR29Zh7Lli
- xziZBHbnaClp9f508Ao2thAxilst1v9n+mQZ/ZF4/9DP6/qUY1egoovgOc7OdzVgfmEgpI0YSn6cR
- 8cfoXmjlkQA+6KaX3wxn/OW2hHCUUDaKJUGuGkCBAqxCb70GOsFl4aqSL14aKDYzR7O0=;
+ bh=3hHl3M4unfg9iAvscWP4Ydk2FKBZFJIjOYqW7CUuezc=; b=Ekbj2idpbe830W4kxisUNl9skU
+ 4uRtVNr+haRMdTeI8PI5UymeAZr9V34oSs1N8a8DbA70siNG7C8OW8fLiX4zb0maqxt6nadytefW7
+ 8vk8cu2mXKmlDHAyeAmG3fD1Hymw4rhUXA+xm5z4MUTnxciHCYEr0aa8CfC5Mi+dnW+k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=I9flChWNWVzCUtL+SBqufmVQDLpOkPiIIQ4QL0HuSIk=; b=P
- aJFMaQOFcP5IX6tr/LlKbExeOcdDDPZ1W/9tIJOqnsfyB0fDOtjOPl4DpO3sTPLtCiIX7uq7gyuV6
- gKCkUNjKIHmhUw8XAENGejKSbWWmq4rpFBGcvXdStSJfHq0lCrJExoQ2Sar9287SX2Uu4DdQy1q8X
- h5eQCJ3jCoHaARn0=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=3hHl3M4unfg9iAvscWP4Ydk2FKBZFJIjOYqW7CUuezc=; b=J
+ SvFSLrDxG4KlCuAIe5P68kMFF1Rv4hn0+ooYJALtiJGEIuc9T3IXDLlsWE4etI4ToAo+Q5PMKiQwC
+ 5mJakAD/jaFrEvtFUC4teQeUKqTRaa54IY6wtYWtyrRwEw00m1LrA6agwKopbmFMvzvQm7AR/0f0M
+ AXj0lXy+W+BttpLc=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1orbo5-00DxjW-9q for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 06 Nov 2022 09:19:11 +0000
+ id 1orcHG-0005E0-2G for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 06 Nov 2022 09:49:19 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 9F2F9B80B2A;
- Sun,  6 Nov 2022 09:19:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05924C433C1;
- Sun,  6 Nov 2022 09:18:59 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2F60F60C01;
+ Sun,  6 Nov 2022 09:49:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05551C433D6;
+ Sun,  6 Nov 2022 09:49:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1667726341;
- bh=bCdeBKiPSqAKr55ZoNMPeBoeVIxPyeQ1u/isy0TDkjs=;
+ s=k20201202; t=1667728145;
+ bh=/3J3K4T2zDP17/yegl4QUIVFBcn3+M5lXwbalWCE2mA=;
  h=From:To:Cc:Subject:Date:From;
- b=eamfVlrGWZ9rYjL0neK5UEXKKWpp2v6CYhUkjAoHDVbbzNB77dwt/PZQLiWA96vRs
- O5aURIAj3eGZJy8CEt+1b64OBh31i7l9qA7ieIHl2bFUXCfFNxZVoEuP7gHH4WSid7
- CMSu3YKFc6enT2jmKn67SogIQ+nEbpPDF2hA3qWVfnAT1suK44qFMkoHIr/GS4XU6G
- zCDUdGTqL637IbObN++6qaDSwS7TBGSUIt76NFnbpwvLTOXFVUW/Ic4g6wI12r3DIM
- n0XzLW8V3Z5Ivaof0jtQCyu2bAVR7Z8fHqXsm07XS1N0i0Rv6FncgwKFgu6T52zWz3
- HF+qtCkNCm3Yw==
+ b=Z2Nk+cZClDHW6V/lWjQXKCDQ0jfxn4VZOCPuTZ6gm0QoE8CpONzrmdbpZIeMOVU8P
+ hE38IxujJB5ApZ+7Jn3MowucGWbaIxaJRbczWzhNIbx80CQFSQ+1kaaL7g/DjR3bnu
+ GDsH1v9DWH0NaLfYFlBejvN1h6iKd8qFYJlbOvfNMZcaPyipkO/Yu4flIUIfBbNn7u
+ foPlN5/0RYlh9A3chWc0QhxqL/VCJMihFcNlZDOkWReiDwYoyn0lctYYGT4HDy9Jbo
+ GOAr65wL+j2/wT4gOlNCkBOOJ7QQnPb7Cqg336w+cTLtgPTNjhWYrQWgZRf1ybccFs
+ CSZm151KuhbZQ==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Sun,  6 Nov 2022 17:18:55 +0800
-Message-Id: <20221106091855.129984-1-chao@kernel.org>
+Date: Sun,  6 Nov 2022 17:48:55 +0800
+Message-Id: <20221106094855.131967-1-chao@kernel.org>
 X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
 X-Spam-Score: -5.9 (-----)
@@ -69,17 +69,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This patch supports errors=remount-ro|continue|panic mount
- option. Signed-off-by: Chao Yu <chao@kernel.org> Signed-off-by: Yangtao Li
- <frank.li@vivo.com> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> --- v5:
- - skip in gc/discard thread instead of stopping them, lea [...] 
+ Content preview: Wei Chen reports a kernel bug as blew: INFO: task
+ syz-executor.0:29056
+ blocked for more than 143 seconds. Not tainted 5.15.0-rc5 #1 "echo 0 >
+ /proc/sys/kernel/hung_task_timeout_secs"
+ disables this message. task:syz-executor.0 state:D stack [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -88,9 +89,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1orbo5-00DxjW-9q
-Subject: [f2fs-dev] [PATCH v5] f2fs: support
- errors=remount-ro|continue|panic mountoption
+X-Headers-End: 1orcHG-0005E0-2G
+Subject: [f2fs-dev] [PATCH] f2fs: speed up f2fs_empty_dir()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,410 +102,281 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Yangtao Li <frank.li@vivo.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Wei Chen <harperchen1110@gmail.com>, Eric Biggers <ebiggers@google.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch supports errors=remount-ro|continue|panic mount option.
+Wei Chen reports a kernel bug as blew:
 
+INFO: task syz-executor.0:29056 blocked for more than 143 seconds.
+      Not tainted 5.15.0-rc5 #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz-executor.0  state:D stack:14632 pid:29056 ppid:  6574 flags:0x00000004
+Call Trace:
+ __schedule+0x4a1/0x1720
+ schedule+0x36/0xe0
+ rwsem_down_write_slowpath+0x322/0x7a0
+ fscrypt_ioctl_set_policy+0x11f/0x2a0
+ __f2fs_ioctl+0x1a9f/0x5780
+ f2fs_ioctl+0x89/0x3a0
+ __x64_sys_ioctl+0xe8/0x140
+ do_syscall_64+0x34/0xb0
+ entry_SYSCALL_64_after_hwframe+0x44/0xae
+
+Eric did some investigation on this issue, quoted from reply of Eric:
+
+"Well, the quality of this bug report has a lot to be desired (not on
+upstream kernel, reproducer is full of totally irrelevant stuff, not
+sent to the mailing list of the filesystem whose disk image is being
+fuzzed, etc.).  But what is going on is that f2fs_empty_dir() doesn't
+consider the case of a directory with an extremely large i_size on a
+malicious disk image.
+
+Specifically, the reproducer mounts an f2fs image with a directory
+that has an i_size of 14814520042850357248, then calls
+FS_IOC_SET_ENCRYPTION_POLICY on it.
+
+That results in a call to f2fs_empty_dir() to check whether the
+directory is empty.  f2fs_empty_dir() then iterates through all
+3616826182336513 blocks the directory allegedly contains to check
+whether any contain anything.  i_rwsem is held during this, so
+anything else that tries to take it will hang."
+
+In order to solve this issue, let's use f2fs_get_next_page_offset()
+to speed up iteration by skipping holes for all below functions:
+- f2fs_empty_dir
+- f2fs_readdir
+- find_in_level
+
+The way why we can speed up iteration was described in
+'commit 3cf4574705b4 ("f2fs: introduce get_next_page_offset to speed
+up SEEK_DATA")'.
+
+Meanwhile, in f2fs_empty_dir(), let's use f2fs_find_data_page()
+instead f2fs_get_lock_data_page(), due to i_rwsem was held in
+caller of f2fs_empty_dir(), there shouldn't be any races, so it's
+fine to not lock dentry page during lookuping dirents in the page.
+
+Link: https://lore.kernel.org/lkml/536944df-a0ae-1dd8-148f-510b476e1347@kernel.org/T/
+Reported-by: Wei Chen <harperchen1110@gmail.com>
+Cc: Eric Biggers <ebiggers@google.com>
 Signed-off-by: Chao Yu <chao@kernel.org>
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
-v5:
-- skip in gc/discard thread instead of stopping them, leave flush/ckpt
-thread as running status.
- Documentation/filesystems/f2fs.rst |   4 +
- fs/f2fs/checkpoint.c               |   7 +-
- fs/f2fs/f2fs.h                     |  18 +++-
- fs/f2fs/file.c                     |   5 --
- fs/f2fs/gc.c                       |   2 +-
- fs/f2fs/super.c                    | 135 ++++++++++++++++++++++++++---
- 6 files changed, 147 insertions(+), 24 deletions(-)
+ fs/f2fs/data.c | 17 ++++++++++++-----
+ fs/f2fs/dir.c  | 34 ++++++++++++++++++++++++----------
+ fs/f2fs/f2fs.h |  5 +++--
+ fs/f2fs/gc.c   |  4 ++--
+ 4 files changed, 41 insertions(+), 19 deletions(-)
 
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index 6e67c5e6c7c3..1d73bc91b9ae 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -343,6 +343,10 @@ memory=%s		 Control memory mode. This supports "normal" and "low" modes.
- 			 Because of the nature of low memory devices, in this mode, f2fs
- 			 will try to save memory sometimes by sacrificing performance.
- 			 "normal" mode is the default mode and same as before.
-+errors=%s		 Specify f2fs behavior on critical errors. This supports modes:
-+			 "panic", "continue" and "remount-ro", respectively, trigger
-+			 panic immediately, continue without doing anything, and remount
-+			 the partition in read-only mode (default behavior).
- ======================== ============================================================
- 
- Debugfs Entries
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 56f7d0d6a8b2..913cea4ebea4 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -30,12 +30,9 @@ void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io,
- 						unsigned char reason)
- {
- 	f2fs_build_fault_attr(sbi, 0, 0);
--	set_ckpt_flags(sbi, CP_ERROR_FLAG);
--	if (!end_io) {
-+	if (!end_io)
- 		f2fs_flush_merged_writes(sbi);
--
--		f2fs_handle_stop(sbi, reason);
--	}
-+	f2fs_handle_critical_error(sbi, reason, end_io);
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 51f7ae777711..560fa80590e9 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1206,7 +1206,8 @@ int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index)
  }
  
- /*
+ struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
+-				     blk_opf_t op_flags, bool for_write)
++				     blk_opf_t op_flags, bool for_write,
++				     pgoff_t *next_pgofs)
+ {
+ 	struct address_space *mapping = inode->i_mapping;
+ 	struct dnode_of_data dn;
+@@ -1232,12 +1233,17 @@ struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
+ 
+ 	set_new_dnode(&dn, inode, NULL, NULL, 0);
+ 	err = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
+-	if (err)
++	if (err) {
++		if (err == -ENOENT && next_pgofs)
++			*next_pgofs = f2fs_get_next_page_offset(&dn, index);
+ 		goto put_err;
++	}
+ 	f2fs_put_dnode(&dn);
+ 
+ 	if (unlikely(dn.data_blkaddr == NULL_ADDR)) {
+ 		err = -ENOENT;
++		if (next_pgofs)
++			*next_pgofs = index + 1;
+ 		goto put_err;
+ 	}
+ 	if (dn.data_blkaddr != NEW_ADDR &&
+@@ -1281,7 +1287,8 @@ struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
+ 	return ERR_PTR(err);
+ }
+ 
+-struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index)
++struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index,
++					pgoff_t *next_pgofs)
+ {
+ 	struct address_space *mapping = inode->i_mapping;
+ 	struct page *page;
+@@ -1291,7 +1298,7 @@ struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index)
+ 		return page;
+ 	f2fs_put_page(page, 0);
+ 
+-	page = f2fs_get_read_data_page(inode, index, 0, false);
++	page = f2fs_get_read_data_page(inode, index, 0, false, next_pgofs);
+ 	if (IS_ERR(page))
+ 		return page;
+ 
+@@ -1317,7 +1324,7 @@ struct page *f2fs_get_lock_data_page(struct inode *inode, pgoff_t index,
+ 	struct address_space *mapping = inode->i_mapping;
+ 	struct page *page;
+ repeat:
+-	page = f2fs_get_read_data_page(inode, index, 0, for_write);
++	page = f2fs_get_read_data_page(inode, index, 0, for_write, NULL);
+ 	if (IS_ERR(page))
+ 		return page;
+ 
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index 21960a899b6a..030b7fd4142f 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -340,6 +340,7 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
+ 	unsigned int bidx, end_block;
+ 	struct page *dentry_page;
+ 	struct f2fs_dir_entry *de = NULL;
++	pgoff_t next_pgofs;
+ 	bool room = false;
+ 	int max_slots;
+ 
+@@ -350,12 +351,13 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
+ 			       le32_to_cpu(fname->hash) % nbucket);
+ 	end_block = bidx + nblock;
+ 
+-	for (; bidx < end_block; bidx++) {
++	while (bidx < end_block) {
+ 		/* no need to allocate new dentry pages to all the indices */
+-		dentry_page = f2fs_find_data_page(dir, bidx);
++		dentry_page = f2fs_find_data_page(dir, bidx, &next_pgofs);
+ 		if (IS_ERR(dentry_page)) {
+ 			if (PTR_ERR(dentry_page) == -ENOENT) {
+ 				room = true;
++				bidx = next_pgofs;
+ 				continue;
+ 			} else {
+ 				*res_page = dentry_page;
+@@ -376,6 +378,8 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
+ 		if (max_slots >= s)
+ 			room = true;
+ 		f2fs_put_page(dentry_page, 0);
++
++		bidx++;
+ 	}
+ 
+ 	if (!de && room && F2FS_I(dir)->chash != fname->hash) {
+@@ -956,7 +960,7 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
+ 
+ bool f2fs_empty_dir(struct inode *dir)
+ {
+-	unsigned long bidx;
++	unsigned long bidx = 0;
+ 	struct page *dentry_page;
+ 	unsigned int bit_pos;
+ 	struct f2fs_dentry_block *dentry_blk;
+@@ -965,13 +969,17 @@ bool f2fs_empty_dir(struct inode *dir)
+ 	if (f2fs_has_inline_dentry(dir))
+ 		return f2fs_empty_inline_dir(dir);
+ 
+-	for (bidx = 0; bidx < nblock; bidx++) {
+-		dentry_page = f2fs_get_lock_data_page(dir, bidx, false);
++	while (bidx < nblock) {
++		pgoff_t next_pgofs;
++
++		dentry_page = f2fs_find_data_page(dir, bidx, &next_pgofs);
+ 		if (IS_ERR(dentry_page)) {
+-			if (PTR_ERR(dentry_page) == -ENOENT)
++			if (PTR_ERR(dentry_page) == -ENOENT) {
++				bidx = next_pgofs;
+ 				continue;
+-			else
++			} else {
+ 				return false;
++			}
+ 		}
+ 
+ 		dentry_blk = page_address(dentry_page);
+@@ -983,10 +991,12 @@ bool f2fs_empty_dir(struct inode *dir)
+ 						NR_DENTRY_IN_BLOCK,
+ 						bit_pos);
+ 
+-		f2fs_put_page(dentry_page, 1);
++		f2fs_put_page(dentry_page, 0);
+ 
+ 		if (bit_pos < NR_DENTRY_IN_BLOCK)
+ 			return false;
++
++		bidx++;
+ 	}
+ 	return true;
+ }
+@@ -1104,7 +1114,8 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
+ 		goto out_free;
+ 	}
+ 
+-	for (; n < npages; n++, ctx->pos = n * NR_DENTRY_IN_BLOCK) {
++	for (; n < npages; ctx->pos = n * NR_DENTRY_IN_BLOCK) {
++		pgoff_t next_pgofs;
+ 
+ 		/* allow readdir() to be interrupted */
+ 		if (fatal_signal_pending(current)) {
+@@ -1118,11 +1129,12 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
+ 			page_cache_sync_readahead(inode->i_mapping, ra, file, n,
+ 				min(npages - n, (pgoff_t)MAX_DIR_RA_PAGES));
+ 
+-		dentry_page = f2fs_find_data_page(inode, n);
++		dentry_page = f2fs_find_data_page(inode, n, &next_pgofs);
+ 		if (IS_ERR(dentry_page)) {
+ 			err = PTR_ERR(dentry_page);
+ 			if (err == -ENOENT) {
+ 				err = 0;
++				n = next_pgofs;
+ 				continue;
+ 			} else {
+ 				goto out_free;
+@@ -1141,6 +1153,8 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
+ 		}
+ 
+ 		f2fs_put_page(dentry_page, 0);
++
++		n++;
+ 	}
+ out_free:
+ 	fscrypt_fname_free_buffer(&fstr);
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 04ef4cce3d7f..af9e114d03a6 100644
+index c767cc714958..473f2902435d 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -161,6 +161,7 @@ struct f2fs_mount_info {
- 	int fs_mode;			/* fs mode: LFS or ADAPTIVE */
- 	int bggc_mode;			/* bggc mode: off, on or sync */
- 	int memory_mode;		/* memory mode */
-+	int errors;			/* errors parameter */
- 	int discard_unit;		/*
- 					 * discard command's offset/size should
- 					 * be aligned to this unit: block,
-@@ -1381,7 +1382,11 @@ enum {
- 	MEMORY_MODE_LOW,	/* memory mode for low memry devices */
- };
- 
--
-+enum errors_option {
-+	MOUNT_ERRORS_READONLY,	/* remount fs ro on errors */
-+	MOUNT_ERRORS_CONTINUE,	/* continue on errors */
-+	MOUNT_ERRORS_PANIC,	/* panic on errors */
-+};
- 
- static inline int f2fs_test_bit(unsigned int nr, char *addr);
- static inline void f2fs_set_bit(unsigned int nr, char *addr);
-@@ -1818,7 +1823,13 @@ struct f2fs_sb_info {
- 
- 	struct workqueue_struct *post_read_wq;	/* post read workqueue */
- 
--	unsigned char errors[MAX_F2FS_ERRORS];	/* error flags */
-+	/*
-+	 * If we are in irq context, let's update error information into
-+	 * on-disk superblock in the work.
-+	 */
-+	struct work_struct s_error_work;
-+	unsigned char errors[MAX_F2FS_ERRORS];		/* error flags */
-+	unsigned char stop_reason[MAX_STOP_REASON];	/* stop reason */
- 	spinlock_t error_lock;			/* protect errors array */
- 	bool error_dirty;			/* errors of sb is dirty */
- 
-@@ -3563,7 +3574,8 @@ int f2fs_enable_quota_files(struct f2fs_sb_info *sbi, bool rdonly);
- int f2fs_quota_sync(struct super_block *sb, int type);
- loff_t max_file_blocks(struct inode *inode);
- void f2fs_quota_off_umount(struct super_block *sb);
--void f2fs_handle_stop(struct f2fs_sb_info *sbi, unsigned char reason);
-+void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
-+							bool irq_context);
- void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error);
- int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover);
- int f2fs_sync_fs(struct super_block *sb, int sync);
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index c605a4f2bce2..9df5fac57666 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2197,7 +2197,6 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
- 				ret = 0;
- 				f2fs_stop_checkpoint(sbi, false,
- 						STOP_CP_REASON_SHUTDOWN);
--				set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
- 				trace_f2fs_shutdown(sbi, in, ret);
- 			}
- 			return ret;
-@@ -2210,7 +2209,6 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
- 		if (ret)
- 			goto out;
- 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_SHUTDOWN);
--		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
- 		thaw_bdev(sb->s_bdev);
- 		break;
- 	case F2FS_GOING_DOWN_METASYNC:
-@@ -2219,16 +2217,13 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
- 		if (ret)
- 			goto out;
- 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_SHUTDOWN);
--		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
- 		break;
- 	case F2FS_GOING_DOWN_NOSYNC:
- 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_SHUTDOWN);
--		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
- 		break;
- 	case F2FS_GOING_DOWN_METAFLUSH:
- 		f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_META_IO);
- 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_SHUTDOWN);
--		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
- 		break;
- 	case F2FS_GOING_DOWN_NEED_FSCK:
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+@@ -3820,8 +3820,9 @@ int f2fs_reserve_new_block(struct dnode_of_data *dn);
+ int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index);
+ int f2fs_reserve_block(struct dnode_of_data *dn, pgoff_t index);
+ struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
+-			blk_opf_t op_flags, bool for_write);
+-struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index);
++			blk_opf_t op_flags, bool for_write, pgoff_t *next_pgofs);
++struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index,
++							pgoff_t *next_pgofs);
+ struct page *f2fs_get_lock_data_page(struct inode *inode, pgoff_t index,
+ 			bool for_write);
+ struct page *f2fs_get_new_data_page(struct inode *inode,
 diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 6466db75af5d..72f165048a3c 100644
+index 72f165048a3c..69d7d8db3daa 100644
 --- a/fs/f2fs/gc.c
 +++ b/fs/f2fs/gc.c
-@@ -59,7 +59,7 @@ static int gc_thread_func(void *data)
- 		if (gc_th->gc_wake)
- 			gc_th->gc_wake = 0;
- 
--		if (try_to_freeze()) {
-+		if (try_to_freeze() || f2fs_readonly(sbi->sb)) {
- 			stat_other_skip_bggc_count(sbi);
- 			continue;
- 		}
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 5fc800444f86..3f394bd9389b 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -163,6 +163,7 @@ enum {
- 	Opt_nogc_merge,
- 	Opt_discard_unit,
- 	Opt_memory_mode,
-+	Opt_errors,
- 	Opt_err,
- };
- 
-@@ -241,6 +242,7 @@ static match_table_t f2fs_tokens = {
- 	{Opt_nogc_merge, "nogc_merge"},
- 	{Opt_discard_unit, "discard_unit=%s"},
- 	{Opt_memory_mode, "memory=%s"},
-+	{Opt_errors, "errors=%s"},
- 	{Opt_err, NULL},
- };
- 
-@@ -1259,6 +1261,25 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+@@ -1562,8 +1562,8 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 				continue;
  			}
- 			kfree(name);
- 			break;
-+		case Opt_errors:
-+			name = match_strdup(&args[0]);
-+			if (!name)
-+				return -ENOMEM;
-+			if (!strcmp(name, "remount-ro")) {
-+				F2FS_OPTION(sbi).errors =
-+						MOUNT_ERRORS_READONLY;
-+			} else if (!strcmp(name, "continue")) {
-+				F2FS_OPTION(sbi).errors =
-+						MOUNT_ERRORS_CONTINUE;
-+			} else if (!strcmp(name, "panic")) {
-+				F2FS_OPTION(sbi).errors =
-+						MOUNT_ERRORS_PANIC;
-+			} else {
-+				kfree(name);
-+				return -EINVAL;
-+			}
-+			kfree(name);
-+			break;
- 		default:
- 			f2fs_err(sbi, "Unrecognized mount option \"%s\" or missing value",
- 				 p);
-@@ -1621,6 +1642,9 @@ static void f2fs_put_super(struct super_block *sb)
- 	f2fs_destroy_node_manager(sbi);
- 	f2fs_destroy_segment_manager(sbi);
  
-+	/* flush s_error_work before sbi destroy */
-+	flush_work(&sbi->s_error_work);
-+
- 	f2fs_destroy_post_read_wq(sbi);
- 
- 	kvfree(sbi->ckpt);
-@@ -2047,6 +2071,13 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
- 	else if (F2FS_OPTION(sbi).memory_mode == MEMORY_MODE_LOW)
- 		seq_printf(seq, ",memory=%s", "low");
- 
-+	if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_READONLY)
-+		seq_printf(seq, ",errors=%s", "remount-ro");
-+	else if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_CONTINUE)
-+		seq_printf(seq, ",errors=%s", "continue");
-+	else if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_PANIC)
-+		seq_printf(seq, ",errors=%s", "panic");
-+
- 	return 0;
- }
- 
-@@ -2069,6 +2100,7 @@ static void default_options(struct f2fs_sb_info *sbi)
- 	F2FS_OPTION(sbi).compress_mode = COMPR_MODE_FS;
- 	F2FS_OPTION(sbi).bggc_mode = BGGC_MODE_ON;
- 	F2FS_OPTION(sbi).memory_mode = MEMORY_MODE_NORMAL;
-+	F2FS_OPTION(sbi).errors = MOUNT_ERRORS_READONLY;
- 
- 	sbi->sb->s_flags &= ~SB_INLINECRYPT;
- 
-@@ -2270,6 +2302,9 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 	if (err)
- 		goto restore_opts;
- 
-+	/* flush outstanding errors before changing fs state */
-+	flush_work(&sbi->s_error_work);
-+
- 	/*
- 	 * Previous and new state of filesystem is RO,
- 	 * so skip checking GC and FLUSH_MERGE conditions.
-@@ -3863,45 +3898,60 @@ int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover)
- 	return err;
- }
- 
--void f2fs_handle_stop(struct f2fs_sb_info *sbi, unsigned char reason)
-+static void save_stop_reason(struct f2fs_sb_info *sbi, unsigned char reason)
-+{
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&sbi->error_lock, flags);
-+	if (sbi->stop_reason[reason] < ((1 << BITS_PER_BYTE) - 1))
-+		sbi->stop_reason[reason]++;
-+	spin_unlock_irqrestore(&sbi->error_lock, flags);
-+}
-+
-+static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
- {
- 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
-+	unsigned long flags;
- 	int err;
- 
- 	f2fs_down_write(&sbi->sb_lock);
- 
--	if (raw_super->s_stop_reason[reason] < ((1 << BITS_PER_BYTE) - 1))
--		raw_super->s_stop_reason[reason]++;
-+	spin_lock_irqsave(&sbi->error_lock, flags);
-+	memcpy(raw_super->s_stop_reason, sbi->stop_reason, MAX_STOP_REASON);
-+	spin_unlock_irqrestore(&sbi->error_lock, flags);
- 
- 	err = f2fs_commit_super(sbi, false);
--	if (err)
--		f2fs_err(sbi, "f2fs_commit_super fails to record reason:%u err:%d",
--								reason, err);
-+
- 	f2fs_up_write(&sbi->sb_lock);
-+	if (err)
-+		f2fs_err(sbi, "f2fs_commit_super fails to record err:%d", err);
- }
- 
- static void f2fs_save_errors(struct f2fs_sb_info *sbi, unsigned char flag)
- {
--	spin_lock(&sbi->error_lock);
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&sbi->error_lock, flags);
- 	if (!test_bit(flag, (unsigned long *)sbi->errors)) {
- 		set_bit(flag, (unsigned long *)sbi->errors);
- 		sbi->error_dirty = true;
- 	}
--	spin_unlock(&sbi->error_lock);
-+	spin_unlock_irqrestore(&sbi->error_lock, flags);
- }
- 
- static bool f2fs_update_errors(struct f2fs_sb_info *sbi)
- {
-+	unsigned long flags;
- 	bool need_update = false;
- 
--	spin_lock(&sbi->error_lock);
-+	spin_lock_irqsave(&sbi->error_lock, flags);
- 	if (sbi->error_dirty) {
- 		memcpy(F2FS_RAW_SUPER(sbi)->s_errors, sbi->errors,
- 							MAX_F2FS_ERRORS);
- 		sbi->error_dirty = false;
- 		need_update = true;
- 	}
--	spin_unlock(&sbi->error_lock);
-+	spin_unlock_irqrestore(&sbi->error_lock, flags);
- 
- 	return need_update;
- }
-@@ -3925,6 +3975,67 @@ void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error)
- 	f2fs_up_write(&sbi->sb_lock);
- }
- 
-+static bool system_going_down(void)
-+{
-+	return system_state == SYSTEM_HALT || system_state == SYSTEM_POWER_OFF
-+		|| system_state == SYSTEM_RESTART;
-+}
-+
-+void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
-+							bool irq_context)
-+{
-+	struct super_block *sb = sbi->sb;
-+	bool shutdown = reason == STOP_CP_REASON_SHUTDOWN;
-+	bool continue_fs = !shutdown &&
-+			F2FS_OPTION(sbi).errors == MOUNT_ERRORS_CONTINUE;
-+
-+	if (!continue_fs && !f2fs_readonly(sb))
-+		set_ckpt_flags(sbi, CP_ERROR_FLAG);
-+
-+	if (!bdev_read_only(sb->s_bdev)) {
-+		save_stop_reason(sbi, reason);
-+
-+		if (irq_context)
-+			schedule_work(&sbi->s_error_work);
-+		else
-+			f2fs_record_stop_reason(sbi);
-+	}
-+
-+	/*
-+	 * We force ERRORS_RO behavior when system is rebooting. Otherwise we
-+	 * could panic during 'reboot -f' as the underlying device got already
-+	 * disabled.
-+	 */
-+	if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_PANIC &&
-+				!shutdown && !system_going_down() &&
-+				!is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN))
-+		panic("F2FS-fs (device %s): panic forced after error\n",
-+							sb->s_id);
-+
-+	if (shutdown)
-+		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
-+
-+	/* continue filesystem operators if errors=continue */
-+	if (continue_fs || f2fs_readonly(sb))
-+		return;
-+
-+	f2fs_warn(sbi, "Remounting filesystem read-only");
-+	/*
-+	 * Make sure updated value of ->s_mount_flags will be visible before
-+	 * ->s_flags update
-+	 */
-+	smp_wmb();
-+	sb->s_flags |= SB_RDONLY;
-+}
-+
-+static void f2fs_record_error_work(struct work_struct *work)
-+{
-+	struct f2fs_sb_info *sbi = container_of(work,
-+					struct f2fs_sb_info, s_error_work);
-+
-+	f2fs_record_stop_reason(sbi);
-+}
-+
- static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
- {
- 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
-@@ -4272,8 +4383,10 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 		goto free_devices;
- 	}
- 
-+	INIT_WORK(&sbi->s_error_work, f2fs_record_error_work);
- 	spin_lock_init(&sbi->error_lock);
- 	memcpy(sbi->errors, raw_super->s_errors, MAX_F2FS_ERRORS);
-+	memcpy(sbi->stop_reason, raw_super->s_stop_reason, MAX_STOP_REASON);
- 
- 	sbi->total_valid_node_count =
- 				le32_to_cpu(sbi->ckpt->valid_node_count);
-@@ -4542,6 +4655,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	f2fs_destroy_segment_manager(sbi);
- stop_ckpt_thread:
- 	f2fs_stop_ckpt_thread(sbi);
-+	/* flush s_error_work before sbi destroy */
-+	flush_work(&sbi->s_error_work);
- 	f2fs_destroy_post_read_wq(sbi);
- free_devices:
- 	destroy_device_list(sbi);
+-			data_page = f2fs_get_read_data_page(inode,
+-						start_bidx, REQ_RAHEAD, true);
++			data_page = f2fs_get_read_data_page(inode, start_bidx,
++							REQ_RAHEAD, true, NULL);
+ 			f2fs_up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+ 			if (IS_ERR(data_page)) {
+ 				iput(inode);
 -- 
 2.36.1
 
