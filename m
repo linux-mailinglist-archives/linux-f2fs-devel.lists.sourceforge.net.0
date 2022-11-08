@@ -2,96 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 918F56216DB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Nov 2022 15:33:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FAAB621ECC
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Nov 2022 23:05:17 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1osPfk-0004jK-MM;
-	Tue, 08 Nov 2022 14:33:52 +0000
+	id 1osWiW-0005H9-J8;
+	Tue, 08 Nov 2022 22:05:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1osPfZ-0004jC-RB
- for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 08 Nov 2022 14:33:44 +0000
+ (envelope-from <penguin-kernel@I-love.SAKURA.ne.jp>)
+ id 1osWiR-0005Gy-Af for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 08 Nov 2022 22:05:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:Cc:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VdLmKbYiccxCZ+O8a62rEQwKHmWgAnhYYzrzVsRoHek=; b=Q+N1vZZCHeqQ7tIpabnhSUDXkw
- CNhGDqOm7N7mD8hCPa3Gdr/Qn//nooBg6oN2deIl1/LZwiAiqB8/ThEOAPPO9OvozBQLyUrkyGnKp
- rFDyChKtBN8nFsybyVf+mbcIK1tsNo4AkJckkZSaQwx3Ft+xD6Oe6NJ5wB9UG2rSRecg=;
+ bh=BtojO97rwG1uXzhqo4BuE8Wgbb1x7S6pz9yby8+FKBs=; b=T1AR2s5ghCuhXIZwdBVnCrtmxv
+ 8AYkpicZVrjaX+4Jhsa77LkFBRVyqB2WvlYH4I4Pydf+2WV0gDc/oUiYLxY5tPDh81BNhVq+vqEYZ
+ bWtzYckze5uzX41vMA+LnTZl5IdoZMgpStUls2T3tz6S8UZmQis4Ycnj4/vFP5ViTfj8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=VdLmKbYiccxCZ+O8a62rEQwKHmWgAnhYYzrzVsRoHek=; b=A
- +cKY90IPHUxPs6+cXHSEMPQegdnf46rlPsGKh4iaJ1w1aPPW02jVRXHD3G5/VSN2PGWRH9ISVWGpn
- Osl7ex2qxhykK/jmnw61HV7tb7pFLBNBX98fnfV4WfRcdSsn+vp6CbX6485yrWHVo6K2lInzxgGjZ
- B9mt6CmhwbjNMrjM=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Cc:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=BtojO97rwG1uXzhqo4BuE8Wgbb1x7S6pz9yby8+FKBs=; b=IX+MgSuA6JkxgJ/BM/SbiS+Zyk
+ Y4Cuhdhvg+eSM4i0fS2bk93LAQ+touELnMj8UxIRvWUjQ2QKeMDyOi5AhFHhuD2AbkO5+Rzq/lJJm
+ kPM4DiMkG4q6CH8dvZdD1ZAhbw81xWuQyydzt1XeygZrNwU9FZQ8y02AEnjBZ1kOG1wI=;
+Received: from www262.sakura.ne.jp ([202.181.97.72])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1osPfW-00GZyk-8C for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 08 Nov 2022 14:33:41 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id EB4B9B8171A;
- Tue,  8 Nov 2022 14:33:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66D6FC433C1;
- Tue,  8 Nov 2022 14:33:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1667918010;
- bh=LpJVLp97jcdOXa81wZN9DO/QFx5S3xej7QgRvzwTmIQ=;
- h=From:To:Cc:Subject:Date:From;
- b=XBwAY1mHTP45LHRwG1sDQ3yLSPOdBRH6RPNt9i7+4NCtsXMPxEE8ToVkfKXq8n+Lz
- 4RxG2UzsmUSw0SJedGm0+7+G/DgEA94cXER2wEvTsCJ4O5t9XL9qHKzNIX4BA9YDIZ
- BDG3Gie0LByMK29SV01b42B6IB556MseYbgdSVkLe3vAqm9+853IqQuQRA8vKqTxMY
- SdlfDMbYUwel6bNXiQvlTLRK1bdTsgPEbNEedLFb8NBZ0lFBpLEKR4ezlvjXOlEkea
- MNEinbhSN1O0diGSRKWrNqPbl9JM14p9iQVedrNueMKzD+W5o9cci9g93jjqIveHhE
- SyWuX8sNXKBYA==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Tue,  8 Nov 2022 22:33:21 +0800
-Message-Id: <20221108143321.147697-1-chao@kernel.org>
-X-Mailer: git-send-email 2.36.1
+ id 1osWiM-00HYcX-FS for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 08 Nov 2022 22:05:07 +0000
+Received: from fsav111.sakura.ne.jp (fsav111.sakura.ne.jp [27.133.134.238])
+ by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 2A8M4gNY082987;
+ Wed, 9 Nov 2022 07:04:42 +0900 (JST)
+ (envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
+Received: from www262.sakura.ne.jp (202.181.97.72)
+ by fsav111.sakura.ne.jp (F-Secure/fsigk_smtp/550/fsav111.sakura.ne.jp);
+ Wed, 09 Nov 2022 07:04:42 +0900 (JST)
+X-Virus-Status: clean(F-Secure/fsigk_smtp/550/fsav111.sakura.ne.jp)
+Received: from [192.168.1.9] (M106072142033.v4.enabler.ne.jp [106.72.142.33])
+ (authenticated bits=0)
+ by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTPSA id 2A8M4gFU082977
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NO);
+ Wed, 9 Nov 2022 07:04:42 +0900 (JST)
+ (envelope-from penguin-kernel@I-love.SAKURA.ne.jp)
+Message-ID: <d8aec8b1-4982-fc06-fd30-0b9a4b4fc4b9@I-love.SAKURA.ne.jp>
+Date: Wed, 9 Nov 2022 07:04:42 +0900
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <0000000000007edb6605ecbb6442@google.com>
+ <0000000000006a83e705ecea7171@google.com>
+From: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
+In-Reply-To: <0000000000006a83e705ecea7171@google.com>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Wei Chen reports a kernel bug as blew: INFO: task
- syz-executor.0:29056
- blocked for more than 143 seconds. Not tainted 5.15.0-rc5 #1 "echo 0 >
- /proc/sys/kernel/hung_task_timeout_secs"
- disables this message. task:syz-executor.0 state:D stack [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  syzbot is reporting lockdep warning at f2fs_handle_error()
+ [1], for spin_lock(&sbi->error_lock) is called before spin_lock_init() is
+ called. For safe locking in error handling, move initialization of [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1osPfW-00GZyk-8C
-Subject: [f2fs-dev] [PATCH v2] f2fs: optimize iteration over sparse
- directories
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+X-Headers-End: 1osWiM-00HYcX-FS
+Subject: [f2fs-dev] [PATCH] f2fs: initialize locks earlier in
+ f2fs_fill_super()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,285 +94,101 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Wei Chen <harperchen1110@gmail.com>, Eric Biggers <ebiggers@google.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: syzbot <syzbot+40642be9b7e0bb28e0df@syzkaller.appspotmail.com>,
+ terrelln@fb.com, syzkaller-bugs@googlegroups.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Wei Chen reports a kernel bug as blew:
+syzbot is reporting lockdep warning at f2fs_handle_error() [1], for
+spin_lock(&sbi->error_lock) is called before spin_lock_init() is called.
+For safe locking in error handling, move initialization of locks (and
+obvious structures) in f2fs_fill_super() to immediately after memory
+allocation.
 
-INFO: task syz-executor.0:29056 blocked for more than 143 seconds.
-      Not tainted 5.15.0-rc5 #1
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.0  state:D stack:14632 pid:29056 ppid:  6574 flags:0x00000004
-Call Trace:
- __schedule+0x4a1/0x1720
- schedule+0x36/0xe0
- rwsem_down_write_slowpath+0x322/0x7a0
- fscrypt_ioctl_set_policy+0x11f/0x2a0
- __f2fs_ioctl+0x1a9f/0x5780
- f2fs_ioctl+0x89/0x3a0
- __x64_sys_ioctl+0xe8/0x140
- do_syscall_64+0x34/0xb0
- entry_SYSCALL_64_after_hwframe+0x44/0xae
-
-Eric did some investigation on this issue, quoted from reply of Eric:
-
-"Well, the quality of this bug report has a lot to be desired (not on
-upstream kernel, reproducer is full of totally irrelevant stuff, not
-sent to the mailing list of the filesystem whose disk image is being
-fuzzed, etc.).  But what is going on is that f2fs_empty_dir() doesn't
-consider the case of a directory with an extremely large i_size on a
-malicious disk image.
-
-Specifically, the reproducer mounts an f2fs image with a directory
-that has an i_size of 14814520042850357248, then calls
-FS_IOC_SET_ENCRYPTION_POLICY on it.
-
-That results in a call to f2fs_empty_dir() to check whether the
-directory is empty.  f2fs_empty_dir() then iterates through all
-3616826182336513 blocks the directory allegedly contains to check
-whether any contain anything.  i_rwsem is held during this, so
-anything else that tries to take it will hang."
-
-In order to solve this issue, let's use f2fs_get_next_page_offset()
-to speed up iteration by skipping holes for all below functions:
-- f2fs_empty_dir
-- f2fs_readdir
-- find_in_level
-
-The way why we can speed up iteration was described in
-'commit 3cf4574705b4 ("f2fs: introduce get_next_page_offset to speed
-up SEEK_DATA")'.
-
-Meanwhile, in f2fs_empty_dir(), let's use f2fs_find_data_page()
-instead f2fs_get_lock_data_page(), due to i_rwsem was held in
-caller of f2fs_empty_dir(), there shouldn't be any races, so it's
-fine to not lock dentry page during lookuping dirents in the page.
-
-Link: https://lore.kernel.org/lkml/536944df-a0ae-1dd8-148f-510b476e1347@kernel.org/T/
-Reported-by: Wei Chen <harperchen1110@gmail.com>
-Cc: Eric Biggers <ebiggers@google.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
+Link: https://syzkaller.appspot.com/bug?extid=40642be9b7e0bb28e0df [1]
+Reported-by: syzbot <syzbot+40642be9b7e0bb28e0df@syzkaller.appspotmail.com>
+Signed-off-by: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
+Tested-by: syzbot <syzbot+40642be9b7e0bb28e0df@syzkaller.appspotmail.com>
 ---
-v2:
-- update commit title suggested by Eric.
- fs/f2fs/data.c | 17 ++++++++++++-----
- fs/f2fs/dir.c  | 34 ++++++++++++++++++++++++----------
- fs/f2fs/f2fs.h |  5 +++--
- fs/f2fs/gc.c   |  4 ++--
- 4 files changed, 41 insertions(+), 19 deletions(-)
+ fs/f2fs/super.c | 33 +++++++++++++++++----------------
+ 1 file changed, 17 insertions(+), 16 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 51f7ae777711..560fa80590e9 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1206,7 +1206,8 @@ int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index)
- }
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 3834ead04620..8df94d287a36 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4095,6 +4095,23 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
  
- struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
--				     blk_opf_t op_flags, bool for_write)
-+				     blk_opf_t op_flags, bool for_write,
-+				     pgoff_t *next_pgofs)
- {
- 	struct address_space *mapping = inode->i_mapping;
- 	struct dnode_of_data dn;
-@@ -1232,12 +1233,17 @@ struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
+ 	sbi->sb = sb;
  
- 	set_new_dnode(&dn, inode, NULL, NULL, 0);
- 	err = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
--	if (err)
-+	if (err) {
-+		if (err == -ENOENT && next_pgofs)
-+			*next_pgofs = f2fs_get_next_page_offset(&dn, index);
- 		goto put_err;
++	/* initialize locks within allocated memory */
++	init_f2fs_rwsem(&sbi->gc_lock);
++	mutex_init(&sbi->writepages);
++	init_f2fs_rwsem(&sbi->cp_global_sem);
++	init_f2fs_rwsem(&sbi->node_write);
++	init_f2fs_rwsem(&sbi->node_change);
++	spin_lock_init(&sbi->stat_lock);
++	init_f2fs_rwsem(&sbi->cp_rwsem);
++	init_f2fs_rwsem(&sbi->quota_sem);
++	init_waitqueue_head(&sbi->cp_wait);
++	spin_lock_init(&sbi->error_lock);
++	for (i = 0; i < NR_INODE_TYPE; i++) {
++		INIT_LIST_HEAD(&sbi->inode_list[i]);
++		spin_lock_init(&sbi->inode_lock[i]);
 +	}
- 	f2fs_put_dnode(&dn);
- 
- 	if (unlikely(dn.data_blkaddr == NULL_ADDR)) {
- 		err = -ENOENT;
-+		if (next_pgofs)
-+			*next_pgofs = index + 1;
- 		goto put_err;
- 	}
- 	if (dn.data_blkaddr != NEW_ADDR &&
-@@ -1281,7 +1287,8 @@ struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
- 	return ERR_PTR(err);
- }
- 
--struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index)
-+struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index,
-+					pgoff_t *next_pgofs)
- {
- 	struct address_space *mapping = inode->i_mapping;
- 	struct page *page;
-@@ -1291,7 +1298,7 @@ struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index)
- 		return page;
- 	f2fs_put_page(page, 0);
- 
--	page = f2fs_get_read_data_page(inode, index, 0, false);
-+	page = f2fs_get_read_data_page(inode, index, 0, false, next_pgofs);
- 	if (IS_ERR(page))
- 		return page;
- 
-@@ -1317,7 +1324,7 @@ struct page *f2fs_get_lock_data_page(struct inode *inode, pgoff_t index,
- 	struct address_space *mapping = inode->i_mapping;
- 	struct page *page;
- repeat:
--	page = f2fs_get_read_data_page(inode, index, 0, for_write);
-+	page = f2fs_get_read_data_page(inode, index, 0, for_write, NULL);
- 	if (IS_ERR(page))
- 		return page;
- 
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index 21960a899b6a..030b7fd4142f 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -340,6 +340,7 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
- 	unsigned int bidx, end_block;
- 	struct page *dentry_page;
- 	struct f2fs_dir_entry *de = NULL;
-+	pgoff_t next_pgofs;
- 	bool room = false;
- 	int max_slots;
- 
-@@ -350,12 +351,13 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
- 			       le32_to_cpu(fname->hash) % nbucket);
- 	end_block = bidx + nblock;
- 
--	for (; bidx < end_block; bidx++) {
-+	while (bidx < end_block) {
- 		/* no need to allocate new dentry pages to all the indices */
--		dentry_page = f2fs_find_data_page(dir, bidx);
-+		dentry_page = f2fs_find_data_page(dir, bidx, &next_pgofs);
- 		if (IS_ERR(dentry_page)) {
- 			if (PTR_ERR(dentry_page) == -ENOENT) {
- 				room = true;
-+				bidx = next_pgofs;
- 				continue;
- 			} else {
- 				*res_page = dentry_page;
-@@ -376,6 +378,8 @@ static struct f2fs_dir_entry *find_in_level(struct inode *dir,
- 		if (max_slots >= s)
- 			room = true;
- 		f2fs_put_page(dentry_page, 0);
++	mutex_init(&sbi->flush_lock);
 +
-+		bidx++;
+ 	/* Load the checksum driver */
+ 	sbi->s_chksum_driver = crypto_alloc_shash("crc32", 0, 0);
+ 	if (IS_ERR(sbi->s_chksum_driver)) {
+@@ -4174,23 +4191,14 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 
+ 	/* init f2fs-specific super block info */
+ 	sbi->valid_super_block = valid_super_block;
+-	init_f2fs_rwsem(&sbi->gc_lock);
+-	mutex_init(&sbi->writepages);
+-	init_f2fs_rwsem(&sbi->cp_global_sem);
+-	init_f2fs_rwsem(&sbi->node_write);
+-	init_f2fs_rwsem(&sbi->node_change);
+ 
+ 	/* disallow all the data/node/meta page writes */
+ 	set_sbi_flag(sbi, SBI_POR_DOING);
+-	spin_lock_init(&sbi->stat_lock);
+ 
+ 	err = f2fs_init_write_merge_io(sbi);
+ 	if (err)
+ 		goto free_bio_info;
+ 
+-	init_f2fs_rwsem(&sbi->cp_rwsem);
+-	init_f2fs_rwsem(&sbi->quota_sem);
+-	init_waitqueue_head(&sbi->cp_wait);
+ 	init_sb_info(sbi);
+ 
+ 	err = f2fs_init_iostat(sbi);
+@@ -4255,7 +4263,6 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 		goto free_devices;
  	}
  
- 	if (!de && room && F2FS_I(dir)->chash != fname->hash) {
-@@ -956,7 +960,7 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
+-	spin_lock_init(&sbi->error_lock);
+ 	memcpy(sbi->errors, raw_super->s_errors, MAX_F2FS_ERRORS);
  
- bool f2fs_empty_dir(struct inode *dir)
- {
--	unsigned long bidx;
-+	unsigned long bidx = 0;
- 	struct page *dentry_page;
- 	unsigned int bit_pos;
- 	struct f2fs_dentry_block *dentry_blk;
-@@ -965,13 +969,17 @@ bool f2fs_empty_dir(struct inode *dir)
- 	if (f2fs_has_inline_dentry(dir))
- 		return f2fs_empty_inline_dir(dir);
+ 	sbi->total_valid_node_count =
+@@ -4271,12 +4278,6 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+ 	limit_reserve_root(sbi);
+ 	adjust_unusable_cap_perc(sbi);
  
--	for (bidx = 0; bidx < nblock; bidx++) {
--		dentry_page = f2fs_get_lock_data_page(dir, bidx, false);
-+	while (bidx < nblock) {
-+		pgoff_t next_pgofs;
-+
-+		dentry_page = f2fs_find_data_page(dir, bidx, &next_pgofs);
- 		if (IS_ERR(dentry_page)) {
--			if (PTR_ERR(dentry_page) == -ENOENT)
-+			if (PTR_ERR(dentry_page) == -ENOENT) {
-+				bidx = next_pgofs;
- 				continue;
--			else
-+			} else {
- 				return false;
-+			}
- 		}
+-	for (i = 0; i < NR_INODE_TYPE; i++) {
+-		INIT_LIST_HEAD(&sbi->inode_list[i]);
+-		spin_lock_init(&sbi->inode_lock[i]);
+-	}
+-	mutex_init(&sbi->flush_lock);
+-
+ 	f2fs_init_extent_cache_info(sbi);
  
- 		dentry_blk = page_address(dentry_page);
-@@ -983,10 +991,12 @@ bool f2fs_empty_dir(struct inode *dir)
- 						NR_DENTRY_IN_BLOCK,
- 						bit_pos);
- 
--		f2fs_put_page(dentry_page, 1);
-+		f2fs_put_page(dentry_page, 0);
- 
- 		if (bit_pos < NR_DENTRY_IN_BLOCK)
- 			return false;
-+
-+		bidx++;
- 	}
- 	return true;
- }
-@@ -1104,7 +1114,8 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
- 		goto out_free;
- 	}
- 
--	for (; n < npages; n++, ctx->pos = n * NR_DENTRY_IN_BLOCK) {
-+	for (; n < npages; ctx->pos = n * NR_DENTRY_IN_BLOCK) {
-+		pgoff_t next_pgofs;
- 
- 		/* allow readdir() to be interrupted */
- 		if (fatal_signal_pending(current)) {
-@@ -1118,11 +1129,12 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
- 			page_cache_sync_readahead(inode->i_mapping, ra, file, n,
- 				min(npages - n, (pgoff_t)MAX_DIR_RA_PAGES));
- 
--		dentry_page = f2fs_find_data_page(inode, n);
-+		dentry_page = f2fs_find_data_page(inode, n, &next_pgofs);
- 		if (IS_ERR(dentry_page)) {
- 			err = PTR_ERR(dentry_page);
- 			if (err == -ENOENT) {
- 				err = 0;
-+				n = next_pgofs;
- 				continue;
- 			} else {
- 				goto out_free;
-@@ -1141,6 +1153,8 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
- 		}
- 
- 		f2fs_put_page(dentry_page, 0);
-+
-+		n++;
- 	}
- out_free:
- 	fscrypt_fname_free_buffer(&fstr);
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index c767cc714958..473f2902435d 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3820,8 +3820,9 @@ int f2fs_reserve_new_block(struct dnode_of_data *dn);
- int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index);
- int f2fs_reserve_block(struct dnode_of_data *dn, pgoff_t index);
- struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
--			blk_opf_t op_flags, bool for_write);
--struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index);
-+			blk_opf_t op_flags, bool for_write, pgoff_t *next_pgofs);
-+struct page *f2fs_find_data_page(struct inode *inode, pgoff_t index,
-+							pgoff_t *next_pgofs);
- struct page *f2fs_get_lock_data_page(struct inode *inode, pgoff_t index,
- 			bool for_write);
- struct page *f2fs_get_new_data_page(struct inode *inode,
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 72f165048a3c..69d7d8db3daa 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1562,8 +1562,8 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
- 				continue;
- 			}
- 
--			data_page = f2fs_get_read_data_page(inode,
--						start_bidx, REQ_RAHEAD, true);
-+			data_page = f2fs_get_read_data_page(inode, start_bidx,
-+							REQ_RAHEAD, true, NULL);
- 			f2fs_up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
- 			if (IS_ERR(data_page)) {
- 				iput(inode);
+ 	f2fs_init_ino_entry_info(sbi);
 -- 
-2.36.1
+2.18.4
 
 
 
