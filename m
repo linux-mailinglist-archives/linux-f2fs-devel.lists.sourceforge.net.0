@@ -2,132 +2,161 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 845556243DE
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Nov 2022 15:11:29 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A93ED6243D7
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Nov 2022 15:08:55 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ot8H8-0007o0-Si;
-	Thu, 10 Nov 2022 14:11:26 +0000
+	id 1ot8Eg-0001ms-D4;
+	Thu, 10 Nov 2022 14:08:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <arnd@arndb.de>) id 1ot8Gn-0007ni-GG
+ (envelope-from <shengyong@oppo.com>) id 1ot8Ec-0001mT-Gr
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Nov 2022 14:11:05 +0000
+ Thu, 10 Nov 2022 14:08:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Subject:Cc:
- To:From:Date:References:In-Reply-To:Message-Id:Mime-Version:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=19++3Vi/MimtPuuPOkXfPImCVesnLn5qoCUVppmD3sc=; b=HJjVv8O0DBkVbCrwX6OcLiVfTd
- hAPxJ3dfs2uXFxwX4HpLNBlwItmXMzgqqlckOAo1USO5sE02i+nTkZAklXiDiZhav4yJpTIGq2Jge
- nJilr8DgME3Orm6pOIOjS0MjENRleA4GqH+xOy3zhbGVatDloKgCY5/vCYQE0VkB7cQ4=;
+ bh=cTMWG6i6v/GkgOGyxb3sBYKnc4qPWZx5OHtS6LECEnQ=; b=M5g84x5Zr8BZG3gvnA56wbCV3B
+ 0L+JjdJjKC8BSXn3WHcwpkEJiT9jiWo3mN0PzMcbb8E7VqLjuj7nlQyTgzyCDFGESgs0HTzh3rjna
+ 5WdrPpM/Uy76vEeoKAcQCpuOcF9H3Kdsmd/AMwnccsRhWC9TTAQ3mcp5qyr8QN8ZdNW8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Subject:Cc:To:From:Date:References
- :In-Reply-To:Message-Id:Mime-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=19++3Vi/MimtPuuPOkXfPImCVesnLn5qoCUVppmD3sc=; b=Esz76jx9b3E0jddMBIslqe+YF8
- x4uvFJtC//uyvgP4XPE5m+El1ebq4PMtPkPMz7d99Sm+frhYJf2kc2a7NKocpklAzecxiYFoXx2kI
- yNsNsBL1ezyNj6oaaFm47/7bHJuIDoFBDRjdB9+dMGQMbhjl4vScIbbRz1K+cD9VKV5o=;
-Received: from out5-smtp.messagingengine.com ([66.111.4.29])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=cTMWG6i6v/GkgOGyxb3sBYKnc4qPWZx5OHtS6LECEnQ=; b=N
+ MXfmGlxd8wLvX9nb9xreqUhVf91F4uKdX2geoeDenao7z9NUnBMu4AMB/PfdmeHmJ3E/Tt+2taIZT
+ QHy5OE9aWhtE6xhirI5mUzaciOyz1dpIqN0uJpjGE+uZxCmfNaMKq/gtxQ28yuv3mWy+wSttz7IKs
+ tZoRagp032zA8UsI=;
+Received: from mail-sgaapc01on2087.outbound.protection.outlook.com
+ ([40.107.215.87] helo=APC01-SG2-obe.outbound.protection.outlook.com)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ot8Gj-0039fe-KU for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Nov 2022 14:11:05 +0000
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id 1A8975C01C7;
- Thu, 10 Nov 2022 08:45:59 -0500 (EST)
-Received: from imap51 ([10.202.2.101])
- by compute3.internal (MEProxy); Thu, 10 Nov 2022 08:45:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
- :cc:content-transfer-encoding:content-type:date:date:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm3; t=1668087959; x=
- 1668174359; bh=19++3Vi/MimtPuuPOkXfPImCVesnLn5qoCUVppmD3sc=; b=K
- pt6mtxrmqu8dYU5O8qXui74BmqL5Y+eS9OXO8wQObK73ULI8UV7CjAmOZ+8e1L5P
- ZXBemJgycQNpr9Ynu0Nm1iU5Mapcij/Rz9uVJ404m2G61yxeo5Fzmw6gXAxRhChw
- KtMxZoeSTFdNmPivpkV4h9fUtqRzA0nWDwz91W2V9bd3u/LYXdlxjQLZwlYVTXOV
- nB9NW+DRv4GX4gNVws2w3rwojBl2tU1jV3lEMLZ44tPBIyW7l33ZQwcTu7VlHpi3
- nBmrWBfN7kzOzZLBs9wWw5Okegoe/QqPQzLujhmw3gkiIX2hG5lUFppG0Aib5mRt
- IgsweDBxzTv6HKC2wL1TQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1668087959; x=
- 1668174359; bh=19++3Vi/MimtPuuPOkXfPImCVesnLn5qoCUVppmD3sc=; b=G
- VyxyVl8Gvb030ftFEXyVojDyEl99IDEwlHrekl6WoJhWjqPcvf0L7XS+5BdSWQoh
- KIJDHLe3LwFXXBnGxHecUpzxnkQHTgJSeMLWG+r5DEtlZh+nqD/wZYUlzZTA1K2a
- kmPirOQ50Y1ERc9YJgBwqiArTSr1OSakFTZahTmSJtVJ7OZXX35Dsw6T5bcuImvN
- 0PenvxUS/EPOKngxhQfzXx0EdI2DkurY4wQ/efmdVqOhsEdtXahevi8J5leuTYjb
- 43acr8ev7Vzc+GfW6pR62YhhEhwgg/cpgrDUmh+MOyo7sZGM30bH2ZD7HdLAbqr1
- pe+D17FZkNv8hcikHEQQA==
-X-ME-Sender: <xms:lgBtY4mwwLcZ13VTE3P0unfzN6z67qCnD59miR8M_6BYaJJ0b4EWNA>
- <xme:lgBtY31c6C-dDgA3YTwDfOQjuyLq0CsmKo9E4YU-Bh2dz3YXhP1jCFk3yBJfuveA3
- aBKGbffK-QXbPyUe8A>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrfeeggdehjecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefofgggkfgjfhffhffvvefutgfgsehtqhertderreejnecuhfhrohhmpedftehr
- nhguuceuvghrghhmrghnnhdfuceorghrnhgusegrrhhnuggsrdguvgeqnecuggftrfgrth
- htvghrnhepgfekueelgeeigefhudduledtkeefffejueelheelfedutedttdfgveeufeef
- ieegnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpe
- dtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrrhhnugesrghrnhgusgdruggv
-X-ME-Proxy: <xmx:lgBtY2oHpMlhxgops79KmpbdN3ul2qupJ9ljsgXlrf3j0281bXQqcQ>
- <xmx:lgBtY0nQG0CK1oUa7iVv5FQhv0lq5r0c2gD1l9EZ1yJlzVlJ6B6QbQ>
- <xmx:lgBtY20JidY8m5YltRT2hWb2hvxqe-RTW9SFNgl27Mc3tMqiMb4LJw>
- <xmx:lwBtYwpKzzI9UilXf38wfcQgPaHaoouKcHdxeQWUBzYqedcDvSb4_w>
-Feedback-ID: i56a14606:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 52E30B60086; Thu, 10 Nov 2022 08:45:58 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.7.0-alpha0-1115-g8b801eadce-fm-20221102.001-g8b801ead
-Mime-Version: 1.0
-Message-Id: <97c529f2-c5a2-4ed6-89eb-c79f020e9d0c@app.fastmail.com>
-In-Reply-To: <CAHJ8P3+g7dr3PBZFQCD5HQLZ2b0WHe=b6Jt7ha1o7mqZJ7_-BQ@mail.gmail.com>
-References: <1667889638-9106-1-git-send-email-zhiguo.niu@unisoc.com>
- <202211101659.j9z9jLHv-lkp@intel.com>
- <88fce16b-5092-4246-8bbf-23f2c03224f3@app.fastmail.com>
- <CAHJ8P3+g7dr3PBZFQCD5HQLZ2b0WHe=b6Jt7ha1o7mqZJ7_-BQ@mail.gmail.com>
-Date: Thu, 10 Nov 2022 14:45:31 +0100
-From: "Arnd Bergmann" <arnd@arndb.de>
-To: "Zhiguo Niu" <niuzhiguo84@gmail.com>
-X-Spam-Score: -0.9 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+ id 1ot8Eb-00067v-Lt for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 10 Nov 2022 14:08:50 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=mB43X4Pneog8cubhClvLcMdq+RWet8IUBM7RDXDMC28KSKX4hy+M8JhXhmEBfzOErqKQKjKw7YhBSYBxxOCLLolWl7w9T/6oSC/h0gt0zGWssKD5lhRXyisWuT0SDy6ZkXHqDWIIJN2HjBNypppb3XH8lSWS2L1Dl6iuARjopYYwwB17xMukGuy23/tA+w295q+9eoBYXbO4ilYhGqthoVBodmZREcOLOcY9ZJX3di2dwfLgO3wiQZ5h0IBIo0qpAqsPU/DfCwYGUXaLWQcWtQZ7f5emk3JZJGB/5kFS3qcQzPietDAbVO1pkW8G4Pe2EdmrGBjOvTDk0kH/R8K9nw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cTMWG6i6v/GkgOGyxb3sBYKnc4qPWZx5OHtS6LECEnQ=;
+ b=jv0RyyL1tjl9VujrbNr+dFFEDUA9lyCEvSBoSLcNkTpcvNH2Ofn/XKYh8vRMYNUcEkDXR6J8ek9Jzr26SDR8bzjEg0rzKqK0EuYqtdpCqGT4JwCqOfJai3m/QlFnhWv476/UmfyrkTVJaG8UCDRqAW2MRn4JyYbVXMK8niE1yUd3CHcAe09ewhAAZahbXRAmkedh1EJA3EurnQXnl00scraAaPDvaFUq2+MzTKmvNpkAAyZiIdP4yvkzQSd9rpiG0WmCvQmsG3KiMbU60SvENN/HW8r+rYMN47on9wPMIlPLh3jEU50sIprtf2grvg0IO21tcy9HPcce5Ke+1dl+hw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oppo.com; dmarc=pass action=none header.from=oppo.com;
+ dkim=pass header.d=oppo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cTMWG6i6v/GkgOGyxb3sBYKnc4qPWZx5OHtS6LECEnQ=;
+ b=A64mDilQfkmqDvxPz+rFFwO0pjhYoYnHK/d+CtAwMRUep7dABX1YNoQ9Old1SO4B9gPWPNsffCTub1RfndgK3cQnKI8gMBdDfu9nDaX28FvvPfhE24l6g8TkTylZ8vate1LL2+rvfLSGeMaa6sz0v390g+VXS9RqezafkIBrRqE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oppo.com;
+Received: from SI2PR02MB5148.apcprd02.prod.outlook.com (2603:1096:4:153::6) by
+ TY0PR02MB5744.apcprd02.prod.outlook.com (2603:1096:400:1b4::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5791.25; Thu, 10 Nov
+ 2022 14:08:27 +0000
+Received: from SI2PR02MB5148.apcprd02.prod.outlook.com
+ ([fe80::31b6:afe9:43b5:aaca]) by SI2PR02MB5148.apcprd02.prod.outlook.com
+ ([fe80::31b6:afe9:43b5:aaca%8]) with mapi id 15.20.5791.027; Thu, 10 Nov 2022
+ 14:08:27 +0000
+To: chao@kernel.org,
+	jaegeuk@kernel.org
+Date: Thu, 10 Nov 2022 22:07:20 +0800
+Message-Id: <20221110140723.92752-1-shengyong@oppo.com>
+X-Mailer: git-send-email 2.25.1
+X-ClientProxiedBy: SG2PR02CA0103.apcprd02.prod.outlook.com
+ (2603:1096:4:92::19) To SI2PR02MB5148.apcprd02.prod.outlook.com
+ (2603:1096:4:153::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SI2PR02MB5148:EE_|TY0PR02MB5744:EE_
+X-MS-Office365-Filtering-Correlation-Id: 36fedf18-342a-4622-2076-08dac32509ab
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: uM3mvJnVUdGEvRd/DaK19yGYjqTaGjfcfoOuRhM+I2jU5/kmmBz/84SklRLgU8DRkv87ZnimCLF6vsF8qQzGkbsaomCScIzG9bya6NwnI1aHLtszYd6GMVaSB10Jzn/P6cgQOfCWJk5iJ/DgZ9pnDjMTyTGx6O5Gpt0DmyYTTFC3031oeWVYYTJRJNnr8afIIfiHE0USqWO7iI7RJ3PqdTVrfhIwIA+yPx6gM0R4jrmS5X+2864C0GnnWsKJWuhwbx0JgdscnMiiXvsEZuqpJDynFch4MK3XCHHiZFuiQUgyEXAHQBKrpslzZ2PioRrs5AZz41MnErDAtND8y8sL0GwdlfqHdwJ2v8SEzCE6qDtDtrs138VMF4vEuw5+Rw3sp/ec0JD2jEA4RJFZdooY8LYRPsUczwfO7kZhiitQYVtDwMryeJOFM6+GftLNyN1TR0QnvTooX+FpreWr3huPv/vzBuVNdhS9AbsYS06adNph10ncwW2DqNBGKsJ1ocDqUDxJ9Bs8+QnXx/iOUs/eDadFxuM2iG1GOI3mW8F7b3OKhZeJduAVE3APSSf2sakcNz3qDF7AEAiAXFel1Ct8uNQoEeVFpKyi5SVbgWCv04qIRB0H5Zh4w3bkEIQdbg10lghTuLxICNwPQHuON5hI3Zi7r1DP6wyC7nG0HgxlUyW9kL2TsMRFY6buUgLljKANrVPeaPau5eUyO9KfeJIHdpBkF4hbsmHzbEWkOFR4zSMH+FjT4HJ7PHI4Rsns9pVAVEMoeXc/+i48I04tzMXbVBXV4rXdBPCsEqXtY9oswNg=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SI2PR02MB5148.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230022)(4636009)(136003)(346002)(396003)(376002)(39860400002)(366004)(451199015)(52116002)(1076003)(186003)(83380400001)(36756003)(6506007)(6512007)(26005)(2616005)(38350700002)(38100700002)(6486002)(478600001)(86362001)(41300700001)(8936002)(5660300002)(66476007)(66556008)(4326008)(66946007)(8676002)(4744005)(316002)(107886003)(6666004)(2906002)(131093003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5SND/c339t+RPfsFl6B6eyJj6xVF47QDqIpRmPMZjumTX18KkWmAcSeHRF9d?=
+ =?us-ascii?Q?jp1/2Qfk+nTCOBvJO89AXpEGItCr+WPlU/F55Bjvpp1Z8qHB7UGl7cP6ARvd?=
+ =?us-ascii?Q?v8BtM1EqZJ2ch+7ELt6daeIidCN7oxGdZcgb3D4cVzJFL2/JUtiB9HnH3Ctq?=
+ =?us-ascii?Q?wvYhOz5fbLEH4O337eA7hY/yohAVLReQUK59qvaH88VmuJE5EzLA0Pf6Xrj+?=
+ =?us-ascii?Q?c/fA311yn/Kk7slgLCsb9jr0MUjoZH5TKGILtM+4Ji/sVI409LgDo5ZXP2pX?=
+ =?us-ascii?Q?hqXIhexMP0o81kr2bn6GMoFBwyS2xTBuvim1PqgCbYXypIB0NLQBsrvc6Sx/?=
+ =?us-ascii?Q?2pHzYRGhIF8rqteEUs19oBKHt6W56JxtAYiUrmGvWXdEdGKEHOZ4cBG79gmb?=
+ =?us-ascii?Q?DG9GDt3tcFCKQkQhhL+t1cmjQCeDb4hJfi6At5G8EYP8H0lt164QHR3yY5lf?=
+ =?us-ascii?Q?1zKreKQOe2G6nism41Skxb1LqCtkXjeKtpoXrO5bprUd5Y1exjb7VnttAWoR?=
+ =?us-ascii?Q?KLHzei/9M4wmYNUmBtK6pZIGjpBKJaca8kuSi6p0/rNLW5mD17Sp/k9Q5OzP?=
+ =?us-ascii?Q?XouI1dd0uDr7unYCQyVi9VHY3RMX92RU4tYH5rLbrmFsOIJZ3r53/5xgHuJx?=
+ =?us-ascii?Q?NeyPYgrmcYwRJjPKMw9c1Nmy0RRIPEdCsFEXaJOdkZ9rT13tZ1JOWs8HISIv?=
+ =?us-ascii?Q?1JsiWfNknxMR+WhLdAxgoxG5iZpHjZ079TfsHgLbj5BQ6yzrtULoDlk6djsF?=
+ =?us-ascii?Q?JxrBNfF3hCyrCmZmKO6eFi+/E8kqlkZ4Otrbp8r5Y59sVR/qkb7win0cg0sY?=
+ =?us-ascii?Q?jwb3wIgAHjsm8l+PTyqaMis/f3HDjE9fGN7WN3IlCyULJqZunfefTLV3HGfo?=
+ =?us-ascii?Q?uYKXTCvUocdX0v4qsuKu/NosA0jpy6FwPKg3Nb3ws+83gtpeJcIQCLAcjvPu?=
+ =?us-ascii?Q?9P/nINHQtbO6cMhjTOLllvxMMG2n7DF/5k4dtS2+yLBs1una05l0ioE/uIcd?=
+ =?us-ascii?Q?R+cHjYDYZDPjK1/5kAQIxJvQbTY8S9Cxnz5wihZkOVVcqcawXvKD9J9hZm9J?=
+ =?us-ascii?Q?YyjIeWYYQXMKR4uuC6eD4JC3FuQLvey/8GTVVIwJCtY7ed9k6saedTlXh6QT?=
+ =?us-ascii?Q?5e1UNAzMUGQgn1RZHfAGSlGpwHWu9VVeGqXHPr0Gqa9xAuPHPNxj5Et1HZTO?=
+ =?us-ascii?Q?CvGRkH6egJ9706AA7KdpRefSS+OeA5ZIvqG8WKlyqR4A6FEvDXFqpfxh5OYG?=
+ =?us-ascii?Q?naKeR2fzKFptPuVK713F3utESVZYbs7OCxcYo5EGFPlFLX9VxiNqHmf2aBYT?=
+ =?us-ascii?Q?GmHVzwisTGrVtC59RYzdRiJGXabEHwgWASO0CvqHLQXat8a6aP64Sidz5vHx?=
+ =?us-ascii?Q?NvJHLomla/v5yUS7+MkxdndlVBc9JuxWxRi1ybp4f9gRSEmN6YlVnFpzByg1?=
+ =?us-ascii?Q?g0bHVVfInZUiMfEulxb/tHPZFzVkvmb1itHVotTbfJH0SrFAD0pM0F7YWPlG?=
+ =?us-ascii?Q?+UEMcU00cpOk8L0/gdAKhXXQTH0ljplHjd+LvRrAEg3PUrDPTmeFksOrxyLM?=
+ =?us-ascii?Q?e90wbA1Z4BycCe5p2mmXnVHlRp2bKavSkUkHD0qv?=
+X-OriginatorOrg: oppo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 36fedf18-342a-4622-2076-08dac32509ab
+X-MS-Exchange-CrossTenant-AuthSource: SI2PR02MB5148.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2022 14:08:27.1649 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LuJRW8fMTKRcv0BCAeV80Hd5NhTtHFPMk6/6vHYTtzLUAVugIIX+vVbBsSkxzoJ0Q/9IRR1Uwuf1ChDiSSRppg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR02MB5744
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Thu, Nov 10, 2022, at 11:20, Zhiguo Niu wrote: > Arnd Bergmann
-    <arnd@arndb.de> 于2022年11月10日周四 17:07写道： >> On Thu, Nov
-   10, 2022, at 09:33, kernel test robot wrote: >> > base: >> > [...] 
- 
- Content analysis details:   (-0.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview: Option "-g" for dump.f2fs is unavailable and not used in
+ dump.f2fs.
+ Signed-off-by: Sheng Yong <shengyong@oppo.com> --- fsck/main.c | 12
+ +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-) diff --git a/fsck/main.c
+ b/fsck/main.c index 3268664..9b50787 100644 --- a/fsck/main.c +++
+ b/fsck/main.c
+ @@ -273,8 +273,10 @@ void f2fs_parse_options(int argc, char *argv[])
+ atoi(optarg); break; case [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
-                             low trust
-                             [66.111.4.29 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.215.87 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.215.87 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-X-Headers-End: 1ot8Gj-0039fe-KU
-Subject: Re: [f2fs-dev] [PATCH V2] f2fs: fix atgc bug on issue in 32bits
- platform
+ envelope-from domain
+X-Headers-End: 1ot8Eb-00067v-Lt
+Subject: [f2fs-dev] [PATCH 1/4] dump.f2fs: remove unavailable optiont -g
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -139,75 +168,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: llvm@lists.linux.dev, kernel test robot <lkp@intel.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- "zhiguo.niu" <zhiguo.niu@unisoc.com>, oe-kbuild-all@lists.linux.dev,
- jaegeuk@kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Sheng Yong via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Sheng Yong <shengyong@oppo.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gVGh1LCBOb3YgMTAsIDIwMjIsIGF0IDExOjIwLCBaaGlndW8gTml1IHdyb3RlOgo+IEFybmQg
-QmVyZ21hbm4gPGFybmRAYXJuZGIuZGU+IOS6jjIwMjLlubQxMeaciDEw5pel5ZGo5ZubIDE3OjA3
-5YaZ6YGT77yaCj4+IE9uIFRodSwgTm92IDEwLCAyMDIyLCBhdCAwOTozMywga2VybmVsIHRlc3Qg
-cm9ib3Qgd3JvdGU6Cj4+ID4gYmFzZTogICAKPj4gPiBodHRwczovL2dpdC5rZXJuZWwub3JnL3B1
-Yi9zY20vbGludXgva2VybmVsL2dpdC9qYWVnZXVrL2YyZnMuZ2l0IAo+PiA+IGRldi10ZXN0Cj4+
-ID4gcGF0Y2ggbGluazogICAgCj4+ID4gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvci8xNjY3ODg5
-NjM4LTkxMDYtMS1naXQtc2VuZC1lbWFpbC16aGlndW8ubml1JTQwdW5pc29jLmNvbQo+PiA+IHBh
-dGNoIHN1YmplY3Q6IFtQQVRDSCBWMl0gZjJmczogZml4IGF0Z2MgYnVnIG9uIGlzc3VlIGluIDMy
-Yml0cyBwbGF0Zm9ybQo+PiA+IEFsbCB3YXJuaW5ncyAobmV3IG9uZXMgcHJlZml4ZWQgYnkgPj4p
-Ogo+PiA+Cj4+ID4gICAgSW4gZmlsZSBpbmNsdWRlZCBmcm9tIGZzL2YyZnMvZ2MuYzoyMjoKPj4g
-Pj4+IGZzL2YyZnMvZ2MuaDo2NToyOiB3YXJuaW5nOiBmaWVsZCAgd2l0aGluICdzdHJ1Y3Qgdmlj
-dGltX2VudHJ5JyBpcyBsZXNzIGFsaWduZWQgdGhhbiAndW5pb24gdmljdGltX2VudHJ5OjooYW5v
-bnltb3VzIGF0IGZzL2YyZnMvZ2MuaDo2NToyKScgYW5kIGlzIHVzdWFsbHkgZHVlIHRvICdzdHJ1
-Y3QgdmljdGltX2VudHJ5JyBiZWluZyBwYWNrZWQsIHdoaWNoIGNhbiBsZWFkIHRvIHVuYWxpZ25l
-ZCBhY2Nlc3NlcyBbLVd1bmFsaWduZWQtYWNjZXNzXQo+PiA+ICAgICAgICAgICAgdW5pb24gewo+
-PiAKPj4gSXQgbG9va3MgbGlrZSB0aGUgcHJvYmxlbSBpcyB0aGUgZXh0cmEgdW5xdWFsaWZpZWQg
-X19wYWNrZWQgYW5ub3RhdGlvbgo+PiBpbnNpZGUgb2YgJ3N0cnVjdCByYl9lbnRyeScuIAo+IHll
-cywgSSBhZ3JlZSwgYnV0IHRoaXMgbW9kaWZpY2F0aW9uIGlzIGFib3V0IHRoZSBmb2xsb3dpbmcg
-Y29tbWl0Ogo+IGYyZnM6IGZpeCBtZW1vcnkgYWxpZ25tZW50IHRvIHN1cHBvcnQgMzJiaXQgCj4g
-KDQ4MDQ2Y2I1NWQyMDhlYWU2NzI1OTg4N2IyOWIzMDk3YmNmNDRjYWbvvIkKCkFoLCBJIHNlZS4g
-U28gaW4gdGhpcyBjYXNlLCB0aGUgbGluZQoKICAgICAgICBlbiA9IChzdHJ1Y3QgZXh0ZW50X25v
-ZGUgKilmMmZzX2xvb2t1cF9yYl90cmVlX3JldCgmZXQtPnJvb3QsCgpyZXF1aXJlcyB0aGUgc2Vj
-b25kIGZpZWxkIG9mICdzdHJ1Y3QgZXh0ZW50X25vZGUnIHRvIGJlCmluIHRoZSBzYW1lIHBsYWNl
-IGFzIHRoZSBjb3JyZXNwb25kaW5nIGZpZWxkIG9mICdzdHJ1Y3QgcmJfZW50cnknLgoKVGhpcyBz
-ZWVtcyBoYXJtbGVzcyB0aGVuLCB0aG91Z2ggSSB3b3VsZCBoYXZlIHB1dCB0aGUgX19wYWNrZWQK
-YW5ub3RhdGlvbiBvbiB0aGUgJ2tleScgbWVtYmVyIGluc3RlYWQgb2YgdGhlIHVuaW9uIHRvCmJl
-dHRlciBkb2N1bWVudCB3aGF0IGlzIGdvaW5nIG9uLiBJZGVhbGx5IHRoZSBjYXN0cyBiZXR3ZWVu
-CnN0cnVjdHVyZXMgc2hvdWxkIG5vdCBiZSB1c2VkIGF0IGFsbCwgYnV0IEkgZG9uJ3Qga25vdyBp
-ZgpjaGFuZ2luZyBmMmZzIGZvciB0aGlzIHdvdWxkIGludm9sdmUgYSBtYWpvciByZXdyaXRlIG9m
-IHRoYXQKY29kZS4KCj4gc28gSSB0aGluayBpcyB0aGUgZm9sbG93aW5nIG1vZGlmaWN0aW9uIG1v
-cmUgYmV0dGVyPyAKPgo+IEBAIC02OCw3ICs2OCw3IEBAIHN0cnVjdCB2aWN0aW1fZW50cnkgewo+
-Cj4gICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgaW50IHNlZ25vOyAgICAgICAgIC8q
-IHNlZ21lbnQgTm8uICovCj4KPiAgICAgICAgICAgICAgICAgfTsKPgo+ICAgICAgICAgICAgICAg
-ICBzdHJ1Y3QgdmljdGltX2luZm8gdmk7ICAgICAgIC8qIHZpY3RpbSBpbmZvICovCj4KPiAtICAg
-ICAgIH07Cj4KPiArICAgICAgfSBfX3BhY2tlZDsKClNvIGhlcmUgaXMgdGhlIGNvbnN0cnVjdCB3
-aXRoCgogICAgICAgIHZlID0gKHN0cnVjdCB2aWN0aW1fZW50cnkgKilyZTsKCnRoYXQgcmVsaWVz
-IG9uIHZpLT5tdGltZSB0byBvdmVybGF5IHJlLT5rZXksIHJpZ2h0PwoKSSdtIG5vdCBzdXJlIHdo
-eSB0aGVyZSBpcyBhIHVuaW9uIGluIHZpY3RpbV9lbnRyeSwgaXQgd291bGQKYmUgYSBsaXR0bGUg
-ZWFzaWVyIHdpdGhvdXQgdGhhdC4gQ2xlYXJseSBib3RoIHNpZGVzCm9mIHRoZSB1bmlvbiBuZWVk
-IHRoZSBzYW1lIGFsaWdubWVudCBjb25zdHJhaW50cywgc28KeW91IGNvdWxkIGFubm90YXRlIHRo
-ZSB0d28gJ210aW1lJyBtZW1iZXJzIGFzIF9fcGFja2VkLAp3aGljaCBnaXZlcyB0aGUgYW5vbnlt
-b3VzIHN0cnVjdCBhbmQgdGhlIHN0cnVjdCB2aWN0aW1faW5mbwozMi1iaXQgYWxpZ25tZW50IGFu
-ZCBhdm9pZHMgdGhlIHdhcm5pbmcuIEhhdmluZyB0aGUgCl9fcGFja2VkIGF0IHRoZSBlbmQgb2Yg
-dGhlIHN0cnVjdHVyZSBvciB1bmlvbiB3b3VsZApyZXN1bHQgaW4gb25seSBzaW5nbGUtYnl0ZSBh
-bGlnbm1lbnQgZm9yIHN0cnVjdHVyZQphbmQgbm90IHNvbHZlIHRoZSBwcm9ibGVtIHRoYXQgdGhl
-IGNvbXBpbGVyIHdhcm5zIGFib3V0LgoKVGhlIG90aGVyIGFsdGVybmF0aXZlIGlzIHRvIHJldmVy
-dCByYl9lbnRyeSBiYWNrIHRvCmhhdmluZyA2NC1iaXQgYWxpZ25tZW50IG9uIHRoZSBrZXksIGJ1
-dCB0aGVuIGFsc28gbWFyawpleHRlbnRfbm9kZSBhcyByZXF1aXJpbmcgdGhlIHNhbWUgYWxpZ25t
-ZW50IG9uIHRoZQonZXh0ZW50X2luZm8nIG1lbWJlciBmb3IgY29uc2lzdGVuY3k6CgotLS0gYS9m
-cy9mMmZzL2YyZnMuaAorKysgYi9mcy9mMmZzL2YyZnMuaApAQCAtNTgwLDExICs1ODAsMTEgQEAg
-c3RydWN0IHJiX2VudHJ5IHsKICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgaW50IGxl
-bjsgICAgICAgLyogbGVuZ3RoIG9mIHRoZSBlbnRyeSAqLwogICAgICAgICAgICAgICAgfTsKICAg
-ICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgbG9uZyBrZXk7ICAgICAgICAgLyogNjQtYml0cyBr
-ZXkgKi8KLSAgICAgICB9IF9fcGFja2VkOworICAgICAgIH07CiB9OwogCiBzdHJ1Y3QgZXh0ZW50
-X2luZm8gewotICAgICAgIHVuc2lnbmVkIGludCBmb2ZzOyAgICAgICAgICAgICAgLyogc3RhcnQg
-b2Zmc2V0IGluIGEgZmlsZSAqLworICAgICAgIHVuc2lnbmVkIGludCBmb2ZzIF9fYWxpZ25lZCg4
-KTsgLyogc3RhcnQgb2Zmc2V0IGluIGEgZmlsZSAqLwogICAgICAgIHVuc2lnbmVkIGludCBsZW47
-ICAgICAgICAgICAgICAgLyogbGVuZ3RoIG9mIHRoZSBleHRlbnQgKi8KICAgICAgICB1MzIgYmxr
-OyAgICAgICAgICAgICAgICAgICAgICAgIC8qIHN0YXJ0IGJsb2NrIGFkZHJlc3Mgb2YgdGhlIGV4
-dGVudCAqLwogI2lmZGVmIENPTkZJR19GMkZTX0ZTX0NPTVBSRVNTSU9OCgogICAgICBBcm5kCgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJm
-cy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5u
-ZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJm
-cy1kZXZlbAo=
+Option "-g" for dump.f2fs is unavailable and not used in dump.f2fs.
+
+Signed-off-by: Sheng Yong <shengyong@oppo.com>
+---
+ fsck/main.c | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
+
+diff --git a/fsck/main.c b/fsck/main.c
+index 3268664..9b50787 100644
+--- a/fsck/main.c
++++ b/fsck/main.c
+@@ -273,8 +273,10 @@ void f2fs_parse_options(int argc, char *argv[])
+ 						atoi(optarg);
+ 				break;
+ 			case 'g':
+-				if (!strcmp(optarg, "android"))
++				if (!strcmp(optarg, "android")) {
+ 					c.defset = CONF_ANDROID;
++					MSG(0, "Info: Set conf for android\n");
++				}
+ 				break;
+ 			case 'l':
+ 				c.layout = 1;
+@@ -409,14 +411,6 @@ void f2fs_parse_options(int argc, char *argv[])
+ 				MSG(0, "Info: Debug level = %d\n",
+ 							c.dbg_lv);
+ 				break;
+-			case 'g':
+-				if (!strcmp(optarg, "android")) {
+-					c.defset = CONF_ANDROID;
+-					MSG(0, "Info: Set conf for android\n");
+-					break;
+-				}
+-				err = EWRONG_OPT;
+-				break;
+ 			case 'i':
+ 				if (strncmp(optarg, "0x", 2))
+ 					ret = sscanf(optarg, "%d",
+-- 
+2.25.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
