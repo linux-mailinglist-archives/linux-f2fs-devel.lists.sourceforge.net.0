@@ -2,89 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C722C624571
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Nov 2022 16:18:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE2696249F7
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 10 Nov 2022 19:52:20 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ot9K8-000399-Fg;
-	Thu, 10 Nov 2022 15:18:36 +0000
+	id 1otCet-000796-CZ;
+	Thu, 10 Nov 2022 18:52:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ot9Jo-00038r-Si
+ (envelope-from <vishal.moola@gmail.com>) id 1otCer-000790-Ok
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Nov 2022 15:18:17 +0000
+ Thu, 10 Nov 2022 18:52:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fNPmN0Y5PrgcreQs71opDcRj/fqmpWBcgd9zU7I1wLE=; b=OKKJQ0/g/7n2e5VQj90CKNb2dc
- Y7Pf0AaIeDBSJb9zd32WFG1kyIw6ZfN1VePOv6n57CGsQ/3BYiG+7Fo4bAsfK12ueIiJ4mSWADTJ0
- SGL5QF5X98QzEMm8lfm8CJs+0snmmvH2hdHOOFxYEiBgiGVh2/c6CE1rDfspKTegCpxE=;
+ bh=ahiLR+0HYqx9Hj3q85kkyLXkS2RfP6cywR4r1/bj6Ic=; b=JTCEwf4fOi4qgkdGRhiuZBWfMq
+ /RHVCX2urjS21gp0aW0+n58YvzQgfWwQkwmHDINMek6b/zWKQnsg6HR5JmCq8ElNm+LPlOeIBf8Di
+ l+oVo2msvWHZq6t0MHj13p1qGXP25Xede0v6Lj1nJyedKSeAAlBcD2JCBkIfLjCBLiPQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
- References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fNPmN0Y5PrgcreQs71opDcRj/fqmpWBcgd9zU7I1wLE=; b=Bujm5dtUgEjcoEx1AEThZMxrtx
- MIk1KN8AWGnS8oz3yi5ugL8y36dJqdiHPlxmqR6vDGQYxNwN84Sd09n1uzOvtjcrO3UlvqydkJC3t
- //SVB3y2Xk9Cira3uFxd0Zk/y+hhMa72nM2Vr9XyqoDPY1XJQ36TDru590qFKk8r05gA=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ot9Jk-003F3i-Aw for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 10 Nov 2022 15:18:16 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id A0D4EB82170;
- Thu, 10 Nov 2022 15:18:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82550C433C1;
- Thu, 10 Nov 2022 15:18:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668093482;
- bh=HJNAZxTJ7uEeAbmnBhJvhS3YM2WaOaEaJpZM7qMZxjM=;
- h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
- b=cWLHPqlYwFfr4vb9qPJTaGak5tQP1y8AomUWZRIBi+urdlJOUcjSxQXmj1kUNft86
- D61yVIuwM0dJAMWHTCavkjCZ5H/y/tqKY2VXrlACi1EB0VgSXnZM2Iw3v3qAU2dya9
- 92l5B0uuwHOpZib9BZxTAp7lUvzuteSKYNY+i6YY9oUTwFZCbmtlazPDJBwCflHLOB
- mJBzt84j7msYCAi0X0+krsjL05gg6I8+KsgdP8DL8w0FCEuFNhbDKiE2GUXTnHCfFV
- Dwr2QaFC9A1qDfDcO2L5oKjCVCR16K3MbLLmX1JT1o4avrZgydT9H0SIt0O6A1DX3S
- c0/PTQ5L+STDw==
-Message-ID: <47c43a5f-bc33-c682-7a1d-82106d713ed2@kernel.org>
-Date: Thu, 10 Nov 2022 23:17:58 +0800
+ bh=ahiLR+0HYqx9Hj3q85kkyLXkS2RfP6cywR4r1/bj6Ic=; b=g3oJfMBEbd2DPeRtFvFEwqKSf/
+ jknG0k0wdzUIqdGd81LbBMi4bM/lBE91LtuURugT1qu18/UkyPHPwL3XcKN8KnUqVK+k6PVBZPCMs
+ KqGtOl+91MwdyB5xhYKFE+AXJuBK83NJZYNVhIXNh9655zEqZ6xRVeMSB4jzk06/SbZ8=;
+Received: from mail-yw1-f175.google.com ([209.85.128.175])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1otCel-0005c7-ML for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 10 Nov 2022 18:52:13 +0000
+Received: by mail-yw1-f175.google.com with SMTP id
+ 00721157ae682-3691e040abaso23815217b3.9
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 10 Nov 2022 10:52:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ahiLR+0HYqx9Hj3q85kkyLXkS2RfP6cywR4r1/bj6Ic=;
+ b=BuLNNyZA6RGJSro1aFTVvKQfJXFXyp5VR6864NrwvkzbzqRoktCJVw6N/Doca5qBcu
+ 30j7oqGhfYMC/2wwo+CnxYyRIcfIpMO1i3CANPIDzCZ/35eph3JNnXqbXZVpyVeE6nwC
+ 2rgiZ/WGg8qdiA9Wx3EmD01ybzYII1H7SmMVjyiHJ0HXfk4CMj8BCtPoDkfwrzn3wjsG
+ tMQ34M0n3gr3bNTVHM2h6CnhVhIFHKJD1ZCvcWbyUbhDpvhP6XUbvTgwPEhVyNT1WYj4
+ 2KOVt0eemsENinf1T7NLvlf2zR8Rak8qZXX3U/QTi6IKzLl/llUNyWZD4jBYY5o/Cbo9
+ gdkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ahiLR+0HYqx9Hj3q85kkyLXkS2RfP6cywR4r1/bj6Ic=;
+ b=ruF/lx3FDNJIpYugjT2Ux0EhGpSuHuiYiEpZUhgJr2Qf8bxBJxtEq3ZGoR0MAYnJfr
+ u5BDFOdGHDstQEs+org+q/0QcG7fU4TizX1UQel9bTKmTMuvQNbZbvs3jl/ktUSxt3Ur
+ jIjHcz+aTncrwKMXfg0XOel4Be+k6OLPJWWhv90IU/hdRqGMaCENNrqEXpWhj+TjM/m+
+ yH5P+to7o19GCFkAMNWf1NbdjiBNVgvbkOLx64IYQsyZ2JHEzG1UgePUsrlgahU8rmbW
+ r0c36w0OLBTnA674Z304F6kWZMoctkc4g5vD5Foh74RUdxCtmLWAWAb3umo94v33YPfl
+ ewGw==
+X-Gm-Message-State: ACrzQf1PvkgnKq7EbJg9c4UcCdTReEWniDgL1/kcFD4HRM2ndb2bJXRL
+ jxueN6RYq4K2eubx4COpV+xoIFhWjBEFLOyrVzY=
+X-Google-Smtp-Source: AMsMyM6qbhoDq4EuNlT/sFztZuNh18/AZoQGojI1IWj/9MWKt4lI+zofGQOcHJnd2iNJiiAFP0Po3i1fYNOJTKFQ5/8=
+X-Received: by 2002:a81:63c6:0:b0:349:37f7:73dd with SMTP id
+ x189-20020a8163c6000000b0034937f773ddmr62868232ywb.368.1668106321899; Thu, 10
+ Nov 2022 10:52:01 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.1
-Content-Language: en-US
-To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
-References: <20221031192416.32917-1-daeho43@gmail.com>
- <20221031192416.32917-2-daeho43@gmail.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221031192416.32917-2-daeho43@gmail.com>
-X-Spam-Score: -7.9 (-------)
+References: <20221017202451.4951-1-vishal.moola@gmail.com>
+ <20221017202451.4951-12-vishal.moola@gmail.com>
+ <CAOzc2pwKoyy4i4zBKhvoKmN8cezUxjDhjYZnK9GLcJniQVPoGA@mail.gmail.com>
+In-Reply-To: <CAOzc2pwKoyy4i4zBKhvoKmN8cezUxjDhjYZnK9GLcJniQVPoGA@mail.gmail.com>
+From: Vishal Moola <vishal.moola@gmail.com>
+Date: Thu, 10 Nov 2022 10:51:50 -0800
+Message-ID: <CAOzc2pwuUZRK-qMFBhPEENUid-NBSfa9YyJ_FCcFHgwFf4mOuQ@mail.gmail.com>
+To: linux-fsdevel@vger.kernel.org
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/11/1 3:24, Daeho Jeong wrote: > From: Daeho Jeong
- <daehojeong@google.com> > > introduce a new ioctl to replace the whole content
- of a file atomically, > which means it induces truncate and con [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  On Mon, Oct 24, 2022 at 12:31 PM Vishal Moola wrote: > > On
+ Mon, Oct 17, 2022 at 1:25 PM Vishal Moola (Oracle) > wrote: > > > > Convert
+ function to use a folio_batch instead of pagevec. This is in [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.128.175 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [vishal.moola[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.175 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -92,11 +108,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ot9Jk-003F3i-Aw
-Subject: Re: [f2fs-dev] [PATCH v6 2/2] f2fs: introduce
- F2FS_IOC_START_ATOMIC_REPLACE
+X-Headers-End: 1otCel-0005c7-ML
+Subject: Re: [f2fs-dev] [PATCH v3 11/23] f2fs: Convert
+ f2fs_fsync_node_pages() to use filemap_get_folios_tag()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,164 +122,94 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ cluster-devel@redhat.com, linux-mm@kvack.org, jaegeuk@kernel.org,
+ ceph-devel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-afs@lists.infradead.org, linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/11/1 3:24, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
-> 
-> introduce a new ioctl to replace the whole content of a file atomically,
-> which means it induces truncate and content update at the same time.
-> We can start it with F2FS_IOC_START_ATOMIC_REPLACE and complete it with
-> F2FS_IOC_COMMIT_ATOMIC_WRITE. Or abort it with
-> F2FS_IOC_ABORT_ATOMIC_WRITE.
-> 
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
-> ---
-> v3: move i_size change after setting atomic write flag
-> v2: add undefined ioctl number reported by <lkp@intel.com>
-> ---
->   fs/f2fs/data.c            |  3 +++
->   fs/f2fs/f2fs.h            |  1 +
->   fs/f2fs/file.c            | 20 ++++++++++++++------
->   fs/f2fs/segment.c         | 14 +++++++++++++-
->   include/uapi/linux/f2fs.h |  1 +
->   5 files changed, 32 insertions(+), 7 deletions(-)
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 5f895ddcd64a..bce4dcc3ad78 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -3457,6 +3457,9 @@ static int prepare_atomic_write_begin(struct f2fs_sb_info *sbi,
->   	else if (*blk_addr != NULL_ADDR)
->   		return 0;
->   
-> +	if (is_inode_flag_set(inode, FI_ATOMIC_REPLACE))
-> +		goto reserve_block;
-> +
->   	/* Look for the block in the original inode */
->   	err = __find_data_block(inode, index, &ori_blk_addr);
->   	if (err)
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index e29f9adf60ca..d513ecd17550 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -765,6 +765,7 @@ enum {
->   	FI_ALIGNED_WRITE,	/* enable aligned write */
->   	FI_COW_FILE,		/* indicate COW file */
->   	FI_ATOMIC_COMMITTED,	/* indicate atomic commit completed except disk sync */
-> +	FI_ATOMIC_REPLACE,	/* indicate atomic replace */
+On Mon, Oct 24, 2022 at 12:31 PM Vishal Moola <vishal.moola@gmail.com> wrote:
+>
+> On Mon, Oct 17, 2022 at 1:25 PM Vishal Moola (Oracle)
+> <vishal.moola@gmail.com> wrote:
+> >
+> > Convert function to use a folio_batch instead of pagevec. This is in
+> > preparation for the removal of find_get_pages_range_tag().
+> >
+> > Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
+> > ---
+> >  fs/f2fs/node.c | 19 ++++++++++---------
+> >  1 file changed, 10 insertions(+), 9 deletions(-)
+> >
+> > diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> > index 983572f23896..e8b72336c096 100644
+> > --- a/fs/f2fs/node.c
+> > +++ b/fs/f2fs/node.c
+> > @@ -1728,12 +1728,12 @@ int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
+> >                         unsigned int *seq_id)
+> >  {
+> >         pgoff_t index;
+> > -       struct pagevec pvec;
+> > +       struct folio_batch fbatch;
+> >         int ret = 0;
+> >         struct page *last_page = NULL;
+> >         bool marked = false;
+> >         nid_t ino = inode->i_ino;
+> > -       int nr_pages;
+> > +       int nr_folios;
+> >         int nwritten = 0;
+> >
+> >         if (atomic) {
+> > @@ -1742,20 +1742,21 @@ int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
+> >                         return PTR_ERR_OR_ZERO(last_page);
+> >         }
+> >  retry:
+> > -       pagevec_init(&pvec);
+> > +       folio_batch_init(&fbatch);
+> >         index = 0;
+> >
+> > -       while ((nr_pages = pagevec_lookup_tag(&pvec, NODE_MAPPING(sbi), &index,
+> > -                               PAGECACHE_TAG_DIRTY))) {
+> > +       while ((nr_folios = filemap_get_folios_tag(NODE_MAPPING(sbi), &index,
+> > +                                       (pgoff_t)-1, PAGECACHE_TAG_DIRTY,
+> > +                                       &fbatch))) {
+> >                 int i;
+> >
+> > -               for (i = 0; i < nr_pages; i++) {
+> > -                       struct page *page = pvec.pages[i];
+> > +               for (i = 0; i < nr_folios; i++) {
+> > +                       struct page *page = &fbatch.folios[i]->page;
+> >                         bool submitted = false;
+> >
+> >                         if (unlikely(f2fs_cp_error(sbi))) {
+> >                                 f2fs_put_page(last_page, 0);
+> > -                               pagevec_release(&pvec);
+> > +                               folio_batch_release(&fbatch);
+> >                                 ret = -EIO;
+> >                                 goto out;
+> >                         }
+> > @@ -1821,7 +1822,7 @@ int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
+> >                                 break;
+> >                         }
+> >                 }
+> > -               pagevec_release(&pvec);
+> > +               folio_batch_release(&fbatch);
+> >                 cond_resched();
+> >
+> >                 if (ret || marked)
+> > --
+> > 2.36.1
+> >
+>
+> Following up on these f2fs patches (11/23, 12/23, 13/23, 14/23, 15/23,
+> 16/23). Does anyone have time to review them this week?
 
-Need to clear FI_ATOMIC_REPLACE in f2fs_abort_atomic_write() for the case
-atomic_commit is not called after atomic_replace?
-
->   	FI_MAX,			/* max flag, never be used */
->   };
->   
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 7ce629c95f4a..7b2d956bc52f 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -1984,7 +1984,7 @@ static int f2fs_ioc_getversion(struct file *filp, unsigned long arg)
->   	return put_user(inode->i_generation, (int __user *)arg);
->   }
->   
-> -static int f2fs_ioc_start_atomic_write(struct file *filp)
-> +static int f2fs_ioc_start_atomic_write(struct file *filp, bool truncate)
->   {
->   	struct inode *inode = file_inode(filp);
->   	struct user_namespace *mnt_userns = file_mnt_user_ns(filp);
-> @@ -2053,10 +2053,6 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
->   
->   	f2fs_write_inode(inode, NULL);
->   
-> -	isize = i_size_read(inode);
-> -	fi->original_i_size = isize;
-> -	f2fs_i_size_write(fi->cow_inode, isize);
-> -
->   	stat_inc_atomic_inode(inode);
->   
->   	set_inode_flag(inode, FI_ATOMIC_FILE);
-> @@ -2064,6 +2060,16 @@ static int f2fs_ioc_start_atomic_write(struct file *filp)
->   	clear_inode_flag(fi->cow_inode, FI_INLINE_DATA);
->   	f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
->   
-> +	isize = i_size_read(inode);
-> +	fi->original_i_size = isize;
-> +	if (truncate) {
-> +		set_inode_flag(inode, FI_ATOMIC_REPLACE);
-> +		truncate_inode_pages_final(inode->i_mapping);
-> +		f2fs_i_size_write(inode, 0);
-> +		isize = 0;
-> +	}
-> +	f2fs_i_size_write(fi->cow_inode, isize);
-
-Should cover above operations w/ fi->i_gc_rwsem[WRITE] to avoid
-racing with background gc?
-
-Thanks,
-
-> +
->   	f2fs_update_time(sbi, REQ_TIME);
->   	fi->atomic_write_task = current;
->   	stat_update_max_atomic_write(inode);
-> @@ -4089,7 +4095,9 @@ static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
->   	case FS_IOC_GETVERSION:
->   		return f2fs_ioc_getversion(filp, arg);
->   	case F2FS_IOC_START_ATOMIC_WRITE:
-> -		return f2fs_ioc_start_atomic_write(filp);
-> +		return f2fs_ioc_start_atomic_write(filp, false);
-> +	case F2FS_IOC_START_ATOMIC_REPLACE:
-> +		return f2fs_ioc_start_atomic_write(filp, true);
->   	case F2FS_IOC_COMMIT_ATOMIC_WRITE:
->   		return f2fs_ioc_commit_atomic_write(filp);
->   	case F2FS_IOC_ABORT_ATOMIC_WRITE:
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 9cbf88092c78..7f62118cbe6e 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -261,14 +261,26 @@ static void __complete_revoke_list(struct inode *inode, struct list_head *head,
->   					bool revoke)
->   {
->   	struct revoke_entry *cur, *tmp;
-> +	pgoff_t start_index = 0;
-> +	bool truncate = is_inode_flag_set(inode, FI_ATOMIC_REPLACE);
->   
->   	list_for_each_entry_safe(cur, tmp, head, list) {
-> -		if (revoke)
-> +		if (revoke) {
->   			__replace_atomic_write_block(inode, cur->index,
->   						cur->old_addr, NULL, true);
-> +		} else if (truncate) {
-> +			f2fs_truncate_hole(inode, start_index, cur->index);
-> +			start_index = cur->index + 1;
-> +		}
-> +
->   		list_del(&cur->list);
->   		kmem_cache_free(revoke_entry_slab, cur);
->   	}
-> +
-> +	if (!revoke && truncate) {
-> +		f2fs_do_truncate_blocks(inode, start_index * PAGE_SIZE, false);
-> +		clear_inode_flag(inode, FI_ATOMIC_REPLACE);
-> +	}
->   }
->   
->   static int __f2fs_commit_atomic_write(struct inode *inode)
-> diff --git a/include/uapi/linux/f2fs.h b/include/uapi/linux/f2fs.h
-> index 3121d127d5aa..955d440be104 100644
-> --- a/include/uapi/linux/f2fs.h
-> +++ b/include/uapi/linux/f2fs.h
-> @@ -42,6 +42,7 @@
->   						struct f2fs_comp_option)
->   #define F2FS_IOC_DECOMPRESS_FILE	_IO(F2FS_IOCTL_MAGIC, 23)
->   #define F2FS_IOC_COMPRESS_FILE		_IO(F2FS_IOCTL_MAGIC, 24)
-> +#define F2FS_IOC_START_ATOMIC_REPLACE	_IO(F2FS_IOCTL_MAGIC, 25)
->   
->   /*
->    * should be same as XFS_IOC_GOINGDOWN.
+Chao, thank you for taking a look at some of these patches!
+If you have time to look over the remaining patches (14, 15, 16)
+feedback on those would be appreciated as well.
 
 
 _______________________________________________
