@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DC5F6260A5
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Nov 2022 18:45:23 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3007762634C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Nov 2022 21:58:51 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1otY5e-00006o-92;
-	Fri, 11 Nov 2022 17:45:18 +0000
+	id 1otb6q-0000tt-RS;
+	Fri, 11 Nov 2022 20:58:44 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1otY5c-00006W-3s
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1otb6q-0000tn-0h
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Nov 2022 17:45:16 +0000
+ Fri, 11 Nov 2022 20:58:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GtY0tARpg52vy4tNBdA356oYenMs9245X9ygXsE5SpQ=; b=VGP0hzUxOyFkRH7CHIBsAgPuLO
- MpZIOtM9yWS/3UzW1iKot/dCbfNZ1Y1/BVfHcauRgmP26IMRJhBF7uG36r8gnoQt5yjYIEvJUKklP
- U8qmYKXQyGVKpZdqBG3RuCeCdqUmR6jTKvv3wBgsy34eazKJPZpJAkTAIkCH05Bkqiko=;
+ bh=wSwj/gePjhVcz9Aq162KBtife7VJy2yz1kjUO8id6jM=; b=SXtguYrYSlXow55GEcCqv8Qmbj
+ OZYNk3ooJj2PIJKOPuLqX1PSWo1Ip7VLITF3JHt6YQ6/KhFV84/hyESbSYq4f9TzWwIDUBszZPS2b
+ /MZKPRG+mSOWoWl27YOiNcIQNqVK3Cay0V8RBKVSt6NMm9a4QSt2LolVHB6pir9UAcj4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -31,38 +31,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GtY0tARpg52vy4tNBdA356oYenMs9245X9ygXsE5SpQ=; b=Gp0ngzDIlG+l5tpKFYUvBfKdRf
- HRorpSryDisvcX//wCiS3eYKsCU4hs2cNMPdGr4OuumnW8gd7SaMcECjFVwDcG/gckPyf3Ir6tUgW
- CpfbWCuP87muKndHiCSClzvOUCWwZVv6PDs0Zgl7rzCVGkD6eiU8C9yZmdNFlGwoeb5Q=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=wSwj/gePjhVcz9Aq162KBtife7VJy2yz1kjUO8id6jM=; b=hxYcWd0mmI2LpmX04ObSXTwT5D
+ RCLVL8ek9SvoOvfd38UssFoCUcLBV73tIX4Jlutm9qJvPAHck8qU8m9TfJU5oBcopd+n6GvHBkfsM
+ iqAPW1Pj5N1WxTodHaPgy6wYGs8LmjhyOS+dtohddazfKUvoQeTMMBaK+8BEy60B8Wcw=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1otY5X-00022V-JQ for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Nov 2022 17:45:16 +0000
+ id 1otb6l-0002s8-LT for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 11 Nov 2022 20:58:43 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 2DBF4CE28B4
+ by ams.source.kernel.org (Postfix) with ESMTPS id BC9DFB827DB
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 11 Nov 2022 17:44:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 588ACC433C1
+ Fri, 11 Nov 2022 20:58:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 60EBDC433C1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 11 Nov 2022 17:44:56 +0000 (UTC)
+ Fri, 11 Nov 2022 20:58:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668188696;
- bh=GtY0tARpg52vy4tNBdA356oYenMs9245X9ygXsE5SpQ=;
+ s=k20201202; t=1668200310;
+ bh=wSwj/gePjhVcz9Aq162KBtife7VJy2yz1kjUO8id6jM=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=epMhg8ONNjDl1UbyYuLufyIpBsrNwIxh0YQSrF7KMNYdvMPEHkkkhsOE+sNAikGnl
- L8Ta1nqy8MGEqq/KB3igJgWDAKNU1iba+8yPzwnON97E/MW7mdcSINTnuAbFVm3Btr
- RtCSYS+VM0k6a99lepXG5YJUaR4mlsf123KR3KiYiFU0S/X1FvPRxVqZK1TptDWAYN
- KNrFugg8hJ3WSv9rmqTA0VctmNGVKO/xFVHnxSZ5FCedtfAOvo5ZH8TAqNJllSDsli
- TLbpgaBz82BsQBy3xkRKDdRcRhgJ355IG2K4pacF7RvuJne0drofM/A0cXxFA41c9t
- loJvqaUViV66A==
+ b=nTKKGRswDXjOcNlc7LnZ3wwq/Q0SY5JUG9rzOUkY8Wy41EvI5qZN3kxiIBxc/sAKZ
+ YLTgZAmoPiaXAjhO4B+wr+487cd1fJattVH2wRw50Nd2wAN1QrW1eqsQcf2Tl6V0jb
+ /Y4Qpl8ljvp6/IQ9iwBiKNrZwDGgXfzGfAPRsUGQEaI14AO9q4Y/rxHPlo21TQttUm
+ UX3PDGTxz1t9reNbOuzJrJiSN0LZHBZZOZupZkxj3UZgoHCj1ihbdI5QhUKdfqRByc
+ S/rFfIrsWZOtLli7z48MYudjrI5leh5/df1Y7bJlXK7IHAucZFftyzPY5XQFRRL8Iu
+ OSU20ASnIf9AQ==
 Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 39D71C433E4; Fri, 11 Nov 2022 17:44:56 +0000 (UTC)
+ from userid 48) id 384EBC433E4; Fri, 11 Nov 2022 20:58:30 +0000 (UTC)
 From: bugzilla-daemon@kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 11 Nov 2022 17:44:56 +0000
+Date: Fri, 11 Nov 2022 20:58:29 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -78,40 +78,39 @@ X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-H31qPZCXjX@https.bugzilla.kernel.org/>
+Message-ID: <bug-216050-202145-S57qHkPYzN@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
 References: <bug-216050-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
  Comment
- #82 from Guido (guido.iodice@gmail.com) --- (In reply to Jaegeuk Kim from
- comment #81) > I think 1313 would be enough to avoid this issue first. >
- 3568 case is after submit IO which could [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ #83 from Guido (guido.iodice@gmail.com) --- I tried this script to trigger
+ the GC: https://github.com/LLJY/f2fs-gc/blob/master/f2fs-gc.sh 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.73.55 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1otY5X-00022V-JQ
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1otb6l-0002s8-LT
 Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -130,13 +129,14 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
---- Comment #82 from Guido (guido.iodice@gmail.com) ---
-(In reply to Jaegeuk Kim from comment #81)
-> I think 1313 would be enough to avoid this issue first.
-> 3568 case is after submit IO which could have a chance to get another states.
+--- Comment #83 from Guido (guido.iodice@gmail.com) ---
+I tried this script to trigger the GC:
+https://github.com/LLJY/f2fs-gc/blob/master/f2fs-gc.sh
 
-Thank you, I'm testing 6.0.8 patched.
-I will not turn off the PC for several days, so let's see what happens.
+It's been running for 10 minutes now, but it's stock to 2503 dirty segments on
+the root partition.
+
+But no sign of 100% cpu, everything looks normal.
 
 -- 
 You may reply to this email to add a comment.
