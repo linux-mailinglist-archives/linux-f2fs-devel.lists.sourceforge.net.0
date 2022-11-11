@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3007762634C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Nov 2022 21:58:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A73662634F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Nov 2022 21:59:37 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1otb6q-0000tt-RS;
-	Fri, 11 Nov 2022 20:58:44 +0000
+	id 1otb7g-0000vl-7b;
+	Fri, 11 Nov 2022 20:59:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1otb6q-0000tn-0h
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1otb7d-0000ve-Af
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Nov 2022 20:58:44 +0000
+ Fri, 11 Nov 2022 20:59:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wSwj/gePjhVcz9Aq162KBtife7VJy2yz1kjUO8id6jM=; b=SXtguYrYSlXow55GEcCqv8Qmbj
- OZYNk3ooJj2PIJKOPuLqX1PSWo1Ip7VLITF3JHt6YQ6/KhFV84/hyESbSYq4f9TzWwIDUBszZPS2b
- /MZKPRG+mSOWoWl27YOiNcIQNqVK3Cay0V8RBKVSt6NMm9a4QSt2LolVHB6pir9UAcj4=;
+ bh=8yYrDsBEHP2wm3jJcm/Mlyzj69u1OErq7azh0b7DJq4=; b=OAmfiGKFk66dt8GRDS98PX+MVH
+ idY57UzqCy1wZRc+TeilWXvWk+P6dE/B8IbeslKtwlFdpAPXS4ux7Hn7MkEauElL0CMTmgnEAy7Pb
+ PB5kBYHtGGtRuGbfgBw/v/a8Xv2BvAKps/yoNsP+Rb4bsIxrp88bGSIpqEfacad3ZKWY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -31,38 +31,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wSwj/gePjhVcz9Aq162KBtife7VJy2yz1kjUO8id6jM=; b=hxYcWd0mmI2LpmX04ObSXTwT5D
- RCLVL8ek9SvoOvfd38UssFoCUcLBV73tIX4Jlutm9qJvPAHck8qU8m9TfJU5oBcopd+n6GvHBkfsM
- iqAPW1Pj5N1WxTodHaPgy6wYGs8LmjhyOS+dtohddazfKUvoQeTMMBaK+8BEy60B8Wcw=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=8yYrDsBEHP2wm3jJcm/Mlyzj69u1OErq7azh0b7DJq4=; b=d84QgPw7sdMLUadTGW4FU7o6BJ
+ Lp4IAMiZWfB0JzPAHItyLDD1345q3T4hQFCX/MmW1UBwaKBsIq3BY5/dbnXSvBTR/Q74nCXjBjmt9
+ w73Uz33iMKYKIZPuMMYEhqODIvbypL8AFbyUXLQ3DBiXeujxfe2+2gKey9IsPbL9WaqU=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1otb6l-0002s8-LT for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Nov 2022 20:58:43 +0000
+ id 1otb7c-004gg2-P3 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 11 Nov 2022 20:59:33 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id BC9DFB827DB
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5BD43620EE
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 11 Nov 2022 20:58:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 60EBDC433C1
+ Fri, 11 Nov 2022 20:59:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2AFADC433C1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 11 Nov 2022 20:58:30 +0000 (UTC)
+ Fri, 11 Nov 2022 20:59:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668200310;
- bh=wSwj/gePjhVcz9Aq162KBtife7VJy2yz1kjUO8id6jM=;
+ s=k20201202; t=1668200363;
+ bh=8yYrDsBEHP2wm3jJcm/Mlyzj69u1OErq7azh0b7DJq4=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=nTKKGRswDXjOcNlc7LnZ3wwq/Q0SY5JUG9rzOUkY8Wy41EvI5qZN3kxiIBxc/sAKZ
- YLTgZAmoPiaXAjhO4B+wr+487cd1fJattVH2wRw50Nd2wAN1QrW1eqsQcf2Tl6V0jb
- /Y4Qpl8ljvp6/IQ9iwBiKNrZwDGgXfzGfAPRsUGQEaI14AO9q4Y/rxHPlo21TQttUm
- UX3PDGTxz1t9reNbOuzJrJiSN0LZHBZZOZupZkxj3UZgoHCj1ihbdI5QhUKdfqRByc
- S/rFfIrsWZOtLli7z48MYudjrI5leh5/df1Y7bJlXK7IHAucZFftyzPY5XQFRRL8Iu
- OSU20ASnIf9AQ==
+ b=l/NPNtg2cVL/gJUyvFIHLHwDitejZFGlnrifG8ENxTL9zVqYuyUh7zA+qlHtHCYVC
+ jPg8PsMCmBJijncOxqfwu0GCv0k9c1mkdn7s+NBIv4/Zw+r6V4aBkEwcO/mYUPzCrO
+ 4swAEYZGSxJjrTJDkx0Yk4t62G1zSI6HNquj5HzmbB/ChcwNzLw6qtU9gpsoVy0pzC
+ BXWt6vVpuuc4ule64YbMxN23n6Dw+yWh6mmx6dDEe16ESXf9hZ0T6b/IKidLll4r97
+ Ob4s8NbGyoTciO2/QeiujQEwQrP0DqyVctLEIw52lpMdGUzc7N/n+ews6t/IU8gg9Z
+ c8T6ha77OIN7w==
 Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 384EBC433E4; Fri, 11 Nov 2022 20:58:30 +0000 (UTC)
+ from userid 48) id 1BC92C433E6; Fri, 11 Nov 2022 20:59:23 +0000 (UTC)
 From: bugzilla-daemon@kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 11 Nov 2022 20:58:29 +0000
+Date: Fri, 11 Nov 2022 20:59:22 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -78,7 +78,7 @@ X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-S57qHkPYzN@https.bugzilla.kernel.org/>
+Message-ID: <bug-216050-202145-X5jJaNmx4w@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
 References: <bug-216050-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -93,13 +93,13 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
  Comment
- #83 from Guido (guido.iodice@gmail.com) --- I tried this script to trigger
- the GC: https://github.com/LLJY/f2fs-gc/blob/master/f2fs-gc.sh 
+ #84 from Guido (guido.iodice@gmail.com) --- this is the output Performing
+ GC on /sys/fs/f2fs/nvme0n1p3/ 2589 2589 2503 2503 2503 2503 ... 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -110,7 +110,7 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1otb6l-0002s8-LT
+X-Headers-End: 1otb7c-004gg2-P3
 Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -129,14 +129,19 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
---- Comment #83 from Guido (guido.iodice@gmail.com) ---
-I tried this script to trigger the GC:
-https://github.com/LLJY/f2fs-gc/blob/master/f2fs-gc.sh
+--- Comment #84 from Guido (guido.iodice@gmail.com) ---
+this is the output
 
-It's been running for 10 minutes now, but it's stock to 2503 dirty segments on
-the root partition.
+Performing GC on /sys/fs/f2fs/nvme0n1p3/
+2589
+2589
+2503
+2503
+2503
+2503
+...
 
-But no sign of 100% cpu, everything looks normal.
+and a lot of 2503....
 
 -- 
 You may reply to this email to add a comment.
