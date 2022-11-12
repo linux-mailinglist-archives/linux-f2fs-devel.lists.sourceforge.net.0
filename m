@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B06A8626630
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 12 Nov 2022 02:28:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD450626648
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 12 Nov 2022 02:55:37 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1otfJZ-00068c-EO;
-	Sat, 12 Nov 2022 01:28:09 +0000
+	id 1otfk5-0007zz-KA;
+	Sat, 12 Nov 2022 01:55:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1otfJY-00068W-Kl
+ (envelope-from <ebiggers@kernel.org>) id 1otfk3-0007zt-Us
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 12 Nov 2022 01:28:08 +0000
+ Sat, 12 Nov 2022 01:55:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+Fq+T/97vjM47DS5j0lcMT9F3it3WrVV/hMtvuWGYU8=; b=IAxMB5PpM4K0/AL5e6/W8SFjOH
- oMm8HdBUcnQ4vl19d4VbyerHoV3UrbORwV/aTz+nQIvtRjIFjRU0h7AlqWljFf4BfGrJKnKd6er45
- us1CPchAdZrEwtOsJtkXl7skVsVi+O0r9yCyK4y9Fs79Y92IP2BHf0kS26Fz5/H/HfmQ=;
+ bh=eh5Ng42syvlADdffipGk7XwcLxEWtTv5ZvFi/TadrD8=; b=YO0Pk3gpGJMSueaqCA7gnZcbtf
+ Tg90AKv5hDTqLrQAwrr55VKQVJK8m/dTRBHiRPL3SLChyH3rX3sh808N5hglrIIvXswovUmLIJmTd
+ ru1M0jq6SuNAxtbeUR/jUhDFrM0t7ZkTTCS2yhUTMjL/r+2sBsefn0e+cP5FwdMgsVR0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,39 +31,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+Fq+T/97vjM47DS5j0lcMT9F3it3WrVV/hMtvuWGYU8=; b=Zvyv03wwOjfb3Tyd/c67ZYx3NJ
- EqYDBpTojnCr/mzzKS0OmZOqDq5/wHWT7Zf+WufXVsfQO3O+TrjzsYtVVZI8wr3P4wZu/H6qsDyAK
- DTirLafjg2s7BYenv7Djkg4zD0pdAdRpWqIikfCqeUGRVT/RgXwYVDwGF7eAGEWLJfrw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=eh5Ng42syvlADdffipGk7XwcLxEWtTv5ZvFi/TadrD8=; b=CREXl16PQ2BoCnaDguszO+hsCk
+ ARmelVvxsWJBpeFigltnzyftgE3VTnSW/gjvKD/WFryR/4cML1plyx7KVEUXaXxa82prCjZXhSV09
+ e+5G1eisowAYE2vdIK/L5iaRskX6rjrnVMpzHyV+HpcPWcfaW3cG1+HBi71bxjHFN6sA=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1otfJX-0002TX-Rj for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 12 Nov 2022 01:28:08 +0000
+ id 1otfk3-0003Ul-7Q for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 12 Nov 2022 01:55:31 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 044B962167;
- Sat, 12 Nov 2022 01:28:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A246C433D6;
- Sat, 12 Nov 2022 01:27:59 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id B31FFB8287A;
+ Sat, 12 Nov 2022 01:55:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16D73C433D6;
+ Sat, 12 Nov 2022 01:55:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668216479;
- bh=MoShBfZdwzrv76NQDM8F3RCjVb1XBmORpbl/oOgsLWE=;
+ s=k20201202; t=1668218120;
+ bh=fgmYqNrujDVO3mYJp1YcFQWlrmMolvGD2bz9AIt6/r0=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UzfiLyomEvyu1Jlh/ptuz+3kSmXVV1j9Q3YNIOUFheOLcuIBHgZwiYiQ8/+xnLHVt
- el/b3QJC1d9inQHC6Rizyv6DXG+FG0FnQtBmWOTY01ODGE+OP/By32ppLqEB0bFzDf
- rQeElz9jrrU1py9sWaBB9drfXAJoHXjWOUAEifHKoVsOKHg2Ac6uulDzfyYrUMetgt
- byg1Cx4k1vVn8rCa9ZYW/nB31oV0QYoj7nquBzNcu4EN009e7Em8nCIqqSTi5VR/hG
- h8ox72aeu8WHizFrhwzL/106ynUtOxy2JTj8JwcZuO9GRrwb2xfbOoJ9icd1WmHZTE
- GMJgAxp2XyEeA==
-Date: Fri, 11 Nov 2022 17:27:57 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Sheng Yong <shengyong@oppo.com>
-Message-ID: <Y272nVjzr6CynmyQ@google.com>
-References: <20221111100830.953733-1-shengyong@oppo.com>
+ b=j2OALwu9R3vpVGygcSTecpj34reTKkU+wR4SQPGT1SezuSGLiCgi4eHo2m/AsYgr9
+ z4XWlkTDsZaFbkYUefFz5H2Lt4ipKkJUTsanv1KwRconQuL0AIq5zrQjks24iiCFoU
+ wo6rZpbsLv/yYT5BNi9sy02gvlTO38/Do88+u2UtqKXksyu69hUNwtAO0FALHBp7c2
+ co+mv9SQXwHcbi7ggTro1VL+RPlgPh81DCOdibtrRthhSMGpS+l4EYNv1RQl7XJ3HR
+ 3F7q8Y0z9B5VGR9aphbvZNK9bg93/3MZobX34Ix2AVVPz5ki4t+OZAcNHkmQTnOEKx
+ p0dZ+qxTq8sXw==
+Date: Fri, 11 Nov 2022 17:55:18 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: Nick Terrell <terrelln@meta.com>
+Message-ID: <Y279BqPNYAr+5OxC@sol.localdomain>
+References: <0000000000006a83e705ecea7171@google.com>
+ <E31B0CBC-F169-4C7D-9FE6-F928C0F802AF@fb.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20221111100830.953733-1-shengyong@oppo.com>
+In-Reply-To: <E31B0CBC-F169-4C7D-9FE6-F928C0F802AF@fb.com>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -71,16 +72,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Does thes make sense?
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev-test&id=608460dfae20b9d23aa222f7448710a086778222
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/
- [...] Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Sat, Nov 12, 2022 at 12:15:08AM +0000, 'Nick Terrell' via
+ syzkaller-bugs wrote: > > Not quite sure why I am CC'd here, I don't see
+ anything related to zstd or compression in this stack. > Just want [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -89,9 +90,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1otfJX-0002TX-Rj
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: fix to enable compress for
- newly created file if extension matches
+X-Headers-End: 1otfk3-0003Ul-7Q
+Subject: Re: [f2fs-dev] [syzbot] INFO: trying to register non-static key in
+ f2fs_handle_error
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,141 +104,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: syzbot <syzbot+40642be9b7e0bb28e0df@syzkaller.appspotmail.com>,
+ "syzkaller-bugs@googlegroups.com" <syzkaller-bugs@googlegroups.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "jaegeuk@kernel.org" <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Does thes make sense?
+On Sat, Nov 12, 2022 at 12:15:08AM +0000, 'Nick Terrell' via syzkaller-bugs wrote:
+> 
+> Not quite sure why I am CC'd here, I don't see anything related to zstd or compression in this stack.
+> Just want to check that it is likely unrelated, and that I'm not missing something.
+> 
+> Best,
+> Nick Terrell
 
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev-test&id=608460dfae20b9d23aa222f7448710a086778222
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev-test&id=962379487b5cb9f3b85ea367b130c2c6ca584edf
+It's because:
 
-Second one is needed to address build error.
+$ ./scripts/get_maintainer.pl fs/f2fs/super.c
+Jaegeuk Kim <jaegeuk@kernel.org> (maintainer:F2FS FILE SYSTEM)
+Chao Yu <chao@kernel.org> (maintainer:F2FS FILE SYSTEM)
+Nick Terrell <terrelln@fb.com> (maintainer:ZSTD)
+linux-f2fs-devel@lists.sourceforge.net (open list:F2FS FILE SYSTEM)
+linux-kernel@vger.kernel.org (open list)
 
-On 11/11, Sheng Yong wrote:
-> If compress_extension is set, and a newly created file matches the
-> extension, the file could be marked as compression file. However,
-> if inline_data is also enabled, there is no chance to check its
-> extension since f2fs_should_compress() always returns false.
-> 
-> This patch moves set_compress_inode(), which do extension check, in
-> f2fs_should_compress() to check extensions before setting inline
-> data flag.
-> 
-> Fixes: 7165841d578e ("f2fs: fix to check inline_data during compressed inode conversion")
-> Signed-off-by: Sheng Yong <shengyong@oppo.com>
-> ---
->  fs/f2fs/namei.c | 27 +++++++++++++--------------
->  1 file changed, 13 insertions(+), 14 deletions(-)
-> 
-> ---
-> v1->v2: add filename parameter for f2fs_new_inode, and move
->         set_compress_inode into f2fs_new_inode
-> 
-> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-> index e104409c3a0e5..36e251f438568 100644
-> --- a/fs/f2fs/namei.c
-> +++ b/fs/f2fs/namei.c
-> @@ -22,8 +22,12 @@
->  #include "acl.h"
->  #include <trace/events/f2fs.h>
->  
-> +static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
-> +						const unsigned char *name);
-> +
->  static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
-> -						struct inode *dir, umode_t mode)
-> +						struct inode *dir, umode_t mode,
-> +						const char *name)
->  {
->  	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
->  	nid_t ino;
-> @@ -119,6 +123,8 @@ static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
->  		if ((F2FS_I(dir)->i_flags & F2FS_COMPR_FL) &&
->  					f2fs_may_compress(inode))
->  			set_compress_context(inode);
-> +		if (name)
-> +			set_compress_inode(sbi, inode, name);
->  	}
->  
->  	/* Should enable inline_data after compression set */
-> @@ -293,8 +299,7 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
->  	unsigned char noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
->  	int i, cold_count, hot_count;
->  
-> -	if (!f2fs_sb_has_compression(sbi) ||
-> -			F2FS_I(inode)->i_flags & F2FS_NOCOMP_FL ||
-> +	if (F2FS_I(inode)->i_flags & F2FS_NOCOMP_FL ||
->  			!f2fs_may_compress(inode) ||
->  			(!ext_cnt && !noext_cnt))
->  		return;
-> @@ -326,10 +331,6 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
->  	for (i = 0; i < ext_cnt; i++) {
->  		if (!is_extension_exist(name, ext[i], false))
->  			continue;
-> -
-> -		/* Do not use inline_data with compression */
-> -		stat_dec_inline_inode(inode);
-> -		clear_inode_flag(inode, FI_INLINE_DATA);
->  		set_compress_context(inode);
->  		return;
->  	}
-> @@ -352,15 +353,13 @@ static int f2fs_create(struct user_namespace *mnt_userns, struct inode *dir,
->  	if (err)
->  		return err;
->  
-> -	inode = f2fs_new_inode(mnt_userns, dir, mode);
-> +	inode = f2fs_new_inode(mnt_userns, dir, mode, dentry->d_name.name);
->  	if (IS_ERR(inode))
->  		return PTR_ERR(inode);
->  
->  	if (!test_opt(sbi, DISABLE_EXT_IDENTIFY))
->  		set_file_temperature(sbi, inode, dentry->d_name.name);
->  
-> -	set_compress_inode(sbi, inode, dentry->d_name.name);
-> -
->  	inode->i_op = &f2fs_file_inode_operations;
->  	inode->i_fop = &f2fs_file_operations;
->  	inode->i_mapping->a_ops = &f2fs_dblock_aops;
-> @@ -689,7 +688,7 @@ static int f2fs_symlink(struct user_namespace *mnt_userns, struct inode *dir,
->  	if (err)
->  		return err;
->  
-> -	inode = f2fs_new_inode(mnt_userns, dir, S_IFLNK | S_IRWXUGO);
-> +	inode = f2fs_new_inode(mnt_userns, dir, S_IFLNK | S_IRWXUGO, NULL);
->  	if (IS_ERR(inode))
->  		return PTR_ERR(inode);
->  
-> @@ -760,7 +759,7 @@ static int f2fs_mkdir(struct user_namespace *mnt_userns, struct inode *dir,
->  	if (err)
->  		return err;
->  
-> -	inode = f2fs_new_inode(mnt_userns, dir, S_IFDIR | mode);
-> +	inode = f2fs_new_inode(mnt_userns, dir, S_IFDIR | mode, NULL);
->  	if (IS_ERR(inode))
->  		return PTR_ERR(inode);
->  
-> @@ -817,7 +816,7 @@ static int f2fs_mknod(struct user_namespace *mnt_userns, struct inode *dir,
->  	if (err)
->  		return err;
->  
-> -	inode = f2fs_new_inode(mnt_userns, dir, mode);
-> +	inode = f2fs_new_inode(mnt_userns, dir, mode, NULL);
->  	if (IS_ERR(inode))
->  		return PTR_ERR(inode);
->  
-> @@ -856,7 +855,7 @@ static int __f2fs_tmpfile(struct user_namespace *mnt_userns, struct inode *dir,
->  	if (err)
->  		return err;
->  
-> -	inode = f2fs_new_inode(mnt_userns, dir, mode);
-> +	inode = f2fs_new_inode(mnt_userns, dir, mode, NULL);
->  	if (IS_ERR(inode))
->  		return PTR_ERR(inode);
->  
-> -- 
-> 2.25.1
+Do *not* use content regexes (K: zstd) in MAINTAINERS unless you are absolutely
+sure you want to be notified about every file that contains your regex.
+
+If you do want to use a content regex anyway, you might want to look into
+changing get_maintainer.pl to make them only apply to patches that contain the
+regex, as I think that might be what people are expecting it does.
+
+- Eric
+
 
 
 _______________________________________________
