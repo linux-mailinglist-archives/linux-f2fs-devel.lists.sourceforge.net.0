@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDBC7627641
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Nov 2022 08:11:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27DE4627647
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Nov 2022 08:14:21 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ouTcd-0004Bx-Jd;
-	Mon, 14 Nov 2022 07:11:11 +0000
+	id 1ouTff-0004GR-0D;
+	Mon, 14 Nov 2022 07:14:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ouTcb-0004Bn-SJ
+ (envelope-from <chao@kernel.org>) id 1ouTfd-0004GK-HA
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 14 Nov 2022 07:11:09 +0000
+ Mon, 14 Nov 2022 07:14:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XztEMEhkmyYtd2rm6UCOfQTBNgMcf6E9e8X8WQ9JVn4=; b=CfowCeo3sfKnIQWn16K5Ym3Fv6
- iSkffPpd3uIKomAD3ZfizMVZSY73WtLBaJY3QuRhUCTAzxjGSH/8aunYcLZ8roUqUJukS62O+ux1J
- gpWHufwf+tcDGs5Wbm6Rfl5ttNOv6CSPvGy5Rw7ZyhJXlxLwv2emf0hwVRA2RNFua6e8=;
+ bh=u1bcxRTnILY+C1rVP/z1uJqWUp1BuExHd/QUndm4w0c=; b=aMifx9jAfKpl6Gq0zs7H8Ce2PR
+ 5zzbSW2ln0FekWSo6at1k8b2ElepcGIyJqUY5y9XBKxjNQkEY4fUu0MtS07vBymHY/q6zz2wk2u4A
+ F4QCKfa+OfyKfN7Pcv+iUVibdetotnWIXi4zFj6U+5eaHk8kXgpkxyNvfFuskiLW9CU8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,42 +31,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XztEMEhkmyYtd2rm6UCOfQTBNgMcf6E9e8X8WQ9JVn4=; b=YshgtBO51GoEUJdGdAZkBUyIzT
- ZacCv+uZWnbMIwZCF8htRGa985GiZQvr6QZhKNHIHBlLaDTeKBo0IY+yjPE5tcBZ6vyolQhbkdMhN
- 8qHQ9Y7jU7NVEVckHyWmxOsBq5ZpZrU3fHvrcB7zMc8aXUL1X/2tHl4t8YUZVgOU6CoE=;
+ bh=u1bcxRTnILY+C1rVP/z1uJqWUp1BuExHd/QUndm4w0c=; b=eUxf45Q7jB8YSXL60C7M0Rfg2p
+ FPImbUgtWXlEfJrb4REWe53eSBc0/57nCOa4xV0fi+KW03oQp3z6cUdS2sfzfeIZBIYmZFw4OzroT
+ n3eE8VnJvMRrJPTpxP3cnWqeMoPMa9sfVqPoTaZAJU8ugYlrf8G9Rod5/YhyhsZsXjqY=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ouTcb-0005bX-6M for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 14 Nov 2022 07:11:09 +0000
+ id 1ouTfc-0005iG-BS for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 14 Nov 2022 07:14:16 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5646660ECB;
- Mon, 14 Nov 2022 07:11:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00D82C433C1;
- Mon, 14 Nov 2022 07:10:59 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id EFCC760DEF;
+ Mon, 14 Nov 2022 07:14:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99B8BC433D6;
+ Mon, 14 Nov 2022 07:14:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668409860;
- bh=XztEMEhkmyYtd2rm6UCOfQTBNgMcf6E9e8X8WQ9JVn4=;
+ s=k20201202; t=1668410050;
+ bh=IYoQEGPZ+Yjd98Eo3nCP4a2hu5VXfVjx8RpXSw8+9M0=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=PtqYy1XqnQtQD9S/7O1Vb2UNo1yiyiyEKNvozjaeF/tTePlO9axeB/y6ihVp/Xl7h
- LMS0UWk8FmpQLxOYRy88gap855cttfj1+lQzYYcyKFDUMYKg9ABUEoVgqO+WLGtnVd
- 4+5+blLZOIfo7EYvHrwfxBZFR8ph2t/MRhgjoBqL9kmzZDWoOt4SDJe2X1OKkfF0NA
- YYu6EW0I6BDLpnyawAWRQKXsxGBqlz0C9ZSbnuDkg4Pc010BGMFNLRSi7DI7bhCFbN
- zmT5HTzAYqh/QOhxUejzGEVKZi0Dj2a9o3ZxFL0RzQuUSVQwc7ybZyuI4xtxQeYaCl
- WoWsl4NXjdrGw==
-Message-ID: <6d3f9c36-74ad-9f3b-7f59-2c5b3a01a0cb@kernel.org>
-Date: Mon, 14 Nov 2022 15:10:58 +0800
+ b=T4KuhvYSQNEabHstI8gwGdnVWl7RLZM7Imp0KZSXtfQvmMU3zvPhxVpyrWFeo+uH3
+ 6sY1EQBToWPQiIxvdtsVaDhHujcZD1fz07Bco2H0jJj6SOb7Po+FZah4I2744fg+9A
+ vU3fJYywCONIzlQQFunJ8jqMe6y2UM9hsy3V2wKsLc33jrMBDHH28xyXivjiNqUqHy
+ IY14ph+9dKBvhGVfD9he6XbhCS/yLfMiwp9D6LXh0KTHVnPD2psVI1PyvGTvKX5wfb
+ MTlyQK/DpRVWegXQO8uX4L4+QT1xRPqE7EV4pJjvEBgZh6cupUeqnF9MwhEQ+OxuSe
+ RxBS6oz+xHoCA==
+Message-ID: <fc15b658-2568-ec52-9ee4-60598bae550f@kernel.org>
+Date: Mon, 14 Nov 2022 15:14:07 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
 Content-Language: en-US
 To: Sheng Yong <shengyong@oppo.com>, jaegeuk@kernel.org
 References: <20221110140723.92752-1-shengyong@oppo.com>
- <20221110140723.92752-2-shengyong@oppo.com>
+ <20221110140723.92752-3-shengyong@oppo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221110140723.92752-2-shengyong@oppo.com>
+In-Reply-To: <20221110140723.92752-3-shengyong@oppo.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -74,8 +74,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/11/10 22:07, Sheng Yong wrote: > Signed-off-by: Sheng
- Yong <shengyong@oppo.com> Reviewed-by: Chao Yu <chao@kernel.org> Thanks, 
+ Content preview:  On 2022/11/10 22:07,
+ Sheng Yong wrote: > If i_namelen is corrupted, 
+ there may be an overflow when doing memcpy. > > Signed-off-by: Sheng Yong
+ <shengyong@oppo.com> Reviewed-by: Chao Yu <chao@kernel.org> 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,8 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ouTcb-0005bX-6M
-Subject: Re: [f2fs-dev] [PATCH 2/4] fsck.f2fs: add parentheses for SB_MASK
+X-Headers-End: 1ouTfc-0005iG-BS
+Subject: Re: [f2fs-dev] [PATCH 3/4] fsck.f2fs: fix potential overflow of
+ copying i_name
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,6 +114,8 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2022/11/10 22:07, Sheng Yong wrote:
+> If i_namelen is corrupted, there may be an overflow when doing memcpy.
+> 
 > Signed-off-by: Sheng Yong <shengyong@oppo.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
