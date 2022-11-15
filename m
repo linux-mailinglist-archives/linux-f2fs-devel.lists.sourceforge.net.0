@@ -2,148 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 593BA62A172
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Nov 2022 19:41:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C43B862A476
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Nov 2022 22:48:20 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ov0rm-000468-Tx;
-	Tue, 15 Nov 2022 18:41:02 +0000
+	id 1ov3mw-0001tH-Nx;
+	Tue, 15 Nov 2022 21:48:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1ov0rl-00045p-1O
+ (envelope-from <jaegeuk@kernel.org>) id 1ov3mv-0001tA-M5
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Nov 2022 18:41:01 +0000
+ Tue, 15 Nov 2022 21:48:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8p1ECSfqgg32TZKqNKLOMQARE8n+fWv4MEOnlyk+ICc=; b=VTY86zXajCL2Kxoi0lvUDg5Jkc
- 592JKD08Zs4Ew4V25pmAy3juxsAEmt1vpRBa+hw0ocw9owQTnki39uASzVk1DcYtfRID94mKKEt89
- pTT1J/4tkgjG7TKrrqaXOIolrlItrAvRGIa+qyokfb9vDPJVmN5++FxsAcD/wt+BBuRI=;
+ bh=y/MJxjAhU5GH9fkPJPganNWu5JIHQyySVDQ9WHGC9JA=; b=Qmib3REhD3PIH4raLMrf1UpQOd
+ E8mvxlYGVjMVCPRyKTyd2NOy7RMZseRVmk2n3Nrwa+23pECRQ22Ngq4/cO7XlQ8DZzMMfVC64F+46
+ MVpRYnVX8EGXz4gSSw5Sz9NvbjrOP/lIYXNQ3rUBW7q1DYt8XSn9CcMOsJRjHWQi4k5E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=8p1ECSfqgg32TZKqNKLOMQARE8n+fWv4MEOnlyk+ICc=; b=e
- x+SsbNr0yge7sFjFbd304Iq6SHXnMp9+ArQf4WUb92QQhUOToEkFLc9OkQVi1SUxwiEtOCiiThQ4p
- sL4Ik2cdmbkYFBEMCitcMWUaVvaArTMTm0aiAiwmxIzbA3ixKf/B0E17Z/ROi5nYGYMvmwfI/Q0DS
- a0maDfUZ0iLAgHqo=;
-Received: from mail-tyzapc01on2091.outbound.protection.outlook.com
- ([40.107.117.91] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=y/MJxjAhU5GH9fkPJPganNWu5JIHQyySVDQ9WHGC9JA=; b=QbS5eVPBzOco6yaaUKyz4XTKle
+ +GeR+jC5YwiGYUBTcFMZyRSJXh6qJ9lWWW9CkJ8IiskQN3Wl3GX3jesJXPTKcmb/vkuPgFT8+jJI5
+ iAUhjCNMvudCaxkAeMtYf2Ql3ZmzhaNeSC8XewA0j7itX1QyZ9tUhR7KHY44aPUs+3tw=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ov0rc-0008Tg-0q for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Nov 2022 18:41:00 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WG3Wwu4WPpVAIyO8P3R1vpwWcuMpcwOd1/WWG0BAbNII1rxCWbLW+2vOYdBlhnJc06iAji2Cbe5J65MuQXGbGPKenLyr3mxBsqDvyX5VT0/M5DecMI7R1gt/TOBC5rtQ+rzPyiMZXgO166N2Zm8R1a78C4mkK4nvWi1YI+8zBeUDuNJq5D4Q27QGWal/2V27ihEavZZnMmRZyGm3DwSxsb4q+qngDUUw1BJ60a4qNmjOs2WpUK1IlEyPCaG9QE75T9gMf36pN/nBQjF56vU7kztwMWq4htnQs7dUIfNq/hX6GJAdcyzpJrG/Ky9fe5tNkkTFTeopgZVrJKps1/w+dw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8p1ECSfqgg32TZKqNKLOMQARE8n+fWv4MEOnlyk+ICc=;
- b=V3r3g4j5gVyDtAi1OQasr7z4QvI+aGjZPrUbjAyAh963ruob+Z4QW/yW5CxdwamTtXW6eY0PLZdO3e1Scq7rK2B4nSvqtGx/aVEZqZ4SMxSKZpKbMq6SWrSeTrPNVZXB7pQvIDzO0S/EorpLuhUKBTdYld8W1t3eUgWRNkB6sCJI4J7EimAoATztATDB1ea0n+M17SGewmhH8YVYI2gjNlG0rIA6glCAv4bdB8UkkRYZZcfjURnCs2JA8lkZuC8NhMyf5UVSmz9GJlRxWNT4Jl1b8vyx2N7KnlR2szfsbCx3Qzol5lwrRqGzx/9QhYUhhSg0s0gtzby4OWKtKNfbiQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8p1ECSfqgg32TZKqNKLOMQARE8n+fWv4MEOnlyk+ICc=;
- b=N3PZzs3eXPrTdXWJtwgkadcX91A8oBkFipqvnFV5C1DbV45+acxcu3HRXIUpFjLG0vAmSByLD9U1HM9kM5XIlashAaloPzaFjdkyFKr3i3zWmKcDs8Gx1gYpM3dxahhVWDMmWp17EP2zCLZLOHN9MvEOaDgkzoNB/ejN3a19wzFMwi3sxM3G9QaC48T1PRNuOj1ruu8SKwmbjwcN/bcXs4SzHEqyHlqYuB2sBCbOxw7oYBSP4FEewmKMmjPl2xBhmGfjzKu9Fi8kPnliyVAcugO3ZarOiJW0qvo+qneomLonclIfIRxz3f+sLzkiluBsho7rNacz+FdBmrzfjlQGQg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by TY0PR06MB5609.apcprd06.prod.outlook.com (2603:1096:400:31e::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.17; Tue, 15 Nov
- 2022 18:40:39 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::1230:5f04:fe98:d139]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::1230:5f04:fe98:d139%8]) with mapi id 15.20.5813.017; Tue, 15 Nov 2022
- 18:40:39 +0000
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Wed, 16 Nov 2022 02:40:23 +0800
-Message-Id: <20221115184023.78070-1-frank.li@vivo.com>
-X-Mailer: git-send-email 2.35.1
-X-ClientProxiedBy: SI1PR02CA0012.apcprd02.prod.outlook.com
- (2603:1096:4:1f7::8) To SEZPR06MB5269.apcprd06.prod.outlook.com
- (2603:1096:101:78::6)
+ id 1ov3mu-0000J8-9h for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 15 Nov 2022 21:48:13 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 037D9B81B73;
+ Tue, 15 Nov 2022 21:48:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85B05C433B5;
+ Tue, 15 Nov 2022 21:48:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1668548883;
+ bh=CG0dXhmknwCwA3hdVEQE9D8iMO7v+ojqxHnJ/bgzyQI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=BJ+DDeaaNph2fnh/K8SKttJN93KgcH5TMqzK8YMGOvh/Bnju6oDFljc1HwjReyBPk
+ Z8rs5+oz8yQ4tyfqL3r3N/rIQoS33RinIXWr34GCHqbYaKHJmBeyeKzwkuvWWZPSbP
+ L4OIzOctSwo+/E+PN7YP7T+BESEz2IyZEJRryiCzwK1vKsVdX8V6lrt5jpb1iXUI2v
+ i9YfvpIiCZoTyHRxA4iuC5fsFDeigVRwhuh0T9P6HKT1DVrHHj40yi7PnPJg9r0pq2
+ 6CG3id/7b48KTq3YUT1OYa36Flaet8mdRCt1BrT/KzmCxL7h/fl9IRQfCzXHQZ8t5v
+ q+jAEsX1UYzpw==
+Date: Tue, 15 Nov 2022 13:48:01 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Sheng Yong <shengyong@oppo.com>
+Message-ID: <Y3QJERdXypeyIXeJ@google.com>
+References: <f508dea8-5dc3-e29e-0d8b-4d64735817ac@kernel.org>
+ <20221115160155.1037163-1-shengyong@oppo.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|TY0PR06MB5609:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2d39baac-06ac-4fef-ef5b-08dac738e44f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: SpbZMCyklnl3yE6t+pvWEfptxtWssNhm+LKXr5fuurk7u3jjnPqJAKWDT5j4RWzmAJHoCF6mG+lxfts8YQYQDdh6maFxNTjeCvQ/u0o/smKn4ZUmO6Dn8NUEp5S1RPOCJzPn1msfsSAAK8LSxf0wcHUxqSLZzRp7oJIrAGpS/EDbFVCc9psf3eaS/9F/OYBD3J1AGjrtmqZISBJhgSqZtLJeF2x2FJZQ/Lag0wDCIXKJJWNl4pbn0AuL6tBMy4yVrpRB411YYmQtuk3259gffEqRX8LITJU+eLs3mh2HtX2OVlJ3GQFwZ9q6NDzOtC8pPJ4TmM6QHN/2RGs84T8zG+Wq06V4YtbUKPZoPJ54fSkvz9IUmW214Re+VzCkcfhzIUmpgcbg7CcoMHVrDklM/nzRyIDZXCq9aAIBUjFOALxcZOLfVeq0e0UdXyr7ynl0YkFb1wLRaaAmiLmOg45iEPoyIwvgk2cciSZVeNvRqn+4z3HURweWcPfV2cW7LE4uvo0K3xAAMdVDO5gqL9/9gpJuMui+1Up5Yx4222j9MYFDxdAB8VVyMsyuzJ312zkPjtJ5Hr8aGzRfU8zJ88iDA6+1V5C/az9JZ4aaCDtlwZLcp8wfAX36fe+nOg1L4oW1VVu8ca1iu+hHld1/FZsuUyU8ipYCR7gnUriIW9UW5tgHfio9c+sodKV5Xf3ATLW3N2edDZPEXU874iazXlavCIJe64ycBJIaCqLUHBFJ9Zj6KZLE7+3XKOS/IYEUmkJRrmUAHyWX4bIyYWRSw4uGCY+ppqP0cYIq0hvTPPEskpk=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(39860400002)(366004)(396003)(346002)(136003)(376002)(451199015)(83380400001)(36756003)(52116002)(86362001)(41300700001)(8676002)(8936002)(4326008)(66556008)(66946007)(66476007)(5660300002)(316002)(38350700002)(38100700002)(6506007)(26005)(2616005)(2906002)(186003)(6512007)(1076003)(478600001)(107886003)(6666004)(6486002)(309714004);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yehy+7sxc8g2NipAgJBft5V4ozr8W/SIZQAqaiY6dKAvvpdxHwo2e5jPtwPd?=
- =?us-ascii?Q?46giGEuVjwqQur1zyv1SEmubtrXcqzGxcbH6vESrtLZodUkDYKcAbbF4L29s?=
- =?us-ascii?Q?gqRpYHfHguImyEPt4N3Zpkkj0WTGZGzT1XI4O35X76DAEH6qPfBjdM2S8Dif?=
- =?us-ascii?Q?NxHIU09VNphfv5ye1zQVyHbK5mgDrqOUgueHhpSURE2sRXD1yRPpe98jZ9uz?=
- =?us-ascii?Q?9Z4tBsrWe7J6qBKJ1V4L1gt5t3zBjEhlDP5xay8Ub4xf976RTN61oqG1bZr0?=
- =?us-ascii?Q?nM4mrWrh2KbLkrhqYD0QYJVaKojmzwnBIoYk6r9V09RyI7+2YnVwyQVbF0kv?=
- =?us-ascii?Q?j8zSxu9q8H8W2p9THVWdrowRYYHIMsUOCewv74uEFIOg+tEOoXmIdTdZOnDe?=
- =?us-ascii?Q?cKS3ND3Z/1jsfa1fHijDP5JbWVLjKUgOdhPHvTWRd3MdfSrQxAq36kxOj2cv?=
- =?us-ascii?Q?DO7SxwATeHNYVXLFLaXGZnnZ1R5Az/QI5fYjKhNHMQmhIcyrv2YPkdkEKTaY?=
- =?us-ascii?Q?j/z8V7jNhitLtaDU6eG2ychy2S5BDD+Ve42/te6tEhSrQ3nTFGrc8Sh8yNC8?=
- =?us-ascii?Q?qfJVKOePL70facfKw+h27FYsqk2GlBlnsMh8wQG7e27uKj/X0ugNBVwB90Sz?=
- =?us-ascii?Q?PpN9Q6qMzmyxedcmSmM9XUrsUFnj/rH05H4P9pB5rQHYB5XMIVImwWIz2pwY?=
- =?us-ascii?Q?S0QumDVA44ri4+PW2j5L2vtXEWPMvsBvrjjaFiJxytVDiiIimYEYrlluDeqM?=
- =?us-ascii?Q?hptmF4Lt4T5k3reFIiZ2L/J/hUanNlkL/ane1Rr3Z2nxLUN39Pl4ySWgVMHS?=
- =?us-ascii?Q?BNhsXVGrS+s0W6E8RpKm80Sam39Xkf1gFxRtlwJkpgMUwHTGjgy9gyU6AQ8k?=
- =?us-ascii?Q?4p/RWER/agyB27niKi7rnkUgedeSmS2ho4dP0NSZhXUQtp7/X61m+sBZJQGV?=
- =?us-ascii?Q?khePL22UIAihy04i4mrwDlPe9oRvesghJuZj98AfUSHS2L9mMcJhfnOPXtDK?=
- =?us-ascii?Q?BGGHw/U/evGgXKh1YCzMnM7ezBcOFU8ADwGRnJDY0dFh3nh/Oso2OTbfk6Z1?=
- =?us-ascii?Q?Bpbja0lDwaUFnG7o8rXR+9VrlmXFwA9A4apLeZaD+CVK7iZBAf2ea94rMpcH?=
- =?us-ascii?Q?gbijCuU9q+Dkfhk6vfH66VY+h3Y/KqaH7LErTqWUI/8XaB+TpAeuMnUBQEe6?=
- =?us-ascii?Q?cJ1MkSgvvj8dtU0sx/AZKdysv8vmN8Q3mLS/2BHaho3SFywdRadruDVTxEBt?=
- =?us-ascii?Q?UFqhcNj9Cs4UixFBvHwWPJG051A2EWpP81XG4+zQCk755HDmfOSKqIXTv36f?=
- =?us-ascii?Q?tbt2siSIjt6DRC7IMF62v1kRw2AUbRWnSFqzeghr4+froaK5Sir1lu5zyNTr?=
- =?us-ascii?Q?XX0QGqrnATRScvLiSFbe3GU/HdpKV2AhYbzoOmosyhb7aNPf25PW0p6Cmp4O?=
- =?us-ascii?Q?B5O3b+5JnMBVuVZwkscGsCtgo0s4d3IZ+TuGI8PTR+Atu98ms1vbBXhzWBA2?=
- =?us-ascii?Q?nNdVcp8txch66RpcY2kIlbTP3V/RFoKsHfTZyvptNUtJi1E12QhZnmEzNphQ?=
- =?us-ascii?Q?2p3/OYzSGLXubq6o6AYOltdrP0EXKyxAO15C67pP?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d39baac-06ac-4fef-ef5b-08dac738e44f
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2022 18:40:39.1073 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: p5dMB9T92Sn+ShlRGcQR3t+x0v3bt57ws8nSDGW6ZrLiCGXTIn4efhEZmCzJgKzDF1ERQUkRpxRZjxou9es2Iw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR06MB5609
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <20221115160155.1037163-1-shengyong@oppo.com>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Some minor modifications to discard opt and related
- parameters:
- 1.introduce f2fs_is_readonly() and use it to simplify code 2.The FLUSH_MERGE
- opt is set by default only in non-ro mode. 3.When ro and DISCARD are set
- at the same time, an error is reported. 4.Display [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 11/16, Sheng Yong wrote: > If compress_extension is set, 
+ and a newly created file matches the > extension, the file could be marked
+ as compression file. However, > if inline_data is also enabled, t [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.117.91 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.117.91 listed in wl.mailspike.net]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -151,8 +89,10 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1ov0rc-0008Tg-0q
-Subject: [f2fs-dev] [PATCH] f2fs: fix to set DISCARD opt
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ov3mu-0000J8-9h
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix to enable compress for newly
+ created file if extension matches
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -164,142 +104,468 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yangtao Li <frank.li@vivo.com>
-Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Some minor modifications to discard opt and related parameters:
+On 11/16, Sheng Yong wrote:
+> If compress_extension is set, and a newly created file matches the
+> extension, the file could be marked as compression file. However,
+> if inline_data is also enabled, there is no chance to check its
+> extension since f2fs_should_compress() always returns false.
+> 
+> This patch moves set_compress_inode(), which do extension check, in
+> f2fs_should_compress() to check extensions before setting inline
+> data flag.
+> 
+> Fixes: 7165841d578e ("f2fs: fix to check inline_data during compressed inode conversion")
+> Signed-off-by: Sheng Yong <shengyong@oppo.com>
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> ---
+>  fs/f2fs/f2fs.h  |   1 +
+>  fs/f2fs/namei.c | 336 ++++++++++++++++++++++++------------------------
+>  2 files changed, 171 insertions(+), 166 deletions(-)
+> ---
+> 
+> Hi, Jaegeuk, Chao,
+> 
+> How about adding a bool `may_compress' in set_compress_new_inode, set
+> `my_compress` according to several conditions. If it is false, clear
+> F2FS_COMPR_FL.
+> 
+> And set_compress_context is also changed to clear F2FS_NOCOMP_FL,
+> otherwise, if F2FS_NOCOMP_FL is inherited from parent and hit
+> compress_extension, both F2FS_NOCOMP_FL and F2FS_COMPR_FL are set.
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 6a8cbf5bb1871..a3420fbb29214 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -4355,6 +4355,7 @@ static inline int set_compress_context(struct inode *inode)
+>  		F2FS_I(inode)->i_compress_flag |=
+>  				F2FS_OPTION(sbi).compress_level <<
+>  				COMPRESS_LEVEL_OFFSET;
+> +	F2FS_I(inode)->i_flags &= ~F2FS_NOCOMP_FL;
+>  	F2FS_I(inode)->i_flags |= F2FS_COMPR_FL;
+>  	set_inode_flag(inode, FI_COMPRESSED_FILE);
+>  	stat_inc_compr_inode(inode);
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index e104409c3a0e5..36ec5cf7cf859 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+> @@ -22,8 +22,170 @@
+>  #include "acl.h"
+>  #include <trace/events/f2fs.h>
+>  
+> +static inline int is_extension_exist(const unsigned char *s, const char *sub,
+> +						bool tmp_ext)
+> +{
+> +	size_t slen = strlen(s);
+> +	size_t sublen = strlen(sub);
+> +	int i;
+> +
+> +	if (sublen == 1 && *sub == '*')
+> +		return 1;
+> +
+> +	/*
+> +	 * filename format of multimedia file should be defined as:
+> +	 * "filename + '.' + extension + (optional: '.' + temp extension)".
+> +	 */
+> +	if (slen < sublen + 2)
+> +		return 0;
+> +
+> +	if (!tmp_ext) {
+> +		/* file has no temp extension */
+> +		if (s[slen - sublen - 1] != '.')
+> +			return 0;
+> +		return !strncasecmp(s + slen - sublen, sub, sublen);
+> +	}
+> +
+> +	for (i = 1; i < slen - sublen; i++) {
+> +		if (s[i] != '.')
+> +			continue;
+> +		if (!strncasecmp(s + i + 1, sub, sublen))
+> +			return 1;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +int f2fs_update_extension_list(struct f2fs_sb_info *sbi, const char *name,
+> +							bool hot, bool set)
+> +{
+> +	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
+> +	int cold_count = le32_to_cpu(sbi->raw_super->extension_count);
+> +	int hot_count = sbi->raw_super->hot_ext_count;
+> +	int total_count = cold_count + hot_count;
+> +	int start, count;
+> +	int i;
+> +
+> +	if (set) {
+> +		if (total_count == F2FS_MAX_EXTENSION)
+> +			return -EINVAL;
+> +	} else {
+> +		if (!hot && !cold_count)
+> +			return -EINVAL;
+> +		if (hot && !hot_count)
+> +			return -EINVAL;
+> +	}
+> +
+> +	if (hot) {
+> +		start = cold_count;
+> +		count = total_count;
+> +	} else {
+> +		start = 0;
+> +		count = cold_count;
+> +	}
+> +
+> +	for (i = start; i < count; i++) {
+> +		if (strcmp(name, extlist[i]))
+> +			continue;
+> +
+> +		if (set)
+> +			return -EINVAL;
+> +
+> +		memcpy(extlist[i], extlist[i + 1],
+> +				F2FS_EXTENSION_LEN * (total_count - i - 1));
+> +		memset(extlist[total_count - 1], 0, F2FS_EXTENSION_LEN);
+> +		if (hot)
+> +			sbi->raw_super->hot_ext_count = hot_count - 1;
+> +		else
+> +			sbi->raw_super->extension_count =
+> +						cpu_to_le32(cold_count - 1);
+> +		return 0;
+> +	}
+> +
+> +	if (!set)
+> +		return -EINVAL;
+> +
+> +	if (hot) {
+> +		memcpy(extlist[count], name, strlen(name));
+> +		sbi->raw_super->hot_ext_count = hot_count + 1;
+> +	} else {
+> +		char buf[F2FS_MAX_EXTENSION][F2FS_EXTENSION_LEN];
+> +
+> +		memcpy(buf, &extlist[cold_count],
+> +				F2FS_EXTENSION_LEN * hot_count);
+> +		memset(extlist[cold_count], 0, F2FS_EXTENSION_LEN);
+> +		memcpy(extlist[cold_count], name, strlen(name));
+> +		memcpy(&extlist[cold_count + 1], buf,
+> +				F2FS_EXTENSION_LEN * hot_count);
+> +		sbi->raw_super->extension_count = cpu_to_le32(cold_count + 1);
+> +	}
+> +	return 0;
+> +}
+> +
+> +static void set_compress_new_inode(struct f2fs_sb_info *sbi, struct inode *dir,
+> +				struct inode *inode, const unsigned char *name)
+> +{
+> +	struct f2fs_inode_info *fi = F2FS_I(inode);
+> +	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
+> +	unsigned char (*noext)[F2FS_EXTENSION_LEN] =
+> +						F2FS_OPTION(sbi).noextensions;
+> +	unsigned char (*ext)[F2FS_EXTENSION_LEN] = F2FS_OPTION(sbi).extensions;
+> +	unsigned char ext_cnt = F2FS_OPTION(sbi).compress_ext_cnt;
+> +	unsigned char noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
+> +	bool may_compress = false;
+> +	int i, cold_count, hot_count;
+> +
+> +	if (!f2fs_sb_has_compression(sbi) || !name)
+> +		return;
+> +	if (!S_ISREG(inode->i_mode) && !S_ISDIR(inode->i_mode))
+> +		return;
+> +
+> +	/* Inherit the compression flag in directory */
+> +	if (fi->i_flags & FS_COMPR_FL)
+> +		may_compress = true;
+> +
+> +	/* Start to check extension list for regular file */
+> +	if ((!ext_cnt && !noext_cnt) || S_ISDIR(inode->i_mode))
 
-  1.introduce f2fs_is_readonly() and use it to simplify code
-  2.The FLUSH_MERGE opt is set by default only in non-ro mode.
-  3.When ro and DISCARD are set at the same time, an error is reported.
-  4.Display discard_unit mount opt when has discard opt.
-  5.clear DISCARD when remount as ro.
+This doesn't address the Chao's point. It seems not much motivation to add
+may_compress. Let me try to combine some with the previous patch.
 
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
----
- fs/f2fs/f2fs.h  |  5 +++++
- fs/f2fs/super.c | 53 +++++++++++++++++++++++++++----------------------
- 2 files changed, 34 insertions(+), 24 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b89b5d755ce0..be23059344b4 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4579,4 +4579,9 @@ static inline void f2fs_handle_page_eio(struct f2fs_sb_info *sbi, pgoff_t ofs,
- #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
- #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
- 
-+static inline bool f2fs_is_readonly(struct f2fs_sb_info *sbi)
-+{
-+	return !!f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb);
-+}
-+
- #endif /* _LINUX_F2FS_H */
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 75027ff85cd9..baa8f0860192 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1353,12 +1353,16 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 		return -EINVAL;
- 	}
- 
--	if ((f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb)) &&
--		test_opt(sbi, FLUSH_MERGE)) {
-+	if (f2fs_is_readonly(sbi) && test_opt(sbi, FLUSH_MERGE)) {
- 		f2fs_err(sbi, "FLUSH_MERGE not compatible with readonly mode");
- 		return -EINVAL;
- 	}
- 
-+	if (f2fs_is_readonly(sbi) && test_opt(sbi, DISCARD)) {
-+		f2fs_err(sbi, "DISCARD not compatible with readonly mode");
-+		return -EINVAL;
-+	}
-+
- 	if (f2fs_sb_has_readonly(sbi) && !f2fs_readonly(sbi->sb)) {
- 		f2fs_err(sbi, "Allow to mount readonly mode only");
- 		return -EROFS;
-@@ -2035,12 +2039,14 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
- 	if (test_opt(sbi, ATGC))
- 		seq_puts(seq, ",atgc");
- 
--	if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_BLOCK)
--		seq_printf(seq, ",discard_unit=%s", "block");
--	else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SEGMENT)
--		seq_printf(seq, ",discard_unit=%s", "segment");
--	else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SECTION)
--		seq_printf(seq, ",discard_unit=%s", "section");
-+	if (test_opt(sbi, DISCARD)) {
-+		if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_BLOCK)
-+			seq_printf(seq, ",discard_unit=%s", "block");
-+		else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SEGMENT)
-+			seq_printf(seq, ",discard_unit=%s", "segment");
-+		else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SECTION)
-+			seq_printf(seq, ",discard_unit=%s", "section");
-+	}
- 
- 	if (F2FS_OPTION(sbi).memory_mode == MEMORY_MODE_NORMAL)
- 		seq_printf(seq, ",memory=%s", "normal");
-@@ -2081,9 +2087,10 @@ static void default_options(struct f2fs_sb_info *sbi)
- 	set_opt(sbi, MERGE_CHECKPOINT);
- 	F2FS_OPTION(sbi).unusable_cap = 0;
- 	sbi->sb->s_flags |= SB_LAZYTIME;
--	if (!f2fs_sb_has_readonly(sbi) && !f2fs_readonly(sbi->sb))
-+	if (!f2fs_is_readonly(sbi))
- 		set_opt(sbi, FLUSH_MERGE);
--	if (f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi))
-+	if ((f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi)) &&
-+		!f2fs_is_readonly(sbi))
- 		set_opt(sbi, DISCARD);
- 	if (f2fs_sb_has_blkzoned(sbi)) {
- 		F2FS_OPTION(sbi).fs_mode = FS_MODE_LFS;
-@@ -2221,7 +2228,6 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 	bool enable_checkpoint = !test_opt(sbi, DISABLE_CHECKPOINT);
- 	bool no_io_align = !F2FS_IO_ALIGNED(sbi);
- 	bool no_atgc = !test_opt(sbi, ATGC);
--	bool no_discard = !test_opt(sbi, DISCARD);
- 	bool no_compress_cache = !test_opt(sbi, COMPRESS_CACHE);
- 	bool block_unit_discard = f2fs_block_unit_discard(sbi);
- 	struct discard_cmd_control *dcc;
-@@ -2398,19 +2404,18 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 		need_stop_flush = true;
- 	}
- 
--	if (no_discard == !!test_opt(sbi, DISCARD)) {
--		if (test_opt(sbi, DISCARD)) {
--			err = f2fs_start_discard_thread(sbi);
--			if (err)
--				goto restore_flush;
--			need_stop_discard = true;
--		} else {
--			dcc = SM_I(sbi)->dcc_info;
--			f2fs_stop_discard_thread(sbi);
--			if (atomic_read(&dcc->discard_cmd_cnt))
--				f2fs_issue_discard_timeout(sbi);
--			need_restart_discard = true;
--		}
-+	if ((*flags & SB_RDONLY) || !test_opt(sbi, DISCARD)) {
-+		clear_opt(sbi, DISCARD);
-+		dcc = SM_I(sbi)->dcc_info;
-+		f2fs_stop_discard_thread(sbi);
-+		if (atomic_read(&dcc->discard_cmd_cnt))
-+			f2fs_issue_discard_timeout(sbi);
-+		need_restart_discard = true;
-+	} else {
-+		err = f2fs_start_discard_thread(sbi);
-+		if (err)
-+			goto restore_flush;
-+		need_stop_discard = true;
- 	}
- 
- 	if (enable_checkpoint == !!test_opt(sbi, DISABLE_CHECKPOINT)) {
--- 
-2.25.1
-
+> +		goto set_compress;
+> +
+> +	/* Don't compress hot files. */
+> +	f2fs_down_read(&sbi->sb_lock);
+> +	cold_count = le32_to_cpu(sbi->raw_super->extension_count);
+> +	hot_count = sbi->raw_super->hot_ext_count;
+> +	for (i = cold_count; i < cold_count + hot_count; i++)
+> +		if (is_extension_exist(name, extlist[i], false)) {
+> +			may_compress = false;
+> +			f2fs_up_read(&sbi->sb_lock);
+> +			goto set_compress;
+> +		}
+> +	f2fs_up_read(&sbi->sb_lock);
+> +
+> +	/* Don't compress unallowed extension. */
+> +	for (i = 0; i < noext_cnt; i++) {
+> +		if (is_extension_exist(name, noext[i], false)) {
+> +			may_compress = false;
+> +			goto set_compress;
+> +		}
+> +	}
+> +
+> +	/* Compress wanting extension. */
+> +	for (i = 0; i < ext_cnt; i++) {
+> +		if (is_extension_exist(name, ext[i], false)) {
+> +			may_compress = true;
+> +			goto set_compress;
+> +		}
+> +	}
+> +
+> +set_compress:
+> +	if (may_compress)
+> +		set_compress_context(inode);
+> +	else if (fi->i_flags & F2FS_COMPR_FL)
+> +		fi->i_flags &= ~F2FS_COMPR_FL;
+> +}
+> +
+>  static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
+> -						struct inode *dir, umode_t mode)
+> +						struct inode *dir, umode_t mode,
+> +						const char *name)
+>  {
+>  	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
+>  	nid_t ino;
+> @@ -114,12 +276,8 @@ static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
+>  	if (F2FS_I(inode)->i_flags & F2FS_PROJINHERIT_FL)
+>  		set_inode_flag(inode, FI_PROJ_INHERIT);
+>  
+> -	if (f2fs_sb_has_compression(sbi)) {
+> -		/* Inherit the compression flag in directory */
+> -		if ((F2FS_I(dir)->i_flags & F2FS_COMPR_FL) &&
+> -					f2fs_may_compress(inode))
+> -			set_compress_context(inode);
+> -	}
+> +	/* Check compression first. */
+> +	set_compress_new_inode(sbi, dir, inode, name);
+>  
+>  	/* Should enable inline_data after compression set */
+>  	if (test_opt(sbi, INLINE_DATA) && f2fs_may_inline_data(inode))
+> @@ -153,40 +311,6 @@ static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
+>  	return ERR_PTR(err);
+>  }
+>  
+> -static inline int is_extension_exist(const unsigned char *s, const char *sub,
+> -						bool tmp_ext)
+> -{
+> -	size_t slen = strlen(s);
+> -	size_t sublen = strlen(sub);
+> -	int i;
+> -
+> -	if (sublen == 1 && *sub == '*')
+> -		return 1;
+> -
+> -	/*
+> -	 * filename format of multimedia file should be defined as:
+> -	 * "filename + '.' + extension + (optional: '.' + temp extension)".
+> -	 */
+> -	if (slen < sublen + 2)
+> -		return 0;
+> -
+> -	if (!tmp_ext) {
+> -		/* file has no temp extension */
+> -		if (s[slen - sublen - 1] != '.')
+> -			return 0;
+> -		return !strncasecmp(s + slen - sublen, sub, sublen);
+> -	}
+> -
+> -	for (i = 1; i < slen - sublen; i++) {
+> -		if (s[i] != '.')
+> -			continue;
+> -		if (!strncasecmp(s + i + 1, sub, sublen))
+> -			return 1;
+> -	}
+> -
+> -	return 0;
+> -}
+> -
+>  /*
+>   * Set file's temperature for hot/cold data separation
+>   */
+> @@ -217,124 +341,6 @@ static inline void set_file_temperature(struct f2fs_sb_info *sbi, struct inode *
+>  		file_set_hot(inode);
+>  }
+>  
+> -int f2fs_update_extension_list(struct f2fs_sb_info *sbi, const char *name,
+> -							bool hot, bool set)
+> -{
+> -	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
+> -	int cold_count = le32_to_cpu(sbi->raw_super->extension_count);
+> -	int hot_count = sbi->raw_super->hot_ext_count;
+> -	int total_count = cold_count + hot_count;
+> -	int start, count;
+> -	int i;
+> -
+> -	if (set) {
+> -		if (total_count == F2FS_MAX_EXTENSION)
+> -			return -EINVAL;
+> -	} else {
+> -		if (!hot && !cold_count)
+> -			return -EINVAL;
+> -		if (hot && !hot_count)
+> -			return -EINVAL;
+> -	}
+> -
+> -	if (hot) {
+> -		start = cold_count;
+> -		count = total_count;
+> -	} else {
+> -		start = 0;
+> -		count = cold_count;
+> -	}
+> -
+> -	for (i = start; i < count; i++) {
+> -		if (strcmp(name, extlist[i]))
+> -			continue;
+> -
+> -		if (set)
+> -			return -EINVAL;
+> -
+> -		memcpy(extlist[i], extlist[i + 1],
+> -				F2FS_EXTENSION_LEN * (total_count - i - 1));
+> -		memset(extlist[total_count - 1], 0, F2FS_EXTENSION_LEN);
+> -		if (hot)
+> -			sbi->raw_super->hot_ext_count = hot_count - 1;
+> -		else
+> -			sbi->raw_super->extension_count =
+> -						cpu_to_le32(cold_count - 1);
+> -		return 0;
+> -	}
+> -
+> -	if (!set)
+> -		return -EINVAL;
+> -
+> -	if (hot) {
+> -		memcpy(extlist[count], name, strlen(name));
+> -		sbi->raw_super->hot_ext_count = hot_count + 1;
+> -	} else {
+> -		char buf[F2FS_MAX_EXTENSION][F2FS_EXTENSION_LEN];
+> -
+> -		memcpy(buf, &extlist[cold_count],
+> -				F2FS_EXTENSION_LEN * hot_count);
+> -		memset(extlist[cold_count], 0, F2FS_EXTENSION_LEN);
+> -		memcpy(extlist[cold_count], name, strlen(name));
+> -		memcpy(&extlist[cold_count + 1], buf,
+> -				F2FS_EXTENSION_LEN * hot_count);
+> -		sbi->raw_super->extension_count = cpu_to_le32(cold_count + 1);
+> -	}
+> -	return 0;
+> -}
+> -
+> -static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
+> -						const unsigned char *name)
+> -{
+> -	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
+> -	unsigned char (*noext)[F2FS_EXTENSION_LEN] = F2FS_OPTION(sbi).noextensions;
+> -	unsigned char (*ext)[F2FS_EXTENSION_LEN] = F2FS_OPTION(sbi).extensions;
+> -	unsigned char ext_cnt = F2FS_OPTION(sbi).compress_ext_cnt;
+> -	unsigned char noext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
+> -	int i, cold_count, hot_count;
+> -
+> -	if (!f2fs_sb_has_compression(sbi) ||
+> -			F2FS_I(inode)->i_flags & F2FS_NOCOMP_FL ||
+> -			!f2fs_may_compress(inode) ||
+> -			(!ext_cnt && !noext_cnt))
+> -		return;
+> -
+> -	f2fs_down_read(&sbi->sb_lock);
+> -
+> -	cold_count = le32_to_cpu(sbi->raw_super->extension_count);
+> -	hot_count = sbi->raw_super->hot_ext_count;
+> -
+> -	for (i = cold_count; i < cold_count + hot_count; i++) {
+> -		if (is_extension_exist(name, extlist[i], false)) {
+> -			f2fs_up_read(&sbi->sb_lock);
+> -			return;
+> -		}
+> -	}
+> -
+> -	f2fs_up_read(&sbi->sb_lock);
+> -
+> -	for (i = 0; i < noext_cnt; i++) {
+> -		if (is_extension_exist(name, noext[i], false)) {
+> -			f2fs_disable_compressed_file(inode);
+> -			return;
+> -		}
+> -	}
+> -
+> -	if (is_inode_flag_set(inode, FI_COMPRESSED_FILE))
+> -		return;
+> -
+> -	for (i = 0; i < ext_cnt; i++) {
+> -		if (!is_extension_exist(name, ext[i], false))
+> -			continue;
+> -
+> -		/* Do not use inline_data with compression */
+> -		stat_dec_inline_inode(inode);
+> -		clear_inode_flag(inode, FI_INLINE_DATA);
+> -		set_compress_context(inode);
+> -		return;
+> -	}
+> -}
+> -
+>  static int f2fs_create(struct user_namespace *mnt_userns, struct inode *dir,
+>  		       struct dentry *dentry, umode_t mode, bool excl)
+>  {
+> @@ -352,15 +358,13 @@ static int f2fs_create(struct user_namespace *mnt_userns, struct inode *dir,
+>  	if (err)
+>  		return err;
+>  
+> -	inode = f2fs_new_inode(mnt_userns, dir, mode);
+> +	inode = f2fs_new_inode(mnt_userns, dir, mode, dentry->d_name.name);
+>  	if (IS_ERR(inode))
+>  		return PTR_ERR(inode);
+>  
+>  	if (!test_opt(sbi, DISABLE_EXT_IDENTIFY))
+>  		set_file_temperature(sbi, inode, dentry->d_name.name);
+>  
+> -	set_compress_inode(sbi, inode, dentry->d_name.name);
+> -
+>  	inode->i_op = &f2fs_file_inode_operations;
+>  	inode->i_fop = &f2fs_file_operations;
+>  	inode->i_mapping->a_ops = &f2fs_dblock_aops;
+> @@ -689,7 +693,7 @@ static int f2fs_symlink(struct user_namespace *mnt_userns, struct inode *dir,
+>  	if (err)
+>  		return err;
+>  
+> -	inode = f2fs_new_inode(mnt_userns, dir, S_IFLNK | S_IRWXUGO);
+> +	inode = f2fs_new_inode(mnt_userns, dir, S_IFLNK | S_IRWXUGO, NULL);
+>  	if (IS_ERR(inode))
+>  		return PTR_ERR(inode);
+>  
+> @@ -760,7 +764,7 @@ static int f2fs_mkdir(struct user_namespace *mnt_userns, struct inode *dir,
+>  	if (err)
+>  		return err;
+>  
+> -	inode = f2fs_new_inode(mnt_userns, dir, S_IFDIR | mode);
+> +	inode = f2fs_new_inode(mnt_userns, dir, S_IFDIR | mode, dentry->d_name.name);
+>  	if (IS_ERR(inode))
+>  		return PTR_ERR(inode);
+>  
+> @@ -817,7 +821,7 @@ static int f2fs_mknod(struct user_namespace *mnt_userns, struct inode *dir,
+>  	if (err)
+>  		return err;
+>  
+> -	inode = f2fs_new_inode(mnt_userns, dir, mode);
+> +	inode = f2fs_new_inode(mnt_userns, dir, mode, NULL);
+>  	if (IS_ERR(inode))
+>  		return PTR_ERR(inode);
+>  
+> @@ -856,7 +860,7 @@ static int __f2fs_tmpfile(struct user_namespace *mnt_userns, struct inode *dir,
+>  	if (err)
+>  		return err;
+>  
+> -	inode = f2fs_new_inode(mnt_userns, dir, mode);
+> +	inode = f2fs_new_inode(mnt_userns, dir, mode, NULL);
+>  	if (IS_ERR(inode))
+>  		return PTR_ERR(inode);
+>  
+> -- 
+> 2.25.1
 
 
 _______________________________________________
