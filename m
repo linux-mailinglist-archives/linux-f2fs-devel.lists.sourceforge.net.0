@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C43B862A476
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Nov 2022 22:48:20 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CAF062AE80
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Nov 2022 23:45:52 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ov3mw-0001tH-Nx;
-	Tue, 15 Nov 2022 21:48:14 +0000
+	id 1ov4gc-0003R0-TI;
+	Tue, 15 Nov 2022 22:45:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1ov3mv-0001tA-M5
+ (envelope-from <jaegeuk@kernel.org>) id 1ov4gK-0003Qa-15
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Nov 2022 21:48:13 +0000
+ Tue, 15 Nov 2022 22:45:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=y/MJxjAhU5GH9fkPJPganNWu5JIHQyySVDQ9WHGC9JA=; b=Qmib3REhD3PIH4raLMrf1UpQOd
- E8mvxlYGVjMVCPRyKTyd2NOy7RMZseRVmk2n3Nrwa+23pECRQ22Ngq4/cO7XlQ8DZzMMfVC64F+46
- MVpRYnVX8EGXz4gSSw5Sz9NvbjrOP/lIYXNQ3rUBW7q1DYt8XSn9CcMOsJRjHWQi4k5E=;
+ bh=ofH11SbItQwNKzYs/5wxTgG8n25ybNVhKH8elTrkmfs=; b=A3w4sorZhtOGJfxmKnvqEG46zF
+ lRqWkx54JmDPw4/sZzOCCvnRV3ya+uVczG8PfHpRHc1ibRyYEQGfN2ctpQt2N3mRaOB1FkeSQ+gYW
+ jext3WNJCLUEVH3bfuRrTZ9KRNsPZllH3NMrnyT4lZX7uyJZ8Xytdk/F88PE2EYDho4I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,43 +31,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=y/MJxjAhU5GH9fkPJPganNWu5JIHQyySVDQ9WHGC9JA=; b=QbS5eVPBzOco6yaaUKyz4XTKle
- +GeR+jC5YwiGYUBTcFMZyRSJXh6qJ9lWWW9CkJ8IiskQN3Wl3GX3jesJXPTKcmb/vkuPgFT8+jJI5
- iAUhjCNMvudCaxkAeMtYf2Ql3ZmzhaNeSC8XewA0j7itX1QyZ9tUhR7KHY44aPUs+3tw=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=ofH11SbItQwNKzYs/5wxTgG8n25ybNVhKH8elTrkmfs=; b=lcU+D53xebCGPcAH94Z3ZEAan2
+ 8PHKq2nmsx6lRa0AwmD/9hKKs9FUZcmMF/NTdQrl1LXIY2Hh/XGSlpQYedZWYHnI4w2KyzqWhCorO
+ xc+vJGIQqd/Qt9qGoUganBMnntn/Nr9P7is8T4n9Zaaj+sumMu4KPmhEK34FU4twRHiY=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ov3mu-0000J8-9h for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Nov 2022 21:48:13 +0000
+ id 1ov4gI-009jxN-5H for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 15 Nov 2022 22:45:27 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 037D9B81B73;
- Tue, 15 Nov 2022 21:48:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85B05C433B5;
- Tue, 15 Nov 2022 21:48:03 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B17E061383;
+ Tue, 15 Nov 2022 22:45:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61256C433C1;
+ Tue, 15 Nov 2022 22:45:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668548883;
- bh=CG0dXhmknwCwA3hdVEQE9D8iMO7v+ojqxHnJ/bgzyQI=;
+ s=k20201202; t=1668552320;
+ bh=vV0d9fLNFGz90PsSm03Nxac0W9/7VpUlMtKygiehz3w=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=BJ+DDeaaNph2fnh/K8SKttJN93KgcH5TMqzK8YMGOvh/Bnju6oDFljc1HwjReyBPk
- Z8rs5+oz8yQ4tyfqL3r3N/rIQoS33RinIXWr34GCHqbYaKHJmBeyeKzwkuvWWZPSbP
- L4OIzOctSwo+/E+PN7YP7T+BESEz2IyZEJRryiCzwK1vKsVdX8V6lrt5jpb1iXUI2v
- i9YfvpIiCZoTyHRxA4iuC5fsFDeigVRwhuh0T9P6HKT1DVrHHj40yi7PnPJg9r0pq2
- 6CG3id/7b48KTq3YUT1OYa36Flaet8mdRCt1BrT/KzmCxL7h/fl9IRQfCzXHQZ8t5v
- q+jAEsX1UYzpw==
-Date: Tue, 15 Nov 2022 13:48:01 -0800
+ b=c2hnreBuVyEGTGPJQ5bad7gDC8lAAIuskh6tS0ZvRuHBvmenkuBjN37Xjz9kKvlG7
+ rwS+vGh0A990++l5ZcNAqU89k68+wzj8KIprV7eJ0zPW7fpT8IS2hdSY2DhKTvAv5o
+ Q0xTGjWlOzpsZogDKmzo3vLQLfRuhCdQ86cPyMuObjlnkg1w9L9i+45TOfcX2qXZWG
+ /uSc3LWWVrQNOEXWMkTepNH18QWfB2r4ZpWoRDcm1ha/VmyYaY+QaykBbab8Tj23GR
+ IoUbBgaZIGIf1/3UcH80hwKJK6a8/1vsFdmjd5HoafCKmWZzmwBA9Dac5WC6HPaIju
+ mBSYXqqyngviw==
+Date: Tue, 15 Nov 2022 14:45:18 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Sheng Yong <shengyong@oppo.com>
-Message-ID: <Y3QJERdXypeyIXeJ@google.com>
+Message-ID: <Y3QWfom22t+UDZ6+@google.com>
 References: <f508dea8-5dc3-e29e-0d8b-4d64735817ac@kernel.org>
  <20221115160155.1037163-1-shengyong@oppo.com>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20221115160155.1037163-1-shengyong@oppo.com>
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -75,22 +75,22 @@ X-Spam-Report: Spam detection software,
  Content preview:  On 11/16, Sheng Yong wrote: > If compress_extension is set, 
  and a newly created file matches the > extension, the file could be marked
  as compression file. However, > if inline_data is also enabled, t [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ov3mu-0000J8-9h
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ov4gI-009jxN-5H
 Subject: Re: [f2fs-dev] [PATCH v3] f2fs: fix to enable compress for newly
  created file if extension matches
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -137,6 +137,9 @@ On 11/16, Sheng Yong wrote:
 > And set_compress_context is also changed to clear F2FS_NOCOMP_FL,
 > otherwise, if F2FS_NOCOMP_FL is inherited from parent and hit
 > compress_extension, both F2FS_NOCOMP_FL and F2FS_COMPR_FL are set.
+
+
+
 > 
 > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
 > index 6a8cbf5bb1871..a3420fbb29214 100644
@@ -282,10 +285,6 @@ On 11/16, Sheng Yong wrote:
 > +
 > +	/* Start to check extension list for regular file */
 > +	if ((!ext_cnt && !noext_cnt) || S_ISDIR(inode->i_mode))
-
-This doesn't address the Chao's point. It seems not much motivation to add
-may_compress. Let me try to combine some with the previous patch.
-
 > +		goto set_compress;
 > +
 > +	/* Don't compress hot files. */
@@ -321,6 +320,10 @@ may_compress. Let me try to combine some with the previous patch.
 > +		set_compress_context(inode);
 > +	else if (fi->i_flags & F2FS_COMPR_FL)
 > +		fi->i_flags &= ~F2FS_COMPR_FL;
+
+Let's inherit F2FS_COMPR_FL and F2FS_NOCOMP_FL here instead of getting it
+before.
+
 > +}
 > +
 >  static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
