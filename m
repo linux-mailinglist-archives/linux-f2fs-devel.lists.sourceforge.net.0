@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3677363214A
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Nov 2022 12:52:34 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BFDA632103
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Nov 2022 12:44:59 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ox5Lj-0003H5-Ou;
-	Mon, 21 Nov 2022 11:52:31 +0000
+	id 1ox5EL-00055e-Pt;
+	Mon, 21 Nov 2022 11:44:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <3RV97YwYKABQ052xyB08805y.w86@flex--glider.bounces.google.com>)
- id 1ox5Lh-0003Gv-Qc for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Nov 2022 11:52:29 +0000
+ (envelope-from <3R197YwYKABY274z0D2AA270.yA8@flex--glider.bounces.google.com>)
+ id 1ox5EJ-00055P-If for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 21 Nov 2022 11:44:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
  References:Mime-Version:In-Reply-To:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=V66iN5ZNYfCs2IKwl/XWPfYUEeh8Am+8/6YCzEI2D8c=; b=isK77YDDidnkVwB60Ko0nxOpdq
- DDKj6Dbcev8biWtmQqrxmbRL1xeegmhGSOdh2BhO2e/+fEgMQk6eVkkUEwYZCfA6JveBj9JqEHowi
- GPD+5MixPkZLmNPI/EP6M3bdRjmoIHS7pYcbtPQCihvn/jAbPd0Qxx5cg6FAywSw6gxI=;
+ bh=V3ROk7430AgCjRwu8JCLeHALA6B0dvLhERaon//wlR0=; b=kU+r8iink81swE2yv5lOc+RlS0
+ m3kSlFlybdYnIxQivqX7WIeopskfWz41gp5Zt1ZUV9lBdMxmE2+yV6RpfZkIs474ze7KlRI9MLvry
+ MuHAfWLA6OQPAkmM6zPHJJ+jY0Z76eXHmyZZIKX+HgExMkGVB9f1NLUKtmhx3H24LfPM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:
@@ -31,53 +31,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=V66iN5ZNYfCs2IKwl/XWPfYUEeh8Am+8/6YCzEI2D8c=; b=NQIYNNRJDCJY2rSygrWME0Ot6i
- 7pucZC91A2OEAxh+Ltl/iGusDB9hPB6TE5JmKJrNsmTSd+hkTvk8LCQolNFAX72DsIgmNcUBWnNoV
- EluNs/p/Q1P4IiGXX2ioKXK391NXKMcyy3cs6hgK+s2mtIr/ipbEtHXho+5X2D24qJ90=;
-Received: from mail-wm1-f74.google.com ([209.85.128.74])
+ bh=V3ROk7430AgCjRwu8JCLeHALA6B0dvLhERaon//wlR0=; b=OO5YVxyw+n4WRHejS2OM8RyXOt
+ HDTGcASNq7b6Rn8rtDef8n/NaJhAnI0uPNUQXJW5AQGayaZd/DdjBzfMwGphoWYSvL+pVDfK5PbPp
+ fU5eRpcGO1N81s+jOv7kqBcDxM1sKnBaZEROyX4ykz/2SGy02Wr4msh8u8hnXwLnt4RI=;
+Received: from mail-wm1-f73.google.com ([209.85.128.73])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ox5Ld-0000Gf-CH for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Nov 2022 11:52:29 +0000
-Received: by mail-wm1-f74.google.com with SMTP id
- e8-20020a05600c218800b003cf634f5280so3002859wme.8
+ id 1ox5EJ-0005re-0Z for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 21 Nov 2022 11:44:51 +0000
+Received: by mail-wm1-f73.google.com with SMTP id
+ ay40-20020a05600c1e2800b003cf8aa16377so6373007wmb.7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 21 Nov 2022 03:52:25 -0800 (PST)
+ Mon, 21 Nov 2022 03:44:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20210112;
  h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
  :date:from:to:cc:subject:date:message-id:reply-to;
- bh=V66iN5ZNYfCs2IKwl/XWPfYUEeh8Am+8/6YCzEI2D8c=;
- b=DrqkFhwq+x32T++mKGiLwBwBQlLcPegquOjKmY4DA36Bdlu1UHyvmrWX1hBJRhVkQ6
- CuCW3GY8rqEftTjZZrLMe7/mkVQz7UfhK+xIE67b7ScIXkJpIv8j5OGL6cLYo9+mckRB
- K7uXn7jnhwdTz8CKtd1PZLB/aUu4HHTidPyJYgxXX5idXFCZCOZVGyv8hmv6enXEqnwn
- sySci2PTifGmbTVUqgKzOGBN+JGcWBPg2j+F9wLZjNT18VaSguq8lzh50Et/vzVO1B6Q
- 2Y+EGhsTlaR3AYtHfVR7KGPKNpJOX8E3kDw+u1VmZZUxfQ8uANGRO5Nfw1xQZ/dSm2xH
- GfuQ==
+ bh=V3ROk7430AgCjRwu8JCLeHALA6B0dvLhERaon//wlR0=;
+ b=VyCfbuWOem8BwV+1kbZt92/iURKerhApO5tHJL82Q3g8gJjhEf8Gf81lkNXinPV0WG
+ 33XKENJFJcX8AOPHW1fpifSRoqxXlHBwqxVqieU0qAQ3CQLak9yv9kSmC8Cd+mpuXWqA
+ dMw4MYS/tqwBn9HATfin7JwAng24nM99T15wf8oiaR3VGtSchxTXvOchJ46VW/seRWPz
+ sXs38pJvJqRP0PnnJsEFB9KY5UE+hWn5HdPDuNxMBW9IoYXeVIqpE2I6F0yMLJyOGUuI
+ BmntwbMnaWN9YoJTyImpLCf9dUeBmBP1Zw2C7sgj5r2JExdS6DMuSGOCl6Jd1Ab+9sfj
+ 6cPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
  :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=V66iN5ZNYfCs2IKwl/XWPfYUEeh8Am+8/6YCzEI2D8c=;
- b=vGbJbz6EyM02u9qkRJf2bA3/+1Uy592DN78aDs7tCeG9QHzk4LOU3D/szX81XhtuM/
- /I7q2pwBn6anhJMXT05aTT8PCGaeS9G32fGt5FMflqq1ZE0DNH+ILoSRx3JcZcOOddU0
- eS1Fv0iRiVhtWXNFD9ussOkB26Mps6xUqkppagqTVHLrzzsRwGTf+o9pATsEP8DIzcLo
- X/lgx5XYudXOPxPRZWszcstbXzbh4RaSeY28FBcZ7CFBYYb3PZ712RLD7g1ITPlqAXkO
- /G/im0XjZSNE2Fe74M/TIUEuVhg8ByHH7dI/xPEXG8jB7rnQCs2W8ibJeoAaEFd8CaGg
- okCw==
-X-Gm-Message-State: ANoB5pnAK0YslE59eZg/5Nc00tcl09Xj+KlG4ysMukU4lEXNi7lg1cJh
- 1qyNQmmiGEEZ5PKrEMw00w5KHGPMSHg=
-X-Google-Smtp-Source: AA0mqf5PzJbpaiga2Jzsuv2QBaVRj0ECKQH/8ki+ITevGs4ly1kTH35yKTlXkQW0dHRua5gsG9D3oRFruQ0=
+ bh=V3ROk7430AgCjRwu8JCLeHALA6B0dvLhERaon//wlR0=;
+ b=dEAlqE/N09BRcv8dBz0SewayO0dYlnKB3pvWLzIzEwF+Go1bjTPPTnlKZJH2OGIs/b
+ SHrIOMEqoj5ucxE4N2qyuovHq4cH1Nfz1su0lvQHxBsIAj8GQoYIA4t2jfxMdtsG2loM
+ /iMKZi8aGzp+ximfA16q+Vhii1QK893mV0ZVQ9X4ZEZk2Y76Hby8lrtuYEeQ87UJcrfJ
+ 6F8lzmY7XLeysPC+K/S4Dp4hyFNbDsZBcORVWcfvfIKh+T3gsOQNraUsopUUjjWSpDXS
+ 0dpe2hEh8jTZOUy0i+X6ewypROfVAipCH77pH13NdQRCQzEULlj5g7x+pmLmaKczdhic
+ 7Cfg==
+X-Gm-Message-State: ANoB5pk9+bujCMw2SJ1E1NW1pHFbPzS94ebByvFjNG3UJeGzcbU5pfWM
+ M9CT9r15gaAPs+hH2la+ZWfsFZ3WiVo=
+X-Google-Smtp-Source: AA0mqf4lwPSD6Y7DTAtXw3/2Z+F5J2o+aieN11Xy71eaA/djePFQf5kKRgdlXgAOixk8oilkdCgBRF7Z9oo=
 X-Received: from glider.muc.corp.google.com
  ([2a00:79e0:9c:201:db68:962:2bf6:6c7])
- (user=glider job=sendgmr) by 2002:adf:e50f:0:b0:22c:cc75:5aab with SMTP id
- j15-20020adfe50f000000b0022ccc755aabmr10402338wrm.143.1669029701044; Mon, 21
- Nov 2022 03:21:41 -0800 (PST)
-Date: Mon, 21 Nov 2022 12:21:31 +0100
+ (user=glider job=sendgmr) by 2002:a5d:6706:0:b0:241:cf90:ab1e with SMTP id
+ o6-20020a5d6706000000b00241cf90ab1emr1020206wru.685.1669029703858; Mon, 21
+ Nov 2022 03:21:43 -0800 (PST)
+Date: Mon, 21 Nov 2022 12:21:32 +0100
 In-Reply-To: <20221121112134.407362-1-glider@google.com>
 Mime-Version: 1.0
 References: <20221121112134.407362-1-glider@google.com>
 X-Mailer: git-send-email 2.38.1.584.g0f3c55d4c2-goog
-Message-ID: <20221121112134.407362-2-glider@google.com>
+Message-ID: <20221121112134.407362-3-glider@google.com>
 To: glider@google.com
 X-Spam-Score: -7.7 (-------)
 X-Spam-Report: Spam detection software,
@@ -90,8 +90,8 @@ X-Spam-Report: Spam detection software,
  may report an error passing the latter to aops->write_end(). Fix this by
  unconditionally initializing fsdata. Suggested-by: Eric Biggers
  <ebiggers@kernel.org>
- Fixes: 1da177e4c3f4 ("Linux-2.6.12-rc2") Signed-off-by: Alexander Potapenko
- <glider@google.com> --- fs/affs/file.c | 2 +- 1 file changed, 1 insertion(+
+ Fixes: 95ae251fe828 ("f2fs: add fs-verity support") Signed-off-by: Alexander
+ Potapenko <glider@google.com> --- fs/f2fs/verity.c | 2 +- 1 file changed,
  [...] Content analysis details:   (-7.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -107,13 +107,13 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.74 listed in wl.mailspike.net]
+ [209.85.128.73 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.128.74 listed in list.dnswl.org]
+ no trust [209.85.128.73 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1ox5Ld-0000Gf-CH
-Subject: [f2fs-dev] [PATCH 2/5] fs: affs: initialize fsdata in
- affs_truncate()
+X-Headers-End: 1ox5EJ-0005re-0Z
+Subject: [f2fs-dev] [PATCH 3/5] fs: f2fs: initialize fsdata in
+ pagecache_write()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -142,25 +142,25 @@ an error passing the latter to aops->write_end().
 Fix this by unconditionally initializing fsdata.
 
 Suggested-by: Eric Biggers <ebiggers@kernel.org>
-Fixes: 1da177e4c3f4 ("Linux-2.6.12-rc2")
+Fixes: 95ae251fe828 ("f2fs: add fs-verity support")
 Signed-off-by: Alexander Potapenko <glider@google.com>
 ---
- fs/affs/file.c | 2 +-
+ fs/f2fs/verity.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/affs/file.c b/fs/affs/file.c
-index cefa222f7881c..8daeed31e1af9 100644
---- a/fs/affs/file.c
-+++ b/fs/affs/file.c
-@@ -880,7 +880,7 @@ affs_truncate(struct inode *inode)
- 	if (inode->i_size > AFFS_I(inode)->mmu_private) {
- 		struct address_space *mapping = inode->i_mapping;
+diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
+index c352fff88a5e6..3f4f3295f1c66 100644
+--- a/fs/f2fs/verity.c
++++ b/fs/f2fs/verity.c
+@@ -81,7 +81,7 @@ static int pagecache_write(struct inode *inode, const void *buf, size_t count,
+ 		size_t n = min_t(size_t, count,
+ 				 PAGE_SIZE - offset_in_page(pos));
  		struct page *page;
 -		void *fsdata;
 +		void *fsdata = NULL;
- 		loff_t isize = inode->i_size;
  		int res;
  
+ 		res = aops->write_begin(NULL, mapping, pos, n, &page, &fsdata);
 -- 
 2.38.1.584.g0f3c55d4c2-goog
 
