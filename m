@@ -2,91 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9EC1563340A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Nov 2022 04:41:00 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9ACE1633687
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 22 Nov 2022 09:02:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oxK9X-0005Iz-Ax;
-	Tue, 22 Nov 2022 03:40:55 +0000
+	id 1oxOEl-0007G3-9Z;
+	Tue, 22 Nov 2022 08:02:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1oxK9U-0005Is-7a
+ (envelope-from <chao@kernel.org>) id 1oxOEI-0007Fg-TT
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 22 Nov 2022 03:40:52 +0000
+ Tue, 22 Nov 2022 08:02:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ Subject:From:References:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VnTub4Y5HXxdbq9kgRXMlJDj14X+1QruDCzpXxBbgMA=; b=gQO9SpDpV4YUadtPr1Y+JXV6hl
- XnDdWAEct+TVCe7W7/haONe/PpgrLb7/SEETU1SpaX9y7b8PgFYrWpqTwwDR2oBBmTzObiRuacnnG
- coFKLmHwwoB0gAe4YQetIcH6CF+xGul1XiI1kdAX5lT4qfEoA8tethaQZoZgSzLmfuEI=;
+ bh=/t9KjP8SadZGhGs7wqcnztHMfd5BQeq0kCZWzpqEPsk=; b=lEK73Lb4FVKHGRaSlZ5t2Q9uqJ
+ dwerJaOdZblFnEII16Qsqy5XZisVFaf7qS84kPD2L/aq5U/l4yZb4KqkrEgDk88UbKZp9wj14hMAe
+ iJnkvhBNUON3Lnmg+iZgnI/DV7IJ2++LlcfuKNF1nYm93jEBjejOnfKegLSwCVpPVvv8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
+ References:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=VnTub4Y5HXxdbq9kgRXMlJDj14X+1QruDCzpXxBbgMA=; b=kEGg/LMZ0ViSAlpeNCtaGliPV6
- dTj3Xm5ZhqepWC4t/dIrbC+KyY+zu1Sd8bBTBuOq6Fs444Bp8l1c3aF5GBplJ3K063mYJ/feXuZ+f
- UjFDf/hVs+vZ2XcshEX68upqNKz+y8uMqllXXG1/DHdcLDA2gI5RSF4IXLFrX8cOcmQY=;
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=/t9KjP8SadZGhGs7wqcnztHMfd5BQeq0kCZWzpqEPsk=; b=gnj6LxTasalNdQe8XZdxq4//Od
+ Qkjy2fIOIC4n4u0ZkXbhrGrR57fQRMCWIPMEPVFwHfxINxF/K2+VjIzhTgaL+ZI9msZFRaYO1Ni67
+ SaiaCv9mcFnyc05RrKK5BBasw76jEogoQL1TQgUELgCVohkYLZkno01TOWfPVz4PFUd0=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oxK9Q-00ALcl-DY for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 22 Nov 2022 03:40:52 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=VnTub4Y5HXxdbq9kgRXMlJDj14X+1QruDCzpXxBbgMA=; b=jZoeg6TF21XJkuWIBeOBqwSFwR
- S+XahH3FklBRWzEpYuA5k1nY0SXTXfkBvmBxqXuCWsHLq4Tt3mmRX/yFTLtoqX7JhtzCr4v49jWZS
- UMTI5vJAY2AkQ06hwM6FO8AD88bQtStfDSZ7R2H1c2kDJrTbbIvhpwgmUrOtqtBTpEfLv51y+8eVN
- bg8imgaRNgbG3Vyne7YSifIZXRQdfxsih0gA8buipA48uL/ef6WZKGQwmUGt4dMgQWtyT95Kh36jm
- A3hWIW5kpYnWbTEo1JBRfr2oBaVEyqfcQ0NcU4pvxfdGiFEUL541uK+IJpUQAYXFvC2NJp7DNAfMG
- 7V3SOPsQ==;
-Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1oxK99-005ts8-U9; Tue, 22 Nov 2022 03:40:31 +0000
-Date: Tue, 22 Nov 2022 03:40:31 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Andrew Morton <akpm@linux-foundation.org>
-Message-ID: <Y3xEr3hhbYfdei+k@casper.infradead.org>
-References: <20221121112134.407362-1-glider@google.com>
- <20221121114840.c407626c13706ff993efabe3@linux-foundation.org>
+ id 1oxOEG-0002sF-UU for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 22 Nov 2022 08:02:06 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id A443EB8198D;
+ Tue, 22 Nov 2022 08:01:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F8DDC433D6;
+ Tue, 22 Nov 2022 08:01:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1669104117;
+ bh=NOXarNOHdXXBuICnUwVDtYZMYcKMQ/aOjAW33SMD19w=;
+ h=Date:To:References:From:Subject:In-Reply-To:From;
+ b=UkOQD0PxLUVkb/17jR6J3yNTjiACQgT6mFyn0h2nbzFWnb4Msp9nyVjr/U/A2rwMY
+ MlspqpX8BEVAFsXs/u8yr3GBABMjimM3oMeZzzmkC9/OmmDB/xmXB2MRU52UxdgF8W
+ quMFacZaopt5I0zbdIijV7c7WIxRIi4yqnkQ9m2uPvVTkqNoE1OxRZiFz8GVSiuEpB
+ SIT+7XlHt7AKiCmUeuNBGRKsHXAs3T1HwsR13T/oQ3jtHzE9EZe0pHH7Uq/ssslV3w
+ MnwLK6Q4oJrkouN48auHLbM/Q5qTrpVhjMACkw/y56W4/6R33aeYjwXrkM3O8J21jZ
+ qCb7Y48Sx/RhA==
+Message-ID: <af5ae747-5552-aeb0-885e-ddc9ab6f39c3@kernel.org>
+Date: Tue, 22 Nov 2022 16:01:54 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20221121114840.c407626c13706ff993efabe3@linux-foundation.org>
-X-Spam-Score: 1.1 (+)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.5.0
+To: yonggil.song@samsung.com, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+References: <CGME20221102100756epcms2p23dfabe90c467313ce094c5c81a99c6d7@epcms2p4>
+ <20221122023656epcms2p4468d4feb97711516206e19890dad09ac@epcms2p4>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20221122023656epcms2p4468d4feb97711516206e19890dad09ac@epcms2p4>
+X-Spam-Score: -5.2 (-----)
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Nov 21, 2022 at 11:48:40AM -0800,
- Andrew Morton wrote:
- > On Mon, 21 Nov 2022 12:21:30 +0100 Alexander Potapenko <glider@google.com>
- wrote: > > > When aops->write_begin() does not initialize fs [...] 
- Content analysis details:   (1.1 points, 6.0 required)
- pts rule name              description
+ 
+ Content preview:  Hi Yonggil, I guess your email client forces converting tab
+    and space characters of patch, please check that. On 2022/11/22 10:36, Yonggil
+    Song wrote: > When f2fs chooses GC victim in large section & LFS mode,
+    > next_victim_seg[gc_type] is referenced first. After segment is freed,
+    > next_vict [...] 
+ 
+ Content analysis details:   (-5.2 points, 6.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+                             high trust
+                             [145.40.68.75 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+                             author's domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-X-Headers-End: 1oxK9Q-00ALcl-DY
-Subject: Re: [f2fs-dev] [PATCH 1/5] fs: ext4: initialize fsdata in
- pagecache_write()
+                             envelope-from domain
+ -0.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oxOEG-0002sF-UU
+Subject: Re: [f2fs-dev] [PATCH v1] f2fs: avoid victim selection from
+ previous victim section
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,43 +115,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: tytso@mit.edu, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
- adilger.kernel@dilger.ca, jaegeuk@kernel.org, linux-fsdevel@vger.kernel.org,
- Alexander Potapenko <glider@google.com>, linux-ext4@vger.kernel.org,
- syzbot+9767be679ef5016b6082@syzkaller.appspotmail.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Nov 21, 2022 at 11:48:40AM -0800, Andrew Morton wrote:
-> On Mon, 21 Nov 2022 12:21:30 +0100 Alexander Potapenko <glider@google.com> wrote:
-> 
-> > When aops->write_begin() does not initialize fsdata, KMSAN reports
-> > an error passing the latter to aops->write_end().
-> > 
-> > Fix this by unconditionally initializing fsdata.
-> > 
-> > ...
-> >
-> 
-> I'm assuming that this is not-a-bug, and that these changes are purely
-> workarounds for a KMSAN shortcoming?
-
-It's a weird one.  It used to be not-a-bug.  Then we changed from
-std=gnu99 to std=gnu11 or something.  And in the intervening years,
-the C standards ctte decided that passing an uninitialised pointer to a
-function was UB.  So we start by passing a pointer to the pointer to
-->write_begin().  Some ->write_begin functions initialise that pointer;
-others don't.  Then we pass the pointer directly to ->write_end.  If
-->write_begin initialised the pointer, that's fine, and if not, it's UB.
-Of course the ->write_end doesn't use it if the ->write_begin didn't
-initialise it, but it's too late because merely calling the function
-was UB.  Thanks, Itanium!
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SGkgWW9uZ2dpbCwKCkkgZ3Vlc3MgeW91ciBlbWFpbCBjbGllbnQgZm9yY2VzIGNvbnZlcnRpbmcg
+dGFiIGFuZCBzcGFjZSBjaGFyYWN0ZXJzIG9mCnBhdGNoLCBwbGVhc2UgY2hlY2sgdGhhdC4KCk9u
+IDIwMjIvMTEvMjIgMTA6MzYsIFlvbmdnaWwgU29uZyB3cm90ZToKPiBXaGVuwqBmMmZzwqBjaG9v
+c2VzwqBHQ8KgdmljdGltwqBpbsKgbGFyZ2XCoHNlY3Rpb27CoCbCoExGU8KgbW9kZSwKPiBuZXh0
+X3ZpY3RpbV9zZWdbZ2NfdHlwZV3CoGlzwqByZWZlcmVuY2VkwqBmaXJzdC7CoEFmdGVywqBzZWdt
+ZW50wqBpc8KgZnJlZWQsCj4gbmV4dF92aWN0aW1fc2VnW2djX3R5cGVdwqBoYXPCoHRoZcKgbmV4
+dMKgc2VnbWVudMKgbnVtYmVyLgo+IEhvd2V2ZXIswqBuZXh0X3ZpY3RpbV9zZWdbZ2NfdHlwZV3C
+oHN0aWxswqBoYXPCoHRoZcKgbGFzdMKgc2VnbWVudMKgbnVtYmVyCj4gZXZlbsKgYWZ0ZXLCoHRo
+ZcKgbGFzdMKgc2VnbWVudMKgb2bCoHNlY3Rpb27CoGlzwqBmcmVlZC7CoEluwqB0aGlzwqBjYXNl
+LMKgd2hlbsKgZjJmcwo+IGNob29zZXPCoGHCoHZpY3RpbcKgZm9ywqB0aGXCoG5leHTCoEdDwqBy
+b3VuZCzCoHRoZcKgbGFzdMKgc2VnbWVudMKgb2bCoHByZXZpb3VzwqB2aWN0aW0KPiBzZWN0aW9u
+wqBpc8KgY2hvc2VuwqBhc8KgYcKgdmljdGltLgo+IAo+IEluaXRpYWxpemXCoG5leHRfdmljdGlt
+X3NlZ1tnY190eXBlXcKgdG/CoE5VTExfU0VHTk/CoGZvcsKgdGhlwqBsYXN0wqBzZWdtZW50wqBp
+bgo+IGxhcmdlwqBzZWN0aW9uLgo+IAo+IEZpeGVzOiBlMzA4MGIwMTIwYTEgKCJmMmZzOiBzdXBw
+b3J0IHN1YnNlY3Rpb25hbCBnYXJiYWdlIGNvbGxlY3Rpb24iKQoKR29vZCBjYXRjaCwgSSdtIGZp
+bmUgd2l0aCB0aGlzIGZpeC4KClRoYW5rcywKCj4gU2lnbmVkLW9mZi1ieTrCoFlvbmdnaWzCoFNv
+bmfCoDx5b25nZ2lsLnNvbmdAc2Ftc3VuZy5jb20+Cj4gLS0tCj4gIMKgZnMvZjJmcy9nYy5jwqB8
+wqA1wqArKystLQo+ICDCoDHCoGZpbGXCoGNoYW5nZWQswqAzwqBpbnNlcnRpb25zKCspLMKgMsKg
+ZGVsZXRpb25zKC0pCj4gCj4gZGlmZsKgLS1naXTCoGEvZnMvZjJmcy9nYy5jwqBiL2ZzL2YyZnMv
+Z2MuYwo+IGluZGV4wqA0NTQ2ZTAxYjJlZTAuLjEwNjc3ZDUzZWYwZcKgMTAwNjQ0Cj4gLS0twqBh
+L2ZzL2YyZnMvZ2MuYwo+ICsrK8KgYi9mcy9mMmZzL2djLmMKPiBAQMKgLTE3NDQsOMKgKzE3NDQs
+OcKgQEDCoHN0YXRpY8KgaW50wqBkb19nYXJiYWdlX2NvbGxlY3Qoc3RydWN0wqBmMmZzX3NiX2lu
+Zm/CoCpzYmksCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoGdldF92YWxpZF9ibG9ja3Moc2JpLMKgc2Vnbm8swqBmYWxz
+ZSnCoD09wqAwKQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoHNlZ19mcmVlZCsrOwo+ICAgCj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgaWbCoChfX2lzX2xhcmdlX3NlY3Rpb24oc2JpKcKgJibCoHNlZ25vwqArwqAxwqA8wqBlbmRf
+c2Vnbm8pCj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oHNiaS0+bmV4dF92aWN0aW1fc2VnW2djX3R5cGVdwqA9wqBzZWdub8KgK8KgMTsKPiArwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBpZsKgKF9faXNfbGFyZ2Vfc2VjdGlvbihzYmkpKQo+
+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBzYmktPm5l
+eHRfdmljdGltX3NlZ1tnY190eXBlXcKgPQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgKHNlZ25vwqArwqAxwqA8wqBlbmRf
+c2Vnbm8pwqA/wqBzZWdub8KgK8KgMcKgOsKgTlVMTF9TRUdOTzsKPiAgwqBza2lwOgo+ICDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZjJmc19wdXRfcGFnZShzdW1fcGFnZSzCoDAp
+Owo+ICDCoMKgwqDCoMKgwqDCoMKgwqB9Cj4gLS0gCj4gMi4zNC4xCgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5n
+IGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0
+cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
