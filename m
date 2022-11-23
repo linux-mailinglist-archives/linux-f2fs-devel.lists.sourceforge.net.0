@@ -2,129 +2,127 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA81E636613
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Nov 2022 17:44:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96FED63666F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Nov 2022 18:02:23 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oxsrR-0003nN-1H;
-	Wed, 23 Nov 2022 16:44:33 +0000
+	id 1oxt8d-00062N-I8;
+	Wed, 23 Nov 2022 17:02:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1oxsrP-0003n9-OW
+ (envelope-from <frank.li@vivo.com>) id 1oxt8b-00062G-Gq
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 23 Nov 2022 16:44:31 +0000
+ Wed, 23 Nov 2022 17:02:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5BuKWrKR5jYRhSucLIT5VYO4TKn8i0Ezryo9kyMfzno=; b=FFAdze+pHNFdtV7rYkcdILPlLX
- 6xm7daxrhMlCVwObIJ1TiO36QVkf5I3OGCASZRyW/gKd0/4M7MbiLQPYX2g/ZMNmKl/enZTCDhf0m
- ngFuVbN8q1GMMakOa1ILqnLGX/AehSUQarcgYzb1aNsFSoC2/kQ2GMvgvNjKOHMD1oJg=;
+ bh=Rg0i0W5xrwdsPIA5Ur0h0yqNLe6MEW9VThXh36b9KOY=; b=gUo5F2I8BeBIac6VRoYDp3h/6s
+ RdNgg3314niT1l7W/qtRBB5h2B4/fwawgcPFA4zWTnIL5dhL+B3wlRQFTE8agYIEWNQ4dMxKLrU9X
+ C79S3/kUWRsO1CZYN0v2gXKT2kLYt5tLfcC7ZsSToWPt2ME2tY9kFP22Kn22sbID65a4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=5BuKWrKR5jYRhSucLIT5VYO4TKn8i0Ezryo9kyMfzno=; b=He0gZ2maOIbdHiHGIliL6+Mza+
- 0xucftGXX7rCcbl6bgmMBTsorIAYc9BSRIjMmD5BSNjVvwg9nZEWdZBjg4P9VmCjJyio6pKaIlBuu
- VhHrmRxqljZdpbVmW4hIBnzUWTnH3c8WN6F5WOaEqs1PEFAmE2nmEtVc8RCNlv72V14o=;
-Received: from mail-psaapc01on2131.outbound.protection.outlook.com
- ([40.107.255.131] helo=APC01-PSA-obe.outbound.protection.outlook.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Rg0i0W5xrwdsPIA5Ur0h0yqNLe6MEW9VThXh36b9KOY=; b=N
+ G13yOSlhR67Hrt3U9Rzcc6iT0t2H139V1s7DXF9px08T/JuNPABFRkE40N//QuzvpexiecnDAw94P
+ FlNyqUmrqCg5YxGKwiQ2oHaEEt7RaJVHadeCanLkJqnQkKv3jYhJT7vU9nzczEU+fTBvDq/cupxMJ
+ xzFjlvpZCh1ikjiA=;
+Received: from mail-tyzapc01on2121.outbound.protection.outlook.com
+ ([40.107.117.121] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oxsrO-0005il-V6 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 23 Nov 2022 16:44:31 +0000
+ id 1oxt8Z-00GVdQ-IE for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 23 Nov 2022 17:02:17 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PyuXd/UGZCoPmLJK6f9mii2nNGoMipGuMBNz8hXN9841nDZYgwXNmRw27KqiDFzyedNoEzgTF4SDDzZOYpQ/DA/s7TRrLSg7g+nuXwo/B7V5VabVfLL4SGqN9Kd/VZp3i+MQNhgcoAxI+Dnhbbd0YTuHtBzhyllDhDO1Ur/YqvP2LrXmupZW9tKb9jZBXXPYRAW2wG4M5C6QbjtxUAkbpRvxTIi571yLOfpmNX64lab0Edvc/GvmoBrJCBDnCfpuZzJyeuOzTiW7w6Lq9m09dVKzxXQbI8TLJHWfWILHTBchjjelkqcN8k4z5rcWxHllxUCW22YL0xgq9ezqSyl4MQ==
+ b=dHf3FK1IP9qlt+2EoEduIlSFp4B0WFCzCfdoGMjlMjG1PrcaOnGZ90rmRHASs6tm5uzzV+PMGEhZSgzp7VWMhx4w1S58jkSGUpKDdx0r9xpejkDHPTh9qh4Y4CpH6iut6jKk3KmEWttBCjh77Mb7LurOGkk+xgG8t4+2O4PkDECiYLulCE8f2Fs7K79AczpaTOgi9OV61DDusgBlygysSUU1/kDqTQ+5BnVZz5aTuu7Hr+Z6tSYuiZCOyacTz9dbnfFCeoCSIdT3dSwdqwDZEAEv4+WipCnHwy7od2nIsj3quYbANTebPJzUaiMFZN2uLHicJ5fZ2aKSPrlOb3LLVg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5BuKWrKR5jYRhSucLIT5VYO4TKn8i0Ezryo9kyMfzno=;
- b=anSh9Dtaui0pTtIkrnhiY+3M8MYFM3Nx1KCYmvziqXz++3papB1JdGJxjUL8Eulk/gVWSQGeIiOZM3HlEsooY+G9GhSKIM1Lv0EWsfaV1Qvsle6DlWUuoEe3x6MaHa6PnUCDNy8GGETw60r7q7rq/5SIjCjuKFGPmq8Y+1A+tuXEGliZnVazPJNwtTTctnx7Zncc1RO/1+GkKRt10W/4mDalFaJ4/RAfhcvr/AC6YYUN2LBosRwr46XeSvFNFsmky2nsfaVTJMjmZvbXUcoq+cLSfe+boXCQxrY7YorSQj9xRnHs79+2eNmebjI+yj6UlvndtLHkqMEebtyK4cESvw==
+ bh=Rg0i0W5xrwdsPIA5Ur0h0yqNLe6MEW9VThXh36b9KOY=;
+ b=PZRXGCWdUl3Djk5EEa52BKQKnirEFE9nMDhFPIpqoUgjcKvjMk53O40vynhCdX0VdJU0TG9gsMBm+Fl3PYero84udWi+KCIApW+XwlBXKEssV7srMgHPE1FkJvAs62OjYPlcEwINDqwH1QIN9MKWmJ6YFsgpLyk5AUF1X3bWZIhy2kJJ/lwY3rqphO46ZmIHjl4wb8C0wpkIM4AM7WNU3F6HL81jFDLe8/z+NcaWTi44C1LDTHa3hwMwiuPTQyDE3s0Nv6Bcd8KQmHgjddwEXTmvmK3UTlh1yj3QCeNiD+YNCYu02OkB13yM+fIVWoo198M442i6eRwz2JXWNsBZuA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5BuKWrKR5jYRhSucLIT5VYO4TKn8i0Ezryo9kyMfzno=;
- b=IwCs67mhZ8pfI003N3JY9/WRLShfG8rYVsMI8YE6AXQgX0dqYkE2LMgUFQrOh1b7wMkvL1dx+Hmc7PkmVgqnMrLoTMhPmm97NORANuyjh23BCmIGltODvre/wbvXqaJiyifA28/4ZklameZ75vp2dVIdNqTlDdfRYf2udCKTDAF56UG8NvakdBOF5hKH+QBftO9rHduG3udW2A+BSJ70RW05taSJVRkPoRv/sZ+AhF3Vj0ZFG86yflRMil10f4MbMiOdRdE0dmk/tWFlsVAgXC9+WZa0kst8HAc/dEEYyUkQem1EcFLuqcCrOB5oAxzGqNF81NUIYv6dTtbbwCTC3A==
+ bh=Rg0i0W5xrwdsPIA5Ur0h0yqNLe6MEW9VThXh36b9KOY=;
+ b=OpID7fjJeTgtFeiVvjNWj9OYdvoMqzKLlqZxcgf8//fAi+Ent270oyBs2hDg8CQgw2gl9zqSpMc8GvsHPw/sVvAsyD6N0Eq+fGsz3HijbhLJlNQ2iK0Ruz3xi5cx1iuHZ9+9nJkJyZqlOgGI0rAmZ82znABmUYBJlGmi7unJ1klJRCVMgzxC03B51DUYgytvqo5dPjNMOzfLNbGTgIBi1tzORMXsraFJNesryX95kP7Yy2znVbMsgvLN6a3r8Vp40DX+hehqKUJvKugQzejtLx06gNB8QTJyw03dy6v5Su3CDsdJpwLACCsRD8UKrsr4d1u1vqDzJVMJQTjU6HciBQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by TYZPR06MB5950.apcprd06.prod.outlook.com (2603:1096:400:333::12) with
+ by SEZPR06MB5368.apcprd06.prod.outlook.com (2603:1096:101:64::11) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5857.8; Wed, 23 Nov
- 2022 16:44:14 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5834.15; Wed, 23 Nov
+ 2022 17:02:06 +0000
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::1230:5f04:fe98:d139]) by SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::1230:5f04:fe98:d139%7]) with mapi id 15.20.5834.015; Wed, 23 Nov 2022
- 16:44:14 +0000
+ 17:02:06 +0000
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Thu, 24 Nov 2022 00:44:02 +0800
-Message-Id: <20221123164402.13849-2-frank.li@vivo.com>
+Date: Thu, 24 Nov 2022 01:01:53 +0800
+Message-Id: <20221123170153.15888-1-frank.li@vivo.com>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20221123164402.13849-1-frank.li@vivo.com>
-References: <20221123164402.13849-1-frank.li@vivo.com>
-X-ClientProxiedBy: SGXP274CA0011.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b8::23)
- To SEZPR06MB5269.apcprd06.prod.outlook.com
+X-ClientProxiedBy: SG2PR06CA0240.apcprd06.prod.outlook.com
+ (2603:1096:4:ac::24) To SEZPR06MB5269.apcprd06.prod.outlook.com
  (2603:1096:101:78::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|TYZPR06MB5950:EE_
-X-MS-Office365-Filtering-Correlation-Id: eb6e2629-dcc9-406d-d275-08dacd71f46a
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SEZPR06MB5368:EE_
+X-MS-Office365-Filtering-Correlation-Id: a7bed81f-5264-4e27-df99-08dacd747394
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: AgazdcgZ7b5yaMhRPULo3JhmIsni17STqZjOHkEVCJ4hgiGPSkERjycAKsLOr7tZUzsuR/XudzRi0Xcmi7z71QlzzQK89wpFMp5JmVtpgM25V94GxKoc1aLwlA9PP4BvCGp/eDPVbJ8IUTLZCmj7LLgWcc1mIcNwOHL4FcC9fBryql6ObcWC2PTvfB/5+7024h+1QQVp16xPNQi0m5scaCUVlkYOvPPfuiJTHG7rCV1OqrvGu8ylZNu7F+7ltJyXE3o1pkhIDctAqW/Qis92bio5XFtourLLQpV4AEPCFDspiuUVQStEAyGR1melTdrQWfCDVx/hAlUZ83lOCLO+QrSnYY4k4OSKccQao8qiQ3knpZb1lghkQM4o/GQ4kUQvZu7UR8Z2Y8PeVT5tg37gC3AQrL/QGRAxjpqax3IvkgFbKkU95g7TbLwAiOI5KIYUPQPyCT+ehV+mo1pOq/u8Uj9icY2F8OidUAPWo7oX+97em4dBo3OvUHrD/YCFvFhGblodePkTzJQ/xkya09UsMutUcr58pJkKBR0JDVion1DBlMPw24aiL+DWSg9V5W/mXqRUcwje4Jga22OLAUsC1ZVL/c4K3nv0VkCSD/PnLBDsoKQ5MweWqVhR8bVzaJC3zZZU0J24L5CQL1aGUk7uBhAOKAZO+5i+F7x/zSgTDE5zI7Uw6My6fOOk3vn/cYLa
+X-Microsoft-Antispam-Message-Info: C9H2sJs9Cu+OCNb3UFSmxFeLOyijzKvAmIHtQf4fkm+qRZGy6xE25GNAObkHPb7PWVYrU6vsugiBTIFuZHnehIoClzNEDMhnCOfSpWSNLQRI/BrpjsqyJPKwvkW3TO8HSeDDQi4yVpS8iD9+bUBvArQewsa/QDro9/QO/ebzj4ZaONzxtLAWp1JbSgk7CRxDIa+Pmz8PKT7eOhVnLcobyrJsYH1dB0RewXdvrPmFMRCAzT5Q3gjXlO007xoVy1ysWx5FvaIRWcR+C33t6TpFqzrYamlEzASQU4hxbH8qS+WOPgzKGFM2CRc93tWmV2JowETG7XGLWQzJCuxi3MgSEqV6/QQ+uDFg88bxQXo2XYvXNrpVd2yjPAqm6ajmBGZ8dK2iW4btNYIKZ/y4hbmWThaaRwYDHGewXiqs4nh3Grd1YxP/FUFDRK+fmYxABPJMefEH9NVMzxdPomhcdiV/P13y22E+wnpxbGoHTwxjQmLiu9Z1HULeIgsNsKZgJZGkMFoBiLOcv4mtDdxfc5nMRt1BbC+fH30oZSBd3HfpTIGqZJauJZ3VSCvIz4VlTkyM4RY4//ynhLO1tYl+X5bjjgRbexlD+4WYcTyjh0rhizsOVtHAGIBU6gGME4/JVkIxhShBfMjOH6ZhSXqIZB16/J1Nhdp65dDkpNr6SYXEnAhv0p7eHwBl7Y1FZnnGoSD4kmwJ9hghHb9wCAwaPIK5YW8yacCWzghFb6Lg6TzxVd4=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(136003)(396003)(376002)(366004)(346002)(39860400002)(451199015)(2906002)(83380400001)(6506007)(66476007)(36756003)(66946007)(41300700001)(66556008)(2616005)(1076003)(86362001)(38100700002)(6512007)(52116002)(38350700002)(5660300002)(4326008)(8676002)(186003)(316002)(8936002)(26005)(19627235002)(478600001)(6486002)(6666004)(107886003);
+ SFS:(13230022)(4636009)(136003)(366004)(346002)(376002)(39860400002)(396003)(451199015)(36756003)(38350700002)(41300700001)(38100700002)(2906002)(86362001)(83380400001)(66476007)(66556008)(8676002)(66946007)(316002)(4326008)(186003)(26005)(6486002)(478600001)(8936002)(5660300002)(6512007)(6506007)(2616005)(6666004)(107886003)(1076003)(52116002)(309714004);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?RozpiDco9OGMnuz655u9toPxfYVtOKW6L/2IeW0e21dZZ7KPpnDMnWb3GaFy?=
- =?us-ascii?Q?GQJSh0InhApz2PGfdhB1VL0OP8jszaGMSHcHsdB+Omy8RQuoWeP4cqUb3Ny7?=
- =?us-ascii?Q?aoMz+Bdvdk0HvDTZ6JGeRgdQNX4tjWJK9hIE/TZ2H5pqynmj6X8tyB+HjSSD?=
- =?us-ascii?Q?y6OcK2yR4u/O0amWdgABabwayh32twWsSkCdmW5vq2EsnwJvk/j5oL7ICIJo?=
- =?us-ascii?Q?XhfvBZwIg0/zKaCAGXNzykt+ZjL5tMXj2TsOAFpxBDHMEMZ5UXTCGONjkrhn?=
- =?us-ascii?Q?1KfWQKkKlD/5lt+niVOiKaHdlZ2+mT7bh1BYq5MhizliQUX8ks0NYS31A55Y?=
- =?us-ascii?Q?K+y66MfOVIjKc3Pbx9RjtiEuPwOJW0YghNPd/Gg4Sgy9K5uam2nF55nvLWff?=
- =?us-ascii?Q?rYCYXuzO0IWk9kuTIgexM3/J54PNqgPoF3hPzwB4hMglFuJLBDJ6p1V2oBHn?=
- =?us-ascii?Q?KVL8ggT9JEFdmip5Ai12PKsIuyVxCGsvZO5IdA7ytQNjkebCX7LJCxtv6kwk?=
- =?us-ascii?Q?EhhwmkKmYK4tCEKdEz2EkrByl/GdN9M8QPnaMp8IbUEjrd9N8i4h+fj/Mm2w?=
- =?us-ascii?Q?FpT4IPkNGZbVP0krwBl4Gd2+BPyYVQFsX3/hzQzEy0Dqzeg7z2cYvIM4hwJX?=
- =?us-ascii?Q?3VBnPu8KkYL78yWhp3uHAd9uhqb1SRnQgeVaWg3XJ2QZOzKKR/mXDzTjL+Oa?=
- =?us-ascii?Q?Ed+BlJfg8L6mW0j4FCBuFJlpNb6RL8zBZQUTKTNgP/Hwoj0sZIkcezVzDuUg?=
- =?us-ascii?Q?Qsarh7A+m+6dabwF8WYKCfobAxOdaBd5AuNx91t2ocWlzdirS2rbf7YLeYSn?=
- =?us-ascii?Q?BG4Q/Lju8sRIs3QtQuZUtCyba5ZYevBodKJr06/xm+3PmiLB40L4KguiZXew?=
- =?us-ascii?Q?rgOo5J6d9ikU5upuU51sV4AgJgjUQYFWa3TZYrfRrRDKGxWt+yE9Xo0jjkXi?=
- =?us-ascii?Q?wuRrtPDwgjw4x3nN5IilVw0BThq/ZxvkfEH3pwAGlBvLAMRtuTuJ0+ARTjoN?=
- =?us-ascii?Q?qzWWCdcNHuex5grXmdnO5VibctcBlE7FML0lCoz2eInlNnceAPcMzM7x/Vgt?=
- =?us-ascii?Q?CO2fEhoLtmdqqBk0w1UB/WgShVomzC2WO8amYSYQ9hnuVGbTtfGiZ82L2FMW?=
- =?us-ascii?Q?MAPhqybXZ1Cnlj85eGp1qj0dG8K6IkTcgn9mtem59ee5vr6BV6rhtKst5kfZ?=
- =?us-ascii?Q?Egl+40geHkPFfGjSrKs2NyHDUtVaiPJ5hj+lOjSl31DcpAQWDfmM4d/QKA+V?=
- =?us-ascii?Q?DzoHyngcYQsnMOZgGP1/kDaSUVQcEvN4mLAB0KHWteE9ZpWzD47g6W0gbCe/?=
- =?us-ascii?Q?KsbOWWUTCddJl8sM2DVcMsCVayuXLgdin9UqZLMQOmGPYi85REASY7trS1Nd?=
- =?us-ascii?Q?FGwbnd0cdxLYn9DYBQjPgx5Wu/LO6WcqKPV2iOoMqkUMAOqfmKmuuw4QUoHc?=
- =?us-ascii?Q?knfYdHzVSxUeNGqLVuYz6EKMaG8mDpXtXcp84XuWnPsh7viwVHU5kIFz0qeo?=
- =?us-ascii?Q?ApNTmI0TRPbbUTmC5Dz6DK8LU1fw9B4Y8vt7PS1EMbpPRpgWz/0tByPR87H1?=
- =?us-ascii?Q?xC6PV+hTYe0hS5qCo6Ic2mSHPOQVl0Kzahoa3tvs?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EtzF4B+kBRbZf9wQ8ZzMLEcgWHpBWCx3UDlXRlvvSGuqGRVGrvvKD4iVzKTn?=
+ =?us-ascii?Q?TeBmk6rPbLJS0/7/oerew0E1jUSqIIdgURkOHl890N0LJ5jY96eOBgciwdGp?=
+ =?us-ascii?Q?3jgmcEkex8i/0UAbKEtfxWcPb0TB/wjZ5N/Ngu0GfeHJewj96aslAEhwRObR?=
+ =?us-ascii?Q?7axOFSnikgn939pAdYDDQt/uEV8yl+Zh5SlHTuV4i+jt9iA9zjFrf4GF+Xz+?=
+ =?us-ascii?Q?wO0YWalJKidomH/BapdfQ6EvS9mIrBnbDAVV7Iuqc7u/YkTRklakgo8gFfIg?=
+ =?us-ascii?Q?POy2uWEzCJ3EjgsmRCGf7RAaTNyJOrjd+prb2T8VKrkYI1LyRW2X7v4heM2Z?=
+ =?us-ascii?Q?IM99b2omIiV8hUs4QuE0mHNr2M+xetICGWc+DGQ66Nq1eMjcwmYU3rBHqjPJ?=
+ =?us-ascii?Q?cOXKfUoZWQjEU+zTn/cMC9GnCr7ic5A3mZdyKSvoaJgdpSBcrD9AKyLVPnL1?=
+ =?us-ascii?Q?Em9LUHjcGcGQdgK6k1ABWZeqnExvLCRoFzdNWUrtStob59PTDRKuxgR6AWPt?=
+ =?us-ascii?Q?X35jY4LJoaGk9W4omv0Q3TOcpAnu1TJG2b92anLWQ6Sjecmd9xsUKyuDiJ9D?=
+ =?us-ascii?Q?ytXJ5BfpOxIab3AO2ZeTf1FlqMN0pFAvXp2Zgs7wG1hZsol6/gyzLqOEe+xJ?=
+ =?us-ascii?Q?tewljRKxnqvzzEvGrV3HJlA85WuRvYJGqmiF4pDJyJX7FO5dr7l/fLdQfNBa?=
+ =?us-ascii?Q?x1ln194v3f8aEB115xUBvi0U2cC71oAgaggJslGUQgsVkHsHUA84avIGX2VJ?=
+ =?us-ascii?Q?MBzLeOKDuDtCup0S82ERsfR5N0dcKSpXtacSyhFiEo2nm0tzZgj2EZoSFIqS?=
+ =?us-ascii?Q?ujOilsM5jqlW0OwcrBLWg0+zhugnKV4BcVSIpU/i3fHvZ/O251oIqr3DQuCT?=
+ =?us-ascii?Q?VEvafaJg3RA59N/JmCAcww4usAQHfPFbpSIS6HU48MMY3ljRWK6gfTRXXQML?=
+ =?us-ascii?Q?mgKjjZL0eEHW1b6ftOTD/U2yBGB+YlzK/yG7J8ObqtOwNIxyIMeAW5zgHrWW?=
+ =?us-ascii?Q?Jcz/FbXChuyeDiMRAFZypbOTr0MqOQ3AZ7mE3iKsqFpbpQ0rzuJOfCN6Dww2?=
+ =?us-ascii?Q?BDqmGaNJWiMVJp3PS4RBZcX3o7b7BZP/wDaqwUjeQThad+mfX1IBE3Y2mwDW?=
+ =?us-ascii?Q?np6tsxy2vIVPR+nQd2kVInW/579Pavb86j9wFzUKrSvxWU8nQxz4jo3wQd16?=
+ =?us-ascii?Q?giDizf7ar/1mecV1v59chCgnmDSqEnFwMmcDYmigcWBnkI7bIAQrgxZxeWtU?=
+ =?us-ascii?Q?ES7XzX/QMeh3MboJwu1AfQHbNBHQZSjXG3R/DkhZsgQPGkIXiOgdgojmjxgL?=
+ =?us-ascii?Q?+XwAVwAVL3jjURfG/Dg7ysCLyGGk5AiLWdjZ9Y4FCUR33o72NWI6cKLyMM7Y?=
+ =?us-ascii?Q?NkCQS1YGYmQswBkICKpKhKu/nbpqeybxEigGyhzK5C3nEctLTCvLwMF2xaUR?=
+ =?us-ascii?Q?thAZqrybDN5lilxGqAuZS0SM9BwswalWOZjUrOtHg3PjY10g9YQJYKJkGpTH?=
+ =?us-ascii?Q?uwSqjHK4S4eSsR3hPXNpurz2TtDVBqJprQ7r3YnL3UqHFellVssUwnSzlA0T?=
+ =?us-ascii?Q?rnKyYNnnJUxOoS5XhOp5MP4n9qE/oRZJhMKYdIc/?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: eb6e2629-dcc9-406d-d275-08dacd71f46a
+X-MS-Exchange-CrossTenant-Network-Message-Id: a7bed81f-5264-4e27-df99-08dacd747394
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2022 16:44:14.3548 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2022 17:02:06.7270 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9nN3xly6AkNwxfH8FD/BimiCbsN56mrmKwzHrmQZXzFABH8iHfQfTibyOh5J9LFrljsAxj1er7OzOdWl1tNpNg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB5950
+X-MS-Exchange-CrossTenant-UserPrincipalName: jh8gKV1VRG3JxVfqLvTnphSrfZOMKuzfaASOZx2SM2P0PRlluso+vI6XYwEzrf9K4OYfnsUTvDUoIjkaM6iy4w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR06MB5368
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -132,21 +130,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Through this node, you can control the background discard
- to run more aggressively or not aggressively when reach the utilization rate
- of the space. Signed-off-by: Yangtao Li <frank.li@vivo.com> ---
- Documentation/ABI/testing/sysfs-fs-f2fs
- | 8 ++++++++ fs/f2fs/f2fs.h | 1 + fs/f2fs/segment.c | 3 ++- fs/f2fs/sysfs.c
- | 9 +++++++++ 4 files changed, 20 [...] 
+ Content preview:  Introduce f2fs_is_readonly() and use it to simplify code.
+ Signed-off-by: Yangtao Li <frank.li@vivo.com> --- fs/f2fs/f2fs.h | 5 +++++
+ fs/f2fs/super.c | 5 ++--- 2 files changed, 7 insertions(+), 3 deletions(-)
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.117.121 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.255.131 listed in wl.mailspike.net]
+ [40.107.117.121 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.255.131 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -154,9 +149,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1oxsrO-0005il-V6
-Subject: [f2fs-dev] [PATCH v2 2/2] f2fs: introduce discard_urgent_util sysfs
- node
+X-Headers-End: 1oxt8Z-00GVdQ-IE
+Subject: [f2fs-dev] [PATCH] f2fs: introduce f2fs_is_readonly() for
+ readability
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -176,101 +171,53 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Through this node, you can control the background discard
-to run more aggressively or not aggressively when reach the
-utilization rate of the space.
+Introduce f2fs_is_readonly() and use it to simplify code.
 
 Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 8 ++++++++
- fs/f2fs/f2fs.h                          | 1 +
- fs/f2fs/segment.c                       | 3 ++-
- fs/f2fs/sysfs.c                         | 9 +++++++++
- 4 files changed, 20 insertions(+), 1 deletion(-)
+ fs/f2fs/f2fs.h  | 5 +++++
+ fs/f2fs/super.c | 5 ++---
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 24e7cb77f265..c9cd9dbafdb1 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -646,3 +646,11 @@ Date:		October 2022
- Contact:	"Yangtao Li" <frank.li@vivo.com>
- Description:	Show the current gc_mode as a string.
- 		This is a read-only entry.
-+
-+What:		/sys/fs/f2fs/<disk>/discard_urgent_util
-+Date:		November 2022
-+Contact:	"Yangtao Li" <frank.li@vivo.com>
-+Description:	When space utilization exceeds this, do background DISCARD aggressively.
-+		Does DISCARD forcibly in a period of given min_discard_issue_time when the number
-+		of discards is not 0 and set discard granularity to 1.
-+		Default: 80
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 4694b55b6df4..296683648d4f 100644
+index f0833638f59e..efc9d6d7b506 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -413,6 +413,7 @@ struct discard_cmd_control {
- 	unsigned int min_discard_issue_time;	/* min. interval between discard issue */
- 	unsigned int mid_discard_issue_time;	/* mid. interval between discard issue */
- 	unsigned int max_discard_issue_time;	/* max. interval between discard issue */
-+	unsigned int discard_urgent_util;	/* utilization which issue discard proactively */
- 	unsigned int discard_granularity;	/* discard granularity */
- 	unsigned int max_ordered_discard;	/* maximum discard granularity issued by lba order */
- 	unsigned int undiscard_blks;		/* # of undiscard blocks */
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index a993211ded1d..3029b6b08d02 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -1069,7 +1069,7 @@ static void __init_discard_policy(struct f2fs_sb_info *sbi,
- 		dpolicy->io_aware = true;
- 		dpolicy->sync = false;
- 		dpolicy->ordered = true;
--		if (utilization(sbi) > DEF_DISCARD_URGENT_UTIL) {
-+		if (utilization(sbi) > dcc->discard_urgent_util) {
- 			dpolicy->granularity = MIN_DISCARD_GRANULARITY;
- 			if (atomic_read(&dcc->discard_cmd_cnt))
- 				dpolicy->max_interval =
-@@ -2085,6 +2085,7 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
- 	dcc->min_discard_issue_time = DEF_MIN_DISCARD_ISSUE_TIME;
- 	dcc->mid_discard_issue_time = DEF_MID_DISCARD_ISSUE_TIME;
- 	dcc->max_discard_issue_time = DEF_MAX_DISCARD_ISSUE_TIME;
-+	dcc->discard_urgent_util = DEF_DISCARD_URGENT_UTIL;
- 	dcc->undiscard_blks = 0;
- 	dcc->next_pos = 0;
- 	dcc->root = RB_ROOT_CACHED;
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 33ec467b3772..a4745d596310 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -493,6 +493,13 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 		return count;
+@@ -4576,6 +4576,11 @@ static inline void f2fs_handle_page_eio(struct f2fs_sb_info *sbi, pgoff_t ofs,
+ 	}
+ }
+ 
++static inline bool f2fs_is_readonly(struct f2fs_sb_info *sbi)
++{
++	return !!f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb);
++}
++
+ #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
+ #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
+ 
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 31435c8645c8..39c6be61450e 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1353,8 +1353,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 		return -EINVAL;
  	}
  
-+	if (!strcmp(a->attr.name, "discard_urgent_util")) {
-+		if (t > 100)
-+			return -EINVAL;
-+		*ui = t;
-+		return count;
-+	}
-+
- 	if (!strcmp(a->attr.name, "migration_granularity")) {
- 		if (t == 0 || t > sbi->segs_per_sec)
- 			return -EINVAL;
-@@ -800,6 +807,7 @@ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_request, max_discard_req
- F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, min_discard_issue_time, min_discard_issue_time);
- F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, mid_discard_issue_time, mid_discard_issue_time);
- F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_issue_time, max_discard_issue_time);
-+F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_urgent_util, discard_urgent_util);
- F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_granularity, discard_granularity);
- F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_ordered_discard, max_ordered_discard);
- F2FS_RW_ATTR(RESERVED_BLOCKS, f2fs_sb_info, reserved_blocks, reserved_blocks);
-@@ -930,6 +938,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(min_discard_issue_time),
- 	ATTR_LIST(mid_discard_issue_time),
- 	ATTR_LIST(max_discard_issue_time),
-+	ATTR_LIST(discard_urgent_util),
- 	ATTR_LIST(discard_granularity),
- 	ATTR_LIST(max_ordered_discard),
- 	ATTR_LIST(pending_discard),
+-	if ((f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb)) &&
+-		test_opt(sbi, FLUSH_MERGE)) {
++	if (f2fs_is_readonly(sbi) && test_opt(sbi, FLUSH_MERGE)) {
+ 		f2fs_err(sbi, "FLUSH_MERGE not compatible with readonly mode");
+ 		return -EINVAL;
+ 	}
+@@ -2085,7 +2084,7 @@ static void default_options(struct f2fs_sb_info *sbi)
+ 	set_opt(sbi, MERGE_CHECKPOINT);
+ 	F2FS_OPTION(sbi).unusable_cap = 0;
+ 	sbi->sb->s_flags |= SB_LAZYTIME;
+-	if (!f2fs_sb_has_readonly(sbi) && !f2fs_readonly(sbi->sb))
++	if (!f2fs_is_readonly(sbi))
+ 		set_opt(sbi, FLUSH_MERGE);
+ 	if (f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi))
+ 		set_opt(sbi, DISCARD);
 -- 
 2.25.1
 
