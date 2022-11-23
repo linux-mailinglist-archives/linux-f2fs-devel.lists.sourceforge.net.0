@@ -2,99 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B8076362F8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Nov 2022 16:12:11 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E5596362FD
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 23 Nov 2022 16:13:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oxrPz-0003Ce-R4;
-	Wed, 23 Nov 2022 15:12:07 +0000
+	id 1oxrQt-0002Ia-DA;
+	Wed, 23 Nov 2022 15:13:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1oxrPy-0003CY-RD
+ (envelope-from <chao@kernel.org>) id 1oxrQs-0002IU-Mk
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 23 Nov 2022 15:12:06 +0000
+ Wed, 23 Nov 2022 15:13:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WKaWu0QlVZpwnezIERyZUUaBSqkMjhxDtcHczdKBQdo=; b=d13Z7slEMGGw4re9GXxkOCX3VV
- MJwSp6YKgOBFQgGK5nQ/LFJhCqvOlIU2QxZ+3EtTcXNgVosmCAiQvMVSTjgHhkGPoaGcGIMgtcCsJ
- XCP3noiiCUx0m1QaDuuQRM2w7KJ8B7CcRGlzLGQC2Lh/413wbyhqmYpvb15QaX200UYY=;
+ bh=d9c57EzMehG1xRoIRQ5InlFeYOsxIUu5uJJo+twxqi4=; b=etSyInL3QpCFxJUzGewsM3nran
+ zupYMoqt9VCvksfmZ8jNNlFD4uZVZIa2UcSFDMZ4gShmu2Hkmj9EXqYgGgKYw+HFh8jBiAWAmZRGx
+ xcxHWCFd4TvHPPnbp9D5SVS5O0yvmW+w6Ic6AyKJmL9aCcjFkl4WS+khh1KA6NbLLt/o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
- References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=WKaWu0QlVZpwnezIERyZUUaBSqkMjhxDtcHczdKBQdo=; b=aSBlP+b2nKVLUtePIfqsreRmYK
- 4ZvpYMH8SF3sJjVa0BJyPqgJjvA4YojmD/Z58r9bYRn516FrVvznU23HosWq+10tFaKkQkSBAT0nj
- GNjdcVRFV1Q7MwZ1K+zwk2+rSNIvfNxSeNl6X8noruP1lU/gJW16SBExpXiz4PwKTARI=;
+ bh=d9c57EzMehG1xRoIRQ5InlFeYOsxIUu5uJJo+twxqi4=; b=l/cOpVIl7ygzXeqc99cJK1HRGb
+ 1ADXtFSWUoQqz7acizZcy3zu4MltHiWht5v2cX9lla09WP6PGFe/UmQ1/50xlh2MPtI8CWvyGZow5
+ mw2Bx/iL5DXKqdowcTrNZ/+MpBiOHcUobnGnpCaCrUOBmQAPcqKcBilLv6t1/ImY3weI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oxrPw-0007YO-UG for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 23 Nov 2022 15:12:06 +0000
+ id 1oxrQs-00G5St-2m for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 23 Nov 2022 15:13:02 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8A61F61D70;
- Wed, 23 Nov 2022 15:11:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 950E7C433C1;
- Wed, 23 Nov 2022 15:11:57 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AED2461D4C;
+ Wed, 23 Nov 2022 15:12:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C589AC433D6;
+ Wed, 23 Nov 2022 15:12:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1669216319;
- bh=E32LuTeewdv4LvRn43Fa4lz46cUSqIZ9KO69kapAzDQ=;
- h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
- b=e1tBjLgkLI3ItIdUiZjmw+zk9GRtMBASep1CcRYCeSFQmcWN/gCX96cmqsfYSMXmk
- qvAtafUkufZK0T3ao79tZwW5k8C6EUMQ6RjciVOsKJohL7w6GblAzpB9kCG2IhgNO2
- /iyaRuT8ERmzp0qpsEmx9iAeZOV4wBkYgVrZBsw3NLPrWpuX2Nfn2RbEPeOde3gl0H
- V1uxNN8/EYTvsh9TtsNkfoFnP+SvkeYQIwpvnjbo2YZRj0AkRLKp+RCj822TKGHrer
- 4YkC/8jc4LIGfa1d7/WSg4Oq56XDUrUG9qUF1A9pcCnaqQvg23h3LTgqRDrCQYvHIK
- aIO7mHe47R+TQ==
-Message-ID: <c8145b2b-f8fa-9065-73dd-497c48a10a46@kernel.org>
-Date: Wed, 23 Nov 2022 23:11:55 +0800
+ s=k20201202; t=1669216376;
+ bh=yOULMtM0+KTy5LieyRbQAWfjtQdPuaw3HboADHL+tcs=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=sMCqNymJxYM7LJZnkYSsMm0pvmOet0Bly0terUqPs6d/6rwXk4qNjqr5pK0jGWLdh
+ rPQRdeGafDEounT3RlYYaor5lL3rC3qERosoVGqQirdwBObE6pVcnLNZlRN1EuEin7
+ pbmJ6/fTBtQ7jdGdL0bHNGjqEsN+HkmOGfygM08k367XwdNtdzDwxdGZywBbWxA1c2
+ SXtBgmMba3C9aMJkbNBHnsCneixzc2RYbVeK3LS9nbreuqTDd9NlY2tWvZn9yRhd4a
+ HNwvja0CbmkL6FX2pbM8PF1dILO0SlryUUhbFf+dlHkPYQ3d3HvG09GaCNzz8c9ORR
+ KKG+6y3ClB+VA==
+Message-ID: <a73cb0ce-7666-607a-fb00-dde2befb9108@kernel.org>
+Date: Wed, 23 Nov 2022 23:12:53 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.5.0
 Content-Language: en-US
-To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
-References: <20221115184023.78070-1-frank.li@vivo.com>
+To: Yuwei Guan <ssawgyw@gmail.com>, jaegeuk@kernel.org
+References: <20221116131035.1056523-1-Yuwei.Guan@zeekrlife.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221115184023.78070-1-frank.li@vivo.com>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20221116131035.1056523-1-Yuwei.Guan@zeekrlife.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/11/16 2:40,
- Yangtao Li wrote: > Some minor modifications
- to discard opt and related parameters: > > 1.introduce f2fs_is_readonly()
- and use it to simplify code > 2.The FLUSH_MERGE opt is set by [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 2022/11/16 21:10, Yuwei Guan wrote: > This 'io_aware_gran'
+ is initialized as MAX_PLIST_NUM in > __init_discard_policy(), and use as
+ 'i < dpolicy->io_aware_gran' > in __issue_discard_cmd(), but 'i < [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oxrPw-0007YO-UG
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to set DISCARD opt
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oxrQs-00G5St-2m
+Subject: Re: [f2fs-dev] [PATCH] f2fs: remove useless io_aware_gran variable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,139 +110,57 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/11/16 2:40, Yangtao Li wrote:
-> Some minor modifications to discard opt and related parameters:
+On 2022/11/16 21:10, Yuwei Guan wrote:
+> This 'io_aware_gran' is initialized as MAX_PLIST_NUM in
+> __init_discard_policy(), and use as 'i < dpolicy->io_aware_gran'
+> in __issue_discard_cmd(), but 'i < dpolicy->io_aware_gran' is
+> true always, so remvoe this variable.
+
+I guess we can export it via sysfs for better configuation?
+
+Thanks,
+
 > 
->    1.introduce f2fs_is_readonly() and use it to simplify code
->    2.The FLUSH_MERGE opt is set by default only in non-ro mode.
->    3.When ro and DISCARD are set at the same time, an error is reported.
->    4.Display discard_unit mount opt when has discard opt.
->    5.clear DISCARD when remount as ro.
-> 
-> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> Signed-off-by: Yuwei Guan <Yuwei.Guan@zeekrlife.com>
 > ---
->   fs/f2fs/f2fs.h  |  5 +++++
->   fs/f2fs/super.c | 53 +++++++++++++++++++++++++++----------------------
->   2 files changed, 34 insertions(+), 24 deletions(-)
+>   fs/f2fs/f2fs.h    | 1 -
+>   fs/f2fs/segment.c | 4 +---
+>   2 files changed, 1 insertion(+), 4 deletions(-)
 > 
 > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index b89b5d755ce0..be23059344b4 100644
+> index dedac413bf64..ced8a5b226b5 100644
 > --- a/fs/f2fs/f2fs.h
 > +++ b/fs/f2fs/f2fs.h
-> @@ -4579,4 +4579,9 @@ static inline void f2fs_handle_page_eio(struct f2fs_sb_info *sbi, pgoff_t ofs,
->   #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
->   #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
+> @@ -388,7 +388,6 @@ struct discard_policy {
+>   	unsigned int mid_interval;	/* used for device busy */
+>   	unsigned int max_interval;	/* used for candidates not exist */
+>   	unsigned int max_requests;	/* # of discards issued per round */
+> -	unsigned int io_aware_gran;	/* minimum granularity discard not be aware of I/O */
+>   	bool io_aware;			/* issue discard in idle time */
+>   	bool sync;			/* submit discard with REQ_SYNC flag */
+>   	bool ordered;			/* issue discard by lba order */
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 8b0b76550578..1cc41a65a645 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -1059,7 +1059,6 @@ static void __init_discard_policy(struct f2fs_sb_info *sbi,
+>   	dpolicy->granularity = granularity;
 >   
-> +static inline bool f2fs_is_readonly(struct f2fs_sb_info *sbi)
-> +{
-> +	return !!f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb);
-> +}
-> +
->   #endif /* _LINUX_F2FS_H */
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 75027ff85cd9..baa8f0860192 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -1353,12 +1353,16 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
->   		return -EINVAL;
->   	}
+>   	dpolicy->max_requests = dcc->max_discard_request;
+> -	dpolicy->io_aware_gran = MAX_PLIST_NUM;
+>   	dpolicy->timeout = false;
 >   
-> -	if ((f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb)) &&
-> -		test_opt(sbi, FLUSH_MERGE)) {
-> +	if (f2fs_is_readonly(sbi) && test_opt(sbi, FLUSH_MERGE)) {
->   		f2fs_err(sbi, "FLUSH_MERGE not compatible with readonly mode");
->   		return -EINVAL;
->   	}
+>   	if (discard_type == DPOLICY_BG) {
+> @@ -1483,8 +1482,7 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+>   				f2fs_time_over(sbi, UMOUNT_DISCARD_TIMEOUT))
+>   				break;
 >   
-> +	if (f2fs_is_readonly(sbi) && test_opt(sbi, DISCARD)) {
-> +		f2fs_err(sbi, "DISCARD not compatible with readonly mode");
-> +		return -EINVAL;
-> +	}
-
-Well, it looks ext4 support mounting image w/ both discard and ro option.
-
-And I guess for the case device is rw, and filesystem is ro, it may allow
-filesystem itself issue command to trim device, and that won't break semantic
-of readonly filesystem?
-
-> +
->   	if (f2fs_sb_has_readonly(sbi) && !f2fs_readonly(sbi->sb)) {
->   		f2fs_err(sbi, "Allow to mount readonly mode only");
->   		return -EROFS;
-> @@ -2035,12 +2039,14 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
->   	if (test_opt(sbi, ATGC))
->   		seq_puts(seq, ",atgc");
->   
-> -	if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_BLOCK)
-> -		seq_printf(seq, ",discard_unit=%s", "block");
-> -	else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SEGMENT)
-> -		seq_printf(seq, ",discard_unit=%s", "segment");
-> -	else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SECTION)
-> -		seq_printf(seq, ",discard_unit=%s", "section");
-> +	if (test_opt(sbi, DISCARD)) {
-> +		if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_BLOCK)
-> +			seq_printf(seq, ",discard_unit=%s", "block");
-> +		else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SEGMENT)
-> +			seq_printf(seq, ",discard_unit=%s", "segment");
-> +		else if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SECTION)
-> +			seq_printf(seq, ",discard_unit=%s", "section");
-> +	}
->   
->   	if (F2FS_OPTION(sbi).memory_mode == MEMORY_MODE_NORMAL)
->   		seq_printf(seq, ",memory=%s", "normal");
-> @@ -2081,9 +2087,10 @@ static void default_options(struct f2fs_sb_info *sbi)
->   	set_opt(sbi, MERGE_CHECKPOINT);
->   	F2FS_OPTION(sbi).unusable_cap = 0;
->   	sbi->sb->s_flags |= SB_LAZYTIME;
-> -	if (!f2fs_sb_has_readonly(sbi) && !f2fs_readonly(sbi->sb))
-> +	if (!f2fs_is_readonly(sbi))
->   		set_opt(sbi, FLUSH_MERGE);
-> -	if (f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi))
-> +	if ((f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi)) &&
-> +		!f2fs_is_readonly(sbi))
->   		set_opt(sbi, DISCARD);
->   	if (f2fs_sb_has_blkzoned(sbi)) {
->   		F2FS_OPTION(sbi).fs_mode = FS_MODE_LFS;
-> @@ -2221,7 +2228,6 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
->   	bool enable_checkpoint = !test_opt(sbi, DISABLE_CHECKPOINT);
->   	bool no_io_align = !F2FS_IO_ALIGNED(sbi);
->   	bool no_atgc = !test_opt(sbi, ATGC);
-> -	bool no_discard = !test_opt(sbi, DISCARD);
->   	bool no_compress_cache = !test_opt(sbi, COMPRESS_CACHE);
->   	bool block_unit_discard = f2fs_block_unit_discard(sbi);
->   	struct discard_cmd_control *dcc;
-> @@ -2398,19 +2404,18 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
->   		need_stop_flush = true;
->   	}
->   
-> -	if (no_discard == !!test_opt(sbi, DISCARD)) {
-> -		if (test_opt(sbi, DISCARD)) {
-> -			err = f2fs_start_discard_thread(sbi);
-> -			if (err)
-> -				goto restore_flush;
-> -			need_stop_discard = true;
-> -		} else {
-> -			dcc = SM_I(sbi)->dcc_info;
-> -			f2fs_stop_discard_thread(sbi);
-> -			if (atomic_read(&dcc->discard_cmd_cnt))
-> -				f2fs_issue_discard_timeout(sbi);
-> -			need_restart_discard = true;
-> -		}
-> +	if ((*flags & SB_RDONLY) || !test_opt(sbi, DISCARD)) {
-> +		clear_opt(sbi, DISCARD);
-> +		dcc = SM_I(sbi)->dcc_info;
-> +		f2fs_stop_discard_thread(sbi);
-> +		if (atomic_read(&dcc->discard_cmd_cnt))
-> +			f2fs_issue_discard_timeout(sbi);
-> +		need_restart_discard = true;
-> +	} else {
-> +		err = f2fs_start_discard_thread(sbi);
-> +		if (err)
-> +			goto restore_flush;
-> +		need_stop_discard = true;
->   	}
->   
->   	if (enable_checkpoint == !!test_opt(sbi, DISABLE_CHECKPOINT)) {
+> -			if (dpolicy->io_aware && i < dpolicy->io_aware_gran &&
+> -						!is_idle(sbi, DISCARD_TIME)) {
+> +			if (dpolicy->io_aware && !is_idle(sbi, DISCARD_TIME)) {
+>   				io_interrupted = true;
+>   				break;
+>   			}
 
 
 _______________________________________________
