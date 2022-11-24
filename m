@@ -2,127 +2,127 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B63786370A0
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Nov 2022 03:49:27 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58A4363711E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 24 Nov 2022 04:37:40 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oy2Il-0003gS-R3;
-	Thu, 24 Nov 2022 02:49:23 +0000
+	id 1oy33Q-0000IE-4n;
+	Thu, 24 Nov 2022 03:37:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1oy2IT-0003gI-0C
+ (envelope-from <frank.li@vivo.com>) id 1oy33O-0000I7-6b
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Nov 2022 02:49:05 +0000
+ Thu, 24 Nov 2022 03:37:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
  :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CaRiiTNhizZcEMOxj0LZrOudMI9ZawVJ7KPxqIUpqg4=; b=JMqEqVol98UVd9YDOXfSGj3dXL
- MNim3CvTyMzTsZN+p5a5b2SffS76SyLRhDJmkbF89/g4K813onzjQpXTaxYEvSKIrVRnwJovFrGMA
- ljg6SEfRngmRJ9j+zKGpNuImwdgbUJpLuLlAjl/ixwxLLI7FbKY1fGehizNO+QIGr9iE=;
+ bh=FuQdlCLS4U5lKkdddD+BypX2RuHXnpjHr1bfgBWLB5Y=; b=hE96iZd7X3mjOQ/6DQyhiv0xrv
+ bLf03B7g44CrbQdcvbouNHwpO4SYPNkQkAclEvAhO91AKQD8w9FSQ6EjxyalUCu1SoHRvTaviko95
+ Q0gj05r3H6FMKq/uWfLhRZ5bwG+lQ/UQGpfATSvADpSY8TGVTWoWfdto1SC17VAMYCv4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
  Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=CaRiiTNhizZcEMOxj0LZrOudMI9ZawVJ7KPxqIUpqg4=; b=X
- 70bHsJBm8WAUqxwvKslI/0VAWO8bb9lisR4JTavFE3zHXua2Ns9ROWU/KLOqHmZc54WlTjS43d6zE
- s8QzWrite9Hz7znnHapyv4LbMS8sPtCQgrMgvdIxbmrwYxvmoP1FjvaiO/zOCCnerYv96tUJ2TAmM
- kE5e3pJe2xZZAmuw=;
-Received: from mail-sgaapc01on2124.outbound.protection.outlook.com
- ([40.107.215.124] helo=APC01-SG2-obe.outbound.protection.outlook.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=FuQdlCLS4U5lKkdddD+BypX2RuHXnpjHr1bfgBWLB5Y=; b=j
+ DBuLhuHW2wiCb89lttxSqm+LMVt4j3KtqEMYbVcLsF62InAARVSdshuJUtKSCQIG5OMLesZM9Zkjm
+ d4ZsS94dFbMIvEDdJRabfiLor40rrBR2sQdxd0Rw0i1o6VXZ+590XWyQOQF8wqhOLBbBO0wAjqdY0
+ eekl1XD9mQLynYDA=;
+Received: from mail-tyzapc01on2102.outbound.protection.outlook.com
+ ([40.107.117.102] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oy2IP-001cMb-Lj for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 24 Nov 2022 02:49:04 +0000
+ id 1oy33I-00062P-8T for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 24 Nov 2022 03:37:34 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mcSTiih3mf5wjEU2HSLNtKfur3jKUn7qw1oONEEtwSp23LLud/tqsO/hGXd7wY/le4TXWLFbUdSrx2awvc2yuQ2MgYVSqX9mWldgB+NxBxB3msCYhws3qT/W5jl/SSdWFMoXlVxux7jtMhlQwmACUylU5Rz5afSoLMkFVK+80H925DjGfhO+6VW302AUiUPM/aHkcskrVjmjkb4K77Nqnb2ki448mfXqoOknItOWO5XgxKHqRmu7vzn2uzP3V0ljs7riOZjvHvEsy8koO7qKs6eFujl8fRrTOwO9Xx+NL1NJeyvypls4+QOo231GZMbGQU+YpfiTd3vycJWHIIA58w==
+ b=R8fjib7JF6/PZH6xG3IIASg6S+hiNXq/b5rvEmqDAOraNNzqrGrN9Wi9LYFWC7pATT+4+p/5k3+c6D1Hgk1kWi2zscTDvp0u2H94HCsdCSSDDdzSVsPsmhEkMtPgT3XPIn7dhNu7YgLSqa+tC7R/sOrUDTFnp36sEVsJpP7yxN2EZGXm8idk1xFH3GfmYOSQcQ3IfOH2ZAKDMd5+v9NsM1IV1eCOCK0J2cY4srHnBldJ0UYzG8uzdk/NYBeI9wCrvr75wivmfkkd7ZGpbnzcVD1iqfD5yYv7TfiUA1ceNbQI/R1J2W0v+EC6RuQ5OE0YFOXBxGOoto6IimUUw2DxDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CaRiiTNhizZcEMOxj0LZrOudMI9ZawVJ7KPxqIUpqg4=;
- b=jmzYeOIEuvGZbcRUJ4Q08FbNK2Jd+hxAaaOOAgb6n0vjBd9/wm59niK3bE6XrbQA1ozqEQRUZcddsO7N8rlGZBomje8G2ZHA+f2M1oI0K4YAwgR2xbahZmcKC6DVcK0y1wgK1T5wSYyuYCa8WYliRIS72qdrJWXmtlAIgg/p8cF9Flpa7DsVTWGCk+it69MSsP/5i3cHyBBKepTDkyVVfP8yVZzh4Vtlw7mGtZ2hdPTwY4n/PBN+vHao0a5Gc5oP997NcOowhwSpdDsCAXf/JuQWoO6Q6T7bDzE5x2ny+D+j2jEXGrbbER/TzHshr3byA81nlz+e7/aFp52iCeZMTg==
+ bh=FuQdlCLS4U5lKkdddD+BypX2RuHXnpjHr1bfgBWLB5Y=;
+ b=HaAsLXuYE1npLamCLOLC7ATteYmynHL+1rW+uPARWA4cdQuvOZ5VHZYVvY0/WY7GPpfIKnJxzTPTw55DkejRQoLV23PiqNC1Ijg2oLhin77+06rdlcHvnR6r9pGgFY4Pm6Z7YLhczXv63TpZT9FZr0/WSow6Vq2A8n+/dl+b38gudBgJEEf7GM6XKvqcM0uFiIMkb2lryyin0fnGOB8KUOMt+VTW2jVlmrhs44GwA8F2YF3MQTBCK/hk2cY7jUp7ZaCeaRFv/1c6J/aznWw4WDQpmB+Qtaeba+5QAWbOGkjf2+X4+NptbYLyGBc997JJfFDHpnhl7eaTjGbY8kD06w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CaRiiTNhizZcEMOxj0LZrOudMI9ZawVJ7KPxqIUpqg4=;
- b=QF1vXGWpIXyXoUHGO+btNIrYUDTAxkaEbIhQOTwILFaBl5lPQ805EPg0dwh6UEhBiFzGE8Nbxv1df1VIoQsMwheuTNu/CQrDHaeFVzvE0t4ls6pCp+T+O05DdhXvHh/vDP9Ieq+8BZgv7FPGCqJQdKT6H/LBwqG80q9H28ofVIdVKW9olWpLogoRWj/l6Z5miOy+CbLVoUoTEFMGR6SZeNTQhcCRxauUAk7EAVb4CzmN6HFdrufq9lOK5jjA+E4EOy8mIx5nI1el+FiOwzTa97isY1C2PAOuRSA1cuB2JsWuSsfo49+jPy6JI1Do9NYRqTEa6xh+f3qtzKmit+0CBw==
+ bh=FuQdlCLS4U5lKkdddD+BypX2RuHXnpjHr1bfgBWLB5Y=;
+ b=LUrzeG7E/o+71FjQ88JWA4khf4uE3TsY1sJ2tFjF1HoUv8qabRn+3Aikmas8zfDVeioSl5hpHTqAl6b/a1dY1iqMjTJ1hYSpxed3x+kN2W2k4VvjIaHT5x5Usy49GnDYv5/ZRdhN/WPIcKUdLxCePtNfr+brKRjwu2xLRoghe4Ez5X0+3jjtEuDS1sMiw3tk6LX0AV/ibdBazTqBOHy1AvuHobuShDxTuBI86war80pxcJLMD6/dkE/fLC5XEODT8X2mQQy8iPXcPsIeDgJ+XAwym0qx1TEShpwNuqndvWM09/ZOo0kvFoi77GEtJRA5iAGSG0FKL15g1N6VaWZoaA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by SEZPR06MB5504.apcprd06.prod.outlook.com (2603:1096:101:a4::13) with
+ by KL1PR0601MB4514.apcprd06.prod.outlook.com (2603:1096:820:72::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5834.15; Thu, 24 Nov
- 2022 02:48:52 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5857.19; Thu, 24 Nov
+ 2022 03:37:17 +0000
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::1230:5f04:fe98:d139]) by SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::1230:5f04:fe98:d139%7]) with mapi id 15.20.5834.015; Thu, 24 Nov 2022
- 02:48:52 +0000
+ 03:37:17 +0000
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Thu, 24 Nov 2022 10:48:42 +0800
-Message-Id: <20221124024842.4809-1-frank.li@vivo.com>
+Date: Thu, 24 Nov 2022 11:37:08 +0800
+Message-Id: <20221124033708.10580-1-frank.li@vivo.com>
 X-Mailer: git-send-email 2.35.1
-X-ClientProxiedBy: SG2PR02CA0077.apcprd02.prod.outlook.com
- (2603:1096:4:90::17) To SEZPR06MB5269.apcprd06.prod.outlook.com
+X-ClientProxiedBy: SI2P153CA0004.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:4:140::23) To SEZPR06MB5269.apcprd06.prod.outlook.com
  (2603:1096:101:78::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SEZPR06MB5504:EE_
-X-MS-Office365-Filtering-Correlation-Id: 53847685-3d95-42fe-1b8d-08dacdc66bdc
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|KL1PR0601MB4514:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7964d4b7-307f-4f5c-fa69-08dacdcd2f8a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: X36UBTqGAs2o7RsMfUE6pDg4CoekUHEjCbmoDKz9TC28kcYxs8RCHqrA/HTmo768skNZC6Wn5c50biMAWM0SPfZo7DJ42yykjOH2IejpghCop0tFO1oLrDCwM7Rw+ojnJGrG5M43o0N3NhnJUQc4x92rKOHFdDefx8gmvhD0QTbTvMnW6W363y2u7gPwuIGEj/Ev8QYzib0t/n3qqwv9uLbnbXLbxqIyoapQ8i2rt3PaR/gy/0EPu04bMquNIYRWXvJNGKfyazSKqnng1M7Kr/z3tu0CKeo1EjjfExjwBFotQBlMe1f36AvOguGzO8Qcgc6t9cVJj9BtPaI5Gh+6DaI2fdvJq4Jo8eSFNAuCSvfU/4nU70E2WxJAAvxMMb+AUjG6OdWzqjBXx22Ju4Zo6d655kR0FMBH9VN8+A9mmPtguiqiNGL9JAa/8XiMyy7JF3Rwr6NLEq756cDUwcyXNkfVapG7lLNnKAElUrNJJJSVFd1R09phUpGLr33nLnf2p5khx19LUPXkFgllQforXupndKE9V4qrHoE6AAoehrCGOK4kFdTafK88mWhM8lvAXhR1Kp5sPU8URBL8DYxlWfOcBSp8vp1IrrBxCVCCPYIfi+pjwUku7CQJuY3mj9oQ8jYMdNaLB3wu0r5uU9eQnuBqKBOw1M+UHS3z5pT874rDFJ5wa1JkMIqMlbvmgTfv
+X-Microsoft-Antispam-Message-Info: +/NneDr6vjFIjWjl0IRtm9gx+BzJjnxof+HN70HWUFCa8IWsablmHp0UYxyrejQXi+zpT1x0woWS52qecj6biUA0U9wIwcHqUfrfG0UsJHPiGPUmPvKHx3iXFfKCTOKM1qV7iEOzUwBh1/KwsGgkRHio2iX+o4E4l+Hf2SEtITjxJLhmITcsRD9QrwqcB5G1iYHWD7MYJmIJggP6JTKSlIBAHAGcH2TIvAyors6U9CgSgmJ4JV9zyJ6vCyCRQbmPBKZ3r1x9LRnXp1S9yEVuSR+aRHj4dJXQwdUeU9E6WYgjNs2kJJWqD/n+8DIYoJGjZSh7sne4ZJYoz/xdW7RjR4EAjgrUPieOMNonlU00cL5DQLfzQ2cqgs8dM2j9eriIrKs8Fbw4K0Y8D9+eODDex6Le5utdWTkZ0BUTqcFQKpIvtXxBRCWyIrhzNJ0jj5dUcX+ir3O7DKHCreKqrewPx78JNApP/imY6AbjlkBjhdgEW9pdLpl2Z7nQD9mCxzVEUzRbN6OiqdENXBAW1a2vjv3hIHbAC/d7VYIwHzvl5o21nBAGgowXx0dRTLhMOXqJIfHpqSzsg0Hgpuuors2yTuD0/hd3NriCrOOctmDJUJ86vqHmjs5hhHVuOPBqLHT7TUYecUQFA0agiicB+MqS9h0qpYad6P3tVEmRAVUCdFuf+lCIV+kNrEMimmc7ARdS
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(346002)(136003)(376002)(366004)(39860400002)(396003)(451199015)(66946007)(1076003)(83380400001)(38350700002)(186003)(38100700002)(41300700001)(2906002)(8936002)(66476007)(6666004)(52116002)(107886003)(6506007)(478600001)(2616005)(8676002)(6486002)(66556008)(4326008)(26005)(316002)(6512007)(5660300002)(86362001)(36756003);
+ SFS:(13230022)(4636009)(396003)(346002)(136003)(376002)(366004)(39860400002)(451199015)(52116002)(38350700002)(38100700002)(6486002)(66556008)(66946007)(83380400001)(6666004)(107886003)(5660300002)(8936002)(2906002)(4326008)(6506007)(8676002)(186003)(1076003)(36756003)(478600001)(26005)(316002)(66476007)(86362001)(2616005)(41300700001)(6512007);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Wi2gUIngN4PCjpnQCQO3o+4aeZiEEAxcdJUZJFk4iPCWZLlUavSsXgp09eMG?=
- =?us-ascii?Q?kQswRwOIqHTFw1u4RkGVECHlvhS7/mulbNc/40H5wXp8Ny6NNri0fsYiwXos?=
- =?us-ascii?Q?3D2NX0T+uajwLvPkbtlX7QKiMC5jizRFyk3/6ZYlUb8KqBYeE/0cIt9byR7T?=
- =?us-ascii?Q?nrr+3r6qssY8+deH1oeIUTKTEsEmYitSJvaBEyAD0jhbcR1h+tYPJudoUmQM?=
- =?us-ascii?Q?NJY1zJMb9t/xXbEl0pfEt1pgD59lSKNe8rIYqQUX3+ndRX7q0YJAwqaveBaA?=
- =?us-ascii?Q?tcBNXl3NdM6hQdJkVgPhHIeFpkt4FyCIiaYyIzm6NDVEgsOVsZK/WP0+NMs0?=
- =?us-ascii?Q?52GhKcc7fKCTmlop5OykoiiDxiecjguMutNs9TiMdI6sRIOwf7+42REf28v0?=
- =?us-ascii?Q?aizE0jcxkl1ty1+aVBCBcYr/enHa+r2XljF9hxGDxi9SBxCChDXA8PIHPbTD?=
- =?us-ascii?Q?fxMxydvNlvJSruPMM0OHLroIP2bQ3FTAegOrLC4o+a9yi4U6C0BXJWB9ykr8?=
- =?us-ascii?Q?hZPOKKIQJdS8XvhjPmDBUK9hBJcafhJc6X61olhpoWoxVn/OH6OsCd5SMehy?=
- =?us-ascii?Q?TuKzTIfJ5OH7TG99QPm8w9RsLtzmqaniTjGt3x9BvfhJb8D3Oszam0D2A8aN?=
- =?us-ascii?Q?WA/TKj1Hejs7Q2izzT6Uh008IE6zoA38QHlMxxVUIk6o5vS8av335C9mC148?=
- =?us-ascii?Q?2uGbBtvT+O/FEVsGLkQ0I6ucAkcdZjnuQKikiin/p4bayikcEH0sxNJ7P4Ee?=
- =?us-ascii?Q?ilcseNxnEdkYNXbapXuKh5LPSEjZ9eBPL0lzj3ijuVw4J9Vx0Fb2HGNUNbfN?=
- =?us-ascii?Q?9JByStzAy3jVJAnO46Ae63cK3E0OCGzsD0B1IewndgqwC5r3zqi67HOlsah2?=
- =?us-ascii?Q?dP/MNNDNi6Cv/4JFvNJiH5uRvbRAGK0+8+VTteafhKIMGpPbxNxD6J3UymWR?=
- =?us-ascii?Q?XGC1wPMRStL43j+Uhqr8wvsbjc553VpE918DRLVJ9rh9kqaIkufPFxuBguxQ?=
- =?us-ascii?Q?8B7bP2WeT5o1XQAG9JPgvld5FA5J6BBmhBOKLYyIJEK6w5QX2criZYWHvW5J?=
- =?us-ascii?Q?k45GerOLasbIpZTYD9PFSXixw3J8kqNaCYmJ4iCuf+tdYuuG2gJ6xWDIekAa?=
- =?us-ascii?Q?c6CDFqPHnQpd2a6gNbDbJYJ1H250WVzXyceYQfG1PjsvKvgWJ3bIFKMNXK0R?=
- =?us-ascii?Q?83OXAmhednQMdp3v5wzFBj0oJPWeO5GnoR4deG4bBfe4Fvd77vzpxcOo1InS?=
- =?us-ascii?Q?X7QJG/gN7j/6pNlpun0ukDJi5lF6hi+p3QoDLQhbNI1qSc/n28MM1DZ+NYB0?=
- =?us-ascii?Q?kZNcRV1pWeLSLsoARZ+3lWSnizurEVM0AeG3B+eeB6oDP7MWk7bhQCvMk/x7?=
- =?us-ascii?Q?OAaYiF40FvxKe4SmxhbKg71ocNTDovlUe6jYWzSusox2Eikmex5PmkEfFuuR?=
- =?us-ascii?Q?xaFoAlZAHecHLFQnDImvJcsOtfda95bUJfno/4KSVvad2eiUmu+P0s1Ztfc6?=
- =?us-ascii?Q?GjV8/r1S/6cmKTUu1yuZITlogHJ92UaC8CvtNCjUJOCXHC7FseG1bBvxeGaV?=
- =?us-ascii?Q?LvSjNSBdZOFAhm5qkxcDh1iOcExCPHxjwhNDlNlC?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?A5/rFk2L0Zo+H+h67pATrsgbWKs+iXQORCHL2iyMY1f2Q+ZpVToNWL99Dbvr?=
+ =?us-ascii?Q?9EjjkW+QtHrTDKz0NeyXAh4RPjY/oihRrotbRIu9VnYuHxMaBhwyUvLKE5g+?=
+ =?us-ascii?Q?T1ENyZ9clCKbjMf3S5AfP3gmbwicouXgAiHo35A5RXDhjxRaSFV47WrIFc4T?=
+ =?us-ascii?Q?5Rbz12iKbLDrxnbfBXaVerKffgw3H6aHNo/qKuDGb9RXxhrImA/TBwpxdpum?=
+ =?us-ascii?Q?vXtvFFhMTdp/yP4tdKlWsBnt8URv6RwAhtAgj+bfqWwmy4ZEOrZUqk60rRc9?=
+ =?us-ascii?Q?nQqyE5mFdCWuPm309n4leUwX1wbX7AGPBlbg5wLtuAzi/NhMKhBlCTtlaLqO?=
+ =?us-ascii?Q?+ais+hDHAm01h1b5bGMoGo1A+qnwGuk3I31d3fuU14FG2exHIlbKZjOxDhUB?=
+ =?us-ascii?Q?f2hNcZNbmKbaVNfrY7e56+Xl54UKTwPqtScL2//mnwBKbQmCr22wWEsaQi0G?=
+ =?us-ascii?Q?4s0UaAA8CFbVck/wWNiRJX2lweMFRJbcf0UI4mXuxtPURB86Dj3wGP3aH10J?=
+ =?us-ascii?Q?Qy4SS7OHD1ljTa7iki04x6S4NuwHWWJS1LIJt/XAPVOxm+2J+V8xEr8OyQHp?=
+ =?us-ascii?Q?RdWub3RPf/yaGDtXsoDOVwjYSBJrkta/P5V9KiPgykSCyd6B5Ktvo38bqPmT?=
+ =?us-ascii?Q?wadQcyBKlAi6A7pkzADu0sGBSg/taZWa2Y8dVpe0tZnUhJXMLw3hzwyEGprA?=
+ =?us-ascii?Q?AqQrhDmi1ocrKNuxg60hM468fwW1qW/y4XOeIUVwqfIdgi5rFI+CPm+RkDEu?=
+ =?us-ascii?Q?ADocLETukFemMTEk5Eyl9Ds81cAjyEBR85l3muCfJ+due6uAmBwDT7HxOvT2?=
+ =?us-ascii?Q?hLYEIiSNdq8f2SlU+f5XpTsLaZ1VCuWby263a4kcXTt3vJlRFDLYYVcTudYF?=
+ =?us-ascii?Q?cpu0RgXFsk2Pa/HL5aLZaMBRJcFjoxEjAAQK6bMJ8uDEom3ecmZrLqJPqmhn?=
+ =?us-ascii?Q?hczZ0pfsUkDBS7B7XC5b5xtBcOE//bd/yiWjc3ftwDKnga8dl3t5kHvFmqhk?=
+ =?us-ascii?Q?QzUTrQQUSb1giV3M6t1hA4HN07Dc62IaOVSUjcxDG1HJgT5nnewmDxhvHfUb?=
+ =?us-ascii?Q?C3JWGu7U0SqEQ5qY3nPmgaOZmD+pKKCWy2ygdtpweGJzfO1vHCGpQlSTI/7h?=
+ =?us-ascii?Q?LeRIfeF+Sl1JPOlNBQCSE1MC8CLexhXTcRnDHEQi2u72R6GskYa5jU990n2h?=
+ =?us-ascii?Q?eit4Ry7TINg2rCmJbQaf6SwHJbvQNPfdQxK4+4m5GQbqhNz3uX1LZvGTbG9b?=
+ =?us-ascii?Q?bVofuF2tdJeq9lSDLjv/Orq/2x9Gja4phNBOIVxv9bLUz5NKRFvZLEPW5wyQ?=
+ =?us-ascii?Q?UPicYiKKaoSygskgtV1UhYQ4pHpkLXCNeSnqBED4D2V3BKWmJXjNwR3VwlPE?=
+ =?us-ascii?Q?S0XwGbpMTu39Wv52WpD9YQVWcsVJc52hWdpWGjc+w4RRLYgcitKT388Q2j9s?=
+ =?us-ascii?Q?2cdv49nRqgEQnXTf2aeCKeGeo0kRO8ijtG+dBUpZQrwSmMVwZOFRwL0TnDRE?=
+ =?us-ascii?Q?Vld5KgrVNEsDtufbYvobRVkxT/qBvh+cR1eZMofPDK5Fi/K8qYyeVKtYihIK?=
+ =?us-ascii?Q?DNU0rzE3Rrh4RdMwPF/4iC17YoKpA+QeKAnymOt8?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 53847685-3d95-42fe-1b8d-08dacdc66bdc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7964d4b7-307f-4f5c-fa69-08dacdcd2f8a
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2022 02:48:52.4714 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2022 03:37:17.8316 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8GhYTd8V2a7UQ3hZPxJFBRn59+B2UaahrzaVmRMue88gxfQ/nRu7m7NGePDm459NMsm+rLRpoGf2U5J5UgzC+A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR06MB5504
+X-MS-Exchange-CrossTenant-UserPrincipalName: NYEHZlJXwRw5LkB8LFi4i2I6E5Lh/A3jYZdA3VTG1qmOPuwoQvAf4dzYmJc65r8xkPVzAwfkI6/ujEpBcZbxiA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR0601MB4514
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -130,16 +130,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Introduce f2fs_is_readonly() and use it to simplify code.
- Signed-off-by: Yangtao Li <frank.li@vivo.com> --- fs/f2fs/f2fs.h | 5 +++++
- fs/f2fs/super.c | 5 ++--- 2 files changed, 7 insertions(+), 3 deletions(-)
+ Content preview: F2FS_SET_FEATURE() and F2FS_CLEAR_FEATURE() have never been
+ used since they were introduced by this commit 76f105a2dbcd("f2fs: add feature
+ facility in superblock"). So let's remove them. BTW, convert f2fs_sb_has_##name
+ to return bool. 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.215.124 listed in list.dnswl.org]
+ no trust [40.107.117.102 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.215.124 listed in wl.mailspike.net]
+ [40.107.117.102 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -149,9 +150,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1oy2IP-001cMb-Lj
-Subject: [f2fs-dev] [PATCH v2] f2fs: introduce f2fs_is_readonly() for
- readability
+X-Headers-End: 1oy33I-00062P-8T
+Subject: [f2fs-dev] [PATCH] f2fs: remove F2FS_SET_FEATURE() and
+ F2FS_CLEAR_FEATURE() macro
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -171,53 +172,41 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Introduce f2fs_is_readonly() and use it to simplify code.
+F2FS_SET_FEATURE() and F2FS_CLEAR_FEATURE() have never
+been used since they were introduced by this commit
+76f105a2dbcd("f2fs: add feature facility in superblock").
+
+So let's remove them. BTW, convert f2fs_sb_has_##name to return bool.
 
 Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
- fs/f2fs/f2fs.h  | 5 +++++
- fs/f2fs/super.c | 5 ++---
- 2 files changed, 7 insertions(+), 3 deletions(-)
+ fs/f2fs/f2fs.h | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index f0833638f59e..eaef7ccee5ae 100644
+index f0833638f59e..0640c703cd5d 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -4576,6 +4576,11 @@ static inline void f2fs_handle_page_eio(struct f2fs_sb_info *sbi, pgoff_t ofs,
- 	}
+@@ -203,10 +203,6 @@ struct f2fs_mount_info {
+ #define __F2FS_HAS_FEATURE(raw_super, mask)				\
+ 	((raw_super->feature & cpu_to_le32(mask)) != 0)
+ #define F2FS_HAS_FEATURE(sbi, mask)	__F2FS_HAS_FEATURE(sbi->raw_super, mask)
+-#define F2FS_SET_FEATURE(sbi, mask)					\
+-	(sbi->raw_super->feature |= cpu_to_le32(mask))
+-#define F2FS_CLEAR_FEATURE(sbi, mask)					\
+-	(sbi->raw_super->feature &= ~cpu_to_le32(mask))
+ 
+ /*
+  * Default values for user and/or group using reserved blocks
+@@ -4384,7 +4380,7 @@ static inline bool f2fs_disable_compressed_file(struct inode *inode)
  }
  
-+static inline bool f2fs_is_readonly(struct f2fs_sb_info *sbi)
-+{
-+	return f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb);
-+}
-+
- #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
- #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
- 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 31435c8645c8..39c6be61450e 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1353,8 +1353,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 		return -EINVAL;
- 	}
- 
--	if ((f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb)) &&
--		test_opt(sbi, FLUSH_MERGE)) {
-+	if (f2fs_is_readonly(sbi) && test_opt(sbi, FLUSH_MERGE)) {
- 		f2fs_err(sbi, "FLUSH_MERGE not compatible with readonly mode");
- 		return -EINVAL;
- 	}
-@@ -2085,7 +2084,7 @@ static void default_options(struct f2fs_sb_info *sbi)
- 	set_opt(sbi, MERGE_CHECKPOINT);
- 	F2FS_OPTION(sbi).unusable_cap = 0;
- 	sbi->sb->s_flags |= SB_LAZYTIME;
--	if (!f2fs_sb_has_readonly(sbi) && !f2fs_readonly(sbi->sb))
-+	if (!f2fs_is_readonly(sbi))
- 		set_opt(sbi, FLUSH_MERGE);
- 	if (f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi))
- 		set_opt(sbi, DISCARD);
+ #define F2FS_FEATURE_FUNCS(name, flagname) \
+-static inline int f2fs_sb_has_##name(struct f2fs_sb_info *sbi) \
++static inline bool f2fs_sb_has_##name(struct f2fs_sb_info *sbi) \
+ { \
+ 	return F2FS_HAS_FEATURE(sbi, F2FS_FEATURE_##flagname); \
+ }
 -- 
 2.25.1
 
