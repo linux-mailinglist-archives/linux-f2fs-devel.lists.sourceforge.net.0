@@ -2,156 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 241E463890B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Nov 2022 12:48:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C90E639027
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Nov 2022 20:07:17 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oyXBf-0003aA-5g;
-	Fri, 25 Nov 2022 11:48:07 +0000
+	id 1oye2Z-0003Va-L0;
+	Fri, 25 Nov 2022 19:07:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1oyXBd-0003Zz-By
+ (envelope-from <ebiggers@kernel.org>) id 1oye2X-0003VT-Lf
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Nov 2022 11:48:05 +0000
+ Fri, 25 Nov 2022 19:07:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Eiszt9hyXn7CsrRNh1OM+4nwZgju70TEK5klDj8wAGU=; b=B2bDoxyMfJ2HlVD9BKpELtLeex
- r+qhwEBr6obW5MxbccN+UYYV/AadN86tmgUknRp2CHG0EoAMdPnjseGEnPCf15MJzyq/+Z/IV3BXz
- /q6DQJ3d/WypIeae9sDPZkBIEFM67UERZt1Ncxlc34IhZRWqOdVtG0YkLMzZG6Hish9I=;
+ bh=C/5Y82YC8VwWrNLTVGenIUze/DZB2IWEEsZFK0ltr5w=; b=jfKP9hE/+E6qk29YKfAjLHsxc2
+ /jRygVdGEN7sTjkTei38G9YfGk6ElRZZjzC2Ue0jeRNlFKe3x/pCltWUVD7QnJUeaOCk1VJazbUAV
+ VKND66ZPSUBicVjeaWoPGrex+YEA1kJiP5dZ9te09hnzPy21MxHVnX90dZqelTzwmra0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Eiszt9hyXn7CsrRNh1OM+4nwZgju70TEK5klDj8wAGU=; b=B
- 67aYDdGBMdO1bi5Ve0oDu51zJxVUPwxNrjpaWum83LSecvlr2GIRqSPYply/zXZJ3FYlaSmAtLM2P
- E8nNzHSTfB9KEjC2Z2Vyxl98gz80Lbnz4Epixoa4A0FFpMszRex91JrbiTWtyYsoJfkxcUzQJ54Au
- 5xUsQPQxi0UQo5xQ=;
-Received: from mail-psaapc01on2110.outbound.protection.outlook.com
- ([40.107.255.110] helo=APC01-PSA-obe.outbound.protection.outlook.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=C/5Y82YC8VwWrNLTVGenIUze/DZB2IWEEsZFK0ltr5w=; b=Q
+ vWJthfWek/29yWzUo+Jl0BnVph4dbh8c+RJ3/97y3HtFYTSUUq8C5W5n1290XgUYQnc+DxlIArqSw
+ tCkV0hUS6bpOaLYgD/M7PxlTG2q0eZJaTReXMK1nVuyOz4Y7yCQSRtXAX4bjcrMkBg6W7RQShdub2
+ 8quFujqJFuu3zqns=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oyXBW-0008RK-DS for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Nov 2022 11:48:05 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EhA9n2Hxj7ZXGyhx5VubZHuNyyrrU0dpmRHTYi8Ohc44nDYFmbfh4z2mvCA0o8pFuqY1tnzw8YDhzzoUNMT+ZXrubzl3Tj+1x6hLYVFtejTMhtUZumBbYIbJFM3CPIVj2hLJmBLK3QaExdyCXJ1wH4kaHdAlDd/JLdiAyES6NOKVAyAb9aPdMnQFvUXeyi50S52dogI/T28KUkdonNllUY0xwk2faNqRSUTNcrZwrXAGl8oMzabwLeVFTMwMgCwIGari9FVZsbiGNhiFzb/217vyuiQ4RetXTF0habuiZCGDdMnIgKkRRAcqA1njQCUz4eKZ2I6z90Q48rHq2E6sEA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Eiszt9hyXn7CsrRNh1OM+4nwZgju70TEK5klDj8wAGU=;
- b=myJjY0F/2o0tM7BfmlHD4UXr7hGHrlJwaiEuLdq2D5DynjyGSDh8d+5kNt4rDXomm32955PCcPAWc9N14V8N87/Omm/W2rdc4ElYmh/HUYwbj7SQ1Jl67Rg+MScQpbS5jGbPc+IJP4wtDliEOL8JncafbCjsu37DZdoqYiMNlu6yjDtpIdz7bqWLmEcVvgZsBvQ8Jm7o2rTv3WVxPkduFVcIyxnx3D5/EsovZXxfpl6caNkD/4BmCcSOAM8zeaj41fhK9fL6HSs/+MH/+TFfbidc022ZNuI64FXN0bsOB3DexgZQYAFlyQmwFwJmH13KxpjYahDaE02w9R7yLn6Y5w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Eiszt9hyXn7CsrRNh1OM+4nwZgju70TEK5klDj8wAGU=;
- b=oNg1Zt9vFlSpNt82w/pTFqnP+73Yot+AkFh6rbLD7KgEgCMkhYDcVOV31g3ihyax5dOxfY4W5S0Zx+q7sX0rT69AZc67XQvfNii/cNh52ieQJhV1cMkK0Q0Z/4vwaw0ZavruEkZphXRg9d6QUOkvnBzlOmdtfGvK7wU32GsRGGeRAo0SFESFc9zi2LbbVZBcGI/Mp1eNPG2wGHCsutVKWbq03lKP1kOao9GE7xCc8Nn2MzNjPkafXERctpOrqzZBNtsTy8A9mV6HYFW1yhVwgGW2kimeuA970lP8DHaB37O5fxozzbcmQSA5WBFvalJ5af+cp4JCEp1JMO6DXx/oYA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by SI2PR06MB4249.apcprd06.prod.outlook.com (2603:1096:4:155::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5857.19; Fri, 25 Nov
- 2022 11:47:45 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::1230:5f04:fe98:d139]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::1230:5f04:fe98:d139%8]) with mapi id 15.20.5857.019; Fri, 25 Nov 2022
- 11:47:45 +0000
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Fri, 25 Nov 2022 19:47:36 +0800
-Message-Id: <20221125114736.19423-1-frank.li@vivo.com>
-X-Mailer: git-send-email 2.35.1
-X-ClientProxiedBy: SI2PR01CA0053.apcprd01.prod.exchangelabs.com
- (2603:1096:4:193::7) To SEZPR06MB5269.apcprd06.prod.outlook.com
- (2603:1096:101:78::6)
+ id 1oye2W-00BoPJ-IT for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 25 Nov 2022 19:07:09 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id DE775B82BE2;
+ Fri, 25 Nov 2022 19:06:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7520DC433C1;
+ Fri, 25 Nov 2022 19:06:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1669403214;
+ bh=uQMdVfMVj5lGbAk5rv9KMLVzXMLt+tl4YtDvcVaSy88=;
+ h=From:To:Cc:Subject:Date:From;
+ b=hdaGO7YGWpCRkN3TBJhAVhOTpPcWCk6ZVOLbV+2K0tArVZpCak97+/a6WzHTGJPHI
+ BMkNYT1+oW2idDh0B11xknfgwAjoj0bafpVob2br9lQs3Wsug0fTHiunhbB0LWdy8t
+ OH1mfAQl4tJYQqO/gb0I05fZUmkSnGJ6G6l1sPGVuK8heGm8TN2ziAEr9b4FKY0ZjV
+ xpvSdSsrrY8naUROkOXoYwoRdiG3Nw0s40KAiBTrDZBH+44K/kpWQckUUqk2DCJZYM
+ kPfGNDzrsRj8WY5KZZsQErctTRYljQuGY6lfsSrdn0M1XO7hzVejiL9MoiekI0eYOb
+ cojOrnf63DV7g==
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Date: Fri, 25 Nov 2022 11:06:42 -0800
+Message-Id: <20221125190642.12787-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SI2PR06MB4249:EE_
-X-MS-Office365-Filtering-Correlation-Id: 85dc13cd-2996-46e0-f157-08dacedade23
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2Lh7sBcPqNVK5dw3DL9882mZWh8zjhpfGyzDZD8utDvSBVjXpcZS3O1T0yxl+tUgVBLmjBXklDo4SfpTZUK8nqBDmZTB6utV7zu5xRz3ySp649ADO7bVe1YrEA2LkNGyC40r9sKYKLVGExbeV4AyTuE8fTcSjsPIa4KcF2SvvBOQh9CD+9eDnlgbclfsNPXxQaCt7FHVEkvPGBgBmliQ1hk4qgBRjCip1G+AdSsLMRox1DsyFKSjnVnK+pXYoILkQyn+Ii06jWqyYgZqomNS1CdaPsl3a7eI3rVUooCRALNznyqYL1UMhV+v0kw7ejY0/3f8D217LLudIUFIW+iFEw2gJXN/Ybr+hvoYIYX0q3Sv6K1/K3ahABZ/HjqtL5PARe07xT97BFhW0gvQrIRwxw0SmLcyG7zl4NlHKVqZxDzmyJk6yN+oBIMPxaOdynZb6UEasJqzzHlje83+E5JD9TzBPFgCIOudm694fm0nnS7junFNSp5OMPa399DX32NWbnG2+4hP3AmeNBbjze1Ot3umzF+K+kt/AEPqaZCDV+IMoxLd4FkzlRDVCnJ7nd0bkOGYoAG1WoxKEomtXoFgzQXPQFQd58lhkV1150a7vMbvL5wOg9jLjRiI/gcp0+NBKcnvTCtAIkDpYBwYJOM0SX/fh4brq0VidNDIskYxjdngoMFV3XuZzVaCaVj10h1F
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(39860400002)(396003)(366004)(376002)(346002)(136003)(451199015)(6506007)(6486002)(36756003)(6666004)(107886003)(41300700001)(186003)(8936002)(83380400001)(2906002)(5660300002)(2616005)(1076003)(66946007)(316002)(66556008)(66476007)(26005)(52116002)(6512007)(86362001)(8676002)(4326008)(478600001)(38350700002)(38100700002);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zvSi98p6QcWznvBxWIeNROUzfXU+3GkZxfbJpf/H2CRnf4LfjoTjA1vuI1Ah?=
- =?us-ascii?Q?N19R01nPhmea8V69KkO/CVX1bgOyM3vTV0tLoaviDS1HhOGCYWzqVblMOSWT?=
- =?us-ascii?Q?lO47ubHJKqAG3CqH7Uz0+UyCow6Cs1F5AgUh/STb6RI5+RGFQtbBZvhUTBKt?=
- =?us-ascii?Q?EKaDu26F+yzaYiImXhoiQL5b52ELcQbQdSCyJXrd+0HyCPdcworMRody9MeV?=
- =?us-ascii?Q?NWAzbaqQGAxX0aRv8D95Tq79eprEKVDEvno1e3tsg4GvDw6nAnbsAKqWLvNu?=
- =?us-ascii?Q?HabOGV0xMAJZefLWx23PWdgYAd5yPNd8g67kA6hnxMbN3TRdaei/XbKRGqtO?=
- =?us-ascii?Q?BM/zy8XE3Zo4UTbw4US967IkdyGcvQCiOnVCmYiIV9Q7QIKVYC/gseOFOe0g?=
- =?us-ascii?Q?uKDVAtXPiU+c6aX7U4Wmuoaiam0yIAiXCVIFZGKqC8uGg3WNBtjfr57ht473?=
- =?us-ascii?Q?3Goh0lJvDB/h5FEbpQY+1X5qjuyMDBEgqOrcqCdeogAvkibMTh/7nZyvG7gZ?=
- =?us-ascii?Q?yBejmowK/KCCAegPBVZwPIwKo14EqXhybSutSD08vAfYEmua8XPrwLRt7Yk0?=
- =?us-ascii?Q?wN1+GHlMb2YQ8kp11uf9wRioUljBV94pBnK4rkN4v/HSGSly1cUg6HsQDvyL?=
- =?us-ascii?Q?gzOPNZO7uc8kr9Hw2wfOTRWpSHetQkIemOBuUpoQhNaaFs9ZNNgnXX9Fl+0U?=
- =?us-ascii?Q?s2gu6r25PHxYc1xaimWZQ6MATK2EhGwZxr8D8e9w1bsbEgrblFKjNnK9FI8z?=
- =?us-ascii?Q?14oDNKolLy0o7X+AFzvUX5rRv1YvNR7IpssHPfQ0PJnroPeYGRsbe0spTch0?=
- =?us-ascii?Q?8XICuHikR+i07ztLLijEeMVbl/OJWa6n4vZb5h+MzzQer96P5WpOe1TLSiGL?=
- =?us-ascii?Q?Caq1Opr9+MpzrPoT5+Ls961OnAwIPSwd6Li4qOSjss58RRyOnfgB7EV+ruPy?=
- =?us-ascii?Q?WrHU1wwPUjriTzJdU99biHA11toodn+lBNI5KlZO96i+5/ot2jqAbBjVkls4?=
- =?us-ascii?Q?wjsbIcV7tg0K8GYYbwKjNy6skbCHpoEWvUXVgCZnEoNU/PDzIjHGQWlGUfRk?=
- =?us-ascii?Q?xKqxLkSUcfA6g/W5t6jN7mejkfCZaw0f0cLU+r6y4uv0lu2wUroUCjK227x7?=
- =?us-ascii?Q?ZAuqy8hrnvWx744gLz9mHgtmwGXULqAfHAbKWrVvCFgt8mIVTTXSh0/aHp5M?=
- =?us-ascii?Q?BnAJv54Qt3Lfxj9T+o9QCLYm/ArjfXUgjzfMcRhimDMnPhUu03iJjay8os1p?=
- =?us-ascii?Q?+lh93/jShpLseoTJv0qa26qSJP0dGFVrrgxbA3+CaIAWvBEHEW6IrZMsrsQA?=
- =?us-ascii?Q?6rslZC46Lwl6xQVNmKTVIUIJEB1K1JMTtTySkLTRFCoCk8DgLa0jq7rdvztj?=
- =?us-ascii?Q?3QdzK23agwaLQUAD1HE9VhZG2R8vpOJxbLa2SgdM32s3CYTF5dRkhFRWeUHr?=
- =?us-ascii?Q?oATAa8eCU8+EOFCqLI9KPPdZnd/M8QigVRIh6xXBZsla/wuQTtmVSBzN5gy9?=
- =?us-ascii?Q?JQLxlkvaUiKqdtvDhNS+ShavRyMk0wsPdwZofV56XOEPK27KjcRi/5g/4LlR?=
- =?us-ascii?Q?iEIMt5JE1Norjvba/Zh/LzMAnH5YwiTEkhXLhR4Q?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 85dc13cd-2996-46e0-f157-08dacedade23
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2022 11:47:45.3154 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: G4U3GmShtPM8AGdOLehLavoBqGJh//We8XvauGAVu5ag3+2rFnvE5M4uM7RmbDrkGS8MNwnegwWEQftGlSK1EA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR06MB4249
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Just for cleanup,
- no functional changes. Signed-off-by: Yangtao
- Li <frank.li@vivo.com> --- fs/f2fs/compress.c | 46 ++++++ fs/f2fs/data.c
- | 14 ++++ fs/f2fs/gc.c | 4 +--- fs/f2fs/recovery.c | 4 [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  From: Eric Biggers <ebiggers@google.com> As a step towards
+ freeing the PG_error flag for other uses, change ext4 and f2fs to stop using
+ PG_error to track verity errors. Instead, if a verity error occurs, just
+ mark the whole bio as failed. Th [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.255.110 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.255.110 listed in wl.mailspike.net]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1oyXBW-0008RK-DS
-Subject: [f2fs-dev] [PATCH] f2fs: do some cleanup for f2fs module init
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1oye2W-00BoPJ-IT
+Subject: [f2fs-dev] [PATCH v4] fsverity: stop using PG_error to track error
+ status
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -163,207 +102,345 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yangtao Li <frank.li@vivo.com>
-Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Just for cleanup, no functional changes.
+From: Eric Biggers <ebiggers@google.com>
 
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
+As a step towards freeing the PG_error flag for other uses, change ext4
+and f2fs to stop using PG_error to track verity errors.  Instead, if a
+verity error occurs, just mark the whole bio as failed.  The coarser
+granularity isn't really a problem since it isn't any worse than what
+the block layer provides, and errors from a multi-page readahead aren't
+reported to applications unless a single-page read fails too.
+
+f2fs supports compression, which makes the f2fs changes a bit more
+complicated than desired, but the basic premise still works.
+
+Note: there are still a few uses of PageError in f2fs, but they are on
+the write path, so they are unrelated and this patch doesn't touch them.
+
+Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/f2fs/compress.c | 46 ++++++----------------------------------------
- fs/f2fs/data.c     | 14 ++++----------
- fs/f2fs/gc.c       |  4 +---
- fs/f2fs/recovery.c |  4 +---
- fs/f2fs/super.c    |  8 ++------
- 5 files changed, 14 insertions(+), 62 deletions(-)
 
+v4: Added a comment for decompression_attempted, added a paragraph to
+    the commit message, and added Chao's Reviewed-by.
+
+v3: made a small simplification to the f2fs changes.  Also dropped the
+    fscrypt patch since it is upstream now.
+
+ fs/ext4/readpage.c |  8 ++----
+ fs/f2fs/compress.c | 64 ++++++++++++++++++++++------------------------
+ fs/f2fs/data.c     | 53 +++++++++++++++++++++++---------------
+ fs/verity/verify.c | 12 ++++-----
+ 4 files changed, 72 insertions(+), 65 deletions(-)
+
+diff --git a/fs/ext4/readpage.c b/fs/ext4/readpage.c
+index 3d21eae267fca..e604ea4e102b7 100644
+--- a/fs/ext4/readpage.c
++++ b/fs/ext4/readpage.c
+@@ -75,14 +75,10 @@ static void __read_end_io(struct bio *bio)
+ 	bio_for_each_segment_all(bv, bio, iter_all) {
+ 		page = bv->bv_page;
+ 
+-		/* PG_error was set if verity failed. */
+-		if (bio->bi_status || PageError(page)) {
++		if (bio->bi_status)
+ 			ClearPageUptodate(page);
+-			/* will re-read again later */
+-			ClearPageError(page);
+-		} else {
++		else
+ 			SetPageUptodate(page);
+-		}
+ 		unlock_page(page);
+ 	}
+ 	if (bio->bi_private)
 diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index d315c2de136f..f920ba8e0e85 100644
+index d315c2de136f2..2b7a5cc4ed662 100644
 --- a/fs/f2fs/compress.c
 +++ b/fs/f2fs/compress.c
-@@ -567,10 +567,7 @@ MODULE_PARM_DESC(num_compress_pages,
- int f2fs_init_compress_mempool(void)
+@@ -1711,50 +1711,27 @@ static void f2fs_put_dic(struct decompress_io_ctx *dic, bool in_task)
+ 	}
+ }
+ 
+-/*
+- * Update and unlock the cluster's pagecache pages, and release the reference to
+- * the decompress_io_ctx that was being held for I/O completion.
+- */
+-static void __f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed,
+-				bool in_task)
++static void f2fs_verify_cluster(struct work_struct *work)
  {
- 	compress_page_pool = mempool_create_page_pool(num_compress_pages, 0);
--	if (!compress_page_pool)
--		return -ENOMEM;
++	struct decompress_io_ctx *dic =
++		container_of(work, struct decompress_io_ctx, verity_work);
+ 	int i;
+ 
++	/* Verify, update, and unlock the decompressed pages. */
+ 	for (i = 0; i < dic->cluster_size; i++) {
+ 		struct page *rpage = dic->rpages[i];
+ 
+ 		if (!rpage)
+ 			continue;
+ 
+-		/* PG_error was set if verity failed. */
+-		if (failed || PageError(rpage)) {
+-			ClearPageUptodate(rpage);
+-			/* will re-read again later */
+-			ClearPageError(rpage);
+-		} else {
++		if (fsverity_verify_page(rpage))
+ 			SetPageUptodate(rpage);
+-		}
++		else
++			ClearPageUptodate(rpage);
+ 		unlock_page(rpage);
+ 	}
+ 
+-	f2fs_put_dic(dic, in_task);
+-}
 -
--	return 0;
-+	return compress_page_pool ? 0 : -ENOMEM;
+-static void f2fs_verify_cluster(struct work_struct *work)
+-{
+-	struct decompress_io_ctx *dic =
+-		container_of(work, struct decompress_io_ctx, verity_work);
+-	int i;
+-
+-	/* Verify the cluster's decompressed pages with fs-verity. */
+-	for (i = 0; i < dic->cluster_size; i++) {
+-		struct page *rpage = dic->rpages[i];
+-
+-		if (rpage && !fsverity_verify_page(rpage))
+-			SetPageError(rpage);
+-	}
+-
+-	__f2fs_decompress_end_io(dic, false, true);
++	f2fs_put_dic(dic, true);
  }
  
- void f2fs_destroy_compress_mempool(void)
-@@ -1983,9 +1980,7 @@ int f2fs_init_page_array_cache(struct f2fs_sb_info *sbi)
- 
- 	sbi->page_array_slab = f2fs_kmem_cache_create(slab_name,
- 					sbi->page_array_slab_size);
--	if (!sbi->page_array_slab)
--		return -ENOMEM;
--	return 0;
-+	return sbi->page_array_slab ? 0 : -ENOMEM;
- }
- 
- void f2fs_destroy_page_array_cache(struct f2fs_sb_info *sbi)
-@@ -1993,53 +1988,24 @@ void f2fs_destroy_page_array_cache(struct f2fs_sb_info *sbi)
- 	kmem_cache_destroy(sbi->page_array_slab);
- }
- 
--static int __init f2fs_init_cic_cache(void)
-+int __init f2fs_init_compress_cache(void)
+ /*
+@@ -1764,6 +1741,8 @@ static void f2fs_verify_cluster(struct work_struct *work)
+ void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed,
+ 				bool in_task)
  {
- 	cic_entry_slab = f2fs_kmem_cache_create("f2fs_cic_entry",
- 					sizeof(struct compress_io_ctx));
- 	if (!cic_entry_slab)
- 		return -ENOMEM;
--	return 0;
--}
--
--static void f2fs_destroy_cic_cache(void)
--{
--	kmem_cache_destroy(cic_entry_slab);
--}
--
--static int __init f2fs_init_dic_cache(void)
--{
- 	dic_entry_slab = f2fs_kmem_cache_create("f2fs_dic_entry",
- 					sizeof(struct decompress_io_ctx));
- 	if (!dic_entry_slab)
--		return -ENOMEM;
--	return 0;
--}
--
--static void f2fs_destroy_dic_cache(void)
--{
--	kmem_cache_destroy(dic_entry_slab);
--}
--
--int __init f2fs_init_compress_cache(void)
--{
--	int err;
--
--	err = f2fs_init_cic_cache();
--	if (err)
--		goto out;
--	err = f2fs_init_dic_cache();
--	if (err)
- 		goto free_cic;
- 	return 0;
- free_cic:
--	f2fs_destroy_cic_cache();
--out:
-+	kmem_cache_destroy(cic_entry_slab);
- 	return -ENOMEM;
++	int i;
++
+ 	if (!failed && dic->need_verity) {
+ 		/*
+ 		 * Note that to avoid deadlocks, the verity work can't be done
+@@ -1773,9 +1752,28 @@ void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed,
+ 		 */
+ 		INIT_WORK(&dic->verity_work, f2fs_verify_cluster);
+ 		fsverity_enqueue_verify_work(&dic->verity_work);
+-	} else {
+-		__f2fs_decompress_end_io(dic, failed, in_task);
++		return;
++	}
++
++	/* Update and unlock the cluster's pagecache pages. */
++	for (i = 0; i < dic->cluster_size; i++) {
++		struct page *rpage = dic->rpages[i];
++
++		if (!rpage)
++			continue;
++
++		if (failed)
++			ClearPageUptodate(rpage);
++		else
++			SetPageUptodate(rpage);
++		unlock_page(rpage);
+ 	}
++
++	/*
++	 * Release the reference to the decompress_io_ctx that was being held
++	 * for I/O completion.
++	 */
++	f2fs_put_dic(dic, in_task);
  }
  
- void f2fs_destroy_compress_cache(void)
- {
--	f2fs_destroy_dic_cache();
--	f2fs_destroy_cic_cache();
-+	kmem_cache_destroy(dic_entry_slab);
-+	kmem_cache_destroy(cic_entry_slab);
- }
+ /*
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 560fa80590e9..35c19248b1e2 100644
+index a71e818cd67b4..1ae8da259d6c5 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -39,10 +39,8 @@ static struct bio_set f2fs_bioset;
+@@ -116,43 +116,56 @@ struct bio_post_read_ctx {
+ 	struct f2fs_sb_info *sbi;
+ 	struct work_struct work;
+ 	unsigned int enabled_steps;
++	/*
++	 * decompression_attempted keeps track of whether
++	 * f2fs_end_read_compressed_page() has been called on the pages in the
++	 * bio that belong to a compressed cluster yet.
++	 */
++	bool decompression_attempted;
+ 	block_t fs_blkaddr;
+ };
  
- int __init f2fs_init_bioset(void)
++/*
++ * Update and unlock a bio's pages, and free the bio.
++ *
++ * This marks pages up-to-date only if there was no error in the bio (I/O error,
++ * decryption error, or verity error), as indicated by bio->bi_status.
++ *
++ * "Compressed pages" (pagecache pages backed by a compressed cluster on-disk)
++ * aren't marked up-to-date here, as decompression is done on a per-compression-
++ * cluster basis rather than a per-bio basis.  Instead, we only must do two
++ * things for each compressed page here: call f2fs_end_read_compressed_page()
++ * with failed=true if an error occurred before it would have normally gotten
++ * called (i.e., I/O error or decryption error, but *not* verity error), and
++ * release the bio's reference to the decompress_io_ctx of the page's cluster.
++ */
+ static void f2fs_finish_read_bio(struct bio *bio, bool in_task)
  {
--	if (bioset_init(&f2fs_bioset, F2FS_BIO_POOL_SIZE,
--					0, BIOSET_NEED_BVECS))
--		return -ENOMEM;
--	return 0;
-+	return bioset_init(&f2fs_bioset, F2FS_BIO_POOL_SIZE,
-+					0, BIOSET_NEED_BVECS);
+ 	struct bio_vec *bv;
+ 	struct bvec_iter_all iter_all;
++	struct bio_post_read_ctx *ctx = bio->bi_private;
+ 
+-	/*
+-	 * Update and unlock the bio's pagecache pages, and put the
+-	 * decompression context for any compressed pages.
+-	 */
+ 	bio_for_each_segment_all(bv, bio, iter_all) {
+ 		struct page *page = bv->bv_page;
+ 
+ 		if (f2fs_is_compressed_page(page)) {
+-			if (bio->bi_status)
++			if (!ctx->decompression_attempted)
+ 				f2fs_end_read_compressed_page(page, true, 0,
+ 							in_task);
+ 			f2fs_put_page_dic(page, in_task);
+ 			continue;
+ 		}
+ 
+-		/* PG_error was set if verity failed. */
+-		if (bio->bi_status || PageError(page)) {
++		if (bio->bi_status)
+ 			ClearPageUptodate(page);
+-			/* will re-read again later */
+-			ClearPageError(page);
+-		} else {
++		else
+ 			SetPageUptodate(page);
+-		}
+ 		dec_page_count(F2FS_P_SB(page), __read_io_type(page));
+ 		unlock_page(page);
+ 	}
+ 
+-	if (bio->bi_private)
+-		mempool_free(bio->bi_private, bio_post_read_ctx_pool);
++	if (ctx)
++		mempool_free(ctx, bio_post_read_ctx_pool);
+ 	bio_put(bio);
  }
  
- void f2fs_destroy_bioset(void)
-@@ -4090,9 +4088,7 @@ int f2fs_init_post_read_wq(struct f2fs_sb_info *sbi)
- 	sbi->post_read_wq = alloc_workqueue("f2fs_post_read_wq",
- 						 WQ_UNBOUND | WQ_HIGHPRI,
- 						 num_online_cpus());
--	if (!sbi->post_read_wq)
--		return -ENOMEM;
--	return 0;
-+	return sbi->post_read_wq ? 0 : -ENOMEM;
- }
+@@ -185,8 +198,10 @@ static void f2fs_verify_bio(struct work_struct *work)
+ 			struct page *page = bv->bv_page;
  
- void f2fs_destroy_post_read_wq(struct f2fs_sb_info *sbi)
-@@ -4105,9 +4101,7 @@ int __init f2fs_init_bio_entry_cache(void)
- {
- 	bio_entry_slab = f2fs_kmem_cache_create("f2fs_bio_entry_slab",
- 			sizeof(struct bio_entry));
--	if (!bio_entry_slab)
--		return -ENOMEM;
--	return 0;
-+	return bio_entry_slab ? 0 : -ENOMEM;
- }
+ 			if (!f2fs_is_compressed_page(page) &&
+-			    !fsverity_verify_page(page))
+-				SetPageError(page);
++			    !fsverity_verify_page(page)) {
++				bio->bi_status = BLK_STS_IOERR;
++				break;
++			}
+ 		}
+ 	} else {
+ 		fsverity_verify_bio(bio);
+@@ -245,6 +260,8 @@ static void f2fs_handle_step_decompress(struct bio_post_read_ctx *ctx,
+ 		blkaddr++;
+ 	}
  
- void f2fs_destroy_bio_entry_cache(void)
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 0f967b1e98f2..4b0d2fa3a769 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1903,9 +1903,7 @@ int __init f2fs_create_garbage_collection_cache(void)
- {
- 	victim_entry_slab = f2fs_kmem_cache_create("f2fs_victim_entry",
- 					sizeof(struct victim_entry));
--	if (!victim_entry_slab)
--		return -ENOMEM;
--	return 0;
-+	return victim_entry_slab ? 0 : -ENOMEM;
- }
++	ctx->decompression_attempted = true;
++
+ 	/*
+ 	 * Optimization: if all the bio's pages are compressed, then scheduling
+ 	 * the per-bio verity work is unnecessary, as verity will be fully
+@@ -1062,6 +1079,7 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
+ 		ctx->sbi = sbi;
+ 		ctx->enabled_steps = post_read_steps;
+ 		ctx->fs_blkaddr = blkaddr;
++		ctx->decompression_attempted = false;
+ 		bio->bi_private = ctx;
+ 	}
+ 	iostat_alloc_and_bind_ctx(sbi, bio, ctx);
+@@ -1089,7 +1107,6 @@ static int f2fs_submit_page_read(struct inode *inode, struct page *page,
+ 		bio_put(bio);
+ 		return -EFAULT;
+ 	}
+-	ClearPageError(page);
+ 	inc_page_count(sbi, F2FS_RD_DATA);
+ 	f2fs_update_iostat(sbi, NULL, FS_DATA_READ_IO, F2FS_BLKSIZE);
+ 	__submit_bio(sbi, bio, DATA);
+@@ -2141,7 +2158,6 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
+ 	inc_page_count(F2FS_I_SB(inode), F2FS_RD_DATA);
+ 	f2fs_update_iostat(F2FS_I_SB(inode), NULL, FS_DATA_READ_IO,
+ 							F2FS_BLKSIZE);
+-	ClearPageError(page);
+ 	*last_block_in_bio = block_nr;
+ 	goto out;
+ out:
+@@ -2289,7 +2305,6 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
  
- void f2fs_destroy_garbage_collection_cache(void)
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index dea95b48b647..77fd453949b1 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -923,9 +923,7 @@ int __init f2fs_create_recovery_cache(void)
- {
- 	fsync_entry_slab = f2fs_kmem_cache_create("f2fs_fsync_inode_entry",
- 					sizeof(struct fsync_inode_entry));
--	if (!fsync_entry_slab)
--		return -ENOMEM;
--	return 0;
-+	return fsync_entry_slab ? 0 : -ENOMEM;
- }
+ 		inc_page_count(sbi, F2FS_RD_DATA);
+ 		f2fs_update_iostat(sbi, inode, FS_DATA_READ_IO, F2FS_BLKSIZE);
+-		ClearPageError(page);
+ 		*last_block_in_bio = blkaddr;
+ 	}
  
- void f2fs_destroy_recovery_cache(void)
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 31435c8645c8..1d56cba495a5 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -288,9 +288,7 @@ static int __init f2fs_create_casefold_cache(void)
- {
- 	f2fs_cf_name_slab = f2fs_kmem_cache_create("f2fs_casefolded_name",
- 							F2FS_NAME_LEN);
--	if (!f2fs_cf_name_slab)
--		return -ENOMEM;
--	return 0;
-+	return f2fs_cf_name_slab ? 0 : -ENOMEM;
- }
+@@ -2306,7 +2321,6 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 	for (i = 0; i < cc->cluster_size; i++) {
+ 		if (cc->rpages[i]) {
+ 			ClearPageUptodate(cc->rpages[i]);
+-			ClearPageError(cc->rpages[i]);
+ 			unlock_page(cc->rpages[i]);
+ 		}
+ 	}
+@@ -2403,7 +2417,6 @@ static int f2fs_mpage_readpages(struct inode *inode,
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ set_error_page:
+ #endif
+-			SetPageError(page);
+ 			zero_user_segment(page, 0, PAGE_SIZE);
+ 			unlock_page(page);
+ 		}
+diff --git a/fs/verity/verify.c b/fs/verity/verify.c
+index bde8c9b7d25f6..961ba248021f9 100644
+--- a/fs/verity/verify.c
++++ b/fs/verity/verify.c
+@@ -200,9 +200,8 @@ EXPORT_SYMBOL_GPL(fsverity_verify_page);
+  * @bio: the bio to verify
+  *
+  * Verify a set of pages that have just been read from a verity file.  The pages
+- * must be pagecache pages that are still locked and not yet uptodate.  Pages
+- * that fail verification are set to the Error state.  Verification is skipped
+- * for pages already in the Error state, e.g. due to fscrypt decryption failure.
++ * must be pagecache pages that are still locked and not yet uptodate.  If a
++ * page fails verification, then bio->bi_status is set to an error status.
+  *
+  * This is a helper function for use by the ->readahead() method of filesystems
+  * that issue bios to read data directly into the page cache.  Filesystems that
+@@ -244,9 +243,10 @@ void fsverity_verify_bio(struct bio *bio)
+ 		unsigned long level0_ra_pages =
+ 			min(max_ra_pages, params->level0_blocks - level0_index);
  
- static void f2fs_destroy_casefold_cache(void)
-@@ -4646,9 +4644,7 @@ static int __init init_inodecache(void)
- 	f2fs_inode_cachep = kmem_cache_create("f2fs_inode_cache",
- 			sizeof(struct f2fs_inode_info), 0,
- 			SLAB_RECLAIM_ACCOUNT|SLAB_ACCOUNT, NULL);
--	if (!f2fs_inode_cachep)
--		return -ENOMEM;
--	return 0;
-+	return f2fs_inode_cachep ? 0 : -ENOMEM;
- }
+-		if (!PageError(page) &&
+-		    !verify_page(inode, vi, req, page, level0_ra_pages))
+-			SetPageError(page);
++		if (!verify_page(inode, vi, req, page, level0_ra_pages)) {
++			bio->bi_status = BLK_STS_IOERR;
++			break;
++		}
+ 	}
  
- static void destroy_inodecache(void)
+ 	fsverity_free_hash_request(params->hash_alg, req);
+
+base-commit: f0c4d9fc9cc9462659728d168387191387e903cc
 -- 
-2.25.1
+2.38.1
 
 
 
