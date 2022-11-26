@@ -2,69 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA2B7639040
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Nov 2022 20:22:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4698F639376
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 26 Nov 2022 03:40:14 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1oyeH7-0003jd-K4;
-	Fri, 25 Nov 2022 19:22:13 +0000
+	id 1oyl6v-0003Ai-0q;
+	Sat, 26 Nov 2022 02:40:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1oyeH5-0003jX-5m
+ (envelope-from <chao@kernel.org>) id 1oyl6t-0003AY-Jt
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Nov 2022 19:22:11 +0000
+ Sat, 26 Nov 2022 02:40:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LGUJ6kcS9fTraLJh4ELVqjAk1s2vH7cihFTflRixyo4=; b=gAEYBaV7oFFT7IxoSWAy8Xyvy+
- M8QS1VA3vWnjUDUdYtqWXFQRruS+RF6RXeods95ONSE+c7aJ5Zl24ugdTZNRnWnSzi3TDn1d1hL0Q
- FQlE8MSkkYYo5P3jSODLtm+ilTR4smI/i3691daDFc/Or/I14Wi/9ceGn/BxnUJ7q13E=;
+ bh=1Wn27ixaXMLku95VoxaPpQ8eUSSWm+I+YPaeOHENglM=; b=GAU5NC3CuJyVynhw+XOdKu1Hbs
+ 2C4hTza5qTcaCTaiZobBysBT2E7aM3hzRiKsm/h1/6ojlt6z4XeLvJOJXCG2DGNFikYNQV3ApkI9T
+ vnn/TfKOt5zeSBXlrgAk4Tqiwha0TPQqb6FkdOSBrFvNmYduY46cNc9sNkVSaPmqcxW4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=LGUJ6kcS9fTraLJh4ELVqjAk1s2vH7cihFTflRixyo4=; b=Mfg4GgodJHJ8rK6tDeLn3EK0bm
- qdqmVgIL9EZm3aSnN41w9kGAonOpBkeVXMUn3Yc7anU6R0/qJfK1M1El8ZslDavcHnVYVyHsf5HHR
- UiA1QXMDgw17DuezgJwLH7Ix6i1UdjgOVAi2XMMdkmAL81zK663FW9cwU9+0dX16sDRU=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=1Wn27ixaXMLku95VoxaPpQ8eUSSWm+I+YPaeOHENglM=; b=Y
+ g+A95apmQTHti+1n+8oLnskiHmKL7OCa0tWOBEcg7ZdWmxLm1HhJwMMSrpZbsn9YvTn60PKaJ+hOA
+ LEIDoSvuHg0eh8Sh01aa4nmWaaPXX65Hz4IILuQkN4YQYpcBTZ+I0JmdPXfHfy7Kvwl67ibC4Jpaq
+ ekjrtU/RNL+apxXQ=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1oyeH4-00BsvA-LP for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Nov 2022 19:22:11 +0000
+ id 1oyl6q-00DwR7-G8 for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 26 Nov 2022 02:40:07 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3E11360C7E;
- Fri, 25 Nov 2022 19:22:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B799C433D6;
- Fri, 25 Nov 2022 19:22:04 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5788C61008
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sat, 26 Nov 2022 02:39:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85A88C433C1;
+ Sat, 26 Nov 2022 02:39:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1669404124;
- bh=KrOiWwXDrPvGkEAn2LB7RpjRNfGbTiRZkWJjSt4RC8I=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=CPFBZj5sInDrrO6haYS/sTWeJTkias4f/BcMHkF1L6JEUbgV5mWsbFMpvn5uMpF6f
- TJCnD0bXT/sY56bIRES8+yrqZ7+UoL9yb8CJa2JSsowup80KWFEOqutG4GkoQFi9If
- ZEWKNQXRszfPq618gUgsErEv5+XY2kLZ4HsJF3A+zNWT2okwAN0bcZpqrRHfV9qPHy
- Co2V1+1DiFXVqtvUbb1JHb2+iynCjzRL8m0Z2GezOg6bI6V0vatPT9INxGT7m6Kx3Q
- e+B8UyDMRIR64AAzx61Pn2wdwiXD3/DwB88uMsGNkfZ684U+NuNKNA++dHr8Gjki4J
- kNXPahX58Lx1Q==
-Date: Fri, 25 Nov 2022 11:22:02 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Y4EV2rNfdNWfzF9+@sol.localdomain>
-References: <20221028175807.55495-1-ebiggers@kernel.org>
- <6bce9afb-2561-7937-caea-8aadaa5a21cd@kernel.org>
+ s=k20201202; t=1669430394;
+ bh=hNp6kkavaA4fFEtDxD/RPPtCE6oh1dDhusRYeGSmsy0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=U6bj76mOt6z+WXCP4Na0X3vxR+JMS8DKAIInJnpun6dOoNU9YOVT1G+qRXDCjArvB
+ XS4v0flEKV1+xaGhlhqNRLOjvFQ3fGVQFdDDTgKBaQJi8R3tcfqa6AEpKQf8rzKPm5
+ yDdCtNjm28vj8egsYNA5ygpUkoRqBmJLoHPlz0EIOPtoLYLhYQyU6Yfshi0l1QrkiM
+ PtycVjBVxPrCre5JhTGm4bgzmZLSsChVFmqAu5Fd1Y1u4jxsiAK/ryguCfSJOKiyFn
+ IBZ+wRiUwIpT9Jz6cC3IWlBQmfD8dVyZjoAIOhesR5PRuULNfeCj6dBI/7aYZlsD1e
+ NKcQyyYtj555w==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Sat, 26 Nov 2022 10:38:07 +0800
+Message-Id: <20221126023807.3490189-1-chao@kernel.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <6bce9afb-2561-7937-caea-8aadaa5a21cd@kernel.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,12 +70,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Nov 25, 2022 at 11:36:14AM +0800, Chao Yu wrote: >
- On 2022/10/29 1:58, Eric Biggers wrote: > > @@ -116,43 +116,51 @@ struct
- bio_post_read_ctx { > > struct f2fs_sb_info *sbi; > > struct work_st [...]
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview: As f2fs component in bugzilla.kernel.org was created and used
+ since 2018-7. Signed-off-by: Chao Yu <chao@kernel.org> --- MAINTAINERS |
+ 1 + 1 file changed, 1 insertion(+) diff --git a/MAINTAINERS b/MAINTAINERS
+ index cf0f18502372..01fdbb592ea7 100644 --- a/MAINTAINERS +++ b/MAINTAINERS
+ @@ -7828, 6 +7828,
+ 7 @@ M: Chao Yu <chao@kernel.org> L: linux-f2fs-devel@lists.sourcefo
+ [...] Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -87,12 +90,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1oyeH4-00BsvA-LP
-Subject: Re: [f2fs-dev] [PATCH v3] fsverity: stop using PG_error to track
- error status
+X-Headers-End: 1oyl6q-00DwR7-G8
+Subject: [f2fs-dev] [PATCH] MAINTAINERS: Add f2fs bug tracker link
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,34 +104,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-fscrypt@vger.kernel.org,
- linux-ext4@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Nov 25, 2022 at 11:36:14AM +0800, Chao Yu wrote:
-> On 2022/10/29 1:58, Eric Biggers wrote:
-> > @@ -116,43 +116,51 @@ struct bio_post_read_ctx {
-> >   	struct f2fs_sb_info *sbi;
-> >   	struct work_struct work;
-> >   	unsigned int enabled_steps;
-> > +	bool decompression_attempted;
-> 
-> How about adding some comments for decompression_attempted? Otherwise it
-> looks good to me.
-> 
+As f2fs component in bugzilla.kernel.org was created and used since
+2018-7.
 
-I added the following:
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
-	/*
- 	 * decompression_attempted keeps track of whether
- 	 * f2fs_end_read_compressed_page() has been called on the pages in the
- 	 * bio that belong to a compressed cluster yet.
- 	 */
+diff --git a/MAINTAINERS b/MAINTAINERS
+index cf0f18502372..01fdbb592ea7 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -7828,6 +7828,7 @@ M:	Chao Yu <chao@kernel.org>
+ L:	linux-f2fs-devel@lists.sourceforge.net
+ S:	Maintained
+ W:	https://f2fs.wiki.kernel.org/
++B:	https://bugzilla.kernel.org/enter_bug.cgi?product=File%20System&component=f2fs
+ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ F:	Documentation/ABI/testing/sysfs-fs-f2fs
+ F:	Documentation/filesystems/f2fs.rst
+-- 
+2.25.1
 
-- Eric
 
 
 _______________________________________________
