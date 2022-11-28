@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E71DE63A494
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Nov 2022 10:16:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3A3163A499
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Nov 2022 10:16:20 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ozaFM-0005V4-Lu;
-	Mon, 28 Nov 2022 09:16:16 +0000
+	id 1ozaFP-0005WE-CT;
+	Mon, 28 Nov 2022 09:16:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+7f5f7765a4bd65a1d96c+7036+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1ozaFH-0005SR-VD for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Nov 2022 09:16:11 +0000
+ id 1ozaFK-0005UP-TC for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Nov 2022 09:16:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=T1+WexSPAThEq+r2pi4MJLHBKqvu2sSgqCXKpDR6P1I=; b=mh/zHYluAlV1GA9fjX9uRgKuZg
- 8wlUrJOyTLeobu+ddwiXbSwEGa9ILKQdKvO+QE7cb9FrEKeZ70nvB6g/9oY2h8hWHZELg5ROC589X
- GK2PBtc74Zf7NJoaHbAw4lo9mdrHHHBSrV0WbMZIvNYgu7jCPy5r/jQ5WCPb7+q75zEU=;
+ bh=2mCuzvSTOc5V2zWs1Uovav5yXqHWfftDq2PPTWi+vOM=; b=lC1mC0zJECTk795HtyiD07Rcnu
+ a+Y5l5mPiKP2aJxiQUXPcgVjI4mdvdLS3aSjAmNoYB2QsGhZ0GQpcjC2JCBkyWHLb3oHG7QwpELiz
+ SSots1OFLaJfecsqaDOKeQVrtkq/p2d6neS9LTQj4EkSmwU5505uaYLKUy95RFDeRSa4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,32 +31,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=T1+WexSPAThEq+r2pi4MJLHBKqvu2sSgqCXKpDR6P1I=; b=fQEoNYFpuOtiFnBQnpmCeViPlL
- BnWTHf+8wRjye0ph040kQBMVTWwSBZofZb5aTSNEcUoibmDghq9QOlq2/4r/v4KD3vDEEaEKjNmsV
- o2cRs7mg0ixdZ2IAtYrxE8kAUrmIm7K2G/PmRixAJhwl2lPZWyBOmCyfv4vJyTPFGWec=;
+ bh=2mCuzvSTOc5V2zWs1Uovav5yXqHWfftDq2PPTWi+vOM=; b=Y56pFtZyTLr5mfGInnH4Gg+MuP
+ Zk2FwyBjmvHT+1OFyZQ2+k2z6YliAAPoZFaJwL8JyUX51DUgVBFQt4kTqX/9nkKth0URGyTxoJJJs
+ YPbZr87K+Eae/9VbKlzBFt3qgtPNmVLbbaqU541EI6Fa+lj0y9DnX3jChsIYvikGsUO0=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ozaFH-00058m-Dv for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Nov 2022 09:16:11 +0000
+ id 1ozaFK-00GRT9-6j for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Nov 2022 09:16:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=T1+WexSPAThEq+r2pi4MJLHBKqvu2sSgqCXKpDR6P1I=; b=CoSBxyX9ZP1gVyL55PvCYRDkKJ
- Kfo960LTOdaTRX3NKXxqfEllgmeVD8oAEa/DzGdd7uQJ6hBYDvKD+PQBtRUWK7r0CbTm/HJ8F0VB1
- Fvvhu6j5mKdLN0WWLrDbredfrW8dRWV3Ahql8EVhXaOpjUfC9qiwckMSlxfz0RFhPRo/LMV4OtVxt
- jDDuwUDEox2E/PCDxMV7rpY2zaiJjRPRdphvV08v7HaQYj9hcTFFuWRuPtxhmkENpngdWKPa4tbCO
- z3kaeLOKAZKmMywF/8+1cIfVtBMiPct0lUdoFpmwBw4vH4jjwys2xrQEH8ba89gzCQpjwjzGvSxRY
- TtAgYc0g==;
+ bh=2mCuzvSTOc5V2zWs1Uovav5yXqHWfftDq2PPTWi+vOM=; b=RuHVgf6B7sTnCIPWA8wZfeW9hB
+ Qffj2uHKC0UJmt6O/9Qp0jUL1TLyu5bwUg/llU4X3ctDVB0zISi0/gbuXAjRlOwkxFnt/lgFFr82Y
+ ioXfJ+UZHRnRhClBF5lSU8uibjTxu+6s2rcycAq017EjPJAnYLHZ8gMnlx7qvaGTlrRV8UQPL80tb
+ 5O4Efrh3xqmd5Pb57NSugSUabBSB7oLhO4eaW+e5T/6FiXSXDj/YXr3l67AI0+sj3nOOIEh8Kr2jv
+ umxJdiVg5CoDqyCS0HVK9oCWI8tZ5+tKyUSv5fAJVUTZT0/FwzI793bAbypBmCwiD2EeR9y1ySv/H
+ Ls2CNClg==;
 Received: from [2001:4bb8:192:26e7:4739:fc09:43a5:2665] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1ozaFB-000Z3D-KE; Mon, 28 Nov 2022 09:16:06 +0000
+ id 1ozaFE-000Z3y-Ab; Mon, 28 Nov 2022 09:16:08 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	Chao Yu <chao@kernel.org>
-Date: Mon, 28 Nov 2022 10:15:22 +0100
-Message-Id: <20221128091523.1242584-15-hch@lst.de>
+Date: Mon, 28 Nov 2022 10:15:23 +0100
+Message-Id: <20221128091523.1242584-16-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20221128091523.1242584-1-hch@lst.de>
 References: <20221128091523.1242584-1-hch@lst.de>
@@ -70,10 +70,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Factor out a helper to return a hole when no dnode was found.
- Signed-off-by: Christoph Hellwig <hch@lst.de> --- fs/f2fs/data.c | 47
- ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+), 23 deletions(-) 
+ Content preview: Add a is_hole local variable to figure out if the block
+ number
+ might need allocation, and untangle to logic to report the hole or fill it
+ with a block allocation. Signed-off-by: Christoph Hellwig <hch@lst.de> ---
+ fs/f2fs/data.c | 113 ++++++++++++++++++++++++ 1 file changed, 56 insertions(+),
+ 57 deletions(-) 
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,8 +90,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1ozaFH-00058m-Dv
-Subject: [f2fs-dev] [PATCH 14/15] f2fs: factor out a f2fs_map_no_dnode
+X-Headers-End: 1ozaFK-00GRT9-6j
+Subject: [f2fs-dev] [PATCH 15/15] f2fs: refactor the hole reporting and
+ allocation logic in f2fs_map_blocks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,76 +109,159 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Factor out a helper to return a hole when no dnode was found.
+Add a is_hole local variable to figure out if the block number might need
+allocation, and untangle to logic to report the hole or fill it with a
+block allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/f2fs/data.c | 47 ++++++++++++++++++++++++-----------------------
- 1 file changed, 24 insertions(+), 23 deletions(-)
+ fs/f2fs/data.c | 113 ++++++++++++++++++++++++-------------------------
+ 1 file changed, 56 insertions(+), 57 deletions(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index f6124cedd121a2..3c802ce397de52 100644
+index 3c802ce397de52..32e6823e1e9b1a 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -1449,6 +1449,28 @@ int f2fs_get_block_locked(struct dnode_of_data *dn, pgoff_t index)
- 	return err;
- }
+@@ -1524,6 +1524,7 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
+ 	block_t blkaddr;
+ 	unsigned int start_pgofs;
+ 	int bidx = 0;
++	bool is_hole;
  
-+static int f2fs_map_no_dnode(struct inode *inode,
-+		struct f2fs_map_blocks *map, struct dnode_of_data *dn,
-+		pgoff_t pgoff)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+
-+	/*
-+	 * There is one exceptional case that read_node_page() may return
-+	 * -ENOENT due to filesystem has been shutdown or cp_error, return
-+	 * -EIO in that case.
-+	 */
+ 	if (!maxblocks)
+ 		return 0;
+@@ -1564,78 +1565,76 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
+ 
+ next_block:
+ 	blkaddr = f2fs_data_blkaddr(&dn);
+-
+-	if (__is_valid_data_blkaddr(blkaddr) &&
+-		!f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE)) {
++	is_hole = !__is_valid_data_blkaddr(blkaddr);
++	if (!is_hole &&
++	    !f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE)) {
+ 		err = -EFSCORRUPTED;
+ 		f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
+ 		goto sync_out;
+ 	}
+ 
+-	if (__is_valid_data_blkaddr(blkaddr)) {
+-		/* use out-place-update for driect IO under LFS mode */
+-		if (f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO &&
+-							map->m_may_create) {
++	/* use out-place-update for direct IO under LFS mode */
 +	if (map->m_may_create &&
-+	    (is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN) || f2fs_cp_error(sbi)))
-+		return -EIO;
++	    (is_hole || (f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO))) {
++		if (unlikely(f2fs_cp_error(sbi))) {
++			err = -EIO;
++			goto sync_out;
++		}
 +
-+	if (map->m_next_pgofs)
-+		*map->m_next_pgofs = f2fs_get_next_page_offset(dn, pgoff);
-+	if (map->m_next_extent)
-+		*map->m_next_extent = f2fs_get_next_page_offset(dn, pgoff);
-+	return 0;
-+}
-+
- static bool f2fs_map_blocks_cached(struct inode *inode,
- 		struct f2fs_map_blocks *map, int flag)
- {
-@@ -1530,29 +1552,8 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
- 	if (err) {
- 		if (flag == F2FS_GET_BLOCK_BMAP)
- 			map->m_pblk = 0;
--
--		if (err == -ENOENT) {
--			/*
--			 * There is one exceptional case that read_node_page()
--			 * may return -ENOENT due to filesystem has been
--			 * shutdown or cp_error, so force to convert error
--			 * number to EIO for such case.
--			 */
--			if (map->m_may_create &&
--				(is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN) ||
--				f2fs_cp_error(sbi))) {
++		switch (flag) {
++		case F2FS_GET_BLOCK_PRE_AIO:
++			if (blkaddr == NULL_ADDR) {
++				prealloc++;
++				last_ofs_in_node = dn.ofs_in_node;
++			}
++			break;
++		case F2FS_GET_BLOCK_PRE_DIO:
++		case F2FS_GET_BLOCK_DIO:
+ 			err = __allocate_data_block(&dn, map->m_seg_type);
+ 			if (err)
+ 				goto sync_out;
+-			blkaddr = dn.data_blkaddr;
++			if (flag == F2FS_GET_BLOCK_PRE_DIO)
++				file_need_truncate(inode);
+ 			set_inode_flag(inode, FI_APPEND_WRITE);
++			break;
++		default:
++			WARN_ON_ONCE(1);
++			err = -EIO;
++			goto sync_out;
+ 		}
+-	} else {
+-		if (map->m_may_create) {
+-			if (unlikely(f2fs_cp_error(sbi))) {
 -				err = -EIO;
--				goto unlock_out;
+-				goto sync_out;
 -			}
--
--			err = 0;
--			if (map->m_next_pgofs)
--				*map->m_next_pgofs =
--					f2fs_get_next_page_offset(&dn, pgofs);
--			if (map->m_next_extent)
--				*map->m_next_extent =
--					f2fs_get_next_page_offset(&dn, pgofs);
--		}
-+		if (err == -ENOENT)
-+			err = f2fs_map_no_dnode(inode, map, &dn, pgofs);
- 		goto unlock_out;
+-			if (flag == F2FS_GET_BLOCK_PRE_AIO) {
+-				if (blkaddr == NULL_ADDR) {
+-					prealloc++;
+-					last_ofs_in_node = dn.ofs_in_node;
+-				}
+-			} else {
+-				WARN_ON(flag != F2FS_GET_BLOCK_PRE_DIO &&
+-					flag != F2FS_GET_BLOCK_DIO);
+-				err = __allocate_data_block(&dn,
+-							map->m_seg_type);
+-				if (!err) {
+-					if (flag == F2FS_GET_BLOCK_PRE_DIO)
+-						file_need_truncate(inode);
+-					set_inode_flag(inode, FI_APPEND_WRITE);
+-				}
+-			}
+-			if (err)
+-				goto sync_out;
++
++		blkaddr = dn.data_blkaddr;
++	    	if (is_hole)
+ 			map->m_flags |= F2FS_MAP_NEW;
+-			blkaddr = dn.data_blkaddr;
+-		} else {
+-			if (f2fs_compressed_file(inode) &&
+-					f2fs_sanity_check_cluster(&dn) &&
+-					(flag != F2FS_GET_BLOCK_FIEMAP ||
+-					IS_ENABLED(CONFIG_F2FS_CHECK_FS))) {
+-				err = -EFSCORRUPTED;
+-				f2fs_handle_error(sbi,
+-						ERROR_CORRUPTED_CLUSTER);
+-				goto sync_out;
+-			}
+-			if (flag == F2FS_GET_BLOCK_BMAP) {
+-				map->m_pblk = 0;
+-				goto sync_out;
+-			}
+-			if (flag == F2FS_GET_BLOCK_PRECACHE)
+-				goto sync_out;
+-			if (flag == F2FS_GET_BLOCK_FIEMAP &&
+-						blkaddr == NULL_ADDR) {
+-				if (map->m_next_pgofs)
+-					*map->m_next_pgofs = pgofs + 1;
+-				goto sync_out;
+-			}
+-			if (flag != F2FS_GET_BLOCK_FIEMAP) {
+-				/* for defragment case */
++	} else if (is_hole) {
++		if (f2fs_compressed_file(inode) &&
++		    f2fs_sanity_check_cluster(&dn) &&
++		    (flag != F2FS_GET_BLOCK_FIEMAP ||
++		     IS_ENABLED(CONFIG_F2FS_CHECK_FS))) {
++			err = -EFSCORRUPTED;
++			f2fs_handle_error(sbi,
++					ERROR_CORRUPTED_CLUSTER);
++			goto sync_out;
++		}
++
++		switch (flag) {
++		case F2FS_GET_BLOCK_PRECACHE:
++			goto sync_out;
++		case F2FS_GET_BLOCK_BMAP:
++			map->m_pblk = 0;
++			goto sync_out;
++		case F2FS_GET_BLOCK_FIEMAP:
++			if (blkaddr == NULL_ADDR) {
+ 				if (map->m_next_pgofs)
+ 					*map->m_next_pgofs = pgofs + 1;
+ 				goto sync_out;
+ 			}
++			break;
++		default:
++			/* for defragment case */
++			if (map->m_next_pgofs)
++				*map->m_next_pgofs = pgofs + 1;
++			goto sync_out;
+ 		}
  	}
  
 -- 
