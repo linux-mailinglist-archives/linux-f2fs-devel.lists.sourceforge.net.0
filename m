@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEE8F63A496
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Nov 2022 10:16:19 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED9E563A492
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Nov 2022 10:16:15 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ozaFO-00082U-ED;
-	Mon, 28 Nov 2022 09:16:18 +0000
+	id 1ozaFK-000165-AU;
+	Mon, 28 Nov 2022 09:16:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+7f5f7765a4bd65a1d96c+7036+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1ozaF8-00081B-HF for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Nov 2022 09:16:02 +0000
+ id 1ozaFE-00014q-Eu for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Nov 2022 09:16:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mo35tAxXmMMRiAoVdJV0xt8CeHxRi5H5ytU1aFMmHN8=; b=ICgDlMzZ+JjOSNkEtVDDSLs7Ct
- tg0KRON+TeGbnHkErsJNS9VIn1w/mARGqEpUB1JVmDj8sKHHxn9lxa4ze806TxbWnf61wWcTGII9T
- X0v16vR25ehVDE1mN/eiw+FHHj1bPGl3A0Uc1AF3wi39dC+W0no2GBeRex1tOahYr6aY=;
+ bh=JjIPB8OS2ZjH3/FD3xDCz5HuniRBrPuSgdJYbMn14HA=; b=hITmsZDuDn1YIc/aB51MNazI+1
+ qFT0z9kf5vNhpMAdezvBiPcpXs+ZaeKjrtlg70bWFWZuVngHplhzSz/nj4Out0w7d61i5+LfD3NnA
+ J8UD2bC96Q/+ikocVU09hTViRqS7PZTKZ9lMJx2S+uyV0b1Joo5p7zhEEmvFO57Cnxek=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,32 +31,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mo35tAxXmMMRiAoVdJV0xt8CeHxRi5H5ytU1aFMmHN8=; b=WhfDuNZm/OQ3ml45Upr4Jlh13v
- cfISlD75rmQYTL9nv8mxUsfWrBq72r15VFzWfFTe3lkW/LFkxmjXR5/gZ6myEJkz9wQiaGuUYM7Jj
- P/bMazMsmfymRjjXdJzVaGDiF9iDo9b0TJ67aIgHvSxfxjZBRizdYpM+DtEdn5Yzcg00=;
+ bh=JjIPB8OS2ZjH3/FD3xDCz5HuniRBrPuSgdJYbMn14HA=; b=gqFYqbRVHcSe5KjnSqKPJO9OeL
+ xOwr0MV/mzAHzuxBDjPpuEpqD06B768EHLF07MXFhLDyDwCBenkJJ/PipKSda5Nptx5WFSa73iwQv
+ 9XAjWAht2pYsiWidfeMVL+14u9F6v0jDh6NlwuOYFdoIVS9S65uT6cnkpjeCGAczt3pI=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ozaEy-00057O-JY for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Nov 2022 09:15:53 +0000
+ id 1ozaF1-00057S-8Y for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Nov 2022 09:15:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=mo35tAxXmMMRiAoVdJV0xt8CeHxRi5H5ytU1aFMmHN8=; b=SmPeLFcY8KJlsJib1Qw5v8098G
- fpiLus8UjYALYTs6NsMFFL6FMnQjjp5gqVBZ1leH4aCYY/lF6A/tqQMPOv9dlTWgnBSk7f/Xt5Tfn
- 9rAc983QHeAWrRbLaR77QO1OBcvq8zDe1VXpKvzZiWmzaSifvi0rGvyrYpcuJ0msXQP3xzvgHyrzp
- mDrL1yhIEXuOLP3zXl8DdmvQo6MTndfpnuurESl/9zyWakZJZPWbdi08kjH0xDmjECLelaFxiSRlE
- bfs/2jk3u0bb9BrmHpQBHfxt7im8UkMN2SzZqN9C6uEyF+sCN9rIcHfKII7GcMC6JvrLNQpNoz1Yt
- cFDh+oYg==;
+ bh=JjIPB8OS2ZjH3/FD3xDCz5HuniRBrPuSgdJYbMn14HA=; b=bG848rcPSe90P8oN1OeCa9LZUo
+ z6OyGg90KRiorNXDe+38paqjIg79eRYkfOSjTskmsLaV9ypqCTqnkUUxT1i8IagoRTw6F8EJF08Bc
+ 3zcF3YVvtQgl30VQgeV2g/JZ9PZlEtcPThAOVbGlzK73coA/njR3/mAb4g/SUnQVJ6mHcnxvybuKn
+ zIDyU/Qb7At7pRcYyX/rKofzXZoRzIMZJCFK39s5nOjRpjQEHwKAtFcoj90kZrlr3h6k2YFby9og8
+ 1EZ1hCdhwyNMW9aimPj7r+VTyYQnqeuaXBFa1qW30aHwodnl+5O6nPJPZu5zdi3vK6pshuM1aLDV0
+ xlg6AvgQ==;
 Received: from [2001:4bb8:192:26e7:4739:fc09:43a5:2665] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1ozaEs-000Ytu-NS; Mon, 28 Nov 2022 09:15:47 +0000
+ id 1ozaEv-000Yv4-EY; Mon, 28 Nov 2022 09:15:49 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	Chao Yu <chao@kernel.org>
-Date: Mon, 28 Nov 2022 10:15:15 +0100
-Message-Id: <20221128091523.1242584-8-hch@lst.de>
+Date: Mon, 28 Nov 2022 10:15:16 +0100
+Message-Id: <20221128091523.1242584-9-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20221128091523.1242584-1-hch@lst.de>
 References: <20221128091523.1242584-1-hch@lst.de>
@@ -70,11 +70,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This allows to keep the f2fs_do_map_lock based locking scheme
- private to data.c. Signed-off-by: Christoph Hellwig <hch@lst.de> ---
- fs/f2fs/data.c
- | 16 ++++++++++++++-- fs/f2fs/f2fs.h | 3 +-- fs/f2fs/file.c | 4 +--- 3 files
- changed, 16 insertions(+), 7 deletions(-) 
+ Content preview: Split f2fs_do_map_lock into a lock and unlock helper to make
+ the code using it easier to read. Signed-off-by: Christoph Hellwig
+ <hch@lst.de>
+ --- fs/f2fs/data.c | 46 +++++++++++++++++++++++ 1 file changed,
+ 23 insertions(+), 23 deletions(-) 
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,8 +89,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1ozaEy-00057O-JY
-Subject: [f2fs-dev] [PATCH 07/15] f2fs: add a f2fs_get_block_locked helper
+X-Headers-End: 1ozaF1-00057S-8Y
+Subject: [f2fs-dev] [PATCH 08/15] f2fs: f2fs_do_map_lock
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,94 +107,136 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This allows to keep the f2fs_do_map_lock based locking scheme
-private to data.c.
+Split f2fs_do_map_lock into a lock and unlock helper to make the code
+using it easier to read.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/f2fs/data.c | 16 ++++++++++++++--
- fs/f2fs/f2fs.h |  3 +--
- fs/f2fs/file.c |  4 +---
- 3 files changed, 16 insertions(+), 7 deletions(-)
+ fs/f2fs/data.c | 46 +++++++++++++++++++++++-----------------------
+ 1 file changed, 23 insertions(+), 23 deletions(-)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index a294a589ba1a91..6df80a30df263c 100644
+index 6df80a30df263c..b7c8e3e0113aff 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -1197,7 +1197,7 @@ int f2fs_reserve_block(struct dnode_of_data *dn, pgoff_t index)
- 	return err;
- }
- 
--int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index)
-+static int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index)
- {
- 	if (f2fs_lookup_extent_cache_block(dn->inode, index, &dn->data_blkaddr))
- 		return 0;
-@@ -1427,7 +1427,7 @@ static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
+@@ -1427,19 +1427,20 @@ static int __allocate_data_block(struct dnode_of_data *dn, int seg_type)
  	return 0;
  }
  
--void f2fs_do_map_lock(struct f2fs_sb_info *sbi, int flag, bool lock)
-+static void f2fs_do_map_lock(struct f2fs_sb_info *sbi, int flag, bool lock)
+-static void f2fs_do_map_lock(struct f2fs_sb_info *sbi, int flag, bool lock)
++static void f2fs_map_lock(struct f2fs_sb_info *sbi, int flag)
  {
- 	if (flag == F2FS_GET_BLOCK_PRE_AIO) {
- 		if (lock)
-@@ -1442,6 +1442,18 @@ void f2fs_do_map_lock(struct f2fs_sb_info *sbi, int flag, bool lock)
- 	}
- }
- 
-+int f2fs_get_block_locked(struct dnode_of_data *dn, pgoff_t index)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
-+	int err;
-+
-+	f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, true);
-+	err = f2fs_get_block(dn, index);
-+	f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, false);
-+
-+	return err;
+-	if (flag == F2FS_GET_BLOCK_PRE_AIO) {
+-		if (lock)
+-			f2fs_down_read(&sbi->node_change);
+-		else
+-			f2fs_up_read(&sbi->node_change);
+-	} else {
+-		if (lock)
+-			f2fs_lock_op(sbi);
+-		else
+-			f2fs_unlock_op(sbi);
+-	}
++	if (flag == F2FS_GET_BLOCK_PRE_AIO)
++		f2fs_down_read(&sbi->node_change);
++	else
++		f2fs_lock_op(sbi);
 +}
 +
- /*
-  * f2fs_map_blocks() tries to find or build mapping relationship which
-  * maps continuous logical blocks to physical blocks, and return such
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index c0a1a987889167..a3789dab0aade9 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3791,7 +3791,7 @@ void f2fs_set_data_blkaddr(struct dnode_of_data *dn);
- void f2fs_update_data_blkaddr(struct dnode_of_data *dn, block_t blkaddr);
- int f2fs_reserve_new_blocks(struct dnode_of_data *dn, blkcnt_t count);
- int f2fs_reserve_new_block(struct dnode_of_data *dn);
--int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index);
-+int f2fs_get_block_locked(struct dnode_of_data *dn, pgoff_t index);
- int f2fs_reserve_block(struct dnode_of_data *dn, pgoff_t index);
- struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
- 			blk_opf_t op_flags, bool for_write);
-@@ -3801,7 +3801,6 @@ struct page *f2fs_get_lock_data_page(struct inode *inode, pgoff_t index,
- struct page *f2fs_get_new_data_page(struct inode *inode,
- 			struct page *ipage, pgoff_t index, bool new_i_size);
- int f2fs_do_write_data_page(struct f2fs_io_info *fio);
--void f2fs_do_map_lock(struct f2fs_sb_info *sbi, int flag, bool lock);
- int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
- 			int create, int flag);
- int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 82cda12582272a..cbeb7bd880046e 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -113,10 +113,8 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
++static void f2fs_map_unlock(struct f2fs_sb_info *sbi, int flag)
++{
++	if (flag == F2FS_GET_BLOCK_PRE_AIO)
++		f2fs_up_read(&sbi->node_change);
++	else
++		f2fs_unlock_op(sbi);
+ }
  
- 	if (need_alloc) {
- 		/* block allocation */
--		f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, true);
- 		set_new_dnode(&dn, inode, NULL, NULL, 0);
--		err = f2fs_get_block(&dn, page->index);
--		f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, false);
-+		err = f2fs_get_block_locked(&dn, page->index);
+ int f2fs_get_block_locked(struct dnode_of_data *dn, pgoff_t index)
+@@ -1447,9 +1448,9 @@ int f2fs_get_block_locked(struct dnode_of_data *dn, pgoff_t index)
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
+ 	int err;
+ 
+-	f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, true);
++	f2fs_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO);
+ 	err = f2fs_get_block(dn, index);
+-	f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, false);
++	f2fs_map_unlock(sbi, F2FS_GET_BLOCK_PRE_AIO);
+ 
+ 	return err;
+ }
+@@ -1524,7 +1525,7 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+ 
+ next_dnode:
+ 	if (map->m_may_create)
+-		f2fs_do_map_lock(sbi, flag, true);
++		f2fs_map_lock(sbi, flag);
+ 
+ 	/* When reading holes, we need its node page */
+ 	set_new_dnode(&dn, inode, NULL, NULL, 0);
+@@ -1708,7 +1709,7 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+ 	f2fs_put_dnode(&dn);
+ 
+ 	if (map->m_may_create) {
+-		f2fs_do_map_lock(sbi, flag, false);
++		f2fs_map_unlock(sbi, flag);
+ 		f2fs_balance_fs(sbi, dn.node_changed);
+ 	}
+ 	goto next_dnode;
+@@ -1754,7 +1755,7 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map,
+ 	f2fs_put_dnode(&dn);
+ unlock_out:
+ 	if (map->m_may_create) {
+-		f2fs_do_map_lock(sbi, flag, false);
++		f2fs_map_unlock(sbi, flag);
+ 		f2fs_balance_fs(sbi, dn.node_changed);
+ 	}
+ out:
+@@ -3330,7 +3331,7 @@ static int prepare_write_begin(struct f2fs_sb_info *sbi,
+ 
+ 	if (f2fs_has_inline_data(inode) ||
+ 			(pos & PAGE_MASK) >= i_size_read(inode)) {
+-		f2fs_do_map_lock(sbi, flag, true);
++		f2fs_map_lock(sbi, flag);
+ 		locked = true;
  	}
  
- #ifdef CONFIG_F2FS_FS_COMPRESSION
+@@ -3366,8 +3367,7 @@ static int prepare_write_begin(struct f2fs_sb_info *sbi,
+ 			err = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
+ 			if (err || dn.data_blkaddr == NULL_ADDR) {
+ 				f2fs_put_dnode(&dn);
+-				f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO,
+-								true);
++				f2fs_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO);
+ 				WARN_ON(flag != F2FS_GET_BLOCK_PRE_AIO);
+ 				locked = true;
+ 				goto restart;
+@@ -3382,7 +3382,7 @@ static int prepare_write_begin(struct f2fs_sb_info *sbi,
+ 	f2fs_put_dnode(&dn);
+ unlock_out:
+ 	if (locked)
+-		f2fs_do_map_lock(sbi, flag, false);
++		f2fs_map_unlock(sbi, flag);
+ 	return err;
+ }
+ 
+@@ -3420,7 +3420,7 @@ static int __reserve_data_block(struct inode *inode, pgoff_t index,
+ 	struct page *ipage;
+ 	int err = 0;
+ 
+-	f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, true);
++	f2fs_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO);
+ 
+ 	ipage = f2fs_get_node_page(sbi, inode->i_ino);
+ 	if (IS_ERR(ipage)) {
+@@ -3436,7 +3436,7 @@ static int __reserve_data_block(struct inode *inode, pgoff_t index,
+ 	f2fs_put_dnode(&dn);
+ 
+ unlock_out:
+-	f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO, false);
++	f2fs_map_unlock(sbi, F2FS_GET_BLOCK_PRE_AIO);
+ 	return err;
+ }
+ 
 -- 
 2.30.2
 
