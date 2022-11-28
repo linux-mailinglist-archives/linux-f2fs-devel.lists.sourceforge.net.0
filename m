@@ -2,155 +2,122 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC2E663A038
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Nov 2022 04:52:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F83663A422
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Nov 2022 10:06:35 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ozVBv-0001Mf-FY;
-	Mon, 28 Nov 2022 03:52:23 +0000
+	id 1oza5v-0003sP-Sz;
+	Mon, 28 Nov 2022 09:06:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1ozVBt-0001MY-It
+ (envelope-from <qxy65535@gmail.com>) id 1oza5k-0003qQ-Rk
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Nov 2022 03:52:21 +0000
+ Mon, 28 Nov 2022 09:06:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iIMdO7Ba0mvREi0m2Cnj3HjZScRjMIXODgy29Lcjk/A=; b=SoahSpMXCL1nMBHn8oKcSPxH82
- WKbXdNhwYPqX8Zf0jc4BrGHMpqeDj+PpFGpLvr7tPm0Kk73Lq9lUlbs587QNJy6iHa9RAI5VGEFnh
- Y5n1Zk+iOpra+V1VOjb2KoRDCd1k/R4qGxDMtP+OgSZsYUPIvaIK88vbp6cdTI4dJonM=;
+ bh=z+Rewj5p/ZFGKxaPkUSZu5AiKFXUjbdI5QMEOTU0onA=; b=O6lHLzV5aqPpm43/aUEyUu1wVw
+ 9n6om5lZPmc0o3J5DFuRQjIbnZYbYe4o2cCEEg1dNmC8yTfrOp1ERDieC/rMdirBmY/O3UZoMo2iX
+ tvIO1/uBPXL677CLR40rQLjV9WxyT6/QSemCJH0sD/0CJPxFTMlvfE7jzpQJPdbw9m8k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=iIMdO7Ba0mvREi0m2Cnj3HjZScRjMIXODgy29Lcjk/A=; b=I
- R/Dgp1S+8COUaU1Hb0rVo3mcelBGJUPlpaXMsCg/1fHoDX8UdzUwi40tp07g2axtf5wpcNjygmrqq
- xPB48Xw2EXioFEXYN3F6hscwI/6m4W+7+Eal7qQL7T1sESFOsC2/xIciQw4HSnuUrjMijCo/z7LVv
- BZy2HU5CLRNejeSg=;
-Received: from mail-tyzapc01on2107.outbound.protection.outlook.com
- ([40.107.117.107] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ozVBj-00G9Nt-2E for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Nov 2022 03:52:21 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=n+TOk/cdYPLPGOmuo1edvlcm4YnLpGIKLqZbqGjYnYU50GP+bjb2e3iUnqSmAK4TUV2e5EBmx5fb7EnFu16Q8wmcQV8ofqu82PXA3psBDs+wK9ZH7vRVO2PS2A7C6v4Zuhy7e39bwSHzxWSVACtvc0xVGDdFttKoxszZSr4XeTIHjnIPfSXiLkj4BcZ85VAPzuf5NnJX6iPiJXhYYoRXU3ELcF6435R1ncvWL64z0YoIifxTCT8fYJN485s3RcpUG/sHpC1Xr66nljoiqgCbZnh+xWR3ATB30B/0JLPGZLJy0hKutV8XuBkPY/87NIOpc6MT4Fk23Bjb80LJahCMuA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iIMdO7Ba0mvREi0m2Cnj3HjZScRjMIXODgy29Lcjk/A=;
- b=OTVTQS9CmbCHWk1dCWFh/yOAkFke0f1ywaChiNvyMbCBDQVKpCSAQj5RUDUZkqy6OPGz0fpHxQJ9H7/gtYSYbCanxsvUL+m0VLDZS59ufYU0vs71hoU0/SxfFi3QiEySOh5w0E4DoSMAGg87OOOzoH7ooWXvygJjN5S3e7swufVSs6CDpIdP9WZpK7ub0U8ni62zbfUMEfWLYzZUdjgaN9xYqwb6AV0v7+VifLxAfH0ZS4KgGLPj3LA/gRHvvw+ASllJlZcVbRf9WzZJ8h6kOMQ5ORraIXyDK+8aMqRub9gRcRkLdIYnfS9/eB4KqdxJMQJol2cRAvXceIQnhFMz1Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iIMdO7Ba0mvREi0m2Cnj3HjZScRjMIXODgy29Lcjk/A=;
- b=HVI+uJDRBQ6nEAx5aetPUE8+XIQLXS0DtSECm91Z46Hl5m80yEoK3avGo+hBuAviPtFGhiZVhR5+bj4f3hBPf1ZAw4VaUPc7JVVoy4gK+tnAKlegg1FN31d3qKsg8g3683rhYJGdjvuOf9VTrrQgyWHNnnX+rtwtuVZg7yxtJh62EpWCe2qXbGBoAeXIHLTmBiJ1M7XW/vodmyT6O71I4EynFO9c4/j70JtxR8DgU60HLGG+JprPzuN4ge8kGaMJAShtilKLTJFxX3ouFRH+lm64hNPtpHhvNVePCp9yVDzhYgaK2dByW+FVTiMBszDkn0M3GMD5BHLGrblWHVytOw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by SI2PR06MB4044.apcprd06.prod.outlook.com (2603:1096:4:eb::5) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5857.23; Mon, 28 Nov 2022 03:51:59 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::ef03:cbfb:f8ef:d88b]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::ef03:cbfb:f8ef:d88b%9]) with mapi id 15.20.5857.023; Mon, 28 Nov 2022
- 03:51:59 +0000
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Mon, 28 Nov 2022 11:51:50 +0800
-Message-Id: <20221128035150.30787-1-frank.li@vivo.com>
-X-Mailer: git-send-email 2.35.1
-X-ClientProxiedBy: SI2P153CA0001.APCP153.PROD.OUTLOOK.COM (2603:1096:4:140::7)
- To SEZPR06MB5269.apcprd06.prod.outlook.com
- (2603:1096:101:78::6)
+ List-Owner:List-Archive; bh=z+Rewj5p/ZFGKxaPkUSZu5AiKFXUjbdI5QMEOTU0onA=; b=L
+ WRDzaIgIxKAcknFxqjej2iKJc0Y0bJWrxJphUQgfbovIEU9EAG4D6wGGZNdypcsF6BVA2nx5vnZ2G
+ XXVK2o2YN7UM83nto6JCt8FAGqn131+KQV+JOZv6wQFPDqz0pxOlp8q3c8Yz6IwDb8Ss56s5nSSwC
+ yKveOAgglqRIb4fk=;
+Received: from mail-pf1-f174.google.com ([209.85.210.174])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1oza5h-0004Ly-Ei for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Nov 2022 09:06:20 +0000
+Received: by mail-pf1-f174.google.com with SMTP id c15so526850pfb.13
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 28 Nov 2022 01:06:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=z+Rewj5p/ZFGKxaPkUSZu5AiKFXUjbdI5QMEOTU0onA=;
+ b=N1GqHq6LcBeYT2l7XL/E6WrtMRb3SC9TfF0Ms+o9jvLzFuUqGl9Vm8bAou8v2kAWsi
+ poKhl+7fXJFqqqWVJbPZdfSyo1DHC2n0YX1uvnCcs41pVleSqF9bFUuwRjg+iMcF2dZP
+ GtZIUs9iE3sUpienUE20MiT6D8PgcUjnHJe9x+0kxXkPI10ugjCHonoNiNup1GwPZAmL
+ Og7VTNP7yhM6ueK9OzJ6Lo/zKsvmfuL4be0w9cqBnuUsBj/JAzOpTJptu0HvQDjulGbD
+ i0AebW/Aj1gLuAFrI35sA04jfCmRGBEWZGegZDlTbvEmG6VUu/9aLBfQIOEXz37gJNxU
+ Rzfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=z+Rewj5p/ZFGKxaPkUSZu5AiKFXUjbdI5QMEOTU0onA=;
+ b=78oOSAOiW4Bken3zYKptFcdbzvRVdkJa6qvFkgLI84k0ele5CauPVwaQl3V3TgFzCP
+ +N6UU164An9K/v8s+BlRK5XaD9qk2j3XRFwlTM/PJQ9KfUx4neVQvbiUMLtR0PHxxbwB
+ SZHwDRvdirSJU0T6jfNdpf4TiOne9Rm5Sned7pjjOQrqLiQqapxINfnIIKxbj7ajWEG1
+ WVWlUGUakU69um2JhhM6BTZnljW6oc2N7XdR9mC0AoiqO/J+jITZNKZol/uOkDu+101/
+ iWmZ3HwWJs+VcqgSFDtPH2M0uUiIqlahN1rLoKEN9N5ugnXci+3ffIHwUHI+3VH0/BK9
+ aA1g==
+X-Gm-Message-State: ANoB5pl7VJbUCTsJBAHfhbikV1QR3VqGjabuZVYtVS63BlpiokeIpZ0f
+ /IyJL0NImU8fWYJ/aPbGS1DFnpqxxFEJoA==
+X-Google-Smtp-Source: AA0mqf62LtEI9k6+6wMNDHKrBLNRhc6uHK7Lm6kOO+RYwr5f9qZ4w4JI2m2o2VZeO6mtsy7bcya9Qw==
+X-Received: by 2002:a05:6a00:1d0c:b0:573:7b50:acb8 with SMTP id
+ a12-20020a056a001d0c00b005737b50acb8mr34307462pfx.59.1669626371832; 
+ Mon, 28 Nov 2022 01:06:11 -0800 (PST)
+Received: from mi-HP-ProDesk-680-G4-MT.mioffice.cn ([43.224.245.252])
+ by smtp.gmail.com with ESMTPSA id
+ s17-20020a170902ea1100b001811a197797sm8269268plg.194.2022.11.28.01.06.09
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 28 Nov 2022 01:06:11 -0800 (PST)
+From: qixiaoyu1 <qxy65535@gmail.com>
+X-Google-Original-From: qixiaoyu1 <qixiaoyu1@xiaomi.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Mon, 28 Nov 2022 16:58:54 +0800
+Message-Id: <20221128085859.5295-1-qixiaoyu1@xiaomi.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SI2PR06MB4044:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3b9afaf8-c411-438d-a177-08dad0f3e6b4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: /tRdpsa/JU9/2oXJfKYWGPzAGxT62w37JENjz34/2eIvaWFqhobzH3PeKhlnk0kEhn8toJKwldoSPsksrogf2LRpgIEdY70X5lTxCE30fGlBKsBKPV12PTg+qYdt9xrTuVmv+qx45QqEpEHYJqEflEcKdPwEMKSOqDQgrDx4QYrV4k11I/xkTqKx9IFb29JmgmYT5aAIcyqisfvX6wS/MLGyOi1EwvxcSx3hBGbnm35hFM5kNEGL5hVoB3K57ZRMwLrbSydtoKKJrf+/JHJWgZ+TufC61rmfgludhlKkMw0i/FNtWWWNc0+mGDI3h4XzWoQi3pOr6u9lsC9N3Gpi/8xMKEFf/rik3Sx5U2cKGU1fEGzuyvA1vGh6HOQl5DL5HsHlyr5SqI3cl5pLBWHz8mV1gO1JbcHtKHMRzb+dEoLNG9EW0kI3uX/mP+KGxM9AKthoLpAR3RvVQip8KUx/X8+WzFmD7dD3S7Cqw879ljjIFS2J/Ht8mDE4aMk9io2nuOiSNdQxEoChuzZZKE0FzzUv1ko1QrWpE/wHdBnkro9S5mvc1UJ8Jq6IYSjUPdpI3aXw2vdAq57fYij5mnGSEEsNuwGvxV5lwpWP/cXuBBL6oFFiYGgwJIJ6DGymZiuk8YBzZjpOi3Hx8TyKabsuksC6cdpdao/AFkUX95hbNhr5b9TSIl4UODITRL6gql6c+KXwiZHr9jC0BFygsuoXeQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(346002)(376002)(366004)(136003)(39860400002)(396003)(451199015)(478600001)(316002)(2906002)(36756003)(66946007)(6486002)(966005)(83380400001)(38350700002)(38100700002)(107886003)(6666004)(26005)(52116002)(6506007)(86362001)(6512007)(186003)(2616005)(1076003)(4744005)(5660300002)(41300700001)(8936002)(66556008)(66476007)(4326008)(8676002);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?wSucYULU9pdiLDCm8uHBWFlybQ6wcAvjdAx/pO+qrGfoBmvDzuoc7T6o16fu?=
- =?us-ascii?Q?OJFyrr3tGZ6XL2524k8LE6VCXCjsVWRkoMSsRQ/1YEtlBIFICRrbWvcsBBlC?=
- =?us-ascii?Q?WlikMU6njjdUKBPyq5/x/bZJKl4Ydy/gTAwCv9oAarXHQXO1AejFVW3LN5No?=
- =?us-ascii?Q?syh3cLTrvFbhfFS928GfQMxbKuYguDrtYIVrSLnuVQKP4slHEzIWoXBbRBwG?=
- =?us-ascii?Q?xgjZIDc4dLqZXc10Pa9QQgNqG4/l/oM1fDeYH+qv12O0Gb5+oDCaPVGvDinS?=
- =?us-ascii?Q?yvHy82MVsws08nG18g0OkcgZEYntfz6q0VTNXiyh2nogEXYVklMhSK9yl2HH?=
- =?us-ascii?Q?g61gG7Bv6DCnXiouuumsNXtvWys6b37/KKwUO4RtsqRJBL84GE/WM8MuEly8?=
- =?us-ascii?Q?4ja2FWw+gn40KTNA1pYyQpaiOYN8aSUBIn/aII1PV6clXbQs/iFAL6fnjd7U?=
- =?us-ascii?Q?md+3iJrl88sx8+h+e4U2p3+cvLWbY1Nq08skW7ksqqqnlVU8ZpsCdJ6Z2Agc?=
- =?us-ascii?Q?vYFLXyVCON+g3/J2H2KMbu7HXmQKy2YFIdbxB1LDJAzk3qAlpD7VX9hblCWI?=
- =?us-ascii?Q?tHpW3k+MGNyxYS2/hOeEvfOp71yx0mXyTjpBdwYY9I5BKBp4iuZWnHq8cw1M?=
- =?us-ascii?Q?RGkRAoo+joTo3g8HWEN9dPF4n/1sccTNzO3jVo+wDNz6eiEp8A9tLPC7YnzZ?=
- =?us-ascii?Q?6GszMShLeNO0K3S7e115lxzl7kyqH/A7OCaSBcZaaq++ispFDKCEQmON2yot?=
- =?us-ascii?Q?xjmxgzcgVsJ09YRooqPUxG27ErWjrpbFuh4ayj3Jxrifc0ccrYKQv2rOZFOT?=
- =?us-ascii?Q?3TilCxcw1CFWMA42W5LXOW+VLnsyYBcA6ZEAzKKFDHVeoQ4XRtrblKYYAHCV?=
- =?us-ascii?Q?u+5znayc7ZoWsq5MU1Ii9WQlmutrP1tfzIjVNBvvGkPjDJTsfQR57Y62Lp/y?=
- =?us-ascii?Q?LPBLWXH2LSXkuU8vC44JVVR4slabJiWW/Zy81ac0uRAlzg0/O6KUIOyIHzj5?=
- =?us-ascii?Q?pinwLrP6zbIVFLxzrb0P6i+R3W5kSjCUNYXo9JTfV2LHr+qNvZ27haQE96u5?=
- =?us-ascii?Q?8oYk2ZqOG2XlocW9KzNtsLmBvRtIBpqv/WAk4fiJdOlSSm6AsfGyGqqxYQwY?=
- =?us-ascii?Q?3M50lg8w2mN2inr9pNiNX7rXsQ7rMKDo7qrXuJU/dstg9iQ5P79yL2E+S1JF?=
- =?us-ascii?Q?DPFg5t56BsF6UdBeydjgLTp/65Ts9WWq69/i5St1iTVvl7O35phLdiY/JpLN?=
- =?us-ascii?Q?wjUIiVfaC0DiqTT3U9BOSPqUv0mwgmLJuoo5GA6cGf562iVFWRi/px8vmon+?=
- =?us-ascii?Q?q1CdHRY69Y+ARuKYxtu8vFbchyTt3UieyRrsBF1GyyDNhk0xDRd1mTCHnRbB?=
- =?us-ascii?Q?EPCF9ySBYzyKlMxqeO8MLA998BV/6DC9AOeWN3AcOTjdczeCmGR8WhznTXeD?=
- =?us-ascii?Q?LJxWf0GBqUCUPl8xtBOxOCGZwtXye023cdQHj8UT6CoORxA085Bx5GTvYUp8?=
- =?us-ascii?Q?UJAEod7nEp0V3Aw7bJ7IcwLfxIWUHcvU7IeOc0L7RJg5LhtZrAF19smJdDFq?=
- =?us-ascii?Q?/qRGKBmBqCd9UjGzkPiNPNd3pUSqoEYC7wBhssV/?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3b9afaf8-c411-438d-a177-08dad0f3e6b4
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2022 03:51:59.4605 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pLJLnHQf3zuVVGX6ROrpACMmj96MjnGVWgtiLgN0mHDBwo25YnJBpGeJIWXrETpdHmNTR5Il4trhzGlQWF8mAA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR06MB4044
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  It's better to use bugzilla.kernel.org for reporting bugs.
- Signed-off-by: Yangtao Li <frank.li@vivo.com> ---
- Documentation/filesystems/f2fs.rst
- | 6 +++++- 1 file changed, 5 insertions(+), 1 deletion(-) 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: This patch series introduce a runtime hot/cold data
+ separation method for f2fs,
+ in order to improve the accuracy for data temperature classification, 
+ reduce the garbage collection overhead after long- [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.117.107 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.117.107 listed in wl.mailspike.net]
+ no trust [209.85.210.174 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [qxy65535[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [qxy65535[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.174 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1ozVBj-00G9Nt-2E
-Subject: [f2fs-dev] [PATCH] f2fs: Add f2fs bug tracker link
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1oza5h-0004Ly-Ei
+Subject: [f2fs-dev] [PATCH 0/5] Support enhanced hot/cold data separation
+ for f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -162,43 +129,86 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yangtao Li <frank.li@vivo.com>
-Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: xiongping1 <xiongping1@xiaomi.com>, qixiaoyu1 <qixiaoyu1@xiaomi.com>,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-It's better to use bugzilla.kernel.org for reporting bugs.
+This patch series introduce a runtime hot/cold data separation
+method for f2fs, in order to improve the accuracy for data
+temperature classification, reduce the garbage collection overhead
+after long-term data updates.
 
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
----
- Documentation/filesystems/f2fs.rst | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+Enhanced hot/cold data separation can record data block update
+frequency as "age" of the extent per inode, and take use of the age
+info to indicate better temperature type for data block allocation:
+ - It record total data blocks allocated since mount;
+ - When file extent has been updated, it calculate the count of data
+blocks allocated since last update as the age of the extent;
+ - Before the data block allocated, it search for the age info and
+choose the suitable segment for allocation.
 
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index 6e67c5e6c7c3..67e1f3e86f32 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -25,10 +25,14 @@ a consistency checking tool (fsck.f2fs), and a debugging tool (dump.f2fs).
- 
- - git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git
- 
--For reporting bugs and sending patches, please use the following mailing list:
-+For sending patches, please use the following mailing list:
- 
- - linux-f2fs-devel@lists.sourceforge.net
- 
-+For reporting bugs, please use the following f2fs bug tracker link:
-+
-+- https://bugzilla.kernel.org/enter_bug.cgi?product=File%20System&component=f2fs
-+
- Background and Design issues
- ============================
- 
+Patch 1 records total data blocks allocated since mount.
+
+Patch 2 implements cache to manager block update frequency per inode.
+
+Patch 3 adds age_extent_cache mount option to enable this feature only
+when age_extent_cache mount option is on.
+
+Patch 4 updates block age info during out of place update.
+
+Patch 5 implements data block seperation with block update frequency.
+
+Test and result:
+ - Prepare: create about 30000 files
+  * 3% for cold files (with cold file extension like .apk, from 3M to 10M)
+  * 50% for warm files (with random file extension like .FcDxq, from 1K
+to 4M)
+  * 47% for hot files (with hot file extension like .db, from 1K to 256K)
+ - create(5%)/random update(90%)/delete(5%) the files
+  * total write amount is about 70G
+  * fsync will be called for .db files, and buffered write will be used
+for other files
+
+The storage of test device is large enough(128G) so that it will not
+switch to SSR mode during the test.
+
+Benefit: dirty segment count increment reduce about 14%
+ - before: Dirty +21110
+ - after:  Dirty +18286
+
+qixiaoyu1 (2):
+  f2fs: update block age info during out of place update
+  f2fs: implement data block seperation with block update frequency
+
+xiongping1 (3):
+  f2fs: record total data blocks allocated since mount
+  f2fs: implement cache to manager block update frequency per inode
+  f2fs: add age_extent_cache mount option
+
+ Documentation/ABI/testing/sysfs-fs-f2fs |  14 +
+ Documentation/filesystems/f2fs.rst      |   4 +
+ fs/f2fs/Kconfig                         |   7 +
+ fs/f2fs/Makefile                        |   1 +
+ fs/f2fs/block_age.c                     | 733 ++++++++++++++++++++++++
+ fs/f2fs/debug.c                         |  20 +
+ fs/f2fs/f2fs.h                          |  83 +++
+ fs/f2fs/file.c                          |  10 +
+ fs/f2fs/inode.c                         |   8 +
+ fs/f2fs/namei.c                         |   4 +
+ fs/f2fs/node.c                          |   7 +-
+ fs/f2fs/node.h                          |   3 +
+ fs/f2fs/segment.c                       |  23 +
+ fs/f2fs/shrinker.c                      |   3 +
+ fs/f2fs/super.c                         |  51 ++
+ fs/f2fs/sysfs.c                         |  28 +
+ include/trace/events/f2fs.h             | 239 ++++++++
+ 17 files changed, 1237 insertions(+), 1 deletion(-)
+ create mode 100644 fs/f2fs/block_age.c
+
 -- 
-2.25.1
+2.36.1
 
 
 
