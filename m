@@ -2,99 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A72C63A597
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Nov 2022 11:02:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A7D963B20F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Nov 2022 20:18:36 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ozayO-0000f8-GU;
-	Mon, 28 Nov 2022 10:02:48 +0000
+	id 1ozjeA-0002zy-Gr;
+	Mon, 28 Nov 2022 19:18:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3O4eEYwkbAH4u01mcnngtcrrkf.iqqingwugteqpvgpv.eqo@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1ozayK-0000f1-Hw for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Nov 2022 10:02:44 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <jaegeuk@kernel.org>) id 1ozjeA-0002zs-0j
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Nov 2022 19:18:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QTTQ1zd8bG+E/AXaRhKnQmn9Auf5fnjfJF5NgvxTVAY=; b=HCIWORzXOvS/DUwTtW/kruVDLO
- 9T6gg9qdctOJ0luiZOldzKMRZfMny/Vn3k+r9m9ZK6wCRinnMqidHz1yEvxR1pFgkinTDQ/OtZlo2
- woW2CoesX25eQ3tuqTKR1ra4FeTZJ7RMXVaLHhaKl9ezeHCbZf/Ndd3phzAyZ0IyVacc=;
+ bh=0vXo1NDYdcsMgDmWJ9M80jThf8cOB9C8YE7Xl0oQtAc=; b=EHfwXGYN8BUJ2tantyCRl+KXp7
+ GWYV/CkUYYw6VqtKdDGQ0Ls+G3+BdVMHCxgA0dwV3KVP7kjxI2AdACiU1OwpJusyX7P89iBX8UAKC
+ QSDJUplfJdpgo3Fj0WQL5vYxny67QPSAxkSk9KvqZOQoIiXiBlPKlC1gGTY3mE3I+cXE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=QTTQ1zd8bG+E/AXaRhKnQmn9Auf5fnjfJF5NgvxTVAY=; b=C
- qr8c7zf/svkKzIG5seBDee+G3K/HIjiJcEkK5fENAH2MRXl+pEtdKjref38Z1IBlAu2Xh9tMDRFQv
- vlkFNmyq0/b8PviUEac9DjxCwshf3Wg3L+UiAjphXVBZm530a4xdvMv/vNgX8j6XUODNaY3bQVU80
- G6i9KbwWCvLj9ucc=;
-Received: from mail-il1-f200.google.com ([209.85.166.200])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ozayG-00016h-TF for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Nov 2022 10:02:44 +0000
-Received: by mail-il1-f200.google.com with SMTP id
- o10-20020a056e02102a00b003006328df7bso8502386ilj.17
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 28 Nov 2022 02:02:40 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QTTQ1zd8bG+E/AXaRhKnQmn9Auf5fnjfJF5NgvxTVAY=;
- b=AZ9HgDHmh3L76wIejFu61/2iSYV0oRAICYvq6daeRBPoZ0wmhAQkPvUzz8qsOiP+YR
- jCW2TfCLsDW52R1hrf57/otwhyXwveP2VPRmNuCAZxlvWGSyOEWiH/Joq6teOzIeiHAX
- l6siGBqCszaLrPBfx0nghmS9jguCpIvVzFptHeOW3Mf+2PwqWQTFD3nJ+EyYiA8A+0XP
- T44NEsTVlrXVifEUp/FH1DFDuU8Q0x5S1N2zJ6VoTQLCY2pwMwvnwM/aEZTo6/RMVCCS
- upCK0X9r1dcWp9AlcXvIBc2pYduzZss7hvFHLtDLCsYkevrgytkQfgBXFELtH85+2OMQ
- oBLg==
-X-Gm-Message-State: ANoB5plaCmWz9kAMjffewQIJjN49HGcnA5us83/I7QZuq7A1MntXT5xE
- nPoohL2d211vZiq1BK49IiM5xrhYf9rj/tyur40g3kF3XBCj
-X-Google-Smtp-Source: AA0mqf5vzpTCEW4SWwL7JbbqzZUh+6X3T+qHItM2ye9YLuaNSnR4NxErIC3hT8ahvNZRDvMRzX8yScSY61h4tiZKZw6EadsCIf29
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=0vXo1NDYdcsMgDmWJ9M80jThf8cOB9C8YE7Xl0oQtAc=; b=AiN/84E+cvVbThOUB1XxijrQ+S
+ K+cm5I7tsDBLgaBrg3TX/HQn8hNwf2XYh9CphSWIb2HHLsaRAnsxQiGtZJQtkAPZto6io+wRtGmBp
+ X5i90zfStjV5C/QQCx0tYqAjvPDNXoLzRrr5krk51HEwui0RGD2G+ZQ4aS1CzkdiLniE=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1ozje8-00H90a-VZ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Nov 2022 19:18:29 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B2160613FB;
+ Mon, 28 Nov 2022 19:18:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A1FAC433C1;
+ Mon, 28 Nov 2022 19:18:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1669663101;
+ bh=cSNJcLEebvWXEYQhjrIKZD9HkMS/dzw+itu/l77AXjg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=qEcWuUNdDza2ZBlsLEWZldNX193IZe2aFS0DmXQ2RhlCwfQdEcPqa+qpluTb5boBo
+ xTxkpe2TDdiAo46/ETob0JZjebaOTMTQC8UnmncaPdCOH7A4C5SHcn/L1nUE4yGMDX
+ pOhAz7qrNojOmh2lZWQFOf8n7ZlywTcNaoo5Z/9w2yZTvF6wPsjQjH2wbbgWM3PpBB
+ OJ0xgPe7HYj7zT6S/y/q6ONYqNbcI81nQg5jzNvCRa57OZzd2H4BMLYIZyPpZshIal
+ saSImZy/xuWnG1d2Iy5HIzhQpQIz7unmTBJjKnEqBSiImXoIxB6UlId0vLvja7Xu0C
+ PoCjvFfyb9v0g==
+Date: Mon, 28 Nov 2022 11:18:19 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <Y4UJewp0sbHZ2z9Q@google.com>
+References: <20221125190642.12787-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:216a:b0:303:129a:8157 with SMTP id
- s10-20020a056e02216a00b00303129a8157mr1513770ilv.38.1669629755302; Mon, 28
- Nov 2022 02:02:35 -0800 (PST)
-Date: Mon, 28 Nov 2022 02:02:35 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <00000000000078aba005ee84f8e2@google.com>
-From: syzbot <syzbot+fbc90a26c932581cfe6b@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com, terrelln@fb.com
-X-Spam-Score: 0.6 (/)
+Content-Disposition: inline
+In-Reply-To: <20221125190642.12787-1-ebiggers@kernel.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 6d464646530f
- Merge branch 'for-next/core' into for-kernelci git tree:
- git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
- for-kernelci console output: https://syzkaller.appspot. [...] 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  On 11/25,
+ Eric Biggers wrote: > From: Eric Biggers <ebiggers@google.com>
+ > > As a step towards freeing the PG_error flag for other uses, change ext4
+ > and f2fs to stop using PG_error to track verity e [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.200 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.200 listed in wl.mailspike.net]
-X-Headers-End: 1ozayG-00016h-TF
-Subject: [f2fs-dev] [syzbot] possible deadlock in f2fs_handle_error
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ozje8-00H90a-VZ
+Subject: Re: [f2fs-dev] [PATCH v4] fsverity: stop using PG_error to track
+ error status
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,277 +104,352 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+On 11/25, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
+> 
+> As a step towards freeing the PG_error flag for other uses, change ext4
+> and f2fs to stop using PG_error to track verity errors.  Instead, if a
+> verity error occurs, just mark the whole bio as failed.  The coarser
+> granularity isn't really a problem since it isn't any worse than what
+> the block layer provides, and errors from a multi-page readahead aren't
+> reported to applications unless a single-page read fails too.
+> 
+> f2fs supports compression, which makes the f2fs changes a bit more
+> complicated than desired, but the basic premise still works.
+> 
+> Note: there are still a few uses of PageError in f2fs, but they are on
+> the write path, so they are unrelated and this patch doesn't touch them.
+> 
+> Reviewed-by: Chao Yu <chao@kernel.org>
 
-syzbot found the following issue on:
+Acked-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-HEAD commit:    6d464646530f Merge branch 'for-next/core' into for-kernelci
-git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
-console output: https://syzkaller.appspot.com/x/log.txt?x=177fa381880000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=23eec5c79c22aaf8
-dashboard link: https://syzkaller.appspot.com/bug?extid=fbc90a26c932581cfe6b
-compiler:       Debian clang version 13.0.1-++20220126092033+75e33f71c2da-1~exp1~20220126212112.63, GNU ld (GNU Binutils for Debian) 2.35.2
-userspace arch: arm64
+Thanks,
 
-Unfortunately, I don't have any reproducer for this issue yet.
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/f22d29413625/disk-6d464646.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/389f0a5f1a4a/vmlinux-6d464646.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/48ddb02d82da/Image-6d464646.gz.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+fbc90a26c932581cfe6b@syzkaller.appspotmail.com
-
-loop3: detected capacity change from 0 to 262144
-F2FS-fs (loop3): Mismatch valid blocks 0 vs. 1
-======================================================
-WARNING: possible circular locking dependency detected
-6.1.0-rc6-syzkaller-32662-g6d464646530f #0 Not tainted
-------------------------------------------------------
-syz-executor.3/2078 is trying to acquire lock:
-ffff00010e914088 (&sbi->sb_lock){++++}-{3:3}, at: f2fs_down_write fs/f2fs/f2fs.h:2205 [inline]
-ffff00010e914088 (&sbi->sb_lock){++++}-{3:3}, at: f2fs_handle_error+0x9c/0x17c fs/f2fs/super.c:3898
-
-but task is already holding lock:
-ffff0000fd2733b8 (&array[i].journal_rwsem){++++}-{3:3}, at: build_sit_entries+0x568/0x9b8 fs/f2fs/segment.c:4412
-
-which lock already depends on the new lock.
-
-
-the existing dependency chain (in reverse order) is:
-
--> #6 (&array[i].journal_rwsem){++++}-{3:3}:
-       down_read+0x5c/0x78 kernel/locking/rwsem.c:1509
-       scan_curseg_cache fs/f2fs/node.c:2401 [inline]
-       __f2fs_build_free_nids fs/f2fs/node.c:2513 [inline]
-       f2fs_build_free_nids+0x798/0x8f4 fs/f2fs/node.c:2528
-       f2fs_build_node_manager+0x624/0x64c fs/f2fs/node.c:3313
-       f2fs_fill_super+0x1470/0x1e90 fs/f2fs/super.c:4306
-       mount_bdev+0x1b8/0x210 fs/super.c:1401
-       f2fs_mount+0x44/0x58 fs/f2fs/super.c:4580
-       legacy_get_tree+0x30/0x74 fs/fs_context.c:610
-       vfs_get_tree+0x40/0x140 fs/super.c:1531
-       do_new_mount+0x1dc/0x4e4 fs/namespace.c:3040
-       path_mount+0x358/0x890 fs/namespace.c:3370
-       do_mount fs/namespace.c:3383 [inline]
-       __do_sys_mount fs/namespace.c:3591 [inline]
-       __se_sys_mount fs/namespace.c:3568 [inline]
-       __arm64_sys_mount+0x2c4/0x3c4 fs/namespace.c:3568
-       __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
-       invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
-       el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
-       do_el0_svc+0x48/0x164 arch/arm64/kernel/syscall.c:206
-       el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:637
-       el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:655
-       el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:584
-
--> #5 (&nm_i->nat_tree_lock){++++}-{3:3}:
-       down_read+0x5c/0x78 kernel/locking/rwsem.c:1509
-       f2fs_down_read fs/f2fs/f2fs.h:2180 [inline]
-       f2fs_get_node_info+0x74/0x458 fs/f2fs/node.c:560
-       f2fs_do_write_data_page+0x638/0x1094 fs/f2fs/data.c:2710
-       f2fs_write_single_data_page+0x750/0xb24 fs/f2fs/data.c:2845
-       f2fs_write_cache_pages+0x498/0xdd0 fs/f2fs/data.c:3097
-       __f2fs_write_data_pages+0x3f0/0x47c fs/f2fs/data.c:3247
-       f2fs_write_data_pages+0x44/0x54 fs/f2fs/data.c:3274
-       do_writepages+0x144/0x27c mm/page-writeback.c:2469
-       __writeback_single_inode+0x64/0x2e4 fs/fs-writeback.c:1587
-       writeback_sb_inodes+0x3e4/0x85c fs/fs-writeback.c:1870
-       wb_writeback+0x198/0x328 fs/fs-writeback.c:2044
-       wb_do_writeback+0xc8/0x384 fs/fs-writeback.c:2187
-       wb_workfn+0x70/0x15c fs/fs-writeback.c:2227
-       process_one_work+0x2d8/0x504 kernel/workqueue.c:2289
-       worker_thread+0x340/0x610 kernel/workqueue.c:2436
-       kthread+0x12c/0x158 kernel/kthread.c:376
-       ret_from_fork+0x10/0x20 arch/arm64/kernel/entry.S:863
-
--> #4 (&sbi->cp_rwsem){++++}-{3:3}:
-       down_read+0x5c/0x78 kernel/locking/rwsem.c:1509
-       f2fs_down_read fs/f2fs/f2fs.h:2180 [inline]
-       f2fs_lock_op fs/f2fs/f2fs.h:2223 [inline]
-       f2fs_do_truncate_blocks+0x98/0x384 fs/f2fs/file.c:687
-       f2fs_truncate_blocks+0x9c/0x1d8 fs/f2fs/file.c:750
-       f2fs_truncate+0x1b8/0x2a8 fs/f2fs/file.c:802
-       f2fs_setattr+0x5c8/0x788 fs/f2fs/file.c:1009
-       notify_change+0x758/0x7f0 fs/attr.c:420
-       do_truncate+0x108/0x150 fs/open.c:65
-       handle_truncate+0xf4/0x154 fs/namei.c:3216
-       do_open fs/namei.c:3561 [inline]
-       path_openat+0xee0/0x11c4 fs/namei.c:3713
-       do_filp_open+0xdc/0x1b8 fs/namei.c:3740
-       do_sys_openat2+0xb8/0x22c fs/open.c:1310
-       do_sys_open fs/open.c:1326 [inline]
-       __do_sys_openat fs/open.c:1342 [inline]
-       __se_sys_openat fs/open.c:1337 [inline]
-       __arm64_sys_openat+0xb0/0xe0 fs/open.c:1337
-       __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
-       invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
-       el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
-       do_el0_svc+0x48/0x164 arch/arm64/kernel/syscall.c:206
-       el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:637
-       el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:655
-       el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:584
-
--> #3 (mapping.invalidate_lock#4){++++}-{3:3}:
-       down_read+0x5c/0x78 kernel/locking/rwsem.c:1509
-       filemap_invalidate_lock_shared include/linux/fs.h:811 [inline]
-       f2fs_vm_page_mkwrite+0x18c/0x9a4 fs/f2fs/file.c:104
-       do_page_mkwrite+0x74/0x288 mm/memory.c:2978
-       wp_page_shared+0x8c/0x364 mm/memory.c:3324
-       do_wp_page+0x794/0xd10 mm/memory.c:3474
-       handle_pte_fault mm/memory.c:4973 [inline]
-       __handle_mm_fault mm/memory.c:5097 [inline]
-       handle_mm_fault+0x880/0xa48 mm/memory.c:5218
-       __do_page_fault arch/arm64/mm/fault.c:512 [inline]
-       do_page_fault+0x428/0x79c arch/arm64/mm/fault.c:612
-       do_mem_abort+0x54/0x130 arch/arm64/mm/fault.c:831
-       el0_da+0x70/0x16c arch/arm64/kernel/entry-common.c:515
-       el0t_64_sync_handler+0xcc/0xf0 arch/arm64/kernel/entry-common.c:658
-       el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:584
-
--> #2 (sb_pagefaults#2){.+.+}-{0:0}:
-       percpu_down_read include/linux/percpu-rwsem.h:51 [inline]
-       __sb_start_write+0x84/0x1f4 include/linux/fs.h:1826
-       sb_start_pagefault include/linux/fs.h:1930 [inline]
-       f2fs_vm_page_mkwrite+0x160/0x9a4 fs/f2fs/file.c:99
-       do_page_mkwrite+0x74/0x288 mm/memory.c:2978
-       wp_page_shared+0x8c/0x364 mm/memory.c:3324
-       do_wp_page+0x794/0xd10 mm/memory.c:3474
-       handle_pte_fault mm/memory.c:4973 [inline]
-       __handle_mm_fault mm/memory.c:5097 [inline]
-       handle_mm_fault+0x880/0xa48 mm/memory.c:5218
-       __do_page_fault arch/arm64/mm/fault.c:512 [inline]
-       do_page_fault+0x428/0x79c arch/arm64/mm/fault.c:612
-       do_mem_abort+0x54/0x130 arch/arm64/mm/fault.c:831
-       el0_da+0x70/0x16c arch/arm64/kernel/entry-common.c:515
-       el0t_64_sync_handler+0xcc/0xf0 arch/arm64/kernel/entry-common.c:658
-       el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:584
-
--> #1 (&mm->mmap_lock){++++}-{3:3}:
-       __might_fault+0x7c/0xb4 mm/memory.c:5646
-       _copy_to_user include/linux/uaccess.h:143 [inline]
-       copy_to_user include/linux/uaccess.h:169 [inline]
-       f2fs_ioc_get_encryption_pwsalt fs/f2fs/file.c:2349 [inline]
-       __f2fs_ioctl+0x3204/0x3318 fs/f2fs/file.c:4151
-       f2fs_ioctl+0x74/0xbc fs/f2fs/file.c:4224
-       vfs_ioctl fs/ioctl.c:51 [inline]
-       __do_sys_ioctl fs/ioctl.c:870 [inline]
-       __se_sys_ioctl fs/ioctl.c:856 [inline]
-       __arm64_sys_ioctl+0xd0/0x140 fs/ioctl.c:856
-       __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
-       invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
-       el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
-       do_el0_svc+0x48/0x164 arch/arm64/kernel/syscall.c:206
-       el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:637
-       el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:655
-       el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:584
-
--> #0 (&sbi->sb_lock){++++}-{3:3}:
-       check_prev_add kernel/locking/lockdep.c:3097 [inline]
-       check_prevs_add kernel/locking/lockdep.c:3216 [inline]
-       validate_chain kernel/locking/lockdep.c:3831 [inline]
-       __lock_acquire+0x1530/0x3084 kernel/locking/lockdep.c:5055
-       lock_acquire+0x100/0x1f8 kernel/locking/lockdep.c:5668
-       down_write+0x5c/0x88 kernel/locking/rwsem.c:1562
-       f2fs_down_write fs/f2fs/f2fs.h:2205 [inline]
-       f2fs_handle_error+0x9c/0x17c fs/f2fs/super.c:3898
-       check_block_count+0x210/0x268
-       build_sit_entries+0x638/0x9b8 fs/f2fs/segment.c:4432
-       f2fs_build_segment_manager+0x354/0x408 fs/f2fs/segment.c:5123
-       f2fs_fill_super+0x1438/0x1e90 fs/f2fs/super.c:4300
-       mount_bdev+0x1b8/0x210 fs/super.c:1401
-       f2fs_mount+0x44/0x58 fs/f2fs/super.c:4580
-       legacy_get_tree+0x30/0x74 fs/fs_context.c:610
-       vfs_get_tree+0x40/0x140 fs/super.c:1531
-       do_new_mount+0x1dc/0x4e4 fs/namespace.c:3040
-       path_mount+0x358/0x890 fs/namespace.c:3370
-       do_mount fs/namespace.c:3383 [inline]
-       __do_sys_mount fs/namespace.c:3591 [inline]
-       __se_sys_mount fs/namespace.c:3568 [inline]
-       __arm64_sys_mount+0x2c4/0x3c4 fs/namespace.c:3568
-       __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
-       invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
-       el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
-       do_el0_svc+0x48/0x164 arch/arm64/kernel/syscall.c:206
-       el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:637
-       el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:655
-       el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:584
-
-other info that might help us debug this:
-
-Chain exists of:
-  &sbi->sb_lock --> &nm_i->nat_tree_lock --> &array[i].journal_rwsem
-
- Possible unsafe locking scenario:
-
-       CPU0                    CPU1
-       ----                    ----
-  lock(&array[i].journal_rwsem);
-                               lock(&nm_i->nat_tree_lock);
-                               lock(&array[i].journal_rwsem);
-  lock(&sbi->sb_lock);
-
- *** DEADLOCK ***
-
-2 locks held by syz-executor.3/2078:
- #0: ffff000144b030e0 (&type->s_umount_key#53/1){+.+.}-{3:3}, at: alloc_super+0xf8/0x430 fs/super.c:228
- #1: ffff0000fd2733b8 (&array[i].journal_rwsem){++++}-{3:3}, at: build_sit_entries+0x568/0x9b8 fs/f2fs/segment.c:4412
-
-stack backtrace:
-CPU: 0 PID: 2078 Comm: syz-executor.3 Not tainted 6.1.0-rc6-syzkaller-32662-g6d464646530f #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/30/2022
-Call trace:
- dump_backtrace+0x1c4/0x1f0 arch/arm64/kernel/stacktrace.c:156
- show_stack+0x2c/0x54 arch/arm64/kernel/stacktrace.c:163
- __dump_stack lib/dump_stack.c:88 [inline]
- dump_stack_lvl+0x104/0x16c lib/dump_stack.c:106
- dump_stack+0x1c/0x58 lib/dump_stack.c:113
- print_circular_bug+0x2c4/0x2c8 kernel/locking/lockdep.c:2055
- check_noncircular+0x14c/0x154 kernel/locking/lockdep.c:2177
- check_prev_add kernel/locking/lockdep.c:3097 [inline]
- check_prevs_add kernel/locking/lockdep.c:3216 [inline]
- validate_chain kernel/locking/lockdep.c:3831 [inline]
- __lock_acquire+0x1530/0x3084 kernel/locking/lockdep.c:5055
- lock_acquire+0x100/0x1f8 kernel/locking/lockdep.c:5668
- down_write+0x5c/0x88 kernel/locking/rwsem.c:1562
- f2fs_down_write fs/f2fs/f2fs.h:2205 [inline]
- f2fs_handle_error+0x9c/0x17c fs/f2fs/super.c:3898
- check_block_count+0x210/0x268
- build_sit_entries+0x638/0x9b8 fs/f2fs/segment.c:4432
- f2fs_build_segment_manager+0x354/0x408 fs/f2fs/segment.c:5123
- f2fs_fill_super+0x1438/0x1e90 fs/f2fs/super.c:4300
- mount_bdev+0x1b8/0x210 fs/super.c:1401
- f2fs_mount+0x44/0x58 fs/f2fs/super.c:4580
- legacy_get_tree+0x30/0x74 fs/fs_context.c:610
- vfs_get_tree+0x40/0x140 fs/super.c:1531
- do_new_mount+0x1dc/0x4e4 fs/namespace.c:3040
- path_mount+0x358/0x890 fs/namespace.c:3370
- do_mount fs/namespace.c:3383 [inline]
- __do_sys_mount fs/namespace.c:3591 [inline]
- __se_sys_mount fs/namespace.c:3568 [inline]
- __arm64_sys_mount+0x2c4/0x3c4 fs/namespace.c:3568
- __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
- invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
- el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
- do_el0_svc+0x48/0x164 arch/arm64/kernel/syscall.c:206
- el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:637
- el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:655
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:584
-F2FS-fs (loop3): Failed to initialize F2FS segment manager (-117)
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+> 
+> v4: Added a comment for decompression_attempted, added a paragraph to
+>     the commit message, and added Chao's Reviewed-by.
+> 
+> v3: made a small simplification to the f2fs changes.  Also dropped the
+>     fscrypt patch since it is upstream now.
+> 
+>  fs/ext4/readpage.c |  8 ++----
+>  fs/f2fs/compress.c | 64 ++++++++++++++++++++++------------------------
+>  fs/f2fs/data.c     | 53 +++++++++++++++++++++++---------------
+>  fs/verity/verify.c | 12 ++++-----
+>  4 files changed, 72 insertions(+), 65 deletions(-)
+> 
+> diff --git a/fs/ext4/readpage.c b/fs/ext4/readpage.c
+> index 3d21eae267fca..e604ea4e102b7 100644
+> --- a/fs/ext4/readpage.c
+> +++ b/fs/ext4/readpage.c
+> @@ -75,14 +75,10 @@ static void __read_end_io(struct bio *bio)
+>  	bio_for_each_segment_all(bv, bio, iter_all) {
+>  		page = bv->bv_page;
+>  
+> -		/* PG_error was set if verity failed. */
+> -		if (bio->bi_status || PageError(page)) {
+> +		if (bio->bi_status)
+>  			ClearPageUptodate(page);
+> -			/* will re-read again later */
+> -			ClearPageError(page);
+> -		} else {
+> +		else
+>  			SetPageUptodate(page);
+> -		}
+>  		unlock_page(page);
+>  	}
+>  	if (bio->bi_private)
+> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+> index d315c2de136f2..2b7a5cc4ed662 100644
+> --- a/fs/f2fs/compress.c
+> +++ b/fs/f2fs/compress.c
+> @@ -1711,50 +1711,27 @@ static void f2fs_put_dic(struct decompress_io_ctx *dic, bool in_task)
+>  	}
+>  }
+>  
+> -/*
+> - * Update and unlock the cluster's pagecache pages, and release the reference to
+> - * the decompress_io_ctx that was being held for I/O completion.
+> - */
+> -static void __f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed,
+> -				bool in_task)
+> +static void f2fs_verify_cluster(struct work_struct *work)
+>  {
+> +	struct decompress_io_ctx *dic =
+> +		container_of(work, struct decompress_io_ctx, verity_work);
+>  	int i;
+>  
+> +	/* Verify, update, and unlock the decompressed pages. */
+>  	for (i = 0; i < dic->cluster_size; i++) {
+>  		struct page *rpage = dic->rpages[i];
+>  
+>  		if (!rpage)
+>  			continue;
+>  
+> -		/* PG_error was set if verity failed. */
+> -		if (failed || PageError(rpage)) {
+> -			ClearPageUptodate(rpage);
+> -			/* will re-read again later */
+> -			ClearPageError(rpage);
+> -		} else {
+> +		if (fsverity_verify_page(rpage))
+>  			SetPageUptodate(rpage);
+> -		}
+> +		else
+> +			ClearPageUptodate(rpage);
+>  		unlock_page(rpage);
+>  	}
+>  
+> -	f2fs_put_dic(dic, in_task);
+> -}
+> -
+> -static void f2fs_verify_cluster(struct work_struct *work)
+> -{
+> -	struct decompress_io_ctx *dic =
+> -		container_of(work, struct decompress_io_ctx, verity_work);
+> -	int i;
+> -
+> -	/* Verify the cluster's decompressed pages with fs-verity. */
+> -	for (i = 0; i < dic->cluster_size; i++) {
+> -		struct page *rpage = dic->rpages[i];
+> -
+> -		if (rpage && !fsverity_verify_page(rpage))
+> -			SetPageError(rpage);
+> -	}
+> -
+> -	__f2fs_decompress_end_io(dic, false, true);
+> +	f2fs_put_dic(dic, true);
+>  }
+>  
+>  /*
+> @@ -1764,6 +1741,8 @@ static void f2fs_verify_cluster(struct work_struct *work)
+>  void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed,
+>  				bool in_task)
+>  {
+> +	int i;
+> +
+>  	if (!failed && dic->need_verity) {
+>  		/*
+>  		 * Note that to avoid deadlocks, the verity work can't be done
+> @@ -1773,9 +1752,28 @@ void f2fs_decompress_end_io(struct decompress_io_ctx *dic, bool failed,
+>  		 */
+>  		INIT_WORK(&dic->verity_work, f2fs_verify_cluster);
+>  		fsverity_enqueue_verify_work(&dic->verity_work);
+> -	} else {
+> -		__f2fs_decompress_end_io(dic, failed, in_task);
+> +		return;
+> +	}
+> +
+> +	/* Update and unlock the cluster's pagecache pages. */
+> +	for (i = 0; i < dic->cluster_size; i++) {
+> +		struct page *rpage = dic->rpages[i];
+> +
+> +		if (!rpage)
+> +			continue;
+> +
+> +		if (failed)
+> +			ClearPageUptodate(rpage);
+> +		else
+> +			SetPageUptodate(rpage);
+> +		unlock_page(rpage);
+>  	}
+> +
+> +	/*
+> +	 * Release the reference to the decompress_io_ctx that was being held
+> +	 * for I/O completion.
+> +	 */
+> +	f2fs_put_dic(dic, in_task);
+>  }
+>  
+>  /*
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index a71e818cd67b4..1ae8da259d6c5 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -116,43 +116,56 @@ struct bio_post_read_ctx {
+>  	struct f2fs_sb_info *sbi;
+>  	struct work_struct work;
+>  	unsigned int enabled_steps;
+> +	/*
+> +	 * decompression_attempted keeps track of whether
+> +	 * f2fs_end_read_compressed_page() has been called on the pages in the
+> +	 * bio that belong to a compressed cluster yet.
+> +	 */
+> +	bool decompression_attempted;
+>  	block_t fs_blkaddr;
+>  };
+>  
+> +/*
+> + * Update and unlock a bio's pages, and free the bio.
+> + *
+> + * This marks pages up-to-date only if there was no error in the bio (I/O error,
+> + * decryption error, or verity error), as indicated by bio->bi_status.
+> + *
+> + * "Compressed pages" (pagecache pages backed by a compressed cluster on-disk)
+> + * aren't marked up-to-date here, as decompression is done on a per-compression-
+> + * cluster basis rather than a per-bio basis.  Instead, we only must do two
+> + * things for each compressed page here: call f2fs_end_read_compressed_page()
+> + * with failed=true if an error occurred before it would have normally gotten
+> + * called (i.e., I/O error or decryption error, but *not* verity error), and
+> + * release the bio's reference to the decompress_io_ctx of the page's cluster.
+> + */
+>  static void f2fs_finish_read_bio(struct bio *bio, bool in_task)
+>  {
+>  	struct bio_vec *bv;
+>  	struct bvec_iter_all iter_all;
+> +	struct bio_post_read_ctx *ctx = bio->bi_private;
+>  
+> -	/*
+> -	 * Update and unlock the bio's pagecache pages, and put the
+> -	 * decompression context for any compressed pages.
+> -	 */
+>  	bio_for_each_segment_all(bv, bio, iter_all) {
+>  		struct page *page = bv->bv_page;
+>  
+>  		if (f2fs_is_compressed_page(page)) {
+> -			if (bio->bi_status)
+> +			if (!ctx->decompression_attempted)
+>  				f2fs_end_read_compressed_page(page, true, 0,
+>  							in_task);
+>  			f2fs_put_page_dic(page, in_task);
+>  			continue;
+>  		}
+>  
+> -		/* PG_error was set if verity failed. */
+> -		if (bio->bi_status || PageError(page)) {
+> +		if (bio->bi_status)
+>  			ClearPageUptodate(page);
+> -			/* will re-read again later */
+> -			ClearPageError(page);
+> -		} else {
+> +		else
+>  			SetPageUptodate(page);
+> -		}
+>  		dec_page_count(F2FS_P_SB(page), __read_io_type(page));
+>  		unlock_page(page);
+>  	}
+>  
+> -	if (bio->bi_private)
+> -		mempool_free(bio->bi_private, bio_post_read_ctx_pool);
+> +	if (ctx)
+> +		mempool_free(ctx, bio_post_read_ctx_pool);
+>  	bio_put(bio);
+>  }
+>  
+> @@ -185,8 +198,10 @@ static void f2fs_verify_bio(struct work_struct *work)
+>  			struct page *page = bv->bv_page;
+>  
+>  			if (!f2fs_is_compressed_page(page) &&
+> -			    !fsverity_verify_page(page))
+> -				SetPageError(page);
+> +			    !fsverity_verify_page(page)) {
+> +				bio->bi_status = BLK_STS_IOERR;
+> +				break;
+> +			}
+>  		}
+>  	} else {
+>  		fsverity_verify_bio(bio);
+> @@ -245,6 +260,8 @@ static void f2fs_handle_step_decompress(struct bio_post_read_ctx *ctx,
+>  		blkaddr++;
+>  	}
+>  
+> +	ctx->decompression_attempted = true;
+> +
+>  	/*
+>  	 * Optimization: if all the bio's pages are compressed, then scheduling
+>  	 * the per-bio verity work is unnecessary, as verity will be fully
+> @@ -1062,6 +1079,7 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
+>  		ctx->sbi = sbi;
+>  		ctx->enabled_steps = post_read_steps;
+>  		ctx->fs_blkaddr = blkaddr;
+> +		ctx->decompression_attempted = false;
+>  		bio->bi_private = ctx;
+>  	}
+>  	iostat_alloc_and_bind_ctx(sbi, bio, ctx);
+> @@ -1089,7 +1107,6 @@ static int f2fs_submit_page_read(struct inode *inode, struct page *page,
+>  		bio_put(bio);
+>  		return -EFAULT;
+>  	}
+> -	ClearPageError(page);
+>  	inc_page_count(sbi, F2FS_RD_DATA);
+>  	f2fs_update_iostat(sbi, NULL, FS_DATA_READ_IO, F2FS_BLKSIZE);
+>  	__submit_bio(sbi, bio, DATA);
+> @@ -2141,7 +2158,6 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
+>  	inc_page_count(F2FS_I_SB(inode), F2FS_RD_DATA);
+>  	f2fs_update_iostat(F2FS_I_SB(inode), NULL, FS_DATA_READ_IO,
+>  							F2FS_BLKSIZE);
+> -	ClearPageError(page);
+>  	*last_block_in_bio = block_nr;
+>  	goto out;
+>  out:
+> @@ -2289,7 +2305,6 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>  
+>  		inc_page_count(sbi, F2FS_RD_DATA);
+>  		f2fs_update_iostat(sbi, inode, FS_DATA_READ_IO, F2FS_BLKSIZE);
+> -		ClearPageError(page);
+>  		*last_block_in_bio = blkaddr;
+>  	}
+>  
+> @@ -2306,7 +2321,6 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+>  	for (i = 0; i < cc->cluster_size; i++) {
+>  		if (cc->rpages[i]) {
+>  			ClearPageUptodate(cc->rpages[i]);
+> -			ClearPageError(cc->rpages[i]);
+>  			unlock_page(cc->rpages[i]);
+>  		}
+>  	}
+> @@ -2403,7 +2417,6 @@ static int f2fs_mpage_readpages(struct inode *inode,
+>  #ifdef CONFIG_F2FS_FS_COMPRESSION
+>  set_error_page:
+>  #endif
+> -			SetPageError(page);
+>  			zero_user_segment(page, 0, PAGE_SIZE);
+>  			unlock_page(page);
+>  		}
+> diff --git a/fs/verity/verify.c b/fs/verity/verify.c
+> index bde8c9b7d25f6..961ba248021f9 100644
+> --- a/fs/verity/verify.c
+> +++ b/fs/verity/verify.c
+> @@ -200,9 +200,8 @@ EXPORT_SYMBOL_GPL(fsverity_verify_page);
+>   * @bio: the bio to verify
+>   *
+>   * Verify a set of pages that have just been read from a verity file.  The pages
+> - * must be pagecache pages that are still locked and not yet uptodate.  Pages
+> - * that fail verification are set to the Error state.  Verification is skipped
+> - * for pages already in the Error state, e.g. due to fscrypt decryption failure.
+> + * must be pagecache pages that are still locked and not yet uptodate.  If a
+> + * page fails verification, then bio->bi_status is set to an error status.
+>   *
+>   * This is a helper function for use by the ->readahead() method of filesystems
+>   * that issue bios to read data directly into the page cache.  Filesystems that
+> @@ -244,9 +243,10 @@ void fsverity_verify_bio(struct bio *bio)
+>  		unsigned long level0_ra_pages =
+>  			min(max_ra_pages, params->level0_blocks - level0_index);
+>  
+> -		if (!PageError(page) &&
+> -		    !verify_page(inode, vi, req, page, level0_ra_pages))
+> -			SetPageError(page);
+> +		if (!verify_page(inode, vi, req, page, level0_ra_pages)) {
+> +			bio->bi_status = BLK_STS_IOERR;
+> +			break;
+> +		}
+>  	}
+>  
+>  	fsverity_free_hash_request(params->hash_alg, req);
+> 
+> base-commit: f0c4d9fc9cc9462659728d168387191387e903cc
+> -- 
+> 2.38.1
 
 
 _______________________________________________
