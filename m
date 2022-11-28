@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 178B463B40D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Nov 2022 22:15:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D311763B491
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Nov 2022 23:02:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ozlSx-0005B8-DX;
-	Mon, 28 Nov 2022 21:15:03 +0000
+	id 1ozmCa-0007cK-DG;
+	Mon, 28 Nov 2022 22:02:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1ozlSu-0005Al-Fl
+ (envelope-from <jaegeuk@kernel.org>) id 1ozmCZ-0007cE-0D
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Nov 2022 21:15:00 +0000
+ Mon, 28 Nov 2022 22:02:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C/IqBerdBnu661iPk0v4dRj4iYayshF5gBebcBM9p9Y=; b=Fj8M04IbFjJ/TKsMrILU+AM6uU
- j+xTxy6WV9uc0u/1BfGo/XTbNTQfvrrLS/MlIRQuYU6K/E5CxcPwNDIRM03zX23wb4GTpY/Cb9VE0
- 53oTlnvXOQ8M6xanDEQEBC8BTHU7kxmIXtRCUoh1spJUW8rslacyMeIS0oLBCqezrblg=;
+ bh=GiI63A+mxmy3Y5f/xYyMN2jOCfzm+d+rLFqbkW99y7s=; b=IsJXdXf/ecTakovW2Y/xidzqd9
+ AdWLLfI5MjHewH3lr/8qkCZvuu4N3RdFbdLeGCjh+Mgtqlnr4KqT7puiOk85SBn1qkaEku4gowOK8
+ K4Pwk/JZJ8VN/yQjwVfXxU6T06zYn7ik67/hjhY2oYVHF+GUKinWSkZOaePjNvgOMAwQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,67 +31,68 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=C/IqBerdBnu661iPk0v4dRj4iYayshF5gBebcBM9p9Y=; b=P7oUxo3i5u4jSiboyfjopW+tW/
- qYPy+9UHW7jEbLHGJvpioHravEOe85Tz22WZeMQ/9gHliDqwlIvqhRf8XKF11c9C+IEw29SKs2NC6
- giSFEqqjdSVk5+5yQkJSu47J/IQ7XtX2KoYQtkVpshUK0TjEPlDz4ZaV260p9ApdJnZU=;
+ bh=GiI63A+mxmy3Y5f/xYyMN2jOCfzm+d+rLFqbkW99y7s=; b=gdIlK6vUqSv+dOTtZE+eaIO8zr
+ g6Yxr25UhwWqsNQLxIMeGuNIJ2d6CEcwbmGPep/+bF+VTLgbtS794QPHvKvl3yI9rVqbPYpFmNJtB
+ hmD2N69fhJ48/3FP1RxRiXZWXU6VUlTeUfWvI4T9u5+LoQpUdcWggmRM/I7Agl0yWD7o=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ozlSt-0004CW-UO for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Nov 2022 21:15:00 +0000
+ id 1ozmCY-0006a6-CQ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Nov 2022 22:02:10 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 874AD61444;
- Mon, 28 Nov 2022 21:14:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CBD52C433C1;
- Mon, 28 Nov 2022 21:14:53 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 0364C61210;
+ Mon, 28 Nov 2022 22:02:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 47BB5C433D7;
+ Mon, 28 Nov 2022 22:02:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1669670094;
- bh=WEebtS/VB+2cphwwTM1geo4BWud46mfJ9AmRB24poDM=;
+ s=k20201202; t=1669672924;
+ bh=pl9ZG4quKKMMXfDxoF/Izq6FMKP7JPEKUG99JP6uVp8=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=d53cDAbZXQoM7OExcA4L23bJaehbkZJAnaglaQ0VDz4X0qW8DYpTJKWFdENgCLDa6
- SpJWGZcmsEIbzQFVw9OCof2rifp5vY8mxWp3IJtPiaj7j2633sNFk9QYZGmbTOqAX/
- xEHoML+hsM0KfAQonHWbySml8s4Z7zd64ZCP3+33wfwOG0gQ2aXJrAcVMW71lwUUgJ
- +f68WEN1OdO2dUMdikYCzuz3pYdlep1XGqHObV2zugjPpAbSueLM5DMeEylRCRQhUt
- NAOmD/71oieYgmpa7BMlyuvsgu2Vj3gaSzPD4WdyxaAVugs0rjtGR9dyPjEKSLS4DF
- 9u1jC3pVmCPQw==
-Date: Mon, 28 Nov 2022 13:14:52 -0800
+ b=QMwIWUzh33F0tItOAKKNud+vIZ/TFaaOEr9p2xZOGog50kPo0/MnTexm/MIUV7oMU
+ 9mdfVmVNEGhlYjhsxVx3YA7V2P2J2OAiPZiG4leZdGQYmuWycv0gPejHF1QlVIEGJv
+ yBFmVt3alG8DnC96k016aY2HGsMMBaeTDrcOY/HZBTwA6N13/+ZTsYW5OMi5KVzrmW
+ jIbx9ktczqHB2zAHlm7T9Tzve2HWfKGpFR92Jm/P//ybN4Nkh9XqimD976CQ5c22ZN
+ JQr+vpJ6vxV3pMLEMS0162WVykkBjf3MZI9yYD/haVNoc9ovjTKO2fHpwHt+d2VKdD
+ IW/04PsAK1ZQw==
+Date: Mon, 28 Nov 2022 14:02:02 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <Y4UkzM34x9uQqLKG@google.com>
-References: <20221128094346.1256688-1-hch@lst.de>
+To: Yangtao Li <frank.li@vivo.com>
+Message-ID: <Y4Uv2tuHerLvJdLl@google.com>
+References: <20221128035150.30787-1-frank.li@vivo.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20221128094346.1256688-1-hch@lst.de>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20221128035150.30787-1-frank.li@vivo.com>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 11/28, Christoph Hellwig wrote: > Hi Jaegeuk and Chao,
- > > this series cleans up the segment allocation code a bit. Thanks, applied
- for test. > > Diffstat > segment.c | 71 ++++++++++++++++++++++++++ > segment.h
- | 6 ----- > 2 files changed, 30 insertions(+), 47 deletions(-) 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  If you don't mind, let me merge this patch into Chao's patch,
+ since both are same topic. On 11/28, Yangtao Li wrote: > It's better to use
+ bugzilla.kernel.org for reporting bugs. > > Signed-off-by: Yangtao Li
+ <frank.li@vivo.com>
+ > --- > Documentation/filesystems/f2fs.rst | 6 +++++- > 1 fil [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ozlSt-0004CW-UO
-Subject: Re: [f2fs-dev] segment allocation cleanups
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1ozmCY-0006a6-CQ
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Add f2fs bug tracker link
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,23 +104,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 11/28, Christoph Hellwig wrote:
-> Hi Jaegeuk and Chao,
-> 
-> this series cleans up the segment allocation code a bit.
+If you don't mind, let me merge this patch into Chao's patch, since both
+are same topic.
 
-Thanks, applied for test.
-
+On 11/28, Yangtao Li wrote:
+> It's better to use bugzilla.kernel.org for reporting bugs.
 > 
-> Diffstat
->  segment.c |   71 ++++++++++++++++++++++++++------------------------------------
->  segment.h |    6 -----
->  2 files changed, 30 insertions(+), 47 deletions(-)
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> ---
+>  Documentation/filesystems/f2fs.rst | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> index 6e67c5e6c7c3..67e1f3e86f32 100644
+> --- a/Documentation/filesystems/f2fs.rst
+> +++ b/Documentation/filesystems/f2fs.rst
+> @@ -25,10 +25,14 @@ a consistency checking tool (fsck.f2fs), and a debugging tool (dump.f2fs).
+>  
+>  - git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git
+>  
+> -For reporting bugs and sending patches, please use the following mailing list:
+> +For sending patches, please use the following mailing list:
+>  
+>  - linux-f2fs-devel@lists.sourceforge.net
+>  
+> +For reporting bugs, please use the following f2fs bug tracker link:
+> +
+> +- https://bugzilla.kernel.org/enter_bug.cgi?product=File%20System&component=f2fs
+> +
+>  Background and Design issues
+>  ============================
+>  
+> -- 
+> 2.25.1
 
 
 _______________________________________________
