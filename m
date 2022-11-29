@@ -2,69 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5175163BA76
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Nov 2022 08:14:50 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 441A463BAD0
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Nov 2022 08:38:52 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ozupL-0005S1-Pg;
-	Tue, 29 Nov 2022 07:14:47 +0000
+	id 1ozvCa-00018R-4b;
+	Tue, 29 Nov 2022 07:38:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1ozup7-0005Rt-Ro
+ (envelope-from <ebiggers@kernel.org>) id 1ozvCY-00018G-Cs
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Nov 2022 07:14:33 +0000
+ Tue, 29 Nov 2022 07:38:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uopDUAu/Fex85YsnbeGt15fUp2+Zc2WrIHFQ9Sp/QTk=; b=MKmYBo/8JOFMWtle2l0XJXkoJe
- LbGjNS5bTOqdKW4ABypMyU6I2dA93nvBAy4voOCOS6Y+YjFj/ZVqPrlj5tcFMXYsVLZ2qjYYCExKU
- Fo+WTlb1yxxs7tOcdp4N9QScx2feXXqPYORvbhqU0uAXMemf1GK22KOUb48bz4sgvwL8=;
+ bh=1gReftIkPcv86s/6G2e7a+dr7BBjrFGrWJg57mt8yOo=; b=Jb31u8RMWSqNdGyrkCBenmi4Ao
+ 2hr+2s0zl49xi665JQWIoKvB2IeF7ce1BaEP/G5x+3S0e5Er3+gEgOGULYd5jXh5aK2392777J+J2
+ zIrx3mouOIcrpnjsIgIQqGUN39UDlO+Ufu+ujrXps6+uj08fa6A8g99SOKc9DGoiEER4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=uopDUAu/Fex85YsnbeGt15fUp2+Zc2WrIHFQ9Sp/QTk=; b=e1EO2dGCTQfXiPc7dxGipKE/O/
- ELlZnFeFFeZeEGUOQbUPXCbARHEY4wLb8QiWEHqGSzrSsK77r88ll9W+lWGbopdtOsN19SSoZj40s
- ezO/wl52+AZQhEXngFUkH2XoHUP0qXBBzo8oWBrG9ULRhiI2JBgxIu1y6kSjMNMXlmGE=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=1gReftIkPcv86s/6G2e7a+dr7BBjrFGrWJg57mt8yOo=; b=g
+ JfdPVr7jq3LEVURVhZ268k6oiXE9lr94NWmn5uZZ0nSWLwKz3ZRmWVnlG+CqzPOWcnLnos+M3xa3G
+ ziiCgIf7yJVf+gEfywBJWnSQZvpsvKVAb81Q74qDoAUDp11m3nCMpEcht8g4xALJ23tWPXYfZ9vRU
+ sX8jecM3ZRkXnEzk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ozup7-0001JJ-3G for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Nov 2022 07:14:33 +0000
+ id 1ozvCX-0007C1-R7 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 29 Nov 2022 07:38:46 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A8CB3615B1;
- Tue, 29 Nov 2022 07:14:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5A2DC433C1;
- Tue, 29 Nov 2022 07:14:26 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6C8B461559;
+ Tue, 29 Nov 2022 07:38:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE947C433D6;
+ Tue, 29 Nov 2022 07:38:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1669706067;
- bh=us0xxwnUQweVKC2bsLBc59jamq4rwG2vuwf65B53Rfk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=r3nhquNGwkJp4h1DWM5InakWl/6nwkm3jRfMDQ4lUMMThLJt5JHODtnj5i9KOeCjD
- rJ+AnZT6nsQftI8YgD9rRkyM2aLU5Xgbpwjwt15+gCXYo7kBS3B0wcVEa9PnpQIHFk
- 5wyisa7hgbnwQtoYl5BhpUUwq3pOo4k/iiZOabj6x0K4LbEMpsuydNgnKblZ9FR5B3
- RocI8vGci7EUzd9I5go+yXZgt0qfnd23ZHKVtLTeYqkFbZ2sBMav/0Z4s8nFn2bSY3
- YiPXhOeHCpttvtenaGLh9U6ffjWm+vcBat7foTSoE0at5HWRe6g1ZwZnvditRm75QT
- WVe4ZGFsIFJyA==
-Date: Mon, 28 Nov 2022 23:14:25 -0800
+ s=k20201202; t=1669707519;
+ bh=rA4a1g3s0lz7F25H3p9Tr6kKlhmzOPOkO+EN/vK9hL4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ZTSneln1FccU9GM9w5SbSONuhYOw2L+DjvyD1Amicws2eD0P5OskNom+GmS73yExh
+ fSPe5L54ydbJvoHq27ilMzVMXnCUja6YU5JtWFhBAlTOmZy3VXfSYJ5VwAKPYCD9l2
+ ImoMRfkZyeWcdApzC0kx9JuIRW0UU1MfCPvypvjGUgXwR3dL3XS3zx0p0Si2xAqdfg
+ VSXv26zUZkipkHwy1dLi8w6jbBr1CwdHIcmg4xBNLGsGLjLYA74ZkbWkSaNXTL9bq9
+ GMUShXQeltZ+Q92tdSgsELjQzieu1Y8qzKLqZ1EX9+dUAazcYp6/xaUKAA+ljnc0z9
+ JsfdKNOsxnxPg==
 From: Eric Biggers <ebiggers@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <Y4WxUZesKJ79mI9e@sol.localdomain>
-References: <20221125190642.12787-1-ebiggers@kernel.org>
- <Y4WrSeIf+E6+tL1y@google.com>
+To: Theodore Ts'o <tytso@mit.edu>
+Date: Mon, 28 Nov 2022 23:35:59 -0800
+Message-Id: <20221129073559.203528-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Y4WrSeIf+E6+tL1y@google.com>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,9 +69,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Nov 28, 2022 at 10:48:41PM -0800, Jaegeuk Kim wrote:
- > > static void f2fs_finish_read_bio(struct bio *bio, bool in_task) > > {
- > > struct bio_vec *bv; > > struct bvec_iter_all iter_all; > > + [...] 
+ Content preview: From: Eric Biggers <ebiggers@google.com> Add a f2fs/compress
+ configuration which causes all files to be automatically compressed, similar
+ to how f2fs/encrypt causes all files to be automatically encrypted. 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,9 +87,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ozup7-0001JJ-3G
-Subject: Re: [f2fs-dev] [PATCH v4] fsverity: stop using PG_error to track
- error status
+X-Headers-End: 1ozvCX-0007C1-R7
+Subject: [f2fs-dev] [xfstests-bld PATCH] test_appliance: add f2fs/compress
+ config
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,48 +101,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Nov 28, 2022 at 10:48:41PM -0800, Jaegeuk Kim wrote:
-> >  static void f2fs_finish_read_bio(struct bio *bio, bool in_task)
-> >  {
-> >  	struct bio_vec *bv;
-> >  	struct bvec_iter_all iter_all;
-> > +	struct bio_post_read_ctx *ctx = bio->bi_private;
-> >  
-> > -	/*
-> > -	 * Update and unlock the bio's pagecache pages, and put the
-> > -	 * decompression context for any compressed pages.
-> > -	 */
-> >  	bio_for_each_segment_all(bv, bio, iter_all) {
-> >  		struct page *page = bv->bv_page;
-> >  
-> >  		if (f2fs_is_compressed_page(page)) {
-> > -			if (bio->bi_status)
-> > +			if (!ctx->decompression_attempted)
-> 
-> If seems this causes a panic due to the ctx nullified by f2fs_verify_bio.
-> 
+From: Eric Biggers <ebiggers@google.com>
 
-Thanks for catching that!  I've sent out v5 that checks for 'ctx &&
-!ctx->decompression_attempted' here.  That's the right thing to do, since if ctx
-is NULL then decompression must have been attempted.
+Add a f2fs/compress configuration which causes all files to be
+automatically compressed, similar to how f2fs/encrypt causes all files
+to be automatically encrypted.
 
-I'd like to get rid of freeing the bio_post_read_ctx in f2fs_verify_bio().
-But I believe it's still needed, at least in theory.
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ test-appliance/files/root/fs/f2fs/cfg/all.list | 1 +
+ test-appliance/files/root/fs/f2fs/cfg/compress | 5 +++++
+ 2 files changed, 6 insertions(+)
+ create mode 100644 test-appliance/files/root/fs/f2fs/cfg/compress
 
-Do you have a suggestion for testing f2fs compression + verity with xfstests?
-I missed this because compression isn't covered by the "verity" group tests.
-Maybe there should be an "f2fs/compress" config in xfstests-bld that uses mkfs
-and mount options that cause all files to be automatically compressed, similar
-to how f2fs/encrypt automatically encrypts all files with test_dummy_encryption.
+diff --git a/test-appliance/files/root/fs/f2fs/cfg/all.list b/test-appliance/files/root/fs/f2fs/cfg/all.list
+index bc796ff..90a7a36 100644
+--- a/test-appliance/files/root/fs/f2fs/cfg/all.list
++++ b/test-appliance/files/root/fs/f2fs/cfg/all.list
+@@ -1,2 +1,3 @@
+ default
+ encrypt
++compress
+diff --git a/test-appliance/files/root/fs/f2fs/cfg/compress b/test-appliance/files/root/fs/f2fs/cfg/compress
+new file mode 100644
+index 0000000..6f2b954
+--- /dev/null
++++ b/test-appliance/files/root/fs/f2fs/cfg/compress
+@@ -0,0 +1,5 @@
++SIZE=small
++export MKFS_OPTIONS="-O compression,extra_attr"
++export F2FS_MOUNT_OPTIONS="compress_extension=*"
++REQUIRE_FEATURE=compression
++TESTNAME="F2FS compression"
+-- 
+2.38.1
 
-- Eric
 
 
 _______________________________________________
