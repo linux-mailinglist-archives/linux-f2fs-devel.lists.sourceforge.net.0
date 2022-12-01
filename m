@@ -2,83 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A36C63D914
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Nov 2022 16:19:00 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63A1863FAA9
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Dec 2022 23:38:44 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p0OrP-0002yB-W2;
-	Wed, 30 Nov 2022 15:18:56 +0000
+	id 1p0sCT-00025x-Nk;
+	Thu, 01 Dec 2022 22:38:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1p0OrN-0002y4-4p
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1p0sCT-00025q-04
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Nov 2022 15:18:53 +0000
+ Thu, 01 Dec 2022 22:38:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=N9HXBBW7P/KvVNawmxP/5nCywoMe+jH+9tdbHKm2yx4=; b=GhrBw/Br5lwf5ymTFsfq1qJGgx
- mgGzRgCa5qn4nnVNnHC0m792Pim5UeAl592aCgO200Jc1eHCd4wPjKKMQyWf1aN6Hq5QvvAikFWA/
- dn7vou2v6b0mWlzC40Pg8EyklwYMB7NP/DOGzvIr44ypzpYUlFP5pBQYrYjBk+IDojSU=;
+ bh=wA9ht6DD7XcPHX3RWCmJ0LgeqY7dIEAHnV3OF2WgOkA=; b=LMEt2zOKjePJZPqvXv6z7hDTrM
+ YdD4jNIDLoFeFnQHvbeb+qcnc3iRSMqFP7xKQwbDfaKXl8gpxZ7JciO5im7SH4o6AVBsxkI8e8rwT
+ Qhx3iwvUx9T46Sz3ni9BG2IYvQWb0njUHhqxZO2hi0TMQegc5WgaLZ6CpNilZo9DEFrU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=N9HXBBW7P/KvVNawmxP/5nCywoMe+jH+9tdbHKm2yx4=; b=NhZpC7ICaIn64mons3T5J1beDt
- KbBquK5+HKVYiDBQ7MNBfWwGNMHIC4ZpMJN+uyVV5lETWaoR3RlIAjh0/bIzyPaLzI1LwxhcnUbiQ
- zaHEnOK3RxLUB0e/4kzKljX9C/MVrQzWi6GHThjMlkWjxEclvox8HBnQglGjHLTQi4kA=;
-Received: from casper.infradead.org ([90.155.50.34])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=wA9ht6DD7XcPHX3RWCmJ0LgeqY7dIEAHnV3OF2WgOkA=; b=LV6274J/LVFFxeTM1JESOPvn8H
+ TrKrtAUyzAY3IbUfIL8+OdNK8ffN2Gwq4lgeAIdUUfk7NpAPJobVM/f514SJPLocAtWYTw+y1z/Hk
+ 095vS9KDAb/lM4U74wyI2eRvo5AsPZmqpZRjGP9O4kPO35SINiD4uHEjG8CrVm6FjVLU=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p0OrL-001W8f-10 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Nov 2022 15:18:53 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=N9HXBBW7P/KvVNawmxP/5nCywoMe+jH+9tdbHKm2yx4=; b=lQ1WyiKRrQeHAg4aAhQC4Jx+kF
- RcVZQAoZ2Reaiz5xHiiSxbFcwo041E6tsoUwVaGybmugem8+4hWo4WFjyOX3jFA2HYI7lvXcHKn+6
- h7mmjbxsORZKqCW5OipGo8f/FbZrXYnf/RWm9p8tkML3rwfEiVigFzsrNmSJJQ1twbm2qSDMcttHa
- mDNQgjabRUZkO5EOzzr04YbceD+HjlJSuBFmtrVhLUJba1383ukKb7CKz07LEPOl33OB5gbk05iRz
- EEgraQ++6paX17JPyMs1AiM5aJncrYPcaaPXhlH2OX25db/LYTfnvbHkFmJmGfqPlqbwVDHxbxBnH
- o/9lgL9w==;
-Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1p0OrC-00F5XG-0W; Wed, 30 Nov 2022 15:18:42 +0000
-Date: Wed, 30 Nov 2022 15:18:41 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Yangtao Li <frank.li@vivo.com>
-Message-ID: <Y4d0UReDb+EmUJOz@casper.infradead.org>
-References: <Y4ZaBd1r45waieQs@casper.infradead.org>
- <20221130124804.79845-1-frank.li@vivo.com>
+ id 1p0sCO-0003KG-JS for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 01 Dec 2022 22:38:36 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by sin.source.kernel.org (Postfix) with ESMTPS id 69B9CCE1DD5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  1 Dec 2022 22:38:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id AC801C433C1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  1 Dec 2022 22:38:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1669934300;
+ bh=wA9ht6DD7XcPHX3RWCmJ0LgeqY7dIEAHnV3OF2WgOkA=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=KX2n3L042401TICG7D0aINZpopEY6kjZqR9L/tckSVHEKYj3Tzelf3Fl+Bd1Vzc//
+ svI5OsXDs5Xml17M4lE/TpTum/6P8/LYUqFdtFkzMjommzc6uP4S4cpAUqnhIK1ZzE
+ bnV8gNXHZkxdL017HxcI5gNCDwb3QcrbeFyOI/0tQRlOTL6sn4HMBJgDEYm7Nfehgj
+ ahJRjgWAK2JINr0t1dqy/ZD08vIvUuGvay0hMMAPNuqgmQxutEaXP+Hx3ihR90ZzUB
+ YrxjuSCW94D1a/yYEI0jXvq7QlqIwcTLucrXrAtz+cgWgdLzEqkQd9lmjg/eb22GwC
+ r0Rn2mZ9WIRVA==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 97552C433E6; Thu,  1 Dec 2022 22:38:20 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 01 Dec 2022 22:38:20 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: yuriy.garin@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-216050-202145-X6MBg6e4VW@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
+References: <bug-216050-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20221130124804.79845-1-frank.li@vivo.com>
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Nov 30, 2022 at 08:48:04PM +0800, Yangtao Li wrote:
- > Hi, > > > Thanks for reviewing this. I think the real solution to this
- is > > that f2fs should be using large folios. That way, the page c [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
+ Comment
+ #94 from Yuriy Garin (yuriy.garin@gmail.com) --- (In reply to Yuriy Garin
+ from comment #93) > It's running on 6.0.9-arch1-1: > > $ uname -a > Linux
+ ... 6.0.9-arch1-1 #2 SMP PREEMPT_DYNAMIC [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infradead.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -86,9 +110,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1p0OrL-001W8f-10
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Support enhanced hot/cold data
- separation for f2fs
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1p0sCO-0003KG-JS
+Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,52 +124,46 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- vishal.moola@gmail.com, linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
- jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Nov 30, 2022 at 08:48:04PM +0800, Yangtao Li wrote:
-> Hi,
+https://bugzilla.kernel.org/show_bug.cgi?id=216050
+
+--- Comment #94 from Yuriy Garin (yuriy.garin@gmail.com) ---
+(In reply to Yuriy Garin from comment #93)
+> It's running on 6.0.9-arch1-1:
 > 
-> > Thanks for reviewing this.  I think the real solution to this is
-> > that f2fs should be using large folios.  That way, the page cache
-> > will keep track of dirtiness on a per-folio basis, and if your folios
-> > are at least as large as your cluster size, you won't need to do the
-> > f2fs_prepare_compress_overwrite() dance.  And you'll get at least fifteen
-> > dirty folios per call instead of fifteen dirty pages, so your costs will
-> > be much lower.
-> >
-> > Is anyone interested in doing the work to convert f2fs to support
-> > large folios?  I can help, or you can look at the work done for XFS,
-> > AFS and a few other filesystems.
-> 
-> Seems like an interesting job. Not sure if I can be of any help.
-> What needs to be done currently to support large folio?
-> 
-> Are there any roadmaps and reference documents.
+> $ uname -a
+> Linux ... 6.0.9-arch1-1 #2 SMP PREEMPT_DYNAMIC Wed, 23 Nov 2022 05:14:08
+> +0000 x86_64 GNU/Linux
 
-From a filesystem point of view, you need to ensure that you handle folios
-larger than PAGE_SIZE correctly.  The easiest way is to spread the use
-of folios throughout the filesystem.  For example, today the first thing
-we do in f2fs_read_data_folio() is convert the folio back into a page.
-That works because f2fs hasn't told the kernel that it supports large
-folios, so the VFS won't create large folios for it.
+Got the same result on 6.0.10-arch2-1.
 
-It's a lot of subtle things.  Here's an obvious one:
-                        zero_user_segment(page, 0, PAGE_SIZE);
-There's a folio equivalent that will zero an entire folio.
+See timing, may be it helps. Once problems occurs, it goes every 4 minute for 1
+1/2 hour.
 
-But then there is code which assumes the number of blocks per page (maybe
-not in f2fs?) and so on.  Every filesystem will have its own challenges.
+[Wed Nov 30 15:54:15 2022] f2fs_get_lock_data_page: bad: 1032147,
+00000000be98c3cd, 00000000d0321d1e
+[Wed Nov 30 15:58:08 2022] f2fs_get_lock_data_page: bad: 1032147,
+00000000be98c3cd, 00000000d0321d1e
+[Wed Nov 30 16:02:02 2022] f2fs_get_lock_data_page: bad: 1032147,
+00000000be98c3cd, 00000000d0321d1e
+[Wed Nov 30 16:05:55 2022] f2fs_get_lock_data_page: bad: 1032147,
+00000000be98c3cd, 00000000d0321d1e
+[Wed Nov 30 16:09:48 2022] f2fs_get_lock_data_page: bad: 1032147,
+00000000be98c3cd, 00000000d0321d1e
+...
+[Wed Nov 30 17:27:35 2022] f2fs_get_lock_data_page: bad: 1032147,
+00000000be98c3cd, 00000000d0321d1e
+[Wed Nov 30 17:31:29 2022] f2fs_get_lock_data_page: bad: 1032147,
+00000000be98c3cd, 00000000d0321d1e
 
-One way to approach this is to just enable large folios (see commit
-6795801366da or 8549a26308f9) and see what breaks when you run xfstests
-over it.  Probably quite a lot!
+-- 
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
