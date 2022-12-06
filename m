@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C932644935
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Dec 2022 17:29:31 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 98979644BE3
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Dec 2022 19:38:06 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p2aov-0007lc-Kz;
-	Tue, 06 Dec 2022 16:29:25 +0000
+	id 1p2cpN-0002AB-Cn;
+	Tue, 06 Dec 2022 18:38:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1p2aov-0007lT-7C
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1p2cpL-0002A5-V2
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Dec 2022 16:29:25 +0000
+ Tue, 06 Dec 2022 18:37:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zzNTQmSyTPv+vd4vruaeRHTL+sn4VzAM487ohUeAnsM=; b=aMyuLfJFM7sFA+KAH14c4rgWkQ
- Li+5HIp2AvkXdrrEBPvuRA1cUGZDR0ZJ+bo5oTMPTnW3vwxatpY6ksQgaIM4q489/waK+fSfMD0xi
- nWJ62H9DIhlaJykoBPzTz9d51ygYH/AUTLhHMVNAnxgs1xjfjsKs4AXqltKpOz3YH6Ps=;
+ bh=q/wUmBPm0Ui2S5Px1457MIbYAknAwiGGp06KD397AXw=; b=E4oVSyMw/vio0FDGn6fn8hH/u8
+ dfsGH1NoGiZBCmziRtuoSzMP0BgC2/Y82/6844rku+Zv9R2Q1owHbE+tsOU8Z+vmHKMCbbg4ejF4C
+ 0G2jE/BMBipT7+46XFsyce2iMt9m9NRyBAIuHr72o9i+Dl2zFl0q8UfJoyPfFoYwUWiE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -31,38 +31,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zzNTQmSyTPv+vd4vruaeRHTL+sn4VzAM487ohUeAnsM=; b=Vhvu+TWv4SrsxugEFCEixp57cR
- 03VcxPFja+6a0R9uaqD7tFTBKikEdWoYIE7Z32nqgRzD4BGzZY8+261I2EnHLK65oBtBAY8wZ2+Lt
- UcAiTmzRpRAVaOPxW8YME3OqtGQjgJXDTHucNqqBINHdV25fHKNwTNC7bYaKbFlgGogU=;
+ bh=q/wUmBPm0Ui2S5Px1457MIbYAknAwiGGp06KD397AXw=; b=jSHTSa4uDq1AnTELh58mu3Epov
+ oaZiEX8qzQNfkcZ0OpjXyqwRq82UvbDG05V+1qCp3w+smx8w7nT66nDSurSXYitUQsrTO80QS66Ul
+ GPcke2aKcsyPG7fMUf/tnds73EuZLc7JmOsGT9dJL7VnBjreD0fcMVvH4VVrW1i3oPLY=;
 Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p2aoj-0003ho-5N for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Dec 2022 16:29:23 +0000
+ id 1p2cpL-008Ivw-8z for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Dec 2022 18:37:59 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id DC084B81A10
+ by ams.source.kernel.org (Postfix) with ESMTPS id C9869B817C2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  6 Dec 2022 16:29:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 931F0C433D6
+ Tue,  6 Dec 2022 18:37:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8B281C433C1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  6 Dec 2022 16:29:05 +0000 (UTC)
+ Tue,  6 Dec 2022 18:37:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1670344145;
- bh=zzNTQmSyTPv+vd4vruaeRHTL+sn4VzAM487ohUeAnsM=;
+ s=k20201202; t=1670351868;
+ bh=q/wUmBPm0Ui2S5Px1457MIbYAknAwiGGp06KD397AXw=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=K3Fn01EA+D0y+DLwLcNYB1E5gtd2dne34rEj7f8/KDXWK1jSjdD5mHNP77XThurou
- fM+OB6R4AeB1lK1F+zXuNYmt1jOIt9LqahxTeSRyMjNgjhG1PCkoiaE5HpNzKF3YB3
- v8iczqb/Z8EKzn90wWYi0ihJMuTBsJBfUrfFQ359CJ+VQ4TWr7Oguv0T8CQBgmtPrU
- 2FFRxEGuZIpsbcwoVvt4M4st9GCBMNsLiiWViIbUgSYeqAkUVa6y9zW3C+W3Ac36kW
- SpLtNBZYJkMBNoZwmxb7sRnRFEzRsPiihaMOOxu7YJSjjyfeTDTxUJTHYIGMBk76Gj
- WoYHHXPym69gg==
+ b=k0R+VpkVWtTnM5oXkbRLPv/fbUS1aYGJPp7DsgqJhHRzrhHs1c/qJR82qVojenj4+
+ fIVnnPEdskrV5S2pO1zIYyxVbMG4dlREelsyaLnq0+ITVic73we3fZWot8X3/umjf2
+ DYyztyq7BTLWr7nX36h9T1RKsYRBfZwIYIrys6p/dr/wlajkptO2pOCPYHyfY9amY6
+ vBe+5k54RPb8T+cCysGB47JOOvow973oX5cLHvDM2qPBEn2M+4dypTr+GYvymOc7qB
+ dguhN0JQ5JocWco/bkI5rKwRsWnVMpZZ76kdQOypiX+6eQH/G2IRcq9/mg0O7bG6m3
+ +xIMrBiNPZ/HQ==
 Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 75A24C433E4; Tue,  6 Dec 2022 16:29:05 +0000 (UTC)
+ from userid 48) id 66F18C433E4; Tue,  6 Dec 2022 18:37:48 +0000 (UTC)
 From: bugzilla-daemon@kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 06 Dec 2022 16:29:05 +0000
+Date: Tue, 06 Dec 2022 18:37:48 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -78,7 +78,7 @@ X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-AS8SoGR5d3@https.bugzilla.kernel.org/>
+Message-ID: <bug-216050-202145-LRSYrSd1dk@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
 References: <bug-216050-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -93,8 +93,9 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
  Comment
- #101 from Guido (guido.iodice@gmail.com) --- Very interesting: I run the
- script with kernel 5.15.81 and it works well on my root partition 
+ #102 from Guido (guido.iodice@gmail.com) --- interesting enough, after the
+ script run on the 5.15 kernel had successfully reduced the dirty segments,
+ I started the system with the 6.0.11 k [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -109,12 +110,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: f2fs-gc.sh]
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p2aoj-0003ho-5N
+X-Headers-End: 1p2cpL-008Ivw-8z
 Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -127,23 +124,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-aHR0cHM6Ly9idWd6aWxsYS5rZXJuZWwub3JnL3Nob3dfYnVnLmNnaT9pZD0yMTYwNTAKCi0tLSBD
-b21tZW50ICMxMDEgZnJvbSBHdWlkbyAoZ3VpZG8uaW9kaWNlQGdtYWlsLmNvbSkgLS0tClZlcnkg
-aW50ZXJlc3Rpbmc6IEkgcnVuIHRoZSBzY3JpcHQgd2l0aCBrZXJuZWwgNS4xNS44MSBhbmQgaXQg
-d29ya3Mgd2VsbCBvbiBteQpyb290IHBhcnRpdGlvbgoKCnN1ZG8gYmFzaCAuL2YyZnMtZ2Muc2gK
-W3N1ZG9dIHBhc3N3b3JkIGRpIGd1aWRvOiAKUGVyZm9ybWluZyBHQyBvbiAvc3lzL2ZzL2YyZnMv
-bnZtZTBuMXAzLwoxODQ5CjQyNQozMzAKMzA3CjEKR0MgY29tcGxldGVkIGZvciAvc3lzL2ZzL2Yy
-ZnMvbnZtZTBuMXAzLwpQZXJmb3JtaW5nIEdDIG9uIC9zeXMvZnMvZjJmcy9udm1lMG4xcDQvCjQ3
-MgoxMTgKNDcKR0MgY29tcGxldGVkIGZvciAvc3lzL2ZzL2YyZnMvbnZtZTBuMXA0LwpQZXJmb3Jt
-aW5nIEdDIG9uIC9zeXMvZnMvZjJmcy9udm1lMW4xLwpHQyBjb21wbGV0ZWQgZm9yIC9zeXMvZnMv
-ZjJmcy9udm1lMW4xLwpndWlkb+6CsH7ugrB0bXDugrAk7oKwCgotLSAKWW91IG1heSByZXBseSB0
-byB0aGlzIGVtYWlsIHRvIGFkZCBhIGNvbW1lbnQuCgpZb3UgYXJlIHJlY2VpdmluZyB0aGlzIG1h
-aWwgYmVjYXVzZToKWW91IGFyZSB3YXRjaGluZyB0aGUgYXNzaWduZWUgb2YgdGhlIGJ1Zy4KCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMt
-ZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0
-Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMt
-ZGV2ZWwK
+https://bugzilla.kernel.org/show_bug.cgi?id=216050
+
+--- Comment #102 from Guido (guido.iodice@gmail.com) ---
+interesting enough, after the script run on the 5.15 kernel had successfully
+reduced the dirty segments, I started the system with the 6.0.11 kernel and
+relaunched the script (after waiting for the dirty segments to return above
+100). The script on 6.0.11 also worked without a problem on my root partition.
+
+As a precaution, I will run the script every 8 hours. Let's see if this will
+keep the partition clean and not cause problems with kernels > 5.17
+
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
