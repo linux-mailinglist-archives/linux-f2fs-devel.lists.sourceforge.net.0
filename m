@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B0F164485A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Dec 2022 16:50:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37CC064486B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Dec 2022 16:53:54 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p2aDO-0006kL-Kj;
-	Tue, 06 Dec 2022 15:50:38 +0000
+	id 1p2aGV-0006sz-VE;
+	Tue, 06 Dec 2022 15:53:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1p2aDM-0006kB-MQ
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1p2aGH-0006sL-3f
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Dec 2022 15:50:36 +0000
+ Tue, 06 Dec 2022 15:53:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7qYOrTfMVY2hYNizFBeZZl2RVWhr4JorrAeNSZGIARI=; b=bXKuPiMkAf8ECPJzdgMYNzQPFz
- sjvGrRruBzP3RqjqF9oN1EFAYQvK+T3KvIXftjaRN0eHIJ+/3fz1rUIyzsfsEXNCba/gVp8EOpsh6
- aoglpw5SQFSX/1IXUGYnxzv7awxmvmTQ45MIqouHG2BtSaL+lBv1l6jKdmgN27xHEnDM=;
+ bh=e4XgHQO0zjxDEjwWK1heUkk3mg/2gInZLCBAPQP4bWM=; b=BQD9+G8s00RxoP9zDXm4zbGgnv
+ O6LeBiHz2w77Q2K0d/aZXH/vSM+ift9+mOlviwIaqFfK22zDMMEqEJBKbQ2qIT6OHpKIHChQ5UeFi
+ YFZHemIxMmS9GXJHUdQoBXa67K9KVLWjHcUgbnOJOuZNOYeEOpNvRMFZMrz4vXbeZcg8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -31,38 +31,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7qYOrTfMVY2hYNizFBeZZl2RVWhr4JorrAeNSZGIARI=; b=RsOa1uOnT0D+8BDiDQaWY5isrK
- fT22574Mt5on4az86jg5O4YZhQaWDLnxjT3Hp15h2rmXF5+62zf2qqmdOkrJAbiDT5WzsJ70X2h4f
- h9cmtEDgfEqUB4aUpUoHioSRQfUICucvJSABO8eBc+DsWVCI/FVeRMCkSta/rTZZqVEc=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=e4XgHQO0zjxDEjwWK1heUkk3mg/2gInZLCBAPQP4bWM=; b=RnQ7HL9BzQxj/JgBgP4+pH29ll
+ DxriG2mihkX48geTq28U5UOi63SxdrBNZdJ+BySxIqoTg+3XK667qb6RpQjcZImkBqYxXjOHY4Jhp
+ ORdWyvyStX35zGPja8LaAmY79kzOP2yerzLlUe3fFyIe5wOZdAM/JIwCtDF0upIdaJ9Y=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p2aDJ-0007uz-Fc for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Dec 2022 15:50:35 +0000
+ id 1p2aGG-0083Dz-Dh for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Dec 2022 15:53:36 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 32D30B81AA1
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 0C232617A5
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  6 Dec 2022 15:50:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E10F5C433C1
+ Tue,  6 Dec 2022 15:53:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6F3D4C433D7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  6 Dec 2022 15:50:21 +0000 (UTC)
+ Tue,  6 Dec 2022 15:53:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1670341821;
- bh=7qYOrTfMVY2hYNizFBeZZl2RVWhr4JorrAeNSZGIARI=;
+ s=k20201202; t=1670342010;
+ bh=e4XgHQO0zjxDEjwWK1heUkk3mg/2gInZLCBAPQP4bWM=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=O0TFRynQ3JZZKufQrlBCegFfa1qG/srajBHTNQcYowBHPPESPQohnOnR7snIRJafI
- 4UpS69gWFs5iFg0a42ONJKvpgAdV+FdUA8SKiEOAEabGOcYDjLyRKVWYp0uMCKf+Cq
- J9IM0xkZXkDKe7b100+i5UGovzvMxuyamdY96ywmG7vlCwvGHsCX1Fv37/Gyv113XR
- 3jn/5UMBYdB5eyUYZ9n1uMzC8rfmcFt4D0+0oXDfTKlAWHEnXdImwGOpikw+/fDDhP
- bXL7uHx+bxc/A2wdiMoHkfROWZf8Jn943ukD5p8ehqhRTb4nqoe0iCRf1h2ODG7q4N
- ZEuqHeIcBps8Q==
+ b=S6Is7pO1X84Tpylkb5iJTwvZvzOPfixgA62GzrOMBDF2+Oj+i1qTltfUAp+yxbGLP
+ POifcuwCDY37T1ZAYA1PJJvaspuwF6A+PdsixmemS2VNiCNjem4MrKRvFsl0+Ep2/k
+ okE+HnU3yFGr+kOlM12VE7u4OI3wVBv7cyurE0QnSPssJTAgduaPBTCuURW5PWzDkK
+ +wHYgiD0Oqo8hy3qunIg9Z/J5aD6Ak/nEXi3VPEstr7/6OouvClaRH8l8L9cG03vm1
+ hLL0FPY5yovrYQppE/PfG3b5cc2tCiQSGKnvRuyO+i/aXavaBFIUT+FZHx4+N2PPB+
+ 9ta43wXih/pSw==
 Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id BFEF6C433E4; Tue,  6 Dec 2022 15:50:21 +0000 (UTC)
+ from userid 48) id 51386C433E6; Tue,  6 Dec 2022 15:53:30 +0000 (UTC)
 From: bugzilla-daemon@kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 06 Dec 2022 15:50:21 +0000
+Date: Tue, 06 Dec 2022 15:53:30 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -78,7 +78,7 @@ X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-3NOzKi7FAP@https.bugzilla.kernel.org/>
+Message-ID: <bug-216050-202145-ZfnVeEoQhc@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
 References: <bug-216050-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -93,14 +93,14 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
  Comment
- #99 from Guido (guido.iodice@gmail.com) --- Well, I tried to foce f2fs_gc
- on my partitions (with unpatched 6.0.11 kernel) It seems that the problem
- of 100% cpu occupation arises only on nvme0n1p3 (my root). The dirty sectors
- remains 1417 and do not go down and cpu is 100% occupied (since the start,
- not only when it is at [...] 
+ #100 from Guido (guido.iodice@gmail.com) --- And I cannot stop f2fs_gc with
+ [manjaro tmp]# echo 500 > /sys/fs/f2fs/nvme0n1p3/gc_urgent_sleep_time [manjaro
+ tmp]# echo 0 > /sys/fs/f2fs/nvme0n1p3/gc_urgent 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -110,10 +110,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p2aDJ-0007uz-Fc
+X-Headers-End: 1p2aGG-0083Dz-Dh
 Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -132,12 +130,11 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
---- Comment #99 from Guido (guido.iodice@gmail.com) ---
-Well, I tried to foce f2fs_gc on my partitions (with unpatched 6.0.11 kernel)
+--- Comment #100 from Guido (guido.iodice@gmail.com) ---
+And I cannot stop f2fs_gc with
 
-It seems that the problem of 100% cpu occupation arises only on nvme0n1p3 (my
-root). The dirty sectors remains 1417 and do not go down and cpu is 100%
-occupied (since the start, not only when it is at 1417)
+[manjaro tmp]# echo 500 > /sys/fs/f2fs/nvme0n1p3/gc_urgent_sleep_time 
+[manjaro tmp]# echo 0 > /sys/fs/f2fs/nvme0n1p3/gc_urgent
 
 -- 
 You may reply to this email to add a comment.
