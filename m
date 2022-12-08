@@ -2,99 +2,115 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F8EF647503
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Dec 2022 18:30:31 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C2A864776F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Dec 2022 21:43:26 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p3Kj4-0007Fn-6F;
-	Thu, 08 Dec 2022 17:30:26 +0000
+	id 1p3Njl-00023l-8Y;
+	Thu, 08 Dec 2022 20:43:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1p3Kii-0007FC-CE
+ (envelope-from <luca.boccassi@gmail.com>) id 1p3Njj-00023Z-Ts
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Dec 2022 17:30:04 +0000
+ Thu, 08 Dec 2022 20:43:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uZYSg+hVaTx2jNrt03k0iNmlHJoda16uqdaj7wlGZ3E=; b=TR4J7OBfmvc8AmILWhW7c0t9bp
- lbQ+FPnBfAMuvs75aegzsnFfsZMUOL6BEpQT0HKWR6lspQdkVRiMdQbD1r6C+zPWq83e8++SEHJi0
- 9ykXkx5rfcVX0vYGzeYkrKenXSto95ssAvsGzq0H/jo8HAkdy1W37jbDeU/MzXennELk=;
+ bh=E980lveCUquKKhcMXhM1jQtjJxf2DwElGgp3q5gC3Vs=; b=KzRYtgDgdEt3PYfF1p++PF0Ngi
+ BcNYjCIkBGzzaWtrnILCo8/lW+53pMYR/D24yCBsBfAlRQkT52xWG2tvo+OdkaoZLwKuno1zwcaHE
+ bklyOBca/Zwj33U4UQy+Kbbtm/H91OWYceXpPnQMDFklfVbdBwYQMX9NgmaX49SQrzcQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uZYSg+hVaTx2jNrt03k0iNmlHJoda16uqdaj7wlGZ3E=; b=m2/0gSKMMZWo9gNcVpOV5bHKsc
- GuL0xFKIU6hBM8jOBfCHanS+Reu68xu9+da9T/OrP3aHh/2kEhK26x1SGEUiok/ac0mfPD4SwRxNx
- AwaXpZKis9Xro8+pGW0ngdXULH/y8vesLqclLUnz01VhjxKNxA/uXJ7t+JwPXbAjhIqU=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p3Kih-00ARUy-FJ for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Dec 2022 17:30:04 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 452AF61F5B
+ bh=E980lveCUquKKhcMXhM1jQtjJxf2DwElGgp3q5gC3Vs=; b=VnEILYefFLJCFVC6Ggw4V9Xv56
+ FcAKgGHevvxvm8aNdtUDYMToSbCDm3E70pOEvPJOl38he0rF0zKeLYgSSwlniF1szeg4KE5LFekfk
+ 6sg2GvfWytwrAKzrF5rI2Aqi+0EgzDPgIcox8mYv1AV2pBC9g3rv52GrByKAXdjzCjDc=;
+Received: from mail-qt1-f181.google.com ([209.85.160.181])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1p3Njf-0007nD-Li for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Dec 2022 20:43:19 +0000
+Received: by mail-qt1-f181.google.com with SMTP id fu10so2108241qtb.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  8 Dec 2022 17:29:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D757C433D2;
- Thu,  8 Dec 2022 17:29:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1670520596;
- bh=qSA198bplUrIbdYGyPLtvL7kzzxiHPcIk4XswMN9Yzw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Iq8KU0WtPwZOWPLaGlHsBYp1bdGrxduZAK3WjPnKrnWMq2VsZfh7HHk2AephyDpYd
- EjsN1X+EKfJL+mEswxNpxPclz5TOg9x18ub0geFbEHOQgBsojIK6pIPylDjT5AAhcN
- NrJ65WHYNStknY4ZgXmWgkAT76w5i1LPyIpjanTudixDXJvUa49uIS4zXQ7mHrG0Vk
- uN1msctRq5OI8/lAqWTT+wuNjb/1qCM3LFGVZduWqWZlN/4eZIBXqQ9JwrtwsMmVLC
- RWwA0PGHKl3XX6oZfMv3zmoDycgUUtTyKOuVoOHuqp1q1H//9ibvqYtsEvOCHJLB7o
- /c8zwNFTF2Waw==
-Date: Thu, 8 Dec 2022 09:29:54 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Y5IfEkHlpZ0oBRID@google.com>
-References: <20221205185433.3479699-1-jaegeuk@kernel.org>
- <8ffb43dd-3887-aa56-6f0a-1fb6ff0e191e@kernel.org>
+ Thu, 08 Dec 2022 12:43:15 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=E980lveCUquKKhcMXhM1jQtjJxf2DwElGgp3q5gC3Vs=;
+ b=QL5XxRZ5oMeiqu/JCa6anNEua7upwc8dI2AfPXQMpHRsyivU0Ao8eBEP2xhq+XzIOA
+ d1STIv+1FfGiMPMCD9Nhb3D9/L0wgrO8jAJlE3T1b6e9TW3+aXQ0U3GeqPXjt2xt0oTb
+ gfn/oNWSv2urUnQ76UC/8ZmhqidoKtyZkOYQYBTf05zVcKCToup0xw5MVlyXuwvbN7S8
+ Kf6+y+hZIo40EPcNByz79SyoGf0OHNdCkR0PQwyX93H2uNrGnOc0w77tbsq7NFsAXJK2
+ HQlHjQYyQ1EdCaUOlMvqc51v47gvEYC6rQK9Ltiqj2hYWljo++9cr9hm5D331u5UfKIz
+ 7hUQ==
+X-Gm-Message-State: ANoB5plJsNgtNF49QFEWqZmrWPYMp+Es2omT3omaHrqY2Cidi2fX4U80
+ qX7CvvWdm4nfaSkNeJY736C8JbmjBVkPEQ==
+X-Google-Smtp-Source: AA0mqf41qHNy4+a0NHXSYqg+QvCmjjWVSNU1fsHA5c/zqs/HgbkHbpCrd1KyZDCTdlFIaLBZltm/bA==
+X-Received: by 2002:a05:622a:509e:b0:3a6:8b3a:6450 with SMTP id
+ fp30-20020a05622a509e00b003a68b3a6450mr4644496qtb.54.1670532188509; 
+ Thu, 08 Dec 2022 12:43:08 -0800 (PST)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com.
+ [209.85.128.172]) by smtp.gmail.com with ESMTPSA id
+ x12-20020ac8538c000000b003a7e38055c9sm8191863qtp.63.2022.12.08.12.43.08
+ for <linux-f2fs-devel@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 08 Dec 2022 12:43:08 -0800 (PST)
+Received: by mail-yw1-f172.google.com with SMTP id
+ 00721157ae682-3704852322fso27934727b3.8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 08 Dec 2022 12:43:08 -0800 (PST)
+X-Received: by 2002:a81:ff06:0:b0:3ab:6ff4:a598 with SMTP id
+ k6-20020a81ff06000000b003ab6ff4a598mr5143379ywn.425.1670532187832; Thu, 08
+ Dec 2022 12:43:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <8ffb43dd-3887-aa56-6f0a-1fb6ff0e191e@kernel.org>
-X-Spam-Score: -5.9 (-----)
+References: <20221208033523.122642-1-ebiggers@kernel.org>
+In-Reply-To: <20221208033523.122642-1-ebiggers@kernel.org>
+From: Luca Boccassi <bluca@debian.org>
+Date: Thu, 8 Dec 2022 20:42:56 +0000
+X-Gmail-Original-Message-ID: <CAMw=ZnQUmeOWQkMM9Kn5iYaT4dyDQ3j1K=dUgk9jFNcHPxxHrg@mail.gmail.com>
+Message-ID: <CAMw=ZnQUmeOWQkMM9Kn5iYaT4dyDQ3j1K=dUgk9jFNcHPxxHrg@mail.gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
+X-Spam-Score: 0.5 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/08, Chao Yu wrote: > On 2022/12/6 2:54, Jaegeuk Kim
- wrote: > > Let's descrbie it's read extent cache. > > > > Signed-off-by:
- Jaegeuk
- Kim <jaegeuk@kernel.org> > > --- > > fs/f2fs/extent_cache.c | [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Thu, 8 Dec 2022 at 03:35,
+ Eric Biggers <ebiggers@kernel.org>
+ wrote: > > From: Eric Biggers <ebiggers@google.com> > > An issue that arises
+ when migrating from builtin signatures to userspace > signa [...] 
+ Content analysis details:   (0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [luca.boccassi[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p3Kih-00ARUy-FJ
-Subject: Re: [f2fs-dev] [PATCH 1/6] f2fs: specify extent cache for read
- explicitly
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.160.181 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.160.181 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
+ EnvelopeFrom freemail headers are different
+X-Headers-End: 1p3Njf-0007nD-Li
+Subject: Re: [f2fs-dev] [PATCH] fsverity: don't check builtin signatures
+ when require_signatures=0
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,207 +122,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fscrypt@vger.kernel.org, linux-integrity@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 12/08, Chao Yu wrote:
-> On 2022/12/6 2:54, Jaegeuk Kim wrote:
-> > Let's descrbie it's read extent cache.
-> > 
-> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > ---
-> >   fs/f2fs/extent_cache.c |  4 ++--
-> >   fs/f2fs/f2fs.h         | 10 +++++-----
-> >   fs/f2fs/inode.c        |  2 +-
-> >   fs/f2fs/node.c         |  2 +-
-> >   fs/f2fs/node.h         |  2 +-
-> >   fs/f2fs/segment.c      |  4 ++--
-> >   fs/f2fs/super.c        | 16 ++++++++--------
-> >   7 files changed, 20 insertions(+), 20 deletions(-)
-> > 
-> > diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-> > index 932c070173b9..8cd87aee0292 100644
-> > --- a/fs/f2fs/extent_cache.c
-> > +++ b/fs/f2fs/extent_cache.c
-> > @@ -383,7 +383,7 @@ static void __f2fs_init_extent_tree(struct inode *inode, struct page *ipage)
-> >   	if (!i_ext || !i_ext->len)
-> >   		return;
-> > -	get_extent_info(&ei, i_ext);
-> > +	get_read_extent_info(&ei, i_ext);
-> >   	write_lock(&et->lock);
-> >   	if (atomic_read(&et->node_cnt))
-> > @@ -710,7 +710,7 @@ unsigned int f2fs_shrink_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink)
-> >   	unsigned int node_cnt = 0, tree_cnt = 0;
-> >   	int remained;
-> > -	if (!test_opt(sbi, EXTENT_CACHE))
-> > +	if (!test_opt(sbi, READ_EXTENT_CACHE))
-> >   		return 0;
-> >   	if (!atomic_read(&sbi->total_zombie_tree))
-> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > index eb8c27c4e5fc..1c39f8145b61 100644
-> > --- a/fs/f2fs/f2fs.h
-> > +++ b/fs/f2fs/f2fs.h
-> > @@ -92,7 +92,7 @@ extern const char *f2fs_fault_name[FAULT_MAX];
-> >   #define F2FS_MOUNT_FLUSH_MERGE		0x00000400
-> >   #define F2FS_MOUNT_NOBARRIER		0x00000800
-> >   #define F2FS_MOUNT_FASTBOOT		0x00001000
-> > -#define F2FS_MOUNT_EXTENT_CACHE		0x00002000
-> > +#define F2FS_MOUNT_READ_EXTENT_CACHE	0x00002000
-> >   #define F2FS_MOUNT_DATA_FLUSH		0x00008000
-> >   #define F2FS_MOUNT_FAULT_INJECTION	0x00010000
-> >   #define F2FS_MOUNT_USRQUOTA		0x00080000
-> > @@ -600,7 +600,7 @@ enum {
-> >   #define F2FS_MIN_EXTENT_LEN	64	/* minimum extent length */
-> >   /* number of extent info in extent cache we try to shrink */
-> > -#define EXTENT_CACHE_SHRINK_NUMBER	128
-> > +#define READ_EXTENT_CACHE_SHRINK_NUMBER	128
-> >   #define RECOVERY_MAX_RA_BLOCKS		BIO_MAX_VECS
-> >   #define RECOVERY_MIN_RA_BLOCKS		1
-> > @@ -830,7 +830,7 @@ struct f2fs_inode_info {
-> >   	loff_t original_i_size;		/* original i_size before atomic write */
-> >   };
-> > -static inline void get_extent_info(struct extent_info *ext,
-> > +static inline void get_read_extent_info(struct extent_info *ext,
-> >   					struct f2fs_extent *i_ext)
-> >   {
-> >   	ext->fofs = le32_to_cpu(i_ext->fofs);
-> > @@ -838,7 +838,7 @@ static inline void get_extent_info(struct extent_info *ext,
-> >   	ext->len = le32_to_cpu(i_ext->len);
-> >   }
-> > -static inline void set_raw_extent(struct extent_info *ext,
-> > +static inline void set_raw_read_extent(struct extent_info *ext,
-> >   					struct f2fs_extent *i_ext)
-> >   {
-> >   	i_ext->fofs = cpu_to_le32(ext->fofs);
-> > @@ -4407,7 +4407,7 @@ static inline bool f2fs_may_extent_tree(struct inode *inode)
-> >   {
-> >   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> > -	if (!test_opt(sbi, EXTENT_CACHE) ||
-> > +	if (!test_opt(sbi, READ_EXTENT_CACHE) ||
-> >   			is_inode_flag_set(inode, FI_NO_EXTENT) ||
-> >   			(is_inode_flag_set(inode, FI_COMPRESSED_FILE) &&
-> >   			 !f2fs_sb_has_readonly(sbi)))
-> > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> > index 577f109b4e1d..2c705c60019b 100644
-> > --- a/fs/f2fs/inode.c
-> > +++ b/fs/f2fs/inode.c
-> > @@ -629,7 +629,7 @@ void f2fs_update_inode(struct inode *inode, struct page *node_page)
-> >   	if (et) {
-> >   		read_lock(&et->lock);
-> > -		set_raw_extent(&et->largest, &ri->i_ext);
-> > +		set_raw_read_extent(&et->largest, &ri->i_ext);
-> >   		read_unlock(&et->lock);
-> >   	} else {
-> >   		memset(&ri->i_ext, 0, sizeof(ri->i_ext));
-> > diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> > index b9ee5a1176a0..84b147966080 100644
-> > --- a/fs/f2fs/node.c
-> > +++ b/fs/f2fs/node.c
-> > @@ -85,7 +85,7 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
-> >   						sizeof(struct ino_entry);
-> >   		mem_size >>= PAGE_SHIFT;
-> >   		res = mem_size < ((avail_ram * nm_i->ram_thresh / 100) >> 1);
-> > -	} else if (type == EXTENT_CACHE) {
-> > +	} else if (type == READ_EXTENT_CACHE) {
-> >   		mem_size = (atomic_read(&sbi->total_ext_tree) *
-> >   				sizeof(struct extent_tree) +
-> >   				atomic_read(&sbi->total_ext_node) *
-> > diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
-> > index 3c09cae058b0..0aa48704c77a 100644
-> > --- a/fs/f2fs/node.h
-> > +++ b/fs/f2fs/node.h
-> > @@ -146,7 +146,7 @@ enum mem_type {
-> >   	NAT_ENTRIES,	/* indicates the cached nat entry */
-> >   	DIRTY_DENTS,	/* indicates dirty dentry pages */
-> >   	INO_ENTRIES,	/* indicates inode entries */
-> > -	EXTENT_CACHE,	/* indicates extent cache */
-> > +	READ_EXTENT_CACHE,	/* indicates read extent cache */
-> >   	DISCARD_CACHE,	/* indicates memory of cached discard cmds */
-> >   	COMPRESS_PAGE,	/* indicates memory of cached compressed pages */
-> >   	BASE_CHECK,	/* check kernel status */
-> > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> > index 9486ca49ecb1..51de358bc452 100644
-> > --- a/fs/f2fs/segment.c
-> > +++ b/fs/f2fs/segment.c
-> > @@ -449,8 +449,8 @@ void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
-> >   		return;
-> >   	/* try to shrink extent cache when there is no enough memory */
-> > -	if (!f2fs_available_free_memory(sbi, EXTENT_CACHE))
-> > -		f2fs_shrink_extent_tree(sbi, EXTENT_CACHE_SHRINK_NUMBER);
-> > +	if (!f2fs_available_free_memory(sbi, READ_EXTENT_CACHE))
-> > +		f2fs_shrink_extent_tree(sbi, READ_EXTENT_CACHE_SHRINK_NUMBER);
-> >   	/* check the # of cached NAT entries */
-> >   	if (!f2fs_available_free_memory(sbi, NAT_ENTRIES))
-> > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> > index 79bf1faf4161..10bd03bbefec 100644
-> > --- a/fs/f2fs/super.c
-> > +++ b/fs/f2fs/super.c
-> > @@ -814,10 +814,10 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
-> >   			set_opt(sbi, FASTBOOT);
-> >   			break;
-> >   		case Opt_extent_cache:
-> > -			set_opt(sbi, EXTENT_CACHE);
-> > +			set_opt(sbi, READ_EXTENT_CACHE);
-> >   			break;
-> >   		case Opt_noextent_cache:
-> > -			clear_opt(sbi, EXTENT_CACHE);
-> > +			clear_opt(sbi, READ_EXTENT_CACHE);
-> >   			break;
-> >   		case Opt_noinline_data:
-> >   			clear_opt(sbi, INLINE_DATA);
-> > @@ -1954,10 +1954,10 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
-> >   		seq_puts(seq, ",barrier");
-> >   	if (test_opt(sbi, FASTBOOT))
-> >   		seq_puts(seq, ",fastboot");
-> > -	if (test_opt(sbi, EXTENT_CACHE))
-> > -		seq_puts(seq, ",extent_cache");
-> > +	if (test_opt(sbi, READ_EXTENT_CACHE))
-> > +		seq_puts(seq, ",read_extent_cache");
-> 
-> How about keeping consistent w/ description of f2fs.rst?
+On Thu, 8 Dec 2022 at 03:35, Eric Biggers <ebiggers@kernel.org> wrote:
+>
+> From: Eric Biggers <ebiggers@google.com>
+>
+> An issue that arises when migrating from builtin signatures to userspace
+> signatures is that existing files that have builtin signatures cannot be
+> opened unless either CONFIG_FS_VERITY_BUILTIN_SIGNATURES is disabled or
+> the signing certificate is left in the .fs-verity keyring.
+>
+> Since builtin signatures provide no security benefit when
+> fs.verity.require_signatures=0 anyway, let's just skip the signature
+> verification in this case.
+>
+> Fixes: 432434c9f8e1 ("fs-verity: support builtin file signatures")
+> Cc: <stable@vger.kernel.org> # v5.4+
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
+> ---
+>  fs/verity/signature.c | 18 ++++++++++++++++--
+>  1 file changed, 16 insertions(+), 2 deletions(-)
 
-This doesn't change the mount options, but do show the exact name which
-would be better to say what's going on.
-
-> 
-> >   	else
-> > -		seq_puts(seq, ",noextent_cache");
-> > +		seq_puts(seq, ",no_read_extent_cache");
-> 
-> Ditto,
-> 
-> Thanks,
-> 
-> >   	if (test_opt(sbi, DATA_FLUSH))
-> >   		seq_puts(seq, ",data_flush");
-> > @@ -2076,7 +2076,7 @@ static void default_options(struct f2fs_sb_info *sbi)
-> >   	set_opt(sbi, INLINE_XATTR);
-> >   	set_opt(sbi, INLINE_DATA);
-> >   	set_opt(sbi, INLINE_DENTRY);
-> > -	set_opt(sbi, EXTENT_CACHE);
-> > +	set_opt(sbi, READ_EXTENT_CACHE);
-> >   	set_opt(sbi, NOHEAP);
-> >   	clear_opt(sbi, DISABLE_CHECKPOINT);
-> >   	set_opt(sbi, MERGE_CHECKPOINT);
-> > @@ -2218,7 +2218,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
-> >   	bool need_restart_ckpt = false, need_stop_ckpt = false;
-> >   	bool need_restart_flush = false, need_stop_flush = false;
-> >   	bool need_restart_discard = false, need_stop_discard = false;
-> > -	bool no_extent_cache = !test_opt(sbi, EXTENT_CACHE);
-> > +	bool no_read_extent_cache = !test_opt(sbi, READ_EXTENT_CACHE);
-> >   	bool enable_checkpoint = !test_opt(sbi, DISABLE_CHECKPOINT);
-> >   	bool no_io_align = !F2FS_IO_ALIGNED(sbi);
-> >   	bool no_atgc = !test_opt(sbi, ATGC);
-> > @@ -2308,7 +2308,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
-> >   	}
-> >   	/* disallow enable/disable extent_cache dynamically */
-> > -	if (no_extent_cache == !!test_opt(sbi, EXTENT_CACHE)) {
-> > +	if (no_read_extent_cache == !!test_opt(sbi, READ_EXTENT_CACHE)) {
-> >   		err = -EINVAL;
-> >   		f2fs_warn(sbi, "switch extent_cache option is not allowed");
-> >   		goto restore_opts;
+Acked-by: Luca Boccassi <bluca@debian.org>
 
 
 _______________________________________________
