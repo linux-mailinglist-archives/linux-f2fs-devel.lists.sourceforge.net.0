@@ -2,115 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C2A864776F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Dec 2022 21:43:26 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21785647789
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Dec 2022 21:55:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p3Njl-00023l-8Y;
-	Thu, 08 Dec 2022 20:43:21 +0000
+	id 1p3Nvo-00049H-1b;
+	Thu, 08 Dec 2022 20:55:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <luca.boccassi@gmail.com>) id 1p3Njj-00023Z-Ts
+ (envelope-from <ebiggers@kernel.org>) id 1p3Nvm-00049B-Ee
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Dec 2022 20:43:20 +0000
+ Thu, 08 Dec 2022 20:55:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=E980lveCUquKKhcMXhM1jQtjJxf2DwElGgp3q5gC3Vs=; b=KzRYtgDgdEt3PYfF1p++PF0Ngi
- BcNYjCIkBGzzaWtrnILCo8/lW+53pMYR/D24yCBsBfAlRQkT52xWG2tvo+OdkaoZLwKuno1zwcaHE
- bklyOBca/Zwj33U4UQy+Kbbtm/H91OWYceXpPnQMDFklfVbdBwYQMX9NgmaX49SQrzcQ=;
+ bh=ye5/i5vKiKHdXu1tq/AokYNcDLYuZn5TQQWUufUrro4=; b=OcM6GxuRPwJxFvOHF04F86W8RC
+ Ba7sayFcJ66AyoGYIcZytEhY1VKiS/8S/R3UCrdmqklQ/hVn+CoqYCrzxku4Jf+xVRP7nxR+vLfmu
+ N/v/iJqJ4TcYxuSPRxebBytsMp7I53phS1IJjJttZpnI284rJrLwwOAqm1Cv8TmR/uQM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=E980lveCUquKKhcMXhM1jQtjJxf2DwElGgp3q5gC3Vs=; b=VnEILYefFLJCFVC6Ggw4V9Xv56
- FcAKgGHevvxvm8aNdtUDYMToSbCDm3E70pOEvPJOl38he0rF0zKeLYgSSwlniF1szeg4KE5LFekfk
- 6sg2GvfWytwrAKzrF5rI2Aqi+0EgzDPgIcox8mYv1AV2pBC9g3rv52GrByKAXdjzCjDc=;
-Received: from mail-qt1-f181.google.com ([209.85.160.181])
+ bh=ye5/i5vKiKHdXu1tq/AokYNcDLYuZn5TQQWUufUrro4=; b=Kz/vh4ojhK1oET082ehrvzsEQK
+ 9L6JgABLeBRXMDEiRX5I1Qe4jxh7OoYuuZL8o29c2Zy5OfqB4PFc2nF7iIOEECRX1GFxV79m0ISsf
+ O+boFZsaHqD5NACxpntsMg6RMqrBrHZDnShBDxkV1r25Ey56KKSTXmUec6QGE6RYp9Pk=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1p3Njf-0007nD-Li for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Dec 2022 20:43:19 +0000
-Received: by mail-qt1-f181.google.com with SMTP id fu10so2108241qtb.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 08 Dec 2022 12:43:15 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=E980lveCUquKKhcMXhM1jQtjJxf2DwElGgp3q5gC3Vs=;
- b=QL5XxRZ5oMeiqu/JCa6anNEua7upwc8dI2AfPXQMpHRsyivU0Ao8eBEP2xhq+XzIOA
- d1STIv+1FfGiMPMCD9Nhb3D9/L0wgrO8jAJlE3T1b6e9TW3+aXQ0U3GeqPXjt2xt0oTb
- gfn/oNWSv2urUnQ76UC/8ZmhqidoKtyZkOYQYBTf05zVcKCToup0xw5MVlyXuwvbN7S8
- Kf6+y+hZIo40EPcNByz79SyoGf0OHNdCkR0PQwyX93H2uNrGnOc0w77tbsq7NFsAXJK2
- HQlHjQYyQ1EdCaUOlMvqc51v47gvEYC6rQK9Ltiqj2hYWljo++9cr9hm5D331u5UfKIz
- 7hUQ==
-X-Gm-Message-State: ANoB5plJsNgtNF49QFEWqZmrWPYMp+Es2omT3omaHrqY2Cidi2fX4U80
- qX7CvvWdm4nfaSkNeJY736C8JbmjBVkPEQ==
-X-Google-Smtp-Source: AA0mqf41qHNy4+a0NHXSYqg+QvCmjjWVSNU1fsHA5c/zqs/HgbkHbpCrd1KyZDCTdlFIaLBZltm/bA==
-X-Received: by 2002:a05:622a:509e:b0:3a6:8b3a:6450 with SMTP id
- fp30-20020a05622a509e00b003a68b3a6450mr4644496qtb.54.1670532188509; 
- Thu, 08 Dec 2022 12:43:08 -0800 (PST)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com.
- [209.85.128.172]) by smtp.gmail.com with ESMTPSA id
- x12-20020ac8538c000000b003a7e38055c9sm8191863qtp.63.2022.12.08.12.43.08
- for <linux-f2fs-devel@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Dec 2022 12:43:08 -0800 (PST)
-Received: by mail-yw1-f172.google.com with SMTP id
- 00721157ae682-3704852322fso27934727b3.8
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 08 Dec 2022 12:43:08 -0800 (PST)
-X-Received: by 2002:a81:ff06:0:b0:3ab:6ff4:a598 with SMTP id
- k6-20020a81ff06000000b003ab6ff4a598mr5143379ywn.425.1670532187832; Thu, 08
- Dec 2022 12:43:07 -0800 (PST)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1p3Nvh-0008KK-Hh for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Dec 2022 20:55:45 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 24C1661F2E;
+ Thu,  8 Dec 2022 20:55:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44762C433F0;
+ Thu,  8 Dec 2022 20:55:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1670532935;
+ bh=rbuH8ivUiGqEUNAE8E1MZzREUenrlcc3yHgPx3wu918=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=b3riEFg9pwcCA2/bl24yKGEzPVFIY31TIBifX49pOMVNxi4yRcVO/qrZYfFD6FqZI
+ yeEg/YOK8tVYivQ4DhG8zU90S/HBfVqQ6Q6E3f2EFAzuNSIQaRS7DnLSbGglZV27+/
+ xtSXDIhRE5hNnMWA+4dzYFn/J788Sl/AecJvpIh4wojkqI2fwiHo5WuUHt5oWyJG5P
+ L5EPtz3Z7V8EskcDOPe8U1y+xrPJXtv5L4i9NtD/ferwJluJoZ9co8H9aYcuQpwE0s
+ AmHflod78yvrdz1ynEXqHiljwBzSjO2SEVqWrBbM55mLL/XBamdnD5BpX3W6Zx9wB4
+ iAsL13h/Y3TMw==
+Date: Thu, 8 Dec 2022 12:55:33 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: Luca Boccassi <bluca@debian.org>
+Message-ID: <Y5JPRW+9dt28JpZ7@sol.localdomain>
+References: <20221208033548.122704-1-ebiggers@kernel.org>
+ <eea9b4dc9314da2de39b4181a4dac59fda8b0754.camel@debian.org>
 MIME-Version: 1.0
-References: <20221208033523.122642-1-ebiggers@kernel.org>
-In-Reply-To: <20221208033523.122642-1-ebiggers@kernel.org>
-From: Luca Boccassi <bluca@debian.org>
-Date: Thu, 8 Dec 2022 20:42:56 +0000
-X-Gmail-Original-Message-ID: <CAMw=ZnQUmeOWQkMM9Kn5iYaT4dyDQ3j1K=dUgk9jFNcHPxxHrg@mail.gmail.com>
-Message-ID: <CAMw=ZnQUmeOWQkMM9Kn5iYaT4dyDQ3j1K=dUgk9jFNcHPxxHrg@mail.gmail.com>
-To: Eric Biggers <ebiggers@kernel.org>
-X-Spam-Score: 0.5 (/)
+Content-Disposition: inline
+In-Reply-To: <eea9b4dc9314da2de39b4181a4dac59fda8b0754.camel@debian.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 8 Dec 2022 at 03:35,
- Eric Biggers <ebiggers@kernel.org>
- wrote: > > From: Eric Biggers <ebiggers@google.com> > > An issue that arises
- when migrating from builtin signatures to userspace > signa [...] 
- Content analysis details:   (0.5 points, 6.0 required)
+ Content preview:  On Thu, Dec 08, 2022 at 10:43:01AM +0000,
+ Luca Boccassi wrote:
+ > On Wed, 2022-12-07 at 19:35 -0800, Eric Biggers wrote: > > From: Eric Biggers
+ <ebiggers@google.com> > > > > fsverity builtin signatures [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [luca.boccassi[at]gmail.com]
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: fedoraproject.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.160.181 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.160.181 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
- EnvelopeFrom freemail headers are different
-X-Headers-End: 1p3Njf-0007nD-Li
-Subject: Re: [f2fs-dev] [PATCH] fsverity: don't check builtin signatures
- when require_signatures=0
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1p3Nvh-0008KK-Hh
+Subject: Re: [f2fs-dev] [PATCH] fsverity: mark builtin signatures as
+ deprecated
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,34 +109,81 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fscrypt@vger.kernel.org, linux-integrity@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org
+Cc: Jes Sorensen <jsorensen@meta.com>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fscrypt@vger.kernel.org, Victor Hsieh <victorhsieh@google.com>,
+ linux-integrity@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, 8 Dec 2022 at 03:35, Eric Biggers <ebiggers@kernel.org> wrote:
->
-> From: Eric Biggers <ebiggers@google.com>
->
-> An issue that arises when migrating from builtin signatures to userspace
-> signatures is that existing files that have builtin signatures cannot be
-> opened unless either CONFIG_FS_VERITY_BUILTIN_SIGNATURES is disabled or
-> the signing certificate is left in the .fs-verity keyring.
->
-> Since builtin signatures provide no security benefit when
-> fs.verity.require_signatures=0 anyway, let's just skip the signature
-> verification in this case.
->
-> Fixes: 432434c9f8e1 ("fs-verity: support builtin file signatures")
-> Cc: <stable@vger.kernel.org> # v5.4+
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> ---
->  fs/verity/signature.c | 18 ++++++++++++++++--
->  1 file changed, 16 insertions(+), 2 deletions(-)
+On Thu, Dec 08, 2022 at 10:43:01AM +0000, Luca Boccassi wrote:
+> On Wed, 2022-12-07 at 19:35 -0800, Eric Biggers wrote:
+> > From: Eric Biggers <ebiggers@google.com>
+> > 
+> > fsverity builtin signatures, at least as currently implemented, are a
+> > mistake and should not be used.  They mix the authentication policy
+> > between the kernel and userspace, which is not a clean design and causes
+> > confusion.  For builtin signatures to actually provide any security
+> > benefit, userspace still has to enforce that specific files have
+> > fsverity enabled.  Since userspace needs to do this, a better design is
+> > to have that same userspace code do the signature check too.
+> > 
+> > That allows better signature formats and algorithms to be used, avoiding
+> > in-kernel parsing of the notoriously bad PKCS#7 format.  It is also
+> > needed anyway when different keys need to be trusted for different
+> > files, or when it's desired to use fsverity for integrity-only or
+> > auditing on some files and for authenticity on other files.  Basically,
+> > the builtin signatures don't work for any nontrivial use case.
+> > 
+> > (IMA appraisal is another alternative.  It goes in the opposite
+> > direction -- the full policy is moved into the kernel.)
+> > 
+> > For these reasons, the master branch of AOSP no longer uses builtin
+> > signatures.  It still uses fsverity for some files, but signatures are
+> > verified in userspace when needed.
+> > 
+> > None of the public uses of builtin signatures outside Android seem to
+> > have gotten going, either.  Support for builtin signatures was added to
+> > RPM.  However, https://fedoraproject.org/wiki/Changes/FsVerityRPM was
+> > subsequently rejected from Fedora and seems to have been abandoned.
+> > There is also https://github.com/ostreedev/ostree/pull/2269, which was
+> > never merged.  Neither proposal mentioned a plan to set
+> > fs.verity.require_signatures=1 and enforce that files have fs-verity
+> > enabled -- so, they would have had no security benefit on their own.
+> > 
+> > I'd be glad to hear about any other users of builtin signatures that may
+> > exist, and help with the details of what should be used instead.
+> > 
+> > Anyway, the feature can't simply be removed, due to the need to maintain
+> > backwards compatibility.  But let's at least make it clear that it's
+> > deprecated.  Update the documentation accordingly, and rename the
+> > kconfig option to CONFIG_FS_VERITY_DEPRECATED_BUILTINSIG.  Also remove
+> > the kconfig option from the s390 defconfigs, as it's unneeded there.
+> 
+> Hi,
+> 
+> Thanks for starting this discussion, it's an interesting topic.
+> 
+> At MSFT we use fsverity in production, with signatures enforced by the
+> kernel (and policy enforced by the IPE LSM). It's just too easy to fool
+> userspace with well-timed swaps and who knows what else. This is not
+> any different from dm-verity from our POV, it complements it. I very
+> much want the kernel to be in charge of verification and validation, at
+> the time of use.
 
-Acked-by: Luca Boccassi <bluca@debian.org>
+Well, IPE is not upstream, and it duplicates functionality that already exists
+upstream (IMA appraisal).  So from an upstream perspective it doesn't really
+matter currently.  That's interesting that you've already deployed IPE in
+production anyway.  To re-iterate my question at
+https://lore.kernel.org/r/YqKGcdM3t5gjqBpq@sol.localdomain which was ignored,
+can you elaborate on why IPE should exist when IMA appraisal already exists (and
+already supports fsverity), and why IPE uses the fsverity builtin signatures?
+And are you sure that X.509 and PKCS#7 should be used in a new system?  These
+days, if you go through any sort of crypto or security review, you will be told
+not to use those formats since they are overly complex and prone to bugs.
+
+- Eric
 
 
 _______________________________________________
