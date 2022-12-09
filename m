@@ -2,119 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E4026481AC
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Dec 2022 12:29:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C2856483DA
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Dec 2022 15:37:45 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p3bYq-0007di-Ek;
-	Fri, 09 Dec 2022 11:29:00 +0000
+	id 1p3eVQ-0006kg-Ex;
+	Fri, 09 Dec 2022 14:37:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ssawgyw@gmail.com>) id 1p3bYX-0007cI-1N
+ (envelope-from <gabriel@krisman.be>) id 1p3eVC-0006kP-RZ
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 09 Dec 2022 11:28:41 +0000
+ Fri, 09 Dec 2022 14:37:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
+ Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aoo/cX4IZ2UyYHO4YqGyALy4RhYqCFL96tWg9Kbsz+s=; b=jEfaNDxxyx5upyhOygHAcRFx7Z
- UWB0HeQIdqZJ4dkVkunOU7MMmnIgsyYszvBpbD0rzI59s/JK5i5hSCgcnOhfuA1gwO4SDQpISDbJe
- Yj6W2dJktHZwQJEa/6kEVfi+dvOTkrmxMZ+ri9SnQii0Ud+SJgvG4rxuqIUFXJb2qQaU=;
+ bh=+rKQmaQriEX7XnldoSzk56zNLF0zT0xTnNbdoxc3XiY=; b=TJ8LZjq6gOm43ukEgUiNo2eWwF
+ xKuHXlxxz8/d010n340hTnKE4TgtQmichNHDbNl6ii/A5fFJKc1JF1DqYPkhsTUzgSH5XnpMzdNjF
+ 5MXtLrdDPgLYWn+XjhI8vpTKxXuET9BzdrBVx5ycUIb65WJrN0I/UZesupTnUrzpIMXA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=aoo/cX4IZ2UyYHO4YqGyALy4RhYqCFL96tWg9Kbsz+s=; b=A
- 7o8DTQPqZCR6mhCEYzBDkfydrUm7Q1Ue+3eXfQ1Y9AtE38C1wFakY97yu7/s8T76uXgqCgqFQdWP8
- 8sAqDp4J6cmFJ/Zqh2o//3uczu93Pz66WwFs0ZQDOxhyaj43xQ4gw/9gIHaY/7QJEz9sKNOlGYXw/
- dVR7uBnykurYC66E=;
-Received: from mail-pl1-f174.google.com ([209.85.214.174])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1p3bYW-0003DF-EG for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 09 Dec 2022 11:28:40 +0000
-Received: by mail-pl1-f174.google.com with SMTP id p24so4588634plw.1
+ h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+rKQmaQriEX7XnldoSzk56zNLF0zT0xTnNbdoxc3XiY=; b=GDvHzlJuVWTrhYlfzB9NvgOt0F
+ NLXvz5qV/OBzNk+eylkwpWmwrU7DDTnSDWRF4aEtpGkisNDVNFh2ARq1dzh36qCbQ2S6u+gralydV
+ Q2afK7jb4KeVQJeR0/8pBKwri7b2YAbFrujdMWcX+sJRGGJknihndkeE1w/KxXwCOjlM=;
+Received: from mslow1.mail.gandi.net ([217.70.178.240])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1p3eUs-00BO08-TS for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 09 Dec 2022 14:37:20 +0000
+Received: from relay8-d.mail.gandi.net (unknown [IPv6:2001:4b98:dc4:8::228])
+ by mslow1.mail.gandi.net (Postfix) with ESMTP id 86CFAC4AC8
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 09 Dec 2022 03:28:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=aoo/cX4IZ2UyYHO4YqGyALy4RhYqCFL96tWg9Kbsz+s=;
- b=lD9K6jv4/lVYwOsAhaAFdI95eUCppnuBLupdI7ZkjSU9kHf+Hr6DEtcYLu6hfcww/1
- DPGqdp0WrQgVeYdQjIbf52rnlTV633MXGhWCO66EPnSTs++nOizV6GhLmKrs+7EZYpDY
- mziZITxDfBncjmeVtcm6cEEA7Yz1nL6RvcemAdDL+xSLWR6PFTyvgVkKkgwEPcptYrW7
- m5OrBul3dYdV4TrUydP1AhMNhbOw428Q+cK7Vw0MgdQfyZS96QXxEjMoN+p/x1S+V6cC
- usMQrXf4IS9S2YyNzIyz2tOSFSQbVgu1b8On3DW9Eily6tQTu8xEmS8MJryzplcn7mlc
- 8+Ug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aoo/cX4IZ2UyYHO4YqGyALy4RhYqCFL96tWg9Kbsz+s=;
- b=HHPjXsczDBbr0S6zokAWJH4nmIEUIG+KhHrebd12BSHzR6DeBCYDw9fdDgU8mqNODU
- W2xJLTeVInIyGbSMLlBP9mtIW2GywI90deDOYx8PSulHXoSKJOf1AVK+sB2HoIemIM3x
- fRsTkjrdZujSiY/3mBd3RfyjP38a3gEjL2GIil7WTMKDkVwsukuZ4gfaUSCE7W48/Yxx
- Tch+ye//jKbMAOltzIx8BfBqb2CAM4uQUWBJPkkFNsDrjlE5vjn9GIDld+Huy7h9z21x
- q/q90tKedCnBfVAzQlfBiI/B3/TmsOTtEy5oiCWOqVAX9C09U3pxiR4FFQN2uqmyudAz
- wsEg==
-X-Gm-Message-State: ANoB5pkqf8hCy5oPLrf2n5SqZwtC0S0lBMmrEiy675Ua6pFDxW2Ukyi3
- gBdhLwVNkr8UaIdwxtylARQ4sF2s/1FSIYAU
-X-Google-Smtp-Source: AA0mqf6OzkKnmKhBujUklLEHyQsbCNBr0/7+6lnit808FFzDxnyPrrCUypLZ4qB4K+mT5+UlJpp8ig==
-X-Received: by 2002:a05:6a20:9e04:b0:a7:929d:4017 with SMTP id
- ms4-20020a056a209e0400b000a7929d4017mr5600945pzb.9.1670585314836; 
- Fri, 09 Dec 2022 03:28:34 -0800 (PST)
-Received: from VirtualBox.. ([129.227.152.6]) by smtp.gmail.com with ESMTPSA id
- r1-20020a63ce41000000b004790eb3fee1sm837928pgi.90.2022.12.09.03.28.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Dec 2022 03:28:34 -0800 (PST)
-From: Yuwei Guan <ssawgyw@gmail.com>
-X-Google-Original-From: Yuwei Guan <Yuwei.Guan@zeekrlife.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Fri,  9 Dec 2022 19:28:13 +0800
-Message-Id: <20221209112813.73700-1-Yuwei.Guan@zeekrlife.com>
-X-Mailer: git-send-email 2.34.1
+ Fri,  9 Dec 2022 13:47:59 +0000 (UTC)
+Received: (Authenticated sender: gabriel@krisman.be)
+ by mail.gandi.net (Postfix) with ESMTPSA id 31DD51BF207;
+ Fri,  9 Dec 2022 13:47:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=krisman.be; s=gm1;
+ t=1670593666;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=+rKQmaQriEX7XnldoSzk56zNLF0zT0xTnNbdoxc3XiY=;
+ b=RJRe/h7nXSXyFpHYeA8YZHnwGpXNox2c5FCAHXaTVd4aqjHXtPC/z9GRr5Pl85xBnBTbyX
+ 3JtJEZsNbZvS1EuyfWeFdOxGtTQPiQuGxMdr133LGLFhn/R0eOkQ7QSAzJ8fRsaBla/XBz
+ S1ue/jg4rGVTUjG+5EPveIVFqzJts3HwCZmt8Bj1u+V+0BXhKHqDGq74bAvvG4Wi0iBsmh
+ oYsg2Szvvu5uf3CqBp0jgMpKz8DrgBTCQ5uTPihqCXA+8ogbzL87BOdVBAQh2/bJJSVCOb
+ Mxillg4jZWxw/JKCqk2qadCUG2OK+uIA677sHIq9Z4IuR420jjLT4zySnVrwfw==
+From: Gabriel Krisman Bertazi <gabriel@krisman.be>
+To: Muhammad Usama Anjum <usama.anjum@collabora.com>
+References: <20220913234150.513075-1-krisman@collabora.com>
+ <Yy0t8WYhM+Dv3gX1@sol.localdomain> <87fsgi2lax.fsf@collabora.com>
+ <87tu47thie.fsf@suse.de>
+ <2859a108-3189-6407-2d11-6b9f0948f718@collabora.com>
+Date: Fri, 09 Dec 2022 10:47:37 -0300
+In-Reply-To: <2859a108-3189-6407-2d11-6b9f0948f718@collabora.com> (Muhammad
+ Usama Anjum's message of "Thu, 8 Dec 2022 19:38:46 +0500")
+Message-ID: <871qp8n0xy.fsf@suse.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 1.1 (+)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In non-foreground gc mode, if no victim is selected, the gc
- process will wait for no_gc_sleep_time before waking up again. In this
- subsequent
- time, even though a victim will be selected, the gc proces [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  Muhammad Usama Anjum <usama.anjum@collabora.com> writes: >
+ On 10/14/22 4:45 AM, Gabriel Krisman Bertazi wrote: >> Gabriel Krisman Bertazi
+ <krisman@collabora.com> writes: >> >>> Eric Biggers <ebiggers@kernel.org>
+ writes: >>> >>>> On Tue, Sep 13, 2022 at 07:4 [...] 
+ Content analysis details:   (1.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 1.3 RCVD_IN_VALIDITY_RPBL  RBL: Relay in Validity RPBL,
+ https://senderscore.org/blocklistlookup/
+ [217.70.178.240 listed in bl.score.senderscore.com]
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: krisman.be]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [217.70.178.240 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [ssawgyw[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.174 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.174 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1p3bYW-0003DF-EG
-Subject: [f2fs-dev] [PATCH] f2fs: do decrease_sleep_time() if any of the
- victims have been selected
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1p3eUs-00BO08-TS
+Subject: Re: [f2fs-dev] [PATCH v9 0/8] Clean up the case-insensitive lookup
+ path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,68 +115,58 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: kernel@collabora.com, tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
+ Eric Biggers <ebiggers@kernel.org>, adilger.kernel@dilger.ca,
+ jaegeuk@kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In non-foreground gc mode, if no victim is selected, the gc process
-will wait for no_gc_sleep_time before waking up again. In this
-subsequent time, even though a victim will be selected, the gc process
-still waits for no_gc_sleep_time before waking up. The configuration
-of wait_ms is not reasonable.
+Muhammad Usama Anjum <usama.anjum@collabora.com> writes:
 
-After any of the victims have been selected, we need to do
-decrease_sleep_time() to reduce wait_ms.
+> On 10/14/22 4:45 AM, Gabriel Krisman Bertazi wrote:
+>> Gabriel Krisman Bertazi <krisman@collabora.com> writes:
+>> 
+>>> Eric Biggers <ebiggers@kernel.org> writes:
+>>>
+>>>> On Tue, Sep 13, 2022 at 07:41:42PM -0400, Gabriel Krisman Bertazi wrote:
+>>>>> Hi,
+>>>>>
+>>>>> I'm resubmitting this as v9 since I think it has fallen through the
+>>>>> cracks :).  It is a collection of trivial fixes for casefold support on
+>>>>> ext4/f2fs. More details below.
+>>>>>
+>>>>> It has been sitting on the list for a while and most of it is r-b
+>>>>> already. I'm keeping the tags for this submission, since there is no
+>>>>> modifications from previous submissions, apart from a minor conflict
+>>>>> resolution when merging to linus/master.
+>>>>
+>>>> Who are you expecting to apply this?
+>>>
+>>> Hi Eric,
+>>>
+>>> There are three groups of changes here: libfs, ext4 and f2fs.  Since the
+>>> changes in libfs are self-contained and only affect these two
+>>> filesystems, I think it should be fine for them to go through a fs tree.
+>>>
+>>> The bulk of changes are ext4, and Ted mentioned on an earlier version
+>>> that he could pick the first patches of this series, so I'm thinking it
+>>> should all go through the ext4 tree.  If Jaegeuk acks, the f2fs changes
+>>> are safe to go with the rest, or I can send them afterwards as a
+>>> separate series once the libfs code is merged.
+>> 
+>> Ted,
+>> 
+>> Does the above plan work for you? Do you intend to pick this up for the
+>> next merge window?
+> It seems like this series hasn't been picked up. Any ideas on what can
+> be done?
 
-If it is GC_URGENT_HIGH or GC_URGENT_MID gc mode,
-wait_ms will keep urgent_sleep_time after executing decrease_sleep_time().
+I got tired of the radio silence and gave up on it.  If there is interest,
+feel free to respin it once more.
 
-In decrease_sleep_time() wait_time will be reduced to max_sleep_time
-from no_gc_sleep_time, if *wait is no_gc_sleep_time. And then it goes
-down in the next step.
-
-Signed-off-by: Yuwei Guan <Yuwei.Guan@zeekrlife.com>
----
- fs/f2fs/gc.c | 2 ++
- fs/f2fs/gc.h | 7 ++++++-
- 2 files changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index f0c6506d8975..c023ffeb9268 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -141,6 +141,8 @@ static int gc_thread_func(void *data)
- 			/* don't bother wait_ms by foreground gc */
- 			if (!foreground)
- 				wait_ms = gc_th->no_gc_sleep_time;
-+		} else {
-+			decrease_sleep_time(gc_th, &wait_ms);
- 		}
- 
- 		if (foreground)
-diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
-index 19b956c2d697..6402584dcd72 100644
---- a/fs/f2fs/gc.h
-+++ b/fs/f2fs/gc.h
-@@ -150,8 +150,13 @@ static inline void decrease_sleep_time(struct f2fs_gc_kthread *gc_th,
- {
- 	unsigned int min_time = gc_th->min_sleep_time;
- 
--	if (*wait == gc_th->no_gc_sleep_time)
-+	if (*wait == gc_th->urgent_sleep_time)
-+		return;
-+
-+	if (*wait == gc_th->no_gc_sleep_time) {
- 		*wait = gc_th->max_sleep_time;
-+		return;
-+	}
- 
- 	if ((long long)*wait - (long long)min_time < (long long)min_time)
- 		*wait = min_time;
 -- 
-2.34.1
-
+Gabriel Krisman Bertazi
 
 
 _______________________________________________
