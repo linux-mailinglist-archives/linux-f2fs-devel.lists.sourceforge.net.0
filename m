@@ -2,83 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 491486492A6
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 11 Dec 2022 07:04:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F8906493F4
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 11 Dec 2022 12:40:32 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p4FRf-00068T-Di;
-	Sun, 11 Dec 2022 06:04:15 +0000
+	id 1p4Kh0-0003ct-8L;
+	Sun, 11 Dec 2022 11:40:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1p4FRe-00068N-1N
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1p4Kgx-0003cm-Uh
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 11 Dec 2022 06:04:14 +0000
+ Sun, 11 Dec 2022 11:40:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1EnAx1geRWwCfFzlBGrx4cqIztH4USU76VYUhrnSf9o=; b=bX0S3JaPfvxci3lE0VFsKuVT4J
- y9dCp1GjDabxY9DxRcWtKHPyTCwkFnER2hlJFYlgodKtqzXwScaIIrWR7fPwuxMiO791sIKeZLhht
- kHu+KFcVRTGpXiPQA10aRZA1i9+y+xVyduDW6iq+QiOePsFvtk3nQQwWWx5KQgWAVw6I=;
+ bh=hZ/qpyCcNXV9188vfbaL7GlCk0rjYXS1q0yJ7cl16nc=; b=Dk6YlQoLHLf8KfgcW1ZUpiNJHc
+ cYQZA8H7ZUfJ4FUuj/n3RW6ZAJWhPEQypNrh7j1bf1Jc1x1prP+5d1l+F1f2HDbMTYZsgebRYmh3n
+ cVpBi5QhuR5o193Oo0pQfZo6BT5WJy9QXmPelBg5LsbCmH0m3dONkObdp8elYgjPAeEY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1EnAx1geRWwCfFzlBGrx4cqIztH4USU76VYUhrnSf9o=; b=nNdoxjxr2IK1gAqRioAL8lXzSU
- MyqsN1zjgqWB7hyOmGLK7hC7tzgugvoh89brsqqXwyB5h325LeeIe/G523v/KIEVo8XFOT/iAyrBe
- WJaW52oQzqOfc9+F0UscdmvNTHHf18YNdgqutUh7jqKdZwGg/2vhaPT6Geh+aFuIoAK0=;
+ bh=hZ/qpyCcNXV9188vfbaL7GlCk0rjYXS1q0yJ7cl16nc=; b=O2J0XEKlV/AkvP+tUyfD5DSVR0
+ JDy59795LhReXsyjJQw/9pSEdVFFOXi4ECEwVQGZ80bpWm/KyXj8+pRTM5sLLfKkw5Jlr70uiQr8b
+ 4Be1w4cKQa+95ImbKm2wwIzQTwOXTfLwMfme1VYdNSYqTMX6G+oQgG7pcqwCa01xG9sY=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p4FRY-00DY8D-QQ for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 11 Dec 2022 06:04:13 +0000
+ id 1p4Kgg-0004qa-2K for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 11 Dec 2022 11:40:15 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 61B2F60C99;
- Sun, 11 Dec 2022 06:04:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A34B2C433D2;
- Sun, 11 Dec 2022 06:03:59 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7300660D58
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 11 Dec 2022 11:39:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 72019C433F1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun, 11 Dec 2022 11:39:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1670738642;
- bh=U9Rhp55xf6rXsF3RAaS6Y+CbURUJS89vuN+H36qlHoI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=gvn7tDTwTp770J0jxxGbJ/eD63c2MIQ371jcBZF6XySVsl5cwc/6/VJo7EmthNzpR
- ox3i1TMBwhRRllHhRuEMj7/Ug14/jRwkSLG9TzG1xFIyrs+jBie1F8LMjwY/9KeJtK
- eIJeshb0ZiuFM2HlcrQabSdC3HRmw7LCtQjh0nG2y2NaUW5CC69gWekQmEFR96jvA+
- W3ZPJEJYx+e3y7DQ4q8N6XLP/qxyzl9WAQoFLBlxikvESbccCCFgAfPRaObz5IC/oX
- VspM7gm8zxvpsnKEKbW6OjUEbeBubLYFyePfm/TrC3WWIJWxybX8d6rAxbBHKq/UQM
- W5JZ+7R9vuEBQ==
-Message-ID: <489f2daa-4559-6c32-71e2-8bab65fb8154@kernel.org>
-Date: Sun, 11 Dec 2022 14:03:57 +0800
+ s=k20201202; t=1670758796;
+ bh=hZ/qpyCcNXV9188vfbaL7GlCk0rjYXS1q0yJ7cl16nc=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=tdI9DUSwlcS47ObXMGcANgs69rM57YjK3arwd8K9LVVjnIMYyoJCUvtWDqQUrzQ7+
+ AXa9Uw+xNdDaHWPbVAB+v7vVcX22+sE6/p5P7Ggksh2Uz9PBgUL44fh2gxwCV9cS+G
+ UiLYgZwpc3trd8WSMl/v1KDC0VUselWmVpvT0sEbWInqGNUtMaKrreaEjGjgAMvOdP
+ ypdlbcIjW+IVz7OUAtKdnaZY887+y8Kz9Cya0ox0/y60nk/Zw4GOQuxW1QrsL5FsR6
+ NbLGnTQbSIWQg70aW2JM9ReY3+JVqziBIDIYa17WkfLEbBNd1nrfV4/nwIr4LkQ9V9
+ 5KNKhoA/Svhog==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 578EDC43141; Sun, 11 Dec 2022 11:39:56 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Sun, 11 Dec 2022 11:39:56 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: v10lator@myway.de
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-216050-202145-sygYY0Y3qY@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
+References: <bug-216050-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.1
-Content-Language: en-US
-To: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
- linux-fsdevel@vger.kernel.org
-References: <20221102161031.5820-1-vishal.moola@gmail.com>
- <20221102161031.5820-17-vishal.moola@gmail.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221102161031.5820-17-vishal.moola@gmail.com>
-X-Spam-Score: -5.5 (-----)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/11/3 0:10, Vishal Moola (Oracle) wrote: > Convert
- function to use folios throughout. This is in preparation for the > removal
- of find_get_pages_range_tag(). This change removes 5 calls to > co [...] 
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
+ Comment
+ #109 from Thomas (v10lator@myway.de) --- For me it seems that applying the
+ debug patch with f2fs_io_schedule_timeout and running the f2fs-gc.sh script
+ one time, then rebooting fixed the pr [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -92,11 +110,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.3 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p4FRY-00DY8D-QQ
-Subject: Re: [f2fs-dev] [PATCH v4 16/23] f2fs: Convert
- f2fs_sync_meta_pages() to use filemap_get_folios_tag()
+X-Headers-End: 1p4Kgg-0004qa-2K
+Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,38 +124,25 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com, linux-mm@kvack.org, ceph-devel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-afs@lists.infradead.org,
- linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/11/3 0:10, Vishal Moola (Oracle) wrote:
-> Convert function to use folios throughout. This is in preparation for the
-> removal of find_get_pages_range_tag(). This change removes 5 calls to
-> compound_head().
-> 
-> Initially the function was checking if the previous page index is truly the
-> previous page i.e. 1 index behind the current page. To convert to folios and
-> maintain this check we need to make the check
-> folio->index != prev + folio_nr_pages(previous folio) since we don't know
-> how many pages are in a folio.
-> 
-> At index i == 0 the check is guaranteed to succeed, so to workaround indexing
-> bounds we can simply ignore the check for that specific index. This makes the
-> initial assignment of prev trivial, so I removed that as well.
-> 
-> Also modified a comment in commit_checkpoint for consistency.
-> 
-> Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
+https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
-Acked-by: Chao Yu <chao@kernel.org>
+--- Comment #109 from Thomas (v10lator@myway.de) ---
+For me it seems that applying the debug patch with f2fs_io_schedule_timeout and
+running the f2fs-gc.sh script one time, then rebooting fixed the problem.
 
-Thanks,
+For me this was on the root partition which is on a NVMe SSD. I also edited the
+f2fs-gc.sh script so it runs on that partition only instead of running on all
+found f2fs partitions before executing it.
 
+-- 
+You may reply to this email to add a comment.
+
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
