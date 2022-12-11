@@ -2,126 +2,118 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64C55649422
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 11 Dec 2022 13:09:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8994649429
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 11 Dec 2022 13:19:50 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p4L8c-0004Am-1s;
-	Sun, 11 Dec 2022 12:08:58 +0000
+	id 1p4LJ4-0004WE-UA;
+	Sun, 11 Dec 2022 12:19:46 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ssawgyw@gmail.com>) id 1p4L8V-0004Aa-8B
+ (envelope-from <ssawgyw@gmail.com>) id 1p4LIj-0004Vz-Ta
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 11 Dec 2022 12:08:51 +0000
+ Sun, 11 Dec 2022 12:19:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9WrHr/ARwnMyppm++yunzPxOr+kEprrwqMrIKFv+XIU=; b=NtauvvvOt8sCzGV1k4PGeWu9OF
- o539Y45nfx2P5C37IJ4oxAe3PAzTcDGZzuYEhH7SZ93R04kRte5LrywCYYqZMOx+ziRFvahVnhltj
- C2DPA318agYQ+qHZ4V7vwaze5Hn1uuSUa1JamExQ0jiteEND/EMYGKTQeOwVq7TqbJE4=;
+ bh=2gPtb0kZX78YC1crT8EvCgaAOrm2u8F10CNCRPyKjDs=; b=Hhqk1tnmx1cDQmjr8eCuv5MNEu
+ t+483Dny6iUxle1jpWv6/fGBL8YSP2efMA14aCi0wexqFq+ZAs2EM3YDsxOPBwqk8Ztjl0AvCfIdr
+ NPb6xKWiUFCjGDmufcRpP/yfg7e0cCIN4+wextWiLrLSbgN48V3YoxKZpx7Bk3l7FKFU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=9WrHr/ARwnMyppm++yunzPxOr+kEprrwqMrIKFv+XIU=; b=HnKuXl78Zbple2Caa4R2IvXqDX
- yX9YLCWDQCooFOKsIEXlm7O6qjq+zfFEUNWca0KMOMYuipDcIoE4FvMdwt6MmL+5P+B6Y3qHcIUa0
- 6f5X9YfjToCAGxRBg7kwV/rFIP7Ly91k3UsmcQgiK0s0zJdygTjRFIY3IUHW6jYXbyb8=;
-Received: from mail-pj1-f54.google.com ([209.85.216.54])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=2gPtb0kZX78YC1crT8EvCgaAOrm2u8F10CNCRPyKjDs=; b=V
+ hQd+EwTr4IE63G0vo1iQp8iwiESiGHu2KWldSZjKweT/FoVnIWX863b6yoEnwchDYF9QXP59kqzNz
+ U831NB2KY6co8q/x41TPnc19/orLgmVHVwjYpCC+H1fpqSzmyMyKrFvOQ7BrOe8w6/eAXdeHMt58K
+ eqg/GG68whm93500=;
+Received: from mail-pg1-f181.google.com ([209.85.215.181])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1p4L8T-0005uY-BL for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 11 Dec 2022 12:08:51 +0000
-Received: by mail-pj1-f54.google.com with SMTP id js9so8233779pjb.2
+ id 1p4LIg-00Doid-63 for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 11 Dec 2022 12:19:25 +0000
+Received: by mail-pg1-f181.google.com with SMTP id f3so6450210pgc.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 11 Dec 2022 04:08:49 -0800 (PST)
+ Sun, 11 Dec 2022 04:19:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9WrHr/ARwnMyppm++yunzPxOr+kEprrwqMrIKFv+XIU=;
- b=NKtFvqzh0GHJdhTuyl8EatAHdryR01F6HQEMJNRDaDOuxCepmMGCLP72sSFp9gVMM7
- gygK2XTYA6YB9wdjJuJhKyrDCGd8+E2bvYP1+E5i6tnzpRvzVoNTesbIEU0IxQuQNtBd
- cXL3gmU9k9vplNNnWoDlULalhfziN+Me0plYqafFdeV71B3y7/xKu0DcJMcjlA2qfNju
- GEIN1h276n1tvlqmS4WDUa1MiJytO3gvN+P/9T/6vpPGEIaMojt3KnVmLA8htg9QN/uC
- CLDvzl0LClM3jOFa/Y+F+9pNIY64/zAL2nXzOp3cRkze1ifE27FpgFtwUIx11/k8iJ1v
- bRxg==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2gPtb0kZX78YC1crT8EvCgaAOrm2u8F10CNCRPyKjDs=;
+ b=qrIcVpUzXvWXYO3UhPLOnorH/Eu/FHJejqP7uivXntXh0txXkSUgUup7nNojEoAKCa
+ EmCWI3H16krYpIW2w2JWRS7C1LzuS7hcv9S3p34ufjZEexlyIOEWrWFKSZjqscfzEaa7
+ hz5CVyjz1PHWYOWPxtN+nmHDD0dW1SeWi/DcYir/6H4rhDNT3KkV3ZxeToSkxi9S8VG3
+ 8xb/mCU4fr1rNTrr52nEuGoNCqRHtp3bDZMDSCvA9MR/COJKTGIBRdZuBWt0rkukMBSf
+ NLer25MBEjP0hrAmNKg6xavme1lWhZ1MAEMOt8NigV8ARg9BxQ02Jcx8r2bvQML8/WFV
+ ncMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=9WrHr/ARwnMyppm++yunzPxOr+kEprrwqMrIKFv+XIU=;
- b=n23mrDlOKvS2X/TbT8z3CR9Pwql+Coq4dPJCiFapeuzxHVWkc4XFVaE+gMg1A8JDjQ
- dXm0FOFnM33WwHn1+IFdPhru0fWthRtwkcPyBsss1u2eYTiPkIXs3Yz6wz8XIyTHt+eO
- v1AIU6t+iOZ24mn8QSV9gnlsSEuRTxmzTV4oE+HH5dqzPgwujOTGpGpW4CWvvvi3/RJP
- LXBBe/vvNCrCO1a5xwVnTDSEIjC7wDCwwA/Mkb0rLKTXiIbesWH2VakTfns/SnN7Ktcm
- aiSh1cB+Dg4SeWlT+7QJ4LwHpQqJ7qXAh8C++2ydf2P9ONo0iYLY8253U/T7vIXS9KKq
- uglQ==
-X-Gm-Message-State: ANoB5pkT2F/5dyZCwM9pbpsMmLBpSbKgm+UFIkA+VZnIjID45l2KytgD
- jpFpzdRmd5uylmILxSPvRJ4=
-X-Google-Smtp-Source: AA0mqf6I8yxImjueeWCqD2/eos0s/WkdQT7MJbHro4tD1yZF6qlRgRjP54rcihxZSpmZms4el5rxgQ==
-X-Received: by 2002:a05:6a21:3398:b0:a4:bd66:6201 with SMTP id
- yy24-20020a056a21339800b000a4bd666201mr19735663pzb.59.1670760523767; 
- Sun, 11 Dec 2022 04:08:43 -0800 (PST)
-Received: from [127.0.0.1] (ec2-18-162-209-88.ap-east-1.compute.amazonaws.com.
- [18.162.209.88]) by smtp.gmail.com with ESMTPSA id
- a21-20020aa794b5000000b00574b86040a4sm3956601pfl.3.2022.12.11.04.08.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 11 Dec 2022 04:08:43 -0800 (PST)
-Message-ID: <547e58b1-942e-8beb-29a2-3920184c46a0@gmail.com>
-Date: Sun, 11 Dec 2022 20:08:39 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.1
-To: Chao Yu <chao@kernel.org>, jaegeuk@kernel.org
-References: <20221121161101.72847-1-Yuwei.Guan@zeekrlife.com>
- <7368c57a-141e-86b0-365f-8af795940483@kernel.org>
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2gPtb0kZX78YC1crT8EvCgaAOrm2u8F10CNCRPyKjDs=;
+ b=qOWgPd4bdbNQ20ZgY96GblbS/gz5LGzn5BAnkd4ycnPB7e+Xk5PPMs2PjB7JosVK+P
+ HXlnh+bXB3/nMhq4QyB4lF/SoMqDlTMwOoBV2fhk+aTW03cEHSnjjLh8Oab058MEtndO
+ lu9daaXB/I3OjoNpWayIgUDvIkMFcd5bW2ZRGXR9Rz/CLNhQX7erCPT69/3xGfTzs4hV
+ TA1cAJQpOD6igH7/bIoAbu2099sO7rBUweVJB1Zf243oY20o5do+MTdXuio5novS4WKD
+ gAeDupeVTg/uF6UTGTH5a6fItuoiNnAZKfmUpHIu/U5TeUERWBlFdLOdaJASCCJhHWhN
+ Co7A==
+X-Gm-Message-State: ANoB5plzofUfzamprhvP3ewLLZKismIb5D726mPlcj8u+gX//ourDjw/
+ NERBcOkqH+tBZKSUbQ79Kt8=
+X-Google-Smtp-Source: AA0mqf4vuuM+wRcWw8X2rkwWqijFrj/G0xljLe1/XMy+uhyQPu5NxN2mrGYn/do9HVRXVBE6izGVRw==
+X-Received: by 2002:aa7:9050:0:b0:56d:67d7:1eb2 with SMTP id
+ n16-20020aa79050000000b0056d67d71eb2mr12565044pfo.19.1670761156574; 
+ Sun, 11 Dec 2022 04:19:16 -0800 (PST)
+Received: from VirtualBox.. ([129.227.152.6]) by smtp.gmail.com with ESMTPSA id
+ k145-20020a628497000000b00578199ea5afsm2472838pfd.9.2022.12.11.04.19.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 11 Dec 2022 04:19:16 -0800 (PST)
 From: Yuwei Guan <ssawgyw@gmail.com>
-In-Reply-To: <7368c57a-141e-86b0-365f-8af795940483@kernel.org>
-X-Spam-Score: -2.2 (--)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-Google-Original-From: Yuwei Guan <Yuwei.Guan@zeekrlife.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Sun, 11 Dec 2022 20:18:52 +0800
+Message-Id: <20221211121852.112127-1-Yuwei.Guan@zeekrlife.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  在 2022/12/11 10:36, Chao Yu 写道: > On 2022/11/22 0:11,
-    Yuwei Guan wrote: >> As the 'dcc->discard_granularity' and 'dcc->max_ordered_discard'
-    can >> be set >> at the user space, and if the 'dcc->m [...] 
- 
- Content analysis details:   (-2.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview: As the 'dcc->discard_granularity' and
+ 'dcc->max_ordered_discard'
+ can be set at the user space, and if the 'dcc->max_ordered_discard' is set
+ larger than 'dcc->discard_granularity' in DPOLICY_BG mode, o [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [ssawgyw[at]gmail.com]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [209.85.216.54 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.216.54 listed in list.dnswl.org]
+ no trust [209.85.215.181 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [ssawgyw[at]gmail.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1p4L8T-0005uY-BL
-Subject: Re: [f2fs-dev] [PATCH] f2fs: continuous counting for 'issued' in
+ envelope-from domain
+ -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.215.181 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1p4LIg-00Doid-63
+Subject: [f2fs-dev] [PATCH v2] f2fs: continuous counting for 'issued' in
  __issue_discard_cmd_orderly()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -135,73 +127,91 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-CgrlnKggMjAyMi8xMi8xMSAxMDozNiwgQ2hhbyBZdSDlhpnpgZM6Cj4gT24gMjAyMi8xMS8yMiAw
-OjExLCBZdXdlaSBHdWFuIHdyb3RlOgo+PiBBcyB0aGUgJ2RjYy0+ZGlzY2FyZF9ncmFudWxhcml0
-eScgYW5kICdkY2MtPm1heF9vcmRlcmVkX2Rpc2NhcmQnIGNhbiAKPj4gYmUgc2V0Cj4+IGF0IHRo
-ZSB1c2VyIHNwYWNlLCBhbmQgaWYgdGhlICdkY2MtPm1heF9vcmRlcmVkX2Rpc2NhcmQnIGlzIHNl
-dCBsYXJnZXIgCj4+IHRoYW4KPj4gJ2RjYy0+ZGlzY2FyZF9ncmFudWxhcml0eScgaW4gRFBPTElD
-WV9CRyBtb2RlLCBvciBpdCdzIGEgdm9sdW1lIGRldmljZSwKPj4gZGlzY2FyZF9ncmFudWxhcml0
-eSBjYW4gYmUgdHVuZWQgdG8gMSBpbiBmMmZzX3R1bmluZ19wYXJhbWV0ZXJzKCksCj4+IGl0IHdp
-bGwgbWF5IHNlbmQgbW9yZSByZXF1ZXN0cyB0aGFuIHRoZSBudW1iZXIgb2YgJ2Rwb2xpY3ktPm1h
-eF9yZXF1ZXN0cycKPj4gaW4gaXNzdWVfZGlzY2FyZF90aHJlYWQoKS4KPj4KPj4gVGhpcyBwYXRj
-aCB3aWxsIGZpeCB0aGUgaXNzdWUuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IFl1d2VpIEd1YW4gPFl1
-d2VpLkd1YW5AemVla3JsaWZlLmNvbT4KPj4gLS0tCj4+IMKgIGZzL2YyZnMvc2VnbWVudC5jIHwg
-MTcgKysrKysrKystLS0tLS0tLS0KPj4gwqAgMSBmaWxlIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygr
-KSwgOSBkZWxldGlvbnMoLSkKPj4KPj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvc2VnbWVudC5jIGIv
-ZnMvZjJmcy9zZWdtZW50LmMKPj4gaW5kZXggOGIwYjc2NTUwNTc4Li5iMDE1N2JmMzkyZmIgMTAw
-NjQ0Cj4+IC0tLSBhL2ZzL2YyZnMvc2VnbWVudC5jCj4+ICsrKyBiL2ZzL2YyZnMvc2VnbWVudC5j
-Cj4+IEBAIC0xMzc5LDggKzEzNzksOCBAQCBzdGF0aWMgaW50IF9fcXVldWVfZGlzY2FyZF9jbWQo
-c3RydWN0IAo+PiBmMmZzX3NiX2luZm8gKnNiaSwKPj4gwqDCoMKgwqDCoCByZXR1cm4gMDsKPj4g
-wqAgfQo+PiAtc3RhdGljIHVuc2lnbmVkIGludCBfX2lzc3VlX2Rpc2NhcmRfY21kX29yZGVybHko
-c3RydWN0IGYyZnNfc2JfaW5mbyAKPj4gKnNiaSwKPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBkaXNjYXJkX3BvbGljeSAqZHBvbGljeSkKPj4gK3N0YXRp
-YyBpbnQgX19pc3N1ZV9kaXNjYXJkX2NtZF9vcmRlcmx5KHN0cnVjdCBmMmZzX3NiX2luZm8gKnNi
-aSwKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBkaXNj
-YXJkX3BvbGljeSAqZHBvbGljeSwgaW50ICppc3N1ZWQpCj4+IMKgIHsKPj4gwqDCoMKgwqDCoCBz
-dHJ1Y3QgZGlzY2FyZF9jbWRfY29udHJvbCAqZGNjID0gU01fSShzYmkpLT5kY2NfaW5mbzsKPj4g
-wqDCoMKgwqDCoCBzdHJ1Y3QgZGlzY2FyZF9jbWQgKnByZXZfZGMgPSBOVUxMLCAqbmV4dF9kYyA9
-IE5VTEw7Cj4+IEBAIC0xMzg4LDcgKzEzODgsNiBAQCBzdGF0aWMgdW5zaWduZWQgaW50IAo+PiBf
-X2lzc3VlX2Rpc2NhcmRfY21kX29yZGVybHkoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpLAo+PiDC
-oMKgwqDCoMKgIHN0cnVjdCBkaXNjYXJkX2NtZCAqZGM7Cj4+IMKgwqDCoMKgwqAgc3RydWN0IGJs
-a19wbHVnIHBsdWc7Cj4+IMKgwqDCoMKgwqAgdW5zaWduZWQgaW50IHBvcyA9IGRjYy0+bmV4dF9w
-b3M7Cj4+IC3CoMKgwqAgdW5zaWduZWQgaW50IGlzc3VlZCA9IDA7Cj4+IMKgwqDCoMKgwqAgYm9v
-bCBpb19pbnRlcnJ1cHRlZCA9IGZhbHNlOwo+PiDCoMKgwqDCoMKgIG11dGV4X2xvY2soJmRjYy0+
-Y21kX2xvY2spOwo+PiBAQCAtMTQxNSw5ICsxNDE0LDkgQEAgc3RhdGljIHVuc2lnbmVkIGludCAK
-Pj4gX19pc3N1ZV9kaXNjYXJkX2NtZF9vcmRlcmx5KHN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSwK
-Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIH0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGRjYy0+bmV4dF9w
-b3MgPSBkYy0+bHN0YXJ0ICsgZGMtPmxlbjsKPj4gLcKgwqDCoMKgwqDCoMKgIGVyciA9IF9fc3Vi
-bWl0X2Rpc2NhcmRfY21kKHNiaSwgZHBvbGljeSwgZGMsICZpc3N1ZWQpOwo+PiArwqDCoMKgwqDC
-oMKgwqAgZXJyID0gX19zdWJtaXRfZGlzY2FyZF9jbWQoc2JpLCBkcG9saWN5LCBkYywgaXNzdWVk
-KTsKPj4gLcKgwqDCoMKgwqDCoMKgIGlmIChpc3N1ZWQgPj0gZHBvbGljeS0+bWF4X3JlcXVlc3Rz
-KQo+PiArwqDCoMKgwqDCoMKgwqAgaWYgKCppc3N1ZWQgPj0gZHBvbGljeS0+bWF4X3JlcXVlc3Rz
-KQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBicmVhazsKPj4gwqAgbmV4dDoKPj4gwqDC
-oMKgwqDCoMKgwqDCoMKgIG5vZGUgPSByYl9uZXh0KCZkYy0+cmJfbm9kZSk7Cj4+IEBAIC0xNDMz
-LDEwICsxNDMyLDEwIEBAIHN0YXRpYyB1bnNpZ25lZCBpbnQgCj4+IF9faXNzdWVfZGlzY2FyZF9j
-bWRfb3JkZXJseShzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmksCj4+IMKgwqDCoMKgwqAgbXV0ZXhf
-dW5sb2NrKCZkY2MtPmNtZF9sb2NrKTsKPj4gLcKgwqDCoCBpZiAoIWlzc3VlZCAmJiBpb19pbnRl
-cnJ1cHRlZCkKPj4gLcKgwqDCoMKgwqDCoMKgIGlzc3VlZCA9IC0xOwo+PiArwqDCoMKgIGlmICgh
-KCppc3N1ZWQpICYmIGlvX2ludGVycnVwdGVkKQo+PiArwqDCoMKgwqDCoMKgwqAgKmlzc3VlZCA9
-IC0xOwo+PiAtwqDCoMKgIHJldHVybiBpc3N1ZWQ7Cj4+ICvCoMKgwqAgcmV0dXJuICppc3N1ZWQ7
-Cj4gCj4gQSBsaXR0bGUgd2VpcmVkIHRoYXQgX19pc3N1ZV9kaXNjYXJkX2NtZF9vcmRlcmx5KCkg
-d2lsbCBvdXRwdXQgdGhlIGRhdGEKPiBpbiBib3RoIHJldHVybiB2YWx1ZSBhbmQgQGlzc3VlZCBw
-YXJhbWV0ZXIuCj4gCkdvdCBpdC4KPiBIb3cgYWJvdXQgY2hhbmdpbmcgdHlwZSBvZiByZXR1cm4g
-dmFsdWUgX19pc3N1ZV9kaXNjYXJkX2NtZF9vcmRlcmx5KCkKPiBmcm9tIHVuc2lnbmVkIGludCB0
-byB2b2lkLgo+IApJIHdpbGwgc2VudCBhIHYyIHBhdGNoIGZvciB0aGlzLgo+IFRoYW5rcywKPiAK
-Pj4gwqAgfQo+PiDCoCBzdGF0aWMgdW5zaWduZWQgaW50IF9fd2FpdF9hbGxfZGlzY2FyZF9jbWQo
-c3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpLAo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgc3RydWN0IGRpc2NhcmRfcG9saWN5ICpkcG9saWN5KTsKPj4gQEAgLTE0
-NjUsNyArMTQ2NCw3IEBAIHN0YXRpYyBpbnQgX19pc3N1ZV9kaXNjYXJkX2NtZChzdHJ1Y3QgCj4+
-IGYyZnNfc2JfaW5mbyAqc2JpLAo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBicmVhazsK
-Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChpICsgMSA8IGRjYy0+bWF4X29yZGVyZWRfZGlzY2Fy
-ZCAmJiBkcG9saWN5LT5vcmRlcmVkKQo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4g
-X19pc3N1ZV9kaXNjYXJkX2NtZF9vcmRlcmx5KHNiaSwgZHBvbGljeSk7Cj4+ICvCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIHJldHVybiBfX2lzc3VlX2Rpc2NhcmRfY21kX29yZGVybHkoc2JpLCBkcG9s
-aWN5LCAmaXNzdWVkKTsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHBlbmRfbGlzdCA9ICZkY2MtPnBl
-bmRfbGlzdFtpXTsKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3Rz
-LnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0
-aW5mby9saW51eC1mMmZzLWRldmVsCg==
+As the 'dcc->discard_granularity' and 'dcc->max_ordered_discard' can be set
+at the user space, and if the 'dcc->max_ordered_discard' is set larger than
+'dcc->discard_granularity' in DPOLICY_BG mode, or it's a volume device,
+discard_granularity can be tuned to 1 in f2fs_tuning_parameters(),
+it will may send more requests than the number of 'dpolicy->max_requests'
+in issue_discard_thread().
+
+This patch will fix the issue.
+
+Signed-off-by: Yuwei Guan <Yuwei.Guan@zeekrlife.com>
+---
+ fs/f2fs/segment.c | 21 ++++++++++-----------
+ 1 file changed, 10 insertions(+), 11 deletions(-)
+
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index a9099a754dd2..908b9a9bd82d 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1379,8 +1379,8 @@ static void __queue_discard_cmd(struct f2fs_sb_info *sbi,
+ 	mutex_unlock(&SM_I(sbi)->dcc_info->cmd_lock);
+ }
+ 
+-static unsigned int __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
+-					struct discard_policy *dpolicy)
++static void __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
++					struct discard_policy *dpolicy, int *issued)
+ {
+ 	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
+ 	struct discard_cmd *prev_dc = NULL, *next_dc = NULL;
+@@ -1388,7 +1388,6 @@ static unsigned int __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
+ 	struct discard_cmd *dc;
+ 	struct blk_plug plug;
+ 	unsigned int pos = dcc->next_pos;
+-	unsigned int issued = 0;
+ 	bool io_interrupted = false;
+ 
+ 	mutex_lock(&dcc->cmd_lock);
+@@ -1415,9 +1414,9 @@ static unsigned int __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
+ 		}
+ 
+ 		dcc->next_pos = dc->lstart + dc->len;
+-		err = __submit_discard_cmd(sbi, dpolicy, dc, &issued);
++		err = __submit_discard_cmd(sbi, dpolicy, dc, issued);
+ 
+-		if (issued >= dpolicy->max_requests)
++		if (*issued >= dpolicy->max_requests)
+ 			break;
+ next:
+ 		node = rb_next(&dc->rb_node);
+@@ -1433,10 +1432,8 @@ static unsigned int __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
+ 
+ 	mutex_unlock(&dcc->cmd_lock);
+ 
+-	if (!issued && io_interrupted)
+-		issued = -1;
+-
+-	return issued;
++	if (!(*issued) && io_interrupted)
++		*issued = -1;
+ }
+ static unsigned int __wait_all_discard_cmd(struct f2fs_sb_info *sbi,
+ 					struct discard_policy *dpolicy);
+@@ -1464,8 +1461,10 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+ 		if (i + 1 < dpolicy->granularity)
+ 			break;
+ 
+-		if (i + 1 < dcc->max_ordered_discard && dpolicy->ordered)
+-			return __issue_discard_cmd_orderly(sbi, dpolicy);
++		if (i + 1 < dcc->max_ordered_discard && dpolicy->ordered) {
++			__issue_discard_cmd_orderly(sbi, dpolicy, &issued);
++			return issued;
++		}
+ 
+ 		pend_list = &dcc->pend_list[i];
+ 
+-- 
+2.34.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
