@@ -2,64 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D65D649874
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Dec 2022 05:46:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80C3264987B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Dec 2022 05:49:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p4ahg-00052R-Gb;
-	Mon, 12 Dec 2022 04:46:12 +0000
+	id 1p4akU-0000Ca-8b;
+	Mon, 12 Dec 2022 04:49:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1p4ahf-00052F-K7
+ (envelope-from <ebiggers@kernel.org>) id 1p4akF-0000CB-Ma
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Dec 2022 04:46:11 +0000
+ Mon, 12 Dec 2022 04:48:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
  From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=h3u27pM1KdReLMKP7YcpwMjlxkY/BHSbHp2QG5ymXbE=; b=Bx6610Cmtb3xEbra/l5tJW0WjX
- ek23ETcniS0O1sLzWCZ7LHHuOS8KgIQMzV3SlC5J74BmRKC73nhfwfaUGUbYWiGvlz+ANmgD7atrG
- o2eewqIKm2kSOxzXJtg7oTRGlo2Up0uVddlo8LIQ3x83oQogeUBPr7acMjwrZaw5BKTs=;
+ bh=j/fs7VMWPZeRXSGt3VEbQ/vYccxgN/NgVB0x6PdebXw=; b=MN2KzdyfvwVr8ZmW+e3/WBF0nk
+ eFH/EbtfOjl2Z1HWpdCqkRIRGoSpE6ySNWgPtCWlXaKJHbkFnL4V/W5AqQ5Xj4eU66ug6j0r76hkw
+ 8cD1QHxve9QPQBseiT4rTOb1MB41aZ33J/29zUmteOJCsYltzQSPcSVn8JD48xcPpK7k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
  Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=h3u27pM1KdReLMKP7YcpwMjlxkY/BHSbHp2QG5ymXbE=; b=e
- c0JE5RELYXyKRyt2plDWnNCw+aGHw3jfFTkR3Os3dGVqX982w6Xsd1vmyyoKAJuphFs97eY/la0hU
- F34ccGpem1yLv4upy77M+uzF/dRghQyAxSJ9r2zSYsDApd9jpgyr37m9ImsC98W+zeTPsUjsvDVcx
- AEt105pBzuXnlMc0=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=j/fs7VMWPZeRXSGt3VEbQ/vYccxgN/NgVB0x6PdebXw=; b=g
+ liMSUE/CUm7FYSdRGTV1y7riCS7rkB6e2t89zfWK3P1Uyn/1pWsbBnZ4kADJpLHHBRCi1itaw2S5q
+ trfua8Ok8Ho2R8sH7X6hgt6ViEd267LMF0wRcj3PMvtP/DxWiTNLqxJ0HW51CZvxRgDtYHi2Im/0J
+ O/MeNwBZVlb8bXjQ=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p4ahb-00EPiW-9E for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Dec 2022 04:46:11 +0000
+ id 1p4akA-0005bV-QB for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 12 Dec 2022 04:48:51 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id C8C14B80B72;
- Mon, 12 Dec 2022 04:45:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4021DC433D2;
- Mon, 12 Dec 2022 04:45:56 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 326D260EAB;
+ Mon, 12 Dec 2022 04:48:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56B1BC433D2;
+ Mon, 12 Dec 2022 04:48:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1670820356;
- bh=ZiPqywrfVYJKyTMOBz5ADrSOCtd+XOKFfeu5S1nMah4=;
+ s=k20201202; t=1670820517;
+ bh=P8vfT0mshHozuGK5w2ZRZj2IsGSxzeJ1hYUPDymSUpA=;
  h=Date:From:To:Cc:Subject:From;
- b=HHl82Mya2ZR0wKm/58rpz/ANETzs4T9/LlUcAtG6Jj/kdDcSPMy3nUSluiVp8JwXG
- 5Zx/BL/ckxlDkCXUPLL9ML9luXQVYAs6fZ+ytcqXBYsADAqzIE7i3GKmkbTrSW/Kw2
- 3XWKMbBePAmK7rN4+xXQ8ZaI0tsddiJh0pnmP8PZueq0XoVAbGF6TIgTBuagMf3cb6
- Lct0ctXRuaxw6z9+1GJaxO70Dsudj2HbinzikLEoff2C/Ux+gZAKDKEfXZsivs/eKS
- MgwgMj5QowZcxObgBI0FlnIbym4sDn6ocMgkng+dpntHP+WBUO09whZTmB+UJ6+foK
- l2I392lOG5/3w==
-Date: Sun, 11 Dec 2022 20:45:54 -0800
+ b=oRfLPsbhhzn6jLWFdlSW5/taJKYumF3eyRG6EcL4YW6sqOLFj4LLaHj6VXSSK40pr
+ Hv/+9C6Os/u8mW4Ko5Rx8JyzQBryXRoTVcGRN1TyF68EbgPW2fE6j4NG9PfMLQs6Ce
+ Fa2RwGYuDTemB8vFMLZdS4aYYJPJKlbvPQaJEOJc/MJvHvlQ0ewBVY5XQg6+7qe9Qr
+ 39D8WQ2euxHusx0zuZJE52IRL6NtNBwZPc9aQiC2Jb0AeLMaz9KQCvZdrswp07u3ez
+ J+jKuIuPrkG8E4cf8B1YiU2uSQP8a23eQ4W2ELRPkHSt8Whx7ilNFj96Ji/7n4kaFF
+ UbIBpi6gYmeIA==
+Date: Sun, 11 Dec 2022 20:48:35 -0800
 From: Eric Biggers <ebiggers@kernel.org>
 To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <Y5ayAsXkTF3jK13s@sol.localdomain>
+Message-ID: <Y5ayo48TtNrPgU9D@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
 X-Spam-Score: -5.9 (-----)
@@ -75,10 +75,10 @@ X-Spam-Report: Spam detection software,
  at: Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -87,8 +87,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p4ahb-00EPiW-9E
-Subject: [f2fs-dev] [GIT PULL] fscrypt updates for 6.2
+X-Headers-End: 1p4akA-0005bV-QB
+Subject: [f2fs-dev] [GIT PULL] fsverity updates for 6.2
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,8 +102,8 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -114,45 +114,34 @@ The following changes since commit f0c4d9fc9cc9462659728d168387191387e903cc:
 
 are available in the Git repository at:
 
-  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fscrypt-for-linus
+  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fsverity-for-linus
 
-for you to fetch changes up to 41952551acb405080726aa38a8a7ce317d9de4bb:
+for you to fetch changes up to a4bbf53d88c728da9ff6c316b1e4ded63a8f3940:
 
-  fscrypt: add additional documentation for SM4 support (2022-12-02 10:43:00 -0800)
-
-----------------------------------------------------------------
-
-This release adds SM4 encryption support, contributed by Tianjia Zhang.
-SM4 is a Chinese block cipher that is an alternative to AES.
-
-I recommend against using SM4, but (according to Tianjia) some people
-are being required to use it.  Since SM4 has been turning up in many
-other places (crypto API, wireless, TLS, OpenSSL, ARMv8 CPUs, etc.), it
-hasn't been very controversial, and some people have to use it, I don't
-think it would be fair for me to reject this optional feature.
-
-Besides the above, there are a couple cleanups.
+  fsverity: simplify fsverity_get_digest() (2022-11-29 21:07:41 -0800)
 
 ----------------------------------------------------------------
-Eric Biggers (4):
-      fscrypt: pass super_block to fscrypt_put_master_key_activeref()
-      fscrypt: add comment for fscrypt_valid_enc_modes_v1()
-      fscrypt: remove unused Speck definitions
-      fscrypt: add additional documentation for SM4 support
 
-Tianjia Zhang (2):
-      blk-crypto: Add support for SM4-XTS blk crypto mode
-      fscrypt: Add SM4 XTS/CTS symmetric algorithm support
+The main change this cycle is to stop using the PG_error flag to track
+verity failures, and instead just track failures at the bio level.  This
+follows a similar fscrypt change that went into 6.1, and it is a step
+towards freeing up PG_error for other uses.
 
- Documentation/filesystems/fscrypt.rst |  7 +++++++
- block/blk-crypto.c                    |  6 ++++++
- fs/crypto/fscrypt_private.h           | 13 ++++---------
- fs/crypto/keyring.c                   | 14 ++++++--------
- fs/crypto/keysetup.c                  | 17 ++++++++++++++++-
- fs/crypto/policy.c                    | 12 ++++++++++++
- include/linux/blk-crypto.h            |  1 +
- include/uapi/linux/fscrypt.h          |  4 ++--
- 8 files changed, 54 insertions(+), 20 deletions(-)
+There's also one other small cleanup.
+
+----------------------------------------------------------------
+Eric Biggers (2):
+      fsverity: stop using PG_error to track error status
+      fsverity: simplify fsverity_get_digest()
+
+ fs/ext4/readpage.c           |  8 ++----
+ fs/f2fs/compress.c           | 64 +++++++++++++++++++++-----------------------
+ fs/f2fs/data.c               | 53 ++++++++++++++++++++++--------------
+ fs/verity/fsverity_private.h |  5 ++++
+ fs/verity/hash_algs.c        |  6 +++++
+ fs/verity/measure.c          | 19 ++-----------
+ fs/verity/verify.c           | 12 ++++-----
+ 7 files changed, 85 insertions(+), 82 deletions(-)
 
 
 _______________________________________________
