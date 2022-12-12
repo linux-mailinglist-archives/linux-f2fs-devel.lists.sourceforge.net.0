@@ -2,120 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A1DB64945F
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 11 Dec 2022 14:09:08 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D65D649874
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Dec 2022 05:46:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p4M4l-0005Vi-RI;
-	Sun, 11 Dec 2022 13:09:03 +0000
+	id 1p4ahg-00052R-Gb;
+	Mon, 12 Dec 2022 04:46:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ssawgyw@gmail.com>) id 1p4M4k-0005Vc-Hj
+ (envelope-from <ebiggers@kernel.org>) id 1p4ahf-00052F-K7
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 11 Dec 2022 13:09:02 +0000
+ Mon, 12 Dec 2022 04:46:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Kv8kcpsRmLiddotvQaawoolO0sTJlYruTgtBrstc49M=; b=f2McuS0KYw6Hqzz2hJl+IgOjDB
- YklOr04fyPo9p7lIpXcDAm9r7sNvUOZ4zUnwn4kt4wPTj5CdCafhFDyR+PsC8++gkL0s1MS6BvMrR
- WlUInqaW9NN5K++2ReUkBJwN4uYJhZYz6nuht/7y15EgVUkxWLDIUG6Th92IidGwTHlo=;
+ bh=h3u27pM1KdReLMKP7YcpwMjlxkY/BHSbHp2QG5ymXbE=; b=Bx6610Cmtb3xEbra/l5tJW0WjX
+ ek23ETcniS0O1sLzWCZ7LHHuOS8KgIQMzV3SlC5J74BmRKC73nhfwfaUGUbYWiGvlz+ANmgD7atrG
+ o2eewqIKm2kSOxzXJtg7oTRGlo2Up0uVddlo8LIQ3x83oQogeUBPr7acMjwrZaw5BKTs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Kv8kcpsRmLiddotvQaawoolO0sTJlYruTgtBrstc49M=; b=F
- noq2nTB5PH68SHWQXIwNsV1aw2FLHsE1hs/HyC4kghhmwb/9zZXPa66EFGSc1x0fzr+yJP9UBGMs8
- kLyYl+LanjYtBs1qXgojLZrLmX3k5kiJ+zjd74qbwafdTPW6wrJREa1xtqjzMPDHtBYPAH86/FLvk
- +N0+cp6sWwSREtgU=;
-Received: from mail-pj1-f53.google.com ([209.85.216.53])
+ List-Owner:List-Archive; bh=h3u27pM1KdReLMKP7YcpwMjlxkY/BHSbHp2QG5ymXbE=; b=e
+ c0JE5RELYXyKRyt2plDWnNCw+aGHw3jfFTkR3Os3dGVqX982w6Xsd1vmyyoKAJuphFs97eY/la0hU
+ F34ccGpem1yLv4upy77M+uzF/dRghQyAxSJ9r2zSYsDApd9jpgyr37m9ImsC98W+zeTPsUjsvDVcx
+ AEt105pBzuXnlMc0=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1p4M4f-00DqDa-By for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 11 Dec 2022 13:09:02 +0000
-Received: by mail-pj1-f53.google.com with SMTP id
- b13-20020a17090a5a0d00b0021906102d05so9505365pjd.5
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 11 Dec 2022 05:08:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Kv8kcpsRmLiddotvQaawoolO0sTJlYruTgtBrstc49M=;
- b=QGDmQTi7v4M3a7gz51ftuLvf7RjAIYaG1giqRYlNplDgqd5Ht3ui0pI27p4XSkFXp3
- 3pV2jiGAU2pty/bxepurgOg6+ZMj72xVu1X/uDW8Jz66aT4XPKcw9i2X/89+BZA4f9aT
- BW/e6Rz4S8rZtSucGl0zqLXdr1AO2HbdegbXbcTY7DHh6zDbH43KJgNG92rSbyATAhf0
- lz+X6vz/xoXvvCzd3E0uMr6UXTWuazmj1qsodwYnvggQ1ba4IrGAQBD5IhHXUFJN3VCu
- vbg9oRtD8yh9Ngc7ba1EAEUEepfC4UWnz5YxN/OJx8OIs2SmEaXl0Q33mjYQJLvqfguo
- sYvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Kv8kcpsRmLiddotvQaawoolO0sTJlYruTgtBrstc49M=;
- b=6b7meoAr31QnenbauYX2iH6UGcyEqmvZmyRDb21hZQ3pdEDZeaiJ3+TwfMofn9wHAF
- 6nNSYaMTJKoPxh3qesuh4OhX2T65MSh25JTApk3x5HdTy9MtCmn6rxA+/s8Tj4fEQsDJ
- /09iqYqA9u+v1AIlS6sVbTYvq7MpVaJL1UAQ2M4xtVO+MbyX+o0rxhwD51x2qZhFhguL
- o95F06sb9Vfbuhn1FxxbtJnKoM/2dD1GLr0VeFpxxIChmsAP5plYHTGRMIk1PwGCWNzy
- WrFY4EpwQZ7KK3fzdd31OrumSu/sTc+LHyYrxmU4K5EShKSJfkCMQvGmxEifc11DkboO
- Ushw==
-X-Gm-Message-State: ANoB5pkBa+Y6uZPcYpu6jJboM5Tg0vGJTRm9IK3lcWUEQoRSPF839ePJ
- zsr0xKXDUWOaleME76o6E+k=
-X-Google-Smtp-Source: AA0mqf5dEJCsGXsJcaoyYUPof4dNDixAgjIjDfw5onXGgeaF5n9lTtSPKNVvNY0kQNjFbQWHWlScEw==
-X-Received: by 2002:a17:902:c18b:b0:189:8e01:c72a with SMTP id
- d11-20020a170902c18b00b001898e01c72amr13026193pld.17.1670764131738; 
- Sun, 11 Dec 2022 05:08:51 -0800 (PST)
-Received: from VirtualBox.. ([129.227.152.6]) by smtp.gmail.com with ESMTPSA id
- b13-20020a170902650d00b00186b549cdc2sm4315412plk.157.2022.12.11.05.08.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Dec 2022 05:08:51 -0800 (PST)
-From: Yuwei Guan <ssawgyw@gmail.com>
-X-Google-Original-From: Yuwei Guan <Yuwei.Guan@zeekrlife.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Sun, 11 Dec 2022 21:08:41 +0800
-Message-Id: <20221211130841.113959-1-Yuwei.Guan@zeekrlife.com>
-X-Mailer: git-send-email 2.34.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1p4ahb-00EPiW-9E for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 12 Dec 2022 04:46:11 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id C8C14B80B72;
+ Mon, 12 Dec 2022 04:45:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4021DC433D2;
+ Mon, 12 Dec 2022 04:45:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1670820356;
+ bh=ZiPqywrfVYJKyTMOBz5ADrSOCtd+XOKFfeu5S1nMah4=;
+ h=Date:From:To:Cc:Subject:From;
+ b=HHl82Mya2ZR0wKm/58rpz/ANETzs4T9/LlUcAtG6Jj/kdDcSPMy3nUSluiVp8JwXG
+ 5Zx/BL/ckxlDkCXUPLL9ML9luXQVYAs6fZ+ytcqXBYsADAqzIE7i3GKmkbTrSW/Kw2
+ 3XWKMbBePAmK7rN4+xXQ8ZaI0tsddiJh0pnmP8PZueq0XoVAbGF6TIgTBuagMf3cb6
+ Lct0ctXRuaxw6z9+1GJaxO70Dsudj2HbinzikLEoff2C/Ux+gZAKDKEfXZsivs/eKS
+ MgwgMj5QowZcxObgBI0FlnIbym4sDn6ocMgkng+dpntHP+WBUO09whZTmB+UJ6+foK
+ l2I392lOG5/3w==
+Date: Sun, 11 Dec 2022 20:45:54 -0800
+From: Eric Biggers <ebiggers@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <Y5ayAsXkTF3jK13s@sol.localdomain>
 MIME-Version: 1.0
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In non-foreground gc mode, if no victim is selected, the gc
- process will wait for no_gc_sleep_time before waking up again. In this
- subsequent
- time, even though a victim will be selected, the gc proces [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: The following changes since commit
+ f0c4d9fc9cc9462659728d168387191387e903cc:
+ Linux 6.1-rc4 (2022-11-06 15:07:11 -0800) are available in the Git repository
+ at: Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [ssawgyw[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.53 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.53 listed in wl.mailspike.net]
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1p4M4f-00DqDa-By
-Subject: [f2fs-dev] [PATCH v2] f2fs: reset wait_ms to default if any of the
- victims have been selected
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1p4ahb-00EPiW-9E
+Subject: [f2fs-dev] [GIT PULL] fscrypt updates for 6.2
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,43 +100,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Theodore Ts'o <tytso@mit.edu>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In non-foreground gc mode, if no victim is selected, the gc process
-will wait for no_gc_sleep_time before waking up again. In this
-subsequent time, even though a victim will be selected, the gc process
-still waits for no_gc_sleep_time before waking up. The configuration
-of wait_ms is not reasonable.
+The following changes since commit f0c4d9fc9cc9462659728d168387191387e903cc:
 
-After any of the victims have been selected, we need to reset wait_ms to
-default sleep time from no_gc_sleep_time.
+  Linux 6.1-rc4 (2022-11-06 15:07:11 -0800)
 
-Signed-off-by: Yuwei Guan <Yuwei.Guan@zeekrlife.com>
----
- fs/f2fs/gc.c | 4 ++++
- 1 file changed, 4 insertions(+)
+are available in the Git repository at:
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index f0c6506d8975..d7a9d84ba57c 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -141,6 +141,10 @@ static int gc_thread_func(void *data)
- 			/* don't bother wait_ms by foreground gc */
- 			if (!foreground)
- 				wait_ms = gc_th->no_gc_sleep_time;
-+		} else {
-+			/* reset wait_ms to default sleep time */
-+			if (wait_ms == gc_th->no_gc_sleep_time)
-+				wait_ms = gc_th->min_sleep_time;
- 		}
- 
- 		if (foreground)
--- 
-2.34.1
+  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git tags/fscrypt-for-linus
 
+for you to fetch changes up to 41952551acb405080726aa38a8a7ce317d9de4bb:
+
+  fscrypt: add additional documentation for SM4 support (2022-12-02 10:43:00 -0800)
+
+----------------------------------------------------------------
+
+This release adds SM4 encryption support, contributed by Tianjia Zhang.
+SM4 is a Chinese block cipher that is an alternative to AES.
+
+I recommend against using SM4, but (according to Tianjia) some people
+are being required to use it.  Since SM4 has been turning up in many
+other places (crypto API, wireless, TLS, OpenSSL, ARMv8 CPUs, etc.), it
+hasn't been very controversial, and some people have to use it, I don't
+think it would be fair for me to reject this optional feature.
+
+Besides the above, there are a couple cleanups.
+
+----------------------------------------------------------------
+Eric Biggers (4):
+      fscrypt: pass super_block to fscrypt_put_master_key_activeref()
+      fscrypt: add comment for fscrypt_valid_enc_modes_v1()
+      fscrypt: remove unused Speck definitions
+      fscrypt: add additional documentation for SM4 support
+
+Tianjia Zhang (2):
+      blk-crypto: Add support for SM4-XTS blk crypto mode
+      fscrypt: Add SM4 XTS/CTS symmetric algorithm support
+
+ Documentation/filesystems/fscrypt.rst |  7 +++++++
+ block/blk-crypto.c                    |  6 ++++++
+ fs/crypto/fscrypt_private.h           | 13 ++++---------
+ fs/crypto/keyring.c                   | 14 ++++++--------
+ fs/crypto/keysetup.c                  | 17 ++++++++++++++++-
+ fs/crypto/policy.c                    | 12 ++++++++++++
+ include/linux/blk-crypto.h            |  1 +
+ include/uapi/linux/fscrypt.h          |  4 ++--
+ 8 files changed, 54 insertions(+), 20 deletions(-)
 
 
 _______________________________________________
