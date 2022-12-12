@@ -2,89 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B54A649C44
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Dec 2022 11:35:09 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28C17649E93
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Dec 2022 13:21:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p4g9I-0007CI-Ge;
-	Mon, 12 Dec 2022 10:35:04 +0000
+	id 1p4hoQ-0005mo-EA;
+	Mon, 12 Dec 2022 12:21:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1p4g9D-0007Bz-8q
+ (envelope-from <zhuqiandann@gmail.com>) id 1p4hoP-0005mZ-E2
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Dec 2022 10:34:59 +0000
+ Mon, 12 Dec 2022 12:21:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4kUY0i7xmrXOaC2GjzZTarAyq/cPYaoVpiBEagyNlr4=; b=IN9Rn2V5LORc5ZKQrzp0GREyl8
- Q2saqQPEiLrCZRBpFH6ZcBEFd32/GeeGhtFmJVL3fcRjN6i+xONlEitOcJkfRMZ6b8fgFwSYWtp7p
- 9/GuAYr+xBUbG7XVZc8GqE8hIult1SToy5H3VVmYZGuDO7AgD9MliBtssCpQH4aUea3s=;
+ bh=BcAXeIHfkMK9KXq9ftGmJ8WUeCsNRonPesUxZB6zPLw=; b=DsXgzuq8EoUtDgQnDYf3ztnqX8
+ d3PuhmCTwtbb9JwfWvKzBf0SIlISoVsMhFiNG8dc/5fpRyidUNYrjiF8/ZhgkCm8b1+jl8FchT9+5
+ 4PBcKrV1yptSKD64XD3qDeBvgpjSOHYNZt9uzzosk5czaCQWF1/MSKFEY91r43grlIBA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4kUY0i7xmrXOaC2GjzZTarAyq/cPYaoVpiBEagyNlr4=; b=a64zm3C4UmjB2wQXE2wt5Urth4
- Mv8ab0elN1jF8BZbrunC+5yODdrl2l1mnfI04WZPrRmhlYIx8V9Nbg6IJEIJkJLAUtlFSLpSO0yHl
- rydFt6Wo6KG3gxoXKhOD0xyN1esvT+kH3hX5UFGkkHA8aaZUfNE0nJQk7WzgFz20LVTQ=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p4g98-00EdhK-TJ for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Dec 2022 10:34:59 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7E14360F91;
- Mon, 12 Dec 2022 10:34:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A48CC433EF;
- Mon, 12 Dec 2022 10:34:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1670841288;
- bh=d83TxHN9oztaLU1gt+Fi+GU5ce7VMeB1SwmpA2UXsIQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=GlRg1ZklbUlADjU40uhGLTH3HINyulcwz3kNsqM/HYCxmZCRM6Jx3jUjosf0boNG3
- ayQS4y0Wc7kZYzrCdJJ0eCLvvUhi5tuNTO1Meq6q68JQtoMaNPvUnGWfEkbjrudG1T
- fIRxRe63FSpKVTMkKLvTj+XfmliO3DvB0gu6rFggrCvvuiCWaWv/5xxSfZ1uliB6ZJ
- W1kzTJg1dqvegeugr3N7MY+B18fJs41GMwGIORqjOlL1xpyefIaoDOjWRE6Aqk5FjS
- V5H7d2bZMkwJYw1i+b4QPgSRlzY59TXpO5Kjr/5C/sROJjN874lVg/+4AMPutJrs55
- jWcu52z8fvaiQ==
-Message-ID: <e257526b-6199-6ff4-8eae-59a8dc8377a2@kernel.org>
-Date: Mon, 12 Dec 2022 18:34:45 +0800
+ bh=BcAXeIHfkMK9KXq9ftGmJ8WUeCsNRonPesUxZB6zPLw=; b=C+haL8NUfK5xj378RAQqyFc2e+
+ zDtD+E2B0geCuVlqifQcb08PjX8z5Hs/TAXc/UkmzWdw40ummaq8D1deL82lgunNk91b5IQA4aMOf
+ hsgN5R9N0BIAEW1sRRdb5vh16dSRtwSADOYSRJTGLj1+bTJiCPi61ju9TLoVrW1KYCnQ=;
+Received: from mail-pj1-f67.google.com ([209.85.216.67])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1p4hoO-0002TO-8O for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 12 Dec 2022 12:21:36 +0000
+Received: by mail-pj1-f67.google.com with SMTP id
+ t11-20020a17090a024b00b0021932afece4so15499513pje.5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 12 Dec 2022 04:21:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BcAXeIHfkMK9KXq9ftGmJ8WUeCsNRonPesUxZB6zPLw=;
+ b=q1os7l5fQQrL4oJv26hp6jcpO+N+CbETyzz+5akCRldnOkaXXxnRteRq1IZULQwt+c
+ 1POQqWJC8TkNILQ+n26MFX6SxRuFgfvpxSiQifOLk5hat+lJUjaIvLOofjEoU0Hob/zq
+ ExRGFvbT+wJsST7Nv0eW4crBzmwgY/HryE3OrHf2zSnK1rnxN+bVh3LwKTlHrQrgmZDB
+ QNqMalMf/ZgJuFA+GsjPm9gt1FIyaucdAjOQWYZFJBhjk/eqECnDBd/8cOpJqMbO93LY
+ OOoGMo1qn1ElRhYh1yCVSY6SX8roC9jECzwGpvIeao6C3Eu2pBXJa4B9ILW+s5z9NWBd
+ r18A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BcAXeIHfkMK9KXq9ftGmJ8WUeCsNRonPesUxZB6zPLw=;
+ b=IdwMOu57mrg1cf/yMxO+bZsAa2nuAWUqpz0GdEr+nBxvIu1NUmKsSxRX1YusNkmH+x
+ QGAfmO+4imGMqisNrXlP117tYiIjuVG2I9i3PhzL+9F7gv3OIdEenYhvfKD8O6T1qils
+ 5huC1blDXx4ADrrtvS4ASup5HhsOGotICB9lFnMw0Vpz12QBA92gpy1E4jhCZHrv3vPk
+ CIp07pbIqVTXvvfmvn3vIVtLVLI48hW5Mlhhz/KkYcSeUY/B4m4UArpB52vlowJasW3s
+ 8OoSZz+tWIXjtrmGCMB/gAMmcPcm4pF+oXIob7OQr7QeQU+RmgUfABeSnJEZFltxjzBW
+ n4qw==
+X-Gm-Message-State: ANoB5plm3VCMJr/ozTTAKQtcrYHhiUrKtQM8hO3ruAl6crUNUqL5OWjn
+ iwf+as+6zOCwNIz/xsI1kVs=
+X-Google-Smtp-Source: AA0mqf7kyIG8mVVfnKhyWnMxqTyfdu0OUZOEIX6skITpEGLG5oR1+P2LXCbqtxizE7PqzGQSKC32cA==
+X-Received: by 2002:a17:902:8688:b0:189:89e0:4077 with SMTP id
+ g8-20020a170902868800b0018989e04077mr16291429plo.55.1670847690686; 
+ Mon, 12 Dec 2022 04:21:30 -0800 (PST)
+Received: from mi-ThinkStation-K ([43.224.245.228])
+ by smtp.gmail.com with ESMTPSA id
+ u11-20020a170902714b00b001895b2d48a1sm6199469plm.253.2022.12.12.04.21.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Dec 2022 04:21:30 -0800 (PST)
+Date: Mon, 12 Dec 2022 20:21:09 +0800
+From: zhoudan <zhuqiandann@gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <20221212122109.GA714122@mi-ThinkStation-K>
+References: <20221208050808.2448146-1-zhoudan8@xiaomi.com>
+ <Y5OYYJYx9G2LbRmc@google.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.0
-Content-Language: en-US
-To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
-References: <20221129041524.81235-1-frank.li@vivo.com>
- <20221129041524.81235-2-frank.li@vivo.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221129041524.81235-2-frank.li@vivo.com>
-X-Spam-Score: -5.2 (-----)
+Content-Disposition: inline
+In-Reply-To: <Y5OYYJYx9G2LbRmc@google.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/11/29 12:15,
- Yangtao Li wrote: > This patch adds support
- for counting the average time of submit discard > command, and we can see
- its value in debugfs. How about enabling this only when CONFIG_DEBUG_FS is
- on? Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  Maybe I'm not describing it clearly enough, but I think there
+ is something wrong with the logic here.The 'f2fs_release_compress_blocks'
+ method does not determine if the file is compressed, but simply [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.67 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.67 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [zhuqiandann[at]gmail.com]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -92,11 +113,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p4g98-00EdhK-TJ
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: add support for counting the
- average time of submit discard cmd
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1p4hoO-0002TO-8O
+Subject: Re: [f2fs-dev] [PATCH] f2fs: don't set FI_COMPRESS_RELEASED if file
+ is not compressed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,158 +128,68 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
+Cc: zhoudan8@xiaomi.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/11/29 12:15, Yangtao Li wrote:
-> This patch adds support for counting the average time of submit discard
-> command, and we can see its value in debugfs.
+Maybe I'm not describing it clearly enough, but I think there is 
+something wrong with the logic here.The 'f2fs_release_compress_blocks'
+method does not determine if the file is compressed, but simply adds 
+the FI_COMPRESS_RELEASED flag. 
+In particular, in the current Android system, when the application is 
+installed, the release interface is called by default to release the 
+storage marked as compressed,  without checking whether the file is 
+actually compressed. In this case, when compress_mode is set to user, 
+calling the compress interface returns ENVAL and the file cannot be 
+compressed.
+So I think the implementation of release needs to be modified, and 
+only set FI_COMPRESS_RELEASED when it's really compressed and the 
+storage is released.
 
-How about enabling this only when CONFIG_DEBUG_FS is on?
-
-+Cc block mailing list
-
-Not sure block layer has similar stats? if it hasn't, can such stat
-be accounted in block layer, and then all filesystem can be benefited.
-
-Thanks,
-
+On Fri, Dec 09, 2022 at 12:19:44PM -0800, Jaegeuk Kim wrote:
+> On 12/08, zhoudan8 wrote:
+> > In compress_mode=user, f2fs_release_compress_blocks()
+> >  does not verify whether it has been compressed and
+> >  sets FI_COMPRESS_RELEASED directly. which will lead to
+> > return -EINVAL after calling compress.
+> > To fix it,let's do not set FI_COMPRESS_RELEASED if file
+> > is not compressed.
 > 
-> Signed-off-by: Yangtao Li <frank.li@vivo.com>
-> ---
->   fs/f2fs/debug.c   |  7 +++++--
->   fs/f2fs/f2fs.h    |  5 +++++
->   fs/f2fs/segment.c | 18 ++++++++++++++++--
->   3 files changed, 26 insertions(+), 4 deletions(-)
+> Do you mean you want to avoid EINVAL on a file having FI_COMPRESS_RELEASED
+> with zero i_compr_blokcs?
 > 
-> diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
-> index 733b1bd37404..eed3edfc5faf 100644
-> --- a/fs/f2fs/debug.c
-> +++ b/fs/f2fs/debug.c
-> @@ -109,6 +109,9 @@ static void update_general_status(struct f2fs_sb_info *sbi)
->   			llist_empty(&SM_I(sbi)->fcc_info->issue_list);
->   	}
->   	if (SM_I(sbi)->dcc_info) {
-> +		struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
-> +
-> +		si->discard_avg = dcc->discard_time_avg;
->   		si->nr_discarded =
->   			atomic_read(&SM_I(sbi)->dcc_info->issued_discard);
->   		si->nr_discarding =
-> @@ -510,8 +513,8 @@ static int stat_show(struct seq_file *s, void *v)
->   			   si->nr_wb_cp_data, si->nr_wb_data,
->   			   si->nr_flushing, si->nr_flushed,
->   			   si->flush_list_empty);
-> -		seq_printf(s, "Discard: (%4d %4d)) cmd: %4d undiscard:%4u\n",
-> -			   si->nr_discarding, si->nr_discarded,
-> +		seq_printf(s, "Discard: (%4d %4d, avg:%4lldns)) cmd: %4d undiscard:%4u\n",
-> +			   si->nr_discarding, si->nr_discarded, ktime_to_us(si->discard_avg),
->   			   si->nr_discard_cmd, si->undiscard_blks);
->   		seq_printf(s, "  - atomic IO: %4d (Max. %4d)\n",
->   			   si->aw_cnt, si->max_aw_cnt);
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index eb8c27c4e5fc..5a99759d10ac 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -370,6 +370,8 @@ struct discard_cmd {
->   	int error;			/* bio error */
->   	spinlock_t lock;		/* for state/bio_ref updating */
->   	unsigned short bio_ref;		/* bio reference count */
-> +	struct discard_cmd_control *dcc; /* global discard cmd control */
-> +	ktime_t submit_start;		/* submit start time */
->   };
->   
->   enum {
-> @@ -414,6 +416,8 @@ struct discard_cmd_control {
->   	unsigned int max_ordered_discard;	/* maximum discard granularity issued by lba order */
->   	unsigned int undiscard_blks;		/* # of undiscard blocks */
->   	unsigned int next_pos;			/* next discard position */
-> +	spinlock_t discard_time_lock;	/* for discard time statistics */
-> +	ktime_t discard_time_avg;		/* issued discard cmd avg time */
->   	atomic_t issued_discard;		/* # of issued discard */
->   	atomic_t queued_discard;		/* # of queued discard */
->   	atomic_t discard_cmd_cnt;		/* # of cached cmd count */
-> @@ -3882,6 +3886,7 @@ struct f2fs_stat_info {
->   	int nr_dio_read, nr_dio_write;
->   	unsigned int io_skip_bggc, other_skip_bggc;
->   	int nr_flushing, nr_flushed, flush_list_empty;
-> +	ktime_t	discard_avg;
->   	int nr_discarding, nr_discarded;
->   	int nr_discard_cmd;
->   	unsigned int undiscard_blks;
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 9486ca49ecb1..bc96b1afb308 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -931,6 +931,7 @@ static struct discard_cmd *__create_discard_cmd(struct f2fs_sb_info *sbi,
->   	list_add_tail(&dc->list, pend_list);
->   	spin_lock_init(&dc->lock);
->   	dc->bio_ref = 0;
-> +	dc->dcc = dcc;
->   	atomic_inc(&dcc->discard_cmd_cnt);
->   	dcc->undiscard_blks += len;
->   
-> @@ -1000,9 +1001,13 @@ static void __remove_discard_cmd(struct f2fs_sb_info *sbi,
->   static void f2fs_submit_discard_endio(struct bio *bio)
->   {
->   	struct discard_cmd *dc = (struct discard_cmd *)bio->bi_private;
-> +	struct discard_cmd_control *dcc = dc->dcc;
->   	unsigned long flags;
-> +	ktime_t submit_time;
-> +	int nr_discarded;
->   
->   	spin_lock_irqsave(&dc->lock, flags);
-> +	submit_time = ktime_sub(ktime_get(), dc->submit_start);
->   	if (!dc->error)
->   		dc->error = blk_status_to_errno(bio->bi_status);
->   	dc->bio_ref--;
-> @@ -1012,6 +1017,14 @@ static void f2fs_submit_discard_endio(struct bio *bio)
->   	}
->   	spin_unlock_irqrestore(&dc->lock, flags);
->   	bio_put(bio);
-> +
-> +	spin_lock_irqsave(&dcc->discard_time_lock, flags);
-> +	nr_discarded = atomic_read(&dcc->issued_discard);
-> +	dcc->discard_time_avg = div_u64(ktime_add(nr_discarded * dcc->discard_time_avg,
-> +										submit_time),
-> +									nr_discarded + 1);
-> +	atomic_inc(&dcc->issued_discard);
-> +	spin_unlock_irqrestore(&dcc->discard_time_lock, flags);
->   }
->   
->   static void __check_sit_bitmap(struct f2fs_sb_info *sbi,
-> @@ -1160,6 +1173,7 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
->   		 * right away
->   		 */
->   		spin_lock_irqsave(&dc->lock, flags);
-> +		dc->submit_start = ktime_get();
->   		if (last)
->   			dc->state = D_SUBMIT;
->   		else
-> @@ -1179,8 +1193,6 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
->   		bio->bi_opf |= flag;
->   		submit_bio(bio);
->   
-> -		atomic_inc(&dcc->issued_discard);
-> -
->   		f2fs_update_iostat(sbi, NULL, FS_DISCARD, 1);
->   
->   		lstart += len;
-> @@ -2070,9 +2082,11 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
->   	INIT_LIST_HEAD(&dcc->wait_list);
->   	INIT_LIST_HEAD(&dcc->fstrim_list);
->   	mutex_init(&dcc->cmd_lock);
-> +	spin_lock_init(&dcc->discard_time_lock);
->   	atomic_set(&dcc->issued_discard, 0);
->   	atomic_set(&dcc->queued_discard, 0);
->   	atomic_set(&dcc->discard_cmd_cnt, 0);
-> +	dcc->discard_time_avg = 0;
->   	dcc->nr_discards = 0;
->   	dcc->max_discards = MAIN_SEGS(sbi) << sbi->log_blocks_per_seg;
->   	dcc->max_discard_request = DEF_MAX_DISCARD_REQUEST;
+> I think the current logic is giving the error on a released file already.
+> 
+> > 
+> > Signed-off-by: zhoudan8 <zhoudan8@xiaomi.com>
+> > ---
+> >  fs/f2fs/file.c | 3 +--
+> >  1 file changed, 1 insertion(+), 2 deletions(-)
+> > 
+> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > index 82cda1258227..f32910077df6 100644
+> > --- a/fs/f2fs/file.c
+> > +++ b/fs/f2fs/file.c
+> > @@ -3451,14 +3451,13 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
+> >  	ret = filemap_write_and_wait_range(inode->i_mapping, 0, LLONG_MAX);
+> >  	if (ret)
+> >  		goto out;
+> > -
+> > -	set_inode_flag(inode, FI_COMPRESS_RELEASED);
+> >  	inode->i_ctime = current_time(inode);
+> >  	f2fs_mark_inode_dirty_sync(inode, true);
+> >  
+> >  	if (!atomic_read(&F2FS_I(inode)->i_compr_blocks))
+> >  		goto out;
+> >  
+> > +	set_inode_flag(inode, FI_COMPRESS_RELEASED);
+> >  	f2fs_down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+> >  	filemap_invalidate_lock(inode->i_mapping);
+> >  
+> > -- 
+> > 2.38.1
 
 
 _______________________________________________
