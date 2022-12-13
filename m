@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98EA464BCDB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Dec 2022 20:11:23 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7DA664BD0D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Dec 2022 20:17:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p5AgQ-0004G4-4p;
-	Tue, 13 Dec 2022 19:11:18 +0000
+	id 1p5AmZ-0001KU-CP;
+	Tue, 13 Dec 2022 19:17:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1p5AgP-0004Fy-7o
+ (envelope-from <jaegeuk@kernel.org>) id 1p5AmX-0001KO-4m
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Dec 2022 19:11:17 +0000
+ Tue, 13 Dec 2022 19:17:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3w72/8K2CauCfvYEcYmQl8MJZ0gtvghHUWYDFYbGCvA=; b=ErZc6888PEnT5irMCcBpyb0L7h
- KxbiQF6PQX1b4eRq8+SfZ04Kl16TWAtG+g7yEb8wO/IsAL7pugBxFJuduqw7CuDSExeiIv01eKCaC
- 2Te4IJTXNtYaMHj7qnBA538N50qLgeKU5u1GmRc+gAXJdcu53S/CBMODWcxTPuoraJIo=;
+ bh=V+Ey6+x0DiQeXB+HxcsVQeqMn4lDNI2M51+RkCxiEq0=; b=jAzIiIIneRRvZZwS564xfIhjtG
+ wJsObyZr6BOa0DfxfmW3o8ykdGF7oBlGtaHVrOU5pJAc/MU64wc+dLR8H8ExSBoxyMzUc+s0D1Cy/
+ jJ8j3EjIahULowf37kcyRhF6E4XNm/uIry+xz5vCFox32lqggCoVboG4BkbAPRLoqmuE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,68 +31,68 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3w72/8K2CauCfvYEcYmQl8MJZ0gtvghHUWYDFYbGCvA=; b=nDdvlomO0FGO4xQsfrrD4la+gq
- lQZ1AfBQfDMO9vrKHHDj/7HiJG/rSXPpz+dJbUP5zPQnQnWViBbuH0ts1BFmuvBY2xnhgusZO0Ece
- uHz/PknkUMKLynIqPDaoCEacgZjBw1kdbpQD6tGsh8ylx8LDPpFUh9lkST7gjGcQh6yE=;
+ bh=V+Ey6+x0DiQeXB+HxcsVQeqMn4lDNI2M51+RkCxiEq0=; b=aLt34ohrKbWjXVXT5ToxSzqz2F
+ L+qDFIPClULgyEYpf9vRFaUiFDDmTIXcXzKjVVGI6OzgPiOywGSSX76dcSsQlTCk6TzxfzGRT4HID
+ mWsGKtCYgYjINGr+kABUgR4ChDSF3IuoO2lUjbqibGLwR7uJpDEBb26tz4O1w43n02F8=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p5AgO-00GB4q-LX for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Dec 2022 19:11:17 +0000
+ id 1p5AmW-00GBIl-HZ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Dec 2022 19:17:37 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 443A5616F4;
- Tue, 13 Dec 2022 19:11:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7FBCDC433D2;
- Tue, 13 Dec 2022 19:11:10 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 28742616F0;
+ Tue, 13 Dec 2022 19:17:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65B4CC433EF;
+ Tue, 13 Dec 2022 19:17:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1670958670;
- bh=/VeZtsI4jZz7Y++Dl+hs6w4K2j0s34Gujm/rr1i5/0Y=;
+ s=k20201202; t=1670959050;
+ bh=oQXZwLpEHai9jIJPJXjlwzNaTMDa9dkWWo0SoGbc+jw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=CwexaBGc4Uanr5oZfvr1a+liupkMwiLS8HTgnuvrJMxuRL8N7fHajOG3D9jOVdMSE
- 0T8M4szF7ZcMocoKrz8KSmbxFRM2XL7Uwhr9tCjXWqZAPK7Jbsz2aQbdwh0f94Bb+7
- GGN5Hf9EsJzWP0NEIvcEtYph2rPdgy83eljNcCwUbPt+8GYnF6GDsNUiKjCS9iyoKg
- NxNDDeYY2gZN8tP9ZgY1ONKPwn2P3Y1l72BeWNthnYYMVFJXTQwAOOaHJJIfkkvcrZ
- +VFIjTAOD3SA3GuX/lur1fXMmFXRSjcFc0yFq34yQrZS0g3qc/ZRTiWgswSYEAk8/q
- t1FnCE5y4q6yg==
-Date: Tue, 13 Dec 2022 11:11:08 -0800
+ b=c3hwuUoTS1nYS74nAYE15G6ufa1d8mbLQGLmD0fIG3cSe19dTDwanL2uGifbWSDQA
+ 6Dnn+NMMr4QtV4gse2Jsjb0y5gPXG3ixDuEEBCSXAlIlkq2ni+KPgKGGlBle2vCrNc
+ 7ZKlPNkCnsV5CojmO7mSa61aOiNgpgbYd6oi8TPrFYZv8Hh7+iAJtpaSyRTq2yDU3P
+ kl1vtvkeXvL5cAjPARciDVEWFfFyXHWB4SFt4HAX9zYYXMV+x7zzN/UvtifQTs4ami
+ uHqdk8UNPxzVZ6g+YRFjyXoGAmCBhW/Hz2wlV5WL7NDcT2di2SfNGPtpvtj5ge/yzu
+ +EKgtvV0EudxQ==
+Date: Tue, 13 Dec 2022 11:17:28 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Yangtao Li <frank.li@vivo.com>
-Message-ID: <Y5jOTL66ph3Nq/Hr@google.com>
-References: <ddf243c9-f557-7f11-1964-8d2324f84092@kernel.org>
- <20221213115454.14885-1-frank.li@vivo.com>
+Message-ID: <Y5jPyEiAtDPx7VSI@google.com>
+References: <0cc89bf7-ea7c-d6e9-5ba9-548181de4c82@kernel.org>
+ <20221213122121.18685-1-frank.li@vivo.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20221213115454.14885-1-frank.li@vivo.com>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20221213122121.18685-1-frank.li@vivo.com>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/13,
- Yangtao Li wrote: > > What do you think of extending
- this function to support io_counts? > > > > void f2fs_update_iostat(struct
- f2fs_sb_info *sbi, struct inode *inode, > > enum iostat_type t [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 12/13, Yangtao Li wrote: > Hi Jaegeuk, > > >>> Again, w'd
+ better to consider this functionality only when DEBUG_FS > >>> is enabled.
+ > >> > >> BTW, why can't we use iostat to get the discard latenc [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p5AgO-00GB4q-LX
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix iostat parameter for discard
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1p5AmW-00GBIl-HZ
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: add support for counting time of
+ submit discard cmd
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,27 +110,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 12/13, Yangtao Li wrote:
-> > What do you think of extending this function to support io_counts?
+> Hi Jaegeuk,
+> 
+> >>> Again, w'd better to consider this functionality only when DEBUG_FS 
+> >>> is enabled.
+> >> 
+> >> BTW, why can't we use iostat to get the discard latencies?
 > > 
-> > void f2fs_update_iostat(struct f2fs_sb_info *sbi, struct inode *inode,
-> > 			enum iostat_type type, unsigned long long io_bytes,
-> > 			unsigned long long io_counts)
+> > Agreed.
 > 
-> Support to have extra io_count.
+> Let me spend some time on this. So, I guess this patch can't catch up with the merge window.
+> And I still have some patches that have not been picked, can you take a look, hope they can
+> catch up with the window.
 > 
-> But I don't think there is any need to add additional parameters to f2fs_update_iostat.
-> IIUC, each call to f2fs_update_iostat means that the corresponding count increases by 1,
-> so only the internal processing of the function is required.
-> 
-> BTW, let's type out the iocount of the additional record in the following way?
-> 
-> time:           1670930162
-> [WRITE]
-> app buffered data:      4096(1)
+> How long is the 6.2 merge window left and when will you send the f2fs 6.2 pull request?
 
-How about giving in another columns with additional stats like avg. len/call or max. len?
+I cut off the patches for this merge window. Please consider next release.
+BTW, could you please send a patch set instead of random posts? It's quite hard
+to find which one was merged or not.
 
-app buffered data:      4096	1
+Thanks,
 
 > 
 > Thx,
