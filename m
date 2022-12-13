@@ -2,102 +2,122 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30BFA64AD66
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Dec 2022 03:03:11 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A21A64AD90
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Dec 2022 03:21:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p4udQ-0000xm-0R;
-	Tue, 13 Dec 2022 02:03:08 +0000
+	id 1p4uvH-0006ZS-F7;
+	Tue, 13 Dec 2022 02:21:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1p4udO-0000xf-PZ
+ (envelope-from <zhuqiandann@gmail.com>) id 1p4uvG-0006ZM-6e
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Dec 2022 02:03:06 +0000
+ Tue, 13 Dec 2022 02:21:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0+/hBTPgoVr1qg0soSFF5fatWCeNlNeyu4DkfX660Rk=; b=LsUM5jsjVPyeiR76BnBcqwLXE6
- yx9xOwusxKX90jzwtV+lr06637QuZQx6CP6AaoVZC/vieb6V/9sWT0scukSnbpSTMNfz++GchXcQG
- wnVBpUaYiq6Wr5vbpowfX8mk3P+OdwnuTCRccHIuSJFhs97pFo6nVfxMrtu7lIRT0Clg=;
+ bh=3GJvqoej8HYxTnxfSuAPi6hTjb1Vgz1dmuhQAIbX9nU=; b=Pk8dEgDC6oI3Nho+wHFhssQ1Zr
+ eGeHdnZTZz/wNeKmoKTNlrfi2K+EoYyhPfa++pg3kDrZ41B++b0GKknHoVCFOBYyyTbu9/0AoC47V
+ fK7iI2i8I4L0noZrE6oP1d5bfpazSL0GP853Ib/0RJDdjJBGMaHfdf2mKb+9jMM1KrGM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0+/hBTPgoVr1qg0soSFF5fatWCeNlNeyu4DkfX660Rk=; b=l0hQbAirL/xS8xiii06LHY0Yls
- CqXFtxEZyT4acTjr6rl0umZUZAHSDdeFRpP1FA2PJSF4euVXw2F9G/2fqOqNy8US9wpjBrFKIjp5l
- ipQq/Z0FEh4PelaUhl14+o9w82FvOFbA1dA8SXrmw2eOVZ/PnCiTIxYjQBkVdXJBd5fg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p4udN-0007dn-Qa for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Dec 2022 02:03:06 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6C909612E6;
- Tue, 13 Dec 2022 02:03:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E0BFC433D2;
- Tue, 13 Dec 2022 02:02:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1670896980;
- bh=zscdFGlQLq5lM+HV3Wr7JIYnd9xVoYqAFnWU2yJJolQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=kkARd6WMQ/C8KJbfbvzY7TrdSCdVhLC/HQ9kCvyg4ykMJyrSSfPHy2a8n25u9ytQF
- FkNDz8S/nvSjxTBURqP4cy3hJuCuPQyNR0QD9KY+fnyaCGUjMiSXxQ8VX8Ex8lXW4Z
- QHGgDOtcgup43F/mVPA+uOTDacejrNorpkxXegfhJl90lBD3KR5xfMqWrqZD0poqbM
- cx30TwQJIFHbKSTpOcZ97vFTYVYalS4KnMgb0dItAWzao5+cbXa4GSQ2sXMOtc5r0T
- x2o9VMH2R16Hw47ma/pe27ldWxio1CHVEr6y0bSdnDGTLki/ncujh89n5rJlPPswAw
- WVuLLogvbPbvg==
-Message-ID: <635cee2a-3f11-b963-b800-b417be7007b5@kernel.org>
-Date: Tue, 13 Dec 2022 10:02:57 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.0
-Content-Language: en-US
+ bh=3GJvqoej8HYxTnxfSuAPi6hTjb1Vgz1dmuhQAIbX9nU=; b=iNQB6GJ4eSO6AA/eHaC0RTP/df
+ 8V58LNFL2KfmnHSvGdcgfwruflMLEPvYAHWG9kkMF5aBvcQH1m+Uet3ks9yWMFGDAPdbt7zlw2cx7
+ 0/e9v/utTACIEzZBP/XKiic2szaS5Dt3g6ep2Bw6RayQSWyAYMrJmpX/Ez2gvHEZv/Ms=;
+Received: from mail-pl1-f195.google.com ([209.85.214.195])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1p4uvC-00FJl5-16 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Dec 2022 02:21:34 +0000
+Received: by mail-pl1-f195.google.com with SMTP id g10so14078744plo.11
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 12 Dec 2022 18:21:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=3GJvqoej8HYxTnxfSuAPi6hTjb1Vgz1dmuhQAIbX9nU=;
+ b=pXvyZqmR+fhVi20IlDjOV2Q3MEsWPbOYS18DKR68vMzvEyspd/XpHRmI/p1Btap2Sf
+ DsMe9t/H17Ep5HryqMpJKZ7L9ePm7SZ8p5DlmofWc3Qjf3CXS6vz4HPMBaILiTMvjJGx
+ 4d4fweQDMPY0sOQrLpW5WzVryzaZwMA/Je7SvBjADzephzI0lEKJBMCUc918sgHl0thX
+ y7RAW8K+GNt20urQd/bFPp8vBnjWWbjGRfCOkv1Pd9Ahtv7YkaLJj4ylei/7geg0ZLH9
+ +AYOQOI5qWsMam9mWSnMHNe6uPvwja47a8nT0EJeGA4BCX+S0wjEVfkixeOVTsihUxQn
+ XvSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3GJvqoej8HYxTnxfSuAPi6hTjb1Vgz1dmuhQAIbX9nU=;
+ b=1bpE2JCO17hB9hA2VdpsDlB2SuDuKG8KyBjrZdPYa2mc4DgKF+nd5E7Tt8CklAOZdt
+ znLXrHKdDOEyIVdwNvW4E1vE2bbxP/0RDnJ6BA738kThCCpfcJltH6NRodgXN3jI2QBq
+ bH1+XNPd3t4ItmT93tAy1QhF+uOoTPHh0iwRsU6tGnfrGE4US4wBu9P0btQkF+jbfb50
+ TQngB6DKQwCNFu5JtJMZD0EC0P/Sg+on5h7vcLlh0TfnM3waeg5PVUFR1+fV5pO5NRBg
+ qDEZ860WdZtP0mrnPEoekcAad2TptHlsnUqQEbxsnABvIjFXj3BDJdPPQS5nFLTBrYcY
+ 2iaw==
+X-Gm-Message-State: ANoB5pnACTiLK06ZPiord36uU86yIIOTpX21RYY1AoQlQUs6Rif/WB3a
+ 1ad9oESaAWxwf2Fm/hP8SZE=
+X-Google-Smtp-Source: AA0mqf777PQQ8zccjWAtTOaxYZB+2AHCAP7D4AyTJhtpBojKU57ansA0CiKHHn5CJNaxclSljVe/9Q==
+X-Received: by 2002:a05:6a20:699b:b0:9d:efbe:2078 with SMTP id
+ t27-20020a056a20699b00b0009defbe2078mr30988576pzk.46.1670898084417; 
+ Mon, 12 Dec 2022 18:21:24 -0800 (PST)
+Received: from mi-ThinkStation-K ([43.224.245.228])
+ by smtp.gmail.com with ESMTPSA id
+ f4-20020a63dc44000000b004786c63c21esm5795430pgj.42.2022.12.12.18.21.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Dec 2022 18:21:23 -0800 (PST)
+Date: Tue, 13 Dec 2022 10:21:00 +0800
+From: zhoudan <zhuqiandann@gmail.com>
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20221125114736.19423-1-frank.li@vivo.com>
- <b8c54a6b-1f6d-9a86-b87c-e980902aa3a3@kernel.org>
- <Y5ewzsPuCd5UbCCJ@google.com>
- <c1daf309-a44d-46a8-7f97-bf5aab63aa9a@kernel.org>
- <Y5fXRihgabAa7Wmv@google.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <Y5fXRihgabAa7Wmv@google.com>
-X-Spam-Score: -7.9 (-------)
+Message-ID: <20221213022100.GA841758@mi-ThinkStation-K>
+References: <20221208050808.2448146-1-zhoudan8@xiaomi.com>
+ <Y5OYYJYx9G2LbRmc@google.com>
+ <20221212122109.GA714122@mi-ThinkStation-K>
+ <Y5ezpOwd8sOTTaW5@google.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <Y5ezpOwd8sOTTaW5@google.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/12/13 9:37, Jaegeuk Kim wrote: > On 12/13, Chao Yu
- wrote: >> On 2022/12/13 6:53, Jaegeuk Kim wrote: >>> On 12/11, Chao Yu wrote:
- >>>> On 2022/11/25 19:47, Yangtao Li wrote: >>>>> Just for clea [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  However, 'f2fs_compressed_file()' only determines whether
+ the file can be compressed, not whether the file has been compressed. As far
+ as I know, when compress_mode is user, files marked FI_COMPRESSED [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.195 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [zhuqiandann[at]gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.195 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p4udN-0007dn-Qa
-Subject: Re: [f2fs-dev] [PATCH] f2fs: do some cleanup for f2fs module init
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1p4uvC-00FJl5-16
+Subject: Re: [f2fs-dev] [PATCH] f2fs: don't set FI_COMPRESS_RELEASED if file
+ is not compressed
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,223 +129,78 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- Yangtao Li <frank.li@vivo.com>
+Cc: zhoudan8@xiaomi.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/12/13 9:37, Jaegeuk Kim wrote:
-> On 12/13, Chao Yu wrote:
->> On 2022/12/13 6:53, Jaegeuk Kim wrote:
->>> On 12/11, Chao Yu wrote:
->>>> On 2022/11/25 19:47, Yangtao Li wrote:
->>>>> Just for cleanup, no functional changes.
->>>>>
->>>>> Signed-off-by: Yangtao Li <frank.li@vivo.com>
->>>>> ---
->>>>>     fs/f2fs/compress.c | 46 ++++++----------------------------------------
->>>>>     fs/f2fs/data.c     | 14 ++++----------
->>>>>     fs/f2fs/gc.c       |  4 +---
->>>>>     fs/f2fs/recovery.c |  4 +---
->>>>>     fs/f2fs/super.c    |  8 ++------
->>>>>     5 files changed, 14 insertions(+), 62 deletions(-)
->>>>>
->>>>> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
->>>>> index d315c2de136f..f920ba8e0e85 100644
->>>>> --- a/fs/f2fs/compress.c
->>>>> +++ b/fs/f2fs/compress.c
->>>>> @@ -567,10 +567,7 @@ MODULE_PARM_DESC(num_compress_pages,
->>>>>     int f2fs_init_compress_mempool(void)
->>>>>     {
->>>>>     	compress_page_pool = mempool_create_page_pool(num_compress_pages, 0);
->>>>> -	if (!compress_page_pool)
->>>>> -		return -ENOMEM;
->>>>> -
->>>>> -	return 0;
->>>>> +	return compress_page_pool ? 0 : -ENOMEM;
->>>>
->>>> I don't think this needs cleanup, other part looks good to me.
->>>
->>> What is the point here comparing to the below? fyi; I picked this change.
->>
->> IIUC, the question is for Yangtao? :P
+However, 'f2fs_compressed_file()' only determines whether the file can 
+be compressed, not whether the file has been compressed. As far as I 
+know, when compress_mode is user, files marked FI_COMPRESSED_FILE 
+will be compressed only after 'f2fs_ioc_compress_file()' is called.
+On Mon, Dec 12, 2022 at 03:05:08PM -0800, Jaegeuk Kim wrote:
+> On 12/12, zhoudan wrote:
+> > Maybe I'm not describing it clearly enough, but I think there is 
+> > something wrong with the logic here.The 'f2fs_release_compress_blocks'
+> > method does not determine if the file is compressed, but simply adds 
+> > the FI_COMPRESS_RELEASED flag. 
 > 
-> Heh, to you. :) I think either looks fine. Hence, 
-
-Ah... alright.
-
-I comment on this cleanup, due to I don't see any benefit, since both implementations
-are very common in kernel codes.
-
-> I'm fine with this patch.
-
-Okay.
-
-Thanks,
-
+> I firstly lost your point since f2fs_release_compress_blocks() checked
+> f2fs_compressed_file().
 > 
->>
->> Thanks,
->>
->>>
->>>>
->>>> Thanks,
->>>>
->>>>>     }
->>>>>     void f2fs_destroy_compress_mempool(void)
->>>>> @@ -1983,9 +1980,7 @@ int f2fs_init_page_array_cache(struct f2fs_sb_info *sbi)
->>>>>     	sbi->page_array_slab = f2fs_kmem_cache_create(slab_name,
->>>>>     					sbi->page_array_slab_size);
->>>>> -	if (!sbi->page_array_slab)
->>>>> -		return -ENOMEM;
->>>>> -	return 0;
->>>>> +	return sbi->page_array_slab ? 0 : -ENOMEM;
->>>>>     }
->>>>>     void f2fs_destroy_page_array_cache(struct f2fs_sb_info *sbi)
->>>>> @@ -1993,53 +1988,24 @@ void f2fs_destroy_page_array_cache(struct f2fs_sb_info *sbi)
->>>>>     	kmem_cache_destroy(sbi->page_array_slab);
->>>>>     }
->>>>> -static int __init f2fs_init_cic_cache(void)
->>>>> +int __init f2fs_init_compress_cache(void)
->>>>>     {
->>>>>     	cic_entry_slab = f2fs_kmem_cache_create("f2fs_cic_entry",
->>>>>     					sizeof(struct compress_io_ctx));
->>>>>     	if (!cic_entry_slab)
->>>>>     		return -ENOMEM;
->>>>> -	return 0;
->>>>> -}
->>>>> -
->>>>> -static void f2fs_destroy_cic_cache(void)
->>>>> -{
->>>>> -	kmem_cache_destroy(cic_entry_slab);
->>>>> -}
->>>>> -
->>>>> -static int __init f2fs_init_dic_cache(void)
->>>>> -{
->>>>>     	dic_entry_slab = f2fs_kmem_cache_create("f2fs_dic_entry",
->>>>>     					sizeof(struct decompress_io_ctx));
->>>>>     	if (!dic_entry_slab)
->>>>> -		return -ENOMEM;
->>>>> -	return 0;
->>>>> -}
->>>>> -
->>>>> -static void f2fs_destroy_dic_cache(void)
->>>>> -{
->>>>> -	kmem_cache_destroy(dic_entry_slab);
->>>>> -}
->>>>> -
->>>>> -int __init f2fs_init_compress_cache(void)
->>>>> -{
->>>>> -	int err;
->>>>> -
->>>>> -	err = f2fs_init_cic_cache();
->>>>> -	if (err)
->>>>> -		goto out;
->>>>> -	err = f2fs_init_dic_cache();
->>>>> -	if (err)
->>>>>     		goto free_cic;
->>>>>     	return 0;
->>>>>     free_cic:
->>>>> -	f2fs_destroy_cic_cache();
->>>>> -out:
->>>>> +	kmem_cache_destroy(cic_entry_slab);
->>>>>     	return -ENOMEM;
->>>>>     }
->>>>>     void f2fs_destroy_compress_cache(void)
->>>>>     {
->>>>> -	f2fs_destroy_dic_cache();
->>>>> -	f2fs_destroy_cic_cache();
->>>>> +	kmem_cache_destroy(dic_entry_slab);
->>>>> +	kmem_cache_destroy(cic_entry_slab);
->>>>>     }
->>>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>>>> index 560fa80590e9..35c19248b1e2 100644
->>>>> --- a/fs/f2fs/data.c
->>>>> +++ b/fs/f2fs/data.c
->>>>> @@ -39,10 +39,8 @@ static struct bio_set f2fs_bioset;
->>>>>     int __init f2fs_init_bioset(void)
->>>>>     {
->>>>> -	if (bioset_init(&f2fs_bioset, F2FS_BIO_POOL_SIZE,
->>>>> -					0, BIOSET_NEED_BVECS))
->>>>> -		return -ENOMEM;
->>>>> -	return 0;
->>>>> +	return bioset_init(&f2fs_bioset, F2FS_BIO_POOL_SIZE,
->>>>> +					0, BIOSET_NEED_BVECS);
->>>>>     }
->>>>>     void f2fs_destroy_bioset(void)
->>>>> @@ -4090,9 +4088,7 @@ int f2fs_init_post_read_wq(struct f2fs_sb_info *sbi)
->>>>>     	sbi->post_read_wq = alloc_workqueue("f2fs_post_read_wq",
->>>>>     						 WQ_UNBOUND | WQ_HIGHPRI,
->>>>>     						 num_online_cpus());
->>>>> -	if (!sbi->post_read_wq)
->>>>> -		return -ENOMEM;
->>>>> -	return 0;
->>>>> +	return sbi->post_read_wq ? 0 : -ENOMEM;
->>>>>     }
->>>>>     void f2fs_destroy_post_read_wq(struct f2fs_sb_info *sbi)
->>>>> @@ -4105,9 +4101,7 @@ int __init f2fs_init_bio_entry_cache(void)
->>>>>     {
->>>>>     	bio_entry_slab = f2fs_kmem_cache_create("f2fs_bio_entry_slab",
->>>>>     			sizeof(struct bio_entry));
->>>>> -	if (!bio_entry_slab)
->>>>> -		return -ENOMEM;
->>>>> -	return 0;
->>>>> +	return bio_entry_slab ? 0 : -ENOMEM;
->>>>>     }
->>>>>     void f2fs_destroy_bio_entry_cache(void)
->>>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
->>>>> index 0f967b1e98f2..4b0d2fa3a769 100644
->>>>> --- a/fs/f2fs/gc.c
->>>>> +++ b/fs/f2fs/gc.c
->>>>> @@ -1903,9 +1903,7 @@ int __init f2fs_create_garbage_collection_cache(void)
->>>>>     {
->>>>>     	victim_entry_slab = f2fs_kmem_cache_create("f2fs_victim_entry",
->>>>>     					sizeof(struct victim_entry));
->>>>> -	if (!victim_entry_slab)
->>>>> -		return -ENOMEM;
->>>>> -	return 0;
->>>>> +	return victim_entry_slab ? 0 : -ENOMEM;
->>>>>     }
->>>>>     void f2fs_destroy_garbage_collection_cache(void)
->>>>> diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
->>>>> index dea95b48b647..77fd453949b1 100644
->>>>> --- a/fs/f2fs/recovery.c
->>>>> +++ b/fs/f2fs/recovery.c
->>>>> @@ -923,9 +923,7 @@ int __init f2fs_create_recovery_cache(void)
->>>>>     {
->>>>>     	fsync_entry_slab = f2fs_kmem_cache_create("f2fs_fsync_inode_entry",
->>>>>     					sizeof(struct fsync_inode_entry));
->>>>> -	if (!fsync_entry_slab)
->>>>> -		return -ENOMEM;
->>>>> -	return 0;
->>>>> +	return fsync_entry_slab ? 0 : -ENOMEM;
->>>>>     }
->>>>>     void f2fs_destroy_recovery_cache(void)
->>>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
->>>>> index 31435c8645c8..1d56cba495a5 100644
->>>>> --- a/fs/f2fs/super.c
->>>>> +++ b/fs/f2fs/super.c
->>>>> @@ -288,9 +288,7 @@ static int __init f2fs_create_casefold_cache(void)
->>>>>     {
->>>>>     	f2fs_cf_name_slab = f2fs_kmem_cache_create("f2fs_casefolded_name",
->>>>>     							F2FS_NAME_LEN);
->>>>> -	if (!f2fs_cf_name_slab)
->>>>> -		return -ENOMEM;
->>>>> -	return 0;
->>>>> +	return f2fs_cf_name_slab ? 0 : -ENOMEM;
->>>>>     }
->>>>>     static void f2fs_destroy_casefold_cache(void)
->>>>> @@ -4646,9 +4644,7 @@ static int __init init_inodecache(void)
->>>>>     	f2fs_inode_cachep = kmem_cache_create("f2fs_inode_cache",
->>>>>     			sizeof(struct f2fs_inode_info), 0,
->>>>>     			SLAB_RECLAIM_ACCOUNT|SLAB_ACCOUNT, NULL);
->>>>> -	if (!f2fs_inode_cachep)
->>>>> -		return -ENOMEM;
->>>>> -	return 0;
->>>>> +	return f2fs_inode_cachep ? 0 : -ENOMEM;
->>>>>     }
->>>>>     static void destroy_inodecache(void)
+> > In particular, in the current Android system, when the application is 
+> > installed, the release interface is called by default to release the 
+> > storage marked as compressed,  without checking whether the file is 
+> > actually compressed. In this case, when compress_mode is set to user, 
+> > calling the compress interface returns ENVAL and the file cannot be 
+> > compressed.
+> > So I think the implementation of release needs to be modified, and 
+> > only set FI_COMPRESS_RELEASED when it's really compressed and the 
+> > storage is released.
+> > 
+> > On Fri, Dec 09, 2022 at 12:19:44PM -0800, Jaegeuk Kim wrote:
+> > > On 12/08, zhoudan8 wrote:
+> > > > In compress_mode=user, f2fs_release_compress_blocks()
+> > > >  does not verify whether it has been compressed and
+> > > >  sets FI_COMPRESS_RELEASED directly. which will lead to
+> > > > return -EINVAL after calling compress.
+> > > > To fix it,let's do not set FI_COMPRESS_RELEASED if file
+> > > > is not compressed.
+> > > 
+> > > Do you mean you want to avoid EINVAL on a file having FI_COMPRESS_RELEASED
+> > > with zero i_compr_blokcs?
+> > > 
+> > > I think the current logic is giving the error on a released file already.
+> > > 
+> > > > 
+> > > > Signed-off-by: zhoudan8 <zhoudan8@xiaomi.com>
+> > > > ---
+> > > >  fs/f2fs/file.c | 3 +--
+> > > >  1 file changed, 1 insertion(+), 2 deletions(-)
+> > > > 
+> > > > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > > > index 82cda1258227..f32910077df6 100644
+> > > > --- a/fs/f2fs/file.c
+> > > > +++ b/fs/f2fs/file.c
+> > > > @@ -3451,14 +3451,13 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
+> > > >  	ret = filemap_write_and_wait_range(inode->i_mapping, 0, LLONG_MAX);
+> > > >  	if (ret)
+> > > >  		goto out;
+> > > > -
+> > > > -	set_inode_flag(inode, FI_COMPRESS_RELEASED);
+> > > >  	inode->i_ctime = current_time(inode);
+> > > >  	f2fs_mark_inode_dirty_sync(inode, true);
+> > > >  
+> > > >  	if (!atomic_read(&F2FS_I(inode)->i_compr_blocks))
+> > > >  		goto out;
+> > > >  
+> > > > +	set_inode_flag(inode, FI_COMPRESS_RELEASED);
+> > > >  	f2fs_down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+> > > >  	filemap_invalidate_lock(inode->i_mapping);
+> > > >  
+> > > > -- 
+> > > > 2.38.1
 
 
 _______________________________________________
