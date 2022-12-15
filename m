@@ -2,87 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA1CF64D54C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Dec 2022 03:27:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC91B64D657
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 15 Dec 2022 07:06:46 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p5dyR-0007bY-6T;
-	Thu, 15 Dec 2022 02:27:51 +0000
+	id 1p5hOD-0004pZ-H2;
+	Thu, 15 Dec 2022 06:06:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1p5dyP-0007bS-Mm
+ (envelope-from <ebiggers@kernel.org>) id 1p5hOB-0004pT-TM
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 15 Dec 2022 02:27:49 +0000
+ Thu, 15 Dec 2022 06:06:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Yvwjdl9ZfMoQ3QpSqUmQMmHEA4RDmUk/+ZI0/DiOX3o=; b=IJXObxQjcocZjE9M0p8f3zb/au
- SO4TRsKkf2ghxjQzM58bgEMLTRhwhJ61v6E1TK/SFHb3Nau5mdyP0xQZ6ehGoy79cCR/PQsMKhKSy
- hvyGZi1wH2nMiR8kIy57JCRAUX/rYpIglo3wSQW7owT1bRlOULg0yVdp/z6SaTs0t4iM=;
+ bh=eJgyGBOcomKyIT+5GYJs2+Ud+6GbiN02Qa+wJrYCwhs=; b=i5d4lB6UNBOuXRNiKSFxhfh9IS
+ +KJICl5We+okA4gQr3QYq8AO/YgfEckxR3yEhB7QPX5+2eC4lyJI5+92j5DjaK6mre5whcVc5rdij
+ +B/f5yW/1B2lHBL6+7TlXIMecq/qaeL6BWfXlfqk3GxQm0GlJpr5skHdqLKR2Cn+lJqo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Yvwjdl9ZfMoQ3QpSqUmQMmHEA4RDmUk/+ZI0/DiOX3o=; b=cdKsmSKYek9mjrukpMOZhKU8dv
- vjrBDq3KCG5Qv1byI00tGVOQwTECq6Jo50xcTCtsRlXgJBZURi3EDeF3LEXiEeLCrYadB59R8jd2E
- mhXKNIxnb/Svdg24lK03hgzQWfLh6oVBY6PN5csTuggpeuh1tDzhuD0S1cti/BkSawMY=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=eJgyGBOcomKyIT+5GYJs2+Ud+6GbiN02Qa+wJrYCwhs=; b=T
+ kozMg0qTT7ElYfGiU1qlYfIy6nSZDjd4HeBNn/EVXhMopGqei6gUSy83qDxVRvyqSYHZXbqRwNkWg
+ occurpX5lYpBmMHffOUytpGF5nC5mkC3k9yFKpOUsZmfBkgAgU7MQautDoeGapOmd/Gipx8P270Rz
+ C+dgAxr0DM77mbSo=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p5dyN-0006TQ-JQ for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 15 Dec 2022 02:27:49 +0000
+ id 1p5hO6-00016q-AT for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 15 Dec 2022 06:06:39 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 7AD49B819DC;
- Thu, 15 Dec 2022 02:27:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0791C433EF;
- Thu, 15 Dec 2022 02:27:33 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTPS id 35B88CE1BC8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 15 Dec 2022 06:06:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 174D3C433EF;
+ Thu, 15 Dec 2022 06:06:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1671071255;
- bh=6P0YU/kHb4MLrqdFcxUR9lquyd86rwTP5ITcamVK9p8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=D7k8vy9cvAV512lD8LMxtybCL0jRAFdoc2HUJYIhpYv8A9+vHKjh9MIsubO3UPllQ
- F/9zGaBukJ1TS12KJSsH8l+RDBqQZFC8SX6NN1gEM3A9391sPCIauXsSZZNZTyXoQc
- AvR44DOTInaumSEuansw+p6n7BV92eIOUV9M10zgM6cla08M74b/uRjyWDrrNlwtAY
- YDNuJyDfETOsdo/hpe83xRuMfddTgSS3C/RPse3wJUnc0yy1a1V9Z8KJ9Pk3d/NN9C
- i7NDMWucQE+lHBPEk9Pnj9sqtWO7SARRP18YeZMkC+Q7roi2F5P7uaPbBgmhsgT+xF
- ssW4ifduEut2g==
-Message-ID: <ff5f1e9d-1f44-5a3b-4b76-d3cfa877b18b@kernel.org>
-Date: Thu, 15 Dec 2022 10:27:32 +0800
+ s=k20201202; t=1671084382;
+ bh=oUUTcNGCxne4bIvsKsWaj+oTN6NR5UQmZDveEZOr+7k=;
+ h=From:To:Cc:Subject:Date:From;
+ b=QgYs6oa4cNZXmrblrSnFAei9T8fknp9gyrSrfDWrAv16WQQcAWeQFdCyQue8LEf37
+ WbDOYX/ftTQw8DIl+QHAn82hAE1gKkKj3sI9Sw5Zn9bSRMLeHHx5qph8ZD7TWmZ8ZA
+ 1rSC5LnAUz+YLN0jNJTqKtl25UemjMlZ0dcVAtRliQ0STjEarwoET6uOzuMF/jdZNQ
+ Kq1OSRRCeE3N3umSPoZmuBx9L4NYFfn9aj4bFAq/S+g+lMblOqmrlsixAIcAV7mNB9
+ X8mH7m7BZm0PPuaws4939kx6KQadRASKqIASnTYwNuYpi/zkIF+/kcRWOe3CMXr9UA
+ tx6cFNHxaPZLA==
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Date: Wed, 14 Dec 2022 22:04:20 -0800
+Message-Id: <20221215060420.60692-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.0
-Content-Language: en-US
-To: Yuwei Guan <Yuwei.Guan@zeekrlife.com>, jaegeuk@kernel.org
-References: <20221213093419.134-1-Yuwei.Guan@zeekrlife.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221213093419.134-1-Yuwei.Guan@zeekrlife.com>
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -2.7 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/12/13 17:34, Yuwei Guan wrote: > Any of the following
- scenarios will send more than the number of > max_requests at a time, which
- will not meet the design of the > max_requests limit. > > - Se [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  From: Eric Biggers <ebiggers@google.com> I've gotten very
+ little use out of these debug messages, and I'm not aware of anyone else having
+ used them. Indeed, sprinkling pr_debug around is not really a best practice
+ these days, especially for filesystem code. Tracepoints are used instead.
+ Content analysis details:   (-2.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -90,11 +89,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p5dyN-0006TQ-JQ
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: deliver the accumulated 'issued' to
- __issue_discard_cmd_orderly() to meet the max_requests limit
+X-Headers-End: 1p5hO6-00016q-AT
+Subject: [f2fs-dev] [PATCH] fsverity: remove debug messages and
+ CONFIG_FS_VERITY_DEBUG
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,110 +104,262 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Bagas Sanjaya <bagasdotme@gmail.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-xfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-btrfs@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/12/13 17:34, Yuwei Guan wrote:
-> Any of the following scenarios will send more than the number of
-> max_requests at a time, which will not meet the design of the
-> max_requests limit.
-> 
-> - Set max_ordered_discard larger than discard_granularity from userspace.
-> - It is a small size device, discard_granularity can be tuned to 1 in
->    f2fs_tuning_parameters().
-> 
-> We need to deliver the accumulated @issued to __issue_discard_cmd_orderly()
-> to meet the max_requests limit.
-> 
-> BTW, convert the parameter type of @issued in __submit_discard_cmd().
-> 
-> Signed-off-by: Yuwei Guan <Yuwei.Guan@zeekrlife.com>
-> Cc: Bagas Sanjaya <bagasdotme@gmail.com>
+From: Eric Biggers <ebiggers@google.com>
 
-For the code part, it looks good to me.
+I've gotten very little use out of these debug messages, and I'm not
+aware of anyone else having used them.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Indeed, sprinkling pr_debug around is not really a best practice these
+days, especially for filesystem code.  Tracepoints are used instead.
 
-Thanks,
+Let's just remove these and start from a clean slate.
 
-> ---
->   fs/f2fs/segment.c | 24 +++++++++++-------------
->   1 file changed, 11 insertions(+), 13 deletions(-)
-> 
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index a9099a754dd2..5268938466f5 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -1097,8 +1097,7 @@ static void __update_discard_tree_range(struct f2fs_sb_info *sbi,
->   /* this function is copied from blkdev_issue_discard from block/blk-lib.c */
->   static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
->   						struct discard_policy *dpolicy,
-> -						struct discard_cmd *dc,
-> -						unsigned int *issued)
-> +						struct discard_cmd *dc, int *issued)
->   {
->   	struct block_device *bdev = dc->bdev;
->   	unsigned int max_discard_blocks =
-> @@ -1379,8 +1378,8 @@ static void __queue_discard_cmd(struct f2fs_sb_info *sbi,
->   	mutex_unlock(&SM_I(sbi)->dcc_info->cmd_lock);
->   }
->   
-> -static unsigned int __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
-> -					struct discard_policy *dpolicy)
-> +static void __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
-> +					struct discard_policy *dpolicy, int *issued)
->   {
->   	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
->   	struct discard_cmd *prev_dc = NULL, *next_dc = NULL;
-> @@ -1388,7 +1387,6 @@ static unsigned int __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
->   	struct discard_cmd *dc;
->   	struct blk_plug plug;
->   	unsigned int pos = dcc->next_pos;
-> -	unsigned int issued = 0;
->   	bool io_interrupted = false;
->   
->   	mutex_lock(&dcc->cmd_lock);
-> @@ -1415,9 +1413,9 @@ static unsigned int __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
->   		}
->   
->   		dcc->next_pos = dc->lstart + dc->len;
-> -		err = __submit_discard_cmd(sbi, dpolicy, dc, &issued);
-> +		err = __submit_discard_cmd(sbi, dpolicy, dc, issued);
->   
-> -		if (issued >= dpolicy->max_requests)
-> +		if (*issued >= dpolicy->max_requests)
->   			break;
->   next:
->   		node = rb_next(&dc->rb_node);
-> @@ -1433,10 +1431,8 @@ static unsigned int __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
->   
->   	mutex_unlock(&dcc->cmd_lock);
->   
-> -	if (!issued && io_interrupted)
-> -		issued = -1;
-> -
-> -	return issued;
-> +	if (!(*issued) && io_interrupted)
-> +		*issued = -1;
->   }
->   static unsigned int __wait_all_discard_cmd(struct f2fs_sb_info *sbi,
->   					struct discard_policy *dpolicy);
-> @@ -1464,8 +1460,10 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
->   		if (i + 1 < dpolicy->granularity)
->   			break;
->   
-> -		if (i + 1 < dcc->max_ordered_discard && dpolicy->ordered)
-> -			return __issue_discard_cmd_orderly(sbi, dpolicy);
-> +		if (i + 1 < dcc->max_ordered_discard && dpolicy->ordered) {
-> +			__issue_discard_cmd_orderly(sbi, dpolicy, &issued);
-> +			return issued;
-> +		}
->   
->   		pend_list = &dcc->pend_list[i];
->   
+This change does not affect info, warning, and error messages.
+
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/verity/Kconfig            |  8 --------
+ fs/verity/enable.c           | 11 -----------
+ fs/verity/fsverity_private.h |  4 ----
+ fs/verity/init.c             |  1 -
+ fs/verity/open.c             | 21 ++-------------------
+ fs/verity/signature.c        |  2 --
+ fs/verity/verify.c           | 13 -------------
+ 7 files changed, 2 insertions(+), 58 deletions(-)
+
+diff --git a/fs/verity/Kconfig b/fs/verity/Kconfig
+index aad1f1d998b9..a7ffd718f171 100644
+--- a/fs/verity/Kconfig
++++ b/fs/verity/Kconfig
+@@ -34,14 +34,6 @@ config FS_VERITY
+ 
+ 	  If unsure, say N.
+ 
+-config FS_VERITY_DEBUG
+-	bool "FS Verity debugging"
+-	depends on FS_VERITY
+-	help
+-	  Enable debugging messages related to fs-verity by default.
+-
+-	  Say N unless you are an fs-verity developer.
+-
+ config FS_VERITY_BUILTIN_SIGNATURES
+ 	bool "FS Verity builtin signature support"
+ 	depends on FS_VERITY
+diff --git a/fs/verity/enable.c b/fs/verity/enable.c
+index df6b499bf6a1..ef4df451fce7 100644
+--- a/fs/verity/enable.c
++++ b/fs/verity/enable.c
+@@ -70,10 +70,6 @@ static int build_merkle_tree_level(struct file *filp, unsigned int level,
+ 	for (i = 0; i < num_blocks_to_hash; i++) {
+ 		struct page *src_page;
+ 
+-		if ((pgoff_t)i % 10000 == 0 || i + 1 == num_blocks_to_hash)
+-			pr_debug("Hashing block %llu of %llu for level %u\n",
+-				 i + 1, num_blocks_to_hash, level);
+-
+ 		if (level == 0) {
+ 			/* Leaf: hashing a data block */
+ 			src_page = read_file_data_page(filp, i, &ra,
+@@ -263,15 +259,12 @@ static int enable_verity(struct file *filp,
+ 	 * ->begin_enable_verity() and ->end_enable_verity() using the inode
+ 	 * lock and only allow one process to be here at a time on a given file.
+ 	 */
+-	pr_debug("Building Merkle tree...\n");
+ 	BUILD_BUG_ON(sizeof(desc->root_hash) < FS_VERITY_MAX_DIGEST_SIZE);
+ 	err = build_merkle_tree(filp, &params, desc->root_hash);
+ 	if (err) {
+ 		fsverity_err(inode, "Error %d building Merkle tree", err);
+ 		goto rollback;
+ 	}
+-	pr_debug("Done building Merkle tree.  Root hash is %s:%*phN\n",
+-		 params.hash_alg->name, params.digest_size, desc->root_hash);
+ 
+ 	/*
+ 	 * Create the fsverity_info.  Don't bother trying to save work by
+@@ -286,10 +279,6 @@ static int enable_verity(struct file *filp,
+ 		goto rollback;
+ 	}
+ 
+-	if (arg->sig_size)
+-		pr_debug("Storing a %u-byte PKCS#7 signature alongside the file\n",
+-			 arg->sig_size);
+-
+ 	/*
+ 	 * Tell the filesystem to finish enabling verity on the file.
+ 	 * Serialized with ->begin_enable_verity() by the inode lock.
+diff --git a/fs/verity/fsverity_private.h b/fs/verity/fsverity_private.h
+index c7fcb855e068..a16038a0ee67 100644
+--- a/fs/verity/fsverity_private.h
++++ b/fs/verity/fsverity_private.h
+@@ -8,10 +8,6 @@
+ #ifndef _FSVERITY_PRIVATE_H
+ #define _FSVERITY_PRIVATE_H
+ 
+-#ifdef CONFIG_FS_VERITY_DEBUG
+-#define DEBUG
+-#endif
+-
+ #define pr_fmt(fmt) "fs-verity: " fmt
+ 
+ #include <linux/fsverity.h>
+diff --git a/fs/verity/init.c b/fs/verity/init.c
+index c98b7016f446..023905151035 100644
+--- a/fs/verity/init.c
++++ b/fs/verity/init.c
+@@ -49,7 +49,6 @@ static int __init fsverity_init(void)
+ 	if (err)
+ 		goto err_exit_workqueue;
+ 
+-	pr_debug("Initialized fs-verity\n");
+ 	return 0;
+ 
+ err_exit_workqueue:
+diff --git a/fs/verity/open.c b/fs/verity/open.c
+index 81ff94442f7b..12bf2596b173 100644
+--- a/fs/verity/open.c
++++ b/fs/verity/open.c
+@@ -77,10 +77,6 @@ int fsverity_init_merkle_tree_params(struct merkle_tree_params *params,
+ 	params->log_arity = params->log_blocksize - ilog2(params->digest_size);
+ 	params->hashes_per_block = 1 << params->log_arity;
+ 
+-	pr_debug("Merkle tree uses %s with %u-byte blocks (%u hashes/block), salt=%*phN\n",
+-		 hash_alg->name, params->block_size, params->hashes_per_block,
+-		 (int)salt_size, salt);
+-
+ 	/*
+ 	 * Compute the number of levels in the Merkle tree and create a map from
+ 	 * level to the starting block of that level.  Level 'num_levels - 1' is
+@@ -90,7 +86,6 @@ int fsverity_init_merkle_tree_params(struct merkle_tree_params *params,
+ 
+ 	/* Compute number of levels and the number of blocks in each level */
+ 	blocks = ((u64)inode->i_size + params->block_size - 1) >> log_blocksize;
+-	pr_debug("Data is %lld bytes (%llu blocks)\n", inode->i_size, blocks);
+ 	while (blocks > 1) {
+ 		if (params->num_levels >= FS_VERITY_MAX_LEVELS) {
+ 			fsverity_err(inode, "Too many levels in Merkle tree");
+@@ -109,8 +104,6 @@ int fsverity_init_merkle_tree_params(struct merkle_tree_params *params,
+ 	for (level = (int)params->num_levels - 1; level >= 0; level--) {
+ 		blocks = params->level_start[level];
+ 		params->level_start[level] = offset;
+-		pr_debug("Level %d is %llu blocks starting at index %llu\n",
+-			 level, blocks, offset);
+ 		offset += blocks;
+ 	}
+ 
+@@ -176,9 +169,6 @@ struct fsverity_info *fsverity_create_info(const struct inode *inode,
+ 		fsverity_err(inode, "Error %d computing file digest", err);
+ 		goto out;
+ 	}
+-	pr_debug("Computed file digest: %s:%*phN\n",
+-		 vi->tree_params.hash_alg->name,
+-		 vi->tree_params.digest_size, vi->file_digest);
+ 
+ 	err = fsverity_verify_signature(vi, desc->signature,
+ 					le32_to_cpu(desc->sig_size));
+@@ -343,12 +333,8 @@ int fsverity_file_open(struct inode *inode, struct file *filp)
+ 	if (!IS_VERITY(inode))
+ 		return 0;
+ 
+-	if (filp->f_mode & FMODE_WRITE) {
+-		pr_debug("Denying opening verity file (ino %lu) for write\n",
+-			 inode->i_ino);
++	if (filp->f_mode & FMODE_WRITE)
+ 		return -EPERM;
+-	}
+-
+ 	return ensure_verity_info(inode);
+ }
+ EXPORT_SYMBOL_GPL(fsverity_file_open);
+@@ -365,11 +351,8 @@ EXPORT_SYMBOL_GPL(fsverity_file_open);
+  */
+ int fsverity_prepare_setattr(struct dentry *dentry, struct iattr *attr)
+ {
+-	if (IS_VERITY(d_inode(dentry)) && (attr->ia_valid & ATTR_SIZE)) {
+-		pr_debug("Denying truncate of verity file (ino %lu)\n",
+-			 d_inode(dentry)->i_ino);
++	if (IS_VERITY(d_inode(dentry)) && (attr->ia_valid & ATTR_SIZE))
+ 		return -EPERM;
+-	}
+ 	return 0;
+ }
+ EXPORT_SYMBOL_GPL(fsverity_prepare_setattr);
+diff --git a/fs/verity/signature.c b/fs/verity/signature.c
+index 143a530a8008..e7d3ca919a1e 100644
+--- a/fs/verity/signature.c
++++ b/fs/verity/signature.c
+@@ -82,8 +82,6 @@ int fsverity_verify_signature(const struct fsverity_info *vi,
+ 		return err;
+ 	}
+ 
+-	pr_debug("Valid signature for file digest %s:%*phN\n",
+-		 hash_alg->name, hash_alg->digest_size, vi->file_digest);
+ 	return 0;
+ }
+ 
+diff --git a/fs/verity/verify.c b/fs/verity/verify.c
+index 961ba248021f..92f36b5522fa 100644
+--- a/fs/verity/verify.c
++++ b/fs/verity/verify.c
+@@ -91,8 +91,6 @@ static bool verify_page(struct inode *inode, const struct fsverity_info *vi,
+ 	if (WARN_ON_ONCE(!PageLocked(data_page) || PageUptodate(data_page)))
+ 		return false;
+ 
+-	pr_debug_ratelimited("Verifying data page %lu...\n", index);
+-
+ 	/*
+ 	 * Starting at the leaf level, ascend the tree saving hash pages along
+ 	 * the way until we find a verified hash page, indicated by PageChecked;
+@@ -105,9 +103,6 @@ static bool verify_page(struct inode *inode, const struct fsverity_info *vi,
+ 
+ 		hash_at_level(params, index, level, &hindex, &hoffset);
+ 
+-		pr_debug_ratelimited("Level %d: hindex=%lu, hoffset=%u\n",
+-				     level, hindex, hoffset);
+-
+ 		hpage = inode->i_sb->s_vop->read_merkle_tree_page(inode, hindex,
+ 				level == 0 ? level0_ra_pages : 0);
+ 		if (IS_ERR(hpage)) {
+@@ -122,19 +117,13 @@ static bool verify_page(struct inode *inode, const struct fsverity_info *vi,
+ 			memcpy_from_page(_want_hash, hpage, hoffset, hsize);
+ 			want_hash = _want_hash;
+ 			put_page(hpage);
+-			pr_debug_ratelimited("Hash page already checked, want %s:%*phN\n",
+-					     params->hash_alg->name,
+-					     hsize, want_hash);
+ 			goto descend;
+ 		}
+-		pr_debug_ratelimited("Hash page not yet checked\n");
+ 		hpages[level] = hpage;
+ 		hoffsets[level] = hoffset;
+ 	}
+ 
+ 	want_hash = vi->root_hash;
+-	pr_debug("Want root hash: %s:%*phN\n",
+-		 params->hash_alg->name, hsize, want_hash);
+ descend:
+ 	/* Descend the tree verifying hash pages */
+ 	for (; level > 0; level--) {
+@@ -151,8 +140,6 @@ static bool verify_page(struct inode *inode, const struct fsverity_info *vi,
+ 		memcpy_from_page(_want_hash, hpage, hoffset, hsize);
+ 		want_hash = _want_hash;
+ 		put_page(hpage);
+-		pr_debug("Verified hash page at level %d, now want %s:%*phN\n",
+-			 level - 1, params->hash_alg->name, hsize, want_hash);
+ 	}
+ 
+ 	/* Finally, verify the data page */
+
+base-commit: 041fae9c105ae342a4245cf1e0dc56a23fbb9d3c
+-- 
+2.38.1
+
 
 
 _______________________________________________
