@@ -2,160 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F068B64E608
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Dec 2022 03:50:16 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AD3B64E60B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Dec 2022 03:51:57 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p60nc-0008OR-Bq;
-	Fri, 16 Dec 2022 02:50:12 +0000
+	id 1p60pH-00034F-HD;
+	Fri, 16 Dec 2022 02:51:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1p60nW-0008OJ-7u
+ (envelope-from <chao@kernel.org>) id 1p60pG-000348-5t
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 16 Dec 2022 02:50:06 +0000
+ Fri, 16 Dec 2022 02:51:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xkPRz4HuxnBRvPyPyjyiC/ZiYzctQfIpXzsctDoonPc=; b=U4QIinNFi6LOMn2aeriEjSdMBR
- y3xjxLoR4yhDQBB8D6HGiUMHvNr5DFb4SW8RGtLRz0G0abFcvyvEVKMEedFvDU4E1cqt5n1Me2KXp
- YsPoiLitipslfNT6nIrQu4dypBJSYmIimETe8FpJ5/gFisykYU6wEluf3oSggjKh3yog=;
+ bh=Tg42K+YyLekyf88ILDyZrryoUwDtysXotebMq03HG7k=; b=fvdNuO8VkJv6erDI1iBXaK5D/i
+ ga2jEPmzd3ys9135GZ46L9M60370sQqLqENt5ylnDpuisYUovSuC/wayISmGJzcSMfsmtBMaMa7CN
+ K+dA6nWRNBHqEHlDkSnCRU+Ojpu9t0mpMxyqPaGUF3MGMWibPJtG7yH3vgo6lxIAJhLQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xkPRz4HuxnBRvPyPyjyiC/ZiYzctQfIpXzsctDoonPc=; b=TeSSAHjWMr/oBgDf7XY3b5/yC5
- qZ8cTmMqn+Tnb1sZ9XY8P2AkSM6AwO3tmm9Mk5AxkcIaX+wCSq5BejfmDGlZcBEsirCPYknP5bSOj
- WIlO2TsHKAnhUr9DCt5NkwUO1ccVIvyCXmucK4bogIHs+h6PUvBpjKIGc/85+ftJm6jM=;
-Received: from mail-sgaapc01on2116.outbound.protection.outlook.com
- ([40.107.215.116] helo=APC01-SG2-obe.outbound.protection.outlook.com)
+ bh=Tg42K+YyLekyf88ILDyZrryoUwDtysXotebMq03HG7k=; b=Pzb+Sk8rI/0I8VGPLPTHyFs+Fz
+ OnRBVMyLgbHuj08tJ5c3pIq0zFSq16KCaP4hPYaeO9KGEE/PjW23kupzdKK6hq0knPo/PCFND6txq
+ ji725v90tiQ8TyE4nAieHYqiX4EOJPkOKEsuMRuep2I2rfV8UmPccFlwnSPBHMbj4Mjo=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p60nU-000xxn-Hc for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 16 Dec 2022 02:50:06 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BYRiIEg8lcL9+DQhOd9n76TJy6up2hFBRMc/LYtjxJKr8QTPSbuC6PdIjSUYjpNLV9Q4hQbGesh7f0abKSVl4Y6fxdz6EUM1mwSNd6jzqWL8a1nSzsti47DGcYe0iHCPxIYdQSuLHHH2S781PFbybpreev/mbsna9dPkgggEgeTegRZyctY83lSV8tUt4zrMDrMP/fawKQ50E5qxcDY0tWdgklu9GvNpM45kQKuWj7snP4I+5sRjpWSUsO41KllO71BV1dMB2DpnTVfM7rgPAzVMtXIeHlCvs5UQJx8IFReDm9iAHVmH2LAqfUmRQk35teK3PBtf7Rnd5//j/bUHRA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xkPRz4HuxnBRvPyPyjyiC/ZiYzctQfIpXzsctDoonPc=;
- b=EUtOx+CQtlTSh2b7GFBnpxgswzBMa8Q4AumNj4orb6clm3yUxWn8I3grZireMrL5Bx7CKClaXDPWcSkP/VZJCtAY4X+1a3XTY7GYHepyvboiCdYzcnTLq0qoC4mKV1grZrJ9AN6tLwjMjGHwkjtKhvIpdx/KV9/UOo6Lq5vaDrwGy94R7BXeIgISQ5jvJtRHoufMP94V/YNHekn3SUQFHKhkh8Pw38O/UcaxyWucNQvJfJRRhKh0ud5/dGTtWvhk8a/ptoJSrIKUAeCmf/t/TQC5EEDfBu+Q5Z5P4WLNv50pCbuCb4TZbSkpty72mpOOkZIRSGFC8axQxNNNqcwQLg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xkPRz4HuxnBRvPyPyjyiC/ZiYzctQfIpXzsctDoonPc=;
- b=P7b+CgqG877AE3qz8D3PCmkUmyM4wVxYUXmzw3Zg/5+E2wro6fZDkpdV62atrP6RJxq7INAcLOb9EoDywpbkWbw2EmL6/pK5TXaI5JVgUCPW34OoPBtYzLu4ExDzuQm6kkdD8kgt4d7RI50cxJFs4UkCPRi+dDPdrT5galksQxwRiE74icYDM7DDWaoD7Tn8QtGdUpMhNtV4PUz5t83Qi/8ZeFFjJJDWxEc5D30Nfli1epe4HUuN90xe31+6EZK0rBmy0jFhWsMMC9AEI7SDVvOghZEZfP5njptPh7+qDVTpzTDik9pj1Ovj52ohdgG2Xtme3AKxBWvcT7+Kus4/wA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by SI2PR06MB3980.apcprd06.prod.outlook.com (2603:1096:4:f5::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5924.15; Fri, 16 Dec
- 2022 02:49:55 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::ef03:cbfb:f8ef:d88b]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::ef03:cbfb:f8ef:d88b%9]) with mapi id 15.20.5924.011; Fri, 16 Dec 2022
- 02:49:55 +0000
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Fri, 16 Dec 2022 10:49:46 +0800
-Message-Id: <20221216024946.77650-1-frank.li@vivo.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <65a6b4e0-fe25-f341-0095-40c28d690eb1@kernel.org>
-References: <65a6b4e0-fe25-f341-0095-40c28d690eb1@kernel.org>
-X-ClientProxiedBy: SI1PR02CA0050.apcprd02.prod.outlook.com
- (2603:1096:4:1f5::12) To SEZPR06MB5269.apcprd06.prod.outlook.com
- (2603:1096:101:78::6)
+ id 1p60pB-000y0R-M1 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 16 Dec 2022 02:51:54 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 109C4B81CF6;
+ Fri, 16 Dec 2022 02:51:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A143BC433D2;
+ Fri, 16 Dec 2022 02:51:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1671159093;
+ bh=efWWnl3l3gWnkN8hoZS+d4dcbkkHnDrdS7MG4YlWCQc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=jkFOL7sg7Sfg44YaEAAOzJgATyLq1QMHK4xPEEiPjRCVLfKhbYKbiY6+IYpUN7E1a
+ U3YVib+o6eJiSegscDq6r9TRGFQZqOyqcTjki2g8nsOWSBOCvIZ3axNN7vpYe1hqSO
+ kUIrQxGRBAEWp/L40UtpdwJSgh1W18xt/TGBNONIrU6Qiy+YGyfX1ymFFxEqWuSYfo
+ i21DjDBOkGnmhbGHB/UYCiZoa01tPfBOaZz03Ys00q5piplid1nyYYNz78Qu2GK8TQ
+ k0/gHYc6BpaPzxOMH3Kdqk/JbqmE8UapMUWjLSELEiOWinLSAHgwwEMu1axeX8xn/S
+ HFTUOYNlt4jLA==
+Message-ID: <dedae282-2d13-cc12-95b8-98cfd377d98c@kernel.org>
+Date: Fri, 16 Dec 2022 10:51:30 +0800
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SI2PR06MB3980:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5f3eb661-0bd9-4981-8975-08dadf103629
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: KUIHtv8P497Jr2YP2LglpViwp039ZQ7dxKZEyVhE1mc3tDt9wt402xH1NxM+lSVyej343uJHc8lOlxax5VLKDor8e7BHDfYVnbwmS/PCARQkTHFGInWkIOIw0mSH8APPWqz9zLSRXn7kH+p4R6lpIj7mSoMbifk0V7trf7EIJkrNXUiZ+cx2RM8PSwcSZhyAm8HkDhxcfixCcOlFyj6uvxJIKC07E+pwZaX04+D68nMZK5XWPAtBoelBlnP1XKAzpyLFI3Ka8C7bj0W0MQP/R8S6Db4oCfbFalmBQilxrqkMdrdSkKB+sX0EwAAf88E+tWEZlb/+r8Ft+VINcjCNmO9uu0Fn3xR+jRSP2fJCz/o6faUz6JNtDCmY/y1bvTQQw7XMN2pJiZEYIEy0mHFL27cVDoKkzCv2cVvrHmeKdHRt32nThpZlNWjqj/6SF4qN8sFZZJEvKniqoBOG8GlPn4KZmLu2DSGQiqa8mL01EgTeBvdOPXB4rJf7XC//K+KWWka/1k0ESBZaI8wvCRt2F2bO/Eys8puLmYX9cg1LzWo9b9LDLbVFgYkAsDiThAo3yjpjPCD1CcB+QEWS9ThiT2Xozp/euIO+Tcgg0LYykHXEQbluFp87B/u/YHz+doSa/K8OMpZ2CQ4fMnEYOZInioafiofAbL/NTtuXf8HV/Xd2eDnBMrd7wjJ+BX/sMvnSY5dnmZ7oOKIZCosHIDPv16FFUBQ4wjvo3aXWVOVL+xA=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(396003)(136003)(39860400002)(346002)(366004)(376002)(451199015)(36756003)(8676002)(6512007)(186003)(26005)(478600001)(966005)(66476007)(1076003)(6486002)(41300700001)(2616005)(4326008)(86362001)(66556008)(5660300002)(83380400001)(8936002)(2906002)(66946007)(6666004)(52116002)(316002)(6506007)(4744005)(38100700002)(38350700002);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?YuFekqdUEcVOhtX+WRYPF1LAqrzzMaDhnEFMLVlhft7Pc74cBrqly1XC5RWh?=
- =?us-ascii?Q?iGTXZjnZTxIMscL6XmXelGkAX+7ym2Mc+57JCHaw3DNs00icGHYxEKfViDTF?=
- =?us-ascii?Q?6j+3C9g4ucTLEEfbR9RgILVhL3oQM1KMj9jZhsHxZVfcIksp1uAsR5ilV5zG?=
- =?us-ascii?Q?JjuhWuaWx1aVnFiUgD9XtczInqd9upnRwqh4+wQOeY1vP8Yo9Vnfm/X1rjcs?=
- =?us-ascii?Q?FLw7+1jTA7Sal/lcZvXeyh89pCIhCjfSCv6ZH6liQukNkSXDy4nYRAHA/2xL?=
- =?us-ascii?Q?bRcE1lBK0RzSjP+IV7RODYnb29E2ZmDYsiLUXX+Is3ge0zWlZ1wxd+MmyFI9?=
- =?us-ascii?Q?LjvBtDzUY3USzUzvphzBnOXIBn5UsTP+22in6QZ7uOwN7YIN6J4PErP4horE?=
- =?us-ascii?Q?sGc9CPNIRzd/wWYdp3HhEfJkSYlbojnQrDh4Oy8ktTJzLDLzZfIBccN77QnC?=
- =?us-ascii?Q?zoDGn172qiJgtjyoqJFKT/U9UptZi5jst5slwfTFbxHoGMVyu8EcOr0CG2/j?=
- =?us-ascii?Q?fbHBOri4tbFjMc3D6m0SNdM1BsFs4HcAjnpA+PCSo3svNIZnFbE67YKkDpMC?=
- =?us-ascii?Q?ZQX4vy/PRgU2qTrSNHigRRbalTkjnFgnxbtYXY1fau0KXiParfFvUITg3438?=
- =?us-ascii?Q?0vhdzKamUDclBhQfd5/ebeZfW8PZCi4VDNVF8eKAcB5UxqhCfZPm3zACchTy?=
- =?us-ascii?Q?KUBZ/SMFziwIJ6gVVU+wbDak3lwVp5tmnnZybAvVin0uLC5VXYTeDcPWPdIJ?=
- =?us-ascii?Q?iWJmdM1ucMV3ip+rbiZYHUJkBMcHIcXoVvyFxMCeUragHRbZTXkY3U71M4ML?=
- =?us-ascii?Q?sA6B+iJPim1h9E7n4e61yTDufrPAYrQl7umHwUx13n4DEeo4pnobColJVpjC?=
- =?us-ascii?Q?qJ3w/bm85uS4CEYXO2OEzWrE2MXAX3TtRXYlHVg50CxPYw5G0wzxpTxSt+AZ?=
- =?us-ascii?Q?ez5PGYlwEJzpeJBqmGsNd4KI4LVr50LL6sO11fn1yr0jUgOGQaKOqZ5uWL13?=
- =?us-ascii?Q?cMLz3uyCE4fKbJnV+AjJnBqoLR92aitvY5EIkwdmJQ7L6zKZ4xaG5neWBGIb?=
- =?us-ascii?Q?G56dl5ZqXxeRWzjaMyJp9ODUrPIz099MX9tEEmIJx1fc7BlYdDq0xMluyOyL?=
- =?us-ascii?Q?MhZA1LYLMNOOSUmsXrw07sy9bMvrVtSV3ATmmjg69Hu7l8pfo0bFAI72HjQ9?=
- =?us-ascii?Q?27NZZmSGB+uj8Zfurpwhv5TXOOn/5EhB9aC5k7rHc6jHQgdgdGp67kH/14KL?=
- =?us-ascii?Q?KQ0wM9bYOKArPb76dBYYpUD3RqQHOILHO61JJCr0Zr8I/UGkj0gokPhTxbcb?=
- =?us-ascii?Q?cOFYoKttlzHvQopEdTwxImdka5/oukOXExC8fx9Ysfn23uHA1x/oBcd/cp6r?=
- =?us-ascii?Q?68zQE2k5/3gNHqYOfLieqDLb8Da7hYNSpox82am29RrZwB18O683RcsBpXwV?=
- =?us-ascii?Q?KJkKGH9589OucacrTG16C8Hbxz4Id3Ougb15CbUd3TcJNeJZPlt6h+03+H3S?=
- =?us-ascii?Q?Hc4gygXCBeWLApzRE++ysL2RcOfcC7KaeOaGi4Bf8yGcq0/Ub8DzFVpiaNI9?=
- =?us-ascii?Q?e0JyHeYPurs8y2QO1GB3fU+xa8MQHBhA5induzME?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5f3eb661-0bd9-4981-8975-08dadf103629
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2022 02:49:54.9383 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: L3cYIpBUvrrF2jBYCJh9KAhPIjGUrqzC6mN1LzkGEwd0bjYvKx3SZMvkgPH+Y4KhYr5yW71mJfk73zQPdot9rw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR06MB3980
-X-Spam-Score: -0.2 (/)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.5.0
+Content-Language: en-US
+To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
+References: <20221215122012.55832-1-frank.li@vivo.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20221215122012.55832-1-frank.li@vivo.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  > The website is available now,
- cool... :) > > https://patchwork.kernel.org/project/f2fs/
- The website link is accessible, but it seems like it still needs some work?
- According to my test, the patches from last night and today are not visible
- on the website. 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 2022/12/15 20:20, Yangtao Li wrote: > There is no need
+ to additionally use f2fs_show_injection_info() > to output information.
+ Concatenate
+ time_to_inject() and > __time_to_inject() via a macro. In [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.215.116 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.215.116 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1p60nU-000xxn-Hc
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: add support for counting time of
- submit discard cmd
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1p60pB-000y0R-M1
+Subject: Re: [f2fs-dev] [PATCH] f2fs: merge f2fs_show_injection_info() into
+ time_to_inject()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -167,27 +107,355 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yangtao Li <frank.li@vivo.com>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-> The website is available now, cool... :)
+On 2022/12/15 20:20, Yangtao Li wrote:
+> There is no need to additionally use f2fs_show_injection_info()
+> to output information. Concatenate time_to_inject() and
+> __time_to_inject() via a macro. In the new __time_to_inject() function,
+> pass in the caller function name.
 > 
-> https://patchwork.kernel.org/project/f2fs/
+> In this way, we no longer need the f2fs_show_injection_info() function,
+> and let's remove it.
+> 
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> ---
+>   fs/f2fs/checkpoint.c |  5 +----
+>   fs/f2fs/data.c       |  8 ++------
+>   fs/f2fs/dir.c        |  4 +---
+>   fs/f2fs/f2fs.h       | 43 +++++++++++++------------------------------
+>   fs/f2fs/file.c       |  4 +---
+>   fs/f2fs/gc.c         |  4 +---
+>   fs/f2fs/inode.c      |  4 +---
+>   fs/f2fs/node.c       |  4 +---
+>   fs/f2fs/segment.c    |  5 +----
+>   fs/f2fs/super.c      |  8 ++------
+>   10 files changed, 24 insertions(+), 65 deletions(-)
+> 
+> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+> index 56f7d0d6a8b2..d68b3c991888 100644
+> --- a/fs/f2fs/checkpoint.c
+> +++ b/fs/f2fs/checkpoint.c
+> @@ -171,10 +171,8 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
+>   bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+>   					block_t blkaddr, int type)
+>   {
+> -	if (time_to_inject(sbi, FAULT_BLKADDR)) {
+> -		f2fs_show_injection_info(sbi, FAULT_BLKADDR);
+> +	if (time_to_inject(sbi, FAULT_BLKADDR))
+>   		return false;
+> -	}
+>   
+>   	switch (type) {
+>   	case META_NAT:
+> @@ -622,7 +620,6 @@ int f2fs_acquire_orphan_inode(struct f2fs_sb_info *sbi)
+>   
+>   	if (time_to_inject(sbi, FAULT_ORPHAN)) {
+>   		spin_unlock(&im->ino_lock);
+> -		f2fs_show_injection_info(sbi, FAULT_ORPHAN);
+>   		return -ENOSPC;
+>   	}
+>   
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index c77442a42f89..873908ed20f7 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -295,10 +295,8 @@ static void f2fs_read_end_io(struct bio *bio)
+>   	iostat_update_and_unbind_ctx(bio, 0);
+>   	ctx = bio->bi_private;
+>   
+> -	if (time_to_inject(sbi, FAULT_READ_IO)) {
+> -		f2fs_show_injection_info(sbi, FAULT_READ_IO);
+> +	if (time_to_inject(sbi, FAULT_READ_IO))
+>   		bio->bi_status = BLK_STS_IOERR;
+> -	}
+>   
+>   	if (bio->bi_status) {
+>   		f2fs_finish_read_bio(bio, intask);
+> @@ -335,10 +333,8 @@ static void f2fs_write_end_io(struct bio *bio)
+>   	iostat_update_and_unbind_ctx(bio, 1);
+>   	sbi = bio->bi_private;
+>   
+> -	if (time_to_inject(sbi, FAULT_WRITE_IO)) {
+> -		f2fs_show_injection_info(sbi, FAULT_WRITE_IO);
+> +	if (time_to_inject(sbi, FAULT_WRITE_IO))
+>   		bio->bi_status = BLK_STS_IOERR;
+> -	}
+>   
+>   	bio_for_each_segment_all(bvec, bio, iter_all) {
+>   		struct page *page = bvec->bv_page;
+> diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+> index 8e025157f35c..9ccdbe120425 100644
+> --- a/fs/f2fs/dir.c
+> +++ b/fs/f2fs/dir.c
+> @@ -732,10 +732,8 @@ int f2fs_add_regular_entry(struct inode *dir, const struct f2fs_filename *fname,
+>   	}
+>   
+>   start:
+> -	if (time_to_inject(F2FS_I_SB(dir), FAULT_DIR_DEPTH)) {
+> -		f2fs_show_injection_info(F2FS_I_SB(dir), FAULT_DIR_DEPTH);
+> +	if (time_to_inject(F2FS_I_SB(dir), FAULT_DIR_DEPTH))
+>   		return -ENOSPC;
+> -	}
+>   
+>   	if (unlikely(current_depth == MAX_DIR_HASH_DEPTH))
+>   		return -ENOSPC;
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 4035dab1f570..d01817b11f61 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1875,12 +1875,9 @@ struct f2fs_sb_info {
+>   };
+>   
+>   #ifdef CONFIG_F2FS_FAULT_INJECTION
+> -#define f2fs_show_injection_info(sbi, type)					\
+> -	printk_ratelimited("%sF2FS-fs (%s) : inject %s in %s of %pS\n",	\
+> -		KERN_INFO, sbi->sb->s_id,				\
+> -		f2fs_fault_name[type],					\
+> -		__func__, __builtin_return_address(0))
+> -static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
+> +#define time_to_inject(sbi, type) __time_to_inject(sbi, type, __func__)
+> +static inline bool __time_to_inject(struct f2fs_sb_info *sbi, int type,
+> +								    const char *func_name)
+>   {
+>   	struct f2fs_fault_info *ffi = &F2FS_OPTION(sbi).fault_info;
+>   
+> @@ -1893,12 +1890,14 @@ static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
+>   	atomic_inc(&ffi->inject_ops);
+>   	if (atomic_read(&ffi->inject_ops) >= ffi->inject_rate) {
+>   		atomic_set(&ffi->inject_ops, 0);
+> +		printk_ratelimited("%sF2FS-fs (%s) : inject %s in %s of %pS\n",
+> +			KERN_INFO, sbi->sb->s_id, f2fs_fault_name[type],
+> +			func_name, __builtin_return_address(0));
 
-The website link is accessible, but it seems like it still needs some work?
-According to my test, the patches from last night and today are not visible on the website.
+After moving f2fs_show_injection_info() core functionality into time_to_inject(),
+__builtin_return_address(0) result changes from return address of caller of
+f2fs_show_injection_info() to return address of time_to_inject().
 
-> Jaegeuk, your email address is out-of-update in above link, it needs to
-> be updated.
+Thanks,
 
-> Maintainer	Jaegeuk Kim <jaegeuk.kim@samsung.com>
-
-Thx,
-Yangtao
+>   		return true;
+>   	}
+>   	return false;
+>   }
+>   #else
+> -#define f2fs_show_injection_info(sbi, type) do { } while (0)
+>   static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
+>   {
+>   	return false;
+> @@ -2231,10 +2230,8 @@ static inline void f2fs_lock_op(struct f2fs_sb_info *sbi)
+>   
+>   static inline int f2fs_trylock_op(struct f2fs_sb_info *sbi)
+>   {
+> -	if (time_to_inject(sbi, FAULT_LOCK_OP)) {
+> -		f2fs_show_injection_info(sbi, FAULT_LOCK_OP);
+> +	if (time_to_inject(sbi, FAULT_LOCK_OP))
+>   		return 0;
+> -	}
+>   	return f2fs_down_read_trylock(&sbi->cp_rwsem);
+>   }
+>   
+> @@ -2322,7 +2319,6 @@ static inline int inc_valid_block_count(struct f2fs_sb_info *sbi,
+>   		return ret;
+>   
+>   	if (time_to_inject(sbi, FAULT_BLOCK)) {
+> -		f2fs_show_injection_info(sbi, FAULT_BLOCK);
+>   		release = *count;
+>   		goto release_quota;
+>   	}
+> @@ -2602,10 +2598,8 @@ static inline int inc_valid_node_count(struct f2fs_sb_info *sbi,
+>   			return err;
+>   	}
+>   
+> -	if (time_to_inject(sbi, FAULT_BLOCK)) {
+> -		f2fs_show_injection_info(sbi, FAULT_BLOCK);
+> +	if (time_to_inject(sbi, FAULT_BLOCK))
+>   		goto enospc;
+> -	}
+>   
+>   	spin_lock(&sbi->stat_lock);
+>   
+> @@ -2729,11 +2723,8 @@ static inline struct page *f2fs_grab_cache_page(struct address_space *mapping,
+>   		if (page)
+>   			return page;
+>   
+> -		if (time_to_inject(F2FS_M_SB(mapping), FAULT_PAGE_ALLOC)) {
+> -			f2fs_show_injection_info(F2FS_M_SB(mapping),
+> -							FAULT_PAGE_ALLOC);
+> +		if (time_to_inject(F2FS_M_SB(mapping), FAULT_PAGE_ALLOC))
+>   			return NULL;
+> -		}
+>   	}
+>   
+>   	if (!for_write)
+> @@ -2750,10 +2741,8 @@ static inline struct page *f2fs_pagecache_get_page(
+>   				struct address_space *mapping, pgoff_t index,
+>   				int fgp_flags, gfp_t gfp_mask)
+>   {
+> -	if (time_to_inject(F2FS_M_SB(mapping), FAULT_PAGE_GET)) {
+> -		f2fs_show_injection_info(F2FS_M_SB(mapping), FAULT_PAGE_GET);
+> +	if (time_to_inject(F2FS_M_SB(mapping), FAULT_PAGE_GET))
+>   		return NULL;
+> -	}
+>   
+>   	return pagecache_get_page(mapping, index, fgp_flags, gfp_mask);
+>   }
+> @@ -2803,10 +2792,8 @@ static inline void *f2fs_kmem_cache_alloc(struct kmem_cache *cachep,
+>   	if (nofail)
+>   		return f2fs_kmem_cache_alloc_nofail(cachep, flags);
+>   
+> -	if (time_to_inject(sbi, FAULT_SLAB_ALLOC)) {
+> -		f2fs_show_injection_info(sbi, FAULT_SLAB_ALLOC);
+> +	if (time_to_inject(sbi, FAULT_SLAB_ALLOC))
+>   		return NULL;
+> -	}
+>   
+>   	return kmem_cache_alloc(cachep, flags);
+>   }
+> @@ -3380,10 +3367,8 @@ static inline bool is_dot_dotdot(const u8 *name, size_t len)
+>   static inline void *f2fs_kmalloc(struct f2fs_sb_info *sbi,
+>   					size_t size, gfp_t flags)
+>   {
+> -	if (time_to_inject(sbi, FAULT_KMALLOC)) {
+> -		f2fs_show_injection_info(sbi, FAULT_KMALLOC);
+> +	if (time_to_inject(sbi, FAULT_KMALLOC))
+>   		return NULL;
+> -	}
+>   
+>   	return kmalloc(size, flags);
+>   }
+> @@ -3397,10 +3382,8 @@ static inline void *f2fs_kzalloc(struct f2fs_sb_info *sbi,
+>   static inline void *f2fs_kvmalloc(struct f2fs_sb_info *sbi,
+>   					size_t size, gfp_t flags)
+>   {
+> -	if (time_to_inject(sbi, FAULT_KVMALLOC)) {
+> -		f2fs_show_injection_info(sbi, FAULT_KVMALLOC);
+> +	if (time_to_inject(sbi, FAULT_KVMALLOC))
+>   		return NULL;
+> -	}
+>   
+>   	return kvmalloc(size, flags);
+>   }
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index cad4bdd6f097..ef25b5b14b10 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -782,10 +782,8 @@ int f2fs_truncate(struct inode *inode)
+>   
+>   	trace_f2fs_truncate(inode);
+>   
+> -	if (time_to_inject(F2FS_I_SB(inode), FAULT_TRUNCATE)) {
+> -		f2fs_show_injection_info(F2FS_I_SB(inode), FAULT_TRUNCATE);
+> +	if (time_to_inject(F2FS_I_SB(inode), FAULT_TRUNCATE))
+>   		return -EIO;
+> -	}
+>   
+>   	err = f2fs_dquot_initialize(inode);
+>   	if (err)
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 83e68ec7763d..2b9891efcfee 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -72,11 +72,9 @@ static int gc_thread_func(void *data)
+>   			continue;
+>   		}
+>   
+> -		if (time_to_inject(sbi, FAULT_CHECKPOINT)) {
+> -			f2fs_show_injection_info(sbi, FAULT_CHECKPOINT);
+> +		if (time_to_inject(sbi, FAULT_CHECKPOINT))
+>   			f2fs_stop_checkpoint(sbi, false,
+>   					STOP_CP_REASON_FAULT_INJECT);
+> -		}
+>   
+>   		if (!sb_start_write_trylock(sbi->sb)) {
+>   			stat_other_skip_bggc_count(sbi);
+> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> index ff6cf66ed46b..01b9e6f85f6b 100644
+> --- a/fs/f2fs/inode.c
+> +++ b/fs/f2fs/inode.c
+> @@ -809,10 +809,8 @@ void f2fs_evict_inode(struct inode *inode)
+>   	if (F2FS_HAS_BLOCKS(inode))
+>   		err = f2fs_truncate(inode);
+>   
+> -	if (time_to_inject(sbi, FAULT_EVICT_INODE)) {
+> -		f2fs_show_injection_info(sbi, FAULT_EVICT_INODE);
+> +	if (time_to_inject(sbi, FAULT_EVICT_INODE))
+>   		err = -EIO;
+> -	}
+>   
+>   	if (!err) {
+>   		f2fs_lock_op(sbi);
+> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+> index dde4c0458704..8e87be0fa85e 100644
+> --- a/fs/f2fs/node.c
+> +++ b/fs/f2fs/node.c
+> @@ -2544,10 +2544,8 @@ bool f2fs_alloc_nid(struct f2fs_sb_info *sbi, nid_t *nid)
+>   	struct f2fs_nm_info *nm_i = NM_I(sbi);
+>   	struct free_nid *i = NULL;
+>   retry:
+> -	if (time_to_inject(sbi, FAULT_ALLOC_NID)) {
+> -		f2fs_show_injection_info(sbi, FAULT_ALLOC_NID);
+> +	if (time_to_inject(sbi, FAULT_ALLOC_NID))
+>   		return false;
+> -	}
+>   
+>   	spin_lock(&nm_i->nid_list_lock);
+>   
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 25ddea478fc1..573955d9aed7 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -384,10 +384,8 @@ int f2fs_commit_atomic_write(struct inode *inode)
+>    */
+>   void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
+>   {
+> -	if (time_to_inject(sbi, FAULT_CHECKPOINT)) {
+> -		f2fs_show_injection_info(sbi, FAULT_CHECKPOINT);
+> +	if (time_to_inject(sbi, FAULT_CHECKPOINT))
+>   		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_FAULT_INJECT);
+> -	}
+>   
+>   	/* balance_fs_bg is able to be pending */
+>   	if (need && excess_cached_nats(sbi))
+> @@ -1142,7 +1140,6 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+>   		dc->len += len;
+>   
+>   		if (time_to_inject(sbi, FAULT_DISCARD)) {
+> -			f2fs_show_injection_info(sbi, FAULT_DISCARD);
+>   			err = -EIO;
+>   		} else {
+>   			err = __blkdev_issue_discard(bdev,
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 1f812b9ce985..73e779d3b2e7 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -1372,10 +1372,8 @@ static struct inode *f2fs_alloc_inode(struct super_block *sb)
+>   {
+>   	struct f2fs_inode_info *fi;
+>   
+> -	if (time_to_inject(F2FS_SB(sb), FAULT_SLAB_ALLOC)) {
+> -		f2fs_show_injection_info(F2FS_SB(sb), FAULT_SLAB_ALLOC);
+> +	if (time_to_inject(F2FS_SB(sb), FAULT_SLAB_ALLOC))
+>   		return NULL;
+> -	}
+>   
+>   	fi = alloc_inode_sb(sb, f2fs_inode_cachep, GFP_F2FS_ZERO);
+>   	if (!fi)
+> @@ -2595,10 +2593,8 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
+>   
+>   int f2fs_dquot_initialize(struct inode *inode)
+>   {
+> -	if (time_to_inject(F2FS_I_SB(inode), FAULT_DQUOT_INIT)) {
+> -		f2fs_show_injection_info(F2FS_I_SB(inode), FAULT_DQUOT_INIT);
+> +	if (time_to_inject(F2FS_I_SB(inode), FAULT_DQUOT_INIT))
+>   		return -ESRCH;
+> -	}
+>   
+>   	return dquot_initialize(inode);
+>   }
 
 
 _______________________________________________
