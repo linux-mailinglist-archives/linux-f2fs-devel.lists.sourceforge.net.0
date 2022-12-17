@@ -2,99 +2,119 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2CCA64F6B5
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 17 Dec 2022 02:14:28 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D04164F6EB
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 17 Dec 2022 03:04:32 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p6LmT-0007a4-83;
-	Sat, 17 Dec 2022 01:14:25 +0000
+	id 1p6MYq-0005AB-NW;
+	Sat, 17 Dec 2022 02:04:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1p6LmS-0007Zy-6c
+ (envelope-from <luca.boccassi@gmail.com>) id 1p6MYp-0005A4-5o
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 17 Dec 2022 01:14:24 +0000
+ Sat, 17 Dec 2022 02:04:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oMgnpMSAcMZnvqMMtqIfR9NyzHHGz55tUfCgNqteyok=; b=EKw/+xXPBMN5i1GvtxfqBevGR4
- yTh6+mcenogx0R9haxi4g7I5VWrSinBhFL5sx5D4umstExWfHEvuYnNobxWs5sYgKER2B3rWz5rv7
- +HavK/QqYgBL8AiVPa8NAk/+TTGEkcurAx+Je6NHBkR9s6tDOZf+o921qTOHNEBDKqGg=;
+ bh=tcPbsVl3cOtu0VxF4tk4pBw4lW90yLxGMNm2VAvKhL8=; b=JhKyxtvf/I4Lzqxr3ONse957Se
+ TpUFfIqBqDRWj6WYM2iOA+6df9B4suNUEW6jNEk4HIqPWvm40lQNHqh74uUdWRV2WN4hyew6uA2fW
+ AuUV+q0+5VNUK/nkF/BOQGEk3etHgXhpVtX2Y06yP6Qh2LsbY8WgSZEtdkU5fQP+i9t8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=oMgnpMSAcMZnvqMMtqIfR9NyzHHGz55tUfCgNqteyok=; b=gM4Tx+0oKG9IROZSTxyDlKWyYD
- NRlVivxE6Dp8X/kVSAxR8lLcULxp1zzq0W8shc4qwrjmEd+qVeia6okSPTIPygqNJ+oN/5WPxs/PO
- +PM1uI70wcXHzMUts8TnxkH0j5eqmXCgZqCqDaJzY7l3uNrAbhpM1q/CR9uxl1IRPk2E=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=tcPbsVl3cOtu0VxF4tk4pBw4lW90yLxGMNm2VAvKhL8=; b=RwppaCJa08gY8kKE7kmPUcTGBa
+ mqTHOWx8thJk1PqqQLBAn3yikvRaIC1TfAdSsioaMqstAUbKxz5jlqQnmpDOajof4bHnO1/slrQ7s
+ QNHvnBYVg2t1EK1pslJjRtxiYJhZLw/cMcoo6l1GwJiLBXJ8YkEYKVVpMQZoM0fcMcYE=;
+Received: from mail-qt1-f181.google.com ([209.85.160.181])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p6LmR-001wI0-6D for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 17 Dec 2022 01:14:24 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8177F62295;
- Sat, 17 Dec 2022 01:14:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3488C433D2;
- Sat, 17 Dec 2022 01:14:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1671239656;
- bh=XQs9wEArOAjfkpOf9evtR3fsz46BwnN0f73p8uara+U=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=NN0pK48o5qpl6Po0hECTTtkQlyc7Bs9p7cAtQsj781QP8fwQbiRgZw8YEAMJ+WyTZ
- tVmTje9hukeqfo77qR4GOBLsC+TO/LEbYyOYt/zB27Y+xAaQalV9p09ir/BO5nhtJ1
- Lzf7Dz8TQAsjsNIJjQHH065cFCap9tgHPLPHXbBujmNRt402AVbBSdzy4jVqUkEYpJ
- RgV1Yqiphd6SGVtmJH9x4wqhiBTOZYvz6oLU8xmxnKfvS7YPxZ7c/wOlz5n3hamqlj
- e79tBzyc7XvKqNqTyBJomYZNViQQS7NecIGWBwFM82Zf5XAs1TAI8bx0LfEhF/fFll
- GDusB3ZM9pn8A==
-Message-ID: <0377292c-ba43-06cd-2638-8e41e2e75f3a@kernel.org>
-Date: Sat, 17 Dec 2022 09:14:16 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1p6MYm-001yCf-Vb for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 17 Dec 2022 02:04:23 +0000
+Received: by mail-qt1-f181.google.com with SMTP id j16so4216950qtv.4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 16 Dec 2022 18:04:20 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tcPbsVl3cOtu0VxF4tk4pBw4lW90yLxGMNm2VAvKhL8=;
+ b=VgN+fw6LfUNJYGFrgrBtYjCjtuzpruFD4jeUBsDNCjCH2aK+Ag5c8/ubcWHL+P8PDi
+ 98IxlezhmCc8WAmEnBri8c1vGI+2UX8vCaFwy4d4EfK/kSclbI7DCKaVpH07Dp6OtBuZ
+ cGsEPNyvSdn25H0Py2Kooh9uFsc1PyccQrx2jeFSeyahE+WfjB9T3lYNsYdqEho9P8Ps
+ Ds3gOb9XcRFFhEeYh8LgmIsZ9eQBE/6W0mE1jXq0S7gjkNcBNDYahcS0JigXhvwLCcp7
+ Py0Y5cG6Szt9IxpkG5OM7Jrp5+ZG2sbqQ9la4wDpZ3GwALht5CD7P5jVFNCN+lzZJSg6
+ 0agw==
+X-Gm-Message-State: ANoB5pmvyWOTRu1gA0Z4T58AcJLzb8i4e5jF7AYwNd9E3m7WlhFNSekf
+ +i2yRHooYKucE2p0VMvOMw9aS47zed5cXg==
+X-Google-Smtp-Source: AA0mqf5GGB/vtNKqfUvFlx1zhPyDNEDj0IR7aEIhy6lVTJ238vqwje3Z7dGLfR1gGEvYUuHOsK4QKw==
+X-Received: by 2002:ac8:5a84:0:b0:3a7:e91e:60fd with SMTP id
+ c4-20020ac85a84000000b003a7e91e60fdmr66246728qtc.62.1671242655035; 
+ Fri, 16 Dec 2022 18:04:15 -0800 (PST)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com.
+ [209.85.128.179]) by smtp.gmail.com with ESMTPSA id
+ w10-20020a05620a424a00b006a6ebde4799sm2663741qko.90.2022.12.16.18.04.13
+ for <linux-f2fs-devel@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 Dec 2022 18:04:14 -0800 (PST)
+Received: by mail-yw1-f179.google.com with SMTP id
+ 00721157ae682-3cbdd6c00adso56683007b3.11
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 16 Dec 2022 18:04:13 -0800 (PST)
+X-Received: by 2002:a81:ff06:0:b0:3ab:6ff4:a598 with SMTP id
+ k6-20020a81ff06000000b003ab6ff4a598mr7952254ywn.425.1671242653731; Fri, 16
+ Dec 2022 18:04:13 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
-References: <a2c286e1-470f-ff83-196a-f7ea490096ff@kernel.org>
- <20221216193248.71333-1-frank.li@vivo.com>
-Content-Language: en-US
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221216193248.71333-1-frank.li@vivo.com>
-X-Spam-Score: -5.2 (-----)
+References: <20221208033548.122704-1-ebiggers@kernel.org>
+ <eea9b4dc9314da2de39b4181a4dac59fda8b0754.camel@debian.org>
+ <Y5JPRW+9dt28JpZ7@sol.localdomain>
+ <00c7b6b0e2533b2bf007311c2ede64cb92a130db.camel@debian.org>
+ <Y5zbNtaadNGPGHQb@sol.localdomain>
+In-Reply-To: <Y5zbNtaadNGPGHQb@sol.localdomain>
+From: Luca Boccassi <bluca@debian.org>
+Date: Sat, 17 Dec 2022 02:04:02 +0000
+X-Gmail-Original-Message-ID: <CAMw=ZnQNJjKVAf9xafashv8diab2Xg92M1+wNT3A37RMBVwR2Q@mail.gmail.com>
+Message-ID: <CAMw=ZnQNJjKVAf9xafashv8diab2Xg92M1+wNT3A37RMBVwR2Q@mail.gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
+X-Spam-Score: 0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/12/17 3:32, Yangtao Li wrote: > Hi Chao, > >> After
- moving f2fs_show_injection_info() core functionality into time_to_inject(),
- >> __builtin_return_address(0) result changes from return addres [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Fri, 16 Dec 2022 at 20:55,
+ Eric Biggers <ebiggers@kernel.org>
+ wrote: > > On Thu, Dec 08, 2022 at 09:37:29PM +0000, Luca Boccassi wrote:
+ > > > > The second question is easy: because the kernel is th [...] 
+ Content analysis details:   (0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [luca.boccassi[at]gmail.com]
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p6LmR-001wI0-6D
-Subject: Re: [f2fs-dev] [PATCH] f2fs: merge f2fs_show_injection_info() into
- time_to_inject()
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.160.181 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.160.181 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
+ EnvelopeFrom freemail headers are different
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1p6MYm-001yCf-Vb
+Subject: Re: [f2fs-dev] [PATCH] fsverity: mark builtin signatures as
+ deprecated
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,117 +126,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jes Sorensen <jsorensen@meta.com>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fscrypt@vger.kernel.org, Victor Hsieh <victorhsieh@google.com>,
+ linux-integrity@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/12/17 3:32, Yangtao Li wrote:
-> Hi Chao,
-> 
->> After moving f2fs_show_injection_info() core functionality into time_to_inject(),
->> __builtin_return_address(0) result changes from return address of caller of
->> f2fs_show_injection_info() to return address of time_to_inject().
-> 
-> It seems you are wrong, and the original patch didn't change the logic here.
-> Because time_to_inject is an inline function, __builtin_return_address(0)
-> has not return address of time_to_inject().
+On Fri, 16 Dec 2022 at 20:55, Eric Biggers <ebiggers@kernel.org> wrote:
+>
+> On Thu, Dec 08, 2022 at 09:37:29PM +0000, Luca Boccassi wrote:
+> >
+> > The second question is easy: because the kernel is the right place for
+> > our use case to do this verification and enforcement, exactly like dm-
+> > verity does.
+>
+> Well, dm-verity's in-kernel signature verification support is a fairly new
+> feature.  Most users of dm-verity don't use it, and will not be using it.
 
-Yeah, but it depends on compile option, right? If user use -O0 or -fno-inline
-option, inline function will not be expanded...
+I'm not sure what you mean by "most users" - systemd has support for
+dm-verity signatures all over the place, libcryptsetup/veritysetup
+supports them, and even libmount has native first-class mount options
+for them.
 
-How about using deterministic implementation?
+> > Userspace is largely untrusted, or much lower trust anyway.
+>
+> Yes, which means the kernel is highly trusted.  Which is why parsing complex
+> binary formats, X.509 and PKCS#7, in C code in the kernel is not a great idea...
 
-Thanks,
+Maybe, but it's there and it's used for multiple purposes and
+userspace relies on it. If you want to add a new alternative and
+optional formats I don't think it would be a problem, I certainly
+wouldn't mind.
 
-> 
-> My test:
-> 
-> (1). w/ below patch, we found that the value of __builtin_return_address(0) in
-> 	__time_to_inject() is the same as that in f2fs_show_injection_info().
-> 
-> # mount -t f2fs -o fault_type=0xffff,fault_injection=1 /mnt/9p/f2fs.img /mnt/f2fs
-> [   19.739661] loop0: detected capacity change from 0 to 2097152
-> [   19.749759]  new F2FS-fs (loop0) : inject kmalloc in f2fs_kmalloc of f2fs_fill_super+0x7eb/0x1780
-> [   19.750313] raw F2FS-fs (loop0) : inject kmalloc in f2fs_kmalloc of f2fs_fill_super+0x7eb/0x1780
-> mount: mounting /dev/loop0 on /mnt/f2fs failed: Cannot allocate memory
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 4035dab1f570..1e5030633f4d 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1876,11 +1876,13 @@ struct f2fs_sb_info {
-> 
->   #ifdef CONFIG_F2FS_FAULT_INJECTION
->   #define f2fs_show_injection_info(sbi, type)                                    \
-> -       printk_ratelimited("%sF2FS-fs (%s) : inject %s in %s of %pS\n", \
-> +       printk_ratelimited("%sraw F2FS-fs (%s) : inject %s in %s of %pS\n",     \
->                  KERN_INFO, sbi->sb->s_id,                               \
->                  f2fs_fault_name[type],                                  \
->                  __func__, __builtin_return_address(0))
-> -static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
-> +
-> +#define time_to_inject(sbi, type) __time_to_inject(sbi, type, __func__)
-> +static inline bool __time_to_inject(struct f2fs_sb_info *sbi, int type, const char *func_name)
->   {
->          struct f2fs_fault_info *ffi = &F2FS_OPTION(sbi).fault_info;
-> 
-> @@ -1893,6 +1895,10 @@ static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
->          atomic_inc(&ffi->inject_ops);
->          if (atomic_read(&ffi->inject_ops) >= ffi->inject_rate) {
->                  atomic_set(&ffi->inject_ops, 0);
-> +               printk_ratelimited("%s new F2FS-fs (%s) : inject %s in %s of %pS\n",
-> +                       KERN_INFO, sbi->sb->s_id,
-> +                       f2fs_fault_name[type],
-> +                       func_name, __builtin_return_address(0));
->                  return true;
->          }
->          return false;
-> 
-> (2). w/ below patch(remove inline form __time_to_inject()), we found that the value of
-> 	__builtin_return_address(0) in __time_to_inject() is different from that in
-> 	f2fs_show_injection_info().
-> 
-> # mount -t f2fs -o fault_type=0xffff,fault_injection=1 /mnt/9p/f2fs.img /mnt/f2fs
-> [   81.019451] loop0: detected capacity change from 0 to 2097152
-> [   81.031058]  new F2FS-fs (loop0) : inject kmalloc in f2fs_kmalloc of f2fs_init_write_merge_io+0x35/0x1c0
-> [   81.031745] raw F2FS-fs (loop0) : inject kmalloc in f2fs_kmalloc of f2fs_fill_super+0x7eb/0x1710
-> mount: mounting /dev/loop0 on /mnt/f2fs failed: Cannot allocate memory
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 4035dab1f570..f15001b5d73b 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1876,11 +1876,13 @@ struct f2fs_sb_info {
-> 
->   #ifdef CONFIG_F2FS_FAULT_INJECTION
->   #define f2fs_show_injection_info(sbi, type)                                    \
-> -       printk_ratelimited("%sF2FS-fs (%s) : inject %s in %s of %pS\n", \
-> +       printk_ratelimited("%sraw F2FS-fs (%s) : inject %s in %s of %pS\n",     \
->                  KERN_INFO, sbi->sb->s_id,                               \
->                  f2fs_fault_name[type],                                  \
->                  __func__, __builtin_return_address(0))
-> -static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
-> +
-> +#define time_to_inject(sbi, type) __time_to_inject(sbi, type, __func__)
-> +static bool __time_to_inject(struct f2fs_sb_info *sbi, int type, const char *func_name)
->   {
->          struct f2fs_fault_info *ffi = &F2FS_OPTION(sbi).fault_info;
-> 
-> @@ -1893,6 +1895,10 @@ static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
->          atomic_inc(&ffi->inject_ops);
->          if (atomic_read(&ffi->inject_ops) >= ffi->inject_rate) {
->                  atomic_set(&ffi->inject_ops, 0);
-> +               printk_ratelimited("%s new F2FS-fs (%s) : inject %s in %s of %pS\n",
-> +                       KERN_INFO, sbi->sb->s_id,
-> +                       f2fs_fault_name[type],
-> +                       func_name, __builtin_return_address(0));
->                  return true;
->          }
->          return false;
-> 
-> Thx,
-> Yangtao
+Kind regards,
+Luca Boccassi
 
 
 _______________________________________________
