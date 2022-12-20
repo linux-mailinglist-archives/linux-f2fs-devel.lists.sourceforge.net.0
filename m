@@ -2,99 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D60C651A1D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Dec 2022 05:56:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7EB1651B88
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Dec 2022 08:25:13 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p7UfW-0001lo-Kx;
-	Tue, 20 Dec 2022 04:55:58 +0000
+	id 1p7Wzs-0004F7-GF;
+	Tue, 20 Dec 2022 07:25:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1p7UfW-0001li-1I
+ (envelope-from <chao@kernel.org>) id 1p7Wzr-0004Ex-0k
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Dec 2022 04:55:58 +0000
+ Tue, 20 Dec 2022 07:25:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=J+/FBqIogp8YH0j57zrX+Hw54nzkNT++r0GlPEwUxTQ=; b=mOu4m0QZW1xi8Qzv6vxqz5HvOz
- 3vY1dpejG/61g0yUYNVC3d9vwE39/9FFN6nVHJPbtN4TGkurBvFl8NtsbnMRONAZwJxPrniibQOX5
- ddk1bMsZ5u5i2XQxvuXWqNBDRbqvSRVr6f7p2mUaElpGTeWwj62SBlISWK3/FeUf4+i4=;
+ bh=+5cdzz3t3JYDB3i5mAjk6l7Kr7UjT/DaSMh8g1cE4ho=; b=aZThlJzDYnnA6uro61nPHonxxE
+ uAwlap7a0L31Udt3lI10zECQH/puwmyODyQbrsHxc+CThm6DwGXU8RuBGY16kb2qTOUgOwz5mZCU2
+ Hc24dMGDE9HwBd9F0nc6CnWcuXdhqXiTtuOHC2oYg0Z+yxq7o+ENfsp9H94SF+9oreT4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
+ References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=J+/FBqIogp8YH0j57zrX+Hw54nzkNT++r0GlPEwUxTQ=; b=S4alWiyx+kZhXVX7YygIy8WqVC
- XBoU6wxbebDYjEQwb0jcKe+uLbjRIHWcT667okt+OpX/PaVXdN0j5hi3qmcRPXn8v5WdOUuJByHRY
- CZN2r4KhZyJPHQf7K1SDkdcEahaPcBzQxW2yyTQhptVN+S3nJc5zgPw3vRw2SR1IrO6M=;
+ bh=+5cdzz3t3JYDB3i5mAjk6l7Kr7UjT/DaSMh8g1cE4ho=; b=cURFc2ozKdp+lX2lA9h2EpXvPc
+ GBbhK+rYWuOZN+rRupYJyP3ztjJgt/T44mwJuMXU1cw6/qxemN5zCmjVtcEygjl36ZYb2lOgBBEsb
+ 9XJtUcfK7OqZ1uHrDwoqGQVp/u4t+4K9ZKd78H87kac5VOm8YaMmONkQ/EAoKXJFt+ME=;
 Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p7UfR-005O06-Gs for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Dec 2022 04:55:57 +0000
+ id 1p7Wzk-0007TD-I4 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Dec 2022 07:25:04 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 6244CB810FD;
- Tue, 20 Dec 2022 04:55:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26B7BC433EF;
- Tue, 20 Dec 2022 04:55:43 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id EAB37B80B4A;
+ Tue, 20 Dec 2022 07:24:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85303C433D2;
+ Tue, 20 Dec 2022 07:24:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1671512145;
- bh=GO91DA62dHcU7Q/IJM2c+OtFqkL8CSTiPULcSnxTK68=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=p7XZpBHyVGDRJbYNgkBWTtK0s0fOTBFN9ejLUyQLm7pBGJX3weslrBmxnFeLyc/Hh
- 7WqRpWndI3aGmtghZopcWqi+tdQq2Vdtd4b/i4YHIiRT+c7EhTBLcbZVfnUs6yO88u
- 4Kv6CJhtODRsevqrSd7Q4eRia55jtQyP+x9h1Y6AlEQvbE9HhvmwwYauVotm7FWIap
- wql6qDCPiLT+heQNh8j/De08euUpEnvv4E/p+8WjFAeED6Oc7m2SJLLtccnKQyDij8
- fkox45tyLYq7EdjUraUxNb0Tlfuacw94BiibuK+eSChQHZ+3ea+1tGPXp5UO8vK83z
- ReQwA+dK4YcTQ==
-Message-ID: <7cd515b7-cc24-bc66-416d-c9d27fade0ec@kernel.org>
-Date: Tue, 20 Dec 2022 12:55:42 +0800
+ s=k20201202; t=1671521091;
+ bh=fic7UtMekVGEyz7xE6CP02+SrSkeyzgkK1qckUpJxvo=;
+ h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
+ b=BgCC8unpIs6R9kXkB5SLbQ0dhtZZTWyvqbAMbGoTcTfehE9vDNoJUdFpaW4zq31DR
+ +UZcfx5gdsxhRR5a40U2Wrlpt29QpnyGwVD/YgVLfAOLHV6Pr/eBjvUWcSd/5VYuN8
+ xCCDVsMKwVkiihX9ZHZ9lXJIRd78Ng0+wUcHnpvtEeZXjGASC5e2vxl2ADfAbOXjHY
+ wB7g0XiqfjM7Y5IsuwiZMPJHANDPtNtY7P79f4s1q123xaYECW8+StaIEQ/48JsdQK
+ LsVqm5Xa/XfqgzZAq4lhVvEhqGM4PVMM9cUu08D3zszOviLDAVGfrmNrlBNUPgbsB3
+ WwXbTxYq0ga2Q==
+Message-ID: <4414ea75-7fd9-258c-789a-3026c1117630@kernel.org>
+Date: Tue, 20 Dec 2022 15:24:47 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.0
+ Thunderbird/102.6.0
 Content-Language: en-US
 To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
-References: <20221217132318.37718-1-frank.li@vivo.com>
+References: <20221219132517.17576-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221217132318.37718-1-frank.li@vivo.com>
-X-Spam-Score: -6.3 (------)
+In-Reply-To: <20221219132517.17576-1-frank.li@vivo.com>
+X-Spam-Score: -6.4 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/12/17 21:23, Yangtao Li wrote: > This patch moves
- discard related code from segment.c into discard.c > since discard is
- independent
- feature, and it's better to maintain > them in separated pla [...] 
- Content analysis details:   (-6.3 points, 6.0 required)
+ Content preview:  On 2022/12/19 21:25, Yangtao Li wrote: > There is no need
+ to additionally use f2fs_show_injection_info() > to output information.
+ Concatenate
+ time_to_inject() and > __time_to_inject() via a macro. In [...] 
+ Content analysis details:   (-6.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -1.1 NICE_REPLY_A           Looks like a legit reply (A)
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -1.2 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p7UfR-005O06-Gs
-Subject: Re: [f2fs-dev] [PATCH] f2fs: maintain discard in separated file
+X-Headers-End: 1p7Wzk-0007TD-I4
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: merge f2fs_show_injection_info()
+ into time_to_inject()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,54 +111,30 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/12/17 21:23, Yangtao Li wrote:
-> This patch moves discard related code from segment.c into discard.c
-> since discard is independent feature, and it's better to maintain
-> them in separated place.
-> 
-> There is no functionality change.
+On 2022/12/19 21:25, Yangtao Li wrote:
+> There is no need to additionally use f2fs_show_injection_info()
+> to output information. Concatenate time_to_inject() and
+> __time_to_inject() via a macro. In the new __time_to_inject()
+> function, pass in the caller function name. And in order to avoid
+> this inline function is not expanded causing __builtin_return_address(0)
+> return address of of time_to_inject(), mark time_to_inject() as
+> __always_inline.
 
-Please check Jaegeuk's comments on similar patch:
+IMO, we'd better have a good reason (maybe performace related) to change
+inline to __always_inline, rather than avoiding printed message change
+due to compile option.
 
-https://lore.kernel.org/linux-f2fs-devel/20180426160819.GI68594@jaegeuk-macbookpro.roam.corp.google.com/
+> -static inline bool time_to_inject(struct f2fs_sb_info *sbi, int type)
+> +#define time_to_inject(sbi, type) __time_to_inject(sbi, type, __func__)
+> +static __always_inline bool __time_to_inject(struct f2fs_sb_info *sbi, int type,
+> +								    const char *func_name)
 
-> 
-> Signed-off-by: Yangtao Li <frank.li@vivo.com>
-> ---
->   fs/f2fs/Makefile  |    2 +-
->   fs/f2fs/discard.c | 1271 +++++++++++++++++++++++++++++++++++++++++++++
->   fs/f2fs/f2fs.h    |   37 +-
->   fs/f2fs/segment.c | 1268 +-------------------------------------------
->   4 files changed, 1317 insertions(+), 1261 deletions(-)
->   create mode 100644 fs/f2fs/discard.c
-> 
-> diff --git a/fs/f2fs/Makefile b/fs/f2fs/Makefile
-> index 8a7322d229e4..3d2874633db0 100644
-> --- a/fs/f2fs/Makefile
-> +++ b/fs/f2fs/Makefile
-> @@ -3,7 +3,7 @@ obj-$(CONFIG_F2FS_FS) += f2fs.o
->   
->   f2fs-y		:= dir.o file.o inode.o namei.o hash.o super.o inline.o
->   f2fs-y		+= checkpoint.o gc.o data.o node.o segment.o recovery.o
-> -f2fs-y		+= shrinker.o extent_cache.o sysfs.o
-> +f2fs-y		+= shrinker.o extent_cache.o sysfs.o discard.o
->   f2fs-$(CONFIG_F2FS_STAT_FS) += debug.o
->   f2fs-$(CONFIG_F2FS_FS_XATTR) += xattr.o
->   f2fs-$(CONFIG_F2FS_FS_POSIX_ACL) += acl.o
-> diff --git a/fs/f2fs/discard.c b/fs/f2fs/discard.c
-> new file mode 100644
-> index 000000000000..794f88fc729d
-> --- /dev/null
-> +++ b/fs/f2fs/discard.c
-> @@ -0,0 +1,1271 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * f2fs discard support
-> + *
-> + * Copyright (c) 2022 Vivo Communication Technology Co.,Ltd.
-> + * Author: Yangtao Li <frank.li@vivo.com>
+How about:
 
-Oops, this is not a right way that changing copyright & anthor to vivo...
+#define time_to_inject(sbi, type) __time_to_inject(sbi, type, __func__,	\
+					__builtin_return_address(0))
+static inline bool __time_to_inject(struct f2fs_sb_info *sbi, int type,
+				const char *func, const char *parent_func)
 
 Thanks,
 
