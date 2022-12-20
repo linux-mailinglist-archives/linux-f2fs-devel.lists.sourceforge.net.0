@@ -2,115 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 161696513CD
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Dec 2022 21:23:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D60C651A1D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Dec 2022 05:56:05 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p7Mey-0001JZ-Q8;
-	Mon, 19 Dec 2022 20:22:52 +0000
+	id 1p7UfW-0001lo-Kx;
+	Tue, 20 Dec 2022 04:55:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <s.shtylyov@omp.ru>) id 1p7Mei-0001JI-HA
+ (envelope-from <chao@kernel.org>) id 1p7UfW-0001li-1I
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Dec 2022 20:22:36 +0000
+ Tue, 20 Dec 2022 04:55:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Date:Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y+/ZW1k3L8GjPaRSZMAJQ2PiUw93GFfKnUvpTJ87RF8=; b=FHMIKByVmuULKB7xfMVuRdpSJE
- GHmDmSCA0diCY/7TfMtFEvOYtGYQ0zXU8jYUQXAlYf6MAd/KdpImN4+GDh5BCtfglmGiOPbf1IMbO
- uKTBbSYf2dNEj/awIQTv7NjVBLiA+tH3dFpVhuhgTHHqiGFmIcPXCO/tFr6Dl0pNh+To=;
+ bh=J+/FBqIogp8YH0j57zrX+Hw54nzkNT++r0GlPEwUxTQ=; b=mOu4m0QZW1xi8Qzv6vxqz5HvOz
+ 3vY1dpejG/61g0yUYNVC3d9vwE39/9FFN6nVHJPbtN4TGkurBvFl8NtsbnMRONAZwJxPrniibQOX5
+ ddk1bMsZ5u5i2XQxvuXWqNBDRbqvSRVr6f7p2mUaElpGTeWwj62SBlISWK3/FeUf4+i4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:
- Subject:From:To:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Y+/ZW1k3L8GjPaRSZMAJQ2PiUw93GFfKnUvpTJ87RF8=; b=g
- 1DCzgZI0vo6me4+h0qomc/8OUyAspqMlIfJY4uJKU84wr7LCfhz/fyLlv7zFryS8NH8/8z5zYTXZy
- pECGb2uSRGolMPTW6vGLsJYj9Lo3tAmRkG1t1LgBYn9nsy/OUQZNXSjEeuQxsXVcnsbk2RItk4TVA
- bkNXwosAkbkgGTH0=;
-Received: from mx01.omp.ru ([90.154.21.10])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=J+/FBqIogp8YH0j57zrX+Hw54nzkNT++r0GlPEwUxTQ=; b=S4alWiyx+kZhXVX7YygIy8WqVC
+ XBoU6wxbebDYjEQwb0jcKe+uLbjRIHWcT667okt+OpX/PaVXdN0j5hi3qmcRPXn8v5WdOUuJByHRY
+ CZN2r4KhZyJPHQf7K1SDkdcEahaPcBzQxW2yyTQhptVN+S3nJc5zgPw3vRw2SR1IrO6M=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.95) id 1p7Meg-0053w2-TC
- for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Dec 2022 20:22:36 +0000
-Received: from [192.168.1.103] (178.176.77.110) by msexch01.omp.ru
- (10.188.4.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.2.986.14; Mon, 19 Dec
- 2022 23:07:04 +0300
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
- <linux-f2fs-devel@lists.sourceforge.net>
-From: Sergey Shtylyov <s.shtylyov@omp.ru>
-Organization: Open Mobile Platform
-Message-ID: <b4be3020-3c3a-4f67-4cd5-d2eb00659108@omp.ru>
-Date: Mon, 19 Dec 2022 23:07:04 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1p7UfR-005O06-Gs for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Dec 2022 04:55:57 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 6244CB810FD;
+ Tue, 20 Dec 2022 04:55:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26B7BC433EF;
+ Tue, 20 Dec 2022 04:55:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1671512145;
+ bh=GO91DA62dHcU7Q/IJM2c+OtFqkL8CSTiPULcSnxTK68=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=p7XZpBHyVGDRJbYNgkBWTtK0s0fOTBFN9ejLUyQLm7pBGJX3weslrBmxnFeLyc/Hh
+ 7WqRpWndI3aGmtghZopcWqi+tdQq2Vdtd4b/i4YHIiRT+c7EhTBLcbZVfnUs6yO88u
+ 4Kv6CJhtODRsevqrSd7Q4eRia55jtQyP+x9h1Y6AlEQvbE9HhvmwwYauVotm7FWIap
+ wql6qDCPiLT+heQNh8j/De08euUpEnvv4E/p+8WjFAeED6Oc7m2SJLLtccnKQyDij8
+ fkox45tyLYq7EdjUraUxNb0Tlfuacw94BiibuK+eSChQHZ+3ea+1tGPXp5UO8vK83z
+ ReQwA+dK4YcTQ==
+Message-ID: <7cd515b7-cc24-bc66-416d-c9d27fade0ec@kernel.org>
+Date: Tue, 20 Dec 2022 12:55:42 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.5.0
 Content-Language: en-US
-X-Originating-IP: [178.176.77.110]
-X-ClientProxiedBy: msexch01.omp.ru (10.188.4.12) To msexch01.omp.ru
- (10.188.4.12)
-X-KSE-ServerInfo: msexch01.omp.ru, 9
-X-KSE-AntiSpam-Interceptor-Info: scan successful
-X-KSE-AntiSpam-Version: 5.9.59, Database issued on: 12/19/2022 19:45:17
-X-KSE-AntiSpam-Status: KAS_STATUS_NOT_DETECTED
-X-KSE-AntiSpam-Method: none
-X-KSE-AntiSpam-Rate: 59
-X-KSE-AntiSpam-Info: Lua profiles 174285 [Dec 19 2022]
-X-KSE-AntiSpam-Info: Version: 5.9.59.0
-X-KSE-AntiSpam-Info: Envelope from: s.shtylyov@omp.ru
-X-KSE-AntiSpam-Info: LuaCore: 502 502 69dee8ef46717dd3cb3eeb129cb7cc8dab9e30f6
-X-KSE-AntiSpam-Info: {rep_avail}
-X-KSE-AntiSpam-Info: {Tracking_from_domain_doesnt_match_to}
-X-KSE-AntiSpam-Info: {relay has no DNS name}
-X-KSE-AntiSpam-Info: {SMTP from is not routable}
-X-KSE-AntiSpam-Info: {Found in DNSBL: 178.176.77.110 in (user)
- b.barracudacentral.org}
-X-KSE-AntiSpam-Info: {Found in DNSBL: 178.176.77.110 in (user)
- dbl.spamhaus.org}
-X-KSE-AntiSpam-Info: 127.0.0.199:7.1.2; omp.ru:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1
-X-KSE-AntiSpam-Info: ApMailHostAddress: 178.176.77.110
-X-KSE-AntiSpam-Info: {DNS response errors}
-X-KSE-AntiSpam-Info: Rate: 59
-X-KSE-AntiSpam-Info: Status: not_detected
-X-KSE-AntiSpam-Info: Method: none
-X-KSE-AntiSpam-Info: Auth:dmarc=temperror header.from=omp.ru;spf=temperror
- smtp.mailfrom=omp.ru;dkim=none
-X-KSE-Antiphishing-Info: Clean
-X-KSE-Antiphishing-ScanningType: Heuristic
-X-KSE-Antiphishing-Method: None
-X-KSE-Antiphishing-Bases: 12/19/2022 19:49:00
-X-KSE-AttachmentFiltering-Interceptor-Info: protection disabled
-X-KSE-Antivirus-Interceptor-Info: scan successful
-X-KSE-Antivirus-Info: Clean, bases: 12/19/2022 5:55:00 PM
-X-KSE-BulkMessagesFiltering-Scan-Result: InTheLimit
-X-Spam-Score: 0.0 (/)
+To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
+References: <20221217132318.37718-1-frank.li@vivo.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20221217132318.37718-1-frank.li@vivo.com>
+X-Spam-Score: -6.3 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In expand_inode_data(),
- the 'new_size' local variable is initialized
- to the result of i_size_read(), however this value isn't ever used, so we
- can drop this initializer... Found by Linux Verification Center
- (linuxtesting.org) with the SVACE static analysis tool. 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  On 2022/12/17 21:23, Yangtao Li wrote: > This patch moves
+ discard related code from segment.c into discard.c > since discard is
+ independent
+ feature, and it's better to maintain > them in separated pla [...] 
+ Content analysis details:   (-6.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1p7Meg-0053w2-TC
-Subject: [f2fs-dev] [PATCH] f2fs: file: drop useless initializer in
- expand_inode_data()
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -1.1 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1p7UfR-005O06-Gs
+Subject: Re: [f2fs-dev] [PATCH] f2fs: maintain discard in separated file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,38 +106,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In expand_inode_data(), the 'new_size' local variable is initialized to
-the result of i_size_read(), however this value isn't ever used,  so we
-can drop this initializer...
+On 2022/12/17 21:23, Yangtao Li wrote:
+> This patch moves discard related code from segment.c into discard.c
+> since discard is independent feature, and it's better to maintain
+> them in separated place.
+> 
+> There is no functionality change.
 
-Found by Linux Verification Center (linuxtesting.org) with the SVACE static
-analysis tool.
+Please check Jaegeuk's comments on similar patch:
 
-Signed-off-by: Sergey Shtylyov <s.shtylyov@omp.ru>
+https://lore.kernel.org/linux-f2fs-devel/20180426160819.GI68594@jaegeuk-macbookpro.roam.corp.google.com/
 
----
-This patch is against the 'dev' branch of Jaegeuk Kim's F2FS repo...
+> 
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> ---
+>   fs/f2fs/Makefile  |    2 +-
+>   fs/f2fs/discard.c | 1271 +++++++++++++++++++++++++++++++++++++++++++++
+>   fs/f2fs/f2fs.h    |   37 +-
+>   fs/f2fs/segment.c | 1268 +-------------------------------------------
+>   4 files changed, 1317 insertions(+), 1261 deletions(-)
+>   create mode 100644 fs/f2fs/discard.c
+> 
+> diff --git a/fs/f2fs/Makefile b/fs/f2fs/Makefile
+> index 8a7322d229e4..3d2874633db0 100644
+> --- a/fs/f2fs/Makefile
+> +++ b/fs/f2fs/Makefile
+> @@ -3,7 +3,7 @@ obj-$(CONFIG_F2FS_FS) += f2fs.o
+>   
+>   f2fs-y		:= dir.o file.o inode.o namei.o hash.o super.o inline.o
+>   f2fs-y		+= checkpoint.o gc.o data.o node.o segment.o recovery.o
+> -f2fs-y		+= shrinker.o extent_cache.o sysfs.o
+> +f2fs-y		+= shrinker.o extent_cache.o sysfs.o discard.o
+>   f2fs-$(CONFIG_F2FS_STAT_FS) += debug.o
+>   f2fs-$(CONFIG_F2FS_FS_XATTR) += xattr.o
+>   f2fs-$(CONFIG_F2FS_FS_POSIX_ACL) += acl.o
+> diff --git a/fs/f2fs/discard.c b/fs/f2fs/discard.c
+> new file mode 100644
+> index 000000000000..794f88fc729d
+> --- /dev/null
+> +++ b/fs/f2fs/discard.c
+> @@ -0,0 +1,1271 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * f2fs discard support
+> + *
+> + * Copyright (c) 2022 Vivo Communication Technology Co.,Ltd.
+> + * Author: Yangtao Li <frank.li@vivo.com>
 
- fs/f2fs/file.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Oops, this is not a right way that changing copyright & anthor to vivo...
 
-Index: f2fs/fs/f2fs/file.c
-===================================================================
---- f2fs.orig/fs/f2fs/file.c
-+++ f2fs/fs/f2fs/file.c
-@@ -1697,7 +1697,7 @@ static int expand_inode_data(struct inod
- 			.err_gc_skipped = true,
- 			.nr_free_secs = 0 };
- 	pgoff_t pg_start, pg_end;
--	loff_t new_size = i_size_read(inode);
-+	loff_t new_size;
- 	loff_t off_end;
- 	block_t expanded = 0;
- 	int err;
+Thanks,
 
 
 _______________________________________________
