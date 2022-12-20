@@ -2,53 +2,53 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 423AD65256C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Dec 2022 18:17:42 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B44AB652570
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Dec 2022 18:17:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p7gFF-0000KB-Da;
-	Tue, 20 Dec 2022 17:17:37 +0000
+	id 1p7gFQ-0007ox-Jy;
+	Tue, 20 Dec 2022 17:17:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <s.shtylyov@omp.ru>) id 1p7gFA-0000K4-6a
+ (envelope-from <s.shtylyov@omp.ru>) id 1p7gFP-0007or-GI
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Dec 2022 17:17:34 +0000
+ Tue, 20 Dec 2022 17:17:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :Date:Message-ID:CC:To:Subject:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=imbAOY3T7mH/tQi0uczJlXYr4gaLEeUPuGsh7bAYb8w=; b=Jwws2TtmoWTdoBuk920dZ27jfx
- 1bHH2rHP/rGdcxLgx2nOd/f/eKZjP6JKOpXsob+i4iXpdd42iwfuuX9f0nxXFO5bVSac/2OhaI7oY
- ozB/vjCgb/a1bLJ5is7PrTc4RRVyadowwXLyGtGtpJwWCJgfUNTIhHQEO8sTnTIUMk0w=;
+ bh=imbAOY3T7mH/tQi0uczJlXYr4gaLEeUPuGsh7bAYb8w=; b=UTrISbWqI9fSaCPE6jVI3rrYGW
+ 5o2XbEZSlGm0pjk9ewPjxBNaeltCDaq8MGiSkMQ0svYN6Xa24RgfHymzQI6m5I9y+8DSx32xovU5I
+ auGaMLRwqJ5VMV0fsf94rkBe9DYk9PsKBzZAT0uvgnlzM6LPf6J1S2eEp0Bke/eXn3hY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:CC:To
  :Subject:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=imbAOY3T7mH/tQi0uczJlXYr4gaLEeUPuGsh7bAYb8w=; b=S
- XCY2tNBLvrNosKbtcYQ8z0CeMH2ZPoi56jdSCu/R9u3pWJfMbnqW+cEI7g8Osl8d+2vfVF/YadgGq
- 0sqntn/qjvym7AW9gBD26KdOlOPEyjDx2/2PrLhFjiqhASTuSoKW56wCmwCe57fL1gpngNiPpjbze
- PBqfL8o+0QanOsE8=;
+ List-Owner:List-Archive; bh=imbAOY3T7mH/tQi0uczJlXYr4gaLEeUPuGsh7bAYb8w=; b=W
+ 0pwdXLzNajQM2+UHTMuv6wFqmkMiAigrejPKZ0A3eibVObNl78uQYoXXspP9YOs31rciThrb7pMD2
+ CTv3N2mk4ELyaV7AdKjrxPlylVtq+DS7OTbG1gbGhjONWn5J7xqhQtAhYj8rJUMxQYPP1/euQZztV
+ 5e/zseYY0dxGWzS4=;
 Received: from mx01.omp.ru ([90.154.21.10])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.95) id 1p7gF8-005yeN-EL
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.95) id 1p7gFO-0000A8-U2
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Dec 2022 17:17:31 +0000
+ Tue, 20 Dec 2022 17:17:47 +0000
 Received: from [192.168.1.103] (31.173.87.192) by msexch01.omp.ru
  (10.188.4.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.2.986.14; Tue, 20 Dec
- 2022 20:17:15 +0300
+ 2022 20:17:32 +0300
 From: Sergey Shtylyov <s.shtylyov@omp.ru>
 To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
  <linux-f2fs-devel@lists.sourceforge.net>
 Organization: Open Mobile Platform
-Message-ID: <a3e9c819-4fb5-1340-77df-f76332f1fb76@omp.ru>
-Date: Tue, 20 Dec 2022 20:17:15 +0300
+Message-ID: <38010b42-afd3-5394-09df-2378b7b5d10f@omp.ru>
+Date: Tue, 20 Dec 2022 20:17:32 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.1
 MIME-Version: 1.0
@@ -107,8 +107,8 @@ X-Spam-Report: Spam detection software,
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1p7gF8-005yeN-EL
-Subject: [f2fs-dev] [PATCH] f2fs: file: drop useless initializer in
+X-Headers-End: 1p7gFO-0000A8-U2
+Subject: [f2fs-dev] [PATCH REPOST] f2fs: file: drop useless initializer in
  expand_inode_data()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
