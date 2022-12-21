@@ -2,97 +2,119 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA4B16530DA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Dec 2022 13:34:31 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C5936532A1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Dec 2022 15:46:44 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p7yIl-0005C9-Tc;
-	Wed, 21 Dec 2022 12:34:27 +0000
+	id 1p80Mh-00048E-Sy;
+	Wed, 21 Dec 2022 14:46:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1p7yIk-0005C2-WD
+ (envelope-from <s.shtylyov@omp.ru>) id 1p80Mg-00047y-84
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 21 Dec 2022 12:34:27 +0000
+ Wed, 21 Dec 2022 14:46:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ MIME-Version:Date:Message-ID:From:References:CC:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ihaKuc9L1/NDMSiOp8AopQQLQt9u3ZLYi0S2+JPRHFw=; b=Iiy1ZNkUSJjxit5djSCLHaJZEw
- Qp2dVwwl7jtg/DwcuHmkqf3FeypMtA+siVs5KH35MRc088rjNe+jg7nNeCiOdQRfvTmV+Th0vVUMC
- JvN/ss1KWV8N9MFiav1nwvszxqMXeM8A7JgBoSG2PSLawLjVv66pq5hws3EGCATXVtBU=;
+ bh=Ae46Xx+PuxzkSYZYcR0m9g36/vDyFtgPimYtOhYL6hM=; b=BTpTA18BP3XXTwq7FMiA0fMh03
+ VZ6khjk3rO6MlxBGv+K6iCHyEnIisovpZsum9LOAXR1LiqnKYAyXR+driNGE0PSQlb/AgVNTvJlDL
+ dsVQkjOZZwbeXXOzUf/vHR3EEUSOe2/gcxd4V1A23ZQ9x4hSSkdd9y/DK973DsPgiNHE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
- References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:CC:To:Subject:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ihaKuc9L1/NDMSiOp8AopQQLQt9u3ZLYi0S2+JPRHFw=; b=EFz2j9NzY3mlbmK1H2Ls0DSOFm
- a3urBQvOdW46gubNZtb1dINV+MyWGT3fBAeL7T6NZ4jSTP/9ZOw+D2HiF7kAYw5BbsRV3uROgVpt2
- PWfAYA36Ye1qgEeYurRbuHtT/PWgjVLo0vMfJ1auZE0CJLNvslLtoJd1Nr+rNr70UMq8=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=Ae46Xx+PuxzkSYZYcR0m9g36/vDyFtgPimYtOhYL6hM=; b=SVgBvCtB8RbVIayofpnCmrB4ZV
+ LhU7QVVL2O5suX9vB1jPMtPw9h2oN1ATBGHFM3cHSe1Hm89WSxWzwdvZ2cNqD9FQmJULVMw3i4bwj
+ 7JuzuIYhfT0dq1o15ltdbtHjMzRX7sE2SAHlY8QtiC4dCSo2RQh33e1Hqnq2lW4fSYSg=;
+Received: from [90.154.21.10] (helo=mx01.omp.ru)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p7yIk-0008W7-91 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 21 Dec 2022 12:34:26 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 0C859B81B6A;
- Wed, 21 Dec 2022 12:34:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B0A2C433D2;
- Wed, 21 Dec 2022 12:34:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1671626058;
- bh=S/O6ux2v6aPfNcNVslK998HVTz/7pVCS2/8Ewlu4WHM=;
- h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
- b=VMuwgOYr4JUNQEiz784JqTKrMgf9DQlsvwACaQi4uMCVO9t8lZFQYSCcxDiUu7YkI
- lWNfB+2J/FydC9dPf+X2wMNcMgfdaTmeoUEnsqkzDlTFjqkxIlEAmsREXuHT9aL83K
- YcatceSjgBBmaN7ibI0DnrAN9eXS8miXOos+JxBnQ6LWCNFyfCG3I/kl34cj1Uvfl3
- sc8cP2FyyPbnQAoenb/B9HK/nIl5ijTlrFwnBqUd3YEUXa6zv2YcN7IaASBfiEiUnx
- vwD7EURTyPbKmsxWZZ5CQLKwnKFvtcBmCcy8RnythY1FoUtKkvw0q4cL6v6wD+/Bcm
- 0E9eXivW0h3DA==
-Message-ID: <c532ee2b-66bb-9227-ebd7-a070599fe3ae@kernel.org>
-Date: Wed, 21 Dec 2022 20:34:13 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Content-Language: en-US
-To: Yangtao Li <frank.li@vivo.com>, s.shtylyov@omp.ru
+ (TLS1.2:ECDHE-RSA-AES256-SHA384:256) (Exim 4.95) id 1p80Me-0005O4-HD
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 21 Dec 2022 14:46:38 +0000
+Received: from [192.168.1.103] (178.176.72.202) by msexch01.omp.ru
+ (10.188.4.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.2.986.14; Wed, 21 Dec
+ 2022 17:46:11 +0300
+To: Yangtao Li <frank.li@vivo.com>, <jaegeuk@kernel.org>, <chao@kernel.org>
 References: <20221221033021.36615-1-frank.li@vivo.com>
-From: Chao Yu <chao@kernel.org>
+From: Sergey Shtylyov <s.shtylyov@omp.ru>
+Organization: Open Mobile Platform
+Message-ID: <07bca981-edb0-aa85-28e2-ceaf58b6a519@omp.ru>
+Date: Wed, 21 Dec 2022 17:46:10 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.1
+MIME-Version: 1.0
 In-Reply-To: <20221221033021.36615-1-frank.li@vivo.com>
-X-Spam-Score: -7.9 (-------)
+Content-Language: en-US
+X-Originating-IP: [178.176.72.202]
+X-ClientProxiedBy: msexch01.omp.ru (10.188.4.12) To msexch01.omp.ru
+ (10.188.4.12)
+X-KSE-ServerInfo: msexch01.omp.ru, 9
+X-KSE-AntiSpam-Interceptor-Info: scan successful
+X-KSE-AntiSpam-Version: 5.9.59, Database issued on: 12/21/2022 14:32:04
+X-KSE-AntiSpam-Status: KAS_STATUS_NOT_DETECTED
+X-KSE-AntiSpam-Method: none
+X-KSE-AntiSpam-Rate: 59
+X-KSE-AntiSpam-Info: Lua profiles 174331 [Dec 21 2022]
+X-KSE-AntiSpam-Info: Version: 5.9.59.0
+X-KSE-AntiSpam-Info: Envelope from: s.shtylyov@omp.ru
+X-KSE-AntiSpam-Info: LuaCore: 502 502 69dee8ef46717dd3cb3eeb129cb7cc8dab9e30f6
+X-KSE-AntiSpam-Info: {rep_avail}
+X-KSE-AntiSpam-Info: {Tracking_arrow_text}
+X-KSE-AntiSpam-Info: {Tracking_from_domain_doesnt_match_to}
+X-KSE-AntiSpam-Info: {relay has no DNS name}
+X-KSE-AntiSpam-Info: {SMTP from is not routable}
+X-KSE-AntiSpam-Info: {Found in DNSBL: 178.176.72.202 in (user)
+ b.barracudacentral.org}
+X-KSE-AntiSpam-Info: {Found in DNSBL: 178.176.72.202 in (user)
+ dbl.spamhaus.org}
+X-KSE-AntiSpam-Info: 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; omp.ru:7.1.1;
+ 178.176.72.202:7.1.2,7.4.1,7.7.3
+X-KSE-AntiSpam-Info: {iprep_blacklist}
+X-KSE-AntiSpam-Info: ApMailHostAddress: 178.176.72.202
+X-KSE-AntiSpam-Info: {DNS response errors}
+X-KSE-AntiSpam-Info: Rate: 59
+X-KSE-AntiSpam-Info: Status: not_detected
+X-KSE-AntiSpam-Info: Method: none
+X-KSE-AntiSpam-Info: Auth:dmarc=temperror header.from=omp.ru;spf=temperror
+ smtp.mailfrom=omp.ru;dkim=none
+X-KSE-Antiphishing-Info: Clean
+X-KSE-Antiphishing-ScanningType: Heuristic
+X-KSE-Antiphishing-Method: None
+X-KSE-Antiphishing-Bases: 12/21/2022 14:35:00
+X-KSE-AttachmentFiltering-Interceptor-Info: protection disabled
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean, bases: 12/21/2022 10:52:00 AM
+X-KSE-BulkMessagesFiltering-Scan-Result: InTheLimit
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi all, On 2022/12/21 11:30, Yangtao Li wrote: > Hi Sergey, 
- > >> In expand_inode_data(), the 'new_size' local variable is initialized
- to >> the result of i_size_read(), however this value isn't ever used, so
- [...] Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  Hello! On 12/21/22 6:30 AM,
+ Yangtao Li wrote: >> In expand_inode_data(), 
+ the 'new_size' local variable is initialized to >> the result of i_size_read(),
+ however this value isn't ever used, so we >> can drop this initializer...
+ >> >> Found by Linu [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p7yIk-0008W7-91
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
+ -1.1 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1p80Me-0005O4-HD
 Subject: Re: [f2fs-dev] [PATCH REPOST] f2fs: file: drop useless initializer
  in expand_inode_data()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -106,17 +128,15 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi all,
+Hello!
 
-On 2022/12/21 11:30, Yangtao Li wrote:
-> Hi Sergey,
-> 
+On 12/21/22 6:30 AM, Yangtao Li wrote:
+
 >> In expand_inode_data(), the 'new_size' local variable is initialized to
 >> the result of i_size_read(), however this value isn't ever used,  so we
 >> can drop this initializer...
@@ -130,22 +150,23 @@ On 2022/12/21 11:30, Yangtao Li wrote:
 >> This patch is against the 'dev' branch of Jaegeuk Kim's F2FS repo...
 >> Reposting with ISP RAS mailing lists CC'ed now...
 > 
-> Why do you repeatedly send a patch that cannot be applied, and this does not have
+> Why do you repeatedly send a patch that cannot be applied,
 
-The format is weired, but still I can apply this into my git repo...
+   Why (it does apply to your 'dev' branch)? Because of the merge window?
 
-> a CC on linux-kernel.vger.kernel.org.
+> and this does not have a CC on linux-kernel.vger.kernel.org.
 
-I guess linux-kernel.vger.kernel.org is not mandatory, feel free
-to Cc this mailing list.
+   I normnally avoid CCing LKML as my patches are not generally interesting
+to the wide public (I think)...
 
-Thanks,
-
-> 
 > Otherwise, code modification looks good to me.
-> 
+
+   Thanx!
+
 > Thx,
 > Yangtao
+
+MBR, Sergey
 
 
 _______________________________________________
