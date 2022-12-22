@@ -2,97 +2,119 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B72EF6539E6
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Dec 2022 00:49:04 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 205C6653A9D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Dec 2022 03:28:46 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p88pX-0003pH-7v;
-	Wed, 21 Dec 2022 23:48:59 +0000
+	id 1p8BK6-00046f-9M;
+	Thu, 22 Dec 2022 02:28:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1p88pV-0003pB-H4
+ (envelope-from <raj.khem@gmail.com>) id 1p8BK4-00046Z-Kj
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 21 Dec 2022 23:48:57 +0000
+ Thu, 22 Dec 2022 02:28:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bQLb2XHOR3/VImIsPbeZY6XNF6O9qLIo20u8RNoVleM=; b=QNUvx4gskC5h0maDufFR2SMLMH
- tHnYfnE7RF3Fv9cejrq9NTPTLNKKydYWru2zAmfAsiRlFuXgTcn7I9l1JjBKj3wjOuWOExhLwq83T
- VxglZLpwQPjcbLbpTegjOkAZuqqazvjHPD0pC/A6LEtIieMA4KsRUGD3+3wQ26BG2Izw=;
+ bh=lzxnYomd7VaxUFiWhUShEMFjSdOAPazXsBhz/nuG8fE=; b=jMO1Da0pZTBeHhhIBs2GHzFxX0
+ Cm4nkH0FaxP5ZQ6M9UlJP5IAMYEqPTEhSwwDf51uTauK3p9c7SbHIlI2sV5REhrPWjQO3zLeTweEM
+ LTRf8fwlvDi8c0fp0+B2WY4JtU81JQZCTAML8eEX8fA9gJyBCW6yV87oi8YuTZgJWqTA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=bQLb2XHOR3/VImIsPbeZY6XNF6O9qLIo20u8RNoVleM=; b=ScJO5m8UmQcS/LO5EcKfA+tLrp
- 5y72ZyiwkeQny0w3jLevOjXskOjnxMNo1bCkl0M9KeFFc8nqtEcXA+UlcjQJxjtSva6CnsPqsmOqP
- HaaWF02D7HUHuviHYKgT1l0psGjkuDZb0QiBn2MNMe8Q3XBMKJsndfg+TlUoGSPnGjFg=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=lzxnYomd7VaxUFiWhUShEMFjSdOAPazXsBhz/nuG8fE=; b=k
+ KMzF+en3IR+uEHcDTOpCiZkk/O+srtHCkxFml3tzvdEsq1iK/26+pQqx1E4pKkHz+1vzxJPezQzJI
+ X9Ysn+dcORRtvQH/GzCjka++MNB9G7pkER0EOvO0DxNjkLNt2PW42Ph/3iGmoTCTumCkYsroJ39Ya
+ VWQxXCdti53gYNZ4=;
+Received: from mail-pj1-f50.google.com ([209.85.216.50])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p88pQ-007I8x-4v for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 21 Dec 2022 23:48:57 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 698C5CE1810;
- Wed, 21 Dec 2022 23:48:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68B06C433D2;
- Wed, 21 Dec 2022 23:48:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1671666514;
- bh=dfwaApWQ0HHasq7Na874WL021J+XeyqZRnuKNQdoIeg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=lbiOFI5ce6MhuC0e2A8vQiFx/g2qB5m5bAuRy9qk5Mm6jsrk+zWBi3jlAng6HxqRS
- tkK0WMTApgo6M0Jbg3095s4Q1pMoYgKZS/ZWlc2VENkPe/bJziiHDjmGYr3gWqg0q/
- P5+W7XUBFaQXduCjSECo0Fbaa9symmfh45iWALREkyJEsVUmBrV0KR4cgEcWC69XAU
- 8kNNFUCCnqTZJM2oskc545+E3tIgEQDhY12cdfhUl6fXV7rYVW+Hdy9jUErqQrqK/S
- rcWGayoxy12exGtux3xcFCjCAkcRBWcdnXHle4L7F66IcCQHm+yINcrctCpSdkJen2
- YhHnAN0ngueAA==
-Date: Wed, 21 Dec 2022 15:48:32 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org, "Theodore Y. Ts'o" <tytso@mit.edu>
-Message-ID: <Y6ObULdVm2UN5kw1@sol.localdomain>
-References: <Y5jRbLEJh3S46Jer@sol.localdomain>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1p8BK2-007OJu-Nr for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 22 Dec 2022 02:28:40 +0000
+Received: by mail-pj1-f50.google.com with SMTP id u5so475204pjy.5
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 21 Dec 2022 18:28:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lzxnYomd7VaxUFiWhUShEMFjSdOAPazXsBhz/nuG8fE=;
+ b=hJvXeVrqJtwcEuH2AkTjtkTxlgQOXlwYnyEiZLM2xXlbRVR5D9GJMw+uaugjtax5ut
+ BD2jQhDy1t64bXGtK4cp7uNmyZmP7t643KTiLyfHJcqi2LBttH1ieeMHFIYtKxUz/AAc
+ vVGnI44aretOSs/7g/6L0rduDPcFzzh+jdHnPUXNb7FXz/p41HMBps+xo9QtdR39hC/A
+ w14jFkrWI6VzkHtDdqpyk/Xfe4evv4mg4D2NLUQ3Sw8kfkMal3cKgZELsEWiz6Inw/ea
+ VNXIJbeMU+n1m9JVZmhCflhaSdHOlXvML8mXHZNZH/QSCb1XvsL7YsvTVphjmjCnuUXZ
+ mexQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lzxnYomd7VaxUFiWhUShEMFjSdOAPazXsBhz/nuG8fE=;
+ b=Q8S0mrPyO0g2J/2qRd0Kh6tZAmUUTxI4LRHFvOSM9BzqojcKvyiZ/cYeGFqD4pIVbL
+ Y95/87iSCp4aqAFfnOKD10apmPYVb7JG1PgjfXlDllsIpbq9Z7W8mkEv1EZn4yYmdxpN
+ wTtxVRBQgZl45pYlyUNPfwxSxAjj083tEZ/74kNN9uj+8N/dpDsuTq3pz+9QeddTBZpF
+ mPCs8HzmbgzAEbMxtalmHF2q31SmzBzwEsJphdS9uSglMcYoiyImGAjbLUiTZ2ACxm+I
+ 9+9N4WVns4qPvlQ+z60GgwpkTws+aMmIxfpIBB5J+nhU+FeGgunGTJtBsyeoQQ8Texay
+ 2Ykw==
+X-Gm-Message-State: AFqh2krSzl6RfkoCs2OuMpweT4t4YiTF+J/eGq0T9JlIO9R4gYqQe4Yf
+ bLNoP8gctOsttXpCxOt/QES0vkEJpI0=
+X-Google-Smtp-Source: AMrXdXtfg3+m75rqCqoNYeiu4Djs+jYKyHdUaQ0jP0uI2mB1CR8E1NITsI6L21Nzg1mrMRE93G9rvg==
+X-Received: by 2002:a05:6a21:c007:b0:ad:67fa:8e50 with SMTP id
+ bm7-20020a056a21c00700b000ad67fa8e50mr5833278pzc.57.1671676112756; 
+ Wed, 21 Dec 2022 18:28:32 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::41f2])
+ by smtp.gmail.com with ESMTPSA id
+ n20-20020a638f14000000b00478c48cf73csm10521278pgd.82.2022.12.21.18.28.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Dec 2022 18:28:32 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Wed, 21 Dec 2022 18:28:29 -0800
+Message-Id: <20221222022830.976309-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Y5jRbLEJh3S46Jer@sol.localdomain>
-X-Spam-Score: -3.4 (---)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Dec 13, 2022 at 11:24:28AM -0800, Eric Biggers wrote:
- > Currently, fsverity development is reusing the same mailing list, git repo
- > (though a different branch), and patchwork project as fscry [...] 
- Content analysis details:   (-3.4 points, 6.0 required)
+ Content preview: Relative path does not work when searching for include files
+ when srcdir != builddir Signed-off-by: Khem Raj --- tools/f2fs_io/Makefile.am
+ | 2 +- 1 file changed, 1 insertion(+),
+ 1 deletion(-) diff --git a/tools/f2fs_io/Makefile.am
+ b/tools/f2fs_io/Makefile.am index 6c17db1..bc4f9d0 100644 ---
+ a/tools/f2fs_io/Makefile.am
+ +++ b/tools/f2fs_io/Makefile.am @@ -1,7 +1,7 @@ ## Makefile.am 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.73.55 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.50 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [raj.khem[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p88pQ-007I8x-4v
-Subject: Re: [f2fs-dev] Separate mailing list (and git and patchwork) for
- fsverity?
+ valid 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.50 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1p8BK2-007OJu-Nr
+Subject: [f2fs-dev] [PATCH 1/2] f2fs_io: Fix out of tree builds
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,57 +126,35 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Khem Raj <raj.khem@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Dec 13, 2022 at 11:24:28AM -0800, Eric Biggers wrote:
-> Currently, fsverity development is reusing the same mailing list, git repo
-> (though a different branch), and patchwork project as fscrypt --- mainly just
-> because I was a little lazy and didn't bother to ask for new ones:
-> 
-> FSCRYPT: FILE SYSTEM LEVEL ENCRYPTION SUPPORT
-> [...]
-> L:      linux-fscrypt@vger.kernel.org
-> Q:      https://patchwork.kernel.org/project/linux-fscrypt/list/
-> T:      git git://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git
-> [...]
-> 
-> FSVERITY: READ-ONLY FILE-BASED AUTHENTICITY PROTECTION
-> [...]
-> L:      linux-fscrypt@vger.kernel.org
-> Q:      https://patchwork.kernel.org/project/linux-fscrypt/list/
-> T:      git git://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git fsverity
-> [...]
-> 
-> I think this is causing some confusion.  It also makes it so that people can't
-> subscribe to the list for just one or the other.
-> 
-> What would people say about having a separate mailing list, git repo, and
-> patchwork project for fsverity?  So the fsverity entry would look like:
-> 
-> FSVERITY: READ-ONLY FILE-BASED AUTHENTICITY PROTECTION
-> [...]
-> L:      linux-fsverity@vger.kernel.org
-> Q:      https://patchwork.kernel.org/project/linux-fsverity/list/
-> T:      git git://git.kernel.org/pub/scm/fs/fsverity/fsverity.git
-> [...]
-> 
-> For the branches in the git repo, I'm thinking of using 'for-next' and
-> 'for-current'.  (I'd also update the fscrypt ones to match; currently they are
-> 'master' and 'for-stable'.)
-> 
-> If people are okay with these changes, I'll send off the needed requests to
-> helpdesk and linux-next to make these changes, and send Linus a pull request to
-> update MAINTAINERS.  (And update fsverity-utils to point to the new list.)
-> 
+Relative path does not work when searching for include files
+when srcdir != builddir
 
-Any thoughts on this from anyone?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ tools/f2fs_io/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-- Eric
+diff --git a/tools/f2fs_io/Makefile.am b/tools/f2fs_io/Makefile.am
+index 6c17db1..bc4f9d0 100644
+--- a/tools/f2fs_io/Makefile.am
++++ b/tools/f2fs_io/Makefile.am
+@@ -1,7 +1,7 @@
+ ## Makefile.am
+ 
+ if LINUX
+-AM_CPPFLAGS = -I../../include
++AM_CPPFLAGS = -I$(top_srcdir)/include
+ AM_CFLAGS = -Wall
+ sbin_PROGRAMS = f2fs_io
+ f2fs_io_SOURCES = f2fs_io.c
+-- 
+2.39.0
+
 
 
 _______________________________________________
