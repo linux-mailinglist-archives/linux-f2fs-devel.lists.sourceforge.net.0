@@ -2,68 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 137E4654983
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Dec 2022 00:55:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A70C76549B3
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Dec 2022 01:14:56 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p8VP2-0006Yu-84;
-	Thu, 22 Dec 2022 23:55:08 +0000
+	id 1p8Vi8-0000rZ-WF;
+	Fri, 23 Dec 2022 00:14:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1p8VP0-0006Yn-EM
+ (envelope-from <jaegeuk@kernel.org>) id 1p8Vi7-0000rS-GW
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 Dec 2022 23:55:06 +0000
+ Fri, 23 Dec 2022 00:14:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EoSKRfP95tMCCyXGT6oqGYtq4T4xh5ZQBFdSKAqMbOA=; b=gibEhM837tskoXibiPtCNN4fFn
- doUR+aa3MYrJV6azMKi50yY2tW4HK6ZC7Qs/U+dQIOynkMAP5IR+vrL3WJJok197uI5+jiX+SjkL1
- 8hXAcU2b+K/G98cPZw8PQP4hlHjp1J/nFqZ+e21LVeOl69Ur9bukOLbdh1GWDSQCZnIY=;
+ bh=/wdi0KRKsj8pKESKD+rfwDybGwmA3ojPHem0aqJlFq0=; b=TbBG9Cc7NIsnT7FQ2N92+Fw+mn
+ FqldKZJEpKp7Yfas4HUBPL86wzlfmdXZOLfEhCo1/NA5aAyPElHx+lMQZ8hP8mM2WqPULtdo/7XM5
+ yLzu0aJwJ4h1UF4eSxb8vbNv1K7NotpBND3dlMaTqNu8WRdG74o942hr97LI8u+XA3Js=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=EoSKRfP95tMCCyXGT6oqGYtq4T4xh5ZQBFdSKAqMbOA=; b=Q
- dHdzGOU5P6QZs4rJQOLno+/YO+rMmifE7jwv/YW7lWvS8IXjBQ4gxPeXScXewJlbFr7KMGJ8c8sKi
- kjMCYrF488W1zd06svARe5VnSeyCYRWN3z3QggL76kBNUqpeVAZsunjjxJXCfJze3cKNwpvz9WE2M
- Yg9vBz+XaFcMkerc=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=/wdi0KRKsj8pKESKD+rfwDybGwmA3ojPHem0aqJlFq0=; b=IYsD0VgcImxDYLQXpWOt0sho6B
+ P0rDkD0zI9s758LRqdbIu/9y1SEsHF0bXE3lcn3Byqx5XLKtoevXOJiITHYuS+YQXOExWC+2TENxa
+ FNjKmIn8sV7q2mpGCaz90pf9OfgddxBgoneTTCBWHBaxL7mLxiN+urFAplEU3eyuVvP8=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p8VOz-008OvR-Po for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 22 Dec 2022 23:55:06 +0000
+ id 1p8Vi3-008QTR-Rz for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 23 Dec 2022 00:14:51 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9717B61DDA
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 22 Dec 2022 23:54:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 592CFC433D2;
- Thu, 22 Dec 2022 23:54:59 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 9384DB81F66;
+ Fri, 23 Dec 2022 00:14:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45F59C433D2;
+ Fri, 23 Dec 2022 00:14:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1671753299;
- bh=S0IfmelM7yN+udGca+1KPF5Wdz0l5L6Avlts03bXzCo=;
- h=From:To:Cc:Subject:Date:From;
- b=K5NW/mys7QToKUfmyLIQwokRF4s8EDDmQDlS180rqsBQFMkxJVUlZHkoE90AHE6pd
- TusZw5Uy6lcMLW60VQdPlVIAZ7+PKGokMJOkn2jLnP+iv66glZn8D0gQELk4+5J8pi
- QyUIhjQOXIU3E9GqlwL/cbv2cZOREkaK90AiO8M1YexBbcWZ+0Zr80ZwVH1dKuL9K6
- zHKt+fq0Scu8X44nfkmi4tPTun1aVyHfNaoh5xN2fTGsWIpjWwA9oj9MOQKxwzM2SS
- u9/31kgjEKIjPbBp9JL7V5C/RJnybSQnwqxlIlCQ2Ddfeb0eys3mjOo/5EJvo/dxEO
- TMfv3TnFGtbXw==
+ s=k20201202; t=1671754480;
+ bh=VE+yqOLcd3z2ANYoGY7M19qxnqQnS9CN5fiaLNE8QTM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=W4cpKjoUuotsEOOB00erID4kYg3YPb2pgf3GJX0X/VT+qrOIwYAOUiKJYgPA/UPAT
+ ZAz/Ma0QERpC8iLm86sSEnz34URhJ2dvWv09WecgUou24CGCbRWvLZOaK5FDPsrf0N
+ nrmsj2DJeLKEbenEiw9Ja2CCSgfBwmt4U6DLvIxCoQ3g24PVdSqd3F/mAfW4u8oECC
+ v3RO0Xpemyn/qrrvYXWCEsParc5Romxq8jmFUFaGhl+e4SvLNCCz3PhIBX6phI4GxY
+ ijp3YKYq/qWJb31j03oqDD01ON/MPzok3gBSHaKaEx7hseXsl3R4vXPMuFlrnwwZS8
+ mXqYUvzL32yTQ==
+Date: Thu, 22 Dec 2022 16:14:38 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 22 Dec 2022 15:54:58 -0800
-Message-Id: <20221222235458.957816-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.39.0.314.g84b9a713c41-goog
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <Y6Ty7qaU2jOf/P1m@google.com>
+References: <20221222022830.976309-1-raj.khem@gmail.com>
+ <20221222022830.976309-2-raj.khem@gmail.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20221222022830.976309-2-raj.khem@gmail.com>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -71,18 +72,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch avoids the below panic. pc :
- __lookup_extent_tree+0xd8/0x760
- lr : f2fs_do_write_data_page+0x104/0x87c sp : ffffffc010cbb3c0 x29:
- ffffffc010cbb3e0
- x28: 0000000000000000 x27: ffffff8803e7f020 x26: ffffff8803e7ed40 x25: ffffff8
- [...] Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 12/21, Khem Raj wrote: > Remove _LARGEFILE64_SOURCE, this
+ is redundant when _FILE_OFFSET_BITS=64 > additionally it fixes build with
+ musl because the detection logic for > lseek64 fails because when [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -91,9 +90,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p8VOz-008OvR-Po
-Subject: [f2fs-dev] [PATCH] f2fs: let's avoid panic if extent_tree is not
- created
+X-Headers-End: 1p8Vi3-008QTR-Rz
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs_io: Define _FILE_OFFSET_BITS=64
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,71 +103,70 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch avoids the below panic.
+On 12/21, Khem Raj wrote:
+> Remove _LARGEFILE64_SOURCE, this is redundant when _FILE_OFFSET_BITS=64
+> additionally it fixes build with musl because the detection logic for
+> lseek64 fails because when using _LARGEFILE64_SOURCE musl also define's
+> lseek64 as an alias to lseek
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  lib/libf2fs_io.c        | 4 +++-
+>  tools/f2fs_io/f2fs_io.c | 4 ++--
+>  2 files changed, 5 insertions(+), 3 deletions(-)
+> 
+> diff --git a/lib/libf2fs_io.c b/lib/libf2fs_io.c
+> index 1a8167d..abb43a3 100644
+> --- a/lib/libf2fs_io.c
+> +++ b/lib/libf2fs_io.c
+> @@ -11,7 +11,9 @@
+>   *
+>   * Dual licensed under the GPL or LGPL version 2 licenses.
+>   */
+> -#define _LARGEFILE64_SOURCE
+> +#ifndef _FILE_OFFSET_BITS
+> +#define _FILE_OFFSET_BITS 64
+> +#endif
 
-pc : __lookup_extent_tree+0xd8/0x760
-lr : f2fs_do_write_data_page+0x104/0x87c
-sp : ffffffc010cbb3c0
-x29: ffffffc010cbb3e0 x28: 0000000000000000
-x27: ffffff8803e7f020 x26: ffffff8803e7ed40
-x25: ffffff8803e7f020 x24: ffffffc010cbb460
-x23: ffffffc010cbb480 x22: 0000000000000000
-x21: 0000000000000000 x20: ffffffff22e90900
-x19: 0000000000000000 x18: ffffffc010c5d080
-x17: 0000000000000000 x16: 0000000000000020
-x15: ffffffdb1acdbb88 x14: ffffff888759e2b0
-x13: 0000000000000000 x12: ffffff802da49000
-x11: 000000000a001200 x10: ffffff8803e7ed40
-x9 : ffffff8023195800 x8 : ffffff802da49078
-x7 : 0000000000000001 x6 : 0000000000000000
-x5 : 0000000000000006 x4 : ffffffc010cbba28
-x3 : 0000000000000000 x2 : ffffffc010cbb480
-x1 : 0000000000000000 x0 : ffffff8803e7ed40
-Call trace:
- __lookup_extent_tree+0xd8/0x760
- f2fs_do_write_data_page+0x104/0x87c
- f2fs_write_single_data_page+0x420/0xb60
- f2fs_write_cache_pages+0x418/0xb1c
- __f2fs_write_data_pages+0x428/0x58c
- f2fs_write_data_pages+0x30/0x40
- do_writepages+0x88/0x190
- __writeback_single_inode+0x48/0x448
- writeback_sb_inodes+0x468/0x9e8
- __writeback_inodes_wb+0xb8/0x2a4
- wb_writeback+0x33c/0x740
- wb_do_writeback+0x2b4/0x400
- wb_workfn+0xe4/0x34c
- process_one_work+0x24c/0x5bc
- worker_thread+0x3e8/0xa50
- kthread+0x150/0x1b4
+This fails to build in x86_64/gcc.
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/extent_cache.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+libf2fs_io.c:87:8: error: unknown type name 'off64_t'
+   87 | static off64_t  *dcache_blk; /* which block it cached */
+      |        ^~~~~~~
 
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index a510fa57a823..1daf8c88c09b 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -546,7 +546,8 @@ static bool __lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
- 	struct extent_node *en;
- 	bool ret = false;
- 
--	f2fs_bug_on(sbi, !et);
-+	if (!et)
-+		return false;
- 
- 	trace_f2fs_lookup_extent_tree_start(inode, pgofs, type);
- 
--- 
-2.39.0.314.g84b9a713c41-goog
 
+>  
+>  #include <stdio.h>
+>  #include <stdlib.h>
+> diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+> index 6dcd840..cb99039 100644
+> --- a/tools/f2fs_io/f2fs_io.c
+> +++ b/tools/f2fs_io/f2fs_io.c
+> @@ -12,8 +12,8 @@
+>  #ifndef _LARGEFILE_SOURCE
+>  #define _LARGEFILE_SOURCE
+>  #endif
+> -#ifndef _LARGEFILE64_SOURCE
+> -#define _LARGEFILE64_SOURCE
+> +#ifndef _FILE_OFFSET_BITS
+> +#define _FILE_OFFSET_BITS 64
+>  #endif
+>  #ifndef O_LARGEFILE
+>  #define O_LARGEFILE 0
+> -- 
+> 2.39.0
+> 
+> 
+> 
+> _______________________________________________
+> Linux-f2fs-devel mailing list
+> Linux-f2fs-devel@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
