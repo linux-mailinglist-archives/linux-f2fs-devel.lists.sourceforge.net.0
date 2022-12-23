@@ -2,86 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30B89654D3C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Dec 2022 09:08:43 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 100EB655483
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Dec 2022 21:37:31 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p8d6b-0001fl-GG;
-	Fri, 23 Dec 2022 08:08:37 +0000
+	id 1p8onJ-0000p8-Qm;
+	Fri, 23 Dec 2022 20:37:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <BATV+a36cbb7ae26730e9169d+7061+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1p8d6N-0001XK-EG for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Dec 2022 08:08:23 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <ebiggers@kernel.org>) id 1p8omy-0000oS-GN
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 23 Dec 2022 20:37:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fbFBDoUTr0Hz3vXP45guCPqzXQAzMtYZDFQbW7aV/7M=; b=fXL7ZaqsXOhyp5xHUB34V9lB35
- tuNLeRr3j4FYlH3Woq6zDGq6Ps9I8CY0LIytYbLlw949F+44yxGZrMFczAmekeD6nvnzrpFX4EGRP
- MO5R7i8prTxtQjC+oxWzgaMqjXEt4ic5tSnD4fc/UVIxPlLJN2mBX1XyxVKXOZILRT9s=;
+ bh=8wiQPotQZ2G9Fw66RPEDxqUP+lv8gEWdFUv8fhYg5rM=; b=N53oQZU+SE00G9iLz9NAt01093
+ jYI+oxiZQfNSH5ndFhCU4lbyZF6cW+Zw1b3yObLm9IycAuWxJ4wpqXm0j2711wGkF/yx6lhrhbtmN
+ f/vwrcy5Dv21lL7LxVNczz41KBIQmyF6ohdwBx2AU7/fgI3WMInfFlDXMp38/f8icSsk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=fbFBDoUTr0Hz3vXP45guCPqzXQAzMtYZDFQbW7aV/7M=; b=ZFqJfA+65xslT0R3a6lfgX0xfI
- WgChS3rmJ1JUoleiGAKkFDvTxxxt8u0gWzjCY/bLEKgaSj+s18ClewQrdD3ydJXFHCufcfOJtafqg
- 1h1J32PXvGqFNgA58ur1p9ct43ssfX8tCUwmau6HSqUDdt9CSHFD/P3U82xVUPC8EW/E=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=8wiQPotQZ2G9Fw66RPEDxqUP+lv8gEWdFUv8fhYg5rM=; b=W
+ 2/cidDJ5f5hYJ0N3irrCSKtrYAjCXStvfEM3NZXkjfJkUb8NSFSlJpyhVLKcm1ezx4MIbVRglUJdc
+ 6ql+LhzGboIF7u1tMgev9NGnrc7jo4d//QCPLehCXOp/0V5ff/elUyoQixgICULtMKycC+wTwuda3
+ OIKzyDTa6AwHarhU=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p8d6F-0007ja-MD for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Dec 2022 08:08:17 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=fbFBDoUTr0Hz3vXP45guCPqzXQAzMtYZDFQbW7aV/7M=; b=E51cHrJYUYXCLQJ6msKO9XaW+8
- SzQjBaBALne5fVjvNAvOV5qoAzJhYusiS9APVbPLZRIMgmJ7vHa2pr+LksdjkiUicoqtpUYZXNLFN
- 9bDjsW51Plzixgfu/1HQwqxSRbvphYEqPWc08mBxLgstgTi4TqffHWvFVor42sHep04aR2QZoiHJ9
- cydEsdBmqvFVWSWR3FsMvKU0hkKQBd8bHu6sdY4gbMqcF3OiPiol9TM3x7/sFIBON+zQeq5GNAJry
- xu016McQd+WlF9525pZjlgYolVF64q6K95fNFFNOvo3JJyco1IHDzd6tNVkz7jyKmnvciMq4Uhlf9
- 38vhvqTg==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1p8d5y-0054Xp-JZ; Fri, 23 Dec 2022 08:07:58 +0000
-Date: Fri, 23 Dec 2022 00:07:58 -0800
-From: Christoph Hellwig <hch@infradead.org>
-To: Vishal Moola <vishal.moola@gmail.com>
-Message-ID: <Y6Vh3iu1xD7jgF9/@infradead.org>
-References: <0a95ba7b-9335-ce03-0f47-5d9f4cce988f@kernel.org>
- <20221212191317.9730-1-vishal.moola@gmail.com>
- <6770f692-490e-34fc-46f8-4f65aa071f58@kernel.org>
- <Y5trNfldXrM4FIyU@casper.infradead.org>
- <CAOzc2pzoyBg=jgYNNfsmum9tKFOAy65zVsEyDE3vKoiti7FZDA@mail.gmail.com>
+ id 1p8omu-009S2E-Ts for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 23 Dec 2022 20:37:08 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 3EF10B8210B;
+ Fri, 23 Dec 2022 20:36:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1111C433D2;
+ Fri, 23 Dec 2022 20:36:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1671827816;
+ bh=kuHoLDiwzIWt/yosaiuNbL76iPgmKQeB3oMrh4p5xhg=;
+ h=From:To:Cc:Subject:Date:From;
+ b=B7Cu5MHwFXyHpkWZYORJe5npw6Jrf1ax1VKcHSg3IFIcJDzGR9a97Ncit2dNZPAIn
+ zchceSAsxgUW9LWZwY+Qs21W42THfLhyb73HWKYCQMD6C3nyrNmv03p6rEqIKff2vX
+ rGocAZ5zYfyRKsGNeRx5kmBn6OpsxJaxvfI0pqee3hx1HNdZXebmxhO1m0ANxY9Osp
+ w/RSqDNgQw3oGnoM8VKaM1pEOZnyb0VQUtFSgmrbPXZ4DFlh6cLeHnmzpgqJ0IJS7e
+ oHfsWT1U3jch+XCx3vCHk3VC1pQueY3KEUpgWxfGU6DxWmkttz2NYAqCwQeIyJzmL0
+ RCxP/GM9U3Qmg==
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-fscrypt@vger.kernel.org
+Date: Fri, 23 Dec 2022 12:36:27 -0800
+Message-Id: <20221223203638.41293-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAOzc2pzoyBg=jgYNNfsmum9tKFOAy65zVsEyDE3vKoiti7FZDA@mail.gmail.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -2.5 (--)
+X-Spam-Score: -3.4 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Dec 21, 2022 at 09:17:30AM -0800, Vishal Moola wrote:
- > > That said, folio_ref_inct() is very much MM-internal and filesystems
- > > should be using folio_get(), so please make that modification [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview: [This patchset applies to mainline + some fsverity cleanups
+ I sent out recently. You can get everything from tag "fsverity-non4k-v2"
+ of https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git ] Currently,
+ filesystems
+ (ext4, f2fs, and btrfs) only support fsverity when the Merkle tree block
+ size, filesystem block size, and page size are all the same. In practice that
+ means 4K, since increasing [...] 
+ Content analysis details:   (-3.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [198.137.202.133 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -89,9 +91,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1p8d6F-0007ja-MD
-Subject: Re: [f2fs-dev] [RFC PATCH] f2fs: Convert f2fs_write_cache_pages()
- to use filemap_get_folios_tag()
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1p8omu-009S2E-Ts
+Subject: [f2fs-dev] [PATCH v2 00/11] fsverity: support for non-4K pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,30 +105,105 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
- linux-fsdevel@vger.kernel.org
+Cc: Andrey Albershteyn <aalbersh@redhat.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Dec 21, 2022 at 09:17:30AM -0800, Vishal Moola wrote:
-> > That said, folio_ref_inct() is very much MM-internal and filesystems
-> > should be using folio_get(), so please make that modification in the
-> > next revision, Vishal.
-> 
-> Ok, I'll go through and fix all of those in the next version.
+[This patchset applies to mainline + some fsverity cleanups I sent out
+ recently.  You can get everything from tag "fsverity-non4k-v2" of
+ https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git ]
 
-Btw, something a lot more productive in this area would be to figure out
-how we could convert all these copy and paste versions of
-write_cache_pages to use common code.  This might need changes to the
-common code, but the amount of duplicate and poorly maintained versions
-of this loop is a bit alarming:
+Currently, filesystems (ext4, f2fs, and btrfs) only support fsverity
+when the Merkle tree block size, filesystem block size, and page size
+are all the same.  In practice that means 4K, since increasing the page
+size, e.g. to 16K, forces the Merkle tree block size and filesystem
+block size to be increased accordingly.  That can be impractical; for
+one, users want the same file signatures to work on all systems.
 
- - btree_write_cache_pages
- - extent_write_cache_pages
- - f2fs_write_cache_pages
- - gfs2_write_cache_jdata
+Therefore, this patchset reduces the coupling between these sizes.
+
+First, patches 1-4 are cleanups.
+
+Second, patches 5-9 allow the Merkle tree block size to be less than the
+page size or filesystem block size, provided that it's not larger than
+either one.  This involves, among other things, changing the way that
+fs/verity/verify.c tracks which hash blocks have been verified.
+
+Finally, patches 10-11 make ext4 support fsverity when the filesystem
+block size is less than the page size.  Note, f2fs doesn't need similar
+changes because f2fs always assumes that the filesystem block size and
+page size are the same anyway.  I haven't looked into btrfs yet.
+
+I've tested this patchset using the "verity" group of tests in xfstests
+with the following xfstests patchset applied:
+"[PATCH v2 00/10] xfstests: update verity tests for non-4K block and page size"
+(https://lore.kernel.org/fstests/20221223010554.281679-1-ebiggers@kernel.org/T/#u)
+
+Note: on the thread "[RFC PATCH 00/11] fs-verity support for XFS"
+(https://lore.kernel.org/linux-xfs/20221213172935.680971-1-aalbersh@redhat.com/T/#u)
+there have been many requests for other things to support, including:
+
+  * folios in the pagecache
+  * alternative Merkle tree caching methods
+  * direct I/O
+  * merkle_tree_block_size > page_size
+  * extremely large files, using a reclaimable bitmap
+
+We shouldn't try to boil the ocean, though, so to keep the scope of this
+patchset manageable I haven't changed it significantly from v1.  This
+patchset does bring us closer to many of the above, just not all the way
+there.  I'd like to follow up this patchset with a change to support
+folios, which should be straightforward.  Next, we can do a change to
+generalize the Merkle tree interface to allow XFS to use an alternative
+caching method, as that sounds like the highest priority item for XFS.
+
+Anyway, the changelog is:
+
+Changed in v2:
+   - Rebased onto the recent fsverity cleanups.
+   - Split some parts of the big "support verification" patch into
+     separate patches.
+   - Passed the data_pos to verify_data_block() instead of computing it
+     using page->index, to make it ready for folio and DIO support.
+   - Eliminated some unnecessary arithmetic in verify_data_block().
+   - Changed the log_* fields in merkle_tree_params to u8.
+   - Restored PageLocked and !PageUptodate checks for pagecache pages.
+   - Eliminated the change to fsverity_hash_buffer().
+   - Other small cleanups
+
+Eric Biggers (11):
+  fsverity: use unsigned long for level_start
+  fsverity: simplify Merkle tree readahead size calculation
+  fsverity: store log2(digest_size) precomputed
+  fsverity: use EFBIG for file too large to enable verity
+  fsverity: replace fsverity_hash_page() with fsverity_hash_block()
+  fsverity: support verification with tree block size < PAGE_SIZE
+  fsverity: support enabling with tree block size < PAGE_SIZE
+  ext4: simplify ext4_readpage_limit()
+  f2fs: simplify f2fs_readpage_limit()
+  fs/buffer.c: support fsverity in block_read_full_folio()
+  ext4: allow verity with fs block size < PAGE_SIZE
+
+ Documentation/filesystems/fsverity.rst |  76 +++---
+ fs/buffer.c                            |  67 ++++-
+ fs/ext4/readpage.c                     |   3 +-
+ fs/ext4/super.c                        |   5 -
+ fs/f2fs/data.c                         |   3 +-
+ fs/verity/enable.c                     | 260 ++++++++++----------
+ fs/verity/fsverity_private.h           |  20 +-
+ fs/verity/hash_algs.c                  |  24 +-
+ fs/verity/open.c                       |  98 ++++++--
+ fs/verity/verify.c                     | 325 +++++++++++++++++--------
+ include/linux/fsverity.h               |  14 +-
+ 11 files changed, 565 insertions(+), 330 deletions(-)
+
+-- 
+2.39.0
+
 
 
 _______________________________________________
