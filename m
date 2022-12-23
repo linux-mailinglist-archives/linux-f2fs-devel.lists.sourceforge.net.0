@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3F51655469
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Dec 2022 21:37:19 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 443C1655455
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Dec 2022 21:37:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p8on8-0004iV-MZ;
-	Fri, 23 Dec 2022 20:37:18 +0000
+	id 1p8omu-0003Ow-CS;
+	Fri, 23 Dec 2022 20:37:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1p8omx-0004ht-9a
+ (envelope-from <ebiggers@kernel.org>) id 1p8omt-0003Op-H1
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Dec 2022 20:37:07 +0000
+ Fri, 23 Dec 2022 20:37:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B2r4/T1tUmv3fr1qrcqLg309McSqFijWf07I2550xJw=; b=U+SZEmdduhMlQS5A807r0cXXbB
- 28Fnrbkx3suWt6wFSs0kxwiQZoTUe+/z1eGYOGy+zdJXPVNMIXxvuf0wMZjMrlkYEJTo8U4jkqn0s
- FdNVEJZY9TcMy3NY/bBPDFZOf1KnER2vy+KiUC51vILoXr3S3Pc+S2TptUYYwew+zS7Q=;
+ bh=A+xtctLy+fQFyKbl/YtJ+IVU/zZ2qZt9cfPUzZOXAbk=; b=DxbC6R2Yg6ieDKdwwUqN9DdZpv
+ CW4ZsXurp4ZtFFbYuMpJ4LuZVuCeyhVoCfjmczaQBl3APOfJ+i+P8abOTo7Jbc2aAxYn3DyxQgG4k
+ 2EqMqPqgHwMgoCc43D0/yxFMh/2s79eoQoYbcM20wPn7XIPrHS7SEUwxMKftpY8wv9B0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,70 +31,70 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=B2r4/T1tUmv3fr1qrcqLg309McSqFijWf07I2550xJw=; b=FuO+vPkkdd+dIDpxBjukSCVcHC
- P7YTb0PZPzuQMWBheuFHoYfIo9Ub5UM8UbftFM+BCt60dOB/goDAMYLVjkpkusyIqE+V9tBct1zve
- 1uOfOcOBWCa7nMFl7fTrRMmar/2Po/Xcxzs3BfZHAB2oggIJyEW9/btRqNBWzjaAsPek=;
+ bh=A+xtctLy+fQFyKbl/YtJ+IVU/zZ2qZt9cfPUzZOXAbk=; b=iDLD797SSpjnWHxOyNw1gQ/XtB
+ NZxaruaq/Gt09q/sFGoLZvMjnwyEcGiBlPmvIagkJMGG2YpD4KVEsPcehjvWN3sXW7H+esRj9hRzm
+ 7EKT94jTBUMQCwTkHNSkA8MaI0OYcNUSV4RC8Vpc7+RL1wl2zJQPL2pCIWN35r+tTii8=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p8oms-00088N-D4 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Dec 2022 20:37:07 +0000
+ id 1p8oms-00088U-Q2 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 23 Dec 2022 20:37:03 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 0454361EA5;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 68A8D61EF6;
  Fri, 23 Dec 2022 20:36:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C4AAC433F0;
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AB06C433F1;
  Fri, 23 Dec 2022 20:36:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1671827816;
- bh=iUdBvdNiQeVKQXe2/6eUg98m/CYbzWe1kqf/gTptRGs=;
+ bh=t0yAzf0aY4TIwKR3lJb5ncYuHOsUm40J81t2ZXzWYCw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=o8C+LgP264e1gacZYiTziQL/GH12JCvASKiy5SXoD1HtZfRYZgkHJnfdt2sNMXL0v
- X34BZqbXGrrKNvyzK3y83BjWzbYzV5+Q1Is+CpOJXNGdxZDkXLyjDTQUga5Q2CZpCw
- OqVIOMlddULiPdjDnZ3AymdRzg1VekEkK3hxKn9z04fj6l6qHYAgUz5kgQN0f41Od9
- gAi0ffWHW59SXVPnfoc5xbsnhxtkkvYOI/9lYfpiJE0UuQWSj5+gwE6Mx9N32bmvLx
- gZsX1DoA4hCdVrVaOBmsJQJMOwKM95SYpLYribt5jmS/hpnI7h7Xb+DI4LHfKiL+mL
- ZLwS/xH9MtKVQ==
+ b=OrB9nct0a4D75w6OZb/PSADeO79+yJwZst83UJeD+WY4kVJr7xzqBKafuOYGiydbt
+ DFBA/1jsp1UtZ45r05r5BpGhQn58FTfFYWUxdIug8yNDjXpbK1Jk56GbMRE6MTPX/X
+ Jg1i+Tk1sadNzYRvqZWbUb1umRD1ailVYXQV97mbspBG8y7C57Z3oLQXhXKYeJPHM4
+ +o+7Iyok+em4Zkzw2AkQI+IY8ysPbxMU818Q8qOqubpg5WNVStEQF6M3vNB2sPo8VF
+ pneBVurJaEV04Vc1JTOKA10j3s8g/EK1VOdp+hMlfzjzMoe1qWQmZkrO1LHjpjJAIb
+ ast7KgPHOwJDA==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Fri, 23 Dec 2022 12:36:28 -0800
-Message-Id: <20221223203638.41293-2-ebiggers@kernel.org>
+Date: Fri, 23 Dec 2022 12:36:29 -0800
+Message-Id: <20221223203638.41293-3-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20221223203638.41293-1-ebiggers@kernel.org>
 References: <20221223203638.41293-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -3.4 (---)
+X-Spam-Score: -2.7 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Eric Biggers <ebiggers@google.com> fs/verity/ isn't
- consistent with whether Merkle tree block indices are 'unsigned long' or
- 'u64'.
- There's no real point to using u64 for them, though, since (a) a Merkle tree
- with over ULONG_MAX blocks [...] 
- Content analysis details:   (-3.4 points, 6.0 required)
+ Content preview:  From: Eric Biggers <ebiggers@google.com> First, calculate
+ max_ra_pages more efficiently by using the bio size. Second, calculate the
+ number of readahead pages from the hash page index, instead of calculating
+ it ahead of time using the data page index. This ends up being a bit simpler, 
+ especially since level 0 [...] 
+ Content analysis details:   (-2.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p8oms-00088N-D4
-Subject: [f2fs-dev] [PATCH v2 01/11] fsverity: use unsigned long for
- level_start
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1p8oms-00088U-Q2
+Subject: [f2fs-dev] [PATCH v2 02/11] fsverity: simplify Merkle tree
+ readahead size calculation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,80 +116,128 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-fs/verity/ isn't consistent with whether Merkle tree block indices are
-'unsigned long' or 'u64'.  There's no real point to using u64 for them,
-though, since (a) a Merkle tree with over ULONG_MAX blocks would only be
-needed for a file larger than MAX_LFS_FILESIZE, and (b) for reads, the
-status of all Merkle tree blocks has to be tracked in memory.
+First, calculate max_ra_pages more efficiently by using the bio size.
 
-Therefore, let's make things a bit more efficient on 32-bit systems by
-using 'unsigned long[]' for merkle_tree_params::level_start, instead of
-'u64[]'.  Also, to be extra safe, explicitly check that there aren't
-more than ULONG_MAX Merkle tree blocks.
+Second, calculate the number of readahead pages from the hash page
+index, instead of calculating it ahead of time using the data page
+index.  This ends up being a bit simpler, especially since level 0 is
+last in the tree, so we can just limit the readahead to the tree size.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
  fs/verity/fsverity_private.h |  2 +-
- fs/verity/open.c             | 20 +++++++++++++++-----
- 2 files changed, 16 insertions(+), 6 deletions(-)
+ fs/verity/open.c             |  3 ++-
+ fs/verity/verify.c           | 21 +++++++--------------
+ 3 files changed, 10 insertions(+), 16 deletions(-)
 
 diff --git a/fs/verity/fsverity_private.h b/fs/verity/fsverity_private.h
-index a16038a0ee67d..e8b40c8000be7 100644
+index e8b40c8000be7..48b97f5d05569 100644
 --- a/fs/verity/fsverity_private.h
 +++ b/fs/verity/fsverity_private.h
-@@ -52,7 +52,7 @@ struct merkle_tree_params {
- 	 * Starting block index for each tree level, ordered from leaf level (0)
- 	 * to root level ('num_levels - 1')
- 	 */
--	u64 level_start[FS_VERITY_MAX_LEVELS];
-+	unsigned long level_start[FS_VERITY_MAX_LEVELS];
- };
+@@ -46,7 +46,7 @@ struct merkle_tree_params {
+ 	unsigned int log_arity;		/* log2(hashes_per_block) */
+ 	unsigned int num_levels;	/* number of levels in Merkle tree */
+ 	u64 tree_size;			/* Merkle tree size in bytes */
+-	unsigned long level0_blocks;	/* number of blocks in tree level 0 */
++	unsigned long tree_pages;	/* Merkle tree size in pages */
  
- /*
+ 	/*
+ 	 * Starting block index for each tree level, ordered from leaf level (0)
 diff --git a/fs/verity/open.c b/fs/verity/open.c
-index e0ef1a6283943..83ccc3c137363 100644
+index 83ccc3c137363..e356eefb54d7b 100644
 --- a/fs/verity/open.c
 +++ b/fs/verity/open.c
-@@ -34,6 +34,7 @@ int fsverity_init_merkle_tree_params(struct merkle_tree_params *params,
- 	struct fsverity_hash_alg *hash_alg;
- 	int err;
- 	u64 blocks;
-+	u64 blocks_in_level[FS_VERITY_MAX_LEVELS];
- 	u64 offset;
- 	int level;
+@@ -7,6 +7,7 @@
  
-@@ -94,17 +95,26 @@ int fsverity_init_merkle_tree_params(struct merkle_tree_params *params,
- 		}
- 		blocks = (blocks + params->hashes_per_block - 1) >>
+ #include "fsverity_private.h"
+ 
++#include <linux/mm.h>
+ #include <linux/slab.h>
+ 
+ static struct kmem_cache *fsverity_info_cachep;
+@@ -97,7 +98,6 @@ int fsverity_init_merkle_tree_params(struct merkle_tree_params *params,
  			 params->log_arity;
--		/* temporarily using level_start[] to store blocks in level */
--		params->level_start[params->num_levels++] = blocks;
-+		blocks_in_level[params->num_levels++] = blocks;
+ 		blocks_in_level[params->num_levels++] = blocks;
  	}
--	params->level0_blocks = params->level_start[0];
-+	params->level0_blocks = blocks_in_level[0];
+-	params->level0_blocks = blocks_in_level[0];
  
  	/* Compute the starting block of each level */
  	offset = 0;
- 	for (level = (int)params->num_levels - 1; level >= 0; level--) {
--		blocks = params->level_start[level];
- 		params->level_start[level] = offset;
--		offset += blocks;
-+		offset += blocks_in_level[level];
-+	}
-+
-+	/*
-+	 * Since the data, and thus also the Merkle tree, cannot have more than
-+	 * ULONG_MAX pages, hash block indices can always fit in an
-+	 * 'unsigned long'.  To be safe, explicitly check for it too.
-+	 */
-+	if (offset > ULONG_MAX) {
-+		fsverity_err(inode, "Too many blocks in Merkle tree");
-+		err = -EFBIG;
-+		goto out_err;
+@@ -118,6 +118,7 @@ int fsverity_init_merkle_tree_params(struct merkle_tree_params *params,
  	}
  
  	params->tree_size = offset << log_blocksize;
++	params->tree_pages = PAGE_ALIGN(params->tree_size) >> PAGE_SHIFT;
+ 	return 0;
+ 
+ out_err:
+diff --git a/fs/verity/verify.c b/fs/verity/verify.c
+index de0d7aef785bf..4c57a1bd01afc 100644
+--- a/fs/verity/verify.c
++++ b/fs/verity/verify.c
+@@ -74,7 +74,7 @@ static inline int cmp_hashes(const struct fsverity_info *vi,
+  */
+ static bool verify_page(struct inode *inode, const struct fsverity_info *vi,
+ 			struct ahash_request *req, struct page *data_page,
+-			unsigned long level0_ra_pages)
++			unsigned long max_ra_pages)
+ {
+ 	const struct merkle_tree_params *params = &vi->tree_params;
+ 	const unsigned int hsize = params->digest_size;
+@@ -103,7 +103,8 @@ static bool verify_page(struct inode *inode, const struct fsverity_info *vi,
+ 		hash_at_level(params, index, level, &hindex, &hoffset);
+ 
+ 		hpage = inode->i_sb->s_vop->read_merkle_tree_page(inode, hindex,
+-				level == 0 ? level0_ra_pages : 0);
++				level == 0 ? min(max_ra_pages,
++					params->tree_pages - hindex) : 0);
+ 		if (IS_ERR(hpage)) {
+ 			err = PTR_ERR(hpage);
+ 			fsverity_err(inode,
+@@ -199,14 +200,13 @@ void fsverity_verify_bio(struct bio *bio)
+ {
+ 	struct inode *inode = bio_first_page_all(bio)->mapping->host;
+ 	const struct fsverity_info *vi = inode->i_verity_info;
+-	const struct merkle_tree_params *params = &vi->tree_params;
+ 	struct ahash_request *req;
+ 	struct bio_vec *bv;
+ 	struct bvec_iter_all iter_all;
+ 	unsigned long max_ra_pages = 0;
+ 
+ 	/* This allocation never fails, since it's mempool-backed. */
+-	req = fsverity_alloc_hash_request(params->hash_alg, GFP_NOFS);
++	req = fsverity_alloc_hash_request(vi->tree_params.hash_alg, GFP_NOFS);
+ 
+ 	if (bio->bi_opf & REQ_RAHEAD) {
+ 		/*
+@@ -218,24 +218,17 @@ void fsverity_verify_bio(struct bio *bio)
+ 		 * This improves sequential read performance, as it greatly
+ 		 * reduces the number of I/O requests made to the Merkle tree.
+ 		 */
+-		bio_for_each_segment_all(bv, bio, iter_all)
+-			max_ra_pages++;
+-		max_ra_pages /= 4;
++		max_ra_pages = bio->bi_iter.bi_size >> (PAGE_SHIFT + 2);
+ 	}
+ 
+ 	bio_for_each_segment_all(bv, bio, iter_all) {
+-		struct page *page = bv->bv_page;
+-		unsigned long level0_index = page->index >> params->log_arity;
+-		unsigned long level0_ra_pages =
+-			min(max_ra_pages, params->level0_blocks - level0_index);
+-
+-		if (!verify_page(inode, vi, req, page, level0_ra_pages)) {
++		if (!verify_page(inode, vi, req, bv->bv_page, max_ra_pages)) {
+ 			bio->bi_status = BLK_STS_IOERR;
+ 			break;
+ 		}
+ 	}
+ 
+-	fsverity_free_hash_request(params->hash_alg, req);
++	fsverity_free_hash_request(vi->tree_params.hash_alg, req);
+ }
+ EXPORT_SYMBOL_GPL(fsverity_verify_bio);
+ #endif /* CONFIG_BLOCK */
 -- 
 2.39.0
 
