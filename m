@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A959655456
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Dec 2022 21:37:10 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C183655484
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Dec 2022 21:37:31 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p8omx-0003PL-NW;
-	Fri, 23 Dec 2022 20:37:07 +0000
+	id 1p8onK-0000pQ-6o;
+	Fri, 23 Dec 2022 20:37:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1p8omv-0003P4-6n
+ (envelope-from <ebiggers@kernel.org>) id 1p8omz-0000oa-HI
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Dec 2022 20:37:05 +0000
+ Fri, 23 Dec 2022 20:37:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=l8P4LiO96AU70qR/laRSg5gCbmzlW0fQ82FdUEyjHoc=; b=KGeYEOfJDnSPZSVjYVJ9R0pLw6
- DQge4ybq6ncfqTTM+idzFUr5SwtAexN/fuUgzVUSm8npMOoq8VrUbEvXAVMyVhvjoAHiuQpqFOmEg
- nWDlvYHvkI9uiEQHNFKZYyVwWUl8M+f7vgHmTIZYOyrkT+zbcSA+wdV3u1KiC27531O8=;
+ bh=XG80x8x7YhVHbVAAYLK4PlfjQVUCY66dtzWif2/0WXM=; b=MUr81FxYuLMgTXJTw/Zr+fWv9D
+ EHSC+jEbIcCsN8myyCx/NaMAKRht7zFhVLN4qtUGuhgZhHLBEsSy/4J+4NLHB3A3zqhUeMdA2wyDi
+ rfZMmxohrExJgz3u/T3vV0cox1gGv1C3zokJGuh1r+vke7NlUTWvUIvZlOfVWWUL9Bro=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,35 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=l8P4LiO96AU70qR/laRSg5gCbmzlW0fQ82FdUEyjHoc=; b=JVoQ5XA228AEmS15kJ1Jc5D2Fk
- IusvsjdAu8KlZr82Ddq7Auz5Qk5s4Ezr7eeXqVDeYo6GvK2HeAvL8hvgtFfEpy1E3BkgxxkLJaOcw
- 4EDYOWI/vKsPllYBrn1LsAX3U8P09rLS1uY0oDqYu34nGuVjGPuoaPTAarsx/kfHxsCI=;
+ bh=XG80x8x7YhVHbVAAYLK4PlfjQVUCY66dtzWif2/0WXM=; b=GqdAqDxtGlbs3qxnL69v+fR9pd
+ BdUxf6PvYTY2gl+G1JXasz31jykMon7amXuNJdO54YgF5ApvG+O/B8ZZk6hvGLqEpyu1miRp8B4l+
+ CgroODnsmE/rbGvOkRJOZ2EWGOiOjHxBzUClFfXbxRWffeRRLM5kepqUiUg0s3F1xcvc=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1p8omu-00088s-ML for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Dec 2022 20:37:05 +0000
+ id 1p8omz-009S3S-0W for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 23 Dec 2022 20:37:09 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4F45B61EF9;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AF83A60AC5;
  Fri, 23 Dec 2022 20:36:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E024EC433D2;
- Fri, 23 Dec 2022 20:36:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A262C433EF;
+ Fri, 23 Dec 2022 20:36:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1671827819;
- bh=5f4h1JTh7Ym7YmoePqqN9Pp+PtyJBLUnyId3SNpncmY=;
+ bh=4oD1V523N4OyxstVi41q9/FPJsjEFrEIUKGeeV0MTvk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=h7bOrmUW3fhnTg+x+VidhjcdnxirPqapDdU+dX0eyaJNzRUfcdaufj8eyUp+calwr
- OyiNLgf+6HE7ok378y0UR8FjTJQQu/V1DznM1pWjOE7PgLXgsQgDWeugloXgdPG6FA
- tPb0VywVIDEM6DExy/uSrjb19zUJCNWhJGbf2V8HDg4FS1IlcP6Cms9Te/6XFL+s3y
- 8V4j2+7KcN0CTZrn6OOyi+3sqCmbbhvheg/VTaVhJlZcpX/BEPuy2RE4B+/nY9vrQ1
- LlO0ZdiYXFtYTYnXitWhSrTkfxHWDzYdq1mLc1Bdr1nOP35niVNWtEsAM32+mIeGR7
- VSxlsvBM+b0bQ==
+ b=CPWnTNgYmt6CHb9BL1qsJSCqM3DzwpOukO6P/TF58fagSqhT4layB4JaIZgvDEsoa
+ brZ/vkXQ0/N2NTvHV8gxSfrysKPIq8spCa7Klmpfw1m6Z5dGbmJhPf75v0RMwCfPHL
+ iCDoakd4sHQgLNoYwCUBLXwxsZAfjtCkiwoBI771EW0whZ1URkj0PFxWZrH8mwPKEa
+ U1lix5nDUvqRaQBXdiAmBReWIgaK7eubwfI1JD68dvWqj5YVohIxpUmiXT2soZvFDN
+ YpdC0krtFjeEQaYvRSXplVkyNp1GHNIIl0sofW0z+53fYnX14aCYrjLkUFD//aOry/
+ IEHktE1X0geUg==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Fri, 23 Dec 2022 12:36:35 -0800
-Message-Id: <20221223203638.41293-9-ebiggers@kernel.org>
+Date: Fri, 23 Dec 2022 12:36:36 -0800
+Message-Id: <20221223203638.41293-10-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20221223203638.41293-1-ebiggers@kernel.org>
 References: <20221223203638.41293-1-ebiggers@kernel.org>
@@ -74,7 +74,7 @@ X-Spam-Report: Spam detection software,
  Content preview: From: Eric Biggers <ebiggers@google.com> Now that the
  implementation
  of FS_IOC_ENABLE_VERITY has changed to not involve reading back Merkle tree
- blocks that were previously written, there is no need for ext4_readpage_limit()
+ blocks that were previously written, there is no need for f2fs_readpage_limit()
  to allow for thi [...] 
  Content analysis details:   (-2.7 points, 6.0 required)
  pts rule name              description
@@ -92,8 +92,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1p8omu-00088s-ML
-Subject: [f2fs-dev] [PATCH v2 08/11] ext4: simplify ext4_readpage_limit()
+X-Headers-End: 1p8omz-009S3S-0W
+Subject: [f2fs-dev] [PATCH v2 09/11] f2fs: simplify f2fs_readpage_limit()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,23 +117,23 @@ From: Eric Biggers <ebiggers@google.com>
 
 Now that the implementation of FS_IOC_ENABLE_VERITY has changed to not
 involve reading back Merkle tree blocks that were previously written,
-there is no need for ext4_readpage_limit() to allow for this case.
+there is no need for f2fs_readpage_limit() to allow for this case.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/ext4/readpage.c | 3 +--
+ fs/f2fs/data.c | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/fs/ext4/readpage.c b/fs/ext4/readpage.c
-index d5266932ce6cd..c61dc8a7c0147 100644
---- a/fs/ext4/readpage.c
-+++ b/fs/ext4/readpage.c
-@@ -211,8 +211,7 @@ static void ext4_set_bio_post_read_ctx(struct bio *bio,
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 6e43e19c7d1ca..6c403e22002de 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2053,8 +2053,7 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
  
- static inline loff_t ext4_readpage_limit(struct inode *inode)
+ static inline loff_t f2fs_readpage_limit(struct inode *inode)
  {
 -	if (IS_ENABLED(CONFIG_FS_VERITY) &&
--	    (IS_VERITY(inode) || ext4_verity_in_progress(inode)))
+-	    (IS_VERITY(inode) || f2fs_verity_in_progress(inode)))
 +	if (IS_ENABLED(CONFIG_FS_VERITY) && IS_VERITY(inode))
  		return inode->i_sb->s_maxbytes;
  
