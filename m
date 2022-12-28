@@ -2,130 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FE31655A45
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 24 Dec 2022 15:00:59 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A61765738E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 28 Dec 2022 08:16:09 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1p9551-000624-6L;
-	Sat, 24 Dec 2022 14:00:51 +0000
+	id 1pAQfT-0004F6-0P;
+	Wed, 28 Dec 2022 07:16:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bagasdotme@gmail.com>) id 1p9550-00061y-FM
- for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 24 Dec 2022 14:00:50 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3J-2rYwkbANQIOPA0BB4H0FF83.6EE6B4KI4H2EDJ4DJ.2EC@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1pAQfS-0004Ez-82 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 28 Dec 2022 07:16:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- References:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9JXM0KAhlws+0VmPex6+ZlzFQeInZVdFj7LBU8Zn+Dc=; b=SSay4bPQSHfRT+ynBTKFBZSFEl
- pn2/oM3jyv3tGaH53MPndtUKIApOY23zX8jXLuoydoIkp17WfJjHUAck7CkAO7ZZpuf+Cfjqn6yMG
- BbIRLA1dEMklY0U6s9XNNX/mobvN/vx4tfn2JqaGYQt1xH5y0qEYdSM5+Debxrs7vB+I=;
+ bh=8IVZWs7Fj0bD4vFVaAmg70gyF/cHcfBs+WGR7kbCiZQ=; b=donbDSt3ysvzre/n9g9/P5/dmR
+ ZqC+2EJ2/gdsNiE0OU17l4mtAfWYNqdDt5RD8Jw3CenEjH9bYD9WwWmrGDkl6SCZ/PFC/Bph4Wwvg
+ sE+UsXmUYvzlpBzOoW5y+5kh1gMRa3NgY4HZN33QGWZvHWczoMaNkOQA4byl05hAPXv8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:To:From:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=9JXM0KAhlws+0VmPex6+ZlzFQeInZVdFj7LBU8Zn+Dc=; b=NQg+NZOX/d2qA8PoBz7nzNSQmG
- YWRzQ5AFDkCMy7xZZcu8iqSlpIn5Z10OZU8c6cTzlJ7Zt7MeTNRebnMm+wWtbsrC3UjSN+nqotFeT
- xFEcDL8ElKYvJZldF1A523/OYiIZN+OEsfrOWe/N7OqvsfqeqVnrnrBA/FAFKFfwYHlQ=;
-Received: from mail-pl1-f182.google.com ([209.85.214.182])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=8IVZWs7Fj0bD4vFVaAmg70gyF/cHcfBs+WGR7kbCiZQ=; b=g
+ RT0ES+9dWU2b/QE5JD22NASkNLEL8Rl6xOLd+mpEX5gUlXcjfOgsARJJrQ7O7Q+AAyElzEpXKRujX
+ oo2ZHRPK7q6pfGSc9S94mhV69JEVmar9mXyyx8a7WyNMtwmIY8FC99zL+JwAyDOvEKnOGpu+H3cCH
+ sDX91yvHCXt3D15E=;
+Received: from mail-il1-f197.google.com ([209.85.166.197])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1p954w-00Amys-NE for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 24 Dec 2022 14:00:50 +0000
-Received: by mail-pl1-f182.google.com with SMTP id jn22so7229305plb.13
+ id 1pAQfO-00051T-2T for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 28 Dec 2022 07:16:02 +0000
+Received: by mail-il1-f197.google.com with SMTP id
+ r6-20020a92cd86000000b00304b2d1c2d7so9795764ilb.11
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 24 Dec 2022 06:00:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :to:from:subject:user-agent:mime-version:date:message-id:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9JXM0KAhlws+0VmPex6+ZlzFQeInZVdFj7LBU8Zn+Dc=;
- b=QoltfF8hkLYSIcmgc9MnXP5eiZB/nYMrUPEXWwdxpC31gwooM1FCX9US6x66b0dOK1
- 8G5UE8BwI1WBjd0utuBH7vcaypL2yvbPnfB5Vd2a6LrhOovzDZ5FwX9vuFrMQlsLYQxc
- MZs9yMsPaLhVruG1aURprOVPwwKyYqTGZZXFm2nVrkq0cZc19OimCNM5uvyqIDAaSOPy
- hU3sca/Cb0rryCrlv88uta0+Jg3BNSGkiZRZPojBM/sW3OiHDDQJCfIoHyTvwlakc2fM
- f97AMVi6ZIZm8Fix/Qv1c865G6v3friwurGd6DS430pUeczoEuC3RPy2oDZb04jHc3q2
- NUgA==
+ Tue, 27 Dec 2022 23:15:58 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :to:from:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9JXM0KAhlws+0VmPex6+ZlzFQeInZVdFj7LBU8Zn+Dc=;
- b=p0EyBBTCxZ+gg/S2aH111YI0SH2lAmC5poLAvw7yOYXPOo5XXg3KPDp/rKlBKuW4hF
- oMYTPV74unsbceXuctrw6Apdt3Y1kgXuDeReyL2t64xSerSwfMQJ9f5Bxw31oe7752EU
- a9OZtovwJXF6KXkuY7zCGhLtYOScSm4fVZHLW0md8noWjNeKzq0aGpaxjGw2Asjee5k5
- 4BGkPqV49B7PsBWtveYzRekQ3RfLKpkVsLU4YnSL5dXpCB+cYMGEwJU/3IBCod0ipG0I
- tLyuzxA2he00NK+CYW+xDOVfJF/OAJD/Mn+W1STFGrm0hRT9ZyX1x2dfkg3/83OFb32W
- LLrA==
-X-Gm-Message-State: AFqh2kqi1Km6mJ3cFJAvbEw4D/DR0axE4YEv0JLFWNFR/a1BDkoD3Tqy
- +hAQvOmTz6eJ2kd3azpkJ9o=
-X-Google-Smtp-Source: AMrXdXvBxPeQMBBLe4NDEv+BsucJYDxppcvPdxwNY5Fngy+HFMhYlZwOyzCVPZbSV34dU/SK1aPzbw==
-X-Received: by 2002:a17:902:ca14:b0:185:441e:222c with SMTP id
- w20-20020a170902ca1400b00185441e222cmr12326548pld.39.1671890439108; 
- Sat, 24 Dec 2022 06:00:39 -0800 (PST)
-Received: from [192.168.43.80] (subs02-180-214-232-28.three.co.id.
- [180.214.232.28]) by smtp.gmail.com with ESMTPSA id
- m12-20020a170902d18c00b00186bc66d2cbsm4181746plb.73.2022.12.24.06.00.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 24 Dec 2022 06:00:38 -0800 (PST)
-Message-ID: <0c70ba66-ef00-7242-d198-844f803662fa@gmail.com>
-Date: Sat, 24 Dec 2022 21:00:33 +0700
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8IVZWs7Fj0bD4vFVaAmg70gyF/cHcfBs+WGR7kbCiZQ=;
+ b=NkU9gziI45kTDbwOtcZGO7v6ObYCpe2OtFSfCMRYgNXADHI50DN3XjXXcpe6AwoIl8
+ Jv4lne4pD5tk8z6CuXgowjeYnOxrHP4PNJh/WEbUrJxivtGhvogaFMxLORjmrpgCBc4v
+ OKhnNNOYF0EBCAZJylFOvjCM1alOHKKUQRFhD8kmwMvA0+Ssa7Er//ZxioKoLEj52CzU
+ vMyVd59BNr8vEU63CCPmjCdkuFXZJMoYLv4mVnoCE9kkjBdK0Af43LCfDlJ2FinhYvUK
+ TkkSUcXP7IAo56lI6grLEQv09WmwrkscHZ/SKuEYENKXO8c9QHZjpw74l/4Hg7hWC44e
+ bSAA==
+X-Gm-Message-State: AFqh2kp+cD9/s2f36u8PBZt4+eqIDauElT12q5lAiU5OBEwEKtuXeXVF
+ xLF9wRfG9tCcnZDNeJKfhWCCJePf4a0Z+6LTxQ4JbMP/ztLo
+X-Google-Smtp-Source: AMrXdXth64vSMVEIGS56YbTcK4Wa4bLCYK8U9HKN3jufZ7lw4iSDgWsVELPaVX7YWdJe0FQX7AIajmO005hM8T8nPiYD0UOuEcrx
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Jeff Chua <jeff.chua.linux@gmail.com>, lkml
- <linux-kernel@vger.kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Chao Yu <chao@kernel.org>,
- F2FS Development <linux-f2fs-devel@lists.sourceforge.net>,
- Linux Regressions <regressions@lists.linux.dev>
-References: <CAAJw_Ztzyh-GNTJYpXbA0CeJv2Rz=fLZKE6_Q=7JMmM+s9yHXQ@mail.gmail.com>
- <CAAJw_Ztb0mJVkHtBhryf=9g8CA0fZZRa8HVio8GCGUSLOvqa7A@mail.gmail.com>
- <Y6bz4wOC0nwu2yGU@debian.me>
-Content-Language: en-US
-In-Reply-To: <Y6bz4wOC0nwu2yGU@debian.me>
-X-Spam-Score: 0.2 (/)
+X-Received: by 2002:a02:711c:0:b0:38a:c412:6ed0 with SMTP id
+ n28-20020a02711c000000b0038ac4126ed0mr2351775jac.27.1672211751700; Tue, 27
+ Dec 2022 23:15:51 -0800 (PST)
+Date: Tue, 27 Dec 2022 23:15:51 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <000000000000730db305f0de2300@google.com>
+From: syzbot <syzbot+fb4ca11228cf7fef7938@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.6 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 12/24/22 19:43, Bagas Sanjaya wrote: > On Sat, Dec 24,
- 2022 at 01:48:55PM +0800, Jeff Chua wrote: >> Got the following error in latest
- linux-6.2-git with just vim (:w >> file1). No problem with lin [...] 
- Content analysis details:   (0.2 points, 6.0 required)
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: a27405b2ed9c
+ Merge tag 'sound-6.2-rc1-2' of git://git.kern.. git tree: upstream console
+ output: https://syzkaller.appspot.com/x/log.txt?x=179bf81f880000 kernel
+ config: https://syzkaller.a [...] 
+ Content analysis details:   (0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [bagasdotme[at]gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.182 listed in wl.mailspike.net]
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.182 listed in list.dnswl.org]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 1.5 RCVD_IN_SORBS_WEB      RBL: SORBS: sender is an abusable web server
- [180.214.232.28 listed in dnsbl.sorbs.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -1.1 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1p954w-00Amys-NE
-Subject: Re: [f2fs-dev] f2fs write error Linux v6.2
+ no trust [209.85.166.197 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.197 listed in wl.mailspike.net]
+X-Headers-End: 1pAQfO-00051T-2T
+Subject: [f2fs-dev] [syzbot] [f2fs?] possible deadlock in
+ f2fs_vm_page_mkwrite
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -141,131 +111,254 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 12/24/22 19:43, Bagas Sanjaya wrote:
-> On Sat, Dec 24, 2022 at 01:48:55PM +0800, Jeff Chua wrote:
->> Got the following error in latest linux-6.2-git with just vim (:w
->> file1). No problem with linux-6.1.1
->>
->> 2022-12-22T14:09:51.419409+08:00 [localhost] kernel: BUG: kernel NULL
->> pointer dereference, address: 0000000000000024
->> 2022-12-22T14:09:51.419422+08:00 [localhost] kernel: #PF: supervisor
->> write access in kernel mode
->> 2022-12-22T14:09:51.419423+08:00 [localhost] kernel: #PF:
->> error_code(0x0002) - not-present page
->> 2022-12-22T14:09:51.419424+08:00 [localhost] kernel: PGD 147b63067 P4D
->> 147b63067 PUD 177d5c067 PMD 0
->> 2022-12-22T14:09:51.419424+08:00 [localhost] kernel: Oops: 0002 [#7] PREEMPT SMP
->> 2022-12-22T14:09:51.419428+08:00 [localhost] kernel: CPU: 6 PID: 22891
->> Comm: vi Tainted: G     UD            6.1.0 #11
->> 2022-12-22T14:09:51.419428+08:00 [localhost] kernel: Hardware name:
->> LENOVO 21CCS1GL00/21CCS1GL00, BIOS N3AET69W (1.34 ) 12/05/2022
->> 2022-12-22T14:09:51.419428+08:00 [localhost] kernel: RIP:
->> 0010:f2fs_issue_flush+0x10e/0x180
->> 2022-12-22T14:09:51.419429+08:00 [localhost] kernel: Code: ba 01 00 00
->> 00 be 03 00 00 00 e8 ad e8 d5 ff 48 83 3b 00 74 1e 48 89 e7 e8 7f c1
->> 84 00 f0 ff 4b 24 8b 44 24 2c e9 66 ff ff ff <f0> ff 43 24 e9 4a ff ff
->> ff 45 31 ff 4c 87 7b 28 4d 85 ff 74 d6 44
->> 2022-12-22T14:09:51.419429+08:00 [localhost] kernel: RSP:
->> 0018:ffffc90000b13df0 EFLAGS: 00010246
->> 2022-12-22T14:09:51.419430+08:00 [localhost] kernel: RAX:
->> ffff888101caccc0 RBX: 0000000000000000 RCX: 0000000000000000
->> 2022-12-22T14:09:51.419430+08:00 [localhost] kernel: RDX:
->> 0000000010000088 RSI: 000000000005a844 RDI: ffff8881027bf000
->> 2022-12-22T14:09:51.419431+08:00 [localhost] kernel: RBP:
->> ffff8881027bf000 R08: 0000000000000000 R09: ffff8881027bf2a8
->> 2022-12-22T14:09:51.419431+08:00 [localhost] kernel: R10:
->> 0000000000000000 R11: 0000000000000000 R12: 0000000000000024
->> 2022-12-22T14:09:51.419432+08:00 [localhost] kernel: R13:
->> 000000000005a844 R14: 000000000005a844 R15: 0000000000000000
->> 2022-12-22T14:09:51.419432+08:00 [localhost] kernel: FS:
->> 00007ff03fdf0b80(0000) GS:ffff88883f380000(0000)
->> knlGS:0000000000000000
->> 2022-12-22T14:09:51.419432+08:00 [localhost] kernel: CS:  0010 DS:
->> 0000 ES: 0000 CR0: 0000000080050033
->> 2022-12-22T14:09:51.419433+08:00 [localhost] kernel: CR2:
->> 0000000000000024 CR3: 000000013d64e006 CR4: 0000000000770ee0
->> 2022-12-22T14:09:51.419433+08:00 [localhost] kernel: PKRU: 55555554
->> 2022-12-22T14:09:51.419434+08:00 [localhost] kernel: Call Trace:
->> 2022-12-22T14:09:51.419434+08:00 [localhost] kernel: <TASK>
->> 2022-12-22T14:09:51.419435+08:00 [localhost] kernel: ?
->> preempt_count_add+0x63/0x90
->> 2022-12-22T14:09:51.419435+08:00 [localhost] kernel: ?
->> preempt_count_add+0x63/0x90
->> 2022-12-22T14:09:51.419435+08:00 [localhost] kernel: ?
->> preempt_count_add+0x63/0x90
->> 2022-12-22T14:09:51.419436+08:00 [localhost] kernel:
->> f2fs_do_sync_file+0x489/0x650
->> 2022-12-22T14:09:51.419436+08:00 [localhost] kernel: __x64_sys_fsync+0x2f/0x60
->> 2022-12-22T14:09:51.419437+08:00 [localhost] kernel: do_syscall_64+0x35/0x80
->> 2022-12-22T14:09:51.419437+08:00 [localhost] kernel:
->> entry_SYSCALL_64_after_hwframe+0x46/0xb0
->> 2022-12-22T14:09:51.419438+08:00 [localhost] kernel: RIP: 0033:0x7ff03feef20b
->> 2022-12-22T14:09:51.419438+08:00 [localhost] kernel: Code: 3d 00 f0 ff
->> ff 77 48 c3 0f 1f 80 00 00 00 00 48 83 ec 18 89 7c 24 0c e8 a3 a2 f8
->> ff 8b 7c 24 0c 41 89 c0 b8 4a 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 35
->> 44 89 c7 89 44 24 0c e8 01 a3 f8 ff 8b 44
->> 2022-12-22T14:09:51.419438+08:00 [localhost] kernel: RSP:
->> 002b:00007ffe6ecca530 EFLAGS: 00000293 ORIG_RAX: 000000000000004a
->> 2022-12-22T14:09:51.419439+08:00 [localhost] kernel: RAX:
->> ffffffffffffffda RBX: 0000000000000001 RCX: 00007ff03feef20b
->> 2022-12-22T14:09:51.419439+08:00 [localhost] kernel: RDX:
->> 0000000000000002 RSI: 0000000000000002 RDI: 0000000000000003
->> 2022-12-22T14:09:51.419440+08:00 [localhost] kernel: RBP:
->> 0000000000002000 R08: 0000000000000000 R09: 00000000024bcfb0
->> 2022-12-22T14:09:51.419440+08:00 [localhost] kernel: R10:
->> fffffffffffff4bf R11: 0000000000000293 R12: 00000000000006b7
->> 2022-12-22T14:09:51.419440+08:00 [localhost] kernel: R13:
->> 000000000000003d R14: 0000000000000000 R15: 00000000024a1680
->> 2022-12-22T14:09:51.419441+08:00 [localhost] kernel: </TASK>
->> 2022-12-22T14:09:51.419441+08:00 [localhost] kernel: Modules linked
->> in: [last unloaded: ecc]
->> 2022-12-22T14:09:51.419442+08:00 [localhost] kernel: CR2: 0000000000000024
->> 2022-12-22T14:09:51.419442+08:00 [localhost] kernel: ---[ end trace
->> 0000000000000000 ]---
->> 2022-12-22T14:09:51.419443+08:00 [localhost] kernel: RIP:
->> 0010:f2fs_issue_flush+0x10e/0x180
->> 2022-12-22T14:09:51.419443+08:00 [localhost] kernel: Code: ba 01 00 00
->> 00 be 03 00 00 00 e8 ad e8 d5 ff 48 83 3b 00 74 1e 48 89 e7 e8 7f c1
->> 84 00 f0 ff 4b 24 8b 44 24 2c e9 66 ff ff ff <f0> ff 43 24 e9 4a ff ff
->> ff 45 31 ff 4c 87 7b 28 4d 85 ff 74 d6 44
->> 2022-12-22T14:09:51.419443+08:00 [localhost] kernel: RSP:
->> 0018:ffffc90003903df0 EFLAGS: 00010246
->> 2022-12-22T14:09:51.419444+08:00 [localhost] kernel: RAX:
->> ffff888100106d80 RBX: 0000000000000000 RCX: 0000000000000000
->> 2022-12-22T14:09:51.419444+08:00 [localhost] kernel: RDX:
->> 0000000010000088 RSI: 0000000000b0e2ba RDI: ffff888116227000
->> 2022-12-22T14:09:51.419445+08:00 [localhost] kernel: RBP:
->> ffff888116227000 R08: 0000000000000000 R09: ffff8881162272a8
->> 2022-12-22T14:09:51.419445+08:00 [localhost] kernel: R10:
->> 0000000000000000 R11: 0000000000000000 R12: 0000000000000024
->> 2022-12-22T14:09:51.419445+08:00 [localhost] kernel: R13:
->> 0000000000b0e2ba R14: 0000000000b0e2ba R15: 0000000000000000
->> 2022-12-22T14:09:51.419446+08:00 [localhost] kernel: FS:
->> 00007ff03fdf0b80(0000) GS:ffff88883f380000(0000)
->> knlGS:0000000000000000
->> 2022-12-22T14:09:51.419446+08:00 [localhost] kernel: CS:  0010 DS:
->> 0000 ES: 0000 CR0: 0000000080050033
->> 2022-12-22T14:09:51.419446+08:00 [localhost] kernel: CR2:
->> 0000000000000024 CR3: 000000013d64e006 CR4: 0000000000770ee0
->> 2022-12-22T14:09:51.419447+08:00 [localhost] kernel: PKRU: 55555554
-> 
-> Thanks for the report! I'm adding this to regzbot:
-> 
-> #regzbot ^introduced v6.1.1..v6.2
-> #regzbot title f2fs: kernel NULL pointer dereference when writing file
-> 
+Hello,
 
-Oops, I mean:
+syzbot found the following issue on:
 
-#regzbot introduced v6.1.1..72a85e2b0a1e1e
+HEAD commit:    a27405b2ed9c Merge tag 'sound-6.2-rc1-2' of git://git.kern..
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=179bf81f880000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=b0e81c4eb13a67cd
+dashboard link: https://syzkaller.appspot.com/bug?extid=fb4ca11228cf7fef7938
+compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
 
-Also, Cc'ed other F2FS maintainers and relevant lists.
+Unfortunately, I don't have any reproducer for this issue yet.
 
-Thanks.
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/a20faa4894d9/disk-a27405b2.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/ab24ee3f0e4b/vmlinux-a27405b2.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/8d684f455dae/bzImage-a27405b2.xz
 
--- 
-An old man doll... just what I always wanted! - Clara
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+fb4ca11228cf7fef7938@syzkaller.appspotmail.com
 
+======================================================
+WARNING: possible circular locking dependency detected
+6.1.0-syzkaller-14565-ga27405b2ed9c #0 Not tainted
+------------------------------------------------------
+syz-executor.2/24424 is trying to acquire lock:
+ffff888083cd8670 (mapping.invalidate_lock#5){++++}-{3:3}, at: filemap_invalidate_lock_shared include/linux/fs.h:811 [inline]
+ffff888083cd8670 (mapping.invalidate_lock#5){++++}-{3:3}, at: f2fs_vm_page_mkwrite+0x630/0x1c90 fs/f2fs/file.c:104
+
+but task is already holding lock:
+ffff888085076558 (sb_pagefaults#2){.+.+}-{0:0}, at: do_page_mkwrite+0x19b/0x680 mm/memory.c:2947
+
+which lock already depends on the new lock.
+
+
+the existing dependency chain (in reverse order) is:
+
+-> #6 (sb_pagefaults#2){.+.+}-{0:0}:
+       percpu_down_read include/linux/percpu-rwsem.h:51 [inline]
+       __sb_start_write include/linux/fs.h:1811 [inline]
+       sb_start_pagefault include/linux/fs.h:1915 [inline]
+       f2fs_vm_page_mkwrite+0x48a/0x1c90 fs/f2fs/file.c:99
+       do_page_mkwrite+0x19b/0x680 mm/memory.c:2947
+       wp_page_shared mm/memory.c:3295 [inline]
+       do_wp_page+0x353/0x3370 mm/memory.c:3377
+       handle_pte_fault mm/memory.c:4949 [inline]
+       __handle_mm_fault+0x1f58/0x3c90 mm/memory.c:5073
+       handle_mm_fault+0x1b6/0x850 mm/memory.c:5219
+       do_user_addr_fault+0x475/0x1210 arch/x86/mm/fault.c:1428
+       handle_page_fault arch/x86/mm/fault.c:1519 [inline]
+       exc_page_fault+0x98/0x170 arch/x86/mm/fault.c:1575
+       asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+
+-> #5 (&mm->mmap_lock){++++}-{3:3}:
+       __might_fault mm/memory.c:5647 [inline]
+       __might_fault+0x10c/0x180 mm/memory.c:5640
+       _copy_to_user+0x29/0x150 lib/usercopy.c:29
+       copy_to_user include/linux/uaccess.h:169 [inline]
+       f2fs_ioc_get_encryption_pwsalt+0x2b2/0x370 fs/f2fs/file.c:2365
+       __f2fs_ioctl+0x29f1/0xaaf0 fs/f2fs/file.c:4169
+       f2fs_ioctl+0x18e/0x220 fs/f2fs/file.c:4242
+       vfs_ioctl fs/ioctl.c:51 [inline]
+       __do_sys_ioctl fs/ioctl.c:870 [inline]
+       __se_sys_ioctl fs/ioctl.c:856 [inline]
+       __x64_sys_ioctl+0x197/0x210 fs/ioctl.c:856
+       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+       do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
+       entry_SYSCALL_64_after_hwframe+0x63/0xcd
+
+-> #4 (&sbi->sb_lock){++++}-{3:3}:
+       down_write+0x94/0x220 kernel/locking/rwsem.c:1562
+       f2fs_down_write fs/f2fs/f2fs.h:2213 [inline]
+       f2fs_handle_error+0x8e/0x200 fs/f2fs/super.c:3926
+       check_block_count+0x440/0x4f0 fs/f2fs/segment.h:765
+       build_sit_entries fs/f2fs/segment.c:4471 [inline]
+       f2fs_build_segment_manager+0x5a08/0xa650 fs/f2fs/segment.c:5162
+       f2fs_fill_super+0x3aba/0x7680 fs/f2fs/super.c:4328
+       mount_bdev+0x351/0x410 fs/super.c:1359
+       legacy_get_tree+0x109/0x220 fs/fs_context.c:610
+       vfs_get_tree+0x8d/0x2f0 fs/super.c:1489
+       do_new_mount fs/namespace.c:3145 [inline]
+       path_mount+0x132a/0x1e20 fs/namespace.c:3475
+       do_mount fs/namespace.c:3488 [inline]
+       __do_sys_mount fs/namespace.c:3697 [inline]
+       __se_sys_mount fs/namespace.c:3674 [inline]
+       __x64_sys_mount+0x283/0x300 fs/namespace.c:3674
+       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+       do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
+       entry_SYSCALL_64_after_hwframe+0x63/0xcd
+
+-> #3 (&array[i].journal_rwsem){++++}-{3:3}:
+       down_read+0x9c/0x450 kernel/locking/rwsem.c:1509
+       scan_curseg_cache+0xa7/0x3b0 fs/f2fs/node.c:2404
+       __f2fs_build_free_nids+0x761/0xe10 fs/f2fs/node.c:2516
+       f2fs_build_free_nids fs/f2fs/node.c:2531 [inline]
+       f2fs_build_node_manager+0x2007/0x2fb0 fs/f2fs/node.c:3316
+       f2fs_fill_super+0x3ade/0x7680 fs/f2fs/super.c:4334
+       mount_bdev+0x351/0x410 fs/super.c:1359
+       legacy_get_tree+0x109/0x220 fs/fs_context.c:610
+       vfs_get_tree+0x8d/0x2f0 fs/super.c:1489
+       do_new_mount fs/namespace.c:3145 [inline]
+       path_mount+0x132a/0x1e20 fs/namespace.c:3475
+       do_mount fs/namespace.c:3488 [inline]
+       __do_sys_mount fs/namespace.c:3697 [inline]
+       __se_sys_mount fs/namespace.c:3674 [inline]
+       __x64_sys_mount+0x283/0x300 fs/namespace.c:3674
+       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+       do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
+       entry_SYSCALL_64_after_hwframe+0x63/0xcd
+
+-> #2 (&nm_i->nat_tree_lock){++++}-{3:3}:
+       down_read+0x9c/0x450 kernel/locking/rwsem.c:1509
+       f2fs_down_read fs/f2fs/f2fs.h:2188 [inline]
+       f2fs_get_node_info+0x1ac/0x1070 fs/f2fs/node.c:564
+       f2fs_do_write_data_page+0x7f5/0x1e20 fs/f2fs/data.c:2728
+       f2fs_write_single_data_page+0x13f0/0x1920 fs/f2fs/data.c:2863
+       f2fs_write_cache_pages+0xaa8/0x2010 fs/f2fs/data.c:3115
+       __f2fs_write_data_pages fs/f2fs/data.c:3265 [inline]
+       f2fs_write_data_pages+0x4c7/0x1230 fs/f2fs/data.c:3292
+       do_writepages+0x1af/0x690 mm/page-writeback.c:2581
+       filemap_fdatawrite_wbc mm/filemap.c:388 [inline]
+       filemap_fdatawrite_wbc+0x147/0x1b0 mm/filemap.c:378
+       __filemap_fdatawrite_range+0xb8/0xf0 mm/filemap.c:421
+       file_write_and_wait_range+0xce/0x140 mm/filemap.c:777
+       f2fs_do_sync_file+0x3a4/0x2a20 fs/f2fs/file.c:275
+       f2fs_sync_file+0x13a/0x190 fs/f2fs/file.c:393
+       vfs_fsync_range+0x13e/0x230 fs/sync.c:188
+       generic_write_sync include/linux/fs.h:2882 [inline]
+       f2fs_file_write_iter+0x1840/0x31c0 fs/f2fs/file.c:4721
+       call_write_iter include/linux/fs.h:2186 [inline]
+       new_sync_write fs/read_write.c:491 [inline]
+       vfs_write+0x9ed/0xdd0 fs/read_write.c:584
+       ksys_write+0x12b/0x250 fs/read_write.c:637
+       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+       do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
+       entry_SYSCALL_64_after_hwframe+0x63/0xcd
+
+-> #1 (&sbi->cp_rwsem){++++}-{3:3}:
+       down_read+0x9c/0x450 kernel/locking/rwsem.c:1509
+       f2fs_down_read fs/f2fs/f2fs.h:2188 [inline]
+       f2fs_lock_op fs/f2fs/f2fs.h:2231 [inline]
+       f2fs_do_truncate_blocks+0x6ae/0x11e0 fs/f2fs/file.c:688
+       f2fs_truncate_blocks+0x7b/0x310 fs/f2fs/file.c:751
+       f2fs_truncate.part.0+0x498/0x7c0 fs/f2fs/file.c:803
+       f2fs_truncate include/linux/fs.h:806 [inline]
+       f2fs_setattr+0x1b00/0x2350 fs/f2fs/file.c:1010
+       notify_change+0xca7/0x1420 fs/attr.c:482
+       do_truncate+0x143/0x200 fs/open.c:65
+       handle_truncate fs/namei.c:3216 [inline]
+       do_open fs/namei.c:3561 [inline]
+       path_openat+0x2157/0x2a50 fs/namei.c:3714
+       do_filp_open+0x1ba/0x410 fs/namei.c:3741
+       do_sys_openat2+0x16d/0x4c0 fs/open.c:1310
+       do_sys_open fs/open.c:1326 [inline]
+       __do_sys_openat fs/open.c:1342 [inline]
+       __se_sys_openat fs/open.c:1337 [inline]
+       __x64_sys_openat+0x143/0x1f0 fs/open.c:1337
+       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+       do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
+       entry_SYSCALL_64_after_hwframe+0x63/0xcd
+
+-> #0 (mapping.invalidate_lock#5){++++}-{3:3}:
+       check_prev_add kernel/locking/lockdep.c:3097 [inline]
+       check_prevs_add kernel/locking/lockdep.c:3216 [inline]
+       validate_chain kernel/locking/lockdep.c:3831 [inline]
+       __lock_acquire+0x2a43/0x56d0 kernel/locking/lockdep.c:5055
+       lock_acquire kernel/locking/lockdep.c:5668 [inline]
+       lock_acquire+0x1e3/0x630 kernel/locking/lockdep.c:5633
+       down_read+0x9c/0x450 kernel/locking/rwsem.c:1509
+       filemap_invalidate_lock_shared include/linux/fs.h:811 [inline]
+       f2fs_vm_page_mkwrite+0x630/0x1c90 fs/f2fs/file.c:104
+       do_page_mkwrite+0x19b/0x680 mm/memory.c:2947
+       wp_page_shared mm/memory.c:3295 [inline]
+       do_wp_page+0x353/0x3370 mm/memory.c:3377
+       handle_pte_fault mm/memory.c:4949 [inline]
+       __handle_mm_fault+0x1f58/0x3c90 mm/memory.c:5073
+       handle_mm_fault+0x1b6/0x850 mm/memory.c:5219
+       do_user_addr_fault+0x475/0x1210 arch/x86/mm/fault.c:1428
+       handle_page_fault arch/x86/mm/fault.c:1519 [inline]
+       exc_page_fault+0x98/0x170 arch/x86/mm/fault.c:1575
+       asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+
+other info that might help us debug this:
+
+Chain exists of:
+  mapping.invalidate_lock#5 --> &mm->mmap_lock --> sb_pagefaults#2
+
+ Possible unsafe locking scenario:
+
+       CPU0                    CPU1
+       ----                    ----
+  lock(sb_pagefaults#2);
+                               lock(&mm->mmap_lock);
+                               lock(sb_pagefaults#2);
+  lock(mapping.invalidate_lock#5);
+
+ *** DEADLOCK ***
+
+2 locks held by syz-executor.2/24424:
+ #0: ffff88808236aa58 (&mm->mmap_lock){++++}-{3:3}, at: mmap_read_trylock include/linux/mmap_lock.h:136 [inline]
+ #0: ffff88808236aa58 (&mm->mmap_lock){++++}-{3:3}, at: do_user_addr_fault+0x276/0x1210 arch/x86/mm/fault.c:1369
+ #1: ffff888085076558 (sb_pagefaults#2){.+.+}-{0:0}, at: do_page_mkwrite+0x19b/0x680 mm/memory.c:2947
+
+stack backtrace:
+CPU: 1 PID: 24424 Comm: syz-executor.2 Not tainted 6.1.0-syzkaller-14565-ga27405b2ed9c #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/26/2022
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xd1/0x138 lib/dump_stack.c:106
+ check_noncircular+0x25f/0x2e0 kernel/locking/lockdep.c:2177
+ check_prev_add kernel/locking/lockdep.c:3097 [inline]
+ check_prevs_add kernel/locking/lockdep.c:3216 [inline]
+ validate_chain kernel/locking/lockdep.c:3831 [inline]
+ __lock_acquire+0x2a43/0x56d0 kernel/locking/lockdep.c:5055
+ lock_acquire kernel/locking/lockdep.c:5668 [inline]
+ lock_acquire+0x1e3/0x630 kernel/locking/lockdep.c:5633
+ down_read+0x9c/0x450 kernel/locking/rwsem.c:1509
+ filemap_invalidate_lock_shared include/linux/fs.h:811 [inline]
+ f2fs_vm_page_mkwrite+0x630/0x1c90 fs/f2fs/file.c:104
+ do_page_mkwrite+0x19b/0x680 mm/memory.c:2947
+ wp_page_shared mm/memory.c:3295 [inline]
+ do_wp_page+0x353/0x3370 mm/memory.c:3377
+ handle_pte_fault mm/memory.c:4949 [inline]
+ __handle_mm_fault+0x1f58/0x3c90 mm/memory.c:5073
+ handle_mm_fault+0x1b6/0x850 mm/memory.c:5219
+ do_user_addr_fault+0x475/0x1210 arch/x86/mm/fault.c:1428
+ handle_page_fault arch/x86/mm/fault.c:1519 [inline]
+ exc_page_fault+0x98/0x170 arch/x86/mm/fault.c:1575
+ asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+RIP: 0033:0x7f7704e2bd49
+Code: 48 8b 04 24 48 85 c0 74 17 48 8b 54 24 18 48 0f ca 48 89 54 24 18 48 83 f8 01 0f 85 9b 02 00 00 48 8b 44 24 10 48 8b 54 24 18 <48> 89 10 e9 c2 fd ff ff 48 8b 44 24 10 0f b7 10 48 8b 04 24 48 85
+RSP: 002b:00007fff6cf850f0 EFLAGS: 00010246
+RAX: 00000000200015c0 RBX: 0000000000000000 RCX: 0000000000000000
+RDX: 0000000020000080 RSI: 0000000000000000 RDI: 000055555625c2e8
+RBP: 00007fff6cf851e8 R08: 0000000000000000 R09: 0000000000000000
+R10: 00007f7704a08208 R11: 0000000000000246 R12: 00000000000f9793
+R13: 00007fff6cf85210 R14: 00007f7704fac050 R15: 0000000000000032
+ </TASK>
+
+
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
 
 
 _______________________________________________
