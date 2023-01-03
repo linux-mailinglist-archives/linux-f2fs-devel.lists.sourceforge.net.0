@@ -2,71 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 875F565C475
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jan 2023 18:03:45 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46D8965C4F9
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jan 2023 18:21:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pCkhR-0004yq-SD;
-	Tue, 03 Jan 2023 17:03:41 +0000
+	id 1pCkyz-0007H2-Qb;
+	Tue, 03 Jan 2023 17:21:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pCkhP-0004yj-R3
+ (envelope-from <jaegeuk@kernel.org>) id 1pCkyz-0007Gq-3M
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jan 2023 17:03:39 +0000
+ Tue, 03 Jan 2023 17:21:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=30A9UU58eLsJsI4fwFvg1Qv3IgMM+/V0q3hZS0jm2iE=; b=djvZ38HWU7trOqdatbTY0boh9n
- 5VOOUOtPqgY8upiHSIBgoCnH5CrgoY82ippzqrkAlausqYbpDSFrAdgWFtoUCtmM64YrVgClmO9dt
- Xbg1GmunBiNFX2E2sz1rjnKDW/ktYGoDONrQkeA9Y10GmzstoLTisLfaDy0MrFpCz1dM=;
+ bh=xsXH01p2ZHU26TavxncWmQl5temDvoXjUduGbHitBtY=; b=F3LSaBkhWW/TRJCe//aBNXlurg
+ fnH1HjMWO3S0dt9HhcnpjCSgdyXH/LUVM0lU2CahrBDKEHiSK8hOLfhrLuA8CZJl6ntHgJmXstc6C
+ PlAMDxFFWRd7EzDtAUQkD0ZWKldDxThTLobyRVmrkTFRpxAKvtmQ7Vb2c7Snf/gDGP0g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=30A9UU58eLsJsI4fwFvg1Qv3IgMM+/V0q3hZS0jm2iE=; b=Z+jYWbxr4kU6BmTgsykIVuqAAm
- HVL+/uzbHElhF0xuHIYghMJqMseyeRC/efz0ipZGJHtGOEpUoi/OJLh7Zd6SCOVuRemqp54f5+FPk
- FSwvx5+3DpOWiGn2kjARidOcWFHPnStbCRgNG6VAVLMy4OcSRGMJvULaozJa5j1eFjtc=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ ;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=xsXH01p2ZHU26TavxncWmQl5temDvoXjUduGbHitBtY=; b=Lf2woJCJRwPE3NzJFSYIMhFlmE
+ 0lMKdFqNee4/YgHckFJjvURx8V5tGRmb1AV4//ACsK/mZNHx3J7btWFnALPtAeqvSQv1v3Mjy0PME
+ UrrBqBzAZLkqfK5LB83C6J/a/2VSlDPpVzVWW+D9GXBJzmLJ4OvtAl03I7cSaArWIF80=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pCkhG-0005We-HB for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jan 2023 17:03:32 +0000
+ id 1pCkyu-0006Fi-Rc for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Jan 2023 17:21:49 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 6FF5EB81023
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  3 Jan 2023 17:03:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 30ADBC433EF;
- Tue,  3 Jan 2023 17:03:22 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7255661499;
+ Tue,  3 Jan 2023 17:21:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3E8CC433EF;
+ Tue,  3 Jan 2023 17:21:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1672765402;
- bh=es9YEwfTJUiG5onbnN2r3/MT0gKlvyPEE1s/ihzxQ40=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=UNZHWsYsbqP+6kFXbs0mEDWbKzasYQXOzWNSySfJo2aBpZBLMQd3ExEN2Helh9NCb
- 24aus7w9kvod/v/bgH1nZQ9CsY9aGHPN+0ns2PwqrI/rg7PxO1nUA79YXN/PVMi1+G
- VEQ7lrz1Hf3XfTIvbN9cPTcepT0WUCI1mmE/9/YB8D2q3N0E0ChN1izfm3M7jzM6nV
- uhUlE/MGvnulY+Fgy3g9tMPZdpECESOD9FumiCd4XDDd92SYzConkj3XoJsBhUpKxr
- 12VAzMFjcMnTg/rG5cfJzmhuLeFmrmjbB9l3+d34QI33KIFjfI1ivb1+j3FoDHWOd+
- kuYTRz+TpFLtQ==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 0E6ACE5724E; Tue,  3 Jan 2023 17:03:22 +0000 (UTC)
+ s=k20201202; t=1672766498;
+ bh=ZyHwp988sZ12I9wUpcqJnIag8LKn4dqtFEX5E1v6dTM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=L5+SocAcVsRgVFso+7sdT7ZF8+HaKHIgyi70Vor3XTTgY0FDRqRnmJSbiOtk93rwn
+ sRs9acZY9HXE45mBrQqipA1WCYV3ezvff8/W6QpXVt3DeKEgHyDzZiDjn+FCKswuZF
+ A/Ceo0O0JgruvKf6i7oN0XOcsf4JsEMUqj4e0hYMfN5xBzsPfwIwuWUr3Nz5Q1t2Dn
+ Zzbjy9AWLjLgC+OEPqGY3pQ2SYzt+09QCy/vL2cn8rGhbOti9X04phlMojyUvnCTlJ
+ 4GRE2Elbhjyuu9c87CPGDpru/12rqnEJADC/EEx2sK/Id3COOZmW+Lipuby9see57r
+ m2QKN87YmKBpw==
+Date: Tue, 3 Jan 2023 09:21:37 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <Y7RkIbB5JAAJ3Rw6@google.com>
+References: <20221128091523.1242584-1-hch@lst.de>
 MIME-Version: 1.0
-From: patchwork-bot+f2fs@kernel.org
-Message-Id: <167276540205.24190.7786330518792341546.git-patchwork-notify@kernel.org>
-Date: Tue, 03 Jan 2023 17:03:22 +0000
-References: <20221230154332.5082-1-chao@kernel.org>
-In-Reply-To: <20221230154332.5082-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+Content-Disposition: inline
+In-Reply-To: <20221128091523.1242584-1-hch@lst.de>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -74,18 +71,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 30 Dec 2022 23:43:32 +0800 you
- wrote: > With below two cases, it will cause NULL pointer dereference when
- > accessing SM_I(sbi)->fcc_info in f2fs_issue_flush(). > > a) If kthread_run()
- fails i [...] 
+ Content preview:  Hi Christoph, I applied the patch set with minor modification
+ to address merge conflict. Could you please take a look?
+ https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/log/?h=dev-test&qt=author&q=Christoph+Hellwig
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -94,9 +89,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pCkhG-0005We-HB
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid NULL pointer dereference
- in f2fs_issue_flush()
+X-Headers-End: 1pCkyu-0006Fi-Rc
+Subject: Re: [f2fs-dev] a fix and a bunch of cleanups
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,40 +102,35 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello:
+Hi Christoph,
 
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
+I applied the patch set with minor modification to address merge conflict.
+Could you please take a look?
 
-On Fri, 30 Dec 2022 23:43:32 +0800 you wrote:
-> With below two cases, it will cause NULL pointer dereference when
-> accessing SM_I(sbi)->fcc_info in f2fs_issue_flush().
+https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/log/?h=dev-test&qt=author&q=Christoph+Hellwig
+
+Thanks,
+
+On 11/28, Christoph Hellwig wrote:
+> Hi Jaegeuk and Chao,
 > 
-> a) If kthread_run() fails in f2fs_create_flush_cmd_control(), it will
-> release SM_I(sbi)->fcc_info,
+> the first patch in this series fixes a warning and subsequent hang when
+> testing zoned f2fs.  The other patches are misc cleanups for the I/O path.
 > 
-> - mount -o noflush_merge /dev/vda /mnt/f2fs
-> - mount -o remount,flush_merge /dev/vda /mnt/f2fs  -- kthread_run() fails
-> - dd if=/dev/zero of=/mnt/f2fs/file bs=4k count=1 conv=fsync
-> 
-> [...]
-
-Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to avoid NULL pointer dereference in f2fs_issue_flush()
-    https://git.kernel.org/jaegeux/f2fs/c/b3d83066cbeb
-
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
-
+> Diffstat
+>  fs/f2fs/compress.c          |    2 
+>  fs/f2fs/data.c              |  544 ++++++++++++++++++++++----------------------
+>  fs/f2fs/extent_cache.c      |   19 -
+>  fs/f2fs/f2fs.h              |   24 -
+>  fs/f2fs/file.c              |   16 -
+>  fs/f2fs/gc.c                |    4 
+>  include/trace/events/f2fs.h |   11 
+>  7 files changed, 309 insertions(+), 311 deletions(-)
 
 
 _______________________________________________
