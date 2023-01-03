@@ -2,95 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46D8965C4F9
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jan 2023 18:21:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D923165C6B6
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jan 2023 19:50:30 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pCkyz-0007H2-Qb;
-	Tue, 03 Jan 2023 17:21:49 +0000
+	id 1pCmMm-0001KW-Fg;
+	Tue, 03 Jan 2023 18:50:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pCkyz-0007Gq-3M
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pCmMj-0001KP-EW
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jan 2023 17:21:49 +0000
+ Tue, 03 Jan 2023 18:50:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xsXH01p2ZHU26TavxncWmQl5temDvoXjUduGbHitBtY=; b=F3LSaBkhWW/TRJCe//aBNXlurg
- fnH1HjMWO3S0dt9HhcnpjCSgdyXH/LUVM0lU2CahrBDKEHiSK8hOLfhrLuA8CZJl6ntHgJmXstc6C
- PlAMDxFFWRd7EzDtAUQkD0ZWKldDxThTLobyRVmrkTFRpxAKvtmQ7Vb2c7Snf/gDGP0g=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=fRBmHQQhL9qSurZLLoVztwPAyki2TKqFdML50yCzWR0=; b=hPRde51dT7yzsnX3OYithJOGav
+ Hua5IkdvAHL6SGyl0TrG8oZSFYz2A/z92l3IEpzFIG6D8ROopygAh+P26AulesX51PPJNpwqrSbc7
+ JKEqwFtE9c3fSdbfwQNBKw7zrXOomhFWKt4qpzxMrOCPoCNqFR682MwVtaOGvEzPLzm8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=xsXH01p2ZHU26TavxncWmQl5temDvoXjUduGbHitBtY=; b=Lf2woJCJRwPE3NzJFSYIMhFlmE
- 0lMKdFqNee4/YgHckFJjvURx8V5tGRmb1AV4//ACsK/mZNHx3J7btWFnALPtAeqvSQv1v3Mjy0PME
- UrrBqBzAZLkqfK5LB83C6J/a/2VSlDPpVzVWW+D9GXBJzmLJ4OvtAl03I7cSaArWIF80=;
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=fRBmHQQhL9qSurZLLoVztwPAyki2TKqFdML50yCzWR0=; b=G
+ AzxFv+yqpTSAkRkNspFHn3/3iWMnkoqVOBf1IArTwUQn3xlrbYTfhhD2KCqV8f5inreqgQYEfN0X6
+ Lu+suaOh3PRKh/yMt9i+5TBXi+BoauY2FTOFmKfxw0mEyIw6DiLskwhY05ikSzkjFgZU4tlBXvXGt
+ 0sz72ONxAIGo8eH8=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pCkyu-0006Fi-Rc for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Jan 2023 17:21:49 +0000
+ id 1pCmMi-0003vl-Tb for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Jan 2023 18:50:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7255661499;
- Tue,  3 Jan 2023 17:21:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3E8CC433EF;
- Tue,  3 Jan 2023 17:21:38 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1FFFC614CE
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  3 Jan 2023 18:50:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 87EFEC433EF
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  3 Jan 2023 18:50:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1672766498;
- bh=ZyHwp988sZ12I9wUpcqJnIag8LKn4dqtFEX5E1v6dTM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=L5+SocAcVsRgVFso+7sdT7ZF8+HaKHIgyi70Vor3XTTgY0FDRqRnmJSbiOtk93rwn
- sRs9acZY9HXE45mBrQqipA1WCYV3ezvff8/W6QpXVt3DeKEgHyDzZiDjn+FCKswuZF
- A/Ceo0O0JgruvKf6i7oN0XOcsf4JsEMUqj4e0hYMfN5xBzsPfwIwuWUr3Nz5Q1t2Dn
- Zzbjy9AWLjLgC+OEPqGY3pQ2SYzt+09QCy/vL2cn8rGhbOti9X04phlMojyUvnCTlJ
- 4GRE2Elbhjyuu9c87CPGDpru/12rqnEJADC/EEx2sK/Id3COOZmW+Lipuby9see57r
- m2QKN87YmKBpw==
-Date: Tue, 3 Jan 2023 09:21:37 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <Y7RkIbB5JAAJ3Rw6@google.com>
-References: <20221128091523.1242584-1-hch@lst.de>
+ s=k20201202; t=1672771816;
+ bh=+uIU9xfkcyX7RWNnAFD5cI8hKU1cIJSE0Mo1RpDDqe0=;
+ h=Subject:From:Date:To:From;
+ b=DUbxhG5mI52ehtu6H2GbMCLYe1i1UmFxybPUDE3a2B8pNJjeBEdnLkP37bEHqiuYX
+ NWFI3mXkzFfnkY95hGhhbgzxJ+IIP36FHUgV3HuIXdRhTsKCjZMx/jEvmjjKTjssKt
+ U2z0fhn8HiZ4+aBJhUvRmjW2DtApEzqsfQKWDS/Te8Tz02iRCZDK6vzQUdK6x/3vrl
+ vd8Zq6l1UndFoGrc51n6iurFYE0OwpNhRMcs/xLXNjU2uUjF+PLnQK+ZRtPYuZ3sRf
+ Miuuxgc74ajVqwLehIAh/oYv0o4xk7ggKtfrPKEW0zo0VMLGzFKQprYGhRabCB8hL5
+ RMarBg+ec+o3g==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ 68271E5724C for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  3 Jan 2023 18:50:16 +0000 (UTC)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20221128091523.1242584-1-hch@lst.de>
-X-Spam-Score: -5.9 (-----)
+From: patchwork-bot+f2fs@kernel.org
+Message-Id: <167277181636.18849.2830383185297660901.git-patchwork-summary@kernel.org>
+Date: Tue, 03 Jan 2023 18:50:16 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Christoph, I applied the patch set with minor modification
- to address merge conflict. Could you please take a look?
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/log/?h=dev-test&qt=author&q=Christoph+Hellwig
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Series: fix per-block age-based
+ extent_cache Submitter: Jaegeuk Kim <jaegeuk@kernel.org> Committer: Jaegeuk
+ Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/project/f2fs/list/?series=7 [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pCkyu-0006Fi-Rc
-Subject: Re: [f2fs-dev] a fix and a bunch of cleanups
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pCmMi-0003vl-Tb
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,35 +108,38 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Christoph,
+Hello:
 
-I applied the patch set with minor modification to address merge conflict.
-Could you please take a look?
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/log/?h=dev-test&qt=author&q=Christoph+Hellwig
+Series: fix per-block age-based extent_cache
+  Submitter: Jaegeuk Kim <jaegeuk@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=705293
+  Lore link: https://lore.kernel.org/r/20221217004659.2092427-1-jaegeuk@kernel.org
+    Patches: [f2fs-dev,1/3] f2fs: initialize extent_cache parameter
+             [f2fs-dev,2/3] f2fs: don't mix to use union values in extent_info
+             [f2fs-dev,3/3] f2fs: should use a temp extent_info for lookup
 
-Thanks,
+Patch: [f2fs-dev] f2fs: let's avoid panic if extent_tree is not created
+  Submitter: Jaegeuk Kim <jaegeuk@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=706609
+  Lore link: https://lore.kernel.org/r/20221222235458.957816-1-jaegeuk@kernel.org
 
-On 11/28, Christoph Hellwig wrote:
-> Hi Jaegeuk and Chao,
-> 
-> the first patch in this series fixes a warning and subsequent hang when
-> testing zoned f2fs.  The other patches are misc cleanups for the I/O path.
-> 
-> Diffstat
->  fs/f2fs/compress.c          |    2 
->  fs/f2fs/data.c              |  544 ++++++++++++++++++++++----------------------
->  fs/f2fs/extent_cache.c      |   19 -
->  fs/f2fs/f2fs.h              |   24 -
->  fs/f2fs/file.c              |   16 -
->  fs/f2fs/gc.c                |    4 
->  include/trace/events/f2fs.h |   11 
->  7 files changed, 309 insertions(+), 311 deletions(-)
+
+Total patches: 4
+
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
 
 _______________________________________________
