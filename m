@@ -2,99 +2,152 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21FCD65AF2C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Jan 2023 11:01:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87BF365BEE8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Jan 2023 12:29:22 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pCHdd-0007rf-6j;
-	Mon, 02 Jan 2023 10:01:49 +0000
+	id 1pCfTn-0005C1-Lo;
+	Tue, 03 Jan 2023 11:29:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3hKuyYwkbAMk7DEzp00t6p44xs.v33v0t97t6r328t28.r31@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1pCHdc-0007rT-9Y for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Jan 2023 10:01:48 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <Yuwei.Guan@zeekrlife.com>) id 1pCfTm-0005Bn-Ib
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Jan 2023 11:29:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2gTVxH1zp8JSpYvuSq3RyaiZ87QO7AjNm6jJ2nVfpLg=; b=IIQW+IZLnDXpzqMXXg3eLZQUYY
- gEoJpeh5bSA6njjo7OZQvO1S/WN0s97Z6bpmyPz11alsor0KrzvdHxUK+Lm+EbgpxYHTJRzPNSfRy
- mdPVrM5SHkQe7K4U/ojJPM56JN6joyvInfhpOsN8Vjw8jxp0zZTV6V0T1aAhjIYJrh5g=;
+ bh=1+hbJMZgro+yDnnS7dcLQezoUfN2iLWX2xhJgPFJ1+k=; b=YaVRNZFG5MoPVjvAdJAendU8jl
+ 3rMIvLm7mivDCkA1LEMezGaX8dVOPrfQ3ksdxPhaU+pYlJ5lSpG8hyEDbwWzuwnJK3bxRDCVupTqU
+ INU2CRE2cWkBDFIiRfsGFDU2K1/blb6GaTSMDQL/4pkww+X3w9udzctsITObPLLyMS7I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=2gTVxH1zp8JSpYvuSq3RyaiZ87QO7AjNm6jJ2nVfpLg=; b=b
- OEGE6pdLslOdikZaxKi9N6F9YOYsTE7XS1K+SoRUbMcY6fi/Rp8gfS1RSHqkVsDIUYxLhhyuCpijm
- ekWMexlztCj1PGVqX8Rgh/DMqKJMz5tYDOlJlV95C1p54E/J0s6qfhUnoCMxulu+M8qJW8UYsVgva
- TLI/xwr3c5Q1sQgk=;
-Received: from mail-il1-f199.google.com ([209.85.166.199])
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=1+hbJMZgro+yDnnS7dcLQezoUfN2iLWX2xhJgPFJ1+k=; b=gBKFK6M7tVefgdj73qRNXhDmu2
+ w5aTpmbkvn606LaT5ml5GgFBK0eE05oX3/LuvWYL474kDWOslXJviVx3TjB4JSpitapY9UqEX+6Gh
+ YN1ocYRqdRHyTWvRV6jmFjUavvpRyaCQmSVSIyfRTXTG5+AI1p46oKwHkdr+V4voEMeY=;
+Received: from mail-psaapc01on2093.outbound.protection.outlook.com
+ ([40.107.255.93] helo=APC01-PSA-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pCHda-0007lh-EJ for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Jan 2023 10:01:48 +0000
-Received: by mail-il1-f199.google.com with SMTP id
- i14-20020a056e020d8e00b003034b93bd07so17726920ilj.14
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 02 Jan 2023 02:01:46 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2gTVxH1zp8JSpYvuSq3RyaiZ87QO7AjNm6jJ2nVfpLg=;
- b=3Lury3qJy/JcmwePMrjBvtEu7+ZeWCQUEtQxyigRuH5yO/NqLPgMskV87adlnylc1v
- QWBrSQquq/yhijAPlr46CuMQSxLHbJAd6e9Vus6Cl/f+DNUhCV+qBa+rxpC2In9CR1mJ
- qoo0xhjNfHdlSM1DgV2c80JcMDh6gxmFpJc3I7YoXUjBtorvNpjfDxPFNXZRHQHH9cQB
- L8nOqoFGvm0EQBPptHpmpF5NgkbbA6dBALyIY+QHfVdcMKhVoI4YDkg3h4+aW5K8pDOd
- uguKnfpxbyL+EkVQjY+6fXwMqxfWZX1ELJUmleCKTDEha23RUIZLv31Kk3wrxiCnW5Hf
- Yw6g==
-X-Gm-Message-State: AFqh2ko0hV9sndD4x1BIlp2oNv4S6vVFK67AueF70l7ZvbmBfHOEVATA
- cd1+xfhiTSjxsaeMbpwrdA3YvYloTiLBqpgXxsJ3qFD3SUwK
-X-Google-Smtp-Source: AMrXdXu4s9TXlbwA9vLcIWPeEO71I6oyEUfygDplgDzoYITeWFVQrFg4Jz5AHEBIW2DzsQP3QS5HGnpjbl7fpI/rEt5iQ7rXshIb
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1pCfTd-0005vR-2n for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Jan 2023 11:29:13 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=REWzGkejoyY5gQ/86jAStmvLKPbz9cyClgLbLa72erZ68sz2VX8dX0rCGxstjAdqvzR2biBZdTeG3LQ49mdZX5LXiDIXOpfVO3UKuQmHdYl3uFHF9cKprvfu3gs5jRp9rVH4MXrELqT4eOSfQQmDvFH5BuYDIc34ZycXtsnlJ2uUc7QM9CY31Rw4y2VinVR4a0YPdDrMi8hZ3f8odFc7MH0Qkd8CNUpgX74NDNwXKzIxOCevcg110IEUezGzJWaeVjstAtKLlAaqEmcTfnOAHXKWpkUMCOMSCahWhvSzJh48pMcxnnHpeMjPmFYw+NkThr24wBgtTJALNY8RfF4Ohw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1+hbJMZgro+yDnnS7dcLQezoUfN2iLWX2xhJgPFJ1+k=;
+ b=CmoAumzNg01Q7YzInYaJ5zHn63ks+MdhkwycjbQqSEPV/hAIYd/xqatoHXLQmgTehvWVjG9NwyuCvWc6UcXljtbLCsATfqABoQxoe3izanmevH0R1kT8Dn1ShQY4y3Lhj5+yVgaUKqgvfzyyt8c2bja5SJxBKKkHelko378IiVsSjrcPtjx+LybUjw18H4MUk7m9M/h/FUHWqJ9mZ8rrt3DVZbE4BFW+dUZVJoipyUyeOHXcA5KrMiislx9ufdiaAo/upvC/o9vtua6gsy8tFb4kAeSGOQFuuYu4o9OBToKFIWsgSwehWVfy+JbErEG9ZIW5lvjakFDUFPiqH9a/4A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 145.14.71.66) smtp.rcpttodomain=kernel.org smtp.mailfrom=zeekrlife.com;
+ dmarc=bestguesspass action=none header.from=zeekrlife.com; dkim=none (message
+ not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=geely.onmicrosoft.com; 
+ s=selector2-geely-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1+hbJMZgro+yDnnS7dcLQezoUfN2iLWX2xhJgPFJ1+k=;
+ b=Ej1dMEMZuSIo9MNIZeNdGA7gne3nN6HVrp2BoJHvEbKZUqnPtc6e3a4OIyyJmfvORctEZ0nFKTUZTPKAj7GrSEjDkKXqfs9eyXv4b5dL8kXLkfbh5uxvPufn3f3hsFmd1D0NUrWAReNtTh0ge66dFlVEnNGQ16bkSagVNYWUqJw=
+Received: from TY2PR06CA0047.apcprd06.prod.outlook.com (2603:1096:404:2e::35)
+ by SEZPR02MB5829.apcprd02.prod.outlook.com (2603:1096:101:38::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5944.19; Tue, 3 Jan
+ 2023 11:28:53 +0000
+Received: from TYZAPC01FT031.eop-APC01.prod.protection.outlook.com
+ (2603:1096:404:2e:cafe::c2) by TY2PR06CA0047.outlook.office365.com
+ (2603:1096:404:2e::35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5966.19 via Frontend
+ Transport; Tue, 3 Jan 2023 11:28:53 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 145.14.71.66)
+ smtp.mailfrom=zeekrlife.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none header.from=zeekrlife.com;
+Received-SPF: Pass (protection.outlook.com: domain of zeekrlife.com designates
+ 145.14.71.66 as permitted sender)
+ receiver=protection.outlook.com; 
+ client-ip=145.14.71.66; helo=CN-BJI-EXP58.Geely.Auto; pr=C
+Received: from CN-BJI-EXP58.Geely.Auto (145.14.71.66) by
+ TYZAPC01FT031.mail.protection.outlook.com (10.118.152.180) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.5944.17 via Frontend Transport; Tue, 3 Jan 2023 11:28:52 +0000
+Received: from CN-BJI-EXP64.Geely.Auto (10.186.65.77) by
+ CN-BJI-EXP58.Geely.Auto (10.186.65.70) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.14; Tue, 3 Jan 2023 19:28:36 +0800
+Received: from CN-BJI-EXP64.Geely.Auto ([::1]) by CN-BJI-EXP64.Geely.Auto
+ ([fe80::98fc:ab7:7b38:dd47%8]) with mapi id 15.01.2176.014; Tue, 3 Jan 2023
+ 19:28:36 +0800
+From: =?utf-8?B?566h546J5LyfKOerueWumCk=?= <Yuwei.Guan@zeekrlife.com>
+To: Chao Yu <chao@kernel.org>, "jaegeuk@kernel.org" <jaegeuk@kernel.org>
+Thread-Topic: [PATCH v3] f2fs: deliver the accumulated 'issued' to
+ __issue_discard_cmd_orderly() to meet the max_requests limit
+Thread-Index: AQHZDtY1kK3k6y3j1EWxvg9ki6uGo65ttckAgB744bA=
+Date: Tue, 3 Jan 2023 11:28:36 +0000
+Message-ID: <e377b58f396741fe980556a25326a201@zeekrlife.com>
+References: <20221213093419.134-1-Yuwei.Guan@zeekrlife.com>
+ <ff5f1e9d-1f44-5a3b-4b76-d3cfa877b18b@kernel.org>
+In-Reply-To: <ff5f1e9d-1f44-5a3b-4b76-d3cfa877b18b@kernel.org>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.186.26.32]
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:803:b0:304:c661:f53 with SMTP id
- u3-20020a056e02080300b00304c6610f53mr3385441ilm.155.1672653700643; Mon, 02
- Jan 2023 02:01:40 -0800 (PST)
-Date: Mon, 02 Jan 2023 02:01:40 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000a8c57205f1450921@google.com>
-From: syzbot <syzbot+9b7be0f1263ed2dbfbba@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYZAPC01FT031:EE_|SEZPR02MB5829:EE_
+X-MS-Office365-Filtering-Correlation-Id: eec62e72-63d5-4868-9eb9-08daed7db175
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: ph4d8K1CzaMgxzAPT9R9KGtYMvksBfzo/HeLLsnqrZLrh58Xa8xwa4nL90m41P7IUrdKjcT/Nvwfq+/SVAtVjKHog2+Hakcn+oGMulY47actjgu7pEdYHiprNMsiw8lzMfIHUOGoJ+i4+/qfVZGekIMz+LGvvDPV//QmX8DSspPDqqsggN9RrJelhu5he4k210xdaj8p5ZNxBKqauQ/kU6/X+SB3czvt58N4iYcatP0XFjmOX9dmQO02clTJFdJtsbC+ryfus0KyAqe/rIqrSBwwkeQqDdFEgtUgCSulluOBT1uAsZgRffUZG3CmvAR9xLrD/6pY4k1O2y7R/98RiHJuaG5VYgftHeP4sSXqLvlwv/wKKjaTqYQRCmW9ZZIfF5wkbbWcIkSc05W6KuPuDTupYyLCrGlQeVT7C6xJeLgGvDvbBUEhzwScUV+CMa2eabwUKv31/0AUO47eJb0CAO3wPDtDA5Ll8ynOSpOl86X+D7w/QKEhtA+r7zfMR12sVyabnyHszdQY3oUHbVqgTyByOakBIngTnMaQdDNUTsQBi20Z5XKoOm7rriJ7SgObUgxW+t4TSbd54xmdU4KP5yo2pQDP4RK1nv/xfIM9yseVPHwXfQ0niU0YbSe2/3nWa24Ahbg3cnIktlroh2nEVr4vvenfRdZ9/PsUUtlWQC4+gBcyxR2UNd59HV7VHXWdFS8ACCvPx0yiKVGJYFkaVsrq15abRFAmaFDlf8MFvcjUJiFd1a/ZMvoOpFlAQmO5/v8P7Ftw3jHYB5U3FXMYJQ==
+X-Forefront-Antispam-Report: CIP:145.14.71.66; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CN-BJI-EXP58.Geely.Auto; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230022)(4636009)(346002)(396003)(39860400002)(136003)(376002)(451199015)(36840700001)(46966006)(40470700004)(2616005)(36860700001)(336012)(47076005)(83380400001)(40480700001)(86362001)(40460700003)(82310400005)(356005)(81166007)(82740400003)(36756003)(85182001)(2906002)(70206006)(54906003)(110136005)(36906005)(41300700001)(70586007)(8676002)(8936002)(316002)(5660300002)(4326008)(108616005)(53546011)(26005)(186003)(24736004)(478600001)(22166006)(36900700001);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: Zeekrlife.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2023 11:28:52.2505 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: eec62e72-63d5-4868-9eb9-08daed7db175
+X-MS-Exchange-CrossTenant-Id: 6af81d03-dafe-4d76-a257-3cc43cb0454f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=6af81d03-dafe-4d76-a257-3cc43cb0454f; Ip=[145.14.71.66];
+ Helo=[CN-BJI-EXP58.Geely.Auto]
+X-MS-Exchange-CrossTenant-AuthSource: TYZAPC01FT031.eop-APC01.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR02MB5829
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 1b929c02afd3
- Linux 6.2-rc1 git tree: upstream console output:
- https://syzkaller.appspot.com/x/log.txt?x=10e8d2e4480000
- kernel config: https://syzkaller.appspot.com/x/.config?x=2651619a26b [...]
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  > > > On 2022/12/13 17:34, Yuwei Guan wrote: > > Any of the
+ following scenarios will send more than the number of > > max_requests at
+ a time, which will not meet the design of the > > max_requests lim [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.199 listed in list.dnswl.org]
+ no trust [40.107.255.93 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.199 listed in wl.mailspike.net]
-X-Headers-End: 1pCHda-0007lh-EJ
-Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_abort_atomic_write
+ [40.107.255.93 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1pCfTd-0005vR-2n
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: deliver the accumulated 'issued' to
+ __issue_discard_cmd_orderly() to meet the max_requests limit
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,92 +159,127 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Bagas Sanjaya <bagasdotme@gmail.com>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+> 
+> 
+> On 2022/12/13 17:34, Yuwei Guan wrote:
+> > Any of the following scenarios will send more than the number of
+> > max_requests at a time, which will not meet the design of the
+> > max_requests limit.
+> >
+> > - Set max_ordered_discard larger than discard_granularity from userspace.
+> > - It is a small size device, discard_granularity can be tuned to 1 in
+> >    f2fs_tuning_parameters().
+> >
+> > We need to deliver the accumulated @issued to
+> > __issue_discard_cmd_orderly() to meet the max_requests limit.
+> >
+> > BTW, convert the parameter type of @issued in __submit_discard_cmd().
+> >
+> > Signed-off-by: Yuwei Guan <Yuwei.Guan@zeekrlife.com>
+> > Cc: Bagas Sanjaya <bagasdotme@gmail.com>
+> 
+> For the code part, it looks good to me.
+> 
+> Reviewed-by: Chao Yu <chao@kernel.org>
+> 
+Hi Jeageuk,
 
-syzbot found the following issue on:
+Could you help to review this commit.
 
-HEAD commit:    1b929c02afd3 Linux 6.2-rc1
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=10e8d2e4480000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=2651619a26b4d687
-dashboard link: https://syzkaller.appspot.com/bug?extid=9b7be0f1263ed2dbfbba
-compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
-
-Unfortunately, I don't have any reproducer for this issue yet.
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/d562ace1a56c/disk-1b929c02.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/39f000fe6b9e/vmlinux-1b929c02.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/1c67e48de5a0/bzImage-1b929c02.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+9b7be0f1263ed2dbfbba@syzkaller.appspotmail.com
-
-------------[ cut here ]------------
-kernel BUG at fs/inode.c:1763!
-invalid opcode: 0000 [#1] PREEMPT SMP KASAN
-CPU: 0 PID: 533 Comm: syz-executor.3 Not tainted 6.2.0-rc1-syzkaller #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/26/2022
-RIP: 0010:iput+0x68/0x80 fs/inode.c:1763
-Code: ff 83 e3 40 48 89 de e8 16 d0 9b ff 48 85 db 75 14 e8 3c d3 9b ff 48 89 ef e8 24 f7 ff ff 5b 5d e9 2d d3 9b ff e8 28 d3 9b ff <0f> 0b e8 d1 da e9 ff eb c5 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f
-RSP: 0018:ffffc90014357be0 EFLAGS: 00010293
-RAX: 0000000000000000 RBX: 0000000000000040 RCX: 0000000000000000
-RDX: ffff8880766d1d40 RSI: ffffffff81e57f18 RDI: 0000000000000007
-RBP: ffff88808c1e5960 R08: 0000000000000007 R09: 0000000000000000
-R10: 0000000000000040 R11: 0000000000000000 R12: ffff88808c1e04b0
-R13: 0000000000000000 R14: ffff88808c1e5960 R15: 0000000000000000
-FS:  00007f8898356700(0000) GS:ffff8880b9800000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f8898335718 CR3: 00000000290d3000 CR4: 0000000000350ef0
-Call Trace:
- <TASK>
- f2fs_abort_atomic_write+0xea/0x4f0 fs/f2fs/segment.c:196
- f2fs_ioc_commit_atomic_write+0x19f/0x260 fs/f2fs/file.c:2157
- __f2fs_ioctl+0x26f0/0xaaf0 fs/f2fs/file.c:4154
- f2fs_ioctl+0x18e/0x220 fs/f2fs/file.c:4242
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:870 [inline]
- __se_sys_ioctl fs/ioctl.c:856 [inline]
- __x64_sys_ioctl+0x197/0x210 fs/ioctl.c:856
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7f889768c0a9
-Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 f1 19 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007f8898356168 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
-RAX: ffffffffffffffda RBX: 00007f88977ac050 RCX: 00007f889768c0a9
-RDX: 0000000000000000 RSI: 000000000000f502 RDI: 0000000000000004
-RBP: 00007f88976e7ae9 R08: 0000000000000000 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
-R13: 00007ffc5d002faf R14: 00007f8898356300 R15: 0000000000022000
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:iput+0x68/0x80 fs/inode.c:1763
-Code: ff 83 e3 40 48 89 de e8 16 d0 9b ff 48 85 db 75 14 e8 3c d3 9b ff 48 89 ef e8 24 f7 ff ff 5b 5d e9 2d d3 9b ff e8 28 d3 9b ff <0f> 0b e8 d1 da e9 ff eb c5 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f
-RSP: 0018:ffffc90014357be0 EFLAGS: 00010293
-RAX: 0000000000000000 RBX: 0000000000000040 RCX: 0000000000000000
-RDX: ffff8880766d1d40 RSI: ffffffff81e57f18 RDI: 0000000000000007
-RBP: ffff88808c1e5960 R08: 0000000000000007 R09: 0000000000000000
-R10: 0000000000000040 R11: 0000000000000000 R12: ffff88808c1e04b0
-R13: 0000000000000000 R14: ffff88808c1e5960 R15: 0000000000000000
-FS:  00007f8898356700(0000) GS:ffff8880b9800000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f8898335718 CR3: 00000000290d3000 CR4: 0000000000350ef0
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
+Thanks.
+> Thanks,
+> 
+> > ---
+> >   fs/f2fs/segment.c | 24 +++++++++++-------------
+> >   1 file changed, 11 insertions(+), 13 deletions(-)
+> >
+> > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c index
+> > a9099a754dd2..5268938466f5 100644
+> > --- a/fs/f2fs/segment.c
+> > +++ b/fs/f2fs/segment.c
+> > @@ -1097,8 +1097,7 @@ static void __update_discard_tree_range(struct
+> f2fs_sb_info *sbi,
+> >   /* this function is copied from blkdev_issue_discard from block/blk-lib.c
+> */
+> >   static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+> >                                               struct discard_policy *dpolicy,
+> > -                                             struct discard_cmd *dc,
+> > -                                             unsigned int *issued)
+> > +                                             struct discard_cmd *dc,
+> > + int *issued)
+> >   {
+> >       struct block_device *bdev = dc->bdev;
+> >       unsigned int max_discard_blocks = @@ -1379,8 +1378,8 @@ static
+> > void __queue_discard_cmd(struct f2fs_sb_info *sbi,
+> >       mutex_unlock(&SM_I(sbi)->dcc_info->cmd_lock);
+> >   }
+> >
+> > -static unsigned int __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
+> > -                                     struct discard_policy *dpolicy)
+> > +static void __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
+> > +                                     struct discard_policy *dpolicy,
+> > +int *issued)
+> >   {
+> >       struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
+> >       struct discard_cmd *prev_dc = NULL, *next_dc = NULL; @@ -1388,7
+> > +1387,6 @@ static unsigned int __issue_discard_cmd_orderly(struct
+> f2fs_sb_info *sbi,
+> >       struct discard_cmd *dc;
+> >       struct blk_plug plug;
+> >       unsigned int pos = dcc->next_pos;
+> > -     unsigned int issued = 0;
+> >       bool io_interrupted = false;
+> >
+> >       mutex_lock(&dcc->cmd_lock);
+> > @@ -1415,9 +1413,9 @@ static unsigned int
+> __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
+> >               }
+> >
+> >               dcc->next_pos = dc->lstart + dc->len;
+> > -             err = __submit_discard_cmd(sbi, dpolicy, dc, &issued);
+> > +             err = __submit_discard_cmd(sbi, dpolicy, dc, issued);
+> >
+> > -             if (issued >= dpolicy->max_requests)
+> > +             if (*issued >= dpolicy->max_requests)
+> >                       break;
+> >   next:
+> >               node = rb_next(&dc->rb_node); @@ -1433,10 +1431,8 @@
+> > static unsigned int __issue_discard_cmd_orderly(struct f2fs_sb_info
+> > *sbi,
+> >
+> >       mutex_unlock(&dcc->cmd_lock);
+> >
+> > -     if (!issued && io_interrupted)
+> > -             issued = -1;
+> > -
+> > -     return issued;
+> > +     if (!(*issued) && io_interrupted)
+> > +             *issued = -1;
+> >   }
+> >   static unsigned int __wait_all_discard_cmd(struct f2fs_sb_info *sbi,
+> >                                       struct discard_policy *dpolicy);
+> > @@ -1464,8 +1460,10 @@ static int __issue_discard_cmd(struct
+> f2fs_sb_info *sbi,
+> >               if (i + 1 < dpolicy->granularity)
+> >                       break;
+> >
+> > -             if (i + 1 < dcc->max_ordered_discard && dpolicy->ordered)
+> > -                     return __issue_discard_cmd_orderly(sbi, dpolicy);
+> > +             if (i + 1 < dcc->max_ordered_discard && dpolicy->ordered) {
+> > +                     __issue_discard_cmd_orderly(sbi, dpolicy, &issued);
+> > +                     return issued;
+> > +             }
+> >
+> >               pend_list = &dcc->pend_list[i];
+> >
 
 _______________________________________________
 Linux-f2fs-devel mailing list
