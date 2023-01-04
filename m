@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AA4165DE41
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DADB65DE42
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Jan 2023 22:15:34 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pDB6j-0003Tb-2u;
+	id 1pDB6j-0002Qd-DQ;
 	Wed, 04 Jan 2023 21:15:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <vishal.moola@gmail.com>) id 1pDB6g-0003Sv-Kg
+ (envelope-from <vishal.moola@gmail.com>) id 1pDB6h-0002Pt-9Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Jan 2023 21:15:30 +0000
+ Wed, 04 Jan 2023 21:15:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wLGgwLr/csaNeBIMYfbH9zx9j3AdiWGm09ROWOa5iAY=; b=QqRtaxYm5jLLEevi8ihJIgWsXw
- SgFo7LDh74Kwxnt90BRWY8wW6oRwwZCnmhDIHXH7WuLazBwgFeQ65efc9VVcSISQmQd11uJi3TzAr
- aGpvZYrjV4IU9Q8+xE3mSEbQnN1r6GyvZHOx1BE/kwZIjwCF6QltWfYeJtAwj/Z2xSy8=;
+ bh=BlC7rcv7uN/Ok17R0azuMVwGkvRCqLRr8I16XJ1l0Zg=; b=OGnuhGkuri2BSjeKjeCQc9gHxO
+ 6j1bj4xi9TdW1RMwmdpfQ9qkgyZF60CbK3V78kcJzxLQKM8YNbvKp9Ccpk+cwMUeVgQ+dgR1LLTu7
+ 76ItHfHTQ9qzCYCLbHv/Ou/lCMTknXRwpIhO4JfvFE43zYoj/Ydqhslm0WcVkb59FLsY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,56 +31,55 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wLGgwLr/csaNeBIMYfbH9zx9j3AdiWGm09ROWOa5iAY=; b=K3tiPS6gcMj5QbiPpI4Kpb+Eli
- sD/UbvrVjpBf+/nWhBogyRX0gy2mpXIp8sOo7WvYi28CmNvG76x8OwFxlhsuQyiqybAjEghmDnqI7
- JZ48vdTWjeoz5kr5X8us2jXNXoHRMNm5ZbhZwne88o2b4mrdFVQfcMGttVD4exSnnz8A=;
-Received: from mail-pj1-f46.google.com ([209.85.216.46])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=BlC7rcv7uN/Ok17R0azuMVwGkvRCqLRr8I16XJ1l0Zg=; b=AMjTUq1BapNZStJHcZ9qxhT3Vf
+ KdSuWQ6K3veH2YbDUNqPpqcs+1YKBve7RShJhSmb43xEdq8A7pzh7lO6AioCI0pqIvB1hS49SdZVQ
+ ykZwLNf05bx+ILzN8fD+rUtM/czjRmn0mWBWyB21JCpq2E2LpOvEOOuB4gzhdxnzva7c=;
+Received: from mail-pl1-f174.google.com ([209.85.214.174])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pDB6f-0050ya-52 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Jan 2023 21:15:29 +0000
-Received: by mail-pj1-f46.google.com with SMTP id
- n65-20020a17090a2cc700b0021bc5ef7a14so35837118pjd.0
+ id 1pDB6g-000563-NO for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Jan 2023 21:15:31 +0000
+Received: by mail-pl1-f174.google.com with SMTP id jn22so37170814plb.13
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 04 Jan 2023 13:15:29 -0800 (PST)
+ Wed, 04 Jan 2023 13:15:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wLGgwLr/csaNeBIMYfbH9zx9j3AdiWGm09ROWOa5iAY=;
- b=JiIf52J13fF3RZdd/gu8czce51QuNDKyRmp/RhQBZpiZeU3XEs1WalfwDAIkQP3i1h
- 7oaEZjWzR8v45uiToP37QSjLBQ6hFoKkzsu//TvxJBpZZTHSu/Ti+0DB14c/uViJpKft
- LemnBJAU1yNQKcrmO0+Bqi75NqwYHFoh6HrWlcKcA9N4lX0TdQaGXSiQJygzjTysgH/H
- Ppdlz/iLT+f5FltAthrg93ciA4z+S+CmoY6IExMFrN5abl65NskD8ykG3req494jeVOI
- SIJLZug6nx7VJLjV0ukQMkHOfmOMT4MrYPY4bGDi0laktjz8hyQhgyGhNDvAUwE+FMju
- 93bg==
+ bh=BlC7rcv7uN/Ok17R0azuMVwGkvRCqLRr8I16XJ1l0Zg=;
+ b=l0t6NL5SCvyD8kdyfFc7nOlzhreLq5VCcEZoAPCjS9SYlOOIdyy01o8enEBrI/r1kI
+ ge7wlbNG0U5OHLin8Sv0DJ9D+P9p9F9nvhdVsVzqSo2MjhW1QMKBlTmQftWK0E3Sq3mX
+ s5i3P5LahXYCAZDxiD7TON2xAC7xlyma9HMVO7+C60fEOzvSJBRZE+ygGDT49ocIptx1
+ ZqodBy1UQufx3eUsdyctWHg9lneTCyK6t6QfTsYnGyQ1gnGKfPEGcEh9fBK7H9Fo86Cv
+ 0aWOKjYHhKUcF745lohZ9dh0iABWPhdJYkbVa6/m4X3OwsSxOaXcOBpLjiswo+OAnLFc
+ jYVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wLGgwLr/csaNeBIMYfbH9zx9j3AdiWGm09ROWOa5iAY=;
- b=A8s7O6uAttrYKr9FLatslHtYdlsCDO9HcpEMn8kW8gzLP94dm86GdPDWD/6t2qFarb
- D2L8g/D4QdRxwFHk3e7NzOb6kHS0qU5JbFPr2JY8n9O4UrS/P1Xc9ktN03wTUTzUEuVC
- U6Hy1NuulC2+fWtT93R0dHVqV4aJcCdgdYrQvacC3EnmfCHL6fy/dYaXURroMP1bH57M
- gB+rB/VgXurV+9NpFIw98FzsMbMUKuWL+MFufUT8PjYA2gHLE4/YbBQTw1yJ+VqRauPX
- q67A+EwckLDeL9mj6Aipny48HiTJKaA0SyB/IeXNSbW6wr99fZ8YyRPm+5ZyB9NG/Jsi
- zG4g==
-X-Gm-Message-State: AFqh2kpmaezZUPe1k/0kv5FPQTMxejfRRrrtw4ARkljGSwsd+TbejDt2
- UIDaAgvxdO0EPteGfdeL34o=
-X-Google-Smtp-Source: AMrXdXs7s+m/7nsrgJ9l/mJQIpEV7Y/DeAKat3L22TbeUL9zUgX6QTynjS3828Iu+F7/uHuvxs7fOw==
-X-Received: by 2002:a17:90b:794:b0:219:64ca:49a0 with SMTP id
- l20-20020a17090b079400b0021964ca49a0mr53526904pjz.22.1672866923492; 
- Wed, 04 Jan 2023 13:15:23 -0800 (PST)
+ bh=BlC7rcv7uN/Ok17R0azuMVwGkvRCqLRr8I16XJ1l0Zg=;
+ b=Qhy8lYaiXAZIWZhWgGGb4tEtp1VcycR5eCq0tVi1kDJdAwnnRXs572npX9LUscS8b9
+ e3TMfr5alzETDcOiqYMMh2MRl9uYDQNzhTfRH7pe5pghH4sbK3f2t2bMsjIP53Kdt33G
+ Mu1QC4+6biQiEgZa17C0JW61+jsCtDEQTRYGHLI7ViYpXQlQufIJM7SdNpWlxa12jfMh
+ MYYwQTR/Z1llOuHHBMnRuSnE8sAOUAPyyz801Ip7W7w/eqbokFMHvv3q9de2Xsb9t587
+ kHIbk8OQfJsWdmDTFPQmfQ6eatPB/WQ9Deo1QSkC0O1b87bM5Jrh36qYEiL6ZqD8Ij8M
+ MNDg==
+X-Gm-Message-State: AFqh2kpXqIXMynvQcVdD2gI2OZZwrmSQgOccpJgzxQ3mAlVuy2qBsngV
+ p6XZl07hJDSjHrYde5KH+KM=
+X-Google-Smtp-Source: AMrXdXtmjSnTHrGQEHw6VbNzkxfY/pt2X9Tas5/n9E/HJyc3xHf0BuAuSYZ6Gu+13LxzPXvTYPQi8g==
+X-Received: by 2002:a17:90a:7341:b0:225:f7b3:aebf with SMTP id
+ j1-20020a17090a734100b00225f7b3aebfmr34765688pjs.30.1672866924907; 
+ Wed, 04 Jan 2023 13:15:24 -0800 (PST)
 Received: from fedora.hsd1.ca.comcast.net ([2601:644:8002:1c20::a55d])
  by smtp.googlemail.com with ESMTPSA id
- i8-20020a17090a138800b00226369149cesm6408pja.21.2023.01.04.13.15.22
+ i8-20020a17090a138800b00226369149cesm6408pja.21.2023.01.04.13.15.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Jan 2023 13:15:23 -0800 (PST)
+ Wed, 04 Jan 2023 13:15:24 -0800 (PST)
 From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
 To: linux-fsdevel@vger.kernel.org
-Date: Wed,  4 Jan 2023 13:14:44 -0800
-Message-Id: <20230104211448.4804-20-vishal.moola@gmail.com>
+Date: Wed,  4 Jan 2023 13:14:45 -0800
+Message-Id: <20230104211448.4804-21-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230104211448.4804-1-vishal.moola@gmail.com>
 References: <20230104211448.4804-1-vishal.moola@gmail.com>
@@ -96,15 +95,15 @@ X-Spam-Report: Spam detection software,
  preparation
  for the removal of find_get_pages_range_tag(). This change removes 1 call
  to compound_head(). Signed-off-by: Vishal Moola (Oracle) Acked-by: Ryusuke
- Konishi --- fs/nilfs2/segment.c | 15 +++++++-------- 1 file changed,
- 7 insertions(+), 8 deletions(-) 
+ Konishi --- fs/nilfs2/btree.c | 14 +++++++------- 1 file changed,
+ 7 insertions(+), 7 deletions(-) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.46 listed in list.dnswl.org]
+ no trust [209.85.214.174 listed in list.dnswl.org]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.46 listed in wl.mailspike.net]
+ [209.85.214.174 listed in wl.mailspike.net]
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [vishal.moola[at]gmail.com]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
@@ -117,9 +116,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1pDB6f-0050ya-52
-Subject: [f2fs-dev] [PATCH v5 19/23] nilfs2: Convert
- nilfs_lookup_dirty_node_buffers() to use filemap_get_folios_tag()
+X-Headers-End: 1pDB6g-000563-NO
+Subject: [f2fs-dev] [PATCH v5 20/23] nilfs2: Convert
+ nilfs_btree_lookup_dirty_buffers() to use filemap_get_folios_tag()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -148,49 +147,48 @@ compound_head().
 Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
 Acked-by: Ryusuke Konishi <konishi.ryusuke@gmail.com>
 ---
- fs/nilfs2/segment.c | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
+ fs/nilfs2/btree.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/fs/nilfs2/segment.c b/fs/nilfs2/segment.c
-index 8866af742a49..da56a9221277 100644
---- a/fs/nilfs2/segment.c
-+++ b/fs/nilfs2/segment.c
-@@ -737,20 +737,19 @@ static void nilfs_lookup_dirty_node_buffers(struct inode *inode,
- {
- 	struct nilfs_inode_info *ii = NILFS_I(inode);
- 	struct inode *btnc_inode = ii->i_assoc_inode;
+diff --git a/fs/nilfs2/btree.c b/fs/nilfs2/btree.c
+index b9d15c3df3cc..da6a19eede9a 100644
+--- a/fs/nilfs2/btree.c
++++ b/fs/nilfs2/btree.c
+@@ -2141,7 +2141,7 @@ static void nilfs_btree_lookup_dirty_buffers(struct nilfs_bmap *btree,
+ 	struct inode *btnc_inode = NILFS_BMAP_I(btree)->i_assoc_inode;
+ 	struct address_space *btcache = btnc_inode->i_mapping;
+ 	struct list_head lists[NILFS_BTREE_LEVEL_MAX];
 -	struct pagevec pvec;
 +	struct folio_batch fbatch;
  	struct buffer_head *bh, *head;
- 	unsigned int i;
  	pgoff_t index = 0;
- 
- 	if (!btnc_inode)
- 		return;
-+	folio_batch_init(&fbatch);
+ 	int level, i;
+@@ -2151,19 +2151,19 @@ static void nilfs_btree_lookup_dirty_buffers(struct nilfs_bmap *btree,
+ 	     level++)
+ 		INIT_LIST_HEAD(&lists[level]);
  
 -	pagevec_init(&pvec);
--
--	while (pagevec_lookup_tag(&pvec, btnc_inode->i_mapping, &index,
++	folio_batch_init(&fbatch);
+ 
+-	while (pagevec_lookup_tag(&pvec, btcache, &index,
 -					PAGECACHE_TAG_DIRTY)) {
 -		for (i = 0; i < pagevec_count(&pvec); i++) {
 -			bh = head = page_buffers(pvec.pages[i]);
-+	while (filemap_get_folios_tag(btnc_inode->i_mapping, &index,
-+				(pgoff_t)-1, PAGECACHE_TAG_DIRTY, &fbatch)) {
++	while (filemap_get_folios_tag(btcache, &index, (pgoff_t)-1,
++				PAGECACHE_TAG_DIRTY, &fbatch)) {
 +		for (i = 0; i < folio_batch_count(&fbatch); i++) {
 +			bh = head = folio_buffers(fbatch.folios[i]);
  			do {
- 				if (buffer_dirty(bh) &&
- 						!buffer_async_write(bh)) {
-@@ -761,7 +760,7 @@ static void nilfs_lookup_dirty_node_buffers(struct inode *inode,
- 				bh = bh->b_this_page;
- 			} while (bh != head);
+ 				if (buffer_dirty(bh))
+ 					nilfs_btree_add_dirty_buffer(btree,
+ 								     lists, bh);
+ 			} while ((bh = bh->b_this_page) != head);
  		}
 -		pagevec_release(&pvec);
 +		folio_batch_release(&fbatch);
  		cond_resched();
  	}
- }
+ 
 -- 
 2.38.1
 
