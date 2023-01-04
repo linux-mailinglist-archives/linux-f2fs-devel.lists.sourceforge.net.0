@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E671965CD6D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Jan 2023 07:59:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0BA265CD99
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Jan 2023 08:25:33 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pCxjl-0004PV-Sf;
-	Wed, 04 Jan 2023 06:58:57 +0000
+	id 1pCy9R-0004my-W4;
+	Wed, 04 Jan 2023 07:25:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1pCxjl-0004PP-9I
+ (envelope-from <ebiggers@kernel.org>) id 1pCy9Q-0004mn-Ir
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Jan 2023 06:58:57 +0000
+ Wed, 04 Jan 2023 07:25:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HVIAWYILR+5EU2tvIgAaJBt+h2tt6V4jE3TZ1pYxjm8=; b=GD1je2M29C2q7+NqGApmzVut0o
- vxOs3pulWFW+sA0pI7boBdsUqmuKTo3HsKZ6/GOpP9nwDqqSSrTI9JhMrVsX6Gb6f5+8y6ZxjGcdj
- CRe0sY7ApITzKZnFVB0a+JB0G9LnfjgGjh6Tk8rrtbXKfXNaA/x5xvwrexFCMuw7MpCk=;
+ bh=cceV+AtJ9MtZMomS+IjwOz6z8srT60OwVpOFRGB8GZM=; b=EmpTCJjX1F7Jn3jHnKc3uRN+yr
+ o9syHlEnMG4yQdJyOSYqQYwYTplPGMS95zIpDzRByB9WD6FyY8AHX2/AmUiBS7/ga7Xht0wy+AR6i
+ ArrO25sbgCC/RwR/GzeTZLPhlnz+ndGgw8vaEGsiEdeHkegDkZCvucJsr4utsYYBuz9I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,69 +31,68 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HVIAWYILR+5EU2tvIgAaJBt+h2tt6V4jE3TZ1pYxjm8=; b=SDVgcjNwI4ScDnC3VbGdyeJiuJ
- V+Nt+eD16QwSvu7wXNojc2JXDO7FODQ3lvnS7EyG+OsZuzWz2zghW9aTSS101jqRcma0YAg8b3j3h
- OmjNKziXIvcgDnCazbJhYof4sq1uE1tg7exhLH75fF1pShNezCMVg4+cWHl5ZEVrusL0=;
+ bh=cceV+AtJ9MtZMomS+IjwOz6z8srT60OwVpOFRGB8GZM=; b=mdD4eaCsKt4baLta+iQTi1jYFJ
+ I6rX+1QxdVcCMOmheLAFfDMzLKx6VESBUiG2bcP9pHLfx2AUVAk6DJoS/TJ3FjIlFLL4Z1l8AccKt
+ qxMq1cEhLrsrLTuq7yJv9ysuujW2lD18XYZaNM+NamonaV1uubjbzsRMsf89HBTanIHg=;
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pCxjh-0006uL-PH for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Jan 2023 06:58:57 +0000
+ id 1pCy9P-00080W-T1 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Jan 2023 07:25:28 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 7B6C7B81205
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  4 Jan 2023 06:58:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE594C433D2;
- Wed,  4 Jan 2023 06:58:45 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 9EA78B8119A;
+ Wed,  4 Jan 2023 07:25:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1AFCBC433D2;
+ Wed,  4 Jan 2023 07:25:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1672815526;
- bh=A5Zfogc/sz6TcmE5utXwOgFFIovnnjMqVtADVSdFIFk=;
+ s=k20201202; t=1672817120;
+ bh=EY0QIS6ah2VRlLsuBHHzFqCxhBDp5eEMXYtwzaAjNBw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=g352m9v8ZhEtl9aFsgP0fB9nHIZGxJuNzYxlZeLr2QMuZ2xwZJNHIVoD/kK/wTJvG
- 80A4d6n8rDCqYtZseIKP79DS/7GH6uAn1B8HjiP+sP7o+tkQtcCyx8gtpHROcTA6rj
- ev1K67aJPcJoqKHnfoKervDOk1KZpjDNlgehvmzGJKh6Y7vZAtmqfgFi55upmJDIKs
- XOcNz8B3Ble4MqcQxjghsLWiS5xfqajlSP4KE0UCAH8ezWGVt394GK5mDu+QInmZVX
- DSWGRLTWlh6QD6viJcScz3vfFjAkj0J/mYNopPHarc2ruFRZacaKmOOY8prQzO61YY
- ozGcEBBedHU1g==
-Date: Tue, 3 Jan 2023 22:58:44 -0800
+ b=Y8eevhPlbLQQByJxtZSN0ftIYXlnqoyA5BJUM6AP5KbL8Hdw0HMg2nuBQ5sdlamXc
+ LExL2VFObRchVEVgRsCm15mnz4C6rXRbtTsMN2cr4b6oRiHMmmABbSNflU3EWaJhst
+ 5J1PEpb3DqjERtGwRqlzrEMz3WeV19T0b43MtEWOjh9knfnp7tviL6qmTp7aHZSXLT
+ IEN/P6uhszJ2K9eZEk+XPP3yijgHtnJlqNNbbV7wSwv2r5oqXKVzoj6Y3IR7JL9E+a
+ vEiPUYFi+z+qSUbJ0/w3bVi8IcSNUBhhDXmmHc9rII8AQDlMi9JWlYLQi6CtdvuVhT
+ N9g/5kMqBLp7w==
+Date: Tue, 3 Jan 2023 23:25:18 -0800
 From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Message-ID: <Y7UjpFWy6R+J4BLV@sol.localdomain>
-References: <20221215060420.60692-1-ebiggers@kernel.org>
+To: Ojaswin Mujoo <ojaswin@linux.ibm.com>
+Message-ID: <Y7Up3kpGcJr0FCgq@sol.localdomain>
+References: <20221223203638.41293-1-ebiggers@kernel.org>
+ <Y7UeuYVkyy2/fWF1@li-bb2b2a4c-3307-11b2-a85c-8fa5c3a69313.ibm.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20221215060420.60692-1-ebiggers@kernel.org>
-X-Spam-Score: -2.7 (--)
+In-Reply-To: <Y7UeuYVkyy2/fWF1@li-bb2b2a4c-3307-11b2-a85c-8fa5c3a69313.ibm.com>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Dec 14, 2022 at 10:04:20PM -0800, Eric Biggers wrote:
- > From: Eric Biggers <ebiggers@google.com> > > I've gotten very little use
- out of these debug messages, and I'm not > aware of anyone else [...] 
- Content analysis details:   (-2.7 points, 6.0 required)
+ Content preview:  On Wed, Jan 04, 2023 at 12:08:09PM +0530,
+ Ojaswin Mujoo wrote:
+ > Hi Eric, > > I have roughly gone through the series and run the (patched)
+ xfstests on > this patchset on a powerpc machine with 64k pag [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [145.40.68.75 listed in list.dnswl.org]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pCxjh-0006uL-PH
-Subject: Re: [f2fs-dev] [PATCH] fsverity: remove debug messages and
- CONFIG_FS_VERITY_DEBUG
+X-Headers-End: 1pCy9P-00080W-T1
+Subject: Re: [f2fs-dev] [PATCH v2 00/11] fsverity: support for non-4K pages
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,39 +104,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-xfs@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-btrfs@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Andrey Albershteyn <aalbersh@redhat.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Dec 14, 2022 at 10:04:20PM -0800, Eric Biggers wrote:
-> From: Eric Biggers <ebiggers@google.com>
+On Wed, Jan 04, 2023 at 12:08:09PM +0530, Ojaswin Mujoo wrote:
+> Hi Eric,
 > 
-> I've gotten very little use out of these debug messages, and I'm not
-> aware of anyone else having used them.
+> I have roughly gone through the series and run the (patched) xfstests on
+> this patchset on a powerpc machine with 64k pagesize and 64k,4k and 1k
+> merkle tree size on EXT4 and everything seems to work correctly. 
 > 
-> Indeed, sprinkling pr_debug around is not really a best practice these
-> days, especially for filesystem code.  Tracepoints are used instead.
+> Just for records, test generic/692 takes a lot of time to complete with
+> 64k merkel tree size due to the calculations assuming it to be 4k,
+> however I was able to manually test that particular scenario. (I'll try
+> to send a patch to fix the fstest later).
 > 
-> Let's just remove these and start from a clean slate.
+> Anyways, feel free to add:
 > 
-> This change does not affect info, warning, and error messages.
+> Tested-by: Ojaswin Mujoo <ojaswin@linux.ibm.com>
 > 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> ---
->  fs/verity/Kconfig            |  8 --------
->  fs/verity/enable.c           | 11 -----------
->  fs/verity/fsverity_private.h |  4 ----
->  fs/verity/init.c             |  1 -
->  fs/verity/open.c             | 21 ++-------------------
->  fs/verity/signature.c        |  2 --
->  fs/verity/verify.c           | 13 -------------
->  7 files changed, 2 insertions(+), 58 deletions(-)
+> Since I was not very familiar with the fsverty codebase, I'll try to
+> take some more time to review the code and get back with any
+> comments/RVBs.
+> 
+> Regards,
+> ojaswin
 
-Applied for 6.3.  (To
-https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git/log/?h=fsverity for now,
-but there might be a new git repo soon, as is being discussed elsewhere.)
+Thanks Ojaswin!  That's a good point about generic/692.  The right fix for it is
+to make it use $FSV_BLOCK_SIZE instead of 4K in its calculations.
+
+I suppose you saw that issue by running the test on ext4 with fs_block_size ==
+page_size == 64K, causing xfstests to use merkle_tree_block_size == 64K by
+default.  Thanks for doing that; that's something I haven't been able to test
+yet.  My focus has been on merkle_tree_block_size < page_size.
+merkle_tree_block_size > 4K should just work, though, assuming
+merkle_tree_block_size <= min(fs_block_size, page_size).  (Or
+merkle_tree_block_size == fs_block_size == page_size before this patch series.)
 
 - Eric
 
