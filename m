@@ -2,118 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 951CB65CBA7
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Jan 2023 02:54:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74CCC65CBDC
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Jan 2023 03:25:49 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pCsyx-00088G-5j;
-	Wed, 04 Jan 2023 01:54:19 +0000
+	id 1pCtTN-0002T8-Cf;
+	Wed, 04 Jan 2023 02:25:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ssawgyw@gmail.com>) id 1pCsyv-000889-NR
+ (envelope-from <jaegeuk@kernel.org>) id 1pCtTL-0002T1-VL
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Jan 2023 01:54:17 +0000
+ Wed, 04 Jan 2023 02:25:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3ENfREs/+kE8uL6hKvwskOdg+lSrgQr9bKPvZeVGJsQ=; b=VOVRML7upPl4r0KAVzw344QWN+
- 9nqLqWB94GCbNQTHc/OBEiLn8gCxUWBkn7Lr3xcwGFhQHOnlbhm/2f9DsD9MDxVx8+TVMkGk4D8EF
- J31O8W1TbBEwieEUOJ5z1si7i7jOEjrJwWFJFj6ILUdr2TFfLat+VycnS5ypvWLOlKQo=;
+ bh=WhSQLQ9dypMheOZRekpu2UAZu53dZZ4woN14slyjKas=; b=RQ1UyVBPD5oeqv55iorjMmzfSw
+ y1QL6Jl4TBU2K0biICCI6Ye7hxmtncCeWgJ56ar9e/tGnP0iYVgzb62AXWjEJiGZbPjRgyYDCbw8E
+ rIwg9M/q8cFuQZF5XeIIK49dRYFqHdCI/6ISTpFbTECZuPnH51EyTV738mROdDmaHzHg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3ENfREs/+kE8uL6hKvwskOdg+lSrgQr9bKPvZeVGJsQ=; b=OvQBsdvNhAE7WY+eMDDfCpIW20
- NJYAfqEXx3RLfL6RsVE4RAvXPYuADOB59GaCkHK6U9i59me6ssdr3Hpqd5TMXMKwKhH4yReQxlhvZ
- HwYrobOxCc6ky/82YtMrdhGrEoplnsuCHK2H8hJ4pLTV9j3Qph7glLcsl0G2PA/CV4v8=;
-Received: from mail-lf1-f46.google.com ([209.85.167.46])
+ bh=WhSQLQ9dypMheOZRekpu2UAZu53dZZ4woN14slyjKas=; b=MikKswZvW7koZ/oUZMCMhShSpp
+ qqLsxaCsgqzO+mBy6gloDnprJYQHkhgVXBqW7dLRU+TA6+zgepBNRYqMgkE82XhYEFHQ05E4OH5VL
+ NfFKewCmZIPSoUKlGMakdrZsfqNxZbFg46IQE9kSVDigTaGQH3imI3Ajm8uKcM5JwHGI=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pCsyr-003xb5-IT for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Jan 2023 01:54:17 +0000
-Received: by mail-lf1-f46.google.com with SMTP id f34so48361401lfv.10
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 03 Jan 2023 17:54:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3ENfREs/+kE8uL6hKvwskOdg+lSrgQr9bKPvZeVGJsQ=;
- b=l2Oa3ChyCBqNbRs+zG8Q6BjSygUEBDXqjvOtb6ISycKB4uz13FzHAd2NeOuT80deCp
- F16Ls0b3Hdpp2sDdKdqrXl8/UYlrxyjvUeXNgVAB5u0L9AWtjUCfXBz/NyCx3BzRq69w
- SrJI+RN9AJ8gOkTUDJYsZuAC+SrK26Y0tfgdEhAIL9ZInzItPmdOXi6ISqi5hB3rWzyp
- LzT1CpRrx+yJdky8GmUENBZLxQ6IPW2F8yWHMjQpPERIrhnpL4mlBn+ute/muhBRkncO
- mJQsxGdcc5fHz8hnS+pF0KcU4A/meIIeMZQWHigy0Ppo6dciulyyraX0Yzj3WVydOPce
- 1Mdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3ENfREs/+kE8uL6hKvwskOdg+lSrgQr9bKPvZeVGJsQ=;
- b=Un7wntz+plpzY1fyyZpT+IT2iElVqTm7PLfPvmbN/oZ21B6KGKyIwvuMevDIAXWQgf
- KEOd3cD3AL7olDD7QMy2ND1+0bffzRyn/dbQbpec2RkK1J1zjt75QYSiNC/Uve00qzZW
- VS98ds6+nADmoSJKWlFV9Q0SYssNqiffeXk7SQyFH/4WzjcHBgBL1rAmd3V7ehldy0MW
- YhsBDbnYFmCc7FsCF1xuJC+sqtHU9RByXtBlrMPjrGeuO/c+csE+BQaEkW4Cd2ACz09Z
- bUtCAgB95HFCIvOf32UU2h0qMHeDiH9dTJXxzX9hDYpXfMl+XAaNEoJNieclF68LljV7
- 2h8A==
-X-Gm-Message-State: AFqh2kp9LbOkkdVjU+aXUdx/sP/wgxrVFu/DSi99/6wknR5YG5H8NS1/
- 0Cu5AcAxK+j74IwueeViiFDVSg3uSSKVMVsQX1wSLLH3WRkjFQ==
-X-Google-Smtp-Source: AMrXdXummYS5wWjhsB82C1I1nGXyx/WY06hs91ePQQc/dWXl7bXvUORru8MGAx3oYddjt38BMzgtQGyukuftT2d1NC4=
-X-Received: by 2002:ac2:53ae:0:b0:4b5:7968:630f with SMTP id
- j14-20020ac253ae000000b004b57968630fmr3152653lfh.351.1672797246897; Tue, 03
- Jan 2023 17:54:06 -0800 (PST)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1pCtTH-003yhe-EF for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Jan 2023 02:25:43 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 2E3CDB811AC;
+ Wed,  4 Jan 2023 02:25:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ACB1DC433EF;
+ Wed,  4 Jan 2023 02:25:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1672799129;
+ bh=oK2mDCxzprTJCQ6Rr1YJkLumKen+sr1SehohaD2wNYM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=MinH0ScOgSHfP1f9X11R3VKxQOT+0oCHAfQJjH6XS0wbHlObm4gu2IqDWW4hGH2WG
+ TQ9Ox6If7ucCXFSqpvAvLVfA3CcudhAO/qCztYytMeA4chtLjIVhG9kUQqgmd44c/w
+ olShQlxY6ttbVht3c0KFWp7Tm8Egyisq5RIJmS4cwtXnCN5izwJmYqT7qJxgW/tSeu
+ cMSy3davXhJm3GLmZy3NJnkDeILWuGpqlZEk3wQNzbXJjWwcXhcmCLLigAtWq+EET9
+ 6uIX/ZChxKZQUHe2I0oUrKdNWpzjpE7rwQUSt7fcRdC4tl9zJrTZ6fCMbWTmaUeaFx
+ 7H60HgxUtphMw==
+Date: Tue, 3 Jan 2023 18:25:28 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Yangtao Li <frank.li@vivo.com>
+Message-ID: <Y7TjmBqDo9IgUaZw@google.com>
+References: <20221212140540.5187-1-frank.li@vivo.com>
 MIME-Version: 1.0
-References: <20221230154332.5082-1-chao@kernel.org>
- <167276540205.24190.7786330518792341546.git-patchwork-notify@kernel.org>
-In-Reply-To: <167276540205.24190.7786330518792341546.git-patchwork-notify@kernel.org>
-From: Yuwei Guan <ssawgyw@gmail.com>
-Date: Wed, 4 Jan 2023 09:53:32 +0800
-Message-ID: <CALJQGLmws5BBdDUYp3qiytEWrCLegT6RA+M+9H7O1kYfoy6TXg@mail.gmail.com>
-To: patchwork-bot+f2fs@kernel.org
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+Content-Disposition: inline
+In-Reply-To: <20221212140540.5187-1-frank.li@vivo.com>
+X-Spam-Score: -5.9 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  于2023年1月4日周三 01:04写道： > > Hello: > > This
-    patch was applied to jaegeuk/f2fs.git (dev) > by Jaegeuk Kim : > > On Fri,
-    30 Dec 2022 23:43:32 +0800 you wrote: > > With below two cases [...] 
- 
- Content analysis details:   (-0.2 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 12/12,
+ Yangtao Li wrote: > The current discard_io_aware_gran
+ is a fixed value, change it to be > configurable through the sys node. >
+ > Signed-off-by: Yangtao Li <frank.li@vivo.com> > --- > v2: > - [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [ssawgyw[at]gmail.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.167.46 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.167.46 listed in wl.mailspike.net]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-X-Headers-End: 1pCsyr-003xb5-IT
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid NULL pointer dereference
- in f2fs_issue_flush()
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pCtTH-003yhe-EF
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: introduce discard_io_aware_gran
+ sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,35 +104,131 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-PHBhdGNod29yay1ib3QrZjJmc0BrZXJuZWwub3JnPiDkuo4yMDIz5bm0MeaciDTml6XlkajkuIkg
-MDE6MDTlhpnpgZPvvJoKPgo+IEhlbGxvOgo+Cj4gVGhpcyBwYXRjaCB3YXMgYXBwbGllZCB0byBq
-YWVnZXVrL2YyZnMuZ2l0IChkZXYpCj4gYnkgSmFlZ2V1ayBLaW0gPGphZWdldWtAa2VybmVsLm9y
-Zz46Cj4KPiBPbiBGcmksIDMwIERlYyAyMDIyIDIzOjQzOjMyICswODAwIHlvdSB3cm90ZToKPiA+
-IFdpdGggYmVsb3cgdHdvIGNhc2VzLCBpdCB3aWxsIGNhdXNlIE5VTEwgcG9pbnRlciBkZXJlZmVy
-ZW5jZSB3aGVuCj4gPiBhY2Nlc3NpbmcgU01fSShzYmkpLT5mY2NfaW5mbyBpbiBmMmZzX2lzc3Vl
-X2ZsdXNoKCkuCj4gPgo+ID4gYSkgSWYga3RocmVhZF9ydW4oKSBmYWlscyBpbiBmMmZzX2NyZWF0
-ZV9mbHVzaF9jbWRfY29udHJvbCgpLCBpdCB3aWxsCj4gPiByZWxlYXNlIFNNX0koc2JpKS0+ZmNj
-X2luZm8sCj4gPgo+ID4gLSBtb3VudCAtbyBub2ZsdXNoX21lcmdlIC9kZXYvdmRhIC9tbnQvZjJm
-cwo+ID4gLSBtb3VudCAtbyByZW1vdW50LGZsdXNoX21lcmdlIC9kZXYvdmRhIC9tbnQvZjJmcyAg
-LS0ga3RocmVhZF9ydW4oKSBmYWlscwo+ID4gLSBkZCBpZj0vZGV2L3plcm8gb2Y9L21udC9mMmZz
-L2ZpbGUgYnM9NGsgY291bnQ9MSBjb252PWZzeW5jCj4gPgo+ID4gWy4uLl0KPgo+IEhlcmUgaXMg
-dGhlIHN1bW1hcnkgd2l0aCBsaW5rczoKPiAgIC0gW2YyZnMtZGV2XSBmMmZzOiBmaXggdG8gYXZv
-aWQgTlVMTCBwb2ludGVyIGRlcmVmZXJlbmNlIGluIGYyZnNfaXNzdWVfZmx1c2goKQo+ICAgICBo
-dHRwczovL2dpdC5rZXJuZWwub3JnL2phZWdldXgvZjJmcy9jL2IzZDgzMDY2Y2JlYgo+CgpIaSBq
-ZWFnZXVrLApUaGVyZSBpcyBhIGNoYXJhY3RlciBlcnJvciBpbiBwYXRjaHdvcmsgY29uZmlndXJh
-dGlvbiwgOikuCjpzL2phZWdldXgvamVhZ2V1ay9nCgo+IFlvdSBhcmUgYXdlc29tZSwgdGhhbmsg
-eW91IQo+IC0tCj4gRGVldC1kb290LWRvdCwgSSBhbSBhIGJvdC4KPiBodHRwczovL2tvcmcuZG9j
-cy5rZXJuZWwub3JnL3BhdGNod29yay9wd2JvdC5odG1sCj4KPgo+Cj4KPiBfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+IExpbnV4LWYyZnMtZGV2ZWwgbWFp
-bGluZyBsaXN0Cj4gTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKPiBodHRw
-czovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVs
-CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgt
-ZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3Jn
-ZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgt
-ZjJmcy1kZXZlbAo=
+On 12/12, Yangtao Li wrote:
+> The current discard_io_aware_gran is a fixed value, change it to be
+> configurable through the sys node.
+> 
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> ---
+> v2:
+> - allow 0
+>  Documentation/ABI/testing/sysfs-fs-f2fs |  9 +++++++++
+>  fs/f2fs/f2fs.h                          |  3 +++
+>  fs/f2fs/segment.c                       |  3 ++-
+>  fs/f2fs/sysfs.c                         | 13 +++++++++++++
+>  4 files changed, 27 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+> index 9e3756625a81..7b6cd4cf40ce 100644
+> --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+> +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+> @@ -669,3 +669,12 @@ Contact:	"Ping Xiong" <xiongping1@xiaomi.com>
+>  Description:	When DATA SEPARATION is on, it controls the age threshold to indicate
+>  		the data blocks as warm. By default it was initialized as 2621440 blocks
+>  		(equals to 10GB).
+> +
+> +What:		/sys/fs/f2fs/<disk>/discard_io_aware_gran
+> +Date:		December 2022
+> +Contact:	"Yangtao Li" <frank.li@vivo.com>
+> +Description:	Controls background discard granularity of inner discard thread
+> +		when is not in idle. Inner thread will not issue discards with size that
+> +		is smaller than granularity. The unit size is one block(4KB), now only
+> +		support configuring in range of [0, 512].
+> +		Default: 512
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index e8953c3dc81a..bd1430d09c6d 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -332,6 +332,8 @@ struct discard_entry {
+>  #define DEFAULT_DISCARD_GRANULARITY		16
+>  /* default maximum discard granularity of ordered discard, unit: block count */
+>  #define DEFAULT_MAX_ORDERED_DISCARD_GRANULARITY	16
+> +/* default minimum granularity discard not be aware of I/O, unit: block count */
+> +#define DEFAULT_IO_AWARE_DISCARD_GRANULARITY	512
+
+It seems we don't need to add another dependency between this and MAX_PLIST_NUM.
+Can we use one?
+
+>  
+>  /* max discard pend list number */
+>  #define MAX_PLIST_NUM		512
+> @@ -410,6 +412,7 @@ struct discard_cmd_control {
+>  	unsigned int min_discard_issue_time;	/* min. interval between discard issue */
+>  	unsigned int mid_discard_issue_time;	/* mid. interval between discard issue */
+>  	unsigned int max_discard_issue_time;	/* max. interval between discard issue */
+> +	unsigned int discard_io_aware_gran; /* minimum discard granularity not be aware of I/O */
+>  	unsigned int discard_urgent_util;	/* utilization which issue discard proactively */
+>  	unsigned int discard_granularity;	/* discard granularity */
+>  	unsigned int max_ordered_discard;	/* maximum discard granularity issued by lba order */
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index a9099a754dd2..f4bf39ee31c6 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -1060,7 +1060,7 @@ static void __init_discard_policy(struct f2fs_sb_info *sbi,
+>  	dpolicy->granularity = granularity;
+>  
+>  	dpolicy->max_requests = dcc->max_discard_request;
+> -	dpolicy->io_aware_gran = MAX_PLIST_NUM;
+> +	dpolicy->io_aware_gran = dcc->discard_io_aware_gran;
+>  	dpolicy->timeout = false;
+>  
+>  	if (discard_type == DPOLICY_BG) {
+> @@ -2066,6 +2066,7 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
+>  	if (!dcc)
+>  		return -ENOMEM;
+>  
+> +	dcc->discard_io_aware_gran = DEFAULT_IO_AWARE_DISCARD_GRANULARITY;
+>  	dcc->discard_granularity = DEFAULT_DISCARD_GRANULARITY;
+>  	dcc->max_ordered_discard = DEFAULT_MAX_ORDERED_DISCARD_GRANULARITY;
+>  	if (F2FS_OPTION(sbi).discard_unit == DISCARD_UNIT_SEGMENT)
+> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> index 83a366f3ee80..5ab42da5f2a3 100644
+> --- a/fs/f2fs/sysfs.c
+> +++ b/fs/f2fs/sysfs.c
+> @@ -473,6 +473,17 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>  		return count;
+>  	}
+>  
+> +	if (!strcmp(a->attr.name, "discard_io_aware_gran")) {
+> +		if (t > MAX_PLIST_NUM)
+> +			return -EINVAL;
+> +		if (!f2fs_block_unit_discard(sbi))
+> +			return -EINVAL;
+> +		if (t == *ui)
+> +			return count;
+> +		*ui = t;
+> +		return count;
+> +	}
+> +
+>  	if (!strcmp(a->attr.name, "discard_granularity")) {
+>  		if (t == 0 || t > MAX_PLIST_NUM)
+>  			return -EINVAL;
+> @@ -825,6 +836,7 @@ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_request, max_discard_req
+>  F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, min_discard_issue_time, min_discard_issue_time);
+>  F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, mid_discard_issue_time, mid_discard_issue_time);
+>  F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_issue_time, max_discard_issue_time);
+> +F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_io_aware_gran, discard_io_aware_gran);
+>  F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_urgent_util, discard_urgent_util);
+>  F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_granularity, discard_granularity);
+>  F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_ordered_discard, max_ordered_discard);
+> @@ -960,6 +972,7 @@ static struct attribute *f2fs_attrs[] = {
+>  	ATTR_LIST(min_discard_issue_time),
+>  	ATTR_LIST(mid_discard_issue_time),
+>  	ATTR_LIST(max_discard_issue_time),
+> +	ATTR_LIST(discard_io_aware_gran),
+>  	ATTR_LIST(discard_urgent_util),
+>  	ATTR_LIST(discard_granularity),
+>  	ATTR_LIST(max_ordered_discard),
+> -- 
+> 2.25.1
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
