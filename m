@@ -2,65 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6C2C661CD8
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Jan 2023 04:47:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FC79661CDD
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Jan 2023 04:49:38 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pEj8c-0006lH-LA;
-	Mon, 09 Jan 2023 03:47:54 +0000
+	id 1pEjAG-0006oQ-FJ;
+	Mon, 09 Jan 2023 03:49:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pEj8b-0006lA-4q
+ (envelope-from <chao@kernel.org>) id 1pEjAF-0006oK-VJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Jan 2023 03:47:53 +0000
+ Mon, 09 Jan 2023 03:49:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=K2r7sas/9J1FBVf3GFl8ES5/XBH/KZQvSHm//SRNSRY=; b=BUrTMdEK9yE9Jesg0FFvFtzzv/
- luXd/G/SNh+3jHa2jv74cCenNfPztge36yeUvcgEk3NSQTzgHc9xpeK0tD7U5XeQ0UrlEzLK0OtnP
- KbSVWf1i5M7rgZ2RLBqdWT8eh5R1nPdf42Zo6RIP7VUmqLGIujR07JFohp/uhylbcsuM=;
+ bh=EWbsLOrxWTFiqQfMeqCVPDHd30PUivdO48Wj9KerfHs=; b=A9xpj8bdWp5a1Bn1UMpNxg/Ta9
+ JZv3FOHLMNY90wdIBt3yT07jjRikriIVD+G13GpJag7/zFkBgWQLWSVLgD84FNysfQ5dFniGmU11c
+ vKq2ATgVeLjBryXrkclUpVu9QK3jmiJ0mM8Hbkkmf7GfC2XM2kGQP+w3Hi/oaAmprzDg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=K2r7sas/9J1FBVf3GFl8ES5/XBH/KZQvSHm//SRNSRY=; b=G
- 0scjgZml8km7tzT0JbXOm2YQiLo1mi+qYnL+AtJWEpKh1PWJUBusuqfA8UAiLx269wq0Cj0dgg7wN
- 974zwdsNfJliEs3XBzFJ8n90BEk7oOlRu9J5+vQv7HyQ+BGR2GpHimeIKpHMEu/Tl+3m9B2N58JeJ
- YbRUFWK7YRNyWrXw=;
+ List-Owner:List-Archive; bh=EWbsLOrxWTFiqQfMeqCVPDHd30PUivdO48Wj9KerfHs=; b=m
+ Uv+Gjq7QLqLBJkoy1fBgw/+tOY0lpA2/I56d6NKvWpuImwRCpb8t1jTJIkGlNkwo3xhyuiQJ9hgVC
+ HkCJGznU+E/iTGxJT0yvvS3Hw04VpybttcHpUFc/Q6GNrVHnOulqRafl/JRtSZ+KZsXO/67RVVCNd
+ QpMpJeBSCYfXD4Mo=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pEj8a-0003h2-Il for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Jan 2023 03:47:53 +0000
+ id 1pEjAF-0003nv-CR for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 09 Jan 2023 03:49:35 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 32E1360E17
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 02EF960C38
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  9 Jan 2023 03:47:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 609E8C433D2;
- Mon,  9 Jan 2023 03:47:45 +0000 (UTC)
+ Mon,  9 Jan 2023 03:49:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48A10C433EF;
+ Mon,  9 Jan 2023 03:49:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1673236066;
- bh=bVMllKVymzErfe1oVh1phFGGebLRoiDWdp3ZzO703Ts=;
+ s=k20201202; t=1673236169;
+ bh=XDnCVXGXzYassBSR7qHkIyje/nQ1gYWjET1uSxSAlPU=;
  h=From:To:Cc:Subject:Date:From;
- b=J+WioKvUkcckgC2UD76uzWAjNEy9n/kAIXOBWoCOd3NS2G7/WWequuKcAo5Dqo7K/
- Opy/2V8Ajrn9dM1Jg22faM2CaHAY0UaIWKOQR8wn38wuuYoQnDmL6qieaXgPNPSgJi
- /tSxlZ1n/u9FdPSK/VUxwD4SFYk7SDXvbxSyF9Oc1MiiY3MoEpkMpGsTPgrL1uko2B
- FLi0fQ1nQDTgAo9RpyCokD/jt8TrWH+qhmAouTJZli0fTMgsj2yuMXxMCDlXUeA0KD
- 3+NYa4NkrKd8nJM9PJxUTpndWjXOw6Gnl+X9So6Ruh7KAEjZIHvS9WCZkfbn8YTp61
- DGk53B1hbGBaA==
+ b=QF0kQZFGD4IGR1HiSBf3nfIBQguOfRQngtDixAdlAUnAV+BatyEQTKxsIS3Kfd/z0
+ R6+IGFXydUKl+pYhhvbB6Dyl+gjsI1dxSENzXEOUcadIpYC6+0zev16t5ePdY6Es63
+ RegS/rIqusgco2qRB673yEyKjNwgvUCvJwPdu2EtL5IH4fWzSBwKBr56JWfkI5r6Yl
+ gk6SUmKiZ9H6rA814DjgEYIVLqgWG7deCvyk7IRKtbng+7QvDK2mragDgAaWMM7RHe
+ qhxqhg7T+CAPpCDaNSAAb1HLl88jXrgqMGHL+7POu9Gzt7479aJnRggNVwEjNmDQQn
+ jB+eB64wvQVVw==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Mon,  9 Jan 2023 11:47:34 +0800
-Message-Id: <20230109034734.491518-1-chao@kernel.org>
+Date: Mon,  9 Jan 2023 11:49:20 +0800
+Message-Id: <20230109034920.492914-1-chao@kernel.org>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Spam-Score: -5.9 (-----)
@@ -70,14 +70,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  f2fs_rename() has checked CP_ERROR_FLAG, so remove redundant
- check in f2fs_create_whiteout(). Signed-off-by: Chao Yu <chao@kernel.org>
- --- fs/f2fs/namei.c | 3 --- 1 file changed,
- 3 deletions(-) diff --git a/fs/f2fs/namei.c
- b/fs/f2fs/namei.c index 6032589099ce..82923273f4bb 100644 ---
- a/fs/f2fs/namei.c
- +++ b/fs/f2fs/namei.c @@ -926,9 +926,6 @@ static int f2fs_tmpfile(struct
- user_namespace *mn [...] 
+ Content preview:  In do_read_inode(), sanity_check_inode() should be called
+ after f2fs_init_read_extent_tree(),
+ fix it. Fixes: 72840cccc0a1 ("f2fs: allocate
+ the extent_cache by default") Signed-off-by: Chao Yu <chao@kernel.org> ---
+ fs/f2fs/inode.c | 12 ++++++------ 1 file changed, 6 insertions(+),
+ 6 deletions(-)
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +91,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pEj8a-0003h2-Il
-Subject: [f2fs-dev] [PATCH] f2fs: remove unneeded f2fs_cp_error() in
- f2fs_create_whiteout()
+X-Headers-End: 1pEjAF-0003nv-CR
+Subject: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on extent cache
+ correctly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,28 +110,45 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-f2fs_rename() has checked CP_ERROR_FLAG, so remove redundant check
-in f2fs_create_whiteout().
+In do_read_inode(), sanity_check_inode() should be called after
+f2fs_init_read_extent_tree(), fix it.
 
+Fixes: 72840cccc0a1 ("f2fs: allocate the extent_cache by default")
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/namei.c | 3 ---
- 1 file changed, 3 deletions(-)
+ fs/f2fs/inode.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index 6032589099ce..82923273f4bb 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -926,9 +926,6 @@ static int f2fs_tmpfile(struct user_namespace *mnt_userns, struct inode *dir,
- static int f2fs_create_whiteout(struct user_namespace *mnt_userns,
- 				struct inode *dir, struct inode **whiteout)
- {
--	if (unlikely(f2fs_cp_error(F2FS_I_SB(dir))))
--		return -EIO;
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index de5cd311ca79..574dee5d44e0 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -413,12 +413,6 @@ static int do_read_inode(struct inode *inode)
+ 		fi->i_inline_xattr_size = 0;
+ 	}
+ 
+-	if (!sanity_check_inode(inode, node_page)) {
+-		f2fs_put_page(node_page, 1);
+-		f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
+-		return -EFSCORRUPTED;
+-	}
 -
- 	return __f2fs_tmpfile(mnt_userns, dir, NULL,
- 				S_IFCHR | WHITEOUT_MODE, true, whiteout);
- }
+ 	/* check data exist */
+ 	if (f2fs_has_inline_data(inode) && !f2fs_exist_data(inode))
+ 		__recover_inline_status(inode, node_page);
+@@ -482,6 +476,12 @@ static int do_read_inode(struct inode *inode)
+ 	f2fs_init_read_extent_tree(inode, node_page);
+ 	f2fs_init_age_extent_tree(inode);
+ 
++	if (!sanity_check_inode(inode, node_page)) {
++		f2fs_put_page(node_page, 1);
++		f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
++		return -EFSCORRUPTED;
++	}
++
+ 	f2fs_put_page(node_page, 1);
+ 
+ 	stat_inc_inline_xattr(inode);
 -- 
 2.25.1
 
