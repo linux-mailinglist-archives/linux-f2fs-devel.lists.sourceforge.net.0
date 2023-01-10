@@ -2,98 +2,119 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 448266637BC
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Jan 2023 04:11:11 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D05F4664070
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Jan 2023 13:28:04 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pF52Z-0000Y2-6x;
-	Tue, 10 Jan 2023 03:11:07 +0000
+	id 1pFDjT-0001zx-N9;
+	Tue, 10 Jan 2023 12:27:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1pF52X-0000Xw-EW
+ (envelope-from <glider@google.com>) id 1pFDjH-0001zi-BY
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Jan 2023 03:11:05 +0000
+ Tue, 10 Jan 2023 12:27:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FIMKHxBnUpPOk81KstCAWXdFMV/G6QqdEE6uFGoYOso=; b=DntdOFdSC8ByQ4QXsV8LLcr1ay
- RWAInYO1lMs5dQcyC8VNnutyIeJEkfSZq9+hE2NVh68uZtUAJ5RLZNP7hhUJFFvHD1opVfZ1lzKud
- ZIYWfp4jRCKm3NtF86hpC3Ei+6uPrBhidmOMyCqWTh0Xdmexu+pFOKYcvrDJMoWAdoeE=;
+ bh=6KndhW8ZthnZXH5GZJH/lEnO//E0T9z85lpDRJv/Coo=; b=DhtKgPdJvEr1ZXALTJjQVIk4M+
+ LUnqCW/goOUJmwXRpCpVFJM0KaWcUrQOu4kEKqjU+dSjhUW6bnyP11BmQnVvcpEnmL12KyBbZx01U
+ S2kHcXUzdr0GkC5Rp8g/uV0tMUKXoGf+YIkkHyUHS7pkD2a7z2NtmRoTF3RStZUylT50=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FIMKHxBnUpPOk81KstCAWXdFMV/G6QqdEE6uFGoYOso=; b=Tqs3IB3V5BioEjjyDdFcoC/0ML
- qXI37h90BJWBrYLPDotfEXerGVbr6AdN1nsNOFQYybNWQEiqgWbi41iHcDuOrHnkDJ+WGc7o1ZwKV
- +DaUPs6X/PPH2E6rgGSVbXbohZ/cSwq+Mfeu/KFE1qO6SuhX32H9Pbc9jK+p/APGLyqA=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=6KndhW8ZthnZXH5GZJH/lEnO//E0T9z85lpDRJv/Coo=; b=SZ4vBW62wlp04Mim3O4uiKQIlK
+ t02bZiTL1VlsPxd67lePU1GjXFcA3Z34GloL9nGzTWY9lUj9Op+Ybu7Rh2xFv6wKUOuaXVGQDNoQs
+ BnDPPBfvKIFDigT1b5AX1lrJ/UVuAM13IqKCV4PhYC5FCabHyaK5BdOl6cPcBD48Psew=;
+Received: from mail-yb1-f171.google.com ([209.85.219.171])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pF52W-00CO8T-Mc for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Jan 2023 03:11:05 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 97A98B810DE;
- Tue, 10 Jan 2023 03:10:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13C58C433EF;
- Tue, 10 Jan 2023 03:10:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1673320256;
- bh=5NobUZe3e86WKsQ4ysdFkOmOmqcIBSN1keo/Nf7bv98=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ACfctoYBs5wi1feupJMe9VvOxeQIJMM5nrQwNmiCsToT47F8O1JSPDC53r7j98Hie
- ygskpNxEW8BTQT+iX61Eqd+KkTTpJ5sYjWcAimwT/+8yyQKIYG7srPe2mg1QuCJDXn
- qvssUtahGRb7IhvQCwFNdGgUs3nxR0Am1B7byOwQNUjMrPi1SO0eeW+rzMyRTEfnYp
- /ahZRGjcKFJJ09ckTVh4PPkcRe5gyBh3W1ZfAR2G8+FkYLgHtrDIE/Q5bOXRwt9dde
- DsKg9ToAo9oaTON9UdkOjX0B4UAgtK8OJ/xei+3gzSEIGadBLHsihDA+iYgEuhvId2
- Qox8Csj6RpLlA==
-Date: Mon, 9 Jan 2023 19:10:54 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Andrey Albershteyn <aalbersh@redhat.com>
-Message-ID: <Y7zXPoEQkmQs/Whw@sol.localdomain>
-References: <20221223203638.41293-1-ebiggers@kernel.org>
- <Y7xRIZfla92yzK9N@sol.localdomain>
- <20230109193446.mpmbodoctaddovpv@aalbersh.remote.csb>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1pFDjG-00Crcd-Aa for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Jan 2023 12:27:47 +0000
+Received: by mail-yb1-f171.google.com with SMTP id 16so11649747ybc.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 10 Jan 2023 04:27:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6KndhW8ZthnZXH5GZJH/lEnO//E0T9z85lpDRJv/Coo=;
+ b=fLHC6l/L0Ijx5D2CAJDRuaGTh0+lAqH7wRXf4FXEos/1kCMAzIGNE/a19cTVHPstyj
+ JwaTeSROjJgdKlGX2jhdbFh9OyFkzqux7VGs0+lrSZRTtt+esc/w3XrW1M+qkRBOzrNd
+ 2+HGDXTDKGfbMGyWkagwgv+cThJ+qjOtFr9rhUtHn7QO3oehJwbga1TlShhaSinIURvU
+ 54pzeCiKxGHjU4wHJ1X9db9bwm7ajet6de0BfVL4IT7QfNxXO2bScK09DianQE/OI7tU
+ jt+NXznD2zJ0+5lt87pz53ZPLKBDIvsa2HqYHFm4kDDKjA7Qdg+pqmsS6UU0Sqqna8hx
+ /OvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6KndhW8ZthnZXH5GZJH/lEnO//E0T9z85lpDRJv/Coo=;
+ b=O4P0SqqRhXqfHk/7Nm+mbtaXhINUT/4aAJ0d4vF443fgRcIPc4MavNzXq3PNxJl3I3
+ FomRMIc6whGxLZWL32Q0uxi+kcw+cSPl4aimFzUd21FjGWIfNVWYDvQVmnWeOB6OgeOX
+ SHAEhsLUGjzwYBNy3GbrNM3t5UmTFEzFNR6uXHHFl0Bammf77/toui5f3c2xRL0gN4NR
+ Qc4rYKitqaKtXxb5uNQd8WOwcMNBAVUm6emcaU20ZxuFzmk0c5Uw58mgTnt21rZgd74v
+ VSVTTYoqzQWW28lPEw/gQTu7DC4jkGhheMpOR9xmaK74XTCNEG34ghHRWJExVb39r0Bo
+ XCbQ==
+X-Gm-Message-State: AFqh2krZt9jLihvQcu+gLv+o2IwGSzSOmtzEXy7xL6n13GaA2eg5l9yI
+ tJ6tGU0gLUtoaBa48m+ww3QqkFlhQAJvjMKwMXdIJA==
+X-Google-Smtp-Source: AMrXdXuKs2wl/bseH+adSS22ymofeLisqiz/F7ZTp9k5notKnLu5IuY4AXMn8tcdHRycayafMh+GPeKHWlUwXyTIcIU=
+X-Received: by 2002:a25:bbc1:0:b0:6fd:ef90:2ae5 with SMTP id
+ c1-20020a25bbc1000000b006fdef902ae5mr5331591ybk.376.1673353659656; Tue, 10
+ Jan 2023 04:27:39 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230109193446.mpmbodoctaddovpv@aalbersh.remote.csb>
-X-Spam-Score: -2.7 (--)
+References: <20221121112134.407362-1-glider@google.com>
+ <20221121112134.407362-2-glider@google.com>
+ <20221122145615.GE5824@twin.jikos.cz>
+In-Reply-To: <20221122145615.GE5824@twin.jikos.cz>
+Date: Tue, 10 Jan 2023 13:27:03 +0100
+Message-ID: <CAG_fn=Waivo=jEEqp7uMjKXdAvqP3XPtnAQeiRfu6ptwPmkyjw@mail.gmail.com>
+To: dsterba@suse.cz
+X-Spam-Score: -15.7 (---------------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Jan 09, 2023 at 08:34:46PM +0100, Andrey Albershteyn
- wrote: > On Mon, Jan 09, 2023 at 09:38:41AM -0800, Eric Biggers wrote: >
- > On Fri, Dec 23, 2022 at 12:36:27PM -0800, Eric Biggers wrote: > [...] 
- Content analysis details:   (-2.7 points, 6.0 required)
+ Content preview:  On Tue, Nov 22,
+ 2022 at 3:56 PM David Sterba <dsterba@suse.cz>
+ wrote: > > On Mon, Nov 21, 2022 at 12:21:31PM +0100, Alexander Potapenko
+ wrote: > > When aops->write_begin() does not initialize fsdata, [...] 
+ Content analysis details:   (-15.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.219.171 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.171 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
+ white-list
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pF52W-00CO8T-Mc
-Subject: Re: [f2fs-dev] [PATCH v2 00/11] fsverity: support for non-4K pages
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
+ Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1pFDjG-00Crcd-Aa
+Subject: Re: [f2fs-dev] [PATCH 2/5] fs: affs: initialize fsdata in
+ affs_truncate()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,40 +126,39 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org
+From: Alexander Potapenko via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Alexander Potapenko <glider@google.com>
+Cc: tytso@mit.edu, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+ adilger.kernel@dilger.ca, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ akpm@linux-foundation.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jan 09, 2023 at 08:34:46PM +0100, Andrey Albershteyn wrote:
-> On Mon, Jan 09, 2023 at 09:38:41AM -0800, Eric Biggers wrote:
-> > On Fri, Dec 23, 2022 at 12:36:27PM -0800, Eric Biggers wrote:
-> > > [This patchset applies to mainline + some fsverity cleanups I sent out
-> > >  recently.  You can get everything from tag "fsverity-non4k-v2" of
-> > >  https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git ]
-> > 
-> > I've applied this patchset for 6.3, but I'd still greatly appreciate reviews and
-> > acks, especially on the last 4 patches, which touch files outside fs/verity/.
-> > 
-> > (I applied it to
-> > https://git.kernel.org/pub/scm/fs/fscrypt/fscrypt.git/log/?h=fsverity for now,
-> > but there might be a new git repo soon, as is being discussed elsewhere.)
-> > 
-> > - Eric
-> > 
-> 
-> The fs/verity patches look good to me, I've checked them but forgot
-> to send RVB :( Haven't tested them yet though
-> 
-> Reviewed-by: Andrey Albershteyn <aalbersh@redhat.com>
-> 
+On Tue, Nov 22, 2022 at 3:56 PM David Sterba <dsterba@suse.cz> wrote:
+>
+> On Mon, Nov 21, 2022 at 12:21:31PM +0100, Alexander Potapenko wrote:
+> > When aops->write_begin() does not initialize fsdata, KMSAN may report
+> > an error passing the latter to aops->write_end().
+> >
+> > Fix this by unconditionally initializing fsdata.
+> >
+> > Suggested-by: Eric Biggers <ebiggers@kernel.org>
+> > Fixes: 1da177e4c3f4 ("Linux-2.6.12-rc2")
+> > Signed-off-by: Alexander Potapenko <glider@google.com>
+>
+> With the fixed Fixes: reference,
+>
+> Acked-by: David Sterba <dsterba@suse.com>
 
-Thanks Andrey!  I added your Reviewed-by to patches 1-7 only, since you said
-"the fs/verity patches".  Let me know if I can add it to patches 8-11 too.
+Hi David,
 
-- Eric
+I've noticed that the ext4 counterpart of this patch is in the
+upstream tree already, whereas the affs, f2fs, hfs and hfsplus
+versions are not.
+Are they picked via a different tree?
 
 
 _______________________________________________
