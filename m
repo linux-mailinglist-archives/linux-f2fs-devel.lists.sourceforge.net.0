@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF17C665C86
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Jan 2023 14:31:07 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92986665CA2
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Jan 2023 14:34:29 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pFbC7-00080T-TO;
-	Wed, 11 Jan 2023 13:31:06 +0000
+	id 1pFbFM-0008L3-01;
+	Wed, 11 Jan 2023 13:34:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pFbC5-00080N-P0
+ (envelope-from <chao@kernel.org>) id 1pFbFK-0008Kx-Ng
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Jan 2023 13:31:04 +0000
+ Wed, 11 Jan 2023 13:34:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qr9pYB2VWIIzvrDlzhJZwoGhpz8ozCcA4Sf/TUh3dII=; b=Q73/J/QbI+Nl8oeoLZ1JewtHjl
- 226dhsNplyLfc4ZALD2KNk06F8zW2GgpdYDKEWwtLK7sGn3JzajKxy5vyr9upIBWUsv9ib3TxiW8j
- 09ODbsoPhIQyrIMt8TAzkp31QN21oBtfvc74WGiBuUSMAKEFfQh+75RblGMMnwM8mbkI=;
+ bh=uRMvlF7kzvJXvqL76PpA15a+26M2Xb1xUkQ0h7Vj4jA=; b=j4BTWgtAxz+cmYbEhV198Y/5zu
+ vZoGVZUbHecPKzOceXKPjZsGpvaFs1QiMnPpA1ZVr6VCwtHcgoGnqL2FowEibtab1YdBQIfg4UxHs
+ wRvOzm9tiawGNT+wuN1hZHIIxoklGIkpHJ0muzQUxjLUBxvexfvzcvJIE0N5chvWWhXQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,41 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qr9pYB2VWIIzvrDlzhJZwoGhpz8ozCcA4Sf/TUh3dII=; b=E4184Zph/oyz46sZSmIu2r7kCx
- aRd3DwGcuy0AdwEd83zSqdWp0ZS544vYlAC6bZoOLE+eMkpNx/8OCrA9gqPcOmpdohHpMKnhsM1cz
- 7uoM9t+Z2Jg3A5rLryij3r3eFRrfvUZx8hlczmg3r+an1VdRPTbyPFUT+1TMd7IVZyco=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=uRMvlF7kzvJXvqL76PpA15a+26M2Xb1xUkQ0h7Vj4jA=; b=mVTC4rWBmkRC8/b6MGGy37FhKm
+ o7URLn0QkECdiL3YrxT1QwrRu4NQjopGC7TWIDHM5/ZXRXfVPPHxBUukxOvQkB9BuhO1ag+KPm2Hg
+ FsYFvV5IigA/jvVUD7lHTRAYrryyIgzduF44he8meodNvGwddbEDN/Jn6RGJxGX41leA=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pFbC3-0003xC-Qz for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Jan 2023 13:31:04 +0000
+ id 1pFbFJ-000477-DX for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Jan 2023 13:34:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6A47161AFE;
- Wed, 11 Jan 2023 13:30:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E321DC433EF;
- Wed, 11 Jan 2023 13:30:56 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 23500B81BFA;
+ Wed, 11 Jan 2023 13:34:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 758EFC433EF;
+ Wed, 11 Jan 2023 13:34:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1673443857;
- bh=QSRDEhjQOIo+1Nf6WjkaaVUOZYxoWbLk6Ng5D63wRtk=;
+ s=k20201202; t=1673444057;
+ bh=YVZANdPbH/3BTa60dWNOCN4zdiN2W1PrF5Me7iiAayY=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=oZiIJdF6H8ADKwN3l2+goyFyMDs29JZDKum+lywwyA8Oj2xnomUR/PyFk/eT6DXKl
- P8YYzAkKiSgXhgHLlC03Rwrl7Z36MP6RvWFDjwB8J9NnFBOgePLTw5Q7mHtphMomvo
- mmIl2OkjFzGS2WQzLBs6GoOKYMfQpF+xuY7LSyC6QQgjd+Z1U19nPV3T/1iwfd5+kj
- X+vZSdMmPCwU4zPHQKrUBMvufd0M6QwhgokNPR6d1rpClVPxleHLLZDnPWRjR/mutD
- w8p8cwt6N4vc5C8zpCMWS+CGrM1NzegJaSjvn24oke3G6snbbdIzmAk5klds/RVaaE
- i3KPExJbosgvg==
-Message-ID: <8d71e53b-3ca0-3c84-acf0-5e8ec0952cc3@kernel.org>
-Date: Wed, 11 Jan 2023 21:30:55 +0800
+ b=dc2WvAuVHpGmhwqQXC+jB+D4VYt0AskCoXjZ1GcyLLMFV7w4gk6nYdHnwbP8mzstf
+ mK+kVTuXq02t3QqaVTsTiErWYtPspdxBF63kmgUS68eOajhpogUZEZ7jHVgagTcVU+
+ YxxV6yefsC0eWde+x6EZvPxYPMwlKdGM6TbRMhsiT6fLDETMqAQ0CyZeSbpTixzXXI
+ xo8G4d9/KuqAxpbHc9sVUzrtpek1Zk4q8EpuI1pyxyo/NNJUZkfFqlXsmgGfG2fuX2
+ +G41E9FS+GiAywYKtwIp7SiBHrv0RBV3uZpxEvCykEvU9Jptg56KFOEw8WMPpX4pJJ
+ KlVbHfrJW3SKw==
+Message-ID: <22eb9d58-f828-6094-00a4-c3cc9a9ce40a@kernel.org>
+Date: Wed, 11 Jan 2023 21:34:15 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.6.1
 Content-Language: en-US
 To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
-References: <20221220183904.53908-1-frank.li@vivo.com>
+References: <20221217052448.60656-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221220183904.53908-1-frank.li@vivo.com>
+In-Reply-To: <20221217052448.60656-1-frank.li@vivo.com>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -73,15 +73,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/12/21 2:39, Yangtao Li wrote: > There is no need to
- additionally use f2fs_show_injection_info() > to output information.
- Concatenate
- time_to_inject() and > __time_to_inject() via a macro. In t [...] 
+ Content preview:  On 2022/12/17 13:24, Yangtao Li wrote: > Commit 1cd2e6d54435
+ ("f2fs: define MIN_DISCARD_GRANULARITY macro") > introduce it, let's convert
+ to use MIN_DISCARD_GRANULARITY macro. > > Signed-off-by: Yangt [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -93,9 +92,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pFbC3-0003xC-Qz
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: merge f2fs_show_injection_info()
- into time_to_inject()
+X-Headers-End: 1pFbFJ-000477-DX
+Subject: Re: [f2fs-dev] [PATCH] f2fs: convert to use MIN_DISCARD_GRANULARITY
+ macro
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,16 +111,10 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/12/21 2:39, Yangtao Li wrote:
-> There is no need to additionally use f2fs_show_injection_info()
-> to output information. Concatenate time_to_inject() and
-> __time_to_inject() via a macro. In the new __time_to_inject()
-> function, pass in the caller function name and parent function.
+On 2022/12/17 13:24, Yangtao Li wrote:
+> Commit 1cd2e6d54435 ("f2fs: define MIN_DISCARD_GRANULARITY macro")
+> introduce it, let's convert to use MIN_DISCARD_GRANULARITY macro.
 > 
-> In this way, we no longer need the f2fs_show_injection_info() function,
-> and let's remove it.
-> 
-> Suggested-by: Chao Yu <chao@kernel.org>
 > Signed-off-by: Yangtao Li <frank.li@vivo.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
