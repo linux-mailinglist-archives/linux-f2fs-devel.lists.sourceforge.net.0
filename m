@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DD73665C7B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Jan 2023 14:26:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AD23665C83
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Jan 2023 14:30:27 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pFb80-00089h-Qq;
-	Wed, 11 Jan 2023 13:26:52 +0000
+	id 1pFbBQ-0008FI-Qe;
+	Wed, 11 Jan 2023 13:30:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pFb7z-00089X-N6
+ (envelope-from <chao@kernel.org>) id 1pFbBP-0008F8-Fh
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Jan 2023 13:26:51 +0000
+ Wed, 11 Jan 2023 13:30:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=h5oWv92woa8dmebZ0WjOPocOKZOXDpqdschKrhVKAWM=; b=Ygz6bQ6S3v8/ZYKlbnmg2NDuJY
- ZH/4zhepcejz+8bO39j0kffpSSRDsV6PdO4zX851aZZY8w8Y+BMdIkj2CL7JGt/D2E6AnrcuWxf9W
- aqXu9Db/prtYKrCngDWjW3KgP43EloJbrFUrt/vBtpHMETjwQt5u9rnVCDI649wf3DN4=;
+ bh=JPg8tMGtzJ+RJWfPZe9z/XnvC6B7yEsQzEYSlQV671Q=; b=T3PY22hN4b9TFNa1f7bfIWZZho
+ R6cruIcM9FiTuy9vF/QWdNY+bzWf13Mm1RFlIvwMqXitw5fZf4cuwvxdHLJ6F9mGo/B0GapxGSbAg
+ H3Jy4AuYs67fhHgB+EA+T3meVsHGMMjXQo3k5XhWyl7psdjmSks8J0mkTxsnu5mxtp5I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,41 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=h5oWv92woa8dmebZ0WjOPocOKZOXDpqdschKrhVKAWM=; b=B5oUStfWVau9sWoKYfGfi3yL6d
- weXZlZ5onxN4J4n9bdc1p+i7mQ86Ug9jkxZuKY7WUX7cvp1k02LfxGwOsnCG0dIU1glrmh5A0IMT8
- R+FuQuLVg4b0DaMP9c1mP3BIU52ql6cF/wH8ct8XWAstT/gUN7OiUT6ifZaqJ5i07oUw=;
-Received: from sin.source.kernel.org ([145.40.73.55])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=JPg8tMGtzJ+RJWfPZe9z/XnvC6B7yEsQzEYSlQV671Q=; b=g0UVvOPM4MZVK9NHbTXRIf6jwY
+ Bjzs+tKL8dO//2vYi27dxNCklMXBNWT5tlb8GHIO+QWQNw2/8UKPzjEOXCxAamwJqF5F7Y8+2Q/0B
+ 2r5eNsDmrdnDtTdNK6mQTkGpPJaz9H2/38q2+pPAFeKdzjG4mmibsaQfY7ovCIKZtD80=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pFb7x-0003mq-0q for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Jan 2023 13:26:50 +0000
+ id 1pFbBO-00DuPZ-Af for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Jan 2023 13:30:22 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 7D899CE1B9F;
- Wed, 11 Jan 2023 13:26:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFF97C433EF;
- Wed, 11 Jan 2023 13:26:33 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E2DD461D1B;
+ Wed, 11 Jan 2023 13:30:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A2ABC43396;
+ Wed, 11 Jan 2023 13:30:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1673443594;
- bh=5uTuSkRij3tB7MfvutYSz+QKNc1AdosporoRVPXJjFk=;
+ s=k20201202; t=1673443816;
+ bh=yqVgwWvB4/KMucLBOLI63/hATRZpVbXQMLtw0697zJI=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=JMUSmLn3nsr0FqbgNcr33Rn7Xr20dlr0DUAHpvqJgynkz9yh478mvYKm+3UmVEAk9
- 4vcApuxn3n2I5nF/IDWPdf9TLEcvuUfS0VBKdl6tSJFa9bFmMSmLybA5In96bI7mY4
- X7fqPX4Q4zsrjZYnSQPL9m6BU+PD45mQLaJMGJlqYtXkd5ZpCXE8EGTlur+lfDM1BY
- PYg492teGQVkuFF1Ahi6n5YB1KQQkcilKAH9XLN0k2kXz5D3eNlSVlT7O8DVHk+nSN
- DOyzlPbmTLd9IMI/Yabr5zcjoGxXTaVq61ZMv6BuHJ9RY+XUhjEAfMYBGeqwgi0rFO
- bPmSiA/d4yLPQ==
-Message-ID: <c22f71b9-84e5-3a1c-34a9-a29e6c31de98@kernel.org>
-Date: Wed, 11 Jan 2023 21:26:32 +0800
+ b=FuWmDJHbYuPi3yPnixcamijaM6M03H1GVoryiqGjS30zSx82mZxgh1i85zC5k1sOl
+ R/7jvsJqf4Y65BMFEWKPJ5GtcJUDCqE1iiEOzH8q/o5uJ/zeBcJQxu495xXVwB/XcM
+ bGZvd/RWHTVbyv/Lam7RCYRPVsJV3wfFwgxXJjKBjlCEVizBphfl4pJMGblGyvQVu0
+ IKp6wJiuD3s5UwkfirWXn/yfEGE2EHDsUT0NdqVAsdp44XkrZrQtdWDYJBj7Op2wx7
+ V2XP8OKZ31EOV/pgGRJOhqK9kfU+SGJ0oYT2ayn4JeCmQVLOnaBCWDhhxDdWd9tJXv
+ Orsd3For0y6EQ==
+Message-ID: <aed2e21a-84b1-667f-c194-dda01bdaef6c@kernel.org>
+Date: Wed, 11 Jan 2023 21:30:14 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.6.1
 Content-Language: en-US
 To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
-References: <20221220191212.58042-1-frank.li@vivo.com>
+References: <20221220185459.55950-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20221220191212.58042-1-frank.li@vivo.com>
+In-Reply-To: <20221220185459.55950-1-frank.li@vivo.com>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -73,14 +73,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2022/12/21 3:12, Yangtao Li wrote: > For example,
- f2fs_collapse_range(), 
- f2fs_collapse_range(), > f2fs_insert_range(),
- the functions used in f2fs_fallocate()
- > are all prefixed with f2fs_, so let's [...] 
+ Content preview:  On 2022/12/21 2:54,
+ Yangtao Li wrote: > After commit 4d67490498ac
+ ("f2fs: Don't create discard thread when > device doesn't support realtime
+ discard"), f2fs_issue_discard_timeout() > is not only calle [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -90,13 +91,11 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pFb7x-0003mq-0q
-Subject: Re: [f2fs-dev] [PATCH] f2fs: add a f2fs_ prefix to punch_hole() and
- expand_inode_data()
+X-Headers-End: 1pFbBO-00DuPZ-Af
+Subject: Re: [f2fs-dev] [PATCH] f2fs: update comment about
+ f2fs_issue_discard_timeout()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,16 +112,20 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2022/12/21 3:12, Yangtao Li wrote:
-> For example, f2fs_collapse_range(), f2fs_collapse_range(),
-> f2fs_insert_range(), the functions used in f2fs_fallocate()
-> are all prefixed with f2fs_, so let's keep the name consistent.
-> 
-> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+On 2022/12/21 2:54, Yangtao Li wrote:
+> After commit 4d67490498ac ("f2fs: Don't create discard thread when
+> device doesn't support realtime discard"), f2fs_issue_discard_timeout()
+> is not only called by f2fs_put_super().
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Actually, it also comes from error path of fill_super().
+
+We don't need to update this comments all the time, how about removing
+this since it's trivial.
 
 Thanks,
+
+> 
+> Let's update it.
 
 
 _______________________________________________
