@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1ED4D668809
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jan 2023 00:59:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25744668810
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jan 2023 01:01:38 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pG7Tl-0006hm-0E;
-	Thu, 12 Jan 2023 23:59:28 +0000
+	id 1pG7Vo-0007Yi-Pe;
+	Fri, 13 Jan 2023 00:01:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pG7Tj-0006hf-U4
+ (envelope-from <jaegeuk@kernel.org>) id 1pG7Vi-0007Ya-U8
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Jan 2023 23:59:27 +0000
+ Fri, 13 Jan 2023 00:01:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lcbXP+asppRr1xNZOVgHC/D60VbrcwgcDnA9W3xhXRs=; b=OrPTqOZYG1lO93ztLQ1O/HOu1J
- v5ocB+lAyUTu3UoeYkND6pCbdg+jR+3Z+97zcTd3piNNsPyvw4AuIdvDPPmLSvJst0vieHzL7seOZ
- N+L0ExxfFu2CjgXdrtuB9p83tMTl5xN87O5rmrvPINf4ZLn/dJDTfmBvZZSf9qoC3hkI=;
+ bh=8Pvf6nVfi/tb/160O3jMGIc7hB+bx1gYQIBs3IXKl2Y=; b=fPtjGpBQGE3sUtx5H/lqgryKJ3
+ ywL3MnfffMXbuKmg2NiZcrPpVdGUTcuTD8QFam10daV8dvP/tI+1Vdf7rnJ1kN+zNpS5dBGF4ClKw
+ oGBWDxxMtgSB/1cm0W5Zi0hKcgi7pBIY41lRk6w9wGohEdYhvdFc7LncjpD1du5vQvKQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,40 +31,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lcbXP+asppRr1xNZOVgHC/D60VbrcwgcDnA9W3xhXRs=; b=O7bvo/jYOIPU77Of4B1JPo3UHQ
- 4469J0x40kS7atNqxkstPK6cRpyzzWCFM//gAsw32sxKyuq43Yz9Q3DX7kVXVCh6t1god/eh/FtC7
- Y+bqIOZ3B8ZWbNhN3z4diG9UDrEX6BuHiKRhZWlzDFhuJ4GjdVZScaQ216AR0ea2M7wM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=8Pvf6nVfi/tb/160O3jMGIc7hB+bx1gYQIBs3IXKl2Y=; b=Xax1dT+2yU8HgKpL7juvtCVf97
+ CPuhrax5iktyTQE0BjOXFj6hbpxe0yZ5bQxv1d8oRzgugmt4ITTOhKosHDvqD0fPKeiBVK8gYzcPf
+ FrVejzz4MtMq0E17TXh229HKKO+EMZ5A1DCgiOZuMiiD4msgPUcg3nIull41CwOGks6g=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pG7Ti-001gY1-FN for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Jan 2023 23:59:27 +0000
+ id 1pG7Vh-001gfS-Ie for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 13 Jan 2023 00:01:30 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 34C80621DE;
- Thu, 12 Jan 2023 23:59:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7498BC433D2;
- Thu, 12 Jan 2023 23:59:19 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 4A161B815FA
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 13 Jan 2023 00:01:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D064EC433D2;
+ Fri, 13 Jan 2023 00:01:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1673567959;
- bh=y5277AjUhOZZfHLc0JpxLjlZ1u6nyxvQMiT0TtO78ic=;
+ s=k20201202; t=1673568082;
+ bh=TyMA7DoMSGx0SjncJKNHxuzQNLUrFJ8p4YaiwDyBuaY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=oSP7SUQHJ+Y8yvD3tsyOKydc70bLw9Y0q3ew0k/e/iDDDj1KyYnl0O6fnKpbXX5gk
- 60QBGDnOcxBGTixPo1jaruDDirh3onpyN3Y8H47e2a4N1PcFXLj043GsnCMaqBIo4C
- qm5WckIkmje3HcqYa16dgNuEadjzdjOXw8RUx1xCS2cgscJwJeWQ9iHkL1Mv19JcRG
- JyORgsyG/T0QiuLOStxFX06ua219Cnr3qcMt888vRU8Fnu4UMlUB6ThOUyjOtbwXgp
- VnXLQz3lMyptT55cK/GaE587Ai8mN8aiO14+JtE7g6lqtTdBYUl9yPESNt2/rMqO2a
- kivWqdkcIzM6g==
-Date: Thu, 12 Jan 2023 15:59:17 -0800
+ b=gR85rp8zy7pV4cJt2OoeWvGaL29TLrpklndP+zww6sarfVli/SfqswZRdJID+fOCU
+ GQlZ7+xybWobxHvp+nVagnFMn3QCWDe1USlPnq9jI0xqIt5kmAinmYY+oJGCLY7f71
+ Y86vFIjDv8AVW51swoLI1z51GDEljI6z4bYdqq3/QDlB2+lxsQwytCAlFQb3kUcSc7
+ /IScmkPgtQ8xrmn8G5WtgmW/pGoMY7n/2faRqebwkQZbvmjnjzl9IAScg5Fiz+IiSj
+ kCB1LU1CUkq9rBdfVS3psckS7YVjmgs1+pFgnhasG0Rr7A7IyA59whfvdwkre12e+8
+ 0BwjkL103gCQg==
+Date: Thu, 12 Jan 2023 16:01:20 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Yangtao Li <frank.li@vivo.com>
-Message-ID: <Y8Ce1XO0Qeo8AnHh@google.com>
-References: <Y78LNobSXGF5N3tn@google.com>
- <20230112151328.29124-1-frank.li@vivo.com>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <Y8CfUMsas4ZqVL0R@google.com>
+References: <20230105233908.1030651-1-jaegeuk@kernel.org>
+ <Y74O+5SklijYqMU1@google.com>
+ <77b18266-69c4-c7f0-0eab-d2069a7b21d5@kernel.org>
+ <Y78E9NpDxtvr2/Hs@google.com>
+ <bb9a9d1a-0d4c-b27e-e724-f99d5b8b4283@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230112151328.29124-1-frank.li@vivo.com>
+In-Reply-To: <bb9a9d1a-0d4c-b27e-e724-f99d5b8b4283@kernel.org>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,16 +76,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 01/12, Yangtao Li wrote: > Dear Jaegeuk, > > > Hi Yangtao,
- > > > > These are all in dev-test branch, which means you don't need to stack
- up more > > patches on top of it. I just integrated most of [...] 
+ Content preview:  On 01/12, Chao Yu wrote: > On 2023/1/12 2:50, Jaegeuk Kim
+ wrote: > > On 01/11, Chao Yu wrote: > > > On 2023/1/11 9:20, Jaegeuk Kim wrote:
+ > > > > In f2fs_update_inode_page, f2fs_get_node_page handles [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -90,9 +94,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pG7Ti-001gY1-FN
-Subject: Re: [f2fs-dev] [PATCH 1/4] f2fs: reset iostat_count in
- f2fs_reset_iostat()
+X-Headers-End: 1pG7Vh-001gfS-Ie
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: retry to update the inode page
+ given EIO
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,38 +108,67 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 01/12, Yangtao Li wrote:
-> Dear Jaegeuk,
-> 
-> > Hi Yangtao,
+On 01/12, Chao Yu wrote:
+> On 2023/1/12 2:50, Jaegeuk Kim wrote:
+> > On 01/11, Chao Yu wrote:
+> > > On 2023/1/11 9:20, Jaegeuk Kim wrote:
+> > > > In f2fs_update_inode_page, f2fs_get_node_page handles EIO along with
+> > > > f2fs_handle_page_eio that stops checkpoint, if the disk couldn't be recovered.
+> > > > As a result, we don't need to stop checkpoint right away given single EIO.
+> > > 
+> > > f2fs_handle_page_eio() only covers the case that EIO occurs on the same
+> > > page, should we cover the case EIO occurs on different pages?
 > > 
-> > These are all in dev-test branch, which means you don't need to stack up more
-> > patches on top of it. I just integrated most of them into two original patches.
+> > Which case are you looking at?
 > 
-> Ok, I'll merge the previous commits and resend next time.
+> - __get_node_page(PageA)		- __get_node_page(PageB)
+>  - f2fs_handle_page_eio
+>   - sbi->page_eio_ofs[type] = PageA->index
+> 					 - f2fs_handle_page_eio
+> 					  - sbi->page_eio_ofs[type] = PageB->index
 > 
-> > Could you please take a look at this?
-> 
-> LGTM.
-> 
-> > Applied with the fix.
-> 
-> Thanks!
-> 
-> BTW, I would like to ask whether it is possible to maintain discard in separated file.
-> 
-> https://patchwork.kernel.org/project/f2fs/patch/20221217132318.37718-1-frank.li@vivo.com/
+> In such race case, it may has low probability to set CP_ERROR_FLAG as we expect?
 
-Not worth.
+Do you see that case in products?
+I'm trying to avoid setting CP_ERROR_FLAG here.
 
 > 
-> MBR,
-> Yangtao
+> Thanks,
+> 
+> > 
+> > > 
+> > > Thanks,
+> > > 
+> > > > 
+> > > > Cc: stable@vger.kernel.org
+> > > > Signed-off-by: Randall Huang <huangrandall@google.com>
+> > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > > > ---
+> > > > 
+> > > >    Change log from v1:
+> > > >     - fix a bug
+> > > > 
+> > > >    fs/f2fs/inode.c | 2 +-
+> > > >    1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > 
+> > > > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> > > > index ff6cf66ed46b..2ed7a621fdf1 100644
+> > > > --- a/fs/f2fs/inode.c
+> > > > +++ b/fs/f2fs/inode.c
+> > > > @@ -719,7 +719,7 @@ void f2fs_update_inode_page(struct inode *inode)
+> > > >    	if (IS_ERR(node_page)) {
+> > > >    		int err = PTR_ERR(node_page);
+> > > > -		if (err == -ENOMEM) {
+> > > > +		if (err == -ENOMEM || (err == -EIO && !f2fs_cp_error(sbi))) {
+> > > >    			cond_resched();
+> > > >    			goto retry;
+> > > >    		} else if (err != -ENOENT) {
 
 
 _______________________________________________
