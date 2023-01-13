@@ -2,164 +2,121 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADF4F669111
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jan 2023 09:35:45 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2ADB76692D4
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 13 Jan 2023 10:26:48 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pGFXE-0000ne-VH;
-	Fri, 13 Jan 2023 08:35:35 +0000
+	id 1pGGKh-0002Ls-EM;
+	Fri, 13 Jan 2023 09:26:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tom@talpey.com>) id 1pGFWy-0000nN-F5
+ (envelope-from <error27@gmail.com>) id 1pGGKb-0002Ll-Ny
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jan 2023 08:35:19 +0000
+ Fri, 13 Jan 2023 09:26:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:Message-ID:
+ Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8vTBhXyIif/stiznOMHNZceBPP7AhXrVUJXFpMBI7nY=; b=lIQEBODFQaa8yq1ptrq/fnEQvY
- Nx5u/dTFWugO8HSqwmKQ/UL1lz95LEAIlEMWPFrV+RDiIi97NK4EiHk18MuQhbSMGH0F8pFwEf0ly
- N/2Li3x9Kdz0CUie9XtlYezCO91liqINfnUCbd6ZFrE50bgZ3dyMKF7T8d8lP088cI+E=;
+ bh=fBILbsDemyg2wqqLqcvsyl90/r+YyiYMgxhIHYXDi+k=; b=iEswwSoQLUINiXZBKy2f99pP6V
+ 4W3hvLqTOULfcFkJn4KCfLVs0eVGlFtyhLHJbI67hbIyk65v0oxVUHVWXmaiu8K8t1u24Rlk7+qBz
+ jNthpKuUltwHwrtfo5B3VH64j4yn/uaRFIviGez3iZ5JOaNRwTo40VijC3ZME80wzb+w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=8vTBhXyIif/stiznOMHNZceBPP7AhXrVUJXFpMBI7nY=; b=EHz/kHhXy5EP5aDSLgV6nvR7xd
- z55xjCWW92MlcAJoLIhReCWFSjhF5dUwkSPvYzfIAKg+FWhNA7ThvB7JUKOZwQ+2bZzFnQP+yny/0
- 7RVNQMudXdrg29sCQWr2cxiCBAgQVgXx8+pBOwYlM54FueI3IwDIihlPJxrGq3Ty8qqQ=;
-Received: from mail-bn7nam10on2085.outbound.protection.outlook.com
- ([40.107.92.85] helo=NAM10-BN7-obe.outbound.protection.outlook.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pGFWv-0000hk-PB for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 13 Jan 2023 08:35:18 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jja084DOvHz/ysl6drtblRoGPkerac58FjSfr5QRwAVlwwuNY7Xncux5MZZJ55R/Ta9O+KqcHTwHev6Esd1fBn3uFF+okKLkBUK69kL42NI4vxfPMyJm/BT9Xne/l+hGfeiZnM92dMimAGluE7s5Y4G2ZFnPz/zs0r22DS1WWe3mI3rNc0MclDLWEsU5q4ryNZQSmHu+YnIi65CDJzHYml8fMM19GdurQFgbvQ77TU2KZFts7CaK4gHUpZxo+jySN5vXywAxpx6WT6h04qCxF6Kjo8c5ovsmGJOD8hC0iHvyA8d8DVdg688eNxFBKi5E8NwbDxpaEF93NeCBSdi/Kw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8vTBhXyIif/stiznOMHNZceBPP7AhXrVUJXFpMBI7nY=;
- b=nfRhn1h8szrl94IYJ3gNSWNQhcQXifiKHWzdfUpVYr8oBBR5XETVQH/dCJipGP3SeZXIVlpiJWD3HUFv5swVMUh3KV5vCA+/rxc2Z9c5X8qYjsYg1fYP1YfZeQvJJuK/e/LcybG3ZR7uQw7BOPtNm7/bsIZP4/Tmp6+8gWfNHkdzs5KbA1J1w7qHUABuMSdrBosBz2lPkfdISOgIHrL228sDpQKXJ2Yjzr2EaGei91pcbV+TiUeZcl2M6KnTCe3hYFh2GsX0F6zLlHW9QM6/gfJkIRw1C71nnnUN174HAzDaRN1Dyd2aK+dPKXSV5YEpmo2Nd1hbtooh4JiOhRqEJA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
- dkim=pass header.d=talpey.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=talpey.com;
-Received: from SN6PR01MB4445.prod.exchangelabs.com (2603:10b6:805:e2::33) by
- MN0PR01MB7658.prod.exchangelabs.com (2603:10b6:208:379::14) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5986.18; Fri, 13 Jan 2023 03:03:28 +0000
-Received: from SN6PR01MB4445.prod.exchangelabs.com
- ([fe80::d8d6:449f:967:ccb5]) by SN6PR01MB4445.prod.exchangelabs.com
- ([fe80::d8d6:449f:967:ccb5%7]) with mapi id 15.20.5986.018; Fri, 13 Jan 2023
- 03:03:28 +0000
-Message-ID: <c2b5b3b4-d5d0-bf35-d659-b2328689073a@talpey.com>
-Date: Thu, 12 Jan 2023 22:03:27 -0500
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-To: Vishal Moola <vishal.moola@gmail.com>, linux-fsdevel@vger.kernel.org,
- pc@cjr.nz
-References: <20230104211448.4804-1-vishal.moola@gmail.com>
- <20230104211448.4804-10-vishal.moola@gmail.com>
- <CAOzc2pw9WCgHyA2epbz5=HEWN4bFzD4C7zL2452J_egv7iSLrw@mail.gmail.com>
-Content-Language: en-US
-From: Tom Talpey <tom@talpey.com>
-In-Reply-To: <CAOzc2pw9WCgHyA2epbz5=HEWN4bFzD4C7zL2452J_egv7iSLrw@mail.gmail.com>
-X-ClientProxiedBy: BL0PR02CA0054.namprd02.prod.outlook.com
- (2603:10b6:207:3d::31) To SN6PR01MB4445.prod.exchangelabs.com
- (2603:10b6:805:e2::33)
+ h=In-Reply-To:Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:
+ Sender:Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=fBILbsDemyg2wqqLqcvsyl90/r+YyiYMgxhIHYXDi+k=; b=j
+ acdrwHRrUAvIlx1EsnljDg/eeKZkT+ljXcqDD7I3GbUrKYNfSFYjzCgBUz9cTDzTePObdrTvsYe8i
+ FlaMxiAjStuqlR685w4WtU2Uz5Akel23W/BVm7b49WmyekzWLCIYXSTvmtuHRQTORTzeE1NXWXgpI
+ zeiRu90DXeq6d+LY=;
+Received: from mail-wm1-f42.google.com ([209.85.128.42])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1pGGKa-002HMq-2q for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 13 Jan 2023 09:26:36 +0000
+Received: by mail-wm1-f42.google.com with SMTP id g10so14835782wmo.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 13 Jan 2023 01:26:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
+ :to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fBILbsDemyg2wqqLqcvsyl90/r+YyiYMgxhIHYXDi+k=;
+ b=fDnrLkiFVnWaOqJFi04+e25RZGTzXZNK0Z4tY2UAkZd4pGEcQefkqsc47NF4wdpWYw
+ Zee7uHq+v1f5I6Y62wrG3xqc3r1Z96WGNOgC4jFtI4ROY/UFElDrTRWJCx4SdfRcCaWv
+ DvgpZMLVR+djCsm7n6wLlQETAlAkYL9xPXRPfixguiGWvoxUqX5gmxBaLibVczdUTPA7
+ T17ncV7HaNXzu7WGi6VJf5XvTzT+Axs2+4LsVnDEcPrWk9wFPUaq0xgHtLYKMaJi9/o2
+ MNh3jhS1Mg5AxALKIuM2mhIJ7dBDir2o2jJlA+h8FJNmsQ6TKMafLULzsT5k05dJuWmJ
+ dXYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
+ :to:from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fBILbsDemyg2wqqLqcvsyl90/r+YyiYMgxhIHYXDi+k=;
+ b=m9JAX4trMpSWaKAVqp21AQ1ZqZlwghK1+FZTX7VuDzepUkvmnWirQL1ifGnuNfgFKR
+ l0E1SyDXSOqSDZCVCDVoZixrKTi6l1DsLacJ4ggE23Lw0Nc5s0hC80NYEwQKFJ8SokGD
+ Gdr5ixIG9HfTSHPTyLQKTLsVhs40P/lyhHN2xv+O6T5AQ9IosKeKp+E4iW/9YSul9feX
+ 9l8K1MQ3R0I52IBw0b3wlYdKQueiuQ/VNiOPUCRfpdFmWDYEuQCiFpXPcwIlJxfQS8VA
+ GB518IZmD5dijAjRlm0Uad4bLgmHz9jpjvARiZgyYn2RQcLEIUmHeHAoKFLZMrOVxVjg
+ iTgw==
+X-Gm-Message-State: AFqh2koEx5PodMhT5Is6k7DvRwMRykV897ZWv+qXKMyL8TlAEpit5gBH
+ 4NEgDUH7JVJTbrc3f6Z81YA=
+X-Google-Smtp-Source: AMrXdXsGQPd5Vn8PcSQDQSMtm3zkObx3Shco6JYdBVaDiBPsQ8SiSmQKPkhuiBWzKQM7B2/YFy8P0g==
+X-Received: by 2002:a05:600c:3b93:b0:3d2:1bf6:5796 with SMTP id
+ n19-20020a05600c3b9300b003d21bf65796mr58748727wms.35.1673601989558; 
+ Fri, 13 Jan 2023 01:26:29 -0800 (PST)
+Received: from localhost ([102.36.222.112]) by smtp.gmail.com with ESMTPSA id
+ l3-20020a05600c4f0300b003a6125562e1sm26363824wmq.46.2023.01.13.01.26.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Jan 2023 01:26:28 -0800 (PST)
+Date: Fri, 13 Jan 2023 12:26:26 +0300
+From: Dan Carpenter <error27@gmail.com>
+To: oe-kbuild@lists.linux.dev, Yangtao Li <frank.li@vivo.com>,
+ jaegeuk@kernel.org, chao@kernel.org
+Message-ID: <202301131759.qq5Cubxn-lkp@intel.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR01MB4445:EE_|MN0PR01MB7658:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6099c8fe-fcff-41dc-95df-08daf512bea2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ogdor07xuDclJYNPGsRbT/sz7DkjlBIprcyyJ5VDb/QP0ZSqEspkIsHjDr4O8uU89V2ODuYmhU/2S6+E/i4Be1KVoFyrrWobvpnuv2OBwE6qVoYJ64NxpC+rTQYqfIRGMR6xopiiAnahLSQdaE6pUnRBX4s6AYauPdOFzOkxhgHRoMUH/kLt5p0JFThAjFDRFA/FmI5d6RXRcyhwDB6gWCsBIIBAaSJ4d/yOP4b/DiSGzP5WUIMbAbI8qq+46oFGwfb2a7Vm89dNVkS3thQH/NGP/48HAtGgoYyRIHMUCcSq0fyPpcz7lYInM7Q1Jj9sJYMfPHUddCAU8LH6Gq1RjBkmqL8UwY0WLvW9KuwxcQoffX9x2X1EntdTCgmxOvAWik2xu8DQPM8j9qSicQxazWile3NeB9jB/sksQKGSnZ/gEUJTLgM7+svaFiV3/HvVmkd2wwzi+LUyMamL/g8NTRLKTjMEu7z8MnHtF80a/8EXO1YgWGlwHM+2Y5CUHsSk3PRHv3AxPorc/E638x5n9eLn63OfiRuLujKsV3J8VN3P2utiW1L0AlfBVHfM6wobEcj1iFjrl0S7LlRwQgUz7tIsR0vr89AirxRLIc7n0GH27q4ABpPW4P/CULFUiGKu3vdvWNJZwZqsJ6DBJNqjLH2Y6qSwlm8hHoHtqSNeJGBDNyvP6cj864OsxKPB/k1qukyWWuQsuzXKasMvdRcNMOeD6p2qMD6QMT+7Tzvm3C8=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN6PR01MB4445.prod.exchangelabs.com; PTR:; CAT:NONE;
- SFS:(13230022)(376002)(346002)(39830400003)(136003)(366004)(396003)(451199015)(41300700001)(66556008)(4326008)(66476007)(2616005)(316002)(36756003)(66946007)(8676002)(86362001)(31696002)(38350700002)(38100700002)(5660300002)(8936002)(83380400001)(7416002)(6506007)(53546011)(31686004)(6486002)(2906002)(52116002)(26005)(478600001)(186003)(6512007)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SzhCR3BscWI1QVRCc2thUzNHVmR2ckI4VTNGQnpoc2cwbTZKZUVCUS8zTGpD?=
- =?utf-8?B?ZG5vV2VoR0FlWWQ1dFhrN1RDakhVZ0dwaWJqY3NKNE9LSkZueDk2OTJSbnlW?=
- =?utf-8?B?UXQxYXlydnJOQnk5TU8wUzZBS0tMbEhzL0xOZWdOaEt2Y2l3d2Jwa3JqdXk5?=
- =?utf-8?B?a3lMeFFkYlNyclp4QUZ5YW9MMVFKNUs5bnRJdFlWamUvTFZ3YmxHZGdEUTdY?=
- =?utf-8?B?U3hBUEs5MDlhM1BDb2NKZWQwS2kyTHYyVTN1Tk9YMGtsVkZQbTBHbVhZdlR4?=
- =?utf-8?B?Wlp1amVGQk9CTklCa3lPMDdwelBGMjU3K2dRUjRxR1hQVkhDQ2VIeCtaUy9H?=
- =?utf-8?B?c1FhWFhYU28rU2gxRWFYSWN0K2VMOURxZWZYbmxnYnFReXlsVHN6UVMzNUgw?=
- =?utf-8?B?ckdHeXBrM3hoeDVxdnh2L3Y4NEdMbVNXMTN0dVJwaEtHR1FMUUJYTnQ3TnRC?=
- =?utf-8?B?ZGpudG1IdWFJRUdzVlRWR09UY0pGQjNvcFpUUjNoTFdxYTZWQ2ZNZmJVazlP?=
- =?utf-8?B?WU1sZGFJa3hpNHdKVi91d2pLb1ZEVE9qdERBNDBxL3lLTDZXNzV5aVlvR0lj?=
- =?utf-8?B?UkwwZjhhbUZGS1d1UkJaUVJZdlMvOEd4V0tOMEdmWDNBaTlSeVBibW1Yc3FU?=
- =?utf-8?B?aVp0blVqSWx3UnBIQTNBVEtIZm15QXRSWlpTMW1UMTBKczB6M29xVzVRKzFq?=
- =?utf-8?B?aDYzcXk1bE1PMis0SDhxZDlSdjIxVlFRTzYrSXdEKzM1WkhsN1IxNUxFUnkw?=
- =?utf-8?B?bzJ3aTUzMGVGcW12aGVlQ0VlSnFkMVhTOUZwb3JFY1pwUUJyY0VudlF1WERy?=
- =?utf-8?B?bjFoRnRTNHhleGVXMmJISldNQ2g1WkV0Q0pjZ3lnSEV2RnhObW1lYVZFQWFn?=
- =?utf-8?B?ZEZSaFJoQ0JSeFdNeVZyamhLNjNUNkVBaDJ1Z1Y5ZUdyOXJWOXF1VkxzOEQ0?=
- =?utf-8?B?S2k0T25jOEEzS2t1RUFNRCs4bHNWRGUyVk1mcE9SQmllc3hZL3lIWlhWQ1Bt?=
- =?utf-8?B?K0VQanVjSytmT2JTRFVINDVKdkUrdTE2UmIwUW4rSXRka3ZEQm1mNUxBK1Rm?=
- =?utf-8?B?Q1E0Wm1jRVJVOEYrdXdaOEYvK0N4T3p6NWVaSythNmRGQmhjSkllekJMUVZE?=
- =?utf-8?B?RWZFdlhWRHdBak5UMTliZFBvbVNQdzB3c2ZqZ2ZDcmkvbzNaWUE5S05PS0h3?=
- =?utf-8?B?WHFqK1lRZ1NVSHJlU0hmTGs4NjVqcm0xYWVIRjhkV1ZabytyeUFKN0dNOGVa?=
- =?utf-8?B?dE1XODNhUXFPZmFQSTBGbzZmNXFaZitkd0lIdS9QSXZ0ejZaN2xJdURCN3Ji?=
- =?utf-8?B?ZmtiOHFLaksyREVMdzVlNGpzZENvRDVuSTNPSVBoSE4vRHNMV3MxQVgzSVM5?=
- =?utf-8?B?RnFESG9LT1BhcFRCRVZMMVJCamQ1V29oaDdVQzNvRzR2eVRyNk85aTVSdDli?=
- =?utf-8?B?MU0xelREamI3WXBOTzNCUUthbTlpTWZuSUpCdzNLdDRWRGtZMm1WeVBuRksy?=
- =?utf-8?B?MzQyYWtjZmdJSTBTanJQTjYzVHlxb3dHOUN5UjJpK2pvM0VWQzNXVUJaYkU4?=
- =?utf-8?B?N0p0S2R0QXFSd1gxZU9ESlBSOTMrNEpsdmFjZTNZWWNZT3h0Wk9DQVhLekRn?=
- =?utf-8?B?VmptY3k0ZlpwWjcxcWpzUVF1dytXbkRyM2xuNlRkS2dBbkFHd0tCRkFwNjJ1?=
- =?utf-8?B?OW13bjBIdW5TSTcwOWtrd1BLNkVsanNSTkM2UktQZTR6cStrOEJkOWQzdGdr?=
- =?utf-8?B?d3l6ay9yM0o4TG9kRDdGa01ralpOREF6RXM3NWt1ejFhdHZxQzNCUzVoZXRm?=
- =?utf-8?B?RTZaekQ2MDlrN0h1bXptZWFvOS9EaGNJcEptNjNMRFVITEdxZ1lEb1ExQ2Zw?=
- =?utf-8?B?eVpVbUxscHFFeFJ4LzFtaTdnWEw5aGpNRHM0SWNVcGxOb0RucHlMSjJ2anAw?=
- =?utf-8?B?K0gveGUrV3BWZ2xtS0NlbVNFaHUvMDJ3RmhqK3cxekJsNEFqVEtwVjFFVHoy?=
- =?utf-8?B?STNJb2crSHpBK3pUUUhka1R5YW9odlJvdUhSdnludUw1L1d3REJ3VzFHMldZ?=
- =?utf-8?B?YjNwYzFoc0tKWUNBYWZLazVYbWtFUXFwK3NMaDdIaTErT04vZXlnQjNUbTJE?=
- =?utf-8?Q?VC8wdv4CgwH55vreVT4b906hn?=
-X-OriginatorOrg: talpey.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6099c8fe-fcff-41dc-95df-08daf512bea2
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR01MB4445.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jan 2023 03:03:28.6482 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LNK8TCcsfiAm8iJpU/mL5rmUpyOxGTchhz9GynVpwsSRFaDDa6D2It6URxWjAJxZ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR01MB7658
-X-Spam-Score: -2.0 (--)
+Content-Disposition: inline
+In-Reply-To: <20230105042240.24738-1-frank.li@vivo.com>
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This code would be a lot more readable if it had fewer
- goto's.
- The goto out's are ok but the again and add_more are easily eliminated. Two
- possibilities... On 1/12/2023 12:19 PM, Vishal Moola wrote: > On Wed, Jan
- 4, 2023 at 1:15 PM Vishal Moola (Oracle) > <vishal.moola@gmail.com> wrote:
- >> >> This is in preparation for the removal of find_get_pages_range [...]
- Content analysis details:   (-2.0 points, 6.0 required)
+ Content preview:  Hi Yangtao,
+ https://git-scm.com/docs/git-format-patch#_base_tree_information]
+ url:
+ https://github.com/intel-lab-lkp/linux/commits/Yangtao-Li/f2fs-use-iostat_lat_type-directly-as-a-parameter-in-the-iostat_update_and_unbind_ctx/20230105-122414
+ base: https://git.kernel.org/pub/scm [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.92.85 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.92.85 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1pGFWv-0000hk-PB
-Subject: Re: [f2fs-dev] [PATCH v5 09/23] cifs: Convert
- wdata_alloc_and_fillpages() to use filemap_get_folios_tag()
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [error27[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [error27[at]gmail.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.42 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.128.42 listed in list.dnswl.org]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+X-Headers-End: 1pGGKa-002HMq-2q
+Subject: Re: [f2fs-dev] [PATCH] f2fs: use iostat_lat_type directly as a
+ parameter in the iostat_update_and_unbind_ctx()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -171,114 +128,70 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com, linux-mm@kvack.org, ceph-devel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-afs@lists.infradead.org,
- linux-btrfs@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ lkp@intel.com, Yangtao Li <frank.li@vivo.com>, oe-kbuild-all@lists.linux.dev
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This code would be a lot more readable if it had fewer goto's.
-The goto out's are ok but the again and add_more are easily
-eliminated.
+Hi Yangtao,
 
-Two possibilities...
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-On 1/12/2023 12:19 PM, Vishal Moola wrote:
-> On Wed, Jan 4, 2023 at 1:15 PM Vishal Moola (Oracle)
-> <vishal.moola@gmail.com> wrote:
->>
->> This is in preparation for the removal of find_get_pages_range_tag(). Now also
->> supports the use of large folios.
->>
->> Since tofind might be larger than the max number of folios in a
->> folio_batch (15), we loop through filling in wdata->pages pulling more
->> batches until we either reach tofind pages or run out of folios.
->>
->> This function may not return all pages in the last found folio before
->> tofind pages are reached.
->>
->> Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
->> ---
->>   fs/cifs/file.c | 32 +++++++++++++++++++++++++++++---
->>   1 file changed, 29 insertions(+), 3 deletions(-)
->>
->> diff --git a/fs/cifs/file.c b/fs/cifs/file.c
->> index 22dfc1f8b4f1..8cdd2f67af24 100644
->> --- a/fs/cifs/file.c
->> +++ b/fs/cifs/file.c
->> @@ -2527,14 +2527,40 @@ wdata_alloc_and_fillpages(pgoff_t tofind, struct address_space *mapping,
->>                            unsigned int *found_pages)
->>   {
->>          struct cifs_writedata *wdata;
->> -
->> +       struct folio_batch fbatch;
->> +       unsigned int i, idx, p, nr;
->>          wdata = cifs_writedata_alloc((unsigned int)tofind,
->>                                       cifs_writev_complete);
->>          if (!wdata)
->>                  return NULL;
->>
->> -       *found_pages = find_get_pages_range_tag(mapping, index, end,
->> -                               PAGECACHE_TAG_DIRTY, tofind, wdata->pages);
->> +       folio_batch_init(&fbatch);
->> +       *found_pages = 0;
->> +
+url:    https://github.com/intel-lab-lkp/linux/commits/Yangtao-Li/f2fs-use-iostat_lat_type-directly-as-a-parameter-in-the-iostat_update_and_unbind_ctx/20230105-122414
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
+patch link:    https://lore.kernel.org/r/20230105042240.24738-1-frank.li%40vivo.com
+patch subject: [PATCH] f2fs: use iostat_lat_type directly as a parameter in the iostat_update_and_unbind_ctx()
+config: alpha-randconfig-m041-20230110
+compiler: alpha-linux-gcc (GCC) 12.1.0
 
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Reported-by: Dan Carpenter <error27@gmail.com>
 
-This is really just the top of a while loop:
+New smatch warnings:
+fs/f2fs/iostat.c:228 __update_iostat_latency() error: buffer overflow 'io_lat->sum_lat[type]' 3 <= 3
+fs/f2fs/iostat.c:229 __update_iostat_latency() error: buffer overflow 'io_lat->bio_cnt[type]' 3 <= 3
+fs/f2fs/iostat.c:230 __update_iostat_latency() error: buffer overflow 'io_lat->peak_lat[type]' 3 <= 3
 
-   while (nr = filemap_get_folios_tag(...)) {
+Old smatch warnings:
+fs/f2fs/iostat.c:231 __update_iostat_latency() error: buffer overflow 'io_lat->peak_lat[type]' 3 <= 3
 
->> +again:
->> +       nr = filemap_get_folios_tag(mapping, index, end,
->> +                               PAGECACHE_TAG_DIRTY, &fbatch);
->> +       if (!nr)
->> +               goto out; /* No dirty pages left in the range */
->> +
->> +       for (i = 0; i < nr; i++) {
->> +               struct folio *folio = fbatch.folios[i];
->> +
->> +               idx = 0;
->> +               p = folio_nr_pages(folio);
+vim +228 fs/f2fs/iostat.c
 
-And this is a "do {"
+a4b6817625e71d Daeho Jeong 2021-08-20  211  static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
+2804a18e00dbd6 Yangtao Li  2023-01-05  212  				enum iostat_lat_type type)
+a4b6817625e71d Daeho Jeong 2021-08-20  213  {
+a4b6817625e71d Daeho Jeong 2021-08-20  214  	unsigned long ts_diff;
+2804a18e00dbd6 Yangtao Li  2023-01-05  215  	unsigned int page_type = iostat_ctx->type;
+a4b6817625e71d Daeho Jeong 2021-08-20  216  	struct f2fs_sb_info *sbi = iostat_ctx->sbi;
+a4b6817625e71d Daeho Jeong 2021-08-20  217  	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
+61803e984307c7 Daeho Jeong 2022-06-10  218  	unsigned long flags;
+a4b6817625e71d Daeho Jeong 2021-08-20  219  
+a4b6817625e71d Daeho Jeong 2021-08-20  220  	if (!sbi->iostat_enable)
+a4b6817625e71d Daeho Jeong 2021-08-20  221  		return;
+a4b6817625e71d Daeho Jeong 2021-08-20  222  
+a4b6817625e71d Daeho Jeong 2021-08-20  223  	ts_diff = jiffies - iostat_ctx->submit_ts;
+2804a18e00dbd6 Yangtao Li  2023-01-05  224  	if (page_type >= META_FLUSH)
+                                                                 ^^^^^^^^^^
 
->> +add_more:
->> +               wdata->pages[*found_pages] = folio_page(folio, idx);
->> +               folio_get(folio);
->> +               if (++*found_pages == tofind) {
->> +                       folio_batch_release(&fbatch);
->> +                       goto out;
->> +               }
->> +               if (++idx < p)
->> +                       goto add_more;
+2804a18e00dbd6 Yangtao Li  2023-01-05  225  		page_type = META;
+a4b6817625e71d Daeho Jeong 2021-08-20  226  
+61803e984307c7 Daeho Jeong 2022-06-10  227  	spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
+2804a18e00dbd6 Yangtao Li  2023-01-05 @228  	io_lat->sum_lat[type][page_type] += ts_diff;
+                                                                      ^^^^^^^^^
+Mixup between META_FLUSH and NR_PAGE_TYPE leads to memory corruption.
 
-To here "} while (++idx < p);"
+2804a18e00dbd6 Yangtao Li  2023-01-05 @229  	io_lat->bio_cnt[type][page_type]++;
+2804a18e00dbd6 Yangtao Li  2023-01-05 @230  	if (ts_diff > io_lat->peak_lat[type][page_type])
+2804a18e00dbd6 Yangtao Li  2023-01-05  231  		io_lat->peak_lat[type][page_type] = ts_diff;
+61803e984307c7 Daeho Jeong 2022-06-10  232  	spin_unlock_irqrestore(&sbi->iostat_lat_lock, flags);
+a4b6817625e71d Daeho Jeong 2021-08-20  233  }
 
->> +       }
->> +       folio_batch_release(&fbatch);
->> +       goto again;
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
 
-End while "}"
-
->> +out:
->>          return wdata;
->>   }
->>
->> --
->> 2.38.1
->>
-> 
-> Could someone review this cifs patch, please? This is one of the
-> 2 remaining patches that need to be looked at in the series.
-
-It's otherwise ok.
-
-Tom.
-> 
 
 
 _______________________________________________
