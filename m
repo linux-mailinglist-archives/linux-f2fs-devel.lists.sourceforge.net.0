@@ -2,126 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 572F266B5E6
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Jan 2023 04:12:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84D8B66B701
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 16 Jan 2023 06:56:04 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pHFuv-0001qV-G3;
-	Mon, 16 Jan 2023 03:12:12 +0000
+	id 1pHITP-0004jC-F6;
+	Mon, 16 Jan 2023 05:55:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <qxy65535@gmail.com>) id 1pHFuu-0001qO-3j
- for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 16 Jan 2023 03:12:10 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <35ubEYwkbAOsflmXNYYReNccVQ.TbbTYRhfRePbagRag.PbZ@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1pHITN-0004j2-Pj for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 16 Jan 2023 05:55:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=70wWPTTRf45yo4TsZOfmJlWbWf/vWiaM4qlj+SV+zPg=; b=TvGZnHZymnhVsmlcPP+C6GbK0J
- zyNrdJREV/RnSwLlOxbVXSsf+jGNcLV26iUpy7QJUDvSk0vorI83ca33ycw6ZJkJUTXUMlW64OR2e
- BYmlSP68NnAcNIaOJnXq0J0xPSmx7tLfVLFa7Edhz5eRbC3bGU5TFMJ9ZzIevszQ1GZk=;
+ bh=Neb0M9m1wuS/EiJZKNK8tyTuZyiCOJ+/j+azaSqhRls=; b=KRcNJ9zLd+2RTEOGCAJo+qxbSb
+ Z6Kyp7hr3kl2ek9XC1zIt4g2QkU09+a+BBphNlmdmeKF1b4+Mkk9lBs/WCj6WPUH+mHRqRxs5AUI4
+ JsVKmvjNx2khQiMopT9Y+jTqpQl3hYq4gPbPLdh/fhARhy2R88Zf2MdcVMeYkM42ZHBI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=70wWPTTRf45yo4TsZOfmJlWbWf/vWiaM4qlj+SV+zPg=; b=gO4TqaZz6+2qvN+sT8ouDDGkrO
- etYfh5klyZq+d+jTDgxSA41ckKhBRAx8EPs/ykxKVxAQ0wqKtJHyznJCTArvatoOOvclre43NYX7i
- CuPC2C6wyEM7X9tpUYa+wBhU1/qLCsPiAOD/OYyAmiH10dyJq+E7VjgQXy657bPmpkiY=;
-Received: from mail-pj1-f48.google.com ([209.85.216.48])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Neb0M9m1wuS/EiJZKNK8tyTuZyiCOJ+/j+azaSqhRls=; b=B
+ 60ARQwX2mW4WRigB8UN72qZr+nIcmz2frbVyM9U/AJnkjvT5s62PLBibvfCFKG8IXNfxWAeG7iosw
+ 1oVHa4jLHvhF5GuZ9n0F+gRMqh7qkOlhDuoq3GTRckCSGG1lZMqCv5Ihl+c3DkIPXl/3Yj5bPBCUL
+ mX0NDB4SHNSvbLko=;
+Received: from mail-io1-f72.google.com ([209.85.166.72])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pHFuq-0006jg-JB for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 16 Jan 2023 03:12:10 +0000
-Received: by mail-pj1-f48.google.com with SMTP id bj3so24582133pjb.0
+ id 1pHITL-005PEN-LB for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 16 Jan 2023 05:55:56 +0000
+Received: by mail-io1-f72.google.com with SMTP id
+ h17-20020a5d9e11000000b007049a892316so3526964ioh.7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 15 Jan 2023 19:12:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=70wWPTTRf45yo4TsZOfmJlWbWf/vWiaM4qlj+SV+zPg=;
- b=jdJ20l8M/RfczWorTmdZeOFh4qbp8AttwUMlGoseZpFA99uR1fLBekTrptX9mXE2Pe
- dUj2C5MLSdTl043rgpqSZyRqfYpkGBjy07xu1uR2Vo7t0tFgh1nD3O/nu2XMpirVmdp5
- TnfEUG/dPp+NMjAOyTBb8y7B5qUeDJcV4SX22jaPX6bf9G+mFM9dtLuyAYnkKMhWvL9B
- tT/7c0kd5n4fZ+1iqdo3+iN/2H7cZ16orrtA7/Tao4s9FK/UD3n+w7U/9pas5tWu36kM
- To7nmCu/P8U5UMPeAYZC4573/dQmc8vqlWnlWyQmTCb8AS08cGwGWvXNcVC0adJ+5m8f
- bNfA==
+ Sun, 15 Jan 2023 21:55:55 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=70wWPTTRf45yo4TsZOfmJlWbWf/vWiaM4qlj+SV+zPg=;
- b=TMVer725QsfdJa7JvhcLv/RydjJEyX0i60zjGuev4eGp7ZbMlAStT78Qfm3RxpsFeu
- tsylghZl8LP3yTrBBH44I3eceBLLrcs9kHQopBFesF0EuVaqt++yWrPYVsCAGuVbQebh
- C8ircFFRwSQ2Ux8SoTi3ouZLk+2UPAWezPRCJgDACNp9Sh0z0BQoDOcOhvf4pMdNFIGk
- uKVq9/e5WjYAT7PJ/GocKkkGgwLg42hf+eivS4jhFaxO8WdfbrpCEynBs1+sGy1vSwlH
- J8Nyv4gSoUJC7JkUR2MT6XzQ6qsZsaF3t1fo4wJRK+y+Jw2PGpPAigbp08JjQZ2UbEu5
- Fdng==
-X-Gm-Message-State: AFqh2kow2fDWzKIBnkQo9n9r14igfW/R9+h++gbHghvHr/DsW6dUbKmk
- klc2N5SLmm1FVmkvSSldhYA=
-X-Google-Smtp-Source: AMrXdXvA54E+I6eaQGmDNC76CiN85SNIgGPjufJgIykCbBHVbvEqcj0PxpI9DLtqU6sOD6x4wddI1Q==
-X-Received: by 2002:a17:902:9303:b0:194:8bd7:3236 with SMTP id
- bc3-20020a170902930300b001948bd73236mr4145106plb.45.1673838722991; 
- Sun, 15 Jan 2023 19:12:02 -0800 (PST)
-Received: from mi-HP-ProDesk-680-G4-MT.mioffice.cn ([43.224.245.252])
- by smtp.gmail.com with ESMTPSA id
- m3-20020a170902db0300b0018980f14ecfsm15326458plx.115.2023.01.15.19.12.00
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 15 Jan 2023 19:12:02 -0800 (PST)
-From: qixiaoyu1 <qxy65535@gmail.com>
-X-Google-Original-From: qixiaoyu1 <qixiaoyu1@xiaomi.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>,
-	Chao Yu <chao@kernel.org>
-Date: Mon, 16 Jan 2023 11:08:50 +0800
-Message-Id: <20230116030850.20260-2-qixiaoyu1@xiaomi.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20230116030850.20260-1-qixiaoyu1@xiaomi.com>
-References: <20230113125859.15651-1-qixiaoyu1@xiaomi.com>
- <20230116030850.20260-1-qixiaoyu1@xiaomi.com>
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Neb0M9m1wuS/EiJZKNK8tyTuZyiCOJ+/j+azaSqhRls=;
+ b=J58VaXBeChbGAUtJtq5yyZcHmIp6vuEcMHE+ueR6auiBqR/NgiM0izsIrAjqe1kkKd
+ 8mbY9F9KG0K+eHazrkwx6brJoD55o8fazuPWsoU8En7fBvVq37mjSa0Nd+RUIx8o8C2c
+ uOqNGulufZKy9shlCf9sryqbVa3NLMRW5ZdkEDY6AQRYQLiciLq5ZzcUboPaSvuS8LAz
+ neQAHQTgwTuEQpqRw4sDxTENSDKdewEu8W4um1tlkMA8pMSk1xtfH7weg2l1oX3Z048W
+ r7H8sto0+gYUAD8A1u3b8ier7IgAk3mnblaKbnhdoSyol9mkLF35uHco/FM26pDJqa/n
+ 2uuw==
+X-Gm-Message-State: AFqh2krCBQViPlwxo4zTl/fF6SH8LmiM5pA54DgKxBtpotCH+gx3HTkA
+ gMOnQdfDSrhSkAE9fjKAS0fREXD7IIGMl67e0gsM2QYshfxF
+X-Google-Smtp-Source: AMrXdXuY6j0pIfj/op015EDT3XMTEE1KPDhSOnmOINBlGwf8rd77Zae3Fd9SY0PUzKGdBWgDB/Lqv8CnhQ6l1esLbjvFWhn1GYkH
 MIME-Version: 1.0
-X-Spam-Score: 0.0 (/)
+X-Received: by 2002:a92:1a0b:0:b0:30d:8f68:cd9 with SMTP id
+ a11-20020a921a0b000000b0030d8f680cd9mr4810898ila.274.1673848550134; Sun, 15
+ Jan 2023 21:55:50 -0800 (PST)
+Date: Sun, 15 Jan 2023 21:55:50 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <0000000000003d19f805f25b3c71@google.com>
+From: syzbot <syzbot+15d87e3695975269de2c@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.6 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Signed-off-by: qixiaoyu1 Signed-off-by: xiongping1 ---
- Documentation/ABI/testing/sysfs-fs-f2fs
- | 5 +++++ fs/f2fs/extent_cache.c | 12 +++++++----- fs/f2fs/f2fs.h | 1 +
- fs/f2fs/sysfs.c | 11 ++++++++ [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: 5a41237ad1d4
+ gcc: disable -Warray-bounds for gcc-11 too git tree: upstream console output:
+ https://syzkaller.appspot.com/x/log.txt?x=11ffa85a480000 kernel config:
+ https://syzkaller.appspo [...] 
+ Content analysis details:   (0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [qxy65535[at]gmail.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [qxy65535[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.48 listed in wl.mailspike.net]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.48 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1pHFuq-0006jg-JB
-Subject: [f2fs-dev] [PATCH 2/2 v2] f2fs: add sysfs nodes to set
- last_age_weight
+ no trust [209.85.166.72 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.72 listed in wl.mailspike.net]
+X-Headers-End: 1pHITL-005PEN-LB
+Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in __destroy_extent_tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,123 +106,126 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: xiongping1@xiaomi.com, qixiaoyu1@xiaomi.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Signed-off-by: qixiaoyu1 <qixiaoyu1@xiaomi.com>
-Signed-off-by: xiongping1 <xiongping1@xiaomi.com>
+Hello,
+
+syzbot found the following issue on:
+
+HEAD commit:    5a41237ad1d4 gcc: disable -Warray-bounds for gcc-11 too
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=11ffa85a480000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=2b6ecad960fc703e
+dashboard link: https://syzkaller.appspot.com/bug?extid=15d87e3695975269de2c
+compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
+userspace arch: i386
+
+Unfortunately, I don't have any reproducer for this issue yet.
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+15d87e3695975269de2c@syzkaller.appspotmail.com
+
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/extent_cache.c:1191!
+invalid opcode: 0000 [#1] PREEMPT SMP KASAN
+CPU: 3 PID: 7706 Comm: syz-executor.3 Not tainted 6.2.0-rc3-syzkaller-00009-g5a41237ad1d4 #0
+Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.14.0-2 04/01/2014
+RIP: 0010:__destroy_extent_tree+0x64a/0x7f0 fs/f2fs/extent_cache.c:1191
+Code: 04 00 00 00 49 8d 9c 07 e8 0c 00 00 48 89 df e8 fc 00 22 fe f0 ff 03 48 8b 3c 24 e8 20 1c 5b 06 e9 93 fc ff ff e8 a6 fa d3 fd <0f> 0b e8 9f fa d3 fd e8 6a 1f 59 06 31 ff 89 c3 89 c6 e8 3f f7 d3
+RSP: 0018:ffffc90027ee79c0 EFLAGS: 00010246
+RAX: 0000000000040000 RBX: 0000000000000000 RCX: ffffc90007712000
+RDX: 0000000000040000 RSI: ffffffff83ad57ba RDI: 0000000000000005
+RBP: ffff8880754b0000 R08: 0000000000000005 R09: 0000000000000000
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff888044fd2000 R14: 0000000000000001 R15: ffff8880700e4000
+FS:  0000000000000000(0000) GS:ffff88802c900000(0063) knlGS:00000000f7fa4b40
+CS:  0010 DS: 002b ES: 002b CR0: 0000000080050033
+CR2: 00007f2dd53c836b CR3: 000000006d4f3000 CR4: 0000000000150ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+Call Trace:
+ <TASK>
+ f2fs_destroy_extent_tree+0x17/0x30 fs/f2fs/extent_cache.c:1204
+ f2fs_evict_inode+0x38b/0x1df0 fs/f2fs/inode.c:789
+ evict+0x2ed/0x6b0 fs/inode.c:664
+ iput_final fs/inode.c:1747 [inline]
+ iput.part.0+0x59b/0x880 fs/inode.c:1773
+ iput+0x5c/0x80 fs/inode.c:1763
+ f2fs_abort_atomic_write+0xea/0x4f0 fs/f2fs/segment.c:196
+ f2fs_release_file+0xc8/0xf0 fs/f2fs/file.c:1869
+ __fput+0x27c/0xa90 fs/file_table.c:320
+ task_work_run+0x16f/0x270 kernel/task_work.c:179
+ get_signal+0x1c7/0x2450 kernel/signal.c:2635
+ arch_do_signal_or_restart+0x79/0x5c0 arch/x86/kernel/signal.c:306
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x15f/0x250 kernel/entry/common.c:203
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:285 [inline]
+ syscall_exit_to_user_mode+0x1d/0x50 kernel/entry/common.c:296
+ __do_fast_syscall_32+0x72/0xf0 arch/x86/entry/common.c:181
+ do_fast_syscall_32+0x33/0x70 arch/x86/entry/common.c:203
+ entry_SYSENTER_compat_after_hwframe+0x70/0x82
+RIP: 0023:0xf7fa9549
+Code: 03 74 c0 01 10 05 03 74 b8 01 10 06 03 74 b4 01 10 07 03 74 b0 01 10 08 03 74 d8 01 00 00 00 00 00 51 52 55 89 e5 0f 34 cd 80 <5d> 5a 59 c3 90 90 90 90 8d b4 26 00 00 00 00 8d b4 26 00 00 00 00
+RSP: 002b:00000000f7fa45cc EFLAGS: 00000296 ORIG_RAX: 00000000000000bb
+RAX: 00000000002dc7fb RBX: 0000000000000004 RCX: 0000000000000005
+RDX: 0000000000000000 RSI: 0000000001000fc4 RDI: 0000000000000000
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000296 R12: 0000000000000000
+R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:__destroy_extent_tree+0x64a/0x7f0 fs/f2fs/extent_cache.c:1191
+Code: 04 00 00 00 49 8d 9c 07 e8 0c 00 00 48 89 df e8 fc 00 22 fe f0 ff 03 48 8b 3c 24 e8 20 1c 5b 06 e9 93 fc ff ff e8 a6 fa d3 fd <0f> 0b e8 9f fa d3 fd e8 6a 1f 59 06 31 ff 89 c3 89 c6 e8 3f f7 d3
+RSP: 0018:ffffc90027ee79c0 EFLAGS: 00010246
+RAX: 0000000000040000 RBX: 0000000000000000 RCX: ffffc90007712000
+RDX: 0000000000040000 RSI: ffffffff83ad57ba RDI: 0000000000000005
+RBP: ffff8880754b0000 R08: 0000000000000005 R09: 0000000000000000
+R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000000
+R13: ffff888044fd2000 R14: 0000000000000001 R15: ffff8880700e4000
+FS:  0000000000000000(0000) GS:ffff88802c900000(0063) knlGS:00000000f7fa4b40
+CS:  0010 DS: 002b ES: 002b CR0: 0000000080050033
+CR2: 00007f2dd53c836b CR3: 000000006d4f3000 CR4: 0000000000150ee0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+----------------
+Code disassembly (best guess):
+   0:	03 74 c0 01          	add    0x1(%rax,%rax,8),%esi
+   4:	10 05 03 74 b8 01    	adc    %al,0x1b87403(%rip)        # 0x1b8740d
+   a:	10 06                	adc    %al,(%rsi)
+   c:	03 74 b4 01          	add    0x1(%rsp,%rsi,4),%esi
+  10:	10 07                	adc    %al,(%rdi)
+  12:	03 74 b0 01          	add    0x1(%rax,%rsi,4),%esi
+  16:	10 08                	adc    %cl,(%rax)
+  18:	03 74 d8 01          	add    0x1(%rax,%rbx,8),%esi
+  1c:	00 00                	add    %al,(%rax)
+  1e:	00 00                	add    %al,(%rax)
+  20:	00 51 52             	add    %dl,0x52(%rcx)
+  23:	55                   	push   %rbp
+  24:	89 e5                	mov    %esp,%ebp
+  26:	0f 34                	sysenter
+  28:	cd 80                	int    $0x80
+* 2a:	5d                   	pop    %rbp <-- trapping instruction
+  2b:	5a                   	pop    %rdx
+  2c:	59                   	pop    %rcx
+  2d:	c3                   	retq
+  2e:	90                   	nop
+  2f:	90                   	nop
+  30:	90                   	nop
+  31:	90                   	nop
+  32:	8d b4 26 00 00 00 00 	lea    0x0(%rsi,%riz,1),%esi
+  39:	8d b4 26 00 00 00 00 	lea    0x0(%rsi,%riz,1),%esi
+
+
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs |  5 +++++
- fs/f2fs/extent_cache.c                  | 12 +++++++-----
- fs/f2fs/f2fs.h                          |  1 +
- fs/f2fs/sysfs.c                         | 11 +++++++++++
- 4 files changed, 24 insertions(+), 5 deletions(-)
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 9e3756625a81..11af7dbb6bc9 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -669,3 +669,8 @@ Contact:	"Ping Xiong" <xiongping1@xiaomi.com>
- Description:	When DATA SEPARATION is on, it controls the age threshold to indicate
- 		the data blocks as warm. By default it was initialized as 2621440 blocks
- 		(equals to 10GB).
-+
-+What:           /sys/fs/f2fs/<disk>/last_age_weight
-+Date:           January 2023
-+Contact:        "Ping Xiong" <xiongping1@xiaomi.com>
-+Description:    When DATA SEPARATION is on, it controls the weight of last data block age.
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index ad5533f178fd..f081f4edae78 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -871,11 +871,12 @@ void f2fs_update_read_extent_tree_range_compressed(struct inode *inode,
- }
- #endif
- 
--static unsigned long long __calculate_block_age(unsigned long long new,
--						unsigned long long old)
-+static unsigned long long __calculate_block_age(struct f2fs_sb_info *sbi,
-+						unsigned long long new, unsigned long long old)
- {
--	return div_u64(new, 100) * (100 - LAST_AGE_WEIGHT)
--		+ div_u64(old, 100) * LAST_AGE_WEIGHT;
-+	unsigned int weight = sbi->last_age_weight;
-+
-+	return div_u64(new, 100) * (100 - weight) + div_u64(old, 100) * weight;
- }
- 
- /* This returns a new age and allocated blocks in ei */
-@@ -907,7 +908,7 @@ static int __get_new_block_age(struct inode *inode, struct extent_info *ei,
- 			cur_age = ULLONG_MAX - tei.last_blocks + cur_blocks;
- 
- 		if (tei.age)
--			ei->age = __calculate_block_age(cur_age, tei.age);
-+			ei->age = __calculate_block_age(sbi, cur_age, tei.age);
- 		else
- 			ei->age = cur_age;
- 		ei->last_blocks = cur_blocks;
-@@ -1223,6 +1224,7 @@ void f2fs_init_extent_cache_info(struct f2fs_sb_info *sbi)
- 	atomic64_set(&sbi->allocated_data_blocks, 0);
- 	sbi->hot_data_age_threshold = DEF_HOT_DATA_AGE_THRESHOLD;
- 	sbi->warm_data_age_threshold = DEF_WARM_DATA_AGE_THRESHOLD;
-+	sbi->last_age_weight = LAST_AGE_WEIGHT;
- }
- 
- int __init f2fs_create_extent_cache(void)
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index e8953c3dc81a..c3609cbc28c7 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1679,6 +1679,7 @@ struct f2fs_sb_info {
- 	/* The threshold used for hot and warm data seperation*/
- 	unsigned int hot_data_age_threshold;
- 	unsigned int warm_data_age_threshold;
-+	unsigned int last_age_weight;
- 
- 	/* basic filesystem units */
- 	unsigned int log_sectors_per_block;	/* log2 sectors per block */
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 83a366f3ee80..a70cf674d8e7 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -686,6 +686,15 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
- 		return count;
- 	}
- 
-+	if (!strcmp(a->attr.name, "last_age_weight")) {
-+		if (t <= 0 || t >= 100)
-+			return -EINVAL;
-+		if (t == *ui)
-+			return count;
-+		*ui = (unsigned int)t;
-+		return count;
-+	}
-+
- 	*ui = (unsigned int)t;
- 
- 	return count;
-@@ -944,6 +953,7 @@ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, revoked_atomic_block, revoked_atomic_block)
- /* For block age extent cache */
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, hot_data_age_threshold, hot_data_age_threshold);
- F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, warm_data_age_threshold, warm_data_age_threshold);
-+F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, last_age_weight, last_age_weight);
- 
- #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
- static struct attribute *f2fs_attrs[] = {
-@@ -1042,6 +1052,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(revoked_atomic_block),
- 	ATTR_LIST(hot_data_age_threshold),
- 	ATTR_LIST(warm_data_age_threshold),
-+	ATTR_LIST(last_age_weight),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs);
--- 
-2.36.1
-
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
 
 
 _______________________________________________
