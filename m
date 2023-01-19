@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C44DE6734CA
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Jan 2023 10:51:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D150F6739D5
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Jan 2023 14:19:28 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pIRZu-0005Or-Qw;
-	Thu, 19 Jan 2023 09:51:25 +0000
+	id 1pIUp9-0001BL-CP;
+	Thu, 19 Jan 2023 13:19:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1pIRZt-0005Ol-N5
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1pIUp6-0001BA-7d
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 19 Jan 2023 09:51:24 +0000
+ Thu, 19 Jan 2023 13:19:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jIBW+O2b+OFOVSiBbYmqmruwlwGxWoFUbXuJ9nvI0Ss=; b=LxRgrVsTjvMl3XJ9PatfOpr/MG
- p3d+c37oJtlSpT5bO4SeJTHWfbRGsWOnBL1E2GyPks80uFaTf3KlsdstpzJuWx2trntB4q650Psuy
- X/IPSqg5OqpToKKHditSMQHRkK6+evAz3xHtHASLsNcWhIEvwGUiyz5aP6yVph9nPEu0=;
+ bh=lSIR0CQTZ4zEsfVZyaIBiyNt4XjLMcWEJoaM0oE6mDs=; b=AVjcDbBnx/E9ncRutG6oaGmoRR
+ tZpitdLTysxMPWdvc6B3+g3NvpX14yneGOVNpG+z8cg+qgJ/ShecwFvog8fJZY1ESC88lWuQRtbBT
+ QnlMoIrXemZvfBsuutuwVdSP3reg2odVylbgKuWTFb1NTfSSJIz2tDDF1QpFcX+PAcfc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -31,38 +31,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jIBW+O2b+OFOVSiBbYmqmruwlwGxWoFUbXuJ9nvI0Ss=; b=LB9BSM7RdJDmeSp4EOkQm6+uoJ
- AkkdlhDQ/tzAwiy7ty27L3lB8oKVDHi/dSRyhxN2JgyJRHZb/VdlMlpJZMeaTb5jqiTcMmWosMoyK
- hA7ZAQdHRvcJ+sVa3IHb+h2WrPhy1vJQyTgzeq592CLUFHqgCTaCm8woImo07ZGS1u+g=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=lSIR0CQTZ4zEsfVZyaIBiyNt4XjLMcWEJoaM0oE6mDs=; b=aXYgq6hg+8b73RJMmfXKHZvV8N
+ cT4r3w0/eG9Sg6QvKfp8tHQfX9eg0IxT+ueNf1M4UqHU0ktVGXtbknd7abspSsrdr4Ybw8uL1jzmE
+ ZYWSadP6mrcxW+PqkY1vLbaGcbQwA0azFaKjoOmoyF5JRExxf3wSnIYPj4BBjxjtNODk=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pIRZq-008nrg-EO for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 19 Jan 2023 09:51:24 +0000
+ id 1pIUp4-009AWz-31 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 19 Jan 2023 13:19:18 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 2627CB82153
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AE8F06127C
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 19 Jan 2023 09:51:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C4DDBC433D2
+ Thu, 19 Jan 2023 13:19:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B9727C433D2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 19 Jan 2023 09:51:14 +0000 (UTC)
+ Thu, 19 Jan 2023 13:19:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1674121874;
- bh=zWD11UsOdxgs8b00+XdAXv/2Ix1oJ2XBvHwN2wEy6NQ=;
+ s=k20201202; t=1674134351;
+ bh=lSIR0CQTZ4zEsfVZyaIBiyNt4XjLMcWEJoaM0oE6mDs=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=i5stR6G+GB8gtc+EmOaWstpUGadHxkUhAqZFBDYVv0X4AGcBfcc2JaRdWmiPz7Z3R
- 3aNyLZsSBOghQlErw3oSg0dcDu8KM4E0Xoew+cm7iZsXGO16jGdT1mmexDrTPKNyKs
- GBtJ+Db46OP55l8L9f2Ar8IubUu6sCP7BzQq+daJ7H6T2YmwC17GaLNZwxAmKo147g
- LxUWBgXqXHdXRcMMSSZcAvS2LrXa6/4WXaJ0aaZkAm0lApN+8fL7QwV9JipestBU7n
- E9lxF/buEK6wKfj6s/KjAPNbPGXntzij70dd/xUVyflC6SAMgKlG6qt6ehAmlzJHT8
- /bsyRC/OTS1Jg==
+ b=CGn9pyfbF6BsU/nut2U3vrpiFhLGIxZ/Jlv3FI7XGPIrwwrFAj5vL4vtTI7i9/bGx
+ GSpct4SVPG/RGYYl+s0mglMW7tRIO7guoO3WhS5WsaB6GJFEM1n8Fy/eQDxB2v5d95
+ HhV51Qe98O2nE0SijU6SX5/O/O52JzgtEp1hnNeELdd/v6fcEXGjkv5Zh+t6eDayKn
+ WwYFso2v4Xw5yhEtHt7xs2ChhTn1VmZ4cfjuaWseq8PBU0zkYWAp97QdqU22ae2hCr
+ DEEDsOHDDCA9LXwaX6xjdRcGPTO+KduJ3l+ircXW0WgpdtZsBh20Iiec+L+HNoDq8x
+ l/ITV13KIfa2A==
 Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id AB7B5C43142; Thu, 19 Jan 2023 09:51:14 +0000 (UTC)
+ from userid 48) id 6CA73C43142; Thu, 19 Jan 2023 13:19:11 +0000 (UTC)
 From: bugzilla-daemon@kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 19 Jan 2023 09:51:14 +0000
+Date: Thu, 19 Jan 2023 13:19:10 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -77,8 +77,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_severity
-Message-ID: <bug-216050-202145-qhO6dZAimT@https.bugzilla.kernel.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-216050-202145-CO7EtPZFhE@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
 References: <bug-216050-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -91,16 +91,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 Guido
- (guido.iodice@gmail.com)
- changed: What |Removed |Added Severity|normal |high 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
+ Comment
+ #125 from Guido (guido.iodice@gmail.com) --- Can I ask to other reporters
+ what distro they use? I use manjaro but the problem occurs also with archlinux
+ kernel. Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -108,7 +109,7 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pIRZq-008nrg-EO
+X-Headers-End: 1pIUp4-009AWz-31
 Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -127,24 +128,11 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
-Guido (guido.iodice@gmail.com) changed:
+--- Comment #125 from Guido (guido.iodice@gmail.com) ---
+Can I ask to other reporters what distro they use?
+I use manjaro but the problem occurs also with archlinux kernel.
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-           Severity|normal                      |high
-
---- Comment #124 from Guido (guido.iodice@gmail.com) ---
-I took the liberty of raising the importance of the bug because it renders the
-operating system unusable. I have not set 'blocking' only because not all users
-are affected.
-In any case, my experiment of reformatting the partition did not eliminate the
-problem and shows that it is probably more common than a corner case.
-The 5.15 LTS kernel will go EoF in October, I hope the bug will be fixed by
-then.
-
-Aside from that, I wonder if an analysis of the differences between the 5.17
-and 5.18 kernels shows where the problem lies. I don't have the expertise to do
-that.
+Maybe it's related to CONFIG_F2FS_UNFAIR_RWSEM=y ?
 
 -- 
 You may reply to this email to add a comment.
