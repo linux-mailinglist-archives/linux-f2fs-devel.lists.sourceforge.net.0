@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0363A67411F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Jan 2023 19:41:30 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 110B5674133
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Jan 2023 19:45:44 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pIZqn-0002QR-OF;
-	Thu, 19 Jan 2023 18:41:24 +0000
+	id 1pIZux-0007wI-7e;
+	Thu, 19 Jan 2023 18:45:41 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1pIZql-0002QJ-6q
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1pIZuv-0007w3-NA
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 19 Jan 2023 18:41:22 +0000
+ Thu, 19 Jan 2023 18:45:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ta0BuiIsTa9UzVwKyAix9RGRtdd3lHM4x8m27+Q+IOc=; b=fwfLVEqi5gVe8JwUhJDdv7XNJj
- 0tIIQqETqqeveghxx5U36Be8Qsvi9N/Rb8lSNPB+YrQ0sg2iHyIsCgRxj/959l9ZNPRjahpXi5TtM
- t9kPg7iIRVppuDED5fC62fGOaeAaC0OJo1FpTWVy+YJZ8fopDbWQQzz0vh4804/Sh/H4=;
+ bh=HdXViYsYgPs9hrtEVy9JFklzJV4/Rq1+j9zV+jbHNS8=; b=bb7xGsy+dUcXF1Q7ONamL/oWnP
+ IhXxrxuiNa28EnADwRaHEh+PH/Eg/LbhEL8hq+ECUMbBOIrn68z/JZCtU6pEfJoEGKCiYXEsSYKnn
+ N1rYg1yEG/coY6GMMQ0gCLNw9CY4QoukCfnCSg+/j7UxuKxs3VPSe4BAgighfLGHxtzk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -31,38 +31,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ta0BuiIsTa9UzVwKyAix9RGRtdd3lHM4x8m27+Q+IOc=; b=XupDoP63jBDlrWUtmwlsqkm39V
- cFScxUzdwH8bDo1YE1vsi2Q/jUMfYzUsJwXG274/L+jNRju95i9f9qQVF/XnbTfaGlfsyA+vyIWok
- VtMHuV8rft+Os8i0Jdf7A3GYErLoBQfXdcXp/D02YH+ofH5K1SozXYPs8SPWTXL9lSBA=;
+ bh=HdXViYsYgPs9hrtEVy9JFklzJV4/Rq1+j9zV+jbHNS8=; b=I2YbF5vDhZmIEVkXKCY6cBmddO
+ tDW/uxl6yHPcDfUTs9BYi32r5ElH05dRDViyYCYiZ36gE7C38asd2N0ViSTcrsGLgv6DWrEOJwRtj
+ NvPscJZDE17F2TjShQFk7T5sDeUF4OW6dr0+bDfWps6x7Kf3Q2TSOBgcAsKhdI7Sa0mg=;
 Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pIZqj-009PBX-M3 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 19 Jan 2023 18:41:22 +0000
+ id 1pIZut-0007k9-Hx for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 19 Jan 2023 18:45:40 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 63A08B82699
+ by ams.source.kernel.org (Postfix) with ESMTPS id 42130B826FD
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 19 Jan 2023 18:41:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0D1A2C433F0
+ Thu, 19 Jan 2023 18:45:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id F2EB3C433EF
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 19 Jan 2023 18:41:14 +0000 (UTC)
+ Thu, 19 Jan 2023 18:45:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1674153674;
- bh=Ta0BuiIsTa9UzVwKyAix9RGRtdd3lHM4x8m27+Q+IOc=;
+ s=k20201202; t=1674153932;
+ bh=nhIOjSTE/jYgQMeo/hUxUndXoFKxI6wJWKcPu5y9Wqc=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=g9MkTm8xIt5IfLYecMmfvt8YervTc7aMq483hfevPVw84NV05UkY8lxuFWdptq03f
- o4kQQRmainXdki7ibh14hJIsPxJizdePLnragjrhfs4/r4wXIe4TDQuumXdvfyNXGm
- SMPQAyRP469U3rdiGjA/uidnGYCs9JQtEHAHqgG+2DAy8VAVOcEuRSB1EsJWURvU/2
- byprfhbGhaSFS2ppmJsoXqFn4Ol0wBcB/C9FUPb0+MReu6NQi97V52ju81M8DZtgJo
- TvSsZMGQ2yXDeZEoLnxmW5HWRzUzQH7bfqu0KoejU3iQf3NXDOXwOPaTw7baZe+QS0
- 5Ghj7d+RBkCHg==
+ b=BXJhT1XNRz40NKosE75aIfjkfVnnghCKjerYpCjFhJVl8Okyj0ytrSsrFuZPC2LvV
+ 3b/F+4CCKrMunq1Wy9fqfTvLw1+ZYIaFcHtj5vIaoA8evDCdGl+/gp03+Q9mHU+pxb
+ sv5MwYL9E8RpDHdqOraHhxPl+gQZmU9ixSBvg/p3OvqGOM/Yv05ET6AYrT03sSfuNU
+ 49JRkn2tpNv4uEmuOO43RWHSSoSfdp50+oct86Xczm7cVYL7R+qKs+5RDWMIi2QI73
+ LC5kyiTyPTNaBFWKFgxFM/L8gNLdZUIfAL/Jci+a3h1gAnIkhc2awr1RJ2geE7P8vP
+ wKgUvaJEzYyzA==
 Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id E49D6C43142; Thu, 19 Jan 2023 18:41:13 +0000 (UTC)
+ from userid 48) id D7CB4C43142; Thu, 19 Jan 2023 18:45:31 +0000 (UTC)
 From: bugzilla-daemon@kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 19 Jan 2023 18:41:13 +0000
+Date: Thu, 19 Jan 2023 18:45:31 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -71,14 +71,14 @@ X-Bugzilla-Component: f2fs
 X-Bugzilla-Version: 2.5
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: high
-X-Bugzilla-Who: v10lator@myway.de
+X-Bugzilla-Who: jaegeuk@kernel.org
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-GHwIi6Ss1v@https.bugzilla.kernel.org/>
+Message-ID: <bug-216050-202145-1fLEQcnLiz@https.bugzilla.kernel.org/>
 In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
 References: <bug-216050-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
@@ -93,10 +93,10 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
  Comment
- #130 from Thomas (v10lator@myway.de) --- (In reply to Matteo Croce from
- comment
- #129) > > Bisecting this is impossible: There are 16205 commits between 5.17
- and > 5.18. > > This will take [...] 
+ #131 from Jaegeuk Kim (jaegeuk@kernel.org) --- Re Comment #122, By any chance, 
+ could you add a code to print "page->mapping->host->i_ino" if
+ page->mapping->host
+ exists, and the status of PageUptodate(page)? 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -111,7 +111,7 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pIZqj-009PBX-M3
+X-Headers-End: 1pIZut-0007k9-Hx
 Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -130,15 +130,42 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
---- Comment #130 from Thomas (v10lator@myway.de) ---
-(In reply to Matteo Croce from comment #129)
-> > Bisecting this is impossible: There are 16205 commits between 5.17 and
-> 5.18.
-> 
-> This will take roughly 14 steps. Long but not impossible.
+--- Comment #131 from Jaegeuk Kim (jaegeuk@kernel.org) ---
+Re Comment #122,
 
-Exactly: 14 steps * 2 months = 28 months = 2 years and 4 months. This ofc
-assumes you're bisecting 24/7...
+By any chance, could you add a code to print "page->mapping->host->i_ino" if
+page->mapping->host exists, and the status of PageUptodate(page)?
+
+When GC tries to move the valid block, if the block was truncated and somehow
+MM gives a stale page, we may hit a loop?
+
+How about this to report the error to GC? GC will skip this migration and will
+do it later or skip it, if the block was really truncated.
+
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1325,18 +1325,14 @@ struct page *f2fs_get_lock_data_page(struct inode
+*inode, pgoff_t index,
+ {
+        struct address_space *mapping = inode->i_mapping;
+        struct page *page;
+-repeat:
++
+        page = f2fs_get_read_data_page(inode, index, 0, for_write, NULL);
+        if (IS_ERR(page))
+                return page;
+
+        /* wait for read completion */
+        lock_page(page);
+-       if (unlikely(page->mapping != mapping)) {
+-               f2fs_put_page(page, 1);
+-               goto repeat;
+-       }
+-       if (unlikely(!PageUptodate(page))) {
++       if (unlikely(page->mapping != mapping || !PageUptodate(page))) {
+                f2fs_put_page(page, 1);
+                return ERR_PTR(-EIO);
+        }
 
 -- 
 You may reply to this email to add a comment.
