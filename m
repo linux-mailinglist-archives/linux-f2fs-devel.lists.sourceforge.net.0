@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C3676731D4
+	by mail.lfdr.de (Postfix) with ESMTPS id B7EE56731D7
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Jan 2023 07:36:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pIOXa-0001Sa-AQ;
-	Thu, 19 Jan 2023 06:36:48 +0000
+	id 1pIOXd-0000z4-Ak;
+	Thu, 19 Jan 2023 06:36:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+d6c99cb0ec1a2cfa7d20+7088+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1pIOXY-0001SN-0s for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 19 Jan 2023 06:36:46 +0000
+ id 1pIOXX-0000yr-E5 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 19 Jan 2023 06:36:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wI3Vffj/Y5/w+tGLiOXfNC6bTn/YLU1DHa2oGPTIuIQ=; b=WxVHh5/CfIv8zJv/j3PEoooibG
- bobyle4jOLg2f+HgNvEJjUTzoZLRYoViHm3gDjcQ4KCQVBjQwcALUnKn10RZiaOA2l/4F4RI/MQHL
- YTP69bVr09xhpTGD4c97qnlpzVJYPGl0EJtSbW4dP67AgqhaMFFHnzRIZ52PehLjMxkM=;
+ bh=i98/N1jTMU5BFfsuB5WaRbW8ztdFj6EVQJfgX6qMD04=; b=GOdis+lxbjhu+qGphaZFn49r8w
+ DC2s1uPCovyxvKMahfgp7lmJ33qP1IvvnDBzevm3idK/zvHjfCj3dZ9AzqKTrqc674oq7fSFr0rF0
+ mHh1MBksZu7uhVs5aExsbPun8zY9PqgEh9/a9uPXzgHbvizRKYUQYPwXCQzOda8ngBkQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,32 +31,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wI3Vffj/Y5/w+tGLiOXfNC6bTn/YLU1DHa2oGPTIuIQ=; b=KDzaAAkMxRFwnY4uF45ykGpydn
- ckog4af0Hj0/mVuKiN1OgoqI+P4jX7hXVCbSGSkDhsCOOS7hPGhogl38F8FkFP43Qv/VRJ7yVJe9N
- xyB4tCecNm6q37F6UqfB6oV0q+h1oDLBi7MWmghBmXh59AKttsPwV5hQ9gVYJr+tiW6A=;
+ bh=i98/N1jTMU5BFfsuB5WaRbW8ztdFj6EVQJfgX6qMD04=; b=RQxpuitvN6/62+VmWmgG34Q54+
+ UaJ5zmq18tAbEOvmwcIt0/f0Mcn7cUyIYL8at0Htb7yIFLPn+Z2hsV8eHynL28XBlxqUmYrA6obTU
+ Nv5DPhPlfv5Mziuav+g+aFI9NivvpNlF1YdEyTiBj1Y75cpOkHOM6DEOBl6mRHu+kSfY=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pIOXW-008fSH-0P for linux-f2fs-devel@lists.sourceforge.net;
+ id 1pIOXW-008fSJ-0O for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 19 Jan 2023 06:36:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=wI3Vffj/Y5/w+tGLiOXfNC6bTn/YLU1DHa2oGPTIuIQ=; b=1KyRE5AhwCYkbKr83BICy8/GOT
- KhN8x8857MD1XgWYJpfVavUrxnHBkIOaffuw13sCDl8VUBx4pv7ZDMf6ptflhn8dOV+4IBRnGEPJl
- 8VlUcHTQ7nrNcbXCcf15DIs04qWO4Gzch8PYMNrxO+sLwWi62oBYxcsbSdWIKHhQ4qhM4uqY0wkvA
- iTDXECiS6uOZLO6pcLrBw5wYpNxuHRysjG93U+RnS0m971nIxioIFRwcFB58UubAhE8h9eXlDWKij
- m2CAAsUo7DO3HJqJz+qqkYu4LBHNYJ8CaFp2aZ2xNJ3RIrpXaZItZA7V6WsyQ7CG1+7BiUPnpKngU
- vMjrthSg==;
+ bh=i98/N1jTMU5BFfsuB5WaRbW8ztdFj6EVQJfgX6qMD04=; b=vSRe5crZIFOdBLzlPen2t7HXXL
+ M5HIjZkDID1izOD5c3F52h3rhFDR3HOn08Lhtl2Lb1n60gs25Wm3ai/gMOj8Ubo4og5wEMwsYJfia
+ oKdwV70gIBIgoTKG/XgFJu4t4hUp55EjaVtSzRkXNEQ6binpXi0vSzDtMh330V8+T9CBfO2W+S3Id
+ wOZxNfOkutwUypANhwmzQmk6hCsBitD7ub+pdYViu8YbyC8Ezp5LeLEBjwfRumcUv/eCqriQJX3ug
+ OaRMNHGllfJXCYcHbXqP5XLnsNr8g4VwvN0tj7uDoM3L9xybsb2RuQX+rOMIWZ1im/YEU7bhLX6Gc
+ HCzDfx6w==;
 Received: from [2001:4bb8:19a:2039:96fe:c1ec:dda2:41a3] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pIOXL-003kb4-6L; Thu, 19 Jan 2023 06:36:35 +0000
+ id 1pIOXO-003kbY-F3; Thu, 19 Jan 2023 06:36:38 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	Chao Yu <chao@kernel.org>
-Date: Thu, 19 Jan 2023 07:36:19 +0100
-Message-Id: <20230119063625.466485-3-hch@lst.de>
+Date: Thu, 19 Jan 2023 07:36:20 +0100
+Message-Id: <20230119063625.466485-4-hch@lst.de>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230119063625.466485-1-hch@lst.de>
 References: <20230119063625.466485-1-hch@lst.de>
@@ -70,12 +70,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: For each loop add a local curseg_info pointer insted of
- looking
- it up for each of the three fields. Signed-off-by: Christoph Hellwig
- <hch@lst.de>
- --- fs/f2fs/checkpoint.c | 22 ++++++++++ 1 file changed, 10 insertions(+),
- 12 deletions(-) 
+ Content preview: Add a helper to return the valid blocks on log and SSR
+ segments, 
+ and replace the last two uses of curseg_blkoff with it. Signed-off-by:
+ Christoph
+ Hellwig <hch@lst.de> --- fs/f2fs/segment.c | 32 +++++++++++++++
+ fs/f2fs/segment.h
+ | 6 ------ 2 files changed, 15 insertions(+), 23 deletions(-) 
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,8 +91,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1pIOXW-008fSH-0P
-Subject: [f2fs-dev] [PATCH 2/8] f2fs: simplify do_checkpoint
+X-Headers-End: 1pIOXW-008fSJ-0O
+Subject: [f2fs-dev] [PATCH 3/8] f2fs: add a f2fs_curseg_valid_blocks helper
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,49 +109,90 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-For each loop add a local curseg_info pointer insted of looking it up
-for each of the three fields.
+Add a helper to return the valid blocks on log and SSR segments, and
+replace the last two uses of curseg_blkoff with it.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/f2fs/checkpoint.c | 22 ++++++++++------------
- 1 file changed, 10 insertions(+), 12 deletions(-)
+ fs/f2fs/segment.c | 32 +++++++++++++++-----------------
+ fs/f2fs/segment.h |  6 ------
+ 2 files changed, 15 insertions(+), 23 deletions(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index d68b3c991888df..641165c8299231 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1470,20 +1470,18 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 	ckpt->elapsed_time = cpu_to_le64(get_mtime(sbi, true));
- 	ckpt->free_segment_count = cpu_to_le32(free_segments(sbi));
- 	for (i = 0; i < NR_CURSEG_NODE_TYPE; i++) {
--		ckpt->cur_node_segno[i] =
--			cpu_to_le32(curseg_segno(sbi, i + CURSEG_HOT_NODE));
--		ckpt->cur_node_blkoff[i] =
--			cpu_to_le16(curseg_blkoff(sbi, i + CURSEG_HOT_NODE));
--		ckpt->alloc_type[i + CURSEG_HOT_NODE] =
--				curseg_alloc_type(sbi, i + CURSEG_HOT_NODE);
-+		struct curseg_info *curseg = CURSEG_I(sbi, i + CURSEG_HOT_NODE);
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index ec6880213e8fa9..ad323b6e8609cd 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -2323,6 +2323,15 @@ bool f2fs_is_checkpointed_data(struct f2fs_sb_info *sbi, block_t blkaddr)
+ 	return is_cp;
+ }
+ 
++static unsigned short f2fs_curseg_valid_blocks(struct f2fs_sb_info *sbi, int type)
++{
++	struct curseg_info *curseg = CURSEG_I(sbi, type);
 +
-+		ckpt->cur_node_segno[i] = cpu_to_le32(curseg->segno);
-+		ckpt->cur_node_blkoff[i] = cpu_to_le16(curseg->next_blkoff);
-+		ckpt->alloc_type[i + CURSEG_HOT_NODE] = curseg->alloc_type;
- 	}
- 	for (i = 0; i < NR_CURSEG_DATA_TYPE; i++) {
--		ckpt->cur_data_segno[i] =
--			cpu_to_le32(curseg_segno(sbi, i + CURSEG_HOT_DATA));
--		ckpt->cur_data_blkoff[i] =
--			cpu_to_le16(curseg_blkoff(sbi, i + CURSEG_HOT_DATA));
--		ckpt->alloc_type[i + CURSEG_HOT_DATA] =
--				curseg_alloc_type(sbi, i + CURSEG_HOT_DATA);
-+		struct curseg_info *curseg = CURSEG_I(sbi, i + CURSEG_HOT_DATA);
++	if (sbi->ckpt->alloc_type[type] == SSR)
++		return sbi->blocks_per_seg;
++	return curseg->next_blkoff;
++}
 +
-+		ckpt->cur_data_segno[i] = cpu_to_le32(curseg->segno);;
-+		ckpt->cur_data_blkoff[i] = cpu_to_le16(curseg->next_blkoff);
-+		ckpt->alloc_type[i + CURSEG_HOT_DATA] = curseg->alloc_type;
+ /*
+  * Calculate the number of current summary pages for writing
+  */
+@@ -2332,15 +2341,11 @@ int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra)
+ 	int i, sum_in_page;
+ 
+ 	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++) {
+-		if (sbi->ckpt->alloc_type[i] == SSR)
+-			valid_sum_count += sbi->blocks_per_seg;
+-		else {
+-			if (for_ra)
+-				valid_sum_count += le16_to_cpu(
+-					F2FS_CKPT(sbi)->cur_data_blkoff[i]);
+-			else
+-				valid_sum_count += curseg_blkoff(sbi, i);
+-		}
++		if (sbi->ckpt->alloc_type[i] != SSR && for_ra)
++			valid_sum_count +=
++				le16_to_cpu(F2FS_CKPT(sbi)->cur_data_blkoff[i]);
++		else
++			valid_sum_count += f2fs_curseg_valid_blocks(sbi, i);
  	}
  
- 	/* 2 cp + n data seg summary + orphan inode blocks */
+ 	sum_in_page = (PAGE_SIZE - 2 * SUM_JOURNAL_SIZE -
+@@ -3861,15 +3866,8 @@ static void write_compacted_summaries(struct f2fs_sb_info *sbi, block_t blkaddr)
+ 
+ 	/* Step 3: write summary entries */
+ 	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++) {
+-		unsigned short blkoff;
+-
+ 		seg_i = CURSEG_I(sbi, i);
+-		if (sbi->ckpt->alloc_type[i] == SSR)
+-			blkoff = sbi->blocks_per_seg;
+-		else
+-			blkoff = curseg_blkoff(sbi, i);
+-
+-		for (j = 0; j < blkoff; j++) {
++		for (j = 0; j < f2fs_curseg_valid_blocks(sbi, i); j++) {
+ 			if (!page) {
+ 				page = f2fs_grab_meta_page(sbi, blkaddr++);
+ 				kaddr = (unsigned char *)page_address(page);
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index ad6a9c19f46a48..0f3f05cb8c29f5 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -710,12 +710,6 @@ static inline unsigned char curseg_alloc_type(struct f2fs_sb_info *sbi,
+ 	return curseg->alloc_type;
+ }
+ 
+-static inline unsigned short curseg_blkoff(struct f2fs_sb_info *sbi, int type)
+-{
+-	struct curseg_info *curseg = CURSEG_I(sbi, type);
+-	return curseg->next_blkoff;
+-}
+-
+ static inline void check_seg_range(struct f2fs_sb_info *sbi, unsigned int segno)
+ {
+ 	f2fs_bug_on(sbi, segno > TOTAL_SEGS(sbi) - 1);
 -- 
 2.39.0
 
