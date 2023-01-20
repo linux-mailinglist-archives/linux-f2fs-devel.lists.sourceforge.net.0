@@ -2,126 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9C5D6759AF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Jan 2023 17:17:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E53806759B0
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Jan 2023 17:17:30 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pIu50-0005SN-3u;
-	Fri, 20 Jan 2023 16:17:25 +0000
+	id 1pIu54-0005Sz-GM;
+	Fri, 20 Jan 2023 16:17:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1pIu4y-0005S8-Ty
+ (envelope-from <frank.li@vivo.com>) id 1pIu51-0005SZ-Px
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 20 Jan 2023 16:17:24 +0000
+ Fri, 20 Jan 2023 16:17:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8lJ3yJrB3A8rLWx2XBIG7df0s87Jz6khg7Z8UDThGoo=; b=nAF8Czx017Rmc7WnHT4Yk5dzKS
- hrd6itQb40Oy+eVS42pCOAX0zHBCrQQoMugbLuH5wEaFuKl2n8/sixvYOIkg3bzvNY28pQnSqMcWw
- b7Ze0cH+tMN5RRwwziJIGqUwcEQMPkVL0mRk+y+9P/9ozyLxZg/VSj0WmD7e2AWV6nJg=;
+ bh=kQ9sS67a6Hzv5hcd5/XgE4GMoO6QfrFaMRdt6H7dv5Q=; b=QznCgKKAMMDRrsAHfpmhT6XTNA
+ ZlKwYMg5e/xu9M1sO1xLUgBfpS5DfJDtwpc41M4FQnhyQt7apPO/ROpaID8OKwvHnY4rxxnkCLpxS
+ B2fi4qK4bbn3tCULaEMgnwdPOJZnrwQ4e2mpEjk31Cf0CXgIyjOdGtoGpBgq8vMU0rgc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=8lJ3yJrB3A8rLWx2XBIG7df0s87Jz6khg7Z8UDThGoo=; b=h
- 9KhMLgBdbD9Vu00UohpEHY+KycCCrXUGZ27RvdKOjG6GNmn4JAvA0+krcS1EXgWoKdU3MRnODopq3
- eBaSrQIOVGXWUOw6LAiHffb08VpMvzGvne6dTruAylJoCC8vsWGP6+7xWkbZSUkLXnO1/HeazPRes
- KslbYbmOuudKLMkw=;
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=kQ9sS67a6Hzv5hcd5/XgE4GMoO6QfrFaMRdt6H7dv5Q=; b=M9Y+J+ip5d6tcP8JRRPsVun2ir
+ iWs64bJybrLbaL/7vvUBaOb+tigXgvj9D9TFRR6a7haKq5Y7B6OHWwUlpIMw+nfd26EzsONCycueK
+ KvPTJlRoHUEyLpUBcwh7OBmFlpujOPBTSxffr3iLL9tYNgGRt5cVoTohOK7ttkqZqW3A=;
 Received: from mail-psaapc01on2095.outbound.protection.outlook.com
  ([40.107.255.95] helo=APC01-PSA-obe.outbound.protection.outlook.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pIu4t-00ANvr-Uo for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 20 Jan 2023 16:17:24 +0000
+ id 1pIu4y-00ANvr-Ec for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 20 Jan 2023 16:17:26 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=URElY5bQB98tco8pTiPkdBQdCR+SxOQBV7R0ggPWCzISblNCpo91+PXrZdf6iFbK4UHNNDHzoVuhK+22IjDpqvxZaehlvX/jafVYyD/+hImLSCIcI/FWpgPGLN0EvCWMg7Wr44boA9yqvh2kELiO8Wv1zD73gxDkDRmsvpCqF0+DkvEKt1PKk7VjSnCTNpY7fEpGs1pMoLDhDjWo6vcE7Tzwrz60pC9jsaqpRSCLO2+KzVfrVpYqYCEKPPOdk9VyS7Z+LyqsvWQ9enrXOe0bF1TlBZ/zMTlBnrsDnfVD2g88Xpc44iXZJuryK+lTsaHHueOAPsNMbL5MhvQy4cH3og==
+ b=WzWnufwTPLe4IOXWvmUUG/L4U0H9pY98U3V0ZYdm1h5hjoUyQ3mJ0XmwpIwsCRbLUvCMYO2x1M6mRztyHYVtT9a9l3yo6lAHnjTeDks9cg2wZeNOKVBLeUkiw0/VPpJ5SlUGw4Ly2rQ0GasOLDt81KH4fvyf3qvIUYRZJgfKX1s9vkn3pv9g46PGkifxLsNLEQ11z+Q+zJKlQBqAMD32KGSd2WDdHFF/RD2tSyX7B2N69RcI05OsNmnWBB931gFiXx9LZXc75s5Xdzx4juxBqTx9wXKUS/RXjLhoooiYCkdcTZC7/Rvoo0BRjEapnJ8GnEG6Pq9j4p9+RjIbbZQWWQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8lJ3yJrB3A8rLWx2XBIG7df0s87Jz6khg7Z8UDThGoo=;
- b=SCcczmWk5v0nsMD4PGe3Qc18HHc+y5dnL7Y0W9nzErgwwbWKfxc67yJJMFma0m4utvFZJRp/rL9qD/FHKB9Rt+e3eRZL8IbSfd78QpM2EghwKrmfpaXa4UWudMxZ0Ic+OL1iJ5ehOv1TteVZJgHWzE4ZdAwOnPiti2/Jz4lF1e8hPnrga7RQskC2oHJY7n8W3vJZEKw1V2b2wDgkJZAIPLdxpXRCDuW9QSBCoF6iQ1eVNZVdyEU/+iKQ4QwhTok5p3MWGUE3fEd4+ftyXh0+bCAWCsp6YRgyeRp3HZy+R4Dx5Zheic8mCQonUUEak7NEZbsVpYvpsFjSV4f+YBXBmg==
+ bh=kQ9sS67a6Hzv5hcd5/XgE4GMoO6QfrFaMRdt6H7dv5Q=;
+ b=XlgkQO8oGaD8qi325S9NQcCU7o56dnDM3mM5I9EL2qC+tVNUTPcuVMKaDaiz+71o8VZJ8Igb5rpCRS3evR7A6lQqUjkCkoaY/GUy29kawaysYvUHIZtNxheA2+teHOnq8svco2cuMYLkMabvfjVwm1uuz/FzLqOvagtizeDDa6mTWCG3UbWZ9mgF4Z3wKyvF4c27o6fep7ULY5q2T4txbPZG8IOVdlDAyoOFkkV+mPLaVSLKTNtjq2yzsan/gDIo+tPmCARYXxZ1SiMHBoeoRzo/am8yPh9dxeUGlWjUmY7U6aM5E/2dKl++KC5vPUVQ4Ru8rsowG2Lfovaxz4jeAg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8lJ3yJrB3A8rLWx2XBIG7df0s87Jz6khg7Z8UDThGoo=;
- b=TsywWlnvbDW7nb5J3CRIuZ2CDkGRDgOaUNcLGhIhExu6y6Nr8ikT5V+WUptKOVqa6MiXjLtCiIRCxL88MrPZzI0Gbe49raZ8qi4wdE5WvIFX7f1o25sfhWHZTLS8Yms4Ure94+4MQZ3Vk69bvU/Xr6Ybt7UeL7jBQMBWg/BH0RS7noyvFD0LyiXEq4/Pmp7wwtZ49SYIlJBd9rqdoXt4G/YzMs3V9m3/KnaAdoxnma4MlWh4m4YnKpsm6wI8LmtANwNrISSf2Bm8EF76MAsCY9LEsnBLvivamKy6gRjeZBHge9cmsa+dpC8jXzUGWtEQetLNe/GrI2+u8iL/JnUlNg==
+ bh=kQ9sS67a6Hzv5hcd5/XgE4GMoO6QfrFaMRdt6H7dv5Q=;
+ b=IlYOvnoWZ+vswcU3PF2bdPDdYAxL6/oNK64wK3zuitKO4GwAprwQQIpKjWMIW+IYpz29oo0lKaeSesN5NcOL2jIoUIXAdatq4jhIZ2uFKviQNAWGNK93ixNov6OiTTFdBHC6te2RgWCJ065ktkGutzDkFiLDqCSQ13LizABf/cSrU9gAWWRV5WOVhy2Dh5afSN9oO6ASw7nhQG4ACUxKLZonIHvKwOmfczW9B+tOB9vi3yNuNHiWbE8bjHpOlOERgx62Wp1x2j8oUBs3BOI478ODu03pn2uF67Iny1UAFRnbC00vRUuaJJ9rtEf4XLrh3OEfu8E4KpcjVZlSdOysKQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
  by KL1PR06MB6233.apcprd06.prod.outlook.com (2603:1096:820:d8::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.5; Fri, 20 Jan
- 2023 16:17:06 +0000
+ 2023 16:17:08 +0000
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::3e52:d08c:ecf4:d572]) by SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::3e52:d08c:ecf4:d572%5]) with mapi id 15.20.6002.012; Fri, 20 Jan 2023
- 16:17:06 +0000
+ 16:17:08 +0000
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Sat, 21 Jan 2023 00:16:55 +0800
-Message-Id: <20230120161656.70308-1-frank.li@vivo.com>
+Date: Sat, 21 Jan 2023 00:16:56 +0800
+Message-Id: <20230120161656.70308-2-frank.li@vivo.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20230120161656.70308-1-frank.li@vivo.com>
+References: <20230120161656.70308-1-frank.li@vivo.com>
 X-ClientProxiedBy: SI2PR02CA0041.apcprd02.prod.outlook.com
  (2603:1096:4:196::20) To SEZPR06MB5269.apcprd06.prod.outlook.com
  (2603:1096:101:78::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|KL1PR06MB6233:EE_
-X-MS-Office365-Filtering-Correlation-Id: 607ef2a7-b2db-4734-7847-08dafb01c623
+X-MS-Office365-Filtering-Correlation-Id: f2895943-8783-4bc6-0512-08dafb01c780
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2OHeEkaJ4KaNAXkuyCzGVt6LEG+H3Imyc16iHSiQx9ETlNc//FS4SGwwegWl8uKYha0x9UjEf9xaPUjMPhttaDicISvrCyLk99eCyZFl/Jce3FPG1PRzePiVZ2TfWFJCM8v7VPjPY3E7qNBZLg3tKXTEAYb+iCerscllwa/Csv6sGn/3CzeCF6lQfdf7AzUY/EjuBVAULAWJCByLObRNH9VZ8bl+frAw11amWjYONH+9VJiHEA6vEWv+ECif1Yyvros/YIZq4keVlUUf5q6f5mNYC9mEg3yExUGch0NRJQiPJpAze/yLsgFUpEXU3fP46ekRMgl7qIV6sPB8BGgYPJmorl43pfEBDVqc4FhWoMT6gDLduKJQEMvRAKbajXoux45bnqDWdV6MTRHtkFlDEoxsIwtdNlccvgJptHYCTNE5m3el3LhEB3i2IG1zx3MYEmOQd8nejMGzd8cv89+xaWo+cXOeZIZKxwZSgcqWokZkIICU9gYCFTLBkcWW16zy+q2WaVfbbIVQXCJJHVJ1turgX8zo+40lVAxDc+4CmQgJY7Qd43Yihf/XSLIfL3Nw5nByFvNUdaUxb7T+pc095CoLRPDEtcML1dS7+OtnFUS5730Qpa8eUl2w0WG2EYVNFUHrZYolj7I7YrfFuOgFyHlUYKtjSUQvcEBTkziKltHnAxlYElHVxybPMdxf2tt8Fgg5YTMCdwNMy0dqIdb+0A==
+X-Microsoft-Antispam-Message-Info: MeYXorIS3ykowvbnAqJe6goDTQXl1vB57w56E2oQDIvF86geZsiTmEtE9n/ga+czGiCr7iOR0jJGOsoeHdNLBtrNrMGdv3rKIPZms5V654xlGm+MMMCvTm5pWSND1EmPhIQQq5honOqk5HGw9LvkiG7PFzLnCL9EdyGNaXCdAbfHPFK3AoE8n8gkeoz+GRaG4ZHhwYLrR3x9yh18chs3vBVnx0FnGhAGLtiDlZelNhIT01Z+GkVByH3GNy/qq9tjnfA7UKB8OtNFKr0dmsXaCaM3rURPSkeAB6KkHzJHC7+JdqAsMYs5FfiLJ1baXRUu5yLeqaKWL2bCDVjTMwM6vm1rRSMFsNK5y13wXIdSX7sr4MLDoqxq4NHtn/ep5i/7qaSa50PKSi0pZMDes55VfD148rNPEnykngO8wTTeocuHG1DXuvmx22f81hH+MarT5/5KI4uYSDFOEpqGs9YWiS4FUpfa0sfSNdAw4Dk4EDDpeTwoTO/5OnE3OoPteGzmfDJsqaESyM9YvLL0p729pkb9O/B3d2O8CHxff8n31jdzmf5IfTEghhFW/CU0LWbVPhvf0tMYNSUPoLiHB3LWiVZ1Re0leRxm+qhPSRFIfcfQuc0VBgJf8R2/H40oA979wz7cvHconr1DHw7nZtZMV2AAQZmbRRxgPuxaQVJasc07MfH8axz42RWoaNrP8QYYxcIcdUOTl7aq4tvlSn3+PQ==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230022)(4636009)(376002)(396003)(136003)(346002)(39860400002)(366004)(451199015)(6486002)(5660300002)(41300700001)(8676002)(54906003)(66476007)(66556008)(316002)(66946007)(2906002)(478600001)(1076003)(26005)(6666004)(52116002)(36756003)(186003)(6512007)(6506007)(2616005)(8936002)(4326008)(83380400001)(86362001)(38100700002)(38350700002);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?mJT2oE7+ENvW68Ki7r6LEBUFcTmIBnoqGYO+bHgMikq2NXvZjZ4YS85UdsCa?=
- =?us-ascii?Q?pKleo3CBPxbWd2dM71kifd3eX0muQoLnT8fAWg/a7VjdbRH0BZimnMIAer74?=
- =?us-ascii?Q?mU/Sm/eQfBgewmEHS5MOB75m0xZj8vr3A4CuCyoMw8jvFytmmA8eGz24fbq2?=
- =?us-ascii?Q?dB+bJgqZhgLSyMu9fgVlRqx5toUkaPaMyvZ7N7lVqtqT/9g3kfSE+t0G8T/+?=
- =?us-ascii?Q?STA5Pqjg3HnI0HQY8+VfSehRjvlYeo0CCu2r4pfi4xUx2rbhVL9ra0i6Y8M8?=
- =?us-ascii?Q?7QDY3tLL7GHlrGQidzOTdpANp+oTkazpBtvBFw9TWgIxxntdI/5l3ObGFLhx?=
- =?us-ascii?Q?4CzI+dmUiGHocX+4caz5+5BfgPNNMWZNSYBNjaQARJif9o+pnqWgn8njUme1?=
- =?us-ascii?Q?6T6H37Uo5AiRviYXYZYKBbQ+zzk/8jxQ2NQ8pLXlBkXM6lJ2nlQZUSRfiNrs?=
- =?us-ascii?Q?vP7w2Eq4LYD8v3TYj+E42fnqebzo1yGtnmHIKDQC0DC03G8v1UNQjqkKkaSL?=
- =?us-ascii?Q?SfifbjZ5ICH3K9F4fEjkTml08FFK7pu7isU5/9GWDU5Z7/kbpc6BX+2TxNzN?=
- =?us-ascii?Q?tkSkcdE2p6WjLw01xWSeLvyfYCVsJ8HyDaez7pE7seB3o8R8r8Vwm9zp3bgc?=
- =?us-ascii?Q?oc3sEVA3Mau4JjHcz1+zHkYG/rmW7f3Vqu9/B0Axs9uErI4SB0lRRYERVgJs?=
- =?us-ascii?Q?KzSh5OTZ6wgq/cu31AbvPmjIwE05rhqScXJOAWnUyG6JaT1/nTOe0UYe3Xzr?=
- =?us-ascii?Q?vLkdoyPEGLTiYV6x59IAArXz7SnZak1GVW7Ho22qYjRkSxJjd020MS5pgL6u?=
- =?us-ascii?Q?qCUnIGfXsAWbcwWNKGCZ0yuFfx4+J4NxEwIyzSIdPsvybGyjx2bOphXPUiAa?=
- =?us-ascii?Q?6viacEfSUiQYDG8bG1haALUhwvNO3d9oH8BkD9yTeA5iUGjvzk6i3Tgh9YaU?=
- =?us-ascii?Q?GzxYlYsLHiwGtuJIgTRbkwikwVmw8Kb+6ko8kqGy7ElspjFzhx3vqjPL4LTI?=
- =?us-ascii?Q?RhK0jAatwnM8LxDyjo3GBnyEjpIa2MGeAACTH2rnJOsG3pHL/O4UvDsgyc4W?=
- =?us-ascii?Q?1menBJfOdXe7mgDJkT8uXQh6hHp8CG6YyESGERSG20E/c/EVdm/NJm/75olc?=
- =?us-ascii?Q?TKVFAf2X6B6juLR0I2YKZ3LuEpkxE4RLTf8x/1jpnyS4uYyjDuFkx9jbroW+?=
- =?us-ascii?Q?ZGrkrTPseAsf9hKkykGVFsi7BG56fov/BvGxRykgc4naDH6LKUKLxq9MgHj1?=
- =?us-ascii?Q?/n2TOBnES892X7sdIDoKj+dnKwkugnu6XdQmald+2UyJyl8sxe+WFzUxUnyp?=
- =?us-ascii?Q?fV8+8xiO5Y3Ro5B8+uaDjkYgdorbCOzxKXfFaGilKtPjEovvaRtJCmUdwRGC?=
- =?us-ascii?Q?HlV2Lso52DD7EWampQAkwLvEmHcS0y4SJU76p+kJpJp9E48OU7Q6hyIqZcqX?=
- =?us-ascii?Q?xbT8e9oc8obklvse+5cOSm1HZaCTbgi7duh0ZCQBCDiRYsBDUtx2hbihzYfQ?=
- =?us-ascii?Q?B4VXZ5Br7wuJk3rJvtp5UHBRf4JsFsWFbY+SHyujzmjKeBF5cQuINaN9e3fY?=
- =?us-ascii?Q?fqalXUOk5mUdvFn84abb533GEPtnzG2bZIkflBj9?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?6zD0JJcL9OIH7d7Prtn8YnyeW512UCMLPBT9Olnm3LT2iNVSEsduLsqenk/9?=
+ =?us-ascii?Q?JtZIKbryNweNqEOG54QGD/ij9R7JNVOd3gSqOjsWl2XktekfmL2Hbx1d2Pdl?=
+ =?us-ascii?Q?XRl6HAJWh14OcbUxch+Q0PMitUCTJ1Tvffd1cJklvEePOkrXvrMwJKTr3Oqn?=
+ =?us-ascii?Q?6KYnZYvRC4drvqZIZXpSZAIKe+bJKebZcFeRkYaxEBQa0DtaA0/ZNZ4XGenX?=
+ =?us-ascii?Q?pDYVlYX8dUJad5b0ui++D5OLtdppn7U6YD9vgg2Gmu/L98UZh28nC5CL+vUh?=
+ =?us-ascii?Q?oufrIOpXnej1GwZiLMWpzphoaMRfGq373VHFp1t6Bh9p3wRkZq7elfw89LHj?=
+ =?us-ascii?Q?75GdRSqDJP+I+vrvjXiD6hY0Sh7stXaHF3OWFhg/z7GeWDKlBdeDKQcYKPmP?=
+ =?us-ascii?Q?SVidrvEL3nMNmqMUWq8Pn8lNmHYN1HR3sVSUYxUsisNS69QIUDF061d+TYHo?=
+ =?us-ascii?Q?13w8hkIM+sbBgwFP53STaxCWt6dn+JP7qbf3zJs6f3ekqZaUOkfbVUzHlf+Q?=
+ =?us-ascii?Q?aJVnvTj6SE9rXqzFr6lKovYseaVeIdX6cA6GtBa12K7aVsn75P8POs5Zn+JS?=
+ =?us-ascii?Q?J+OeII8Fds4dIAjErf+07ROzDgpRIc+IGaslANGsHw8J4ycY1hwoHBNpH7hD?=
+ =?us-ascii?Q?+MH0AHqnK7zCi39ZKu2P6OCqxD7qsCFcQeoW7bDNPt3jvVCKX+G+pHjjQLfK?=
+ =?us-ascii?Q?TveaUwcCPY2bOm69lJ/MuyGZaNit/VQ8Ldp++g8ceQ9+m/kfOyNMlfckSpIr?=
+ =?us-ascii?Q?nXE45s25SJPLNTbzCZD3cXg972ztI7HBDKaHoHPsMRl6IXBmY5BtLZkV160e?=
+ =?us-ascii?Q?TEkb20uWAZFt2nBNXkN77MBAer+iSp5OaAqR+IEoG83KD4WPqYzKhFFFC3i7?=
+ =?us-ascii?Q?QkM4XEXMnfG20TeC2XKkO4OyCc1l+mpN1D9mZ5/jRpoZKT/Qk92IJWy/Hnce?=
+ =?us-ascii?Q?2NJD41c08xD/nIGl42GCt9xUgqcuVmMoW8QZReIJaksY44FdEctBPu0kMGoH?=
+ =?us-ascii?Q?Gl79xArViwzDWmMGgPSTlCU6hHFwOzwvRAW+DxP5v3p0+e4Gv4hmPV+m0XMh?=
+ =?us-ascii?Q?28t6/M3NvUPPxV9Lwut1x3SiO5MAPP06ZL5LS+U1LXezr5TUInLqA9vj8rII?=
+ =?us-ascii?Q?FuiWFrxZ99d3pmO8Mex7hv6RARDjyrnUNRrfuqdlrzFsXTROQK2Z4Rq5uQkZ?=
+ =?us-ascii?Q?oexmdsB1rhmwJ+8fp2JKL12ypRsv3xrTfLoYamKrX757193ckcJh28jV78pL?=
+ =?us-ascii?Q?OARa3WEfmOfsxmFBm2REWbV0FwhLtXUMu/GhKMC02Y7lfdap3NCAHzu4P7uy?=
+ =?us-ascii?Q?5ETLwM/OJwtT3+LZ0ENTzThLFURb8wEDrQW3YEtqokn3D06AR7wgA82UdMVl?=
+ =?us-ascii?Q?xI71AbFSXYQMSSYU+g8Ro6SlHPBdYewvMRV28P3biqHKDfV0FDWJuN8hE1Xk?=
+ =?us-ascii?Q?Rqp5MWEFzVWK84rBneTAfzfadjjnd1BMNK9lrKBP3iNdCJfiKKV3wYlG+8vL?=
+ =?us-ascii?Q?1O3mpOyK+QIPhHUYUD0WA31RIKFiWxMGnczl0Icp2838INoO+gu+rpFDEvGy?=
+ =?us-ascii?Q?RdepLeXWT9cPSoVuyuZbkmgYUOMffwln1SZP1+an?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 607ef2a7-b2db-4734-7847-08dafb01c623
+X-MS-Exchange-CrossTenant-Network-Message-Id: f2895943-8783-4bc6-0512-08dafb01c780
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2023 16:17:06.5504 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2023 16:17:08.8035 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UJLCCWrPkiFlpDUO0N3+9TAPX1O9KBzmKBEVm8QQgj3TFHFANwNjUpqXRFfqqt6Re3hAFAVIqy9ktURRWsVWFw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: TjE6VVfUZzPbHuuKvgwolwqyX2+WQr2MXOFYBxzV9IPZvbW8qAuxZBfPMNoMVR0K7QK+joeDN3yCkVq+6p30Fg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR06MB6233
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -130,10 +132,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add iotype sanity check to avoid potential memory corruption.
- This is to fix the compile error below: fs/f2fs/iostat.c:231
- __update_iostat_latency()
- error: buffer overflow 'io_lat->peak_lat[type]' 3 <= 3 
+ Content preview:  Convert to use iostat_lat_type as parameter instead of raw
+ number. BTW, move NUM_PREALLOC_IOSTAT_CTXS to the header file, and rename
+ iotype to page_type to match the definition. Reported-by: kernel test robot
+ <lkp@intel.com> Reported-by: Dan Carpenter <error27@gmail.com> Signed-off-by:
+ Yangtao Li <frank.li@vivo.com> --- v3: -convert to f2fs_warn() fs/f2fs/data.c
+ | 4 ++-- fs/f [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -150,9 +154,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1pIu4t-00ANvr-Uo
-Subject: [f2fs-dev] [PATCH v3 1/2] f2fs: fix to avoid potential memory
- corruption in __update_iostat_latency()
+X-Headers-End: 1pIu4y-00ANvr-Ec
+Subject: [f2fs-dev] [PATCH v3 2/2] f2fs: use iostat_lat_type directly as a
+ parameter in the iostat_update_and_unbind_ctx()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -173,68 +177,176 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add iotype sanity check to avoid potential memory corruption.
-This is to fix the compile error below:
+Convert to use iostat_lat_type as parameter instead of raw number.
+BTW, move NUM_PREALLOC_IOSTAT_CTXS to the header file, and rename
+iotype to page_type to match the definition.
 
-fs/f2fs/iostat.c:231 __update_iostat_latency() error: buffer overflow
-'io_lat->peak_lat[type]' 3 <= 3
-
-vim +228 fs/f2fs/iostat.c
-
-  211  static inline void __update_iostat_latency(struct bio_iostat_ctx
-	*iostat_ctx,
-  212					enum iostat_lat_type type)
-  213  {
-  214		unsigned long ts_diff;
-  215		unsigned int page_type = iostat_ctx->type;
-  216		struct f2fs_sb_info *sbi = iostat_ctx->sbi;
-  217		struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
-  218		unsigned long flags;
-  219
-  220		if (!sbi->iostat_enable)
-  221			return;
-  222
-  223		ts_diff = jiffies - iostat_ctx->submit_ts;
-  224		if (page_type >= META_FLUSH)
-                                 ^^^^^^^^^^
-
-  225			page_type = META;
-  226
-  227		spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
- @228		io_lat->sum_lat[type][page_type] += ts_diff;
-                                      ^^^^^^^^^
-Mixup between META_FLUSH and NR_PAGE_TYPE leads to memory corruption.
-
-Fixes: a4b6817625e7 ("f2fs: introduce periodic iostat io latency traces")
 Reported-by: kernel test robot <lkp@intel.com>
 Reported-by: Dan Carpenter <error27@gmail.com>
-Suggested-by: Chao Yu <chao@kernel.org>
-Suggested-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
 v3:
--convert to warn
- fs/f2fs/iostat.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+-convert to f2fs_warn()
+ fs/f2fs/data.c   |  4 ++--
+ fs/f2fs/iostat.c | 39 ++++++++++++++++-----------------------
+ fs/f2fs/iostat.h | 19 ++++++++++---------
+ 3 files changed, 28 insertions(+), 34 deletions(-)
 
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 1645b8a1b904..710d4acde187 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -292,7 +292,7 @@ static void f2fs_read_end_io(struct bio *bio)
+ 	struct bio_post_read_ctx *ctx;
+ 	bool intask = in_task();
+ 
+-	iostat_update_and_unbind_ctx(bio, 0);
++	iostat_update_and_unbind_ctx(bio, READ_IO);
+ 	ctx = bio->bi_private;
+ 
+ 	if (time_to_inject(sbi, FAULT_READ_IO))
+@@ -330,7 +330,7 @@ static void f2fs_write_end_io(struct bio *bio)
+ 	struct bio_vec *bvec;
+ 	struct bvec_iter_all iter_all;
+ 
+-	iostat_update_and_unbind_ctx(bio, 1);
++	iostat_update_and_unbind_ctx(bio, bio->bi_opf & REQ_SYNC ? WRITE_SYNC_IO : WRITE_ASYNC_IO);
+ 	sbi = bio->bi_private;
+ 
+ 	if (time_to_inject(sbi, FAULT_WRITE_IO))
 diff --git a/fs/f2fs/iostat.c b/fs/f2fs/iostat.c
-index ed8176939aa5..96637756eae8 100644
+index 96637756eae8..c767a2e7d5a9 100644
 --- a/fs/f2fs/iostat.c
 +++ b/fs/f2fs/iostat.c
-@@ -223,8 +223,12 @@ static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
+@@ -14,7 +14,6 @@
+ #include "iostat.h"
+ #include <trace/events/f2fs.h>
+ 
+-#define NUM_PREALLOC_IOSTAT_CTXS	128
+ static struct kmem_cache *bio_iostat_ctx_cache;
+ static mempool_t *bio_iostat_ctx_pool;
+ 
+@@ -210,53 +209,47 @@ void f2fs_update_iostat(struct f2fs_sb_info *sbi, struct inode *inode,
+ }
+ 
+ static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
+-				int rw, bool is_sync)
++				enum iostat_lat_type lat_type)
+ {
+ 	unsigned long ts_diff;
+-	unsigned int iotype = iostat_ctx->type;
++	unsigned int page_type = iostat_ctx->type;
+ 	struct f2fs_sb_info *sbi = iostat_ctx->sbi;
+ 	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
+-	int idx;
+ 	unsigned long flags;
+ 
+ 	if (!sbi->iostat_enable)
  		return;
  
  	ts_diff = jiffies - iostat_ctx->submit_ts;
--	if (iotype >= META_FLUSH)
-+	if (iotype == META_FLUSH) {
- 		iotype = META;
-+	} else if (iotype >= NR_PAGE_TYPE) {
-+		f2fs_warn(sbi, "%s: %d over NR_PAGE_TYPE", __func__, iotype);
-+		return;
-+	}
+-	if (iotype == META_FLUSH) {
+-		iotype = META;
+-	} else if (iotype >= NR_PAGE_TYPE) {
+-		f2fs_warn(sbi, "%s: %d over NR_PAGE_TYPE", __func__, iotype);
++	if (page_type == META_FLUSH) {
++		page_type = META;
++	} else if (page_type >= NR_PAGE_TYPE) {
++		f2fs_warn(sbi, "%s: %d over NR_PAGE_TYPE", __func__, page_type);
+ 		return;
+ 	}
  
- 	if (rw == 0) {
- 		idx = READ_IO;
+-	if (rw == 0) {
+-		idx = READ_IO;
+-	} else {
+-		if (is_sync)
+-			idx = WRITE_SYNC_IO;
+-		else
+-			idx = WRITE_ASYNC_IO;
++	if (lat_type >= MAX_IO_TYPE) {
++		f2fs_warn(sbi, "%s: %d over MAX_IO_TYPE", __func__, lat_type);
++		return;
+ 	}
+ 
+ 	spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
+-	io_lat->sum_lat[idx][iotype] += ts_diff;
+-	io_lat->bio_cnt[idx][iotype]++;
+-	if (ts_diff > io_lat->peak_lat[idx][iotype])
+-		io_lat->peak_lat[idx][iotype] = ts_diff;
++	io_lat->sum_lat[lat_type][page_type] += ts_diff;
++	io_lat->bio_cnt[lat_type][page_type]++;
++	if (ts_diff > io_lat->peak_lat[lat_type][page_type])
++		io_lat->peak_lat[lat_type][page_type] = ts_diff;
+ 	spin_unlock_irqrestore(&sbi->iostat_lat_lock, flags);
+ }
+ 
+-void iostat_update_and_unbind_ctx(struct bio *bio, int rw)
++void iostat_update_and_unbind_ctx(struct bio *bio, enum iostat_lat_type lat_type)
+ {
+ 	struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
+-	bool is_sync = bio->bi_opf & REQ_SYNC;
+ 
+-	if (rw == 0)
++	if (lat_type == READ_IO)
+ 		bio->bi_private = iostat_ctx->post_read_ctx;
+ 	else
+ 		bio->bi_private = iostat_ctx->sbi;
+-	__update_iostat_latency(iostat_ctx, rw, is_sync);
++	__update_iostat_latency(iostat_ctx, lat_type);
+ 	mempool_free(iostat_ctx, bio_iostat_ctx_pool);
+ }
+ 
+diff --git a/fs/f2fs/iostat.h b/fs/f2fs/iostat.h
+index 2c048307b6e0..1f827a2fe6b2 100644
+--- a/fs/f2fs/iostat.h
++++ b/fs/f2fs/iostat.h
+@@ -8,20 +8,21 @@
+ 
+ struct bio_post_read_ctx;
+ 
++enum iostat_lat_type {
++	READ_IO = 0,
++	WRITE_SYNC_IO,
++	WRITE_ASYNC_IO,
++	MAX_IO_TYPE,
++};
++
+ #ifdef CONFIG_F2FS_IOSTAT
+ 
++#define NUM_PREALLOC_IOSTAT_CTXS	128
+ #define DEFAULT_IOSTAT_PERIOD_MS	3000
+ #define MIN_IOSTAT_PERIOD_MS		100
+ /* maximum period of iostat tracing is 1 day */
+ #define MAX_IOSTAT_PERIOD_MS		8640000
+ 
+-enum {
+-	READ_IO,
+-	WRITE_SYNC_IO,
+-	WRITE_ASYNC_IO,
+-	MAX_IO_TYPE,
+-};
+-
+ struct iostat_lat_info {
+ 	unsigned long sum_lat[MAX_IO_TYPE][NR_PAGE_TYPE];	/* sum of io latencies */
+ 	unsigned long peak_lat[MAX_IO_TYPE][NR_PAGE_TYPE];	/* peak io latency */
+@@ -57,7 +58,7 @@ static inline struct bio_post_read_ctx *get_post_read_ctx(struct bio *bio)
+ 	return iostat_ctx->post_read_ctx;
+ }
+ 
+-extern void iostat_update_and_unbind_ctx(struct bio *bio, int rw);
++extern void iostat_update_and_unbind_ctx(struct bio *bio, enum iostat_lat_type type);
+ extern void iostat_alloc_and_bind_ctx(struct f2fs_sb_info *sbi,
+ 		struct bio *bio, struct bio_post_read_ctx *ctx);
+ extern int f2fs_init_iostat_processing(void);
+@@ -67,7 +68,7 @@ extern void f2fs_destroy_iostat(struct f2fs_sb_info *sbi);
+ #else
+ static inline void f2fs_update_iostat(struct f2fs_sb_info *sbi, struct inode *inode,
+ 		enum iostat_type type, unsigned long long io_bytes) {}
+-static inline void iostat_update_and_unbind_ctx(struct bio *bio, int rw) {}
++static inline void iostat_update_and_unbind_ctx(struct bio *bio, enum iostat_lat_type type) {}
+ static inline void iostat_alloc_and_bind_ctx(struct f2fs_sb_info *sbi,
+ 		struct bio *bio, struct bio_post_read_ctx *ctx) {}
+ static inline void iostat_update_submit_ctx(struct bio *bio,
 -- 
 2.25.1
 
