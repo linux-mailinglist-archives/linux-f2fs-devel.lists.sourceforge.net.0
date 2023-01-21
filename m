@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49E1967640F
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Jan 2023 06:47:09 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E562B676434
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Jan 2023 07:39:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pJ6iX-0007Ry-2k;
-	Sat, 21 Jan 2023 05:47:04 +0000
+	id 1pJ7Xb-0006Jl-5O;
+	Sat, 21 Jan 2023 06:39:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1pJ6iV-0007Rs-Kz
- for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 21 Jan 2023 05:47:02 +0000
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+1651c3ebed9361b307e7+7090+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1pJ7XY-0006Jf-AX for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 21 Jan 2023 06:39:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7ooqmtC9vgkjhH5uMtOuYKubMReNDays7h0BBrH5+8M=; b=ZVjNIq7tAmTGoce7t/rA+nfKxS
- gLftNdL80pm4fY79MzY4AbgN9CNGBamZF+bsFqrQc29eSz4STNXtv5OeZhsSZy3ZlTBCl7+enxEuR
- bWW8LP5oVM8YKU7ZTFAT5NRQ4+GPX5hD8wDWXnDf79ZD388sLEESjqg0XdyhHbCFCcF8=;
+ bh=pbB8338ZfSvN5avLy4jRRyLgTgoL9VF2bh4jfARYSoY=; b=W6Uiyk0OKiV0cvh3Sud5JW7QV6
+ aBHXrSWXD2621NU92QaNu5UBu5jDF85XhIv/FDj0u8EmrpIbBMx/0m/5XjnQ2/3FxtLlkQW9urvb5
+ G8FDsbdqjnY2S+Xx5fNp0IgHXilOvHCpeHKsLTDskX1yR/P4Hvn5t+ri/Y3O3Zk32uds=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,68 +31,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7ooqmtC9vgkjhH5uMtOuYKubMReNDays7h0BBrH5+8M=; b=XCq67xQv+tWuthmRs7/wtxfl9v
- 6NH920/5bQeL6HkbrO88rqO+/xC7Ifq14UFkUol4M4QkdIADxqbcfjJNnohEwaO8SzgVh6xbULa5Y
- 0cY5F7QXBvuKGZ1NZ6rwT4Dqs7TAn0hTmsRgS7j7swqBdj8pnt4K4q12aysHNBhZRbSg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=pbB8338ZfSvN5avLy4jRRyLgTgoL9VF2bh4jfARYSoY=; b=RxDWj1DZK6RAj5NPpNwRgD5FHf
+ jXzXgAg+8QRrTPNdCGDZ8O8MZrr65MCcCVbFRILIQZNDEFlg6ShBFDqCcRsB/CfLKHErPogqWoUMf
+ ARuCHQ7nvH/r5RWIUmdxe/uKCGBiiMFyA7NJv6h//JP4ZO403B5IcmPJ8Rki4Ywau0P4=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pJ6iU-00B8Dc-9u for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 21 Jan 2023 05:47:02 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id DD219601C0;
- Sat, 21 Jan 2023 05:46:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15E24C433EF;
- Sat, 21 Jan 2023 05:46:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1674280012;
- bh=8SxDwvezamNgdCvUXl9WhV9580K6miB6Zm1RyeGT6PA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=LAK0J7coIoDluJ2A5Jm66dZUoSbq6jKiU0ykC2xY7ovP7DEfTJbKnn4D9duF50W4n
- p2zYljlus3Uh0Kjaf9ueWDOgKRrvvjnV4KvCYfpUwrgbP/DnaO/4JGBhB23jD5kQp3
- 48lmMJ+JtuoRNhhzoTco/WIgs2qT7pnU0Gr661maMMrTRCTRQDQMzkxWxv+bq9GBqh
- 4gz14G6fT6bUe/40rnNzsu/GfTeei0Qh3aKzYx8TGPKxzBxW6agmm1i8ErCHvr0vHN
- kpw9PMQ8D4v/ls80RY2dGIGyTGRTz1sXsrrMCHyJXm2AnuOhZHYoUlshLTH9VCq5Fm
- LejQtZIDNL5PQ==
-Date: Fri, 20 Jan 2023 21:46:49 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Yangtao Li <frank.li@vivo.com>
-Message-ID: <Y8t8SZ9VGm5fjYAn@sol.localdomain>
-References: <20230121051204.81251-1-frank.li@vivo.com>
+ id 1pJ7XV-00BAbM-2A for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 21 Jan 2023 06:39:46 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=pbB8338ZfSvN5avLy4jRRyLgTgoL9VF2bh4jfARYSoY=; b=F+LR1CwIsyVpngzUGE2qUMd1jN
+ uj274WuuBiMxOEJ/sz8alo6NOXYTEmgDpxSqhy6+F8U/DLhKVoH7y5pF90W4oQaTeRBgyzwhm1gUu
+ JnmVwS0bYrPR09cpQVViev3nCD9OzprTksNZzrocqDTt1IOw6xnyNOG2tmZY1aX4EtX/oTR2SN+eo
+ /a5Y6I7VBXwxkAJLWa1m0egijIDvOY9XKuuY7Et6B3cmpF2fP+7ltQXRwbc4kPJixH1yjovqRuZsW
+ oTQvvuzNpFPz1GGep/Up3cpy9UoShl8qOlObgbqAMRiP/K/vPnX48uKdKsWRYFxl+4DovjWbi8vmK
+ pxe3gEqg==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
+ Hat Linux)) id 1pJ7X9-00DQNk-ST; Sat, 21 Jan 2023 06:39:23 +0000
+Date: Fri, 20 Jan 2023 22:39:23 -0800
+From: Christoph Hellwig <hch@infradead.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <Y8uImwmmprNOCnB9@infradead.org>
+References: <20221223203638.41293-1-ebiggers@kernel.org>
+ <20221223203638.41293-11-ebiggers@kernel.org>
+ <20230109183759.c1e469f5f2181e9988f10131@linux-foundation.org>
+ <Y7zV41MQWSUGo4fw@sol.localdomain>
+ <Y8rx/SPfnlYJJ8XD@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230121051204.81251-1-frank.li@vivo.com>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <Y8rx/SPfnlYJJ8XD@sol.localdomain>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sat, Jan 21, 2023 at 01:12:00PM +0800,
- Yangtao Li via Linux-f2fs-devel
- wrote: > commit bdc48fa11e46 ("checkpatch/coding-style: deprecate 80-column
- > warning") increased the limit to 100 columns. Le [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Fri, Jan 20, 2023 at 11:56:45AM -0800, Eric Biggers wrote:
+ > Any more thoughts on this from Andrew, the ext4 maintainers, or anyone
+ else? As someone else: I relaly much prefer to support common functionality
+ (fsverity) in common helpers rather than copy and pasting them into various
+ file systems. The copy common helper and slightly modi [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [198.137.202.133 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pJ6iU-00B8Dc-9u
-Subject: Re: [f2fs-dev] [PATCH v2 1/5] f2fs: fix unnecessary newlines in
- super.c
+X-Headers-End: 1pJ7XV-00BAbM-2A
+Subject: Re: [f2fs-dev] [PATCH v2 10/11] fs/buffer.c: support fsverity in
+ block_read_full_folio()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,29 +105,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Andrey Albershteyn <aalbersh@redhat.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, linux-ext4@vger.kernel.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sat, Jan 21, 2023 at 01:12:00PM +0800, Yangtao Li via Linux-f2fs-devel wrote:
-> commit bdc48fa11e46 ("checkpatch/coding-style: deprecate 80-column
-> warning") increased the limit to 100 columns. Let's remove some
-> unnecessary newlines.
+On Fri, Jan 20, 2023 at 11:56:45AM -0800, Eric Biggers wrote:
+> Any more thoughts on this from Andrew, the ext4 maintainers, or anyone else?
 
-80 is still the *preferred* limit.  See Documentation/process/coding-style.rst:
-
-	The preferred limit on the length of a single line is 80 columns.                
-											 
-	Statements longer than 80 columns should be broken into sensible chunks,
-	unless exceeding 80 columns significantly increases readability and does
-	not hide information.                                                            
-
-Also, to avoid churn, patches that just change whitespace generally aren't
-accepted, unless they are changing the relevant code anyway.
-
-- Eric
+As someone else:  I relaly much prefer to support common functionality
+(fsverity) in common helpers rather than copy and pasting them into
+various file systems.  The copy common helper and slightly modify it
+is a cancer infecting various file systems that makes it really hard
+to maintain the kernel.
 
 
 _______________________________________________
