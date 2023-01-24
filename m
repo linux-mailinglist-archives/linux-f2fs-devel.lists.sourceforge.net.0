@@ -2,96 +2,118 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A00A678462
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Jan 2023 19:19:46 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 350CC679661
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Jan 2023 12:15:43 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pK1Pw-0003dT-Po;
-	Mon, 23 Jan 2023 18:19:40 +0000
+	id 1pKHH6-0002PK-RV;
+	Tue, 24 Jan 2023 11:15:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1pK1Pr-0003Qf-8S
+ (envelope-from <glider@google.com>) id 1pKHH4-0002PD-6R
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 23 Jan 2023 18:19:34 +0000
+ Tue, 24 Jan 2023 11:15:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oXCaWVDnlza+dwCnUEbA0BHkFWy5SCqK5uTSxTHpYgg=; b=mYsHlarXjcPZUwWDPAG4CZjOgl
- 6Z1BJsuhypOOtrfSWTCkoCDxKv9HRSR+rc0VJN3l9KemepahDiFs7fWNP/LuGhi9dI5NdPMTbTC4o
- nAI9C3+5ffplJvvQkkLkyy2ZjnELKDoBpDgVZZln1xODxnBZjBVXoI0K6Pn0lik+4azg=;
+ bh=PZZkl0nuhDOnpS6mpTFr8PbXxlSJ2XVVn7nhNW4knVE=; b=KjAejuEGTrI6fRwWpdnVtLooDu
+ UZw/Q7W7vAS0vbj75KqPFrZL5WMy6IaJUEq+XuDcjZ+70o4UR8pA5lhblwWsUZM1i4/9qTsOI8WLT
+ zulWZoABKnVGScVMVNBhyFgdQil8/rg4P1X4gNAEabqC0mygOsf6FjRXmg/9mVfD+yCQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=oXCaWVDnlza+dwCnUEbA0BHkFWy5SCqK5uTSxTHpYgg=; b=KzqmokY0mx5ovxZc+G7SZBm4Lv
- GP8gPbca0Auf64/5vK7lTsM9dBgaehfOcngUQGTnHS6UV0DCEE8m9cp7sziude4hZWrjJKRz4UhGq
- JNY7JpQMq4e/RGKb/xgYMAO9ydU3WwuvSAS0ZCM1mU+YA7BUO6BK30qfabf0VLILGQYU=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=PZZkl0nuhDOnpS6mpTFr8PbXxlSJ2XVVn7nhNW4knVE=; b=Yget3UmDS2xQF0gyXkffijkTtj
+ SOgEJe+Mrq0lgY15zGHB0RLM2Wocf3QFcNxuI5/yxk/lPZhSu1R4nRBWm0uu45U05NVmVwOY6Ku3p
+ kMmfvOfArSg+KH6J+OFxCrbINmevfYqJ5CDTM+QRqUn9P74JqR9rKeLSJIdgzj71yM6A=;
+Received: from mail-il1-f173.google.com ([209.85.166.173])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pK1Pl-00Dapf-MH for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 23 Jan 2023 18:19:34 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 5AB1AB80E69;
- Mon, 23 Jan 2023 18:19:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E6B36C433D2;
- Mon, 23 Jan 2023 18:19:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1674497962;
- bh=BiY+94W/UA2ynCZttnaitmIe+1NUuICPK8erHklsvrI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=SS7mH2m+jFdYT29f+ugatIp0s4o2xES95QYx4dULaqt5ngD2AEAiPMPWfxeLrIg00
- 0P53p1KTrkVlW61dom7c6Tzq/stVlZ7FAZbd03PpEJw8Tx77ZIfE/SrL9sxl5JUX4Y
- IRnFZ7boJRA2LZ8Cmf4tbtoZJY4IK+1fPOq3ndY/ku94GYns4yHyz662AFS9IYigR9
- vUiZTjvFJy1MvGUsNFd410L4OGuBo9uGffEevrWZITeQcgE848HZerPMfN3VImjg3O
- 3H1VmFhTtY5ENmXujibtZFjzojFhWQjVKvNBtBLahRLETIGH6czKzo5UYdMveHpLs/
- 3SWE4cIyNbxUA==
-Date: Mon, 23 Jan 2023 18:19:20 +0000
-From: Eric Biggers <ebiggers@kernel.org>
-To: Alexander Potapenko <glider@google.com>
-Message-ID: <Y87PqGgw1uJVlnrP@gmail.com>
-References: <20230123070414.138052-1-ebiggers@kernel.org>
- <CAG_fn=VNjkRMozdcQUSMTHvMQ26SG45oisxamJbEVrg2m41ngg@mail.gmail.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1pKHGz-00EFJc-1G for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 24 Jan 2023 11:15:33 +0000
+Received: by mail-il1-f173.google.com with SMTP id v6so7276039ilq.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 24 Jan 2023 03:15:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PZZkl0nuhDOnpS6mpTFr8PbXxlSJ2XVVn7nhNW4knVE=;
+ b=eysX+ECnIsH4FMjfUYT/LQAt9n6rglG6tqxiFcoAUICMiQfGdw6uRCYzxropjiIHWX
+ aGm0Ai3CVpIR3vF+EduIDOySpa/9Cs7/A0TdpklPuDWKFUgQZpGb/QUx7y/gmG1+gJQT
+ R0EgI2WlD8RTdP4mKPBp2BIR3O5cm0XeN7nPZ0SG8//AUcx383pwBNqlJlupg5yLuFLh
+ /Bt4ywpI6JPeuzM6XnPuB0hUMriFJgSFDg1wnWsB4yXnlV+fcImKNZFnp8e56Zo2rLxF
+ LM6SKfI/YCy26+jyb1ULwBcIRsTXvzHOZMkpI89Kjz5MQ29Qw33zMIR8Bf4V25RxB/nC
+ pH4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PZZkl0nuhDOnpS6mpTFr8PbXxlSJ2XVVn7nhNW4knVE=;
+ b=B1NYv+dptW+Xmu1WvzBuMSH2LGF05tN50KOiylfDIy3SLwXF+RT1VROeN1LxOSpHTK
+ qhFwgwbH/5qZXrl3xQVgn/vuFaSu6caETSRH3oHL23lTeiXqIx6f7qvYO8zwIWPiQbyg
+ vFpLygNUrZoMDeBKXTCn7C4Z+V0hABO22C4V9wM2pVxLxRjqioRC9yGaKqztsb2fy7Z3
+ jrvQhFexLmnZHj7pEILHP8/y1cOVS+29molh1VBsmgsgAIO7/v30rNy9c0fBeS9iWcOm
+ yJyW5q5Ki6Bec6/MgUrj4egfJCqFL86JGGWrzRag6yAqkYLAxMhZhjrjBB481tqSlkLT
+ GWCw==
+X-Gm-Message-State: AFqh2krDgzMBtIDm+AF57zoce6QkkIU34LpgrzOIEPW+6KOqnKMcomM8
+ rfm5hLD5lMzc7th8OQUAiH6Lghhb4w5MQtN5UtLE2jqa4dW6iIuOxAU=
+X-Google-Smtp-Source: AMrXdXs9ga503SwE+09dmDEVZS1/XV2RvPbDoA7tJR1Y92okF1PYzLfNb1qZ9UTKSZ00MIBxwWsvnEHJ4Bii4h03Zso=
+X-Received: by 2002:a05:6e02:88d:b0:30f:5d21:e56 with SMTP id
+ z13-20020a056e02088d00b0030f5d210e56mr1230055ils.192.1674557526609; Tue, 24
+ Jan 2023 02:52:06 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAG_fn=VNjkRMozdcQUSMTHvMQ26SG45oisxamJbEVrg2m41ngg@mail.gmail.com>
-X-Spam-Score: -5.9 (-----)
+References: <20221121112134.407362-1-glider@google.com>
+ <20221121112134.407362-4-glider@google.com>
+In-Reply-To: <20221121112134.407362-4-glider@google.com>
+Date: Tue, 24 Jan 2023 11:51:30 +0100
+Message-ID: <CAG_fn=WDjw1MVYhEh7K4HOpGNBWsq6YuyG6Xx7XcP4Xpu+KhZg@mail.gmail.com>
+To: glider@google.com
+X-Spam-Score: -15.7 (---------------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Jan 23, 2023 at 09:58:22AM +0100, Alexander Potapenko
- wrote: > On Mon, Jan 23, 2023 at 8:05 AM Eric Biggers <ebiggers@kernel.org>
- wrote: > > > > From: Eric Biggers <ebiggers@google.com> > > > [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Mon, Nov 21,
+ 2022 at 12:21 PM Alexander Potapenko <glider@google.com>
+ wrote: > > When aops->write_begin() does not initialize fsdata, KMSAN may
+ report > an error passing the latter to aops->write_e [...] 
+ Content analysis details:   (-15.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.166.173 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.166.173 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
+ white-list
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pK1Pl-00Dapf-MH
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix information leak in
- f2fs_move_inline_dirents()
+ valid
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
+ Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1pKHGz-00EFJc-1G
+Subject: Re: [f2fs-dev] [PATCH 4/5] fs: hfs: initialize fsdata in
+ hfs_file_truncate()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,77 +125,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Alexander Potapenko via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Alexander Potapenko <glider@google.com>
+Cc: tytso@mit.edu, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Eric Biggers <ebiggers@kernel.org>,
+ adilger.kernel@dilger.ca, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ akpm@linux-foundation.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jan 23, 2023 at 09:58:22AM +0100, Alexander Potapenko wrote:
-> On Mon, Jan 23, 2023 at 8:05 AM Eric Biggers <ebiggers@kernel.org> wrote:
-> >
-> > From: Eric Biggers <ebiggers@google.com>
-> >
-> > When converting an inline directory to a regular one, f2fs is leaking
-> > uninitialized memory to disk because it doesn't initialize the entire
-> > directory block.  Fix this by zero-initializing the block.
-> >
-> > This bug was introduced by commit 4ec17d688d74 ("f2fs: avoid unneeded
-> > initializing when converting inline dentry"), which didn't consider the
-> > security implications of leaking uninitialized memory to disk.
-> >
-> > This was found by running xfstest generic/435 on a KMSAN-enabled kernel.
-> 
-> Out of curiosity, did you add any extra annotations to detect uninit
-> writes to the disk?
+On Mon, Nov 21, 2022 at 12:21 PM Alexander Potapenko <glider@google.com> wrote:
+>
+> When aops->write_begin() does not initialize fsdata, KMSAN may report
+> an error passing the latter to aops->write_end().
+>
+> Fix this by unconditionally initializing fsdata.
+>
+> Suggested-by: Eric Biggers <ebiggers@kernel.org>
+> Fixes: 1da177e4c3f4 ("Linux-2.6.12-rc2")
+> Signed-off-by: Alexander Potapenko <glider@google.com>
 
-No.  This is the report I got:
+Dear FS maintainers,
 
-[  145.280969] =====================================================
-[  145.285368] BUG: KMSAN: uninit-value in virtqueue_add+0x1ba5/0x6ac0
-[  145.289123]  virtqueue_add+0x1ba5/0x6ac0
-[  145.291539]  virtqueue_add_sgs+0x2ae/0x2c0
-[  145.294036]  virtio_queue_rqs+0xa59/0x1270
-[  145.296566]  blk_mq_flush_plug_list+0x34a/0x9e0
-[  145.299389]  __blk_flush_plug+0x6b5/0x760
-[  145.301801]  blk_finish_plug+0x92/0xd0
-[  145.304084]  __f2fs_write_data_pages+0x3953/0x4140
-[  145.307011]  f2fs_write_data_pages+0xf1/0x120
-[  145.309665]  do_writepages+0x45c/0x980
-[  145.312017]  filemap_fdatawrite+0x1d2/0x260
-[  145.314533]  f2fs_sync_dirty_inodes+0x3a3/0xa40
-[  145.317272]  f2fs_write_checkpoint+0xecc/0x2890
-[  145.320013]  __checkpoint_and_complete_reqs+0x12e/0x660
-[  145.323126]  issue_checkpoint_thread+0x10a/0x420
-[  145.325900]  kthread+0x35c/0x490
-[  145.327995]  ret_from_fork+0x1f/0x30
-[  145.330208]
-[  145.331242] Uninit was created at:
-[  145.333399]  __alloc_pages+0x6f9/0xc90
-[  145.335716]  alloc_pages+0x8aa/0xa20
-[  145.337921]  folio_alloc+0x34/0x40
-[  145.340069]  __filemap_get_folio+0xa9f/0x11a0
-[  145.342719]  pagecache_get_page+0x5b/0x1b0
-[  145.345209]  grab_cache_page_write_begin+0xa5/0xc0
-[  145.348096]  do_convert_inline_dir+0x8dc/0x3680
-[  145.350812]  f2fs_add_inline_entry+0x76a/0x11a0
-[  145.353532]  f2fs_do_add_link+0x59b/0x970
-[  145.356009]  f2fs_create+0x5b6/0x8c0
-[  145.358213]  path_openat+0x25a5/0x46e0
-[  145.360547]  do_filp_open+0x2ab/0x700
-[  145.362785]  do_sys_openat2+0x20e/0x780
-[  145.365138]  __x64_sys_openat+0x259/0x360
-[  145.367562]  do_syscall_64+0x41/0x90
-[  145.369819]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
-[  145.372895]
-[  145.373900] Bytes 2043-2050 of 4096 are uninitialized
-[  145.376857] Memory access of size 4096 starts at ffff888076818000
-[  145.380391]
-[  145.381429] CPU: 1 PID: 1907 Comm: f2fs_ckpt-254:3 Not tainted 6.2.0-rc5-next-20230123 #1
-[  145.386152] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS rel-1.16.1-0-g3208b098f51a-prebuilt.qemu.org 04/01/2014
-[  145.392541] =====================================================
-[  145.396096] Disabling lock debugging due to kernel taint
-[  145.399241] =====================================================
+HFS/HFSPLUS are orphaned, can someone take this patch to their tree?
+Thanks in advance!
+(same for "fs: hfsplus: initialize fsdata in hfsplus_file_truncate()":
+https://lore.kernel.org/all/20221121112134.407362-5-glider@google.com/)
 
 
 _______________________________________________
