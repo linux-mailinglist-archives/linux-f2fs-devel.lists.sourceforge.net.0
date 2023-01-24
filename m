@@ -2,126 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6C08679D95
+	by mail.lfdr.de (Postfix) with ESMTPS id B6919679D94
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Jan 2023 16:34:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pKLJN-0006cR-G2;
-	Tue, 24 Jan 2023 15:34:12 +0000
+	id 1pKLJP-0007uc-PX;
+	Tue, 24 Jan 2023 15:34:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1pKLJM-0006cG-QJ
+ (envelope-from <frank.li@vivo.com>) id 1pKLJO-0007uR-3H
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Jan 2023 15:34:12 +0000
+ Tue, 24 Jan 2023 15:34:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wXC+m9eUG+mzMFbxwJuWWalt4+y0c5FzY63l4SuGz8A=; b=H5aX6tR3yII3y8f/dtlFAajio+
- FFLewIbrAqgYBpgryNImSN01VK21PmbxQLnB/kbBOk1+8d2TftN9u070BI4HFlpnsGuXW0Uob91g6
- 5Fk7G81n47l6q8LS23oSAw0PDao8iI+o+tgqqEb12HcdJMB3bKxWDEHJzUd7OPM4q7SA=;
+ bh=GWTwX2GEQqTlCLwksBsX1n06U4YmhekP4Gv4TwhYbzA=; b=FQ1OWaavhC8/1i2ZIJnDBNe/yi
+ hxa6yAC3ofqgwFwD5l1M1CwPLbczK+HkU2olFeRjIhptt8uMgjYp+8ryG7YeKWevxCyXJr9fuCO9q
+ vJeL6TG/szdiIYNJLrPGHeFTkO5PcSO+wbtZGrcCJI9qnGQWJ9F1+MWFQUL1kR1B1GVY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=wXC+m9eUG+mzMFbxwJuWWalt4+y0c5FzY63l4SuGz8A=; b=g
- F1QjU0iTt7FPdGTeXRilghLbFnhBuykUJilV5YpkTekXu3Dj34eRqjVyN5ZQh6F/95+KYYXUbVzET
- hibNS5eJ/7SYIytHGkWe4aT3zHTh7qzg6gh7tN0RciCzatBMRPxV0Arj5w7kA7l/lm1+5yKsRmOnD
- 6PK7dV1rb9ydKeLo=;
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=GWTwX2GEQqTlCLwksBsX1n06U4YmhekP4Gv4TwhYbzA=; b=CVOOhhYX7skr54Re2hrDinyKar
+ ssaUSq9qOKQkOOo/5k/kiea2jRfDbPBSoq++aOf2NGajaye5Ex62xrE4yYM/Yyj/PueJPyiA9kmSI
+ qQs3hfdY3Ps3IU2P2TbllLmb8h3u+9JYn2RHPpoonqfAkQt0bX+8+WVGg8t/MwF6Dzh8=;
 Received: from mail-sgaapc01on2135.outbound.protection.outlook.com
  ([40.107.215.135] helo=APC01-SG2-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pKLJG-0004P9-KO for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Jan 2023 15:34:11 +0000
+ id 1pKLJM-0004P9-Ag for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 24 Jan 2023 15:34:13 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=i0TKAfMY6PqbvlhCn9LFFLEAs5BbEQY+0p9JaZfO86FL3n0rjU8vGe3UU9TetzLyT4cTc/a0tbfRJoaPk+R4RdrDPwmuyrlPEKQ7JelCUlWtllBvxWFZ1UIaT1ft5Jy4S+nNeScZDX32hsngTvj+NsWatstefBh+dSscsUeHn5wTMk2v4KOypBC3Sj6/q/iEUwwrvK2rkO6+LhnGtbAM+ST/wXw0IZNLoduGbwMbS6CsP/8JGv7IHtmoHVmESnywGy4yuM44d4fJC5a+5mRYOy989GmIAciF2IZtwwWlOxiGEzZ2RuGf2l4rSjMfXgH2mu+JtxeN840yOvrTfJ1GJA==
+ b=lfJiHr3hWxcdzJh3l8qYWBk0Pm6/16ZZXqcrQOsGAk44KciKexclnEpE34Uau/nXQOml79vN1ClSIbevWAxf64C7Zs2oWCfwydIDq250ohaqvcOvpYl6GKm0i5s49BqIA7zyC/LDMCZHb6jbAYStpSUEYFkRsU/q0ivDtTBVGAac39Df9Yos44bpNHOuk36xX+c8j60LVAmdbeM5S0mNS5azDCzHWqiNBQJ9Gzf4CTJbfgDckNQ2DFx5TcU3+r4zHm/tdvg+ZFLx6PW9zQQY3JP/Yiy53fZawKaR2szD0ggMcG7Sx6nYGfCqYs27KVR1WAuLx5m4I1Nf5ouzRWsTVw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wXC+m9eUG+mzMFbxwJuWWalt4+y0c5FzY63l4SuGz8A=;
- b=m8SA6Bc9B0p6Y8b1BHcoXYPD7LdCzZDRIh1ic8xGAzn6xTg7ETbOG8pthKoHuu1adipfLIyt77nONQkpV/FpD2/Hwq5qW5C4vMpvxLd04RVNPwrjSa9uLmccarCteBsD2/roE/vrRJI1OZwityIySOjQ2NIgMn+zqAzYToRGHZ1kfqlynR/gBgcT5yLnKvVVg7BE/BPi/PiR+dGTcxbeFJWtHBYo0FzIoc/emBMlr8Bfq9iooQh0uhmJNKdbylpr9EkVmSVyrt/23h4DKm5723OgqGHpJP2/I1aOkqfnJNN4ZuSh1Oe205NT/H/r0o252fkhx+1bRDyvnIeJLkT5qw==
+ bh=GWTwX2GEQqTlCLwksBsX1n06U4YmhekP4Gv4TwhYbzA=;
+ b=cSwk+NS2GAzKMas6/UdVQsn8MzNA/lRUOtwdq7Y2CtKYMhqlAz4gpPlfS38DVYn/Pap4frU0aoAIo8GuONMAX11YBabJZQB6NJqaTP9Gr2H5yzfvO5bVr2ofC5Y8k1hg0WHjZUttUmZsLOxRjrwwkVwtQGneT4zkUpq776X46Wu0E32dw9AUij1txRas/HeNRXOJX3hqCSiO6n0E3FN06HQIbXNQHQB6OXXn4oBrfMnUShmTIgmE0HVBO8GCfHd5mVZ7slLt8yDMExDjOLKEvf/8HfJgzStSNHIVt2bzSYHe4FRcELgabahBMWZca07jxDfCx4nGRdqe92TXvdZciw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wXC+m9eUG+mzMFbxwJuWWalt4+y0c5FzY63l4SuGz8A=;
- b=gfC81AMw9a7dPtCBj28UXcwJxX8p6JiNWmhpyWXaXsBg32t1X0YDdLo0/hd5u/2oCL8P1Swnh3zBMq3XQlgne6HzSXTwrrNjTfWgj/rdI1qqzWjtjHtjhgomN4uB1KF6WEViAgbhCTDJE7k/vY1bvLP4efSaJmJZjAgIoLR4mQnczbrdqXQEmcxrSOQWRd5SESL4SPFGRYUCDyylP7SvMt/yMTMp0ub+5Dr9dKy6rG0QmKCPfH+HAZv9zzKRRymWQfc8ffamq4rYh+fUUB6u/jA/irRtAi2D7wP31XkRfcuLg0hmSKjv8AgWGpL4WkUL+cRvftODCvj8cq3M4MhQrQ==
+ bh=GWTwX2GEQqTlCLwksBsX1n06U4YmhekP4Gv4TwhYbzA=;
+ b=iJxcMkTZCv9lrjSru1+JdEHghXGE5kE7BXAs5EfcZItrnZtsUfbLV0sr3D7qRi1Kz/wwTgyE7ne+KkL+2fGF2RA5+xJ3TnSjTIjnsmfKkPxYa+DcVqkiM1CuAFz2OXRMYw73KBYwn79lV9Hggb+L4uA3Vg2uquCuBIGoyCSrt8Em1MDcZwNQFFFDfbxc2Bn5WtOWyY/d6DROSKhuBRJHZQv/nbSO/6sjTZDhygOa22Ou7MomhDc8FH5TzRM0WAiDkLYPNMEA7mKew0B11I9ilAaVw00yeDIhL2V5WFhgs43DpvtXa6gtM3Cgc6YUsglI8CDR4UGSscuyBJpoJD1zXQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
  by SI2PR06MB5019.apcprd06.prod.outlook.com (2603:1096:4:1a3::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.9; Tue, 24 Jan
- 2023 15:33:57 +0000
+ 2023 15:33:59 +0000
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::3e52:d08c:ecf4:d572]) by SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::3e52:d08c:ecf4:d572%4]) with mapi id 15.20.6043.016; Tue, 24 Jan 2023
- 15:33:57 +0000
+ 15:33:59 +0000
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Tue, 24 Jan 2023 23:33:43 +0800
-Message-Id: <20230124153346.74881-1-frank.li@vivo.com>
+Date: Tue, 24 Jan 2023 23:33:44 +0800
+Message-Id: <20230124153346.74881-2-frank.li@vivo.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20230124153346.74881-1-frank.li@vivo.com>
+References: <20230124153346.74881-1-frank.li@vivo.com>
 X-ClientProxiedBy: SGXP274CA0004.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b8::16)
  To SEZPR06MB5269.apcprd06.prod.outlook.com
  (2603:1096:101:78::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SI2PR06MB5019:EE_
-X-MS-Office365-Filtering-Correlation-Id: b6084881-f20c-4562-0f25-08dafe20683f
+X-MS-Office365-Filtering-Correlation-Id: 3a6e1fa0-f0a5-4c94-4ecc-08dafe2069a2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Ehd8+5R0/wXTMxYqS8eTIG/duol3nK5o+tAJ7LtB20UXqxmQNIg+DcvC10WO/5giKHaMpOqvK+2/2gYOEB0fh5Vsp8VEm5ILb1NycmpGm4FbXhMBffzZpsODY4R0Ig8Er0FJMrJTm52gWmMz+LDO1eZyMpMolesREkLibgQ730OUzo0A7QUTTqKuUhxxyWLa5BJykeAYSepnAOB+rYyRfL4gkvFm6HfwQBWECHTs0ur1Xxdh2lQSsRF/p1ixI0WqjPxYmINof+iJTqqzXuSQBS4+KSQuLnvpdbb9Opn4/BSA0IIA2RKTP4sfaUYhUQlYwKjzfUIsJsMYEIE3Ydv8uwzI7NYIppJR3QuqQ0fdmLOMRv1InshW7aJGp/IYxXAtpyFPYxHZgonaXO/9BcZPLEqcFTjDvUa2Q4gQ8pFgMFVOb9toq24oNtRMMmKGmuAD999Y2uYhBq+cZbpXWZemdBQ2ljLkVrj8339JQjFW3qFYstfyRFVgj94zGuQsVB51wr9t2xcuvX2BAR91B8zsRKJsCQkhg288GJGlDXC8SucU2TbpkrTrLTZHGoETkIYHvuqfF8SbQbkwqXI3RNmxL/71Gg6Mf8lNqSksZfuPooVHXnEhjv56LPlxIHef3LKWJHXK6f7AZom3+i7SrhcFNU5ojOS59V45c7aSPZn/1CTtqpDrnAnPwGLW/gcTMOYh/KRcTPLyRuTuK885aeut06BYtliii+Fo8rjjJu6Z1xE+txuOpfuUpbOiy3VTTv2E
+X-Microsoft-Antispam-Message-Info: AqLaTs3e0EY/WjmCF4MKS8pt60Cg4kTJMqg8pbVs/GHPMoGR+DEJ5sFsLZzfioJ8ZoMdgT+JoVesq8rWZkaQ9rhQEua0vSzqkr2fpKpJl3hSt1UNqWSVV2KMNc20P84REP1/tK6e3IkM2iIlqLewRJE6BYlnVdA6XshcK1FlbLLNkTVs9McT4CUGrlkHdg49WY6z/1DJ4vHRcB4znDRV9XZMaLFywPDnORDW9Tf+SRaLbppNtnY3kBmG31rU0rZe5YQ14j3sRE/vmgKIYoAm4GrbRtyPY2+1h5Cqlwm0Wf23BMUin8PfgWxcTf3iIrlKfsIUiDcIzqcAQNuHUUAMlP7rrWQbJOzQeNTwgThfX3Ys0/PjCYrh+JDCY0gvoYgKDdssKJQH8HGSBxa50CWztoglO9E2JtA2RF2Kg5YQE2NFnVUzlCTF/cvhG/4ZEElN7rpPKvByHnQUOVzLLeXlJomrJBULNELDkc/K308pJCCE85bQyXColUqgbO+yeB0REzmySlKZH6n7G2A0C15gKWrs4/Wb1KzMHsr2ZhBHKBJRM8dDfo+MTclZa/LDh+CM5s8DQqUWye8x+9V5iScPT0/1uKAIdUkN8qfVT3CjSMDDoUpEjjjxIL3kgf5qpccdzZ4MWysqMbD5pjpDltdO+vD9f8TbreUKkTCkLSuxTrt5eG91kjS83YLu9PmgeO6LKRLRHPTtMHWhpUkbEQ9Smg==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(376002)(346002)(366004)(136003)(39860400002)(396003)(451199015)(2616005)(2906002)(6512007)(26005)(86362001)(186003)(38350700002)(38100700002)(36756003)(8936002)(52116002)(316002)(5660300002)(83380400001)(41300700001)(6666004)(107886003)(478600001)(6506007)(6486002)(4326008)(8676002)(66476007)(1076003)(66556008)(66946007)(42413004)(32563001);
+ SFS:(13230022)(4636009)(376002)(346002)(366004)(136003)(39860400002)(396003)(451199015)(2616005)(2906002)(6512007)(26005)(86362001)(186003)(38350700002)(38100700002)(36756003)(8936002)(52116002)(316002)(5660300002)(83380400001)(41300700001)(6666004)(107886003)(478600001)(6506007)(6486002)(4326008)(8676002)(66476007)(1076003)(66556008)(66946007);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Ai6EbR4W5iV+luRASWxrMOrzZJqLpY6ZKHtnqutJFN+eW1e3nRaymfrnXYCV?=
- =?us-ascii?Q?h0PvnE+klPVmUsXrzI+4EIlrU8D/LnAJOUzBfRJgz1Pb+sLYuigPYqimWqrO?=
- =?us-ascii?Q?3blED057S9hLaNnVKxRXaWveDjUiQLKbGwaV+UwU8NqpOMXt1VJZ7E7MOelr?=
- =?us-ascii?Q?AuM35L9O22Yuve0yIxEVAkf31ROQhqL/Ssm79chELdNrCeqTsjXqBrctMQHR?=
- =?us-ascii?Q?HycFaELD74Ef9s/MS9TsldHVWMylw9tUdKXEIs5Z7t2EZ86S+GBJg0OFyb1/?=
- =?us-ascii?Q?23mIkHaUN0KoGZVkqJPqszv259ne0euTQuKeU/p5jUpipE6nvWqspB7NwxD+?=
- =?us-ascii?Q?8ik7ta8XN9gaUrU9W4enVJ8zTR8+KMZGsqFfC7g636x4A+/1snyKLtWQe4IQ?=
- =?us-ascii?Q?WQbOLK5Whrld6x+kjd9LBKhHngILsnrE6yK4GQExMp5OQvXq+JSWR61UTLLi?=
- =?us-ascii?Q?LGsZnL1Ippa905OCBjoepgLddPE10CGzojnxVIUHD9kQyoE1Ma5rzIsYx6wC?=
- =?us-ascii?Q?ZHKDdw9wa19kyJ9MjsSgS6nS1BaLCfpgpCWBUorwo6o3aANR3uKUrwRc0wj3?=
- =?us-ascii?Q?mHW4vGQeyyULZJsDnQTVBJ0XJ6hcsh8zR/uI0E6tp58vyNP4qNBplK2AIyc5?=
- =?us-ascii?Q?lXuO1g6/B0KYs4bTarxTb5AmcG3aXCDEhvaTaM8QxhlfXnGSGdZmDf64dyH6?=
- =?us-ascii?Q?98FX25VUZ7Ie4OpjThOA6gWjqLb9QbnDv6gNJNHO+9BgkvqADLyQI0ppa6QH?=
- =?us-ascii?Q?Oi47A3uHU+i0VZe/wt/iPrEbCDf9dbxy6j8Njm1yPr99vy+s4yKWTj2QkDHO?=
- =?us-ascii?Q?9KoSvZzf1DAbBDhJ1NKwg0JpuWJLffSl/CsygFpSJru5nIdGmg50MbVE5gM/?=
- =?us-ascii?Q?LKjjb51mY4jlF1njlt3pbNyhkhU6wsV57Yj2lZUdeSHdSYS70yuT+mSwnMkC?=
- =?us-ascii?Q?r/6OIyBM0XpMQzm/YyF+aw+MBkm6Qe8yDHxjxuFF8lMj42EDuNX5vnYFYjk2?=
- =?us-ascii?Q?FD/j438Znlg7lZi6DmnXqPYJY8aeCFB1oMK2hODiV9St8h1IsmoVm7WO2C/A?=
- =?us-ascii?Q?hqGOkf18/3UBZOyo90OCzMl1ZJeLBwu6xc4Dfbbmv/aO59j3lIG5y71YjPHp?=
- =?us-ascii?Q?qoslzYaP0/v+HuAnV/SCNanlkpjAnO5L7MS9hIEovXomdEUx0L/JfuOJU4rJ?=
- =?us-ascii?Q?OlMiUaeQv+TFwvr/smQBssN3ypcXqgiS0YTFbQEYHyJkc3FuOoF8NtUYAa5A?=
- =?us-ascii?Q?m81A/tQCX/tjaYlsEjB5qdiCIOJp3aQU9AlE6uBbQ91VXGsDYUD9EGBchOuO?=
- =?us-ascii?Q?gMGmVbD9DNeQ/U995YLxWXxWcYXqplNerO4cZxZggE7uvENhKSnTF7LmNkad?=
- =?us-ascii?Q?i+rV97bpfWt+3dZeOzh9GiZoYtSsWXijTsxOBVW5PJTuq2WO4uuoFijhTNIU?=
- =?us-ascii?Q?I0ioU6gJ8FtEcrYDa7AQKsnHBrtsYJEZqkLQ0vPtDskOyfflKq8OjS8XSg8Z?=
- =?us-ascii?Q?OcrrvxWVPSgIt8pQ+PKJV4lI+RVUChOftaZl50m0b7aFxIvWaur0g6C7BSdm?=
- =?us-ascii?Q?If3oWgOPJv/dpgoDQ65AnW3uu45iV2JC74ayIOcm?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?uSG714e7Ld9oWhlX3QneEh9e4ayOY1MqvVNaA26drbknYP+IxHjU2Nh6gDw6?=
+ =?us-ascii?Q?k5O8JN9AbJoR7Npxs12FtYGf94+6T8uQvnzEqF7pF3qIuxKxaNYjxoxK971g?=
+ =?us-ascii?Q?/OQ/Y4B62c3CwevDx934BfT5w7/fJ0CjsEP6AG93M/GExl0p1LwywKWhSo15?=
+ =?us-ascii?Q?BFDGZR7oE6NzXfEW8N/9gsqN7xxRSQgLU+et1bt39EbHnqIZ3ALfL221vIBt?=
+ =?us-ascii?Q?DkUouX0aICCPi7iIWx75VX7RfaWjyug5qKFgzAedFBpwoVReFM/2pn73tv3g?=
+ =?us-ascii?Q?iezQlvoaDaEK1kB2qbyq37mveaGC0hPOngm78KVlW+c2wstAcLFaqSGY86Fb?=
+ =?us-ascii?Q?wCDaM7298Cnk5nyMs0OOLc/A5kYfukOHYe0itZd1BcXT9R5BkRogqQKmK3R/?=
+ =?us-ascii?Q?jC/lC1nNpCWlvtV7TzeAGuxqwQ8HVd/E5H42qbuF1IrZBvCA6FhLoP+aqbmK?=
+ =?us-ascii?Q?pL/ssFMXXWz5JCfHQXZCP13TZggqDV9D1ewviVzeTt6NcNoK2s4Zv/0Bsumw?=
+ =?us-ascii?Q?u5xuTjG9fjOJBB3JfmCl6tuihXmQMquIFT3qQ7MgEm6gAqmhkWKc4weKWsL6?=
+ =?us-ascii?Q?b4vKk3D3lSX1Yj8Vbj8Ktp1DX4J39ilrDYKcKX43sydAIqOdwp7iforrdF0D?=
+ =?us-ascii?Q?PONfYxbLLOnqQFFeVslvNCO9Fy5B13VTgrJcb9jP60ni74DyI2PnZC6ECGjK?=
+ =?us-ascii?Q?q32MQzupBRvbMj/xLsMFe8xUQnKZpTii/VyLBffvZlhqBIlKUTvcRIOj4iB6?=
+ =?us-ascii?Q?7IWO33eEceYZ773wC+xKphHY/gocXE+ocHzOp3xyRVyv1KL8b/etZZHT/Om4?=
+ =?us-ascii?Q?QF1KSIxJ/KxLjncDguMEI1/Ll9XDEck1Ty+VlZeTHI5hFIsJSxtE4b2AnmU6?=
+ =?us-ascii?Q?/rNlh3EQniAPWp1uHZQk7fpvsZJ7QCF7wjYegcIVhFzdBr/KZxjAAwZ3gTF/?=
+ =?us-ascii?Q?fRup1YxOQ9bE1uFT5ZQKVSOe4lwkNtBRO1wvT9sJzxoGaFnCH4Tw0faP5wck?=
+ =?us-ascii?Q?DhDR2LAH76GegcshyzCMq/rSGki9M1eh3jNbKt0LfEx6+WqNgl9FcHTIAhMM?=
+ =?us-ascii?Q?gyyT45TAjttgFFrBlCwM7wv29wEt14rq99/d8Jhty/GhBI2l/TJ90dqBLCWu?=
+ =?us-ascii?Q?YsSfuUGR6V3dNgGKAcb95umo2xYZYxbvhNZOTP4D1WzDnATK1CTWKw4pIT7E?=
+ =?us-ascii?Q?N/Lmfy9V13q9t4Uvkz76vSyc6vC9qrC9zG5ByYZPpSOI+dHSr02JvJqx4yfM?=
+ =?us-ascii?Q?CslIMq+PllXj+GHhunpQKrQ7nUW1THgpa6fJGjwg8Bk/iu3Q6dA7IaMR5cjK?=
+ =?us-ascii?Q?755RVgWLIuXVGzkg7yxXVPVWKGfbN/8EeRLWyE/sCwupdS9tV5BJDB32gZyE?=
+ =?us-ascii?Q?L7LvVADg0ebUoDEcNociJfhh8ixw7xBwgbdlTD54IO9cIOtvDOUZrNguGBop?=
+ =?us-ascii?Q?2bGc8G/L7rc90NxzRGaNWFNObkYudFbjv6gHpenKDAuXaYHoQRK9uYdVamcU?=
+ =?us-ascii?Q?SwVIulw06twaURFkrP1qls3ffGO2MjFq3+APNhdVK8ceSxmzgPBDhOvv0TmN?=
+ =?us-ascii?Q?DFgg/TTXbhx/KSL1pRGnbBT+g7onYPLUoQZGxpuH?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6084881-f20c-4562-0f25-08dafe20683f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3a6e1fa0-f0a5-4c94-4ecc-08dafe2069a2
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jan 2023 15:33:56.9905 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jan 2023 15:33:59.2573 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Nd7t5/xm9sKV26iNJSRydXkP2u8ct9mbskUA6JyQmTCUNAMRmq3fkg3Ketxm77zrffT1aVVex7V/pOakxlMVnw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: E3YsLk4w62/HtYXRS2GiKu2emPbfS70A/6oR0T6QQ8RJjRZSdeWbadFauECvKTBuxC2z4YjcYtzv9kXOdFdJZg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR06MB5019
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -130,10 +132,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: f2fs supports lz4 compression algorithm and lz4hc compression
- algorithm,
- which the level parameter needs to be passed in. When CONFIG_F2FS_FS_LZ4HC
- is not enabled, even if there is no problem with the [...] 
+ Content preview: f2fs_set_lz4hc_level() and f2fs_set_zstd_level() have common
+ code, let's introduce f2fs_set_compress_level() to do sanity compress level
+ check. Signed-off-by: Yangtao Li <frank.li@vivo.com> --- fs/f2fs/super.c
+ | 57 +++++++++++++++ 1 file changed, 17 insertions(+), 40 deletions(-) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -150,9 +152,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1pKLJG-0004P9-KO
-Subject: [f2fs-dev] [PATCH 1/4] f2fs: fix to check lz4hc compression when
- CONFIG_F2FS_FS_LZ4HC is not enabled
+X-Headers-End: 1pKLJM-0004P9-Ag
+Subject: [f2fs-dev] [PATCH 2/4] f2fs: introduce f2fs_set_compress_level()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -172,80 +173,113 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-f2fs supports lz4 compression algorithm and lz4hc compression algorithm,
-which the level parameter needs to be passed in. When CONFIG_F2FS_FS_LZ4HC
-is not enabled, even if there is no problem with the level parameter, add
-the level parameter to the lz4 algorithm will cause the mount to fail.
+f2fs_set_lz4hc_level() and f2fs_set_zstd_level() have common code,
+let's introduce f2fs_set_compress_level() to do sanity compress level
+check.
 
-Let's change it to be the same as other compression algorithms. When the
-kernel does not enable the algorithm, ignore this parameter and print msg.
-
-Fixes: 3fde13f817e2 ("f2fs: compress: support compress level")
 Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
- fs/f2fs/super.c | 31 ++++++++++++++-----------------
- 1 file changed, 14 insertions(+), 17 deletions(-)
+ fs/f2fs/super.c | 57 +++++++++++++++----------------------------------
+ 1 file changed, 17 insertions(+), 40 deletions(-)
 
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index d8a65645ee48..ad5df4d5c39a 100644
+index ad5df4d5c39a..b5fbe9939390 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -588,19 +588,11 @@ static int f2fs_test_compress_extension(struct f2fs_sb_info *sbi)
+@@ -588,40 +588,12 @@ static int f2fs_test_compress_extension(struct f2fs_sb_info *sbi)
  	return 0;
  }
  
--#ifdef CONFIG_F2FS_FS_LZ4
-+#ifdef CONFIG_F2FS_FS_LZ4HC
- static int f2fs_set_lz4hc_level(struct f2fs_sb_info *sbi, const char *str)
- {
 -#ifdef CONFIG_F2FS_FS_LZ4HC
+-static int f2fs_set_lz4hc_level(struct f2fs_sb_info *sbi, const char *str)
++static int __maybe_unused f2fs_set_compress_level(struct f2fs_sb_info *sbi,
++					const char *str, const char *alg_name,
++					unsigned int min, unsigned int max)
+ {
  	unsigned int level;
+-
+-	str += 3;
+-
+-	if (str[0] != ':') {
+-		f2fs_info(sbi, "wrong format, e.g. <alg_name>:<compr_level>");
+-		return -EINVAL;
+-	}
+-	if (kstrtouint(str + 1, 10, &level))
+-		return -EINVAL;
+-
+-	if (level < LZ4HC_MIN_CLEVEL || level > LZ4HC_MAX_CLEVEL) {
+-		f2fs_info(sbi, "invalid lz4hc compress level: %d", level);
+-		return -EINVAL;
+-	}
+-
+-	F2FS_OPTION(sbi).compress_level = level;
+-	return 0;
+-}
 -#endif
- 
--	if (strlen(str) == 3) {
+-
+-#ifdef CONFIG_F2FS_FS_ZSTD
+-static int f2fs_set_zstd_level(struct f2fs_sb_info *sbi, const char *str)
+-{
+-	unsigned int level;
+-	int len = 4;
+-
+-	if (strlen(str) == len) {
 -		F2FS_OPTION(sbi).compress_level = 0;
 -		return 0;
 -	}
--
--#ifdef CONFIG_F2FS_FS_LZ4HC
- 	str += 3;
++	int len = strlen(alg_name);
  
- 	if (str[0] != ':') {
-@@ -617,10 +609,6 @@ static int f2fs_set_lz4hc_level(struct f2fs_sb_info *sbi, const char *str)
+ 	str += len;
  
- 	F2FS_OPTION(sbi).compress_level = level;
+@@ -632,8 +604,8 @@ static int f2fs_set_zstd_level(struct f2fs_sb_info *sbi, const char *str)
+ 	if (kstrtouint(str + 1, 10, &level))
+ 		return -EINVAL;
+ 
+-	if (!level || level > zstd_max_clevel()) {
+-		f2fs_info(sbi, "invalid zstd compress level: %d", level);
++	if (level < min || level > max) {
++		f2fs_info(sbi, "invalid %s compress level: %d", alg_name, level);
+ 		return -EINVAL;
+ 	}
+ 
+@@ -641,7 +613,6 @@ static int f2fs_set_zstd_level(struct f2fs_sb_info *sbi, const char *str)
  	return 0;
--#else
--	f2fs_info(sbi, "kernel doesn't support lz4hc compression");
--	return -EINVAL;
--#endif
  }
  #endif
+-#endif
  
-@@ -1085,10 +1073,19 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ {
+@@ -1077,7 +1048,8 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 					F2FS_OPTION(sbi).compress_level = 0;
+ 				} else {
+ #ifdef CONFIG_F2FS_FS_LZ4HC
+-					ret = f2fs_set_lz4hc_level(sbi, name);
++					ret = f2fs_set_compress_level(sbi, name, "lz4",
++						LZ4HC_MIN_CLEVEL, LZ4HC_MAX_CLEVEL);
+ 					if (ret) {
+ 						kfree(name);
+ 						return -EINVAL;
+@@ -1094,10 +1066,15 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
  #endif
- 			} else if (!strncmp(name, "lz4", 3)) {
- #ifdef CONFIG_F2FS_FS_LZ4
--				ret = f2fs_set_lz4hc_level(sbi, name);
+ 			} else if (!strncmp(name, "zstd", 4)) {
+ #ifdef CONFIG_F2FS_FS_ZSTD
+-				ret = f2fs_set_zstd_level(sbi, name);
 -				if (ret) {
 -					kfree(name);
 -					return -EINVAL;
-+				if (strlen(name) == 3) {
++				if (strlen(name) == 4) {
 +					F2FS_OPTION(sbi).compress_level = 0;
 +				} else {
-+#ifdef CONFIG_F2FS_FS_LZ4HC
-+					ret = f2fs_set_lz4hc_level(sbi, name);
++					ret = f2fs_set_compress_level(sbi, name, "zstd", 1,
++						zstd_max_clevel());
 +					if (ret) {
 +						kfree(name);
 +						return -EINVAL;
 +					}
-+#else
-+					f2fs_info(sbi, "kernel doesn't support lz4hc compression");
-+					break;
-+#endif
  				}
  				F2FS_OPTION(sbi).compress_algorithm =
- 								COMPRESS_LZ4;
+ 								COMPRESS_ZSTD;
 -- 
 2.25.1
 
