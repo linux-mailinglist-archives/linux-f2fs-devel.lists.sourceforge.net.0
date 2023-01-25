@@ -2,103 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 391ED67B12F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Jan 2023 12:29:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF97767B131
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Jan 2023 12:29:54 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pKdyE-000667-UX;
-	Wed, 25 Jan 2023 11:29:38 +0000
+	id 1pKdyU-00066m-BR;
+	Wed, 25 Jan 2023 11:29:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1pKdyD-000660-0I
+ (envelope-from <brauner@kernel.org>) id 1pKdyT-00066b-2h
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Jan 2023 11:29:36 +0000
+ Wed, 25 Jan 2023 11:29:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:Message-Id:Date:Subject:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
+ Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XArVxmj+IwvPr9caruOG1hNSMWRWNwrrhrJGhaz21Gc=; b=BWVQieRzmPJzeGryTPT30uOA6L
- AXUX/vPgb4/WvYzp7ezOvqIKGpuVTIcorx5O3x8xwGxNfXusbqTPNf1rmKjSfA64wZ0xMmVhBULme
- hU5ixR4AoiIV+Vw4CQYlCnPgZ/VnK2Vjee/r9Xghx9ukPj3j5CS/RFM31Dqu7jdICfaA=;
+ bh=SI8EUcn0Y65z7s/FmHblOF3xtnj72QMN8WQV5Hmmt7A=; b=awFFahT1K7HDmEaOGc+7lIWTwh
+ IUNEGmDgmyBZOmXJl2VzZkTLckl6E2yFpl3UCge6FXjU+FbAKQjsFQ8RruV01rsmdUkhHfYY5oRdJ
+ ohwxx4p2JkkvLpjN3JJiRrA1Y8yQtdeiL8Y3TpC4YtmwfPaejAaVHqBvv+8zcNhed/ck=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date
- :Subject:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=XArVxmj+IwvPr9caruOG1hNSMWRWNwrrhrJGhaz21Gc=; b=S
- 0yUzAMQCCuO/c0OnXBIZYpwMlAKtVbofFN0Fl8aXfm+HAArwfksEC8NNtgWFSDE/OMwTolk6hW/od
- 0Lm7luEokUD36o57n1CHl/7v0tyqsnHIyco3on4OJdNajwlKbAXSmA3JQrXTaZ90dKiEF4Lr7yR2K
- Hrbo4Thga55b71fY=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
+ Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=SI8EUcn0Y65z7s/FmHblOF3xtnj72QMN8WQV5Hmmt7A=; b=i3xQjWyeSTCvVKT0LqrNv65meN
+ 6ZvgmwmUFLxPumu8/ohS74OTLHxIeZSfCNCT7sqvrAr6R9ygQFF3d6Wvdo9XbEEUrZSX0BbSKal7G
+ Z0NAzBTBArN+7vqPSneA9yTsJPVDss2neOyHbvVpIugvc0+e4sr7dlbiOmM8xxlj2/FM=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pKdy7-0006qR-E7 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Jan 2023 11:29:36 +0000
+ id 1pKdyQ-00FGuu-ER for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Jan 2023 11:29:52 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 0714B61356;
- Wed, 25 Jan 2023 11:29:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AAC2C433EF;
- Wed, 25 Jan 2023 11:29:22 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 17896B81991;
+ Wed, 25 Jan 2023 11:29:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C13AC4339E;
+ Wed, 25 Jan 2023 11:29:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1674646165;
- bh=iVepgeT7psmWqr/2L8LpCH4RngFmQJ2i/zddXU3Ybms=;
- h=From:Subject:Date:To:Cc:From;
- b=aa0adWk8JIHYbDKjUCphZ1mzhrcTx2e5m+zTBZn9obQWuMBhYiKhvxE/PfkC0DrMo
- n+Ti2ja6VfjxgUnPOpsi1+/EmtHqmyra/AonZ5w9wjQlfzKpsP+4TOI050CJaL0N1y
- bKz7YhLgOmOvqok9PjXvsoVl3tKqVYUbksPXEapn+w0KefS9YB16xUcTypEO9pAwIN
- evQ3wG1KZlyA608u+IFmR08EX1UGoUJze8vveYRXvWqAxEv1eQ5rc5zD6Fc879yXFq
- 13JMMXTEhD0lFVC6szsgPPomAG4klotXLnPAg8gEVmP0MH1tcrAZMyEp+bDrceHz66
- q2f2/uwZQY7jw==
+ s=k20201202; t=1674646182;
+ bh=xUJebQ0e9KwSrY/Cal4CAWhcfhSdz9RiiwAWxi4+KHc=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+ b=cozUATMauQjoFoE5hvkPr3B8PLlGiW9MIxmWen0gF5YS0pgPqXF4Pn9S0uVbr+uYc
+ p491Vbspem4g0PCceifALOTy6+qpfE5kh/4jStAxD+ZuKyYh0DxthtjJI4hQ7AWHFk
+ b/fuJK+2etQRxLoSUz5B53F8exR1AtrjGyeIe12JxcWlBMZ3V+mnl/TttpVH5tUL0q
+ gTwehhNG5kDIv5l9NTUrGlkxx3X4kbOtust3QDGfEIg7G3Rs+XCpIss1ACzBvsuqWS
+ x1sg9/dCn9u129Cr/KNRlE3sLRhKJRlmxglFod74Z71pw0JW+wAJNfUMcilK9LdLyQ
+ y2Rw4Ww0qzb/w==
 From: Christian Brauner <brauner@kernel.org>
-Date: Wed, 25 Jan 2023 12:28:45 +0100
-Message-Id: <20230125-fs-acl-remove-generic-xattr-handlers-v1-0-6cf155b492b6@kernel.org>
+Date: Wed, 25 Jan 2023 12:28:53 +0100
 MIME-Version: 1.0
-X-B4-Tracking: v=1; b=H4sIAG4S0WMC/x2O0QqDMBAEf0XuuSeaVgj9ldKHmGw0YGO5UxHEf
- 2/s47DMsAcpJEHpWR0k2JKmORdobxX50eUBnEJhMo25N63pOCo7P7HgM2/gAbn4nne3LMJFCBN
- E+eEjgu06G6ylkuqdgntx2Y9XLGodV0VdQtf6FcS0/0+83uf5A07KJIqUAAAA
+Message-Id: <20230125-fs-acl-remove-generic-xattr-handlers-v1-8-6cf155b492b6@kernel.org>
+References: <20230125-fs-acl-remove-generic-xattr-handlers-v1-0-6cf155b492b6@kernel.org>
+In-Reply-To: <20230125-fs-acl-remove-generic-xattr-handlers-v1-0-6cf155b492b6@kernel.org>
 To: linux-fsdevel@vger.kernel.org, Christoph Hellwig <hch@lst.de>
 X-Mailer: b4 0.12.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3964; i=brauner@kernel.org;
- h=from:subject:message-id; bh=iVepgeT7psmWqr/2L8LpCH4RngFmQJ2i/zddXU3Ybms=;
- b=owGbwMvMwCU28Zj0gdSKO4sYT6slMSRfFJq42SCo7mej0syzO7/VS69Ps21sFO48f9znuHr/fZEX
- p52lO0pZGMS4GGTFFFkc2k3C5ZbzVGw2ytSAmcPKBDKEgYtTACYSeIbhn+X/3zmPrKtsko21fh3Smv
- 5k/WvP2Uo6Sw92TuXesanV+BYjw7wCO68bLxsFprMsyP59RaXIcbL7hMBFnntnmxRL2pSJsAIA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4258; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=xUJebQ0e9KwSrY/Cal4CAWhcfhSdz9RiiwAWxi4+KHc=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMSRfFJo4R/Ewy9Nf8XlH1lk8Wza9MPAK53VNoYdMX0ydX15S
+ m3EqtqOUhUGMi0FWTJHFod0kXG45T8Vmo0wNmDmsTCBDGLg4BWAi93sYGbaf/ODb2vt+zuIgaS/j00
+ sL73qtV3355daEa3pPt8VtbvFlZLgVWjcxz8ixvPOexxans++qrF/uSFf4VCiod6a0MOLIOS4A
 X-Developer-Key: i=brauner@kernel.org; a=openpgp;
  fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hey everyone, after we finished the introduction of the new
- posix acl api last cycle we still left the generic POSIX ACL xattr handler
- around for two reasons. First, because a few filesystems relied on the ->list()
- [...] Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  Last cycle we introduced a new posix acl api. Filesystems
+ now only need to implement the inode operations for posix acls. The generic
+ xattr handlers aren't used anymore by the vfs and will be complete [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pKdy7-0006qR-E7
-Subject: [f2fs-dev] [PATCH 00/12] acl: remove remaining posix acl handlers
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pKdyQ-00FGuu-ER
+Subject: [f2fs-dev] [PATCH 08/12] f2fs: drop posix acl handlers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,108 +109,137 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: "Christian Brauner \(Microsoft\)" <brauner@kernel.org>,
- reiserfs-devel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-mtd@lists.infradead.org, Al Viro <viro@zeniv.linux.org.uk>,
- Jan Kara <jack@suse.com>, linux-ext4@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, ocfs2-devel@oss.oracle.com,
+ linux-f2fs-devel@lists.sourceforge.net, Al Viro <viro@zeniv.linux.org.uk>,
  Seth Forshee <sforshee@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hey everyone,
+Last cycle we introduced a new posix acl api. Filesystems now only need
+to implement the inode operations for posix acls. The generic xattr
+handlers aren't used anymore by the vfs and will be completely removed.
+Keeping the handler around is confusing and gives the false impression
+that the xattr infrastructure of the vfs is used to interact with posix
+acls when it really isn't anymore.
 
-after we finished the introduction of the new posix acl api last cycle
-we still left the generic POSIX ACL xattr handler around for two
-reasons. First, because a few filesystems relied on the ->list() method
-of the generic POSIX ACL xattr handlers in their ->listxattr() inode
-operation. Second, during inode initalization in inode_init_always() the
-registered xattr handlers in sb->s_xattr are used to raise IOP_XATTR in
-inode->i_opflags.
+For this to work we simply rework the ->listxattr() inode operation to
+not rely on the generix posix acl handlers anymore.
 
-With the removal of the legacy POSIX ACL handlers it is at least
-possible for a filesystem to only implement POSIX ACLs but no other
-xattrs. If that were to happen we would miss to raise IOP_XATTR because
-sb->s_xattr would be NULL.
-
-Fix these things and then get rid of the misleading and effectively
-already unused generic POSIX ACL handlers.
-
-For most filesystems it is a trivial removal of the generic POSIX ACL
-handlers. Only for erofs, ext2, ext4, f2fs, jffs2, reiserfs, oc2fs the
-handler is used but rather easy to fix.
-
-All filesystems with reasonable integration into xfstests have been
-tested with:
-
-        ./check -g acl,attr,cap,idmapped,io_uring,perms,unlink
-
-All tests pass without regression on xfstests for-next branch.
-
-Since erofs doesn't have integration into xfstests yet afaict I have
-tested it with the testuite available in erofs-utils. They also all pass
-without any regressions.
-
-This branch depends on [1] which hopefully should be merged soon and can
-be pulled from [2] which already includes [1] so it's easy to test and
-compile.
-
-With this all remnants of the old POSIX ACL xattr handling will be gone.
-
-Thanks!
-Christian
-
-[1]: https://lore.kernel.org/lkml/20230125100040.374709-1-brauner@kernel.org
-[2]: ssh://git@gitolite.kernel.org/pub/scm/linux/kernel/git/vfs/idmapping.git tags/fs.acl.remove.generic.xattr.handlers.v1
-
+Cc: <linux-f2fs-devel@lists.sourceforge.net>
 Signed-off-by: Christian Brauner (Microsoft) <brauner@kernel.org>
 ---
-Christian Brauner (12):
-      xattr: simplify listxattr helpers
-      xattr, posix acl: add listxattr helpers
-      xattr: remove unused argument
-      fs: drop unused posix acl handlers
-      erofs: drop posix acl handlers
-      ext2: drop posix acl handlers
-      ext4: drop posix acl handlers
-      f2fs: drop posix acl handlers
-      jffs2: drop posix acl handlers
-      ocfs2: drop posix acl handlers
-      reiserfs: drop posix acl handlers
-      acl: remove posix acl handlers
+ fs/f2fs/xattr.c | 63 ++++++++++++++++++++++++++++++++++-----------------------
+ 1 file changed, 38 insertions(+), 25 deletions(-)
 
- fs/9p/xattr.c                   |   4 --
- fs/btrfs/xattr.c                |   4 --
- fs/ceph/xattr.c                 |   4 --
- fs/cifs/xattr.c                 |   4 --
- fs/ecryptfs/inode.c             |   4 --
- fs/erofs/xattr.c                |  49 ++++++++++++----
- fs/erofs/xattr.h                |  21 -------
- fs/ext2/xattr.c                 |  60 +++++++++++--------
- fs/ext4/xattr.c                 |  71 +++++++++++++----------
- fs/f2fs/xattr.c                 |  63 ++++++++++++--------
- fs/gfs2/xattr.c                 |   2 -
- fs/jffs2/xattr.c                |  42 +++++++-------
- fs/jfs/xattr.c                  |   4 --
- fs/nfs/nfs3_fs.h                |   1 -
- fs/nfs/nfs3acl.c                |   6 --
- fs/nfs/nfs3super.c              |   3 -
- fs/nfsd/nfs4xdr.c               |   3 +-
- fs/ntfs3/xattr.c                |   4 --
- fs/ocfs2/xattr.c                |  41 +++++++------
- fs/orangefs/xattr.c             |   2 -
- fs/overlayfs/super.c            |   8 ---
- fs/posix_acl.c                  |  20 -------
- fs/reiserfs/xattr.c             |  38 ++++++------
- fs/xattr.c                      | 124 ++++++++++++++++++++--------------------
- fs/xfs/xfs_xattr.c              |   4 --
- include/linux/posix_acl_xattr.h |   6 +-
- include/linux/xattr.h           |   8 ++-
- mm/shmem.c                      |   4 --
- 28 files changed, 290 insertions(+), 314 deletions(-)
----
-base-commit: 1b929c02afd37871d5afb9d498426f83432e71c2
-change-id: 20230125-fs-acl-remove-generic-xattr-handlers-4cfed8558d88
+diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+index dc2e8637189e..e5bd071fac8c 100644
+--- a/fs/f2fs/xattr.c
++++ b/fs/f2fs/xattr.c
+@@ -189,25 +189,8 @@ const struct xattr_handler f2fs_xattr_security_handler = {
+ 	.set	= f2fs_xattr_generic_set,
+ };
+ 
+-static const struct xattr_handler *f2fs_xattr_handler_map[] = {
+-	[F2FS_XATTR_INDEX_USER] = &f2fs_xattr_user_handler,
+-#ifdef CONFIG_F2FS_FS_POSIX_ACL
+-	[F2FS_XATTR_INDEX_POSIX_ACL_ACCESS] = &posix_acl_access_xattr_handler,
+-	[F2FS_XATTR_INDEX_POSIX_ACL_DEFAULT] = &posix_acl_default_xattr_handler,
+-#endif
+-	[F2FS_XATTR_INDEX_TRUSTED] = &f2fs_xattr_trusted_handler,
+-#ifdef CONFIG_F2FS_FS_SECURITY
+-	[F2FS_XATTR_INDEX_SECURITY] = &f2fs_xattr_security_handler,
+-#endif
+-	[F2FS_XATTR_INDEX_ADVISE] = &f2fs_xattr_advise_handler,
+-};
+-
+ const struct xattr_handler *f2fs_xattr_handlers[] = {
+ 	&f2fs_xattr_user_handler,
+-#ifdef CONFIG_F2FS_FS_POSIX_ACL
+-	&posix_acl_access_xattr_handler,
+-	&posix_acl_default_xattr_handler,
+-#endif
+ 	&f2fs_xattr_trusted_handler,
+ #ifdef CONFIG_F2FS_FS_SECURITY
+ 	&f2fs_xattr_security_handler,
+@@ -216,13 +199,44 @@ const struct xattr_handler *f2fs_xattr_handlers[] = {
+ 	NULL,
+ };
+ 
+-static inline const struct xattr_handler *f2fs_xattr_handler(int index)
++static const char *f2fs_xattr_prefix(int xattr_index, struct dentry *dentry)
+ {
++	const char *name = NULL;
+ 	const struct xattr_handler *handler = NULL;
+ 
+-	if (index > 0 && index < ARRAY_SIZE(f2fs_xattr_handler_map))
+-		handler = f2fs_xattr_handler_map[index];
+-	return handler;
++	switch (xattr_index) {
++	case F2FS_XATTR_INDEX_USER:
++		handler = &f2fs_xattr_user_handler;
++		break;
++	case F2FS_XATTR_INDEX_TRUSTED:
++		handler = &f2fs_xattr_trusted_handler;
++		break;
++	case F2FS_XATTR_INDEX_ADVISE:
++		handler = &f2fs_xattr_advise_handler;
++		break;
++#ifdef CONFIG_F2FS_FS_SECURITY
++	case F2FS_XATTR_INDEX_SECURITY:
++		handler = &f2fs_xattr_security_handler;
++		break;
++#endif
++#ifdef CONFIG_F2FS_FS_POSIX_ACL
++	case F2FS_XATTR_INDEX_POSIX_ACL_ACCESS:
++		if (posix_acl_dentry_list(dentry))
++			name = XATTR_NAME_POSIX_ACL_ACCESS;
++		break;
++	case F2FS_XATTR_INDEX_POSIX_ACL_DEFAULT:
++		if (posix_acl_dentry_list(dentry))
++			name = XATTR_NAME_POSIX_ACL_DEFAULT;
++		break;
++#endif
++	default:
++		return NULL;
++	}
++
++	if (xattr_dentry_list(handler, dentry))
++		name = xattr_prefix(handler);
++
++	return name;
+ }
+ 
+ static struct f2fs_xattr_entry *__find_xattr(void *base_addr,
+@@ -573,12 +587,12 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
+ 	last_base_addr = (void *)base_addr + XATTR_SIZE(inode);
+ 
+ 	list_for_each_xattr(entry, base_addr) {
+-		const struct xattr_handler *handler =
+-			f2fs_xattr_handler(entry->e_name_index);
+ 		const char *prefix;
+ 		size_t prefix_len;
+ 		size_t size;
+ 
++		prefix = f2fs_xattr_prefix(entry->e_name_index, dentry);
++
+ 		if ((void *)(entry) + sizeof(__u32) > last_base_addr ||
+ 			(void *)XATTR_NEXT_ENTRY(entry) > last_base_addr) {
+ 			f2fs_err(F2FS_I_SB(inode), "inode (%lu) has corrupted xattr",
+@@ -590,10 +604,9 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
+ 			goto cleanup;
+ 		}
+ 
+-		if (!handler || (handler->list && !handler->list(dentry)))
++		if (!prefix)
+ 			continue;
+ 
+-		prefix = xattr_prefix(handler);
+ 		prefix_len = strlen(prefix);
+ 		size = prefix_len + entry->e_name_len + 1;
+ 		if (buffer) {
+
+-- 
+2.34.1
 
 
 
