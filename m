@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70C1C67F454
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 28 Jan 2023 04:35:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57C4D67F552
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 28 Jan 2023 07:53:04 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pLc0J-0005sQ-SS;
-	Sat, 28 Jan 2023 03:35:47 +0000
+	id 1pLf59-0001N5-3h;
+	Sat, 28 Jan 2023 06:52:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pLc0H-0005sK-Lw
+ (envelope-from <chao@kernel.org>) id 1pLf58-0001Mz-2W
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 28 Jan 2023 03:35:45 +0000
+ Sat, 28 Jan 2023 06:52:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Jvyac98PfOImtDLtlU7j0NcXsfeWJQSz0ungZNBMBXM=; b=dqQzyXO7qD8aEFf5K6CeOyHLVQ
- LNs7ZZ9WK1UyjLzw9s+4YgFSGpV78ZSCEGFS6UyrZpEA/My8qrCmqQwY16+KcxGqb9g70ieJunLBs
- 9A067v2ND/282lSwaQXlHz5l1vmm3EPsq7/VDQMEZ8ej32yebj+KKM6F9nlpULfpXf2k=;
+ bh=UUaqzQgYKSNiKwuoaTeOdUMrUFdw4GPkszHSN7yxW/8=; b=RrAQgR5I9tTpk+vrcmz1qS8aIf
+ RBztUCsFEvyQrSGTOXCRuljqNi/r8YqPaLW8Z4cgXxgdYNwrgR6inSmsrsIITM6xFFA/7BfH40m96
+ 6+WoMgIRTLw8LAObcFypVM1FhQarqoBu4Kx61r4bGzGCmJC3tkBJmUPxQuEmvxZl2fuU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,53 +31,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Jvyac98PfOImtDLtlU7j0NcXsfeWJQSz0ungZNBMBXM=; b=AwdRF2xsMMyMH8i4BZDt5DfJPk
- /KmOGUpY2tBZvvaigbj2VqEGrpJmALxLhtk210o9G5V/kKoGp3ESuRA/u0XfvAfPiQ3ulbYA3q1d4
- u/2fHaJ14ogKgql3ZA+QBeV0Upy+fohxCxoW2Kx36/b1sFffSHi20YKS7hx4LkTPNEXg=;
+ bh=UUaqzQgYKSNiKwuoaTeOdUMrUFdw4GPkszHSN7yxW/8=; b=eZ8q2h3GGrBstVgflmRYA11Uvq
+ hQa5fYxRkgYW4AfBAQBNxl358j5Pd+DqbwWN4k0At6DfSrbd0XNNqQxJxVysxfwWSL9H/NPxF5ebO
+ 5kRSCDVV0MNFqIT5Z1xY+k+FtTKrOx5eloQO66yCariAfa3ORpEiuOX9meZwKHNCqxnQ=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pLc0G-001EiP-8z for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 28 Jan 2023 03:35:44 +0000
+ id 1pLf56-001Q71-SM for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 28 Jan 2023 06:52:57 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id DA6AA615A9;
- Sat, 28 Jan 2023 03:35:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D347AC433D2;
- Sat, 28 Jan 2023 03:35:36 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7FBC8600BE;
+ Sat, 28 Jan 2023 06:52:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 406D1C433D2;
+ Sat, 28 Jan 2023 06:52:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1674876938;
- bh=ApbP8EJRFMfmC3wPXgImgw5jYcobkoKDFxkpXh2Drh0=;
+ s=k20201202; t=1674888769;
+ bh=moCmHtP6WNEhW3voaGVZN+oBQpsMfXGYlro+vQJN4FU=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Js2I/owq0961EyvlPFtUXq5ooYps1yJbvF/JXCs7fUcJ0WOv5Ov+J6HRA0anLaHUM
- qdyhAcmSQaplf4qUaY9Qy+qlwOshueRrLI/VrR082U/vxKi6/dyFZPl9sYDLupHthe
- UZ1WNyTgXL/QTww9HYXWWBhu2tmd0H90nFc0fH6J/FL5RiPcoWksbhv9Gyj7JxXaw5
- aPjE5N1HCgAdgHJGQp/SiyiMff95BnlsFSoAOmewb4lmyfYlCYkXgbw7Ii0ALS8Hdy
- t7xVZPAu84zAa+zXc7p9xUKdgOzIHuHmUCZvNpXc7v2DtZHaXn8PZODdD0M7h9nG0F
- IZo9JSs+GGaMQ==
-Message-ID: <7c12ebaa-4d3d-e475-dfb2-7b459cd26e64@kernel.org>
-Date: Sat, 28 Jan 2023 11:35:34 +0800
+ b=VegJ0q314axePk3BRR0facAsmCUuptbrASXuZL/NUmfkRjTxzOqA2hTNX+MNkI5rm
+ tZdVBXUYBo8ZpReTiPcV5SQYDQQXZhqEh28zh+fDuGbuVu5JYZYxoHjlpe58spZBfC
+ Qhb84+Ov3I3LXzCMQsxdTxJGVbMc+qmA607QabgTigxiv6s5Ei6f44jtIY4b0+1DvM
+ EEx3JcnhTFunAmE2m7mo1ahnVFc7u2cVUNATSASnySHPBrTHry1XTWSqYBlumBE/XG
+ 0PgStTI3DzIIBsAniUYTsjV2N4wOGYgrkR5JaO0yYabs7rCMrv14eN5Crrf5mTiWtb
+ LtF1eecbVM18Q==
+Message-ID: <7a1dda12-7c86-d5fb-4875-19b28bb786e4@kernel.org>
+Date: Sat, 28 Jan 2023 14:52:45 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.6.1
 Content-Language: en-US
-To: qixiaoyu1 <qxy65535@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230113125859.15651-1-qixiaoyu1@xiaomi.com>
- <20230116030850.20260-1-qixiaoyu1@xiaomi.com>
+To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
+References: <20230112133443.16713-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230116030850.20260-1-qixiaoyu1@xiaomi.com>
-X-Spam-Score: -7.9 (-------)
+In-Reply-To: <20230112133443.16713-1-frank.li@vivo.com>
+X-Spam-Score: -6.3 (------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/1/16 11:08, qixiaoyu1 wrote: > Currently we wrongly
- calculate the new block age to > old * LAST_AGE_WEIGHT / 100. > > Fix it
- to new * (100 - LAST_AGE_WEIGHT) / 100 > + old * LAST_AGE_WEIGHT / [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  On 2023/1/12 21:34, Yangtao Li wrote: > commit 3fde13f817e2
+ ("f2fs: compress: support compress level") introduce > compress level, which
+ macro(COMPRESS_LEVEL_OFFSET) is 8, But use wrong > comment abou [...] 
+ Content analysis details:   (-6.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -90,11 +89,10 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pLc0G-001EiP-8z
-Subject: Re: [f2fs-dev] [PATCH 1/2 v2] f2fs: fix wrong calculation of block
- age
+ valid -1.1 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pLf56-001Q71-SM
+Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs: clarify compress level bit offset
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,54 +104,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: xiongping1@xiaomi.com, qixiaoyu1@xiaomi.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/1/16 11:08, qixiaoyu1 wrote:
-> Currently we wrongly calculate the new block age to
-> old * LAST_AGE_WEIGHT / 100.
+On 2023/1/12 21:34, Yangtao Li wrote:
+> commit 3fde13f817e2 ("f2fs: compress: support compress level") introduce
+> compress level, which macro(COMPRESS_LEVEL_OFFSET) is 8, But use wrong
+> comment about compress level.
 > 
-> Fix it to new * (100 - LAST_AGE_WEIGHT) / 100
->                  + old * LAST_AGE_WEIGHT / 100.
+> Let's fix it.
 > 
-> Signed-off-by: qixiaoyu1 <qixiaoyu1@xiaomi.com>
-> Signed-off-by: xiongping1 <xiongping1@xiaomi.com>
-> ---
-> Change log v1 -> v2:
->   - fix udiv
-> 
->   fs/f2fs/extent_cache.c | 7 ++-----
->   1 file changed, 2 insertions(+), 5 deletions(-)
-> 
-> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-> index 342af24b2f8c..ad5533f178fd 100644
-> --- a/fs/f2fs/extent_cache.c
-> +++ b/fs/f2fs/extent_cache.c
-> @@ -874,11 +874,8 @@ void f2fs_update_read_extent_tree_range_compressed(struct inode *inode,
->   static unsigned long long __calculate_block_age(unsigned long long new,
->   						unsigned long long old)
->   {
-> -	unsigned long long diff;
-> -
-> -	diff = (new >= old) ? new - (new - old) : new + (old - new);
-> -
-> -	return div_u64(diff * LAST_AGE_WEIGHT, 100);
-> +	return div_u64(new, 100) * (100 - LAST_AGE_WEIGHT)
-> +		+ div_u64(old, 100) * LAST_AGE_WEIGHT;
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
 
-How about updating as below to avoid lossing accuracy if new is less than 100?
-
-return div_u64(new * (100 - LAST_AGE_WEIGHT), 100) +
-		div_u64(old * LAST_AGE_WEIGHT, 100);
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
->   }
->   
->   /* This returns a new age and allocated blocks in ei */
 
 
 _______________________________________________
