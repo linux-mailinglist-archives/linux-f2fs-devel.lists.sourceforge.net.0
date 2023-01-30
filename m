@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 411A2681F3B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Jan 2023 00:00:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CB6D681F35
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Jan 2023 00:00:29 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pMd8b-0003di-Et;
-	Mon, 30 Jan 2023 23:00:32 +0000
+	id 1pMd8W-0004yh-OS;
+	Mon, 30 Jan 2023 23:00:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pMd8V-0003d7-Ez
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pMd8U-0004yO-Mm
  for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 30 Jan 2023 23:00:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,52 +21,51 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RmE0k29mybQY5WLzLH0l0NYCVkCyWR5tTi5g8vamnlk=; b=jK/ee0WFTAuzOBuDKNjhwmBfF8
- r8/guAefBPT/2JG2ennThYadi6gVjUw1ctRFLdUqVpZjPjLzcI1wsVoZAIE0AoxDzjfgpWqp8RYHH
- /VIzhk/RZ3wHD8AdtFMliKakfbqvm9URGA1c1dWr38Ck6/RzbUmijfHNbuMdQ1C19VtE=;
+ bh=P2iQm09VRNQe1Lnt5xvbmsSrfmVikG3oU81DhU/1ZJw=; b=cTKTkk43f5Qb5V0OHzae/a9LaY
+ 9afc/m6SLkv3xnz/vUKqqWIwF3A8+/6xqzg/t+moshAXynVhCtkZ5mxcphqroLTMgN6kBztJNujKy
+ L5BB22NqlKgneEs61TaVJBm6mmIUFsyhrFBUuqM1ycyuDrEnJkSfn1E4noOkFwFvjGNE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RmE0k29mybQY5WLzLH0l0NYCVkCyWR5tTi5g8vamnlk=; b=La2HEDJe3eSa1mKPCDQy2gvJHW
- w7yDFaa4G+Uow1GaN5f/EiijyMuBZGRtBKwSuP4j56R1nuPSUgneh3MTqsCGw4XZAEHgVUL/NHGtQ
- ML9xG2XBDIwnkoWWkivBJPi+dxUAsDTbO1RR/UBoNKsl2Tz/xfH8lv7RSuLzComV5AfM=;
+ bh=P2iQm09VRNQe1Lnt5xvbmsSrfmVikG3oU81DhU/1ZJw=; b=IVHY13i8P/RRSiyM5vLDQhT7JN
+ OOI2aesalj+YpAYHW5RRLW/MkSjT4u0uG4B3lSNPVumt3PZgG6kNDNOGDogry3IteHfRpglV2IeDP
+ ZImyo+mCT6OyvX9bnhF+s64T+8ZHY1GVYOj6BUoTZKuvPsOjdZGKBueAfIcdkMyI6Bbo=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pMd8S-004OGU-8z for linux-f2fs-devel@lists.sourceforge.net;
+ id 1pMd8R-0002fU-Hi for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 30 Jan 2023 23:00:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id DEF8E612FB
- for <linux-f2fs-devel@lists.sourceforge.net>;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E9F7461301;
  Mon, 30 Jan 2023 23:00:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 27A72C433AA;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2DFEEC433AF;
  Mon, 30 Jan 2023 23:00:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1675119618;
- bh=umkF9ddrYQfLVnvHs4hapm7fWtMrN53sEfGlRBENlWs=;
+ bh=a6ZQ/b0uXTbL1kCWSrh6VhSJzA1LEtVN1cuA2y8NfJc=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=OG8Hu/poBUEyWHtprU2VhELWPuJdYJRclmxs49CSlj/YQZvLie05PO4Y2LTSImOGo
- iAyJ/hGhrmhDusgGiP7ghXVN6g00A4/bLYJCy9tAer93TSmnmMCEDAgtz73k6vl4Mi
- bOPk/jFmiptSdfofSDWEHnrO1t4+bpuY1UZHK1oMhffaCOdIh+jIL2ORu2idZnpgEE
- k6lvi+VcXrIUJSPyI3HiiCtditcXttHV/RcYIVZ9Wf/ZVQ6nP5DtiQO3ORnfvz3lN+
- aEJryQ1CsB45vmkEmRa9BO1YfPQHhk0wPqlkDeC83DUa4MV6wX9uQUvaeXW7f5EIFu
- f/updMwlvaZcA==
+ b=j//+z8dCXXmcQfDGsph4mKLYBfMhUwHH9AqaCM5HzPmZctdWu9TeMlwVD3v04s65d
+ O1LuMuTRqnhS8GNfh01nVJu7Icsz6ahzc8n4yj7awxMJD9ywOdK9OV+RCN1Dl+nBZi
+ mYoTBte6azOq1KsCgJBPaCu4vn+5JV1i+vKBt2TbBrvTLmhaB6p1ZGcTFA7dquGTeR
+ 2YeETPvht/KzGnIebAdkwUkTOw+rjETCyj+TFPJMEdHS4cJy1pDFJJ/UZ2w36OJAtK
+ ik7IGit+BhCfaHRSC7N7aSNKfNPtRoHQ9D275nnwnu29xiv4/FR7OM3QhCCAbzE148
+ xasfar4xhDYdw==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- E9368E5255C; Mon, 30 Jan 2023 23:00:17 +0000 (UTC)
+ 0315DE5255E; Mon, 30 Jan 2023 23:00:18 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <167511961795.12751.16077999668439439794.git-patchwork-notify@kernel.org>
-Date: Mon, 30 Jan 2023 23:00:17 +0000
-References: <20230109034734.491518-1-chao@kernel.org>
-In-Reply-To: <20230109034734.491518-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+Message-Id: <167511961800.12751.17604829596454297245.git-patchwork-notify@kernel.org>
+Date: Mon, 30 Jan 2023 23:00:18 +0000
+References: <20230112191404.59020-1-frank.li@vivo.com>
+In-Reply-To: <20230112191404.59020-1-frank.li@vivo.com>
+To: Yangtao Li <frank.li@vivo.com>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -75,10 +74,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 9 Jan 2023 11:47:34 +0800 you wrote:
- > f2fs_rename() has checked CP_ERROR_FLAG, so remove redundant check > in
- f2fs_create_whiteout(). > > Signed-off-by: Chao Yu <chao@kernel.org> > ---
- > fs/f [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 13 Jan 2023 03:14:04 +0800 you
+ wrote: > f2fs_issue_discard_timeout() returns whether discard cmds are dropped,
+ > which does not match the meaning of the function. Let's change it to >
+ return w [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pMd8S-004OGU-8z
-Subject: Re: [f2fs-dev] [PATCH] f2fs: remove unneeded f2fs_cp_error() in
- f2fs_create_whiteout()
+X-Headers-End: 1pMd8R-0002fU-Hi
+Subject: Re: [f2fs-dev] [PATCH] f2fs: return true if all cmd were issued or
+ no cmd need to be issued for f2fs_issue_discard_timeout()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,18 +117,21 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon,  9 Jan 2023 11:47:34 +0800 you wrote:
-> f2fs_rename() has checked CP_ERROR_FLAG, so remove redundant check
-> in f2fs_create_whiteout().
+On Fri, 13 Jan 2023 03:14:04 +0800 you wrote:
+> f2fs_issue_discard_timeout() returns whether discard cmds are dropped,
+> which does not match the meaning of the function. Let's change it to
+> return whether all discard cmd are issued.
 > 
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  fs/f2fs/namei.c | 3 ---
->  1 file changed, 3 deletions(-)
+> After commit 4d67490498ac ("f2fs: Don't create discard thread when
+> device doesn't support realtime discard"), f2fs_issue_discard_timeout()
+> is alse called by f2fs_remount(). Since the comments of
+> f2fs_issue_discard_timeout() doesn't make much sense, let's update it.
+> 
+> [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: remove unneeded f2fs_cp_error() in f2fs_create_whiteout()
-    https://git.kernel.org/jaegeuk/f2fs/c/8abe4be45132
+  - [f2fs-dev] f2fs: return true if all cmd were issued or no cmd need to be issued for f2fs_issue_discard_timeout()
+    https://git.kernel.org/jaegeuk/f2fs/c/255699a4d876
 
 You are awesome, thank you!
 -- 
