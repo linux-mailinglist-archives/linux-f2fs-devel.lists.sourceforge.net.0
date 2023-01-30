@@ -2,71 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD5AE681F3C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Jan 2023 00:00:33 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EF14681F37
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Jan 2023 00:00:29 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pMd8b-0004zX-4Q;
-	Mon, 30 Jan 2023 23:00:32 +0000
+	id 1pMd8W-0001kK-N2;
+	Mon, 30 Jan 2023 23:00:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pMd8Z-0004z9-R7
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pMd8U-0001k1-Qv
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 30 Jan 2023 23:00:31 +0000
+ Mon, 30 Jan 2023 23:00:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/35ikqloMktsiJHNheNcTP+pE97urVOT/am4FBeU+R0=; b=bzUMUCGVmSZUM4rHPshyL37aGp
- qOBWw0tTtn9MT4CWgLICXzx9XCGboJ98CLgb1RhBOgma/FXTsxAKQFH7Zu6MFx0ExaI8oj89kYVz9
- ajf2/D92UVulYYlUtMOGHbhWHLawF5p5N/nkYxVYk5ZGJlE457XCrOqReh8QeziM3oqk=;
+ bh=4SQLkTKxzLH3BSKdy3EbbnX/DuzmlPwF5xyCxUYpu4I=; b=A9I5P71IqTpTKWUr1M2sWiNdQ3
+ rVCH3ePxiGdQZMf98IKImBxel1X4zND+4WpLyfakf16+uhk55YVgtsUnEVOffOmX/pJYUalP0JCpk
+ jNj7QxsGB/P5vQ+AIzpJbLYKR6VPjh6n3f8YQ4A5HYxU8r9C2+cBeniXZZlAnQbKyBRQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/35ikqloMktsiJHNheNcTP+pE97urVOT/am4FBeU+R0=; b=EucirHcnw5gtd+dIeNVq9dTbY9
- ayxj9GriOXzcADcHgRZnRG3nl/oAM8BUxgBn/nC6AIn0ZrHsB09O7zOmXBnvSfXgHsJIX5Vs9K2y2
- XS4bGTINHwUWxHPM7oh5ikDnGwUGWMRBxWQwMhlpAn2m369a3Kuv1bRd8FmrzaeZ8iFo=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=4SQLkTKxzLH3BSKdy3EbbnX/DuzmlPwF5xyCxUYpu4I=; b=hu18Mgv9Q019L2CuMIv+DoMm/c
+ Vo5jDZbA+PDksWxOGkMbSHe0lnmNBxDCbUfpH/ovKxqUAQDq2vE66kzzjeO/UfZo5uya3T3InfxXe
+ X/CLCDIZSKbkf2hrOfJkaYtR4ij56Vlq6/FPn0Fh/KhUosf9SAwiJ4zqUW6fUPlQe318=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pMd8W-004OGX-S3 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 30 Jan 2023 23:00:29 +0000
+ id 1pMd8S-004OGV-Kt for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 30 Jan 2023 23:00:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 65E89B81729
- for <linux-f2fs-devel@lists.sourceforge.net>;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 43CD6612F1;
  Mon, 30 Jan 2023 23:00:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0D1F6C433A4;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 41BC3C433B0;
  Mon, 30 Jan 2023 23:00:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1675119618;
- bh=CMt3YGmi7TPBDuXz+slvY6FzDAJYXbHGEJa3D+ssLbk=;
+ bh=xc/KvQ4qE0zaYQjdK4Tv1DHZUeHVYvXu8EZbsocIWMI=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=CvMC3enDwkkDBfmWDU4trVuWWgsNR91OAe0a6yxskuwlBq7evvN+vz4CoBdhmSl7D
- hENXOlvZLw5PwYgvnGXnn3yTwqeljgy8o0Wb14A8EpoHupbuzIgBCgym6DlJqyN06B
- ZQFX44ooCjUK0K7lt0S9z96LIUzbS/hKWtkvRrq3rHBSNbX+4G9I+t38Dt047sajVF
- Erx6y8s+pmx84Iy9KEN4KsO0iKQ6nlBpksXw/jr4aDNF+7vCotgquEPsQT6VpzoPqu
- mAyBa/d0JmH5xuN2qhKZiuENZTFrn/zNf9hTTaE6SWgJUD9WEszwPK/LT4hjFr4DMV
- vUeWlHIt0bdoQ==
+ b=dGpGBnSMfW8ed69u0Uf/Jclr2hr47Yn9jb4pQPEFKNbbRpQGGYAiFfvcaCXk6NNZ7
+ 1lU4LBBOupaNXs8O8cFCMzXsyUIZQFKCTcftkCg5Ulru6ffLLiqnCCvaV91K8l/LEO
+ awZcyX/x6wz2S8N5H3v0ldnmzLOMLu+kJyjgBIOkEds1mzpVOzRXcTMXwNcZAYdu82
+ opqGaeee5mJjjtQ7okuYJFpgoFrQxLjb13OdBGoXQGxwbosicx9EfPJZSzX5MryoTm
+ r09zs4g57gIuUtkbxLJlAoRNHtHy1S2/0Hw2miEHVN8Mi0kz9uzMRoVOOWeiYqA0QM
+ Zw54fyIIL1GCA==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- CC415C04E36; Mon, 30 Jan 2023 23:00:17 +0000 (UTC)
+ F006FC16ABD; Mon, 30 Jan 2023 23:00:17 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <167511961783.12751.11163869544099252869.git-patchwork-notify@kernel.org>
+Message-Id: <167511961798.12751.8349285057815304075.git-patchwork-notify@kernel.org>
 Date: Mon, 30 Jan 2023 23:00:17 +0000
-References: <20230109034920.492914-1-chao@kernel.org>
-In-Reply-To: <20230109034920.492914-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+References: <20221222081855.81553-1-frank.li@vivo.com>
+In-Reply-To: <20221222081855.81553-1-frank.li@vivo.com>
+To: Yangtao Li <frank.li@vivo.com>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -75,15 +74,15 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 9 Jan 2023 11:49:20 +0800 you wrote:
- > In do_read_inode(),
- sanity_check_inode() should be called after > f2fs_init_read_extent_tree(), 
- fix it. > > Fixes: 72840cccc0a1 ("f2fs: allocate the exte [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 22 Dec 2022 16:18:55 +0800 you
+ wrote: > No need to initialize idx twice. BTW, remove the unnecessary cnt
+ variable. > > Signed-off-by: Yangtao Li <frank.li@vivo.com> > --- >
+ fs/f2fs/iostat.c | [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -93,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pMd8W-004OGX-S3
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on extent cache
- correctly
+X-Headers-End: 1pMd8S-004OGV-Kt
+Subject: Re: [f2fs-dev] [PATCH] f2fs: drop useless initializer and unneeded
+ local variable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,19 +117,17 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon,  9 Jan 2023 11:49:20 +0800 you wrote:
-> In do_read_inode(), sanity_check_inode() should be called after
-> f2fs_init_read_extent_tree(), fix it.
+On Thu, 22 Dec 2022 16:18:55 +0800 you wrote:
+> No need to initialize idx twice. BTW, remove the unnecessary cnt variable.
 > 
-> Fixes: 72840cccc0a1 ("f2fs: allocate the extent_cache by default")
-> Signed-off-by: Chao Yu <chao@kernel.org>
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
 > ---
->  fs/f2fs/inode.c | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
+>  fs/f2fs/iostat.c | 10 ++++------
+>  1 file changed, 4 insertions(+), 6 deletions(-)
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to do sanity check on extent cache correctly
-    https://git.kernel.org/jaegeuk/f2fs/c/14c42b75ee14
+  - [f2fs-dev] f2fs: drop useless initializer and unneeded local variable
+    https://git.kernel.org/jaegeuk/f2fs/c/c5f9db2548d0
 
 You are awesome, thank you!
 -- 
