@@ -2,100 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3500681F3A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Jan 2023 00:00:32 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD5AE681F3C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Jan 2023 00:00:33 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pMd8a-0003dP-RK;
-	Mon, 30 Jan 2023 23:00:31 +0000
+	id 1pMd8b-0004zX-4Q;
+	Mon, 30 Jan 2023 23:00:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pMd8T-0003d1-Vt
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pMd8Z-0004z9-R7
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 30 Jan 2023 23:00:24 +0000
+ Mon, 30 Jan 2023 23:00:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HbKOSdLOKlFyF1xxZntGe1YLY1E5Es8jAGr7Q0HXhdE=; b=m1yPjJaenyt+2IjHzldAomZjzs
- KJmiylfTUxr2/6cTm+EVCMUEN9w2Bo1KzvzMcOZhllBPEaRtWBOcotf9tS2CCua9hp8HllobyjcAN
- PL8ZbOG8eST1Tg9+vl0aVCSPmU+gaBzyVdzLe78qGN35xlnNQyt+yjCO5rT3BXBqdPKs=;
+ bh=/35ikqloMktsiJHNheNcTP+pE97urVOT/am4FBeU+R0=; b=bzUMUCGVmSZUM4rHPshyL37aGp
+ qOBWw0tTtn9MT4CWgLICXzx9XCGboJ98CLgb1RhBOgma/FXTsxAKQFH7Zu6MFx0ExaI8oj89kYVz9
+ ajf2/D92UVulYYlUtMOGHbhWHLawF5p5N/nkYxVYk5ZGJlE457XCrOqReh8QeziM3oqk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HbKOSdLOKlFyF1xxZntGe1YLY1E5Es8jAGr7Q0HXhdE=; b=XL4zjyFdajPNnPF64LhU9CNRUW
- c804ZLl8cnSu0kCzgNQQvr0jxnylDpViHJyMYmpFlfxi8yKCMgMPrfasOxHq/0h4IgHCLqzJtOhP7
- C52eVaEhjUGWlMkCKkwVBvgQuowzUeUw1XdBj6vicxKOmdTAw4PCuvuZQV8Pd2zfq1tg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=/35ikqloMktsiJHNheNcTP+pE97urVOT/am4FBeU+R0=; b=EucirHcnw5gtd+dIeNVq9dTbY9
+ ayxj9GriOXzcADcHgRZnRG3nl/oAM8BUxgBn/nC6AIn0ZrHsB09O7zOmXBnvSfXgHsJIX5Vs9K2y2
+ XS4bGTINHwUWxHPM7oh5ikDnGwUGWMRBxWQwMhlpAn2m369a3Kuv1bRd8FmrzaeZ8iFo=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pMd8R-0002fO-5B for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 30 Jan 2023 23:00:24 +0000
+ id 1pMd8W-004OGX-S3 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 30 Jan 2023 23:00:29 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8A161612FA
+ by ams.source.kernel.org (Postfix) with ESMTPS id 65E89B81729
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 30 Jan 2023 23:00:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0D1F6C433A4;
  Mon, 30 Jan 2023 23:00:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id DF809C4339B;
- Mon, 30 Jan 2023 23:00:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1675119617;
- bh=8wG5NIsuKshWhb2XiCI9lAfT/vlNO8ZyFCtUknM3ANs=;
+ s=k20201202; t=1675119618;
+ bh=CMt3YGmi7TPBDuXz+slvY6FzDAJYXbHGEJa3D+ssLbk=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=XzZUsRun1zvbD5R8j+IpZ8toL9en35Dt9IKNfR2Y7YJlT7n3yX/Aq0b5jjeNrdwLx
- jdReH5IJkI53OueNqokmBuWJtk0BIBcbMoDRaT392BmbTMDJQ7S/YZboVAxYqrlaXF
- 0Coh2OZ/VrvCTijcH7ESr54u5+eijNteWokgV23L0dKiKNyp2wCq0Wcd9Q5lHtlxnw
- vbA8FgO4MJQgNY+u8Sy03eSaqmmjfHjIRu4UjsIdAt9glqbcLJsxpnHdmPTzfi4lkE
- D1J8ili7HsxUydzF7d9uolw1Lzm4H+/IQlrULkxWQHDOZ9KuzAl7uHMmmw79WKgE3B
- 7eIgr9Twh5KOw==
+ b=CvMC3enDwkkDBfmWDU4trVuWWgsNR91OAe0a6yxskuwlBq7evvN+vz4CoBdhmSl7D
+ hENXOlvZLw5PwYgvnGXnn3yTwqeljgy8o0Wb14A8EpoHupbuzIgBCgym6DlJqyN06B
+ ZQFX44ooCjUK0K7lt0S9z96LIUzbS/hKWtkvRrq3rHBSNbX+4G9I+t38Dt047sajVF
+ Erx6y8s+pmx84Iy9KEN4KsO0iKQ6nlBpksXw/jr4aDNF+7vCotgquEPsQT6VpzoPqu
+ mAyBa/d0JmH5xuN2qhKZiuENZTFrn/zNf9hTTaE6SWgJUD9WEszwPK/LT4hjFr4DMV
+ vUeWlHIt0bdoQ==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- C5423E4D014; Mon, 30 Jan 2023 23:00:17 +0000 (UTC)
+ CC415C04E36; Mon, 30 Jan 2023 23:00:17 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <167511961780.12751.1698186738415312806.git-patchwork-notify@kernel.org>
+Message-Id: <167511961783.12751.11163869544099252869.git-patchwork-notify@kernel.org>
 Date: Mon, 30 Jan 2023 23:00:17 +0000
-References: <20230109034453.490176-1-chao@kernel.org>
-In-Reply-To: <20230109034453.490176-1-chao@kernel.org>
+References: <20230109034920.492914-1-chao@kernel.org>
+In-Reply-To: <20230109034920.492914-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 9 Jan 2023 11:44:49 +0800 you wrote:
- > Commit 3db1de0e582c ("f2fs: change the current atomic write way") > removed
- old tracepoints, but it missed to add new one, this patch > fixes to introduc
- [...] Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 9 Jan 2023 11:49:20 +0800 you wrote:
+ > In do_read_inode(),
+ sanity_check_inode() should be called after > f2fs_init_read_extent_tree(), 
+ fix it. > > Fixes: 72840cccc0a1 ("f2fs: allocate the exte [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pMd8R-0002fO-5B
-Subject: Re: [f2fs-dev] [PATCH 1/5] f2fs: introduce
- trace_f2fs_replace_atomic_write_block
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pMd8W-004OGX-S3
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on extent cache
+ correctly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,31 +115,22 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This series was applied to jaegeuk/f2fs.git (dev)
+This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon,  9 Jan 2023 11:44:49 +0800 you wrote:
-> Commit 3db1de0e582c ("f2fs: change the current atomic write way")
-> removed old tracepoints, but it missed to add new one, this patch
-> fixes to introduce trace_f2fs_replace_atomic_write_block to trace
-> atomic_write commit flow.
+On Mon,  9 Jan 2023 11:49:20 +0800 you wrote:
+> In do_read_inode(), sanity_check_inode() should be called after
+> f2fs_init_read_extent_tree(), fix it.
 > 
-> Fixes: 3db1de0e582c ("f2fs: change the current atomic write way")
+> Fixes: 72840cccc0a1 ("f2fs: allocate the extent_cache by default")
 > Signed-off-by: Chao Yu <chao@kernel.org>
-> 
-> [...]
+> ---
+>  fs/f2fs/inode.c | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
 
 Here is the summary with links:
-  - [f2fs-dev,1/5] f2fs: introduce trace_f2fs_replace_atomic_write_block
-    https://git.kernel.org/jaegeuk/f2fs/c/2f3a9ae990a7
-  - [f2fs-dev,2/5] f2fs: clear atomic_write_task in f2fs_abort_atomic_write()
-    https://git.kernel.org/jaegeuk/f2fs/c/0e8d040bfa4c
-  - [f2fs-dev,3/5] f2fs: fix to abort atomic write only during do_exist()
-    (no matching commit)
-  - [f2fs-dev,4/5] f2fs: fix to avoid race condition of f2fs_abort_atomic_write()
-    https://git.kernel.org/jaegeuk/f2fs/c/f4c49874a80b
-  - [f2fs-dev,5/5] f2fs: fix to avoid race condition of atomic write
-    https://git.kernel.org/jaegeuk/f2fs/c/f571253668a9
+  - [f2fs-dev] f2fs: fix to do sanity check on extent cache correctly
+    https://git.kernel.org/jaegeuk/f2fs/c/14c42b75ee14
 
 You are awesome, thank you!
 -- 
