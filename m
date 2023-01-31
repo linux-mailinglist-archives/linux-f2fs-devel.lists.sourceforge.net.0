@@ -2,100 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4513D68316B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Jan 2023 16:25:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 707946835B6
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Jan 2023 19:54:08 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pMsVE-0001jl-NT;
-	Tue, 31 Jan 2023 15:24:55 +0000
+	id 1pMvlb-0003w4-WF;
+	Tue, 31 Jan 2023 18:54:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3uDLZYwkbAKcZfgRHSSLYHWWPK.NVVNSLbZLYJVUaLUa.JVT@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1pMsV8-0001jG-OJ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 31 Jan 2023 15:24:49 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <jaegeuk@kernel.org>) id 1pMvla-0003vi-PA
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 31 Jan 2023 18:54:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/GzT8Ca9/sD3nYDS8TtqObVTP1MErstxT4+p3mDIIRI=; b=SWnSfjG6cevmOq7Vy7FDB+MOVH
- RyDB2AwZXPF2Ll6IFQvCcQeL/KtEjaOoEJwTDibOSaBPsz9R3kV6knwEKepfbKpg7U6QTkBoZpoX3
- MriejvIr0BU1PvL0ANPRkdAIVL07rkVXSSJz7G+BQ8G0EBw6aOt6A3wx8xvqOGDZRhAg=;
+ bh=wjgrIs2DjNq+cmujDVCF9p4LIdxBtYRjIngkBGQDhAM=; b=XKV/wxqirsVJyl3Nkw+jUfz81P
+ vDFtkp0fvk2n7CAa9wbq7Qeu0L3WWmBms9uK9R+KWIN2SxoTHisd/5xQ0tlGi1KgO/277ELsFmgPp
+ YOShua65l8RMN66v9fJ3FIRLwLOVdHhTuGN5gNw0RsW1UDS+vHQuqbcbf0cOHIF00hhU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=/GzT8Ca9/sD3nYDS8TtqObVTP1MErstxT4+p3mDIIRI=; b=K
- tyVF/1w+95oJVGYi5V19pqD9/oMXnszKEsj/5HK6REQ3esVW8JxMkEYL7dq8y9h/SaRTLYF19MNKi
- V8SWiAN5dKVxhip5KjpOJh0HJg4ofbi3zuo2KwkjMmNh+brNYqdK8+h6/EWHmHcldtIUjo8OaxDgs
- gjuoZMbf0oHd9GaU=;
-Received: from mail-io1-f71.google.com ([209.85.166.71])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=wjgrIs2DjNq+cmujDVCF9p4LIdxBtYRjIngkBGQDhAM=; b=PF8/It72dE3StlBNf8wsaqzZNU
+ iievoTPjY5ZsFEJXKjmEgBYfj48CMhgjM0JjU2KP+OPZYiTZwvggMgJ9Bwz4RTo22MpNx3L9Vij2T
+ jUQH0VkNeDVCxEiP74bqUuFGLazf0LpPSN4IyuEOeo1cLS/1j/io66uHldcxK1Yd4Rxk=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pMsV3-00073Y-1b for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 31 Jan 2023 15:24:49 +0000
-Received: by mail-io1-f71.google.com with SMTP id
- r25-20020a6bd919000000b0071cfef31f97so3160187ioc.4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 31 Jan 2023 07:24:45 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=/GzT8Ca9/sD3nYDS8TtqObVTP1MErstxT4+p3mDIIRI=;
- b=gr0Luk1ElBKEE0Ptu43sL9ZffY20CBJX0YjPgYr3IdE9fqQfAJySsC53j1zsKrtgSR
- W08xEEGtGxbvdaf/eq6s8Yr5p5MqYfoocvtvlOOhfy4S/eNA3SN3ZwWE4XXFbvUPrXuv
- bBk/63cIfWP93jEFZbbq4FmeEbzg+EEyRgX3sDRReDfYDKBX+HiyP0AIDFzSMMzYlVFP
- DSRzhdYTDebUO+SnGlVvLzyhcURMWbMW6Q3VSY6aCzBY123cq3DmMsIn2rjIdNoE0NBp
- VJ5pOMw2c4SHofx8+eJtapWkSduD0z3i2BNVYP7tu8sAXuNRuQoLgl6SW5qhwV8ObnNt
- g5aA==
-X-Gm-Message-State: AFqh2kpXWuPZ6cBdBjMXE9O21lZF2Qn9NdqoDAUlMdeNNKr/TWAT+dTs
- sfqsyjDeDANQVQkmOlznlgIekI7C3Q45hKrwJkvCP5iHBRYF
-X-Google-Smtp-Source: AMrXdXtgzaWcC/0LwpfcOSRKR32P1nfEhyIyPUxLVUoJfjH8mh0nAv91cvviHAxXMsQqdXqNFH3GLIr7sT+YHyqx6cSi1Od7wX4U
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1pMvlY-000627-61 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 31 Jan 2023 18:54:01 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 46DA4B81E69;
+ Tue, 31 Jan 2023 18:53:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0819C433D2;
+ Tue, 31 Jan 2023 18:53:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1675191230;
+ bh=eCIb/J2UH5mMwlFcpyhn3g1R9B4aXfIAjIhAOpoUULc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=fO245kcBS+ICDYS5Lqld7ybNovw8GUnlrycA/YOl+y/YnWqQf951FNEbqfjhcV0sT
+ MQroEBXVtHtzcTC17ol4a/NMyxCXMLgJwcse64wKjIUog5HlY6xdCB2sRtUEfHpMyP
+ b9b2WeT6k3cUwulhrImtfG0LmBorDT+K8gESWL5BYKj1LMbApFcrZLaipQ6wPM/Ow9
+ 0dx2Y3KIowlAEiTa/l3JKbeBp5zvaEyvlb9SW7bofikls5/2vUiySrp7mehrh9oxzx
+ qI7e8iHaO6N6HWLhTrBeF8/Ukrn5qAbxwtc7HOTruGxweyP5ZUpI5JPvwFzj31JGIh
+ 5IKDDWYc6/MPQ==
+Date: Tue, 31 Jan 2023 10:53:48 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <Y9ljvM5aLxgpK3ZF@google.com>
+References: <20230120161656.70308-1-frank.li@vivo.com>
+ <20230120161656.70308-2-frank.li@vivo.com>
+ <855c7c54-57f6-dcf8-9218-0dba6e216fd4@kernel.org>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6638:3b06:b0:38a:adeb:d4d1 with SMTP id
- bb6-20020a0566383b0600b0038aadebd4d1mr8349878jab.81.1675178680186; Tue, 31
- Jan 2023 07:24:40 -0800 (PST)
-Date: Tue, 31 Jan 2023 07:24:40 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <0000000000002b009605f390ee61@google.com>
-From: syzbot <syzbot+a6054f41d1cf28996a7d@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+Content-Disposition: inline
+In-Reply-To: <855c7c54-57f6-dcf8-9218-0dba6e216fd4@kernel.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 7c46948a6e9c
- Merge tag 'fs.fuse.acl.v6.2-rc6' of git://git.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=13f04ecd480000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  On 01/31, Chao Yu wrote: > On 2023/1/21 0:16,
+ Yangtao Li wrote:
+ > > Convert to use iostat_lat_type as parameter instead of raw number. >
+ > BTW, move NUM_PREALLOC_IOSTAT_CTXS to the header file, and re [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.71 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.71 listed in wl.mailspike.net]
-X-Headers-End: 1pMsV3-00073Y-1b
-Subject: [f2fs-dev] [syzbot] [f2fs?] KASAN: use-after-free Write in
- __attach_extent_node
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pMvlY-000627-61
+Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs: use iostat_lat_type directly as
+ a parameter in the iostat_update_and_unbind_ctx()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,216 +106,210 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: kernel test robot <lkp@intel.com>, linux-f2fs-devel@lists.sourceforge.net,
+ Dan Carpenter <error27@gmail.com>, linux-kernel@vger.kernel.org,
+ Yangtao Li <frank.li@vivo.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+On 01/31, Chao Yu wrote:
+> On 2023/1/21 0:16, Yangtao Li wrote:
+> > Convert to use iostat_lat_type as parameter instead of raw number.
+> > BTW, move NUM_PREALLOC_IOSTAT_CTXS to the header file, and rename
+> > iotype to page_type to match the definition.
+> > 
+> > Reported-by: kernel test robot <lkp@intel.com>
+> > Reported-by: Dan Carpenter <error27@gmail.com>
+> > Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> > ---
+> > v3:
+> > -convert to f2fs_warn()
+> >   fs/f2fs/data.c   |  4 ++--
+> >   fs/f2fs/iostat.c | 39 ++++++++++++++++-----------------------
+> >   fs/f2fs/iostat.h | 19 ++++++++++---------
+> >   3 files changed, 28 insertions(+), 34 deletions(-)
+> > 
+> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > index 1645b8a1b904..710d4acde187 100644
+> > --- a/fs/f2fs/data.c
+> > +++ b/fs/f2fs/data.c
+> > @@ -292,7 +292,7 @@ static void f2fs_read_end_io(struct bio *bio)
+> >   	struct bio_post_read_ctx *ctx;
+> >   	bool intask = in_task();
+> > -	iostat_update_and_unbind_ctx(bio, 0);
+> > +	iostat_update_and_unbind_ctx(bio, READ_IO);
+> >   	ctx = bio->bi_private;
+> >   	if (time_to_inject(sbi, FAULT_READ_IO))
+> > @@ -330,7 +330,7 @@ static void f2fs_write_end_io(struct bio *bio)
+> >   	struct bio_vec *bvec;
+> >   	struct bvec_iter_all iter_all;
+> > -	iostat_update_and_unbind_ctx(bio, 1);
+> > +	iostat_update_and_unbind_ctx(bio, bio->bi_opf & REQ_SYNC ? WRITE_SYNC_IO : WRITE_ASYNC_IO);
+> >   	sbi = bio->bi_private;
+> >   	if (time_to_inject(sbi, FAULT_WRITE_IO))
+> > diff --git a/fs/f2fs/iostat.c b/fs/f2fs/iostat.c
+> > index 96637756eae8..c767a2e7d5a9 100644
+> > --- a/fs/f2fs/iostat.c
+> > +++ b/fs/f2fs/iostat.c
+> > @@ -14,7 +14,6 @@
+> >   #include "iostat.h"
+> >   #include <trace/events/f2fs.h>
+> > -#define NUM_PREALLOC_IOSTAT_CTXS	128
+> >   static struct kmem_cache *bio_iostat_ctx_cache;
+> >   static mempool_t *bio_iostat_ctx_pool;
+> > @@ -210,53 +209,47 @@ void f2fs_update_iostat(struct f2fs_sb_info *sbi, struct inode *inode,
+> >   }
+> >   static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
+> > -				int rw, bool is_sync)
+> > +				enum iostat_lat_type lat_type)
+> >   {
+> >   	unsigned long ts_diff;
+> > -	unsigned int iotype = iostat_ctx->type;
+> > +	unsigned int page_type = iostat_ctx->type;
+> >   	struct f2fs_sb_info *sbi = iostat_ctx->sbi;
+> >   	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
+> > -	int idx;
+> >   	unsigned long flags;
+> >   	if (!sbi->iostat_enable)
+> >   		return;
+> >   	ts_diff = jiffies - iostat_ctx->submit_ts;
+> > -	if (iotype == META_FLUSH) {
+> > -		iotype = META;
+> > -	} else if (iotype >= NR_PAGE_TYPE) {
+> > -		f2fs_warn(sbi, "%s: %d over NR_PAGE_TYPE", __func__, iotype);
+> > +	if (page_type == META_FLUSH) {
+> > +		page_type = META;
+> > +	} else if (page_type >= NR_PAGE_TYPE) {
+> > +		f2fs_warn(sbi, "%s: %d over NR_PAGE_TYPE", __func__, page_type);
+> >   		return;
+> >   	}
+> > -	if (rw == 0) {
+> > -		idx = READ_IO;
+> > -	} else {
+> > -		if (is_sync)
+> > -			idx = WRITE_SYNC_IO;
+> > -		else
+> > -			idx = WRITE_ASYNC_IO;
+> > +	if (lat_type >= MAX_IO_TYPE) {
+> > +		f2fs_warn(sbi, "%s: %d over MAX_IO_TYPE", __func__, lat_type);
+> > +		return;
+> >   	}
+> >   	spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
+> > -	io_lat->sum_lat[idx][iotype] += ts_diff;
+> > -	io_lat->bio_cnt[idx][iotype]++;
+> > -	if (ts_diff > io_lat->peak_lat[idx][iotype])
+> > -		io_lat->peak_lat[idx][iotype] = ts_diff;
+> > +	io_lat->sum_lat[lat_type][page_type] += ts_diff;
+> > +	io_lat->bio_cnt[lat_type][page_type]++;
+> > +	if (ts_diff > io_lat->peak_lat[lat_type][page_type])
+> > +		io_lat->peak_lat[lat_type][page_type] = ts_diff;
+> >   	spin_unlock_irqrestore(&sbi->iostat_lat_lock, flags);
+> >   }
+> > -void iostat_update_and_unbind_ctx(struct bio *bio, int rw)
+> > +void iostat_update_and_unbind_ctx(struct bio *bio, enum iostat_lat_type lat_type)
+> >   {
+> >   	struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
+> > -	bool is_sync = bio->bi_opf & REQ_SYNC;
+> > -	if (rw == 0)
+> > +	if (lat_type == READ_IO)
+> >   		bio->bi_private = iostat_ctx->post_read_ctx;
+> >   	else
+> >   		bio->bi_private = iostat_ctx->sbi;
+> > -	__update_iostat_latency(iostat_ctx, rw, is_sync);
+> > +	__update_iostat_latency(iostat_ctx, lat_type);
+> >   	mempool_free(iostat_ctx, bio_iostat_ctx_pool);
+> >   }
+> > diff --git a/fs/f2fs/iostat.h b/fs/f2fs/iostat.h
+> > index 2c048307b6e0..1f827a2fe6b2 100644
+> > --- a/fs/f2fs/iostat.h
+> > +++ b/fs/f2fs/iostat.h
+> > @@ -8,20 +8,21 @@
+> >   struct bio_post_read_ctx;
+> > +enum iostat_lat_type {
+> > +	READ_IO = 0,
+> > +	WRITE_SYNC_IO,
+> > +	WRITE_ASYNC_IO,
+> > +	MAX_IO_TYPE,
+> > +};
+> 
+> How about adjusting iostat_lat[{0,1,2}] to iostat_lat[{READ_IO,WRITE_SYNC_IO,WRITE_ASYNC_IO}]
+> in tracepoint function.
+> 
+> 	TP_fast_assign(
+> 		__entry->dev		= sbi->sb->s_dev;
+> 		__entry->d_rd_peak	= iostat_lat[0][DATA].peak_lat;
+> 		__entry->d_rd_avg	= iostat_lat[0][DATA].avg_lat;
+> 		__entry->d_rd_cnt	= iostat_lat[0][DATA].cnt;
+> 		__entry->n_rd_peak	= iostat_lat[0][NODE].peak_lat;
+> 		__entry->n_rd_avg	= iostat_lat[0][NODE].avg_lat;
+> 		__entry->n_rd_cnt	= iostat_lat[0][NODE].cnt;
+> 		__entry->m_rd_peak	= iostat_lat[0][META].peak_lat;
+> 		__entry->m_rd_avg	= iostat_lat[0][META].avg_lat;
+> 		__entry->m_rd_cnt	= iostat_lat[0][META].cnt;
+> 		__entry->d_wr_s_peak	= iostat_lat[1][DATA].peak_lat;
+> 		__entry->d_wr_s_avg	= iostat_lat[1][DATA].avg_lat;
+> 		__entry->d_wr_s_cnt	= iostat_lat[1][DATA].cnt;
+> 		__entry->n_wr_s_peak	= iostat_lat[1][NODE].peak_lat;
+> 		__entry->n_wr_s_avg	= iostat_lat[1][NODE].avg_lat;
+> 		__entry->n_wr_s_cnt	= iostat_lat[1][NODE].cnt;
+> 		__entry->m_wr_s_peak	= iostat_lat[1][META].peak_lat;
+> 		__entry->m_wr_s_avg	= iostat_lat[1][META].avg_lat;
+> 		__entry->m_wr_s_cnt	= iostat_lat[1][META].cnt;
+> 		__entry->d_wr_as_peak	= iostat_lat[2][DATA].peak_lat;
+> 		__entry->d_wr_as_avg	= iostat_lat[2][DATA].avg_lat;
+> 		__entry->d_wr_as_cnt	= iostat_lat[2][DATA].cnt;
+> 		__entry->n_wr_as_peak	= iostat_lat[2][NODE].peak_lat;
+> 		__entry->n_wr_as_avg	= iostat_lat[2][NODE].avg_lat;
+> 		__entry->n_wr_as_cnt	= iostat_lat[2][NODE].cnt;
+> 		__entry->m_wr_as_peak	= iostat_lat[2][META].peak_lat;
+> 		__entry->m_wr_as_avg	= iostat_lat[2][META].avg_lat;
+> 		__entry->m_wr_as_cnt	= iostat_lat[2][META].cnt;
+> 	),
 
-syzbot found the following issue on:
+Yangtao,
 
-HEAD commit:    7c46948a6e9c Merge tag 'fs.fuse.acl.v6.2-rc6' of git://git..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=13f04ecd480000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=c8d5c2ee6c2bd4b8
-dashboard link: https://syzkaller.appspot.com/bug?extid=a6054f41d1cf28996a7d
-compiler:       Debian clang version 13.0.1-6~deb11u1, GNU ld (GNU Binutils for Debian) 2.35.2
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=15d846f5480000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=177f1649480000
+Could you please send another patch to address the Choa's suggestion?
 
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/cc51645b6401/disk-7c46948a.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/be036b5604a3/vmlinux-7c46948a.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/274f5abf2c8f/bzImage-7c46948a.xz
-mounted in repro: https://storage.googleapis.com/syzbot-assets/f8e3282fa048/mount_0.gz
+Thanks,
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+a6054f41d1cf28996a7d@syzkaller.appspotmail.com
-
-==================================================================
-BUG: KASAN: use-after-free in rb_link_node include/linux/rbtree.h:65 [inline]
-BUG: KASAN: use-after-free in __attach_extent_node+0x23d/0x480 fs/f2fs/extent_cache.c:372
-Write of size 8 at addr ffff8880714514e8 by task syz-executor122/5273
-
-CPU: 1 PID: 5273 Comm: syz-executor122 Not tainted 6.2.0-rc5-syzkaller-00047-g7c46948a6e9c #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/12/2023
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:88 [inline]
- dump_stack_lvl+0x1b1/0x290 lib/dump_stack.c:106
- print_address_description+0x74/0x340 mm/kasan/report.c:306
- print_report+0x107/0x1f0 mm/kasan/report.c:417
- kasan_report+0xcd/0x100 mm/kasan/report.c:517
- rb_link_node include/linux/rbtree.h:65 [inline]
- __attach_extent_node+0x23d/0x480 fs/f2fs/extent_cache.c:372
- __insert_extent_tree+0x25b/0x580 fs/f2fs/extent_cache.c:655
- __update_extent_tree_range+0x15cf/0x1e00 fs/f2fs/extent_cache.c:795
- __update_extent_cache fs/f2fs/extent_cache.c:962 [inline]
- f2fs_update_read_extent_cache+0x410/0x580 fs/f2fs/extent_cache.c:1052
- f2fs_outplace_write_data+0x1e2/0x380 fs/f2fs/segment.c:3453
- f2fs_do_write_data_page+0x122d/0x2570 fs/f2fs/data.c:2745
- f2fs_write_single_data_page+0x1162/0x1c90 fs/f2fs/data.c:2863
- f2fs_write_cache_pages+0xf6e/0x2330 fs/f2fs/data.c:3115
- __f2fs_write_data_pages fs/f2fs/data.c:3265 [inline]
- f2fs_write_data_pages+0x7d2/0xc30 fs/f2fs/data.c:3292
- do_writepages+0x3c3/0x680 mm/page-writeback.c:2581
- filemap_fdatawrite_wbc+0x11e/0x170 mm/filemap.c:388
- __filemap_fdatawrite_range mm/filemap.c:421 [inline]
- file_write_and_wait_range+0x219/0x320 mm/filemap.c:777
- f2fs_do_sync_file+0x611/0x19f0 fs/f2fs/file.c:275
- generic_write_sync include/linux/fs.h:2885 [inline]
- f2fs_file_write_iter+0x659/0x2400 fs/f2fs/file.c:4721
- call_write_iter include/linux/fs.h:2189 [inline]
- new_sync_write fs/read_write.c:491 [inline]
- vfs_write+0x7dc/0xc50 fs/read_write.c:584
- ksys_write+0x177/0x2a0 fs/read_write.c:637
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x3d/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7fbe7cc4e4a9
-Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 d1 18 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007fbe7cbf12f8 EFLAGS: 00000246 ORIG_RAX: 0000000000000001
-RAX: ffffffffffffffda RBX: 00007fbe7ccd1780 RCX: 00007fbe7cc4e4a9
-RDX: 00000000000ffe00 RSI: 0000000020004200 RDI: 0000000000000004
-RBP: 00007fbe7cc9daec R08: 0000000000000000 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000246 R12: 6974797a616c6f6e
-R13: 00007fbe7cc9d8e8 R14: 0030656c69662f2e R15: 00007fbe7ccd1788
- </TASK>
-
-Allocated by task 5273:
- kasan_save_stack mm/kasan/common.c:45 [inline]
- kasan_set_track+0x3d/0x60 mm/kasan/common.c:52
- __kasan_slab_alloc+0x65/0x70 mm/kasan/common.c:325
- kasan_slab_alloc include/linux/kasan.h:201 [inline]
- slab_post_alloc_hook mm/slab.h:761 [inline]
- slab_alloc_node mm/slub.c:3452 [inline]
- slab_alloc mm/slub.c:3460 [inline]
- __kmem_cache_alloc_lru mm/slub.c:3467 [inline]
- kmem_cache_alloc+0x1b3/0x350 mm/slub.c:3476
- f2fs_kmem_cache_alloc_nofail fs/f2fs/f2fs.h:2796 [inline]
- f2fs_kmem_cache_alloc fs/f2fs/f2fs.h:2806 [inline]
- __grab_extent_tree+0x19b/0x420 fs/f2fs/extent_cache.c:423
- f2fs_init_extent_tree+0x20c/0x450 fs/f2fs/extent_cache.c:533
- f2fs_new_inode+0xd89/0x1060 fs/f2fs/namei.c:312
- __f2fs_tmpfile+0xa5/0x380 fs/f2fs/namei.c:852
- f2fs_ioc_start_atomic_write+0x3ec/0x970 fs/f2fs/file.c:2098
- __f2fs_ioctl+0x137d/0xb540
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:870 [inline]
- __se_sys_ioctl+0xfb/0x170 fs/ioctl.c:856
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x3d/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
-Freed by task 5278:
- kasan_save_stack mm/kasan/common.c:45 [inline]
- kasan_set_track+0x3d/0x60 mm/kasan/common.c:52
- kasan_save_free_info+0x27/0x40 mm/kasan/generic.c:518
- ____kasan_slab_free+0xd6/0x120 mm/kasan/common.c:236
- kasan_slab_free include/linux/kasan.h:177 [inline]
- slab_free_hook mm/slub.c:1781 [inline]
- slab_free_freelist_hook+0x12e/0x1a0 mm/slub.c:1807
- slab_free mm/slub.c:3787 [inline]
- kmem_cache_free+0x94/0x1d0 mm/slub.c:3809
- __destroy_extent_tree+0x6fa/0x880 fs/f2fs/extent_cache.c:1193
- f2fs_destroy_extent_tree+0x13/0x20 fs/f2fs/extent_cache.c:1204
- f2fs_evict_inode+0x324/0x1310 fs/f2fs/inode.c:789
- evict+0x2a4/0x620 fs/inode.c:664
- f2fs_abort_atomic_write+0xc7/0x410 fs/f2fs/segment.c:196
- f2fs_ioc_abort_atomic_write fs/f2fs/file.c:2182 [inline]
- __f2fs_ioctl+0x3294/0xb540 fs/f2fs/file.c:4156
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:870 [inline]
- __se_sys_ioctl+0xfb/0x170 fs/ioctl.c:856
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x3d/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
-The buggy address belongs to the object at ffff8880714514e0
- which belongs to the cache f2fs_extent_tree of size 144
-The buggy address is located 8 bytes inside of
- 144-byte region [ffff8880714514e0, ffff888071451570)
-
-The buggy address belongs to the physical page:
-page:ffffea0001c51440 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x71451
-flags: 0xfff00000000200(slab|node=0|zone=1|lastcpupid=0x7ff)
-raw: 00fff00000000200 ffff88814662c8c0 dead000000000122 0000000000000000
-raw: 0000000000000000 0000000080130013 00000001ffffffff 0000000000000000
-page dumped because: kasan: bad access detected
-page_owner tracks the page as allocated
-page last allocated via order 0, migratetype Reclaimable, gfp_mask 0x112c50(GFP_NOFS|__GFP_NOWARN|__GFP_NORETRY|__GFP_HARDWALL|__GFP_RECLAIMABLE), pid 5255, tgid 5254 (syz-executor122), ts 207313154622, free_ts 199367221676
- prep_new_page mm/page_alloc.c:2531 [inline]
- get_page_from_freelist+0x742/0x7c0 mm/page_alloc.c:4283
- __alloc_pages+0x259/0x560 mm/page_alloc.c:5549
- alloc_slab_page+0xbd/0x190 mm/slub.c:1851
- allocate_slab+0x5e/0x3c0 mm/slub.c:1998
- new_slab mm/slub.c:2051 [inline]
- ___slab_alloc+0x782/0xe20 mm/slub.c:3193
- __slab_alloc mm/slub.c:3292 [inline]
- __slab_alloc_node mm/slub.c:3345 [inline]
- slab_alloc_node mm/slub.c:3442 [inline]
- slab_alloc mm/slub.c:3460 [inline]
- __kmem_cache_alloc_lru mm/slub.c:3467 [inline]
- kmem_cache_alloc+0x268/0x350 mm/slub.c:3476
- f2fs_kmem_cache_alloc_nofail fs/f2fs/f2fs.h:2796 [inline]
- f2fs_kmem_cache_alloc fs/f2fs/f2fs.h:2806 [inline]
- __grab_extent_tree+0x19b/0x420 fs/f2fs/extent_cache.c:423
- f2fs_init_extent_tree+0x20c/0x450 fs/f2fs/extent_cache.c:533
- f2fs_new_inode+0xd89/0x1060 fs/f2fs/namei.c:312
- __f2fs_tmpfile+0xa5/0x380 fs/f2fs/namei.c:852
- f2fs_ioc_start_atomic_write+0x3ec/0x970 fs/f2fs/file.c:2098
- __f2fs_ioctl+0x137d/0xb540
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:870 [inline]
- __se_sys_ioctl+0xfb/0x170 fs/ioctl.c:856
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x3d/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-page last free stack trace:
- reset_page_owner include/linux/page_owner.h:24 [inline]
- free_pages_prepare mm/page_alloc.c:1446 [inline]
- free_pcp_prepare+0x751/0x780 mm/page_alloc.c:1496
- free_unref_page_prepare mm/page_alloc.c:3369 [inline]
- free_unref_page_list+0xb2/0x830 mm/page_alloc.c:3510
- release_pages+0x233e/0x25e0 mm/swap.c:1076
- __pagevec_release+0x7d/0xf0 mm/swap.c:1096
- pagevec_release include/linux/pagevec.h:71 [inline]
- folio_batch_release include/linux/pagevec.h:135 [inline]
- shmem_undo_range+0x6d0/0x1fe0 mm/shmem.c:947
- shmem_truncate_range mm/shmem.c:1042 [inline]
- shmem_evict_inode+0x276/0xa10 mm/shmem.c:1151
- evict+0x2a4/0x620 fs/inode.c:664
- __dentry_kill+0x3b1/0x5b0 fs/dcache.c:607
- dentry_kill+0xbb/0x290
- dput+0x1f3/0x410 fs/dcache.c:913
- __fput+0x5e4/0x880 fs/file_table.c:328
- task_work_run+0x243/0x300 kernel/task_work.c:179
- resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
- exit_to_user_mode_loop+0x124/0x150 kernel/entry/common.c:171
- exit_to_user_mode_prepare+0xb2/0x140 kernel/entry/common.c:203
- __syscall_exit_to_user_mode_work kernel/entry/common.c:285 [inline]
- syscall_exit_to_user_mode+0x26/0x60 kernel/entry/common.c:296
- do_syscall_64+0x49/0xb0 arch/x86/entry/common.c:86
-
-Memory state around the buggy address:
- ffff888071451380: fb fb fb fb fb fb fb fb fb fb fc fc fc fc fc fc
- ffff888071451400: fc fc 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->ffff888071451480: 00 00 00 00 fc fc fc fc fc fc fc fc fa fb fb fb
-                                                          ^
- ffff888071451500: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fc fc
- ffff888071451580: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
-==================================================================
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-syzbot can test patches for this issue, for details see:
-https://goo.gl/tpsmEJ#testing-patches
+> 
+> Thanks,
+> 
+> > +
+> >   #ifdef CONFIG_F2FS_IOSTAT
+> > +#define NUM_PREALLOC_IOSTAT_CTXS	128
+> >   #define DEFAULT_IOSTAT_PERIOD_MS	3000
+> >   #define MIN_IOSTAT_PERIOD_MS		100
+> >   /* maximum period of iostat tracing is 1 day */
+> >   #define MAX_IOSTAT_PERIOD_MS		8640000
+> > -enum {
+> > -	READ_IO,
+> > -	WRITE_SYNC_IO,
+> > -	WRITE_ASYNC_IO,
+> > -	MAX_IO_TYPE,
+> > -};
+> > -
+> >   struct iostat_lat_info {
+> >   	unsigned long sum_lat[MAX_IO_TYPE][NR_PAGE_TYPE];	/* sum of io latencies */
+> >   	unsigned long peak_lat[MAX_IO_TYPE][NR_PAGE_TYPE];	/* peak io latency */
+> > @@ -57,7 +58,7 @@ static inline struct bio_post_read_ctx *get_post_read_ctx(struct bio *bio)
+> >   	return iostat_ctx->post_read_ctx;
+> >   }
+> > -extern void iostat_update_and_unbind_ctx(struct bio *bio, int rw);
+> > +extern void iostat_update_and_unbind_ctx(struct bio *bio, enum iostat_lat_type type);
+> >   extern void iostat_alloc_and_bind_ctx(struct f2fs_sb_info *sbi,
+> >   		struct bio *bio, struct bio_post_read_ctx *ctx);
+> >   extern int f2fs_init_iostat_processing(void);
+> > @@ -67,7 +68,7 @@ extern void f2fs_destroy_iostat(struct f2fs_sb_info *sbi);
+> >   #else
+> >   static inline void f2fs_update_iostat(struct f2fs_sb_info *sbi, struct inode *inode,
+> >   		enum iostat_type type, unsigned long long io_bytes) {}
+> > -static inline void iostat_update_and_unbind_ctx(struct bio *bio, int rw) {}
+> > +static inline void iostat_update_and_unbind_ctx(struct bio *bio, enum iostat_lat_type type) {}
+> >   static inline void iostat_alloc_and_bind_ctx(struct f2fs_sb_info *sbi,
+> >   		struct bio *bio, struct bio_post_read_ctx *ctx) {}
+> >   static inline void iostat_update_submit_ctx(struct bio *bio,
 
 
 _______________________________________________
