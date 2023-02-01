@@ -2,113 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10ADB6865DA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Feb 2023 13:23:28 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E193268664E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Feb 2023 13:57:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pNC90-0006bM-UG;
-	Wed, 01 Feb 2023 12:23:18 +0000
+	id 1pNCgQ-0007jx-7N;
+	Wed, 01 Feb 2023 12:57:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <qxy65535@gmail.com>) id 1pNC8z-0006b5-8T
+ (envelope-from <chao@kernel.org>) id 1pNCgN-0007jZ-V4
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Feb 2023 12:23:16 +0000
+ Wed, 01 Feb 2023 12:57:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3TmW+83D4k+IrbCdYMzXDO8Tj9MpJav0XaxfanWpefQ=; b=dQTUXYowHbOU1atUblsS54yI/E
- zAM9WkkKbzY4TDCS1KkE26hG9Ac4YWqffPRPiCM2ar5dTVPIfikL3GjIp/N60el2fLz1XXBpYsZuc
- 9IToz71sVHtgvVO9YQ00PeqjOTqAvG0zeNc8zWTAYWdayPi962dJQQt5kgnXrOsvIui4=;
+ bh=3f0SPeR3KETZKx1Bpw9bXWQvTOKNstlbK4/yavmjmqo=; b=HnaTUVQYp4xJeoQzAkrpwg7CI8
+ yk43Rzufoh+oMP8XfwRSltNO6K8jNeAnWXWXKfDnviAd56Ie2fAETf7z2+2c29yNvb9NfjWe9FNyg
+ RjI0wdgRk6Km3O01S7GpAwQ/0ENGr10mS6hWf8i17NGmiezI2PwA+0HB5MaLaXzurd8Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
+ References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3TmW+83D4k+IrbCdYMzXDO8Tj9MpJav0XaxfanWpefQ=; b=KWHhweRfutpUDPe87olzpjVmCw
- 9zECsSP7w1dTvIlD4bWweCkZZhqsmqZhZvoSREsYbeKBFUwuBSTE7qrIAgO44tsml8yphm2BSwxrG
- LsK/pI1Sugw0q2FlXV75XcIL++Dt7AOqRn6ldycL1eY2KoSJIJ/eO4iozqq0z26MLowY=;
-Received: from mail-pl1-f175.google.com ([209.85.214.175])
+ bh=3f0SPeR3KETZKx1Bpw9bXWQvTOKNstlbK4/yavmjmqo=; b=epQBB9GGQ7N7K9/nXzFTB5tLvW
+ d65/zYrKo3ejXQszCRm5cCXso7vKbfVcL/zT9DMyZeuStobFViqhZ6041bLbrrmKLAAwjZhj0bOZt
+ WF6cdKW8pe0TTePz28oLSxEWUzgMc8xxSho4MyxePPsP8hxd1KBtdPsjmeymr00UhKvU=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pNC8x-007GRo-Tg for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Feb 2023 12:23:16 +0000
-Received: by mail-pl1-f175.google.com with SMTP id b5so11014494plz.5
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 01 Feb 2023 04:23:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3TmW+83D4k+IrbCdYMzXDO8Tj9MpJav0XaxfanWpefQ=;
- b=I5U/ro+QsRr0QjuYf4lEaPFcjn4T3ultNGoWwNM7VxnllmLJJM43O/A4EdK78c+gYN
- LD/yvPN0BMxT3Oct4S9gm14T9/ahFXkBF3DHOsuE+R+5dn8oIt/L2GVdV+Opeu2UQUmI
- XSmYtsktQ9oDE/OvCXFlb5YPxFqMkbbEz/0joqxrGGrZ1UnbStCp3qNFcFuRGs8TiFxn
- UQU3ml3wD8Y5U+Jln9RnOKi9prgJbiyt11WYS5L/ucSRfn05PaCobkFwfVwxARpNC1Pu
- 4BdqDWyvdbhktsDDxA7XthNi8u2A4KOD2vj+aWfujnMB0tR0Gp75JTZ6P7a9Xsz/ryzW
- QVXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3TmW+83D4k+IrbCdYMzXDO8Tj9MpJav0XaxfanWpefQ=;
- b=fDucM/375VmtlgFK6vcLuiSAT2wfMvznh2OTkyWtzXhjgqWYlKAQEVD3ZUung5OEdf
- v1tWBljKfrAmjhgTDRfEx04HnmmI5JBIQqoCeXBqaJkxwoJCK1NC4DIO2kMNNXBcDcWM
- 4EU1Dnjt8K4yFj9DFyXFuOEE/PdNzA4Fk98cC4ILDMblYRYEjc0nQ9AytxTpxpxjI/7X
- XWszbMxZ7L10BOp98QKZFhQ1E9Pswp+ePswIEyOcQk8Hw2yKfKMT5IJL6K/Net0/7CdF
- iuECLzTTp44/aJtNtnJt1CI3hpbyUMRUCvFHBkEN5+re5KEoptzQnCp5pdYn6/uMeEBu
- NXig==
-X-Gm-Message-State: AO0yUKWdy+roxpAHTY+NWBD1eVBsYye8gKw5491AFQ1V1JLnqH3so9aT
- i/qbDaidRm+q+OkMEGawDVE=
-X-Google-Smtp-Source: AK7set9lOEgQz/SUAUmSfBUuhQJpbhyySXachWSl8MnURgyFYlXm/kqYjHVG4Os61imcmeur3J0G0w==
-X-Received: by 2002:a17:902:ea12:b0:196:6297:bbc2 with SMTP id
- s18-20020a170902ea1200b001966297bbc2mr2907338plg.58.1675254190327; 
- Wed, 01 Feb 2023 04:23:10 -0800 (PST)
-Received: from mi-HP-ProDesk-680-G4-MT ([43.224.245.237])
- by smtp.gmail.com with ESMTPSA id
- q5-20020a170902c74500b00195f0fb0c18sm11745867plq.31.2023.02.01.04.23.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Feb 2023 04:23:09 -0800 (PST)
-Date: Wed, 1 Feb 2023 20:23:04 +0800
-From: qixiaoyu <qxy65535@gmail.com>
-To: Chao Yu <chao@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <Y9pZqOMBipT2NZk0@mi-HP-ProDesk-680-G4-MT>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1pNCgM-007I5J-K6 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 01 Feb 2023 12:57:47 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 0FAD1B8201D;
+ Wed,  1 Feb 2023 12:57:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA15CC433EF;
+ Wed,  1 Feb 2023 12:57:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1675256257;
+ bh=8dtRUXoHN3LUlKfLhDcM61zlUbHfbbjOfI95C6JYLAQ=;
+ h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
+ b=ClPgW21A6heaqpnKL9sHaOtJyXrz4nRxyJGWAswMJH4Pkh0PHJR9aHJ1Wfpu+HfVi
+ YX5GsyUMi07pvqxP4D6tidoBz01e4C5d1eb0DD0Wm5sJkqjabGEc1gnpERxIWpbHFc
+ czGQH8MIjGF/xwIS8G/I9VcLGAkpjHUlzm4dwjXDRVzU0NFMQYskxw2GQwrkhNx7RJ
+ 3conp0KsLw0K1SDcEoc97wukWESVfsXDvrav2JH9XiDFAvuT6lxOA9i9ozv5zj9sPJ
+ 7aBWmyrtXQuHmrTi+1Ir8z7uWeuGJZENfpqVDCvw1jxLiVypVVp+meyClsa9rjsLX9
+ TbKOmuyVK5xYQ==
+Message-ID: <938a8e61-4e47-1acc-938c-c90d213d2c86@kernel.org>
+Date: Wed, 1 Feb 2023 20:57:33 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.1
+Content-Language: en-US
+To: qixiaoyu <qxy65535@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20230113125859.15651-1-qixiaoyu1@xiaomi.com>
  <20230116030850.20260-1-qixiaoyu1@xiaomi.com>
  <7c12ebaa-4d3d-e475-dfb2-7b459cd26e64@kernel.org>
  <Y9ZWDVV3HJ431Fis@mi-HP-ProDesk-680-G4-MT>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Y9ZWDVV3HJ431Fis@mi-HP-ProDesk-680-G4-MT>
-X-Spam-Score: 0.1 (/)
+ <Y9pZqOMBipT2NZk0@mi-HP-ProDesk-680-G4-MT>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <Y9pZqOMBipT2NZk0@mi-HP-ProDesk-680-G4-MT>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: > > > > How about updating as below to avoid lossing accuracy
- if new is less than 100? > > > > return div_u64(new * (100 - LAST_AGE_WEIGHT), 
- 100) + > > div_u64(old * LAST_AGE_WEIGHT, 100); > > > > Tha [...] 
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview:  On 2023/2/1 20:23, qixiaoyu wrote: >>> >>> How about updating
+ as below to avoid lossing accuracy if new is less than 100? >>> >>> return
+ div_u64(new * (100 - LAST_AGE_WEIGHT), 100) + >>> div_u64(old * [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.175 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [qxy65535[at]gmail.com]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [qxy65535[at]gmail.com]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.214.175 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -116,7 +92,11 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1pNC8x-007GRo-Tg
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.1 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pNCgM-007I5J-K6
 Subject: Re: [f2fs-dev] [PATCH 1/2 v2] f2fs: fix wrong calculation of block
  age
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -132,34 +112,48 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: xiongping1@xiaomi.com, qixiaoyu1@xiaomi.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-> > 
-> > How about updating as below to avoid lossing accuracy if new is less than 100?
-> > 
-> > return div_u64(new * (100 - LAST_AGE_WEIGHT), 100) +
-> > 		div_u64(old * LAST_AGE_WEIGHT, 100);
-> > 
-> > Thanks,
-> > 
-> 
-> We want to avoid overflow by doing the division first. To keep the accuracy, how
-> about updating as below:
-> 
-> 	res = div_u64_rem(new, 100, &rem_new) * (100 - LAST_AGE_WEIGHT)
-> 		+ div_u64_rem(old, 100, &rem_old) * LAST_AGE_WEIGHT;
-> 	res += rem_new * (100 - LAST_AGE_WEIGHT) / 100 + rem_old * LAST_AGE_WEIGHT / 100;
-> 	return res;
-> 
-> Thanks,
-> 
+On 2023/2/1 20:23, qixiaoyu wrote:
+>>>
+>>> How about updating as below to avoid lossing accuracy if new is less than 100?
+>>>
+>>> return div_u64(new * (100 - LAST_AGE_WEIGHT), 100) +
+>>> 		div_u64(old * LAST_AGE_WEIGHT, 100);
+>>>
+>>> Thanks,
+>>>
+>>
+>> We want to avoid overflow by doing the division first. To keep the accuracy, how
 
-Friendly ping
+Alright,
 
-> > >   }
-> > >   /* This returns a new age and allocated blocks in ei */
+>> about updating as below:
+>>
+>> 	res = div_u64_rem(new, 100, &rem_new) * (100 - LAST_AGE_WEIGHT)
+>> 		+ div_u64_rem(old, 100, &rem_old) * LAST_AGE_WEIGHT;
+>> 	res += rem_new * (100 - LAST_AGE_WEIGHT) / 100 + rem_old * LAST_AGE_WEIGHT / 100;
+>> 	return res;
+
+if (rem_new)
+	res += rem_new * (100 - LAST_AGE_WEIGHT) / 100;
+if (rem_old)
+	res += rem_old * LAST_AGE_WEIGHT / 100;
+
+Otherwise, it looks fine to me. :)
+
+Thanks,
+
+>>
+>> Thanks,
+>>
+> 
+> Friendly ping
+> 
+>>>>    }
+>>>>    /* This returns a new age and allocated blocks in ei */
 
 
 _______________________________________________
