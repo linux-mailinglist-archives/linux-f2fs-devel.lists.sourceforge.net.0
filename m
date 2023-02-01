@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D24B6866EB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Feb 2023 14:30:41 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DED5686748
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  1 Feb 2023 14:43:19 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pNDC8-000326-R3;
-	Wed, 01 Feb 2023 13:30:36 +0000
+	id 1pNDOP-0007Vl-8l;
+	Wed, 01 Feb 2023 13:43:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1pNDC7-000320-8M
+ (envelope-from <brauner@kernel.org>) id 1pNDOO-0007Ve-35
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Feb 2023 13:30:34 +0000
+ Wed, 01 Feb 2023 13:43:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OVU9+n3wSvSuANAsouaV/u270liNHHgsPlHI9v82c/A=; b=K49Wkxh2FIxBqrE4JfJPT67KHH
- tbUCAKR5tvpE1nWBG77JlNuFBEz0bP4lC/S0EWtPM1SAQC2hf4YXzNVxAROpHi7S59UFPdGajlHbi
- Agd7IgsRV84twsfK39xTuh/r4oqyBLwGDnltvpw7lQODnJqMh1KmeOFIZ4DuTExTtMBo=;
+ bh=236qP/C90Z1wdMee922mWauOTL0WF+oXGDgnJ96vQFg=; b=PR2eJTuiH2dnVE0F3bPwbOHess
+ mm57ommBdh6OdVGGfXq1RVds07HBSsTT1C7TFk/TX4eUHHiN0CFf7unqQeGD0RZvnAbSdNTBUfuLM
+ 5jvZ154V3QcXmd1uhp/FvBkW9xIYYW7IGmSfMt840s5MIFiaBw+yxjCwa46K4fIDpIgE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,40 +31,68 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OVU9+n3wSvSuANAsouaV/u270liNHHgsPlHI9v82c/A=; b=hmfGacWmnDDR8POkn+J2CRdAG7
- gSRYB2jJhbh1wtpZPiul3P1gob9gjU8/gcxISp+lq2af4iPMor2JQM7xqlz0L+GvfMxDMnIooB8JM
- 9luahvX/t2MgOkXpEf5Q6jYTL6W7kaOzOHS2RHA8uMyNXqSo9Qj7E2oQto/jkPTd0mXo=;
-Received: from verein.lst.de ([213.95.11.211])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=236qP/C90Z1wdMee922mWauOTL0WF+oXGDgnJ96vQFg=; b=m+wenAD5faOQfz9cGWNKo0WbJl
+ 3PuTMJ5OHLSvG8NrEasAH+Pxa/dLrP3L1FokTzzFci6hd2JgnwOfR0xRLc1gFgQ48GXUNn8ohMu7v
+ ISjnyvEom6JdATKG8R8Q66d+DGJaSuV8RodxW6OauT01EJvAh5mAZbwE28DyIGvOO8ow=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pNDC5-007Jpc-Ds for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Feb 2023 13:30:34 +0000
-Received: by verein.lst.de (Postfix, from userid 2407)
- id A80D468AA6; Wed,  1 Feb 2023 14:30:20 +0100 (CET)
-Date: Wed, 1 Feb 2023 14:30:20 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: Christian Brauner <brauner@kernel.org>
-Message-ID: <20230201133020.GA31902@lst.de>
+ id 1pNDOI-0005x8-Hc for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 01 Feb 2023 13:43:14 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 09227B82168;
+ Wed,  1 Feb 2023 13:43:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5161DC433EF;
+ Wed,  1 Feb 2023 13:42:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1675258979;
+ bh=236qP/C90Z1wdMee922mWauOTL0WF+oXGDgnJ96vQFg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=lMMF4aTsthtPu0qSDZz5BvWT3Pmxnz+NILt33rgl1+vXpJfzqEv41DYzKsqYGtoGo
+ RfbSM457WNfz2Hj+9ntpXQApKcCjAJVksXRu34iUU27WSsyzFHxu28zKksBwqEgFjq
+ bEmZWftDL1skahY8fxJIf/X2bYWhUr5/ruKGAoT6wF16to0EWnPfOxShNm4aNuTyFH
+ TllIEyGeIvTdR60qHVy/Feh2ApS62j8QtGi5QRujJzXjmj7KFrOB8C3HaUwsJdZUwf
+ P83wP7ZfiBKmcU8JDkWwvICV8r+9vwyn/20bGSvqbW6MrkafLuuV0989PpLRqSWgss
+ U+lNph1qFbXHw==
+Date: Wed, 1 Feb 2023 14:42:54 +0100
+From: Christian Brauner <brauner@kernel.org>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20230201134254.fai2vc7gtzj6iikx@wittgenstein>
 References: <20230125-fs-acl-remove-generic-xattr-handlers-v3-0-f760cc58967d@kernel.org>
+ <20230201133020.GA31902@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230125-fs-acl-remove-generic-xattr-handlers-v3-0-f760cc58967d@kernel.org>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20230201133020.GA31902@lst.de>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This version looks good to me, but I'd really prefer if a
- reiserfs insider could look over the reiserfs patches. 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  On Wed, Feb 01, 2023 at 02:30:20PM +0100, Christoph Hellwig
+ wrote: > This version looks good to me, but I'd really prefer if a reiserfs
+ > insider could look over the reiserfs patches. I consider this material
+ for v6.4 even with an -rc8 for v6.3. So there's time but we shouldn't block
+ it on reiserfs. Especially, since it's marked deprecated. 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
-X-Headers-End: 1pNDC5-007Jpc-Ds
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pNDOI-0005x8-Hc
 Subject: Re: [f2fs-dev] [PATCH v3 00/10] acl: drop posix acl handlers from
  xattr handlers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -80,15 +108,24 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-unionfs@vger.kernel.org, reiserfs-devel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org,
- Seth Forshee <sforshee@kernel.org>, linux-fsdevel@vger.kernel.org,
+ Al Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
  linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- Christoph Hellwig <hch@lst.de>, Al Viro <viro@zeniv.linux.org.uk>
+ Seth Forshee <sforshee@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This version looks good to me, but I'd really prefer if a reiserfs
-insider could look over the reiserfs patches.
+On Wed, Feb 01, 2023 at 02:30:20PM +0100, Christoph Hellwig wrote:
+> This version looks good to me, but I'd really prefer if a reiserfs
+> insider could look over the reiserfs patches.
+
+I consider this material for v6.4 even with an -rc8 for v6.3. So there's
+time but we shouldn't block it on reiserfs. Especially, since it's
+marked deprecated.
+
+Fwiw, I've tested reiserfs with xfstests on a kernel with and without
+this series applied and there's no regressions. But it's overall pretty
+buggy at least according to xfstests. Which is expected, I guess.
 
 
 _______________________________________________
