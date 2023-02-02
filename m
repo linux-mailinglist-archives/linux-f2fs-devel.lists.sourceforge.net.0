@@ -2,99 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A97E36875AC
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Feb 2023 07:13:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B29556875AE
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Feb 2023 07:15:43 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pNSqv-0001bM-F9;
-	Thu, 02 Feb 2023 06:13:44 +0000
+	id 1pNSsl-0001eO-TN;
+	Thu, 02 Feb 2023 06:15:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pNSqu-0001bG-DL
+ (envelope-from <nathan@kernel.org>) id 1pNSsk-0001eI-GE
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 02 Feb 2023 06:13:42 +0000
+ Thu, 02 Feb 2023 06:15:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VMOTpIqv7Q3URx4lSVADbdSmKHmtlaHZ/Tr/nSCctyY=; b=kl6I1jMomwso1UPNTWk7QhME/V
- yC9d+vjilNmpEj2MdjCDKTf/5xni87VDtBZfZtwPbwWmhIw33KG5L780/ypde6HbWBQgtToFUAv/7
- bNq6nuUu6SliBKlNX+KRuUEGczf4V5OKnjbRX9z4Vn9oGnYCXpQO5muLTviO2zt0IUlk=;
+ bh=hDNgg6m2xkES0BL9aO63SNY0dbitzKPAa/b1BtCrrr4=; b=Fe4LYG/NwCSSs68p8oSWdo3Vrr
+ 8K7v+WWw7i9SWA2HfLQr1Fkjx3m5wqhFIzGYC69C72aRCCHiTR83mSbB23zqhRAf6aXFGIIOTuzBS
+ yujy54MjIV1anW1vr94fOmz+VqvKZXMATVNkoexHIChVwWNTjNb5eauHaC7iBNqSouPI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=VMOTpIqv7Q3URx4lSVADbdSmKHmtlaHZ/Tr/nSCctyY=; b=XYWYbyJCGRaaUJBvm/ZiaoHrk+
- UCYdHRm82D9nazpumiqIZT7EHM3DAUlxpP2wfhPZum4FIFOQlf7aYWyf2sZmlnXmoCavimJD96U0q
- /6McI7oQAjzTdflZoib7HIbdIcowapUxmvADUo4qwEmR9vGrEbzBc+HIizV5MTInjSQ8=;
-Received: from [145.40.73.55] (helo=sin.source.kernel.org)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=hDNgg6m2xkES0BL9aO63SNY0dbitzKPAa/b1BtCrrr4=; b=GuhNodD8Nmeh23t25cWQwWz49E
+ R40IkP6DjeCKUfTsL5cCCIYUlOu0bf7rJ3PAd0IoOBAEDf7mJvkjATqANMVL8pNI91KnhFWY88SYk
+ dd6ltDs83FgL71r+ZuNi+8n3XfbaBhFcRKcNml7JhMhcLPTABUvKjx/EGz9DajGCKUtg=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pNSqq-0007ly-4Z for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 02 Feb 2023 06:13:42 +0000
+ id 1pNSsi-008AVi-CJ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 02 Feb 2023 06:15:36 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 17D20CE283B;
- Thu,  2 Feb 2023 06:13:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61EFEC433EF;
- Thu,  2 Feb 2023 06:13:20 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id D2B97B824DA;
+ Thu,  2 Feb 2023 06:15:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F054AC433EF;
+ Thu,  2 Feb 2023 06:15:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1675318402;
- bh=Ky/1ghQ0FqtHg3xtb96YzswiIfdF+Rqi4ezcKZbriac=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=oq+IOUsNJsb8KLDC9noPayjVCf2oBUFxMuMDB1bNOoRSDuWLWRHJ3eWvHqXfARpVT
- QBxInPNh415ggQ8QKILcvq7V/ZcAzU3+gThlkmEJeANvWHTJIGDGTWEX5vlN5Gxem3
- Izw2eeLw1PxNKeysXvULTeOFPGUhi1IhSVZ4nJ8fMVj2oTPXhpmd2wbM9418Gzyy3n
- ouKTIP8XDudyWgLTk+aGySOtxVRhLzQM34Xr7UEBFfgQc2/qXLrf/Mhuv9wAomcsBp
- SNSgBCUiGTVU+2AbqmOqZAhCJBpEzPYBYRrGoH9GUz/Tv4NfEwUqHZ/tC6EOHhNHno
- D0ssbfmqouC0Q==
-Message-ID: <64d1f9d3-12d8-cc7a-501e-5c0286b0cfa1@kernel.org>
-Date: Thu, 2 Feb 2023 14:13:18 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Content-Language: en-US
-To: Nathan Chancellor <nathan@kernel.org>, jaegeuk@kernel.org
+ s=k20201202; t=1675318525;
+ bh=ezi/tsRwvbIGmfLvyvnkgMf52A4ZxQwliiJ7g6rQbHI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=d2kFqZXqLdNq3C9BL4FdBB4OSoW+nGNQjlVY/Awdx2cs3s2n+856r+ioKjht5q/oQ
+ E3TKCm2qiJreclhOcBosZMv1BVKV+aK7h0xh6JBm7CO5/if7tX6QVzFDlZGpFZAEe6
+ YWF/Xp/hGv36xvwv4aKpaEZOD0U4j6vkBfwz4azT50KSQTJoetesDYSQR5E8yPW9f7
+ 8oG+3/jUur6+Yf1nCQI6Ht9yxvML7qh8UDV/EXF0j4U79GetPPbsZ7i+9SRD8N4wzG
+ S7+UPY6Vt/shIuExluBGeIpm+l9q/+3yJIX/rSsNWJSPyiIbFFmnDoTgv48qmY44dD
+ 9QakSYXdyLsEw==
+Date: Wed, 1 Feb 2023 23:15:23 -0700
+From: Nathan Chancellor <nathan@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <Y9tU+woHY23zHpmv@dev-arch.thelio-3990X>
 References: <20230201-f2fs-fix-single-length-bitfields-v1-1-e386f7916b94@kernel.org>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230201-f2fs-fix-single-length-bitfields-v1-1-e386f7916b94@kernel.org>
-X-Spam-Score: -6.6 (------)
+ <64d1f9d3-12d8-cc7a-501e-5c0286b0cfa1@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <64d1f9d3-12d8-cc7a-501e-5c0286b0cfa1@kernel.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/2/2 0:40, Nathan Chancellor wrote: > Clang warns:
- > > ../fs/f2fs/data.c:995:17: error: implicit truncation from 'int' to a
- one-bit
- wide bit-field changes value from 1 to -1 [-Werror,-Wsingle-b [...] 
- Content analysis details:   (-6.6 points, 6.0 required)
+ Content preview:  On Thu, Feb 02, 2023 at 02:13:18PM +0800, Chao Yu wrote: >
+ On 2023/2/2 0:40,
+ Nathan Chancellor wrote: > > Clang warns: > > > > ../fs/f2fs/data.c:995:17:
+ error: implicit truncation from 'int' to a one- [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.73.55 listed in list.dnswl.org]
- 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pNSqq-0007ly-4Z
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pNSsi-008AVi-CJ
 Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix type of single bit bitfield in
  f2fs_io_info
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -109,35 +106,41 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: kernel test robot <lkp@intel.com>, trix@redhat.com, llvm@lists.linux.dev,
- ndesaulniers@google.com, patches@lists.linux.dev, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+ ndesaulniers@google.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, patches@lists.linux.dev,
+ jaegeuk@kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/2/2 0:40, Nathan Chancellor wrote:
-> Clang warns:
+On Thu, Feb 02, 2023 at 02:13:18PM +0800, Chao Yu wrote:
+> On 2023/2/2 0:40, Nathan Chancellor wrote:
+> > Clang warns:
+> > 
+> >    ../fs/f2fs/data.c:995:17: error: implicit truncation from 'int' to a one-bit wide bit-field changes value from 1 to -1 [-Werror,-Wsingle-bit-bitfield-constant-conversion]
+> >            fio->submitted = 1;
+> >                           ^ ~
+> >    ../fs/f2fs/data.c:1011:15: error: implicit truncation from 'int' to a one-bit wide bit-field changes value from 1 to -1 [-Werror,-Wsingle-bit-bitfield-constant-conversion]
+> >                            fio->retry = 1;
+> >                                       ^ ~
+> > 
+> >    ../fs/f2fs/segment.c:3320:16: error: implicit truncation from 'int' to a one-bit wide bit-field changes value from 1 to -1 [-Werror,-Wsingle-bit-bitfield-constant-conversion]
+> >                    fio->in_list = 1;
+> >                                 ^ ~
+> > 
+> > There is not a bug here because the value of these fields is never
+> > explicitly compared against (just whether it is zero or non-zero) but
+> > it is easy to silence the warning by using an unsigned type to allow
+> > an assignment of 0 or 1 without implicit conversion.
 > 
->    ../fs/f2fs/data.c:995:17: error: implicit truncation from 'int' to a one-bit wide bit-field changes value from 1 to -1 [-Werror,-Wsingle-bit-bitfield-constant-conversion]
->            fio->submitted = 1;
->                           ^ ~
->    ../fs/f2fs/data.c:1011:15: error: implicit truncation from 'int' to a one-bit wide bit-field changes value from 1 to -1 [-Werror,-Wsingle-bit-bitfield-constant-conversion]
->                            fio->retry = 1;
->                                       ^ ~
-> 
->    ../fs/f2fs/segment.c:3320:16: error: implicit truncation from 'int' to a one-bit wide bit-field changes value from 1 to -1 [-Werror,-Wsingle-bit-bitfield-constant-conversion]
->                    fio->in_list = 1;
->                                 ^ ~
-> 
-> There is not a bug here because the value of these fields is never
-> explicitly compared against (just whether it is zero or non-zero) but
-> it is easy to silence the warning by using an unsigned type to allow
-> an assignment of 0 or 1 without implicit conversion.
+> Nathan, thanks a lot for catching this, do you mind letting I merge this fix
+> into original patch? as the original patch has not been upstreamed yet.
 
-Nathan, thanks a lot for catching this, do you mind letting I merge this fix
-into original patch? as the original patch has not been upstreamed yet.
+No worries, do whatever you need to! I just care that the problem gets
+resolved one way or another :)
 
-Thanks,
+Cheers,
+Nathan
 
 
 _______________________________________________
