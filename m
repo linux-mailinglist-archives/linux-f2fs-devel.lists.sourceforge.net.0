@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 580496877CE
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Feb 2023 09:48:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A28C6877D0
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  2 Feb 2023 09:48:58 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pNVH0-0004qW-CO;
-	Thu, 02 Feb 2023 08:48:49 +0000
+	id 1pNVH7-0006Rw-Iy;
+	Thu, 02 Feb 2023 08:48:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1pNVGw-0004pJ-Bk
+ (envelope-from <frank.li@vivo.com>) id 1pNVGy-0006RF-DP
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 02 Feb 2023 08:48:45 +0000
+ Thu, 02 Feb 2023 08:48:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
  :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5LC7c2CJAzq6tVlXVGuvpQutyrfREL0OZTedO1ndBto=; b=DiM6pJWBCCFhxuOqwTF4yIKkxG
- Lnl46dUB0xu6B6xGYnvzk1Cv0n6iMNOL5PJV8rZiFaVc81ShmhJ2l/stchFpdHjI/ihhGEaPMYIit
- v0CrTt+/cMlRadfeOV+IVoNcZHxaIbFgT578ZpeC/ECYLoDk/FJnm52t/vOk+rZmb10A=;
+ bh=abLHHZnqlBGrE6ZQZAOui0eS8X7sxC4va+1/7fk9Eug=; b=OX8sel5fZ0nFzViewR0BFT+esT
+ y16/QOVZlpGKGBYGmpiSdYh5+qx41LZ4vAUrQw01iVRbzYbZdDPZSZ+VndNMk/W+sENmlxZqXoouK
+ PGzVYdnIAM+QUi7q+ohmZZlI0Iax/6KXjEe/6DH2nZ0LFTsqOUL4faj+WweB3XTNZoYI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
@@ -31,44 +31,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5LC7c2CJAzq6tVlXVGuvpQutyrfREL0OZTedO1ndBto=; b=kqEoOmAEMcSrOr2dtkZT1ZKOi6
- WfSrYGLv1GBB6fy9CStMOTD4TmIn9JGel93NX5AAwi01NTU8JfiiJNMUyIXRufziTjK4bH1sFxY13
- AMBkD4KmAjxe9Y/T3rOiddVl6nnCIPGBO+ArCLhlvKJQBRtNSlVuM2qk3rFbaDSJ6bVU=;
+ bh=abLHHZnqlBGrE6ZQZAOui0eS8X7sxC4va+1/7fk9Eug=; b=BICFo47sfhVj1OAPsnNeRnwSnU
+ LQdba0L4yM3dF5hd4GkKaIZuMecDj67r8UAYpN3jz75X/5x7YjrIaYPvd3a971LJ/X9pwPLS8TAyV
+ lLnH9e6Tuum8GwnLVmL9nYu6KDdsZxi3Dtab6cnE4YU2QVYq70ZOUaCpdfmVusllySGw=;
 Received: from mail-psaapc01on2104.outbound.protection.outlook.com
  ([40.107.255.104] helo=APC01-PSA-obe.outbound.protection.outlook.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pNVGq-008Iir-HR for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 02 Feb 2023 08:48:45 +0000
+ id 1pNVGx-008Iir-03 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 02 Feb 2023 08:48:47 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TADMVfXAJ8I870nxZtu2+X3RGR5IvoAO/MCjlUOcHxm/6YffgckqU5zS7uAIo68odT/3a/hJVSJeYyXP8376EDzgOTKz485zOauqrrjWCzXdKwvFCmEGR0Zldiyb/OR5j/WzOaBbEpWiPkrtVBWq7Hsx98N2RWG1Yyvp+i0N7SBqjJ+ghAzlh/YM3fEDm8MDmfkT5IB1nG+zaaBwk5T6YnwPLCPBLrVlbUepPqqajEC+79/HgpElEgJauFAbqpW9RJFG/7ISV+UlODyKB0skIy/shE22Bz9RlSmG1KTXJhS4JUPMdFuUuO+vuo+uiKF6oOoQ8sHxBYOfTW6D5kkMiA==
+ b=OroH9k1OT77WW6Zumz1GMKapm2IE+YaNHvWVHTQBhpLgTLrvQdP/fgDIk0UqFDSBzW3xQis8WPHOJwEHFaZfTgM/W0YLvyZhWSzq5oFvca4BUDgzy2s4kGdMG7I0GkKHovnXJQ9NbCOsOHtmQo0KxCKdkAgjtakIubIWsV95/dg62bG30vpMJVrrsIp4IQuSfC1SRKT1ZEfKpYrwuUun3dgyYsTrJd/rqCt26zSM60+FQNHBwMicHthXMjgJT/Kdf2QmN0tHmJXES0rkUFgdU5mIPTB/rEmebp0u9AnU6oTNCxB91qoAfCouJC6zbB5mpP1BxPy4naEmERXPdw7JrQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5LC7c2CJAzq6tVlXVGuvpQutyrfREL0OZTedO1ndBto=;
- b=ZmF0xrbOgPKNUZ08GcVFtX6cFBYpk5gUGn6SSKEjNWFK3yOGeEuYnyYVRt4abvLStuEZEACLqPIKf4dmYzx5Me1KW8ZuVX2s9dNlBjhmil+PcGBz4YqjYgY9nhABekphLvDnj7sqtDVNU+k8ROB+2SotYFPiAzTTyGt5ZpVeCj5JBFvskXp1IkPxI2p9wGjC4AHh0wU830YIt59hdNDnM+Pkchkhkib5GRfPjH+Z/jqK5LaGqiP17gtE71D3oqsVAJPBhnxgLQY8RlUy1qazRKK//1SgRr58A/eORXHUWXC/mpilpzJ5doZtRZH/Y47R2hlDPSzhU48oXz0L3DaCzA==
+ bh=abLHHZnqlBGrE6ZQZAOui0eS8X7sxC4va+1/7fk9Eug=;
+ b=VORg3+fl/u12xBsc10pzRfe/zB6uTeGs8jvD5UBb9roRzvzirLH8YQJxgmg0xusu4pFFdB9Zh4gZ6gjemOSqe7oy/2s5+iSj4ufkWDlnclwnK8CCT/NqHVx8ddwA9o1Z/78UjeViP9urEU9ddQ1huQ9x0JeqLZ0+3+n+xA8PKn3Je982bTn79KXkWHgbvQdjAac40o7qnbJgoC6GAAOPGTy5TnzklYTOurKjZYdT+OCZDp6ljkqOy6D7nz+srinCw3VbVhtGCcyjn8NLZAEHLtXl5bzvcHKfGF5iTkAdqXYagtIZ6WNLmu9Isywn973+nvgQdVN0euKHFY0S8OcXHQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5LC7c2CJAzq6tVlXVGuvpQutyrfREL0OZTedO1ndBto=;
- b=BEIkwtKPi2alK2jUsoBACU2uoODscHYD9JaR3ZFqTLm2LHMFCD+9YZbZJ25dbbTAVVseTOcJeo9stXDU4+32PE0H8ClYAHwWmu2ylS6IAt34CfOJl5erOIpv+zCrEFN3MREwFvnN26gZNeXu1siUFYMULdqyvbh7dOWUZuhpCV8Cm58/EXcsx+CZIW2XCmw6tL+w6lB/o+yE4MacOrcVrAiGHl+WNb3skSpdPIt4VNzGU0am5mtoCkhaOp2LYXb28ag6dMy5zNPj+c9vd6MCMOgnQxrIDZ9mF0Crq5X6/A4o2VdhPg/ofuBqnFelwoYojvTY3Q19Nt/BnEYKdiE4uA==
+ bh=abLHHZnqlBGrE6ZQZAOui0eS8X7sxC4va+1/7fk9Eug=;
+ b=J+97mL1ePNQ5f9XieEmlD+xuJqBgTgaQDulGE04DvLTuR2jJXw1UveBV3l8R9EfsUpJp1nJkgjWo237moiDdgba5xpjUJpqVWS7EgLk985bLPR6w7Lk5ujaZyO+ixbRqaeAEYTN52fQsTKdt2YdYftsCfFCzu29Tn7vM9euPoM5S2FHVbB3Zq+dkaRJoqk5hpi0oeRHU2VywPQ6m0gFQWlpG9zK55tjUHI1yTwT/5zXRdivfE6cBZA+ti/UyuJJvXk43FhxJSysyfa7/rjAksOk9AfqHFnXxg5Xf+DD5zYnsFFnadvemd1lf4dCSNIE+xrNpNvLL0L1ZCJW8ME59Zg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
  by KL1PR0601MB4514.apcprd06.prod.outlook.com (2603:1096:820:72::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.22; Thu, 2 Feb
- 2023 08:48:31 +0000
+ 2023 08:48:32 +0000
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::3e52:d08c:ecf4:d572]) by SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::3e52:d08c:ecf4:d572%5]) with mapi id 15.20.6064.022; Thu, 2 Feb 2023
- 08:48:31 +0000
+ 08:48:32 +0000
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Thu,  2 Feb 2023 16:48:14 +0800
-Message-Id: <20230202084815.70791-2-frank.li@vivo.com>
+Date: Thu,  2 Feb 2023 16:48:15 +0800
+Message-Id: <20230202084815.70791-3-frank.li@vivo.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20230202084815.70791-1-frank.li@vivo.com>
 References: <20230202084815.70791-1-frank.li@vivo.com>
@@ -78,65 +78,65 @@ X-ClientProxiedBy: SG2PR04CA0184.apcprd04.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|KL1PR0601MB4514:EE_
-X-MS-Office365-Filtering-Correlation-Id: a2bc3ae4-314a-4eed-630c-08db04fa42b2
+X-MS-Office365-Filtering-Correlation-Id: ea3e8357-23d9-4e21-a0b5-08db04fa43b6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: iMtuVnziWyaLDZXm+nGI0C8Z/cm2GW2PKCx+kYGSJxYuvTg7mrZePDli925seF9zg8Wue/0BBIUCPPcSs3cLICllL1pAn3M1qtgpmFyOZwpXjt7Z7jW4CPeXcpa/SjgctRs9TkzXc+KqFPcwHOvdL/fKTODX3LYErTXQ4QAtCGtYkHzhmYvlrX82bn8Ryqth3aXhv7+RCpIQAm9cYuQkv39fyrueRSDJij0RNHWZ3gtsBrTrjiR9rGJ8RtpwO8xAExg6fWQ73rNAZSW2TV8sn/9xrMmR63TGtMdc2ORr4YuCn8OkSEeAFT1qxj0tXHPcNFEnd/fhogC9IeSFEu1i9km73iEBoy9307LcYvKLQk0tlt78DzSiCjoKVYDUIgfoCiznCGPAY6NbYdb6a1kM9DS/n0QkRofAREPbrKP/uP6tOYam39Y3vAB6Fyyw7UY22WOcIMVgvupjPP8QoJdtpUK/cRsTHeg9P6xhvJpPbRTZNWZtZ39VsfyZPyK9RtLYJSQFpZczju4+iPXLq7ADVnqzzsEzAadhEA1jent8SScAimgu//CSRIkLhW4aWB9ktGJeiM4QN/gNqIQZ/c2qKB8wud+cpjNJCgmeRAnjvX/5emdNxxD25erGa8lVuBxypC7Xq/K+/RzExXpA9At6pFbrqqUm0lAcs/QOv0wV/30xWCdhPmDaGxABCQ32Hkvg3IYqnjS8IBSJQGnEDT2L4g==
+X-Microsoft-Antispam-Message-Info: KPwc9QVnCJgOmmyXW0gLMvoZOLCuQDSxdKzufQ5p1SI5myRQlM2uy9NZ9BOkpfXbbQK48J9iME67jxgn81GXD/Fmy3WiZ5LsQo9tcHUfsWUV+F9yUna/uJlEQB0R3WyCGGX+VhKxlhtjwMFwgAEv0WemvcC802OPmjAySQq6po65Veox4FFMqrq7AqjWXLVHOOgKw3Gj8DpkTugvpiRY/GffhCOh3U+Q0JupzehJiueirIiktfSuwNCAfwuD80J4tYB0AU64eEKiOrDIiEvrth0+PILv/7j+s3I7RNZUM3DHIn88sYDAUYZfG689DjuKK3PEXmfwPls6n9tQXTOqf9OJS5JUZCt6WFW9zYqpSbBj238cLGWqi7TK9dSEyU8dcU5wDGZGePowSvNED9YcVVvOE2Il0v8DKSKqVUcEfWKlvfpyp0uo+DjH5E9RDH9CpDi6MkVEEhQDzi/B1nB/UFJdSoQyVwjkWvrwBpbQfG82sInBtRei5WE0vKbNNy6og2kQDS12XxhMEFDu5CgLI3UIK/iE8XHQgXl8mDN6pKmjKq0MUKJIXykQFJ8pgKIwMisWb2P0aPN+Qjj/IGW5jb5tlyBKeGp+4lyppH22tIw86OiMrgTWKT+SiDbea9McqM67fGGd5D0Llpu3JKmJqR8ufLhIb4gggoGzOmzg0RELBdaazXrq6X0+gEFr1+liKDAEMxjGNUL6IVqPiOy+5Q==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230025)(4636009)(376002)(396003)(346002)(39860400002)(136003)(366004)(451199018)(6512007)(1076003)(478600001)(8936002)(186003)(2906002)(107886003)(26005)(6666004)(52116002)(6506007)(2616005)(6486002)(86362001)(8676002)(5660300002)(83380400001)(4326008)(41300700001)(38350700002)(38100700002)(316002)(19627235002)(66556008)(66946007)(66476007)(36756003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?jDqImtme//JzpkhgPKLEaxrOK6cpKtaWJAWpn4oPiO0zjrhYSRh7ejly7789?=
- =?us-ascii?Q?3NGEgOo+rEcwXPoPqfNjoB5+FpvAVyWSRkJlRxCJJLmqi9mAfTv6/6pXtgp/?=
- =?us-ascii?Q?QnfGe7gg+DX8IPb65B426ilPYsyNu/hDOy52Jd2WpxGc4kFosKaSulyJxais?=
- =?us-ascii?Q?8u8LihOfYNKDA7Bosm6fH7QYDxzrh+qPA63EpBq7Dyjhe+1wKXT8iQ15G4QZ?=
- =?us-ascii?Q?YxaGMiNsoizu4fqAyuvqbWSRGJnXEGp/nLq8yntXnplfGWg9X6cYdEJav7gk?=
- =?us-ascii?Q?7cu0acd3ZbGo7wsv/wBWUSuVyMRMB2TkYPlozPpjVAfu7q7y7Cu7l10D9qgJ?=
- =?us-ascii?Q?tpHvqlLfyVm7Z+RTwvaaZfhvRtA3MCQteVo1Om9A1Rpx0nCv0nPLhXUocBhA?=
- =?us-ascii?Q?btr+lWw4oRxwgVdis37lQhTfmKcTM/Hs4+c5PyoBNpvhFbZEhQllJIwVRgb0?=
- =?us-ascii?Q?YFLkcHEA7f8cMLGQvTtPHvivYRrf5Rh8Z5fvn3aNPaXGP0KXtmtrkUrjAtKA?=
- =?us-ascii?Q?hw4NAwz+5tArrOnyFkdzXjAY//n0uUKWQOYaPJOsUA8KWyABjZxJvy+Yz/TL?=
- =?us-ascii?Q?uBCVfPy/VdRDEgkt2haBGqXouKcE6SDtJmtVI5uUUkh9bhX9umxpgJaBbQtE?=
- =?us-ascii?Q?VfzULqgVrZ9YJEYQb3bMkjdelH/epe5rITF9FYlylgdUVd0kNpckAIvs4C2h?=
- =?us-ascii?Q?F5mckw1CAjKXFNEvEoW6EBc+Rp2Y91BMPXdcpa/JsWDk6/7cSXHleEitX3BB?=
- =?us-ascii?Q?D0MfPQqxhH8wXq5LFDaBOnxxaTEJQrLnXTIT3TphccabMj+y0nAcPNL4WaGF?=
- =?us-ascii?Q?T3GsGga9ztgt5h+SukaQDK2YbVdOcfQgzFUrz9YO/LNPlEzYjtoyBXuZ4CtS?=
- =?us-ascii?Q?H3QG/5pvKTth+d54v7WdgalMKClGpSveEqAe7u5iVVLE/VNxICeZangEy8tF?=
- =?us-ascii?Q?5ITEA54m6r9Bkupeb5JLhHIfqSGL+D8pimxXzN04lajRLErzoW420XUWeYPl?=
- =?us-ascii?Q?v0hJ/X+RhqUHqBwgVjluqgZjHZAK5g9tZ9NVfbSf08qiiR6dQ7AHr6BhnJDJ?=
- =?us-ascii?Q?FLg8dfCt4WtcF6TGioF1RgDdYJjy+lQoA17qXKbGugEQM8LwS0lGEFGLmIMT?=
- =?us-ascii?Q?lL45mM8y/+WJOotYwqtZCfWQSrdvSruLTLTsVOhzva0aYd4K5PANY0UxWzOB?=
- =?us-ascii?Q?JKDJPKXVtGyB001SdbsSFhaWVNqgTnsVUECw+SALlakdS/Dur6X4VZE34njf?=
- =?us-ascii?Q?bi8bWnwwXvWRjOVyOeewf7z9L+lnH0iSh5ZRrCZdW4qaeBejjrSPMWD4Qngx?=
- =?us-ascii?Q?G5aBkuhRh4SbR34P8whUySBdxGsvQHFYQKNUbH09mvhNPSShXQIStKB6zsir?=
- =?us-ascii?Q?jRDNtT6sahJXh3yKLPw+IzFDoQG8m4onGaOLwMV+XFGbNR80VSCIqLKTRLVK?=
- =?us-ascii?Q?m7S/69YNal3Tm8hgqY2BfV0Kfc/tsL7eGKUyEpNlchcV9R7qKDGtdiu1RKhK?=
- =?us-ascii?Q?33rcaTNiaT6+G7/6zxSPm56qpQXzsdTFR3001yfrn5gEZErGtB5ze0dG0/4M?=
- =?us-ascii?Q?eew8uvPAyVGehxlee3YtNfvd1X1Pu7Kk1wej3H0R?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0ZW58v8Bx1DpDrPS8UlzVzgCk6m0VQ1imj8pYVSJkz+9E2OVWQTi2Y8SR0Di?=
+ =?us-ascii?Q?SCHIROo9DI/xDe+NRZrI9O7sSdYNE1ysGnlmrRjrqwvSkvCX0HVfFkFKdvXI?=
+ =?us-ascii?Q?cJnz0ly7DqUBed85n5m8aynW10m7MpIPJjjrTTM4zshFYfKI0vrVlH5paFkR?=
+ =?us-ascii?Q?j0L5mnythz6gKzhwbLq3ScVlTjOdqILqG6pUTc6Krv5IPUQdECzVeQsk1EUo?=
+ =?us-ascii?Q?yys+oAFdIYWBvQ5oU48W17FBB7GL+QFbTTludEiAAC47WJbX4aGC9lbuZMRn?=
+ =?us-ascii?Q?iarkiLY4Kzfd5iyI01fp7sXw12jqOhJS7mUvrmg3Sn1YNmU4Rmb+vx3TUprJ?=
+ =?us-ascii?Q?8DAEpLbvDn9WtZmvLPB40aTrpjgHSLV9sWkqTEz5Mby4Gxe8cQC/txBTZ3U2?=
+ =?us-ascii?Q?cj75ez0g2O/5tobbVpd9zY4HDM/XqlJwE/DqT7fOekXCPK4tftB7vmVSQvtG?=
+ =?us-ascii?Q?V9ogVt1yIT0/efwOgaGm8v1pveSBwOr9/QAVePdNSSoqAWD1uvChPm/XbymG?=
+ =?us-ascii?Q?5FDGaNL75lLsTdv5Jkt3jkKrjn8m/9dEcKKrjEGlYjNYmtZd98aCA0CII3qa?=
+ =?us-ascii?Q?CV1yTJuizhJOOz0bPOKUNSmOzSQuuACQh8Oj0CafOrTgC/dQoS1PDa2RScnI?=
+ =?us-ascii?Q?096jcmxIYvYMjOEvs7XosLhB9+3hYS5/V8BTtnr6XEDJGVAr1jT+eRjYi/u2?=
+ =?us-ascii?Q?LIioOGzV84tpFVGY4lsC0j99MXuOUU8lrAG14a9P0L5it094RPu4ZrVoAtu8?=
+ =?us-ascii?Q?56AqrqbeUY+l1oSiRiDzQptTTokLHx0mQFjnQKROMewotaGj9uwdSARBT0ln?=
+ =?us-ascii?Q?xE2DfLmJTosmqb3CimJkaD20oqHZ+XGFEjAo81LHwXrf5kEhQWX2ityVrbBI?=
+ =?us-ascii?Q?CXr4C3BWdmbyUNC5GG1pYGXmHBDv/dYYjHlmVAwgiytylPZnw5l8VdgfRhtr?=
+ =?us-ascii?Q?en81iHDaeOm1cxzEBQgRBMPr1Aq9WaOcTFyGBrWKpxSZuiHYA6ACfZSj3wWe?=
+ =?us-ascii?Q?CA3h/fmyQkdawB+6iYtVqkFdaDhT6uW7EFO6Z5Q0Rn/iZ5/v2fqxh6LosGQZ?=
+ =?us-ascii?Q?5NaM7VoAL/d74QYctgJjf0hD7ttcoCiEif2I0OSnhU0PCVEIwrfacrJAjvDd?=
+ =?us-ascii?Q?vj6+B1iBUfGWcm6lMkdfF/mKu0n9GYPeMTCEztCChhn3Y4TXIdGiaiFeO7oJ?=
+ =?us-ascii?Q?xytmzCI9WBZb9mpyh2chn8OiYhWpPonLgx8neYLKsGcksdobCBJyAcJg11en?=
+ =?us-ascii?Q?ChORFzVhfXGpSrJ10BMYaFATT5R9IVCwDpNpZi/L1oQenHhgY0ynS/Z4h6LY?=
+ =?us-ascii?Q?a8lXfzXexBStbR7jCTBpRmXfJWLKv4cVIFyM6jn0QWNxAMuCYQ1TTB+IDcvC?=
+ =?us-ascii?Q?KltCdElr6brSGQBY8YDr5xrVsN6019W09k5btLZcyQQgsEhve4xJMmn8if7M?=
+ =?us-ascii?Q?uGFpraRVd+UIuF2PdZBML4vaKMSfWSjyHz2uf+xDp85pAcM3QairwUAwJ2uZ?=
+ =?us-ascii?Q?7C6Oqy/AFku8b84veJZoKdjeqvwSSjcLqgqhBbpjyBEAfvg/aDWrzNzoecia?=
+ =?us-ascii?Q?yyfVXB6aaMZS8j8R9KWkTssua5FfLwfMngBNUgbt?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2bc3ae4-314a-4eed-630c-08db04fa42b2
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea3e8357-23d9-4e21-a0b5-08db04fa43b6
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2023 08:48:31.1785 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2023 08:48:32.8840 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PcJNfPctUHhfyQnPLovz0Q2ip47wl+RHNwZ70NmXEOKs4aIeBbu7Ys+XFeT3l8q6PY6moygtb4z9hqzjyf5HjA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: WfwH8791XEUTaq+Zp4VShho2qHc9G0MnOX+cjzIaT/1NurgVfptLHiQABU83253fTFDAkWb8osEtr5dyyRpNAg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR0601MB4514
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  IPU policy can be disabled, let's add description for it and
- other policy. Signed-off-by: Yangtao Li <frank.li@vivo.com> ---
- Documentation/ABI/testing/sysfs-fs-f2fs
- | 27 ++++++++++++++++--------- 1 file changed, 17 insertions(+),
- 10 deletions(-)
+ Content preview: Add a ipu_mode sysfs node to show the current ipu policy as
+ a string for readability, like we do in commit a3951cd199a5 ("f2fs: introduce
+ gc_mode sysfs node"). Since we use ipu_policy as a bitmap, and the bitmap
+ API parameter is unsigned long type data, let's change ipu_policy to unsigned
+ long type. 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -144,18 +144,17 @@ X-Spam-Report: Spam detection software,
  [40.107.255.104 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
  no trust [40.107.255.104 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
-X-Headers-End: 1pNVGq-008Iir-HR
-Subject: [f2fs-dev] [PATCH v3 2/3] f2fs: add missing description for
- ipu_policy node
+X-Headers-End: 1pNVGx-008Iir-03
+Subject: [f2fs-dev] [PATCH v3 3/3] f2fs: introduce ipu_mode sysfs node
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -175,51 +174,138 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-IPU policy can be disabled, let's add description for it and other policy.
+Add a ipu_mode sysfs node to show the current ipu policy as a string
+for readability, like we do in commit a3951cd199a5 ("f2fs: introduce
+gc_mode sysfs node").
+
+Since we use ipu_policy as a bitmap, and the bitmap API parameter is
+unsigned long type data, let's change ipu_policy to unsigned long type.
 
 Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 27 ++++++++++++++++---------
- 1 file changed, 17 insertions(+), 10 deletions(-)
+v3:
+-drop old_ipu_policy type conversion
+ Documentation/ABI/testing/sysfs-fs-f2fs |  6 ++++++
+ fs/f2fs/f2fs.h                          |  4 ++--
+ fs/f2fs/segment.h                       |  1 +
+ fs/f2fs/sysfs.c                         | 28 ++++++++++++++++++++++++-
+ 4 files changed, 36 insertions(+), 3 deletions(-)
 
 diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 75420c242cc4..8a71397fa060 100644
+index 8a71397fa060..10e34753d246 100644
 --- a/Documentation/ABI/testing/sysfs-fs-f2fs
 +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -49,16 +49,23 @@ Contact:	"Jaegeuk Kim" <jaegeuk.kim@samsung.com>
- Description:	Controls the in-place-update policy.
- 		updates in f2fs. User can set:
+@@ -724,3 +724,9 @@ Description:	Controls background discard granularity of inner discard thread
+ 		is smaller than granularity. The unit size is one block(4KB), now only
+ 		support configuring in range of [0, 512].
+ 		Default: 512
++
++What:		/sys/fs/f2fs/<disk>/ipu_mode
++Date:		February 2023
++Contact:	"Yangtao Li" <frank.li@vivo.com>
++Description:	Show the current ipu policy as a string.
++		This is a read-only entry.
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 08dc64c5050e..066cd497be09 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1070,7 +1070,7 @@ struct f2fs_sm_info {
  
--		====  =================
--		0x01  F2FS_IPU_FORCE
--		0x02  F2FS_IPU_SSR
--		0x04  F2FS_IPU_UTIL
--		0x08  F2FS_IPU_SSR_UTIL
--		0x10  F2FS_IPU_FSYNC
--		0x20  F2FS_IPU_ASYNC
--		0x40  F2FS_IPU_NOCACHE
--		0x80  F2FS_IPU_HONOR_OPU_WRITE
--		====  =================
-+		===== =============== ===================================================
-+		value policy          description
-+		0x00  DISABLE         disable IPU(=default option in LFS mode)
-+		0x01  FORCE           all the time
-+		0x02  SSR             if SSR mode is activated
-+		0x04  UTIL            if FS utilization is over threashold
-+		0x08  SSR_UTIL        if SSR mode is activated and FS utilization is over
-+		                      threashold
-+		0x10  FSYNC           activated in fsync path only for high performance
-+		                      flash storages. IPU will be triggered only if the
-+		                      # of dirty pages over min_fsync_blocks.
-+		                      (=default option)
-+		0x20  ASYNC           do IPU given by asynchronous write requests
-+		0x40  NOCACHE         disable IPU bio cache
-+		0x80  HONOR_OPU_WRITE use OPU write prior to IPU write if inode has
-+		                      FI_OPU_WRITE flag
-+		===== =============== ===================================================
+ 	struct list_head sit_entry_set;	/* sit entry set list */
  
- 		Refer segment.h for details.
+-	unsigned int ipu_policy;	/* in-place-update policy */
++	unsigned long ipu_policy;	/* in-place-update policy */
+ 	unsigned int min_ipu_util;	/* in-place-update threshold */
+ 	unsigned int min_fsync_blocks;	/* threshold for fsync */
+ 	unsigned int min_seq_blocks;	/* threshold for sequential blocks */
+@@ -1322,7 +1322,7 @@ enum {
+ 	MAX_TIME,
+ };
  
+-/* Note that you need to keep synchronization with this gc_mode_names array */
++/* Modification on enum should be synchronized with gc_mode_names array */
+ enum {
+ 	GC_NORMAL,
+ 	GC_IDLE_CB,
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 8ee5e5db9287..92c8be00d396 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -672,6 +672,7 @@ static inline int utilization(struct f2fs_sb_info *sbi)
+ 
+ #define F2FS_IPU_DISABLE	0
+ 
++/* Modification on enum should be synchronized with ipu_mode_names array */
+ enum {
+ 	F2FS_IPU_FORCE,
+ 	F2FS_IPU_SSR,
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index e1f1ebfa59d6..2a95545b2938 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -51,6 +51,17 @@ static const char *gc_mode_names[MAX_GC_MODE] = {
+ 	"GC_URGENT_MID"
+ };
+ 
++static const char *ipu_mode_names[F2FS_IPU_MAX] = {
++	"FORCE",
++	"SSR",
++	"UTIL",
++	"SSR_UTIL",
++	"FSYNC",
++	"ASYNC",
++	"NOCACHE",
++	"HONOR_OPU_WRITE",
++};
++
+ struct f2fs_attr {
+ 	struct attribute attr;
+ 	ssize_t (*show)(struct f2fs_attr *a, struct f2fs_sb_info *sbi, char *buf);
+@@ -149,6 +160,19 @@ static ssize_t gc_mode_show(struct f2fs_attr *a,
+ 	return sysfs_emit(buf, "%s\n", gc_mode_names[sbi->gc_mode]);
+ }
+ 
++static ssize_t ipu_mode_show(struct f2fs_attr *a,
++		struct f2fs_sb_info *sbi, char *buf)
++{
++	int len = 0, i = 0;
++
++	if (SM_I(sbi)->ipu_policy == F2FS_IPU_DISABLE)
++		return sysfs_emit(buf, "DISABLE\n");
++
++	for_each_set_bit(i, &SM_I(sbi)->ipu_policy, F2FS_IPU_MAX)
++		len += scnprintf(buf + len, PAGE_SIZE - len, "%s\n", ipu_mode_names[i]);
++	return len;
++}
++
+ static ssize_t features_show(struct f2fs_attr *a,
+ 		struct f2fs_sb_info *sbi, char *buf)
+ {
+@@ -702,7 +726,7 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+ 			return -EINVAL;
+ 		if (t >= BIT(F2FS_IPU_MAX))
+ 			return -EINVAL;
+-		SM_I(sbi)->ipu_policy = (unsigned int)t;
++		SM_I(sbi)->ipu_policy = t;
+ 		return count;
+ 	}
+ 
+@@ -898,6 +922,7 @@ F2FS_GENERAL_RO_ATTR(mounted_time_sec);
+ F2FS_GENERAL_RO_ATTR(main_blkaddr);
+ F2FS_GENERAL_RO_ATTR(pending_discard);
+ F2FS_GENERAL_RO_ATTR(gc_mode);
++F2FS_GENERAL_RO_ATTR(ipu_mode);
+ #ifdef CONFIG_F2FS_STAT_FS
+ F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_foreground_calls, cp_count);
+ F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_background_calls, bg_cp_count);
+@@ -987,6 +1012,7 @@ static struct attribute *f2fs_attrs[] = {
+ 	ATTR_LIST(max_ordered_discard),
+ 	ATTR_LIST(pending_discard),
+ 	ATTR_LIST(gc_mode),
++	ATTR_LIST(ipu_mode),
+ 	ATTR_LIST(ipu_policy),
+ 	ATTR_LIST(min_ipu_util),
+ 	ATTR_LIST(min_fsync_blocks),
 -- 
 2.25.1
 
