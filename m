@@ -2,66 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF686688C3A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Feb 2023 02:03:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 252B0688C40
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Feb 2023 02:07:41 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pNkUO-0005ER-MZ;
-	Fri, 03 Feb 2023 01:03:39 +0000
+	id 1pNkYD-0005e7-0R;
+	Fri, 03 Feb 2023 01:07:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1pNkUL-0005EL-VL
+ (envelope-from <ebiggers@kernel.org>) id 1pNkYB-0005e1-OZ
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Feb 2023 01:03:37 +0000
+ Fri, 03 Feb 2023 01:07:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jvKtRdKzyboyHgHmgcf2t89gEFXiHc6xToK5xgfGIcU=; b=LB6P9KI/ldohsw+Ld9w9DNKFa0
- gCaoZj93chVxKyDByOANy+Z5dT0sG471ndgbkKnvqlkdBXGxV7ffTo3PIMMVDeX14E5mwESyvvtoE
- 1SIs635NChtUmQZVJgAHlpkKvn6lWHt7YT5JQhIMWyZHhWAh/+4cxOKAKiA1+LSDy2y4=;
+ bh=XKBr5/nM94jPOmFZhzEzIUh6EP62++qk2FBmPinpCxU=; b=EQ73cNYaXC52tdiDsTk2QxGYnA
+ Ozghw5jPpnOFL+8F08nOCcbdN1JednCzOCWPQDxJL5Jx45uMaU3F89ttNBUZhLwRY0MTu/McjHJaO
+ ZspwbU7AOY3Bb0FTZm3om/aTIfc/gEcTehuMj9JGNXNP01uAW9Di5vDZ3u2hFxToON5Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=jvKtRdKzyboyHgHmgcf2t89gEFXiHc6xToK5xgfGIcU=; b=m
- 8HAqLLl+ooqd+JWIzOmWYxsgAouYlHVG9kzOHMDn4zTJGGSS4gIDEBg37FkAY8QngNfgl7mM9Fg8w
- CpNMz7pO5aK+MBkUdDt+d5A/3J/hC/ny61P8fRCeOYDFpYkFhSPovFJ5Fnc/i4ouEMCMbhBn284mV
- V444Qh/Rlkhy0Jlw=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=XKBr5/nM94jPOmFZhzEzIUh6EP62++qk2FBmPinpCxU=; b=Bl+d2D+75/NcwN4Kh3J7hS1Zyx
+ ZYiA2HCDyqyJC5s0ddyteqIsdjEtXNEP+MnR0AIcoiBLwPPCJDwcA0mcr80rvn5eNDY9i+h2vkxXo
+ Q10s6SQLITJyXZK1YSXms0sd+F+OHMDFKGZRSkelzmZtJMkDJAYrObYZRldsnMcfE7MA=;
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pNkUJ-0002zH-K4 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Feb 2023 01:03:37 +0000
+ id 1pNkY9-00034y-Fd for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 03 Feb 2023 01:07:34 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 0D3D5B828DE;
- Fri,  3 Feb 2023 01:03:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C9BDC433D2;
- Fri,  3 Feb 2023 01:03:28 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id EC26CB828DD;
+ Fri,  3 Feb 2023 01:07:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5044BC433D2;
+ Fri,  3 Feb 2023 01:07:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1675386208;
- bh=sh0TjyWGQ9JudO9PAEgymM1IjtlW0nUu2xMRWylfafA=;
- h=From:To:Cc:Subject:Date:From;
- b=pYGKbv7GLtPxXrXlNcebSiLkqQkWtfqvrf3Ekj6KOLFIBU7lcVEq3uKBozBfFShYt
- ITK3HHTz+DRvde7O4jU3ZpH8DJGQiGWE2GujCxhwijWyEaSJuRg+nGOieKkBTAqtCv
- Z+Tpa9LXinGC7xez25ol2fXXniG0rrcQBTBm3sFfaz+rlDJd7Eh+wdyiXdPRmuM+H0
- zkyxnafvPoVAj8yKFsDIP4uwhmzLPhlP1zIVVJRUPvawAe6I93d+xGVy2kBV72PVIM
- rGcY2ZP6SAhF2ph7XhuxzocLGD7GSHJqlwdIGLXzctf6sf8ZuKJqvPAz4+oNpbTPMh
- mGGl/HxcPRdSg==
+ s=k20201202; t=1675386446;
+ bh=fz7m0oNp3+iBydgkgnlasJNzPQcxkPq6HJHHFp/eDmU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=rOPBW7zi68EwVAEdF7hysr6oZSetdbFyWDQ38pu9afuQOyIaPfIj+GPMbinOGVKwF
+ jOpH9BpW+bFA8vk7Oz4cWWpqnAqwPG7tuOwazTT8kOuxLoXmnkIa0biz8NiC8WUZfa
+ NKuoTC94VJ+yKXU7LXEvM8Irk+XI3Mjv332MA4lkEK0Hqeyk7CSKdtUDdl/kqRWCGQ
+ MbybtQGZhULhNZV0MFyzvrt8AOHC1Ggpkq2BaXFEA0/oNk8H6zxXUFJ64hcx5eS5OC
+ MDxra6w/3V4tQGiLhEIhmdYs8ky9b8YHTMa4Rzj2vL9clXunI18/XZsl6ugnW/lVbd
+ KSk8JF2n/4nFw==
+Date: Thu, 2 Feb 2023 17:07:24 -0800
 From: Eric Biggers <ebiggers@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu,  2 Feb 2023 17:02:39 -0800
-Message-Id: <20230203010239.216421-1-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.39.1
+To: Tejun Heo <tj@kernel.org>
+Message-ID: <Y9xeTDOmMZ75G6cq@sol.localdomain>
+References: <20230129121851.2248378-1-willy@infradead.org>
+ <Y9a2m8uvmXmCVYvE@sol.localdomain>
+ <Y9bkoasmAmtQ2nSV@casper.infradead.org>
+ <Y9mH0PCcZoGPryXw@slm.duckdns.org>
+ <Y9oHQ6MfRbfwmFyK@sol.localdomain>
+ <Y9wrglzrfzTiCjh8@slm.duckdns.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <Y9wrglzrfzTiCjh8@slm.duckdns.org>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -69,10 +76,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> When writing a page
- from an encrypted file that is using filesystem-layer encryption (not inline
- encryption), f2fs encrypts the pagecache page into a bounce page, then writes
- the bounce page. 
+ Content preview:  On Thu, Feb 02, 2023 at 11:30:42AM -1000, Tejun Heo wrote:
+ > > The bug we're discussing here is that when ext4 writes out a pagecache
+ page in > > an encrypted file, it first encrypts the data into a b [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pNkUJ-0002zH-K4
-Subject: [f2fs-dev] [PATCH] f2fs: fix cgroup writeback accounting with
- fs-layer encryption
+X-Headers-End: 1pNkY9-00034y-Fd
+Subject: Re: [f2fs-dev] [PATCH] fscrypt: Copy the memcg information to the
+ ciphertext page
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,72 +108,31 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: stable@vger.kernel.org, Tejun Heo <tj@kernel.org>,
- linux-fscrypt@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-fsdevel@vger.kernel.org
+Cc: "Theodore Y . Ts'o" <tytso@mit.edu>, Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
+ stable@vger.kernel.org, cgroups@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On Thu, Feb 02, 2023 at 11:30:42AM -1000, Tejun Heo wrote:
+> > The bug we're discussing here is that when ext4 writes out a pagecache page in
+> > an encrypted file, it first encrypts the data into a bounce page, then passes
+> > the bounce page (which don't have a memcg) to wbc_account_cgroup_owner().  Maybe
+> > the proper fix is to just pass the pagecache page to wbc_account_cgroup_owner()
+> > instead?  See below for ext4 (a separate patch would be needed for f2fs):
+> 
+> Yeah, this makes sense to me and is the right thing to do no matter what.
+> wbc_account_cgroup_owner() should be fed the origin page so that the IO can
+> be blamed on the owner of that page.
 
-When writing a page from an encrypted file that is using
-filesystem-layer encryption (not inline encryption), f2fs encrypts the
-pagecache page into a bounce page, then writes the bounce page.
+Thanks.  These patches fix this for ext4 and f2fs:
 
-It also passes the bounce page to wbc_account_cgroup_owner().  That's
-incorrect, because the bounce page is a newly allocated temporary page
-that doesn't have the memory cgroup of the original pagecache page.
-This makes wbc_account_cgroup_owner() not account the I/O to the owner
-of the pagecache page as it should.
+    * https://lore.kernel.org/r/20230203005503.141557-1-ebiggers@kernel.org
+    * https://lore.kernel.org/r/20230203010239.216421-1-ebiggers@kernel.org
 
-Fix this by always passing the pagecache page to
-wbc_account_cgroup_owner().
-
-Fixes: 578c647879f7 ("f2fs: implement cgroup writeback support")
-Cc: stable@vger.kernel.org
-Reported-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/f2fs/data.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 754841bce389f..8a636500db0ef 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -739,7 +739,7 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
- 	}
- 
- 	if (fio->io_wbc && !is_read_io(fio->op))
--		wbc_account_cgroup_owner(fio->io_wbc, page, PAGE_SIZE);
-+		wbc_account_cgroup_owner(fio->io_wbc, fio->page, PAGE_SIZE);
- 
- 	inc_page_count(fio->sbi, is_read_io(fio->op) ?
- 			__read_io_type(page) : WB_DATA_TYPE(fio->page));
-@@ -949,7 +949,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
- 	}
- 
- 	if (fio->io_wbc)
--		wbc_account_cgroup_owner(fio->io_wbc, page, PAGE_SIZE);
-+		wbc_account_cgroup_owner(fio->io_wbc, fio->page, PAGE_SIZE);
- 
- 	inc_page_count(fio->sbi, WB_DATA_TYPE(page));
- 
-@@ -1023,7 +1023,7 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 	}
- 
- 	if (fio->io_wbc)
--		wbc_account_cgroup_owner(fio->io_wbc, bio_page, PAGE_SIZE);
-+		wbc_account_cgroup_owner(fio->io_wbc, fio->page, PAGE_SIZE);
- 
- 	io->last_block_in_bio = fio->new_blkaddr;
- 
-
-base-commit: de6b3a5e09b29c014bd04044b023896107cfa2ee
--- 
-2.39.1
-
+- Eric
 
 
 _______________________________________________
