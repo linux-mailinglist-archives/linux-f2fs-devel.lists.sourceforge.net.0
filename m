@@ -2,101 +2,122 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8788968937C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Feb 2023 10:23:14 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42AAA68A17B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Feb 2023 19:20:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pNsHn-0001bR-N1;
-	Fri, 03 Feb 2023 09:23:11 +0000
+	id 1pO0fT-0003uQ-OC;
+	Fri, 03 Feb 2023 18:20:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pNsHj-0001bK-Ux
+ (envelope-from <htejun@gmail.com>) id 1pO0fS-0003uK-CB
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Feb 2023 09:23:07 +0000
+ Fri, 03 Feb 2023 18:20:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XSot76zFHz9O8EjdYf+IVgbw7v0D74GYLFogclO7880=; b=gss0RlMy9RoiNJzf6/exjlzoI4
- nMesy4cPqTvLX1fpyOtfOj03ZbUAhjzfCvwH0thjB+pNhKcxoS7kjv/X/PHj5OlH9AfAnsrTmiTMS
- 0qf9QRo5xCYwrFJ3XSJrNdox1VFg/9oEK05l0UrpOiI1Y2O2oAJEdXRoWkJc560Cj4CA=;
+ bh=IVDJzsJUnCAcEMEmSLL1dt196xAYMs/0LWkqLtUvGEo=; b=hsoXQ05WhynVU8vF0hMt0/g/tt
+ k/05beSYwJZpKgvG8DNC1yIKovSIRONUQWBGbtdUcX15KIyZMU5raVSmj74t7VDKYKYI8uLOU5kqr
+ e6xMddErPJ+XRf1i0j9/zAXCXL/I4GnS3CLgpNeAgiZJkO6vu0YKPv3/uryPNowe127Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XSot76zFHz9O8EjdYf+IVgbw7v0D74GYLFogclO7880=; b=LjAfWUCZpRpniAAflEjrthHu5H
- zTABpGNRWE3cmoXTLaBkx5QWUcDr3qiSp7dLSHdrtf7kzESehF7TYZxfqUDsWQWT9GH5/7dP+l3ch
- AlhKhBNO+PmdOIVKZRtsCKlfg8mRVgBZueiC7UAnfwUBlh6OeKq0rUwWUtgnmbVbsIPI=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pNsHi-009yx3-IZ for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Feb 2023 09:23:07 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 4A111B829CB;
- Fri,  3 Feb 2023 09:23:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D58A5C433EF;
- Fri,  3 Feb 2023 09:22:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1675416178;
- bh=ij0RAKgWyzJy36XWqq6ACHy+no3lvMbd/2UT4aL6kxc=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=qEH2+6BeJrP6PsBhU363wcLjwlYxIaa8mCEcEhA9sd5camWVvXnsKoK7kpsv76xBH
- JBG4DVtk2zY8JME6U4yXrWhyw3dEV4PTJUUbrvI0xcGrjLHJGsv1wBu/xmPujbZVlo
- Yoxc1y4SGhR/i0+L+25dPxTgLPoEsXQvym252wig10uTVE0/VIi37+/glnfZUeRR24
- v/PvQ2lDsGaRuwUD6NMJXUqposUnRhqtYGTZ8zZ+w5DVxl/8rwWpgW9caWvpak6gdP
- 3PyxIyCtLXhZk/eQhmcLN3Wi6wQfDoDf+O/KuMUvsHylxwtUprVh7VquHoEMXoliu2
- HjmbD3s/OLV0w==
-Message-ID: <5e70add2-2e1b-3612-1e75-ae366e8b7b7e@kernel.org>
-Date: Fri, 3 Feb 2023 17:22:56 +0800
+ bh=IVDJzsJUnCAcEMEmSLL1dt196xAYMs/0LWkqLtUvGEo=; b=BYtdN5cFM9nzOTy/gw8uPkQhss
+ FY94bi5RUdczpxNam79lyFK21G4MrppNI5vUoqJOdF6XBlVJNQG31Qjc9yW0Ew2JFNixQQGTPIPd5
+ rxdUZONXCN4LwVs9Q+E8+KtwlyXHCRF6GVKlGS9BWVgE587EhYq63hR0BG/Zld+cxhb4=;
+Received: from mail-pj1-f53.google.com ([209.85.216.53])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1pO0fQ-00087f-5O for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 03 Feb 2023 18:20:09 +0000
+Received: by mail-pj1-f53.google.com with SMTP id m11so5875681pji.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 03 Feb 2023 10:20:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
+ :reply-to; bh=IVDJzsJUnCAcEMEmSLL1dt196xAYMs/0LWkqLtUvGEo=;
+ b=kdRIA05rAAC19fkietGOxycCuZIno6yjvx1SFT/+o28dhYlh4hl1Lr9PAOYpkahyxz
+ iJHGmJQK6PErKv89CynOVzGX39fiB96ONdaomtRNNKWWXTDKbs/vVYdvFYip8zrpsA1X
+ Dnfqy4oNZ72o/xXtbYUSIg6z0giUg25im8UDzZrYEGvZDleUFPRelepYXGc1tiydIiMj
+ cLK4F21p92luasoaRFLFeay9p/s+uPDxGMW4UaXG32J+wW6tbyRMJ9/0E3n0lYKu3CsG
+ bxpYYf9gkYGojovE/IlQ/1NYNTb06sM21upjUtRXD5ML3pz6QV5QGsQ7I0d9R/b0NCq8
+ EQSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IVDJzsJUnCAcEMEmSLL1dt196xAYMs/0LWkqLtUvGEo=;
+ b=smyuu3sRi8Te3XflVJQ7wqvHFaBeyEpfpgcQYDWjRgd8WJW58ERRqScUsUEq4S+kmh
+ ZwY59oS2D0505XkvcTiDZHPQdzRGsbicQI/oT75o8p/od/o4ZO0jxoufUcAryMFX4FBt
+ wyC7BmtFQEIF+eIsyQQHHBbwnT1XYxI66Q/s8d95QYxl44CW1fhg3j5MvDTFps6yHJ1I
+ rCUqwxtaECZ6acCtzrDFi1aFhsWaVRx9Yuoq5JKpTOTRbC048GRX22oiRnzftCWJVITn
+ C6LcYJBJ3vMBCtKHptIWCcrzkL3ZlQ8IwNiTLDFeE8CF0b/y6xHGfFA6HXKCIdIQ1YOe
+ kohw==
+X-Gm-Message-State: AO0yUKXcbIcQNKoRBEast1RnTKMdrrRJyQ3NnxE35Tiw+WuCjGUVcoGY
+ qC4oqmhwgMDZdZfSMGM0Lxk=
+X-Google-Smtp-Source: AK7set8KWOhNAuduyHHtTkMAFypSCaOCENLdIxVTHb1PgH3y0+Y+cEpM++i7M/VJly2PAzBZcvL6yA==
+X-Received: by 2002:a17:902:f0cd:b0:195:f3d5:beb0 with SMTP id
+ v13-20020a170902f0cd00b00195f3d5beb0mr8818755pla.64.1675448403097; 
+ Fri, 03 Feb 2023 10:20:03 -0800 (PST)
+Received: from localhost
+ (2603-800c-1a02-1bae-a7fa-157f-969a-4cde.res6.spectrum.com.
+ [2603:800c:1a02:1bae:a7fa:157f:969a:4cde])
+ by smtp.gmail.com with ESMTPSA id
+ b2-20020a1709027e0200b00194b3a7853esm1892297plm.181.2023.02.03.10.20.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Feb 2023 10:20:02 -0800 (PST)
+Date: Fri, 3 Feb 2023 08:20:01 -1000
+From: Tejun Heo <tj@kernel.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <Y91QUXMfgYx3BrA7@slm.duckdns.org>
+References: <20230203010239.216421-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Content-Language: en-US
-To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
-References: <20230202084815.70791-1-frank.li@vivo.com>
- <20230202084815.70791-2-frank.li@vivo.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230202084815.70791-2-frank.li@vivo.com>
-X-Spam-Score: -5.3 (-----)
+Content-Disposition: inline
+In-Reply-To: <20230203010239.216421-1-ebiggers@kernel.org>
+X-Spam-Score: 0.4 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/2/2 16:48,
- Yangtao Li wrote: > IPU policy can be disabled, 
- let's add description for it and other policy. > > Signed-off-by: Yangtao
- Li <frank.li@vivo.com> Reviewed-by: Chao Yu <chao@kernel.org> 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  On Thu, Feb 02, 2023 at 05:02:39PM -0800, Eric Biggers wrote:
+ > From: Eric Biggers <ebiggers@google.com> > > When writing a page from an
+ encrypted file that is using > filesystem-layer encryption (not [...] 
+ Content analysis details:   (0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.53 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [htejun[at]gmail.com]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pNsHi-009yx3-IZ
-Subject: Re: [f2fs-dev] [PATCH v3 2/3] f2fs: add missing description for
- ipu_policy node
+ valid 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.53 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
+ EnvelopeFrom freemail headers are different
+X-Headers-End: 1pO0fQ-00087f-5O
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix cgroup writeback accounting with
+ fs-layer encryption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,19 +129,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-fscrypt@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
+ linux-fsdevel@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/2/2 16:48, Yangtao Li wrote:
-> IPU policy can be disabled, let's add description for it and other policy.
+On Thu, Feb 02, 2023 at 05:02:39PM -0800, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> When writing a page from an encrypted file that is using
+> filesystem-layer encryption (not inline encryption), f2fs encrypts the
+> pagecache page into a bounce page, then writes the bounce page.
+> 
+> It also passes the bounce page to wbc_account_cgroup_owner().  That's
+> incorrect, because the bounce page is a newly allocated temporary page
+> that doesn't have the memory cgroup of the original pagecache page.
+> This makes wbc_account_cgroup_owner() not account the I/O to the owner
+> of the pagecache page as it should.
+> 
+> Fix this by always passing the pagecache page to
+> wbc_account_cgroup_owner().
+> 
+> Fixes: 578c647879f7 ("f2fs: implement cgroup writeback support")
+> Cc: stable@vger.kernel.org
+> Reported-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Acked-by: Tejun Heo <tj@kernel.org>
 
-Thanks,
+Thanks.
+
+-- 
+tejun
 
 
 _______________________________________________
