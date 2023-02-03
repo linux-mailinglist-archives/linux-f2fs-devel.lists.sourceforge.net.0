@@ -2,161 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A08B568A301
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Feb 2023 20:29:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26FB168A3F2
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  3 Feb 2023 22:01:18 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pO1km-00085c-V3;
-	Fri, 03 Feb 2023 19:29:44 +0000
+	id 1pO3BL-0004fY-7i;
+	Fri, 03 Feb 2023 21:01:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sanan.hasanov@Knights.ucf.edu>) id 1pO1kl-00085V-2S
+ (envelope-from <krisman@suse.de>) id 1pO3BE-0004fL-1Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Feb 2023 19:29:42 +0000
+ Fri, 03 Feb 2023 21:01:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sQM9rlXMUu9gfe8YFTJWy72aP92xNgwICYYfE8EX5nI=; b=WS7p/oZaGywUa1e5/MoAg0K6SJ
- fA7zzhl6vbOod3DrUBhQKng7fm0hSwM2IVnpEUoMRwX37v038aELFo547bAXRmK6SDFgTEcHsaVz+
- A5x8fCBlZHo/o6CNnJYD8CyIQ84QrZnGjr4yaaZde7HYQcNaVZC/7Ta/3YRLxCRDV6kI=;
+ bh=aPC22QHm6XGBmfoxFvZlvMY0ghDI7BCzikZtAWF5rRY=; b=RWVDB/p9YkfyGGcWetLOYKtwHl
+ BLJUbqiQYffqFB8aD4bIp5wtfSiTMxs1rnUgm7fSOZNK0LIeG4YWoVRhNmn6R7RDOca8iF1ClKKo3
+ QZEBmvOnhny2TvUR4Q/1TcD/Q2ojrPepsfHuVJv+HX5LQ/V0MH9SZUUH3/H26AoGXa5g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=sQM9rlXMUu9gfe8YFTJWy72aP92xNgwICYYfE8EX5nI=; b=f
- 1JPVCaJ92agAbHwPHAvgEpDe5+j8zH7IZLu1P7KyxkY89PTQhqUaOMwJ7PqtLQYZ2MbAIPWmMCBXJ
- zAqiGhpzMKjvJGw/2dKCdiVekra9VBOXFshx5zfqhirwrbfK49apR7TlOjKEHdrbv5M80NadSTEXS
- kqK48mkp/jz9KsJA=;
-Received: from mail-mw2nam10on2040.outbound.protection.outlook.com
- ([40.107.94.40] helo=NAM10-MW2-obe.outbound.protection.outlook.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pO1kd-0001JZ-Rw for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 03 Feb 2023 19:29:42 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ViTiV3mBVO1bCGsZfLM4SAj7svfMxUKs7n5/8H6om9y+majqxaqML0xlaRSJDlcSSURjt5ORS4VRyklqAbJinPV7ZtVouuqevkqe0+vJRnloIEpE4fnbIPwSPDzNXxS5INeVR53uMWKvfxcGOHPLbiX5H8ndkhT6UP7KYS38+ZGgGIs73o6FhehmVU4IGA9bcJaY+RiJp1DOBS9HKnPm9J3Oa3vYmJeRlpiJk97Sc3ZmpxB7ID3PZnNZFBruFMWvVcTiWPx1J9dAo4MWq0EvhLuu/NEfDLCVimdM2D/s5dPG1d1tJKZu63yG7/OqN8le0IiORpE5dB6CIjUzWEwf2Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sQM9rlXMUu9gfe8YFTJWy72aP92xNgwICYYfE8EX5nI=;
- b=oNhy3jY8ywE1dWfhzGYETUQak4sQjVbMkhej/bbbib2qqy3t9B+WWahYpyI9y3ETbP5y7mpReB3qPUitIr0GDArR7wzW7BLYmCb2VDmHMuvGJYUpht1wyscI2jwdzFXmiz+TWy03TmnNkOGqZSwg0cnPk5R3ULC2rNk5lmixhe/t3i5TlN38E0SfLk0WGXQ1IKdRcJpWNtvQcLYfS7TFr4o9cu0t2yjXtNdcU1/+pDSFK/s9mb28GsxqOKu+OEIXGEtaUX6mkjrGvRYPCAUAV6mdTS6dBxjMJJMTTITefoCEfAsZ93DqM6dFCRio6C1sOKQBl6N4cVU/TJ1lZ7oRVw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=knights.ucf.edu; dmarc=pass action=none
- header.from=knights.ucf.edu; dkim=pass header.d=knights.ucf.edu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=knightsucfedu39751.onmicrosoft.com;
- s=selector2-knightsucfedu39751-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sQM9rlXMUu9gfe8YFTJWy72aP92xNgwICYYfE8EX5nI=;
- b=fGPyjjksi0ULKSuFZuKwg3WK+58H1qp2m9bSgvzjToPH2yNmcCnuzfWiZ2uqpcsxlVxcBrJkHVXtV6sp7rXr6mrxg7hi/stLw1lab+xUQ5E3lXv7ZjyOfV6asa7CDf82rQuFHlUkVl0Q6j6JIeO2iaNgFTI2Y+g0d4T/Oj1pqcE=
-Received: from IA1PR07MB9830.namprd07.prod.outlook.com (2603:10b6:208:44b::14)
- by DM5PR07MB7894.namprd07.prod.outlook.com (2603:10b6:4:aa::39) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.28; Fri, 3 Feb
- 2023 18:56:42 +0000
-Received: from IA1PR07MB9830.namprd07.prod.outlook.com
- ([fe80::d883:f078:37f:dace]) by IA1PR07MB9830.namprd07.prod.outlook.com
- ([fe80::d883:f078:37f:dace%9]) with mapi id 15.20.6064.024; Fri, 3 Feb 2023
- 18:56:41 +0000
-From: Sanan Hasanov <sanan.hasanov@Knights.ucf.edu>
-To: "jaegeuk@kernel.org" <jaegeuk@kernel.org>, "chao@kernel.org"
- <chao@kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>
-Thread-Topic: KASAN: slab-out-of-bounds Read in f2fs_iget
-Thread-Index: AQHZN/1XNusp4zIyiEC4U6RFRi8pVw==
-Date: Fri, 3 Feb 2023 18:56:41 +0000
-Message-ID: <IA1PR07MB9830A51FD5E2F4BA573EE517ABD79@IA1PR07MB9830.namprd07.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=Knights.ucf.edu;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: IA1PR07MB9830:EE_|DM5PR07MB7894:EE_
-x-ms-office365-filtering-correlation-id: b988f760-8455-489d-6124-08db06186333
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: ucB4xX3aV/vWzxJMlWV4CDPSezMRj0/V7bp3xWVosq7BTqjJrXU3ZrLH5c0IacW5Ue72Hb+Oydjeq6cVjLmWAGqPTacwjAlgijfMWEtWyYvRLB+wZutUDwflRg0apaDB97KwbsglAtQlMW7CCVh3xIAJlUPKfyStN6UFCpfOY5swAkGCla/eyOnulRPYqF/Zh3GKsj5/MYXJ1jKYHzideylqpls848vQDNyi7sdRB6jM6eNQ6Z9Ogqy3MlLf+PO0vl1inFoj7BcjlheedVnYeIL7f1OnhujElPXUpHuy9TlYN7cTIUcalYX7/j96iNxd/zAWOwt1vhysbsJmcjvhIsUL9tb15tt38zu+0tcyXz9bxHdCTwD8mmIDHdg/ej2Fjcrn6IbqHnCayj7lS1rrsCnEj5cw/RKjvbsnfuMIJ3vTwGVycpZo06z3Q7yea5QCAfkqDDjqHxIr8PXylbJZhKHVk5+EoR7D1PaBnEOFtPIe4tjFsVq7RYonTUm9s6v6o7uijapA3pxnxagDyXboB3FKOCMYyZh2c9H4EL16oyGmAhpGjt3e+fO0jU8Bra+vvqVyxlDeFDml6nLFV4ALQugwt4j9QnlQhRsY9jYtkkhGXEzgTY0hhSLZK15WutmTTkWvEnNuowq8yQImmzqpabnKiArsEwwYgHHqhcihEUwb8/OHWikEbJcDXcuPh7AHv0v0sgL4iCCOHcj6mtFOE9Lz7QjzcTs4cHvzby0fp9y6x7jXs4e99Q0xNugOZalumZDdUOByH+0jCY1eDHrREpsE0+VBmZxDC+C8vhkqpwnaov3iFJrcDkzmtNgwwPJoBvZHg/oJ7dAD3srJjjdmmg==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:IA1PR07MB9830.namprd07.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230025)(4636009)(366004)(136003)(376002)(39860400002)(346002)(396003)(451199018)(5930299012)(478600001)(66446008)(2906002)(64756008)(4326008)(8676002)(41300700001)(52536014)(44832011)(8936002)(5660300002)(66476007)(316002)(76116006)(71200400001)(66556008)(91956017)(110136005)(54906003)(66946007)(7696005)(786003)(966005)(6506007)(83380400001)(26005)(38070700005)(9686003)(75432002)(186003)(122000001)(55016003)(33656002)(41320700001)(38100700002)(86362001)(505234007);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?0o6EVf4b4rxXXYg+9hsS45PlOg/cPU5K4ce0DDkvAMF/W4M4EyoNaPuXkp?=
- =?iso-8859-1?Q?Hat+61RmT2dn+ilyw0SO6D5i+H8DZEwipKMp4j2DmEeOkA6VoJBQHXQpeB?=
- =?iso-8859-1?Q?Vbz0B5/6XhmqzXI55pEUNpPB8ErjwoFkjPdm5uM75A2d7FJhqg/auANgq1?=
- =?iso-8859-1?Q?2MtFxP5B2aquHWSM8tc7RcETBnueX/RG7biUNnTJnufFsAkdpikEap9huV?=
- =?iso-8859-1?Q?2HkTS6b9ytmiQLpx+99eRJM4dQxhOZW77K9+CyeL/yEJEZRQbzxThI8fOU?=
- =?iso-8859-1?Q?vO6s+UmQJVExEya1tkZ9DrmFEgc3aZvOWWOp++4F1kWsGZQ89Cax5pFF+T?=
- =?iso-8859-1?Q?biRxBMHC2LN+BBdJZkIqVyhZdeY+JOWBWR9YLXHEImlmo3ZH5Yqy0df+qF?=
- =?iso-8859-1?Q?3LuhDVPrN6OGQr/incj0S0CkJbqmPZkc5Lxx3WuB3DaznlLuhUgqgZRvcJ?=
- =?iso-8859-1?Q?savYUj9EfoluhBHJ2wWU84wb78m5CJeeG6gKpY0nu7eDdraOEMXyZtFW+R?=
- =?iso-8859-1?Q?MoapGFaQcj0Bt2ygmSuaEvxfcR78cHJ61HJrteRMAeosq9rPJYaUPpUcPu?=
- =?iso-8859-1?Q?sLvqyLKbhnU8llBcgx5w1oMOwkU3stiFL60PFCueqHP+MN5JVVjpawlhcJ?=
- =?iso-8859-1?Q?7xV0p4DCYYIvanaE3tcI4F608C4fpVhkLrvl/falY8JStF8M2CN0mD3xxC?=
- =?iso-8859-1?Q?CY7FCIAU0i5KTyWkL9NQAfqxWTmVFJO4xSpDJvt5tkrj1S80MVJco4/kgb?=
- =?iso-8859-1?Q?Or+sLcMG5thj9pHaWfaELV6s4mabikhe8LTNgGiup621CUXfbWAtJ5KD11?=
- =?iso-8859-1?Q?+A3wku6Roaux7dZaRYP+KXiZJ/sODRZg1axkj0hy8kO7c1f7lHS+E7UuxZ?=
- =?iso-8859-1?Q?PNxd9iMD6urHzsOvk+TK8sWODL/dRqWQz4B2SPMnVr3uUfL7+JYc62y5yQ?=
- =?iso-8859-1?Q?UU7VnznrvzrQTad5R1L/Q60dHodyxt3NaZOryLQvqTRy3uxa7ZSu6+DbYQ?=
- =?iso-8859-1?Q?IF3JAtv6hxcSJLqshSKIucxjsaz+TNbZlgHanzJozoHZ8er9fMUgmVnE7P?=
- =?iso-8859-1?Q?EevtV+bwM2XnWIfkZFEQRsdnCVSra5TBQc6mZ6sQ3LtDn/CFmRxG+kOTQS?=
- =?iso-8859-1?Q?FXs2F2wtOz8NnmJnYs8wKN8Uhjc4ckW0VrON1pnbgXxP1yRLooacpvTnJB?=
- =?iso-8859-1?Q?sPHHRrxi1cy1cbksWqCEfh5HinIc88zxerfpwBWG3h0/KWV2+UhIseNsJA?=
- =?iso-8859-1?Q?oT/Cn2VpuWGlmyOq9iAjmHfV0nOQ56HLtzwzuJP3Gyi++C1om5zqnK/qLq?=
- =?iso-8859-1?Q?ep5WMibcZmXaWCWKqa7plQDa4A9o0isDMW8xjm9TTiZSzKkkz0V2UmUvUd?=
- =?iso-8859-1?Q?srHASdw6rICkraY50Bq2EtCNQXTyF98jcOctNxmy3LB6G1QyH/eFcs8Lih?=
- =?iso-8859-1?Q?aI+ofbinP59TsRGJSB73/8XjSVrtOmRfwYYSQineY2Ju0mAhRkLxGkqnvp?=
- =?iso-8859-1?Q?V33BllXUkTQaz7S+90xUF634n10aYdMUy2h+ItC3xmZfNFs6ecc0j48J7o?=
- =?iso-8859-1?Q?0P6yb3ikbzonIebxpiEDchIryKAQ4JMVFEQX6H105p26qYMaAgQyF+KxUX?=
- =?iso-8859-1?Q?QNWHLsJNqBVWhMASajIERPWVrcLSbOl8N9x6Fut7VVzwCagr0NVgHXHg?=
- =?iso-8859-1?Q?=3D=3D?=
+ List-Owner:List-Archive; bh=aPC22QHm6XGBmfoxFvZlvMY0ghDI7BCzikZtAWF5rRY=; b=J
+ +QwFG5CqeYzQf2MkRM8sdd1kM8iYtagu9SpmsasH9nDD+uI47ldSF89/hI9JnpvgFHdXswQqyhEOy
+ P705tbDOp31LlxnRUs7JAUq7GcLgo1KaF58cMfQyWGiK/FiecMCxohFXhsN2e/zWs/vdVxrMBgOQl
+ paMh0WaEK11cscsI=;
+Received: from smtp-out2.suse.de ([195.135.220.29])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1pO3B7-00ASvG-OI for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 03 Feb 2023 21:01:07 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id F0ED55C340;
+ Fri,  3 Feb 2023 21:00:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1675458053; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=aPC22QHm6XGBmfoxFvZlvMY0ghDI7BCzikZtAWF5rRY=;
+ b=Ap7nmh84y8F9gwYtJO94l1L2dtLKqdB871gijxrby+u6/VL1b5AOtfYzoN+182fBDIPf3Z
+ AbCG7FRYKE/N9fadf7S08ZloqwKsoENasjwUUXk+vEG2pbUenBu/xyEHBR2pRwFD+ffjA6
+ hZIX7bK1VcvbHnEGtX0YqscbhoBp6D0=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1675458053;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=aPC22QHm6XGBmfoxFvZlvMY0ghDI7BCzikZtAWF5rRY=;
+ b=9PL9jYsZ84+KXNpSuewKOkAPE7RqSCg/8kKFXdTAtp6gfFfhgtH5rDh2K4KyeSVZ98ZTKG
+ z1KOBG+fLWrbaaCQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 80FF51358A;
+ Fri,  3 Feb 2023 21:00:52 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id n9rIEgR23WPqJgAAMHmgww
+ (envelope-from <krisman@suse.de>); Fri, 03 Feb 2023 21:00:52 +0000
+From: Gabriel Krisman Bertazi <krisman@suse.de>
+To: viro@zeniv.linux.org.uk, tytso@mit.edu, jaegeuk@kernel.org,
+ ebiggers@kernel.org, jack@suse.cz
+Date: Fri,  3 Feb 2023 18:00:32 -0300
+Message-Id: <20230203210039.16289-1-krisman@suse.de>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-X-OriginatorOrg: knights.ucf.edu
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: IA1PR07MB9830.namprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b988f760-8455-489d-6124-08db06186333
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Feb 2023 18:56:41.5881 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 5b16e182-78b3-412c-9196-68342689eeb7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: As1Tm56Og4HqXD0q6TXuTNnxu/CkdmlyXRdyWRC5EEyJEgRCuxDj+M2CTIkBIzZpjIL37yw9VaP3P5sDOv9UgkS+m+oVdgeR7FNqP2sYb78=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR07MB7894
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Good day, dear maintainers, We found a bug using a modified
- kernel configuration file used by syzbot. We enhanced the coverage of the
- configuration file using our tool, klocalizer. 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview: From: Gabriel krisman Bertazi <krisman@suse.de> This patchset
+ enables negative dentries for case-insensitive directories in ext4/f2fs.
+ It solves the corner cases for this feature, including those already tested
+ by fstests (generic/556). It also sol [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.94.40 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.94.40 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.29 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1pO1kd-0001JZ-Rw
-Subject: [f2fs-dev] KASAN: slab-out-of-bounds Read in f2fs_iget
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1pO3B7-00ASvG-OI
+Subject: [f2fs-dev] [PATCH v2 0/7] Support negative dentries on
+ case-insensitive ext4 and f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -168,123 +114,200 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "syzkaller@googlegroups.com" <syzkaller@googlegroups.com>,
- "contact@pgazz.com" <contact@pgazz.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: linux-fsdevel@vger.kernel.org, Gabriel krisman Bertazi <krisman@suse.de>,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Good day, dear maintainers,
+From: Gabriel krisman Bertazi <krisman@suse.de>
 
-We found a bug using a modified kernel configuration file used by syzbot.
+This patchset enables negative dentries for case-insensitive directories
+in ext4/f2fs.  It solves the corner cases for this feature, including
+those already tested by fstests (generic/556).  It also solves an
+existing bug with the existing implementation where old negative
+dentries are left behind after a directory conversion to
+case-insensitive.
 
-We enhanced the coverage of the configuration file using our tool, klocaliz=
-er.
+Testing-wise, I ran sanity checks to show it properly uses the created
+negative dentries, observed the expected performance increase of the
+dentry cache hit, and showed it survives the quick group in fstests on
+both f2fs and ext4 without regressions.
 
-Kernel Branch: 6.2.0-rc6-next-20230201
-Kernel config:=A0https://drive.google.com/file/d/17UnUG1E5HyCPGz_HN8--CTXXx=
-SHV2e6z/view?usp=3Dsharing
-C Reproducer:=A0https://drive.google.com/file/d/1SUoN_Bud8DW-FHrE4bV-azXaAd=
-ITStS9/view?usp=3Dsharing
+* Background
 
-Thank you!
+Negative dentries have always been disabled in case-insensitive
+directories because, in their current form, they can't provide enough
+assurances that all the case variations of a filename won't exist in a
+directory, and the name-preserving case-insenstive semantics
+during file creation prevents some negative dentries from being
+instantiated unmodified.
 
-Best regards,
-Sanan Hasanov
+Nevertheless, for the general case, the existing implementation would
+already work with negative dentries, even though they are fully
+disabled. That is: if the original lookup that created the dentry was
+done in a case-insensitive way, the negative dentry can usually be
+validated, since it assures that no other dcache entry exists, *and*
+that no variation of the file exists on disk (since the lookup
+failed). A following lookup would then be executed with the
+case-insensitive-aware d_hash and d_lookup, which would find the right
+negative dentry and use it.
 
-F2FS-fs (loop0): Magic Mismatch, valid(0xf2f52010) - read(0x0)
-F2FS-fs (loop0): Can't find valid F2FS filesystem in 1th superblock
-F2FS-fs (loop0): Found nat_bits in checkpoint
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-BUG: KASAN: slab-out-of-bounds in f2fs_iget+0x4acd/0x5550
-Read of size 4 at addr ffff888111be9bf8 by task syz-executor941/5911
+The first corner case arises when a case-insensitive directory has
+negative dentries that were created before the directory was flipped to
+case-insensitive.  A directory must be empty to be converted, but it
+doesn't mean the directory doesn't have negative dentry children.  If
+that happens, the dangling dentries left behind can't assure that no
+case-variation of the name exists. They only mean the exact name
+doesn't exist.  A further lookup would incorrectly validate them.
 
-CPU: 3 PID: 5911 Comm: syz-executor941 Not tainted 6.2.0-rc6-next-20230201 =
-#1
-Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/=
-2014
-Call Trace:
-=A0<TASK>
-=A0dump_stack_lvl+0x178/0x260
-=A0print_report+0xc1/0x5e0
-=A0kasan_report+0xc0/0xf0
-=A0f2fs_iget+0x4acd/0x5550
-=A0f2fs_fill_super+0x4131/0x8490
-=A0mount_bdev+0x332/0x400
-=A0legacy_get_tree+0x109/0x220
-=A0vfs_get_tree+0x8d/0x350
-=A0path_mount+0x675/0x1e30
-=A0__x64_sys_mount+0x283/0x300
-=A0do_syscall_64+0x39/0x80
-=A0entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7f5b5d4a67ee
-Code: 48 c7 c0 ff ff ff ff eb aa e8 ce 05 00 00 66 2e 0f 1f 84 00 00 00 00 =
-00 0f 1f 40 00 f3 0f 1e fa 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff f=
-f 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007ffecd308d08 EFLAGS: 00000286 ORIG_RAX: 00000000000000a5
-RAX: ffffffffffffffda RBX: 00007ffecd308d60 RCX: 00007f5b5d4a67ee
-RDX: 0000000020000000 RSI: 0000000020000100 RDI: 00007ffecd308d20
-RBP: 0000000000000003 R08: 00007ffecd308d60 R09: 00005555ffffffff
-R10: 0000000000000000 R11: 0000000000000286 R12: 00007ffecd308d20
-R13: 0000000000000004 R14: 0000000000000026 R15: 0000000000000000
-=A0</TASK>
+The code below demonstrates the problem.  In this example $1 and $2 are
+two strings, where:
 
-Allocated by task 1:
-=A0kasan_save_stack+0x22/0x40
-=A0kasan_set_track+0x25/0x30
-=A0__kasan_kmalloc+0x7c/0x90
-=A0snd_info_create_entry+0x51/0x420
-=A0snd_pcm_new_stream+0x4d2/0x1530
-=A0_snd_pcm_new+0x246/0x3f0
-=A0snd_pcm_new+0x3e/0x50
-=A0loopback_pcm_new+0x95/0x200
-=A0loopback_probe+0x294/0xe90
-=A0platform_probe+0xba/0x1b0
-=A0really_probe+0x236/0x8f0
-=A0__driver_probe_device+0x252/0x2d0
-=A0driver_probe_device+0x4c/0x1a0
-=A0__device_attach_driver+0x1ce/0x290
-=A0bus_for_each_drv+0x163/0x1e0
-=A0__device_attach+0x1f2/0x490
-=A0bus_probe_device+0x1e8/0x2a0
-=A0device_add+0x10d4/0x1c90
-=A0platform_device_add+0x35a/0x6f0
-=A0platform_device_register_full+0x396/0x4e0
-=A0alsa_card_loopback_init+0x167/0x2c0
-=A0do_one_initcall+0x141/0x860
-=A0kernel_init_freeable+0x5e4/0x8f0
-=A0kernel_init+0x1e/0x2c0
-=A0ret_from_fork+0x1f/0x30
+      (i) $1 != $2
+     (ii) casefold($1) == casefold($2)
+    (iii) hash($1) == hash($2) == hash(casefold($1))
 
-The buggy address belongs to the object at ffff888111be9800
-=A0which belongs to the cache kmalloc-512 of size 512
-The buggy address is located 752 bytes to the right of
-=A0allocated 264-byte region [ffff888111be9800, ffff888111be9908)
+Then, the following sequence could potentially return a ENOENT, even
+though the case-insensitive lookup should exist:
 
-The buggy address belongs to the physical page:
-page:00000000acf7864d refcount:1 mapcount:0 mapping:0000000000000000 index:=
-0x0 pfn:0x111be9
-flags: 0x17ffe0000000200(slab|node=3D0|zone=3D2|lastcpupid=3D0x3fff)
-raw: 017ffe0000000200 ffff888100040600 ffffea000446fa90 ffffea0004470e10
-raw: 0000000000000000 ffff888111be9000 0000000100000004 0000000000000000
-page dumped because: kasan: bad access detected
+  mkdir  d      <- Case-sensitive directory
+  touch  d/$1
+  touch  d/$2
+  unlink d/$1   <- leaves negative dentry  behind.
+  unlink d/$2   <- leaves *another* negative dentry behind.
+  chattr +F d   <- make 'd' case-insensitive.
+  touch  d/$1   <- Both negative dentries could match. finds one of them,
+		   and instantiate
+  access d/$1   <- Find the other negative dentry, get -ENOENT.
 
-Memory state around the buggy address:
-=A0ffff888111be9a80: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
-=A0ffff888111be9b00: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
->ffff888111be9b80: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
-=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 ^
-=A0ffff888111be9c00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-=A0ffff888111be9c80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-F2FS-fs (loop0): sanity_check_inode: inode (ino=3D3) is with extra_attr, bu=
-t extra_attr feature is off
-F2FS-fs (loop0): Failed to read root inode
+In fact, this is a problem even on the current implementation, where
+negative dentries for CI are disabled.  There was a bug reported by Al
+Viro in 2020, where a directory might end up with dangling negative
+dentries created during a case-sensitive lookup, because they existed
+before the +F attribute was set.
+
+It is hard to trigger the issue, because condition (iii) is hard to test
+on an unmodified kernel.  By hacking the kernel to force the hash
+collision, there are a few ways we can trigger this bizarre behavior in
+case-insensitive directories through the insertion of negative dentries.
+
+Another problem exists when turning a negative dentry to positive.  If
+the negative dentry has a different case than what is currently being
+used for lookup, the dentry cannot be reused without changing its name,
+in order to guarantee filename-preserving semantics to userspace.  We
+need to either change the name or invalidate the dentry. This issue is
+currently avoided in mainline, since the negative dentry mechanism is
+disabled.
+
+* Proposal
+
+The main idea is to differentiate negative dentries created in a
+case-insensitive context from those created during a case-sensitive
+lookup via a new dentry flag, D_CASEFOLD_LOOKUP, set by the filesystem
+the d_lookup hook.  Since the former can be used (except for the
+name-preserving issue), d_revalidate will just check the flag to
+quickly accept or reject the dentry.
+
+A different solution would be to guarantee no negative dentry exists
+during the case-sensitive to case-insensitive directory conversion (the
+other direction is safe).  It has the following problems:
+
+  1) It is not trivial to implement a race-free mechanism to ensure
+  negative dentries won't be recreated immediately after invalidation
+  while converting the directory.
+
+  2) The knowledge whether the negative dentry is valid (i.e. comes from
+  a case-insensitive lookup) is implicit on the fact that we are
+  correctly invalidating dentries when converting the directory.
+
+Having a D_CASEFOLD_LOOKUP avoids both issues, and seems to be a cheap
+solution to the problem.
+
+But, as explained above, due to the filename preserving semantics, we
+cannot just validate based on D_CASEFOLD_LOOKUP.
+
+For that, one solution would be to invalidate the negative dentry when
+it is decided to turn it positive, instead of reusing it. I implemented
+that in the past (2018) but Al Viro made it clear we don't want to incur
+costs on the VFS critical path for filesystems who don't care about
+case-insensitiveness.
+
+Instead, this patch invalidates negative dentries in casefold
+directories in d_revalidate during creation lookups, iff the lookup name
+is not exactly what is cached.  Other kinds of lookups wouldn't need
+this limitation.
+
+* caveats
+
+1) Encryption
+
+Negative dentries on case-insensitive encrypted directories are also
+disabled.  No semantic change for them is intended in
+this patchset; we just bypass the revalidation directly to fscrypt, for
+positive dentries.  Encryption support is future work.
+
+2) revalidate the cached dentry using the name under lookup
+
+Validating based on the lookup name is strange for a cache.  the new
+semantic is implemented by d_revalidate, to stay out of the critical
+path of filesystems who don't care about case-insensitiveness, as much
+as possible.  The only change is the addition of a new flavor of
+d_revalidate.
+
+* Tests
+
+There are a tests in place for most of the corner cases in generic/556.
+They mainly verify the name-preserving semantics.  The invalidation when
+converting the directory is harder to test, because it is hard to force
+the invalidation of specific cached dentries that occlude a dangling
+invalid dentry.  I tested it with forcing the positive dentries to be
+removed, but I'm not sure how to write an upstreamable test.
+
+It also survives fstests quick group regression testing on both ext4 and
+f2fs.
+
+* Performance
+
+The latency of lookups of non-existing files is obviously improved, as
+would be expected.  The following numbers compare the execution time of 10^6
+lookups of a non-existing file in a case-insensitive directory
+pre-populated with 100k files in ext4.
+
+Without the patch: 10.363s / 0.349s / 9.920s  (real/user/sys)
+With the patch:     1.752s / 0.276s / 1.472s  (real/user/sys)
+
+* patchset
+
+Patch 1 introduces a new flavor of d_revalidate to provide the
+filesystem with the name under lookup; Patch 2 introduces the new flag
+to signal the dentry creation context; Patch 3 introduces a libfs helper
+to revalidate negative dentries on case-insensitive directories; Patch 4
+deals with encryption; Patch 5 cleans up the now redundant dentry
+operations for case-insensitive with and without encryption; Finally,
+Patch 6 and 7 enable support on case-insensitive directories
+for ext4 and f2fs, respectively.
+
+Gabriel Krisman Bertazi (7):
+  fs: Expose name under lookup to d_revalidate hook
+  fs: Add DCACHE_CASEFOLD_LOOKUP flag
+  libfs: Validate negative dentries in case-insensitive directories
+  libfs: Support revalidation of encrypted case-insensitive dentries
+  libfs: Merge encrypted_ci_dentry_ops and ci_dentry_ops
+  ext4: Enable negative dentries on case-insensitive lookup
+  f2fs: Enable negative dentries on case-insensitive lookup
+
+ fs/dcache.c            | 10 +++++-
+ fs/ext4/namei.c        | 34 ++------------------
+ fs/f2fs/namei.c        | 23 ++------------
+ fs/libfs.c             | 72 ++++++++++++++++++++++++------------------
+ fs/namei.c             | 23 ++++++++------
+ include/linux/dcache.h |  9 ++++++
+ 6 files changed, 78 insertions(+), 93 deletions(-)
+
+-- 
+2.35.3
+
 
 
 _______________________________________________
