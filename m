@@ -2,67 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BC7368D9B1
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Feb 2023 14:51:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5C6068E03B
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Feb 2023 19:40:08 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pPONt-0003EJ-Ai;
-	Tue, 07 Feb 2023 13:51:44 +0000
+	id 1pPSsu-0004KI-5i;
+	Tue, 07 Feb 2023 18:40:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pPONr-0003E6-0P
+ (envelope-from <jaegeuk@kernel.org>) id 1pPSss-0004K0-Ge
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 07 Feb 2023 13:51:42 +0000
+ Tue, 07 Feb 2023 18:40:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wiH33mLmuNZ3Rak7QFaH3fOT5RnoglRoWQYht9hATtw=; b=AcEa8t4huoqORvMm36om0x5VZa
- 4ZU0tuwGj2VADmcX+B/MwK7bLHyA+AvvCYOiTYGQoMAOh8jVqpoV3udWCFoiToWmC/I/ESrS/8Uje
- rYQB39u2R2KBEPMjZZ+HrmppmL+SjUt63VyLGrAnmjqea1VI9j/nkU8D8x7xm3mvnPU4=;
+ bh=Ac8lCrl6hPPaFjP65rAqzxwuN2vqxhZ/bEEZ4X1tVG8=; b=LbmglfiUYWjnA1Jme/nbi2oCJI
+ wmllUjeMZwFxQU9Y5calKOV4sPljhMyqbKlvrz9KRTBqqDQrG7Exyshpx7Xn6LinfEotgyL5az24B
+ ZvIiSAnAgGP97LbqHtVp0/W5DJOzWbXKO2ADFQyG4C7rAqYZHx1mAOkJJHX8BBduFEIc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=wiH33mLmuNZ3Rak7QFaH3fOT5RnoglRoWQYht9hATtw=; b=H
- 6M9NOi7y4RPssxJexrdaswD7DJlXm+m9btCvtQ4jjmNk9hwzGknUSfzdVlSycnSViCWeOQMQZ8v8S
- Y+GlvM6mnxUkGBNtFDfLhhoO+Hkfh5DCgJt/H8+7aQBZ0S3ITKSM8batQGOnDZOfkvUnGbhkwcEWm
- gxBZx2Kixpk2p668=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Ac8lCrl6hPPaFjP65rAqzxwuN2vqxhZ/bEEZ4X1tVG8=; b=K02T57ceWR1C7kWKaQ8/Z86GfQ
+ coVeqfypijUC7wG5uIc9+PusWtHTILRGYlwWhap/Ay5UG3Tn73AFMBOnXaCwJTffWSkCPohau9Vvz
+ 1gy7XAoosSkZ88U1HZXK9RRE/0BWJKH1v7NjpNgMOXyl/g271RsDd3atMpPb+w50iDxI=;
 Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pPONl-00DgQH-TA for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 07 Feb 2023 13:51:42 +0000
+ id 1pPSsq-00DrsS-Ja for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 07 Feb 2023 18:40:01 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 6460DB81989
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  7 Feb 2023 13:51:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE599C433D2;
- Tue,  7 Feb 2023 13:51:25 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 404B5B81AB0;
+ Tue,  7 Feb 2023 18:39:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3E58C433D2;
+ Tue,  7 Feb 2023 18:39:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1675777887;
- bh=EZKYBpYclv2eyaC70CMbiuy4/z/DP/rVT2+COP6B7k4=;
- h=From:To:Cc:Subject:Date:From;
- b=H9NN8tCu7JU0D8HHeLsn4x7AQrUS0UMDr+gbWOveIWZQu3Mcaw0QL8enNqhV7rfM4
- fTrxPUwPgECH1whC0b5FELUb43G1/cKOgDLc4Hsgd1JPNo7iTqYljE1iJgj5LlLV4U
- Ur6XPUNoF2OousCijZ7cyey/VQ2uSFgy852BXKCUuRzZR/nWV+8WQoi+ZePQgur9d7
- F1Rzm/f6VIV+T3tTuRvHb6hRCayfWrq3fi9NOjkPxE0vEZObmrT5al9uYnUBg5afuW
- nMeHH5PkVbQ8Gg8LhPHESmYGjIO8WsBCWAMQx77VsGEwtCRSZmbtp3fp/viI3yhM7o
- l9N//kjNLMvgw==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Tue,  7 Feb 2023 21:48:08 +0800
-Message-Id: <20230207134808.1827869-1-chao@kernel.org>
-X-Mailer: git-send-email 2.25.1
+ s=k20201202; t=1675795187;
+ bh=kuFm3PbCYEBSCb27li2FWOvTczSe7QfhNjRsq9s9KRE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=B8B1Zv37Xdg0TxhLX3aJcZ3+LFa6VoSQcwAcmjQvXOtLcgCX8wQVwlsCsnUEwJ2ok
+ gyBeoVvVRv26t3LT3P6c9OUaSAwEu29y0aphppjxZW/0Wodtvx/vIQm0EFr+W2N3PM
+ fb7tGE70guZfFo2D1NDdqNeOu2GrXNx+MmPyvHFIEN0w1MoZysvAWpdKmO6GYnhRML
+ 76AtlqyTa+ZZT0TM7hcdQuzxj/AMrmH+RaLu9PFIJ4pU2QeNBx+Lq3xTufyLXA987J
+ yAtE2kdjyKLdkdAFk7Hvii9GCLp+0DFXd0MMnvFM+Ph5GdZaN/PHgMZm2oBOb2v/MN
+ Huu/lNP+tIy7w==
+Date: Tue, 7 Feb 2023 10:39:45 -0800
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <Y+Ka8cbf0j+/NzJv@google.com>
+References: <3589331b-a3ec-87e1-790d-387439672ea5@kernel.org>
+ <20230204094345.591407-1-qixiaoyu1@xiaomi.com>
+ <ecce441d-845f-caf1-d7a8-e3c30a21ae60@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <ecce441d-845f-caf1-d7a8-e3c30a21ae60@kernel.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -70,12 +73,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In do_read_inode(), sanity check for extent cache should be
- called after f2fs_init_read_extent_tree(), fix it. Fixes: 72840cccc0a1 ("f2fs:
- allocate the extent_cache by default") Signed-off-by: Chao Yu
- <chao@kernel.org>
- --- v2: - just relocate sanity check on extent cache. fs/f2fs/extent_cache.c
- | 25 ++++++++++ [...] 
+ Content preview:  On 02/07, Chao Yu wrote: > On 2023/2/4 17:43,
+ qixiaoyu1 wrote:
+ > > Signed-off-by: qixiaoyu1 <qixiaoyu1@xiaomi.com> > > Signed-off-by:
+ xiongping1
+ <xiongping1@xiaomi.com> > > --- > > change log v3 -> v4 [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pPONl-00DgQH-TA
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix to do sanity check on extent cache
- correctly
+X-Headers-End: 1pPSsq-00DrsS-Ja
+Subject: Re: [f2fs-dev] [PATCH 2/2 v4] f2fs: add sysfs nodes to set
+ last_age_weight
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,115 +106,137 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net, Xiaoyu Qi <qixiaoyu1@xiaomi.com>,
+ linux-kernel@vger.kernel.org, Ping Xiong <xiongping1@xiaomi.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In do_read_inode(), sanity check for extent cache should be called after
-f2fs_init_read_extent_tree(), fix it.
+On 02/07, Chao Yu wrote:
+> On 2023/2/4 17:43, qixiaoyu1 wrote:
+> > Signed-off-by: qixiaoyu1 <qixiaoyu1@xiaomi.com>
+> > Signed-off-by: xiongping1 <xiongping1@xiaomi.com>
+> > ---
+> > change log v3 -> v4:
+> >    - allow 0 and 100 to a valid value
+> > 
+> >   Documentation/ABI/testing/sysfs-fs-f2fs |  5 +++++
+> >   fs/f2fs/extent_cache.c                  | 15 +++++++++------
+> >   fs/f2fs/f2fs.h                          |  1 +
+> >   fs/f2fs/sysfs.c                         | 11 +++++++++++
+> >   4 files changed, 26 insertions(+), 6 deletions(-)
+> > 
+> > diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
+> > index 9e3756625a81..11af7dbb6bc9 100644
+> > --- a/Documentation/ABI/testing/sysfs-fs-f2fs
+> > +++ b/Documentation/ABI/testing/sysfs-fs-f2fs
+> > @@ -669,3 +669,8 @@ Contact:	"Ping Xiong" <xiongping1@xiaomi.com>
+> >   Description:	When DATA SEPARATION is on, it controls the age threshold to indicate
+> >   		the data blocks as warm. By default it was initialized as 2621440 blocks
+> >   		(equals to 10GB).
+> > +
+> > +What:           /sys/fs/f2fs/<disk>/last_age_weight
+> > +Date:           January 2023
+> > +Contact:        "Ping Xiong" <xiongping1@xiaomi.com>
+> > +Description:    When DATA SEPARATION is on, it controls the weight of last data block age.
+> > diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
+> > index d9f12f404beb..ce99882ba81c 100644
+> > --- a/fs/f2fs/extent_cache.c
+> > +++ b/fs/f2fs/extent_cache.c
+> > @@ -871,19 +871,21 @@ void f2fs_update_read_extent_tree_range_compressed(struct inode *inode,
+> >   }
+> >   #endif
+> > -static unsigned long long __calculate_block_age(unsigned long long new,
+> > +static unsigned long long __calculate_block_age(struct f2fs_sb_info *sbi,
+> > +						unsigned long long new,
+> >   						unsigned long long old)
+> >   {
+> >   	unsigned int rem_old, rem_new;
+> >   	unsigned long long res;
+> > +	unsigned int weight = sbi->last_age_weight;
+> > -	res = div_u64_rem(new, 100, &rem_new) * (100 - LAST_AGE_WEIGHT)
+> > -		+ div_u64_rem(old, 100, &rem_old) * LAST_AGE_WEIGHT;
+> > +	res = div_u64_rem(new, 100, &rem_new) * (100 - weight)
+> > +		+ div_u64_rem(old, 100, &rem_old) * weight;
+> >   	if (rem_new)
+> > -		res += rem_new * (100 - LAST_AGE_WEIGHT) / 100;
+> > +		res += rem_new * (100 - weight) / 100;
+> >   	if (rem_old)
+> > -		res += rem_old * LAST_AGE_WEIGHT / 100;
+> > +		res += rem_old * weight / 100;
+> >   	return res;
+> >   }
+> > @@ -917,7 +919,7 @@ static int __get_new_block_age(struct inode *inode, struct extent_info *ei,
+> >   			cur_age = ULLONG_MAX - tei.last_blocks + cur_blocks;
+> >   		if (tei.age)
+> > -			ei->age = __calculate_block_age(cur_age, tei.age);
+> > +			ei->age = __calculate_block_age(sbi, cur_age, tei.age);
+> >   		else
+> >   			ei->age = cur_age;
+> >   		ei->last_blocks = cur_blocks;
+> > @@ -1233,6 +1235,7 @@ void f2fs_init_extent_cache_info(struct f2fs_sb_info *sbi)
+> >   	atomic64_set(&sbi->allocated_data_blocks, 0);
+> >   	sbi->hot_data_age_threshold = DEF_HOT_DATA_AGE_THRESHOLD;
+> >   	sbi->warm_data_age_threshold = DEF_WARM_DATA_AGE_THRESHOLD;
+> > +	sbi->last_age_weight = LAST_AGE_WEIGHT;
+> >   }
+> >   int __init f2fs_create_extent_cache(void)
+> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > index e8953c3dc81a..c3609cbc28c7 100644
+> > --- a/fs/f2fs/f2fs.h
+> > +++ b/fs/f2fs/f2fs.h
+> > @@ -1679,6 +1679,7 @@ struct f2fs_sb_info {
+> >   	/* The threshold used for hot and warm data seperation*/
+> >   	unsigned int hot_data_age_threshold;
+> >   	unsigned int warm_data_age_threshold;
+> > +	unsigned int last_age_weight;
+> >   	/* basic filesystem units */
+> >   	unsigned int log_sectors_per_block;	/* log2 sectors per block */
+> > diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> > index 83a366f3ee80..cd2fb52d1f3c 100644
+> > --- a/fs/f2fs/sysfs.c
+> > +++ b/fs/f2fs/sysfs.c
+> > @@ -686,6 +686,15 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+> >   		return count;
+> >   	}
+> > +	if (!strcmp(a->attr.name, "last_age_weight")) {
+> > +		if (t < 0 || t > 100)
+> 
+> t is unsigned long variable, should never be less than 0.
+> 
+> Otherwise, it looks good to me, maybe Jaegeuk could fix it manually.
 
-Fixes: 72840cccc0a1 ("f2fs: allocate the extent_cache by default")
-Signed-off-by: Chao Yu <chao@kernel.org>
----
-v2:
-- just relocate sanity check on extent cache.
- fs/f2fs/extent_cache.c | 25 +++++++++++++++++++++++++
- fs/f2fs/f2fs.h         |  1 +
- fs/f2fs/inode.c        | 22 ++++++----------------
- 3 files changed, 32 insertions(+), 16 deletions(-)
+Ok, applied.
 
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 1daf8c88c09b..d93fcb082c31 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -19,6 +19,31 @@
- #include "node.h"
- #include <trace/events/f2fs.h>
- 
-+bool sanity_check_extent_cache(struct inode *inode)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	struct f2fs_inode_info *fi = F2FS_I(inode);
-+	struct extent_info *ei;
-+
-+	if (!fi->extent_tree[EX_READ])
-+		return true;
-+
-+	ei = &fi->extent_tree[EX_READ]->largest;
-+
-+	if (ei->len &&
-+		(!f2fs_is_valid_blkaddr(sbi, ei->blk,
-+					DATA_GENERIC_ENHANCE) ||
-+		!f2fs_is_valid_blkaddr(sbi, ei->blk + ei->len - 1,
-+					DATA_GENERIC_ENHANCE))) {
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
-+		f2fs_warn(sbi, "%s: inode (ino=%lx) extent info [%u, %u, %u] is incorrect, run fsck to fix",
-+			  __func__, inode->i_ino,
-+			  ei->blk, ei->fofs, ei->len);
-+		return false;
-+	}
-+	return true;
-+}
-+
- static void __set_extent_info(struct extent_info *ei,
- 				unsigned int fofs, unsigned int len,
- 				block_t blk, bool keep_clen,
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index f3c5f7740c1a..8148aeabab03 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4136,6 +4136,7 @@ void f2fs_leave_shrinker(struct f2fs_sb_info *sbi);
- /*
-  * extent_cache.c
-  */
-+bool sanity_check_extent_cache(struct inode *inode);
- struct rb_entry *f2fs_lookup_rb_tree(struct rb_root_cached *root,
- 				struct rb_entry *cached_re, unsigned int ofs);
- struct rb_node **f2fs_lookup_rb_tree_ext(struct f2fs_sb_info *sbi,
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 01b9e6f85f6b..164779c561f9 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -262,22 +262,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 		return false;
- 	}
- 
--	if (fi->extent_tree[EX_READ]) {
--		struct extent_info *ei = &fi->extent_tree[EX_READ]->largest;
--
--		if (ei->len &&
--			(!f2fs_is_valid_blkaddr(sbi, ei->blk,
--						DATA_GENERIC_ENHANCE) ||
--			!f2fs_is_valid_blkaddr(sbi, ei->blk + ei->len - 1,
--						DATA_GENERIC_ENHANCE))) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
--			f2fs_warn(sbi, "%s: inode (ino=%lx) extent info [%u, %u, %u] is incorrect, run fsck to fix",
--				  __func__, inode->i_ino,
--				  ei->blk, ei->fofs, ei->len);
--			return false;
--		}
--	}
--
- 	if (f2fs_sanity_check_inline_data(inode)) {
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: inode (ino=%lx, mode=%u) should not have inline_data, run fsck to fix",
-@@ -482,6 +466,12 @@ static int do_read_inode(struct inode *inode)
- 	f2fs_init_read_extent_tree(inode, node_page);
- 	f2fs_init_age_extent_tree(inode);
- 
-+	if (!sanity_check_extent_cache(inode)) {
-+		f2fs_put_page(node_page, 1);
-+		f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
-+		return -EFSCORRUPTED;
-+	}
-+
- 	f2fs_put_page(node_page, 1);
- 
- 	stat_inc_inline_xattr(inode);
--- 
-2.25.1
-
+> 
+> Reviewed-by: Chao Yu <chao@kernel.org>
+> 
+> Thanks,
+> 
+> > +			return -EINVAL;
+> > +		if (t == *ui)
+> > +			return count;
+> > +		*ui = (unsigned int)t;
+> > +		return count;
+> > +	}
+> > +
+> >   	*ui = (unsigned int)t;
+> >   	return count;
+> > @@ -944,6 +953,7 @@ F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, revoked_atomic_block, revoked_atomic_block)
+> >   /* For block age extent cache */
+> >   F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, hot_data_age_threshold, hot_data_age_threshold);
+> >   F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, warm_data_age_threshold, warm_data_age_threshold);
+> > +F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, last_age_weight, last_age_weight);
+> >   #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
+> >   static struct attribute *f2fs_attrs[] = {
+> > @@ -1042,6 +1052,7 @@ static struct attribute *f2fs_attrs[] = {
+> >   	ATTR_LIST(revoked_atomic_block),
+> >   	ATTR_LIST(hot_data_age_threshold),
+> >   	ATTR_LIST(warm_data_age_threshold),
+> > +	ATTR_LIST(last_age_weight),
+> >   	NULL,
+> >   };
+> >   ATTRIBUTE_GROUPS(f2fs);
 
 
 _______________________________________________
