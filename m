@@ -2,99 +2,122 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F10DD68E836
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Feb 2023 07:21:56 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91F6A68F3A1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Feb 2023 17:44:13 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pPdq9-0006La-6C;
-	Wed, 08 Feb 2023 06:21:55 +0000
+	id 1pPnY9-0002Ja-BV;
+	Wed, 08 Feb 2023 16:44:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1pPdpz-0006L0-QE
+ (envelope-from <torvalds@linuxfoundation.org>) id 1pPnY6-0002JK-0i
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 08 Feb 2023 06:21:46 +0000
+ Wed, 08 Feb 2023 16:43:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZM2gebMby0FP9+HsVZ0LPm3InqNmJr/0inCyE6wV4Pk=; b=UdGNsZ+jxiMe1nwE5fGlzsr4l0
- X1H71FRKZ9/v9IdRRtvs13u20wC51ELv7yN+eukoW8Z9vzVZnGGRpArCkys3VehTrte0DNhS4rjmm
- wz1MCvsgRZcPvZwmzkVzooBb+utFn6hm+M4oJAP7ZHjraqd8+QtljBmUopRhZNuTT3lo=;
+ bh=5ldS/9lgbAryUlzaEqo027FaU3ababbmuo6baFKv9sM=; b=GwhV5viHYMV4ZpcCZ6UToRlQrp
+ EEa7rQaanq8g4kx7FAa2FWeSnV4iJsNij9ZZyyZZPYwSORmgJhP13HAcZEoCjqpJoSd/uhRT6lKT3
+ hSmTOfHyKrW5smkKu5uXFD8rKN4otuHdOV58jcZzrmzsAElmdVOzz/f2mHo9J+1v0+K0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZM2gebMby0FP9+HsVZ0LPm3InqNmJr/0inCyE6wV4Pk=; b=avoeMxB0m9VwcjKycIzjpfwBVe
- 1GE6Z5kPMdzRnb+5s/vW/QDiJuOHDP1zlFDw4dWfiLsrWei8TnRG/QkhBZX0FbtcLHjU9hpERsymV
- SVkbuNmpJc5bFASVZvyZUdXyGvW5JgahRjcl7Y6vNEnKnloFSK0qud/V3j73gNGAJii8=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pPdpv-0008R5-Eu for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 08 Feb 2023 06:21:46 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id B13AAB81C20;
- Wed,  8 Feb 2023 06:21:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F8D2C4339C;
- Wed,  8 Feb 2023 06:21:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1675837296;
- bh=9FKAgPpudsEY1b71O+8Pdv2NPJKqQ94hKa6qzZM+f/E=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=X2gSotr/T2tuDmj7eKZmGldsLfnOOCW8QnUhI2J1RVyfsgRQkq6H/4aUYesDQqe5u
- p9xk2PzVPdD3+GWILcUbgcq3lYj62oT2jWOjX9pvjpMINlDn9DM8Ba7BMJtgrazy7L
- MQnl1SYZ/1vlQofGYyiIllHv+nQqLWAQJKdkHMJRW0XXpjuq+/53oHp4oNTNvW0uXB
- DGMASFJ6wcbYlRfKN9HQJ83ru/vWVpJ761mzUoHLe2g8zHMOvokUupC6LVJnjhERJI
- HXgyqcAzu02y7ZMxIXGiHqkJumxfzUmZ6lJ7AZurqZgLD7eZw3M/uzoUunaFzn/wNP
- zEVtwiPO+49gw==
-From: Eric Biggers <ebiggers@kernel.org>
-To: linux-fscrypt@vger.kernel.org
-Date: Tue,  7 Feb 2023 22:21:07 -0800
-Message-Id: <20230208062107.199831-6-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230208062107.199831-1-ebiggers@kernel.org>
-References: <20230208062107.199831-1-ebiggers@kernel.org>
+ bh=5ldS/9lgbAryUlzaEqo027FaU3ababbmuo6baFKv9sM=; b=S3uPTDBkry7VSVDCRlcSq99b+B
+ RBOqcEEaVxP/wVs2vHwjlwDJdr0zmwokQEg30E03POuPW61PNcJPBH+8Jdvo/40D5QN16MQQq11Ga
+ UX6v52SJ2ozwT5o1Wj9CAsizmLSUQYLYSIB4LYy5ZRAf4JfyH3T+/A10gZ1Dnq7OmTcU=;
+Received: from mail-ej1-f42.google.com ([209.85.218.42])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1pPnY3-00FF5C-Df for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 08 Feb 2023 16:43:57 +0000
+Received: by mail-ej1-f42.google.com with SMTP id rp23so1521237ejb.7
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 08 Feb 2023 08:43:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux-foundation.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5ldS/9lgbAryUlzaEqo027FaU3ababbmuo6baFKv9sM=;
+ b=GMKcvLbWgYYOV8D3gsJ1NLFPsx/+rb4QbvXLP5DPdEX/7OtnyJYn0eSEvrkIK19zWo
+ BjCy3lR5nl3V/D+qx2u/4QrQu2ABYM65YPAlg3ZH+V2JzoEt7pgPNZH7lJ1yMN2zh5qx
+ oiCs2/g3lnxsmmeEgvnZSDKkH0EEM32NJxdQU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5ldS/9lgbAryUlzaEqo027FaU3ababbmuo6baFKv9sM=;
+ b=qyc64vOuQhGzxn1SwIEsESN0OXYgIpqtcqaZ1ravd5RXQrNB/iX4hrG9dkqsq0ZWma
+ RatJRGP6/fju+aWVTskrST2PNSwulv49tV073e7v/HR1lJnSQmN8m2QKI1sImXcjzHve
+ njeaOKbxXhk3r4L3IQQBaWWmLo5SLj2oWx/erDFyph0QgG1ieSlz2C5NN1+AQ9lklGRP
+ ONEQ/RIaK4SQZRiu6hTivZSjEBxIO/eZoPVjPdssuwAmRf3tmhQNARgRfK6JvaNsnnoh
+ gS5+CTpdyC/Z7R590hmpTf8+B2H9+m0s7pqe8eESe1U+B52YC0UkoY0SxJuhSIUCCjlS
+ ulZg==
+X-Gm-Message-State: AO0yUKVS1JtR180mHpHrgz/PosDX4fkM81ExX3ZCOG08HByWJAQUYTP+
+ Z3P0Mn8v12mt4oVBSyqXPMlDajh/C9SXiYL+k6HCfA==
+X-Google-Smtp-Source: AK7set+9VN8dHDQcY/ebD3R40/IVVyudg1mlf2JbNOk3YnYiM20iN3oBc64VL6BJeEBdHty3TDt3hQ==
+X-Received: by 2002:a5d:4d0e:0:b0:2c4:553:e9a9 with SMTP id
+ z14-20020a5d4d0e000000b002c40553e9a9mr2072650wrt.43.1675870723580; 
+ Wed, 08 Feb 2023 07:38:43 -0800 (PST)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com.
+ [209.85.208.46]) by smtp.gmail.com with ESMTPSA id
+ t8-20020a7bc3c8000000b003e00c9888besm2274832wmj.30.2023.02.08.07.38.42
+ for <linux-f2fs-devel@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Feb 2023 07:38:42 -0800 (PST)
+Received: by mail-ed1-f46.google.com with SMTP id v13so20950943eda.11
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 08 Feb 2023 07:38:42 -0800 (PST)
+X-Received: by 2002:a50:d0db:0:b0:4a2:6562:f664 with SMTP id
+ g27-20020a50d0db000000b004a26562f664mr1769251edf.5.1675870722462; Wed, 08 Feb
+ 2023 07:38:42 -0800 (PST)
 MIME-Version: 1.0
-X-Spam-Score: -3.4 (---)
+References: <20230208062107.199831-1-ebiggers@kernel.org>
+In-Reply-To: <20230208062107.199831-1-ebiggers@kernel.org>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Wed, 8 Feb 2023 07:38:25 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wg=5AqsG_1Td_bOMpFE8odKhsT9Mb3s4Wp+qq_X1Z6gqQ@mail.gmail.com>
+Message-ID: <CAHk-=wg=5AqsG_1Td_bOMpFE8odKhsT9Mb3s4Wp+qq_X1Z6gqQ@mail.gmail.com>
+To: Eric Biggers <ebiggers@kernel.org>
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> Now that
- fscrypt_add_test_dummy_key()
- is only called by setup_file_encryption_key() and not by the individual
- filesystems, 
- un-export it. Also change its prototype to take the fscrypt_key_specifier
- dir [...] 
- Content analysis details:   (-3.4 points, 6.0 required)
+ Content preview:  On Tue, Feb 7,
+ 2023 at 10:21 PM Eric Biggers <ebiggers@kernel.org>
+ wrote: > > I was going back and forth between this solution and instead having
+ ext4 > and f2fs call fscrypt_destroy_keyring() on ->fi [...] 
+ Content analysis details:   (0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.218.42 listed in list.dnswl.org]
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.42 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pPdpv-0008R5-Eu
-Subject: [f2fs-dev] [PATCH 5/5] fscrypt: clean up
- fscrypt_add_test_dummy_key()
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1pPnY3-00FF5C-Df
+Subject: Re: [f2fs-dev] [PATCH 0/5] Add the test_dummy_encryption key
+ on-demand
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,144 +129,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Linus Torvalds <torvalds@linux-foundation.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fsdevel@vger.kernel.org, linux-fscrypt@vger.kernel.org,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Eric Biggers <ebiggers@google.com>
+On Tue, Feb 7, 2023 at 10:21 PM Eric Biggers <ebiggers@kernel.org> wrote:
+>
+> I was going back and forth between this solution and instead having ext4
+> and f2fs call fscrypt_destroy_keyring() on ->fill_super failure.  (Or
+> using Linus's suggestion of adding the test dummy key as the very last
+> step of ->fill_super.)  It does seem ideal to add the key at mount time,
+> but I ended up going with this solution instead because it reduces the
+> number of things the individual filesystems have to handle.
 
-Now that fscrypt_add_test_dummy_key() is only called by
-setup_file_encryption_key() and not by the individual filesystems,
-un-export it.  Also change its prototype to take the
-fscrypt_key_specifier directly, as the caller already has it.
+Well, the diffstat certainly looks nice:
 
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- fs/crypto/fscrypt_private.h |  3 +++
- fs/crypto/keyring.c         | 26 +++++++-------------------
- fs/crypto/keysetup.c        |  4 +---
- include/linux/fscrypt.h     |  9 ---------
- 4 files changed, 11 insertions(+), 31 deletions(-)
+>  8 files changed, 34 insertions(+), 51 deletions(-)
 
-diff --git a/fs/crypto/fscrypt_private.h b/fs/crypto/fscrypt_private.h
-index 17dd33d9a522e..0fec2dfc36ebe 100644
---- a/fs/crypto/fscrypt_private.h
-+++ b/fs/crypto/fscrypt_private.h
-@@ -573,6 +573,9 @@ fscrypt_find_master_key(struct super_block *sb,
- int fscrypt_get_test_dummy_key_identifier(
- 			  u8 key_identifier[FSCRYPT_KEY_IDENTIFIER_SIZE]);
- 
-+int fscrypt_add_test_dummy_key(struct super_block *sb,
-+			       struct fscrypt_key_specifier *key_spec);
-+
- int fscrypt_verify_key_added(struct super_block *sb,
- 			     const u8 identifier[FSCRYPT_KEY_IDENTIFIER_SIZE]);
- 
-diff --git a/fs/crypto/keyring.c b/fs/crypto/keyring.c
-index 78dd2ff306bd7..78086f8dbda52 100644
---- a/fs/crypto/keyring.c
-+++ b/fs/crypto/keyring.c
-@@ -211,10 +211,6 @@ static int allocate_filesystem_keyring(struct super_block *sb)
-  * are still available at this time; this is important because after user file
-  * accesses have been allowed, this function may need to evict keys from the
-  * keyslots of an inline crypto engine, which requires the block device(s).
-- *
-- * This is also called when the super_block is being freed.  This is needed to
-- * avoid a memory leak if mounting fails after the "test_dummy_encryption"
-- * option was processed, as in that case the unmount-time call isn't made.
-  */
- void fscrypt_destroy_keyring(struct super_block *sb)
- {
-@@ -778,34 +774,26 @@ int fscrypt_get_test_dummy_key_identifier(
- /**
-  * fscrypt_add_test_dummy_key() - add the test dummy encryption key
-  * @sb: the filesystem instance to add the key to
-- * @dummy_policy: the encryption policy for test_dummy_encryption
-+ * @key_spec: the key specifier of the test dummy encryption key
-  *
-- * If needed, add the key for the test_dummy_encryption mount option to the
-- * filesystem.  To prevent misuse of this mount option, a per-boot random key is
-- * used instead of a hardcoded one.  This makes it so that any encrypted files
-- * created using this option won't be accessible after a reboot.
-+ * Add the key for the test_dummy_encryption mount option to the filesystem.  To
-+ * prevent misuse of this mount option, a per-boot random key is used instead of
-+ * a hardcoded one.  This makes it so that any encrypted files created using
-+ * this option won't be accessible after a reboot.
-  *
-  * Return: 0 on success, -errno on failure
-  */
- int fscrypt_add_test_dummy_key(struct super_block *sb,
--			       const struct fscrypt_dummy_policy *dummy_policy)
-+			       struct fscrypt_key_specifier *key_spec)
- {
--	const union fscrypt_policy *policy = dummy_policy->policy;
--	struct fscrypt_key_specifier key_spec;
- 	struct fscrypt_master_key_secret secret;
- 	int err;
- 
--	if (!policy)
--		return 0;
--	err = fscrypt_policy_to_key_spec(policy, &key_spec);
--	if (err)
--		return err;
- 	fscrypt_get_test_dummy_secret(&secret);
--	err = add_master_key(sb, &secret, &key_spec);
-+	err = add_master_key(sb, &secret, key_spec);
- 	wipe_master_key_secret(&secret);
- 	return err;
- }
--EXPORT_SYMBOL_GPL(fscrypt_add_test_dummy_key);
- 
- /*
-  * Verify that the current user has added a master key with the given identifier
-diff --git a/fs/crypto/keysetup.c b/fs/crypto/keysetup.c
-index 20323c0ba4c5e..aa94fba9d17e7 100644
---- a/fs/crypto/keysetup.c
-+++ b/fs/crypto/keysetup.c
-@@ -464,9 +464,7 @@ static int setup_file_encryption_key(struct fscrypt_info *ci,
- 		 */
- 		if (dummy_policy &&
- 		    fscrypt_policies_equal(dummy_policy, &ci->ci_policy)) {
--			struct fscrypt_dummy_policy tmp = { dummy_policy };
--
--			err = fscrypt_add_test_dummy_key(sb, &tmp);
-+			err = fscrypt_add_test_dummy_key(sb, &mk_spec);
- 			if (err)
- 				return err;
- 			mk = fscrypt_find_master_key(sb, &mk_spec);
-diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 4f5f8a6512132..44848d870046a 100644
---- a/include/linux/fscrypt.h
-+++ b/include/linux/fscrypt.h
-@@ -309,8 +309,6 @@ fscrypt_free_dummy_policy(struct fscrypt_dummy_policy *dummy_policy)
- /* keyring.c */
- void fscrypt_destroy_keyring(struct super_block *sb);
- int fscrypt_ioctl_add_key(struct file *filp, void __user *arg);
--int fscrypt_add_test_dummy_key(struct super_block *sb,
--			       const struct fscrypt_dummy_policy *dummy_policy);
- int fscrypt_ioctl_remove_key(struct file *filp, void __user *arg);
- int fscrypt_ioctl_remove_key_all_users(struct file *filp, void __user *arg);
- int fscrypt_ioctl_get_key_status(struct file *filp, void __user *arg);
-@@ -530,13 +528,6 @@ static inline int fscrypt_ioctl_add_key(struct file *filp, void __user *arg)
- 	return -EOPNOTSUPP;
- }
- 
--static inline int
--fscrypt_add_test_dummy_key(struct super_block *sb,
--			   const struct fscrypt_dummy_policy *dummy_policy)
--{
--	return 0;
--}
--
- static inline int fscrypt_ioctl_remove_key(struct file *filp, void __user *arg)
- {
- 	return -EOPNOTSUPP;
--- 
-2.39.1
+with that
 
+>  fs/super.c                  |  1 -
+
+removing the offending line that made Dan's static detection tool so
+unhappy, so this all looks lovely to me.
+
+Thanks,
+             Linus
 
 
 _______________________________________________
