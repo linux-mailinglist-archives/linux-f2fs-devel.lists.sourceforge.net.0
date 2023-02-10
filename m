@@ -2,68 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B820C692946
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Feb 2023 22:30:34 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4EA669294B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Feb 2023 22:33:07 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pQayU-0005ls-0r;
-	Fri, 10 Feb 2023 21:30:29 +0000
+	id 1pQb0v-0007t5-L8;
+	Fri, 10 Feb 2023 21:33:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pQayS-0005lm-T1
+ (envelope-from <jaegeuk@kernel.org>) id 1pQb0u-0007sz-UJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Feb 2023 21:30:28 +0000
+ Fri, 10 Feb 2023 21:33:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vN55a8g+6QA63PY0FK39xnboB7aqA9KqKN6mkH+przg=; b=mRktda0s/wJZQe82Km2Es9q/n0
- csO25scpo3uCkSutOO2HVR/IfFeVPkXhqxrr0WGaad/Hx29KcNa+kMDMXlVvDDl/vu1XxYi59q1ez
- 9aoWzS/O7YT2HYoxBuIfQYv8nmMxHUNZHgDK0ccMjW9Ir++fMtrr1B5xHRCXnjqMrPys=;
+ bh=EL6W5emnmivlXeG1YEhXRBAOcS1npi8mWtqG8Erd8mE=; b=MYU4P82h8/EZ198QuFwtXbd6ld
+ upRal9FQJObnFzNQp2pdvJcs52mGVd9OVYsXrVcYIUNqpTO1GHLtWzey55DMdXJZoxjPQg8sUbLP9
+ SGUvI9jTi4AF0klfUZRdAj+/lhmvQqagkAmIi2mucsVhYAUi1sI4VTJhxILdAvHGcaz4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=vN55a8g+6QA63PY0FK39xnboB7aqA9KqKN6mkH+przg=; b=k9+QHoPX0VjJNFbJrlJefLzXk9
- +iWQcft+fCkqYgX6gRe2u+OuNiwTJ42bvWM9drMrSBh4wN8na7S53BL6ATjC/pVA9OL9fXf+hTCqC
- PPtDQueHvGQ1RRyrkEoJj9SaAIImDRNI2G7LW2WIzE335OnT5Cqsm91XNKbSa/AHiWQw=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=EL6W5emnmivlXeG1YEhXRBAOcS1npi8mWtqG8Erd8mE=; b=W
+ PQzJXbIolVmYRTGfjs62WyUXBPgtcw0jjwwoyjQCK3t0hwadJeoOA8o0kZ6gNsOwdL90qEubG08PF
+ UHUVKdl7IDWSteY1E8RJuUD9MrZo6YMR2yB64DxVIe1/gKpj05xRiNYo0b24TFVvbcoWxROSLPYjJ
+ g3hDBGrZQ+Y6fvPU=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pQayR-00Ha6m-9X for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Feb 2023 21:30:28 +0000
+ id 1pQb0t-0005EJ-L3 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 Feb 2023 21:33:00 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C5F5C61E87;
- Fri, 10 Feb 2023 21:30:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 081AFC4339B;
- Fri, 10 Feb 2023 21:30:21 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 086FD61EAC
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 10 Feb 2023 21:32:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54472C433D2;
+ Fri, 10 Feb 2023 21:32:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1676064621;
- bh=RM5rm9wA7Rfifn+Mrc6jfNB4qyZD8rHzGfvx3pLS7yo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ZcN8NnV99nOnLoFDljaTLX3uPvXOpaUnHJxXruHhtZyNXnQfEJwoo+g0dO/m3dsa3
- x55Vb1j0H6QCXqsg3339Z9M2Dvo2Apfb7QFABa/mviCAl/LOiiI+6DmhMQIR3ncxP2
- kf9HgrCU44DB98ycvoJcqpBLz2wsXC6nT9R4SOlVtosJ0OkD25/erNHfCVQjc7+2cF
- NVEtCBoRHllZtO6vGw3mLj3EIEnVDLYLj/UGv6jMKVHgSvoxj1HbgTADOAXyahWa3E
- xY2L0pC5pk8FUakkhOmIsM4QOx+l9vGasdo4hf5ZaVfum4PfGq7EduqyU0/c06wRZB
- 8q8Sct5rGReTw==
-Date: Fri, 10 Feb 2023 13:30:19 -0800
+ s=k20201202; t=1676064774;
+ bh=J3Gyaseg7yhQVMzzAFVCsvKsCGLb9pPjdnQxlIuqQSM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=UlHZ7Wr9nKKcfNOZ+RrvVsHagvQ1NcpyDMwY0EEiuLVJIv/32rh11KQzSYSt6eNBm
+ 0WoXa3ggxLx7SE11k1rpBpLPbjN+cjSA/qHiDN44gOtzMQCpQ12FsU2ynCUxsDrX32
+ EzGfEGwGjsnkGsc7sIDzTLJ/Eek7fkEsLH24TdmAEZPbKe87+wWEu5j+JfQwUqxgbR
+ Z9024rKOqhd7Pbqvd48GC2SHHXefCfURVsiyVTKIi32EsT5+VKhtcAIJSGohaDU2pL
+ LBFEYUvjpEZ4JWYKCNTdACxDwasYtaeI6/G7j1B0DU7NUGl2y7wgTMpPFbyJ87mydl
+ IcWBcCuWaD4PQ==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Yangtao Li <frank.li@vivo.com>
-Message-ID: <Y+a3a0eSkhVUh/RG@google.com>
-References: <20230210102019.61193-1-frank.li@vivo.com>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 10 Feb 2023 13:32:50 -0800
+Message-Id: <20230210213250.3471246-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.39.1.581.gbfd45094c4-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230210102019.61193-1-frank.li@vivo.com>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -71,10 +71,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 02/10,
- Yangtao Li wrote: > When the released file is reserving
- and the space is insufficient, > the fsck flag is set incorrectly, and lead
- to the file cannot be > reserved and released normally. > [...] 
+ Content preview:  MAIN_SEGS is for data area, while TOTAL_SEGS includes data
+ and metadata. Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> ---
+ fs/f2fs/segment.h
+ | 4 ++-- 1 file changed, 2 insertions(+), 2 deletions(-) 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,9 +89,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pQayR-00Ha6m-9X
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to release compress file for
- F2FS_IOC_RESERVE_COMPRESS_BLOCKS when has no space
+X-Headers-End: 1pQb0t-0005EJ-L3
+Subject: [f2fs-dev] [PATCH] f2fs: fix wrong segment count
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,203 +102,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: hanqi@vivo.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 02/10, Yangtao Li wrote:
-> When the released file is reserving and the space is insufficient,
-> the fsck flag is set incorrectly, and lead to the file cannot be
-> reserved and released normally.
-> 
-> $ mount -t f2fs -o compress_extension=*,compress_mode=user /mnt/9p/f2fs.img
-> 	/mnt/f2fs/
-> $ dd if=/dev/zero of=/mnt/f2fs/800M bs=1M count=800
-> $ dd if=/dev/zero of=/mnt/f2fs/60M bs=1M count=60
-> $ f2fs_io compress /mnt/f2fs/60M
-> $ ./mnt/9p/my_f2fs_io release_cblocks /mnt/f2fs/60M
-> 11520
-> $ dd if=/dev/zero of=/mnt/f2fs/30M bs=1M count=30
-> $ f2fs_io reserve_cblocks /mnt/f2fs/60M
-> [   56.399712] F2FS-fs (loop0): f2fs_reserve_compress_blocks: partial blocks
-> 	were released i_ino=cf iblocks=76104, reserved=5220, compr_blocks=5655,
-> 	run fsck to fix.
-> F2FS_IOC_RESERVE_COMPRESS_BLOCKS failed: No space left on device
-> 
-> $ ./mnt/9p/my_f2fs_io reserve_cblocks /mnt/f2fs/60M
-> 0
-> $ ./mnt/9p/my_f2fs_io release_cblocks /mnt/f2fs/60M
-> F2FS_IOC_RELEASE_COMPRESS_BLOCKS failed: Invalid argument
-> 
-> $ rm /mnt/f2fs/30M
-> $ ./mnt/9p/my_f2fs_io reserve_cblocks /mnt/f2fs/60M
-> 0
-> $ ./mnt/9p/my_f2fs_io release_cblocks /mnt/f2fs/60M
-> F2FS_IOC_RELEASE_COMPRESS_BLOCKS failed: Invalid argument
-> 
-> In this case, let's release back the reserved part of the compressed file.
-> 
-> Fixes: c75488fb4d82 ("f2fs: introduce F2FS_IOC_RESERVE_COMPRESS_BLOCKS")
-> Signed-off-by: Qi Han <hanqi@vivo.com>
-> Signed-off-by: Yangtao Li <frank.li@vivo.com>
-> ---
->  fs/f2fs/file.c | 97 ++++++++++++++++++++++++++++++++------------------
->  1 file changed, 63 insertions(+), 34 deletions(-)
-> 
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 300eae8b5415..8f3f55ac153a 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -3427,11 +3427,52 @@ static int release_compress_blocks(struct dnode_of_data *dn, pgoff_t count)
->  	return released_blocks;
->  }
->  
-> +static int f2fs_do_release_compress_blocks(struct inode *inode,
-> +			pgoff_t page_count, unsigned int *released_blocks)
-> +{
-> +	pgoff_t page_idx = 0;
-> +	int ret;
-> +
-> +	while (page_idx < page_count) {
-> +		struct dnode_of_data dn;
-> +		pgoff_t end_offset, count;
-> +
-> +		set_new_dnode(&dn, inode, NULL, NULL, 0);
-> +		ret = f2fs_get_dnode_of_data(&dn, page_idx, LOOKUP_NODE);
-> +		if (ret) {
-> +			if (ret == -ENOENT) {
-> +				page_idx = f2fs_get_next_page_offset(&dn,
-> +								page_idx);
-> +				ret = 0;
-> +				continue;
-> +			}
-> +			break;
-> +		}
-> +
-> +		end_offset = ADDRS_PER_PAGE(dn.node_page, inode);
-> +		count = min(end_offset - dn.ofs_in_node, page_count - page_idx);
-> +		count = round_up(count, F2FS_I(inode)->i_cluster_size);
-> +
-> +		ret = release_compress_blocks(&dn, count);
-> +
-> +		f2fs_put_dnode(&dn);
-> +
-> +		if (ret < 0)
-> +			break;
-> +
-> +		page_idx += count;
-> +		if (released_blocks)
-> +			*released_blocks += ret;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
->  static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
->  {
->  	struct inode *inode = file_inode(filp);
->  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> -	pgoff_t page_idx = 0, last_idx;
-> +	pgoff_t last_idx;
->  	unsigned int released_blocks = 0;
->  	int ret;
->  	int writecount;
-> @@ -3481,36 +3522,7 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
->  
->  	last_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
->  
-> -	while (page_idx < last_idx) {
-> -		struct dnode_of_data dn;
-> -		pgoff_t end_offset, count;
-> -
-> -		set_new_dnode(&dn, inode, NULL, NULL, 0);
-> -		ret = f2fs_get_dnode_of_data(&dn, page_idx, LOOKUP_NODE);
-> -		if (ret) {
-> -			if (ret == -ENOENT) {
-> -				page_idx = f2fs_get_next_page_offset(&dn,
-> -								page_idx);
-> -				ret = 0;
-> -				continue;
-> -			}
-> -			break;
-> -		}
-> -
-> -		end_offset = ADDRS_PER_PAGE(dn.node_page, inode);
-> -		count = min(end_offset - dn.ofs_in_node, last_idx - page_idx);
-> -		count = round_up(count, F2FS_I(inode)->i_cluster_size);
-> -
-> -		ret = release_compress_blocks(&dn, count);
-> -
-> -		f2fs_put_dnode(&dn);
-> -
-> -		if (ret < 0)
-> -			break;
-> -
-> -		page_idx += count;
-> -		released_blocks += ret;
-> -	}
-> +	ret = f2fs_do_release_compress_blocks(inode, last_idx, &released_blocks);
->  
->  	filemap_invalidate_unlock(inode->i_mapping);
->  	f2fs_up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
-> @@ -3585,8 +3597,22 @@ static int reserve_compress_blocks(struct dnode_of_data *dn, pgoff_t count)
->  		if (ret)
->  			return ret;
->  
-> -		if (reserved != cluster_size - compr_blocks)
-> -			return -ENOSPC;
-> +		if (reserved != cluster_size - compr_blocks) {
-> +			dec_valid_block_count(sbi, dn->inode, reserved);
+MAIN_SEGS is for data area, while TOTAL_SEGS includes data and metadata.
 
-This looks breaking the consistency?
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/segment.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> +
-> +			for (i = cluster_size - 1; i > 0; i--) {
-> +				dn->ofs_in_node--;
-> +				blkaddr = f2fs_data_blkaddr(dn);
-> +
-> +				if (__is_valid_data_blkaddr(blkaddr)) {
-> +					dn->ofs_in_node -= i;
-> +					return -ENOSPC;
-> +				}
-> +
-> +				dn->data_blkaddr = NULL_ADDR;
-> +				f2fs_set_data_blkaddr(dn);
-> +			}
-> +		}
->  
->  		f2fs_i_compr_blocks_update(dn->inode, compr_blocks, true);
->  
-> @@ -3604,6 +3630,7 @@ static int f2fs_reserve_compress_blocks(struct file *filp, unsigned long arg)
->  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->  	pgoff_t page_idx = 0, last_idx;
->  	unsigned int reserved_blocks = 0;
-> +	struct dnode_of_data dn;
->  	int ret;
->  
->  	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
-> @@ -3637,7 +3664,6 @@ static int f2fs_reserve_compress_blocks(struct file *filp, unsigned long arg)
->  	last_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
->  
->  	while (page_idx < last_idx) {
-> -		struct dnode_of_data dn;
->  		pgoff_t end_offset, count;
->  
->  		set_new_dnode(&dn, inode, NULL, NULL, 0);
-> @@ -3667,6 +3693,9 @@ static int f2fs_reserve_compress_blocks(struct file *filp, unsigned long arg)
->  		reserved_blocks += ret;
->  	}
->  
-> +	if (ret == -ENOSPC)
-> +		f2fs_do_release_compress_blocks(inode, page_idx + dn.ofs_in_node, NULL);
-> +
->  	filemap_invalidate_unlock(inode->i_mapping);
->  	f2fs_up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
->  
-> -- 
-> 2.25.1
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 8ee5e5db9287..6003fbaf4b7d 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -720,7 +720,7 @@ static inline unsigned char curseg_alloc_type(struct f2fs_sb_info *sbi,
+ 
+ static inline void check_seg_range(struct f2fs_sb_info *sbi, unsigned int segno)
+ {
+-	f2fs_bug_on(sbi, segno > TOTAL_SEGS(sbi) - 1);
++	f2fs_bug_on(sbi, segno > MAIN_SEGS(sbi) - 1);
+ }
+ 
+ static inline void verify_fio_blkaddr(struct f2fs_io_info *fio)
+@@ -775,7 +775,7 @@ static inline int check_block_count(struct f2fs_sb_info *sbi,
+ 
+ 	/* check segment usage, and check boundary of a given segment number */
+ 	if (unlikely(GET_SIT_VBLOCKS(raw_sit) > usable_blks_per_seg
+-					|| segno > TOTAL_SEGS(sbi) - 1)) {
++					|| segno > MAIN_SEGS(sbi) - 1)) {
+ 		f2fs_err(sbi, "Wrong valid blocks %d or segno %u",
+ 			 GET_SIT_VBLOCKS(raw_sit), segno);
+ 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+-- 
+2.39.1.581.gbfd45094c4-goog
+
 
 
 _______________________________________________
