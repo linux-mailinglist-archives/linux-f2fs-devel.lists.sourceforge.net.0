@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0CF96940F9
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Feb 2023 10:25:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FB9869411D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Feb 2023 10:29:34 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pRV5R-0006Pu-9c;
-	Mon, 13 Feb 2023 09:25:24 +0000
+	id 1pRV9N-0006XL-LI;
+	Mon, 13 Feb 2023 09:29:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pRV5N-0006Pn-Ou
+ (envelope-from <chao@kernel.org>) id 1pRV9L-0006XE-K8
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Feb 2023 09:25:21 +0000
+ Mon, 13 Feb 2023 09:29:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=H5aC8or+oFmQy61a7+/ZQEsYBSaVY7sE0TPB21YfZds=; b=YcNHRQuI3YLHQVYjmAgbkse0vK
- fPJFbijvlhPxpAkeDpi4qYuZQ5UyTxaYK3+7lGOcMDBfVkRGkN0YOz3pxm6PU3dxotY9GCvlRjfLB
- TfaZKsispdPMRZmrzFTfLGfif6hV868qFtO9IN1kHiV2pUtcUM+ARth+jOfHtuCGUcjA=;
+ bh=RcPUqYO/a4ikyX2D+/Ty1AmgiWMTcM0u2sMXop0tllI=; b=g9IUB98aXCFGW0XVO+uXT1wVlq
+ ORPZwpOUjxO5xXuJuntNQAvkbWcs3Bri3cviXPEZhEkXXytFsluO6bAyGrD3rA7TQCLkyml/CNDql
+ 5D5JbxgMd8v8uBT8Q7VDOVPUqPjBeZlXH/8sKg9gQMzQpCz4PXnubUBmLaO8JjWRJpwE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,74 +31,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=H5aC8or+oFmQy61a7+/ZQEsYBSaVY7sE0TPB21YfZds=; b=WhKjS3mzZmllSqpv0VBvmxt6it
- WbRd0o3P6YF5hT6y2sHhgGbTqCfa1aOu8PwclZkWVtbKesOuavjJj446SStDd99T1AL9R6y0fu3PW
- +35q+fmTtZ5t4VSHP08OL7fDWOzEYxcTxUexfq2fgIRlkMoZPjtULiWyFjvPtJvY92nI=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=RcPUqYO/a4ikyX2D+/Ty1AmgiWMTcM0u2sMXop0tllI=; b=I9sq/mXPG+4gRIg4VQqoFRxIx+
+ Zhf4hTg2lo+y56QRPSxLbCDOSzzguxZIOL/BmcVJhqdYr93fG04UCkLz4ope+MZrDnNPoTtnxXnEb
+ JWmK+WABZanRxFVyeWUZgAGWlG7ROPAH/rygNz9WGam0WtTQitYXoo3xOnGbifPNQXnY=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pRV5H-002cqP-Qq for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Feb 2023 09:25:20 +0000
+ id 1pRV9H-002d3N-Fg for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 13 Feb 2023 09:29:26 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6414B60F29;
- Mon, 13 Feb 2023 09:25:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48F7AC433A7;
- Mon, 13 Feb 2023 09:25:09 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id D3582B80E67;
+ Mon, 13 Feb 2023 09:29:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A7D6DC433D2;
+ Mon, 13 Feb 2023 09:29:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1676280310;
- bh=VnuDtpouDgwVlLpnixSYPUGpmwgIa3hlM9urXtzlhvg=;
+ s=k20201202; t=1676280552;
+ bh=BwYOX5bxqbd258lx4NZjPicBhmu6sXCQeAs5cOJ/RAs=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=cRNuUwUcjQDnPdZQD2RIdYo4Yr0z57XZwJhizae7btX0J9GC1zhxjjR4tfcNfVYet
- qfXMe36aMspV4xTrWlWAd7iKeV1BGGPFAlTdetowW6mufHflCDDpbJYpm3swDixG1i
- PyCyI9PG4tgTG0fr/VrocRGgZDWTnqbDGz0XTyvDm6JnnvqB9NWg3LIvQnX6mWHVv9
- blRK4T6NExG9/er6CBkJ/pMrI0MLxtSOg5o4zPD2bEazKrpyt6KKdfJbNb2f2QepHa
- yAn+fJ7qP7PsJbAyXQqmdFvMKrrj8Qn0I87GWCxVvn+8i8ulICItLQE+LC8nkAkFpf
- QYLZMhaQwmsFg==
-Message-ID: <cc338b66-f0f5-d9b7-81d3-b15bccc9d463@kernel.org>
-Date: Mon, 13 Feb 2023 17:25:07 +0800
+ b=DPuR0pXUJsvRAIRKYBYWq5uzSILPiXAjOqXDj/2UESWojUEl5bm/EmuQ5WBXLW5ZG
+ nocTb2nQ3odFxYI07+mTWk3Vg5WQkiUIgh50SP4of1BNNQ/cnpz59wpsbs3Y+fMrto
+ 6/bjMZWqaBwU1l4Ko1FghnZi0g0Zc638k/sJqP1GDGpmFRFmm/rURWzKuWEOB5yV0R
+ nYjSyNuys9JLASpeZQqKg0KWu8vUjyPUrB4Z2hSMmjrOguWR5yHWoy79ZhGFR5sX93
+ QJatKMbkQNkANglQv/ZTcsJYDD0nb4cQ81RpMxXoOAK6thNfH/6YqZpjPX9Cksx4Ca
+ TArpFV4tRdlXg==
+Message-ID: <30af506c-8c4e-bb8a-6f4b-634f30632fb3@kernel.org>
+Date: Mon, 13 Feb 2023 17:29:10 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.2
-To: =?UTF-8?Q?Thomas_Wei=c3=9fschuh?= <linux@weissschuh.net>,
- Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230209-kobj_type-f2fs-v1-1-b6feedbdd4a8@weissschuh.net>
 Content-Language: en-US
+To: Yangtao Li <frank.li@vivo.com>
+References: <20230209034044.22072-1-frank.li@vivo.com>
+ <Y+UswNp5NrDWjpGX@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230209-kobj_type-f2fs-v1-1-b6feedbdd4a8@weissschuh.net>
-X-Spam-Score: -5.5 (-----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+In-Reply-To: <Y+UswNp5NrDWjpGX@google.com>
+X-Spam-Score: -7.9 (-------)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 2023/2/9 11:20, Thomas Weißschuh wrote: > Since commit
-    ee6d3dd4ed48 ("driver core: make kobj_type constant.") > the driver core
-   allows the usage of const struct kobj_type. > > Take advantage of th [...]
-    
- 
- Content analysis details:   (-5.5 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 2023/2/10 1:26, Jaegeuk Kim wrote: > On 02/09, Yangtao
+ Li wrote: >> Export ipu_policy as a string in debugfs for better readability
+ and >> it can help us better understand some strategies of the fi [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [139.178.84.217 listed in list.dnswl.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.3 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pRV5H-002cqP-Qq
-Subject: Re: [f2fs-dev] [PATCH] f2fs: make kobj_type structures constant
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pRV9H-002d3N-Fg
+Subject: Re: [f2fs-dev] [PATCH] f2fs: export ipu policy in debugfs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,19 +105,208 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyMy8yLzkgMTE6MjAsIFRob21hcyBXZWnDn3NjaHVoIHdyb3RlOgo+IFNpbmNlIGNvbW1p
-dCBlZTZkM2RkNGVkNDggKCJkcml2ZXIgY29yZTogbWFrZSBrb2JqX3R5cGUgY29uc3RhbnQuIikK
-PiB0aGUgZHJpdmVyIGNvcmUgYWxsb3dzIHRoZSB1c2FnZSBvZiBjb25zdCBzdHJ1Y3Qga29ial90
-eXBlLgo+IAo+IFRha2UgYWR2YW50YWdlIG9mIHRoaXMgdG8gY29uc3RpZnkgdGhlIHN0cnVjdHVy
-ZSBkZWZpbml0aW9ucyB0byBwcmV2ZW50Cj4gbW9kaWZpY2F0aW9uIGF0IHJ1bnRpbWUuCj4gCj4g
-U2lnbmVkLW9mZi1ieTogVGhvbWFzIFdlacOfc2NodWggPGxpbnV4QHdlaXNzc2NodWgubmV0PgoK
-UmV2aWV3ZWQtYnk6IENoYW8gWXUgPGNoYW9Aa2VybmVsLm9yZz4KClRoYW5rcywKCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVs
-IG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRw
-czovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVs
-Cg==
+On 2023/2/10 1:26, Jaegeuk Kim wrote:
+> On 02/09, Yangtao Li wrote:
+>> Export ipu_policy as a string in debugfs for better readability and
+>> it can help us better understand some strategies of the file system.
+>>
+>> Since we use ipu_policy as a bitmap, and the bitmap API parameter is
+>> unsigned long type data, let's change ipu_policy to unsigned long type.
+>>
+>> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+>> ---
+>>   fs/f2fs/debug.c   | 64 ++++++++++++++++++++++++++++++++---------------
+>>   fs/f2fs/f2fs.h    |  4 +--
+>>   fs/f2fs/segment.h |  1 +
+>>   fs/f2fs/sysfs.c   |  2 +-
+>>   4 files changed, 48 insertions(+), 23 deletions(-)
+>>
+>> diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+>> index 32af4f0c5735..d50dc8e6abfd 100644
+>> --- a/fs/f2fs/debug.c
+>> +++ b/fs/f2fs/debug.c
+>> @@ -354,6 +354,17 @@ static char *s_flag[] = {
+>>   	[SBI_IS_FREEZING]	= " freezefs",
+>>   };
+>>   
+>> +static const char *ipu_mode_names[F2FS_IPU_MAX] = {
+>> +	[F2FS_IPU_FORCE]	= "FORCE",
+>> +	[F2FS_IPU_SSR]		= "SSR",
+>> +	[F2FS_IPU_UTIL]		= "UTIL",
+>> +	[F2FS_IPU_SSR_UTIL]	= "SSR_UTIL",
+>> +	[F2FS_IPU_FSYNC]	= "FSYNC",
+>> +	[F2FS_IPU_ASYNC]	= "ASYNC",
+>> +	[F2FS_IPU_NOCACHE]	= "NOCACHE",
+>> +	[F2FS_IPU_HONOR_OPU_WRITE]	= "HONOR_OPU_WRITE",
+>> +};
+>> +
+>>   static int stat_show(struct seq_file *s, void *v)
+>>   {
+>>   	struct f2fs_stat_info *si;
+>> @@ -362,18 +373,20 @@ static int stat_show(struct seq_file *s, void *v)
+>>   
+>>   	raw_spin_lock_irqsave(&f2fs_stat_lock, flags);
+>>   	list_for_each_entry(si, &f2fs_stat_list, stat_list) {
+>> -		update_general_status(si->sbi);
+>> +		struct f2fs_sb_info *sbi = si->sbi;
+>> +
+>> +		update_general_status(sbi);
+>>   
+>>   		seq_printf(s, "\n=====[ partition info(%pg). #%d, %s, CP: %s]=====\n",
+>> -			si->sbi->sb->s_bdev, i++,
+>> -			f2fs_readonly(si->sbi->sb) ? "RO" : "RW",
+>> -			is_set_ckpt_flags(si->sbi, CP_DISABLED_FLAG) ?
+>> -			"Disabled" : (f2fs_cp_error(si->sbi) ? "Error" : "Good"));
+>> -		if (si->sbi->s_flag) {
+>> +			sbi->sb->s_bdev, i++,
+>> +			f2fs_readonly(sbi->sb) ? "RO" : "RW",
+>> +			is_set_ckpt_flags(sbi, CP_DISABLED_FLAG) ?
+>> +			"Disabled" : (f2fs_cp_error(sbi) ? "Error" : "Good"));
+
+How about making another patch to replace si->sbi w/ sbi?
+
+Thanks,
+
+>> +		if (sbi->s_flag) {
+>>   			seq_puts(s, "[SBI:");
+>> -			for_each_set_bit(j, &si->sbi->s_flag, 32)
+>> +			for_each_set_bit(j, &sbi->s_flag, 32)
+>>   				seq_puts(s, s_flag[j]);
+>> -			seq_puts(s, "]\n");
+>> +			seq_puts(s, "]\n\n");
+>>   		}
+>>   		seq_printf(s, "[SB: 1] [CP: 2] [SIT: %d] [NAT: %d] ",
+>>   			   si->sit_area_segs, si->nat_area_segs);
+>> @@ -383,8 +396,19 @@ static int stat_show(struct seq_file *s, void *v)
+>>   			   si->overp_segs, si->rsvd_segs);
+>>   		seq_printf(s, "Current Time Sec: %llu / Mounted Time Sec: %llu\n\n",
+>>   					ktime_get_boottime_seconds(),
+>> -					SIT_I(si->sbi)->mounted_time);
+>> -		if (test_opt(si->sbi, DISCARD))
+>> +					SIT_I(sbi)->mounted_time);
+>> +
+>> +		seq_puts(s, "Policy:\n");
+>> +		seq_puts(s, "  - IPU: [");
+>> +		if (IS_F2FS_IPU_DISABLE(sbi)) {
+>> +			seq_puts(s, " DISABLE\n");
+>> +		} else {
+>> +			for_each_set_bit(j, &SM_I(sbi)->ipu_policy, F2FS_IPU_MAX)
+>> +				seq_printf(s, " %s", ipu_mode_names[j]);
+>> +		}
+>> +		seq_puts(s, " ]\n");
+>> +
+>> +		if (test_opt(sbi, DISCARD))
+>>   			seq_printf(s, "Utilization: %u%% (%u valid blocks, %u discard blocks)\n",
+>>   				si->utilization, si->valid_count, si->discard_blks);
+>>   		else
+>> @@ -491,15 +515,15 @@ static int stat_show(struct seq_file *s, void *v)
+>>   		seq_printf(s, "  - node segments : %d (%d)\n",
+>>   				si->node_segs, si->bg_node_segs);
+>>   		seq_puts(s, "  - Reclaimed segs :\n");
+>> -		seq_printf(s, "    - Normal : %d\n", si->sbi->gc_reclaimed_segs[GC_NORMAL]);
+>> -		seq_printf(s, "    - Idle CB : %d\n", si->sbi->gc_reclaimed_segs[GC_IDLE_CB]);
+>> +		seq_printf(s, "    - Normal : %d\n", sbi->gc_reclaimed_segs[GC_NORMAL]);
+>> +		seq_printf(s, "    - Idle CB : %d\n", sbi->gc_reclaimed_segs[GC_IDLE_CB]);
+>>   		seq_printf(s, "    - Idle Greedy : %d\n",
+>> -				si->sbi->gc_reclaimed_segs[GC_IDLE_GREEDY]);
+>> -		seq_printf(s, "    - Idle AT : %d\n", si->sbi->gc_reclaimed_segs[GC_IDLE_AT]);
+>> +				sbi->gc_reclaimed_segs[GC_IDLE_GREEDY]);
+>> +		seq_printf(s, "    - Idle AT : %d\n", sbi->gc_reclaimed_segs[GC_IDLE_AT]);
+>>   		seq_printf(s, "    - Urgent High : %d\n",
+>> -				si->sbi->gc_reclaimed_segs[GC_URGENT_HIGH]);
+>> -		seq_printf(s, "    - Urgent Mid : %d\n", si->sbi->gc_reclaimed_segs[GC_URGENT_MID]);
+>> -		seq_printf(s, "    - Urgent Low : %d\n", si->sbi->gc_reclaimed_segs[GC_URGENT_LOW]);
+>> +				sbi->gc_reclaimed_segs[GC_URGENT_HIGH]);
+>> +		seq_printf(s, "    - Urgent Mid : %d\n", sbi->gc_reclaimed_segs[GC_URGENT_MID]);
+>> +		seq_printf(s, "    - Urgent Low : %d\n", sbi->gc_reclaimed_segs[GC_URGENT_LOW]);
+>>   		seq_printf(s, "Try to move %d blocks (BG: %d)\n", si->tot_blks,
+>>   				si->bg_data_blks + si->bg_node_blks);
+>>   		seq_printf(s, "  - data blocks : %d (%d)\n", si->data_blks,
+>> @@ -565,7 +589,7 @@ static int stat_show(struct seq_file *s, void *v)
+>>   			   si->ndirty_imeta);
+>>   		seq_printf(s, "  - fsync mark: %4lld\n",
+>>   			   percpu_counter_sum_positive(
+>> -					&si->sbi->rf_node_block_count));
+>> +					&sbi->rf_node_block_count));
+>>   		seq_printf(s, "  - NATs: %9d/%9d\n  - SITs: %9d/%9d\n",
+>>   			   si->dirty_nats, si->nats, si->dirty_sits, si->sits);
+>>   		seq_printf(s, "  - free_nids: %9d/%9d\n  - alloc_nids: %9d\n",
+>> @@ -592,12 +616,12 @@ static int stat_show(struct seq_file *s, void *v)
+>>   			   si->block_count[LFS], si->segment_count[LFS]);
+>>   
+>>   		/* segment usage info */
+>> -		f2fs_update_sit_info(si->sbi);
+>> +		f2fs_update_sit_info(sbi);
+>>   		seq_printf(s, "\nBDF: %u, avg. vblocks: %u\n",
+>>   			   si->bimodal, si->avg_vblocks);
+>>   
+>>   		/* memory footprint */
+>> -		update_mem_info(si->sbi);
+>> +		update_mem_info(sbi);
+>>   		seq_printf(s, "\nMemory: %llu KB\n",
+>>   			(si->base_mem + si->cache_mem + si->page_mem) >> 10);
+>>   		seq_printf(s, "  - static: %llu KB\n",
+> 
+> I don't think we need the changes below.
+> 
+>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+>> index 44f2d76525bf..b699ed74f438 100644
+>> --- a/fs/f2fs/f2fs.h
+>> +++ b/fs/f2fs/f2fs.h
+>> @@ -1070,7 +1070,7 @@ struct f2fs_sm_info {
+>>   
+>>   	struct list_head sit_entry_set;	/* sit entry set list */
+>>   
+>> -	unsigned int ipu_policy;	/* in-place-update policy */
+>> +	unsigned long ipu_policy;	/* in-place-update policy */
+>>   	unsigned int min_ipu_util;	/* in-place-update threshold */
+>>   	unsigned int min_fsync_blocks;	/* threshold for fsync */
+>>   	unsigned int min_seq_blocks;	/* threshold for sequential blocks */
+>> @@ -1322,7 +1322,7 @@ enum {
+>>   	MAX_TIME,
+>>   };
+>>   
+>> -/* Note that you need to keep synchronization with this gc_mode_names array */
+>> +/* Modification on enum should be synchronized with gc_mode_names array */
+>>   enum {
+>>   	GC_NORMAL,
+>>   	GC_IDLE_CB,
+>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+>> index 8ee5e5db9287..92c8be00d396 100644
+>> --- a/fs/f2fs/segment.h
+>> +++ b/fs/f2fs/segment.h
+>> @@ -672,6 +672,7 @@ static inline int utilization(struct f2fs_sb_info *sbi)
+>>   
+>>   #define F2FS_IPU_DISABLE	0
+>>   
+>> +/* Modification on enum should be synchronized with ipu_mode_names array */
+>>   enum {
+>>   	F2FS_IPU_FORCE,
+>>   	F2FS_IPU_SSR,
+>> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+>> index 6082e132257a..228df201f6d4 100644
+>> --- a/fs/f2fs/sysfs.c
+>> +++ b/fs/f2fs/sysfs.c
+>> @@ -711,7 +711,7 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>>   			return -EINVAL;
+>>   		if (t && f2fs_lfs_mode(sbi))
+>>   			return -EINVAL;
+>> -		SM_I(sbi)->ipu_policy = (unsigned int)t;
+>> +		SM_I(sbi)->ipu_policy = t;
+>>   		return count;
+>>   	}
+>>   
+>> -- 
+>> 2.25.1
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
