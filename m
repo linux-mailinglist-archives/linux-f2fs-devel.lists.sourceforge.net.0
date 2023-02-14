@@ -2,101 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CFAB4696C5E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Feb 2023 19:07:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B37E4696C75
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 14 Feb 2023 19:10:39 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pRziG-000630-3E;
-	Tue, 14 Feb 2023 18:07:31 +0000
+	id 1pRzlG-00067W-Le;
+	Tue, 14 Feb 2023 18:10:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pRziD-00062s-Bv
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pRzlD-00067K-EN
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 14 Feb 2023 18:07:28 +0000
+ Tue, 14 Feb 2023 18:10:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IAY8dVYRcdMdybIRO1qO9xEcgUoFoKW3T8FHzeAQ6lc=; b=OlbwsdeCEujHRXVxxc/A2iqVr+
- iZY5llYXkAhbKw3ktIxHNcV2Hez1dnmtsmtQkvFngxISwMewMU4e9CCK69zUQhu+5ZwhSpvxr7uQf
- qMgMs40yay3HC6RvhCmk4VWMwrdhZCg/8eZNJc2pwkLzpSsI8Vj7pJCZ5SgW0k/3/3j8=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=nJVcmXOnyPYLjF6Uws+MaoQoxPPBCSyTDktRiSS1Z/k=; b=gSZL0vmDn9Kemgq4A+SZiybKL+
+ eV1vyj9XZ51qcKayhlyJVauYXQs1R25trU6WCG7vCEUc1OCjjdzGzV9GAi0BNQZp6DCICue7GqGdA
+ KMmFmIVN5S8i1WgRcdgY1j+gb3mQ9MFHj0Fl3zE6moPseMX3IZN/g7mIQY4xl4mnYovk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=IAY8dVYRcdMdybIRO1qO9xEcgUoFoKW3T8FHzeAQ6lc=; b=XF8ax0QzIQthp1zuHu3JXo6Yzt
- Hvgylhz6S0MLttuUw7LJna63M4zQugN7uhaU/saZG8NUkQAeuQsdAz0dlPhsww/KyynwIyd6i3QVd
- BCx918l+FbFNdVod9By7Ei+88kueu6nI+QgvvGHOVD6Md7S/ScLqb+FGPVO4JEJe5xlk=;
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=nJVcmXOnyPYLjF6Uws+MaoQoxPPBCSyTDktRiSS1Z/k=; b=F
+ euANuH2TdGL6YZAbNB9z3zRDxjjQNxVIvZeU/rQLiNOWu/+05pccg+yUMAYzXH0SBBHP8MwXARRF1
+ +ggmhsG46XX7YRGpBSs1A8aPy/bUdTXn4hsCm+GlKvgYh57Lzcq8nZEY30S+nGnltt4jSAtkXeNYx
+ bL4lHIuwA4ZwCTQs=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pRziB-0001Ft-7k for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 14 Feb 2023 18:07:28 +0000
+ id 1pRzlB-0001LL-Al for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 14 Feb 2023 18:10:34 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9C0EB61802;
- Tue, 14 Feb 2023 18:07:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E376EC433D2;
- Tue, 14 Feb 2023 18:07:21 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B510461812
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 14 Feb 2023 18:10:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6821AC433D2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 14 Feb 2023 18:10:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1676398042;
- bh=nSR8hVUSauHMlrOcczG32O1VhiEbOlM8in7Lm4PwEhU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Dxg+Mhsn4lxcC06z+dkoCPWr3JaiUr3WDh04awWbGuBj6UtkM8hMA2isJvKD7cTOm
- QkZL2TUqA1r1oUrnfKpsn2EkXjrpfT48N6UybcdOT0Z4d3JDJyOMJ1h8rwUNqtyC55
- y//2VPHYA362k7I5o3Xgtrw1hQA+anp5/qEaSo7Wjmp4mDiLpkEZmNKwAmV6Wz98ET
- C54fJrAMqUEKuKziPKSSX9b2g965bSdffDP3VeVNHOssbHZrenkbuRJH1zBxavnud7
- KPv34WV5SXe4ygNFaRP0CxnRJM0cwTzJXmnCsxMxqn+yr/EX4C4XBzbKcL9KC6Qbyb
- 7MKkxr5s6XfYw==
-Date: Tue, 14 Feb 2023 10:07:19 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <Y+vN18flpTqWwvll@google.com>
-References: <20230209-kobj_type-f2fs-v1-1-b6feedbdd4a8@weissschuh.net>
- <cc338b66-f0f5-d9b7-81d3-b15bccc9d463@kernel.org>
- <Y+p4jezz5asWoPhu@google.com>
- <abb12474-f338-dedf-115b-da70e4946cec@kernel.org>
+ s=k20201202; t=1676398228;
+ bh=GuynPZdvxBxG4GUeu1xWs3rM3Ivw5PvuWMv1h2FyTbU=;
+ h=Subject:From:Date:To:From;
+ b=fc9u/SyIBSlikOUpDeN+S/KQb71evSTuTAj49wcCpwzb21T/ZUHoJf4YTZAbhuKvW
+ A7ogr/C/k8BOB8btslg5YTyYKQgI2y7ChFHa/88KVlo+5+HqRvxH3g4dRhLTs7XIwg
+ Sh3dpWVgYohYwGbZ1g0kHXf2JFlKZvhnAx9MGxn2RGtrhmD0TSUoNiAJAP3MEJqbja
+ wp27KSwOyLkk52mfp5f0YWiBHNE5WpSKnTtxcyKoujemp7503Hd7MZGh5GI2ZlTbR4
+ /A6tq3J1vBBRP1GzlaSuPgggbqsIs38Bzf4yxVIdJEmR/J9OVNho+dfhGxVhqdum28
+ H9JscSidkOndw==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ 52C54C4166F for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 14 Feb 2023 18:10:28 +0000 (UTC)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <abb12474-f338-dedf-115b-da70e4946cec@kernel.org>
+From: patchwork-bot+f2fs@kernel.org
+Message-Id: <167639822833.3874.2915071388704469722.git-patchwork-summary@kernel.org>
+Date: Tue, 14 Feb 2023 18:10:28 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -5.2 (-----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 02/14, Chao Yu wrote: > On 2023/2/14 1:51, Jaegeuk Kim
-   wrote: > > On 02/13, Chao Yu wrote: > > > On 2023/2/9 11:20, Thomas Weißschuh
-    wrote: > > > > Since commit ee6d3dd4ed48 ("driver core: make kob [...] 
- 
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev] f2fs:
+ synchronize
+ atomic write aborts Submitter: Daeho Jeong <daeho43@gmail.com> Committer:
+ Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/project/f2fs/list [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [139.178.84.217 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pRziB-0001Ft-7k
-Subject: Re: [f2fs-dev] [PATCH] f2fs: make kobj_type structures constant
+X-Headers-End: 1pRzlB-0001LL-Al
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,76 +109,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org,
- Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 02/14, Chao Yu wrote:
-> On 2023/2/14 1:51, Jaegeuk Kim wrote:
-> > On 02/13, Chao Yu wrote:
-> > > On 2023/2/9 11:20, Thomas Wei=DFschuh wrote:
-> > > > Since commit ee6d3dd4ed48 ("driver core: make kobj_type constant.")
-> > > > the driver core allows the usage of const struct kobj_type.
-> > > > =
+Hello:
 
-> > > > Take advantage of this to constify the structure definitions to pre=
-vent
-> > > > modification at runtime.
-> > > > =
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-> > > > Signed-off-by: Thomas Wei=DFschuh <linux@weissschuh.net>
-> > > =
+Patch: [f2fs-dev] f2fs: synchronize atomic write aborts
+  Submitter: Daeho Jeong <daeho43@gmail.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=720437
+  Lore link: https://lore.kernel.org/r/20230209181819.2333522-1-daeho43@gmail.com
 
-> > > Reviewed-by: Chao Yu <chao@kernel.org>
-> > =
+Series: [f2fs-dev,v3,1/2] f2fs: export ipu policy in debugfs
+  Submitter: Yangtao Li <frank.li@vivo.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=721304
+  Lore link: https://lore.kernel.org/r/20230213141825.22858-1-frank.li@vivo.com
+    Patches: [f2fs-dev,v3,1/2] f2fs: export ipu policy in debugfs
+             [f2fs-dev,v3,2/2] f2fs: replace si->sbi w/ sbi in stat_show()
 
-> > Hi Chao,
-> > =
 
-> > Note that, next time, I won't apply/modify any patches merged in -dev,
-> > unless it has a problem.
-> =
+Total patches: 3
 
-> Hi Jaegeuk,
-> =
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
-> Oh, any particular reason, to avoid unneeded commit id change when the ti=
-me is
-> close to merge window?
 
-Hi Chao,
-
-I'm trying to avoid breaking the -next branch.
-
-> =
-
-> Is there any period of grace before merging patches from dev-test branch =
-into dev
-> branch? Maybe a week is reasonable? so I may have time to catch up in tim=
-e.
-
-No rule, but I'm trying to wait for several days while running my local tes=
-ts.
-If the patch looks okay, sometimes I'll queue it right away.
-
-Thanks,
-
-> =
-
-> Thanks,
-> =
-
-> > =
-
-> > Thanks,
-> > =
-
-> > > =
-
-> > > Thanks,
 
 
 _______________________________________________
