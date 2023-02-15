@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 810A1697E9C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Feb 2023 15:44:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1476A697EA6
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Feb 2023 15:46:02 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pSJ14-00011f-Cr;
-	Wed, 15 Feb 2023 14:44:13 +0000
+	id 1pSJ2m-0001SJ-RI;
+	Wed, 15 Feb 2023 14:46:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pSJ12-00011S-Jc
+ (envelope-from <chao@kernel.org>) id 1pSJ2l-0001S6-BH
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Feb 2023 14:44:11 +0000
+ Wed, 15 Feb 2023 14:45:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cRIolvVj76LtArNh47muiswhE/aeQ65fOXCcGo2vYxw=; b=G2JvR725MzEhQN0pUmH05EKqa5
- HR08MfFa2U523haLsWycZ5j4xfIPTwp+5s6Q+J/3Z9Uji6AOOwc/qrC4qdez7vggr12CCJLQARIIi
- klX2Irkjx0VZLrqJdSoHdBxc8gk/rC13bo9/1+SPFCUYcUctBfVjMtOFJy4/UzJIQWwY=;
+ bh=tiwzMuGHItJAQKSjrVQzL5t5IG9/7v0BvQMavAqXzqE=; b=Hh6pZtWVg85OnQcUpjXCLAnxiN
+ Z1vF2VjVzOFauzTYnX10dG7e7J3Itl11yjjjpsU3rSr1nak5Bc4W9KOBkfD8m0z10fS0/twkZ2bRy
+ 2QpEG3WkSCB9IrJova3oYRjkoE2N7joI5gonJLowhfaJ6pGEmCXoFQVXcNh9nQWhs6wI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,76 +31,72 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cRIolvVj76LtArNh47muiswhE/aeQ65fOXCcGo2vYxw=; b=famv4phky+EaQ6noAqPdSyJ+PY
- WUEO6uaKWxWycs1t68hWPzSHdWnpRz64LOC6pqTa+IEBdYbn6czMuuAnaF4jn/J8/Q1eDm5xezkAb
- vcP2xz0Y1ietRZho4XJS3mg5HBxGp93q+Yu3Nqxj1CJ/0bI8CD4tbTz1Cegz63i+RQnc=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=tiwzMuGHItJAQKSjrVQzL5t5IG9/7v0BvQMavAqXzqE=; b=cJYBXsmQ3gT4V3xXXULytIiVq0
+ A4vdMxNDi9s5BkqKiA+N3wfPUY+v42vhHNaraqg5+7ny6SXLjAfZ5WQi29WXKcW4588E+ooRzYAUY
+ sJPXeF5BGnYPtLECgFw7rIhFeFB8sx77/RZXUle4ckzMPAhA4e5kddN1iTEshOnVpWzM=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pSJ0v-0006hP-PW for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Feb 2023 14:44:11 +0000
+ id 1pSJ2j-0006l4-1Z for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 15 Feb 2023 14:45:58 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2C08361C44;
- Wed, 15 Feb 2023 14:44:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 931DBC4339C;
- Wed, 15 Feb 2023 14:43:57 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 865AAB82041
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 15 Feb 2023 14:45:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1839DC433EF;
+ Wed, 15 Feb 2023 14:45:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1676472239;
- bh=ZYy2SiK9o8XAp9f39GoyiQzDdp41wQI4tr6oU4Ic9Fw=;
+ s=k20201202; t=1676472350;
+ bh=i7XJdYYy5Ec8OzUEFnRgUnGX3zdu+ChHpKa9KrxeWT8=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=PlyxzAm1ZI1Fqk6aBTiXn0qDQdolDjA6CwWYTCIC0Sb1a+SeyN9An1jI8Ps5KIKWx
- 1BAq2Ii8lNEa2CtlMPrbvJd+gHG/G/VuWEn3+lQoDnLmOZWD/wd9HKYeM09oCPe7FS
- ZzGn2DKBvAPk4rK9VMUFfgg/yhv8uJtYEngh8SrFpmIqKL9VukCPBFOxrmykZ3JyL5
- REX9VbCE1dXnwmMFehnn8YIS/reX2jXIlNHpX5j1wdBzGty7MiqxVBuPZtik7pVX/I
- ojuw7T7HGpWe6+ffqoPfvZ9wTT/zLwcZL6Zw1eh3aQVffZTFfR9H8v3SOoJbQsNytT
- EPa48PS5od94A==
-Message-ID: <10a80557-50f6-f563-56ca-eb3df7e4ea93@kernel.org>
-Date: Wed, 15 Feb 2023 22:43:54 +0800
+ b=bKr6YjHORC8EsH9VafAjrlUiaCMJvXEsZ7Zl0Iz0hCCUyCqcC0BSR4LuXEOywhBls
+ lUMSTDN3h8okUruhrmpzamMTKPjfG8SkNB0Zm7yqZRXE9JDnALbMfreC38+hNlgh41
+ 5LS03rOr52DNRqUBeclMssI/Iqc9XKpFP9qJQAvCGNNIJu9Yt9uqDEqvnJz1Lhnr56
+ 9wyCUomS4yeu07y+dQEzBvz5fh2x1Ep8TFkUoz6f+P9ErUsiH6Sm6gNwR/1xroXpvt
+ AQEXQAyqA5AprLWMX2Jn5EDYSPkinz0k4hVBAll1fjauDrddiK/faakSpyFSj7j5dm
+ JDwmGhLfPGZzQ==
+Message-ID: <4eb60628-1546-1bcb-b71a-92368d7116eb@kernel.org>
+Date: Wed, 15 Feb 2023 22:45:45 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.6.1
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230209-kobj_type-f2fs-v1-1-b6feedbdd4a8@weissschuh.net>
- <cc338b66-f0f5-d9b7-81d3-b15bccc9d463@kernel.org>
- <Y+p4jezz5asWoPhu@google.com>
- <abb12474-f338-dedf-115b-da70e4946cec@kernel.org>
- <Y+vN18flpTqWwvll@google.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20230214235719.799831-1-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <Y+vN18flpTqWwvll@google.com>
+In-Reply-To: <20230214235719.799831-1-jaegeuk@kernel.org>
 X-Spam-Score: -7.9 (-------)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 2023/2/15 2:07, Jaegeuk Kim wrote: > On 02/14, Chao Yu
-   wrote: >> On 2023/2/14 1:51, Jaegeuk Kim wrote: >>> On 02/13, Chao Yu wrote:
-    >>>> On 2023/2/9 11:20, Thomas Weißschuh wrote: >>>>> Since comm [...] 
- 
+ Content preview:  On 2023/2/15 7:57,
+ Jaegeuk Kim wrote: > We should not truncate
+ replaced blocks, and were supposed to truncate the first > part as well.
+ > > This reverts commit 78a99fe6254cad4be310cd84af39f6c46b668c72 [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pSJ0v-0006hP-PW
-Subject: Re: [f2fs-dev] [PATCH] f2fs: make kobj_type structures constant
+X-Headers-End: 1pSJ2j-0006l4-1Z
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Revert "f2fs: truncate blocks in batch
+ in __complete_revoke_list()"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,38 +108,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org,
- =?UTF-8?Q?Thomas_Wei=c3=9fschuh?= <linux@weissschuh.net>,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: stable@vger.kernel.org
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyMy8yLzE1IDI6MDcsIEphZWdldWsgS2ltIHdyb3RlOgo+IE9uIDAyLzE0LCBDaGFvIFl1
-IHdyb3RlOgo+PiBPbiAyMDIzLzIvMTQgMTo1MSwgSmFlZ2V1ayBLaW0gd3JvdGU6Cj4+PiBPbiAw
-Mi8xMywgQ2hhbyBZdSB3cm90ZToKPj4+PiBPbiAyMDIzLzIvOSAxMToyMCwgVGhvbWFzIFdlacOf
-c2NodWggd3JvdGU6Cj4+Pj4+IFNpbmNlIGNvbW1pdCBlZTZkM2RkNGVkNDggKCJkcml2ZXIgY29y
-ZTogbWFrZSBrb2JqX3R5cGUgY29uc3RhbnQuIikKPj4+Pj4gdGhlIGRyaXZlciBjb3JlIGFsbG93
-cyB0aGUgdXNhZ2Ugb2YgY29uc3Qgc3RydWN0IGtvYmpfdHlwZS4KPj4+Pj4KPj4+Pj4gVGFrZSBh
-ZHZhbnRhZ2Ugb2YgdGhpcyB0byBjb25zdGlmeSB0aGUgc3RydWN0dXJlIGRlZmluaXRpb25zIHRv
-IHByZXZlbnQKPj4+Pj4gbW9kaWZpY2F0aW9uIGF0IHJ1bnRpbWUuCj4+Pj4+Cj4+Pj4+IFNpZ25l
-ZC1vZmYtYnk6IFRob21hcyBXZWnDn3NjaHVoIDxsaW51eEB3ZWlzc3NjaHVoLm5ldD4KPj4+Pgo+
-Pj4+IFJldmlld2VkLWJ5OiBDaGFvIFl1IDxjaGFvQGtlcm5lbC5vcmc+Cj4+Pgo+Pj4gSGkgQ2hh
-bywKPj4+Cj4+PiBOb3RlIHRoYXQsIG5leHQgdGltZSwgSSB3b24ndCBhcHBseS9tb2RpZnkgYW55
-IHBhdGNoZXMgbWVyZ2VkIGluIC1kZXYsCj4+PiB1bmxlc3MgaXQgaGFzIGEgcHJvYmxlbS4KPj4K
-Pj4gSGkgSmFlZ2V1aywKPj4KPj4gT2gsIGFueSBwYXJ0aWN1bGFyIHJlYXNvbiwgdG8gYXZvaWQg
-dW5uZWVkZWQgY29tbWl0IGlkIGNoYW5nZSB3aGVuIHRoZSB0aW1lIGlzCj4+IGNsb3NlIHRvIG1l
-cmdlIHdpbmRvdz8KPiAKPiBIaSBDaGFvLAo+IAo+IEknbSB0cnlpbmcgdG8gYXZvaWQgYnJlYWtp
-bmcgdGhlIC1uZXh0IGJyYW5jaC4KCkphZWdldWssIHNvIHdoeSBkbyB3ZSBuZWVkIHRvIGF2b2lk
-IGJyZWFraW5nIC1uZXh0IGJyYW5jaD8gSSBkaWRuJ3QgZ2V0IGl0LiA6LSgKCj4gCj4+Cj4+IElz
-IHRoZXJlIGFueSBwZXJpb2Qgb2YgZ3JhY2UgYmVmb3JlIG1lcmdpbmcgcGF0Y2hlcyBmcm9tIGRl
-di10ZXN0IGJyYW5jaCBpbnRvIGRldgo+PiBicmFuY2g/IE1heWJlIGEgd2VlayBpcyByZWFzb25h
-YmxlPyBzbyBJIG1heSBoYXZlIHRpbWUgdG8gY2F0Y2ggdXAgaW4gdGltZS4KPiAKPiBObyBydWxl
-LCBidXQgSSdtIHRyeWluZyB0byB3YWl0IGZvciBzZXZlcmFsIGRheXMgd2hpbGUgcnVubmluZyBt
-eSBsb2NhbCB0ZXN0cy4KPiBJZiB0aGUgcGF0Y2ggbG9va3Mgb2theSwgc29tZXRpbWVzIEknbGwg
-cXVldWUgaXQgcmlnaHQgYXdheS4KClN1cmUsIG5vdCBwcm9ibGVtLgoKVGhhbmtzLAoKPiAKPiBU
-aGFua3MsCj4gCj4+Cj4+IFRoYW5rcywKPj4KPj4+Cj4+PiBUaGFua3MsCj4+Pgo+Pj4+Cj4+Pj4g
-VGhhbmtzLAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-CkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291
-cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZv
-L2xpbnV4LWYyZnMtZGV2ZWwK
+On 2023/2/15 7:57, Jaegeuk Kim wrote:
+> We should not truncate replaced blocks, and were supposed to truncate the first
+> part as well.
+> 
+> This reverts commit 78a99fe6254cad4be310cd84af39f6c46b668c72.
+> 
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+
+Oh, my bad, thanks for fixing this.
+
+Reviewed-by: Chao Yu <chao@kernel.org>
+
+Thanks,
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
