@@ -2,146 +2,123 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75E0569E298
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Feb 2023 15:46:28 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E00C369F330
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Feb 2023 12:09:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pUTuP-0001kh-CC;
-	Tue, 21 Feb 2023 14:46:20 +0000
+	id 1pUmzg-0006t4-49;
+	Wed, 22 Feb 2023 11:09:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1pUTuM-0001kZ-T0
+ (envelope-from <yonggil.song@samsung.com>) id 1pUmzX-0006sw-2w
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Feb 2023 14:46:18 +0000
+ Wed, 22 Feb 2023 11:08:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ Date:Message-ID:In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6CAgJ0RCr7zliEbWYAvawyfjQijB5EsAOpDsyPVGK80=; b=MTeP9u+8ytq8pelJGzamynLBI7
- SyDK5arSPRVLF6s6ia1elaAYUmKPaYuIcNUciPq4sdeOBC0YLcH+xmuIqcjaVfEq3wShK2UuRIKvN
- I4jPH1zPOK41kKx3Rda3FByd0gN1SdLXpTZ/XHHiYrmYqgybY0N52aMM1v5oMcfOhlJY=;
+ bh=EJ1ONzg4Ake5LMmRVtzSRvFY+LqShBVIqPKICBhvGWc=; b=Iem6fh6OTdhYRofk+9z+USOWXA
+ F325tQcC3KEUUK+z2jv4asPE1y7Rzc0FsCSfSJDFpRDr2BNk7FHdCkhSQrVnPqojhddxnEpxeAJWM
+ jBW+MXSiNE9oTFf830aSofGULSaQ0/BsVhmRKrNMR59NVCydAkyz9IVkj23CBZynU46o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=6CAgJ0RCr7zliEbWYAvawyfjQijB5EsAOpDsyPVGK80=; b=T
- DBSPRTYtl9EkVGb/4UiLslLHnhZByc78ddZSbiFYyRdAG4Kpj3gdoBv3hofQSlzA5OlmSsrauD2ef
- kEVBWwIbAFFewWhiaGrK0iNEIs5pZZvj93MNCLdFOgjlLqAV+IgGWwsaidSSa+DS1TFSbERvUlFEP
- C+fL2shp6kOvX0jM=;
-Received: from mail-tyzapc01on2109.outbound.protection.outlook.com
- ([40.107.117.109] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:
+ In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=EJ1ONzg4Ake5LMmRVtzSRvFY+LqShBVIqPKICBhvGWc=; b=BUhbpzeshnQfcg7xTKV1QW80ef
+ ZMc6cHoVlGIkTf+qUIyGfi+lL9M5j5V/egwQ2EyEhA8w9QJsSi5O9evfrhCf1bHOttBv9IZOhnc2J
+ gGNrinAqccySqQ/thGYKKa43XB30IL4mkRyp0y4r6fbfvpdU9ivFH4pIwfrbkzfj9NS8=;
+Received: from mailout2.samsung.com ([203.254.224.25])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pUTuD-00CX2r-LS for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Feb 2023 14:46:18 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hbkfXl917kkeGCgqfXguj3tsXPZfz9YyWnYpHKz3Y8IFAfBec4CSg2+uWJb4Xru1xuVTPqU5owpMJ2mSOjAcVz8xp1ulnlpKIFxO7aLHpDvjJ+f7tqqnRp5K5vuPtOuvl6iXbxLQkA+Sr4Tpz6CFmPMbFF7Du07iVdLpCrssQLt4xTnDqdVnGv4XUo4AiSaMgg+6AlJLXLAqFJKtErTRs7Cx5zXO9wSvac04SsJgAbTNQwDjf9xc9vPviEuQEU9jxUQ+4w4BY9CJ96/iFPHT5Cdicx14g2iTU5FXDt4183owVCh68YhtAFA1AmuwDhd3wE0UWIxC/nGU7HId6YFZRQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6CAgJ0RCr7zliEbWYAvawyfjQijB5EsAOpDsyPVGK80=;
- b=gH57L/b8rFOj3rutlxOjBI1/uZyIKkVxBe/xXN8Vf941ihHH4dnekkEVXxs2ENBbmCPbIebTU4ZBhI49JNFaLA3fE88VaEsfGr8ItaaEw4+IRMYjyRCASI5pbUtK4YuSnwOkGhN/lLVTiNhNrlhm8huJdBUXi/oBGcNB7DwdMNqjWTe2Do0gRdhiX0w5TJehNIVtOhL2am7IUTdQbk9Hb4CCWpDk6e896caFi4JQllMGDqj8WQ2I5OB5Sl5VA7jhfFJ0QekHN/V4IvVePXAQBV2nTwgIlO8ocWZ9SYjUVZ1X5XGSLthn4GAeQESFCkW0buIPxe0q/n3VxD/c9jyJOQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6CAgJ0RCr7zliEbWYAvawyfjQijB5EsAOpDsyPVGK80=;
- b=nlj61ufm0QFSRaj17FiTR8SpnVUKTktLZFoBcAH+YxcenE+d/df68sQS0Y9V+bcCMpOxAt5NxYy5YhlylKqVRCANfxBucpD6anUD8wvGVnoS18GfwGMhF08Dv/AB+YvAma3ShCOK947NmhhzDMbu6K7woXpfDE8/c9TAWtXaaQFaHG102bJcPeuLY7+m3CqFqsasHCN75NU9a5MnQdKKE93lewR2du0UkQ6+EGjjmzWp1yWYTGwBcEH90Wjm6jZljbZVxHZTB/rrGSDNtyVtiobVaiye6OLyeO19Z0J+Dt0ejCGpkvtj3nwxaQkt2fItAcj0n3I0MsKeuVAGl1p6ZQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by TY0PR06MB5848.apcprd06.prod.outlook.com (2603:1096:400:275::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6134.15; Tue, 21 Feb
- 2023 14:46:01 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::daf6:5ebb:a93f:1869]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::daf6:5ebb:a93f:1869%9]) with mapi id 15.20.6111.010; Tue, 21 Feb 2023
- 14:46:01 +0000
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Tue, 21 Feb 2023 22:45:50 +0800
-Message-Id: <20230221144550.46557-1-frank.li@vivo.com>
-X-Mailer: git-send-email 2.35.1
-X-ClientProxiedBy: SI2PR04CA0001.apcprd04.prod.outlook.com
- (2603:1096:4:197::12) To SEZPR06MB5269.apcprd06.prod.outlook.com
- (2603:1096:101:78::6)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|TY0PR06MB5848:EE_
-X-MS-Office365-Filtering-Correlation-Id: c8e9ae1a-a28f-4710-eddc-08db141a5996
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: qQnvZhhwEcgdHMpHd8A6IafIGSltIqmdiRVCmUEMPSV6BOIj/XYOOoMjK5P7cWBlcm4Wiy1N31wLdVe8PWn+UausNY0ghH926uyJrRdzErFR6ZQBWZt7Mdae9Fo7uHFCEcO6yrEY8qSA1kfqizkaTtdgMvbj/Vqh7ghpkfvydnrgwRpD9Empu5flbZ1EikmEWgqrkou6YrxjcdFVv6q+AqNcXBO6iQPSbtuGz+B1Yvm5hFfQ4LskVufJVc6abQrnHNKRME8OgUno46F2ukQ6Eo+4SNTeII6qPOHaNBXRo9IaAWWMwHFKt03sfLJhEjpaLW2+r+q45OEpO7D62TKldFXoaZPG/KYtwb3f5b5CvdDegfRAkpkGa34BMuf9on2QCzRDayDtS8qpkhweKNN4RUZFgpHNFchz6+npP1DsGqfnhRPAovujDJ0pv3uonkh4yA9eWzLIwSutxLLzfuDCpIYso0dhla8TkR9XcReNgUYEmapGaCxoZ0WPmnNP67mHPyxxavN2QvrqIdX7gfajLRpwDbyAtkPvOzRIE8+OyoDajLGYiEtM2G0aPlE3FKDeG7vSqD4sux9uKRsHR1OTcu7ts5xelZUKQw6YmLLbCz4P2HSCq3/GA/c+pG/RIvuha+o/5C/STlgcfDGQPpDsdAQih8T6XU+oJiwDleUo0dbQ/sUNjrCjK8R1pD4zmoh0APg/+2+ohfwilHCzGpKhfA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230025)(4636009)(366004)(346002)(39860400002)(396003)(136003)(376002)(451199018)(4326008)(52116002)(66556008)(66476007)(6486002)(316002)(41300700001)(66946007)(8936002)(5660300002)(36756003)(86362001)(478600001)(186003)(26005)(6666004)(38100700002)(107886003)(1076003)(6512007)(6506007)(38350700002)(8676002)(2616005)(2906002)(83380400001);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Q1N1oF2CtSd8oWurM/VVV/ojPVdtEbqmIW3pJ2j8y/kF5TsoqaMARImMDF0R?=
- =?us-ascii?Q?HLiVJB2J+ZaNN2FJORI7AnTP0lc5O8fZuE03UMKh5HifynAeZgl9vvDghGii?=
- =?us-ascii?Q?kXD/cFZJUbP8rz06+ybpwRtZRj9rKMYmwcXkgf0cHE/l5VWlt5+QXII8Comq?=
- =?us-ascii?Q?YC9wKbhr3hbXh8FpiniZ4dkDLMVtTnPE55KeQl/92E8D+6bQ/GESE+ceR1DF?=
- =?us-ascii?Q?l4hGofxBGMObEMlriQgNhWxvaSe+MOhGAWpfmcsGAOh/+Ku1eQ5p1ayiFlBI?=
- =?us-ascii?Q?PcUek5HAANm0DJKg9fwj+pDXx0ZI9l2+eGVCOAtkc/CFGPGHijC15+G3MGRF?=
- =?us-ascii?Q?sRaE5dnAXnlracMMAvFcKP2R8/Fh98Lj3L1KIQhBa5G+gwt7qK7kxKDoDWLl?=
- =?us-ascii?Q?b0JmGE4UbdcgOQnZsbveP7qXKItkH1cIOGYpoVT2RCIZykzMwMnsva+JE/J9?=
- =?us-ascii?Q?r126UlratG3g9WuVp2RbF9J/neajPqVMI8vD65eJVAf8eB2b7Nqbj/w1PLzZ?=
- =?us-ascii?Q?+4TTGGRBuVem9M4HG31x22lHNM2BRvSec9O5+Msq0gFoIwQIOFopBCIhtzt/?=
- =?us-ascii?Q?+zNuCx6xE5gxB0b8F1pvHke/qERgoej4csH85CeNZsvCQqTMrv1RqozH2cRD?=
- =?us-ascii?Q?iGbU04RtvLzUq2suax+mQbxpfnToPeUTppqwsOtpG1H9HLUqhMYDntXv/EDq?=
- =?us-ascii?Q?Xvz+sjyLQ63QE2d6oniG1bArlKrAtkTMnhDlvn/1MF0CBBfd5C7GnYo7dLGS?=
- =?us-ascii?Q?equP7rpbCp+mtOiV60vqtvXnohJBcna/TRqd39da2B7bP5Y/X+CpFKdjHvaY?=
- =?us-ascii?Q?70Apphp18RA/c7H0fb/eA2CnAwxqVi5SN/cfrSzuAn6FCdhdXGI8RA5sjdOE?=
- =?us-ascii?Q?oTRKW/efd5e8pxcTZVlU5I2xNIIN/vwbSYuolcjT6p0w5UhQpPWfP7Z5/j4z?=
- =?us-ascii?Q?dnwcR+UMPDHsZ9HodAdUIUXIYd9B++uLQzfmbf38dAe6E9lMfLxr0scvpWFK?=
- =?us-ascii?Q?Qpoa2J5LKbWoVjAeKYqtL8pMyYco1trmqMW67ZbJ+nNlA1AJSi45fX6SaBkT?=
- =?us-ascii?Q?bho5TV8mMEEBwcMBoWQlt2C9tDXd2ppkKxOawxz0P+vNAgUhglOB+N++kMWb?=
- =?us-ascii?Q?4Sd8tXmseQmaoRDBPRzagEULvBNZeCXL3FTUheJlqBxHhT1CQtZimEYCYC+R?=
- =?us-ascii?Q?/OZQTw2BtykXn5WcFyd0Kt/EjRlWwwlqNuuLcKNccTooUgBBePNbF8p6gQ8E?=
- =?us-ascii?Q?ArK9hrQDz0ek7YJpN3bnwRJxg+DXA1zvuNO3TQSerWXL7gwXG8oWcaZC8KOF?=
- =?us-ascii?Q?r48emKQ3Kn3rfSCyUsuZfpD8id7+yit6HL1lDFHZTTK1vpVfkZnHKy0M6yA8?=
- =?us-ascii?Q?/6CS9xlRTxfdsW1gGHcqb61CnBGhne/d2l3Mmm2BgCSqdxd608bfhjYnvits?=
- =?us-ascii?Q?r1yrdS+IcTpx673WLfhLoluKVmzIuutxbG1qgKcTcuOnU0S1tV0rAmngmWrV?=
- =?us-ascii?Q?VS4UJr5VM2ldldR4iOr6rvoMiCpjpkvJbPPJBrA5eXq6UlxaVVk6LsMFfuAE?=
- =?us-ascii?Q?TLr9P2iiWaYTWgYnXcQaNc0ryK/WCqX7uJd5xq2K?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c8e9ae1a-a28f-4710-eddc-08db141a5996
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Feb 2023 14:46:01.0481 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1+aFgqDrvDxBP8xCs3O98HmTz4CkeOppQ2yvNaaPub+Mrbxkl6z0aQ0Yve28+pg6fyoVydbpL+rqeEiHdRoQbg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR06MB5848
-X-Spam-Score: -0.2 (/)
+ id 1pUmzP-0002HE-Ek for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 22 Feb 2023 11:08:52 +0000
+Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20230222110834epoutp02ee5785984f0d8588d421ced2df018f1a~GIO1R5nN92458724587epoutp02K
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 22 Feb 2023 11:08:34 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20230222110834epoutp02ee5785984f0d8588d421ced2df018f1a~GIO1R5nN92458724587epoutp02K
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1677064114;
+ bh=EJ1ONzg4Ake5LMmRVtzSRvFY+LqShBVIqPKICBhvGWc=;
+ h=Subject:Reply-To:From:To:CC:In-Reply-To:Date:References:From;
+ b=FksyZb7ZmejD0S4+tmVDXkxnwqBOoNmXbyHWUurf9Z5KTev8Y+cDtzdJ5Xf5Ah+bB
+ FJdnN9HzYr7QcrB5kdRS0HqiEWDfrojHgd9ZjDk0Q2htbDvCrXQcBRTcHw7Vf+vRu2
+ 5MfYLRn68gflunRwVAPKdB5sjOiz5MJJp2qWdJKs=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ epcas2p4.samsung.com (KnoxPortal) with ESMTP id
+ 20230222110834epcas2p4da3f3b9c75e732e684460d8638cdecdd~GIO00Lf2V0449404494epcas2p49;
+ Wed, 22 Feb 2023 11:08:34 +0000 (GMT)
+Received: from epsmges2p3.samsung.com (unknown [182.195.36.102]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4PMD0x4xdQz4x9Q5; Wed, 22 Feb
+ 2023 11:08:33 +0000 (GMT)
+X-AuditID: b6c32a47-777ff7000000222e-04-63f5f7b1f932
+Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
+ epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 3D.86.08750.1B7F5F36; Wed, 22 Feb 2023 20:08:33 +0900 (KST)
+Mime-Version: 1.0
+From: Yonggil Song <yonggil.song@samsung.com>
+To: "hans.holmberg@wdc.com" <hans.holmberg@wdc.com>, Jaegeuk Kim
+ <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
+X-Priority: 3
+X-Content-Kind-Code: NORMAL
+In-Reply-To: <20230220122004.26555-1-hans.holmberg@wdc.com>
+X-CPGS-Detection: blocking_info_exchange
+X-Drm-Type: N,general
+X-Msg-Generator: Mail
+X-Msg-Type: PERSONAL
+X-Reply-Demand: N
+Message-ID: <20230222110833epcms2p8906f628cfa52910867e4c5ed649f791d@epcms2p8>
+Date: Wed, 22 Feb 2023 20:08:33 +0900
+X-CMS-MailID: 20230222110833epcms2p8906f628cfa52910867e4c5ed649f791d
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrNKsWRmVeSWpSXmKPExsWy7bCmhe7G71+TDZZeULU4PfUsk0Vr+zcm
+ iwlvjrJbPFk/i9ni0iJ3i8u75rA5sHlsWtXJ5rF7wWcmj8+b5DzaD3QzBbBEZdtkpCampBYp
+ pOYl56dk5qXbKnkHxzvHm5oZGOoaWlqYKynkJeam2iq5+AToumXmAO1WUihLzCkFCgUkFhcr
+ 6dvZFOWXlqQqZOQXl9gqpRak5BSYF+gVJ+YWl+al6+WlllgZGhgYmQIVJmRn3Pm8kr3giUzF
+ 3bbfbA2M38S6GDk5JARMJFbP62LtYuTiEBLYwSjx+dpvli5GDg5eAUGJvzuEQWqEBVIklp98
+ wg5iCwkoSVw70MsCEdeX2Lx4GVicTUBX4u+G5WC2iECRxIsZl9hAZjILnGaUuP7iCRvEMl6J
+ Ge1PWSBsaYnty7cygticAtYSXddeQtVoSPxY1ssMYYtK3Fz9lh3Gfn9sPiOELSLReu8sVI2g
+ xIOfu6HikhKLDp1ngrDzJf6uuA41s0Zia0MbVFxf4lrHRrAbeAV8JU727mYFsVkEVCW6J96G
+ muMisWvDW7D5zALyEtvfzmEGhQmzgKbE+l36IKaEgLLEkVssEBV8Eh2H/7LDfLhj3hOoTWoS
+ mzdtZoWwZSQuPG6Dmu4h0XP2HdMERsVZiICehWTXLIRdCxiZVzGKpRYU56anFhsVGMPjNjk/
+ dxMjOBVque9gnPH2g94hRiYOxkOMEhzMSiK8/3k/JwvxpiRWVqUW5ccXleakFh9iNAX6ciKz
+ lGhyPjAZ55XEG5pYGpiYmRmaG5kamCuJ80rbnkwWEkhPLEnNTk0tSC2C6WPi4JRqYOq88Vb0
+ prRaWd/aF+ujrW29p9vWXIpe8qn08Aupk/vWzPGtMxBdduki2+xIxiurjBRPnGsQDjK5qeN9
+ pLG895yHuOVXSXEdY4P0JzLn0/Uib26YIMnD6eSc1xL9d9PxNpPIBxWzwxZ364Tf+3019+Fl
+ qz9Xj4tVFLy+1Lz1rlrJ69387jJzZ/3ZXplU4sK5X0nEOPpaY/i63WUz1/JtkjW1NXk2LUet
+ Zml3OevUGwdWn8y78efDAUc9zaW2YnPzbAq5nrlOuXhyztmGmZHRNg1r9lwzkZBM+tZW5J62
+ +Lrv7ZdWLayeklz2VxYy/HovfUynz1NoZvOUUMecVRn33G8H3raf+/yfevP2QzosJ5VYijMS
+ DbWYi4oTAXzOghIOBAAA
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20230220123747epcas2p4c72ace14d10031df7aa116999ad5fe25
+References: <20230220122004.26555-1-hans.holmberg@wdc.com>
+ <CGME20230220123747epcas2p4c72ace14d10031df7aa116999ad5fe25@epcms2p8>
+X-Spam-Score: -3.2 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: We should set the error code when dqget() failed. Fixes:
- 2c1d03056991 ("f2fs: support F2FS_IOC_FS{GET,
- SET}XATTR") Signed-off-by: Yangtao Li <frank.li@vivo.com>
- --- fs/f2fs/file.c | 15 ++++++++------- 1 file changed, 8 insertions(+),
- 7 deletions(-) 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  >In some cases, e.g. for zoned block devices, direct writes
+ are >forced into buffered writes that will populate the page cache >and be
+ written out just like buffered io. > >Direct reads, on the other [...] 
+ Content analysis details:   (-3.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.117.109 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.117.109 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [203.254.224.25 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -150,10 +127,10 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
-X-Headers-End: 1pUTuD-00CX2r-LS
-Subject: [f2fs-dev] [PATCH] f2fs: handle dqget error in
- f2fs_transfer_project_quota()
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pUmzP-0002HE-Ek
+Subject: Re: [f2fs-dev] [RFC PATCH] f2fs: preserve direct write semantics
+ when buffering is forced
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -165,53 +142,126 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yangtao Li <frank.li@vivo.com>
-Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Reply-To: yonggil.song@samsung.com
+Cc: "damien.lemoal@wdc.com" <damien.lemoal@wdc.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-We should set the error code when dqget() failed.
+>In some cases, e.g. for zoned block devices, direct writes are
+>forced into buffered writes that will populate the page cache
+>and be written out just like buffered io.
+>
+>Direct reads, on the other hand, is supported for the zoned
+>block device case. This has the effect that applications
+>built for direct io will fill up the page cache with data
+>that will never be read, and that is a waste of resources.
+>
+>If we agree that this is a problem, how do we fix it?
 
-Fixes: 2c1d03056991 ("f2fs: support F2FS_IOC_FS{GET,SET}XATTR")
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
----
- fs/f2fs/file.c | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+I agree
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index ca1720fc1187..f25e58680984 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -3009,15 +3009,16 @@ int f2fs_transfer_project_quota(struct inode *inode, kprojid_t kprojid)
- 	struct dquot *transfer_to[MAXQUOTAS] = {};
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	struct super_block *sb = sbi->sb;
--	int err = 0;
-+	int err;
- 
- 	transfer_to[PRJQUOTA] = dqget(sb, make_kqid_projid(kprojid));
--	if (!IS_ERR(transfer_to[PRJQUOTA])) {
--		err = __dquot_transfer(inode, transfer_to);
--		if (err)
--			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
--		dqput(transfer_to[PRJQUOTA]);
--	}
-+	if (IS_ERR(transfer_to[PRJQUOTA]))
-+		return PTR_ERR(transfer_to[PRJQUOTA]);
-+
-+	err = __dquot_transfer(inode, transfer_to);
-+	if (err)
-+		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
-+	dqput(transfer_to[PRJQUOTA]);
- 	return err;
- }
- 
--- 
-2.25.1
+thanks
 
+>
+>A) Supporting proper direct writes for zoned block devices would
+>be the best, but it is currently not supported (probably for
+>a good but non-obvious reason). Would it be feasible to
+>implement proper direct IO?
+>
+>B) Avoid the cost of keeping unwanted data by syncing and throwing
+>out the cached pages for buffered O_DIRECT writes before completion.
+>
+>This patch implements B) by reusing the code for how partial
+>block writes are flushed out on the "normal" direct write path.
+>
+>Note that this changes the performance characteristics of f2fs
+>quite a bit.
+>
+>Direct IO performance for zoned block devices is lower for
+>small writes after this patch, but this should be expected
+>with direct IO and in line with how f2fs behaves on top of
+>conventional block devices.
+>
+>Another open question is if the flushing should be done for
+>all cases where buffered writes are forced.
+>
+>Signed-off-by: Hans Holmberg <hans.holmberg@wdc.com>
+Reviewed-by: Yonggil Song <yonggil.song@samsung.com>
+>---
+> fs/f2fs/file.c | 38 ++++++++++++++++++++++++++++++--------
+> 1 file changed, 30 insertions(+), 8 deletions(-)
+>
+>diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+>index ecbc8c135b49..4e57c37bce35 100644
+>--- a/fs/f2fs/file.c
+>+++ b/fs/f2fs/file.c
+>@@ -4513,6 +4513,19 @@ static const struct iomap_dio_ops f2fs_iomap_dio_write_ops = {
+> 	.end_io = f2fs_dio_write_end_io,
+> };
+> 
+>+static void f2fs_flush_buffered_write(struct address_space *mapping,
+>+				      loff_t start_pos, loff_t end_pos)
+>+{
+>+	int ret;
+>+
+>+	ret = filemap_write_and_wait_range(mapping, start_pos, end_pos);
+>+	if (ret < 0)
+>+		return;
+>+	invalidate_mapping_pages(mapping,
+>+				 start_pos >> PAGE_SHIFT,
+>+				 end_pos >> PAGE_SHIFT);
+>+}
+>+
+> static ssize_t f2fs_dio_write_iter(struct kiocb *iocb, struct iov_iter *from,
+> 				   bool *may_need_sync)
+> {
+>@@ -4612,14 +4625,9 @@ static ssize_t f2fs_dio_write_iter(struct kiocb *iocb, struct iov_iter *from,
+> 
+> 			ret += ret2;
+> 
+>-			ret2 = filemap_write_and_wait_range(file->f_mapping,
+>-							    bufio_start_pos,
+>-							    bufio_end_pos);
+>-			if (ret2 < 0)
+>-				goto out;
+>-			invalidate_mapping_pages(file->f_mapping,
+>-						 bufio_start_pos >> PAGE_SHIFT,
+>-						 bufio_end_pos >> PAGE_SHIFT);
+>+			f2fs_flush_buffered_write(file->f_mapping,
+>+						  bufio_start_pos,
+>+						  bufio_end_pos);
+> 		}
+> 	} else {
+> 		/* iomap_dio_rw() already handled the generic_write_sync(). */
+>@@ -4717,8 +4725,22 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+> 	inode_unlock(inode);
+> out:
+> 	trace_f2fs_file_write_iter(inode, orig_pos, orig_count, ret);
+>+
+> 	if (ret > 0 && may_need_sync)
+> 		ret = generic_write_sync(iocb, ret);
+>+
+>+	/* If buffered IO was forced, flush and drop the data from
+>+	 * the page cache to preserve O_DIRECT semantics
+>+	 */
+>+	if (ret > 0 && !dio && (iocb->ki_flags & IOCB_DIRECT)) {
+>+		struct file *file = iocb->ki_filp;
+>+		loff_t end_pos = orig_pos + ret - 1;
+>+
+>+		f2fs_flush_buffered_write(file->f_mapping,
+>+					  orig_pos,
+>+					  end_pos);
+>+	}
+>+
+> 	return ret;
+> }
+> 
+>-- 
+>2.25.1
 
 
 _______________________________________________
