@@ -2,97 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 386DC6AB9C2
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Mar 2023 10:26:51 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D11496ABFE5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Mar 2023 13:51:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pZ77J-0002dq-ET;
-	Mon, 06 Mar 2023 09:26:48 +0000
+	id 1pZAJS-00081i-VG;
+	Mon, 06 Mar 2023 12:51:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1pZ77G-0002df-OB
+ (envelope-from <douglas.raillard@arm.com>) id 1pZAJR-00081c-2h
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 06 Mar 2023 09:26:45 +0000
+ Mon, 06 Mar 2023 12:51:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A7Zgre1Ml80Md0w30Lw2q19COkDfl+Pgad2aCknhU1c=; b=g1FZMpN3dKDRs7wbuIGuUZisZP
- CUeAT2UQiIml5ghhFvGVOQpnm1vkARi8xpPhpQooSS0028x5hv+mis65T/lmpGWi4o7hEkAJxL9dj
- YYKLkeLqqFQjBEFI6gnHtBEMDjopJxBDO+Mtbukk71dbzs/kxIQw9RFmu6tXEAsJ1oLY=;
+ bh=9Rxvog2dEq5YgT9I+lO7A1WYg5oTp4eIruMCNm3sV2E=; b=GM67qufd28HddKJhWx7QTQpuDo
+ D7g7ChyQjqFOM54D53hs5LGkjk//eFlgKF3a/ZMVByR4DLVgzH6a5l18hJKGqlAPcKCDka0Q6ZKcr
+ TkXKAeetnfNlT7c8/CtU00FuD1Jfl7AAajNtKeGnTO6aWPlCTeAMO+xue4cqsiS9mp6Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=A7Zgre1Ml80Md0w30Lw2q19COkDfl+Pgad2aCknhU1c=; b=hcBOqEQ49HjF+0dFqUU/jc+ekr
- mraeFMZ55KHJQMFAbuXUWuPLAvML/3JSmVufEaZUwtaZ+bxZNh5zUham7hWqBwerYsN1vwh5bKSNb
- KOjOyK8maVhUF5takm5kZWDnPWg+8rFou9b0UtxC/o+K8sa0mcEsgqf45fdmLjS14tEU=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pZ77F-000ont-Bm for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 06 Mar 2023 09:26:45 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id EF6BE60B2C;
- Mon,  6 Mar 2023 09:26:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2167C433EF;
- Mon,  6 Mar 2023 09:26:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1678094799;
- bh=57FrCCZ2Wq+YAZlBEbTVLCXLXyHrbe4LXgxzAP6Rt70=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=aGpHk5/EASsEtl4vKnAkGUaXhtbPzA/d2cXgftsQx8PVrRgVXQNsAAnUOBX1GgX6I
- G/6gfIFXfw4GETwfv8Vqa+2mueXnJba6vq4doCPeNTZ+42jYFYMi/XGYUBkeA8X/oD
- ElKS799bOnXufZBGOEBscaDcXEpJHRp87DtATu56G0m7hUhBUbQpW3gm1nxMrdfglF
- 0ZbBUcHJGIkJmz/Hsybihbq8zOv2if13KJ/EEandIpN1dFYg7WzDuihAtyiEKIBsW3
- NHz3uKORaef+IPel5P8LpgPELeV5dFcgKzByHGHs4b9oIVc5RyT13xsoOqXUWsxf3W
- aynSxAyBPrijQ==
-Date: Mon, 6 Mar 2023 10:26:33 +0100
-From: Christian Brauner <brauner@kernel.org>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20230306092633.tobpejvw7mwcx22v@wittgenstein>
-References: <20230125-fs-acl-remove-generic-xattr-handlers-v3-0-f760cc58967d@kernel.org>
- <20230201133020.GA31902@lst.de>
- <20230201134254.fai2vc7gtzj6iikx@wittgenstein>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:To:From:
+ Sender:Reply-To:Cc:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=9Rxvog2dEq5YgT9I+lO7A1WYg5oTp4eIruMCNm3sV2E=; b=Q
+ LKiRz+X0RRUFg9azlDbslN9qKX2zMf8stX4AbiNCS7CV80EiLVBBNkAPB4x85tYcSd1esvaYMzGZX
+ xFs3oy92FHzgdAlqqVOHhTw8GEy/i4qzaRCGbMaccGUytxthD/tNHFor5p9SXn5lEAv175OUEOrJ9
+ s7tcDXR2HRvK/9hI=;
+Received: from foss.arm.com ([217.140.110.172])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
+ id 1pZAJO-0000Z6-Df for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 06 Mar 2023 12:51:32 +0000
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BC07512FC;
+ Mon,  6 Mar 2023 04:26:51 -0800 (PST)
+Received: from e126130.cambridge.arm.com (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 68D863F67D;
+ Mon,  6 Mar 2023 04:26:06 -0800 (PST)
+From: Douglas RAILLARD <douglas.raillard@arm.com>
+To: douglas.raillard@arm.com, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Chao Yu <chao@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net (open list:F2FS FILE SYSTEM),
+ linux-kernel@vger.kernel.org (open list:TRACING),
+ linux-trace-kernel@vger.kernel.org (open list:TRACING)
+Date: Mon,  6 Mar 2023 12:25:49 +0000
+Message-Id: <20230306122549.236561-1-douglas.raillard@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230201134254.fai2vc7gtzj6iikx@wittgenstein>
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Feb 01, 2023 at 02:42:54PM +0100, Christian Brauner
- wrote: > On Wed, Feb 01, 2023 at 02:30:20PM +0100, Christoph Hellwig wrote:
- > > This version looks good to me, but I'd really prefer if a re [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  From: Douglas Raillard <douglas.raillard@arm.com> Fix the
+ nid_t field so that its size is correctly reported in the text format embedded
+ in trace.dat files. As it stands, it is reported as being of size 4: 
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [217.140.110.172 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pZ77F-000ont-Bm
-Subject: Re: [f2fs-dev] [PATCH v3 00/10] acl: drop posix acl handlers from
- xattr handlers
+X-Headers-End: 1pZAJO-0000Z6-Df
+Subject: [f2fs-dev] [PATCH] f2fs: Fix f2fs_truncate_partial_nodes ftrace
+ event
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,33 +86,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-unionfs@vger.kernel.org, reiserfs-devel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org,
- Al Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
- linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- Seth Forshee <sforshee@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Feb 01, 2023 at 02:42:54PM +0100, Christian Brauner wrote:
-> On Wed, Feb 01, 2023 at 02:30:20PM +0100, Christoph Hellwig wrote:
-> > This version looks good to me, but I'd really prefer if a reiserfs
-> > insider could look over the reiserfs patches.
-> 
-> I consider this material for v6.4 even with an -rc8 for v6.3. So there's
-> time but we shouldn't block it on reiserfs. Especially, since it's
-> marked deprecated.
+From: Douglas Raillard <douglas.raillard@arm.com>
 
-So I've applied this now. If there's still someone interested in
-checking the reiserfs bits more than what we did with xfstests they
-should please do so. But I don't want to hold up this series waiting for
-that to happen.
+Fix the nid_t field so that its size is correctly reported in the text
+format embedded in trace.dat files. As it stands, it is reported as
+being of size 4:
 
-> 
-> Fwiw, I've tested reiserfs with xfstests on a kernel with and without
-> this series applied and there's no regressions. But it's overall pretty
-> buggy at least according to xfstests. Which is expected, I guess.
+        field:nid_t nid[3];     offset:24;      size:4; signed:0;
+
+Instead of 12:
+
+        field:nid_t nid[3];     offset:24;      size:12;        signed:0;
+
+This also fixes the reported offset of subsequent fields so that they
+match with the actual struct layout.
+
+
+Signed-off-by: Douglas Raillard <douglas.raillard@arm.com>
+---
+ include/trace/events/f2fs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+index 31d994e6b4ca..8d053838d6cf 100644
+--- a/include/trace/events/f2fs.h
++++ b/include/trace/events/f2fs.h
+@@ -512,7 +512,7 @@ TRACE_EVENT(f2fs_truncate_partial_nodes,
+ 	TP_STRUCT__entry(
+ 		__field(dev_t,	dev)
+ 		__field(ino_t,	ino)
+-		__field(nid_t,	nid[3])
++		__array(nid_t,	nid, 3)
+ 		__field(int,	depth)
+ 		__field(int,	err)
+ 	),
+-- 
+2.25.1
+
 
 
 _______________________________________________
