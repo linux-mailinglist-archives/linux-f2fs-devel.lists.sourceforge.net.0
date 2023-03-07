@@ -2,84 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4821F6AD0DD
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  6 Mar 2023 22:52:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B9C76AD711
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Mar 2023 07:01:55 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pZIke-0000vj-8H;
-	Mon, 06 Mar 2023 21:52:11 +0000
+	id 1pZQOV-0000eV-75;
+	Tue, 07 Mar 2023 06:01:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pZIkd-0000vc-8e
+ (envelope-from <chao@kernel.org>) id 1pZQOT-0000eO-TO
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 06 Mar 2023 21:52:10 +0000
+ Tue, 07 Mar 2023 06:01:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=H2G+TP6hjkKgQJ+566EXr0uZ/IGR8HgAQW4cwLBXGRQ=; b=VwwWFHfMW+Vq1R5CRDUM8+HzbO
- wZeKn7PQucMxVIFKHLyLzVUWpeCAo1AeTkDWivbGKRPdF5VGUDV13QQsCh4DXlIZiuvhk8jUioLRd
- 6obkeOoP0EKqVbadjvQg6kmsRgYkZS8zxtsiAaJ7lDpWpTHsjUeA2LSfCfOJnZyfOfcQ=;
+ bh=0G9utSeENOXNQsWH8wZTXMlBFimyqIDGXh4ifzFg21Q=; b=mtdWKMbF/gHYK661BP/GDNJfpH
+ XbkAkDjCZO7J24Q60yHA8TBiDMxcxeYlbYeV2joan4kNbud+22qHs8e0C0L7HZLggzkr0X5xZnaDG
+ /9lfAngDRXAYiaPnuYRluIxTwHfGYHhv9WOBgIchD+ba7Jp06IFoCNBURZthIZpYZU7U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=H2G+TP6hjkKgQJ+566EXr0uZ/IGR8HgAQW4cwLBXGRQ=; b=S7IJb/YDTvZdYqCaI0fcTs2Zxr
- Q4GXIFKhgQMcIZs2fgv377971gfA9XwDh3eoFvS9OqRuhkF/WcE0GosyIF/bbH82Er8Yq8EEOLGVS
- DmF4OmnH4+9UPJRdkXRt6aXaUQlhotUVRegBKKebvkrTrlErswf3Pw43dcbnJ7Ryurjk=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=0G9utSeENOXNQsWH8wZTXMlBFimyqIDGXh4ifzFg21Q=; b=dl2NCvmX4pbzbXuwpYAE+fr40O
+ N60qXc7GGILTVjClw78QG7VnKFGfAIFILpyqZhp0GgvbVR7VuAwmqi1apNAh7u7iJiPqAp5shTm25
+ tU750Pq7WsGgQZF69g7qPVc1IG/1hAnItY5tFShrgWxEtY5URx9W+NYMaPkKdOYRqoT8=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pZIkZ-001RNt-6z for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 06 Mar 2023 21:52:10 +0000
+ id 1pZQOR-0002Xv-Nn for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 07 Mar 2023 06:01:49 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B9C1960F59;
- Mon,  6 Mar 2023 21:52:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFDA2C4339B;
- Mon,  6 Mar 2023 21:52:00 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 2F905B81205;
+ Tue,  7 Mar 2023 06:01:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72C92C433EF;
+ Tue,  7 Mar 2023 06:01:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1678139521;
- bh=kO0Keh//hnfQf8ULbQJWCH8cX47nO17LVIchs+as6WU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=YB3IQJ2xZiXWlJSkxMXIgc658PghDmAlpzfen7DzM6yBsYExhqY7DYF741alTyqRi
- KoPeGZ99XE2t7ZQc86cJfnpXmQA1hXLiuPz7WTQlIlP4wOcdQt5E0W6w3kaXBUT7B3
- +lEo80rezUP/7mpU9wFNdmaHAsoayTfEF8ZOxCiWohBBmYwHS4Ot/BbRd1q8O7nnMZ
- KG1uuMAqQeaLZzkPiydzMLscJT+QCRpFb5TUrZvoh9t+dQseK0sjZulbHoO3DWsw7P
- cxdKlQoMJ34cWpBofSl6UBH5qO9e6E+74Bp72zlQP5+C8VQDWAp0c8C8MGiMtPAgs+
- oXVxtLf7w8ZDg==
-Date: Mon, 6 Mar 2023 13:51:59 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Yonggil Song <yonggil.song@samsung.com>
-Message-ID: <ZAZgf4sbh14sVZMp@google.com>
-References: <CGME20230215024850epcms2p22be2cc864d82b44f31c19a7ef28770b6@epcms2p7>
- <20230216071350epcms2p7b3f5f37b168b634ec7a7ba8555fd0b49@epcms2p7>
+ s=k20201202; t=1678168900;
+ bh=xlQv5ZF9uz5qXAhO/3nR4xFyeMK6zkkCXsLp/a3Z1fA=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=BAli/Vbb+GkkidkJGK7WwwLI7F+q6UAQ/W3ixqtkcUb+DtQz0IyAnW9zd2T3AI/DN
+ BuFd4vvufnyWOGbNTBFiZEKOdbOtD/CHc+qH9hJBXRGYbVWgCkt8E4Yj7H5Utzl0W9
+ 2CFdHG5VLmCsRk69St/DasRzDuohzoomUgD8/pY49UDW7njvrwWNd9iynwMuYzx/Lv
+ kvCHPhRwzd4Uz3ZzSP2UxDQNH0vQf2+ch1yCSF7xxwNkcAspjlIBTP8YYIcSX2XS8w
+ lm6Z5sdnXHREYs8r5AcYTjTlc+WVkzEWAafeBGyMsoTCag1RBnXTbu1V0wYYkGHYky
+ gMAtL3CtApKnw==
+Message-ID: <fa4cfb68-5866-ecea-4073-4c5c52e587c9@kernel.org>
+Date: Tue, 7 Mar 2023 14:01:36 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230216071350epcms2p7b3f5f37b168b634ec7a7ba8555fd0b49@epcms2p7>
-X-Spam-Score: -5.9 (-----)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.2
+Content-Language: en-US
+To: Douglas RAILLARD <douglas.raillard@arm.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ "open list:F2FS FILE SYSTEM" <linux-f2fs-devel@lists.sourceforge.net>,
+ "open list:TRACING" <linux-kernel@vger.kernel.org>,
+ "open list:TRACING" <linux-trace-kernel@vger.kernel.org>
+References: <20230306122549.236561-1-douglas.raillard@arm.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20230306122549.236561-1-douglas.raillard@arm.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 02/16, Yonggil Song wrote: > When f2fs skipped a gc round
- during victim migration, there was a bug which > would skip all upcoming
- gc rounds unconditionally because skipped_gc_rwsem > was not initi [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 2023/3/6 20:25, Douglas RAILLARD wrote: > From: Douglas
+ Raillard <douglas.raillard@arm.com> > > Fix the nid_t field so that its size
+ is correctly reported in the text > format embedded in trace.dat [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -88,9 +92,14 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pZIkZ-001RNt-6z
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix uninitialized skipped_gc_rwsem
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pZQOR-0002Xv-Nn
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix f2fs_truncate_partial_nodes ftrace
+ event
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,44 +111,32 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "daehojeong@google.com" <daehojeong@google.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, Seokhwan Kim <sukka.kim@samsung.com>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 02/16, Yonggil Song wrote:
-> When f2fs skipped a gc round during victim migration, there was a bug which
-> would skip all upcoming gc rounds unconditionally because skipped_gc_rwsem
-> was not initialized. It fixes the bug by correctly initializing the
-> skipped_gc_rwsem inside the gc loop.
+On 2023/3/6 20:25, Douglas RAILLARD wrote:
+> From: Douglas Raillard <douglas.raillard@arm.com>
 > 
-> Fixes: 3db1de0e582c ("f2fs: change the current atomic write way")
-
-Applied with the below fix.
-
-Fixes: 6f8d4455060d ("f2fs: avoid fi->i_gc_rwsem[WRITE] lock in f2fs_gc"
-
-> Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
+> Fix the nid_t field so that its size is correctly reported in the text
+> format embedded in trace.dat files. As it stands, it is reported as
+> being of size 4:
 > 
-> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> index b22f49a6f128..81d326abaac1 100644
-> --- a/fs/f2fs/gc.c
-> +++ b/fs/f2fs/gc.c
-> @@ -1786,8 +1786,8 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
->  				prefree_segments(sbi));
->  
->  	cpc.reason = __get_cp_reason(sbi);
-> -	sbi->skipped_gc_rwsem = 0;
->  gc_more:
-> +	sbi->skipped_gc_rwsem = 0;
->  	if (unlikely(!(sbi->sb->s_flags & SB_ACTIVE))) {
->  		ret = -EINVAL;
->  		goto stop;
-> -- 
-> 2.34.1
+>          field:nid_t nid[3];     offset:24;      size:4; signed:0;
+> 
+> Instead of 12:
+> 
+>          field:nid_t nid[3];     offset:24;      size:12;        signed:0;
+> 
+> This also fixes the reported offset of subsequent fields so that they
+> match with the actual struct layout.
+> 
+> 
+> Signed-off-by: Douglas Raillard <douglas.raillard@arm.com>
+
+Reviewed-by: Chao Yu <chao@kernel.org>
+
+Thanks,
 
 
 _______________________________________________
