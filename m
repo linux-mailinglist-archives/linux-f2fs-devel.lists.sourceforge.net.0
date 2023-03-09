@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 336696B320B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Mar 2023 00:26:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDA556B326E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Mar 2023 00:55:14 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1paPeL-0007tH-0o;
-	Thu, 09 Mar 2023 23:26:17 +0000
+	id 1paQ6H-0000D4-0h;
+	Thu, 09 Mar 2023 23:55:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1paPe3-0007m8-RM
+ (envelope-from <jaegeuk@kernel.org>) id 1paQ6C-0000Cx-Q0
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Mar 2023 23:26:00 +0000
+ Thu, 09 Mar 2023 23:55:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yPaMvZHC1aE9zfF3wYlKIYQbJn6slyfz02R9f8jEtUE=; b=UWXZoduYC+F1R+SmCVhbpgF8c3
- 6UeG1pckJ+CUouddXyO/xsopmorGy5vKv6oBA2I9r3sXdMQ2sfn5+cFmFBSt8eV+xTIrRcpnoNME6
- H1jAkfIcFndW+nsXS2dQ19oxEXsbG4BRKf/siulcKCDovlkFEKNZ//BSVGe+asrBTpvI=;
+ bh=IAqxC3wUP2EYGVo7XR8MA/kc1dctNij0ARPsGHn0FTM=; b=R2cx9xz12b5A+hKL6ZpVNe+ok8
+ EG+F5PfIf7M+eQ4CEhCunL8RwzTQS/LIKszCrJx53y+cHeZbdb+PMbbDBPb1ZS6sK4G7rWdSyaY+a
+ Jj0b8nqrvRGKUzJ4CEENgH/B+JXdhJXGzq/8RLlt53jkO1Jpmu2WnPcGnzW3SzMfnaMs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,65 +31,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=yPaMvZHC1aE9zfF3wYlKIYQbJn6slyfz02R9f8jEtUE=; b=f/802QFTl96bwj+wn9rT6/yRhw
- FGTSAh0kjf/Mr4fdFqOjanpPSIxDPIl8SyJKWUeFOwzQTpeXjcOyj/c6rfwkv2+9MTwqUUKxUpAmo
- zEW66raulktdO1EL5HcCvO0amBmPhIEl6tvQttVR2Q5NoY7+fTCBtyL61Ga1XPrT+oxQ=;
+ bh=IAqxC3wUP2EYGVo7XR8MA/kc1dctNij0ARPsGHn0FTM=; b=O7Yov7AsabpNCla79OK1hYZu8a
+ aYW8gnQxkBV1qusYv9y34V06aXftxghbxjfKpy+gPsporn8EEaYTZg5oK7lYUtzTfL2GIpTrQD4Nb
+ mzKOPA2ZQBSZEjXP5DOtI4XNY3pVtyw/fWV0ZfE1K909DpRlRMNcdTjPVeXJHU1ONu6c=;
 Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1paPe3-002qdC-Bo for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Mar 2023 23:26:00 +0000
+ id 1paQ6C-00039H-2z for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 09 Mar 2023 23:55:05 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id D90F3B8213F;
- Thu,  9 Mar 2023 23:25:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71733C433EF;
- Thu,  9 Mar 2023 23:25:51 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 7B266B82126;
+ Thu,  9 Mar 2023 23:54:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B879C433EF;
+ Thu,  9 Mar 2023 23:54:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1678404351;
- bh=2br2n7KTsiZSG8vELjtJ0cA+PLd2npYRSMve4yq0f/4=;
+ s=k20201202; t=1678406093;
+ bh=NVI2OlJ900G4SGtLDQtVSYp/i7Iky39BU/S4ql+hYwc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=QyIu47mZ3o0MXudfmWHgRF9SMMf/VZ/rAE8qvzHiQHrS+BtjQm5y6JEjTdOukiuLa
- nZ7nab+gLBGHc+Zj+Jb/rwHOW+39xfGy9odC/80SDUKP0jg94qnnbfUjRFBLrSfrai
- 99/vIxp/LAffZukGwd76YQjJFFMniWGqh1KFpY3M1cLFmaT4kc2LKKhJIRufavQRw2
- ummbLi+HommC23JSJa9ojGPDWdDXP8s+iG5TAf+Xtj7tiwNkjmXh4YfAqK7Q8UMSKj
- +YYxLLkWeJ4chMclwWqHCPVoVzveATena/xAGSZ1eTFJEHzvEFmtXz8mLUoreZoLMk
- ujkVY+VX6M1rw==
-Date: Thu, 9 Mar 2023 15:25:49 -0800
+ b=Hn5jbEneu117NrVW3NwCd1ZDLW+pw4VrpIEutwIq2nYwpnuf+CM/KuonptYSnp8wP
+ WA0o6VlL1aWQMsFe6V+4BugCw2h1Vq2Csr+OhNpN04jITeuJbIEOQIInYuzXIlsDMx
+ +QZLVeScEdSjyA3+/htoEKcE7excUib6hay0574yCYfQBJC916HOT5S+J1y7KC4GRq
+ n5MEPh4Uf6qKw9RYySUxMb2ImjAMtCi0LQQdqG/F4Z0LgtqkoS48fN/qTwnOIqHLcH
+ LxaRI2gvbakexrA3KUDNmA6t7iXYCK6X/yFW4o7zdy/beWZvPLXrkKk05OE3T22uAk
+ DsoX4CGJ6+ibA==
+Date: Thu, 9 Mar 2023 15:54:51 -0800
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZApq/Rg2sbkCuQ2i@google.com>
+To: David Laight <David.Laight@aculab.com>
+Message-ID: <ZApxy2u9j3yKFRyS@google.com>
 References: <20230307151408.58490-1-chao@kernel.org>
+ <942fe8111fdb48e583b846f3e2902228@AcuMS.aculab.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230307151408.58490-1-chao@kernel.org>
-X-Spam-Score: -5.9 (-----)
+In-Reply-To: <942fe8111fdb48e583b846f3e2902228@AcuMS.aculab.com>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 03/07,
- Chao Yu wrote: > F2FS-fs (dm-x): inconsistent rbtree, 
- cur(3470333575168) next(3320009719808) > [ cut here ] > kernel BUG at
- fs/f2fs/gc.c:602! > Internal error: Oops - [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 03/08,
+ David Laight wrote: > From: Chao Yu <chao@kernel.org>
+ > > Sent: 07 March 2023 15:14 > > > > F2FS-fs (dm-x): inconsistent rbtree,
+ cur(3470333575168) next(3320009719808) > > [ cut [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [145.40.68.75 listed in list.dnswl.org]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1paPe3-002qdC-Bo
+ valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1paQ6C-00039H-2z
 Subject: Re: [f2fs-dev] [PATCH] f2fs: fix unaligned field offset in 32-bits
  platform
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -103,134 +104,112 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Zhiguo Niu <zhiguo.niu@unisoc.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Zhiguo Niu <zhiguo.niu@unisoc.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 03/07, Chao Yu wrote:
-> F2FS-fs (dm-x): inconsistent rbtree, cur(3470333575168) next(3320009719808)
-> ------------[ cut here ]------------
-> kernel BUG at fs/f2fs/gc.c:602!
-> Internal error: Oops - BUG: 0 [#1] PREEMPT SMP ARM
-> PC is at get_victim_by_default+0x13c0/0x1498
-> LR is at f2fs_check_rb_tree_consistence+0xc4/0xd4
-> ....
-> [<c04d98b0>] (get_victim_by_default) from [<c04d4f44>] (f2fs_gc+0x220/0x6cc)
-> [<c04d4f44>] (f2fs_gc) from [<c04d4780>] (gc_thread_func+0x2ac/0x708)
-> [<c04d4780>] (gc_thread_func) from [<c015c774>] (kthread+0x1a8/0x1b4)
-> [<c015c774>] (kthread) from [<c01010b4>] (ret_from_fork+0x14/0x20)
+On 03/08, David Laight wrote:
+> From: Chao Yu <chao@kernel.org>
+> > Sent: 07 March 2023 15:14
+> > 
+> > F2FS-fs (dm-x): inconsistent rbtree, cur(3470333575168) next(3320009719808)
+> > ------------[ cut here ]------------
+> > kernel BUG at fs/f2fs/gc.c:602!
+> > Internal error: Oops - BUG: 0 [#1] PREEMPT SMP ARM
+> > PC is at get_victim_by_default+0x13c0/0x1498
+> > LR is at f2fs_check_rb_tree_consistence+0xc4/0xd4
+> > ....
+> > [<c04d98b0>] (get_victim_by_default) from [<c04d4f44>] (f2fs_gc+0x220/0x6cc)
+> > [<c04d4f44>] (f2fs_gc) from [<c04d4780>] (gc_thread_func+0x2ac/0x708)
+> > [<c04d4780>] (gc_thread_func) from [<c015c774>] (kthread+0x1a8/0x1b4)
+> > [<c015c774>] (kthread) from [<c01010b4>] (ret_from_fork+0x14/0x20)
+> > 
+> > The reason is there is __packed attribute in struct rb_entry, but there
+> > is no __packed attribute in struct victim_entry, so wrong offset of key
+> > field will be parsed in struct rb_entry in f2fs_check_rb_tree_consistence,
+> > it describes memory layouts of struct rb_entry and struct victim_entry in
+> > 32-bits platform as below:
+> > 
+> > struct rb_entry {
+> >    [0] struct rb_node rb_node;
+> >        union {
+> >            struct {...};
+> >   [12]     unsigned long long key;
+> >        } __packed;
 > 
-> The reason is there is __packed attribute in struct rb_entry, but there
-> is no __packed attribute in struct victim_entry, so wrong offset of key
-> field will be parsed in struct rb_entry in f2fs_check_rb_tree_consistence,
-> it describes memory layouts of struct rb_entry and struct victim_entry in
-> 32-bits platform as below:
-> 
-> struct rb_entry {
->    [0] struct rb_node rb_node;
->        union {
->            struct {...};
->   [12]     unsigned long long key;
->        } __packed;
-> }
-> size of struct rb_entry: 20
-> 
-> struct victim_entry {
->    [0] struct rb_node rb_node;
->        union {
->            struct {...};
->   [16]     struct victim_info vi;
+> This __packed removes the 4-byte pad before the union.
+> I bet it should be removed...
 
-Why 16?
-Don't we get the key from "unsigned long long mtime" starting at [12]?
+struct rb_node {
+        unsigned long  __rb_parent_color;
+        struct rb_node *rb_right;
+        struct rb_node *rb_left;
+} __attribute__((aligned(sizeof(long))));
 
-	struct rb_node rb_node;		/* rb node located in rb-tree */
-	union {
-		struct {
-			unsigned long long mtime;	/* mtime of section */
-			unsigned int segno;		/* segment No. */
-		};
-		struct victim_info vi;	/* victim info */
-	}; 
+Hmm, isn't this aligned to 32bits originally? Why does 32bits pad 4-bytes
+if we remove __packed?
 
->        };
->   [32] struct list_head list;
-> }
-> size of struct victim_entry: 40
 > 
-> This patch tries to add __packed attribute in below structure:
-> - discard_info, discard_cmd
-> - extent_info, extent_node
-> - victim_info, victim_entry
-> in order to fix this unaligned field offset issue in 32-bits platform.
+> > }
+> > size of struct rb_entry: 20
+> > 
+> > struct victim_entry {
+> >    [0] struct rb_node rb_node;
+> >        union {
+> >            struct {...};
+> >   [16]     struct victim_info vi;
+> >        };
+> >   [32] struct list_head list;
+> > }
+> > size of struct victim_entry: 40
+> > 
+> > This patch tries to add __packed attribute in below structure:
+> > - discard_info, discard_cmd
+> > - extent_info, extent_node
+> > - victim_info, victim_entry
+> > in order to fix this unaligned field offset issue in 32-bits platform.
 > 
-> Fixes: 004b68621897 ("f2fs: use rb-tree to track pending discard commands")
-> Fixes: 13054c548a1c ("f2fs: introduce infra macro and data structure of rb-tree extent cache")
-> Fixes: 093749e296e2 ("f2fs: support age threshold based garbage collection")
-> Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  fs/f2fs/f2fs.h | 6 +++---
->  fs/f2fs/gc.h   | 4 ++--
->  2 files changed, 5 insertions(+), 5 deletions(-)
+> Have you looked at the amount of extra code that gets generated
+> on systems that fault misaligned accesses?
 > 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index b0ab2062038a..17fa7572ceed 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -349,7 +349,7 @@ struct discard_info {
->  	block_t lstart;			/* logical start address */
->  	block_t len;			/* length */
->  	block_t start;			/* actual start address in dev */
-> -};
-> +} __packed;
->  
->  struct discard_cmd {
->  	struct rb_node rb_node;		/* rb node located in rb-tree */
-> @@ -361,7 +361,7 @@ struct discard_cmd {
->  		};
->  		struct discard_info di;	/* discard info */
->  
-> -	};
-> +	} __packed;
->  	struct list_head list;		/* command list */
->  	struct completion wait;		/* compleation */
->  	struct block_device *bdev;	/* bdev */
-> @@ -660,7 +660,7 @@ struct extent_info {
->  			unsigned long long last_blocks;
->  		};
->  	};
-> -};
-> +} __packed;
->  
->  struct extent_node {
->  	struct rb_node rb_node;		/* rb node located in rb-tree */
-> diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
-> index 15bd1d680f67..304937d9a084 100644
-> --- a/fs/f2fs/gc.h
-> +++ b/fs/f2fs/gc.h
-> @@ -58,7 +58,7 @@ struct gc_inode_list {
->  struct victim_info {
->  	unsigned long long mtime;	/* mtime of section */
->  	unsigned int segno;		/* section No. */
-> -};
-> +} __packed;
->  
->  struct victim_entry {
->  	struct rb_node rb_node;		/* rb node located in rb-tree */
-> @@ -68,7 +68,7 @@ struct victim_entry {
->  			unsigned int segno;		/* segment No. */
->  		};
->  		struct victim_info vi;	/* victim info */
-> -	};
-> +	} __packed;
->  	struct list_head list;
->  };
->  
-> -- 
-> 2.36.1
+> Plausibly adding __packed __aligned(4) will restrict the compiler
+> to just aligning 64bit items on 32bit boundaries.
+> But even then is you pass the address of a misaligned structure
+> to another function it will fault later of.
+> 
+> You haven't actually said where the misalignment comes from.
+> If the code is doing (foo *)(ptr + 1) then that is broken
+> when the alignments of 'ptr' and 'foo' differ.
+
+IIUC, the problem comes since we access the same object with two structures
+to handle rb_tree.
+
+E.g.,
+
+[struct extent_node]                   [struct rb_entry]
+struct rb_node rb_node;                struct rb_node rb_node;
+                                       union {
+struct extent_info ei;                   struct {
+  unsigned int fofs;                       unsigned int ofs;
+  unsigned int len;                        unsigned int len;
+                                         };
+                                         unsigned long long key;
+                                       } __packed;
+
+So, I think if we get a different offset of fofs or ofs between in
+extent_node and rb_entry, further work'll access a wrong memory since
+we simply cast the object pointer between two.
+
+> 
+> 	David
+> 
+> -
+> Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
+> Registration No: 1397386 (Wales)
 
 
 _______________________________________________
