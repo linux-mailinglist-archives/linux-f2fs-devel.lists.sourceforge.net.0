@@ -2,149 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65D316B4E64
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Mar 2023 18:21:22 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B8B46B5286
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Mar 2023 22:05:15 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pagQe-0006Ki-Te;
-	Fri, 10 Mar 2023 17:21:17 +0000
+	id 1pajvJ-00007W-3I;
+	Fri, 10 Mar 2023 21:05:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1pagQd-0006Ka-9l
+ (envelope-from <jaegeuk@kernel.org>) id 1pajvH-00007N-Tn
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Mar 2023 17:21:15 +0000
+ Fri, 10 Mar 2023 21:05:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VdeXT8cHX2yTegN6ekSmSq6od6qVpIw+eNsSPhU0duA=; b=OCvedijSkWBAsOYd7gtUAL3tPe
- PEE1LFXVLHNUV8HNR75W2SXtIve9SsAsrHUwXvbWnnsHgq3s1Y/I3Z8sTFhBVvsO7Hy20C6yUEerw
- mHJXuoWoG/XYfobz7+SUEjnW2SsbQlhrkZUVUnMRfN8biNUB3AxKBs3qQpHY0/V3VdD0=;
+ bh=orcFZ4We/sLn3VolS68cg+8GHc9L20C0OWQsX4mIzfM=; b=Upd7Lycje8r2XQBtxW4pwFb47M
+ hvSrcerYCgnsiDqwxFTE8jeL47nlLB63/l8GPhPfc/CUtvUJmHSWFQtw22hobAYAwNyV/JST5nkRP
+ y+ZU9JRXTqQMwAiexqmAamM3HTJvLXw97M95vj01IVAjAsUfzfrTPfDg2Gm0gzyRHjA8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=VdeXT8cHX2yTegN6ekSmSq6od6qVpIw+eNsSPhU0duA=; b=F
- hcqrm2xiCgQpiJXmnYv/SNEcMZ7AZl+op1fnuYMe8d3jbL0P6pQqGwPWDsO6yOwTrf+3rnPPFZNXI
- QX2aGCNOmR3lSvmoLL1ay8ASy4Sq6EF8hk+UX2J5bAKm34IGCBM9jT7yp1Q8vApjh0ijtKAYzflBj
- Sst72OzE/g1ntzOY=;
-Received: from mail-tyzapc01on2092.outbound.protection.outlook.com
- ([40.107.117.92] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
+ List-Owner:List-Archive; bh=orcFZ4We/sLn3VolS68cg+8GHc9L20C0OWQsX4mIzfM=; b=Q
+ oY/h/jtBTFo0dLLVOAU6ODxfGiO4fTg73RcLuUsBMsHHzkKUDyxQColw7JrRxhGPDzYJVKv1b8coM
+ 9sB9LWT5LMmvCaCX9OJOh3F0yGynKDgLNRi/pRJblwM9EYrCSv2YpqjwVhdQWQR3pqpCsDJisBRR7
+ xj9WV5VtsbAUafm0=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pagQY-0006nR-6y for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Mar 2023 17:21:15 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PmirOavs6rffXmMz3XqyNLdKf7Z4WtbP8NfVr+qyLNB51GB5olMMLEbm7Pjt5eKVdzzpZ4PY+Ui/DQIbLFoH4IC5l72b2xve6jS6vtFImCO510O3ojsrlpQGo2eNfaDsZ2RNsuP0gM3W8+VxiZ7fYPPPMBWQxf7MDpol0wOw1FoM67Gkkr1KnKt4qkGcaPqkrKkQq7WzgwhmTSCcmmM7H7Uvyx+IqE4fUZV6v8VqM9rrIHiD8P5YQfhwGY99huaRU27aci0u0xP/4RBO1W8FHBF8aS9kDt86ug0v9cofaMdlqseBU/xgKls3Ya6UVP1foq4KoPcIWte3xeejOiFO8A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VdeXT8cHX2yTegN6ekSmSq6od6qVpIw+eNsSPhU0duA=;
- b=ipx7Ze7y5TKL9JNYsTx2xNjvIJuydUQoUHMVuUKgaEB/x138g63ej4c2JiDJSUgCmHomxr+qpcC4pQBE7viVr7noRWyX8iQ2AB15PUPzWtadtKoroU0c7NcNtdSkzFdSR4hKbG2NUVt2JD7xzbqt6/qHDyfYAuCNNK5HqzqvB8QNlsdWEliN9LLmt8gF1O01b6KFUqJSVQuVXeEd2WDRAzHEAAt51WtBss6h9e6N5JYUHepqvRleN5OxbjSWVwwBPq/Em0ydeCvxcG9eG4CZrrK/bVG7Yuf/EGC/r85K9qfzvkUqZi2RJjUjmf8rERW3aJnfviVULZlAMP3+l4KWew==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VdeXT8cHX2yTegN6ekSmSq6od6qVpIw+eNsSPhU0duA=;
- b=Ab39MdtizwnPIdX+oIQz7UUuzvLnWCkve0eK6DWiJOzYIxLDA0d8HSIz1hhpKkKXu239hPwI1wLwTsOYGdZxy6IYkCKDCQatwgIrFLHin20hKjFORXjPQ0a+ChOhHT94AMz081273ukNYNmWaFn8R1AgZ1A6HsVUxi0Xe3qztbFOqQPh32ZVhRjzGBQjMwZNsFUZrnK4YNEsDjJeMxO2caUlWlKFE3vxxaLS+OBJBBeh2kk8l/fB5rB5h2a66OGGxbKXAlDojS1rca31Fxg30AO0wbK9iV2tb1VowqRTuQYySqqKSnRKZdqYmdgUqoNJ7gvy1gcRWoSsEMR/ym6dCg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by TY0PR06MB5848.apcprd06.prod.outlook.com (2603:1096:400:275::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.20; Fri, 10 Mar
- 2023 17:21:00 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::daf6:5ebb:a93f:1869]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::daf6:5ebb:a93f:1869%9]) with mapi id 15.20.6178.019; Fri, 10 Mar 2023
- 17:21:00 +0000
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Sat, 11 Mar 2023 01:20:48 +0800
-Message-Id: <20230310172048.27996-1-frank.li@vivo.com>
-X-Mailer: git-send-email 2.35.1
-X-ClientProxiedBy: SI1PR02CA0058.apcprd02.prod.outlook.com
- (2603:1096:4:1f5::9) To SEZPR06MB5269.apcprd06.prod.outlook.com
- (2603:1096:101:78::6)
+ id 1pajvI-0008VV-1n for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 Mar 2023 21:05:08 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AD09261CC7
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 10 Mar 2023 21:05:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E0D3C433EF;
+ Fri, 10 Mar 2023 21:05:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1678482301;
+ bh=ufn00wP0sV8fXwjhldQV9NohBmeMthR1PV71MsYlCPw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=DHsF0T45vo6fAiJa3vmt00EAuV4P1jQrgm3ZdvCaJGxAhzgwmDpBof9FvLQbqi2vx
+ kSoKE/VuWDFMCElwt7mmVuchRCoYJhHsYHWQJBz/hby3O0jx6wtJtylH8cq/bd71hj
+ dOE5wyZWANeRa5L6qzilF4mYumPlTXn5tRJTYKGloVXXmaAKtAx2FqpMylkrFrvIlX
+ Zs4nfqqOvEIveiPy6MuxaaU28lGgchJXKkdTJtkol0HlbdtLFFPflqRCPzSYSX1G8O
+ LS1wFGwlin1/H5iJDl6HxLp/0h6wNHBjwG98uTU6ZcKrrSLlgqCK4Z6+2M0wzTRMLF
+ ZHVPY1S2Adgtg==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 10 Mar 2023 13:04:52 -0800
+Message-Id: <20230310210454.2350881-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.40.0.rc1.284.g88254d51c5-goog
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|TY0PR06MB5848:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93292147-ab68-4da0-7f3c-08db218bd146
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: K2R/vhMk9r1z9t0+rAytICDRBO3mo54B22J/u/Oz726qs585pdwHGhl3+7K9+6gfXdZXfPqPcSOG939rUZX7NRxluAndt+ppoiRPdnxHFpmSriEfTS0wQ8vwcKt7JsiFT5Uz8KUrCqJlT2zTqdCE5pof+FQDTLLD6laGTy7KlQYn4YCynNJ0zVV+LhFkQqvwWk/+ORQwCoF8NWQKtorPPg6BPfRgHs9AIHTHpAZAtUMy5UN1CYXx/BVSTRXK1u+URH8gOeVret3jZhhWaE0pr3wA8MjpsN9bSuHmxXZngHUmdtB6/Js4gsCj2m98MctJJj6mGmzyWaAkPKNiXEWBHjxG3i57hQzP0cIVxV1PCop+jEp2ielHiyo9RjOMT8Ly2vxMHsC4U4mtN4T/R36hA7Qi+WhgFnw2GI4YXUldpy1l1/4Ezy97VS3l39oo8a8uz8XB3O4GddJkK7zgt1atfBUDzc2HL3UufIDWbozDFW+TrMXclVolY4IB1rD2yEWDtkTwf9arI7RqYlhHo/iNDjHKdVGNSNMkoa1BfGCjcn3O3s7GdxuSRjhgKyPvmq6zHjA4z+J+Q7/+YoYV0AAt13rPVz08YRmPjQcq9eHDNpW2MAPSieQz4HZViKCVEvDXi0lXbnCQhVXlm2/MGkdxDhqpThzNkIXC16gsdSk3f3fUDOdtoERQ8U6DkWbtjcqJT/ymJ2X4abKDdIqUH5tbHA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230025)(4636009)(346002)(396003)(376002)(39860400002)(136003)(366004)(451199018)(38350700002)(41300700001)(186003)(26005)(1076003)(6506007)(38100700002)(316002)(6512007)(86362001)(2616005)(4744005)(83380400001)(8936002)(6666004)(107886003)(36756003)(4326008)(8676002)(2906002)(52116002)(478600001)(66556008)(66946007)(66476007)(5660300002)(6486002);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?pGV3XxZuSTLri0gbh59qVz2u6fKwm/v2QYy/YQLqvozHPDXfVp9U1TJGYVzU?=
- =?us-ascii?Q?UVjoLY/DP+igBsw5sPrrofN96NfGwf9A2psSGI9jhre4wLFHPvNiMV+ih/II?=
- =?us-ascii?Q?s/ZjDAbjBFXUtbkUTTlxvZGHRlqG22REVBVVxDG4u+FbXjyBHbhPOchbQSYi?=
- =?us-ascii?Q?tMYFicsK7QtcWTyCrm+qX9mq7/JAMfC0L7HTMYVpUSMr2li1pPw8PEJecx+0?=
- =?us-ascii?Q?Hy2ER00/WMxDDg3ef6zXjjiZ9Orr/IVFS585Ol60yUkJy9PapTEkbpkhZpy1?=
- =?us-ascii?Q?Dh/Li0v63lZWT6yxwQCac7y9/O0sFUcXS6bLixR0wVzqs3Ig2mhLN/BmNqFU?=
- =?us-ascii?Q?5FqDrBEAau7iItK3MSFP3CcCfCwSwAqiVPr0EUPqDxFuL7leKPSMz96zRWSC?=
- =?us-ascii?Q?lh7RnJmV15lsfsXb8eeiyzRYpJJWkuZG8P8vvTWIQDGoSnAmVIJpqZ0DwedL?=
- =?us-ascii?Q?p8EbY9vK4LvFCJRNtkYatnAtF8RdilKlcVHq77G9QLGb9CvlfV17nbaeQjog?=
- =?us-ascii?Q?DqO5jGeJSIlrXdNfA++/smTQbzdj82tKzHyF3neLV6wyqguQpV0XbZPEi/+8?=
- =?us-ascii?Q?qaToOsgqKj3hoRqWMXicuLfkBLwLTQFHS7twMdDSDefKz5ZQsJ5mKAglLmvl?=
- =?us-ascii?Q?OWZOW8kDIZCm3gL4BHAnEwEIZ3vldaSNOw8MXJ2GW3avklIW9y/w0PTm9cBm?=
- =?us-ascii?Q?UIvCE82Fbs1UdGg6riwdRU14VF1yR1kZ9qCdRvVfZrebqt+gXATlRdpJXdtP?=
- =?us-ascii?Q?QjD0gzHW7ydm1hErpeSLEhh/84W9M+LnOn4Vs5QrxBpVgxM482hgU5rnE05C?=
- =?us-ascii?Q?lc2nn8XKadPfLuqCGDEtmHJRz/uORbAZlmU1Yo07VzYIvs68PS5LqrItaE3d?=
- =?us-ascii?Q?Tb7mYd7dRtOSSkF31JUCICci0lTzWjLYYLnVzFa/zvBG5wk69kFQY+qaCY0W?=
- =?us-ascii?Q?FE6KXdBq0YOnaCp8wkhdz5FFa2C3aTbCeF6pHKaO55uo7aQcaRCXa1P4Lhyv?=
- =?us-ascii?Q?1/LCxbxHKxAFWCenCKgvJ48OQi3LV7Y5L7EKMkv4PGFpKn3SGv6p91/6R1/R?=
- =?us-ascii?Q?hnqe+teQ8cOKn/H5CRVp0VUcWdFMBsBycZ7ouzeR02xjdh4TnFoK5KqTTwnD?=
- =?us-ascii?Q?cD033qV4h2tmKhYycvVqOeI8dydDhjJytnrtc/jz9suKSHKgvKUQ6eSoy4Ie?=
- =?us-ascii?Q?72zJVlw85d9vn5IoswDyM75mT9oRsmt6B2MiegatmOihmOWw4VV9ssUoK+cs?=
- =?us-ascii?Q?8j1Fq/pfKRNcS4UhOYHMe04eJbCXEkA5T5Ajwz0/68lNZyUmHPTw/at/UO49?=
- =?us-ascii?Q?PVA91BMzczPlKd/o+z5DunsV9zhEViYL98/KXgW+e93klIxVAX7GcIvM5nh0?=
- =?us-ascii?Q?ZKGKnTpHb+04f0UNJQnOEPFv+mZQNgDFNbrYSzjNuWC0MTgYp0f1i7RVAnCZ?=
- =?us-ascii?Q?5ZXpovrnLhKbeZdQ9S+FJxEk0kTuVJ2k1RedoRld+D74xaciC9cr2LLNUxLd?=
- =?us-ascii?Q?pf0bh+nWyIRxC/6zq8s3LBLZSpvAcjmP9GnxH4EBynhah3+bxNdDbEK4Zauq?=
- =?us-ascii?Q?vPw2wpLH3Q/RjzY+kwiX5ymh2L+vtpBBcfei8RXq?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93292147-ab68-4da0-7f3c-08db218bd146
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2023 17:21:00.0473 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qDrr6X1SilQrVIc1jR7TMTjxABZ16Ic0gmH4bnuyFXE5l4eprSvrmd2hn0IEeZ+bHto0mRwd0kmGYgHgnLsk4Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR06MB5848
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  s/not compatible/is not compatible Signed-off-by: Yangtao
- Li <frank.li@vivo.com> --- fs/f2fs/super.c | 4 ++-- 1 file changed,
- 2 insertions(+), 
- 2 deletions(-) diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c index
- 9c87d91df61b..4c22f1b1da09
- 100644 --- a/fs/f2fs/super.c +++ b/fs/f2fs/super.c @@ -1350,7 +1350,7 @@
- static int parse_options(struct super_block *sb [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: Let's reduce the complexity of mixed use of rb_tree in
+ victim_entry
+ from extent_cache and discard_cmd. This should fix arm32 memory alignment
+ issue caused by shared rb_entry. [struct victim_entry] [struct rb_entry]
+ [0] struct rb_node rb_node; [0] struct rb_node rb_node;
+ union { struct { unsigned
+ int ofs; unsigned int len; }; [16] unsigned long long mtime; [12] unsigned
+ lon [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.117.92 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.117.92 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -152,9 +92,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
-X-Headers-End: 1pagQY-0006nR-6y
-Subject: [f2fs-dev] [PATCH] f2fs: fix typo
+ valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pajvI-0008VV-1n
+Subject: [f2fs-dev] [PATCH 1/3] f2fs: factor out victim_entry usage from
+ general rb_tree use
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -166,45 +107,332 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yangtao Li <frank.li@vivo.com>
-Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, stable@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-s/not compatible/is not compatible
+Let's reduce the complexity of mixed use of rb_tree in victim_entry from
+extent_cache and discard_cmd.
 
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
+This should fix arm32 memory alignment issue caused by shared rb_entry.
+
+[struct victim_entry]              [struct rb_entry]
+[0] struct rb_node rb_node;        [0] struct rb_node rb_node;
+                                       union {
+                                         struct {
+                                           unsigned int ofs;
+                                           unsigned int len;
+                                         };
+[16] unsigned long long mtime;     [12] unsigned long long key;
+                                       } __packed;
+
+Cc: <stable@vger.kernel.org>
+Fixes: 093749e296e2 ("f2fs: support age threshold based garbage collection")
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/super.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ fs/f2fs/extent_cache.c | 36 +-------------------
+ fs/f2fs/f2fs.h         | 15 ++-------
+ fs/f2fs/gc.c           | 74 ++++++++++++++++++++++++++++++++++--------
+ fs/f2fs/gc.h           | 14 ++------
+ fs/f2fs/segment.c      |  4 +--
+ 5 files changed, 68 insertions(+), 75 deletions(-)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 9c87d91df61b..4c22f1b1da09 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1350,7 +1350,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
+index 28b12553f2b3..d1aa4609ca6b 100644
+--- a/fs/f2fs/extent_cache.c
++++ b/fs/f2fs/extent_cache.c
+@@ -204,29 +204,6 @@ struct rb_entry *f2fs_lookup_rb_tree(struct rb_root_cached *root,
+ 	return re;
+ }
+ 
+-struct rb_node **f2fs_lookup_rb_tree_ext(struct f2fs_sb_info *sbi,
+-					struct rb_root_cached *root,
+-					struct rb_node **parent,
+-					unsigned long long key, bool *leftmost)
+-{
+-	struct rb_node **p = &root->rb_root.rb_node;
+-	struct rb_entry *re;
+-
+-	while (*p) {
+-		*parent = *p;
+-		re = rb_entry(*parent, struct rb_entry, rb_node);
+-
+-		if (key < re->key) {
+-			p = &(*p)->rb_left;
+-		} else {
+-			p = &(*p)->rb_right;
+-			*leftmost = false;
+-		}
+-	}
+-
+-	return p;
+-}
+-
+ struct rb_node **f2fs_lookup_rb_tree_for_insert(struct f2fs_sb_info *sbi,
+ 				struct rb_root_cached *root,
+ 				struct rb_node **parent,
+@@ -335,7 +312,7 @@ struct rb_entry *f2fs_lookup_rb_tree_ret(struct rb_root_cached *root,
+ }
+ 
+ bool f2fs_check_rb_tree_consistence(struct f2fs_sb_info *sbi,
+-				struct rb_root_cached *root, bool check_key)
++				struct rb_root_cached *root)
+ {
+ #ifdef CONFIG_F2FS_CHECK_FS
+ 	struct rb_node *cur = rb_first_cached(root), *next;
+@@ -352,23 +329,12 @@ bool f2fs_check_rb_tree_consistence(struct f2fs_sb_info *sbi,
+ 		cur_re = rb_entry(cur, struct rb_entry, rb_node);
+ 		next_re = rb_entry(next, struct rb_entry, rb_node);
+ 
+-		if (check_key) {
+-			if (cur_re->key > next_re->key) {
+-				f2fs_info(sbi, "inconsistent rbtree, "
+-					"cur(%llu) next(%llu)",
+-					cur_re->key, next_re->key);
+-				return false;
+-			}
+-			goto next;
+-		}
+-
+ 		if (cur_re->ofs + cur_re->len > next_re->ofs) {
+ 			f2fs_info(sbi, "inconsistent rbtree, cur(%u, %u) next(%u, %u)",
+ 				  cur_re->ofs, cur_re->len,
+ 				  next_re->ofs, next_re->len);
+ 			return false;
+ 		}
+-next:
+ 		cur = next;
+ 	}
+ #endif
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 9c3ddebd28e3..9396549e112d 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -630,13 +630,8 @@ enum extent_type {
+ 
+ struct rb_entry {
+ 	struct rb_node rb_node;		/* rb node located in rb-tree */
+-	union {
+-		struct {
+-			unsigned int ofs;	/* start offset of the entry */
+-			unsigned int len;	/* length of the entry */
+-		};
+-		unsigned long long key;		/* 64-bits key */
+-	} __packed;
++	unsigned int ofs;		/* start offset of the entry */
++	unsigned int len;		/* length of the entry */
+ };
+ 
+ struct extent_info {
+@@ -4139,10 +4134,6 @@ void f2fs_leave_shrinker(struct f2fs_sb_info *sbi);
+ bool sanity_check_extent_cache(struct inode *inode);
+ struct rb_entry *f2fs_lookup_rb_tree(struct rb_root_cached *root,
+ 				struct rb_entry *cached_re, unsigned int ofs);
+-struct rb_node **f2fs_lookup_rb_tree_ext(struct f2fs_sb_info *sbi,
+-				struct rb_root_cached *root,
+-				struct rb_node **parent,
+-				unsigned long long key, bool *left_most);
+ struct rb_node **f2fs_lookup_rb_tree_for_insert(struct f2fs_sb_info *sbi,
+ 				struct rb_root_cached *root,
+ 				struct rb_node **parent,
+@@ -4153,7 +4144,7 @@ struct rb_entry *f2fs_lookup_rb_tree_ret(struct rb_root_cached *root,
+ 		struct rb_node ***insert_p, struct rb_node **insert_parent,
+ 		bool force, bool *leftmost);
+ bool f2fs_check_rb_tree_consistence(struct f2fs_sb_info *sbi,
+-				struct rb_root_cached *root, bool check_key);
++				struct rb_root_cached *root);
+ void f2fs_init_extent_tree(struct inode *inode);
+ void f2fs_drop_extent_tree(struct inode *inode);
+ void f2fs_destroy_extent_node(struct inode *inode);
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 292a17d62f56..19a6d0c54581 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -398,8 +398,7 @@ static struct victim_entry *attach_victim_entry(struct f2fs_sb_info *sbi,
+ 	struct atgc_management *am = &sbi->am;
+ 	struct victim_entry *ve;
+ 
+-	ve =  f2fs_kmem_cache_alloc(victim_entry_slab,
+-				GFP_NOFS, true, NULL);
++	ve =  f2fs_kmem_cache_alloc(victim_entry_slab, GFP_NOFS, true, NULL);
+ 
+ 	ve->mtime = mtime;
+ 	ve->segno = segno;
+@@ -414,6 +413,29 @@ static struct victim_entry *attach_victim_entry(struct f2fs_sb_info *sbi,
+ 	return ve;
+ }
+ 
++static struct rb_node **f2fs_lookup_rb_tree_ext(struct f2fs_sb_info *sbi,
++				struct rb_root_cached *root,
++				struct rb_node **parent,
++				unsigned long long mtime, bool *leftmost)
++{
++	struct rb_node **p = &root->rb_root.rb_node;
++	struct victim_entry *ve;
++
++	while (*p) {
++		*parent = *p;
++		ve = rb_entry(*parent, struct victim_entry, rb_node);
++
++		if (mtime < ve->mtime) {
++			p = &(*p)->rb_left;
++		} else {
++			p = &(*p)->rb_right;
++			*leftmost = false;
++		}
++	}
++
++	return p;
++}
++
+ static void insert_victim_entry(struct f2fs_sb_info *sbi,
+ 				unsigned long long mtime, unsigned int segno)
+ {
+@@ -481,7 +503,6 @@ static void atgc_lookup_victim(struct f2fs_sb_info *sbi,
+ 	struct atgc_management *am = &sbi->am;
+ 	struct rb_root_cached *root = &am->root;
+ 	struct rb_node *node;
+-	struct rb_entry *re;
+ 	struct victim_entry *ve;
+ 	unsigned long long total_time;
+ 	unsigned long long age, u, accu;
+@@ -508,12 +529,10 @@ static void atgc_lookup_victim(struct f2fs_sb_info *sbi,
+ 
+ 	node = rb_first_cached(root);
+ next:
+-	re = rb_entry_safe(node, struct rb_entry, rb_node);
+-	if (!re)
++	ve = rb_entry_safe(node, struct victim_entry, rb_node);
++	if (!ve)
+ 		return;
+ 
+-	ve = (struct victim_entry *)re;
+-
+ 	if (ve->mtime >= max_mtime || ve->mtime < min_mtime)
+ 		goto skip;
+ 
+@@ -556,7 +575,6 @@ static void atssr_lookup_victim(struct f2fs_sb_info *sbi,
+ 	struct sit_info *sit_i = SIT_I(sbi);
+ 	struct atgc_management *am = &sbi->am;
+ 	struct rb_node *node;
+-	struct rb_entry *re;
+ 	struct victim_entry *ve;
+ 	unsigned long long age;
+ 	unsigned long long max_mtime = sit_i->dirty_max_mtime;
+@@ -576,15 +594,13 @@ static void atssr_lookup_victim(struct f2fs_sb_info *sbi,
+ next_stage:
+ 	node = lookup_central_victim(sbi, p);
+ next_node:
+-	re = rb_entry_safe(node, struct rb_entry, rb_node);
+-	if (!re) {
++	ve = rb_entry_safe(node, struct victim_entry, rb_node);
++	if (!ve) {
+ 		if (stage == 0)
+ 			goto skip_stage;
+ 		return;
  	}
  
- 	if (f2fs_is_readonly(sbi) && test_opt(sbi, FLUSH_MERGE)) {
--		f2fs_err(sbi, "FLUSH_MERGE not compatible with readonly mode");
-+		f2fs_err(sbi, "FLUSH_MERGE is not compatible with readonly mode");
- 		return -EINVAL;
+-	ve = (struct victim_entry *)re;
+-
+ 	if (ve->mtime >= max_mtime || ve->mtime < min_mtime)
+ 		goto skip_node;
+ 
+@@ -623,11 +639,41 @@ static void atssr_lookup_victim(struct f2fs_sb_info *sbi,
+ 		goto next_stage;
  	}
+ }
++
++static bool f2fs_check_victim_tree(struct f2fs_sb_info *sbi,
++				struct rb_root_cached *root)
++{
++#ifdef CONFIG_F2FS_CHECK_FS
++	struct rb_node *cur = rb_first_cached(root), *next;
++	struct victim_entry *cur_ve, *next_ve;
++
++	if (!cur)
++		return true;
++
++	while (cur) {
++		next = rb_next(cur);
++		if (!next)
++			return true;
++
++		cur_ve = rb_entry(cur, struct victim_entry, rb_node);
++		next_ve = rb_entry(next, struct victim_entry, rb_node);
++
++		if (cur_ve->mtime > next_ve->mtime) {
++			f2fs_info(sbi, "broken victim_rbtree, "
++				"cur_mtime(%llu) next_mtime(%llu)",
++				cur_ve->mtime, next_ve->mtime);
++			return false;
++		}
++		cur = next;
++	}
++#endif
++	return true;
++}
++
+ static void lookup_victim_by_age(struct f2fs_sb_info *sbi,
+ 						struct victim_sel_policy *p)
+ {
+-	f2fs_bug_on(sbi, !f2fs_check_rb_tree_consistence(sbi,
+-						&sbi->am.root, true));
++	f2fs_bug_on(sbi, !f2fs_check_victim_tree(sbi, &sbi->am.root));
  
-@@ -2342,7 +2342,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+ 	if (p->gc_mode == GC_AT)
+ 		atgc_lookup_victim(sbi, p);
+diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+index 15bd1d680f67..5ad6ac63e13f 100644
+--- a/fs/f2fs/gc.h
++++ b/fs/f2fs/gc.h
+@@ -55,20 +55,10 @@ struct gc_inode_list {
+ 	struct radix_tree_root iroot;
+ };
  
- 	if ((*flags & SB_RDONLY) && test_opt(sbi, DISABLE_CHECKPOINT)) {
- 		err = -EINVAL;
--		f2fs_warn(sbi, "disabling checkpoint not compatible with read-only");
-+		f2fs_warn(sbi, "disabling checkpoint is not compatible with read-only");
- 		goto restore_opts;
- 	}
+-struct victim_info {
+-	unsigned long long mtime;	/* mtime of section */
+-	unsigned int segno;		/* section No. */
+-};
+-
+ struct victim_entry {
+ 	struct rb_node rb_node;		/* rb node located in rb-tree */
+-	union {
+-		struct {
+-			unsigned long long mtime;	/* mtime of section */
+-			unsigned int segno;		/* segment No. */
+-		};
+-		struct victim_info vi;	/* victim info */
+-	};
++	unsigned long long mtime;	/* mtime of section */
++	unsigned int segno;		/* segment No. */
+ 	struct list_head list;
+ };
  
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 227e25836173..e98a12e8dca1 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1478,7 +1478,7 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+ 			goto next;
+ 		if (unlikely(dcc->rbtree_check))
+ 			f2fs_bug_on(sbi, !f2fs_check_rb_tree_consistence(sbi,
+-							&dcc->root, false));
++							&dcc->root));
+ 		blk_start_plug(&plug);
+ 		list_for_each_entry_safe(dc, tmp, pend_list, list) {
+ 			f2fs_bug_on(sbi, dc->state != D_PREP);
+@@ -2965,7 +2965,7 @@ static unsigned int __issue_discard_cmd_range(struct f2fs_sb_info *sbi,
+ 	mutex_lock(&dcc->cmd_lock);
+ 	if (unlikely(dcc->rbtree_check))
+ 		f2fs_bug_on(sbi, !f2fs_check_rb_tree_consistence(sbi,
+-							&dcc->root, false));
++							&dcc->root));
+ 
+ 	dc = (struct discard_cmd *)f2fs_lookup_rb_tree_ret(&dcc->root,
+ 					NULL, start,
 -- 
-2.35.1
+2.40.0.rc1.284.g88254d51c5-goog
 
 
 
