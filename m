@@ -2,85 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CD606B7F71
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Mar 2023 18:25:41 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C0156B826B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Mar 2023 21:12:59 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pblvU-0008WJ-Cp;
-	Mon, 13 Mar 2023 17:25:36 +0000
+	id 1pboXH-00067d-RD;
+	Mon, 13 Mar 2023 20:12:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sales1@asda.co.uk>) id 1pblvT-0008WD-PT
+ (envelope-from <jaegeuk@kernel.org>) id 1pboX4-00067V-U0
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Mar 2023 17:25:36 +0000
+ Mon, 13 Mar 2023 20:12:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:Subject:To:From:Reply-To:Sender:Cc:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PDLUiNbU/elmUKeDRgM3Rm1PAHn7IUBiXGOZM3d1kYc=; b=XbsZQ5W1gfNQ/U2kY1IqP+t5io
- xsy381WpnePpgd6lIxkXlBMUndczl6JzRPYZiGxB4M+tpYMvcnwa6qZ6Dz6YU6uGPHcbGYpxqIjjf
- c/z4zBzvr7JYPd2aqyC5Jjh9zuoveR/eqXhHIra7hHT2OBq38DsQ2BsVF3vXCh8FKzG0=;
+ bh=RNOnQSzxnnlo6WTgOcU+1OPbMbj0YuiC+MnuGHcOwuM=; b=WQkvzqUeX46VmytF5LtowQ4AtD
+ b1VidI6+8H0tPUujuWu7pKOxqNSIY/jABiMWXAwWX752w7hT4ABRV0umFT9XdVru7EgoW6YUc1si8
+ EaeADnZCo/p6Kec5ll8DuEkbjr68B6NPR5daZqVegBThcrQFD+aTsEJp7tplctmqhjmI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:To:From:Reply-To:Sender:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=PDLUiNbU/elmUKeDRgM3Rm1PAHn7IUBiXGOZM3d1kYc=; b=F
- 1vRJ1wUpyan7WsK4AnRjE0Gqnig9S3EOGdJ7UtpRWbHmo7b0GKze9F7+342eg9Qn4cy0sM7xnneNv
- lNao2Tnx0PjNyqJ6ri6R6zb4vczQMWj9fXxHW4fbIEOpI+fvzWFaOmPgv0ocuoHVv6BIfu0gifXa4
- TlXJkZ5pBNG6b9WM=;
-Received: from [103.30.145.160]
- (helo=defaultworkshop.klidefectmanagement.com.novalocal)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=RNOnQSzxnnlo6WTgOcU+1OPbMbj0YuiC+MnuGHcOwuM=; b=h
+ Nuwy8UUjqYa3rjyeTJhyyf7vKNZBJGOctum//jYZn9ss2JpNhxlEbjpQ0GALUWuzY427CohLvmdkC
+ e9wjCFyNOn+qwxE+KtvaB5R63f8KxnmZZpgP9DOAvr5FID41/WxhFJD6rX6Azz2lVX8USCo1jRKxo
+ 5RmPSJxd3bmpwijI=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pblvT-0007AO-Mr for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Mar 2023 17:25:36 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=asda.co.uk; 
- s=x;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:To:From:Reply-To:Sender:Cc:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=PDLUiNbU/elmUKeDRgM3Rm1PAHn7IUBiXGOZM3d1kYc=; b=f
- 6Hy6BOdT+GR5u1MaMnJrfCG1paNm3idgwjgNhnpPoG4QNSpeLSI7w2n7zAnGEDNRNPZC5ovf5ub03
- wUJA9jvyALVOCBhULl2zehq0ZKeSrBahGODsIdAs1rm9JsR3EoVuHYPAIYu7OTRwwkDgMmYlwyOqO
- T67wRSwMX2uobsCM=;
-Received: from ec2-52-11-215-80.us-west-2.compute.amazonaws.com
- ([52.11.215.80] helo=asda.co.uk)
- by defaultworkshop.klidefectmanagement.com.novalocal with esmtpa (Exim 4.94.2)
- (envelope-from <sales1@asda.co.uk>) id 1pblvM-0005hs-JZ
- for linux-f2fs-devel@lists.sourceforge.net; Tue, 14 Mar 2023 00:25:29 +0700
-From: ASDA Stores Limited <sales1@asda.co.uk>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: 13 Mar 2023 17:25:27 +0000
-Message-ID: <20230313152049.A759EAF18A015C5B@asda.co.uk>
+ id 1pboX5-006l6m-7k for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 13 Mar 2023 20:12:35 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 1B1EAB8136E
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 13 Mar 2023 20:12:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B49BFC433EF;
+ Mon, 13 Mar 2023 20:12:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1678738347;
+ bh=93oBMhuuWAg7pa428yDott1Pdcee67T+Qwe4d9PxvgM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=lR2dCQZ75GzqqfbwgBo3G/Gad6lzit53Eq10yxIBT5ufJDzbpeAfwZ/nZVEwjYbxs
+ uFutQQYE+rWYUxqtTc2q9vzougmNrmXi6iNbkhQl+fpJpZf2PjpG835zSBE3n44Fdm
+ InQARHxj3aAVK5nowH/AyooQOjDSjHs3rGe8WEKF04iTOGX28ooUReP9PI875jPrNm
+ gn1SrWKG/J591OYn+L8t6QJEyfxt4dt2l0R/DDyA9pyG3kRRxx75s1FE0A3az/yejJ
+ sl1MO9kmdKESq+PlGLGgAfTW0mmIzknVt4jR4nqRxHHA2wgy20Hr8sal+Q0JmSGggt
+ f6/9QCWbK1zLw==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 13 Mar 2023 13:12:13 -0700
+Message-Id: <20230313201216.924234-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.40.0.rc1.284.g88254d51c5-goog
 MIME-Version: 1.0
-X-Spam-Score: 2.4 (++)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Dear linux-f2fs-devel I'm a procurement manager with ASDA
- Group (the owners of ASDA Stores) and your company product has caught our
- interest. Therefore, we request you send list and prices of your hot [...]
- Content analysis details:   (2.4 points, 6.0 required)
+ Content preview: This series removes the use of rb_entry based on memory
+ alignment
+ which doesn't look like a right design when considering various
+ architectures/compilers.
+ v2 from v1: - adjusted Eric's review - refactored gc.c further to clean up
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 1.0 SPF_SOFTFAIL           SPF: sender does not match SPF record (softfail)
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- 0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
- 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-X-Headers-End: 1pblvT-0007AO-Mr
-Subject: [f2fs-dev] First quarter procurement order/enquiry
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [145.40.68.75 listed in list.dnswl.org]
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pboX5-006l6m-7k
+Subject: [f2fs-dev] [PATCH 0/3] remove shared memory structures
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -92,33 +104,33 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: sales@asda-c.com
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Dear linux-f2fs-devel
-I'm a procurement manager  with ASDA Group (the owners of ASDA 
-Stores) and your company product has caught our interest. 
-Therefore, we request you send
-list and prices of your hot selling items (products) for our 
-evaluation/pick.
+This series removes the use of rb_entry based on memory alignment which doesn't
+look like a right design when considering various architectures/compilers.
 
-Soon as we receive your reply, we shall send you our company 
-profile and buying proposal. You can also check our website below 
-for detailed info of our purchase area and trading capacity.
+ v2 from v1:
+  - adjusted Eric's review
+  - refactored gc.c further to clean up
 
-Your immediate response E-mail:  sales@asda-c.com   shall be 
-appreciated.
+Jaegeuk Kim (3):
+  f2fs: factor out victim_entry usage from general rb_tree use
+  f2fs: factor out discard_cmd usage from general rb_tree use
+  f2fs: remove entire rb_entry sharing
 
-Best Wishes
+ fs/f2fs/extent_cache.c | 241 ++++++++++++---------------------------
+ fs/f2fs/f2fs.h         |  38 +------
+ fs/f2fs/gc.c           | 139 ++++++++++++++---------
+ fs/f2fs/gc.h           |  14 +--
+ fs/f2fs/segment.c      | 252 +++++++++++++++++++++++++++--------------
+ 5 files changed, 324 insertions(+), 360 deletions(-)
 
-Ms Stelle Montgomery
-Purchasing Dept.
-ASDA Stores Limited
-Tel:  +44 7418367220
-WhatsApp: + 44-7502985874
-Website: www.asda.com
+-- 
+2.40.0.rc1.284.g88254d51c5-goog
+
 
 
 _______________________________________________
