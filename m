@@ -2,138 +2,158 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFA176BE03F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Mar 2023 05:42:15 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C737C6BFFE3
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 19 Mar 2023 08:52:08 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pd1ur-0004lD-Dk;
-	Fri, 17 Mar 2023 04:42:09 +0000
+	id 1pdnpg-0003N4-L1;
+	Sun, 19 Mar 2023 07:52:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yonggil.song@samsung.com>) id 1pd1uq-0004l0-7O
+ (envelope-from <frank.li@vivo.com>) id 1pdnpe-0003Mx-Kq
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 17 Mar 2023 04:42:08 +0000
+ Sun, 19 Mar 2023 07:51:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- Date:Message-ID:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bKzs6ie9jGyq5vPlXlQ+VCASdpfrk5dRG/RQ1bs+T3s=; b=Ex6BknxuxZ4kP9UyYGY52KAdhu
- g0KrkTqEpy5Ldy5gaeXTbejj3cm9WOxPDefhap476urAMsTu1/CCAd2S00utf7Kf4za8qWRkDvvCM
- +1m6R3XJCEdBBvvW3ywUqgL0CeQSOHXP6Ap573Be1aiOayNclr+cwAWojHp3DeqgWau4=;
+ bh=VUWwBkzOfM1kB3c/5VYdcEvnLFhDOME4sOKTv0gGYpM=; b=lv0IPTuryLi/RB9t0LFFkIaKYO
+ YlFI808y6YT6Vr33VIKhOneW6R9UK7iBAjpnIuwrvtFHicuR4Baig6ewJ0FrSU9x6+FZHKn4Le1Tn
+ y9H1vLnF73FhTIFcD5MQO9e5fW0ZtGdRKpowiNHOaOT+uCsSk7WmR3RGTOYIz+07Q5zM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:CC:To:
- From:Sender:Reply-To:Subject:Mime-Version:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=bKzs6ie9jGyq5vPlXlQ+VCASdpfrk5dRG/RQ1bs+T3s=; b=D
- VpIZlaNtuwpHzv+QXji5IRI8BwIXHRM71937DdUGcAQFM4pZNi3RLQU06OcypxHpiPnODgds1TT0q
- lKwGlnJWTNObAa0OlnGl2Yl4lFaUxysHYaiozBT92sBPC57n8zMXOEpJu7Ccvm8C4x+ruEe9SbacH
- GLUCOZn/bpIVrNVs=;
-Received: from mailout3.samsung.com ([203.254.224.33])
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=VUWwBkzOfM1kB3c/5VYdcEvnLFhDOME4sOKTv0gGYpM=; b=W
+ kXf0wUwOe6qYJ6Zw5f6KVfl6MaqPgKp2ai8NhK1ii4RucHQgc58GdxSKdz3/bpCcgntKFFQdvBCTq
+ Ow2GrCGyjAJCRPP5DqCkvSEetSUkVArYPqSxITpEndQaGQzlaEmGPWLk2sJ8U2Nnvo6jJKqRrLddE
+ I2aL05XAqlae0OQ4=;
+Received: from mail-tyzapc01on2110.outbound.protection.outlook.com
+ ([40.107.117.110] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pd1um-00BWD0-0q for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 17 Mar 2023 04:42:08 +0000
-Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20230317044153epoutp03d1621214ae164afca4306c00274f2cbe~NGyxvw6Fx0404504045epoutp03P
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 17 Mar 2023 04:41:53 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20230317044153epoutp03d1621214ae164afca4306c00274f2cbe~NGyxvw6Fx0404504045epoutp03P
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1679028113;
- bh=bKzs6ie9jGyq5vPlXlQ+VCASdpfrk5dRG/RQ1bs+T3s=;
- h=Subject:Reply-To:From:To:CC:Date:References:From;
- b=G/V5ggd6hemv8rI0I4HLVwRJHzTNYv77wNmjzb/V5Tq8C+Azn66O6INShW1Cbgqrr
- bpu+BKiiFnYJcvnAmC5M4L4GEp+jF5SwRNp13cw2aBiyLHKWvITMpEgODGSufTZPyx
- 8pHXrtJAIuKfClJl3hhfiEVcP5LjI7VajsF04w5A=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTP id
- 20230317044152epcas2p246dd93436bd94013b3e612497ee4f0c3~NGyw4PvqD1112911129epcas2p2v;
- Fri, 17 Mar 2023 04:41:52 +0000 (GMT)
-Received: from epsmges2p2.samsung.com (unknown [182.195.36.69]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4PdBL80z35z4x9Pp; Fri, 17 Mar
- 2023 04:41:52 +0000 (GMT)
-X-AuditID: b6c32a46-4e1ff70000007a4b-25-6413ef8f00b4
-Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
- epsmges2p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- 38.E3.31307.F8FE3146; Fri, 17 Mar 2023 13:41:51 +0900 (KST)
-Mime-Version: 1.0
-From: Yonggil Song <yonggil.song@samsung.com>
-To: "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-X-Priority: 3
-X-Content-Kind-Code: NORMAL
-X-CPGS-Detection: blocking_info_exchange
-X-Drm-Type: N,general
-X-Msg-Generator: Mail
-X-Msg-Type: PERSONAL
-X-Reply-Demand: N
-Message-ID: <20230317044151epcms2p5872591b638dab3261a9dd563253f1b94@epcms2p5>
-Date: Fri, 17 Mar 2023 13:41:51 +0900
-X-CMS-MailID: 20230317044151epcms2p5872591b638dab3261a9dd563253f1b94
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrGKsWRmVeSWpSXmKPExsWy7bCmqW7/e+EUgwMnpC1WPQi3eLJ+FrPF
- pUXuFidXvGCxWNUxl9Fi6vkjTA5sHptWdbJ57F7wmcmjb8sqxgDmqGybjNTElNQihdS85PyU
- zLx0WyXv4HjneFMzA0NdQ0sLcyWFvMTcVFslF58AXbfMHKC1SgpliTmlQKGAxOJiJX07m6L8
- 0pJUhYz84hJbpdSClJwC8wK94sTc4tK8dL281BIrQwMDI1OgwoTsjJfTmpgKPnhVLPn2hrWB
- cYdNFyMnh4SAicTX54+Yuxi5OIQEdjBKHD19lK2LkYODV0BQ4u8OYZAaYQF3iRk3t7KD2EIC
- ShLXDvSyQMT1JTYvXgYWZxPQlfi7YTk7yBwRgRZGiQkffzCBOMwC8xklJt86zQyxjVdiRvtT
- FghbWmL78q2MELaGxI9lvVA1ohI3V79lh7HfH5sPVSMi0XrvLFSNoMSDn7uh4pISiw6dZ4Kw
- 8yX+rrjOBmHXSGxtaIOK60tc69gItpdXwFdiyre9YPNZBFQl1t6cygrysISAi0TzgwSQMLOA
- vMT2t3OYQcLMApoS63fpQ1QoSxy5xQJRwSfRcfgvO8xTO+Y9gVqkJrF502ZWCFtG4sLjNqgj
- PSSutV1hhgRhoETr2gdsExgVZiECehaSvbMQ9i5gZF7FKJZaUJybnlpsVGAEj9vk/NxNjOAE
- qOW2g3HK2w96hxiZOBgPMUpwMCuJ8IazCKQI8aYkVlalFuXHF5XmpBYfYjQFengis5Rocj4w
- BeeVxBuaWBqYmJkZmhuZGpgrifNK255MFhJITyxJzU5NLUgtgulj4uCUamCa8Wnir2UWz9w7
- tj6f72P/rLUgMzfj0ZMEA7GD5649nsujkpV/+8ab3clXDOx47jI41y383TSn1K1haf7s47dV
- 7eVPdN3IXajb086Uwbg+bebM22tmL9p+qcmo+1RDEX/LvvMfpxwwW9aXLe5j4L21991Jd8uE
- XIXt5Xu4JjDabDgZpXqvcW1Otcyqb7/60hRyPixNnfJ/q3BDy81/25cICzewcewqOT2JzdpP
- hyXv0c+45t9tARvq/i7w5Q3+HiDzavu0aRv3nKx7tbxZ4lRiifut60XmJpUzPT2i93jUav1Y
- 8ltivaUi54wt0x8sMjC5+Erl+0yhqc3m4Tqza9MutJzdwh7OHy3x98BtXgt+JZbijERDLeai
- 4kQAlA8wYQkEAAA=
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230317044151epcms2p5872591b638dab3261a9dd563253f1b94
-References: <CGME20230317044151epcms2p5872591b638dab3261a9dd563253f1b94@epcms2p5>
-X-Spam-Score: -3.2 (---)
+ id 1pdnpb-00DJkh-EC for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 19 Mar 2023 07:51:59 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YbAONHybI8u8v5fs7gkwHN6KIARK48us/fwPo6fPtaAhCULkmvnoQx7A8x5FppOzprcfLPEDT1DbQedLJRQoFreI+hcvSe2zk64VNoysTBhsAxM6nciNIyEO0tRvdZmbv8cCFagCoHkAFMxCaGHAVJ58lEIjUUak117Jvi8cUIMQsQFGptLrzjZtX3aOkwMWXPSC2asPUagCNY33PaSI2bI1cpd2GtjqTYEN057OVhN6P/5NCZZW8BGvzikjl1wsvhiIYejn2Ul4jJeyj6oJSG/igs58yM3ZbQzv2f7CV5rwwQiWA8odl1SysFOstRKRLpUKOKcMMwcqpHt8SSx83w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VUWwBkzOfM1kB3c/5VYdcEvnLFhDOME4sOKTv0gGYpM=;
+ b=Mzz6Y50+vsfvbYtIKhnWWqO8yCIU0prZ9fd3WWiq+kHid7SIJWoGgWxgPhisAvLuHKVcdWfOZEyP0P5EFy+XempPFCjBEW7pvIdCjdnh67Wnx0hNVoqAt9GqfQwf5ARmfi9olecP766dAmRQ7d4nlBGnZA0C7bJag6Sp7xbXO9EUIFUN6poSO06g4Rp5lxDL/f8Ai6jy9B4Vf63YxoSKUQxnhb4OcsPi8NAag3/p4Ybcvwo3TjFQXox28NzAOook+3FiHIsXMRzD5sYePEJB2B0qjM980N8ZfVkcAmohfMuWWFsw131V//nujyIU00LMUyq5+VEzmeXHKaQcqP8K3Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VUWwBkzOfM1kB3c/5VYdcEvnLFhDOME4sOKTv0gGYpM=;
+ b=Varn4LiMc1vDpxyVjT19E9aCEdc7uQBeUoORfPLdo921+QdzUqEPOXBRDbdALc3b0RmBm+Mw/nHuUBTQZ55Or19xSspOo9+SXomuFm6Igd5wZu3CEjZVKuRpdaekOndfHSXKenIBuRHlmIEva4svyJlbKlHWVCXJE07BxO1ml6uquQFLNzghPy6nsmuXdqvxuGiBPM2J4jDWvwUlzRAQ+cn35yolZ8N6P2x7ZwoUMU3rhiNz5AeNGRH0wvUZZlKDUQtmXMgAy8YEswD4vu2D6nmzs3hp/BxIM5Bx82AKaYqFd7rLu2tlF/KqWD8skoFsKDgWFjMUn5idEnx6msSbRg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
+ by TY0PR06MB5626.apcprd06.prod.outlook.com (2603:1096:400:31f::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.36; Sun, 19 Mar
+ 2023 07:51:45 +0000
+Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
+ ([fe80::daf6:5ebb:a93f:1869]) by SEZPR06MB5269.apcprd06.prod.outlook.com
+ ([fe80::daf6:5ebb:a93f:1869%9]) with mapi id 15.20.6178.037; Sun, 19 Mar 2023
+ 07:51:45 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Sun, 19 Mar 2023 15:51:30 +0800
+Message-Id: <20230319075130.24962-1-frank.li@vivo.com>
+X-Mailer: git-send-email 2.35.1
+X-ClientProxiedBy: SG2PR02CA0074.apcprd02.prod.outlook.com
+ (2603:1096:4:90::14) To SEZPR06MB5269.apcprd06.prod.outlook.com
+ (2603:1096:101:78::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|TY0PR06MB5626:EE_
+X-MS-Office365-Filtering-Correlation-Id: a36a097b-f488-46c7-f941-08db284ec8e7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: oRI9grBx3OlfcClQONykPGfF/kkEyaEQV095ERTsdlfdZ+VpJuRAAeWx71UfEyUfJsXIHz6YvLkgWNAqaRlgG2pbEsztNAuR6F27Ou1icS8khRlunsdufKe4Htau17xoVCuWZHi5w9pvANcLfu5lC52rg52AHK3OxbIe+ItlEf3mdMW59VTIaK0bWNT9FRiHdoZkW69BOEBAKovGD402JAvkeznIj76XG1boBvrE7YToLHs1f78WfJmAc5OglxL5KLbK26kvx084hMDM+QNcY6Ohk0XpsN4rxRpuUvDPH3oWrZmz2HoALvakJuSSVH2uNlLQcPrjCXhftkuNvet0nAY7VLidJC/1qhwPhn/ujUzSlhMtk8Ibar/NkE3IJk3j+aoWKSFC8LbV/lL7vko54jZIsLfbxICjjx0uZih9aHjJ031awCZ1nQUdE6rkBNiisrfv2nOSbN9keMAVPesZFsMAoZEEWlO2zoInD6fTc7v7SuQJsJYLLGasZ2IDMAQlqs5KSdOUMMSPIX0Tj5+mSYi7Y+VXE74vZUKOsH9THJTgKFPN2aDoRy4OFYCTFVEimQWmAAGXWnYLHeGILYmh6x1IK9sjdY7Zwk67SYL31VH84Dx6D6P7/ZegvKcijX7QKwkppBgU8QVJlKf1xxWe0b0YtOCnGIiv6c1FwccVSUi5B7c0l3VOLjprcwuz4kQLDwWdkiwVd5YrYiwRcKQ6Ig==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230025)(4636009)(376002)(396003)(136003)(39850400004)(346002)(366004)(451199018)(316002)(110136005)(66556008)(66946007)(66476007)(478600001)(4326008)(41300700001)(8936002)(5660300002)(8676002)(36756003)(86362001)(52116002)(6512007)(1076003)(6506007)(6486002)(186003)(26005)(6666004)(2616005)(2906002)(83380400001)(38100700002)(38350700002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ZbjM4SqKlKfA2PXX9Cd/4DxchugUhbsuRLWn2h9c7i32OlfsCiVR+gx80BZD?=
+ =?us-ascii?Q?MPYpvPAmt3d5VGpsguXhxFhAIxFXrYccdB+0miH18E/o9+AKWUPhTX09dWuH?=
+ =?us-ascii?Q?86/nt5m6yeDFSIPnCjrKm1qac+I6XAqntYD+Iishu9i7Nat9yWfkrE5v1lg3?=
+ =?us-ascii?Q?wNrWRvJ+3Szxy2cGjRWv2E5i1o7x5IpGOWNDQzQU6e609sYXeRqp5qNSSdrp?=
+ =?us-ascii?Q?KH3ADGgbX0VL+k9OxVeh5fwJxumgcnrjf5QqHVcq7zLFoOYAtWsxw3J5giyV?=
+ =?us-ascii?Q?AMe1gN6zNqTmSPTa4Xb7TXt6THvhn1MeLRSkmi47zfse1o4Tj+XnKvlnrJzm?=
+ =?us-ascii?Q?zNxIi+OCwkdzpRE5qb1LkM1DsOY7G17OAOOK91oeqS9lNvf4KZUScm/ZMFJS?=
+ =?us-ascii?Q?NTFs+LLpKhZ5/AedgRJTZ4NgRApCLc90TJa+ozQLAm27NMdqAaAddHwIZUWy?=
+ =?us-ascii?Q?SRqOJtZvHO6YWfCDfIV8UGX7CjusxjA+If4GSpSDyXkkPcCeA14dW2LB/4UG?=
+ =?us-ascii?Q?BiBC/O6QXR82dj75kRos0uk1/VkWa6kCzUK2iVbmeQ/n04l9Gqia/aFYBjlt?=
+ =?us-ascii?Q?zO9htz+Md7D+OMtYuCVnguBN85L4oDn/z7ddlzi1Tl9ZzF8suLt0aP4dYRGo?=
+ =?us-ascii?Q?X9ccuuJuvwm1DcdMxl7NqUhyYiplj5Xujip9Zrxm7cXqCeEKiKTMtye2XWpO?=
+ =?us-ascii?Q?7xNHPWVdQCdH5kmMqzUCoIgfyv/OHCT71Z2ZDwT8oQ7JNzvkl3dgihgEovIu?=
+ =?us-ascii?Q?u7WbhaEv3ayQR1uDZSuFztOtlXgnoby/e84+KH+R6kOXIP6DqZKQ8EOqwzS3?=
+ =?us-ascii?Q?Naq4mfgJw4IA/lsLN3HPOnmp9cBgCItp7Rd2mWB3+KKyF12Bd9Wx3EyySE3o?=
+ =?us-ascii?Q?n9BMDtWi5ra258ZI9FlGruzPB2Jo4+0RbtSNZ9i5ENFvSMrlMwCPIxmMmHX/?=
+ =?us-ascii?Q?oWOpDh5AoZ7TkhnxXHYencrFH3+oPNqyT0uwj1B2rIw5vmmUwrp4QfU+mamv?=
+ =?us-ascii?Q?pOosKE0WbwM2LRsa0f16IIjPN2lZYSlZNlS0xADMd7RLwXidq8Tw3LO+KA2C?=
+ =?us-ascii?Q?b2NIuqeeaf8dCekpb1VVwavKx4Bzo3bsqh5b4hLvDqKkpSuATT5RHigQA5j9?=
+ =?us-ascii?Q?iCbVLQT9T43NSR14zj2iQdrQsNQhJaTbmwk1X434cjHUKrMMYEGZi11lWlo+?=
+ =?us-ascii?Q?1cYX1l6Mjp0hRNwTAI8o5tcSNLFvVPHgCU+aIdbBM/8nXmpyiwV9v0CtzNAG?=
+ =?us-ascii?Q?AFqFC5xP5CAGi8qyLjzB7rPB+2uP4c0mCkIsGHR+w5JL7axFIQhJBTZ5KIR3?=
+ =?us-ascii?Q?2j54RhGE90ITBTTaoCvmkWOj8M3oN4hIFWGOyv1oe3J3He/8RStLrb4EX/ie?=
+ =?us-ascii?Q?BI+aK43+h8oibRPBhqwztITHsgHqgoyrnwgVm4a3oQOo2N5qpFR9DXBLqeoW?=
+ =?us-ascii?Q?5ms+/d9+jn4yEbQ48iZ6y28wlW5i39i99k0EG3nnGD1YXsuV/njGeUrwI72A?=
+ =?us-ascii?Q?J8JYCpBAZ0RUfbFwFZU6Vohi6VV2y7eFaOX5Lnex518AeTYSodf+lMd2pNJp?=
+ =?us-ascii?Q?V3YpqZhx53FnkxhanuWQqGBp3fl8sfmIzYqFy6AI?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a36a097b-f488-46c7-f941-08db284ec8e7
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2023 07:51:44.8762 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FSRP7/uUvfg1JwTS0F8rZ8p+lPhZBZAkMFfc0ruvFX28gsjpGxyPN/qFF4TZbBy7helu6ABKXFdb9PCx9Evxtw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR06MB5626
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Overview ======== This option allows zoned block device users
- to configure GC reserved and overprovision area manually according to their
- demands on performance of sustained write latency and WAF. Problem =======
- Content analysis details:   (-3.2 points, 6.0 required)
+ Content preview:  Opt_compress_chksum, Opt_compress_mode and Opt_compress_cache
+ lack the necessary check to see if the image supports compression, let's
+ add it. Signed-off-by: Yangtao Li <frank.li@vivo.com> --- v2: -drop
+ f2fs_mount_opt_need_skip()
+ fs/f2fs/super.c | 12 ++++++++++++ 1 file changed, 12 insertions(+) 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [203.254.224.33 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.33 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.117.110 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.117.110 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pd1um-00BWD0-0q
-Subject: [f2fs-dev] [PATCH v1] mkfs.f2fs: Introduce configurable reserved
- sections
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1pdnpb-00DJkh-EC
+Subject: [f2fs-dev] [PATCH v2] f2fs: add compression feature check for all
+ compress mount opt
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,265 +165,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: yonggil.song@samsung.com
-Cc: Seokhwan Kim <sukka.kim@samsung.com>, Jorn Lee <lunar.lee@samsung.com>
+From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Yangtao Li <frank.li@vivo.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Yangtao Li <frank.li@vivo.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Overview
-========
+Opt_compress_chksum, Opt_compress_mode and Opt_compress_cache
+lack the necessary check to see if the image supports compression,
+let's add it.
 
-This option allows zoned block device users to configure GC reserved and
-overprovision area manually according to their demands on performance of
-sustained write latency and WAF.
-
-Problem
-=======
-
-The overprovision segments that mkfs generates are mostly occupied by GC
-reserved. This degrades WAF performance.
-
-Experiment
-==========
-
-The following experiment evaluated the application of configurable reserved.
-The experimental environment is as follows.
-
-  System info
-    - 4.2Ghz, 8 core CPU
-    - 64GiB Memory
-  Device info
-    - a conventional null_blk with 448MiB capacity(meta area) and
-    - a sequential null_blk with 953 zones of 64MiB
-  Format
-    - as-is (find out ovp ratio): mkfs.f2fs <conv null_blk> -c <seq null_blk> -m
-        Info: Overprovision ratio = 3.700%
-        Info: Overprovision segments = 1152 (GC reserved = 1088)
-    - config rsvd: mkfs.f2fs <conv null_blk> -c <seq null_blk> -m 8 -o 2.965
-        Info: Overprovision ratio = 2.965%
-        Info: Overprovision segments = 1152 (GC reserved = 256)
-  Mount
-    - mount <conv null_blk> <mount point>
-  Fio script
-    - fio --rw=randwrite --bs=4k --ba=4k --filesize=58630m --norandommap --overwrite=1 --name=job1 --filename=<mount point>/sustain --time_based --runtime=2h
-  WAF calculation
-    - (IOs on conv. null_blk + IOs on seq. null_blk) / random write IOs
-
-Conclusion
-==========
-
-In the experiment, it can be shown that reducing the reserved segments
-decreases WAF to 10% (from 222 to 23) although it triggers checkpoint more
-frequently during gc. With direct IO, the WAF of as-is gets much higher.
-In other words, a user can configure more reserved segments for lower GC
-latency or allocate less reserved segments for lower WAF on the same number
-of OP segments.
-
-Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
- include/f2fs_fs.h       | 22 ++++++++++++++++++++--
- lib/libf2fs.c           | 22 ++++++++++++++++++++++
- man/mkfs.f2fs.8         |  9 +++++++--
- mkfs/f2fs_format.c      | 29 +++++++++++++++++++++++------
- mkfs/f2fs_format_main.c |  5 +++--
- 5 files changed, 75 insertions(+), 12 deletions(-)
+v2:
+-drop f2fs_mount_opt_need_skip()
+ fs/f2fs/super.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 333ae07a5ebd..1d41e9f8397e 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -375,6 +375,10 @@ static inline uint64_t bswap_64(uint64_t val)
- 
- #define LPF "lost+found"
- 
-+/* one for gc buffer, the other for node */
-+#define MIN_RSVD_SECS	(uint32_t)(NR_CURSEG_TYPE + 2)
-+#define CONFIG_RSVD_DEFAULT_OP_RATIO	3.0
-+
- enum f2fs_config_func {
- 	MKFS,
- 	FSCK,
-@@ -460,6 +464,7 @@ typedef struct {
- #define ALIGN_UP(addrs, size)	ALIGN_DOWN(((addrs) + (size) - 1), (size))
- 
- struct f2fs_configuration {
-+	uint32_t conf_reserved_sections;
- 	uint32_t reserved_segments;
- 	uint32_t new_reserved_segments;
- 	int sparse_mode;
-@@ -1614,6 +1619,20 @@ extern uint32_t f2fs_get_usable_segments(struct f2fs_super_block *sb);
- #define ZONE_ALIGN(blks)	SIZE_ALIGN(blks, c.blks_per_seg * \
- 					c.segs_per_zone)
- 
-+static inline double get_reserved(struct f2fs_super_block *sb, double ovp)
-+{
-+	double reserved;
-+	uint32_t usable_main_segs = f2fs_get_usable_segments(sb);
-+	uint32_t segs_per_sec = round_up(usable_main_segs, get_sb(section_count));
-+
-+	if (c.conf_reserved_sections)
-+		reserved = c.conf_reserved_sections * segs_per_sec;
-+	else
-+		reserved = (100 / ovp + 1 + NR_CURSEG_TYPE) * segs_per_sec;
-+
-+	return reserved;
-+}
-+
- static inline double get_best_overprovision(struct f2fs_super_block *sb)
- {
- 	double reserved, ovp, candidate, end, diff, space;
-@@ -1631,8 +1650,7 @@ static inline double get_best_overprovision(struct f2fs_super_block *sb)
- 	}
- 
- 	for (; candidate <= end; candidate += diff) {
--		reserved = (100 / candidate + 1 + NR_CURSEG_TYPE) *
--				round_up(usable_main_segs, get_sb(section_count));
-+		reserved = get_reserved(sb, candidate);
- 		ovp = (usable_main_segs - reserved) * candidate / 100;
- 		if (ovp < 0)
- 			continue;
-diff --git a/lib/libf2fs.c b/lib/libf2fs.c
-index f63307a42a08..b5644ff6ebdd 100644
---- a/lib/libf2fs.c
-+++ b/lib/libf2fs.c
-@@ -1069,6 +1069,28 @@ int get_device_info(int i)
- 				dev->nr_rnd_zones);
- 		MSG(0, "      %zu blocks per zone\n",
- 				dev->zone_blocks);
-+		if (c.conf_reserved_sections) {
-+			if (c.conf_reserved_sections < MIN_RSVD_SECS) {
-+				MSG(0, "      Too small sections are reserved(%u secs)\n",
-+				    c.conf_reserved_sections);
-+				c.conf_reserved_sections =
-+					max(c.conf_reserved_sections, MIN_RSVD_SECS);
-+				MSG(0, "      It is operated as a minimum reserved sections(%u secs)\n",
-+				    c.conf_reserved_sections);
-+			} else {
-+				MSG(0, "      %u sections are reserved\n",
-+				c.conf_reserved_sections);
-+			}
-+			if (!c.overprovision) {
-+				c.overprovision = CONFIG_RSVD_DEFAULT_OP_RATIO;
-+				MSG(0, "      Overprovision ratio is set to default(%.1lf%%)\n",
-+				    c.overprovision);
-+			}
-+		} else {
-+			MSG(0,
-+				"      0 reserved sections are received.\n"
-+				"      Reserved sections are calculating\n");
-+		}
- 	}
- #endif
- 	/* adjust wanted_total_sectors */
-diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
-index a6249f6ef6ed..800c4c79bf37 100644
---- a/man/mkfs.f2fs.8
-+++ b/man/mkfs.f2fs.8
-@@ -43,6 +43,7 @@ mkfs.f2fs \- create an F2FS file system
- ]
- [
- .B \-m
-+.I #-of-reserved-sections
- ]
- [
- .B \-o
-@@ -152,8 +153,12 @@ Enable extended node bitmap.
- .BI \-l " volume-label"
- Specify the volume label to the partition mounted as F2FS.
- .TP
--.BI \-m
--Specify f2fs filesystem to supports the block zoned feature.
-+.BI \-m " #-of-reserved-sections"
-+Specify f2fs filesystem to supports the block zoned feature and reserved sections.
-+If specified to non-zero, reserved segments count is set to the larger size
-+between 8 sections and the input value.  If specified to zero, the best number
-+will be assigned automatically according to the partition size. If overprovision-ratio-percentage
-+is not specifed, it will set to default 3.0%.
- Without it, the filesystem doesn't support the feature.
- .TP
- .BI \-o " overprovision-ratio-percentage"
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index f4a49acc498c..22e53be5003d 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -483,9 +483,7 @@ static int f2fs_prepare_super_block(void)
- 	if (c.overprovision == 0)
- 		c.overprovision = get_best_overprovision(sb);
- 
--	c.reserved_segments =
--			(100 / c.overprovision + 1 + NR_CURSEG_TYPE) *
--			round_up(f2fs_get_usable_segments(sb), get_sb(section_count));
-+	c.reserved_segments = get_reserved(sb, c.overprovision);
- 
- 	if (c.feature & cpu_to_le32(F2FS_FEATURE_RO)) {
- 		c.overprovision = 0;
-@@ -765,11 +763,30 @@ static int f2fs_write_check_point_pack(void)
- 			get_cp(rsvd_segment_count)) *
- 			c.overprovision / 100);
- 
--	if (get_cp(overprov_segment_count) < get_cp(rsvd_segment_count))
-+	if (!(c.conf_reserved_sections) &&
-+	    get_cp(overprov_segment_count) < get_cp(rsvd_segment_count))
- 		set_cp(overprov_segment_count, get_cp(rsvd_segment_count));
- 
--	set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
--			2 * get_sb(segs_per_sec));
-+	/*
-+	 * If conf_reserved_sections has a non zero value, overprov_segment_count
-+	 * is set to overprov_segment_count + rsvd_segment_count.
-+	 */
-+	if (c.conf_reserved_sections) {
-+		/*
-+		 * Overprovision segments must be bigger than two sections.
-+		 * In non configurable reserved section case, overprovision
-+		 * segments are always bigger than two sections.
-+		 */
-+		if (get_cp(overprov_segment_count) < 2 * get_sb(segs_per_sec)) {
-+			MSG(0, "\tError: Not enough overprovision segments (%u)\n",
-+			    get_cp(overprov_segment_count));
-+			goto free_cp_payload;
-+		}
-+		set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
-+				get_cp(rsvd_segment_count));
-+	 } else
-+		set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
-+				2 * get_sb(segs_per_sec));
- 
- 	if (f2fs_get_usable_segments(sb) <= get_cp(overprov_segment_count)) {
- 		MSG(0, "\tError: Not enough segments to create F2FS Volume\n");
-diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
-index f50971c4591c..a4accda91780 100644
---- a/mkfs/f2fs_format_main.c
-+++ b/mkfs/f2fs_format_main.c
-@@ -61,7 +61,7 @@ static void mkfs_usage()
- 	MSG(0, "  -i extended node bitmap, node ratio is 20%% by default\n");
- 	MSG(0, "  -l label\n");
- 	MSG(0, "  -U uuid\n");
--	MSG(0, "  -m support zoned block device [default:0]\n");
-+	MSG(0, "  -m support zoned block device, # of reserved sections [default:0]\n");
- 	MSG(0, "  -o overprovision percentage [default:auto]\n");
- 	MSG(0, "  -O feature1[,feature2,...] e.g. \"encrypt\"\n");
- 	MSG(0, "  -C [encoding[:flag1,...]] Support casefolding with optional flags\n");
-@@ -176,7 +176,7 @@ static void add_default_options(void)
- 
- static void f2fs_parse_options(int argc, char *argv[])
- {
--	static const char *option_string = "qa:c:C:d:e:E:g:hil:mo:O:rR:s:S:z:t:T:U:Vfw:";
-+	static const char *option_string = "qa:c:C:d:e:E:g:hil:m:o:O:rR:s:S:z:t:T:U:Vfw:";
- 	static const struct option long_opts[] = {
- 		{ .name = "help", .has_arg = 0, .flag = NULL, .val = 'h' },
- 		{ .name = NULL, .has_arg = 0, .flag = NULL, .val = 0 }
-@@ -235,6 +235,7 @@ static void f2fs_parse_options(int argc, char *argv[])
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 9c87d91df61b..a88706bbfc0d 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1179,9 +1179,17 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 			kfree(name);
  			break;
- 		case 'm':
- 			c.zoned_mode = 1;
-+			c.conf_reserved_sections = atoi(optarg);
+ 		case Opt_compress_chksum:
++			if (!f2fs_sb_has_compression(sbi)) {
++				f2fs_info(sbi, "Image doesn't support compression");
++				break;
++			}
+ 			F2FS_OPTION(sbi).compress_chksum = true;
  			break;
- 		case 'o':
- 			c.overprovision = atof(optarg);
+ 		case Opt_compress_mode:
++			if (!f2fs_sb_has_compression(sbi)) {
++				f2fs_info(sbi, "Image doesn't support compression");
++				break;
++			}
+ 			name = match_strdup(&args[0]);
+ 			if (!name)
+ 				return -ENOMEM;
+@@ -1196,6 +1204,10 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 			kfree(name);
+ 			break;
+ 		case Opt_compress_cache:
++			if (!f2fs_sb_has_compression(sbi)) {
++				f2fs_info(sbi, "Image doesn't support compression");
++				break;
++			}
+ 			set_opt(sbi, COMPRESS_CACHE);
+ 			break;
+ #else
 -- 
-2.34.1
+2.35.1
+
 
 
 _______________________________________________
