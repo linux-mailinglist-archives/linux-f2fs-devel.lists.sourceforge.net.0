@@ -2,148 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A11A6C0B86
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Mar 2023 08:41:54 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5F216C13AF
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Mar 2023 14:42:30 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1peA9N-0003I0-9b;
-	Mon, 20 Mar 2023 07:41:49 +0000
+	id 1peFmI-0001nG-Vy;
+	Mon, 20 Mar 2023 13:42:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <prvs=436eb87b3=damien.lemoal@opensource.wdc.com>)
- id 1peA9M-0003Hn-7f for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Mar 2023 07:41:48 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+c562255d70dcb65b4262+7148+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1peFmG-0001n6-LP for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 Mar 2023 13:42:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FNnp65p18r9InImb3TefnHBuhcbVhzynIwAJbR29uJY=; b=NXTL5n5SjLC4whRNZmUx0JXz78
- 2tbvxim6aUd8nBEXRsKa8JEh6SkiXeOe1yLMjzg924Vada+8U5nUZ+VMh10LLOqUBaCEZ2Wc+ByQk
- uwpOFGckxBlO4z+FMaBatsYuIg6J1UHdaKLezq/tYXD+u5u5hCxSFTlGC+aR2L6B0aQA=;
+ bh=4nvdeTrbCGVI17LJ6CL04s20971xhX1bwQsBRYlV8qE=; b=Xn+RXv/iPAkugp7h2kj6idhRqR
+ 9ZI1FWZm8SuTfFxqL/+prV2Um4VVjrebAZRgvbPgbiiFEgdjZZqV58DF+os8GdK54plyPu+0MmhB6
+ GZdVVxpn0uaEqzP0m9TErp8eEBTMyxWG/8vWVeu4eZddCoVw8tFvk9Tb3xWV3rqOIrAE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FNnp65p18r9InImb3TefnHBuhcbVhzynIwAJbR29uJY=; b=LXABzoOejdk4oTd27VMzGAvXGS
- 5Vbt5X1+ljc4vosJxw06okgFuDCsOzVVTsAs3fBamhJCkgbjdYH50IVi59Fp9GEyYrCRhnLTr+SLg
- TRZOAa7lgfHiyBTgyyOye1Qa6TaBAM0+jYB6I1+ZWpxk/XW3qvyjamRcbYMjGoBFI048=;
-Received: from esa3.hgst.iphmx.com ([216.71.153.141])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=4nvdeTrbCGVI17LJ6CL04s20971xhX1bwQsBRYlV8qE=; b=FFK+pj8a83bncvTAnThyGKsyeb
+ 9QUbFiAPvLt5YIvmtfveyFnr8SNdsVlm1L+XQ3jHSwtDPWPij8PArg//GexO0Aufc63hvQqQRFbxA
+ 08ORrN6Ij9P3WZ5sD9ICSaK13R6xslTmLixUrHPL8PeMx9PDMZnxhibhOYlPyIs08LTc=;
+Received: from bombadil.infradead.org ([198.137.202.133])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1peA9I-00052o-Mk for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Mar 2023 07:41:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1679298104; x=1710834104;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=PznhUX2rDF8uhJla7kd2cwVnZx5w5yiNB4r5BQcdnfM=;
- b=jsMi7Hh0dU4SH7t1nmS3eFb6sUiWfXVMfMYC/A0n4rKsnRkxfpOOY7hR
- SAY0PREeHV1dcdaSb90rhjKi5L8ypNWYxO9Wra2lnnS5cqfEjTXTImJ4s
- ToZ/Lst9ivh1WYWqDwMC8tBBsM6ufBWJlWh2LMS11U80RMK9/WMJxQiKe
- F1e2LBshjHGI0uYrfBZkMrKmBIo9dE2VYo8Atpf9DuOAAA09P/4gvIMt5
- So163/e/u1lubw5ZSB68h8LqPpeGpJENmr7m5GTJEee3qnWTHwSqTEBg7
- U+Yv+1uiF+2Hw/trQ6tWPSr2xRdNdEmksue/OC7kwM4gU//UF27eKOW5H g==;
-X-IronPort-AV: E=Sophos;i="5.98,274,1673884800"; d="scan'208";a="230987199"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 20 Mar 2023 15:26:11 +0800
-IronPort-SDR: ikhI0//A8SUb1BiiLf8spFh1JHtd0PFqIrjaVtWHn48TwCrBHso5IBFu0gaOAPwnD6nyJ7AUFX
- cALZ55cEXY0F5uDizoDDu05LNKFqnnirxkTB4Fh8vuHcySXVqnIxGKxtWKmEUsYj8qFToVWgXF
- Vc1X8zTZ6TvEtfV3uEuteUPFenMt4ZyfbQ1k46ccaMAeJRjlOLLS6JQCLmU2T9berCzypnUfuc
- pViUxn/5E9AtoCY3PikPYzyBX5SNmgA2QviiVL+yB276GiPYFj5HZ9K2y4Zd2ldQKrLyv+EjBF
- nxU=
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 19 Mar 2023 23:36:51 -0700
-IronPort-SDR: w6p2V19CrjXccFw30jHvl2M1D9hq9qDdRo6uhgip0UEZe6LASJ1JulqbtasZl8wtaE5CB0CIsw
- /u4in8/pd4vgHOWygzJ8fETypmZnt6GQZrR5hHE4U7c3Fa3xfEIc+sulY4js4xFvjHvzqO/gT0
- 8J+VSFfGe22m1DXpRiNryvj54dDtFT+3J+Vm5xk+VIhH+HOfHNw/+cnn1iMFhQgUmtN3dMRQl1
- MfIDOkWZD519gGMa7XuODrXMrwofXgP6GEYDX8WillAqWbQOZ6gYjmZwgRR5HC0Q88ICQJfOga
- XQY=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 20 Mar 2023 00:26:11 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4Pg5rL1V3Sz1RtW2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 20 Mar 2023 00:26:10 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:content-type
- :in-reply-to:organization:from:references:to:content-language
- :subject:user-agent:mime-version:date:message-id; s=dkim; t=
- 1679297169; x=1681889170; bh=PznhUX2rDF8uhJla7kd2cwVnZx5w5yiNB4r
- 5BQcdnfM=; b=Ac3sR0XYJ+rryJ+0bDOPKxCm+dcSwHcMLzkGxuGt8+HwZ87G7ax
- pAFVEfaZLRQ1T7YBu9pTJb2iOB0dq+m2M50+2ySCb+VWMEj6z8KBJcfvkX/VTy5y
- HdsZwpvEu2xSrqc4DcASona2/D8FSQf2eX7sdS1/ZdFCrT/cmr56n/dcPEizamwB
- YvpCPWbz6qWy+PWRiDVh/KqVyD37i1IhQ4/yFHZk59+5WH/VWBjihD6KvLqKMHsL
- iYmgtRtkq5BDuKsPoQJio8UBdylvkAVkIe2vLW8QNxxsm80THSUesX6KayIzGn6+
- /6kD3KtQY7keflXYjvtNZUIrzhBwhIGlsKA==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id ykisSdT5ORIj
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 20 Mar 2023 00:26:09 -0700 (PDT)
-Received: from [10.225.163.91] (unknown [10.225.163.91])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4Pg5rB164vz1RtVm;
- Mon, 20 Mar 2023 00:26:01 -0700 (PDT)
-Message-ID: <982b6aa9-4adb-acef-d9d7-9a1764a66213@opensource.wdc.com>
-Date: Mon, 20 Mar 2023 16:26:00 +0900
+ id 1peFmE-00EJHt-Vd for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 Mar 2023 13:42:19 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=4nvdeTrbCGVI17LJ6CL04s20971xhX1bwQsBRYlV8qE=; b=n82AssvJ7n/9KqIF/sa0wF812L
+ 9iiP4WXFSqISNg/zwvDmPWd8CNQCTSb8E1t+lQwmFM9nafJiSPJyKq6XGVUUp0qWZ4lryMGehnaVE
+ vC50fFwTZcIJg4y/pKgzJEcxKVtFMtehC6YclcoeCNcPL87wNwWZQXK1y7DA/RR9XbJZXJKOzR07Q
+ EIuz4NBLXDNKeR4s5k6DCqHjoEM8W5cWB0CjfzeYHspRie+huHaTLJQ09IRoUUIOGSSCjbmjWaT/z
+ 7rjEsy5r7eU3isCXXjahi+g8LwT7337U0vN44M9VeArzieqET283zDbvLZSE4EYE4d4EmFdGN1usa
+ 8qCB1wSw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1peFm4-009DTd-0d; Mon, 20 Mar 2023 13:42:08 +0000
+Date: Mon, 20 Mar 2023 06:42:08 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Hans Holmberg <hans.holmberg@wdc.com>
+Message-ID: <ZBhisCo7gTitmKeO@infradead.org>
+References: <20230220122004.26555-1-hans.holmberg@wdc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Content-Language: en-US
-To: Yangtao Li <frank.li@vivo.com>, clm@fb.com, josef@toxicpanda.com,
- dsterba@suse.com, xiang@kernel.org, chao@kernel.org, huyue2@coolpad.com,
- jefflexu@linux.alibaba.com, jaegeuk@kernel.org,
- trond.myklebust@hammerspace.com, anna@kernel.org, konishi.ryusuke@gmail.com,
- mark@fasheh.com, jlbec@evilplan.org, joseph.qi@linux.alibaba.com,
- richard@nod.at, djwong@kernel.org, naohiro.aota@wdc.com, jth@kernel.org,
- gregkh@linuxfoundation.org, rafael@kernel.org
-References: <e4b8012d-32df-e054-4a2a-772fda228a6a@opensource.wdc.com>
- <20230320071140.44748-1-frank.li@vivo.com>
-Organization: Western Digital Research
-In-Reply-To: <20230320071140.44748-1-frank.li@vivo.com>
+Content-Disposition: inline
+In-Reply-To: <20230220122004.26555-1-hans.holmberg@wdc.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 3/20/23 16:11,
- Yangtao Li wrote: > Hi filesystem maintainers, 
- > >> Hard to comment on patches with this. It is only 10 patches. So send
- everything please. > > If you are interested in the entire pa [...] 
+ Content preview:  On Mon, Feb 20, 2023 at 01:20:04PM +0100,
+ Hans Holmberg wrote:
+ > A) Supporting proper direct writes for zoned block devices would > be the
+ best, but it is currently not supported (probably for > a goo [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [216.71.153.141 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ medium trust [198.137.202.133 listed in list.dnswl.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1peA9I-00052o-Mk
-Subject: Re: [f2fs-dev] [PATCH v2,
- RESEND 01/10] kobject: introduce kobject_del_and_put()
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1peFmE-00EJHt-Vd
+Subject: Re: [f2fs-dev] [RFC PATCH] f2fs: preserve direct write semantics
+ when buffering is forced
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -155,38 +100,24 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Damien Le Moal via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Damien Le Moal <damien.lemoal@opensource.wdc.com>
-Cc: linux-nfs@vger.kernel.org, linux-nilfs@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-mtd@lists.infradead.org,
- ocfs2-devel@oss.oracle.com, linux-fsdevel@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
+Cc: damien.lemoal@wdc.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 3/20/23 16:11, Yangtao Li wrote:
-> Hi filesystem maintainers,
-> 
->> Hard to comment on patches with this. It is only 10 patches. So send everything please.
-> 
-> If you are interested in the entire patchset besides Damien,
-> please let me know. I'll resend the email later to cc more people.
+On Mon, Feb 20, 2023 at 01:20:04PM +0100, Hans Holmberg wrote:
+> A) Supporting proper direct writes for zoned block devices would
+> be the best, but it is currently not supported (probably for
+> a good but non-obvious reason). Would it be feasible to
+> implement proper direct IO?
 
-Yes, I said I am interested, twice already. It is IMPOSSIBLE to review a patch
-without the context of other patches before/after said patch. So if you want a
-review/ack for zonefs, then send the entire series.
+I don't think why not.  In many ways direct writes to zoned devices
+should be easier than non-direct writes.
 
-> 
-> Thx,
-> Yangtao
-
--- 
-Damien Le Moal
-Western Digital Research
-
+Any comments from the maintainers why the direct I/O writes to zoned
+devices are disabled?  I could not find anything helpful in the comments
+or commit logs.
 
 
 _______________________________________________
