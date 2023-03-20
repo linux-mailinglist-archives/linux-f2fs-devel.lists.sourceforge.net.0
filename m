@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5F216C13AF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Mar 2023 14:42:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50EC36C13D1
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Mar 2023 14:43:44 +0100 (CET)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1peFmI-0001nG-Vy;
-	Mon, 20 Mar 2023 13:42:23 +0000
+	id 1peFnX-0001pJ-Eu;
+	Mon, 20 Mar 2023 13:43:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+c562255d70dcb65b4262+7148+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1peFmG-0001n6-LP for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Mar 2023 13:42:21 +0000
+ id 1peFnU-0001pD-1p for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 Mar 2023 13:43:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4nvdeTrbCGVI17LJ6CL04s20971xhX1bwQsBRYlV8qE=; b=Xn+RXv/iPAkugp7h2kj6idhRqR
- 9ZI1FWZm8SuTfFxqL/+prV2Um4VVjrebAZRgvbPgbiiFEgdjZZqV58DF+os8GdK54plyPu+0MmhB6
- GZdVVxpn0uaEqzP0m9TErp8eEBTMyxWG/8vWVeu4eZddCoVw8tFvk9Tb3xWV3rqOIrAE=;
+ bh=lyaRvsye6sWCYUaK2r7kITb5Cun3WkrtNnMFlhr/WZs=; b=YzckCFwBVoMJ36QoP6apKBGOkg
+ 6TEbnJ0PDAeEi9mZ4kv0qVUv1zMzE/vpA/P9FdR8rs+Y6Ke8PuEkkoSoNEQn+BJa4xAPAJCKplEc3
+ 5Btf6VPqbqi9tgsajktgG5jHt5yy4MeL0N8eNzLvTnlZaNKvoAUsstdX4R0sifqrz9vs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,34 +31,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4nvdeTrbCGVI17LJ6CL04s20971xhX1bwQsBRYlV8qE=; b=FFK+pj8a83bncvTAnThyGKsyeb
- 9QUbFiAPvLt5YIvmtfveyFnr8SNdsVlm1L+XQ3jHSwtDPWPij8PArg//GexO0Aufc63hvQqQRFbxA
- 08ORrN6Ij9P3WZ5sD9ICSaK13R6xslTmLixUrHPL8PeMx9PDMZnxhibhOYlPyIs08LTc=;
+ bh=lyaRvsye6sWCYUaK2r7kITb5Cun3WkrtNnMFlhr/WZs=; b=nJhdn4b5BNgtlO2+CTvlNPsoyA
+ NixzcpggC+4Qhyx9/lM9Nt9bOyyNWapJ5O25ZxPymJBQd/k6D8rDXxNCUZ5rxVtOGQMS4b/uuG9eh
+ zmNaq7uEuidK73DdZp/LaRoBdFCcLdVech0JMfrvMNAyqKwaeoCMhlyVjGQg6ZD6KSOY=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1peFmE-00EJHt-Vd for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Mar 2023 13:42:19 +0000
+ id 1peFnU-000144-5E for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 Mar 2023 13:43:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=4nvdeTrbCGVI17LJ6CL04s20971xhX1bwQsBRYlV8qE=; b=n82AssvJ7n/9KqIF/sa0wF812L
- 9iiP4WXFSqISNg/zwvDmPWd8CNQCTSb8E1t+lQwmFM9nafJiSPJyKq6XGVUUp0qWZ4lryMGehnaVE
- vC50fFwTZcIJg4y/pKgzJEcxKVtFMtehC6YclcoeCNcPL87wNwWZQXK1y7DA/RR9XbJZXJKOzR07Q
- EIuz4NBLXDNKeR4s5k6DCqHjoEM8W5cWB0CjfzeYHspRie+huHaTLJQ09IRoUUIOGSSCjbmjWaT/z
- 7rjEsy5r7eU3isCXXjahi+g8LwT7337U0vN44M9VeArzieqET283zDbvLZSE4EYE4d4EmFdGN1usa
- 8qCB1wSw==;
+ bh=lyaRvsye6sWCYUaK2r7kITb5Cun3WkrtNnMFlhr/WZs=; b=BN6jRCUiL5YXWEQuJl9pMl5886
+ K4uUNDR9EKK7rheJ/M/Ig50O9RvfiuWlggLqjqsXM77Wlx5UG3DJpT2/u05D4hI+cXFNHzF2nB/Ca
+ IWb5oHndufarTQI8vZUVq3lpXW7kZ1O5LqeTr9hbeVSl3I15sp1wxMRB44IKU3c8AXTOhksjBBy+k
+ jZPBO1Q4JX88AMgaSIW1Ft1w3TSUbv2gFFZ5ISdOWq+8uoWfLJrFrQInZKbJC7EyX+dxuYWFgoIvH
+ I/My94HTVPUF9KZKE7ldXlAJGHZTcZUQUR8RHWsouypLxmGjgr1XQMJVoe5Cp5NQ6mtp6hm6qS172
+ 4bnXPsyA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1peFm4-009DTd-0d; Mon, 20 Mar 2023 13:42:08 +0000
-Date: Mon, 20 Mar 2023 06:42:08 -0700
+ Linux)) id 1peFnI-009Dkw-1x; Mon, 20 Mar 2023 13:43:24 +0000
+Date: Mon, 20 Mar 2023 06:43:24 -0700
 From: Christoph Hellwig <hch@infradead.org>
-To: Hans Holmberg <hans.holmberg@wdc.com>
-Message-ID: <ZBhisCo7gTitmKeO@infradead.org>
-References: <20230220122004.26555-1-hans.holmberg@wdc.com>
+To: Yangtao Li <frank.li@vivo.com>
+Message-ID: <ZBhi/OSEak3QPryb@infradead.org>
+References: <20230316093632.25929-1-frank.li@vivo.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230220122004.26555-1-hans.holmberg@wdc.com>
+In-Reply-To: <20230316093632.25929-1-frank.li@vivo.com>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -2.5 (--)
@@ -68,10 +68,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Feb 20, 2023 at 01:20:04PM +0100,
- Hans Holmberg wrote:
- > A) Supporting proper direct writes for zoned block devices would > be the
- best, but it is currently not supported (probably for > a goo [...] 
+ Content preview:  On Thu, Mar 16, 2023 at 05:36:32PM +0800, Yangtao Li wrote:
+ > + if (PageWriteback(cc->rpages[i])) { > + if (wbc->sync_mode !=
+ WB_SYNC_NONE)
+ > + f2fs_wait_on_page_writeback(cc->rpages[i], > + DATA, tru [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -86,9 +86,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1peFmE-00EJHt-Vd
-Subject: Re: [f2fs-dev] [RFC PATCH] f2fs: preserve direct write semantics
- when buffering is forced
+X-Headers-End: 1peFnU-000144-5E
+Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: fix to wait page writeback
+ in f2fs_write_raw_pages()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,24 +100,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: damien.lemoal@wdc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: liyangtao <11127627@bbktel.com>, hanqi@vivo.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Feb 20, 2023 at 01:20:04PM +0100, Hans Holmberg wrote:
-> A) Supporting proper direct writes for zoned block devices would
-> be the best, but it is currently not supported (probably for
-> a good but non-obvious reason). Would it be feasible to
-> implement proper direct IO?
+On Thu, Mar 16, 2023 at 05:36:32PM +0800, Yangtao Li wrote:
+> +		if (PageWriteback(cc->rpages[i])) {
+> +			if (wbc->sync_mode != WB_SYNC_NONE)
+> +				f2fs_wait_on_page_writeback(cc->rpages[i],
+> +						DATA, true, true);
+> +			else
+> +				goto continue_unlock;
 
-I don't think why not.  In many ways direct writes to zoned devices
-should be easier than non-direct writes.
+Please avoid the else by doing the goto in the branch:
 
-Any comments from the maintainers why the direct I/O writes to zoned
-devices are disabled?  I could not find anything helpful in the comments
-or commit logs.
+		if (PageWriteback(cc->rpages[i])) {
+			if (wbc->sync_mode == WB_SYNC_NONE)
+				goto continue_unlock;
+			f2fs_wait_on_page_writeback(cc->rpages[i], DATA, true,
+						    true);
 
 
 _______________________________________________
