@@ -2,98 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (unknown [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 551A96C6B4B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Mar 2023 15:42:11 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0EF56C6C18
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Mar 2023 16:18:03 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pfM8l-00016i-Kl;
-	Thu, 23 Mar 2023 14:42:08 +0000
+	id 1pfMhR-000861-4V;
+	Thu, 23 Mar 2023 15:17:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pfM8f-000161-3n
+ (envelope-from <chao@kernel.org>) id 1pfMhM-00085t-NW
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Mar 2023 14:42:01 +0000
+ Thu, 23 Mar 2023 15:17:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uX81b+f03/K6rVT4ab7r73fTgT1ubWizpxu93noCA/M=; b=biwuyLlorhDK/IjQT6MxvihYIm
- dE6vTV7S5P/aQ75k8Ks8+SoeKh/vQ1SUA9PATU5USXhp9UEwVMD4Ptb8ceSx/IqgaPrwlxpSg1o8n
- KgdXymHw2S9q2U8jp2KZ2tJbt2eJlVUFYiSUxJqwnO625Lz5bndSaC/qKRDGKEPckzvc=;
+ bh=GEuGO17c6ZOxfDOyHEIDFrFVggeAHgAndlfWuYGrDoA=; b=A7BsYtMgfZGFeLuERQQOH0uTOO
+ GY8tpwq4e5dVSYYpWSMmorAD5+pl79sgaQldX30Izeq6/IQi/jbQYnsAWupNRnaFe2+8DUWhA8jq/
+ AQa1zpC/kSouOa1ySwWicOe20r1e7DauwShbvTRvIkKbOtDUU+j13ADg0vz4ct5kVm44=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
- References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uX81b+f03/K6rVT4ab7r73fTgT1ubWizpxu93noCA/M=; b=lQxHHvtt11Gy2em4Srf6J9Y2dw
- I9DzCu7P6vAyDsXEGX5EYushrhALWm0EGYQ/FQr2OdcW1YTdwFpUDnrXKU/sGLnqudqm0YSvKHM7a
- 5TJkqzoPD6CMG+I304MrYxvOvqCgYKKBSq7RZVHVzDAy9+jWSpcYcCintj98L+Mdgzlc=;
+ bh=GEuGO17c6ZOxfDOyHEIDFrFVggeAHgAndlfWuYGrDoA=; b=cTP0E9cv55Ybq95ehTNnRzolYQ
+ KVVhj6xGM1TNBXboyzsmPHo1uo9xbx59a5fDtLrAphWuMgYZogcdU689plq76BtU2z4gWBKKjN9Jn
+ yfQY15VHZ80MC9XMMpUxhEizGlVJow8zwxY2Umq6qzjuRww9KFQEsWGRIydE8FcXv/Rg=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pfM8e-0005VB-VY for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Mar 2023 14:42:01 +0000
+ id 1pfMhI-0007I8-Jn for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 23 Mar 2023 15:17:50 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 912A962779;
- Thu, 23 Mar 2023 14:41:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B64B3C433A1;
- Thu, 23 Mar 2023 14:41:53 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 3C3A16278F;
+ Thu, 23 Mar 2023 15:17:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A867FC433D2;
+ Thu, 23 Mar 2023 15:17:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1679582515;
- bh=Vlg7H3iswuM5SaVZgxQDjdnUoBhjPiMEv9IlvCOSVCs=;
- h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
- b=moaZguZ/J3waAJf4kCmha0ZzZ93nG9vf/r6CkBqy/vkc696vUfAOvgqBzW40wPeJl
- 3q13nAaqKIiFJrZImZiTgn660O42ZCsl9rvyJ2/5Q63b6g3nZKLvXlyJRD35DmqXrc
- RmFMPoK61a3C4RAAXdYL7Gd1dvB9ECwxmP1nyQPB9APmuKI7905/sJi8vYqXVFaVFU
- 6nKWYMmOfequny+COOzLUC6YVIUyQoRAKPUo3unRhUxV2fh81F6nO6+/4UjT2uvXDW
- MPzKkJvqQdPUYpI1Sh+b0B+AQuVWns4w+E9bOWxbREBbXMSlspK66uZnqqZJfZDbNb
- cSVmxBZOQ/KGw==
-Message-ID: <0f1704e5-4a4f-d920-9c69-e01ed2f0dde5@kernel.org>
-Date: Thu, 23 Mar 2023 22:41:52 +0800
+ s=k20201202; t=1679584662;
+ bh=QtIAtDLDIoKln0bsHHFK0vxtR/850kTuSdnFC8ym8bA=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=a22tikQRQmcohKDLd6X39kaUMGIbozfwYExk+fQBxjKH/XmL7TPPhlmbbDl1PWygK
+ PmF4dPhmvOyX0frC1rs9w11NZ86PWNFkdR9HzxGARg79XxM+0N8CW+oqfffLCM7uz5
+ Na2/CNoHUIrUPPkTbB2VFPUSoj7sSJXbINaKuPVNh+/u1Jk0zYOSlBVDVwOgif+a4h
+ qmeWDX1bdF/P3TCIi9CDKa/M8d0pUmdkeiV8mbgP/mear1kbLz39SZgXUv9uqEGty4
+ 3L2fEXLfcYqy0xpXf1Yms0jtWqJMm3somhV5MaY9swUZXvpndUVzYoE36T050fMguB
+ xzbfKpvVYVXrQ==
+Message-ID: <a24d66ad-4048-fd5c-ae47-2dd17c87bcbe@kernel.org>
+Date: Thu, 23 Mar 2023 23:17:38 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
 Content-Language: en-US
-To: Wang Shilong <wangshilong1991@gmail.com>, Yangtao Li <frank.li@vivo.com>
-References: <20230221144550.46557-1-frank.li@vivo.com>
+To: yonggil.song@samsung.com, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+References: <CGME20230313094825epcms2p71e6cb549251dc55e8d202dd64b9913a6@epcms2p7>
+ <20230313094825epcms2p71e6cb549251dc55e8d202dd64b9913a6@epcms2p7>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230221144550.46557-1-frank.li@vivo.com>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20230313094825epcms2p71e6cb549251dc55e8d202dd64b9913a6@epcms2p7>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  +Shilong, Hi, Shilong, Could you please help to check this
- patch? in original patch, it tries to ignore such error intentionally? or
- it is a bug? 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 2023/3/13 17:48, Yonggil Song wrote: > When using f2fs
+ on a zoned block device with 2MiB zone size, IO errors > occurs because f2fs
+ tries to write data to a zone that has not been reset. > > The ca [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pfM8e-0005VB-VY
-Subject: Re: [f2fs-dev] [PATCH] f2fs: handle dqget error in
- f2fs_transfer_project_quota()
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pfMhI-0007I8-Jn
+Subject: Re: [f2fs-dev] [PATCH v1] f2fs: Fix discard bug on zoned block
+ devices with 2MiB zone size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,56 +110,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-+Shilong,
-
-Hi, Shilong,
-
-Could you please help to check this patch? in original patch, it tries to
-ignore such error intentionally? or it is a bug?
-
-On 2023/2/21 22:45, Yangtao Li wrote:
-> We should set the error code when dqget() failed.
+On 2023/3/13 17:48, Yonggil Song wrote:
+> When using f2fs on a zoned block device with 2MiB zone size, IO errors
+> occurs because f2fs tries to write data to a zone that has not been reset.
 > 
-> Fixes: 2c1d03056991 ("f2fs: support F2FS_IOC_FS{GET,SET}XATTR")
-> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> The cause is that f2fs tries to discard multiple zones at once. This is
+> caused by a condition in f2fs_clear_prefree_segments that does not check
+> for zoned block devices when setting the discard range. This leads to
+> invalid reset commands and write pointer mismatches.
+> 
+> This patch fixes the zoned block device with 2MiB zone size to reset one
+> zone at a time.
+> 
+> Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
 > ---
->   fs/f2fs/file.c | 15 ++++++++-------
->   1 file changed, 8 insertions(+), 7 deletions(-)
+>   fs/f2fs/segment.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index ca1720fc1187..f25e58680984 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -3009,15 +3009,16 @@ int f2fs_transfer_project_quota(struct inode *inode, kprojid_t kprojid)
->   	struct dquot *transfer_to[MAXQUOTAS] = {};
->   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->   	struct super_block *sb = sbi->sb;
-> -	int err = 0;
-> +	int err;
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index acf3d3fa4363..2b6cb6df623b 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -1953,7 +1953,8 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
+>   					(end - 1) <= cpc->trim_end)
+>   				continue;
 >   
->   	transfer_to[PRJQUOTA] = dqget(sb, make_kqid_projid(kprojid));
-> -	if (!IS_ERR(transfer_to[PRJQUOTA])) {
-> -		err = __dquot_transfer(inode, transfer_to);
-> -		if (err)
-> -			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
-> -		dqput(transfer_to[PRJQUOTA]);
-> -	}
-> +	if (IS_ERR(transfer_to[PRJQUOTA]))
-> +		return PTR_ERR(transfer_to[PRJQUOTA]);
-> +
-> +	err = __dquot_transfer(inode, transfer_to);
-> +	if (err)
-> +		set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
-> +	dqput(transfer_to[PRJQUOTA]);
->   	return err;
->   }
->   
+> -		if (!f2fs_lfs_mode(sbi) || !__is_large_section(sbi)) {
+> +		if (!f2fs_sb_has_blkzoned(sbi) &&
+
+Could you please add one line comment here for this change?
+
+Otherwise it looks good to me.
+
+Thanks,
+
+> +		    (!f2fs_lfs_mode(sbi) || !__is_large_section(sbi))) {
+>   			f2fs_issue_discard(sbi, START_BLOCK(sbi, start),
+>   				(end - start) << sbi->log_blocks_per_seg);
+>   			continue;
 
 
 _______________________________________________
