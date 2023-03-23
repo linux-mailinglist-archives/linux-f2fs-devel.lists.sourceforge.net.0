@@ -2,74 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (unknown [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0EF56C6C18
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Mar 2023 16:18:03 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CA996C6C2E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Mar 2023 16:21:56 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pfMhR-000861-4V;
-	Thu, 23 Mar 2023 15:17:59 +0000
+	id 1pfMlF-0003gc-Cc;
+	Thu, 23 Mar 2023 15:21:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pfMhM-00085t-NW
+ (envelope-from <chao@kernel.org>) id 1pfMl7-0003gO-V7
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Mar 2023 15:17:54 +0000
+ Thu, 23 Mar 2023 15:21:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GEuGO17c6ZOxfDOyHEIDFrFVggeAHgAndlfWuYGrDoA=; b=A7BsYtMgfZGFeLuERQQOH0uTOO
- GY8tpwq4e5dVSYYpWSMmorAD5+pl79sgaQldX30Izeq6/IQi/jbQYnsAWupNRnaFe2+8DUWhA8jq/
- AQa1zpC/kSouOa1ySwWicOe20r1e7DauwShbvTRvIkKbOtDUU+j13ADg0vz4ct5kVm44=;
+ bh=HAGJ8lyLD9nbPVdx2Rxw349fE4HmMkiUxTEWhtRhhpU=; b=jAXAI+FS+DboN+0yMZPmxVzanr
+ qubrvIxwfJN8N0+wpKbA8Y7NI0zP76ABM2IiwH28CHXZFz1cd89tgEi8maNHIlAwJ0c+/clgbKsiu
+ Nf9verBMg3xa7n+Bh5xGRJD1pUxB0Dc/dpEU+teHdJ9Z2BbGmy6ThPw/TA8V+RqbMjFs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GEuGO17c6ZOxfDOyHEIDFrFVggeAHgAndlfWuYGrDoA=; b=cTP0E9cv55Ybq95ehTNnRzolYQ
- KVVhj6xGM1TNBXboyzsmPHo1uo9xbx59a5fDtLrAphWuMgYZogcdU689plq76BtU2z4gWBKKjN9Jn
- yfQY15VHZ80MC9XMMpUxhEizGlVJow8zwxY2Umq6qzjuRww9KFQEsWGRIydE8FcXv/Rg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=HAGJ8lyLD9nbPVdx2Rxw349fE4HmMkiUxTEWhtRhhpU=; b=fQS/PTY9Tus5TR5oPtu5Up/cDS
+ ionTfwLHlAh5NRB/VtQnndE8xLYGvMyLdn1EU+XCSMuMPHu2pRpiYXyr9RLSBSfCED+djxd83PK1l
+ fg7p5B1BdnJQZyJ1rB8MxQ5is15+5WgV7yGsi9764hiZwlsWVK+JhavHz8kfJqZl4e2c=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pfMhI-0007I8-Jn for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Mar 2023 15:17:50 +0000
+ id 1pfMl4-0007V9-2T for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 23 Mar 2023 15:21:46 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3C3A16278F;
- Thu, 23 Mar 2023 15:17:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A867FC433D2;
- Thu, 23 Mar 2023 15:17:40 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id CA635B82168;
+ Thu, 23 Mar 2023 15:21:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9560BC433D2;
+ Thu, 23 Mar 2023 15:21:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1679584662;
- bh=QtIAtDLDIoKln0bsHHFK0vxtR/850kTuSdnFC8ym8bA=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=a22tikQRQmcohKDLd6X39kaUMGIbozfwYExk+fQBxjKH/XmL7TPPhlmbbDl1PWygK
- PmF4dPhmvOyX0frC1rs9w11NZ86PWNFkdR9HzxGARg79XxM+0N8CW+oqfffLCM7uz5
- Na2/CNoHUIrUPPkTbB2VFPUSoj7sSJXbINaKuPVNh+/u1Jk0zYOSlBVDVwOgif+a4h
- qmeWDX1bdF/P3TCIi9CDKa/M8d0pUmdkeiV8mbgP/mear1kbLz39SZgXUv9uqEGty4
- 3L2fEXLfcYqy0xpXf1Yms0jtWqJMm3somhV5MaY9swUZXvpndUVzYoE36T050fMguB
- xzbfKpvVYVXrQ==
-Message-ID: <a24d66ad-4048-fd5c-ae47-2dd17c87bcbe@kernel.org>
-Date: Thu, 23 Mar 2023 23:17:38 +0800
+ s=k20201202; t=1679584894;
+ bh=wDNZypUN3pUlKsoLg7F1xpHMXCzrpFZE6n63BErOVPk=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=rEaAOL6Es2N0HyP3hVvjRdkPuh45Nbw+xFfMk0W3cMJXSerXAJj0pS2yiEGmnDB+5
+ GcbP/o97JVVbtmh+jFXZdp5YPjJgmoFCmEpbB9Ltx2xcKfEHfwB91HkIEQ8ziB/A6D
+ STY+f+Gyawhntzay8BYIpLuJkEF7Etp6QSX5PSdYEyVpEhmA0PwI1CX0fhqy3XHirG
+ 4RJf+tIOHv2ri34ugm64K95qcDVpqntGgEao6Kl+84Co0+mSSUtC9kwuD4UsvlcZyP
+ DYEfT1DuiaNLtKD4f9CP2qQiLvyoDK/XBoi1byFNimjoAPsMuhW+xU25QXdnVSKTR5
+ kbZsRYknhE+sQ==
+Message-ID: <90993654-9fff-685e-55a2-8698bc719cf5@kernel.org>
+Date: Thu, 23 Mar 2023 23:21:32 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
 Content-Language: en-US
-To: yonggil.song@samsung.com, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-References: <CGME20230313094825epcms2p71e6cb549251dc55e8d202dd64b9913a6@epcms2p7>
- <20230313094825epcms2p71e6cb549251dc55e8d202dd64b9913a6@epcms2p7>
+To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
+References: <20230302095509.53720-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230313094825epcms2p71e6cb549251dc55e8d202dd64b9913a6@epcms2p7>
+In-Reply-To: <20230302095509.53720-1-frank.li@vivo.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -77,14 +73,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/3/13 17:48, Yonggil Song wrote: > When using f2fs
- on a zoned block device with 2MiB zone size, IO errors > occurs because f2fs
- tries to write data to a zone that has not been reset. > > The ca [...] 
+ Content preview:  On 2023/3/2 17:55, Yangtao Li wrote: > It seems inappropriate
+ that the current logic does not handle > filemap_fdatawrite() errors, so
+ let's fix it. > > Signed-off-by: Yangtao Li <frank.li@vivo.com> Reviewed-by:
+ Chao Yu <chao@kernel.org> 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ high trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -96,9 +93,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pfMhI-0007I8-Jn
-Subject: Re: [f2fs-dev] [PATCH v1] f2fs: Fix discard bug on zoned block
- devices with 2MiB zone size
+X-Headers-End: 1pfMl4-0007V9-2T
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to handle filemap_fdatawrite()
+ error in f2fs_ioc_decompress_file/f2fs_ioc_compress_file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,48 +107,20 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/3/13 17:48, Yonggil Song wrote:
-> When using f2fs on a zoned block device with 2MiB zone size, IO errors
-> occurs because f2fs tries to write data to a zone that has not been reset.
+On 2023/3/2 17:55, Yangtao Li wrote:
+> It seems inappropriate that the current logic does not handle
+> filemap_fdatawrite() errors, so let's fix it.
 > 
-> The cause is that f2fs tries to discard multiple zones at once. This is
-> caused by a condition in f2fs_clear_prefree_segments that does not check
-> for zoned block devices when setting the discard range. This leads to
-> invalid reset commands and write pointer mismatches.
-> 
-> This patch fixes the zoned block device with 2MiB zone size to reset one
-> zone at a time.
-> 
-> Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
-> ---
->   fs/f2fs/segment.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index acf3d3fa4363..2b6cb6df623b 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -1953,7 +1953,8 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
->   					(end - 1) <= cpc->trim_end)
->   				continue;
->   
-> -		if (!f2fs_lfs_mode(sbi) || !__is_large_section(sbi)) {
-> +		if (!f2fs_sb_has_blkzoned(sbi) &&
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
 
-Could you please add one line comment here for this change?
-
-Otherwise it looks good to me.
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
-> +		    (!f2fs_lfs_mode(sbi) || !__is_large_section(sbi))) {
->   			f2fs_issue_discard(sbi, START_BLOCK(sbi, start),
->   				(end - start) << sbi->log_blocks_per_seg);
->   			continue;
 
 
 _______________________________________________
