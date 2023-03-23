@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (unknown [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 332806C6B07
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Mar 2023 15:31:55 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5BF46C6B0C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Mar 2023 15:32:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pfLyn-00074m-3I;
-	Thu, 23 Mar 2023 14:31:51 +0000
+	id 1pfLza-0000YT-Mg;
+	Thu, 23 Mar 2023 14:32:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pfLyl-00074f-8h
+ (envelope-from <chao@kernel.org>) id 1pfLzX-0000YH-Ks
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Mar 2023 14:31:49 +0000
+ Thu, 23 Mar 2023 14:32:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lMMvq5TIJk5uvnf3xO4BsB9NNYLBhtiWzGbTSaGH21g=; b=MSPo/Tg+HU3wgv69FN0giwEcHp
- hrbtldwAY7ZCAggTMbCfuhIF63N6vrjPwpjl01kckQChmZXqYoA1NFj64BVHiGQAUf+WflAi73LPm
- 06/tjMPNgMXx6ZvhTjm1UfwVeitsHc9YzLUsM9BIFKV6anes0wc0k9gzWV+/bVihxwuE=;
+ bh=iadFUoqqKW9Z6xVM7nu3j6bDDokOlOPdaO/XWRnrmX4=; b=dnK2nGqOqahsQXKyCHlgi35G3N
+ shtlLTDIitJK5M0rnvubg2CzaIbBKmY4xywr10vyd9coEJ+2n405KNs8l6/OLNEt4oVGHCoMyM4K3
+ 4XRMsJaDaREBhO+jYmCvrtWdzgPJMDOYQNGmJVVziq8PeKXEwlx86W51UmJF1m1SOHXI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,34 +31,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lMMvq5TIJk5uvnf3xO4BsB9NNYLBhtiWzGbTSaGH21g=; b=MnH3VzPoxl2Bjpnf0bx27RPrCP
- whb2jB0HMMhNV+654zx7p8UfeJMDL68FbPASTycZEEQhf3ri10BK1WJdEK4RQObwNtGOzXlBoPIVv
- oIJtAekdnN5Lt3BZ+MKz0X4yN4s1XVGC5xwvb9XAN30l45wsh8kclgsUci8G/6DLLjZQ=;
+ bh=iadFUoqqKW9Z6xVM7nu3j6bDDokOlOPdaO/XWRnrmX4=; b=JjFx0ECnKaKPod+P5HvYtqRZnY
+ 8ZKpaQlavMGK5+Mb5zt7irIS4ays0FJ5T/rqyeyjQhN50ydGAO4KNVr1XkARJQwj5dfsPlHwp14DB
+ c2QuaqLmXaYq0fyKRWzN9BDVeSbkRweZR0+DL+/315SlmMsFVecVHHPHBXaKfWJ7TTak=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pfLym-000Hy4-N8 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Mar 2023 14:31:49 +0000
+ id 1pfLzX-000I2Y-Nz for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 23 Mar 2023 14:32:36 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4F344626D1
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5AADB62769
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 23 Mar 2023 14:31:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E407AC433EF;
- Thu, 23 Mar 2023 14:31:37 +0000 (UTC)
+ Thu, 23 Mar 2023 14:32:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D76DCC433EF;
+ Thu, 23 Mar 2023 14:32:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1679581898;
- bh=Sv3YybIQKDgWMcn1KW6KjvbVZBTE9wL1diTv47fKkqs=;
+ s=k20201202; t=1679581949;
+ bh=HHWrNMrPlNwL81CabBt0+fkOmCZiHtHeEc00qjEhBTE=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=gFywPhWzMoKqSKt+w9EW24FI9Ut3lF7kvBz/A9Q7RSqioTBgu8qyebBsk9D5c7lCw
- 8mYHdZ32zH6q13p7SUs9vQkPM3J1iRx9GWhaRIBq+FEIJJq/I5mwBTrecnPvggwGDH
- /juttkIXqnaCkT9yvwQtGtD10qz3k6cfXxggcnM/yiBd9SbEy8IF87yWBHh/j8Tft8
- ZCink1m69aeWohxXaDL1ByWTb+ri8aY5Su/odbyVs1FQqc+RDOgUTqYsvk0BgQs/k3
- d0h2Tf3fdIZzFnxK+146+01Vg3/Le3YZRtllkEWH5CVTwVxZILEj6I+jrikAiQz9Ye
- lA3M32DfTDhWQ==
-Message-ID: <dabe799f-001d-6514-f18f-16466c11653d@kernel.org>
-Date: Thu, 23 Mar 2023 22:31:36 +0800
+ b=kEn9mn0wY9dmxlUr9qFUf+dpySxwscUg07B4sar7MR0Wx0CTG13oBMTAM/oPBp0Cg
+ EkuTrNgG1ULF4umJ4seD677BShuGXEgqwInyYnKon/DxmfTMxx7N3s0mWkuLM0FSGI
+ NcIWl3UKC2KnXWyfrZaKWzQh7LA8fARh6SZkicPGb+IIzYDO+KnSkzkwGxiEHXa6O0
+ HbvnUksEqKuPJvnyYpjxgRs3OsvNlc6TxnNbvc/RWCt3RjN7TS+UpkNt5i4KE1xYT9
+ 1BmEggt8owjnw4Y0HrjCwEfGvV+gniqfh08Y1OvyBK3iTXHqd3v/b20bHldDzsdIGS
+ 6V2kXDXQGvOEA==
+Message-ID: <a58bbd47-6390-91b5-b00c-0399362c95c7@kernel.org>
+Date: Thu, 23 Mar 2023 22:32:27 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
@@ -66,9 +66,9 @@ Content-Language: en-US
 To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 References: <20230313201216.924234-1-jaegeuk@kernel.org>
- <20230313201216.924234-3-jaegeuk@kernel.org>
+ <20230313201216.924234-4-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230313201216.924234-3-jaegeuk@kernel.org>
+In-Reply-To: <20230313201216.924234-4-jaegeuk@kernel.org>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -76,9 +76,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/3/14 4:12, Jaegeuk Kim wrote: > This is a second part
- to remove the mixed use of rb_tree in discard_cmd from > extent_cache. >
- > This should also fix arm32 memory alignment issue caused by sha [...] 
+ Content preview:  On 2023/3/14 4:12, Jaegeuk Kim wrote: > This is a last part
+ to remove the memory sharing for rb_tree in extent_cache. > > This should
+ also fix arm32 memory alignment issue. > > [struct extent_node] [s [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +94,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pfLym-000Hy4-N8
-Subject: Re: [f2fs-dev] [PATCH 2/3] f2fs: factor out discard_cmd usage from
- general rb_tree use
+X-Headers-End: 1pfLzX-000I2Y-Nz
+Subject: Re: [f2fs-dev] [PATCH 3/3] f2fs: remove entire rb_entry sharing
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,23 +113,22 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 2023/3/14 4:12, Jaegeuk Kim wrote:
-> This is a second part to remove the mixed use of rb_tree in discard_cmd from
-> extent_cache.
+> This is a last part to remove the memory sharing for rb_tree in extent_cache.
 > 
-> This should also fix arm32 memory alignment issue caused by shared rb_entry.
+> This should also fix arm32 memory alignment issue.
 > 
-> [struct discard_cmd]               [struct rb_entry]
+> [struct extent_node]               [struct rb_entry]
 > [0] struct rb_node rb_node;        [0] struct rb_node rb_node;
 >    union {                              union {
 >      struct {                             struct {
-> [16]  block_t lstart;              [12]    unsigned int ofs;
->        block_t len;                         unsigned int len;
+> [16]  unsigned int fofs;           [12]    unsigned int ofs;
+>        unsigned int len;                    unsigned int len;
 >                                           };
 >                                           unsigned long long key;
 >                                         } __packed;
 > 
 > Cc: <stable@vger.kernel.org>
-> Fixes: 004b68621897 ("f2fs: use rb-tree to track pending discard commands")
+> Fixes: 13054c548a1c ("f2fs: introduce infra macro and data structure of rb-tree extent cache")
 > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
