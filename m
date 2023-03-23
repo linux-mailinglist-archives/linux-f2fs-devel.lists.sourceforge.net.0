@@ -2,117 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (unknown [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D205C6C6B1A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Mar 2023 15:34:18 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9EB96C6B6E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Mar 2023 15:47:20 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pfM18-0007BN-J7;
-	Thu, 23 Mar 2023 14:34:16 +0000
+	id 1pfMDm-0001PB-L1;
+	Thu, 23 Mar 2023 14:47:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1pfM16-0007BH-OV
+ (envelope-from <tytso@mit.edu>) id 1pfMDl-0001Os-Nh
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Mar 2023 14:34:14 +0000
+ Thu, 23 Mar 2023 14:47:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ha6Y5F9AQG0GQDvcwxfLd4IxxUqU7cyGTy3kGa4dNjo=; b=N1Z4elDuLsynt4idNXYg5g2AdQ
- tzYhCSB2auDeI9Eu1CYN1wPNvisuEgo+4OMuAnd3nX8z6LMz19QfCe2vX4PJa0aF0dqAmPnv9xaPy
- vIIhJEX4x3wJAGrAOIwUGbBG8mLhLI55MrIaNs7e1d+NcTONFuqVHcdzlyQAHILUUy3c=;
+ bh=2PSG6kT36CkBgT8ei5K71qzuiLAw9IbqghpRjidCjVg=; b=UDQStOqXYO9Nkqnc7fshi22nHj
+ p0b7930puf/adIIIRsrIpOrdXYAagWTwZCfRr5jrwLV6j+MjVhF4CWzj54kVW1LkT2CR5UtDgQHNW
+ euQzo/inlPzEEg+Sm/ojlbshDqigeIHfvdc0CF7ItxAsND89FJgm4BaEXJqPGRWQSFgI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ha6Y5F9AQG0GQDvcwxfLd4IxxUqU7cyGTy3kGa4dNjo=; b=mwnY5facyD8tZv8Md2Lk8THIfd
- GE1AvAuAK7Ay0Woqzqx/v5wvOQbxDpyOTmeQzSikLwYZMKmixstIGEczXB/tUaVgdMfTpl5onL292
- HHMZLHrdtgVUxfB6afQEHRjK0h1E1/p8LuaxJvJCmYYnaYeq4QalGX+oQaFy21DETLjQ=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ bh=2PSG6kT36CkBgT8ei5K71qzuiLAw9IbqghpRjidCjVg=; b=Ng/2EY5S+5WtFSjdwSvQyNtcfb
+ lCc5GvXfAYwzPaNJI4LDQbydvW+8c6bm6sjjzpH9LdO6QsIQV4KVzmBT0Kc95nVVA2Q1xurTsZANZ
+ alAO4/BgkX814AYzlcMG6pvQa1E5g052x84KILKo9vV3x3bXujFbxMZS4fo0mBFhTy5U=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pfM16-000I9b-Ki for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Mar 2023 14:34:14 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 62DA2B81DE5
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 23 Mar 2023 14:34:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2D0BBC4339B
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 23 Mar 2023 14:34:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1679582045;
- bh=Ha6Y5F9AQG0GQDvcwxfLd4IxxUqU7cyGTy3kGa4dNjo=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=gLHt7KWtxd6qNp0mtdASA3RcRMbnG3Qzk42Ps0V5NU3yuAmFtIXyAM25kscTcIvJ3
- Zi0S+qA/d7XFolGDb/jW2aSgGuBspqxnjscdxrFCdYp8NxX/fmuwTfz6a2LfOGpx0j
- hX/KEgYcyvCGEnHu1daQNpIXBGNrxGPtzW3MpP4pDs/CvOhV0JsBqSLojvaNqhXUSV
- AUacIiC9aK6GcUpJLU5pQ5g5PTVo9nQWOHbCi9HdyXDy1yf3obdAIQyr2FtTj4YxxL
- Lh/TtHGBbxwN08NqZu0iXt1DVtlvSQKal2fLDIlI2kIK0ccusLFMi2dyjCntrQBVeV
- klCMdKU+3ZYrg==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 0AA1FC43141; Thu, 23 Mar 2023 14:34:05 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 23 Mar 2023 14:34:04 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: guido.iodice@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-DQubByjD9F@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1pfMDl-000J6U-JS for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 23 Mar 2023 14:47:18 +0000
+Received: from cwcc.thunk.org (pool-173-48-120-46.bstnma.fios.verizon.net
+ [173.48.120.46]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 32NEaMVT012103
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 23 Mar 2023 10:36:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
+ t=1679582184; bh=2PSG6kT36CkBgT8ei5K71qzuiLAw9IbqghpRjidCjVg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=YNMEWSEK/bpf4wrXU9PCz+Cs9x578xeEeRj8/aSRvYm6/q1R41hDWeh9K35tdPW7t
+ Xm6c7HPXVUm51FTDYw8Yjf486KHMGFN46uJfca8hUvxcxfyBiDB+47HL6adcWMEQPc
+ IeUY9ouonFKpoSTBEqIoJ3qMNs7Nh2HFKvrb5h7LO8lTaPTLDyzW34DPiVRcX8laAp
+ YU7kgko7ggR67GmhDalP3S874Yb5MnrIYsaEvocj+YKp+Y3Lo5GEffptlLiINroZ08
+ nogJ9LbA9TGGgdleLsIecmmt5CaS6nPd4R8mlkgztJf8SCWgrajm3xs8onVrC5f3N6
+ VEWYIXSsr69+A==
+Received: by cwcc.thunk.org (Postfix, from userid 15806)
+ id 0EDD815C4279; Thu, 23 Mar 2023 10:36:22 -0400 (EDT)
+Date: Thu, 23 Mar 2023 10:36:22 -0400
+From: "Theodore Ts'o" <tytso@mit.edu>
+To: Gabriel Krisman Bertazi <krisman@collabora.com>
+Message-ID: <20230323143622.GE136146@mit.edu>
+References: <20220622194603.102655-1-krisman@collabora.com>
+ <20220622194603.102655-4-krisman@collabora.com>
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+Content-Disposition: inline
+In-Reply-To: <20220622194603.102655-4-krisman@collabora.com>
+X-Spam-Score: -2.1 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
- Comment
- #139 from Guido (guido.iodice@gmail.com) --- I have been using the kernel
- with this patch for a month now and so far no problems. Out of superstition
- (I am Italian!), I'm afraid to say tha [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Wed, Jun 22, 2022 at 03:45:59PM -0400, Gabriel Krisman
+ Bertazi wrote: > Introduce a dentry revalidation helper to be used by
+ case-insensitive
+ > filesystems to check if it is safe to reuse a negativ [...] 
+ Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [18.9.28.11 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pfM16-000I9b-Ki
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+ 0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
+X-Headers-End: 1pfMDl-000J6U-JS
+Subject: Re: [f2fs-dev] [PATCH 3/7] libfs: Validate negative dentries in
+ case-insensitive directories
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,22 +100,27 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: kernel@collabora.com, linux-f2fs-devel@lists.sourceforge.net,
+ ebiggers@kernel.org, viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org,
+ jaegeuk@kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+On Wed, Jun 22, 2022 at 03:45:59PM -0400, Gabriel Krisman Bertazi wrote:
+> Introduce a dentry revalidation helper to be used by case-insensitive
+> filesystems to check if it is safe to reuse a negative dentry.
+> 
+> A negative dentry is safe to be reused on a case-insensitive lookup if
+> it was created during a case-insensitive lookup and this is not a lookup
+> that will instantiate a dentry. If this is a creation lookup, we also
+> need to make sure the name matches sensitively the name under lookup in
+> order to assure the name preserving semantics.
+> 
+> Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
 
---- Comment #139 from Guido (guido.iodice@gmail.com) ---
-I have been using the kernel with this patch for a month now and so far no
-problems. Out of superstition (I am Italian!), I'm afraid to say that the bug
-is fixed, but it seems plausible
+Reviewed-by: Theodore Ts'o <tytso@mit.edu>
 
--- 
-You may reply to this email to add a comment.
-
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
