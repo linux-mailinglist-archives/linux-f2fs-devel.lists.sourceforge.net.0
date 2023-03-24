@@ -2,73 +2,67 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (unknown [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F1C16C753A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Mar 2023 02:52:53 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 518C96C7880
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Mar 2023 08:11:55 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pfWbn-000645-KQ;
-	Fri, 24 Mar 2023 01:52:48 +0000
+	id 1pfbaX-0006BG-7i;
+	Fri, 24 Mar 2023 07:11:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pfWbm-00063z-7h
+ (envelope-from <chao@kernel.org>) id 1pfbaV-0006BA-Dk
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 24 Mar 2023 01:52:46 +0000
+ Fri, 24 Mar 2023 07:11:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8cSqDpNgtrTK6/DVDh/DqIWgX0nq/uJWGjnbYsenW7Q=; b=m7BUlYMdJG5BMYKB0AQNWtJckC
- bYZ5jSkTpwXzwKGBrYzNUg9Jkvm8gSeAXGz4VY/DiopzUNDnlGKLa1ncO3aLG11GRlpJjXVMevzv6
- tQTHCSMzACv+gdkBWRKjWNQkgFtfQDZnqn2WQybA7aLv8HxVpDKlSG4jdGFkdAJbzKu0=;
+ bh=ZETkEfKj2/0zNH33wFebpLM6CNBk0DcgJ8ub7BAvqpE=; b=BbI9S+h1x8MEg8bnccO2awl1qF
+ 8H211Unoe4gEYuabaLF5vyeSM8HhoLWwN3W3S3ZKxadSkf4aWk5Ab2S5PQ2q6yLcfWomysvZLXngn
+ zAjoKcK48ar0Uxt5+O/zii/Xco+OhBgR9dLkW4bloAeg296eWAj3WkjOWtGcn6ZX6mak=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=8cSqDpNgtrTK6/DVDh/DqIWgX0nq/uJWGjnbYsenW7Q=; b=TMLA3bV4lLiqEYdxnkc2MFpLT+
- pr64qMTmI2jgzUgkhxF2z3Pz9JOj8zO6Yb6m9ZWiOBCueG24tiOSGH1Ftv2KAtdFiSASeCvwwb30d
- zi0BTw1Vz45H8gucu+Id41xZ+zSOwOeN53OSJ5p6o5NvWP/X9Th1RrWZmcDGohqNd6/s=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ZETkEfKj2/0zNH33wFebpLM6CNBk0DcgJ8ub7BAvqpE=; b=E
+ PQ3iIyOlz9E7ZLM7EVp69x/prauYIRjrIGbHiYWtTnaQBdyyGE+8TAKP5sa1R3YXJlbqjvPKOfvwD
+ tU5eMi6oNUv0UrNoiQB/W6yIzZjnp70Y8dfeSBOn/NVxpPbmBi+gEHpW5XHym9whsxsvuUfwJ0Qfy
+ sll/vGxW1eFYsnyI=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pfWbl-000v8s-TP for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 24 Mar 2023 01:52:46 +0000
+ id 1pfbaR-0001Ql-4Q for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 24 Mar 2023 07:11:47 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 2024FB822B1;
- Fri, 24 Mar 2023 01:52:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE1FFC433D2;
- Fri, 24 Mar 2023 01:52:27 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E68E46293A
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 24 Mar 2023 07:11:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0639C433EF;
+ Fri, 24 Mar 2023 07:11:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1679622748;
- bh=7Ov5bcBJRytUEv+2NcWM9mM0KBzimX69aeySA71KuQQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ULPZ1Hb5Fx37otUY1CFhOilyXzeSeno+3EKAk+3D0advy9ZCTEGh9FiBfvXlRoxZJ
- EUzg/uvG6IDzVqDVnfeCe4TC0WoWELgL8ErWr1/xokXizv0YWca81VMVQhUwCdDBUj
- nEJxbb3rzHeyqYndELjP1dnDFtFGbtE8dpfUl6segz4dmJO6D6t69AXvfhrh9ZX+xd
- YMkTHuh/SK7f4kKJCu7hxXoUeVXoaTb8uNco/p52C6yAvXfD/waEaDNcCEPGeJ0JuX
- DpmMs2GpNNA4IsNtGPwC+GvxLbDVClC05suMJWEEprCFkSNViy6QgarmIY915Gv7+U
- P6QfpgjXL7d4g==
-Message-ID: <35dd1eea-f1b9-418e-5f97-cfd10b7ff803@kernel.org>
-Date: Fri, 24 Mar 2023 09:52:25 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.2
-Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <CGME20230313094825epcms2p71e6cb549251dc55e8d202dd64b9913a6@epcms2p7>
- <20230313094825epcms2p71e6cb549251dc55e8d202dd64b9913a6@epcms2p7>
- <a24d66ad-4048-fd5c-ae47-2dd17c87bcbe@kernel.org>
- <ZBzMql6DkrUWiRKP@google.com>
+ s=k20201202; t=1679641892;
+ bh=fd449v8qUAZkDHI6JVneORMPbA4ytiODmJnf767Az2E=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Ifgg7zI5WbqRt/wqU+zoY5M6knul1KM3tbF0F9zWBh/P/F0IUZoA9U0oA8fJLKqe7
+ XFu7rjzuhLE0JGqH5oTfrqQNn3akT63mR4zyes68LX5vvspHXTFAAE6VTP1+HwX1ai
+ 6o/ZQ7DDwUOX1YVudxWf0iQUWdDZM4wEAUNkPPGqFabR7y9xGIULR1Nq2rd0eKXwP/
+ OLM3xaXi9QdTa+TQLOwIKvifuaPlCBCQwGHcDNFx1BN3HPmm1x4F3svRGykC/4S1W/
+ mL682Ozy7WyDe40UAdex1veILvNgqTaN8aVQe/cZaogmNTU4W67Emo6fZbLQ5822I9
+ l6nWibBrt4IwQ==
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZBzMql6DkrUWiRKP@google.com>
+To: jaegeuk@kernel.org
+Date: Fri, 24 Mar 2023 15:10:28 +0800
+Message-Id: <20230324071028.336982-1-chao@kernel.org>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -76,28 +70,27 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/3/24 6:03, Jaegeuk Kim wrote: > On 03/23, Chao Yu
- wrote: >> On 2023/3/13 17:48, Yonggil Song wrote: >>> When using f2fs on a
- zoned block device with 2MiB zone size, IO errors >>> occurs becaus [...]
+ Content preview:  In order to reclaim free blocks in prefree sections before
+ latter use. Fixes: 6f8d4455060d ("f2fs: avoid fi->i_gc_rwsem[WRITE] lock
+ in f2fs_gc") Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/f2fs.h |
+ 1 + fs/f2fs/gc.c | 8 ++++++++ fs/f2fs/segment.c | 1 + 3 files ch [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [145.40.68.75 listed in list.dnswl.org]
- -0.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pfWbl-000v8s-TP
-Subject: Re: [f2fs-dev] [PATCH v1] f2fs: Fix discard bug on zoned block
- devices with 2MiB zone size
+ valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pfbaR-0001Ql-4Q
+Subject: [f2fs-dev] [PATCH] f2fs: fix to trigger a checkpoint in the end of
+ foreground garbage collection
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,61 +102,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/3/24 6:03, Jaegeuk Kim wrote:
-> On 03/23, Chao Yu wrote:
->> On 2023/3/13 17:48, Yonggil Song wrote:
->>> When using f2fs on a zoned block device with 2MiB zone size, IO errors
->>> occurs because f2fs tries to write data to a zone that has not been reset.
->>>
->>> The cause is that f2fs tries to discard multiple zones at once. This is
->>> caused by a condition in f2fs_clear_prefree_segments that does not check
->>> for zoned block devices when setting the discard range. This leads to
->>> invalid reset commands and write pointer mismatches.
->>>
->>> This patch fixes the zoned block device with 2MiB zone size to reset one
->>> zone at a time.
->>>
->>> Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
->>> ---
->>>    fs/f2fs/segment.c | 3 ++-
->>>    1 file changed, 2 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->>> index acf3d3fa4363..2b6cb6df623b 100644
->>> --- a/fs/f2fs/segment.c
->>> +++ b/fs/f2fs/segment.c
->>> @@ -1953,7 +1953,8 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
->>>    					(end - 1) <= cpc->trim_end)
->>>    				continue;
->>> -		if (!f2fs_lfs_mode(sbi) || !__is_large_section(sbi)) {
->>> +		if (!f2fs_sb_has_blkzoned(sbi) &&
->>
->> Could you please add one line comment here for this change?
-> 
-> This was merged in -dev a while ago. I don't think this would be critical
-> to rebase it again.
+In order to reclaim free blocks in prefree sections before latter use.
 
-Yes, it's not critical, fine to me.
+Fixes: 6f8d4455060d ("f2fs: avoid fi->i_gc_rwsem[WRITE] lock in f2fs_gc")
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/f2fs.h    | 1 +
+ fs/f2fs/gc.c      | 8 ++++++++
+ fs/f2fs/segment.c | 1 +
+ 3 files changed, 10 insertions(+)
 
-Thanks,
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 53a005b420cf..b1515375cb4c 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1269,6 +1269,7 @@ struct f2fs_gc_control {
+ 	unsigned int victim_segno;	/* target victim segment number */
+ 	int init_gc_type;		/* FG_GC or BG_GC */
+ 	bool no_bg_gc;			/* check the space and stop bg_gc */
++	bool reclaim_space;		/* trigger checkpoint to reclaim space */
+ 	bool should_migrate_blocks;	/* should migrate blocks */
+ 	bool err_gc_skipped;		/* return EAGAIN if GC skipped */
+ 	unsigned int nr_free_secs;	/* # of free sections to do GC */
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 2996d38aa89c..5a451d3d512d 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -132,6 +132,7 @@ static int gc_thread_func(void *data)
+ 
+ 		gc_control.init_gc_type = sync_mode ? FG_GC : BG_GC;
+ 		gc_control.no_bg_gc = foreground;
++		gc_control.reclaim_space = foreground;
+ 		gc_control.nr_free_secs = foreground ? 1 : 0;
+ 
+ 		/* if return value is not zero, no victim was selected */
+@@ -1880,6 +1881,13 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+ 				(gc_type == FG_GC) ? sec_freed : 0, 0)) {
+ 		if (gc_type == FG_GC && sec_freed < gc_control->nr_free_secs)
+ 			goto go_gc_more;
++
++		/*
++		 * trigger a checkpoint in the end of foreground garbage
++		 * collection.
++		 */
++		if (gc_control->reclaim_space)
++			ret = f2fs_write_checkpoint(sbi, &cpc);
+ 		goto stop;
+ 	}
+ 
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 6c11789da884..b62af2ae1685 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -421,6 +421,7 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
+ 				.victim_segno = NULL_SEGNO,
+ 				.init_gc_type = BG_GC,
+ 				.no_bg_gc = true,
++				.reclaim_space = true,
+ 				.should_migrate_blocks = false,
+ 				.err_gc_skipped = false,
+ 				.nr_free_secs = 1 };
+-- 
+2.25.1
 
-> 
->>
->> Otherwise it looks good to me.
->>
->> Thanks,
->>
->>> +		    (!f2fs_lfs_mode(sbi) || !__is_large_section(sbi))) {
->>>    			f2fs_issue_discard(sbi, START_BLOCK(sbi, start),
->>>    				(end - start) << sbi->log_blocks_per_seg);
->>>    			continue;
 
 
 _______________________________________________
