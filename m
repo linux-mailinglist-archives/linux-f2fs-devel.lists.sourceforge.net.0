@@ -2,72 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EEF936C9497
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 26 Mar 2023 15:47:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E105A6C9499
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 26 Mar 2023 15:48:06 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pgQia-0003ZY-J2;
-	Sun, 26 Mar 2023 13:47:32 +0000
+	id 1pgQj6-0004iY-PH;
+	Sun, 26 Mar 2023 13:48:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pgQiU-0003ZR-Ru
+ (envelope-from <chao@kernel.org>) id 1pgQj2-0004iJ-8P
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 26 Mar 2023 13:47:27 +0000
+ Sun, 26 Mar 2023 13:48:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=L/LZWqqG7X5vjnhpi75VHPT0CJh4H1QcujZQr0+wDss=; b=buwcke8x0MDitq+Myfqj8lNIDV
- Ov2K5rKIvPB4wHnGOIlrUSUanCMyAygq1tmYPaALYRduY0/X/7J9QQ9W0mgnU1PdJ7hTijF2lV1RA
- OPou2fjWVdoJRNNQw14MrPL/cy4TiaTwVqsun4CUtgDUcY2xOV5zloTwcbbV70MNupF4=;
+ bh=+SpUcrqQU2yvb+UA3gwrYnueTILlD9OO69AKuHDiNKw=; b=ZyBBTrwk5OuyeQtEAz5KupACT8
+ OQA6cdwqUf82/ypyhd9508a8B/Y2qNXRs9JRsTT6eqL0HxD1Qc2QcgrwZ285s8Ag26NodbBqeM8eL
+ 4UFG4E3dBxztXHIilrtAfMP+lYWuusmIHt+efoU2fBliXscbP0rPil8Z+UwjcuhBXLFw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
- References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=L/LZWqqG7X5vjnhpi75VHPT0CJh4H1QcujZQr0+wDss=; b=dv9Tom9i0kMqVTr4dPNcyaUGtU
- oxBl8ga5ZcWOFZe+qJYIbeuR1u7E4GMm/okVzmr1hOL6/RlFoEq8dm6bCehoBIntf20/Ha98zhn2o
- ebJB3Zxs8eEq3bD/M1XtYjZp2eUMzIu/lOrs2MkfCGtHECScE+5iCk5W6KJ45D5vKF6I=;
+ bh=+SpUcrqQU2yvb+UA3gwrYnueTILlD9OO69AKuHDiNKw=; b=jB687tkeonetQouhGs6ENHwqJ4
+ HbiS9S0iqc4yw6ebruqWK2ZtPI2r6LRObbnYy/jezxnR7Xmz1hQbAG0I5njSdqINWyk5F1bI57R45
+ ZUY15lGbq8PxbabmwLDuy088c1lfPa4jvaaBf3L6qu70V/vhyPQxtdG0NCLfSh5GQSmM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pgQiU-004Mqi-IN for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 26 Mar 2023 13:47:27 +0000
+ id 1pgQiz-00045X-26 for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 26 Mar 2023 13:47:59 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id EF3D660EE2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 26 Mar 2023 13:47:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7C6DC433D2;
- Sun, 26 Mar 2023 13:47:15 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7027160EE1;
+ Sun, 26 Mar 2023 13:47:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A364C433EF;
+ Sun, 26 Mar 2023 13:47:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1679838437;
- bh=s2QYAdjbUYQBkX1WyFcFHz0Vhba1CYaExhV8K6Xm6iE=;
- h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
- b=WlczRvY58+j7UqiQ0n27gc7fKfvprvdjanglAmNZrCG/VjSo5ZpvNgsN9mKbFRbGu
- M3cvoO1b6F7UzA0QCXq0SylaVtJKLGzBXeSa04nYzRWSyQdGVUwnxj553nXE2dL3Rb
- An34Z7ymKIhJi1n2WhwLZ6NkNb/tGxIPotAx+ngpi/NzuwIHblXvZ4bMH9ARUeM3dE
- qQ6WZ4y08cRTVb7xVoK2oyl/DHDQ2WsnuXMysrZFqB4Wm9r8vA+qzj4HFkrxU2KlPS
- xtmkYzV2gtbY9dFGHUC2Yn1/HjgdnjjA67jOlhm7D40Jb1Y5djR5zVuiEOfPNQvcWn
- SmEaSnCWmiM3Q==
-Message-ID: <8aea02b0-86f9-539a-02e9-27b381e68b66@kernel.org>
-Date: Sun, 26 Mar 2023 21:47:14 +0800
+ s=k20201202; t=1679838465;
+ bh=Mbrp8vJfL4WUN8W5w3k6PtvrtBZ8ae9TAdSfQJPoQCY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=EAGLHJEtYiiFDBODRxZ07bdcD8p12oHlpjlz1gRiKEjUcfWZ4nZB46uNRljMhFgzZ
+ 2Nf3yPjKaCdb63id3RP/xZHDPqNMYek2OzTLiCUoahWRePe/VbKV7uQBaXg+Xu739c
+ Z4ZpQmyIj1Er6Tlj0YjZwZrAyrX/HfKaAWcY/15FQJIcEnM5RImqwtolWvYllV0hen
+ 2xAlG4NdeYyA/2//HJgRlZTyX9cEnLbhNVeTtaPhH2dJNQmNZnS7OBK8Euee5E3Eyd
+ njVsOeAgwQsgoI8wSlYbNApE8iNISj1floUNOreIyYgJUU0AfznZRLFaeYtxH4h8iq
+ lUmPr5VXbbioA==
+Message-ID: <67aaa031-ab25-ffe4-ea56-3f3e4c0ac3d1@kernel.org>
+Date: Sun, 26 Mar 2023 21:47:42 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20230323213919.1876157-1-jaegeuk@kernel.org>
+To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
+References: <20230320172218.59628-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230323213919.1876157-1-jaegeuk@kernel.org>
+In-Reply-To: <20230320172218.59628-1-frank.li@vivo.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -75,10 +73,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/3/24 5:39,
- Jaegeuk Kim wrote: > https://bugzilla.kernel.org/show_bug.cgi?id=216050
- > > Somehow we're getting a page which has a different mapping. > Let's avoid
- the infinite loop. > > Cc: <sta [...] 
+ Content preview:  On 2023/3/21 1:22,
+ Yangtao Li wrote: > BUG_ON() will be triggered
+ when writing files concurrently,
+ > because the same page is writtenback multiple
+ times. > > 1597 void folio_end_writeback(struct folio [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +94,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pgQiU-004Mqi-IN
-Subject: Re: [f2fs-dev] [PATCH] f2fs: get out of a repeat loop when getting
- a locked data page
+X-Headers-End: 1pgQiz-00045X-26
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: compress: fix to call
+ f2fs_wait_on_page_writeback() in f2fs_write_raw_pages()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,74 +108,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: stable@vger.kernel.org
+Cc: Christoph Hellwig <hch@lst.de>, hanqi@vivo.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/3/24 5:39, Jaegeuk Kim wrote:
-> https://bugzilla.kernel.org/show_bug.cgi?id=216050
+On 2023/3/21 1:22, Yangtao Li wrote:
+> BUG_ON() will be triggered when writing files concurrently,
+> because the same page is writtenback multiple times.
 > 
-> Somehow we're getting a page which has a different mapping.
-> Let's avoid the infinite loop.
+> 1597 void folio_end_writeback(struct folio *folio)
+> 1598 {
+> 		......
+> 1618     if (!__folio_end_writeback(folio))
+> 1619         BUG();
+> 		......
+> 1625 }
 > 
-> Cc: <stable@vger.kernel.org>
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->   fs/f2fs/data.c | 8 ++------
->   1 file changed, 2 insertions(+), 6 deletions(-)
+> kernel BUG at mm/filemap.c:1619!
+> Call Trace:
+>   <TASK>
+>   f2fs_write_end_io+0x1a0/0x370
+>   blk_update_request+0x6c/0x410
+>   blk_mq_end_request+0x15/0x130
+>   blk_complete_reqs+0x3c/0x50
+>   __do_softirq+0xb8/0x29b
+>   ? sort_range+0x20/0x20
+>   run_ksoftirqd+0x19/0x20
+>   smpboot_thread_fn+0x10b/0x1d0
+>   kthread+0xde/0x110
+>   ? kthread_complete_and_exit+0x20/0x20
+>   ret_from_fork+0x22/0x30
+>   </TASK>
 > 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index bf51e6e4eb64..80702c93e885 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -1329,18 +1329,14 @@ struct page *f2fs_get_lock_data_page(struct inode *inode, pgoff_t index,
->   {
->   	struct address_space *mapping = inode->i_mapping;
->   	struct page *page;
-> -repeat:
-> +
->   	page = f2fs_get_read_data_page(inode, index, 0, for_write, NULL);
->   	if (IS_ERR(page))
->   		return page;
->   
->   	/* wait for read completion */
->   	lock_page(page);
-> -	if (unlikely(page->mapping != mapping)) {
+> Below is the concurrency scenario:
+> 
+> [Process A]		[Process B]		[Process C]
+> f2fs_write_raw_pages()
+>    - redirty_page_for_writepage()
+>    - unlock page()
+> 			f2fs_do_write_data_page()
+> 			  - lock_page()
+> 			  - clear_page_dirty_for_io()
+> 			  - set_page_writeback() [1st writeback]
+> 			    .....
+> 			    - unlock page()
+> 
+> 						generic_perform_write()
+> 						  - f2fs_write_begin()
+> 						    - wait_for_stable_page()
+> 
+> 						  - f2fs_write_end()
+> 						    - set_page_dirty()
+> 
+>    - lock_page()
+>      - f2fs_do_write_data_page()
+>        - set_page_writeback() [2st writeback]
+> 
+> This problem was introduced by the previous commit 7377e853967b ("f2fs:
+> compress: fix potential deadlock of compress file"). All pagelocks were
+> released in f2fs_write_raw_pages(), but whether the page was
+> in the writeback state was ignored in the subsequent writing process.
+> Let's fix it by waiting for the page to writeback before writing.
+> 
+> Cc: Christoph Hellwig <hch@lst.de>
+> Fixes: 4c8ff7095bef ("f2fs: support data compression")
+> Fixes: 7377e853967b ("f2fs: compress: fix potential deadlock of compress file")
+> Signed-off-by: Qi Han <hanqi@vivo.com>
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
 
-How about using such logic only for move_data_page() to limit affect for
-other paths?
-
-Jaegeuk, any thoughts about why mapping is mismatch in between page's one and
-inode->i_mapping?
-
-After several times code review, I didn't get any clue about why f2fs always
-get the different mapping in a loop.
-
-Maybe we can loop MM guys to check whether below folio_file_page() may return
-page which has different mapping?
-
-struct page *pagecache_get_page(struct address_space *mapping, pgoff_t index,
-		int fgp_flags, gfp_t gfp)
-{
-	struct folio *folio;
-
-	folio = __filemap_get_folio(mapping, index, fgp_flags, gfp);
-	if (IS_ERR(folio))
-		return NULL;
-	return folio_file_page(folio, index);
-}
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
-> -		f2fs_put_page(page, 1);
-> -		goto repeat;
-> -	}
-> -	if (unlikely(!PageUptodate(page))) {
-> +	if (unlikely(page->mapping != mapping || !PageUptodate(page))) {
->   		f2fs_put_page(page, 1);
->   		return ERR_PTR(-EIO);
->   	}
 
 
 _______________________________________________
