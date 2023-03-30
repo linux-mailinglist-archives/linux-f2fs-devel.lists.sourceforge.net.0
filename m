@@ -2,157 +2,158 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 229CD6D097C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Mar 2023 17:25:39 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BD3F6D0A7E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Mar 2023 17:53:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1phu9d-0000YX-Tv;
-	Thu, 30 Mar 2023 15:25:34 +0000
+	id 1phub4-0004Z1-N0;
+	Thu, 30 Mar 2023 15:53:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1phu9c-0000YQ-J9
+ (envelope-from <shengyong@oppo.com>) id 1phub3-0004Yv-Jm
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 30 Mar 2023 15:25:33 +0000
+ Thu, 30 Mar 2023 15:53:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
  :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=l6UOYNrhS/ATqFSBARfWj7xnbFE94bckjujkFNerpdk=; b=SNO7urU8++tgTPClKJOElFngVw
- CCOnCqXobkQNOCkNuzpQ2UyK5ZDSATRylNVrd4qRL9clJ8362PSx03vpYpj3OvwdgZVwITgbn1hTQ
- GM19b8oA+cy0vufpdOXY1GBjzr/MeMR+rtxNK1usGx1pka8BuUwL+5uXwpwqYyLJY60A=;
+ bh=D5GnJ5XgGnJGhMgT4ne+3mtU9fx/t9qTuiA3Re2+zpQ=; b=Vbto+98D9XeRSGa4v1ztaRjO9D
+ p0w1nQkkPXFbKWxBXit39gcfHTYSVzqfc6CPi0ANTX87wlB6TeLkZMHgeyOelDO0OrIBtVgYcjJWN
+ dO2o1NLW6wScsbbb0dFSj2StrBQakFCELgn/MQABMlkBM43KcnSJ86rdnCGN7wUzf5Bg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
  Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=l6UOYNrhS/ATqFSBARfWj7xnbFE94bckjujkFNerpdk=; b=P
- bfZQchehJ0VK7onwCAhhvq+kPi0M0g+47C/ToK1g2Nc4492B9ujmXbxvYki0kgA9QlNZBHmuZ1Sa3
- KmXHTPDIYsQba/huJq0vhRs0yopmYP73oLWoW+2yvbtDyItOb7EOJOr2LsrrWG6YnTV6ZKtTAdKGs
- qK5jmNZUhlqmz04M=;
-Received: from mail-tyzapc01on2131.outbound.protection.outlook.com
- ([40.107.117.131] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
+ List-Owner:List-Archive; bh=D5GnJ5XgGnJGhMgT4ne+3mtU9fx/t9qTuiA3Re2+zpQ=; b=k
+ 547RJ5uK03IOHE+2Z49TnKlZJYA8a7xHZQ1Tp21c9zIolNoqb0Eva6RMx42rSu2VXYeuo/Zd5Lr4U
+ q7BTLbORz0GBFsNns84e50HxmZDOzHUwT25W4DxEK0KjgBDgBlKqHFYmtN/M02S/u6zGRO+ktlzc3
+ qD3mfeEeTgdQI55I=;
+Received: from mail-tyzapc01on2049.outbound.protection.outlook.com
+ ([40.107.117.49] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1phu9c-009pMt-GP for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 30 Mar 2023 15:25:33 +0000
+ id 1phuav-009quV-W2 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 30 Mar 2023 15:53:52 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HSYapoPeMXlz8py87SaIwwziyi62n+h1KV6LASJlklml9UKujnQvDP1i44Q/lgB7goBo/XCfOarHzNmFlMCeP2IeorDq4vxBd72qQUCBE/ObYUm0QFPfEmLKly6bj7mnqhGBBQnkLZXCmiRRz7lyxlVliZP3EMDmWLjTgHfX+As/+azsjDOEimwQGwhPCYeDivg4hVa1qBzSy6KttEihZxxqX1Npd+h3aDwHcKGhDqP6jKTKTZ+/XbYKBR3qg5TQyEifWu6KJXO5IhXPJxSfa1MwrRmYAhtW3MUnlonDzl4SN7pScUxSTksHzfWxVwSSEsizejAIMSOgJohNsIoceA==
+ b=kz6BwLgWmRoyXQq80DYUDtNIRW+IcS4LvXBolQVN+8sKKx3fxlGbSWB90NTwwe4jfOqu6R2QoSdM8ffi7eiZRFBtntq8rlqhoX67D+O8Rr+x0v41uRVWgnMDznqvBeiY1SZOb8AQ2JyAVE6aHpSvaN2IOFqgXKOsUkxbP4vqiysd4josDGRhcwIhGFOEOrVkKQqaMwB5b8YfKfHpT5sKVycWvG23EGwn7Hec/5eGzmazYlbUTR5QnMflU42E2F98LEMGh32MCSHrc3Su9KOEQiBskV+jyoGit6xqJICtTd1XWVWvOxQ09l5sW7VuneUUPq42/hpJ5khIrpXsC+t0DQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=l6UOYNrhS/ATqFSBARfWj7xnbFE94bckjujkFNerpdk=;
- b=E9TO2WxVO0SQvaVHqoIeYFGMYoR650C/t3k2odM4Ja6sNvjwW99CWGnEUccBOx0d9P4eqG0ty0Y9rkfs9Ip9MsdqV1eFUYmv/MNGOcnbv/xkGT0GTIq2oksuVYoLdvoqNtzC8WaVDeU61gOAFvV2zLxnShoqWeyGgp9U9ZnwmPG5S8n6+0G2FDu/a1Ta/Up1rOiwxgtyOAYsPHl8AMx1jJRVkej6VXX95Ds/+aSLW2k/2Ttoo4YGJuCx9RC9JUU9sdskFo4GEsQ2C07FFkh2Cc4Q1tQTb+l83TMLGzBSoZUtEKLH3F90V/Kt8vKk+LcND/P1cvuMPgihfzWifEmhpg==
+ bh=D5GnJ5XgGnJGhMgT4ne+3mtU9fx/t9qTuiA3Re2+zpQ=;
+ b=X3EoRqypKOqeoId2wApzkocsYYAarI9ySZ04l5lP3c1FYDrF0D9iRs3TgnH6OyGC7CfKVrW/FIRtyhsqheAkjZM/DdWfCoqziZqP+Z6cuaRNk/I470QU8aTdGpSzb7T6dMeZlwoYcf6DDWxMm6cmBODhgGngBSqj2gCHaMQI43X/Aob2OiFwWSq0AcumOUVHYwPzhwTFwG2DeMEtwTZs5PXt+I2ZlN8/6kmuPmPoTUK/WIGrATSbwucS38u0nIbYnQjrHT/wIQnbBvE2RB8OQ7Y0boGJSW6hXP3jTwH/ABtPNnqp4CCTFDJhcRR75CjCEYNDQx7B7CrgE+4u7FjVOQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ smtp.mailfrom=oppo.com; dmarc=pass action=none header.from=oppo.com;
+ dkim=pass header.d=oppo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=l6UOYNrhS/ATqFSBARfWj7xnbFE94bckjujkFNerpdk=;
- b=UqSxE16jsg01KRK19MSGhC/UM3RoinsQvhkmu8YSCKBsz7l1vPABkRbMTFO1lpV83dEJZFGms2mg3k+QbmfT/Krz5OWKlb/N9Ft9/tBjJfYn1QODKfpMdEcOFm5EsGoAob6MCxLT1gEU3QNvMpAIg15Zlgd+Sw3rqkXNnk4zqsmS56hMY2HmQWqZ+I/z1XeRhE3ggoPooquCyQCY4s0MfUs3bojOboFWOAq9zSvqkSqNeX9KlUkh8UcK3sDgp6IzEFlmL3im/HWV8Ce/LbXW0Bo+hnzqwnN2GVCRr19GsD1OH09xIOEsaRk89KJW0nkSb6oxGco/ybsXoLp0DI3A/A==
+ bh=D5GnJ5XgGnJGhMgT4ne+3mtU9fx/t9qTuiA3Re2+zpQ=;
+ b=qPWRbfqfWpLzHDljTqrEQyKNASVAtorY5MxVqV5ERw1NciMC1Zb/z/71mkexEMLPylG5mAWpfIGxw0wk2D0gdCpsdKEaw0Srb19dH0qIQLG66ZjHWQKMN6UkPV2ROdT1hfJD3xZrNjOuCmTxF/u+VPAbCZwZI8eHwVdsMcmvG4w=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by SI2PR06MB4393.apcprd06.prod.outlook.com (2603:1096:4:155::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.20; Thu, 30 Mar
- 2023 15:25:21 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::a3a1:af8e:be1e:437c]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::a3a1:af8e:be1e:437c%6]) with mapi id 15.20.6222.033; Thu, 30 Mar 2023
- 15:25:21 +0000
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Thu, 30 Mar 2023 23:25:10 +0800
-Message-Id: <20230330152510.81886-1-frank.li@vivo.com>
-X-Mailer: git-send-email 2.35.1
-X-ClientProxiedBy: SG3P274CA0015.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:be::27)
- To SEZPR06MB5269.apcprd06.prod.outlook.com
- (2603:1096:101:78::6)
+ header.d=none;dmarc=none action=none header.from=oppo.com;
+Received: from SI2PR02MB5148.apcprd02.prod.outlook.com (2603:1096:4:153::6) by
+ SEZPR02MB5663.apcprd02.prod.outlook.com (2603:1096:101:4f::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6254.22; Thu, 30 Mar 2023 15:37:42 +0000
+Received: from SI2PR02MB5148.apcprd02.prod.outlook.com
+ ([fe80::9a8c:cd43:d810:b523]) by SI2PR02MB5148.apcprd02.prod.outlook.com
+ ([fe80::9a8c:cd43:d810:b523%3]) with mapi id 15.20.6254.021; Thu, 30 Mar 2023
+ 15:37:41 +0000
+To: jaegeuk@kernel.org, chao@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Date: Thu, 30 Mar 2023 23:37:19 +0800
+Message-Id: <20230330153719.3085164-1-shengyong@oppo.com>
+X-Mailer: git-send-email 2.25.1
+X-ClientProxiedBy: SG2PR02CA0104.apcprd02.prod.outlook.com
+ (2603:1096:4:92::20) To SI2PR02MB5148.apcprd02.prod.outlook.com
+ (2603:1096:4:153::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SI2PR06MB4393:EE_
-X-MS-Office365-Filtering-Correlation-Id: ae098078-7bea-4089-a34a-08db3132f9c4
+X-MS-TrafficTypeDiagnostic: SI2PR02MB5148:EE_|SEZPR02MB5663:EE_
+X-MS-Office365-Filtering-Correlation-Id: 14f6b3fb-deed-4350-547f-08db3134b329
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: qHOYdLfeqqjBB5IYkEJLXGkaDcPusDjc8tcsPR5u5FWdQbg9x4XI5twma23dmNuaqDjVlHOmTltA+YJF05lPwQJCFi6o5gx44I92KYMy4f+iczXVZWEdcnLFzPksNLVXoBaaScvhfsPrK80rq93htsyyG2ga4mbFCR6gmyxbKIwGCBZcgGWtWeumzShlmnVIK7qXEC5lm9YkSXxw9VI9UWVcZFEGMQCnFmroYM60v9aROJln9f3eGmk/8lKccY/IYalXxyX4anrTGPHmy/kpX/SBP9iPZu7cHB/z/YsrP0AxW5U+Aa2Kmh2OvxxZoLVwa9bU30bDSQZ4+iEUNjYvzaU08TnT/+HkauiQD7hJ8YToIfRoHDcwirTpXeGeXWKPAH6v/v9jtHhlJWd6yB1ZSwR1ZHfuA7nIHzf6UYqz4R/BR4kOQ8K1X/i++PrDIP9+9+6Fo5nilhlRzW+EyOKrJmu83QVv8E2y3/OHq+JjjcsOxoFIk2cghNHGSwH+I9gmww3hJAWcuYUYbmSwJC1P+x0hnKij5UFeQ6KUiaMmC8XyCvX8WuF8my6iUBl0PUJXnfo6WTn77uEbxx2pPK5MCvryOX7uQR/3rEsR0b6JT/SpuVLYe7YhE2pWEA1W72nH
+X-Microsoft-Antispam-Message-Info: NikSk3lUGm94LuojxBmSsrZQeVrEX+aneJPwUNCSiTzUj6LmgQsif14543jWmS6SgEOBxU2GJgOKt+Dnecf9BHnN3iIsFEEz1pQy9xy8PM+0J3x51TL4sMnaU2SASC2ptw48bxvQXZDJnL1WNtGg8S1nfXyqw1+hJMj0s8/xOJE9UbefZOmpT/v6rDQ8OP9XmhC2zjCMK6ttN3ypQtO8UH5qoUjXbCzZ9QE6cMfhQSukHIu01TpRo+n+ybFd017XViL1lqdEXOpFXNy/HOxNoJpTiq1yiSfkr8uoGuoaNpR5PbAxru5FM/70isSvmU1ErvkgA33AQYLrQU84By3g5FKWb58QoyJKnZxFQFW4boiKDP6Ld//6uXA82iRltARUCVvFKqhzXanfLq9XavwofsR8kQuZVSEkuur8TOuuwvIY4pIdYssymqrMEVAj8QdpKrQ1WmzgtbOw5aslc3HtwOYT0Dio1ZW6MtoRnQjEYxwNV48BXGzwweFxIDkkBoc8aPHy4uc4n2wIpXmbjftiW6gWifhPe2c2en4f4pQjEEFpBHAfCfxjmOBEXpP5LAujEVIwdP0cY/rIkd8CLoWCMdZhZdbOFJrs9uPha350REU8i4LH/R0NOkkctntvNJIM
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(4636009)(376002)(39860400002)(136003)(366004)(346002)(396003)(451199021)(2906002)(8936002)(86362001)(66946007)(41300700001)(66476007)(66556008)(8676002)(4326008)(186003)(36756003)(316002)(19627235002)(6512007)(6506007)(1076003)(107886003)(26005)(83380400001)(5660300002)(52116002)(6486002)(6666004)(38350700002)(2616005)(38100700002)(478600001);
- DIR:OUT; SFP:1102; 
+ IPV:NLI; SFV:NSPM; H:SI2PR02MB5148.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(4636009)(366004)(396003)(376002)(346002)(136003)(39860400002)(451199021)(2616005)(107886003)(26005)(83380400001)(86362001)(1076003)(186003)(6512007)(6506007)(38100700002)(38350700002)(316002)(8676002)(8936002)(41300700001)(6666004)(6486002)(478600001)(36756003)(5660300002)(52116002)(4326008)(66556008)(66946007)(66476007)(2906002);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?WWl+6Nu/OeIKaDRbfJSuH8+1+TSSMh0RPc8XxNSf5Drny2YsUc5tT4bC5tGr?=
- =?us-ascii?Q?eVdaj+KEJI8pSGaPLxtNCgXk6JzZGjEHd4BVXyJ6vU5BCqkg9vpb+l8UzzE7?=
- =?us-ascii?Q?FjlIjA8VH1CJat8aFJC76+5+o+lt0+P3QKMpL805HHYGXPUlSYYaeV1G57iv?=
- =?us-ascii?Q?6j2uynnyHC3S+RijPoosXSRnpEmgpZYXo/WkuNjkPJ7dm4zKhxGxyEaQJb2M?=
- =?us-ascii?Q?EJ2Ha/bzm7Tzaynp6RJYB08NURTSY36bsk0rCnus96fanhbi0kmGIpFHpN6s?=
- =?us-ascii?Q?CQRuWfMFqZqsmYoOq2KGA2fxwy570RFY28vQbpYrml2DqgBeWPMvuSauh1jK?=
- =?us-ascii?Q?sgLkie41hC+q/o22KMQ7DbBM9VKP5NbrwnybZMMlm7AANdQKb452zlE0M2HI?=
- =?us-ascii?Q?A1O2TsGjGS2ulsD7MILckXgomieCp5/F9GO5bg1d/tyrWbUPAvg7HucUYAW5?=
- =?us-ascii?Q?0n+CAzqAOUXR7peX246rpnjzx25U4Lo3q/5vKJ6OmGCW3ghKVNqrCJzNaQ/4?=
- =?us-ascii?Q?5wgmvS+9BU3RDWEUpqI97fQWPK4AL63PQw2LYHmXGLyKIWHvJMIgKIgxHD4W?=
- =?us-ascii?Q?ehjKAoN/WwZHb1HPFy/w7Qmse2980amOuKPfiMlYYrJsURLp2BKW5sI2qcTq?=
- =?us-ascii?Q?99ZPP7gMgJgZF3Uib8BTRf7Nz4xmcmGzuiDwc2LiP1gocAlqZLFcnffPgNPq?=
- =?us-ascii?Q?HhJ2gw8xDCrOqeYGQ/SGnJotaR6/309LvSdkKrmUCG9bjz279+2PjoQB5a1W?=
- =?us-ascii?Q?bCHJQ8qaLkSvqiKxOBBpjVglg8m+HbK5H7llLQYbF9R92a8yqzzz/iFTGCQ2?=
- =?us-ascii?Q?akimf9pas3fp3QlLHds40td/mpNM/1UAe977DyfFVTPA2fwzESJqL/WHDgws?=
- =?us-ascii?Q?f80YnEMhNi0It19U3K3KxpCg/LHg7N8iikLYtgMPl1X6wjvDf5m9sFTTHX21?=
- =?us-ascii?Q?dmaobMnKecYJPYUYDx2tcVSh2ozIwSuHb9Erj6dpIXPdo985ulg9V/Fkp+ly?=
- =?us-ascii?Q?calX/PCXYYTxpr/uzvaRwIYidV9W549I64Ur11j5hQ6UouxOTlKkCFHZdqaC?=
- =?us-ascii?Q?z9Uxt6JQ+eXixnC5DM/HLEuI9asOt3Upf0t5cKlCl/xciiaH+9s27mzgBU40?=
- =?us-ascii?Q?8meu/EnrLqZt1m7GXOqR1EGceQR60ujnIpWCUDbEGA4CFUEzW8CE/TFVbURE?=
- =?us-ascii?Q?c6UojPxVUDapVThsILQikMx3Tc4WDlIvlZjQdyRMSUpv5Ts7WlOhTYuW1rmq?=
- =?us-ascii?Q?d+3Z5SX632hWoZjvjNWdfPAdImlpayAt4wTwM5zhL2bnxDgRyoGZNwrjd4z2?=
- =?us-ascii?Q?jivGhLhV82p9xL4mLBT+FId6398k4CKRMALZqT33MMfdzptXqZKvGCM14h4k?=
- =?us-ascii?Q?WwNNNcT/pW9wV23fzUgWow2WYshvcyC+1PtqSLjxyIVBormYJ2M05Eqvvnud?=
- =?us-ascii?Q?bN7l0F+0dZ8px/8i/KJs0ePyae66wvfjp69e5VWr0UzVKcH7SIl1k7Y0zUHC?=
- =?us-ascii?Q?oPziSqVsAkEEFFUBBuEapug0CZoKrp4kMCwBCXlYdeq8OVfEueawHs/AIH8+?=
- =?us-ascii?Q?TlHbHOzBrbus0aBLyYfglXZ5okkQlR73MgAeGvKb?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ae098078-7bea-4089-a34a-08db3132f9c4
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dPda5ank+fQg7wQWrGrYkhyAFB4ED5HeV6xD3O5iaiGyOnDd4/kjs03bB6yp?=
+ =?us-ascii?Q?Sp4z586lWzSPIwHhtPhie7ESX5MBxW8MnZHIp1J8WTYAQxXVPSc47Arj/tur?=
+ =?us-ascii?Q?S4GwT/oHXp/ehGFP1gR3HvHsaP18drYO8mn0RMTkZXugbYnNhIRMKGI+3+Gp?=
+ =?us-ascii?Q?OKx1u6JqRwPE5xpDqPFIjzBQALUOIrUaj8CZpBFdVZgF2aJw5TANlkryr3Xz?=
+ =?us-ascii?Q?FU+Qd8DhV4bOwkPWx9pni2lKjp6O6FcK9jBitgj4UQNBJMaw1uziytNv0e/v?=
+ =?us-ascii?Q?UuyJSGrOAH6g06hg6oy/TBv65toHi9Tj7AUEa6XaDJK3vuSDUwY4hC5vhEIA?=
+ =?us-ascii?Q?puBvK5wPEmjm8E0qJEnCkPblLyqCnOgM2bPYF1CWTc9qsJjM03bJPGmRO3QB?=
+ =?us-ascii?Q?BqtEfMUiwcLhrKS+32n1jrn+Lgbh77hNSvQHhzcSosU9dtHzprIC3Rk9bVx1?=
+ =?us-ascii?Q?nUgOcqrV8DBHkkndPW3YX0wgiywxH5C0tNjvgZIccLbjGIqQX+K9sLmrJO+O?=
+ =?us-ascii?Q?UjbpvQ/h4gdQ8n/z0nji+s9f/59h7YcuwZ6dU/i4g6TuEIwh08n+VZjyxQ2b?=
+ =?us-ascii?Q?TwesAJR3oppSsLUcE1jkn69Emwo9ogBFiijuFjpqblDKWpSv4yZ3+t8TdcEM?=
+ =?us-ascii?Q?jtw4FdQ9bTxfNF6G/K2SG0PKhP0QPGAycRpCPWIsOXWRdfrNyNfuttEL7TQy?=
+ =?us-ascii?Q?v/4AZ47zT3Z7AdlNPHHZ/3ZpP69hsurgMuUjTSS1UPHpH1rkGkcJaEGkuKKr?=
+ =?us-ascii?Q?t0EioX3AdcidcAY4+Mo5VhkBMsASQw+VxE6BGmf9JRiYzHJ+4ZXBdNDoOhal?=
+ =?us-ascii?Q?1azWyiFfLsRtkzNDjGn83JMwpgdnQfFpkh7uDqMWLeq09oZKdTK2K3qXMIeJ?=
+ =?us-ascii?Q?LT1dkCwlNlewLTZJvAYfJAH+99JMaszAyvtXl5gcoYxJbIOB/Lktymisz+1X?=
+ =?us-ascii?Q?OIpfXL2/RXH6Mj39/Jgb6bJK3mtKk/rVHzOWeGX753VYaWwD3geXaE+aM+ji?=
+ =?us-ascii?Q?Z3vfD8uMt2Ajml8y8zLV0eQJ530IwqarFoAKnE8kdl0rBCsLB313s9iKhXkg?=
+ =?us-ascii?Q?rqImTdRLWRsviABYX30T/cWuKw3jLPHjkpby+PeuHQmNClrTGJUEJQ4q6fiR?=
+ =?us-ascii?Q?4tAQX3Sc/wM+aDHPorq2BJMpo3DzXNQXukXz4A0nPZ2EMHyasulBtI9ocEbR?=
+ =?us-ascii?Q?zB8/Y9XmnTZ2++5b+wANKJIPbWokwGKEPw+s/E90GCKVK/xTE/6glJFyBoBA?=
+ =?us-ascii?Q?mtZKrYE48s3t2206VheFgy91zbmLE7E6Oc+HgqkhMagUxPJrEBWyK7acCN+c?=
+ =?us-ascii?Q?7i+HGkr0UHcELNbfk4RxW7K1DUVvUFKFOD7OROI6ojSKOwYMjI5d3WDZOAJx?=
+ =?us-ascii?Q?qkSHFA6byQam6ctie7j839v71NYfxdc+ckgYfm3AGmA0LCYLVJz8jEpjkZVN?=
+ =?us-ascii?Q?j4hOmj11Xk99+lM5J6zqcyyWvNtm/kjdSZQlxfOe82NlcxWgSIvGofDStn1l?=
+ =?us-ascii?Q?+Amqehncg1pUgsGcrV8NKygQWUWlOTlZa/nbbRNJ2+vgqgzA25M8WpdRGLW/?=
+ =?us-ascii?Q?Pp6NW5g978LKyslM8yO02SS9XJzVvW1mndyPTRJr?=
+X-OriginatorOrg: oppo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 14f6b3fb-deed-4350-547f-08db3134b329
+X-MS-Exchange-CrossTenant-AuthSource: SI2PR02MB5148.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2023 15:25:21.4267 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2023 15:37:41.8932 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lSTgMfRE5jXLyhNkxhYIo0xXdWUa4CaIEJiipOz35meOfuwcUj58bMMiAkwXmilZVxnL3bZvzhtwOdC7RN+Jyg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR06MB4393
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0f3tCewMOrHa6bdLU/ib5YLPZQzhInS3Nd8K/p6dYDcYYGXKV06Woh9JAKviebzDp5/kexQD+YQoBbVhAV9Xag==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR02MB5663
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Similar to FAULT_LOCK_OP, this patch supports to inject fault
- into f2fs_down_write_trylock(). Usage: a) echo 524288 >
- /sys/fs/f2fs/<dev>/inject_type
- or b) mount -o fault_type=524288 <dev> <mountpoint> 
+ Content preview: This patch adds `level` in `struct f2fs_compr_option` to
+ allow
+ ioctl setting compression level. The first byte of original f2fs_compr_option
+ indicates which algorithm is used. While the new f2fs_compr_option splits
+ the first byte into two parts: * the MBS 4 bits indicate the version * the
+ LBS 4 [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.117.131 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.117.131 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ no trust [40.107.117.49 listed in list.dnswl.org]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.117.49 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1phu9c-009pMt-GP
-Subject: [f2fs-dev] [PATCH v2] f2fs: support fault injection for
- f2fs_down_write_trylock()
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1phuav-009quV-W2
+Subject: [f2fs-dev] [RFC PATCH] f2fs: expand f2fs_compr_option to allow
+ ioctl setting compression level
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -164,219 +165,203 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yangtao Li <frank.li@vivo.com>
-Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Sheng Yong via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Sheng Yong <shengyong@oppo.com>
+Cc: linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Similar to FAULT_LOCK_OP, this patch supports to inject fault into
-f2fs_down_write_trylock().
+This patch adds `level` in `struct f2fs_compr_option` to allow ioctl
+setting compression level.
 
-Usage:
-  a) echo 524288 > /sys/fs/f2fs/<dev>/inject_type or
-  b) mount -o fault_type=524288 <dev> <mountpoint>
+The first byte of original f2fs_compr_option indicates which algorithm
+is used. While the new f2fs_compr_option splits the first byte into two
+parts:
+  * the MBS 4 bits indicate the version
+  * the LBS 4 bits indicate the algorithm
 
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
+The original f2fs_compr_option is renamed to f2fs_compr_option_base,
+which is used to calculate ioctl command. For now, the version could
+be 0 or 1.
+
+When getting and setting compression option, the first byte should be
+copied from userspace in advance to get the version. Then copy the
+whole option according to version size.
+
+The new f2fs_compr_option could be compatible with old userspace tool:
+    Old tool does not set the MSB 4 bits, which keep all 0. F2FS
+    detects option is version 0, and will not return or set level.
+
+But if new tool is used on old F2FS:
+    New tool sets the MSB 4 bits to 1, get_option could return V0
+    values, but set_option will fail.
+
+Signed-off-by: Sheng Yong <shengyong@oppo.com>
 ---
-v2:
--remove f2fs_down_write_trylock macro
- Documentation/ABI/testing/sysfs-fs-f2fs |  1 +
- Documentation/filesystems/f2fs.rst      |  1 +
- fs/f2fs/checkpoint.c                    |  4 ++--
- fs/f2fs/f2fs.h                          |  7 ++++++-
- fs/f2fs/file.c                          |  8 ++++----
- fs/f2fs/gc.c                            | 10 +++++-----
- fs/f2fs/node.c                          |  2 +-
- fs/f2fs/super.c                         |  1 +
- 8 files changed, 21 insertions(+), 13 deletions(-)
+ fs/f2fs/file.c            | 41 ++++++++++++++++++++++++++++++++++-----
+ include/uapi/linux/f2fs.h | 39 ++++++++++++++++++++++++++++++++++---
+ 2 files changed, 72 insertions(+), 8 deletions(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index c1314b7fe544..fc0f82f5c9f9 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -714,6 +714,7 @@ Description:	Support configuring fault injection type, should be
- 		FAULT_DQUOT_INIT         0x000010000
- 		FAULT_LOCK_OP            0x000020000
- 		FAULT_BLKADDR            0x000040000
-+		FAULT_LOCK               0x000080000
- 		===================      ===========
- 
- What:		/sys/fs/f2fs/<disk>/discard_io_aware_gran
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index 2055e72871fe..a81c896464ff 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -206,6 +206,7 @@ fault_type=%d		 Support configuring fault injection type, should be
- 			 FAULT_DQUOT_INIT	  0x000010000
- 			 FAULT_LOCK_OP		  0x000020000
- 			 FAULT_BLKADDR		  0x000040000
-+			 FAULT_LOCK	          0x000080000
- 			 ===================	  ===========
- mode=%s			 Control block allocation mode which supports "adaptive"
- 			 and "lfs". In "lfs" mode, there should be no random
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 1e0164cde23d..b119c9ab0cc1 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -372,7 +372,7 @@ static int f2fs_write_meta_pages(struct address_space *mapping,
- 		goto skip_write;
- 
- 	/* if locked failed, cp will flush dirty pages instead */
--	if (!f2fs_down_write_trylock(&sbi->cp_global_sem))
-+	if (!f2fs_down_write_trylock(sbi, &sbi->cp_global_sem))
- 		goto skip_write;
- 
- 	trace_f2fs_writepages(mapping->host, wbc, META);
-@@ -1185,7 +1185,7 @@ static bool __need_flush_quota(struct f2fs_sb_info *sbi)
- 	if (!is_journalled_quota(sbi))
- 		return false;
- 
--	if (!f2fs_down_write_trylock(&sbi->quota_sem))
-+	if (!f2fs_down_write_trylock(sbi, &sbi->quota_sem))
- 		return true;
- 	if (is_sbi_flag_set(sbi, SBI_QUOTA_SKIP_FLUSH)) {
- 		ret = false;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index e73fefe0d8fb..d434c25fa175 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -61,6 +61,7 @@ enum {
- 	FAULT_DQUOT_INIT,
- 	FAULT_LOCK_OP,
- 	FAULT_BLKADDR,
-+	FAULT_LOCK,
- 	FAULT_MAX,
- };
- 
-@@ -2193,8 +2194,12 @@ static inline void f2fs_down_write(struct f2fs_rwsem *sem)
- 	down_write(&sem->internal_rwsem);
- }
- 
--static inline int f2fs_down_write_trylock(struct f2fs_rwsem *sem)
-+static inline int f2fs_down_write_trylock(struct f2fs_sb_info *sbi,
-+					struct f2fs_rwsem *sem)
- {
-+	if (time_to_inject(sbi, FAULT_LOCK))
-+		return 0;
-+
- 	return down_write_trylock(&sem->internal_rwsem);
- }
- 
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 14e9a20e68df..db8c435d6201 100644
+index 14e9a20e68df3..909da18208d76 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -2462,7 +2462,7 @@ static int f2fs_ioc_gc(struct file *filp, unsigned long arg)
- 		return ret;
+@@ -3904,10 +3904,27 @@ static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
+ {
+ 	struct inode *inode = file_inode(filp);
+ 	struct f2fs_comp_option option;
++	__u8 ver;
++	size_t copt_sz;
  
- 	if (!sync) {
--		if (!f2fs_down_write_trylock(&sbi->gc_lock)) {
-+		if (!f2fs_down_write_trylock(sbi, &sbi->gc_lock)) {
- 			ret = -EBUSY;
- 			goto out;
- 		}
-@@ -2506,7 +2506,7 @@ static int __f2fs_ioc_gc_range(struct file *filp, struct f2fs_gc_range *range)
+ 	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
+ 		return -EOPNOTSUPP;
  
- do_more:
- 	if (!range->sync) {
--		if (!f2fs_down_write_trylock(&sbi->gc_lock)) {
-+		if (!f2fs_down_write_trylock(sbi, &sbi->gc_lock)) {
- 			ret = -EBUSY;
- 			goto out;
- 		}
-@@ -2851,7 +2851,7 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
- 	f2fs_down_write(&F2FS_I(src)->i_gc_rwsem[WRITE]);
- 	if (src != dst) {
- 		ret = -EBUSY;
--		if (!f2fs_down_write_trylock(&F2FS_I(dst)->i_gc_rwsem[WRITE]))
-+		if (!f2fs_down_write_trylock(sbi, &F2FS_I(dst)->i_gc_rwsem[WRITE]))
- 			goto out_src;
++	if (copy_from_user(&option.value, (__u8 __user *)arg, 1))
++		return -EFAULT;
++
++	ver = COPTION_VERSION(option.value);
++	copt_sz = COPTION_SIZE(ver);
++	if (copt_sz == UINT_MAX) {
++		/*
++		 * In order to be compatible with old version option, whose
++		 * algorithm is not initialized, the V0 option is returned
++		 * instead of error.
++		 */
++		ver = F2FS_COPTION_V0;
++		copt_sz = COPTION_SIZE(ver);
++	}
++
+ 	inode_lock_shared(inode);
+ 
+ 	if (!f2fs_compressed_file(inode)) {
+@@ -3915,13 +3932,14 @@ static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
+ 		return -ENODATA;
  	}
  
-@@ -2971,7 +2971,7 @@ static int f2fs_ioc_flush_device(struct file *filp, unsigned long arg)
- 	end_segno = min(start_segno + range.segments, dev_end_segno);
+-	option.algorithm = F2FS_I(inode)->i_compress_algorithm;
++	option.value = COPTION_VALUE(ver, F2FS_I(inode)->i_compress_algorithm);
+ 	option.log_cluster_size = F2FS_I(inode)->i_log_cluster_size;
++	option.level = F2FS_I(inode)->i_compress_level;
  
- 	while (start_segno < end_segno) {
--		if (!f2fs_down_write_trylock(&sbi->gc_lock)) {
-+		if (!f2fs_down_write_trylock(sbi, &sbi->gc_lock)) {
- 			ret = -EBUSY;
- 			goto out;
- 		}
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 7e97e4284db5..302950c6cbeb 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -104,7 +104,7 @@ static int gc_thread_func(void *data)
- 		if (foreground) {
- 			f2fs_down_write(&sbi->gc_lock);
- 			goto do_gc;
--		} else if (!f2fs_down_write_trylock(&sbi->gc_lock)) {
-+		} else if (!f2fs_down_write_trylock(sbi, &sbi->gc_lock)) {
- 			stat_other_skip_bggc_count(sbi);
- 			goto next;
- 		}
-@@ -1577,7 +1577,7 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
- 				return submitted;
- 			}
+ 	inode_unlock_shared(inode);
  
--			if (!f2fs_down_write_trylock(
-+			if (!f2fs_down_write_trylock(sbi,
- 				&F2FS_I(inode)->i_gc_rwsem[WRITE])) {
- 				iput(inode);
- 				sbi->skipped_gc_rwsem++;
-@@ -1620,11 +1620,11 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
- 			int err;
+ 	if (copy_to_user((struct f2fs_comp_option __user *)arg, &option,
+-				sizeof(option)))
++				copt_sz))
+ 		return -EFAULT;
  
- 			if (S_ISREG(inode->i_mode)) {
--				if (!f2fs_down_write_trylock(&fi->i_gc_rwsem[READ])) {
-+				if (!f2fs_down_write_trylock(sbi, &fi->i_gc_rwsem[READ])) {
- 					sbi->skipped_gc_rwsem++;
- 					continue;
- 				}
--				if (!f2fs_down_write_trylock(
-+				if (!f2fs_down_write_trylock(sbi,
- 						&fi->i_gc_rwsem[WRITE])) {
- 					sbi->skipped_gc_rwsem++;
- 					f2fs_up_write(&fi->i_gc_rwsem[READ]);
-@@ -2150,7 +2150,7 @@ int f2fs_resize_fs(struct f2fs_sb_info *sbi, __u64 block_count)
- 	secs = div_u64(shrunk_blocks, BLKS_PER_SEC(sbi));
+ 	return 0;
+@@ -3932,6 +3950,8 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
+ 	struct inode *inode = file_inode(filp);
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	struct f2fs_comp_option option;
++	__u8 ver, alg;
++	size_t copt_sz;
+ 	int ret = 0;
  
- 	/* stop other GC */
--	if (!f2fs_down_write_trylock(&sbi->gc_lock))
-+	if (!f2fs_down_write_trylock(sbi, &sbi->gc_lock))
- 		return -EAGAIN;
+ 	if (!f2fs_sb_has_compression(sbi))
+@@ -3940,14 +3960,23 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
+ 	if (!(filp->f_mode & FMODE_WRITE))
+ 		return -EBADF;
  
- 	/* stop CP to protect MAIN_SEC in free_segment_range */
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index bd1dad523796..e8e838f72ae6 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -517,7 +517,7 @@ int f2fs_try_to_free_nats(struct f2fs_sb_info *sbi, int nr_shrink)
- 	struct f2fs_nm_info *nm_i = NM_I(sbi);
- 	int nr = nr_shrink;
++	if (copy_from_user(&option.value, (__u8 __user *)arg, 1))
++		return -EFAULT;
++
++	ver = COPTION_VERSION(option.value);
++	alg = COPTION_ALGORITHM(option.value);
++	copt_sz = COPTION_SIZE(ver);
++	if (copt_sz == UINT_MAX)
++		return -EFAULT;
++
+ 	if (copy_from_user(&option, (struct f2fs_comp_option __user *)arg,
+-				sizeof(option)))
++				copt_sz))
+ 		return -EFAULT;
  
--	if (!f2fs_down_write_trylock(&nm_i->nat_tree_lock))
-+	if (!f2fs_down_write_trylock(sbi, &nm_i->nat_tree_lock))
- 		return 0;
+ 	if (!f2fs_compressed_file(inode) ||
+ 			option.log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
+ 			option.log_cluster_size > MAX_COMPRESS_LOG_SIZE ||
+-			option.algorithm >= COMPRESS_MAX)
++			alg >= COMPRESS_MAX)
+ 		return -EINVAL;
  
- 	spin_lock(&nm_i->nat_list_lock);
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 7d0202f7b317..768be1c76a47 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -62,6 +62,7 @@ const char *f2fs_fault_name[FAULT_MAX] = {
- 	[FAULT_DQUOT_INIT]	= "dquot initialize",
- 	[FAULT_LOCK_OP]		= "lock_op",
- 	[FAULT_BLKADDR]		= "invalid blkaddr",
-+	[FAULT_LOCK]		= "lock",
+ 	file_start_write(filp);
+@@ -3963,9 +3992,11 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
+ 		goto out;
+ 	}
+ 
+-	F2FS_I(inode)->i_compress_algorithm = option.algorithm;
++	F2FS_I(inode)->i_compress_algorithm = alg;
+ 	F2FS_I(inode)->i_log_cluster_size = option.log_cluster_size;
+ 	F2FS_I(inode)->i_cluster_size = BIT(option.log_cluster_size);
++	if (ver == F2FS_COPTION_V1)
++		F2FS_I(inode)->i_compress_level = option.level;
+ 	f2fs_mark_inode_dirty_sync(inode, true);
+ 
+ 	if (!f2fs_is_compress_backend_ready(inode))
+diff --git a/include/uapi/linux/f2fs.h b/include/uapi/linux/f2fs.h
+index 955d440be1046..940cf46174357 100644
+--- a/include/uapi/linux/f2fs.h
++++ b/include/uapi/linux/f2fs.h
+@@ -37,9 +37,9 @@
+ #define F2FS_IOC_SEC_TRIM_FILE		_IOW(F2FS_IOCTL_MAGIC, 20,	\
+ 						struct f2fs_sectrim_range)
+ #define F2FS_IOC_GET_COMPRESS_OPTION	_IOR(F2FS_IOCTL_MAGIC, 21,	\
+-						struct f2fs_comp_option)
++						struct f2fs_comp_option_base)
+ #define F2FS_IOC_SET_COMPRESS_OPTION	_IOW(F2FS_IOCTL_MAGIC, 22,	\
+-						struct f2fs_comp_option)
++						struct f2fs_comp_option_base)
+ #define F2FS_IOC_DECOMPRESS_FILE	_IO(F2FS_IOCTL_MAGIC, 23)
+ #define F2FS_IOC_COMPRESS_FILE		_IO(F2FS_IOCTL_MAGIC, 24)
+ #define F2FS_IOC_START_ATOMIC_REPLACE	_IO(F2FS_IOCTL_MAGIC, 25)
+@@ -91,9 +91,42 @@ struct f2fs_sectrim_range {
+ 	__u64 flags;
  };
  
- void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
+-struct f2fs_comp_option {
++#define F2FS_COPTION_V0	0
++#define F2FS_COPTION_V1	1
++
++#define COPTION_VER_SHIFT	4
++#define COPTION_VER_MASK	(~((1 << COPTION_VER_SHIFT) - 1))
++
++struct f2fs_comp_option_base {
+ 	__u8 algorithm;
+ 	__u8 log_cluster_size;
+ };
+ 
++struct f2fs_comp_option {
++	union {
++		struct f2fs_comp_option_base base;
++		struct {
++			__u8 value; // MSB 4 bit is version, LSB 4 bit is algorithm
++			__u8 log_cluster_size;
++		};
++	};
++	__u8 level;
++};
++
++#define COPTION_VERSION(val) ((val) >> COPTION_VER_SHIFT)
++#define COPTION_ALGORITHM(val) ((val) & ((1 << COPTION_VER_SHIFT) - 1))
++#define COPTION_VALUE(ver, alg) (((__u8)(ver) << COPTION_VER_SHIFT) | (__u8)(alg))
++#define COPTION_SIZE(ver) ({					\
++	size_t sz = UINT_MAX;					\
++	switch (ver) {						\
++	case F2FS_COPTION_V0:					\
++		sz = offsetof(struct f2fs_comp_option, level);	\
++		break;						\
++	case F2FS_COPTION_V1:					\
++		sz = sizeof(struct f2fs_comp_option);		\
++		break;						\
++	}							\
++	sz;							\
++})
++
+ #endif /* _UAPI_LINUX_F2FS_H */
 -- 
-2.35.1
+2.25.1
 
 
 
