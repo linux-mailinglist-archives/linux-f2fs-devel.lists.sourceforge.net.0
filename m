@@ -2,126 +2,127 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3BA86D0B27
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Mar 2023 18:28:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E1156D0BBF
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 30 Mar 2023 18:50:16 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1phv8o-0005sG-9g;
-	Thu, 30 Mar 2023 16:28:45 +0000
+	id 1phvTX-00022o-2f;
+	Thu, 30 Mar 2023 16:50:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1phv8n-0005s9-Lx
+ (envelope-from <frank.li@vivo.com>) id 1phvTU-00022g-D0
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 30 Mar 2023 16:28:44 +0000
+ Thu, 30 Mar 2023 16:50:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
  :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EkFRCy9DDI8CX6WsddO36xVa2wo8ptGLsLrJQzL4eg4=; b=O6pmGAw1SH1khtXy5aMUO22KX7
- u1zbQQjxcRXOd3y+m0nLKmscAIJVN8XwLw5g21tB4crfp21ffUxnE30mGr/mTJF8dIIDEjdPbADlW
- AJMyjWdPbqlUZjCiZ7QP9vnjIK1+NPY5Wtc/omPIhQ01VL2JwJcNd/X3PlHXl3BPwqzM=;
+ bh=u9jDTYwzuHpy0M7uPUlxv+bYEweovSShVKMF5+6WB5c=; b=THSFuOcHF9Xv1kAc9cy+jaws8+
+ Q96dNIcRTt8piYAbaUh6+JIcpcD2bdLIYvEtiL5ALoVi6OwCmYP+GJFdEyvA26ctPMROdfZLOx6SU
+ MIbgYIIfRDjUSKpWZpD+JOSY4Z9kiEW5rVXHPEGUDGdnY3Yzqal7dKFCcdcWoiXat8pM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
  Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=EkFRCy9DDI8CX6WsddO36xVa2wo8ptGLsLrJQzL4eg4=; b=M
- Z2DA9d5+Lg9H5n+JCyl8EplxUAHgLHmzrvoB5w/yqDW+gXXHCc05ca6jygvUuZdC9b+6PVPxnCNLp
- clwrAsiSnurnrojioSt4ZZal+NkMvWgF70YIl3+m2WCL7cbA+SYRAnhxQsz8r0mqWqj1fB6lhBOyF
- 5gStnYVoN2hAhjpE=;
-Received: from mail-sgaapc01on2134.outbound.protection.outlook.com
- ([40.107.215.134] helo=APC01-SG2-obe.outbound.protection.outlook.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=u9jDTYwzuHpy0M7uPUlxv+bYEweovSShVKMF5+6WB5c=; b=I
+ EoTueIpg2oi/ikT3wv4B74ph4FaDBxg+I//DCtd/epB6NxiiRHLF3nqXLql7R4dspQuv4weuRpnfR
+ U7yaZhEgJXbNETO4WUH5lliuenjgalIcOg8PElcxV+dVa89gylDcJuKXT8N2Hd700trgLUvRC7OtX
+ LHfS9QdCL0nqww4w=;
+Received: from mail-sgaapc01on2138.outbound.protection.outlook.com
+ ([40.107.215.138] helo=APC01-SG2-obe.outbound.protection.outlook.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1phv8f-0003Io-U5 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 30 Mar 2023 16:28:43 +0000
+ id 1phvTU-009u27-GO for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 30 Mar 2023 16:50:09 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mv2isaB+SSF0dnfb8C5wwDLnEoVesmEPaAbyrlTdNAGWnKsI07NQFBmexO6tKEU60g+PYhSWsIRbyui+zb1qi8xbpN8O07uTYN6ColLY3RyCCJ1V4HY3SXUqz5PURsSndKHCrmgmx1vEUQ3eTSX2gXRsqOkzFBFBcsxl0Zuu5/azNj/sD8i/dvu4XFTu9Ss/d6fYVg2qtqleUxrHvsc3ArxVMlDhH5LxVMlUNj/vVDtZiDnM8YKO+U6STJ1njbszoQP3NTkRcojGvW6jhBATLWm4JGjpJetG47Ms5xA47rHtSKEkOe4kPjaD/WUCXVgQJCcKOapQHpMHP/2IcB5BIQ==
+ b=G2V98v1xsp16JasHV9+HSBGKsfz8n2QnNG9Ji3M1PfDYLAufC4U0MU5Jon8RULtHeAjjhjVC7Tox2YBN+jilSSRVvv4gVdcD3qcLImMWT1lOfdgFXM7d6idVT8COM9vKOjaqnPJ0Dm8iJVhW3VwhD3RdpFFUe+yZ5yXdXkj2e8dc0ZFYmRF+jF/3rgpDkitJVxQwjEHoci0Xlw+XJX+/EIJ83l77ZqI0FqWFtbjQYjdKVvd0hbKY9ORGPUs3DM8Ajsjt5EMLMOYzTwXsdZnJPuw7BfIBOfqG6PwtZ6iOTZMvDNDkNEycrG4qq9Nc4Vk1bRuud/4QgCel4m1nt4m55A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EkFRCy9DDI8CX6WsddO36xVa2wo8ptGLsLrJQzL4eg4=;
- b=Qyeax//uvuX3eOTca6/Z7i+kgeBhh0DL3JoaKzarkJvP3qlEEynZwcmJl5eBe49ajovSS5d3KeieQ2EX4XHVO+AcB+tfyOmyjx0Zng//ctg7/mbLnzv67kS0/V4/8WRQ15l+V29/CS8xn/9iX1WaDT7xE1NBdPu7eM2HMOIWk6iAvgmgP+Rcg2z9zzuILP7AvKbED/aiw4lNz6aWE6tDHHTBxbZYGPBVkBDjlm9vrZ1aWJ25S1FWcrS0BHHTuRQCXW5F5slj+vL7nICahEHBgi9JEB5F5TF4QPBoNjOwBHBBHdN0m5ZZZLZkaHtBm0W1uGBzuRE6M8ImQAbGf8ze6w==
+ bh=u9jDTYwzuHpy0M7uPUlxv+bYEweovSShVKMF5+6WB5c=;
+ b=R91tIAI1tAlUIDgMiEMj1bdSDSqvXOrSialqFyqNioMX2l/ETkplCUPcUcA8uk/qe0W9N3X/SJwWs4ZGG+eIVOnA261eP5BeyvNHQuqV53a3DH/rgYo/Ht1nZAA0G9k1AUAxsLW+2WpWi8Dp9tPxPyubMWp8CSjsawfgFcib/wdx/M5vLnSo+5n9poPVXuADGfGLa9J+A2U0xVtFAxRX0K6cIDro42e74nn0YBqJ5TkGxOLBWIuYTKAi+uruCwuBf+BBR4KyFFtfvyXfP4GDM4EKhjwkuYHSuY9XgXVKI8J0I18mXQr/V4sE1y0gIT7RNsdlOkvUBDeUePS4PHvVVA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EkFRCy9DDI8CX6WsddO36xVa2wo8ptGLsLrJQzL4eg4=;
- b=fWb9Aa/xOURsKJXtcFRmvQFok8Kkas1EgStqM4WBeKjFfQISkjgjI55o0ASZ1tBh3GrNYfK9XqmFI8he+E02NnWXWaErgj+hIeVm7BfvIuCB3vxoxlFzNCXpHTxHg5FsKsNJvddGcbiXttrHAry9UdllM6C5RdXJ3Uy1SrFS/oNIXXSUU/ObVy1ia7voxrSnSSD51qyzR8nPOnEq2pkw2W43eKdJbd6kl1qYZzSmUKI+mGB3XdsVesQyVWljcBqx4rycs3PH/3wyGaeKSuDv5X3savM0EArKfg6Tb029q2Y13eW7Lnd6PlAf2mJhU8GOsrzI4Pov5Pw85f7tZy4vXw==
+ bh=u9jDTYwzuHpy0M7uPUlxv+bYEweovSShVKMF5+6WB5c=;
+ b=qFYWvjZC2qw9+DJUmRp7G0EXW+5lFF5bbwHWTZ23nb54XU0hswPEPIrc82ug3hNTIgPFfWfxN59vUWOs/PHeRDrPYkGltH1KTw9CX+0ngbkhFntR+Tzh59hJSjhcoGLjY2tyNvpv26i9eMqnAyWIg8UbfttyYScMWebYpKA83hK344Ikxi8Q5CO+tstIYzaqKRqeoWfSQsALPjiK9UKhF0IzbWXb6Egna0nTRMVwCFwx3faCXEyylvR8uk1rg5e1pVf1SbeJT74KOtg18uQMHlkCzBuIMexujrJ8rEq/zXYQqF1TelvmuzWb0eIQL80HNhLv4gym6XZgKc/PNESyFQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by SI2PR06MB4009.apcprd06.prod.outlook.com (2603:1096:4:e8::8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6254.20; Thu, 30 Mar 2023 16:28:25 +0000
+ by SG2PR06MB5335.apcprd06.prod.outlook.com (2603:1096:4:1d7::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.21; Thu, 30 Mar
+ 2023 16:50:00 +0000
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::a3a1:af8e:be1e:437c]) by SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::a3a1:af8e:be1e:437c%6]) with mapi id 15.20.6222.033; Thu, 30 Mar 2023
- 16:28:25 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
- Nick Terrell <terrelln@fb.com>
-Date: Fri, 31 Mar 2023 00:28:11 +0800
-Message-Id: <20230330162811.18923-1-frank.li@vivo.com>
+ 16:50:00 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Fri, 31 Mar 2023 00:49:47 +0800
+Message-Id: <20230330164948.29644-1-frank.li@vivo.com>
 X-Mailer: git-send-email 2.35.1
-X-ClientProxiedBy: SI2PR01CA0001.apcprd01.prod.exchangelabs.com
- (2603:1096:4:191::13) To SEZPR06MB5269.apcprd06.prod.outlook.com
+X-ClientProxiedBy: SI2PR02CA0010.apcprd02.prod.outlook.com
+ (2603:1096:4:194::15) To SEZPR06MB5269.apcprd06.prod.outlook.com
  (2603:1096:101:78::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SI2PR06MB4009:EE_
-X-MS-Office365-Filtering-Correlation-Id: 41603b14-f0e0-4488-027f-08db313bc917
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SG2PR06MB5335:EE_
+X-MS-Office365-Filtering-Correlation-Id: facdf84c-cc94-4860-1c4e-08db313ecd09
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: /CL3dObbQgp61mR1u4K/C+kU8xbFedl5fGaeMcVq5yu05kAKXcApiKdS7e6ZhxgeJMbZAcRh6GyL261ib/JMOU1MB81qdHAeGDaGOD60rQkWvL7tKctkmz0Y3qxJBVsgdnj5ALPD3j2VFmxSitksdUqqI2LJrJpf7scC7CGvVA7PjmLYfH1ABLCpsimclLu+2fHKv6uGk8po7DpbLES9KmRa0VgUdeesmNKS6qaly5rn6lAO9ccawgESwqGPEZi4nRf67YuFoHrtYnxd2k4JyU5sEesw08by2Iy1Gr2PX866XwQloqPdv0CjATaSNiKtX2ISXZrK5ybh0ao/KVrcI2JUyxtCDvLnb4QLp9vqkzag4EOQPgm4e1EVuZ7ZiR9KiWKNdDKGGVK23YUgmDjy2wW9eau0aMw7BeUXPLiwrxFTzY01QyLRgOgAWaKPpDL2O+MgipRlOuFj8QFbt2+WMJzjzBfNGFqiNZrQS2K52D4T8DJP2z7w+hFCIhfoxz2NDDBvP8TcYgpb5qYsBhAnC1qwLs37YXzChl20/kKrQoblrewkHIINQrAygVvwQlQQFjeOXHZzd2c1OJbocZ5St7hY+8lKSXAVRV72BUzhCZQ6vOOjF61H6mBkBYEXAT4G
+X-Microsoft-Antispam-Message-Info: XvnGr8a7TJUl1gz2R2S+zln3mjJFF5GjgzXjNKJmImNnZAvga7kJyRdq7bOwlHGvmj0vN4NpOaJjzPUT1wVRogiGJ+Uvx3999xyclOAiNRYcmKou/sQZhjvfSwah43hpbHGKC0k2+yftmo6uhwyXejsGfwxwwaFbtDiroq7rtkPlg9vsHk0ltDtYEYj50f8GTIQ1FvtXft19rS87fXJn9TJdrSfpKz5r8WIrg8lKR7CNpM0nfZtxmoc/lJoQ8Y7ITeNipy3T/9FCaJj1DuFY4dh/oEzqSyVmM7iQa3FD8p3v7iNSey4wLLLRqiMYRJ/5hhhDNbPQJTRNco7v5Aws4bvoifN9h4YD6LrsuFMFoCz7LUVi5PM/Fnt6njipWm++t8OdhGIdoNrWmtuxpTktWmfBql4mCDkBglKS9qZXvjyaHL8M4cM9WsC9LIBGvEMR7mP4YETdAyxZPkaRa2JFWGTG9tUft3gqT1nlCIxNf5r65tkcC4boco9CkMbdGb/+aSicOuv/SsLyoudXBSW2ETCb9nS5THze9nFgAcO+gXVWkwD3o1jNv5UqYTyYCY01R86s+lBFZKAo0DKNSRGKP8KuZ1tf7mdzn+IhK7vX1P594RGps5esOKkqiDwHy95u
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(4636009)(376002)(366004)(346002)(396003)(136003)(39860400002)(451199021)(2906002)(8936002)(86362001)(66946007)(41300700001)(66556008)(8676002)(66476007)(4326008)(186003)(36756003)(316002)(110136005)(6506007)(1076003)(6512007)(26005)(5660300002)(83380400001)(52116002)(6666004)(6486002)(38350700002)(2616005)(38100700002)(478600001);
+ SFS:(13230028)(4636009)(376002)(396003)(136003)(39860400002)(366004)(346002)(451199021)(8676002)(478600001)(86362001)(6666004)(8936002)(66556008)(66946007)(66476007)(4326008)(41300700001)(110136005)(316002)(26005)(38100700002)(38350700002)(1076003)(6506007)(36756003)(2616005)(83380400001)(6512007)(2906002)(5660300002)(6486002)(52116002)(186003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ks/+9vaBcZTZo3l/wGDHnaJT3LQbW6AjDCoD9URcuXBXrgVzGnrIm1+BeOH6?=
- =?us-ascii?Q?+VQ8oItw/XLk3tb5vIGAX1yDBoO1VLtLBbA6Y01JfkJLjTyTrhRH1csbXKIa?=
- =?us-ascii?Q?DuJpwnpUi9bbw/Uh9XJSu/jIEO54ZVaN5+EuCklHLPm+UH+Qkgpom3k0wHTs?=
- =?us-ascii?Q?waOgBg508jNgthZ9Q4+cIbyayzXNhtGeOpFiceGhjLzmEQ0J3W7RPfeDzP08?=
- =?us-ascii?Q?13WtroCTsMr/HiFG2AicYMiCidFrbEKybY3Z7TaEMCZg/LdTuZPteYOZ/jGd?=
- =?us-ascii?Q?Byigu7ss+DIKzKb/VnwEdfo+Z1O2BjhTjWmE40wLhu5c+bR2l8EtAVLUzSXM?=
- =?us-ascii?Q?Hdk6NS8sVJTYD49oMnskxtffV1qYsQZsxbgv0QDHgFIN5w75lyMaVM1+6Um3?=
- =?us-ascii?Q?jwFqu64yA2tOuJCpqUcTe/cCwkIktSoo5L5lWXGFx8cCWHYX8D93btsmwQcP?=
- =?us-ascii?Q?oOqDg7iGrJ2wErMvcv8CLLtz6SLeRNSCp/cEm2lAWgcg9X2cpGPxx5W5sqx4?=
- =?us-ascii?Q?Hefv21RVbKEercgI/E89d/PNOCc89+vxvo3afB2ji3jsgA6HIlQigIHbLjf9?=
- =?us-ascii?Q?sEKSrKlPUj89rnccadCNowuRpCtzZrn1pEluRNXQ51mxgRqpA5MIsdQmz0tf?=
- =?us-ascii?Q?7h/dVUjUwI4sY9eV4BxXzDlZEzJUcd1qShTNij+QIgmoF8m1+yRTSuzMXUB5?=
- =?us-ascii?Q?iA2b8F05rG296Etx3XRPfX7AkZ87EnzNVWTvOlyYOofA4RvgHUI4rh4FJlH/?=
- =?us-ascii?Q?CvWX1HnErzmEMU8arH9RlVJgdr81qaJFY04oSWQwaDx92aCAR09NpSP7src5?=
- =?us-ascii?Q?g3KjCFuguXXi77hWfyxnwn9lcOQWDAt4/t+zZnvoT7k/WHMt6LZ+vJv0S6wz?=
- =?us-ascii?Q?JG4BLNo6GWGf31B0oDQEwBeB1BtQtalUXb5Hc1H4TMfecul5AdYbMuhsYLJ+?=
- =?us-ascii?Q?BnULhTO5ZKXubingvwd0Bcb0q6AuT10IVbKanGktcGPvdE8VLxow1Cqm4yxv?=
- =?us-ascii?Q?YG0jNOqTKyxR8uQ6iizspzbmVnxnrRgLcDE5+7J68e3nI0BhlY5+wWRnwZAp?=
- =?us-ascii?Q?S02SavvQGijnCoEGJU5Ao70Zz65JYuustcD/HMnUxuDhM0Bc67rLVzqJ79oT?=
- =?us-ascii?Q?tlaczljRwpk88nuqnJVQpPbmCSRszZomkbWkq4DTQkvSXmlxO/fK0E6eQ1uE?=
- =?us-ascii?Q?CmYXCDeoABqyQ8+5asLxUWmzNahQ53/kpY9mhZlucoDMcfwBFjlscyOY9vR2?=
- =?us-ascii?Q?qb4PWQMun/uFDFtwS0E2A+5AEDXhAXfrOOxkFI+YriS9utGhhfaY5AaLUDX/?=
- =?us-ascii?Q?lwrXH/uSBF49FcyOOdJq1cFtHNOHfIE4YFshr4sOyJKNNJ9edlL9pU9JzpC+?=
- =?us-ascii?Q?PPgsefLc71ckNWxYfRCKu+uiGcSh7r7nSwMCMpY+Mz5x770n0bwotHppv04m?=
- =?us-ascii?Q?4swTqjWKwUmTe9sNtVdEcrPAfUeeJKc6UANUlQSnk+sZb6tkRzGIjANUxW/f?=
- =?us-ascii?Q?4RCUus7l5TyfzbgwPLw8lgyrQVXTJ6uDe+N8NIpR3zybuwA13wdrpX5mBVrO?=
- =?us-ascii?Q?vCkhjAIDc/On0NEEOG4+h/f0YYWLRX++T5kSadSN?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1lj/xoS429nSgmS5UNN5u8Tmbw9qR1Uxo02MC2zn+9bCHqsYBuydiAenJz8/?=
+ =?us-ascii?Q?boUqIbT+OF0/lp3WISjoHWLBc5lIqC/1aM23B35vikmDPNrSysr4qE1GH3uu?=
+ =?us-ascii?Q?sp7GMa6W6Clus+qPgwCVERTWmsXkkOZ4kHgazWhNpY8figSItqQ37GqL9FR6?=
+ =?us-ascii?Q?KAkquzQ48v+jFTHhJY7G5R7uyQDI02c6dqyVMC8riGd0fWBK63aKAhH0ua09?=
+ =?us-ascii?Q?hPBMBn6XzwfZxu0/O++0JLakY4b0g3T5ZoGs0q5dtXkVq9GRdZv5EOpUZBvt?=
+ =?us-ascii?Q?4UijN8f8Z4CyBRzSLiPjcLyjwrnXXWvK7t2YuO9Jvn7pW89Lb787PRZirdwV?=
+ =?us-ascii?Q?T37sOgMKVXwaZdC3rFpMyY5BeQtgXju5hRIS7Kznvgo3W+kCq59gI2rF/rSS?=
+ =?us-ascii?Q?YlbBCYBpS5H8OPNgzhgqiK9v6OrANpPjGDzS7UANniS4HGOoZ1SwmJTztG1Y?=
+ =?us-ascii?Q?pmX5NTBK3OnzRSssv4YIxVd7o7KuFF/FD/eMVdpnZK7uz4csyz4umlY9zYqm?=
+ =?us-ascii?Q?DRTxB9hATdzQTIaLPlIQt02zLjlc+ZzGQefbY3CE628jJUwNlvv4zzDbJalA?=
+ =?us-ascii?Q?xi6iF1C2xxC85tvSsDTWO3OLaBHArWbFMyYFAiWo8YM5ql+tSLUqKsiWWj5G?=
+ =?us-ascii?Q?pcP5wm4upMiVfC3ECZ7FFPJ5huB7kDj6F7hdRclZYq1P+EkrHC6zKn/QZfVN?=
+ =?us-ascii?Q?UAlrE5/ALl4b5Afhy8erenyrC1bqYrjv2mapUW0vluXYnKN030h6XYzrpZGD?=
+ =?us-ascii?Q?AwM6vTa0NRD+ET8qtklq2QDQt2JJ2oA58HugrLkZRrES/dmWi1bSCzxU7+Yp?=
+ =?us-ascii?Q?sAVW5mrFf5D0RvFzNjfAU/Ctd9dGONgi+LluWYDN5UMG+2dhJ8eTWjyNXjfV?=
+ =?us-ascii?Q?BDzwgXC0er9vpv6HZMU4J4pPvcKmjtda94WGA3H3F4XJ4Cwfi963v/Gw3Uf4?=
+ =?us-ascii?Q?/jhSzPcpF2AeDCGt1P/iKMabUSlOhGoNklankD/JLhS2M/3MdZhBvRmrxqrA?=
+ =?us-ascii?Q?y5CNhXNyQSb0RKUFPyFi4H7m+r+sS4DFzBb8F5UGGEH6MoABiRAEZM40PWSX?=
+ =?us-ascii?Q?+PwesN7WwMsYqXYAT5AXCLT1+JlTmDaghEfAZ+nQP63RvmMDR6edh1wn8iFq?=
+ =?us-ascii?Q?KlIIzCERRUgb/cNlb2VZvzEaTtvudogBTy7Pgu/rk1YxgwKEDI+xJnRE8G6E?=
+ =?us-ascii?Q?k2S/PViAFbaWg6z1p+zIsWCvj0Rv2msCOE42IO/c4iT5okVAkD/9eDsVnfZN?=
+ =?us-ascii?Q?UUWrN5+STMBuSqJRw2hhdxuuJ7tpvK9WorJJM/zTnh0Cyw0e1WGt6AMnsD6T?=
+ =?us-ascii?Q?023mkW28/lyEOWYNihyaNeLRDvEBg/MgyJ50uQeFMtK/GTpduZoXinWXz9PO?=
+ =?us-ascii?Q?LjaXKzHvmWSHAv5DM68j7bfPo3ds50kv6VQIYewnIpS6kM+yV4uSBOEJnO8f?=
+ =?us-ascii?Q?PFfR9WgDrNlXhtEMmSQXPxMsGc74RL0LoJ59CRP5rqU+Eod25f/rIOeH+Jfu?=
+ =?us-ascii?Q?52IlqAOuHvL/HcVx0pszLlplxBZ6ITYA/Yslz2jciV1GZv1/RKBmQcZ1NCwA?=
+ =?us-ascii?Q?3HptbkUoxBIaEfmGiN6YmyQrOXQZ2/O1PDdLf7Lv?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 41603b14-f0e0-4488-027f-08db313bc917
+X-MS-Exchange-CrossTenant-Network-Message-Id: facdf84c-cc94-4860-1c4e-08db313ecd09
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2023 16:28:25.1242 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2023 16:50:00.1774 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: An0N5g8+/5RghEe3ozSRhPNNHZx35OJ8FT2UAs0PBT3yl+KjDi3rP3+kxBuFPfWI3VrzmB/E1/PZELPc1IQBTQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR06MB4009
+X-MS-Exchange-CrossTenant-UserPrincipalName: V1wfjgZgMeuxPBGVi0hIv2bQYmt4XRRt3PkQPJaRtGZgBcx9k+xEjHENNPGXF5gkKZAFvSAcI4WUrGyLk0J1Og==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2PR06MB5335
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -129,21 +130,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Commit 3fde13f817e2 ("f2fs: compress: support compress
- level")
- forgot to do basic compress level check, let's add it. Signed-off-by: Yangtao
- Li <frank.li@vivo.com> --- fs/f2fs/inode.c | 94 +++++++++++++++++++++++++
- include/linux/zstd_lib.h | 3 ++ lib/zstd/compress/clevels.h | 4 -- 3 files
- changed, 67 inse [...] 
+ Content preview:  Remove unnecessary lz4hc_compress_pages(). Signed-off-by:
+ Yangtao Li <frank.li@vivo.com> --- v2: -rebase fs/f2fs/compress.c | 24 ++++
+ 1 file changed, 4 insertions(+), 20 deletions(-) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.215.138 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.215.138 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.215.134 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.215.134 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -151,9 +149,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1phv8f-0003Io-U5
-Subject: [f2fs-dev] [RESEND] f2fs: add sanity compress level check for
- compressed file
+X-Headers-End: 1phvTU-009u27-GO
+Subject: [f2fs-dev] [PATCH v2] f2fs: merge lz4hc_compress_pages() to
+ lz4_compress_pages()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -173,164 +171,58 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Commit 3fde13f817e2 ("f2fs: compress: support compress level")
-forgot to do basic compress level check, let's add it.
+Remove unnecessary lz4hc_compress_pages().
 
 Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
- fs/f2fs/inode.c             | 94 +++++++++++++++++++++++++------------
- include/linux/zstd_lib.h    |  3 ++
- lib/zstd/compress/clevels.h |  4 --
- 3 files changed, 67 insertions(+), 34 deletions(-)
+v2:
+-rebase
+ fs/f2fs/compress.c | 24 ++++--------------------
+ 1 file changed, 4 insertions(+), 20 deletions(-)
 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index bb5b365a195d..e63f75168700 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -10,6 +10,8 @@
- #include <linux/buffer_head.h>
- #include <linux/writeback.h>
- #include <linux/sched/mm.h>
-+#include <linux/lz4.h>
-+#include <linux/zstd.h>
- 
- #include "f2fs.h"
- #include "node.h"
-@@ -202,6 +204,66 @@ void f2fs_inode_chksum_set(struct f2fs_sb_info *sbi, struct page *page)
- 	ri->i_inode_checksum = cpu_to_le32(f2fs_inode_chksum(sbi, page));
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 3182e1506252..f8b15c932c97 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -264,34 +264,18 @@ static void lz4_destroy_compress_ctx(struct compress_ctx *cc)
+ 	cc->private = NULL;
  }
  
-+static bool sanity_check_compress_inode(struct inode *inode,
-+			struct f2fs_inode *ri)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	unsigned char compress_level;
-+
-+	if (ri->i_compress_algorithm >= COMPRESS_MAX) {
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
-+		f2fs_warn(sbi,
-+			"%s: inode (ino=%lx) has unsupported compress algorithm: %u, run fsck to fix",
-+			__func__, inode->i_ino, ri->i_compress_algorithm);
-+		return false;
-+	}
-+	if (le64_to_cpu(ri->i_compr_blocks) >
-+			SECTOR_TO_BLOCK(inode->i_blocks)) {
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
-+		f2fs_warn(sbi,
-+			"%s: inode (ino=%lx) has inconsistent i_compr_blocks:%llu, i_blocks:%llu, run fsck to fix",
-+			__func__, inode->i_ino, le64_to_cpu(ri->i_compr_blocks),
-+			SECTOR_TO_BLOCK(inode->i_blocks));
-+		return false;
-+	}
-+	if (ri->i_log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
-+		ri->i_log_cluster_size > MAX_COMPRESS_LOG_SIZE) {
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
-+		f2fs_warn(sbi,
-+			"%s: inode (ino=%lx) has unsupported log cluster size: %u, run fsck to fix",
-+			__func__, inode->i_ino, ri->i_log_cluster_size);
-+		return false;
-+	}
-+
-+	compress_level = le16_to_cpu(ri->i_compress_flag) >> COMPRESS_LEVEL_OFFSET;
-+	switch (ri->i_compress_algorithm) {
-+	case COMPRESS_LZO:
-+	case COMPRESS_LZORLE:
-+		if (compress_level)
-+			goto err;
-+		break;
-+	case COMPRESS_LZ4:
-+		if ((compress_level && compress_level < LZ4HC_MIN_CLEVEL) ||
-+				compress_level > LZ4HC_MAX_CLEVEL)
-+			goto err;
-+		break;
-+	case COMPRESS_ZSTD:
-+		if (!compress_level || compress_level > ZSTD_MAX_CLEVEL)
-+			goto err;
-+		break;
-+	default:
-+		goto err;
-+	}
-+
-+	return true;
-+
-+err:
-+	set_sbi_flag(sbi, SBI_NEED_FSCK);
-+	f2fs_warn(sbi, "%s: inode (ino=%lx) has unsupported compress level: %u, run fsck to fix",
-+		  __func__, inode->i_ino, compress_level);
-+	return false;
-+}
-+
- static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+-#ifdef CONFIG_F2FS_FS_LZ4HC
+-static int lz4hc_compress_pages(struct compress_ctx *cc)
++static int lz4_compress_pages(struct compress_ctx *cc)
  {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-@@ -285,36 +347,8 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+-	unsigned char level = F2FS_I(cc->inode)->i_compress_level;
+ 	int len;
++#ifdef CONFIG_F2FS_FS_LZ4HC
++	unsigned char level = F2FS_I(cc->inode)->i_compress_level;
  
- 	if (f2fs_has_extra_attr(inode) && f2fs_sb_has_compression(sbi) &&
- 			fi->i_flags & F2FS_COMPR_FL &&
--			F2FS_FITS_IN_INODE(ri, fi->i_extra_isize,
--						i_log_cluster_size)) {
--		if (ri->i_compress_algorithm >= COMPRESS_MAX) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
--			f2fs_warn(sbi, "%s: inode (ino=%lx) has unsupported "
--				"compress algorithm: %u, run fsck to fix",
--				  __func__, inode->i_ino,
--				  ri->i_compress_algorithm);
--			return false;
--		}
--		if (le64_to_cpu(ri->i_compr_blocks) >
--				SECTOR_TO_BLOCK(inode->i_blocks)) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
--			f2fs_warn(sbi, "%s: inode (ino=%lx) has inconsistent "
--				"i_compr_blocks:%llu, i_blocks:%llu, run fsck to fix",
--				  __func__, inode->i_ino,
--				  le64_to_cpu(ri->i_compr_blocks),
--				  SECTOR_TO_BLOCK(inode->i_blocks));
--			return false;
--		}
--		if (ri->i_log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
--			ri->i_log_cluster_size > MAX_COMPRESS_LOG_SIZE) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
--			f2fs_warn(sbi, "%s: inode (ino=%lx) has unsupported "
--				"log cluster size: %u, run fsck to fix",
--				  __func__, inode->i_ino,
--				  ri->i_log_cluster_size);
--			return false;
--		}
--	}
-+			F2FS_FITS_IN_INODE(ri, fi->i_extra_isize, i_log_cluster_size))
-+		sanity_check_compress_inode(inode, ri);
- 
- 	return true;
- }
-diff --git a/include/linux/zstd_lib.h b/include/linux/zstd_lib.h
-index 79d55465d5c1..ff55f41c73d3 100644
---- a/include/linux/zstd_lib.h
-+++ b/include/linux/zstd_lib.h
-@@ -88,6 +88,9 @@ ZSTDLIB_API const char* ZSTD_versionString(void);
- #  define ZSTD_CLEVEL_DEFAULT 3
+ 	if (level)
+ 		len = LZ4_compress_HC(cc->rbuf, cc->cbuf->cdata, cc->rlen,
+ 					cc->clen, level, cc->private);
+ 	else
+-		len = LZ4_compress_default(cc->rbuf, cc->cbuf->cdata, cc->rlen,
+-						cc->clen, cc->private);
+-	if (!len)
+-		return -EAGAIN;
+-
+-	cc->clen = len;
+-	return 0;
+-}
+-#endif
+-
+-static int lz4_compress_pages(struct compress_ctx *cc)
+-{
+-	int len;
+-
+-#ifdef CONFIG_F2FS_FS_LZ4HC
+-	return lz4hc_compress_pages(cc);
  #endif
- 
-+/*-=====  Pre-defined compression levels  =====-*/
-+#define ZSTD_MAX_CLEVEL     22
-+
- /* *************************************
-  *  Constants
-  ***************************************/
-diff --git a/lib/zstd/compress/clevels.h b/lib/zstd/compress/clevels.h
-index d9a76112ec3a..b040d9d29089 100644
---- a/lib/zstd/compress/clevels.h
-+++ b/lib/zstd/compress/clevels.h
-@@ -14,10 +14,6 @@
- #define ZSTD_STATIC_LINKING_ONLY  /* ZSTD_compressionParameters  */
- #include <linux/zstd.h>
- 
--/*-=====  Pre-defined compression levels  =====-*/
--
--#define ZSTD_MAX_CLEVEL     22
--
- __attribute__((__unused__))
- 
- static const ZSTD_compressionParameters ZSTD_defaultCParameters[4][ZSTD_MAX_CLEVEL+1] = {
+-	len = LZ4_compress_default(cc->rbuf, cc->cbuf->cdata, cc->rlen,
++		len = LZ4_compress_default(cc->rbuf, cc->cbuf->cdata, cc->rlen,
+ 						cc->clen, cc->private);
+ 	if (!len)
+ 		return -EAGAIN;
 -- 
 2.35.1
 
