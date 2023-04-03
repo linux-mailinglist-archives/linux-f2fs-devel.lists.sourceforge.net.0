@@ -2,89 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4721D6D4E71
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 Apr 2023 18:54:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 523216D4E87
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  3 Apr 2023 19:00:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pjNSC-0005Fg-Fm;
-	Mon, 03 Apr 2023 16:54:48 +0000
+	id 1pjNXH-00027z-Mb;
+	Mon, 03 Apr 2023 17:00:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pjNSA-0005Fa-GA
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1pjNXF-00027t-Jq
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Apr 2023 16:54:46 +0000
+ Mon, 03 Apr 2023 17:00:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XnwuyQBOjohNBccuQRKNgfjiqtyhbR2pwRuovzXlDq4=; b=SoXaQ/d87QOsrAUj/E9UOXF9BZ
- JudAvbVQWGXmvXh4t1Mr6rf4AJDJ8bqtJCXatL21yJ5d9g3JEgMmGcQr+bp8/GhLSnpLFRE5VzJPJ
- RvmDCA2WaGuiuHketKnszgfL2jyCumxN5w8zRi2QaC/G3agEWhPGYnIpUTgHDKI9tIuk=;
+ bh=6Q5Dows9I8aJm7DcZ4udoIYN2Efhw1dp8qX3QYJSAnc=; b=L2lY5B+6Vw7rPI7VpncQkGfTeW
+ cgQ30meEG1vLUz6hMrNovOGPFfLpa6BQCPDQluM2Qnk2iHdzStwxTDucH6Ab+naCYon8JUeJR5TB7
+ 7f64ysNl6SVuFHW0mONQwpWAQvqnF1UykhuHc3irjpTRgQx19YjPS0ZXQLYYmTBD3wrA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XnwuyQBOjohNBccuQRKNgfjiqtyhbR2pwRuovzXlDq4=; b=mtpbMAIn2f2R0dd3kacuQ9BZMH
- XaJy5t83y5LbLS3TkCGppR0JWGBEeSibGp9mRJhefjCA4CO1fnpgLuBV/5yIoDpKxKodK4/V7JQR1
- O4LLgFk++3GDjSMr5qzXibM9ACu46arp+yAm04s3vxAqB3lRZv0SeGWbNRGDPidHZV9A=;
+ bh=6Q5Dows9I8aJm7DcZ4udoIYN2Efhw1dp8qX3QYJSAnc=; b=avR1Le7T03hlPygyxe8Os8STwh
+ OSq0zIxiVp160OKhx0CtVEQDQycFFStZmGhS4rIVBAbpUBZ8a/rSIVy8YWstevSoppYNwV/D6ISo2
+ PRju60wHeHs8prlG6oc4aFyj7Uc0cTBwEE108XodZ9CqAs79QFPCGnWRqOjK0vIS9Kj0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pjNS9-0004Xm-TB for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 03 Apr 2023 16:54:46 +0000
+ id 1pjNXF-00Duy9-Si for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 03 Apr 2023 17:00:02 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4986F61889
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D92E061347
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  3 Apr 2023 16:54:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97D92C4339B;
- Mon,  3 Apr 2023 16:54:36 +0000 (UTC)
+ Mon,  3 Apr 2023 16:59:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 49FEFC433EF
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  3 Apr 2023 16:59:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1680540876;
- bh=VVcpYsvPB42S9bhD5icaj68wnU6tD0Ujr7cjnyc0m6s=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=RG56pQe+yzCCW/MbuTaBH80yWs+g5IqypJRlftuPykhevhqMbHz06yUXWtkaVyrb2
- TZVlzvoM/vIoHE4LvoCDDPeODqIn8Kl76Hupl0OUFfjlu3WqYytSJ9g+u+6NS0c11N
- 4cGjTDZDbsEfIHM9GWf7h9mJFqsNdoCA6Qq+M9I1HrP9cBUarQKHs29ZMlvE/11IxJ
- mHtfs03+wg+qXIGSJTIklyXZLF1suAw4fCGKRB3D4XQgpsYl5S+O+Ck0PO0LmeU+d3
- RX6tnOB0BrWlptz2N4clpCzRpWGBBdsYWvuEaUyaWmDgstY2bOt09agjXpxSBKdjaS
- 0PbYkrFVcPXnw==
-Date: Mon, 3 Apr 2023 09:54:34 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <ZCsEytDjqEjQDPiO@google.com>
-References: <20230403165038.3018949-1-jaegeuk@kernel.org>
+ s=k20201202; t=1680541190;
+ bh=u30HR1yY4x/CmY+veWtAVlQPTLkH1AM6oafE8v/9EgQ=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=tg5UeiPlK+7WZD8fWWbVSXT54z3BhMvkMq0JXQhEaWzO4goGFe43NZmxA4Za2BFvC
+ pzk5ACPpau95zVoB7MZ80CHP08JucqTB2127kmPaxtnVo/U28qt4FyvOik1ZrKVKoE
+ aj0Ly/w170p7oXzUfcyz5jgfrKlbF2AqsfgNAtVTTixdHOIb7/XwHGGX3ld61rnozY
+ ccvQa6H3z2SnlvPwTsIuzxk3wpSaPnEiKCYr8smmOSAQrsGW06l5eN5SUvBx/k4G2W
+ BgkBHSVBPDTLdTFpjRNftxlSdu2JaO88mU0lqFHbFQifleFhqvgzle6S5ZppNdROMK
+ igrFtXjFfM/YQ==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 2C785C43142; Mon,  3 Apr 2023 16:59:50 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 03 Apr 2023 16:59:49 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: blocking
+X-Bugzilla-Who: jaegeuk@kernel.org
+X-Bugzilla-Status: ASSIGNED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: cc
+Message-ID: <bug-217266-202145-16z3yxLWhk@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-217266-202145@https.bugzilla.kernel.org/>
+References: <bug-217266-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230403165038.3018949-1-jaegeuk@kernel.org>
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: We got a kernel panic if old_addr is NULL.
- https://bugzilla.kernel.org/show_bug.cgi?id=217266
- BUG: kernel NULL pointer dereference, address: 0000000000000000 Call Trace:
- <TASK> f2fs_commit_atomic_write+0x619/0x990 [f2fs
- a1b985b80f5babd6f3ea778384908880812bfa43]
- __f2fs_ioctl+0xd8e/0x4080 [f2fs [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=217266 Jaegeuk
+ Kim (jaegeuk@kernel.org) changed: What |Removed |Added CC| |jaegeuk@kernel.org
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -92,10 +107,10 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pjNS9-0004Xm-TB
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix null pointer panic in
- tracepoint in __replace_atomic_write_block
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pjNXF-00Duy9-Si
+Subject: [f2fs-dev] [Bug 217266] kernel panic on f2fs filesystem when
+ f2fs_commit_atomic_write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,46 +126,23 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-We got a kernel panic if old_addr is NULL.
-
 https://bugzilla.kernel.org/show_bug.cgi?id=217266
 
-BUG: kernel NULL pointer dereference, address: 0000000000000000
- Call Trace:
-  <TASK>
-  f2fs_commit_atomic_write+0x619/0x990 [f2fs a1b985b80f5babd6f3ea778384908880812bfa43]
-  __f2fs_ioctl+0xd8e/0x4080 [f2fs a1b985b80f5babd6f3ea778384908880812bfa43]
-  ? vfs_write+0x2ae/0x3f0
-  ? vfs_write+0x2ae/0x3f0
-  __x64_sys_ioctl+0x91/0xd0
-  do_syscall_64+0x5c/0x90
-  entry_SYSCALL_64_after_hwframe+0x72/0xdc
- RIP: 0033:0x7f69095fe53f
+Jaegeuk Kim (jaegeuk@kernel.org) changed:
 
-Fixes: 2f3a9ae990a7 ("f2fs: introduce trace_f2fs_replace_atomic_write_block")
-Cc: <stable@vger.kernel.org>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/segment.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 CC|                            |jaegeuk@kernel.org
 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 72bce3808394..2439d7029e64 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -257,7 +257,7 @@ static int __replace_atomic_write_block(struct inode *inode, pgoff_t index,
- 	f2fs_put_dnode(&dn);
- 
- 	trace_f2fs_replace_atomic_write_block(inode, F2FS_I(inode)->cow_inode,
--					index, *old_addr, new_addr, recover);
-+			index, old_addr ? *old_addr : 0, new_addr, recover);
- 	return 0;
- }
- 
+--- Comment #6 from Jaegeuk Kim (jaegeuk@kernel.org) ---
+I think this fixes the panic.
+https://lore.kernel.org/linux-f2fs-devel/ZCsEytDjqEjQDPiO@google.com/T/#u
+
 -- 
-2.40.0.348.gf938b09366-goog
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
