@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C4986D65FC
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Apr 2023 16:55:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 497B76D65FE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Apr 2023 16:55:40 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pji4P-0000jB-UN;
-	Tue, 04 Apr 2023 14:55:37 +0000
+	id 1pji4R-0000jl-Rv;
+	Tue, 04 Apr 2023 14:55:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@redhat.com>) id 1pji4L-0000iV-LV
+ (envelope-from <aalbersh@redhat.com>) id 1pji4P-0000jC-Cr
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 14:55:32 +0000
+ Tue, 04 Apr 2023 14:55:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
  :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=g1NG2DlOPhECSBoFyURsYJB7f5VQnxxV8rEkg1d1tQc=; b=f7nUotqTAQy6fGbxigzuVn/b/B
- knBdoCqrc9roK6TZJLjPCpu1F4MXUiuAB6XCpGMzJzdeLU+/O96mFhi7QFTIsQhYxIMVoD5/UAukG
- ZCIG9ZMaw/fWTLA1Avkqbg8gGJzCXn69IDK4XEJzVDZmbnJTxAG3WY4Xw3wSpw6i6RDQ=;
+ bh=mf1FPmX34sPBqBJ1RqvZnmanS11JhvTJ+HM36CjFqII=; b=buViPMlZjgtgu0d9NXAH+RTH3c
+ WV75Fo4XqpEuVaE3uJywOrLdfjvOA2wEEFiQg434RjUdU98I0CFs95P6ko9cKFa22HLu0D/FJn2kV
+ e6Dr4SDSGbORLR661kA40M9sp9ft7aCDHx2dwEKGFhIEXz7OQeI+12g6csGltFNKoyyU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
@@ -31,65 +31,65 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=g1NG2DlOPhECSBoFyURsYJB7f5VQnxxV8rEkg1d1tQc=; b=HQD7BbJTo+efWh4L11HBXsLSCz
- anrF7UAmDE++iLnUlzjPCSdQf05IvnHV+GusGvsNlFOXHsvjjRD20Nu+7SGtUHrFsfKmcyUqpWysY
- Lv9dF4MhiAkCRLNoi7qkDRKsne/t7lV/tq9uQi7wZj+r8CqWxu4qx7MdfCwogndqwr5Y=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ bh=mf1FPmX34sPBqBJ1RqvZnmanS11JhvTJ+HM36CjFqII=; b=IU4jS4oV0lHxlY3QsOYxP12a8d
+ l7x2IdmMUlPjzNcoWmmZdCoEg93+8Xjmao8/iagqWNA9eCU645jWkgVNGDy5+keGfy+tR4MEW15T4
+ VhqKkbB9C6yDjq9LpTtNmuzIsYBYGpBNhzhgZR1s0Nj0qgpmB1SMOBebfI/jQtuH6PGE=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pji4K-00025F-4L for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 14:55:32 +0000
+ id 1pji4N-00025V-L9 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 04 Apr 2023 14:55:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1680620126;
+ s=mimecast20190719; t=1680620129;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=g1NG2DlOPhECSBoFyURsYJB7f5VQnxxV8rEkg1d1tQc=;
- b=JcVIpQAJvDrdUuqyNsVYLoncjglB0MOHWb63z5op0+StlMVRhPam+GFVYw4LAKTPNbaHrv
- D9hinTozxWlq9yUYQuiZmmLVrCHg9cuuwwYfbCQ+6SQQq1vL/gWV1zMDfldmzVzf1QfaVN
- vWSv/7YYON5GFQA1Qogi4AUMEcj/66s=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=mf1FPmX34sPBqBJ1RqvZnmanS11JhvTJ+HM36CjFqII=;
+ b=hObF0eTNOzV/ChyfgCdz87MpVMgrd4c43YoZnB1LD4Bm75QeuZzbkgvbIQdRX4941a+YFg
+ O8gUT4kHL9I9cdDBxXhAzzwYqM2fhveXdXh6cihMaIFzESFWk2xCBDzUbx9ZPXBNYsvf4w
+ ce+HiWSU45jmsS5IA+CTPLdswGAd5Cs=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-463-p8jdI2vOND283DWsl4MxWg-1; Tue, 04 Apr 2023 10:55:24 -0400
-X-MC-Unique: p8jdI2vOND283DWsl4MxWg-1
-Received: by mail-qk1-f198.google.com with SMTP id
- s21-20020a05620a0bd500b0074234f33f24so14661693qki.3
+ us-mta-638-H_tx-w18Mwm0-ZQf0abp0A-1; Tue, 04 Apr 2023 10:55:28 -0400
+X-MC-Unique: H_tx-w18Mwm0-ZQf0abp0A-1
+Received: by mail-qt1-f197.google.com with SMTP id
+ w13-20020ac857cd000000b003e37d3e6de2so22338772qta.16
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 04 Apr 2023 07:55:21 -0700 (PDT)
+ Tue, 04 Apr 2023 07:55:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680620121;
+ d=1e100.net; s=20210112; t=1680620124;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g1NG2DlOPhECSBoFyURsYJB7f5VQnxxV8rEkg1d1tQc=;
- b=dewwA8fKLrVQCZe0TSrGFOcn6GJ6U6TaSDS1AEqjnvhAQ8NiO24UgZJrBGjdcfCD9j
- IAPmAb4CPSP8Z7TDK72LyM+TQQusaDvlC4ID8NmLiiXJS+1Ep88x9uEBmz1YOZvybsCu
- 7v1Lmxd1n5OsfouEURnHZ1oO+rK074v2Hq2b/fIewCgKNBBODaLDKiaPqkL+bseoFLGW
- aj3ZCVMSrikZXE5LTbYyIXFKsYel5fVsbQ7uRPErFxGpOk/QLhAj8hhGa6s8lRwY7Idk
- YWvZhw69tnRfBsJ6M7DeUaKOKZ5zC/qYyuynbGlSYL6JfFaz8OdfFrOULMaT6kCrY+BH
- 8Pxw==
-X-Gm-Message-State: AAQBX9f5ye4k/Vgh8laCELIfEZ7vgB+cSH1auA3vzUPgQANEAfZiINsh
- 7uuYK6jSZS98Cr6DUiT3Bi+hNtIXtdlUQa6cX0aLQ4YKHF6LBqe8Qed6w11ClOJUuMBb/ruuuGl
- oxQiXbbvaX54oY+24GaHxel0X4Wsn/9Gh4psS
-X-Received: by 2002:ac8:5754:0:b0:3d7:960e:5387 with SMTP id
- 20-20020ac85754000000b003d7960e5387mr3872051qtx.35.1680620121260; 
- Tue, 04 Apr 2023 07:55:21 -0700 (PDT)
-X-Google-Smtp-Source: AKy350bjyktKoJdi6D9KFFirgwb83MTSe30Fparym5df9UxsVGpZNZWXy1G6A3UC/2iyEvUKlSZpbw==
-X-Received: by 2002:ac8:5754:0:b0:3d7:960e:5387 with SMTP id
- 20-20020ac85754000000b003d7960e5387mr3871997qtx.35.1680620120899; 
- Tue, 04 Apr 2023 07:55:20 -0700 (PDT)
+ bh=mf1FPmX34sPBqBJ1RqvZnmanS11JhvTJ+HM36CjFqII=;
+ b=HYqfAp4fQTdRqNlppSeqP28fyDF1mFD1J6gzY/zVZLVI2vtxFsfHyiVBtJE5IC9sGQ
+ PpBbQSWnbuqle2jdquhM6V96UszzqoHZjaIvafPjyBh/7bHBjPwWT4gLlcW9VdLFUErU
+ xDPnNjMBT0HAl/n/JVf6UKg4JQR8WNILAtNv+MXxvIdUSNqClrsPMgabO+GVM2DXI8fy
+ AuA2RwykNz4f9VPrlV/JbmaR9iehCxVOGFGyFSdDOF5Gu44paNqfe370WdcDA7nz23uU
+ DrkKMybGj2mgx/CnDo800sjSOSV2Dcrc1fhFxzVmdBOiz2AH1RzcRkr0L5JjHjm8q4JV
+ h79w==
+X-Gm-Message-State: AAQBX9fhlHpCLVlBn2J3RHnWSbiZBggiCQXEmZvpUBwQwhaWO9+Xbn5j
+ rxFK98TlSLDDpYcoN5JlchIOrwT8ChUMM6egFuNq4bv9IthTg5IBsr+eaheFFW6wIcV356WuwT4
+ g+Icw6RWwe9HA3GBu+lybNqrSCxTZYse/c9km
+X-Received: by 2002:a05:622a:586:b0:3e4:df94:34fa with SMTP id
+ c6-20020a05622a058600b003e4df9434famr4035273qtb.37.1680620124177; 
+ Tue, 04 Apr 2023 07:55:24 -0700 (PDT)
+X-Google-Smtp-Source: AKy350bRYRoH4ADtP4T/X8Xk7AmNG3QGNTCPUhw/3V50RQPtNVC1H25ltfcQUL3M/obCpWJOFk1Kng==
+X-Received: by 2002:a05:622a:586:b0:3e4:df94:34fa with SMTP id
+ c6-20020a05622a058600b003e4df9434famr4035211qtb.37.1680620123789; 
+ Tue, 04 Apr 2023 07:55:23 -0700 (PDT)
 Received: from aalbersh.remote.csb ([109.183.6.197])
  by smtp.gmail.com with ESMTPSA id
- j4-20020ac86644000000b003e6387431dcsm3296539qtp.7.2023.04.04.07.55.18
+ j4-20020ac86644000000b003e6387431dcsm3296539qtp.7.2023.04.04.07.55.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Apr 2023 07:55:20 -0700 (PDT)
+ Tue, 04 Apr 2023 07:55:23 -0700 (PDT)
 From: Andrey Albershteyn <aalbersh@redhat.com>
 To: djwong@kernel.org, dchinner@redhat.com, ebiggers@kernel.org,
  hch@infradead.org, linux-xfs@vger.kernel.org, fsverity@lists.linux.dev
-Date: Tue,  4 Apr 2023 16:53:08 +0200
-Message-Id: <20230404145319.2057051-13-aalbersh@redhat.com>
+Date: Tue,  4 Apr 2023 16:53:09 +0200
+Message-Id: <20230404145319.2057051-14-aalbersh@redhat.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20230404145319.2057051-1-aalbersh@redhat.com>
 References: <20230404145319.2057051-1-aalbersh@redhat.com>
@@ -103,18 +103,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: As noted by Dave there are two problems with using
- fs-verity's
- workqueue in XFS: 1. High priority workqueues are used within XFS to ensure
- that data IO completion cannot stall processing of journal IO completions.
- Hence using a WQ_HIGHPRI workqueue directly in the user data IO pat [...]
+ Content preview: The read IO path provides callout for configuring ioend. This
+ allows filesystem to add verification of completed BIOs. The
+ xfs_prepare_read_ioend()
+ configures bio->bi_end_io which places verification [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [170.10.129.124 listed in wl.mailspike.net]
+ [170.10.133.124 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.129.124 listed in list.dnswl.org]
+ no trust [170.10.133.124 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -125,9 +124,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pji4K-00025F-4L
-Subject: [f2fs-dev] [PATCH v2 12/23] xfs: introduce workqueue for post read
- IO work
+X-Headers-End: 1pji4N-00025V-L9
+Subject: [f2fs-dev] [PATCH v2 13/23] xfs: add iomap's readpage operations
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -148,72 +146,136 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-As noted by Dave there are two problems with using fs-verity's
-workqueue in XFS:
+The read IO path provides callout for configuring ioend. This allows
+filesystem to add verification of completed BIOs. The
+xfs_prepare_read_ioend() configures bio->bi_end_io which places
+verification task in the workqueue. The task does fs-verity
+verification and then call back to the iomap to finish IO.
 
-1. High priority workqueues are used within XFS to ensure that data
-   IO completion cannot stall processing of journal IO completions.
-   Hence using a WQ_HIGHPRI workqueue directly in the user data IO
-   path is a potential filesystem livelock/deadlock vector.
-
-2. The fsverity workqueue is global - it creates a cross-filesystem
-   contention point.
-
-This patch adds per-filesystem, per-cpu workqueue for fsverity
-work.
+This patch add callouts implementation to verify pages with
+fs-verity. Also implements folio operation .verify_folio for direct
+folio verification by fs-verity.
 
 Signed-off-by: Andrey Albershteyn <aalbersh@redhat.com>
 ---
- fs/xfs/xfs_mount.h | 1 +
- fs/xfs/xfs_super.c | 9 +++++++++
- 2 files changed, 10 insertions(+)
+ fs/xfs/xfs_aops.c  | 45 +++++++++++++++++++++++++++++++++++++++++++++
+ fs/xfs/xfs_iomap.c | 11 +++++++++++
+ fs/xfs/xfs_linux.h |  1 +
+ 3 files changed, 57 insertions(+)
 
-diff --git a/fs/xfs/xfs_mount.h b/fs/xfs/xfs_mount.h
-index f3269c0626f0..53a4a9304937 100644
---- a/fs/xfs/xfs_mount.h
-+++ b/fs/xfs/xfs_mount.h
-@@ -107,6 +107,7 @@ typedef struct xfs_mount {
- 	struct xfs_mru_cache	*m_filestream;  /* per-mount filestream data */
- 	struct workqueue_struct *m_buf_workqueue;
- 	struct workqueue_struct	*m_unwritten_workqueue;
-+	struct workqueue_struct	*m_postread_workqueue;
- 	struct workqueue_struct	*m_reclaim_workqueue;
- 	struct workqueue_struct	*m_sync_workqueue;
- 	struct workqueue_struct *m_blockgc_wq;
-diff --git a/fs/xfs/xfs_super.c b/fs/xfs/xfs_super.c
-index 4f814f9e12ab..d6f22cb94ee2 100644
---- a/fs/xfs/xfs_super.c
-+++ b/fs/xfs/xfs_super.c
-@@ -548,6 +548,12 @@ xfs_init_mount_workqueues(
- 	if (!mp->m_unwritten_workqueue)
- 		goto out_destroy_buf;
- 
-+	mp->m_postread_workqueue = alloc_workqueue("xfs-pread/%s",
-+			XFS_WQFLAGS(WQ_FREEZABLE | WQ_MEM_RECLAIM),
-+			0, mp->m_super->s_id);
-+	if (!mp->m_postread_workqueue)
-+		goto out_destroy_postread;
-+
- 	mp->m_reclaim_workqueue = alloc_workqueue("xfs-reclaim/%s",
- 			XFS_WQFLAGS(WQ_FREEZABLE | WQ_MEM_RECLAIM),
- 			0, mp->m_super->s_id);
-@@ -581,6 +587,8 @@ xfs_init_mount_workqueues(
- 	destroy_workqueue(mp->m_reclaim_workqueue);
- out_destroy_unwritten:
- 	destroy_workqueue(mp->m_unwritten_workqueue);
-+out_destroy_postread:
-+	destroy_workqueue(mp->m_postread_workqueue);
- out_destroy_buf:
- 	destroy_workqueue(mp->m_buf_workqueue);
- out:
-@@ -596,6 +604,7 @@ xfs_destroy_mount_workqueues(
- 	destroy_workqueue(mp->m_inodegc_wq);
- 	destroy_workqueue(mp->m_reclaim_workqueue);
- 	destroy_workqueue(mp->m_unwritten_workqueue);
-+	destroy_workqueue(mp->m_postread_workqueue);
- 	destroy_workqueue(mp->m_buf_workqueue);
+diff --git a/fs/xfs/xfs_aops.c b/fs/xfs/xfs_aops.c
+index daa0dd4768fb..2a3ab5afd665 100644
+--- a/fs/xfs/xfs_aops.c
++++ b/fs/xfs/xfs_aops.c
+@@ -548,6 +548,49 @@ xfs_vm_bmap(
+ 	return iomap_bmap(mapping, block, &xfs_read_iomap_ops);
  }
  
++static void
++xfs_read_work_end_io(
++	struct work_struct *work)
++{
++	struct iomap_read_ioend *ioend =
++		container_of(work, struct iomap_read_ioend, work);
++	struct bio *bio = &ioend->read_inline_bio;
++
++	fsverity_verify_bio(bio);
++	iomap_read_end_io(bio);
++	/*
++	 * The iomap_read_ioend has been freed by bio_put() in
++	 * iomap_read_end_io()
++	 */
++}
++
++static void
++xfs_read_end_io(
++	struct bio *bio)
++{
++	struct iomap_read_ioend *ioend =
++		container_of(bio, struct iomap_read_ioend, read_inline_bio);
++	struct xfs_inode	*ip = XFS_I(ioend->io_inode);
++
++	WARN_ON_ONCE(!queue_work(ip->i_mount->m_postread_workqueue,
++					&ioend->work));
++}
++
++static void
++xfs_prepare_read_ioend(
++	struct iomap_read_ioend	*ioend)
++{
++	if (!fsverity_active(ioend->io_inode))
++		return;
++
++	INIT_WORK(&ioend->work, &xfs_read_work_end_io);
++	ioend->read_inline_bio.bi_end_io = &xfs_read_end_io;
++}
++
++static const struct iomap_readpage_ops xfs_readpage_ops = {
++	.prepare_ioend		= &xfs_prepare_read_ioend,
++};
++
+ STATIC int
+ xfs_vm_read_folio(
+ 	struct file			*unused,
+@@ -555,6 +598,7 @@ xfs_vm_read_folio(
+ {
+ 	struct iomap_readpage_ctx	ctx = {
+ 		.cur_folio		= folio,
++		.ops			= &xfs_readpage_ops,
+ 	};
+ 
+ 	return iomap_read_folio(&ctx, &xfs_read_iomap_ops);
+@@ -566,6 +610,7 @@ xfs_vm_readahead(
+ {
+ 	struct iomap_readpage_ctx	ctx = {
+ 		.rac			= rac,
++		.ops			= &xfs_readpage_ops,
+ 	};
+ 
+ 	iomap_readahead(&ctx, &xfs_read_iomap_ops);
+diff --git a/fs/xfs/xfs_iomap.c b/fs/xfs/xfs_iomap.c
+index 285885c308bd..e0f3c5d709f6 100644
+--- a/fs/xfs/xfs_iomap.c
++++ b/fs/xfs/xfs_iomap.c
+@@ -27,6 +27,7 @@
+ #include "xfs_dquot_item.h"
+ #include "xfs_dquot.h"
+ #include "xfs_reflink.h"
++#include "xfs_verity.h"
+ 
+ #define XFS_ALLOC_ALIGN(mp, off) \
+ 	(((off) >> mp->m_allocsize_log) << mp->m_allocsize_log)
+@@ -83,8 +84,18 @@ xfs_iomap_valid(
+ 	return true;
+ }
+ 
++static bool
++xfs_verify_folio(
++	struct folio	*folio,
++	loff_t		pos,
++	unsigned int	len)
++{
++	return fsverity_verify_folio(folio, len, pos);
++}
++
+ static const struct iomap_folio_ops xfs_iomap_folio_ops = {
+ 	.iomap_valid		= xfs_iomap_valid,
++	.verify_folio		= xfs_verify_folio,
+ };
+ 
+ int
+diff --git a/fs/xfs/xfs_linux.h b/fs/xfs/xfs_linux.h
+index e88f18f85e4b..c574fbf4b67d 100644
+--- a/fs/xfs/xfs_linux.h
++++ b/fs/xfs/xfs_linux.h
+@@ -63,6 +63,7 @@ typedef __u32			xfs_nlink_t;
+ #include <linux/rhashtable.h>
+ #include <linux/xattr.h>
+ #include <linux/mnt_idmapping.h>
++#include <linux/fsverity.h>
+ 
+ #include <asm/page.h>
+ #include <asm/div64.h>
 -- 
 2.38.4
 
