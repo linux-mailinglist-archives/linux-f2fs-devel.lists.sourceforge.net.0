@@ -2,127 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DF5B6D58AF
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Apr 2023 08:21:30 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D73276D59C2
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Apr 2023 09:37:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pja2m-00046C-I2;
-	Tue, 04 Apr 2023 06:21:23 +0000
+	id 1pjbDz-0003qQ-Dw;
+	Tue, 04 Apr 2023 07:37:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yonggil.song@samsung.com>) id 1pja2k-000466-6y
+ (envelope-from <qkrwngud825@gmail.com>) id 1pjbDy-0003qK-0a
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 06:21:21 +0000
+ Tue, 04 Apr 2023 07:37:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- Date:Message-ID:In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:MIME-Version:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zNeAT4LJkGBpLpeEzrm+tLr4gKPKdx4SirCmwKDyg4o=; b=KeZPgdHa0cNo5Nu3a6q2i5uT+y
- x4ghJcgcZQ40+yBt0WFSju0/tEQCCGZFhq+5NHy0EvdGFywgOsjgKiP/hW7dwZQd3SqFdqgA86QIa
- PkZ4Wb1dvQzEiIWAjNu+PHo48AGE7EH4sYwjQ3ofQygDUYVdHa+bl5P7tny9Mmg1jCBQ=;
+ bh=7ykuty3u3JJ80ezway9WNl5VkBg7udCs51rc3u4Ga+s=; b=DEYycCEAnFtUNkRFdvKQoRjJxd
+ 6BoTHmMBvHkAMV//sjmpmd59etEp0W1tPucOdnTD1CUvEnC9oMDJMIdET6tntPf7+aWVn+joEaxc0
+ +OuZL14oOOx0H1YU+bd/wjA+lXxdmN6ujx8EIjXalCCdE/GVXBbiYyvsC9vxwcy3O/F4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:
- In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=zNeAT4LJkGBpLpeEzrm+tLr4gKPKdx4SirCmwKDyg4o=; b=bnNv2Niu7SLaLxhpbJ7IEshHep
- Stq7pWY3LgY6HgNmeL2mrvuOcFMOOgzC6jciXSg5w0XUfIoI5LyTCelhKCtiB/zq4Ym2hopFM8Td2
- N8gFqOOGF84l7e0bAIWnzOvfdkGKf1vWUmHqrsoknclVlu1q5HSoDmbSC44LrQre9POo=;
-Received: from mailout2.samsung.com ([203.254.224.25])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pja2d-00ESrM-9N for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 06:21:21 +0000
-Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20230404062105epoutp0246946f45bef106d8d3599c24020a79ef~SpwhV4CvT0224102241epoutp025
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :MIME-Version:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=7ykuty3u3JJ80ezway9WNl5VkBg7udCs51rc3u4Ga+s=; b=A
+ /6maopPIadTimYNEC2LNA/7rjfbN8WK5IWtfQlVJEkV5oSww2tj2X1KClY7ST6z/zbRQItM7xIlzf
+ q1ePVrYVhPVfPM6+w7X2EYbkFVCU4mD7ozeWLoaW9m82Lxu4LVK/VR0ni0GRIQGPkdiI7aW18AxI+
+ IOHDzXuzqQpJiJcc=;
+Received: from mail-ed1-f49.google.com ([209.85.208.49])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1pjbDw-0002MM-2z for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 04 Apr 2023 07:37:01 +0000
+Received: by mail-ed1-f49.google.com with SMTP id fi11so3305086edb.10
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  4 Apr 2023 06:21:05 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20230404062105epoutp0246946f45bef106d8d3599c24020a79ef~SpwhV4CvT0224102241epoutp025
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1680589265;
- bh=zNeAT4LJkGBpLpeEzrm+tLr4gKPKdx4SirCmwKDyg4o=;
- h=Subject:Reply-To:From:To:CC:In-Reply-To:Date:References:From;
- b=eKGQhNL8H76T+8Bha0QryLqEUMBRIpWexnyi0PLrdk6oco+j9rdVllj7v7Ifez1BD
- 7yH6B5RHYt11kB0vVpslim2YaUnoBcwWy8U5NEOugc/BXri5ajsiuCuj0JOhPgkyo6
- bQsEiqCo73eYYDXPORx/aSi74hGP+txsSbo5bWlc=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas2p1.samsung.com (KnoxPortal) with ESMTP id
- 20230404062104epcas2p1ab52250d34ee732ddda4c0df7f0cc7aa~Spwg0JeD31956319563epcas2p1B;
- Tue,  4 Apr 2023 06:21:04 +0000 (GMT)
-Received: from epsmges2p1.samsung.com (unknown [182.195.36.89]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4PrHhJ09XZz4x9Pp; Tue,  4 Apr
- 2023 06:21:04 +0000 (GMT)
-X-AuditID: b6c32a45-8bdf87000001f1e7-c5-642bc1cf0455
-Received: from epcas2p3.samsung.com ( [182.195.41.55]) by
- epsmges2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 4D.B1.61927.FC1CB246; Tue,  4 Apr 2023 15:21:03 +0900 (KST)
-Mime-Version: 1.0
-From: Yonggil Song <yonggil.song@samsung.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>
-X-Priority: 3
-X-Content-Kind-Code: NORMAL
-In-Reply-To: <20230328080601epcms2p3853fec730598eb10f10117b0b375014f@epcms2p3>
-X-CPGS-Detection: blocking_info_exchange
-X-Drm-Type: N,general
-X-Msg-Generator: Mail
-X-Msg-Type: PERSONAL
-X-Reply-Demand: N
-Message-ID: <20230404062103epcms2p24f82d2807090ec9ca260bfa70c372bda@epcms2p2>
-Date: Tue, 04 Apr 2023 15:21:03 +0900
-X-CMS-MailID: 20230404062103epcms2p24f82d2807090ec9ca260bfa70c372bda
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrCKsWRmVeSWpSXmKPExsWy7bCmue75g9opBidum1usehBu8WT9LGaL
- S4vcLU6ueMFisapjLqPF1PNHmBzYPDat6mTz2L3gM5NH35ZVjAHMUdk2GamJKalFCql5yfkp
- mXnptkrewfHO8aZmBoa6hpYW5koKeYm5qbZKLj4Bum6ZOUBrlRTKEnNKgUIBicXFSvp2NkX5
- pSWpChn5xSW2SqkFKTkF5gV6xYm5xaV56Xp5qSVWhgYGRqZAhQnZGe/fHWct+O1VsXrzO6YG
- xs02XYycHBICJhJt6y4zdjFycQgJ7GCU+Ni4hr2LkYODV0BQ4u8OYZAaYQF3iR9LN7GC2EIC
- ShLXDvSyQMT1JTYvXsYOYrMJ6Er83bAczBYRqJZ4t/Y5mM0sUCLRMHkxM8QuXokZ7U9ZIGxp
- ie3LtzKCrOIU8JO48g+qREPix7JeKFtU4ubqt+ww9vtj8xkhbBGJ1ntnoWoEJR783A0Vl5RY
- dOg8E4SdL/F3xXU2CLtGYmtDG1RcX+Jax0awE3gFfCUWz5wG9haLgKrE4nXPoU5zkTjcNZMV
- 4nx5ie1v5zCDnMksoCmxfpc+iCkhoCxx5BYLRAWfRMfhv+wwD+6Y9wRqk5rE5k2bWSFsGYkL
- j9ugrvSQuNZ2hXkCo+IsRDDPQrJrFsKuBYzMqxjFUguKc9NTi40KDOExm5yfu4kRnPy0XHcw
- Tn77Qe8QIxMH4yFGCQ5mJRFe1S6tFCHelMTKqtSi/Pii0pzU4kOMpkBfTmSWEk3OB6bfvJJ4
- QxNLAxMzM0NzI1MDcyVxXmnbk8lCAumJJanZqakFqUUwfUwcnFINTNUcZ5xieeZ72YQE/Nr/
- Z9Om/yqJtQtaSiab3L6dmhvnnJGQ2HNeKW3u1V2Pwyo/Tnu5zuzT5mXFDSH3uSU+MH/keWJm
- J3F6Umqw3OPI/F4zyd4myZM9BXsmGV0MDWmTY4vPvsdd5TWZ19U++IdnqMWTw0cbT0dfVnO5
- wWLPP9sz7dPTouk82fd2LzwqUmeiMTFLL0q+RsanYOpXhVXm5/2zDgQpKmh2pU2QVth27ujn
- vpQHV88nHrF9W7XulM+vz8/m5/lVX+pc8d9lw3eGW/Ffu46fzSqXC1Wbs9FwDYsQ577ZVt8N
- Kx0Xv/LRlHn3Zm/0kaVLMz7qxoZf2qy3aRf7/jNmT9dfP3J+jtjyrUosxRmJhlrMRcWJAL+I
- xQYHBAAA
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230317044151epcms2p5872591b638dab3261a9dd563253f1b94
-References: <20230328080601epcms2p3853fec730598eb10f10117b0b375014f@epcms2p3>
- <ZCIKIzPmJyjA44JK@google.com>
- <20230317044151epcms2p5872591b638dab3261a9dd563253f1b94@epcms2p5>
- <CGME20230317044151epcms2p5872591b638dab3261a9dd563253f1b94@epcms2p2>
-X-Spam-Score: -3.2 (---)
+ Tue, 04 Apr 2023 00:37:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20210112; t=1680593813;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7ykuty3u3JJ80ezway9WNl5VkBg7udCs51rc3u4Ga+s=;
+ b=fBZ2cKm5L0iuzIItohl9gx7cgbRit6bk1+B5bKVC87suuJeih2nLQmgLUkhbG+v2sy
+ mr5PJmIdgY8vX7oO8AsAM1WLpRYAspFvM7dNC3CE2WZwQ8bgc3jskSIJcRvjJGya0iAu
+ 9h/VEpGmI+WYFVCTEcvZRavqXRuFmSl1o2m5ugAkHJrF6zDyKDc+fE7JPPpTaPFJ3+3Q
+ lgtpCALa5xIDTDSigwHGpRWTkfzexkRzPGWvayNgx/yPIH8Wi0xhUVojBYPfK6RQrXu3
+ rG9J99eDiZo+v+vh0vdWPx7AOlsihbTZkmrm0DIA8inBBZP42/Dpk9t6QBt4hcVJl+2s
+ t3oQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680593813;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7ykuty3u3JJ80ezway9WNl5VkBg7udCs51rc3u4Ga+s=;
+ b=1z/SjSBiifPsusShkH3mOXW/xVqzAJlu1uaJNChmTdK/VE3K8LGvvs1oY0LjpvYYSS
+ 6t+rKuhq1kCZnw+bcPIqin0SzhooTfwjS6RnX1rrYsPqJyDjqNBQzIlP5X89XDqxU6ux
+ o2Co0zUVBRebKv0h2IQS1HtrYN78+MouhflDhgk7JeRx4e1gqeGWl11RfH9BOKjk8d5h
+ D93dEk4nTj4Y/ZeKBOAWxrdp+WQiSI444ehge/PKx8YjSY/PsyJGVWfig05qeZ+/pS9O
+ W811i44nE/QVlRMWXbTIceKJprDuMCAb/wlOonZDXQA/23XlsiZPnFUG0a977RR011qu
+ HZDQ==
+X-Gm-Message-State: AAQBX9f6Gyy3BrOYHL98BAbh6o43vWwS+fXg7HV1PTcSpee1zoArTdnd
+ DKyyDAyPWUDi0MCOLnAUYuxHwbQqSXJS+aWYWy18BsA8htxqOQ==
+X-Google-Smtp-Source: AKy350YAj2+5PG/12+mSC0ObNJMiIWpwonrwU92TggnoLRl3D7BhDjah6BSYpdhVYeFq9R+r6mlqJ9NKtBvuBSXi/js=
+X-Received: by 2002:a17:907:72c1:b0:92e:5db0:666a with SMTP id
+ du1-20020a17090772c100b0092e5db0666amr719236ejc.14.1680593812964; Tue, 04 Apr
+ 2023 00:36:52 -0700 (PDT)
+MIME-Version: 1.0
+From: Juhyung Park <qkrwngud825@gmail.com>
+Date: Tue, 4 Apr 2023 16:36:41 +0900
+Message-ID: <CAD14+f3z=kS9E+NTKH7t1J2xL1PpLOVMNx=CabD_t2K6U=T9uQ@mail.gmail.com>
+To: linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>, 
+ Chao Yu <chao@kernel.org>
+X-Spam-Score: 1.3 (+)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Overview ======== This option allows zoned block device users
- to configure GC reserved and overprovision area manually according to their
- demands on performance of sustained write latency and WAF. Problem =======
- Content analysis details:   (-3.2 points, 6.0 required)
+ Content preview:  Hi everyone, I want to start a discussion on using f2fs for
+ regular desktops/workstations. There are growing number of interests in using
+ f2fs as the general root file-system: 2018:
+ https://www.phoronix.com/news/GRUB-Now-Supports-F2FS
+ 2020: https://www.phoronix.com/news/Clear-Linux-F2FS-Roo [...] 
+ Content analysis details:   (1.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [203.254.224.25 listed in list.dnswl.org]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.3 HK_RANDOM_FROM         From username looks random
+ 1.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [qkrwngud825[at]gmail.com]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [qkrwngud825[at]gmail.com]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.49 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.208.49 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -130,10 +111,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pja2d-00ESrM-9N
-Subject: [f2fs-dev] [PATCH v2] mkfs.f2fs: Introduce configurable reserved
- sections
+X-Headers-End: 1pjbDw-0002MM-2z
+Subject: [f2fs-dev] [DISCUSSION] f2fs for desktop
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,282 +124,139 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: yonggil.song@samsung.com
-Cc: Seokhwan Kim <sukka.kim@samsung.com>, Jorn Lee <lunar.lee@samsung.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Alexander Koskovich <akoskovich@pm.me>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Overview
-========
-
-This option allows zoned block device users to configure GC reserved and
-overprovision area manually according to their demands on performance of
-sustained write latency and WAF.
-
-Problem
-=======
-
-The overprovision segments that mkfs generates are mostly occupied by GC
-reserved. This degrades WAF performance.
-
-Experiment
-==========
-
-The following experiment evaluated the application of configurable reserved.
-The experimental environment is as follows.
-
-  System info
-    - 4.2Ghz, 8 core CPU
-    - 64GiB Memory
-  Device info
-    - a conventional null_blk with 448MiB capacity(meta area) and
-    - a sequential null_blk with 953 zones of 64MiB
-  Format
-    - as-is (find out ovp ratio): mkfs.f2fs <conv null_blk> -c <seq null_blk> -m
-        Info: Overprovision ratio = 3.700%
-        Info: Overprovision segments = 1152 (GC reserved = 1088)
-    - config rsvd: mkfs.f2fs <conv null_blk> -c <seq null_blk> -m -Z 8 -o 2.965
-        Info: Overprovision ratio = 2.965%
-        Info: Overprovision segments = 1152 (GC reserved = 256)
-  Mount
-    - mount <conv null_blk> <mount point>
-  Fio script
-    - fio --rw=randwrite --bs=4k --ba=4k --filesize=58630m --norandommap --overwrite=1 --name=job1 --filename=<mount point>/sustain --time_based --runtime=2h
-  WAF calculation
-    - (IOs on conv. null_blk + IOs on seq. null_blk) / random write IOs
-
-Conclusion
-==========
-
-In the experiment, it can be shown that reducing the reserved segments
-decreases WAF to 10% (from 222 to 23) although it triggers checkpoint more
-frequently during gc. With direct IO, the WAF of as-is gets much higher.
-In other words, a user can configure more reserved segments for lower GC
-latency or allocate less reserved segments for lower WAF on the same number
-of OP segments.
-
-Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
----
- include/f2fs_fs.h       | 22 ++++++++++++++++++++--
- lib/libf2fs.c           | 18 ++++++++++++++++++
- man/mkfs.f2fs.8         | 12 ++++++++++++
- mkfs/f2fs_format.c      | 30 ++++++++++++++++++++++++------
- mkfs/f2fs_format_main.c | 11 ++++++++++-
- 5 files changed, 84 insertions(+), 9 deletions(-)
-
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 333ae07a5ebd..5d74dcc0dc11 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -375,6 +375,10 @@ static inline uint64_t bswap_64(uint64_t val)
- 
- #define LPF "lost+found"
- 
-+/* one for gc buffer, the other for node */
-+#define MIN_RSVD_SECS	(NR_CURSEG_TYPE + 2U)
-+#define CONFIG_RSVD_DEFAULT_OP_RATIO	3.0
-+
- enum f2fs_config_func {
- 	MKFS,
- 	FSCK,
-@@ -460,6 +464,7 @@ typedef struct {
- #define ALIGN_UP(addrs, size)	ALIGN_DOWN(((addrs) + (size) - 1), (size))
- 
- struct f2fs_configuration {
-+	uint32_t conf_reserved_sections;
- 	uint32_t reserved_segments;
- 	uint32_t new_reserved_segments;
- 	int sparse_mode;
-@@ -1614,6 +1619,20 @@ extern uint32_t f2fs_get_usable_segments(struct f2fs_super_block *sb);
- #define ZONE_ALIGN(blks)	SIZE_ALIGN(blks, c.blks_per_seg * \
- 					c.segs_per_zone)
- 
-+static inline double get_reserved(struct f2fs_super_block *sb, double ovp)
-+{
-+	double reserved;
-+	uint32_t usable_main_segs = f2fs_get_usable_segments(sb);
-+	uint32_t segs_per_sec = round_up(usable_main_segs, get_sb(section_count));
-+
-+	if (c.conf_reserved_sections)
-+		reserved = c.conf_reserved_sections * segs_per_sec;
-+	else
-+		reserved = (100 / ovp + 1 + NR_CURSEG_TYPE) * segs_per_sec;
-+
-+	return reserved;
-+}
-+
- static inline double get_best_overprovision(struct f2fs_super_block *sb)
- {
- 	double reserved, ovp, candidate, end, diff, space;
-@@ -1631,8 +1650,7 @@ static inline double get_best_overprovision(struct f2fs_super_block *sb)
- 	}
- 
- 	for (; candidate <= end; candidate += diff) {
--		reserved = (100 / candidate + 1 + NR_CURSEG_TYPE) *
--				round_up(usable_main_segs, get_sb(section_count));
-+		reserved = get_reserved(sb, candidate);
- 		ovp = (usable_main_segs - reserved) * candidate / 100;
- 		if (ovp < 0)
- 			continue;
-diff --git a/lib/libf2fs.c b/lib/libf2fs.c
-index f63307a42a08..8dcc33bda0b5 100644
---- a/lib/libf2fs.c
-+++ b/lib/libf2fs.c
-@@ -1069,6 +1069,24 @@ int get_device_info(int i)
- 				dev->nr_rnd_zones);
- 		MSG(0, "      %zu blocks per zone\n",
- 				dev->zone_blocks);
-+
-+		if (c.conf_reserved_sections) {
-+			if (c.conf_reserved_sections < MIN_RSVD_SECS) {
-+				MSG(0, "      Too small sections are reserved(%u secs)\n",
-+				    c.conf_reserved_sections);
-+				c.conf_reserved_sections = MIN_RSVD_SECS;
-+				MSG(0, "      It is operated as a minimum reserved sections(%u secs)\n",
-+				    c.conf_reserved_sections);
-+			} else {
-+				MSG(0, "      %u sections are reserved\n",
-+				c.conf_reserved_sections);
-+			}
-+			if (!c.overprovision) {
-+				c.overprovision = CONFIG_RSVD_DEFAULT_OP_RATIO;
-+				MSG(0, "      Overprovision ratio is set to default(%.1lf%%)\n",
-+				    c.overprovision);
-+			}
-+		}
- 	}
- #endif
- 	/* adjust wanted_total_sectors */
-diff --git a/man/mkfs.f2fs.8 b/man/mkfs.f2fs.8
-index a6249f6ef6ed..474c40131bae 100644
---- a/man/mkfs.f2fs.8
-+++ b/man/mkfs.f2fs.8
-@@ -92,6 +92,10 @@ mkfs.f2fs \- create an F2FS file system
- [
- .B \-V
- ]
-+[
-+.B \-Z
-+.I #-of-reserved-sections
-+]
- .I device
- .I [sectors]
- .SH DESCRIPTION
-@@ -265,6 +269,14 @@ Number of sectors. Default is determined by device size.
- .BI \-V
- Print the version number and exit.
- .TP
-+.BI \-Z " #-of-reserved-sections"
-+Specify the number of GC reserved sections for zoned device. If specified
-+to non-zero, reserved segments count is set to the larger size between 8
-+sections and the input value. If specified to zero, the best number will be
-+assigned automatically according to the partition size.
-+If overprovision-ratio-percentage is not specified, it will set to default
-+3.0%. Without '-m' option, the filesystem doesn't support the feature.
-+.TP
- .BI \-h,\ \-\-help
- Print usage and exit.
- .SH AUTHOR
-diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index f4a49acc498c..d3bb62222024 100644
---- a/mkfs/f2fs_format.c
-+++ b/mkfs/f2fs_format.c
-@@ -483,9 +483,7 @@ static int f2fs_prepare_super_block(void)
- 	if (c.overprovision == 0)
- 		c.overprovision = get_best_overprovision(sb);
- 
--	c.reserved_segments =
--			(100 / c.overprovision + 1 + NR_CURSEG_TYPE) *
--			round_up(f2fs_get_usable_segments(sb), get_sb(section_count));
-+	c.reserved_segments = get_reserved(sb, c.overprovision);
- 
- 	if (c.feature & cpu_to_le32(F2FS_FEATURE_RO)) {
- 		c.overprovision = 0;
-@@ -765,11 +763,31 @@ static int f2fs_write_check_point_pack(void)
- 			get_cp(rsvd_segment_count)) *
- 			c.overprovision / 100);
- 
--	if (get_cp(overprov_segment_count) < get_cp(rsvd_segment_count))
-+	if (!(c.conf_reserved_sections) &&
-+	    get_cp(overprov_segment_count) < get_cp(rsvd_segment_count))
- 		set_cp(overprov_segment_count, get_cp(rsvd_segment_count));
- 
--	set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
--			2 * get_sb(segs_per_sec));
-+	/*
-+	 * If conf_reserved_sections has a non zero value, overprov_segment_count
-+	 * is set to overprov_segment_count + rsvd_segment_count.
-+	 */
-+	if (c.conf_reserved_sections) {
-+		/*
-+		 * Overprovision segments must be bigger than two sections.
-+		 * In non configurable reserved section case, overprovision
-+		 * segments are always bigger than two sections.
-+		 */
-+		if (get_cp(overprov_segment_count) < 2 * get_sb(segs_per_sec)) {
-+			MSG(0, "\tError: Not enough overprovision segments (%u)\n",
-+			    get_cp(overprov_segment_count));
-+			goto free_cp_payload;
-+		}
-+		set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
-+				get_cp(rsvd_segment_count));
-+	 } else {
-+		set_cp(overprov_segment_count, get_cp(overprov_segment_count) +
-+				2 * get_sb(segs_per_sec));
-+	 }
- 
- 	if (f2fs_get_usable_segments(sb) <= get_cp(overprov_segment_count)) {
- 		MSG(0, "\tError: Not enough segments to create F2FS Volume\n");
-diff --git a/mkfs/f2fs_format_main.c b/mkfs/f2fs_format_main.c
-index f50971c4591c..07995b350a70 100644
---- a/mkfs/f2fs_format_main.c
-+++ b/mkfs/f2fs_format_main.c
-@@ -75,6 +75,7 @@ static void mkfs_usage()
- 	MSG(0, "  -w wanted sector size\n");
- 	MSG(0, "  -z # of sections per zone [default:1]\n");
- 	MSG(0, "  -V print the version number and exit\n");
-+	MSG(0, "  -Z # of reserved sections [default:auto]\n");
- 	MSG(0, "sectors: number of sectors [default: determined by device size]\n");
- 	exit(1);
- }
-@@ -176,7 +177,7 @@ static void add_default_options(void)
- 
- static void f2fs_parse_options(int argc, char *argv[])
- {
--	static const char *option_string = "qa:c:C:d:e:E:g:hil:mo:O:rR:s:S:z:t:T:U:Vfw:";
-+	static const char *option_string = "qa:c:C:d:e:E:g:hil:mo:O:rR:s:S:z:t:T:U:Vfw:Z:";
- 	static const struct option long_opts[] = {
- 		{ .name = "help", .has_arg = 0, .flag = NULL, .val = 'h' },
- 		{ .name = NULL, .has_arg = 0, .flag = NULL, .val = 0 }
-@@ -295,6 +296,9 @@ static void f2fs_parse_options(int argc, char *argv[])
- 			}
- 			c.feature |= cpu_to_le32(F2FS_FEATURE_CASEFOLD);
- 			break;
-+		case 'Z':
-+			c.conf_reserved_sections = atoi(optarg);
-+			break;
- 		default:
- 			MSG(0, "\tError: Unknown option %c\n",option);
- 			mkfs_usage();
-@@ -490,6 +494,11 @@ int main(int argc, char *argv[])
- 		goto err_format;
- 	}
- 
-+	if (c.conf_reserved_sections && !c.zoned_mode) {
-+		MSG(0, "\tError: Reserved area can't be specified on non zoned device\n");
-+		goto err_format;
-+	}
-+
- 	if (f2fs_format_device() < 0)
- 		goto err_format;
- 
--- 
-2.34.1
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SGkgZXZlcnlvbmUsCgpJIHdhbnQgdG8gc3RhcnQgYSBkaXNjdXNzaW9uIG9uIHVzaW5nIGYyZnMg
+Zm9yIHJlZ3VsYXIgZGVza3RvcHMvd29ya3N0YXRpb25zLgoKVGhlcmUgYXJlIGdyb3dpbmcgbnVt
+YmVyIG9mIGludGVyZXN0cyBpbiB1c2luZyBmMmZzIGFzIHRoZSBnZW5lcmFsCnJvb3QgZmlsZS1z
+eXN0ZW06CjIwMTg6IGh0dHBzOi8vd3d3LnBob3Jvbml4LmNvbS9uZXdzL0dSVUItTm93LVN1cHBv
+cnRzLUYyRlMKMjAyMDogaHR0cHM6Ly93d3cucGhvcm9uaXguY29tL25ld3MvQ2xlYXItTGludXgt
+RjJGUy1Sb290LU9wdGlvbgoyMDIzOiBodHRwczovL2NvZGUubGF1bmNocGFkLm5ldC9+bmV4dXNw
+cmlzbS9jdXJ0aW4vK2dpdC9jdXJ0aW4vK21lcmdlLzQzOTg4MAoyMDIzOiBodHRwczovL2NvZGUu
+bGF1bmNocGFkLm5ldC9+bmV4dXNwcmlzbS9ncnViLytnaXQvdWJ1bnR1LyttZXJnZS80NDAxOTMK
+CkkndmUgYmVlbiBwZXJzb25hbGx5IHJ1bm5pbmcgZjJmcyBvbiBhbGwgb2YgbXkgeDg2IExpbnV4
+IGJveGVzIHNpbmNlCjIwMTUsIGFuZCBJIGhhdmUgc2V2ZXJhbCBjb25jZXJucyB0aGF0IEkgdGhp
+bmsgd2UgbmVlZCB0byBjb2xsZWN0aXZlbHkKYWRkcmVzcyBmb3IgcmVndWxhciBub24tQW5kcm9p
+ZCBub3JtaWVzIHRvIHVzZSBmMmZzOgoKQS4gQm9vdGxvYWRlciBhbmQgaW5zdGFsbGVyIHN1cHBv
+cnQKQi4gSG9zdC1zaWRlIEdDCkMuIEV4dGVuZGVkIG5vZGUgYml0bWFwCgpJJ2xsIGdvIHRocm91
+Z2ggZWFjaCBvbmUuCgo9PT0gQS4gQm9vdGxvYWRlciBhbmQgaW5zdGFsbGVyIHN1cHBvcnQgPT09
+CgpJdCBzZWVtcyB0aGF0IGJvdGggR1JVQiBhbmQgc3lzdGVtZC1ib290IHN1cHBvcnRzIGYyZnMg
+d2l0aG91dCB0aGUKbmVlZCBmb3IgYSBzZXBhcmF0ZSBleHQ0LWZvcm1hdHRlZCAvYm9vdCBwYXJ0
+aXRpb24uClNvbWUgZGlzdHJvcyBhcmUgc2VlbWluZ2x5IGRpc2FibGluZyBmMmZzIG1vZHVsZSBm
+b3IgR1JVQiB0aG91Z2ggZm9yCnNlY3VyaXR5IHJlYXNvbnM6Cmh0dHBzOi8vYnVncy5sYXVuY2hw
+YWQubmV0L3VidW50dS8rc291cmNlL2dydWIyLytidWcvMTg2ODY2NAoKSXQncyB1bHRpbWF0ZWx5
+IHVwIHRvIHRoZSBkaXN0cm8gZm9sa3MgdG8gZW5hYmxlIHRoaXMsIGFuZCBzdGlsbCBpbgp0aGUg
+d29yc3QtY2FzZSBzY2VuYXJpbywgdGhleSBjYW4gc3BlY2lmeSBhIHNlcGFyYXRlIC9ib290IHBh
+cnRpdGlvbgphbmQgZm9ybWF0IGl0IHRvIGV4dDQgdXBvbiBpbnN0YWxsYXRpb24uCgpUaGUgaW5z
+dGFsbGVyIGl0c2VsZiB0byBzaG93IGYyZnMgYW5kIGNhbGwgbWtmcy5mMmZzIGlzIGJlaW5nIHdv
+cmtlZApvbiBjdXJyZW50bHkgb24gVWJ1bnR1LiBTZWUgdGhlIDIwMjMgbGlua3MgYWJvdmUuCgpO
+b3RoaW5nIGYyZnMgbWFpbmxpbmUgZGV2ZWxvcGVycyBzaG91bGQgZG8gaGVyZSwgaW1vLgoKPT09
+IEIuIEhvc3Qtc2lkZSBHQyA9PT0KCmYyZnMgcmVsaWV2ZXMgbW9zdCBvZiB0aGUgZGV2aWNlLXNp
+ZGUgR0MgYnV0IGludHJvZHVjZXMgYSBuZXcKaG9zdC1zaWRlIEdDLiBUaGlzIGlzIGV4dHJlbWVs
+eSBjb25mdXNpbmcgZm9yIHBlb3BsZSB3aG8gaGF2ZSBubwpiYWNrZ3JvdW5kIGluIFNTRHMgYW5k
+IGZsYXNoIHN0b3JhZ2UgdG8gdW5kZXJzdGFuZCwgbGV0IGFsb25lCmRpc2NhcmQvdHJpbS9lcmFz
+ZSBjb21wbGljYXRpb25zLgoKSW4gbW9zdCBjb25zdW1lci1ncmFkZSBibGFja2JveCBTU0RzLCBk
+ZXZpY2Utc2lkZSBHQ3MgYXJlIGhhbmRsZWQKYXV0b21hdGljYWxseSBmb3IgdmFyaW91cyB3b3Jr
+bG9hZHMuIGYyZnMsIGhvd2V2ZXIsIGxlYXZlcyB0aGF0CnJlc3BvbnNpYmlsaXR5IHRvIHRoZSB1
+c2Vyc3BhY2Ugd2l0aCBjb25zZXJ2YXRpdmUgdHVuaW5nIG9uIHRoZQprZXJuZWwtc2lkZSBieSBk
+ZWZhdWx0LiBBbmRyb2lkIGhhbmRsZXMgdGhpcyBieSBpbml0LnJjIHR1bmluZ3MgYW5kIGEKc2Vw
+YXJhdGUgY29kZSBydW5uaW5nIGluIHZvbGQgdG8gdHJpZ2dlciBnY191cmdlbnQuCgpGb3IgcmVn
+dWxhciBMaW51eCBkZXNrdG9wIGRpc3Ryb3MsIGYyZnMganVzdCBydW5zIG9uIHRoZSBkZWZhdWx0
+CmNvbmZpZ3VyYXRpb24gc2V0IG9uIHRoZSBrZXJuZWwgYW5kIHVubGVzcyBpdOKAmXMgcnVubmlu
+ZyAyNC83IHdpdGgKcGxlbnRpZnVsIGlkbGUgdGltZSwgaXQgcXVpY2tseSBydW5zIG91dCBvZiBm
+cmVlIHNlZ21lbnRzIGFuZCBzdGFydHMKdHJpZ2dlcmluZyBmb3JlZ3JvdW5kIEdDLiBUaGlzIGlz
+IGdpdmluZyBwZW9wbGUgdGhlIHdyb25nIGltcHJlc3Npb24KdGhhdCBmMmZzIHNsb3dzIGRvd24g
+ZmFyIGRyYXN0aWNhbGx5IHRoYW4gb3RoZXIgZmlsZS1zeXN0ZW1zIHdoZW4KdGhhdOKAmXMgcXVp
+dGUgdGhlIGNvbnRyYXJ5IChpLmUuLCBsZXNzIGZyYWdtZW50YXRpb24gb3ZlcnRpbWUpLgoKVGhp
+cyBpcyBhbG1vc3QgdGhlIGVxdWl2YWxlbnQgb2YgcmUtbGl2aW5nIHRoZSBuaWdodG1hcmUgb2Yg
+dHJpbS4gT24KU1NEcyB3aXRoIHZlcnkgc21hbGwgdG8gbm8gb3Zlci1wcm92aXNpb25lZCBzcGFj
+ZSwgcnVubmluZyBhCmZpbGUtc3lzdGVtIHdpdGggbm8gZGlzY2FyZCB3aGF0LXNvLWV2ZXIgKHNh
+ZGx5IHN0aWxsIGEgY29tbW9uIGNhc2UKd2hlbiBhbiBleHRlcm5hbCBTU0QgaXMgdXNlZCB3aXRo
+IG5vIFVBUykgd2lsbCBhbHNvIGRyYXN0aWNhbGx5IHNsb3cKdGhlIHBlcmZvcm1hbmNlIGRvd24u
+IE9uIGZpbGUtc3lzdGVtcyB3aXRoIG5vIGFzeW5jaHJvbm91cyBkaXNjYXJkLAptb3VudGluZyBh
+IGZpbGUtc3lzdGVtIHdpdGggdGhlIGRpc2NhcmQgb3B0aW9uIGFkZHMgYSBub24tbmVnbGlnaWJs
+ZQpvdmVyaGVhZCBvbiBldmVyeSByZW1vdmUvZGVsZXRlIG9wZXJhdGlvbnMsIHNvIG1vc3QgZGlz
+dHJvcyBub3cKKHRoYW5rZnVsbHkpIHVzZSBhIHRpbWVyIGpvYiByZWdpc3RlcmVkIHRvIHN5c3Rl
+bWQgdG8gdHJpZ2dlciBmc3RyaW06Cmh0dHBzOi8vZ2l0aHViLmNvbS91dGlsLWxpbnV4L3V0aWwt
+bGludXgvY29tbWl0cy9tYXN0ZXIvc3lzLXV0aWxzL2ZzdHJpbS50aW1lcgoKVGhpcyBpcyBzdGls
+bCBmYXIgZnJvbSBpZGVhbC4gVGhlIGRlZmF1bHQgZmlsZS1zeXN0ZW0sIGV4dDQsIHNsb3dzCmRv
+d24gZHJhc3RpY2FsbHkgYWxtb3N0IHRvIGEgaGFsdCB3aGVuIGZzdHJpbSAtYSBpcyBjYWxsZWQs
+IGVzcGVjaWFsbHkKb24gU0FUQS4gRm9yIHNvbWUgcmVhc29uIHRoYXQgaXMgc3RpbGwgYSBteXN0
+ZXJ5IGZvciBtZSwgcGVvcGxlIHNlZW0KdG8gYmUgaGFwcHkgd2l0aCBpdC4gTm8gb25lIGJvdGhl
+cmVkIHRvIGltcHJvdmUgaXQgZm9yIHllYXJzCsKvXF8o44OEKV8vwq8uCgpTbyBoZXJl4oCZcyBt
+eSBwcm9wb3NhbDoKQXMgTGludXggZGlzdHJvcyBkb27igJl0IGhhdmUgYSBnb29kIG1lY2hhbmlz
+bSBmb3IgaGludGluZyB3aGVuIHRvCnRyaWdnZXIgR0MsIGludHJvZHVjZSBhIG5ldyBLY29uZmln
+LCBDT05GSUdfRjJGU19HQ19VUE9OX0ZTVFJJTSBhbmQKZW5hYmxlIGl0IGJ5IGRlZmF1bHQuClRo
+aXMgY29uZmlnIHdpbGwgaG9vayB1cCBpb2N0bChGSVRSSU0pLCB3aGljaCBpcyBjdXJyZW50bHkg
+aWdub3JlZCBvbgpmMmZzIC0gaHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tl
+cm5lbC9naXQvamFlZ2V1ay9mMmZzLmdpdC9jb21taXQvP2g9bWFzdGVyJmlkPWU1NTVkYTlmMzEy
+MTBkMmI2MjgwNWNkN2ZhZjI5MjI4YWY3YzNjZmIKLCB0byBwZXJmb3JtIGRpc2NhcmQgYW5kIEdD
+IG9uIGFsbCBpbnZhbGlkIHNlZ21lbnRzLgpVc2Vyc3BhY2UgY29uZmlndXJhdGlvbiB3aXRoIGVu
+b3VnaCBmMmZzL0dDIGtub3dsZWRnZSBzdWNoIGFzIEFuZHJvaWQKc2hvdWxkIGRpc2FibGUgaXQu
+CgpUaGlzIHdpbGwgZW5zdXJlIHRoYXQgTGludXggZGlzdHJvcyB0aGF0IGJsaW5kbHkgY2FsbCBm
+c3RyaW0gd2lsbCBhdApsZWFzdCBhdm9pZCBjb25zdGFudCBzbG93ZG93bnMgd2hlbiBmcmVlIHNl
+Z21lbnRzIGFyZSBkZXBsZXRlZCB3aXRoCnRoZSBvY2Nhc2lvbmFsIChvbmNlIGEgd2Vlaykgc2xv
+d2Rvd24sIHdoaWNoICpwZW9wbGUgYXJlIGFscmVhZHkKbGl2aW5nIHdpdGggb24gZXh0NCouIEkn
+bGwgZXZlbiBnbyBmdXJ0aGVyIGFuZCBtZW50aW9uIHRoYXQgc2luY2UgZjJmcwpHQyBpcyBhIHJl
+Z3VsYXIgUi9XIHdvcmtsb2FkLCBpdCBkb2Vzbid0IGNhdXNlIGFuIGV4dHJlbWUgc2xvd2Rvd24K
+Y29tcGFyYWJsZSB0byBhIGxldmVsIG9mIGEgZnVsbCBmaWxlLXN5c3RlbSB0cmltIG9wZXJhdGlv
+bi4KCklmIHRoaXMgaXMgYWNjZXB0YWJsZSwgSeKAmWxsIGNvb2sgdXAgYSBwYXRjaC4KCkluIGFu
+IGlkZWFsIHdvcmxkLCBhbGwgTGludXggZGlzdHJvcyBzaG91bGQgaGF2ZSBhbiBleHBsaWNpdCBm
+MmZzIEdDCnRyaWdnZXIgbWVjaGFuaXNtIChha2luIHRvCmh0dHBzOi8vZ2l0aHViLmNvbS9rZGF2
+ZS9idHJmc21haW50ZW5hbmNlI2Rpc3Ryby1pbnRlZ3JhdGlvbiApLCBidXQKaXTigJlzIHByYWN0
+aWNhbGx5IHVucmVhbGlzdGljIHRvIGV4cGVjdCB0aGF0LCBnaXZlbiB0aGUgaW5zdGFsbGVyCmRv
+ZXNu4oCZdCBldmVuIHN1cHBvcnQgZjJmcyBmb3Igbm93LgoKPT09IEMuIEV4dGVuZGVkIG5vZGUg
+Yml0bWFwID09PQoKZjJmcyBieSBkZWZhdWx0IGhhdmUgYSB2ZXJ5IGxpbWl0ZWQgbnVtYmVyIG9m
+IGFsbG93ZWQgaW5vZGVzIGNvbXBhcmVkCnRvIG90aGVyIGZpbGUtc3lzdGVtcy4gSnVzdCAyIEFP
+U1Agc3luY3MgYXJlIGVub3VnaCB0byBleGhhdXN0IGYyZnMKYW5kIHJlc3VsdCBpbiAtRU5PU1BD
+LgoKSGVyZSBhcmUgc29tZSBvZiB0aGUgc3RhdHMgY29sbGVjdGVkIGZyb20gbWUgYW5kIG15IGNv
+bGxlYWd1ZSB0aGF0IHdlCnVzZSBkYWlseSBhcyBhIHJlZ3VsYXIgZGVza3RvcCB3aXRoIEdVSSwg
+d2ViLWJyb3dzaW5nIGFuZCBldmVyeXRoaW5nOgoxLiBMYXB0b3AKVXRpbGl6YXRpb246IDY4JSAo
+MTgyOTE0ODUwIHZhbGlkIGJsb2NrcywgNDYyIGRpc2NhcmQgYmxvY2tzKQogIC0gTm9kZTogMTAy
+MzQ5MDUgKElub2RlOiAxMDEwNjUyNiwgT3RoZXI6IDEyODM3OSkKICAtIERhdGE6IDE3MjY3OTk0
+NQogIC0gSW5saW5lX3hhdHRyIElub2RlOiAyMDA0ODI3CiAgLSBJbmxpbmVfZGF0YSBJbm9kZTog
+ODY3MjA0CiAgLSBJbmxpbmVfZGVudHJ5IElub2RlOiA1MTQ1NgoKMi4gRGVza3RvcCAjMQpVdGls
+aXphdGlvbjogNTUlICgxMzMzMTA0NjUgdmFsaWQgYmxvY2tzLCAwIGRpc2NhcmQgYmxvY2tzKQog
+IC0gTm9kZTogNjM4OTY2MCAoSW5vZGU6IDYyODk3NjUsIE90aGVyOiA5OTg5NSkKICAtIERhdGE6
+IDEyNjkyMDgwNQogIC0gSW5saW5lX3hhdHRyIElub2RlOiAyMjUzODM4CiAgLSBJbmxpbmVfZGF0
+YSBJbm9kZTogMTExOTEwOQogIC0gSW5saW5lX2RlbnRyeSBJbm9kZTogMTg3OTU4CgozLiBEZXNr
+dG9wICMyClV0aWxpemF0aW9uOiA4MyUgKDIwMjIyMjAwMyB2YWxpZCBibG9ja3MsIDEgZGlzY2Fy
+ZCBibG9ja3MpCiAgLSBOb2RlOiAyMTg4NzgzNiAoSW5vZGU6IDIxNzU3MTM5LCBPdGhlcjogMTMw
+Njk3KQogIC0gRGF0YTogMTgwMzM0MTY3CiAgLSBJbmxpbmVfeGF0dHIgSW5vZGU6IDM5MjkyCiAg
+LSBJbmxpbmVfZGF0YSBJbm9kZTogMzUyMTMKICAtIElubGluZV9kZW50cnkgSW5vZGU6IDExMjcK
+CjQuIENvbGxlYWd1ZQpVdGlsaXphdGlvbjogMjIlICgxMDg2NTI5MjkgdmFsaWQgYmxvY2tzLCAz
+NjI0MjA2MDUgZGlzY2FyZCBibG9ja3MpCiAgLSBOb2RlOiA1NjI5MzQ4IChJbm9kZTogNTU0Mjkw
+OSwgT3RoZXI6IDg2NDM5KQogIC0gRGF0YTogMTAzMDIzNTgxCiAgLSBJbmxpbmVfeGF0dHIgSW5v
+ZGU6IDY1NTc1MgogIC0gSW5saW5lX2RhdGEgSW5vZGU6IDI1OTkwMAogIC0gSW5saW5lX2RlbnRy
+eSBJbm9kZTogMTkzMDAwCgo1LiBBbmRyb2lkIHBob25lIChmb3IgcmVmZXJlbmNlKQpVdGlsaXph
+dGlvbjogNzglICgzNjUwNTcxMyB2YWxpZCBibG9ja3MsIDEwNzQgZGlzY2FyZCBibG9ja3MpCiAg
+LSBOb2RlOiA3MDQ2OTggKElub2RlOiA2ODMzMzcsIE90aGVyOiAyMTM2MSkKICAtIERhdGE6IDM1
+ODAxMDE1CiAgLSBJbmxpbmVfeGF0dHIgSW5vZGU6IDY4MzMzMwogIC0gSW5saW5lX2RhdGEgSW5v
+ZGU6IDIzNzQ3MAogIC0gSW5saW5lX2RlbnRyeSBJbm9kZTogMTEyMTc3CgpDaGFvIFl1IGFkZGVk
+IGEgZnVuY3Rpb25hbGl0eSB0byBleHBhbmQgdGhpcyB2aWEgdGhlIC1pIGZsYWcgcGFzc2VkIHRv
+Cm1rZnMuZjJmcyBiYWNrIGluIDIwMTggLQpodHRwczovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20v
+bGludXgva2VybmVsL2dpdC9qYWVnZXVrL2YyZnMtdG9vbHMuZ2l0L2NvbW1pdC8/aWQ9YmFhYTA3
+NmI0ZDU3NjA0MjkxM2NmZTM0MTY5NDQyZGZkYTY1MWNhNAoKSSBvY2Nhc2lvbmFsbHkgZmluZCBt
+eXNlbGYgaW4gYSB3ZWlyZCBwb3NpdGlvbiBvZiBoYXZpbmcgdG8gdGVsbApwZW9wbGUgIk9oIHlv
+dSBzaG91bGQgdXNlIHRoZSAtaSBvcHRpb24gZnJvbSBta2ZzLmYyZnMiIHdoZW4gdGhleQplbmNv
+dW50ZXIgdGhpcyBpc3N1ZSBvbmx5IGFmdGVyIHRoZXnigJl2ZSBtaWdyYXRlZCBtb3N0IG9mIHRo
+ZSBkYXRhIGFuZAphc2sgYmFjayAiV2h5IGlzbuKAmXQgdGhpcyBlbmFibGVkIGJ5IGRlZmF1bHQ/
+Ii4KCldoaWxlIHRoaXMgbWlnaHQgbm90IGJlIGFuIGlzc3VlIGZvciB0aGUgZm9yZXNlZWFibGUg
+ZnV0dXJlIGluCkFuZHJvaWQsIEnigJlkIGFyZ3VlIHRoYXQgdGhpcyBpcyBhIGZlYXR1cmUgdGhh
+dCBuZWVkcyB0byBiZSBlbmFibGVkIGJ5CmRlZmF1bHQgZm9yIGRlc2t0b3AgZW52aXJvbm1lbnRz
+IHdpdGggcHJlZmVyYWJseSBhIHJvYnVzdCB0ZXN0aW5nCmluZnJhc3RydWN0dXJlLiBHdWFyZGlu
+ZyB0aGlzIHdpdGggI2lmbmRlZiBfX0FORFJPSURfXyBkb2VzbuKAmXQgc2VlbSB0bwptYWtlIG11
+Y2ggc2Vuc2UgYXMgaXQgaW50cm9kdWNlcyBtb3JlIGNvbXBsaWNhdGlvbnMgdG8gaG93CmZ1enpp
+bmcvdGVzdGluZyBzaG91bGQgYmUgZG9uZS4KCknigJlsbCBhbHNvIGFkZCB0aGF0IGl04oCZcyBh
+IGNvbW1vbiBwcmFjdGljZSBmb3IgdXNlcnNwYWNlIG1rZnMgdG9vbHMgdG8KaW50cm9kdWNlIGJy
+ZWFraW5nIGRlZmF1bHQgY2hhbmdlcyB0byBvbGRlciBrZXJuZWxzICh3aXRoIG9wdGlvbnMgdG8K
+cHJvZHVjZSBhIGxlZ2FjeSBpbWFnZSwgb2YgY291cnNlKS4KClRoaXMgd2FzIGEgbGVuZ3RoeSBl
+bWFpbCwgYnV0IEkgaG9wZSBJIHdhcyBiZWluZyByZWFzb25hYmxlLgoKSmFlZ2V1ayBhbmQgQ2hh
+bywgbGV0IG1lIGtub3cgd2hhdCB5b3UgdGhpbmsuCkFuZCBhcyBhbHdheXMsIHRoYW5rcyBmb3Ig
+eW91ciBoYXJkIHdvcmsgOikKClRoYW5rcywKcmVnYXJkcwoKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0
+CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291
+cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
