@@ -2,97 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98D216D70BB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 01:32:41 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 925656D70BE
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 01:35:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pjq8k-0002fK-Tg;
-	Tue, 04 Apr 2023 23:32:38 +0000
+	id 1pjqBq-00071k-U4;
+	Tue, 04 Apr 2023 23:35:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1pjq8j-0002fE-5H
+ (envelope-from <jaegeuk@kernel.org>) id 1pjqBp-00071e-KV
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 23:32:36 +0000
+ Tue, 04 Apr 2023 23:35:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MmoxdKIc4151pVAmtBeT09xdteWmODj4r9H1FuRwtxw=; b=RtPWJA6dhEmZDSRX5MrCJdS+n4
- 0s6k32Ezx43m2qk6+G7uDNQ4CaSJDwXeQhSp6PYdrKQYySZdNcc2XeO/aOL7f+1TzzzTZIX0VxX4T
- UOQsOjoYbsfc87Q7IfqOw4R076fc1AlLpAlTV7+hDI0VKgZCANtK2BOZzGDY/bcW8P5E=;
+ bh=3p7UtIEuxIn9l8nSuDqPRFklKlYdBRWKGV3BDK9Ulxg=; b=HGGmLzkJZmUA9oIMKJIdXsOG8l
+ 02bl57Z6RHSJXcM2g/ZTr5Z99EcR5ToLorEyqtMzmaKzyMpz6FN73hjdPy35roJXZIh88fUtdBKYB
+ ZggfZhxV4O9GbJMN17wxKr5KDSIVLmBsx5n13qjv7MJovW94adMiENR3psPKYd8WjDJA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=MmoxdKIc4151pVAmtBeT09xdteWmODj4r9H1FuRwtxw=; b=PxP5jxa/62N0GDdPqI9lUrBhxc
- 25HmquUbCGqj2jISgKYSFpJy7VlLbCUezG3pqyvAFxH/sD6M0C/RcmKGbt7A6YXX5MONP01FTywMr
- rCVC54ntRBnMrt2qSaUomdRheNGrCm0XLs/lMmS+Du/3q4ZB4w/5XZEt+Pi6FoNdxFyo=;
+ bh=3p7UtIEuxIn9l8nSuDqPRFklKlYdBRWKGV3BDK9Ulxg=; b=C61Cz3/houMewkZxcnZmrvf6HN
+ V2Res05AF+u49Tq2+wtExXEAmNbWp0jnGRPUR9kR0pJ1FmQhF9z5nNWSAKHtruG0MNcTddqHMFoiS
+ xHKwUaKzoN+96cyf3Xi7W4/rkfTVka1HCJDgYG+UqznxX0fqfzVRvPOp5yrWoUcAuKsM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pjq8h-00FSnP-0p for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 23:32:35 +0000
+ id 1pjqBn-00FT0Q-Re for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 04 Apr 2023 23:35:48 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id D5EA56343B;
- Tue,  4 Apr 2023 23:32:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BF8AEC433EF;
- Tue,  4 Apr 2023 23:32:25 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7368F634EA;
+ Tue,  4 Apr 2023 23:35:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9B72C433D2;
+ Tue,  4 Apr 2023 23:35:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1680651146;
- bh=mzC9yxS3pU0gQe8btlzdUEVy3UG1HFMbmPEVa9F5ySY=;
+ s=k20201202; t=1680651341;
+ bh=TMDDfH2ucEOOrR5gS9kx4Il3nxEXPkiRBPzae0W0Dxk=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=IQ5deiEXGx1gFAZISmhBLeCx8NzxQoUgL9nmQTkP3esfYaFFQQ3b7ESc/W//rQnfl
- 3sC6jG70uboYZiTYrN8C1P21fsc+gnsV48CY7KPCfaJ/OQnp8UfTYsmdcdkTEW4buW
- hVn+2CEI8t2/lO/2BdLWwWucOOyJ253E2xRfYlRB0Mh95jIzG88ZgJaCkbFY/S4ke/
- DQzAT3I9w8UZewW6kTUEN8IG68kmycB6WIeZaSCrRu4RRTDEL/ofiUNKTs5kJkkHKg
- x1+XwPQ6O+zGp2wSQJhkj/co7Ojg7M32UskAXMdTeQ7xaEOcp4FpffpkAMVswDrSRa
- iX8vXvvL6hmJg==
-Date: Tue, 4 Apr 2023 16:32:24 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Andrey Albershteyn <aalbersh@redhat.com>
-Message-ID: <20230404233224.GE1893@sol.localdomain>
-References: <20230404145319.2057051-1-aalbersh@redhat.com>
- <20230404145319.2057051-22-aalbersh@redhat.com>
+ b=q1AQdqpPoJMAC763oWMS1MnRwjTm5Hoqq1Izf/K56J6CT9e6j3W+r/n/n7vxHc+UX
+ EgfwKpMN4Z0NraxWp+uEDwD/QBkEQnSK81AcZI4h2PD/mcKHBBIDA3oEB1Pkp8DSRB
+ kUdjS4AkvnF3qI1wJzDY/RFSpUYZ1x4MEV8gkhmgL3CfuDPALBs2mty4aGj+ZyOL9s
+ cS1XCdb/K+W02jGPnOnSF6bC+MO/Imc/PcA19KPbit19QD+l19VCi3djp8UXEP/Lye
+ OsD2rlC+XbZYPJLBvil1ssfI0wDm70r4aoCUOJSHzm8zDW1KSf4IoTBJBP5icUP/Pe
+ 9/AxLnP5iLF4A==
+Date: Tue, 4 Apr 2023 16:35:40 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Juhyung Park <qkrwngud825@gmail.com>
+Message-ID: <ZCy0TBDkzh+VRrnU@google.com>
+References: <CAD14+f3z=kS9E+NTKH7t1J2xL1PpLOVMNx=CabD_t2K6U=T9uQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230404145319.2057051-22-aalbersh@redhat.com>
-X-Spam-Score: -5.9 (-----)
+In-Reply-To: <CAD14+f3z=kS9E+NTKH7t1J2xL1PpLOVMNx=CabD_t2K6U=T9uQ@mail.gmail.com>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Andrey, On Tue, Apr 04, 2023 at 04:53:17PM +0200, Andrey
- Albershteyn wrote: > In case of different Merkle tree block size fs-verity
- expects > ->read_merkle_tree_page() to return Merkle tree page filled with
- > [...] Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  Hi Juhyung, On 04/04, Juhyung Park wrote: > Hi everyone, >
+ > I want to start a discussion on using f2fs for regular
+ desktops/workstations.
+ > > There are growing number of interests in using f2fs as the general >
+ [...] Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pjq8h-00FSnP-0p
-Subject: Re: [f2fs-dev] [PATCH v2 21/23] xfs: handle merkle tree block size
- != fs blocksize != PAGE_SIZE
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pjqBn-00FT0Q-Re
+Subject: Re: [f2fs-dev] [DISCUSSION] f2fs for desktop
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,132 +103,151 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: fsverity@lists.linux.dev, linux-xfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, agruenba@redhat.com, djwong@kernel.org,
- damien.lemoal@opensource.wdc.com, linux-f2fs-devel@lists.sourceforge.net,
- hch@infradead.org, cluster-devel@redhat.com, dchinner@redhat.com,
- rpeterso@redhat.com, xiang@kernel.org, jth@kernel.org,
- linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Alexander Koskovich <akoskovich@pm.me>,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Andrey,
-
-On Tue, Apr 04, 2023 at 04:53:17PM +0200, Andrey Albershteyn wrote:
-> In case of different Merkle tree block size fs-verity expects
-> ->read_merkle_tree_page() to return Merkle tree page filled with
-> Merkle tree blocks. The XFS stores each merkle tree block under
-> extended attribute. Those attributes are addressed by block offset
-> into Merkle tree.
-> 
-> This patch make ->read_merkle_tree_page() to fetch multiple merkle
-> tree blocks based on size ratio. Also the reference to each xfs_buf
-> is passed with page->private to ->drop_page().
-> 
-> Signed-off-by: Andrey Albershteyn <aalbersh@redhat.com>
-> ---
->  fs/xfs/xfs_verity.c | 74 +++++++++++++++++++++++++++++++++++----------
->  fs/xfs/xfs_verity.h |  8 +++++
->  2 files changed, 66 insertions(+), 16 deletions(-)
-> 
-> diff --git a/fs/xfs/xfs_verity.c b/fs/xfs/xfs_verity.c
-> index a9874ff4efcd..ef0aff216f06 100644
-> --- a/fs/xfs/xfs_verity.c
-> +++ b/fs/xfs/xfs_verity.c
-> @@ -134,6 +134,10 @@ xfs_read_merkle_tree_page(
->  	struct page		*page = NULL;
->  	__be64			name = cpu_to_be64(index << PAGE_SHIFT);
->  	uint32_t		bs = 1 << log_blocksize;
-> +	int			blocks_per_page =
-> +		(1 << (PAGE_SHIFT - log_blocksize));
-> +	int			n = 0;
-> +	int			offset = 0;
->  	struct xfs_da_args	args = {
->  		.dp		= ip,
->  		.attr_filter	= XFS_ATTR_VERITY,
-> @@ -143,26 +147,59 @@ xfs_read_merkle_tree_page(
->  		.valuelen	= bs,
->  	};
->  	int			error = 0;
-> +	bool			is_checked = true;
-> +	struct xfs_verity_buf_list	*buf_list;
->  
->  	page = alloc_page(GFP_KERNEL);
->  	if (!page)
->  		return ERR_PTR(-ENOMEM);
->  
-> -	error = xfs_attr_get(&args);
-> -	if (error) {
-> -		kmem_free(args.value);
-> -		xfs_buf_rele(args.bp);
-> +	buf_list = kzalloc(sizeof(struct xfs_verity_buf_list), GFP_KERNEL);
-> +	if (!buf_list) {
->  		put_page(page);
-> -		return ERR_PTR(-EFAULT);
-> +		return ERR_PTR(-ENOMEM);
->  	}
->  
-> -	if (args.bp->b_flags & XBF_VERITY_CHECKED)
-> +	/*
-> +	 * Fill the page with Merkle tree blocks. The blcoks_per_page is higher
-> +	 * than 1 when fs block size != PAGE_SIZE or Merkle tree block size !=
-> +	 * PAGE SIZE
-> +	 */
-> +	for (n = 0; n < blocks_per_page; n++) {
-> +		offset = bs * n;
-> +		name = cpu_to_be64(((index << PAGE_SHIFT) + offset));
-> +		args.name = (const uint8_t *)&name;
-> +
-> +		error = xfs_attr_get(&args);
-> +		if (error) {
-> +			kmem_free(args.value);
-> +			/*
-> +			 * No more Merkle tree blocks (e.g. this was the last
-> +			 * block of the tree)
-> +			 */
-> +			if (error == -ENOATTR)
-> +				break;
-> +			xfs_buf_rele(args.bp);
-> +			put_page(page);
-> +			kmem_free(buf_list);
-> +			return ERR_PTR(-EFAULT);
-> +		}
-> +
-> +		buf_list->bufs[buf_list->buf_count++] = args.bp;
-> +
-> +		/* One of the buffers was dropped */
-> +		if (!(args.bp->b_flags & XBF_VERITY_CHECKED))
-> +			is_checked = false;
-> +
-> +		memcpy(page_address(page) + offset, args.value, args.valuelen);
-> +		kmem_free(args.value);
-> +		args.value = NULL;
-> +	}
-
-I was really hoping for a solution where the cached data can be used directly,
-instead allocating a temporary page and copying the cached data into it every
-time the cache is accessed.  The problem with what you have now is that every
-time a single 32-byte hash is accessed, a full page (potentially 64KB!) will be
-allocated and filled.  That's not very efficient.  The need to allocate the
-temporary page can also cause ENOMEM (which will get reported as EIO).
-
-Did you consider alternatives that would work more efficiently?  I think it
-would be worth designing something that works properly with how XFS is planned
-to cache the Merkle tree, instead of designing a workaround.
-->read_merkle_tree_page was not really designed for what you are doing here.
-
-How about replacing ->read_merkle_tree_page with a function that takes in a
-Merkle tree block index (not a page index!) and hands back a (page, offset) pair
-that identifies where the Merkle tree block's data is located?  Or (folio,
-offset), I suppose.
-
-With that, would it be possible to directly return the XFS cache?
-
-- Eric
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SGkgSnVoeXVuZywKCk9uIDA0LzA0LCBKdWh5dW5nIFBhcmsgd3JvdGU6Cj4gSGkgZXZlcnlvbmUs
+Cj4gCj4gSSB3YW50IHRvIHN0YXJ0IGEgZGlzY3Vzc2lvbiBvbiB1c2luZyBmMmZzIGZvciByZWd1
+bGFyIGRlc2t0b3BzL3dvcmtzdGF0aW9ucy4KPiAKPiBUaGVyZSBhcmUgZ3Jvd2luZyBudW1iZXIg
+b2YgaW50ZXJlc3RzIGluIHVzaW5nIGYyZnMgYXMgdGhlIGdlbmVyYWwKPiByb290IGZpbGUtc3lz
+dGVtOgo+IDIwMTg6IGh0dHBzOi8vd3d3LnBob3Jvbml4LmNvbS9uZXdzL0dSVUItTm93LVN1cHBv
+cnRzLUYyRlMKPiAyMDIwOiBodHRwczovL3d3dy5waG9yb25peC5jb20vbmV3cy9DbGVhci1MaW51
+eC1GMkZTLVJvb3QtT3B0aW9uCj4gMjAyMzogaHR0cHM6Ly9jb2RlLmxhdW5jaHBhZC5uZXQvfm5l
+eHVzcHJpc20vY3VydGluLytnaXQvY3VydGluLyttZXJnZS80Mzk4ODAKPiAyMDIzOiBodHRwczov
+L2NvZGUubGF1bmNocGFkLm5ldC9+bmV4dXNwcmlzbS9ncnViLytnaXQvdWJ1bnR1LyttZXJnZS80
+NDAxOTMKClRoaXMgaXMgcXVpdGUgcHJvbWlzaW5nLiA6KQoKPiAKPiBJJ3ZlIGJlZW4gcGVyc29u
+YWxseSBydW5uaW5nIGYyZnMgb24gYWxsIG9mIG15IHg4NiBMaW51eCBib3hlcyBzaW5jZQo+IDIw
+MTUsIGFuZCBJIGhhdmUgc2V2ZXJhbCBjb25jZXJucyB0aGF0IEkgdGhpbmsgd2UgbmVlZCB0byBj
+b2xsZWN0aXZlbHkKPiBhZGRyZXNzIGZvciByZWd1bGFyIG5vbi1BbmRyb2lkIG5vcm1pZXMgdG8g
+dXNlIGYyZnM6Cj4gCj4gQS4gQm9vdGxvYWRlciBhbmQgaW5zdGFsbGVyIHN1cHBvcnQKPiBCLiBI
+b3N0LXNpZGUgR0MKPiBDLiBFeHRlbmRlZCBub2RlIGJpdG1hcAo+IAo+IEknbGwgZ28gdGhyb3Vn
+aCBlYWNoIG9uZS4KPiAKPiA9PT0gQS4gQm9vdGxvYWRlciBhbmQgaW5zdGFsbGVyIHN1cHBvcnQg
+PT09Cj4gCj4gSXQgc2VlbXMgdGhhdCBib3RoIEdSVUIgYW5kIHN5c3RlbWQtYm9vdCBzdXBwb3J0
+cyBmMmZzIHdpdGhvdXQgdGhlCj4gbmVlZCBmb3IgYSBzZXBhcmF0ZSBleHQ0LWZvcm1hdHRlZCAv
+Ym9vdCBwYXJ0aXRpb24uCj4gU29tZSBkaXN0cm9zIGFyZSBzZWVtaW5nbHkgZGlzYWJsaW5nIGYy
+ZnMgbW9kdWxlIGZvciBHUlVCIHRob3VnaCBmb3IKPiBzZWN1cml0eSByZWFzb25zOgo+IGh0dHBz
+Oi8vYnVncy5sYXVuY2hwYWQubmV0L3VidW50dS8rc291cmNlL2dydWIyLytidWcvMTg2ODY2NAo+
+IAo+IEl0J3MgdWx0aW1hdGVseSB1cCB0byB0aGUgZGlzdHJvIGZvbGtzIHRvIGVuYWJsZSB0aGlz
+LCBhbmQgc3RpbGwgaW4KPiB0aGUgd29yc3QtY2FzZSBzY2VuYXJpbywgdGhleSBjYW4gc3BlY2lm
+eSBhIHNlcGFyYXRlIC9ib290IHBhcnRpdGlvbgo+IGFuZCBmb3JtYXQgaXQgdG8gZXh0NCB1cG9u
+IGluc3RhbGxhdGlvbi4KPiAKPiBUaGUgaW5zdGFsbGVyIGl0c2VsZiB0byBzaG93IGYyZnMgYW5k
+IGNhbGwgbWtmcy5mMmZzIGlzIGJlaW5nIHdvcmtlZAo+IG9uIGN1cnJlbnRseSBvbiBVYnVudHUu
+IFNlZSB0aGUgMjAyMyBsaW5rcyBhYm92ZS4KPiAKPiBOb3RoaW5nIGYyZnMgbWFpbmxpbmUgZGV2
+ZWxvcGVycyBzaG91bGQgZG8gaGVyZSwgaW1vLgo+IAo+ID09PSBCLiBIb3N0LXNpZGUgR0MgPT09
+Cj4gCj4gZjJmcyByZWxpZXZlcyBtb3N0IG9mIHRoZSBkZXZpY2Utc2lkZSBHQyBidXQgaW50cm9k
+dWNlcyBhIG5ldwo+IGhvc3Qtc2lkZSBHQy4gVGhpcyBpcyBleHRyZW1lbHkgY29uZnVzaW5nIGZv
+ciBwZW9wbGUgd2hvIGhhdmUgbm8KPiBiYWNrZ3JvdW5kIGluIFNTRHMgYW5kIGZsYXNoIHN0b3Jh
+Z2UgdG8gdW5kZXJzdGFuZCwgbGV0IGFsb25lCj4gZGlzY2FyZC90cmltL2VyYXNlIGNvbXBsaWNh
+dGlvbnMuCj4gCj4gSW4gbW9zdCBjb25zdW1lci1ncmFkZSBibGFja2JveCBTU0RzLCBkZXZpY2Ut
+c2lkZSBHQ3MgYXJlIGhhbmRsZWQKPiBhdXRvbWF0aWNhbGx5IGZvciB2YXJpb3VzIHdvcmtsb2Fk
+cy4gZjJmcywgaG93ZXZlciwgbGVhdmVzIHRoYXQKPiByZXNwb25zaWJpbGl0eSB0byB0aGUgdXNl
+cnNwYWNlIHdpdGggY29uc2VydmF0aXZlIHR1bmluZyBvbiB0aGUKPiBrZXJuZWwtc2lkZSBieSBk
+ZWZhdWx0LiBBbmRyb2lkIGhhbmRsZXMgdGhpcyBieSBpbml0LnJjIHR1bmluZ3MgYW5kIGEKPiBz
+ZXBhcmF0ZSBjb2RlIHJ1bm5pbmcgaW4gdm9sZCB0byB0cmlnZ2VyIGdjX3VyZ2VudC4KPiAKPiBG
+b3IgcmVndWxhciBMaW51eCBkZXNrdG9wIGRpc3Ryb3MsIGYyZnMganVzdCBydW5zIG9uIHRoZSBk
+ZWZhdWx0Cj4gY29uZmlndXJhdGlvbiBzZXQgb24gdGhlIGtlcm5lbCBhbmQgdW5sZXNzIGl04oCZ
+cyBydW5uaW5nIDI0Lzcgd2l0aAo+IHBsZW50aWZ1bCBpZGxlIHRpbWUsIGl0IHF1aWNrbHkgcnVu
+cyBvdXQgb2YgZnJlZSBzZWdtZW50cyBhbmQgc3RhcnRzCj4gdHJpZ2dlcmluZyBmb3JlZ3JvdW5k
+IEdDLiBUaGlzIGlzIGdpdmluZyBwZW9wbGUgdGhlIHdyb25nIGltcHJlc3Npb24KPiB0aGF0IGYy
+ZnMgc2xvd3MgZG93biBmYXIgZHJhc3RpY2FsbHkgdGhhbiBvdGhlciBmaWxlLXN5c3RlbXMgd2hl
+bgo+IHRoYXTigJlzIHF1aXRlIHRoZSBjb250cmFyeSAoaS5lLiwgbGVzcyBmcmFnbWVudGF0aW9u
+IG92ZXJ0aW1lKS4KPiAKPiBUaGlzIGlzIGFsbW9zdCB0aGUgZXF1aXZhbGVudCBvZiByZS1saXZp
+bmcgdGhlIG5pZ2h0bWFyZSBvZiB0cmltLiBPbgo+IFNTRHMgd2l0aCB2ZXJ5IHNtYWxsIHRvIG5v
+IG92ZXItcHJvdmlzaW9uZWQgc3BhY2UsIHJ1bm5pbmcgYQo+IGZpbGUtc3lzdGVtIHdpdGggbm8g
+ZGlzY2FyZCB3aGF0LXNvLWV2ZXIgKHNhZGx5IHN0aWxsIGEgY29tbW9uIGNhc2UKPiB3aGVuIGFu
+IGV4dGVybmFsIFNTRCBpcyB1c2VkIHdpdGggbm8gVUFTKSB3aWxsIGFsc28gZHJhc3RpY2FsbHkg
+c2xvdwo+IHRoZSBwZXJmb3JtYW5jZSBkb3duLiBPbiBmaWxlLXN5c3RlbXMgd2l0aCBubyBhc3lu
+Y2hyb25vdXMgZGlzY2FyZCwKPiBtb3VudGluZyBhIGZpbGUtc3lzdGVtIHdpdGggdGhlIGRpc2Nh
+cmQgb3B0aW9uIGFkZHMgYSBub24tbmVnbGlnaWJsZQo+IG92ZXJoZWFkIG9uIGV2ZXJ5IHJlbW92
+ZS9kZWxldGUgb3BlcmF0aW9ucywgc28gbW9zdCBkaXN0cm9zIG5vdwo+ICh0aGFua2Z1bGx5KSB1
+c2UgYSB0aW1lciBqb2IgcmVnaXN0ZXJlZCB0byBzeXN0ZW1kIHRvIHRyaWdnZXIgZnN0cmltOgo+
+IGh0dHBzOi8vZ2l0aHViLmNvbS91dGlsLWxpbnV4L3V0aWwtbGludXgvY29tbWl0cy9tYXN0ZXIv
+c3lzLXV0aWxzL2ZzdHJpbS50aW1lcgo+IAo+IFRoaXMgaXMgc3RpbGwgZmFyIGZyb20gaWRlYWwu
+IFRoZSBkZWZhdWx0IGZpbGUtc3lzdGVtLCBleHQ0LCBzbG93cwo+IGRvd24gZHJhc3RpY2FsbHkg
+YWxtb3N0IHRvIGEgaGFsdCB3aGVuIGZzdHJpbSAtYSBpcyBjYWxsZWQsIGVzcGVjaWFsbHkKPiBv
+biBTQVRBLiBGb3Igc29tZSByZWFzb24gdGhhdCBpcyBzdGlsbCBhIG15c3RlcnkgZm9yIG1lLCBw
+ZW9wbGUgc2VlbQo+IHRvIGJlIGhhcHB5IHdpdGggaXQuIE5vIG9uZSBib3RoZXJlZCB0byBpbXBy
+b3ZlIGl0IGZvciB5ZWFycwo+IMKvXF8o44OEKV8vwq8uCj4gCj4gU28gaGVyZeKAmXMgbXkgcHJv
+cG9zYWw6Cj4gQXMgTGludXggZGlzdHJvcyBkb27igJl0IGhhdmUgYSBnb29kIG1lY2hhbmlzbSBm
+b3IgaGludGluZyB3aGVuIHRvCj4gdHJpZ2dlciBHQywgaW50cm9kdWNlIGEgbmV3IEtjb25maWcs
+IENPTkZJR19GMkZTX0dDX1VQT05fRlNUUklNIGFuZAo+IGVuYWJsZSBpdCBieSBkZWZhdWx0Lgo+
+IFRoaXMgY29uZmlnIHdpbGwgaG9vayB1cCBpb2N0bChGSVRSSU0pLCB3aGljaCBpcyBjdXJyZW50
+bHkgaWdub3JlZCBvbgo+IGYyZnMgLSBodHRwczovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGlu
+dXgva2VybmVsL2dpdC9qYWVnZXVrL2YyZnMuZ2l0L2NvbW1pdC8/aD1tYXN0ZXImaWQ9ZTU1NWRh
+OWYzMTIxMGQyYjYyODA1Y2Q3ZmFmMjkyMjhhZjdjM2NmYgo+ICwgdG8gcGVyZm9ybSBkaXNjYXJk
+IGFuZCBHQyBvbiBhbGwgaW52YWxpZCBzZWdtZW50cy4KPiBVc2Vyc3BhY2UgY29uZmlndXJhdGlv
+biB3aXRoIGVub3VnaCBmMmZzL0dDIGtub3dsZWRnZSBzdWNoIGFzIEFuZHJvaWQKPiBzaG91bGQg
+ZGlzYWJsZSBpdC4KCkhvdyBhYm91dCBhZGRpbmcgYW4gb3B0aW9uIGxpa2UgIm1lbW9yeT1oaWdo
+IiB0byB0dW5lIGJhY2tncm91bmQgR0MgcGFyYW1ldGVycwpzZWFtbGVzc2x5PwoKPiAKPiBUaGlz
+IHdpbGwgZW5zdXJlIHRoYXQgTGludXggZGlzdHJvcyB0aGF0IGJsaW5kbHkgY2FsbCBmc3RyaW0g
+d2lsbCBhdAo+IGxlYXN0IGF2b2lkIGNvbnN0YW50IHNsb3dkb3ducyB3aGVuIGZyZWUgc2VnbWVu
+dHMgYXJlIGRlcGxldGVkIHdpdGgKPiB0aGUgb2NjYXNpb25hbCAob25jZSBhIHdlZWspIHNsb3dk
+b3duLCB3aGljaCAqcGVvcGxlIGFyZSBhbHJlYWR5Cj4gbGl2aW5nIHdpdGggb24gZXh0NCouIEkn
+bGwgZXZlbiBnbyBmdXJ0aGVyIGFuZCBtZW50aW9uIHRoYXQgc2luY2UgZjJmcwo+IEdDIGlzIGEg
+cmVndWxhciBSL1cgd29ya2xvYWQsIGl0IGRvZXNuJ3QgY2F1c2UgYW4gZXh0cmVtZSBzbG93ZG93
+bgo+IGNvbXBhcmFibGUgdG8gYSBsZXZlbCBvZiBhIGZ1bGwgZmlsZS1zeXN0ZW0gdHJpbSBvcGVy
+YXRpb24uCj4gCj4gSWYgdGhpcyBpcyBhY2NlcHRhYmxlLCBJ4oCZbGwgY29vayB1cCBhIHBhdGNo
+Lgo+IAo+IEluIGFuIGlkZWFsIHdvcmxkLCBhbGwgTGludXggZGlzdHJvcyBzaG91bGQgaGF2ZSBh
+biBleHBsaWNpdCBmMmZzIEdDCj4gdHJpZ2dlciBtZWNoYW5pc20gKGFraW4gdG8KPiBodHRwczov
+L2dpdGh1Yi5jb20va2RhdmUvYnRyZnNtYWludGVuYW5jZSNkaXN0cm8taW50ZWdyYXRpb24gKSwg
+YnV0Cj4gaXTigJlzIHByYWN0aWNhbGx5IHVucmVhbGlzdGljIHRvIGV4cGVjdCB0aGF0LCBnaXZl
+biB0aGUgaW5zdGFsbGVyCj4gZG9lc27igJl0IGV2ZW4gc3VwcG9ydCBmMmZzIGZvciBub3cuCj4g
+Cj4gPT09IEMuIEV4dGVuZGVkIG5vZGUgYml0bWFwID09PQo+IAo+IGYyZnMgYnkgZGVmYXVsdCBo
+YXZlIGEgdmVyeSBsaW1pdGVkIG51bWJlciBvZiBhbGxvd2VkIGlub2RlcyBjb21wYXJlZAo+IHRv
+IG90aGVyIGZpbGUtc3lzdGVtcy4gSnVzdCAyIEFPU1Agc3luY3MgYXJlIGVub3VnaCB0byBleGhh
+dXN0IGYyZnMKPiBhbmQgcmVzdWx0IGluIC1FTk9TUEMuCj4gCj4gSGVyZSBhcmUgc29tZSBvZiB0
+aGUgc3RhdHMgY29sbGVjdGVkIGZyb20gbWUgYW5kIG15IGNvbGxlYWd1ZSB0aGF0IHdlCj4gdXNl
+IGRhaWx5IGFzIGEgcmVndWxhciBkZXNrdG9wIHdpdGggR1VJLCB3ZWItYnJvd3NpbmcgYW5kIGV2
+ZXJ5dGhpbmc6Cj4gMS4gTGFwdG9wCj4gVXRpbGl6YXRpb246IDY4JSAoMTgyOTE0ODUwIHZhbGlk
+IGJsb2NrcywgNDYyIGRpc2NhcmQgYmxvY2tzKQo+ICAgLSBOb2RlOiAxMDIzNDkwNSAoSW5vZGU6
+IDEwMTA2NTI2LCBPdGhlcjogMTI4Mzc5KQo+ICAgLSBEYXRhOiAxNzI2Nzk5NDUKPiAgIC0gSW5s
+aW5lX3hhdHRyIElub2RlOiAyMDA0ODI3Cj4gICAtIElubGluZV9kYXRhIElub2RlOiA4NjcyMDQK
+PiAgIC0gSW5saW5lX2RlbnRyeSBJbm9kZTogNTE0NTYKPiAKPiAyLiBEZXNrdG9wICMxCj4gVXRp
+bGl6YXRpb246IDU1JSAoMTMzMzEwNDY1IHZhbGlkIGJsb2NrcywgMCBkaXNjYXJkIGJsb2NrcykK
+PiAgIC0gTm9kZTogNjM4OTY2MCAoSW5vZGU6IDYyODk3NjUsIE90aGVyOiA5OTg5NSkKPiAgIC0g
+RGF0YTogMTI2OTIwODA1Cj4gICAtIElubGluZV94YXR0ciBJbm9kZTogMjI1MzgzOAo+ICAgLSBJ
+bmxpbmVfZGF0YSBJbm9kZTogMTExOTEwOQo+ICAgLSBJbmxpbmVfZGVudHJ5IElub2RlOiAxODc5
+NTgKPiAKPiAzLiBEZXNrdG9wICMyCj4gVXRpbGl6YXRpb246IDgzJSAoMjAyMjIyMDAzIHZhbGlk
+IGJsb2NrcywgMSBkaXNjYXJkIGJsb2NrcykKPiAgIC0gTm9kZTogMjE4ODc4MzYgKElub2RlOiAy
+MTc1NzEzOSwgT3RoZXI6IDEzMDY5NykKPiAgIC0gRGF0YTogMTgwMzM0MTY3Cj4gICAtIElubGlu
+ZV94YXR0ciBJbm9kZTogMzkyOTIKPiAgIC0gSW5saW5lX2RhdGEgSW5vZGU6IDM1MjEzCj4gICAt
+IElubGluZV9kZW50cnkgSW5vZGU6IDExMjcKPiAKPiA0LiBDb2xsZWFndWUKPiBVdGlsaXphdGlv
+bjogMjIlICgxMDg2NTI5MjkgdmFsaWQgYmxvY2tzLCAzNjI0MjA2MDUgZGlzY2FyZCBibG9ja3Mp
+Cj4gICAtIE5vZGU6IDU2MjkzNDggKElub2RlOiA1NTQyOTA5LCBPdGhlcjogODY0MzkpCj4gICAt
+IERhdGE6IDEwMzAyMzU4MQo+ICAgLSBJbmxpbmVfeGF0dHIgSW5vZGU6IDY1NTc1Mgo+ICAgLSBJ
+bmxpbmVfZGF0YSBJbm9kZTogMjU5OTAwCj4gICAtIElubGluZV9kZW50cnkgSW5vZGU6IDE5MzAw
+MAo+IAo+IDUuIEFuZHJvaWQgcGhvbmUgKGZvciByZWZlcmVuY2UpCj4gVXRpbGl6YXRpb246IDc4
+JSAoMzY1MDU3MTMgdmFsaWQgYmxvY2tzLCAxMDc0IGRpc2NhcmQgYmxvY2tzKQo+ICAgLSBOb2Rl
+OiA3MDQ2OTggKElub2RlOiA2ODMzMzcsIE90aGVyOiAyMTM2MSkKPiAgIC0gRGF0YTogMzU4MDEw
+MTUKPiAgIC0gSW5saW5lX3hhdHRyIElub2RlOiA2ODMzMzMKPiAgIC0gSW5saW5lX2RhdGEgSW5v
+ZGU6IDIzNzQ3MAo+ICAgLSBJbmxpbmVfZGVudHJ5IElub2RlOiAxMTIxNzcKPiAKPiBDaGFvIFl1
+IGFkZGVkIGEgZnVuY3Rpb25hbGl0eSB0byBleHBhbmQgdGhpcyB2aWEgdGhlIC1pIGZsYWcgcGFz
+c2VkIHRvCj4gbWtmcy5mMmZzIGJhY2sgaW4gMjAxOCAtCj4gaHR0cHM6Ly9naXQua2VybmVsLm9y
+Zy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvamFlZ2V1ay9mMmZzLXRvb2xzLmdpdC9jb21taXQv
+P2lkPWJhYWEwNzZiNGQ1NzYwNDI5MTNjZmUzNDE2OTQ0MmRmZGE2NTFjYTQKPiAKPiBJIG9jY2Fz
+aW9uYWxseSBmaW5kIG15c2VsZiBpbiBhIHdlaXJkIHBvc2l0aW9uIG9mIGhhdmluZyB0byB0ZWxs
+Cj4gcGVvcGxlICJPaCB5b3Ugc2hvdWxkIHVzZSB0aGUgLWkgb3B0aW9uIGZyb20gbWtmcy5mMmZz
+IiB3aGVuIHRoZXkKPiBlbmNvdW50ZXIgdGhpcyBpc3N1ZSBvbmx5IGFmdGVyIHRoZXnigJl2ZSBt
+aWdyYXRlZCBtb3N0IG9mIHRoZSBkYXRhIGFuZAo+IGFzayBiYWNrICJXaHkgaXNu4oCZdCB0aGlz
+IGVuYWJsZWQgYnkgZGVmYXVsdD8iLgo+IAo+IFdoaWxlIHRoaXMgbWlnaHQgbm90IGJlIGFuIGlz
+c3VlIGZvciB0aGUgZm9yZXNlZWFibGUgZnV0dXJlIGluCj4gQW5kcm9pZCwgSeKAmWQgYXJndWUg
+dGhhdCB0aGlzIGlzIGEgZmVhdHVyZSB0aGF0IG5lZWRzIHRvIGJlIGVuYWJsZWQgYnkKPiBkZWZh
+dWx0IGZvciBkZXNrdG9wIGVudmlyb25tZW50cyB3aXRoIHByZWZlcmFibHkgYSByb2J1c3QgdGVz
+dGluZwo+IGluZnJhc3RydWN0dXJlLiBHdWFyZGluZyB0aGlzIHdpdGggI2lmbmRlZiBfX0FORFJP
+SURfXyBkb2VzbuKAmXQgc2VlbSB0bwo+IG1ha2UgbXVjaCBzZW5zZSBhcyBpdCBpbnRyb2R1Y2Vz
+IG1vcmUgY29tcGxpY2F0aW9ucyB0byBob3cKPiBmdXp6aW5nL3Rlc3Rpbmcgc2hvdWxkIGJlIGRv
+bmUuCj4gCj4gSeKAmWxsIGFsc28gYWRkIHRoYXQgaXTigJlzIGEgY29tbW9uIHByYWN0aWNlIGZv
+ciB1c2Vyc3BhY2UgbWtmcyB0b29scyB0bwo+IGludHJvZHVjZSBicmVha2luZyBkZWZhdWx0IGNo
+YW5nZXMgdG8gb2xkZXIga2VybmVscyAod2l0aCBvcHRpb25zIHRvCj4gcHJvZHVjZSBhIGxlZ2Fj
+eSBpbWFnZSwgb2YgY291cnNlKS4KCkRvIHlvdSBoYXZlIHNvbWUgbWVhc3VyZW1lbnRzIHJlZ2Fy
+ZGluZyB0byB0aGUgYWRkaXRpb25hbCBzcGFjZSB0aGF0IGxhcmdlIE5BVApvY2N1cGllcz8KClRo
+YW5rcywKCj4gCj4gVGhpcyB3YXMgYSBsZW5ndGh5IGVtYWlsLCBidXQgSSBob3BlIEkgd2FzIGJl
+aW5nIHJlYXNvbmFibGUuCj4gCj4gSmFlZ2V1ayBhbmQgQ2hhbywgbGV0IG1lIGtub3cgd2hhdCB5
+b3UgdGhpbmsuCj4gQW5kIGFzIGFsd2F5cywgdGhhbmtzIGZvciB5b3VyIGhhcmQgd29yayA6KQo+
+IAo+IFRoYW5rcywKPiByZWdhcmRzCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1k
+ZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQv
+bGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
