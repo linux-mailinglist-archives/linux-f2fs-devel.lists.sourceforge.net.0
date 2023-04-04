@@ -2,70 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57F9A6D6EFE
+	by mail.lfdr.de (Postfix) with ESMTPS id DA2DE6D6EFF
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Apr 2023 23:30:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pjoEV-0002tb-5r;
-	Tue, 04 Apr 2023 21:30:27 +0000
+	id 1pjoEY-0005N9-Ff;
+	Tue, 04 Apr 2023 21:30:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pjoET-0002tV-81
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pjoEV-0005N2-WD
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 21:30:25 +0000
+ Tue, 04 Apr 2023 21:30:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GfKVcyY6kZWlGqe7KIvkvz3HyHjyWyeVcyXmO3rlcdY=; b=ln/NQ+4eATaVs3ylx6Pl3QGbPA
- wikXHCI58P68GvnCSFTOEqF9IG7W89UmhzdyNHt5xEBAX+TsXfYQtOaEgiqWArAHeiD1NddW5F7XE
- AvuMD29WQzn1A4sbhNiObKm+zBwUs5gAO8PSnZ8Ku3RE8PFemyNl0QmrluI3PVpnNApc=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=koToLaZdm7xVmR02lfBd1V//nKOoGFhxGgLdrPRLWEQ=; b=On1b4O8qnee4RK7Li1Zjq/dKnZ
+ 3Zf/iSqObIu4bPqf4cSa4vHS993EVDh4ZFF2kWFWDmk0kEFycrmIGQ6oEmDK6PfBF5fdZ5fYqknw1
+ pCojhi9K6dK/hATB9z/J7DrwsgBt51t7uaRU2dGp3FgCyoeucaZ4NPhs+bRADaiBR1rs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GfKVcyY6kZWlGqe7KIvkvz3HyHjyWyeVcyXmO3rlcdY=; b=Sod0KfVgb/s+Kbofli7H0QWWoM
- 7qN8Mi4/Bfqbqe4RqeqXEPWGy4GuLiJtOAkFUREG/Wtdo9Qdo55J3S7qsY1SyU5q9xwxDPRqOdBT/
- AvQ8ZZk7j59ChVDLoFs1zJfJvXY+/dJLWC29CJoIxFNUCoKsfwR39Ln1YY5MJMJytjvQ=;
+ ;
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=koToLaZdm7xVmR02lfBd1V//nKOoGFhxGgLdrPRLWEQ=; b=C
+ Uh/+0cuA8hAhTqVqqYc7d0XSp+NPsYZI1ldh4G/6kxGYGW64r+X7RcYXvxXF31UnE1/3+piVBbfuV
+ orDrlHSOkKXewatjeN/wQgYFGcAsgeK0n5V0aO+og2UJx3LA97eWcmDDVz3deM1v6ny5hYGzH5iLm
+ 3+yB10asLVERHPsk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pjoET-00FMON-0d for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 21:30:25 +0000
+ id 1pjoEU-0005ES-Ie for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 04 Apr 2023 21:30:27 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9BF63635FF;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 8CF7B6359D
+ for <linux-f2fs-devel@lists.sourceforge.net>;
  Tue,  4 Apr 2023 21:30:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0B13CC433EF;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id EA484C433D2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
  Tue,  4 Apr 2023 21:30:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1680643819;
- bh=BhqwVjVyK+Eol6KMD537Bt+HCSapsZ3NENVcIm/jk3E=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=aRciJmjj3GSjvK/LQTaFh+wQ9PedRJ20Wpa6RH6UcqAZ4JfkmfZz2ESThlhzveigG
- 4eUZcTY4xmnswV9DH2NY+xibmAAE2q0952DvDpXHrAwo4H8s1pIx2sMULX4m3A/bC0
- z3kMvySCcERCYKCtsudeXg63KL21X9KruWTVhGyQWvaDiGxMQI+hDyMEcmxXJ+zHgT
- E++8eYygKRVuk8Qf4Ggnlsqzz5eKAV70Aeav00Jh2UxFkEi9zuEsGpjj6c18jTPQPh
- ihHzOJu6vAvi+DrU8UvykCwVnHeq2pqHQvKaMQ6K3I11nKh6RtCObeD+ZaiAjSzbjE
- ymmib/CZ1lpgQ==
+ bh=tLIGldmc6VJLJKhZIahXWVQun9qLKPKFj9Dz4Fg3ZHs=;
+ h=Subject:From:Date:To:From;
+ b=pW3n4buMDrxitdVV0PeDguoEuFSFM4AiIsh2Gcb49XrTUJWmqIpqGN13eAOZKVAh/
+ d8fuN4Z7UoxFoBe6cDLfVmQlL/lhpJoQiVCMIXmzGZoiB7PHCKrTNgD2DxCNikLSfj
+ Lf+Zr5o2b5YZEuwediLau8/1Efk96PoXtMs00hli4Sh9uq7IHZg8GNGjYHGREeciKP
+ 3g0gMevr1WSvFT8yVEKywPv7lyDLHyMSlVD91yjjRyBtCGoT1zCwRkvyNSf4slQ9BI
+ 2eTs4aC01g1yjuTo1s/++21/vTzLP3PgGUzrA5QwlJSXTCw+0W+WfMeZwnLE6CSH7I
+ ycPcdktV3409g==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- DB511C395C5; Tue,  4 Apr 2023 21:30:18 +0000 (UTC)
+ D0955E5EA85 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  4 Apr 2023 21:30:18 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168064381889.16246.5404521009795232180.git-patchwork-notify@kernel.org>
+Message-Id: <168064381879.16246.14850843030360367320.git-patchwork-summary@kernel.org>
 Date: Tue, 04 Apr 2023 21:30:18 +0000
-References: <20230404040051.50726-1-frank.li@vivo.com>
-In-Reply-To: <20230404040051.50726-1-frank.li@vivo.com>
-To: Yangtao Li <frank.li@vivo.com>
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -73,11 +75,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 4 Apr 2023 12:00:51 +0800 you wrote:
- > There is only single instance of these ops, and Jaegeuk point out that:
- > > Originally this was intended to give a chance to provide other >
- allocation o [...] 
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev, v2] f2fs: remove
+ struct victim_selection default_v_ops Submitter: Yangtao Li
+ <frank.li@vivo.com>
+ Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/pr [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +96,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pjoET-00FMON-0d
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: remove struct victim_selection
- default_v_ops
+X-Headers-End: 1pjoEU-0005ES-Ie
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,32 +109,30 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-On Tue,  4 Apr 2023 12:00:51 +0800 you wrote:
-> There is only single instance of these ops, and Jaegeuk point out that:
-> 
->     Originally this was intended to give a chance to provide other
->     allocation option. Anyway, it seems quit hard to do it anymore.
-> 
-> So remove the indirection and call f2fs_get_victim() directly.
-> 
-> [...]
+Patch: [f2fs-dev,v2] f2fs: remove struct victim_selection default_v_ops
+  Submitter: Yangtao Li <frank.li@vivo.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=736646
+  Lore link: https://lore.kernel.org/r/20230404040051.50726-1-frank.li@vivo.com
 
-Here is the summary with links:
-  - [f2fs-dev,v2] f2fs: remove struct victim_selection default_v_ops
-    https://git.kernel.org/jaegeuk/f2fs/c/4066666c1581
+Patch: [f2fs-dev,v2] f2fs: fix to check readonly condition correctly
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=736866
+  Lore link: https://lore.kernel.org/r/20230404152807.4987-1-chao@kernel.org
 
-You are awesome, thank you!
+
+Total patches: 2
+
 -- 
 Deet-doot-dot, I am a bot.
 https://korg.docs.kernel.org/patchwork/pwbot.html
