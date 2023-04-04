@@ -2,94 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 768166D65E2
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Apr 2023 16:55:00 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2D546D65EA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Apr 2023 16:55:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pji3l-0000fU-E9;
-	Tue, 04 Apr 2023 14:54:56 +0000
+	id 1pji3w-0003jl-35;
+	Tue, 04 Apr 2023 14:55:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@redhat.com>) id 1pji3i-0000fL-WD
+ (envelope-from <aalbersh@redhat.com>) id 1pji3s-0003jY-1H
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 14:54:54 +0000
+ Tue, 04 Apr 2023 14:55:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oD3C5F3LGtukmBxzahEExE7hRIVYDTE1CCzX3qZAvIY=; b=hRSU0OLmkd6BqjJMajPUtETh2/
- yUNzSSLCKkKeaSYYEeIi9DThjVKMVCARQ/CU7t1xq337dqpc+UzkfjgdwUI21HLSN+tm1jCZAYnIY
- kqpdXJw66c7r92LxHxO16vKeZLh6/g3oD3qkxJcKqGOLTOb9hZiwTqk9lvOdFu7+TtmY=;
+ bh=Mu/TYgURhfr8hK7U6stIfBangv6J3wSWfzsQZ+cJkGQ=; b=KISXzMimsjWhRxuxgyEepAOyWC
+ I3KhXYikJV3WhmuHIQJjjmemnKgJLUQXjQnb3c33JxnLQBhe/gzV8N7jLMLGS1AWa3U7Zy7yA+09O
+ l6FSGIFrNsTpFOM8NC1Edq6NpWw49n+WNb86FMcZmAsTBafDbygtduR83F0sF++PWlAI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=oD3C5F3LGtukmBxzahEExE7hRIVYDTE1CCzX3qZAvIY=; b=Q
- 4DrJ79YNEx3CRfiZUW6H8MQPunGpjRZq+d5Ky6UxaJAA1sGeN3MR6918HjoqQOFQBpqmz3R0hwn7q
- LBZR5hoCkTXz61teHPsfY1xOdZJWm9FuEbzRA5//8JICHC7jgxXkrrYcX0IDhTr5g/50qChPYNP+8
- LREfULEUd1Ptp6co=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Mu/TYgURhfr8hK7U6stIfBangv6J3wSWfzsQZ+cJkGQ=; b=a2Lsn4/dOQJNnZCZ/mht9O+DYV
+ QLaqLDtXeZLZOGMwwQdtzYeKWk5kWi9mLsZnAOuuCf6hnMlLljmYsZdqqX98BGuIr1p5DnlwQxP2i
+ mTz1AlFqIcGjH6Y7OMpXuds4/jKidKPXsRMCkWlwvP88guf8GoflqXTAWK9k/SOFvF0g=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pji3g-00Ez5k-9h for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 14:54:54 +0000
+ id 1pji3n-00022W-Ke for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 04 Apr 2023 14:55:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1680620086;
+ s=mimecast20190719; t=1680620093;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=oD3C5F3LGtukmBxzahEExE7hRIVYDTE1CCzX3qZAvIY=;
- b=Bco5HbC1gdH1h9fk3KheKe3qNzcHt2OVvfvZPZZTbbq5NQrO+y+f+X+MskyA4etKFJI4LA
- Pj3sZEm+9mP9ROPeGBTMqDqTl1JAv9SA2v48JBpqQzZnmAkD9+VwLf10XD4o8iY+FUcrdt
- cFTpJHjwomSR493LpueDqzXUTX/ruFA=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Mu/TYgURhfr8hK7U6stIfBangv6J3wSWfzsQZ+cJkGQ=;
+ b=Mbk2ICFo+Ayd425HSjwtViRZhADwSWzLUDEg6i5uazcoANGbV+wZDCFr0l+FBTlEMmo1HN
+ FPL6Z4iXsJ7QoxH+3j82rdQ3wQw+S+rfLsC3yqFkX9t476YGnGcWfG2mcleKSyP0EI7o7A
+ SDc2NIkt1L3njR8LpCU3/KlZaGwExqI=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-546-7qCeYPkhNe-VhTLvl2q3zA-1; Tue, 04 Apr 2023 10:54:44 -0400
-X-MC-Unique: 7qCeYPkhNe-VhTLvl2q3zA-1
-Received: by mail-qv1-f69.google.com with SMTP id
- a10-20020a0ccdca000000b005d70160fbb0so14664819qvn.21
+ us-mta-465-PR9zj6sLPTm3G5rSeTvjfQ-1; Tue, 04 Apr 2023 10:54:44 -0400
+X-MC-Unique: PR9zj6sLPTm3G5rSeTvjfQ-1
+Received: by mail-qk1-f198.google.com with SMTP id
+ n129-20020a374087000000b0074a2ff16363so3598185qka.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 04 Apr 2023 07:54:43 -0700 (PDT)
+ Tue, 04 Apr 2023 07:54:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680620081;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oD3C5F3LGtukmBxzahEExE7hRIVYDTE1CCzX3qZAvIY=;
- b=UB9rRfa80UDwp7zv707RUmQyR3mc9QHxHRzDMwBgDYd7QvROMHNKS5Iyb6Zn74CI3N
- Oy60LwnlMvtJMgWfdXC9rxonqGRrP454VNp7xQfg/85m5puvtN7UDBm9DnBY3M45l+OB
- eXxRn5On/eZ1Ke2AwEmsoOJGuGo35bFq90jV+fqqsKBa+Bs3ZJYWWEA2sVWSqlU71QuM
- r3cXzvjPjNUBNxhft+2TS9tnRFTnL5PYa4Gnj2SivNcGSfXNmEu98lTg17i96ibP1Yv1
- 7k4MD+flnLjWqDl1nCynF5LQouG6ATOCMNyxOn7MIMwCrzlIj23KZswX1pcUbgsjoOqo
- 8+Kw==
-X-Gm-Message-State: AAQBX9fJFUnKdDk9Qyxh1d0C+BHcneM9XwY6MbeYxI2rxUEp26MgbVcg
- jRkICHMNUP/pcuBJGtgiLOf5MPgk3FuoUrj2LcxPs5ET9xcWrEsqjmG4M7pWM6Jvy/PV2FVfJad
- sNIy4Tu0k7i1eW7UvjAokaKSH0/9CsG83RXuL
-X-Received: by 2002:a05:622a:183:b0:3e4:9f9a:54b2 with SMTP id
- s3-20020a05622a018300b003e49f9a54b2mr3125037qtw.65.1680620080398; 
- Tue, 04 Apr 2023 07:54:40 -0700 (PDT)
-X-Google-Smtp-Source: AKy350aQaTUsx1W6QCtRYW4E/BPPbSUPOo7MRSxPdoArP74ywpcoKBragJvpDtJCE5UocjgeAZeoJA==
-X-Received: by 2002:a05:622a:183:b0:3e4:9f9a:54b2 with SMTP id
- s3-20020a05622a018300b003e49f9a54b2mr3124990qtw.65.1680620080023; 
- Tue, 04 Apr 2023 07:54:40 -0700 (PDT)
+ d=1e100.net; s=20210112; t=1680620084;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Mu/TYgURhfr8hK7U6stIfBangv6J3wSWfzsQZ+cJkGQ=;
+ b=3gPF77taZDQlV2VhGgxfaacoJ4JGL0ddDTpZSdAfUFyF1qkG0iUwBJtCB5KSBbHl5d
+ TwA59GoMj62hQT4G5kPjAjlhMqKCeeuaHRfgnb8iiHjbV+yreWUwWBWQXAbh4i7oIgV8
+ EhB2uQeb42VJaYrdlyyiP/PbB84Gu/+n4FrWMBa8kn9maEeFlKT0CpQergYyBxtG9NF7
+ ajQC5rQ1674z0QRmW+8qpM3I9nSsjtRRcWx7+QHzCMJN1k5wGULOKTBI5NMk0VUC715T
+ OiVA2n0231gtvJOQQfmnxmsyezp5ixpBgNAj2DsabI1+XNK3sTo4xodyhyOG8SXJEvcq
+ 1ulw==
+X-Gm-Message-State: AAQBX9eKI4eb3ygKRGnNVBq/osgmiE7ngVjzoDQ+cbZZjT18Xbc7Edl5
+ jkMcTjEUuXAJ9YtoBgglwEljQlJOr0ONLqC8w6GNpXtNDRF3sURqQXertuknd96sqTuXbGZc1sJ
+ 1v6Jnwj3RNOmquDG1pdVF4vkJcaEvLMEaU0nq
+X-Received: by 2002:ac8:5a13:0:b0:3e3:937b:2a64 with SMTP id
+ n19-20020ac85a13000000b003e3937b2a64mr3736993qta.18.1680620083958; 
+ Tue, 04 Apr 2023 07:54:43 -0700 (PDT)
+X-Google-Smtp-Source: AKy350YwX4bLGTdahm+NMX4R0qo4ogg8AwvBHQg1l9KHd+r+1n6TF6bmdPhAhTEI8OKPbhpGvFPy7w==
+X-Received: by 2002:ac8:5a13:0:b0:3e3:937b:2a64 with SMTP id
+ n19-20020ac85a13000000b003e3937b2a64mr3736946qta.18.1680620083477; 
+ Tue, 04 Apr 2023 07:54:43 -0700 (PDT)
 Received: from aalbersh.remote.csb ([109.183.6.197])
  by smtp.gmail.com with ESMTPSA id
- j4-20020ac86644000000b003e6387431dcsm3296539qtp.7.2023.04.04.07.54.35
+ j4-20020ac86644000000b003e6387431dcsm3296539qtp.7.2023.04.04.07.54.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Apr 2023 07:54:39 -0700 (PDT)
+ Tue, 04 Apr 2023 07:54:43 -0700 (PDT)
 From: Andrey Albershteyn <aalbersh@redhat.com>
 To: djwong@kernel.org, dchinner@redhat.com, ebiggers@kernel.org,
  hch@infradead.org, linux-xfs@vger.kernel.org, fsverity@lists.linux.dev
-Date: Tue,  4 Apr 2023 16:52:56 +0200
-Message-Id: <20230404145319.2057051-1-aalbersh@redhat.com>
+Date: Tue,  4 Apr 2023 16:52:57 +0200
+Message-Id: <20230404145319.2057051-2-aalbersh@redhat.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20230404145319.2057051-1-aalbersh@redhat.com>
+References: <20230404145319.2057051-1-aalbersh@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
@@ -100,21 +103,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi all,
- This is V2 of fs-verity support in XFS. In this series
- I did numerous changes from V1 which are described below. This patchset
- introduces
- fs-verity [5] support for XFS. This implementation utilizes extended
- attributes
- to store fs-verity metadata. The Merkle tree blocks are stored in the remote
- extended attribute [...] 
+ Content preview: From: Allison Henderson <allison.henderson@oracle.com> This
+ patch adds two new fields to the atti/d. They are nname and nnamelen. This
+ will be used for parent pointer updates since a rename operation may cause
+ the parent pointer to update both the name an [...] 
  Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.133.124 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [170.10.133.124 listed in wl.mailspike.net]
+ [170.10.129.124 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [170.10.129.124 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -125,8 +124,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pji3g-00Ez5k-9h
-Subject: [f2fs-dev] [PATCH v2 00/23] fs-verity support for XFS
+X-Headers-End: 1pji3n-00022W-Ke
+Subject: [f2fs-dev] [PATCH v2 01/23] xfs: Add new name to attri/d
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -140,152 +139,420 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-ext4@vger.kernel.org, agruenba@redhat.com,
  damien.lemoal@opensource.wdc.com, linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com, rpeterso@redhat.com, xiang@kernel.org,
- jth@kernel.org, linux-erofs@lists.ozlabs.org,
- Andrey Albershteyn <aalbersh@redhat.com>, linux-btrfs@vger.kernel.org
+ cluster-devel@redhat.com, Allison Henderson <allison.henderson@oracle.com>,
+ rpeterso@redhat.com, xiang@kernel.org, jth@kernel.org,
+ linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi all,
+From: Allison Henderson <allison.henderson@oracle.com>
 
-This is V2 of fs-verity support in XFS. In this series I did
-numerous changes from V1 which are described below.
+This patch adds two new fields to the atti/d.  They are nname and
+nnamelen.  This will be used for parent pointer updates since a
+rename operation may cause the parent pointer to update both the
+name and value.  So we need to carry both the new name as well as
+the target name in the attri/d.
 
-This patchset introduces fs-verity [5] support for XFS. This
-implementation utilizes extended attributes to store fs-verity
-metadata. The Merkle tree blocks are stored in the remote extended
-attributes.
+Signed-off-by: Allison Henderson <allison.henderson@oracle.com>
+Reviewed-by: Darrick J. Wong <djwong@kernel.org>
+---
+ fs/xfs/libxfs/xfs_attr.c       |  12 ++-
+ fs/xfs/libxfs/xfs_attr.h       |   4 +-
+ fs/xfs/libxfs/xfs_da_btree.h   |   2 +
+ fs/xfs/libxfs/xfs_log_format.h |   6 +-
+ fs/xfs/xfs_attr_item.c         | 135 +++++++++++++++++++++++++++------
+ fs/xfs/xfs_attr_item.h         |   1 +
+ 6 files changed, 133 insertions(+), 27 deletions(-)
 
-A few key points:
-- fs-verity metadata is stored in extended attributes
-- Direct path and DAX are disabled for inodes with fs-verity
-- Pages are verified in iomap's read IO path (offloaded to
-  workqueue)
-- New workqueue for verification processing
-- New ro-compat flag
-- Inodes with fs-verity have new on-disk diflag
-- xfs_attr_get() can return buffer with the attribute
-
-The patchset is tested with xfstests -g auto on xfs_1k, xfs_4k,
-xfs_1k_quota, and xfs_4k_quota. Haven't found any major failures.
-
-Patches [6/23] and [7/23] touch ext4, f2fs, btrfs, and patch [8/23]
-touches erofs, gfs2, and zonefs.
-
-The patchset consist of four parts:
-- [1..4]: Patches from Parent Pointer patchset which add binary
-          xattr names with a few deps
-- [5..7]: Improvements to core fs-verity
-- [8..9]: Add read path verification to iomap
-- [10..23]: Integration of fs-verity to xfs
-
-Changes from V1:
-- Added parent pointer patches for easier testing
-- Many issues and refactoring points fixed from the V1 review
-- Adjusted for recent changes in fs-verity core (folios, non-4k)
-- Dropped disabling of large folios
-- Completely new fsverity patches (fix, callout, log_blocksize)
-- Change approach to verification in iomap to the same one as in
-  write path. Callouts to fs instead of direct fs-verity use.
-- New XFS workqueue for post read folio verification
-- xfs_attr_get() can return underlying xfs_buf
-- xfs_bufs are marked with XBF_VERITY_CHECKED to track verified
-  blocks
-
-kernel:
-[1]: https://github.com/alberand/linux/tree/xfs-verity-v2
-
-xfsprogs:
-[2]: https://github.com/alberand/xfsprogs/tree/fsverity-v2
-
-xfstests:
-[3]: https://github.com/alberand/xfstests/tree/fsverity-v2
-
-v1:
-[4]: https://lore.kernel.org/linux-xfs/20221213172935.680971-1-aalbersh@redhat.com/
-
-fs-verity:
-[5]: https://www.kernel.org/doc/html/latest/filesystems/fsverity.html
-
-Thanks,
-Andrey
-
-Allison Henderson (4):
-  xfs: Add new name to attri/d
-  xfs: add parent pointer support to attribute code
-  xfs: define parent pointer xattr format
-  xfs: Add xfs_verify_pptr
-
-Andrey Albershteyn (19):
-  fsverity: make fsverity_verify_folio() accept folio's offset and size
-  fsverity: add drop_page() callout
-  fsverity: pass Merkle tree block size to ->read_merkle_tree_page()
-  iomap: hoist iomap_readpage_ctx from the iomap_readahead/_folio
-  iomap: allow filesystem to implement read path verification
-  xfs: add XBF_VERITY_CHECKED xfs_buf flag
-  xfs: add XFS_DA_OP_BUFFER to make xfs_attr_get() return buffer
-  xfs: introduce workqueue for post read IO work
-  xfs: add iomap's readpage operations
-  xfs: add attribute type for fs-verity
-  xfs: add fs-verity ro-compat flag
-  xfs: add inode on-disk VERITY flag
-  xfs: initialize fs-verity on file open and cleanup on inode
-    destruction
-  xfs: don't allow to enable DAX on fs-verity sealsed inode
-  xfs: disable direct read path for fs-verity sealed files
-  xfs: add fs-verity support
-  xfs: handle merkle tree block size != fs blocksize != PAGE_SIZE
-  xfs: add fs-verity ioctls
-  xfs: enable ro-compat fs-verity flag
-
- fs/btrfs/verity.c               |  15 +-
- fs/erofs/data.c                 |  12 +-
- fs/ext4/verity.c                |   9 +-
- fs/f2fs/verity.c                |   9 +-
- fs/gfs2/aops.c                  |  10 +-
- fs/ioctl.c                      |   4 +
- fs/iomap/buffered-io.c          |  89 ++++++-----
- fs/verity/read_metadata.c       |   7 +-
- fs/verity/verify.c              |   9 +-
- fs/xfs/Makefile                 |   1 +
- fs/xfs/libxfs/xfs_attr.c        |  81 +++++++++-
- fs/xfs/libxfs/xfs_attr.h        |   7 +-
- fs/xfs/libxfs/xfs_attr_leaf.c   |   7 +
- fs/xfs/libxfs/xfs_attr_remote.c |  13 +-
- fs/xfs/libxfs/xfs_da_btree.h    |   7 +-
- fs/xfs/libxfs/xfs_da_format.h   |  46 +++++-
- fs/xfs/libxfs/xfs_format.h      |  14 +-
- fs/xfs/libxfs/xfs_log_format.h  |   8 +-
- fs/xfs/libxfs/xfs_sb.c          |   2 +
- fs/xfs/scrub/attr.c             |   4 +-
- fs/xfs/xfs_aops.c               |  61 +++++++-
- fs/xfs/xfs_attr_item.c          | 142 +++++++++++++++---
- fs/xfs/xfs_attr_item.h          |   1 +
- fs/xfs/xfs_attr_list.c          |  17 ++-
- fs/xfs/xfs_buf.h                |  17 ++-
- fs/xfs/xfs_file.c               |  22 ++-
- fs/xfs/xfs_inode.c              |   2 +
- fs/xfs/xfs_inode.h              |   3 +-
- fs/xfs/xfs_ioctl.c              |  22 +++
- fs/xfs/xfs_iomap.c              |  14 ++
- fs/xfs/xfs_iops.c               |   4 +
- fs/xfs/xfs_linux.h              |   1 +
- fs/xfs/xfs_mount.h              |   3 +
- fs/xfs/xfs_ondisk.h             |   4 +
- fs/xfs/xfs_super.c              |  19 +++
- fs/xfs/xfs_trace.h              |   1 +
- fs/xfs/xfs_verity.c             | 256 ++++++++++++++++++++++++++++++++
- fs/xfs/xfs_verity.h             |  27 ++++
- fs/xfs/xfs_xattr.c              |   9 ++
- fs/zonefs/file.c                |  12 +-
- include/linux/fsverity.h        |  18 ++-
- include/linux/iomap.h           |  39 ++++-
- include/uapi/linux/fs.h         |   1 +
- 43 files changed, 923 insertions(+), 126 deletions(-)
- create mode 100644 fs/xfs/xfs_verity.c
- create mode 100644 fs/xfs/xfs_verity.h
-
+diff --git a/fs/xfs/libxfs/xfs_attr.c b/fs/xfs/libxfs/xfs_attr.c
+index e28d93d232de..b1dbed7655e8 100644
+--- a/fs/xfs/libxfs/xfs_attr.c
++++ b/fs/xfs/libxfs/xfs_attr.c
+@@ -423,6 +423,12 @@ xfs_attr_complete_op(
+ 	args->op_flags &= ~XFS_DA_OP_REPLACE;
+ 	if (do_replace) {
+ 		args->attr_filter &= ~XFS_ATTR_INCOMPLETE;
++		if (args->new_namelen > 0) {
++			args->name = args->new_name;
++			args->namelen = args->new_namelen;
++			args->hashval = xfs_da_hashname(args->name,
++							args->namelen);
++		}
+ 		return replace_state;
+ 	}
+ 	return XFS_DAS_DONE;
+@@ -922,9 +928,13 @@ xfs_attr_defer_replace(
+ 	struct xfs_da_args	*args)
+ {
+ 	struct xfs_attr_intent	*new;
++	int			op_flag;
+ 	int			error = 0;
+ 
+-	error = xfs_attr_intent_init(args, XFS_ATTRI_OP_FLAGS_REPLACE, &new);
++	op_flag = args->new_namelen == 0 ? XFS_ATTRI_OP_FLAGS_REPLACE :
++		  XFS_ATTRI_OP_FLAGS_NVREPLACE;
++
++	error = xfs_attr_intent_init(args, op_flag, &new);
+ 	if (error)
+ 		return error;
+ 
+diff --git a/fs/xfs/libxfs/xfs_attr.h b/fs/xfs/libxfs/xfs_attr.h
+index 81be9b3e4004..3e81f3f48560 100644
+--- a/fs/xfs/libxfs/xfs_attr.h
++++ b/fs/xfs/libxfs/xfs_attr.h
+@@ -510,8 +510,8 @@ struct xfs_attr_intent {
+ 	struct xfs_da_args		*xattri_da_args;
+ 
+ 	/*
+-	 * Shared buffer containing the attr name and value so that the logging
+-	 * code can share large memory buffers between log items.
++	 * Shared buffer containing the attr name, new name, and value so that
++	 * the logging code can share large memory buffers between log items.
+ 	 */
+ 	struct xfs_attri_log_nameval	*xattri_nameval;
+ 
+diff --git a/fs/xfs/libxfs/xfs_da_btree.h b/fs/xfs/libxfs/xfs_da_btree.h
+index ffa3df5b2893..a4b29827603f 100644
+--- a/fs/xfs/libxfs/xfs_da_btree.h
++++ b/fs/xfs/libxfs/xfs_da_btree.h
+@@ -55,7 +55,9 @@ enum xfs_dacmp {
+ typedef struct xfs_da_args {
+ 	struct xfs_da_geometry *geo;	/* da block geometry */
+ 	const uint8_t		*name;		/* string (maybe not NULL terminated) */
++	const uint8_t	*new_name;	/* new attr name */
+ 	int		namelen;	/* length of string (maybe no NULL) */
++	int		new_namelen;	/* new attr name len */
+ 	uint8_t		filetype;	/* filetype of inode for directories */
+ 	void		*value;		/* set of bytes (maybe contain NULLs) */
+ 	int		valuelen;	/* length of value */
+diff --git a/fs/xfs/libxfs/xfs_log_format.h b/fs/xfs/libxfs/xfs_log_format.h
+index f13e0809dc63..ae9c99762a24 100644
+--- a/fs/xfs/libxfs/xfs_log_format.h
++++ b/fs/xfs/libxfs/xfs_log_format.h
+@@ -117,7 +117,8 @@ struct xfs_unmount_log_format {
+ #define XLOG_REG_TYPE_ATTRD_FORMAT	28
+ #define XLOG_REG_TYPE_ATTR_NAME	29
+ #define XLOG_REG_TYPE_ATTR_VALUE	30
+-#define XLOG_REG_TYPE_MAX		30
++#define XLOG_REG_TYPE_ATTR_NNAME	31
++#define XLOG_REG_TYPE_MAX		31
+ 
+ 
+ /*
+@@ -957,6 +958,7 @@ struct xfs_icreate_log {
+ #define XFS_ATTRI_OP_FLAGS_SET		1	/* Set the attribute */
+ #define XFS_ATTRI_OP_FLAGS_REMOVE	2	/* Remove the attribute */
+ #define XFS_ATTRI_OP_FLAGS_REPLACE	3	/* Replace the attribute */
++#define XFS_ATTRI_OP_FLAGS_NVREPLACE	4	/* Replace attr name and val */
+ #define XFS_ATTRI_OP_FLAGS_TYPE_MASK	0xFF	/* Flags type mask */
+ 
+ /*
+@@ -974,7 +976,7 @@ struct xfs_icreate_log {
+ struct xfs_attri_log_format {
+ 	uint16_t	alfi_type;	/* attri log item type */
+ 	uint16_t	alfi_size;	/* size of this item */
+-	uint32_t	__pad;		/* pad to 64 bit aligned */
++	uint32_t	alfi_nname_len;	/* attr new name length */
+ 	uint64_t	alfi_id;	/* attri identifier */
+ 	uint64_t	alfi_ino;	/* the inode for this attr operation */
+ 	uint32_t	alfi_op_flags;	/* marks the op as a set or remove */
+diff --git a/fs/xfs/xfs_attr_item.c b/fs/xfs/xfs_attr_item.c
+index 2788a6f2edcd..95e9ecbb4a67 100644
+--- a/fs/xfs/xfs_attr_item.c
++++ b/fs/xfs/xfs_attr_item.c
+@@ -75,6 +75,8 @@ static inline struct xfs_attri_log_nameval *
+ xfs_attri_log_nameval_alloc(
+ 	const void			*name,
+ 	unsigned int			name_len,
++	const void			*nname,
++	unsigned int			nname_len,
+ 	const void			*value,
+ 	unsigned int			value_len)
+ {
+@@ -85,15 +87,25 @@ xfs_attri_log_nameval_alloc(
+ 	 * this. But kvmalloc() utterly sucks, so we use our own version.
+ 	 */
+ 	nv = xlog_kvmalloc(sizeof(struct xfs_attri_log_nameval) +
+-					name_len + value_len);
++					name_len + nname_len + value_len);
+ 
+ 	nv->name.i_addr = nv + 1;
+ 	nv->name.i_len = name_len;
+ 	nv->name.i_type = XLOG_REG_TYPE_ATTR_NAME;
+ 	memcpy(nv->name.i_addr, name, name_len);
+ 
++	if (nname_len) {
++		nv->nname.i_addr = nv->name.i_addr + name_len;
++		nv->nname.i_len = nname_len;
++		memcpy(nv->nname.i_addr, nname, nname_len);
++	} else {
++		nv->nname.i_addr = NULL;
++		nv->nname.i_len = 0;
++	}
++	nv->nname.i_type = XLOG_REG_TYPE_ATTR_NNAME;
++
+ 	if (value_len) {
+-		nv->value.i_addr = nv->name.i_addr + name_len;
++		nv->value.i_addr = nv->name.i_addr + nname_len + name_len;
+ 		nv->value.i_len = value_len;
+ 		memcpy(nv->value.i_addr, value, value_len);
+ 	} else {
+@@ -147,11 +159,15 @@ xfs_attri_item_size(
+ 	*nbytes += sizeof(struct xfs_attri_log_format) +
+ 			xlog_calc_iovec_len(nv->name.i_len);
+ 
+-	if (!nv->value.i_len)
+-		return;
++	if (nv->nname.i_len) {
++		*nvecs += 1;
++		*nbytes += xlog_calc_iovec_len(nv->nname.i_len);
++	}
+ 
+-	*nvecs += 1;
+-	*nbytes += xlog_calc_iovec_len(nv->value.i_len);
++	if (nv->value.i_len) {
++		*nvecs += 1;
++		*nbytes += xlog_calc_iovec_len(nv->value.i_len);
++	}
+ }
+ 
+ /*
+@@ -181,6 +197,9 @@ xfs_attri_item_format(
+ 	ASSERT(nv->name.i_len > 0);
+ 	attrip->attri_format.alfi_size++;
+ 
++	if (nv->nname.i_len > 0)
++		attrip->attri_format.alfi_size++;
++
+ 	if (nv->value.i_len > 0)
+ 		attrip->attri_format.alfi_size++;
+ 
+@@ -188,6 +207,10 @@ xfs_attri_item_format(
+ 			&attrip->attri_format,
+ 			sizeof(struct xfs_attri_log_format));
+ 	xlog_copy_from_iovec(lv, &vecp, &nv->name);
++
++	if (nv->nname.i_len > 0)
++		xlog_copy_from_iovec(lv, &vecp, &nv->nname);
++
+ 	if (nv->value.i_len > 0)
+ 		xlog_copy_from_iovec(lv, &vecp, &nv->value);
+ }
+@@ -374,6 +397,7 @@ xfs_attr_log_item(
+ 	attrp->alfi_op_flags = attr->xattri_op_flags;
+ 	attrp->alfi_value_len = attr->xattri_nameval->value.i_len;
+ 	attrp->alfi_name_len = attr->xattri_nameval->name.i_len;
++	attrp->alfi_nname_len = attr->xattri_nameval->nname.i_len;
+ 	ASSERT(!(attr->xattri_da_args->attr_filter & ~XFS_ATTRI_FILTER_MASK));
+ 	attrp->alfi_attr_filter = attr->xattri_da_args->attr_filter;
+ }
+@@ -415,7 +439,8 @@ xfs_attr_create_intent(
+ 		 * deferred work state structure.
+ 		 */
+ 		attr->xattri_nameval = xfs_attri_log_nameval_alloc(args->name,
+-				args->namelen, args->value, args->valuelen);
++				args->namelen, args->new_name,
++				args->new_namelen, args->value, args->valuelen);
+ 	}
+ 
+ 	attrip = xfs_attri_init(mp, attr->xattri_nameval);
+@@ -503,7 +528,8 @@ xfs_attri_validate(
+ 	unsigned int			op = attrp->alfi_op_flags &
+ 					     XFS_ATTRI_OP_FLAGS_TYPE_MASK;
+ 
+-	if (attrp->__pad != 0)
++	if (attrp->alfi_op_flags != XFS_ATTRI_OP_FLAGS_NVREPLACE &&
++	    attrp->alfi_nname_len != 0)
+ 		return false;
+ 
+ 	if (attrp->alfi_op_flags & ~XFS_ATTRI_OP_FLAGS_TYPE_MASK)
+@@ -517,6 +543,7 @@ xfs_attri_validate(
+ 	case XFS_ATTRI_OP_FLAGS_SET:
+ 	case XFS_ATTRI_OP_FLAGS_REPLACE:
+ 	case XFS_ATTRI_OP_FLAGS_REMOVE:
++	case XFS_ATTRI_OP_FLAGS_NVREPLACE:
+ 		break;
+ 	default:
+ 		return false;
+@@ -526,9 +553,14 @@ xfs_attri_validate(
+ 		return false;
+ 
+ 	if ((attrp->alfi_name_len > XATTR_NAME_MAX) ||
++	    (attrp->alfi_nname_len > XATTR_NAME_MAX) ||
+ 	    (attrp->alfi_name_len == 0))
+ 		return false;
+ 
++	if (op == XFS_ATTRI_OP_FLAGS_REMOVE &&
++	    attrp->alfi_value_len != 0)
++		return false;
++
+ 	return xfs_verify_ino(mp, attrp->alfi_ino);
+ }
+ 
+@@ -589,6 +621,8 @@ xfs_attri_item_recover(
+ 	args->whichfork = XFS_ATTR_FORK;
+ 	args->name = nv->name.i_addr;
+ 	args->namelen = nv->name.i_len;
++	args->new_name = nv->nname.i_addr;
++	args->new_namelen = nv->nname.i_len;
+ 	args->hashval = xfs_da_hashname(args->name, args->namelen);
+ 	args->attr_filter = attrp->alfi_attr_filter & XFS_ATTRI_FILTER_MASK;
+ 	args->op_flags = XFS_DA_OP_RECOVERY | XFS_DA_OP_OKNOENT |
+@@ -599,6 +633,7 @@ xfs_attri_item_recover(
+ 	switch (attr->xattri_op_flags) {
+ 	case XFS_ATTRI_OP_FLAGS_SET:
+ 	case XFS_ATTRI_OP_FLAGS_REPLACE:
++	case XFS_ATTRI_OP_FLAGS_NVREPLACE:
+ 		args->value = nv->value.i_addr;
+ 		args->valuelen = nv->value.i_len;
+ 		args->total = xfs_attr_calc_size(args, &local);
+@@ -688,6 +723,7 @@ xfs_attri_item_relog(
+ 	new_attrp->alfi_op_flags = old_attrp->alfi_op_flags;
+ 	new_attrp->alfi_value_len = old_attrp->alfi_value_len;
+ 	new_attrp->alfi_name_len = old_attrp->alfi_name_len;
++	new_attrp->alfi_nname_len = old_attrp->alfi_nname_len;
+ 	new_attrp->alfi_attr_filter = old_attrp->alfi_attr_filter;
+ 
+ 	xfs_trans_add_item(tp, &new_attrip->attri_item);
+@@ -710,48 +746,102 @@ xlog_recover_attri_commit_pass2(
+ 	const void			*attr_value = NULL;
+ 	const void			*attr_name;
+ 	size_t				len;
+-
+-	attri_formatp = item->ri_buf[0].i_addr;
+-	attr_name = item->ri_buf[1].i_addr;
++	const void			*attr_nname = NULL;
++	int				op, i = 0;
+ 
+ 	/* Validate xfs_attri_log_format before the large memory allocation */
+ 	len = sizeof(struct xfs_attri_log_format);
+-	if (item->ri_buf[0].i_len != len) {
++	if (item->ri_buf[i].i_len != len) {
+ 		XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
+-				item->ri_buf[0].i_addr, item->ri_buf[0].i_len);
++				item->ri_buf[i].i_addr, item->ri_buf[i].i_len);
+ 		return -EFSCORRUPTED;
+ 	}
+ 
++	attri_formatp = item->ri_buf[i].i_addr;
+ 	if (!xfs_attri_validate(mp, attri_formatp)) {
+ 		XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
+-				item->ri_buf[0].i_addr, item->ri_buf[0].i_len);
++				item->ri_buf[i].i_addr, item->ri_buf[i].i_len);
+ 		return -EFSCORRUPTED;
+ 	}
+ 
++	op = attri_formatp->alfi_op_flags & XFS_ATTRI_OP_FLAGS_TYPE_MASK;
++	switch (op) {
++	case XFS_ATTRI_OP_FLAGS_SET:
++	case XFS_ATTRI_OP_FLAGS_REPLACE:
++		if (item->ri_total != 3) {
++			XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
++					     attri_formatp, len);
++			return -EFSCORRUPTED;
++		}
++		break;
++	case XFS_ATTRI_OP_FLAGS_REMOVE:
++		if (item->ri_total != 2) {
++			XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
++					     attri_formatp, len);
++			return -EFSCORRUPTED;
++		}
++		break;
++	case XFS_ATTRI_OP_FLAGS_NVREPLACE:
++		if (item->ri_total != 4) {
++			XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
++					     attri_formatp, len);
++			return -EFSCORRUPTED;
++		}
++		break;
++	default:
++		XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
++				     attri_formatp, len);
++		return -EFSCORRUPTED;
++	}
++
++	i++;
+ 	/* Validate the attr name */
+-	if (item->ri_buf[1].i_len !=
++	if (item->ri_buf[i].i_len !=
+ 			xlog_calc_iovec_len(attri_formatp->alfi_name_len)) {
+ 		XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
+-				item->ri_buf[0].i_addr, item->ri_buf[0].i_len);
++				attri_formatp, len);
+ 		return -EFSCORRUPTED;
+ 	}
+ 
++	attr_name = item->ri_buf[i].i_addr;
+ 	if (!xfs_attr_namecheck(attr_name, attri_formatp->alfi_name_len)) {
+ 		XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
+-				item->ri_buf[1].i_addr, item->ri_buf[1].i_len);
++				item->ri_buf[i].i_addr, item->ri_buf[i].i_len);
+ 		return -EFSCORRUPTED;
+ 	}
+ 
++	i++;
++	if (attri_formatp->alfi_nname_len) {
++		/* Validate the attr nname */
++		if (item->ri_buf[i].i_len !=
++		    xlog_calc_iovec_len(attri_formatp->alfi_nname_len)) {
++			XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
++					item->ri_buf[i].i_addr,
++					item->ri_buf[i].i_len);
++			return -EFSCORRUPTED;
++		}
++
++		attr_nname = item->ri_buf[i].i_addr;
++		if (!xfs_attr_namecheck(attr_nname,
++				attri_formatp->alfi_nname_len)) {
++			XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
++					item->ri_buf[i].i_addr,
++					item->ri_buf[i].i_len);
++			return -EFSCORRUPTED;
++		}
++		i++;
++	}
++
++
+ 	/* Validate the attr value, if present */
+ 	if (attri_formatp->alfi_value_len != 0) {
+-		if (item->ri_buf[2].i_len != xlog_calc_iovec_len(attri_formatp->alfi_value_len)) {
++		if (item->ri_buf[i].i_len != xlog_calc_iovec_len(attri_formatp->alfi_value_len)) {
+ 			XFS_CORRUPTION_ERROR(__func__, XFS_ERRLEVEL_LOW, mp,
+-					item->ri_buf[0].i_addr,
+-					item->ri_buf[0].i_len);
++					attri_formatp, len);
+ 			return -EFSCORRUPTED;
+ 		}
+ 
+-		attr_value = item->ri_buf[2].i_addr;
++		attr_value = item->ri_buf[i].i_addr;
+ 	}
+ 
+ 	/*
+@@ -760,7 +850,8 @@ xlog_recover_attri_commit_pass2(
+ 	 * reference.
+ 	 */
+ 	nv = xfs_attri_log_nameval_alloc(attr_name,
+-			attri_formatp->alfi_name_len, attr_value,
++			attri_formatp->alfi_name_len, attr_nname,
++			attri_formatp->alfi_nname_len, attr_value,
+ 			attri_formatp->alfi_value_len);
+ 
+ 	attrip = xfs_attri_init(mp, nv);
+diff --git a/fs/xfs/xfs_attr_item.h b/fs/xfs/xfs_attr_item.h
+index 3280a7930287..24d4968dd6cc 100644
+--- a/fs/xfs/xfs_attr_item.h
++++ b/fs/xfs/xfs_attr_item.h
+@@ -13,6 +13,7 @@ struct kmem_zone;
+ 
+ struct xfs_attri_log_nameval {
+ 	struct xfs_log_iovec	name;
++	struct xfs_log_iovec	nname;
+ 	struct xfs_log_iovec	value;
+ 	refcount_t		refcount;
+ 
 -- 
 2.38.4
 
