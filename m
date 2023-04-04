@@ -2,90 +2,91 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D5086D55CB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Apr 2023 03:18:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FC556D55D6
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  4 Apr 2023 03:25:34 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pjVJc-0007mH-7I;
-	Tue, 04 Apr 2023 01:18:27 +0000
+	id 1pjVQS-0000P2-Eh;
+	Tue, 04 Apr 2023 01:25:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pjVJa-0007mB-OJ
+ (envelope-from <chao@kernel.org>) id 1pjVQR-0000Ow-KA
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 01:18:26 +0000
+ Tue, 04 Apr 2023 01:25:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=//ZW0TEZujqY4La+qdggtKnadXfW1RDj35TArO/EaKU=; b=kdPVegzBujL1gM8iwIDYXJ2rTt
- 4EHvYS5EgtgPafn2f/ZnUSFULQGNOd/RX72v5FgKbCS2rRM4cr+NelCjaZCOeR/eZarmISoHwsXmQ
- yDULr7vpjlnzqZKxenxW+qvu0APsFLQSEAZSL0bYLhi7wH5fGoV13trZftxhMse1y+Wc=;
+ bh=sVlL4fS8R1N6AwS506FZcBZ69cJ48cmmQpmWwONu4vw=; b=fNDBrdy9TYcR2GYlw2ebxBVEvV
+ 5Cep/DHsJTWcxTNl/0eAHd9psCtscbeldCqgvgMute5B96SZ1rXHR3CiJRy8se/SDw4ivvMjQ4ObY
+ 6/ylhZt4+18IomvbFVV63AgFb0gZBhpwwYlIs4k1BbuiQ/HGPwLqU+SbN5UMSmm1fkLQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=//ZW0TEZujqY4La+qdggtKnadXfW1RDj35TArO/EaKU=; b=N0cVdlfeVAPIFCOdrI80w7Npsx
- I92XeF9FoilNQdzNxM1UfavaeuJb1Vqi7QICBetUjM0gq/t1qlGM6M3PQ/5BPayoEuZlcFm3RZgag
- sEtmoZsCkd6KVw6wIeBfMX/58QOkginnomzwlvv3Yd69X4arTC3Fo/LNj9RUKXX2AM5U=;
+ bh=sVlL4fS8R1N6AwS506FZcBZ69cJ48cmmQpmWwONu4vw=; b=bbMLJhF68L9jZAzN+lcoVqSFat
+ B2GHbd6YN2VwJ2FX3LCJPitUUKy1EI41PqPCX1mUtIF7Owa8aEYsRDyBlzSQc29KG2NLr5L/ZHf5W
+ +oO7hfMI46eNOiXSC3WTryelDeKhPKI798joJTh4hCReozo4NgMSJp5GJiQzzsgENTqM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pjVJZ-00EAB1-6j for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 04 Apr 2023 01:18:25 +0000
+ id 1pjVQP-0007zV-RK for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 04 Apr 2023 01:25:30 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id CCC3A61698
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  4 Apr 2023 01:18:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7498EC433EF;
- Tue,  4 Apr 2023 01:18:18 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 71BDA616A1;
+ Tue,  4 Apr 2023 01:25:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF4B7C433EF;
+ Tue,  4 Apr 2023 01:25:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1680571099;
- bh=omvd1hoh8VRO0NpDO8klPxjFF4gsouVc4emYNNhV+x0=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=QqWBg9qvN/7v6mfGsRigTTa1XLb2wufnvh1I5ezXp3RTvT1D2UL3oiqMcLUTwGLAe
- ZWwmXOdG4Z0Od6LQw1ZqPXXa/8VVcUwdTv7deH8F6xkCKxwZAU9Vp0nxYWEnd3z5pE
- 1N7YfHM5LG2SMHsZ+ISwW9QNxh+kKi209HTEsT3QKl6qTnZMsiLc+baDmdTe+Jib9d
- wC1pPEh501SdPY0iBkyl4+kQVYh9HtBwsQfiOL0wYOnT+U9Y3ZlIc7heu/z8j/aitO
- SIlh9DYqBVjuferu2LB76GBNtcDXOxkpWM6pBlJ/AsIdIISOJ5Odj4JaDg8T7Go7Z4
- ELoh0B3+cbC1g==
-Message-ID: <07d1c848-fd1e-7e5e-6b56-90ac2a1a86ef@kernel.org>
-Date: Tue, 4 Apr 2023 09:18:17 +0800
+ s=k20201202; t=1680571523;
+ bh=zfHDtaLH41b4cFQyBpcvmCaz2z6D//kiNcS8+SPhD00=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=XMj+XexmOGSmT76ZfavX6JW7bHrlQgaq71cBqQbI6A8iLlNdFjvzQhOSx+ID7nRx5
+ l4csvFoPurqTikPygZ/VOfij09wogOzkyvinI5gbRUx8NT0fKxMRCejtI//G7GQPWf
+ E1JUKYd+swy73s62/14ic30NjGTcUhq+EDFkmHdpoidDfBI2s4lVL9ggzqMNoh1GCo
+ ZFzvEVSo8JbS9ibhObZxT02ItG7t+r3Zu6FE5XipLEHB6OhyJ4g1MqdGyuBVixDhDS
+ 3km6jETYKcMWBb1J4aBNykzNJ/M7jZCf0s++Ab9moRZf/LTyiezmcuGQLdL2piya4w
+ z670yS/cjSTaA==
+Message-ID: <87c74724-da3d-c5fd-b70d-b80a48ec058e@kernel.org>
+Date: Tue, 4 Apr 2023 09:25:21 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.1
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20230403165038.3018949-1-jaegeuk@kernel.org>
- <ZCsEytDjqEjQDPiO@google.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <CGME20230321001251epcms2p4c1fd48495643dbfca2cf82a433490bb8@epcms2p4>
+ <20230321001251epcms2p4c1fd48495643dbfca2cf82a433490bb8@epcms2p4>
+ <48f18a16-c6d8-3df4-55c5-11546e7dde35@kernel.org>
+ <ZCsGfTM1SjLblTVG@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZCsEytDjqEjQDPiO@google.com>
-X-Spam-Score: -6.5 (------)
+In-Reply-To: <ZCsGfTM1SjLblTVG@google.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/4/4 0:54, Jaegeuk Kim wrote: > We got a kernel panic
- if old_addr is NULL. > > https://bugzilla.kernel.org/show_bug.cgi?id=217266
- > > BUG: kernel NULL pointer dereference, address: 000000000000 [...] 
- Content analysis details:   (-6.5 points, 6.0 required)
+ Content preview:  On 2023/4/4 1:01, Jaegeuk Kim wrote: > On 04/01,
+ Chao Yu wrote:
+ >> On 2023/3/21 8:12, Yonggil Song wrote: >>> When f2fs tries to checkpoint
+ during foreground gc in LFS mode, system >>> crash occurs du [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -93,11 +94,11 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -1.3 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pjVJZ-00EAB1-6j
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix null pointer panic in
- tracepoint in __replace_atomic_write_block
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pjVQP-0007zV-RK
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Fix system crash due to lack of
+ free space in LFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,36 +110,188 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/4/4 0:54, Jaegeuk Kim wrote:
-> We got a kernel panic if old_addr is NULL.
+On 2023/4/4 1:01, Jaegeuk Kim wrote:
+> On 04/01, Chao Yu wrote:
+>> On 2023/3/21 8:12, Yonggil Song wrote:
+>>> When f2fs tries to checkpoint during foreground gc in LFS mode, system
+>>> crash occurs due to lack of free space if the amount of dirty node and
+>>> dentry pages generated by data migration exceeds free space.
+>>> The reproduction sequence is as follows.
+>>>
+>>>    - 20GiB capacity block device (null_blk)
+>>>    - format and mount with LFS mode
+>>>    - create a file and write 20,000MiB
+>>>    - 4k random write on full range of the file
+>>>
+>>>    RIP: 0010:new_curseg+0x48a/0x510 [f2fs]
+>>>    Code: 55 e7 f5 89 c0 48 0f af c3 48 8b 5d c0 48 c1 e8 20 83 c0 01 89 43 6c 48 83 c4 28 5b 41 5c 41 5d 41 5e 41 5f 5d c3 cc cc cc cc <0f> 0b f0 41 80 4f 48 04 45 85 f6 0f 84 ba fd ff ff e9 ef fe ff ff
+>>>    RSP: 0018:ffff977bc397b218 EFLAGS: 00010246
+>>>    RAX: 00000000000027b9 RBX: 0000000000000000 RCX: 00000000000027c0
+>>>    RDX: 0000000000000000 RSI: 00000000000027b9 RDI: ffff8c25ab4e74f8
+>>>    RBP: ffff977bc397b268 R08: 00000000000027b9 R09: ffff8c29e4a34b40
+>>>    R10: 0000000000000001 R11: ffff977bc397b0d8 R12: 0000000000000000
+>>>    R13: ffff8c25b4dd81a0 R14: 0000000000000000 R15: ffff8c2f667f9000
+>>>    FS: 0000000000000000(0000) GS:ffff8c344ec80000(0000) knlGS:0000000000000000
+>>>    CS: 0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+>>>    CR2: 000000c00055d000 CR3: 0000000e30810003 CR4: 00000000003706e0
+>>>    DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+>>>    DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+>>>    Call Trace:
+>>>    <TASK>
+>>>    allocate_segment_by_default+0x9c/0x110 [f2fs]
+>>>    f2fs_allocate_data_block+0x243/0xa30 [f2fs]
+>>>    ? __mod_lruvec_page_state+0xa0/0x150
+>>>    do_write_page+0x80/0x160 [f2fs]
+>>>    f2fs_do_write_node_page+0x32/0x50 [f2fs]
+>>>    __write_node_page+0x339/0x730 [f2fs]
+>>>    f2fs_sync_node_pages+0x5a6/0x780 [f2fs]
+>>>    block_operations+0x257/0x340 [f2fs]
+>>>    f2fs_write_checkpoint+0x102/0x1050 [f2fs]
+>>>    f2fs_gc+0x27c/0x630 [f2fs]
+>>>    ? folio_mark_dirty+0x36/0x70
+>>>    f2fs_balance_fs+0x16f/0x180 [f2fs]
+>>>
+>>> This patch adds checking whether free sections are enough before checkpoint
+>>> during gc.
+>>>
+>>> Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
+>>> ---
+>>>    fs/f2fs/gc.c      | 10 ++++++++--
+>>>    fs/f2fs/gc.h      |  2 ++
+>>>    fs/f2fs/segment.h | 27 ++++++++++++++++++++++-----
+>>>    3 files changed, 32 insertions(+), 7 deletions(-)
+>>>
+>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>>> index 4546e01b2ee0..dd563866d3c9 100644
+>>> --- a/fs/f2fs/gc.c
+>>> +++ b/fs/f2fs/gc.c
+>>> @@ -1773,6 +1773,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+>>>    		.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
+>>>    	};
+>>>    	unsigned int skipped_round = 0, round = 0;
+>>> +	unsigned int need_lower = 0, need_upper = 0;
+>>>    	trace_f2fs_gc_begin(sbi->sb, gc_type, gc_control->no_bg_gc,
+>>>    				gc_control->nr_free_secs,
+>>> @@ -1858,8 +1859,13 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+>>>    		}
+>>>    	}
+>>> -	/* Write checkpoint to reclaim prefree segments */
+>>> -	if (free_sections(sbi) < NR_CURSEG_PERSIST_TYPE &&
+>>> +	ret = get_need_secs(sbi, &need_lower, &need_upper);
+>>
+>> Can we avoid calling has_curseg_enough_space() for this case?
 > 
-> https://bugzilla.kernel.org/show_bug.cgi?id=217266
-> 
-> BUG: kernel NULL pointer dereference, address: 0000000000000000
->   Call Trace:
->    <TASK>
->    f2fs_commit_atomic_write+0x619/0x990 [f2fs a1b985b80f5babd6f3ea778384908880812bfa43]
->    __f2fs_ioctl+0xd8e/0x4080 [f2fs a1b985b80f5babd6f3ea778384908880812bfa43]
->    ? vfs_write+0x2ae/0x3f0
->    ? vfs_write+0x2ae/0x3f0
->    __x64_sys_ioctl+0x91/0xd0
->    do_syscall_64+0x5c/0x90
->    entry_SYSCALL_64_after_hwframe+0x72/0xdc
->   RIP: 0033:0x7f69095fe53f
-> 
-> Fixes: 2f3a9ae990a7 ("f2fs: introduce trace_f2fs_replace_atomic_write_block")
-> Cc: <stable@vger.kernel.org>
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> Why? :P
 
-Thanks for fixing this. :)
-
-Reviewed-by: Chao Yu <chao@kernel.org>
+We won't check the return value of get_need_secs(), so it's not needed to call
+has_curseg_enough_space() in get_need_secs() in this path, right?
 
 Thanks,
+
+> 
+>>
+>> Maybe we can add one parameter curseg_no_space for get_need_secs() to get
+>> result of has_curseg_enough_space()?
+>>
+>> static inline void get_need_secs(struct f2fs_sb_info *sbi,
+>> 				unsigned int *lower, unsigned int *upper,
+>> 				bool *curseg_no_space);
+>> {
+>> ...
+>> 	*lower = node_secs + dent_secs;
+>> 	*upper = *lower + (node_blocks ? 1 : 0) + (dent_blocks ? 1 : 0);
+>>
+>> 	if (curseg_no_space)
+>> 		*curseg_no_space =
+>> 			!has_curseg_enough_space(sbi, node_blocks, dent_blocks);
+>> }
+>>
+>> Then we can use get_need_secs(, , NULL) in f2fs_gc(),
+>> and use get_need_secs(, , &curseg_no_space) in has_not_enough_free_secs()?
+>>
+>> Thoughts?
+>>
+>> Thanks,
+>>
+>>> +
+>>> +	/*
+>>> +	 * Write checkpoint to reclaim prefree segments.
+>>> +	 * We need more three extra sections for writer's data/node/dentry.
+>>> +	 */
+>>> +	if (free_sections(sbi) <= need_upper + NR_GC_CHECKPOINT_SECS &&
+>>>    				prefree_segments(sbi)) {
+>>>    		ret = f2fs_write_checkpoint(sbi, &cpc);
+>>>    		if (ret)
+>>> diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+>>> index 19b956c2d697..e81d22bf3772 100644
+>>> --- a/fs/f2fs/gc.h
+>>> +++ b/fs/f2fs/gc.h
+>>> @@ -30,6 +30,8 @@
+>>>    /* Search max. number of dirty segments to select a victim segment */
+>>>    #define DEF_MAX_VICTIM_SEARCH 4096 /* covers 8GB */
+>>> +#define NR_GC_CHECKPOINT_SECS (3)	/* data/node/dentry sections */
+>>> +
+>>>    struct f2fs_gc_kthread {
+>>>    	struct task_struct *f2fs_gc_task;
+>>>    	wait_queue_head_t gc_wait_queue_head;
+>>> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+>>> index be8f2d7d007b..52a6d1ed4f24 100644
+>>> --- a/fs/f2fs/segment.h
+>>> +++ b/fs/f2fs/segment.h
+>>> @@ -605,8 +605,12 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
+>>>    	return true;
+>>>    }
+>>> -static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
+>>> -					int freed, int needed)
+>>> +/*
+>>> + * calculate needed sections for dirty node/dentry
+>>> + * and call has_curseg_enough_space
+>>> + */
+>>> +static inline bool get_need_secs(struct f2fs_sb_info *sbi,
+>>> +				  unsigned int *lower, unsigned int *upper)
+>>>    {
+>>>    	unsigned int total_node_blocks = get_pages(sbi, F2FS_DIRTY_NODES) +
+>>>    					get_pages(sbi, F2FS_DIRTY_DENTS) +
+>>> @@ -616,20 +620,33 @@ static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
+>>>    	unsigned int dent_secs = total_dent_blocks / CAP_BLKS_PER_SEC(sbi);
+>>>    	unsigned int node_blocks = total_node_blocks % CAP_BLKS_PER_SEC(sbi);
+>>>    	unsigned int dent_blocks = total_dent_blocks % CAP_BLKS_PER_SEC(sbi);
+>>> +
+>>> +	*lower = node_secs + dent_secs;
+>>> +	*upper = *lower + (node_blocks ? 1 : 0) + (dent_blocks ? 1 : 0);
+>>> +
+>>> +	return !has_curseg_enough_space(sbi, node_blocks, dent_blocks);
+>>> +}
+>>> +
+>>> +static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
+>>> +					int freed, int needed)
+>>> +{
+>>>    	unsigned int free, need_lower, need_upper;
+>>> +	bool curseg_enough;
+>>>    	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
+>>>    		return false;
+>>> +	curseg_enough = get_need_secs(sbi, &need_lower, &need_upper);
+>>> +
+>>>    	free = free_sections(sbi) + freed;
+>>> -	need_lower = node_secs + dent_secs + reserved_sections(sbi) + needed;
+>>> -	need_upper = need_lower + (node_blocks ? 1 : 0) + (dent_blocks ? 1 : 0);
+>>> +	need_lower += (needed + reserved_sections(sbi));
+>>> +	need_upper += (needed + reserved_sections(sbi));
+>>>    	if (free > need_upper)
+>>>    		return false;
+>>>    	else if (free <= need_lower)
+>>>    		return true;
+>>> -	return !has_curseg_enough_space(sbi, node_blocks, dent_blocks);
+>>> +	return curseg_enough;
+>>>    }
+>>>    static inline bool f2fs_is_checkpoint_ready(struct f2fs_sb_info *sbi)
 
 
 _______________________________________________
