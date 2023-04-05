@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 805DF6D82C1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 17:56:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51CE06D82C4
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 17:57:39 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pk5UQ-0008MM-VU;
-	Wed, 05 Apr 2023 15:56:03 +0000
+	id 1pk5Vv-0008Pw-Dt;
+	Wed, 05 Apr 2023 15:57:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pk5UO-0008M7-4c
+ (envelope-from <jaegeuk@kernel.org>) id 1pk5Vu-0008P2-3D
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 15:56:01 +0000
+ Wed, 05 Apr 2023 15:57:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FzNMEaD/bfHX29ABhmTkmCmd8JTyK2ZVLIATWx+KG0A=; b=gDeNfl5JTcQS23o19x5k61lPEq
- 4BxlqfCJOb2JAFaZ6R5AGAUOZV1tNB8nHJM6ylM51FD4kQLcVhmzU79mMdeOYNit24/CvrCZryl/r
- 1HzR5kdaUfV5FVT6UTDH+lkkspafftdXfzWEQ6OSld1r366fLmds13Pbx94ljCdZ4v4A=;
+ bh=oaWPdKdNPnDKtD6FK+eV1Sj5Tqor9nlsfMQyGHmab9E=; b=HHw77zoPo9S7uYOTUFkqwb2ENA
+ eJ1HOtGH3273GV52GgXY3RuR2gk5sdpMqTLe09dGl4ZY9Pzu9ILL+9NVtUF5A28z6ZgYpSUwaCimV
+ FzV2DSJERDHOKb123sVQO8NtY15/DtPvThFQyJDGQMsqeixgWndSpTNiszx/xASu0H8I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,42 +31,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FzNMEaD/bfHX29ABhmTkmCmd8JTyK2ZVLIATWx+KG0A=; b=nH589IiLvwxSR4hDdQlkUiVpRE
- cQZ9GL/yGN3ZqkpshyxsTTGpnH+9WeM/wQbqMn2h+KF0oFmCGW3z2DIqaNddDtfnGAwDKM6eI17fm
- zuK6vJd8bs/PpbFi20Ba1hhF1u3OuucM7opkToXLiSsk8lxbdo2RSKzhoydQXMRHoPl8=;
+ bh=oaWPdKdNPnDKtD6FK+eV1Sj5Tqor9nlsfMQyGHmab9E=; b=MNve6Zufxk+rSmP0mBki9IHhP4
+ fPlcdqCw6MGFvIssLol5m/3pPi0FeFUTTE9eHBxYxq0h4UYqrchIHPeq79zsLBESLkQJ7v8Q16SM1
+ pq2s/rkXQKUeV/Z8evKzlhZR8ugG1cl5Yzjk7pcfr3gD3H3FAeI3/uPffZ42j7BWH32M=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pk5UJ-0001wq-D3 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 15:56:00 +0000
+ id 1pk5Vs-0001zM-0S for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 05 Apr 2023 15:57:34 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id F29C061D4A
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  5 Apr 2023 15:55:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4EAD5C433D2;
- Wed,  5 Apr 2023 15:55:49 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9CB2361D4A;
+ Wed,  5 Apr 2023 15:57:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2973C433EF;
+ Wed,  5 Apr 2023 15:57:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1680710149;
- bh=YYDw0RuzTK3iw0hXHKgSXbk0yvOIgNiO+TT8XJvU7GY=;
+ s=k20201202; t=1680710246;
+ bh=Wf6yC9V68CXdRJzxScFYl/wiaFwWP6I9Y1bxabKUuHY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=fdPH2fhPJz3vAlXSaoPyW4UTbkLVVi0H+IHUaXTmwThxRofluxBVBnt6znjjFPdyw
- BAeI/YwpID3g6RgSFB8OU3ex7XFGFhMb3rg2Moohn1ycWtnnMpXBmiNnNEtjrYPfW/
- qZSFrcxzHMndvVpivUYnhcJS/j8T2togNsRgifYybAuAHt8xYHnBRWzL5JpeU3PMlM
- BEixxAdul0D9ZDJekcLRatv7T1mJAsA2vjAyybts0YyvK4m6rW/Aql8VlxPtJWUcy7
- 5As/QtByH5ioBC7dfARZ0RSwE46tftdu92jN7Sj3vFV1n9UHQq/N+q1TOxTcI40rvf
- CgWKsB5ICqjLA==
-Date: Wed, 5 Apr 2023 08:55:47 -0700
+ b=aJ+CMtDmZoUKsWeow3qAnsJUNrmfxXeE/P8Z67h4jblTblFlW+qlhgNVXnzKqKx7C
+ 9AllNbLRwsyn93A/ZX1ke8VF1ScwhHG86FgDaeBXLAX7cjByu/Cv8JPvxe6tEKTGix
+ 2yuQ8J+Q/rtMZorSiAd37dWvZwjFssvALpsz30PtIFiDUNHiN6aRD7utITV/uQtglP
+ bsj1F6BwfqhZkIAx+FBBT+Xyj7mbinxYim9bIeiztnQgh18umEU1mR1PXeukkX3OUK
+ mplODYW1DhLoAv4WDqYiQVSvOyUbWYgzrquuETwxmBKlESEbm/x4BASP5JsG8k/UO+
+ BfsIculAJUBXg==
+Date: Wed, 5 Apr 2023 08:57:24 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <ZC2aA+i5+HpdJ6M2@google.com>
-References: <20230324071028.336982-1-chao@kernel.org>
- <ZCyZGgf4RSEjyHTF@google.com>
- <a4e49177-3959-eb2b-996c-5d07b7390495@kernel.org>
+Message-ID: <ZC2aZJFIJZclTkkK@google.com>
+References: <20230331113305.77217-1-frank.li@vivo.com>
+ <3918411a-77fc-48d7-5b80-c4b84203a39c@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <a4e49177-3959-eb2b-996c-5d07b7390495@kernel.org>
+In-Reply-To: <3918411a-77fc-48d7-5b80-c4b84203a39c@kernel.org>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -74,10 +72,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 04/05, Chao Yu wrote: > On 2023/4/5 5:39,
- Jaegeuk Kim wrote:
- > > Can we do like this? > > > > From 9a58f0e59364241aa31b555cfe793d278e39b0dc
- Mon Sep 17 00:00:00 2001 > > From: Jaegeuk Kim <jaegeuk@k [...] 
+ Content preview:  On 04/05, Chao Yu wrote: > On 2023/3/31 19:33, Yangtao Li
+ wrote: > > Let's use sysfs_emit. > > > > Signed-off-by: Yangtao Li
+ <frank.li@vivo.com>
+ > > --- > > fs/f2fs/sysfs.c | 10 ++-------- > > 1 file [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +91,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pk5UJ-0001wq-D3
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to trigger a checkpoint in the end
- of foreground garbage collection
+X-Headers-End: 1pk5Vs-0001zM-0S
+Subject: Re: [f2fs-dev] [PATCH] f2fs: convert to use sysfs_emit
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,143 +104,51 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Yangtao Li <frank.li@vivo.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 04/05, Chao Yu wrote:
-> On 2023/4/5 5:39, Jaegeuk Kim wrote:
-> > Can we do like this?
+> On 2023/3/31 19:33, Yangtao Li wrote:
+> > Let's use sysfs_emit.
 > > 
-> >  From 9a58f0e59364241aa31b555cfe793d278e39b0dc Mon Sep 17 00:00:00 2001
-> > From: Jaegeuk Kim <jaegeuk@kernel.org>
-> > Date: Tue, 4 Apr 2023 14:36:00 -0700
-> > Subject: [PATCH] f2fs: do checkpoint when there's not enough free sections
-> > 
-> > We didn't do checkpoint in FG_GC case, which may cause losing to reclaim prefree
-> > sctions in time.
-> > 
-> > Fixes: 6f8d4455060d ("f2fs: avoid fi->i_gc_rwsem[WRITE] lock in f2fs_gc")
-> > Signed-off-by: Chao Yu <chao@kernel.org>
-> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > Signed-off-by: Yangtao Li <frank.li@vivo.com>
 > > ---
-> >   fs/f2fs/gc.c | 24 +++++++++++-------------
-> >   1 file changed, 11 insertions(+), 13 deletions(-)
+> >   fs/f2fs/sysfs.c | 10 ++--------
+> >   1 file changed, 2 insertions(+), 8 deletions(-)
 > > 
-> > diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> > index 56c53dbe05c9..f1d0dd9c5a6c 100644
-> > --- a/fs/f2fs/gc.c
-> > +++ b/fs/f2fs/gc.c
-> > @@ -1806,6 +1806,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
-> >   	};
-> >   	unsigned int skipped_round = 0, round = 0;
-> >   	unsigned int upper_secs;
-> > +	bool stop_gc = false;
-> >   	trace_f2fs_gc_begin(sbi->sb, gc_type, gc_control->no_bg_gc,
-> >   				gc_control->nr_free_secs,
-> > @@ -1876,19 +1877,15 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
-> >   				(gc_type == FG_GC) ? sec_freed : 0, 0)) {
-> >   		if (gc_type == FG_GC && sec_freed < gc_control->nr_free_secs)
-> >   			goto go_gc_more;
-> > -		goto stop;
-> > -	}
-> > -
-> > -	/* FG_GC stops GC by skip_count */
-> > -	if (gc_type == FG_GC) {
-> > +		stop_gc = true;
+> > diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> > index 9ddc6ee19433..2c0b2cb05a3a 100644
+> > --- a/fs/f2fs/sysfs.c
+> > +++ b/fs/f2fs/sysfs.c
+> > @@ -312,19 +312,13 @@ static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
+> >   	if (!strcmp(a->attr.name, "ckpt_thread_ioprio")) {
+> >   		struct ckpt_req_control *cprc = &sbi->cprc_info;
+> > -		int len = 0;
+> >   		int class = IOPRIO_PRIO_CLASS(cprc->ckpt_thread_ioprio);
+> >   		int data = IOPRIO_PRIO_DATA(cprc->ckpt_thread_ioprio);
+> > -		if (class == IOPRIO_CLASS_RT)
+> > -			len += scnprintf(buf + len, PAGE_SIZE - len, "rt,");
+> > -		else if (class == IOPRIO_CLASS_BE)
+> > -			len += scnprintf(buf + len, PAGE_SIZE - len, "be,");
+> > -		else
+> > +		if (class != IOPRIO_CLASS_RT && class != IOPRIO_CLASS_BE)
+> >   			return -EINVAL;
+> > -		len += scnprintf(buf + len, PAGE_SIZE - len, "%d\n", data);
+> > -		return len;
+> > +		return sysfs_emit(buf, "%s,%d\n", class == IOPRIO_CLASS_RT ? "rt" : "be", data);
 > 
-> I guess below condition is for emergency recycle of prefree segments during
-> foreground GC, in order to avoid exhausting free sections due to to many
-> metadata allocation during CP.
-> 
-> 	if (free_sections(sbi) <= upper_secs + NR_GC_CHECKPOINT_SECS &&
-> 				prefree_segments(sbi)) {
-> 
-> But for common case, free_sections() is close to reserved_segments(), and
-> upper_secs + NR_GC_CHECKPOINT_SECS value may be far smaller than free_sections(),
-> so checkpoint may not be trggered as expected, IIUC.
-> 
-> So it's fine to just trigger CP in the end of foreground garbage collection?
+> Exceed 80 columns.
 
-My major concern is to avoid unnecessary checkpointing given multiple FG_GC
-requests were pending in parallel. And, I don't want to add so many combination
-which gives so many corner cases, and feel f2fs_gc() needs to call checkpoint
-automatically in the worst case scenario only.
-
-By the way, do we just need to call checkpoint here including FG_GC as well?
-
-1832
-1833         if (gc_type == BG_GC && has_not_enough_free_secs(sbi, 0, 0)) {
-1834                 /*
-1835                  * For example, if there are many prefree_segments below given
-1836                  * threshold, we can make them free by checkpoint. Then, we
-1837                  * secure free segments which doesn't need fggc any more.
-1838                  */
-1839                 if (prefree_segments(sbi)) {
-1840                         ret = f2fs_write_checkpoint(sbi, &cpc);
-1841                         if (ret)
-1842                                 goto stop;
-1843                 }
-1844                 if (has_not_enough_free_secs(sbi, 0, 0))
-1845                         gc_type = FG_GC;
-1846         }
-
-> 
-> One other concern is for those path as below:
-> - disable_checkpoint
-> - ioc_gc
-> - ioc_gc_range
-> - ioc_resize
-> ...
-
-I think the upper caller should decide to call checkpoint, if they want to
-reclaim the prefree likewise f2fs_disable_checkpoint.
-
-> 
-> We've passed gc_type as FG_GC, but the demand here is to migrate block in time,
-> rather than dirtying blocks, and callers don't expect checkpoint in f2fs_gc(),
-> instead the callers will do the checkpoit as it needs.
-> 
-> That means it's better to decouple FG_GC and write_checkpoint behavior, so I
-> added another parameter .reclaim_space to just let f2fs_balance_fs() to trigger
-> checkpoit in the end of f2fs_gc().
+Fixed and applied.
 
 > 
 > Thanks,
 > 
-> > +	} else if (gc_type == FG_GC) {
-> > +		/* FG_GC stops GC by skip_count */
-> >   		if (sbi->skipped_gc_rwsem)
-> >   			skipped_round++;
-> >   		round++;
-> >   		if (skipped_round > MAX_SKIP_GC_COUNT &&
-> > -				skipped_round * 2 >= round) {
-> > -			ret = f2fs_write_checkpoint(sbi, &cpc);
-> > -			goto stop;
-> > -		}
-> > +				skipped_round * 2 >= round)
-> > +			stop_gc = true;
 > >   	}
-> >   	__get_secs_required(sbi, NULL, &upper_secs, NULL);
-> > @@ -1901,12 +1898,13 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
-> >   				prefree_segments(sbi)) {
-> >   		ret = f2fs_write_checkpoint(sbi, &cpc);
-> >   		if (ret)
-> > -			goto stop;
-> > +			stop_gc = true;
-> >   	}
-> >   go_gc_more:
-> > -	segno = NULL_SEGNO;
-> > -	goto gc_more;
-> > -
-> > +	if (!stop_gc) {
-> > +		segno = NULL_SEGNO;
-> > +		goto gc_more;
-> > +	}
-> >   stop:
-> >   	SIT_I(sbi)->last_victim[ALLOC_NEXT] = 0;
-> >   	SIT_I(sbi)->last_victim[FLUSH_DEVICE] = gc_control->victim_segno;
+> >   #ifdef CONFIG_F2FS_FS_COMPRESSION
 
 
 _______________________________________________
