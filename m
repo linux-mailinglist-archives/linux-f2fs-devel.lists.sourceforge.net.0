@@ -2,69 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B086C6D8346
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 18:13:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33E0F6D8387
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 18:20:42 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pk5lI-0001OX-SF;
-	Wed, 05 Apr 2023 16:13:28 +0000
+	id 1pk5sG-0001dm-5K;
+	Wed, 05 Apr 2023 16:20:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pk5lA-0001ON-Ft
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pk5s2-0001dd-P8
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 16:13:23 +0000
+ Wed, 05 Apr 2023 16:20:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
+ Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0YGKAhWSIIluAMjfDKpBRI+SxUUkXqNeuXpnbz4DS94=; b=HqtL2Tu2dIAEECK5GTfVo6k7x1
- kY8HF4UHtQV26OQ83F0Tu+gILdDDa6ER93Fh+fjhRayZY/vlBcnciw2VOtWkz3PmycksUOyOgCNMJ
- JggAMj/OUA8FfLE2lKzuxfnrWU4uKUDXnAkBx0jNZx7yMmmwrM91sKNx7Csbx61o5QhU=;
+ bh=L1mJE0CJ3udTfc4KM+3kbMH+u/yDlCvLWVOCIykPizs=; b=EDu7D33fMV4poUOei9dmKkoczP
+ Wb0oJ3yIfzDW+Jwby19/LKl7EOJAqUYnJuGCFijgV1mGcobLt5Frm5WvN9pXSH6hEdN7IixXdmb9r
+ Kj5o9DMDl80K5b5PqoQ67mySMWMfMIz+2MADN9cw3Xg0Ni/wkq97P4lcXckeI7KHSJTA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=0YGKAhWSIIluAMjfDKpBRI+SxUUkXqNeuXpnbz4DS94=; b=h7oFUZWviCkIuDujb2rl2RNBkO
- epv0r76vjwz9EJ5UWqAtUOTcH27ic3kXbUQi2Mcal5tPyBl+GtFz8BHGF2qRrvFVRN83B7B03B4RD
- DB9oB8i1YVEe4nQYLYcHWLzD9VGmvuG8UCip29VuksIzzoTsPTJIq1CyiVCY+Y1+qbbw=;
+ ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=L1mJE0CJ3udTfc4KM+3kbMH+u/yDlCvLWVOCIykPizs=; b=P+SxpQC45LtrhWFhPVjgS12AYm
+ mvgqWvqaxLZgKDAHDWKP/drVyCNaYRaAC8XzXeOFVylFA5clVSAyxS30iticnSxxgolBshkTkMqH+
+ Eg/JVku6+H+wB+nmbfOUVLv2KM8d3uvO2PSUPER+Kr3wrVWDGFnU3icJQfEJYhJkLUxo=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pk5l9-00G8A3-3p for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 16:13:19 +0000
+ id 1pk5s1-00G8Pu-DD for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 05 Apr 2023 16:20:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4CFAA63E77;
- Wed,  5 Apr 2023 16:13:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 90945C433EF;
- Wed,  5 Apr 2023 16:13:12 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 09AEB63F97;
+ Wed,  5 Apr 2023 16:20:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 907E0C433D2;
+ Wed,  5 Apr 2023 16:20:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1680711192;
- bh=BgZ2eR1AMfTLT7IXUy09mn13VpKwlChWuOugjbAL2Ew=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=MCQhPEA/ROBdA0GMysw8V4w4TC9dPizo+YVsyMAMp2/lEiKL611OTOfrQYtTfCRzb
- slUv1YM0F+UkaLhyS5vcyZameDhAmRyc/ln3ZwRT0l+t16BRB8z/RN3aViRQP/3C+V
- ycY+3Me4yyEod6BKC/VoQk6S30yn1QVIke7xFnH6qJAbJo39asjnkxZOfqbgve2y9F
- kGNnJJosk/68kGz+2VhigiIF8/GVXkAI6huZP9PR98le9IG3fYuT+sAu4KkWZ88iY1
- 0sCPb9dvVsXrONScmh528MKAltAPeg6ElD3u7s75cpk350FZLZZXYik9yhvtrsemkx
- 3cGXdhEP/jVxg==
-Date: Wed, 5 Apr 2023 09:13:10 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZC2eFqN+UdhM6Qu9@google.com>
-References: <20230330164948.29644-1-frank.li@vivo.com>
- <a6d9887f-1ff0-fd43-85ff-e6fee87bbe84@kernel.org>
+ s=k20201202; t=1680711619;
+ bh=aZWL0zcs3q9581Ru8j7YepShZdC8rcoI7ccdq3wCk7Q=;
+ h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+ b=Ev6VZsHiFwhR6SZiZ1go6umII/WSNGCYiKRdwjHVDNVrq8coT/DwXUOIMPH3GMovB
+ 6OvhWBQUNMVOZ00ktWyJRzZzI62QyMLn76WDRBasoX0VL0FfOw/qZtIY6pnx9gP7wA
+ tDvQJ0BlYKC0SfxwT1C4OQVGnyDrZar8QO1VNGCmI3H7aaT/rAQ2iB1X3V99+BA4BE
+ ounUHEFza5GwcP81/r9BmLVwPOuYgstezHyT3DTTx7I9XDqTE4pNhcWFGzVeO7QUZw
+ hTBJ1fBsQ4HuJUJY7CQNYqPN5xSdz4EEyfvVxjHIMRqbANa3uIUIIZ6zvMEBTjrGYL
+ 6DgX4YmlsPbEA==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ 6EAEBE29F4C; Wed,  5 Apr 2023 16:20:19 +0000 (UTC)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <a6d9887f-1ff0-fd43-85ff-e6fee87bbe84@kernel.org>
+From: patchwork-bot+f2fs@kernel.org
+Message-Id: <168071161944.13885.1835796747309052831.git-patchwork-notify@kernel.org>
+Date: Wed, 05 Apr 2023 16:20:19 +0000
+References: <20230124153346.74881-1-frank.li@vivo.com>
+In-Reply-To: <20230124153346.74881-1-frank.li@vivo.com>
+To: Yangtao Li <frank.li@vivo.com>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,12 +73,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 04/05, Chao Yu wrote: > On 2023/3/31 0:49,
- Yangtao Li wrote:
- > > +#ifdef CONFIG_F2FS_FS_LZ4HC > > + unsigned char level =
- F2FS_I(cc->inode)->i_compress_level; 
- > > if (level) > > len = LZ4_compress_ [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 24 Jan 2023 23:33:43 +0800 you
+ wrote: > f2fs supports lz4 compression algorithm and lz4hc compression
+ algorithm, 
+ > which the level parameter needs to be passed in. When CONFIG_F2FS_FS_LZ4HC
+ > [...] Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -92,9 +93,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pk5l9-00G8A3-3p
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: merge lz4hc_compress_pages() to
- lz4_compress_pages()
+X-Headers-End: 1pk5s1-00G8Pu-DD
+Subject: Re: [f2fs-dev] [PATCH 1/4] f2fs: fix to check lz4hc compression
+ when CONFIG_F2FS_FS_LZ4HC is not enabled
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,77 +107,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- Yangtao Li <frank.li@vivo.com>
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 04/05, Chao Yu wrote:
-> On 2023/3/31 0:49, Yangtao Li wrote:
-> > +#ifdef CONFIG_F2FS_FS_LZ4HC
-> > +	unsigned char level = F2FS_I(cc->inode)->i_compress_level;
-> >   	if (level)
-> >   		len = LZ4_compress_HC(cc->rbuf, cc->cbuf->cdata, cc->rlen,
-> >   					cc->clen, level, cc->private);
-> >   	else
-> 
-> [snip]
-> 
-> >   #endif
-> 
-> [snip]
-> 
-> > +		len = LZ4_compress_default(cc->rbuf, cc->cbuf->cdata, cc->rlen,
-> 
-> It's weired that whole else xxx; statement is split by #endif.
-> 
-> What about?
-> 
-> 	unsigned char level = 0;
-> 
-> #if
-> ...
-> #endif
-> 	if (!level)
-> 		len = LZ4_compress_default()
+Hello:
 
-I modified like this.
+This series was applied to jaegeuk/f2fs.git (dev)
+by Jaegeuk Kim <jaegeuk@kernel.org>:
 
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -266,17 +266,19 @@ static void lz4_destroy_compress_ctx(struct compress_ctx *cc)
-
- static int lz4_compress_pages(struct compress_ctx *cc)
- {
--       int len;
--#ifdef CONFIG_F2FS_FS_LZ4HC
-+       int len = -EINVAL;
-        unsigned char level = F2FS_I(cc->inode)->i_compress_level;
-
--       if (level)
-+       if (!level)
-+               len = LZ4_compress_default(cc->rbuf, cc->cbuf->cdata, cc->rlen,
-+                                               cc->clen, cc->private);
-+#ifdef CONFIG_F2FS_FS_LZ4HC
-+       else
-                len = LZ4_compress_HC(cc->rbuf, cc->cbuf->cdata, cc->rlen,
-                                        cc->clen, level, cc->private);
--       else
- #endif
--               len = LZ4_compress_default(cc->rbuf, cc->cbuf->cdata, cc->rlen,
--                                               cc->clen, cc->private);
-+       if (len < 0)
-+               return len;
-        if (!len)
-                return -EAGAIN;
-
+On Tue, 24 Jan 2023 23:33:43 +0800 you wrote:
+> f2fs supports lz4 compression algorithm and lz4hc compression algorithm,
+> which the level parameter needs to be passed in. When CONFIG_F2FS_FS_LZ4HC
+> is not enabled, even if there is no problem with the level parameter, add
+> the level parameter to the lz4 algorithm will cause the mount to fail.
 > 
-> Thanks,
+> Let's change it to be the same as other compression algorithms. When the
+> kernel does not enable the algorithm, ignore this parameter and print msg.
 > 
-> >   						cc->clen, cc->private);
-> >   	if (!len)
-> >   		return -EAGAIN;
+> [...]
+
+Here is the summary with links:
+  - [f2fs-dev,1/4] f2fs: fix to check lz4hc compression when CONFIG_F2FS_FS_LZ4HC is not enabled
+    (no matching commit)
+  - [f2fs-dev,2/4] f2fs: introduce f2fs_set_compress_level()
+    (no matching commit)
+  - [f2fs-dev,3/4] f2fs: set default compress option only when sb_has_compression
+    https://git.kernel.org/jaegeuk/f2fs/c/338abb312bb2
+  - [f2fs-dev,4/4] f2fs: merge lz4hc_compress_pages() to lz4_compress_pages()
+    (no matching commit)
+
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
 
 _______________________________________________
