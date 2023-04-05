@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4D696D8AB1
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Apr 2023 00:38:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 626F16D8A8B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Apr 2023 00:27:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pkBld-0004xP-Bi;
-	Wed, 05 Apr 2023 22:38:14 +0000
+	id 1pkBb2-0000z3-5F;
+	Wed, 05 Apr 2023 22:27:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <david@fromorbit.com>) id 1pkBlc-0004x1-KS
+ (envelope-from <david@fromorbit.com>) id 1pkBb0-0000yw-Cp
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 22:38:13 +0000
+ Wed, 05 Apr 2023 22:27:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sr4CJdOOx/6apQcfPjVNK8msYC2J6U4ttJpvFiO5hDA=; b=Fp0FRqo3jMEozJaqVrIipCqM2T
- 9jsLk+GsXpK08d+Lq/z8kx4bOGg7l4agUISBiYnZJvfO2+hAkwWcrOm9rgGf7/duNvqTOWt9RGfCm
- BXhUj8hQiTIPvqPTpAnjnJjwfxjQEEYz0w7RGdEyRMM2cAeq0n8cmlotZb0GJqD4rthQ=;
+ bh=XK91TzLV+BuNFfVuafZ92bpnVCXIC7GzKLzoDgloMhQ=; b=f451aAwiCVx4Ke4qwl1/NczpdM
+ Eru2refP4iSCyYWyr2I/+Rcs65CX+GoWSk84oK1xG/eMrudHaFCbb5CAGB03Yk8ljBGi6i4PqzXvf
+ 6GPTFjqav69rn2tjLFtSrLTenFMLo2E17k3Yk8+qk8hMY4Bmp0mcJMjJ7GoG1hpFzXHc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,95 +31,91 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sr4CJdOOx/6apQcfPjVNK8msYC2J6U4ttJpvFiO5hDA=; b=YzkpbAxo1sdnmV4kgVwKf+0Isi
- IB/ZYYgL7CcztUKiUOXaq60FUlq0gwv8SPld7RSN1Ii4SBEcb0IfGb2vp07mGrkfgXujiYgowroBU
- QpgFeierSFnC97OXVNlaKBLKz8bqXX94Np0hsPxxZc/KyWrqKY+7iFSc0pS/swFjFwW4=;
-Received: from mail-yw1-f171.google.com ([209.85.128.171])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=XK91TzLV+BuNFfVuafZ92bpnVCXIC7GzKLzoDgloMhQ=; b=G3YXuygwWuH8nYZY338whHt9vO
+ ytotPYy7G27rqm9T0Hvlx87zR2TI4yM/n441lvISBMv5PcAaiHaOUMtseRQh4MM4awb0/3t5EMyZb
+ +WWPxtzxA7NCjo6L0zfUGsV2pFaylX1tMbsbV7sWAudSZJd6RrucbAN2KAoVqL19xdWM=;
+Received: from mail-pf1-f179.google.com ([209.85.210.179])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pkBlb-00GLK8-Rv for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 22:38:13 +0000
-Received: by mail-yw1-f171.google.com with SMTP id
- 00721157ae682-54bfa5e698eso39459447b3.13
+ id 1pkBak-0004Ny-9Y for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 05 Apr 2023 22:27:11 +0000
+Received: by mail-pf1-f179.google.com with SMTP id q20so13513272pfs.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 05 Apr 2023 15:38:11 -0700 (PDT)
+ Wed, 05 Apr 2023 15:26:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fromorbit-com.20210112.gappssmtp.com; s=20210112; t=1680734286;
+ d=fromorbit-com.20210112.gappssmtp.com; s=20210112; t=1680733610;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sr4CJdOOx/6apQcfPjVNK8msYC2J6U4ttJpvFiO5hDA=;
- b=A2ebZYUzCzt2QZN45XHO9sH3qZv8FJBym2XAniJvc2/xCjW5iPAi7qBvSOsMAUqYT/
- 2Ib1XCWB0Ct5COj6bB1GLihqs0OjLEiM8q8v3vFk0n+A4RPqzuexTbIuVG9r0s3foB3X
- 8BR9T5Nch7rgF+ni2YlWfSekUzi+kpJ8dmPTL0wRettkr01PTzDzoNyuUf+RdnD8mka0
- KDxUoF6C2YbylYaIre58+KiPMzhQg9X/cZqA1ZuBFYmuL8Xst5NTK8pP2FI8yNLlqh3s
- xug0xDIGUwOQoRITANY4rrUftRl0bxFCXFfsLdnAFcGcN1SwlrE+3ufV2N9v7SIYjVpg
- FpHw==
+ bh=XK91TzLV+BuNFfVuafZ92bpnVCXIC7GzKLzoDgloMhQ=;
+ b=phPcb/SN25q2kw/FZ/aTqEL2YPFWV1/ZElIAli3MXwfTv+tjVLKBBur9WuCBaHCACZ
+ D0ju4+GcM15ciS601Xut6OQO62IcxpBJTZB44/j8jsTfzgxzPHi6TdM4MY4h6EyEny7j
+ BbdxTD7Y3B8eY3yR5kJLlHPTG42T+G04/g6dTuxR8Njnk2FYDl45LZH1iZ4SC7iVdwTL
+ tTVNywDojFuzLzWPQMIgKhwVwu6aApOhjuoSmwEpixB3aP31p9E2vZt7xOTDI/JRk5fv
+ sCNqzrkqiBz4QGhA8yapRr2so2J+w7D3gNKPhFHxFD9sZSe0S5qmiAchEhtJIawjKa7P
+ E+3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680734286;
+ d=1e100.net; s=20210112; t=1680733610;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sr4CJdOOx/6apQcfPjVNK8msYC2J6U4ttJpvFiO5hDA=;
- b=hqUXm3cJ2VLKgA2cgg//3buwpWsIGQ3MSGC6+cGwfwP9KzxUuqaJaGPDbBUfxW6POa
- 61a0Wl/bbkgEWF8ql1DOwILyHIMcy4JjzWYf0gxe2zfRiuCU6Dq1L/il7IXcywMBKolo
- TtxlSq1IAUKiicj7s42E8t4K3npi/bMDSkq41O6Dzz1zqI/YhQMKyY0DsAx2Zz8gAnZF
- t2ruXNU8u1VgGaj8qZbKCAVATSbLSzlLw5GGLUSh0vZ+oPuzCsbyeU+tz3NWztPt7ykO
- G8Ay4I2UBRi60DzGkZYwzoaAP51vPXLpl2gikWPm0TzljuIKKfT1H5ZHxkx14u9uqDN3
- oAcA==
-X-Gm-Message-State: AAQBX9dE8vgKsqNZQnLu9XwbHoJUWx3Yc/6NaCCydo0z5iTnkjDBmo2c
- rUJf3wEhC2edN5QeIUYt0iuEuf9/u1NDkjRCabM=
-X-Google-Smtp-Source: AKy350buwNZtgpjQjNrpY+dRBomVST4nFtdRBnQ6Mea8vZue8EC+2ZTK97MNMJLE5y0NZdZDQ14O+g==
-X-Received: by 2002:aa7:9a44:0:b0:626:1c2a:2805 with SMTP id
- x4-20020aa79a44000000b006261c2a2805mr5960988pfj.25.1680732898541; 
- Wed, 05 Apr 2023 15:14:58 -0700 (PDT)
+ bh=XK91TzLV+BuNFfVuafZ92bpnVCXIC7GzKLzoDgloMhQ=;
+ b=SUMjbWeXYYFnno0kxb1ecPGsMGNGNAlL9KHh74p+MKo5Z/Urm8Ff4dN8afeauhXoGS
+ oG2dIQSKySD3zEiEF8CWHqfCKlVCCRo+gyEhDj+CLOr2jlx3x62LP56SoSTPt9QpxClZ
+ xrMB6dMOFHiUhuMHM2IwxHgt40Uc8JUp4OOFsrKUN/pmJCRyhRXWN//6Dr4aOsgx7bTC
+ oZgF7X0wZWi8JOXin5/Mx6DEY4QRllP+l6Ujnj4LgUkvrNjgxGLhdw7mL2vV3J/HRwRN
+ ze7M6FWXH7okVNZeAhcUXZXbm+RQj/Penk9QT4wSwb8TbW+qQBTDMFpDjSe6U1G0ex5w
+ VLuw==
+X-Gm-Message-State: AAQBX9c0sM6FOMFbAQKGV1m91WwpomdlVF5xYHEgMSTTi6wtT6p33IEa
+ ISOm6IdsJ1h0B6ofACazuk8/SQ==
+X-Google-Smtp-Source: AKy350ZizTU3q/Uc2TiZy7crqeJ4jvK0CtSZoX/AzNtdP+Y2QHldAbm030UMhCShfo2v0Sb07Y+LGg==
+X-Received: by 2002:a62:1d8f:0:b0:627:e577:4326 with SMTP id
+ d137-20020a621d8f000000b00627e5774326mr6595721pfd.17.1680733610237; 
+ Wed, 05 Apr 2023 15:26:50 -0700 (PDT)
 Received: from dread.disaster.area (pa49-181-91-157.pa.nsw.optusnet.com.au.
  [49.181.91.157]) by smtp.gmail.com with ESMTPSA id
- t17-20020a62ea11000000b005a9ea5d43ddsm11542560pfh.174.2023.04.05.15.14.58
+ 2-20020aa79142000000b0062c0cfbb264sm11493110pfi.93.2023.04.05.15.26.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Apr 2023 15:14:58 -0700 (PDT)
+ Wed, 05 Apr 2023 15:26:49 -0700 (PDT)
 Received: from dave by dread.disaster.area with local (Exim 4.92.3)
  (envelope-from <david@fromorbit.com>)
- id 1pkBP4-00HUS4-Uz; Thu, 06 Apr 2023 08:14:54 +1000
-Date: Thu, 6 Apr 2023 08:14:54 +1000
+ id 1pkBaY-00HUjN-NL; Thu, 06 Apr 2023 08:26:46 +1000
+Date: Thu, 6 Apr 2023 08:26:46 +1000
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20230405221454.GQ3223426@dread.disaster.area>
+Message-ID: <20230405222646.GR3223426@dread.disaster.area>
 References: <20230404145319.2057051-1-aalbersh@redhat.com>
- <20230404145319.2057051-20-aalbersh@redhat.com>
- <20230404161047.GA109974@frogsfrogsfrogs>
- <20230405150142.3jmxzo5i27bbc4c4@aalbersh.remote.csb>
- <20230405150927.GD303486@frogsfrogsfrogs>
- <ZC2YsgYRsvBejGYY@infradead.org> <ZC23x22bxItnsANI@gmail.com>
+ <20230404145319.2057051-22-aalbersh@redhat.com>
+ <20230404163602.GC109974@frogsfrogsfrogs>
+ <20230405160221.he76fb5b45dud6du@aalbersh.remote.csb>
+ <20230405163847.GG303486@frogsfrogsfrogs>
+ <ZC264FSkDQidOQ4N@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <ZC23x22bxItnsANI@gmail.com>
-X-Spam-Score: -0.0 (/)
+In-Reply-To: <ZC264FSkDQidOQ4N@gmail.com>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Apr 05, 2023 at 06:02:47PM +0000, Eric Biggers wrote:
- > And I really hope that you don't want to do DIO to the *Merkle tree*, as
- that Not for XFS - the merkle tree is not held as file data. That said, the
- merkle tree in XFS is not page cache or block aligned metadata either, so
- we really want the same memory buffer based interface for the merkle tree
- reading so that the merkle tree code [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  On Wed, Apr 05, 2023 at 06:16:00PM +0000, Eric Biggers wrote:
+ > On Wed, Apr 05, 2023 at 09:38:47AM -0700, Darrick J. Wong wrote: > > >
+ The merkle tree pages are dropped after verification. When page i [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.128.171 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.179 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.179 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.171 listed in wl.mailspike.net]
-X-Headers-End: 1pkBlb-00GLK8-Rv
-Subject: Re: [f2fs-dev] [PATCH v2 19/23] xfs: disable direct read path for
- fs-verity sealed files
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1pkBak-0004Ny-9Y
+Subject: Re: [f2fs-dev] [PATCH v2 21/23] xfs: handle merkle tree block size
+ != fs blocksize != PAGE_SIZE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -138,7 +134,7 @@ Cc: fsverity@lists.linux.dev, linux-xfs@vger.kernel.org,
  linux-ext4@vger.kernel.org, agruenba@redhat.com,
  "Darrick J. Wong" <djwong@kernel.org>,
  Andrey Albershteyn <aalbersh@redhat.com>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, hch@infradead.org,
  cluster-devel@redhat.com, dchinner@redhat.com, rpeterso@redhat.com,
  xiang@kernel.org, jth@kernel.org, linux-erofs@lists.ozlabs.org,
  damien.lemoal@opensource.wdc.com, linux-btrfs@vger.kernel.org
@@ -146,16 +142,58 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Apr 05, 2023 at 06:02:47PM +0000, Eric Biggers wrote:
-> And I really hope that you don't want to do DIO to the *Merkle tree*, as that
+On Wed, Apr 05, 2023 at 06:16:00PM +0000, Eric Biggers wrote:
+> On Wed, Apr 05, 2023 at 09:38:47AM -0700, Darrick J. Wong wrote:
+> > > The merkle tree pages are dropped after verification. When page is
+> > > dropped xfs_buf is marked as verified. If fs-verity wants to
+> > > verify again it will get the same verified buffer. If buffer is
+> > > evicted it won't have verified state.
+> > > 
+> > > So, with enough memory pressure buffers will be dropped and need to
+> > > be reverified.
+> > 
+> > Please excuse me if this was discussed and rejected long ago, but
+> > perhaps fsverity should try to hang on to the merkle tree pages that
+> > this function returns for as long as possible until reclaim comes for
+> > them?
+> > 
+> > With the merkle tree page lifetimes extended, you then don't need to
+> > attach the xfs_buf to page->private, nor does xfs have to extend the
+> > buffer cache to stash XBF_VERITY_CHECKED.
+> 
+> Well, all the other filesystems that support fsverity (ext4, f2fs, and btrfs)
+> just cache the Merkle tree pages in the inode's page cache.  It's an approach
+> that I know some people aren't a fan of, but it's efficient and it works.
 
-Not for XFS - the merkle tree is not held as file data.
+Which puts pages beyond EOF in the page cache. Given that XFS also
+allows persistent block allocation beyond EOF, having both data in the page
+cache and blocks beyond EOF that contain unrelated information is a
+Real Bad Idea.
 
-That said, the merkle tree in XFS is not page cache or block aligned
-metadata either, so we really want the same memory buffer based
-interface for the merkle tree reading so that the merkle tree code
-can read directly from the xfs-buf rather than requiring us to copy
-it out of the xfsbuf into temporary pages...
+Just because putting metadata in the file data address space works
+for one filesystem, it doesn't me it's a good idea or that it works
+for every filesystem.
+
+> We could certainly think about moving to a design where fs/verity/ asks the
+> filesystem to just *read* a Merkle tree block, without adding it to a cache, and
+> then fs/verity/ implements the caching itself.  That would require some large
+> changes to each filesystem, though, unless we were to double-cache the Merkle
+> tree blocks which would be inefficient.
+
+No, that's unnecessary.
+
+All we need if for fsverity to require filesystems to pass it byte
+addressable data buffers that are externally reference counted. The
+filesystem can take a page reference before mapping the page and
+passing the kaddr to fsverity, then unmap and drop the reference
+when the merkle tree walk is done as per Andrey's new drop callout.
+
+fsverity doesn't need to care what the buffer is made from, how it
+is cached, what it's life cycle is, etc. The caching mechanism and
+reference counting is entirely controlled by the filesystem callout
+implementations, and fsverity only needs to deal with memory buffers
+that are guaranteed to live for the entire walk of the merkle
+tree....
 
 Cheers,
 
