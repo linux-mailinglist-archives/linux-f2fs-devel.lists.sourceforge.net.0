@@ -2,115 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBE8E6D7E9D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 16:05:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0FC36D838A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 18:21:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pk3lh-00081c-LV;
-	Wed, 05 Apr 2023 14:05:44 +0000
+	id 1pk5sk-0000CA-EL;
+	Wed, 05 Apr 2023 16:21:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zlang@redhat.com>) id 1pk3lE-00081L-Hx
+ (envelope-from <chao@kernel.org>) id 1pk5sg-0000C3-2o
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 14:05:25 +0000
+ Wed, 05 Apr 2023 16:21:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=net1/YQpLyeedtAUAtKmhMoSFz+7An5MzKe0V2cpLas=; b=TBw8gG7ZUjtlfTZY4uO5iqDSWk
- ibilBfjn8CvTDjlw8k5JUtuBI0y/BI/fAgTLP7fCLoahM1QJ49GFqEwZr0ItL8iSBiram0F7+eC38
- TiTSRUuxWb1LMW8UBewKlns1pRtFJ4/ycHwBRWzfCZgROhyq8KaHe2+fRbHJ1h2cTDwo=;
+ bh=1KHuoOHO4Pp4VgnkuM2R0x0IoDrKVIg9RgiS8cWT1qw=; b=PKOlB6WMjtvxVOf1RDs/TSWPEA
+ kYmPKXMZQFZQb6QiOqmzpaY4v0yL66pzR0+NY5VWB6ZyLnWd6sTECwdnmwoByvBow7X2Byn0zNq44
+ rOgHwWLy3I7yaVCBdBsZwx5FFSGXrNAzL7J4E4KDnn9SwuY7XP3y4oZSEw4x9CVEkfXI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=net1/YQpLyeedtAUAtKmhMoSFz+7An5MzKe0V2cpLas=; b=BYZy4G9lslV6SE18cF0hPW9eto
- MHHF1A45UgbZQRHz4iH27tDKnG8CGnsbW7kG+xPSXLyT6ac1ZNgiob6zCI7cDB9SKQ5cTWfQqJkWh
- yNrPPwdPN+3aROFDxvx0CcpCX/j3QN/e/swUnuJEYpxkqF9rVKEtl4YQu4oGYcQxCe2U=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=1KHuoOHO4Pp4VgnkuM2R0x0IoDrKVIg9RgiS8cWT1qw=; b=j
+ OCLZMpNzvV206FHtUMy5GWBgsrvWm1JYsuDJgyaW+5nrE5KrFimMUtfkI9Z9FIStkaKEK83eivW4x
+ AztUk/qTR4WgybfP2ZMatugOTBRq5k/60e9a5IOvKE7TE3n49B4gZ2JEMC0rIKdC9Ctpu1dAKz2/L
+ nDhsjew/6lRSsiqg=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pk3l8-00G3B8-97 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 14:05:15 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1680703501;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=net1/YQpLyeedtAUAtKmhMoSFz+7An5MzKe0V2cpLas=;
- b=JGJeULaeMyhYtlq101XNuQtgSD0BWDFEGdbPJ/JTcn7w7MdJDA+EinvhafDj6wVG7T9sDF
- fFt2lagut/m/ZNFavnhls8dJf+NBUMoCI/6BKBNNkrGXu4GL2REayYV5bRFMoVUNCMGHy3
- lGbUduN9DDmP+dZflU2nhL1kvqUyP+c=
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-315-ggUSKofwM7-z2cIBGskDYQ-1; Wed, 05 Apr 2023 10:02:12 -0400
-X-MC-Unique: ggUSKofwM7-z2cIBGskDYQ-1
-Received: by mail-pj1-f70.google.com with SMTP id
- oa14-20020a17090b1bce00b0023d1b58d3baso11459697pjb.4
+ id 1pk5sg-00G8Ss-FB for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 05 Apr 2023 16:21:06 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1306C63F85
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 05 Apr 2023 07:02:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680703331;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=net1/YQpLyeedtAUAtKmhMoSFz+7An5MzKe0V2cpLas=;
- b=LCRfabKbFSi/5YtunO4tFaozIsQ0M39cjCp0K/C74kC/uxJOTy3uiQ4r1wgG31EqMh
- RutT+yvJ4cfw8LZuvPTs1ePm+ti2ZQEwknBHrXy0YjDssCZB/jREx8ZD6yZCf56jp7Px
- 1myW0O3XVSeiiuBriSCtInR/+mB9m6e5xHdfJZgJUDkrZvv/TZnuJLQEEGjnAWdCKr3E
- Vr7m0F5MKnu1u5LC5gFknZIaxCKyVFnzMc3z5+IxrYyWEYs8HbYFvAfpXPVbc5OO0GE2
- B2k8tDWZDLSCbMDlkbbz3WmNZrlLbrPigYMFb58JCOye4h4vDChG+E2TFmoSDt9itr9k
- cjGg==
-X-Gm-Message-State: AAQBX9cLKBkdWAnGxMPpgaEyKNgaAZoKJQgXVrdIQXnmRIc8fRaMA7nL
- hVkAKpOQa7CNiH5pvUw3EshV4qn6vLEjVzIcZuDdDo8UqTQzNz8dwdOSgQrY2Kug+84d1cBhdWt
- raEQbrQwtF7I9C/cV1R3jZ7ILaOdJEqsNzPrfNg==
-X-Received: by 2002:a17:903:283:b0:1a1:cd69:d301 with SMTP id
- j3-20020a170903028300b001a1cd69d301mr6292227plr.68.1680703330929; 
- Wed, 05 Apr 2023 07:02:10 -0700 (PDT)
-X-Google-Smtp-Source: AKy350Z3hrO2tDczikPPadND/siCWP3StMDF6ZwRfuQDU1LtW+SuQXatmasFWBRAsAV4qHbVdUEpFA==
-X-Received: by 2002:a17:903:283:b0:1a1:cd69:d301 with SMTP id
- j3-20020a170903028300b001a1cd69d301mr6292202plr.68.1680703330583; 
- Wed, 05 Apr 2023 07:02:10 -0700 (PDT)
-Received: from zlang-mailbox ([43.228.180.230])
- by smtp.gmail.com with ESMTPSA id
- b24-20020a630c18000000b005023496e339sm9037285pgl.63.2023.04.05.07.02.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Apr 2023 07:02:10 -0700 (PDT)
-Date: Wed, 5 Apr 2023 22:02:02 +0800
-From: Zorro Lang <zlang@redhat.com>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20230405140202.bdp3lzgross2cjbt@zlang-mailbox>
-References: <20230404171411.699655-1-zlang@kernel.org>
- <20230404171411.699655-4-zlang@kernel.org>
- <20230404221653.GC1893@sol.localdomain>
+ Wed,  5 Apr 2023 16:21:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ACCDBC433EF;
+ Wed,  5 Apr 2023 16:20:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1680711660;
+ bh=GzJotDDyx4YLgFNr3TBry5o3drZWZVKpvv5e3qKlLUQ=;
+ h=From:To:Cc:Subject:Date:From;
+ b=DSOaLTHWUE4O2oIJGxfOpv2NKBLHCKFSXvv6mQCkqTsX3FMjQgDSazRsx67j1FA6k
+ 6iQlM6slmxke4aiKaIHdPDSFYDqq559jMGPHwrw7a0OVco7dv4D7moVwcxTpFRiDl0
+ DLMpCIQUQPV/sD6QmYE7DOwWWIW9cDecpS0E606XkLdSfcrmJ8yb4KgI7QQbJllxu0
+ JBWz2RVtA1AKHtUe0AdggOim/K4/e+VikwPbI2gFsZXhGm9SlJVWuZGidmhScvMWS5
+ DH6Hoc80zXsaW5cHiqkmKWfxiM1qS+fHUJvMezK3TlBRrEEhU+xFmI8u3nLGLsQBqP
+ HK/pIreXffQtQ==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Wed,  5 Apr 2023 22:43:59 +0800
+Message-Id: <20230405144359.930253-1-chao@kernel.org>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-In-Reply-To: <20230404221653.GC1893@sol.localdomain>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Apr 04, 2023 at 03:16:53PM -0700, Eric Biggers wrote:
- > Hi Zorro, > > On Wed, Apr 05, 2023 at 01:14:09AM +0800, Zorro Lang wrote:
- > > +FSVERITY > > +L: fsverity@lists.linux.dev > > +S: Support [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: xfstest generic/614 fails to run due below reason:
+ generic/614
+ 1s ... [not run] test requires delayed allocation buffered writes The root
+ cause is f2fs tags wrong fiemap flag for delay allocated extent. 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.129.124 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -120,12 +88,10 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [170.10.129.124 listed in wl.mailspike.net]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pk3l8-00G3B8-97
-Subject: Re: [f2fs-dev] [PATCH 3/5] fstests/MAINTAINERS: add supported
- mailing list
+X-Headers-End: 1pk5sg-00G8Ss-FB
+Subject: [f2fs-dev] [PATCH] f2fs: fix to tag FIEMAP_EXTENT_DELALLOC in
+ fiemap() for delay allocated extent
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -137,54 +103,82 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-cifs@vger.kernel.org, brauner@kernel.org, linux-ext4@vger.kernel.org,
- Zorro Lang <zlang@kernel.org>, djwong@kernel.org, amir73il@gmail.com,
- linux-nfs@vger.kernel.org, fstests@vger.kernel.org,
- linux-unionfs@vger.kernel.org, linux-xfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, anand.jain@oracle.com, jack@suse.com,
- fdmanana@suse.com, ceph-devel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-btrfs@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Apr 04, 2023 at 03:16:53PM -0700, Eric Biggers wrote:
-> Hi Zorro,
-> 
-> On Wed, Apr 05, 2023 at 01:14:09AM +0800, Zorro Lang wrote:
-> > +FSVERITY
-> > +L:	fsverity@lists.linux.dev
-> > +S:	Supported
-> > +F:	common/verity
-> > +
-> > +FSCRYPT
-> > +L:      linux-fscrypt@vger.kernel.org
-> > +S:	Supported
-> > +F:	common/encrypt
-> 
-> Most of the encrypt and verity tests are in tests/generic/ and are in the
-> 'encrypt' or 'verity' test groups.
-> 
-> These file patterns only pick up the common files, not the actual tests.
-> 
-> Have you considered adding a way to specify maintainers for a test group?
-> Something like:
-> 
->     G:      encrypt
-> 
-> and
-> 
->     G:      verity
+xfstest generic/614 fails to run due below reason:
 
-Good idea! Let's check if this patchset is acceptable by most of you,
-then I'll think about how to add this feature later.
+generic/614 1s ... [not run] test requires delayed allocation buffered writes
 
-Thanks,
-Zorro
+The root cause is f2fs tags wrong fiemap flag for delay allocated
+extent.
 
-> 
-> - Eric
-> 
+Quoted from fiemap.h:
+FIEMAP_EXTENT_UNKNOWN		0x00000002 /* Data location unknown. */
+FIEMAP_EXTENT_DELALLOC		0x00000004 /* Location still pending.
+						    * Sets EXTENT_UNKNOWN. */
+FIEMAP_EXTENT_UNWRITTEN		0x00000800 /* Space allocated, but
+						    * no data (i.e. zero). */
+
+FIEMAP_EXTENT_UNWRITTEN means block address is preallocated, but w/o
+been written any data, which status f2fs is not supported now, for all
+NEW_ADDR block addresses, it means delay allocated blocks, so let's
+tag FIEMAP_EXTENT_DELALLOC instead.
+
+Testcase:
+xfs_io -f -c 'pwrite 0 64k' /mnt/f2fs/file;
+filefrag -v /mnt/f2fs/file
+
+Output:
+- Before
+Filesystem type is: f2f52010
+Fize of /mnt/f2fs/file is 65536 (16 blocks of 4096 bytes)
+ ext:     logical_offset:        physical_offset: length:   expected: flags:
+   0:        0..      15:          0..        15:     16:             last,unwritten,merged,eof
+/mnt/f2fs/file: 1 extent found
+
+After:
+Filesystem type is: f2f52010
+File size of /mnt/f2fs/file is 65536 (16 blocks of 4096 bytes)
+ ext:     logical_offset:        physical_offset: length:   expected: flags:
+   0:        0..      15:          0..         0:      0:             last,unknown_loc,delalloc,eof
+/mnt/f2fs/file: 1 extent found
+
+Fixes: 7f63eb77af7b ("f2fs: report unwritten area in f2fs_fiemap")
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/data.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 359de650772e..3afc9764743e 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1995,7 +1995,10 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 	}
+ 
+ 	if (size) {
+-		flags |= FIEMAP_EXTENT_MERGED;
++		if (flags & FIEMAP_EXTENT_DELALLOC)
++			phys = 0;
++		else
++			flags |= FIEMAP_EXTENT_MERGED;
+ 		if (IS_ENCRYPTED(inode))
+ 			flags |= FIEMAP_EXTENT_DATA_ENCRYPTED;
+ 
+@@ -2035,7 +2038,7 @@ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 				size += blks_to_bytes(inode, 1);
+ 			}
+ 		} else if (map.m_flags & F2FS_MAP_DELALLOC) {
+-			flags = FIEMAP_EXTENT_UNWRITTEN;
++			flags = FIEMAP_EXTENT_DELALLOC;
+ 		}
+ 
+ 		start_blk += bytes_to_blks(inode, size);
+-- 
+2.36.1
 
 
 
