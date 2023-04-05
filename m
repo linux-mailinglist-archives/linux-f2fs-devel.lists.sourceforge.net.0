@@ -2,72 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35DDC6D85C8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 20:16:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EFFB6D88DE
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 22:43:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pk7g4-0001w1-Gp;
-	Wed, 05 Apr 2023 18:16:13 +0000
+	id 1pk9yc-0003QJ-IY;
+	Wed, 05 Apr 2023 20:43:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1pk7g4-0001vv-2M
+ (envelope-from <jaegeuk@kernel.org>) id 1pk9ya-0003QD-Ok
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 18:16:12 +0000
+ Wed, 05 Apr 2023 20:43:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nMGdYZVz88iNnPqnJrvWnqcw1Ql+5T1kzULIEIbApDk=; b=CqNWLylTfA6L+UMMnHLadGxJRg
- SFFZ15IOmOeOWMor/FhxeWaz9Av3Zxw45wZB4uIESlgM6YOiD7rYCRNl7RATr3Y1LyFRHMJul6QnZ
- yYPLeQokvM/tRcl7mGL103ivgyUD+4/DG0A27SergrPSRBKYvP//fA5iDu6KPOEkW2f4=;
+ bh=JniBpkCHHAEoMHOK1pvPuRbN+M6IRib/BlHFmE8D0Sg=; b=H5qR7nNzOoArhOYC6zLk8lcvpg
+ GQJUUrJqy1SE9lGw0QHmbUU9RtQSdIo7sERchk8vo0lHY0bzkE/BORp7ooOsowr/DGEMnQfYBONDx
+ YspY5IYEP/Geo6GF29S2gNa06+PIMT9JucjkveacBFblQmds7H+8bnslhO0QJREU5JfA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=nMGdYZVz88iNnPqnJrvWnqcw1Ql+5T1kzULIEIbApDk=; b=FFU+mjFMRKuanjZmPv1b2hbHv7
- LO7yT6u/IgwSUHTcFXLZ2hVxnxTJrsi+XaMs00Yq1C4BbO2E9OYAMZy04odxRaMjI9HJWVhk3c6Ch
- hxl7KQG7hkSyN9g6KCEgUN0DTB5B8dFJSedl7358jFhfnzILKCoswMGN4piF2ySt4Ebo=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=JniBpkCHHAEoMHOK1pvPuRbN+M6IRib/BlHFmE8D0Sg=; b=I
+ d0vl7s30jEEeMFf+5A7m+q9fvchLqSm2jXe3OUKhy5BjrYRlPU3m2nUJ4zrLdUXBLBorbdRl0RZ0l
+ 4mQDsLmVugYpYme3qlPKshEq3gqPTkNkHhe0MMS4x6ZhxPpTAZJhHxZdkiWZ5pyD5YkALz8pLgB+w
+ QA0OR36GguyzqUqU=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pk7fz-00067m-PL for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 18:16:12 +0000
+ id 1pk9ya-0001W5-8S for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 05 Apr 2023 20:43:29 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4EC7B63D3A;
- Wed,  5 Apr 2023 18:16:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 710CAC433EF;
- Wed,  5 Apr 2023 18:16:01 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id CCE8A6286E
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed,  5 Apr 2023 20:43:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32284C433EF;
+ Wed,  5 Apr 2023 20:43:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1680718561;
- bh=wiJeaBlTTUnHN5dRjU986tMd+hpSmAJjFn5myvsg4zA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=REOOWtLgQ9JDh9SSF6xoyg94oSouuHFnpL2v3YnQ3T2oBYSI6IMS8Hy8imtRKtDy1
- cU3K/Iy3e/I3Q2+TSdKRafqsRNXapecZukPc1WANLn9sTP01Li50nyZ7qlCS5TCVJ+
- 3cW7AZM1K/82Q6rN89XufLRWJRxkvNpgVxn/rDB2tRQwEAn32VY0qtyYqIT5Mhljtf
- O5whuuDDjSKbQwdJKsF8Nl8Wr8dqY9vgtd1lUYNpjci7tFUD9wHH4/61yvdWJlTH+K
- DtIew2Dd7HkelryBLbZ5MioiFh7yAV2qMaWKrH/687VXslb1Q2GI4zSjEhOMaWMwe0
- NDlFE8RqYVveQ==
-Date: Wed, 5 Apr 2023 18:16:00 +0000
-From: Eric Biggers <ebiggers@kernel.org>
-To: "Darrick J. Wong" <djwong@kernel.org>
-Message-ID: <ZC264FSkDQidOQ4N@gmail.com>
-References: <20230404145319.2057051-1-aalbersh@redhat.com>
- <20230404145319.2057051-22-aalbersh@redhat.com>
- <20230404163602.GC109974@frogsfrogsfrogs>
- <20230405160221.he76fb5b45dud6du@aalbersh.remote.csb>
- <20230405163847.GG303486@frogsfrogsfrogs>
+ s=k20201202; t=1680727402;
+ bh=6e4aZuW0CQQJwSrwrHjU6vWTR/ojeKCfsa6BmYjfvTA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=kVU7e56XTp0GILO03kRtXnM7vFH2/BeDjpP+O+rtcTuTvrF1HZsC3vtmE8rd0+ljh
+ zyXVwpICoks53jh1WRHNftqqHZZtLrWGmJMv1e8uf2m4eK6CfXuHCaPBCPgNRFlNZg
+ gSloE5T4979gfWCTRQODPVDJ25EQTdiqwFy2xNd66vQZULILV3reSwLQtTvMFP27yG
+ iWbMAFcMbdUzMM/pD/cpPK7+IDIepwMqmBcOw8MKIj0vnFWZ5CMwP6xfVwtbf7FhdP
+ BkKYpeYDaHmWMoVyyVBqkelbmdHwoUgnMcypzG6dyEYJLkUL9Uu4izVri6EJSYGoFZ
+ 3AleDHXkHQjGw==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Wed,  5 Apr 2023 13:43:21 -0700
+Message-Id: <20230405204321.2056498-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.40.0.348.gf938b09366-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230405163847.GG303486@frogsfrogsfrogs>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -75,9 +71,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Apr 05, 2023 at 09:38:47AM -0700, Darrick J. Wong
- wrote: > > The merkle tree pages are dropped after verification. When page
- is > > dropped xfs_buf is marked as verified. If fs-verity wants to [...]
+ Content preview: set_page_private_# increases a refcount after attaching
+ page->private, and clear_page_private_# decreases it. But,
+ f2fs_release_folio and f2fs_invalidate_folio
+ call folio_detach_private() which decrea [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,9 +89,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1pk7fz-00067m-PL
-Subject: Re: [f2fs-dev] [PATCH v2 21/23] xfs: handle merkle tree block size
- != fs blocksize != PAGE_SIZE
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pk9ya-0001W5-8S
+Subject: [f2fs-dev] [PATCH] f2fs: attach/detach private value in pair
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,52 +103,181 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: fsverity@lists.linux.dev, linux-xfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, agruenba@redhat.com,
- Andrey Albershteyn <aalbersh@redhat.com>,
- linux-f2fs-devel@lists.sourceforge.net, hch@infradead.org,
- cluster-devel@redhat.com, dchinner@redhat.com, rpeterso@redhat.com,
- xiang@kernel.org, jth@kernel.org, linux-erofs@lists.ozlabs.org,
- damien.lemoal@opensource.wdc.com, linux-btrfs@vger.kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, stable@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Apr 05, 2023 at 09:38:47AM -0700, Darrick J. Wong wrote:
-> > The merkle tree pages are dropped after verification. When page is
-> > dropped xfs_buf is marked as verified. If fs-verity wants to
-> > verify again it will get the same verified buffer. If buffer is
-> > evicted it won't have verified state.
-> > 
-> > So, with enough memory pressure buffers will be dropped and need to
-> > be reverified.
-> 
-> Please excuse me if this was discussed and rejected long ago, but
-> perhaps fsverity should try to hang on to the merkle tree pages that
-> this function returns for as long as possible until reclaim comes for
-> them?
-> 
-> With the merkle tree page lifetimes extended, you then don't need to
-> attach the xfs_buf to page->private, nor does xfs have to extend the
-> buffer cache to stash XBF_VERITY_CHECKED.
+set_page_private_# increases a refcount after attaching page->private, and
+clear_page_private_# decreases it.
+But, f2fs_release_folio and f2fs_invalidate_folio call folio_detach_private()
+which decreases the refcount again, which corrupts the page cache.
 
-Well, all the other filesystems that support fsverity (ext4, f2fs, and btrfs)
-just cache the Merkle tree pages in the inode's page cache.  It's an approach
-that I know some people aren't a fan of, but it's efficient and it works.
+Cc: <stable@vger.kernel.org>
+Fixes: b763f3bedc2d ("f2fs: restructure f2fs page.private layout")
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ fs/f2fs/compress.c |  4 ++--
+ fs/f2fs/data.c     |  6 ++++--
+ fs/f2fs/f2fs.h     | 48 ++++++++++++++++------------------------------
+ 3 files changed, 22 insertions(+), 36 deletions(-)
 
-We could certainly think about moving to a design where fs/verity/ asks the
-filesystem to just *read* a Merkle tree block, without adding it to a cache, and
-then fs/verity/ implements the caching itself.  That would require some large
-changes to each filesystem, though, unless we were to double-cache the Merkle
-tree blocks which would be inefficient.
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 11653fa79289..70b3910db413 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1854,7 +1854,7 @@ void f2fs_cache_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
+ 		return;
+ 	}
+ 
+-	set_page_private_data(cpage, ino);
++	set_page_private_ino(cpage, ino);
+ 
+ 	if (!f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE_READ))
+ 		goto out;
+@@ -1917,7 +1917,7 @@ void f2fs_invalidate_compress_pages(struct f2fs_sb_info *sbi, nid_t ino)
+ 				continue;
+ 			}
+ 
+-			if (ino != get_page_private_data(&folio->page)) {
++			if (ino != get_page_private_ino(&folio->page)) {
+ 				folio_unlock(folio);
+ 				continue;
+ 			}
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 359de650772e..7262c754ff8b 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -3724,8 +3724,9 @@ void f2fs_invalidate_folio(struct folio *folio, size_t offset, size_t length)
+ 
+ 	if (test_opt(sbi, COMPRESS_CACHE) &&
+ 			inode->i_ino == F2FS_COMPRESS_INO(sbi))
+-		clear_page_private_data(&folio->page);
++		clear_page_private_ino(&folio->page);
+ 
++	WARN_ON_ONCE(page_private(&folio->page));
+ 	folio_detach_private(folio);
+ }
+ 
+@@ -3742,12 +3743,13 @@ bool f2fs_release_folio(struct folio *folio, gfp_t wait)
+ 		struct inode *inode = folio->mapping->host;
+ 
+ 		if (inode->i_ino == F2FS_COMPRESS_INO(sbi))
+-			clear_page_private_data(&folio->page);
++			clear_page_private_ino(&folio->page);
+ 	}
+ 
+ 	clear_page_private_reference(&folio->page);
+ 	clear_page_private_gcing(&folio->page);
+ 
++	WARN_ON_ONCE(page_private(&folio->page));
+ 	folio_detach_private(folio);
+ 	return true;
+ }
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index dfead8160a51..3d883201e7a5 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1395,6 +1395,7 @@ enum {
+ 	PAGE_PRIVATE_ONGOING_MIGRATION,		/* data page which is on-going migrating */
+ 	PAGE_PRIVATE_INLINE_INODE,		/* inode page contains inline data */
+ 	PAGE_PRIVATE_REF_RESOURCE,		/* dirty page has referenced resources */
++	PAGE_PRIVATE_DATA,			/* page has referenced data */
+ 	PAGE_PRIVATE_MAX
+ };
+ 
+@@ -1409,73 +1410,56 @@ static inline bool page_private_##name(struct page *page) \
+ #define PAGE_PRIVATE_SET_FUNC(name, flagname) \
+ static inline void set_page_private_##name(struct page *page) \
+ { \
+-	if (!PagePrivate(page)) { \
+-		get_page(page); \
+-		SetPagePrivate(page); \
+-		set_page_private(page, 0); \
+-	} \
++	if (!PagePrivate(page)) \
++		attach_page_private(page, 0); \
+ 	set_bit(PAGE_PRIVATE_NOT_POINTER, &page_private(page)); \
+ 	set_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
+ }
+ 
++/* clear private by f2fs_release_folio or f2fs_invalidate_folio */
+ #define PAGE_PRIVATE_CLEAR_FUNC(name, flagname) \
+ static inline void clear_page_private_##name(struct page *page) \
+ { \
+ 	clear_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
+-	if (page_private(page) == BIT(PAGE_PRIVATE_NOT_POINTER)) { \
++	if (page_private(page) == BIT(PAGE_PRIVATE_NOT_POINTER)) \
+ 		set_page_private(page, 0); \
+-		if (PagePrivate(page)) { \
+-			ClearPagePrivate(page); \
+-			put_page(page); \
+-		}\
+-	} \
+ }
+ 
+ PAGE_PRIVATE_GET_FUNC(nonpointer, NOT_POINTER);
+ PAGE_PRIVATE_GET_FUNC(inline, INLINE_INODE);
+ PAGE_PRIVATE_GET_FUNC(gcing, ONGOING_MIGRATION);
+ PAGE_PRIVATE_GET_FUNC(dummy, DUMMY_WRITE);
++PAGE_PRIVATE_GET_FUNC(data, DATA);
+ 
+ PAGE_PRIVATE_SET_FUNC(reference, REF_RESOURCE);
+ PAGE_PRIVATE_SET_FUNC(inline, INLINE_INODE);
+ PAGE_PRIVATE_SET_FUNC(gcing, ONGOING_MIGRATION);
+ PAGE_PRIVATE_SET_FUNC(dummy, DUMMY_WRITE);
++PAGE_PRIVATE_SET_FUNC(data, DATA);
+ 
+ PAGE_PRIVATE_CLEAR_FUNC(reference, REF_RESOURCE);
+ PAGE_PRIVATE_CLEAR_FUNC(inline, INLINE_INODE);
+ PAGE_PRIVATE_CLEAR_FUNC(gcing, ONGOING_MIGRATION);
+ PAGE_PRIVATE_CLEAR_FUNC(dummy, DUMMY_WRITE);
++PAGE_PRIVATE_CLEAR_FUNC(data, DATA);
+ 
+-static inline unsigned long get_page_private_data(struct page *page)
++static inline nid_t get_page_private_ino(struct page *page)
+ {
+-	unsigned long data = page_private(page);
+-
+-	if (!test_bit(PAGE_PRIVATE_NOT_POINTER, &data))
++	if (!page_private_data(page))
+ 		return 0;
+-	return data >> PAGE_PRIVATE_MAX;
++	return page_private(page) >> PAGE_PRIVATE_MAX;
+ }
+ 
+-static inline void set_page_private_data(struct page *page, unsigned long data)
++static inline void set_page_private_ino(struct page *page, nid_t ino)
+ {
+-	if (!PagePrivate(page)) {
+-		get_page(page);
+-		SetPagePrivate(page);
+-		set_page_private(page, 0);
+-	}
+-	set_bit(PAGE_PRIVATE_NOT_POINTER, &page_private(page));
+-	page_private(page) |= data << PAGE_PRIVATE_MAX;
++	set_page_private_data(page);
++	page_private(page) |= ino << PAGE_PRIVATE_MAX;
+ }
+ 
+-static inline void clear_page_private_data(struct page *page)
++static inline void clear_page_private_ino(struct page *page)
+ {
+ 	page_private(page) &= GENMASK(PAGE_PRIVATE_MAX - 1, 0);
+-	if (page_private(page) == BIT(PAGE_PRIVATE_NOT_POINTER)) {
+-		set_page_private(page, 0);
+-		if (PagePrivate(page)) {
+-			ClearPagePrivate(page);
+-			put_page(page);
+-		}
+-	}
++	clear_page_private_data(page);
+ }
+ 
+ /* For compression */
+-- 
+2.40.0.348.gf938b09366-goog
 
-So it feels like continuing to have the filesystem (not fs/verity/) be
-responsible for the cache is the best way to allow XFS to do things a bit
-differently, without regressing the other filesystems.
-
-I'm interested in hearing any other proposals, though.
-
-- Eric
 
 
 _______________________________________________
