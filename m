@@ -2,115 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E59D26D713B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 02:25:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5461D6D715B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 02:35:45 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pjqyA-0007cJ-14;
-	Wed, 05 Apr 2023 00:25:45 +0000
+	id 1pjr7n-0005au-4v;
+	Wed, 05 Apr 2023 00:35:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <david@fromorbit.com>) id 1pjqy9-0007cD-2U
+ (envelope-from <chao@kernel.org>) id 1pjr7k-0005an-HG
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 00:25:44 +0000
+ Wed, 05 Apr 2023 00:35:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CiwVxtHqh7PtMKcIrbTly4vzLJ3BWefIHUj9tJBpUIs=; b=QduLzef8trv2dOAh9i/lPNIxsI
- rcg+cTPCeXxZk1BGsTJFpf68Z3xJCfa7wSvKG6B4+WCOEs/CJIh519LP2DeNAJcgMQVxl9/4ZZCHa
- UBPe5Dw/VcygpEvYSF4XPhTfokC6pFuD23nrCJPoVGFzVplkIztBtefzkSmS2rT60haE=;
+ bh=0bsk+BkDowxvPdwUIfF/QhzF53tiyXbdWpKrmQnbj8w=; b=C/vB/1P0ar2MfT3ZQoJuaded75
+ ChIfY/cE42wLM767uXDH6rNClPrRWT7+HjGWAL+ClyPxGtkO/KzZ+P/2QbCH4hczfH1d3odc+qfxh
+ aWIdf9T/lZ0IhNH248MIA9hkbVxPM/YD9zBBN4TW/866uGXmtwyL+saD/UyBJ7TzPAzM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CiwVxtHqh7PtMKcIrbTly4vzLJ3BWefIHUj9tJBpUIs=; b=CzZIbrPKBKm9TpeX5njms5gx3n
- vRe9o5b5fMi+Lsf+lNaZNCwAbPeSM70n1habB6YttjSnyQhQW5sxrBgEoKF9XBmKf6o6NJwnUWpt/
- cpdrnuKRKL0p19kxkym1/wuYHVZqwnG37X6sLdKBodBIkk+v/DCvhx6LlE3h1kHM6vrw=;
-Received: from mail-vs1-f46.google.com ([209.85.217.46])
+ bh=0bsk+BkDowxvPdwUIfF/QhzF53tiyXbdWpKrmQnbj8w=; b=HrDHIpZMu3RKzqv+AO2xuBRNzu
+ nSu2x28iQwO2TllpehqpPt7bFOQdfeBfsuF0y3NqLGMhcY2yeh+rQUqbbmUmTKGabJWjZuZdUMTNB
+ LJkiDxQFTB517ofC7s3iwi8ZBMKI+RPVT5+ucQFnaWdzPA8WJZNmRKt84W+JHHtimMwo=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pjqy7-00FVqp-J8 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 00:25:44 +0000
-Received: by mail-vs1-f46.google.com with SMTP id i10so30030427vss.5
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 04 Apr 2023 17:25:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fromorbit-com.20210112.gappssmtp.com; s=20210112; t=1680654337;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CiwVxtHqh7PtMKcIrbTly4vzLJ3BWefIHUj9tJBpUIs=;
- b=l6r86/ce9IsFgOsq7ESN4gNSClZQP/sjX+D2xE89cFM1t8dRy9wftUcOkA4pXYnHNE
- O9IYna7Za4iqCg6Z63nRspLxVspobB7fFTqClYVHxkNvi5uOPxp/vKueX7OQEXLyhZJQ
- Uv9/iasViZSObsUjc2syUdWAAtgYFBCM8UFV+EUoBJ/OQ3Hnm0STb1AWHiNWvofj5VFq
- u9RCAtimWWpVRQiIWnN977Kosedzs8LozVXTwXC2MxyWN9zC2BezQIZSLuflcpJ9WEhv
- FVU26R66Mns0H5Ts9KSm87ggDueHfuLgrMbrZcaOqFvliRDAadjJfnf5Skk1r3b33i3W
- rAzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680654337;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CiwVxtHqh7PtMKcIrbTly4vzLJ3BWefIHUj9tJBpUIs=;
- b=nzNiO5XtKrqDCCoCyfstLM2bburQGaYjfsNWqdefaP+rCd5+J7QNCaWsBwkQmOh+nx
- wQ+yuWQVIpXFEsohvlPzMs7wX0HKTdokvISEkalVHQ8zpmVN5OdA5BaMT3pVDPu6DEU6
- Tyaysn8wT5UaOVuM35ft8QqnRndeZHsWNzTfRV94kw6tztxg79WYg7M1w98rD3HHTXf0
- NN2/hXi6ily4Syxyjwo9wilJEudMjxpIAb7Wzzrqpb+QVZ8tZeds3QBe3VlH3eovxYTN
- Ejt/Huhf/RnZdz0mBunETDhjotOEIiF+yWlNwPnt8yd4iETx6DNk1AjuWyiQmH2Wsh1I
- OEqw==
-X-Gm-Message-State: AAQBX9d80YkGoGcbVmFD3z842Q4Jspsmpb8X+6x7LEJTxymSgIlcwtvl
- 7nfaTjH9l4DgqgmtPkBlr1O3HUXm/UsaaKiVBcc=
-X-Google-Smtp-Source: AKy350boc1NJttMEXbPWdN9rfQR7KWvZb/0IvD3DuAJJ+io4CZz0OVS7AP+iey99+szOCn0Wgij/bQ==
-X-Received: by 2002:a62:6454:0:b0:626:7c43:7cb8 with SMTP id
- y81-20020a626454000000b006267c437cb8mr3631280pfb.20.1680652596758; 
- Tue, 04 Apr 2023 16:56:36 -0700 (PDT)
-Received: from dread.disaster.area (pa49-181-91-157.pa.nsw.optusnet.com.au.
- [49.181.91.157]) by smtp.gmail.com with ESMTPSA id
- a18-20020a656412000000b005136b93f8e9sm8146027pgv.14.2023.04.04.16.56.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Apr 2023 16:56:36 -0700 (PDT)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1pjqVt-00H7ij-6l; Wed, 05 Apr 2023 09:56:33 +1000
-Date: Wed, 5 Apr 2023 09:56:33 +1000
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20230404235633.GN3223426@dread.disaster.area>
-References: <20230404145319.2057051-1-aalbersh@redhat.com>
- <20230404145319.2057051-17-aalbersh@redhat.com>
- <20230404224123.GD1893@sol.localdomain>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1pjr7e-00FWKp-C8 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 05 Apr 2023 00:35:39 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 8A91163A06;
+ Wed,  5 Apr 2023 00:35:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 778E9C433EF;
+ Wed,  5 Apr 2023 00:35:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1680654926;
+ bh=mwyGRFVE7UXU4VltUnClGeQB9w/yKZov+rkmzpNbM7M=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Le3fqn8WuECi4wtHkaO/GkVlYAF1Z4ZCEfhJ1FzLfSxmMR500cNi2LpgxfTswhzou
+ LZr045meU2rt1qbQOZlISDiymqJFAn7MVEh037VpmhN57pF7A5WeXJsTWu5iSzZ+y4
+ kytSvQ4kt+C5w92Le6AY4Hg8CsgddJAq0bq91DxjESj76oqL6p/hWZLbmRcI1h2G5c
+ 0ihhvavPq4qgyu4cAUpaEWGZaL+PbO27xDzGnPepGXCYdlpVBubXiWbkr2GOyzHLHt
+ kERrOaGz1BNR8qZvvXM/Fo+7unvzhtk5JKRMadV/KIHFPRrUKL8jY25ycJNP/3wbfS
+ +aQlA9UMzd11g==
+Message-ID: <0a85063f-ec04-d7e8-83bc-c716aeb9e79a@kernel.org>
+Date: Wed, 5 Apr 2023 08:35:25 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230404224123.GD1893@sol.localdomain>
-X-Spam-Score: -0.0 (/)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Content-Language: en-US
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <CGME20230321001251epcms2p4c1fd48495643dbfca2cf82a433490bb8@epcms2p4>
+ <20230321001251epcms2p4c1fd48495643dbfca2cf82a433490bb8@epcms2p4>
+ <48f18a16-c6d8-3df4-55c5-11546e7dde35@kernel.org>
+ <ZCsGfTM1SjLblTVG@google.com>
+ <87c74724-da3d-c5fd-b70d-b80a48ec058e@kernel.org>
+ <ZCyV8ZSrj1rlJslZ@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <ZCyV8ZSrj1rlJslZ@google.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Apr 04, 2023 at 03:41:23PM -0700, Eric Biggers wrote:
- > Hi Andrey, > > On Tue, Apr 04, 2023 at 04:53:12PM +0200, Andrey Albershteyn
- wrote: > > Add flag to mark inodes which have fs-verity enab [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  On 2023/4/5 5:26, Jaegeuk Kim wrote: > On 04/04,
+ Chao Yu wrote:
+ >> On 2023/4/4 1:01, Jaegeuk Kim wrote: >>> On 04/01, Chao Yu wrote: >>>>
+ On 2023/3/21 8:12, Yonggil Song wrote: >>>>> When f2fs tries t [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.217.46 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.217.46 listed in list.dnswl.org]
-X-Headers-End: 1pjqy7-00FVqp-J8
-Subject: Re: [f2fs-dev] [PATCH v2 16/23] xfs: add inode on-disk VERITY flag
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pjr7e-00FWKp-C8
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Fix system crash due to lack of
+ free space in LFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,71 +112,102 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Dave Chinner via Linux-f2fs-devel
+Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
  <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Dave Chinner <david@fromorbit.com>
-Cc: fsverity@lists.linux.dev, linux-xfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, agruenba@redhat.com, djwong@kernel.org,
- Andrey Albershteyn <aalbersh@redhat.com>,
- linux-f2fs-devel@lists.sourceforge.net, hch@infradead.org,
- cluster-devel@redhat.com, dchinner@redhat.com, rpeterso@redhat.com,
- xiang@kernel.org, jth@kernel.org, linux-erofs@lists.ozlabs.org,
- damien.lemoal@opensource.wdc.com, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Apr 04, 2023 at 03:41:23PM -0700, Eric Biggers wrote:
-> Hi Andrey,
+On 2023/4/5 5:26, Jaegeuk Kim wrote:
+> On 04/04, Chao Yu wrote:
+>> On 2023/4/4 1:01, Jaegeuk Kim wrote:
+>>> On 04/01, Chao Yu wrote:
+>>>> On 2023/3/21 8:12, Yonggil Song wrote:
+>>>>> When f2fs tries to checkpoint during foreground gc in LFS mode, system
+>>>>> crash occurs due to lack of free space if the amount of dirty node and
+>>>>> dentry pages generated by data migration exceeds free space.
+>>>>> The reproduction sequence is as follows.
+>>>>>
+>>>>>     - 20GiB capacity block device (null_blk)
+>>>>>     - format and mount with LFS mode
+>>>>>     - create a file and write 20,000MiB
+>>>>>     - 4k random write on full range of the file
+>>>>>
+>>>>>     RIP: 0010:new_curseg+0x48a/0x510 [f2fs]
+>>>>>     Code: 55 e7 f5 89 c0 48 0f af c3 48 8b 5d c0 48 c1 e8 20 83 c0 01 89 43 6c 48 83 c4 28 5b 41 5c 41 5d 41 5e 41 5f 5d c3 cc cc cc cc <0f> 0b f0 41 80 4f 48 04 45 85 f6 0f 84 ba fd ff ff e9 ef fe ff ff
+>>>>>     RSP: 0018:ffff977bc397b218 EFLAGS: 00010246
+>>>>>     RAX: 00000000000027b9 RBX: 0000000000000000 RCX: 00000000000027c0
+>>>>>     RDX: 0000000000000000 RSI: 00000000000027b9 RDI: ffff8c25ab4e74f8
+>>>>>     RBP: ffff977bc397b268 R08: 00000000000027b9 R09: ffff8c29e4a34b40
+>>>>>     R10: 0000000000000001 R11: ffff977bc397b0d8 R12: 0000000000000000
+>>>>>     R13: ffff8c25b4dd81a0 R14: 0000000000000000 R15: ffff8c2f667f9000
+>>>>>     FS: 0000000000000000(0000) GS:ffff8c344ec80000(0000) knlGS:0000000000000000
+>>>>>     CS: 0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+>>>>>     CR2: 000000c00055d000 CR3: 0000000e30810003 CR4: 00000000003706e0
+>>>>>     DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+>>>>>     DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+>>>>>     Call Trace:
+>>>>>     <TASK>
+>>>>>     allocate_segment_by_default+0x9c/0x110 [f2fs]
+>>>>>     f2fs_allocate_data_block+0x243/0xa30 [f2fs]
+>>>>>     ? __mod_lruvec_page_state+0xa0/0x150
+>>>>>     do_write_page+0x80/0x160 [f2fs]
+>>>>>     f2fs_do_write_node_page+0x32/0x50 [f2fs]
+>>>>>     __write_node_page+0x339/0x730 [f2fs]
+>>>>>     f2fs_sync_node_pages+0x5a6/0x780 [f2fs]
+>>>>>     block_operations+0x257/0x340 [f2fs]
+>>>>>     f2fs_write_checkpoint+0x102/0x1050 [f2fs]
+>>>>>     f2fs_gc+0x27c/0x630 [f2fs]
+>>>>>     ? folio_mark_dirty+0x36/0x70
+>>>>>     f2fs_balance_fs+0x16f/0x180 [f2fs]
+>>>>>
+>>>>> This patch adds checking whether free sections are enough before checkpoint
+>>>>> during gc.
+>>>>>
+>>>>> Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
+>>>>> ---
+>>>>>     fs/f2fs/gc.c      | 10 ++++++++--
+>>>>>     fs/f2fs/gc.h      |  2 ++
+>>>>>     fs/f2fs/segment.h | 27 ++++++++++++++++++++++-----
+>>>>>     3 files changed, 32 insertions(+), 7 deletions(-)
+>>>>>
+>>>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>>>>> index 4546e01b2ee0..dd563866d3c9 100644
+>>>>> --- a/fs/f2fs/gc.c
+>>>>> +++ b/fs/f2fs/gc.c
+>>>>> @@ -1773,6 +1773,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+>>>>>     		.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
+>>>>>     	};
+>>>>>     	unsigned int skipped_round = 0, round = 0;
+>>>>> +	unsigned int need_lower = 0, need_upper = 0;
+>>>>>     	trace_f2fs_gc_begin(sbi->sb, gc_type, gc_control->no_bg_gc,
+>>>>>     				gc_control->nr_free_secs,
+>>>>> @@ -1858,8 +1859,13 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+>>>>>     		}
+>>>>>     	}
+>>>>> -	/* Write checkpoint to reclaim prefree segments */
+>>>>> -	if (free_sections(sbi) < NR_CURSEG_PERSIST_TYPE &&
+>>>>> +	ret = get_need_secs(sbi, &need_lower, &need_upper);
+>>>>
+>>>> Can we avoid calling has_curseg_enough_space() for this case?
+>>>
+>>> Why? :P
+>>
+>> We won't check the return value of get_need_secs(), so it's not needed to call
+>> has_curseg_enough_space() in get_need_secs() in this path, right?
 > 
-> On Tue, Apr 04, 2023 at 04:53:12PM +0200, Andrey Albershteyn wrote:
-> > Add flag to mark inodes which have fs-verity enabled on them (i.e.
-> > descriptor exist and tree is built).
-> > 
-> > Signed-off-by: Andrey Albershteyn <aalbersh@redhat.com>
-> > ---
-> >  fs/ioctl.c                 | 4 ++++
-> >  fs/xfs/libxfs/xfs_format.h | 4 +++-
-> >  fs/xfs/xfs_inode.c         | 2 ++
-> >  fs/xfs/xfs_iops.c          | 2 ++
-> >  include/uapi/linux/fs.h    | 1 +
-> >  5 files changed, 12 insertions(+), 1 deletion(-)
-> [...]
-> > diff --git a/include/uapi/linux/fs.h b/include/uapi/linux/fs.h
-> > index b7b56871029c..5172a2eb902c 100644
-> > --- a/include/uapi/linux/fs.h
-> > +++ b/include/uapi/linux/fs.h
-> > @@ -140,6 +140,7 @@ struct fsxattr {
-> >  #define FS_XFLAG_FILESTREAM	0x00004000	/* use filestream allocator */
-> >  #define FS_XFLAG_DAX		0x00008000	/* use DAX for IO */
-> >  #define FS_XFLAG_COWEXTSIZE	0x00010000	/* CoW extent size allocator hint */
-> > +#define FS_XFLAG_VERITY		0x00020000	/* fs-verity sealed inode */
-> >  #define FS_XFLAG_HASATTR	0x80000000	/* no DIFLAG for this	*/
-> >  
+> I see. Thanks. I think we can do like this:
 > 
-> I don't think "xfs: add inode on-disk VERITY flag" is an accurate description of
-> a patch that involves adding something to the UAPI.
+> Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
+> [Jaegeuk Kim: code clean-up]
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 
-Well it does that, but it also adds the UAPI for querying the
-on-disk flag via the FS_IOC_FSGETXATTR interface as well.  It
-probably should be split up into two patches.
+Better, thanks! :)
 
-> Should the other filesystems support this new flag too?
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-I think they should get it automatically now that it has been
-defined for FS_IOC_FSGETXATTR and added to the generic fileattr flag
-fill functions in fs/ioctl.c.
-
-> I'd also like all ways of getting the verity flag to continue to be mentioned in
-> Documentation/filesystems/fsverity.rst.  The existing methods (FS_IOC_GETFLAGS
-> and statx) are already mentioned there.
-
-*nod*
-
--Dave.
--- 
-Dave Chinner
-david@fromorbit.com
+Thanks,
 
 
 _______________________________________________
