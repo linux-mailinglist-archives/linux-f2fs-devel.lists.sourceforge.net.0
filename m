@@ -2,88 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AE9D6D88FB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 22:46:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F7206D8908
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Apr 2023 22:48:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pkA12-0005DS-DS;
-	Wed, 05 Apr 2023 20:45:59 +0000
+	id 1pkA2x-0003hK-F4;
+	Wed, 05 Apr 2023 20:48:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1pkA10-0005DM-ST
+ (envelope-from <jaegeuk@kernel.org>) id 1pkA2w-0003hD-2E
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 20:45:58 +0000
+ Wed, 05 Apr 2023 20:47:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Kvs7G53kHQ4yhVug7bqdcUTxyrN7f69T8xfFTZ5tcBE=; b=AfwWC0Tuu8JxXNoT3qLqzrhGi0
- ilQX0/Sj8LfGMKruuUF40RMj4yPb8VAnbTe4SNdlPa1bSObYIkpuRS41X3IEUVkXeGU+MrHQFlHKN
- nTMHrIZ11BPD6dFpAvmyoIULS28eqouW+I4UJUB9SMAPtqaRd7R1RTeEGsHrlfbQt6Ks=;
+ bh=r4qMDxguIGRezRwQrXTGNuFRYn2+W6NvXNXp/KOdjYU=; b=Ct1NygZL3Ie4In/4b8RiY+FM4r
+ NlFgtPOFWgPPw7cEDvKuqJkuViFW/s5/88mKzuiQdgQQN31/9+uA+jecb8m6CC9CIA8xaLm+nzzqi
+ xmW9kH/6SkriSedOrAgoJOXvUjtWMZdFAQhhJgV/HJSC95UNNDNQMGpLhvnJFMcSbzs4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Kvs7G53kHQ4yhVug7bqdcUTxyrN7f69T8xfFTZ5tcBE=; b=kuj3ND0ppbzR5V/HBA4yOx4qmb
- 9hHHqlqSQOMRxOxHXKkZhP0HcUIkK8lrmeRD7WLtUpgOhpcMSvsJ92GXwdE3YSoyu1H3CKN500lcX
- 5LyhP3DtqQIkoCvBoRdqn+qDnc3BRAraDIPVKU8qAZRkrmRo6fU1Q7Qmsbu19VfACUWw=;
+ bh=r4qMDxguIGRezRwQrXTGNuFRYn2+W6NvXNXp/KOdjYU=; b=etrkq5QR+HjTkkL1WjtDhv2TEL
+ EeQRREZMSrgSHZlCyvL2djwvZVJ54uR7jTCjUZQXmiF87zKrv3Kam+Btf8PD9w9qw+2ZMH3ohm2ys
+ 2KJRrxo80gbV8z6p3DB1A15OWB0Nt9gyFGnYk03sIlmtHRe7LR39J/Iy2xY4vC2sJ6Yw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pkA0z-0001aE-F0 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 05 Apr 2023 20:45:57 +0000
+ id 1pkA2v-00GHah-Ct for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 05 Apr 2023 20:47:58 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 1386364193
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  5 Apr 2023 20:45:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 7840EC433EF
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  5 Apr 2023 20:45:51 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 329E7629CA;
+ Wed,  5 Apr 2023 20:47:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62061C433EF;
+ Wed,  5 Apr 2023 20:47:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1680727551;
- bh=Kvs7G53kHQ4yhVug7bqdcUTxyrN7f69T8xfFTZ5tcBE=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=Tz3Jbr5mgRdCdx6mVl9qMn/MqZMLWCenmqCBdyIRYuW3vBpm7GqfNKm95YwzfeYF/
- EyfeuIp5G0TmFvdZDeCeGwUdQu/VVAb5nObHkNuycOUMi+anMLUVZhBNHuAxnHh1y0
- qHsZm+VwSoHU4E9zAxw+CGMjGRebF3VyECIsEBTnqP1can6Fv4OclseUoUyryk0Lux
- reeWaZQFyBeUhVea30GnsspQMbxkZHHokxnjSeYgav9zgzqT1phcjY2R7NG+kYmZwA
- fgTbdeCXZRMTap8++pnERWewBJAtKkeb+Fb81eZMbVXj8oMTRh8dhWdjBESET2HVzr
- VS/zxlkSh+Hgg==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 53BEFC43141; Wed,  5 Apr 2023 20:45:51 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 05 Apr 2023 20:45:51 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: jaegeuk@kernel.org
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-r9aC6H9uvS@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1680727666;
+ bh=JHYkzEFJehfbG4+KRCg90sRcADee5WmNO6JSJDaA3UI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=KcHIC6dk/n3uDrmqf2bu7zCEr2DJ28jvt/zGKEVORnaPu5cmB/PPFR8mfpeGN/do5
+ NpDaLZ7zP7rS5/zBniaVT8rxVDJz5wXWVpsnD8PD55oeh8HNwDMGQ3lFXXFM48ZVIa
+ pzzusqmdFST6v5G6DN5KPM87zqTQHjI3D1oRsUfoPiput1EuVKhDSNPDMQ6E7NLqe+
+ 6YsQ4khuyLr0TT78b3fBh/Uxkv0Aaw+JUOkc2MBPgOkEc86xCee7NYch51aJntyXX1
+ wo75tXqHKzWTaLjc8F8sc+bDJbnDcWD/7S1KDhL7Jrffne5O14KVvejg72d2xpuAGJ
+ WisliDXJc8UyA==
+Date: Wed, 5 Apr 2023 13:47:44 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Matthew Wilcox <willy@infradead.org>
+Message-ID: <ZC3ecF7pklH8CxBw@google.com>
+References: <20230323213919.1876157-1-jaegeuk@kernel.org>
+ <8aea02b0-86f9-539a-02e9-27b381e68b66@kernel.org>
+ <ZCG2mfviZfY1dqb4@google.com>
+ <ZCHCykI/BLcfDzt7@casper.infradead.org>
+ <ZC2kSfNUXKK4PfpM@google.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <ZC2kSfNUXKK4PfpM@google.com>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -91,13 +75,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
- Comment
- #142 from Jaegeuk Kim (jaegeuk@kernel.org) --- I've reviewed the refcount
- of the path and found one suspicious routine when handling page->private.
+ Content preview:  On 04/05, Jaegeuk Kim wrote: > On 03/27,
+ Matthew Wilcox wrote:
+ > > On Mon, Mar 27, 2023 at 08:30:33AM -0700, Jaegeuk Kim wrote: > > > On
+ 03/26, Chao Yu wrote: > > > > On 2023/3/24 5:39, Jaegeuk Kim wr [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -107,11 +93,10 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pkA0z-0001aE-F0
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+X-Headers-End: 1pkA2v-00GHah-Ct
+Subject: Re: [f2fs-dev] [PATCH] f2fs: get out of a repeat loop when getting
+ a locked data page
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,25 +108,175 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
+ linux-fsdevel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+On 04/05, Jaegeuk Kim wrote:
+> On 03/27, Matthew Wilcox wrote:
+> > On Mon, Mar 27, 2023 at 08:30:33AM -0700, Jaegeuk Kim wrote:
+> > > On 03/26, Chao Yu wrote:
+> > > > On 2023/3/24 5:39, Jaegeuk Kim wrote:
+> > > > > https://bugzilla.kernel.org/show_bug.cgi?id=216050
+> > > > > 
+> > > > > Somehow we're getting a page which has a different mapping.
+> > > > > Let's avoid the infinite loop.
+> > > > > 
+> > > > > Cc: <stable@vger.kernel.org>
+> > > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > > > > ---
+> > > > >   fs/f2fs/data.c | 8 ++------
+> > > > >   1 file changed, 2 insertions(+), 6 deletions(-)
+> > > > > 
+> > > > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > > > > index bf51e6e4eb64..80702c93e885 100644
+> > > > > --- a/fs/f2fs/data.c
+> > > > > +++ b/fs/f2fs/data.c
+> > > > > @@ -1329,18 +1329,14 @@ struct page *f2fs_get_lock_data_page(struct inode *inode, pgoff_t index,
+> > > > >   {
+> > > > >   	struct address_space *mapping = inode->i_mapping;
+> > > > >   	struct page *page;
+> > > > > -repeat:
+> > > > > +
+> > > > >   	page = f2fs_get_read_data_page(inode, index, 0, for_write, NULL);
+> > > > >   	if (IS_ERR(page))
+> > > > >   		return page;
+> > > > >   	/* wait for read completion */
+> > > > >   	lock_page(page);
+> > > > > -	if (unlikely(page->mapping != mapping)) {
+> > > > 
+> > > > How about using such logic only for move_data_page() to limit affect for
+> > > > other paths?
+> > > 
+> > > Why move_data_page() only? If this happens, we'll fall into a loop in anywhere?
+> > > 
+> > > > 
+> > > > Jaegeuk, any thoughts about why mapping is mismatch in between page's one and
+> > > > inode->i_mapping?
+> > > 
+> > > > 
+> > > > After several times code review, I didn't get any clue about why f2fs always
+> > > > get the different mapping in a loop.
+> > > 
+> > > I couldn't find the path to happen this. So weird. Please check the history in the
+> > > bug.
+> > > 
+> > > > 
+> > > > Maybe we can loop MM guys to check whether below folio_file_page() may return
+> > > > page which has different mapping?
+> > > 
+> > > Matthew may have some idea on this?
+> > 
+> > There's a lot of comments in the bug ... hard to come into this one
+> > cold.
+> > 
+> > I did notice this one (#119):
+> > : Interestingly, ref count is 514, which looks suspiciously as a binary
+> > : flag 1000000010. Is it possible that during 5.17/5.18 implementation
+> > : of a "pin", somehow binary flag was written to ref count, or something
+> > : like '1 << ...' happens?
+> > 
+> > That indicates to me that somehow you've got hold of a THP that is in
+> > the page cache.  Probably shmem/tmpfs.  That indicate to me a refcount
+> > problem that looks something like this:
+> > 
+> > f2fs allocates a page
+> > f2fs adds the page to the page cache
+> > f2fs puts the reference to the page without removing it from the
+> > page cache (how?)
+> 
+> Is it somewhat related to setting a bit in private field?
+> 
+> When we migrate the blocks, we do:
+> 1) get_lock_page()
+> 2) submit read
+> 3) lock_page()
+> 3) set_page_dirty()
+> 4) set_page_private_gcing(page)
+> 
+> --- in fs/f2fs/f2fs.h
+> 1409 #define PAGE_PRIVATE_SET_FUNC(name, flagname) \
+> 1410 static inline void set_page_private_##name(struct page *page) \
+> 1411 { \
+> 1412         if (!PagePrivate(page)) { \
+> 1413                 get_page(page); \
+> 1414                 SetPagePrivate(page); \
+> 1415                 set_page_private(page, 0); \
+> 1416         } \
+> 1417         set_bit(PAGE_PRIVATE_NOT_POINTER, &page_private(page)); \
+> 1418         set_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
+> 1419 }
+> 
+> 
+> 5) set_page_writebac()
+> 6) submit write
+> 7) unlock_page()
+> 8) put_page(page)
+> 
+> Later, f2fs_invalidate_folio will do put_page again by:
+> clear_page_private_gcing(&folio->page);
+> 
+> --- in fs/f2fs/f2fs.h
+> 1421 #define PAGE_PRIVATE_CLEAR_FUNC(name, flagname) \
+> 1422 static inline void clear_page_private_##name(struct page *page) \
+> 1423 { \
+> 1424         clear_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
+> 1425         if (page_private(page) == BIT(PAGE_PRIVATE_NOT_POINTER)) { \
+> 1426                 set_page_private(page, 0); \
+> 1427                 if (PagePrivate(page)) { \
+> 1428                         ClearPagePrivate(page); \
+> 1429                         put_page(page); \
+> 1430                 }\
+> 1431         } \
+> 1432 }
 
---- Comment #142 from Jaegeuk Kim (jaegeuk@kernel.org) ---
-I've reviewed the refcount of the path and found one suspicious routine when
-handling page->private.
-
-By any chance, can we try this patch instead of the above workaround?
+It seems f2fs_invalidate_folio and f2fs_release_folio drop the refcount by
+folio_detach_private() additionally.
 
 https://lore.kernel.org/lkml/20230405204321.2056498-1-jaegeuk@kernel.org/T/#u
 
--- 
-You may reply to this email to add a comment.
+> 
+> > page is now free, gets reallocated into a THP
+> > lookup from the f2fs file finds the new THP
+> > things explode messily
+> > 
+> > Checking page->mapping is going to avoid the messy explosion, but
+> > you'll still have a page in the page cache which doesn't actually
+> > belong to you, and that's going to lead to subtle data corruption.
+> > 
+> > This should be caught by page_expected_state(), called from
+> > free_page_is_bad(), called from free_pages_prepare().  Do your testers
+> > have CONFIG_DEBUG_VM enabled?  That might give you a fighting chance at
+> > finding the last place which called put_page().  It won't necessarily be
+> > the _wrong_ place to call put_page() (that may have happened earlier),
+> > but it may give you a clue.
+> > 
+> > > > 
+> > > > struct page *pagecache_get_page(struct address_space *mapping, pgoff_t index,
+> > > > 		int fgp_flags, gfp_t gfp)
+> > > > {
+> > > > 	struct folio *folio;
+> > > > 
+> > > > 	folio = __filemap_get_folio(mapping, index, fgp_flags, gfp);
+> > > > 	if (IS_ERR(folio))
+> > > > 		return NULL;
+> > > > 	return folio_file_page(folio, index);
+> > > > }
+> > > > 
+> > > > Thanks,
+> > > > 
+> > > > > -		f2fs_put_page(page, 1);
+> > > > > -		goto repeat;
+> > > > > -	}
+> > > > > -	if (unlikely(!PageUptodate(page))) {
+> > > > > +	if (unlikely(page->mapping != mapping || !PageUptodate(page))) {
+> > > > >   		f2fs_put_page(page, 1);
+> > > > >   		return ERR_PTR(-EIO);
+> > > > >   	}
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
