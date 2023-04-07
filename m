@@ -2,153 +2,162 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E20636DB200
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 Apr 2023 19:46:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8404D6DB201
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 Apr 2023 19:46:46 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pkqAb-0001mY-VI;
-	Fri, 07 Apr 2023 17:46:41 +0000
+	id 1pkqAe-0000LH-Cu;
+	Fri, 07 Apr 2023 17:46:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1pkqAZ-0001mR-PB
+ (envelope-from <frank.li@vivo.com>) id 1pkqAd-0000L9-7n
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Apr 2023 17:46:39 +0000
+ Fri, 07 Apr 2023 17:46:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YmfXcCsXN4o/FIs6g/+CLsFE+z5Gk+zVqU5lRRDjHWg=; b=gHZFvAdK6wjwBHupQFFTFguR5r
- tuEGLr7ptnbw+fvY04QRjMF6wLyLD288XTu7/aa/5tAGEGRGbO36vUqdYLazsjtdllFeeCnOMax5w
- G2/EBN3TQOfg1rkv4jFh42O00bEPRXSxhWKd8KNgxAEwa9wFtvKKrfknCzL80xU0zHUw=;
+ bh=l13cqtxzQcUOoYpmE+V0PGtrr5i/usoTVpOWUdBlP/0=; b=hC3H43MPgO+6sQEBp+EWdBzX9/
+ w4NpYao5YarCPdPfstK8euzPCnRwdBynDlBY+NGuM1lOLcRFYLahCKxdU9Pm1A1+oOZBEPE/NvNJn
+ 1NBKQWM05e0d1wWNI/xynSCSd1ODvK3NgsEu+B9WVoPFIa047rMuMPFB7RpRqQ5wPasQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=YmfXcCsXN4o/FIs6g/+CLsFE+z5Gk+zVqU5lRRDjHWg=; b=m
- BA723yyiDI6oueVUD3Wu3b/3uJmWJt6h60y78Uhy7vC9RGHyxQra7Wc3AEqqzAsRxIu12ItP3Vz1/
- WHzlEJCiWlxkzTcKFd8wYrDCyK8ZUNeIKBcHGEjctcMKx1MpzeveG8l6aQ2zSuUuouEjNGQEBKO77
- CdIeeowk7nptBetg=;
-Received: from mail-tyzapc01on2122.outbound.protection.outlook.com
- ([40.107.117.122] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=l13cqtxzQcUOoYpmE+V0PGtrr5i/usoTVpOWUdBlP/0=; b=XWLRuwBxoiyDqb4GbHsPpY4Oj/
+ LlwP13vlkrnENGHVdC7GL2YTsq+2TLIpRJw62/U0BD7Q5hZyVz4KEVynVdKgguDs8cKv0piE7iGMp
+ 8nf0d7MoimiS0a0SHRVfDFtqd8PII3lUAO+x+BvqdFUNt6S3ip1f6xivBQ8xgt6PDo4g=;
+Received: from mail-sgaapc01on2117.outbound.protection.outlook.com
+ ([40.107.215.117] helo=APC01-SG2-obe.outbound.protection.outlook.com)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pkqAP-000LV9-QL for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Apr 2023 17:46:38 +0000
+ id 1pkqAZ-0000rT-8r for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 07 Apr 2023 17:46:44 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bGnRJCujd/g3mMCMIuoxO5qM0YWeqr5B8rCq6scSg5IMyBJZ4MZr3DzAcQ8gUrD00sk/Dj0P94UduQvYW0WWSDrtl8Sj6355h0u33v0BhMv29+Q2XzccFu6G9r3lNfzHrS/8o9aT0q0gy9hX3BvOnSnXaYGOUsRlm2dgjMjiQdOs7311IYIGr+GKibswRC7vlt8/mQ4mNIllxKShgBaI7aW+R7RGGsjJnlKPhZNHNCwCNk5NmKfUL6mFMiR2bJmXJcHjEZiU/w40SIf6BGMARy4g+W5t215u/7TNrFxHPd1+tAJsUJa8At7w9CAOObH5ZCW96cqxZ3f1gt9F+utO2w==
+ b=FhC8LLiGw1ZccWXgw/vhFAxiJnoynx2kGnUxXdh0HFmul01Z7/f+CH3WuzOfhNVKJeXJUiq43dmlMo2hzLhg0VFcMLw3smZNS+3hnHG6w9m80769nDwQ94qmmV6havDurd81xN2ryQOeIdoDUv1trCXrjskJ2BggnzJkTh2gnovs4HA2tmml6BwZhep+e76IOSsCsM1k85TBUvjuibE/hFBh87VaOMV0Qs/j+nWNgn4XbVf8XzkPHJfG9Txur+tx8MjSmxaSs0kPZA2CbRObRtW6D14Oic8J6uS2q3WLZjI+O5r/4f/to4nXKJez48xW0Lwza7w1XZAp+P6W1rBgnw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YmfXcCsXN4o/FIs6g/+CLsFE+z5Gk+zVqU5lRRDjHWg=;
- b=CuYgENGAZQjzZ7/DRECJQX15n0c60W+mXz2ZJqUivfnCwB5SSCE8nH7yNbETYpCVNuzSrRVH6EHHVmUO3GAfv3dIoZteUUJSpSIJbzylCzTCDXQZPGGOS+mKoEmoPkIR8mjAGugIu0O7/apCAOMWRup0bp05RmLJmwxtYzkmGAFuyads0VcPyyuP6fGKWWPEKvXFH3BbZoOjis/IH7MUWl7Wlny+3i/PkeA6W9srPBa0FcYf+zfvAVjQtPcWcgRSoF5gcwy42w0ie+JDQez3jv2nuNgN25ir8wUArcBXEBWsNMzdbULq6HCtFplVDWYpJl9ufeuIxDhni5Kd7pGgkw==
+ bh=l13cqtxzQcUOoYpmE+V0PGtrr5i/usoTVpOWUdBlP/0=;
+ b=PG7kvsGcNEVv696RpK5Wdk85mc85pcSRA302Ezt843ix+O9JNes6yXwLkILAj3/xu0WaqKyBoPkvTYqa/DtEwjqm4fBYB6lyumvpszZEZ2aYAFr/s3Y+Mdu9iH1+9ENRPNyl4jzaZ16WuYAXEHtjSNegQ67qVvnKafE/kQJiDFZziyEKOhAyt46oGO9h58wDpMouuY3tS5r6J0YqkjlUMBU2lU0R3I+9JBIbjM+09joP86VJ9xN4OqQ+jlB3leZWHrlrR2zPH70RgHJEU6hVPdRzocxCEZFUQb0QqBP8b2POyowMtwpiRa1r4Faoex6iDJRRrGLj+px4WHeSjUbfxg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YmfXcCsXN4o/FIs6g/+CLsFE+z5Gk+zVqU5lRRDjHWg=;
- b=ISGIk1cV5PUsvhlnaesV3TqYm6z7oDWLHbbQYXqEsgkLg0a0MfKu2zC5D/n8HA4WyGNXZxw44E/oDbOzj9cZ2UN7yKz3M0vwtYz1lFXri0T+zp/6HIQOPq+q6OM+5mrteC+yJBhVmDMoyKh2egfX3CxHwAcy5Kspu/ls2VKGdhiIgVcOyA81kvnPVzhP5t9MiPNFkvBHwahE2WF80cFwvm2iQnOBrHVtKTTcijBtKZi8AvIGM8qxCA+GTh5RW3QzIw8d04dg40jtZSfZr5MB3uNlHBRy0hvSzMTwu0NQR0R3cBmLmeP0JfVzQG6p3pf4f2QWyXPJUyvU5/nwbn6Syw==
+ bh=l13cqtxzQcUOoYpmE+V0PGtrr5i/usoTVpOWUdBlP/0=;
+ b=IavwA5O94j9hUSOqgRMG2aWsPUK9PLKgQC7o9r96puT/c62X6zgO6+gb6FhkszHljK1BvrGST1IB0JJUC1A70HhQTcaEQbWt96J1WwaShpafPIyI0m8npA42rv0RCo/XbXQZlKHvG4oc3lyLaz0f3eUcWtbomY7zqQHTHeLhrbfyRfrQZkkLYKkSn3NtOolmVKWK5TCYhheydOkTkr7+JHcHE3cm0CivQbneyx8D68pXgUUWWX1egqjld37WG3n2lACN4eexCrs5HsNCVQ7EvuxqiWVreNKMghzPsjQwExW8Q9ezIlHlhpcvGVlA2eNX3i0ZWoXaIs+iMuVhHNlQOg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by TYZPR06MB5907.apcprd06.prod.outlook.com (2603:1096:400:339::12) with
+ by KL1PR0601MB5613.apcprd06.prod.outlook.com (2603:1096:820:9a::7) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.34; Fri, 7 Apr
- 2023 17:46:20 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.35; Fri, 7 Apr
+ 2023 17:46:23 +0000
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::a3a1:af8e:be1e:437c]) by SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::a3a1:af8e:be1e:437c%6]) with mapi id 15.20.6277.031; Fri, 7 Apr 2023
- 17:46:20 +0000
+ 17:46:23 +0000
 To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
  Steven Rostedt <rostedt@goodmis.org>,
  Masami Hiramatsu <mhiramat@kernel.org>
-Date: Sat,  8 Apr 2023 01:46:07 +0800
-Message-Id: <20230407174609.4939-1-frank.li@vivo.com>
+Date: Sat,  8 Apr 2023 01:46:08 +0800
+Message-Id: <20230407174609.4939-2-frank.li@vivo.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20230407174609.4939-1-frank.li@vivo.com>
+References: <20230407174609.4939-1-frank.li@vivo.com>
 X-ClientProxiedBy: SG2PR02CA0127.apcprd02.prod.outlook.com
  (2603:1096:4:188::7) To SEZPR06MB5269.apcprd06.prod.outlook.com
  (2603:1096:101:78::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|TYZPR06MB5907:EE_
-X-MS-Office365-Filtering-Correlation-Id: 459fd702-c2d6-455b-5d8a-08db378ffeec
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|KL1PR0601MB5613:EE_
+X-MS-Office365-Filtering-Correlation-Id: 931756d5-9329-4742-dc3f-08db379000bf
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 5L2STOmviU+Uv7IrYdfq63X6/pGmGFWxRvZzSdVK8XDw8WYdXBIvrIGuLLMWHzmcX3RVERnFaJP7CLrjqPgWDLWgvvqyx37XgyfA4DIZpmLMuDyqdUG8JZ6Rn9+CQgUPG6ClGWNRLa9A+cKWO0Ao0RSSr9L4oADh8svONoPLkd5duN23BZpRLrt5UHngMSx6++zn7jlxAOs0jAzMuNcfEvxqHt3i/wEJKaQjcGyE1ev3Q0tbDw8n2lm4a7WRlwGZvLP3+o55CAsGU+fAnY8Sv7VCqO90d0OsfqMHAYW3Ax8DR5VgnU7cUwIWyKWnP+eST6jfnvQiwkqsYU1wjBs5New0kgo8KGFYBhR1MB5/7gbykaAxWaDhlbxpREjEe5iArsIWQqIxeJSlqodn3C8N5PFudbX3Pum+W1tP1XGHl7YgrPqWfWIelysJGABcatbymTwLDx7GAJL5AYxVCrp3UuC8lQF1+412vzLvP4ICrZMTrGPDd7t9DP4gar68TjG1gudCfLR8E6Wicw8Y6pc5I2UUJM3c+/SR+50s9i5TKUzGQrUZjLIzZzRGFm0CXwvqNFokY5mkVKp3BU6P8pSlF1/kn7AVJPFjT4Q6xZyLA2d2wHR58fWn46bVFWQYumGg
+X-Microsoft-Antispam-Message-Info: hCu4mhKfhHqlK46MeUKEbcZCp5DOlO3D68Y/IbYPgbitYMafUrYR1r4B1CrFu9GRiiTm6dMZu8VimijMOzdLNt+2hvkUIlp1ik8NP70BlTrUqHOyVVDVi99OitPUclq5ik5R0rFhWQd3Jjv/Cfn7C4xi0DOvyczbTTrgkH6HxNj3h5zqxdJ8taCSJ8nC7D701DtXaeaSqSvaJS8svfGwrAbegu81uHazDF5ClKJ6vIzxWvPDynETg5eWUgQnvspunfm04TF+V6nEJDLXYRuoxQhzwoljfnjGyvRKGZyH5HiEm2h4IIZJUoIMD/CP0hkUgo15QAFlxZWYMYa9C4BayxhDl8fJoQhyuXV87atR8ttFAUSv4CBslTXTnuJsZ2Cju98EbLycg6tyUTYsVDmS2E45wm+GOMBlxtpyC8qpRgWvOx0lW5VcRIilbYr8K/Te4Bs+fsV33kznqP4wtNOeTAbXFbjFliwcsSqA2KHwa9vQ/poApyC/k3GSehNIDBBOK6IyZcXtigD4J5i23JaSohl8e/U2LaOdnB69uUshcll9pBvRooJZ+eq3mQbARMDSfvoH0tinC5bvH2WMznbkrAHc24VUo44wPgiG8v+FP1wgkxvouc7N2YlS3PmP94QR
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(4636009)(366004)(376002)(346002)(136003)(396003)(39860400002)(451199021)(38100700002)(38350700002)(36756003)(6506007)(110136005)(8676002)(26005)(186003)(5660300002)(6512007)(1076003)(8936002)(2906002)(4326008)(66476007)(66946007)(316002)(52116002)(66556008)(6486002)(478600001)(30864003)(6666004)(86362001)(41300700001)(83380400001)(2616005);
+ SFS:(13230028)(4636009)(376002)(366004)(136003)(396003)(39860400002)(346002)(451199021)(4326008)(66476007)(66556008)(66946007)(110136005)(316002)(36756003)(2906002)(41300700001)(2616005)(478600001)(86362001)(52116002)(5660300002)(6486002)(6666004)(8676002)(8936002)(186003)(38350700002)(38100700002)(6512007)(1076003)(6506007)(83380400001)(26005);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ZX2Fa1KrSpm6cxzMX78hr5/s/P78d479YF/uMGAsb4QiX5JIB2P7RHRAgxpC?=
- =?us-ascii?Q?JvCQk7AN6dBDJR5pqPzzXsxWZRjZi53BIFJDWl2w5U/0gBknpM34rTDbk2UH?=
- =?us-ascii?Q?J8HTPpJHsEnx1wwHSFiXTII3e9EfGPR0fhhBJJbflEz1PRbh0ohLr28ZL3/l?=
- =?us-ascii?Q?ga/0g7VWk7xJCrNdnz6vUCsCYeCshRUy2V5wyAyBVBFyJekPjHWgYsBDf9HZ?=
- =?us-ascii?Q?7NVQpfxmCYt7NfTDDefjteJIE2GWiHngGq55KTHXUWoB7ZVYog6bjmULRYoF?=
- =?us-ascii?Q?fGpYIaUoGAzsyN24YhyC9i4P3MxJsF7v1hdhQqxmG5gN2U77fEmL9+8r1wNE?=
- =?us-ascii?Q?QnxdfDjex/7ctGkJG7EVYNit2RkILEOlfVruTwFGF6/LBE3mdfmJfPXut/H0?=
- =?us-ascii?Q?Mo0zEtfOto2KBfbuoschn28JDl/kHb9DzOHw+FljhYP8eRZ9crQvdxurz5gi?=
- =?us-ascii?Q?yOB9bsHtnRS+YM/iLMEifOjAI2XOyKw9SK0JFpXQ254+dZ+AQ1l4hRx5y2y+?=
- =?us-ascii?Q?Py0bDe+rJExEGJD2QXAUQyW36169RLmKdg5WcT8Ba7ceHe2xzc0fiN1sHh6u?=
- =?us-ascii?Q?Jx1H5iXrubo1x6yk3wxsP5YpKKLACrgFfWPaqT7EdpQSZlrnbSR4reZ3K7WA?=
- =?us-ascii?Q?Zff5ZnhD/T72MMs7eZyBnJ0nfqra5KcTwmgMXyLJml1d8wG1QbUaT4Vs/Pb4?=
- =?us-ascii?Q?7K4SJwcQ5dFZmlkhXTJODeJQAPBVZ7WbCtMELpyBE4G9uEWrp8T7g1AZdyDs?=
- =?us-ascii?Q?n++EFtWb2QX5LXEI0/FL0fAeUy+Q2tYQ4qKtusDADfLLFE8KkLPPD9+WD5nG?=
- =?us-ascii?Q?mDOBrzVXCuNTIooJDOhBlJza2TrAwz/qSpq7EM8MFoVozfk/zQyUqWGTmFA2?=
- =?us-ascii?Q?VyXCP7+Z3Lx/Z4w4GZPhHI0UOYbbWSRjEvLt02fqNzDIV5KrLX3CsMVJ7ynY?=
- =?us-ascii?Q?YMPY3XtsxLFIOlZ2+ef6ZuUDFVbidizUUp/JJbao495h2mhNZhDhfQVGrHUf?=
- =?us-ascii?Q?xH8Qeyyhuch8rHYclXE1LLPIeVP97/TcJ5op15k/7GS//AHPi7EHfphwjLyy?=
- =?us-ascii?Q?ywa1afSiaUSbGrbR4pDacMA9tPb2+NWVZzxGBT+euK+x2kZTvb0FvF3sdEny?=
- =?us-ascii?Q?u9kselfPgCRZ9AuGvByleROw+O0p76DxwSiqBDxhc+BdDi52oMJ8ge5Mc6dw?=
- =?us-ascii?Q?RAC5DXFiEmKZ0u2geOx7y4SXLsm4YLMBornFBar+BRyl/s3Q1BbTN6WTQfEh?=
- =?us-ascii?Q?Hev4zFDNRb4ZXWyWoVllbBsEoIiw5t9QurcepLi0Sm7d28C5MocC5zZxIqHt?=
- =?us-ascii?Q?LcrxlU2+BzyLIIXArNPw5an8u9XlNRo4hM/GNgPo6JcmI4vg6sDHE3hpAGqf?=
- =?us-ascii?Q?JlQsJe+WIND6oCjh7ahU+U8TpxkFRNqGHIHMpvK3hIfbAVH12PPR85RZY7oC?=
- =?us-ascii?Q?vTB5yDTar9C52/LkUL7NupM7w4PGFqsJz1634xRS2jzRgrgHQKSBU/31r2kl?=
- =?us-ascii?Q?UlY/hKNrfWzmPpiCk+tlP9xQQu1toAjpUkNuc/OkIPk+qG6MlFe/+rvzrUDu?=
- =?us-ascii?Q?M1b7fysVWf3djCIH+3AJ+iVQi+m1bzChxgUgFf8K?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tlxwxtlFsvIqiUilb6JIeVY+PWOnK7IecupfyEbocy75ceA/LfxBBGfb6riL?=
+ =?us-ascii?Q?CYT/CVtOwcEOCzdfYJMgCjjZZRODR+TAdAbENgXdLW5lWJ4WYLtolXrG/NQo?=
+ =?us-ascii?Q?6Y3040zY3pwlRp6CP3Y8aEUA1JZadTxguAOAs0FB2SZXv6bsRwh1VQtQ2cGc?=
+ =?us-ascii?Q?OugnfC3l9mCMu3A5ZyDegMxaVe1pFedaZsHTnN7fI5QGCE4B/AGmh1CIdWil?=
+ =?us-ascii?Q?LOLLSmQgAmnMRq7+xNqT61KwqxIqDEEbG00gMv8XyEKf1D06CPYMrOWfkRoZ?=
+ =?us-ascii?Q?9oDYM7QNYp7oRTT3+9Qarf8D4YXtnXjK3H+bFWzhGDNH67yqea6ke1AAtN8c?=
+ =?us-ascii?Q?fQXV34CNQcRzGIUCcJowKfKBoWGKK1sVNKkGdD5tOUgpikdgYqrdlaKARXpV?=
+ =?us-ascii?Q?yToqwlQlRGXYAIan8ovtCVbrn7EFOsC2BiT98a/UYR9K2pnqkocKo6M5F9a4?=
+ =?us-ascii?Q?gD9ZD9lKnUS7FsVauh8kf+Sv0qdUknjlGin+RWm5Hndmk3cozUzM02nY0FTV?=
+ =?us-ascii?Q?sUwVsJBBvo7BUwXhZdrf76Ig8tkxaSBl6Y9i34LqvwZnXaGl7Z5M61T2S4UV?=
+ =?us-ascii?Q?f8cwH0kh9hA+ewNqUB8KUXhCKJpXCwd6dVPxY663tU42O+6MLtxM/zSlmDgR?=
+ =?us-ascii?Q?wlxM+GSNTRVqw8CqASPcRZG7N/PAIiJP+02r/Labgm7cDTaOWAO/ypftNfoU?=
+ =?us-ascii?Q?RmxrZ8ID0j585tf/VkMed89IyLJ5C5S5fh3qWc/+MjSaIfUw1MeyLx5aWk0B?=
+ =?us-ascii?Q?hMGy8+v4ic/Y9NbCUCd1F0b1a5bDhz/C4Uk+FbjvnNdSm6gKeVH4d1RWI9xr?=
+ =?us-ascii?Q?XPmqEgrwgru9+NG5Y8/xO/LEi5yR1lCI5dACS2wm7dy3qHR39+Q8w8VqzxJO?=
+ =?us-ascii?Q?2FTE0W2c7nHaY7AK5Y9fVKh4GZGa03L3uAYzktOnE159EoCBJbKa2KPWfHbi?=
+ =?us-ascii?Q?oQa8Kqss7Yl8BJ+pPBY/Z4tDXI2QnTAQRFEYCY7bhLhImDOy1Ew9znTCgAHg?=
+ =?us-ascii?Q?xdlPxoUgpnpZUlJOYbOfxuoCTO778NpMOM0VlO0JwzE5sNMU+NFDZv73YBo7?=
+ =?us-ascii?Q?1anxKlFo2P2mjGNoxJJ6bDNUy2hfm4FJkotFDuZdTCsoqSslnABmR588yWtI?=
+ =?us-ascii?Q?1PtlP3IHxn/D7R42XC0tKQb+Gxvvl4Zuf35lcszwB8HjMlNq5stYhlds11Bo?=
+ =?us-ascii?Q?Sxsf35xEnBNr5jlCr9wwP9E8j7EFfP3+29uP0u+LrHwv71Mt8R4bMS7aVnZO?=
+ =?us-ascii?Q?VlIe0QQNRSqiJrycFcG+2JeN2QXo2pUwJSiCdoD4wpWgvLuvOBv7OYDvwzEF?=
+ =?us-ascii?Q?tqLi6bNIiER9OBBk4kgWPRCqk9U3u+Hqoxa2K9uHMkfQYSZF3Cy0Hy7r1tux?=
+ =?us-ascii?Q?MvDt1XXq9urwZ1zX8qQnsrm/EBtxvgwePa8i1l9t/knw1LbFzptWG7OI28XZ?=
+ =?us-ascii?Q?8xJ3UMtqbMbYAMNMC63OlrnS/RFu7h57qfKgKNoyedKba8W/QWKoAe2TADUv?=
+ =?us-ascii?Q?AWAdYFHwtT2hrui8XvpI5bzdx320lH7ImngD+3XcKcFLN04DRytssYmJgGYh?=
+ =?us-ascii?Q?oW7sbWWdf8eUMrloJ/Xput2d58qUoqzCk86040Rl?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 459fd702-c2d6-455b-5d8a-08db378ffeec
+X-MS-Exchange-CrossTenant-Network-Message-Id: 931756d5-9329-4742-dc3f-08db379000bf
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Apr 2023 17:46:20.1806 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Apr 2023 17:46:23.1753 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zSDNUC2t9h8AxYVbZFjk4jVPtL8y7WHH8JDGrynz2QaGE12cTPArgapKZd3txja7dspt63LgSteCWkkjFWLLVA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB5907
-X-Spam-Score: 0.2 (/)
+X-MS-Exchange-CrossTenant-UserPrincipalName: +CDNQp5QufVD77XIxJf7iTA5Z7SIuQ8n/T6h0TIFk5e4tENaNGIqP7t3PAxGO8MUlqQH2EzJnzcPAfUO/paqMA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR0601MB5613
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: The current code uses a mixture of MAX_IO_TYPE and
- NR_PAGE_TYPE
- to form lat_type, and uses a two-dimensional array to store data. NR_PAGE_TYPE
- is 3, which is unreasonable for a discard with a PAGE_TYP [...] 
- Content analysis details:   (0.2 points, 6.0 required)
+ Content preview:  In this patch,
+ it adds to account discard latency. This allows
+ us to track the discard io latency of the system lightweightly after enabling
+ iostat. Signed-off-by: Yangtao Li <frank.li@vivo.com> --- v4: -split it to
+ two patch fs/f2fs/f2fs.h | 1 + fs/f2fs/iostat.c | 6 ++++-- fs/f2fs/segment.c
+ | 8 +++++++- include/trace/events/f2fs.h | 12 ++++++++++ [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.117.122 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.117.122 listed in list.dnswl.org]
+ no trust [40.107.215.117 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.215.117 listed in wl.mailspike.net]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- 0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
-X-Headers-End: 1pkqAP-000LV9-QL
-Subject: [f2fs-dev] [PATCH v4 1/2] f2fs: refactor struct iostat_lat_info
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+X-Headers-End: 1pkqAZ-0000rT-8r
+Subject: [f2fs-dev] [PATCH v4 2/2] f2fs: add iostat latency statistics
+ support for discard
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -168,339 +177,128 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The current code uses a mixture of MAX_IO_TYPE and NR_PAGE_TYPE
-to form lat_type, and uses a two-dimensional array to store data.
-NR_PAGE_TYPE is 3, which is unreasonable for a discard with a
-PAGE_TYPE of 1. So this patch changes the array to a 1D array and
-does some cleanup.
+In this patch, it adds to account discard latency. This allows us to
+track the discard io latency of the system lightweightly after enabling
+iostat.
 
 Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
- fs/f2fs/data.c              |  2 +-
- fs/f2fs/iostat.c            | 79 +++++++++++++++++++++----------------
- fs/f2fs/iostat.h            | 49 +++++++++++------------
- include/trace/events/f2fs.h | 56 +++++++++++++-------------
- 4 files changed, 97 insertions(+), 89 deletions(-)
+v4:
+-split it to two patch
+ fs/f2fs/f2fs.h              |  1 +
+ fs/f2fs/iostat.c            |  6 ++++--
+ fs/f2fs/segment.c           |  8 +++++++-
+ include/trace/events/f2fs.h | 12 ++++++++++--
+ 4 files changed, 22 insertions(+), 5 deletions(-)
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index e975f9c702ab..38cab984496f 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2311,7 +2311,7 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
- 		if (bio_add_page(bio, page, blocksize, 0) < blocksize)
- 			goto submit_and_realloc;
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 3d883201e7a5..1779f3596176 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1112,6 +1112,7 @@ enum page_type {
+ 	META_FLUSH,
+ 	IPU,		/* the below types are used by tracepoints only. */
+ 	OPU,
++	DISCARD,	/* used by iostat */
+ };
  
--		ctx = get_post_read_ctx(bio);
-+		ctx = iostat_get_bio_private(bio);
- 		ctx->enabled_steps |= STEP_DECOMPRESS;
- 		refcount_inc(&dic->refcnt);
- 
+ enum temp_type {
 diff --git a/fs/f2fs/iostat.c b/fs/f2fs/iostat.c
-index 3d5bfb1ad585..5d496d5b70d3 100644
+index 5d496d5b70d3..f40b8915ae1b 100644
 --- a/fs/f2fs/iostat.c
 +++ b/fs/f2fs/iostat.c
-@@ -86,23 +86,21 @@ int __maybe_unused iostat_info_seq_show(struct seq_file *seq, void *offset)
- 
- static inline void __record_iostat_latency(struct f2fs_sb_info *sbi)
- {
--	int io, idx;
--	struct f2fs_iostat_latency iostat_lat[MAX_IO_TYPE][NR_PAGE_TYPE];
-+	struct f2fs_iostat_latency iostat_lat[MAX_LAT_TYPE];
- 	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
-+	unsigned int lat_type;
- 	unsigned long flags;
- 
- 	spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
--	for (idx = 0; idx < MAX_IO_TYPE; idx++) {
--		for (io = 0; io < NR_PAGE_TYPE; io++) {
--			iostat_lat[idx][io].peak_lat =
--			   jiffies_to_msecs(io_lat->peak_lat[idx][io]);
--			iostat_lat[idx][io].cnt = io_lat->bio_cnt[idx][io];
--			iostat_lat[idx][io].avg_lat = iostat_lat[idx][io].cnt ?
--			   jiffies_to_msecs(io_lat->sum_lat[idx][io]) / iostat_lat[idx][io].cnt : 0;
--			io_lat->sum_lat[idx][io] = 0;
--			io_lat->peak_lat[idx][io] = 0;
--			io_lat->bio_cnt[idx][io] = 0;
--		}
-+	for (lat_type = 0; lat_type < MAX_LAT_TYPE; lat_type++) {
-+		iostat_lat[lat_type].peak_lat =
-+		   jiffies_to_msecs(io_lat->peak_lat[lat_type]);
-+		iostat_lat[lat_type].cnt = io_lat->bio_cnt[lat_type];
-+		iostat_lat[lat_type].avg_lat = iostat_lat[lat_type].cnt ?
-+		   jiffies_to_msecs(io_lat->sum_lat[lat_type]) / iostat_lat[lat_type].cnt : 0;
-+		io_lat->sum_lat[lat_type] = 0;
-+		io_lat->peak_lat[lat_type] = 0;
-+		io_lat->bio_cnt[lat_type] = 0;
- 	}
- 	spin_unlock_irqrestore(&sbi->iostat_lat_lock, flags);
- 
-@@ -208,62 +206,73 @@ void f2fs_update_iostat(struct f2fs_sb_info *sbi, struct inode *inode,
- 	f2fs_record_iostat(sbi);
- }
- 
--static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
--				enum iostat_lat_type lat_type)
-+static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx)
- {
--	unsigned long ts_diff;
--	unsigned int page_type = iostat_ctx->type;
- 	struct f2fs_sb_info *sbi = iostat_ctx->sbi;
- 	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
-+	unsigned int lat_type = iostat_ctx->lat_type;
-+	unsigned long ts_diff;
- 	unsigned long flags;
- 
- 	if (!sbi->iostat_enable)
- 		return;
- 
--	ts_diff = jiffies - iostat_ctx->submit_ts;
--	if (page_type == META_FLUSH) {
--		page_type = META;
--	} else if (page_type >= NR_PAGE_TYPE) {
--		f2fs_warn(sbi, "%s: %d over NR_PAGE_TYPE", __func__, page_type);
-+	if (lat_type >= MAX_LAT_TYPE) {
-+		f2fs_warn(sbi, "%s: %d over MAX_LAT_TYPE", __func__, lat_type);
- 		return;
- 	}
-+	ts_diff = jiffies - iostat_ctx->submit_ts;
- 
- 	spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
--	io_lat->sum_lat[lat_type][page_type] += ts_diff;
--	io_lat->bio_cnt[lat_type][page_type]++;
--	if (ts_diff > io_lat->peak_lat[lat_type][page_type])
--		io_lat->peak_lat[lat_type][page_type] = ts_diff;
-+	io_lat->sum_lat[lat_type] += ts_diff;
-+	io_lat->bio_cnt[lat_type]++;
-+	if (ts_diff > io_lat->peak_lat[lat_type])
-+		io_lat->peak_lat[lat_type] = ts_diff;
- 	spin_unlock_irqrestore(&sbi->iostat_lat_lock, flags);
- }
- 
- void iostat_update_and_unbind_ctx(struct bio *bio)
-+{
-+	struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
-+
-+	if (op_is_write(bio_op(bio)))
-+		bio->bi_private = iostat_ctx->sbi;
-+	else
-+		bio->bi_private = iostat_ctx->iostat_private;
-+
-+	__update_iostat_latency(iostat_ctx);
-+	mempool_free(iostat_ctx, bio_iostat_ctx_pool);
-+}
-+
-+void iostat_update_submit_ctx(struct bio *bio, enum page_type type)
+@@ -235,7 +235,7 @@ void iostat_update_and_unbind_ctx(struct bio *bio)
  {
  	struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
- 	enum iostat_lat_type lat_type;
  
-+	iostat_ctx->submit_ts = jiffies;
-+
- 	if (op_is_write(bio_op(bio))) {
+-	if (op_is_write(bio_op(bio)))
++	if (op_is_write(bio_op(bio)) && !op_is_discard(bio_op(bio)))
+ 		bio->bi_private = iostat_ctx->sbi;
+ 	else
+ 		bio->bi_private = iostat_ctx->iostat_private;
+@@ -251,7 +251,9 @@ void iostat_update_submit_ctx(struct bio *bio, enum page_type type)
+ 
+ 	iostat_ctx->submit_ts = jiffies;
+ 
+-	if (op_is_write(bio_op(bio))) {
++	if (type == DISCARD) {
++		lat_type = DISCARD_LAT;
++	} else if (op_is_write(bio_op(bio))) {
  		lat_type = bio->bi_opf & REQ_SYNC ?
--				WRITE_SYNC_IO : WRITE_ASYNC_IO;
--		bio->bi_private = iostat_ctx->sbi;
-+				WRITE_SYNC_DATA_LAT : WRITE_ASYNC_DATA_LAT;
-+		lat_type = (enum iostat_lat_type)(lat_type + type);
- 	} else {
--		lat_type = READ_IO;
--		bio->bi_private = iostat_ctx->post_read_ctx;
-+		lat_type = READ_DATA_LAT;
-+		lat_type = (enum iostat_lat_type)(lat_type + type);
- 	}
+ 				WRITE_SYNC_DATA_LAT : WRITE_ASYNC_DATA_LAT;
+ 		lat_type = (enum iostat_lat_type)(lat_type + type);
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index fc0734e4fb92..be24e9c945a3 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1100,9 +1100,12 @@ static void __remove_discard_cmd(struct f2fs_sb_info *sbi,
  
--	__update_iostat_latency(iostat_ctx, lat_type);
--	mempool_free(iostat_ctx, bio_iostat_ctx_pool);
-+	iostat_ctx->lat_type = lat_type;
- }
- 
- void iostat_alloc_and_bind_ctx(struct f2fs_sb_info *sbi,
--		struct bio *bio, struct bio_post_read_ctx *ctx)
-+		struct bio *bio, void *private)
+ static void f2fs_submit_discard_endio(struct bio *bio)
  {
- 	struct bio_iostat_ctx *iostat_ctx;
- 	/* Due to the mempool, this never fails. */
- 	iostat_ctx = mempool_alloc(bio_iostat_ctx_pool, GFP_NOFS);
- 	iostat_ctx->sbi = sbi;
- 	iostat_ctx->submit_ts = 0;
--	iostat_ctx->type = 0;
--	iostat_ctx->post_read_ctx = ctx;
-+	iostat_ctx->lat_type = 0;
-+	iostat_ctx->iostat_private = private;
- 	bio->bi_private = iostat_ctx;
- }
+-	struct discard_cmd *dc = (struct discard_cmd *)bio->bi_private;
++	struct discard_cmd *dc;
+ 	unsigned long flags;
  
-diff --git a/fs/f2fs/iostat.h b/fs/f2fs/iostat.h
-index eb99d05cf272..67b468691498 100644
---- a/fs/f2fs/iostat.h
-+++ b/fs/f2fs/iostat.h
-@@ -6,17 +6,24 @@
- #ifndef __F2FS_IOSTAT_H__
- #define __F2FS_IOSTAT_H__
- 
-+#ifdef CONFIG_F2FS_IOSTAT
++	iostat_update_and_unbind_ctx(bio);
++	dc = bio->bi_private;
 +
- struct bio_post_read_ctx;
+ 	spin_lock_irqsave(&dc->lock, flags);
+ 	if (!dc->error)
+ 		dc->error = blk_status_to_errno(bio->bi_status);
+@@ -1276,6 +1279,9 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+ 		bio->bi_private = dc;
+ 		bio->bi_end_io = f2fs_submit_discard_endio;
+ 		bio->bi_opf |= flag;
++
++		iostat_alloc_and_bind_ctx(sbi, bio, dc);
++		iostat_update_submit_ctx(bio, DISCARD);
+ 		submit_bio(bio);
  
- enum iostat_lat_type {
--	READ_IO = 0,
--	WRITE_SYNC_IO,
--	WRITE_ASYNC_IO,
--	MAX_IO_TYPE,
-+	READ_DATA_LAT = 0,
-+	READ_NODE_LAT,
-+	READ_META_LAT,
-+	WRITE_SYNC_DATA_LAT,
-+	WRITE_SYNC_NODE_LAT,
-+	WRITE_SYNC_META_LAT,
-+	WRITE_ASYNC_DATA_LAT,
-+	WRITE_ASYNC_NODE_LAT,
-+	WRITE_ASYNC_META_LAT,
-+	DISCARD_LAT,
-+	MAX_LAT_TYPE,
- };
- 
--#ifdef CONFIG_F2FS_IOSTAT
--
- #define NUM_PREALLOC_IOSTAT_CTXS	128
- #define DEFAULT_IOSTAT_PERIOD_MS	3000
- #define MIN_IOSTAT_PERIOD_MS		100
-@@ -24,9 +31,9 @@ enum iostat_lat_type {
- #define MAX_IOSTAT_PERIOD_MS		8640000
- 
- struct iostat_lat_info {
--	unsigned long sum_lat[MAX_IO_TYPE][NR_PAGE_TYPE];	/* sum of io latencies */
--	unsigned long peak_lat[MAX_IO_TYPE][NR_PAGE_TYPE];	/* peak io latency */
--	unsigned int bio_cnt[MAX_IO_TYPE][NR_PAGE_TYPE];	/* bio count */
-+	unsigned long sum_lat[MAX_LAT_TYPE];	/* sum of io latencies */
-+	unsigned long peak_lat[MAX_LAT_TYPE];	/* peak io latency */
-+	unsigned int bio_cnt[MAX_LAT_TYPE];	/* bio count */
- };
- 
- extern int __maybe_unused iostat_info_seq_show(struct seq_file *seq,
-@@ -38,29 +45,21 @@ extern void f2fs_update_iostat(struct f2fs_sb_info *sbi, struct inode *inode,
- struct bio_iostat_ctx {
- 	struct f2fs_sb_info *sbi;
- 	unsigned long submit_ts;
--	enum page_type type;
--	struct bio_post_read_ctx *post_read_ctx;
-+	enum iostat_lat_type lat_type;
-+	void *iostat_private;
- };
- 
--static inline void iostat_update_submit_ctx(struct bio *bio,
--			enum page_type type)
--{
--	struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
--
--	iostat_ctx->submit_ts = jiffies;
--	iostat_ctx->type = type;
--}
--
--static inline struct bio_post_read_ctx *get_post_read_ctx(struct bio *bio)
-+static inline struct bio_post_read_ctx *iostat_get_bio_private(struct bio *bio)
- {
- 	struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
- 
--	return iostat_ctx->post_read_ctx;
-+	return iostat_ctx->iostat_private;
- }
- 
-+extern void iostat_update_submit_ctx(struct bio *bio, enum page_type type);
- extern void iostat_update_and_unbind_ctx(struct bio *bio);
- extern void iostat_alloc_and_bind_ctx(struct f2fs_sb_info *sbi,
--		struct bio *bio, struct bio_post_read_ctx *ctx);
-+		struct bio *bio, void *private);
- extern int f2fs_init_iostat_processing(void);
- extern void f2fs_destroy_iostat_processing(void);
- extern int f2fs_init_iostat(struct f2fs_sb_info *sbi);
-@@ -70,10 +69,10 @@ static inline void f2fs_update_iostat(struct f2fs_sb_info *sbi, struct inode *in
- 		enum iostat_type type, unsigned long long io_bytes) {}
- static inline void iostat_update_and_unbind_ctx(struct bio *bio) {}
- static inline void iostat_alloc_and_bind_ctx(struct f2fs_sb_info *sbi,
--		struct bio *bio, struct bio_post_read_ctx *ctx) {}
-+		struct bio *bio, void *private) {}
- static inline void iostat_update_submit_ctx(struct bio *bio,
- 		enum page_type type) {}
--static inline struct bio_post_read_ctx *get_post_read_ctx(struct bio *bio)
-+static inline struct bio_post_read_ctx *iostat_get_bio_private(struct bio *bio)
- {
- 	return bio->bi_private;
- }
+ 		atomic_inc(&dcc->issued_discard);
 diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-index 99cbc5949e3c..040a430e1199 100644
+index 040a430e1199..385291ac9ad5 100644
 --- a/include/trace/events/f2fs.h
 +++ b/include/trace/events/f2fs.h
-@@ -2045,7 +2045,7 @@ struct f2fs_iostat_latency {
- 
- TRACE_EVENT(f2fs_iostat_latency,
- 
--	TP_PROTO(struct f2fs_sb_info *sbi, struct f2fs_iostat_latency (*iostat_lat)[NR_PAGE_TYPE]),
-+	TP_PROTO(struct f2fs_sb_info *sbi, struct f2fs_iostat_latency *iostat_lat),
- 
- 	TP_ARGS(sbi, iostat_lat),
- 
-@@ -2082,33 +2082,33 @@ TRACE_EVENT(f2fs_iostat_latency,
+@@ -2078,6 +2078,9 @@ TRACE_EVENT(f2fs_iostat_latency,
+ 		__field(unsigned int,	m_wr_as_peak)
+ 		__field(unsigned int,	m_wr_as_avg)
+ 		__field(unsigned int,	m_wr_as_cnt)
++		__field(unsigned int,	discard_peak)
++		__field(unsigned int,	discard_avg)
++		__field(unsigned int,	discard_cnt)
+ 	),
  
  	TP_fast_assign(
- 		__entry->dev		= sbi->sb->s_dev;
--		__entry->d_rd_peak	= iostat_lat[READ_IO][DATA].peak_lat;
--		__entry->d_rd_avg	= iostat_lat[READ_IO][DATA].avg_lat;
--		__entry->d_rd_cnt	= iostat_lat[READ_IO][DATA].cnt;
--		__entry->n_rd_peak	= iostat_lat[READ_IO][NODE].peak_lat;
--		__entry->n_rd_avg	= iostat_lat[READ_IO][NODE].avg_lat;
--		__entry->n_rd_cnt	= iostat_lat[READ_IO][NODE].cnt;
--		__entry->m_rd_peak	= iostat_lat[READ_IO][META].peak_lat;
--		__entry->m_rd_avg	= iostat_lat[READ_IO][META].avg_lat;
--		__entry->m_rd_cnt	= iostat_lat[READ_IO][META].cnt;
--		__entry->d_wr_s_peak	= iostat_lat[WRITE_SYNC_IO][DATA].peak_lat;
--		__entry->d_wr_s_avg	= iostat_lat[WRITE_SYNC_IO][DATA].avg_lat;
--		__entry->d_wr_s_cnt	= iostat_lat[WRITE_SYNC_IO][DATA].cnt;
--		__entry->n_wr_s_peak	= iostat_lat[WRITE_SYNC_IO][NODE].peak_lat;
--		__entry->n_wr_s_avg	= iostat_lat[WRITE_SYNC_IO][NODE].avg_lat;
--		__entry->n_wr_s_cnt	= iostat_lat[WRITE_SYNC_IO][NODE].cnt;
--		__entry->m_wr_s_peak	= iostat_lat[WRITE_SYNC_IO][META].peak_lat;
--		__entry->m_wr_s_avg	= iostat_lat[WRITE_SYNC_IO][META].avg_lat;
--		__entry->m_wr_s_cnt	= iostat_lat[WRITE_SYNC_IO][META].cnt;
--		__entry->d_wr_as_peak	= iostat_lat[WRITE_ASYNC_IO][DATA].peak_lat;
--		__entry->d_wr_as_avg	= iostat_lat[WRITE_ASYNC_IO][DATA].avg_lat;
--		__entry->d_wr_as_cnt	= iostat_lat[WRITE_ASYNC_IO][DATA].cnt;
--		__entry->n_wr_as_peak	= iostat_lat[WRITE_ASYNC_IO][NODE].peak_lat;
--		__entry->n_wr_as_avg	= iostat_lat[WRITE_ASYNC_IO][NODE].avg_lat;
--		__entry->n_wr_as_cnt	= iostat_lat[WRITE_ASYNC_IO][NODE].cnt;
--		__entry->m_wr_as_peak	= iostat_lat[WRITE_ASYNC_IO][META].peak_lat;
--		__entry->m_wr_as_avg	= iostat_lat[WRITE_ASYNC_IO][META].avg_lat;
--		__entry->m_wr_as_cnt	= iostat_lat[WRITE_ASYNC_IO][META].cnt;
-+		__entry->d_rd_peak	= iostat_lat[READ_DATA_LAT].peak_lat;
-+		__entry->d_rd_avg	= iostat_lat[READ_DATA_LAT].avg_lat;
-+		__entry->d_rd_cnt	= iostat_lat[READ_DATA_LAT].cnt;
-+		__entry->n_rd_peak	= iostat_lat[READ_NODE_LAT].peak_lat;
-+		__entry->n_rd_avg	= iostat_lat[READ_NODE_LAT].avg_lat;
-+		__entry->n_rd_cnt	= iostat_lat[READ_NODE_LAT].cnt;
-+		__entry->m_rd_peak	= iostat_lat[READ_META_LAT].peak_lat;
-+		__entry->m_rd_avg	= iostat_lat[READ_META_LAT].avg_lat;
-+		__entry->m_rd_cnt	= iostat_lat[READ_META_LAT].cnt;
-+		__entry->d_wr_s_peak	= iostat_lat[WRITE_SYNC_DATA_LAT].peak_lat;
-+		__entry->d_wr_s_avg	= iostat_lat[WRITE_SYNC_DATA_LAT].avg_lat;
-+		__entry->d_wr_s_cnt	= iostat_lat[WRITE_SYNC_DATA_LAT].cnt;
-+		__entry->n_wr_s_peak	= iostat_lat[WRITE_SYNC_NODE_LAT].peak_lat;
-+		__entry->n_wr_s_avg	= iostat_lat[WRITE_SYNC_NODE_LAT].avg_lat;
-+		__entry->n_wr_s_cnt	= iostat_lat[WRITE_SYNC_NODE_LAT].cnt;
-+		__entry->m_wr_s_peak	= iostat_lat[WRITE_SYNC_META_LAT].peak_lat;
-+		__entry->m_wr_s_avg	= iostat_lat[WRITE_SYNC_META_LAT].avg_lat;
-+		__entry->m_wr_s_cnt	= iostat_lat[WRITE_SYNC_META_LAT].cnt;
-+		__entry->d_wr_as_peak	= iostat_lat[WRITE_ASYNC_DATA_LAT].peak_lat;
-+		__entry->d_wr_as_avg	= iostat_lat[WRITE_ASYNC_DATA_LAT].avg_lat;
-+		__entry->d_wr_as_cnt	= iostat_lat[WRITE_ASYNC_DATA_LAT].cnt;
-+		__entry->n_wr_as_peak	= iostat_lat[WRITE_ASYNC_NODE_LAT].peak_lat;
-+		__entry->n_wr_as_avg	= iostat_lat[WRITE_ASYNC_NODE_LAT].avg_lat;
-+		__entry->n_wr_as_cnt	= iostat_lat[WRITE_ASYNC_NODE_LAT].cnt;
-+		__entry->m_wr_as_peak	= iostat_lat[WRITE_ASYNC_META_LAT].peak_lat;
-+		__entry->m_wr_as_avg	= iostat_lat[WRITE_ASYNC_META_LAT].avg_lat;
-+		__entry->m_wr_as_cnt	= iostat_lat[WRITE_ASYNC_META_LAT].cnt;
+@@ -2109,6 +2112,9 @@ TRACE_EVENT(f2fs_iostat_latency,
+ 		__entry->m_wr_as_peak	= iostat_lat[WRITE_ASYNC_META_LAT].peak_lat;
+ 		__entry->m_wr_as_avg	= iostat_lat[WRITE_ASYNC_META_LAT].avg_lat;
+ 		__entry->m_wr_as_cnt	= iostat_lat[WRITE_ASYNC_META_LAT].cnt;
++		__entry->discard_peak	= iostat_lat[DISCARD_LAT].peak_lat;
++		__entry->discard_avg	= iostat_lat[DISCARD_LAT].avg_lat;
++		__entry->discard_cnt	= iostat_lat[DISCARD_LAT].cnt;
  	),
  
  	TP_printk("dev = (%d,%d), "
+@@ -2116,7 +2122,8 @@ TRACE_EVENT(f2fs_iostat_latency,
+ 		"rd_data [%u/%u/%u], rd_node [%u/%u/%u], rd_meta [%u/%u/%u], "
+ 		"wr_sync_data [%u/%u/%u], wr_sync_node [%u/%u/%u], "
+ 		"wr_sync_meta [%u/%u/%u], wr_async_data [%u/%u/%u], "
+-		"wr_async_node [%u/%u/%u], wr_async_meta [%u/%u/%u]",
++		"wr_async_node [%u/%u/%u], wr_async_meta [%u/%u/%u], "
++		"discard [%u/%u/%u]",
+ 		show_dev(__entry->dev),
+ 		__entry->d_rd_peak, __entry->d_rd_avg, __entry->d_rd_cnt,
+ 		__entry->n_rd_peak, __entry->n_rd_avg, __entry->n_rd_cnt,
+@@ -2126,7 +2133,8 @@ TRACE_EVENT(f2fs_iostat_latency,
+ 		__entry->m_wr_s_peak, __entry->m_wr_s_avg, __entry->m_wr_s_cnt,
+ 		__entry->d_wr_as_peak, __entry->d_wr_as_avg, __entry->d_wr_as_cnt,
+ 		__entry->n_wr_as_peak, __entry->n_wr_as_avg, __entry->n_wr_as_cnt,
+-		__entry->m_wr_as_peak, __entry->m_wr_as_avg, __entry->m_wr_as_cnt)
++		__entry->m_wr_as_peak, __entry->m_wr_as_avg, __entry->m_wr_as_cnt,
++		__entry->discard_peak, __entry->discard_avg, __entry->discard_cnt)
+ );
+ #endif
+ 
 -- 
 2.35.1
 
