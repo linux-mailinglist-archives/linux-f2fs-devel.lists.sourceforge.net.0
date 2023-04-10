@@ -2,65 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13E8B6DC292
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Apr 2023 04:12:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D1556DC294
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Apr 2023 04:14:24 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1plh1R-0008Dw-Ca;
-	Mon, 10 Apr 2023 02:12:45 +0000
+	id 1plh2y-0008GQ-S1;
+	Mon, 10 Apr 2023 02:14:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1plh1M-0008Dl-Q2
+ (envelope-from <chao@kernel.org>) id 1plh2w-0008GK-K1
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Apr 2023 02:12:41 +0000
+ Mon, 10 Apr 2023 02:14:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qt7XHUcc7uLjUUDWgbw7IAq7j2Hxc0A5FC6yM3pwdk8=; b=eemnVdLMkW56e60/a8XDiTJG8J
- 5d8hOXt2n47DJHfkla85CvvuL75tTaGjOkV/Q7g4XsThvxmboN7LTbWvYU0tB1PG/6qo6JcZ8TG5E
- H0Bpy7+rfn7Hftw7RLo2X3LNwe6SIuKarsrCZf4n7Odr65XRcsMhqk32qQGUX1xVi8go=;
+ bh=2ADmnYEY8KNAhOROyJ/F/ok/JfgesFrPCS6WIBfd35E=; b=KUjX9mrDk9Cr9/1P+w9NN8050A
+ IIP7XG+iibqP3APUEE5k5gIxYYEp+XxgZIFbKI8gtPiheyxzB/4mdF+8AjOyAcB6sV2YEGPHj0YTE
+ 2a6nFsCCDmvCUYN4aEKCdQJRKzwHIAaKYmrQDjkakjcQr8iCn2LxtKfzuRzopu2qahqQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=qt7XHUcc7uLjUUDWgbw7IAq7j2Hxc0A5FC6yM3pwdk8=; b=O
- IgmLeaKGy1OV+lBXK0ouknXi+PRS9LMc0r0aZHAJcMkVHG60n5lb7Kh6SSK6iOVHM9hQ4bvVDgDHR
- 2lM7EFLqMZZHr7nKscZy80eYBU/B+1wdvV+DxUem4JOpUW91W0GtuSOCIryuSJirDwvfcVJb3u3iV
- jBOiZIFGlDxfL+jc=;
+ List-Owner:List-Archive; bh=2ADmnYEY8KNAhOROyJ/F/ok/JfgesFrPCS6WIBfd35E=; b=M
+ uekFL5wrFBrJ1dx4Lfp6bIm83gKDY7FFaQCJQr/2kQIdV3Nj08WbvySwzPy/5O10H7IechhxpnZS/
+ ODaZQxVRX19yz5Zc8E8X6909oD/rRrQc+qQPSx4X/tYUDywZnh8nYrdrFCVkZ6a8h4ryCGPgwSdO1
+ yY6filq7lBwnu/dw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1plh1M-0007C3-Fm for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Apr 2023 02:12:41 +0000
+ id 1plh2u-002V3p-Mx for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Apr 2023 02:14:17 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id EC35361741
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5467060C38
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 10 Apr 2023 02:12:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4DE7FC433D2;
- Mon, 10 Apr 2023 02:12:32 +0000 (UTC)
+ Mon, 10 Apr 2023 02:14:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 918D1C433EF;
+ Mon, 10 Apr 2023 02:14:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1681092754;
- bh=2wTb3o2En2FYkmbvF9dDTpIdwIzLMd7m35J/cia5i2E=;
+ s=k20201202; t=1681092850;
+ bh=pXSNSEY080dCZ45hxP1p6QKFX6fqVzj/5je/deUizYA=;
  h=From:To:Cc:Subject:Date:From;
- b=NAqwGYbgXwF9CP5o0Hf9EftnNEUBP5QlxxnP1r7sHbXBZNntE0OpWq23ME+eS+9sx
- xHXPEgomjcinXQ0lYPVEjjKMA4HmLZDtDzIp8MlLB0Zq8QZkKFN7yot5nwQcsblsv2
- HsexiDSi5J+1NcFB/gqQKVkcgCJ9Ls57qpDA+v5C0vBZYwg+2TZJo8D9P4zGmivond
- Tx36Wmv4YqGDEy5Vsf72KR5j+OutxHRSYQv8lPo9+vIlHNpv5Gss4GOMTLyrO13tYn
- oyn4gK34dMeay7pw3eQ6W3K3XCrdXfoq4oTtH8F/yfsoNJ9D/5vZV84/Roj908vCL+
- 3kyR2BZhU+aDg==
+ b=n0DnDTV39nOj54ijI8xX14a/fVfk9sb29YAwpg1Njihu112/Z2WuHhSez2wB3VT5+
+ hDMhWrJ0w4tA2L4t7IM282Nh8c74N5OgCX2zCqgqrmIWR7qDHHK/m4FOfk1D8oCJKC
+ yLs5EfczK6jb6+70E8GlxQhvpLO8V3hdnSHeXDpKHxXJE7jsmUFOu3SpV4BTuVdHN2
+ SaLsZ/mG/9j9Gux99gVA4vf/XAfnj9XLdxddMh3/TWN/roBztJ17IdcJ2U+WJgnRjR
+ 2qB6HZSUggm50IScvP1fzkgbLudZvtJZIRDH3tVqajaIZI4FY6l/+zfrrZqN+hRMZF
+ /i1a/H21BZKLQ==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Mon, 10 Apr 2023 10:12:22 +0800
-Message-Id: <20230410021222.1826966-1-chao@kernel.org>
+Date: Mon, 10 Apr 2023 10:14:02 +0800
+Message-Id: <20230410021402.1833220-1-chao@kernel.org>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Spam-Score: -5.2 (-----)
@@ -70,11 +70,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  xfstest generic/361 reports a bug as below: f2fs_bug_on(sbi, 
- sbi->fsync_node_num);
- kernel BUG at fs/f2fs/super.c:1627! RIP: 0010:f2fs_put_super+0x3a8/0x3b0
- Call Trace: generic_shutdown_super+0x8c/0x1b0 kill_block_super+0x2b/0x60
- kill_f2fs_super+0x87/0x110 deactivate_locked_super+0x3 [...] 
+ Content preview: xfstest generic/019 reports a bug: kernel BUG at
+ mm/filemap.c:1619!
+ RIP: 0010:folio_end_writeback+0x8a/0x90 Call Trace:
+ end_page_writeback+0x1c/0x60
+ f2fs_write_end_io+0x199/0x420 bio_endio+0x104/0x180
+ submit_bio_noacct+0xa5/0x510 submi [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,9 +91,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1plh1M-0007C3-Fm
-Subject: [f2fs-dev] [PATCH] f2fs: fix to drop all dirty pages during
- umount() if cp_error is set
+X-Headers-End: 1plh2u-002V3p-Mx
+Subject: [f2fs-dev] [PATCH] f2fs: fix to avoid use-after-free for cached IPU
+ bio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,85 +110,68 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-xfstest generic/361 reports a bug as below:
+xfstest generic/019 reports a bug:
 
-f2fs_bug_on(sbi, sbi->fsync_node_num);
-
-kernel BUG at fs/f2fs/super.c:1627!
-RIP: 0010:f2fs_put_super+0x3a8/0x3b0
+kernel BUG at mm/filemap.c:1619!
+RIP: 0010:folio_end_writeback+0x8a/0x90
 Call Trace:
- generic_shutdown_super+0x8c/0x1b0
- kill_block_super+0x2b/0x60
- kill_f2fs_super+0x87/0x110
- deactivate_locked_super+0x39/0x80
- deactivate_super+0x46/0x50
- cleanup_mnt+0x109/0x170
- __cleanup_mnt+0x16/0x20
- task_work_run+0x65/0xa0
- exit_to_user_mode_prepare+0x175/0x190
- syscall_exit_to_user_mode+0x25/0x50
- do_syscall_64+0x4c/0x90
- entry_SYSCALL_64_after_hwframe+0x72/0xdc
+ end_page_writeback+0x1c/0x60
+ f2fs_write_end_io+0x199/0x420
+ bio_endio+0x104/0x180
+ submit_bio_noacct+0xa5/0x510
+ submit_bio+0x48/0x80
+ f2fs_submit_write_bio+0x35/0x300
+ f2fs_submit_merged_ipu_write+0x2a0/0x2b0
+ f2fs_write_single_data_page+0x838/0x8b0
+ f2fs_write_cache_pages+0x379/0xa30
+ f2fs_write_data_pages+0x30c/0x340
+ do_writepages+0xd8/0x1b0
+ __writeback_single_inode+0x44/0x370
+ writeback_sb_inodes+0x233/0x4d0
+ __writeback_inodes_wb+0x56/0xf0
+ wb_writeback+0x1dd/0x2d0
+ wb_workfn+0x367/0x4a0
+ process_one_work+0x21d/0x430
+ worker_thread+0x4e/0x3c0
+ kthread+0x103/0x130
+ ret_from_fork+0x2c/0x50
 
-During umount(), if cp_error is set, f2fs_wait_on_all_pages() should
-not stop waiting all F2FS_WB_CP_DATA pages to be writebacked, otherwise,
-fsync_node_num can be non-zero after f2fs_wait_on_all_pages() causing
-this bug.
+The root cause is: after cp_error is set, f2fs_submit_merged_ipu_write()
+in f2fs_write_single_data_page() tries to flush IPU bio in cache, however
+f2fs_submit_merged_ipu_write() missed to check validity of @bio parameter,
+result in submitting random cached bio which belong to other IO context,
+then it will cause use-after-free issue, fix it by adding additional
+validity check.
 
-In this case, to avoid deadloop in f2fs_wait_on_all_pages(), it needs
-to drop all dirty pages rather than redirtying them.
-
+Fixes: 0b20fcec8651 ("f2fs: cache global IPU bio")
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/checkpoint.c | 12 ++++++++++--
- fs/f2fs/data.c       |  3 ++-
- 2 files changed, 12 insertions(+), 3 deletions(-)
+ fs/f2fs/data.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index e6b266bb9ce0..007fd965dd7e 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -327,8 +327,15 @@ static int __f2fs_write_meta_page(struct page *page,
- 
- 	trace_f2fs_writepage(page, META);
- 
--	if (unlikely(f2fs_cp_error(sbi)))
-+	if (unlikely(f2fs_cp_error(sbi))) {
-+		if (is_sbi_flag_set(sbi, SBI_IS_CLOSE)) {
-+			ClearPageUptodate(page);
-+			dec_page_count(sbi, F2FS_DIRTY_META);
-+			unlock_page(page);
-+			return 0;
-+		}
- 		goto redirty_out;
-+	}
- 	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
- 		goto redirty_out;
- 	if (wbc->for_reclaim && page->index < GET_SUM_BLOCK(sbi, 0))
-@@ -1288,7 +1295,8 @@ void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
- 		if (!get_pages(sbi, type))
- 			break;
- 
--		if (unlikely(f2fs_cp_error(sbi)))
-+		if (unlikely(f2fs_cp_error(sbi) &&
-+			!is_sbi_flag_set(sbi, SBI_IS_CLOSE)))
- 			break;
- 
- 		if (type == F2FS_DIRTY_META)
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index becc7bdb7403..8064df5f829d 100644
+index 8064df5f829d..b59b5c7096f3 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -2801,7 +2801,8 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
- 		 * don't drop any dirty dentry pages for keeping lastest
- 		 * directory structure.
- 		 */
--		if (S_ISDIR(inode->i_mode))
-+		if (S_ISDIR(inode->i_mode) &&
-+				!is_sbi_flag_set(sbi, SBI_IS_CLOSE))
- 			goto redirty_out;
- 		goto out;
+@@ -874,6 +874,8 @@ void f2fs_submit_merged_ipu_write(struct f2fs_sb_info *sbi,
+ 	bool found = false;
+ 	struct bio *target = bio ? *bio : NULL;
+ 
++	f2fs_bug_on(sbi, !target && !page);
++
+ 	for (temp = HOT; temp < NR_TEMP_TYPE && !found; temp++) {
+ 		struct f2fs_bio_info *io = sbi->write_io[DATA] + temp;
+ 		struct list_head *head = &io->bio_list;
+@@ -2902,7 +2904,8 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
+ 
+ 	if (unlikely(f2fs_cp_error(sbi))) {
+ 		f2fs_submit_merged_write(sbi, DATA);
+-		f2fs_submit_merged_ipu_write(sbi, bio, NULL);
++		if (bio && *bio)
++			f2fs_submit_merged_ipu_write(sbi, bio, NULL);
+ 		submitted = NULL;
  	}
+ 
 -- 
 2.25.1
 
