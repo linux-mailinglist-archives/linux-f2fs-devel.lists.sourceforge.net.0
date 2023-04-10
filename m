@@ -2,104 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 641BB6DC56C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Apr 2023 11:57:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4750B6DC775
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Apr 2023 15:53:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ploGu-00065b-5Q;
-	Mon, 10 Apr 2023 09:57:13 +0000
+	id 1plrxL-0008MQ-R4;
+	Mon, 10 Apr 2023 13:53:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1ploGs-00065U-M3
+ (envelope-from <chao@kernel.org>) id 1plrxK-0008MC-LB
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Apr 2023 09:57:11 +0000
+ Mon, 10 Apr 2023 13:53:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=936JdSGdYffpBnyXEoJLDcny/ujmdJHe5QTGRHYP2kU=; b=MYpfh0yrqytkLzvbQDxH2Jey+8
- Lbr9zsqUM8GpfwHPDZEqmbUyaFU+RJ955v62wk4z4+Xt9Js9dcNcyew0CHZh8fDXvK9WEZ2xwWf+N
- /heXlnYeqkp6t1i8g3FB2gT7Z0X0Dug9I9ufMZP5pGuIhMWqyjECxFO7ftk9le9Qt4r4=;
+ bh=7IjlcpX2/Yv5c+wHLxJ5k8LiVyvP2Y6HlvOQiYpJPeM=; b=BOzHt66QtaFiGrko9Fldo30Q5w
+ mmxUnpZvAvs3r5yK9g3n8M+dGfJOcTFkJUtVTLvZgNbUBSXgv7FA+ZxzmRnQH2tMLT49Jfv4DHMeg
+ lbgDOEL2YJVgHMA+hd6E8+ZUnJRAbX76bLLj9BpS7GW3UHIPfoKr9vwXwdDo/or7rI/w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
+ References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=936JdSGdYffpBnyXEoJLDcny/ujmdJHe5QTGRHYP2kU=; b=mLwOqKB5dlq+mE4YyEtcCwVeUm
- ZAMBDQ6GkFK66Q36RJzi8lYX0f1i1FLG2WkERIwMQV+4svo1H/ObuaMoXxxvCnZ+klgEMxoAiTJKL
- hATlW5qTALTsSlg7HF2hDpjCxcaSqvL1FQ+eoF4J/saowBn1wDpQfYCt2Kbm0RSqTQic=;
+ bh=7IjlcpX2/Yv5c+wHLxJ5k8LiVyvP2Y6HlvOQiYpJPeM=; b=FcaL/c7xYqm8IX4BMk1Ve9iXrJ
+ mqKJ7rAIZxN4tbYnhaUuZOGpRm/2z0pqxTnBKrWlKUxk0LJRTOof/2f65/DCt6bkVOONfWA/9IaRQ
+ xfKKNp1KWV/4bh09bSE1yWy2E4GVtw9qB9ITEOCAoc3i3Uej+zTtjCprOMC7EfSE79RM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1ploGs-0005qh-89 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Apr 2023 09:57:11 +0000
+ id 1plrxD-002wIr-TY for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Apr 2023 13:53:13 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C6B35611C5;
- Mon, 10 Apr 2023 09:57:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F046C433D2;
- Mon, 10 Apr 2023 09:57:02 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B3D9E60ED8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 10 Apr 2023 13:52:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 861BCC433D2;
+ Mon, 10 Apr 2023 13:52:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1681120624;
- bh=Qb9Wmug4U9+BqbWJHo9Bbrc1/cehXaMbdrrOHYrt/Sk=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=a3Qd6K9WNjaL9sCU0jBGqmkdQUiwzR8CF68FMp0t7DYxl42rv1nxllaeBuyKId8p7
- cPWTFNwkkeIsNxxc1wjI132N7kjQ+CmFErDfvosiiJC1y8LLlvxHJeDQgFfNdWm8Ew
- jMtXj32hgAE6iE6UmzzjRBQbZRu9OsfEnEpa2GefZGXkwEx2EDI47/GIpwUwZ9VcnF
- N8GE1vMdcAKotPpgTqWuBqv8G331dKAlW7Sux50duSdPPbBv9qAYpquzqNJuT9nx38
- iBdIEkoh6TDvNcHrj/cAX+koN48pEkknnEh8kxKDf5pjGlsLe4/HonZwTUbdAt2NLB
- WCXziAQL0P4rg==
-Message-ID: <c07853c1-6512-6539-a9dd-d9681dd51727@kernel.org>
-Date: Mon, 10 Apr 2023 17:57:00 +0800
+ s=k20201202; t=1681134777;
+ bh=MiBRI1IjJJKvf3dOcpSwiYgL1iNNZCu/5VtsQEm9a1Q=;
+ h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
+ b=khoEVsj5SJ+iGxEz4qgNP57tIqNFyTUdFKRgnRszpdrkbit+r+E0sSSUuiwc/0qbf
+ XqtwtXWF75to1/+aQjRmgf16yaY8DqJhrjHpDcIDFYXfyxwIpNdddTV4PffGZ1uzRW
+ 3F2i/HEf7o+MlvKnUvjQr56DyxtZ1Qayv2lskB2gr54+rxfJCHeJ87el/Ub5jQ5E/t
+ nR9xhoAA1Ajuug6/RbuhACpYWtcQ2JO8tQxOcDF6MPO5cLCNVmGJ9ueKRTaU+xKm93
+ f9D7EaGHUjG3AHbN65LvE44rAOiXwLpLw24TvoQt7RoZ5t0WR3OX783FtzHT51wpmt
+ SBO3gESRtT/Sw==
+Message-ID: <f4ae2b3a-0aff-8941-4081-9dc53334c590@kernel.org>
+Date: Mon, 10 Apr 2023 21:52:52 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.1
+ Thunderbird/102.8.0
 Content-Language: en-US
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230323213919.1876157-1-jaegeuk@kernel.org>
- <8aea02b0-86f9-539a-02e9-27b381e68b66@kernel.org>
- <ZCG2mfviZfY1dqb4@google.com> <ZCHCykI/BLcfDzt7@casper.infradead.org>
- <ZC2kSfNUXKK4PfpM@google.com>
- <9dc4ba32-5be5-26d8-5dd2-9bd48d6b0af4@kernel.org>
- <ZC46Ccm8xTT4OlE3@google.com>
+References: <20230324071028.336982-1-chao@kernel.org>
+ <ZCyZGgf4RSEjyHTF@google.com>
+ <a4e49177-3959-eb2b-996c-5d07b7390495@kernel.org>
+ <ZC2aA+i5+HpdJ6M2@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZC46Ccm8xTT4OlE3@google.com>
-X-Spam-Score: -7.9 (-------)
+In-Reply-To: <ZC2aA+i5+HpdJ6M2@google.com>
+X-Spam-Score: -8.4 (--------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/4/6 11:18, Jaegeuk Kim wrote: > On 04/06, Chao Yu
- wrote: >> On 2023/4/6 0:39, Jaegeuk Kim wrote: >>> On 03/27, Matthew Wilcox
- wrote: >>>> On Mon, Mar 27, 2023 at 08:30:33AM -0700, Jaegeuk Kim [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  On 2023/4/5 23:55, Jaegeuk Kim wrote: > On 04/05, Chao Yu
+ wrote: >> On 2023/4/5 5:39, Jaegeuk Kim wrote: >>> Can we do like this? >>>
+ >>> From 9a58f0e59364241aa31b555cfe793d278e39b0dc Mon Sep 17 00:00 [...] 
+ Content analysis details:   (-8.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1ploGs-0005qh-89
-Subject: Re: [f2fs-dev] [PATCH] f2fs: get out of a repeat loop when getting
- a locked data page
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -3.2 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1plrxD-002wIr-TY
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to trigger a checkpoint in the end
+ of foreground garbage collection
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,233 +110,162 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org,
- Matthew Wilcox <willy@infradead.org>, linux-fsdevel@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/4/6 11:18, Jaegeuk Kim wrote:
-> On 04/06, Chao Yu wrote:
->> On 2023/4/6 0:39, Jaegeuk Kim wrote:
->>> On 03/27, Matthew Wilcox wrote:
->>>> On Mon, Mar 27, 2023 at 08:30:33AM -0700, Jaegeuk Kim wrote:
->>>>> On 03/26, Chao Yu wrote:
->>>>>> On 2023/3/24 5:39, Jaegeuk Kim wrote:
->>>>>>> https://bugzilla.kernel.org/show_bug.cgi?id=216050
->>>>>>>
->>>>>>> Somehow we're getting a page which has a different mapping.
->>>>>>> Let's avoid the infinite loop.
->>>>>>>
->>>>>>> Cc: <stable@vger.kernel.org>
->>>>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>>>>>> ---
->>>>>>>     fs/f2fs/data.c | 8 ++------
->>>>>>>     1 file changed, 2 insertions(+), 6 deletions(-)
->>>>>>>
->>>>>>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>>>>>> index bf51e6e4eb64..80702c93e885 100644
->>>>>>> --- a/fs/f2fs/data.c
->>>>>>> +++ b/fs/f2fs/data.c
->>>>>>> @@ -1329,18 +1329,14 @@ struct page *f2fs_get_lock_data_page(struct inode *inode, pgoff_t index,
->>>>>>>     {
->>>>>>>     	struct address_space *mapping = inode->i_mapping;
->>>>>>>     	struct page *page;
->>>>>>> -repeat:
->>>>>>> +
->>>>>>>     	page = f2fs_get_read_data_page(inode, index, 0, for_write, NULL);
->>>>>>>     	if (IS_ERR(page))
->>>>>>>     		return page;
->>>>>>>     	/* wait for read completion */
->>>>>>>     	lock_page(page);
->>>>>>> -	if (unlikely(page->mapping != mapping)) {
->>>>>>
->>>>>> How about using such logic only for move_data_page() to limit affect for
->>>>>> other paths?
->>>>>
->>>>> Why move_data_page() only? If this happens, we'll fall into a loop in anywhere?
->>>>>
->>>>>>
->>>>>> Jaegeuk, any thoughts about why mapping is mismatch in between page's one and
->>>>>> inode->i_mapping?
->>>>>
->>>>>>
->>>>>> After several times code review, I didn't get any clue about why f2fs always
->>>>>> get the different mapping in a loop.
->>>>>
->>>>> I couldn't find the path to happen this. So weird. Please check the history in the
->>>>> bug.
->>>>>
->>>>>>
->>>>>> Maybe we can loop MM guys to check whether below folio_file_page() may return
->>>>>> page which has different mapping?
->>>>>
->>>>> Matthew may have some idea on this?
->>>>
->>>> There's a lot of comments in the bug ... hard to come into this one
->>>> cold.
->>>>
->>>> I did notice this one (#119):
->>>> : Interestingly, ref count is 514, which looks suspiciously as a binary
->>>> : flag 1000000010. Is it possible that during 5.17/5.18 implementation
->>>> : of a "pin", somehow binary flag was written to ref count, or something
->>>> : like '1 << ...' happens?
->>>>
->>>> That indicates to me that somehow you've got hold of a THP that is in
->>>> the page cache.  Probably shmem/tmpfs.  That indicate to me a refcount
->>>> problem that looks something like this:
->>>>
->>>> f2fs allocates a page
->>>> f2fs adds the page to the page cache
->>>> f2fs puts the reference to the page without removing it from the
->>>> page cache (how?)
+On 2023/4/5 23:55, Jaegeuk Kim wrote:
+> On 04/05, Chao Yu wrote:
+>> On 2023/4/5 5:39, Jaegeuk Kim wrote:
+>>> Can we do like this?
 >>>
->>> Is it somewhat related to setting a bit in private field?
->>
->> IIUC, it looks the page reference is added/removed as pair.
->>
+>>>   From 9a58f0e59364241aa31b555cfe793d278e39b0dc Mon Sep 17 00:00:00 2001
+>>> From: Jaegeuk Kim <jaegeuk@kernel.org>
+>>> Date: Tue, 4 Apr 2023 14:36:00 -0700
+>>> Subject: [PATCH] f2fs: do checkpoint when there's not enough free sections
 >>>
->>> When we migrate the blocks, we do:
->>> 1) get_lock_page()
->>
->> - f2fs_grab_cache_page
->>   - pagecache_get_page
->>    - __filemap_get_folio
->>     - no_page  -> filemap_alloc_folio  page_ref = 1 (referenced by caller)
->>      - filemap_add_folio page_ref = 2 (referenced by radix tree)
->>
->>> 2) submit read
->>> 3) lock_page()
->>> 3) set_page_dirty()
->>> 4) set_page_private_gcing(page)
->>
->> page_ref = 3 (reference by private data)
->>
+>>> We didn't do checkpoint in FG_GC case, which may cause losing to reclaim prefree
+>>> sctions in time.
 >>>
->>> --- in fs/f2fs/f2fs.h
->>> 1409 #define PAGE_PRIVATE_SET_FUNC(name, flagname) \
->>> 1410 static inline void set_page_private_##name(struct page *page) \
->>> 1411 { \
->>> 1412         if (!PagePrivate(page)) { \
->>> 1413                 get_page(page); \
->>> 1414                 SetPagePrivate(page); \
->>> 1415                 set_page_private(page, 0); \
->>> 1416         } \
->>> 1417         set_bit(PAGE_PRIVATE_NOT_POINTER, &page_private(page)); \
->>> 1418         set_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
->>> 1419 }
+>>> Fixes: 6f8d4455060d ("f2fs: avoid fi->i_gc_rwsem[WRITE] lock in f2fs_gc")
+>>> Signed-off-by: Chao Yu <chao@kernel.org>
+>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+>>> ---
+>>>    fs/f2fs/gc.c | 24 +++++++++++-------------
+>>>    1 file changed, 11 insertions(+), 13 deletions(-)
 >>>
->>>
->>> 5) set_page_writebac()
->>> 6) submit write
->>> 7) unlock_page()
->>> 8) put_page(page)
+>>> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+>>> index 56c53dbe05c9..f1d0dd9c5a6c 100644
+>>> --- a/fs/f2fs/gc.c
+>>> +++ b/fs/f2fs/gc.c
+>>> @@ -1806,6 +1806,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+>>>    	};
+>>>    	unsigned int skipped_round = 0, round = 0;
+>>>    	unsigned int upper_secs;
+>>> +	bool stop_gc = false;
+>>>    	trace_f2fs_gc_begin(sbi->sb, gc_type, gc_control->no_bg_gc,
+>>>    				gc_control->nr_free_secs,
+>>> @@ -1876,19 +1877,15 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+>>>    				(gc_type == FG_GC) ? sec_freed : 0, 0)) {
+>>>    		if (gc_type == FG_GC && sec_freed < gc_control->nr_free_secs)
+>>>    			goto go_gc_more;
+>>> -		goto stop;
+>>> -	}
+>>> -
+>>> -	/* FG_GC stops GC by skip_count */
+>>> -	if (gc_type == FG_GC) {
+>>> +		stop_gc = true;
 >>
->> page_ref = 2 (ref by caller was removed)
+>> I guess below condition is for emergency recycle of prefree segments during
+>> foreground GC, in order to avoid exhausting free sections due to to many
+>> metadata allocation during CP.
 >>
->>>
->>> Later, f2fs_invalidate_folio will do put_page again by:
->>> clear_page_private_gcing(&folio->page);
+>> 	if (free_sections(sbi) <= upper_secs + NR_GC_CHECKPOINT_SECS &&
+>> 				prefree_segments(sbi)) {
 >>
->> page_ref = 1 (ref by private was removed, and the last left ref is hold by radix tree)
+>> But for common case, free_sections() is close to reserved_segments(), and
+>> upper_secs + NR_GC_CHECKPOINT_SECS value may be far smaller than free_sections(),
+>> so checkpoint may not be trggered as expected, IIUC.
 >>
->>>
->>> --- in fs/f2fs/f2fs.h
->>> 1421 #define PAGE_PRIVATE_CLEAR_FUNC(name, flagname) \
->>> 1422 static inline void clear_page_private_##name(struct page *page) \
->>> 1423 { \
->>> 1424         clear_bit(PAGE_PRIVATE_##flagname, &page_private(page)); \
->>> 1425         if (page_private(page) == BIT(PAGE_PRIVATE_NOT_POINTER)) { \
->>> 1426                 set_page_private(page, 0); \
->>> 1427                 if (PagePrivate(page)) { \
->>> 1428                         ClearPagePrivate(page); \
->>
->> Since PagePrivate was cleared, so folio_detach_private in
->> f2fs_invalidate_folio()/f2fs_release_folio will just skip drop reference.
->>
->> static inline void *folio_detach_private(struct folio *folio)
->> {
->> 	void *data = folio_get_private(folio);
->>
->> 	if (!folio_test_private(folio))
->> 		return NULL;
->> 	folio_clear_private(folio);
->> 	folio->private = NULL;
->> 	folio_put(folio);
->>
->> 	return data;
->> }
->>
->> Or am I missing something?
+>> So it's fine to just trigger CP in the end of foreground garbage collection?
 > 
-> Ah, I missed folio_test_private() tho, can we really expect get_page(),
-> SetPagePrivate(), and set_page_private() is in pair with folio_detach_private()?
+> My major concern is to avoid unnecessary checkpointing given multiple FG_GC
+> requests were pending in parallel. And, I don't want to add so many combination
+> which gives so many corner cases, and feel f2fs_gc() needs to call checkpoint
+> automatically in the worst case scenario only.
 
-I guess we are trying to maintain PagePrivate and page_private w/
-inner {set,clear}_page_private_* functions, if they are called in paired correctly,
-we don't need to call folio_detach_private() additionally in .release_folio and
-.invalid_folio, right? Otherwise there must be a bug.
+Alright.
 
-In this patch, I use bug_on to instead folio_detach_private().
-https://lore.kernel.org/linux-f2fs-devel/20230410022418.1843178-1-chao@kernel.org/
+> 
+> By the way, do we just need to call checkpoint here including FG_GC as well?
 
-In this patch, I use {attach,detach}_page_private() to clean up openned codes.
-https://lore.kernel.org/linux-f2fs-devel/20230410022418.1843178-2-chao@kernel.org/
+I didn't get it, do you mean?
 
-With above two patches, I didn't hit any panic or use-after-free issue when testing
-xfstest until now.
+- f2fs_balance_fs()
+  - f2fs_gc() creates prefree segments but not call checkpoint to reclaim
+
+- f2fs_balance_fs()
+  - f2fs_gc()
+   - detect prefree segments created by last f2fs_balance_fs, then call
+f2fs_write_checkpoint to reclaim
+
+Or could you please provide a draft patch? :-P
 
 Thanks,
 
-
-> I feel attach/detach_page_private would look better?
+> 
+> 1832
+> 1833         if (gc_type == BG_GC && has_not_enough_free_secs(sbi, 0, 0)) {
+> 1834                 /*
+> 1835                  * For example, if there are many prefree_segments below given
+> 1836                  * threshold, we can make them free by checkpoint. Then, we
+> 1837                  * secure free segments which doesn't need fggc any more.
+> 1838                  */
+> 1839                 if (prefree_segments(sbi)) {
+> 1840                         ret = f2fs_write_checkpoint(sbi, &cpc);
+> 1841                         if (ret)
+> 1842                                 goto stop;
+> 1843                 }
+> 1844                 if (has_not_enough_free_secs(sbi, 0, 0))
+> 1845                         gc_type = FG_GC;
+> 1846         }
+> 
+>>
+>> One other concern is for those path as below:
+>> - disable_checkpoint
+>> - ioc_gc
+>> - ioc_gc_range
+>> - ioc_resize
+>> ...
+> 
+> I think the upper caller should decide to call checkpoint, if they want to
+> reclaim the prefree likewise f2fs_disable_checkpoint.
+> 
+>>
+>> We've passed gc_type as FG_GC, but the demand here is to migrate block in time,
+>> rather than dirtying blocks, and callers don't expect checkpoint in f2fs_gc(),
+>> instead the callers will do the checkpoit as it needs.
+>>
+>> That means it's better to decouple FG_GC and write_checkpoint behavior, so I
+>> added another parameter .reclaim_space to just let f2fs_balance_fs() to trigger
+>> checkpoit in the end of f2fs_gc().
 > 
 >>
 >> Thanks,
 >>
->>> 1429                         put_page(page); \
->>> 1430                 }\
->>> 1431         } \
->>> 1432 }
->>>
->>>> page is now free, gets reallocated into a THP
->>>> lookup from the f2fs file finds the new THP
->>>> things explode messily
->>>>
->>>> Checking page->mapping is going to avoid the messy explosion, but
->>>> you'll still have a page in the page cache which doesn't actually
->>>> belong to you, and that's going to lead to subtle data corruption.
->>>>
->>>> This should be caught by page_expected_state(), called from
->>>> free_page_is_bad(), called from free_pages_prepare().  Do your testers
->>>> have CONFIG_DEBUG_VM enabled?  That might give you a fighting chance at
->>>> finding the last place which called put_page().  It won't necessarily be
->>>> the _wrong_ place to call put_page() (that may have happened earlier),
->>>> but it may give you a clue.
->>>>
->>>>>>
->>>>>> struct page *pagecache_get_page(struct address_space *mapping, pgoff_t index,
->>>>>> 		int fgp_flags, gfp_t gfp)
->>>>>> {
->>>>>> 	struct folio *folio;
->>>>>>
->>>>>> 	folio = __filemap_get_folio(mapping, index, fgp_flags, gfp);
->>>>>> 	if (IS_ERR(folio))
->>>>>> 		return NULL;
->>>>>> 	return folio_file_page(folio, index);
->>>>>> }
->>>>>>
->>>>>> Thanks,
->>>>>>
->>>>>>> -		f2fs_put_page(page, 1);
->>>>>>> -		goto repeat;
->>>>>>> -	}
->>>>>>> -	if (unlikely(!PageUptodate(page))) {
->>>>>>> +	if (unlikely(page->mapping != mapping || !PageUptodate(page))) {
->>>>>>>     		f2fs_put_page(page, 1);
->>>>>>>     		return ERR_PTR(-EIO);
->>>>>>>     	}
+>>> +	} else if (gc_type == FG_GC) {
+>>> +		/* FG_GC stops GC by skip_count */
+>>>    		if (sbi->skipped_gc_rwsem)
+>>>    			skipped_round++;
+>>>    		round++;
+>>>    		if (skipped_round > MAX_SKIP_GC_COUNT &&
+>>> -				skipped_round * 2 >= round) {
+>>> -			ret = f2fs_write_checkpoint(sbi, &cpc);
+>>> -			goto stop;
+>>> -		}
+>>> +				skipped_round * 2 >= round)
+>>> +			stop_gc = true;
+>>>    	}
+>>>    	__get_secs_required(sbi, NULL, &upper_secs, NULL);
+>>> @@ -1901,12 +1898,13 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+>>>    				prefree_segments(sbi)) {
+>>>    		ret = f2fs_write_checkpoint(sbi, &cpc);
+>>>    		if (ret)
+>>> -			goto stop;
+>>> +			stop_gc = true;
+>>>    	}
+>>>    go_gc_more:
+>>> -	segno = NULL_SEGNO;
+>>> -	goto gc_more;
+>>> -
+>>> +	if (!stop_gc) {
+>>> +		segno = NULL_SEGNO;
+>>> +		goto gc_more;
+>>> +	}
+>>>    stop:
+>>>    	SIT_I(sbi)->last_victim[ALLOC_NEXT] = 0;
+>>>    	SIT_I(sbi)->last_victim[FLUSH_DEVICE] = gc_control->victim_segno;
 
 
 _______________________________________________
