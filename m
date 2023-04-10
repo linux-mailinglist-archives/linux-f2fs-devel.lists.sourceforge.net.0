@@ -2,116 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20AA56DBEC1
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  9 Apr 2023 07:30:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DA736DC288
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Apr 2023 04:08:02 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1plNcy-0004h4-1Y;
-	Sun, 09 Apr 2023 05:30:12 +0000
+	id 1plgwl-0000nM-Ep;
+	Mon, 10 Apr 2023 02:07:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wanghan1995315@gmail.com>) id 1plNcv-0004gy-Oc
+ (envelope-from <chao@kernel.org>) id 1plgwk-0000nG-Bd
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 09 Apr 2023 05:30:10 +0000
+ Mon, 10 Apr 2023 02:07:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1yGdTXD81UK+6RB1Ag6uhuMGqDZmHdmvA9kSohgNfBs=; b=DHD/4Hn66NmM5hJqD9XAj8d440
- aisTroEsVrpTDXz1N2BTiHksP9IekmtutuPEdlnAQtV0j+BLOoZYV+SnUMiVQ8s1q3V1wH3CL5Ztx
- QccMYv9r5O37Ibw1sqAEtGYF9hHGw+hjcmOy8Wac4W7mhSDAeRPcVbrkHgDnUM+RF3hM=;
+ bh=3X2St2AXz8cFTnIcaNjzl/OMdnufR20OS2/idPIu0Us=; b=PlgRFgih1MWgA30227XQAH9CZE
+ hdbCuoUJWx/yq4V2YjagCzPw+mcQK0tZvlzHYArWX0dhDpllgBZ49NaNTx8bmRIZCbHaAskr/yZcF
+ C2mV/1om8QfHk7plVchkKAUvLVV1pH0pSARcwXP+faXvf2CLTeYDeYVndrEQ2aHwrrU4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:MIME-Version:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=1yGdTXD81UK+6RB1Ag6uhuMGqDZmHdmvA9kSohgNfBs=; b=M
- MatzvQG1bSN7lFlwIkgllH5EpuaHlg0uS8rqadDqAFB5l2v8+6D84UXzH32AYq4VDGmSNIGwvVV18
- LArruw9BE/Fo05XIy6V19r5FrWBWA/3swnc124k0YvcmuPZTFVJPtJfJzQ1/6MEwqPXJMmrd8MBUl
- NlmMA9yElQswLKUA=;
-Received: from mail-pj1-f48.google.com ([209.85.216.48])
+ List-Owner:List-Archive; bh=3X2St2AXz8cFTnIcaNjzl/OMdnufR20OS2/idPIu0Us=; b=N
+ MyRbbjgA88sV6fl4prw2ZhLr/WGHhP/T9YRnAp1hhCrUH5PmCXGPhh+4oDuK1RcFq/qKR0pCw3FZ8
+ E0n6wFTwaXn8HcTmKZLQpqPHfuXeb9sWBf28i76Hoybo/KNLdB1HqOvS2h3YShDRVvjMiSWdSZ2j/
+ CdyXxiYFSY2uqyWM=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1plNcu-001mJP-VZ for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 09 Apr 2023 05:30:10 +0000
-Received: by mail-pj1-f48.google.com with SMTP id go23so4812884pjb.4
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1plgwk-002Uqg-KA for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Apr 2023 02:07:55 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D8D9260C16
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 08 Apr 2023 22:30:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1681018203;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=1yGdTXD81UK+6RB1Ag6uhuMGqDZmHdmvA9kSohgNfBs=;
- b=WmqZj+7C9UJs/4Awm/8MxzqVnxLeJ0Uwk4dTwQCCBkPto6RdMcQmD6mMsfVddwYnki
- wwxrncMe1oEqNZa52XJg3esWFFuSJuscTvVDRGptjWxYbrTvopyK+V1cvJy/jspmo4Gl
- Nz5wcmv0dsplsVM570qACui//loBMlhdtSFA+5azLQDmAcjTWmFYhqGve4Irl9uigRHh
- i6XWa1G0ZNmxM/xXvY1YuNoDyXOJkA1MjasNAOp3hR4PBbRekHKyqxlN5j16z+Rg5DI6
- w4lYolN5cqP6Q8gaqX64nTt5s9H98NWDbgoFIU/+IO0KW/4GAvYRd6kOk3Ufh3h1BiiL
- VzuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681018203;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1yGdTXD81UK+6RB1Ag6uhuMGqDZmHdmvA9kSohgNfBs=;
- b=eSQu0bNy/HM4Brleq9Rz1IwOoxer0MWO0lEKlX9XgoGMCNvwGop+LrH2+ThlYS9RWS
- lHnT8Ug0Ufce9bWFm1LJE/dEIC4HVy/ZYDNLsQCin30LNIW1QOCecKn7CNo2VejmvSnA
- DK+qILHCdJknDRwS8HMtn1eu3madl9jziF/ma5z1AoqrBG7Hubc94f/fBqMS0YAB4Kvi
- vcgt6PD6c9SFneqTYSVcHRRlODF46QNWVB0tSvPmcFajZEIM3A5+crFTNDhgESFpgR7Q
- DNm8/ilcJax/rrJ5dsH9F7TKBRZwLe6lQ4tW3IecmL973o8aFJQOBiI+hhCcaX+v+5by
- ZeRA==
-X-Gm-Message-State: AAQBX9fQqO+deJtX3gzQlwDF3SDyY8yGdbIIdaYoVo2sSRxeJeS3o6nO
- XA0y2edsQQmCo12cfiZpI0k4H7c5okNhQo0eT/Y=
-X-Google-Smtp-Source: AKy350b7tGXFDbHUydSvmDVXA/EJexOmDxAPr6/WRr3WRDXuPjUCXY1xuDX9tRtp6rzmCA9xhHOEES5tV7CWfpJe+sk=
-X-Received: by 2002:a17:902:d48e:b0:1a5:e03:55b with SMTP id
- c14-20020a170902d48e00b001a50e03055bmr1027625plg.11.1681018203235; Sat, 08
- Apr 2023 22:30:03 -0700 (PDT)
+ Mon, 10 Apr 2023 02:07:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02D65C433D2;
+ Mon, 10 Apr 2023 02:07:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1681092460;
+ bh=gvtVs77/FSkY/6eE8xO1TaHO2ECWAurgukRxLECf6AU=;
+ h=From:To:Cc:Subject:Date:From;
+ b=AlfMFPSJjjeVX4qUcR3E5MYpq56I6gyVHmEJO74PL1sijsNUxi5YJXVcoHhQU0Sht
+ oOXxkTrqJ/A9hNKinEzkATncmB1DtxQ28OsaHM6Mx3BSndif2T4qpQtLotDy7uPqXd
+ G8SbRKkiGRzK1b0umu6s4Z0BqxN50kt6EOtO5dvbZRXTDK5yVX89r3RExdrdsoE//T
+ nuCkIyOHXfIbY27ulwOpwRfogQyNji9mrCEH+HdB1MSHhEyxD1er+rs5i6y2rPAaEw
+ +h5coy8Qj5ylmCWTuBBB/UpdVVZi8VUrMMiZKFEia5BZrLdRXyGpdAF5WRgU3DD6eK
+ glkAk2n187ojA==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Mon, 10 Apr 2023 10:07:24 +0800
+Message-Id: <20230410020724.1817150-1-chao@kernel.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-From: Wang Han <wanghan1995315@gmail.com>
-Date: Sun, 9 Apr 2023 13:29:51 +0800
-Message-ID: <CAFfSv_0z9gmzj0GaUKNBq9Qt00F4f9diA5O_XXyaT8pJyrSmtw@mail.gmail.com>
-To: jaegeuk@kernel.org, chao@kernel.org
-X-Spam-Score: 0.1 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This should be 'disable' rather than 'disabled'. Reported-by:
- LoveSy Signed-off-by: Wang Han --- Documentation/filesystems/f2fs.rst | 2
- +- 1 file changed, 1 insertion(+),
- 1 deletion(-) diff --git a/Documentation/filesystems/f2fs.rst
- b/Documentation/filesystems/f2fs.rst index 2055e72871fe6b..c57745375edbc7
- 100644 --- a/Documentation/filesystems/f2fs.rst +++ b/Documentation/filesystem
- [...] Content analysis details:   (0.1 points, 6.0 required)
+ Content preview: xfstest generic/614 fails to run due to below reason:
+ generic/614
+ 1s ... [not run] test requires delayed allocation buffered writes The root
+ cause is f2fs tags wrong fiemap flag for delay allocated extent. 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.48 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [wanghan1995315[at]gmail.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.48 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [wanghan1995315[at]gmail.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1plNcu-001mJP-VZ
-Subject: [f2fs-dev] [PATCH] docs: f2fs: Correct instruction to disable
- checkpoint
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1plgwk-002Uqg-KA
+Subject: [f2fs-dev] [PATCH v2] f2fs: fix to tag FIEMAP_EXTENT_DELALLOC in
+ fiemap() for delay allocated extent
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,38 +104,62 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This should be 'disable' rather than 'disabled'.
-
-Reported-by: LoveSy <shana@zju.edu.cn>
-Signed-off-by: Wang Han <wanghan1995315@gmail.com>
----
- Documentation/filesystems/f2fs.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/Documentation/filesystems/f2fs.rst
-b/Documentation/filesystems/f2fs.rst
-index 2055e72871fe6b..c57745375edbc7 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -264,7 +264,7 @@ checkpoint=%s[:%u[%]] Set to "disable" to turn off
-checkpointing. Set to "enabl
-  disabled, any unmounting or unexpected shutdowns will cause
-  the filesystem contents to appear as they did when the
-  filesystem was mounted with that option.
-- While mounting with checkpoint=disabled, the filesystem must
-+ While mounting with checkpoint=disable, the filesystem must
-  run garbage collection to ensure that all available space can
-  be used. If this takes too much time, the mount may return
-  EAGAIN. You may optionally add a value to indicate how much
--- 
-2.25.1
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+eGZzdGVzdCBnZW5lcmljLzYxNCBmYWlscyB0byBydW4gZHVlIHRvIGJlbG93IHJlYXNvbjoKCmdl
+bmVyaWMvNjE0IDFzIC4uLiBbbm90IHJ1bl0gdGVzdCByZXF1aXJlcyBkZWxheWVkIGFsbG9jYXRp
+b24gYnVmZmVyZWQgd3JpdGVzCgpUaGUgcm9vdCBjYXVzZSBpcyBmMmZzIHRhZ3Mgd3JvbmcgZmll
+bWFwIGZsYWcgZm9yIGRlbGF5IGFsbG9jYXRlZApleHRlbnQuCgpRdW90ZWQgZnJvbSBmaWVtYXAg
+aW9jdGwgbWFudWFsIGZyb20gWzFdOgpGSUVNQVBfRVhURU5UX1VOS05PV04KVGhlIGxvY2F0aW9u
+IG9mIHRoaXMgZXh0ZW50IGlzIGN1cnJlbnRseSB1bmtub3duLiBUaGlzIG1heQppbmRpY2F0ZSB0
+aGUgZGF0YSBpcyBzdG9yZWQgb24gYW4gaW5hY2Nlc3NpYmxlIHZvbHVtZSBvciB0aGF0Cm5vIHN0
+b3JhZ2UgaGFzIGJlZW4gYWxsb2NhdGVkIGZvciB0aGUgZmlsZSB5ZXQuCgpGSUVNQVBfRVhURU5U
+X0RFTEFMTE9DClRoaXMgd2lsbCBhbHNvIHNldCBGSUVNQVBfRVhURU5UX1VOS05PV04uCgpEZWxh
+eWVkIGFsbG9jYXRpb24gLSB3aGlsZSB0aGVyZSBpcyBkYXRhIGZvciB0aGlzIGV4dGVudCwgaXRz
+CnBoeXNpY2FsIGxvY2F0aW9uIGhhcyBub3QgYmVlbiBhbGxvY2F0ZWQgeWV0LgoKRklFTUFQX0VY
+VEVOVF9VTldSSVRURU4KVW53cml0dGVuIGV4dGVudCAtIHRoZSBleHRlbnQgaXMgYWxsb2NhdGVk
+IGJ1dCBpdHMgZGF0YSBoYXMgbm90CmJlZW4gaW5pdGlhbGl6ZWQuIFRoaXMgaW5kaWNhdGVzIHRo
+ZSBleHRlbnTigJlzIGRhdGEgd2lsbCBiZSBhbGwKemVybyBpZiByZWFkIHRocm91Z2ggdGhlIGZp
+bGVzeXN0ZW0gYnV0IHRoZSBjb250ZW50cyBhcmUgdW5kZWZpbmVkCmlmIHJlYWQgZGlyZWN0bHkg
+ZnJvbSB0aGUgZGV2aWNlLgoKWzFdIGh0dHBzOi8vd3d3Lmtlcm5lbC5vcmcvZG9jL2h0bWwvbGF0
+ZXN0L2ZpbGVzeXN0ZW1zL2ZpZW1hcC5odG1sCgpGSUVNQVBfRVhURU5UX1VOV1JJVFRFTiBtZWFu
+cyBibG9jayBhZGRyZXNzIGlzIHByZWFsbG9jYXRlZCwgYnV0IHcvbwpiZWVuIHdyaXR0ZW4gYW55
+IGRhdGEsIHdoaWNoIHN0YXR1cyBmMmZzIGlzIG5vdCBzdXBwb3J0ZWQgbm93LCBmb3IgYWxsCk5F
+V19BRERSIGJsb2NrIGFkZHJlc3NlcywgaXQgbWVhbnMgZGVsYXkgYWxsb2NhdGVkIGJsb2Nrcywg
+c28gbGV0J3MKdGFnIEZJRU1BUF9FWFRFTlRfREVMQUxMT0MgaW5zdGVhZC4KClRlc3RjYXNlOgp4
+ZnNfaW8gLWYgLWMgJ3B3cml0ZSAwIDY0aycgL21udC9mMmZzL2ZpbGU7CmZpbGVmcmFnIC12IC9t
+bnQvZjJmcy9maWxlCgpPdXRwdXQ6Ci0gQmVmb3JlCkZpbGVzeXN0ZW0gdHlwZSBpczogZjJmNTIw
+MTAKRml6ZSBvZiAvbW50L2YyZnMvZmlsZSBpcyA2NTUzNiAoMTYgYmxvY2tzIG9mIDQwOTYgYnl0
+ZXMpCiBleHQ6ICAgICBsb2dpY2FsX29mZnNldDogICAgICAgIHBoeXNpY2FsX29mZnNldDogbGVu
+Z3RoOiAgIGV4cGVjdGVkOiBmbGFnczoKICAgMDogICAgICAgIDAuLiAgICAgIDE1OiAgICAgICAg
+ICAwLi4gICAgICAgIDE1OiAgICAgMTY6ICAgICAgICAgICAgIGxhc3QsdW53cml0dGVuLG1lcmdl
+ZCxlb2YKL21udC9mMmZzL2ZpbGU6IDEgZXh0ZW50IGZvdW5kCgotIEFmdGVyOgpGaWxlc3lzdGVt
+IHR5cGUgaXM6IGYyZjUyMDEwCkZpbGUgc2l6ZSBvZiAvbW50L2YyZnMvZmlsZSBpcyA2NTUzNiAo
+MTYgYmxvY2tzIG9mIDQwOTYgYnl0ZXMpCiBleHQ6ICAgICBsb2dpY2FsX29mZnNldDogICAgICAg
+IHBoeXNpY2FsX29mZnNldDogbGVuZ3RoOiAgIGV4cGVjdGVkOiBmbGFnczoKICAgMDogICAgICAg
+IDAuLiAgICAgIDE1OiAgICAgICAgICAwLi4gICAgICAgICAwOiAgICAgIDA6ICAgICAgICAgICAg
+IGxhc3QsdW5rbm93bl9sb2MsZGVsYWxsb2MsZW9mCi9tbnQvZjJmcy9maWxlOiAxIGV4dGVudCBm
+b3VuZAoKRml4ZXM6IDdmNjNlYjc3YWY3YiAoImYyZnM6IHJlcG9ydCB1bndyaXR0ZW4gYXJlYSBp
+biBmMmZzX2ZpZW1hcCIpClNpZ25lZC1vZmYtYnk6IENoYW8gWXUgPGNoYW9Aa2VybmVsLm9yZz4K
+LS0tCnYyOgotIGZpeCB0eXBlIGFuZCB1cGRhdGUgZGVzY3JpcHRpb24gb2YgZmllbWFwIG1hbnVh
+bCBpbiBjb21taXQgbWVzc2FnZS4KIGZzL2YyZnMvZGF0YS5jIHwgNyArKysrKy0tCiAxIGZpbGUg
+Y2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2Zz
+L2YyZnMvZGF0YS5jIGIvZnMvZjJmcy9kYXRhLmMKaW5kZXggMGE1ODMyZWM0MDQ2Li5iZWNjN2Jk
+Yjc0MDMgMTAwNjQ0Ci0tLSBhL2ZzL2YyZnMvZGF0YS5jCisrKyBiL2ZzL2YyZnMvZGF0YS5jCkBA
+IC0xOTk5LDcgKzE5OTksMTAgQEAgaW50IGYyZnNfZmllbWFwKHN0cnVjdCBpbm9kZSAqaW5vZGUs
+IHN0cnVjdCBmaWVtYXBfZXh0ZW50X2luZm8gKmZpZWluZm8sCiAJfQogCiAJaWYgKHNpemUpIHsK
+LQkJZmxhZ3MgfD0gRklFTUFQX0VYVEVOVF9NRVJHRUQ7CisJCWlmIChmbGFncyAmIEZJRU1BUF9F
+WFRFTlRfREVMQUxMT0MpCisJCQlwaHlzID0gMDsKKwkJZWxzZQorCQkJZmxhZ3MgfD0gRklFTUFQ
+X0VYVEVOVF9NRVJHRUQ7CiAJCWlmIChJU19FTkNSWVBURUQoaW5vZGUpKQogCQkJZmxhZ3MgfD0g
+RklFTUFQX0VYVEVOVF9EQVRBX0VOQ1JZUFRFRDsKIApAQCAtMjAzOSw3ICsyMDQyLDcgQEAgaW50
+IGYyZnNfZmllbWFwKHN0cnVjdCBpbm9kZSAqaW5vZGUsIHN0cnVjdCBmaWVtYXBfZXh0ZW50X2lu
+Zm8gKmZpZWluZm8sCiAJCQkJc2l6ZSArPSBibGtzX3RvX2J5dGVzKGlub2RlLCAxKTsKIAkJCX0K
+IAkJfSBlbHNlIGlmIChtYXAubV9mbGFncyAmIEYyRlNfTUFQX0RFTEFMTE9DKSB7Ci0JCQlmbGFn
+cyA9IEZJRU1BUF9FWFRFTlRfVU5XUklUVEVOOworCQkJZmxhZ3MgPSBGSUVNQVBfRVhURU5UX0RF
+TEFMTE9DOwogCQl9CiAKIAkJc3RhcnRfYmxrICs9IGJ5dGVzX3RvX2Jsa3MoaW5vZGUsIHNpemUp
+OwotLSAKMi4yNS4xCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlz
+dHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xp
+c3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
