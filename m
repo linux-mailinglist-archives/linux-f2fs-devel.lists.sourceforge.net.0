@@ -2,71 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 220606DE1C0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Apr 2023 19:00:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BAC826DE1BF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Apr 2023 19:00:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pmHM5-0008LW-32;
-	Tue, 11 Apr 2023 17:00:29 +0000
+	id 1pmHMB-0007An-C5;
+	Tue, 11 Apr 2023 17:00:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pmHM3-0008L8-4G
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pmHM9-0007Ae-VI
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Apr 2023 17:00:27 +0000
+ Tue, 11 Apr 2023 17:00:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=F2IKzThatDxKaIPPYtkdupSxSWmO19y+aP5HP5MDzFU=; b=iDVEgjBi08qs9KQxiMmFhDjUwo
- +6AM2OHWlIe71d47Fyz7S76I6hR/g/7JeMRhwRCzsrr9XIooVOAbnPfLYu61jIVyoVnmDfvVM7vAs
- ZTs0rRnHs8y6UBNiwx2WIpFWU+2FELpTOVc8tEuTrDhXw0Q2LMHktrPvE4kBasvqQfgE=;
+ bh=hWGud0FFCjFE9h7nJTagZyc1kr5Qo8DXORDVTfEi2Cg=; b=NJBbExQMGQ/Ogk46mZULHYT2/g
+ LVUMuzqs0GgIG1uErnkl47+SyvhF0fVaCFHkzrJF9d+HWJCx877gWASZgMSGl9G0vEIdN9wARp2W0
+ 0a2CKQe0Ti+pr4ownkdF5Qdo5Q8HurLFdiXS6GG4jchd5eeWUpG+aRy8Pc2RB3IHeBJs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=F2IKzThatDxKaIPPYtkdupSxSWmO19y+aP5HP5MDzFU=; b=ftXUEhxi6cPKFDdOlUuteNFVtn
- 90mEi8YXogADd8S9ZKsorZMOAd9QKt5Y0Ec326hU3YgkBMNHZE6nPu8ugYMzEGsbwRXn729hr4PL4
- O6xvdvfG90i9CtG1YU19Po1rD5+MN8e7LaWfGiQ8lHmq7BtNEQCxwF7uYLYQEGklcFQw=;
+ bh=hWGud0FFCjFE9h7nJTagZyc1kr5Qo8DXORDVTfEi2Cg=; b=f/VyFVam3OnFGLHyZCLhdzgs12
+ LQClwt+NoWDXRus3Sz4Z3qbqRJ+QifKX0TK8RqlX7FjrdxR68IIEXFsxjmeKp1IzScqE3dOyvSblf
+ 8CZe6N6hQazQyBSfat/RXMXseG7FZI/GnFn9UPB3WrZwRvcLLzTKt+1LrD0HAvlZ+poI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pmHM2-004G75-GN for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Apr 2023 17:00:27 +0000
+ id 1pmHM7-0005Cw-S7 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Apr 2023 17:00:32 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 250B4629B0
- for <linux-f2fs-devel@lists.sourceforge.net>;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 26C15629B3;
  Tue, 11 Apr 2023 17:00:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 11FE9C433A7;
- Tue, 11 Apr 2023 17:00:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0163BC433D2;
+ Tue, 11 Apr 2023 17:00:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1681232420;
- bh=aJirYYVnV507CuqdHFL9yYz35QVzF4kkQPhyKYjmd94=;
+ bh=AgbUHXxAqtch2A8ZK9s2UlYpUA1Fw453yyGXCQGJqk8=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=nk6jCMDRQOZ12KevU/XEk6UfbS8sZsm08gwJLobFPYj9YjVSnWXcNnOXZjoEHGJEo
- qK0AVOX6ShPpnPSHhmME56aQpIDcB62I4ITy0bop9tEMR/oqWU6izNqMktTE1z/XfO
- sc9MhpOoq4UXMph6YyLI7CdGXaYEvof7HP68YWsq1oLG58cD6e12HcPG0t7LVh7XnJ
- YY7zVQUue9d9/Pb9wVFRL51CkR/hXw5Rl2VnE9B2k+CkuPWPK7sk0db5qZMqSz/HR5
- qMFzh1QOOwyUxvO+HepHgei65BbibdSX4RnGjM/imFPA2Qdl8r2c+AiZsbuHrm+pDc
- MCe1THivk+jDw==
+ b=MwmG6PpNvMwo/cgJhd7Pkd0lP4bYljwNmD5rtAWWCQGYHctG4JZMBBHTy9Kruy/jY
+ WlhkP5OzLkdc0IIl3JdUWYKfCZJ2loIiovV6N1c7Kz9JVyW7D1cUr6CTcNVGhd+ZyR
+ N2qc/UQtVtxH3NDlENIdS6tklvy3pksMXtxRai0mCjd/rAW7VXYEaxuAvn3SSTvGro
+ rUFuf8AgZuYrC2DbKvi84A56ImqQGcTNbLnFKhD8iQpd3hZmcXF1I2YDFOoL0HunX2
+ 0jp9YYlTw6uLl/m2MLxp9fQHvuo18xU1YX1D4MWOl2Ews91OQy9mcQS/CuWu1Ft73c
+ HvHRUezrENgJQ==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- DF9BBE52449; Tue, 11 Apr 2023 17:00:19 +0000 (UTC)
+ D71E3E52446; Tue, 11 Apr 2023 17:00:19 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168123241991.4928.7987013426639567312.git-patchwork-notify@kernel.org>
+Message-Id: <168123241987.4928.2853902355953919510.git-patchwork-notify@kernel.org>
 Date: Tue, 11 Apr 2023 17:00:19 +0000
-References: <20230410022012.1839127-1-chao@kernel.org>
-In-Reply-To: <20230410022012.1839127-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+References: <20230404032844.3596879-1-o451686892@gmail.com>
+In-Reply-To: <20230404032844.3596879-1-o451686892@gmail.com>
+To: Weizhao Ouyang <o451686892@gmail.com>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -75,11 +74,11 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 10 Apr 2023 10:20:12 +0800 you
- wrote: > i_crtime will never change after inode creation, so we don't need
- > to copy it into f2fs_inode_info.i_disk_time[3], and monitor its > change
- to decide w [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 4 Apr 2023 11:28:44 +0800 you wrote:
+ > Use common implementation of file type conversion helpers. > >
+ Signed-off-by:
+ Weizhao Ouyang <o451686892@gmail.com> > --- > fs/f2fs/dir.c | 39 +++-------
+ [...] Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -94,8 +93,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pmHM2-004G75-GN
-Subject: Re: [f2fs-dev] [PATCH] f2fs: remove unneeded in-memory i_crtime copy
+X-Headers-End: 1pmHM7-0005Cw-S7
+Subject: Re: [f2fs-dev] [PATCH] f2fs: use common implementation of file type
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,20 +117,20 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon, 10 Apr 2023 10:20:12 +0800 you wrote:
-> i_crtime will never change after inode creation, so we don't need
-> to copy it into f2fs_inode_info.i_disk_time[3], and monitor its
-> change to decide whether updating inode page, remove related stuff.
+On Tue,  4 Apr 2023 11:28:44 +0800 you wrote:
+> Use common implementation of file type conversion helpers.
 > 
-> Signed-off-by: Chao Yu <chao@kernel.org>
+> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
 > ---
->  fs/f2fs/f2fs.h  | 5 +----
->  fs/f2fs/inode.c | 1 -
->  2 files changed, 1 insertion(+), 5 deletions(-)
+>  fs/f2fs/dir.c           | 39 +++------------------------------------
+>  fs/f2fs/f2fs.h          |  1 -
+>  fs/f2fs/inline.c        |  2 +-
+>  include/linux/f2fs_fs.h | 15 ---------------
+>  4 files changed, 4 insertions(+), 53 deletions(-)
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: remove unneeded in-memory i_crtime copy
-    https://git.kernel.org/jaegeuk/f2fs/c/c277991d7cf0
+  - [f2fs-dev] f2fs: use common implementation of file type
+    https://git.kernel.org/jaegeuk/f2fs/c/0c9f4521958f
 
 You are awesome, thank you!
 -- 
