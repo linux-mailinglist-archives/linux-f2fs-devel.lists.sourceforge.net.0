@@ -2,86 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A853F6DE1BA
+	by mail.lfdr.de (Postfix) with ESMTPS id A475A6DE1B9
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Apr 2023 19:00:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pmHM3-0008L7-AM;
+	id 1pmHM2-00030u-Me;
 	Tue, 11 Apr 2023 17:00:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pmHM2-0008L1-2W
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pmHM1-00030o-L7
  for linux-f2fs-devel@lists.sourceforge.net;
  Tue, 11 Apr 2023 17:00:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
+ Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iGH8jZrn2IaakVnDnaQC/WNDrUd1vGO4GIwwGgSZh0A=; b=EQPpLCGBCTCr6tMRJ0WnE8xoLy
- GS3zyt74Qhyf37U8AzD2ac/44HnLUWzWK/FRmb4yksNoWWl/7luOkkkh0IMnfjJF97w6/HBIKJs55
- ClKiLGiXCuMQjlTZcELYWgvB7dxX7oyqccxrahWEd2dypb3zn+0qRZESPob0DwRtQh2U=;
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=zI5eNzUmpAqdyLhfDuLQcjm+eebg/i+4co3orCKL1ZY=; b=kNjgg74PMp+2ZygwJSg9XFdRYe
+ U7Mb1U5VRWA8tEEboWpUjIiNwYIJCcr9bp6/2wzB7qzwHnf7DZvUU4ObgXAjA1pt/cEPb4KgJmT+D
+ Uuws2ahAzcCloalY7Lm0y8xDvEuf0OZ6W2hcf6XhO2QgU33p8QxQTEC3T1UpcffdhoUM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
- Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=iGH8jZrn2IaakVnDnaQC/WNDrUd1vGO4GIwwGgSZh0A=; b=P
- VBUSstQvHLTCLQx4Yz0pKbkgVkw40mS1KLtqTjmEieMFlipm/l52Ia3UDkjWaxNHlWHEHA/HgMrd3
- +/t4/0HIM+RpyPeQhI5pWK+xTWMbHCte3LN+of8hFilU0fCUiLP/cnSZJhm797IkueE8aVJf5ZiKY
- SzHu05mne4IKr2AU=;
+ ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=zI5eNzUmpAqdyLhfDuLQcjm+eebg/i+4co3orCKL1ZY=; b=LyfuQ4j5zbcQ8guLakVoaC8F84
+ ZViKPV2jRujEoUaY1LfoAKIQAR2Cn3JiX5OT6aMmWNUmfZ55vfYZ2emvIoFPED0H50Al6sEhAzaTb
+ DwrjvaL2+ehSIoEX6hH5UaErj+UEJPDSLCX63JtuWIn9/WL2Eq4kVuhPvNXZT13BX8G8=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pmHM1-0005Cf-QL for linux-f2fs-devel@lists.sourceforge.net;
+ id 1pmHM1-0005Cg-TV for linux-f2fs-devel@lists.sourceforge.net;
  Tue, 11 Apr 2023 17:00:26 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6B1006298E
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 887266299A
  for <linux-f2fs-devel@lists.sourceforge.net>;
  Tue, 11 Apr 2023 17:00:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D008BC433EF
- for <linux-f2fs-devel@lists.sourceforge.net>;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id EB0AFC4339C;
  Tue, 11 Apr 2023 17:00:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1681232419;
- bh=jH1b/N2eWtjFf3Rat+lMYueRG+sD0KYl5SPmtDtejss=;
- h=Subject:From:Date:To:From;
- b=mpLyQfNeE9aTrajSW06eP4tjev/PlQzZC1g0Z2QytvvCQdu2owViRCc4WVj7N03sG
- j7iCS5jvFX23RlAvrJGM5UKtU5dA2ODJNlOQcCZQRqj++T4ozxXID592XPfXFPJrF9
- 99otbFl8k5Y9fWsZmVnpwKIfX3ESSFSshjuWnY+7TLxvpuazAN541QmpSEJnNLsM60
- 3io6uir0g3H3IL1vlaW/LwOShVsivEPZz9ydd8h4/dAPkFJ4d5hBwhiKfO3jD9Fhz/
- l/L1vmWO+yEht67weRGEuBQ1eXz39XwuQsm903SeRb2s1/1QB4vSV6ip4ErO8Jwdwi
- G++WEp/HrEprQ==
+ s=k20201202; t=1681232420;
+ bh=UNSRSV9N/VyQhvGkfoOPWdKjQBu0P4UsjBMlYKJS+hw=;
+ h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+ b=CPker5tChAsnSZapefS0UD5yHNC1NcLDv0bwoPc4z0HrfRv2eFGeQI2mMiFDxyd2A
+ KlZjSaDPI4pbdCxf98o1BJBiwUJGRMXUIrft70j0rKo6UpQ03UoOQ+XLhzjSmjOIDH
+ iY/5ogLJKyxdGDxtAUTD6yXxFKSJyrgajdgipGaDdUKPzXBSPBF2+1D8afylXNSmeg
+ j1DX7HwbYg40jLet0Y/6I3a/N5E/12DQW+8xfpmbkA4p7RbSvJWeg6ktN/N1x+NFds
+ 951TCkvCZLgb2tAxniAx6ZvhqtccumbLk+x53DkPdQb+hCbvNYs8nKu1JS7rA50p3C
+ NOH4e7+vGanyA==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- B36AEE52445 for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 11 Apr 2023 17:00:19 +0000 (UTC)
+ C5B9CE52441; Tue, 11 Apr 2023 17:00:19 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168123241966.4928.4553261323699662851.git-patchwork-summary@kernel.org>
+Message-Id: <168123241980.4928.10692103692042697319.git-patchwork-notify@kernel.org>
 Date: Tue, 11 Apr 2023 17:00:19 +0000
-To: linux-f2fs-devel@lists.sourceforge.net
-X-Spam-Score: -5.2 (-----)
+References: <20230410021222.1826966-1-chao@kernel.org>
+In-Reply-To: <20230410021222.1826966-1-chao@kernel.org>
+To: Chao Yu <chao@kernel.org>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: The following patches were marked "accepted", because
- they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev] f2fs: fix
- to avoid use-after-free for cached IPU bio Submitter: Chao Yu
- <chao@kernel.org>
- Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
- https://patchwork.kernel.org/project/ [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 10 Apr 2023 10:12:22 +0800 you
+ wrote: > xfstest generic/361 reports a bug as below: > > f2fs_bug_on(sbi,
+ sbi->fsync_node_num);
+ > > kernel BUG at fs/f2fs/super.c:1627! > RIP: 0010:f2fs_put_supe
+ [...] Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -90,14 +88,15 @@ X-Spam-Report: Spam detection software,
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pmHM1-0005Cf-QL
-Subject: [f2fs-dev] Patchwork summary for: f2fs
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pmHM1-0005Cg-TV
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to drop all dirty pages during
+ umount() if cp_error is set
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,54 +108,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-The following patches were marked "accepted", because they were applied to
-jaegeuk/f2fs.git (dev):
+This patch was applied to jaegeuk/f2fs.git (dev)
+by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-Patch: [f2fs-dev] f2fs: fix to avoid use-after-free for cached IPU bio
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=738321
-  Lore link: https://lore.kernel.org/r/20230410021402.1833220-1-chao@kernel.org
+On Mon, 10 Apr 2023 10:12:22 +0800 you wrote:
+> xfstest generic/361 reports a bug as below:
+> 
+> f2fs_bug_on(sbi, sbi->fsync_node_num);
+> 
+> kernel BUG at fs/f2fs/super.c:1627!
+> RIP: 0010:f2fs_put_super+0x3a8/0x3b0
+> Call Trace:
+>  generic_shutdown_super+0x8c/0x1b0
+>  kill_block_super+0x2b/0x60
+>  kill_f2fs_super+0x87/0x110
+>  deactivate_locked_super+0x39/0x80
+>  deactivate_super+0x46/0x50
+>  cleanup_mnt+0x109/0x170
+>  __cleanup_mnt+0x16/0x20
+>  task_work_run+0x65/0xa0
+>  exit_to_user_mode_prepare+0x175/0x190
+>  syscall_exit_to_user_mode+0x25/0x50
+>  do_syscall_64+0x4c/0x90
+>  entry_SYSCALL_64_after_hwframe+0x72/0xdc
+> 
+> [...]
 
-Patch: [f2fs-dev] f2fs: fix to drop all dirty pages during umount() if cp_error is set
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=738320
-  Lore link: https://lore.kernel.org/r/20230410021222.1826966-1-chao@kernel.org
+Here is the summary with links:
+  - [f2fs-dev] f2fs: fix to drop all dirty pages during umount() if cp_error is set
+    https://git.kernel.org/jaegeuk/f2fs/c/c9b3649a934d
 
-Patch: [f2fs-dev] f2fs: use f2fs_hw_is_readonly() instead of bdev_read_only()
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=738322
-  Lore link: https://lore.kernel.org/r/20230410021722.1836433-1-chao@kernel.org
-
-Patch: [f2fs-dev] f2fs: use common implementation of file type
-  Submitter: Weizhao Ouyang <o451686892@gmail.com>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=736640
-  Lore link: https://lore.kernel.org/r/20230404032844.3596879-1-o451686892@gmail.com
-
-Patch: [f2fs-dev] f2fs: remove unneeded in-memory i_crtime copy
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=738323
-  Lore link: https://lore.kernel.org/r/20230410022012.1839127-1-chao@kernel.org
-
-Patch: [f2fs-dev] f2fs: fix to keep consistent i_gc_rwsem lock order
-  Submitter: Chao Yu <chao@kernel.org>
-  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
-  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=738319
-  Lore link: https://lore.kernel.org/r/20230410021140.1825781-1-chao@kernel.org
-
-
-Total patches: 6
-
+You are awesome, thank you!
 -- 
 Deet-doot-dot, I am a bot.
 https://korg.docs.kernel.org/patchwork/pwbot.html
