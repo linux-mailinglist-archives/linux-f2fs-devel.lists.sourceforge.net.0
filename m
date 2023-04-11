@@ -2,84 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A475A6DE1B9
+	by mail.lfdr.de (Postfix) with ESMTPS id ABB066DE1BB
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Apr 2023 19:00:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pmHM2-00030u-Me;
-	Tue, 11 Apr 2023 17:00:27 +0000
+	id 1pmHM5-0001Sz-35;
+	Tue, 11 Apr 2023 17:00:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pmHM1-00030o-L7
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pmHM3-0001Sq-Sv
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Apr 2023 17:00:26 +0000
+ Tue, 11 Apr 2023 17:00:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zI5eNzUmpAqdyLhfDuLQcjm+eebg/i+4co3orCKL1ZY=; b=kNjgg74PMp+2ZygwJSg9XFdRYe
- U7Mb1U5VRWA8tEEboWpUjIiNwYIJCcr9bp6/2wzB7qzwHnf7DZvUU4ObgXAjA1pt/cEPb4KgJmT+D
- Uuws2ahAzcCloalY7Lm0y8xDvEuf0OZ6W2hcf6XhO2QgU33p8QxQTEC3T1UpcffdhoUM=;
+ bh=RVxWB6Zsi+PGtuUD0LBpMZrqMhViABP5NX8k44//cmk=; b=nIvjjPrsOY+uTqTw2lbejd2hbR
+ LoQ8D+CReB+I0N4hdJ0ADhEH/SnZbWCSYH6m1pdW4Kc1HxxKdi/uDZ6m/Xt/zrxbd9JNf+RVQuoKv
+ 9H1HWtfcBHK71w4Bm+qdf1cJ5r3MRiYOlBU89xhcKatPYqx4vhM92wZSVa29lT5BKtdo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zI5eNzUmpAqdyLhfDuLQcjm+eebg/i+4co3orCKL1ZY=; b=LyfuQ4j5zbcQ8guLakVoaC8F84
- ZViKPV2jRujEoUaY1LfoAKIQAR2Cn3JiX5OT6aMmWNUmfZ55vfYZ2emvIoFPED0H50Al6sEhAzaTb
- DwrjvaL2+ehSIoEX6hH5UaErj+UEJPDSLCX63JtuWIn9/WL2Eq4kVuhPvNXZT13BX8G8=;
+ bh=RVxWB6Zsi+PGtuUD0LBpMZrqMhViABP5NX8k44//cmk=; b=gDoTK9bhDm8yqSoOYPHJl8LMTB
+ 7ZHdDVu419V6qfxtfxUXM/lphNLVcAN7Jizn6hvjr8lEcwuXZG8La9ZzOQVreT8nBCqHSGDrkDoiE
+ Syw9Q3Yh+Kwt9jAi6zDsbjpwF4odQbQz1MLvhQSiJvd8mPOzcNUxyBj1SznuuaPai0rk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pmHM1-0005Cg-TV for linux-f2fs-devel@lists.sourceforge.net;
+ id 1pmHM2-0005Ch-FK for linux-f2fs-devel@lists.sourceforge.net;
  Tue, 11 Apr 2023 17:00:26 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 887266299A
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1B4B7629AD
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 11 Apr 2023 17:00:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id EB0AFC4339C;
+ Tue, 11 Apr 2023 17:00:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 053ADC433A0;
  Tue, 11 Apr 2023 17:00:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1681232420;
- bh=UNSRSV9N/VyQhvGkfoOPWdKjQBu0P4UsjBMlYKJS+hw=;
+ bh=y0sC1maeF6BaZCVKP2Dpae2MYRm6bDMWSoxaogWa0tw=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=CPker5tChAsnSZapefS0UD5yHNC1NcLDv0bwoPc4z0HrfRv2eFGeQI2mMiFDxyd2A
- KlZjSaDPI4pbdCxf98o1BJBiwUJGRMXUIrft70j0rKo6UpQ03UoOQ+XLhzjSmjOIDH
- iY/5ogLJKyxdGDxtAUTD6yXxFKSJyrgajdgipGaDdUKPzXBSPBF2+1D8afylXNSmeg
- j1DX7HwbYg40jLet0Y/6I3a/N5E/12DQW+8xfpmbkA4p7RbSvJWeg6ktN/N1x+NFds
- 951TCkvCZLgb2tAxniAx6ZvhqtccumbLk+x53DkPdQb+hCbvNYs8nKu1JS7rA50p3C
- NOH4e7+vGanyA==
+ b=Mu0Y+nL2v52Anxuw8M7kClUMoXtEdnoJ0tC7PXlRgKOG/GIIKEzqpAAHcR/YlBEDE
+ oDbCqh45+oxLslZL/sU0YUoh561I/rKLGuMvXPJpW5gV8ysxQIqfOPlC97Y89+Jze9
+ 9rBlfZ77FyZ3tTTnvThj+6A5tzuQaiwH+1/cDtYAnrbLQ0hu82dCu9YDQVf5hCIjy1
+ P63DHgOoSuJGs/CNu+ZkHT6t4juchCJZPanngquwV7gTeq9LPemJVaUxTXJ4MnlxV3
+ Yo16NwKW8DgSlE2/m5HvQFNEWbmYKBs+DXBIshczsWl5INcr3cldZ+oII7ygM7ARlJ
+ 2/0W9RkcyPUKQ==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- C5B9CE52441; Tue, 11 Apr 2023 17:00:19 +0000 (UTC)
+ CE94DE52447; Tue, 11 Apr 2023 17:00:19 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168123241980.4928.10692103692042697319.git-patchwork-notify@kernel.org>
+Message-Id: <168123241984.4928.10498593969347479726.git-patchwork-notify@kernel.org>
 Date: Tue, 11 Apr 2023 17:00:19 +0000
-References: <20230410021222.1826966-1-chao@kernel.org>
-In-Reply-To: <20230410021222.1826966-1-chao@kernel.org>
+References: <20230410021722.1836433-1-chao@kernel.org>
+In-Reply-To: <20230410021722.1836433-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 10 Apr 2023 10:12:22 +0800 you
- wrote: > xfstest generic/361 reports a bug as below: > > f2fs_bug_on(sbi,
- sbi->fsync_node_num);
- > > kernel BUG at fs/f2fs/super.c:1627! > RIP: 0010:f2fs_put_supe
- [...] Content analysis details:   (-5.9 points, 6.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 10 Apr 2023 10:17:22 +0800 you
+ wrote: > f2fs has supported multi-device feature, to check devices' rw status, 
+ > it should use f2fs_hw_is_readonly() rather than bdev_read_only(), fix >
+ it. > > [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -88,15 +88,15 @@ X-Spam-Report: Spam detection software,
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pmHM1-0005Cg-TV
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to drop all dirty pages during
- umount() if cp_error is set
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pmHM2-0005Ch-FK
+Subject: Re: [f2fs-dev] [PATCH] f2fs: use f2fs_hw_is_readonly() instead of
+ bdev_read_only()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,32 +119,22 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon, 10 Apr 2023 10:12:22 +0800 you wrote:
-> xfstest generic/361 reports a bug as below:
+On Mon, 10 Apr 2023 10:17:22 +0800 you wrote:
+> f2fs has supported multi-device feature, to check devices' rw status,
+> it should use f2fs_hw_is_readonly() rather than bdev_read_only(), fix
+> it.
 > 
-> f2fs_bug_on(sbi, sbi->fsync_node_num);
-> 
-> kernel BUG at fs/f2fs/super.c:1627!
-> RIP: 0010:f2fs_put_super+0x3a8/0x3b0
-> Call Trace:
->  generic_shutdown_super+0x8c/0x1b0
->  kill_block_super+0x2b/0x60
->  kill_f2fs_super+0x87/0x110
->  deactivate_locked_super+0x39/0x80
->  deactivate_super+0x46/0x50
->  cleanup_mnt+0x109/0x170
->  __cleanup_mnt+0x16/0x20
->  task_work_run+0x65/0xa0
->  exit_to_user_mode_prepare+0x175/0x190
->  syscall_exit_to_user_mode+0x25/0x50
->  do_syscall_64+0x4c/0x90
->  entry_SYSCALL_64_after_hwframe+0x72/0xdc
+> Meanwhile, it removes f2fs_hw_is_readonly() check condition in:
+> - f2fs_write_checkpoint()
+> - f2fs_convert_inline_inode()
+> As it has checked f2fs_readonly() condition, and if f2fs' devices
+> were readonly, f2fs_readonly() must be true.
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to drop all dirty pages during umount() if cp_error is set
-    https://git.kernel.org/jaegeuk/f2fs/c/c9b3649a934d
+  - [f2fs-dev] f2fs: use f2fs_hw_is_readonly() instead of bdev_read_only()
+    https://git.kernel.org/jaegeuk/f2fs/c/68f0453dabdb
 
 You are awesome, thank you!
 -- 
