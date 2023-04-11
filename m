@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 758636DD15C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Apr 2023 07:02:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BEDB6DD17C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Apr 2023 07:20:29 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pm694-0006UE-Br;
-	Tue, 11 Apr 2023 05:02:17 +0000
+	id 1pm6Qa-000367-Je;
+	Tue, 11 Apr 2023 05:20:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+c6fa32d9e84a85109083+7170+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1pm692-0006U8-0k for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Apr 2023 05:02:16 +0000
+ id 1pm6QZ-000360-HY for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Apr 2023 05:20:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KBhNfUOcD8iQz+TMuW2IJQH6CYVeRvhGPDElxngGpyE=; b=J66z19h0Jh6UwGvpuNNj7WEVNn
- w0PllaTxR7h2y6qGe8SiqxcOzAVbBzGl+hKj3dn3/u5miYgUajubC+AnFAQ58ziKQ3gvO+rroMRQ1
- p+Q0HKqtd4LTCNezPpOzmh8v5NRa40O6WE7Sn5FM1yYn4jmhwoz1hdEHgu2DQgj3ZQNg=;
+ bh=6nX5sI6EN+QIsWtAaq5RhWz/W4vuyCGzISy2tTv8b6w=; b=eYiBsl1kaQqV4+httY8Epc2Mau
+ 9aMTlNxckgUABEPj8SYlpKrZICwIqBCxS5u2LFGiO4ZMtJo4eTGVsBPLzVskXjKJjAd9NwxX2M9oH
+ e5OI5XVGSOWwa0mo9nPSzbc/nBmHiJsaB+0JHLBY23X9moS8ZmXTgsrWUXDoBy106jLA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,34 +31,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KBhNfUOcD8iQz+TMuW2IJQH6CYVeRvhGPDElxngGpyE=; b=RG/D/sG+9mkFbvbvA3KiNXcqhV
- 8krZZAPTB2m/wc2tTBAcKQwZBJlKduaruqCzHEQgAWnZgnkY77f1TlHITeWmcNJlbxWSIHhFXgA8W
- sSyxbQPZXC92wrhPinig0otetF/pPeMotfjsRr+DDzD3z1RohL8g7znhkCH56tNHgrpY=;
+ bh=6nX5sI6EN+QIsWtAaq5RhWz/W4vuyCGzISy2tTv8b6w=; b=kdWFGciT/pjVN15yzE4K7WzjmE
+ snXYLekNFK3oW1zRPcOJwwTBhqVgzKGrhJTbojk3X/+yC1GqrYzHOOjuKbmDqvC7PaHt1vUHd4zhn
+ YmbDjDf6T2905GAJU1FuHfAtxWLFja4z4F5aRsVMeSPMIFFLn19/lz7iqu8SmF5w7Qic=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pm68x-00055Q-Cb for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Apr 2023 05:02:15 +0000
+ id 1pm6QW-003lT7-1n for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Apr 2023 05:20:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=KBhNfUOcD8iQz+TMuW2IJQH6CYVeRvhGPDElxngGpyE=; b=SuYCXB7pkcbxWbG1OHBZx7juNA
- pku0+MY68aN+S95h6lBSIC3+WUupYPcZ/eHTEqYAFMoLUQnYO8MeMYSbBdMCyQylUcDHHLHcmIXd7
- e5NqbRZSQB0gMOfbiVnUErygHRgsOtoOGaC/2EcI+J1zpIrNhA2wJV2TkXNBC4tU7LeHeSTqUrrZO
- VIlNf2JBzbM+1SJ8Gb7TZBAgltRuPGZead5QKLPM2er7apLZLYmpxUY511LIx0AYMvAIJ3J+L1juU
- k1OlPAFQtvgOTFojCSEo3+oOplG9rBmr5OVIw9zq4j1KxjAJOgfkDHNzOUYwe4/ft+nr670+zJOBn
- JIilyNgg==;
+ bh=6nX5sI6EN+QIsWtAaq5RhWz/W4vuyCGzISy2tTv8b6w=; b=k1nDyW9ThWdwLT7pSWirEu8vAz
+ 5gsYJWy42X4KvcpSpeCIEbOYds8a6VmdcdtnrFfTUZOMfEQkb0BOzhlbMIm5cunipw+jcMqtf6L/r
+ FPpApigHLGsj0AbugbMiQtHKiTFGY9ozfe/zBscnPg1Mzgw7dPOExuqFoZe1d4/QjfAIxWMa+PTwM
+ 0e/gNRrYWpCr+ICTg8kD6Z7Kzqr7DVQAQCnWLRdiGK4HSeKC67KTJGD8gscP39JkuZlIwihkF+6hw
+ gY+QlKY1Wbp8V4K0W3LfRl2b/hiI8yJJDxRKMbrd7FtzqjIBqzmCFNIpdbdq70XMfufV+YB7upDdm
+ vTfdPYZg==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pm68l-00GQYB-0D; Tue, 11 Apr 2023 05:01:59 +0000
-Date: Mon, 10 Apr 2023 22:01:59 -0700
+ Linux)) id 1pm6Py-00GReU-09; Tue, 11 Apr 2023 05:19:46 +0000
+Date: Mon, 10 Apr 2023 22:19:46 -0700
 From: Christoph Hellwig <hch@infradead.org>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <ZDTpx15RX/64lbjY@infradead.org>
-References: <20230406003714.94580-1-ebiggers@kernel.org>
+To: Andrey Albershteyn <aalbersh@redhat.com>
+Message-ID: <ZDTt8jSdG72/UnXi@infradead.org>
+References: <20230404145319.2057051-1-aalbersh@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230406003714.94580-1-ebiggers@kernel.org>
+In-Reply-To: <20230404145319.2057051-1-aalbersh@redhat.com>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -2.5 (--)
@@ -68,9 +68,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Apr 05, 2023 at 05:37:14PM -0700, Eric Biggers wrote:
- > Therefore, let's convert fs/verity/ from ahash to shash. This > simplifies
- the code, and it should also slightly improve performance for [...] 
+ Content preview:  Dave is going to hate me for this, but.. I've been looking
+ over some of the interfaces here,
+ and I'm starting to very seriously questioning
+ the design decisions of storing the fsverity hashes in xattrs. 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -85,9 +86,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1pm68x-00055Q-Cb
-Subject: Re: [f2fs-dev] [RFC PATCH] fsverity: use shash API instead of ahash
- API
+X-Headers-End: 1pm6QW-003lT7-1n
+Subject: Re: [f2fs-dev] [PATCH v2 00/23] fs-verity support for XFS
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,23 +99,28 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: fsverity@lists.linux.dev, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
+Cc: fsverity@lists.linux.dev, linux-xfs@vger.kernel.org,
+ linux-ext4@vger.kernel.org, agruenba@redhat.com, hch@infradead.org,
+ djwong@kernel.org, damien.lemoal@opensource.wdc.com,
+ linux-f2fs-devel@lists.sourceforge.net, ebiggers@kernel.org,
+ cluster-devel@redhat.com, dchinner@redhat.com, rpeterso@redhat.com,
+ xiang@kernel.org, jth@kernel.org, linux-erofs@lists.ozlabs.org,
  linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Apr 05, 2023 at 05:37:14PM -0700, Eric Biggers wrote:
-> Therefore, let's convert fs/verity/ from ahash to shash.  This
-> simplifies the code, and it should also slightly improve performance for
-> everyone who wasn't actually using one of these ahash-only crypto
-> accelerators, i.e. almost everyone (or maybe even everyone)!
+Dave is going to hate me for this, but..
 
-This looks like a very nice cleanup to me.  So unless someone really
-uses async crypto offload heavily for fsverity and can come up with
-a convincing argument for that, I'm all for the change.
+I've been looking over some of the interfaces here, and I'm starting
+to very seriously questioning the design decisions of storing the
+fsverity hashes in xattrs.
+
+Yes, storing them beyond i_size in the file is a bit of a hack, but
+it allows to reuse a lot of the existing infrastructure, and much
+of fsverity is based around it.  So storing them in an xattrs causes
+a lot of churn in the interface.  And the XFS side with special
+casing xattr indices also seems not exactly nice.
 
 
 _______________________________________________
