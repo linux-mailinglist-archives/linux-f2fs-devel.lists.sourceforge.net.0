@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BFDB6DE17E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Apr 2023 18:53:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E61366DE1A3
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Apr 2023 18:58:28 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pmHF5-00074B-LF;
-	Tue, 11 Apr 2023 16:53:14 +0000
+	id 1pmHK7-00077k-Eb;
+	Tue, 11 Apr 2023 16:58:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pmHF4-000744-1F
+ (envelope-from <jaegeuk@kernel.org>) id 1pmHK6-00077e-K4
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Apr 2023 16:53:13 +0000
+ Tue, 11 Apr 2023 16:58:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A+3UTAujVj2VzsUlI3Exjh7/5eSBBstHIVTA5X4SaaU=; b=K6dCkeBeqwL6x/iHScnfwb84Lf
- HWR0psrwFLkPBOPkJLAR7K6Bttf6Qbwjc9rXc1p6RGimd4zwliEl5a2D1YUF3p+jponvxFYS9ADxe
- BSjj/i1NSuPuL/+dhn5JugroLkVAvWOqmqhCVVkZm5jTztB7Nior0mcfOy1nGpm+ksGw=;
+ bh=7oZZcUp3vFjkm0/WWzLsdBmvjJJ9vw72g75mgWvprts=; b=Y6UlR+x5YU6LpfDbYxY/mUPA5U
+ uqW4qjz0F3ghRiNTwGl6xNRBi/rFd/Pfqb19P/YFcthz8AOimXjSCOiTlWNcz4ioBgUT+HEh8Upvp
+ H8H0FfitGaZachrcnQIv1aCcGNKH3p1zMubGgue+YSwzo+Ek6QXCM3pVQSPJM8Z3YMMI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,43 +31,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=A+3UTAujVj2VzsUlI3Exjh7/5eSBBstHIVTA5X4SaaU=; b=avT0WnEBouk8CIy7DGxd4tlhV8
- eQkJMnD136BRoktVedUdJFwcRM9+7SUIYyF8CERPUtVV1ljfdhkY/VVt5SnjrUSgRQrDfgOIsFlWA
- dhAOcFdaOVCx7tIj6gzTLTbE+qRK9qQvMgBU6zz7wafuH6vgDWes9cwV4BHdX6Lyh+sY=;
+ bh=7oZZcUp3vFjkm0/WWzLsdBmvjJJ9vw72g75mgWvprts=; b=H6/LIqGlZHKat23WrQytAw51QK
+ qRP9zM4PjOU6nFECFmnYMIpaJZKIqCwIyMZuqa0qth1WN5zzmTPtWa1m+Z/ZrZiNP5Mbw6v6JePj8
+ dZiul+cDk250s1MyvVF3D159TtG9MFH5DCoQAiXe6J8DZoTAzq6HnFbGhFHthBMpIpkI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pmHF2-0004wW-AK for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Apr 2023 16:53:13 +0000
+ id 1pmHK4-004G1y-UX for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Apr 2023 16:58:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id E9B8A61F4F
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 8DD0362006
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 11 Apr 2023 16:53:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44AEFC433A0;
- Tue, 11 Apr 2023 16:53:06 +0000 (UTC)
+ Tue, 11 Apr 2023 16:58:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE4D4C433EF;
+ Tue, 11 Apr 2023 16:58:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1681231986;
- bh=AqPxyfg+Et2H5o/3OwXKueRRJSbxjOyJRZgCX/0lmK0=;
+ s=k20201202; t=1681232299;
+ bh=PIuBueFuizxDxX4lJnpDE3pr3ApvuOEeLShaHwfYbOM=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=PL+AUFEgisfOP5Mg9c0lnKBGVW+0Vcg/zaxQBdXF0BOnvP+SA1u0MnKWhsYOe9juM
- z0wYjdkmL7UTtB0Z3FJ/jwvOBvNxafWkeJBRkeGqRC5ReZbh6TMOu7d8mVfbtxNy/Y
- +qckpCp6tN07mhoBIxHlu/EXCEmyqH+XhXjKI4uYgyhoEwTptSMkH6MaRVYBtJj8XP
- Wo2RTn28SO3OBZ8lo5Lq09Dw9eVTCzBLN1+nfl0ApoAOBniwhvhlncpQDOuUI4kbAy
- EZYU07IQmIzhbs4S4q9gyBp7Yg/5NfaRKCQ7Rn4mSwnHw3v69OH37BoVnrgj3+VWyd
- l8W9OjlZIRfwQ==
-Date: Tue, 11 Apr 2023 09:53:04 -0700
+ b=Ed4aF71ezAFa0//i0i6fLWtruR3eUgmzyzzZVo7B7U++1fZqxukDN+qXRRRTL9hd4
+ cZNQtNcTk9UKijEyNI586L4Qw1nItwW5XjeKtGZvVgkAhfBj+D8PFslSWjUNtW6Xws
+ 1bFHbTApAr0lrR1l114srXm8v2jmK3i9gWMevKEMrM0F+WQBLbEQ9zO0xMNFO0lncz
+ p/yHdZ0cx7ItaJS0oN50mUB2vrS+mPfMH51IGC/C2nffdW+nOHta2l3MOa65EV+VWA
+ 9tWHW2ssE+9Yi7SORgriuMAdwRyQRsYc8pxsxt/9qc1hklt5DRdA/mrVg/mecA14m2
+ MGqqyL08Cm1Eg==
+Date: Tue, 11 Apr 2023 09:58:17 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
-Message-ID: <ZDWQcJJ9ceNK9Vi8@google.com>
-References: <20230402112825.42486-1-chao@kernel.org>
- <ZCsT5mRsZJqPXBzz@google.com>
- <a8d480c5-3992-d241-97b3-2a7d7b15c1d1@kernel.org>
- <2c70970b-1938-7b32-8de3-21d93895bef8@kernel.org>
+Message-ID: <ZDWRqRgwuLpkR7qO@google.com>
+References: <20230410022418.1843178-1-chao@kernel.org>
+ <ZDRWdJxP6QzcIU7G@google.com>
+ <b05d7ce8-ef98-a7ef-9873-4403ec0858c1@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <2c70970b-1938-7b32-8de3-21d93895bef8@kernel.org>
+In-Reply-To: <b05d7ce8-ef98-a7ef-9873-4403ec0858c1@kernel.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -75,9 +74,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 04/11, Chao Yu wrote: > On 2023/4/10 10:19, Chao Yu wrote:
- > > On 2023/4/4 1:59, Jaegeuk Kim wrote: > > > On 04/02, Chao Yu wrote: >
- > > > This patch does below changes: > > > > > > > > - If f2fs e [...] 
+ Content preview:  On 04/11, Chao Yu wrote: > On 2023/4/11 2:33, Jaegeuk Kim
+ wrote: > > On 04/10, Chao Yu wrote: > > > We have maintain PagePrivate and
+ page_private and page reference > > > w/ {set,clear}_page_private_* [...]
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pmHF2-0004wW-AK
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to check readonly condition
- correctly
+X-Headers-End: 1pmHK4-004G1y-UX
+Subject: Re: [f2fs-dev] [PATCH 1/2] f2fs: remove folio_detach_private() in
+ .invalidate_folio and .release_folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,153 +112,56 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 04/11, Chao Yu wrote:
-> On 2023/4/10 10:19, Chao Yu wrote:
-> > On 2023/4/4 1:59, Jaegeuk Kim wrote:
-> > > On 04/02, Chao Yu wrote:
-> > > > This patch does below changes:
-> > > > 
-> > > > - If f2fs enables readonly feature or device is readonly, allow to
-> > > > mount readonly mode only
-> > > > - Introduce f2fs_dev_is_readonly() to indicate whether image or device
-> > > > is readonly
-> > > > - remove unnecessary f2fs_hw_is_readonly() in f2fs_write_checkpoint()
-> > > > and f2fs_convert_inline_inode()
-> > > > - enable FLUSH_MERGE only if f2fs is mounted as rw and image/device
-> > > > is writable
+> On 2023/4/11 2:33, Jaegeuk Kim wrote:
+> > On 04/10, Chao Yu wrote:
+> > > We have maintain PagePrivate and page_private and page reference
+> > > w/ {set,clear}_page_private_*, it doesn't need to call
+> > > folio_detach_private() in the end of .invalidate_folio and
+> > > .release_folio, remove it and use f2fs_bug_on instead.
+> > > 
+> > > Signed-off-by: Chao Yu <chao@kernel.org>
+> > > ---
+> > >   fs/f2fs/data.c | 7 +++++--
+> > >   1 file changed, 5 insertions(+), 2 deletions(-)
+> > > 
+> > > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > > index 4946df6dd253..8b179b4bdc03 100644
+> > > --- a/fs/f2fs/data.c
+> > > +++ b/fs/f2fs/data.c
+> > > @@ -3737,7 +3737,8 @@ void f2fs_invalidate_folio(struct folio *folio, size_t offset, size_t length)
+> > >   			inode->i_ino == F2FS_COMPRESS_INO(sbi))
+> > >   		clear_page_private_data(&folio->page);
+> > > -	folio_detach_private(folio);
+> > > +	f2fs_bug_on(sbi, PagePrivate(&folio->page));
+> > > +	f2fs_bug_on(sbi, page_private(&folio->page));
 > > 
-> > Jaegeuk,
-> > 
-> > Please drop this patch, and help to check below one, thanks. :)
-> > 
-> > f2fs: use f2fs_hw_is_readonly() instead of bdev_read_only()
+> > I think we can just check page_private() only.
 > 
-> Oh, I didn't make it clear.
-> 
-> I found you applied both v1 and v2 of this patch.
+> Why? how about the case PagePrivate was set, but page_private was't? It must
+> be a bug as well?
 
-Yeah, I was keeping the fixes locally. Please check again.
+Given the code, I think both are set all the time. My concern is someone is
+not doing set/get properly. Actually, I got a panic on page_private() when
+running fsstress overnight. I'm trying to reproduce it to find which bit was
+set.
 
-> 
-> So I mean how about keeping v2:
-> 
-> [PATCH v2] f2fs: fix to check readonly condition correctly
-> https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git/commit/?h=dev-test&id=2bce08d26c0fe3a4ce1cca03ee0ea0c59d98c0b2
-> 
-> and apply
-> 
-> [PATCH] f2fs: use f2fs_hw_is_readonly() instead of bdev_read_only()
-> https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git/commit/?h=dev-test&id=7ec21ff2e8f521842938415af741fc72f39c0135
-> 
-> to instead
-> 
-> [PATCH] f2fs: fix to check readonly condition correctly
-> https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git/commit/?h=dev-test&id=66eb18a8b892afe085097747521fb280a1577ea4
 > 
 > Thanks,
 > 
 > > 
-> > Thanks,
-> > 
-> > > 
-> > > What is the problem to solve here?
-> > > 
-> > > > 
-> > > > Signed-off-by: Chao Yu <chao@kernel.org>
-> > > > ---
-> > > >    fs/f2fs/checkpoint.c |  2 +-
-> > > >    fs/f2fs/f2fs.h       | 10 +++++-----
-> > > >    fs/f2fs/inline.c     |  3 +--
-> > > >    fs/f2fs/super.c      | 13 +++++++------
-> > > >    4 files changed, 14 insertions(+), 14 deletions(-)
-> > > > 
-> > > > diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> > > > index 8e1db5752fff..1eef597ed393 100644
-> > > > --- a/fs/f2fs/checkpoint.c
-> > > > +++ b/fs/f2fs/checkpoint.c
-> > > > @@ -1604,7 +1604,7 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
-> > > >    	unsigned long long ckpt_ver;
-> > > >    	int err = 0;
-> > > > -	if (f2fs_readonly(sbi->sb) || f2fs_hw_is_readonly(sbi))
-> > > > +	if (f2fs_readonly(sbi->sb))
-> > > >    		return -EROFS;
-> > > >    	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
-> > > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > > > index 2d4a7ef62537..7de95133478a 100644
-> > > > --- a/fs/f2fs/f2fs.h
-> > > > +++ b/fs/f2fs/f2fs.h
-> > > > @@ -4446,6 +4446,11 @@ static inline bool f2fs_hw_is_readonly(struct f2fs_sb_info *sbi)
-> > > >    	return false;
-> > > >    }
-> > > > +static inline bool f2fs_dev_is_readonly(struct f2fs_sb_info *sbi)
-> > > > +{
-> > > > +	return f2fs_sb_has_readonly(sbi) || f2fs_hw_is_readonly(sbi);
-> > > > +}
-> > > > +
-> > > >    static inline bool f2fs_lfs_mode(struct f2fs_sb_info *sbi)
-> > > >    {
-> > > >    	return F2FS_OPTION(sbi).fs_mode == FS_MODE_LFS;
-> > > > @@ -4546,11 +4551,6 @@ static inline void f2fs_handle_page_eio(struct f2fs_sb_info *sbi, pgoff_t ofs,
-> > > >    	}
-> > > >    }
-> > > > -static inline bool f2fs_is_readonly(struct f2fs_sb_info *sbi)
-> > > > -{
-> > > > -	return f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb);
-> > > > -}
-> > > > -
-> > > >    #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
-> > > >    #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
-> > > > diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-> > > > index 72269e7efd26..2c36f2dc2317 100644
-> > > > --- a/fs/f2fs/inline.c
-> > > > +++ b/fs/f2fs/inline.c
-> > > > @@ -203,8 +203,7 @@ int f2fs_convert_inline_inode(struct inode *inode)
-> > > >    	struct page *ipage, *page;
-> > > >    	int err = 0;
-> > > > -	if (!f2fs_has_inline_data(inode) ||
-> > > > -			f2fs_hw_is_readonly(sbi) || f2fs_readonly(sbi->sb))
-> > > > +	if (!f2fs_has_inline_data(inode) || f2fs_readonly(sbi->sb))
-> > > >    		return 0;
-> > > >    	err = f2fs_dquot_initialize(inode);
-> > > > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> > > > index d016f398fcad..db7649010c12 100644
-> > > > --- a/fs/f2fs/super.c
-> > > > +++ b/fs/f2fs/super.c
-> > > > @@ -1382,15 +1382,16 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
-> > > >    		return -EINVAL;
-> > > >    	}
-> > > > -	if (f2fs_is_readonly(sbi) && test_opt(sbi, FLUSH_MERGE)) {
-> > > > +	if (f2fs_dev_is_readonly(sbi) && !f2fs_readonly(sbi->sb)) {
-> > > > +		f2fs_err(sbi, "Allow to mount readonly mode only");
-> > > > +		return -EROFS;
-> > > > +	}
-> > > > +
-> > > > +	if (f2fs_readonly(sbi->sb) && test_opt(sbi, FLUSH_MERGE)) {
-> > > >    		f2fs_err(sbi, "FLUSH_MERGE not compatible with readonly mode");
-> > > >    		return -EINVAL;
-> > > >    	}
-> > > > -	if (f2fs_sb_has_readonly(sbi) && !f2fs_readonly(sbi->sb)) {
-> > > > -		f2fs_err(sbi, "Allow to mount readonly mode only");
-> > > > -		return -EROFS;
-> > > > -	}
-> > > >    	return 0;
-> > > >    }
-> > > > @@ -2122,7 +2123,7 @@ static void default_options(struct f2fs_sb_info *sbi)
-> > > >    	set_opt(sbi, MERGE_CHECKPOINT);
-> > > >    	F2FS_OPTION(sbi).unusable_cap = 0;
-> > > >    	sbi->sb->s_flags |= SB_LAZYTIME;
-> > > > -	if (!f2fs_is_readonly(sbi))
-> > > > +	if (!f2fs_readonly(sbi->sb) && !f2fs_dev_is_readonly(sbi))
-> > > >    		set_opt(sbi, FLUSH_MERGE);
-> > > >    	if (f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi))
-> > > >    		set_opt(sbi, DISCARD);
-> > > > -- 
-> > > > 2.36.1
-> > 
-> > 
-> > _______________________________________________
-> > Linux-f2fs-devel mailing list
-> > Linux-f2fs-devel@lists.sourceforge.net
-> > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+> > >   }
+> > >   bool f2fs_release_folio(struct folio *folio, gfp_t wait)
+> > > @@ -3759,7 +3760,9 @@ bool f2fs_release_folio(struct folio *folio, gfp_t wait)
+> > >   	clear_page_private_reference(&folio->page);
+> > >   	clear_page_private_gcing(&folio->page);
+> > > -	folio_detach_private(folio);
+> > > +	f2fs_bug_on(sbi, PagePrivate(&folio->page));
+> > > +	f2fs_bug_on(sbi, page_private(&folio->page));
+> > > +
+> > >   	return true;
+> > >   }
+> > > -- 
+> > > 2.25.1
 
 
 _______________________________________________
