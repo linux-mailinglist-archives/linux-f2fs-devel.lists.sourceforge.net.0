@@ -2,117 +2,157 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0828D6DE9DA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Apr 2023 05:18:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A54786DEA35
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Apr 2023 06:12:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pmR0L-0006lU-6z;
-	Wed, 12 Apr 2023 03:18:40 +0000
+	id 1pmRqM-0002o3-J2;
+	Wed, 12 Apr 2023 04:12:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <david@fromorbit.com>) id 1pmR0J-0006lO-Uv
+ (envelope-from <frank.li@vivo.com>) id 1pmRqK-0002nw-NW
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Apr 2023 03:18:39 +0000
+ Wed, 12 Apr 2023 04:12:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QTzf86zAv2fU3C/eN/0tX6Qjb72nN2ZOHZq+wIvYYEk=; b=SnS/H5QawgXAye6L6499Mp7veK
- 10Q/hXqzZboYMEk5Zo7G9s4Y18xDyJb9kGpeQUBENEJ+6ovkwY30sb/iud3rWKpqlLbrCzOQfUcoj
- WCYNMVwhRJgmf4O97uu3lXIuEhNIGLBkKIFmjDtw7m8LhrFqVHlQsQknQ9OqyK+03VRo=;
+ bh=cRixI1QTEPcUZ6ZF/jBdS6RZiN23k9KQkGs6woANuvY=; b=ZkZ4j0TRP3WgmVtMMGYwUYv9AM
+ 8nGMaYUzHheMywJAfq/A2+Njz7X1JMKtCjWslPskr5QotirWdWHox2yRofbA0sx5KH9gcDz/wVjw4
+ LGKGfYjn+62vQ6aNswIL176qcQWzD8RvImRpUrp1af06dw7H/8TFNyItIk+wJSRUWC1M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=QTzf86zAv2fU3C/eN/0tX6Qjb72nN2ZOHZq+wIvYYEk=; b=gos2Ra0UinTHbEU5M/AlL1vcqP
- /6PZT33W93z1LDJXZKJKC2ZU0e5eNF+AJL5OsFCe1S+VK2dms0K24zKdslukb2NT+Mw5cnzpJWaji
- DnyOh1rK5JbdVCDm9vO2mPtzqHxYx6jfObxljs7Lm0FMaUou+SVcPvT69Bvt+JI/nkW0=;
-Received: from mail-pj1-f45.google.com ([209.85.216.45])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pmR0F-004wBf-OF for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Apr 2023 03:18:39 +0000
-Received: by mail-pj1-f45.google.com with SMTP id f2so1582454pjs.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 11 Apr 2023 20:18:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fromorbit-com.20210112.gappssmtp.com; s=20210112; t=1681269510;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QTzf86zAv2fU3C/eN/0tX6Qjb72nN2ZOHZq+wIvYYEk=;
- b=RIm6qfQDAE0Gvz8EmVP4usexgRsGP9V/jIqls91dsJNT85XwtaGY8OPFulpCxkIEk4
- vd1CrUN1XT/s9k9NS9Z+V99y7RX29V7R9a9VZzITy3cVmE9hTRU9XNV6+yDeQf7n5qyf
- dtXOF3uA5knLC4fM3FOa6eJk7WllE1rz75WFFSthumGqgwhenqTIWQU5MyJZ+hPDyGBX
- tpVfTf5Z1vv4udhay0UI5TDrPQWqmcRsjacWZEYmoM2I+oaHVz2L2aKEktSnw0dEGkGx
- Vq2BZOUc2q6kExZKSQAUI3o0C9emWKB2Vh6KZqJnPdWxcyqxEdK80KlWeVm6DNwN7OYe
- dvYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681269510;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QTzf86zAv2fU3C/eN/0tX6Qjb72nN2ZOHZq+wIvYYEk=;
- b=35QTo72dZa2gSB1kE+Ha/3Twgo3T5A8bxI1i0CWzwJX3UMxp8o6UYXkwiCE6RX5i61
- 1SnMtJLlqEUp1yKCl8BM/dko3GzhcjP75bSTlCou8JIEK3Bu3kTEGYwK7xj8nH6zi9GZ
- XcO9aIB3IZwQmVRGNnqcufri3XELDNY3+Zo0W42zN4YWqphN6daOeZo2kF7nBpwMwuFS
- I0fRFMq1LE4G9V0ZwZ2Ti+CE63SeFjTt84f+2vntbf3VPqPYHeFZqPkoNVt+gTche3UU
- 1tvJ1fBS7VknmH50WGdjAZXSY2gByd8W5r4p5gEY9v4JTpr2Sm0J/HlAT7bmBS3P8+Zo
- INsA==
-X-Gm-Message-State: AAQBX9fwrVm3Dd3wXRnFte3puRkBFnQevEftA2sjFI/xqOBR/cSUkb4p
- 5oa4oIJBHOKGgw7szyDYkQVa3w==
-X-Google-Smtp-Source: AKy350bEvRaL0tcbYZNXJN9S8MKTlfNUtm72wryf0f0tx94/6m3Gotj2MFJG8+gujGf5Bd9bxftN0Q==
-X-Received: by 2002:a17:90a:45:b0:23f:a4da:1203 with SMTP id
- 5-20020a17090a004500b0023fa4da1203mr6850168pjb.19.1681269510087; 
- Tue, 11 Apr 2023 20:18:30 -0700 (PDT)
-Received: from dread.disaster.area (pa49-180-41-174.pa.nsw.optusnet.com.au.
- [49.180.41.174]) by smtp.gmail.com with ESMTPSA id
- z8-20020a1709028f8800b0019f9fd5c24asm7362321plo.207.2023.04.11.20.18.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Apr 2023 20:18:29 -0700 (PDT)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1pmR06-002L8o-E9; Wed, 12 Apr 2023 13:18:26 +1000
-Date: Wed, 12 Apr 2023 13:18:26 +1000
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20230412031826.GI3223426@dread.disaster.area>
-References: <20230404145319.2057051-1-aalbersh@redhat.com>
- <ZDTt8jSdG72/UnXi@infradead.org>
- <20230412023319.GA5105@sol.localdomain>
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=cRixI1QTEPcUZ6ZF/jBdS6RZiN23k9KQkGs6woANuvY=; b=F
+ Zuh+wNWPugesby9Upwi6ERRreRF278hPKIMBCi3BK6RIb+t4C5+jG79hwRVrm6oNyZfUUHgNxHzmW
+ sXF60EEX1BtthgsiKPdmj/kYOrLFdEsRhvT+B4YRIMyoX0VkDaMXK+ghbkbTYJwfag34strUCWhw0
+ LWM7IGsmlAT4b+qQ=;
+Received: from mail-tyzapc01on2138.outbound.protection.outlook.com
+ ([40.107.117.138] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1pmRqB-0001yC-TF for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 12 Apr 2023 04:12:24 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PYKsNZndpWOcHRKoENyTL0PVOFWqAoo1R0oLAbM47d/YmhCTgwq0zlgN6cRM0rGN5TN5ZkRBSb4P6K0ZE6fzaFcfNHAJqerTAxx4PGAo+O8sjIdx/tFCLgYlsStRCc6Y0Cn7jJcWUWZljzVHUL1TQ1F44qpKICfSjdNwYDZEJju/fZa2qF5B6gtpFb3Gcd5YeC8L2yJvbWgPyXlMrD8/RbnYNXOUD9BSyzm+MFZqL0836NbZxecXNJbTmEBAYrrLrHvCqRrYIVEyYTnb/W/EjOPG2N0pmYhsNn8Z1PBFmEJ5FNYfcwDkR4CyzEPot4/FqB2GFEREIu1mwWzPbwLkmA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cRixI1QTEPcUZ6ZF/jBdS6RZiN23k9KQkGs6woANuvY=;
+ b=SquRVkGnpS5rvlerYmbSOm1/SquiLmH8RReWppEbHPVhWFbctmV/59zBS7LtC02nfP043Z6KggmDf5R7s8HfFXkf+MgqTNlma4a3GhUk9YvF/O8LP3/TSSbb0/OpQzzKVZCc5xS5gMsCoyv+MRV5hKo5Tn4Aoiloh/SATi66gUPNWj/kO15E59Zy6WAPZ1jOKs2t3xmCF8iIUV78aCHugJPMqgSAz2AHENq+WA4xnXQ9eJfDK8J+RAJt3eZ9evGgeKrWQjydxgk7/TSLe7mg1ohr3xEc3lDXyZbO5PhnKgW9k/j0bdCaLIX3VzBs0Buue/DN+yS9JG3tqV9l+w+Taw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cRixI1QTEPcUZ6ZF/jBdS6RZiN23k9KQkGs6woANuvY=;
+ b=qwTczu+bXwMmoxvhfWvfe5z5dnJQsNQFri21kXWdjJGjn3MOTP9gwOdhs8f2UjdoK3ZuNXio82CEiT7C7rE2YOpsMlinOh2ZmhGFSTqrvzPYoxGgqMvBDxhb4SGqwbvr5QqF1xSexa8UAWGebo54AMPU8WA3Hw89ueLC65pttK28hyMdUzjqWb1N7KG0N9OeGSUAybj7gZPKeSdnCt3enY1dAsAD/0AWTjYZfFyKSGPII6NIRtNcNc7ofos8Bkqg4XWOyzWG9r/njsCh/Ad73hgEpXjZkCd/Qki+7A/6nilEcD0JhKxMtQEn58PZhnJTZOxT+yxU/7i1kerOa7A0UQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
+ by SEZPR06MB5366.apcprd06.prod.outlook.com (2603:1096:101:7e::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.38; Wed, 12 Apr
+ 2023 04:12:05 +0000
+Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
+ ([fe80::a3a1:af8e:be1e:437c]) by SEZPR06MB5269.apcprd06.prod.outlook.com
+ ([fe80::a3a1:af8e:be1e:437c%6]) with mapi id 15.20.6277.038; Wed, 12 Apr 2023
+ 04:12:05 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Wed, 12 Apr 2023 11:49:40 +0800
+Message-Id: <20230412034940.41943-1-frank.li@vivo.com>
+X-Mailer: git-send-email 2.35.1
+X-ClientProxiedBy: SI2PR02CA0038.apcprd02.prod.outlook.com
+ (2603:1096:4:196::22) To SEZPR06MB5269.apcprd06.prod.outlook.com
+ (2603:1096:101:78::6)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230412023319.GA5105@sol.localdomain>
-X-Spam-Score: 0.0 (/)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SEZPR06MB5366:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1df07305-9611-457e-2def-08db3b0c1313
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: UlEvkSihMZfho9C8cxVWt+J1xT7d73W4Jigbk/fXuRxCBvrArUak4Jiqk0zj/+dJh5nNEDfC1YAEZP8NOaPqhPeQcYfBZaveQA9vser7tC2eh25OXumBCAMO3szQ9Wxrju3SsN6I26iDr1hyXwxcRSdEw2/YYuQJlsQijIzoN9eksiGVs1gRtpLUsKWDDP1s9FgSKfEa+FK5shj2J1qha4vHeQSbcJm5F5lKhSB6M4IptP8Gjd4aObp7DwUoyDOVsJ/BdBoMts95lSeI3dfhMtczhCkUvE2wKiKkUbb1pWVYZaNtB/zXJvhgsW/c8fdKpPw+8R+ej9YnXCO8+Zc509U0vx0CdQphmdk9q7PthweQRPnQIkjdtHxC2DuOV13PH7KiunZbo5bcNxHzrtSHpaQHk7G896EoRNkxctDFOpEkKh8awj9edr5VkNJYfIsfLD+8Za/1aXCVIVM86sACzhHjMPa0a9mzRvYsEHfQTt42JoZJcoUXrXgB9jMj6eRXtxImCQIChybJqa8q+OynSHOgGESdbXSNPvA+fL5I0nvQcAp2YiA7n06BTeXOUk5YSuLD1VdT1rDiVNtPkTj7qp1BF92WgIPTlA/8kAf4dT0ZDJucTrf3tqGocL4HYsrQ
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(4636009)(39860400002)(396003)(376002)(366004)(136003)(346002)(451199021)(52116002)(8676002)(4326008)(66946007)(66556008)(66476007)(5660300002)(186003)(86362001)(83380400001)(6666004)(41300700001)(110136005)(316002)(8936002)(2906002)(36756003)(26005)(478600001)(6512007)(6506007)(1076003)(6486002)(2616005)(38100700002)(38350700002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?E/PkfKWycbuZVdQH6M/SeLlaASL6TE7osjBvCM18FdMTFnc6clEff2qiAQm0?=
+ =?us-ascii?Q?zxEmGDRhVu9dcOoy+kCImWccwfpX+6OMgHnb3ZjylJ/QfMdXYx5baHFusf7o?=
+ =?us-ascii?Q?VIL924AhypriOL7nMwfAWtuHbQqGHqxykQZT69TiJsUXYK9OnzYkHIhHv84E?=
+ =?us-ascii?Q?3Ut2k9q+HieHafq4ck/HHDfmnAIxBSrKj0XriwegCrdbkhwzbior5BNmk2w5?=
+ =?us-ascii?Q?+LsMR1UKbulcmkGY+rXqrckuNlW+7pYPWGBeoP8GdRHNVLvQSGuA9o9tfz44?=
+ =?us-ascii?Q?euMKB8T/hbVdoK2hM6GZGPRvYe4BnZN1G4UKE91aQx4bsnLmpVG/GbPvz06X?=
+ =?us-ascii?Q?iKaf48StYO0SUfr3SW/NfhssXv/hr66iU54TAstzYf6+znYPH4fMfBUsJMwu?=
+ =?us-ascii?Q?hAIcPNIKvfLQobGfgflsRcAYfeRIdfdCW6uurt+ROE4mXtNPYbd2RUdDVgqU?=
+ =?us-ascii?Q?tAtLw8f+CcoZS3SFr4cPu+sBKZee1cTvqppvWQAhLaShuLER0/l7cY98RlGj?=
+ =?us-ascii?Q?rG094AEPSAxuFqKtLePZ4jhCxct7zn9WDrV5MaSknNWkkJ/GMZTP0f5AWdZ0?=
+ =?us-ascii?Q?K+lueGkv2Xk1cbCe9LyiMHC7JBubTGr6kT+EWvPYcht7FLlw5WkpCsfEgK2o?=
+ =?us-ascii?Q?kpCwUAEdT0H5ALz3bKG8JTr3GxoJuYtsj8U3cMb7FxLI+68pqHVKtp0Ga7Vg?=
+ =?us-ascii?Q?VVoFQQPnH7akgNoKPNgFx9VDL+h3AZDKLiuTCmVZxdu8vUk5aoR0EYLsaC9R?=
+ =?us-ascii?Q?2oDNtzRx/Hnqb8cMoCbhJ4GdD4wKGfTjzJAwhAdVDn0vN6lbtaQBkhEMNhPJ?=
+ =?us-ascii?Q?HO1bFndn37fP54HT4ZUI0NKUzCo6G53h2l9ccy35z99IVKCdI8Y3wdG/bO4t?=
+ =?us-ascii?Q?RBqWEagRpegGEVsw6SYOLLwnj3wR3sGxijuUcfyt9AkFtYKnnjM+EZzWzo6h?=
+ =?us-ascii?Q?CHmQYvARlfxkf8L/+kxXBjewyPXbRDiD5hOEhrAXTBuUkaCD3b7cNsiy0d0i?=
+ =?us-ascii?Q?xMZA0EQOLCxjvYkGEJ2k8mxIEj14kBfPGpjK3gEzSLJMXfhfa0N5qByRorzF?=
+ =?us-ascii?Q?723zbAnJbyhb7OGw5BmYQeUX82s18nm8xXDTymkA0rH26Wb27TAOdf8YlqgH?=
+ =?us-ascii?Q?l/0KC6ypNYSnHcWrbA0FD07ax0Ij4aSd7Sro5hUH5iEzuHMESFhu0KpTfVmk?=
+ =?us-ascii?Q?5TH1artc2BwkYYil3nnaNvQWCOqCnbnab499i7XFWlAbz+LMyUg22hQ/qrmu?=
+ =?us-ascii?Q?5ErzWgRYIsxuPIOmNW/Upp/PZCKc3nW0qrfZ6u3nBVJQy1oFBm873/89FRK9?=
+ =?us-ascii?Q?HkwE/354AOS16BPUdB2uMS0RyBjZjCsbpP5slV6cLh0PJHOiYpgsCkDNmMtU?=
+ =?us-ascii?Q?YbSIAzBtAOy3R4Phg2Jpj1t64J145M6nRQ0f+RCI4BdMg7oI8CnN/l7PFIIU?=
+ =?us-ascii?Q?DfEZoPoXpaJctXxoXgfwTu8PNz0VHpgee1rmE4OiHmNHSEShGQyeL4uxicze?=
+ =?us-ascii?Q?OXHwbCZiExJ2ld893IV8rVfMO/bJbXvHAizb7wEYoh71Daad0kOKNHnQsB5A?=
+ =?us-ascii?Q?lQvg33qk+htqWUAQh34LpD3dBNTNg75VapCOztNq?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1df07305-9611-457e-2def-08db3b0c1313
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Apr 2023 04:12:05.1146 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Bqx9jATmutWCIyQ6LgeU+qwBVzIyX87PuO3sco/eGtmlkr26yJ2VwXrrrizbQalcYCfGxg8+Jp4EhDxdRV7G2g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR06MB5366
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Apr 11, 2023 at 07:33:19PM -0700, Eric Biggers wrote:
- > On Mon, Apr 10, 2023 at 10:19:46PM -0700, Christoph Hellwig wrote: > >
- Dave is going to hate me for this, but.. > > > > I've been lookin [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview: For the readable and writable f2fs_attr with struct_type of
+ F2FS_SBI type, let's directly use the F2FS_SBI_RW_ATTR macro. Signed-off-by:
+ Yangtao Li <frank.li@vivo.com> --- fs/f2fs/sysfs.c | 73
+ +++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+), 36 deletions(-) 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.117.138 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.45 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.45 listed in wl.mailspike.net]
+ no trust [40.107.117.138 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 T_SPF_HELO_TEMPERROR   SPF: test of HELO record failed (temperror)
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1pmR0F-004wBf-OF
-Subject: Re: [f2fs-dev] [PATCH v2 00/23] fs-verity support for XFS
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+X-Headers-End: 1pmRqB-0001yC-TF
+Subject: [f2fs-dev] [PATCH] f2fs: introduce F2FS_SBI_RW_ATTR macro
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,98 +164,147 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Dave Chinner via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Dave Chinner <david@fromorbit.com>
-Cc: fsverity@lists.linux.dev, linux-xfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, agruenba@redhat.com, djwong@kernel.org,
- Andrey Albershteyn <aalbersh@redhat.com>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- cluster-devel@redhat.com, dchinner@redhat.com, rpeterso@redhat.com,
- xiang@kernel.org, jth@kernel.org, linux-erofs@lists.ozlabs.org,
- damien.lemoal@opensource.wdc.com, linux-btrfs@vger.kernel.org
+From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Yangtao Li <frank.li@vivo.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Yangtao Li <frank.li@vivo.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Apr 11, 2023 at 07:33:19PM -0700, Eric Biggers wrote:
-> On Mon, Apr 10, 2023 at 10:19:46PM -0700, Christoph Hellwig wrote:
-> > Dave is going to hate me for this, but..
-> > 
-> > I've been looking over some of the interfaces here, and I'm starting
-> > to very seriously questioning the design decisions of storing the
-> > fsverity hashes in xattrs.
-> > 
-> > Yes, storing them beyond i_size in the file is a bit of a hack, but
-> > it allows to reuse a lot of the existing infrastructure, and much
-> > of fsverity is based around it.  So storing them in an xattrs causes
-> > a lot of churn in the interface.  And the XFS side with special
-> > casing xattr indices also seems not exactly nice.
-> 
-> It seems it's really just the Merkle tree caching interface that is causing
-> problems, as it's currently too closely tied to the page cache?  That is just an
-> implementation detail that could be reworked along the lines of what is being
-> discussed.
-> 
-> But anyway, it is up to the XFS folks.  Keep in mind there is also the option of
-> doing what btrfs is doing, where it stores the Merkle tree separately from the
-> file data stream, but caches it past i_size in the page cache at runtime.
+For the readable and writable f2fs_attr with struct_type of F2FS_SBI type,
+let's directly use the F2FS_SBI_RW_ATTR macro.
 
-Right. It's not entirely simple to store metadata on disk beyond EOF
-in XFS because of all the assumptions throughout the IO path and
-allocator interfaces that it can allocate space beyond EOF at will
-and something else will clean it up later if it is not needed. This
-impacts on truncate, delayed allocation, writeback, IO completion,
-EOF block removal on file close, background garbage collection,
-ENOSPC/EDQUOT driven space freeing, etc.  Some of these things cross
-over into iomap infrastructure, too.
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
+---
+ fs/f2fs/sysfs.c | 73 +++++++++++++++++++++++++------------------------
+ 1 file changed, 37 insertions(+), 36 deletions(-)
 
-AFAIC, it's far more intricate, complex and risky to try to store
-merkle tree data beyond EOF than it is to put it in an xattr
-namespace because IO path EOF handling bugs result in user data
-corruption. This happens over and over again, no matter how careful
-we are about these aspects of user data handling.
-
-OTOH, putting the merkle tree data in a different namespace avoids
-these issues completely. Yes, we now have to solve an API mismatch,
-but we aren't risking the addition of IO path data corruption bugs
-to every non-fsverity filesystem in production...
-
-Hence I think copying the btrfs approach (i.e. only caching the
-merkle tree data in the page cache beyond EOF) would be as far as I
-think we'd want to go. Realistically, there would be little
-practical difference between btrfs storing the merkle tree blocks in
-a separate internal btree and XFS storing them in an internal
-private xattr btree namespace.
-
-I would, however, prefer not to have to do this at all if we could
-simply map the blocks directly out of the xattr buffers as we
-already do internally for all the XFS code...
-
-> I guess there is also the issue of encryption, which hasn't come up yet since
-> we're talking about fsverity support only.  The Merkle tree (including the
-> fsverity_descriptor) is supposed to be encrypted, just like the file contents
-> are.  Having it be stored after the file contents accomplishes that easily...
-> Of course, it doesn't have to be that way; a separate key could be derived, or
-> the Merkle tree blocks could be encrypted with the file contents key using
-> indices past i_size, without them physically being stored in the data stream.
-
-I'm expecting that fscrypt for XFS will include encryption of the
-xattr names and values (just like we will need to do for directory
-names) except for the xattrs that hold the encryption keys
-themselves. That means the merkle tree blocks should get encrypted
-without any extra work needing to be done anywhere.  This will
-simply require the fscrypt keys to be held in a private internal
-xattr namespace that isn't encrypted, but that's realtively trivial
-to do...
-
-Cheers,
-
-Dave.
-
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 8ea05340bad9..4d6263e556fa 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -850,13 +850,16 @@ static struct f2fs_attr f2fs_attr_##_name = {			\
+ 	.offset = offsetof(struct _struct_name, _elname),       \
+ }
+ 
++#define  F2FS_SBI_RW_ATTR(name, elname)				\
++	F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, name, elname)	\
++
+ F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_urgent_sleep_time,
+ 							urgent_sleep_time);
+ F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_min_sleep_time, min_sleep_time);
+ F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_max_sleep_time, max_sleep_time);
+ F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_no_gc_sleep_time, no_gc_sleep_time);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_idle, gc_mode);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent, gc_mode);
++F2FS_SBI_RW_ATTR(gc_idle, gc_mode);
++F2FS_SBI_RW_ATTR(gc_urgent, gc_mode);
+ F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, reclaim_segments, rec_prefree_segments);
+ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_small_discards, max_discards);
+ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_request, max_discard_request);
+@@ -878,31 +881,29 @@ F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, ram_thresh, ram_thresh);
+ F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, ra_nid_pages, ra_nid_pages);
+ F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, dirty_nats_ratio, dirty_nats_ratio);
+ F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, max_roll_forward_node_blocks, max_rf_node_blocks);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_victim_search, max_victim_search);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, migration_granularity, migration_granularity);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, dir_level, dir_level);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, cp_interval, interval_time[CP_TIME]);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, idle_interval, interval_time[REQ_TIME]);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, discard_idle_interval,
+-					interval_time[DISCARD_TIME]);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_idle_interval, interval_time[GC_TIME]);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info,
+-		umount_discard_timeout, interval_time[UMOUNT_DISCARD_TIMEOUT]);
++F2FS_SBI_RW_ATTR(max_victim_search, max_victim_search);
++F2FS_SBI_RW_ATTR(migration_granularity, migration_granularity);
++F2FS_SBI_RW_ATTR(dir_level, dir_level);
++F2FS_SBI_RW_ATTR(cp_interval, interval_time[CP_TIME]);
++F2FS_SBI_RW_ATTR(idle_interval, interval_time[REQ_TIME]);
++F2FS_SBI_RW_ATTR(discard_idle_interval, interval_time[DISCARD_TIME]);
++F2FS_SBI_RW_ATTR(gc_idle_interval, interval_time[GC_TIME]);
++F2FS_SBI_RW_ATTR(umount_discard_timeout, interval_time[UMOUNT_DISCARD_TIMEOUT]);
+ #ifdef CONFIG_F2FS_IOSTAT
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, iostat_enable, iostat_enable);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, iostat_period_ms, iostat_period_ms);
++F2FS_SBI_RW_ATTR(iostat_enable, iostat_enable);
++F2FS_SBI_RW_ATTR(iostat_period_ms, iostat_period_ms);
+ #endif
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, readdir_ra, readdir_ra);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_io_bytes, max_io_bytes);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_pin_file_thresh, gc_pin_file_threshold);
++F2FS_SBI_RW_ATTR(readdir_ra, readdir_ra);
++F2FS_SBI_RW_ATTR(max_io_bytes, max_io_bytes);
++F2FS_SBI_RW_ATTR(gc_pin_file_thresh, gc_pin_file_threshold);
+ F2FS_RW_ATTR(F2FS_SBI, f2fs_super_block, extension_list, extension_list);
+ #ifdef CONFIG_F2FS_FAULT_INJECTION
+ F2FS_RW_ATTR(FAULT_INFO_RATE, f2fs_fault_info, inject_rate, inject_rate);
+ F2FS_RW_ATTR(FAULT_INFO_TYPE, f2fs_fault_info, inject_type, inject_type);
+ #endif
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, data_io_flag, data_io_flag);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, node_io_flag, node_io_flag);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_remaining_trials, gc_remaining_trials);
++F2FS_SBI_RW_ATTR(data_io_flag, data_io_flag);
++F2FS_SBI_RW_ATTR(node_io_flag, node_io_flag);
++F2FS_SBI_RW_ATTR(gc_remaining_trials, gc_remaining_trials);
+ F2FS_RW_ATTR(CPRC_INFO, ckpt_req_control, ckpt_thread_ioprio, ckpt_thread_ioprio);
+ F2FS_GENERAL_RO_ATTR(dirty_segments);
+ F2FS_GENERAL_RO_ATTR(free_segments);
+@@ -956,11 +957,11 @@ F2FS_FEATURE_RO_ATTR(casefold);
+ F2FS_FEATURE_RO_ATTR(readonly);
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ F2FS_FEATURE_RO_ATTR(compression);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compr_written_block, compr_written_block);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compr_saved_block, compr_saved_block);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compr_new_inode, compr_new_inode);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compress_percent, compress_percent);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compress_watermark, compress_watermark);
++F2FS_SBI_RW_ATTR(compr_written_block, compr_written_block);
++F2FS_SBI_RW_ATTR(compr_saved_block, compr_saved_block);
++F2FS_SBI_RW_ATTR(compr_new_inode, compr_new_inode);
++F2FS_SBI_RW_ATTR(compress_percent, compress_percent);
++F2FS_SBI_RW_ATTR(compress_watermark, compress_watermark);
+ #endif
+ F2FS_FEATURE_RO_ATTR(pin_file);
+ 
+@@ -970,22 +971,22 @@ F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_candidate_count, max_candidate_cou
+ F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_weight, age_weight);
+ F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_threshold, age_threshold);
+ 
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, seq_file_ra_mul, seq_file_ra_mul);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_segment_mode, gc_segment_mode);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_reclaimed_segments, gc_reclaimed_segs);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_fragment_chunk, max_fragment_chunk);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_fragment_hole, max_fragment_hole);
++F2FS_SBI_RW_ATTR(seq_file_ra_mul, seq_file_ra_mul);
++F2FS_SBI_RW_ATTR(gc_segment_mode, gc_segment_mode);
++F2FS_SBI_RW_ATTR(gc_reclaimed_segments, gc_reclaimed_segs);
++F2FS_SBI_RW_ATTR(max_fragment_chunk, max_fragment_chunk);
++F2FS_SBI_RW_ATTR(max_fragment_hole, max_fragment_hole);
+ 
+ /* For atomic write */
+ F2FS_RO_ATTR(F2FS_SBI, f2fs_sb_info, current_atomic_write, current_atomic_write);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, peak_atomic_write, peak_atomic_write);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, committed_atomic_block, committed_atomic_block);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, revoked_atomic_block, revoked_atomic_block);
++F2FS_SBI_RW_ATTR(peak_atomic_write, peak_atomic_write);
++F2FS_SBI_RW_ATTR(committed_atomic_block, committed_atomic_block);
++F2FS_SBI_RW_ATTR(revoked_atomic_block, revoked_atomic_block);
+ 
+ /* For block age extent cache */
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, hot_data_age_threshold, hot_data_age_threshold);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, warm_data_age_threshold, warm_data_age_threshold);
+-F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, last_age_weight, last_age_weight);
++F2FS_SBI_RW_ATTR(hot_data_age_threshold, hot_data_age_threshold);
++F2FS_SBI_RW_ATTR(warm_data_age_threshold, warm_data_age_threshold);
++F2FS_SBI_RW_ATTR(last_age_weight, last_age_weight);
+ 
+ #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
+ static struct attribute *f2fs_attrs[] = {
 -- 
-Dave Chinner
-david@fromorbit.com
+2.35.1
+
 
 
 _______________________________________________
