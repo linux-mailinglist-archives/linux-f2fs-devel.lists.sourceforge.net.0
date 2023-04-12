@@ -2,69 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E19F6DFB14
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Apr 2023 18:17:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB4926DFB23
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Apr 2023 18:20:29 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pmdAA-0003iG-Hx;
-	Wed, 12 Apr 2023 16:17:37 +0000
+	id 1pmdCu-0003oU-4E;
+	Wed, 12 Apr 2023 16:20:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pmdA9-0003i9-2t
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pmdCs-0003oN-Mq
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Apr 2023 16:17:36 +0000
+ Wed, 12 Apr 2023 16:20:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fCIm5guctr+B9AFF1TdwFH1IVbSkXULZa9GBxUdjmpU=; b=MtvOjPBSrKvw+OsUfbpOzbPkoy
- 12bMVhl1QTLG6MAGvEgkRmszeWpPXhaBefInZC2J9bN/Ox4PxI590gaSGLYX3kbqvroWzV+2FGWOz
- 8r4aaDYx2d89jKbhr1FtzzbW+losrBHEiYrp/ONx7EUabiKnIsjo4IOOz9GnNC2SH2wM=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=sdBNlygdCKrNTV26EqU1Jtu11uQx9LUI7ydIwnB9f/A=; b=iWMwjX24KIGWmKv/MC+QDrB7jC
+ 4ERJXb7qVDBiQ/l/91fR1qENUH1M+8k4J3D1l+iP/2LRI8QGnxSbec6WIie4/afSpV8Z5yGBR1nFE
+ WJ9G/gNJp9XNPwo7kFq11r88FG1toHQ+nl0+rK0cWmZrjPaTcuhBN03K8sJ0FuhNxR5w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=fCIm5guctr+B9AFF1TdwFH1IVbSkXULZa9GBxUdjmpU=; b=VOw9++96gnyCVOfAnszCruOVJt
- 3eLRB2REGdj8cGBFYHvsZeEvRNxA3hve3WIxOLt9ob2LnHLERX3DrPn9AVNbE3nNjNXL0YD44WcwV
- ash0eCNTMEnkBWsqICvcs+FgMN/uUWjPnUF8YeRhb8nyCA8hEJNqWyt3c8bbxzWeWpFw=;
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=sdBNlygdCKrNTV26EqU1Jtu11uQx9LUI7ydIwnB9f/A=; b=L
+ oC3ML+U1hjDJivnf6S77HAUgJH89xms4/3pnUNZMUdmMsqxqSGDCS14VUjmxw/2POAZAE27SCAbKS
+ wvDgEqYH+SIzHz26tgWdBKIeunILiHB2knQlbJHq+2hNFVzoKqF+4i+oB/1mNt6dZkn3AAgOHoTkV
+ rFup7TNx2ca98mpk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pmdA7-005RdH-FI for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Apr 2023 16:17:36 +0000
+ id 1pmdCr-005Rkm-3l for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 12 Apr 2023 16:20:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 10FC3636D8
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AE87362D59
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 12 Apr 2023 16:17:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6678EC4339B;
- Wed, 12 Apr 2023 16:17:29 +0000 (UTC)
+ Wed, 12 Apr 2023 16:20:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1EE34C433EF
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 12 Apr 2023 16:20:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1681316249;
- bh=nB+s4y1cVa3fwfi6O40cHZ5sEurmUD9JrP46j7oa/iw=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=tkNlceuD6IFLx3n848LVw7iSIM/8b59KKvDgNmk4GitWKO87cmeAKZ58AeH3oqhhx
- aIPXElT3Tziag0CttNFJjgVqHW1FP2hqaTvtei44x2jhhyt7qmQzIgRePxG3KEyn46
- EGuOE4eNt22DiOYlCxV7jIWTLJuIHKlAKyu+l75AaIX50/OLH5qen/4/+WliKyURl5
- Raax/uRBov0eNfmjkHKB1fUXwlGd6NxMaaZlhwebN3qmixBzsaC3L/ScUTaHrLIK37
- +B4v3OLfEUzRK8Mcz5TOq87iRpzl4hP9tGfpuo8TWhbxFU5xDQwmqiMaMmWpZCNWrk
- XaQDVCGZq4m9Q==
-Date: Wed, 12 Apr 2023 09:17:27 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <ZDbZlwH5u3/nOTwL@google.com>
-References: <20230407181539.4136580-1-jaegeuk@kernel.org>
+ s=k20201202; t=1681316419;
+ bh=xPPYnHcEpPPQG6PA/PeoPqtioT4B3ocE+l8u8LyDdQk=;
+ h=Subject:From:Date:To:From;
+ b=L4lPUXQyMLzPE9rAfkmrMzduPy2J//osjiKUxziMxrAxAWIS5OdGCaPO+I6FRNjvq
+ W6jERIdzZzo6GubDboXCNhyW6HLuotXHY9EKJZ1o5P4dfjm3SUpWmvGiNxXlF6h8Zt
+ W6iXdQ4dUy5vhmePtwBDlzQLrIJfKhZMM+IP7Bk5XMCnV4+DSKC8kAkxNwc/vNQXwv
+ FewHiowvKKCiZ2aum90p0H1olwPvtykVflw1zwgTHTUa1qJ0vZGIwBT+e5a/L+dVzi
+ MmuPDj1Dw+Z9Sl/f7r1RkHF05HhRGYfg9rEsuhKnRX5adQimHEpcGPMg9S59xBuPLP
+ CtEnidCyhWKRg==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ 03780E52446 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 12 Apr 2023 16:20:18 +0000 (UTC)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230407181539.4136580-1-jaegeuk@kernel.org>
+From: patchwork-bot+f2fs@kernel.org
+Message-Id: <168131641895.15557.18168724829302263593.git-patchwork-summary@kernel.org>
+Date: Wed, 12 Apr 2023 16:20:18 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,10 +75,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: 1. extent_cache - let's drop the largest extent_cache 2.
- invalidate_block
- - don't show the warnings Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
- --- Change log from v1: - add one more case to skip the error message 
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev] f2fs: fix
+ to recover quota data correctly Submitter: Chao Yu <chao@kernel.org>
+ Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/project/f2fs/list/? [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,9 +95,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pmdA7-005RdH-FI
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: relax sanity check if checkpoint is
- corrupted
+X-Headers-End: 1pmdCr-005Rkm-3l
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,89 +112,36 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-1. extent_cache
- - let's drop the largest extent_cache
-2. invalidate_block
- - don't show the warnings
+Hello:
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
- Change log from v1:
-  - add one more case to skip the error message
+Patch: [f2fs-dev] f2fs: fix to recover quota data correctly
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=736173
+  Lore link: https://lore.kernel.org/r/20230402112706.42211-1-chao@kernel.org
 
- fs/f2fs/checkpoint.c   | 10 ++++++++++
- fs/f2fs/extent_cache.c | 22 +++++++++++++++-------
- 2 files changed, 25 insertions(+), 7 deletions(-)
+Patch: [f2fs-dev] f2fs: add radix_tree_preload_end in error case
+  Submitter: Yohan Joung <jyh429@gmail.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=734185
+  Lore link: https://lore.kernel.org/r/20230327135800.524-1-yohan.joung@sk.com
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 448ecf5000b8..64b3860f50ee 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -152,6 +152,11 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
- 	se = get_seg_entry(sbi, segno);
- 
- 	exist = f2fs_test_bit(offset, se->cur_valid_map);
-+
-+	/* skip data, if we already have an error in checkpoint. */
-+	if (unlikely(f2fs_cp_error(sbi)))
-+		return exist;
-+
- 	if (exist && type == DATA_GENERIC_ENHANCE_UPDATE) {
- 		f2fs_err(sbi, "Inconsistent error blkaddr:%u, sit bitmap:%d",
- 			 blkaddr, exist);
-@@ -202,6 +207,11 @@ bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
- 	case DATA_GENERIC_ENHANCE_UPDATE:
- 		if (unlikely(blkaddr >= MAX_BLKADDR(sbi) ||
- 				blkaddr < MAIN_BLKADDR(sbi))) {
-+
-+			/* Skip to emit an error message. */
-+			if (unlikely(f2fs_cp_error(sbi)))
-+				return false;
-+
- 			f2fs_warn(sbi, "access invalid blkaddr:%u",
- 				  blkaddr);
- 			set_sbi_flag(sbi, SBI_NEED_FSCK);
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 9a8153895d20..bea6ab9d846a 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -23,18 +23,26 @@ bool sanity_check_extent_cache(struct inode *inode)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	struct f2fs_inode_info *fi = F2FS_I(inode);
-+	struct extent_tree *et = fi->extent_tree[EX_READ];
- 	struct extent_info *ei;
- 
--	if (!fi->extent_tree[EX_READ])
-+	if (!et)
-+		return true;
-+
-+	ei = &et->largest;
-+	if (!ei->len)
- 		return true;
- 
--	ei = &fi->extent_tree[EX_READ]->largest;
-+	/* Let's drop, if checkpoint got corrupted. */
-+	if (is_set_ckpt_flags(sbi, CP_ERROR_FLAG)) {
-+		ei->len = 0;
-+		et->largest_updated = true;
-+		return true;
-+	}
- 
--	if (ei->len &&
--		(!f2fs_is_valid_blkaddr(sbi, ei->blk,
--					DATA_GENERIC_ENHANCE) ||
--		!f2fs_is_valid_blkaddr(sbi, ei->blk + ei->len - 1,
--					DATA_GENERIC_ENHANCE))) {
-+	if (!f2fs_is_valid_blkaddr(sbi, ei->blk, DATA_GENERIC_ENHANCE) ||
-+	    !f2fs_is_valid_blkaddr(sbi, ei->blk + ei->len - 1,
-+					DATA_GENERIC_ENHANCE)) {
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: inode (ino=%lx) extent info [%u, %u, %u] is incorrect, run fsck to fix",
- 			  __func__, inode->i_ino,
+Patch: [f2fs-dev] f2fs: fix potential corruption when moving a directory
+  Submitter: Jaegeuk Kim <jaegeuk@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=737778
+  Lore link: https://lore.kernel.org/r/20230406195122.3917650-1-jaegeuk@kernel.org
+
+
+Total patches: 3
+
 -- 
-2.40.0.577.gac1e443424-goog
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
 
 
 
