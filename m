@@ -2,70 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 366276E186F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Apr 2023 01:40:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CCFB6E186E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Apr 2023 01:40:31 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pn6YL-0007md-Nx;
-	Thu, 13 Apr 2023 23:40:32 +0000
+	id 1pn6YG-0007m6-EO;
+	Thu, 13 Apr 2023 23:40:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pn6YK-0007mM-76
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pn6YE-0007lz-J2
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Apr 2023 23:40:31 +0000
+ Thu, 13 Apr 2023 23:40:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cjYCEXVfF/v6FY+9iZ0VU7bFgnNRemBCTGAbv8j0t24=; b=OAIvo3Ak1PRCLhcTHvwJwq/iii
- Y/9IJJd1dS1pj0/3kE8l8T1jdYQZgGjEoYdyK10VUmV4DIVvRF+zi0OgHsxTiV4M++ChYrisi+KIU
- +OMfSyMozVKildmVep+mitla6v3MZ1esU0JJItwwlbdnPpY1pAYKaP6qq/XVBk0EADik=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=9YqjZjhyZYm2MVBkzTBBI4NdLNmUNT1JQOKs9R0ubR4=; b=nLPoVpK+7lqSJ/8hWV8bTp2AiG
+ 9xUGJaieAW8FBvdeMRC1bxMMc7XWsu6mRp4cQFbn3vOoCvzuenu5zOrhO6vyIOXvAdh3CgC+uicI1
+ cZle4dEMfa00FJbFLt+08uJb8o9VAsvLtbXVMc94akWOD53gW7UUXQP4DS+6Io5zbebs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cjYCEXVfF/v6FY+9iZ0VU7bFgnNRemBCTGAbv8j0t24=; b=dIgN+Retu/ZsrCke6J/dudqYou
- V8/gysLyNTioiy5xg+zE4/20MNsVBl5NjhSp1F0GFRv5y+9RTEgAIMN8Hu6He/VbM3k40BAjtKuQh
- zGHYZS6yPim5++hC0UvvPzopDZInZuSfGCaTiESL3lgwRQ/i+hlN3cXYVDGvjU5jp/8s=;
+ ;
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=9YqjZjhyZYm2MVBkzTBBI4NdLNmUNT1JQOKs9R0ubR4=; b=e
+ pEpfehXnAKKmUVpCxDKNbqb8VMyzbas8KuJ8aE2bTfVQ+8kd5RlGbWGhZmGeKwbNgfQ93BRgJBbx0
+ UhR5e2au0fbWnpbO2Wql0y5yQHYy8ik61xmZu5FGzy9zvxQYbzirZrqwBCD3jpRzjioTFGqCqlIZZ
+ 26efl+Z2utzYZYmE=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pn6YI-006zt7-OB for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Apr 2023 23:40:31 +0000
+ id 1pn6YD-0005Mv-0G for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 13 Apr 2023 23:40:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id AC47B64296;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 79F486097C
+ for <linux-f2fs-devel@lists.sourceforge.net>;
  Thu, 13 Apr 2023 23:40:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id DD47AC4339E;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C5E99C433D2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
  Thu, 13 Apr 2023 23:40:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1681429218;
- bh=mLppmDZWTkjo/jvIXTtESwl04zJe3TFM/Gu0KBcnsyg=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=kw36A7ZPnPaYaqCH1/go0ObWYcvaL0SazYqlfRkttlSN5TIUXjelC+EYXqbZ6848B
- KDoeuiDIPiIVI946fupYZPvxoLw/KSkwLZMQCjvyigxvFG8+LJsfXeQJ9CiBK3yg1u
- 99XcVUSyv8/KRUewj8PnI5QMQEg9B717BglTZLem6pYpHxIjJ9rYnD7GfnPfUPpWK7
- 8zTLvhIo7bLxkJsKPNVh7ZhgUbGmgrXCfMAuy/1YS9UH42P/o7t5D0B5+AV3EI1s1v
- hYOjex9/wLOtxhR0TEwmu0xqKPHYL+a6ed1n0bQUVs1ydJ6//h5ORXsriZNjY94Yyr
- l2r/X6uVTgoYw==
+ bh=aD83G0XVZg2wJVpPUlVolrwVdIXgn/fCf4lTTYkfKdI=;
+ h=Subject:From:Date:To:From;
+ b=Z7j5oICugjJnq5D3yHdpvGUkYPFjM2KGxymyHkt0w6ogsQBwRFy7JpsgXnT62IPTM
+ lunSLeXFCP/FcycSW7nxd0Pz8bkniPXRGO8tOJxGDvygioQtPZl7Wy1BwqDHxb7ayA
+ IAT56s0+0Q5v3b0MncXgbMOvzmt/JcLaJprhcVK1MRO7EqtfRNzPMyOptWCJZpvAkX
+ WbXnjZdoDcFD+kj4muYubTbIlYxKVM7mGAQe2qQ6Tqz4IcQ+K89ivp7MLoXXhlRXr1
+ zolLLfPgt6tdkSrT3L7B+Z5lFJLBCt7JYVPoJkg6Up9hg1NY7ce1WDJUydzJLsymYn
+ TcpVRJJGQ8hJA==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- C7060E4D003; Thu, 13 Apr 2023 23:40:18 +0000 (UTC)
+ A3B31C395C5 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 13 Apr 2023 23:40:18 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168142921881.31957.8288025446972589519.git-patchwork-notify@kernel.org>
+Message-Id: <168142921861.31957.13374831617691006612.git-patchwork-summary@kernel.org>
 Date: Thu, 13 Apr 2023 23:40:18 +0000
-References: <20230405144453.930311-1-chao@kernel.org>
-In-Reply-To: <20230405144453.930311-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -73,11 +75,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 5 Apr 2023 22:44:53 +0800 you wrote:
- > Otherwise, if truncation on cow_inode failed, remained data may > pollute
- current transaction of atomic write. > > Cc: Daeho Jeong
- <daehojeong@google.com [...] 
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev] f2fs: fix
+ passing relative address when discard zones Submitter: Daeho Jeong
+ <daeho43@gmail.com>
+ Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/p [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +96,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pn6YI-006zt7-OB
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to check return value of
- f2fs_do_truncate_blocks()
+X-Headers-End: 1pn6YD-0005Mv-0G
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,32 +109,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- daehojeong@google.com, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-On Wed,  5 Apr 2023 22:44:53 +0800 you wrote:
-> Otherwise, if truncation on cow_inode failed, remained data may
-> pollute current transaction of atomic write.
-> 
-> Cc: Daeho Jeong <daehojeong@google.com>
-> Fixes: a46bebd502fe ("f2fs: synchronize atomic write aborts")
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> 
-> [...]
+Patch: [f2fs-dev] f2fs: fix passing relative address when discard zones
+  Submitter: Daeho Jeong <daeho43@gmail.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=737814
+  Lore link: https://lore.kernel.org/r/20230406221104.992322-1-daeho43@gmail.com
 
-Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to check return value of f2fs_do_truncate_blocks()
-    https://git.kernel.org/jaegeuk/f2fs/c/b851ee6ba3cc
+Patch: [f2fs-dev,1/1] f2fs: support iopoll method
+  Submitter: Wu Bo <bo.wu@vivo.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=739447
+  Lore link: https://lore.kernel.org/r/20230413101711.13682-1-bo.wu@vivo.com
 
-You are awesome, thank you!
+Patch: [f2fs-dev] f2fs: remove batched_trim_sections node description
+  Submitter: Yangtao Li <frank.li@vivo.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=736850
+  Lore link: https://lore.kernel.org/r/20230404143832.18234-1-frank.li@vivo.com
+
+Patch: [f2fs-dev] f2fs: fix to check return value of f2fs_do_truncate_blocks()
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=737261
+  Lore link: https://lore.kernel.org/r/20230405144453.930311-1-chao@kernel.org
+
+Patch: [f2fs-dev] f2fs: fix to check return value of inc_valid_block_count()
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=737262
+  Lore link: https://lore.kernel.org/r/20230405144536.930370-1-chao@kernel.org
+
+
+Total patches: 5
+
 -- 
 Deet-doot-dot, I am a bot.
 https://korg.docs.kernel.org/patchwork/pwbot.html
