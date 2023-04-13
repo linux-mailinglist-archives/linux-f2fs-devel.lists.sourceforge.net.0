@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 062316E1128
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 Apr 2023 17:30:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 377186E1130
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 Apr 2023 17:33:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pmytd-00075V-Ee;
-	Thu, 13 Apr 2023 15:30:00 +0000
+	id 1pmyx6-0007aD-QO;
+	Thu, 13 Apr 2023 15:33:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pmytd-00075M-1Q
+ (envelope-from <chao@kernel.org>) id 1pmyx5-0007a6-Qn
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Apr 2023 15:30:00 +0000
+ Thu, 13 Apr 2023 15:33:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PUZuMZ6CeyLoHpniuGz1HCJbIOfOuKdw3gEoM9mSeUA=; b=cd3OnXk15TxijROOdtaw8slDwF
- 7K4VSTs0Hv898AMCneYUuWJnqnYl/t2m3MvrW7GLAOWko9+Q+IDPX5/NGhe0DJnXUkSixB4Rpc/Dy
- 9r3QAvFOOYxpDK2F7YPoX5FRB1UP+vQZXxY5b7Y7StkRScXFQyokmPYnCEm8A6YhzOYM=;
+ bh=5KBMCN/OghfVXdjjt+6NWWf8nfNl7IEIrVkEbI3dp4k=; b=HB0Ofa0luJvPrrY3EHXjx3pbrh
+ EQc24whHo4Cf559pReWpt7wyE2hDHdrA8DkSggML4LsmWmbtrf35kdkRIdzGkO5cvXhlHwTiJFJ1T
+ /LXJ8iN9bFCrA0nmobI0BF8gd/oH83HhbHlagtMKUypMqWq2MwSccQAiosebY5pymyI8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,41 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PUZuMZ6CeyLoHpniuGz1HCJbIOfOuKdw3gEoM9mSeUA=; b=lNTnSorY9YquJPurigga+Q40fb
- djDjfW7zGMgybWIJ4YRerZk9qkEz/L6ZAtSyBtSFQDqjt5ibgcUsiwKQ16gf0xhXojy2aopTrhs/B
- WBAK8gAlx4GwZ2lyVFgrqraYpr87L2St7wpaFIreW38r/XFfUlw3v7NUBZt6S0fcEGxY=;
+ bh=5KBMCN/OghfVXdjjt+6NWWf8nfNl7IEIrVkEbI3dp4k=; b=QahGf7JaflNUJ4geYMaUNkmICX
+ p13x1LDHuu1YvSFlKNx7xuMSXIM5QgNdEacQ9th9p8OlTKk/nyxmo7wDShz07IzK7dKEmVL3YG8e6
+ 66Dv2ir6zIjKl7sjheJY5ARsoleE8IAsw5/LlgfGt5B6KG7zK4D19fQ1QOofq71yooeU=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pmyta-0004tP-N6 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Apr 2023 15:30:00 +0000
+ id 1pmyx5-0004zO-KW for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 13 Apr 2023 15:33:36 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4A7E762F83;
- Thu, 13 Apr 2023 15:29:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BF5C8C433EF;
- Thu, 13 Apr 2023 15:29:50 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 35CC560ACB;
+ Thu, 13 Apr 2023 15:33:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1B19C433EF;
+ Thu, 13 Apr 2023 15:33:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1681399792;
- bh=WCkepq/738+2orq7PK25GkvgPQBCXeI2AO6IC9nQw4M=;
+ s=k20201202; t=1681400009;
+ bh=5KBMCN/OghfVXdjjt+6NWWf8nfNl7IEIrVkEbI3dp4k=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=pne8MER3zV/HpnSukmOpJ94bWO2mctP5nOkEfXOKtvGUS4XZVsuZGNNYvF/Br3Jf/
- 7RbXaoKS1BdeQfi/Fx3kf3uOM/MTi6BIcUJh6FeaEtoOw2iUbfKFOB9L7i47dgJakP
- 4lH3NdPSxUi0RWyHZi2STbTyCN+fUXwhnVMAekiJyALeYvdI3yyDr1Luy9YhUNNn5i
- qMgZhyvUeVfIpA7gJcs5scD48COYexmWEABWr+XZBU44KJ7t4FMMyrZdVgYNa1J27B
- JtrvKKGWszk4z78oU4+AwwKmGu9OzUPP3af6wQEQU5UKuonXg4W/t2p5XqPoc6FBq2
- 1T1MsIpECeepQ==
-Message-ID: <2bce1365-6971-7451-e894-0fb1fc31a641@kernel.org>
-Date: Thu, 13 Apr 2023 23:29:49 +0800
+ b=c0FtRgpeDXzH4qTMCTgXG4mf3ccp5c7nPZDj+3ceh7JVAA44RB6wBTRt05/jPC/OR
+ cLldXBZznKy2G62lR2diHFHw1MLrdfL5TN3uQBoMd+mdqlPTPi/01DF9WbfGp94Aj4
+ 3S9WI9vpgFh5I8Nx6J85FjpAgPBHGBpyg/l6jUhQ+8kd8Ah7i7mtUIuA+BuulHPY+N
+ PhlCqLLt1eY96Uf1IKir/MNGTouUP0Bh160zSlPaEJW0xqm6lxpg+u50AFm+1XVtsA
+ YTmCAYFfcXrIhu9SscO1DG9F0Hov+xNi0AckmdYsYXFHH040V9+1I46ljVd6dzXW8L
+ W6bi9F6mnT9Jg==
+Message-ID: <88e48f65-a68f-6742-fe25-d05e7113c2fc@kernel.org>
+Date: Thu, 13 Apr 2023 23:33:27 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
 Content-Language: en-US
-To: Wu Bo <bo.wu@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230413101711.13682-1-bo.wu@vivo.com>
+To: Yangtao Li <frank.li@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20230412034940.41943-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230413101711.13682-1-bo.wu@vivo.com>
+In-Reply-To: <20230412034940.41943-1-frank.li@vivo.com>
 X-Spam-Score: -6.3 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -73,9 +73,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/4/13 18:17, Wu Bo wrote: > Wire up the iopoll method
- to the common implementation. > As f2fs use common dio infrastructure: >
- commit a1e09b03e6f5 ("f2fs: use iomap for direct I/O") > > Signed- [...] 
+ Content preview:  On 2023/4/12 11:49, Yangtao Li wrote: > For the readable and
+ writable f2fs_attr with struct_type of F2FS_SBI type, > let's directly use
+ the F2FS_SBI_RW_ATTR macro. F2FS_RW_ATTR looks more common to me. 
  Content analysis details:   (-6.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,8 +92,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -1.1 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pmyta-0004tP-N6
-Subject: Re: [f2fs-dev] [PATCH 1/1] f2fs: support iopoll method
+X-Headers-End: 1pmyx5-0004zO-KW
+Subject: Re: [f2fs-dev] [PATCH] f2fs: introduce F2FS_SBI_RW_ATTR macro
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,20 +105,16 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: wubo.oduw@gmail.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/4/13 18:17, Wu Bo wrote:
-> Wire up the iopoll method to the common implementation.
-> As f2fs use common dio infrastructure:
-> commit a1e09b03e6f5 ("f2fs: use iomap for direct I/O")
-> 
-> Signed-off-by: Wu Bo <bo.wu@vivo.com>
+On 2023/4/12 11:49, Yangtao Li wrote:
+> For the readable and writable f2fs_attr with struct_type of F2FS_SBI type,
+> let's directly use the F2FS_SBI_RW_ATTR macro.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+F2FS_RW_ATTR looks more common to me.
 
 Thanks,
 
