@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7377B6E1871
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Apr 2023 01:40:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 366276E186F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Apr 2023 01:40:34 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pn6YN-0007mt-3h;
-	Thu, 13 Apr 2023 23:40:34 +0000
+	id 1pn6YL-0007md-Nx;
+	Thu, 13 Apr 2023 23:40:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pn6YK-0007mV-Qa
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pn6YK-0007mM-76
  for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 13 Apr 2023 23:40:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,50 +21,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vL/80rbqW1MiaNbJyd6RmbqNI7drkpnby40HFmfoBEg=; b=kANsyCXUdcMyn7qVr2JDAtoEsB
- 6yQ6nNta6PrR7ogRNrMSwWtIWHsOpBhJ/Apz8AWS4WaI5ZVISxaQpfwVavE8LgBEqfb36hPquW0E7
- pm2yy6C53aXL8G07gk4xFTV8ZjNlvh6pxxy9/FlgEuNG9Xat7MrBvuTt9zUmh7a8bBIY=;
+ bh=cjYCEXVfF/v6FY+9iZ0VU7bFgnNRemBCTGAbv8j0t24=; b=OAIvo3Ak1PRCLhcTHvwJwq/iii
+ Y/9IJJd1dS1pj0/3kE8l8T1jdYQZgGjEoYdyK10VUmV4DIVvRF+zi0OgHsxTiV4M++ChYrisi+KIU
+ +OMfSyMozVKildmVep+mitla6v3MZ1esU0JJItwwlbdnPpY1pAYKaP6qq/XVBk0EADik=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vL/80rbqW1MiaNbJyd6RmbqNI7drkpnby40HFmfoBEg=; b=TTwMI8nc4LxuhJxCJVOskWhe78
- VOruTBuynvZie3aGG3chnaLcPa/QIWThxvTgZBbwKd2fuSrg+HZVnbjkqVOxQBUj0yPvEvqy96Hdc
- 2lzfKtNoKdBNtNJdMMZbYYwH6bPVuD2ffyZbX599AB1J0hYCwVDZOfuZn+H9cBgYYJY4=;
+ bh=cjYCEXVfF/v6FY+9iZ0VU7bFgnNRemBCTGAbv8j0t24=; b=dIgN+Retu/ZsrCke6J/dudqYou
+ V8/gysLyNTioiy5xg+zE4/20MNsVBl5NjhSp1F0GFRv5y+9RTEgAIMN8Hu6He/VbM3k40BAjtKuQh
+ zGHYZS6yPim5++hC0UvvPzopDZInZuSfGCaTiESL3lgwRQ/i+hlN3cXYVDGvjU5jp/8s=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pn6YJ-006ztU-A7 for linux-f2fs-devel@lists.sourceforge.net;
+ id 1pn6YI-006zt7-OB for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 13 Apr 2023 23:40:31 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 614436429C;
- Thu, 13 Apr 2023 23:40:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id F3324C433A0;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AC47B64296;
+ Thu, 13 Apr 2023 23:40:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id DD47AC4339E;
  Thu, 13 Apr 2023 23:40:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1681429219;
- bh=y1tsCDiR9PB0QaZqwPHvaqN4LWmaz9Wyb/y9A7Tkf5Q=;
+ s=k20201202; t=1681429218;
+ bh=mLppmDZWTkjo/jvIXTtESwl04zJe3TFM/Gu0KBcnsyg=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=ZE0jiYJYP3cQM56F74mfHvqsS8Bkl2etzHgJ+mhyvwgEFuNYXzWCXxabfjm8Up+tu
- amXve31PQc2ZY+SKmEDoaDyRkR+MkD8lqU4+WTNTC6GXiOhUNTn+VPmtpNr+Y1UEaW
- 2yeipsDYoiTcpA10S2vkDWsubTSGQK3euLBKDn+6CVG4//QNhRCApbsLmaf/Dy7k2i
- swIRPhPMKGAJ2VXrcu6FdFwJEPP+Hf/WOjFyWXXDN1zBBhp2+ztgODOWDUPzICGTYl
- 4OPGgAMJSyqsejovCPxp5PrYhddY16ob788ybkaUKzBNEiAQH7RPcIOYxyaATYqqES
- y9QuQUC7AlEmw==
+ b=kw36A7ZPnPaYaqCH1/go0ObWYcvaL0SazYqlfRkttlSN5TIUXjelC+EYXqbZ6848B
+ KDoeuiDIPiIVI946fupYZPvxoLw/KSkwLZMQCjvyigxvFG8+LJsfXeQJ9CiBK3yg1u
+ 99XcVUSyv8/KRUewj8PnI5QMQEg9B717BglTZLem6pYpHxIjJ9rYnD7GfnPfUPpWK7
+ 8zTLvhIo7bLxkJsKPNVh7ZhgUbGmgrXCfMAuy/1YS9UH42P/o7t5D0B5+AV3EI1s1v
+ hYOjex9/wLOtxhR0TEwmu0xqKPHYL+a6ed1n0bQUVs1ydJ6//h5ORXsriZNjY94Yyr
+ l2r/X6uVTgoYw==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- D0646E52505; Thu, 13 Apr 2023 23:40:18 +0000 (UTC)
+ C7060E4D003; Thu, 13 Apr 2023 23:40:18 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168142921884.31957.17494916129948763212.git-patchwork-notify@kernel.org>
+Message-Id: <168142921881.31957.8288025446972589519.git-patchwork-notify@kernel.org>
 Date: Thu, 13 Apr 2023 23:40:18 +0000
-References: <20230405144536.930370-1-chao@kernel.org>
-In-Reply-To: <20230405144536.930370-1-chao@kernel.org>
+References: <20230405144453.930311-1-chao@kernel.org>
+In-Reply-To: <20230405144453.930311-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
@@ -74,10 +74,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 5 Apr 2023 22:45:36 +0800 you wrote:
- > In __replace_atomic_write_block(), we missed to check return value > of
- inc_valid_block_count(), for extreme testcase that f2fs image is > run out
- of spa [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 5 Apr 2023 22:44:53 +0800 you wrote:
+ > Otherwise, if truncation on cow_inode failed, remained data may > pollute
+ current transaction of atomic write. > > Cc: Daeho Jeong
+ <daehojeong@google.com [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +93,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pn6YJ-006ztU-A7
+X-Headers-End: 1pn6YI-006zt7-OB
 Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to check return value of
- inc_valid_block_count()
+ f2fs_do_truncate_blocks()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,21 +118,19 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Wed,  5 Apr 2023 22:45:36 +0800 you wrote:
-> In __replace_atomic_write_block(), we missed to check return value
-> of inc_valid_block_count(), for extreme testcase that f2fs image is
-> run out of space, it may cause inconsistent status in between SIT
-> table and total valid block count.
+On Wed,  5 Apr 2023 22:44:53 +0800 you wrote:
+> Otherwise, if truncation on cow_inode failed, remained data may
+> pollute current transaction of atomic write.
 > 
 > Cc: Daeho Jeong <daehojeong@google.com>
-> Fixes: 3db1de0e582c ("f2fs: change the current atomic write way")
+> Fixes: a46bebd502fe ("f2fs: synchronize atomic write aborts")
 > Signed-off-by: Chao Yu <chao@kernel.org>
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to check return value of inc_valid_block_count()
-    https://git.kernel.org/jaegeuk/f2fs/c/935fc6fa6466
+  - [f2fs-dev] f2fs: fix to check return value of f2fs_do_truncate_blocks()
+    https://git.kernel.org/jaegeuk/f2fs/c/b851ee6ba3cc
 
 You are awesome, thank you!
 -- 
