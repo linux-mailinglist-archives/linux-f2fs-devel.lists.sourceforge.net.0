@@ -2,149 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFFEF6E321A
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 15 Apr 2023 17:31:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 338196E326F
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 15 Apr 2023 18:29:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pnhsN-0003R9-DV;
-	Sat, 15 Apr 2023 15:31:42 +0000
+	id 1pnilo-00020i-JV;
+	Sat, 15 Apr 2023 16:28:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1pnhsM-0003R2-7T
+ (envelope-from <lkp@intel.com>) id 1pniln-00020b-3e
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 15 Apr 2023 15:31:41 +0000
+ Sat, 15 Apr 2023 16:28:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1EGizgU7cjM2YbXEwrOIA9kzvJPnBfTwTXZ43ap4GdM=; b=nQEkh/4ujiNg8EodM5qrREGVfW
- qB6iLRwP1K7PEex+T3fpsAmx6GUv92KSA4wdCBeFrMFXcpXNUZ1sKD6EpC331ZbUNb+6UBJwYyfMF
- IqPX7WDn7WT+6XKYbjz2FSIOjygRn7W9XtaHGsLM+2enjYlYYythI22PcX4tFQckdL1Q=;
+ bh=pXNW+MN0KH9FkXzSOVYbKvttzL3EyvlMug0QLeimEuU=; b=eumkzntpYaRVAsc4kkn5lxGWlY
+ DvOAUcjHUBQ8wkycvQApkhXpaRyYjiqEX+66dHMl1FAChyfdXaba834EXz/TpIWppmJFL+6rCGCJS
+ 23cOGKcwkkC/sS9V2sidgfyv6+4Zm5bzt2ehabR/KLXPge/EX8M9ajryXOizpO0/qFcI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=1EGizgU7cjM2YbXEwrOIA9kzvJPnBfTwTXZ43ap4GdM=; b=d
- RRIvYMYD+JitrZnNESd0vo5KoQSiAWJhPY3fjjDx5WVR6A2xonP1zISuvKW5+DTupA084gOwXul0R
- +qtdZ2psUuJlmov0Fiy29kFvZrdNZZNKvF0xFFCP2UbSZl9TlbAD/7qCTeoOcTVb66JrCDSK4eCsE
- 01w3tADhPYeFuE+Y=;
-Received: from mail-sgaapc01on2138.outbound.protection.outlook.com
- ([40.107.215.138] helo=APC01-SG2-obe.outbound.protection.outlook.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=pXNW+MN0KH9FkXzSOVYbKvttzL3EyvlMug0QLeimEuU=; b=cXRvN1N7h7jjMawMrp2e2XUzIx
+ 9iP+OuWgE8sqj1knWYu2UMvYYWZiiT99nAHotPuQ7k8z7W73a/kxJQhn3D3qkQuoXUv1cLKPOz7qj
+ WVasDtNTnhb968feezrr9R4+KKT+VeopsPxfPOi4efMJDDCulXe5XiNUPnhXK1zxNLqQ=;
+Received: from mga14.intel.com ([192.55.52.115])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pnhsC-0002mV-8U for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 15 Apr 2023 15:31:37 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Q8IyJFGtnm2Z+TJ2Mo/hP8TdGkyewcGitoi23prQt0leDnqf23dktZR5Ha83ye0Nb4FU5GoYNRQt3WjD0bUmZIR+XQ0oH+AWWxKEavByjUEgeg9ARKGSwr4sCTCM49t2TnyGDUfgrExaGW+AYBPeu8GxzDWpkgcu9k2VMrQoPxlQ7GOe+7+pHbHkJ6IGRzDCcMySd4q/DGXAbOg2qhlYtkgEaIVLQwDnpuNpa1ICYQqW/pWGEsZUMTdkj1lZ3pDjknTaelxkuYd0P7HEVpObFcG8kgdcD6otal5lLg0lmNdOUvIXKWE1IYNAkNwdultSeWNAB0MEOW3BuXY0EA20qA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1EGizgU7cjM2YbXEwrOIA9kzvJPnBfTwTXZ43ap4GdM=;
- b=R7lOQ4S1+Otab7jguTWHx3qhuTDOfdvPnPffUl0kRt6UyfNZ26U2h0N3defHDGsJ/pMXXjjAdgX85bTTNNFMrLAQ/ouubP11MwXxl+h+Rldtv7BkiJvpD+YPVLHMuyAD++LjiSsBarZPmCmtYr33GjTbgjP21McFG7EbewlzWtowyvJGV8KuD2OCNHR1X4/RNJVeUJdlMkJaGGIZJ84LbN0x4DtUPYdSAApmxpbdvasFGDhE/VqCzlffd9DC15S/3t96SiJcwBWHFXjgZs7af9k3OqRVZc3EDEofSTQikrO+lpeQk0+SzD4NKDYo8sGoA3zlJrq4Gn72V5Ktoqpi2w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1EGizgU7cjM2YbXEwrOIA9kzvJPnBfTwTXZ43ap4GdM=;
- b=d07x53fhwCqAIctIHLNGR/BnA6BxZJEzLt1f+u55stQ8gpa0WSwbgsTO35V8/yzwaEMm+xWa5GL26V+lzrnQdja2GAdxZGWp7HjIxxJzrvhd8xBn1KTOT2IjUmszSgFLMTvZChTFltXrCUrQsYL/TP8mH+EULfILgc3SZmlSCZ7V5Irkixw5iMJBnvyKexb9VBBFmbb8w/kWcxfVNKh8r2g8qTUsL87aHST4ukWdoCf3WaYwJUKNfXj47+EL7auH7CEb9IaLEskYOHtMzV47KuvA/Lh/iI2LjuHx9136CwfGlTDARicAr8fvROxOUe//jIeqLlYfLGFLrcvz8mTaDA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by SG2PR06MB5431.apcprd06.prod.outlook.com (2603:1096:4:1bb::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.48; Sat, 15 Apr
- 2023 15:31:19 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::a3a1:af8e:be1e:437c]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::a3a1:af8e:be1e:437c%6]) with mapi id 15.20.6277.038; Sat, 15 Apr 2023
- 15:31:18 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>,
-	Chao Yu <chao@kernel.org>
-Date: Sat, 15 Apr 2023 23:29:43 +0800
-Message-Id: <20230415152944.51393-1-frank.li@vivo.com>
-X-Mailer: git-send-email 2.35.1
-X-ClientProxiedBy: SG2PR06CA0213.apcprd06.prod.outlook.com
- (2603:1096:4:68::21) To SEZPR06MB5269.apcprd06.prod.outlook.com
- (2603:1096:101:78::6)
+ id 1pnilk-008oXm-KS for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 15 Apr 2023 16:28:58 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1681576136; x=1713112136;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=7WDFbotKuhiIiJbcxbHdXMWDMXq/tVrwwzO/KDspDBE=;
+ b=Z3QvjMqTZBgmVqAfle2CuIo/i511pEjE+hatap3RRczjLRWw7g6llPRK
+ Te2P4Nrqhf/m4Yd0n0UswXh8qntDCHDweRSFji9zSH5kib4U85r4jBoHB
+ XdyOH9y28KRrSTsq/bWjNzqP5X8w3kN7qHj5MaFMVGDoGKPVD5roCw08I
+ ns0nFFT9cduvtzIpJMfkptKurR++jVASsphkjTqmftoTmOK1a7OWfCykM
+ dSOY75j3tNjIj0eGZQd4sM44Dr7IjsOo7BjNjjbpNugZcTv82V4SvSAM1
+ rq3hvJ0biDWN1y1Ajqu4qyHiNw+lYOde4/if5aI0KL/gLJEVVjFXwrt4u w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10681"; a="344656229"
+X-IronPort-AV: E=Sophos;i="5.99,200,1677571200"; d="scan'208";a="344656229"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+ by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 Apr 2023 09:28:50 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10681"; a="936370018"
+X-IronPort-AV: E=Sophos;i="5.99,200,1677571200"; d="scan'208";a="936370018"
+Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
+ by fmsmga006.fm.intel.com with ESMTP; 15 Apr 2023 09:28:48 -0700
+Received: from kbuild by b613635ddfff with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1pnilb-000bCt-2B;
+ Sat, 15 Apr 2023 16:28:47 +0000
+Date: Sun, 16 Apr 2023 00:28:23 +0800
+From: kernel test robot <lkp@intel.com>
+To: Yangtao Li <frank.li@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Chao Yu <yuchao0@huawei.com>, Chao Yu <chao@kernel.org>
+Message-ID: <202304160030.xKck82Nx-lkp@intel.com>
+References: <20230415132446.13063-1-frank.li@vivo.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SG2PR06MB5431:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3acd43b5-4297-408e-0c10-08db3dc67540
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: soBbx5HCpjU/H3+Ri9XOeFJlkBofsszXMrr97l2974I+OSrgK+sz6fmjpkZAi6zSww8JGXvnI47ZLPZjP7cD4G5BPzdRErQTRrrQVoRltH0uTXjUbubDBZpZbmXVHRoGdnVFlkBXdj6EJdSo4jACthIkOwe6y+L68Mpg2ciXcpGyFZ1A+4GSdApHPESXaqvNnlLjVx5LYAQheXLVmw7IPOpZCNWwuqs09luCu2OpHzntNqTqBrDwcFMVAjIrYrp+UGKG3jsntcsMI2lMwmrso94x+t7j4MejiidgkLA9e10Uo+MOpxqf3Zg1M42BvJvTglWAN6L6Z6xMlTtaEe5FfK1EAClocgvJOsvTAx2nHH6iz84WXJWSrfemsBnr6i6Ofa3UMnZk9kVbPgZvERQRCugDm3MFHsMk/SNTpqN87ZENQPN9bIriEIUMIlx5nqh8TNzni2maBIft2jRkHArceDMDMttNqjS9sk7GDxKaFUt8dXUHVKDrlvH03Gje4iJIAV/8D5Dh4Y52ncHjCeVc1UN2V5TOAbWwq+yz3ucLwSJfyM1orlbfEPw0m7IK/xWvmSgTV5GPw3ZD5CA3zM0XbOdi0XB2iH7FeCdcRxrcyow=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(4636009)(136003)(376002)(346002)(366004)(396003)(39860400002)(451199021)(52116002)(966005)(6486002)(110136005)(30864003)(478600001)(54906003)(316002)(6666004)(2906002)(8936002)(8676002)(36756003)(2616005)(66946007)(66556008)(186003)(4326008)(66476007)(83380400001)(38100700002)(38350700002)(41300700001)(5660300002)(6512007)(6506007)(26005)(86362001)(1076003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dgvqSGez4Sq1oQuHx+k1cwHvS6umpAL6TRCjk4iSmNzXX0mxPPxYBNfl1eXJ?=
- =?us-ascii?Q?almaY6WgzK0V45MJGoXTTXyeP6py4sQKG9Mlaz+Fl56NkplWyGtLXssGJlFh?=
- =?us-ascii?Q?m78OegoftojGPTSH/RIJfzcMFmIQFEB+UFI5xE4cg29ulfl4FsGE205Irial?=
- =?us-ascii?Q?KqYTCS3qeaoL5/8OCEGh0188bk5XqtBYq6eYzfcfjIYJxwHhspdQy4Dm7Fcr?=
- =?us-ascii?Q?yR0v6tQa0hDUt8uV4ycM5Nw/orWHVOg1MBsYmt2bvQ5HoIQ9ldFWREA0Nrpp?=
- =?us-ascii?Q?hJmXha/CPcTVzFWABy5/ge/ryGAdWFHhwU9f31adYtH4aMFVALw7VTFwFi/i?=
- =?us-ascii?Q?7rV4o4Zfk6tvYHbVM8KjPmFE4ncIhG4JYwaGUHuZDx+kjR4iOl1QtPM0NyV5?=
- =?us-ascii?Q?S8H7f+MzcnS2CMxq6A3Uw2fJx+JyjdI6uTOSeqqCJnXi4KZDyQgODQJi5oqx?=
- =?us-ascii?Q?x418gjP76w9QqSJhLTR4uWlhCAmkzMOeXzhld9GD9E2lbDuqR2PxQf/y8+Rz?=
- =?us-ascii?Q?oROczhaxker8ju2gj22CKNm4v3zj0/CssI4kKbO+xtqcFWAlI8Wu8p0KD47o?=
- =?us-ascii?Q?7xZUnvEfX+yMT62yKw4lSbgPG0qmpetfhPkR2p4QRmV+n2UeJozJHSZ9qQAX?=
- =?us-ascii?Q?YIesmvz6djHQ4EpC1HKuHXvOjCQEC9yV1KfSVswegZVx+mt7kkTbbGYmZVwR?=
- =?us-ascii?Q?i0cE3UQX0EAAdCXA9kjR4rUJt/t0l3OWolvtnJVMya8JGK5JyA/uJiq7PSrz?=
- =?us-ascii?Q?OpVHhHcteoBZQp7L+joY5qSQIzsDhZk7/MBjK65YS357i/M6RxBbsl9usk5L?=
- =?us-ascii?Q?oWF0JniPtn/rd3A3OsFS/nJQeMBDaCI5f1kbZEWJX6cyrVm/vTsIvEQJty6H?=
- =?us-ascii?Q?4udXA5yyLZ2O9/UtqKGXAbyJy3PlOfIfWErEASOf7xNzVP4zgkoekmQ7OjbS?=
- =?us-ascii?Q?H/LGqRCd1mSo114M/AHkXenNxhKA1Ybr81RFHZ9AX/QMVo0Ig8soPnU2t6yo?=
- =?us-ascii?Q?utj5XEQfGQslV4a/wGc2tdKxRz74TtsV7pKvgiunfbAejtsGHo6YEKUHq82H?=
- =?us-ascii?Q?G3Ux3ENbDJZRXhMGtmrvsB4Hu2VHtv3rliOT+OYQmim6tBapMUK49QO9ngbI?=
- =?us-ascii?Q?Bqwp8D8vwkmXPcZfV+9Gwc3y94ux5wxtco17cq7pO0NsaZt02bJ7/ilCgSIL?=
- =?us-ascii?Q?r79SFrjP/br43ZedJXH8pa2j7IwOCZDrIp5e6LpDzndQJOmBraHoNKle3Zcd?=
- =?us-ascii?Q?VB23smpmLlzRjomnp88ibKuYKHqy4/1UQLVOdT/0EVh85OfVjuRGYmpvjIY0?=
- =?us-ascii?Q?eBHaEWQP3yACHXaScdyMtpF/jRAIlgQooBDaeOCs9mSdIvrhj7QT9SwsjmT/?=
- =?us-ascii?Q?925pRoy33tnBhc6425Dd4z7Q1J738bh9/vWRwjXknT3M+T8rT9zp/8fMfHo1?=
- =?us-ascii?Q?Vj8JUawbBuuQWZgVUaCTM2dTCplXtCt2zTUmM6MKBTNAjTr9jwmn4Zx+rX4T?=
- =?us-ascii?Q?jxCEdOTPG0pZwVrcR4LSY4kJfHgE0ckX1pR+w91W3cquwP78C6ngmy62/pLo?=
- =?us-ascii?Q?l4Ezf7dyv1SEPj9c4lc1oD6DGGyQAU2ADDaLqbfh?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3acd43b5-4297-408e-0c10-08db3dc67540
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2023 15:31:18.5383 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NcQqXqlZqn+5aUWAc+2ByEh4nWSp8osZRcS5Hxl58+L8nNNQnqZMTiuJXmJTZj6kvkgHFa848G+QqzN/yfI8lQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2PR06MB5431
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <20230415132446.13063-1-frank.li@vivo.com>
+X-Spam-Score: -3.2 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch provides a large number of variants of
- F2FS_RW_ATTR and F2FS_RO_ATTR macros,
- reducing the number of parameters required to initialize
- the f2fs_attr structure. Reported-by: kernel test robot <lkp@intel.com> Link:
- https://lore.kernel.org/oe-kbuild-all/202304152234.wjaY3IYm-lkp@intel.com/
- Signed-off-by: Yangtao Li <frank.li@vivo.com> --- v2: -fix compile error
- [...] Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  Hi Yangtao, kernel test robot noticed the following build
+ errors: [auto build test ERROR on jaegeuk-f2fs/dev-test] [also build test
+ ERROR on jaegeuk-f2fs/dev] [cannot apply to linus/master v6.3-rc6] [If your
+ patch is applied to the wrong git tree, kindly drop us a n [...] 
+ Content analysis details:   (-3.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.215.138 listed in wl.mailspike.net]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [192.55.52.115 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.215.138 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -152,8 +98,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1pnhsC-0002mV-8U
-Subject: [f2fs-dev] [PATCH v2] f2fs: refactor struct f2fs_attr macro
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pnilk-008oXm-KS
+Subject: Re: [f2fs-dev] [PATCH] f2fs: refactor struct f2fs_attr macro
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -165,307 +112,263 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yangtao Li <frank.li@vivo.com>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel test robot <lkp@intel.com>, Yangtao Li <frank.li@vivo.com>
+Cc: linux-kernel@vger.kernel.org, llvm@lists.linux.dev,
+ linux-f2fs-devel@lists.sourceforge.net, Yangtao Li <frank.li@vivo.com>,
+ oe-kbuild-all@lists.linux.dev
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch provides a large number of variants of F2FS_RW_ATTR
-and F2FS_RO_ATTR macros, reducing the number of parameters required
-to initialize the f2fs_attr structure.
+Hi Yangtao,
 
-Reported-by: kernel test robot <lkp@intel.com>
-Link: https://lore.kernel.org/oe-kbuild-all/202304152234.wjaY3IYm-lkp@intel.com/
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
----
-v2:
--fix compile error
- fs/f2fs/sysfs.c | 237 +++++++++++++++++++++++++++++-------------------
- 1 file changed, 146 insertions(+), 91 deletions(-)
+kernel test robot noticed the following build errors:
 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 8ea05340bad9..1fb38b222684 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -842,68 +842,157 @@ static struct f2fs_attr f2fs_attr_##_name = {			\
- #define F2FS_GENERAL_RO_ATTR(name) \
- static struct f2fs_attr f2fs_attr_##name = __ATTR(name, 0444, name##_show, NULL)
- 
--#define F2FS_STAT_ATTR(_struct_type, _struct_name, _name, _elname)	\
--static struct f2fs_attr f2fs_attr_##_name = {			\
--	.attr = {.name = __stringify(_name), .mode = 0444 },	\
--	.show = f2fs_sbi_show,					\
--	.struct_type = _struct_type,				\
--	.offset = offsetof(struct _struct_name, _elname),       \
--}
-+#define STAT_INFO_RO_ATTR(name, elname)				\
-+	F2FS_RO_ATTR(STAT_INFO, f2fs_stat_info, name, elname)	\
-+
-+#define GC_THREAD_RW_ATTR(name, elname)				\
-+	F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, name, elname)	\
-+
-+#define SM_INFO_RW_ATTR(name, elname)				\
-+	F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, name, elname)	\
-+
-+#define SM_INFO_GENERAL_RW_ATTR(elname)				\
-+	SM_INFO_RW_ATTR(elname, elname)				\
-+
-+#define DCC_INFO_RW_ATTR(name, elname)					\
-+	F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, name, elname)	\
-+
-+#define DCC_INFO_GENERAL_RW_ATTR(elname)			\
-+	DCC_INFO_RW_ATTR(elname, elname)			\
-+
-+#define NM_INFO_RW_ATTR(name, elname)				\
-+	F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, name, elname)	\
-+
-+#define NM_INFO_GENERAL_RW_ATTR(elname)				\
-+	NM_INFO_RW_ATTR(elname, elname)				\
-+
-+#define F2FS_SBI_RW_ATTR(name, elname)				\
-+	F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, name, elname)	\
-+
-+#define F2FS_SBI_GENERAL_RW_ATTR(elname)			\
-+	F2FS_SBI_RW_ATTR(elname, elname)			\
-+
-+#define F2FS_SBI_GENERAL_RO_ATTR(elname)			\
-+	F2FS_RO_ATTR(F2FS_SBI, f2fs_sb_info, elname, elname)	\
-+
-+#define FAULT_INFO_RATE_GENERAL_RW_ATTR(elname)				\
-+	F2FS_RW_ATTR(FAULT_INFO_RATE, f2fs_fault_info, elname, elname)	\
-+
-+#define FAULT_INFO_TYPE_GENERAL_RW_ATTR(elname)				\
-+	F2FS_RW_ATTR(FAULT_INFO_TYPE, f2fs_fault_info, elname, elname)	\
-+
-+#define RESERVED_BLOCKS_GENERAL_RW_ATTR(elname)				\
-+	F2FS_RW_ATTR(RESERVED_BLOCKS, f2fs_sb_info, elname, elname)	\
-+
-+#define CPRC_INFO_GENERAL_RW_ATTR(elname)				\
-+	F2FS_RW_ATTR(CPRC_INFO, ckpt_req_control, elname, elname)	\
-+
-+#define ATGC_INFO_RW_ATTR(name, elname)				\
-+	F2FS_RW_ATTR(ATGC_INFO, atgc_management, name, elname)	\
- 
--F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_urgent_sleep_time,
--							urgent_sleep_time);
--F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_min_sleep_time, min_sleep_time);
--F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_max_sleep_time, max_sleep_time);
--F2FS_RW_ATTR(GC_THREAD, f2fs_gc_kthread, gc_no_gc_sleep_time, no_gc_sleep_time);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_idle, gc_mode);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_urgent, gc_mode);
--F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, reclaim_segments, rec_prefree_segments);
--F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_small_discards, max_discards);
--F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_request, max_discard_request);
--F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, min_discard_issue_time, min_discard_issue_time);
--F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, mid_discard_issue_time, mid_discard_issue_time);
--F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_issue_time, max_discard_issue_time);
--F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_io_aware_gran, discard_io_aware_gran);
--F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_urgent_util, discard_urgent_util);
--F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_granularity, discard_granularity);
--F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_ordered_discard, max_ordered_discard);
--F2FS_RW_ATTR(RESERVED_BLOCKS, f2fs_sb_info, reserved_blocks, reserved_blocks);
--F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, ipu_policy, ipu_policy);
--F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, min_ipu_util, min_ipu_util);
--F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, min_fsync_blocks, min_fsync_blocks);
--F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, min_seq_blocks, min_seq_blocks);
--F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, min_hot_blocks, min_hot_blocks);
--F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, min_ssr_sections, min_ssr_sections);
--F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, ram_thresh, ram_thresh);
--F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, ra_nid_pages, ra_nid_pages);
--F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, dirty_nats_ratio, dirty_nats_ratio);
--F2FS_RW_ATTR(NM_INFO, f2fs_nm_info, max_roll_forward_node_blocks, max_rf_node_blocks);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_victim_search, max_victim_search);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, migration_granularity, migration_granularity);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, dir_level, dir_level);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, cp_interval, interval_time[CP_TIME]);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, idle_interval, interval_time[REQ_TIME]);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, discard_idle_interval,
--					interval_time[DISCARD_TIME]);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_idle_interval, interval_time[GC_TIME]);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info,
--		umount_discard_timeout, interval_time[UMOUNT_DISCARD_TIMEOUT]);
-+/* GC_THREAD ATTR */
-+GC_THREAD_RW_ATTR(gc_urgent_sleep_time, urgent_sleep_time);
-+GC_THREAD_RW_ATTR(gc_min_sleep_time, min_sleep_time);
-+GC_THREAD_RW_ATTR(gc_max_sleep_time, max_sleep_time);
-+GC_THREAD_RW_ATTR(gc_no_gc_sleep_time, no_gc_sleep_time);
-+
-+/* SM_INFO ATTR */
-+SM_INFO_RW_ATTR(reclaim_segments, rec_prefree_segments);
-+SM_INFO_GENERAL_RW_ATTR(ipu_policy);
-+SM_INFO_GENERAL_RW_ATTR(min_ipu_util);
-+SM_INFO_GENERAL_RW_ATTR(min_fsync_blocks);
-+SM_INFO_GENERAL_RW_ATTR(min_seq_blocks);
-+SM_INFO_GENERAL_RW_ATTR(min_hot_blocks);
-+SM_INFO_GENERAL_RW_ATTR(min_ssr_sections);
-+
-+/* DCC_INFO ATTR */
-+DCC_INFO_RW_ATTR(max_small_discards, max_discards);
-+DCC_INFO_GENERAL_RW_ATTR(max_discard_request);
-+DCC_INFO_GENERAL_RW_ATTR(min_discard_issue_time);
-+DCC_INFO_GENERAL_RW_ATTR(mid_discard_issue_time);
-+DCC_INFO_GENERAL_RW_ATTR(max_discard_issue_time);
-+DCC_INFO_GENERAL_RW_ATTR(discard_io_aware_gran);
-+DCC_INFO_GENERAL_RW_ATTR(discard_urgent_util);
-+DCC_INFO_GENERAL_RW_ATTR(discard_granularity);
-+DCC_INFO_GENERAL_RW_ATTR(max_ordered_discard);
-+
-+/* NM_INFO ATTR */
-+NM_INFO_RW_ATTR(max_roll_forward_node_blocks, max_rf_node_blocks);
-+NM_INFO_GENERAL_RW_ATTR(ram_thresh);
-+NM_INFO_GENERAL_RW_ATTR(ra_nid_pages);
-+NM_INFO_GENERAL_RW_ATTR(dirty_nats_ratio);
-+
-+/* F2FS_SBI ATTR */
-+F2FS_RW_ATTR(F2FS_SBI, f2fs_super_block, extension_list, extension_list);
-+F2FS_SBI_RW_ATTR(gc_idle, gc_mode);
-+F2FS_SBI_RW_ATTR(gc_urgent, gc_mode);
-+F2FS_SBI_RW_ATTR(cp_interval, interval_time[CP_TIME]);
-+F2FS_SBI_RW_ATTR(idle_interval, interval_time[REQ_TIME]);
-+F2FS_SBI_RW_ATTR(discard_idle_interval, interval_time[DISCARD_TIME]);
-+F2FS_SBI_RW_ATTR(gc_idle_interval, interval_time[GC_TIME]);
-+F2FS_SBI_RW_ATTR(umount_discard_timeout, interval_time[UMOUNT_DISCARD_TIMEOUT]);
-+F2FS_SBI_RW_ATTR(gc_pin_file_thresh, gc_pin_file_threshold);
-+F2FS_SBI_RW_ATTR(gc_reclaimed_segments, gc_reclaimed_segs);
-+F2FS_SBI_GENERAL_RW_ATTR(max_victim_search);
-+F2FS_SBI_GENERAL_RW_ATTR(migration_granularity);
-+F2FS_SBI_GENERAL_RW_ATTR(dir_level);
- #ifdef CONFIG_F2FS_IOSTAT
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, iostat_enable, iostat_enable);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, iostat_period_ms, iostat_period_ms);
-+F2FS_SBI_GENERAL_RW_ATTR(iostat_enable);
-+F2FS_SBI_GENERAL_RW_ATTR(iostat_period_ms);
- #endif
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, readdir_ra, readdir_ra);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_io_bytes, max_io_bytes);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_pin_file_thresh, gc_pin_file_threshold);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_super_block, extension_list, extension_list);
-+F2FS_SBI_GENERAL_RW_ATTR(readdir_ra);
-+F2FS_SBI_GENERAL_RW_ATTR(max_io_bytes);
-+F2FS_SBI_GENERAL_RW_ATTR(data_io_flag);
-+F2FS_SBI_GENERAL_RW_ATTR(node_io_flag);
-+F2FS_SBI_GENERAL_RW_ATTR(gc_remaining_trials);
-+F2FS_SBI_GENERAL_RW_ATTR(seq_file_ra_mul);
-+F2FS_SBI_GENERAL_RW_ATTR(gc_segment_mode);
-+F2FS_SBI_GENERAL_RW_ATTR(max_fragment_chunk);
-+F2FS_SBI_GENERAL_RW_ATTR(max_fragment_hole);
-+#ifdef CONFIG_F2FS_FS_COMPRESSION
-+F2FS_SBI_GENERAL_RW_ATTR(compr_written_block);
-+F2FS_SBI_GENERAL_RW_ATTR(compr_saved_block);
-+F2FS_SBI_GENERAL_RW_ATTR(compr_new_inode);
-+F2FS_SBI_GENERAL_RW_ATTR(compress_percent);
-+F2FS_SBI_GENERAL_RW_ATTR(compress_watermark);
-+#endif
-+F2FS_SBI_GENERAL_RW_ATTR(peak_atomic_write);
-+F2FS_SBI_GENERAL_RW_ATTR(committed_atomic_block);
-+F2FS_SBI_GENERAL_RW_ATTR(revoked_atomic_block);
-+F2FS_SBI_GENERAL_RW_ATTR(hot_data_age_threshold);
-+F2FS_SBI_GENERAL_RW_ATTR(warm_data_age_threshold);
-+F2FS_SBI_GENERAL_RW_ATTR(last_age_weight);
-+F2FS_SBI_GENERAL_RO_ATTR(current_atomic_write);
-+#ifdef CONFIG_BLK_DEV_ZONED
-+F2FS_SBI_GENERAL_RO_ATTR(unusable_blocks_per_sec);
-+#endif
-+
-+/* STAT_INFO ATTR */
-+#ifdef CONFIG_F2FS_STAT_FS
-+STAT_INFO_RO_ATTR(cp_foreground_calls, cp_count);
-+STAT_INFO_RO_ATTR(cp_background_calls, bg_cp_count);
-+STAT_INFO_RO_ATTR(gc_foreground_calls, call_count);
-+STAT_INFO_RO_ATTR(gc_background_calls, bg_gc);
-+#endif
-+
-+/* FAULT_INFO ATTR */
- #ifdef CONFIG_F2FS_FAULT_INJECTION
--F2FS_RW_ATTR(FAULT_INFO_RATE, f2fs_fault_info, inject_rate, inject_rate);
--F2FS_RW_ATTR(FAULT_INFO_TYPE, f2fs_fault_info, inject_type, inject_type);
-+FAULT_INFO_RATE_GENERAL_RW_ATTR(inject_rate);
-+FAULT_INFO_TYPE_GENERAL_RW_ATTR(inject_type);
- #endif
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, data_io_flag, data_io_flag);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, node_io_flag, node_io_flag);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_remaining_trials, gc_remaining_trials);
--F2FS_RW_ATTR(CPRC_INFO, ckpt_req_control, ckpt_thread_ioprio, ckpt_thread_ioprio);
-+
-+/* RESERVED_BLOCKS ATTR */
-+RESERVED_BLOCKS_GENERAL_RW_ATTR(reserved_blocks);
-+
-+/* CPRC_INFO ATTR */
-+CPRC_INFO_GENERAL_RW_ATTR(ckpt_thread_ioprio);
-+
-+/* ATGC_INFO ATTR */
-+ATGC_INFO_RW_ATTR(atgc_candidate_ratio, candidate_ratio);
-+ATGC_INFO_RW_ATTR(atgc_candidate_count, max_candidate_count);
-+ATGC_INFO_RW_ATTR(atgc_age_weight, age_weight);
-+ATGC_INFO_RW_ATTR(atgc_age_threshold, age_threshold);
-+
- F2FS_GENERAL_RO_ATTR(dirty_segments);
- F2FS_GENERAL_RO_ATTR(free_segments);
- F2FS_GENERAL_RO_ATTR(ovp_segments);
-@@ -917,10 +1006,6 @@ F2FS_GENERAL_RO_ATTR(main_blkaddr);
- F2FS_GENERAL_RO_ATTR(pending_discard);
- F2FS_GENERAL_RO_ATTR(gc_mode);
- #ifdef CONFIG_F2FS_STAT_FS
--F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_foreground_calls, cp_count);
--F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, cp_background_calls, bg_cp_count);
--F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, gc_foreground_calls, call_count);
--F2FS_STAT_ATTR(STAT_INFO, f2fs_stat_info, gc_background_calls, bg_gc);
- F2FS_GENERAL_RO_ATTR(moved_blocks_background);
- F2FS_GENERAL_RO_ATTR(moved_blocks_foreground);
- F2FS_GENERAL_RO_ATTR(avg_vblocks);
-@@ -935,8 +1020,6 @@ F2FS_FEATURE_RO_ATTR(encrypted_casefold);
- #endif /* CONFIG_FS_ENCRYPTION */
- #ifdef CONFIG_BLK_DEV_ZONED
- F2FS_FEATURE_RO_ATTR(block_zoned);
--F2FS_RO_ATTR(F2FS_SBI, f2fs_sb_info, unusable_blocks_per_sec,
--					unusable_blocks_per_sec);
- #endif
- F2FS_FEATURE_RO_ATTR(atomic_write);
- F2FS_FEATURE_RO_ATTR(extra_attr);
-@@ -956,37 +1039,9 @@ F2FS_FEATURE_RO_ATTR(casefold);
- F2FS_FEATURE_RO_ATTR(readonly);
- #ifdef CONFIG_F2FS_FS_COMPRESSION
- F2FS_FEATURE_RO_ATTR(compression);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compr_written_block, compr_written_block);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compr_saved_block, compr_saved_block);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compr_new_inode, compr_new_inode);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compress_percent, compress_percent);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, compress_watermark, compress_watermark);
- #endif
- F2FS_FEATURE_RO_ATTR(pin_file);
- 
--/* For ATGC */
--F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_candidate_ratio, candidate_ratio);
--F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_candidate_count, max_candidate_count);
--F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_weight, age_weight);
--F2FS_RW_ATTR(ATGC_INFO, atgc_management, atgc_age_threshold, age_threshold);
--
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, seq_file_ra_mul, seq_file_ra_mul);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_segment_mode, gc_segment_mode);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, gc_reclaimed_segments, gc_reclaimed_segs);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_fragment_chunk, max_fragment_chunk);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_fragment_hole, max_fragment_hole);
--
--/* For atomic write */
--F2FS_RO_ATTR(F2FS_SBI, f2fs_sb_info, current_atomic_write, current_atomic_write);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, peak_atomic_write, peak_atomic_write);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, committed_atomic_block, committed_atomic_block);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, revoked_atomic_block, revoked_atomic_block);
--
--/* For block age extent cache */
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, hot_data_age_threshold, hot_data_age_threshold);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, warm_data_age_threshold, warm_data_age_threshold);
--F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, last_age_weight, last_age_weight);
--
- #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
- static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(gc_urgent_sleep_time),
+[auto build test ERROR on jaegeuk-f2fs/dev-test]
+[also build test ERROR on jaegeuk-f2fs/dev]
+[cannot apply to linus/master v6.3-rc6]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Yangtao-Li/f2fs-refactor-struct-f2fs_attr-macro/20230415-212520
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
+patch link:    https://lore.kernel.org/r/20230415132446.13063-1-frank.li%40vivo.com
+patch subject: [PATCH] f2fs: refactor struct f2fs_attr macro
+config: arm-randconfig-r046-20230410 (https://download.01.org/0day-ci/archive/20230416/202304160030.xKck82Nx-lkp@intel.com/config)
+compiler: clang version 17.0.0 (https://github.com/llvm/llvm-project 9638da200e00bd069e6dd63604e14cbafede9324)
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # install arm cross compiling tool for clang build
+        # apt-get install binutils-arm-linux-gnueabi
+        # https://github.com/intel-lab-lkp/linux/commit/280d6a5b38dd6b5a5303f5426e9f71466a13f047
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Yangtao-Li/f2fs-refactor-struct-f2fs_attr-macro/20230415-212520
+        git checkout 280d6a5b38dd6b5a5303f5426e9f71466a13f047
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=arm olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=arm SHELL=/bin/bash fs/f2fs/
+
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Link: https://lore.kernel.org/oe-kbuild-all/202304160030.xKck82Nx-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> fs/f2fs/sysfs.c:981:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]
+   FAULT_INFO_TYPE_GENERAL_RW_ATTR(inject_type);
+   ^
+   int
+>> fs/f2fs/sysfs.c:981:33: error: a parameter list without types is only allowed in a function definition
+   FAULT_INFO_TYPE_GENERAL_RW_ATTR(inject_type);
+                                   ^
+>> fs/f2fs/sysfs.c:1094:2: error: use of undeclared identifier 'f2fs_attr_inject_type'; did you mean 'f2fs_attr_inject_rate'?
+           ATTR_LIST(inject_type),
+           ^
+   fs/f2fs/sysfs.c:1045:27: note: expanded from macro 'ATTR_LIST'
+   #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
+                             ^
+   <scratch space>:20:1: note: expanded from here
+   f2fs_attr_inject_type
+   ^
+   fs/f2fs/sysfs.c:980:1: note: 'f2fs_attr_inject_rate' declared here
+   FAULT_INFO_RATE_GENERAL_RW_ATTR(inject_rate);
+   ^
+   fs/f2fs/sysfs.c:879:2: note: expanded from macro 'FAULT_INFO_RATE_GENERAL_RW_ATTR'
+           F2FS_RW_ATTR(FAULT_INFO_RATE, f2fs_fault_info, elname, elname)  \
+           ^
+   fs/f2fs/sysfs.c:838:2: note: expanded from macro 'F2FS_RW_ATTR'
+           F2FS_ATTR_OFFSET(struct_type, name, 0644,               \
+           ^
+   fs/f2fs/sysfs.c:824:25: note: expanded from macro 'F2FS_ATTR_OFFSET'
+   static struct f2fs_attr f2fs_attr_##_name = {                   \
+                           ^
+   <scratch space>:48:1: note: expanded from here
+   f2fs_attr_inject_rate
+   ^
+   3 errors generated.
+
+
+vim +/int +981 fs/f2fs/sysfs.c
+
+   977	
+   978	/* FAULT_INFO ATTR */
+   979	#ifdef CONFIG_F2FS_FAULT_INJECTION
+   980	FAULT_INFO_RATE_GENERAL_RW_ATTR(inject_rate);
+ > 981	FAULT_INFO_TYPE_GENERAL_RW_ATTR(inject_type);
+   982	#endif
+   983	
+   984	/* RESERVED_BLOCKS ATTR */
+   985	RESERVED_BLOCKS_GENERAL_RW_ATTR(reserved_blocks);
+   986	
+   987	/* CPRC_INFO ATTR */
+   988	CPRC_INFO_GENERAL_RW_ATTR(ckpt_thread_ioprio);
+   989	
+   990	/* ATGC_INFO ATTR */
+   991	ATGC_INFO_RW_ATTR(atgc_candidate_ratio, candidate_ratio);
+   992	ATGC_INFO_RW_ATTR(atgc_candidate_count, max_candidate_count);
+   993	ATGC_INFO_RW_ATTR(atgc_age_weight, age_weight);
+   994	ATGC_INFO_RW_ATTR(atgc_age_threshold, age_threshold);
+   995	
+   996	F2FS_GENERAL_RO_ATTR(dirty_segments);
+   997	F2FS_GENERAL_RO_ATTR(free_segments);
+   998	F2FS_GENERAL_RO_ATTR(ovp_segments);
+   999	F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
+  1000	F2FS_GENERAL_RO_ATTR(features);
+  1001	F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
+  1002	F2FS_GENERAL_RO_ATTR(unusable);
+  1003	F2FS_GENERAL_RO_ATTR(encoding);
+  1004	F2FS_GENERAL_RO_ATTR(mounted_time_sec);
+  1005	F2FS_GENERAL_RO_ATTR(main_blkaddr);
+  1006	F2FS_GENERAL_RO_ATTR(pending_discard);
+  1007	F2FS_GENERAL_RO_ATTR(gc_mode);
+  1008	#ifdef CONFIG_F2FS_STAT_FS
+  1009	F2FS_GENERAL_RO_ATTR(moved_blocks_background);
+  1010	F2FS_GENERAL_RO_ATTR(moved_blocks_foreground);
+  1011	F2FS_GENERAL_RO_ATTR(avg_vblocks);
+  1012	#endif
+  1013	
+  1014	#ifdef CONFIG_FS_ENCRYPTION
+  1015	F2FS_FEATURE_RO_ATTR(encryption);
+  1016	F2FS_FEATURE_RO_ATTR(test_dummy_encryption_v2);
+  1017	#if IS_ENABLED(CONFIG_UNICODE)
+  1018	F2FS_FEATURE_RO_ATTR(encrypted_casefold);
+  1019	#endif
+  1020	#endif /* CONFIG_FS_ENCRYPTION */
+  1021	#ifdef CONFIG_BLK_DEV_ZONED
+  1022	F2FS_FEATURE_RO_ATTR(block_zoned);
+  1023	#endif
+  1024	F2FS_FEATURE_RO_ATTR(atomic_write);
+  1025	F2FS_FEATURE_RO_ATTR(extra_attr);
+  1026	F2FS_FEATURE_RO_ATTR(project_quota);
+  1027	F2FS_FEATURE_RO_ATTR(inode_checksum);
+  1028	F2FS_FEATURE_RO_ATTR(flexible_inline_xattr);
+  1029	F2FS_FEATURE_RO_ATTR(quota_ino);
+  1030	F2FS_FEATURE_RO_ATTR(inode_crtime);
+  1031	F2FS_FEATURE_RO_ATTR(lost_found);
+  1032	#ifdef CONFIG_FS_VERITY
+  1033	F2FS_FEATURE_RO_ATTR(verity);
+  1034	#endif
+  1035	F2FS_FEATURE_RO_ATTR(sb_checksum);
+  1036	#if IS_ENABLED(CONFIG_UNICODE)
+  1037	F2FS_FEATURE_RO_ATTR(casefold);
+  1038	#endif
+  1039	F2FS_FEATURE_RO_ATTR(readonly);
+  1040	#ifdef CONFIG_F2FS_FS_COMPRESSION
+  1041	F2FS_FEATURE_RO_ATTR(compression);
+  1042	#endif
+  1043	F2FS_FEATURE_RO_ATTR(pin_file);
+  1044	
+  1045	#define ATTR_LIST(name) (&f2fs_attr_##name.attr)
+  1046	static struct attribute *f2fs_attrs[] = {
+  1047		ATTR_LIST(gc_urgent_sleep_time),
+  1048		ATTR_LIST(gc_min_sleep_time),
+  1049		ATTR_LIST(gc_max_sleep_time),
+  1050		ATTR_LIST(gc_no_gc_sleep_time),
+  1051		ATTR_LIST(gc_idle),
+  1052		ATTR_LIST(gc_urgent),
+  1053		ATTR_LIST(reclaim_segments),
+  1054		ATTR_LIST(main_blkaddr),
+  1055		ATTR_LIST(max_small_discards),
+  1056		ATTR_LIST(max_discard_request),
+  1057		ATTR_LIST(min_discard_issue_time),
+  1058		ATTR_LIST(mid_discard_issue_time),
+  1059		ATTR_LIST(max_discard_issue_time),
+  1060		ATTR_LIST(discard_io_aware_gran),
+  1061		ATTR_LIST(discard_urgent_util),
+  1062		ATTR_LIST(discard_granularity),
+  1063		ATTR_LIST(max_ordered_discard),
+  1064		ATTR_LIST(pending_discard),
+  1065		ATTR_LIST(gc_mode),
+  1066		ATTR_LIST(ipu_policy),
+  1067		ATTR_LIST(min_ipu_util),
+  1068		ATTR_LIST(min_fsync_blocks),
+  1069		ATTR_LIST(min_seq_blocks),
+  1070		ATTR_LIST(min_hot_blocks),
+  1071		ATTR_LIST(min_ssr_sections),
+  1072		ATTR_LIST(max_victim_search),
+  1073		ATTR_LIST(migration_granularity),
+  1074		ATTR_LIST(dir_level),
+  1075		ATTR_LIST(ram_thresh),
+  1076		ATTR_LIST(ra_nid_pages),
+  1077		ATTR_LIST(dirty_nats_ratio),
+  1078		ATTR_LIST(max_roll_forward_node_blocks),
+  1079		ATTR_LIST(cp_interval),
+  1080		ATTR_LIST(idle_interval),
+  1081		ATTR_LIST(discard_idle_interval),
+  1082		ATTR_LIST(gc_idle_interval),
+  1083		ATTR_LIST(umount_discard_timeout),
+  1084	#ifdef CONFIG_F2FS_IOSTAT
+  1085		ATTR_LIST(iostat_enable),
+  1086		ATTR_LIST(iostat_period_ms),
+  1087	#endif
+  1088		ATTR_LIST(readdir_ra),
+  1089		ATTR_LIST(max_io_bytes),
+  1090		ATTR_LIST(gc_pin_file_thresh),
+  1091		ATTR_LIST(extension_list),
+  1092	#ifdef CONFIG_F2FS_FAULT_INJECTION
+  1093		ATTR_LIST(inject_rate),
+> 1094		ATTR_LIST(inject_type),
+  1095	#endif
+  1096		ATTR_LIST(data_io_flag),
+  1097		ATTR_LIST(node_io_flag),
+  1098		ATTR_LIST(gc_remaining_trials),
+  1099		ATTR_LIST(ckpt_thread_ioprio),
+  1100		ATTR_LIST(dirty_segments),
+  1101		ATTR_LIST(free_segments),
+  1102		ATTR_LIST(ovp_segments),
+  1103		ATTR_LIST(unusable),
+  1104		ATTR_LIST(lifetime_write_kbytes),
+  1105		ATTR_LIST(features),
+  1106		ATTR_LIST(reserved_blocks),
+  1107		ATTR_LIST(current_reserved_blocks),
+  1108		ATTR_LIST(encoding),
+  1109		ATTR_LIST(mounted_time_sec),
+  1110	#ifdef CONFIG_F2FS_STAT_FS
+  1111		ATTR_LIST(cp_foreground_calls),
+  1112		ATTR_LIST(cp_background_calls),
+  1113		ATTR_LIST(gc_foreground_calls),
+  1114		ATTR_LIST(gc_background_calls),
+  1115		ATTR_LIST(moved_blocks_foreground),
+  1116		ATTR_LIST(moved_blocks_background),
+  1117		ATTR_LIST(avg_vblocks),
+  1118	#endif
+  1119	#ifdef CONFIG_BLK_DEV_ZONED
+  1120		ATTR_LIST(unusable_blocks_per_sec),
+  1121	#endif
+  1122	#ifdef CONFIG_F2FS_FS_COMPRESSION
+  1123		ATTR_LIST(compr_written_block),
+  1124		ATTR_LIST(compr_saved_block),
+  1125		ATTR_LIST(compr_new_inode),
+  1126		ATTR_LIST(compress_percent),
+  1127		ATTR_LIST(compress_watermark),
+  1128	#endif
+  1129		/* For ATGC */
+  1130		ATTR_LIST(atgc_candidate_ratio),
+  1131		ATTR_LIST(atgc_candidate_count),
+  1132		ATTR_LIST(atgc_age_weight),
+  1133		ATTR_LIST(atgc_age_threshold),
+  1134		ATTR_LIST(seq_file_ra_mul),
+  1135		ATTR_LIST(gc_segment_mode),
+  1136		ATTR_LIST(gc_reclaimed_segments),
+  1137		ATTR_LIST(max_fragment_chunk),
+  1138		ATTR_LIST(max_fragment_hole),
+  1139		ATTR_LIST(current_atomic_write),
+  1140		ATTR_LIST(peak_atomic_write),
+  1141		ATTR_LIST(committed_atomic_block),
+  1142		ATTR_LIST(revoked_atomic_block),
+  1143		ATTR_LIST(hot_data_age_threshold),
+  1144		ATTR_LIST(warm_data_age_threshold),
+  1145		ATTR_LIST(last_age_weight),
+  1146		NULL,
+  1147	};
+  1148	ATTRIBUTE_GROUPS(f2fs);
+  1149	
+
 -- 
-2.35.1
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
 
 
 _______________________________________________
