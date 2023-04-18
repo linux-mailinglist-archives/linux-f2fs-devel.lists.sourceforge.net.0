@@ -2,91 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C8F16E5B7E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Apr 2023 10:03:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5738E6E66D0
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Apr 2023 16:12:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pogJR-0001Ra-6D;
-	Tue, 18 Apr 2023 08:03:40 +0000
+	id 1pom4N-0005FF-V4;
+	Tue, 18 Apr 2023 14:12:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1pogJP-0001RT-OX
+ (envelope-from <corbet@lwn.net>) id 1pom4M-0005F9-Mr
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Apr 2023 08:03:38 +0000
+ Tue, 18 Apr 2023 14:12:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ewYHF5lDDFgbvB5HTJASHQepdiZsG+YogPXoIEBnrp8=; b=DciiFIhfQgz+x3r8hrCb2n2FmM
- L5b+IOtkT6mPnmLMc90iVLd165xx/g9968TiZw1QgKV06sAn6jupwFaiWMbKt8JTOcD1vwZmBhiqi
- 3P5sLrz8WV3DaFzRyhbNzGJZvJHxOhTvqVWrdVc8dfkiO5HgqqGG68Qi9Z6RUzy9TwKY=;
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
+ References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=PT2NCMZmHfmFhFO7WyZGuotWhtVsbEgq9Kzj+l34a7M=; b=k76xJ36MqYX73Pc/OQCktZslmD
+ qydL7W7W/1iaXsfRsjHTVTTnuba09EAb76n8ROtNS4cS9Kn4TpVoIZeVvdukv9C/1E2BZpUUA+kbb
+ fpgxWib8RfCnKLQBJ6RRXTlS9tmnry+B0Yb47Ot/xIDH+fCRX1pKip8FUekRghD3NFX8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ewYHF5lDDFgbvB5HTJASHQepdiZsG+YogPXoIEBnrp8=; b=V
- +v/LXcQ/TI8wE2oIg4FNMaPTLjNXtNkNofBkqhsOQDvZlRIrdc6Rc4/P6jSkSKsp6oK165WjIeTWy
- +Q5KU1ckCUjSioyt1xvBzRttBJXk66ju68FKENBsivty1qEiqspNVtGVZDj0qGEzseR5LbR86ROB1
- DnK2+0oVbr4oxpyE=;
-Received: from mga04.intel.com ([192.55.52.120])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=PT2NCMZmHfmFhFO7WyZGuotWhtVsbEgq9Kzj+l34a7M=; b=KlV9RdzJLTmvneYtrEH0IpEIt6
+ PLxIIjs9zIfOSu2ZQ1xLhPXx5rQJ/6Tq7cCWYIgTZqZhTi2xYRvNrcVhu4iszAKPONlwGc1dy1ITU
+ K9yyUdTZfNBrk1IGGexGhHPTONaOx66tSjZWl9ggngRCFgqOSnNS6+mD1GZKCMDliRQ4=;
+Received: from ms.lwn.net ([45.79.88.28])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pogJN-0000Uq-0W for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Apr 2023 08:03:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1681805017; x=1713341017;
- h=date:from:to:cc:subject:message-id:mime-version;
- bh=3gvt0Cr3iK9FcuX33wgyb3BC3sOttQXdFu65w04jc1U=;
- b=fWUo9pQXCSKMSPh92EIo+g131aMQBjkyLDzV7e/unrnnSLhYUvCoeP5d
- 9li++zsWp2GwnaSyZryqgxqv1YtYQtcztWcLwwj9tmXF1ijhxGgTFqW2I
- Yd86kn7rbHiMr6bTwcSViGT0RnZ1AxVgCW5oDWj9+x2IbMxzOZRCMbWry
- feFyaNZdo4sgYAnS1tQF8xoKd1N041qonJ0p9Ep4RC/2gy2jBimcyD03d
- IurUJYpJghv9ts/B3pSCGxJ6TVGH/bmDRZ4VEyYmdk+X1fARe6dnba8m5
- bYUTcGKOIzRR70o1Odr40nRMFrWVYTXSS+1n0FpmolTg6usf0V1sSUkPr A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10683"; a="343858971"
-X-IronPort-AV: E=Sophos;i="5.99,206,1677571200"; d="scan'208";a="343858971"
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Apr 2023 01:03:29 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10683"; a="693539353"
-X-IronPort-AV: E=Sophos;i="5.99,206,1677571200"; d="scan'208";a="693539353"
-Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
- by fmsmga007.fm.intel.com with ESMTP; 18 Apr 2023 01:03:27 -0700
-Received: from kbuild by b613635ddfff with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1pogJC-000d8h-1V;
- Tue, 18 Apr 2023 08:03:26 +0000
-Date: Tue, 18 Apr 2023 16:03:01 +0800
-From: kernel test robot <lkp@intel.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <202304181512.3CpLfgBe-lkp@intel.com>
+ id 1pom4J-00BTyV-W5 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Apr 2023 14:12:29 +0000
+Received: from localhost (unknown [IPv6:2601:281:8300:73::5f6])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ms.lwn.net (Postfix) with ESMTPSA id 0296E49B;
+ Tue, 18 Apr 2023 13:47:29 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 0296E49B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+ t=1681825650; bh=PT2NCMZmHfmFhFO7WyZGuotWhtVsbEgq9Kzj+l34a7M=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=qKmHPEkMmP0pBZDYzLk8DxuAtMJRzraMP4DqyUhUdaT6/RVJStVzZDawwe4MX/Nu1
+ S5edW14rv/szYB5dh02gjIgPXvYSgH2DREbewUipFAPlDBbx3f3H6+JUJGCAUYydeI
+ 2sbUSQNLb6iZsC4hHH3fUMaV9RF9qgsT6RjcyQI036ZXmYvD0ElTbfJoJ/031GoFQa
+ NMi4dr7qeTtDNEYt4xVhnmvxmco0HrNtkmRMCDw3aMqUYsFvAyZCacn/aoFZzuNMbp
+ immz4RPN+fhTfvn+hX6X2Ft0IN1hVX7ZniZRGFymKJT7mqQNSjLi6Ep+eR45MS7BoX
+ qZ6NXu97r9h0A==
+From: Jonathan Corbet <corbet@lwn.net>
+To: Bagas Sanjaya <bagasdotme@gmail.com>, Yangtao Li <frank.li@vivo.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
+In-Reply-To: <4517330a-00a3-220f-2fc5-a9ef4aba5ea8@gmail.com>
+References: <20230417044100.56409-1-frank.li@vivo.com>
+ <4517330a-00a3-220f-2fc5-a9ef4aba5ea8@gmail.com>
+Date: Tue, 18 Apr 2023 07:47:29 -0600
+Message-ID: <87354xe1zi.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Spam-Score: -2.5 (--)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: tree:
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- dev-test head: 07717639336b495e1115e95824031643363d0276 commit:
- 07717639336b495e1115e95824031643363d0276
- [49/49] f2fs: remove pow [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  Bagas Sanjaya <bagasdotme@gmail.com> writes: > On 4/17/23
+ 11:41, Yangtao Li wrote: >> Let's descrbie it's read extent cache. > > "Clarify
+ the fact that extent_cache and noextent_cache toggle read > extent cache
+ on or off." 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [192.55.52.120 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [45.79.88.28 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
@@ -96,10 +89,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pogJN-0000Uq-0W
-Subject: [f2fs-dev] [jaegeuk-f2fs:dev-test 49/49] ld.lld: error: undefined
- symbol: __hexagon_udivdi3
+X-Headers-End: 1pom4J-00BTyV-W5
+Subject: Re: [f2fs-dev] [PATCH v2] docs: f2fs: specify extent cache for read
+ explicitly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,52 +103,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: llvm@lists.linux.dev, linux-f2fs-devel@lists.sourceforge.net,
- oe-kbuild-all@lists.linux.dev
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
-head:   07717639336b495e1115e95824031643363d0276
-commit: 07717639336b495e1115e95824031643363d0276 [49/49] f2fs: remove power-of-two limitation fo zoned device
-config: hexagon-randconfig-r012-20230416 (https://download.01.org/0day-ci/archive/20230418/202304181512.3CpLfgBe-lkp@intel.com/config)
-compiler: clang version 17.0.0 (https://github.com/llvm/llvm-project 437b7602e4a998220871de78afcb020b9c14a661)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?id=07717639336b495e1115e95824031643363d0276
-        git remote add jaegeuk-f2fs https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
-        git fetch --no-tags jaegeuk-f2fs dev-test
-        git checkout 07717639336b495e1115e95824031643363d0276
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=hexagon olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=hexagon SHELL=/bin/bash
+Bagas Sanjaya <bagasdotme@gmail.com> writes:
 
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202304181512.3CpLfgBe-lkp@intel.com/
+> On 4/17/23 11:41, Yangtao Li wrote:
+>> Let's descrbie it's read extent cache.
+>
+> "Clarify the fact that extent_cache and noextent_cache toggle read
+> extent cache on or off."
 
-All errors (new ones prefixed by >>):
+Please stop nit-picking patches.  This is good enough, though I might
+fix the "describe" typo on the way in.
 
->> ld.lld: error: undefined symbol: __hexagon_udivdi3
-   >>> referenced by super.c
-   >>>               fs/f2fs/super.o:(f2fs_scan_devices) in archive vmlinux.a
-   >>> referenced by super.c
-   >>>               fs/f2fs/super.o:(f2fs_scan_devices) in archive vmlinux.a
-   >>> did you mean: __hexagon_udivsi3
-   >>> defined in: vmlinux.a(arch/hexagon/lib/udivsi3.o)
---
->> ld.lld: error: undefined symbol: __hexagon_divdi3
-   >>> referenced by gc.c
-   >>>               fs/f2fs/gc.o:(update_fs_metadata) in archive vmlinux.a
-   >>> referenced by gc.c
-   >>>               fs/f2fs/gc.o:(update_fs_metadata) in archive vmlinux.a
+>> -extent_cache		 Enable an extent cache based on rb-tree, it can cache
+>> -			 as many as extent which map between contiguous logical
+>> +extent_cache		 Enable a read extent cache based on rb-tree, it can cache
+> "... . It can cache ..."
 
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests
+Bagas.  Enough.  Seriously.
+
+>>  noinline_data		 Disable the inline data feature, inline data feature is
+>>  			 enabled by default.
+>
+> "Disable inline data feature, for which the feature is enabled by
+> default." (submit as separate patch).
+
+And please stop trying to make additional work for others.  If you want
+to improve something, submit a patch yourself.
+
+jon
 
 
 _______________________________________________
