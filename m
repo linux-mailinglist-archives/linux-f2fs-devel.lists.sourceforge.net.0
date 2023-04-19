@@ -2,148 +2,85 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABCA56E718F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Apr 2023 05:27:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5E8E6E71C1
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 19 Apr 2023 05:41:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1poyTA-0007eq-8j;
-	Wed, 19 Apr 2023 03:26:56 +0000
+	id 1poyhX-0004h2-Bs;
+	Wed, 19 Apr 2023 03:41:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1poyT8-0007ef-Ql
+ (envelope-from <chao@kernel.org>) id 1poyhV-0004gv-76
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 19 Apr 2023 03:26:55 +0000
+ Wed, 19 Apr 2023 03:41:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OjHzi9FD0wWlg8TEYTy6ZQDafhjTGwCfezsR+jsv0Tw=; b=D/08cMOOG+jaRZi0XO8mvroGS/
- MPWa28xU6TxqFeAADJBvlXTqmbNj/f/BA7lYei1zEDMEvGTB3jM3pLl+Fa2SoPIMmttIB7872bfac
- zjB9JewOW/rg9Oxr/lKBAD2C44MNyXSqatajcrBzGrwD+zvnKpIihiaI6FYTiQxruKWE=;
+ bh=JHUkX524Zi7+Z+NmV1Z9te5IkDNqbLiGRnp4fZtmMtE=; b=MiwC9DnmG3eZoXjyXW9ObmGuXU
+ EdGeKYbsK1xulpjboPK7QzWvkwvtFKASBgzLnqcrP3CT03t0SRrGaHRJyKulHm7WWVmEoNW5G8smv
+ KJy6ym8JAsI6g1Gz935xVIkLaWxATAZbw2+IanxFqGgwahLiBr9ARD3Ls2w2slm8A+BI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=OjHzi9FD0wWlg8TEYTy6ZQDafhjTGwCfezsR+jsv0Tw=; b=H
- 5eY9iCdOG6jafDCsoH1y7rQLHfaDD1krpXBb22lf4ra0PR8Kmu5MJl0Zh1cyFgTDGS6ctBFrJkgPZ
- 3o10aDDsEFD0INl5beohkytohl7OLBwAJBwSz4NMRuEJu6eAsW1RDxlPdgZeByTEJJGiOD64K4fwW
- IxDTGDUg6dpKhOBA=;
-Received: from mail-sgaapc01on2103.outbound.protection.outlook.com
- ([40.107.215.103] helo=APC01-SG2-obe.outbound.protection.outlook.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=JHUkX524Zi7+Z+NmV1Z9te5IkDNqbLiGRnp4fZtmMtE=; b=FQ06DL1wvZ2q+/75htGJMMjBJK
+ kr2QdPsQrc0Q1zMH/gaK9OOUsrf0zlkoPadbepni3auXPj2oro3bBpskArvfvvFkIPlZMK+eC0i+r
+ OqBXK4ElPKunWem0MiCr321CK7aLBvcSbG7Td3ztiqjHnjqAh74A8hvFHK9gRknKk8Ak=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1poyT8-0003Qj-7d for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 19 Apr 2023 03:26:55 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OOE+dzP9MVmKv8ZVuY3O8dwg+EX18mToTNXPMvtXdhbcmht1OGj1Ra6XaN01adfo5BHsNLTD3EzWC/587HPbls6nQ74MnmcT0VdECwLA7mxKv1UOYEtgh+ROQ+BliheRXMpqsEjaCsDWUP7EVrgB6TziBFKtP16MOg5s3NJU5wSZhTie4exq6Mywo6+1uIspevQyaQNz11rTKMPWNrOAX9n1P+igppAdTRZx3nrRUDxGCOvWTgap3k1d7wa4y0d3wTpPIuXkQroR8CW8IE7MW2kiV1y0f3Mfp1zSCZYAspf1jTDP4d4SnAX9XI3SOIUuw7csFfOfu8TOQ7S66Uw1kA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OjHzi9FD0wWlg8TEYTy6ZQDafhjTGwCfezsR+jsv0Tw=;
- b=Kog3Y9vGQrBg04NQzMipfoMRfQyyKNHB5owrYjPrmbnIcGhzy/TR4t6WuC/6Tjwef+8InfLVAVQcs7Wj5heTOfl2yHmj0jjvBHyI8isbRAOWkPeZHWEuWd4vBoJoI9R7mxnnDJyJDfYlp4JZxwkBYlFK6pINgg0bpb0gq2BT12kWOiQ6rCg1oE3MVEW4+UZQsGPJ60GYl19sDmlazhjQGkwtOcFklI/WPyIOKNhG9w69vwbQrRrTWE257u6H1uBFjfE3wyBYaXeM+vSFZL52PQAenAISm2eGtKuoG8CDXaqOaMOA4BbgmRItry9F1nINSfsJanb6wlqfgD5JA0FhMg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OjHzi9FD0wWlg8TEYTy6ZQDafhjTGwCfezsR+jsv0Tw=;
- b=qihesdGykmB0i020UD7vBudSKusn5YvdXAxeGZyNUWNrCbarCcBApWlynRvqjb0KXpCmWFXBQsyfnlImB5pNX8wSmS8/pQWziSKjWkiiOG0rcKJub69bO8zPz2B0rD+8Ch5xavyq+9CMdpdfQQoKxvv/a5fg9JDl4LIMI1WfItfKxNEOPJC8LkKfrp9g9CnBecYcvaUJM9df/BYO4fZoGQCJnk3Oo/8mNb7JGzJ6GI28yF7e0gT8FABnxjf32Gyl9g+9SZ3hIbWhyvqw+voyAHAgUyoJbQvm1AcqPOIzG1kJbiMcYplHNqTuY4yW87LzWdTcrBC9GNHPESog1eqgbw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by PSAPR06MB4151.apcprd06.prod.outlook.com (2603:1096:301:2b::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6298.45; Wed, 19 Apr
- 2023 03:26:40 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::76d6:4828:7e80:2965]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::76d6:4828:7e80:2965%6]) with mapi id 15.20.6298.045; Wed, 19 Apr 2023
- 03:26:40 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>,
-	Chao Yu <chao@kernel.org>
-Date: Wed, 19 Apr 2023 11:26:26 +0800
-Message-Id: <20230419032627.15421-1-frank.li@vivo.com>
-X-Mailer: git-send-email 2.39.0
-X-ClientProxiedBy: SI1PR02CA0041.apcprd02.prod.outlook.com
- (2603:1096:4:1f6::18) To SEZPR06MB5269.apcprd06.prod.outlook.com
- (2603:1096:101:78::6)
+ id 1poyhS-00Bzcl-Ng for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 19 Apr 2023 03:41:46 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D02C363A9F;
+ Wed, 19 Apr 2023 03:41:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45474C433D2;
+ Wed, 19 Apr 2023 03:41:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1681875690;
+ bh=MaHvEdzgOoHhj3sCEZRc8zq/sSDcJefJUy7GxVdsiH8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=EFisXcvXVggw27KVtmxFy2FUKhVKSxBIC9x5z6ceqDBIR3C2mYZUk1wHn3QfxY2mV
+ TzPvtKQ2W16G+jg3//xYAc9enDTVVbW1JCQW00ptE28lglPL3WcFKodoWQ0xygNRAN
+ Npa9JLI9Xd+3C3RRezKQ7n/qXf0dXa057G06LnOvEgLvwyd7rng5YqF73RE8zqe6WI
+ NIxWAb134gpaLtqoTFmzibqA6CEA5+FQuXLR8A1prd0/K2fn7LcRYJllFE2XFzWkp+
+ P/wD9n5ZMnR5swlLjPFVCuDyWweo+QuqlBTLXCARalC4p24fHa0aa1Su8q3C1nTswD
+ zx5Cghs1a83Ug==
+Message-ID: <3653416d-8904-4dd9-6b36-bc438ba8729c@kernel.org>
+Date: Wed, 19 Apr 2023 11:41:26 +0800
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|PSAPR06MB4151:EE_
-X-MS-Office365-Filtering-Correlation-Id: e6d489d3-5c9c-4818-8fd5-08db4085e3ab
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: CUP56xiZ6KiEg3/RgNyHVqHPwzGggOQbR5VdsOlKcSwqsShVx1dfcuexqRr8B2H1/92lMvjGPDDX/xlwksQ/8C2Y7wDeWQYksqnLwaKiFJS1SB431yXTxY41FdhWiI/vPEzgTCIveL1Yz3DOeXXebjYhJarxDNv6WR8RVibITcuIKE2RyieO0OE/yBQP4kzvpiUbSfkGAvk0+KxDHL9/qMkVvKuO/3G05k8Sw4MQtyEsp3CVmg1Va2J4O41VqhMOQUJgEsxlsqwJcxFxPSzxHZtJNn+6GbE/sKHGlR3yYU1J1lrPn1hGFI6rNilCh3UmMQWpf+BZ/Q7RDxIKPltcY5L7+m6IDyci9Dy2eQgkRMU3JDR5hsGmKkXBIPtA8rvamZqX15TkzV3aLrot0cCpDNXvKiDvCrPyANSJUAPmgPj/WOxnj9eOrHqNxrN91Fp4YWv7p+Pjv7Xmto+wzETM/RNh41k5c0OOnGbVRM3J6Hdh47E7yj5+35C7J9EbXjQGu/0l2KTHm8eLynQqGwBhh9qzNBC5d4LTVIBAEL2hJ8xVgQFPgmBS4legjeoLiK2atK3mFMV+m3zQEx1kzC4QMmY19OWCkaYJKa3VGC4jV141Pd1+atrUBQxN410R/J30
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(4636009)(396003)(376002)(39860400002)(366004)(346002)(136003)(451199021)(6666004)(6486002)(110136005)(86362001)(478600001)(2616005)(26005)(83380400001)(6506007)(6512007)(186003)(38350700002)(38100700002)(52116002)(1076003)(4744005)(66556008)(66946007)(66476007)(316002)(2906002)(4326008)(5660300002)(8936002)(36756003)(8676002)(41300700001);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?i33j5wdNWCxEsOFmhHqhW3TJnd3jhMADr8lU1TL0iqgtnp4EAoaVUjz9tu5j?=
- =?us-ascii?Q?s+XGWscLNGvW3PHD67xulQE3KR3ODi3d2MzzjONYEq+E1NL38BXFCLV1KBfc?=
- =?us-ascii?Q?Ir1Rdgv3YxHiQDgfhUeao3X4kwg3kxaxvpJ3ec+3Kd8tSduo2+cTosQB7Yjv?=
- =?us-ascii?Q?mThEDXgnAMmzKpLSn3b0tCeZk4U/G0WvoJlPx6uirDh8d1Ujp7WkDXy/y2ro?=
- =?us-ascii?Q?ci9YZbAVQ5VsWT3iVWvEYRTe97P4R9bMqDVRDZ4SaK4FItQVACSEUXXY5xWx?=
- =?us-ascii?Q?rehZdh8DravJ9tRiystOqaGabtuygr2iNmwWXMxuz+wA/iqmf4Uid2l67fjb?=
- =?us-ascii?Q?XT60ZhdE1XnzPx00/zBY9+Lsi+dhPajo7Xjm/Bwz1egPTDjcnDjR4THW/R6j?=
- =?us-ascii?Q?F8qLcMCrG9vD29Jh00pfB3fIUhymkFJLtLjGsikT5fa4hshp7nl8j7Cgff3C?=
- =?us-ascii?Q?qcCvgoj07ekcdfqHK4i82bJe0+H2DDVKmdhmqjj57ZJ8UfsVBprNzfL5pGX8?=
- =?us-ascii?Q?qaBEMN+c0EPdwivb42PQe3j8qLTRVvJJ7keVrUVj1zVUVJ8s1dL/QN908gXh?=
- =?us-ascii?Q?y/oZ1l2I+A9V4o+3f3Nmd+DwhQHVFRmOvhi22vz07gg4kZoke+EDz0ai0Len?=
- =?us-ascii?Q?O0mQUt07Zsb2N0ZmIGK6rjiSVwj8rc9xzN183RCjfA6IXc0Y1XOB7FUxAzUe?=
- =?us-ascii?Q?cr+erZrG2fxFamgsEdAfaZ1BRlfjeG1eDDw5KaGv1Mvjj/D3qHTLDHInhUbS?=
- =?us-ascii?Q?6qLiNRHp7r93im77YHxVf7wdClWWBgKo0eiAsjyJvJXQWnQXnclRKXGauraG?=
- =?us-ascii?Q?N9SEx3JXhMBqeQPck/TZ/gedvpdDpTVpbUU3mzRaKQIkDEYLIfUR+AjSmNbw?=
- =?us-ascii?Q?OJW45VyfTrGNoipzbHvhEKe82GYDeCDZq/Zf4klF0SrcyzY0tPi50ZZSkL8C?=
- =?us-ascii?Q?i+MimLFkn9emqwdQsJ+G01l6UkGYi6jrwG1WVNYDBTTLj7kh+UwXIS4mXTqQ?=
- =?us-ascii?Q?t92wizSRbsZ2gXnWxKyzu/TeeA9KHzNLewuTfxHfWGOBaS5rvwl0YuQ6S36V?=
- =?us-ascii?Q?YGZy/r01CSMBes4u+LBYylRv05vagP/tWU+lLEcOKH2Aj0INg/zwn8zQBKeI?=
- =?us-ascii?Q?W1jWosV/IMRbqtaEZUwvgaRuDST7ANSuNI4hfyOpRRIMus0ltLSZsvxckDAC?=
- =?us-ascii?Q?lMqEiHU3NnCf313b58+i7C6jzo9hNOHiWebUKyEqk/98jh/eL8LYAvSXEwgq?=
- =?us-ascii?Q?ZynoWAu22OZzWLrRSMmhozNVxq1E3wwwgj/vbjI6bR52ODqxNKP78yNUbVrX?=
- =?us-ascii?Q?DaCYfHHXkh5CVhd/HD5xugwjilgR0XHgPhhdMFpKwIa8JVkBOhDpliDcyyNp?=
- =?us-ascii?Q?RCnPYGIoUypZftctCiARMcZSmHS8crGZQ+IPhzItz85oQOAYZMpe3O/clArW?=
- =?us-ascii?Q?ghQniXaQAOiqyRlswBvd17tT9t5haJm0ejC2XE3X5uFTRkA/L+wuWY9fifmo?=
- =?us-ascii?Q?6C5V2cLmeQ2euKGgl533q3aKX00lpvgJHcrqwJpWX8AmAnlysLPY4Y2rw7nU?=
- =?us-ascii?Q?UZmUZ7u/dOJo3+TVkSS2t4B6igD1CfXz+kYnN0ws?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e6d489d3-5c9c-4818-8fd5-08db4085e3ab
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Apr 2023 03:26:39.9841 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mLt0GLn/0OG/2nVjMjb2/c3MYIfGeqExFCmCfN8+HfETvxj6xTB7kiptbNMXCtOTOYlILrsP9/7KNP0tr+hpVg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PSAPR06MB4151
-X-Spam-Score: -0.2 (/)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.1
+Content-Language: en-US
+To: jaegeuk@kernel.org
+References: <20230408123153.954480-1-chao@kernel.org>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20230408123153.954480-1-chao@kernel.org>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add missing 'is'. Signed-off-by: Yangtao Li
- <frank.li@vivo.com>
- --- fs/f2fs/super.c | 4 ++-- 1 file changed, 2 insertions(+), 2 deletions(-)
- diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c index
- 9f15b03037db..357d45e49635
- 100644 --- a/fs/f2fs/super.c +++ b/fs/f2fs/super.c @@ -1362,7 +1362,7 @@
- static int parse_options(struct super_block *sb [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  Ping, Jaegeuk, do you still suffer any issue w/ this version?
+ Thanks, Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.215.103 listed in wl.mailspike.net]
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -151,10 +88,11 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.215.103 listed in list.dnswl.org]
-X-Headers-End: 1poyT8-0003Qj-7d
-Subject: [f2fs-dev] [PATCH] f2fs: fix typo
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1poyhS-00Bzcl-Ng
+Subject: Re: [f2fs-dev] [PATCH v8] f2fs: support
+ errors=remount-ro|continue|panic mountoption
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -166,46 +104,420 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Yangtao Li <frank.li@vivo.com>
-Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
- Yangtao Li <frank.li@vivo.com>
-Content-Type: text/plain; charset="us-ascii"
+Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add missing 'is'.
+Ping,
 
-Signed-off-by: Yangtao Li <frank.li@vivo.com>
----
- fs/f2fs/super.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Jaegeuk, do you still suffer any issue w/ this version?
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 9f15b03037db..357d45e49635 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1362,7 +1362,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 	}
- 
- 	if (f2fs_is_readonly(sbi) && test_opt(sbi, FLUSH_MERGE)) {
--		f2fs_err(sbi, "FLUSH_MERGE not compatible with readonly mode");
-+		f2fs_err(sbi, "FLUSH_MERGE is not compatible with readonly mode");
- 		return -EINVAL;
- 	}
- 
-@@ -2356,7 +2356,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 
- 	if ((*flags & SB_RDONLY) && test_opt(sbi, DISABLE_CHECKPOINT)) {
- 		err = -EINVAL;
--		f2fs_warn(sbi, "disabling checkpoint not compatible with read-only");
-+		f2fs_warn(sbi, "disabling checkpoint is not compatible with read-only");
- 		goto restore_opts;
- 	}
- 
--- 
-2.39.0
+Thanks,
 
+On 2023/4/8 20:31, Chao Yu wrote:
+> This patch supports errors=remount-ro|continue|panic mount option,
+> by default it uses "remount-ro" mode.
+> 
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> ---
+> v8:
+> - record stop reason synchronously if it's from ioctl shutdown interface
+> - fix typo in doc and commit message.
+> - use f2fs_hw_is_readonly() instead of bdev_read_only()
+>   Documentation/filesystems/f2fs.rst |   5 ++
+>   fs/f2fs/checkpoint.c               |   7 +-
+>   fs/f2fs/f2fs.h                     |  20 ++++-
+>   fs/f2fs/file.c                     |   5 --
+>   fs/f2fs/gc.c                       |   2 +-
+>   fs/f2fs/super.c                    | 134 ++++++++++++++++++++++++++---
+>   6 files changed, 149 insertions(+), 24 deletions(-)
+> 
+> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> index 2055e72871fe..ba4c02fad647 100644
+> --- a/Documentation/filesystems/f2fs.rst
+> +++ b/Documentation/filesystems/f2fs.rst
+> @@ -351,6 +351,11 @@ age_extent_cache	 Enable an age extent cache based on rb-tree. It records
+>   			 data block update frequency of the extent per inode, in
+>   			 order to provide better temperature hints for data block
+>   			 allocation.
+> +errors=%s		 Specify f2fs behavior on critical errors. This supports modes:
+> +			 "panic", "continue" and "remount-ro", respectively, trigger
+> +			 panic immediately, continue without doing anything, and remount
+> +			 the partition in read-only mode. By default it uses "remount-ro"
+> +			 mode.
+>   ======================== ============================================================
+>   
+>   Debugfs Entries
+> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+> index 73ae4e85e70d..e6b266bb9ce0 100644
+> --- a/fs/f2fs/checkpoint.c
+> +++ b/fs/f2fs/checkpoint.c
+> @@ -30,12 +30,9 @@ void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io,
+>   						unsigned char reason)
+>   {
+>   	f2fs_build_fault_attr(sbi, 0, 0);
+> -	set_ckpt_flags(sbi, CP_ERROR_FLAG);
+> -	if (!end_io) {
+> +	if (!end_io)
+>   		f2fs_flush_merged_writes(sbi);
+> -
+> -		f2fs_handle_stop(sbi, reason);
+> -	}
+> +	f2fs_handle_critical_error(sbi, reason, end_io);
+>   }
+>   
+>   /*
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index ac4942f8e83e..7d9c5a65f974 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -162,6 +162,7 @@ struct f2fs_mount_info {
+>   	int fs_mode;			/* fs mode: LFS or ADAPTIVE */
+>   	int bggc_mode;			/* bggc mode: off, on or sync */
+>   	int memory_mode;		/* memory mode */
+> +	int errors;			/* errors parameter */
+>   	int discard_unit;		/*
+>   					 * discard command's offset/size should
+>   					 * be aligned to this unit: block,
+> @@ -1370,6 +1371,12 @@ enum {
+>   	MEMORY_MODE_LOW,	/* memory mode for low memry devices */
+>   };
+>   
+> +enum errors_option {
+> +	MOUNT_ERRORS_READONLY,	/* remount fs ro on errors */
+> +	MOUNT_ERRORS_CONTINUE,	/* continue on errors */
+> +	MOUNT_ERRORS_PANIC,	/* panic on errors */
+> +};
+> +
+>   static inline int f2fs_test_bit(unsigned int nr, char *addr);
+>   static inline void f2fs_set_bit(unsigned int nr, char *addr);
+>   static inline void f2fs_clear_bit(unsigned int nr, char *addr);
+> @@ -1786,8 +1793,14 @@ struct f2fs_sb_info {
+>   
+>   	struct workqueue_struct *post_read_wq;	/* post read workqueue */
+>   
+> -	unsigned char errors[MAX_F2FS_ERRORS];	/* error flags */
+> -	spinlock_t error_lock;			/* protect errors array */
+> +	/*
+> +	 * If we are in irq context, let's update error information into
+> +	 * on-disk superblock in the work.
+> +	 */
+> +	struct work_struct s_error_work;
+> +	unsigned char errors[MAX_F2FS_ERRORS];		/* error flags */
+> +	unsigned char stop_reason[MAX_STOP_REASON];	/* stop reason */
+> +	spinlock_t error_lock;			/* protect errors/stop_reason array */
+>   	bool error_dirty;			/* errors of sb is dirty */
+>   
+>   	struct kmem_cache *inline_xattr_slab;	/* inline xattr entry */
+> @@ -3522,8 +3535,9 @@ int f2fs_enable_quota_files(struct f2fs_sb_info *sbi, bool rdonly);
+>   int f2fs_quota_sync(struct super_block *sb, int type);
+>   loff_t max_file_blocks(struct inode *inode);
+>   void f2fs_quota_off_umount(struct super_block *sb);
+> -void f2fs_handle_stop(struct f2fs_sb_info *sbi, unsigned char reason);
+>   void f2fs_save_errors(struct f2fs_sb_info *sbi, unsigned char flag);
+> +void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
+> +							bool irq_context);
+>   void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error);
+>   int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover);
+>   int f2fs_sync_fs(struct super_block *sb, int sync);
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index 14e9a20e68df..10743e864d57 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -2221,7 +2221,6 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+>   				ret = 0;
+>   				f2fs_stop_checkpoint(sbi, false,
+>   						STOP_CP_REASON_SHUTDOWN);
+> -				set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
+>   				trace_f2fs_shutdown(sbi, in, ret);
+>   			}
+>   			return ret;
+> @@ -2234,7 +2233,6 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+>   		if (ret)
+>   			goto out;
+>   		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_SHUTDOWN);
+> -		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
+>   		thaw_bdev(sb->s_bdev);
+>   		break;
+>   	case F2FS_GOING_DOWN_METASYNC:
+> @@ -2243,16 +2241,13 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
+>   		if (ret)
+>   			goto out;
+>   		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_SHUTDOWN);
+> -		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
+>   		break;
+>   	case F2FS_GOING_DOWN_NOSYNC:
+>   		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_SHUTDOWN);
+> -		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
+>   		break;
+>   	case F2FS_GOING_DOWN_METAFLUSH:
+>   		f2fs_sync_meta_pages(sbi, META, LONG_MAX, FS_META_IO);
+>   		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_SHUTDOWN);
+> -		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
+>   		break;
+>   	case F2FS_GOING_DOWN_NEED_FSCK:
+>   		set_sbi_flag(sbi, SBI_NEED_FSCK);
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index f1d0dd9c5a6c..6dc2bc710ba8 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -59,7 +59,7 @@ static int gc_thread_func(void *data)
+>   		if (gc_th->gc_wake)
+>   			gc_th->gc_wake = false;
+>   
+> -		if (try_to_freeze()) {
+> +		if (try_to_freeze() || f2fs_readonly(sbi->sb)) {
+>   			stat_other_skip_bggc_count(sbi);
+>   			continue;
+>   		}
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 23574894e170..1573bf123197 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -164,6 +164,7 @@ enum {
+>   	Opt_discard_unit,
+>   	Opt_memory_mode,
+>   	Opt_age_extent_cache,
+> +	Opt_errors,
+>   	Opt_err,
+>   };
+>   
+> @@ -243,6 +244,7 @@ static match_table_t f2fs_tokens = {
+>   	{Opt_discard_unit, "discard_unit=%s"},
+>   	{Opt_memory_mode, "memory=%s"},
+>   	{Opt_age_extent_cache, "age_extent_cache"},
+> +	{Opt_errors, "errors=%s"},
+>   	{Opt_err, NULL},
+>   };
+>   
+> @@ -1268,6 +1270,25 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>   		case Opt_age_extent_cache:
+>   			set_opt(sbi, AGE_EXTENT_CACHE);
+>   			break;
+> +		case Opt_errors:
+> +			name = match_strdup(&args[0]);
+> +			if (!name)
+> +				return -ENOMEM;
+> +			if (!strcmp(name, "remount-ro")) {
+> +				F2FS_OPTION(sbi).errors =
+> +						MOUNT_ERRORS_READONLY;
+> +			} else if (!strcmp(name, "continue")) {
+> +				F2FS_OPTION(sbi).errors =
+> +						MOUNT_ERRORS_CONTINUE;
+> +			} else if (!strcmp(name, "panic")) {
+> +				F2FS_OPTION(sbi).errors =
+> +						MOUNT_ERRORS_PANIC;
+> +			} else {
+> +				kfree(name);
+> +				return -EINVAL;
+> +			}
+> +			kfree(name);
+> +			break;
+>   		default:
+>   			f2fs_err(sbi, "Unrecognized mount option \"%s\" or missing value",
+>   				 p);
+> @@ -1623,6 +1644,9 @@ static void f2fs_put_super(struct super_block *sb)
+>   	f2fs_destroy_node_manager(sbi);
+>   	f2fs_destroy_segment_manager(sbi);
+>   
+> +	/* flush s_error_work before sbi destroy */
+> +	flush_work(&sbi->s_error_work);
+> +
+>   	f2fs_destroy_post_read_wq(sbi);
+>   
+>   	kvfree(sbi->ckpt);
+> @@ -2053,6 +2077,13 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+>   	else if (F2FS_OPTION(sbi).memory_mode == MEMORY_MODE_LOW)
+>   		seq_printf(seq, ",memory=%s", "low");
+>   
+> +	if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_READONLY)
+> +		seq_printf(seq, ",errors=%s", "remount-ro");
+> +	else if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_CONTINUE)
+> +		seq_printf(seq, ",errors=%s", "continue");
+> +	else if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_PANIC)
+> +		seq_printf(seq, ",errors=%s", "panic");
+> +
+>   	return 0;
+>   }
+>   
+> @@ -2081,6 +2112,7 @@ static void default_options(struct f2fs_sb_info *sbi)
+>   	}
+>   	F2FS_OPTION(sbi).bggc_mode = BGGC_MODE_ON;
+>   	F2FS_OPTION(sbi).memory_mode = MEMORY_MODE_NORMAL;
+> +	F2FS_OPTION(sbi).errors = MOUNT_ERRORS_READONLY;
+>   
+>   	sbi->sb->s_flags &= ~SB_INLINECRYPT;
+>   
+> @@ -2282,6 +2314,9 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+>   	if (err)
+>   		goto restore_opts;
+>   
+> +	/* flush outstanding errors before changing fs state */
+> +	flush_work(&sbi->s_error_work);
+> +
+>   	/*
+>   	 * Previous and new state of filesystem is RO,
+>   	 * so skip checking GC and FLUSH_MERGE conditions.
+> @@ -3931,45 +3966,60 @@ int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover)
+>   	return err;
+>   }
+>   
+> -void f2fs_handle_stop(struct f2fs_sb_info *sbi, unsigned char reason)
+> +static void save_stop_reason(struct f2fs_sb_info *sbi, unsigned char reason)
+> +{
+> +	unsigned long flags;
+> +
+> +	spin_lock_irqsave(&sbi->error_lock, flags);
+> +	if (sbi->stop_reason[reason] < GENMASK(BITS_PER_BYTE - 1, 0))
+> +		sbi->stop_reason[reason]++;
+> +	spin_unlock_irqrestore(&sbi->error_lock, flags);
+> +}
+> +
+> +static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
+>   {
+>   	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
+> +	unsigned long flags;
+>   	int err;
+>   
+>   	f2fs_down_write(&sbi->sb_lock);
+>   
+> -	if (raw_super->s_stop_reason[reason] < GENMASK(BITS_PER_BYTE - 1, 0))
+> -		raw_super->s_stop_reason[reason]++;
+> +	spin_lock_irqsave(&sbi->error_lock, flags);
+> +	memcpy(raw_super->s_stop_reason, sbi->stop_reason, MAX_STOP_REASON);
+> +	spin_unlock_irqrestore(&sbi->error_lock, flags);
+>   
+>   	err = f2fs_commit_super(sbi, false);
+> -	if (err)
+> -		f2fs_err(sbi, "f2fs_commit_super fails to record reason:%u err:%d",
+> -								reason, err);
+> +
+>   	f2fs_up_write(&sbi->sb_lock);
+> +	if (err)
+> +		f2fs_err(sbi, "f2fs_commit_super fails to record err:%d", err);
+>   }
+>   
+>   void f2fs_save_errors(struct f2fs_sb_info *sbi, unsigned char flag)
+>   {
+> -	spin_lock(&sbi->error_lock);
+> +	unsigned long flags;
+> +
+> +	spin_lock_irqsave(&sbi->error_lock, flags);
+>   	if (!test_bit(flag, (unsigned long *)sbi->errors)) {
+>   		set_bit(flag, (unsigned long *)sbi->errors);
+>   		sbi->error_dirty = true;
+>   	}
+> -	spin_unlock(&sbi->error_lock);
+> +	spin_unlock_irqrestore(&sbi->error_lock, flags);
+>   }
+>   
+>   static bool f2fs_update_errors(struct f2fs_sb_info *sbi)
+>   {
+> +	unsigned long flags;
+>   	bool need_update = false;
+>   
+> -	spin_lock(&sbi->error_lock);
+> +	spin_lock_irqsave(&sbi->error_lock, flags);
+>   	if (sbi->error_dirty) {
+>   		memcpy(F2FS_RAW_SUPER(sbi)->s_errors, sbi->errors,
+>   							MAX_F2FS_ERRORS);
+>   		sbi->error_dirty = false;
+>   		need_update = true;
+>   	}
+> -	spin_unlock(&sbi->error_lock);
+> +	spin_unlock_irqrestore(&sbi->error_lock, flags);
+>   
+>   	return need_update;
+>   }
+> @@ -3993,6 +4043,66 @@ void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error)
+>   	f2fs_up_write(&sbi->sb_lock);
+>   }
+>   
+> +static bool system_going_down(void)
+> +{
+> +	return system_state == SYSTEM_HALT || system_state == SYSTEM_POWER_OFF
+> +		|| system_state == SYSTEM_RESTART;
+> +}
+> +
+> +void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
+> +							bool irq_context)
+> +{
+> +	struct super_block *sb = sbi->sb;
+> +	bool shutdown = reason == STOP_CP_REASON_SHUTDOWN;
+> +	bool continue_fs = !shutdown &&
+> +			F2FS_OPTION(sbi).errors == MOUNT_ERRORS_CONTINUE;
+> +
+> +	set_ckpt_flags(sbi, CP_ERROR_FLAG);
+> +
+> +	if (!f2fs_hw_is_readonly(sbi)) {
+> +		save_stop_reason(sbi, reason);
+> +
+> +		if (irq_context && !shutdown)
+> +			schedule_work(&sbi->s_error_work);
+> +		else
+> +			f2fs_record_stop_reason(sbi);
+> +	}
+> +
+> +	/*
+> +	 * We force ERRORS_RO behavior when system is rebooting. Otherwise we
+> +	 * could panic during 'reboot -f' as the underlying device got already
+> +	 * disabled.
+> +	 */
+> +	if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_PANIC &&
+> +				!shutdown && !system_going_down() &&
+> +				!is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN))
+> +		panic("F2FS-fs (device %s): panic forced after error\n",
+> +							sb->s_id);
+> +
+> +	if (shutdown)
+> +		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
+> +
+> +	/* continue filesystem operators if errors=continue */
+> +	if (continue_fs || f2fs_readonly(sb))
+> +		return;
+> +
+> +	f2fs_warn(sbi, "Remounting filesystem read-only");
+> +	/*
+> +	 * Make sure updated value of ->s_mount_flags will be visible before
+> +	 * ->s_flags update
+> +	 */
+> +	smp_wmb();
+> +	sb->s_flags |= SB_RDONLY;
+> +}
+> +
+> +static void f2fs_record_error_work(struct work_struct *work)
+> +{
+> +	struct f2fs_sb_info *sbi = container_of(work,
+> +					struct f2fs_sb_info, s_error_work);
+> +
+> +	f2fs_record_stop_reason(sbi);
+> +}
+> +
+>   static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+>   {
+>   	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
+> @@ -4223,7 +4333,9 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>   	sb->s_fs_info = sbi;
+>   	sbi->raw_super = raw_super;
+>   
+> +	INIT_WORK(&sbi->s_error_work, f2fs_record_error_work);
+>   	memcpy(sbi->errors, raw_super->s_errors, MAX_F2FS_ERRORS);
+> +	memcpy(sbi->stop_reason, raw_super->s_stop_reason, MAX_STOP_REASON);
+>   
+>   	/* precompute checksum seed for metadata */
+>   	if (f2fs_sb_has_inode_chksum(sbi))
+> @@ -4620,6 +4732,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>   	f2fs_destroy_segment_manager(sbi);
+>   stop_ckpt_thread:
+>   	f2fs_stop_ckpt_thread(sbi);
+> +	/* flush s_error_work before sbi destroy */
+> +	flush_work(&sbi->s_error_work);
+>   	f2fs_destroy_post_read_wq(sbi);
+>   free_devices:
+>   	destroy_device_list(sbi);
 
 
 _______________________________________________
