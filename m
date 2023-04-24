@@ -2,96 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70C9F6EC525
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Apr 2023 07:50:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F45A6EC612
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Apr 2023 08:18:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pqp65-0006On-Ca;
-	Mon, 24 Apr 2023 05:50:46 +0000
+	id 1pqpX0-0008FG-UD;
+	Mon, 24 Apr 2023 06:18:34 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <BATV+e16e2fc4419b117693a1+7183+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1pqp5t-0006O9-Ss for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Apr 2023 05:50:38 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <djwong@kernel.org>) id 1pqpX0-0008F6-F9
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Apr 2023 06:18:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZxrNtpoBTvtP7plF9L87gD1yTRTHFh9iF/vNVL4siZQ=; b=ZZAolD84WxioDdgBW8FtVmDbiM
- vLo26JPR8TbNjfqC8/eRHx2ekfQFmA02HGacQ3FLAiZekc4ElXNImo/B/Ji0ig+rcQoRLvZkgfEv5
- W71IV5uMM6BEzCHgOQ1L12yZhXLaZU2F8xdNXjfz28soZJZ5kpJr1HfcNWA1OAzH8UzE=;
+ bh=m8/vbs/KZ4kG3rGa6EPpInm5hn+HmPY26T8rCn74t/Q=; b=T1kE3Iak9CAARmfK8EcN73ZIZU
+ aNE0eG9rbJ//A/RbexLFIpz3NTxFD7c+bHJ004s08QwdFIATTUQt/jDe13H2B8Thy1r8WYd+eP1Ac
+ 9jCaTbXmi2Mpp9Wxqdp2+wXhpXSRmfvxRguwYEeCk+aOYFP+qAky3oTDo1oNxBWRWWWQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZxrNtpoBTvtP7plF9L87gD1yTRTHFh9iF/vNVL4siZQ=; b=It/vCdn306T+skFfJTFq+eOEFC
- gIw3jHFaTRm1v8aeVgwAh8YwpDNfDpVfJOVsD0nPICixavEj3uCq9HuJyQ06sB3Uc+SOebQB3CpjR
- EpkqmER6TqVrup2dTNZkakf76vh23UrsQw6FJ51kbvzeEGoG8DY+zZCyNbYgPcy1WmkE=;
-Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=m8/vbs/KZ4kG3rGa6EPpInm5hn+HmPY26T8rCn74t/Q=; b=VAVWrB7aaJTmQwf0ZgtpvkIcyd
+ BbhjZ0AVGDlk1X6wgVaCgPm3YyQaM7twcX3U9K43SuTKkHVPJovpiN4Wr/3gJrXAnk3U1TvF91h4y
+ HenBghP0XCKVciE7lLVuCSiyUZot/fBTBGpa+t+h3E7IicjL0hVXv0eAFweN4gztQHck=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pqp5t-00HHuQ-Ko for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Apr 2023 05:50:34 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=ZxrNtpoBTvtP7plF9L87gD1yTRTHFh9iF/vNVL4siZQ=; b=svYyaAsphxiqnP9jqAOpBkttbR
- N4Ce8N0Ipc/1VxOyM21RB2j/4GE46fi7rPsZ/z1UMNlV0FENWCFo4TFofunTPQab63OS+vC8+0r4z
- hNJjpAId1J1jbvucbaAE6fV27/R4fhpVu5H1IriwlKdIaxd8UWY0fze6AeJoC5Wux4wA6DOdBfJV/
- 9QBAIqYsEHvTTGlu3tsn7/reirVjk9O5IcYBT4D3udLtU/4kwAjJc3xmhDgsmL5rDcCgwN2uJGzDG
- KQwVXSDnqxUa58BQqn6skOJxcFlaZ/v1U7wXLo1TLgUnW2kFsMlx1Z5MV0IO7GbI68rB6QW8Dmxth
- S+MAaziw==;
-Received: from [2001:4bb8:189:a74f:e8a5:5f73:6d2:23b8] (helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pqp5h-00FPEY-0T; Mon, 24 Apr 2023 05:50:21 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Jens Axboe <axboe@kernel.dk>
-Date: Mon, 24 Apr 2023 07:49:26 +0200
-Message-Id: <20230424054926.26927-18-hch@lst.de>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230424054926.26927-1-hch@lst.de>
+ id 1pqpWy-0004Ea-U2 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Apr 2023 06:18:33 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B3E21617E4;
+ Mon, 24 Apr 2023 06:18:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16E9EC433D2;
+ Mon, 24 Apr 2023 06:18:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1682317106;
+ bh=yrOHoQW3uvuLL/IhB326kZ2OBDh3o24byU0KV1vIAfs=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=UT/Dbssa7FMu87YCTTzaTmgLkwn75ydoQ5e1ln1O+ABDNIqGOzM3jqE84LcFRLXtQ
+ 8PuuiokVVXrvBeYIF8iLRJehcsneFbeO541NlPuyK4WYdzoxYQNo4Ct81C2GCviI+E
+ 79/CFqU6DUXRwrF75TfpgUzUqpnzqkrSmaHscnDlFYff2Q092otoUICLTqHPcjNycW
+ C7ARkCXD0SS6fhBsNHyLWVZjmfBZdVWOaqI2B3r1Z1l+wSYSI5vYVpmU08euCPzUsC
+ TVc0sjLEGEsQXHIvBCt48O7duOfV2QNgFrxe001cpPfOwYHak5QZkXJngosDVkNNLc
+ yFrTv1XJj1gDg==
+Date: Sun, 23 Apr 2023 23:18:25 -0700
+From: "Darrick J. Wong" <djwong@kernel.org>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20230424061825.GO360889@frogsfrogsfrogs>
 References: <20230424054926.26927-1-hch@lst.de>
+ <20230424054926.26927-12-hch@lst.de>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -2.2 (--)
+Content-Disposition: inline
+In-Reply-To: <20230424054926.26927-12-hch@lst.de>
+X-Spam-Score: -5.4 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add a new config option that controls building the
- buffer_head
- code, and select it from all file systems and stacking drivers that need
- it. For the block device nodes and alternative iomap based buffered I/O path
- is provided when buffer_head support is not enabled, and iomap needs a little
- tweak to be able to compile out the buffer_head b [...] 
- Content analysis details:   (-2.2 points, 6.0 required)
+ Content preview:  On Mon, Apr 24, 2023 at 07:49:20AM +0200, Christoph Hellwig
+ wrote: > Move the assignment to current->backing_dev_info from the callers
+ into > iomap_file_buffered_write. Note that zonefs was missing th [...] 
+ Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [198.137.202.133 listed in list.dnswl.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1pqp5t-00HHuQ-Ko
-Subject: [f2fs-dev] [PATCH 17/17] fs: add CONFIG_BUFFER_HEAD
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pqpWy-0004Ea-U2
+Subject: Re: [f2fs-dev] [PATCH 11/17] iomap: assign
+ current->backing_dev_info in iomap_file_buffered_write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,744 +105,117 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org, linux-nfs@vger.kernel.org,
- cluster-devel@redhat.com, linux-xfs@vger.kernel.org,
- Miklos Szeredi <miklos@szeredi.hu>, "Darrick J. Wong" <djwong@kernel.org>,
- linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, David Howells <dhowells@redhat.com>,
- linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>, linux-ext4@vger.kernel.org,
- ceph-devel@vger.kernel.org
+Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
+ linux-nfs@vger.kernel.org, cluster-devel@redhat.com, linux-xfs@vger.kernel.org,
+ Miklos Szeredi <miklos@szeredi.hu>, linux-kernel@vger.kernel.org,
+ Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
+ David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ linux-ext4@vger.kernel.org, ceph-devel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Add a new config option that controls building the buffer_head code, and
-select it from all file systems and stacking drivers that need it.
+On Mon, Apr 24, 2023 at 07:49:20AM +0200, Christoph Hellwig wrote:
+> Move the assignment to current->backing_dev_info from the callers into
+> iomap_file_buffered_write.  Note that zonefs was missing this assignment
+> before.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  fs/gfs2/file.c         | 3 ---
+>  fs/iomap/buffered-io.c | 4 ++++
+>  fs/xfs/xfs_file.c      | 5 -----
+>  3 files changed, 4 insertions(+), 8 deletions(-)
+> 
+> diff --git a/fs/gfs2/file.c b/fs/gfs2/file.c
+> index 8c4fad359ff538..4d88c6080b3e30 100644
+> --- a/fs/gfs2/file.c
+> +++ b/fs/gfs2/file.c
+> @@ -25,7 +25,6 @@
+>  #include <linux/dlm.h>
+>  #include <linux/dlm_plock.h>
+>  #include <linux/delay.h>
+> -#include <linux/backing-dev.h>
+>  #include <linux/fileattr.h>
+>  
+>  #include "gfs2.h"
+> @@ -1041,11 +1040,9 @@ static ssize_t gfs2_file_buffered_write(struct kiocb *iocb,
+>  			goto out_unlock;
+>  	}
+>  
+> -	current->backing_dev_info = inode_to_bdi(inode);
+>  	pagefault_disable();
+>  	ret = iomap_file_buffered_write(iocb, from, &gfs2_iomap_ops);
+>  	pagefault_enable();
+> -	current->backing_dev_info = NULL;
+>  	if (ret > 0) {
+>  		iocb->ki_pos += ret;
+>  		written += ret;
+> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
+> index 2986be63d2bea6..3d5042efda202a 100644
+> --- a/fs/iomap/buffered-io.c
+> +++ b/fs/iomap/buffered-io.c
+> @@ -3,6 +3,7 @@
+>   * Copyright (C) 2010 Red Hat, Inc.
+>   * Copyright (C) 2016-2019 Christoph Hellwig.
+>   */
+> +#include <linux/backing-dev.h>
+>  #include <linux/module.h>
+>  #include <linux/compiler.h>
+>  #include <linux/fs.h>
+> @@ -876,8 +877,11 @@ iomap_file_buffered_write(struct kiocb *iocb, struct iov_iter *i,
+>  	if (iocb->ki_flags & IOCB_NOWAIT)
+>  		iter.flags |= IOMAP_NOWAIT;
+>  
+> +	current->backing_dev_info = inode_to_bdi(iter.inode);
 
-For the block device nodes and alternative iomap based buffered I/O path
-is provided when buffer_head support is not enabled, and iomap needs a
-little tweak to be able to compile out the buffer_head based code path.
+Dumb question from me late on a Sunday night, but does the iomap_unshare
+code need to set this too?  Since it works by dirtying pagecache folios
+without actually changing the contents?
 
-Otherwise this is just Kconfig and ifdef changes.
+--D
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- block/fops.c                 | 71 +++++++++++++++++++++++++++++++-----
- drivers/md/Kconfig           |  1 +
- fs/Kconfig                   |  4 ++
- fs/Makefile                  |  2 +-
- fs/adfs/Kconfig              |  1 +
- fs/affs/Kconfig              |  1 +
- fs/befs/Kconfig              |  1 +
- fs/bfs/Kconfig               |  1 +
- fs/efs/Kconfig               |  1 +
- fs/exfat/Kconfig             |  1 +
- fs/ext2/Kconfig              |  1 +
- fs/ext4/Kconfig              |  1 +
- fs/f2fs/Kconfig              |  1 +
- fs/fat/Kconfig               |  1 +
- fs/freevxfs/Kconfig          |  1 +
- fs/gfs2/Kconfig              |  1 +
- fs/hfs/Kconfig               |  1 +
- fs/hfsplus/Kconfig           |  1 +
- fs/hpfs/Kconfig              |  1 +
- fs/iomap/buffered-io.c       | 12 ++++--
- fs/isofs/Kconfig             |  1 +
- fs/jfs/Kconfig               |  1 +
- fs/minix/Kconfig             |  1 +
- fs/nilfs2/Kconfig            |  1 +
- fs/ntfs/Kconfig              |  1 +
- fs/ntfs3/Kconfig             |  1 +
- fs/ocfs2/Kconfig             |  1 +
- fs/omfs/Kconfig              |  1 +
- fs/qnx4/Kconfig              |  1 +
- fs/qnx6/Kconfig              |  1 +
- fs/reiserfs/Kconfig          |  1 +
- fs/sysv/Kconfig              |  1 +
- fs/udf/Kconfig               |  1 +
- fs/ufs/Kconfig               |  1 +
- include/linux/buffer_head.h  | 32 ++++++++--------
- include/trace/events/block.h |  2 +
- mm/migrate.c                 |  4 +-
- 37 files changed, 125 insertions(+), 32 deletions(-)
-
-diff --git a/block/fops.c b/block/fops.c
-index 7910636f8df33b..524b8a828aad3d 100644
---- a/block/fops.c
-+++ b/block/fops.c
-@@ -24,15 +24,6 @@ static inline struct inode *bdev_file_inode(struct file *file)
- 	return file->f_mapping->host;
- }
- 
--static int blkdev_get_block(struct inode *inode, sector_t iblock,
--		struct buffer_head *bh, int create)
--{
--	bh->b_bdev = I_BDEV(inode);
--	bh->b_blocknr = iblock;
--	set_buffer_mapped(bh);
--	return 0;
--}
--
- static blk_opf_t dio_bio_write_op(struct kiocb *iocb)
- {
- 	blk_opf_t opf = REQ_OP_WRITE | REQ_SYNC | REQ_IDLE;
-@@ -400,7 +391,8 @@ static int blkdev_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
- 	iomap->type = IOMAP_MAPPED;
- 	iomap->addr = iomap->offset;
- 	iomap->length = isize - iomap->offset;
--	iomap->flags |= IOMAP_F_BUFFER_HEAD;
-+	if (IS_ENABLED(CONFIG_BUFFER_HEAD))
-+		iomap->flags |= IOMAP_F_BUFFER_HEAD;
- 	return 0;
- }
- 
-@@ -408,6 +400,16 @@ static const struct iomap_ops blkdev_iomap_ops = {
- 	.iomap_begin		= blkdev_iomap_begin,
- };
- 
-+#ifdef CONFIG_BUFFER_HEAD
-+static int blkdev_get_block(struct inode *inode, sector_t iblock,
-+		struct buffer_head *bh, int create)
-+{
-+	bh->b_bdev = I_BDEV(inode);
-+	bh->b_blocknr = iblock;
-+	set_buffer_mapped(bh);
-+	return 0;
-+}
-+
- static int blkdev_writepage(struct page *page, struct writeback_control *wbc)
- {
- 	return block_write_full_page(page, blkdev_get_block, wbc);
-@@ -453,6 +455,55 @@ const struct address_space_operations def_blk_aops = {
- 	.migrate_folio	= buffer_migrate_folio_norefs,
- 	.is_dirty_writeback = buffer_check_dirty_writeback,
- };
-+#else /* CONFIG_BUFFER_HEAD */
-+static int blkdev_read_folio(struct file *file, struct folio *folio)
-+{
-+	return iomap_read_folio(folio, &blkdev_iomap_ops);
-+}
-+
-+static void blkdev_readahead(struct readahead_control *rac)
-+{
-+	iomap_readahead(rac, &blkdev_iomap_ops);
-+}
-+
-+static int blkdev_map_blocks(struct iomap_writepage_ctx *wpc,
-+		struct inode *inode, loff_t offset)
-+{
-+	loff_t isize = i_size_read(inode);
-+
-+	if (WARN_ON_ONCE(offset >= isize))
-+		return -EIO;
-+	if (offset >= wpc->iomap.offset &&
-+	    offset < wpc->iomap.offset + wpc->iomap.length)
-+		return 0;
-+	return blkdev_iomap_begin(inode, offset, isize - offset,
-+				  IOMAP_WRITE, &wpc->iomap, NULL);
-+}
-+
-+static const struct iomap_writeback_ops blkdev_writeback_ops = {
-+	.map_blocks		= blkdev_map_blocks,
-+};
-+
-+static int blkdev_writepages(struct address_space *mapping,
-+		struct writeback_control *wbc)
-+{
-+	struct iomap_writepage_ctx wpc = { };
-+
-+	return iomap_writepages(mapping, wbc, &wpc, &blkdev_writeback_ops);
-+}
-+
-+const struct address_space_operations def_blk_aops = {
-+	.dirty_folio	= filemap_dirty_folio,
-+	.release_folio		= iomap_release_folio,
-+	.invalidate_folio	= iomap_invalidate_folio,
-+	.read_folio		= blkdev_read_folio,
-+	.readahead		= blkdev_readahead,
-+	.writepages		= blkdev_writepages,
-+	.is_partially_uptodate  = iomap_is_partially_uptodate,
-+	.error_remove_page	= generic_error_remove_page,
-+	.migrate_folio		= filemap_migrate_folio,
-+};
-+#endif /* CONFIG_BUFFER_HEAD */
- 
- /*
-  * for a block special file file_inode(file)->i_size is zero
-diff --git a/drivers/md/Kconfig b/drivers/md/Kconfig
-index b0a22e99bade37..9ee18013b1f2ab 100644
---- a/drivers/md/Kconfig
-+++ b/drivers/md/Kconfig
-@@ -15,6 +15,7 @@ if MD
- config BLK_DEV_MD
- 	tristate "RAID support"
- 	select BLOCK_HOLDER_DEPRECATED if SYSFS
-+	select BUFFER_HEAD
- 	# BLOCK_LEGACY_AUTOLOAD requirement should be removed
- 	# after relevant mdadm enhancements - to make "names=yes"
- 	# the default - are widely available.
-diff --git a/fs/Kconfig b/fs/Kconfig
-index e99830c650336a..366d5d5be2784b 100644
---- a/fs/Kconfig
-+++ b/fs/Kconfig
-@@ -18,8 +18,12 @@ config VALIDATE_FS_PARSER
- config FS_IOMAP
- 	bool
- 
-+config BUFFER_HEAD
-+	bool
-+
- # old blockdev_direct_IO implementation.  Use iomap for new code instead
- config LEGACY_DIRECT_IO
-+	depends on BUFFER_HEAD
- 	bool
- 
- if BLOCK
-diff --git a/fs/Makefile b/fs/Makefile
-index da21e7d0a1cf37..3cd6aa1d2ce387 100644
---- a/fs/Makefile
-+++ b/fs/Makefile
-@@ -18,7 +18,7 @@ obj-y :=	open.o read_write.o file_table.o super.o \
- 		fs_types.o fs_context.o fs_parser.o fsopen.o init.o \
- 		kernel_read_file.o mnt_idmapping.o remap_range.o
- 
--obj-$(CONFIG_BLOCK)		+= buffer.o mpage.o
-+obj-$(CONFIG_BUFFER_HEAD)	+= buffer.o mpage.o
- obj-$(CONFIG_PROC_FS)		+= proc_namespace.o
- obj-$(CONFIG_LEGACY_DIRECT_IO)	+= direct-io.o
- obj-y				+= notify/
-diff --git a/fs/adfs/Kconfig b/fs/adfs/Kconfig
-index 44738fed66251f..1b97058f0c4a92 100644
---- a/fs/adfs/Kconfig
-+++ b/fs/adfs/Kconfig
-@@ -2,6 +2,7 @@
- config ADFS_FS
- 	tristate "ADFS file system support"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	help
- 	  The Acorn Disc Filing System is the standard file system of the
- 	  RiscOS operating system which runs on Acorn's ARM-based Risc PC
-diff --git a/fs/affs/Kconfig b/fs/affs/Kconfig
-index 962b86374e1c15..1ae432d266c32f 100644
---- a/fs/affs/Kconfig
-+++ b/fs/affs/Kconfig
-@@ -2,6 +2,7 @@
- config AFFS_FS
- 	tristate "Amiga FFS file system support"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	select LEGACY_DIRECT_IO
- 	help
- 	  The Fast File System (FFS) is the common file system used on hard
-diff --git a/fs/befs/Kconfig b/fs/befs/Kconfig
-index 9550b6462b8147..5fcfc4024ffe6f 100644
---- a/fs/befs/Kconfig
-+++ b/fs/befs/Kconfig
-@@ -2,6 +2,7 @@
- config BEFS_FS
- 	tristate "BeOS file system (BeFS) support (read only)"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	select NLS
- 	help
- 	  The BeOS File System (BeFS) is the native file system of Be, Inc's
-diff --git a/fs/bfs/Kconfig b/fs/bfs/Kconfig
-index 3a757805b58568..8e7ef866b62a62 100644
---- a/fs/bfs/Kconfig
-+++ b/fs/bfs/Kconfig
-@@ -2,6 +2,7 @@
- config BFS_FS
- 	tristate "BFS file system support"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	help
- 	  Boot File System (BFS) is a file system used under SCO UnixWare to
- 	  allow the bootloader access to the kernel image and other important
-diff --git a/fs/efs/Kconfig b/fs/efs/Kconfig
-index 2df1bac8b375b1..0833e533df9d53 100644
---- a/fs/efs/Kconfig
-+++ b/fs/efs/Kconfig
-@@ -2,6 +2,7 @@
- config EFS_FS
- 	tristate "EFS file system support (read only)"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	help
- 	  EFS is an older file system used for non-ISO9660 CD-ROMs and hard
- 	  disk partitions by SGI's IRIX operating system (IRIX 6.0 and newer
-diff --git a/fs/exfat/Kconfig b/fs/exfat/Kconfig
-index 147edeb044691d..cbeca8e44d9b38 100644
---- a/fs/exfat/Kconfig
-+++ b/fs/exfat/Kconfig
-@@ -2,6 +2,7 @@
- 
- config EXFAT_FS
- 	tristate "exFAT filesystem support"
-+	select BUFFER_HEAD
- 	select NLS
- 	select LEGACY_DIRECT_IO
- 	help
-diff --git a/fs/ext2/Kconfig b/fs/ext2/Kconfig
-index 77393fda99af09..74d98965902e16 100644
---- a/fs/ext2/Kconfig
-+++ b/fs/ext2/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- config EXT2_FS
- 	tristate "Second extended fs support"
-+	select BUFFER_HEAD
- 	select FS_IOMAP
- 	select LEGACY_DIRECT_IO
- 	help
-diff --git a/fs/ext4/Kconfig b/fs/ext4/Kconfig
-index 86699c8cab281c..e20d59221fc05b 100644
---- a/fs/ext4/Kconfig
-+++ b/fs/ext4/Kconfig
-@@ -28,6 +28,7 @@ config EXT3_FS_SECURITY
- 
- config EXT4_FS
- 	tristate "The Extended 4 (ext4) filesystem"
-+	select BUFFER_HEAD
- 	select JBD2
- 	select CRC16
- 	select CRYPTO
-diff --git a/fs/f2fs/Kconfig b/fs/f2fs/Kconfig
-index 03ef087537c7c4..68a1e23e1557c7 100644
---- a/fs/f2fs/Kconfig
-+++ b/fs/f2fs/Kconfig
-@@ -2,6 +2,7 @@
- config F2FS_FS
- 	tristate "F2FS filesystem support"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	select NLS
- 	select CRYPTO
- 	select CRYPTO_CRC32
-diff --git a/fs/fat/Kconfig b/fs/fat/Kconfig
-index afe83b4e717280..25fae1c83725bc 100644
---- a/fs/fat/Kconfig
-+++ b/fs/fat/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- config FAT_FS
- 	tristate
-+	select BUFFER_HEAD
- 	select NLS
- 	select LEGACY_DIRECT_IO
- 	help
-diff --git a/fs/freevxfs/Kconfig b/fs/freevxfs/Kconfig
-index 0e2fc08f7de492..912107ebea6f40 100644
---- a/fs/freevxfs/Kconfig
-+++ b/fs/freevxfs/Kconfig
-@@ -2,6 +2,7 @@
- config VXFS_FS
- 	tristate "FreeVxFS file system support (VERITAS VxFS(TM) compatible)"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	help
- 	  FreeVxFS is a file system driver that support the VERITAS VxFS(TM)
- 	  file system format.  VERITAS VxFS(TM) is the standard file system
-diff --git a/fs/gfs2/Kconfig b/fs/gfs2/Kconfig
-index 03c966840422ec..be7f87a8e11ae1 100644
---- a/fs/gfs2/Kconfig
-+++ b/fs/gfs2/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- config GFS2_FS
- 	tristate "GFS2 file system support"
-+	select BUFFER_HEAD
- 	select FS_POSIX_ACL
- 	select CRC32
- 	select LIBCRC32C
-diff --git a/fs/hfs/Kconfig b/fs/hfs/Kconfig
-index d985066006d588..5ea5cd8ecea9c0 100644
---- a/fs/hfs/Kconfig
-+++ b/fs/hfs/Kconfig
-@@ -2,6 +2,7 @@
- config HFS_FS
- 	tristate "Apple Macintosh file system support"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	select NLS
- 	select LEGACY_DIRECT_IO
- 	help
-diff --git a/fs/hfsplus/Kconfig b/fs/hfsplus/Kconfig
-index 8034e7827a690b..8ce4a33a9ac788 100644
---- a/fs/hfsplus/Kconfig
-+++ b/fs/hfsplus/Kconfig
-@@ -2,6 +2,7 @@
- config HFSPLUS_FS
- 	tristate "Apple Extended HFS file system support"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	select NLS
- 	select NLS_UTF8
- 	select LEGACY_DIRECT_IO
-diff --git a/fs/hpfs/Kconfig b/fs/hpfs/Kconfig
-index ec975f4668775f..ac1e9318e65a4a 100644
---- a/fs/hpfs/Kconfig
-+++ b/fs/hpfs/Kconfig
-@@ -2,6 +2,7 @@
- config HPFS_FS
- 	tristate "OS/2 HPFS file system support"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	select FS_IOMAP
- 	help
- 	  OS/2 is IBM's operating system for PC's, the same as Warp, and HPFS
-diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-index 3d5042efda202a..336a9d4542c97a 100644
---- a/fs/iomap/buffered-io.c
-+++ b/fs/iomap/buffered-io.c
-@@ -42,6 +42,12 @@ static inline struct iomap_page *to_iomap_page(struct folio *folio)
- 	return NULL;
- }
- 
-+static inline bool iomap_use_buffer_heads(const struct iomap *iomap)
-+{
-+	return IS_ENABLED(CONFIG_BUFFER_HEAD) &&
-+		(iomap->flags & IOMAP_F_BUFFER_HEAD);
-+}
-+
- static struct bio_set iomap_ioend_bioset;
- 
- static struct iomap_page *
-@@ -683,7 +689,7 @@ static int iomap_write_begin(struct iomap_iter *iter, loff_t pos,
- 
- 	if (srcmap->type == IOMAP_INLINE)
- 		status = iomap_write_begin_inline(iter, folio);
--	else if (srcmap->flags & IOMAP_F_BUFFER_HEAD)
-+	else if (iomap_use_buffer_heads(srcmap))
- 		status = __block_write_begin_int(folio, pos, len, NULL, srcmap);
- 	else
- 		status = __iomap_write_begin(iter, pos, len, folio);
-@@ -753,7 +759,7 @@ static size_t iomap_write_end(struct iomap_iter *iter, loff_t pos, size_t len,
- 
- 	if (srcmap->type == IOMAP_INLINE) {
- 		ret = iomap_write_end_inline(iter, folio, pos, copied);
--	} else if (srcmap->flags & IOMAP_F_BUFFER_HEAD) {
-+	} else if (iomap_use_buffer_heads(srcmap)) {
- 		ret = block_write_end(NULL, iter->inode->i_mapping, pos, len,
- 				copied, &folio->page, NULL);
- 	} else {
-@@ -1256,7 +1262,7 @@ static loff_t iomap_folio_mkwrite_iter(struct iomap_iter *iter,
- 	loff_t length = iomap_length(iter);
- 	int ret;
- 
--	if (iter->iomap.flags & IOMAP_F_BUFFER_HEAD) {
-+	if (iomap_use_buffer_heads(&iter->iomap)) {
- 		ret = __block_write_begin_int(folio, iter->pos, length, NULL,
- 					      &iter->iomap);
- 		if (ret)
-diff --git a/fs/isofs/Kconfig b/fs/isofs/Kconfig
-index 08ffd37b9bb8f6..51434f2a471b0f 100644
---- a/fs/isofs/Kconfig
-+++ b/fs/isofs/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- config ISO9660_FS
- 	tristate "ISO 9660 CDROM file system support"
-+	select BUFFER_HEAD
- 	help
- 	  This is the standard file system used on CD-ROMs.  It was previously
- 	  known as "High Sierra File System" and is called "hsfs" on other
-diff --git a/fs/jfs/Kconfig b/fs/jfs/Kconfig
-index 51e856f0e4b8d6..17488440eef1a9 100644
---- a/fs/jfs/Kconfig
-+++ b/fs/jfs/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- config JFS_FS
- 	tristate "JFS filesystem support"
-+	select BUFFER_HEAD
- 	select NLS
- 	select CRC32
- 	select LEGACY_DIRECT_IO
-diff --git a/fs/minix/Kconfig b/fs/minix/Kconfig
-index de2003974ff0d0..90ddfad2a75e8f 100644
---- a/fs/minix/Kconfig
-+++ b/fs/minix/Kconfig
-@@ -2,6 +2,7 @@
- config MINIX_FS
- 	tristate "Minix file system support"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	help
- 	  Minix is a simple operating system used in many classes about OS's.
- 	  The minix file system (method to organize files on a hard disk
-diff --git a/fs/nilfs2/Kconfig b/fs/nilfs2/Kconfig
-index 7d59567465e121..7dae168e346e30 100644
---- a/fs/nilfs2/Kconfig
-+++ b/fs/nilfs2/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- config NILFS2_FS
- 	tristate "NILFS2 file system support"
-+	select BUFFER_HEAD
- 	select CRC32
- 	select LEGACY_DIRECT_IO
- 	help
-diff --git a/fs/ntfs/Kconfig b/fs/ntfs/Kconfig
-index f93e69a612833f..7b2509741735a9 100644
---- a/fs/ntfs/Kconfig
-+++ b/fs/ntfs/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- config NTFS_FS
- 	tristate "NTFS file system support"
-+	select BUFFER_HEAD
- 	select NLS
- 	help
- 	  NTFS is the file system of Microsoft Windows NT, 2000, XP and 2003.
-diff --git a/fs/ntfs3/Kconfig b/fs/ntfs3/Kconfig
-index 96cc236f7f7bd3..cdfdf51e55d797 100644
---- a/fs/ntfs3/Kconfig
-+++ b/fs/ntfs3/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- config NTFS3_FS
- 	tristate "NTFS Read-Write file system support"
-+	select BUFFER_HEAD
- 	select NLS
- 	select LEGACY_DIRECT_IO
- 	help
-diff --git a/fs/ocfs2/Kconfig b/fs/ocfs2/Kconfig
-index 304d12186ccd38..4a8288f7ee8697 100644
---- a/fs/ocfs2/Kconfig
-+++ b/fs/ocfs2/Kconfig
-@@ -2,6 +2,7 @@
- config OCFS2_FS
- 	tristate "OCFS2 file system support"
- 	depends on INET && SYSFS && CONFIGFS_FS
-+	select BUFFER_HEAD
- 	select JBD2
- 	select CRC32
- 	select QUOTA
-diff --git a/fs/omfs/Kconfig b/fs/omfs/Kconfig
-index 42b2ec35a05bfb..8470f6c3e64e6a 100644
---- a/fs/omfs/Kconfig
-+++ b/fs/omfs/Kconfig
-@@ -2,6 +2,7 @@
- config OMFS_FS
- 	tristate "SonicBlue Optimized MPEG File System support"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	select CRC_ITU_T
- 	help
- 	  This is the proprietary file system used by the Rio Karma music
-diff --git a/fs/qnx4/Kconfig b/fs/qnx4/Kconfig
-index 45b5b98376c436..a2eb826e76c602 100644
---- a/fs/qnx4/Kconfig
-+++ b/fs/qnx4/Kconfig
-@@ -2,6 +2,7 @@
- config QNX4FS_FS
- 	tristate "QNX4 file system support (read only)"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	help
- 	  This is the file system used by the real-time operating systems
- 	  QNX 4 and QNX 6 (the latter is also called QNX RTP).
-diff --git a/fs/qnx6/Kconfig b/fs/qnx6/Kconfig
-index 6a9d6bce158622..8e865d72204e75 100644
---- a/fs/qnx6/Kconfig
-+++ b/fs/qnx6/Kconfig
-@@ -2,6 +2,7 @@
- config QNX6FS_FS
- 	tristate "QNX6 file system support (read only)"
- 	depends on BLOCK && CRC32
-+	select BUFFER_HEAD
- 	help
- 	  This is the file system used by the real-time operating systems
- 	  QNX 6 (also called QNX RTP).
-diff --git a/fs/reiserfs/Kconfig b/fs/reiserfs/Kconfig
-index 4d22ecfe0fab65..0e6fe26458fede 100644
---- a/fs/reiserfs/Kconfig
-+++ b/fs/reiserfs/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- config REISERFS_FS
- 	tristate "Reiserfs support (deprecated)"
-+	select BUFFER_HEAD
- 	select CRC32
- 	select LEGACY_DIRECT_IO
- 	help
-diff --git a/fs/sysv/Kconfig b/fs/sysv/Kconfig
-index b4e23e03fbeba3..67b3f90afbfd67 100644
---- a/fs/sysv/Kconfig
-+++ b/fs/sysv/Kconfig
-@@ -2,6 +2,7 @@
- config SYSV_FS
- 	tristate "System V/Xenix/V7/Coherent file system support"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	help
- 	  SCO, Xenix and Coherent are commercial Unix systems for Intel
- 	  machines, and Version 7 was used on the DEC PDP-11. Saying Y
-diff --git a/fs/udf/Kconfig b/fs/udf/Kconfig
-index 82e8bfa2dfd989..8f7ce30d47fdce 100644
---- a/fs/udf/Kconfig
-+++ b/fs/udf/Kconfig
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0-only
- config UDF_FS
- 	tristate "UDF file system support"
-+	select BUFFER_HEAD
- 	select CRC_ITU_T
- 	select NLS
- 	select LEGACY_DIRECT_IO
-diff --git a/fs/ufs/Kconfig b/fs/ufs/Kconfig
-index 6d30adb6b890fc..9301e7ecd09210 100644
---- a/fs/ufs/Kconfig
-+++ b/fs/ufs/Kconfig
-@@ -2,6 +2,7 @@
- config UFS_FS
- 	tristate "UFS file system support (read only)"
- 	depends on BLOCK
-+	select BUFFER_HEAD
- 	help
- 	  BSD and derivate versions of Unix (such as SunOS, FreeBSD, NetBSD,
- 	  OpenBSD and NeXTstep) use a file system called UFS. Some System V
-diff --git a/include/linux/buffer_head.h b/include/linux/buffer_head.h
-index 0fcc16b7f02bb4..1ef3915cacfae2 100644
---- a/include/linux/buffer_head.h
-+++ b/include/linux/buffer_head.h
-@@ -16,8 +16,6 @@
- #include <linux/wait.h>
- #include <linux/atomic.h>
- 
--#ifdef CONFIG_BLOCK
--
- enum bh_state_bits {
- 	BH_Uptodate,	/* Contains valid data */
- 	BH_Dirty,	/* Is dirty */
-@@ -196,7 +194,6 @@ void mark_buffer_write_io_error(struct buffer_head *bh);
- void touch_buffer(struct buffer_head *bh);
- void set_bh_page(struct buffer_head *bh,
- 		struct page *page, unsigned long offset);
--bool try_to_free_buffers(struct folio *);
- struct buffer_head *alloc_page_buffers(struct page *page, unsigned long size,
- 		bool retry);
- void create_empty_buffers(struct page *, unsigned long,
-@@ -207,10 +204,6 @@ void end_buffer_async_write(struct buffer_head *bh, int uptodate);
- 
- /* Things to do with buffers at mapping->private_list */
- void mark_buffer_dirty_inode(struct buffer_head *bh, struct inode *inode);
--int inode_has_buffers(struct inode *);
--void invalidate_inode_buffers(struct inode *);
--int remove_inode_buffers(struct inode *inode);
--int sync_mapping_buffers(struct address_space *mapping);
- void clean_bdev_aliases(struct block_device *bdev, sector_t block,
- 			sector_t len);
- static inline void clean_bdev_bh_alias(struct buffer_head *bh)
-@@ -230,9 +223,6 @@ void __bforget(struct buffer_head *);
- void __breadahead(struct block_device *, sector_t block, unsigned int size);
- struct buffer_head *__bread_gfp(struct block_device *,
- 				sector_t block, unsigned size, gfp_t gfp);
--void invalidate_bh_lrus(void);
--void invalidate_bh_lrus_cpu(void);
--bool has_bh_in_lru(int cpu, void *dummy);
- struct buffer_head *alloc_buffer_head(gfp_t gfp_flags);
- void free_buffer_head(struct buffer_head * bh);
- void unlock_buffer(struct buffer_head *bh);
-@@ -248,8 +238,6 @@ int __bh_read(struct buffer_head *bh, blk_opf_t op_flags, bool wait);
- void __bh_read_batch(int nr, struct buffer_head *bhs[],
- 		     blk_opf_t op_flags, bool force_lock);
- 
--extern int buffer_heads_over_limit;
--
- /*
-  * Generic address_space_operations implementations for buffer_head-backed
-  * address_spaces.
-@@ -294,8 +282,6 @@ extern int buffer_migrate_folio_norefs(struct address_space *,
- #define buffer_migrate_folio_norefs NULL
- #endif
- 
--void buffer_init(void);
--
- /*
-  * inline definitions
-  */
-@@ -455,7 +441,20 @@ __bread(struct block_device *bdev, sector_t block, unsigned size)
- 
- bool block_dirty_folio(struct address_space *mapping, struct folio *folio);
- 
--#else /* CONFIG_BLOCK */
-+#ifdef CONFIG_BUFFER_HEAD
-+
-+void buffer_init(void);
-+bool try_to_free_buffers(struct folio *folio);
-+int inode_has_buffers(struct inode *inode);
-+void invalidate_inode_buffers(struct inode *inode);
-+int remove_inode_buffers(struct inode *inode);
-+int sync_mapping_buffers(struct address_space *mapping);
-+void invalidate_bh_lrus(void);
-+void invalidate_bh_lrus_cpu(void);
-+bool has_bh_in_lru(int cpu, void *dummy);
-+extern int buffer_heads_over_limit;
-+
-+#else /* CONFIG_BUFFER_HEAD */
- 
- static inline void buffer_init(void) {}
- static inline bool try_to_free_buffers(struct folio *folio) { return true; }
-@@ -463,9 +462,10 @@ static inline int inode_has_buffers(struct inode *inode) { return 0; }
- static inline void invalidate_inode_buffers(struct inode *inode) {}
- static inline int remove_inode_buffers(struct inode *inode) { return 1; }
- static inline int sync_mapping_buffers(struct address_space *mapping) { return 0; }
-+static inline void invalidate_bh_lrus(void) {}
- static inline void invalidate_bh_lrus_cpu(void) {}
- static inline bool has_bh_in_lru(int cpu, void *dummy) { return false; }
- #define buffer_heads_over_limit 0
- 
--#endif /* CONFIG_BLOCK */
-+#endif /* CONFIG_BUFFER_HEAD */
- #endif /* _LINUX_BUFFER_HEAD_H */
-diff --git a/include/trace/events/block.h b/include/trace/events/block.h
-index 7f4dfbdf12a6f1..a0503f387104a1 100644
---- a/include/trace/events/block.h
-+++ b/include/trace/events/block.h
-@@ -12,6 +12,7 @@
- 
- #define RWBS_LEN	8
- 
-+#ifdef CONFIG_BUFFER_HEAD
- DECLARE_EVENT_CLASS(block_buffer,
- 
- 	TP_PROTO(struct buffer_head *bh),
-@@ -61,6 +62,7 @@ DEFINE_EVENT(block_buffer, block_dirty_buffer,
- 
- 	TP_ARGS(bh)
- );
-+#endif /* CONFIG_BUFFER_HEAD */
- 
- /**
-  * block_rq_requeue - place block IO request back on a queue
-diff --git a/mm/migrate.c b/mm/migrate.c
-index db3f154446af4e..9f9a81d43fc8f2 100644
---- a/mm/migrate.c
-+++ b/mm/migrate.c
-@@ -692,7 +692,7 @@ int migrate_folio(struct address_space *mapping, struct folio *dst,
- }
- EXPORT_SYMBOL(migrate_folio);
- 
--#ifdef CONFIG_BLOCK
-+#ifdef CONFIG_BUFFER_HEAD
- /* Returns true if all buffers are successfully locked */
- static bool buffer_migrate_lock_buffers(struct buffer_head *head,
- 							enum migrate_mode mode)
-@@ -850,7 +850,7 @@ int buffer_migrate_folio_norefs(struct address_space *mapping,
- 	return __buffer_migrate_folio(mapping, dst, src, mode, true);
- }
- EXPORT_SYMBOL_GPL(buffer_migrate_folio_norefs);
--#endif
-+#endif /* CONFIG_BUFFER_HEAD */
- 
- int filemap_migrate_folio(struct address_space *mapping,
- 		struct folio *dst, struct folio *src, enum migrate_mode mode)
--- 
-2.39.2
-
+>  	while ((ret = iomap_iter(&iter, ops)) > 0)
+>  		iter.processed = iomap_write_iter(&iter, i);
+> +	current->backing_dev_info = NULL;
+> +
+>  	if (iter.pos == iocb->ki_pos)
+>  		return ret;
+>  	return iter.pos - iocb->ki_pos;
+> diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
+> index 705250f9f90a1b..f5442e689baf15 100644
+> --- a/fs/xfs/xfs_file.c
+> +++ b/fs/xfs/xfs_file.c
+> @@ -27,7 +27,6 @@
+>  
+>  #include <linux/dax.h>
+>  #include <linux/falloc.h>
+> -#include <linux/backing-dev.h>
+>  #include <linux/mman.h>
+>  #include <linux/fadvise.h>
+>  #include <linux/mount.h>
+> @@ -717,9 +716,6 @@ xfs_file_buffered_write(
+>  	if (ret)
+>  		goto out;
+>  
+> -	/* We can write back this queue in page reclaim */
+> -	current->backing_dev_info = inode_to_bdi(inode);
+> -
+>  	trace_xfs_file_buffered_write(iocb, from);
+>  	ret = iomap_file_buffered_write(iocb, from,
+>  			&xfs_buffered_write_iomap_ops);
+> @@ -753,7 +749,6 @@ xfs_file_buffered_write(
+>  		goto write_retry;
+>  	}
+>  
+> -	current->backing_dev_info = NULL;
+>  out:
+>  	if (iolock)
+>  		xfs_iunlock(ip, iolock);
+> -- 
+> 2.39.2
+> 
 
 
 _______________________________________________
