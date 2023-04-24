@@ -2,100 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 150306ED1B0
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Apr 2023 17:47:30 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99EDA6ED1AA
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Apr 2023 17:46:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pqyPX-00055F-UJ;
-	Mon, 24 Apr 2023 15:47:28 +0000
+	id 1pqyOu-0002E3-9b;
+	Mon, 24 Apr 2023 15:46:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pqyPW-000558-5o
+ (envelope-from <lizetao1@huawei.com>) id 1pqyOs-0002Dw-5F
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Apr 2023 15:47:27 +0000
+ Mon, 24 Apr 2023 15:46:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1eE0PPjJfyBbHMmKQXz4pjmgI0AvMvWSD0pbwBYtfoo=; b=dSeZNi+QvnhFL4ElrjpBwxvmUt
- G6IiiEa3dp5ASm5JeKdO8cIdayS3LwEt2FcEHveLTm9vwV+ZnoxQHGwRCdABU356H2Z+jXc+n8/+R
- aj4DVF25saqQXqbnkCKAhbC94232ohwsEnMlpLcbvR6VIEo473AiDvtcmZG2F4hbbgMY=;
+ bh=nfMNEuRl44uF5Jwgh4trYhfoQd1i+R3ihLAlsMM3FDM=; b=i1pn6ZwClJcVB1su1pcqKD3TMZ
+ W5qDjokd6zfanWUHcziCEjo3QZhVs2P9btaO5B21+mCLwVmKT6Lxg7vqhfWJ9/SkpTk0LH2LNkNB4
+ msnMy+RSz47u7JSHPlsWSTlwtUyNxvL7K9Wupj4tKvvEvOd/8wm46elJmlOhaeal5w0w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=1eE0PPjJfyBbHMmKQXz4pjmgI0AvMvWSD0pbwBYtfoo=; b=YLb6RfCiNzjEbSzhsDmDVC00JT
- 1TzCqLJNqU6MNPpONq6HedAWdVKJnZybsuJlWgdH2luXdrfnqfzWrHKhApgnI13yLHUXUj1Vh1lXo
- P4KOss77wFkr/23PwtPT3L5vZ6ztJlLxE7+TzV9ZnTvbe/CJAmA1mxfXmiry6BuTSZUk=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=nfMNEuRl44uF5Jwgh4trYhfoQd1i+R3ihLAlsMM3FDM=; b=W
+ pxF7efIkYPlvo6uQAeSDqYhrKQVTW5FrGn7P5yO3nG2cQSJARfxGnNGUd9XnHypIZU+00+IfWhJJf
+ WeMaCjeNIrbGuK1jR0Wn/TxJrr66+D/GXHO5r+z3kQ/Kn59g51gW8zZwQf0JkV2i0DQKCVSqd2Mb/
+ c5XCdoOF4WlA6HAo=;
+Received: from szxga08-in.huawei.com ([45.249.212.255])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pqyPW-0007QY-Ht for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Apr 2023 15:47:27 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C6FF262268;
- Mon, 24 Apr 2023 15:47:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32842C433D2;
- Mon, 24 Apr 2023 15:47:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1682351240;
- bh=4RTntsS8Ltvi/zweHMoGG/466+f9Gl/cJ22m2S/ZjzE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=MWidb279bEM5WgbBMBj6MoM4r+XA9hNa4cZhS5rsS0Jchg+5o66aoGHNDrVDImCl+
- qqIt6ssRxmKXjk2Ftx/Bcs1uMUYr8RYZwBtIgDcIW/OqWN8FWdKGmBVYNb1YPBS4Sd
- IxFx2BCUIUWmhgHq2EeVDR/fU69fTjgVp01Yn3i83Tj3P0fz/YVCnV9bnDzm9XeWoe
- qFbFG6MpK+vSn5IAhXQJItFUP4nSV2/x3Qdf1iafNkOe0VYaUMTNUrBWHQ4p0jnkgK
- kG5aX2p1bS5e5nkxOq3ZU9IZ9UHUpITuvAHsEnauSf99sCd4nBh0f9x0x+wdjFDW+z
- DNzh7ZGwnnGEQ==
-Message-ID: <32d4cb93-1491-4d1b-7713-61369a93f658@kernel.org>
-Date: Mon, 24 Apr 2023 23:47:20 +0800
+ id 1pqyOp-0007PI-2R for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Apr 2023 15:46:45 +0000
+Received: from kwepemi500012.china.huawei.com (unknown [172.30.72.53])
+ by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4Q4qC51sWZz17Trl;
+ Mon, 24 Apr 2023 23:42:41 +0800 (CST)
+Received: from huawei.com (10.90.53.73) by kwepemi500012.china.huawei.com
+ (7.221.188.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Mon, 24 Apr
+ 2023 23:46:31 +0800
+To: <jaegeuk@kernel.org>, <chao@kernel.org>
+Date: Mon, 24 Apr 2023 23:46:48 +0000
+Message-ID: <20230424234648.577673-1-lizetao1@huawei.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Content-Language: en-US
-To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
-References: <20230424154440.23279-1-daeho43@gmail.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230424154440.23279-1-daeho43@gmail.com>
-X-Spam-Score: -7.9 (-------)
+X-Originating-IP: [10.90.53.73]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ kwepemi500012.china.huawei.com (7.221.188.12)
+X-CFilter-Loop: Reflected
+X-Spam-Score: -2.3 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/4/24 23:44, Daeho Jeong wrote: > From: Daeho Jeong
- <daehojeong@google.com> > > When a node block is missing for atomic write
- block replacement, we need > to allocate it in advance of the repla [...]
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  After the commit "0a4ee518185", this "goto" statement was
+ redundant,
+ remote it for clean code. Signed-off-by: Li Zetao <lizetao1@huawei.com>
+ --- fs/f2fs/data.c | 1 - 1 file changed,
+ 1 deletion(-) diff --git a/fs/f2fs/data.c
+ b/fs/f2fs/data.c index 06b552a0aba2..c9a71b4b09dd 100644 --- a/fs/f2fs/data.c
+ +++ b/fs/f2fs/data.c @@ -2171, 7 +2171,
+ 6 @@ static int f2fs_read_single_page(struct inode *inod [...] 
+ Content analysis details:   (-2.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [45.249.212.255 listed in wl.mailspike.net]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [45.249.212.255 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 DATE_IN_FUTURE_06_12   Date: is 6 to 12 hours after Received: date
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pqyPW-0007QY-Ht
-Subject: Re: [f2fs-dev] [PATCH] f2fs: allocate node blocks for atomic write
- block replacement
+X-Headers-End: 1pqyOp-0007PI-2R
+Subject: [f2fs-dev] [PATCH -next] f2fs: remove redundant goto statement in
+ f2fs_read_single_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,23 +94,36 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+From: Li Zetao via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Li Zetao <lizetao1@huawei.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/4/24 23:44, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
-> 
-> When a node block is missing for atomic write block replacement, we need
-> to allocate it in advance of the replacement.
-> 
-> Fixes: 3db1de0e582c ("f2fs: change the current atomic write way")
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+After the commit "0a4ee518185", this "goto" statement was redundant,
+remote it for clean code.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Li Zetao <lizetao1@huawei.com>
+---
+ fs/f2fs/data.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-Thanks,
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 06b552a0aba2..c9a71b4b09dd 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2171,7 +2171,6 @@ static int f2fs_read_single_page(struct inode *inode, struct page *page,
+ 	f2fs_update_iostat(F2FS_I_SB(inode), NULL, FS_DATA_READ_IO,
+ 							F2FS_BLKSIZE);
+ 	*last_block_in_bio = block_nr;
+-	goto out;
+ out:
+ 	*bio_ret = bio;
+ 	return ret;
+-- 
+2.34.1
+
 
 
 _______________________________________________
