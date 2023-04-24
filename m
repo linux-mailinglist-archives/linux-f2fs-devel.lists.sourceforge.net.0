@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 000336EC513
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Apr 2023 07:49:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D3A26EC515
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Apr 2023 07:50:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pqp5J-0004IG-SE;
+	id 1pqp5J-0007IV-1T;
 	Mon, 24 Apr 2023 05:49:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+e16e2fc4419b117693a1+7183+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1pqp5H-0004I9-HO for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Apr 2023 05:49:54 +0000
+ id 1pqp5H-0007IL-08 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Apr 2023 05:49:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=V5nklQoA9f4p457fAmSLCbWYVHcQ95Tr9Yi93vZ1hXQ=; b=nCjuVtkVVc1fPqw4NetZPxZ3n7
- OHJa+Bt2N0O6Dk1bwwek+9IWlun+WZ2+tLk991c24566npRBu6q5gkVEQsbKhVSqhx7aDHc7zOqTR
- B18WS5bqhNZll/xMHTHVSfiaAV4MnOVJNZZDfb3ow1URpWyMigSJKZPmTkyugVqXfdj4=;
+ bh=TRgCZMat6SwmbUJc5nYBP6IbIwCnK37cme83Pl+2pA8=; b=RuJs+4j3k+5DRVoUosPqnznquO
+ yNHdXNw0fDZPZkK7hs/GK1ynerkXPDTDdSaWl2ELm0Zb6n41QrYk6oUddq1tw5hXMgkNUGcpF03fU
+ rPI8r2XBnuZ3CN+bylxkGSvkHmYU+hTOLLnqsaNdHzWIZdnLNJHvxumpnQTliwELocq4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=V5nklQoA9f4p457fAmSLCbWYVHcQ95Tr9Yi93vZ1hXQ=; b=f5NLsfM1OpZeLrQfmizEER0QeA
- HieqnxcGalEoWW11bu6lkB4p8q0qGr7A4IL1TuJGrPXbCgMdkENK++x8FeoiyWsrLkZOOCmrtBwA4
- x58zPgZuMecKaPXVlWPUgKpkOT5jb+iMkYxrfBVXpEDxHert9JTG8YulSe090C3msmm4=;
+ bh=TRgCZMat6SwmbUJc5nYBP6IbIwCnK37cme83Pl+2pA8=; b=iKSrVpaV57T/fcZbJEslD68taM
+ Qtxx7JoiuN52efOdr1ekpBK+b+Xe4a1gqmIbaZBIZ+imHXay4mxIzc4Sh40Nln7h1TNP0DGIEE3To
+ UAAL6mWSRgBb+bAUtvtKB/N/XylBg/33DPCXNrAt8fJk6PGDVEeQzSKABoucai/7GQY4=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pqp5E-0003Tp-MK for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Apr 2023 05:49:54 +0000
+ id 1pqp5E-0003Ts-MJ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Apr 2023 05:49:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=V5nklQoA9f4p457fAmSLCbWYVHcQ95Tr9Yi93vZ1hXQ=; b=BVLdIyeC9XyB883rbVnHnnshYb
- v9MBAr9Kui06l3iqsHsxD6wr7hDLJughW5sYL6bLE4MMi2NT4MojE/Kqi+QP5twRZ+EZc4+pHQm3S
- kcN/fEcPtZ2XKOf2kEcveCPw4THCw9R3Vp3FTaYaHC5Q6XyN/KDa1LZrslZMBHL8ouAUMCh+sbtnt
- jGhkPdK1bf1+RRVNAAo7uctMzy3iud0d3e4hNElvjoV0xaEA7vu/iU7cwGxhgjr4qByRCVU5CGTNI
- M7ydlMTMwaIbWoe21seFAlCC/o0TZc5ZPNp4ELlK9gRxqfYBpHM10qTh06+1CPkGzgFFFvJGUiBet
- OQvgwjkg==;
+ bh=TRgCZMat6SwmbUJc5nYBP6IbIwCnK37cme83Pl+2pA8=; b=IisOQjT9f5WFKcdC3Jd5pbj8sh
+ 4VxYG9fcjD21qV4vH246OoxCV6nph/mgCU3NIWP8P4y3dlViSSGAmZjXKbLou0yjIYZaM3cnIY2Kt
+ mjxtvSSMGgpzOLyFt6Owfa5+glDjlrIybM/1ZBwz3b1jzQlJ1EgeUSLyfdrbYx4CDGDKxjiIrnu36
+ kfJfmV8CzCSfJEL70k1/Giql2X0o5GEh/voLjYWzXCdDVciAzPcCtw1ssj+JIttdkB/PCHceRsfbT
+ 6ORot5jXqhFK8ewJjwizNl7JjjUwrZhWXmblesM672+/0ZZBeLqjjqHAXGNhN8Y39rALvBAMKA3jw
+ wWfxZqbQ==;
 Received: from [2001:4bb8:189:a74f:e8a5:5f73:6d2:23b8] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pqp4y-00FOuS-1q; Mon, 24 Apr 2023 05:49:37 +0000
+ id 1pqp51-00FOul-1F; Mon, 24 Apr 2023 05:49:39 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Mon, 24 Apr 2023 07:49:11 +0200
-Message-Id: <20230424054926.26927-3-hch@lst.de>
+Date: Mon, 24 Apr 2023 07:49:12 +0200
+Message-Id: <20230424054926.26927-4-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230424054926.26927-1-hch@lst.de>
 References: <20230424054926.26927-1-hch@lst.de>
@@ -69,9 +69,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  def_blk_fops always returns -ENODEV, which dosn't match the
- return value of a non-existing block device with CONFIG_BLOCK, which is -ENXIO.
- Just remove the extra implementation and fall back to the de [...] 
+ Content preview: block_page_mkwrite_return is neither block nor mkwrite
+ specific, 
+ and should not be under CONFIG_BLOCK. Move it to mm.h and rename it to
+ errno_to_vmfault.
+ Signed-off-by: Christoph Hellwig <hch@lst.de> --- fs/ext4/inode.c | 2 +-
+ fs/f2fs/file.c | 2 +- fs/gfs2/file.c | 16 ++++++++--------
+ fs/iomap/buffered-io.c
+ | 2 +- fs/nilfs2/file.c | 2 +- fs/udf/file.c [...] 
  Content analysis details:   (-2.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -87,9 +92,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1pqp5E-0003Tp-MK
-Subject: [f2fs-dev] [PATCH 02/17] fs: remove the special !CONFIG_BLOCK
- def_blk_fops
+X-Headers-End: 1pqp5E-0003Ts-MJ
+Subject: [f2fs-dev] [PATCH 03/17] fs: rename and move
+ block_page_mkwrite_return
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,79 +118,207 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-def_blk_fops always returns -ENODEV, which dosn't match the return value
-of a non-existing block device with CONFIG_BLOCK, which is -ENXIO.
-Just remove the extra implementation and fall back to the default
-no_open_fops that always returns -ENXIO.
+block_page_mkwrite_return is neither block nor mkwrite specific, and
+should not be under CONFIG_BLOCK.  Move it to mm.h and rename it to
+errno_to_vmfault.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/Makefile   | 10 ++--------
- fs/inode.c    |  3 ++-
- fs/no-block.c | 19 -------------------
- 3 files changed, 4 insertions(+), 28 deletions(-)
- delete mode 100644 fs/no-block.c
+ fs/ext4/inode.c             |  2 +-
+ fs/f2fs/file.c              |  2 +-
+ fs/gfs2/file.c              | 16 ++++++++--------
+ fs/iomap/buffered-io.c      |  2 +-
+ fs/nilfs2/file.c            |  2 +-
+ fs/udf/file.c               |  2 +-
+ include/linux/buffer_head.h | 12 ------------
+ include/linux/mm.h          | 13 +++++++++++++
+ 8 files changed, 26 insertions(+), 25 deletions(-)
 
-diff --git a/fs/Makefile b/fs/Makefile
-index 05f89b5c962f88..da21e7d0a1cf37 100644
---- a/fs/Makefile
-+++ b/fs/Makefile
-@@ -18,14 +18,8 @@ obj-y :=	open.o read_write.o file_table.o super.o \
- 		fs_types.o fs_context.o fs_parser.o fsopen.o init.o \
- 		kernel_read_file.o mnt_idmapping.o remap_range.o
+diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+index bf0b7dea4900af..c0f41a38bd9ca4 100644
+--- a/fs/ext4/inode.c
++++ b/fs/ext4/inode.c
+@@ -6343,7 +6343,7 @@ vm_fault_t ext4_page_mkwrite(struct vm_fault *vmf)
+ 	if (err == -ENOSPC && ext4_should_retry_alloc(inode->i_sb, &retries))
+ 		goto retry_alloc;
+ out_ret:
+-	ret = block_page_mkwrite_return(err);
++	ret = errno_to_vmfault(err);
+ out:
+ 	filemap_invalidate_unlock_shared(mapping);
+ 	sb_end_pagefault(inode->i_sb);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 15dabeac469050..f4ab23efcf85f8 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -161,7 +161,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
  
--ifeq ($(CONFIG_BLOCK),y)
--obj-y +=	buffer.o mpage.o
--else
--obj-y +=	no-block.o
--endif
--
--obj-$(CONFIG_PROC_FS) += proc_namespace.o
--
-+obj-$(CONFIG_BLOCK)		+= buffer.o mpage.o
-+obj-$(CONFIG_PROC_FS)		+= proc_namespace.o
- obj-$(CONFIG_LEGACY_DIRECT_IO)	+= direct-io.o
- obj-y				+= notify/
- obj-$(CONFIG_EPOLL)		+= eventpoll.o
-diff --git a/fs/inode.c b/fs/inode.c
-index 4558dc2f135573..d43f07f146eb73 100644
---- a/fs/inode.c
-+++ b/fs/inode.c
-@@ -2265,7 +2265,8 @@ void init_special_inode(struct inode *inode, umode_t mode, dev_t rdev)
- 		inode->i_fop = &def_chr_fops;
- 		inode->i_rdev = rdev;
- 	} else if (S_ISBLK(mode)) {
--		inode->i_fop = &def_blk_fops;
-+		if (IS_ENABLED(CONFIG_BLOCK))
-+			inode->i_fop = &def_blk_fops;
- 		inode->i_rdev = rdev;
- 	} else if (S_ISFIFO(mode))
- 		inode->i_fop = &pipefifo_fops;
-diff --git a/fs/no-block.c b/fs/no-block.c
-deleted file mode 100644
-index 481c0f0ab4bd2c..00000000000000
---- a/fs/no-block.c
-+++ /dev/null
-@@ -1,19 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-or-later
--/* no-block.c: implementation of routines required for non-BLOCK configuration
-- *
-- * Copyright (C) 2006 Red Hat, Inc. All Rights Reserved.
-- * Written by David Howells (dhowells@redhat.com)
-- */
--
--#include <linux/kernel.h>
--#include <linux/fs.h>
--
--static int no_blkdev_open(struct inode * inode, struct file * filp)
+ 	sb_end_pagefault(inode->i_sb);
+ err:
+-	return block_page_mkwrite_return(err);
++	return errno_to_vmfault(err);
+ }
+ 
+ static const struct vm_operations_struct f2fs_file_vm_ops = {
+diff --git a/fs/gfs2/file.c b/fs/gfs2/file.c
+index 300844f50dcd28..8c4fad359ff538 100644
+--- a/fs/gfs2/file.c
++++ b/fs/gfs2/file.c
+@@ -432,7 +432,7 @@ static vm_fault_t gfs2_page_mkwrite(struct vm_fault *vmf)
+ 	gfs2_holder_init(ip->i_gl, LM_ST_EXCLUSIVE, 0, &gh);
+ 	err = gfs2_glock_nq(&gh);
+ 	if (err) {
+-		ret = block_page_mkwrite_return(err);
++		ret = errno_to_vmfault(err);
+ 		goto out_uninit;
+ 	}
+ 
+@@ -474,7 +474,7 @@ static vm_fault_t gfs2_page_mkwrite(struct vm_fault *vmf)
+ 
+ 	err = gfs2_rindex_update(sdp);
+ 	if (err) {
+-		ret = block_page_mkwrite_return(err);
++		ret = errno_to_vmfault(err);
+ 		goto out_unlock;
+ 	}
+ 
+@@ -482,12 +482,12 @@ static vm_fault_t gfs2_page_mkwrite(struct vm_fault *vmf)
+ 	ap.target = data_blocks + ind_blocks;
+ 	err = gfs2_quota_lock_check(ip, &ap);
+ 	if (err) {
+-		ret = block_page_mkwrite_return(err);
++		ret = errno_to_vmfault(err);
+ 		goto out_unlock;
+ 	}
+ 	err = gfs2_inplace_reserve(ip, &ap);
+ 	if (err) {
+-		ret = block_page_mkwrite_return(err);
++		ret = errno_to_vmfault(err);
+ 		goto out_quota_unlock;
+ 	}
+ 
+@@ -500,7 +500,7 @@ static vm_fault_t gfs2_page_mkwrite(struct vm_fault *vmf)
+ 	}
+ 	err = gfs2_trans_begin(sdp, rblocks, 0);
+ 	if (err) {
+-		ret = block_page_mkwrite_return(err);
++		ret = errno_to_vmfault(err);
+ 		goto out_trans_fail;
+ 	}
+ 
+@@ -508,7 +508,7 @@ static vm_fault_t gfs2_page_mkwrite(struct vm_fault *vmf)
+ 	if (gfs2_is_stuffed(ip)) {
+ 		err = gfs2_unstuff_dinode(ip);
+ 		if (err) {
+-			ret = block_page_mkwrite_return(err);
++			ret = errno_to_vmfault(err);
+ 			goto out_trans_end;
+ 		}
+ 	}
+@@ -524,7 +524,7 @@ static vm_fault_t gfs2_page_mkwrite(struct vm_fault *vmf)
+ 
+ 	err = gfs2_allocate_page_backing(page, length);
+ 	if (err)
+-		ret = block_page_mkwrite_return(err);
++		ret = errno_to_vmfault(err);
+ 
+ out_page_locked:
+ 	if (ret != VM_FAULT_LOCKED)
+@@ -558,7 +558,7 @@ static vm_fault_t gfs2_fault(struct vm_fault *vmf)
+ 	gfs2_holder_init(ip->i_gl, LM_ST_SHARED, 0, &gh);
+ 	err = gfs2_glock_nq(&gh);
+ 	if (err) {
+-		ret = block_page_mkwrite_return(err);
++		ret = errno_to_vmfault(err);
+ 		goto out_uninit;
+ 	}
+ 	ret = filemap_fault(vmf);
+diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
+index 6f4c97a6d7e9dc..2986be63d2bea6 100644
+--- a/fs/iomap/buffered-io.c
++++ b/fs/iomap/buffered-io.c
+@@ -1290,7 +1290,7 @@ vm_fault_t iomap_page_mkwrite(struct vm_fault *vmf, const struct iomap_ops *ops)
+ 	return VM_FAULT_LOCKED;
+ out_unlock:
+ 	folio_unlock(folio);
+-	return block_page_mkwrite_return(ret);
++	return errno_to_vmfault(ret);
+ }
+ EXPORT_SYMBOL_GPL(iomap_page_mkwrite);
+ 
+diff --git a/fs/nilfs2/file.c b/fs/nilfs2/file.c
+index a265d391ffe92d..ea35294bb158a3 100644
+--- a/fs/nilfs2/file.c
++++ b/fs/nilfs2/file.c
+@@ -108,7 +108,7 @@ static vm_fault_t nilfs_page_mkwrite(struct vm_fault *vmf)
+ 	wait_for_stable_page(page);
+  out:
+ 	sb_end_pagefault(inode->i_sb);
+-	return block_page_mkwrite_return(ret);
++	return errno_to_vmfault(ret);
+ }
+ 
+ static const struct vm_operations_struct nilfs_file_vm_ops = {
+diff --git a/fs/udf/file.c b/fs/udf/file.c
+index 8238f742377bab..9420284d7c0455 100644
+--- a/fs/udf/file.c
++++ b/fs/udf/file.c
+@@ -71,7 +71,7 @@ static vm_fault_t udf_page_mkwrite(struct vm_fault *vmf)
+ 		err = block_commit_write(page, 0, end);
+ 	if (err < 0) {
+ 		unlock_page(page);
+-		ret = block_page_mkwrite_return(err);
++		ret = errno_to_vmfault(err);
+ 		goto out_unlock;
+ 	}
+ out_dirty:
+diff --git a/include/linux/buffer_head.h b/include/linux/buffer_head.h
+index 8f14dca5fed756..0fcc16b7f02bb4 100644
+--- a/include/linux/buffer_head.h
++++ b/include/linux/buffer_head.h
+@@ -281,18 +281,6 @@ int generic_cont_expand_simple(struct inode *inode, loff_t size);
+ int block_commit_write(struct page *page, unsigned from, unsigned to);
+ int block_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf,
+ 				get_block_t get_block);
+-/* Convert errno to return value from ->page_mkwrite() call */
+-static inline vm_fault_t block_page_mkwrite_return(int err)
 -{
--	return -ENODEV;
+-	if (err == 0)
+-		return VM_FAULT_LOCKED;
+-	if (err == -EFAULT || err == -EAGAIN)
+-		return VM_FAULT_NOPAGE;
+-	if (err == -ENOMEM)
+-		return VM_FAULT_OOM;
+-	/* -ENOSPC, -EDQUOT, -EIO ... */
+-	return VM_FAULT_SIGBUS;
 -}
--
--const struct file_operations def_blk_fops = {
--	.open		= no_blkdev_open,
--	.llseek		= noop_llseek,
--};
+ sector_t generic_block_bmap(struct address_space *, sector_t, get_block_t *);
+ int block_truncate_page(struct address_space *, loff_t, get_block_t *);
+ 
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index 1f79667824eb60..03e645032c81ac 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -3061,6 +3061,19 @@ extern vm_fault_t filemap_map_pages(struct vm_fault *vmf,
+ 		pgoff_t start_pgoff, pgoff_t end_pgoff);
+ extern vm_fault_t filemap_page_mkwrite(struct vm_fault *vmf);
+ 
++/* Convert errno to return value from ->page_mkwrite() call */
++static inline vm_fault_t errno_to_vmfault(int err)
++{
++	if (err == 0)
++		return VM_FAULT_LOCKED;
++	if (err == -EFAULT || err == -EAGAIN)
++		return VM_FAULT_NOPAGE;
++	if (err == -ENOMEM)
++		return VM_FAULT_OOM;
++	/* -ENOSPC, -EDQUOT, -EIO ... */
++	return VM_FAULT_SIGBUS;
++}
++
+ extern unsigned long stack_guard_gap;
+ /* Generic expand stack which grows the stack according to GROWS{UP,DOWN} */
+ extern int expand_stack(struct vm_area_struct *vma, unsigned long address);
 -- 
 2.39.2
 
