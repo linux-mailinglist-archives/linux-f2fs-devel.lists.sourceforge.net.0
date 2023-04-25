@@ -2,127 +2,127 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EE596EE70E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Apr 2023 19:44:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8695C6EE749
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Apr 2023 20:03:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1prMiJ-0003WT-75;
-	Tue, 25 Apr 2023 17:44:27 +0000
+	id 1prN0N-0004dU-0q;
+	Tue, 25 Apr 2023 18:03:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <frank.li@vivo.com>) id 1prMiE-0003WD-PH
+ (envelope-from <frank.li@vivo.com>) id 1prN0L-0004dN-33
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Apr 2023 17:44:23 +0000
+ Tue, 25 Apr 2023 18:03:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
  :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fw0mEMKBPucakJ7PmEWsBqNbxhOtIZzkO8Mn7goxUN0=; b=Pg9IWy08gi9cPrv+GIzfuhKUKT
- sOwgeAt3ufUHZIlUOGgwPUBKxFLB0Lw7qgd7iZssaJtyIShwzjvn1syifJXh0TyCPZOMKKrKdiV8j
- QiSkNeKbH9Fi0gfzOmQ/Y/gYWUSeVWEtV4OnFXZBnYoEd2kjdtjaafo3Y+Bf60QMF8Ds=;
+ bh=G4KJ4WThwLq2cocKaOEx7oU6Zfzf1j5Y5+VfMZmDTB4=; b=V4ZrqrNSlYSoKLM5MtxrFEkO0U
+ 9N+R0NiEtGKwl56optN7qNyda5WlBLe+q64gY8ivo9cblo4G81MtxEviubgUicC/dGx3JhfOesMat
+ 5dmEItap+9XaNQWI4ChhNFio7R9p8cSMoRkxMpI/iK5XNIP6rFtrlo0F5FGYorhelhck=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
  Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=fw0mEMKBPucakJ7PmEWsBqNbxhOtIZzkO8Mn7goxUN0=; b=D
- Pk1KblVV6xcw7SJUaeZbAR7yIlR+jQq0PiOhxPNQpt+UK1LIt4AUqEI1gZJ1esP5QsIbqHjY7kAHA
- 3dRJwjDbxo2UBRKcPktyg7N8wx0A8oH+VTZf5NgSAgnMsWFmqSYh0cxm8MBQughFkrFzwk1TKckdl
- WkdUBzbCdMbILpAo=;
-Received: from mail-psaapc01on2130.outbound.protection.outlook.com
- ([40.107.255.130] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ List-Owner:List-Archive; bh=G4KJ4WThwLq2cocKaOEx7oU6Zfzf1j5Y5+VfMZmDTB4=; b=X
+ otbUVUpBrNpogXsug0b08tulYh0w/08umr5U/i7UO1okerpeslvxHosw+2VfgruWDG1diZV5Jyh86
+ xjf1ibH37227LCqvB21CdidH5J58klCxtLy8PvKUFHNG6/gr4kl2y+l+O+rZG1vdhCx0O54cj9MZq
+ dKICGm7j5js27PKE=;
+Received: from mail-psaapc01on2114.outbound.protection.outlook.com
+ ([40.107.255.114] helo=APC01-PSA-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1prMi3-0006KB-NC for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Apr 2023 17:44:22 +0000
+ id 1prN0L-0006vl-4a for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Apr 2023 18:03:05 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Znn/e9CO7n5DxB7o0L1gPhO+t29QIl8L8houIRIhrWL+/rD6/omS9jwziqkQnEqFkjxJytGoMnIVhJVsPdoUOokqsgry2iPqdoF/9ZWQPJ3+VxPZVEXBUvl4TmDfbFeSpEa65olS8tbWlAsq90BGJ4N8kAhB6gsqvk2XOWOW8UtYQ23g7nJEZEO2A7MdQpJx9T5rahhLyQM80ex+qFfgl4/IP/gmKItlGkDOsHcpPEUwu3ko4K3mlgh3Gst0nfDgDGSlV2886op3+uctYXNOeTkbXcxqP+KYvumEG7PA0sZPBHhJiTyq3k359KuUae7YlZa1ZWTuaDhZGRtc7zczBg==
+ b=I/DWDayLGr35P+lI54/5MIf0dORsl2Rmdd/pEK51E9ZJBcmSB40RZ7JUlMiP5elNZilF0Wkgeua9IT1AMa9Sn9AJfrVaH9oM1JdAAYw1Vhovtoo+VA+T4EA4BAw5bDi/Z0YwUOwp0QFxPcO+kKrQUwptpqpxPqlzsJC1Vw3+q2nZKRvt99frSknKpuryARTqvHB0orBKS9YNM2euP9azJtFfRZ8688Jh8DUUX6mzEyUTsRSCn8zJa0WqCjzAvcXkqoBe0mBNq2ALiCCa1hd8bGpMBvYfq40q68XBLQA4dMMhgLbf7AxLjCL8zBTLpzBAmY8wgwoF9JeGwmkiHlMrdg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fw0mEMKBPucakJ7PmEWsBqNbxhOtIZzkO8Mn7goxUN0=;
- b=HBcDUExPoZVI79SnyDf42iBPZ0Lok/cR15GP/F2iVLRIeKQC2X6y5sWMdmh2ooCIJXmhe3WPP6yIeUY6G+MMeW5imhJGeUqP2OfzlIAgZXBlumHYQapeOVTtXsGAHMdUK/5pW42/papJ8/8MHIuW0r4cK64vkunivVZE4gVFfHjRg3+rknkGRvM3xX/udgrY0Q4ptbC410V6CQ19a8jHO63vesZ+c+4KlwVWyaGn4+/k0TnfmUxzyDNxwQnvl4Ek9jFLz/64Ts5vZ+j/rjIUAobtsbO0PCK3wpyqp0dpSRbLLAEADFuXtbswPHjzp+Rzv3abS0u+QVacSOMHKBsxEg==
+ bh=G4KJ4WThwLq2cocKaOEx7oU6Zfzf1j5Y5+VfMZmDTB4=;
+ b=eka31/Iebm17hKIxc67Z32N8OUWsv0h0zOwZ52DWwIbpwypHS6baYcM49tGX6mnzDR+9HK58K51pOLEFH+zKDMEd8tji72s5mXVqOkbcL4h3+ttZmGxMCoA51azPH1vcYXce7Y/U0DGIBgrsl0ieX7wGV7fW2eZ9a1boUKWVRsVcloJkYOTH9Ba8cNMPiKygMt7x54FJOENIKmqVBacnAohPwNQkhM/Ker9T7XZ+WQuZ7lECCfcCCbKV0gX6F1vsEx1H6g1i31YArZ1+ZbrsPumigJyjwDAQ+G4KuXxFbzlhPuDC9GlN+0nj4OZlxjjeB8CWGMwLW0Lq8o1tKaqMpA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
  dkim=pass header.d=vivo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fw0mEMKBPucakJ7PmEWsBqNbxhOtIZzkO8Mn7goxUN0=;
- b=fgr50EFc+8XrwOVtmMmPYXCYSm902rVT+zEvDr0tpRaEYKBX3DgR7FI213yub9DRzpVvouL3n8FnCEDe92uUa3ftwrnpLSVTp2pGhZtcQrlCxFTOfv05MoxGmt3ILyK37KL7uPzpWgVwL0r++soQuAcvTI540Gy98vBjy7UrDgPRMbBjBLFSnI1O6muzM0RcsD1qv+dyimdPqppDUbMHQnkBzxMRjL4Orazg3FHidKI1rrBUwKi/uebrsUUqztCJeg/Whpo6Z67cxsNHu3twekcFaYrzmSIg3wOA7ySqqXhY8SL1ISOhlJLesToBKLkR3ZQi5Us1wT43iZmjwLcowQ==
+ bh=G4KJ4WThwLq2cocKaOEx7oU6Zfzf1j5Y5+VfMZmDTB4=;
+ b=JsdWvpjI3FcCJS9JpxyMeiOkOROo7DWYhYs2Y4SsBXu22DKauXU9T00iBzwKHMCY1UXW1YeCMl84tJ896JlJIk4YK/njHAEc3ozvdIGxp7sU3e58dT6EAAY5cVZRdsyXCvCzHFGOlERmhGJKqyWWFAz6flY7V5LpG/TVGBHvQddKlPUaYJNdlLZVSHG51GVjCNU6kFgYcnkVebrpp5o4K79o1C/wYvlbeLlcLsjDzmPUkTBfgKMW4qjamomTJNKDOJXiLX82TbrYYppgcpDgH5NiWUdxN4HAh63d6BJwqBnIDk9M9wn+yG4nxHC3VwLNzkN7bffPAsw6p3SF02hWaA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vivo.com;
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by SEYPR06MB6360.apcprd06.prod.outlook.com (2603:1096:101:13f::10) with
+ by SEZPR06MB5967.apcprd06.prod.outlook.com (2603:1096:101:e7::16) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.33; Tue, 25 Apr
- 2023 17:44:02 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.32; Tue, 25 Apr
+ 2023 18:02:54 +0000
 Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::76d6:4828:7e80:2965]) by SEZPR06MB5269.apcprd06.prod.outlook.com
  ([fe80::76d6:4828:7e80:2965%7]) with mapi id 15.20.6319.033; Tue, 25 Apr 2023
- 17:44:01 +0000
+ 18:02:54 +0000
 To: Jaegeuk Kim <jaegeuk@kernel.org>,
 	Chao Yu <chao@kernel.org>
-Date: Wed, 26 Apr 2023 01:43:50 +0800
-Message-Id: <20230425174350.80714-1-frank.li@vivo.com>
+Date: Wed, 26 Apr 2023 02:02:43 +0800
+Message-Id: <20230425180243.9030-1-frank.li@vivo.com>
 X-Mailer: git-send-email 2.39.0
-X-ClientProxiedBy: SG2PR03CA0110.apcprd03.prod.outlook.com
- (2603:1096:4:91::14) To SEZPR06MB5269.apcprd06.prod.outlook.com
+X-ClientProxiedBy: SI2PR04CA0013.apcprd04.prod.outlook.com
+ (2603:1096:4:197::6) To SEZPR06MB5269.apcprd06.prod.outlook.com
  (2603:1096:101:78::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SEYPR06MB6360:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0db0388b-7c2e-42cd-354d-08db45b4a741
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SEZPR06MB5967:EE_
+X-MS-Office365-Filtering-Correlation-Id: abd394e6-8b2a-4221-11c3-08db45b74aae
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: +yBC56UtnpYBkwX2YkhzguDgKX3mjE8jubgjAgkaubddN4FvAB4guMnXH9GF/fBwU+6y46nOf71Ba6Nd02fBqYHzURCX5GzadjjEU2/dmMlzMkOPCc1MzeLONm5p3shr6P1p6BdEwZVl9KUFyBMgRvkeG9i6XXKjuLZeV5FADhohpjEkxS6z9+CU4Ny+gOl8sfoelX4+pyZw71XXXbyiRXrPhDodkIdssaxFj7X5fKZxFIoGcJRqGfoy6JbNPza1REtKl/dcm5brjuWRJLGhNCzaKwtZN1jCII0G4uM5RdjYX7SbwRslLeO98yGeCqLy2ffYe3mm6kkSITddJb1sVwxPPPzRbZZsSfY+mulkmRad0Gz39VdOodt/ARTFkVYyS1S5aDz5fo30oAxqqY6a/ebr+BddaFemTyiRyB70l+gdB+voSzlNyf3HcVhiIFbbyY/z2I4gF9xR2pD43cSVkLLJ9WVo35+F/fFv01gDq52avC7RcAFZQlA5gSLFoSbo9NRD/qzH+rruN+4Dx4U1vVKGkmR848f0MB5epDkk/vmce/ZZ/6QzTX6Vf+gcDgu7U+7oWh9z6cXhKZ7gHJOC6Q9rCRfGpWB4jOqo1qU8tTb8ByOoWlAYmUY1hrRI1veQ
+X-Microsoft-Antispam-Message-Info: j6wWqfHntFjdI7i3hqABYcE5HYIBZaISHU7+SVjYBybJDFNPe+K/IAjXSlpOX9dnSRyJyj5l0UMOAkZi9UvLdrLsFDAWfcrkUInsPvIb4fHuvnfyzHphwTl1VOhi/mAf3WxW0EoWRUDgAcRIAwaTmSc0SLjzKbfPSeUTMXFbvh6AY3QFGjydPJ1LnpoQrKgNwO3CQmu2X0CQQJvlkYwd3BAvGr2vhoJtjdINCriIES8LayzvvWWZcJ6HVnl+6PBz1rE+tJo4wZTtp877jwfqZPC9rI2Gwf7gBgTiO5qiJeis40Yfk6TcPgjad8/0wn0OYWskAnRv832o8Y/3MnDXn6IbIAl2tgxVx0Ne1VarcxQROj0+SNfQNTXWCr31eL1Rm2mmQ9NXalnJIAr0ZsFohZ/PvzbMO4tFKHmMQYgkCnBYYMD63eMA5wazroe3NAhCmP59LaUS7BwiWpZCQADjWuDjAJwvbvdypsYxVQ6B5qUhj0gfnDI0oIvoO2dL++MydGnvig1V9Kb82a8iGVJSSFtfR3b6qt0uy3qzj2iR/zmATvMA1uZzp6+kwjyDysuIFWKJF8VAS4VWHP2Povf5PGKMmGVa5GF11pLk3MR8yRH9v6AqLvd2AQOXb4Mmg0om
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(4636009)(39860400002)(376002)(346002)(366004)(136003)(396003)(451199021)(6666004)(110136005)(6486002)(52116002)(2616005)(83380400001)(1076003)(6506007)(36756003)(186003)(6512007)(26005)(478600001)(8936002)(8676002)(41300700001)(66946007)(66476007)(4326008)(66556008)(316002)(2906002)(86362001)(5660300002)(38100700002)(38350700002);
+ SFS:(13230028)(4636009)(136003)(376002)(346002)(39860400002)(396003)(366004)(451199021)(38350700002)(38100700002)(6506007)(6512007)(26005)(1076003)(186003)(2616005)(8936002)(83380400001)(2906002)(8676002)(5660300002)(36756003)(478600001)(6486002)(52116002)(110136005)(316002)(6666004)(4326008)(66556008)(41300700001)(66946007)(86362001)(66476007);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?vmNApaXYVwZk8P1r+nZ8mfEOgZHu8TtANddANMHiUvZb60zFcyLfeHQkSfya?=
- =?us-ascii?Q?ttW3dQD3OBuMvSeKqVCAZ95pymBbghX53kMqmJl2Xyeo+EhoNu5od4xceP+k?=
- =?us-ascii?Q?yIgI47Gt36tJtlFuj/q3U/lj83SAKyW19rpZSpLWi+auzQ8BtJhqgd2gMXGN?=
- =?us-ascii?Q?NyukT6E8FJARYWm9YvavPlkSE2HKXiL7VsW6nXJP1RJZvdDbfeEQHq1azyzD?=
- =?us-ascii?Q?k/u6JxFlwkMxRamkRg30arFGRAKbppKTF+vpJ+ziNG6AADb5qOK0EwlrPYDq?=
- =?us-ascii?Q?P1Nnr0XDa84Iv5WYMqqCQ/CQ3zsbcO9sX5BEstloj8IWbLhWWM8SMUQARGzE?=
- =?us-ascii?Q?FWbFNrKNMpWQLww33zX08WGAS/us9qoF1YfB+cL4X5OJots+NbH3pWTljzPy?=
- =?us-ascii?Q?n+95mlAErLHvkiSBf/tiIvF77MFbl+ZBpwXk8CQNK4o2ExE6qSEv506bn6s6?=
- =?us-ascii?Q?kS0bCsggliSXSw+uJmxBlrMWawlQdXDoPVIjNn6Otq29JVe8GH1Kl22r8zGG?=
- =?us-ascii?Q?GllS3PihcmLJtDu/hyZZi17DRK1g3mZY/128LWIS6BQawNDOHaINQxx/LK0y?=
- =?us-ascii?Q?iQdL01wYQOv00b/4tNp+WsHAgVjXKs9MGuqMgR75D470LrG681k9yXkZjXKw?=
- =?us-ascii?Q?QF0T2DjgrK+wQnAgAl1e9BOMIOQnoBlo2kB8QGXOaJo7brlKOzi4v0lQNyRD?=
- =?us-ascii?Q?wRyhDjtYPoRHWdhQvOlrm7gwUAo41vPbycV50slaskP+ZGGdyIRrGrKCY4ee?=
- =?us-ascii?Q?e0cX7gB+nGxh2HQ3vlTiwVL/U208/DujeUolOJQdGJPqnifY5WtLQkZyb/Ui?=
- =?us-ascii?Q?hg4HMP+i0kzXxzT4nmRpWNYwTx9KdYnntr+T6kh+cfAAv+Ef9t6eAId/zU1h?=
- =?us-ascii?Q?VfyPDPxgKoZuvrjGcztS8Ye21pEPRSgGCJvIuYJoRW4HCz7RFXL3pttCnpsH?=
- =?us-ascii?Q?K5xdHhu/vyTyf4smMjDR/qcYLQaIrO/yDGBQNJvMBySdJ5tXxENBrv67ph1/?=
- =?us-ascii?Q?RcZCo0seyablH9St/SEwjZuLa/K4aHoXAKEPl8EWmZDwN8IPcUGd69gq9xK+?=
- =?us-ascii?Q?7kungbnXeIRIbiVt/orefSdFxxm1cnY5htDUu6qhAMcw2DF8jeU6NoV7esXP?=
- =?us-ascii?Q?02uzUZmGJQZPUYHG378JCRVuuQDd8B7RKYMcOm7XyMb+Ww+uKH/gHetz6yxr?=
- =?us-ascii?Q?WPO9wNfed9KS41MRJBk1OOn73QKrie5M7ZMQjTIt40YFtIx9AIwBhuVtS2Nt?=
- =?us-ascii?Q?JAYD/ih3m2ng0Tim6wmqqtaAZj3GCgbMzO/XwQrWiBd0TPA0KNXNUmBiGDke?=
- =?us-ascii?Q?Zdol2hntsDoNI/kThsYF5CuruWuvr8B1egDK3ws+n9x46xxJI0onomoKVjL+?=
- =?us-ascii?Q?lG1MiTCjSLZyNIb6nB5J9q9aY0hIcHy1owvwn60sH4HTEYqxhnLir8s/9RDr?=
- =?us-ascii?Q?Ibrby0EWIUL2D2MGYNQ009E18heMTx0f+WaoOFEYfPxmjSk3T+s7UL6ReQ/N?=
- =?us-ascii?Q?HiDnkSB9XWKw+Eo0+Qu59TtbbYjgKHyvyNDeVlzRivPhxeU1blJ6KTuIysEo?=
- =?us-ascii?Q?AaAZVTDSDAmr29makIWi50NuSFdHI+pvltRw87+N?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5Y/MSXrGXao//Row3UttJgT1yIMBeFsWye2R8O7xo/i4RKnZvL2jLwIWJowR?=
+ =?us-ascii?Q?YpKcSwTulOY8RHWTHtfKkVVZIXDNMTiWDuu35bk4Xn4Kddm62t8vtoQZzWxa?=
+ =?us-ascii?Q?MX5ya8SPjk8wv7w4Paiy6hN+PhK0emrexUY6evsMYrvYeRg0C3SvaaNAmsLy?=
+ =?us-ascii?Q?tne91FkdvaIGKbjzdP4/u4mRRoxF1mZ16b+BLvR9sRE2Tn9tr1aOwaehEO2r?=
+ =?us-ascii?Q?vLmQwYVMxApV7v02L7rhL6OW/MiPVSK/IDj/wmhZN/KlpMEWyngDNUcf58ex?=
+ =?us-ascii?Q?0Z3gwz1bpAEXCowEYm2z0wrvKsj3oVDThQi0Q/YrAHHfG8QWgbE5QRZcUVKN?=
+ =?us-ascii?Q?648sIEEXSDlav6Z2KpnGWOLOfJtko5XZgbULPaHEaVIFr8WZ0oI+mjWBQIt6?=
+ =?us-ascii?Q?z5sPQwC2Qtk1GVMhYqRWsZcsWjJewt6F0tJb1HHB1OkwvtbMlT0NzsThcR2Z?=
+ =?us-ascii?Q?mhNVPR2PgTomauIDnvXtMoW/o38pO9uDbxmzmQNz6bDKF9xm439/ahuPm525?=
+ =?us-ascii?Q?hAVpj2AQ4mkuq96fqIsDef92sqku27q/38ZHKhJt/t2e4Of4e4qJeZg+QYYR?=
+ =?us-ascii?Q?Z6b0TQKirV5Xr7FpLNoABroNAUQjX8u0NH4pR4Y58mPab3KJj046o8feULGA?=
+ =?us-ascii?Q?BeVShIM5feUvT8iwKb1gQiqPZcj74XwfX+wx3rL4LyzjXE5S0O5sj+/KvqOj?=
+ =?us-ascii?Q?mYJp1fbY3L3AGwCoMztZ+FTA8piXE3hw+sj52OWdmw8OZdHTugv52lp8fsJS?=
+ =?us-ascii?Q?wsfMNr6yq+i7QXxhMMUcQtQ+FhquomJn2ZXhDH6reR42svTTGCNLmf++3uCt?=
+ =?us-ascii?Q?4G0lduC0G/qxGKJlfHn8gs0XOpxSRHFy68ATy9yvqZ6pWPXncH3JPj2CIjbp?=
+ =?us-ascii?Q?gcQFVokxfpd8I5hSkgGEcPBCIe0EeyVlUAl1lVgWayDjnKWtnc2WswesFJhQ?=
+ =?us-ascii?Q?wRjihfHP5c8ueNc3iVTWhroPFBLTOPFaHgNcbImIEMSV4yPGJqHWKw7S7zjl?=
+ =?us-ascii?Q?UufUQV3ZF/0as7Orrhv/tZ7SxYSAlYJzmN2azBylPDg3hU8mPJi9WvFyaRH4?=
+ =?us-ascii?Q?C/B/qjDToKLeXz7t0K2q7ZnUP5DqCL1+wxeNOPFmilhlghK9nUT1nQGSFctj?=
+ =?us-ascii?Q?Xt9sCOC7W9xJEFHEQfw9R1wqmyBguWGDwQ++Ui2cm4gfVot3g9Bj8ORlDtKb?=
+ =?us-ascii?Q?UwNVIYz12YpEkNNH5J+gpxE1tTe5gndO1/ThdoSxOqaS3OXVMFb21osaECdX?=
+ =?us-ascii?Q?oltmTnTQ9SzosQcqy6URVSDuzl5bsP6lSxZInt84IE5A76SIRaeRBCMvTfg4?=
+ =?us-ascii?Q?JucpuRASfNWkqbD6+dJ0x7rM+IBZHcaj1V/nXQw+atRRTdnrYl5oAMZwVWFu?=
+ =?us-ascii?Q?6hAaU34ZBoGDJutEdznb4sKtRxcUUsde04LWXsQI0raODjgu+3cs5kvVylCa?=
+ =?us-ascii?Q?xz+tXEwkBKQwlZpl9X3jz6Dfkf2w6MMzJ0HBT8r2LkBtLY7iPv+ZEz46oX6P?=
+ =?us-ascii?Q?XTPJAAdmdzyIixS4yqvNFT8t3mNS5CNRn7VHy92KDeWw8C1AwbujFyVo2IMi?=
+ =?us-ascii?Q?5YYst/+HY28acZdcv3WL7nhzG67lB+YuLgbJ/NBE?=
 X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0db0388b-7c2e-42cd-354d-08db45b4a741
+X-MS-Exchange-CrossTenant-Network-Message-Id: abd394e6-8b2a-4221-11c3-08db45b74aae
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2023 17:44:00.7313 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2023 18:02:53.8566 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /qcfGuAKbEYeCN0zfpSzrobsuX0jOH8HrAdiqeB/Ixzt1ZeqHM0DNlal6HivEmP9BfIUVKM2oCekOgtX4pGqAA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB6360
+X-MS-Exchange-CrossTenant-UserPrincipalName: OTclPY805kkDuXa0d7bGlwBwLDZWu9vX5x+TOBhPQyDB6N9DxoZIg+W3/Rm5zldgeaT09d86EJUXe8lgiv56qg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR06MB5967
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -130,17 +130,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This patch introduces bggc_mode related api and uses it in
- code. Signed-off-by: Yangtao Li <frank.li@vivo.com> --- fs/f2fs/f2fs.h |
- 15 +++++++++++++++ fs/f2fs/gc.c | 2 +- fs/f2fs/super.c | 13 ++++++-------
- 3 files changed, 22 insertions(+), 8 deletions(-) 
+ Content preview:  This patch introduces mount_errors related api and uses it
+ in code. Signed-off-by: Yangtao Li <frank.li@vivo.com> --- fs/f2fs/data.c
+ | 2 +- fs/f2fs/f2fs.h | 15 +++++++++++++++ fs/f2fs/node.c | 2 +-
+ fs/f2fs/super.c
+ | 11 +++++------ 4 files changed, 22 insertions(+), 8 [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.255.130 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.255.130 listed in wl.mailspike.net]
+ [40.107.255.114 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.255.114 listed in list.dnswl.org]
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -151,8 +152,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1prMi3-0006KB-NC
-Subject: [f2fs-dev] [PATCH] f2fs: introduce bggc_mode related api
+X-Headers-End: 1prN0L-0006vl-4a
+Subject: [f2fs-dev] [PATCH] f2fs: introduce mount_errors related api
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -172,94 +173,106 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch introduces bggc_mode related api and uses it in code.
+This patch introduces mount_errors related api and uses it in code.
 
 Signed-off-by: Yangtao Li <frank.li@vivo.com>
 ---
+ fs/f2fs/data.c  |  2 +-
  fs/f2fs/f2fs.h  | 15 +++++++++++++++
- fs/f2fs/gc.c    |  2 +-
- fs/f2fs/super.c | 13 ++++++-------
- 3 files changed, 22 insertions(+), 8 deletions(-)
+ fs/f2fs/node.c  |  2 +-
+ fs/f2fs/super.c | 11 +++++------
+ 4 files changed, 22 insertions(+), 8 deletions(-)
 
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index f26eac327d6e..475635c0a905 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2809,7 +2809,7 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
+ 			goto redirty_out;
+ 
+ 		/* keep data pages in remount-ro mode */
+-		if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_READONLY)
++		if (mount_errors_readonly(sbi))
+ 			goto redirty_out;
+ 		goto out;
+ 	}
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index d211ee89c158..e507033756f9 100644
+index 7afc9aef127a..d75f58851b58 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -4547,6 +4547,21 @@ static inline bool f2fs_is_readonly(struct f2fs_sb_info *sbi)
- 	return f2fs_sb_has_readonly(sbi) || f2fs_readonly(sbi->sb);
+@@ -4456,6 +4456,21 @@ static inline bool f2fs_dev_is_readonly(struct f2fs_sb_info *sbi)
+ 	return f2fs_sb_has_readonly(sbi) || f2fs_hw_is_readonly(sbi);
  }
  
-+static inline bool bggc_on_mode(struct f2fs_sb_info *sbi)
++static inline bool mount_errors_readonly(struct f2fs_sb_info *sbi)
 +{
-+	return F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_ON;
++	return F2FS_OPTION(sbi).errors == MOUNT_ERRORS_READONLY;
 +}
 +
-+static inline bool bggc_off_mode(struct f2fs_sb_info *sbi)
++static inline bool mount_errors_continue(struct f2fs_sb_info *sbi)
 +{
-+	return F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_OFF;
++	return F2FS_OPTION(sbi).errors == MOUNT_ERRORS_CONTINUE;
 +}
 +
-+static inline bool bggc_sync_mode(struct f2fs_sb_info *sbi)
++static inline bool mount_errors_panic(struct f2fs_sb_info *sbi)
 +{
-+	return F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_SYNC;
++	return F2FS_OPTION(sbi).errors == MOUNT_ERRORS_PANIC;
 +}
 +
- #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
- #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
+ static inline bool f2fs_lfs_mode(struct f2fs_sb_info *sbi)
+ {
+ 	return F2FS_OPTION(sbi).fs_mode == FS_MODE_LFS;
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index 834c6f099c95..168dbd884631 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -1597,7 +1597,7 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
  
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 61c5f9d26018..7a35e188c7d4 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -124,7 +124,7 @@ static int gc_thread_func(void *data)
- 		if (!foreground)
- 			stat_inc_bggc_count(sbi->stat_info);
- 
--		sync_mode = F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_SYNC;
-+		sync_mode = bggc_sync_mode(sbi);
- 
- 		/* foreground GC was been triggered via f2fs_balance_fs() */
- 		if (foreground)
+ 	if (unlikely(f2fs_cp_error(sbi))) {
+ 		/* keep node pages in remount-ro mode */
+-		if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_READONLY)
++		if (mount_errors_readonly(sbi))
+ 			goto redirty_out;
+ 		ClearPageUptodate(page);
+ 		dec_page_count(sbi, F2FS_DIRTY_NODES);
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 9f15b03037db..9bdf4d703ad3 100644
+index 51812f459581..107585797ffa 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -1897,11 +1897,11 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+@@ -2076,11 +2076,11 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
+ 	else if (F2FS_OPTION(sbi).memory_mode == MEMORY_MODE_LOW)
+ 		seq_printf(seq, ",memory=%s", "low");
+ 
+-	if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_READONLY)
++	if (mount_errors_readonly(sbi))
+ 		seq_printf(seq, ",errors=%s", "remount-ro");
+-	else if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_CONTINUE)
++	else if (mount_errors_continue(sbi))
+ 		seq_printf(seq, ",errors=%s", "continue");
+-	else if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_PANIC)
++	else if (mount_errors_panic(sbi))
+ 		seq_printf(seq, ",errors=%s", "panic");
+ 
+ 	return 0;
+@@ -4049,8 +4049,7 @@ void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
  {
- 	struct f2fs_sb_info *sbi = F2FS_SB(root->d_sb);
+ 	struct super_block *sb = sbi->sb;
+ 	bool shutdown = reason == STOP_CP_REASON_SHUTDOWN;
+-	bool continue_fs = !shutdown &&
+-			F2FS_OPTION(sbi).errors == MOUNT_ERRORS_CONTINUE;
++	bool continue_fs = !shutdown && mount_errors_continue(sbi);
  
--	if (F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_SYNC)
-+	if (bggc_sync_mode(sbi))
- 		seq_printf(seq, ",background_gc=%s", "sync");
--	else if (F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_ON)
-+	else if (bggc_on_mode(sbi))
- 		seq_printf(seq, ",background_gc=%s", "on");
--	else if (F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_OFF)
-+	else if (bggc_off_mode(sbi))
- 		seq_printf(seq, ",background_gc=%s", "off");
+ 	set_ckpt_flags(sbi, CP_ERROR_FLAG);
  
- 	if (test_opt(sbi, GC_MERGE))
-@@ -2366,8 +2366,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 	 * option. Also sync the filesystem.
+@@ -4068,7 +4067,7 @@ void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
+ 	 * could panic during 'reboot -f' as the underlying device got already
+ 	 * disabled.
  	 */
- 	if ((*flags & SB_RDONLY) ||
--			(F2FS_OPTION(sbi).bggc_mode == BGGC_MODE_OFF &&
--			!test_opt(sbi, GC_MERGE))) {
-+			(bggc_off_mode(sbi) && !test_opt(sbi, GC_MERGE))) {
- 		if (sbi->gc_thread) {
- 			f2fs_stop_gc_thread(sbi);
- 			need_restart_gc = true;
-@@ -4547,8 +4546,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- 	 * If filesystem is not mounted as read-only then
- 	 * do start the gc_thread.
- 	 */
--	if ((F2FS_OPTION(sbi).bggc_mode != BGGC_MODE_OFF ||
--		test_opt(sbi, GC_MERGE)) && !f2fs_readonly(sb)) {
-+	if ((!bggc_off_mode(sbi) || test_opt(sbi, GC_MERGE)) &&
-+			!f2fs_readonly(sb)) {
- 		/* After POR, we can run background GC thread.*/
- 		err = f2fs_start_gc_thread(sbi);
- 		if (err)
+-	if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_PANIC &&
++	if (mount_errors_panic(sbi) &&
+ 				!shutdown && !system_going_down() &&
+ 				!is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN))
+ 		panic("F2FS-fs (device %s): panic forced after error\n",
 -- 
 2.39.0
 
