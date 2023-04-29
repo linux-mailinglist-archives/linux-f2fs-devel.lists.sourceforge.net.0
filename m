@@ -2,114 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA3F76F1956
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Apr 2023 15:24:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2023D6F2189
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 29 Apr 2023 02:12:29 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1psO5d-0006mB-J8;
-	Fri, 28 Apr 2023 13:24:46 +0000
+	id 1psYCM-00028n-QL;
+	Sat, 29 Apr 2023 00:12:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1psO5c-0006m5-3x
+ (envelope-from <mcgrof@infradead.org>) id 1psYCL-00028d-0m
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Apr 2023 13:24:45 +0000
+ Sat, 29 Apr 2023 00:12:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gyw6c5NXaMxV6+l+bCkRTryCrhVpO/xKUe1tEPi9Gx4=; b=Xv9MGrrBiPoOWdEuEKGSrzJtco
- vmzOPL6Yxl7XcniRnpt++ss6Df0wORhmpcze/GBHM6DknzvasESNmATUHzeWY+IX8tyfjjjyHKJAb
- y7HLXzJOmpRxAPmrLT3DI3Ui1QBqiEKmeVrDpPExnIpq/8Now5o7SMvy9DnakPG4HYdc=;
+ d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=SFptb4bxgIj4illZMUP0+LEQ5YHjcoe6ZdfH4QgLaE8=; b=R/BUZCFbB85ni82xyWyOyZgi6C
+ B7bMDUjPaT91cELkwK5BLazRZW49GN85AOVeuad84KMk5lrLtaaKQmMglcc4jPlRlywJv0/4/eF77
+ EhgYvzE81Gb/2AHqfJq2WOSNJlIzPKAqQWr01jZnPuERH70uu+MGN0HJ7jpYQwYdv2Do=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gyw6c5NXaMxV6+l+bCkRTryCrhVpO/xKUe1tEPi9Gx4=; b=RNelQXR4ttsXWSWUdO+Mbl9XR4
- azrV7qsyK2iNZ5x/WuUNI2i1ch71/3vjbf4hYbHuXEuSlBchjI+Cqr2rhO1avnK5s9B7ShVCzeuKw
- GzQXUa7vO49mhi1R6/MprvqDq6zkcenXzfBlZFFV87FU6Z9N4M5bNCQppTgdoxHDn6vI=;
-Received: from mga14.intel.com ([192.55.52.115])
+ bh=SFptb4bxgIj4illZMUP0+LEQ5YHjcoe6ZdfH4QgLaE8=; b=jEitIYW8LMEriJMTi+xbG8n6sa
+ jzW55pG1LKmHk8mr1lFqmAwlI+rgnlLH7/gBrJCoYoO1QSxG4rV87c8r3/cQZO8NxS+L0wTxyRDF6
+ QTREL80CtQAR9Ax66FD5Wa8NJDRWTpSTGfKnmXsXDMWkaVC2vQKuRkVyB5o6OaN0FLjE=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1psO5b-0001Os-Fm for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Apr 2023 13:24:44 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1682688283; x=1714224283;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=oB6VWPH6ulg8K295XZM6A23hQpKHxYtitORTOenls3A=;
- b=hPH2ju3Rf97pBPALTuRWShGtXLshS/4mcj+SmdCKETbNzB9WUUT+rmNj
- xIrNxPD0WsXz/0UqbMkZbQJzpBkD9R3n34KNXkykN3DcHxELNP3eOlLq8
- KA8Mx7o8H/V5XmqwVSsVETOj4TYR5lMsOT/opY3guY+kPuI0yeuoSGihh
- uvuPnAamNr15NVG0Evcu8W8avUs6TZj1K7i+RWa4xLE8wyIKsnlZAkEIC
- +eXlJcOhCSuTvKinEaktBDtKqfaMxKaK29MhaPEKbMkR0OXNtwgurnOOL
- 0Up1IxZjnSaguB0Ss8zf4BI0S6obx8a622sLN56tQ2LyzHQVapyAHhPM7 Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10694"; a="347769124"
-X-IronPort-AV: E=Sophos;i="5.99,234,1677571200"; d="scan'208";a="347769124"
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Apr 2023 06:24:37 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10694"; a="819010528"
-X-IronPort-AV: E=Sophos;i="5.99,234,1677571200"; d="scan'208";a="819010528"
-Received: from lkp-server01.sh.intel.com (HELO 5bad9d2b7fcb) ([10.239.97.150])
- by orsmga004.jf.intel.com with ESMTP; 28 Apr 2023 06:24:34 -0700
-Received: from kbuild by 5bad9d2b7fcb with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1psO5R-0000SF-10;
- Fri, 28 Apr 2023 13:24:33 +0000
-Date: Fri, 28 Apr 2023 21:24:18 +0800
-From: kernel test robot <lkp@intel.com>
-To: Daejun Park <daejun7.park@samsung.com>,
- "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "chao@kernel.org" <chao@kernel.org>,
- "rostedt@goodmis.org" <rostedt@goodmis.org>,
- "mhiramat@kernel.org" <mhiramat@kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, 
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-trace-kernel@vger.kernel.org" <linux-trace-kernel@vger.kernel.org>
-Message-ID: <202304282103.nYW33DnO-lkp@intel.com>
-References: <20230428025646epcms2p35acbea45ee80d36808861edba8a3c84a@epcms2p3>
+ id 1psYCI-0001AM-U3 for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 29 Apr 2023 00:12:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Sender:In-Reply-To:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=SFptb4bxgIj4illZMUP0+LEQ5YHjcoe6ZdfH4QgLaE8=; b=DcPVwA/0w7w3ihDlMcami/XEWr
+ na4uR2ZaEMVCEbed/HJorphO6NziasFTaQ/zYpNdLymwt359fTb4MF19qW/HlRtwr3sGpvxYpY3vn
+ FNwF1Ud9N8hZiOmwnL8ihw9/GZF/Co33LwX7BxutpUaUuWy0QKSQNgpxztYInRxUVY4TwkdaivSsm
+ TObjCzU3FiAg0zpoZslTlxk6Bulg0bgzssnJYmH3uGhGo83sh5uG/oGFSYkWww1qp7KHrBMglzvOu
+ k9jRJfica0AfFGfpyfWeLMxApO8wY0Rp63A9R8CMDIuPAT0l/bpU0AL36zhkgs8xPCwcjTboLwdlp
+ AfI1a4iw==;
+Received: from mcgrof by bombadil.infradead.org with local (Exim 4.96 #2 (Red
+ Hat Linux)) id 1psYBx-00BykC-2P; Sat, 29 Apr 2023 00:11:57 +0000
+Date: Fri, 28 Apr 2023 17:11:57 -0700
+From: Luis Chamberlain <mcgrof@kernel.org>
+To: Christoph Hellwig <hch@lst.de>, Pankaj Raghav <p.raghav@samsung.com>,
+ Daniel Gomez <da.gomez@samsung.com>
+Message-ID: <ZExgzbBCbdC1y9Wk@bombadil.infradead.org>
+References: <20230424054926.26927-1-hch@lst.de>
+ <20230424054926.26927-18-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230428025646epcms2p35acbea45ee80d36808861edba8a3c84a@epcms2p3>
-X-Spam-Score: -2.7 (--)
+In-Reply-To: <20230424054926.26927-18-hch@lst.de>
+X-Spam-Score: -2.1 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Daejun,
- kernel test robot noticed the following build errors:
- [auto build test ERROR on jaegeuk-f2fs/dev-test] [also build test ERROR on
- jaegeuk-f2fs/dev linus/master next-20230427] [cannot apply to v6.3] [If your
- patch is applied to the wrong git tree, kindly d [...] 
- Content analysis details:   (-2.7 points, 6.0 required)
+ Content preview:  On Mon, Apr 24, 2023 at 07:49:26AM +0200, Christoph Hellwig
+ wrote: > +const struct address_space_operations def_blk_aops = { > +
+ .dirty_folio
+ = filemap_dirty_folio, > + .release_folio = iomap_release_ [...] 
+ Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [192.55.52.115 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ medium trust [198.137.202.133 listed in list.dnswl.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1psO5b-0001Os-Fm
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: add async reset zone command support
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1psYCI-0001AM-U3
+Subject: Re: [f2fs-dev] [PATCH 17/17] fs: add CONFIG_BUFFER_HEAD
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,92 +99,117 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: llvm@lists.linux.dev, beomsu kim <beomsu7.kim@samsung.com>,
- oe-kbuild-all@lists.linux.dev, Seokhwan Kim <sukka.kim@samsung.com>
+Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
+ linux-nfs@vger.kernel.org, cluster-devel@redhat.com, linux-xfs@vger.kernel.org,
+ Miklos Szeredi <miklos@szeredi.hu>, "Darrick J. Wong" <djwong@kernel.org>,
+ linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, David Howells <dhowells@redhat.com>,
+ linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, linux-ext4@vger.kernel.org,
+ ceph-devel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Daejun,
+On Mon, Apr 24, 2023 at 07:49:26AM +0200, Christoph Hellwig wrote:
+> +const struct address_space_operations def_blk_aops = {
+> +	.dirty_folio	= filemap_dirty_folio,
+> +	.release_folio		= iomap_release_folio,
+> +	.invalidate_folio	= iomap_invalidate_folio,
+> +	.read_folio		= blkdev_read_folio,
+> +	.readahead		= blkdev_readahead,
+> +	.writepages		= blkdev_writepages,
+> +	.is_partially_uptodate  = iomap_is_partially_uptodate,
+> +	.error_remove_page	= generic_error_remove_page,
+> +	.migrate_folio		= filemap_migrate_folio,
+> +};
+> +#endif /* CONFIG_BUFFER_HEAD */
 
-kernel test robot noticed the following build errors:
+We've tested this with bs > ps (LBS) devices and it would seem it crashes,
+as Pankaj notes perhaps due to lack of higher order folio support yet
+on this path, for the block cache. The same crash happens with NVMe
+(using out-of-tree nvme_core.debug_large_lbas boot parameter to enable NVMe
+LBS) or brd with LBS. To enable NVMe LBS or brd with LBS you need
+out of tree patches though of course, so I've stashed these into
+a branch, large-block-20230426 [0] so to help folks who may want
+to experiment further.
 
-[auto build test ERROR on jaegeuk-f2fs/dev-test]
-[also build test ERROR on jaegeuk-f2fs/dev linus/master next-20230427]
-[cannot apply to v6.3]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+[0] https://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/linux-next.git/log/?h=large-block-20230426
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Daejun-Park/f2fs-add-async-reset-zone-command-support/20230428-105944
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
-patch link:    https://lore.kernel.org/r/20230428025646epcms2p35acbea45ee80d36808861edba8a3c84a%40epcms2p3
-patch subject: [PATCH v3] f2fs: add async reset zone command support
-config: i386-randconfig-a013 (https://download.01.org/0day-ci/archive/20230428/202304282103.nYW33DnO-lkp@intel.com/config)
-compiler: clang version 14.0.6 (https://github.com/llvm/llvm-project f28c006a5895fc0e329fe15fead81e37457cb1d1)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/2f3e641e3de509a5ed879fb10fdf3377fd9ca0d9
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Daejun-Park/f2fs-add-async-reset-zone-command-support/20230428-105944
-        git checkout 2f3e641e3de509a5ed879fb10fdf3377fd9ca0d9
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=i386 olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=i386 SHELL=/bin/bash fs/f2fs/
+[   11.245248] BUG: kernel NULL pointer dereference, address: 0000000000000000
+[   11.254581] #PF: supervisor read access in kernel mode
+[   11.257387] #PF: error_code(0x0000) - not-present page
+[   11.260921] PGD 0 P4D 0
+[   11.262600] Oops: 0000 [#1] PREEMPT SMP PTI
+[   11.264993] CPU: 7 PID: 198 Comm: (udev-worker) Not tainted 6.3.0-large-block-20230426 #2
+[   11.269385] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.0-debian-1.16.0-5 04/01/2014
+[   11.275054] RIP: 0010:iomap_page_create.isra.0+0xc/0xd0
+[   11.277924] Code: 41 5e 41 5f c3 cc cc cc cc 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 0f 1f 44 00 00 41 54 55 48 89 f5 53 <48> 8b 06 48 c1 e8 0d 89 c6 83 e6 01 0f 84 a1 00 00 00 4c 8b 65 28
+[   11.287293] RSP: 0018:ffffb0f0805ef9d8 EFLAGS: 00010293
+[   11.289964] RAX: ffff9de3c1fa8388 RBX: ffffb0f0805efa78 RCX: 000000037ffe0000
+[   11.293212] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 000000000000000d
+[   11.296485] RBP: 0000000000000000 R08: 0000000000021000 R09: ffffffff9c733b20
+[   11.299724] R10: 0000000000000001 R11: 000000000000c000 R12: 0000000000000000
+[   11.302974] R13: ffffffff9be96260 R14: ffffb0f0805efa58 R15: 0000000000000000
+[   11.306206] FS:  00007f03ea8368c0(0000) GS:ffff9de43bdc0000(0000) knlGS:0000000000000000
+[   11.309949] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   11.312464] CR2: 0000000000000000 CR3: 0000000117ec6006 CR4: 0000000000770ee0
+[   11.315442] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+[   11.318310] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+[   11.321010] PKRU: 55555554
+[   11.322212] Call Trace:
+[   11.323224]  <TASK>
+[   11.324146]  iomap_readpage_iter+0x96/0x300
+[   11.325694]  iomap_readahead+0x174/0x2d0
+[   11.327129]  read_pages+0x69/0x1f0
+[   11.328389]  ? folio_add_lru+0x7e/0xe0
+[   11.329751]  page_cache_ra_unbounded+0x187/0x1d0
+[   11.331301]  force_page_cache_ra+0x94/0xb0
+[   11.332681]  filemap_get_pages+0x10e/0x650
+[   11.334073]  ? _raw_spin_lock+0x13/0x40
+[   11.335287]  filemap_read+0xbf/0x340
+[   11.336430]  ? aa_file_perm+0x117/0x4b0
+[   11.337646]  ? generic_fillattr+0x45/0xf0
+[   11.338887]  ? _copy_to_user+0x22/0x30
+[   11.340026]  ? cp_new_stat+0x150/0x180
+[   11.341166]  blkdev_read_iter+0x5e/0x140
+[   11.342357]  vfs_read+0x1f0/0x2c0
+[   11.343354]  ksys_read+0x63/0xe0
+[   11.344331]  do_syscall_64+0x37/0x90
+[   11.345411]  entry_SYSCALL_64_after_hwframe+0x72/0xdc
+[   11.346760] RIP: 0033:0x7f03eaf3903d
 
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202304282103.nYW33DnO-lkp@intel.com/
+(gdb) l *(iomap_readpage_iter+0x96)
+0xffffffff814021b6 is in iomap_readpage_iter (fs/iomap/buffered-io.c:280).
+275             if (iomap->type == IOMAP_INLINE)
+276                     return iomap_read_inline_data(iter, folio);
+277
+278             /* zero post-eof blocks as the page may be mapped */
+279             iop = iomap_page_create(iter->inode, folio, iter->flags);
+280             iomap_adjust_read_range(iter->inode, folio, &pos, length, &poff, &plen);
+281             if (plen == 0)
+282                     goto done;
+283
+284             if (iomap_block_needs_zeroing(iter, pos)) {
+(gdb) l *(iomap_page_create+0xc)
+0xffffffff81400cdc is in iomap_page_create (./arch/x86/include/asm/bitops.h:207).
+202     }
+203
+204     static __always_inline bool constant_test_bit(long nr, const volatile unsigned long *addr)
+205     {
+206             return ((1UL << (nr & (BITS_PER_LONG-1))) &
+207                     (addr[nr >> _BITOPS_LONG_SHIFT])) != 0;
+208     }
+209
+210     static __always_inline bool constant_test_bit_acquire(long nr, const volatile unsigned long *addr)
+211     {
 
-All errors (new ones prefixed by >>):
+To reproduce one would want a system with only say XFS as the root
+image. I've enabled this on kdevops through "pure-iomap" option:
 
->> fs/f2fs/segment.c:1789:5: error: implicit declaration of function '__submit_zone_reset_cmd' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
-                                   __submit_zone_reset_cmd(sbi, dc, REQ_SYNC,
-                                   ^
-   1 error generated.
+https://github.com/linux-kdevops/kdevops/blob/master/docs/lbs.md
 
-
-vim +/__submit_zone_reset_cmd +1789 fs/f2fs/segment.c
-
-  1775	
-  1776	/* This should be covered by global mutex, &sit_i->sentry_lock */
-  1777	static void f2fs_wait_discard_bio(struct f2fs_sb_info *sbi, block_t blkaddr)
-  1778	{
-  1779		struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
-  1780		struct discard_cmd *dc;
-  1781		bool need_wait = false;
-  1782	
-  1783		mutex_lock(&dcc->cmd_lock);
-  1784		dc = __lookup_discard_cmd(sbi, blkaddr);
-  1785		if (dc) {
-  1786			if (f2fs_sb_has_blkzoned(sbi) && bdev_is_zoned(dc->bdev)) {
-  1787				/* force submit zone reset */
-  1788				if (dc->state == D_PREP)
-> 1789					__submit_zone_reset_cmd(sbi, dc, REQ_SYNC,
-  1790								&dcc->wait_list, NULL);
-  1791				dc->ref++;
-  1792				need_wait = true;
-  1793			} else {
-  1794				if (dc->state == D_PREP) {
-  1795					__punch_discard_cmd(sbi, dc, blkaddr);
-  1796				} else {
-  1797					dc->ref++;
-  1798					need_wait = true;
-  1799				}
-  1800			}
-  1801		}
-  1802		mutex_unlock(&dcc->cmd_lock);
-  1803	
-  1804		if (need_wait)
-  1805			__wait_one_discard_bio(sbi, dc);
-  1806	}
-  1807	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests
+  Luis
 
 
 _______________________________________________
