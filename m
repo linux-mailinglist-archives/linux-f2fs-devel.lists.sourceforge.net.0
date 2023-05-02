@@ -2,100 +2,146 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A72C86F34DD
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  1 May 2023 19:07:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF8126F3CA6
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  2 May 2023 06:17:54 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1ptWzV-0001wc-7q;
-	Mon, 01 May 2023 17:07:09 +0000
+	id 1pthST-0005Y0-4u;
+	Tue, 02 May 2023 04:17:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3s_FPZAkbAP4y45qgrrkxgvvoj.muumrk0ykxiutzktz.ius@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1ptWzT-0001wV-U7 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 May 2023 17:07:08 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <daejun7.park@samsung.com>) id 1pthSR-0005Xu-M2
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 02 May 2023 04:17:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ Date:Message-ID:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2yu+xZYmt+R/b0iytkvmQxEh5KQSPGy0cMwq8ICzHwY=; b=df1V6LnY5Rjp+jzJUO7EK8/B6J
- x/6EuLb7gZmquqIshbMAyaC471cHfQWQXf3RWtGeXOL8cTUQIzWR60enD6vOpV9hmnN3aHk88wGtm
- anufEcTQL/1pWcTvqz/2D+0GH0lZncTUZfhD4JhHgoGgJPVzOMYq/Hcr5ep960wue80w=;
+ bh=h4HpTDjrPqp6n1tHtvG6n2IcLGmnTi88PxPVIUpI41Q=; b=OtnMJrvEGna6LvdaIrQFLW6yTb
+ 0+vNN6mEX9UDF28siMw+YM0OPGaEZr+bU0tjIA3w+SWFitUPdpmCLFBnORELN0zgq5JHJDOudsNQ+
+ cvqt9P5jM4jQ8kD7AgdzPLs+IZB+YaUDa+cX6soVDDoxVKCoz1W1l7maWX4+ZCLIjBlM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=2yu+xZYmt+R/b0iytkvmQxEh5KQSPGy0cMwq8ICzHwY=; b=e
- LdUUOzoo/wZKE4RMO86o8rXYFMDX5VGuB5rIK4COYx31o+wX0wSYDva6IVeeBslcaU0Xb4XAhUboe
- wJBPUb3yiUfo4PXOUlxsmD4xiDfm3zVNU4NqCLXavx7diidPdfqYW4+i4LWfroUPPorlaf/xV7C/n
- o/x1mVFyb6UuzNXw=;
-Received: from mail-il1-f207.google.com ([209.85.166.207])
+ h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:CC:To:
+ From:Sender:Reply-To:Subject:Mime-Version:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=h4HpTDjrPqp6n1tHtvG6n2IcLGmnTi88PxPVIUpI41Q=; b=L
+ 0SACslB6aTn4VruyC2J3pxYoyQ7VUX5yOPyqpBgZMjSjBxrMUSTG4QvYyTMO2IOUJXb2V1d1eW2eI
+ AiTNwl7HKf9jtMfdzKAVSEqibjP18JgqMp4xH4G/vgqYaeMid9FgvBKCqqXK5A70fF8wfS0BWFRmb
+ 3BTlkSDVFihO5L94=;
+Received: from mailout1.samsung.com ([203.254.224.24])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1ptWzQ-00024C-NX for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 01 May 2023 17:07:08 +0000
-Received: by mail-il1-f207.google.com with SMTP id
- e9e14a558f8ab-32b58d571a8so16372815ab.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1pthSP-0004zS-CO for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 02 May 2023 04:17:43 +0000
+Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20230502041730epoutp01a846a6a5d9f5558e14a01ff138da01b5~bOInGkCv70860808608epoutp011
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 01 May 2023 10:07:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682960819; x=1685552819;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2yu+xZYmt+R/b0iytkvmQxEh5KQSPGy0cMwq8ICzHwY=;
- b=UQ0K3/l3GloAVfKPXbzMupU2VoWFodirR76DySxyyJ0xr1H86Cdw+VO5IuyqqSPGvj
- S7rWMyuLNLIaYpIoCFPANxbPXB0oaDYLCap+R8VhMTTQIw1ywvflnp7DvxbHu0GBD6RI
- haewtLclFNetm6JJ9blL7LgtTheYYtagkCx6puweVg3sCgxoEmr52GXPNKMWOJiCNJBY
- A+2njbVzMiNP+aoK+JhNRPVMeoJo+rUJ3ElzKjr8jRAeTmmgpwji6HLfYoRpa3AXl09L
- j2RTaGAQzMb0uGgDxRB7p81UGGHI4x1DxCVXkqEh3383Uyyi9EnQm3MBVzttAnWpuvtC
- wb8w==
-X-Gm-Message-State: AC+VfDz0+OydIZdyqJuYo/mY2pIj7t/q0vW5VRly5Ejy3zizxttBnaCx
- gjnPBz27HBvqzOMYF8g+Z8LD6ZE0I1S1nQhM/+umBNfb7xIX
-X-Google-Smtp-Source: ACHHUZ6Pwj9qMgUzCKC3UCLlDtadHFChfBAR4VWBNArE7BJthBACaKFXlhA6LPbhyVHvFsqzs2nq02ImwzbBVFE9Laf9gzCvgs4e
-MIME-Version: 1.0
-X-Received: by 2002:a02:a1de:0:b0:40f:a98f:6aec with SMTP id
- o30-20020a02a1de000000b0040fa98f6aecmr5211924jah.1.1682960819133; Mon, 01 May
- 2023 10:06:59 -0700 (PDT)
-Date: Mon, 01 May 2023 10:06:59 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000cbb5f505faa4d920@google.com>
-From: syzbot <syzbot+e5b81eaab292e00e7d98@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+ Tue,  2 May 2023 04:17:30 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20230502041730epoutp01a846a6a5d9f5558e14a01ff138da01b5~bOInGkCv70860808608epoutp011
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1683001050;
+ bh=h4HpTDjrPqp6n1tHtvG6n2IcLGmnTi88PxPVIUpI41Q=;
+ h=Subject:Reply-To:From:To:CC:Date:References:From;
+ b=kdMt3j9kvspriM3mSFNkVxDVXTtSMcbvLhXZgYgalkcLNxkkzBcZAMp639aFN/PQ4
+ vGDQGh1ghWDGX5eozD1Ffgdyk0s6OvjF/8Su38yYgQ9JqAOyjkv0W1SMAh8iNYElOP
+ dpcpsQWN4J8i5q7Rdo1RTHbgCBSw8O9cTQRlzkJU=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas2p3.samsung.com (KnoxPortal) with ESMTP id
+ 20230502041729epcas2p30506747b2e5967ca9c6e3037045aa594~bOImw2bLF0659306593epcas2p3Q;
+ Tue,  2 May 2023 04:17:29 +0000 (GMT)
+Received: from epsmges2p3.samsung.com (unknown [182.195.36.69]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4Q9Rcn1HGqz4x9QN; Tue,  2 May
+ 2023 04:17:29 +0000 (GMT)
+X-AuditID: b6c32a47-e99fd70000002007-a4-64508ed955ae
+Received: from epcas2p2.samsung.com ( [182.195.41.54]) by
+ epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 4E.4A.08199.9DE80546; Tue,  2 May 2023 13:17:29 +0900 (KST)
+Mime-Version: 1.0
+From: Daejun Park <daejun7.park@samsung.com>
+To: "jaegeuk@kernel.org" <jaegeuk@kernel.org>, "chao@kernel.org"
+ <chao@kernel.org>, "rostedt@goodmis.org" <rostedt@goodmis.org>,
+ "mhiramat@kernel.org" <mhiramat@kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>, "linux-trace-kernel@vger.kernel.org"
+ <linux-trace-kernel@vger.kernel.org>
+X-Priority: 3
+X-Content-Kind-Code: NORMAL
+X-CPGS-Detection: blocking_info_exchange
+X-Drm-Type: N,general
+X-Msg-Generator: Mail
+X-Msg-Type: PERSONAL
+X-Reply-Demand: N
+Message-ID: <20230502041628epcms2p7233a97389cebafb73fc525a47215e707@epcms2p7>
+Date: Tue, 02 May 2023 13:16:28 +0900
+X-CMS-MailID: 20230502041628epcms2p7233a97389cebafb73fc525a47215e707
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+X-CPGSPASS: Y
+X-CPGSPASS: Y
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprFJsWRmVeSWpSXmKPExsWy7bCmme7NvoAUg6dT2SwuzPvIbHF66lkm
+ i5eHNC1WPQi3eLJ+FrPFpUXuFpd3zWGzOLL+LIvF4uVqFvs6HjBZrOqYy2gx9fwRJgcej5Z9
+ t9g9Nq3qZPPYveAzk0ffllWMHp83yQWwRmXbZKQmpqQWKaTmJeenZOal2yp5B8c7x5uaGRjq
+ GlpamCsp5CXmptoqufgE6Lpl5gDdpqRQlphTChQKSCwuVtK3synKLy1JVcjILy6xVUotSMkp
+ MC/QK07MLS7NS9fLSy2xMjQwMDIFKkzIztg5fwJzwW/dii9vfrE0MK5S62Lk5JAQMJHY92EH
+ axcjF4eQwA5Gif8nD7N1MXJw8AoISvzdIQxSIyxgJ9HxdSc7iC0koCSx/uIsdoi4nsSth2sY
+ QWw2AR2J6Sfug8VFBKYySxzelAoyk1lgMaPE1v8XWSCW8UrMaH8KZUtLbF++lRHC1pD4sayX
+ GcIWlbi5+i07jP3+2HyoGhGJ1ntnoWoEJR783A0Vl5S4PXcTVH2+xP8ry6HsGoltB+ZB2foS
+ 1zo2gu3lFfCVeHl6AhOIzSKgKtHybiPUHBeJppuvwWqYBeQltr+dwwwKB2YBTYn1u/RBTAkB
+ ZYkjt6Aq+CQ6Dv9lh/mqYeNvrOwd854wQdhqEut+rmeCGCMjcWse4wRGpVmIcJ6FZO0shLUL
+ GJlXMYqlFhTnpqcWGxUYw6M2OT93EyM4kWq572Cc8faD3iFGJg7GQ4wSHMxKIrwfCv1ShHhT
+ EiurUovy44tKc1KLDzGaAj08kVlKNDkfmMrzSuINTSwNTMzMDM2NTA3MlcR5pW1PJgsJpCeW
+ pGanphakFsH0MXFwSjUwdXgp8qZ+WvJOev4p66OujDe1pxW580iLuLAvium0CLL/PVEisqaw
+ /FeFvLx1wF/mht0tq5miVtQ0vc+XVH7JtfvP968Kk26IbfiiJVoiGbvv0TMLQb3a0ndTF56a
+ IXfu7Gf9BTe3zFgWP4fN/JKD+N7v1Xddkn9/8lO48d01X8BqqmbvBo3U/Ka4qQ8+bu0urJY8
+ qhRkP3PPnof7/9dcitjufeCggJkz9+e6qQcWSu+PKzBqMq/nMpzTtfz//okLb3gYNUQ81fjX
+ HzAzmE9y1pHedau3NeUZ/2teXbNa7feyn2tbta8ekWy18JW9JbDcbU7S+UcXOD9ffnPbjz80
+ xVFMMCZSwiAyN9H6svVkJZbijERDLeai4kQAfh01zS0EAAA=
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20230502041628epcms2p7233a97389cebafb73fc525a47215e707
+References: <CGME20230502041628epcms2p7233a97389cebafb73fc525a47215e707@epcms2p7>
+X-Spam-Score: -3.2 (---)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 58390c8ce1bd
- Merge tag 'iommu-updates-v6.4' of git://git.k.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=17fc7ef7c80000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview: Changelog: v3 -> v4 Fixed build error caused by unused
+ function.
+ v2 -> v3 Modified arguments to be correct for ftrace parameter. Changed
+ __submit_zone_reset_cmd
+ to void return. Refactored the f2fs_wait_discard_bio function. Fixed code
+ that was previously incorrectl [...] 
+ Content analysis details:   (-3.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [203.254.224.24 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.24 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.207 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.207 listed in wl.mailspike.net]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1ptWzQ-00024C-NX
-Subject: [f2fs-dev] [syzbot] [f2fs?] possible deadlock in f2fs_release_file
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pthSP-0004zS-CO
+Subject: [f2fs-dev] [PATCH v4] f2fs: add async reset zone command support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,175 +153,201 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Reply-To: daejun7.park@samsung.com
+Cc: Seokhwan Kim <sukka.kim@samsung.com>, beomsu kim <beomsu7.kim@samsung.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+Changelog:
 
-syzbot found the following issue on:
+v3 -> v4
+Fixed build error caused by unused function.
 
-HEAD commit:    58390c8ce1bd Merge tag 'iommu-updates-v6.4' of git://git.k..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=17fc7ef7c80000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=5eadbf0d3c2ece89
-dashboard link: https://syzkaller.appspot.com/bug?extid=e5b81eaab292e00e7d98
-compiler:       Debian clang version 15.0.7, GNU ld (GNU Binutils for Debian) 2.35.2
+v2 -> v3
+Modified arguments to be correct for ftrace parameter.
+Changed __submit_zone_reset_cmd to void return.
+Refactored the f2fs_wait_discard_bio function.
+Fixed code that was previously incorrectly merged.
 
-Unfortunately, I don't have any reproducer for this issue yet.
+v1 -> v2
+Changed to apply the optional async reset write pointer by default.
 
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/60130779f509/disk-58390c8c.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/d7f0cdd29b71/vmlinux-58390c8c.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/de415ad52ae4/bzImage-58390c8c.xz
+This patch enables submit reset zone command asynchornously. It helps
+decrease average latency of write IOs in high utilization scenario by
+faster checkpointing.
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+e5b81eaab292e00e7d98@syzkaller.appspotmail.com
-
-syz-executor.0: attempt to access beyond end of device
-loop0: rw=2049, sector=77824, nr_sectors = 2048 limit=63271
-syz-executor.0: attempt to access beyond end of device
-loop0: rw=2049, sector=79872, nr_sectors = 2048 limit=63271
-======================================================
-WARNING: possible circular locking dependency detected
-6.3.0-syzkaller-12049-g58390c8ce1bd #0 Not tainted
-------------------------------------------------------
-syz-executor.0/7526 is trying to acquire lock:
-ffff8880366c9bd8 (&sb->s_type->i_mutex_key#29){+.+.}-{3:3}, at: inode_lock include/linux/fs.h:775 [inline]
-ffff8880366c9bd8 (&sb->s_type->i_mutex_key#29){+.+.}-{3:3}, at: f2fs_release_file+0x9b/0x100 fs/f2fs/file.c:1866
-
-but task is already holding lock:
-ffff888037e0c448 (&sbi->node_write){++++}-{3:3}, at: f2fs_down_read fs/f2fs/f2fs.h:2087 [inline]
-ffff888037e0c448 (&sbi->node_write){++++}-{3:3}, at: f2fs_write_single_data_page+0xa10/0x1d50 fs/f2fs/data.c:2842
-
-which lock already depends on the new lock.
-
-
-the existing dependency chain (in reverse order) is:
-
--> #2 (&sbi->node_write){++++}-{3:3}:
-       reacquire_held_locks+0x3aa/0x660 kernel/locking/lockdep.c:5216
-       __lock_release kernel/locking/lockdep.c:5405 [inline]
-       lock_release+0x36f/0x9d0 kernel/locking/lockdep.c:5711
-       up_write+0x79/0x580 kernel/locking/rwsem.c:1625
-       f2fs_write_checkpoint+0x13a4/0x1f90 fs/f2fs/checkpoint.c:1651
-       __write_checkpoint_sync fs/f2fs/checkpoint.c:1768 [inline]
-       __checkpoint_and_complete_reqs+0xda/0x3b0 fs/f2fs/checkpoint.c:1787
-       issue_checkpoint_thread+0xda/0x260 fs/f2fs/checkpoint.c:1818
-       kthread+0x2b8/0x350 kernel/kthread.c:379
-       ret_from_fork+0x1f/0x30 arch/x86/entry/entry_64.S:308
-
--> #1 (&sbi->cp_rwsem){++++}-{3:3}:
-       lock_acquire+0x1e3/0x520 kernel/locking/lockdep.c:5691
-       down_read+0x3d/0x50 kernel/locking/rwsem.c:1520
-       f2fs_down_read fs/f2fs/f2fs.h:2087 [inline]
-       f2fs_lock_op fs/f2fs/f2fs.h:2130 [inline]
-       f2fs_convert_inline_inode+0x578/0x800 fs/f2fs/inline.c:218
-       f2fs_setattr+0xb0c/0x1270 fs/f2fs/file.c:995
-       notify_change+0xc8b/0xf40 fs/attr.c:483
-       do_truncate+0x220/0x300 fs/open.c:66
-       do_sys_ftruncate+0x2e4/0x380 fs/open.c:194
-       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
-       do_syscall_64+0x41/0xc0 arch/x86/entry/common.c:80
-       entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
--> #0 (&sb->s_type->i_mutex_key#29){+.+.}-{3:3}:
-       check_prev_add kernel/locking/lockdep.c:3108 [inline]
-       check_prevs_add kernel/locking/lockdep.c:3227 [inline]
-       validate_chain+0x166b/0x58e0 kernel/locking/lockdep.c:3842
-       __lock_acquire+0x1295/0x2000 kernel/locking/lockdep.c:5074
-       lock_acquire+0x1e3/0x520 kernel/locking/lockdep.c:5691
-       down_write+0x3a/0x50 kernel/locking/rwsem.c:1573
-       inode_lock include/linux/fs.h:775 [inline]
-       f2fs_release_file+0x9b/0x100 fs/f2fs/file.c:1866
-       __fput+0x3b7/0x890 fs/file_table.c:321
-       task_work_run+0x24a/0x300 kernel/task_work.c:179
-       get_signal+0x1606/0x17e0 kernel/signal.c:2650
-       arch_do_signal_or_restart+0x91/0x670 arch/x86/kernel/signal.c:306
-       exit_to_user_mode_loop+0x6a/0x100 kernel/entry/common.c:168
-       exit_to_user_mode_prepare+0xb1/0x140 kernel/entry/common.c:204
-       __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
-       syscall_exit_to_user_mode+0x64/0x280 kernel/entry/common.c:297
-       do_syscall_64+0x4d/0xc0 arch/x86/entry/common.c:86
-       entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
-other info that might help us debug this:
-
-Chain exists of:
-  &sb->s_type->i_mutex_key#29 --> &sbi->cp_rwsem --> &sbi->node_write
-
- Possible unsafe locking scenario:
-
-       CPU0                    CPU1
-       ----                    ----
-  rlock(&sbi->node_write);
-                               lock(&sbi->cp_rwsem);
-                               lock(&sbi->node_write);
-  lock(&sb->s_type->i_mutex_key#29);
-
- *** DEADLOCK ***
-
-1 lock held by syz-executor.0/7526:
- #0: ffff888037e0c448 (&sbi->node_write){++++}-{3:3}, at: f2fs_down_read fs/f2fs/f2fs.h:2087 [inline]
- #0: ffff888037e0c448 (&sbi->node_write){++++}-{3:3}, at: f2fs_write_single_data_page+0xa10/0x1d50 fs/f2fs/data.c:2842
-
-stack backtrace:
-CPU: 1 PID: 7526 Comm: syz-executor.0 Not tainted 6.3.0-syzkaller-12049-g58390c8ce1bd #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 04/14/2023
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:88 [inline]
- dump_stack_lvl+0x1e7/0x2d0 lib/dump_stack.c:106
- check_noncircular+0x2fe/0x3b0 kernel/locking/lockdep.c:2188
- check_prev_add kernel/locking/lockdep.c:3108 [inline]
- check_prevs_add kernel/locking/lockdep.c:3227 [inline]
- validate_chain+0x166b/0x58e0 kernel/locking/lockdep.c:3842
- __lock_acquire+0x1295/0x2000 kernel/locking/lockdep.c:5074
- lock_acquire+0x1e3/0x520 kernel/locking/lockdep.c:5691
- down_write+0x3a/0x50 kernel/locking/rwsem.c:1573
- inode_lock include/linux/fs.h:775 [inline]
- f2fs_release_file+0x9b/0x100 fs/f2fs/file.c:1866
- __fput+0x3b7/0x890 fs/file_table.c:321
- task_work_run+0x24a/0x300 kernel/task_work.c:179
- get_signal+0x1606/0x17e0 kernel/signal.c:2650
- arch_do_signal_or_restart+0x91/0x670 arch/x86/kernel/signal.c:306
- exit_to_user_mode_loop+0x6a/0x100 kernel/entry/common.c:168
- exit_to_user_mode_prepare+0xb1/0x140 kernel/entry/common.c:204
- __syscall_exit_to_user_mode_work kernel/entry/common.c:286 [inline]
- syscall_exit_to_user_mode+0x64/0x280 kernel/entry/common.c:297
- do_syscall_64+0x4d/0xc0 arch/x86/entry/common.c:86
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7f9fbc28c169
-Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 f1 19 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007f9fbd007168 EFLAGS: 00000246 ORIG_RAX: 0000000000000148
-RAX: fffffffffffffffb RBX: 00007f9fbc3abf80 RCX: 00007f9fbc28c169
-RDX: 0000000000000001 RSI: 0000000020000240 RDI: 0000000000000005
-RBP: 00007f9fbc2e7ca1 R08: 0000000000000000 R09: 0000000000000003
-R10: 0000000000001400 R11: 0000000000000246 R12: 0000000000000000
-R13: 00007ffc6d012c3f R14: 00007f9fbd007300 R15: 0000000000022000
- </TASK>
-
-
+Signed-off-by: Daejun Park <daejun7.park@samsung.com>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ fs/f2fs/segment.c           | 83 +++++++++++++++++++++++++++++++++++--
+ include/trace/events/f2fs.h | 18 +++++++-
+ 2 files changed, 96 insertions(+), 5 deletions(-)
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 6db410f1bb8c..ec7a8de71198 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1196,6 +1196,44 @@ static void __init_discard_policy(struct f2fs_sb_info *sbi,
+ static void __update_discard_tree_range(struct f2fs_sb_info *sbi,
+ 				struct block_device *bdev, block_t lstart,
+ 				block_t start, block_t len);
++
++#ifdef CONFIG_BLK_DEV_ZONED
++static void __submit_zone_reset_cmd(struct f2fs_sb_info *sbi,
++				   struct discard_cmd *dc, blk_opf_t flag,
++				   struct list_head *wait_list,
++				   unsigned int *issued)
++{
++	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
++	struct block_device *bdev = dc->bdev;
++	struct bio *bio = bio_alloc(bdev, 0, REQ_OP_ZONE_RESET | flag, GFP_NOFS);
++	unsigned long flags;
++
++	trace_f2fs_issue_reset_zone(bdev, dc->di.start);
++
++	spin_lock_irqsave(&dc->lock, flags);
++	dc->state = D_SUBMIT;
++	dc->bio_ref++;
++	spin_unlock_irqrestore(&dc->lock, flags);
++
++	if (issued)
++		(*issued)++;
++
++	atomic_inc(&dcc->queued_discard);
++	dc->queued++;
++	list_move_tail(&dc->list, wait_list);
++
++	/* sanity check on discard range */
++	__check_sit_bitmap(sbi, dc->di.lstart, dc->di.lstart + dc->di.len);
++
++	bio->bi_iter.bi_sector = SECTOR_FROM_BLOCK(dc->di.start);
++	bio->bi_private = dc;
++	bio->bi_end_io = f2fs_submit_discard_endio;
++	submit_bio(bio);
++
++	atomic_inc(&dcc->issued_discard);
++}
++#endif
++
+ /* this function is copied from blkdev_issue_discard from block/blk-lib.c */
+ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+ 				struct discard_policy *dpolicy,
+@@ -1217,6 +1255,13 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
+ 	if (is_sbi_flag_set(sbi, SBI_NEED_FSCK))
+ 		return 0;
+ 
++#ifdef CONFIG_BLK_DEV_ZONED
++	if (f2fs_sb_has_blkzoned(sbi) && bdev_is_zoned(bdev)) {
++		__submit_zone_reset_cmd(sbi, dc, flag, wait_list, issued);
++		return 0;
++	}
++#endif
++
+ 	trace_f2fs_issue_discard(bdev, dc->di.start, dc->di.len);
+ 
+ 	lstart = dc->di.lstart;
+@@ -1461,6 +1506,19 @@ static void __update_discard_tree_range(struct f2fs_sb_info *sbi,
+ 	}
+ }
+ 
++#ifdef CONFIG_BLK_DEV_ZONED
++static void __queue_zone_reset_cmd(struct f2fs_sb_info *sbi,
++		struct block_device *bdev, block_t blkstart, block_t lblkstart,
++		block_t blklen)
++{
++	trace_f2fs_queue_reset_zone(bdev, blkstart);
++
++	mutex_lock(&SM_I(sbi)->dcc_info->cmd_lock);
++	__insert_discard_cmd(sbi, bdev, lblkstart, blkstart, blklen);
++	mutex_unlock(&SM_I(sbi)->dcc_info->cmd_lock);
++}
++#endif
++
+ static void __queue_discard_cmd(struct f2fs_sb_info *sbi,
+ 		struct block_device *bdev, block_t blkstart, block_t blklen)
+ {
+@@ -1724,6 +1782,19 @@ static void f2fs_wait_discard_bio(struct f2fs_sb_info *sbi, block_t blkaddr)
+ 
+ 	mutex_lock(&dcc->cmd_lock);
+ 	dc = __lookup_discard_cmd(sbi, blkaddr);
++#ifdef CONFIG_BLK_DEV_ZONED
++	if (dc && f2fs_sb_has_blkzoned(sbi) && bdev_is_zoned(dc->bdev)) {
++		/* force submit zone reset */
++		if (dc->state == D_PREP)
++			__submit_zone_reset_cmd(sbi, dc, REQ_SYNC,
++						&dcc->wait_list, NULL);
++		dc->ref++;
++		mutex_unlock(&dcc->cmd_lock);
++		/* wait zone reset */
++		__wait_one_discard_bio(sbi, dc);
++		return;
++	}
++#endif
+ 	if (dc) {
+ 		if (dc->state == D_PREP) {
+ 			__punch_discard_cmd(sbi, dc, blkaddr);
+@@ -1876,9 +1947,15 @@ static int __f2fs_issue_discard_zone(struct f2fs_sb_info *sbi,
+ 				 blkstart, blklen);
+ 			return -EIO;
+ 		}
+-		trace_f2fs_issue_reset_zone(bdev, blkstart);
+-		return blkdev_zone_mgmt(bdev, REQ_OP_ZONE_RESET,
+-					sector, nr_sects, GFP_NOFS);
++
++		if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING))) {
++			trace_f2fs_issue_reset_zone(bdev, blkstart);
++			return blkdev_zone_mgmt(bdev, REQ_OP_ZONE_RESET,
++						sector, nr_sects, GFP_NOFS);
++		}
++
++		__queue_zone_reset_cmd(sbi, bdev, blkstart, lblkstart, blklen);
++		return 0;
+ 	}
+ 
+ 	/* For conventional zones, use regular discard if supported */
+diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+index 99cbc5949e3c..ee1477de8324 100644
+--- a/include/trace/events/f2fs.h
++++ b/include/trace/events/f2fs.h
+@@ -1512,7 +1512,7 @@ DEFINE_EVENT(f2fs_discard, f2fs_remove_discard,
+ 	TP_ARGS(dev, blkstart, blklen)
+ );
+ 
+-TRACE_EVENT(f2fs_issue_reset_zone,
++DECLARE_EVENT_CLASS(f2fs_reset_zone,
+ 
+ 	TP_PROTO(struct block_device *dev, block_t blkstart),
+ 
+@@ -1528,11 +1528,25 @@ TRACE_EVENT(f2fs_issue_reset_zone,
+ 		__entry->blkstart = blkstart;
+ 	),
+ 
+-	TP_printk("dev = (%d,%d), reset zone at block = 0x%llx",
++	TP_printk("dev = (%d,%d), zone at block = 0x%llx",
+ 		show_dev(__entry->dev),
+ 		(unsigned long long)__entry->blkstart)
+ );
+ 
++DEFINE_EVENT(f2fs_reset_zone, f2fs_queue_reset_zone,
++
++	TP_PROTO(struct block_device *dev, block_t blkstart),
++
++	TP_ARGS(dev, blkstart)
++);
++
++DEFINE_EVENT(f2fs_reset_zone, f2fs_issue_reset_zone,
++
++	TP_PROTO(struct block_device *dev, block_t blkstart),
++
++	TP_ARGS(dev, blkstart)
++);
++
+ TRACE_EVENT(f2fs_issue_flush,
+ 
+ 	TP_PROTO(struct block_device *dev, unsigned int nobarrier,
+-- 
+2.25.1
 
-If the bug is already fixed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want to change bug's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the bug is a duplicate of another bug, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
 
 
 _______________________________________________
