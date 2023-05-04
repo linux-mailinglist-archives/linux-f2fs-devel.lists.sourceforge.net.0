@@ -2,97 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BBED6F6CF4
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 May 2023 15:31:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D54756F6D3E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 May 2023 15:48:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1puZ3Q-0007il-TH;
-	Thu, 04 May 2023 13:31:28 +0000
+	id 1puZJf-0001hE-E0;
+	Thu, 04 May 2023 13:48:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3qbNTZAkbAIg4ABwmxxq3m11up.s00sxq64q3o0z5qz5.o0y@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1puZ3Q-0007if-0Q for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 May 2023 13:31:28 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <chao@kernel.org>) id 1puZJd-0001gx-T6
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 04 May 2023 13:48:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:Cc:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yVwBEos5iu7/7J5iO/o1soHBlv2P/o3LvFqCNG0issM=; b=W5kjcHYuiFZmnczNu+TSVLBG/S
- 78FUgXOIyZxH8OG0M7SqE5cT8tA2UUayl8VOUzWyyGDqiJpxkmzNxpsycuzq3uqZqEmtB4/x3TmK6
- IqT9BYkGHjMMWlXTKRgzrcLyc/Cz9lWyrp+YDxMExdHVS/7wPWvwZn6RYt1zDcvDoPAo=;
+ bh=zSwns+CtM9qNAEAYBO6y8U/APIwFn9pvSiyKlWNkaoU=; b=aalNKatFB8Atcag+qXtBnbJNe/
+ Xl7gZTogyXP7NI17B3zG0VfZ+aerDzk5+I9GpAHkF4SeEK1dF1FagC6BJi+ILHsHkkJBrSm5DsLT0
+ mlWGN7/yCkJ6D8WhVqxiQt6ntBjHpCLZxzVMgfaZS3OMQI0NHiZs2FHMdnGJgubamg6E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=yVwBEos5iu7/7J5iO/o1soHBlv2P/o3LvFqCNG0issM=; b=g
- 2a0w1asE0KmI2cm1wHo+Z0KlqWgGYdkvYnPhpKAMcAfhAevF3/FwoFKjmT/vnsMmAmyIKYyuUIuWq
- AhnU/zDHlCnh5hiiOuKphS38RjfJrbI+l3lVEGFUvEED3+30+TVmWBPOdc3prwZ+ShHi61fR5cO7D
- neQO3lsgLBvnFxfk=;
-Received: from mail-io1-f70.google.com ([209.85.166.70])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1puZ3P-0005VC-EF for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 May 2023 13:31:27 +0000
-Received: by mail-io1-f70.google.com with SMTP id
- ca18e2360f4ac-7606d443ba6so27417439f.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 04 May 2023 06:31:27 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683207082; x=1685799082;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yVwBEos5iu7/7J5iO/o1soHBlv2P/o3LvFqCNG0issM=;
- b=II9vuF3rzLV6S75ydlSIaMfmDnF9WAUQV5zfCbucltHMZl4v8ahjwZZ7/0E0Otd7UP
- 7t5m6KFWAnk70QvLZ9GwjWdRSOno0Sa92b0D8BG/CRVOuGDIlNUwpxqaFiE0mH4/w31x
- NfFpfOAkJ+0+S+t4w9YXDJ7GgWFZpR/tEiRmwuDvwcIASrYu4LnkRPW9/A9LRQPXARTg
- PwtZSxECl8yNyRBWoyrG/f3rg4whwWuntznwgJZRK+xYZwJH+grCUK2I2jngV0GreJP8
- h9JcZNjB6NOR54X3Qz3B/6gVH8d8BG1g+6Uqt6278XKZxKjBXEuvWXJh7lQXtpmf5vn1
- I10Q==
-X-Gm-Message-State: AC+VfDwOEcor3iUzZGsoo91f9jOiKJJrl9/hP5Vs+p/QZOtALR0zlnkR
- mjspQBmIIJElSVLSDwSQvhSkKmlaf3RCWdyPw11KVm0gT+C8
-X-Google-Smtp-Source: ACHHUZ6HupuhWKorQTNyrYyET7P6ooqBC7PUYwkkiIVJKVyMN7QnPrgbhC+psr9Yh1NWkqdeopoSP95IVRVzcAlLaCZ5RvC47QLG
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Cc:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=zSwns+CtM9qNAEAYBO6y8U/APIwFn9pvSiyKlWNkaoU=; b=AbkgNV6FHapgVO5TiSCgqjc2RF
+ 5ya86GgiPFoojAMMRe2SKy6kOxgP6A2uLJdq0jGRmSjg+3q3gbAY18y/GEaqSBpIST8SMCPsFTg5x
+ I6Ehxyij+vygWtXpKVKWSSJKf+2frUb8eEK/OFtPFHvx28Yj6/FJx/PZJXxfHdOKVn8g=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1puZJe-00E1t1-4e for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 04 May 2023 13:48:14 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id BF631614F6;
+ Thu,  4 May 2023 13:48:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2D33C433D2;
+ Thu,  4 May 2023 13:48:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1683208088;
+ bh=R9GKOXYE8PBV0LY9sI0Q299FOl49FSPW4seo6zskIsk=;
+ h=Date:Subject:To:References:Cc:From:In-Reply-To:From;
+ b=SJQr4kHdHxPmT1D1jnczqDSkjtXVsFUuGuMIN1CnHeXgOMmLV6fSvkTcGaGMq5b9Z
+ TEl/BafjqL9bQbfNNX6fDzVN6z5O9E+g3fG6FbNCyinu/AvzsFMthcqg0KQHdV989/
+ cR6If4+zn3wr37KnQBpRXbUT0jsApaLmc+tA2BzJVCn/Cyong61NXlYDow/EWiIRfG
+ ovGVV8Wbi9s3zyytslHEPH12cN7W/RP5pDc/5T2Fo/NBi9Ve+ICbZKHCnyxK9krzNU
+ jvnHkFkTM9Wsg612GufUOEAa7SNw715sI0cPS3qN/CH2q339j4N4xhdtk4Z9QVCg5X
+ hQQV/eWQjPAXw==
+Message-ID: <d6a26ad8-3c90-d932-d966-85414e0ae42a@kernel.org>
+Date: Thu, 4 May 2023 21:48:04 +0800
 MIME-Version: 1.0
-X-Received: by 2002:a5d:94d1:0:b0:763:dd01:e143 with SMTP id
- y17-20020a5d94d1000000b00763dd01e143mr12018818ior.2.1683207081855; Thu, 04
- May 2023 06:31:21 -0700 (PDT)
-Date: Thu, 04 May 2023 06:31:21 -0700
-In-Reply-To: <fb9b6de8-1efc-eeea-7acb-09d291590576@kernel.org>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <00000000000032909d05fade30c8@google.com>
-From: syzbot <syzbot+eb6201248f684e99b9f8@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Content-Language: en-US
+To: syzbot <syzbot+eb6201248f684e99b9f8@syzkaller.appspotmail.com>,
  syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+References: <00000000000032909d05fade30c8@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <00000000000032909d05fade30c8@google.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot has tested the proposed patch but the reproducer
- is still triggering an issue: no output from test machine Tested on: 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  Hi, On 2023/5/4 21:31, syzbot wrote: > Hello, > > syzbot has
+ tested the proposed patch but the reproducer is still triggering an issue:
+ It said the reproducer is still triggering an issue, however, there is no
+ error output from the test. 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.70 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.70 listed in wl.mailspike.net]
-X-Headers-End: 1puZ3P-0005VC-EF
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1puZJe-00E1t1-4e
 Subject: Re: [f2fs-dev] [syzbot] [f2fs?] WARNING: lock held when returning
  to user space in f2fs_write_single_data_page
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -106,27 +108,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+Hi,
 
-syzbot has tested the proposed patch but the reproducer is still triggering an issue:
-no output from test machine
+On 2023/5/4 21:31, syzbot wrote:
+> Hello,
+> 
+> syzbot has tested the proposed patch but the reproducer is still triggering an issue:
 
+It said the reproducer is still triggering an issue, however, there is
+no error output from the test.
 
+Could you please help to check whether such status is normal or not, or
+am I missing something?
 
-Tested on:
+Thanks,
 
-commit:         2adb872d f2fs: fix potential deadlock due to unpaired ..
-git tree:       https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git dev-test
-console output: https://syzkaller.appspot.com/x/log.txt?x=114b5338280000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=86e4eb913e90d4b2
-dashboard link: https://syzkaller.appspot.com/bug?extid=eb6201248f684e99b9f8
-compiler:       Debian clang version 15.0.7, GNU ld (GNU Binutils for Debian) 2.35.2
-
-Note: no patches were applied.
+> no output from test machine
+> 
+> 
+> 
+> Tested on:
+> 
+> commit:         2adb872d f2fs: fix potential deadlock due to unpaired ..
+> git tree:       https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git dev-test
+> console output: https://syzkaller.appspot.com/x/log.txt?x=114b5338280000
+> kernel config:  https://syzkaller.appspot.com/x/.config?x=86e4eb913e90d4b2
+> dashboard link: https://syzkaller.appspot.com/bug?extid=eb6201248f684e99b9f8
+> compiler:       Debian clang version 15.0.7, GNU ld (GNU Binutils for Debian) 2.35.2
+> 
+> Note: no patches were applied.
 
 
 _______________________________________________
