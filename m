@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D0B06F736B
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 May 2023 21:43:16 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2AE96F7384
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 May 2023 21:43:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1puerA-0003RS-S8;
-	Thu, 04 May 2023 19:43:13 +0000
+	id 1puerp-0005VM-NY;
+	Thu, 04 May 2023 19:43:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1puer9-0003RD-P4
+ (envelope-from <sashal@kernel.org>) id 1puero-0005VF-S8
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 May 2023 19:43:12 +0000
+ Thu, 04 May 2023 19:43:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+8uOjnuawFjO1J2OKU8aTJALufQFwfZhZNpXTEXTlNw=; b=TDcnIjotYAAf6a7kY5DGJG035E
- YR1WZsftTFeM6JFgvAJKscz6bw+m7YE6AV4MVMzYaME3uSJU08Yppr7V1ogBo4B1H9TpsT/WBk84z
- chcWlK1nyzs3BJmagKetapWKgHmBrEZZPJ2KZVct1O06iDbUGvV3PeXQqGKHUHV18OYA=;
+ bh=OBY7npNncmLDFan583z0XSTuBA+O2ygvCOdZroimIxo=; b=UXHJk1M4RhqTg+gTS/tBK6zNFA
+ izVtbjNWLuekYcg8muELLKUouxDApECwhkhj/8CRNF2vJIJYepr87j3m2u45/JJiAF+MY0IgT+0ey
+ RTViQa8ScoMZtGlbDB0M73Z5dkmo22r0PNug9HH/+zeD/kmo5/AX96WeYbL3+b5y2qTE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,37 +31,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+8uOjnuawFjO1J2OKU8aTJALufQFwfZhZNpXTEXTlNw=; b=dCiHQrrVgG9DkDtdmk0pAl+kix
- iZ00rnq9L62G6qWiNdBaIWLcq+mI4DxL219TlwoQwhY8cdHjwLiu6bhhkEDNwrioKXL3KwdUlwDgI
- EVf0TnqkbGpX5//s/xBZT4dkgZZeVzOviRsaYvksUG7BW7YvcQh3fXi9iSeA3t8xd6jU=;
+ bh=OBY7npNncmLDFan583z0XSTuBA+O2ygvCOdZroimIxo=; b=MPmsJ+wtm6En6Dv+Qmtj3C6j9z
+ gWDBmRMuFocUSeNeODDY+5k34w8+hhSoaj9TCnGggFv7rISvl4pFrLVnD5egN12HnVWbp7RVBtay1
+ rvV5hA67pNFye+Uoi6j268swbuBrMmZKZOwnod5NxOJPK82eHDiRzH81iJT81lndz/cA=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1puer9-00EKYd-HH for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 May 2023 19:43:12 +0000
+ id 1puerj-00EKa8-KH for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 04 May 2023 19:43:52 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2AF9363736
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 4293463733
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  4 May 2023 19:43:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8DDBC4339B;
- Thu,  4 May 2023 19:43:04 +0000 (UTC)
+ Thu,  4 May 2023 19:43:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 163EEC433D2;
+ Thu,  4 May 2023 19:43:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683229385;
- bh=R2u0uNrnrx2lK0LOu6A4l5eqeBTAeL2v9gKhXi5O9kA=;
+ s=k20201202; t=1683229421;
+ bh=VZY5km8ttGA4lFXP4uir4dWru8YDf4d/uHraHcdDKFw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=qsuFBYguBPhBujuNxzQ9ma6OYemOUgJb87JQQ0zjhM5CZF+jCrw6XmexwUnT3P+LD
- Drh1S/PUO42iU2hz77Z8JDqIytQRRwircaSKW1uCVZHi1PyfN/tH3GzpEdLS7lP8Bd
- T4lxNOiWxY4LhC89qMnthWKWWoOKzvRv3o/tNXGRWH5eHmtthQpwCioVxE0OVXUB5C
- dhtuPSnx9vCJmJ4KRpAa4Kb3wSgbd3UY8Rw4qTmL7EinFPyQCFQkYSMGK2wODa/KJZ
- 9EbufGMlS5IP6v8gTe7cc/0W3S7hw+sR0a8/2/LKJdVWdYiEsaONaMvSnBXUBYW1F3
- elHMpxZNcL18g==
+ b=C/CohPXAY3Q+HAgb3aV5c7+7hwkdHd0Fuu6x8ObPrhSbxoVyN1utRuZ1hnaEukBcr
+ Ffo9cqLwiMdK1wJfQp9Tb/b6iSgm6mp9xMNAAkNTUNUROj0PJtlKcc0hMwrT1YUKBY
+ yJn5b5PWaCNr4IK6JOvAhh39oX5438jzUhHqxPSXy4yfF+bK6y1Ta1J7fvurFb4iH1
+ e6fCm04k8/i4iMjrz5TDJwL6BcFDr7gfcKdQSTlRQVekGgIAW9fqUhiHMEYwuymPms
+ 9CAjB030EZ0TGlpFhPiqHhfkwh7toSmnjr5OBrLXhHgm9j/BYr1Bzvf6E+WhYXfK7s
+ fVteOUgDi+DGw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu,  4 May 2023 15:41:13 -0400
-Message-Id: <20230504194142.3805425-30-sashal@kernel.org>
+Date: Thu,  4 May 2023 15:41:26 -0400
+Message-Id: <20230504194142.3805425-43-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230504194142.3805425-1-sashal@kernel.org>
 References: <20230504194142.3805425-1-sashal@kernel.org>
@@ -75,18 +75,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
- d78dfefcde9d311284434560d69c0478c55a657e
- ] With below case, it can mount multi-device image w/ rw option, however
- one of secondary device is set as ro, later update will cause panic, so let's
- introduce f2fs_dev_is_readonly(), and check multi-d [...] 
+ Content preview: From: Jaegeuk Kim <jaegeuk@kernel.org> [ Upstream commit
+ bd90c5cd339a9d7cdc609d2d6310b80dc697070d
+ ] 1. extent_cache - let's drop the largest extent_cache 2. invalidate_block
+ - don't show the warnings 
  Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -95,9 +94,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1puer9-00EKYd-HH
-Subject: [f2fs-dev] [PATCH AUTOSEL 6.3 30/59] f2fs: fix to check readonly
- condition correctly
+X-Headers-End: 1puerj-00EKa8-KH
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.3 43/59] f2fs: relax sanity check if
+ checkpoint is corrupted
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,78 +114,105 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Yu <chao@kernel.org>
+From: Jaegeuk Kim <jaegeuk@kernel.org>
 
-[ Upstream commit d78dfefcde9d311284434560d69c0478c55a657e ]
+[ Upstream commit bd90c5cd339a9d7cdc609d2d6310b80dc697070d ]
 
-With below case, it can mount multi-device image w/ rw option, however
-one of secondary device is set as ro, later update will cause panic, so
-let's introduce f2fs_dev_is_readonly(), and check multi-devices rw status
-in f2fs_remount() w/ it in order to avoid such inconsistent mount status.
+1. extent_cache
+ - let's drop the largest extent_cache
+2. invalidate_block
+ - don't show the warnings
 
-mkfs.f2fs -c /dev/zram1 /dev/zram0 -f
-blockdev --setro /dev/zram1
-mount -t f2fs dev/zram0 /mnt/f2fs
-mount: /mnt/f2fs: WARNING: source write-protected, mounted read-only.
-mount -t f2fs -o remount,rw mnt/f2fs
-dd if=/dev/zero  of=/mnt/f2fs/file bs=1M count=8192
-
-kernel BUG at fs/f2fs/inline.c:258!
-RIP: 0010:f2fs_write_inline_data+0x23e/0x2d0 [f2fs]
-Call Trace:
-  f2fs_write_single_data_page+0x26b/0x9f0 [f2fs]
-  f2fs_write_cache_pages+0x389/0xa60 [f2fs]
-  __f2fs_write_data_pages+0x26b/0x2d0 [f2fs]
-  f2fs_write_data_pages+0x2e/0x40 [f2fs]
-  do_writepages+0xd3/0x1b0
-  __writeback_single_inode+0x5b/0x420
-  writeback_sb_inodes+0x236/0x5a0
-  __writeback_inodes_wb+0x56/0xf0
-  wb_writeback+0x2a3/0x490
-  wb_do_writeback+0x2b2/0x330
-  wb_workfn+0x6a/0x260
-  process_one_work+0x270/0x5e0
-  worker_thread+0x52/0x3e0
-  kthread+0xf4/0x120
-  ret_from_fork+0x29/0x50
-
-Signed-off-by: Chao Yu <chao@kernel.org>
+Reviewed-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/f2fs.h  | 5 +++++
- fs/f2fs/super.c | 2 +-
- 2 files changed, 6 insertions(+), 1 deletion(-)
+ fs/f2fs/checkpoint.c   | 10 ++++++++++
+ fs/f2fs/data.c         |  4 ++++
+ fs/f2fs/extent_cache.c | 22 +++++++++++++++-------
+ 3 files changed, 29 insertions(+), 7 deletions(-)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index b0ab2062038a0..bef2641543e3f 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4462,6 +4462,11 @@ static inline bool f2fs_hw_is_readonly(struct f2fs_sb_info *sbi)
- 	return false;
- }
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 96af24c394c39..d4c862ccd1f72 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -152,6 +152,11 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
+ 	se = get_seg_entry(sbi, segno);
  
-+static inline bool f2fs_dev_is_readonly(struct f2fs_sb_info *sbi)
-+{
-+	return f2fs_sb_has_readonly(sbi) || f2fs_hw_is_readonly(sbi);
-+}
+ 	exist = f2fs_test_bit(offset, se->cur_valid_map);
 +
- static inline bool f2fs_lfs_mode(struct f2fs_sb_info *sbi)
- {
- 	return F2FS_OPTION(sbi).fs_mode == FS_MODE_LFS;
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index fbaaabbcd6de7..15716884c787f 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -2274,7 +2274,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
- 	if (f2fs_readonly(sb) && (*flags & SB_RDONLY))
- 		goto skip;
++	/* skip data, if we already have an error in checkpoint. */
++	if (unlikely(f2fs_cp_error(sbi)))
++		return exist;
++
+ 	if (exist && type == DATA_GENERIC_ENHANCE_UPDATE) {
+ 		f2fs_err(sbi, "Inconsistent error blkaddr:%u, sit bitmap:%d",
+ 			 blkaddr, exist);
+@@ -202,6 +207,11 @@ bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
+ 	case DATA_GENERIC_ENHANCE_UPDATE:
+ 		if (unlikely(blkaddr >= MAX_BLKADDR(sbi) ||
+ 				blkaddr < MAIN_BLKADDR(sbi))) {
++
++			/* Skip to emit an error message. */
++			if (unlikely(f2fs_cp_error(sbi)))
++				return false;
++
+ 			f2fs_warn(sbi, "access invalid blkaddr:%u",
+ 				  blkaddr);
+ 			set_sbi_flag(sbi, SBI_NEED_FSCK);
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 4677656215db9..30c15acc81dbb 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2235,6 +2235,10 @@ int f2fs_read_multi_pages(struct compress_ctx *cc, struct bio **bio_ret,
+ 	if (ret)
+ 		goto out;
  
--	if (f2fs_sb_has_readonly(sbi) && !(*flags & SB_RDONLY)) {
-+	if (f2fs_dev_is_readonly(sbi) && !(*flags & SB_RDONLY)) {
- 		err = -EROFS;
- 		goto restore_opts;
- 	}
++	if (unlikely(f2fs_cp_error(sbi))) {
++		ret = -EIO;
++		goto out_put_dnode;
++	}
+ 	f2fs_bug_on(sbi, dn.data_blkaddr != COMPRESS_ADDR);
+ 
+ skip_reading_dnode:
+diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
+index 28b12553f2b34..bd02f0260db9b 100644
+--- a/fs/f2fs/extent_cache.c
++++ b/fs/f2fs/extent_cache.c
+@@ -23,18 +23,26 @@ bool sanity_check_extent_cache(struct inode *inode)
+ {
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	struct f2fs_inode_info *fi = F2FS_I(inode);
++	struct extent_tree *et = fi->extent_tree[EX_READ];
+ 	struct extent_info *ei;
+ 
+-	if (!fi->extent_tree[EX_READ])
++	if (!et)
++		return true;
++
++	ei = &et->largest;
++	if (!ei->len)
+ 		return true;
+ 
+-	ei = &fi->extent_tree[EX_READ]->largest;
++	/* Let's drop, if checkpoint got corrupted. */
++	if (is_set_ckpt_flags(sbi, CP_ERROR_FLAG)) {
++		ei->len = 0;
++		et->largest_updated = true;
++		return true;
++	}
+ 
+-	if (ei->len &&
+-		(!f2fs_is_valid_blkaddr(sbi, ei->blk,
+-					DATA_GENERIC_ENHANCE) ||
+-		!f2fs_is_valid_blkaddr(sbi, ei->blk + ei->len - 1,
+-					DATA_GENERIC_ENHANCE))) {
++	if (!f2fs_is_valid_blkaddr(sbi, ei->blk, DATA_GENERIC_ENHANCE) ||
++	    !f2fs_is_valid_blkaddr(sbi, ei->blk + ei->len - 1,
++					DATA_GENERIC_ENHANCE)) {
+ 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_warn(sbi, "%s: inode (ino=%lx) extent info [%u, %u, %u] is incorrect, run fsck to fix",
+ 			  __func__, inode->i_ino,
 -- 
 2.39.2
 
