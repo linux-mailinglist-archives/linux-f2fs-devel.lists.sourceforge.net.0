@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13AFD6F736A
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D0B06F736B
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 May 2023 21:43:16 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1puerA-0003RJ-FO;
-	Thu, 04 May 2023 19:43:12 +0000
+	id 1puerA-0003RS-S8;
+	Thu, 04 May 2023 19:43:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1puer9-0003R7-Gm
+ (envelope-from <sashal@kernel.org>) id 1puer9-0003RD-P4
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 May 2023 19:43:11 +0000
+ Thu, 04 May 2023 19:43:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hA/Px9/Y8qq77GNSAm298zCKiFw4bxXqRvxKev1J7qw=; b=mKQ2vxJRSH6E39o7jKZ5gq5yoO
- jbwH3BerPSIh57YXAJ24Yl3cGpExfIClvW0ugVXi3lDU1OPNTKrUx6DkgjgikrDNYlVkhLkruHFOx
- EzyFqGZNNnetUMEyWzExPGI/OpAL7a+rtOo49jBgaJW82HCVhRx5bA5RC3gV51LAz3KA=;
+ bh=+8uOjnuawFjO1J2OKU8aTJALufQFwfZhZNpXTEXTlNw=; b=TDcnIjotYAAf6a7kY5DGJG035E
+ YR1WZsftTFeM6JFgvAJKscz6bw+m7YE6AV4MVMzYaME3uSJU08Yppr7V1ogBo4B1H9TpsT/WBk84z
+ chcWlK1nyzs3BJmagKetapWKgHmBrEZZPJ2KZVct1O06iDbUGvV3PeXQqGKHUHV18OYA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,37 +31,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hA/Px9/Y8qq77GNSAm298zCKiFw4bxXqRvxKev1J7qw=; b=Iqi/lnaLsBzb/lNHrtAYGa+VRK
- sFJZj/ebetxt4OVqVIBpgkDb9pNNm4cW9C2OYPlWfkiGn2hllCGsZnlsIuIOrW5MAhnPP+d260sGd
- x61j45+fv0i6+lvux+YWdeWNHPeP3f58BYXfG1zz5ltnn6XBfevpxtzvtMmQ484hKU3g=;
+ bh=+8uOjnuawFjO1J2OKU8aTJALufQFwfZhZNpXTEXTlNw=; b=dCiHQrrVgG9DkDtdmk0pAl+kix
+ iZ00rnq9L62G6qWiNdBaIWLcq+mI4DxL219TlwoQwhY8cdHjwLiu6bhhkEDNwrioKXL3KwdUlwDgI
+ EVf0TnqkbGpX5//s/xBZT4dkgZZeVzOviRsaYvksUG7BW7YvcQh3fXi9iSeA3t8xd6jU=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1puer9-0006oQ-7v for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 May 2023 19:43:11 +0000
+ id 1puer9-00EKYd-HH for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 04 May 2023 19:43:12 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 1107162B99
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2AF9363736
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  4 May 2023 19:43:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D53F7C433A0;
- Thu,  4 May 2023 19:43:03 +0000 (UTC)
+ Thu,  4 May 2023 19:43:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8DDBC4339B;
+ Thu,  4 May 2023 19:43:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683229384;
- bh=d4cbn6cBra8D+tCFsIm/H6iVrYMro8EkguxohBvoJxo=;
+ s=k20201202; t=1683229385;
+ bh=R2u0uNrnrx2lK0LOu6A4l5eqeBTAeL2v9gKhXi5O9kA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GI9lfGo0QxgsldGTwCriH32NNdn4YGz1OQIOKFEkxp7+OiPSxXT7wD+NXJDOl19Mz
- hmargOgMjdQGO88m4Hdp3w410oPEIDNXA0kwJwRpIAWbwix6a9TDwUvPMsRkpZFkcQ
- AlK2kRajCTpv5iHCRhjkG3muB6a0mBk7h1cci+XxsMMMuf1omoU1TSnTyzp2AzQV+4
- 0vMfJZD6ZE5c3jPfw0DtemAStvvf44bYCMHR9DAw+2FzDmg7ypayAtnPQqwodjYEi3
- IUKDjE71XEeBR1wf0FrOcfDCiod8C1uvTaYXPy/cY7aZL9q0H6OEa1s2ovdiYX+dSY
- AyYmbUxXChdBw==
+ b=qsuFBYguBPhBujuNxzQ9ma6OYemOUgJb87JQQ0zjhM5CZF+jCrw6XmexwUnT3P+LD
+ Drh1S/PUO42iU2hz77Z8JDqIytQRRwircaSKW1uCVZHi1PyfN/tH3GzpEdLS7lP8Bd
+ T4lxNOiWxY4LhC89qMnthWKWWoOKzvRv3o/tNXGRWH5eHmtthQpwCioVxE0OVXUB5C
+ dhtuPSnx9vCJmJ4KRpAa4Kb3wSgbd3UY8Rw4qTmL7EinFPyQCFQkYSMGK2wODa/KJZ
+ 9EbufGMlS5IP6v8gTe7cc/0W3S7hw+sR0a8/2/LKJdVWdYiEsaONaMvSnBXUBYW1F3
+ elHMpxZNcL18g==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu,  4 May 2023 15:41:12 -0400
-Message-Id: <20230504194142.3805425-29-sashal@kernel.org>
+Date: Thu,  4 May 2023 15:41:13 -0400
+Message-Id: <20230504194142.3805425-30-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230504194142.3805425-1-sashal@kernel.org>
 References: <20230504194142.3805425-1-sashal@kernel.org>
@@ -76,8 +76,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
- c9b3649a934d131151111354bcbb638076f03a30
- ] xfstest generic/361 reports a bug as below: 
+ d78dfefcde9d311284434560d69c0478c55a657e
+ ] With below case, it can mount multi-device image w/ rw option, however
+ one of secondary device is set as ro, later update will cause panic, so let's
+ introduce f2fs_dev_is_readonly(), and check multi-d [...] 
  Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +95,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1puer9-0006oQ-7v
-Subject: [f2fs-dev] [PATCH AUTOSEL 6.3 29/59] f2fs: fix to drop all dirty
- pages during umount() if cp_error is set
+X-Headers-End: 1puer9-00EKYd-HH
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.3 30/59] f2fs: fix to check readonly
+ condition correctly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,88 +117,75 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Chao Yu <chao@kernel.org>
 
-[ Upstream commit c9b3649a934d131151111354bcbb638076f03a30 ]
+[ Upstream commit d78dfefcde9d311284434560d69c0478c55a657e ]
 
-xfstest generic/361 reports a bug as below:
+With below case, it can mount multi-device image w/ rw option, however
+one of secondary device is set as ro, later update will cause panic, so
+let's introduce f2fs_dev_is_readonly(), and check multi-devices rw status
+in f2fs_remount() w/ it in order to avoid such inconsistent mount status.
 
-f2fs_bug_on(sbi, sbi->fsync_node_num);
+mkfs.f2fs -c /dev/zram1 /dev/zram0 -f
+blockdev --setro /dev/zram1
+mount -t f2fs dev/zram0 /mnt/f2fs
+mount: /mnt/f2fs: WARNING: source write-protected, mounted read-only.
+mount -t f2fs -o remount,rw mnt/f2fs
+dd if=/dev/zero  of=/mnt/f2fs/file bs=1M count=8192
 
-kernel BUG at fs/f2fs/super.c:1627!
-RIP: 0010:f2fs_put_super+0x3a8/0x3b0
+kernel BUG at fs/f2fs/inline.c:258!
+RIP: 0010:f2fs_write_inline_data+0x23e/0x2d0 [f2fs]
 Call Trace:
- generic_shutdown_super+0x8c/0x1b0
- kill_block_super+0x2b/0x60
- kill_f2fs_super+0x87/0x110
- deactivate_locked_super+0x39/0x80
- deactivate_super+0x46/0x50
- cleanup_mnt+0x109/0x170
- __cleanup_mnt+0x16/0x20
- task_work_run+0x65/0xa0
- exit_to_user_mode_prepare+0x175/0x190
- syscall_exit_to_user_mode+0x25/0x50
- do_syscall_64+0x4c/0x90
- entry_SYSCALL_64_after_hwframe+0x72/0xdc
-
-During umount(), if cp_error is set, f2fs_wait_on_all_pages() should
-not stop waiting all F2FS_WB_CP_DATA pages to be writebacked, otherwise,
-fsync_node_num can be non-zero after f2fs_wait_on_all_pages() causing
-this bug.
-
-In this case, to avoid deadloop in f2fs_wait_on_all_pages(), it needs
-to drop all dirty pages rather than redirtying them.
+  f2fs_write_single_data_page+0x26b/0x9f0 [f2fs]
+  f2fs_write_cache_pages+0x389/0xa60 [f2fs]
+  __f2fs_write_data_pages+0x26b/0x2d0 [f2fs]
+  f2fs_write_data_pages+0x2e/0x40 [f2fs]
+  do_writepages+0xd3/0x1b0
+  __writeback_single_inode+0x5b/0x420
+  writeback_sb_inodes+0x236/0x5a0
+  __writeback_inodes_wb+0x56/0xf0
+  wb_writeback+0x2a3/0x490
+  wb_do_writeback+0x2b2/0x330
+  wb_workfn+0x6a/0x260
+  process_one_work+0x270/0x5e0
+  worker_thread+0x52/0x3e0
+  kthread+0xf4/0x120
+  ret_from_fork+0x29/0x50
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/checkpoint.c | 12 ++++++++++--
- fs/f2fs/data.c       |  3 ++-
- 2 files changed, 12 insertions(+), 3 deletions(-)
+ fs/f2fs/f2fs.h  | 5 +++++
+ fs/f2fs/super.c | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index c3e058e0a0188..96af24c394c39 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -325,8 +325,15 @@ static int __f2fs_write_meta_page(struct page *page,
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index b0ab2062038a0..bef2641543e3f 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -4462,6 +4462,11 @@ static inline bool f2fs_hw_is_readonly(struct f2fs_sb_info *sbi)
+ 	return false;
+ }
  
- 	trace_f2fs_writepage(page, META);
++static inline bool f2fs_dev_is_readonly(struct f2fs_sb_info *sbi)
++{
++	return f2fs_sb_has_readonly(sbi) || f2fs_hw_is_readonly(sbi);
++}
++
+ static inline bool f2fs_lfs_mode(struct f2fs_sb_info *sbi)
+ {
+ 	return F2FS_OPTION(sbi).fs_mode == FS_MODE_LFS;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index fbaaabbcd6de7..15716884c787f 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2274,7 +2274,7 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
+ 	if (f2fs_readonly(sb) && (*flags & SB_RDONLY))
+ 		goto skip;
  
--	if (unlikely(f2fs_cp_error(sbi)))
-+	if (unlikely(f2fs_cp_error(sbi))) {
-+		if (is_sbi_flag_set(sbi, SBI_IS_CLOSE)) {
-+			ClearPageUptodate(page);
-+			dec_page_count(sbi, F2FS_DIRTY_META);
-+			unlock_page(page);
-+			return 0;
-+		}
- 		goto redirty_out;
-+	}
- 	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
- 		goto redirty_out;
- 	if (wbc->for_reclaim && page->index < GET_SUM_BLOCK(sbi, 0))
-@@ -1306,7 +1313,8 @@ void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
- 		if (!get_pages(sbi, type))
- 			break;
- 
--		if (unlikely(f2fs_cp_error(sbi)))
-+		if (unlikely(f2fs_cp_error(sbi) &&
-+			!is_sbi_flag_set(sbi, SBI_IS_CLOSE)))
- 			break;
- 
- 		if (type == F2FS_DIRTY_META)
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 06b552a0aba23..4677656215db9 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2798,7 +2798,8 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
- 		 * don't drop any dirty dentry pages for keeping lastest
- 		 * directory structure.
- 		 */
--		if (S_ISDIR(inode->i_mode))
-+		if (S_ISDIR(inode->i_mode) &&
-+				!is_sbi_flag_set(sbi, SBI_IS_CLOSE))
- 			goto redirty_out;
- 		goto out;
+-	if (f2fs_sb_has_readonly(sbi) && !(*flags & SB_RDONLY)) {
++	if (f2fs_dev_is_readonly(sbi) && !(*flags & SB_RDONLY)) {
+ 		err = -EROFS;
+ 		goto restore_opts;
  	}
 -- 
 2.39.2
