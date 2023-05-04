@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 627B66F73B2
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 May 2023 21:45:37 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B34D6F73B3
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  4 May 2023 21:45:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1puetT-0005az-6u;
-	Thu, 04 May 2023 19:45:35 +0000
+	id 1puetU-0006DN-TE;
+	Thu, 04 May 2023 19:45:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1puetS-0005at-42
+ (envelope-from <sashal@kernel.org>) id 1puetT-0006DG-6Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 May 2023 19:45:34 +0000
+ Thu, 04 May 2023 19:45:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=c+hIIMGpp2LbQW1R9KgwiEvptT19PW+2GH5Y7FWm5Qw=; b=D7MdDSzrUr02H+cUGFgu7GNHzw
- OKVT92szg65SiFnhFqUJjMEI5lJ+mbBZcuM3WDJgxokf2Ig7FICvqDEiOjePOMqfETmXdxyHm4N7R
- MRkg9sQwF5mMJG5ymn5VLW/XlbiV+eZZZVHyYnwjCCyqNdSyeRbq9vWoUn6PXl+HJ7Iw=;
+ bh=TJK0BajURyBMs7RJNkmiMMSgzt2wELi9AeFudHqIu9c=; b=jhpbLr+VgYuyD+Y3MUih3FMM4f
+ pJgH215FKyGx9D/bu9XqU6Qgo/gETAHqs9YjXrFFi0uvJMenxcPuB2W81gV36qwXEDIjJkAByeRUf
+ VJwaxqdzfBUJBVUFbXTh78RhIaJBdga5RVFdp4qkQZFimXxUgbZgJMB4qkSOES+BocCQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,36 +31,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=c+hIIMGpp2LbQW1R9KgwiEvptT19PW+2GH5Y7FWm5Qw=; b=k9vQmm+f+cGD9GnBmzXpBXeplj
- Y7cha6WXl40u0YSOwmMNoJ7jBPHUqPhunbFCLsEltVrHgtKL8gN1dRSzUCEzH8qTCwa8+qiKu8mLx
- tDdEQV1EqbNFFs8dr9MOqeOxvlAjYXCpUZNksimGxVXJHdJhet/uILUSqMoc2iuyaP88=;
+ bh=TJK0BajURyBMs7RJNkmiMMSgzt2wELi9AeFudHqIu9c=; b=Sn4sbKV5rmVyHfyn6a4jnT3GbZ
+ gKPTgDp0sJoMgCsd42ZASOwgbVxrlLGrKSbkPkqNq3eDQc5hO7plGCug6PGitHL6fkY6TTpLCfGtv
+ fRKqddZp66xOV+iQITgh2BeEKX8dYT2IP9GxrVI0zCXb5NyZSAsu/4A6rf2bPx4fIjgE=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1puetN-00EKfB-S8 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 04 May 2023 19:45:34 +0000
+ id 1puetO-00EKfE-VG for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 04 May 2023 19:45:35 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6DF8063762;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9468463785
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu,  4 May 2023 19:45:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E3BCC433A0;
  Thu,  4 May 2023 19:45:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15B32C4339B;
- Thu,  4 May 2023 19:45:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683229523;
- bh=kHHRAVxIZORrFWYBiSpM9XP49rQ5R2eyS9hxUUpJNAM=;
+ s=k20201202; t=1683229525;
+ bh=LWx2YOOAmxNY2HxtR+8uE8MXZabiSgZ9Dv632++iMoI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=CT/pC2O5kiHSZ1SBqgzAg9d/VgHQPIw33tjcOO1THvAgDFGKmJYkslQ5NnSh0MzIx
- fBuEG6AtjMk8PYb/18fMOWebS+fgVPzcsHUaGEtJvrkZchFaiomRxeETHwPx2k0PNn
- BYliLHYbok7zxZjUAjDP3Hc7uiHUgijtjpqY9wagDdnRFsHZzOL96dJsErlrPDGlat
- drgcd/GVKfkOwy407goGyF4WTn5LsR9HN3XmNi16yVRiLNNMeQb0MBQiU6gk8E9acX
- qY52rp50jn+6S6f2Qu+p5UTym0+35TBl86DemMBL82svqzKBtSCB/tv+ukFruXtJ4H
- PVxhhMgPmZTnQ==
+ b=FGqEpBcOjUFpddi9Yi7VuOJ+pbRP0humxVPtBKFai5HQS7gafjG0pX09vGqZJbZL+
+ Ez44Ex5F4NuRgEv+/yR7yIrRbye+w9u8qdccVyCmA2k12cj0/FwghVxsdst63CWs7P
+ Wid95QhA9BxPpzRkKByrA7fMCEj0+qE1lrQR7VDVJyGYqPPlOhUOeFqp6VjLrD++cG
+ TR/qf3wueGsR0ar63QfNYosMbZ+J4EtS+k2bp0RpYUL4MeMIqYQdQyTd7egmmI2NPy
+ KkHEE7h0oUC58AAebybqiSWuY1w97ri9g5u4jDTum7rugUWb3Jx70uouI+FsJHNCRy
+ mhG3BfgMJPOAA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu,  4 May 2023 15:43:45 -0400
-Message-Id: <20230504194413.3806354-25-sashal@kernel.org>
+Date: Thu,  4 May 2023 15:43:46 -0400
+Message-Id: <20230504194413.3806354-26-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230504194413.3806354-1-sashal@kernel.org>
 References: <20230504194413.3806354-1-sashal@kernel.org>
@@ -74,12 +75,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Yonggil Song <yonggil.song@samsung.com> [ Upstream
- commit
- d11cef14f8146f3babd286c2cc8ca09c166295e2 ] When f2fs tries to checkpoint
- during foreground gc in LFS mode, system crash occurs due to lack of free
- space if the amount of dirty node and dentry pages generated by data migration
- exceeds free spac [...] 
+ Content preview: From: Chao Yu <chao@kernel.org> [ Upstream commit
+ c9b3649a934d131151111354bcbb638076f03a30
+ ] xfstest generic/361 reports a bug as below: 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +93,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1puetN-00EKfB-S8
-Subject: [f2fs-dev] [PATCH AUTOSEL 6.2 25/53] f2fs: Fix system crash due to
- lack of free space in LFS
+X-Headers-End: 1puetO-00EKfE-VG
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.2 26/53] f2fs: fix to drop all dirty
+ pages during umount() if cp_error is set
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,167 +113,91 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Yonggil Song <yonggil.song@samsung.com>
+From: Chao Yu <chao@kernel.org>
 
-[ Upstream commit d11cef14f8146f3babd286c2cc8ca09c166295e2 ]
+[ Upstream commit c9b3649a934d131151111354bcbb638076f03a30 ]
 
-When f2fs tries to checkpoint during foreground gc in LFS mode, system
-crash occurs due to lack of free space if the amount of dirty node and
-dentry pages generated by data migration exceeds free space.
-The reproduction sequence is as follows.
+xfstest generic/361 reports a bug as below:
 
- - 20GiB capacity block device (null_blk)
- - format and mount with LFS mode
- - create a file and write 20,000MiB
- - 4k random write on full range of the file
+f2fs_bug_on(sbi, sbi->fsync_node_num);
 
- RIP: 0010:new_curseg+0x48a/0x510 [f2fs]
- Code: 55 e7 f5 89 c0 48 0f af c3 48 8b 5d c0 48 c1 e8 20 83 c0 01 89 43 6c 48 83 c4 28 5b 41 5c 41 5d 41 5e 41 5f 5d c3 cc cc cc cc <0f> 0b f0 41 80 4f 48 04 45 85 f6 0f 84 ba fd ff ff e9 ef fe ff ff
- RSP: 0018:ffff977bc397b218 EFLAGS: 00010246
- RAX: 00000000000027b9 RBX: 0000000000000000 RCX: 00000000000027c0
- RDX: 0000000000000000 RSI: 00000000000027b9 RDI: ffff8c25ab4e74f8
- RBP: ffff977bc397b268 R08: 00000000000027b9 R09: ffff8c29e4a34b40
- R10: 0000000000000001 R11: ffff977bc397b0d8 R12: 0000000000000000
- R13: ffff8c25b4dd81a0 R14: 0000000000000000 R15: ffff8c2f667f9000
- FS: 0000000000000000(0000) GS:ffff8c344ec80000(0000) knlGS:0000000000000000
- CS: 0010 DS: 0000 ES: 0000 CR0: 0000000080050033
- CR2: 000000c00055d000 CR3: 0000000e30810003 CR4: 00000000003706e0
- DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
- DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
- Call Trace:
- <TASK>
- allocate_segment_by_default+0x9c/0x110 [f2fs]
- f2fs_allocate_data_block+0x243/0xa30 [f2fs]
- ? __mod_lruvec_page_state+0xa0/0x150
- do_write_page+0x80/0x160 [f2fs]
- f2fs_do_write_node_page+0x32/0x50 [f2fs]
- __write_node_page+0x339/0x730 [f2fs]
- f2fs_sync_node_pages+0x5a6/0x780 [f2fs]
- block_operations+0x257/0x340 [f2fs]
- f2fs_write_checkpoint+0x102/0x1050 [f2fs]
- f2fs_gc+0x27c/0x630 [f2fs]
- ? folio_mark_dirty+0x36/0x70
- f2fs_balance_fs+0x16f/0x180 [f2fs]
+kernel BUG at fs/f2fs/super.c:1627!
+RIP: 0010:f2fs_put_super+0x3a8/0x3b0
+Call Trace:
+ generic_shutdown_super+0x8c/0x1b0
+ kill_block_super+0x2b/0x60
+ kill_f2fs_super+0x87/0x110
+ deactivate_locked_super+0x39/0x80
+ deactivate_super+0x46/0x50
+ cleanup_mnt+0x109/0x170
+ __cleanup_mnt+0x16/0x20
+ task_work_run+0x65/0xa0
+ exit_to_user_mode_prepare+0x175/0x190
+ syscall_exit_to_user_mode+0x25/0x50
+ do_syscall_64+0x4c/0x90
+ entry_SYSCALL_64_after_hwframe+0x72/0xdc
 
-This patch adds checking whether free sections are enough before checkpoint
-during gc.
+During umount(), if cp_error is set, f2fs_wait_on_all_pages() should
+not stop waiting all F2FS_WB_CP_DATA pages to be writebacked, otherwise,
+fsync_node_num can be non-zero after f2fs_wait_on_all_pages() causing
+this bug.
 
-Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
-[Jaegeuk Kim: code clean-up]
-Reviewed-by: Chao Yu <chao@kernel.org>
+In this case, to avoid deadloop in f2fs_wait_on_all_pages(), it needs
+to drop all dirty pages rather than redirtying them.
+
+Signed-off-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- fs/f2fs/gc.c      | 10 ++++++++--
- fs/f2fs/gc.h      |  2 ++
- fs/f2fs/segment.h | 39 ++++++++++++++++++++++++++++++---------
- 3 files changed, 40 insertions(+), 11 deletions(-)
+ fs/f2fs/checkpoint.c | 12 ++++++++++--
+ fs/f2fs/data.c       |  3 ++-
+ 2 files changed, 12 insertions(+), 3 deletions(-)
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 6e2cae3d2e717..3abb0045384cc 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1783,6 +1783,7 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
- 		.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
- 	};
- 	unsigned int skipped_round = 0, round = 0;
-+	unsigned int upper_secs;
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 56f7d0d6a8b2f..53544f254c72b 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -327,8 +327,15 @@ static int __f2fs_write_meta_page(struct page *page,
  
- 	trace_f2fs_gc_begin(sbi->sb, gc_type, gc_control->no_bg_gc,
- 				gc_control->nr_free_secs,
-@@ -1868,8 +1869,13 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
- 		}
- 	}
+ 	trace_f2fs_writepage(page, META);
  
--	/* Write checkpoint to reclaim prefree segments */
--	if (free_sections(sbi) < NR_CURSEG_PERSIST_TYPE &&
-+	__get_secs_required(sbi, NULL, &upper_secs, NULL);
-+
-+	/*
-+	 * Write checkpoint to reclaim prefree segments.
-+	 * We need more three extra sections for writer's data/node/dentry.
-+	 */
-+	if (free_sections(sbi) <= upper_secs + NR_GC_CHECKPOINT_SECS &&
- 				prefree_segments(sbi)) {
- 		ret = f2fs_write_checkpoint(sbi, &cpc);
- 		if (ret)
-diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
-index 19b956c2d697a..e81d22bf3772c 100644
---- a/fs/f2fs/gc.h
-+++ b/fs/f2fs/gc.h
-@@ -30,6 +30,8 @@
- /* Search max. number of dirty segments to select a victim segment */
- #define DEF_MAX_VICTIM_SEARCH 4096 /* covers 8GB */
- 
-+#define NR_GC_CHECKPOINT_SECS (3)	/* data/node/dentry sections */
-+
- struct f2fs_gc_kthread {
- 	struct task_struct *f2fs_gc_task;
- 	wait_queue_head_t gc_wait_queue_head;
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 6eb5922a25361..ec7ceb31f00c7 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -599,8 +599,12 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
- 	return true;
- }
- 
--static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
--					int freed, int needed)
-+/*
-+ * calculate needed sections for dirty node/dentry
-+ * and call has_curseg_enough_space
-+ */
-+static inline void __get_secs_required(struct f2fs_sb_info *sbi,
-+		unsigned int *lower_p, unsigned int *upper_p, bool *curseg_p)
- {
- 	unsigned int total_node_blocks = get_pages(sbi, F2FS_DIRTY_NODES) +
- 					get_pages(sbi, F2FS_DIRTY_DENTS) +
-@@ -610,20 +614,37 @@ static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
- 	unsigned int dent_secs = total_dent_blocks / CAP_BLKS_PER_SEC(sbi);
- 	unsigned int node_blocks = total_node_blocks % CAP_BLKS_PER_SEC(sbi);
- 	unsigned int dent_blocks = total_dent_blocks % CAP_BLKS_PER_SEC(sbi);
--	unsigned int free, need_lower, need_upper;
-+
-+	if (lower_p)
-+		*lower_p = node_secs + dent_secs;
-+	if (upper_p)
-+		*upper_p = node_secs + dent_secs +
-+			(node_blocks ? 1 : 0) + (dent_blocks ? 1 : 0);
-+	if (curseg_p)
-+		*curseg_p = has_curseg_enough_space(sbi,
-+				node_blocks, dent_blocks);
-+}
-+
-+static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
-+					int freed, int needed)
-+{
-+	unsigned int free_secs, lower_secs, upper_secs;
-+	bool curseg_space;
- 
+-	if (unlikely(f2fs_cp_error(sbi)))
++	if (unlikely(f2fs_cp_error(sbi))) {
++		if (is_sbi_flag_set(sbi, SBI_IS_CLOSE)) {
++			ClearPageUptodate(page);
++			dec_page_count(sbi, F2FS_DIRTY_META);
++			unlock_page(page);
++			return 0;
++		}
+ 		goto redirty_out;
++	}
  	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
- 		return false;
+ 		goto redirty_out;
+ 	if (wbc->for_reclaim && page->index < GET_SUM_BLOCK(sbi, 0))
+@@ -1306,7 +1313,8 @@ void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
+ 		if (!get_pages(sbi, type))
+ 			break;
  
--	free = free_sections(sbi) + freed;
--	need_lower = node_secs + dent_secs + reserved_sections(sbi) + needed;
--	need_upper = need_lower + (node_blocks ? 1 : 0) + (dent_blocks ? 1 : 0);
-+	__get_secs_required(sbi, &lower_secs, &upper_secs, &curseg_space);
-+
-+	free_secs = free_sections(sbi) + freed;
-+	lower_secs += needed + reserved_sections(sbi);
-+	upper_secs += needed + reserved_sections(sbi);
+-		if (unlikely(f2fs_cp_error(sbi)))
++		if (unlikely(f2fs_cp_error(sbi) &&
++			!is_sbi_flag_set(sbi, SBI_IS_CLOSE)))
+ 			break;
  
--	if (free > need_upper)
-+	if (free_secs > upper_secs)
- 		return false;
--	else if (free <= need_lower)
-+	else if (free_secs <= lower_secs)
- 		return true;
--	return !has_curseg_enough_space(sbi, node_blocks, dent_blocks);
-+	return !curseg_space;
- }
- 
- static inline bool f2fs_is_checkpoint_ready(struct f2fs_sb_info *sbi)
+ 		if (type == F2FS_DIRTY_META)
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index a28d05895f5c7..8ac5d0f7829c9 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2799,7 +2799,8 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
+ 		 * don't drop any dirty dentry pages for keeping lastest
+ 		 * directory structure.
+ 		 */
+-		if (S_ISDIR(inode->i_mode))
++		if (S_ISDIR(inode->i_mode) &&
++				!is_sbi_flag_set(sbi, SBI_IS_CLOSE))
+ 			goto redirty_out;
+ 		goto out;
+ 	}
 -- 
 2.39.2
 
