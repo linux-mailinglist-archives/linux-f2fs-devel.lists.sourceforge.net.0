@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 458F76F824B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 May 2023 13:49:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAB076F8290
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 May 2023 14:08:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1putwF-0001AA-1Y;
-	Fri, 05 May 2023 11:49:27 +0000
+	id 1puuEH-00085K-7o;
+	Fri, 05 May 2023 12:08:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1putwC-00019t-Vu
+ (envelope-from <chao@kernel.org>) id 1puuE8-000851-PJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 May 2023 11:49:25 +0000
+ Fri, 05 May 2023 12:07:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hj7Nx3xWYsyDS9WIGy5tWELNeH7FLUc13BY5T0eVSnI=; b=TQpWZbnycVugTYbTKKr/nserD6
- ADlwYoV87+OMRhNcSIxl6CFR2Cmjao1VLgprE++ij67+znnqZ/y4nZ7E6kZ6jOG+HNtcnVZbFNI/F
- WMlGVDWQ3XsXY3bhoQl2o3S89aVNBmiZ7xxqFSYijVgwu1u3asHoCunRrxIjpCITak4M=;
+ bh=VE05OMdYR55qpiK1nxSfF9ArhVjAMM8h1kTYWP6Glho=; b=cQNhQyoaRxedIq9dOqy88ekRjE
+ aEWoABcf9qMcvMAccwS83G6uTsEl3U83peYbQNxvz5ht9YetEeZSM5a+Tq9VVJfA2Tmi1SEKZ2Z3A
+ KCpfYFlgcAjk1dRg0chJ24GoqP2NojTO96KqA1mDQMywsweAXieB8SavFELnvjT1C/qc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,48 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hj7Nx3xWYsyDS9WIGy5tWELNeH7FLUc13BY5T0eVSnI=; b=EkxAfTEvjKpnkIvldCS6GXY6Uk
- riMdOatpLT4VJD3RN33zFAcbz8V5c/qmRdPsR8KrZOOeZqLKOrSH3iySiYagh1quc1rbkVJZiZdJO
- GSRGVCLRTUi5s1crIfxFYGekZd2z5sLwYfYnorRt/atVkkgZ/8+sxVKav2iKWuHgSfrI=;
+ bh=VE05OMdYR55qpiK1nxSfF9ArhVjAMM8h1kTYWP6Glho=; b=hzecM21opB5QxrLqdIPacZGVwE
+ J841lDJ02chgYQiPFmUQ0+uG5/XMij24NeC2aT0HsJVoJVJnJGOzf+AINkob65sBTnl8BsmPrV3bb
+ eBF++nO6pWZeJm1XGQd62CU9Yo+0uG9Hp78zQfRKStGnkjYUYoVfqj2e+lvcCNJRVvtM=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1putwD-00FCmp-2S for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 May 2023 11:49:25 +0000
+ id 1puuE7-0003cP-Uj for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 05 May 2023 12:07:56 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A9D7263D7D;
- Fri,  5 May 2023 11:49:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0B8C5C433D2;
- Fri,  5 May 2023 11:49:15 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 8D63863DA7;
+ Fri,  5 May 2023 12:07:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 405C7C433D2;
+ Fri,  5 May 2023 12:07:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683287359;
- bh=0pvNDiOgxzfoBpuvGE5ML1BEAkGH0HeXy85ykEK6SPw=;
+ s=k20201202; t=1683288470;
+ bh=kxuFnp56Va2nSsCuCw2fQRqHerhGWS5+9BN8wx6tKRc=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=srv8SG5HfdHY96IFLxCwepDMFgxbKg/Np4ofZtajhTA3AchZO9b2KEG1PBjHXW524
- 9o+oLTJcoTuDHLk1emxYm5JfK/BfEaIcvpkf+vRXTELKHHHetFIxbKU5lKq9pTV/xE
- +ph1tnYb2DAuWEluwvTibpT4tnaG6j8grs7HIZuUi8mEfRbg3sBGupL9vQ428jArBb
- f8zLdho/9MZr2zhmwGgq1jzqY+Fq5yLkTVPDTwxT7DYppxbLtepHmzgp08mNT8JKIg
- 1eB2qjMIkZkD+IERC4KpOFRSmjXTr7p+fjVS1ruawrPF/n/QS4EPjbD58DHZZU9uX0
- zd5y96SG8kyEg==
-Message-ID: <6bb7a39f-75ae-0d68-8912-ed46b49632e7@kernel.org>
-Date: Fri, 5 May 2023 19:49:11 +0800
+ b=Qsh7UA810gbij11juFPVBmXm6YVQeUuZKwZ6Q+hwOMsSW0lB+EcTSqQmdTgxhqfot
+ RaPLGsHLiRMWdYHyWZ+n7ixKOtu06n4SvKL4uBJvzHcKG/o8QYGW8/XYEk6QfUvAKs
+ gOLc22RMVlN+9P8dwM5EuUjZ0jipMqSAaIsDgMXCC5A8BOmLOeRToKrSHLEDnc0/C7
+ 8JxMjvwPL89VDwMn4/mklyIV9pGXiSAFS9wIjpZ8O9/MzKIz3pxGubYk3A32Q8NDjn
+ /0VsoEhqnRPVYX6fBlXNjVurE6UC9wmt6/fFmXUOx/psQ9/dlnqXY019OSQKYBOqYz
+ 8O2rSfSb8NC3g==
+Message-ID: <bc63bd8f-860c-568e-71cd-ba1d3bd1fc7d@kernel.org>
+Date: Fri, 5 May 2023 20:07:45 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.1
 Content-Language: en-US
-To: daejun7.park@samsung.com, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "rostedt@goodmis.org" <rostedt@goodmis.org>,
- "mhiramat@kernel.org" <mhiramat@kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-trace-kernel@vger.kernel.org" <linux-trace-kernel@vger.kernel.org>
-References: <CGME20230504032618epcms2p78719fc50d05943b26ae47d74fd14438c@epcms2p7>
- <20230504032618epcms2p78719fc50d05943b26ae47d74fd14438c@epcms2p7>
+To: Chunhai Guo <guochunhai@vivo.com>, jaegeuk@kernel.org
+References: <20230504033043.55761-1-guochunhai@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230504032618epcms2p78719fc50d05943b26ae47d74fd14438c@epcms2p7>
+In-Reply-To: <20230504033043.55761-1-guochunhai@vivo.com>
 X-Spam-Score: -9.7 (---------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -80,16 +73,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/5/4 11:26, Daejun Park wrote: > v4 -> v5 > Added f2fs
- iostat for zone reset command. > > v3 -> v4 > Fixed build error caused by
- unused function. > > v2 -> v3 > Modified arguments to be correct [...] 
+ Content preview:  On 2023/5/4 11:30, Chunhai Guo wrote: > Now we detect the
+ looped node chain by comparing the loop counter with > free blocks. While
+ it may take tens of seconds to quit when the free > blocks are large [...]
  Content analysis details:   (-9.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -99,8 +92,9 @@ X-Spam-Report: Spam detection software,
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -4.3 NICE_REPLY_A           Looks like a legit reply (A)
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1putwD-00FCmp-2S
-Subject: Re: [f2fs-dev] [PATCH v5] f2fs: add async reset zone command support
+X-Headers-End: 1puuE7-0003cP-Uj
+Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: Detect looped node chain more
+ efficiently.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,231 +106,147 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Seokhwan Kim <sukka.kim@samsung.com>, beomsu kim <beomsu7.kim@samsung.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net, frank.li@vivo.com
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/5/4 11:26, Daejun Park wrote:
-> v4 -> v5
-> Added f2fs iostat for zone reset command.
+On 2023/5/4 11:30, Chunhai Guo wrote:
+> Now we detect the looped node chain by comparing the loop counter with
+> free blocks. While it may take tens of seconds to quit when the free
+> blocks are large enough. We can use Floyd's cycle detection algorithm to
+> make it more efficient.
 > 
-> v3 -> v4
-> Fixed build error caused by unused function.
+> Below is the log we encounter on a 256GB UFS storage and it takes about
+> 25 seconds to detect looped node chain. After changing the algorithm, it
+> takes about 20ms to finish the same job.
 > 
-> v2 -> v3
-> Modified arguments to be correct for ftrace parameter.
-> Changed __submit_zone_reset_cmd to void return.
-> Refactored the f2fs_wait_discard_bio function.
-> Fixed code that was previously incorrectly merged.
+>      [   10.822904] fsck.f2fs: Info: version timestamp cur: 17, prev: 430
+>      [   10.822949] fsck.f2fs: [update_superblock: 762] Info: Done to
+> update superblock
+>      [   10.822953] fsck.f2fs: Info: superblock features = 1499 :
+> encrypt verity extra_attr project_quota quota_ino casefold
+>      [   10.822956] fsck.f2fs: Info: superblock encrypt level = 0, salt =
+> 00000000000000000000000000000000
+>      [   10.822960] fsck.f2fs: Info: total FS sectors = 59249811 (231444
+> MB)
+>      [   35.852827] fsck.f2fs:	detect looped node chain,
+> blkaddr:1114802, next:1114803
+>      [   35.852842] fsck.f2fs: [f2fs_do_mount:3846] record_fsync_data
+> failed
+>      [   35.856106] fsck.f2fs: fsck.f2fs terminated by exit(255)
 > 
-> v1 -> v2
-> Changed to apply the optional async reset write pointer by default.
-> 
-> This patch enables submit reset zone command asynchornously. It helps
-> decrease average latency of write IOs in high utilization scenario by
-> faster checkpointing.
-> 
-> Signed-off-by: Daejun Park <daejun7.park@samsung.com>
-> ---
->   fs/f2fs/f2fs.h              |  1 +
->   fs/f2fs/iostat.c            |  1 +
->   fs/f2fs/segment.c           | 84 +++++++++++++++++++++++++++++++++++--
->   include/trace/events/f2fs.h | 18 +++++++-
->   4 files changed, 99 insertions(+), 5 deletions(-)
-> 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index d211ee89c158..15518206cb31 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -1175,6 +1175,7 @@ enum iostat_type {
->   	/* other */
->   	FS_DISCARD_IO,			/* discard */
->   	FS_FLUSH_IO,			/* flush */
-> +	FS_ZONE_RESET_IO,		/* zone reset*/
->   	NR_IO_TYPE,
->   };
->   
-> diff --git a/fs/f2fs/iostat.c b/fs/f2fs/iostat.c
-> index 3d5bfb1ad585..f8703038e1d8 100644
-> --- a/fs/f2fs/iostat.c
-> +++ b/fs/f2fs/iostat.c
-> @@ -80,6 +80,7 @@ int __maybe_unused iostat_info_seq_show(struct seq_file *seq, void *offset)
->   	seq_puts(seq, "[OTHER]\n");
->   	IOSTAT_INFO_SHOW("fs discard", FS_DISCARD_IO);
->   	IOSTAT_INFO_SHOW("fs flush", FS_FLUSH_IO);
-> +	IOSTAT_INFO_SHOW("fs zone reset", FS_ZONE_RESET_IO);
->   
->   	return 0;
->   }
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 6db410f1bb8c..4802b05a795b 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -1196,6 +1196,45 @@ static void __init_discard_policy(struct f2fs_sb_info *sbi,
->   static void __update_discard_tree_range(struct f2fs_sb_info *sbi,
->   				struct block_device *bdev, block_t lstart,
->   				block_t start, block_t len);
-> +
-> +#ifdef CONFIG_BLK_DEV_ZONED
-> +static void __submit_zone_reset_cmd(struct f2fs_sb_info *sbi,
-> +				   struct discard_cmd *dc, blk_opf_t flag,
-> +				   struct list_head *wait_list,
-> +				   unsigned int *issued)
-> +{
-> +	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
-> +	struct block_device *bdev = dc->bdev;
-> +	struct bio *bio = bio_alloc(bdev, 0, REQ_OP_ZONE_RESET | flag, GFP_NOFS);
-> +	unsigned long flags;
-> +
-> +	trace_f2fs_issue_reset_zone(bdev, dc->di.start);
-> +
-> +	spin_lock_irqsave(&dc->lock, flags);
-> +	dc->state = D_SUBMIT;
-> +	dc->bio_ref++;
-> +	spin_unlock_irqrestore(&dc->lock, flags);
-> +
-> +	if (issued)
-> +		(*issued)++;
-> +
-> +	atomic_inc(&dcc->queued_discard);
-> +	dc->queued++;
-> +	list_move_tail(&dc->list, wait_list);
-> +
-> +	/* sanity check on discard range */
-> +	__check_sit_bitmap(sbi, dc->di.lstart, dc->di.lstart + dc->di.len);
-> +
-> +	bio->bi_iter.bi_sector = SECTOR_FROM_BLOCK(dc->di.start);
-> +	bio->bi_private = dc;
-> +	bio->bi_end_io = f2fs_submit_discard_endio;
-> +	submit_bio(bio);
-> +
-> +	atomic_inc(&dcc->issued_discard);
-> +	f2fs_update_iostat(sbi, NULL, FS_ZONE_RESET_IO, dc->di.len * F2FS_BLKSIZE);
+> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
 
-It should update trace_f2fs_iostat() to show zone_reset_io stat?
+The patch is clean, but as it is fsck, so any way to fix this issue if we
+want to keep fsynced data rather than dropping them w/ norecovery during
+mount.
 
 Thanks,
 
-> +}
-> +#endif
-> +
->   /* this function is copied from blkdev_issue_discard from block/blk-lib.c */
->   static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
->   				struct discard_policy *dpolicy,
-> @@ -1217,6 +1256,13 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
->   	if (is_sbi_flag_set(sbi, SBI_NEED_FSCK))
->   		return 0;
->   
-> +#ifdef CONFIG_BLK_DEV_ZONED
-> +	if (f2fs_sb_has_blkzoned(sbi) && bdev_is_zoned(bdev)) {
-> +		__submit_zone_reset_cmd(sbi, dc, flag, wait_list, issued);
-> +		return 0;
-> +	}
-> +#endif
-> +
->   	trace_f2fs_issue_discard(bdev, dc->di.start, dc->di.len);
->   
->   	lstart = dc->di.lstart;
-> @@ -1461,6 +1507,19 @@ static void __update_discard_tree_range(struct f2fs_sb_info *sbi,
->   	}
+> ---
+>   fsck/mount.c | 57 ++++++++++++++++++++++++++++++++++++++++++----------
+>   1 file changed, 46 insertions(+), 11 deletions(-)
+> 
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index df0314d..2e919d9 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -3394,22 +3394,48 @@ static void destroy_fsync_dnodes(struct list_head *head)
+>   		del_fsync_inode(entry);
 >   }
 >   
-> +#ifdef CONFIG_BLK_DEV_ZONED
-> +static void __queue_zone_reset_cmd(struct f2fs_sb_info *sbi,
-> +		struct block_device *bdev, block_t blkstart, block_t lblkstart,
-> +		block_t blklen)
+> +static int find_node_blk_fast(struct f2fs_sb_info *sbi, block_t *blkaddr_fast,
+> +		struct f2fs_node *node_blk_fast, bool *is_detecting)
 > +{
-> +	trace_f2fs_queue_reset_zone(bdev, blkstart);
+> +	int i, err;
 > +
-> +	mutex_lock(&SM_I(sbi)->dcc_info->cmd_lock);
-> +	__insert_discard_cmd(sbi, bdev, lblkstart, blkstart, blklen);
-> +	mutex_unlock(&SM_I(sbi)->dcc_info->cmd_lock);
-> +}
-> +#endif
-> +
->   static void __queue_discard_cmd(struct f2fs_sb_info *sbi,
->   		struct block_device *bdev, block_t blkstart, block_t blklen)
->   {
-> @@ -1724,6 +1783,19 @@ static void f2fs_wait_discard_bio(struct f2fs_sb_info *sbi, block_t blkaddr)
->   
->   	mutex_lock(&dcc->cmd_lock);
->   	dc = __lookup_discard_cmd(sbi, blkaddr);
-> +#ifdef CONFIG_BLK_DEV_ZONED
-> +	if (dc && f2fs_sb_has_blkzoned(sbi) && bdev_is_zoned(dc->bdev)) {
-> +		/* force submit zone reset */
-> +		if (dc->state == D_PREP)
-> +			__submit_zone_reset_cmd(sbi, dc, REQ_SYNC,
-> +						&dcc->wait_list, NULL);
-> +		dc->ref++;
-> +		mutex_unlock(&dcc->cmd_lock);
-> +		/* wait zone reset */
-> +		__wait_one_discard_bio(sbi, dc);
-> +		return;
-> +	}
-> +#endif
->   	if (dc) {
->   		if (dc->state == D_PREP) {
->   			__punch_discard_cmd(sbi, dc, blkaddr);
-> @@ -1876,9 +1948,15 @@ static int __f2fs_issue_discard_zone(struct f2fs_sb_info *sbi,
->   				 blkstart, blklen);
->   			return -EIO;
->   		}
-> -		trace_f2fs_issue_reset_zone(bdev, blkstart);
-> -		return blkdev_zone_mgmt(bdev, REQ_OP_ZONE_RESET,
-> -					sector, nr_sects, GFP_NOFS);
-> +
-> +		if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING))) {
-> +			trace_f2fs_issue_reset_zone(bdev, blkstart);
-> +			return blkdev_zone_mgmt(bdev, REQ_OP_ZONE_RESET,
-> +						sector, nr_sects, GFP_NOFS);
+> +	for (i = 0; i < 2; i++) {
+> +		if (!f2fs_is_valid_blkaddr(sbi, *blkaddr_fast, META_POR)) {
+> +			*is_detecting = false;
+> +			return 0;
 > +		}
 > +
-> +		__queue_zone_reset_cmd(sbi, bdev, blkstart, lblkstart, blklen);
-> +		return 0;
+> +		err = dev_read_block(node_blk_fast, *blkaddr_fast);
+> +		if (err)
+> +			return err;
+> +
+> +		if (!is_recoverable_dnode(sbi, node_blk_fast)) {
+> +			*is_detecting = false;
+> +			return 0;
+> +		}
+> +
+> +		*blkaddr_fast = next_blkaddr_of_node(node_blk_fast);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   static int find_fsync_inode(struct f2fs_sb_info *sbi, struct list_head *head)
+>   {
+>   	struct curseg_info *curseg;
+> -	struct f2fs_node *node_blk;
+> -	block_t blkaddr;
+> -	unsigned int loop_cnt = 0;
+> -	unsigned int free_blocks = MAIN_SEGS(sbi) * sbi->blocks_per_seg -
+> -						sbi->total_valid_block_count;
+> +	struct f2fs_node *node_blk, *node_blk_fast;
+> +	block_t blkaddr, blkaddr_fast;
+> +	bool is_detecting = true;
+>   	int err = 0;
+>   
+>   	/* get node pages in the current segment */
+>   	curseg = CURSEG_I(sbi, CURSEG_WARM_NODE);
+>   	blkaddr = NEXT_FREE_BLKADDR(sbi, curseg);
+> +	blkaddr_fast = blkaddr;
+>   
+>   	node_blk = calloc(F2FS_BLKSIZE, 1);
+> -	ASSERT(node_blk);
+> +	node_blk_fast = calloc(F2FS_BLKSIZE, 1);
+> +	ASSERT(node_blk && node_blk_fast);
+>   
+>   	while (1) {
+>   		struct fsync_inode_entry *entry;
+> @@ -3424,6 +3450,16 @@ static int find_fsync_inode(struct f2fs_sb_info *sbi, struct list_head *head)
+>   		if (!is_recoverable_dnode(sbi, node_blk))
+>   			break;
+>   
+> +		/* Here we use Floyd's cycle detection algorithm to detect
+> +		 * looped node chain more effeciently.
+> +		 */
+> +		if (is_detecting) {
+> +			err = find_node_blk_fast(sbi, &blkaddr_fast,
+> +					node_blk_fast, &is_detecting);
+> +			if (err)
+> +				break;
+> +		}
+> +
+>   		if (!is_fsync_dnode(node_blk))
+>   			goto next;
+>   
+> @@ -3441,11 +3477,9 @@ static int find_fsync_inode(struct f2fs_sb_info *sbi, struct list_head *head)
+>   			entry->last_dentry = blkaddr;
+>   next:
+>   		/* sanity check in order to detect looped node chain */
+> -		if (++loop_cnt >= free_blocks ||
+> -			blkaddr == next_blkaddr_of_node(node_blk)) {
+> -			MSG(0, "\tdetect looped node chain, blkaddr:%u, next:%u\n",
+> -				    blkaddr,
+> -				    next_blkaddr_of_node(node_blk));
+> +		if (is_detecting && (blkaddr_fast == blkaddr)) {
+> +			MSG(0, "\tdetect looped node chain, blkaddr:%u\n",
+> +				    blkaddr);
+>   			err = -1;
+>   			break;
+>   		}
+> @@ -3453,6 +3487,7 @@ next:
+>   		blkaddr = next_blkaddr_of_node(node_blk);
 >   	}
 >   
->   	/* For conventional zones, use regular discard if supported */
-> diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-> index 99cbc5949e3c..ee1477de8324 100644
-> --- a/include/trace/events/f2fs.h
-> +++ b/include/trace/events/f2fs.h
-> @@ -1512,7 +1512,7 @@ DEFINE_EVENT(f2fs_discard, f2fs_remove_discard,
->   	TP_ARGS(dev, blkstart, blklen)
->   );
->   
-> -TRACE_EVENT(f2fs_issue_reset_zone,
-> +DECLARE_EVENT_CLASS(f2fs_reset_zone,
->   
->   	TP_PROTO(struct block_device *dev, block_t blkstart),
->   
-> @@ -1528,11 +1528,25 @@ TRACE_EVENT(f2fs_issue_reset_zone,
->   		__entry->blkstart = blkstart;
->   	),
->   
-> -	TP_printk("dev = (%d,%d), reset zone at block = 0x%llx",
-> +	TP_printk("dev = (%d,%d), zone at block = 0x%llx",
->   		show_dev(__entry->dev),
->   		(unsigned long long)__entry->blkstart)
->   );
->   
-> +DEFINE_EVENT(f2fs_reset_zone, f2fs_queue_reset_zone,
-> +
-> +	TP_PROTO(struct block_device *dev, block_t blkstart),
-> +
-> +	TP_ARGS(dev, blkstart)
-> +);
-> +
-> +DEFINE_EVENT(f2fs_reset_zone, f2fs_issue_reset_zone,
-> +
-> +	TP_PROTO(struct block_device *dev, block_t blkstart),
-> +
-> +	TP_ARGS(dev, blkstart)
-> +);
-> +
->   TRACE_EVENT(f2fs_issue_flush,
->   
->   	TP_PROTO(struct block_device *dev, unsigned int nobarrier,
+> +	free(node_blk_fast);
+>   	free(node_blk);
+>   	return err;
+>   }
 
 
 _______________________________________________
