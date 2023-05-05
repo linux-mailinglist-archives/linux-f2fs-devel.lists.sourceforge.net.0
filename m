@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BB216F807D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 May 2023 12:02:41 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B20056F807F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 May 2023 12:02:43 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pusGr-0004ga-Lr;
-	Fri, 05 May 2023 10:02:38 +0000
+	id 1pusGw-0006d9-HE;
+	Fri, 05 May 2023 10:02:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pusGq-0004gR-Px
+ (envelope-from <chao@kernel.org>) id 1pusGu-0006d2-Re
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 May 2023 10:02:37 +0000
+ Fri, 05 May 2023 10:02:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6qumTK+NelXkhB5VDlu/80vlcehzrumCR0Z8roARkTo=; b=Rno1l0QzDuBPIE+l9HRvyr9Rp3
- 1q7eYvFFUjdLq+JhU96pNimsnMknNyWp0ACPGLGuR/BQdxKGfCMOFtSYJ38MUbFoRw9E1cVOgrlmx
- 9u3ZOP9uu63ZA5JnsWf4pkqMzbYr8YmzrRw6zIiYzMRCPjqB7EUnfGQyPrxiJWvkh26Y=;
+ bh=QAlLXmyPGXS4i4+lrCKBZVlQU5pxGZ9Tqil/9eGDbhM=; b=Dx6zD81yYcEz0g/YOr/OVatS8V
+ aKDTXLI4hxpPQV0E8BVpcQ0ScCxJexeH7qcF7XbT9YTkMrPQb0p8axkYi7UiEewANb2hnm/jlQPaX
+ ezSYHM8L588ay2sU/d8xEPC4i9ZMbNJxytysC7KdAW/vbIJk1u7MsX3Pm7dvkhwKgkW0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,36 +31,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6qumTK+NelXkhB5VDlu/80vlcehzrumCR0Z8roARkTo=; b=NCzF4u+6eeNYmkJ3lznGxI0t+s
- W878sWcqDBtBViS06wVroEfnPlWzyZBUK80+IFsG65mopKk/CHMAiysFfbrP47eCQo74ig0v+osqB
- oaOB1mdEGRxZWX/ym4OGylf2IU4zJA3ldlBm4AEPAFBfJpXqxDuUzTWK7DRswwzW0zqs=;
+ bh=QAlLXmyPGXS4i4+lrCKBZVlQU5pxGZ9Tqil/9eGDbhM=; b=PfLzgIrgKtwubPasa51gLYK7WE
+ Mzb032nTt9Ujl0eocNj8qsIu9rgSdReaSh1SMPllYL955L+Mm2UnLz0YtWER8bHK4mtnJ6Z7S+yzM
+ PQH6qh9/VsTao0faVX7Q5ilEr/qZEw+cuI2gs3jIOohJcKNulvLn9XAi72mHVt/npVsA=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pusGl-0007k4-Ss for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 May 2023 10:02:37 +0000
+ id 1pusGn-00F8LB-CN for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 05 May 2023 10:02:40 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7FDC763D04
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 000E263D07
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri,  5 May 2023 10:02:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6983BC4339C;
  Fri,  5 May 2023 10:02:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7672C4339E;
- Fri,  5 May 2023 10:02:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683280945;
- bh=ZyVrUVlQjetosZr4whKO7s1Es2Z/Kb1syAKYglz/M1c=;
+ s=k20201202; t=1683280947;
+ bh=OljGVEJ85emXYstDa5DeLRblnvW4bDVk2devzBiCgxc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jhumQTJwgz15rJ8MWb+GX64ZZl3vOqHgmZr4DRKnaVGjkNFuEdshjQnF7DemzFbo6
- N07vBPzeQqL0qBH0g9sfUbiR0oph9kiRPqgnDSjs/E4xydtQK10xWUCeK2hAzdsDTP
- QRuA+OD3k11j5kRQGnWH1dOfJprzoedlrLUN6NrGOrDCubOM3ueZPsSZWJn7zm19ni
- VjzefE3Y+TbJVEBY8XL08FJJ7dI2wQvz6VPg2G8W/+17cnVpmSxD21Z0qpNW2LmSk5
- DKomY4GWGboFcGypWSprZYXYF+Ve7INYKLF16BM98E6GejlYaw3Ttq867vJDgXOp1l
- uIs7hzCHesZXw==
+ b=TUbvkKhmzEhWnYAS7CTHxkdnbhQLabDx6BtIQYe+zZdsHlS2JxTeDkxM18RSYTiib
+ TaMjg5XmNHAtt5OkkXkVLT4rbWE4dQ7yXfwReA/EdoRF/yGcs25jYwBMwfqTnyaPOx
+ yEHTxlZB3UOetUJsuNufy1vn8okO5UW43IsiDNVNQ3a0ECjPjr0lqtgpK8bNNDPj63
+ UehJPQo7S/XkSnuqwPhC2rkUtzxRhzOLXMONX5nlXWAYp4bzVaOu/UYd/fonHh2xtg
+ RADeZJkd8D7P68jmuqQkk+aoaQd7IiIWsVvPiab3/GBGpAi1HjL822GhurRs15kiOM
+ zY8/c+rWQWyzg==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Fri,  5 May 2023 18:02:01 +0800
-Message-Id: <20230505100205.1921708-2-chao@kernel.org>
+Date: Fri,  5 May 2023 18:02:02 +0800
+Message-Id: <20230505100205.1921708-3-chao@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230505100205.1921708-1-chao@kernel.org>
 References: <20230505100205.1921708-1-chao@kernel.org>
@@ -72,12 +72,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Commit b28f047b28c5 ("f2fs: compress: support chksum")
- renames
- i_padding to i_compress_flag in struct f2fs_inode, adjust f2fs-tools' codes
- as well. Signed-off-by: Chao Yu <chao@kernel.org> --- fsck/mount.c | 2 +-
- include/f2fs_fs.h | 5 ++++- mkfs/f2fs_format.c | 4 ++-- 3 files changed,
- 7 insertions(+), 4 deletions(-) 
+ Content preview: :%s/i_compress_algrithm/i_compress_algorithm/g Signed-off-by:
+ Chao Yu <chao@kernel.org> --- fsck/mount.c | 2 +- fsck/segment.c | 2 +-
+ include/f2fs_fs.h
+ | 2 +- mkfs/f2fs_format.c | 4 ++-- 4 files changed, 5 insertions(+),
+ 5 deletions(-)
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +92,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pusGl-0007k4-Ss
-Subject: [f2fs-dev] [PATCH 2/6] f2fs-tools: rename i_padding to
- i_compress_flag
+X-Headers-End: 1pusGn-00F8LB-CN
+Subject: [f2fs-dev] [PATCH 3/6] f2fs-tools: fix typo in f2fs_inode structure
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,67 +110,77 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Commit b28f047b28c5 ("f2fs: compress: support chksum") renames i_padding
-to i_compress_flag in struct f2fs_inode, adjust f2fs-tools' codes as well.
+:%s/i_compress_algrithm/i_compress_algorithm/g
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
  fsck/mount.c       | 2 +-
- include/f2fs_fs.h  | 5 ++++-
+ fsck/segment.c     | 2 +-
+ include/f2fs_fs.h  | 2 +-
  mkfs/f2fs_format.c | 4 ++--
- 3 files changed, 7 insertions(+), 4 deletions(-)
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/fsck/mount.c b/fsck/mount.c
-index df0314d..2e1634f 100644
+index 2e1634f..b314756 100644
 --- a/fsck/mount.c
 +++ b/fsck/mount.c
-@@ -304,7 +304,7 @@ void print_inode_info(struct f2fs_sb_info *sbi,
- 			DISP_u64(inode, i_compr_blocks);
- 			DISP_u32(inode, i_compress_algrithm);
- 			DISP_u32(inode, i_log_cluster_size);
--			DISP_u32(inode, i_padding);
-+			DISP_u32(inode, i_compress_flag);
+@@ -302,7 +302,7 @@ void print_inode_info(struct f2fs_sb_info *sbi,
  		}
- 	}
- 
+ 		if (c.feature & cpu_to_le32(F2FS_FEATURE_COMPRESSION)) {
+ 			DISP_u64(inode, i_compr_blocks);
+-			DISP_u32(inode, i_compress_algrithm);
++			DISP_u32(inode, i_compress_algorithm);
+ 			DISP_u32(inode, i_log_cluster_size);
+ 			DISP_u32(inode, i_compress_flag);
+ 		}
+diff --git a/fsck/segment.c b/fsck/segment.c
+index 0307bdd..0ca8b5a 100644
+--- a/fsck/segment.c
++++ b/fsck/segment.c
+@@ -633,7 +633,7 @@ int f2fs_build_file(struct f2fs_sb_info *sbi, struct dentry *de)
+ 		get_node_info(sbi, de->ino, &ni);
+ 		ASSERT(dev_read_block(node_blk, ni.blk_addr) >= 0);
+ 		/* update inode meta */
+-		node_blk->i.i_compress_algrithm = c.compress.alg;
++		node_blk->i.i_compress_algorithm = c.compress.alg;
+ 		node_blk->i.i_log_cluster_size =
+ 				c.compress.cc.log_cluster_size;
+ 		node_blk->i.i_flags = cpu_to_le32(F2FS_COMPR_FL);
 diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index c71b59d..7ad1c40 100644
+index 7ad1c40..dca4cd8 100644
 --- a/include/f2fs_fs.h
 +++ b/include/f2fs_fs.h
-@@ -1076,7 +1076,10 @@ struct f2fs_inode {
+@@ -1074,7 +1074,7 @@ struct f2fs_inode {
+ 			__le64 i_crtime;	/* creation time */
+ 			__le32 i_crtime_nsec;	/* creation time in nano scale */
  			__le64 i_compr_blocks;	/* # of compressed blocks */
- 			__u8 i_compress_algrithm;	/* compress algrithm */
+-			__u8 i_compress_algrithm;	/* compress algrithm */
++			__u8 i_compress_algorithm;	/* compress algorithm */
  			__u8 i_log_cluster_size;	/* log of cluster size */
--			__le16 i_padding;		/* padding */
-+			__le16 i_compress_flag;		/* compress flag */
-+						/* 0 bit: chksum flag
-+						 * [8,15] bits: compress level
-+						 */
- 			__le32 i_extra_end[0];	/* for attribute size calculation */
- 		} __attribute__((packed));
- 		__le32 i_addr[DEF_ADDRS_PER_INODE];	/* Pointers to data blocks */
+ 			__le16 i_compress_flag;		/* compress flag */
+ 						/* 0 bit: chksum flag
 diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index d3bb622..11804eb 100644
+index 11804eb..e8c9675 100644
 --- a/mkfs/f2fs_format.c
 +++ b/mkfs/f2fs_format.c
-@@ -1289,7 +1289,7 @@ static int f2fs_write_root_inode(void)
- 	if (c.feature & cpu_to_le32(F2FS_FEATURE_COMPRESSION)) {
- 		raw_node->i.i_compress_algrithm = 0;
- 		raw_node->i.i_log_cluster_size = 0;
--		raw_node->i.i_padding = 0;
-+		raw_node->i.i_compress_flag = 0;
+@@ -1287,7 +1287,7 @@ static int f2fs_write_root_inode(void)
  	}
  
- 	data_blk_nor = get_sb(main_blkaddr) +
-@@ -1611,7 +1611,7 @@ static int f2fs_write_lpf_inode(void)
  	if (c.feature & cpu_to_le32(F2FS_FEATURE_COMPRESSION)) {
- 		raw_node->i.i_compress_algrithm = 0;
+-		raw_node->i.i_compress_algrithm = 0;
++		raw_node->i.i_compress_algorithm = 0;
  		raw_node->i.i_log_cluster_size = 0;
--		raw_node->i.i_padding = 0;
-+		raw_node->i.i_compress_flag = 0;
+ 		raw_node->i.i_compress_flag = 0;
+ 	}
+@@ -1609,7 +1609,7 @@ static int f2fs_write_lpf_inode(void)
  	}
  
- 	data_blk_nor = f2fs_add_default_dentry_lpf();
+ 	if (c.feature & cpu_to_le32(F2FS_FEATURE_COMPRESSION)) {
+-		raw_node->i.i_compress_algrithm = 0;
++		raw_node->i.i_compress_algorithm = 0;
+ 		raw_node->i.i_log_cluster_size = 0;
+ 		raw_node->i.i_compress_flag = 0;
+ 	}
 -- 
 2.25.1
 
