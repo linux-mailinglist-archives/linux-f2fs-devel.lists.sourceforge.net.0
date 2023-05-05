@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 924AA6F82D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 May 2023 14:22:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CD656F8303
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 May 2023 14:33:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1puuRs-0006Ru-ID;
-	Fri, 05 May 2023 12:22:08 +0000
+	id 1puucZ-00076X-AA;
+	Fri, 05 May 2023 12:33:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1puuRn-0006Rn-Ay
+ (envelope-from <chao@kernel.org>) id 1puucY-00076Q-6G
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 May 2023 12:22:05 +0000
+ Fri, 05 May 2023 12:33:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7Z7eix1/UmFLd69fyYThNpexgkZd+bAa2TEj8jkRQJk=; b=UblPZu06Y4863XvSMbs0HFoJFd
- cYxbNg9VDtGZGPlPjEr+38mfoTZgAs4K1qJ7BM5zjE+GzZ0Zt7wGXaYFpwnDQSyrfRAX2M92X+Ho7
- JkvivxlZ7qM+kwPZK4h6Hm/v6LqhgU2AHl78pYrawjGceUrQ1xDvqWVD3ENWrAxVJueA=;
+ bh=QwJL3AaPFIkPQBKJJ0ggRIxMmET/1TIwgfDD5Oal4wc=; b=lfaDGqnlaLXVJGBgr/0HmMCeRJ
+ DwhMoP33y4WWap5Cbff1eoy1Uj5jOTCA7cFS2vPgiTV+AZro+QQqE97UA6Yno1o5AbQuRI1ggWARX
+ StsbOYqaCqSTAmzZxawn0HmKmnCKiamTSF7OFalFEot5rqFnBgDmSJKj9t4BuAl+exck=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,41 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=7Z7eix1/UmFLd69fyYThNpexgkZd+bAa2TEj8jkRQJk=; b=KmBfFebgDVudZaUks5cjuWGzaO
- Iuob5sNGotmaI0MCEE8eN0TUPwyqIbCDIKKKevhdSkvp/yyHhen2GgPSe+juSm0IuSjSb+D6Rgyx3
- 3lXrsolKwt9yZewmS3lA2a03b/DTcWX8joxyNCfjAIxAFc5jCskUm2CxgtMmA6fRegjY=;
+ bh=QwJL3AaPFIkPQBKJJ0ggRIxMmET/1TIwgfDD5Oal4wc=; b=PCOpw5ztjdD+/SdlmONtxxDF1X
+ nyca36Bzj8epTFCqsoJPA0sA4OmkKTSxwRabc0jTszTru+91fFrUWGj74rjcm9whzXUaxZdHCy3J6
+ fGtNI5HLKcotIDdcc7pqYMRW+Xcwdh7O1zQ7BO2+LU2t3Iw9r6mdOT7au7r/PS+FdxPw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1puuRm-00FE8x-Ts for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 May 2023 12:22:03 +0000
+ id 1puucX-00FEVW-Cf for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 05 May 2023 12:33:10 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8AFF9615FB;
- Fri,  5 May 2023 12:21:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85BDFC433EF;
- Fri,  5 May 2023 12:21:55 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 06A2F60B66;
+ Fri,  5 May 2023 12:33:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6010C433D2;
+ Fri,  5 May 2023 12:33:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683289317;
- bh=kVbC8QvtTP91akM/8g+e5cDFlJlaPkveDFGRjOeaEKM=;
+ s=k20201202; t=1683289983;
+ bh=pKG4Mf1bb5gbOdPLge/zmMjdEqspBKyucO7r0APgGMg=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=qUYjMmblucGyhbYQG0FO69Lqlm7ZsgApRx0RohzGK+UBJHCp9HEfAa+qCspEh2X3B
- Q+SsPwEj+98C0tGiKZp9irP6uO3Ue2VYHUShHvRSvastgfDy94gw0KUvucjRWGHdGj
- 5aQc+ITUIgrsgU6F/4HDG4gL9CUTy0A61ub7hGpszwaDKau6wHmtv/K+UjN34gg593
- 1tZDFmC33ZW34x2OvYc8EAuP6p9kX5RvYha8H4oOnBdz1y7ZN16SXQdE++s/El8UjW
- +RjVh5lVtMntV3E5eaqgOiO24iPRveYNbF8vJZJn3HrHv/l7iWvgpP8GPnBG2gSIT3
- j4K9kvuEgXAZQ==
-Message-ID: <c0fbc92e-2ba1-0500-023e-743ac297d587@kernel.org>
-Date: Fri, 5 May 2023 20:21:53 +0800
+ b=AAVyB+eImxXSdHKQeX+a1ytJ4aYUF9jejBsjDavPyRP/Iw66yBoHdGaAdCgMtcfHe
+ pe1LKTN5L7iwKKjqDVOHsYZv/JMy2R3fjU4k51bb5whcW8OMF6ttJbWkt4PIxE4SXG
+ wazkSXjR4yEtht1pX+SC9I0GI/wX7Aki7HtFjilD2ym5IMejQHQsS4EOtxIby3HoeF
+ hgqkMuaEmmJbBQSzmN053FwY9hdXyj+inDCUViWfJnkLQjlbUESp6McmwCT7Vw2hct
+ YPxyHx0XF9x5ATo8JhPG7+z8N2y5eluoZWTT2Pg292pSIAHAyd01xux0hoKiazayKc
+ opd0qZyraVjEQ==
+Message-ID: <d853431a-897c-71b2-d97f-5572bd7f79cb@kernel.org>
+Date: Fri, 5 May 2023 20:32:58 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.1
 Content-Language: en-US
-To: Yangtao Li <frank.li@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230504185238.19488-1-frank.li@vivo.com>
+To: Yangtao Li <frank.li@vivo.com>, jaegeuk@kernel.org
+References: <20230504144406.33713-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230504185238.19488-1-frank.li@vivo.com>
+In-Reply-To: <20230504144406.33713-1-frank.li@vivo.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -73,10 +73,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/5/5 2:52,
- Yangtao Li wrote: > In the following scenario, 
- after executing the move_range ioctl syscall, > the block size of the source
- file is 0, but data can still be read. > > # stat test > F [...] 
+ Content preview:  On 2023/5/4 22:44, Yangtao Li wrote: > This patch supports
+ a new sub-command 'move_range' in f2fs_io > to move a range of data blocks
+ from source file to destination > file via F2FS_IOC_MOVE_RANGE ioc [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +92,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1puuRm-00FE8x-Ts
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to call invalidate_mapping_pages
- in f2fs_move_file_range
+X-Headers-End: 1puucX-00FEVW-Cf
+Subject: Re: [f2fs-dev] [PATCH] f2fs_io: support move_range command
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,52 +110,95 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/5/5 2:52, Yangtao Li wrote:
-> In the following scenario, after executing the move_range ioctl syscall,
-> the block size of the source file is 0, but data can still be read.
+On 2023/5/4 22:44, Yangtao Li wrote:
+> This patch supports a new sub-command 'move_range' in f2fs_io
+> to move a range of data blocks from source file to destination
+> file via F2FS_IOC_MOVE_RANGE ioctl.
 > 
->    # stat test
->    File: test
->    Size: 6               Blocks: 8          IO Block: 4096   regular file
->    # ./new_f2fs_io move_range test test_move_range 0 0 0
->    move range ret=0
->    # stat test
->    File: test
->    Size: 6               Blocks: 0          IO Block: 4096   regular file
->    # cat test
->    nihao
-> 
-> Let's fix to call invalidate_mapping_pages() after __exchange_data_block()
-> success.
-> 
-> Fixes: 4dd6f977fc77 ("f2fs: support an ioctl to move a range of data blocks")
 > Signed-off-by: Yangtao Li <frank.li@vivo.com>
 > ---
->   fs/f2fs/file.c | 3 +++
->   1 file changed, 3 insertions(+)
+>   man/f2fs_io.8           |  4 ++++
+>   tools/f2fs_io/f2fs_io.c | 35 +++++++++++++++++++++++++++++++++++
+>   2 files changed, 39 insertions(+)
 > 
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 78aa8cff4b41..ae7752c5cd0a 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -2870,6 +2870,9 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
->   			f2fs_i_size_write(dst, dst_max_i_size);
->   		else if (dst_osize != dst->i_size)
->   			f2fs_i_size_write(dst, dst_osize);
-> +
-> +		invalidate_mapping_pages(src->i_mapping,
-> +				pos_out, pos_in + len);
+> diff --git a/man/f2fs_io.8 b/man/f2fs_io.8
+> index 13d4bf3..b25f807 100644
+> --- a/man/f2fs_io.8
+> +++ b/man/f2fs_io.8
+> @@ -138,8 +138,12 @@ Trigger filesystem GC
+>   .TP
+>   \fBcheckpoint\fR \fI[file]\fR
+>   Trigger filesystem checkpoint
+> +.TP
+>   \fBprecache_extents\fR \fI[file]\fR
+>   Trigger precache extents
+> +.TP
+> +\fBmove_range\fR \fI[src_path] [dst_path] [src_start] [dst_start] [length]\fR
+> +Move a range of data blocks from source file to destination file
+>   .SH AUTHOR
+>   This version of
+>   .B f2fs_io
+> diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+> index ac7b588..d545d8e 100644
+> --- a/tools/f2fs_io/f2fs_io.c
+> +++ b/tools/f2fs_io/f2fs_io.c
+> @@ -1357,6 +1357,40 @@ static void do_precache_extents(int argc, char **argv, const struct cmd_desc *cm
+>   	exit(0);
+>   }
+>   
+> +#define move_range_desc "moving a range of data blocks from source file to destination file"
+> +#define move_range_help						\
+> +"f2fs_io move_range [src_path] [dst_path] [src_start] [dst_start] [length]\n\n"		\
 
-It needs to consider error cases?
+It's better to wrap the long line as below?
 
-Should we call this to drop page cache of src_inode after __clone_blkaddrs()
-for each round exchange in __exchange_data_block()? and also drop page cache
-of dst_indoe in roll_back case?
+#define move_range_help							\
+"f2fs_io move_range [src_path] [dst_path] [src_start] [dst_start] "	\
+"[length]\n\n"								\
 
 Thanks,
 
->   	}
->   	f2fs_unlock_op(sbi);
+> +"  src_path  : path to source file\n"					\
+> +"  dst_path  : path to destination file\n"				\
+> +"  src_start : start offset of src file move region, unit: bytes\n"	\
+> +"  dst_start : start offset of dst file move region, unit: bytes\n"	\
+> +"  length    : size to move\n"						\
+> +
+> +static void do_move_range(int argc, char **argv, const struct cmd_desc *cmd)
+> +{
+> +	struct f2fs_move_range range;
+> +	int ret, fd;
+> +
+> +	if (argc != 6) {
+> +		fputs("Excess arguments\n\n", stderr);
+> +		fputs(cmd->cmd_help, stderr);
+> +		exit(1);
+> +	}
+> +
+> +	fd = xopen(argv[1], O_RDWR, 0);
+> +	range.dst_fd = xopen(argv[2], O_RDWR | O_CREAT, 0644);
+> +	range.pos_in = atoi(argv[3]);
+> +	range.pos_out = atoi(argv[4]);
+> +	range.len = atoi(argv[5]);
+> +
+> +	ret = ioctl(fd, F2FS_IOC_MOVE_RANGE, &range);
+> +	if (ret < 0)
+> +		die_errno("F2FS_IOC_MOVE_RANGE failed");
+> +
+> +	printf("move range ret=%d\n", ret);
+> +	exit(0);
+> +}
+> +
+>   #define CMD_HIDDEN 	0x0001
+>   #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
+>   #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
+> @@ -1391,6 +1425,7 @@ const struct cmd_desc cmd_list[] = {
+>   	CMD(gc),
+>   	CMD(checkpoint),
+>   	CMD(precache_extents),
+> +	CMD(move_range),
+>   	{ NULL, NULL, NULL, NULL, 0 }
+>   };
 >   
 
 
