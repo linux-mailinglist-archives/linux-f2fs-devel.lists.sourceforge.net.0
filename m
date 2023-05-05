@@ -2,66 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D5926F862B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 May 2023 17:51:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 637436F8672
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  5 May 2023 18:11:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1puxhx-0002B1-Pj;
-	Fri, 05 May 2023 15:50:57 +0000
+	id 1puy1T-0000f9-3I;
+	Fri, 05 May 2023 16:11:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1puxhu-0002Av-Oa
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1puy1R-0000f3-LM
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 May 2023 15:50:54 +0000
+ Fri, 05 May 2023 16:11:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=77HW1mLjyYuLHXGnkBTwlUOFAe1VHOpP4FxvtYczTyo=; b=gbMrfCZCj6JjubTEgyNW9GpyEp
- Pn9QSV1hbTsJyp0ofCtRxVCpgz2SDRZ+QtUc3CFa06zKCUYGES+w67tye5iqlONWGtz1NHgyk4OHd
- eEzmfC9OzOBgIUmUjr5jMP/HHUCaqdjybDnyD/4NRmYTZFlqIcfZ9KffkC3coLYcagwM=;
+ bh=JuERPl7P4baGWw2XUhcPYMr3bPUwF/oHbidI+QWlZfA=; b=D2rPlK4zRnZ0LDea+PCO+9XXsk
+ UiJRVW6EQO4sPA80JrzieYENAJRwa5NseD3NCMsJ+mp+edPbb0k1XdBnYaHwrLjzF/KSP6A0JHFUU
+ AG9jpB4uNKfWBzTLOntBJdgiYa1bwlMfDsKhtXkEoeIXza48QRRMt11vh7MDuhUGDVlI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=77HW1mLjyYuLHXGnkBTwlUOFAe1VHOpP4FxvtYczTyo=; b=G
- wJJOH67+ahuvFTJNPXLxMaCAQT77NYTH1I0oHAf9NreJaW+UdZWATiVUpBvab6dLac+p+hbwrMotU
- dUwUdgn5uYPA7W6rjTUZih9eEwg2kPeB6Qhu69EfezogN5Fp3mq7GSUM/Cyg+PyC/h/WgbxOZi4Tk
- F8Kv5I8urxZtfeEE=;
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=JuERPl7P4baGWw2XUhcPYMr3bPUwF/oHbidI+QWlZfA=; b=QErhhFsZiTLxDr42oRs0kvsYDZ
+ w76X1T11GP9/qXquM1NTarYTwSuQDg2TXAP+0v862na1VjJAFKFJVzxFwVIYALbS/ZpxarBAjHLzf
+ Vg8nWYHNL1aYjpcBmJpR/H7p7gUezryXByKnQlLXncLTsH3+G4aotbp/r4BAix36qKqc=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1puxhs-0005S8-Oh for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 May 2023 15:50:54 +0000
+ id 1puy1M-00FQlb-P8 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 05 May 2023 16:11:05 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8B3BB610A3;
- Fri,  5 May 2023 15:50:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC279C433D2;
- Fri,  5 May 2023 15:50:45 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 33B1463F0D
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri,  5 May 2023 16:10:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 92FF6C4339B
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri,  5 May 2023 16:10:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683301846;
- bh=CDHn8TlmIRVpbZP3dhIjrM+46IXW3eOwMG/RUV0P/vY=;
- h=From:To:Cc:Subject:Date:From;
- b=ImHYPVkHlHHobpHo8LHtCvK0LCQ6BPGU68wAGaiAzUeNLXf/VrzskOEG7Uwsjfeyj
- c50niOn1S+HLwCaYqguC3YWfsqxqxT6zWJrTH9AlNAZ5tg4zWmV8H22quUgDaI7SV6
- W/gdPj74wq8a+23wCkywiWkqkWzsHMXYWVUTYn8FpezpjW3vbBtjVMNSRECe0Q6uag
- 70qhGoqnEgjtbvZNsTQ7/9OJq1wkYBqMxl7lUl+Gut+bgt1iEDLDS0IH1H481Tol1n
- DFT5Ei43hxFaViwNUcHh5mL58/WMfWSBh2/iClWfc77lQOk54DXtsRHHSsWUt5CtFY
- 6M0DJNKFe/rCw==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Fri,  5 May 2023 08:50:40 -0700
-Message-ID: <20230505155040.87561-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.40.1.521.gf1e218fcd8-goog
+ s=k20201202; t=1683303049;
+ bh=JuERPl7P4baGWw2XUhcPYMr3bPUwF/oHbidI+QWlZfA=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=Ake1bPIACxEh6V2Gm74RcN17GABCvVlHwyPJ8bRl6GjPB4IAc+Lg3QFTwa7z/elIn
+ m2WG2EyvTOpS3Tyt0dpaOwZEHvqtFIqUKG5t1Tca6MZG+888cYUuD+BLCpKpnLN5gC
+ 7FtN1Qeo7bS+ROobroOFrdu8U/DAGUsMrDBH2cAuaDSqYDyyCfWN5hV+JpB1UQpWPD
+ bAv4B64tDojXPKghHhKhemItfX9gVttdsqfAmgRQlNd7iSLqIwMmOwJL4BdMSGs9x0
+ O8CqX0r9Tx4gpt5qEMePxPQyrutGf7GjChl/SrPTaqLuXTyxRgTSzpqla/XwnNpUgW
+ ghLj1IFtiHPdA==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 743BFC43141; Fri,  5 May 2023 16:10:49 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Fri, 05 May 2023 16:10:49 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: high
+X-Bugzilla-Who: guido.iodice@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-216050-202145-vRhweEoD7K@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
+References: <bug-216050-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
 X-Spam-Score: -5.4 (-----)
 X-Spam-Report: Spam detection software,
@@ -70,29 +91,29 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Daeho Jeong <daehojeong@google.com> To keep six open
- zone constraints, make them not to be open over six open zones. Signed-off-by:
- Daeho Jeong <daehojeong@google.com> Signed-off-by: Jaegeuk Kim
- <jaegeuk@kernel.org>
- --- fs/f2fs/data.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++++++
- fs/f2fs/f2fs.h | 5 +++++ 2 [...] 
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
+ Comment
+ #160 from Guido (guido.iodice@gmail.com) --- After several weeks, no problem.
+ I also foced gc now with no problem. Now I would like to swith to kernel
+ 6.3, what patch I should use? 
  Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1puxhs-0005S8-Oh
-Subject: [f2fs-dev] [PATCH] f2fs: maintain six open zones for zoned devices
+X-Headers-End: 1puy1M-00FQlb-P8
+Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,139 +125,22 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
-To keep six open zone constraints, make them not to be open over six
-open zones.
+--- Comment #160 from Guido (guido.iodice@gmail.com) ---
+After several weeks, no problem. I also foced gc now with no problem.
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/data.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++++++
- fs/f2fs/f2fs.h |  5 +++++
- 2 files changed, 62 insertions(+)
+Now I would like to swith to kernel 6.3, what patch I should use?
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 7dd92a9028b1..bb9de0a02143 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -383,6 +383,17 @@ static void f2fs_write_end_io(struct bio *bio)
- 	bio_put(bio);
- }
- 
-+#ifdef CONFIG_BLK_DEV_ZONED
-+static void f2fs_zone_write_end_io(struct bio *bio)
-+{
-+	struct f2fs_bio_info *io = (struct f2fs_bio_info *)bio->bi_private;
-+
-+	bio->bi_private = io->bi_private;
-+	complete(&io->zone_wait);
-+	f2fs_write_end_io(bio);
-+}
-+#endif
-+
- struct block_device *f2fs_target_device(struct f2fs_sb_info *sbi,
- 		block_t blk_addr, sector_t *sector)
- {
-@@ -639,6 +650,10 @@ int f2fs_init_write_merge_io(struct f2fs_sb_info *sbi)
- 			INIT_LIST_HEAD(&sbi->write_io[i][j].io_list);
- 			INIT_LIST_HEAD(&sbi->write_io[i][j].bio_list);
- 			init_f2fs_rwsem(&sbi->write_io[i][j].bio_list_lock);
-+#ifdef CONFIG_BLK_DEV_ZONED
-+			sbi->write_io[i][j].zone_pending_bio = NULL;
-+			sbi->write_io[i][j].bi_private = NULL;
-+#endif
- 		}
- 	}
- 
-@@ -965,6 +980,26 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
- 	return 0;
- }
- 
-+#ifdef CONFIG_BLK_DEV_ZONED
-+static bool is_end_zone_blkaddr(struct f2fs_sb_info *sbi, block_t blkaddr)
-+{
-+	int devi = 0;
-+
-+	if (f2fs_is_multi_device(sbi)) {
-+		devi = f2fs_target_device_index(sbi, blkaddr);
-+		if (blkaddr < FDEV(devi).start_blk ||
-+		    blkaddr > FDEV(devi).end_blk) {
-+			f2fs_err(sbi, "Invalid block %x", blkaddr);
-+			return false;
-+		}
-+		blkaddr -= FDEV(devi).start_blk;
-+	}
-+	return bdev_zoned_model(FDEV(devi).bdev) == BLK_ZONED_HM &&
-+		f2fs_blkz_is_seq(sbi, devi, blkaddr) &&
-+		(blkaddr % sbi->blocks_per_blkz == sbi->blocks_per_blkz - 1);
-+}
-+#endif
-+
- void f2fs_submit_page_write(struct f2fs_io_info *fio)
- {
- 	struct f2fs_sb_info *sbi = fio->sbi;
-@@ -975,6 +1010,16 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 	f2fs_bug_on(sbi, is_read_io(fio->op));
- 
- 	f2fs_down_write(&io->io_rwsem);
-+
-+#ifdef CONFIG_BLK_DEV_ZONED
-+	if (f2fs_sb_has_blkzoned(sbi) && btype < META && io->zone_pending_bio) {
-+		wait_for_completion_io(&io->zone_wait);
-+		bio_put(io->zone_pending_bio);
-+		io->zone_pending_bio = NULL;
-+		io->bi_private = NULL;
-+	}
-+#endif
-+
- next:
- 	if (fio->in_list) {
- 		spin_lock(&io->io_lock);
-@@ -1038,6 +1083,18 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
- 	if (fio->in_list)
- 		goto next;
- out:
-+#ifdef CONFIG_BLK_DEV_ZONED
-+	if (f2fs_sb_has_blkzoned(sbi) && btype < META &&
-+			is_end_zone_blkaddr(sbi, fio->new_blkaddr)) {
-+		bio_get(io->bio);
-+		init_completion(&io->zone_wait);
-+		io->bi_private = io->bio->bi_private;
-+		io->bio->bi_private = io;
-+		io->bio->bi_end_io = f2fs_zone_write_end_io;
-+		io->zone_pending_bio = io->bio;
-+		__submit_merged_bio(io);
-+	}
-+#endif
- 	if (is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN) ||
- 				!f2fs_is_checkpoint_ready(sbi))
- 		__submit_merged_bio(io);
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 7afc9aef127a..0f05c1dd633f 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1218,6 +1218,11 @@ struct f2fs_bio_info {
- 	struct bio *bio;		/* bios to merge */
- 	sector_t last_block_in_bio;	/* last block number */
- 	struct f2fs_io_info fio;	/* store buffered io info. */
-+#ifdef CONFIG_BLK_DEV_ZONED
-+	struct completion zone_wait;	/* condition value for the previous open zone to close */
-+	struct bio *zone_pending_bio;	/* pending bio for the previous zone */
-+	void *bi_private;		/* previous bi_private for pending bio */
-+#endif
- 	struct f2fs_rwsem io_rwsem;	/* blocking op for bio */
- 	spinlock_t io_lock;		/* serialize DATA/NODE IOs */
- 	struct list_head io_list;	/* track fios */
 -- 
-2.40.1.521.gf1e218fcd8-goog
+You may reply to this email to add a comment.
 
-
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
