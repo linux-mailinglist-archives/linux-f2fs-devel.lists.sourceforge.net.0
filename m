@@ -2,106 +2,148 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98AA66F8CB4
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  6 May 2023 01:17:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E4BB6F919D
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  6 May 2023 13:40:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pv4gG-0001o7-7Y;
-	Fri, 05 May 2023 23:17:40 +0000
+	id 1pvGGg-0004Th-2q;
+	Sat, 06 May 2023 11:40:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1pv4gE-0001o1-0f
+ (envelope-from <frank.li@vivo.com>) id 1pvGGd-0004TM-Ou
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 May 2023 23:17:38 +0000
+ Sat, 06 May 2023 11:40:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eMcfBI2Xnch4kdMe9hW5WVWrBQQ3U7XULCMQNcMiHUM=; b=kU68Xa20b1NPMLcJuQ9nN36qva
- b5NCbmjWa+S3FdQBlT89S2CwFjKobUECnQU4QqeCnbj+V2ZNfGdcJP8WiUw0+ehTwoUcnoW80cDjA
- bWnhihA0T0XBesuOgM7O5rw8iQHKxIcvwRkfqx4D+uAicOaN3drWzHQ32BV4aSudPdvk=;
+ bh=ZvK1aHZNaaaO9H16uLBWIMIWtfrCjWUZq0GRWdRdX/0=; b=WnFMHzicRQqYupFqW3wlCTxw/8
+ t9p7HVly2xbvmeiflKR9wk8R9/yRFtGms6gEWLA4Gz/j9t5Sh3ZUiF6m1+SrMNC63EoY1ajyQOcRM
+ tbQOXFkYV+l1h6f+ot2ABoHMxBvVIMmwa3pkmdhvNsx4G0dYKYPZ1hD7zsSHnj+fEwSA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=eMcfBI2Xnch4kdMe9hW5WVWrBQQ3U7XULCMQNcMiHUM=; b=a6X7SdoRgdkxXdnHlCHAIHkiJJ
- aV5tPvgPCvEowh0Q2A2Vqrl9x9/rvVe+R3y3IAlrDe8Gb5Yo5xFROXBezNzn4Wm66yjDFXvFlSwZ9
- +aqUkrynBV0525Itxa57dNrFlri9Lp37BLMv07tsDReiNi+ib75Nciu2OOjK1O5N1oSI=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ZvK1aHZNaaaO9H16uLBWIMIWtfrCjWUZq0GRWdRdX/0=; b=f
+ NV7qyXXY5CaNuc2BuZcPpSgnjzHI8k7yJmfjZXLG/6Fopm7iiPoue2i5auB4vEUebVgUmAr5qt6ME
+ kyTWxKzQBHB6YV2hr9qazI5OFoaJpUVeFXvCiX8Bar1ZpgwVVV+Fo3dHbzUtZQ/xNrt+rAv2sGUtp
+ rOuzRbFLXSvdzg3g=;
+Received: from mail-psaapc01on2135.outbound.protection.outlook.com
+ ([40.107.255.135] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pv4gD-0008Hc-7X for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 May 2023 23:17:37 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3CAE16410C
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  5 May 2023 23:17:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 68062C433A4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  5 May 2023 23:17:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683328649;
- bh=C1HoeCM9haCIDiSbqenpSjrZwgnwamd6dgKFXIZ+Hzo=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=ouHU7R4sTfd9SOo7cG/Vij6dvuPBz+hBcDdHy3M/ElOMVC9jrjz/SjJ//u+L78y9O
- e4Plu/Z2jmgAy62sKDT+kRd8Ovo2ofQ3IyHcOm1KGPqXEOeEA7D9hcsY0vXfLe2o2O
- Rvq8SScPEDNvvafeLlPpQOkYABx85bHH0uyTbaOVG1xCDAZa/9KFqf2AnW3yBtZHBu
- eiiRA6djncn6G0MOGFjC/1hHuzEoWOy0REmm7HPRHlExWKDllCCh/MyRFu5t+FcpxP
- yQf+7somCxcfMU4S8Ea2PiwebYIOg+EYgu0EMvxi36wUPij9yDIeaLCSab6MECkuh5
- lbSVzhE6I/ZEA==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 60460C43141; Fri,  5 May 2023 23:17:29 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 05 May 2023 23:17:28 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: lp610mh@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-YEtOxCO9I3@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ id 1pvGGY-00GF3v-22 for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 06 May 2023 11:40:00 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=eIcaWmt3sjR+1jqTSM0C7dFvgMiFyFrjPz4BeFlCXjjJQdKbDPyL0xF42asQcLenb2RwOGqLNeRwxUKwVjttW3y1hYPZlHWTdhJiEIYTcBqJN6xVg0+mMHx5bRHWMIdfzLuSc2Vl/Ih4sFe0me6OiYQunZxTBHsojIL13QGEnxEs7mPrSogZcZ1E+F60CXc0yGfWBGollNHsjGDhvM9tsY5cVhZjNPqVvolIefYDr51NigywOwPPKPFM34hDEnK0Mlzw/rc6BEts8jWhsMOzFgDln3TbZ46FJz0HqCWnHMZletpSfZ79wjbZhWIXEtKgAxt5RpEsjp45HfbcxjAZlQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZvK1aHZNaaaO9H16uLBWIMIWtfrCjWUZq0GRWdRdX/0=;
+ b=YY16dfG/gAatZ6lQHVdrcXhl7XbSyvN8uHAJN90aUL3xr0oPNA2PUchhPR1RnwylhNcnXbNmrr5LVZg3OzDVviqnwVuwZoWS6imnJWJy06G9ycMQugC368hiSYVaMjDhmx8RFHDrWM6FiQCjK32cgkkjHwwEIRE21323e9jjlZ/Awsd+D3TRNDE1r+ZpNXRH8jhEAzBD1zOkHe+rdxbbwOn3bKNfOSh/S7kJtI+P7baqeLawAPLu7jLdfLJ3i5yJ0d9109Mn7sV9swvHNlS8UFnEuNbvy/xON4HIjY/um8eiVdZKlUc1c9wjnqQuUeaMApmcT0FqlzXrZ1qcrF+few==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZvK1aHZNaaaO9H16uLBWIMIWtfrCjWUZq0GRWdRdX/0=;
+ b=JfCKDEToaabJUPimpHgJcs8WWMtfD7xKvFy2ruuzhJAj2TfcN9vrZgpkZoYV7lIIsR1xwduR90iKtsQZAFSpm4u9tLuAH96of8sDF/XkEcJ4e2XHdEzpW63AaYQuP4wCjgHYsV4bUo7i+rhFEUL+UOMw8Uv857zvcTlJDXHMhRXV3seEACqLSaRJkYBrBM7agRxfBqamjMMILH3YyA4GRdDQ+25uRNG/q3/2xqLfNLFpcQo4erPnnPujEpkIf/oX0dOxWPjM0XUhLOR1i5dOWItCzc3vYA2qmYqcRDFf28MlqMrYqzR8j+9gB/F0oUM64DhCRzclom+L50xjSvn1Cw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
+ by SI2PR06MB4267.apcprd06.prod.outlook.com (2603:1096:4:15e::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6363.29; Sat, 6 May
+ 2023 11:39:41 +0000
+Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
+ ([fe80::76d6:4828:7e80:2965]) by SEZPR06MB5269.apcprd06.prod.outlook.com
+ ([fe80::76d6:4828:7e80:2965%7]) with mapi id 15.20.6363.029; Sat, 6 May 2023
+ 11:39:40 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Sat,  6 May 2023 19:39:14 +0800
+Message-Id: <20230506113914.23419-1-frank.li@vivo.com>
+X-Mailer: git-send-email 2.39.0
+X-ClientProxiedBy: SI2PR01CA0006.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:191::14) To SEZPR06MB5269.apcprd06.prod.outlook.com
+ (2603:1096:101:78::6)
 MIME-Version: 1.0
-X-Spam-Score: -5.4 (-----)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SI2PR06MB4267:EE_
+X-MS-Office365-Filtering-Correlation-Id: ccbf2e5b-6f21-41dd-1d98-08db4e2693cd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: DlAUOEZKz3SqsrZkYylc05OArb3CyftySeQX1tfD6yd16RhTQzGOjCMDhPUsw6u7iW/2Bwzh6DgxRex2NDdZAahsKZYWa1ohX8tpz0rHLVHfbKoF5V3PIbdGX7W7UeNwfzRU2GbwNhkjO6d0ZYuIaJyU3rhnTEaCt9EaThBSWLN4fFaeGgrMksxAhcWj1oHWBrqAHAQtMeC1NChhq0Z5FYNx6nu0Dcol+8dRC7iUY1qaPoRCBh6Q1Q2HG4H85GxH9G3v3BIhYo8TUSqz7Fn3FNmGeNI1Eu1MxtxdeIwc2YlqY0PrLFF1kK9tmdDIohpbLMrAJcxeLy7PWcCDE9fDnXYWmbO1JMpjLFC6EPSNRnXLmv/X5osdHHp3/1TStjigtVFqcRPnsiojcbQ8/FXr5tCTLII1I86ZnMVd9PviKZ+ezpEM07wdq6L8arEsX7ZSNFxWZomiEEja3D8p1flfdBLxJ0BhMD1x8dCYF4ViNCpB8tYhhQVAfzxOGaiwmEYWB+RXnJgaZp92hGFAK9c4vESEMpl1YF96i0K3sF6smDfYQrMtfKhM+Pe4onbro4kqXzjgL32kq91XxKcSORyJr3NNV3wdryM2gwMXIzlw5r5KoE+U2/bw2dKED9uhKrFc
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(4636009)(39860400002)(396003)(376002)(346002)(136003)(366004)(451199021)(86362001)(8676002)(8936002)(6486002)(52116002)(66946007)(66476007)(66556008)(4326008)(5660300002)(36756003)(38100700002)(38350700002)(478600001)(83380400001)(110136005)(2616005)(26005)(41300700001)(2906002)(186003)(316002)(6512007)(6506007)(1076003)(6666004);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?YIFOUjaqWaDji8kICHwLtiCrIfKMPgwkAi9g+HN3vwqvVWpK6d31K2ChuaT2?=
+ =?us-ascii?Q?zD52UyvapBT7DKjZYzyAWVfcafbqPEDx1wyfQ3eVLuWd+V/daLpGu85AYzeD?=
+ =?us-ascii?Q?qhFr+uO/RXOR57trCezKrA5Tom776w/vXFJo6KAVWyZLNYiMs/7fWA89zYXt?=
+ =?us-ascii?Q?B2iTqFXH6l6jE7RT7viGPdyN7zkFs1GbD2AAfNOFpD81rFUFRirPX7iE4lvb?=
+ =?us-ascii?Q?WkFfLZRhY9XGVB2B5O7p9SO2jB860lAga4lIbvkkP+ZH1Ctiln1FsBoIPE0t?=
+ =?us-ascii?Q?gWslvRuCW4tcxl+V03UrfNsdclIFx0YbonIfLS8j1AVJVFoWOmlkhJGu2TWl?=
+ =?us-ascii?Q?GqdQmi7maMhiqNUdG7U65R9GSp4L2vsjwEkAWGHbOxIZg3xo4uw+IGg1PQsq?=
+ =?us-ascii?Q?kopdTnNr5qtEnmJEz1y+cUsqSydAdd3DW/hevf4ezXGK9B1FLV1XEiYB7qda?=
+ =?us-ascii?Q?ByMUj4xAAVLWLe5yod2+mkNzyKXoGomKGMs7YpQUiXhbIhtXDkMsQtRyuAhA?=
+ =?us-ascii?Q?+46Pdwxp84Yr8eG+EeQp5xkpYczOxpkz7pMV6VX2qvSYr7Uqftli2SBVYGOq?=
+ =?us-ascii?Q?FHSCdggrtJGsQ24ygBl7pEKTJEP1dVyOA0lByEBefFA2hYv+D9gzvvnO92BP?=
+ =?us-ascii?Q?rZ8BMWHXTjrP5qIWuTdAGUGvSdyY4eX7CqfttYK2bdQIl3ODW3gGR6FoB90k?=
+ =?us-ascii?Q?TaWqKvorncHazcVJrPGAuWP/OllSUFWM/X2bHas6/u9Ccm1tKzGMZiEf4rHM?=
+ =?us-ascii?Q?CdROjU86Q1qh1PSf4mNkcLtNy17JlI+jdfsU47ovY5Cjk+uIWMcUJLT9I6ki?=
+ =?us-ascii?Q?13a+X1qLdl51BV1jeJmtx6RnWi1gvqiaNT2lQNCe+lL3WhFI7+ITwLWCyBwG?=
+ =?us-ascii?Q?XLt0tV9t+vTsqjEw6haQbV9W7H4SVoLI5b4ANwaAX96cZnXPxLMtAf4gbb4J?=
+ =?us-ascii?Q?w4e7awaEhmBDel+4Vny64qQ+nKUndO3PfPDo5o9VIiOywM19zS9CtWe6jyVj?=
+ =?us-ascii?Q?Uiq1/4WoFtJ079eldTR59v/cxklRYf0kIGY9Ht20dc9kSiWZuN0J9yU0VQ07?=
+ =?us-ascii?Q?wpNP3quEqMAOwx19oOwGL6tSCA+6QMgGZtoTW9IgxnZgK/VEP5190P23AP/0?=
+ =?us-ascii?Q?AZ3N+spFfP825XzDgfABmCCsmNvelAyVaq/TUM4VADPDQYhyvf9mKI0goBk0?=
+ =?us-ascii?Q?Lmml6/3kYV0IVIMNJm1qCRreQInqISTOHn+lY3K7LhAwn4zL9/86Cr0ptTLm?=
+ =?us-ascii?Q?TaJGqsuwD/7RfMz/BtrDmSaL1BbvyxFwM9qEVvE3RKrWJLuM4ibMZe26/b7Q?=
+ =?us-ascii?Q?FdN9nMiF5fQZhk0sg7DryaFCaml04TvbKo2K2hLAGh0NJpZjmrFRvifGHbMo?=
+ =?us-ascii?Q?GcP9jJSVxfiYrP7Z4i3vTbfriQ1DkymNk+z0bwtAZcDe/CxsHMBvhTS2tIOo?=
+ =?us-ascii?Q?mv5SdmttUaOOYz8Kqx87p8Nj855i6ubTwmZn4MB+lyhRxuMIZmFmYi005cTY?=
+ =?us-ascii?Q?yR4CzC41ywNujJl7G/G4u4pVtMIUTz/vcT0ie5DXhe1QU0KVnhY3eG6oGuUi?=
+ =?us-ascii?Q?HYxqyNCEiC5juiDRxxkc7mX6VqIrT0rJR3isp3Nf?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ccbf2e5b-6f21-41dd-1d98-08db4e2693cd
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2023 11:39:40.3248 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5UNTw9ksArxb6hFcqmlsYBk4PQKpv09WRYwz29RJkHoRAcmXf8/eJ2UJAGa0AtW5r9VNVj8hPLOrpIqSQwrI4Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR06MB4267
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
- Comment
- #168 from Matias (lp610mh@gmail.com) --- Removed background_gc=sync and it
- happened again, i hope this message gets sent so you could take a look, this
- is the journalctl log after it happe [...] 
- Content analysis details:   (-5.4 points, 6.0 required)
+ Content preview:  For judging the inode flag state,
+ the inode lock must be held.
+ BTW, add compressd file check and to avoid 'if' nesting. Fixes: 4dd6f977fc77
+ ("f2fs: support an ioctl to move a range of data blocks") Signed-off-by:
+ Yangtao Li <frank.li@vivo.com> --- fs/f2fs/file.c | 14 ++++++++------ 1 file
+ changed, 8 insertions(+), 6 de [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.255.135 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.255.135 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
@@ -110,9 +152,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pv4gD-0008Hc-7X
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+X-Headers-End: 1pvGGY-00GF3v-22
+Subject: [f2fs-dev] [PATCH 1/2] f2fs: move the conditional statement after
+ holding the inode lock in f2fs_move_file_range()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,107 +166,62 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Yangtao Li <frank.li@vivo.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Yangtao Li <frank.li@vivo.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+For judging the inode flag state, the inode lock must be held.
+BTW, add compressd file check and to avoid 'if' nesting.
 
---- Comment #168 from Matias (lp610mh@gmail.com) ---
-Removed background_gc=sync and it happened again, i hope this message gets sent
-so you could take a look, this is the journalctl log after it happens. 
+Fixes: 4dd6f977fc77 ("f2fs: support an ioctl to move a range of data blocks")
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
+---
+ fs/f2fs/file.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
-Kernel: 6.3.1 with f2fs updates of 6.4-rc1
-
-
-
-May 05 20:13:44 cachyos-x8664 kernel: INFO: task f2fs_ckpt-8:1:204 blocked for
-more than 122 seconds.
-May 05 20:13:44 cachyos-x8664 kernel:       Not tainted 6.3.1-1-cachyos #1
-May 05 20:13:44 cachyos-x8664 kernel: "echo 0 >
-/proc/sys/kernel/hung_task_timeout_secs" disables this message.
-May 05 20:13:44 cachyos-x8664 kernel: task:f2fs_ckpt-8:1   state:D stack:0    
-pid:204   ppid:2      flags:0x00004000
-May 05 20:13:44 cachyos-x8664 kernel: Call Trace:
-May 05 20:13:44 cachyos-x8664 kernel:  <TASK>
-May 05 20:13:44 cachyos-x8664 kernel:  __schedule+0x441/0x17b0
-May 05 20:13:44 cachyos-x8664 kernel:  ?
-asm_sysvec_apic_timer_interrupt+0x1a/0x20
-May 05 20:13:44 cachyos-x8664 kernel:  schedule_preempt_disabled+0x65/0xe0
-May 05 20:13:44 cachyos-x8664 kernel:  rwsem_down_write_slowpath+0x22b/0x6c0
-May 05 20:13:44 cachyos-x8664 kernel:  ? psi_task_switch+0x12f/0x340
-May 05 20:13:44 cachyos-x8664 kernel:  ?
-__pfx_issue_checkpoint_thread+0x10/0x10 [f2fs
-d2333fc34706e39c1a83271e8b382b177aae887d]
-May 05 20:13:44 cachyos-x8664 kernel:  down_write+0x5b/0x60
-May 05 20:13:44 cachyos-x8664 kernel: 
-__checkpoint_and_complete_reqs+0x7c/0x1b0 [f2fs
-d2333fc34706e39c1a83271e8b382b177aae887d]
-May 05 20:13:44 cachyos-x8664 kernel:  ?
-__pfx_issue_checkpoint_thread+0x10/0x10 [f2fs
-d2333fc34706e39c1a83271e8b382b177aae887d]
-May 05 20:13:44 cachyos-x8664 kernel:  issue_checkpoint_thread+0x4c/0x110 [f2fs
-d2333fc34706e39c1a83271e8b382b177aae887d]
-May 05 20:13:44 cachyos-x8664 kernel:  ?
-__pfx_autoremove_wake_function+0x10/0x10
-May 05 20:13:44 cachyos-x8664 kernel:  kthread+0xdb/0x110
-May 05 20:13:44 cachyos-x8664 kernel:  ? __pfx_kthread+0x10/0x10
-May 05 20:13:44 cachyos-x8664 kernel:  ret_from_fork+0x29/0x50
-May 05 20:13:44 cachyos-x8664 kernel:  </TASK>
-May 05 20:13:44 cachyos-x8664 kernel: INFO: task kworker/u16:0:5392 blocked for
-more than 122 seconds.
-May 05 20:13:44 cachyos-x8664 kernel:       Not tainted 6.3.1-1-cachyos #1
-May 05 20:13:44 cachyos-x8664 kernel: "echo 0 >
-/proc/sys/kernel/hung_task_timeout_secs" disables this message.
-May 05 20:13:44 cachyos-x8664 kernel: task:kworker/u16:0   state:D stack:0    
-pid:5392  ppid:2      flags:0x00004000
-May 05 20:13:44 cachyos-x8664 kernel: Workqueue: writeback wb_workfn
-(flush-8:0)
-May 05 20:13:44 cachyos-x8664 kernel: Call Trace:
-May 05 20:13:44 cachyos-x8664 kernel:  <TASK>
-May 05 20:13:44 cachyos-x8664 kernel:  __schedule+0x441/0x17b0
-May 05 20:13:44 cachyos-x8664 kernel:  ? blk_mq_submit_bio+0x396/0x760
-May 05 20:13:44 cachyos-x8664 kernel:  ? ttwu_queue_wakelist+0xef/0x110
-May 05 20:13:44 cachyos-x8664 kernel:  schedule+0x5e/0xd0
-May 05 20:13:44 cachyos-x8664 kernel:  schedule_timeout+0x329/0x390
-May 05 20:13:44 cachyos-x8664 kernel:  ? autoremove_wake_function+0x32/0x60
-May 05 20:13:44 cachyos-x8664 kernel:  wait_for_completion+0x86/0x160
-May 05 20:13:44 cachyos-x8664 kernel:  f2fs_issue_checkpoint+0x11f/0x200 [f2fs
-d2333fc34706e39c1a83271e8b382b177aae887d]
-May 05 20:13:44 cachyos-x8664 kernel:  f2fs_balance_fs_bg+0x12e/0x3b0 [f2fs
-d2333fc34706e39c1a83271e8b382b177aae887d]
-May 05 20:13:44 cachyos-x8664 kernel:  f2fs_write_node_pages+0x85/0xa00 [f2fs
-d2333fc34706e39c1a83271e8b382b177aae887d]
-May 05 20:13:44 cachyos-x8664 kernel:  ? __pfx_ata_scsi_rw_xlat+0x10/0x10
-May 05 20:13:44 cachyos-x8664 kernel:  ? ata_qc_issue+0x138/0x270
-May 05 20:13:44 cachyos-x8664 kernel:  ? ata_scsi_queuecmd+0xe4/0x170
-May 05 20:13:44 cachyos-x8664 kernel:  ? select_task_rq_fair+0x15d/0x2880
-May 05 20:13:44 cachyos-x8664 kernel:  ? __pfx_f2fs_write_node_pages+0x10/0x10
-[f2fs d2333fc34706e39c1a83271e8b382b177aae887d]
-May 05 20:13:44 cachyos-x8664 kernel:  do_writepages+0x8c/0x610
-May 05 20:13:44 cachyos-x8664 kernel:  ? blk_mq_do_dispatch_sched+0xa7/0x3c0
-May 05 20:13:44 cachyos-x8664 kernel:  ? _flat_send_IPI_mask+0x1f/0x30
-May 05 20:13:44 cachyos-x8664 kernel:  ? ttwu_queue_wakelist+0xef/0x110
-May 05 20:13:44 cachyos-x8664 kernel:  ? try_to_wake_up+0xd9/0xcb0
-May 05 20:13:44 cachyos-x8664 kernel:  __writeback_single_inode+0x3d/0x360
-May 05 20:13:44 cachyos-x8664 kernel:  writeback_sb_inodes+0x1ed/0x530
-May 05 20:13:44 cachyos-x8664 kernel:  ? __wake_up+0x8b/0xc0
-May 05 20:13:44 cachyos-x8664 kernel:  __writeback_inodes_wb+0x4c/0xf0
-May 05 20:13:44 cachyos-x8664 kernel:  wb_writeback+0x1fe/0x390
-May 05 20:13:44 cachyos-x8664 kernel:  wb_workfn+0x412/0x600
-May 05 20:13:44 cachyos-x8664 kernel:  ? __schedule+0x449/0x17b0
-May 05 20:13:44 cachyos-x8664 kernel:  process_one_work+0x24b/0x460
-May 05 20:13:44 cachyos-x8664 kernel:  worker_thread+0x55/0x4f0
-May 05 20:13:44 cachyos-x8664 kernel:  ? __pfx_worker_thread+0x10/0x10
-May 05 20:13:44 cachyos-x8664 kernel:  kthread+0xdb/0x110
-May 05 20:13:44 cachyos-x8664 kernel:  ? __pfx_kthread+0x10/0x10
-May 05 20:13:44 cachyos-x8664 kernel:  ret_from_fork+0x29/0x50
-
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 78aa8cff4b41..850e745ecf88 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2790,9 +2790,6 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
+ 	if (!S_ISREG(src->i_mode) || !S_ISREG(dst->i_mode))
+ 		return -EINVAL;
+ 
+-	if (IS_ENCRYPTED(src) || IS_ENCRYPTED(dst))
+-		return -EOPNOTSUPP;
+-
+ 	if (pos_out < 0 || pos_in < 0)
+ 		return -EINVAL;
+ 
+@@ -2804,12 +2801,17 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
+ 	}
+ 
+ 	inode_lock(src);
+-	if (src != dst) {
++	if (src != dst && !inode_trylock(dst)) {
+ 		ret = -EBUSY;
+-		if (!inode_trylock(dst))
+-			goto out;
++		goto out;
+ 	}
+ 
++	if (IS_ENCRYPTED(src) || IS_ENCRYPTED(dst))
++		return -EOPNOTSUPP;
++
++	if (f2fs_compressed_file(src) || f2fs_compressed_file(dst))
++		return -EOPNOTSUPP;
++
+ 	ret = -EINVAL;
+ 	if (pos_in + len > src->i_size || pos_in + len < pos_in)
+ 		goto out_unlock;
 -- 
-You may reply to this email to add a comment.
+2.39.0
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
