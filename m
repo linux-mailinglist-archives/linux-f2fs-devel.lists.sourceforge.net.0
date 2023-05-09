@@ -2,88 +2,150 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 634FC6FB6D5
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  8 May 2023 21:42:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28F016FC350
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  9 May 2023 11:57:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pw6kX-0005I9-5Q;
-	Mon, 08 May 2023 19:42:21 +0000
+	id 1pwK67-0002hY-Vn;
+	Tue, 09 May 2023 09:57:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1pw6kU-0005Hy-TU
+ (envelope-from <frank.li@vivo.com>) id 1pwK65-0002hQ-Qq
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 08 May 2023 19:42:18 +0000
+ Tue, 09 May 2023 09:57:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zue+yIQFvYVffzhuF4gH3EBm1vUU2ffrSKg443/Fzh4=; b=f4Cd498O9bHXEvJulv48MLC95W
- idcF/yZsHm0d5PtIumHrgqJH0F5JMkc08DW0b+ibH+OQKc/DVgI6/jRKmHox4puNFGknVgtCpoGUJ
- 30FMhB6uDNMD7PdVsKbXDSsddBIB8c65Spyal+1o1XA2AZYCj+tlA2hJyWFjwsy7jFUE=;
+ bh=Ciyak4ApemOiGcAYqhdzZj7ZzKBroG9JAocEbmxXWn0=; b=gFbDEnKTzBV7Dm0we+38TbyAOQ
+ LaQ1IXHw8O8bJjQYLAq8HC+CYtErwx6uwoiPyN9NIR20JHO0gbe/YvzDfMKRK1mmJSPQXvEM7ZDfz
+ 7l9QFcetAZh8aHLXt9Y/Q2fIOSljw/2bVZXZW9UN0nETu+L/B1G92AFshOrJ2aV0orHU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=zue+yIQFvYVffzhuF4gH3EBm1vUU2ffrSKg443/Fzh4=; b=kt0t5KaGKaTv0OBcs5JNVxlnLE
- 7gj/YKpbjAibDxKCQC28Lp7iNc/7kf8Ec5PtMHLhNpyVyz1fptC8yeiYwBcBf6Zqhx/Alp9XOroWe
- m3IRqrENpTY990DePGqPT6OmDOTlVx/fRyUIhc9Y/U6hEyvIXApJfK4aJ7OdTXWOvlbQ=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Ciyak4ApemOiGcAYqhdzZj7ZzKBroG9JAocEbmxXWn0=; b=i
+ lUGOK9RRGZVUbgCvBRS1sm+9OsgC/V7woPzGTPUCH6lR4zsK8hvK4lNjs0ISk3eXH2mU+jmk3eZiI
+ 0mlaTaZ3szybKMvKYM6GIpUadpIoKcP1UBX9Y/L4XkKjXvRTZpEEZiN1YPJVT2BNhFO8gU9x0ghSu
+ mUl+9TDlV4gqiAOc=;
+Received: from mail-sgaapc01on2107.outbound.protection.outlook.com
+ ([40.107.215.107] helo=APC01-SG2-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pw6kP-0003Ql-PO for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 08 May 2023 19:42:18 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 62EAD60F3C
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  8 May 2023 19:42:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B606BC433EF;
- Mon,  8 May 2023 19:42:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683574927;
- bh=i+qa2osEMl04rMcWFXolaIcUj55uGkvbHtdESXwW+4c=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=LlDij8cYFUpBXzgV3WUmjcBeEeAp6NEVG3gl2mgOAisXOrXwpRvaE3v7nt+GRAmYb
- 0wh4iJ5tbY8B48wkZdpNgMmvensBcw16gU45stVv7A/LF3XVe6+x9mtsN0bYNa9z65
- KVbTWYNvKskX6NAuosdMux5zvjcmNgXflHUWvjCfdB+LRc7MDm/pQAT7bNx6plSl5M
- 8Oek4vHPGNBZxkP1VenedbgxeA0fFySEeDGJekYvACyOrRBp4IBKJg5nAE86ctBsPM
- 0+nTGoB/metGTTtZ+abfKAW1UO5cJaNs+LapuqgbAM8+5V4HJyB0hB9MdIv1WMdQTC
- AR1GcJD52vk6w==
-Date: Mon, 8 May 2023 12:42:06 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZFlQjq/nLX16rZYB@google.com>
-References: <20230505100205.1921708-1-chao@kernel.org>
- <20230505100205.1921708-6-chao@kernel.org>
+ id 1pwK63-0002HH-U3 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 09 May 2023 09:57:29 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Sq+qFWuNWEQBQvFy3CcUgfbVuQSIv4jJzW2f576cy3D9N/+TkW4h/q8MP8GkbdYgPjfVZdoT4B45r32Otf3os57b5kRHML0/isyoPhN9KnmjcmQWmbBzR3bnPqnN3xjKbV2a3aVvPCOESh6FZg50i9FErkuTlAvLJckU+QZUjF23vmZrcSDJMOiTx/CN1/kvOI07reWvVnmCHVbfLhtBRQ2fKrRvXv5X7B9Y5iGpUdaOIEJ/QFOflBcUqKLel3sL+OloafVX+of+d18rMinC4x1jjRRkNEb8g0fzzXHQn3bso50CggdHWNKPdJ1MGrqyuH0GP3n/9FpHWVBbKVAdcA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Ciyak4ApemOiGcAYqhdzZj7ZzKBroG9JAocEbmxXWn0=;
+ b=I5TsMZdjLymrHjM9RFJ0RddAcFE0LFHJFrmsFWWS1wOgav6gSf32wu3+Porpro+w+qCWH+13csGxTL4SukXYB82Q9N0lgTLGItUvT+CvxdcU9MwG9kL5+lMnzT03/rX5qs9sbwZ6nj0DzEcwW8rYJ32ZaCfH7iIV4GThHPZHD9hEwd10wY4A6Jwz/3EjwGMBsXDt12H64bIWfLgriHpK7/5+vCJWF/K5uzv3GWgKKHvTbCP1Pk2kUKjbKOBKpUYkCCF0tXA6uDGzO92v/SogAhvWOm6Thdhn14gbrQQJwKLbpfvhYp697bs4xbAecr7oXdH/Wv6MnNR1i8nBAH8xAQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Ciyak4ApemOiGcAYqhdzZj7ZzKBroG9JAocEbmxXWn0=;
+ b=LhboLZJiiKE654Cqllo5dHACjMqaEhtmZz4sDgGquc4hkPrxJv4Xf/rkTC37izovVAxYMeoJ3mGUydoaGIKP9w6MNEINS50NOyGFaXhjo4GTwGBPgsy8+K2qtUtYo0oXcxLQ0Zn7ltXSfhwAgetO9NcBB+htdeQmvFQdGiPhG1GGWBHJQGRV2IpjU6QZdYWdC9tI1M8W1l2W79r5NwfiOMKKZvWNUaO7CcNRI0X0rCjP6Zyk0Ju7y2D+N5cjeWu9L341ytw0sh/Fzz5ACIsbjuNZeRN3c1YG0xFXyI/x+PTh5UQ/JCB5sC4f70dfn5HInPDlFunYYGw018S6F6/WsA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
+ by SEYPR06MB6130.apcprd06.prod.outlook.com (2603:1096:101:db::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6363.33; Tue, 9 May
+ 2023 09:57:18 +0000
+Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
+ ([fe80::76d6:4828:7e80:2965]) by SEZPR06MB5269.apcprd06.prod.outlook.com
+ ([fe80::76d6:4828:7e80:2965%3]) with mapi id 15.20.6363.033; Tue, 9 May 2023
+ 09:57:18 +0000
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Tue,  9 May 2023 17:57:03 +0800
+Message-Id: <20230509095706.17844-1-frank.li@vivo.com>
+X-Mailer: git-send-email 2.39.0
+X-ClientProxiedBy: SI2PR04CA0017.apcprd04.prod.outlook.com
+ (2603:1096:4:197::15) To SEZPR06MB5269.apcprd06.prod.outlook.com
+ (2603:1096:101:78::6)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230505100205.1921708-6-chao@kernel.org>
-X-Spam-Score: -5.9 (-----)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5269:EE_|SEYPR06MB6130:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1487afe6-a0c3-49d3-3b56-08db5073c5fd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 1yZAKTXTaPLt9jt5/Rjgay0t4Exuvr7XR+YWbZ+LKHt/2JXL5TJBLOByru+QamP/5YRR1YFxpRr4dqcD3rZ1Nim+vJ2mcVHSDZj87WfAg1IMEHEVTMViccfCCJEdyXtPURfkStVjV/8nE7LdGYTxbn5FMTCDQhNi42ZRZLPGEl5RSxJUh22J6zXGWdGfzbaAOu9akqgrwApuw2Fb7NLtyqBRJVH+ogSXFClICxFbgcuW4sa8/j06txZZ53SgfDpVCapIAIZaAkzmry25ZWIW65foYW1+csR4AWR8FbvAw7QvfLs14jwYn5yq5x0OmrH+87sZv9d1LPkzArf0gHrNJbPgeZLaer5bpDBIe7tvIX5nDICX28g490AK2qzHdpQxPPcnoiQKe2DfHr+eg0d494NTPJVa8I3vjFlZLZLEifrq6JslvPOru4o/Ta0Qe9cbbtTYg82Gsst+LerZX4XltIXaGU5ugeSr36fTOFTAwfAfwtMg8xf35FDDbRT4QtEP7BoCZ53zhAm7+fbE/ur0GXjPGt+aBZ2yFRSYWYnlO07Ode/NPCqnYV1RuAlO6kEaZzt8HjCkotq/P84NNWmv2YMRGjDitijnExzrwEZqU/A=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(4636009)(396003)(346002)(39860400002)(136003)(376002)(366004)(451199021)(6486002)(83380400001)(316002)(66946007)(66476007)(66556008)(4326008)(478600001)(6666004)(52116002)(2616005)(6506007)(6512007)(1076003)(26005)(107886003)(186003)(2906002)(86362001)(36756003)(41300700001)(5660300002)(8676002)(8936002)(38100700002)(38350700002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?KG251XEDqWAwpwIrilUHKd36dPcuFVswOyVSAsLbMHHePsUzqYJlcUgPg5XL?=
+ =?us-ascii?Q?Wv00JQlq3xZ24gH9DR1f1yOiZr+s2LMxuDz4HlYZvDapaYtp9FMVJ8/VB3/P?=
+ =?us-ascii?Q?r7z5PA7z6h2tyaEXWTdQSwSKLHaBmFifqlHKbxXPGSce7Jw17w+ggNq6CKJq?=
+ =?us-ascii?Q?JA/du/2G4uvJPPTx5GQ0eFeVOoXBXMb3RlKlFBYbYekAm9gN9ID7hBHM4+FX?=
+ =?us-ascii?Q?lFwQ4wpQlBO+dAKkql+/72CiALHEuYR6DqGRI1jm9MqeR0IA4q4DBIUFNFXB?=
+ =?us-ascii?Q?YtEolFHgOXWkKqfGF6cbuDZFFN0jSXBB8WWhoCNgoX6MYpLpv9sTe+9FFT6m?=
+ =?us-ascii?Q?+cRhhT40JmqiclVRuxrzXYHM/u62g8wwo97oURUgRKzEcuEPRTph3R99IbIe?=
+ =?us-ascii?Q?x4SofTx3LQ781VTchHqZyTZ3OMHtOClHumBJP7+oxA/YX82RIl6/94P3lnR8?=
+ =?us-ascii?Q?eS7Z+kXIme78nycVhgP2pUOJthU7VLqCRf8ocHVSYoqsu3Rk3Mg2G4GEgfts?=
+ =?us-ascii?Q?MuG27EBhhB9+k3ggMrnjaB5MrWgRTxrY6udJroMVnyuUVfare6y2xeFxqJYO?=
+ =?us-ascii?Q?jvVhdrgLfAfDP7Oh7dCDsRZY4jYTSOPxaguePZys5BdR2FJFDR6LJ9tZ3Ew5?=
+ =?us-ascii?Q?kuosKpZMcXxUXL177VxtMhRja/rN2PIvRI3KSZGWkPxrIEha/ai8nDfw2dyR?=
+ =?us-ascii?Q?ZnPsQm5n7AfpforV5OYy1tVU0JNVwWsdJJx2sslUQbopHUDPadid+sOeAWHY?=
+ =?us-ascii?Q?0on5dO21kqXhLmwX28ayPSv31SddDciSdxFIvuq496qc/pX2z4NAWUoH2VrW?=
+ =?us-ascii?Q?qiQesZegFSICiDJ9dLbPbxSynsH4Z1c7ZtiS9TRIq1IQKRkx+J/bENV/x7se?=
+ =?us-ascii?Q?BKMgDjD40eweas8LH7j0gqYksns795byeutwT9OIlg2mBtbGPyXvn0ovtXu/?=
+ =?us-ascii?Q?9JuBpPvl3omQ87Bx4g/aVHw6Kqne8bZ3IvngeLGzpakSOtqCu+4/DU9dw9k6?=
+ =?us-ascii?Q?WAr5psOvaa+FpVAnX/9YJyoPpG2qEiSoc5F14Uy9om2p/kYBzM+4cNBC/EaS?=
+ =?us-ascii?Q?23YkUd1mx70jStb1OkAGZKgz42JL0RczFXHtEQDdVUvqbmP2y8RE7bDw9sqq?=
+ =?us-ascii?Q?IK5nPQV0fvi9oitDshxa9ioFmHTMW1hypOyt+j1EYxBqTR2L8rV5OekRSSNE?=
+ =?us-ascii?Q?QPQ3cSyf+S38j5V/bSVGlwpWsMYHLkpj7wikGfLUVOwJsYOK7e+/yxKlez1C?=
+ =?us-ascii?Q?nBGVqNWOe4Zn6hLLPczpBRKNRgnayNhEQvOfIMISED7zxZseNIfcDOpFoBjE?=
+ =?us-ascii?Q?W/riK1DM4d70PnLhINi6qw1rzFqYPuXntuYi+2NMO6YNCu1pU+gAHruCIdxZ?=
+ =?us-ascii?Q?m55n/W9Vdd69abn7SEQj0vfo4Bkcq6lqxpCaF41MGwtcRjGKejhWtRTgr5Tg?=
+ =?us-ascii?Q?Is/Nc2/Fr6wydF92np3OsaQhYK7/dEhojsMJiI+OZ6YNCUu4SyfsGde0BC/R?=
+ =?us-ascii?Q?GI56DZtEkksiQX+g7fShYbzIGnKEQlqV21M8V6FRjTH1Z3yWUjQARWc+xC/Q?=
+ =?us-ascii?Q?TU/iKyZ6JspmigygrswDQ590Tw9WtQa6Cph6vqMk?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1487afe6-a0c3-49d3-3b56-08db5073c5fd
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2023 09:57:18.1483 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0rjJCbHO8V6pibiP8z4k7qbBgLWCO4H7/nYJOdP4yVxNTfkVbocYHICghTMdtTPoxABohW1NfDhKG4V/tYelCg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB6130
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Added this to avoid android build failure. ---
- a/include/f2fs_fs.h +++ b/include/f2fs_fs.h @@ -23, 6 +23,
- 7 @@ #include <stdio.h> #include <stdlib.h>
- +#include <sys/stat.h> #include <stddef.h> #include <string.h> #include
- <time.h> Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview: F2FS_I_SB(inode) is redundant. Signed-off-by: Yangtao Li
+ <frank.li@vivo.com>
+ --- fs/f2fs/file.c | 12 ++++++------ 1 file changed, 6 insertions(+),
+ 6 deletions(-)
+ diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c index 0dbbcb406d3f..6f8936ec689c
+ 100644 --- a/fs/f2fs/file.c +++ b/fs/f2fs/file.c @@ -3466, 7 +3466, 7 @@ static
+ int f2fs_release_compress_blocks(struct file [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.215.107 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.215.107 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -91,10 +153,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pw6kP-0003Ql-PO
-Subject: Re: [f2fs-dev] [PATCH 6/6] f2fs-tools: use f2fs_init_inode() to
- clean up codes
+X-Headers-End: 1pwK63-0002HH-U3
+Subject: [f2fs-dev] [PATCH 1/4] f2fs: convert to use sbi directly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,297 +166,82 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+From: Yangtao Li via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Yangtao Li <frank.li@vivo.com>
+Cc: Yangtao Li <frank.li@vivo.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Added this to avoid android build failure.
+F2FS_I_SB(inode) is redundant.
 
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -23,6 +23,7 @@
+Signed-off-by: Yangtao Li <frank.li@vivo.com>
+---
+ fs/f2fs/file.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
- #include <stdio.h>
- #include <stdlib.h>
-+#include <sys/stat.h>
- #include <stddef.h>
- #include <string.h>
- #include <time.h>
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 0dbbcb406d3f..6f8936ec689c 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3466,7 +3466,7 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
+ 	int ret;
+ 	int writecount;
+ 
+-	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
++	if (!f2fs_sb_has_compression(sbi))
+ 		return -EOPNOTSUPP;
+ 
+ 	if (!f2fs_compressed_file(inode))
+@@ -3479,7 +3479,7 @@ static int f2fs_release_compress_blocks(struct file *filp, unsigned long arg)
+ 	if (ret)
+ 		return ret;
+ 
+-	f2fs_balance_fs(F2FS_I_SB(inode), true);
++	f2fs_balance_fs(sbi, true);
+ 
+ 	inode_lock(inode);
+ 
+@@ -3636,7 +3636,7 @@ static int f2fs_reserve_compress_blocks(struct file *filp, unsigned long arg)
+ 	unsigned int reserved_blocks = 0;
+ 	int ret;
+ 
+-	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
++	if (!f2fs_sb_has_compression(sbi))
+ 		return -EOPNOTSUPP;
+ 
+ 	if (!f2fs_compressed_file(inode))
+@@ -3652,7 +3652,7 @@ static int f2fs_reserve_compress_blocks(struct file *filp, unsigned long arg)
+ 	if (atomic_read(&F2FS_I(inode)->i_compr_blocks))
+ 		goto out;
+ 
+-	f2fs_balance_fs(F2FS_I_SB(inode), true);
++	f2fs_balance_fs(sbi, true);
+ 
+ 	inode_lock(inode);
+ 
+@@ -4046,7 +4046,7 @@ static int f2fs_ioc_decompress_file(struct file *filp)
+ 	if (!f2fs_compressed_file(inode))
+ 		return -EINVAL;
+ 
+-	f2fs_balance_fs(F2FS_I_SB(inode), true);
++	f2fs_balance_fs(sbi, true);
+ 
+ 	file_start_write(filp);
+ 	inode_lock(inode);
+@@ -4121,7 +4121,7 @@ static int f2fs_ioc_compress_file(struct file *filp)
+ 	if (!f2fs_compressed_file(inode))
+ 		return -EINVAL;
+ 
+-	f2fs_balance_fs(F2FS_I_SB(inode), true);
++	f2fs_balance_fs(sbi, true);
+ 
+ 	file_start_write(filp);
+ 	inode_lock(inode);
+-- 
+2.39.0
 
-On 05/05, Chao Yu wrote:
-> No logic changes.
-> 
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  fsck/node.c        |   7 ++-
->  include/f2fs_fs.h  |  36 +++++++++-----
->  mkfs/f2fs_format.c | 118 ++++++++-------------------------------------
->  3 files changed, 50 insertions(+), 111 deletions(-)
-> 
-> diff --git a/fsck/node.c b/fsck/node.c
-> index c3e383b..9ce8a72 100644
-> --- a/fsck/node.c
-> +++ b/fsck/node.c
-> @@ -57,7 +57,12 @@ int f2fs_rebuild_qf_inode(struct f2fs_sb_info *sbi, int qtype)
->  		MSG(1, "\tError: Calloc Failed for raw_node!!!\n");
->  		return -ENOMEM;
->  	}
-> -	f2fs_init_qf_inode(sb, raw_node, qtype, time(NULL));
-> +	f2fs_init_inode(sb, raw_node,
-> +			le32_to_cpu(sb->qf_ino[qtype]), time(NULL), 0x8180);
-> +
-> +	raw_node->i.i_size = cpu_to_le64(1024 * 6);
-> +	raw_node->i.i_blocks = cpu_to_le64(1);
-> +	raw_node->i.i_flags = FS_IMMUTABLE_FL;
->  
->  	if (is_set_ckpt_flags(ckpt, CP_CRC_RECOVERY_FLAG))
->  		cp_ver |= (cur_cp_crc(ckpt) << 32);
-> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-> index 4accade..cab452d 100644
-> --- a/include/f2fs_fs.h
-> +++ b/include/f2fs_fs.h
-> @@ -1741,20 +1741,16 @@ static inline void show_version(const char *prog)
->  #endif
->  }
->  
-> -static inline void f2fs_init_qf_inode(struct f2fs_super_block *sb,
-> -		struct f2fs_node *raw_node, int qtype, time_t mtime)
-> +static inline void f2fs_init_inode(struct f2fs_super_block *sb,
-> +		struct f2fs_node *raw_node, nid_t ino, time_t mtime, mode_t mode)
->  {
-> -	raw_node->footer.nid = sb->qf_ino[qtype];
-> -	raw_node->footer.ino = sb->qf_ino[qtype];
-> +	raw_node->footer.nid = cpu_to_le32(ino);
-> +	raw_node->footer.ino = cpu_to_le32(ino);
->  	raw_node->footer.cp_ver = cpu_to_le64(1);
-> -	raw_node->i.i_mode = cpu_to_le16(0x8180);
-> -	raw_node->i.i_links = cpu_to_le32(1);
-> +
->  	raw_node->i.i_uid = cpu_to_le32(c.root_uid);
->  	raw_node->i.i_gid = cpu_to_le32(c.root_gid);
->  
-> -	raw_node->i.i_size = cpu_to_le64(1024 * 6); /* Hard coded */
-> -	raw_node->i.i_blocks = cpu_to_le64(1);
-> -
->  	raw_node->i.i_atime = cpu_to_le32(mtime);
->  	raw_node->i.i_atime_nsec = 0;
->  	raw_node->i.i_ctime = cpu_to_le32(mtime);
-> @@ -1763,9 +1759,15 @@ static inline void f2fs_init_qf_inode(struct f2fs_super_block *sb,
->  	raw_node->i.i_mtime_nsec = 0;
->  	raw_node->i.i_generation = 0;
->  	raw_node->i.i_xattr_nid = 0;
-> -	raw_node->i.i_flags = FS_IMMUTABLE_FL;
-> -	raw_node->i.i_current_depth = cpu_to_le32(0);
-> +	raw_node->i.i_flags = 0;
-> +	raw_node->i.i_current_depth = cpu_to_le32(S_ISDIR(mode) ? 1 : 0);
->  	raw_node->i.i_dir_level = DEF_DIR_LEVEL;
-> +	raw_node->i.i_mode = cpu_to_le16(mode);
-> +	raw_node->i.i_links = cpu_to_le32(S_ISDIR(mode) ? 2 : 1);
-> +
-> +	/* for dentry block in directory */
-> +	raw_node->i.i_size = cpu_to_le64(1 << get_sb(log_blocksize));
-> +	raw_node->i.i_blocks = cpu_to_le64(2);
->  
->  	if (c.feature & cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR)) {
->  		raw_node->i.i_inline = F2FS_EXTRA_ATTR;
-> @@ -1775,6 +1777,18 @@ static inline void f2fs_init_qf_inode(struct f2fs_super_block *sb,
->  	if (c.feature & cpu_to_le32(F2FS_FEATURE_PRJQUOTA))
->  		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
->  
-> +	if (c.feature & cpu_to_le32(F2FS_FEATURE_INODE_CRTIME)) {
-> +		raw_node->i.i_crtime = cpu_to_le32(mtime);
-> +		raw_node->i.i_crtime_nsec = 0;
-> +	}
-> +
-> +	if (c.feature & cpu_to_le32(F2FS_FEATURE_COMPRESSION)) {
-> +		raw_node->i.i_compr_blocks = 0;
-> +		raw_node->i.i_compress_algorithm = 0;
-> +		raw_node->i.i_log_cluster_size = 0;
-> +		raw_node->i.i_compress_flag = 0;
-> +	}
-> +
->  	raw_node->i.i_ext.fofs = 0;
->  	raw_node->i.i_ext.blk_addr = 0;
->  	raw_node->i.i_ext.len = 0;
-> diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-> index 666af45..6d02a57 100644
-> --- a/mkfs/f2fs_format.c
-> +++ b/mkfs/f2fs_format.c
-> @@ -1233,7 +1233,7 @@ static int f2fs_discard_obsolete_dnode(void)
->  static int f2fs_write_root_inode(void)
->  {
->  	struct f2fs_node *raw_node = NULL;
-> -	uint64_t blk_size_bytes, data_blk_nor;
-> +	uint64_t data_blk_nor;
->  	uint64_t main_area_node_seg_blk_offset = 0;
->  
->  	raw_node = calloc(F2FS_BLKSIZE, 1);
-> @@ -1242,65 +1242,21 @@ static int f2fs_write_root_inode(void)
->  		return -1;
->  	}
->  
-> -	raw_node->footer.nid = sb->root_ino;
-> -	raw_node->footer.ino = sb->root_ino;
-> -	raw_node->footer.cp_ver = cpu_to_le64(1);
-> -	raw_node->footer.next_blkaddr = cpu_to_le32(
-> -			get_sb(main_blkaddr) +
-> -			c.cur_seg[CURSEG_HOT_NODE] *
-> -			c.blks_per_seg + 1);
-> +	f2fs_init_inode(sb, raw_node, le32_to_cpu(sb->root_ino),
-> +						mkfs_time, 0x41ed);
->  
-> -	raw_node->i.i_mode = cpu_to_le16(0x41ed);
->  	if (c.lpf_ino)
->  		raw_node->i.i_links = cpu_to_le32(3);
-> -	else
-> -		raw_node->i.i_links = cpu_to_le32(2);
-> -	raw_node->i.i_uid = cpu_to_le32(c.root_uid);
-> -	raw_node->i.i_gid = cpu_to_le32(c.root_gid);
-> -
-> -	blk_size_bytes = 1 << get_sb(log_blocksize);
-> -	raw_node->i.i_size = cpu_to_le64(1 * blk_size_bytes); /* dentry */
-> -	raw_node->i.i_blocks = cpu_to_le64(2);
-> -
-> -	raw_node->i.i_atime = cpu_to_le32(mkfs_time);
-> -	raw_node->i.i_atime_nsec = 0;
-> -	raw_node->i.i_ctime = cpu_to_le32(mkfs_time);
-> -	raw_node->i.i_ctime_nsec = 0;
-> -	raw_node->i.i_mtime = cpu_to_le32(mkfs_time);
-> -	raw_node->i.i_mtime_nsec = 0;
-> -	raw_node->i.i_generation = 0;
-> -	raw_node->i.i_xattr_nid = 0;
-> -	raw_node->i.i_flags = 0;
-> -	raw_node->i.i_current_depth = cpu_to_le32(1);
-> -	raw_node->i.i_dir_level = DEF_DIR_LEVEL;
-> -
-> -	if (c.feature & cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR)) {
-> -		raw_node->i.i_inline = F2FS_EXTRA_ATTR;
-> -		raw_node->i.i_extra_isize = cpu_to_le16(calc_extra_isize());
-> -	}
-> -
-> -	if (c.feature & cpu_to_le32(F2FS_FEATURE_PRJQUOTA))
-> -		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
->  
-> -	if (c.feature & cpu_to_le32(F2FS_FEATURE_INODE_CRTIME)) {
-> -		raw_node->i.i_crtime = cpu_to_le32(mkfs_time);
-> -		raw_node->i.i_crtime_nsec = 0;
-> -	}
-> -
-> -	if (c.feature & cpu_to_le32(F2FS_FEATURE_COMPRESSION)) {
-> -		raw_node->i.i_compress_algorithm = 0;
-> -		raw_node->i.i_log_cluster_size = 0;
-> -		raw_node->i.i_compress_flag = 0;
-> -	}
-> +	raw_node->footer.next_blkaddr = cpu_to_le32(
-> +			get_sb(main_blkaddr) +
-> +			c.cur_seg[CURSEG_HOT_NODE] *
-> +			c.blks_per_seg + 1);
->  
->  	data_blk_nor = get_sb(main_blkaddr) +
->  		c.cur_seg[CURSEG_HOT_DATA] * c.blks_per_seg;
->  	raw_node->i.i_addr[get_extra_isize(raw_node)] = cpu_to_le32(data_blk_nor);
->  
-> -	raw_node->i.i_ext.fofs = 0;
-> -	raw_node->i.i_ext.blk_addr = 0;
-> -	raw_node->i.i_ext.len = 0;
-> -
->  	main_area_node_seg_blk_offset = get_sb(main_blkaddr);
->  	main_area_node_seg_blk_offset += c.cur_seg[CURSEG_HOT_NODE] *
->  					c.blks_per_seg;
-> @@ -1403,13 +1359,17 @@ static int f2fs_write_qf_inode(int qtype, int offset)
->  		MSG(1, "\tError: Calloc Failed for raw_node!!!\n");
->  		return -1;
->  	}
-> -	f2fs_init_qf_inode(sb, raw_node, qtype, mkfs_time);
-> +	f2fs_init_inode(sb, raw_node,
-> +			le32_to_cpu(sb->qf_ino[qtype]), mkfs_time, 0x8180);
-> +
-> +	raw_node->i.i_size = cpu_to_le64(1024 * 6);
-> +	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
-> +	raw_node->i.i_flags = FS_IMMUTABLE_FL;
->  
->  	raw_node->footer.next_blkaddr = cpu_to_le32(
->  			get_sb(main_blkaddr) +
->  			c.cur_seg[CURSEG_HOT_NODE] *
->  			c.blks_per_seg + 1 + qtype + 1);
-> -	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
->  
->  	data_blk_nor = get_sb(main_blkaddr) +
->  		c.cur_seg[CURSEG_HOT_DATA] * c.blks_per_seg + 1
-> @@ -1552,7 +1512,7 @@ static block_t f2fs_add_default_dentry_lpf(void)
->  static int f2fs_write_lpf_inode(void)
->  {
->  	struct f2fs_node *raw_node;
-> -	uint64_t blk_size_bytes, main_area_node_seg_blk_offset;
-> +	uint64_t main_area_node_seg_blk_offset;
->  	block_t data_blk_nor;
->  	int err = 0;
->  
-> @@ -1564,56 +1524,16 @@ static int f2fs_write_lpf_inode(void)
->  		return -1;
->  	}
->  
-> -	raw_node->footer.nid = cpu_to_le32(c.lpf_ino);
-> -	raw_node->footer.ino = raw_node->footer.nid;
-> -	raw_node->footer.cp_ver = cpu_to_le64(1);
-> -	raw_node->footer.next_blkaddr = cpu_to_le32(
-> -			get_sb(main_blkaddr) +
-> -			c.cur_seg[CURSEG_HOT_NODE] * c.blks_per_seg +
-> -			1 + c.quota_inum + 1);
-> -
-> -	raw_node->i.i_mode = cpu_to_le16(0x41c0); /* 0700 */
-> -	raw_node->i.i_links = cpu_to_le32(2);
-> -	raw_node->i.i_uid = cpu_to_le32(c.root_uid);
-> -	raw_node->i.i_gid = cpu_to_le32(c.root_gid);
-> +	f2fs_init_inode(sb, raw_node, c.lpf_ino, mkfs_time, 0x41c0);
->  
-> -	blk_size_bytes = 1 << get_sb(log_blocksize);
-> -	raw_node->i.i_size = cpu_to_le64(1 * blk_size_bytes);
-> -	raw_node->i.i_blocks = cpu_to_le64(2);
-> -
-> -	raw_node->i.i_atime = cpu_to_le32(mkfs_time);
-> -	raw_node->i.i_atime_nsec = 0;
-> -	raw_node->i.i_ctime = cpu_to_le32(mkfs_time);
-> -	raw_node->i.i_ctime_nsec = 0;
-> -	raw_node->i.i_mtime = cpu_to_le32(mkfs_time);
-> -	raw_node->i.i_mtime_nsec = 0;
-> -	raw_node->i.i_generation = 0;
-> -	raw_node->i.i_xattr_nid = 0;
-> -	raw_node->i.i_flags = 0;
->  	raw_node->i.i_pino = le32_to_cpu(sb->root_ino);
->  	raw_node->i.i_namelen = le32_to_cpu(strlen(LPF));
->  	memcpy(raw_node->i.i_name, LPF, strlen(LPF));
-> -	raw_node->i.i_current_depth = cpu_to_le32(1);
-> -	raw_node->i.i_dir_level = DEF_DIR_LEVEL;
->  
-> -	if (c.feature & cpu_to_le32(F2FS_FEATURE_EXTRA_ATTR)) {
-> -		raw_node->i.i_inline = F2FS_EXTRA_ATTR;
-> -		raw_node->i.i_extra_isize = cpu_to_le16(calc_extra_isize());
-> -	}
-> -
-> -	if (c.feature & cpu_to_le32(F2FS_FEATURE_PRJQUOTA))
-> -		raw_node->i.i_projid = cpu_to_le32(F2FS_DEF_PROJID);
-> -
-> -	if (c.feature & cpu_to_le32(F2FS_FEATURE_INODE_CRTIME)) {
-> -		raw_node->i.i_crtime = cpu_to_le32(mkfs_time);
-> -		raw_node->i.i_crtime_nsec = 0;
-> -	}
-> -
-> -	if (c.feature & cpu_to_le32(F2FS_FEATURE_COMPRESSION)) {
-> -		raw_node->i.i_compress_algorithm = 0;
-> -		raw_node->i.i_log_cluster_size = 0;
-> -		raw_node->i.i_compress_flag = 0;
-> -	}
-> +	raw_node->footer.next_blkaddr = cpu_to_le32(
-> +			get_sb(main_blkaddr) +
-> +			c.cur_seg[CURSEG_HOT_NODE] * c.blks_per_seg +
-> +			1 + c.quota_inum + 1);
->  
->  	data_blk_nor = f2fs_add_default_dentry_lpf();
->  	if (data_blk_nor == 0) {
-> -- 
-> 2.25.1
 
 
 _______________________________________________
