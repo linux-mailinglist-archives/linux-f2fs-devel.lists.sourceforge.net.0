@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8152F7004A3
+	by mail.lfdr.de (Postfix) with ESMTPS id 734847004A2
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 12 May 2023 12:04:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pxPdT-00009M-RA;
-	Fri, 12 May 2023 10:04:28 +0000
+	id 1pxPdV-0001Xb-TR;
+	Fri, 12 May 2023 10:04:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pxPdS-00009G-BA
+ (envelope-from <chao@kernel.org>) id 1pxPdV-0001XV-2A
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 12 May 2023 10:04:26 +0000
+ Fri, 12 May 2023 10:04:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Se97dhIGY3W+s+ekmGDeCmU+PPtEE1/bdv9KHq2fpFA=; b=caY4MSsmjdveiXo5AjE1+B/lgZ
- yv0kt7CYXFR7r/EEWiMMK4F83iNsB5vmS47mXswFXgRmvzgOd53R1ONVAIYvaIH1BkgTr9d0NXWcz
- deKS/PdH2oxL76Z/K1A3Gka5Ypoo/ogtUy5Msi7RjqNNj2fVqrN3CQInyGAVN0/a7XY8=;
+ bh=zJvmdKDWcZPor4XEktqB1zvln09wBdpKlZzkIZkZ0Z0=; b=LJ7ktSv+88SZFlk/XuY8VnI2wF
+ At7BwnW+FRHsNybPupoD10H5IM83Btr2x+Fvk3MHf5CTOL45Jkm4eUn3+WTS41g524AM0uVYnQXlQ
+ LEE4jMv7FxC7hqi1KIgL6nQ520cUZWvtPX3w+GxMMW0MIfLnaLcSuQIYtiOg5QpsB8Ts=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,69 +31,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Se97dhIGY3W+s+ekmGDeCmU+PPtEE1/bdv9KHq2fpFA=; b=NCJrSFxJYe3HzJqIb6tFQZ/xL8
- 9xk6uXGpV25DIw1aYOpQCyStrt7fFeGeSYa/2efRtr20ABM2AkwPX7pTPZUv3G8smsxIb129NLJGD
- XWiwQjGRTg0EstZizcCnKNWo8EkXeWnuDsG/fE9A/DXaGLpc3MNsyWYy68RyHYlCp5pc=;
+ bh=zJvmdKDWcZPor4XEktqB1zvln09wBdpKlZzkIZkZ0Z0=; b=l2ofkR9gSEDJh9WgNR3jj+WSFX
+ 9IzZeWlsan2rodKnquDbSPQ9+kGFwyh6fqExQWr8tD9ISS0XuLFV5vaIPdMYSWZOFf3NeUlOJ2Xjm
+ L+SVnM0AxqYojsHayQydMtiLJms2tDHib5SHpcYk3OHVTyYPz0jMOZ7HQQ0eErfJ5ntc=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pxPdS-004LeP-14 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 12 May 2023 10:04:26 +0000
+ id 1pxPdU-0003Ov-Aq for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 12 May 2023 10:04:29 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A44A060B7D
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 276D8654BB
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 12 May 2023 10:04:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 90B0CC433EF;
  Fri, 12 May 2023 10:04:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 14B68C4339B;
- Fri, 12 May 2023 10:04:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683885860;
- bh=0I9BcCMbg57042PZ9psBsrZc7/NzJdfA0pvmLIQsofc=;
+ s=k20201202; t=1683885861;
+ bh=fRRt8IpBbE+fHPgkz53zREV8+DuYhsCsjIX+gtD+gw8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=sxVr3zAV2U9ua15LmyfsyrwR9kmds5ZYQqLmKCB2W5OTJmp50l0rbbpvz/i+c7S6r
- nxhh2mOSAOrzbN+J/oRF8QCXx2oDvMsSz/cknAuGowk88vvKITNSqRiZoLcFgvir4V
- ng+8viaujQX0LtejetXUPTLY1UZJ0IVDUaBq3PoDnCqIf4XPObc0E6oqJtmO2zYA3r
- VbTdWocw1OofgBCHMC9LVPvrmNzk8LPhIuWdMx0OBp+wYEwKslMhD2nBvUfLPq9OhF
- amVaTNbYDyFsZXERNU+R5S1WPzuDMAmdHGZT/Gjxq9phI7HE45Zl1i70yQ9U6SMLk/
- KO1E6laIpOX3w==
+ b=HYw4b0tzqDdoMtDlAJtJVjudJf5G60nojl9ismBXZRkWp8+X8kLgjVg6LSChBERuj
+ BFje8ZTnjHZfn2DaVTBKgdOEQZK5lrLBEBojq0KgSWn/JrBaqWk9/kYwsEXluQE747
+ wrBYrW3OLun8rc7Rjw7+anST10xJeVAE+H4/8cG6QGSEknDeVTdXSX6VOhIFJS0c6I
+ kBRruhkYKOrjjwlM6b0cB6eaQOgkQZFKJ0REKTJG+pb1wVoM1jomTmd5lDADa4S4ve
+ +A1qpAT6fMqb7exyDf4s+W/3ot8isJWVjhqdz/EzjMNTj0qnBtKEOY+7PG1Hq12b1z
+ LcqY+qLf064fA==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Fri, 12 May 2023 18:03:52 +0800
-Message-Id: <20230512100354.4072489-2-chao@kernel.org>
+Date: Fri, 12 May 2023 18:03:53 +0800
+Message-Id: <20230512100354.4072489-3-chao@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230512100354.4072489-1-chao@kernel.org>
 References: <20230512100354.4072489-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  use f2fs_is_valid_blkaddr() instead of IS_VALID_BLK_ADDR()
- to check validity of data/node's block address. use is_valid_data_blkaddr()
- in sanity_check_nid() to check NULL_ADDR as NEW_ADDR, and print the value
- in error path explicitly. 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview: In order to track details of stat info and repair flow.
+ [FSCK]
+ valid_block_count matching with CP [Fail] [0x2, 0x0] [FSCK] valid_node_count
+ matching with CP (de lookup) [Fail] [0x1, 0x0] [FSCK] valid_node_count matching
+ with CP (nat lookup) [Fail] [0x1, 0x [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pxPdS-004LeP-14
-Subject: [f2fs-dev] [PATCH 2/4] fsck.f2fs: use f2fs_is_valid_blkaddr()
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pxPdU-0003Ov-Aq
+Subject: [f2fs-dev] [PATCH 3/4] fsck.f2fs: add more debug info in
+ fsck_verify()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,198 +110,113 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-use f2fs_is_valid_blkaddr() instead of IS_VALID_BLK_ADDR() to
-check validity of data/node's block address.
+In order to track details of stat info and repair flow.
 
-use is_valid_data_blkaddr() in sanity_check_nid() to check NULL_ADDR
-as NEW_ADDR, and print the value in error path explicitly.
+[FSCK] valid_block_count matching with CP             [Fail] [0x2, 0x0]
+[FSCK] valid_node_count matching with CP (de lookup)  [Fail] [0x1, 0x0]
+[FSCK] valid_node_count matching with CP (nat lookup) [Fail] [0x1, 0x0]
+[FSCK] valid_inode_count matched with CP              [Fail] [0x1, 0x0]
+
+Info: flush_journal_entries() n_nats: 1, n_sits: 6
+Info: write_checkpoint() cur_cp:1
+Info: fix_checkpoint() cur_cp:1
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fsck/dump.c  |  5 +++--
- fsck/f2fs.h  | 15 +--------------
- fsck/fsck.c  | 23 +++++++++++++----------
- fsck/fsck.h  |  2 ++
- fsck/mount.c |  4 +++-
- 5 files changed, 22 insertions(+), 27 deletions(-)
+ fsck/fsck.c  | 18 +++++++++++++-----
+ fsck/mount.c |  7 ++++++-
+ 2 files changed, 19 insertions(+), 6 deletions(-)
 
-diff --git a/fsck/dump.c b/fsck/dump.c
-index b8f6144..dd1f0ab 100644
---- a/fsck/dump.c
-+++ b/fsck/dump.c
-@@ -278,7 +278,8 @@ static void dump_data_blk(struct f2fs_sb_info *sbi, __u64 offset, u32 blkaddr)
- 		return;
- 
- 	/* get data */
--	if (blkaddr == NEW_ADDR || !IS_VALID_BLK_ADDR(sbi, blkaddr)) {
-+	if (blkaddr == NEW_ADDR ||
-+			!f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC)) {
- 		memset(buf, 0, F2FS_BLKSIZE);
- 	} else {
- 		int ret;
-@@ -588,7 +589,7 @@ int dump_node(struct f2fs_sb_info *sbi, nid_t nid, int force)
- 	DBG(1, "nat_entry.version     [0x%x]\n", ni.version);
- 	DBG(1, "nat_entry.ino         [0x%x]\n", ni.ino);
- 
--	if (!IS_VALID_BLK_ADDR(sbi, ni.blk_addr)) {
-+	if (!f2fs_is_valid_blkaddr(sbi, ni.blk_addr, DATA_GENERIC)) {
- 		MSG(force, "Invalid node blkaddr: %u\n\n", ni.blk_addr);
- 		goto out;
- 	}
-diff --git a/fsck/f2fs.h b/fsck/f2fs.h
-index e65644e..9791071 100644
---- a/fsck/f2fs.h
-+++ b/fsck/f2fs.h
-@@ -108,6 +108,7 @@ enum {
- 	META_SSA,
- 	META_MAX,
- 	META_POR,
-+	DATA_GENERIC,
- };
- 
- #define MAX_RA_BLOCKS	64
-@@ -520,20 +521,6 @@ static inline bool IS_VALID_NID(struct f2fs_sb_info *sbi, u32 nid)
- 			<< (sbi->log_blocks_per_seg - 1)));
- }
- 
--static inline bool IS_VALID_BLK_ADDR(struct f2fs_sb_info *sbi, u32 addr)
--{
--	if (addr == NULL_ADDR || addr == NEW_ADDR)
--		return 1;
--
--	if (addr >= le64_to_cpu(F2FS_RAW_SUPER(sbi)->block_count) ||
--				addr < SM_I(sbi)->main_blkaddr) {
--		DBG(1, "block addr [0x%x]\n", addr);
--		return 0;
--	}
--	/* next block offset will be checked at the end of fsck. */
--	return 1;
--}
--
- static inline bool is_valid_data_blkaddr(block_t blkaddr)
- {
- 	if (blkaddr == NEW_ADDR || blkaddr == NULL_ADDR ||
 diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 64db1e5..9180deb 100644
+index 9180deb..3650873 100644
 --- a/fsck/fsck.c
 +++ b/fsck/fsck.c
-@@ -236,7 +236,7 @@ static int is_valid_summary(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+@@ -2407,6 +2407,8 @@ static void fix_checkpoint(struct f2fs_sb_info *sbi)
  
- 	get_node_info(sbi, nid, &ni);
- 
--	if (!IS_VALID_BLK_ADDR(sbi, ni.blk_addr))
-+	if (!f2fs_is_valid_blkaddr(sbi, ni.blk_addr, DATA_GENERIC))
- 		goto out;
- 
- 	/* read node_block */
-@@ -405,12 +405,12 @@ static int sanity_check_nid(struct f2fs_sb_info *sbi, u32 nid,
- 		return -EINVAL;
- 	}
- 
--	if (ni->blk_addr == NEW_ADDR) {
--		ASSERT_MSG("nid is NEW_ADDR. [0x%x]", nid);
-+	if (!is_valid_data_blkaddr(ni->blk_addr)) {
-+		ASSERT_MSG("nid->blk_addr is 0x%x. [0x%x]", ni->blk_addr, nid);
- 		return -EINVAL;
- 	}
- 
--	if (!IS_VALID_BLK_ADDR(sbi, ni->blk_addr)) {
-+	if (!f2fs_is_valid_blkaddr(sbi, ni->blk_addr, DATA_GENERIC)) {
- 		ASSERT_MSG("blkaddress is not valid. [0x%x]", ni->blk_addr);
- 		return -EINVAL;
- 	}
-@@ -676,7 +676,7 @@ void fsck_reada_node_block(struct f2fs_sb_info *sbi, u32 nid)
- 
- 	if (nid != 0 && IS_VALID_NID(sbi, nid)) {
- 		get_node_info(sbi, nid, &ni);
--		if (IS_VALID_BLK_ADDR(sbi, ni.blk_addr))
-+		if (f2fs_is_valid_blkaddr(sbi, ni.blk_addr, DATA_GENERIC))
- 			dev_reada_block(ni.blk_addr);
- 	}
+ 	ret = f2fs_fsync_device();
+ 	ASSERT(ret >= 0);
++
++	MSG(0, "Info: fix_checkpoint() cur_cp:%d\n", sbi->cur_cp);
  }
-@@ -1612,7 +1612,8 @@ static int __chk_dentries(struct f2fs_sb_info *sbi, int casefolded,
- 			struct node_info ni;
  
- 			get_node_info(sbi, ino, &ni);
--			if (IS_VALID_BLK_ADDR(sbi, ni.blk_addr)) {
-+			if (f2fs_is_valid_blkaddr(sbi, ni.blk_addr,
-+							DATA_GENERIC)) {
- 				dev_reada_block(ni.blk_addr);
- 				name_len = le16_to_cpu(dentry[i].name_len);
- 				if (name_len > 0)
-@@ -1867,7 +1868,7 @@ int fsck_chk_data_blk(struct f2fs_sb_info *sbi, int casefolded,
- 		return 0;
+ static void fix_checkpoints(struct f2fs_sb_info *sbi)
+@@ -3284,7 +3286,8 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 	if (sbi->total_valid_block_count == fsck->chk.valid_blk_cnt) {
+ 		printf(" [Ok..] [0x%x]\n", (u32)fsck->chk.valid_blk_cnt);
+ 	} else {
+-		printf(" [Fail] [0x%x]\n", (u32)fsck->chk.valid_blk_cnt);
++		printf(" [Fail] [0x%x, 0x%x]\n", sbi->total_valid_block_count,
++					(u32)fsck->chk.valid_blk_cnt);
+ 		verify_failed = true;
  	}
  
--	if (!IS_VALID_BLK_ADDR(sbi, blk_addr)) {
-+	if (!f2fs_is_valid_blkaddr(sbi, blk_addr, DATA_GENERIC)) {
- 		ASSERT_MSG("blkaddress is not valid. [0x%x]", blk_addr);
- 		return -EINVAL;
+@@ -3292,7 +3295,8 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 	if (sbi->total_valid_node_count == fsck->chk.valid_node_cnt) {
+ 		printf(" [Ok..] [0x%x]\n", fsck->chk.valid_node_cnt);
+ 	} else {
+-		printf(" [Fail] [0x%x]\n", fsck->chk.valid_node_cnt);
++		printf(" [Fail] [0x%x, 0x%x]\n", sbi->total_valid_node_count,
++						fsck->chk.valid_node_cnt);
+ 		verify_failed = true;
  	}
-@@ -1939,7 +1940,8 @@ int fsck_chk_orphan_node(struct f2fs_sb_info *sbi)
- 			if (c.preen_mode == PREEN_MODE_1 && !c.fix_on) {
- 				get_node_info(sbi, ino, &ni);
- 				if (!IS_VALID_NID(sbi, ino) ||
--				    !IS_VALID_BLK_ADDR(sbi, ni.blk_addr)) {
-+					!f2fs_is_valid_blkaddr(sbi, ni.blk_addr,
-+								DATA_GENERIC)) {
- 					free(orphan_blk);
- 					free(new_blk);
- 					return -EINVAL;
-@@ -1997,7 +1999,8 @@ int fsck_chk_quota_node(struct f2fs_sb_info *sbi)
- 		if (c.preen_mode == PREEN_MODE_1 && !c.fix_on) {
- 			get_node_info(sbi, ino, &ni);
- 			if (!IS_VALID_NID(sbi, ino) ||
--					!IS_VALID_BLK_ADDR(sbi, ni.blk_addr))
-+				!f2fs_is_valid_blkaddr(sbi, ni.blk_addr,
-+							DATA_GENERIC))
- 				return -EINVAL;
- 			continue;
- 		}
-@@ -2136,7 +2139,7 @@ int fsck_chk_meta(struct f2fs_sb_info *sbi)
- 			 */
- 			continue;
  
--		if (!IS_VALID_BLK_ADDR(sbi, blk)) {
-+		if (!f2fs_is_valid_blkaddr(sbi, blk, DATA_GENERIC)) {
- 			MSG(0, "\tError: nat entry[ino %u block_addr 0x%x]"
- 				" is in valid\n",
- 				ino, blk);
-diff --git a/fsck/fsck.h b/fsck/fsck.h
-index 02dcff8..89b1c6e 100644
---- a/fsck/fsck.h
-+++ b/fsck/fsck.h
-@@ -216,6 +216,8 @@ extern int f2fs_set_sit_bitmap(struct f2fs_sb_info *, u32);
- extern void fsck_init(struct f2fs_sb_info *);
- extern int fsck_verify(struct f2fs_sb_info *);
- extern void fsck_free(struct f2fs_sb_info *);
-+extern bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
-+					block_t blkaddr, int type);
- extern int f2fs_ra_meta_pages(struct f2fs_sb_info *, block_t, int, int);
- extern int f2fs_do_mount(struct f2fs_sb_info *);
- extern void f2fs_do_umount(struct f2fs_sb_info *);
+@@ -3300,7 +3304,8 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 	if (sbi->total_valid_node_count == fsck->chk.valid_nat_entry_cnt) {
+ 		printf(" [Ok..] [0x%x]\n", fsck->chk.valid_nat_entry_cnt);
+ 	} else {
+-		printf(" [Fail] [0x%x]\n", fsck->chk.valid_nat_entry_cnt);
++		printf(" [Fail] [0x%x, 0x%x]\n", sbi->total_valid_node_count,
++						fsck->chk.valid_nat_entry_cnt);
+ 		verify_failed = true;
+ 	}
+ 
+@@ -3308,7 +3313,8 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 	if (sbi->total_valid_inode_count == fsck->chk.valid_inode_cnt) {
+ 		printf(" [Ok..] [0x%x]\n", fsck->chk.valid_inode_cnt);
+ 	} else {
+-		printf(" [Fail] [0x%x]\n", fsck->chk.valid_inode_cnt);
++		printf(" [Fail] [0x%x, 0x%x]\n", sbi->total_valid_inode_count,
++						fsck->chk.valid_inode_cnt);
+ 		verify_failed = true;
+ 	}
+ 
+@@ -3317,7 +3323,9 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+ 						fsck->chk.sit_free_segs) {
+ 		printf(" [Ok..] [0x%x]\n", fsck->chk.sit_free_segs);
+ 	} else {
+-		printf(" [Fail] [0x%x]\n", fsck->chk.sit_free_segs);
++		printf(" [Fail] [0x%x, 0x%x]\n",
++			le32_to_cpu(F2FS_CKPT(sbi)->free_segment_count),
++			fsck->chk.sit_free_segs);
+ 		verify_failed = true;
+ 	}
+ 
 diff --git a/fsck/mount.c b/fsck/mount.c
-index 16c98cc..f0b0072 100644
+index f0b0072..f19f081 100644
 --- a/fsck/mount.c
 +++ b/fsck/mount.c
-@@ -767,6 +767,7 @@ bool f2fs_is_valid_blkaddr(struct f2fs_sb_info *sbi,
- 			return 0;
- 		break;
- 	case META_POR:
-+	case DATA_GENERIC:
- 		if (blkaddr >= MAX_BLKADDR(sbi) ||
- 			blkaddr < MAIN_BLKADDR(sbi))
- 			return 0;
-@@ -1596,7 +1597,8 @@ static int f2fs_early_init_nid_bitmap(struct f2fs_sb_info *sbi)
- 		block_t addr;
+@@ -2782,8 +2782,11 @@ void flush_journal_entries(struct f2fs_sb_info *sbi)
+ 	int n_nats = flush_nat_journal_entries(sbi);
+ 	int n_sits = flush_sit_journal_entries(sbi);
  
- 		addr = le32_to_cpu(nat_in_journal(journal, i).block_addr);
--		if (!IS_VALID_BLK_ADDR(sbi, addr)) {
-+		if (addr != NULL_ADDR &&
-+			!f2fs_is_valid_blkaddr(sbi, addr, DATA_GENERIC)) {
- 			MSG(0, "\tError: f2fs_init_nid_bitmap: addr(%u) is invalid!!!\n", addr);
- 			journal->n_nats = cpu_to_le16(i);
- 			c.fix_on = 1;
+-	if (n_nats || n_sits)
++	if (n_nats || n_sits) {
++		MSG(0, "Info: flush_journal_entries() n_nats: %d, n_sits: %d\n",
++							n_nats, n_sits);
+ 		write_checkpoints(sbi);
++	}
+ }
+ 
+ void flush_sit_entries(struct f2fs_sb_info *sbi)
+@@ -3259,6 +3262,8 @@ void write_checkpoint(struct f2fs_sb_info *sbi)
+ 
+ 	ret = f2fs_fsync_device();
+ 	ASSERT(ret >= 0);
++
++	MSG(0, "Info: write_checkpoint() cur_cp:%d\n", sbi->cur_cp);
+ }
+ 
+ void write_checkpoints(struct f2fs_sb_info *sbi)
 -- 
 2.25.1
 
