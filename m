@@ -2,65 +2,65 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45B47705160
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 May 2023 16:59:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DC1C705206
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 May 2023 17:24:22 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pyw9H-00014j-0d;
-	Tue, 16 May 2023 14:59:35 +0000
+	id 1pywXB-0001MW-ST;
+	Tue, 16 May 2023 15:24:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pyw9F-00014d-45
+ (envelope-from <chao@kernel.org>) id 1pywX7-0001MQ-LI
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 16 May 2023 14:59:33 +0000
+ Tue, 16 May 2023 15:24:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Pp1WTNN73VDTBOzVnsmUPI/cVr/EOVT11WTMQUoS7mg=; b=bJBoACoX6WuX5Pqq3FGct4tvFN
- 9TccvwBOsoon7BOLrsHplBjo873tnp4Ru+vNNw4//wCLGtkIWrMhId8Zu6bL4Cr1lrEJXqKj4fOBH
- y98V7LBV8H4ktOAC6EATsgJmN2v9x1rbN7Duf0b+jihkEPEsHvRBfSb4/fjOlFgorNoA=;
+ bh=s2s/ccMC4Z2K6TRahFRfnzlFlPl6sOgfOEPGE0q3ZR4=; b=Z9YD/PjYWvayoyHP1ox30N8oEM
+ nnm9bXDGzNFpfdp3sBP7lr+ko1EpiW8WcOnbz0rUTZxLuBwE1sAkVJezgj2PP/5fmk4ZwDAaNOWWU
+ T50wR/ivGc4Slpcg0Tp5q7kYZz1zkU+R7ddUnrDNrnnQvmFZTVYhBB1dJhAMCNg7IdAI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Pp1WTNN73VDTBOzVnsmUPI/cVr/EOVT11WTMQUoS7mg=; b=k
- IhZIBV/uXpoosWUml24WZXMUVlu4ujxYtfqapbjtysLq8KxT6M7oiTyVltAmfpUbfImt/nvrA4S/5
- ygfXmId5rcEwC7zS1LZGD2e1hVm0DDhYGHfZflaMpTX5dFPH/hVTXkBPqOGq2DWMvPk9P5EgsfB+w
- 9y009/IWEzvMyZ1A=;
+ List-Owner:List-Archive; bh=s2s/ccMC4Z2K6TRahFRfnzlFlPl6sOgfOEPGE0q3ZR4=; b=f
+ kAjpL6jpzv/DnO+QO0iy+OK+LcDSHYTBOGAJ3fO7gI1H3/zX5/YjOaxnz25rUZMLzybpX/+9f80hC
+ VNDhV3mcA8GzvGqsIU4FZ8EXuRWLLUDaHNynC1sLLuIfyFljmIZFbjH/jOHF1YqoE9OYGPFpISPpW
+ XK9ZD/cyfw6WZj00=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pyw9E-00066U-EZ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 16 May 2023 14:59:33 +0000
+ id 1pywX7-0007xW-2I for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 16 May 2023 15:24:13 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id D6B3361358
+ by dfw.source.kernel.org (Postfix) with ESMTPS id A5B8E62C8C
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 16 May 2023 14:59:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D03BC433EF;
- Tue, 16 May 2023 14:59:24 +0000 (UTC)
+ Tue, 16 May 2023 15:24:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD6B8C433D2;
+ Tue, 16 May 2023 15:24:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1684249166;
- bh=xadHQ5u7AP9D9UBRP9O31hXT7Tag8SIcHKaMxYMy4Xk=;
+ s=k20201202; t=1684250647;
+ bh=dlpta+O6AiRXSqeDkk4SbGJ4ZUr5sNITboxH95GYYEw=;
  h=From:To:Cc:Subject:Date:From;
- b=bOxujnbeamDXadHr13bQuuEetQvfsT6WgR06G+1jk5OmFv+qvsAT4vOT80iyvBy1z
- LhIPpLsyi1qFH1j/MYBYGp0LDMiDlASqrFOF2Mx5nwmPZwM3ucxvGl31Nx5vVWbg72
- +HW0/3WGxeUvFPJDFUJfofBM00kiKqEEe3rHjuL8U097afwPuiyDuXMMfuidUKz3Yt
- 1MK7vFZp+FLJxWH40T1QJzxb44khIB75dCXJA2A/DjEHWGwTb2WBoQSvyM9AznlJyf
- nt7kkZeRCOb/J1cAtJupupcMtX39o64ycpAlSdegvfm+TzcPfxz9szUfYqJoSHw1+5
- GrnEP091obxhg==
+ b=kJEA5hI+Wdi20yIxk1fqICrPWnarW0/Ac8m1J/cW04ZVawLaeNW3Ng6SjJdr8anfd
+ vnUvCtmhQEFdVdJERDv2ztM79XEg45STq0Agc0zjl5gxL9yTGyqhhjH5G0nmi71NFC
+ 6/BjUdfKMRn4QUPcAl+mzEyMkgecPDEfxACm5clJ8aosHHQ45MvijrIgwOhrOoIxKC
+ jFZAzL63bAnIUWJilQJ4vYfC+uM56FZpmooQzZO8ptTEPivZH1ufuQyrzbzH5YDCK9
+ jXUl60Z9ThHS98E50LkUWDAPhVoUBtLRKz9Vokgzh/AbvmOGTr7KtpXI+3ILq6ADYg
+ n1hR65mihswjw==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Tue, 16 May 2023 22:59:11 +0800
-Message-Id: <20230516145911.162431-1-chao@kernel.org>
+Date: Tue, 16 May 2023 23:23:46 +0800
+Message-Id: <20230516152346.190199-1-chao@kernel.org>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Spam-Score: -5.2 (-----)
@@ -70,12 +70,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In IRQ context, it wakes up workqueue to record errors into
- on-disk superblock fields rather than in-memory fields. Signed-off-by: Chao
- Yu <chao@kernel.org> --- v2: - make f2fs_record_errors() static.
- fs/f2fs/compress.c
- | 2 +- fs/f2fs/f2fs.h | 1 + fs/f2fs/super.c | 26 +++++++++++++++++++++++---
- 3 files changed, 25 [...] 
+ Content preview:  We should set noatime bit for quota files, since no one cares
+ about atime of quota file, and we should set immutalbe bit as well, due to
+ nobody should write to the file through exported interfaces. Meanwhile this
+ patch use inode_lock to avoid race condition during inode->i_flags,
+ f2fs_inode->i_flags update. 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,8 +91,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pyw9E-00066U-EZ
-Subject: [f2fs-dev] [PATCH v2] f2fs: flush error flags in workqueue
+X-Headers-End: 1pywX7-0007xW-2I
+Subject: [f2fs-dev] [PATCH] f2fs: fix to set noatime and immutable flag for
+ quota file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,97 +110,46 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In IRQ context, it wakes up workqueue to record errors into on-disk
-superblock fields rather than in-memory fields.
+We should set noatime bit for quota files, since no one cares about
+atime of quota file, and we should set immutalbe bit as well, due to
+nobody should write to the file through exported interfaces.
+
+Meanwhile this patch use inode_lock to avoid race condition during
+inode->i_flags, f2fs_inode->i_flags update.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
-v2:
-- make f2fs_record_errors() static.
- fs/f2fs/compress.c |  2 +-
- fs/f2fs/f2fs.h     |  1 +
- fs/f2fs/super.c    | 26 +++++++++++++++++++++++---
- 3 files changed, 25 insertions(+), 4 deletions(-)
+ fs/f2fs/super.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 10b545a1088e..75d3d99fffcc 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -744,7 +744,7 @@ void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_task)
- 
- 		/* Avoid f2fs_commit_super in irq context */
- 		if (!in_task)
--			f2fs_save_errors(sbi, ERROR_FAIL_DECOMPRESSION);
-+			f2fs_handle_error_async(sbi, ERROR_FAIL_DECOMPRESSION);
- 		else
- 			f2fs_handle_error(sbi, ERROR_FAIL_DECOMPRESSION);
- 		goto out_release;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 0f05c1dd633f..99edc4981edf 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3563,6 +3563,7 @@ void f2fs_save_errors(struct f2fs_sb_info *sbi, unsigned char flag);
- void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason,
- 							bool irq_context);
- void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error);
-+void f2fs_handle_error_async(struct f2fs_sb_info *sbi, unsigned char error);
- int f2fs_commit_super(struct f2fs_sb_info *sbi, bool recover);
- int f2fs_sync_fs(struct super_block *sb, int sync);
- int f2fs_sanity_check_ckpt(struct f2fs_sb_info *sbi);
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 51812f459581..17082dc3c1a3 100644
+index 9f15b03037db..5d3ac196f0d5 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -3980,6 +3980,11 @@ static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
- 	f2fs_down_write(&sbi->sb_lock);
- 
- 	spin_lock_irqsave(&sbi->error_lock, flags);
-+	if (sbi->error_dirty) {
-+		memcpy(F2FS_RAW_SUPER(sbi)->s_errors, sbi->errors,
-+							MAX_F2FS_ERRORS);
-+		sbi->error_dirty = false;
-+	}
- 	memcpy(raw_super->s_stop_reason, sbi->stop_reason, MAX_STOP_REASON);
- 	spin_unlock_irqrestore(&sbi->error_lock, flags);
- 
-@@ -4019,12 +4024,10 @@ static bool f2fs_update_errors(struct f2fs_sb_info *sbi)
- 	return need_update;
- }
- 
--void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error)
-+static void f2fs_record_errors(struct f2fs_sb_info *sbi, unsigned char error)
+@@ -2713,6 +2713,7 @@ static int f2fs_quota_enable(struct super_block *sb, int type, int format_id,
  {
+ 	struct inode *qf_inode;
+ 	unsigned long qf_inum;
++	unsigned int qf_flag = F2FS_NOATIME_FL | F2FS_IMMUTABLE_FL;
  	int err;
  
--	f2fs_save_errors(sbi, error);
--
- 	f2fs_down_write(&sbi->sb_lock);
+ 	BUG_ON(!f2fs_sb_has_quota_ino(F2FS_SB(sb)));
+@@ -2728,7 +2729,15 @@ static int f2fs_quota_enable(struct super_block *sb, int type, int format_id,
+ 	}
  
- 	if (!f2fs_update_errors(sbi))
-@@ -4038,6 +4041,23 @@ void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error)
- 	f2fs_up_write(&sbi->sb_lock);
- }
- 
-+void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error)
-+{
-+	f2fs_save_errors(sbi, error);
-+	f2fs_record_errors(sbi, error);
-+}
+ 	/* Don't account quota for quota files to avoid recursion */
++	inode_lock(qf_inode);
+ 	qf_inode->i_flags |= S_NOQUOTA;
 +
-+void f2fs_handle_error_async(struct f2fs_sb_info *sbi, unsigned char error)
-+{
-+	f2fs_save_errors(sbi, error);
++	if (!(F2FS_I(qf_inode)->i_flags & qf_flag)) {
++		F2FS_I(qf_inode)->i_flags |= qf_flag;
++		f2fs_set_inode_flags(qf_inode);
++	}
++	inode_unlock(qf_inode);
 +
-+	if (!sbi->error_dirty)
-+		return;
-+	if (!test_bit(error, (unsigned long *)sbi->errors))
-+		return;
-+	schedule_work(&sbi->s_error_work);
-+}
-+
- static bool system_going_down(void)
- {
- 	return system_state == SYSTEM_HALT || system_state == SYSTEM_POWER_OFF
+ 	err = dquot_load_quota_inode(qf_inode, type, format_id, flags);
+ 	iput(qf_inode);
+ 	return err;
 -- 
 2.25.1
 
