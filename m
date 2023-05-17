@@ -2,66 +2,68 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 642177062C8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 May 2023 10:27:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B10A7062C3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 May 2023 10:27:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pzCV6-0003fs-RN;
-	Wed, 17 May 2023 08:27:13 +0000
+	id 1pzCV1-0003m2-4G;
+	Wed, 17 May 2023 08:27:07 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pzCV0-0003fl-SO
+ (envelope-from <chao@kernel.org>) id 1pzCUx-0003lu-1m
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 May 2023 08:27:07 +0000
+ Wed, 17 May 2023 08:27:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nZRmxI1AVmtsviVxaSVAXCPMxw+5Ch/7OmwEtYKL5Zo=; b=fhUyjvt1CLP9qBHXbUN0/dQad2
- k+k2NyfkcuYhONmYpjvMqg9stowMZXXX8cJlzWGWYaKN3SgetNumZIHqhbHNpz+1xzzUmkFGiq6Tq
- OGhBHt7hawMfELc3yq/CNAhST2OHMjriDRUnY3d5yKfB1lLj8inC1U0LSS8U0w7S6Bqg=;
+ bh=djDfp/RRblAdZ+qFbz4xYZLtO7O+Y63PPFgvbyOtcvk=; b=GOMjKb0wGxx2bhyTeOxq6E+8TD
+ gOzEuOyCinY2VxdZSBiyOmpL115CwkY9eE9ph8m3Lf7O2QTSQDq2JQHBTnGhuPgpBxla5v8NX+uJj
+ QcCwRK6DWb1XD7Z63VoKtKymPsRaXJMCq3aCOW4tV1jKHw1DnBYsf6SOgKzTftSz0TS4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=nZRmxI1AVmtsviVxaSVAXCPMxw+5Ch/7OmwEtYKL5Zo=; b=m
- KqVrk3udH3PLs1cEsV25yV88vS3wPeoWQoxHBmdTT8qhSATA74Lgq6UVdGA5sjv/sJZQtDxADmPwy
- nrL1EuhCMJrAcgi9S5YDNr0zgf4WnHCeyYBKCxRp7Hpj6Xmmh19bMU8BcH6MYj+yvpYY/V2N1pFL9
- Cr4OStG9jU49U0Cw=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=djDfp/RRblAdZ+qFbz4xYZLtO7O+Y63PPFgvbyOtcvk=; b=AFZXDc4YfLpKtGQX+Z5VbHE5eV
+ AP+B6xDlN+vhnjUlZFDHeuHy24KZhFB/ihItnhjXZc8g0xFGdtQE2f+RlsPgzJ+H9HKJwEBqvmjpV
+ j+5rttzEFtgUb3eSu6skXLjfHvVPP/gDT0pR+7XhyCBtW1Wt2CHyCxbE9JpR0ygX5CSo=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pzCUu-0000y7-Uj for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 May 2023 08:27:05 +0000
+ id 1pzCUw-00AqVL-A2 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 17 May 2023 08:27:02 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8F68C64392
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E991A64398
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 17 May 2023 08:26:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73C24C4339B;
  Wed, 17 May 2023 08:26:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1694EC433D2;
- Wed, 17 May 2023 08:26:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1684312015;
- bh=nhs9XZt9TE1JZayFKciVfCHV26Yeb2iIfKqqNkCp2+g=;
- h=From:To:Cc:Subject:Date:From;
- b=fGWOqAVvQ8SsfZOZ8ak97rQCASkAFoCh6Tspd5YiJrW/D3CWidb+vLyObeWc+dBqn
- 653lbCOBgOj2mxCK5V5f/+NVn26eXQfwkTzE7VfiVtErQ8LCOCR3Bd1l4fC18KpsEx
- TY5h6KrItQv+9UgrRspRuNwp3sumg8UuDnT2b70VtsQ3pfJ7Lq7LFglSezb+N8hooM
- bI+oNQlAYuxoNStU1FUuSUWVdbEeQJewhvd8sLDtOY+WrhlQCgp6vMRAf9LdVu/HlN
- dwanLfYo2JrU46j//iOAKAQNg4qRQrtPzcxkbS9Hv0rEPKuI8+yp0op2X0sx7ogTrv
- AKXfAce8yzd0g==
+ s=k20201202; t=1684312016;
+ bh=uS2u4IltUkAClq+msBoWRZCWsmFWrqV/LxWB6PcUyjM=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=OP1ftbJqQvM1i1Cu4zAuXyRPAHiQHlSl4S4nmhzRVMhnEI4V9436V/I11OzO9zA4X
+ 4e78RegXZV71/sVjFNnq+uWjGDlNbtn0qy6u4gCqvwE2gDuC6BZG2+fLurv+brrKWt
+ 0SiLdj3YmJvTq8qfaR6121HJPyhYkspPRIX/TBAJFd45orVcdar0B9MSWNrtqPgnvm
+ Ud/GSSQ3bP3hJ53vMWE7iYhm9XbeV7VjP2Dyd9iCETflEiq/1hC57R/aYvEiX0A5hg
+ 0nczVNKXzdCRiNomgjV+EbR4kT9/Xb+aX1nVw5YL3mh6lzfXiluaBolDjKGgdeT3we
+ DlTZ+XxFgmCuA==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Wed, 17 May 2023 16:26:29 +0800
-Message-Id: <20230517082632.748914-1-chao@kernel.org>
+Date: Wed, 17 May 2023 16:26:30 +0800
+Message-Id: <20230517082632.748914-2-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230517082632.748914-1-chao@kernel.org>
+References: <20230517082632.748914-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
@@ -70,12 +72,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Disk quota file is controlled by filesystem quota subsystem, 
- access time of quota file is almost random, and should be meanless to user,
- so let's add noatime to quota file. Meanwhile,
- set quota file w/ F2FS_IMMUTABLE_FL
- instead of FS_IMMUTABLE_FL, since F2FS_IMMUTABLE_FL is on-disk flag, however
- FS_IMMUTABLE_FL is in-memory one. 
+ Content preview:  - remove unneeded nat initialization for root/quota inode
+ due to it has been initialized in nat journal. - name f2fs_update_nat_root()
+ to f2fs_update_nat_default(). Signed-off-by: Chao Yu <chao@kernel.org> ---
+ mkfs/f2fs_format.c | 24 ++ 1 file changed, 2 insertions(+), 22 deletions(-)
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,8 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pzCUu-0000y7-Uj
-Subject: [f2fs-dev] [PATCH 1/4] f2fs-tools: add noatime for quota file
+X-Headers-End: 1pzCUw-00AqVL-A2
+Subject: [f2fs-dev] [PATCH 2/4] mkfs.f2fs: remove unneeded nat
+ initialization in f2fs_update_nat_root()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,81 +111,67 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Disk quota file is controlled by filesystem quota subsystem, access time
-of quota file is almost random, and should be meanless to user, so let's
-add noatime to quota file.
-
-Meanwhile, set quota file w/ F2FS_IMMUTABLE_FL instead of FS_IMMUTABLE_FL,
-since F2FS_IMMUTABLE_FL is on-disk flag, however FS_IMMUTABLE_FL is in-memory
-one.
+- remove unneeded nat initialization for root/quota inode due to
+it has been initialized in nat journal.
+- name f2fs_update_nat_root() to f2fs_update_nat_default().
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fsck/node.c             | 2 +-
- include/f2fs_fs.h       | 7 ++++++-
- mkfs/f2fs_format.c      | 2 +-
- tools/f2fs_io/f2fs_io.h | 4 ++++
- 4 files changed, 12 insertions(+), 3 deletions(-)
+ mkfs/f2fs_format.c | 24 ++----------------------
+ 1 file changed, 2 insertions(+), 22 deletions(-)
 
-diff --git a/fsck/node.c b/fsck/node.c
-index 9ce8a72..4dc7890 100644
---- a/fsck/node.c
-+++ b/fsck/node.c
-@@ -62,7 +62,7 @@ int f2fs_rebuild_qf_inode(struct f2fs_sb_info *sbi, int qtype)
- 
- 	raw_node->i.i_size = cpu_to_le64(1024 * 6);
- 	raw_node->i.i_blocks = cpu_to_le64(1);
--	raw_node->i.i_flags = FS_IMMUTABLE_FL;
-+	raw_node->i.i_flags = F2FS_NOATIME_FL | F2FS_IMMUTABLE_FL;
- 
- 	if (is_set_ckpt_flags(ckpt, CP_CRC_RECOVERY_FLAG))
- 		cp_ver |= (cur_cp_crc(ckpt) << 32);
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 936a5d8..8475645 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -750,7 +750,12 @@ enum {
- #define QUOTA_DATA(i)		(2)
- #define QUOTA_INO(sb,t)	(le32_to_cpu((sb)->qf_ino[t]))
- 
--#define FS_IMMUTABLE_FL		0x00000010 /* Immutable file */
-+/*
-+ * On-disk inode flags (f2fs_inode::i_flags)
-+ */
-+#define F2FS_IMMUTABLE_FL		0x00000010 /* Immutable file */
-+#define F2FS_NOATIME_FL			0x00000080 /* do not update atime */
-+
- 
- #define F2FS_ENC_UTF8_12_1	1
- #define F2FS_ENC_STRICT_MODE_FL	(1 << 0)
 diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
-index ef5d9a6..df6bde2 100644
+index df6bde2..620f779 100644
 --- a/mkfs/f2fs_format.c
 +++ b/mkfs/f2fs_format.c
-@@ -1364,7 +1364,7 @@ static int f2fs_write_qf_inode(int qtype, int offset)
+@@ -1413,12 +1413,10 @@ static int f2fs_write_qf_inode(int qtype, int offset)
+ 	return 0;
+ }
  
- 	raw_node->i.i_size = cpu_to_le64(1024 * 6);
- 	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
--	raw_node->i.i_flags = FS_IMMUTABLE_FL;
-+	raw_node->i.i_flags = F2FS_NOATIME_FL | F2FS_IMMUTABLE_FL;
+-static int f2fs_update_nat_root(void)
++static int f2fs_update_nat_default(void)
+ {
+ 	struct f2fs_nat_block *nat_blk = NULL;
+ 	uint64_t nat_seg_blk_offset = 0;
+-	enum quota_type qtype;
+-	int i;
  
- 	raw_node->footer.next_blkaddr = cpu_to_le32(
- 			get_sb(main_blkaddr) +
-diff --git a/tools/f2fs_io/f2fs_io.h b/tools/f2fs_io/f2fs_io.h
-index 58be8f8..b4aa9cf 100644
---- a/tools/f2fs_io/f2fs_io.h
-+++ b/tools/f2fs_io/f2fs_io.h
-@@ -167,6 +167,10 @@ struct fscrypt_get_policy_ex_arg {
- #define F2FS_IOC_FSGETXATTR		FS_IOC_FSGETXATTR
- #define F2FS_IOC_FSSETXATTR		FS_IOC_FSSETXATTR
+ 	nat_blk = calloc(F2FS_BLKSIZE, 1);
+ 	if(nat_blk == NULL) {
+@@ -1426,24 +1424,6 @@ static int f2fs_update_nat_root(void)
+ 		return -1;
+ 	}
  
-+#ifndef FS_IMMUTABLE_FL
-+#define FS_IMMUTABLE_FL			0x00000010 /* Immutable file */
-+#endif
-+
- #ifndef FS_ENCRYPT_FL
- #define FS_ENCRYPT_FL			0x00000800 /* Encrypted file */
+-	/* update quota */
+-	for (qtype = i = 0; qtype < F2FS_MAX_QUOTAS; qtype++) {
+-		if (!((1 << qtype) & c.quota_bits))
+-			continue;
+-		nat_blk->entries[sb->qf_ino[qtype]].block_addr =
+-				cpu_to_le32(get_sb(main_blkaddr) +
+-				c.cur_seg[CURSEG_HOT_NODE] *
+-				c.blks_per_seg + i + 1);
+-		nat_blk->entries[sb->qf_ino[qtype]].ino = sb->qf_ino[qtype];
+-		i++;
+-	}
+-
+-	/* update root */
+-	nat_blk->entries[get_sb(root_ino)].block_addr = cpu_to_le32(
+-		get_sb(main_blkaddr) +
+-		c.cur_seg[CURSEG_HOT_NODE] * c.blks_per_seg);
+-	nat_blk->entries[get_sb(root_ino)].ino = sb->root_ino;
+-
+ 	/* update node nat */
+ 	nat_blk->entries[get_sb(node_ino)].block_addr = cpu_to_le32(1);
+ 	nat_blk->entries[get_sb(node_ino)].ino = sb->node_ino;
+@@ -1660,7 +1640,7 @@ static int f2fs_create_root_dir(void)
+ 	}
  #endif
+ 
+-	err = f2fs_update_nat_root();
++	err = f2fs_update_nat_default();
+ 	if (err < 0) {
+ 		MSG(1, "\tError: Failed to update NAT for root!!!\n");
+ 		goto exit;
 -- 
 2.40.1
 
