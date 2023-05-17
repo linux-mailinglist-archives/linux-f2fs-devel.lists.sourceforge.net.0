@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E663705D62
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 May 2023 04:40:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91167705D65
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 May 2023 04:44:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pz75Z-0004gQ-LY;
-	Wed, 17 May 2023 02:40:29 +0000
+	id 1pz79p-0001pq-FS;
+	Wed, 17 May 2023 02:44:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pz75W-0004gJ-1X
+ (envelope-from <chao@kernel.org>) id 1pz79o-0001pk-5Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 May 2023 02:40:26 +0000
+ Wed, 17 May 2023 02:44:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+UGL8REk3T2oLZSds1bwFk4w7dg+trb+BTfpGRQNXew=; b=TCFa9RLxOShc2WGffswjhksHav
- q3kboHSkbxWjneSnrMFDRZ/SqVz/DmEdWW2q2hV6UELLSXJcb3RgbRYsBU+7l4rEnEf5qDtY8KCK0
- VOdkTLetMJXJk0fh0JI585D2F5WVDdS4A4H2xfrTUTCOK9JyFtOLljMNtCs2KokCeT6s=;
+ bh=/OsnaMXHBh0eBqDrP7f+L7YTCMeqtymn6XfunynblmE=; b=KnVWM0yDspplN9OK8dAp/MyMQ9
+ 9La4I0o4hXvoFo7+lJrPX1emAuLVP44ZOj2847AwQQXwuxSeXckn1GNxBn2lhBOJ6v75BDWFAbyh+
+ OlDdFoWRcuqj6anjt93o8fyb2xnZmBABe3nsAJYV+95Bd1vlWreGtK2dH5GoWjHU/XN4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,45 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+UGL8REk3T2oLZSds1bwFk4w7dg+trb+BTfpGRQNXew=; b=dwMXYN9sS8OQdDiYnS3P8tUi93
- niVbyJNmwaEG2skA/Jo+zd4XDXMC91TGBkMLvSfS8ACpCjIgzvt3N12Z99e7wkaB1RE+s+97/161E
- M0A+7mA5QV3nkb9pYM/BiiDxzYfA7ejEzkEQGL4oQeaNxmz0IeYSwecm8VrATjh1T2lI=;
+ bh=/OsnaMXHBh0eBqDrP7f+L7YTCMeqtymn6XfunynblmE=; b=ZXwnpFEaNRUwssp2vj7SF3/NqD
+ FzTwD8aWrDjp6QzQd2F95ME1yVqi6FdfNE7efm6golog+Z+p5ggQXho/qSC4TEPfxxooOzu+p3ZOc
+ 0iRtVy2rLKJc8o1/2OA2Z7mIGQ49OdsTjo+ZzSHtiPWMG1DnY9n1gp1K+4imF5am3g2c=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pz75V-00024J-GF for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 May 2023 02:40:25 +0000
+ id 1pz79o-0002LA-D2 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 17 May 2023 02:44:52 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id DF14061085;
- Wed, 17 May 2023 02:40:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2495C433EF;
- Wed, 17 May 2023 02:40:14 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 09AB760FFC;
+ Wed, 17 May 2023 02:44:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C44ADC433EF;
+ Wed, 17 May 2023 02:44:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1684291216;
- bh=NdrwmnejHdoL348J6WmccW3ZdlHY3rSkgi/6/8J/jcc=;
+ s=k20201202; t=1684291486;
+ bh=qNDtCoajT3pDCRQM68Y/i7MapdhfLICp5GbRlmJgsYo=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=i8PH5HNXNqDJ4w+iqIxFtytlXJGS9XfvLYfHVXQG8mf6Xd4zUba616U2iUVpYnQK6
- h+VN2FU0ztxn/omhVl8Scc1WImm6E4BLmszILp8I52pfG3nYGM+7JvUAQxxs5UtdsM
- jEfvZDvF3qxSB6Bph8nWIsXrVMHoDaUTKFMVIdB+3Gv0yS2jC38pDD2k1eGpdE+0zI
- 8WtNur9FAsMZAOKVtX3ItRsiIhvrJizJWhOows6raG2sli7QdfF7pEvyOj6qm7QmnB
- I39THNrhW6mUtcL9aVZUtzj3TostteHDfylp9WRgufK591ooBmADKBNgIb4A+5o4gK
- x0cj0tShqAMjg==
-Message-ID: <a089749c-061a-f5b7-1d09-2fc0fce2f76a@kernel.org>
-Date: Wed, 17 May 2023 10:40:13 +0800
+ b=cKrDFv3Fqj0jRSbVb5JVYzZZ6aQ2YaEDTDuh33Mx3eSy6p93EUDjLrIEryyNUJ4jq
+ YpBZPK71rmQNCGaH5Y8aFgRhseEv4fypMy2NHLT0EWd2V61V5tOkNEqPEBMtbiMmur
+ mVLGVziAfjLXNvcZ51S3R2KEV+rkYzvcipIojRDruDckZeDHl2OwJ0erUrT46GS/eC
+ NsQbO2uAvy9NuSeI67uvwx61Ll8IRSEz+F5ATL9NlJZTuUYoYcVIOfLhSjX6NTn0Tx
+ 5q9El8T4cyTf0Ig8fSsDJq7eJHEdGVw9fboKGsguIBcH7g8+1FqtQXOpm1vfIQe+l3
+ cDLHLLKomed3g==
+Message-ID: <45eb63c6-a147-776a-99b5-7ac06848ede8@kernel.org>
+Date: Wed, 17 May 2023 10:44:43 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
 Content-Language: en-US
-To: yonggil.song@samsung.com, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-References: <CGME20230512041610epcms2p506e7539079670524146ba6eeeb9dbd63@epcms2p5>
- <20230512041610epcms2p506e7539079670524146ba6eeeb9dbd63@epcms2p5>
+To: Wu Bo <bo.wu@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20230516120747.68844-1-bo.wu@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230512041610epcms2p506e7539079670524146ba6eeeb9dbd63@epcms2p5>
+In-Reply-To: <20230516120747.68844-1-bo.wu@vivo.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -77,10 +73,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/5/12 12:16, Yonggil Song wrote: > There was a bug
- that finishing FG GC unconditionally because free sections > are
- over-estimated
- after checkpoint in FG GC. > This patch initializes sec_freed [...] 
+ Content preview:  On 2023/5/16 20:07, Wu Bo wrote: > Modify the order between
+ 'trace_f2fs_iget' & 'unlock_new_inode', so the > I_NEW can pass to the trace
+ event when the inode initialised. Why is it needed? And trace_f2fs_iget()
+ won't print inode->i_state? 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -98,9 +94,8 @@ X-Spam-Report: Spam detection software,
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -2.7 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pz75V-00024J-GF
-Subject: Re: [f2fs-dev] [PATCH v1] f2fs: Fix over-estimating free section
- during FG GC
+X-Headers-End: 1pz79o-0002LA-D2
+Subject: Re: [f2fs-dev] [PATCH 1/1] f2fs: pass I_NEW flag to trace event
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,21 +107,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Seokhwan Kim <sukka.kim@samsung.com>, beomsu kim <beomsu7.kim@samsung.com>
+Cc: wubo.oduw@gmail.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/5/12 12:16, Yonggil Song wrote:
-> There was a bug that finishing FG GC unconditionally because free sections
-> are over-estimated after checkpoint in FG GC.
-> This patch initializes sec_freed by every checkpoint in FG GC.
-> 
-> Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
+On 2023/5/16 20:07, Wu Bo wrote:
+> Modify the order between 'trace_f2fs_iget' & 'unlock_new_inode', so the
+> I_NEW can pass to the trace event when the inode initialised.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Why is it needed? And trace_f2fs_iget() won't print inode->i_state?
 
 Thanks,
+
+> 
+> Signed-off-by: Wu Bo <bo.wu@vivo.com>
+> ---
+>   fs/f2fs/inode.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> index cf4327ad106c..caf959289fe7 100644
+> --- a/fs/f2fs/inode.c
+> +++ b/fs/f2fs/inode.c
+> @@ -577,8 +577,8 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+>   		file_dont_truncate(inode);
+>   	}
+>   
+> -	unlock_new_inode(inode);
+>   	trace_f2fs_iget(inode);
+> +	unlock_new_inode(inode);
+>   	return inode;
+>   
+>   bad_inode:
 
 
 _______________________________________________
