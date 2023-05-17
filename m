@@ -2,72 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E68D705CC5
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 May 2023 04:02:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80DA0705D50
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 May 2023 04:31:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pz6V9-000882-Ra;
-	Wed, 17 May 2023 02:02:51 +0000
+	id 1pz6wc-0001eW-Ll;
+	Wed, 17 May 2023 02:31:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pz6V8-00087w-EE
+ (envelope-from <chao@kernel.org>) id 1pz6wb-0001eQ-OV
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 May 2023 02:02:50 +0000
+ Wed, 17 May 2023 02:31:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=J2i860tLQLeVsbnPAQed6YnJPOyM7XEzPNTBOaECD2M=; b=F8hCcUjRSQaHtWOL/aUUbYtLwf
- YcIHzrMLDIeu0dNCrcC5IP8q/EQOZ8BPIybZCmwi679pTHJHO7euhfJ0q2PpcLlbI9ujvgRbRq3lP
- VGNk9IKXdoI6i6UQPqleOQBEQ5pxeQmRenA25PfkuachBBRSbBCRg4hFBzqrM0YouPwA=;
+ bh=HPZx4nJ+q7FUcC8sCwuGCWkOXLIFkSBYHgQRF2FXg34=; b=nHOCuXTq4X+y5O4H8OiYtG4OfA
+ sByY5EAZU9rnEL+482DV0oOK8j9Y/Gjtny8yasSN+kLQk6VkwZnogfSormiXyF7VILj+q+ZVEZ2mF
+ A4cRte03YItamWmghh4eVpU1PtUanMfbBiyhdkOsjevG4ecYJsSokqKSfPYlguYQAT7g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
+ References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=J2i860tLQLeVsbnPAQed6YnJPOyM7XEzPNTBOaECD2M=; b=Kf0hhQBV7U660A7Vw53pbrQ8CO
- prgbpOMYV5KyEmRGiz6uwnwRyFTjpGY7dLjlPRh3rYA7Y7AWxLoMyungx2si17LFf5jgTlhWCxX2X
- 0PYBOL1/oWCvRcLWd1pPVy3La++fylFpf/SXstjxVT+ss7sro2AXmIXKIaDe/XHkQxcc=;
+ bh=HPZx4nJ+q7FUcC8sCwuGCWkOXLIFkSBYHgQRF2FXg34=; b=Y23NoJll6AAXy/62OOUDhFQqsV
+ mNP87stwgZvXxPPiypyrGC1YH47wfqI1/8QyeQQox72tWFsZuHkHsmANUgSOm6jH33y420sRTOqko
+ wu/wXORzXFkF+9/2JkP22ql8FCAlOuuxDecm3PaW5tvf0x7G84fENtbRUAKz/lLOW9Kc=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pz6V7-00008v-SM for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 May 2023 02:02:50 +0000
+ id 1pz6wX-00AP3S-OD for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 17 May 2023 02:31:14 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 78D1361253
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 17 May 2023 02:02:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D55BC433EF;
- Wed, 17 May 2023 02:02:43 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5C087640DC;
+ Wed, 17 May 2023 02:31:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42D41C433EF;
+ Wed, 17 May 2023 02:31:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1684288963;
- bh=X3/tQnIYCqBzehMVDwTZlPr0yhayMhgorwDhACGUN4k=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=kbGL+SqDb7dp7zDc9WgIb4Wh7xTu2BMFlmzuberLJ8RspfpGb9BrEKEfQQ+uFQxU/
- fVB99cDIBYiAm6AkvRdHxzWaSMd+xuc7BEy1aulj/6sgOu9NrmYLphloCXfiPv4lpl
- 6UjvWOPgxCzULAqfCFWINjxDchq3czUVHC+0PS13ajNSh5HuBHj4VLx3hpeGbxwrg1
- oFlmwOwPKr6U+eXvGcML8apQJ7D+ie1eUz99ha9pCia19sfjy6Il54lDCmOslz7gjj
- 2bXLaZMPBRu+7MRyhm+Jkk1FbBc4uPN9wuzT/9j4arT7WZVhPDPQa/l4dEmBkVKz/W
- PJwKYqo+TnHWQ==
-Message-ID: <0332822f-4798-40d0-71c6-cab4580f8400@kernel.org>
-Date: Wed, 17 May 2023 10:02:41 +0800
+ s=k20201202; t=1684290663;
+ bh=U3hlYielRl+Zlfry5z+DIvZqfK56E0/XCd0A2B3lgVQ=;
+ h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
+ b=dspg+YXHIiktfnthq/TguCfKe+h6PuxcJxeqL71F/VnkX1rSCaOqJstrg0WDviutJ
+ HiD5KnnD1cZszmksYylYXQn6VkvWwhm37EMD4kC4OtYqm1MORQ9vI4COcymY+r9r+Y
+ uDZuF0yYThajzSZnv5jUatXRVEuCbXouiOGgEI1Z3Dgm3D2yBQH3nhrxZCjV9wFtpg
+ Tf+RAqJTt35AQxDIhI1vBNvSTJBVqMggqCnH04M7ftGKeoIBlpET2pXpYxDkzmfXva
+ rtLUoEldKFmuwMw+MQ88rCo+qnPYnxwDqS2IeFfta+kyPSR7Mm8VAw4lN/IC1pm4K+
+ ebS4UiTfqlsLw==
+Message-ID: <5f0218d5-f11d-92db-097a-1db76a142138@kernel.org>
+Date: Wed, 17 May 2023 10:31:00 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230505100205.1921708-1-chao@kernel.org>
- <20230505100205.1921708-6-chao@kernel.org> <ZFlQjq/nLX16rZYB@google.com>
+To: Yangtao Li <frank.li@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20230511091308.10509-1-frank.li@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZFlQjq/nLX16rZYB@google.com>
+In-Reply-To: <20230511091308.10509-1-frank.li@vivo.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -75,9 +73,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/5/9 3:42, Jaegeuk Kim wrote: > Added this to avoid
- android build failure. > > --- a/include/f2fs_fs.h > +++ b/include/f2fs_fs.h
- > @@ -23,6 +23,7 @@ > > #include <stdio.h> > #include <stdlib.h> [...] 
+ Content preview:  On 2023/5/11 17:13, Yangtao Li wrote: > When an EFSCORRUPTED
+ error occurs in f2fs, report the error to > userspace monitoring tools. >
+ > Signed-off-by: Yangtao Li <frank.li@vivo.com> > --- > fs/f2fs/s [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,9 +93,9 @@ X-Spam-Report: Spam detection software,
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -2.7 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pz6V7-00008v-SM
-Subject: Re: [f2fs-dev] [PATCH 6/6] f2fs-tools: use f2fs_init_inode() to
- clean up codes
+X-Headers-End: 1pz6wX-00AP3S-OD
+Subject: Re: [f2fs-dev] [PATCH] f2fs: add fsnotify_sb_error() in
+ f2fs_save_errors
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,28 +107,49 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/5/9 3:42, Jaegeuk Kim wrote:
-> Added this to avoid android build failure.
+On 2023/5/11 17:13, Yangtao Li wrote:
+> When an EFSCORRUPTED error occurs in f2fs, report the error to
+> userspace monitoring tools.
 > 
-> --- a/include/f2fs_fs.h
-> +++ b/include/f2fs_fs.h
-> @@ -23,6 +23,7 @@
+> Signed-off-by: Yangtao Li <frank.li@vivo.com>
+> ---
+>   fs/f2fs/super.c | 3 +++
+>   1 file changed, 3 insertions(+)
 > 
->   #include <stdio.h>
->   #include <stdlib.h>
-> +#include <sys/stat.h>
->   #include <stddef.h>
->   #include <string.h>
->   #include <time.h>
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 51812f459581..42d5aa504afe 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -28,6 +28,7 @@
+>   #include <linux/part_stat.h>
+>   #include <linux/zstd.h>
+>   #include <linux/lz4.h>
+> +#include <linux/fsnotify.h>
+>   
+>   #include "f2fs.h"
+>   #include "node.h"
+> @@ -4000,6 +4001,8 @@ void f2fs_save_errors(struct f2fs_sb_info *sbi, unsigned char flag)
+>   		sbi->error_dirty = true;
+>   	}
+>   	spin_unlock_irqrestore(&sbi->error_lock, flags);
+> +
+> +	fsnotify_sb_error(sbi->sb, NULL, EFSCORRUPTED);
 
-Thank you for the fix, :)
+Can we call this function in irq context?
+
+- f2fs_decompress_cluster
+  - f2fs_save_errors
 
 Thanks,
+
+>   }
+>   
+>   static bool f2fs_update_errors(struct f2fs_sb_info *sbi)
 
 
 _______________________________________________
