@@ -2,101 +2,155 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 166BA707806
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 May 2023 04:23:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C58D7078CA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 May 2023 06:11:57 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pzTIJ-0000Xh-QM;
-	Thu, 18 May 2023 02:23:07 +0000
+	id 1pzUzY-00018a-2v;
+	Thu, 18 May 2023 04:11:52 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1pzTII-0000Xb-5g
+ (envelope-from <guochunhai@vivo.com>) id 1pzUzV-00018T-Pc
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 18 May 2023 02:23:06 +0000
+ Thu, 18 May 2023 04:11:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JzxNiNU9tmO1xdBYHbntAMIsQzDKbFt6Dg4oVN3ZRNY=; b=Y9BW4Vw7CVb6yV2qHe1SS5rUB2
- oPt/HVRRO0STUDc9yFk3SjZ2Gd+CGxuTjiVa3VKGjl5WiVnZpMeYEGEbQYFCM8KK/46o7NHUub+Zp
- WhuvPdQckxw67AToZsdTwESA8IrOmXDmQLvO7o5JReAiFRQ/wFiP/M2wqWDxHdr/z0rE=;
+ bh=p7JclodLj7OI5T/S1DbhRztXvFZgIJsTPtG1EJibHDk=; b=O8BTGm8CRkMhWsnzyS82nxDFS0
+ VDbM/CU4N8KetjQc8UboAEW/GTf/Cdms+UlBLHe1AqyB113SMjH6HIPd+kLbBAa3N2Z2mNZif1p9A
+ upqvIkfWhx1FZJrDtRyrnZLjnA7A6jdQhWV9r2sssUNA+hHykrVP8MT86e/wtoNuoLIc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=JzxNiNU9tmO1xdBYHbntAMIsQzDKbFt6Dg4oVN3ZRNY=; b=GUcOmbL34jsedmyD9s1ydBFtGZ
- 61EiCFEVVgTU8xJy2PiRT8iQVYVNCpJ7g1cMeLT5DFU8KjzUpHBdg4DDcLHbpdaydwRGKgh0PpRch
- HdxSfLqriekhZ29+acpNNfShAx/K3L2uPIGIK6M1f+hXgVfPRXPlnqp/JgqBjkbJ2kPE=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=p7JclodLj7OI5T/S1DbhRztXvFZgIJsTPtG1EJibHDk=; b=Q
+ HEC93GhxJfxmWCitGcOtzMaB7DlyP02g1EoX7ssBSTDojpvLdEKvE70btCpKJKtc1xYw4kLb9+xea
+ eM2CNRpjb4ai4QlJzUOR0L63CgQ8WNobBcCgR3cdnQsyD0PJQMNQDLA6Mdl/YvZB3KxADr/ak/98j
+ orMigdeheyugVuz4=;
+Received: from mail-psaapc01on2091.outbound.protection.outlook.com
+ ([40.107.255.91] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pzTIG-0002K6-EW for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 18 May 2023 02:23:06 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 13DF164C67;
- Thu, 18 May 2023 02:22:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F1E9C433D2;
- Thu, 18 May 2023 02:22:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1684376578;
- bh=vjGtfgzPWi0Yy8xiEb2wiWA7NRdasfDWeUOUdULaHFE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=NRzVPGrdYOcGM/LrAHRVft1KcFYGIkD3Dq/VEl5CIRorIZsuqg7QBE1Y3ZEyi7fK+
- xOT16lTJafOakjMJtfM+eUXqZmq4MzDIisLBf2ahWnXvp4plIvtg8KC47+EagnT+eG
- v5WT652/4+KoKatD+gpC7/10Ms186C1+Lcsbst6EDOkm86qMSJtQQBAZyRzAQ7XN/V
- 5g+hXyNg9uJg35ZA8mPVt8GcksxFLQMWWx3DXG5ImFikh4nMCfPnRb35/BqncBWp5V
- PR6+NjsUqWwFGuQ3tE+sCohPjCa9Ao7FJuE34oioFTF7iKuX1XRxjKeqvB/4igeP3u
- Ny7R5G4iErOzQ==
-Message-ID: <99b2e506-668b-a331-0f93-6eeae1412441@kernel.org>
-Date: Thu, 18 May 2023 10:22:55 +0800
+ id 1pzUzN-00Bu4I-HH for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 18 May 2023 04:11:50 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lEBNuiiiUnjUccADNBEwVA40gUkIRLZuGN64JzJ3n1AAcPoLMWcocM9sT3CTweO+jkTvF1s7xxE1BFenPzS8dUnCDxiGsQXRXFTAajM+6Q6phTNZ56zL3rxqbwAITggMK4x1ZDFO796hRiBeNMiUatFgq2ULXZtZ83uMHpm8PY26DU5KCSbJJEqYxLQuxmCVLuY5NPgh/j9bRwmpBo6winwwS3pEpdsVDzH0K7IkDHqnXqTFC1nqEoy5+yO0RgLC+jtYqV9a81Pmt+rr3EUL6t67Ua03cUQDUE+Pv2neyB3wjRJUfz598mwWivl6FzgvYSSUqhzU0cWzCu6DnFysRQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=p7JclodLj7OI5T/S1DbhRztXvFZgIJsTPtG1EJibHDk=;
+ b=KbVZDOKeUHVXwcTE+83N68p0BhlGKHPUfYpqtNIx1k1zVjz4sLN3YTNHYMYvo/HOEDMuyr/szHb9DkUdtWRcV3pVyQ+0CTUCDQ1UE5kdfEBiipnt/4YaCVVDDIXtuw3u7vU42RpP/QP5jLn5J4sC/82upKR9feoxbfMw6klMZruMDxHpJiHB+5U9XzpIO5NNtSrYKgugwScEPr6aZkwuACmPll/U7zMiqBZUlFLuytUzZQGxfJTDZyoj6u8RZALwhJWz955xcr0yHsYpvI4R6D/UwLQg0pdsMlWWnqSPXXjrUTrHERoEkCHz5RTqx2sPclGwsk1mmvjEP92+RFugbA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=p7JclodLj7OI5T/S1DbhRztXvFZgIJsTPtG1EJibHDk=;
+ b=ZrPS33Cn+LNYRuX79FI/bxWG3FY3QBd4rUFLMZ9AXY/w0oIK/5G6/mKd4JSOwxh3VeeMqQB4g0SsyrP4NIlbZLc9/+s1Rf15j41vCJfhVsmYfjUPym5Xhd1eYnIQmYmP+qSZMP8f3Tpf1yQTtwnJau3iuwGUMRKlU2cdZwKW/n0iQb4jJ/ncrSwcLXjIW2096lWrlTf7Pp+CPT2daDCuLUAtmJ7BXcS0ymfFJrciGG/duNMZz9r+VVq5JGdshtqHztwxKR6qDt7dxf1ELHH+ktcD1dCR2wGIQvG82vaR4hpCIxL3IUZdeUeY1QMWdFVfVU+Ykol540K9s/5bqu+M9A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from TY2PR06MB3342.apcprd06.prod.outlook.com (2603:1096:404:fb::23)
+ by KL1PR0601MB4371.apcprd06.prod.outlook.com (2603:1096:820:74::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6411.19; Thu, 18 May
+ 2023 04:11:22 +0000
+Received: from TY2PR06MB3342.apcprd06.prod.outlook.com
+ ([fe80::a567:9fc1:447f:c912]) by TY2PR06MB3342.apcprd06.prod.outlook.com
+ ([fe80::a567:9fc1:447f:c912%4]) with mapi id 15.20.6387.032; Thu, 18 May 2023
+ 04:11:22 +0000
+To: chao@kernel.org
+Date: Thu, 18 May 2023 12:11:04 +0800
+Message-Id: <20230518041104.78285-1-guochunhai@vivo.com>
+X-Mailer: git-send-email 2.39.0
+X-ClientProxiedBy: SG2PR06CA0244.apcprd06.prod.outlook.com
+ (2603:1096:4:ac::28) To TY2PR06MB3342.apcprd06.prod.outlook.com
+ (2603:1096:404:fb::23)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230505155040.87561-1-jaegeuk@kernel.org>
- <8c91663e-dfca-4b64-dc39-5a130fbb99a7@kernel.org>
- <ZGV9saLA+9rM4t9p@google.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZGV9saLA+9rM4t9p@google.com>
-X-Spam-Score: -6.6 (------)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TY2PR06MB3342:EE_|KL1PR0601MB4371:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0035a693-39ad-412d-6bab-08db5755f0bd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Cl35h5TOypeg7NKHfHTx97VnpgGYMyJQj8TmUZjJW2oXKIsVLPi8EmdTzKQPlA21t+pegWmp7eD3x81T6qQu6dDjl7kekdWteg+jBVV9fu9nWXxSX5xDGUkjuJnvHJ0k8u1NTTXhSyCPxIoMAu+wrd+7Ol4sq9Qkjyt6pUxW1IC7Xj7aQj8NNsxBAenLwLwqD5Rvadr6LKu7HHlAZdw9J3W7QdPpV+zbULyDGn9fZfUv5ZEHUWiZ+1sV53/kslmkPzV6Aj9Oc3knk/Zc2zGh6CoW80SYlF3pr5GYkQRP8wJVTwpcECC1JVEXSQ/Ng0Fo9AUwShEL1M2zOGADk8mnsqCooUyrrv0OFGKuOBH0GQ/5GHJVoPypvcwBPyIWbs1IpGbD3q09i4ngvlx3rpT2nifIBjFYK5CYDUgtVmYfPaQyO4vVFKCmlEKjB/LWY/WHtC8OkNkuHugas4ukmlXwugLqaj0QdWyOSv+URzXlREWao8twauerRb7F8H1i8Hkr/iP0pr5h0EhLy3d3QMbkykW2FeLWs7MrFz7kiMP2YZp0RmCyrfSYagUdPID7/9SnTNwnifqZI3VC7SMw+PKwpT4nF3/f+XPfNQXshAVarVEk8NFRIP3hdmrwS5JFiJxwCcupoN/orR65wXuzEgEE7tSCU6t3fQ8bomXJqMjhZzI=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TY2PR06MB3342.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(4636009)(396003)(366004)(346002)(136003)(376002)(39860400002)(451199021)(6486002)(4326008)(2906002)(5660300002)(8936002)(8676002)(86362001)(83380400001)(316002)(66946007)(66556008)(38350700002)(38100700002)(41300700001)(66476007)(6916009)(186003)(107886003)(6512007)(26005)(36756003)(1076003)(6506007)(6666004)(52116002)(478600001)(2616005);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?jZxXfXM9tzPyyzdDlRfkAzXaUOAWH8RPf/xBjHXCgE2+vT3Hbtj2Uin60+Lg?=
+ =?us-ascii?Q?F+aN4y83FjZ1E+peF0oR90jFdOLvLMJkjtIRuzetkFFP0Ig85oLylQvdVTNE?=
+ =?us-ascii?Q?PT0NJcgQgFytanEqlWiQQBgLUCvioc2gfgqQJb/8RePixCMZ4mgVpud6XABO?=
+ =?us-ascii?Q?JEQO2rsJdTvBszgDCSXnzCneETmeh+qJpdcsu2lqSLl5W98Uwfl+iGmljWbl?=
+ =?us-ascii?Q?ihWfCQIma6I6moyWtn8n2tl7HgB9FUCSw77i14grYROsY3CwdNN2uFncWUCZ?=
+ =?us-ascii?Q?m7KgUR7YuYqRWQ/nQoBu3dULGkpz2EHcm/OA/Muraos77WxlCqLZ7LvGSzKn?=
+ =?us-ascii?Q?976FFiLzWFyHyY8sE/7v+T40ucERQ/HA8/voYJyjVDQeVQUFGexgrMtp/kaR?=
+ =?us-ascii?Q?QkXDPs5wqGbnrFDPnPJuNyOb4DJ+xeoGDBjBP+vJLYGNt68s3390TRSYZnw3?=
+ =?us-ascii?Q?F9HpS5nyZi/jlAhnu6Ml8gE5gg+F6WZeJRdOIdNOmZLNtFtNVKWbO/Qe2QIa?=
+ =?us-ascii?Q?bmdYz7MYu1P6Ul7iTAzRxPU4dNd9MPwaHJbMV8xRxQVqe4vCl5AwUGGy6asb?=
+ =?us-ascii?Q?ujKj0Oj5APqUuGQOo1TeJyLVI1zAlF5dl0vFb/VU8P7K5+5msf58J4+7mNa3?=
+ =?us-ascii?Q?Ktw4+5sGPgmi6AyOpIVUT/UwgOqiigDQ30eAhQiMl2cjNiINeJvLgwV2vhhP?=
+ =?us-ascii?Q?XtmQJEho+ROx9NDEOgxU6OIp41XD/Mfpd2aXVFONxMhyX8UVn6a3gDE6qAMr?=
+ =?us-ascii?Q?GM7xOsck9gHZu4Oz0HlocEaoaN+YznXRqhGiHe2lFSNWNWj1IBbNDJBq6Nwh?=
+ =?us-ascii?Q?w1kxFtF7VwZJFquixHMzWGcdsku8w/9xliVbx/vUx4yZ9l0l21SRTaRxJ46L?=
+ =?us-ascii?Q?OZeOElfZwo8usZDfUMi7/5k2IWtEGKko8dEfYraZUQ/3XKL95nEJS03y3LiX?=
+ =?us-ascii?Q?ksJ9deyAG3U4uIBCrdXE9HLyNHHIE+vuTEYOuE8c2YjU0eaO1Y/wc28vfKVZ?=
+ =?us-ascii?Q?kpQXHWPk8Rt/aRabGRhRVE28U7wGbJo5y35rN68GcO+mdgRlicfpppGDmE84?=
+ =?us-ascii?Q?+FCg71kGHkLe8v+IL+9bq0UodsU7DhoaJW+3/1adH0gQYUOF9yLDprXLDCak?=
+ =?us-ascii?Q?TmLU7oIR35sBmVSGsk2l5QmsQXwpCdDNRnTplEl2kqvF1Sl84acpKNJtn4g7?=
+ =?us-ascii?Q?q07krXwtFFM7/Viv6EtvATsCiii0ve2XAJJmmb3nYh0dc6VN3tZ9wo8/+EMD?=
+ =?us-ascii?Q?pxp9FJ7YBrpAQ3TJhGkmlz/O7VK1YawmvP7xCOQvlg0/kzq9vvndmuiVISFa?=
+ =?us-ascii?Q?FvmjYZryQb6bxRsLlkF11D3B5zZ1difo6soeH7+XD5dOdGgvm4uu/WfJrxFs?=
+ =?us-ascii?Q?KNtMAT+N8RXBvqWLekxmMLwNlzspZ6fMcAH+wGfXGUfybiszc7UJbbihavp4?=
+ =?us-ascii?Q?/5bYQsdIfbSNmVZhIvOoqqGDCBlUyS1fU5W0Egdx2imt2p7IjjwX6mnuU1j0?=
+ =?us-ascii?Q?hM0cBJMBJatyfg+kcGMYT++Hwvxxd4OERGOuiOHJo1WRLGY+uAkVIM9Fj0yH?=
+ =?us-ascii?Q?79j8XUBXvEAE88b3poY13krHuaIayrn/UZnhnGyk?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0035a693-39ad-412d-6bab-08db5755f0bd
+X-MS-Exchange-CrossTenant-AuthSource: TY2PR06MB3342.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2023 04:11:22.7626 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: xF/dxJqyjU2c1JwUiiLgqDiZeuTjz6AodEPy7QGCm3PnhNCjzLAMfkxE7qa5vgcbW2VbnzqmewO/xarNa2bw2A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR0601MB4371
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/5/18 9:21, Jaegeuk Kim wrote: > Applied the below
- comments. Thanks. Reviewed-by: Chao Yu <chao@kernel.org> Thanks, 
- Content analysis details:   (-6.6 points, 6.0 required)
+ Content preview: find_fsync_inode() detect the looped node chain by comparing
+ the loop counter with free blocks. While it may take tens of seconds to quit
+ when the free blocks are large enough. We can use Floyd's cycl [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.255.91 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.255.91 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -1.4 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pzTIG-0002K6-EW
-Subject: Re: [f2fs-dev] [PATCH] f2fs: maintain six open zones for zoned
- devices
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1pzUzN-00Bu4I-HH
+Subject: [f2fs-dev] [PATCH v4] fsck.f2fs: Detect and fix looped node chain
+ efficiently
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,150 +162,204 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Chunhai Guo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chunhai Guo <guochunhai@vivo.com>
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Chunhai Guo <guochunhai@vivo.com>, frank.li@vivo.com
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/5/18 9:21, Jaegeuk Kim wrote:
-> Applied the below comments. Thanks.
+find_fsync_inode() detect the looped node chain by comparing the loop
+counter with free blocks. While it may take tens of seconds to quit when
+the free blocks are large enough. We can use Floyd's cycle detection
+algorithm to make the detection more efficient, and fix the issue by
+filling a NULL address in the last node of the chain.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Below is the log we encounter on a 256GB UFS storage and it takes about
+25 seconds to detect looped node chain. After changing the algorithm, it
+takes about 20ms to finish the same job.
 
-Thanks,
+    [   10.822904] fsck.f2fs: Info: version timestamp cur: 17, prev: 430
+    [   10.822949] fsck.f2fs: [update_superblock: 762] Info: Done to
+update superblock
+    [   10.822953] fsck.f2fs: Info: superblock features = 1499 :
+encrypt verity extra_attr project_quota quota_ino casefold
+    [   10.822956] fsck.f2fs: Info: superblock encrypt level = 0, salt =
+00000000000000000000000000000000
+    [   10.822960] fsck.f2fs: Info: total FS sectors = 59249811 (231444
+MB)
+    [   35.852827] fsck.f2fs:	detect looped node chain,
+blkaddr:1114802, next:1114803
+    [   35.852842] fsck.f2fs: [f2fs_do_mount:3846] record_fsync_data
+failed
+    [   35.856106] fsck.f2fs: fsck.f2fs terminated by exit(255)
 
-> 
-> On 05/17, Chao Yu wrote:
->> On 2023/5/5 23:50, Jaegeuk Kim wrote:
->>> From: Daeho Jeong <daehojeong@google.com>
->>>
->>> To keep six open zone constraints, make them not to be open over six
->>> open zones.
->>>
->>> Signed-off-by: Daeho Jeong <daehojeong@google.com>
->>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>> ---
->>>    fs/f2fs/data.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++++++
->>>    fs/f2fs/f2fs.h |  5 +++++
->>>    2 files changed, 62 insertions(+)
->>>
->>> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->>> index 7dd92a9028b1..bb9de0a02143 100644
->>> --- a/fs/f2fs/data.c
->>> +++ b/fs/f2fs/data.c
->>> @@ -383,6 +383,17 @@ static void f2fs_write_end_io(struct bio *bio)
->>>    	bio_put(bio);
->>>    }
->>> +#ifdef CONFIG_BLK_DEV_ZONED
->>> +static void f2fs_zone_write_end_io(struct bio *bio)
->>> +{
->>> +	struct f2fs_bio_info *io = (struct f2fs_bio_info *)bio->bi_private;
->>> +
->>> +	bio->bi_private = io->bi_private;
->>> +	complete(&io->zone_wait);
->>> +	f2fs_write_end_io(bio);
->>> +}
->>> +#endif
->>> +
->>>    struct block_device *f2fs_target_device(struct f2fs_sb_info *sbi,
->>>    		block_t blk_addr, sector_t *sector)
->>>    {
->>> @@ -639,6 +650,10 @@ int f2fs_init_write_merge_io(struct f2fs_sb_info *sbi)
->>>    			INIT_LIST_HEAD(&sbi->write_io[i][j].io_list);
->>>    			INIT_LIST_HEAD(&sbi->write_io[i][j].bio_list);
->>>    			init_f2fs_rwsem(&sbi->write_io[i][j].bio_list_lock);
->>> +#ifdef CONFIG_BLK_DEV_ZONED
->>
->> init_completion(&io->zone_wait);
->>
->>> +			sbi->write_io[i][j].zone_pending_bio = NULL;
->>> +			sbi->write_io[i][j].bi_private = NULL;
->>> +#endif
->>>    		}
->>>    	}
->>> @@ -965,6 +980,26 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
->>>    	return 0;
->>>    }
->>> +#ifdef CONFIG_BLK_DEV_ZONED
->>> +static bool is_end_zone_blkaddr(struct f2fs_sb_info *sbi, block_t blkaddr)
->>> +{
->>> +	int devi = 0;
->>> +
->>> +	if (f2fs_is_multi_device(sbi)) {
->>> +		devi = f2fs_target_device_index(sbi, blkaddr);
->>> +		if (blkaddr < FDEV(devi).start_blk ||
->>> +		    blkaddr > FDEV(devi).end_blk) {
->>> +			f2fs_err(sbi, "Invalid block %x", blkaddr);
->>> +			return false;
->>> +		}
->>> +		blkaddr -= FDEV(devi).start_blk;
->>> +	}
->>> +	return bdev_zoned_model(FDEV(devi).bdev) == BLK_ZONED_HM &&
->>> +		f2fs_blkz_is_seq(sbi, devi, blkaddr) &&
->>> +		(blkaddr % sbi->blocks_per_blkz == sbi->blocks_per_blkz - 1);
->>> +}
->>> +#endif
->>> +
->>>    void f2fs_submit_page_write(struct f2fs_io_info *fio)
->>>    {
->>>    	struct f2fs_sb_info *sbi = fio->sbi;
->>> @@ -975,6 +1010,16 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
->>>    	f2fs_bug_on(sbi, is_read_io(fio->op));
->>>    	f2fs_down_write(&io->io_rwsem);
->>> +
->>> +#ifdef CONFIG_BLK_DEV_ZONED
->>> +	if (f2fs_sb_has_blkzoned(sbi) && btype < META && io->zone_pending_bio) {
->>> +		wait_for_completion_io(&io->zone_wait);
->>> +		bio_put(io->zone_pending_bio);
->>> +		io->zone_pending_bio = NULL;
->>> +		io->bi_private = NULL;
->>> +	}
->>> +#endif
->>> +
->>>    next:
->>>    	if (fio->in_list) {
->>>    		spin_lock(&io->io_lock);
->>> @@ -1038,6 +1083,18 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
->>>    	if (fio->in_list)
->>>    		goto next;
->>>    out:
->>> +#ifdef CONFIG_BLK_DEV_ZONED
->>> +	if (f2fs_sb_has_blkzoned(sbi) && btype < META &&
->>> +			is_end_zone_blkaddr(sbi, fio->new_blkaddr)) {
->>> +		bio_get(io->bio);
->>> +		init_completion(&io->zone_wait);
->>
->> reinit_completion(&io->zone_wait);
->>
->> Thanks,
->>
->>> +		io->bi_private = io->bio->bi_private;
->>> +		io->bio->bi_private = io;
->>> +		io->bio->bi_end_io = f2fs_zone_write_end_io;
->>> +		io->zone_pending_bio = io->bio;
->>> +		__submit_merged_bio(io);
->>> +	}
->>> +#endif
->>>    	if (is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN) ||
->>>    				!f2fs_is_checkpoint_ready(sbi))
->>>    		__submit_merged_bio(io);
->>> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
->>> index 7afc9aef127a..0f05c1dd633f 100644
->>> --- a/fs/f2fs/f2fs.h
->>> +++ b/fs/f2fs/f2fs.h
->>> @@ -1218,6 +1218,11 @@ struct f2fs_bio_info {
->>>    	struct bio *bio;		/* bios to merge */
->>>    	sector_t last_block_in_bio;	/* last block number */
->>>    	struct f2fs_io_info fio;	/* store buffered io info. */
->>> +#ifdef CONFIG_BLK_DEV_ZONED
->>> +	struct completion zone_wait;	/* condition value for the previous open zone to close */
->>> +	struct bio *zone_pending_bio;	/* pending bio for the previous zone */
->>> +	void *bi_private;		/* previous bi_private for pending bio */
->>> +#endif
->>>    	struct f2fs_rwsem io_rwsem;	/* blocking op for bio */
->>>    	spinlock_t io_lock;		/* serialize DATA/NODE IOs */
->>>    	struct list_head io_list;	/* track fios */
+Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+---
+ fsck/mount.c | 128 +++++++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 110 insertions(+), 18 deletions(-)
+
+diff --git a/fsck/mount.c b/fsck/mount.c
+index df0314d57caf..755b659f0c27 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -3394,22 +3394,91 @@ static void destroy_fsync_dnodes(struct list_head *head)
+ 		del_fsync_inode(entry);
+ }
+ 
++static int find_node_blk_fast(struct f2fs_sb_info *sbi, block_t *blkaddr_fast,
++		struct f2fs_node *node_blk_fast, bool *is_detecting)
++{
++	int i, err;
++
++	for (i = 0; i < 2; i++) {
++		if (!f2fs_is_valid_blkaddr(sbi, *blkaddr_fast, META_POR)) {
++			*is_detecting = false;
++			return 0;
++		}
++
++		err = dev_read_block(node_blk_fast, *blkaddr_fast);
++		if (err)
++			return err;
++
++		if (!is_recoverable_dnode(sbi, node_blk_fast)) {
++			*is_detecting = false;
++			return 0;
++		}
++
++		*blkaddr_fast = next_blkaddr_of_node(node_blk_fast);
++	}
++
++	return 0;
++}
++
++static int loop_node_chain_fix(struct f2fs_sb_info *sbi,
++		block_t blkaddr_fast, struct f2fs_node *node_blk_fast,
++		block_t blkaddr, struct f2fs_node *node_blk)
++{
++	block_t blkaddr_entry, blkaddr_tmp;
++	int err;
++
++	/* find the entry point of the looped node chain */
++	while (blkaddr_fast != blkaddr) {
++		err = dev_read_block(node_blk_fast, blkaddr_fast);
++		if (err)
++			return err;
++		blkaddr_fast = next_blkaddr_of_node(node_blk_fast);
++
++		err = dev_read_block(node_blk, blkaddr);
++		if (err)
++			return err;
++		blkaddr = next_blkaddr_of_node(node_blk);
++	}
++	blkaddr_entry = blkaddr;
++
++	/* find the last node of the chain */
++	do {
++		blkaddr_tmp = blkaddr;
++		err = dev_read_block(node_blk, blkaddr);
++		if (err)
++			return err;
++		blkaddr = next_blkaddr_of_node(node_blk);
++	} while (blkaddr != blkaddr_entry);
++
++	/* fix the blkaddr of last node with NULL_ADDR. */
++	node_blk->footer.next_blkaddr = NULL_ADDR;
++	if (node_blk->footer.nid == node_blk->footer.ino)
++		err = write_inode(node_blk, blkaddr_tmp);
++	else
++		err = dev_write_block(node_blk, blkaddr_tmp);
++	if (!err)
++		FIX_MSG("Fix looped node chain on blkaddr %u\n",
++				blkaddr_tmp);
++	return err;
++}
++
+ static int find_fsync_inode(struct f2fs_sb_info *sbi, struct list_head *head)
+ {
+ 	struct curseg_info *curseg;
+-	struct f2fs_node *node_blk;
+-	block_t blkaddr;
+-	unsigned int loop_cnt = 0;
+-	unsigned int free_blocks = MAIN_SEGS(sbi) * sbi->blocks_per_seg -
+-						sbi->total_valid_block_count;
++	struct f2fs_node *node_blk, *node_blk_fast;
++	block_t blkaddr, blkaddr_fast;
++	bool is_detecting = true;
+ 	int err = 0;
+ 
++	node_blk = calloc(F2FS_BLKSIZE, 1);
++	node_blk_fast = calloc(F2FS_BLKSIZE, 1);
++	ASSERT(node_blk && node_blk_fast);
++
++retry:
+ 	/* get node pages in the current segment */
+ 	curseg = CURSEG_I(sbi, CURSEG_WARM_NODE);
+ 	blkaddr = NEXT_FREE_BLKADDR(sbi, curseg);
+-
+-	node_blk = calloc(F2FS_BLKSIZE, 1);
+-	ASSERT(node_blk);
++	blkaddr_fast = blkaddr;
+ 
+ 	while (1) {
+ 		struct fsync_inode_entry *entry;
+@@ -3440,19 +3509,42 @@ static int find_fsync_inode(struct f2fs_sb_info *sbi, struct list_head *head)
+ 		if (IS_INODE(node_blk) && is_dent_dnode(node_blk))
+ 			entry->last_dentry = blkaddr;
+ next:
+-		/* sanity check in order to detect looped node chain */
+-		if (++loop_cnt >= free_blocks ||
+-			blkaddr == next_blkaddr_of_node(node_blk)) {
+-			MSG(0, "\tdetect looped node chain, blkaddr:%u, next:%u\n",
+-				    blkaddr,
+-				    next_blkaddr_of_node(node_blk));
+-			err = -1;
+-			break;
+-		}
+-
+ 		blkaddr = next_blkaddr_of_node(node_blk);
++
++		/* sanity check to detect looped node chain with Floyd's cycle
++		 * detection algorithm
++		 */
++		if (is_detecting) {
++			err = find_node_blk_fast(sbi, &blkaddr_fast,
++					node_blk_fast, &is_detecting);
++			if (err)
++				break;
++
++			if (blkaddr_fast != blkaddr)
++				continue;
++
++			ASSERT_MSG("\tdetect looped node chain, blkaddr:%u\n",
++					blkaddr);
++
++			if (!c.fix_on) {
++				err = -1;
++				break;
++			}
++
++			err = loop_node_chain_fix(sbi,
++					NEXT_FREE_BLKADDR(sbi, curseg),
++					node_blk_fast, blkaddr, node_blk);
++			if (err)
++				break;
++
++			/* After fixing the looped node chain, retry agian. */
++			is_detecting = false;
++			destroy_fsync_dnodes(head);
++			goto retry;
++		}
+ 	}
+ 
++	free(node_blk_fast);
+ 	free(node_blk);
+ 	return err;
+ }
+-- 
+2.25.1
+
 
 
 _______________________________________________
