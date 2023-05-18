@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3CDA7077A1
+	by mail.lfdr.de (Postfix) with ESMTPS id 94CDE7077A0
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 18 May 2023 03:50:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pzSml-0008Tg-ER;
+	id 1pzSmk-00084E-S5;
 	Thu, 18 May 2023 01:50:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pzSmj-0008TZ-DU
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1pzSmi-000848-T2
  for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 18 May 2023 01:50:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,52 +21,51 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IZs0C0dY1X+5vp5XLuYvrwQM1J6boRs7WOj23Hsf9mI=; b=OLHxMy/m2Pl2ASSBepsWy4wdne
- lyV9x4XuH0mCbu29PhO6AzL/HZKSjzknagiWV3oz5CeQppsW9RKqNxJ36ZoT8uXzbHIQXTJRlaRUG
- SLlXyIN5L44m4GRiO/VxzRLZwwBbYxjbkK0orBFXj7aCpYQbcyyt9qHah8ceRracBVuo=;
+ bh=Rrho9o0Pbk4Mzv6teHDhhVTRQCrZpQjTjhQd1OQOYuY=; b=VgMW1tQMxYs45sTFZNDGlcdQSz
+ i5oAwR+Qv20IsqiaAeJUjfQ2pTsAox6ycuA8c6hWiMvQV8QA860lx5LICFZzo+wsue/5Nl+ynnQ5O
+ ME0hCKe4WnJR2fB0jjwSmvlTuycqIbq2yXlfi4qNNCrVR13nlRhSj3QGaz3e1Zjh1Gss=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IZs0C0dY1X+5vp5XLuYvrwQM1J6boRs7WOj23Hsf9mI=; b=GhzTRaTOsra253xfxoAQ+OlxIL
- 1UMxZq4qywv1dfKm2PLaST48AmOP4pbgXET7HE/NAgyq+GRzWxcI5A496SGSljzklrJCwg0yGat3q
- vRfCd8sukWVuzGlkK9Lu//+8DVsCM7aK55ZkZW/F3fb+881g+LQvV7X3geOIm5C1v7aU=;
+ bh=Rrho9o0Pbk4Mzv6teHDhhVTRQCrZpQjTjhQd1OQOYuY=; b=CI49okFR0S+sLx505Amslz6hTA
+ jJJeb7yltE9TPcFpAGCrMIZb78vHY6ajXfFCMKUtaeGiYh2wbEGpmZ9QFa85pZKUkWV5GWbGJz7Xf
+ vuT5+omL3etLOv+K9Cj+nKKrdEBjqTiCgir9rdWbnhK01iKgFbt96mko3s/SzZE/LOEk=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pzSmh-0007UI-TO for linux-f2fs-devel@lists.sourceforge.net;
+ id 1pzSmh-00Blum-EB for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 18 May 2023 01:50:29 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8712A64C27
- for <linux-f2fs-devel@lists.sourceforge.net>;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1432764BD6;
  Thu, 18 May 2023 01:50:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8E403C433A0;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7717AC433D2;
  Thu, 18 May 2023 01:50:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1684374621;
- bh=WWMJVyyhTnwh2cfx/KpW0I+0aNVVIvg8+5ecK0txWCI=;
+ bh=IfEqFTkpASofzO7ndZbO1NCaS7B5DFxc2BiF3SYjWLc=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=bFsZvK8I24yGU9vojBHCYURsGtkipDQWFDkBht4dgCIdnwcsFMmuooMlR0Ahd4yLw
- tqQI4reXI1igz8Ya9+PqfjPX6PIwg19KUlgZ/RzoxnJa1HLd1jYGccOcVNijugQ77u
- t5D6bkfjtBew6LY3Tx/2gpUL+nHj/s5tdl1NSP7Bl0pCMH8G1/3EVG/l6YXfcWOSWf
- cUAYAdPYaTv0lCRaoq84msZo82Gr4y9wZjT3JFdSSGQ/9xfBOa4Edav7WW5ciUTjjb
- ZoVpHc3hx+y4UU1TxQ1zl0K/oDRECfwLyTMnXqVDi8EjeYTUafSDmPuVgNSy0WS01c
- BM/8JOAv3Jj/A==
+ b=Dvb6W7aLIgL3+yq5/7ZQTfFNmQufoOmPx3/pitPdCb6u7Xh7/GK7N+4LOk/GOQITn
+ nT7MTiES59w3AoFYrfSM+O0MkQ0hav5H+4S5lgZaCMHqTf3MxjKzbd6tQJTvwLqaLF
+ mCjzrZ04B+IVmBlMP3ZmtJKPx5DT/81HX8oxt4YzHzeJA48LGhCWi9o+hNPD7MFQu3
+ p3faPq0CBtqZRV3oa3SEZmiUo7ro8nZ7u6rrdfMF7oF8VQjrOruYFf0pXs2IspRGVS
+ S+yMeSBrORecO9vbRJOpHlB7FDckLpClwJQEngHFA9fM8QjxHDXZPaOsRvrjrlxcjw
+ qPcF6XbE1j9wA==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 63AB3E21EEC; Thu, 18 May 2023 01:50:21 +0000 (UTC)
+ 57FFCE5421C; Thu, 18 May 2023 01:50:21 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168437462140.19511.17183994837001574389.git-patchwork-notify@kernel.org>
+Message-Id: <168437462135.19511.5914214442392156234.git-patchwork-notify@kernel.org>
 Date: Thu, 18 May 2023 01:50:21 +0000
-References: <20230516152346.190199-1-chao@kernel.org>
-In-Reply-To: <20230516152346.190199-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+References: <20230505204000.3604748-1-daeho43@gmail.com>
+In-Reply-To: <20230505204000.3604748-1-daeho43@gmail.com>
+To: Daeho Jeong <daeho43@gmail.com>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -75,11 +74,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 16 May 2023 23:23:46 +0800 you
- wrote: > We should set noatime bit for quota files, since no one cares about
- > atime of quota file, and we should set immutalbe bit as well, due to >
- nobody shou [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Fri, 5 May 2023 13:40:00 -0700 you wrote:
+ > From: Daeho Jeong <daehojeong@google.com> > > Zoned UFS allows only 6 open
+ zones at the same time, so we need to take > care of the count of open zones
+ w [...] Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -93,9 +91,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1pzSmh-0007UI-TO
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to set noatime and immutable flag
- for quota file
+X-Headers-End: 1pzSmh-00Blum-EB
+Subject: Re: [f2fs-dev] [PATCH] f2fs: close unused open zones while mounting
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,8 +104,8 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: daehojeong@google.com, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -118,19 +115,19 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue, 16 May 2023 23:23:46 +0800 you wrote:
-> We should set noatime bit for quota files, since no one cares about
-> atime of quota file, and we should set immutalbe bit as well, due to
-> nobody should write to the file through exported interfaces.
+On Fri,  5 May 2023 13:40:00 -0700 you wrote:
+> From: Daeho Jeong <daehojeong@google.com>
 > 
-> Meanwhile this patch use inode_lock to avoid race condition during
-> inode->i_flags, f2fs_inode->i_flags update.
+> Zoned UFS allows only 6 open zones at the same time, so we need to take
+> care of the count of open zones while mounting.
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: fix to set noatime and immutable flag for quota file
-    https://git.kernel.org/jaegeuk/f2fs/c/3c125710454d
+  - [f2fs-dev] f2fs: close unused open zones while mounting
+    https://git.kernel.org/jaegeuk/f2fs/c/0539a460e037
 
 You are awesome, thank you!
 -- 
