@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F011C709359
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 May 2023 11:36:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AFB3070935B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 May 2023 11:36:06 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pzwWn-0003XX-Uw;
-	Fri, 19 May 2023 09:36:02 +0000
+	id 1pzwWr-0004ym-5E;
+	Fri, 19 May 2023 09:36:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+aecf67361b95543ec79f+7208+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1pzwWl-0003Ws-CW for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 19 May 2023 09:36:00 +0000
+ id 1pzwWo-0004yD-Gw for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 19 May 2023 09:36:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jBsLbOyW4gxJfboFsPaM/jr4wcWxBT1Mri8F0Ud0gD8=; b=mlwJdmWsTJKqkNvGC2F1sOlsDw
- +t2L1jgl9gw3PR7K0C1l79XW0+z+9pb2votJmRGBXl/MnL+MeciD2wjoZiCHfMW34EwlUsCOExfLi
- ltmjaunL1XfmMnbp3kmL7rNuOIBTJny6EoUrHFHUT2iGiogmzyCgcNnqOY74YJMUUd6Q=;
+ bh=DWCBIuCWrEPUSgFUMsFJ6qSq1T5QDjJd5vFpRCChJ1w=; b=OzxsBbhEQYPfcADgIUu012mwmq
+ hI7g1NXWEzit9Sjdlgg4gaNYEDR3QduK1+SnepgntD3X+xpgqdJW4S+TUbeKMT5i/yDIXHGH7KrFj
+ SzB/JRI2Ywb465w3FeVuC4IceZvGJ41PZj/62fO6CsVTg0hrCBdVS6qwKx9YNhxnt8NA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jBsLbOyW4gxJfboFsPaM/jr4wcWxBT1Mri8F0Ud0gD8=; b=YAm0gSdnYrrSZ0frZI/y5fpEwD
- UIUZ6/+9DIbnAkRZpXZgJ8GvA8xhlnDZE2xOCJ2TYIG/v9NAxxAvcSo6Wi6u+dvjzMdWBopNCQEu7
- L8GOnmfz3jrrGeIimcQFTzHPJSJBxBJL4m8Qy+qdUUMXjEdIMz1VuhcrY3vjrYEiEFCo=;
+ bh=DWCBIuCWrEPUSgFUMsFJ6qSq1T5QDjJd5vFpRCChJ1w=; b=WX7mJf24jwAdnBiFSjySFFwMyE
+ EQr7lziMHONhTvSfKo0xJzkguZxA2oiByzB4Kr5OMclGh0KlUXi9gudBFIHFf4OjUEPbGUKX+HQCO
+ UX8r0E17GrRK9bcmb70gvB0xVS5McEdBxAc9i8fg0uY9zd+2u3Ri/7uSbRgZB8/RmlXU=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pzwWl-00DDQY-IG for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 19 May 2023 09:36:00 +0000
+ id 1pzwWo-0007Rp-9O for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 19 May 2023 09:36:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=jBsLbOyW4gxJfboFsPaM/jr4wcWxBT1Mri8F0Ud0gD8=; b=CJ+A5CucslKF05xEph7ZTKtrZ0
- 2m1gkbiYfzpbtTt1XTbMs91Z6sBHAPMva3XLcVNtvCKv+5A6Yt3jZeQsnaQfDhtMWLLz7dmaTQVZ7
- M09DndXYZgSi3F84aM+aUrXASh0lFIaychMModF2k0xSG4po0YGEvtMoBhLtzic+dHU8AqxyUk7nq
- rUT1Lz/9lG68YM/Y1UnQTYM8Xu0RsVv+sH1YXWxHCT9P5xvCDmv3wB05YjcuDoGbnPzzlAJaKcdQl
- rzznR1GintoXSsaocfkeJCe2ZH8w34EK+LZ0LW9n/Nu7pOWNGYOfKPfWYZVwB0Q+0Z040kY30qie4
- cyio+LIA==;
+ bh=DWCBIuCWrEPUSgFUMsFJ6qSq1T5QDjJd5vFpRCChJ1w=; b=GayNG3kzJFJ5dJ+3pyHdgpJaHg
+ Vg+D3WJSisJRAfKh4FdM+kMULiHBkVK2JlSjPpe6AWhhM9TnhNcnVYwVNicVKsW2D6CwQtiNr4GbI
+ ifi8oL59NNJcPyuNM4H5lL3BQg0kUH1IUPhrqcRX4x0gkGHePahAMpgU+OMoye7IWbL1i4P4N0K7d
+ hPveIYGdIaP1exiwrksrwwox3ggk+6PoAmRpABmAJW0vLpX170W8n4+WiyOMWiWdUV0KUHViDPR2V
+ y4iTj0Am5OrXwsAxT9LSL8UdxWNyTm0g69FXTbp/zKBR4iorevNKqz7EDBD0kG/pHeghxQmsCy7c1
+ 7dhC9L+g==;
 Received: from [2001:4bb8:188:3dd5:e8d0:68bb:e5be:210a] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pzwWW-00Fjfv-2R; Fri, 19 May 2023 09:35:45 +0000
+ id 1pzwWZ-00FjgM-1F; Fri, 19 May 2023 09:35:48 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Matthew Wilcox <willy@infradead.org>
-Date: Fri, 19 May 2023 11:35:15 +0200
-Message-Id: <20230519093521.133226-8-hch@lst.de>
+Date: Fri, 19 May 2023 11:35:16 +0200
+Message-Id: <20230519093521.133226-9-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230519093521.133226-1-hch@lst.de>
 References: <20230519093521.133226-1-hch@lst.de>
@@ -69,11 +69,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: All callers of iomap_file_buffered_write need to updated
- ki_pos, 
- move it into common code. Signed-off-by: Christoph Hellwig <hch@lst.de> ---
- fs/gfs2/file.c | 4 +--- fs/iomap/buffered-io.c | 9 ++++++--- fs/xfs/xfs_file.c
- | 2 -- fs/zonefs/file.c | 4 +--- 4 files changed, 8 insertions(+), 11 d [...]
+ Content preview:  Move the assignment to current->backing_dev_info from the
+ callers into iomap_file_buffered_write to reduce boiler plate code and reduce
+ the scope to just around the page dirtying loop. Note that zonefs was missing
+ this assignment before. 
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,8 +87,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1pzwWl-00DDQY-IG
-Subject: [f2fs-dev] [PATCH 07/13] iomap: update ki_pos in
+X-Headers-End: 1pzwWo-0007Rp-9O
+Subject: [f2fs-dev] [PATCH 08/13] iomap: assign current->backing_dev_info in
  iomap_file_buffered_write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -119,88 +118,96 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-All callers of iomap_file_buffered_write need to updated ki_pos, move it
-into common code.
+Move the assignment to current->backing_dev_info from the callers into
+iomap_file_buffered_write to reduce boiler plate code and reduce the
+scope to just around the page dirtying loop.
+
+Note that zonefs was missing this assignment before.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/gfs2/file.c         | 4 +---
- fs/iomap/buffered-io.c | 9 ++++++---
- fs/xfs/xfs_file.c      | 2 --
- fs/zonefs/file.c       | 4 +---
- 4 files changed, 8 insertions(+), 11 deletions(-)
+ fs/gfs2/file.c         | 3 ---
+ fs/iomap/buffered-io.c | 3 +++
+ fs/xfs/xfs_file.c      | 5 -----
+ 3 files changed, 3 insertions(+), 8 deletions(-)
 
 diff --git a/fs/gfs2/file.c b/fs/gfs2/file.c
-index 300844f50dcd28..499ef174dec138 100644
+index 499ef174dec138..261897fcfbc495 100644
 --- a/fs/gfs2/file.c
 +++ b/fs/gfs2/file.c
-@@ -1046,10 +1046,8 @@ static ssize_t gfs2_file_buffered_write(struct kiocb *iocb,
+@@ -25,7 +25,6 @@
+ #include <linux/dlm.h>
+ #include <linux/dlm_plock.h>
+ #include <linux/delay.h>
+-#include <linux/backing-dev.h>
+ #include <linux/fileattr.h>
+ 
+ #include "gfs2.h"
+@@ -1041,11 +1040,9 @@ static ssize_t gfs2_file_buffered_write(struct kiocb *iocb,
+ 			goto out_unlock;
+ 	}
+ 
+-	current->backing_dev_info = inode_to_bdi(inode);
+ 	pagefault_disable();
  	ret = iomap_file_buffered_write(iocb, from, &gfs2_iomap_ops);
  	pagefault_enable();
- 	current->backing_dev_info = NULL;
--	if (ret > 0) {
--		iocb->ki_pos += ret;
-+	if (ret > 0)
+-	current->backing_dev_info = NULL;
+ 	if (ret > 0)
  		written += ret;
--	}
  
- 	if (inode == sdp->sd_rindex)
- 		gfs2_glock_dq_uninit(statfs_gh);
 diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-index 063133ec77f49e..550525a525c45c 100644
+index 550525a525c45c..b2779bd1f10611 100644
 --- a/fs/iomap/buffered-io.c
 +++ b/fs/iomap/buffered-io.c
-@@ -864,16 +864,19 @@ iomap_file_buffered_write(struct kiocb *iocb, struct iov_iter *i,
- 		.len		= iov_iter_count(i),
- 		.flags		= IOMAP_WRITE,
- 	};
--	int ret;
-+	ssize_t ret;
- 
+@@ -3,6 +3,7 @@
+  * Copyright (C) 2010 Red Hat, Inc.
+  * Copyright (C) 2016-2019 Christoph Hellwig.
+  */
++#include <linux/backing-dev.h>
+ #include <linux/module.h>
+ #include <linux/compiler.h>
+ #include <linux/fs.h>
+@@ -869,8 +870,10 @@ iomap_file_buffered_write(struct kiocb *iocb, struct iov_iter *i,
  	if (iocb->ki_flags & IOCB_NOWAIT)
  		iter.flags |= IOMAP_NOWAIT;
  
++	current->backing_dev_info = inode_to_bdi(iter.inode);
  	while ((ret = iomap_iter(&iter, ops)) > 0)
  		iter.processed = iomap_write_iter(&iter, i);
--	if (iter.pos == iocb->ki_pos)
-+
-+	if (unlikely(ret < 0))
- 		return ret;
--	return iter.pos - iocb->ki_pos;
-+	ret = iter.pos - iocb->ki_pos;
-+	iocb->ki_pos += ret;
-+	return ret;
- }
- EXPORT_SYMBOL_GPL(iomap_file_buffered_write);
++	current->backing_dev_info = NULL;
  
+ 	if (unlikely(ret < 0))
+ 		return ret;
 diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
-index aede746541f8ae..bfba10e0b0f3c2 100644
+index bfba10e0b0f3c2..98d763cc3b114c 100644
 --- a/fs/xfs/xfs_file.c
 +++ b/fs/xfs/xfs_file.c
-@@ -723,8 +723,6 @@ xfs_file_buffered_write(
+@@ -27,7 +27,6 @@
+ 
+ #include <linux/dax.h>
+ #include <linux/falloc.h>
+-#include <linux/backing-dev.h>
+ #include <linux/mman.h>
+ #include <linux/fadvise.h>
+ #include <linux/mount.h>
+@@ -717,9 +716,6 @@ xfs_file_buffered_write(
+ 	if (ret)
+ 		goto out;
+ 
+-	/* We can write back this queue in page reclaim */
+-	current->backing_dev_info = inode_to_bdi(inode);
+-
  	trace_xfs_file_buffered_write(iocb, from);
  	ret = iomap_file_buffered_write(iocb, from,
  			&xfs_buffered_write_iomap_ops);
--	if (likely(ret >= 0))
--		iocb->ki_pos += ret;
+@@ -751,7 +747,6 @@ xfs_file_buffered_write(
+ 		goto write_retry;
+ 	}
  
- 	/*
- 	 * If we hit a space limit, try to free up some lingering preallocated
-diff --git a/fs/zonefs/file.c b/fs/zonefs/file.c
-index 132f01d3461f14..e212d0636f848e 100644
---- a/fs/zonefs/file.c
-+++ b/fs/zonefs/file.c
-@@ -643,9 +643,7 @@ static ssize_t zonefs_file_buffered_write(struct kiocb *iocb,
- 		goto inode_unlock;
- 
- 	ret = iomap_file_buffered_write(iocb, from, &zonefs_write_iomap_ops);
--	if (ret > 0)
--		iocb->ki_pos += ret;
--	else if (ret == -EIO)
-+	if (ret == -EIO)
- 		zonefs_io_error(inode, true);
- 
- inode_unlock:
+-	current->backing_dev_info = NULL;
+ out:
+ 	if (iolock)
+ 		xfs_iunlock(ip, iolock);
 -- 
 2.39.2
 
