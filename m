@@ -2,112 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84011709036
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 May 2023 09:13:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5704D709089
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 May 2023 09:42:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pzuJ4-0005AL-Ak;
-	Fri, 19 May 2023 07:13:43 +0000
+	id 1pzukg-0003O1-Pj;
+	Fri, 19 May 2023 07:42:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <butterflyhuangxx@gmail.com>) id 1pzuJ2-0005AF-RL
+ (envelope-from <dhowells@redhat.com>) id 1pzuke-0003Nu-Sf
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 19 May 2023 07:13:41 +0000
+ Fri, 19 May 2023 07:42:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=egSzj1GevLMUbPHUEJPsVJawKF57WYXztEr3RntCX4U=; b=AHpQt7zeJvl7CIUt9iaCCBZwmV
- 5FvsYCwtAaSoKa55pwqChLbVDnnc/RCpFVOMzrOPzDoN1jaWf3omzuD46wihoe2XCBH51ybAKKgqN
- vyzVvbVCgfqnB64mNwCLHNAnNSldjo80H6xZ7IK4C02macJ6ciuVcRAZ78jDtkSG0KDs=;
+ bh=r5qDgkT4BMNnpU06yXa6htF6MTIyeI5iJgctjYsdWto=; b=Ve4nWkEQinnXLAy1EkAzNn569p
+ L7qdwPEh05Kf3ATUHlvadkNXH7crDpj6iqVQEv/f9ad8Z5NNXRtm6IgZ0pnnjA8MkJ682sRaZcJBZ
+ CcYVCK7xl8eoq21nfgicsTouNuutiUKWxMlYEp6/PU9tNuUUu1YXjvrJJBDq+UxYxbmY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:MIME-Version:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=egSzj1GevLMUbPHUEJPsVJawKF57WYXztEr3RntCX4U=; b=L
- uwIkQmy/dTGu06jyel4QiLu0BiXk30T2DiJOtNfcRJda4KDAicxh2h35N+mCDBJgT+n83qrr2NdfV
- qjGYBdIZqlAsPU8lP/I9HKCFj2pGU+JzsYfyoER/cwWtar8HP5riNx441Ign1YCM0Agw9U7N/qydr
- T41kw9bLjvJouIO0=;
-Received: from mail-ot1-f49.google.com ([209.85.210.49])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=r5qDgkT4BMNnpU06yXa6htF6MTIyeI5iJgctjYsdWto=; b=HFKfuIlq8FbM6nT+ClxGvN6hjs
+ 58WpsBV9XVwPWqJ/P8b9nRK/4uaw2FWI5fs0mW5oFVfNp1Sn+UBlou71RGEatY570vxepYQ6I3t5i
+ mXHTUWYyj2lJPZ0mWCJJoDjWbVZnDgGIFVZkm1LBspy3isxoQzAsDTqHQN/zvBmsTx2I=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1pzuJ2-00D5fk-Q9 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 19 May 2023 07:13:41 +0000
-Received: by mail-ot1-f49.google.com with SMTP id
- 46e09a7af769-6ab2d14e999so2056479a34.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 19 May 2023 00:13:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1684480415; x=1687072415;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=egSzj1GevLMUbPHUEJPsVJawKF57WYXztEr3RntCX4U=;
- b=bi+CyzjOeaeMIaBjkopMtvhqJHFRAggtf57TONQVSG8LlJa/4/Ddk1dpVvG255WIZL
- HL5GWIfBf6HD3dXEmiWoD/K8dTlvO4WMdhovhe5HhZrI1z9N6DA12V1owZOruNFyqUEY
- yuo4GgSrNEy6/QQ/rBhpVlDWKlhY/Uuy4ewX02UoG/bdKJnjXh0Mk1mBBCjwux4z9x9x
- 0Ssice4/rrIAXzeXsbSDMhza5bO4bpsQ5+mDwPeAwxyETVOYizPHeXq/D2qHgaA8xX98
- A06DDthsqwi6iLtIbjC6Idyq6WNINDJJJPlbiNTWcRo+4FS1+Jbcl6ZvSxMlxEbLHA+s
- ujxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684480415; x=1687072415;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=egSzj1GevLMUbPHUEJPsVJawKF57WYXztEr3RntCX4U=;
- b=k2zYg9QdX/n3Bh30Ss2+0FEyJTW234qQkQOEW+48dw9tB3E3QbctFddxl/6xjIGhpw
- YhNedeN4EYNqkKenyUNZLRUj3I6V1mZ4N9A+Ev1+QQmYX3LL6GHCCSncMc46TFVhr6uR
- /PZebZe2xg2ql4HbbBOW/Pe/NPcjCMdhKFpUlYLTmuOAewTNGDOAPui2pO0gqYs81cqt
- Ir+oyMiah83IS0AY0BjUx9/AADCNPJdFrNWW8FD26jLbOcZ72Cui5hfOrAq24DInKiJX
- /giWSQe8L/PgHV6DgfyV/HQKCqB5birkm+cKCNudKTR+uXkLibJDzJVFZfh1XwstkJyt
- FlYw==
-X-Gm-Message-State: AC+VfDxU1pu4BEkqZEIepj0u+gKe5Ea8COKIHtgwcpXeCv5ez1N9Qfbs
- Md3i0qIkr8/iA15pgT5/tLBh+F3MkjO2j/LUUwo=
-X-Google-Smtp-Source: ACHHUZ5UXpBqr+hcH7v5FWkYUdqANhvm/PpRdWEm8OFW/juz4P7B+HEjMpbK52AGsK22EWA0M9XI9ddYvIPnE+xQo34=
-X-Received: by 2002:a05:6808:3c5:b0:38d:1597:71f1 with SMTP id
- o5-20020a05680803c500b0038d159771f1mr768246oie.31.1684480414968; Fri, 19 May
- 2023 00:13:34 -0700 (PDT)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1pzuka-00D6bg-7P for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 19 May 2023 07:42:13 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1684482122;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=r5qDgkT4BMNnpU06yXa6htF6MTIyeI5iJgctjYsdWto=;
+ b=Y0ycKK5T6mVqGYUc5QLGVd2+jHvV9iK/dLjQ6P/eQEy6BptA3gjSe9YoDu/eeiIKtRMP5J
+ /oCfVw2PqeEg/Ghg636pegW2kEwH9huZifPtyTFmsRjSeh76byiHrNb3nyz+K9P6J+JPhY
+ kYZTG1EsfMXPmVpCBlTzerWxyi95Cm0=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-636-UwmqYBTZNaOSEg7543TOgw-1; Fri, 19 May 2023 03:41:56 -0400
+X-MC-Unique: UwmqYBTZNaOSEg7543TOgw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id ABE8E1C04B50;
+ Fri, 19 May 2023 07:41:55 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.42.28.221])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 367671121314;
+ Fri, 19 May 2023 07:41:53 +0000 (UTC)
+From: David Howells <dhowells@redhat.com>
+To: Jens Axboe <axboe@kernel.dk>, Al Viro <viro@zeniv.linux.org.uk>,
+ Christoph Hellwig <hch@infradead.org>
+Date: Fri, 19 May 2023 08:40:31 +0100
+Message-Id: <20230519074047.1739879-17-dhowells@redhat.com>
+In-Reply-To: <20230519074047.1739879-1-dhowells@redhat.com>
+References: <20230519074047.1739879-1-dhowells@redhat.com>
 MIME-Version: 1.0
-From: butt3rflyh4ck <butterflyhuangxx@gmail.com>
-Date: Fri, 19 May 2023 15:13:23 +0800
-Message-ID: <CAFcO6XMJC=u5aASRNCqfVi7tJwDJBYGCw5i13M-R8zXdB9-8Ew@mail.gmail.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>, chao@kernel.org
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi, there is a null-ptr-deref bug in f2fs_write_end_io in
- fs/f2fs/data.c, I reproduce it in the latest kernel too. #Quick description
- When a thread always calls F2FS_IOC_RESIZE_FS to resize fs, if resize fs
- is failed, f2fs kernel thread would invoke callback function to update f2fs
- io info, it would call f2fs_writ [...] 
+ Content preview:  Provide a splice_read stub for f2fs. This does some checks
+ and tracing before proceeding and will switch from direct-I/O to buffered
+ I/O if forced or if misaligned. It also updates the iostats after d [...]
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [butterflyhuangxx[at]gmail.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [170.10.133.124 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.49 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.49 listed in wl.mailspike.net]
+ no trust [170.10.133.124 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1pzuJ2-00D5fk-Q9
-Subject: [f2fs-dev] A null-ptr-deref bug in f2fs_write_end_io
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1pzuka-00D6bg-7P
+Subject: [f2fs-dev] [PATCH v20 16/32] f2fs: Provide a splice-read stub
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,185 +113,160 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: LKML <linux-kernel@vger.kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-block@vger.kernel.org, Hillf Danton <hdanton@sina.com>,
+ Jan Kara <jack@suse.cz>, David Hildenbrand <david@redhat.com>,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ Jeff Layton <jlayton@kernel.org>, Christian Brauner <brauner@kernel.org>,
+ Matthew Wilcox <willy@infradead.org>, linux-kernel@vger.kernel.org,
+ David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
+ Jason Gunthorpe <jgg@nvidia.com>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Logan Gunthorpe <logang@deltatee.com>, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi, there is a null-ptr-deref  bug in f2fs_write_end_io in
-fs/f2fs/data.c, I reproduce it in the latest kernel too.
+Provide a splice_read stub for f2fs.  This does some checks and tracing
+before proceeding and will switch from direct-I/O to buffered I/O if forced
+or if misaligned.  It also updates the iostats after doing a buffered I/O.
 
-#Quick description
-When a thread always calls F2FS_IOC_RESIZE_FS to  resize fs, if resize
-fs is failed, f2fs kernel thread would  invoke callback function to
-update
-f2fs io info, it would call  f2fs_write_end_io and may trigger
-null-ptr-deref in NODE_MAPPING.
-```
-static inline struct address_space *NODE_MAPPING(struct f2fs_sb_info *sbi)
-{
-return sbi->node_inode->i_mapping;
-}
-```
-there is deref in sbi.
+[Note: I wonder if I should only do the tracing if I call
+filemap_splice_read() as direct_splice_read() will call
+f2fs_file_read_iter().]
 
-#crash log
-----------------------------------------
-general protection fault, probably for non-canonical address
-0xdffffc0000000006: 0000 [#1] PREEMPT SMP KASAN
-KASAN: null-ptr-deref in range [0x0000000000000030-0x0000000000000037]
-CPU: 0 PID: 17 Comm: ksoftirqd/0 Not tainted 6.4.0-rc1 #18
-Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
-RIP: 0010:NODE_MAPPING fs/f2fs/f2fs.h:1972 [inline]
-RIP: 0010:f2fs_write_end_io+0x727/0x1050 fs/f2fs/data.c:370
-Code: 00 00 48 89 f8 48 c1 e8 03 80 3c 18 00 0f 85 b3 07 00 00 48 8b
-44 24 08 4c 8b a8 60 01 00 00 49 8d 7d 30 48 89 f8 48 c1 e8 03 <80> 3c
-18 00 0f 85 9c 07 00 00 4d 3b 75 30 0f 84 10 04 00 00 e8 10
-RSP: 0018:ffffc9000042fc78 EFLAGS: 00010216
-RAX: 0000000000000006 RBX: dffffc0000000000 RCX: 0000000000000100
-RDX: ffff888013d18000 RSI: ffffffff83a93a4d RDI: 0000000000000030
-RBP: ffffea00009e6900 R08: 0000000000000001 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000000 R12: ffffea00009e6900
-R13: 0000000000000000 R14: ffff88802a3cec48 R15: 0000000000000000
-FS:  0000000000000000(0000) GS:ffff88802ca00000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000555faf194000 CR3: 00000000251bd000 CR4: 0000000000750ef0
-PKRU: 55555554
-Call Trace:
- <TASK>
- bio_endio+0x5af/0x6c0 block/bio.c:1608
- req_bio_endio block/blk-mq.c:761 [inline]
- blk_update_request+0x5cc/0x1690 block/blk-mq.c:906
- blk_mq_end_request+0x59/0x4c0 block/blk-mq.c:1023
- lo_complete_rq+0x1c6/0x280 drivers/block/loop.c:370
- blk_complete_reqs+0xad/0xe0 block/blk-mq.c:1101
- __do_softirq+0x1d4/0x8ef kernel/softirq.c:571
- run_ksoftirqd kernel/softirq.c:939 [inline]
- run_ksoftirqd+0x31/0x60 kernel/softirq.c:931
- smpboot_thread_fn+0x659/0x9e0 kernel/smpboot.c:164
- kthread+0x33e/0x440 kernel/kthread.c:379
- ret_from_fork+0x1f/0x30 arch/x86/entry/entry_64.S:308
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:NODE_MAPPING fs/f2fs/f2fs.h:1972 [inline]
-RIP: 0010:f2fs_write_end_io+0x727/0x1050 fs/f2fs/data.c:370
-Code: 00 00 48 89 f8 48 c1 e8 03 80 3c 18 00 0f 85 b3 07 00 00 48 8b
-44 24 08 4c 8b a8 60 01 00 00 49 8d 7d 30 48 89 f8 48 c1 e8 03 <80> 3c
-18 00 0f 85 9c 07 00 00 4d 3b 75 30 0f 84 10 04 00 00 e8 10
-RSP: 0018:ffffc9000042fc78 EFLAGS: 00010216
-RAX: 0000000000000006 RBX: dffffc0000000000 RCX: 0000000000000100
-RDX: ffff888013d18000 RSI: ffffffff83a93a4d RDI: 0000000000000030
-RBP: ffffea00009e6900 R08: 0000000000000001 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000000 R12: ffffea00009e6900
-R13: 0000000000000000 R14: ffff88802a3cec48 R15: 0000000000000000
-FS:  0000000000000000(0000) GS:ffff88802ca00000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000555faf194000 CR3: 00000000251bd000 CR4: 0000000000750ef0
-PKRU: 55555554
------------------------
+Signed-off-by: David Howells <dhowells@redhat.com>
+cc: Christoph Hellwig <hch@lst.de>
+cc: Al Viro <viro@zeniv.linux.org.uk>
+cc: Jens Axboe <axboe@kernel.dk>
+cc: Jaegeuk Kim <jaegeuk@kernel.org>
+cc: Chao Yu <chao@kernel.org>
+cc: linux-f2fs-devel@lists.sourceforge.net
+cc: linux-fsdevel@vger.kernel.org
+cc: linux-block@vger.kernel.org
+cc: linux-mm@kvack.org
+---
+ fs/f2fs/file.c | 68 ++++++++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 60 insertions(+), 8 deletions(-)
 
-# new crash log in latest kernel
----------------------
-[  193.695164][ T8174] loop0: detected capacity change from 0 to 264192
-[  193.696467][ T8174] F2FS-fs (loop0): Magic Mismatch,
-valid(0xf2f52010) - read(0x0)
-[  193.696875][ T8174] F2FS-fs (loop0): Can't find valid F2FS
-filesystem in 2th superblock
-[  193.698363][ T8174] F2FS-fs (loop0): invalid crc_offset: 0
-[  193.700454][ T8174] F2FS-fs (loop0): Disable nat_bits due to
-incorrect cp_ver (4542359912962316977, 0)
-[  193.716594][ T8174] F2FS-fs (loop0): Try to recover 2th superblock, ret: 0
-[  193.717102][ T8174] F2FS-fs (loop0): Mounted with checkpoint
-version = 3e17dab1
-[  193.743330][ T8174] F2FS-fs (loop0): For resize: curseg of type 0: 46 ==> 4
-[  193.743904][ T8174] F2FS-fs (loop0): For resize: curseg of type 3: 52 ==> 6
-[  193.745690][ T8174] F2FS-fs (loop0): For resize: curseg of type 4: 50 ==> 8
-[  193.746108][ T8174] F2FS-fs (loop0): For resize: curseg of type 5: 48 ==> 10
-[  193.751857][ T8174] F2FS-fs (loop0): resize_fs failed, should run
-fsck to repair!
-[  193.780283][    C0] general protection fault, probably for
-non-canonical address 0xdffffc0000000006: 0000 [#1] PREEMPT SMP KASAN
-[  193.781027][    C0] KASAN: null-ptr-deref in range
-[0x0000000000000030-0x0000000000000037]
-[  193.781572][    C0] CPU: 0 PID: 17 Comm: ksoftirqd/0 Not tainted
-6.4.0-rc2-00163-g2d1bcbc6cd70-dirty #17
-[  193.782201][    C0] Hardware name: QEMU Standard PC (i440FX + PIIX,
-1996), BIOS 1.15.0-1 04/01/2014
-[  193.782727][    C0] RIP: 0010:f2fs_write_end_io+0x727/0x1050
-[  193.783083][    C0] Code: 00 00 48 89 f8 48 c1 e8 03 80 3c 18 00 0f
-85 b3 07 00 00 48 8b 44 24 08 4c 8b a8 60 01 00 00 49 8d 7d 30 48 89
-f8 48 c1 e8 03 <80> 3c 18 00 0f 85 9c 07 00 00 4d 3b 75 30 0f 0
-[  193.784268][    C0] RSP: 0018:ffffc9000042fc78 EFLAGS: 00010216
-[  193.784629][    C0] RAX: 0000000000000006 RBX: dffffc0000000000
-RCX: 0000000000000100
-[  193.785109][    C0] RDX: ffff888013d18000 RSI: ffffffff83a9588d
-RDI: 0000000000000030
-[  193.785576][    C0] RBP: ffffea000143e740 R08: 0000000000000001
-R09: 0000000000000000
-[  193.786051][    C0] R10: 0000000000000000 R11: 0000000000000000
-R12: ffffea000143e740
-[  193.786571][    C0] R13: 0000000000000000 R14: ffff888041423738
-R15: 0000000000000000
-[  193.787055][    C0] FS:  0000000000000000(0000)
-GS:ffff88802ca00000(0000) knlGS:0000000000000000
-[  193.787620][    C0] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[  193.787997][    C0] CR2: 000056056fd87000 CR3: 000000001b546000
-CR4: 00000000000006f0
-[  193.788585][    C0] Call Trace:
-[  193.788863][    C0]  <TASK>
-[  193.789115][    C0]  ? bio_uninit+0x1b7/0x410
-[  193.789509][    C0]  ? f2fs_write_end+0xa80/0xa80
-[  193.790053][    C0]  bio_endio+0x5af/0x6c0
-[  193.790522][    C0]  blk_update_request+0x5cc/0x1690
-[  193.791171][    C0]  blk_mq_end_request+0x59/0x4c0
-[  193.791695][    C0]  lo_complete_rq+0x1c6/0x280
-[  193.792247][    C0]  blk_complete_reqs+0xad/0xe0
-[  193.792759][    C0]  __do_softirq+0x1d4/0x8ef
-[  193.793312][    C0]  ? __irq_exit_rcu+0x190/0x190
-[  193.793805][    C0]  run_ksoftirqd+0x31/0x60
-[  193.794183][    C0]  smpboot_thread_fn+0x659/0x9e0
-[  193.794576][    C0]  ? sort_range+0x30/0x30
-[  193.794900][    C0]  kthread+0x33e/0x440
-[  193.795263][    C0]  ? kthread_complete_and_exit+0x40/0x40
-[  193.795907][    C0]  ret_from_fork+0x1f/0x30
-[  193.796324][    C0]  </TASK>
-[  193.796689][    C0] Modules linked in:
-[  193.797189][    C0] ---[ end trace 0000000000000000 ]---
-[  193.797635][    C0] RIP: 0010:f2fs_write_end_io+0x727/0x1050
-[  193.798182][    C0] Code: 00 00 48 89 f8 48 c1 e8 03 80 3c 18 00 0f
-85 b3 07 00 00 48 8b 44 24 08 4c 8b a8 60 01 00 00 49 8d 7d 30 48 89
-f8 48 c1 e8 03 <80> 3c 18 00 0f 85 9c 07 00 00 4d 3b 75 30 0f 0
-[  193.799559][    C0] RSP: 0018:ffffc9000042fc78 EFLAGS: 00010216
-[  193.799945][    C0] RAX: 0000000000000006 RBX: dffffc0000000000
-RCX: 0000000000000100
-[  193.800329][    C0] RDX: ffff888013d18000 RSI: ffffffff83a9588d
-RDI: 0000000000000030
-[  193.800666][    C0] RBP: ffffea000143e740 R08: 0000000000000001
-R09: 0000000000000000
-[  193.801047][    C0] R10: 0000000000000000 R11: 0000000000000000
-R12: ffffea000143e740
-[  193.801503][    C0] R13: 0000000000000000 R14: ffff888041423738
-R15: 0000000000000000
-[  193.802069][    C0] FS:  0000000000000000(0000)
-GS:ffff88802ca00000(0000) knlGS:0000000000000000
-[  193.802804][    C0] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[  193.803356][    C0] CR2: 000056056fd87000 CR3: 000000001b546000
-CR4: 00000000000006f0
-[  193.804046][    C0] Kernel panic - not syncing: Fatal exception in interrupt
-[  193.804748][    C0] Kernel Offset: disabled
-[  193.805086][    C0] Rebooting in 86400 seconds..
-----------------------------
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 5ac53d2627d2..3723387f4a87 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -4367,22 +4367,23 @@ static ssize_t f2fs_dio_read_iter(struct kiocb *iocb, struct iov_iter *to)
+ 	return ret;
+ }
+ 
+-static void f2fs_trace_rw_file_path(struct kiocb *iocb, size_t count, int rw)
++static void f2fs_trace_rw_file_path(struct file *file, loff_t pos, size_t count,
++				    int rw)
+ {
+-	struct inode *inode = file_inode(iocb->ki_filp);
++	struct inode *inode = file_inode(file);
+ 	char *buf, *path;
+ 
+ 	buf = f2fs_getname(F2FS_I_SB(inode));
+ 	if (!buf)
+ 		return;
+-	path = dentry_path_raw(file_dentry(iocb->ki_filp), buf, PATH_MAX);
++	path = dentry_path_raw(file_dentry(file), buf, PATH_MAX);
+ 	if (IS_ERR(path))
+ 		goto free_buf;
+ 	if (rw == WRITE)
+-		trace_f2fs_datawrite_start(inode, iocb->ki_pos, count,
++		trace_f2fs_datawrite_start(inode, pos, count,
+ 				current->pid, path, current->comm);
+ 	else
+-		trace_f2fs_dataread_start(inode, iocb->ki_pos, count,
++		trace_f2fs_dataread_start(inode, pos, count,
+ 				current->pid, path, current->comm);
+ free_buf:
+ 	f2fs_putname(buf);
+@@ -4398,7 +4399,8 @@ static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
+ 		return -EOPNOTSUPP;
+ 
+ 	if (trace_f2fs_dataread_start_enabled())
+-		f2fs_trace_rw_file_path(iocb, iov_iter_count(to), READ);
++		f2fs_trace_rw_file_path(iocb->ki_filp, iocb->ki_pos,
++					iov_iter_count(to), READ);
+ 
+ 	if (f2fs_should_use_dio(inode, iocb, to)) {
+ 		ret = f2fs_dio_read_iter(iocb, to);
+@@ -4413,6 +4415,55 @@ static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
+ 	return ret;
+ }
+ 
++static ssize_t f2fs_file_splice_read(struct file *in, loff_t *ppos,
++				     struct pipe_inode_info *pipe,
++				     size_t len, unsigned int flags)
++{
++	struct inode *inode = file_inode(in);
++	const loff_t pos = *ppos;
++	ssize_t ret;
++
++	if (!f2fs_is_compress_backend_ready(inode))
++		return -EOPNOTSUPP;
++
++	if (trace_f2fs_dataread_start_enabled())
++		f2fs_trace_rw_file_path(in, pos, len, READ);
++
++	if (in->f_flags & O_DIRECT) {
++		if (f2fs_force_buffered_io(inode, READ))
++			goto buffered;
++
++		/*
++		 * Direct I/O not aligned to the disk's logical_block_size will
++		 * be attempted, but will fail with -EINVAL.
++		 *
++		 * f2fs additionally requires that direct I/O be aligned to the
++		 * filesystem block size, which is often a stricter
++		 * requirement.  However, f2fs traditionally falls back to
++		 * buffered I/O on requests that are logical_block_size-aligned
++		 * but not fs-block aligned.
++		 *
++		 * The below logic implements this behavior.
++		 */
++		if (!IS_ALIGNED(pos, i_blocksize(inode)) &&
++		    IS_ALIGNED(pos, bdev_logical_block_size(inode->i_sb->s_bdev)))
++			goto buffered;
++		ret = direct_splice_read(in, ppos, pipe, len, flags);
++		goto done;
++	}
++
++buffered:
++	ret = filemap_splice_read(in, ppos, pipe, len, flags);
++	if (ret > 0)
++		f2fs_update_iostat(F2FS_I_SB(inode), inode,
++				   APP_BUFFERED_READ_IO, ret);
++
++done:
++	if (trace_f2fs_dataread_end_enabled())
++		trace_f2fs_dataread_end(inode, pos, ret);
++	return ret;
++}
++
+ static ssize_t f2fs_write_checks(struct kiocb *iocb, struct iov_iter *from)
+ {
+ 	struct file *file = iocb->ki_filp;
+@@ -4714,7 +4765,8 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+ 		ret = preallocated;
+ 	} else {
+ 		if (trace_f2fs_datawrite_start_enabled())
+-			f2fs_trace_rw_file_path(iocb, orig_count, WRITE);
++			f2fs_trace_rw_file_path(iocb->ki_filp, iocb->ki_pos,
++						orig_count, WRITE);
+ 
+ 		/* Do the actual write. */
+ 		ret = dio ?
+@@ -4919,7 +4971,7 @@ const struct file_operations f2fs_file_operations = {
+ #ifdef CONFIG_COMPAT
+ 	.compat_ioctl	= f2fs_compat_ioctl,
+ #endif
+-	.splice_read	= generic_file_splice_read,
++	.splice_read	= f2fs_file_splice_read,
+ 	.splice_write	= iter_file_splice_write,
+ 	.fadvise	= f2fs_file_fadvise,
+ };
 
-If needed, I would provide reproduce.
-
-Regards,
- butt3rflyh4ck.
-
-
-
--- 
-Active Defense Lab of Venustech
 
 
 _______________________________________________
