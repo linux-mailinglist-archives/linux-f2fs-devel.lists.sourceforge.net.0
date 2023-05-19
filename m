@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72D91709360
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 May 2023 11:36:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7780770935F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 May 2023 11:36:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1pzwX3-0003aI-Ds;
-	Fri, 19 May 2023 09:36:18 +0000
+	id 1pzwX3-0008Rp-9o;
+	Fri, 19 May 2023 09:36:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+aecf67361b95543ec79f+7208+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1pzwX1-0003a5-O1 for linux-f2fs-devel@lists.sourceforge.net;
+ id 1pzwX2-0008Ri-J4 for linux-f2fs-devel@lists.sourceforge.net;
  Fri, 19 May 2023 09:36:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=STVg9hQSNCoHnaWP+j57/x1LHg0FYksrLdPn28xq/k4=; b=F/HrRjHzLhjBBW6oxzsyHqyvZR
- 9/X7l61vALfoRgKH+JJzm4/UXV3u1LRjdABViOWtFD6ZZPwX2XWRKPU2D+A2LWyq7VPAzIWSgR6+V
- I80g9JJFoZgZDD4sZTsG9VSr6R4/tfV/xp0KZCpdfTJYRmTkNMuL4n3cRGC+6Mc+H4sA=;
+ bh=lKV8h274a8dJZYXDnZBnFaYep44iQbnn3gg/wqWXLcU=; b=LLSQSTjPGgaJZYuKGiyIw1uvug
+ R3ef1IhObL65aNaWtCm03qZY8ZgS4/664UJrDHX8ZLWyYFIP8GkbzSUe7cSdUtlnneA2Gx37oq5k4
+ tsKUzaDFx6Ff/6r4H4VhZL3BpCnHApKtTIXygDAvhegaM4KC48vdNLWR986lH3qz57iE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=STVg9hQSNCoHnaWP+j57/x1LHg0FYksrLdPn28xq/k4=; b=kjzHeVLTn3yGSvqKOOesqvkKYr
- 9XPdBppSA/q+7HrkhS62/OFeSduOra80OdsOqeNYMzsdzw2brjgwMg2VmCkqJA5Ne7kgQW0wF2K+c
- elwbiCYxTjaJ5qP5N8BSOe665Mje648zOpuj7xJe4BtDzkwzsTvTFZN4iDvCD7Zt+/g4=;
+ bh=lKV8h274a8dJZYXDnZBnFaYep44iQbnn3gg/wqWXLcU=; b=HOu/YhF3idslEFQeivlaOMgneq
+ tU0DG+ab87eBs8Gg6Lp2ztbAnNi9GS6pEoR0/xeO5kuG1j1zFxu/r/u636xpITmbgN+ktJduVD8jd
+ 80qWYgWDLnk34NV7U+QauQ0L2r7PmGp6ALyIXSsFSDmaN/gJ+rvfu4PmBq//rrWpRTOQ=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1pzwX1-00DDYS-Vv for linux-f2fs-devel@lists.sourceforge.net;
+ id 1pzwX2-0007YV-0M for linux-f2fs-devel@lists.sourceforge.net;
  Fri, 19 May 2023 09:36:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=STVg9hQSNCoHnaWP+j57/x1LHg0FYksrLdPn28xq/k4=; b=lQYT2kwaUEtArFfEb79xA//fBJ
- qogp7VjnGEoqLT6bjXgEup01sK0KL/4RiA1Fe8gDUeej2m9QIQCe2S/3Jocd+N+cdKp668C9VvAeW
- phbQS3w1Z6z10f/6yehWWZEY+S9fYiGxT0TfhkNTWvUDWB9iDdV0uv+kx5oc3HcI/0ayvEc19i8ma
- zliWUfhpNpatxjBI+G08zM6lhwpCdNsKd9r0pUWyuMh5c22vx8ahQkEsYV+AjmSNW3RXuG4Ue3k+H
- sTtOSNleeSciqjt1JlkB9rX6zj9iM4pWW19+tNfp7ueTD0W+O2LSYhMGFcK+0P4fgPFc3EgSG2rLh
- YUxjFJXg==;
+ bh=lKV8h274a8dJZYXDnZBnFaYep44iQbnn3gg/wqWXLcU=; b=cWIcWF+NCJsR16lt+GN3SyqYi8
+ 20m98Sg1zXHAv7DP2DoTSsINVBJLT/jPU8582VtWjlVAlPAxQNKVTFaC0YOnpEd5FvRMnBLi4ey94
+ K4WsXk4K1iXMjE0WTmxaYPPuCk8QMzpH/S5exdIPqIWUyCVLjzR3cBZl2UWcus5acmbfLvwlunIjm
+ 4ycE2BJo+CC540gWRfo2M+hpyeOMIoCToQspTNQ3U/ipx7csq77R4XMThx+m4QCcDyjZBfA7VJFoS
+ hKoo+WYpC8HvPYhP5WamSeG2WcUggfS4/afnmf7Abg1NQrcteg0tvokFZlTlL+/0VmwC02dijjfgF
+ XYj4OTgA==;
 Received: from [2001:4bb8:188:3dd5:e8d0:68bb:e5be:210a] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pzwWk-00Fjjz-1H; Fri, 19 May 2023 09:35:58 +0000
+ id 1pzwWm-00Fjl7-2x; Fri, 19 May 2023 09:36:01 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Matthew Wilcox <willy@infradead.org>
-Date: Fri, 19 May 2023 11:35:20 +0200
-Message-Id: <20230519093521.133226-13-hch@lst.de>
+Date: Fri, 19 May 2023 11:35:21 +0200
+Message-Id: <20230519093521.133226-14-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230519093521.133226-1-hch@lst.de>
 References: <20230519093521.133226-1-hch@lst.de>
@@ -69,11 +69,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  pos is always equal to iocb->ki_pos, and mapping is always
- equal to iocb->ki_filp->f_mapping. Signed-off-by: Christoph Hellwig
- <hch@lst.de>
- --- fs/fuse/file.c | 11 +++++------ 1 file changed, 5 insertions(+),
- 6 deletions(-)
+ Content preview: Use the generic direct_write_fallback helper instead of
+ duplicating
+ the logic. Signed-off-by: Christoph Hellwig <hch@lst.de> --- fs/fuse/file.c
+ | 27 +++ 1 file changed, 3 insertions(+), 24 deletions(-) 
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +87,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1pzwX1-00DDYS-Vv
-Subject: [f2fs-dev] [PATCH 12/13] fuse: drop redundant arguments to
- fuse_perform_write
+X-Headers-End: 1pzwX2-0007YV-0M
+Subject: [f2fs-dev] [PATCH 13/13] fuse: use direct_write_fallback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,54 +117,62 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-pos is always equal to iocb->ki_pos, and mapping is always equal to
-iocb->ki_filp->f_mapping.
+Use the generic direct_write_fallback helper instead of duplicating the
+logic.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/fuse/file.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ fs/fuse/file.c | 27 +++------------------------
+ 1 file changed, 3 insertions(+), 24 deletions(-)
 
 diff --git a/fs/fuse/file.c b/fs/fuse/file.c
-index fd2f27f2144750..5f7b58798f99fc 100644
+index 5f7b58798f99fc..02ab446ab57f1f 100644
 --- a/fs/fuse/file.c
 +++ b/fs/fuse/file.c
-@@ -1280,13 +1280,13 @@ static inline unsigned int fuse_wr_pages(loff_t pos, size_t len,
- 		     max_pages);
- }
- 
--static ssize_t fuse_perform_write(struct kiocb *iocb,
--				  struct address_space *mapping,
--				  struct iov_iter *ii, loff_t pos)
-+static ssize_t fuse_perform_write(struct kiocb *iocb, struct iov_iter *ii)
- {
-+	struct address_space *mapping = iocb->ki_filp->f_mapping;
+@@ -1340,11 +1340,9 @@ static ssize_t fuse_cache_write_iter(struct kiocb *iocb, struct iov_iter *from)
+ 	struct file *file = iocb->ki_filp;
+ 	struct address_space *mapping = file->f_mapping;
+ 	ssize_t written = 0;
+-	ssize_t written_buffered = 0;
  	struct inode *inode = mapping->host;
+ 	ssize_t err;
  	struct fuse_conn *fc = get_fuse_conn(inode);
- 	struct fuse_inode *fi = get_fuse_inode(inode);
-+	loff_t pos = iocb->ki_pos;
- 	int err = 0;
- 	ssize_t res = 0;
+-	loff_t endbyte = 0;
  
-@@ -1385,8 +1385,7 @@ static ssize_t fuse_cache_write_iter(struct kiocb *iocb, struct iov_iter *from)
- 		if (written < 0 || !iov_iter_count(from))
- 			goto out;
+ 	if (fc->writeback_cache) {
+ 		/* Update size (EOF optimization) and mode (SUID clearing) */
+@@ -1382,28 +1380,9 @@ static ssize_t fuse_cache_write_iter(struct kiocb *iocb, struct iov_iter *from)
  
--		written_buffered = fuse_perform_write(iocb, mapping, from,
--						      iocb->ki_pos);
-+		written_buffered = fuse_perform_write(iocb, from);
- 		if (written_buffered < 0) {
- 			err = written_buffered;
- 			goto out;
-@@ -1406,7 +1405,7 @@ static ssize_t fuse_cache_write_iter(struct kiocb *iocb, struct iov_iter *from)
- 		written += written_buffered;
- 		iocb->ki_pos += written_buffered;
+ 	if (iocb->ki_flags & IOCB_DIRECT) {
+ 		written = generic_file_direct_write(iocb, from);
+-		if (written < 0 || !iov_iter_count(from))
+-			goto out;
+-
+-		written_buffered = fuse_perform_write(iocb, from);
+-		if (written_buffered < 0) {
+-			err = written_buffered;
+-			goto out;
+-		}
+-		endbyte = iocb->ki_pos + written_buffered - 1;
+-
+-		err = filemap_write_and_wait_range(file->f_mapping,
+-						   iocb->ki_pos,
+-						   endbyte);
+-		if (err)
+-			goto out;
+-
+-		invalidate_mapping_pages(file->f_mapping,
+-					 iocb->ki_pos >> PAGE_SHIFT,
+-					 endbyte >> PAGE_SHIFT);
+-
+-		written += written_buffered;
+-		iocb->ki_pos += written_buffered;
++		if (written >= 0 && iov_iter_count(from))
++			written = direct_write_fallback(iocb, from, written,
++					fuse_perform_write(iocb, from));
  	} else {
--		written = fuse_perform_write(iocb, mapping, from, iocb->ki_pos);
-+		written = fuse_perform_write(iocb, from);
+ 		written = fuse_perform_write(iocb, from);
  	}
- out:
- 	current->backing_dev_info = NULL;
 -- 
 2.39.2
 
