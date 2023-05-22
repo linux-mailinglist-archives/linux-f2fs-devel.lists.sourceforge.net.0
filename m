@@ -2,108 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93FCE70C01F
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 May 2023 15:52:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43E0B70C0E1
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 May 2023 16:20:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q15x9-0007i2-Eh;
-	Mon, 22 May 2023 13:52:00 +0000
+	id 1q16OD-0004Zc-UN;
+	Mon, 22 May 2023 14:19:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dhowells@redhat.com>) id 1q15x7-0007hn-FM
+ (envelope-from <miklos@szeredi.hu>) id 1q16OD-0004ZW-3p
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 May 2023 13:51:58 +0000
+ Mon, 22 May 2023 14:19:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8d8uJmrTh/75eqAaNN/foN1c757ttvO6v+jRBhlF56A=; b=S8rxu7pU/L6Q+XFDaBsjOF1/Su
- zdW3IRf3RftxvItHjHUX6ujRxTafGzFGA2VvH2wPhPH+/rQoMGoEPGRNVSry+Q6N128ZtmKPJMUkc
- FPyLQ7RjFuOnze1Uo+vDZyH5NE4xdbFdW+rip3EijUmKqj6MCcqYIZ4QjhvEfwvCi6iM=;
+ bh=VSL7mwwp7mP3i/A2Ha5ZWYNP2l8nV9xWCZ9dDdVJyrE=; b=LTRLrxKHIPubX4TLAgM3PZjayo
+ 76W0/ttqguujTf3hWyHX5YAIZxXCp9bXWpqt5X+XOBb7Qbqpf7QjzzS8yv5EZ/lLELGX+x2PzTgsP
+ GDEYlb3dCgE9B4wn2niQNKiF/zszp58zb8+4GUzk2vbFkZtsLA/Dueoz/cHcLxcuwfco=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8d8uJmrTh/75eqAaNN/foN1c757ttvO6v+jRBhlF56A=; b=eIfA0RMUViXakScyMH0oxCs/th
- 3Q5MKuopLrfvNsuS9ch/wMdM2eZ0b/0JyxbWm4/Gb04a0fixlk2a6ynk3FjlKx/SXgBqnxDMjcXCx
- pPVE1vY8FvR0YLrJgIDSvhRcX0V4EQRzuXiDUb2SmAVrs4l/th0/0gIvbFiDPpAbp5eg=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ bh=VSL7mwwp7mP3i/A2Ha5ZWYNP2l8nV9xWCZ9dDdVJyrE=; b=ZZzgrm6kr6I5xZwj8kcR2xPNQb
+ gnTJSXGzyoViERT0kGX5+m9L/rjTh+6eMf2w+xQtwQmq8NyxErl+Paz/n4qlZSuf9Fx0A88lQuG/j
+ 9HSxyFfRJgIpHsDCqgQBhngSr8ozVS0hhg9GyuRSJbIp58RS6FqIfMhFAPKJAT6xdByY=;
+Received: from mail-ej1-f52.google.com ([209.85.218.52])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q15x1-00055Z-VE for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 May 2023 13:51:58 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1684763505;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8d8uJmrTh/75eqAaNN/foN1c757ttvO6v+jRBhlF56A=;
- b=G3Gb0leLNGy9D39/4BB8ELVvuZanIRr/qu6JoSiAkJgHKWlaQ2WHyH+sZ0dX0plq/XsHdG
- Yqcj7LS2in80DaBgfLmYczQZhVzBTl9ANbjG0VG967g9KLVnCxkTrXXtMfTtYQmL+qWMxZ
- E45mihEXFIyX2oECa+7mtG8abPGtGDE=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-103-ZtUfXtY9PdeS9nRV65CuKw-1; Mon, 22 May 2023 09:51:41 -0400
-X-MC-Unique: ZtUfXtY9PdeS9nRV65CuKw-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 149CE185A797;
- Mon, 22 May 2023 13:51:40 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.39.192.68])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 59064492B0A;
- Mon, 22 May 2023 13:51:37 +0000 (UTC)
-From: David Howells <dhowells@redhat.com>
-To: Jens Axboe <axboe@kernel.dk>, Al Viro <viro@zeniv.linux.org.uk>,
- Christoph Hellwig <hch@infradead.org>
-Date: Mon, 22 May 2023 14:50:06 +0100
-Message-Id: <20230522135018.2742245-20-dhowells@redhat.com>
-In-Reply-To: <20230522135018.2742245-1-dhowells@redhat.com>
-References: <20230522135018.2742245-1-dhowells@redhat.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1q16OC-0005tM-C2 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 22 May 2023 14:19:57 +0000
+Received: by mail-ej1-f52.google.com with SMTP id
+ a640c23a62f3a-96fe88cd2fcso203996566b.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 22 May 2023 07:19:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=szeredi.hu; s=google; t=1684765190; x=1687357190;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VSL7mwwp7mP3i/A2Ha5ZWYNP2l8nV9xWCZ9dDdVJyrE=;
+ b=bW3JxzSWL903VRTFCHvbgK/kSmmhNGzjPmv2oTgKuUeY/4UGuj+rpVpSRqU0fLX71Z
+ 9x0WYxajpqEHWpasb3FMt2QPMwFvEXG1qzy09fFvoatRiySxfHmtlreAhXwdf72AH0EA
+ uaD7yDQ7ocfBWwGajHKOT7vpFDgho5apenxJE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1684765190; x=1687357190;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VSL7mwwp7mP3i/A2Ha5ZWYNP2l8nV9xWCZ9dDdVJyrE=;
+ b=d+B7fzT3Dpw9U304X97+Ntn85+u+1iqVHkU8qckU6730einnlRRGdeaac8JVzZxSdo
+ BKxVQAWqaZ7240Fig3QkEs83QcjvJx7ad0ml7HlTKYiSlL10gyQsXpfHQH4S2FGU3YhB
+ 6l74H5Cx+l0icufEdGdVTBoc2k4NN/Mao1E2wv3jgwmmkI33poKEC8Uk/t3DeeZehLA7
+ cFx8ECMwwkmxvFDsrFItlm75AvLKdrYGftHX4MncnibwrFpy81R25+6uHOg95BQQwVEk
+ 3nA3R6Erh+XlI6SRTAEbTPJ6A/7eVpgQD0P6PqZrgE+pDcH0h5uUA+YoMFyZq3Hj8xnp
+ Ft5A==
+X-Gm-Message-State: AC+VfDxS9cb++NAglCvBf9YJ7ofyaw0zG2bjVnsD34Hac3CuXukKvYaU
+ 9QzaLbJiAJHO3OYrui4VGSedSel1g5BZKw1K7FkB4A==
+X-Google-Smtp-Source: ACHHUZ5pTZpoagrq7BPdRNACytZjcbnwwAzdd4/4F4mMBgFIR5olByJvr8DzGqhjgDPmmSOeMIBmAwCLlQut/WuHsuo=
+X-Received: by 2002:a17:907:25c2:b0:969:edf8:f73b with SMTP id
+ ae2-20020a17090725c200b00969edf8f73bmr9314077ejc.60.1684765189889; Mon, 22
+ May 2023 07:19:49 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
-X-Spam-Score: -0.9 (/)
+References: <20230519093521.133226-1-hch@lst.de>
+ <20230519093521.133226-11-hch@lst.de>
+In-Reply-To: <20230519093521.133226-11-hch@lst.de>
+Date: Mon, 22 May 2023 16:19:38 +0200
+Message-ID: <CAJfpegtHb4pA=1NBRzQJSub7B0HZqnvqsMNQmYYM-8L7PTQfvw@mail.gmail.com>
+To: Christoph Hellwig <hch@lst.de>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Provide a splice_read wrapper for f2fs. This does some checks
- and tracing before calling filemap_splice_read() and will update the iostats
- afterwards. Direct I/O is handled by the caller. Signed-off-by: David Howells
- <dhowells@redhat.com> cc: Christoph Hellwig <hch@lst.de> cc: Al Viro
- <viro@zeniv.linux.org.uk>
- cc: Jens Axboe <axboe@kernel.dk> cc: Jaegeuk Kim <jaegeuk@kernel.org> cc:
- Ch [...] 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview:  On Fri, 19 May 2023 at 11:36, Christoph Hellwig <hch@lst.de>
+ wrote: > > Add a helper dealing with handling the syncing of a buffered write
+ fallback > for direct I/O. > > Signed-off-by: Christoph Hellw [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [170.10.129.124 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [170.10.129.124 listed in wl.mailspike.net]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ no trust [209.85.218.52 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.218.52 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q15x1-00055Z-VE
-Subject: [f2fs-dev] [PATCH v22 19/31] f2fs: Provide a splice-read wrapper
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1q16OC-0005tM-C2
+Subject: Re: [f2fs-dev] [PATCH 10/13] fs: factor out a direct_write_fallback
+ helper
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,131 +117,82 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org, Hillf Danton <hdanton@sina.com>,
- Jan Kara <jack@suse.cz>, David Hildenbrand <david@redhat.com>,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Jeff Layton <jlayton@kernel.org>, Christian Brauner <brauner@kernel.org>,
- Matthew Wilcox <willy@infradead.org>, linux-kernel@vger.kernel.org,
- David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
- Jason Gunthorpe <jgg@nvidia.com>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- Logan Gunthorpe <logang@deltatee.com>, Christoph Hellwig <hch@lst.de>
+From: Miklos Szeredi via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Miklos Szeredi <miklos@szeredi.hu>
+Cc: "Darrick J. Wong" <djwong@kernel.org>, linux-mm@kvack.org,
+ Andreas Gruenbacher <agruenba@redhat.com>,
+ Matthew Wilcox <willy@infradead.org>, cluster-devel@redhat.com,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
+ linux-nfs@vger.kernel.org, linux-block@vger.kernel.org,
+ Damien Le Moal <dlemoal@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Xiubo Li <xiubli@redhat.com>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
+ Theodore Ts'o <tytso@mit.edu>,
+ "open list:F2FS FILE SYSTEM" <linux-f2fs-devel@lists.sourceforge.net>,
+ linux-xfs@vger.kernel.org, Anna Schumaker <anna@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Provide a splice_read wrapper for f2fs.  This does some checks and tracing
-before calling filemap_splice_read() and will update the iostats
-afterwards.  Direct I/O is handled by the caller.
+On Fri, 19 May 2023 at 11:36, Christoph Hellwig <hch@lst.de> wrote:
+>
+> Add a helper dealing with handling the syncing of a buffered write fallback
+> for direct I/O.
+>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  fs/libfs.c         | 36 ++++++++++++++++++++++++++++
+>  include/linux/fs.h |  2 ++
+>  mm/filemap.c       | 59 ++++++++++------------------------------------
+>  3 files changed, 50 insertions(+), 47 deletions(-)
+>
+> diff --git a/fs/libfs.c b/fs/libfs.c
+> index 89cf614a327158..9f3791fc6e0715 100644
+> --- a/fs/libfs.c
+> +++ b/fs/libfs.c
+> @@ -1613,3 +1613,39 @@ u64 inode_query_iversion(struct inode *inode)
+>         return cur >> I_VERSION_QUERIED_SHIFT;
+>  }
+>  EXPORT_SYMBOL(inode_query_iversion);
+> +
+> +ssize_t direct_write_fallback(struct kiocb *iocb, struct iov_iter *iter,
+> +               ssize_t direct_written, ssize_t buffered_written)
+> +{
+> +       struct address_space *mapping = iocb->ki_filp->f_mapping;
+> +       loff_t pos = iocb->ki_pos, end;
 
-Signed-off-by: David Howells <dhowells@redhat.com>
-cc: Christoph Hellwig <hch@lst.de>
-cc: Al Viro <viro@zeniv.linux.org.uk>
-cc: Jens Axboe <axboe@kernel.dk>
-cc: Jaegeuk Kim <jaegeuk@kernel.org>
-cc: Chao Yu <chao@kernel.org>
-cc: linux-f2fs-devel@lists.sourceforge.net
-cc: linux-fsdevel@vger.kernel.org
-cc: linux-block@vger.kernel.org
-cc: linux-mm@kvack.org
----
- fs/f2fs/file.c | 43 +++++++++++++++++++++++++++++++++++--------
- 1 file changed, 35 insertions(+), 8 deletions(-)
+At this point pos will point after the end of the buffered write (as
+per earlier patches), yes?
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 5ac53d2627d2..3fce122997ca 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4367,22 +4367,23 @@ static ssize_t f2fs_dio_read_iter(struct kiocb *iocb, struct iov_iter *to)
- 	return ret;
- }
- 
--static void f2fs_trace_rw_file_path(struct kiocb *iocb, size_t count, int rw)
-+static void f2fs_trace_rw_file_path(struct file *file, loff_t pos, size_t count,
-+				    int rw)
- {
--	struct inode *inode = file_inode(iocb->ki_filp);
-+	struct inode *inode = file_inode(file);
- 	char *buf, *path;
- 
- 	buf = f2fs_getname(F2FS_I_SB(inode));
- 	if (!buf)
- 		return;
--	path = dentry_path_raw(file_dentry(iocb->ki_filp), buf, PATH_MAX);
-+	path = dentry_path_raw(file_dentry(file), buf, PATH_MAX);
- 	if (IS_ERR(path))
- 		goto free_buf;
- 	if (rw == WRITE)
--		trace_f2fs_datawrite_start(inode, iocb->ki_pos, count,
-+		trace_f2fs_datawrite_start(inode, pos, count,
- 				current->pid, path, current->comm);
- 	else
--		trace_f2fs_dataread_start(inode, iocb->ki_pos, count,
-+		trace_f2fs_dataread_start(inode, pos, count,
- 				current->pid, path, current->comm);
- free_buf:
- 	f2fs_putname(buf);
-@@ -4398,7 +4399,8 @@ static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
- 		return -EOPNOTSUPP;
- 
- 	if (trace_f2fs_dataread_start_enabled())
--		f2fs_trace_rw_file_path(iocb, iov_iter_count(to), READ);
-+		f2fs_trace_rw_file_path(iocb->ki_filp, iocb->ki_pos,
-+					iov_iter_count(to), READ);
- 
- 	if (f2fs_should_use_dio(inode, iocb, to)) {
- 		ret = f2fs_dio_read_iter(iocb, to);
-@@ -4413,6 +4415,30 @@ static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
- 	return ret;
- }
- 
-+static ssize_t f2fs_file_splice_read(struct file *in, loff_t *ppos,
-+				     struct pipe_inode_info *pipe,
-+				     size_t len, unsigned int flags)
-+{
-+	struct inode *inode = file_inode(in);
-+	const loff_t pos = *ppos;
-+	ssize_t ret;
-+
-+	if (!f2fs_is_compress_backend_ready(inode))
-+		return -EOPNOTSUPP;
-+
-+	if (trace_f2fs_dataread_start_enabled())
-+		f2fs_trace_rw_file_path(in, pos, len, READ);
-+
-+	ret = filemap_splice_read(in, ppos, pipe, len, flags);
-+	if (ret > 0)
-+		f2fs_update_iostat(F2FS_I_SB(inode), inode,
-+				   APP_BUFFERED_READ_IO, ret);
-+
-+	if (trace_f2fs_dataread_end_enabled())
-+		trace_f2fs_dataread_end(inode, pos, ret);
-+	return ret;
-+}
-+
- static ssize_t f2fs_write_checks(struct kiocb *iocb, struct iov_iter *from)
- {
- 	struct file *file = iocb->ki_filp;
-@@ -4714,7 +4740,8 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
- 		ret = preallocated;
- 	} else {
- 		if (trace_f2fs_datawrite_start_enabled())
--			f2fs_trace_rw_file_path(iocb, orig_count, WRITE);
-+			f2fs_trace_rw_file_path(iocb->ki_filp, iocb->ki_pos,
-+						orig_count, WRITE);
- 
- 		/* Do the actual write. */
- 		ret = dio ?
-@@ -4919,7 +4946,7 @@ const struct file_operations f2fs_file_operations = {
- #ifdef CONFIG_COMPAT
- 	.compat_ioctl	= f2fs_compat_ioctl,
- #endif
--	.splice_read	= generic_file_splice_read,
-+	.splice_read	= f2fs_file_splice_read,
- 	.splice_write	= iter_file_splice_write,
- 	.fadvise	= f2fs_file_fadvise,
- };
+> +       int err;
+> +
+> +       /*
+> +        * If the buffered write fallback returned an error, we want to return
+> +        * the number of bytes which were written by direct I/O, or the error
+> +        * code if that was zero.
+> +        *
+> +        * Note that this differs from normal direct-io semantics, which will
+> +        * return -EFOO even if some bytes were written.
+> +        */
+> +       if (unlikely(buffered_written < 0))
+> +               return buffered_written;
+> +
+> +       /*
+> +        * We need to ensure that the page cache pages are written to disk and
+> +        * invalidated to preserve the expected O_DIRECT semantics.
+> +        */
+> +       end = pos + buffered_written - 1;
 
+So this calculation is wrong.
+
+AFAICS this affects later patches as well.
+
+Thanks,
+Miklos
 
 
 _______________________________________________
