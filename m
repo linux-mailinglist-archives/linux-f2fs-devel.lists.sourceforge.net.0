@@ -2,79 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC78870DCB0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 May 2023 14:35:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 912B770DCB4
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 May 2023 14:36:52 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q1REq-0001rU-9r;
-	Tue, 23 May 2023 12:35:41 +0000
+	id 1q1RFx-0001vA-AD;
+	Tue, 23 May 2023 12:36:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1q1REo-0001rL-KL
+ (envelope-from <chao@kernel.org>) id 1q1RFw-0001v3-Hk
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 May 2023 12:35:39 +0000
+ Tue, 23 May 2023 12:36:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HQ6Qh5jGVx8tlQ+w/PXoG8FE76HBp2ZfQVfH2GVPJAQ=; b=aSzzE8QtYupJ/AHCOQt/A7XjS+
- KZIagjysnE65e0cNdS9uwplJ7FMNMHF01mTvrTFGWQFFk4jKUtFX9Je/5NSDgJKyMs5Ru3NR2kvI/
- z3XMHgVMFHrqW1YAzOnv3SUBoiuWrh1g/PBBO28t4VPs5jqNaJQgq+vawvedng0xiuZI=;
+ bh=ce3I3BOGwRL+Hdq211cwYd4uNzDvT4csntX5cY9nJD8=; b=EJIujEeEnjf0apxqNAxq6ZLnsz
+ E1jQr625WzaUzStPxNE9dfirZR+j+vKgJ1ilm+6WJW3FMgruJzIzDwKw8ZovbKhQHh0/kQt8Iy29W
+ UM8vBLVnmwppB9cDqCGUM6D6Ze5ABa7s63bAlRSUyzxCDqBbiJndJWIxrPk8yu5DgPUk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=HQ6Qh5jGVx8tlQ+w/PXoG8FE76HBp2ZfQVfH2GVPJAQ=; b=H
- m/8cROYO1JGnr2i7LBMFAU4sB/6wmL/vWHLk/+6sanSS/RIZJmrTIaGzRFTFptNjAEPqbd0dVgtwC
- hq6vwiV3R37Ci9Gl2B24WIvMcAEZK5Y7G+EW+fNDKJHIfrUefG+vd1F3lqUrpq+/lyifXDWJ86ADr
- so6M8deZmoaFiu1M=;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ce3I3BOGwRL+Hdq211cwYd4uNzDvT4csntX5cY9nJD8=; b=XYodnY0Tpqu5CndhvVuE1MDa4/
+ 0JJCxktob4JX/5gwK3qxchPuCbCjNoiO1V6gjAuGOugxPHNruvm+1yPXoiqRy1AK5bhqPuvhYi+k9
+ REGdWRjU9UaM0Dy/7r5GtQwS7a9Hq35khSkdDCUzggzd2gecqpJ7xPANv9RomGcffLZo=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q1REo-000TQc-NF for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 May 2023 12:35:39 +0000
+ id 1q1RFw-000TTO-PN for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 23 May 2023 12:36:49 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 56167631DD
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 23 May 2023 12:35:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 996DFC433EF;
- Tue, 23 May 2023 12:35:26 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 68371631AF;
+ Tue, 23 May 2023 12:36:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F2DC0C433D2;
+ Tue, 23 May 2023 12:36:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1684845328;
- bh=5URJ0niupsFX+DKwvQymh4lC2dqDWe3nA3EpbyGLCMQ=;
- h=From:To:Cc:Subject:Date:From;
- b=BavkA/EXyBhl+LzyUGOz7k0/foOqHh6AVOumTFGjo8pIFxeBJG6j6mfZ1Y57sOeft
- BGq9k0WlLazMd/LvKexUp0/uOIsoU36fAfgZNY3qIpN6wlwbPh+jxkfHU/VbYqSZz3
- bOw6/H3H9n3f4UIy1MjlKISHausqPgXUiblgcfusfsZs/aIN8xzvxD+9A+08sdYNJm
- 3g5JCx1fuxpIeyFxNNBke/AF4dkWbFOQDDZGB9WqHW0S/XZVmapz/oBL6NJRFaJoPE
- rIbOBLpWzHibC6ejzpz3XM1oxZosBy9PbsOUUG1cGnUeKAjOPaAmUHu4ejD6dFAxAA
- a5mjuJMXqDy/A==
-From: Chao Yu <chao@kernel.org>
-To: jaegeuk@kernel.org
-Date: Tue, 23 May 2023 20:35:21 +0800
-Message-Id: <20230523123521.67656-1-chao@kernel.org>
-X-Mailer: git-send-email 2.40.1
+ s=k20201202; t=1684845402;
+ bh=bWH03AemVwult1QyGoPBgmcdG2x0RGL6Y8nlzAk1w3Y=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=ZxZqkBw+sKxcgg854Ofrb7ZnOYRj/5H7qI0IeSsEVPtmNJ0D8pYEA+EnpcZ1JmAJW
+ azu8X85HfGM4fN7zTrjjQ3adxkgKxoeYuFPW+uu3kPm2smAoS9LA5Wlocx7iYc2tH/
+ n7SeWqxENV44SSx5ruFhhiYcObNlSqsHFKNCIQem9oIX7woYYghNjN8Uf6vgvmFdpJ
+ aBvYojj9Yz/13SIVFFqXHO1AsfxSktkR3FoKLS7geQJ+WFcyrlfbXXcwrDMlS0KEkB
+ Rw/ACmOSJ9KTRpxKyZslrLoeXvpDBDQgWe4E57/vs7V7jSLanWFGiw2KYfzI7ewHop
+ M2Rh0afezi/AA==
+Message-ID: <b39c6217-a0d3-105a-b8e9-e636b87ab46e@kernel.org>
+Date: Tue, 23 May 2023 20:36:40 +0800
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+To: Chunhai Guo <guochunhai@vivo.com>
+References: <20230523104059.78315-1-guochunhai@vivo.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20230523104059.78315-1-guochunhai@vivo.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Use sbi->log_sectors_per_block to clean up below calculated
- one: unsigned int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
- Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/segment.c | 23
- +++++++++++ 1 file changed, 11 insertions(+), 12 deletions(-) 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 2023/5/23 18:40, Chunhai Guo wrote: > find_fsync_inode()
+ detect the looped node chain by comparing the loop > counter with free blocks.
+ While it may take tens of seconds to quit when > the free blo [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -87,9 +89,11 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q1REo-000TQc-NF
-Subject: [f2fs-dev] [PATCH] f2fs: clean up w/ sbi->log_sectors_per_block
+ valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q1RFw-000TTO-PN
+Subject: Re: [f2fs-dev] [PATCH v7] fsck.f2fs: Detect and fix looped node
+ chain efficiently
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,109 +105,43 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ frank.li@vivo.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Use sbi->log_sectors_per_block to clean up below calculated one:
+On 2023/5/23 18:40, Chunhai Guo wrote:
+> find_fsync_inode() detect the looped node chain by comparing the loop
+> counter with free blocks. While it may take tens of seconds to quit when
+> the free blocks are large enough. We can use Floyd's cycle detection
+> algorithm to make the detection more efficient, and fix the issue by
+> filling a NULL address in the last node of the chain.
+> 
+> Below is the log we encounter on a 256GB UFS storage and it takes about
+> 25 seconds to detect looped node chain. After changing the algorithm, it
+> takes about 20ms to finish the same job.
+> 
+>      [   10.822904] fsck.f2fs: Info: version timestamp cur: 17, prev: 430
+>      [   10.822949] fsck.f2fs: [update_superblock: 762] Info: Done to
+> update superblock
+>      [   10.822953] fsck.f2fs: Info: superblock features = 1499 :
+> encrypt verity extra_attr project_quota quota_ino casefold
+>      [   10.822956] fsck.f2fs: Info: superblock encrypt level = 0, salt =
+> 00000000000000000000000000000000
+>      [   10.822960] fsck.f2fs: Info: total FS sectors = 59249811 (231444
+> MB)
+>      [   35.852827] fsck.f2fs:	detect looped node chain,
+> blkaddr:1114802, next:1114803
+>      [   35.852842] fsck.f2fs: [f2fs_do_mount:3846] record_fsync_data
+> failed
+>      [   35.856106] fsck.f2fs: fsck.f2fs terminated by exit(255)
+> 
+> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
 
-unsigned int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/segment.c | 23 +++++++++++------------
- 1 file changed, 11 insertions(+), 12 deletions(-)
-
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 43d537d29b52..9282399cc810 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -4768,17 +4768,17 @@ static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
- {
- 	unsigned int wp_segno, wp_blkoff, zone_secno, zone_segno, segno;
- 	block_t zone_block, wp_block, last_valid_block;
--	unsigned int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
- 	int i, s, b, ret;
- 	struct seg_entry *se;
- 
- 	if (zone->type != BLK_ZONE_TYPE_SEQWRITE_REQ)
- 		return 0;
- 
--	wp_block = fdev->start_blk + (zone->wp >> log_sectors_per_block);
-+	wp_block = fdev->start_blk + (zone->wp >> sbi->log_sectors_per_block);
- 	wp_segno = GET_SEGNO(sbi, wp_block);
- 	wp_blkoff = wp_block - START_BLOCK(sbi, wp_segno);
--	zone_block = fdev->start_blk + (zone->start >> log_sectors_per_block);
-+	zone_block = fdev->start_blk + (zone->start >>
-+						sbi->log_sectors_per_block);
- 	zone_segno = GET_SEGNO(sbi, zone_block);
- 	zone_secno = GET_SEC_FROM_SEG(sbi, zone_segno);
- 
-@@ -4824,7 +4824,7 @@ static int check_zone_write_pointer(struct f2fs_sb_info *sbi,
- 			    "pointer. Reset the write pointer: wp[0x%x,0x%x]",
- 			    wp_segno, wp_blkoff);
- 		ret = __f2fs_issue_discard_zone(sbi, fdev->bdev, zone_block,
--					zone->len >> log_sectors_per_block);
-+				zone->len >> sbi->log_sectors_per_block);
- 		if (ret)
- 			f2fs_err(sbi, "Discard zone failed: %s (errno=%d)",
- 				 fdev->path, ret);
-@@ -4885,7 +4885,6 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
- 	struct blk_zone zone;
- 	unsigned int cs_section, wp_segno, wp_blkoff, wp_sector_off;
- 	block_t cs_zone_block, wp_block;
--	unsigned int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
- 	sector_t zone_sector;
- 	int err;
- 
-@@ -4897,8 +4896,8 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
- 		return 0;
- 
- 	/* report zone for the sector the curseg points to */
--	zone_sector = (sector_t)(cs_zone_block - zbd->start_blk)
--		<< log_sectors_per_block;
-+	zone_sector = (sector_t)(cs_zone_block - zbd->start_blk) <<
-+						sbi->log_sectors_per_block;
- 	err = blkdev_report_zones(zbd->bdev, zone_sector, 1,
- 				  report_one_zone_cb, &zone);
- 	if (err != 1) {
-@@ -4910,10 +4909,10 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
- 	if (zone.type != BLK_ZONE_TYPE_SEQWRITE_REQ)
- 		return 0;
- 
--	wp_block = zbd->start_blk + (zone.wp >> log_sectors_per_block);
-+	wp_block = zbd->start_blk + (zone.wp >> sbi->log_sectors_per_block);
- 	wp_segno = GET_SEGNO(sbi, wp_block);
- 	wp_blkoff = wp_block - START_BLOCK(sbi, wp_segno);
--	wp_sector_off = zone.wp & GENMASK(log_sectors_per_block - 1, 0);
-+	wp_sector_off = zone.wp & GENMASK(sbi->log_sectors_per_block - 1, 0);
- 
- 	if (cs->segno == wp_segno && cs->next_blkoff == wp_blkoff &&
- 		wp_sector_off == 0)
-@@ -4940,8 +4939,8 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
- 	if (!zbd)
- 		return 0;
- 
--	zone_sector = (sector_t)(cs_zone_block - zbd->start_blk)
--		<< log_sectors_per_block;
-+	zone_sector = (sector_t)(cs_zone_block - zbd->start_blk) <<
-+						sbi->log_sectors_per_block;
- 	err = blkdev_report_zones(zbd->bdev, zone_sector, 1,
- 				  report_one_zone_cb, &zone);
- 	if (err != 1) {
-@@ -4959,7 +4958,7 @@ static int fix_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
- 			    "Reset the zone: curseg[0x%x,0x%x]",
- 			    type, cs->segno, cs->next_blkoff);
- 		err = __f2fs_issue_discard_zone(sbi, zbd->bdev,	cs_zone_block,
--					zone.len >> log_sectors_per_block);
-+					zone.len >> sbi->log_sectors_per_block);
- 		if (err) {
- 			f2fs_err(sbi, "Discard zone failed: %s (errno=%d)",
- 				 zbd->path, err);
--- 
-2.40.1
-
+Thanks,
 
 
 _______________________________________________
