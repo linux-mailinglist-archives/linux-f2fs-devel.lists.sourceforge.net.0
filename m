@@ -2,84 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F80470DF92
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 May 2023 16:44:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD48370E14D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 May 2023 18:02:07 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q1TF0-0001Pg-AN;
-	Tue, 23 May 2023 14:43:59 +0000
+	id 1q1USY-0001Zs-GI;
+	Tue, 23 May 2023 16:02:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <SRS0=q/om=BM=goodmis.org=rostedt@kernel.org>)
- id 1q1TEy-0001PL-Hx for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 May 2023 14:43:57 +0000
+ (envelope-from <hch@lst.de>) id 1q1USW-0001ZX-9L
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 23 May 2023 16:02:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HMdRs4EVy6NjSK7M+XtSG8loeq8D7L+FTyQAmHNRI6I=; b=Z4LS4WFtyAFylSz8HvNscbB44S
- eq9azJTmgdWqvYt3UjKU8RgJY99oTJZ2+es2uzBoJPnqx/bpseRqnFqc6nXdlVZ4WfSJslOMUGI8p
- CEcRzQSh5V4e3i8ueQOfItOY1CLiwcNFYb/3i8rKuZzaDJzdYlQTEWl+NH02Be81qnB4=;
+ bh=P1cg1lro73aIsxAqkDpaQ1HJTCIwEkgkw0qDkJM6b+M=; b=PRurC+jfKbW5ijQTiqSqIdxNRM
+ VJ4CKac5cUJ1rcVuBPZ+KcbUO7LAfSphS6W8DqZ3pcm4tTrd6DN/OfenQmM/BzAJ8f3C8Yc1IFuhP
+ mc6jgxyAb06z3Ya5B9d9wkVM3fz297tBrSjLWTqjfG//VNNfSrfNjAGM1sM85h5hyyJE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HMdRs4EVy6NjSK7M+XtSG8loeq8D7L+FTyQAmHNRI6I=; b=PiWxD0aHwzTP6t51bwYV6FRsJs
- Qip9L7L6Y6L2GPOwZRAHhaZv2iI939uVZAquG4UoegVuVe65I3rxxv+p1CtmXe4/IBGmSDchZbPIC
- nBzdwL/t0IP08WslHXT0Xf1FBX97dAVkSR/10ew59NWbMAitckfUI+3HN7B7xxm9Q2Zk=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=P1cg1lro73aIsxAqkDpaQ1HJTCIwEkgkw0qDkJM6b+M=; b=TX6aXIlAlGEjZVD9cKUx48fyfr
+ HukJnAgRuPAiUPzdWYvCPh51CriCQjOqrKZD8eEzyFzCxrNovQJBVJmsDMRceFsSxTT2SlTZAyAkU
+ oVeMGNjtgrcdYjZ3WpBvcnZM6OG7QUVddrYKLxhveR/GMF/Qmr2Fc/kCVU/qZz/cgdBs=;
+Received: from verein.lst.de ([213.95.11.211])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q1TEy-000Yf1-Fw for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 May 2023 14:43:57 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4BEFA60ACF;
- Tue, 23 May 2023 14:43:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E08C9C433D2;
- Tue, 23 May 2023 14:43:48 +0000 (UTC)
-Date: Tue, 23 May 2023 10:43:47 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <20230523104347.61149ecd@rorschach.local.home>
-In-Reply-To: <ZFqWr3sSYMsHtHAC@google.com>
-References: <CGME20230508081042epcms2p8a637deae7de1829f54614e09d5fde5e5@epcms2p8>
- <20230508081042epcms2p8a637deae7de1829f54614e09d5fde5e5@epcms2p8>
- <ZFqWr3sSYMsHtHAC@google.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ id 1q1USV-00067t-IN for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 23 May 2023 16:02:01 +0000
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 32BF46732D; Tue, 23 May 2023 18:01:47 +0200 (CEST)
+Date: Tue, 23 May 2023 18:01:46 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Damien Le Moal <dlemoal@kernel.org>
+Message-ID: <20230523160146.GA15391@lst.de>
+References: <20230519093521.133226-1-hch@lst.de>
+ <20230519093521.133226-7-hch@lst.de>
+ <5703f49d-177a-a810-6f1c-b32aa1abcde7@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -4.8 (----)
+Content-Disposition: inline
+In-Reply-To: <5703f49d-177a-a810-6f1c-b32aa1abcde7@kernel.org>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue,
- 9 May 2023 11:53:35 -0700 Jaegeuk Kim <jaegeuk@kernel.org>
- wrote: > On 05/08, Daejun Park wrote: > > v5 -> v6 > > Added trace_f2fs_iostat
- support for zone reset command. > > > > v4 -> v5 > > Added f2fs iostat for
- zone reset command. > > > > v3 -> v4 > > Fixed build [...] 
- Content analysis details:   (-4.8 points, 6.0 required)
+ Content preview:  On Mon, May 22, 2023 at 08:56:34AM +0900,
+ Damien Le Moal wrote:
+ > On 5/19/23 18:35, Christoph Hellwig wrote: > > Add a helper to invalidate
+ page cache after a dio write. > > > > Signed-off-by: Christo [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1q1TEy-000Yf1-Fw
-Subject: Re: [f2fs-dev] [PATCH v6] f2fs: add async reset zone command support
+X-Headers-End: 1q1USV-00067t-IN
+Subject: Re: [f2fs-dev] [PATCH 06/13] filemap: add a
+ kiocb_invalidate_post_write helper
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -91,75 +82,34 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- "mhiramat@kernel.org" <mhiramat@kernel.org>,
- Seokhwan Kim <sukka.kim@samsung.com>, beomsu kim <beomsu7.kim@samsung.com>,
- "linux-trace-kernel@vger.kernel.org" <linux-trace-kernel@vger.kernel.org>
+Cc: "Darrick J. Wong" <djwong@kernel.org>, linux-mm@kvack.org,
+ Christoph Hellwig <hch@lst.de>, Andreas Gruenbacher <agruenba@redhat.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, Matthew Wilcox <willy@infradead.org>,
+ cluster-devel@redhat.com, Ilya Dryomov <idryomov@gmail.com>,
+ linux-ext4@vger.kernel.org, linux-nfs@vger.kernel.org,
+ linux-block@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Xiubo Li <xiubli@redhat.com>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
+ Theodore Ts'o <tytso@mit.edu>,
+ "open list:F2FS FILE SYSTEM" <linux-f2fs-devel@lists.sourceforge.net>,
+ linux-xfs@vger.kernel.org, Anna Schumaker <anna@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, 9 May 2023 11:53:35 -0700
-Jaegeuk Kim <jaegeuk@kernel.org> wrote:
-
-> On 05/08, Daejun Park wrote:
-> > v5 -> v6
-> > Added trace_f2fs_iostat support for zone reset command.
+On Mon, May 22, 2023 at 08:56:34AM +0900, Damien Le Moal wrote:
+> On 5/19/23 18:35, Christoph Hellwig wrote:
+> > Add a helper to invalidate page cache after a dio write.
 > > 
-> > v4 -> v5
-> > Added f2fs iostat for zone reset command.
-> > 
-> > v3 -> v4
-> > Fixed build error caused by unused function.
-> > 
-> > v2 -> v3
-> > Modified arguments to be correct for ftrace parameter.
-> > Changed __submit_zone_reset_cmd to void return.
-> > Refactored the f2fs_wait_discard_bio function.
-> > Fixed code that was previously incorrectly merged.
-> > 
-> > v1 -> v2
-> > Changed to apply the optional async reset write pointer by default.  
+> > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > 
-> Don't add the history in the patch description.
+> Nit: kiocb_invalidate_post_dio_write() may be a better name to be explicit about
+> the fact that this is for DIOs only ?
 
-Well, you can (and should) ...
-
-> 
-> > 
-> > This patch enables submit reset zone command asynchornously. It helps
-> > decrease average latency of write IOs in high utilization scenario by
-> > faster checkpointing.
-> > 
-> > Signed-off-by: Daejun Park <daejun7.park@samsung.com>
-> > ---
-
-But it must go below the three dashes above. That will keep 'git am'
-from adding it to the change log.
-
--- Steve
-
-
-> >  fs/f2fs/f2fs.h              |  1 +
-> >  fs/f2fs/iostat.c            |  1 +
-> >  fs/f2fs/segment.c           | 84 +++++++++++++++++++++++++++++++++++--
-> >  include/trace/events/f2fs.h | 24 +++++++++--
-> >  4 files changed, 104 insertions(+), 6 deletions(-)
-> > 
-> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > index d211ee89c158..51b68a629814 100644
-> > --- a/fs/f2fs/f2fs.h
-> > +++ b/fs/f2fs/f2fs.h
-> > @@ -1175,6 +1175,7 @@ enum iostat_type {
-> >  	/* other */
-> >  	FS_DISCARD_IO,			/* discard */
-> >  	FS_FLUSH_IO,			/* flush */
-> > +	FS_ZONE_RESET_IO,		/* zone reset */
-> >  	NR_IO_TYPE,
-> >  };
-> >  
+I've renamed it to kiocb_invalidate_post_direct_write, thanks.
 
 
 _______________________________________________
