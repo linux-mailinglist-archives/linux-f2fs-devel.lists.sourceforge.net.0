@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD48370E14D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 May 2023 18:02:07 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6AA870E159
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 May 2023 18:02:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q1USY-0001Zs-GI;
-	Tue, 23 May 2023 16:02:03 +0000
+	id 1q1UTI-0008SN-8U;
+	Tue, 23 May 2023 16:02:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1q1USW-0001ZX-9L
+ (envelope-from <hch@lst.de>) id 1q1UT1-0008SD-IH
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 May 2023 16:02:01 +0000
+ Tue, 23 May 2023 16:02:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=P1cg1lro73aIsxAqkDpaQ1HJTCIwEkgkw0qDkJM6b+M=; b=PRurC+jfKbW5ijQTiqSqIdxNRM
- VJ4CKac5cUJ1rcVuBPZ+KcbUO7LAfSphS6W8DqZ3pcm4tTrd6DN/OfenQmM/BzAJ8f3C8Yc1IFuhP
- mc6jgxyAb06z3Ya5B9d9wkVM3fz297tBrSjLWTqjfG//VNNfSrfNjAGM1sM85h5hyyJE=;
+ bh=SXa2kFfyTN09HX23wlss7wg+NteNNThYne6pkQeZJRE=; b=MIhT8PJN+MIUfsqlTWiXMp/0v8
+ UiKj09higk94y9jDUWDiq/TZANSiAz5UOLUKxHczxy8aWNZZSietQH9Ifn33vI+ZH8QMx3SYliKEZ
+ 51PmpGnWVgTrsULSD8eMxLAWt/snANihaFd9VshCIoncqeJG0rlG9zHrZJsEoNdoG6Ao=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,46 +31,47 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=P1cg1lro73aIsxAqkDpaQ1HJTCIwEkgkw0qDkJM6b+M=; b=TX6aXIlAlGEjZVD9cKUx48fyfr
- HukJnAgRuPAiUPzdWYvCPh51CriCQjOqrKZD8eEzyFzCxrNovQJBVJmsDMRceFsSxTT2SlTZAyAkU
- oVeMGNjtgrcdYjZ3WpBvcnZM6OG7QUVddrYKLxhveR/GMF/Qmr2Fc/kCVU/qZz/cgdBs=;
+ bh=SXa2kFfyTN09HX23wlss7wg+NteNNThYne6pkQeZJRE=; b=JMWFXrBEz+JiV1vXg6o7uouAeb
+ I7vEL2VIE9VmBIJ8KlgpEa5iZ7X3NNY2b5OSZg5F7A0SE0FYXSulmfV9kQ5Ntod4FZjEL/Ftdhlpe
+ FkQwfJJSmTYJgPJebj9hw7CODO44BVvpH1TkWNi9LF6G5z+lbYEKkkNeOEJtELUWzaHo=;
 Received: from verein.lst.de ([213.95.11.211])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q1USV-00067t-IN for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 May 2023 16:02:01 +0000
+ id 1q1USx-000cRR-7b for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 23 May 2023 16:02:31 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 32BF46732D; Tue, 23 May 2023 18:01:47 +0200 (CEST)
-Date: Tue, 23 May 2023 18:01:46 +0200
+ id 8A4516732D; Tue, 23 May 2023 18:02:17 +0200 (CEST)
+Date: Tue, 23 May 2023 18:02:17 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Damien Le Moal <dlemoal@kernel.org>
-Message-ID: <20230523160146.GA15391@lst.de>
+Message-ID: <20230523160217.GB15391@lst.de>
 References: <20230519093521.133226-1-hch@lst.de>
- <20230519093521.133226-7-hch@lst.de>
- <5703f49d-177a-a810-6f1c-b32aa1abcde7@kernel.org>
+ <20230519093521.133226-8-hch@lst.de>
+ <5c66fe46-13eb-d9d2-e107-cc48eb50688f@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <5703f49d-177a-a810-6f1c-b32aa1abcde7@kernel.org>
+In-Reply-To: <5c66fe46-13eb-d9d2-e107-cc48eb50688f@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, May 22, 2023 at 08:56:34AM +0900,
+ Content preview:  On Mon, May 22, 2023 at 09:01:05AM +0900,
  Damien Le Moal wrote:
- > On 5/19/23 18:35, Christoph Hellwig wrote: > > Add a helper to invalidate
- page cache after a dio write. > > > > Signed-off-by: Christo [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ > > - int ret; > > + ssize_t ret; > > > > if (iocb->ki_flags & IOCB_NOWAIT)
+ > > iter.flags |= IOMAP_NOWAIT; > > > > while ((ret = iomap_ [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1q1USV-00067t-IN
-Subject: Re: [f2fs-dev] [PATCH 06/13] filemap: add a
- kiocb_invalidate_post_write helper
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1q1USx-000cRR-7b
+Subject: Re: [f2fs-dev] [PATCH 07/13] iomap: update ki_pos in
+ iomap_file_buffered_write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,16 +101,22 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, May 22, 2023 at 08:56:34AM +0900, Damien Le Moal wrote:
-> On 5/19/23 18:35, Christoph Hellwig wrote:
-> > Add a helper to invalidate page cache after a dio write.
-> > 
-> > Signed-off-by: Christoph Hellwig <hch@lst.de>
+On Mon, May 22, 2023 at 09:01:05AM +0900, Damien Le Moal wrote:
+> > -	int ret;
+> > +	ssize_t ret;
+> >  
+> >  	if (iocb->ki_flags & IOCB_NOWAIT)
+> >  		iter.flags |= IOMAP_NOWAIT;
+> >  
+> >  	while ((ret = iomap_iter(&iter, ops)) > 0)
+> >  		iter.processed = iomap_write_iter(&iter, i);
+> > -	if (iter.pos == iocb->ki_pos)
+> > +
+> > +	if (unlikely(ret < 0))
 > 
-> Nit: kiocb_invalidate_post_dio_write() may be a better name to be explicit about
-> the fact that this is for DIOs only ?
+> Nit: This could be if (unlikely(ret <= 0)), no ?
 
-I've renamed it to kiocb_invalidate_post_direct_write, thanks.
+No.  iomap_iter does not return te amount of bytes written.
 
 
 _______________________________________________
