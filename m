@@ -2,126 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1068771104A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 May 2023 18:03:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8460711A35
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 May 2023 00:36:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q2DQk-0003uX-TQ;
-	Thu, 25 May 2023 16:03:12 +0000
+	id 1q2JZD-0004Rr-Gj;
+	Thu, 25 May 2023 22:36:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <agruenba@redhat.com>) id 1q2DQg-0003uQ-Lj
+ (envelope-from <jaegeuk@kernel.org>) id 1q2JZ9-0004Rk-O5
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 May 2023 16:03:06 +0000
+ Thu, 25 May 2023 22:36:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WiRt50oXKhasmrzR2kh6FHaULiNwoG0spSQORGoTHTA=; b=f/oFkvSPeCxdMlOd7jTMl/wmbO
- TxJRsGe+4dRk86aHdbw3hLdI+PHYdD1O2yNK33LtvsgA9T/llJNhAJyvB7fQSnuUAUsZ+qcU9jhRF
- c54Gmbzhm+cN4nAmbpRpO+h/8K1N1JbOnTaWPrlNRUEFPEV2/vc0IBQX91cDvMUB8KME=;
+ bh=S1jXpluJP1PmULPfySuGZnbyqWKWmdGDXnqsQshg/YI=; b=GSz4EiYyyqR+b7Qj0pMz7ium4y
+ 6k/x610pvev7yefZw7BAt3rLi/CZf4WegK1NqoZxbK14tpMZjYmvB3y+VWZ5ZJgmySodJvLdG0QAB
+ 4lnUVfHCdB91GQ/yHecW7tIvqHgiBS8aNKXP5CGWqWlKtREuts/kHUIyfFPAzMuvwics=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=WiRt50oXKhasmrzR2kh6FHaULiNwoG0spSQORGoTHTA=; b=ZIiCHqYcESl+uRGTUYZKCR4dfD
- 5EnAa7/LmjfCySZXII0vEdcjmwqjlRtF42yOVhrlmJNJF8uzBqH6MvSaZwBFUts1NzqOND68Cx2F5
- DdNtH/xVpBMay+0xCbiBSAbcFSmmreLaJUPgAIGgmGg3HSVR0YPpTAsyynKjEGMyGo7A=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=S1jXpluJP1PmULPfySuGZnbyqWKWmdGDXnqsQshg/YI=; b=LfjLEm29Shw2wLwbeVSuvvOBUu
+ 1FKepMYOjufKWAdn0IhSglOOr+s0FrzlFo0a6NDfhfuFTp36UaklEe//TBWG7B6qXGOMu7mqhLvu3
+ rOK693/p4dv0wWMNx7pgbEtPkupgsbHi93HYHizLbD5y0vakILX/uzyL9+dwGyZUaozg=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q2DQa-0007ra-Rk for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 May 2023 16:03:06 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1685030574;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=WiRt50oXKhasmrzR2kh6FHaULiNwoG0spSQORGoTHTA=;
- b=XUP7UROl5HBAugXj1iXk5AdSwKwQD3khNOaLBldJF205UZxPUypP4P9G6nPGrnqFdKIRCe
- fegx+49de2qE2PREfJan86+lrNTZV7V8rfoUgUOk0SmQdrKRQszNtxeLXDy+ADLa2lUtSY
- Tad9dFKrwVzcHXly2WNIgEu5p9BriBE=
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-48-Te4IBpDrMHW2bEtT41M1CA-1; Thu, 25 May 2023 12:02:53 -0400
-X-MC-Unique: Te4IBpDrMHW2bEtT41M1CA-1
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-1ae8ed0a9dfso9940945ad.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 25 May 2023 09:02:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685030570; x=1687622570;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WiRt50oXKhasmrzR2kh6FHaULiNwoG0spSQORGoTHTA=;
- b=AiKx8Rkp1iqCMIGJSNOUq/o3YgNBMZkgF1LutZMa94Q+Lw3ERlAz6vvseUJj7mqc1Z
- /fuGe3ScMuzZw//3JUi+hTZCiZtM5oNBamZINiYIbkIdKxxxwoGf21oNiE2OIJAbfdkq
- 0kxj3HrRk6y+a6/qX0ebrhETgPhWXy+eXnRokYmc9nVG4UB2o2bUkNvPcf3HShjZREnX
- XG5FdhA6Sy1ORh0v8FAS700Z+5MEWjCo1DJ1uOfaVC8iEqAOxkyGo8o57WjXmFaRGbfb
- 9EU4qX0ge/JWGDUIt2WRMGdnoV/efX2sQyaUTeL50fPO+VbUsk2TcFf1Otn+GzVfJkC8
- ieUg==
-X-Gm-Message-State: AC+VfDwdcgNL44lvQ2RzTisMHwM2wPdWLpdvD55SEEprcrb+tNlflh2k
- pdw4WVvoIGcx0NL2v+znPk4F8ZGPWUH+Vj5smrXScZzSutWi7aDLJMcomYPWbyvG52e9vsAvOWY
- 1KInwt+nnkCDsbMprc5lxiwIyV/R4SxLxZ55qaxGw7zv66bWSAOiF2ja5hG6DwfQQ1xQ=
-X-Received: by 2002:a17:902:f54c:b0:1af:f64c:f363 with SMTP id
- h12-20020a170902f54c00b001aff64cf363mr3052075plf.15.1685030569937; 
- Thu, 25 May 2023 09:02:49 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ6IxaSUVZPKltFK7HOITIsIRGnmd5NzIdTwh6dJNU2vgkdbKhe1zl+1aodXLLyyl7kcWSFpgVAL2XCU4JAoynY=
-X-Received: by 2002:a17:902:f54c:b0:1af:f64c:f363 with SMTP id
- h12-20020a170902f54c00b001aff64cf363mr3052030plf.15.1685030569588; Thu, 25
- May 2023 09:02:49 -0700 (PDT)
+ id 1q2JZ9-002eYO-7e for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 25 May 2023 22:36:16 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id CF83264BB6;
+ Thu, 25 May 2023 22:36:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15DA8C433D2;
+ Thu, 25 May 2023 22:36:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1685054169;
+ bh=BcSYYg73TLn+z8kwYMwcwfRgiBCpnbMeDZWwBzOl5yc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ROhmLm4rvwOqwrgtl92QOpbpEGeedPRgoXYuDKFodAOCscUNDnEDcgH69CTODHacB
+ CeLTbSfoH4xF+eOrywfZWTWVXFVVbqxzuIav6HmdJlizGeNGXYAV88k3aVfHiTa6Q5
+ 54vZl0iJ4sjSjmLfXXIuj4qLjnjz3p6Y8+D8iN5/nIJ8/T5hVMVDeuUEwpI/trS9bn
+ jBSL6QZKvC6rXZ0HCDAbq+0en5EA7c+UaZQaE+W/G7w4YPrRo4jIvz2LjOP3dQqB7o
+ s1lahVzcr67ppJwazxiXh0RM6ViQZbtYG7XKzP0ulunmqV4v4FQG5+3t7DigWqbl8s
+ FBj5eM8TRIzUA==
+Date: Thu, 25 May 2023 15:36:07 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chunhai Guo <guochunhai@vivo.com>
+Message-ID: <ZG/i1xMdE/mugO8l@google.com>
+References: <20230524024204.13694-1-guochunhai@vivo.com>
 MIME-Version: 1.0
-References: <20230524063810.1595778-1-hch@lst.de>
- <20230524063810.1595778-8-hch@lst.de>
-In-Reply-To: <20230524063810.1595778-8-hch@lst.de>
-From: Andreas Gruenbacher <agruenba@redhat.com>
-Date: Thu, 25 May 2023 18:02:37 +0200
-Message-ID: <CAHc6FU6akk6yg1YGpgq-XqMv7soOLA4_Jg17T1M+NKn1PRmJkg@mail.gmail.com>
-To: Christoph Hellwig <hch@lst.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-X-Spam-Score: -0.9 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+Content-Disposition: inline
+In-Reply-To: <20230524024204.13694-1-guochunhai@vivo.com>
+X-Spam-Score: -5.9 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Wed, May 24, 2023 at 8:54 AM Christoph Hellwig <hch@lst.de>
-    wrote: > All callers of iomap_file_buffered_write need to updated ki_pos,
-    move it > into common code. Thanks for this set of cleanups, especially for
-    the patch killing current->backing_dev_info. 
- 
- Content analysis details:   (-0.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 05/24, Chunhai Guo wrote: > find_fsync_inode() detect the
+ looped node chain by comparing the loop > counter with free blocks. While
+ it may take tens of seconds to quit when > the free blocks are la [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [170.10.133.124 listed in list.dnswl.org]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q2DQa-0007ra-Rk
-Subject: Re: [f2fs-dev] [PATCH 07/11] iomap: update ki_pos in
- iomap_file_buffered_write
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q2JZ9-002eYO-7e
+Subject: Re: [f2fs-dev] [PATCH v8] fsck.f2fs: Detect and fix looped node
+ chain efficiently
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,80 +102,219 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Darrick J. Wong" <djwong@kernel.org>, linux-mm@kvack.org,
- Miklos Szeredi <miklos@szeredi.hu>, Matthew Wilcox <willy@infradead.org>,
- cluster-devel@redhat.com, Ilya Dryomov <idryomov@gmail.com>,
- linux-ext4@vger.kernel.org, linux-nfs@vger.kernel.org,
- linux-block@vger.kernel.org, Damien Le Moal <dlemoal@kernel.org>,
- Alexander Viro <viro@zeniv.linux.org.uk>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Xiubo Li <xiubli@redhat.com>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
- Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, Anna Schumaker <anna@kernel.org>,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-f2fs-devel@lists.sourceforge.net, frank.li@vivo.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gV2VkLCBNYXkgMjQsIDIwMjMgYXQgODo1NOKAr0FNIENocmlzdG9waCBIZWxsd2lnIDxoY2hA
-bHN0LmRlPiB3cm90ZToKPiBBbGwgY2FsbGVycyBvZiBpb21hcF9maWxlX2J1ZmZlcmVkX3dyaXRl
-IG5lZWQgdG8gdXBkYXRlZCBraV9wb3MsIG1vdmUgaXQKPiBpbnRvIGNvbW1vbiBjb2RlLgoKVGhh
-bmtzIGZvciB0aGlzIHNldCBvZiBjbGVhbnVwcywgZXNwZWNpYWxseSBmb3IgdGhlIHBhdGNoIGtp
-bGxpbmcKY3VycmVudC0+YmFja2luZ19kZXZfaW5mby4KClJldmlld2VkLWJ5OiBBbmRyZWFzIEdy
-dWVuYmFjaGVyIDxhZ3J1ZW5iYUByZWRoYXQuY29tPgoKPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3Rv
-cGggSGVsbHdpZyA8aGNoQGxzdC5kZT4KPiBBY2tlZC1ieTogRGFtaWVuIExlIE1vYWwgPGRsZW1v
-YWxAa2VybmVsLm9yZz4KPiBSZXZpZXdlZC1ieTogRGFycmljayBKLiBXb25nIDxkandvbmdAa2Vy
-bmVsLm9yZz4KPiAtLS0KPiAgZnMvZ2ZzMi9maWxlLmMgICAgICAgICB8IDQgKy0tLQo+ICBmcy9p
-b21hcC9idWZmZXJlZC1pby5jIHwgOSArKysrKystLS0KPiAgZnMveGZzL3hmc19maWxlLmMgICAg
-ICB8IDIgLS0KPiAgZnMvem9uZWZzL2ZpbGUuYyAgICAgICB8IDQgKy0tLQo+ICA0IGZpbGVzIGNo
-YW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgMTEgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEv
-ZnMvZ2ZzMi9maWxlLmMgYi9mcy9nZnMyL2ZpbGUuYwo+IGluZGV4IDkwNGEwZDZhYzFhMWE5Li5j
-NmE3NTU1ZDVhZDhiYiAxMDA2NDQKPiAtLS0gYS9mcy9nZnMyL2ZpbGUuYwo+ICsrKyBiL2ZzL2dm
-czIvZmlsZS5jCj4gQEAgLTEwNDQsMTAgKzEwNDQsOCBAQCBzdGF0aWMgc3NpemVfdCBnZnMyX2Zp
-bGVfYnVmZmVyZWRfd3JpdGUoc3RydWN0IGtpb2NiICppb2NiLAo+ICAgICAgICAgcGFnZWZhdWx0
-X2Rpc2FibGUoKTsKPiAgICAgICAgIHJldCA9IGlvbWFwX2ZpbGVfYnVmZmVyZWRfd3JpdGUoaW9j
-YiwgZnJvbSwgJmdmczJfaW9tYXBfb3BzKTsKPiAgICAgICAgIHBhZ2VmYXVsdF9lbmFibGUoKTsK
-PiAtICAgICAgIGlmIChyZXQgPiAwKSB7Cj4gLSAgICAgICAgICAgICAgIGlvY2ItPmtpX3BvcyAr
-PSByZXQ7Cj4gKyAgICAgICBpZiAocmV0ID4gMCkKPiAgICAgICAgICAgICAgICAgd3JpdHRlbiAr
-PSByZXQ7Cj4gLSAgICAgICB9Cj4KPiAgICAgICAgIGlmIChpbm9kZSA9PSBzZHAtPnNkX3JpbmRl
-eCkKPiAgICAgICAgICAgICAgICAgZ2ZzMl9nbG9ja19kcV91bmluaXQoc3RhdGZzX2doKTsKPiBk
-aWZmIC0tZ2l0IGEvZnMvaW9tYXAvYnVmZmVyZWQtaW8uYyBiL2ZzL2lvbWFwL2J1ZmZlcmVkLWlv
-LmMKPiBpbmRleCAwNjMxMzNlYzc3ZjQ5ZS4uNTUwNTI1YTUyNWM0NWMgMTAwNjQ0Cj4gLS0tIGEv
-ZnMvaW9tYXAvYnVmZmVyZWQtaW8uYwo+ICsrKyBiL2ZzL2lvbWFwL2J1ZmZlcmVkLWlvLmMKPiBA
-QCAtODY0LDE2ICs4NjQsMTkgQEAgaW9tYXBfZmlsZV9idWZmZXJlZF93cml0ZShzdHJ1Y3Qga2lv
-Y2IgKmlvY2IsIHN0cnVjdCBpb3ZfaXRlciAqaSwKPiAgICAgICAgICAgICAgICAgLmxlbiAgICAg
-ICAgICAgID0gaW92X2l0ZXJfY291bnQoaSksCj4gICAgICAgICAgICAgICAgIC5mbGFncyAgICAg
-ICAgICA9IElPTUFQX1dSSVRFLAo+ICAgICAgICAgfTsKPiAtICAgICAgIGludCByZXQ7Cj4gKyAg
-ICAgICBzc2l6ZV90IHJldDsKPgo+ICAgICAgICAgaWYgKGlvY2ItPmtpX2ZsYWdzICYgSU9DQl9O
-T1dBSVQpCj4gICAgICAgICAgICAgICAgIGl0ZXIuZmxhZ3MgfD0gSU9NQVBfTk9XQUlUOwo+Cj4g
-ICAgICAgICB3aGlsZSAoKHJldCA9IGlvbWFwX2l0ZXIoJml0ZXIsIG9wcykpID4gMCkKPiAgICAg
-ICAgICAgICAgICAgaXRlci5wcm9jZXNzZWQgPSBpb21hcF93cml0ZV9pdGVyKCZpdGVyLCBpKTsK
-PiAtICAgICAgIGlmIChpdGVyLnBvcyA9PSBpb2NiLT5raV9wb3MpCj4gKwo+ICsgICAgICAgaWYg
-KHVubGlrZWx5KHJldCA8IDApKQo+ICAgICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+IC0gICAg
-ICAgcmV0dXJuIGl0ZXIucG9zIC0gaW9jYi0+a2lfcG9zOwo+ICsgICAgICAgcmV0ID0gaXRlci5w
-b3MgLSBpb2NiLT5raV9wb3M7Cj4gKyAgICAgICBpb2NiLT5raV9wb3MgKz0gcmV0Owo+ICsgICAg
-ICAgcmV0dXJuIHJldDsKPiAgfQo+ICBFWFBPUlRfU1lNQk9MX0dQTChpb21hcF9maWxlX2J1ZmZl
-cmVkX3dyaXRlKTsKPgo+IGRpZmYgLS1naXQgYS9mcy94ZnMveGZzX2ZpbGUuYyBiL2ZzL3hmcy94
-ZnNfZmlsZS5jCj4gaW5kZXggNDMxYzNmZDBlMmI1OTguLmQ1NzQ0M2RiNjMzNjM3IDEwMDY0NAo+
-IC0tLSBhL2ZzL3hmcy94ZnNfZmlsZS5jCj4gKysrIGIvZnMveGZzL3hmc19maWxlLmMKPiBAQCAt
-NzIwLDggKzcyMCw2IEBAIHhmc19maWxlX2J1ZmZlcmVkX3dyaXRlKAo+ICAgICAgICAgdHJhY2Vf
-eGZzX2ZpbGVfYnVmZmVyZWRfd3JpdGUoaW9jYiwgZnJvbSk7Cj4gICAgICAgICByZXQgPSBpb21h
-cF9maWxlX2J1ZmZlcmVkX3dyaXRlKGlvY2IsIGZyb20sCj4gICAgICAgICAgICAgICAgICAgICAg
-ICAgJnhmc19idWZmZXJlZF93cml0ZV9pb21hcF9vcHMpOwo+IC0gICAgICAgaWYgKGxpa2VseShy
-ZXQgPj0gMCkpCj4gLSAgICAgICAgICAgICAgIGlvY2ItPmtpX3BvcyArPSByZXQ7Cj4KPiAgICAg
-ICAgIC8qCj4gICAgICAgICAgKiBJZiB3ZSBoaXQgYSBzcGFjZSBsaW1pdCwgdHJ5IHRvIGZyZWUg
-dXAgc29tZSBsaW5nZXJpbmcgcHJlYWxsb2NhdGVkCj4gZGlmZiAtLWdpdCBhL2ZzL3pvbmVmcy9m
-aWxlLmMgYi9mcy96b25lZnMvZmlsZS5jCj4gaW5kZXggMTMyZjAxZDM0NjFmMTQuLmUyMTJkMDYz
-NmY4NDhlIDEwMDY0NAo+IC0tLSBhL2ZzL3pvbmVmcy9maWxlLmMKPiArKysgYi9mcy96b25lZnMv
-ZmlsZS5jCj4gQEAgLTY0Myw5ICs2NDMsNyBAQCBzdGF0aWMgc3NpemVfdCB6b25lZnNfZmlsZV9i
-dWZmZXJlZF93cml0ZShzdHJ1Y3Qga2lvY2IgKmlvY2IsCj4gICAgICAgICAgICAgICAgIGdvdG8g
-aW5vZGVfdW5sb2NrOwo+Cj4gICAgICAgICByZXQgPSBpb21hcF9maWxlX2J1ZmZlcmVkX3dyaXRl
-KGlvY2IsIGZyb20sICZ6b25lZnNfd3JpdGVfaW9tYXBfb3BzKTsKPiAtICAgICAgIGlmIChyZXQg
-PiAwKQo+IC0gICAgICAgICAgICAgICBpb2NiLT5raV9wb3MgKz0gcmV0Owo+IC0gICAgICAgZWxz
-ZSBpZiAocmV0ID09IC1FSU8pCj4gKyAgICAgICBpZiAocmV0ID09IC1FSU8pCj4gICAgICAgICAg
-ICAgICAgIHpvbmVmc19pb19lcnJvcihpbm9kZSwgdHJ1ZSk7Cj4KPiAgaW5vZGVfdW5sb2NrOgo+
-IC0tCj4gMi4zOS4yCj4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBs
-aXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMv
-bGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On 05/24, Chunhai Guo wrote:
+> find_fsync_inode() detect the looped node chain by comparing the loop
+> counter with free blocks. While it may take tens of seconds to quit when
+> the free blocks are large enough. We can use Floyd's cycle detection
+> algorithm to make the detection more efficient, and fix the issue by
+> filling a NULL address in the last node of the chain.
+> 
+> Below is the log we encounter on a 256GB UFS storage and it takes about
+> 25 seconds to detect looped node chain. After changing the algorithm, it
+> takes about 20ms to finish the same job.
+> 
+>     [   10.822904] fsck.f2fs: Info: version timestamp cur: 17, prev: 430
+>     [   10.822949] fsck.f2fs: [update_superblock: 762] Info: Done to
+> update superblock
+>     [   10.822953] fsck.f2fs: Info: superblock features = 1499 :
+> encrypt verity extra_attr project_quota quota_ino casefold
+>     [   10.822956] fsck.f2fs: Info: superblock encrypt level = 0, salt =
+> 00000000000000000000000000000000
+>     [   10.822960] fsck.f2fs: Info: total FS sectors = 59249811 (231444
+> MB)
+>     [   35.852827] fsck.f2fs:	detect looped node chain,
+> blkaddr:1114802, next:1114803
+>     [   35.852842] fsck.f2fs: [f2fs_do_mount:3846] record_fsync_data
+> failed
+>     [   35.856106] fsck.f2fs: fsck.f2fs terminated by exit(255)
+> 
+> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+> ---
+> v7 -> v8 : Reformat the code to reduce indention.
+> v6 -> v7 : Correct logic error to handle is_detecting return by
+> 	find_node_blk_fast().
+> v5 -> v6 : Simplify the code by removing unnecessary retry logic.
+> v4 -> v5 : Use IS_INODE() to make the code more clear.
+> v3 -> v4 : Set c.bug_on with ASSERT_MSG() when issue is detected and fix
+> 	it only if c.fix_on is 1.
+> v2 -> v3 : Write inode with write_inode() to avoid chksum being broken.
+> v1 -> v2 : Fix looped node chain directly after it is detected.
+> ---
+>  fsck/mount.c | 127 +++++++++++++++++++++++++++++++++++++++++++++------
+>  1 file changed, 112 insertions(+), 15 deletions(-)
+> 
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index 4c7488840c7c..9d6a222a055c 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -3518,22 +3518,90 @@ static void destroy_fsync_dnodes(struct list_head *head)
+>  		del_fsync_inode(entry);
+>  }
+>  
+> +static int find_node_blk_fast(struct f2fs_sb_info *sbi, block_t *blkaddr_fast,
+> +		struct f2fs_node *node_blk_fast, bool *is_detecting)
+> +{
+> +	int i, err;
+> +
+> +	for (i = 0; i < 2; i++) {
+> +		if (!f2fs_is_valid_blkaddr(sbi, *blkaddr_fast, META_POR)) {
+> +			*is_detecting = false;
+> +			return 0;
+> +		}
+> +
+> +		err = dev_read_block(node_blk_fast, *blkaddr_fast);
+> +		if (err)
+> +			return err;
+> +
+> +		if (!is_recoverable_dnode(sbi, node_blk_fast)) {
+> +			*is_detecting = false;
+> +			return 0;
+> +		}
+> +
+> +		*blkaddr_fast = next_blkaddr_of_node(node_blk_fast);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int loop_node_chain_fix(struct f2fs_sb_info *sbi,
+
+Applied after removing sbi pointer which is unneeded.
+
+> +		block_t blkaddr_fast, struct f2fs_node *node_blk_fast,
+> +		block_t blkaddr, struct f2fs_node *node_blk)
+> +{
+> +	block_t blkaddr_entry, blkaddr_tmp;
+> +	int err;
+> +
+> +	/* find the entry point of the looped node chain */
+> +	while (blkaddr_fast != blkaddr) {
+> +		err = dev_read_block(node_blk_fast, blkaddr_fast);
+> +		if (err)
+> +			return err;
+> +		blkaddr_fast = next_blkaddr_of_node(node_blk_fast);
+> +
+> +		err = dev_read_block(node_blk, blkaddr);
+> +		if (err)
+> +			return err;
+> +		blkaddr = next_blkaddr_of_node(node_blk);
+> +	}
+> +	blkaddr_entry = blkaddr;
+> +
+> +	/* find the last node of the chain */
+> +	do {
+> +		blkaddr_tmp = blkaddr;
+> +		err = dev_read_block(node_blk, blkaddr);
+> +		if (err)
+> +			return err;
+> +		blkaddr = next_blkaddr_of_node(node_blk);
+> +	} while (blkaddr != blkaddr_entry);
+> +
+> +	/* fix the blkaddr of last node with NULL_ADDR. */
+> +	node_blk->footer.next_blkaddr = NULL_ADDR;
+> +	if (IS_INODE(node_blk))
+> +		err = write_inode(node_blk, blkaddr_tmp);
+> +	else
+> +		err = dev_write_block(node_blk, blkaddr_tmp);
+> +	if (!err)
+> +		FIX_MSG("Fix looped node chain on blkaddr %u\n",
+> +				blkaddr_tmp);
+> +	return err;
+> +}
+> +
+>  static int find_fsync_inode(struct f2fs_sb_info *sbi, struct list_head *head)
+>  {
+>  	struct curseg_info *curseg;
+> -	struct f2fs_node *node_blk;
+> -	block_t blkaddr;
+> -	unsigned int loop_cnt = 0;
+> -	unsigned int free_blocks = MAIN_SEGS(sbi) * sbi->blocks_per_seg -
+> -						sbi->total_valid_block_count;
+> +	struct f2fs_node *node_blk, *node_blk_fast;
+> +	block_t blkaddr, blkaddr_fast;
+> +	bool is_detecting = true;
+>  	int err = 0;
+>  
+> +	node_blk = calloc(F2FS_BLKSIZE, 1);
+> +	node_blk_fast = calloc(F2FS_BLKSIZE, 1);
+> +	ASSERT(node_blk && node_blk_fast);
+> +
+>  	/* get node pages in the current segment */
+>  	curseg = CURSEG_I(sbi, CURSEG_WARM_NODE);
+>  	blkaddr = NEXT_FREE_BLKADDR(sbi, curseg);
+> -
+> -	node_blk = calloc(F2FS_BLKSIZE, 1);
+> -	ASSERT(node_blk);
+> +	blkaddr_fast = blkaddr;
+>  
+>  	while (1) {
+>  		struct fsync_inode_entry *entry;
+> @@ -3564,19 +3632,48 @@ static int find_fsync_inode(struct f2fs_sb_info *sbi, struct list_head *head)
+>  		if (IS_INODE(node_blk) && is_dent_dnode(node_blk))
+>  			entry->last_dentry = blkaddr;
+>  next:
+> -		/* sanity check in order to detect looped node chain */
+> -		if (++loop_cnt >= free_blocks ||
+> -			blkaddr == next_blkaddr_of_node(node_blk)) {
+> -			MSG(0, "\tdetect looped node chain, blkaddr:%u, next:%u\n",
+> -				    blkaddr,
+> -				    next_blkaddr_of_node(node_blk));
+> +		blkaddr = next_blkaddr_of_node(node_blk);
+> +
+> +		/* Below we will detect looped node chain with Floyd's cycle
+> +		 * detection algorithm.
+> +		 */
+> +		if (!is_detecting)
+> +			continue;
+> +
+> +		err = find_node_blk_fast(sbi, &blkaddr_fast,
+> +				node_blk_fast, &is_detecting);
+> +		if (err)
+> +			break;
+> +
+> +		if (!is_detecting)
+> +			continue;
+> +
+> +		if (blkaddr_fast != blkaddr)
+> +			continue;
+> +
+> +		ASSERT_MSG("\tdetect looped node chain, blkaddr:%u\n",
+> +				blkaddr);
+> +
+> +		if (!c.fix_on) {
+>  			err = -1;
+>  			break;
+>  		}
+>  
+> -		blkaddr = next_blkaddr_of_node(node_blk);
+> +		err = loop_node_chain_fix(sbi,
+> +				NEXT_FREE_BLKADDR(sbi, curseg),
+> +				node_blk_fast, blkaddr, node_blk);
+> +		if (err)
+> +			break;
+> +
+> +		/* Since we call get_fsync_inode() to ensure there are no
+> +		 * duplicate inodes in the inode_list even if there are
+> +		 * duplicate blkaddr, we can continue running after fixing the
+> +		 * looped node chain.
+> +		 */
+> +		is_detecting = false;
+>  	}
+>  
+> +	free(node_blk_fast);
+>  	free(node_blk);
+>  	return err;
+>  }
+> -- 
+> 2.25.1
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
