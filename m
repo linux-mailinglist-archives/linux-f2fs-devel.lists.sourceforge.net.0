@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C12E7109D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 May 2023 12:16:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80E427109CE
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 May 2023 12:16:44 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q281U-0008JQ-6g;
-	Thu, 25 May 2023 10:16:45 +0000
+	id 1q281S-0006Pv-Gt;
+	Thu, 25 May 2023 10:16:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1q281M-0008Hr-Jk
+ (envelope-from <jack@suse.cz>) id 1q281O-0006Pa-VK
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 May 2023 10:16:37 +0000
+ Thu, 25 May 2023 10:16:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ioHF3wJZOEdK9Zi2g8x0HxHqMAZdyIP3moICR5/W8ZM=; b=CZtozkQYFVvRU00KPI9oRFkMl3
- tnPUockr/9djNKTZvDMdIELbcp8oJomnLpkwMbykIVwyqPzR0I5V/ZE2WNfCCzgITvvtxTcXhZGk8
- X3z+hcmSQmr/cO9121Y9ueVCK13+Ikg/BhKz1sha9ZFBC1Wsmz3JvCHPYyQDah92QbNA=;
+ bh=l8ThI8pc0gEYM+rQf003qTc2rYTYbf8AIQ/C2gqIwQo=; b=lxzXeGEdf9PEW7pCrWKD7J8mHI
+ RYhqKcSKLngYm6gAyiQPfvD0Bvm8gZ8OOUF7Pzb3+k82c0qmLkhUqeu06BDJyyQmthrSkbzF0+Nh8
+ F5RXgXv/ZCzvx1texatQtaZyelJnOeZXTqyDDldcdI3wXLlNASCP74LTJ8ycwuyk+W6M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,66 +31,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ioHF3wJZOEdK9Zi2g8x0HxHqMAZdyIP3moICR5/W8ZM=; b=R35mkq5m0t5kC/ky9RVARqTbeE
- opaH21/GoL2CxHUGv1/Vho0BAsrogjzNfQfbUJ+XAU3bLd8FpovGR+1KDPObJaXKZsBe+l8Owy3x2
- xGsH0uNbB65G9OBtjkJRKL7+gM/jYLLzNJgSiLYf8QI8fjOIcqbAw7X63ODYNkcR4L5Y=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=l8ThI8pc0gEYM+rQf003qTc2rYTYbf8AIQ/C2gqIwQo=; b=E+LAwW64hKCDNRDajtnDIzOlG8
+ 9o8FArggqbDRqFuAPZSJ+xoTMNOlpOhu5FEnYUHQRpe7T4h9mFNniZnMMMRtFNxUe+Z9ewcF4qcQl
+ GIKDh3pqM96doaycdqVO9NhSyvz5/UYmhwy9WrAt1xBWQAgUCl/IFvZ4OOrhMto4MfV8=;
+Received: from smtp-out2.suse.de ([195.135.220.29])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q281I-0029jR-3W for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 25 May 2023 10:16:37 +0000
+ id 1q281J-0004Uq-LP for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 25 May 2023 10:16:36 +0000
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 00FF321C04;
- Thu, 25 May 2023 10:16:25 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id E959C1FDA6;
+ Thu, 25 May 2023 10:16:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1685009785; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1685009784; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ioHF3wJZOEdK9Zi2g8x0HxHqMAZdyIP3moICR5/W8ZM=;
- b=zlI5luAWs6dlefQrgCyE8/RxotUnEISB/qpqoF0e6pJkMf70IuPfZsQ+zPVXMciXD80L5y
- KE9IraxZiqxObo476RsgM+aR8fA2F0/n+EuBJJ2hN5Lp3yn0u5EjEJOwfWQQhSdQHXxPlX
- MuVIjOmhBhYpP2rtxhl1RAAqwTJu0t4=
+ bh=l8ThI8pc0gEYM+rQf003qTc2rYTYbf8AIQ/C2gqIwQo=;
+ b=vGJRhYLBeDgm3lofus6jF2pH0QZ7csZBwE40esnbNlRfC4THd9PvZ3qgvGFQJKVy11bB4w
+ St/MYo7op2w7g+8+kXwfXULEUy5qo6MxZi2CCoeBEJFIQ+YMtUxRwmfRgAyOtJ74ZCgQi0
+ 4UhDKWsBdUUniwIbGBE+xJMAkrCjTxk=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1685009785;
+ s=susede2_ed25519; t=1685009784;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ioHF3wJZOEdK9Zi2g8x0HxHqMAZdyIP3moICR5/W8ZM=;
- b=Bq+jfOFsP+9HFcZSWTVhJXL79d71c35osZNrCmaovcKk2E0tzyKERfjBVYIXaFAFjomY01
- Is72rB8LCDpCnPCQ==
+ bh=l8ThI8pc0gEYM+rQf003qTc2rYTYbf8AIQ/C2gqIwQo=;
+ b=vt5ytHCOONlo6sKwamNAQezf6EXKStak6uDeoYhEjUinoAW5zdwuas8fSHRdcgHO3ewCuA
+ zSC88gXcCBxivjCA==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E60E313A2C;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D89B6134B2;
  Thu, 25 May 2023 10:16:24 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id +G4iOHg1b2RDdgAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id xGqPNHg1b2RCdgAAMHmgww
  (envelope-from <jack@suse.cz>); Thu, 25 May 2023 10:16:24 +0000
 Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 5D1CEA075F; Thu, 25 May 2023 12:16:24 +0200 (CEST)
+ id 62CA6A0762; Thu, 25 May 2023 12:16:24 +0200 (CEST)
 From: Jan Kara <jack@suse.cz>
 To: Al Viro <viro@ZenIV.linux.org.uk>
-Date: Thu, 25 May 2023 12:16:08 +0200
-Message-Id: <20230525101624.15814-2-jack@suse.cz>
+Date: Thu, 25 May 2023 12:16:09 +0200
+Message-Id: <20230525101624.15814-3-jack@suse.cz>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230525100654.15069-1-jack@suse.cz>
 References: <20230525100654.15069-1-jack@suse.cz>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1840; i=jack@suse.cz;
- h=from:subject; bh=cUFu/3mUBi4bt/K+j6IZ3Ng8iPItrjlJa92MM2nlCwY=;
- b=owEBbQGS/pANAwAIAZydqgc/ZEDZAcsmYgBkbzVnIPd8xE0p+HpULv7ZaonyuahLzBKAgbz88fay
- PJv6AsKJATMEAAEIAB0WIQSrWdEr1p4yirVVKBycnaoHP2RA2QUCZG81ZwAKCRCcnaoHP2RA2fRdB/
- wMo8PsY3/7QbU+9pwKfl8SOaMaHlJdjPgdRPs0Q59CmemAwPozLN+6Q+dDzy++ajVHXFcxUC1slW/J
- vNVYlOShU3+bOeu1zmdzl7mmYDeDDJjibd0gjB06IwHZRXlUG/KXqso6fC0CgL7NQhyiaqphZCP1qn
- VaXNgip5UnA5k75piXNMOfpFaskUp6AKbSMl1J2jumzY8VCN4UFEf/0T5Q8vhIOFm8Ebv/j6ntGavm
- fMDxQs0qeaZxtGOkeRc/VF1hZ0tRU8r48DUw+rgdvUqAw104da3ANAxNZVE/hGVfozW6eL3Cltet5+
- hO6b8NX0cYp8i2tWVvshjSuV8AXU1m
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1658; i=jack@suse.cz;
+ h=from:subject; bh=vkItO1SrB+pdJMx2hexFFd1udgUclLpxYk9h2ck+yss=;
+ b=owEBbQGS/pANAwAIAZydqgc/ZEDZAcsmYgBkbzVopRE2Fjl98U8Lrl0R5i/BOQo9DAUy4HoMvjC0
+ F+Fj1NGJATMEAAEIAB0WIQSrWdEr1p4yirVVKBycnaoHP2RA2QUCZG81aAAKCRCcnaoHP2RA2WZNB/
+ 9+AYv+yBnOYkrzxnwkWw7wp/jqKoxKekJuoRaGKhr9jRSq38pa6+9y2XWOgY5i1gIA3134tHlBo5tU
+ ENewvUXdIYWoAG0TeN86+UiZC7qH3NV/mEk9+MTpppXNJeR6+audbw7g+wKPuetxw9u38rC+SWtNLN
+ mcFEGVm4ryCLgbFQ5sVqEfwtmc9i1c/1HoKb1fLWEPbJbyFQo6FwNwSYLzjnEJbg4g74zK8CWbr04H
+ cWV9mUvwy1FHki5WFFIsaSamAFgdqZI+DCstqvh0PYdIDOwBZMcMbuhKm7GPRuEkaKGTrRE1QvOdX9
+ dbDxF5I+XhQAFspQggY07qdTfg7BI8
 X-Developer-Key: i=jack@suse.cz; a=openpgp;
  fpr=93C6099A142276A28BBE35D815BC833443038D8C
 X-Spam-Score: -2.5 (--)
@@ -100,16 +100,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This reverts commit f950fd0529130a617b3da526da9fb6a896ce87c2.
- The locking is going to be provided by vfs_rename() in the following patches.
+ Content preview: This reverts commit d94772154e524b329a168678836745d2773a6e02.
+ The locking is going to be provided by VFS. CC: Jaegeuk Kim
+ <jaegeuk@kernel.org>
  CC: stable@vger.kernel.org Signed-off-by: Jan Kara <jack@suse.cz> ---
- fs/udf/namei.c
- | 14 ++ 1 file changed, 2 insertions(+), 12 deletions(-) 
+ fs/f2fs/namei.c
+ | 16 + 1 file changed, 1 insertion(+), 15 deletions(-) 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
+ medium trust [195.135.220.29 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -119,9 +120,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1q281I-0029jR-3W
-Subject: [f2fs-dev] [PATCH 2/6] Revert "udf: Protect rename against
- modification of moved directory"
+X-Headers-End: 1q281J-0004Uq-LP
+Subject: [f2fs-dev] [PATCH 3/6] Revert "f2fs: fix potential corruption when
+ moving a directory"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -143,64 +144,62 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This reverts commit f950fd0529130a617b3da526da9fb6a896ce87c2. The
-locking is going to be provided by vfs_rename() in the following
-patches.
+This reverts commit d94772154e524b329a168678836745d2773a6e02. The
+locking is going to be provided by VFS.
 
+CC: Jaegeuk Kim <jaegeuk@kernel.org>
 CC: stable@vger.kernel.org
 Signed-off-by: Jan Kara <jack@suse.cz>
 ---
- fs/udf/namei.c | 14 ++------------
- 1 file changed, 2 insertions(+), 12 deletions(-)
+ fs/f2fs/namei.c | 16 +---------------
+ 1 file changed, 1 insertion(+), 15 deletions(-)
 
-diff --git a/fs/udf/namei.c b/fs/udf/namei.c
-index fd20423d3ed2..fd29a66e7241 100644
---- a/fs/udf/namei.c
-+++ b/fs/udf/namei.c
-@@ -793,11 +793,6 @@ static int udf_rename(struct mnt_idmap *idmap, struct inode *old_dir,
- 			if (!empty_dir(new_inode))
- 				goto out_oiter;
- 		}
--		/*
--		 * We need to protect against old_inode getting converted from
--		 * ICB to normal directory.
--		 */
--		inode_lock_nested(old_inode, I_MUTEX_NONDIR2);
- 		retval = udf_fiiter_find_entry(old_inode, &dotdot_name,
- 					       &diriter);
- 		if (retval == -ENOENT) {
-@@ -806,10 +801,8 @@ static int udf_rename(struct mnt_idmap *idmap, struct inode *old_dir,
- 				old_inode->i_ino);
- 			retval = -EFSCORRUPTED;
- 		}
--		if (retval) {
--			inode_unlock(old_inode);
-+		if (retval)
- 			goto out_oiter;
--		}
- 		has_diriter = true;
- 		tloc = lelb_to_cpu(diriter.fi.icb.extLocation);
- 		if (udf_get_lb_pblock(old_inode->i_sb, &tloc, 0) !=
-@@ -889,7 +882,6 @@ static int udf_rename(struct mnt_idmap *idmap, struct inode *old_dir,
- 			       udf_dir_entry_len(&diriter.fi));
- 		udf_fiiter_write_fi(&diriter, NULL);
- 		udf_fiiter_release(&diriter);
--		inode_unlock(old_inode);
- 
- 		inode_dec_link_count(old_dir);
- 		if (new_inode)
-@@ -901,10 +893,8 @@ static int udf_rename(struct mnt_idmap *idmap, struct inode *old_dir,
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index 77a71276ecb1..ad597b417fea 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -995,20 +995,12 @@ static int f2fs_rename(struct mnt_idmap *idmap, struct inode *old_dir,
+ 			goto out;
  	}
- 	return 0;
- out_oiter:
--	if (has_diriter) {
-+	if (has_diriter)
- 		udf_fiiter_release(&diriter);
--		inode_unlock(old_inode);
--	}
- 	udf_fiiter_release(&oiter);
  
- 	return retval;
+-	/*
+-	 * Copied from ext4_rename: we need to protect against old.inode
+-	 * directory getting converted from inline directory format into
+-	 * a normal one.
+-	 */
+-	if (S_ISDIR(old_inode->i_mode))
+-		inode_lock_nested(old_inode, I_MUTEX_NONDIR2);
+-
+ 	err = -ENOENT;
+ 	old_entry = f2fs_find_entry(old_dir, &old_dentry->d_name, &old_page);
+ 	if (!old_entry) {
+ 		if (IS_ERR(old_page))
+ 			err = PTR_ERR(old_page);
+-		goto out_unlock_old;
++		goto out;
+ 	}
+ 
+ 	if (S_ISDIR(old_inode->i_mode)) {
+@@ -1116,9 +1108,6 @@ static int f2fs_rename(struct mnt_idmap *idmap, struct inode *old_dir,
+ 
+ 	f2fs_unlock_op(sbi);
+ 
+-	if (S_ISDIR(old_inode->i_mode))
+-		inode_unlock(old_inode);
+-
+ 	if (IS_DIRSYNC(old_dir) || IS_DIRSYNC(new_dir))
+ 		f2fs_sync_fs(sbi->sb, 1);
+ 
+@@ -1133,9 +1122,6 @@ static int f2fs_rename(struct mnt_idmap *idmap, struct inode *old_dir,
+ 		f2fs_put_page(old_dir_page, 0);
+ out_old:
+ 	f2fs_put_page(old_page, 0);
+-out_unlock_old:
+-	if (S_ISDIR(old_inode->i_mode))
+-		inode_unlock(old_inode);
+ out:
+ 	iput(whiteout);
+ 	return err;
 -- 
 2.35.3
 
