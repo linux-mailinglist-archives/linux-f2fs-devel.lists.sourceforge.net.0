@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01E4B712A6D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 May 2023 18:15:11 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C028712A96
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 May 2023 18:25:20 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q2a5p-0001oH-HP;
-	Fri, 26 May 2023 16:15:05 +0000
+	id 1q2aFf-0006T2-70;
+	Fri, 26 May 2023 16:25:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1q2a5j-0001nu-FC
+ (envelope-from <jaegeuk@kernel.org>) id 1q2aFe-0006Ss-C2
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 May 2023 16:15:03 +0000
+ Fri, 26 May 2023 16:25:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zIxJZlEMysStA7/FM7+fPUYYpoiSnGVmDQscbrneOt4=; b=ZEz+pkb1fhc7qb9jVcFscVHVWp
- TLDp8Qk1CbzeSCutezjo/KqIim0HcEypfWCq0P0idpbMTYLykbjrD17rui/utnfqgJRl7v/CzNQWx
- HAHxwBF6K/MU4g+uETeYbSLa8JAUh4G9uUhIgrTuj4PT3V6mXwin18G4eV8eNnVF01bw=;
+ bh=uV8KtlvTKf7RKsPJYtBKftxJwgFKLN6oT8Zc+eGcVGA=; b=Rxfqw1atxoBEzgqTBJjcG2LNL5
+ yJHH2xst/ydbAOVO35xKQsFyR7t4RFeroQj07tUR7sijBCjfOOiW0qJq8kjIV1V9/vWqdEkP2QCdz
+ A9/P4djGlxc6+IgN6PL0QGyO4UHwfRmiYynrsauEmqo7rlCGGzuMwZtYIbx66pZ0zvUo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,69 +31,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zIxJZlEMysStA7/FM7+fPUYYpoiSnGVmDQscbrneOt4=; b=iYG0ajZC1n3qWGZk+BCIotxHIc
- isZNujBU00iQ6IPXRqqrwh+7cPhcQpA72UGpNnWwIxSHz1MCBahSgGDrM0BhKJDgpeYXu1ULLsiE6
- xhN2tdSspPhTQp0JVe2eoWl18D4pX/RFkd/ZhDKxMngKBZ1XEyK8GvoyuGJf/fEj/fD4=;
+ bh=uV8KtlvTKf7RKsPJYtBKftxJwgFKLN6oT8Zc+eGcVGA=; b=FQCsoltVsGsZSdvQhLqa26gIob
+ ZebVMSLJ9lxDj1PVFFO6eWdfm6vOIPeUhse2ecqd+v5fMWVfbvdOK2wFmy7Wu3JtlA8ssQumT9HHE
+ NlvsCLyWnnXw/LjeyKR3gyj9etVR6ceBEJyQFdHd5CdpznKLryoNwr4687cGdpszqHmQ=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q2a5h-0001Nc-0T for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 May 2023 16:14:57 +0000
+ id 1q2aFe-0001eq-Er for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 May 2023 16:25:15 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9B1C765124;
- Fri, 26 May 2023 16:14:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF97AC433D2;
- Fri, 26 May 2023 16:14:50 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 147F86115B
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 26 May 2023 16:25:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 625D6C4339B;
+ Fri, 26 May 2023 16:25:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685117691;
- bh=lq7NZfUbigP0/8SKwCXdVPed0LJzckYN/tArDod7OjM=;
+ s=k20201202; t=1685118308;
+ bh=CH1MDjskD9x36rX5dx9t6IlDI/Ls7bSc14xsmmmqqv4=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=J2zesTC0h87wObmPj+ckC8f0a5QK4eN/uALaBEBLyG1fXz494ZWjhKWLFVvo3phkP
- QV9BdIGSvNv3HVKoZr8QKarfgnTHotx4LsmnbOWkpcolyWS/VjQ/RXPJnJQJR8Wgjn
- 61zxXnetOQBEz4Jqzk7hZ7iJC5f+0b3epe3TDW+mk2TjltYdaTYbSVqDXdZF44NeGL
- flLn59gB9WDk4/G39G8OMCyZT/t+MUx9Is5l362ohrI04NusbalrSBxbQ0rYBD7xiZ
- agRLlqts8ZhLqa4I84Tuc6IGPm21uaip3gGcZ5aNjRRdWlLyuhr+NydnJciMloX3u7
- CwIfqzbBu17+A==
-Date: Fri, 26 May 2023 09:14:49 -0700
+ b=fv7GlioCeL6D83fheLY8TeFv6cDtaXkxbO6vBIXeVRCre2IodygtCLyXH7XTIkJLI
+ 5xN0JdX/NLck+DXRA9sRc2H48dcRYru2mTkrDkiH3RNaY7u3wxkh0FrO3rQlAvqQR0
+ zV89hN6KwMrXRrkXVHTqh/JTb6ixTwReuFy2jczKbyjC7LS0ixBVkjDOpvKcPQeapE
+ 1TANFW36Wa+kMeo9wP+RpcKiJEaMe4GpZD1v/bO5bRclZ0MAaFJGnzGzB79tZrenYF
+ g0KO3Y4m4TVGAEAxRBPwn8sPTDdvaEAW9vAEIs7IdFqea9q+16INNYX2/HzkiyCP6D
+ LXNZ9/+YBm7dQ==
+Date: Fri, 26 May 2023 09:25:06 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chunhai Guo <guochunhai@vivo.com>
-Message-ID: <ZHDa+SS+mK0rFmGy@google.com>
-References: <20230524083329.10494-1-guochunhai@vivo.com>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZHDdYjFRwWDcELJw@google.com>
+References: <20230526061129.2999437-1-chao@kernel.org>
+ <20230526061129.2999437-2-chao@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230524083329.10494-1-guochunhai@vivo.com>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20230526061129.2999437-2-chao@kernel.org>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Is this v9? Why does it have any history anymore? On 05/24, 
- Chunhai Guo wrote: > find_fsync_dnodes() detect the looped node chain by
- comparing the loop > counter with free blocks. While it may take tens of
- seconds to quit when > the free blocks are l [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 05/26,
+ Chao Yu wrote: > Signed-off-by: Chao Yu <chao@kernel.org>
+ > --- > fsck/mount.c | 56 +++++++++++++ > include/f2fs_fs.h | 42
+ +++++++++++++++++++++ [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q2a5h-0001Nc-0T
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Detect and fix looped node chain
- efficiently
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q2aFe-0001eq-Er
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs-tools: reuse feature_table in
+ print_sb_state()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,195 +105,163 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net, frank.li@vivo.com
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Is this v9? Why does it have any history anymore?
-
-On 05/24, Chunhai Guo wrote:
-> find_fsync_dnodes() detect the looped node chain by comparing the loop
-> counter with free blocks. While it may take tens of seconds to quit when
-> the free blocks are large enough. We can use Floyd's cycle detection
-> algorithm to make the detection more efficient, and fix the issue by
-> filling a NULL address in the last node of the chain.
-> 
-> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+On 05/26, Chao Yu wrote:
+> Signed-off-by: Chao Yu <chao@kernel.org>
 > ---
->  fs/f2fs/recovery.c | 135 ++++++++++++++++++++++++++++++++++++++-------
->  1 file changed, 116 insertions(+), 19 deletions(-)
+>  fsck/mount.c      | 56 +++++++++++++----------------------------------
+>  include/f2fs_fs.h | 42 +++++++++++++++++++++--------------
+>  2 files changed, 41 insertions(+), 57 deletions(-)
 > 
-> diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-> index 58c1a0096f7d..1b94078947cb 100644
-> --- a/fs/f2fs/recovery.c
-> +++ b/fs/f2fs/recovery.c
-> @@ -360,21 +360,98 @@ static unsigned int adjust_por_ra_blocks(struct f2fs_sb_info *sbi,
->  	return ra_blocks;
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index 70e8b46..60ad493 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -599,54 +599,28 @@ void print_cp_state(u32 flag)
+>  	MSG(0, "\n");
 >  }
 >  
-> +static int find_node_blk_fast(struct f2fs_sb_info *sbi, block_t *blkaddr_fast,
-> +		bool *is_detecting)
-> +{
-> +	unsigned int ra_blocks = RECOVERY_MAX_RA_BLOCKS;
-> +	struct page *page = NULL;
-> +	int i;
-> +
-> +	for (i = 0; i < 2; i++) {
-> +		if (!f2fs_is_valid_blkaddr(sbi, *blkaddr_fast, META_POR)) {
-> +			*is_detecting = false;
-> +			return 0;
-> +		}
-> +
-> +		page = f2fs_get_tmp_page(sbi, *blkaddr_fast);
-> +		if (IS_ERR(page))
-> +			return PTR_ERR(page);
-> +
-> +		if (!is_recoverable_dnode(page)) {
-> +			f2fs_put_page(page, 1);
-> +			*is_detecting = false;
-> +			return 0;
-> +		}
-> +
-> +		ra_blocks = adjust_por_ra_blocks(sbi, ra_blocks, *blkaddr_fast,
-> +						next_blkaddr_of_node(page));
-> +
-> +		*blkaddr_fast = next_blkaddr_of_node(page);
-> +		f2fs_put_page(page, 1);
-> +
-> +		f2fs_ra_meta_pages_cond(sbi, *blkaddr_fast, ra_blocks);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int loop_node_chain_fix(struct f2fs_sb_info *sbi, block_t blkaddr_fast,
-> +		block_t blkaddr)
-> +{
-> +	struct page *page = NULL;
-> +	block_t blkaddr_entry, blkaddr_tmp;
-> +	struct f2fs_node *rn;
-> +
-> +	/* find the entry point of the looped node chain */
-> +	while (blkaddr_fast != blkaddr) {
-> +		page = f2fs_get_tmp_page(sbi, blkaddr_fast);
-> +		if (IS_ERR(page))
-> +			return PTR_ERR(page);
-> +		blkaddr_fast = next_blkaddr_of_node(page);
-> +		f2fs_put_page(page, 1);
-> +
-> +		page = f2fs_get_tmp_page(sbi, blkaddr);
-> +		if (IS_ERR(page))
-> +			return PTR_ERR(page);
-> +		blkaddr = next_blkaddr_of_node(page);
-> +		f2fs_put_page(page, 1);
-> +	}
-> +	blkaddr_entry = blkaddr;
-> +
-> +	/* find the last node of the chain */
-> +	do {
-> +		blkaddr_tmp = blkaddr;
-> +		page = f2fs_get_tmp_page(sbi, blkaddr);
-> +		if (IS_ERR(page))
-> +			return PTR_ERR(page);
-> +		blkaddr = next_blkaddr_of_node(page);
-> +		if (blkaddr != blkaddr_entry)
-> +			f2fs_put_page(page, 1);
-> +	} while (blkaddr != blkaddr_entry);
-> +
-> +	/* fix the blkaddr of last node with NULL_ADDR. */
-> +	rn = F2FS_NODE(page);
-> +	rn->footer.next_blkaddr = NULL_ADDR;
-> +	f2fs_inode_chksum_set(sbi, page);
-> +	set_page_dirty(page);
-> +	f2fs_put_page(page, 1);
-> +	f2fs_notice(sbi, "Fix looped node chain on blkaddr %u\n", blkaddr_tmp);
-> +	return 0;
-> +}
-> +
->  static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
->  				bool check_only)
+> +extern struct feature feature_table[];
+>  void print_sb_state(struct f2fs_super_block *sb)
 >  {
->  	struct curseg_info *curseg;
->  	struct page *page = NULL;
-> -	block_t blkaddr;
-> -	unsigned int loop_cnt = 0;
-> -	unsigned int ra_blocks = RECOVERY_MAX_RA_BLOCKS;
-> -	unsigned int free_blocks = MAIN_SEGS(sbi) * sbi->blocks_per_seg -
-> -						valid_user_blocks(sbi);
-> +	block_t blkaddr, blkaddr_fast;
-> +	bool is_detecting = true;
->  	int err = 0;
+>  	unsigned int f = get_sb(feature);
+> +	char *name;
+>  	int i;
 >  
->  	/* get node pages in the current segment */
->  	curseg = CURSEG_I(sbi, CURSEG_WARM_NODE);
->  	blkaddr = NEXT_FREE_BLKADDR(sbi, curseg);
-> +	blkaddr_fast = blkaddr;
->  
->  	while (1) {
->  		struct fsync_inode_entry *entry;
-> @@ -431,25 +508,45 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
->  		if (IS_INODE(page) && is_dent_dnode(page))
->  			entry->last_dentry = blkaddr;
->  next:
-> -		/* sanity check in order to detect looped node chain */
-> -		if (++loop_cnt >= free_blocks ||
-> -			blkaddr == next_blkaddr_of_node(page)) {
-> -			f2fs_notice(sbi, "%s: detect looped node chain, blkaddr:%u, next:%u",
-> -				    __func__, blkaddr,
-> -				    next_blkaddr_of_node(page));
-> -			f2fs_put_page(page, 1);
-> +		/* check next segment */
-> +		blkaddr = next_blkaddr_of_node(page);
-> +		f2fs_put_page(page, 1);
+>  	MSG(0, "Info: superblock features = %x : ", f);
+> -	if (f & F2FS_FEATURE_ENCRYPT) {
+> -		MSG(0, "%s", " encrypt");
+> -	}
+> -	if (f & F2FS_FEATURE_VERITY) {
+> -		MSG(0, "%s", " verity");
+> -	}
+> -	if (f & F2FS_FEATURE_BLKZONED) {
+> -		MSG(0, "%s", " blkzoned");
+> -	}
+> -	if (f & F2FS_FEATURE_EXTRA_ATTR) {
+> -		MSG(0, "%s", " extra_attr");
+> -	}
+> -	if (f & F2FS_FEATURE_PRJQUOTA) {
+> -		MSG(0, "%s", " project_quota");
+> -	}
+> -	if (f & F2FS_FEATURE_INODE_CHKSUM) {
+> -		MSG(0, "%s", " inode_checksum");
+> -	}
+> -	if (f & F2FS_FEATURE_FLEXIBLE_INLINE_XATTR) {
+> -		MSG(0, "%s", " flexible_inline_xattr");
+> -	}
+> -	if (f & F2FS_FEATURE_QUOTA_INO) {
+> -		MSG(0, "%s", " quota_ino");
+> -	}
+> -	if (f & F2FS_FEATURE_INODE_CRTIME) {
+> -		MSG(0, "%s", " inode_crtime");
+> -	}
+> -	if (f & F2FS_FEATURE_LOST_FOUND) {
+> -		MSG(0, "%s", " lost_found");
+> -	}
+> -	if (f & F2FS_FEATURE_SB_CHKSUM) {
+> -		MSG(0, "%s", " sb_checksum");
+> -	}
+> -	if (f & F2FS_FEATURE_CASEFOLD) {
+> -		MSG(0, "%s", " casefold");
+> -	}
+> -	if (f & F2FS_FEATURE_COMPRESSION) {
+> -		MSG(0, "%s", " compression");
+> -	}
+> -	if (f & F2FS_FEATURE_RO) {
+> -		MSG(0, "%s", " ro");
 > +
-> +		/* Below we will detect looped node chain with Floyd's cycle
-> +		 * detection algorithm.
-> +		 */
-> +		if (!is_detecting)
+> +	for (i = 0; i < 32; i++) {
+
+Need to add a definition for 32?
+
+> +		unsigned int bit = 1 << i;
+> +
+> +		if (!(f & bit))
 > +			continue;
 > +
-> +		err = find_node_blk_fast(sbi, &blkaddr_fast, &is_detecting);
-> +		if (err)
-> +			break;
-> +
-> +		if (!is_detecting)
+> +		name = feature_name(feature_table, bit);
+> +		if (!name)
 > +			continue;
 > +
-> +		if (blkaddr_fast != blkaddr)
-> +			continue;
-> +
-> +		f2fs_notice(sbi, "%s: detect looped node chain, blkaddr:%u",
-> +				__func__, blkaddr);
-> +
-> +		if (check_only) {
->  			err = -EINVAL;
->  			break;
->  		}
->  
-> -		ra_blocks = adjust_por_ra_blocks(sbi, ra_blocks, blkaddr,
-> -						next_blkaddr_of_node(page));
-> -
-> -		/* check next segment */
-> -		blkaddr = next_blkaddr_of_node(page);
-> -		f2fs_put_page(page, 1);
-> +		err = loop_node_chain_fix(sbi, blkaddr,
-> +				NEXT_FREE_BLKADDR(sbi, curseg));
-> +		if (err)
-> +			break;
->  
-> -		f2fs_ra_meta_pages_cond(sbi, blkaddr, ra_blocks);
-> +		/* Since we call get_fsync_inode() to ensure there are
-> +		 * no duplicate inodes in the inode_list even if there
-> +		 * are duplicate blkaddr, we can continue running
-> +		 * after fixing the looped node chain.
-> +		 */
-> +		is_detecting = false;
+> +		MSG(0, " %s", name);
 >  	}
->  	return err;
+> +
+>  	MSG(0, "\n");
+>  	MSG(0, "Info: superblock encrypt level = %d, salt = ",
+>  					sb->encryption_level);
+> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+> index 9d35b42..a97c974 100644
+> --- a/include/f2fs_fs.h
+> +++ b/include/f2fs_fs.h
+> @@ -1811,35 +1811,45 @@ static inline void f2fs_init_inode(struct f2fs_super_block *sb,
+>  
+>  struct feature {
+>  	char *name;
+> -	u32  mask;
+> +	u32 mask;
+> +	u32 settable;
+>  };
+>  
+>  #define INIT_FEATURE_TABLE						\
+>  struct feature feature_table[] = {					\
+> -	{ "encrypt",			F2FS_FEATURE_ENCRYPT },		\
+> -	{ "extra_attr",			F2FS_FEATURE_EXTRA_ATTR },	\
+> -	{ "project_quota",		F2FS_FEATURE_PRJQUOTA },	\
+> -	{ "inode_checksum",		F2FS_FEATURE_INODE_CHKSUM },	\
+> -	{ "flexible_inline_xattr",	F2FS_FEATURE_FLEXIBLE_INLINE_XATTR },\
+> -	{ "quota",			F2FS_FEATURE_QUOTA_INO },	\
+> -	{ "inode_crtime",		F2FS_FEATURE_INODE_CRTIME },	\
+> -	{ "lost_found",			F2FS_FEATURE_LOST_FOUND },	\
+> -	{ "verity",			F2FS_FEATURE_VERITY },	/* reserved */ \
+> -	{ "sb_checksum",		F2FS_FEATURE_SB_CHKSUM },	\
+> -	{ "casefold",			F2FS_FEATURE_CASEFOLD },	\
+> -	{ "compression",		F2FS_FEATURE_COMPRESSION },	\
+> -	{ "ro",				F2FS_FEATURE_RO},		\
+> -	{ NULL,				0x0},				\
+> +	{ "encrypt",			F2FS_FEATURE_ENCRYPT,		1}, \
+> +	{ "blkzoned",			F2FS_FEATURE_BLKZONED,		0}, \
+> +	{ "extra_attr",			F2FS_FEATURE_EXTRA_ATTR,	1}, \
+> +	{ "project_quota",		F2FS_FEATURE_PRJQUOTA,		1}, \
+> +	{ "inode_checksum",		F2FS_FEATURE_INODE_CHKSUM,	1}, \
+> +	{ "flexible_inline_xattr",	F2FS_FEATURE_FLEXIBLE_INLINE_XATTR,1}, \
+> +	{ "quota",			F2FS_FEATURE_QUOTA_INO,		1}, \
+> +	{ "inode_crtime",		F2FS_FEATURE_INODE_CRTIME,	1}, \
+> +	{ "lost_found",			F2FS_FEATURE_LOST_FOUND,	1}, \
+> +	{ "verity",			F2FS_FEATURE_VERITY,		1}, \
+> +	{ "sb_checksum",		F2FS_FEATURE_SB_CHKSUM,		1}, \
+> +	{ "casefold",			F2FS_FEATURE_CASEFOLD,		1}, \
+> +	{ "compression",		F2FS_FEATURE_COMPRESSION,	1}, \
+> +	{ "ro",				F2FS_FEATURE_RO,		1}, \
+> +	{ NULL,				0x0,				0}, \
+>  };
+>  
+>  static inline u32 feature_map(struct feature *table, char *feature)
+>  {
+>  	struct feature *p;
+> -	for (p = table; p->name && strcmp(p->name, feature); p++)
+> +	for (p = table; p->name && p->settable && strcmp(p->name, feature); p++)
+>  		;
+>  	return p->mask;
 >  }
+>  
+> +static inline char *feature_name(struct feature *table, u32 mask)
+> +{
+> +	struct feature *p;
+> +	for (p = table; p->name && p->mask != mask; p++)
+> +		;
+> +	return p->name;
+> +}
+> +
+>  static inline int set_feature_bits(struct feature *table, char *features)
+>  {
+>  	u32 mask = feature_map(table, features);
 > -- 
-> 2.25.1
+> 2.40.1
 
 
 _______________________________________________
