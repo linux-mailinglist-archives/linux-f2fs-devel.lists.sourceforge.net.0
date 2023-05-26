@@ -2,98 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E122711FA9
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 May 2023 08:11:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A03E2711FB0
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 May 2023 08:15:58 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q2Qfy-0003ve-RA;
-	Fri, 26 May 2023 06:11:47 +0000
+	id 1q2Qju-00078Z-33;
+	Fri, 26 May 2023 06:15:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1q2Qfy-0003vY-3Y
+ (envelope-from <chao@kernel.org>) id 1q2Qjk-00078O-7c
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 May 2023 06:11:46 +0000
+ Fri, 26 May 2023 06:15:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Gvrnf2+VqBOpdmjyh+MYLNt9zIIobbqoyA7a4oa2vdQ=; b=cqJPrJuSR4YXeP7kMcrb0Sdo/d
- 1DvTymWkrCcmDubEbvz5nfrH4d/WGRYlG2SJYbIYgQ+Q1BxaZKXqupBhoYrW2lYbbP6jL9NlX6NE9
- eiplsV3YXXY2xgRBKIepI+lV6D4UAOKcp/Hp5XBY52JikBpL8z/BpC/JKcYFe3RWhmdA=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Gvrnf2+VqBOpdmjyh+MYLNt9zIIobbqoyA7a4oa2vdQ=; b=XkzgMGToHYyvOJ//NObMDgU2EK
- BMQilPTTbinAcArX3gVx1eKMlUgpBIYj1tjwtQvr/I2PAIlRyee+HfIYh6qk6qHzEiiVxm7LCr+Ck
- 7SL9N9nhDxxn0n9KeF5rKM37azByXEpdGtFyjxw6qWC9p8Wlw0awgpWUY/O5jrEekatM=;
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=3JL5moCBUieq54Q6xZbfdM7EJFbI3xayNaFxMM9IstI=; b=KyiN3M/Aas5i2YIL3nvRlsSl1i
+ vvZ4NTULBFv8Vx5x0CzHfwy7FBgDptOacWD2EehPFhroA2wutDb329Wg4ls4ewolXO/VgTMvcuq0G
+ kfMoy9ifYQ9qSyuYhWZNgeFc2vFVK+VWKxN9zv8ttcDABLtuk1vUG2e3JeeY2A5p9XTM=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=3JL5moCBUieq54Q6xZbfdM7EJFbI3xayNaFxMM9IstI=; b=l
+ 4UiI14/mlmXnHukQDSYEHgXqwW0RzE0F7hkI9njKVzaHWbOpwH/B4aQNPTdoggVbM9NTpoIgj9Vqn
+ KCmIJ82zn1k1FzACPupxTAN/WQ+0Pv3tyg2m8T+h776jIq7/15mGg/JbCj2LXrREUB0aoCZGLTV2c
+ nLZRmkRd1XhYldtA=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q2Qfx-0002ct-Rn for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 May 2023 06:11:46 +0000
+ id 1q2Qjh-002y8d-Id for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 May 2023 06:15:40 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B1A1B64CD4
+ by dfw.source.kernel.org (Postfix) with ESMTPS id C628E64C91
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 26 May 2023 06:11:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F6D2C4339E;
- Fri, 26 May 2023 06:11:34 +0000 (UTC)
+ Fri, 26 May 2023 06:15:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4611FC433EF;
+ Fri, 26 May 2023 06:15:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685081496;
- bh=ONUEYU4rfcMIQQDvoNfqWwWHZxhiDpp14GIuRThjJLM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=SAqLhQrzueHjbx9bAwSlE/SLlMA+C7IUuyxDdN9p4Xjg/EbdhWIQAg67PMk/2Pknu
- ipA1N6H3TjwTgr5UKdNS+DOURwoU2mk8pw9X5hoTYp7htPn6f//HJbG0VU+WKxovBb
- Htec1DXudHS4D3+j1pUaKUJ6x6HjhjdFbM9FABEjByjIJglDLRThiZAFRdqRWPjsV0
- f4qV50eEA2eSEKinbWZ/dBEYlDfIbApldogs+yFEJyfruydSLuRpThgMmAVppLYdIK
- roD3pNtrV91/SWT9rgyrAadjUEbjjGW9I1n86/mocE32qBieYnAcxPMBlozgb1BBPD
- oXzxoy+GuBfnA==
+ s=k20201202; t=1685081727;
+ bh=t4F6QqJEFLc9LcKCIZTDzH6RSd1vViOuTfm5Ct7ZJYI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=DSHruy01//qfLuLQYHJJD8aX1IOWw2rLTaXZH/+tsRWkAdvohPJoWc0IJBbZhYZkE
+ KwdYojzabBO/yj9Havad+sTzQyZF+qC+B3GFmG4Ze2yHRKO/YZER0YjjnhYX8U35fw
+ ISBuX4bWm91IpUsc9EFhYX8m2PlU0zIx2Wth8vrCrxX5M9s/yWZntule8xxkZeBeXB
+ Mi+pYWoA4GJmx8ychcurH577E6CPSiMCq/lhJsDkUCniZf5Fih+v9clO3Dw1qEQYcb
+ bnESN4trcspOBDSgjOS731j3r6ANUnRXivUISJvDszqYZTQNjpif8Sm9vh15mUUo8b
+ G3iUxEShUe/ig==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Fri, 26 May 2023 14:11:29 +0800
-Message-Id: <20230526061129.2999437-2-chao@kernel.org>
+Date: Fri, 26 May 2023 14:15:13 +0800
+Message-Id: <20230526061513.3001458-1-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230526061129.2999437-1-chao@kernel.org>
-References: <20230526061129.2999437-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Signed-off-by: Chao Yu <chao@kernel.org> --- fsck/mount.c
- | 56 +++++++++++++ include/f2fs_fs.h | 42 +++++++++++++++++++++ 2 files
- changed, 41 insertions [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview: reuse feature_table in print_sb_state() for cleanup.
+ Signed-off-by:
+ Chao Yu <chao@kernel.org> --- v2: - add commit message. fsck/mount.c | 56
+ +++++++++++++ include/f2fs_fs.h | 42 +++++++++++++++++++++ 2 fi [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q2Qfx-0002ct-Rn
-Subject: [f2fs-dev] [PATCH 2/2] f2fs-tools: reuse feature_table in
- print_sb_state()
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q2Qjh-002y8d-Id
+Subject: [f2fs-dev] [PATCH v2 2/2] f2fs-tools: reuse feature_table to clean
+ up print_sb_state()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,8 +107,12 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
+reuse feature_table in print_sb_state() for cleanup.
+
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
+v2:
+- add commit message.
  fsck/mount.c      | 56 +++++++++++++----------------------------------
  include/f2fs_fs.h | 42 +++++++++++++++++++++--------------
  2 files changed, 41 insertions(+), 57 deletions(-)
