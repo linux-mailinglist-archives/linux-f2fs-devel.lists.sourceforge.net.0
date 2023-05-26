@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84011711E68
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 May 2023 05:25:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BEA4E711E71
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 May 2023 05:28:54 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q2O4t-00023d-1v;
-	Fri, 26 May 2023 03:25:19 +0000
+	id 1q2O8I-00026h-Kf;
+	Fri, 26 May 2023 03:28:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1q2O4r-00023X-5M
+ (envelope-from <chao@kernel.org>) id 1q2O8H-00026b-9Z
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 May 2023 03:25:17 +0000
+ Fri, 26 May 2023 03:28:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=h8S0q6P2YCbq4EfVbeoQy7rv0xDNo2b4SGfDbmUPPvs=; b=mvMvweNsxiibSCzbIBiSlrr0yN
- CSkFphaLeiznY3zTfZEqg/FoA12Wg0SSej4Fx7MVX8JyUwHHGwDGR3wO/9U33kaJEC02MKFJ7scsW
- Id8k+9fwkrmlQ3h1P71qW6P5oE9GAGyk7NIGWHdehHJmw5Fgg2KnHM9qHh9AzOSva22A=;
+ bh=lAOdr13d1ZWItJaWdF0wjJqZnxR5BsQ1sAujkiDYj9w=; b=Oev9/14bODPLjI8AmI/YbgWb84
+ K1l9Qt8EHqe1BVpXO5eXij4xf0TT/ozrdWFtRWRdpAJxQMOAlTt0g5H4doLQZmHsinHBl/AQIy//b
+ 39UFKHTrF1b4DGBseN0tWg9LI6EXz4f0JosIa7hnnhAwsfbmCeYpvxun6pMakRwhWikU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,45 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=h8S0q6P2YCbq4EfVbeoQy7rv0xDNo2b4SGfDbmUPPvs=; b=cZ/F/cWBaq3rczf/qIesgkn94B
- 1/RmCuj2h1sxsdzOoanHCP1HtnwMMo70CDZAlC2LvorVmZcRp8zZYm5LgdlqIgGvNaZhC3l8ixdl/
- Snd5DtuOzKKEx5TArEEKQ1KqVygWaXTyewUJImVsapzVCWC/KtswUH0+EjKUbWvqx3sc=;
+ bh=lAOdr13d1ZWItJaWdF0wjJqZnxR5BsQ1sAujkiDYj9w=; b=ZmYIncLvz63CdAnPfDec2bH7p3
+ wzgX9bB/5MqpEegw9YbylCUW+Tx5HOFDYJ9AyhqQg0xSB2gkRqT2korMM/Ybb1aLIJ8XdoawhxM28
+ Vv3l5M0CGaTv4O9A9MrUzZJrLXBOd+nK7l0LoxFXQv4Y1y2KhvmlOIJjH9NrEFU4KgiE=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q2O4q-002reG-Q3 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 May 2023 03:25:17 +0000
+ id 1q2O7x-0006Gn-7C for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 May 2023 03:28:38 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5D3C2646D8
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 26 May 2023 03:25:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3197BC433D2;
- Fri, 26 May 2023 03:25:09 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id CA07460AB4;
+ Fri, 26 May 2023 03:28:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C077C433EF;
+ Fri, 26 May 2023 03:28:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685071510;
- bh=Bm4Dxs55HedgmIwSVMIWw3KdNzyuSGhL6iGT2Ux63Jg=;
+ s=k20201202; t=1685071703;
+ bh=hOkTUhX7SLqXrGQMJon5UdIGGFM35WQqlJV4qp28fzQ=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=LYG91t20TQh0MYXHr9BgSCpR8/Gu5vutRQnKKuvrb4MEjfjorURFb95D5hJG5pin5
- cnasnbXYg6L0OMXmwFz77mDdRH7PG8r8UCVYFOuj7JFsLu9BKiIiME+wxObYxEFOjO
- Pc8QRf65ve2/4rrAWMzN97v6IqE58QiEdx8EKhIBpyYeE2C9iSdayRXnUXjFHID2No
- aTFa4+QKf6gIPhyjDlO/5UaRYGJ1/5HZhel3sNdYtrgQI70UHQ6bRVdh0J9aWuCTnm
- pN0sR9JCnMCB72JeML5NfuNBxLgtPI+tvkB8YCtZ9e49kA25noQP3TeTMBLdzgIJGu
- LLIwr6K2ydpvQ==
-Message-ID: <efe47e32-4aa1-f897-7341-bc7bdc98c621@kernel.org>
-Date: Fri, 26 May 2023 11:25:08 +0800
+ b=X4Uq15t0xbUan1sWiYt/XrgvuPDVEBJkJ+U5C0OP9sfkNFD/c+Nq6Fyb+hVIqmpLy
+ NBm2xjRAvo442Cs6B0d5m12JEQJ4nMc9uMPEvVMIK/S8+FQQxC2WPgBSKuEuVe95zD
+ CDw8/Sb+Ix4ql7yB/xt4P8Yn+UHbxcC1xBTZVaB/e+2Gc75CW+OPH/jaocmkmUnCxs
+ dGGM815ZeT/Qz81UA/MUD31xTsr507/xR7bA1TH4SkLrZpQaUXZQ7P/tNzQbgy0H+m
+ 8SaZFL4+EjeiVAI3UcF7DG3RQZmEZ9P+9BhGllDdF9yr174LbIqRTURAC/BzC6CsGZ
+ JtApabKEQPU5g==
+Message-ID: <031ec210-7806-1bfc-9786-c246f2d1ae50@kernel.org>
+Date: Fri, 26 May 2023 11:28:19 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230517082632.748914-1-chao@kernel.org>
- <20230517082632.748914-3-chao@kernel.org> <ZGWBFvPFvQH7qdmz@google.com>
- <a54081b2-ae51-6331-28df-f292a8009862@kernel.org>
- <ZG1rAWuHP+46AiEE@google.com>
+To: Chunhai Guo <guochunhai@vivo.com>, jaegeuk@kernel.org
+References: <20230524083329.10494-1-guochunhai@vivo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZG1rAWuHP+46AiEE@google.com>
+In-Reply-To: <20230524083329.10494-1-guochunhai@vivo.com>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -77,9 +73,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/5/24 9:40, Jaegeuk Kim wrote: > On 05/18, Chao Yu
- wrote: >> On 2023/5/18 9:36, Jaegeuk Kim wrote: >>> On 05/17, Chao Yu wrote:
- >>>> Introduce alloc_next_free_block() to wrap below openned code [...] 
+ Content preview:  On 2023/5/24 16:33, Chunhai Guo wrote: > find_fsync_dnodes()
+ detect the looped node chain by comparing the loop > counter with free blocks.
+ While it may take tens of seconds to quit when > the free bl [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -97,9 +93,9 @@ X-Spam-Report: Spam detection software,
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q2O4q-002reG-Q3
-Subject: Re: [f2fs-dev] [PATCH 3/4] mkfs.f2fs: cleanup w/
- alloc_next_free_block()
+X-Headers-End: 1q2O7x-0006Gn-7C
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Detect and fix looped node chain
+ efficiently
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,223 +107,196 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net, frank.li@vivo.com
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/5/24 9:40, Jaegeuk Kim wrote:
-> On 05/18, Chao Yu wrote:
->> On 2023/5/18 9:36, Jaegeuk Kim wrote:
->>> On 05/17, Chao Yu wrote:
->>>> Introduce alloc_next_free_block() to wrap below openned codes:
->>>>
->>>> 	blkaddr = get_sb(main_blkaddr) +
->>>> 			c.cur_seg[curseg_type] * c.blks_per_seg +
->>>> 			c.curseg_offset[curseg_type];
->>>>
->>>> Meanwhile add curseg_offset field in f2fs_configuration to record
->>>> last blkaddr in each log.
->>>>
->>>> Signed-off-by: Chao Yu <chao@kernel.org>
->>>> ---
->>>>    include/f2fs_fs.h  |   2 +
->>>>    mkfs/f2fs_format.c | 101 +++++++++++++++++++--------------------------
->>>>    2 files changed, 45 insertions(+), 58 deletions(-)
->>>>
->>>> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
->>>> index 8475645..05d27ba 100644
->>>> --- a/include/f2fs_fs.h
->>>> +++ b/include/f2fs_fs.h
->>>> @@ -603,6 +603,8 @@ struct f2fs_configuration {
->>>>    	/* compression support for sload.f2fs */
->>>>    	compress_config_t compress;
->>>> +
->>>> +	block_t curseg_offset[6];
->>>
->>> NR_CURSEG_TYPE?
->>
->> The macro is defined after struct f2fs_configuration...
->>
->> How about updating all value w/ macro in below patch, as the patch
->> relocates struct f2fs_configuration?
+On 2023/5/24 16:33, Chunhai Guo wrote:
+> find_fsync_dnodes() detect the looped node chain by comparing the loop
+> counter with free blocks. While it may take tens of seconds to quit when
+> the free blocks are large enough. We can use Floyd's cycle detection
+> algorithm to make the detection more efficient, and fix the issue by
+> filling a NULL address in the last node of the chain.
 > 
-> Could you please post patches?
+> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+> ---
+>   fs/f2fs/recovery.c | 135 ++++++++++++++++++++++++++++++++++++++-------
+>   1 file changed, 116 insertions(+), 19 deletions(-)
+> 
+> diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+> index 58c1a0096f7d..1b94078947cb 100644
+> --- a/fs/f2fs/recovery.c
+> +++ b/fs/f2fs/recovery.c
+> @@ -360,21 +360,98 @@ static unsigned int adjust_por_ra_blocks(struct f2fs_sb_info *sbi,
+>   	return ra_blocks;
+>   }
+>   
+> +static int find_node_blk_fast(struct f2fs_sb_info *sbi, block_t *blkaddr_fast,
+> +		bool *is_detecting)
+> +{
+> +	unsigned int ra_blocks = RECOVERY_MAX_RA_BLOCKS;
+> +	struct page *page = NULL;
+> +	int i;
+> +
+> +	for (i = 0; i < 2; i++) {
+> +		if (!f2fs_is_valid_blkaddr(sbi, *blkaddr_fast, META_POR)) {
+> +			*is_detecting = false;
+> +			return 0;
+> +		}
+> +
+> +		page = f2fs_get_tmp_page(sbi, *blkaddr_fast);
+> +		if (IS_ERR(page))
+> +			return PTR_ERR(page);
+> +
+> +		if (!is_recoverable_dnode(page)) {
+> +			f2fs_put_page(page, 1);
+> +			*is_detecting = false;
+> +			return 0;
+> +		}
+> +
+> +		ra_blocks = adjust_por_ra_blocks(sbi, ra_blocks, *blkaddr_fast,
+> +						next_blkaddr_of_node(page));
+> +
+> +		*blkaddr_fast = next_blkaddr_of_node(page);
+> +		f2fs_put_page(page, 1);
+> +
+> +		f2fs_ra_meta_pages_cond(sbi, *blkaddr_fast, ra_blocks);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int loop_node_chain_fix(struct f2fs_sb_info *sbi, block_t blkaddr_fast,
+> +		block_t blkaddr)
+> +{
+> +	struct page *page = NULL;
+> +	block_t blkaddr_entry, blkaddr_tmp;
+> +	struct f2fs_node *rn;
+> +
+> +	/* find the entry point of the looped node chain */
+> +	while (blkaddr_fast != blkaddr) {
+> +		page = f2fs_get_tmp_page(sbi, blkaddr_fast);
+> +		if (IS_ERR(page))
+> +			return PTR_ERR(page);
+> +		blkaddr_fast = next_blkaddr_of_node(page);
+> +		f2fs_put_page(page, 1);
+> +
+> +		page = f2fs_get_tmp_page(sbi, blkaddr);
+> +		if (IS_ERR(page))
+> +			return PTR_ERR(page);
+> +		blkaddr = next_blkaddr_of_node(page);
+> +		f2fs_put_page(page, 1);
+> +	}
+> +	blkaddr_entry = blkaddr;
+> +
+> +	/* find the last node of the chain */
+> +	do {
+> +		blkaddr_tmp = blkaddr;
+> +		page = f2fs_get_tmp_page(sbi, blkaddr);
+> +		if (IS_ERR(page))
+> +			return PTR_ERR(page);
+> +		blkaddr = next_blkaddr_of_node(page);
+> +		if (blkaddr != blkaddr_entry)
+> +			f2fs_put_page(page, 1);
+> +	} while (blkaddr != blkaddr_entry);
+> +
+> +	/* fix the blkaddr of last node with NULL_ADDR. */
+> +	rn = F2FS_NODE(page);
+> +	rn->footer.next_blkaddr = NULL_ADDR;
+> +	f2fs_inode_chksum_set(sbi, page);
+> +	set_page_dirty(page);
+> +	f2fs_put_page(page, 1);
+> +	f2fs_notice(sbi, "Fix looped node chain on blkaddr %u\n", blkaddr_tmp);
+> +	return 0;
+> +}
+> +
+>   static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
+>   				bool check_only)
+>   {
+>   	struct curseg_info *curseg;
+>   	struct page *page = NULL;
+> -	block_t blkaddr;
+> -	unsigned int loop_cnt = 0;
+> -	unsigned int ra_blocks = RECOVERY_MAX_RA_BLOCKS;
+> -	unsigned int free_blocks = MAIN_SEGS(sbi) * sbi->blocks_per_seg -
+> -						valid_user_blocks(sbi);
+> +	block_t blkaddr, blkaddr_fast;
+> +	bool is_detecting = true;
+>   	int err = 0;
+>   
+>   	/* get node pages in the current segment */
+>   	curseg = CURSEG_I(sbi, CURSEG_WARM_NODE);
+>   	blkaddr = NEXT_FREE_BLKADDR(sbi, curseg);
+> +	blkaddr_fast = blkaddr;
+>   
+>   	while (1) {
+>   		struct fsync_inode_entry *entry;
+> @@ -431,25 +508,45 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
+>   		if (IS_INODE(page) && is_dent_dnode(page))
+>   			entry->last_dentry = blkaddr;
+>   next:
+> -		/* sanity check in order to detect looped node chain */
+> -		if (++loop_cnt >= free_blocks ||
+> -			blkaddr == next_blkaddr_of_node(page)) {
+> -			f2fs_notice(sbi, "%s: detect looped node chain, blkaddr:%u, next:%u",
+> -				    __func__, blkaddr,
+> -				    next_blkaddr_of_node(page));
+> -			f2fs_put_page(page, 1);
+> +		/* check next segment */
+> +		blkaddr = next_blkaddr_of_node(page);
+> +		f2fs_put_page(page, 1);
+> +
+> +		/* Below we will detect looped node chain with Floyd's cycle
+> +		 * detection algorithm.
+> +		 */
+> +		if (!is_detecting)
+> +			continue;
+> +
+> +		err = find_node_blk_fast(sbi, &blkaddr_fast, &is_detecting);
+> +		if (err)
+> +			break;
+> +
+> +		if (!is_detecting)
+> +			continue;
+> +
+> +		if (blkaddr_fast != blkaddr)
+> +			continue;
+> +
+> +		f2fs_notice(sbi, "%s: detect looped node chain, blkaddr:%u",
+> +				__func__, blkaddr);
+> +
+> +		if (check_only) {
+>   			err = -EINVAL;
+>   			break;
+>   		}
+>   
+> -		ra_blocks = adjust_por_ra_blocks(sbi, ra_blocks, blkaddr,
+> -						next_blkaddr_of_node(page));
 
-Could you please check below patch?
-
-[PATCH v2 4/4] mkfs.f2fs: refactor format flow for cleanup
+What about just bailing out if there is a loop in chain and do repair in fsck?
 
 Thanks,
 
-> 
->>
->> [PATCH 4/4]mkfs.f2fs: refactor format flow for cleanup
->>
->> Thanks,
->>
->>>
->>>>    };
->>>>    #ifdef CONFIG_64BIT
->>>> diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
->>>> index 620f779..2ca5f48 100644
->>>> --- a/mkfs/f2fs_format.c
->>>> +++ b/mkfs/f2fs_format.c
->>>> @@ -1230,11 +1230,24 @@ static int f2fs_discard_obsolete_dnode(void)
->>>>    }
->>>>    #endif
->>>> +static block_t alloc_next_free_block(int curseg_type, int blkcnt)
->>>> +{
->>>> +	block_t blkaddr;
->>>> +
->>>> +	blkaddr = get_sb(main_blkaddr) +
->>>> +		c.cur_seg[curseg_type] * c.blks_per_seg +
->>>> +		c.curseg_offset[curseg_type];
->>>> +
->>>> +	c.curseg_offset[curseg_type] += blkcnt;
->>>> +
->>>> +	return blkaddr;
->>>> +}
->>>> +
->>>>    static int f2fs_write_root_inode(void)
->>>>    {
->>>>    	struct f2fs_node *raw_node = NULL;
->>>> -	uint64_t data_blk_nor;
->>>> -	uint64_t main_area_node_seg_blk_offset = 0;
->>>> +	block_t data_blkaddr;
->>>> +	block_t node_blkaddr;
->>>>    	raw_node = calloc(F2FS_BLKSIZE, 1);
->>>>    	if (raw_node == NULL) {
->>>> @@ -1248,24 +1261,15 @@ static int f2fs_write_root_inode(void)
->>>>    	if (c.lpf_ino)
->>>>    		raw_node->i.i_links = cpu_to_le32(3);
->>>> -	raw_node->footer.next_blkaddr = cpu_to_le32(
->>>> -			get_sb(main_blkaddr) +
->>>> -			c.cur_seg[CURSEG_HOT_NODE] *
->>>> -			c.blks_per_seg + 1);
->>>> -
->>>> -	data_blk_nor = get_sb(main_blkaddr) +
->>>> -		c.cur_seg[CURSEG_HOT_DATA] * c.blks_per_seg;
->>>> -	raw_node->i.i_addr[get_extra_isize(raw_node)] = cpu_to_le32(data_blk_nor);
->>>> -
->>>> -	main_area_node_seg_blk_offset = get_sb(main_blkaddr);
->>>> -	main_area_node_seg_blk_offset += c.cur_seg[CURSEG_HOT_NODE] *
->>>> -					c.blks_per_seg;
->>>> -
->>>> -	DBG(1, "\tWriting root inode (hot node), %x %x %x at offset 0x%08"PRIu64"\n",
->>>> -			get_sb(main_blkaddr),
->>>> -			c.cur_seg[CURSEG_HOT_NODE],
->>>> -			c.blks_per_seg, main_area_node_seg_blk_offset);
->>>> -	if (write_inode(raw_node, main_area_node_seg_blk_offset) < 0) {
->>>> +	data_blkaddr = alloc_next_free_block(CURSEG_HOT_DATA, 1);
->>>> +	raw_node->i.i_addr[get_extra_isize(raw_node)] =
->>>> +				cpu_to_le32(data_blkaddr);
->>>> +
->>>> +	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE, 1);
->>>> +	raw_node->footer.next_blkaddr = cpu_to_le32(node_blkaddr + 1);
->>>> +
->>>> +	DBG(1, "\tWriting root inode (hot node), offset 0x%x\n", node_blkaddr);
->>>> +	if (write_inode(raw_node, node_blkaddr) < 0) {
->>>>    		MSG(1, "\tError: While writing the raw_node to disk!!!\n");
->>>>    		free(raw_node);
->>>>    		return -1;
->>>> @@ -1349,8 +1353,8 @@ static int f2fs_write_default_quota(int qtype, unsigned int blkaddr,
->>>>    static int f2fs_write_qf_inode(int qtype, int offset)
->>>>    {
->>>>    	struct f2fs_node *raw_node = NULL;
->>>> -	uint64_t data_blk_nor;
->>>> -	uint64_t main_area_node_seg_blk_offset = 0;
->>>> +	block_t data_blkaddr;
->>>> +	block_t node_blkaddr;
->>>>    	__le32 raw_id;
->>>>    	int i;
->>>> @@ -1366,14 +1370,10 @@ static int f2fs_write_qf_inode(int qtype, int offset)
->>>>    	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
->>>>    	raw_node->i.i_flags = F2FS_NOATIME_FL | F2FS_IMMUTABLE_FL;
->>>> -	raw_node->footer.next_blkaddr = cpu_to_le32(
->>>> -			get_sb(main_blkaddr) +
->>>> -			c.cur_seg[CURSEG_HOT_NODE] *
->>>> -			c.blks_per_seg + 1 + qtype + 1);
->>>> +	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE, 1);
->>>> +	raw_node->footer.next_blkaddr = cpu_to_le32(node_blkaddr + 1);
->>>> -	data_blk_nor = get_sb(main_blkaddr) +
->>>> -		c.cur_seg[CURSEG_HOT_DATA] * c.blks_per_seg + 1
->>>> -		+ offset * QUOTA_DATA(i);
->>>> +	data_blkaddr = alloc_next_free_block(CURSEG_HOT_DATA, QUOTA_DATA(i));
->>>>    	if (qtype == 0)
->>>>    		raw_id = raw_node->i.i_uid;
->>>> @@ -1385,24 +1385,17 @@ static int f2fs_write_qf_inode(int qtype, int offset)
->>>>    		ASSERT(0);
->>>>    	/* write two blocks */
->>>> -	if (f2fs_write_default_quota(qtype, data_blk_nor, raw_id)) {
->>>> +	if (f2fs_write_default_quota(qtype, data_blkaddr, raw_id)) {
->>>>    		free(raw_node);
->>>>    		return -1;
->>>>    	}
->>>>    	for (i = 0; i < QUOTA_DATA(qtype); i++)
->>>>    		raw_node->i.i_addr[get_extra_isize(raw_node) + i] =
->>>> -					cpu_to_le32(data_blk_nor + i);
->>>> +					cpu_to_le32(data_blkaddr + i);
->>>> -	main_area_node_seg_blk_offset = get_sb(main_blkaddr);
->>>> -	main_area_node_seg_blk_offset += c.cur_seg[CURSEG_HOT_NODE] *
->>>> -					c.blks_per_seg + offset + 1;
->>>> -
->>>> -	DBG(1, "\tWriting quota inode (hot node), %x %x %x at offset 0x%08"PRIu64"\n",
->>>> -			get_sb(main_blkaddr),
->>>> -			c.cur_seg[CURSEG_HOT_NODE],
->>>> -			c.blks_per_seg, main_area_node_seg_blk_offset);
->>>> -	if (write_inode(raw_node, main_area_node_seg_blk_offset) < 0) {
->>>> +	DBG(1, "\tWriting quota inode (hot node), offset 0x%x\n", node_blkaddr);
->>>> +	if (write_inode(raw_node, node_blkaddr) < 0) {
->>>>    		MSG(1, "\tError: While writing the raw_node to disk!!!\n");
->>>>    		free(raw_node);
->>>>    		return -1;
->>>> @@ -1492,8 +1485,8 @@ static block_t f2fs_add_default_dentry_lpf(void)
->>>>    static int f2fs_write_lpf_inode(void)
->>>>    {
->>>>    	struct f2fs_node *raw_node;
->>>> -	uint64_t main_area_node_seg_blk_offset;
->>>> -	block_t data_blk_nor;
->>>> +	block_t data_blkaddr;
->>>> +	block_t node_blkaddr;
->>>>    	int err = 0;
->>>>    	ASSERT(c.lpf_ino);
->>>> @@ -1510,28 +1503,20 @@ static int f2fs_write_lpf_inode(void)
->>>>    	raw_node->i.i_namelen = le32_to_cpu(strlen(LPF));
->>>>    	memcpy(raw_node->i.i_name, LPF, strlen(LPF));
->>>> -	raw_node->footer.next_blkaddr = cpu_to_le32(
->>>> -			get_sb(main_blkaddr) +
->>>> -			c.cur_seg[CURSEG_HOT_NODE] * c.blks_per_seg +
->>>> -			1 + c.quota_inum + 1);
->>>> +	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE, 1);
->>>> +	raw_node->footer.next_blkaddr = cpu_to_le32(node_blkaddr + 1);
->>>> -	data_blk_nor = f2fs_add_default_dentry_lpf();
->>>> -	if (data_blk_nor == 0) {
->>>> +	data_blkaddr = f2fs_add_default_dentry_lpf();
->>>> +	if (data_blkaddr == 0) {
->>>>    		MSG(1, "\tError: Failed to add default dentries for lost+found!!!\n");
->>>>    		err = -1;
->>>>    		goto exit;
->>>>    	}
->>>> -	raw_node->i.i_addr[get_extra_isize(raw_node)] = cpu_to_le32(data_blk_nor);
->>>> -
->>>> -	main_area_node_seg_blk_offset = get_sb(main_blkaddr);
->>>> -	main_area_node_seg_blk_offset += c.cur_seg[CURSEG_HOT_NODE] *
->>>> -		c.blks_per_seg + c.quota_inum + 1;
->>>> +	raw_node->i.i_addr[get_extra_isize(raw_node)] = cpu_to_le32(data_blkaddr);
->>>> -	DBG(1, "\tWriting lost+found inode (hot node), %x %x %x at offset 0x%08"PRIu64"\n",
->>>> -			get_sb(main_blkaddr),
->>>> -			c.cur_seg[CURSEG_HOT_NODE],
->>>> -			c.blks_per_seg, main_area_node_seg_blk_offset);
->>>> -	if (write_inode(raw_node, main_area_node_seg_blk_offset) < 0) {
->>>> +	DBG(1, "\tWriting lost+found inode (hot node), offset 0x%x\n",
->>>> +								node_blkaddr);
->>>> +	if (write_inode(raw_node, node_blkaddr) < 0) {
->>>>    		MSG(1, "\tError: While writing the raw_node to disk!!!\n");
->>>>    		err = -1;
->>>>    		goto exit;
->>>> -- 
->>>> 2.40.1
+> -
+> -		/* check next segment */
+> -		blkaddr = next_blkaddr_of_node(page);
+> -		f2fs_put_page(page, 1);
+> +		err = loop_node_chain_fix(sbi, blkaddr,
+> +				NEXT_FREE_BLKADDR(sbi, curseg));
+> +		if (err)
+> +			break;
+>   
+> -		f2fs_ra_meta_pages_cond(sbi, blkaddr, ra_blocks);
+> +		/* Since we call get_fsync_inode() to ensure there are
+> +		 * no duplicate inodes in the inode_list even if there
+> +		 * are duplicate blkaddr, we can continue running
+> +		 * after fixing the looped node chain.
+> +		 */
+> +		is_detecting = false;
+>   	}
+>   	return err;
+>   }
 
 
 _______________________________________________
