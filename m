@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81B78712B5F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 May 2023 19:05:27 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBB15712BAC
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 May 2023 19:21:23 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q2asT-00026Z-Up;
-	Fri, 26 May 2023 17:05:22 +0000
+	id 1q2b7x-0002zm-7G;
+	Fri, 26 May 2023 17:21:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1q2asS-00026T-Gl
+ (envelope-from <jaegeuk@kernel.org>) id 1q2b7w-0002zg-4u
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 May 2023 17:05:21 +0000
+ Fri, 26 May 2023 17:21:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kkWlPl9OY2OKB8e7s8p10JcYLC/4T+EuGxM70lrvD6g=; b=V4oCjkjDeDQJFahE5nVrnZdwMx
- ilrIqjcDAnaGfitgK1dst4obi2aqqAYtscGTremieqgbiYN7sGIv7vNN95ziZnnbueb4VmLICTEeQ
- MWybsK692byz3WLM0tEZv/WVDJwbT0GCOU4Wz9Xah2nVEXVCThxNQS5gjl5P1PtHpMnI=;
+ bh=TIjkfSltBGoHMDVJMLIFiM2/FJ3SSYVYXtUCRMj64/A=; b=cWIRn7glubfJ1neva57SuzRh59
+ IT4SYOdquuJS+IQw6mdElaQixI63noQ9upizpFqJbQ9kOfgGe/BCtij5YQWKk9DvLqiUQfQiGxG5z
+ vg5b6z44ktTLZG292qf634gXQQHIP6O6QcXHAh6hxc5RU2VQOGUr24pdD1FLqK8RUqKA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,40 +31,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kkWlPl9OY2OKB8e7s8p10JcYLC/4T+EuGxM70lrvD6g=; b=akc8ns7coC7aJA5wa7FR+VOllU
- CJmXfssfTa2CXBtEJ8266nJUgphBTGpwHNISlXslpbvxb2L2pjq6zrgjTZtep31qGiz9aTj+NAZFP
- K+m5aNP34kI2Wtc5EUqb1K9h1Ej11NQrUcKn0WlNBEnwOVvzJ1f+t+r+YAreJnVi4qkY=;
+ bh=TIjkfSltBGoHMDVJMLIFiM2/FJ3SSYVYXtUCRMj64/A=; b=P3xyejLkg4xsd2u6/JL2RA5Kl2
+ dH3xIgv7igm4OEg8DuvYwR21quuAGAZA2aSYHoHymGFYP7uDB6PjmU3HkLUiR8K3mPBhDUol0Wtpj
+ Tl23gYgyChLsHQJXYTK2qjlkIUJjlI/GJ++J3/+B7uq340OVkRCHSxMd2J0G9DG95GHY=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q2asR-0002wZ-Ls for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 May 2023 17:05:21 +0000
+ id 1q2b7v-0003MO-4g for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 May 2023 17:21:20 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 44668616EF
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 26 May 2023 17:05:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EBD1C433EF;
- Fri, 26 May 2023 17:05:05 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AB512651DA;
+ Fri, 26 May 2023 17:21:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E1489C4339B;
+ Fri, 26 May 2023 17:21:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685120705;
- bh=ePK1BfFlvFrWar0yL2hBGckKFKq2mnc2EzLSm0R6ijc=;
+ s=k20201202; t=1685121673;
+ bh=gh6aGwNXF50lyfx9OR33zTQ40B1N9Ok+l110UgV9qcI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=GXgdFunLkyGrpkIU9YdEqlG2fBFk9ls+vr4FDXPuJGWqELhwebezmSz8ZUR5HR2da
- B8NYURXh77JegpXXuG8HPqF4UkB9PUu4sASuJEl1ME4u1LqzY47zim5rbmpJJmXHd2
- vMAlAcqxK8UURKtgU5YSO0npZFMmsQwgjKjr6YUYY9JA1A+RfYkV38jDXerzOBg5M7
- Z3/oTIeEuOK04HAm3otUSozyENpAkWbYyQhyavImhT1oTkYTDgTr3/jQZtXEV7WqKn
- wR/rmo/c4CeOGo5oSTdlB0x2N7f2jLHsQZRS5CF/YPUJe0pGbAdK+M1LYBWippl8Zi
- VVZlpvYs0S57w==
-Date: Fri, 26 May 2023 10:05:03 -0700
+ b=KCZWZO1PWnA8Cq7ymgLi3vRtsV0NlSriolEERPEA+bwPTZTWmfaLKm0H3LuxCbkHF
+ j+o1OzQiW3Nu3kkBjBkqZ8lcKomyl4c/96+9/R6XAq2cqjk/SzOSysxhQ7N7XHDj1k
+ 35DTIrnhfczEV6SGpFHZtqDhZ+Ww4CQ+40N1OY9LdynmL4brW1eBsIyAI2Hzu1V3nu
+ VtBKjURAhdG+9lpFHBoQS0eSaUiEWcFe0IwGugC5NEooutaAocq/jlD6/j2bq9TUHl
+ 3QKblWFwpOOLi9bYbwx69M4mPSp/LXSQIxwcAQcvUwewnPXkGQTiFGB33ExAgfRWh8
+ asFhwsOwQO2nQ==
+Date: Fri, 26 May 2023 10:21:11 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZHDmv2hLR9WZ16Pl@google.com>
-References: <20230525082508.2320763-1-chao@kernel.org>
+To: Wu Bo <bo.wu@vivo.com>
+Message-ID: <ZHDqhy4E9iSnneLa@google.com>
+References: <20230524100812.80741-1-bo.wu@vivo.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230525082508.2320763-1-chao@kernel.org>
+In-Reply-To: <20230524100812.80741-1-bo.wu@vivo.com>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,16 +71,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 05/25,
- Chao Yu wrote: > We should set noatime bit for quota
- files, since no one cares about > atime of quota file, and we should set
- immutalbe bit as well, due to > nobody should write to the file [...] 
+ Content preview:  On 05/24, Wu Bo wrote: > The NULL return of 'd_splice_alias'
+ dosen't mean error. > > Signed-off-by: Wu Bo <bo.wu@vivo.com> > --- >
+ fs/f2fs/namei.c
+ | 2 +- > 1 file changed, 1 insertion(+), 1 deletion(- [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -92,9 +91,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q2asR-0002wZ-Ls
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to set noatime and immutable
- flag for quota file
+X-Headers-End: 1q2b7v-0003MO-4g
+Subject: Re: [f2fs-dev] [PATCH 1/1] f2fs: fix args passed to
+ trace_f2fs_lookup_end
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,55 +105,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: wubo.oduw@gmail.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/25, Chao Yu wrote:
-> We should set noatime bit for quota files, since no one cares about
-> atime of quota file, and we should set immutalbe bit as well, due to
-> nobody should write to the file through exported interfaces.
+On 05/24, Wu Bo wrote:
+> The NULL return of 'd_splice_alias' dosen't mean error.
 > 
-> Meanwhile this patch use inode_lock to avoid race condition during
-> inode->i_flags, f2fs_inode->i_flags update.
-> 
-> Signed-off-by: Chao Yu <chao@kernel.org>
+> Signed-off-by: Wu Bo <bo.wu@vivo.com>
 > ---
-> v2:
-> - fix to detect i_flags status correctly.
->  fs/f2fs/super.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
+>  fs/f2fs/namei.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index 51812f459581..1cf84c993d7c 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -2763,7 +2763,17 @@ static int f2fs_quota_enable(struct super_block *sb, int type, int format_id,
->  	}
->  
->  	/* Don't account quota for quota files to avoid recursion */
-> +	inode_lock(qf_inode);
->  	qf_inode->i_flags |= S_NOQUOTA;
-> +
-> +	if (!(F2FS_I(qf_inode)->i_flags & F2FS_NOATIME_FL) ||
-> +		!(F2FS_I(qf_inode)->i_flags & F2FS_IMMUTABLE_FL)) {
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index 77a71276ecb1..e5a3e39ce90c 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+> @@ -577,7 +577,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
+>  #endif
+>  	new = d_splice_alias(inode, dentry);
+>  	err = PTR_ERR_OR_ZERO(new);
+> -	trace_f2fs_lookup_end(dir, dentry, ino, !new ? -ENOENT : err);
+> +	trace_f2fs_lookup_end(dir, new ? new : dentry, ino, err);
 
-What about this?
+Shouldn't give an error pointer to the dentry field.
 
-if ((F2FS_I(qf_inode)->i_flags & qf_flag) != qf_flag)
+How about just giving the err?
 
-> +		F2FS_I(qf_inode)->i_flags |=
-> +				F2FS_NOATIME_FL | F2FS_IMMUTABLE_FL;
-> +		f2fs_set_inode_flags(qf_inode);
-> +	}
-> +	inode_unlock(qf_inode);
-> +
->  	err = dquot_load_quota_inode(qf_inode, type, format_id, flags);
->  	iput(qf_inode);
->  	return err;
+-       err = PTR_ERR_OR_ZERO(new);
+-       trace_f2fs_lookup_end(dir, dentry, ino, !new ? -ENOENT : err);
++       trace_f2fs_lookup_end(dir, dentry, ino, PTR_ERR_OR_ZERO(new));
+
+
+>  	return new;
+>  out_iput:
+>  	iput(inode);
 > -- 
-> 2.40.1
+> 2.35.3
 
 
 _______________________________________________
