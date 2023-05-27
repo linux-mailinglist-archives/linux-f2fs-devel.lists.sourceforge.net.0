@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4470B7130CB
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 May 2023 02:04:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0362B7130CC
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 27 May 2023 02:05:43 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q2hQJ-0005wl-7Q;
-	Sat, 27 May 2023 00:04:44 +0000
+	id 1q2hRC-0005z2-Qd;
+	Sat, 27 May 2023 00:05:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1q2hQI-0005we-1l
+ (envelope-from <chao@kernel.org>) id 1q2hRB-0005yv-28
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 27 May 2023 00:04:42 +0000
+ Sat, 27 May 2023 00:05:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fpIrWYVKBnAbFY/U2eotuGaTxI7YpsKI6PMeVYuW+9A=; b=goEMxWVVlyy9wZwFZ0GQWx3V4s
- cbbDxGeLgIPnn4R0/OENaWlMCPnA527hMlAj4D9jndvjXiBf+RVNnujzkY2oN4FI3H+PjbGdQsbqi
- TFoTbeG48nBWv7+/TlO8DZGMONqK8pYb4zTaRjODT9kFnPesvU8W+Wz4PNPtS/AwWEok=;
+ bh=REKflrLIlaWLYcjjM1JQdFboJo0J11obtbPkm8ptq1o=; b=NykPW3caNl/uj4WozQHClZjzEm
+ NXj3SvoqmdGi1vecKvrEhId3va4ZMLYC15YgTm+NOAPby27zncPKk39eYKg2VzKdQ3HndpUuMoRYg
+ 94pVKhN/JOne5H5x0MxFMGWpx9kPSCcB1c/d8EPgtu9fIn/qSCuwuprN3D/9gO7fDRt0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,43 +31,43 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fpIrWYVKBnAbFY/U2eotuGaTxI7YpsKI6PMeVYuW+9A=; b=CidIS+nx9T7N3ba5G4gZygc2yH
- /ZpXZL9R+86kBJCjn5yg3NxQZldPF7Oy9fkkEhXs7OzpdezaBCRlqcVEy6h1NTrNAWeokPdjJ7+cv
- fu8Vws8c8Cb64Y3kFgnZEU1t1NtohO/vmObmL+OuT6FkqLO7Ci3dEtd3qrjdjQ4WYMNc=;
+ bh=REKflrLIlaWLYcjjM1JQdFboJo0J11obtbPkm8ptq1o=; b=WX6+9VOjRnt74XSbbuKEcHoQHH
+ pkx3Z8chmS7Nr3Mn4vdnhxixfnRio3AM6LBE9APmAUlD3DkhpnS2EvfpOAZSEWIwtaa5eeofXeW9y
+ cNqRg2uZ91Ulyhnqd87u+hqSLUO/hNF7h3z9WFdbOXxY4+fPFpg3McIMZ3/+P8Pcqpto=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q2hQH-003iVD-5q for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 27 May 2023 00:04:42 +0000
+ id 1q2hRB-003iX8-5y for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 27 May 2023 00:05:37 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B68AE63D50
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B2A6D63D50
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 27 May 2023 00:04:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55411C433D2;
- Sat, 27 May 2023 00:04:33 +0000 (UTC)
+ Sat, 27 May 2023 00:05:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 873F1C433D2;
+ Sat, 27 May 2023 00:05:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685145875;
- bh=tQP6TDKYMO+Vov4/ja5qjhaNXtPrbXIxcqe055rTXLw=;
+ s=k20201202; t=1685145931;
+ bh=OtxeRoeV8ysrB1DutqMltSvGzrP7VFJI3zDDRi2+7Zk=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Y2a2B1Gwr5fpM7UwF+PD7IaZAnVCdecTS8P9bqS9SoaEUBCbwFXLqRSshAOEMuDDN
- +kuEkr58savAgdIAso0i/18IWmbvGL5KL32rAw98RBquL4XwEZiDzCRgAyxqIDAQ/U
- r6OvPoWn3+NJ6lck/SCEJKjISffVKoX+X72h3Xic7L6zY3pz8M5J2aiQEZ08HPcxdf
- GdFp5sJa6E7NvDN/noe2NN8O1GUIaywO6izRtZQOOHh1SU8gn/uu65nxOrF1E/sSqg
- V1VLnXpABZkwiRgxPtK8ANZQCvVOrNKzTNdnHtG++cPvxAitp6UQqOnRfsFLMazqre
- 5ShFUT7KduTFA==
-Message-ID: <cef794a0-7228-52f6-2073-e1abbeb24770@kernel.org>
-Date: Sat, 27 May 2023 08:04:31 +0800
+ b=dvdKSxWKJYUwKGEJsV+8PQKRAGea8jMtRYsCZ/aBZ+ZE7Unmrek1NGNX7ggEb5pLm
+ 6WiRI90gxd5WcfT7A6dPt2hlmWP5Nx863HsDfof46VGN6Vj0VI3QdTa2uB4pDKrADk
+ Kyj8PEefTOSZclUQjb5OUuU/Q4GymYNL4WW2slnkwERnTbA3DwXY6RbnvDhXsNX5HM
+ Sf4Ycce1mphi5fCQIfP6hpT0F9k1s8564ZDEh1Qzp0dWmt/3vl58ZAhQwWzMdvrW9b
+ 42GTbgUm5alAViL6p333V7E6Mp6oUI1graghAUFW30e0D21F52kiERWBsH7E6Y0yhq
+ xlqZTVADsOwMQ==
+Message-ID: <0a8de47e-d097-2517-a94e-bf258fd0c18b@kernel.org>
+Date: Sat, 27 May 2023 08:05:28 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
 Content-Language: en-US
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230526032357.2912540-1-chao@kernel.org>
- <ZHDd6REAhqwG16ic@google.com>
+References: <20230526061129.2999437-1-chao@kernel.org>
+ <20230526061129.2999437-2-chao@kernel.org> <ZHDdYjFRwWDcELJw@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZHDd6REAhqwG16ic@google.com>
+In-Reply-To: <ZHDdYjFRwWDcELJw@google.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -75,9 +75,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/5/27 0:27, Jaegeuk Kim wrote: > Applying: mkfs.f2fs:
- refactor format flow for cleanup > .git/rebase-apply/patch:449: trailing
- whitespace. > > .git/rebase-apply/patch:652: trailing whitespace. [...] 
+ Content preview:  On 2023/5/27 0:25, Jaegeuk Kim wrote: > On 05/26, Chao Yu
+ wrote: >> Signed-off-by: Chao Yu <chao@kernel.org> >> --- >> fsck/mount.c
+ | 56 +++++++++++++ >> include/f2fs [...] 
  Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +93,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q2hQH-003iVD-5q
-Subject: Re: [f2fs-dev] [PATCH v2 4/4] mkfs.f2fs: refactor format flow for
- cleanup
+X-Headers-End: 1q2hRB-003iX8-5y
+Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs-tools: reuse feature_table in
+ print_sb_state()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,1005 +112,162 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/5/27 0:27, Jaegeuk Kim wrote:
-> Applying: mkfs.f2fs: refactor format flow for cleanup
-> .git/rebase-apply/patch:449: trailing whitespace.
+On 2023/5/27 0:25, Jaegeuk Kim wrote:
+> On 05/26, Chao Yu wrote:
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>>   fsck/mount.c      | 56 +++++++++++++----------------------------------
+>>   include/f2fs_fs.h | 42 +++++++++++++++++++++--------------
+>>   2 files changed, 41 insertions(+), 57 deletions(-)
+>>
+>> diff --git a/fsck/mount.c b/fsck/mount.c
+>> index 70e8b46..60ad493 100644
+>> --- a/fsck/mount.c
+>> +++ b/fsck/mount.c
+>> @@ -599,54 +599,28 @@ void print_cp_state(u32 flag)
+>>   	MSG(0, "\n");
+>>   }
+>>   
+>> +extern struct feature feature_table[];
+>>   void print_sb_state(struct f2fs_super_block *sb)
+>>   {
+>>   	unsigned int f = get_sb(feature);
+>> +	char *name;
+>>   	int i;
+>>   
+>>   	MSG(0, "Info: superblock features = %x : ", f);
+>> -	if (f & F2FS_FEATURE_ENCRYPT) {
+>> -		MSG(0, "%s", " encrypt");
+>> -	}
+>> -	if (f & F2FS_FEATURE_VERITY) {
+>> -		MSG(0, "%s", " verity");
+>> -	}
+>> -	if (f & F2FS_FEATURE_BLKZONED) {
+>> -		MSG(0, "%s", " blkzoned");
+>> -	}
+>> -	if (f & F2FS_FEATURE_EXTRA_ATTR) {
+>> -		MSG(0, "%s", " extra_attr");
+>> -	}
+>> -	if (f & F2FS_FEATURE_PRJQUOTA) {
+>> -		MSG(0, "%s", " project_quota");
+>> -	}
+>> -	if (f & F2FS_FEATURE_INODE_CHKSUM) {
+>> -		MSG(0, "%s", " inode_checksum");
+>> -	}
+>> -	if (f & F2FS_FEATURE_FLEXIBLE_INLINE_XATTR) {
+>> -		MSG(0, "%s", " flexible_inline_xattr");
+>> -	}
+>> -	if (f & F2FS_FEATURE_QUOTA_INO) {
+>> -		MSG(0, "%s", " quota_ino");
+>> -	}
+>> -	if (f & F2FS_FEATURE_INODE_CRTIME) {
+>> -		MSG(0, "%s", " inode_crtime");
+>> -	}
+>> -	if (f & F2FS_FEATURE_LOST_FOUND) {
+>> -		MSG(0, "%s", " lost_found");
+>> -	}
+>> -	if (f & F2FS_FEATURE_SB_CHKSUM) {
+>> -		MSG(0, "%s", " sb_checksum");
+>> -	}
+>> -	if (f & F2FS_FEATURE_CASEFOLD) {
+>> -		MSG(0, "%s", " casefold");
+>> -	}
+>> -	if (f & F2FS_FEATURE_COMPRESSION) {
+>> -		MSG(0, "%s", " compression");
+>> -	}
+>> -	if (f & F2FS_FEATURE_RO) {
+>> -		MSG(0, "%s", " ro");
+>> +
+>> +	for (i = 0; i < 32; i++) {
 > 
-> .git/rebase-apply/patch:652: trailing whitespace.
-> 
-> .git/rebase-apply/patch:747: trailing whitespace.
+> Need to add a definition for 32?
 
-Oh, sorry, I've fixed above issues.
-
-> 	struct f2fs_node *raw_node = NULL;
-> error: patch failed: include/f2fs_fs.h:494
-> error: include/f2fs_fs.h: patch does not apply
-> error: patch failed: mkfs/f2fs_format.c:1230
-> error: mkfs/f2fs_format.c: patch does not apply
-> Patch failed at 0001 mkfs.f2fs: refactor format flow for cleanup
-> 
-> Could you please rebase it from dev-test with format-patch?
-
-I guess it is because we apply below patches w/ reversed order?
-
-mkfs.f2fs: refactor format flow for cleanup
-f2fs-tools: fix to le32 type variable correctly
-
-Could you please try to apply patches w/ below order?
-
-[PATCH v3 3/4] mkfs.f2fs: cleanup w/ alloc_next_free_block()	--- first
-[PATCH v3 4/4] mkfs.f2fs: refactor format flow for cleanup
-[PATCH v4 1/2] f2fs-tools: fix to le32 type variable correctly
-[PATCH v4 2/2] f2fs-tools: reuse feature_table to clean up print_sb_state()	--- last
+Agree and fixed.
 
 Thanks,
 
 > 
-> On 05/26, Chao Yu wrote:
->> During formatting device, node/data block and filesystem metatdata related
->> to same inode were updated in separated functions, e.g. for root inode:
->> - f2fs_write_root_inode() updates root inode's block
->> - f2fs_write_check_point_pack updates its nat/sit journal, summary block
->>
->> Result in:
->> - there are some redundant codes in between f2fs_write_check_point_pack()
->> and functions in f2fs_create_root_dir().
->> - readability is bad due to filesystem meta and data/node updates in
->> separated places.
->> - bad scalability if we want to add more default inode.
->>
->> So that, this patch introduces below functions:
->> - update_sit_journal
->> - update_nat_jounral
->> - update_summary_entry
->>
->> Then use them to update inode related metadata into cache in below
->> functions:
->> - f2fs_write_root_inode
->> - f2fs_add_default_dentry_root
->> - f2fs_write_qf_inode
->> - f2fs_write_default_quota
->> - f2fs_write_lpf_inode
->> - f2fs_write_lpf_inode
->>
->> Finally, f2fs_write_check_point_pack() can write back cached metadata
->> into CP area directly.
->>
->> Signed-off-by: Chao Yu <chao@kernel.org>
->> ---
->> v2:
->> - use NR_CURSEG_TYPE in struct f2fs_configuration
->>   include/f2fs_fs.h  | 235 ++++++++++++------------
->>   mkfs/f2fs_format.c | 449 ++++++++++++++++++++++-----------------------
->>   2 files changed, 337 insertions(+), 347 deletions(-)
->>
+>> +		unsigned int bit = 1 << i;
+>> +
+>> +		if (!(f & bit))
+>> +			continue;
+>> +
+>> +		name = feature_name(feature_table, bit);
+>> +		if (!name)
+>> +			continue;
+>> +
+>> +		MSG(0, " %s", name);
+>>   	}
+>> +
+>>   	MSG(0, "\n");
+>>   	MSG(0, "Info: superblock encrypt level = %d, salt = ",
+>>   					sb->encryption_level);
 >> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
->> index 05d27ba..e441749 100644
+>> index 9d35b42..a97c974 100644
 >> --- a/include/f2fs_fs.h
 >> +++ b/include/f2fs_fs.h
->> @@ -494,119 +494,6 @@ typedef struct {
->>   #define ALIGN_DOWN(addrs, size)	(((addrs) / (size)) * (size))
->>   #define ALIGN_UP(addrs, size)	ALIGN_DOWN(((addrs) + (size) - 1), (size))
+>> @@ -1811,35 +1811,45 @@ static inline void f2fs_init_inode(struct f2fs_super_block *sb,
 >>   
->> -struct f2fs_configuration {
->> -	uint32_t conf_reserved_sections;
->> -	uint32_t reserved_segments;
->> -	uint32_t new_reserved_segments;
->> -	int sparse_mode;
->> -	int zoned_mode;
->> -	int zoned_model;
->> -	size_t zone_blocks;
->> -	double overprovision;
->> -	double new_overprovision;
->> -	uint32_t cur_seg[6];
->> -	uint32_t segs_per_sec;
->> -	uint32_t secs_per_zone;
->> -	uint32_t segs_per_zone;
->> -	uint32_t start_sector;
->> -	uint32_t total_segments;
->> -	uint32_t sector_size;
->> -	uint64_t device_size;
->> -	uint64_t total_sectors;
->> -	uint64_t wanted_total_sectors;
->> -	uint64_t wanted_sector_size;
->> -	uint64_t target_sectors;
->> -	uint32_t sectors_per_blk;
->> -	uint32_t blks_per_seg;
->> -	__u8 init_version[VERSION_LEN + 1];
->> -	__u8 sb_version[VERSION_LEN + 1];
->> -	__u8 version[VERSION_LEN + 1];
->> -	char *vol_label;
->> -	char *vol_uuid;
->> -	uint16_t s_encoding;
->> -	uint16_t s_encoding_flags;
->> -	int heap;
->> -	int32_t kd;
->> -	int32_t dump_fd;
->> -	struct device_info devices[MAX_DEVICES];
->> -	int ndevs;
->> -	char *extension_list[2];
->> -	const char *rootdev_name;
->> -	int dbg_lv;
->> -	int show_dentry;
->> -	int trim;
->> -	int trimmed;
->> -	int func;
->> -	void *private;
->> -	int dry_run;
->> -	int no_kernel_check;
->> -	int fix_on;
->> -	int force;
->> -	int defset;
->> -	int bug_on;
->> -	int force_stop;
->> -	int abnormal_stop;
->> -	int fs_errors;
->> -	int bug_nat_bits;
->> -	bool quota_fixed;
->> -	int alloc_failed;
->> -	int auto_fix;
->> -	int layout;
->> -	int show_file_map;
->> -	u64 show_file_map_max_offset;
->> -	int quota_fix;
->> -	int preen_mode;
->> -	int ro;
->> -	int preserve_limits;		/* preserve quota limits */
->> -	int large_nat_bitmap;
->> -	int fix_chksum;			/* fix old cp.chksum position */
->> -	__le32 feature;			/* defined features */
->> -	unsigned int quota_bits;	/* quota bits */
->> -	time_t fixed_time;
->> -
->> -	/* mkfs parameters */
->> -	int fake_seed;
->> -	uint32_t next_free_nid;
->> -	uint32_t quota_inum;
->> -	uint32_t quota_dnum;
->> -	uint32_t lpf_inum;
->> -	uint32_t lpf_dnum;
->> -	uint32_t lpf_ino;
->> -	uint32_t root_uid;
->> -	uint32_t root_gid;
->> -
->> -	/* defragmentation parameters */
->> -	int defrag_shrink;
->> -	uint64_t defrag_start;
->> -	uint64_t defrag_len;
->> -	uint64_t defrag_target;
->> -
->> -	/* sload parameters */
->> -	char *from_dir;
->> -	char *mount_point;
->> -	char *target_out_dir;
->> -	char *fs_config_file;
->> -#ifdef HAVE_LIBSELINUX
->> -	struct selinux_opt seopt_file[8];
->> -	int nr_opt;
->> -#endif
->> -	int preserve_perms;
->> -
->> -	/* resize parameters */
->> -	int safe_resize;
->> -
->> -	/* precomputed fs UUID checksum for seeding other checksums */
->> -	uint32_t chksum_seed;
->> -
->> -	/* cache parameters */
->> -	dev_cache_config_t cache_config;
->> -
->> -	/* compression support for sload.f2fs */
->> -	compress_config_t compress;
->> -
->> -	block_t curseg_offset[6];
->> -};
->> -
->>   #ifdef CONFIG_64BIT
->>   #define BITS_PER_LONG	64
->>   #else
->> @@ -721,6 +608,12 @@ enum {
->>   	NO_CHECK_TYPE
+>>   struct feature {
+>>   	char *name;
+>> -	u32  mask;
+>> +	u32 mask;
+>> +	u32 settable;
 >>   };
 >>   
->> +enum {
->> +	CURSEG_RO_HOT_DATA,
->> +	CURSEG_RO_HOT_NODE,
->> +	NR_RO_CURSEG_TYPE,
->> +};
->> +
->>   #define F2FS_MIN_SEGMENTS	9 /* SB + 2 (CP + SIT + NAT) + SSA + MAIN */
->>   
->>   /*
->> @@ -749,7 +642,7 @@ enum {
->>   #define F2FS_META_INO(sbi)	(sbi->meta_ino_num)
->>   
->>   #define F2FS_MAX_QUOTAS		3
->> -#define QUOTA_DATA(i)		(2)
->> +#define QUOTA_DATA		2
->>   #define QUOTA_INO(sb,t)	(le32_to_cpu((sb)->qf_ino[t]))
->>   
->>   /*
->> @@ -1471,6 +1364,120 @@ enum {
->>   	SSR
+>>   #define INIT_FEATURE_TABLE						\
+>>   struct feature feature_table[] = {					\
+>> -	{ "encrypt",			F2FS_FEATURE_ENCRYPT },		\
+>> -	{ "extra_attr",			F2FS_FEATURE_EXTRA_ATTR },	\
+>> -	{ "project_quota",		F2FS_FEATURE_PRJQUOTA },	\
+>> -	{ "inode_checksum",		F2FS_FEATURE_INODE_CHKSUM },	\
+>> -	{ "flexible_inline_xattr",	F2FS_FEATURE_FLEXIBLE_INLINE_XATTR },\
+>> -	{ "quota",			F2FS_FEATURE_QUOTA_INO },	\
+>> -	{ "inode_crtime",		F2FS_FEATURE_INODE_CRTIME },	\
+>> -	{ "lost_found",			F2FS_FEATURE_LOST_FOUND },	\
+>> -	{ "verity",			F2FS_FEATURE_VERITY },	/* reserved */ \
+>> -	{ "sb_checksum",		F2FS_FEATURE_SB_CHKSUM },	\
+>> -	{ "casefold",			F2FS_FEATURE_CASEFOLD },	\
+>> -	{ "compression",		F2FS_FEATURE_COMPRESSION },	\
+>> -	{ "ro",				F2FS_FEATURE_RO},		\
+>> -	{ NULL,				0x0},				\
+>> +	{ "encrypt",			F2FS_FEATURE_ENCRYPT,		1}, \
+>> +	{ "blkzoned",			F2FS_FEATURE_BLKZONED,		0}, \
+>> +	{ "extra_attr",			F2FS_FEATURE_EXTRA_ATTR,	1}, \
+>> +	{ "project_quota",		F2FS_FEATURE_PRJQUOTA,		1}, \
+>> +	{ "inode_checksum",		F2FS_FEATURE_INODE_CHKSUM,	1}, \
+>> +	{ "flexible_inline_xattr",	F2FS_FEATURE_FLEXIBLE_INLINE_XATTR,1}, \
+>> +	{ "quota",			F2FS_FEATURE_QUOTA_INO,		1}, \
+>> +	{ "inode_crtime",		F2FS_FEATURE_INODE_CRTIME,	1}, \
+>> +	{ "lost_found",			F2FS_FEATURE_LOST_FOUND,	1}, \
+>> +	{ "verity",			F2FS_FEATURE_VERITY,		1}, \
+>> +	{ "sb_checksum",		F2FS_FEATURE_SB_CHKSUM,		1}, \
+>> +	{ "casefold",			F2FS_FEATURE_CASEFOLD,		1}, \
+>> +	{ "compression",		F2FS_FEATURE_COMPRESSION,	1}, \
+>> +	{ "ro",				F2FS_FEATURE_RO,		1}, \
+>> +	{ NULL,				0x0,				0}, \
 >>   };
 >>   
->> +#define MAX_CACHE_SUMS			8
->> +
->> +struct f2fs_configuration {
->> +	uint32_t conf_reserved_sections;
->> +	uint32_t reserved_segments;
->> +	uint32_t new_reserved_segments;
->> +	int sparse_mode;
->> +	int zoned_mode;
->> +	int zoned_model;
->> +	size_t zone_blocks;
->> +	double overprovision;
->> +	double new_overprovision;
->> +	uint32_t cur_seg[NR_CURSEG_TYPE];
->> +	uint32_t segs_per_sec;
->> +	uint32_t secs_per_zone;
->> +	uint32_t segs_per_zone;
->> +	uint32_t start_sector;
->> +	uint32_t total_segments;
->> +	uint32_t sector_size;
->> +	uint64_t device_size;
->> +	uint64_t total_sectors;
->> +	uint64_t wanted_total_sectors;
->> +	uint64_t wanted_sector_size;
->> +	uint64_t target_sectors;
->> +	uint32_t sectors_per_blk;
->> +	uint32_t blks_per_seg;
->> +	__u8 init_version[VERSION_LEN + 1];
->> +	__u8 sb_version[VERSION_LEN + 1];
->> +	__u8 version[VERSION_LEN + 1];
->> +	char *vol_label;
->> +	char *vol_uuid;
->> +	uint16_t s_encoding;
->> +	uint16_t s_encoding_flags;
->> +	int heap;
->> +	int32_t kd;
->> +	int32_t dump_fd;
->> +	struct device_info devices[MAX_DEVICES];
->> +	int ndevs;
->> +	char *extension_list[2];
->> +	const char *rootdev_name;
->> +	int dbg_lv;
->> +	int show_dentry;
->> +	int trim;
->> +	int trimmed;
->> +	int func;
->> +	void *private;
->> +	int dry_run;
->> +	int no_kernel_check;
->> +	int fix_on;
->> +	int force;
->> +	int defset;
->> +	int bug_on;
->> +	int force_stop;
->> +	int abnormal_stop;
->> +	int fs_errors;
->> +	int bug_nat_bits;
->> +	bool quota_fixed;
->> +	int alloc_failed;
->> +	int auto_fix;
->> +	int layout;
->> +	int show_file_map;
->> +	u64 show_file_map_max_offset;
->> +	int quota_fix;
->> +	int preen_mode;
->> +	int ro;
->> +	int preserve_limits;		/* preserve quota limits */
->> +	int large_nat_bitmap;
->> +	int fix_chksum;			/* fix old cp.chksum position */
->> +	__le32 feature;			/* defined features */
->> +	unsigned int quota_bits;	/* quota bits */
->> +	time_t fixed_time;
->> +
->> +	/* mkfs parameters */
->> +	int fake_seed;
->> +	uint32_t next_free_nid;
->> +	uint32_t lpf_ino;
->> +	uint32_t root_uid;
->> +	uint32_t root_gid;
->> +
->> +	/* defragmentation parameters */
->> +	int defrag_shrink;
->> +	uint64_t defrag_start;
->> +	uint64_t defrag_len;
->> +	uint64_t defrag_target;
->> +
->> +	/* sload parameters */
->> +	char *from_dir;
->> +	char *mount_point;
->> +	char *target_out_dir;
->> +	char *fs_config_file;
->> +#ifdef HAVE_LIBSELINUX
->> +	struct selinux_opt seopt_file[8];
->> +	int nr_opt;
->> +#endif
->> +	int preserve_perms;
->> +
->> +	/* resize parameters */
->> +	int safe_resize;
->> +
->> +	/* precomputed fs UUID checksum for seeding other checksums */
->> +	uint32_t chksum_seed;
->> +
->> +	/* cache parameters */
->> +	dev_cache_config_t cache_config;
->> +
->> +	/* compression support for sload.f2fs */
->> +	compress_config_t compress;
->> +
->> +	block_t curseg_offset[NR_CURSEG_TYPE];
->> +	struct f2fs_journal sit_jnl;
->> +	struct f2fs_journal nat_jnl;
->> +	struct f2fs_summary sum[NR_CURSEG_TYPE][MAX_CACHE_SUMS];
->> +};
->> +
->>   extern int utf8_to_utf16(char *, const char *, size_t, size_t);
->>   extern int utf16_to_utf8(char *, const char *, size_t, size_t);
->>   extern int log_base_2(uint32_t);
->> diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
->> index 2ca5f48..9257c2e 100644
->> --- a/mkfs/f2fs_format.c
->> +++ b/mkfs/f2fs_format.c
->> @@ -14,6 +14,7 @@
->>   #include <string.h>
->>   #include <unistd.h>
->>   #include <f2fs_fs.h>
->> +#include <assert.h>
->>   
->>   #ifdef HAVE_SYS_STAT_H
->>   #include <sys/stat.h>
->> @@ -687,7 +688,7 @@ static int f2fs_init_nat_area(void)
->>   
->>   static int f2fs_write_check_point_pack(void)
+>>   static inline u32 feature_map(struct feature *table, char *feature)
 >>   {
->> -	struct f2fs_summary_block *sum = NULL;
->> +	struct f2fs_summary_block *sum;
->>   	struct f2fs_journal *journal;
->>   	uint32_t blk_size_bytes;
->>   	uint32_t nat_bits_bytes, nat_bits_blocks;
->> @@ -698,8 +699,7 @@ static int f2fs_write_check_point_pack(void)
->>   	char *cp_payload = NULL;
->>   	char *sum_compact, *sum_compact_p;
->>   	struct f2fs_summary *sum_entry;
->> -	enum quota_type qtype;
->> -	int off;
->> +	unsigned short vblocks;
->>   	int ret = -1;
->>   
->>   	cp = calloc(F2FS_BLKSIZE, 1);
->> @@ -750,10 +750,10 @@ static int f2fs_write_check_point_pack(void)
->>   		set_cp(cur_data_segno[i], 0xffffffff);
->>   	}
->>   
->> -	set_cp(cur_node_blkoff[0], 1 + c.quota_inum + c.lpf_inum);
->> -	set_cp(cur_data_blkoff[0], 1 + c.quota_dnum + c.lpf_dnum);
->> -	set_cp(valid_block_count, 2 + c.quota_inum + c.quota_dnum +
->> -			c.lpf_inum + c.lpf_dnum);
->> +	set_cp(cur_node_blkoff[0], c.curseg_offset[CURSEG_HOT_NODE]);
->> +	set_cp(cur_data_blkoff[0], c.curseg_offset[CURSEG_HOT_DATA]);
->> +	set_cp(valid_block_count, c.curseg_offset[CURSEG_HOT_NODE] +
->> +					c.curseg_offset[CURSEG_HOT_DATA]);
->>   	set_cp(rsvd_segment_count, c.reserved_segments);
->>   
->>   	/*
->> @@ -824,8 +824,8 @@ static int f2fs_write_check_point_pack(void)
->>   
->>   	set_cp(ckpt_flags, flags);
->>   	set_cp(cp_pack_start_sum, 1 + get_sb(cp_payload));
->> -	set_cp(valid_node_count, 1 + c.quota_inum + c.lpf_inum);
->> -	set_cp(valid_inode_count, 1 + c.quota_inum + c.lpf_inum);
->> +	set_cp(valid_node_count, c.curseg_offset[CURSEG_HOT_NODE]);
->> +	set_cp(valid_inode_count, c.curseg_offset[CURSEG_HOT_NODE]);
->>   	set_cp(next_free_nid, c.next_free_nid);
->>   	set_cp(sit_ver_bitmap_bytesize, ((get_sb(segment_count_sit) / 2) <<
->>   			get_sb(log_blocks_per_seg)) / 8);
->> @@ -883,126 +883,58 @@ static int f2fs_write_check_point_pack(void)
->>   	 * | cold data summary |
->>   	 * +-------------------+
->>   	*/
->> -	memset(sum, 0, sizeof(struct f2fs_summary_block));
->> -	SET_SUM_TYPE((&sum->footer), SUM_TYPE_DATA);
->> -
->> -	journal = &sum->journal;
->> -	journal->n_nats = cpu_to_le16(1 + c.quota_inum + c.lpf_inum);
->> -	journal->nat_j.entries[0].nid = sb->root_ino;
->> -	journal->nat_j.entries[0].ne.version = 0;
->> -	journal->nat_j.entries[0].ne.ino = sb->root_ino;
->> -	journal->nat_j.entries[0].ne.block_addr = cpu_to_le32(
->> -			get_sb(main_blkaddr) +
->> -			get_cp(cur_node_segno[0]) * c.blks_per_seg);
->> -
->> -	for (qtype = 0, i = 1; qtype < F2FS_MAX_QUOTAS; qtype++) {
->> -		if (!((1 << qtype) & c.quota_bits))
->> -			continue;
->> -		journal->nat_j.entries[i].nid = sb->qf_ino[qtype];
->> -		journal->nat_j.entries[i].ne.version = 0;
->> -		journal->nat_j.entries[i].ne.ino = sb->qf_ino[qtype];
->> -		journal->nat_j.entries[i].ne.block_addr = cpu_to_le32(
->> -				get_sb(main_blkaddr) +
->> -				get_cp(cur_node_segno[0]) *
->> -				c.blks_per_seg + i);
->> -		i++;
->> -	}
->> -
->> -	if (c.lpf_inum) {
->> -		journal->nat_j.entries[i].nid = cpu_to_le32(c.lpf_ino);
->> -		journal->nat_j.entries[i].ne.version = 0;
->> -		journal->nat_j.entries[i].ne.ino = cpu_to_le32(c.lpf_ino);
->> -		journal->nat_j.entries[i].ne.block_addr = cpu_to_le32(
->> -				get_sb(main_blkaddr) +
->> -				get_cp(cur_node_segno[0]) *
->> -				c.blks_per_seg + i);
->> -	}
->>   
->> +	/* nat_sjournal */
->> +	journal = &c.nat_jnl;
->>   	memcpy(sum_compact_p, &journal->n_nats, SUM_JOURNAL_SIZE);
->>   	sum_compact_p += SUM_JOURNAL_SIZE;
->>   
->> -	memset(sum, 0, sizeof(struct f2fs_summary_block));
->> -
->> -	/* inode sit for root */
->> -	if (c.feature & cpu_to_le32(F2FS_FEATURE_RO))
->> -		journal->n_sits = cpu_to_le16(2);
->> -	else
->> -		journal->n_sits = cpu_to_le16(6);
->> -
->> -	journal->sit_j.entries[0].segno = cp->cur_node_segno[0];
->> -	journal->sit_j.entries[0].se.vblocks =
->> -				cpu_to_le16((CURSEG_HOT_NODE << 10) |
->> -						(1 + c.quota_inum + c.lpf_inum));
->> -	f2fs_set_bit(0, (char *)journal->sit_j.entries[0].se.valid_map);
->> -	for (i = 1; i <= c.quota_inum; i++)
->> -		f2fs_set_bit(i, (char *)journal->sit_j.entries[0].se.valid_map);
->> -	if (c.lpf_inum)
->> -		f2fs_set_bit(i, (char *)journal->sit_j.entries[0].se.valid_map);
->> +	/* sit_journal */
->> +	journal = &c.sit_jnl;
->>   
->>   	if (c.feature & cpu_to_le32(F2FS_FEATURE_RO)) {
->> -		/* data sit for root */
->> -		journal->sit_j.entries[1].segno = cp->cur_data_segno[0];
->> -		journal->sit_j.entries[1].se.vblocks =
->> -					cpu_to_le16((CURSEG_HOT_DATA << 10) |
->> -							(1 + c.quota_dnum + c.lpf_dnum));
->> -		f2fs_set_bit(0, (char *)journal->sit_j.entries[1].se.valid_map);
->> -		for (i = 1; i <= c.quota_dnum; i++)
->> -			f2fs_set_bit(i, (char *)journal->sit_j.entries[1].se.valid_map);
->> -		if (c.lpf_dnum)
->> -			f2fs_set_bit(i, (char *)journal->sit_j.entries[1].se.valid_map);
->> +		i = CURSEG_RO_HOT_DATA;
->> +		vblocks = le16_to_cpu(journal->sit_j.entries[i].se.vblocks);
->> +		journal->sit_j.entries[i].segno = cp->cur_data_segno[0];
->> +		journal->sit_j.entries[i].se.vblocks =
->> +				cpu_to_le16(vblocks | (CURSEG_HOT_DATA << 10));
->> +
->> +		i = CURSEG_RO_HOT_NODE;
->> +		vblocks = le16_to_cpu(journal->sit_j.entries[i].se.vblocks);
->> +		journal->sit_j.entries[i].segno = cp->cur_node_segno[0];
->> +		journal->sit_j.entries[i].se.vblocks |=
->> +				cpu_to_le16(vblocks | (CURSEG_HOT_NODE << 10));
->> +
->> +		journal->n_sits = cpu_to_le16(2);
->>   	} else {
->> -		journal->sit_j.entries[1].segno = cp->cur_node_segno[1];
->> -		journal->sit_j.entries[1].se.vblocks =
->> -					cpu_to_le16((CURSEG_WARM_NODE << 10));
->> -		journal->sit_j.entries[2].segno = cp->cur_node_segno[2];
->> -		journal->sit_j.entries[2].se.vblocks =
->> -					cpu_to_le16((CURSEG_COLD_NODE << 10));
->> -
->> -		/* data sit for root */
->> -		journal->sit_j.entries[3].segno = cp->cur_data_segno[0];
->> -		journal->sit_j.entries[3].se.vblocks =
->> -					cpu_to_le16((CURSEG_HOT_DATA << 10) |
->> -							(1 + c.quota_dnum + c.lpf_dnum));
->> -		f2fs_set_bit(0, (char *)journal->sit_j.entries[3].se.valid_map);
->> -		for (i = 1; i <= c.quota_dnum; i++)
->> -			f2fs_set_bit(i, (char *)journal->sit_j.entries[3].se.valid_map);
->> -		if (c.lpf_dnum)
->> -			f2fs_set_bit(i, (char *)journal->sit_j.entries[3].se.valid_map);
->> -
->> -		journal->sit_j.entries[4].segno = cp->cur_data_segno[1];
->> -		journal->sit_j.entries[4].se.vblocks =
->> -					cpu_to_le16((CURSEG_WARM_DATA << 10));
->> -		journal->sit_j.entries[5].segno = cp->cur_data_segno[2];
->> -		journal->sit_j.entries[5].se.vblocks =
->> -					cpu_to_le16((CURSEG_COLD_DATA << 10));
->> +		for (i = CURSEG_HOT_DATA; i < NR_CURSEG_TYPE; i++) {
->> +			if (i < NR_CURSEG_DATA_TYPE)
->> +				journal->sit_j.entries[i].segno =
->> +					cp->cur_data_segno[i];
->> +					
->> +			else
->> +				journal->sit_j.entries[i].segno =
->> +					cp->cur_node_segno[i - NR_CURSEG_DATA_TYPE];
->> +
->> +			vblocks =
->> +				le16_to_cpu(journal->sit_j.entries[i].se.vblocks);
->> +			journal->sit_j.entries[i].se.vblocks =
->> +						cpu_to_le16(vblocks | (i << 10));
->> +		}
->> +
->> +		journal->n_sits = cpu_to_le16(6);
->>   	}
->>   
->>   	memcpy(sum_compact_p, &journal->n_sits, SUM_JOURNAL_SIZE);
->>   	sum_compact_p += SUM_JOURNAL_SIZE;
->>   
->>   	/* hot data summary */
->> -	sum_entry = (struct f2fs_summary *)sum_compact_p;
->> -	sum_entry->nid = sb->root_ino;
->> -	sum_entry->ofs_in_node = 0;
->> -
->> -	off = 1;
->> -	for (qtype = 0; qtype < F2FS_MAX_QUOTAS; qtype++) {
->> -		int j;
->> -
->> -		if (!((1 << qtype) & c.quota_bits))
->> -			continue;
->> -
->> -		for (j = 0; j < QUOTA_DATA(qtype); j++) {
->> -			(sum_entry + off + j)->nid = sb->qf_ino[qtype];
->> -			(sum_entry + off + j)->ofs_in_node = cpu_to_le16(j);
->> -		}
->> -		off += QUOTA_DATA(qtype);
->> -	}
->> +	memset(sum, 0, sizeof(struct f2fs_summary_block));
->> +	SET_SUM_TYPE((&sum->footer), SUM_TYPE_DATA);
->>   
->> -	if (c.lpf_dnum) {
->> -		(sum_entry + off)->nid = cpu_to_le32(c.lpf_ino);
->> -		(sum_entry + off)->ofs_in_node = 0;
->> -	}
->> +	sum_entry = (struct f2fs_summary *)sum_compact_p;
->> +	memcpy(sum_entry, c.sum[CURSEG_HOT_DATA],
->> +			sizeof(struct f2fs_summary) * MAX_CACHE_SUMS);
->>   
->>   	/* warm data summary, nothing to do */
->>   	/* cold data summary, nothing to do */
->> @@ -1018,21 +950,8 @@ static int f2fs_write_check_point_pack(void)
->>   	/* Prepare and write Segment summary for HOT_NODE */
->>   	memset(sum, 0, sizeof(struct f2fs_summary_block));
->>   	SET_SUM_TYPE((&sum->footer), SUM_TYPE_NODE);
->> -
->> -	sum->entries[0].nid = sb->root_ino;
->> -	sum->entries[0].ofs_in_node = 0;
->> -	for (qtype = i = 0; qtype < F2FS_MAX_QUOTAS; qtype++) {
->> -		if (!((1 << qtype) & c.quota_bits))
->> -			continue;
->> -		sum->entries[1 + i].nid = sb->qf_ino[qtype];
->> -		sum->entries[1 + i].ofs_in_node = 0;
->> -		i++;
->> -	}
->> -	if (c.lpf_inum) {
->> -		i++;
->> -		sum->entries[i].nid = cpu_to_le32(c.lpf_ino);
->> -		sum->entries[i].ofs_in_node = 0;
->> -	}
->> +	memcpy(sum->entries, c.sum[CURSEG_HOT_NODE],
->> +			sizeof(struct f2fs_summary) * MAX_CACHE_SUMS);
->>   
->>   	cp_seg_blk++;
->>   	DBG(1, "\tWriting Segment summary for HOT_NODE, at offset 0x%08"PRIx64"\n",
->> @@ -1198,7 +1117,8 @@ static int f2fs_discard_obsolete_dnode(void)
->>   	offset += c.cur_seg[CURSEG_WARM_NODE] * c.blks_per_seg;
->>   
->>   	last_inode_pos = start_inode_pos +
->> -		c.cur_seg[CURSEG_HOT_NODE] * c.blks_per_seg + c.quota_inum + c.lpf_inum;
->> +		c.cur_seg[CURSEG_HOT_NODE] * c.blks_per_seg +
->> +		c.curseg_offset[CURSEG_COLD_NODE] - 1;
->>   
->>   	do {
->>   		if (offset < get_sb(main_blkaddr) || offset >= end_blkaddr)
->> @@ -1230,19 +1150,124 @@ static int f2fs_discard_obsolete_dnode(void)
->>   }
->>   #endif
->>   
->> -static block_t alloc_next_free_block(int curseg_type, int blkcnt)
->> +static block_t alloc_next_free_block(int curseg_type)
->>   {
->>   	block_t blkaddr;
->>   
->>   	blkaddr = get_sb(main_blkaddr) +
->> -		c.cur_seg[curseg_type] * c.blks_per_seg +
->> -		c.curseg_offset[curseg_type];
->> +			c.cur_seg[curseg_type] * c.blks_per_seg +
->> +			c.curseg_offset[curseg_type];
->>   
->> -	c.curseg_offset[curseg_type] += blkcnt;
->> +	c.curseg_offset[curseg_type]++;
->>   
->>   	return blkaddr;
+>>   	struct feature *p;
+>> -	for (p = table; p->name && strcmp(p->name, feature); p++)
+>> +	for (p = table; p->name && p->settable && strcmp(p->name, feature); p++)
+>>   		;
+>>   	return p->mask;
 >>   }
 >>   
->> +void update_sit_journal(int curseg_type)
+>> +static inline char *feature_name(struct feature *table, u32 mask)
 >> +{
->> +	struct f2fs_journal *sit_jnl = &c.sit_jnl;
->> +	unsigned short vblocks;
->> +	int idx = curseg_type;
->> +
->> +	if (c.feature & cpu_to_le32(F2FS_FEATURE_RO)) {
->> +		if (curseg_type < NR_CURSEG_DATA_TYPE)
->> +			idx = CURSEG_RO_HOT_DATA;
->> +		else
->> +			idx = CURSEG_RO_HOT_NODE;
->> +	}
->> +
->> +	f2fs_set_bit(c.curseg_offset[curseg_type] - 1,
->> +		(char *)sit_jnl->sit_j.entries[idx].se.valid_map);
->> +
->> +	vblocks = le16_to_cpu(sit_jnl->sit_j.entries[idx].se.vblocks);
->> +	sit_jnl->sit_j.entries[idx].se.vblocks = cpu_to_le16(vblocks + 1);
+>> +	struct feature *p;
+>> +	for (p = table; p->name && p->mask != mask; p++)
+>> +		;
+>> +	return p->name;
 >> +}
 >> +
->> +void update_nat_journal(nid_t nid, block_t blkaddr)
->> +{
->> +	struct f2fs_journal *nat_jnl = &c.nat_jnl;
->> +	unsigned short n_nats = le16_to_cpu(nat_jnl->n_nats);
->> +
->> +	nat_jnl->nat_j.entries[n_nats].nid = cpu_to_le32(nid);
->> +	nat_jnl->nat_j.entries[n_nats].ne.version = 0;
->> +	nat_jnl->nat_j.entries[n_nats].ne.ino = cpu_to_le32(nid);
->> +	nat_jnl->nat_j.entries[n_nats].ne.block_addr = cpu_to_le32(blkaddr);
->> +	nat_jnl->n_nats = cpu_to_le16(n_nats + 1);
->> +}
->> +
->> +void update_summary_entry(int curseg_type, nid_t nid,
->> +					unsigned short ofs_in_node)
->> +{
->> +	struct f2fs_summary *sum;
->> +	unsigned int curofs = c.curseg_offset[curseg_type] - 1;
->> +
->> +	assert(curofs < MAX_CACHE_SUMS);
->> +
->> +	sum = c.sum[curseg_type] + curofs;
->> +	sum->nid = cpu_to_le32(nid);
->> +	sum->ofs_in_node = cpu_to_le16(ofs_in_node);
->> +}
->> +
->> +static block_t f2fs_add_default_dentry_root(void)
->> +{
->> +	struct f2fs_dentry_block *dent_blk = NULL;
->> +	block_t data_blkaddr;
->> +
->> +	dent_blk = calloc(F2FS_BLKSIZE, 1);
->> +	if(dent_blk == NULL) {
->> +		MSG(1, "\tError: Calloc Failed for dent_blk!!!\n");
->> +		return 0;
->> +	}
->> +
->> +	dent_blk->dentry[0].hash_code = 0;
->> +	dent_blk->dentry[0].ino = sb->root_ino;
->> +	dent_blk->dentry[0].name_len = cpu_to_le16(1);
->> +	dent_blk->dentry[0].file_type = F2FS_FT_DIR;
->> +	memcpy(dent_blk->filename[0], ".", 1);
->> +
->> +	dent_blk->dentry[1].hash_code = 0;
->> +	dent_blk->dentry[1].ino = sb->root_ino;
->> +	dent_blk->dentry[1].name_len = cpu_to_le16(2);
->> +	dent_blk->dentry[1].file_type = F2FS_FT_DIR;
->> +	memcpy(dent_blk->filename[1], "..", 2);
->> +
->> +	/* bitmap for . and .. */
->> +	test_and_set_bit_le(0, dent_blk->dentry_bitmap);
->> +	test_and_set_bit_le(1, dent_blk->dentry_bitmap);
->> +
->> +	if (c.lpf_ino) {
->> +		int len = strlen(LPF);
->> +		f2fs_hash_t hash = f2fs_dentry_hash(0, 0, (unsigned char *)LPF, len);
->> +
->> +		dent_blk->dentry[2].hash_code = cpu_to_le32(hash);
->> +		dent_blk->dentry[2].ino = cpu_to_le32(c.lpf_ino);
->> +		dent_blk->dentry[2].name_len = cpu_to_le16(len);
->> +		dent_blk->dentry[2].file_type = F2FS_FT_DIR;
->> +		memcpy(dent_blk->filename[2], LPF, F2FS_SLOT_LEN);
->> +
->> +		memcpy(dent_blk->filename[3], &LPF[F2FS_SLOT_LEN],
->> +				len - F2FS_SLOT_LEN);
->> +
->> +		test_and_set_bit_le(2, dent_blk->dentry_bitmap);
->> +		test_and_set_bit_le(3, dent_blk->dentry_bitmap);
->> +	}
->> +
->> +	data_blkaddr = alloc_next_free_block(CURSEG_HOT_DATA);
->> +
->> +	DBG(1, "\tWriting default dentry root, at offset 0x%x\n", data_blkaddr);
->> +	if (dev_write_block(dent_blk, data_blkaddr)) {
->> +		MSG(1, "\tError: While writing the dentry_blk to disk!!!\n");
->> +		free(dent_blk);
->> +		return 0;
->> +	}
->> +
->> +	update_sit_journal(CURSEG_HOT_DATA);
->> +	update_summary_entry(CURSEG_HOT_DATA, le32_to_cpu(sb->root_ino), 0);
->> +	
->> +	free(dent_blk);
->> +	return data_blkaddr;
->> +}
->> +
->>   static int f2fs_write_root_inode(void)
+>>   static inline int set_feature_bits(struct feature *table, char *features)
 >>   {
->>   	struct f2fs_node *raw_node = NULL;
->> @@ -1261,11 +1286,17 @@ static int f2fs_write_root_inode(void)
->>   	if (c.lpf_ino)
->>   		raw_node->i.i_links = cpu_to_le32(3);
->>   
->> -	data_blkaddr = alloc_next_free_block(CURSEG_HOT_DATA, 1);
->> +	data_blkaddr = f2fs_add_default_dentry_root();
->> +	if (data_blkaddr == 0) {
->> +		MSG(1, "\tError: Failed to add default dentries for root!!!\n");
->> +		free(raw_node);
->> +		return -1;
->> +	}
->> +
->>   	raw_node->i.i_addr[get_extra_isize(raw_node)] =
->>   				cpu_to_le32(data_blkaddr);
->>   
->> -	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE, 1);
->> +	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE);
->>   	raw_node->footer.next_blkaddr = cpu_to_le32(node_blkaddr + 1);
->>   
->>   	DBG(1, "\tWriting root inode (hot node), offset 0x%x\n", node_blkaddr);
->> @@ -1275,22 +1306,27 @@ static int f2fs_write_root_inode(void)
->>   		return -1;
->>   	}
->>   
->> +	update_nat_journal(le32_to_cpu(sb->root_ino), node_blkaddr);
->> +	update_sit_journal(CURSEG_HOT_NODE);
->> +	update_summary_entry(CURSEG_HOT_NODE, le32_to_cpu(sb->root_ino), 0);
->> +
->>   	free(raw_node);
->>   	return 0;
->>   }
->>   
->> -static int f2fs_write_default_quota(int qtype, unsigned int blkaddr,
->> -						__le32 raw_id)
->> +static int f2fs_write_default_quota(int qtype, __le32 raw_id)
->>   {
->>   	char *filebuf = calloc(F2FS_BLKSIZE, 2);
->>   	int file_magics[] = INITQMAGICS;
->>   	struct v2_disk_dqheader ddqheader;
->>   	struct v2_disk_dqinfo ddqinfo;
->>   	struct v2r1_disk_dqblk dqblk;
->> +	block_t blkaddr;
->> +	int i;
->>   
->>   	if (filebuf == NULL) {
->>   		MSG(1, "\tError: Calloc Failed for filebuf!!!\n");
->> -		return -1;
->> +		return 0;
->>   	}
->>   
->>   	/* Write basic quota header */
->> @@ -1337,22 +1373,30 @@ static int f2fs_write_default_quota(int qtype, unsigned int blkaddr,
->>   	memcpy(filebuf + 5136, &dqblk, sizeof(struct v2r1_disk_dqblk));
->>   
->>   	/* Write two blocks */
->> -	if (dev_write_block(filebuf, blkaddr) ||
->> -	    dev_write_block(filebuf + F2FS_BLKSIZE, blkaddr + 1)) {
->> -		MSG(1, "\tError: While writing the quota_blk to disk!!!\n");
->> -		free(filebuf);
->> -		return -1;
->> +	for (i = 0; i < QUOTA_DATA; i++) {
->> +		blkaddr = alloc_next_free_block(CURSEG_HOT_DATA);
->> +
->> +		if (dev_write_block(filebuf + i * F2FS_BLKSIZE, blkaddr)) {
->> +			MSG(1, "\tError: While writing the quota_blk to disk!!!\n");
->> +			free(filebuf);
->> +			return 0;
->> +		}
->> +
->> +		update_sit_journal(CURSEG_HOT_DATA);
->> +		update_summary_entry(CURSEG_HOT_DATA,
->> +					le32_to_cpu(sb->qf_ino[qtype]), i);
->>   	}
->> +
->>   	DBG(1, "\tWriting quota data, at offset %08x, %08x\n",
->> -					blkaddr, blkaddr + 1);
->> +					blkaddr - 1, blkaddr);
->> +
->>   	free(filebuf);
->> -	c.quota_dnum += QUOTA_DATA(qtype);
->> -	return 0;
->> +	return blkaddr - 1;
->>   }
->>   
->>   static int f2fs_write_qf_inode(int qtype, int offset)
->>   {
->> -	struct f2fs_node *raw_node = NULL;
->> +	struct f2fs_node *raw_node = NULL;	
->>   	block_t data_blkaddr;
->>   	block_t node_blkaddr;
->>   	__le32 raw_id;
->> @@ -1367,14 +1411,12 @@ static int f2fs_write_qf_inode(int qtype, int offset)
->>   			le32_to_cpu(sb->qf_ino[qtype]), mkfs_time, 0x8180);
->>   
->>   	raw_node->i.i_size = cpu_to_le64(1024 * 6);
->> -	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
->> +	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA);
->>   	raw_node->i.i_flags = F2FS_NOATIME_FL | F2FS_IMMUTABLE_FL;
->>   
->> -	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE, 1);
->> +	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE);
->>   	raw_node->footer.next_blkaddr = cpu_to_le32(node_blkaddr + 1);
->>   
->> -	data_blkaddr = alloc_next_free_block(CURSEG_HOT_DATA, QUOTA_DATA(i));
->> -
->>   	if (qtype == 0)
->>   		raw_id = raw_node->i.i_uid;
->>   	else if (qtype == 1)
->> @@ -1385,12 +1427,13 @@ static int f2fs_write_qf_inode(int qtype, int offset)
->>   		ASSERT(0);
->>   
->>   	/* write two blocks */
->> -	if (f2fs_write_default_quota(qtype, data_blkaddr, raw_id)) {
->> +	data_blkaddr = f2fs_write_default_quota(qtype, raw_id);
->> +	if (data_blkaddr == 0) {
->>   		free(raw_node);
->>   		return -1;
->>   	}
->>   
->> -	for (i = 0; i < QUOTA_DATA(qtype); i++)
->> +	for (i = 0; i < QUOTA_DATA; i++)
->>   		raw_node->i.i_addr[get_extra_isize(raw_node) + i] =
->>   					cpu_to_le32(data_blkaddr + i);
->>   
->> @@ -1401,8 +1444,11 @@ static int f2fs_write_qf_inode(int qtype, int offset)
->>   		return -1;
->>   	}
->>   
->> +	update_nat_journal(le32_to_cpu(sb->qf_ino[qtype]), node_blkaddr);
->> +	update_sit_journal(CURSEG_HOT_NODE);
->> +	update_summary_entry(CURSEG_HOT_NODE, le32_to_cpu(sb->qf_ino[qtype]), 0);
->> +
->>   	free(raw_node);
->> -	c.quota_inum++;
->>   	return 0;
->>   }
->>   
->> @@ -1442,7 +1488,7 @@ static int f2fs_update_nat_default(void)
->>   static block_t f2fs_add_default_dentry_lpf(void)
->>   {
->>   	struct f2fs_dentry_block *dent_blk;
->> -	uint64_t data_blk_offset;
->> +	block_t data_blkaddr;
->>   
->>   	dent_blk = calloc(F2FS_BLKSIZE, 1);
->>   	if (dent_blk == NULL) {
->> @@ -1465,21 +1511,21 @@ static block_t f2fs_add_default_dentry_lpf(void)
->>   	test_and_set_bit_le(0, dent_blk->dentry_bitmap);
->>   	test_and_set_bit_le(1, dent_blk->dentry_bitmap);
->>   
->> -	data_blk_offset = get_sb(main_blkaddr);
->> -	data_blk_offset += c.cur_seg[CURSEG_HOT_DATA] * c.blks_per_seg +
->> -		1 + c.quota_dnum;
->> +	data_blkaddr = alloc_next_free_block(CURSEG_HOT_DATA);
->>   
->> -	DBG(1, "\tWriting default dentry lost+found, at offset 0x%08"PRIx64"\n",
->> -			data_blk_offset);
->> -	if (dev_write_block(dent_blk, data_blk_offset)) {
->> +	DBG(1, "\tWriting default dentry lost+found, at offset 0x%x\n",
->> +							data_blkaddr);
->> +	if (dev_write_block(dent_blk, data_blkaddr)) {
->>   		MSG(1, "\tError While writing the dentry_blk to disk!!!\n");
->>   		free(dent_blk);
->>   		return 0;
->>   	}
->>   
->> +	update_sit_journal(CURSEG_HOT_DATA);
->> +	update_summary_entry(CURSEG_HOT_DATA, c.lpf_ino, 0);
->> +
->>   	free(dent_blk);
->> -	c.lpf_dnum++;
->> -	return data_blk_offset;
->> +	return data_blkaddr;
->>   }
->>   
->>   static int f2fs_write_lpf_inode(void)
->> @@ -1503,7 +1549,7 @@ static int f2fs_write_lpf_inode(void)
->>   	raw_node->i.i_namelen = le32_to_cpu(strlen(LPF));
->>   	memcpy(raw_node->i.i_name, LPF, strlen(LPF));
->>   
->> -	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE, 1);
->> +	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE);
->>   	raw_node->footer.next_blkaddr = cpu_to_le32(node_blkaddr + 1);
->>   
->>   	data_blkaddr = f2fs_add_default_dentry_lpf();
->> @@ -1522,72 +1568,15 @@ static int f2fs_write_lpf_inode(void)
->>   		goto exit;
->>   	}
->>   
->> -	c.lpf_inum++;
->> +	update_nat_journal(c.lpf_ino, node_blkaddr);
->> +	update_sit_journal(CURSEG_HOT_NODE);
->> +	update_summary_entry(CURSEG_HOT_NODE, c.lpf_ino, 0);
->> +
->>   exit:
->>   	free(raw_node);
->>   	return err;
->>   }
->>   
->> -static int f2fs_add_default_dentry_root(void)
->> -{
->> -	struct f2fs_dentry_block *dent_blk = NULL;
->> -	uint64_t data_blk_offset = 0;
->> -
->> -	dent_blk = calloc(F2FS_BLKSIZE, 1);
->> -	if(dent_blk == NULL) {
->> -		MSG(1, "\tError: Calloc Failed for dent_blk!!!\n");
->> -		return -1;
->> -	}
->> -
->> -	dent_blk->dentry[0].hash_code = 0;
->> -	dent_blk->dentry[0].ino = sb->root_ino;
->> -	dent_blk->dentry[0].name_len = cpu_to_le16(1);
->> -	dent_blk->dentry[0].file_type = F2FS_FT_DIR;
->> -	memcpy(dent_blk->filename[0], ".", 1);
->> -
->> -	dent_blk->dentry[1].hash_code = 0;
->> -	dent_blk->dentry[1].ino = sb->root_ino;
->> -	dent_blk->dentry[1].name_len = cpu_to_le16(2);
->> -	dent_blk->dentry[1].file_type = F2FS_FT_DIR;
->> -	memcpy(dent_blk->filename[1], "..", 2);
->> -
->> -	/* bitmap for . and .. */
->> -	test_and_set_bit_le(0, dent_blk->dentry_bitmap);
->> -	test_and_set_bit_le(1, dent_blk->dentry_bitmap);
->> -
->> -	if (c.lpf_ino) {
->> -		int len = strlen(LPF);
->> -		f2fs_hash_t hash = f2fs_dentry_hash(0, 0, (unsigned char *)LPF, len);
->> -
->> -		dent_blk->dentry[2].hash_code = cpu_to_le32(hash);
->> -		dent_blk->dentry[2].ino = cpu_to_le32(c.lpf_ino);
->> -		dent_blk->dentry[2].name_len = cpu_to_le16(len);
->> -		dent_blk->dentry[2].file_type = F2FS_FT_DIR;
->> -		memcpy(dent_blk->filename[2], LPF, F2FS_SLOT_LEN);
->> -
->> -		memcpy(dent_blk->filename[3], &LPF[F2FS_SLOT_LEN],
->> -				len - F2FS_SLOT_LEN);
->> -
->> -		test_and_set_bit_le(2, dent_blk->dentry_bitmap);
->> -		test_and_set_bit_le(3, dent_blk->dentry_bitmap);
->> -	}
->> -
->> -	data_blk_offset = get_sb(main_blkaddr);
->> -	data_blk_offset += c.cur_seg[CURSEG_HOT_DATA] *
->> -				c.blks_per_seg;
->> -
->> -	DBG(1, "\tWriting default dentry root, at offset 0x%08"PRIx64"\n",
->> -				data_blk_offset);
->> -	if (dev_write_block(dent_blk, data_blk_offset)) {
->> -		MSG(1, "\tError: While writing the dentry_blk to disk!!!\n");
->> -		free(dent_blk);
->> -		return -1;
->> -	}
->> -
->> -	free(dent_blk);
->> -	return 0;
->> -}
->> -
->>   static int f2fs_create_root_dir(void)
->>   {
->>   	enum quota_type qtype;
->> @@ -1630,12 +1619,6 @@ static int f2fs_create_root_dir(void)
->>   		MSG(1, "\tError: Failed to update NAT for root!!!\n");
->>   		goto exit;
->>   	}
->> -
->> -	err = f2fs_add_default_dentry_root();
->> -	if (err < 0) {
->> -		MSG(1, "\tError: Failed to add default dentries for root!!!\n");
->> -		goto exit;
->> -	}
->>   exit:
->>   	if (err)
->>   		MSG(1, "\tError: Could not create the root directory!!!\n");
+>>   	u32 mask = feature_map(table, features);
 >> -- 
 >> 2.40.1
 
