@@ -2,126 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C4587141DD
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 May 2023 04:08:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 305227141DE
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 29 May 2023 04:08:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q3SIj-0003Og-Nu;
-	Mon, 29 May 2023 02:08:02 +0000
+	id 1q3SJD-0007Om-SX;
+	Mon, 29 May 2023 02:08:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <shengyong@oppo.com>) id 1q3SIh-0003ON-L4
+ (envelope-from <shengyong@oppo.com>) id 1q3SJ8-0007Of-IP
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 May 2023 02:08:00 +0000
+ Mon, 29 May 2023 02:08:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3G8+uiDrbckIv8h1mWbhrzMoneuA8FhW8Y/LsK8APeg=; b=mdW0QIzxegc370GBgBlzaVrmQg
- 5ALUbkLBDwAcSACX7rLtVfZ+u4LFTdJrnLVHHGkc7CKD5ci2mEF6noey3sAarib36NBz9WR9LgbDp
- coHqddlGeS187gzYtOXoBY91jNGAT9XJ00q0NlaHiNNyfGIesWgxdq66PaQk9FUSKszo=;
+ bh=WLvxepq//Nr0ZocNEPavwrXeDuP1FmcGw8Ja5RHm/LA=; b=EDLSbCemVlPEVR/CFMUhnb9UNQ
+ 43r5snNdb2Yv7K6qsFIoNg5WSzxOG6SXLK6spfH8dyy+axnWK18wroivf+lfGObeBmUJwr+0iWtjb
+ V9YzbfNpDUxrRsO2ZKMM0MH9nmtcKyu/0CnNJnoXRi06rSa/JnGnTB9BXBUngbyp0Rp4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=3G8+uiDrbckIv8h1mWbhrzMoneuA8FhW8Y/LsK8APeg=; b=h
- 5+BAdxO4JpBGbYLb8WlL+Qy9Ur9liA9DNxi7Z/ml5NcasLMmTQtSVt0rLPawDlNDAqJ8ZVbs4bC+F
- RbEH+EorVezJTxJSACIPLoTUCADWSWt79bYZ5KeOHe+gdFObx1ZbrlcJV83mTyVVNezDfVypI5hPq
- VSB3WxMplttqMrxY=;
-Received: from mail-psaapc01on2049.outbound.protection.outlook.com
- ([40.107.255.49] helo=APC01-PSA-obe.outbound.protection.outlook.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=WLvxepq//Nr0ZocNEPavwrXeDuP1FmcGw8Ja5RHm/LA=; b=SSAgG+DZpW0SzAtb8jkk9iPyP5
+ dR85ESx5vnrvOUF5CeyxfAEECn+qbP5eAFbVzro7rJLMDLc5v4MYwdo9LIO2jo6kk3SsY7xVF0Pvx
+ YYkGDRPmHZdXz1kldqncidp7+PC/cbKZEupVY7AgKDgVP0OVrq6xoiJbCGh3fyhyQAyo=;
+Received: from mail-tyzapc01on2058.outbound.protection.outlook.com
+ ([40.107.117.58] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q3SIb-0001xi-Ev for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 29 May 2023 02:08:00 +0000
+ id 1q3SJ2-005OLE-3S for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 29 May 2023 02:08:26 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Wq1ypVN/ZKJdL2lBX9HUuApZSYEIUCmBw48UagutCh/cQ/OWdb8EympNiNLlcLh1xAx32VgSFWT18A/CNx/6jQskY7cp0hvhdo/cj7F7uqC5oZ5JUVN7mZ8FJflxamXObP6cZIILa8Y5YhaXcsjyqYCTYA6itLcjgZRrOZPWG8DNS9MpGbVQ7wQLCA/7tIa9i9hFnDgkegG0wuxPlwawMORrjGYvHwsUqQU0lofzejOsqnYfbd4G8Ue8EfDk++r0ijsWIGxqYWTp/T5DzUEHAloLYsgKefM1XFO3lr/8jKh9NjXW7YUUWB+9l/6SXS+uBvTI0b9c33AE+RriV2Vdqg==
+ b=QnJrCe/0711rBX7nOiG9CJMtma7pa3IxIyLkfqRRIsdomKfxIGfjHG+zjS91z5ITGw096EVmpchosJmHkuCvHtm5qiZ95l2iTjpCrWkCGWTTdDa4vtrdgY5Mbvq+2UyoDltMqEjiUfzyhxrP9ro+X/U38cJtNZKWwbrfrg8IWn3CnwPtaWpYAnJ2oP3OxZ0W2KWd0e6ibTSabI4BSCJzfY2V8NjUiXQFlNPs/krkaOOYd1LGzu6q5BjwspOshoi80JFKDtsYZGSusQlipLaLR9uqcY/oC/JEdu6UGTkE/8dNQam7g00Elbvol5K/sZm3O2DkuJJlOHwNH71wA72xRA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3G8+uiDrbckIv8h1mWbhrzMoneuA8FhW8Y/LsK8APeg=;
- b=lrUU/Ztyeyua1o/4noQLr+oSIGgFUqNeWw3ToxLwO2O+WNyu2YAC2Z5/x+pYDIBY2AFjPxQ02dvrSRVZbHTyNKMYQhOtv7pK80S+iW9WTD9D95e8QHXq8irek/Mya1V+MpIcEYWRVff96ghifPEK5AiFzAMSQ/VIURpelAPdbRfC2On398vswQT2cfOrk0S0GpCaPeYo0+DGUkS/Dq7oHa4tElmcj1Kv8XsSpeKH/OJ4TxSp76GL/qhxCPNovhiQ7722MKGNHCR1kXRrjBRkiU5/8D6/JZ3iFQQH9W2D3wCLc0s7LxOlmf7nNdxOwsBC62TPpaEeI9istC+Aj9u4AA==
+ bh=WLvxepq//Nr0ZocNEPavwrXeDuP1FmcGw8Ja5RHm/LA=;
+ b=OD8Kk+U5FBRNWdqj3z6Tv8o1+KuFwtw8Cs4KaglIU67tu+VvjgMVdwlg+nrHERf1nj+6m0vl551zN8zFxjBVZfsZp7raxdrwEUekgUa7QIvDYSSyBanOYTorGZM98P4uWvh3GFbGWPSLsM0XiU3W7z7bJaTecGDqrj2p0DTx+eLoB8VWPP4n5ZVUozGcdzLlqrtrN0JmjWdMnC1O0RI8mrYvgjFVZTd7sMHiqasR3w3j4QR9lYWy3JNn5g4eBjwpCk2dY2HcSBcTgMVxpmIR2SkHBBbpY0MSqTiYHYyumPt5lbMLzCZ3rJSnwTSiXxJRcK16muRFibwYB6XSRbW9bg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oppo.com; dmarc=pass action=none header.from=oppo.com;
  dkim=pass header.d=oppo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3G8+uiDrbckIv8h1mWbhrzMoneuA8FhW8Y/LsK8APeg=;
- b=vVoOzHBmkqaofF1KJnOjwTAy2/X26sHui8MnCJdYUtonSYpBxZ5N7ftxywcX801Q0SxYzVk7SpuQI+EJKSN3S4aLfqp4ntpKwQjFaOCngiR9Qty5nEGFkBQFYX79FfjwKZdtgekrM3AQTPXNdm/HIWlBB5SiNQ1peZWHCb1405A=
+ bh=WLvxepq//Nr0ZocNEPavwrXeDuP1FmcGw8Ja5RHm/LA=;
+ b=UNrsoSaklyNM+spd22cZ4Hm6tym1l0HxKmIhAZ8lbELyhoQ3ooydT42ISq+S/flgupKhyyi+TQkw+ZITyNS+JMZP9YF6YLQfvPxTkXF4cE69zewoVf2WXQClt/TCZroqmxGYvH96p//J/XVRDVHMQJOu/92bREcW69G1znenm54=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oppo.com;
 Received: from SI2PR02MB5148.apcprd02.prod.outlook.com (2603:1096:4:153::6) by
  SI2PR02MB4617.apcprd02.prod.outlook.com (2603:1096:4:ec::7) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6455.18; Mon, 29 May 2023 01:35:28 +0000
+ 15.20.6455.18; Mon, 29 May 2023 01:35:40 +0000
 Received: from SI2PR02MB5148.apcprd02.prod.outlook.com
  ([fe80::1bc4:fbb5:b757:83ee]) by SI2PR02MB5148.apcprd02.prod.outlook.com
  ([fe80::1bc4:fbb5:b757:83ee%5]) with mapi id 15.20.6455.020; Mon, 29 May 2023
- 01:35:28 +0000
+ 01:35:40 +0000
 To: jaegeuk@kernel.org,
 	chao@kernel.org
-Date: Mon, 29 May 2023 09:35:00 +0800
-Message-Id: <20230529013502.2230810-1-shengyong@oppo.com>
+Date: Mon, 29 May 2023 09:35:01 +0800
+Message-Id: <20230529013502.2230810-2-shengyong@oppo.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230529013502.2230810-1-shengyong@oppo.com>
+References: <20230529013502.2230810-1-shengyong@oppo.com>
 X-ClientProxiedBy: SG2PR01CA0175.apcprd01.prod.exchangelabs.com
  (2603:1096:4:28::31) To SI2PR02MB5148.apcprd02.prod.outlook.com
  (2603:1096:4:153::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SI2PR02MB5148:EE_|SI2PR02MB4617:EE_
-X-MS-Office365-Filtering-Correlation-Id: efe1bbf7-1258-412d-39a0-08db5fe4fb4a
+X-MS-Office365-Filtering-Correlation-Id: 8f79a084-e32a-4a2b-247b-08db5fe502c9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: fg3bhp2wYy0XfjXs6HBP8yCJqWBKGv+7jxXTUFajroZpcUCotuVX+jZzQc8akDDvLhw8xqvRC9/0DZfDPscSv+21i081rQZF8MEN5YgOIt78GCavCwzI3EXv32wL+j3+rBzQvcjMTQsQ2R5v6BdnfQgapT4KvN5iXJUnUJbwl/Lz5c5ghXfIbyoPblsWMyu+MjaLEBmOVxlZnbK9tOI/wl2IPFpQPxOiEoRRWcAYfE1g0EtGHwQUGM/c3H1exiS9iZTFmAMWoBIeZ/vkcAU4DscHX7Ng799nSbLMrB13Asr44L4c8DIrspJAYDyu02XcMxQ/9ACqtYrv+D/pw66WMH93jZWdwMAQVfeCy2ysEv7uDzH/JqxEQmHkbPaW+R0lWAZ1tyPs1seKR6m3hBB1WLWY6NbX5DP+lHK/OZN+O20gF14K5LclW3qVMqY425HhzeTwbulJR0+i6pIaH2cbD0yk8sHYDYFPm8rsW0HiKeQkNQNnDR4M6vCAbRxHOCzkuwmUAz1Ysq1EYB47816ZDgF+CXiRVF3qQu/v1HBrSXtUSuMoSeHdgczvXKj0oGIi3H+n3CT5+6VlkNcnK+sHxHrIpsVvzn/5dYUJxvVma0+YZeMHhBWDyTAsZwtLTRCG
+X-Microsoft-Antispam-Message-Info: kYI7Tn6tNgaHK0Qle9Xq3xdHBQeKtCEKyPxs8cJWn6G3zKqOg6A/ufYn/nIKgSdiunVs7Uum5ogYICHi2ydss6uxSw68xw9Fq0OQHdEN1ECTuQAdRfugDarcy977e9vQxGxggipLg6T5WEpngWoltEpQ6yRLwDnQBoVjDSR0IO/7Qa/CCcu+em2hRAFtW2cOwC1+VUuY4qEJ+ShlmSJHUKHogQ52D4FQP0lGAp7hLJt1E1vWOnE/liJ2NbZIwcSrbAoSCPGu2o3ZQxmrSg5OIL2w1uTPNsh+m6Zq5E2I1Qk5Ab0ox+wixu4FTuIV+lxCzsnQn0mzzkgwF6hTytcueSiIcDHZ/JbdN4D64FrI6wPZE7HsrmaqxDuY/P1P6Vov+/w8v5/cO5PzoVa5OIU4ld4bQi++xZnd7mRap/UamZzT2draAdjkFmrcn+KdiwxXy6hCQNiIQbI6WfM5Nmk+/ilgw7FAShS1kajecrIIt979f5uO+PJHW5djLyARpxWaYEK+N1G8dqXygKF/DO7rX/5GIUizDfH3ajf7JC/ZtejkFdoPsJeAe6H9iwGj3Sxb/U9caNpCR141G82CaUglueDq8J1/fQId59C6o8qHJLfjia954/513h4Yjwq0slXs
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SI2PR02MB5148.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(4636009)(376002)(346002)(39860400002)(396003)(136003)(366004)(451199021)(2616005)(186003)(83380400001)(2906002)(30864003)(4326008)(5660300002)(26005)(1076003)(6506007)(6512007)(36756003)(86362001)(107886003)(478600001)(8676002)(8936002)(66946007)(66556008)(66476007)(6666004)(316002)(38100700002)(38350700002)(41300700001)(6486002)(52116002);
+ SFS:(13230028)(4636009)(376002)(346002)(39860400002)(396003)(136003)(366004)(451199021)(2616005)(186003)(83380400001)(2906002)(4326008)(5660300002)(26005)(1076003)(6506007)(6512007)(36756003)(86362001)(107886003)(478600001)(8676002)(8936002)(66946007)(66556008)(66476007)(6666004)(316002)(38100700002)(38350700002)(41300700001)(6486002)(52116002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?qs0qflQuH2FnZ0FHLyNBH+kPz4KwcINEXLtK7BEqaPspKzXMuO3+ocJCcnLm?=
- =?us-ascii?Q?BwZTvMGX2WNM3tenb4Ve+YD6TDT7SAR5YmSxoPxx9hCDqiD3wVAHLHwiujfl?=
- =?us-ascii?Q?b2NAiqFdFiW+i2MXZiWyMUUta9vJjkkhYxLv//LVKqBbsk4xthDwJoV5CGAA?=
- =?us-ascii?Q?mHy75wNCUT1OCLGRfBqEVLV8hRA1dV1jjJCQYY/XK38UAvKbyL1YfSYOXT29?=
- =?us-ascii?Q?4PpzlhMzZ73RkaeJFSBwYw9TP5vzzdfd1KMnKc/5rv2Uow3Cv9CCJTPbiGF6?=
- =?us-ascii?Q?xHkasL5vhyFvbvkeku3YozC0kEeMH0iENEpVDXdtKbq4sOKrAi8jcyGBy44Z?=
- =?us-ascii?Q?NmbBK7ANHSC1COC+vfKiwAbMXrhDA8N8dx00KdapZ5wkSjHs/wWxdkT77XkR?=
- =?us-ascii?Q?4S7QWj2ko9lRYjWxLQaplcmwK5o5tiRL4ecNn9oDFdHhXNy2mSYktPbKBx8E?=
- =?us-ascii?Q?vW0pIdxtS8BeFYHNzk15EjJBl7PpQFpwzwnxGv8cuM4jrwGXBOdCQRDv/xPD?=
- =?us-ascii?Q?AzZYL/vULVe3auuVejeXVGnIyvqYTWaCFobe/qDQjTlVXmqDMjxfM/+4Z08y?=
- =?us-ascii?Q?CYYKkhsGzjiP6dIrSHwCb/+ni+aa72rSLgPjf1GFQA0EFPa9rDXWHnA4g8Ha?=
- =?us-ascii?Q?UBV/pifZTZZmNpTcItzftDzNADTW2RSOARHm6Df+HwAuZLkeUA/DxURRA7cO?=
- =?us-ascii?Q?791vyGc2WDdBKcEyaKEhm6L2wADiWEiAyIFkVm/3P0x3DHGcqU45dJ7hsulC?=
- =?us-ascii?Q?f9x7n9ovc9dQWkryqKZus25xbLQftKSDwtHhdjG0HtUaHSzgiqfK5xfuSWET?=
- =?us-ascii?Q?eVKZgZg9Ebfvh9nrINEBPQA6Ahf7toy7GJlklXP8V1psPyNqVqMT7mrvyCON?=
- =?us-ascii?Q?ntqjhAgVTaGJesVHqiKmcUc9x7dFg2tr5wAp+Tln/vYol5Lkw/IxEnM/KYqv?=
- =?us-ascii?Q?gQC/J30Jy2i6Wa2ZGN4ZM4JFKWv0vSQUbBLiEhEtptB6mEw5pI8M1d7LCQBn?=
- =?us-ascii?Q?iTEWcnFSXkRCnooHGcn5WhF1u4fDkDITdDxd6ggD7NC8PHKuyVXlNegpj8Np?=
- =?us-ascii?Q?vJvf94sFKvVAUnS3iB/Cwhi66PSrzENlD1RvfZvJ7GJDMmk4PeEfcNVqwslC?=
- =?us-ascii?Q?+KkMABb1nJrGrrElJQBoC4XLqfPzHHKf1wLZjhGUr4hRuy8XBykfhRTS5TiX?=
- =?us-ascii?Q?1omf1UBQ+uhTFIlZHyQruU8m1jNXolWgIYEzvi96b8uNTytBv4DlsKN1L/GD?=
- =?us-ascii?Q?yHUmXoqlfCaVvOB1AVRdAVCNouv3yN8TFIPB23hMphrXYv2+1S+nLhxGADfk?=
- =?us-ascii?Q?9wHaSQQ+DE9tt42nyi1NMXI79nFFdS52lSdgO1Yhd08l0brjjixR6+oaKkMj?=
- =?us-ascii?Q?TnivRbbomHa/9JyGkPlb24RjFJ9UqLLmBh99V9MhESsecOoCrjhA7tyExEBY?=
- =?us-ascii?Q?nRGaN+CEdSmmi0I2KmVeu3/9TmkDnEMA3rHiSlPS4+l9rm2wGxnxmhPcDTVx?=
- =?us-ascii?Q?tQMDr1ZITEN5pjRayAJEfcyDqXCIQy8IxWTqyPTNCIhOCdVMmnB5kjmTwUuF?=
- =?us-ascii?Q?XCoxagANyT8wr/FOTQ05wUT1UzbkIZeiwbpsrOwY?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?9ffX4wunB8UDopP7mSRjtrEWyLOmoG8bsrfz/AyzEXUm6hTaciJ5ysS61zyc?=
+ =?us-ascii?Q?KWi7DzJd35t3OBCFqrGDLqDizv0G9exOjw+qG+wzaJ+nxKlWFqmRxV1foh8A?=
+ =?us-ascii?Q?ZEWWXpFrPdYdp6k3L8Na6rPvvRL2s2VPusP8Z/jQEKVLFLRDX15Ijvq63kWe?=
+ =?us-ascii?Q?mTtQDxbIW9N1j2nExt2izJFsG7nO7GVKlsxA0HzDAPY/Vb+j8kEGQzs0t11C?=
+ =?us-ascii?Q?OHzThBnm5MxnXjfY56yxrgM1K++J78HzjQINzrO0jNsaOTx4tm0tvWtO46z0?=
+ =?us-ascii?Q?73OaklvQ6tQYCfaC+yUqPnelK8W/05gMH6Q4TO8xgQ+oJzC5iFv/RuxOE1E6?=
+ =?us-ascii?Q?+Cz1fXi2IDvnbsfyRIpylz12Z8XBolRC5zPfIyrDGFBm7WGVV6+UOEg2iIdR?=
+ =?us-ascii?Q?T7GEyx9iLoWSpddxL9iK1DuRokYajH7/TuVSGzJAfH2M28CWnXSB3hhwGPw0?=
+ =?us-ascii?Q?urt+BBpybhDz6jbj8Zi6tj0Z3ctc/NNotvmw5R2//W8wmKmLJknITn3hOb3P?=
+ =?us-ascii?Q?j7yaskg+Z1SUDGFailfbLugM6aDNEHJdKc+zGw0ztEflN/gzQ0ykUNZ7iPQ5?=
+ =?us-ascii?Q?6YQcalI067STUMEHa80WE+rhHP3gL1Z0Fj4+FmWIj/xUCb9nktrR1S8oS29h?=
+ =?us-ascii?Q?jNzz6VyHW1NDqf9+Gcr6quiGVQiVFyh8mAs4EDV3Nw57dROunHQ52lymaAPv?=
+ =?us-ascii?Q?NPfIcCrcOyP1svQuhI31XCYME0uSnEsCc+Yw+yq460U/6G2p+g0RdJJX+MQ/?=
+ =?us-ascii?Q?Jlggj+1BCtFM+KAwTZdMHVJ20AJ4Y5n4LCpF7uQR7YTDqjI4ycw6kmfhAVEG?=
+ =?us-ascii?Q?+x7obBY48bvXGpl/SYgzQmTdkflF+tKfGpWZrl9iN0NYZGylzmPuL3vBSJNl?=
+ =?us-ascii?Q?h+mEihuJlOdeVV9qdXV0JtS0p1uiIQ/0vtpR4Kzsp5/9lsMPtoUH3cWfktJb?=
+ =?us-ascii?Q?R86kE5tQEQiUKK93EY9DP8AuOHABoHLYKMVsf/6k/AAPpdWj6xj7Xt71iImm?=
+ =?us-ascii?Q?la85pBLF5Swj0TtE6oKBRsfnatbEoRKShnlitFWBZRurZkhuJkYHh2EwwEAT?=
+ =?us-ascii?Q?b4mm5kwgdoEJrXQotcVVseGUAI1H05ZFipk7Aj5MU9W10dG3eo8BTUSzV9ub?=
+ =?us-ascii?Q?iLOaO4PjMcrS1LgpiOyGsdz2vW+3MDrx1zgN+Eqc2eJbOHX6EOClMZ3P7x/E?=
+ =?us-ascii?Q?PeikepAeKGi3nh8YyHanZo5erv89bpUNLFRS1wq1XkDK5eSYtSqLO4CYmayc?=
+ =?us-ascii?Q?4udubVz5QDC0pfLHcLyzqU1OxtaTD0+t/PUckDfM95K+etHZOrzd3uGvIfHM?=
+ =?us-ascii?Q?ZFIn/2JO7A2izYp0XVNgD+skQVhbLZWGyllOG5TpV8QIHuE+NkP1bZ57m39t?=
+ =?us-ascii?Q?HoHQ5STSVLXMTPWsVfJw49InYavY9nWOFCAhJVgbItWwk7HgWygFSI14IwEK?=
+ =?us-ascii?Q?vf0CARuLAYLlOSgDiGFEo5HhlIseQAOEa+MXQIXtH31AEj7WVX/9PBys3cfP?=
+ =?us-ascii?Q?cYPui/y+I6sinN/tqj04KgtEoeNbVk/gwYLy5SoVfqG6EeDqMEPuhlvy9aOr?=
+ =?us-ascii?Q?w1NsEkIOzadhLoGx2XONqSEcsiXYOdFtTtxeOZma?=
 X-OriginatorOrg: oppo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: efe1bbf7-1258-412d-39a0-08db5fe4fb4a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8f79a084-e32a-4a2b-247b-08db5fe502c9
 X-MS-Exchange-CrossTenant-AuthSource: SI2PR02MB5148.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 May 2023 01:35:27.8911 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 May 2023 01:35:40.4256 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: omJxw3AKxsjEPqL4BOou3+HJVyG44OrTQr8t/1uWK5kQRMxZ7wmDI0J2PZ2XX1HSBhTxw+fqC9xQ/5/lAH0AOg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: vAKfW4aLkJh/dVrmtqN4hgR6fM4f1SQz633bkZVcdtMvLGS3F9syGadoYvncBNlH4E3HVb9B9Q8m7Dni5B5TNQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR02MB4617
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -130,18 +132,18 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch introduces two ioctls: * f2fs_ioc_get_extra_attr
- * f2fs_ioc_set_extra_attr to get or modify values in extra attribute area.
- The argument of these two ioctls is `struct f2fs_extra_attr', which has three
- members: * field: indicates which field in extra attribute area is handled
- * attr: value or userspace pointer * attr_size: [...] 
+ Content preview: This patch adds get_attr and set_attr to access inode's extra
+ attributes. Signed-off-by: Sheng Yong <shengyong@oppo.com> ---
+ tools/f2fs_io/f2fs_io.c
+ | 165 ++++++++++++++++++++++++++++++++++++++++ tools/f2fs_io/f2fs_io.h |
+ 34 +++++++++ 2 files changed, 199 insertions(+) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.255.49 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.255.49 listed in wl.mailspike.net]
+ [40.107.117.58 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.117.58 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -151,8 +153,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1q3SIb-0001xi-Ev
-Subject: [f2fs-dev] [PATCH] f2fs: add f2fs_ioc_[get|set]_extra_attr
+X-Headers-End: 1q3SJ2-005OLE-3S
+Subject: [f2fs-dev] [PATCH 1/2] f2fs_io: add [get|set_attr] to access inode
+ extra attributes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -171,525 +174,229 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch introduces two ioctls:
-  * f2fs_ioc_get_extra_attr
-  * f2fs_ioc_set_extra_attr
-to get or modify values in extra attribute area.
-
-The argument of these two ioctls is `struct f2fs_extra_attr', which has
-three members:
-  * field: indicates which field in extra attribute area is handled
-  * attr: value or userspace pointer
-  * attr_size: size of `attr'
-
-The `field' member could help extend functionality of these two ioctls
-without modify or add new interfaces, if more fields are added into
-extra attributes ares in the feture.
+This patch adds get_attr and set_attr to access inode's extra
+attributes.
 
 Signed-off-by: Sheng Yong <shengyong@oppo.com>
 ---
- fs/f2fs/f2fs.h            |   2 +
- fs/f2fs/file.c            | 289 ++++++++++++++++++++++++++++++++++++--
- fs/f2fs/inode.c           |  21 +++
- fs/f2fs/super.c           |   2 +-
- fs/f2fs/xattr.h           |   1 +
- include/uapi/linux/f2fs.h |  35 +++++
- 6 files changed, 337 insertions(+), 13 deletions(-)
+ tools/f2fs_io/f2fs_io.c | 165 ++++++++++++++++++++++++++++++++++++++++
+ tools/f2fs_io/f2fs_io.h |  34 +++++++++
+ 2 files changed, 199 insertions(+)
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index faa27f41f39d4..08e8527734df5 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -3475,6 +3475,8 @@ int f2fs_pin_file_control(struct inode *inode, bool inc);
- void f2fs_set_inode_flags(struct inode *inode);
- bool f2fs_inode_chksum_verify(struct f2fs_sb_info *sbi, struct page *page);
- void f2fs_inode_chksum_set(struct f2fs_sb_info *sbi, struct page *page);
-+int f2fs_inode_chksum_get(struct f2fs_sb_info *sbi, struct inode *inode,
-+			u32 *chksum);
- struct inode *f2fs_iget(struct super_block *sb, unsigned long ino);
- struct inode *f2fs_iget_retry(struct super_block *sb, unsigned long ino);
- int f2fs_try_to_free_nats(struct f2fs_sb_info *sbi, int nr_shrink);
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 78aa8cff4b41d..cdb192faf7c36 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -25,6 +25,8 @@
- #include <linux/fileattr.h>
- #include <linux/fadvise.h>
- #include <linux/iomap.h>
-+#include <linux/lz4.h>
-+#include <linux/zstd.h>
- 
- #include "f2fs.h"
- #include "node.h"
-@@ -3376,10 +3378,12 @@ static int f2fs_ioc_setfslabel(struct file *filp, unsigned long arg)
- 	return err;
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index 5bc0baf..70e0347 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -1311,6 +1311,169 @@ static void do_gc(int argc, char **argv, const struct cmd_desc *cmd)
+ 	exit(0);
  }
  
--static int f2fs_get_compress_blocks(struct file *filp, unsigned long arg)
-+static int f2fs_get_compress_blocks(struct file *filp, unsigned int attr_size)
- {
- 	struct inode *inode = file_inode(filp);
--	__u64 blocks;
++#define get_attr_desc "get inode extra attribute"
++#define get_attr_help "f2fs_io get_attr [field] [file_path]\n\n"	\
++"field can be\n"							\
++"  total_size\n"							\
++"  isize\n"								\
++"  inline_xattr_size\n"							\
++"  projid\n"								\
++"  inode_chksum\n"							\
++"  crtime\n"								\
++"  cblocks\n"								\
++"  coption\n"
 +
-+	if (attr_size != sizeof(__u64))
-+		return -EINVAL;
- 
- 	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
- 		return -EOPNOTSUPP;
-@@ -3387,7 +3391,14 @@ static int f2fs_get_compress_blocks(struct file *filp, unsigned long arg)
- 	if (!f2fs_compressed_file(inode))
- 		return -EINVAL;
- 
--	blocks = atomic_read(&F2FS_I(inode)->i_compr_blocks);
-+	return atomic_read(&F2FS_I(inode)->i_compr_blocks);
-+}
++static const char *extra_attr_fields[] = {
++	[F2FS_EXTRA_ATTR_TOTAL_SIZE] = "total_size",
++	[F2FS_EXTRA_ATTR_ISIZE] = "isize",
++	[F2FS_EXTRA_ATTR_INLINE_XATTR_SIZE] = "inline_xattr_size",
++	[F2FS_EXTRA_ATTR_PROJID] = "projid",
++	[F2FS_EXTRA_ATTR_INODE_CHKSUM] = "inode_chksum",
++	[F2FS_EXTRA_ATTR_CRTIME] = "crtime",
++	[F2FS_EXTRA_ATTR_COMPR_BLOCKS] = "cblocks",
++	[F2FS_EXTRA_ATTR_COMPR_OPTION] = "coption",
++};
 +
-+static int f2fs_ioc_get_compress_blocks(struct file *filp, unsigned long arg)
++static void do_get_attr(int argc, char **argv, const struct cmd_desc *cmd)
 +{
-+	__u64 blocks;
++	struct f2fs_extra_attr attr = {0};
++	struct timespec ts = {0};
++	struct f2fs_comp_option_v2 coption = {0};
++	int ret, fd;
 +
-+	blocks = f2fs_get_compress_blocks(filp, sizeof(blocks));
- 	return put_user(blocks, (u64 __user *)arg);
- }
- 
-@@ -3905,10 +3916,14 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
- 	return ret;
- }
- 
--static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
-+static int f2fs_get_compress_option_v2(struct file *filp,
-+				       unsigned long attr, __u16 *attr_size)
- {
- 	struct inode *inode = file_inode(filp);
--	struct f2fs_comp_option option;
-+	struct f2fs_comp_option_v2 option;
-+
-+	if (sizeof(option) < *attr_size)
-+		*attr_size = sizeof(option);
- 
- 	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
- 		return -EOPNOTSUPP;
-@@ -3922,31 +3937,42 @@ static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
- 
- 	option.algorithm = F2FS_I(inode)->i_compress_algorithm;
- 	option.log_cluster_size = F2FS_I(inode)->i_log_cluster_size;
-+	option.level = F2FS_I(inode)->i_compress_level;
-+	option.flag = F2FS_I(inode)->i_compress_flag;
- 
- 	inode_unlock_shared(inode);
- 
--	if (copy_to_user((struct f2fs_comp_option __user *)arg, &option,
--				sizeof(option)))
-+	if (copy_to_user((void __user *)attr, &option, *attr_size))
- 		return -EFAULT;
- 
- 	return 0;
- }
- 
--static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
-+static int f2fs_ioc_get_compress_option(struct file *filp, unsigned long arg)
-+{
-+	__u16 size = sizeof(struct f2fs_comp_option);
-+
-+	return f2fs_get_compress_option_v2(filp, arg, &size);
-+}
-+
-+static int f2fs_set_compress_option_v2(struct file *filp,
-+				       unsigned long attr, __u16 *attr_size)
- {
- 	struct inode *inode = file_inode(filp);
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
--	struct f2fs_comp_option option;
-+	struct f2fs_comp_option_v2 option;
- 	int ret = 0;
- 
-+	if (sizeof(option) < *attr_size)
-+		*attr_size = sizeof(option);
-+
- 	if (!f2fs_sb_has_compression(sbi))
- 		return -EOPNOTSUPP;
- 
- 	if (!(filp->f_mode & FMODE_WRITE))
- 		return -EBADF;
- 
--	if (copy_from_user(&option, (struct f2fs_comp_option __user *)arg,
--				sizeof(option)))
-+	if (copy_from_user(&option, (void __user *)attr, *attr_size))
- 		return -EFAULT;
- 
- 	if (!f2fs_compressed_file(inode) ||
-@@ -3955,6 +3981,28 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
- 			option.algorithm >= COMPRESS_MAX)
- 		return -EINVAL;
- 
-+	if (*attr_size == sizeof(struct f2fs_comp_option_v2)) {
-+		if (option.level != 0) {
-+			switch (option.algorithm) {
-+			case COMPRESS_LZO:
-+			case COMPRESS_LZORLE:
-+				return -EINVAL;
-+			case COMPRESS_LZ4:
-+				if (option.level < LZ4HC_MIN_CLEVEL ||
-+				    option.level > LZ4HC_MAX_CLEVEL)
-+					return -EINVAL;
-+				break;
-+			case COMPRESS_ZSTD:
-+				if (option.level > zstd_max_clevel())
-+					return -EINVAL;
-+				break;
-+			}
-+		}
-+
-+		if (option.flag > BIT(COMPRESS_MAX_FLAG) - 1)
-+			return -EINVAL;
++	if (argc != 3) {
++		fputs("Excess arguments\n\n", stderr);
++		fputs(cmd->cmd_help, stderr);
++		exit(1);
 +	}
 +
- 	file_start_write(filp);
- 	inode_lock(inode);
- 
-@@ -3971,6 +4019,10 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
- 	F2FS_I(inode)->i_compress_algorithm = option.algorithm;
- 	F2FS_I(inode)->i_log_cluster_size = option.log_cluster_size;
- 	F2FS_I(inode)->i_cluster_size = BIT(option.log_cluster_size);
-+	if (*attr_size == sizeof(struct f2fs_comp_option_v2)) {
-+		F2FS_I(inode)->i_compress_level = option.level;
-+		F2FS_I(inode)->i_compress_flag = option.flag;
++	for (attr.field = 0; attr.field < F2FS_EXTRA_ATTR_MAX; attr.field++) {
++		if (!strcmp(extra_attr_fields[attr.field], argv[1]))
++			break;
 +	}
- 	f2fs_mark_inode_dirty_sync(inode, true);
- 
- 	if (!f2fs_is_compress_backend_ready(inode))
-@@ -3983,6 +4035,13 @@ static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
- 	return ret;
- }
- 
-+static int f2fs_ioc_set_compress_option(struct file *filp, unsigned long arg)
-+{
-+	__u16 size = sizeof(struct f2fs_comp_option);
-+
-+	return f2fs_set_compress_option_v2(filp, arg, &size);
-+}
-+
- static int redirty_blocks(struct inode *inode, pgoff_t page_idx, int len)
- {
- 	DEFINE_READAHEAD(ractl, NULL, NULL, inode->i_mapping, page_idx);
-@@ -4168,6 +4227,208 @@ static int f2fs_ioc_compress_file(struct file *filp)
- 	return ret;
- }
- 
-+static bool extra_attr_fits_in_inode(struct inode *inode, int field)
-+{
-+	struct f2fs_inode_info *fi = F2FS_I(inode);
-+	struct f2fs_inode *ri;
-+
-+	switch (field) {
-+	case F2FS_EXTRA_ATTR_TOTAL_SIZE:
-+	case F2FS_EXTRA_ATTR_ISIZE:
-+	case F2FS_EXTRA_ATTR_INLINE_XATTR_SIZE:
-+		return true;
-+	case F2FS_EXTRA_ATTR_PROJID:
-+		if (!F2FS_FITS_IN_INODE(ri, fi->i_extra_isize, i_projid))
-+			return false;
-+		return true;
-+	case F2FS_EXTRA_ATTR_INODE_CHKSUM:
-+		if (!F2FS_FITS_IN_INODE(ri, fi->i_extra_isize, i_inode_checksum))
-+			return false;
-+		return true;
-+	case F2FS_EXTRA_ATTR_CRTIME:
-+		if (!F2FS_FITS_IN_INODE(ri, fi->i_extra_isize, i_crtime))
-+			return false;
-+		return true;
-+	case F2FS_EXTRA_ATTR_COMPR_BLOCKS:
-+	case F2FS_EXTRA_ATTR_COMPR_OPTION:
-+		if (!F2FS_FITS_IN_INODE(ri, fi->i_extra_isize, i_compr_blocks))
-+			return false;
-+		return true;
-+	default:
-+		BUG_ON(1);
-+		return false;
-+	}
-+}
-+
-+static int f2fs_ioc_get_extra_attr(struct file *filp, unsigned long arg)
-+{
-+	struct inode *inode = file_inode(filp);
-+	struct f2fs_inode_info *fi = F2FS_I(inode);
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	struct f2fs_extra_attr attr;
-+	u32 chksum;
-+	int ret = 0;
-+
-+	if (!f2fs_has_extra_attr(inode))
-+		return -EOPNOTSUPP;
-+
-+	if (copy_from_user(&attr, (void __user *)arg, sizeof(attr)))
-+		return -EFAULT;
-+
-+	if (attr.field >= F2FS_EXTRA_ATTR_MAX)
-+		return -EINVAL;
-+
-+	if (!extra_attr_fits_in_inode(inode, attr.field))
-+		return -EOPNOTSUPP;
 +
 +	switch (attr.field) {
 +	case F2FS_EXTRA_ATTR_TOTAL_SIZE:
-+		attr.attr = F2FS_TOTAL_EXTRA_ATTR_SIZE;
-+		break;
 +	case F2FS_EXTRA_ATTR_ISIZE:
-+		attr.attr = fi->i_extra_isize;
-+		break;
 +	case F2FS_EXTRA_ATTR_INLINE_XATTR_SIZE:
-+		if (!f2fs_has_inline_xattr(inode))
-+			return -EOPNOTSUPP;
-+		attr.attr = get_inline_xattr_addrs(inode);
-+		break;
 +	case F2FS_EXTRA_ATTR_PROJID:
-+		if (!f2fs_sb_has_project_quota(F2FS_I_SB(inode)))
-+			return -EOPNOTSUPP;
-+		attr.attr = from_kprojid(&init_user_ns, fi->i_projid);
-+		break;
 +	case F2FS_EXTRA_ATTR_INODE_CHKSUM:
-+		ret = f2fs_inode_chksum_get(sbi, inode, &chksum);
-+		if (ret)
-+			return ret;
-+		attr.attr = chksum;
++	case F2FS_EXTRA_ATTR_COMPR_BLOCKS:
++		attr.attr_size = sizeof(attr.attr);
 +		break;
 +	case F2FS_EXTRA_ATTR_CRTIME:
-+		if (!f2fs_sb_has_inode_crtime(sbi))
-+			return -EOPNOTSUPP;
-+		if (attr.attr_size == sizeof(struct timespec64)) {
-+			if (put_timespec64(&fi->i_crtime,
-+					   (void __user *)attr.attr))
-+				return -EFAULT;
-+		} else if (attr.attr_size == sizeof(struct old_timespec32)) {
-+			if (put_old_timespec32(&fi->i_crtime,
-+					       (void __user *)attr.attr))
-+				return -EFAULT;
-+		} else {
-+			return -EINVAL;
-+		}
-+		break;
-+	case F2FS_EXTRA_ATTR_COMPR_BLOCKS:
-+		ret = f2fs_get_compress_blocks(filp, attr.attr_size);
-+		attr.attr = ret;
++		attr.attr_size = sizeof(ts);
++		attr.attr = (unsigned long)&ts;
 +		break;
 +	case F2FS_EXTRA_ATTR_COMPR_OPTION:
-+		ret = f2fs_get_compress_option_v2(filp, attr.attr,
-+						  &attr.attr_size);
++		attr.attr_size = sizeof(coption);
++		attr.attr = (unsigned long)&coption;
 +		break;
 +	default:
-+		return -EINVAL;
++		die("Unknown field");
 +	}
 +
++	fd = xopen(argv[2], O_RDONLY, 0);
++
++	ret = ioctl(fd, F2FS_IOC_GET_EXTRA_ATTR, &attr);
 +	if (ret < 0)
-+		return ret;
-+
-+	if (copy_to_user((void __user *)arg, &attr, sizeof(attr)))
-+		return -EFAULT;
-+
-+	return 0;
-+}
-+
-+static int f2fs_ioc_set_extra_attr(struct file *filp, unsigned long arg)
-+{
-+	struct inode *inode = file_inode(filp);
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+	struct f2fs_extra_attr attr;
-+	struct page *ipage;
-+	void *inline_addr;
-+	int ret;
-+
-+	if (!f2fs_has_extra_attr(inode))
-+		return -EOPNOTSUPP;
-+
-+	if (copy_from_user(&attr, (void __user *)arg, sizeof(attr)))
-+		return -EFAULT;
-+
-+	if (attr.field >= F2FS_EXTRA_ATTR_MAX)
-+		return -EINVAL;
-+
-+	if (!extra_attr_fits_in_inode(inode, attr.field))
-+		return -EOPNOTSUPP;
++		die_errno("F2FS_IOC_GET_EXTRA_ATTR failed");
 +
 +	switch (attr.field) {
 +	case F2FS_EXTRA_ATTR_TOTAL_SIZE:
 +	case F2FS_EXTRA_ATTR_ISIZE:
-+	case F2FS_EXTRA_ATTR_PROJID:
-+	case F2FS_EXTRA_ATTR_INODE_CHKSUM:
-+	case F2FS_EXTRA_ATTR_CRTIME:
-+	case F2FS_EXTRA_ATTR_COMPR_BLOCKS:
-+		/* read only attribtues */
-+		return -EOPNOTSUPP;
 +	case F2FS_EXTRA_ATTR_INLINE_XATTR_SIZE:
-+		if (!f2fs_sb_has_flexible_inline_xattr(sbi) ||
-+		    !f2fs_has_inline_xattr(inode))
-+			return -EOPNOTSUPP;
-+		if (attr.attr < MIN_INLINE_XATTR_SIZE ||
-+		    attr.attr > MAX_INLINE_XATTR_SIZE)
-+			return -EINVAL;
-+		inode_lock(inode);
-+		f2fs_lock_op(sbi);
-+		f2fs_down_write(&F2FS_I(inode)->i_xattr_sem);
-+		if (i_size_read(inode) || F2FS_I(inode)->i_xattr_nid) {
-+			/*
-+			 * it is not allowed to set this field if the inode
-+			 * has data or xattr node
-+			 */
-+			ret = -EFBIG;
-+			goto xattr_out_unlock;
-+		}
-+		ipage = f2fs_get_node_page(sbi, inode->i_ino);
-+		if (IS_ERR(ipage)) {
-+			ret = PTR_ERR(ipage);
-+			goto xattr_out_unlock;
-+		}
-+		inline_addr = inline_xattr_addr(inode, ipage);
-+		if (!IS_XATTR_LAST_ENTRY(XATTR_FIRST_ENTRY(inline_addr))) {
-+			ret = -EFBIG;
-+		} else {
-+			struct f2fs_xattr_header *hdr;
-+			struct f2fs_xattr_entry *ent;
-+
-+			F2FS_I(inode)->i_inline_xattr_size = (int)attr.attr;
-+			inline_addr = inline_xattr_addr(inode, ipage);
-+			hdr = XATTR_HDR(inline_addr);
-+			ent = XATTR_FIRST_ENTRY(inline_addr);
-+			hdr->h_magic = cpu_to_le32(F2FS_XATTR_MAGIC);
-+			hdr->h_refcount = cpu_to_le32(1);
-+			memset(ent, 0, attr.attr - sizeof(*hdr));
-+			set_page_dirty(ipage);
-+			ret = 0;
-+		}
-+		f2fs_put_page(ipage, 1);
-+xattr_out_unlock:
-+		f2fs_up_write(&F2FS_I(inode)->i_xattr_sem);
-+		f2fs_unlock_op(sbi);
-+		inode_unlock(inode);
-+		if (!ret)
-+			f2fs_balance_fs(sbi, true);
++	case F2FS_EXTRA_ATTR_PROJID:
++	case F2FS_EXTRA_ATTR_COMPR_BLOCKS:
++		printf("%"PRIu64"\n", attr.attr);
++		break;
++	case F2FS_EXTRA_ATTR_INODE_CHKSUM:
++		printf("0x%"PRIx64"\n", attr.attr);
++		break;
++	case F2FS_EXTRA_ATTR_CRTIME:
++		printf("sec: %lu\nnsec: %lu\n", ts.tv_sec, ts.tv_nsec);
 +		break;
 +	case F2FS_EXTRA_ATTR_COMPR_OPTION:
-+		ret = f2fs_set_compress_option_v2(filp, attr.attr,
-+						  &attr.attr_size);
++		printf("compression algorithm:%u\n", coption.algorithm);
++		printf("compression cluster log size:%u\n", coption.log_cluster_size);
++		printf("compression level:%u\n", coption.level);
++		printf("compression flag:0x%x\n", coption.flag);
 +		break;
 +	default:
-+		return -EINVAL;
++		die("Unknown field");
 +	}
 +
-+	return ret;
++	exit(0);
 +}
 +
- static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- {
- 	switch (cmd) {
-@@ -4239,7 +4500,7 @@ static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- 	case FS_IOC_SETFSLABEL:
- 		return f2fs_ioc_setfslabel(filp, arg);
- 	case F2FS_IOC_GET_COMPRESS_BLOCKS:
--		return f2fs_get_compress_blocks(filp, arg);
-+		return f2fs_ioc_get_compress_blocks(filp, arg);
- 	case F2FS_IOC_RELEASE_COMPRESS_BLOCKS:
- 		return f2fs_release_compress_blocks(filp, arg);
- 	case F2FS_IOC_RESERVE_COMPRESS_BLOCKS:
-@@ -4254,6 +4515,10 @@ static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
- 		return f2fs_ioc_decompress_file(filp);
- 	case F2FS_IOC_COMPRESS_FILE:
- 		return f2fs_ioc_compress_file(filp);
-+	case F2FS_IOC_GET_EXTRA_ATTR:
-+		return f2fs_ioc_get_extra_attr(filp, arg);
-+	case F2FS_IOC_SET_EXTRA_ATTR:
-+		return f2fs_ioc_set_extra_attr(filp, arg);
- 	default:
- 		return -ENOTTY;
- 	}
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 0a17484443299..aef9c1fd37dca 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -204,6 +204,27 @@ void f2fs_inode_chksum_set(struct f2fs_sb_info *sbi, struct page *page)
- 	ri->i_inode_checksum = cpu_to_le32(f2fs_inode_chksum(sbi, page));
- }
- 
-+int f2fs_inode_chksum_get(struct f2fs_sb_info *sbi,
-+			  struct inode *inode, u32 *chksum)
++#define set_attr_desc "set inode extra attribute"
++#define set_attr_help "f2fs_io set_attr [field] [values] [file_path]\n\n"	\
++"field can be\n"								\
++"  inline_xattr_size : [values] is [size]\n"					\
++"  coption : [values] are [algorithm] [log_cluster_size] [level] [flag]\n"	\
++"    algorithm        : compression algorithm (0:lzo, 1: lz4, 2:zstd, 3:lzorle)\n"	\
++"    log_cluster_size : compression cluster log size (2 <= log_size <= 8)\n"	\
++"    level            : compression level\n"					\
++"    flag             : compression flag (1:chksum)\n"
++
++static void do_set_attr(int argc, char **argv, const struct cmd_desc *cmd)
 +{
-+	struct page *ipage;
-+	struct f2fs_inode_info *fi = F2FS_I(inode);
-+	struct f2fs_inode *ri;
++	struct f2fs_extra_attr attr = {0};
++	struct f2fs_comp_option_v2 coption = {0};
++	int i;
++	int ret, fd;
 +
-+	if (!f2fs_sb_has_inode_chksum(sbi) ||
-+	    !f2fs_has_extra_attr(inode) ||
-+	    !F2FS_FITS_IN_INODE(ri, fi->i_extra_isize, i_inode_checksum))
-+		return -EOPNOTSUPP;
++	if (argc < 4)
++		goto out;
 +
-+	ipage = f2fs_get_node_page(sbi, inode->i_ino);
-+	if (IS_ERR(ipage))
-+		return PTR_ERR(ipage);
++	if (!strcmp(argv[1], extra_attr_fields[F2FS_EXTRA_ATTR_INLINE_XATTR_SIZE])) {
++		if (argc != 4)
++			goto out;
++		i = 2;
++		attr.field = F2FS_EXTRA_ATTR_INLINE_XATTR_SIZE;
++		attr.attr_size = sizeof(attr.attr);
++		attr.attr = atoi(argv[i++]);
++	} else if (!strcmp(argv[1], extra_attr_fields[F2FS_EXTRA_ATTR_COMPR_OPTION])) {
++		if (argc != 7)
++			goto out;
++		i = 2;
++		coption.algorithm = atoi(argv[i++]);
++		coption.log_cluster_size = atoi(argv[i++]);
++		coption.level = atoi(argv[i++]);
++		coption.flag = atoi(argv[i++]);
++		attr.field = F2FS_EXTRA_ATTR_COMPR_OPTION;
++		attr.attr_size = sizeof(coption);
++		attr.attr = (unsigned long)&coption;
++	} else {
++		die("Unknown or read only field");
++	}
 +
-+	*chksum = f2fs_inode_chksum(sbi, ipage);
-+	f2fs_put_page(ipage, true);
-+	return 0;
++	fd = xopen(argv[i], O_WRONLY, 0);
++
++	ret = ioctl(fd, F2FS_IOC_SET_EXTRA_ATTR, &attr);
++	if (ret < 0)
++		die_errno("F2FS_IOC_SET_EXTRA_ATTR failed");
++
++	switch (attr.field) {
++	case F2FS_EXTRA_ATTR_INLINE_XATTR_SIZE:
++		printf("set inline_xattr_size:%"PRIu64"\n", attr.attr);
++		break;
++	case F2FS_EXTRA_ATTR_COMPR_OPTION:
++		printf("set compression option: algorithm=%u, "
++			"log_cluster_size=%u, level=%u, flag=0x%x\n",
++			coption.algorithm, coption.log_cluster_size,
++			coption.level, coption.flag);
++		break;
++	}
++
++	exit(0);
++out:
++	fputs("Excess arguments\n\n", stderr);
++	fputs(cmd->cmd_help, stderr);
++	exit(1);
 +}
 +
- static bool sanity_check_compress_inode(struct inode *inode,
- 			struct f2fs_inode *ri)
- {
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 374c990810ead..64adaec4e98e0 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1361,7 +1361,7 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
- 			return -EINVAL;
- 		}
++
+ #define CMD_HIDDEN 	0x0001
+ #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
+ #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
+@@ -1343,6 +1506,8 @@ const struct cmd_desc cmd_list[] = {
+ 	CMD(get_filename_encrypt_mode),
+ 	CMD(rename),
+ 	CMD(gc),
++	CMD(get_attr),
++	CMD(set_attr),
+ 	{ NULL, NULL, NULL, NULL, 0 }
+ };
  
--		min_size = sizeof(struct f2fs_xattr_header) / sizeof(__le32);
-+		min_size = MIN_INLINE_XATTR_SIZE;
- 		max_size = MAX_INLINE_XATTR_SIZE;
- 
- 		if (F2FS_OPTION(sbi).inline_xattr_size < min_size ||
-diff --git a/fs/f2fs/xattr.h b/fs/f2fs/xattr.h
-index 416d652774a33..b1811c392e6f1 100644
---- a/fs/f2fs/xattr.h
-+++ b/fs/f2fs/xattr.h
-@@ -83,6 +83,7 @@ struct f2fs_xattr_entry {
- 				sizeof(struct f2fs_xattr_header) -	\
- 				sizeof(struct f2fs_xattr_entry))
- 
-+#define MIN_INLINE_XATTR_SIZE (sizeof(struct f2fs_xattr_header) / sizeof(__le32))
- #define MAX_INLINE_XATTR_SIZE						\
- 			(DEF_ADDRS_PER_INODE -				\
- 			F2FS_TOTAL_EXTRA_ATTR_SIZE / sizeof(__le32) -	\
-diff --git a/include/uapi/linux/f2fs.h b/include/uapi/linux/f2fs.h
-index 955d440be1046..a8fdaa22c7bda 100644
---- a/include/uapi/linux/f2fs.h
-+++ b/include/uapi/linux/f2fs.h
-@@ -44,6 +44,11 @@
- #define F2FS_IOC_COMPRESS_FILE		_IO(F2FS_IOCTL_MAGIC, 24)
+diff --git a/tools/f2fs_io/f2fs_io.h b/tools/f2fs_io/f2fs_io.h
+index 58be8f8..b0be15c 100644
+--- a/tools/f2fs_io/f2fs_io.h
++++ b/tools/f2fs_io/f2fs_io.h
+@@ -91,6 +91,10 @@ typedef u32	__be32;
+ #define F2FS_IOC_DECOMPRESS_FILE        _IO(F2FS_IOCTL_MAGIC, 23)
+ #define F2FS_IOC_COMPRESS_FILE          _IO(F2FS_IOCTL_MAGIC, 24)
  #define F2FS_IOC_START_ATOMIC_REPLACE	_IO(F2FS_IOCTL_MAGIC, 25)
- 
 +#define F2FS_IOC_GET_EXTRA_ATTR		_IOR(F2FS_IOCTL_MAGIC, 26,	\
 +						struct f2fs_extra_attr)
 +#define F2FS_IOC_SET_EXTRA_ATTR		_IOW(F2FS_IOCTL_MAGIC, 27,	\
 +						struct f2fs_extra_attr)
-+
- /*
-  * should be same as XFS_IOC_GOINGDOWN.
-  * Flags for going down operation used by FS_IOC_GOINGDOWN
-@@ -96,4 +101,34 @@ struct f2fs_comp_option {
- 	__u8 log_cluster_size;
- };
  
+ #ifndef FSCRYPT_POLICY_V1
+ #define FSCRYPT_POLICY_V1		0
+@@ -216,3 +220,33 @@ struct f2fs_comp_option {
+ 	u8 algorithm;
+ 	u8 log_cluster_size;
+ };
++
 +struct f2fs_comp_option_v2 {
-+	__u8 algorithm;
-+	__u8 log_cluster_size;
-+	__u8 level;
-+	__u8 flag;
++	u8 algorithm;
++	u8 log_cluster_size;
++	u8 level;
++	u8 flag;
 +};
 +
 +enum {
 +	F2FS_EXTRA_ATTR_TOTAL_SIZE,		/* ro, size of extra attr area */
 +	F2FS_EXTRA_ATTR_ISIZE,			/* ro, i_extra_isize */
-+	F2FS_EXTRA_ATTR_INLINE_XATTR_SIZE,	/* rw, i_inline_xattr_size */
++	F2FS_EXTRA_ATTR_INLINE_XATTR_SIZE,	/* r2, i_inline_xattr_size */
 +	F2FS_EXTRA_ATTR_PROJID,			/* ro, i_projid */
 +	F2FS_EXTRA_ATTR_INODE_CHKSUM,		/* ro, i_inode_chksum */
 +	F2FS_EXTRA_ATTR_CRTIME,			/* ro, i_crtime, i_crtime_nsec */
@@ -702,14 +409,12 @@ index 955d440be1046..a8fdaa22c7bda 100644
 +};
 +
 +struct f2fs_extra_attr {
-+	__u8 field;		/* F2FS_EXTRA_ATTR_* */
-+	__u8 rsvd1;
-+	__u16 attr_size;	/* size of @attr */
-+	__u32 rsvd2;
-+	__u64 attr;		/* attr value or pointer */
++	u8 field;	/* F2FS_EXTRA_ATTR_* */
++	u8 rsvd1;
++	u16 attr_size;	/* size of @attr */
++	u32 rsvd2;
++	u64 attr;	/* attr value or pointer */
 +};
-+
- #endif /* _UAPI_LINUX_F2FS_H */
 -- 
 2.40.1
 
