@@ -2,71 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 257A77171DC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 01:40:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CC347171EB
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 01:47:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q48xG-0004oW-4J;
-	Tue, 30 May 2023 23:40:42 +0000
+	id 1q493l-0007Ce-NJ;
+	Tue, 30 May 2023 23:47:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1q48xE-0004oB-A7
+ (envelope-from <jaegeuk@kernel.org>) id 1q493k-0007CY-PC
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 May 2023 23:40:40 +0000
+ Tue, 30 May 2023 23:47:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DBRLMIKp+js5hPh5JKSX4lKxLqSlfnm7pmh8Na4lDVg=; b=fI5x/ra6KO+LCwvcFJTkqmsARu
- OXkEIe3F9qgjGy2PkejPzpSIFk3UMkzQyNeEFqlK6TAOdEgxPN01EO82PP32X8m9W48m2wejMVJvp
- orLOLsN3R9K3q1WngPgcvxPBHAA95mjR2DHT4pzoDaEoNcS1aWjIb3gJCVq/0DK8X3iQ=;
+ bh=BErKxpIJHmretHfTezLo3vpZ40e49dMG/jKG62GZMrg=; b=RiiHBVcwUYqTu+wu4/AO/RC7q/
+ 7faE/S8EKFxTDl6gfoSpynW3yGRn3uSoc0ylizSHISwIx0DnLi7VAbHbAj2YYf890JfLD5+35bLsp
+ ISTh0AvFtMdTefOoQ35WJwkFLh/YRttW+Vw9wXEysWNWADs823MoSlx2wZTaxy8dNkuo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DBRLMIKp+js5hPh5JKSX4lKxLqSlfnm7pmh8Na4lDVg=; b=Jmcowzi+lsUc5b3CBEiY9hH3OU
- Hsrs+gBQgvBcwuQEt64pLIYAAurvLBb/ruXZXRYiINGewDcS7vPDO0JtdyogJiE5exzRqvcjvpkM5
- QFEFB84w/n950Od4iaTqZup/zaZLHZ+5MqQ6lbpM9qgWAiN2b51STyhjuU+avmZ4eCsU=;
+ ;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=BErKxpIJHmretHfTezLo3vpZ40e49dMG/jKG62GZMrg=; b=Z4QhBp1ON3bRchMtGG2OYDaQUY
+ Z29AhPTCHYChtPMrOvBZs/cS4dwscYjoGJEipeX+A1I2q5eWjrnWpYz12UlODUMDTVzrQJy8TW5Wz
+ mBGFW03OxD8c8LtqddKEvuwuvY7ZJvvBqUyvfbbCqDkn1s06cfa2GWFuFqV0d6U0RAV4=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q48xD-006wkk-S3 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 May 2023 23:40:40 +0000
+ id 1q493j-0000Y4-JN for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 30 May 2023 23:47:25 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 611F46354B
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 37205602E8
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 30 May 2023 23:40:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 54A58C433A8;
- Tue, 30 May 2023 23:40:24 +0000 (UTC)
+ Tue, 30 May 2023 23:47:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83467C433D2;
+ Tue, 30 May 2023 23:47:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685490024;
- bh=H9VqBAbZl2Fz3jcWASfHBQXr+VWaknCHrI+JGkA2M7I=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=JEd3jMOSxkRA25cxJZQj+PH7QXy2mHT5dhF1np91C5mvtwruhLNQjF05SpS9MX+xV
- xXHGiCRdtPMUskZmY3GoYdPH7DSUCzELY702nliohHfJbfmuXMmrOrTL58GcMkiXGS
- 5hhyRziWIrfJTn+uPE/3cgI24DdW/BTXRDNBvsT3KAlakPVvW5PF3kE2XSYoTD5LrQ
- 4xIST7nT8C+efwbd4haMOP8zLRYNvlAzt3Woe2J7l/m3AgIiHTiftCg1jKXHJ0AES+
- P3rXnXLNYBkTISxN52Engk4u5tt9UMIFXbZ1ixyTIBIuE1g2b6SLfxJ42rsKmpBxqb
- db/rKKoBaOExA==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 35AC6E21ED8; Tue, 30 May 2023 23:40:24 +0000 (UTC)
-MIME-Version: 1.0
-From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168549002421.8773.313920209333136970.git-patchwork-notify@kernel.org>
-Date: Tue, 30 May 2023 23:40:24 +0000
-References: <20230518021412.2037728-1-chao@kernel.org>
-In-Reply-To: <20230518021412.2037728-1-chao@kernel.org>
+ s=k20201202; t=1685490437;
+ bh=H6t6Au1we9raGSZBZ/rpw68g11Z0sU/WR+jWClBWDVM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Hm++Lmys5ts5c1Xt88j2DE5Mpep4lufExhU14kfcU3Ir2yJQLL/d6XWrzt9wFHFae
+ Zytc3fm1axrP+6R6jeOZlyi0X1XLZpyt4rsx5jclD8fn41l18c0X/EJg+VGZRHAcfv
+ U6MtlQ8g38rSP2Zcl0XAUwovYGjavKcwqdMAXUZyh5HuRTeg56z92r0MBFaUHpYw4C
+ C0PCxB4pHtvJCM7W/GaRQaeiTyMAgTYiSb7k6RnkgD4wW2HXsyvlzsZc+mJnjiep7i
+ HvOHIoRKUYJjYorVTQENk91+yHRWPpg4GJJyfQdXo+slpGaEVkpRcwsmpJDu7jyRFK
+ ghXaM1pDFsNuA==
+Date: Tue, 30 May 2023 16:47:15 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: Chao Yu <chao@kernel.org>
+Message-ID: <ZHaLA9+7Qr1aj3ei@google.com>
+References: <20230526235423.3591350-1-chao@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20230526235423.3591350-1-chao@kernel.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -74,11 +72,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 18 May 2023 10:14:12 +0800 you
- wrote: > In IRQ context, it wakes up workqueue to record errors into on-disk
- > superblock fields rather than in-memory fields. > > Fixes: 1aa161e43106
- ("f2fs: fi [...] 
+ Content preview:  On 05/27, Chao Yu wrote: > Introduce alloc_next_free_block()
+ to wrap below openned codes: > > blkaddr = get_sb(main_blkaddr) + >
+ c.cur_seg[curseg_type]
+ * c.blks_per_seg + > c.curseg_offset[curseg_type [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,8 +90,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q48xD-006wkk-S3
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: flush error flags in workqueue
+X-Headers-End: 1q493j-0000Y4-JN
+Subject: Re: [f2fs-dev] [PATCH v3 3/4] mkfs.f2fs: cleanup w/
+ alloc_next_free_block()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,37 +104,218 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello:
-
-This patch was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
-
-On Thu, 18 May 2023 10:14:12 +0800 you wrote:
-> In IRQ context, it wakes up workqueue to record errors into on-disk
-> superblock fields rather than in-memory fields.
+On 05/27, Chao Yu wrote:
+> Introduce alloc_next_free_block() to wrap below openned codes:
 > 
-> Fixes: 1aa161e43106 ("f2fs: fix scheduling while atomic in decompression path")
-> Fixes: 95fa90c9e5a7 ("f2fs: support recording errors into superblock")
+> 	blkaddr = get_sb(main_blkaddr) +
+> 			c.cur_seg[curseg_type] * c.blks_per_seg +
+> 			c.curseg_offset[curseg_type];
+> 
+> Meanwhile add curseg_offset field in f2fs_configuration to record
+> last blkaddr in each log.
+> 
 > Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+> v3:
+> - rebase the code
+>  include/f2fs_fs.h  |   2 +
+>  mkfs/f2fs_format.c | 101 +++++++++++++++++++--------------------------
+>  2 files changed, 45 insertions(+), 58 deletions(-)
 > 
-> [...]
+> diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
+> index 8475645..05d27ba 100644
+> --- a/include/f2fs_fs.h
+> +++ b/include/f2fs_fs.h
+> @@ -603,6 +603,8 @@ struct f2fs_configuration {
+>  
+>  	/* compression support for sload.f2fs */
+>  	compress_config_t compress;
+> +
+> +	block_t curseg_offset[6];
+>  };
+>  
+>  #ifdef CONFIG_64BIT
+> diff --git a/mkfs/f2fs_format.c b/mkfs/f2fs_format.c
+> index 620f779..2ca5f48 100644
+> --- a/mkfs/f2fs_format.c
+> +++ b/mkfs/f2fs_format.c
+> @@ -1230,11 +1230,24 @@ static int f2fs_discard_obsolete_dnode(void)
+>  }
+>  #endif
+>  
+> +static block_t alloc_next_free_block(int curseg_type, int blkcnt)
+> +{
+> +	block_t blkaddr;
+> +
+> +	blkaddr = get_sb(main_blkaddr) +
+> +		c.cur_seg[curseg_type] * c.blks_per_seg +
+> +		c.curseg_offset[curseg_type];
+> +
+> +	c.curseg_offset[curseg_type] += blkcnt;
+> +
+> +	return blkaddr;
+> +}
+> +
+>  static int f2fs_write_root_inode(void)
+>  {
+>  	struct f2fs_node *raw_node = NULL;
+> -	uint64_t data_blk_nor;
+> -	uint64_t main_area_node_seg_blk_offset = 0;
+> +	block_t data_blkaddr;
+> +	block_t node_blkaddr;
+>  
+>  	raw_node = calloc(F2FS_BLKSIZE, 1);
+>  	if (raw_node == NULL) {
+> @@ -1248,24 +1261,15 @@ static int f2fs_write_root_inode(void)
+>  	if (c.lpf_ino)
+>  		raw_node->i.i_links = cpu_to_le32(3);
+>  
+> -	raw_node->footer.next_blkaddr = cpu_to_le32(
+> -			get_sb(main_blkaddr) +
+> -			c.cur_seg[CURSEG_HOT_NODE] *
+> -			c.blks_per_seg + 1);
+> -
+> -	data_blk_nor = get_sb(main_blkaddr) +
+> -		c.cur_seg[CURSEG_HOT_DATA] * c.blks_per_seg;
+> -	raw_node->i.i_addr[get_extra_isize(raw_node)] = cpu_to_le32(data_blk_nor);
+> -
+> -	main_area_node_seg_blk_offset = get_sb(main_blkaddr);
+> -	main_area_node_seg_blk_offset += c.cur_seg[CURSEG_HOT_NODE] *
+> -					c.blks_per_seg;
+> -
+> -	DBG(1, "\tWriting root inode (hot node), %x %x %x at offset 0x%08"PRIu64"\n",
+> -			get_sb(main_blkaddr),
+> -			c.cur_seg[CURSEG_HOT_NODE],
+> -			c.blks_per_seg, main_area_node_seg_blk_offset);
+> -	if (write_inode(raw_node, main_area_node_seg_blk_offset) < 0) {
+> +	data_blkaddr = alloc_next_free_block(CURSEG_HOT_DATA, 1);
+> +	raw_node->i.i_addr[get_extra_isize(raw_node)] =
+> +				cpu_to_le32(data_blkaddr);
+> +
+> +	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE, 1);
+> +	raw_node->footer.next_blkaddr = cpu_to_le32(node_blkaddr + 1);
+> +
+> +	DBG(1, "\tWriting root inode (hot node), offset 0x%x\n", node_blkaddr);
+> +	if (write_inode(raw_node, node_blkaddr) < 0) {
+>  		MSG(1, "\tError: While writing the raw_node to disk!!!\n");
+>  		free(raw_node);
+>  		return -1;
+> @@ -1349,8 +1353,8 @@ static int f2fs_write_default_quota(int qtype, unsigned int blkaddr,
+>  static int f2fs_write_qf_inode(int qtype, int offset)
+>  {
+>  	struct f2fs_node *raw_node = NULL;
+> -	uint64_t data_blk_nor;
+> -	uint64_t main_area_node_seg_blk_offset = 0;
+> +	block_t data_blkaddr;
+> +	block_t node_blkaddr;
+>  	__le32 raw_id;
+>  	int i;
+>  
+> @@ -1366,14 +1370,10 @@ static int f2fs_write_qf_inode(int qtype, int offset)
 
-Here is the summary with links:
-  - [f2fs-dev,v3] f2fs: flush error flags in workqueue
-    https://git.kernel.org/jaegeuk/f2fs/c/36e63b159dd6
+I removed "int offset" which os obsolete. Please check dev-test branch.
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
-
+>  	raw_node->i.i_blocks = cpu_to_le64(1 + QUOTA_DATA(qtype));
+>  	raw_node->i.i_flags = F2FS_NOATIME_FL | F2FS_IMMUTABLE_FL;
+>  
+> -	raw_node->footer.next_blkaddr = cpu_to_le32(
+> -			get_sb(main_blkaddr) +
+> -			c.cur_seg[CURSEG_HOT_NODE] *
+> -			c.blks_per_seg + 1 + qtype + 1);
+> +	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE, 1);
+> +	raw_node->footer.next_blkaddr = cpu_to_le32(node_blkaddr + 1);
+>  
+> -	data_blk_nor = get_sb(main_blkaddr) +
+> -		c.cur_seg[CURSEG_HOT_DATA] * c.blks_per_seg + 1
+> -		+ offset * QUOTA_DATA(i);
+> +	data_blkaddr = alloc_next_free_block(CURSEG_HOT_DATA, QUOTA_DATA(i));
+>  
+>  	if (qtype == 0)
+>  		raw_id = raw_node->i.i_uid;
+> @@ -1385,24 +1385,17 @@ static int f2fs_write_qf_inode(int qtype, int offset)
+>  		ASSERT(0);
+>  
+>  	/* write two blocks */
+> -	if (f2fs_write_default_quota(qtype, data_blk_nor, raw_id)) {
+> +	if (f2fs_write_default_quota(qtype, data_blkaddr, raw_id)) {
+>  		free(raw_node);
+>  		return -1;
+>  	}
+>  
+>  	for (i = 0; i < QUOTA_DATA(qtype); i++)
+>  		raw_node->i.i_addr[get_extra_isize(raw_node) + i] =
+> -					cpu_to_le32(data_blk_nor + i);
+> +					cpu_to_le32(data_blkaddr + i);
+>  
+> -	main_area_node_seg_blk_offset = get_sb(main_blkaddr);
+> -	main_area_node_seg_blk_offset += c.cur_seg[CURSEG_HOT_NODE] *
+> -					c.blks_per_seg + offset + 1;
+> -
+> -	DBG(1, "\tWriting quota inode (hot node), %x %x %x at offset 0x%08"PRIu64"\n",
+> -			get_sb(main_blkaddr),
+> -			c.cur_seg[CURSEG_HOT_NODE],
+> -			c.blks_per_seg, main_area_node_seg_blk_offset);
+> -	if (write_inode(raw_node, main_area_node_seg_blk_offset) < 0) {
+> +	DBG(1, "\tWriting quota inode (hot node), offset 0x%x\n", node_blkaddr);
+> +	if (write_inode(raw_node, node_blkaddr) < 0) {
+>  		MSG(1, "\tError: While writing the raw_node to disk!!!\n");
+>  		free(raw_node);
+>  		return -1;
+> @@ -1492,8 +1485,8 @@ static block_t f2fs_add_default_dentry_lpf(void)
+>  static int f2fs_write_lpf_inode(void)
+>  {
+>  	struct f2fs_node *raw_node;
+> -	uint64_t main_area_node_seg_blk_offset;
+> -	block_t data_blk_nor;
+> +	block_t data_blkaddr;
+> +	block_t node_blkaddr;
+>  	int err = 0;
+>  
+>  	ASSERT(c.lpf_ino);
+> @@ -1510,28 +1503,20 @@ static int f2fs_write_lpf_inode(void)
+>  	raw_node->i.i_namelen = le32_to_cpu(strlen(LPF));
+>  	memcpy(raw_node->i.i_name, LPF, strlen(LPF));
+>  
+> -	raw_node->footer.next_blkaddr = cpu_to_le32(
+> -			get_sb(main_blkaddr) +
+> -			c.cur_seg[CURSEG_HOT_NODE] * c.blks_per_seg +
+> -			1 + c.quota_inum + 1);
+> +	node_blkaddr = alloc_next_free_block(CURSEG_HOT_NODE, 1);
+> +	raw_node->footer.next_blkaddr = cpu_to_le32(node_blkaddr + 1);
+>  
+> -	data_blk_nor = f2fs_add_default_dentry_lpf();
+> -	if (data_blk_nor == 0) {
+> +	data_blkaddr = f2fs_add_default_dentry_lpf();
+> +	if (data_blkaddr == 0) {
+>  		MSG(1, "\tError: Failed to add default dentries for lost+found!!!\n");
+>  		err = -1;
+>  		goto exit;
+>  	}
+> -	raw_node->i.i_addr[get_extra_isize(raw_node)] = cpu_to_le32(data_blk_nor);
+> -
+> -	main_area_node_seg_blk_offset = get_sb(main_blkaddr);
+> -	main_area_node_seg_blk_offset += c.cur_seg[CURSEG_HOT_NODE] *
+> -		c.blks_per_seg + c.quota_inum + 1;
+> +	raw_node->i.i_addr[get_extra_isize(raw_node)] = cpu_to_le32(data_blkaddr);
+>  
+> -	DBG(1, "\tWriting lost+found inode (hot node), %x %x %x at offset 0x%08"PRIu64"\n",
+> -			get_sb(main_blkaddr),
+> -			c.cur_seg[CURSEG_HOT_NODE],
+> -			c.blks_per_seg, main_area_node_seg_blk_offset);
+> -	if (write_inode(raw_node, main_area_node_seg_blk_offset) < 0) {
+> +	DBG(1, "\tWriting lost+found inode (hot node), offset 0x%x\n",
+> +								node_blkaddr);
+> +	if (write_inode(raw_node, node_blkaddr) < 0) {
+>  		MSG(1, "\tError: While writing the raw_node to disk!!!\n");
+>  		err = -1;
+>  		goto exit;
+> -- 
+> 2.40.1
 
 
 _______________________________________________
