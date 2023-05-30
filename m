@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60EDE71712F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 01:03:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71DE17171BD
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 01:33:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q48Nc-0005j9-Aa;
-	Tue, 30 May 2023 23:03:52 +0000
+	id 1q48pr-0004iG-6o;
+	Tue, 30 May 2023 23:33:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1q48NP-0005ix-Kq
+ (envelope-from <jaegeuk@kernel.org>) id 1q48pk-0004iA-2W
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 May 2023 23:03:42 +0000
+ Tue, 30 May 2023 23:32:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cQaU449aOlM8AxJqG5IQzWPy/zPkKpvV3Xe0nime3xc=; b=GtveQpUvpBezm0EwqpIKL1NhvO
- viwK4EJWI68GjXLJ4uNZFsuOWWZXgNbsfC5qLcPFxL5qbBfDbQC5Tqu9g0Jqr6IwE4ZQtsm3c7oYo
- tQxJPQq+i5HzoOoHMLi2B/1lnr/z3PTRPM2feV4zlH3/F7AtXIKL0it+ZDdSWHb9Hh3I=;
+ bh=vEzkXBQo/b7PQnyCX67HVTT4YmASqWFxkqgWXgu3lfg=; b=a5UYZ3JSOQ7luWx7rw592F/WCd
+ rnwYc2dU+3eWNXYqFJ0SUIdaPmvplrdtcie2qgnAkhBVw7DVy5Znqf1CPnx7QjOsaQBekxmz3D/7h
+ /3bKbraQ5QX0dg+9ECoEMEJqtO/BLS1AutVbBbAOOzDOWmKk+WLXmWtF4nl8tIHsGvgw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,40 +31,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cQaU449aOlM8AxJqG5IQzWPy/zPkKpvV3Xe0nime3xc=; b=jR1OCUrJwxn/+CFed5tIQJAryH
- G1PLirOtKfPVLpt56MU8ckg/fKcE7APpQ7XYwVbWdPuo+0RlYa9obw6+ID9OSJw9urNzVHprMN0wJ
- 3+yuYMRjNT9Yg+9nUfM3XkT5iZF26ImRyPvKNJhkbZBTZalkAgaDdgQSlrDEDIZE2ULk=;
+ bh=vEzkXBQo/b7PQnyCX67HVTT4YmASqWFxkqgWXgu3lfg=; b=idKqEdIok3Vh4LMkfB2g8WaUh0
+ u2ZaYh+uCcqjHdhbafqWANi6MMD2pllSMFcwFh83OtHt3/F0AFebdQosh7rTKApreS8K2DxTf6a86
+ yjBacUhg0Zr7FExCBh+5jx6/3Xekvq5Sk/W+3E4MqyWzOq8iw4arjdawgpsDOafpgIEI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q48NN-006vfn-4g for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 May 2023 23:03:39 +0000
+ id 1q48pW-0000Bm-OM for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 30 May 2023 23:32:49 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id E8CA061728
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 30 May 2023 23:03:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 429F3C433EF;
- Tue, 30 May 2023 23:03:30 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5C4E660F08;
+ Tue, 30 May 2023 23:32:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B92AC433EF;
+ Tue, 30 May 2023 23:32:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685487810;
- bh=0Thf2vGiVZB40K3tYyJIw8Ovlj3DnYCkuF6fIzUtijY=;
+ s=k20201202; t=1685489556;
+ bh=JXz0xI70zuYpYZsltrSyZalooGB27OtEMdKKeiDcQNU=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=KQ/ilYy34kkEJKDalLo+4Y4jHP7NpCUcWH7lLt8EB6FdyOHw+t3vK1RUQfD/aSvZJ
- hIQzlvcFfE2ZWwGGmduwLwgaUdeMISjkVxmD4LtvIjSvY0jPZNfBn3zTaPKPmv5pnU
- jyqr3hb5R6dBSQxRFHTVMLxLxUq7K7fQ6OrVa1QHqdX/KBKtDpQJIQurXU5PGn0nKd
- VyvPD2nii0125SpdktRH8AEWD8bLZXy2My6rAD63hOubjD7R8gKPmf/FI3EN6NM/eo
- /R4bwsNiKUaF0MOlCKntioy5rFSu5i6E5x476i26oYTioVbZkBZxiIXmXB1zL5H05g
- bk4f93Ejp0QgQ==
-Date: Tue, 30 May 2023 16:03:28 -0700
+ b=tXcGh5VxJseqUJCs/l1tb6YMnkYiaCyHEJTbJqUThtjcDapGkcJac485k3iwsuBrJ
+ SdqnqflN+cQvNFYN+X1ewgC1UEYScO3QvVLLxMZvRn/P+VzwJmuG3jsV5DcJnqPR9e
+ veyKyUJlQCnr5v3vsOg+e9djeOGIprE4lt9SJ3sF8g/IsnW/3PeQHDkL06aKLTG5ml
+ zjQwucwHtmy5cbW9CStYnaZd+lGyaZGsgaGWmEpKpAvISP+5LcTF2Q8QAHvuOqbQpu
+ J//q6QKPKLT4b9ZC0qupD41JPo8h6SBsGiv6sx4mL1auDdcJb6WAPzzwg6Md8zlXel
+ wVzjEwbX49w6g==
+Date: Tue, 30 May 2023 16:32:34 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZHaAwCIiQJI+SYe9@google.com>
-References: <20230529102755.2547478-1-chao@kernel.org>
+To: Wu Bo <bo.wu@vivo.com>
+Message-ID: <ZHaHknKmSQIdQzBC@google.com>
+References: <20230530012118.74228-1-bo.wu@vivo.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230529102755.2547478-1-chao@kernel.org>
+In-Reply-To: <20230530012118.74228-1-bo.wu@vivo.com>
 X-Spam-Score: -5.4 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,9 +71,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 05/29, Chao Yu wrote: > This patch does below changes:
- > - clean up check condition > - add sanity check for i_extra_isize w/ lower
- boundary > - add sanity check for feature dependency > - check i_ [...] 
+ Content preview:  On 05/30, Wu Bo wrote: > The NULL return of 'd_splice_alias'
+ dosen't mean error. Thus the > successful case will also return NULL, which
+ makes the tracepoint always > print 'err=-ENOENT'. > > Signed-o [...] 
  Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,8 +90,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q48NN-006vfn-4g
-Subject: Re: [f2fs-dev] [PATCH] f2fs: do more sanity check on inode
+X-Headers-End: 1q48pW-0000Bm-OM
+Subject: Re: [f2fs-dev] [PATCH v2 1/1] f2fs: fix args passed to
+ trace_f2fs_lookup_end
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,171 +104,55 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: wubo.oduw@gmail.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/29, Chao Yu wrote:
-> This patch does below changes:
-> - clean up check condition
-> - add sanity check for i_extra_isize w/ lower boundary
-> - add sanity check for feature dependency
-> - check i_extra_isize only if f2fs_has_extra_attr() is true
-
-Could you describe what is the current problem?
-
+On 05/30, Wu Bo wrote:
+> The NULL return of 'd_splice_alias' dosen't mean error. Thus the
+> successful case will also return NULL, which makes the tracepoint always
+> print 'err=-ENOENT'.
 > 
-> Signed-off-by: Chao Yu <chao@kernel.org>
+> Signed-off-by: Wu Bo <bo.wu@vivo.com>
 > ---
->  fs/f2fs/f2fs.h  |   2 +
->  fs/f2fs/inode.c | 108 +++++++++++++++++++++++++++++++-----------------
->  2 files changed, 72 insertions(+), 38 deletions(-)
+>  fs/f2fs/namei.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 > 
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index 9bd83fb28439..11c0bb12c686 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -3424,6 +3424,8 @@ static inline int get_inline_xattr_addrs(struct inode *inode)
->  	((is_inode_flag_set(i, FI_ACL_MODE)) ? \
->  	 (F2FS_I(i)->i_acl_mode) : ((i)->i_mode))
->  
-> +#define F2FS_MIN_EXTRA_ATTR_SIZE		(sizeof(__le32))
-> +
->  #define F2FS_TOTAL_EXTRA_ATTR_SIZE			\
->  	(offsetof(struct f2fs_inode, i_extra_end) -	\
->  	offsetof(struct f2fs_inode, i_extra_isize))	\
-> diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-> index 0a1748444329..1e49009831c1 100644
-> --- a/fs/f2fs/inode.c
-> +++ b/fs/f2fs/inode.c
-> @@ -300,41 +300,79 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
->  		return false;
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index 77a71276ecb1..0c5e4c424eab 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+> @@ -576,8 +576,9 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
 >  	}
->  
-> -	if (f2fs_sb_has_flexible_inline_xattr(sbi)
-> -			&& !f2fs_has_extra_attr(inode)) {
-> -		set_sbi_flag(sbi, SBI_NEED_FSCK);
-> -		f2fs_warn(sbi, "%s: corrupted inode ino=%lx, run fsck to fix.",
-> -			  __func__, inode->i_ino);
-> -		return false;
-> -	}
-> -
-> -	if (f2fs_has_extra_attr(inode) &&
-> -			!f2fs_sb_has_extra_attr(sbi)) {
-> -		set_sbi_flag(sbi, SBI_NEED_FSCK);
-> -		f2fs_warn(sbi, "%s: inode (ino=%lx) is with extra_attr, but extra_attr feature is off",
-> -			  __func__, inode->i_ino);
-> -		return false;
-> -	}
-> -
-> -	if (fi->i_extra_isize > F2FS_TOTAL_EXTRA_ATTR_SIZE ||
-> +	if (f2fs_has_extra_attr(inode)) {
-> +		if (!f2fs_sb_has_extra_attr(sbi)) {
-> +			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> +			f2fs_warn(sbi, "%s: inode (ino=%lx) is with extra_attr, but extra_attr feature is off",
-> +				  __func__, inode->i_ino);
-> +			return false;
-> +		}
-> +		if (fi->i_extra_isize > F2FS_TOTAL_EXTRA_ATTR_SIZE ||
-> +			fi->i_extra_isize < F2FS_MIN_EXTRA_ATTR_SIZE ||
->  			fi->i_extra_isize % sizeof(__le32)) {
-> -		set_sbi_flag(sbi, SBI_NEED_FSCK);
-> -		f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_extra_isize: %d, max: %zu",
-> -			  __func__, inode->i_ino, fi->i_extra_isize,
-> -			  F2FS_TOTAL_EXTRA_ATTR_SIZE);
-> -		return false;
-> +			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> +			f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_extra_isize: %d, max: %zu",
-> +				  __func__, inode->i_ino, fi->i_extra_isize,
-> +				  F2FS_TOTAL_EXTRA_ATTR_SIZE);
-> +			return false;
-> +		}
-> +		if (f2fs_sb_has_flexible_inline_xattr(sbi) &&
-> +			f2fs_has_inline_xattr(inode) &&
-> +			(!fi->i_inline_xattr_size ||
-> +			fi->i_inline_xattr_size > MAX_INLINE_XATTR_SIZE)) {
-> +			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> +			f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_inline_xattr_size: %d, max: %zu",
-> +				  __func__, inode->i_ino, fi->i_inline_xattr_size,
-> +				  MAX_INLINE_XATTR_SIZE);
-> +			return false;
-> +		}
-> +		if (f2fs_sb_has_compression(sbi) &&
-> +			fi->i_flags & F2FS_COMPR_FL &&
-> +			F2FS_FITS_IN_INODE(ri, fi->i_extra_isize,
-> +						i_compress_flag)) {
-> +			if (!sanity_check_compress_inode(inode, ri))
-> +				return false;
-> +		}
-> +	} else {
-> +		if (f2fs_sb_has_flexible_inline_xattr(sbi)) {
-> +			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> +			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, run fsck to fix.",
-> +				  __func__, inode->i_ino);
-> +			return false;
-> +		}
->  	}
->  
-> -	if (f2fs_has_extra_attr(inode) &&
-> -		f2fs_sb_has_flexible_inline_xattr(sbi) &&
-> -		f2fs_has_inline_xattr(inode) &&
-> -		(!fi->i_inline_xattr_size ||
-> -		fi->i_inline_xattr_size > MAX_INLINE_XATTR_SIZE)) {
-> -		set_sbi_flag(sbi, SBI_NEED_FSCK);
-> -		f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_inline_xattr_size: %d, max: %zu",
-> -			  __func__, inode->i_ino, fi->i_inline_xattr_size,
-> -			  MAX_INLINE_XATTR_SIZE);
-> -		return false;
-> +	if (!f2fs_sb_has_extra_attr(sbi)) {
-> +		if (f2fs_sb_has_project_quota(sbi)) {
-> +			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> +			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
-> +				  __func__, inode->i_ino, F2FS_FEATURE_PRJQUOTA);
-> +			return false;
-> +		}
-> +		if (f2fs_sb_has_inode_chksum(sbi)) {
-> +			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> +			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
-> +				  __func__, inode->i_ino, F2FS_FEATURE_INODE_CHKSUM);
-> +			return false;
-> +		}
-> +		if (f2fs_sb_has_flexible_inline_xattr(sbi)) {
-> +			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> +			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
-> +				  __func__, inode->i_ino, F2FS_FEATURE_FLEXIBLE_INLINE_XATTR);
-> +			return false;
-> +		}
-> +		if (f2fs_sb_has_inode_crtime(sbi)) {
-> +			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> +			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
-> +				  __func__, inode->i_ino, F2FS_FEATURE_INODE_CRTIME);
-> +			return false;
-> +		}
-> +		if (f2fs_sb_has_compression(sbi)) {
-> +			set_sbi_flag(sbi, SBI_NEED_FSCK);
-> +			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
-> +				  __func__, inode->i_ino, F2FS_FEATURE_COMPRESSION);
-> +			return false;
-> +		}
->  	}
->  
->  	if (f2fs_sanity_check_inline_data(inode)) {
-> @@ -358,12 +396,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
->  		return false;
->  	}
->  
-> -	if (f2fs_has_extra_attr(inode) && f2fs_sb_has_compression(sbi) &&
-> -			fi->i_flags & F2FS_COMPR_FL &&
-> -			F2FS_FITS_IN_INODE(ri, fi->i_extra_isize,
-> -						i_compress_flag))
-> -		return sanity_check_compress_inode(inode, ri);
-> -
->  	return true;
->  }
->  
+>  #endif
+>  	new = d_splice_alias(inode, dentry);
+> -	err = PTR_ERR_OR_ZERO(new);
+> -	trace_f2fs_lookup_end(dir, dentry, ino, !new ? -ENOENT : err);
+> +	if (IS_ERR(new))
+> +		err = PTR_ERR(new);
+> +	trace_f2fs_lookup_end(dir, new ? new : dentry, ino, err);
+
+Again, new can be an error pointer, and the previous err was supposed to be
+zero or -ENOENT.
+
+case 1) dentry exists: err (0) with new (NULL) --> dentry, err=0
+case 2) dentry exists: err (0) with new (VALID) --> new, err=0
+case 3) dentry exists: err (0) with new (ERR) --> dentry, err=ERR
+case 4) no dentry exists: err (-ENOENT) with new (NULL) --> dentry, err=-ENOENT
+case 4) no dentry exists: err (-ENOENT) with new (VALID) --> new, err=-ENOENT
+case 5) no dentry exists: err (-ENOENT) with new (ERR) --> dentry, err=ERR
+
+	trace_f2fs_lookup_end(dir, !IS_ERR_OR_NULL(new) ? new : dentry,
+				ino, IS_ERR(new) ? PTR_ERR(new) : err);
+
+
+>  	return new;
+>  out_iput:
+>  	iput(inode);
 > -- 
-> 2.40.1
+> 2.35.3
 
 
 _______________________________________________
