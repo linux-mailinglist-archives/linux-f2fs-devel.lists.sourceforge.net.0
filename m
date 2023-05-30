@@ -2,68 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71DE17171BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 01:33:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC4877171DA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 01:40:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q48pr-0004iG-6o;
-	Tue, 30 May 2023 23:33:03 +0000
+	id 1q48xD-0008Im-K9;
+	Tue, 30 May 2023 23:40:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1q48pk-0004iA-2W
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1q48x8-0008IP-Fi
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 May 2023 23:32:56 +0000
+ Tue, 30 May 2023 23:40:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vEzkXBQo/b7PQnyCX67HVTT4YmASqWFxkqgWXgu3lfg=; b=a5UYZ3JSOQ7luWx7rw592F/WCd
- rnwYc2dU+3eWNXYqFJ0SUIdaPmvplrdtcie2qgnAkhBVw7DVy5Znqf1CPnx7QjOsaQBekxmz3D/7h
- /3bKbraQ5QX0dg+9ECoEMEJqtO/BLS1AutVbBbAOOzDOWmKk+WLXmWtF4nl8tIHsGvgw=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=1BU7MJxzrsOKKpyDhcJcdfbQgku507UtP/99zC/M/EE=; b=a7+jGO5NUA0g22tsTNV4uc97OS
+ sgBlrO2m/XfZmiCU85dhVaxYa1Hgqnma7brJZCGdAMW8W8/c8C7n5qHnicXu+UQx21AyiiuVkDXtn
+ LCqZAiROIPV2hEGiB/mnKPc3vcFLUboxt8zl0gd/SQUWHKxvhP+Xu/5fR4khJhcyFAfA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=vEzkXBQo/b7PQnyCX67HVTT4YmASqWFxkqgWXgu3lfg=; b=idKqEdIok3Vh4LMkfB2g8WaUh0
- u2ZaYh+uCcqjHdhbafqWANi6MMD2pllSMFcwFh83OtHt3/F0AFebdQosh7rTKApreS8K2DxTf6a86
- yjBacUhg0Zr7FExCBh+5jx6/3Xekvq5Sk/W+3E4MqyWzOq8iw4arjdawgpsDOafpgIEI=;
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=1BU7MJxzrsOKKpyDhcJcdfbQgku507UtP/99zC/M/EE=; b=X
+ O5DdDKlMVGw855jZVEfaJOsVBAFJAalFtta5GLyVe7XQ9EIFok7OBHCpkzb0b8DszVef088R5mJQg
+ pRG2rwfE/l3RMOO+KdjeoOl0jcFCrPlgx37C/ypGQPQbEFYuPMRytVZY4PX0gYv25NTnzZQ8IHyzf
+ atgVjvHgdIjGGJyc=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q48pW-0000Bm-OM for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 May 2023 23:32:49 +0000
+ id 1q48x4-006wkL-1g for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 30 May 2023 23:40:34 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5C4E660F08;
- Tue, 30 May 2023 23:32:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B92AC433EF;
- Tue, 30 May 2023 23:32:36 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id A39F5632F3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 30 May 2023 23:40:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 17431C433D2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 30 May 2023 23:40:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685489556;
- bh=JXz0xI70zuYpYZsltrSyZalooGB27OtEMdKKeiDcQNU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=tXcGh5VxJseqUJCs/l1tb6YMnkYiaCyHEJTbJqUThtjcDapGkcJac485k3iwsuBrJ
- SdqnqflN+cQvNFYN+X1ewgC1UEYScO3QvVLLxMZvRn/P+VzwJmuG3jsV5DcJnqPR9e
- veyKyUJlQCnr5v3vsOg+e9djeOGIprE4lt9SJ3sF8g/IsnW/3PeQHDkL06aKLTG5ml
- zjQwucwHtmy5cbW9CStYnaZd+lGyaZGsgaGWmEpKpAvISP+5LcTF2Q8QAHvuOqbQpu
- J//q6QKPKLT4b9ZC0qupD41JPo8h6SBsGiv6sx4mL1auDdcJb6WAPzzwg6Md8zlXel
- wVzjEwbX49w6g==
-Date: Tue, 30 May 2023 16:32:34 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Wu Bo <bo.wu@vivo.com>
-Message-ID: <ZHaHknKmSQIdQzBC@google.com>
-References: <20230530012118.74228-1-bo.wu@vivo.com>
+ s=k20201202; t=1685490024;
+ bh=tfU/tlYKt3H/ibXUHIek68Fj3WcWVuMg9rz2soi3TvA=;
+ h=Subject:From:Date:To:From;
+ b=CNsSVwIJ4d9Tlvfa5VbnbveU7aUFmuS75TCA2q6ekU5vCKXhvCB0qRv8VedfK7ygS
+ wRE7VVE6bgG6D7LIsTN0Y/ixWE3UNX0r11SUoWsp8+Fu5O0iNu4/5L7ySpC8GaFVrG
+ /sMjKvl+PtRMhGx4lKsHiJ8GS/4Fd7NpIBZZhetr4/plpsa7DuVoxyY98e7r2yiL9V
+ XNGSFPvumvKXR8Me7ijVHDd0alfiH1zo9W7iy1eRwRfxnbxaE+EDjp3WbX456U3bZW
+ QYHi5yb7ieUqb0+2EqzKx0/KC2d5QUDQUru0pdb07ZSprCBrotGw+7DvfSCCPzg1Ao
+ O9eJSDuF0kxWw==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ EF81EE52BF6 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 30 May 2023 23:40:23 +0000 (UTC)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230530012118.74228-1-bo.wu@vivo.com>
+From: patchwork-bot+f2fs@kernel.org
+Message-Id: <168549002388.8773.10561627258043389780.git-patchwork-summary@kernel.org>
+Date: Tue, 30 May 2023 23:40:23 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -5.4 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -71,16 +75,19 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 05/30, Wu Bo wrote: > The NULL return of 'd_splice_alias'
- dosen't mean error. Thus the > successful case will also return NULL, which
- makes the tracepoint always > print 'err=-ENOENT'. > > Signed-o [...] 
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev] f2fs: don't
+ reset unchangable mount option in f2fs_remount() Submitter: Chao Yu
+ <chao@kernel.org>
+ Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/ [...] 
  Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -90,9 +97,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q48pW-0000Bm-OM
-Subject: Re: [f2fs-dev] [PATCH v2 1/1] f2fs: fix args passed to
- trace_f2fs_lookup_end
+X-Headers-End: 1q48x4-006wkL-1g
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,55 +110,59 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: wubo.oduw@gmail.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 05/30, Wu Bo wrote:
-> The NULL return of 'd_splice_alias' dosen't mean error. Thus the
-> successful case will also return NULL, which makes the tracepoint always
-> print 'err=-ENOENT'.
-> 
-> Signed-off-by: Wu Bo <bo.wu@vivo.com>
-> ---
->  fs/f2fs/namei.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-> index 77a71276ecb1..0c5e4c424eab 100644
-> --- a/fs/f2fs/namei.c
-> +++ b/fs/f2fs/namei.c
-> @@ -576,8 +576,9 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
->  	}
->  #endif
->  	new = d_splice_alias(inode, dentry);
-> -	err = PTR_ERR_OR_ZERO(new);
-> -	trace_f2fs_lookup_end(dir, dentry, ino, !new ? -ENOENT : err);
-> +	if (IS_ERR(new))
-> +		err = PTR_ERR(new);
-> +	trace_f2fs_lookup_end(dir, new ? new : dentry, ino, err);
+Hello:
 
-Again, new can be an error pointer, and the previous err was supposed to be
-zero or -ENOENT.
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-case 1) dentry exists: err (0) with new (NULL) --> dentry, err=0
-case 2) dentry exists: err (0) with new (VALID) --> new, err=0
-case 3) dentry exists: err (0) with new (ERR) --> dentry, err=ERR
-case 4) no dentry exists: err (-ENOENT) with new (NULL) --> dentry, err=-ENOENT
-case 4) no dentry exists: err (-ENOENT) with new (VALID) --> new, err=-ENOENT
-case 5) no dentry exists: err (-ENOENT) with new (ERR) --> dentry, err=ERR
+Patch: [f2fs-dev] f2fs: don't reset unchangable mount option in f2fs_remount()
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=750045
+  Lore link: https://lore.kernel.org/r/20230523035822.578123-1-chao@kernel.org
 
-	trace_f2fs_lookup_end(dir, !IS_ERR_OR_NULL(new) ? new : dentry,
-				ino, IS_ERR(new) ? PTR_ERR(new) : err);
+Patch: [f2fs-dev,v6] f2fs: add async reset zone command support
+  Submitter: Daejun Park <daejun7.park@samsung.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=745732
+  Lore link: https://lore.kernel.org/r/20230508081042epcms2p8a637deae7de1829f54614e09d5fde5e5@epcms2p8
+
+Patch: [f2fs-dev] f2fs: clean up w/ sbi->log_sectors_per_block
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=750226
+  Lore link: https://lore.kernel.org/r/20230523123521.67656-1-chao@kernel.org
+
+Patch: [f2fs-dev,v2] f2fs: fix to avoid NULL pointer dereference f2fs_write_end_io()
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=750061
+  Lore link: https://lore.kernel.org/r/20230523061725.650692-1-chao@kernel.org
+
+Patch: [f2fs-dev,v3] f2fs: flush error flags in workqueue
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=748719
+  Lore link: https://lore.kernel.org/r/20230518021412.2037728-1-chao@kernel.org
+
+Patch: [f2fs-dev,v3] f2fs: fix to set noatime and immutable flag for quota file
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=751537
+  Lore link: https://lore.kernel.org/r/20230527001539.3608665-1-chao@kernel.org
 
 
->  	return new;
->  out_iput:
->  	iput(inode);
-> -- 
-> 2.35.3
+Total patches: 6
+
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
 
 _______________________________________________
