@@ -2,74 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A3F37167BA
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 May 2023 17:50:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D434E717121
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 00:59:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q41cA-0001lW-FR;
-	Tue, 30 May 2023 15:50:26 +0000
+	id 1q48Iq-0003o6-Vu;
+	Tue, 30 May 2023 22:58:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <alexlu@junglejuiceinternational.com>)
- id 1q41c7-0001l4-7S for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 May 2023 15:50:23 +0000
+ (envelope-from <jaegeuk@kernel.org>) id 1q48Ip-0003ny-9n
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 30 May 2023 22:58:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Subject:Content-Transfer-Encoding:Content-Type:
- MIME-Version:Reply-To:From:Date:Message-ID:To:Sender:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aSCsmhiPmkabHKTqdM4CZYmjEPQ4oowZJCPgWc+77NA=; b=bu3Fokq6wXkahACQaaBBHZaFtA
- +ZEuBlL28OAIA8U9v4+ayjgHqoVIOqDDILJjaaCU7oAmDzK15wZjeFL1qjWFuw7rgQy61oobHueFH
- sArYi7bhBCyyEo1naRP8mmpO6VwHsWNcten5+Q00rKOzc63aNEiqVCNKQaVSKZPpRKbw=;
+ bh=L/dhWHNllEaEQXfmN2HZVi9reABIX8Y6hHzyIC5efpc=; b=TPs8WQl6K0SubZwy8FT4nsXxwF
+ Wfi0ACc9wQaQznDdxi0HZqLSXCZaI1G4T09/0MuquicaMJ9hlb3cLYlJ2H7quOnSRYTvskd3mk7Wr
+ HedHk2ofTZ/g4TMchnl9DlCyH8QseXzRP5OFXIwXwQDDExy3cNKfzI8X9/shmEvKuEI0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Subject:Content-Transfer-Encoding:Content-Type:MIME-Version:Reply-To:From
- :Date:Message-ID:To:Sender:Cc:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=aSCsmhiPmkabHKTqdM4CZYmjEPQ4oowZJCPgWc+77NA=; b=J
- RmFKR5mbqoZ7GD0+pAxmPAHSTvTsjKskdp7I9xqktOpJIvLKALP2gBsZgn/ZY1+gFCqag+9iNkpFU
- UA+pm+2RdyGvirX/ki/Y5Dv+qpqSAedXlFGN5G1eksedcfLre1wA/oeCWcO0tJ/3QpXCvcrEXtUjU
- +HFEZre0oIqNAF0U=;
-Received: from yncll.com ([69.12.91.126])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1q41c6-00042X-QI for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 May 2023 15:50:23 +0000
-To: linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <b3ba457d5499c68982b2bc2f3d232cc3@vistaprint.com>
-Date: Tue, 30 May 2023 17:18:48 +0200
-From: "Christina Bevins" <alexva@junglejuiceinternational.com>
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=L/dhWHNllEaEQXfmN2HZVi9reABIX8Y6hHzyIC5efpc=; b=eyKV9NXZDKARMdWtwp/dk7266o
+ eSGU02ALhnqZtoVvbiJysMlY+ks3KO5PJwRQD+GsQH1azdY/1j4h23gTCLMkQSOYfACRGKWnbl83U
+ BRxRaYut2KKeR9ssQmhLIXoND4qwlRPeFDVFTYnHRZovR2e9iZ2H8MZgnPOH4vlkdPK8=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1q48Ip-0007sb-Dh for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 30 May 2023 22:58:56 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 3361E60FED
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 30 May 2023 22:58:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89482C433D2;
+ Tue, 30 May 2023 22:58:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1685487528;
+ bh=zfTqgzO/JotWGyGtsN2wEF9z4IQswRPkp9lPiyR1Af4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=fqrDM8OSnY2/WmlyaywnoiN+rwkmKL1IbUNS3/c9cvsS/uXK00jGJMHieYt/Y9LwD
+ Mx36DJnO2PeTRuOm4C1h1z86TE8wMRw7eYFoCk02uNbDAQtQBU5eDkTt7r5ZL3Qeh3
+ MlqgFyVYyuc7VJI2DOz5X4snpWpqFsFWqR3XNXPpJQKD/rkcB+dASr+7+7ZZK/A9in
+ 3bJz0KdPMrHw+pmFIXbA66jMnTXqtISw2GXdfEqm7w4MCHOkK6LTk3Wbo8BbgMZzjX
+ +iWUm/hmBEVzOdRRQQvcXNIJCWulwvV5zzW+Ali11HwN0Po//dtZMtiOkdgMid19JO
+ MYIlQcDCAfvcQ==
+Date: Tue, 30 May 2023 15:58:46 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZHZ/psv3hNbP0UBK@google.com>
+References: <20230528080709.1692640-1-chao@kernel.org>
 MIME-Version: 1.0
-X-Helo-Check: bad, Forged Random Domain (yncll.com)
-X-Spam-Score: 9.0 (+++++++++)
+Content-Disposition: inline
+In-Reply-To: <20230528080709.1692640-1-chao@kernel.org>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
- has identified this incoming email as possible spam.  The original
+ has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi, I hope this email finds you well. I wanted to reach out
- to you today to discuss the possibilities of logo products and apparel for
- your business. Quick question: Who would be the best contact to discu [...]
- Content analysis details:   (9.0 points, 6.0 required)
+ Content preview:  On 05/28,
+ Chao Yu wrote: > and use le32_to_cpu() in IS_INODE().
+ > > Signed-off-by: Chao Yu <chao@kernel.org> > --- > fsck/fsck.c | 7 +++----
+ > fsck/mount.c | 4 ++-- > fsck/node.h | 3 ++- > 3 files cha [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 1.0 RCVD_IN_UCE1           RBL: IP Listed in UCEPROTECT Level 1
- [69.12.91.126 listed in dnsbl-1.uceprotect.net]
- 2.7 RCVD_IN_PSBL           RBL: Received via a relay in PSBL
- [69.12.91.126 listed in psbl.surriel.com]
- 0.7 SPF_NEUTRAL            SPF: sender does not match SPF record (neutral)
- 0.0 SPF_HELO_NEUTRAL       SPF: HELO does not match SPF record (neutral)
- 2.0 PYZOR_CHECK            Listed in Pyzor
- (https://pyzor.readthedocs.io/en/latest/)
- 2.7 FSL_BULK_SIG           Bulk signature with no Unsubscribe
-X-VA-Spam-Flag: YES
-X-Spam-Flag: YES
-X-Headers-End: 1q41c6-00042X-QI
-Subject: [f2fs-dev] [SPAM] logo products and apparel
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q48Ip-0007sb-Dh
+Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: clean up codes with IS_INODE()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,35 +103,100 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: christina@pxo2o.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SGksCgpJIGhvcGUgdGhpcyBlbWFpbCBmaW5kcyB5b3Ugd2VsbC4gSSB3YW50ZWQgdG8gcmVhY2gg
-b3V0IHRvIHlvdSB0b2RheSB0bwpkaXNjdXNzCnRoZSBwb3NzaWJpbGl0aWVzIG9mIGxvZ28gcHJv
-ZHVjdHMgYW5kIGFwcGFyZWwgZm9yIHlvdXIgYnVzaW5lc3MuClF1aWNrIHF1ZXN0aW9uOiBXaG8g
-d291bGQgYmUgdGhlIGJlc3QgY29udGFjdCB0byBkaXNjdXNzIHlvdXIgY29tcGFueSBsb2dvCnBy
-b2R1Y3RzIGFuZCBhcHBhcmVsIHN1Y2ggYXM6CgotVC1zaGlydHMKLW11Z3MKLXdhdGVyIGJvdHRs
-ZXMKLVVTQiBmbGFzaCBkcml2ZXMKLXBlbnMKLXBsdXMgMzAwLDAwMCBvdGhlciBwcm9kdWN0cyBm
-b3IgeW91ciBidXNpbmVzc+OAggoKT3VyIGNvbXBhbnkgaGFzIGJlZW4gaW4gdGhlIHByb21vdGlv
-bmFsIHByb2R1Y3RzIGluZHVzdHJ5IHNpbmNlIDIwMDMsCmFuZCB3ZSBoYXZlIGEgdmFzdCBhbW91
-bnQgb2YgZXhwZXJpZW5jZSBpbiBjcmVhdGluZyBjdXN0b20tYnJhbmRlZAptZXJjaGFuZGlzZQp0
-aGF0IGNhbiBoZWxwIHlvdSBwcm9tb3RlIHlvdXIgYnJhbmQsIGluY3JlYXNlIGN1c3RvbWVyIGxv
-eWFsdHksIGFuZCBkcml2ZQpzYWxlcy4KCldoZXRoZXIgeW914oCZcmUgbG9va2luZyB0byBjcmVh
-dGUgYSB1bmlxdWUgcHJvbW90aW9uYWwgaXRlbSBmb3IgYSB0cmFkZQpzaG93LAplbXBsb3llZSBp
-bmNlbnRpdmUgcHJvZ3JhbSwgb3IgY29ycG9yYXRlIGdpZnQsIG91ciB0ZWFtIG9mIHByb21vIHBy
-b2R1Y3QKc3BlY2lhbGlzdHMgaXMgcmVhZHkgdG8gd29yayB3aXRoIHlvdSBldmVyeSBzdGVwIG9m
-IHRoZSB3YXkuIFdl4oCZbGwgaGVscAp5b3Ugc2VsZWN0IHRoZSBwZXJmZWN0IGl0ZW1zIGZvciB5
-b3VyIGJ1c2luZXNzLCBkZXNpZ24gYW5kIGNyZWF0ZQpjdXN0b21pemVkIGxvZ29zLAphbmQgZGVs
-aXZlciB0b3AtcXVhbGl0eSBmaW5pc2hlZCBwcm9kdWN0cyByaWdodCB0byB5b3VyIGRvb3JzdGVw
-LgoKU28sIHdobyB3b3VsZCBiZSB0aGUgYmVzdCBjb250YWN0IHRvIGRpc2N1c3Mgb3VyIHdpZGUg
-cmFuZ2Ugb2YgcHJvZHVjdHMgZm9yCnlvdXIgYnVzaW5lc3M/CldlIHdvdWxkIGJlIGRlbGlnaHRl
-ZCB0byBkaXNjdXNzIGZ1cnRoZXIgaG93IG91ciBwcm9tb3Rpb25hbCBwcm9kdWN0cyBjYW4KaGVs
-cCB5b3UgaW5jcmVhc2UKYnJhbmQgYXdhcmVuZXNzIGFuZCBncm93IHlvdXIgYnVzaW5lc3MuCgpU
-aGFuayB5b3UgZm9yIHlvdXIgdGltZSwgYW5kIHdlIGxvb2sgZm9yd2FyZCB0byBoZWFyaW5nIGZy
-b20geW91IHNvb24uCgpCZXN0IHJlZ2FyZHMsCgpDaHJpc3RpbmEgQmV2aW5zClByb21vIFByb2R1
-Y3QgU3BlY2lhbGlzdAoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxp
-c3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9s
-aXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+On 05/28, Chao Yu wrote:
+> and use le32_to_cpu() in IS_INODE().
+> 
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>  fsck/fsck.c  | 7 +++----
+>  fsck/mount.c | 4 ++--
+>  fsck/node.h  | 3 ++-
+>  3 files changed, 7 insertions(+), 7 deletions(-)
+> 
+> diff --git a/fsck/fsck.c b/fsck/fsck.c
+> index e6ad71d..a4db2a3 100644
+> --- a/fsck/fsck.c
+> +++ b/fsck/fsck.c
+> @@ -247,7 +247,7 @@ static int is_valid_summary(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+>  		goto out;
+>  
+>  	/* check its block address */
+> -	if (node_blk->footer.nid == node_blk->footer.ino) {
+> +	if (IS_INODE(node_blk)) {
+>  		int ofs = get_extra_isize(node_blk);
+>  
+>  		if (ofs + ofs_in_node >= DEF_ADDRS_PER_INODE)
+> @@ -447,8 +447,7 @@ static int sanity_check_nid(struct f2fs_sb_info *sbi, u32 nid,
+>  				nid, ni->ino, le32_to_cpu(node_blk->footer.ino));
+>  		return -EINVAL;
+>  	}
+> -	if (ntype != TYPE_INODE &&
+> -			node_blk->footer.nid == node_blk->footer.ino) {
+> +	if (ntype != TYPE_INODE && IS_INODE(node_blk)) {
+>  		ASSERT_MSG("nid[0x%x] footer.nid[0x%x] footer.ino[0x%x]",
+>  				nid, le32_to_cpu(node_blk->footer.nid),
+>  				le32_to_cpu(node_blk->footer.ino));
+> @@ -3080,7 +3079,7 @@ static int fsck_reconnect_file(struct f2fs_sb_info *sbi)
+>  			ASSERT(err >= 0);
+>  
+>  			/* reconnection will restore these nodes if needed */
+> -			if (node->footer.ino != node->footer.nid) {
+> +			if (!IS_INODE(node)) {
+>  				DBG(1, "Not support non-inode node [0x%x]\n",
+>  				    nid);
+>  				continue;
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index f1fb525..90ecabf 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -2394,7 +2394,7 @@ void update_data_blkaddr(struct f2fs_sb_info *sbi, nid_t nid,
+>  	ASSERT(ret >= 0);
+>  
+>  	/* check its block address */
+> -	if (node_blk->footer.nid == node_blk->footer.ino) {
+> +	if (IS_INODE(node_blk)) {
+>  		int ofs = get_extra_isize(node_blk);
+>  
+>  		oldaddr = le32_to_cpu(node_blk->i.i_addr[ofs + ofs_in_node]);
+> @@ -2409,7 +2409,7 @@ void update_data_blkaddr(struct f2fs_sb_info *sbi, nid_t nid,
+>  	}
+>  
+>  	/* check extent cache entry */
+> -	if (node_blk->footer.nid != node_blk->footer.ino) {
+> +	if (!IS_INODE(node_blk)) {
+>  		get_node_info(sbi, le32_to_cpu(node_blk->footer.ino), &ni);
+>  
+>  		/* read inode block */
+> diff --git a/fsck/node.h b/fsck/node.h
+> index 99139b1..2ba7b8c 100644
+> --- a/fsck/node.h
+> +++ b/fsck/node.h
+> @@ -20,7 +20,8 @@
+>  
+>  static inline int IS_INODE(struct f2fs_node *node)
+
+return bool?
+
+>  {
+> -	return ((node)->footer.nid == (node)->footer.ino);
+> +	return le32_to_cpu(node->footer.ino) ==
+> +			le32_to_cpu(node->footer.nid);
+
+Again, why do we need this conversion which looks uncessary?
+
+>  }
+>  
+>  static inline unsigned int ADDRS_PER_PAGE(struct f2fs_sb_info *sbi,
+> -- 
+> 2.40.1
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
