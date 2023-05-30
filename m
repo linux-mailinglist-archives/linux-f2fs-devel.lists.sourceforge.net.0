@@ -2,115 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 838CA71562A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 May 2023 09:04:40 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2787E71602C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 May 2023 14:42:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q3tPK-0003Zx-Mh;
-	Tue, 30 May 2023 07:04:39 +0000
+	id 1q3ygD-0008MR-ND;
+	Tue, 30 May 2023 12:42:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hare@suse.de>) id 1q3tPI-0003Zq-Sm
+ (envelope-from <brauner@kernel.org>) id 1q3ygC-0008MD-1Z
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 May 2023 07:04:37 +0000
+ Tue, 30 May 2023 12:42:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YbFRVB7SjugDwurb2+tPSaTiCkkw2YVyWGYBohzc0Cs=; b=leymjVWhXXvLgK5uvsBfpo7Xwe
- t0oW3h7yo0BEv2RB85CI0GMwh8eI7s1uxI+lvH53ks7+zuSP6K86xbP/iWqo2sY3sOCIsZ4d+qepG
- PoJrAuNLrjHMA0J6ZiJ1GhaFghg5OE/F01zu6gvGgIOGwObBzDSDMavuJiGFWsWd5n6U=;
+ bh=lixrQWP3ePzK7zF6oDcDJMIYN7GfVRwlswmfib+co7o=; b=LZab4lfCJTVuj/yRVrkycixH86
+ Rqnmxj05XPjvOswlcR+7LuXAuRpvBNSfAEwdvIS3qrRO/k3UzyeIPu68Dn08HgIWcfOZS7PjdFR6u
+ OTMisxdn4Vn7X+Bc/5ztba46/rtVjSniZirsTLYHA/rf7whNf76yOia1N+zhEXw4cqIk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YbFRVB7SjugDwurb2+tPSaTiCkkw2YVyWGYBohzc0Cs=; b=DWSSzgNgvTw1YZa76/C7VGoF+y
- 1AlDwxrWnB4BhjDq+2d4VGze4U3GNMWPEo0Dbggs18NVXICFjQYOA9lPtkzdSpoH4NAkdQxIx9/Ib
- P71eFA99gv+FdT7arB7e7cZxgBd4j9OJ41njqrcILegzAWCqgqP6O6CR9OhiN6+APmJg=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q3tPH-00047r-Nr for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 May 2023 07:04:36 +0000
-Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ bh=lixrQWP3ePzK7zF6oDcDJMIYN7GfVRwlswmfib+co7o=; b=lIZ2KeEa1zEFMbovU4ivRnMQ6Q
+ fyiD+Va9ih18hc2WIaXSsxxd1Y0XHGb5b1ontvbVfElgw02yR0GCTQC/DkYKlYpTVKz2fUDoyiVNu
+ xdWB+jmqWh7F7MgC5wKAwKIZRtNSaHvWZAdIqmZUMeWfrpVfDnUbGBb3YJFkGHKaK2GM=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1q3ygC-006YMQ-42 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 30 May 2023 12:42:24 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 8161921ADD;
- Tue, 30 May 2023 07:04:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1685430269; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YbFRVB7SjugDwurb2+tPSaTiCkkw2YVyWGYBohzc0Cs=;
- b=KOcUui19VSXTBM70SnS1WG4jelThJlEYIo6okgGmeXWj1V9SWx8Um5eU1ny7nUDuOb89tc
- 9N2vTcPsfwbvtaTjlj1frP33IE/c/MfDfWQusfQ/4rRc5rfMbOENYn+aas6HHB+XNrIZaA
- GtlwnZS5+I8x3cEzCpoPqw3xN9ngqiE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1685430269;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YbFRVB7SjugDwurb2+tPSaTiCkkw2YVyWGYBohzc0Cs=;
- b=qZjdojHFqV7UHMDmrDk3tpKs0Cg5W1SY8yb0L1n6dqBYsp3ZX524mkSpcxMRz9CIjRYr7i
- 6ziHSwv44xY7l9Dg==
-Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id D23011341B;
- Tue, 30 May 2023 07:04:28 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap1.suse-dmz.suse.de with ESMTPSA id DkPiMfyfdWRrdAAAGKfGzw
- (envelope-from <hare@suse.de>); Tue, 30 May 2023 07:04:28 +0000
-Message-ID: <9d7b392d-727b-1744-90d0-526b61dcfccf@suse.de>
-Date: Tue, 30 May 2023 09:04:28 +0200
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B761762F7C;
+ Tue, 30 May 2023 12:42:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78B3CC433D2;
+ Tue, 30 May 2023 12:42:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1685450538;
+ bh=AjbhKWnLkbzSGImSCtxRr31JpRn/bFy4QpGd/SOJtsQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=U+6p+TL98fxRHUAbLkCHzfVMO5xsp5WqmINUupyMMLssUcIgc7Kmxv+V5Kds/fS0N
+ yzdgl57dIZFTnAnMYhyai0TY9oiFNDAeL90OBvAgWMy8D7OVhPQfEttMLr8iPJCiJa
+ PdOkheBNknMRnIRgb67UOyGSZX4jrtc6jAD6hFbXNk9vZfqEQi6Jkd/SIVZf0VVWcY
+ TDax/ezF+3aGAVkJzc+V/S2laopkDQr19jiOqZOAfD6tWfhr9herMBemtwqsN43Oyk
+ fqM1pNJGwLAhDlCQ0WyBCzAlWxBBawRN6NTDWgG2e5AfzdYsZQ/b1Bkm6gyqiAMOp9
+ Gg6KXHzh3jOkQ==
+Date: Tue, 30 May 2023 14:42:07 +0200
+From: Christian Brauner <brauner@kernel.org>
+To: Jan Kara <jack@suse.cz>
+Message-ID: <20230530-darauf-nordost-4e631cd8f1d0@brauner>
+References: <20230525100654.15069-1-jack@suse.cz>
+ <20230525101624.15814-4-jack@suse.cz>
+ <20230526-polarstern-herrichten-32fc46c63bfc@brauner>
+ <20230529124131.gbb3fmhrspl332i6@quack3>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: Christoph Hellwig <hch@lst.de>, Matthew Wilcox <willy@infradead.org>
-References: <20230524063810.1595778-1-hch@lst.de>
- <20230524063810.1595778-12-hch@lst.de>
-From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <20230524063810.1595778-12-hch@lst.de>
-X-Spam-Score: -4.5 (----)
+Content-Disposition: inline
+In-Reply-To: <20230529124131.gbb3fmhrspl332i6@quack3>
+X-Spam-Score: -5.4 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 5/24/23 08:38, Christoph Hellwig wrote: > pos is always
- equal to iocb->ki_pos,
- and mapping is always equal to > iocb->ki_filp->f_mapping.
- > > Signed-off-by: Christoph Hellwig <hch@lst.de> > Reviewe [...] 
- Content analysis details:   (-4.5 points, 6.0 required)
+ Content preview:  On Mon, May 29, 2023 at 02:41:31PM +0200, Jan Kara wrote:
+ > On Fri 26-05-23 11:45:15, Christian Brauner wrote: > > On Thu, May 25, 2023
+ at 12:16:10PM +0200, Jan Kara wrote: > > > Currently the locking [...] 
+ Content analysis details:   (-5.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1q3tPH-00047r-Nr
-Subject: Re: [f2fs-dev] [PATCH 11/11] fuse: drop redundant arguments to
- fuse_perform_write
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q3ygC-006YMQ-42
+Subject: Re: [f2fs-dev] [PATCH 4/6] fs: Establish locking order for
+ unrelated directories
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,35 +107,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "Darrick J. Wong" <djwong@kernel.org>, linux-mm@kvack.org,
- Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
- cluster-devel@redhat.com, Ilya Dryomov <idryomov@gmail.com>,
- linux-ext4@vger.kernel.org, linux-nfs@vger.kernel.org,
- linux-block@vger.kernel.org, Damien Le Moal <dlemoal@kernel.org>,
- Alexander Viro <viro@zeniv.linux.org.uk>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Xiubo Li <xiubli@redhat.com>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
- Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, Anna Schumaker <anna@kernel.org>,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: Ted Tso <tytso@mit.edu>, Miklos Szeredi <miklos@szeredi.hu>,
+ "Darrick J. Wong" <djwong@kernel.org>, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ Al Viro <viro@ZenIV.linux.org.uk>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gNS8yNC8yMyAwODozOCwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gcG9zIGlzIGFsd2F5
-cyBlcXVhbCB0byBpb2NiLT5raV9wb3MsIGFuZCBtYXBwaW5nIGlzIGFsd2F5cyBlcXVhbCB0bwo+
-IGlvY2ItPmtpX2ZpbHAtPmZfbWFwcGluZy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RvcGgg
-SGVsbHdpZyA8aGNoQGxzdC5kZT4KPiBSZXZpZXdlZC1ieTogRGFtaWVuIExlIE1vYWwgPGRsZW1v
-YWxAa2VybmVsLm9yZz4KPiAtLS0KPiAgIGZzL2Z1c2UvZmlsZS5jIHwgMTEgKysrKystLS0tLS0K
-PiAgIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDYgZGVsZXRpb25zKC0pCj4gClJl
-dmlld2VkLWJ5OiBIYW5uZXMgUmVpbmVja2UgPGhhcmVAc3VzZS5kZT4KCkNoZWVycywKCkhhbm5l
-cwotLSAKRHIuIEhhbm5lcyBSZWluZWNrZSAgICAgICAgICAgICAgICBLZXJuZWwgU3RvcmFnZSBB
-cmNoaXRlY3QKaGFyZUBzdXNlLmRlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKzQ5IDkx
-MSA3NDA1MyA2ODgKU1VTRSBTb2Z0d2FyZSBTb2x1dGlvbnMgR21iSCwgTWF4ZmVsZHN0ci4gNSwg
-OTA0MDkgTsO8cm5iZXJnCkhSQiAzNjgwOSAoQUcgTsO8cm5iZXJnKSwgR2VzY2jDpGZ0c2bDvGhy
-ZXI6IEl2byBUb3RldiwgQW5kcmV3Ck15ZXJzLCBBbmRyZXcgTWNEb25hbGQsIE1hcnRqZSBCb3Vk
-aWVuIE1vZXJtYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0
-cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlz
-dGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On Mon, May 29, 2023 at 02:41:31PM +0200, Jan Kara wrote:
+> On Fri 26-05-23 11:45:15, Christian Brauner wrote:
+> > On Thu, May 25, 2023 at 12:16:10PM +0200, Jan Kara wrote:
+> > > Currently the locking order of inode locks for directories that are not
+> > > in ancestor relationship is not defined because all operations that
+> > > needed to lock two directories like this were serialized by
+> > > sb->s_vfs_rename_mutex. However some filesystems need to lock two
+> > > subdirectories for RENAME_EXCHANGE operations and for this we need the
+> > > locking order established even for two tree-unrelated directories.
+> > > Provide a helper function lock_two_inodes() that establishes lock
+> > > ordering for any two inodes and use it in lock_two_directories().
+> > > 
+> > > CC: stable@vger.kernel.org
+> > > Signed-off-by: Jan Kara <jack@suse.cz>
+> > > ---
+> > >  fs/inode.c    | 34 ++++++++++++++++++++++++++++++++++
+> > >  fs/internal.h |  2 ++
+> > >  fs/namei.c    |  4 ++--
+> > >  3 files changed, 38 insertions(+), 2 deletions(-)
+> > > 
+> > > diff --git a/fs/inode.c b/fs/inode.c
+> > > index 577799b7855f..2015fa50d34a 100644
+> > > --- a/fs/inode.c
+> > > +++ b/fs/inode.c
+> > > @@ -1103,6 +1103,40 @@ void discard_new_inode(struct inode *inode)
+> > >  }
+> > >  EXPORT_SYMBOL(discard_new_inode);
+> > >  
+> > > +/**
+> > > + * lock_two_inodes - lock two inodes (may be regular files but also dirs)
+> > > + *
+> > > + * Lock any non-NULL argument. The caller must make sure that if he is passing
+> > > + * in two directories, one is not ancestor of the other.  Zero, one or two
+> > > + * objects may be locked by this function.
+> > > + *
+> > > + * @inode1: first inode to lock
+> > > + * @inode2: second inode to lock
+> > > + * @subclass1: inode lock subclass for the first lock obtained
+> > > + * @subclass2: inode lock subclass for the second lock obtained
+> > > + */
+> > > +void lock_two_inodes(struct inode *inode1, struct inode *inode2,
+> > > +		     unsigned subclass1, unsigned subclass2)
+> > > +{
+> > > +	if (!inode1 || !inode2)
+> > > +		goto lock;
+> > 
+> > Before this change in
+> > 
+> > lock_two_nondirectories(struct inode *inode1, struct inode *inode2)
+> > 
+> > the swap() would cause the non-NULL inode to always be locked with
+> > I_MUTEX_NONDIR2. Now it can be either I_MUTEX_NORMAL or I_MUTEX_NONDIR2.
+> > Is that change intentional?
+> 
+> Kind of. I don't think we really care so I didn't bother to complicate the
+> code for this. If you think keeping the lockdep class consistent is worth
+> it, I can modify the patch...
+
+Either a short comment or consistent lockdep class would be nice. I know
+it probably doesn't matter much but otherwise someone may end up
+wondering whether that's ok or not.
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
