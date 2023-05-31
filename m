@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3AC67178B9
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 09:50:58 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 451C87178BF
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 09:51:00 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q4Gbg-0004rO-KK;
-	Wed, 31 May 2023 07:50:57 +0000
+	id 1q4Gbi-0001e8-KB;
+	Wed, 31 May 2023 07:50:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+b81a8c9a6d22e8bb2302+7220+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1q4Gbe-0004rB-T6 for linux-f2fs-devel@lists.sourceforge.net;
+ id 1q4Gbf-0001dw-DB for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 31 May 2023 07:50:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4ln1KAbDHy9yBOHA1NQmJ3I7VD+LrDF+lbZ0/N7BIOE=; b=Zyo3Kgi55NyzYIjZfHFvElv6vK
- fDtpPaMlehHttnmLTsaceFwE7hr3oNDQPBOrryea3fo3piwFM90c23177rXzkWtMX4uqY0eQUTH9q
- E1Awa1z/8f+i8KngLAbN1xP5EEOXKTbpRhkZ2ewoFdnHANZqpg+5ezVAVMuvE+f5UXGs=;
+ bh=oeUDNAIuBGOOZ56XkyqMnjDXKnQawdRHpRl2i305rtg=; b=OegspwlN5LEdcyCgVO2UKnw/q2
+ SusG2RkGbAQPzaRqGI+QXMQHoVDbsiAIDrYgnglLKR1KA2pzItsrI1bWcfVm/YtKwHTBLpXYr0Vbk
+ wiN5ZZBsK81jdIyyiZjV/4lErZjjWzR94D4/nEm9S+pmrEFYoEudP35SYf8y4mMRVcj8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4ln1KAbDHy9yBOHA1NQmJ3I7VD+LrDF+lbZ0/N7BIOE=; b=DHMs5kBU2Y/jY9WV1Qz/fBR9bL
- zCcp+pUC9dofate+Xy/T+C9RNDANGtmemnjPs572m//Zb2zqrOh+uPRKKHIehQHqV/MAdaMIKCZ42
- 7h3zeq6Vdm+XMwY71m6IF2LdooVDDr4vPvOtJtBnje2ZKl6oYDgzyx2Jl/O+IsmJYaBs=;
+ bh=oeUDNAIuBGOOZ56XkyqMnjDXKnQawdRHpRl2i305rtg=; b=MLafh6GUqqDwgO+vMg5NrBWnmD
+ Dr9OrtiWIJV2odjVPS/IViDLwBpFVB4X2PIu2DBomgrhNZqlJqTPIZrqHQZVgfQd8NLuNhPmRsFvk
+ DCYsT4HdjO/o/VCUnumlLgOpYRRSXNEGEnA1692zOgKgRqpgOKaKY7ujnSKxxdyOwq44=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q4Gbc-007EjO-Kz for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 31 May 2023 07:50:53 +0000
+ id 1q4Gbf-007EjW-9X for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 31 May 2023 07:50:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=4ln1KAbDHy9yBOHA1NQmJ3I7VD+LrDF+lbZ0/N7BIOE=; b=mX63p2gq79YVonFeh66UH/Gf07
- oDQXwuuVG/0zTbaChYcaSZnA6FeYN2+9PpMTDarXzQiay1+KiGGQH1JIFRsfB64CVQWWnTGpLxwVO
- VcpKJWbzddayA6uVwiaBzXTcqQxwjJk1jmmNn1tjvtVvwMsaEd4AEVEQhGQXPPFQ1E/Kq493soZrW
- 9Z2XZuavCo3rcl9FCHi+6jxhHCR6klyJnP2Kasjtdf8Fe8M/81uTlaDUsNSJfVZXOwAhdv3404pY6
- rQfVgPAz0cL/WvQa9HtgtvqrCTXdWaIaGGb7pgiRTbLTatjklSX4muexsK6BIbV6QgrMZDrXKNRk6
- VVYhOjBw==;
+ bh=oeUDNAIuBGOOZ56XkyqMnjDXKnQawdRHpRl2i305rtg=; b=UwK1FHTHtOyBkGhF5SwrqCYJaI
+ V5Un7eCVkDVa2V6bOZ5kcaWv3HZlwGRURrEg1/HxkiYB6u5glE/X4tofTPC+PKyi2g6J3lruXgfP3
+ UHhLKQUSgT8GtfPqc0agUDElsY8y9lGiTs5xfOfH746K52QwP2aT6XR7+J+Qy5DxdIoQ0710G/Cm+
+ xsB/kIaUPj2s++pH24XeVlWjAza25Q0tRJOfURvfha9P6ipbqROKE1VC+9VUe9b5gp2jGi0+kt9r/
+ +G7NSTe6LjzFZbPWe2mPeEvoiWJYNa+d00SyQ9qv1QS47XF0PEnXMrGpmL4zg4e3WT1Ul4gE8Z8jH
+ fBjN8G+w==;
 Received: from [2001:4bb8:182:6d06:f5c3:53d7:b5aa:b6a7] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1q4GbQ-00GVp2-07; Wed, 31 May 2023 07:50:40 +0000
+ id 1q4GbS-00GVpj-1y; Wed, 31 May 2023 07:50:43 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Matthew Wilcox <willy@infradead.org>
-Date: Wed, 31 May 2023 09:50:18 +0200
-Message-Id: <20230531075026.480237-5-hch@lst.de>
+Date: Wed, 31 May 2023 09:50:19 +0200
+Message-Id: <20230531075026.480237-6-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230531075026.480237-1-hch@lst.de>
 References: <20230531075026.480237-1-hch@lst.de>
@@ -69,13 +69,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Factor out a helper that does filemap_write_and_wait_range
- for the range covered by a read kiocb, or returns -EAGAIN if the kiocb is
- marked as nowait and there would be pages to write. Signed-off-by: Christoph
- Hellwig <hch@lst.de> Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
- Reviewed-by:
- Hannes Reinecke <hare@suse.de> Acked-by: Darrick J. Wong <djwong@kernel.org>
- --- block/fops. [...] 
+ Content preview: Factor out a helper that calls filemap_write_and_wait_range
+ and invalidate_inode_pages2_range for the range covered by a write kiocb
+ or returns -EAGAIN if the kiocb is marked as nowait and there would [...] 
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,8 +86,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1q4Gbc-007EjO-Kz
-Subject: [f2fs-dev] [PATCH 04/12] filemap: add a kiocb_write_and_wait helper
+X-Headers-End: 1q4Gbf-007EjW-9X
+Subject: [f2fs-dev] [PATCH 05/12] filemap: add a kiocb_invalidate_pages
+ helper
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,117 +117,102 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Factor out a helper that does filemap_write_and_wait_range for the range
-covered by a read kiocb, or returns -EAGAIN if the kiocb is marked as
-nowait and there would be pages to write.
+Factor out a helper that calls filemap_write_and_wait_range and
+invalidate_inode_pages2_range for the range covered by a write kiocb or
+returns -EAGAIN if the kiocb is marked as nowait and there would be pages
+to write or invalidate.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 Acked-by: Darrick J. Wong <djwong@kernel.org>
 ---
- block/fops.c            | 18 +++---------------
- include/linux/pagemap.h |  2 ++
- mm/filemap.c            | 30 ++++++++++++++++++------------
- 3 files changed, 23 insertions(+), 27 deletions(-)
+ include/linux/pagemap.h |  1 +
+ mm/filemap.c            | 48 ++++++++++++++++++++++++-----------------
+ 2 files changed, 29 insertions(+), 20 deletions(-)
 
-diff --git a/block/fops.c b/block/fops.c
-index 58d0aebc7313a8..575171049c5d83 100644
---- a/block/fops.c
-+++ b/block/fops.c
-@@ -576,21 +576,9 @@ static ssize_t blkdev_read_iter(struct kiocb *iocb, struct iov_iter *to)
- 		goto reexpand; /* skip atime */
- 
- 	if (iocb->ki_flags & IOCB_DIRECT) {
--		struct address_space *mapping = iocb->ki_filp->f_mapping;
--
--		if (iocb->ki_flags & IOCB_NOWAIT) {
--			if (filemap_range_needs_writeback(mapping, pos,
--							  pos + count - 1)) {
--				ret = -EAGAIN;
--				goto reexpand;
--			}
--		} else {
--			ret = filemap_write_and_wait_range(mapping, pos,
--							   pos + count - 1);
--			if (ret < 0)
--				goto reexpand;
--		}
--
-+		ret = kiocb_write_and_wait(iocb, count);
-+		if (ret < 0)
-+			goto reexpand;
- 		file_accessed(iocb->ki_filp);
- 
- 		ret = blkdev_direct_IO(iocb, to);
 diff --git a/include/linux/pagemap.h b/include/linux/pagemap.h
-index a56308a9d1a450..36fc2cea13ce20 100644
+index 36fc2cea13ce20..6e4c9ee40baa99 100644
 --- a/include/linux/pagemap.h
 +++ b/include/linux/pagemap.h
 @@ -30,6 +30,7 @@ static inline void invalidate_remote_inode(struct inode *inode)
  int invalidate_inode_pages2(struct address_space *mapping);
  int invalidate_inode_pages2_range(struct address_space *mapping,
  		pgoff_t start, pgoff_t end);
-+
++int kiocb_invalidate_pages(struct kiocb *iocb, size_t count);
+ 
  int write_inode_now(struct inode *, int sync);
  int filemap_fdatawrite(struct address_space *);
- int filemap_flush(struct address_space *);
-@@ -54,6 +55,7 @@ int filemap_check_errors(struct address_space *mapping);
- void __filemap_set_wb_err(struct address_space *mapping, int err);
- int filemap_fdatawrite_wbc(struct address_space *mapping,
- 			   struct writeback_control *wbc);
-+int kiocb_write_and_wait(struct kiocb *iocb, size_t count);
- 
- static inline int filemap_write_and_wait(struct address_space *mapping)
- {
 diff --git a/mm/filemap.c b/mm/filemap.c
-index 15907af4a57ff5..5fcd5227f9cae2 100644
+index 5fcd5227f9cae2..a1cb01a4b8046a 100644
 --- a/mm/filemap.c
 +++ b/mm/filemap.c
-@@ -2762,6 +2762,21 @@ ssize_t filemap_read(struct kiocb *iocb, struct iov_iter *iter,
+@@ -2777,6 +2777,33 @@ int kiocb_write_and_wait(struct kiocb *iocb, size_t count)
+ 	return filemap_write_and_wait_range(mapping, pos, end);
  }
- EXPORT_SYMBOL_GPL(filemap_read);
  
-+int kiocb_write_and_wait(struct kiocb *iocb, size_t count)
++int kiocb_invalidate_pages(struct kiocb *iocb, size_t count)
 +{
 +	struct address_space *mapping = iocb->ki_filp->f_mapping;
 +	loff_t pos = iocb->ki_pos;
 +	loff_t end = pos + count - 1;
++	int ret;
 +
 +	if (iocb->ki_flags & IOCB_NOWAIT) {
-+		if (filemap_range_needs_writeback(mapping, pos, end))
++		/* we could block if there are any pages in the range */
++		if (filemap_range_has_page(mapping, pos, end))
 +			return -EAGAIN;
-+		return 0;
++	} else {
++		ret = filemap_write_and_wait_range(mapping, pos, end);
++		if (ret)
++			return ret;
 +	}
 +
-+	return filemap_write_and_wait_range(mapping, pos, end);
++	/*
++	 * After a write we want buffered reads to be sure to go to disk to get
++	 * the new data.  We invalidate clean cached page from the region we're
++	 * about to write.  We do this *before* the write so that we can return
++	 * without clobbering -EIOCBQUEUED from ->direct_IO().
++	 */
++	return invalidate_inode_pages2_range(mapping, pos >> PAGE_SHIFT,
++					     end >> PAGE_SHIFT);
 +}
 +
  /**
   * generic_file_read_iter - generic filesystem read routine
   * @iocb:	kernel I/O control block
-@@ -2797,18 +2812,9 @@ generic_file_read_iter(struct kiocb *iocb, struct iov_iter *iter)
- 		struct address_space *mapping = file->f_mapping;
- 		struct inode *inode = mapping->host;
+@@ -3820,30 +3847,11 @@ generic_file_direct_write(struct kiocb *iocb, struct iov_iter *from)
+ 	write_len = iov_iter_count(from);
+ 	end = (pos + write_len - 1) >> PAGE_SHIFT;
  
--		if (iocb->ki_flags & IOCB_NOWAIT) {
--			if (filemap_range_needs_writeback(mapping, iocb->ki_pos,
--						iocb->ki_pos + count - 1))
--				return -EAGAIN;
--		} else {
--			retval = filemap_write_and_wait_range(mapping,
--						iocb->ki_pos,
--					        iocb->ki_pos + count - 1);
--			if (retval < 0)
--				return retval;
--		}
+-	if (iocb->ki_flags & IOCB_NOWAIT) {
+-		/* If there are pages to writeback, return */
+-		if (filemap_range_has_page(file->f_mapping, pos,
+-					   pos + write_len - 1))
+-			return -EAGAIN;
+-	} else {
+-		written = filemap_write_and_wait_range(mapping, pos,
+-							pos + write_len - 1);
+-		if (written)
+-			goto out;
+-	}
 -
-+		retval = kiocb_write_and_wait(iocb, count);
-+		if (retval < 0)
-+			return retval;
- 		file_accessed(file);
- 
- 		retval = mapping->a_ops->direct_IO(iocb, iter);
+-	/*
+-	 * After a write we want buffered reads to be sure to go to disk to get
+-	 * the new data.  We invalidate clean cached page from the region we're
+-	 * about to write.  We do this *before* the write so that we can return
+-	 * without clobbering -EIOCBQUEUED from ->direct_IO().
+-	 */
+-	written = invalidate_inode_pages2_range(mapping,
+-					pos >> PAGE_SHIFT, end);
+ 	/*
+ 	 * If a page can not be invalidated, return 0 to fall back
+ 	 * to buffered write.
+ 	 */
++	written = kiocb_invalidate_pages(iocb, write_len);
+ 	if (written) {
+ 		if (written == -EBUSY)
+ 			return 0;
 -- 
 2.39.2
 
