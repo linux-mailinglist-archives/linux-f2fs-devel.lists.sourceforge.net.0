@@ -2,120 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB3817183FA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 15:54:19 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E79A71844D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 31 May 2023 16:10:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q4MHH-0006Nv-CL;
-	Wed, 31 May 2023 13:54:15 +0000
+	id 1q4MWh-0008Gj-Pb;
+	Wed, 31 May 2023 14:10:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <qkrwngud825@gmail.com>) id 1q4MHG-0006No-25
+ (envelope-from <brauner@kernel.org>) id 1q4MWg-0008GU-H5
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 31 May 2023 13:54:14 +0000
+ Wed, 31 May 2023 14:10:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=y5rCFTJGWdcgITCagf0CQsma1inb7ImDXUHOuHQ7JIc=; b=g7tBbAIld0LUIn648xsVMDmZw9
- bE++1Bcyu+H6Io4WVzzfMRuYw4Tz5x/cNHWhk/aFe13zXNpKYsnnZO40W7uhes2v3Wp0YRN5xGFlA
- jlA7LTV1gEMVTxb79wpfGIeYSH9nKKU9CU6M9IRxgSQK4LjWLmdTUJQWGyCeXcc6kVkE=;
+ bh=rSD2SlZQbcHX//nToIEl97vUhzQipE5m2W/GUWYVrRs=; b=Lsha3gc7UOjvVT00urCQXvBSTi
+ ftp8s8c45DLDE2o4awbMR8A8Zw7JD2UvRijqPWSg2ZbDzkZ3H1ZZa6cwBosac7mB0rZhn7Yuh8I3Q
+ iB85GOdK05jKk9kLUZ2093AQHxq5CxKQH2cOhRknfz+nfoiFVmN7gU6gX+0F15nxfZu0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=y5rCFTJGWdcgITCagf0CQsma1inb7ImDXUHOuHQ7JIc=; b=FLuFS0rPKG16CE8H21v9+VMXc1
- y2HVlmK/jWqAubHoTWBtWHmzBYSxslIn8DZpwrzvlhi0tNimIE+XAP4I0F8XOac8+6MwRAi+/G7Dl
- cJ84Z/l3emxZjGHrmvuoujaxtMllrph6pnWogS380iIxQGP0SwDqsikoM2K/o8Wt8m6k=;
-Received: from mail-ed1-f54.google.com ([209.85.208.54])
+ bh=rSD2SlZQbcHX//nToIEl97vUhzQipE5m2W/GUWYVrRs=; b=TQPm8wC6aYVadPGCL/Ypv5TGB5
+ ruxsCwah7Ph8Tg5JkTVepmsCZ9PmbQ44Kb8apAj7MguAwRFt3+V1DQpFE8LEw8xEk2zJNPEFQ5in3
+ mproZSWrZTGYy1ZcYsyCCA2gjBRV3ffnzA6x/XCvWjCBjtI9mdEYQAVIBhUobbKoabf0=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q4MHC-0002lc-3h for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 31 May 2023 13:54:14 +0000
-Received: by mail-ed1-f54.google.com with SMTP id
- 4fb4d7f45d1cf-5147dce372eso8505092a12.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 31 May 2023 06:54:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685541243; x=1688133243;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y5rCFTJGWdcgITCagf0CQsma1inb7ImDXUHOuHQ7JIc=;
- b=mTj9nIpvxbmnkUxTCLhkDnsKwO0grrOAn2KHj3cH1VG+XsV+HB8rMajYT1okDRh4dL
- OSH1Cn+jpqoEaDU3JctZVL02wCvBfafEW/Z7yzMYrKHSWlupRBmlqT+2neNrSXf7uRNE
- 3COHZJfxudAEewu5UtHh7qEpZQRigjCc/LrnKU3owpVJgGwWMH2ja3tsgV7+83BNuHAZ
- /6Wmt0XYQx8eBUghSkDJadejrqVi8t31f6CDiL5ZUxXRVCUqXugI6abyOSXcu7fbTiYU
- rASPCfa/bGxckYckbO/C1Nmw1Hy5O0c/FXnqZt3ChCRhgOHyQjus9U6x21SUCymYLig0
- LbLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685541243; x=1688133243;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=y5rCFTJGWdcgITCagf0CQsma1inb7ImDXUHOuHQ7JIc=;
- b=Pmo13w67Zbif+MiWwjrrtZ0nn76XEzijhgzf+nxUO3m7muNN/CtYh+JCB16LY1qJ/B
- PmfC5kbVBAXwxlZusfHHPw1n58cnJjouBmYFY1xhukxFC8/3dy7YjKKtl0llTxuvV5xM
- 8LaXo95aqd9Qj5lBGYxHY0Vz6aUmYaoZMx5Mt2zQEDhQxeSDiUZix0H0LEN+p1EEpHMo
- 6cVe/Mtnq7uvQ7rFAE+X8VkrN+mObTp7nUURkD1Zjeam36zoixPGDGByU0ZFVMsEkLyQ
- T3MXUzYKNx2mbvRSVNu8PObam2HyIPh3CMWZFHwcsn3IhVRZ4jN1moWsKMTdDNjBG0TV
- GzJQ==
-X-Gm-Message-State: AC+VfDxnZHNvdwy0Ig4j3VHPz2P/qROecIF4YwP8dz+aQvnircMmVRsm
- 9ArzNdV1egxDm69MEBrVJLcXiEcZkNRZJZeN+5M=
-X-Google-Smtp-Source: ACHHUZ7AOHP9g2Megr5QVPTq3LJeayM4t3rVmsZgJHwHD+Q/YbNiDgK6CvMQPQgHJCiZfTLZ8kV3EGXsMp9XQ44DsAQ=
-X-Received: by 2002:a17:907:a426:b0:96f:c988:93b with SMTP id
- sg38-20020a170907a42600b0096fc988093bmr5344896ejc.35.1685541243317; Wed, 31
- May 2023 06:54:03 -0700 (PDT)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1q4MWg-0003NJ-DT for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 31 May 2023 14:10:11 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 085C563C8B;
+ Wed, 31 May 2023 14:10:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E80F9C433D2;
+ Wed, 31 May 2023 14:10:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1685542204;
+ bh=zj4tDmO7r3g1mCDD34R1v748dXlekfkGuK0nSfyITh0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=oks+HxtCMozAFUM8zc0YtoCSSwY0G7GxaSHGf6dTHu2E/R92unLTOutBl09MfRDKE
+ KIXt0zP/OACikPEmsyAT00vJZLnEMzG5R8WYncbX2ugu8RoGGhPMeC7JTys0OH5bEb
+ fQwNTBW8O+dHUDTgK/MMjVtmYZmec0AynqhlGgRjab7+NPWc7daogtqP/3EyNZId9a
+ 0/pY9wFclvWXiSRKjN4c1urSnMmbs1ueO6L+TSR1yR4ICKC4bgLXYDcGzY2ueqvNNS
+ O0XH122GfOLJj2GVKm07IlWKH47M2d7jjddfMxIkrq0Qysqy27nZJ9keLU/dFVAcqI
+ 0841fT6duKA3A==
+Date: Wed, 31 May 2023 16:09:58 +0200
+From: Christian Brauner <brauner@kernel.org>
+To: Jan Kara <jack@suse.cz>
+Message-ID: <20230530-seenotrettung-allrad-44f4b00139d4@brauner>
+References: <20230525100654.15069-1-jack@suse.cz>
+ <20230526-schrebergarten-vortag-9cd89694517e@brauner>
 MIME-Version: 1.0
-References: <20230531125918.55609-1-frank.li@vivo.com>
-In-Reply-To: <20230531125918.55609-1-frank.li@vivo.com>
-From: Juhyung Park <qkrwngud825@gmail.com>
-Date: Wed, 31 May 2023 22:53:52 +0900
-Message-ID: <CAD14+f1YoiSVvq2M1v8u5bUdCNN_0nurY4ued6ZFu1gaBSHxDw@mail.gmail.com>
-To: Yangtao Li <frank.li@vivo.com>
-X-Spam-Score: 0.0 (/)
+Content-Disposition: inline
+In-Reply-To: <20230526-schrebergarten-vortag-9cd89694517e@brauner>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Yangtao,
- I remember hearing that f2fs can perform relatively
- poorly under io_uring, nice find. I suggest rewriting the commit message
- though. From the looks of it, it might suggest that FMODE_BUF_RASYNC is a
- magic flag that automatically improves performance that can be enabled willy
- nilly. Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  On Fri, May 26, 2023 at 05:58:14PM +0200, Christian Brauner
+ wrote: > On Thu, May 25, 2023 at 12:16:06PM +0200, Jan Kara wrote: > > Hello, 
+ > > > > this patch set fixes a problem with cross directory re [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 HK_RANDOM_FROM         From username looks random
- 0.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.208.54 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [qkrwngud825[at]gmail.com]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [qkrwngud825[at]gmail.com]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.208.54 listed in wl.mailspike.net]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1q4MHC-0002lc-3h
-Subject: Re: [f2fs-dev] [PATCH] f2fs: flag as supporting buffered async reads
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q4MWg-0003NJ-DT
+Subject: Re: [f2fs-dev] [PATCH 0/6] fs: Fix directory corruption when moving
+ directories
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,53 +103,145 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- Lu Hongfei <luhongfei@vivo.com>, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Ted Tso <tytso@mit.edu>, Miklos Szeredi <miklos@szeredi.hu>,
+ "Darrick J. Wong" <djwong@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Al Viro <viro@ZenIV.linux.org.uk>,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-SGkgWWFuZ3RhbywKCkkgcmVtZW1iZXIgaGVhcmluZyB0aGF0IGYyZnMgY2FuIHBlcmZvcm0gcmVs
-YXRpdmVseSBwb29ybHkgdW5kZXIgaW9fdXJpbmcsCm5pY2UgZmluZC4KCkkgc3VnZ2VzdCByZXdy
-aXRpbmcgdGhlIGNvbW1pdCBtZXNzYWdlIHRob3VnaC4gRnJvbSB0aGUgbG9va3Mgb2YgaXQsIGl0
-Cm1pZ2h0IHN1Z2dlc3QgdGhhdCBGTU9ERV9CVUZfUkFTWU5DIGlzIGEgbWFnaWMgZmxhZyB0aGF0
-IGF1dG9tYXRpY2FsbHkKaW1wcm92ZXMgcGVyZm9ybWFuY2UgdGhhdCBjYW4gYmUgZW5hYmxlZCB3
-aWxseSBuaWxseS4KCkhvdyBhYm91dCBzb21ldGhpbmcgbGlrZToKCmYyZnMgdXNlcyBnZW5lcmlj
-X2ZpbGVfYnVmZmVyZWRfcmVhZCgpLCB3aGljaCBzdXBwb3J0cyBidWZmZXJlZCBhc3luYwpyZWFk
-cyBzaW5jZSBjb21taXQgMWEwYTc4NTNiOTAxICgibW06IHN1cHBvcnQgYXN5bmMgYnVmZmVyZWQg
-cmVhZHMgaW4KZ2VuZXJpY19maWxlX2J1ZmZlcmVkX3JlYWQoKSIpLgoKTWF0Y2ggb3RoZXIgZmls
-ZS1zeXN0ZW1zIGFuZCBlbmFibGUgaXQuIFRoZSByZWFkIHBlcmZvcm1hbmNlIGhhcyBiZWVuCmdy
-ZWF0bHkgaW1wcm92ZWQgdW5kZXIgaW9fdXJpbmc6CgogICAgMTY3TS9zIC0+IDIzNE0vcywgSW5j
-cmVhc2UgcmF0aW8gYnkgNDAlCgpUZXN0IHcvOgogICAgLi9maW8gLS1uYW1lPW9uZXNzZCAtLWZp
-bGVuYW1lPS9kYXRhL3Rlc3QvbG9jYWwvaW9fdXJpbmdfdGVzdAogICAgLS1zaXplPTI1Nk0gLS1y
-dz1yYW5kcmVhZCAtLWJzPTRrIC0tZGlyZWN0PTAgLS1vdmVyd3JpdGU9MAogICAgLS1udW1qb2Jz
-PTEgLS1pb2RlcHRoPTEgLS10aW1lX2Jhc2VkPTAgLS1ydW50aW1lPTEwCiAgICAtLWlvZW5naW5l
-PWlvX3VyaW5nIC0tcmVnaXN0ZXJmaWxlcyAtLWZpeGVkYnVmcwogICAgLS1ndG9kX3JlZHVjZT0x
-IC0tZ3JvdXBfcmVwb3J0aW5nIC0tc3F0aHJlYWRfcG9sbD0xCgpPbiBXZWQsIE1heSAzMSwgMjAy
-MyBhdCAxMDowMeKAr1BNIFlhbmd0YW8gTGkgdmlhIExpbnV4LWYyZnMtZGV2ZWwKPGxpbnV4LWYy
-ZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0PiB3cm90ZToKPgo+IEFmdGVyIGVuYWJsaW5n
-IHRoaXMgZmVhdHVyZSwgdGhlIHJlYWQgcGVyZm9ybWFuY2UgaGFzIGJlZW4gZ3JlYXRseQo+IGlt
-cHJvdmVkOgo+Cj4gICAgIDE2N00vcyAtPiAyMzRNL3MsIEluY3JlYXNlIHJhdGlvIGJ5IDQwJQo+
-Cj4gVGVzdCB3LzoKPiAgICAgLi9maW8gLS1uYW1lPW9uZXNzZCAtLWZpbGVuYW1lPS9kYXRhL3Rl
-c3QvbG9jYWwvaW9fdXJpbmdfdGVzdAo+ICAgICAtLXNpemU9MjU2TSAtLXJ3PXJhbmRyZWFkIC0t
-YnM9NGsgLS1kaXJlY3Q9MCAtLW92ZXJ3cml0ZT0wCj4gICAgIC0tbnVtam9icz0xIC0taW9kZXB0
-aD0xIC0tdGltZV9iYXNlZD0wIC0tcnVudGltZT0xMAo+ICAgICAtLWlvZW5naW5lPWlvX3VyaW5n
-IC0tcmVnaXN0ZXJmaWxlcyAtLWZpeGVkYnVmcwo+ICAgICAtLWd0b2RfcmVkdWNlPTEgLS1ncm91
-cF9yZXBvcnRpbmcgLS1zcXRocmVhZF9wb2xsPTEKPgo+IFNpZ25lZC1vZmYtYnk6IEx1IEhvbmdm
-ZWkgPGx1aG9uZ2ZlaUB2aXZvLmNvbT4KPiBTaWduZWQtb2ZmLWJ5OiBZYW5ndGFvIExpIDxmcmFu
-ay5saUB2aXZvLmNvbT4KPiAtLS0KPiAgZnMvZjJmcy9maWxlLmMgfCAyICstCj4gIDEgZmlsZSBj
-aGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+Cj4gZGlmZiAtLWdpdCBhL2Zz
-L2YyZnMvZmlsZS5jIGIvZnMvZjJmcy9maWxlLmMKPiBpbmRleCAwMTVlZDI3NGRjMzEuLjIzYzY4
-ZWU5NDZlNSAxMDA2NDQKPiAtLS0gYS9mcy9mMmZzL2ZpbGUuYwo+ICsrKyBiL2ZzL2YyZnMvZmls
-ZS5jCj4gQEAgLTU0Niw3ICs1NDYsNyBAQCBzdGF0aWMgaW50IGYyZnNfZmlsZV9vcGVuKHN0cnVj
-dCBpbm9kZSAqaW5vZGUsIHN0cnVjdCBmaWxlICpmaWxwKQo+ICAgICAgICAgaWYgKGVycikKPiAg
-ICAgICAgICAgICAgICAgcmV0dXJuIGVycjsKPgo+IC0gICAgICAgZmlscC0+Zl9tb2RlIHw9IEZN
-T0RFX05PV0FJVDsKPiArICAgICAgIGZpbHAtPmZfbW9kZSB8PSBGTU9ERV9OT1dBSVQgfCBGTU9E
-RV9CVUZfUkFTWU5DOwo+Cj4gICAgICAgICByZXR1cm4gZHF1b3RfZmlsZV9vcGVuKGlub2RlLCBm
-aWxwKTsKPiAgfQo+IC0tCj4gMi4zOS4wCj4KPgo+Cj4gX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KPiBMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdAo+
-IExpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cj4gaHR0cHM6Ly9saXN0cy5z
-b3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwg
-bWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBz
-Oi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On Fri, May 26, 2023 at 05:58:14PM +0200, Christian Brauner wrote:
+> On Thu, May 25, 2023 at 12:16:06PM +0200, Jan Kara wrote:
+> > Hello,
+> > 
+> > this patch set fixes a problem with cross directory renames originally reported
+> > in [1]. To quickly sum it up some filesystems (so far we know at least about
+> > ext4, udf, f2fs, ocfs2, likely also reiserfs, gfs2 and others) need to lock the
+> > directory when it is being renamed into another directory. This is because we
+> > need to update the parent pointer in the directory in that case and if that
+> > races with other operation on the directory (in particular a conversion from
+> > one directory format into another), bad things can happen.
+> > 
+> > So far we've done the locking in the filesystem code but recently Darrick
+> > pointed out [2] that we've missed the RENAME_EXCHANGE case in our ext4 fix.
+> > That one is particularly nasty because RENAME_EXCHANGE can arbitrarily mix
+> > regular files and directories and proper lock ordering is not achievable in the
+> > filesystems alone.
+> > 
+> > This patch set adds locking into vfs_rename() so that not only parent
+> > directories but also moved inodes (regardless whether they are directories or
+> > not) are locked when calling into the filesystem.
+> 
+> This locking is trauma inducing.
+> 
+> So I was staring at this for a long time and the thing that bothered me
+> big time was that I couldn't easily figure out how we ended up with the
+> locking scheme that we have. So I went digging. Corrections and
+> additions very welcome...
+
+This kept being stuck in the back of my mind so a few
+additions/corrections.
+
+> 
+> Before 914a6e0ea12 ("Import 2.3.51pre1") locking for rename was based on
+> s_vfs_rename_sem and i_sem. For both within- and across-directory
+> renames s_vfs_rename_sem was acquired and the i_sem on the parent
+> directories was acquired but the target wasn't locked.
+> 
+> Then 914a6e0ea12 ("Import 2.3.51pre1") introduced an additional i_zombie
+> semaphore to protect against create, link, mknod, mkdir, unlink, and
+> rmdir on the target. So i_zombie had to be acquired during
+
+If I reconstructed this correctly, then the motivation behind the
+introduction of i_zombie was that locking order for i_sem was solely
+based on pointer order before 1b3d7c93c6d ("[PATCH] (2.5.4"). So when it
+turned out that an existing directory that was replaced during a rename
+had to be locked it would've meant deadlocks:
+
+mv /a/b /a/c/d                          rmdir /a/c/d
+pointer order: a < c                    pointer order: d > c
+
+inode_lock(a->i_sem)
+inode_lock(c->i_sem)                    inode_lock(d->i_sem)
+
+// acquired separately
+// after lock on parents
+inode_lock(d->i_sem)                    inode_lock(c->i_sem)
+
+and the immediate fix was to introduce a separate i_zombie mutex that
+was used to protect against concurrent removals of the target directory.
+
+> vfs_rename_dir() on both parent and the victim but only if the source
+> was a directory. Back then RENAME_EXCHANGE didn't exist so if source was
+> a directory then target if it existed must've been a directory as well.
+> 
+> The original reasoning behind only locking the target if the source was
+> a directory was based on some filesystems not being able to deal with
+> opened but unlinked directories.
+> 
+> The i_zombie finally died in 1b3d7c93c6d ("[PATCH] (2.5.4) death of
+> ->i_zombie") and a new locking scheme was introduced. The
+
+And that locking scheme realized that the topological ordering of the
+subtrees we're operating on makes it possible to lock in ancestor
+order. IOW, lock parent directories before child directories and if no
+ancestor relationship exists lock by pointer ordering. This allowed to
+kill i_zombie...
+
+> s_vfs_rename_sem was now only used for across-directory renames. Instead
+> of having i_zombie and i_sem only i_sem was left. Now, both
+> vfs_rename_dir(/* if renaming directory */) and vfs_rename_other()
+> grabbed i_sem on both parents and on the target. So now the target was
+> always explicitly protected against a concurrent unlink or rmdir
+> as that would be done as part of the rename operation and that race
+> would just been awkward to allow afaict. Probably always was.
+
+I think the main worry making the target directory locking necessary
+during rename were also scenarios like the following. Because an
+existing target directory that was about to be removed during rename
+wasn't locked - in contrast to an explicit rmdir - it would've meant
+that the following race should've been possible:
+
+mv /a/b /a/c/d                          touch /a/c/d/e
+
+inode_lock(a->i_sem)
+inode_lock(c->i_sem)
+// now we're removing d                 // lock on d isn't held by rename
+                                        inode_lock(d->i_sem) 
+                                        // add new file into d
+
+iow, this would be racing adding a new link to the directory that's
+in the process of being removed.
+
+> 
+> The locking of source however is a different story. This was introduced
+> in 6cedba8962f4 ("vfs: take i_mutex on renamed file") to prevent new
+> delegations from being acquired during rename, link, or unlink. So now
+> both source and target were locked. The target seemingly because it
+> would be unlinked in the filesystem's rename method and the source to
+> prevent new delegations from being acquired. So, since leases can only
+> be taken on regular files vfs_setlease()/generic_setlease() directories
+> were never considered for locking. So the lock never had to be acquired
+> for source directories.
+> 
+> So in any case, under the assumption that the broad strokes are correct
+> there seems to be no inherent reason why locking source and target if
+> they're directories couldn't be done if the ordering is well-defined.
+> Which is what originally made me hesitate. IOW, given my current
+> knowledge this seems ok.
+> 
+> Frankly, if we end up unconditionally locking source and target we're in
+> a better place from a pure maintainability perspective as far as I'm
+> concerned. Even if we end up taking the lock pointlessly for e.g., NFS
+> with RENAME_EXCHANGE. The last thing we need is more conditions on when
+> things are locked and why.
+> 
+> /me goes off into the weekend
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
