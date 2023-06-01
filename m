@@ -2,69 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DEDB71A100
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Jun 2023 16:52:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69CC971A151
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Jun 2023 16:59:49 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q4jfT-00079b-Mw;
-	Thu, 01 Jun 2023 14:52:48 +0000
+	id 1q4jmF-0001th-D9;
+	Thu, 01 Jun 2023 14:59:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tytso@mit.edu>) id 1q4jfQ-00079V-Bq
- for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Jun 2023 14:52:44 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+afcc791b37732e68e234+7221+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1q4jmB-0001tL-Gz for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 01 Jun 2023 14:59:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ocmgG3AwXqD+xUhaoXDH/qEJqT72EouO1rvjHBr6Htk=; b=DzxbHgryKYABnylCmLFvmSzOvy
- J+pVtELkq5Q9KxqGU4CGxPtwIaVh2IREY7dwWP+jFppQBet9q1N3ZJBTDYd9U8r4BbxADWeHAeSnC
- WJ/uoVAZJV9eSv4qq7Dkg3L4sFwY7I0uaWsQQHEs1/lwDj1mPt0ZT/VTjCxOmRAS6Q9M=;
+ bh=XbbWN9vPp1Xk6I5ta8jq/xbBcX0bF+DntmFOOCcIAP8=; b=XmNzGDCvmCwn50o/18QnakwvO4
+ CgZsi7zIXwNvQl/u8dXscYfvhxsUwPxNHjd+zmXLhNjgg5bhK+JSnrgrzV8w1Ru7IaSCEt/k2t+9l
+ HMbCaFbpQdjhJeV10I+5DlbwsUa4vvWYAbgHyG2K6YZhmc6bHt49o9xNRUnWjYVmtAF4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ocmgG3AwXqD+xUhaoXDH/qEJqT72EouO1rvjHBr6Htk=; b=FveTt2CWjA/OZvr04xvHymrOWG
- iftKfA3UGK17zCszTjghGML0KprzdPpiHlRCBrxUR49tXaP8iB8dQB2GqrpK3rWc5VIZznUghSFjw
- oHDmLO3LFJ9vfLJr8R3LgvZJ1ShV/vUz1ctvm4cux6jt7aVsFEfJD05avrTsSqavRPkY=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=XbbWN9vPp1Xk6I5ta8jq/xbBcX0bF+DntmFOOCcIAP8=; b=E
+ GzEWWzKidMdDoBQJ2Iv0j0PmKxUtNgluUM0gbhyf90/ZS2kDOzifyNBypNx8NmIYLUeW1/q6tM7Nu
+ ogXU8ezecVaSLkd2CfrXe+1F6uttuxnc29NUkDunl3scsygitjz+suArbcbkvJqa8/RvtySPsydOg
+ dXXtl90IZwkUTJhA=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q4jfM-008SEv-7s for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Jun 2023 14:52:44 +0000
-Received: from cwcc.thunk.org (pool-173-48-119-27.bstnma.fios.verizon.net
- [173.48.119.27]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 351EqMka013065
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 1 Jun 2023 10:52:23 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
- t=1685631145; bh=ocmgG3AwXqD+xUhaoXDH/qEJqT72EouO1rvjHBr6Htk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=VM8/Uu97seftS0qeq+6Ysp9BXkNhjUcaVl9U89FzKjVHN95D2/9uD9/Z0stw6GayT
- TLelYRPi4d2jWT53MdX2oZUfk1PoQcJx+Iz594HiUAahSJ9pKzl9apyvKB/+MjiztU
- bM2Ot+kBWhdNFklD0RSdcbI299bbFE+U8JB76uo6iEoCt4Ql/BS6rmFognIzCNnLq+
- qexrwfUTKnCX32iQ9Da7QywUgvoU0558ckrfhgFf92/Sv7BzpVcMYqbv+yOze6k/Fl
- 6vE0tJLu/1VlEkWol5ckl73dRDgvmHCHXBgfYZlYhDQP/K7RMQlgIh7fIpwMQeSXj8
- Is7CFhO77tRDA==
-Received: by cwcc.thunk.org (Postfix, from userid 15806)
- id 4753A15C02EE; Thu,  1 Jun 2023 10:52:22 -0400 (EDT)
-Date: Thu, 1 Jun 2023 10:52:22 -0400
-From: "Theodore Ts'o" <tytso@mit.edu>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20230601145222.GB1069561@mit.edu>
-References: <20230601104525.27897-1-jack@suse.cz>
- <20230601105830.13168-1-jack@suse.cz>
+ id 1q4jmB-008Sas-SO for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 01 Jun 2023 14:59:44 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=XbbWN9vPp1Xk6I5ta8jq/xbBcX0bF+DntmFOOCcIAP8=; b=TPdEsrmYwQDcbibO2u6xuPEn+F
+ cVqnIFAGztBdzvqIg4dgzXeaGWODyzx/nMQJGSLcpbm/FYzckDj7ONjDiFbguAGwm1Edz1ErTv5Xq
+ dmUfwy6z9Mm278yt2cBQIO3TEjO41LezfuQ+hI0Uoq85CDA65HTJ8oUZMRDVOGbhUFQaPasrNKcZ9
+ Eu32hX3WLCij9TzhijOx9RcgOZEJx4LRtJG3IzRBzVMPWMTYkmpqf58tHPY2g6rZs7Ffjk2zLEgkE
+ xFLBvv0gVJvkzvSmP7yzapeyAfNI1nHgBrDGo52sGrhFJUoFO1j2LLleoHnmhrG4pQCdtQgXyXQuu
+ kGAxXLCQ==;
+Received: from [2001:4bb8:182:6d06:eacb:c751:971:73eb] (helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1q4jla-003w1Z-1c; Thu, 01 Jun 2023 14:59:06 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Matthew Wilcox <willy@infradead.org>
+Date: Thu,  1 Jun 2023 16:58:52 +0200
+Message-Id: <20230601145904.1385409-1-hch@lst.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230601105830.13168-1-jack@suse.cz>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -2.1 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -72,22 +67,26 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jun 01, 2023 at 12:58:21PM +0200, Jan Kara wrote:
- > Remove locking of moved directory in ext4_rename2(). We will take care >
- of it in VFS instead. This effectively reverts commit 0813299c586b [...] 
+ Content preview:  Hi all,
+ this series cleans up some of the generic write helper
+ calling conventions and the page cache writeback / invalidation for direct
+ I/O. This is a spinoff from the no-bufferhead kernel project, for whic [...]
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [18.9.28.11 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ medium trust [198.137.202.133 listed in list.dnswl.org]
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- 0.1 DKIM_INVALID           DKIM or DK signature exists, but is not valid
-X-Headers-End: 1q4jfM-008SEv-7s
-Subject: Re: [f2fs-dev] [PATCH v2 1/6] ext4: Remove ext4 locking of moved
- directory
+X-Headers-End: 1q4jmB-008Sas-SO
+Subject: [f2fs-dev] cleanup the filemap / direct I/O interaction v4
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,35 +98,69 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christian Brauner <brauner@kernel.org>, Miklos Szeredi <miklos@szeredi.hu>,
- "Darrick J. Wong" <djwong@kernel.org>, stable@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- Al Viro <viro@zeniv.linux.org.uk>, linux-fsdevel@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
+Cc: "Darrick J. Wong" <djwong@kernel.org>, linux-mm@kvack.org,
+ Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ cluster-devel@redhat.com, Ilya Dryomov <idryomov@gmail.com>,
+ linux-ext4@vger.kernel.org, linux-nfs@vger.kernel.org,
+ linux-block@vger.kernel.org, Damien Le Moal <dlemoal@kernel.org>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Xiubo Li <xiubli@redhat.com>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
+ Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Anna Schumaker <anna@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jun 01, 2023 at 12:58:21PM +0200, Jan Kara wrote:
-> Remove locking of moved directory in ext4_rename2(). We will take care
-> of it in VFS instead. This effectively reverts commit 0813299c586b
-> ("ext4: Fix possible corruption when moving a directory") and followup
-> fixes.
+Hi all,
 
-Remind me --- commit 0813299c586b is not actually causing any
-problems; it's just not fully effective at solving the problem.  Is
-that correct?
+this series cleans up some of the generic write helper calling
+conventions and the page cache writeback / invalidation for
+direct I/O.  This is a spinoff from the no-bufferhead kernel
+project, for which we'll want to an use iomap based buffered
+write path in the block layer.
 
-In other words, is there a rush in trying to get this revert to Linus
-during this cycle as a regression fix?
+Changes since v3:
+ - fix a generic_sync_file that got lost in fuse
+ - fix fuse to call fuse_perform_write and not generic_perform_write
 
-I think the answer is no, and we can just let this full patch series
-go in via the vfs branch during the next merge window, but I just
-wanted to make sure.
+Changes since v2:
+ - stick to the existing behavior of returning a short write
+   if the buffer fallback write or sync fails
+ - bring back "fuse: use direct_write_fallback" which accidentally
+   got lost in v2
 
-Thanks!
+Changes since v1:
+ - remove current->backing_dev_info entirely
+ - fix the pos/end calculation in direct_write_fallback
+ - rename kiocb_invalidate_post_write to
+   kiocb_invalidate_post_direct_write
+ - typo fixes
 
-					- Ted
+diffstat:
+ block/fops.c            |   18 ----
+ fs/btrfs/file.c         |    6 -
+ fs/ceph/file.c          |    6 -
+ fs/direct-io.c          |   10 --
+ fs/ext4/file.c          |   11 --
+ fs/f2fs/file.c          |    3 
+ fs/fuse/file.c          |   45 ++---------
+ fs/gfs2/file.c          |    6 -
+ fs/iomap/buffered-io.c  |    9 +-
+ fs/iomap/direct-io.c    |   88 ++++++++-------------
+ fs/libfs.c              |   41 ++++++++++
+ fs/nfs/file.c           |    6 -
+ fs/ntfs/file.c          |    2 
+ fs/ntfs3/file.c         |    3 
+ fs/xfs/xfs_file.c       |    6 -
+ fs/zonefs/file.c        |    4 
+ include/linux/fs.h      |    7 -
+ include/linux/pagemap.h |    4 
+ include/linux/sched.h   |    3 
+ mm/filemap.c            |  194 +++++++++++++++++++++---------------------------
+ 20 files changed, 194 insertions(+), 278 deletions(-)
 
 
 _______________________________________________
