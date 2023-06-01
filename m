@@ -2,98 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E23671EEA5
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Jun 2023 18:21:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA09771EF2D
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Jun 2023 18:35:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q4l39-0001Yi-Mx;
-	Thu, 01 Jun 2023 16:21:19 +0000
+	id 1q4lGi-0001VB-Fu;
+	Thu, 01 Jun 2023 16:35:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1q4l38-0001YT-5s
+ (envelope-from <david.laight@aculab.com>) id 1q4lGh-0001V5-NX
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Jun 2023 16:21:18 +0000
+ Thu, 01 Jun 2023 16:35:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=j8pEza/E72jJtbPZIMUCUWp7Ezh0hsVDYDT7YoSCSDo=; b=EMLIoztb0YTSd5mnIWUPoJvcPA
- VNrS723ZHYDJufJknCRAZZtzEmcik6ukRAY8sLqw3DD3NEQKWmhfUGszjk+SLFR9E0Dhutw7p4Qrf
- 7k2OGsIzFOR/8MoweYzFs0RoT/FK3Rd89KoW3q7QzVlmwBtfO95xn8Qo89Ry9oMwJ2Mc=;
+ bh=HEbBfHHQJp3sj0HXfVTKkqqFEm0eopxMSKxexG5ZB8c=; b=DWLwMBIPh+BiukP1dEjC+h5/uo
+ 0g1cK643dZgLdYcoh+b7moDxRV9Ahv0Vg9wCKUzGWGWhceLWAgqWcF94JAf9zNaPZuTSeYniT9Sgu
+ aXBa1dfqXRh7MwhHv17VexC8DSKcEZb9qMQxkm51NdTm1NimTXpBQQfCPInKLs/NPNqc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:In-Reply-To:
+ References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=j8pEza/E72jJtbPZIMUCUWp7Ezh0hsVDYDT7YoSCSDo=; b=DNpQ2YSd/GqGdambe1TwYGwlKi
- HXy/DVXUiNstsVZn5uSjTN28h/Oi0Ei9FE4vCKvJNqZWCsW8fL/Dok9WXkLqGvhB02ByLnzr/ucQN
- /SnL531TJT432ImHpU4oJLFnw5t9DTpWplB9TVQSuiPj8RvHxTZieStAOCQOw4EZ/CcA=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=HEbBfHHQJp3sj0HXfVTKkqqFEm0eopxMSKxexG5ZB8c=; b=mq4OQIL6Ab4YvsuFs/yyJkKdTi
+ qKTrAVbbByjhkt2tD18plRIFZn9ahTlGKvqSwDRYlEZZdxZFa04zey5mVnt1+ENJSb0rCFdDQxuRT
+ SMBtRDBEOAP3q0CRG4urQdOnvgSHvsMQIW6puDopbXLSYcKiYJTBRsDTWuO5CsSjlvAw=;
+Received: from eu-smtp-delivery-151.mimecast.com ([185.58.86.151])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q4l32-0002Aa-2b for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Jun 2023 16:21:18 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A7E7F6114E;
- Thu,  1 Jun 2023 16:21:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45044C433EF;
- Thu,  1 Jun 2023 16:21:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685636466;
- bh=J9x2GSgcCuBZSk1uZOf/tNoS5CtNSbRyWQ2pfrQq7M4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ZZCqqQC0a9i9hGh1DZzervY8TO67e/jssn6MiOym0PkWTyCcyWpfLV+nzn/KctYrE
- JmIfAZQkiWDITUxLX3S0cHZd21Ufpix0t56Pt2OHQRvZHXQkCcBLhl9D/y85/SxXNk
- yI8GCS0Sym3IJxaE5pBG64Azm8xrd5iMdGu8WvDS40fu8DPjGmWji6boJV4tmXMv8U
- phMlnOqSSvBA0I4rm6Su2mcfaT4sLPUKsyLrNmGplbNqgEQ/xOVeEGTUSTxcj99tja
- YNqJQEBVbEb5Wm7RmYNxO9Bpk3zIXOfDGWvc1N7nneMMdNOWCT1ER/auVu2jvRbMkH
- 3pdzyWUkOfaVg==
-Date: Thu, 1 Jun 2023 18:21:00 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20230601-flora-hemmung-31a1e66b5179@brauner>
+ id 1q4lGg-008Wa7-VM for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 01 Jun 2023 16:35:20 +0000
+Received: from AcuMS.aculab.com (156.67.243.121 [156.67.243.121]) by
+ relay.mimecast.com with ESMTP with both STARTTLS and AUTH (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ uk-mta-118-HGYaWkwuPHeTz2fi0dWn6Q-1; Thu, 01 Jun 2023 17:34:02 +0100
+X-MC-Unique: HGYaWkwuPHeTz2fi0dWn6Q-1
+Received: from AcuMS.Aculab.com (10.202.163.6) by AcuMS.aculab.com
+ (10.202.163.6) with Microsoft SMTP Server (TLS) id 15.0.1497.48; Thu, 1 Jun
+ 2023 17:33:58 +0100
+Received: from AcuMS.Aculab.com ([::1]) by AcuMS.aculab.com ([::1]) with mapi
+ id 15.00.1497.048; Thu, 1 Jun 2023 17:33:58 +0100
+From: David Laight <David.Laight@ACULAB.COM>
+To: 'Jan Kara' <jack@suse.cz>
+Thread-Topic: [PATCH v2 4/6] fs: Establish locking order for unrelated
+ directories
+Thread-Index: AQHZlJ1FZufsO2GDRE+EhxV9kbhF9692EqgQ///7d4CAABPFwA==
+Date: Thu, 1 Jun 2023 16:33:58 +0000
+Message-ID: <eb70760399ae4222904c62c64dc529b6@AcuMS.aculab.com>
 References: <20230601104525.27897-1-jack@suse.cz>
  <20230601105830.13168-4-jack@suse.cz>
  <20230601-gebracht-gesehen-c779a56b3bf3@brauner>
  <20230601152449.h4ur5zrfqjqygujd@quack3>
  <c5f209a6263b4f039c5eafcafddf90ca@AcuMS.aculab.com>
  <20230601161353.4o6but7hb7i7qfki@quack3>
-MIME-Version: 1.0
-Content-Disposition: inline
 In-Reply-To: <20230601161353.4o6but7hb7i7qfki@quack3>
-X-Spam-Score: -5.9 (-----)
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.202.205.107]
+MIME-Version: 1.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: aculab.com
+Content-Language: en-US
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jun 01, 2023 at 06:13:53PM +0200, Jan Kara wrote:
+ Content preview:  From: Jan Kara <jack@suse.cz> > Sent: 01 June 2023 17:14 >
  > On Thu 01-06-23 15:37:32, David Laight wrote: > > ... > > > > > + * Lock
- any non-NULL argument. The caller must make sure that if he is pass [...]
- Content analysis details:   (-5.9 points, 6.0 required)
+ any non-NULL argument. The caller must make sure that if he is pas [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [185.58.86.151 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+ [185.58.86.151 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q4l32-0002Aa-2b
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1q4lGg-008Wa7-VM
 Subject: Re: [f2fs-dev] [PATCH v2 4/6] fs: Establish locking order for
  unrelated directories
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -107,13 +107,13 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Ted Tso <tytso@mit.edu>, Miklos Szeredi <miklos@szeredi.hu>,
- "Darrick J. Wong" <djwong@kernel.org>,
+Cc: Christian Brauner <brauner@kernel.org>, Ted Tso <tytso@mit.edu>, Miklos
+ Szeredi <miklos@szeredi.hu>, "Darrick J. Wong" <djwong@kernel.org>,
  "stable@vger.kernel.org" <stable@vger.kernel.org>,
  "linux-f2fs-devel@lists.sourceforge.net"
  <linux-f2fs-devel@lists.sourceforge.net>,
  "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>,
- David Laight <David.Laight@ACULAB.COM>, Al Viro <viro@ZenIV.linux.org.uk>,
+ Al Viro <viro@ZenIV.linux.org.uk>,
  "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
  Jaegeuk Kim <jaegeuk@kernel.org>,
  "linux-ext4@vger.kernel.org" <linux-ext4@vger.kernel.org>
@@ -121,18 +121,20 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jun 01, 2023 at 06:13:53PM +0200, Jan Kara wrote:
+From: Jan Kara <jack@suse.cz>
+> Sent: 01 June 2023 17:14
+> 
 > On Thu 01-06-23 15:37:32, David Laight wrote:
 > > ...
 > > > > > + * Lock any non-NULL argument. The caller must make sure that if he is passing
 > > > > > + * in two directories, one is not ancestor of the other
-> > 
+> >
 > > Not directly relevant to this change but is the 'not an ancestor'
 > > check actually robust?
-> > 
+> >
 > > I found a condition in which the kernel 'pwd' code (which follows
 > > the inode chain) failed to stop at the base of a chroot.
-> > 
+> >
 > > I suspect that the ancestor check would fail the same way.
 > 
 > Honestly, I'm not sure how this could be the case but I'm not a dcache
@@ -143,10 +145,56 @@ On Thu, Jun 01, 2023 at 06:13:53PM +0200, Jan Kara wrote:
 > relationship of two dirs cannot change (which is different from pwd code
 > AFAIK). So IMHO no failure is possible in our case.
 
-Yes, this is a red herring. What matters is that the tree topology can't
-change which is up to the caller to guarantee. And where it's called
-we're under s_vfs_rename_mutex. It's also literally mentioned in the
-directory locking documentation.
+I've found the test program.
+This uses readlinkat() to get the full path /proc/self/fd/0.
+It should be inside the chroot, but the comparison done
+to detect the 'root' fails.
+
+Now maybe any rename that would hit this is invalid
+for other reasons.
+But something is awry somewhere.
+
+	David
+
+The program below reproduces this when run with stdin
+redirected to a file in the current directory.
+
+This sequence is used by 'ip netns exec' so isn't actually
+that unusual.
+
+	David
+
+#define _GNU_SOURCE
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <sched.h>
+
+static void print_link(const char *where, int fd)
+{
+        char buf[256];
+
+        printf("%s: %.*s\n", where, (int)readlinkat(fd, "", buf, sizeof buf), buf);
+}
+
+int main(int argc, char **argv)
+{
+        int link_fd = open("/proc/self/fd/0", O_PATH | O_NOFOLLOW);
+
+        print_link("initial", link_fd);
+        if (chroot("."))
+                return 1;
+        print_link("after chroot", link_fd);
+        if (unshare(CLONE_NEWNS))
+                return 2;
+        print_link("after unshare", link_fd);
+        return 0;
+}
+
+-
+Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
+Registration No: 1397386 (Wales)
+
 
 
 _______________________________________________
