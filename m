@@ -2,88 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8766F719C6A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Jun 2023 14:46:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27B5F719EF3
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  1 Jun 2023 15:59:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q4hh4-0004ym-UZ;
-	Thu, 01 Jun 2023 12:46:19 +0000
+	id 1q4ipi-0000oh-Au;
+	Thu, 01 Jun 2023 13:59:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1q4hh3-0004yg-FM
+ (envelope-from <brauner@kernel.org>) id 1q4ipg-0000oT-95
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Jun 2023 12:46:17 +0000
+ Thu, 01 Jun 2023 13:59:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zA5zh8TUsDaNUb3Scy1bc33znf2Di66y2kPpzn7qjIA=; b=ap8p0gzm9dMQe2BX1jD4wd62uK
- 8Zox7MSUYycuTliFnqV7IPYf9PqHoBO5KrAvWovoNpUY/hczY2fghYqnK3uDsu/wTs5w+0PjtbZiX
- 0/sf+/YzfblbwrKjK4cX0hMafG9ly+bJCRUj71vTTF07J4zp1MJMbKYzV4XILYMe7bsU=;
+ bh=qpZIpmK9fjJHsaOKDIRYf2ea22IcnS/Fi9ymODAuSLc=; b=aLyMfyZfBS2rDSrsHagqOS6zXs
+ U2OHjKLVwWX8yZChqUft4dBzMgVX+CR2bsWOt29VmcfAw4R4JpxmmBsyut0r5WVnA6GX7FFoxAf4s
+ 7Ca3drsM8VGdc0JyNKqg15ZNNRzOgVMdSosEkEOHeOk+MX2B4W29SBuvbANIsKt655IM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zA5zh8TUsDaNUb3Scy1bc33znf2Di66y2kPpzn7qjIA=; b=KYqN3rMhlSiVUoarLA5B241KAo
- 1YTovExM9UFy7dFNOCnz6MYEXr1qwc/pBg7llet4tfCJT+vrXWDcqBEVmsP1i1xXTspmEGfryzkuA
- p560F2rcMchOEABT9pPTd/atJSIlVsNqb8qEIGfYxWJM0kmMv63sqKPIxzeOWVF5FB0s=;
+ bh=qpZIpmK9fjJHsaOKDIRYf2ea22IcnS/Fi9ymODAuSLc=; b=AQVqh6W9pH9ss2uyB8dGj/ngHU
+ HmeifL+JcGhIkHr03wCtyvriB1trYEfxvOtRaoTi+bhcscsV0HEFXO2H9hDv0jRGY5K0A7nhitdEw
+ USRzZOiFSAoDetFEc8bCha4LOj/HNRNU/ukXVJAUQnI9j1pxK6FMJPCI+ELnTkPlS3/M=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q4hh3-0001vj-BO for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 01 Jun 2023 12:46:17 +0000
+ id 1q4ipf-0005cq-Kd for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 01 Jun 2023 13:59:16 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id EC1F064258
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  1 Jun 2023 12:46:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 30959C433A0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  1 Jun 2023 12:46:11 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1ED8B6453A;
+ Thu,  1 Jun 2023 13:59:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA843C433D2;
+ Thu,  1 Jun 2023 13:59:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685623571;
- bh=zA5zh8TUsDaNUb3Scy1bc33znf2Di66y2kPpzn7qjIA=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=YPZsEzXQDL19nmqxHM/5nGVu8pfj086EtGDHEMMhLPMfxa6DEeETTjIRtofBx+2mI
- LqRsZCAFinDttob8oStEx4CPQv7i5MlxlY5gSRAB1++HcsQTVqMxFPXBL2xJC2a7oD
- wvGvOE4dvcq1sJiejpG4r+7Zmiuxl9nf908XQH4n3SMZAqLac4KUF/FseR1Pq8zTQe
- VFlAmeA6wwOvcDk/vN+0W/jBsR04yP+jb5KnF9cGrzCN7HrOyY4KrusKycuQrKgW7E
- xOswQ0dL3ITmtXMjPznw1BEBwCtHTKiJCJkU83xQndoAK8DiR7NLUynaf8fUHtHc3c
- Oojt1DQqNL1sA==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 1B844C43143; Thu,  1 Jun 2023 12:46:11 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 01 Jun 2023 12:46:09 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: guido.iodice@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-5VFpkbFEpO@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1685627944;
+ bh=hrvO0WffTuYX0l8xl6Ve6qY34By3qmMdYk7DH/2LqV4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=RSKNSdL1EwbgZ3EVAsPXSCUcGmPXrtGiZ7K/mcXuispwQXsqu4hHi1HU0/cfChTLi
+ FQHMIEttwLeBHGVThYBwKqodAMzYKLybFe/dsKnlmr8pUS8XikF8TzqxZ4WLw/4vd2
+ Bu7Ra/G6Fr0QhIZ+J7sOiFYzuSObtGZ+4gKtaCoW1oyIaUGmHuR7vvQeb3pqdyxNuL
+ WOG2hgBVDtBfNi2JCBHf8fNlyZmgqz4zF1H/e+Dw9ghxjjnWNs7roFT4qRlFRoQXGy
+ SC+pdwA/NUF6kJm0TcyB2A6vZJnbbT+waoLD1pNjxbIIIkcg7KXeRvZguOFip43Qhq
+ Usx4NRM/X1d6Q==
+Date: Thu, 1 Jun 2023 15:58:58 +0200
+From: Christian Brauner <brauner@kernel.org>
+To: Jan Kara <jack@suse.cz>
+Message-ID: <20230601-gebracht-gesehen-c779a56b3bf3@brauner>
+References: <20230601104525.27897-1-jack@suse.cz>
+ <20230601105830.13168-4-jack@suse.cz>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20230601105830.13168-4-jack@suse.cz>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -91,10 +72,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
- Comment
- #171 from Guido (guido.iodice@gmail.com) --- All ok here with kernel 6.4
- since May, 5th. My mount options: 
+ Content preview:  On Thu, Jun 01, 2023 at 12:58:24PM +0200, Jan Kara wrote:
+ > Currently the locking order of inode locks for directories that are not
+ > in ancestor relationship is not defined because all operations tha [...]
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -109,8 +89,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q4hh3-0001vj-BO
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+X-Headers-End: 1q4ipf-0005cq-Kd
+Subject: Re: [f2fs-dev] [PATCH v2 4/6] fs: Establish locking order for
+ unrelated directories
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,31 +103,71 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Ted Tso <tytso@mit.edu>, Miklos Szeredi <miklos@szeredi.hu>,
+ "Darrick J. Wong" <djwong@kernel.org>, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ Al Viro <viro@ZenIV.linux.org.uk>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+On Thu, Jun 01, 2023 at 12:58:24PM +0200, Jan Kara wrote:
+> Currently the locking order of inode locks for directories that are not
+> in ancestor relationship is not defined because all operations that
+> needed to lock two directories like this were serialized by
+> sb->s_vfs_rename_mutex. However some filesystems need to lock two
+> subdirectories for RENAME_EXCHANGE operations and for this we need the
+> locking order established even for two tree-unrelated directories.
+> Provide a helper function lock_two_inodes() that establishes lock
+> ordering for any two inodes and use it in lock_two_directories().
+> 
+> CC: stable@vger.kernel.org
+> Signed-off-by: Jan Kara <jack@suse.cz>
+> ---
+>  fs/inode.c    | 42 ++++++++++++++++++++++++++++++++++++++++++
+>  fs/internal.h |  2 ++
+>  fs/namei.c    |  4 ++--
+>  3 files changed, 46 insertions(+), 2 deletions(-)
+> 
+> diff --git a/fs/inode.c b/fs/inode.c
+> index 577799b7855f..4000ab08bbc0 100644
+> --- a/fs/inode.c
+> +++ b/fs/inode.c
+> @@ -1103,6 +1103,48 @@ void discard_new_inode(struct inode *inode)
+>  }
+>  EXPORT_SYMBOL(discard_new_inode);
+>  
+> +/**
+> + * lock_two_inodes - lock two inodes (may be regular files but also dirs)
+> + *
+> + * Lock any non-NULL argument. The caller must make sure that if he is passing
+> + * in two directories, one is not ancestor of the other.  Zero, one or two
+> + * objects may be locked by this function.
+> + *
+> + * @inode1: first inode to lock
+> + * @inode2: second inode to lock
+> + * @subclass1: inode lock subclass for the first lock obtained
+> + * @subclass2: inode lock subclass for the second lock obtained
+> + */
+> +void lock_two_inodes(struct inode *inode1, struct inode *inode2,
+> +		     unsigned subclass1, unsigned subclass2)
+> +{
+> +	if (!inode1 || !inode2)
 
---- Comment #171 from Guido (guido.iodice@gmail.com) ---
-All ok here with kernel 6.4 since May, 5th.
+I think you forgot the opening bracket...
+I can just fix this up for you though.
 
-My mount options:
+> +		/*
+> +		 * Make sure @subclass1 will be used for the acquired lock.
+> +		 * This is not strictly necessary (no current caller cares) but
+> +		 * let's keep things consistent.
+> +		 */
+> +		if (!inode1)
+> +			swap(inode1, inode2);
+> +		goto lock;
+> +	}
 
-/dev/nvme0n1p3 on / type f2fs
-(rw,noatime,lazytime,background_gc=on,gc_merge,nodiscard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,flush_merge,barrier,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,checkpoint_merge,fsync_mode=posix,atgc,memory=normal)
-
-/dev/nvme0n1p4 on /home type f2fs
-(rw,noatime,lazytime,background_gc=on,gc_merge,nodiscard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,flush_merge,barrier,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,checkpoint_merge,fsync_mode=posix,atgc,memory=normal)
-
-/dev/nvme1n1 on /run/media/guido/nvme1 type f2fs
-(rw,noatime,lazytime,background_gc=on,gc_merge,nodiscard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,flush_merge,barrier,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,checkpoint_merge,fsync_mode=posix,compress_algorithm=zstd:6,compress_log_size=2,compress_chksum,compress_mode=fs,compress_cache,atgc,memory=normal)
-
--- 
-You may reply to this email to add a comment.
-
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
