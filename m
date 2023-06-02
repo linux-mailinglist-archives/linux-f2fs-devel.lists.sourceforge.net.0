@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C622171FE0B
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Jun 2023 11:39:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09F6471FE23
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Jun 2023 11:44:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q51FX-0004Kx-Oh;
-	Fri, 02 Jun 2023 09:39:12 +0000
+	id 1q51Kd-0002lL-JH;
+	Fri, 02 Jun 2023 09:44:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1q51FV-0004Kq-VA
+ (envelope-from <chao@kernel.org>) id 1q51Kc-0002lF-JV
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 02 Jun 2023 09:39:10 +0000
+ Fri, 02 Jun 2023 09:44:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mEBm3lolxYmN9Eg6exfRQzT3c3BzQBNJFhm4eSX4/MY=; b=Z2Sjjtlb/bPkfFr9OSwRtYEv1r
- UbH6WnR3vZYxLvxxCthdF27HyHwL0Ho10JNUN22KnZ6/rAQcl+2EHwc2KrdsU/eCssSZ4oS1CMhkU
- H8YtgA/u4WsT6cgrjsxK/ucjVnjVwkEImFfkSsGjk1svmnqFS5T9y33CiLwyQBND4Heg=;
+ bh=eBzdastk4u8C3Sq3kCvqexb2Oyf5EX9jz+iO65Btlz0=; b=bqKhtRX6P+J/UIyYFiuanuSJIy
+ KRTihOp8t6ZwketuYgdcUYSBo1MtE4D7flmtPHHpdZx6EH0Twh6pkVPwwP5/uelxtTngHVj/teoH/
+ FZIdKbGhx6pAh7FjToCZF32sxARPJvq0UiptGEkBbrB85ptETVxokxl5fQYwjYm2MJ8I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,71 +31,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mEBm3lolxYmN9Eg6exfRQzT3c3BzQBNJFhm4eSX4/MY=; b=cYB5uG6BGccX41qfEPMlNoTMd8
- V+P7Wqz9UwWPZwyaP57qC4HFU1g/5Gj7KCRfK9as//ilH18vSO0lpPB4kmp32F1xseEBDMnC6hfsK
- YDa3a1GSlPohChC2syzt1CN1+YkzEwPPk0fiMDr56SG63u1YMSuxVdxde8xrRD4jKdy8=;
+ bh=eBzdastk4u8C3Sq3kCvqexb2Oyf5EX9jz+iO65Btlz0=; b=PMq4wqggXnH6ppRwCSZtgjrkFU
+ Bs77ae9IlX7j8MCMxLVCtreyNXDT1vRqaYPUSO4oAdqndzp5OPxzrugGdt7fFw2sD6flpjgTa4H4V
+ WGtkXkWiEZrUP2tc83DE0cKQqePy7sjYRjjSYiRv6/yICKGjFjAJf8CVDv+2pk07JCgg=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q51FS-0007u7-0W for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 02 Jun 2023 09:39:10 +0000
+ id 1q51Kc-00089U-Ey for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 02 Jun 2023 09:44:27 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3739360AFA;
- Fri,  2 Jun 2023 09:38:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 976E9C433EF;
- Fri,  2 Jun 2023 09:38:52 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 144B160C1F;
+ Fri,  2 Jun 2023 09:44:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CAD6C433D2;
+ Fri,  2 Jun 2023 09:44:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685698733;
- bh=eTGJKsIm6xfh2a0IRVtfmLa6Wy7RqLcvF2owGLAjSOQ=;
+ s=k20201202; t=1685699060;
+ bh=0y9eWDGXSBQy6Oyvh0HUtH6cc6K4fP/cZiehJc0UCxM=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=aXwv4zhDxzodEzB/9JyT2q8fuIiooObup9YrYYRbQGlOKRaAG43EdrIqzS6wYyWT0
- yOprjcUaTwLfpjgKLKHFS14BlIeXGufqauHKZqBhQMgbAuW6g/r1r+e0gMa4HaKGNw
- ZgL9/+4BfPLTpzyenVjuvxV6UBq/3AMlfsmNJKFoLKMMotzWMbx2YXlpBfN/htKOJd
- xdRlaK09TMQQgkyv3/Z56teB9ymy9BO60TW/iJCgVuTvMjn+FKNLwRwL8nUXc22p92
- zc1gQBpDTB88fx+ApQcnmOLLn95EtzLywOAr7qK36a5qPHd9bKEPX8yxcUKyroR9To
- QZwjKsg73hZpQ==
-Message-ID: <faae35b2-db70-23ef-3469-7fe31d24618d@kernel.org>
-Date: Fri, 2 Jun 2023 17:38:50 +0800
+ b=Kt7cYnBYJFXJ+VSdH9sebY/SqXG3nRCo8I7J1VNR13fPp/47mnZO2CCIc0CpXz053
+ jpUh1SYK2QAFBGAISxxxdtkAjQQMWvrjrdxFpwMbjKECzmYpZ9liVyhtL26h0xdSMt
+ lwi/FwsvArh32YyFJSig3BzhMA42NEAzRyic2CbfiOgnQLBM9qyhMdp/gFwhfeYgWJ
+ KM36itFxTP+HdBkk71agcRLi6w+H3Xp0OKC1aSTvcgqmB3e3zrE1uyFyQFyJx9NAQs
+ hi/ujS2jMniBwmtIsvW8BHm/W5QNST1UY8oAWjs/Kfddx+emkyAYfSP4RpTU5Oen8H
+ zUbmk8teKhRqA==
+Message-ID: <06a2e4dc-fb28-24cf-0a41-3c281a9b2848@kernel.org>
+Date: Fri, 2 Jun 2023 17:44:17 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
 Content-Language: en-US
 To: Maxim Korotkov <korotkov.maxim.s@gmail.com>,
  Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230531065142.365199-1-korotkov.maxim.s@gmail.com>
+References: <20230531072238.370186-1-korotkov.maxim.s@gmail.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230531065142.365199-1-korotkov.maxim.s@gmail.com>
-X-Spam-Score: -5.5 (-----)
+In-Reply-To: <20230531072238.370186-1-korotkov.maxim.s@gmail.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/5/31 14:51, Maxim Korotkov wrote: > The input pointer
- "parent" was used unsafely > before checking against NULL > > Found by RASU
- JSC with Svace static analyzer > Fixes: 603f8f9d3(sload.f2fs: [...] 
- Content analysis details:   (-5.5 points, 6.0 required)
+ Content preview:  On 2023/5/31 15:22, Maxim Korotkov wrote: > In error handling
+ cases, exiting a function without releasing memory > Added tags to clean
+ up resources and return error code > Found by RASU JSC > Signed-o [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 NICE_REPLY_A           Looks like a legit reply (A)
- -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q51FS-0007u7-0W
-Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: fix potential NULL dereference
+ valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q51Kc-00089U-Ey
+Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: fix memleak in f2fs_create()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,55 +111,63 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/5/31 14:51, Maxim Korotkov wrote:
-> The input pointer "parent" was used unsafely
-> before checking against NULL
-> 
-> Found by RASU JSC with Svace static analyzer
-> Fixes: 603f8f9d3(sload.f2fs: support loading files into partition directly)
+On 2023/5/31 15:22, Maxim Korotkov wrote:
+> In error handling cases, exiting a function without releasing memory
+> Added tags to clean up resources and return error code
+> Found by RASU JSC
 > Signed-off-by: Maxim Korotkov <maskorotkov@rasu.ru>
 > ---
->   fsck/dir.c | 14 +++++++++-----
->   1 file changed, 9 insertions(+), 5 deletions(-)
+>   fsck/dir.c | 9 +++++++--
+>   1 file changed, 7 insertions(+), 2 deletions(-)
 > 
 > diff --git a/fsck/dir.c b/fsck/dir.c
-> index 4a3eb6e..925fe14 100644
+> index 4a3eb6e..c3508bf 100644
 > --- a/fsck/dir.c
 > +++ b/fsck/dir.c
-> @@ -225,19 +225,23 @@ int f2fs_add_link(struct f2fs_sb_info *sbi, struct f2fs_node *parent,
->   	int level = 0, current_depth, bit_pos;
->   	int nbucket, nblock, bidx, block;
->   	int slots = GET_DENTRY_SLOTS(name_len);
-> -	f2fs_hash_t dentry_hash = f2fs_dentry_hash(get_encoding(sbi),
-> -						IS_CASEFOLDED(&parent->i),
-> -						name, name_len);
-> +	f2fs_hash_t dentry_hash;
->   	struct f2fs_dentry_block *dentry_blk;
->   	struct f2fs_dentry_ptr d;
->   	struct dnode_of_data dn;
-> -	nid_t pino = le32_to_cpu(parent->footer.ino);
-> -	unsigned int dir_level = parent->i.i_dir_level;
-> +	nid_t pino;
-> +	unsigned int dir_level;
->   	int ret;
->   
->   	if (parent == NULL)
->   		return -EINVAL;
->   
-> +	dentry_hash = f2fs_dentry_hash(get_encoding(sbi),
-> +						IS_CASEFOLDED(&parent->i),
-> +						name, name_len);	
+> @@ -704,7 +704,7 @@ int f2fs_create(struct f2fs_sb_info *sbi, struct dentry *de)
+>   	ret = convert_inline_dentry(sbi, parent, ni.blk_addr);
+>   	if (ret) {
+>   		MSG(0, "Convert inline dentry for pino=%x failed.\n", de->pino);
+> -		return -1;
+> +		goto err_free_parent_dir;
 
-Unneeded indent after ';', otherwise it looks good to me.
+How about:
+
+	ret = -1
+	goto free_parent_dir;
+
+>   	}
+>   
+>   	ret = f2fs_find_entry(sbi, parent, de);
+> @@ -728,7 +728,7 @@ int f2fs_create(struct f2fs_sb_info *sbi, struct dentry *de)
+>   		if (hardlink_ni.blk_addr == NULL_ADDR) {
+>   			MSG(1, "No original inode for hard link to_ino=%x\n",
+>   				found_hardlink->to_ino);
+> -			return -1;
+> +			goto err_free_child_dir;
+	ret = -1
+	goto free_child_dir;
+
+>   		}
+>   
+>   		/* Use previously-recorded inode */
+> @@ -805,6 +805,11 @@ free_child_dir:
+>   free_parent_dir:
+>   	free(parent);
+>   	return 0;
+
+	return ret;
 
 Thanks,
 
-> +	pino = le32_to_cpu(parent->footer.ino);
-> +	dir_level = parent->i.i_dir_level;
-> +
->   	if (!pino) {
->   		ERR_MSG("Wrong parent ino:%d \n", pino);
->   		return -EINVAL;
+> +err_free_child_dir:
+> +	free(child);
+> +err_free_parent_dir:
+> +	free(parent);
+> +	return -1;	
+>   }
+>   
+>   int f2fs_mkdir(struct f2fs_sb_info *sbi, struct dentry *de)
 
 
 _______________________________________________
