@@ -2,77 +2,71 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5A3D71FC9C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Jun 2023 10:52:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C622171FE0B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  2 Jun 2023 11:39:15 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q50WH-0003mU-2A;
-	Fri, 02 Jun 2023 08:52:25 +0000
+	id 1q51FX-0004Kx-Oh;
+	Fri, 02 Jun 2023 09:39:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1q50WF-0003mO-E3
+ (envelope-from <chao@kernel.org>) id 1q51FV-0004Kq-VA
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 02 Jun 2023 08:52:23 +0000
+ Fri, 02 Jun 2023 09:39:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SArMl7Zl2dVRGwT5Hjc7TnA+8LaypSig0ji9nMQf7JU=; b=LdQnTfmkc5l2IRQBE4x9veizci
- TezE26ZDmn7rZve2N3yTB5j8Bz9P+AE1bB4Pkdx5cVEqSnrqdX+Siu4TxYKUEXdOMkm1IRCREGAY3
- tjtBcUK2gwUY6FWMMwQUacYwe6VDgHgtiUEhug3nLhd41RVgdNX/OKLTBYDCvfHDW4tU=;
+ bh=mEBm3lolxYmN9Eg6exfRQzT3c3BzQBNJFhm4eSX4/MY=; b=Z2Sjjtlb/bPkfFr9OSwRtYEv1r
+ UbH6WnR3vZYxLvxxCthdF27HyHwL0Ho10JNUN22KnZ6/rAQcl+2EHwc2KrdsU/eCssSZ4oS1CMhkU
+ H8YtgA/u4WsT6cgrjsxK/ucjVnjVwkEImFfkSsGjk1svmnqFS5T9y33CiLwyQBND4Heg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SArMl7Zl2dVRGwT5Hjc7TnA+8LaypSig0ji9nMQf7JU=; b=cGGAi4zoFiikqn/9LhGRyn5oSg
- v0wdpwobSvkXDhoxvOXlRnyOf69pL101/WUwGQ/zr0uTOny3SOtZBVgN1CpS0xp2c8KIruO7qAIrm
- MeC7Xi8xRa5rS1tfaD5NTCSINDwYR3XTIS4O+jhHDCBYN+QzAZ03StnLaqm3ojyLNsNE=;
+ bh=mEBm3lolxYmN9Eg6exfRQzT3c3BzQBNJFhm4eSX4/MY=; b=cYB5uG6BGccX41qfEPMlNoTMd8
+ V+P7Wqz9UwWPZwyaP57qC4HFU1g/5Gj7KCRfK9as//ilH18vSO0lpPB4kmp32F1xseEBDMnC6hfsK
+ YDa3a1GSlPohChC2syzt1CN1+YkzEwPPk0fiMDr56SG63u1YMSuxVdxde8xrRD4jKdy8=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q50WC-00976O-CC for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 02 Jun 2023 08:52:23 +0000
+ id 1q51FS-0007u7-0W for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 02 Jun 2023 09:39:10 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id BB39A6150C;
- Fri,  2 Jun 2023 08:52:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52A63C4339B;
- Fri,  2 Jun 2023 08:52:12 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 3739360AFA;
+ Fri,  2 Jun 2023 09:38:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 976E9C433EF;
+ Fri,  2 Jun 2023 09:38:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685695934;
- bh=UUGsYsnqEu8jbU1zwSqU8HEf+QxK5Ufh42Kq2cX812M=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=KHqzk+sGr6rUNDHQKL0DvRCMons0WUTQ4bg2zqUGrUTJWyrkb+ExeDnEamMtinDgk
- KMrmZDDa48EpyFwsDhgH6qRPu9OMhzyZAdqyTggANdLHSGVm838PMB2/heDuYc3ZiE
- Xg5ES/bRhMVgdTlHIwRc+2oKlOTuMwGIJlunlIiYhPxKH1ddOxQqkdlyFBsiotfCij
- YDiMCL0qE7eaJmdAQUt73fvWmsYTDPDtqft0MrH44AhMBTzIRcIP0C2F4FGR/XBwLv
- dIl1GW6PStqSIsCaOH5QafPgNTovlREC5wwfGmkEFa6FCD0PSTxAHGmG5QeM61g8Kd
- NqkyTTKqaVLTw==
-Message-ID: <f301845f-c358-4632-1df5-5944d7483072@kernel.org>
-Date: Fri, 2 Jun 2023 16:52:10 +0800
+ s=k20201202; t=1685698733;
+ bh=eTGJKsIm6xfh2a0IRVtfmLa6Wy7RqLcvF2owGLAjSOQ=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=aXwv4zhDxzodEzB/9JyT2q8fuIiooObup9YrYYRbQGlOKRaAG43EdrIqzS6wYyWT0
+ yOprjcUaTwLfpjgKLKHFS14BlIeXGufqauHKZqBhQMgbAuW6g/r1r+e0gMa4HaKGNw
+ ZgL9/+4BfPLTpzyenVjuvxV6UBq/3AMlfsmNJKFoLKMMotzWMbx2YXlpBfN/htKOJd
+ xdRlaK09TMQQgkyv3/Z56teB9ymy9BO60TW/iJCgVuTvMjn+FKNLwRwL8nUXc22p92
+ zc1gQBpDTB88fx+ApQcnmOLLn95EtzLywOAr7qK36a5qPHd9bKEPX8yxcUKyroR9To
+ QZwjKsg73hZpQ==
+Message-ID: <faae35b2-db70-23ef-3469-7fe31d24618d@kernel.org>
+Date: Fri, 2 Jun 2023 17:38:50 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
 Content-Language: en-US
-To: beomsu7.kim@samsung.com, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- Yonggil Song <yonggil.song@samsung.com>, Seokhwan Kim
- <sukka.kim@samsung.com>, Daejun Park <daejun7.park@samsung.com>,
- Seonghun Kim <seonghun-sui.kim@samsung.com>
-References: <CGME20230602044830epcms2p141ec782e866c2adc5a3142516f051b87@epcms2p1>
- <20230602044830epcms2p141ec782e866c2adc5a3142516f051b87@epcms2p1>
+To: Maxim Korotkov <korotkov.maxim.s@gmail.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20230531065142.365199-1-korotkov.maxim.s@gmail.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230602044830epcms2p141ec782e866c2adc5a3142516f051b87@epcms2p1>
+In-Reply-To: <20230531065142.365199-1-korotkov.maxim.s@gmail.com>
 X-Spam-Score: -5.5 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -80,9 +74,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/6/2 12:48, beomsu kim wrote: > When evaluating in
- f2fs, it takes much time to obtain waf data. > This patch helps to obtain
- waf data without calcluation. > > Signed-off-by: Beomsu Kim <beomsu7 [...]
+ Content preview:  On 2023/5/31 14:51, Maxim Korotkov wrote: > The input pointer
+ "parent" was used unsafely > before checking against NULL > > Found by RASU
+ JSC with Svace static analyzer > Fixes: 603f8f9d3(sload.f2fs: [...] 
  Content analysis details:   (-5.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,9 +94,8 @@ X-Spam-Report: Spam detection software,
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 NICE_REPLY_A           Looks like a legit reply (A)
  -0.2 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q50WC-00976O-CC
-Subject: Re: [f2fs-dev] [PATCH] f2fs: including waf data in f2fs status
- information
+X-Headers-End: 1q51FS-0007u7-0W
+Subject: Re: [f2fs-dev] [PATCH] fsck.f2fs: fix potential NULL dereference
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,65 +107,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Maxim Korotkov <maskorotkov@rasu.ru>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/6/2 12:48, beomsu kim wrote:
-> When evaluating in f2fs, it takes much time to obtain waf data.
-> This patch helps to obtain waf data without calcluation.
+On 2023/5/31 14:51, Maxim Korotkov wrote:
+> The input pointer "parent" was used unsafely
+> before checking against NULL
 > 
-> Signed-off-by: Beomsu Kim <beomsu7.kim@samsung.com>
+> Found by RASU JSC with Svace static analyzer
+> Fixes: 603f8f9d3(sload.f2fs: support loading files into partition directly)
+> Signed-off-by: Maxim Korotkov <maskorotkov@rasu.ru>
 > ---
->   fs/f2fs/iostat.c | 16 ++++++++++++++++
->   1 file changed, 16 insertions(+)
+>   fsck/dir.c | 14 +++++++++-----
+>   1 file changed, 9 insertions(+), 5 deletions(-)
 > 
-> diff --git a/fs/f2fs/iostat.c b/fs/f2fs/iostat.c
-> index 3d5bfb1ad585..6eab11b0610d 100644
-> --- a/fs/f2fs/iostat.c
-> +++ b/fs/f2fs/iostat.c
-> @@ -34,10 +34,22 @@ int __maybe_unused iostat_info_seq_show(struct seq_file *seq, void *offset)
->   {
->          struct super_block *sb = seq->private;
->          struct f2fs_sb_info *sbi = F2FS_SB(sb);
-> +       int j;
-> +       unsigned long long waf = 0;
-> +       unsigned long long data_written_to_storage = 0;
-> +       unsigned long long data_written_by_user = 0;
+> diff --git a/fsck/dir.c b/fsck/dir.c
+> index 4a3eb6e..925fe14 100644
+> --- a/fsck/dir.c
+> +++ b/fsck/dir.c
+> @@ -225,19 +225,23 @@ int f2fs_add_link(struct f2fs_sb_info *sbi, struct f2fs_node *parent,
+>   	int level = 0, current_depth, bit_pos;
+>   	int nbucket, nblock, bidx, block;
+>   	int slots = GET_DENTRY_SLOTS(name_len);
+> -	f2fs_hash_t dentry_hash = f2fs_dentry_hash(get_encoding(sbi),
+> -						IS_CASEFOLDED(&parent->i),
+> -						name, name_len);
+> +	f2fs_hash_t dentry_hash;
+>   	struct f2fs_dentry_block *dentry_blk;
+>   	struct f2fs_dentry_ptr d;
+>   	struct dnode_of_data dn;
+> -	nid_t pino = le32_to_cpu(parent->footer.ino);
+> -	unsigned int dir_level = parent->i.i_dir_level;
+> +	nid_t pino;
+> +	unsigned int dir_level;
+>   	int ret;
 >   
->          if (!sbi->iostat_enable)
->                  return 0;
+>   	if (parent == NULL)
+>   		return -EINVAL;
 >   
-> +       for (j = FS_DATA_IO; j <= FS_CP_META_IO; j++)
+> +	dentry_hash = f2fs_dentry_hash(get_encoding(sbi),
+> +						IS_CASEFOLDED(&parent->i),
+> +						name, name_len);	
 
-FS_CDATA_IO is redundant?
-
-> +               data_written_to_storage += sbi->iostat_bytes[j];
-> +       for (j = FS_DATA_IO; j <= FS_CDATA_IO; j++)
-
-Just needs to include APP_WRITE_IO and APP_MAPPED_IO?
+Unneeded indent after ';', otherwise it looks good to me.
 
 Thanks,
 
-> +               data_written_by_user += sbi->iostat_bytes[j];
+> +	pino = le32_to_cpu(parent->footer.ino);
+> +	dir_level = parent->i.i_dir_level;
 > +
-> +       if (data_written_by_user > 0)
-> +               waf = data_written_to_storage * 100 / data_written_by_user;
-> +
->          seq_printf(seq, "time:          %-16llu\n", ktime_get_real_seconds());
->          seq_printf(seq, "\t\t\t%-16s %-16s %-16s\n",
->                                  "io_bytes", "count", "avg_bytes");
-> @@ -81,6 +93,10 @@ int __maybe_unused iostat_info_seq_show(struct seq_file *seq, void *offset)
->          IOSTAT_INFO_SHOW("fs discard", FS_DISCARD_IO);
->          IOSTAT_INFO_SHOW("fs flush", FS_FLUSH_IO);
->   
-> +       /* print waf */
-> +       seq_puts(seq, "[WAF]\n");
-> +       seq_printf(seq, "fs waf:                %llu.%02llu\n", waf / 100, waf % 100);
-> +
->          return 0;
->   }
->   
+>   	if (!pino) {
+>   		ERR_MSG("Wrong parent ino:%d \n", pino);
+>   		return -EINVAL;
 
 
 _______________________________________________
