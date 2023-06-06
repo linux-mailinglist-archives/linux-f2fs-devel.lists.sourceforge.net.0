@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3532A723993
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 09:41:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22152723996
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 09:41:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6RK1-0003RW-It;
-	Tue, 06 Jun 2023 07:41:42 +0000
+	id 1q6RK7-0003Z5-PX;
+	Tue, 06 Jun 2023 07:41:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+c7f58ba0a08136e81302+7226+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1q6RJz-0003RA-Cy for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 07:41:40 +0000
+ id 1q6RK6-0003Yr-Cn for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 07:41:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FfyUyS9WbjVTL2aLZXa9Y1rln0H/+/QigckVAbNE3A0=; b=hv1s9nli/ArgVqLX1eeXZEvhbI
- go0d822xCxDYUk1x6sGn8vnsTDoQJLDBHJ7pFf936nB1GXTGo7vhKC3nS75E5RCayYznG49A4maWy
- YYhkty7EiMqzilLdKT/wFXdJYlWo1PSwF6Trk58UGshpHE1y8AmYi4lHYnx9DIp9fLjg=;
+ bh=vLDKGJIN4sUAMcx+ss63SchZIFVZL96BaI3AvIUMzr4=; b=UzkNUgRLoqVyKb528DDjD/mj1v
+ xz+oys2LsbqrYllnYOqxGJb+G1cWsCFE5uTYg6gM4H/BRTEHwog3V4V4vuNy5jgakjUfewZTLW5no
+ dvuSXDQqZrUwCmownwwr7FFntTl8Szc24yxp1Usmfj/6VFQUGjrubt/4FKYahoXnUi8g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,52 +31,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FfyUyS9WbjVTL2aLZXa9Y1rln0H/+/QigckVAbNE3A0=; b=couInKdL6rNw7Qk3NtCKhcTGt9
- EqQpMSVIe/obcYjtAQjn5hyvo9LauzBSTK8tZYHQAVTakgzzD92LECxnhkbKAcBbiGPfuIQdTN1fy
- 7ovd1bF0IIv91HuO0PZgXKVb5sAD4uN5RMIKnw0MfqgIa9QyWaC2ynxJO1f0biVrxkg4=;
+ bh=vLDKGJIN4sUAMcx+ss63SchZIFVZL96BaI3AvIUMzr4=; b=EMQMrMTOoOjIwNmoveFgIKMlY1
+ NYPiMWcH9T7kHN6j1XrG3Ehbab3O78kSx+/3Mr/zihmDtngaRjHpKzQqXOBVfL9OSFH8rUrPKCgtl
+ iWSlIT2c8fMDRqhnR3FZQsihboDHUnCVKsrLHmAmDxcdVWVmXPToIzuwBd3xkJYX/kKs=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6RJy-0003d1-Mj for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 07:41:39 +0000
+ id 1q6RK6-0003dQ-M1 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 07:41:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=FfyUyS9WbjVTL2aLZXa9Y1rln0H/+/QigckVAbNE3A0=; b=anWk7SRr+t5f/AAf+QUnfqoBYZ
- U/d1gFk1QRBMAf+TNUBr63aYLvj5fwQVp3I0huz7xb9y2n1KIpYQRR9LX8fNxxlI0CPsSHssmcP51
- hSBSh0QQBQ/wB0eWs3uzu49CcAdHcFI0eMBrNZ8IeHTVqv6wmYA6SA9CpCe6Fi3B//u76z/IvJZIL
- /TUE6Z2d7rqePOsdbsxFCKwWoeG5BKWLMLH3IQ6wrOFLKlxpA3p9F6dFydnJzb7RPgp6phMtO4vjp
- UBTTA4oGcfuxdgcelaMo+ocwami0+MwbVMXKearFiCojUWsigHBm2vnGd0yY72aypMRB+c+2KvGij
- BDiBqSGw==;
+ bh=vLDKGJIN4sUAMcx+ss63SchZIFVZL96BaI3AvIUMzr4=; b=Kqz67xYl70ncmp7C+TTho2ZAwh
+ yxMVvfTUe4ptMIvjyzv5W3/oGptcu3lODz1GZfs1Dzmfa07wbMjg2x6XNkhPoXVVT8TeEzZ5+vZ85
+ v1qggGnWqxY2bsFKIizZ6LsxrrrPNciu1JwJMH/tySvoqXcRfyJlv85UdaK+gMvOpcMhP0h4rkSzj
+ dd9SWrGeDfCkJGWmtE8+Nh6i9voVwKacayAFzTn1gmxkmc1YJhF7r0Oan23F9ssgVCUQ9Cg3Op4+o
+ gDpWg+ZYjjYuzSCNiQl39lt4KnyhQ9DBoM37xAlqu7P4qY4UvMmUgGNWibsjTk/rgEvj+LqaFZPLH
+ vE5IjFEw==;
 Received: from
  2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1q6RJU-000ZoJ-0B; Tue, 06 Jun 2023 07:41:08 +0000
+ id 1q6RJX-000Zqu-1D; Tue, 06 Jun 2023 07:41:11 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Tue,  6 Jun 2023 09:39:42 +0200
-Message-Id: <20230606073950.225178-24-hch@lst.de>
+Date: Tue,  6 Jun 2023 09:39:43 +0200
+Message-Id: <20230606073950.225178-25-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230606073950.225178-1-hch@lst.de>
 References: <20230606073950.225178-1-hch@lst.de>
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -2.1 (--)
+X-Spam-Score: -2.2 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Instead of propagating the fmode_t, just use a bool to track
- if a mtd block device was opened for writing. Signed-off-by: Christoph Hellwig
- <hch@lst.de> --- drivers/mtd/mtd_blkdevs.c | 2 +- drivers/mtd/mtdblock.c
- | 2 +- include/linux/mtd/blktrans.h | 2 +- 3 files changed, 3 insertions(+),
- 3 deletions(-) 
- Content analysis details:   (-2.1 points, 6.0 required)
+ Content preview:  Stop passing the fmode_t around and just use a simple bool
+ to track if an export is read-only. Signed-off-by: Christoph Hellwig
+ <hch@lst.de>
+ --- drivers/block/rnbd/rnbd-srv-sysfs.c | 3 +-- drivers/block/rnbd/rnbd-srv.c
+ | 15 +++++++-------- drivers/block/rnbd/rnbd-srv.h | 2 +- 3 files changed,
+ 9 [...] Content analysis details:   (-2.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
@@ -87,12 +87,13 @@ X-Spam-Report: Spam detection software,
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1q6RJy-0003d1-Mj
-Subject: [f2fs-dev] [PATCH 23/31] mtd: block: use a simple bool to track
- open for write
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1q6RK6-0003dQ-M1
+Subject: [f2fs-dev] [PATCH 24/31] rnbd-srv: replace sess->open_flags with a
+ "bool readonly"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,55 +124,102 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Instead of propagating the fmode_t, just use a bool to track if a mtd
-block device was opened for writing.
+Stop passing the fmode_t around and just use a simple bool to track if
+an export is read-only.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/mtd/mtd_blkdevs.c    | 2 +-
- drivers/mtd/mtdblock.c       | 2 +-
- include/linux/mtd/blktrans.h | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ drivers/block/rnbd/rnbd-srv-sysfs.c |  3 +--
+ drivers/block/rnbd/rnbd-srv.c       | 15 +++++++--------
+ drivers/block/rnbd/rnbd-srv.h       |  2 +-
+ 3 files changed, 9 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/mtd/mtd_blkdevs.c b/drivers/mtd/mtd_blkdevs.c
-index f0bb09fde95e3a..bd0b7545364349 100644
---- a/drivers/mtd/mtd_blkdevs.c
-+++ b/drivers/mtd/mtd_blkdevs.c
-@@ -208,7 +208,7 @@ static int blktrans_open(struct gendisk *disk, fmode_t mode)
- 	ret = __get_mtd_device(dev->mtd);
- 	if (ret)
- 		goto error_release;
--	dev->file_mode = mode;
-+	dev->writable = mode & FMODE_WRITE;
+diff --git a/drivers/block/rnbd/rnbd-srv-sysfs.c b/drivers/block/rnbd/rnbd-srv-sysfs.c
+index d5d9267e1fa5e4..ebd95771c85ec7 100644
+--- a/drivers/block/rnbd/rnbd-srv-sysfs.c
++++ b/drivers/block/rnbd/rnbd-srv-sysfs.c
+@@ -88,8 +88,7 @@ static ssize_t read_only_show(struct kobject *kobj, struct kobj_attribute *attr,
  
- unlock:
- 	dev->open++;
-diff --git a/drivers/mtd/mtdblock.c b/drivers/mtd/mtdblock.c
-index a0a1194dc1d902..fa476fb4dffb6c 100644
---- a/drivers/mtd/mtdblock.c
-+++ b/drivers/mtd/mtdblock.c
-@@ -294,7 +294,7 @@ static void mtdblock_release(struct mtd_blktrans_dev *mbd)
- 		 * It was the last usage. Free the cache, but only sync if
- 		 * opened for writing.
- 		 */
--		if (mbd->file_mode & FMODE_WRITE)
-+		if (mbd->writable)
- 			mtd_sync(mbd->mtd);
- 		vfree(mtdblk->cache_data);
+ 	sess_dev = container_of(kobj, struct rnbd_srv_sess_dev, kobj);
+ 
+-	return sysfs_emit(page, "%d\n",
+-			  !(sess_dev->open_flags & FMODE_WRITE));
++	return sysfs_emit(page, "%d\n", sess_dev->readonly);
+ }
+ 
+ static struct kobj_attribute rnbd_srv_dev_session_ro_attr =
+diff --git a/drivers/block/rnbd/rnbd-srv.c b/drivers/block/rnbd/rnbd-srv.c
+index 29d560472d05ba..b680071342b898 100644
+--- a/drivers/block/rnbd/rnbd-srv.c
++++ b/drivers/block/rnbd/rnbd-srv.c
+@@ -222,7 +222,7 @@ void rnbd_destroy_sess_dev(struct rnbd_srv_sess_dev *sess_dev, bool keep_id)
+ 	blkdev_put(sess_dev->bdev, NULL);
+ 	mutex_lock(&sess_dev->dev->lock);
+ 	list_del(&sess_dev->dev_list);
+-	if (sess_dev->open_flags & FMODE_WRITE)
++	if (!sess_dev->readonly)
+ 		sess_dev->dev->open_write_cnt--;
+ 	mutex_unlock(&sess_dev->dev->lock);
+ 
+@@ -561,7 +561,7 @@ static void rnbd_srv_fill_msg_open_rsp(struct rnbd_msg_open_rsp *rsp,
+ static struct rnbd_srv_sess_dev *
+ rnbd_srv_create_set_sess_dev(struct rnbd_srv_session *srv_sess,
+ 			      const struct rnbd_msg_open *open_msg,
+-			      struct block_device *bdev, fmode_t open_flags,
++			      struct block_device *bdev, bool readonly,
+ 			      struct rnbd_srv_dev *srv_dev)
+ {
+ 	struct rnbd_srv_sess_dev *sdev = rnbd_sess_dev_alloc(srv_sess);
+@@ -576,7 +576,7 @@ rnbd_srv_create_set_sess_dev(struct rnbd_srv_session *srv_sess,
+ 	sdev->bdev		= bdev;
+ 	sdev->sess		= srv_sess;
+ 	sdev->dev		= srv_dev;
+-	sdev->open_flags	= open_flags;
++	sdev->readonly		= readonly;
+ 	sdev->access_mode	= open_msg->access_mode;
+ 
+ 	return sdev;
+@@ -681,13 +681,12 @@ static int process_msg_open(struct rnbd_srv_session *srv_sess,
+ 	struct rnbd_srv_sess_dev *srv_sess_dev;
+ 	const struct rnbd_msg_open *open_msg = msg;
+ 	struct block_device *bdev;
+-	fmode_t open_flags;
++	fmode_t open_flags = FMODE_READ;
+ 	char *full_path;
+ 	struct rnbd_msg_open_rsp *rsp = data;
+ 
+ 	trace_process_msg_open(srv_sess, open_msg);
+ 
+-	open_flags = FMODE_READ;
+ 	if (open_msg->access_mode != RNBD_ACCESS_RO)
+ 		open_flags |= FMODE_WRITE;
+ 
+@@ -736,9 +735,9 @@ static int process_msg_open(struct rnbd_srv_session *srv_sess,
+ 		goto blkdev_put;
  	}
-diff --git a/include/linux/mtd/blktrans.h b/include/linux/mtd/blktrans.h
-index 15cc9b95e32b52..6e471436bba556 100644
---- a/include/linux/mtd/blktrans.h
-+++ b/include/linux/mtd/blktrans.h
-@@ -34,7 +34,7 @@ struct mtd_blktrans_dev {
- 	struct blk_mq_tag_set *tag_set;
- 	spinlock_t queue_lock;
- 	void *priv;
--	fmode_t file_mode;
-+	bool writable;
- };
  
- struct mtd_blktrans_ops {
+-	srv_sess_dev = rnbd_srv_create_set_sess_dev(srv_sess, open_msg,
+-						     bdev, open_flags,
+-						     srv_dev);
++	srv_sess_dev = rnbd_srv_create_set_sess_dev(srv_sess, open_msg, bdev,
++				open_msg->access_mode == RNBD_ACCESS_RO,
++				srv_dev);
+ 	if (IS_ERR(srv_sess_dev)) {
+ 		pr_err("Opening device '%s' on session %s failed, creating sess_dev failed, err: %ld\n",
+ 		       full_path, srv_sess->sessname, PTR_ERR(srv_sess_dev));
+diff --git a/drivers/block/rnbd/rnbd-srv.h b/drivers/block/rnbd/rnbd-srv.h
+index f5962fd31d62e4..76077a9db3dd55 100644
+--- a/drivers/block/rnbd/rnbd-srv.h
++++ b/drivers/block/rnbd/rnbd-srv.h
+@@ -52,7 +52,7 @@ struct rnbd_srv_sess_dev {
+ 	struct kobject                  kobj;
+ 	u32                             device_id;
+ 	bool				keep_id;
+-	fmode_t                         open_flags;
++	bool				readonly;
+ 	struct kref			kref;
+ 	struct completion               *destroy_comp;
+ 	char				pathname[NAME_MAX];
 -- 
 2.39.2
 
