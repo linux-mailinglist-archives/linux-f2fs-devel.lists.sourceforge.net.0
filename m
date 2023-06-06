@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C49D1723966
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 09:41:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0091A723965
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 09:41:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6RJS-0003Tg-PM;
-	Tue, 06 Jun 2023 07:41:07 +0000
+	id 1q6RJS-00051o-HF;
+	Tue, 06 Jun 2023 07:41:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+c7f58ba0a08136e81302+7226+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1q6RJP-0003TJ-GQ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 07:41:04 +0000
+ id 1q6RJP-00051a-5G for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 07:41:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vuH0cWPL8qHtuuqoY6Ow8SnHOfsHuYxiebFIU5Vf46Y=; b=T53gW13soRNwiaQeOgwW9MfNx5
- 2brUrzwBNKbVTISF8wmzsTNd0ifuSbqS/Ztk6lhg1qweuIWDbbVMmsYtDaDhpzTzZlQMgxYVrNs+v
- WSCsnxBVuxHbtBW8WBKB0JVsr3CxRaVv3rqevQPwdhDvU7yJBP46OgtAgvub5NDYyEKo=;
+ bh=5ZtPhPdJKTDTdyqevIERvcb7Bzke9D31HMKtWNK3WW4=; b=Zf13nYjyvvgJ0MGEn4atPzYI5+
+ 58h5zuHD0N6qHUuRVYgedE4vnYjDWTh6ai9EqdmXkLWzXXZYz8dt3a14aXUCYXyWhQ8uX0QFw33dR
+ 5ftIfDyVi86/bOX2AI68rAQ67RK9ICDGGjiONgka5fM13XEU6D07b5aN0jVbg/BYwyqE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,33 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vuH0cWPL8qHtuuqoY6Ow8SnHOfsHuYxiebFIU5Vf46Y=; b=CgPVp63qbT7QB1w4TgtegFzx3G
- MEvvV85QCfvi3OpebsE1+iaDvM/dbtpy+fVzmAWcoyi1tZ/iwD9OYNjp1vAx1cyoWP9eEo3sO34jT
- bJk+u1JNuNcPZeMzGOTRvYp+8oiBvIMQKORxFklyaFWsQxddarkh+G+hJfIUVNWARtbM=;
+ bh=5ZtPhPdJKTDTdyqevIERvcb7Bzke9D31HMKtWNK3WW4=; b=QOqxMGX04H51Qyh25GaxZglRhR
+ ewkzKekVD6+lIZ8pVsNopQpDFYIYxJEc/+B/0hJ8qdXjO9/LUyQrDMsBd11Y++5zi6mC50xHvfe+/
+ LOmypvapBPeCwg5xL8fEpOFjTZVfurMZiyxTFKeTBwRmrK5+I8nh324QBr0TIXK/50Zc=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6RJO-0003b6-Oo for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 07:41:04 +0000
+ id 1q6RJO-00CV7v-UC for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 07:41:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=vuH0cWPL8qHtuuqoY6Ow8SnHOfsHuYxiebFIU5Vf46Y=; b=3gPyZfEi+OdaSn5VmdbupG3LdE
- ESR/D4Ih4YMaf5TrcYcrdr1iKuHbg7mHVbxmotTCJCjwUcIN6ltz8oKogCmiBJFkFZGJ8kPsghRbh
- TWinvG5H7TEa+HarFNp6UZSbc3tEXcMBHWVQ1GP3jRRitkjm/KcXsiaOXCtmEV195AoHZZxxqkieO
- h7dgImMUIPTgEiqoljO4DfPKzxS/byMfRFllHAhgYIdArocY4PtiqmCq6VjM4IVNdRy33rbKk4v8F
- uyeKYJM5THg16nwQo9n+6FWB16yCz9ARfw7yvzerq+icjLbXf8w/3uamxqF8+sOFJxaVfyHZ9+jdt
- kwsG8FQA==;
+ bh=5ZtPhPdJKTDTdyqevIERvcb7Bzke9D31HMKtWNK3WW4=; b=gRieWKPuaV0j1+l/6EHokTx5AR
+ fJ9iG0u7eEdZ5ITUuWzcaBMz7SazZpKbhBa8JWs/b+tQxBXGQ26jGp0n5bbvKSKYF5St4mWw5sV58
+ NlPGd7KTpiY6mMJokiOqvUgZy50O1OuiToUTVm8l8FoSesj1a/ux5roYKEsl1VC7TVNOUvdGJ1o0Z
+ b2A3BXZqefT1Mhf+rZUKaNRFwL/QJGo5HBgUmNcRPexlVzC8k2oxr2OEfmLzJArfHrB4nE7BYfffj
+ z11TYMzpABLahJEVJhYTAwiqRj+9PqeqZWhh+qjRE4h5dBVrJhOBgCrETXuloh+7mzgxZFcnmYnwI
+ 7yDJisCA==;
 Received: from
  2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1q6RIv-000ZBa-3D; Tue, 06 Jun 2023 07:40:34 +0000
+ id 1q6RIy-000ZEq-1z; Tue, 06 Jun 2023 07:40:37 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Tue,  6 Jun 2023 09:39:31 +0200
-Message-Id: <20230606073950.225178-13-hch@lst.de>
+Date: Tue,  6 Jun 2023 09:39:32 +0200
+Message-Id: <20230606073950.225178-14-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230606073950.225178-1-hch@lst.de>
 References: <20230606073950.225178-1-hch@lst.de>
@@ -71,11 +71,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: holder is just an on-stack pointer that can easily be reused
- by other calls,
- replace it with a static variable that doesn't change. Signed-off-by:
- Christoph Hellwig <hch@lst.de> --- kernel/power/swap.c | 5 +++-- 1 file
- changed, 3 insertions(+), 2 deletions(-) 
+ Content preview: sb is just an on-stack pointer that can easily be reused by
+ other calls. Switch to use the bcache-wide bcache_kobj instead as there is
+ no need to claim per-bcache device anyway. Signed-off-by: Christoph Hellwig
+ <hch@lst.de> --- drivers/md/bcache/super.c | 2 +- 1 file changed,
+ 1 insertion(+), 1 deletion(-) 
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -90,8 +90,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1q6RJO-0003b6-Oo
-Subject: [f2fs-dev] [PATCH 12/31] swsusp: don't pass a stack address to
+X-Headers-End: 1q6RJO-00CV7v-UC
+Subject: [f2fs-dev] [PATCH 13/31] bcache: don't pass a stack address to
  blkdev_get_by_path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -123,43 +123,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-holder is just an on-stack pointer that can easily be reused by other calls,
-replace it with a static variable that doesn't change.
+sb is just an on-stack pointer that can easily be reused by other calls.
+Switch to use the bcache-wide bcache_kobj instead as there is no need to
+claim per-bcache device anyway.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- kernel/power/swap.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ drivers/md/bcache/super.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/kernel/power/swap.c b/kernel/power/swap.c
-index 81aec3b2c60510..b03ff1a33c7f68 100644
---- a/kernel/power/swap.c
-+++ b/kernel/power/swap.c
-@@ -1510,6 +1510,8 @@ int swsusp_read(unsigned int *flags_p)
- 	return error;
- }
- 
-+static void *swsusp_holder;
-+
- /**
-  *      swsusp_check - Check for swsusp signature in the resume device
-  */
-@@ -1517,14 +1519,13 @@ int swsusp_read(unsigned int *flags_p)
- int swsusp_check(bool snapshot_test)
- {
- 	int error;
--	void *holder;
- 	fmode_t mode = FMODE_READ;
- 
- 	if (snapshot_test)
- 		mode |= FMODE_EXCL;
- 
- 	hib_resume_bdev = blkdev_get_by_dev(swsusp_resume_device,
--					    mode, &holder, NULL);
-+					    mode, &swsusp_holder, NULL);
- 	if (!IS_ERR(hib_resume_bdev)) {
- 		set_blocksize(hib_resume_bdev, PAGE_SIZE);
- 		clear_page(swsusp_header);
+diff --git a/drivers/md/bcache/super.c b/drivers/md/bcache/super.c
+index 94b91c45c9e2a9..4a2aed047aec12 100644
+--- a/drivers/md/bcache/super.c
++++ b/drivers/md/bcache/super.c
+@@ -2560,7 +2560,7 @@ static ssize_t register_bcache(struct kobject *k, struct kobj_attribute *attr,
+ 	err = "failed to open device";
+ 	bdev = blkdev_get_by_path(strim(path),
+ 				  FMODE_READ|FMODE_WRITE|FMODE_EXCL,
+-				  sb, NULL);
++				  bcache_kobj, NULL);
+ 	if (IS_ERR(bdev)) {
+ 		if (bdev == ERR_PTR(-EBUSY)) {
+ 			dev_t dev;
 -- 
 2.39.2
 
