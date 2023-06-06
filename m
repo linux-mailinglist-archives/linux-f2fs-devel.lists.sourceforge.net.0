@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BD6372399E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 09:41:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D7997239A3
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 09:41:54 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6RKA-00057E-N3;
-	Tue, 06 Jun 2023 07:41:51 +0000
+	id 1q6RKC-0003Tz-Lm;
+	Tue, 06 Jun 2023 07:41:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+c7f58ba0a08136e81302+7226+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1q6RK9-00056u-G8 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 07:41:49 +0000
+ id 1q6RKA-0003Tb-0y for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 07:41:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ipA6E6PjFwn9EQKQAyZEVl0PLPdTLG96IzNuBLnYaLI=; b=mom0hdFmsJlDXvd81cR8n2Kmun
- /gozELJhJZlJgHP/5vwW+yoG8ACHkbInnZJNddSYV4LUKDqoT3hf8vbl3zBPJf6bDnvE3JzHGd4Qf
- t1knuETg3OMPaePmio1yfyJboeJijeLbB6FOfLySVoCUMKVV5hx0oI0UxHYfezC6/UCw=;
+ bh=yxIRWZa8a4c10jlD/hxxOaC/39H/36XgCLysJAxK/Uc=; b=TsShadVkkqAFCMZOIWhBLvTm2K
+ w0Tg0SZ5UDoiobzyEhujVDKwaKAZSQCuvSFXEGuQreV+NGlA8uaqIShPKjE0xIdMWZrQgV+ocDGh+
+ hEeHEgW5eRhRWN0URLYUkr0w1S0Ng32YY5Kt/OBxwwcb5QHlQW1vyt/TqJH6yWTykFT8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,33 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ipA6E6PjFwn9EQKQAyZEVl0PLPdTLG96IzNuBLnYaLI=; b=bFaoR3ONukAItMib0DF+qLwR34
- nUFXOdVeI9h+bd2aIpThIwspmnfWuLnB/btML0Z4qV0SiiykP65sNyVUGw5TAAmYQVhOcYfpMCVuE
- q48EK8J+wfTLXOOhxSQaUH3FyWie7UPQfO55aDAKGOeq5MG2dxr2wpdgGDg9NVJQQHNA=;
+ bh=yxIRWZa8a4c10jlD/hxxOaC/39H/36XgCLysJAxK/Uc=; b=F8GgVCHxWDy3Q9hyjvV8hDNNch
+ MzBN5XXCwFwG+B+O1zJCg5Lpt+CykOZqZINIG8sroqk/Ol8haIKxqeplaPkL5fAd7kYF2xEzIIca6
+ 2WRJh1P2TCAVG3fRA5AqWdA+BaB9T+CF8luOLQmt0eG+mj04n1IvEotLgaak6HrOU4wE=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6RK7-0003dV-VN for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 07:41:49 +0000
+ id 1q6RK9-00CVB4-P5 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 07:41:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=ipA6E6PjFwn9EQKQAyZEVl0PLPdTLG96IzNuBLnYaLI=; b=Mz26LqLtxMwuSjhlwz27X/9eMb
- L0Br/ZqAKPO4imnbeirvoBJPYYAMyDJNknsHiL4UFZJPQRsMh+WZN2F3Ne1P3lNOfZiFN6P6gq8LJ
- bYIWhNJfcWgGoVJJPVFOgq+HLsWUx9WOYZBlWNrT/Z/pkUhQqr7w0ap4SNjXzba1ela+ejYmGkqSD
- 3yR/4wXCh4CBqqhO1mtDf9LisGEjNdzwP37TpjAeu2ofgDWEhUT5nT4e7a0dIH1RFr4F6jdmNxeP2
- YQKbpbUs33CbKPfXlwABUpCruoGh4XcDkam0H7mPJXa4VYofyUC5PMYdlMwCHRTO4EKYN8ixN67bo
- kXAstIoA==;
+ bh=yxIRWZa8a4c10jlD/hxxOaC/39H/36XgCLysJAxK/Uc=; b=ZHDdG0EFcXc5UPjPD5C1V8tMWY
+ 0wg4WSp0EyM/PKYqmKByIxeZoimaq1FGf5uLN8PSOWEphKGtNHdcL9MrOITJxUFMvHABpHnp1eTqN
+ Us5G2NJvDemgudbw47ugTej4AQP5Kz3M8T547mpeKkuwl4qDwRprqXMAyEyHcg5ipZFTdetM/i02W
+ K/d1xSWJ5kYObzzC2umR5wQqwLwHtg+tsCYhJ73t3cFCeZIhBK0K/MHtWb0lU6krvh92MYZN86BhW
+ 9oijve1xPe9x8uAFIFrmWv/xvcZuXCAzpzT0z1hBGTmW4MEUPBZQL7Bf+wTCAitpfaqvj5JUkFdKD
+ X+wdeqwA==;
 Received: from
  2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1q6RJd-000ZwB-0Y; Tue, 06 Jun 2023 07:41:17 +0000
+ id 1q6RJg-000Zye-0A; Tue, 06 Jun 2023 07:41:20 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Tue,  6 Jun 2023 09:39:45 +0200
-Message-Id: <20230606073950.225178-27-hch@lst.de>
+Date: Tue,  6 Jun 2023 09:39:46 +0200
+Message-Id: <20230606073950.225178-28-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230606073950.225178-1-hch@lst.de>
 References: <20230606073950.225178-1-hch@lst.de>
@@ -71,10 +71,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  All these helpers are only used in core block code, so move
- them out of the public header. Signed-off-by: Christoph Hellwig <hch@lst.de>
- --- block/blk.h | 23 +++++++++++++++++++++-- include/linux/blkdev.h | 27
- 2 files changed, 21 insertions(+), 29 deletions(-) 
+ Content preview: A few ioctl handlers have fmode_t arguments that are entirely
+ unused,
+ remove them. Signed-off-by: Christoph Hellwig <hch@lst.de> ---
+ block/blk-zoned.c
+ | 4 ++-- block/blk.h | 6 +++--- block/ioctl.c | 14 +++++++------- 3 files
+ changed, 12 insertions(+), 12 deletions(-) 
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,9 +91,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1q6RK7-0003dV-VN
-Subject: [f2fs-dev] [PATCH 26/31] block: move a few internal definitions out
- of blkdev.h
+X-Headers-End: 1q6RK9-00CVB4-P5
+Subject: [f2fs-dev] [PATCH 27/31] block: remove unused fmode_t arguments
+ from ioctl handlers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,116 +124,101 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-All these helpers are only used in core block code, so move them out of
-the public header.
+A few ioctl handlers have fmode_t arguments that are entirely unused,
+remove them.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- block/blk.h            | 23 +++++++++++++++++++++--
- include/linux/blkdev.h | 27 ---------------------------
- 2 files changed, 21 insertions(+), 29 deletions(-)
+ block/blk-zoned.c |  4 ++--
+ block/blk.h       |  6 +++---
+ block/ioctl.c     | 14 +++++++-------
+ 3 files changed, 12 insertions(+), 12 deletions(-)
 
+diff --git a/block/blk-zoned.c b/block/blk-zoned.c
+index 096b6b47561f83..02cc2c629ac9be 100644
+--- a/block/blk-zoned.c
++++ b/block/blk-zoned.c
+@@ -323,8 +323,8 @@ static int blkdev_copy_zone_to_user(struct blk_zone *zone, unsigned int idx,
+  * BLKREPORTZONE ioctl processing.
+  * Called from blkdev_ioctl.
+  */
+-int blkdev_report_zones_ioctl(struct block_device *bdev, fmode_t mode,
+-			      unsigned int cmd, unsigned long arg)
++int blkdev_report_zones_ioctl(struct block_device *bdev, unsigned int cmd,
++		unsigned long arg)
+ {
+ 	void __user *argp = (void __user *)arg;
+ 	struct zone_report_args args;
 diff --git a/block/blk.h b/block/blk.h
-index 9582fcd0df4123..6910220aa030f1 100644
+index 6910220aa030f1..e28d5d67d31a28 100644
 --- a/block/blk.h
 +++ b/block/blk.h
-@@ -394,10 +394,27 @@ static inline struct bio *blk_queue_bounce(struct bio *bio,
+@@ -394,15 +394,15 @@ static inline struct bio *blk_queue_bounce(struct bio *bio,
  #ifdef CONFIG_BLK_DEV_ZONED
  void disk_free_zone_bitmaps(struct gendisk *disk);
  void disk_clear_zone_settings(struct gendisk *disk);
--#else
-+int blkdev_report_zones_ioctl(struct block_device *bdev, fmode_t mode,
-+		unsigned int cmd, unsigned long arg);
-+int blkdev_zone_mgmt_ioctl(struct block_device *bdev, fmode_t mode,
-+		unsigned int cmd, unsigned long arg);
-+#else /* CONFIG_BLK_DEV_ZONED */
+-int blkdev_report_zones_ioctl(struct block_device *bdev, fmode_t mode,
+-		unsigned int cmd, unsigned long arg);
++int blkdev_report_zones_ioctl(struct block_device *bdev, unsigned int cmd,
++		unsigned long arg);
+ int blkdev_zone_mgmt_ioctl(struct block_device *bdev, fmode_t mode,
+ 		unsigned int cmd, unsigned long arg);
+ #else /* CONFIG_BLK_DEV_ZONED */
  static inline void disk_free_zone_bitmaps(struct gendisk *disk) {}
  static inline void disk_clear_zone_settings(struct gendisk *disk) {}
--#endif
-+static inline int blkdev_report_zones_ioctl(struct block_device *bdev,
-+		fmode_t mode, unsigned int cmd, unsigned long arg)
-+{
-+	return -ENOTTY;
-+}
-+static inline int blkdev_zone_mgmt_ioctl(struct block_device *bdev,
-+		fmode_t mode, unsigned int cmd, unsigned long arg)
-+{
-+	return -ENOTTY;
-+}
-+#endif /* CONFIG_BLK_DEV_ZONED */
-+
-+struct block_device *bdev_alloc(struct gendisk *disk, u8 partno);
-+void bdev_add(struct block_device *bdev, dev_t dev);
- 
- int blk_alloc_ext_minor(void);
- void blk_free_ext_minor(unsigned int minor);
-@@ -449,6 +466,8 @@ extern struct device_attribute dev_attr_events_poll_msecs;
- 
- extern struct attribute_group blk_trace_attr_group;
- 
-+int truncate_bdev_range(struct block_device *bdev, fmode_t mode, loff_t lstart,
-+		loff_t lend);
- long blkdev_ioctl(struct file *file, unsigned cmd, unsigned long arg);
- long compat_blkdev_ioctl(struct file *file, unsigned cmd, unsigned long arg);
- 
-diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
-index 97803603902076..6b65623e447c02 100644
---- a/include/linux/blkdev.h
-+++ b/include/linux/blkdev.h
-@@ -318,7 +318,6 @@ typedef int (*report_zones_cb)(struct blk_zone *zone, unsigned int idx,
- void disk_set_zoned(struct gendisk *disk, enum blk_zoned_model model);
- 
- #ifdef CONFIG_BLK_DEV_ZONED
--
- #define BLK_ALL_ZONES  ((unsigned int)-1)
- int blkdev_report_zones(struct block_device *bdev, sector_t sector,
- 			unsigned int nr_zones, report_zones_cb cb, void *data);
-@@ -328,33 +327,11 @@ extern int blkdev_zone_mgmt(struct block_device *bdev, enum req_op op,
- 			    gfp_t gfp_mask);
- int blk_revalidate_disk_zones(struct gendisk *disk,
- 			      void (*update_driver_data)(struct gendisk *disk));
--
--extern int blkdev_report_zones_ioctl(struct block_device *bdev, fmode_t mode,
--				     unsigned int cmd, unsigned long arg);
--extern int blkdev_zone_mgmt_ioctl(struct block_device *bdev, fmode_t mode,
--				  unsigned int cmd, unsigned long arg);
--
- #else /* CONFIG_BLK_DEV_ZONED */
--
- static inline unsigned int bdev_nr_zones(struct block_device *bdev)
+ static inline int blkdev_report_zones_ioctl(struct block_device *bdev,
+-		fmode_t mode, unsigned int cmd, unsigned long arg)
++		unsigned int cmd, unsigned long arg)
  {
+ 	return -ENOTTY;
+ }
+diff --git a/block/ioctl.c b/block/ioctl.c
+index b39bd5b41ee492..3a10c34b8ef6d3 100644
+--- a/block/ioctl.c
++++ b/block/ioctl.c
+@@ -344,8 +344,8 @@ static int blkdev_pr_clear(struct block_device *bdev,
+ 	return ops->pr_clear(bdev, c.key);
+ }
+ 
+-static int blkdev_flushbuf(struct block_device *bdev, fmode_t mode,
+-		unsigned cmd, unsigned long arg)
++static int blkdev_flushbuf(struct block_device *bdev, unsigned cmd,
++		unsigned long arg)
+ {
+ 	if (!capable(CAP_SYS_ADMIN))
+ 		return -EACCES;
+@@ -354,8 +354,8 @@ static int blkdev_flushbuf(struct block_device *bdev, fmode_t mode,
  	return 0;
  }
--
--static inline int blkdev_report_zones_ioctl(struct block_device *bdev,
--					    fmode_t mode, unsigned int cmd,
--					    unsigned long arg)
--{
--	return -ENOTTY;
--}
--
--static inline int blkdev_zone_mgmt_ioctl(struct block_device *bdev,
--					 fmode_t mode, unsigned int cmd,
--					 unsigned long arg)
--{
--	return -ENOTTY;
--}
--
- #endif /* CONFIG_BLK_DEV_ZONED */
  
- /*
-@@ -1493,11 +1470,7 @@ void blkdev_put(struct block_device *bdev, void *holder);
- struct block_device *blkdev_get_no_open(dev_t dev);
- void blkdev_put_no_open(struct block_device *bdev);
+-static int blkdev_roset(struct block_device *bdev, fmode_t mode,
+-		unsigned cmd, unsigned long arg)
++static int blkdev_roset(struct block_device *bdev, unsigned cmd,
++		unsigned long arg)
+ {
+ 	int ret, n;
  
--struct block_device *bdev_alloc(struct gendisk *disk, u8 partno);
--void bdev_add(struct block_device *bdev, dev_t dev);
- struct block_device *I_BDEV(struct inode *inode);
--int truncate_bdev_range(struct block_device *bdev, fmode_t mode, loff_t lstart,
--		loff_t lend);
+@@ -475,9 +475,9 @@ static int blkdev_common_ioctl(struct block_device *bdev, fmode_t mode,
  
- #ifdef CONFIG_BLOCK
- void invalidate_bdev(struct block_device *bdev);
+ 	switch (cmd) {
+ 	case BLKFLSBUF:
+-		return blkdev_flushbuf(bdev, mode, cmd, arg);
++		return blkdev_flushbuf(bdev, cmd, arg);
+ 	case BLKROSET:
+-		return blkdev_roset(bdev, mode, cmd, arg);
++		return blkdev_roset(bdev, cmd, arg);
+ 	case BLKDISCARD:
+ 		return blk_ioctl_discard(bdev, mode, arg);
+ 	case BLKSECDISCARD:
+@@ -487,7 +487,7 @@ static int blkdev_common_ioctl(struct block_device *bdev, fmode_t mode,
+ 	case BLKGETDISKSEQ:
+ 		return put_u64(argp, bdev->bd_disk->diskseq);
+ 	case BLKREPORTZONE:
+-		return blkdev_report_zones_ioctl(bdev, mode, cmd, arg);
++		return blkdev_report_zones_ioctl(bdev, cmd, arg);
+ 	case BLKRESETZONE:
+ 	case BLKOPENZONE:
+ 	case BLKCLOSEZONE:
 -- 
 2.39.2
 
