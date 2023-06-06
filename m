@@ -2,100 +2,118 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F17F724E35
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 22:37:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1863972508B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 01:14:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6dQN-0005uC-CN;
-	Tue, 06 Jun 2023 20:37:03 +0000
+	id 1q6fsE-0002V6-Sb;
+	Tue, 06 Jun 2023 23:13:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1q6dQI-0005ty-Sm
+ (envelope-from <phil@philpotter.co.uk>) id 1q6fsD-0002V0-8p
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 20:36:59 +0000
+ Tue, 06 Jun 2023 23:13:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bZlwSCjTyONyM6BfdlEEszOvDKo4//CkyOFwKo/Rm5w=; b=SPi1C1SXZ/2Pimf6nAEtd72UbO
- f4qoxGPHWrmlpr2C8S+G9//48bmQrohZ0oB/Gf6s69VqMKye1uXTi9Y8vuM6g+uv8kqhcUFYFaFNk
- v1TfxgXzjY1YQ1HeAV3nS1B9KzfCYv4n5g5uYLu4qvJw7L5wBeerlEQYny/pfbdB4oKA=;
+ bh=ZsgUvAUYrCnrR/1XiT9juxzkogVY5Vs72GapwMni78s=; b=WfWWKNNOBY0ctPgmVWfexyKBRp
+ vjEIwB2Zd3vnpdrp5/+DTeQJxNhzsr72iMq3K2GWPoTkHuDcFV4wQ8OYaN9HDMu6TtycEHACeOX2s
+ wFxyF//qgP3BBIOHvKEB+yRPUGNB2G75MGZlIA21b4BdSB3xJO2GeOyHtn7Mg1e3FFnQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=bZlwSCjTyONyM6BfdlEEszOvDKo4//CkyOFwKo/Rm5w=; b=D
- hZNTkHmNEK+meBcK7p6dL5m9efRPC1W84GA/rxVFI3lgdpDgH81rXNkBey5717FgV/2ISXIHZed4x
- ArwlBBjED98O7BSPHaGXNOAYtT3brUmgt8fudGApEHLRuHdIB+lq2uHo1NaQ7pNmEtKYaTqQpq8x1
- netBx3fLJGvjvM+8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ZsgUvAUYrCnrR/1XiT9juxzkogVY5Vs72GapwMni78s=; b=B1WyeUgHsUeLc1w6O67mOMqqCK
+ aCsFV+/Z+06/jtVeqJArDwI4D+YK7G0rj0/J3DAMztFqM7iyeI0It6c2UCwFlAxi7qTV/TZEvKoxd
+ 2OOiG/yMqkbRglh1ysozjKNIV2lFD2+hveNJOT49oLUgsqE8LhxK2qEveVbOoYkiBX9o=;
+Received: from mail-ej1-f48.google.com ([209.85.218.48])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6dQE-00D3Rm-Q5 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 20:36:59 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6386563802
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1q6fs8-00D9c3-KO for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 23:13:57 +0000
+Received: by mail-ej1-f48.google.com with SMTP id
+ a640c23a62f3a-9768fd99c0cso8033666b.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  6 Jun 2023 20:36:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B52A6C433D2;
- Tue,  6 Jun 2023 20:36:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686083808;
- bh=0cYUz6iSpj0eGwIL3jk2KHuInnAfLbouhLwJjaUDn/U=;
- h=From:To:Cc:Subject:Date:From;
- b=grmxwQPihJZONINOr57RH3NFIbNisnRHwKJOkoK1+XFzKQ9/U8SF/YIRWEKwBCVNK
- KYuGs7WfGbxp9X+IqWMqiRBsXKGhAO8uFUzWX3sZ79ppoEH9pypErF1/wXxfbWF9mf
- gqQtV/VZE143HcdJwoHokLSMb8ZmUjZnzSy1ZhINqnH0NxOPgDLhoOkX5NpI4mIkKZ
- WccMw5QkjpTROKGyDNqBMXYB8OX7Qu1IcNssR3BVROAaCW3RiFWUf8QUWczS1fgUz2
- xZVBmhQnXAKOOWJpg/vys8Jl4FlzELW6Hfr+i7wPT4BGjk/mjIoAM59IEXZFknDB1B
- Y2QAwpiuFRmig==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Tue,  6 Jun 2023 13:36:45 -0700
-Message-ID: <20230606203645.3926651-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.41.0.rc0.172.g3f132b7071-goog
+ Tue, 06 Jun 2023 16:13:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=philpotter-co-uk.20221208.gappssmtp.com; s=20221208; t=1686093226;
+ x=1688685226; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZsgUvAUYrCnrR/1XiT9juxzkogVY5Vs72GapwMni78s=;
+ b=jJxzphhd1H1jafny7+oFhEHaDLcrBDA0gjkRPBwHlW+IatuOrYhAEGnjVDcKT8fRE2
+ WdHLg6XXSBT41IYFDrd54gdkY6LyQPov0qRHsvvLZ0PMcYySTEvFu6PVR0rPKB4vU00u
+ AO4F01xdvKJ0GILWjzsqEhrS3f9VQyRubdVJQEuqAU2NvUNfNeG/Z4YFm1tOL6L3FI2Q
+ o1+nDtS988a6595fUpR24HrOciBarvMN/OkmI7K8fkloYZeX1jzr7hfll4YT89dvcewU
+ Rt+Xlvu6C9po+Tu9wjJlFowjMWQkRnbfc6XfHMhjuKbcTPHu0x497sW7w8eCVQpq9dSX
+ iqOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1686093226; x=1688685226;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZsgUvAUYrCnrR/1XiT9juxzkogVY5Vs72GapwMni78s=;
+ b=MPNpmBRfWXqIRxuxhEBJM3HjXXdmN+mjgRxJBgr3LPTYiJuKXOff3QaKoycx0j2Nyj
+ yXeEqmpo5DHfzhmOw57XEX5HfKMDQ07Ckff4ODEhQLsX8Wbzg6Poptmd9mHJ03VB4qTt
+ KbOg2eWtdufTJSUF+JGntwudRPC1V9XaqpfaOt+wNkaM7MMN8m161SpstGc7LCDZA4gR
+ O/mBR0l1Ri4L8q1a4w2POY4cni0/yEPGCBhkYB5JiR+HmfoQpFQLMrB7ewP46AEbgKbt
+ 3Egol/+LHLxI8YJ0bdkoOhzMyWRn7SGSdLXgqMTzUgCtsvHrZczsDsG0AADOjNoqCs32
+ SFtw==
+X-Gm-Message-State: AC+VfDxVJeMC2aS1gvu4i5kyyRn7oeSPYyqkqTUDXzxKLCsA1NzYDe6U
+ yvYm9Sl14eoISYMi6pYW2h10xmIe4ryw38G5PRpqpbm7
+X-Google-Smtp-Source: ACHHUZ6DIZ/PhyT9JV3FzdchvbYZ3qIwLNNEqf/pmfFBTRfAYv0aDDapWKAK27qD8k0ew1wS3jRAUg==
+X-Received: by 2002:a5d:6b82:0:b0:30e:47e2:7eca with SMTP id
+ n2-20020a5d6b82000000b0030e47e27ecamr4524731wrx.3.1686091845858; 
+ Tue, 06 Jun 2023 15:50:45 -0700 (PDT)
+Received: from equinox
+ (2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.a.1.e.e.d.f.d.0.b.8.0.1.0.0.2.ip6.arpa.
+ [2001:8b0:dfde:e1a0::2]) by smtp.gmail.com with ESMTPSA id
+ l6-20020a5d4bc6000000b0030ae3a6be5bsm13760443wrt.78.2023.06.06.15.50.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Jun 2023 15:50:45 -0700 (PDT)
+Date: Tue, 6 Jun 2023 23:50:43 +0100
+From: Phillip Potter <phil@philpotter.co.uk>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <ZH+4QyeJ2WCOaPGO@equinox>
+References: <20230606073950.225178-1-hch@lst.de>
+ <20230606073950.225178-3-hch@lst.de>
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+Content-Disposition: inline
+In-Reply-To: <20230606073950.225178-3-hch@lst.de>
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Let's compress tmp files for the given extension list.
- Signed-off-by:
- Jaegeuk Kim <jaegeuk@kernel.org> --- fs/f2fs/namei.c | 2 +- 1 file changed,
- 1 insertion(+), 1 deletion(-) diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
- index 3e35eb7dbb8f..cdc94c8e60f7 100644 --- a/fs/f2fs/namei.c +++
- b/fs/f2fs/namei.c
- @@ -161,7 +161,7 @@ static void set_compress_new_inode(struct f2fs_sb [...]
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Tue, Jun 06, 2023 at 09:39:21AM +0200, Christoph Hellwig
+ wrote: > Signed-off-by: Christoph Hellwig <hch@lst.de> > --- >
+ drivers/cdrom/cdrom.c
+ | 3 +-- > drivers/cdrom/gdrom.c | 2 +- > drivers/scsi/s [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.218.48 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.218.48 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q6dQE-00D3Rm-Q5
-Subject: [f2fs-dev] [PATCH] f2fs: compress tmp files given extension
+X-Headers-End: 1q6fs8-00D9c3-KO
+Subject: Re: [f2fs-dev] [PATCH 02/31] cdrom: remove the unused bdev argument
+ to cdrom_open
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,34 +125,98 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Vignesh Raghavendra <vigneshr@ti.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, linux-nvme@lists.infradead.org,
+ Phillip Potter <phil@philpotter.co.uk>, Chris Mason <clm@fb.com>,
+ dm-devel@redhat.com, "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
+ Pavel Machek <pavel@ucw.cz>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Jack Wang <jinpu.wang@ionos.com>, linux-nilfs@vger.kernel.org,
+ linux-scsi@vger.kernel.org, Richard Weinberger <richard@nod.at>,
+ linux-pm@vger.kernel.org, linux-um@lists.infradead.org,
+ Josef Bacik <josef@toxicpanda.com>, Coly Li <colyli@suse.de>,
+ linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, David Sterba <dsterba@suse.com>,
+ Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
+ "Martin K. Petersen" <martin.petersen@oracle.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Let's compress tmp files for the given extension list.
+On Tue, Jun 06, 2023 at 09:39:21AM +0200, Christoph Hellwig wrote:
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  drivers/cdrom/cdrom.c | 3 +--
+>  drivers/cdrom/gdrom.c | 2 +-
+>  drivers/scsi/sr.c     | 2 +-
+>  include/linux/cdrom.h | 3 +--
+>  4 files changed, 4 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/cdrom/cdrom.c b/drivers/cdrom/cdrom.c
+> index 416f723a2dbb33..e3eab319cb0474 100644
+> --- a/drivers/cdrom/cdrom.c
+> +++ b/drivers/cdrom/cdrom.c
+> @@ -1155,8 +1155,7 @@ int open_for_data(struct cdrom_device_info *cdi)
+>   * is in their own interest: device control becomes a lot easier
+>   * this way.
+>   */
+> -int cdrom_open(struct cdrom_device_info *cdi, struct block_device *bdev,
+> -	       fmode_t mode)
+> +int cdrom_open(struct cdrom_device_info *cdi, fmode_t mode)
+>  {
+>  	int ret;
+>  
+> diff --git a/drivers/cdrom/gdrom.c b/drivers/cdrom/gdrom.c
+> index ceded5772aac6d..eaa2d5a90bc82f 100644
+> --- a/drivers/cdrom/gdrom.c
+> +++ b/drivers/cdrom/gdrom.c
+> @@ -481,7 +481,7 @@ static int gdrom_bdops_open(struct block_device *bdev, fmode_t mode)
+>  	bdev_check_media_change(bdev);
+>  
+>  	mutex_lock(&gdrom_mutex);
+> -	ret = cdrom_open(gd.cd_info, bdev, mode);
+> +	ret = cdrom_open(gd.cd_info, mode);
+>  	mutex_unlock(&gdrom_mutex);
+>  	return ret;
+>  }
+> diff --git a/drivers/scsi/sr.c b/drivers/scsi/sr.c
+> index 12869e6d4ebda8..61b83880e395a4 100644
+> --- a/drivers/scsi/sr.c
+> +++ b/drivers/scsi/sr.c
+> @@ -498,7 +498,7 @@ static int sr_block_open(struct block_device *bdev, fmode_t mode)
+>  		sr_revalidate_disk(cd);
+>  
+>  	mutex_lock(&cd->lock);
+> -	ret = cdrom_open(&cd->cdi, bdev, mode);
+> +	ret = cdrom_open(&cd->cdi, mode);
+>  	mutex_unlock(&cd->lock);
+>  
+>  	scsi_autopm_put_device(sdev);
+> diff --git a/include/linux/cdrom.h b/include/linux/cdrom.h
+> index 67caa909e3e615..cc5717cb0fa8a8 100644
+> --- a/include/linux/cdrom.h
+> +++ b/include/linux/cdrom.h
+> @@ -101,8 +101,7 @@ int cdrom_read_tocentry(struct cdrom_device_info *cdi,
+>  		struct cdrom_tocentry *entry);
+>  
+>  /* the general block_device operations structure: */
+> -extern int cdrom_open(struct cdrom_device_info *cdi, struct block_device *bdev,
+> -			fmode_t mode);
+> +int cdrom_open(struct cdrom_device_info *cdi, fmode_t mode);
+>  extern void cdrom_release(struct cdrom_device_info *cdi, fmode_t mode);
+>  extern int cdrom_ioctl(struct cdrom_device_info *cdi, struct block_device *bdev,
+>  		       fmode_t mode, unsigned int cmd, unsigned long arg);
+> -- 
+> 2.39.2
+> 
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/namei.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks for the patch, looks good to me.
 
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index 3e35eb7dbb8f..cdc94c8e60f7 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -161,7 +161,7 @@ static void set_compress_new_inode(struct f2fs_sb_info *sbi, struct inode *dir,
- 
- 	/* Compress wanting extension. */
- 	for (i = 0; i < ext_cnt; i++) {
--		if (is_extension_exist(name, ext[i], false)) {
-+		if (is_extension_exist(name, ext[i], true)) {
- 			set_compress_context(inode);
- 			return;
- 		}
--- 
-2.41.0.rc0.172.g3f132b7071-goog
+Signed-off-by: Phillip Potter <phil@philpotter.co.uk>
 
+Regards,
+Phil
 
 
 _______________________________________________
