@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 709DE723944
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 09:40:37 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B511272394F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 09:40:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6RIy-0001Ib-8T;
-	Tue, 06 Jun 2023 07:40:36 +0000
+	id 1q6RJ1-0003Qq-NO;
+	Tue, 06 Jun 2023 07:40:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+c7f58ba0a08136e81302+7226+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1q6RIv-0001IE-Hv for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 07:40:33 +0000
+ id 1q6RJ0-0003Qh-4M for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 07:40:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8Adtrrh+HKiESWEIybPbNuKkuJAqdXyvilhbFWCcbK0=; b=PhMERQd5Sw4E4bQx16lcm8FVHV
- HU2LJObr0voKhsX3WrG/1Or9IsrRuY44gaZJEZ4NaCTA4A6ED81Aptlp/W0iXXTLAeoRtqnIOuypO
- SJqT3dlWh11q3L3V5OClGTAVCQ4Mt/gG5plKREVib+hp+qFGiC9AySWynapAnu9SYxlQ=;
+ bh=7kSiDWX+wBfpAMl1gbSCpgjgS70R4anaEnwRQlQDcQo=; b=nPVXlzgqUylh/r2tRvJMMmjDsj
+ hFgBfNJToXYaCAaR4uBgA4xIf42s8Nu+vUW424Mq4YqTKAwnZ2ya2KbH8RSs3UWYBUWUwsnX6Ghn/
+ iZTufxvuVbpjFIKfeoxupHYzEAcgDcp+c5wGv+8MliJXF5UapgWYWmVJ8ego6DPWaYbw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,33 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8Adtrrh+HKiESWEIybPbNuKkuJAqdXyvilhbFWCcbK0=; b=kRP1vWsw/mumOel4dh7liaZ9t0
- EZtGsviivFAqf45fxBzx88xZcG1Q916tCNIsBknh8HxJ4ea32e6dcRNitaSp080aV55bmnsEcHLNA
- fqbZRCb8t/vL1aH0ZykNEEkl2itOMn7rkGTvt3baApC2mZkFvoeMn4rpyrMZNJhbLoCk=;
+ bh=7kSiDWX+wBfpAMl1gbSCpgjgS70R4anaEnwRQlQDcQo=; b=bTSraHDRCtpPlzr82gXT1ltPRo
+ sOIOTvGQDQ+9DGXg+EMNqg4AQrdSp2izuNTOdeLjZ1eMti4cfiYd+2GNq9pFqjXPLLw31guR4kA4I
+ u3oI7ywiDWyHcFKaToFMTeb+ZBfjEhb9Kpdc3FCATsuLRkdRKr7hIxbT+i1viR4WbUFs=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6RIt-0003Yi-Mn for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 07:40:33 +0000
+ id 1q6RJ0-0003Yw-6U for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 07:40:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=8Adtrrh+HKiESWEIybPbNuKkuJAqdXyvilhbFWCcbK0=; b=SHBX4tb8IIrhdTh2jVhjBc6ERz
- x8bPbd6MZqyVrQobUYkf34x0AXOKumpQIU14VOwyumZoIQDRHbziYHWyKN6POofTjaqVXf5t3FByh
- 4r9D/DgUeW03MTaSTMiC0M/G0I/E+vrQCXBdPQDw7VzgjPf0GGzvTVIoSLRi+qrwKJyKbyv2l3CRA
- fwIEY/nfT0l/zCHZg/D2b1OB1mY6Q+1F7vBLxZKmQyGjHmIL4hPlJXwldZdlbwI5BFCdZlfMMn3r1
- QNpOV3w1di/kkZYfpRAFoKJuh17ZrmEUzHTxEFyeT0X4ati7vL7z+oFzk8k5R96//u1mvvhUiw5HZ
- Out4L6mg==;
+ bh=7kSiDWX+wBfpAMl1gbSCpgjgS70R4anaEnwRQlQDcQo=; b=nFRQKfpiDHj53kS6vmfxS7C3cA
+ eILPXidLfwXuzQExX0rKMjrPLyAwZkFmTVPgpKPbx9sZm99EoptcHglNzlnKI7MP/iXpq6oT/LmPg
+ K/tZWRM0g4CWcVHOgsIIn+0ZXWy/kSqdoAOzwkogdg0BwORc+v35hymsI+cydLuRiboBKvPgP3ZDf
+ 4uhNhTDAU5SgfUuV6tcVQbUZXIrPZ/CBb6Z4pGfdHPjg9eN7iSoBrMaCh117//0Qse5mpkdkoUWwj
+ X+Zd3ikZUk3cBBPyJbNUkclymt4hxzn9x2PuTwygbhcZdgwbplh8zEhY9PafAqCYkEa0n9EAjXVsH
+ iFM/Krkg==;
 Received: from
  2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1q6RIW-000YhP-1N; Tue, 06 Jun 2023 07:40:08 +0000
+ id 1q6RIZ-000Ykh-1p; Tue, 06 Jun 2023 07:40:12 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Tue,  6 Jun 2023 09:39:24 +0200
-Message-Id: <20230606073950.225178-6-hch@lst.de>
+Date: Tue,  6 Jun 2023 09:39:25 +0200
+Message-Id: <20230606073950.225178-7-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230606073950.225178-1-hch@lst.de>
 References: <20230606073950.225178-1-hch@lst.de>
@@ -71,9 +71,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Set a flag when a cdrom_device_info is opened for writing,
- instead of trying to figure out this at release time. This will allow to
- eventually remove the mode argument to the ->release block_device_op [...]
+ Content preview: Signed-off-by: Christoph Hellwig <hch@lst.de> ---
+ drivers/cdrom/cdrom.c
+ | 2 +- drivers/cdrom/gdrom.c | 2 +- drivers/scsi/sr.c | 2 +-
+ include/linux/cdrom.h
+ | 2 +- 4 files changed, 4 insertions(+), 4 de [...] 
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +90,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1q6RIt-0003Yi-Mn
-Subject: [f2fs-dev] [PATCH 05/31] cdrom: track if a cdrom_device_info was
- opened for data
+X-Headers-End: 1q6RJ0-0003Yw-6U
+Subject: [f2fs-dev] [PATCH 06/31] cdrom: remove the unused mode argument to
+ cdrom_release
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,68 +123,66 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Set a flag when a cdrom_device_info is opened for writing, instead of
-trying to figure out this at release time.  This will allow to eventually
-remove the mode argument to the ->release block_device_operation as
-nothing but the CDROM drivers uses that argument.
-
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/cdrom/cdrom.c | 12 +++++-------
- include/linux/cdrom.h |  1 +
- 2 files changed, 6 insertions(+), 7 deletions(-)
+ drivers/cdrom/cdrom.c | 2 +-
+ drivers/cdrom/gdrom.c | 2 +-
+ drivers/scsi/sr.c     | 2 +-
+ include/linux/cdrom.h | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/cdrom/cdrom.c b/drivers/cdrom/cdrom.c
-index 08abf1ffede002..adebac1bd210d9 100644
+index adebac1bd210d9..998b03fe976e22 100644
 --- a/drivers/cdrom/cdrom.c
 +++ b/drivers/cdrom/cdrom.c
-@@ -1172,6 +1172,7 @@ int cdrom_open(struct cdrom_device_info *cdi, fmode_t mode)
- 			ret = 0;
- 			cdi->media_written = 0;
- 		}
-+		cdi->opened_for_data = true;
- 	}
+@@ -1250,7 +1250,7 @@ static int check_for_audio_disc(struct cdrom_device_info *cdi,
+ 	return 0;
+ }
  
- 	if (ret)
-@@ -1252,7 +1253,6 @@ static int check_for_audio_disc(struct cdrom_device_info *cdi,
- void cdrom_release(struct cdrom_device_info *cdi, fmode_t mode)
+-void cdrom_release(struct cdrom_device_info *cdi, fmode_t mode)
++void cdrom_release(struct cdrom_device_info *cdi)
  {
  	const struct cdrom_device_ops *cdo = cdi->ops;
--	int opened_for_data;
  
- 	cd_dbg(CD_CLOSE, "entering cdrom_release\n");
+diff --git a/drivers/cdrom/gdrom.c b/drivers/cdrom/gdrom.c
+index 14922403983e9e..a401dc4218a998 100644
+--- a/drivers/cdrom/gdrom.c
++++ b/drivers/cdrom/gdrom.c
+@@ -481,7 +481,7 @@ static int gdrom_bdops_open(struct block_device *bdev, fmode_t mode)
+ 	bdev_check_media_change(bdev);
  
-@@ -1270,14 +1270,12 @@ void cdrom_release(struct cdrom_device_info *cdi, fmode_t mode)
- 		}
- 	}
- 
--	opened_for_data = !(cdi->options & CDO_USE_FFLAGS) ||
--		!(mode & FMODE_NDELAY);
--
- 	cdo->release(cdi);
--	if (cdi->use_count == 0) {      /* last process that closes dev*/
--		if (opened_for_data &&
--		    cdi->options & CDO_AUTO_EJECT && CDROM_CAN(CDC_OPEN_TRAY))
-+
-+	if (cdi->use_count == 0 && cdi->opened_for_data) {
-+		if (cdi->options & CDO_AUTO_EJECT && CDROM_CAN(CDC_OPEN_TRAY))
- 			cdo->tray_move(cdi, 1);
-+		cdi->opened_for_data = false;
- 	}
+ 	mutex_lock(&gdrom_mutex);
+-	ret = cdrom_open(gd.cd_info, mode);
++	ret = cdrom_open(gd.cd_info);
+ 	mutex_unlock(&gdrom_mutex);
+ 	return ret;
  }
- EXPORT_SYMBOL(cdrom_release);
+diff --git a/drivers/scsi/sr.c b/drivers/scsi/sr.c
+index 444c7efc14cba7..6d33120ee5ba85 100644
+--- a/drivers/scsi/sr.c
++++ b/drivers/scsi/sr.c
+@@ -512,7 +512,7 @@ static void sr_block_release(struct gendisk *disk, fmode_t mode)
+ 	struct scsi_cd *cd = scsi_cd(disk);
+ 
+ 	mutex_lock(&cd->lock);
+-	cdrom_release(&cd->cdi, mode);
++	cdrom_release(&cd->cdi);
+ 	mutex_unlock(&cd->lock);
+ 
+ 	scsi_device_put(cd->device);
 diff --git a/include/linux/cdrom.h b/include/linux/cdrom.h
-index 0a5db0b0c958a1..385e94732b2cf1 100644
+index 385e94732b2cf1..3f23d5239de254 100644
 --- a/include/linux/cdrom.h
 +++ b/include/linux/cdrom.h
-@@ -64,6 +64,7 @@ struct cdrom_device_info {
- 	int (*exit)(struct cdrom_device_info *);
- 	int mrw_mode_page;
- 	__s64 last_media_change_ms;
-+	bool opened_for_data;
- };
+@@ -102,7 +102,7 @@ int cdrom_read_tocentry(struct cdrom_device_info *cdi,
  
- struct cdrom_device_ops {
+ /* the general block_device operations structure: */
+ int cdrom_open(struct cdrom_device_info *cdi, fmode_t mode);
+-extern void cdrom_release(struct cdrom_device_info *cdi, fmode_t mode);
++void cdrom_release(struct cdrom_device_info *cdi);
+ int cdrom_ioctl(struct cdrom_device_info *cdi, struct block_device *bdev,
+ 		unsigned int cmd, unsigned long arg);
+ extern unsigned int cdrom_check_events(struct cdrom_device_info *cdi,
 -- 
 2.39.2
 
