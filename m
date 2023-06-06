@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CACD17239AB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 09:42:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B23E37239AE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  6 Jun 2023 09:42:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6RKM-0003Vo-0K;
-	Tue, 06 Jun 2023 07:42:02 +0000
+	id 1q6RKQ-0001Xy-IU;
+	Tue, 06 Jun 2023 07:42:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+c7f58ba0a08136e81302+7226+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1q6RKK-0003VL-Dn for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 07:42:00 +0000
+ id 1q6RKM-0001XG-Ga for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 07:42:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=olyTmt1++EhkqUXPlwyxeL1H8bKZf9/0mYmTRE1O09c=; b=UJ2VxBXH06Ka59PY0pcka1umFX
- l4SW+DohzZUIaaLCoCPNWcOw0H2xbq4cso8Ril7FYfYj8ZUmnVOgO/56z/gjCtAU+MkjphpjCkQqk
- TP7ImX8d+MiF5u8v77HklKvClgf375nwLj+DMx4vkABcfVUAC37YBNzSX5LRTQgDS1cY=;
+ bh=RkaoGw7hxnY7p2Aj4jgl8vVIBxmKSkWEmvUol6CzrBM=; b=nLoxbapOBSG/Y75uik8nxV1LUD
+ /pcgp9OS87lX4XMvVLlYogbEYVU/DY4Hx9K7Tq0CfQxH1dbGjRRBIufgjVsBvs1plQUe1YoSMn2re
+ 52S4G0oANhWZwKdyYlJWzNCisTq2Gmnz/2BKi9vuIDnmx5dOq1qBR2sOfhQ7tMgvwVuU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,33 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=olyTmt1++EhkqUXPlwyxeL1H8bKZf9/0mYmTRE1O09c=; b=HTmvKuwL0ul4oQ+IOCGG9449Hj
- AYb/k7CfhybR146KDrSNiPFO05FS0FjJt2KtmZcyNF3QiLEUq0KqCbAXEVsCExrovYp+Y7EGhDbsc
- MOshzkgNPeVYnAV14W1rwSvaSqEyzZqyRfe9urF7/txOa49ZSyD59ozAJUeVNzOTkSYw=;
+ bh=RkaoGw7hxnY7p2Aj4jgl8vVIBxmKSkWEmvUol6CzrBM=; b=eQWhGwHFz1oTdKjOihcc5AmtPN
+ Cypmavc06U0cAVDtz6Ny4An01+hSow2/wmUu7Ig3BEFjJh2DyDbiwpkA3j2YrL0yqTs3edgKhnlYj
+ FClU9VDuSt43JvymR2enMSgePpS+O+nayo1KCJNIh0Zm016pLHrULFQGWb5nktCrc8X4=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6RKK-0003el-4M for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 06 Jun 2023 07:42:00 +0000
+ id 1q6RKL-0003ev-KD for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 06 Jun 2023 07:42:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=olyTmt1++EhkqUXPlwyxeL1H8bKZf9/0mYmTRE1O09c=; b=D6bRDmf0aQjaYta0onoCN8UsmK
- knmcUGvKcM3a6U66+UYI4vcEDdhjzByWGAsLWm8WnHhs7PfTUdRIDNLUY4f//YhB8Tbcr7g2t7g8f
- RfUKIcFnTgIS2K3V2GEqx0XpuEpowQqfWeOrl+P+1eZOo5tf34z6yyykp/Plo8tRMW76HKVK2x07A
- 2hqh615hFyvQ7WGPE5ycOAp1Pp7NIYTQU53YgHsmUxVlqYh60SD64VeoAgNZn4Rrx3/S2XXEFq4gQ
- y9wx+ZxNm+ul7qbPalhtlurHieYREgSrSF79KEqXydWMs7jKeXS+lUzm8MNtRkwN/UtdJDZEwNQxD
- 4QMlBw+Q==;
+ bh=RkaoGw7hxnY7p2Aj4jgl8vVIBxmKSkWEmvUol6CzrBM=; b=NLn6+h1KQ1XPhC8jPNSjuxiI/H
+ d3m1qq+F+uiL75Nt82jjj6hyuacgFBd3QNUYV0sHDor2YZKT1Nxmg04qDVQhMYoevX0tImBwex4VG
+ G+9KvCdLT6m6XXN86IZINhovZ63m0Zc8rws01Ky24GKB/HiugyBnBWZH+oaHS8Q0Idl5inxJoIfSU
+ qi4TPJkaEIQeX6IPAScaGNPHjAr8/VFwUTGdvbJhjlV0CVdqGYYW6JpYO4BQJhreDe+7iuna18m0o
+ /zWoaJMNLycrCXvHvH4YL57SJwMV3vBqiYawbb8oLQ1PPYa/zpRelkQw/bx0xJpawaod/0ZWKLQo4
+ IzSMFktA==;
 Received: from
  2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1q6RJn-000a74-1Q; Tue, 06 Jun 2023 07:41:27 +0000
+ id 1q6RJr-000aA8-0F; Tue, 06 Jun 2023 07:41:33 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Tue,  6 Jun 2023 09:39:48 +0200
-Message-Id: <20230606073950.225178-30-hch@lst.de>
+Date: Tue,  6 Jun 2023 09:39:49 +0200
+Message-Id: <20230606073950.225178-31-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230606073950.225178-1-hch@lst.de>
 References: <20230606073950.225178-1-hch@lst.de>
@@ -71,11 +71,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Always use I_BDEV(file->f_mapping->host) to find the bdev
- for a file to free up file->private_data for other uses. Signed-off-by:
- Christoph
- Hellwig <hch@lst.de> --- block/fops.c | 18 ++++++++ 1 file changed,
- 8 insertions(+), 10 deletions(-) 
+ Content preview: Store the file struct used as the holder in
+ file->private_data
+ as an indicator that this file descriptor was opened exclusively to remove
+ the last use of FMODE_EXCL. Signed-off-by: Christoph Hellwig <hch@lst.de>
+ --- block/fops.c | 14 ++++++++------ 1 file changed, 8 insertions(+),
+ 6 deletions(-)
  Content analysis details:   (-2.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,9 +92,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1q6RKK-0003el-4M
-Subject: [f2fs-dev] [PATCH 29/31] block: always use I_BDEV on
- file->f_mapping->host to find the bdev
+X-Headers-End: 1q6RKL-0003ev-KD
+Subject: [f2fs-dev] [PATCH 30/31] block: store the holder in
+ file->private_data
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,92 +125,57 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Always use I_BDEV(file->f_mapping->host) to find the bdev for a file to
-free up file->private_data for other uses.
+Store the file struct used as the holder in file->private_data as an
+indicator that this file descriptor was opened exclusively to  remove
+the last use of FMODE_EXCL.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- block/fops.c | 18 ++++++++----------
- 1 file changed, 8 insertions(+), 10 deletions(-)
+ block/fops.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
 diff --git a/block/fops.c b/block/fops.c
-index 928c37a214f785..c40b9f978e3bc7 100644
+index c40b9f978e3bc7..915e0ef7560993 100644
 --- a/block/fops.c
 +++ b/block/fops.c
-@@ -54,7 +54,7 @@ static bool blkdev_dio_unaligned(struct block_device *bdev, loff_t pos,
- static ssize_t __blkdev_direct_IO_simple(struct kiocb *iocb,
- 		struct iov_iter *iter, unsigned int nr_pages)
- {
--	struct block_device *bdev = iocb->ki_filp->private_data;
-+	struct block_device *bdev = I_BDEV(iocb->ki_filp->f_mapping->host);
- 	struct bio_vec inline_vecs[DIO_INLINE_BIO_VECS], *vecs;
- 	loff_t pos = iocb->ki_pos;
- 	bool should_dirty = false;
-@@ -170,7 +170,7 @@ static void blkdev_bio_end_io(struct bio *bio)
- static ssize_t __blkdev_direct_IO(struct kiocb *iocb, struct iov_iter *iter,
- 		unsigned int nr_pages)
- {
--	struct block_device *bdev = iocb->ki_filp->private_data;
-+	struct block_device *bdev = I_BDEV(iocb->ki_filp->f_mapping->host);
- 	struct blk_plug plug;
- 	struct blkdev_dio *dio;
- 	struct bio *bio;
-@@ -310,7 +310,7 @@ static ssize_t __blkdev_direct_IO_async(struct kiocb *iocb,
- 					struct iov_iter *iter,
- 					unsigned int nr_pages)
- {
--	struct block_device *bdev = iocb->ki_filp->private_data;
-+	struct block_device *bdev = I_BDEV(iocb->ki_filp->f_mapping->host);
- 	bool is_read = iov_iter_rw(iter) == READ;
- 	blk_opf_t opf = is_read ? REQ_OP_READ : dio_bio_write_op(iocb);
- 	struct blkdev_dio *dio;
-@@ -451,7 +451,7 @@ static loff_t blkdev_llseek(struct file *file, loff_t offset, int whence)
- static int blkdev_fsync(struct file *filp, loff_t start, loff_t end,
- 		int datasync)
- {
--	struct block_device *bdev = filp->private_data;
-+	struct block_device *bdev = I_BDEV(filp->f_mapping->host);
- 	int error;
+@@ -478,7 +478,7 @@ blk_mode_t file_to_blk_mode(struct file *file)
+ 		mode |= BLK_OPEN_READ;
+ 	if (file->f_mode & FMODE_WRITE)
+ 		mode |= BLK_OPEN_WRITE;
+-	if (file->f_mode & FMODE_EXCL)
++	if (file->private_data)
+ 		mode |= BLK_OPEN_EXCL;
+ 	if ((file->f_flags & O_ACCMODE) == 3)
+ 		mode |= BLK_OPEN_WRITE_IOCTL;
+@@ -501,12 +501,15 @@ static int blkdev_open(struct inode *inode, struct file *filp)
+ 	filp->f_flags |= O_LARGEFILE;
+ 	filp->f_mode |= FMODE_NOWAIT | FMODE_BUF_RASYNC;
  
- 	error = file_write_and_wait_range(filp, start, end);
-@@ -510,7 +510,6 @@ static int blkdev_open(struct inode *inode, struct file *filp)
++	/*
++	 * Use the file private data to store the holder, file_to_blk_mode
++	 * relies on this.
++	 */
+ 	if (filp->f_flags & O_EXCL)
+-		filp->f_mode |= FMODE_EXCL;
++		filp->private_data = filp;
+ 
+ 	bdev = blkdev_get_by_dev(inode->i_rdev, file_to_blk_mode(filp),
+-				 (filp->f_mode & FMODE_EXCL) ? filp : NULL,
+-				 NULL);
++				 filp->private_data, NULL);
  	if (IS_ERR(bdev))
  		return PTR_ERR(bdev);
  
--	filp->private_data = bdev;
- 	filp->f_mapping = bdev->bd_inode->i_mapping;
- 	filp->f_wb_err = filemap_sample_wb_err(filp->f_mapping);
- 	return 0;
-@@ -518,9 +517,8 @@ static int blkdev_open(struct inode *inode, struct file *filp)
+@@ -517,8 +520,7 @@ static int blkdev_open(struct inode *inode, struct file *filp)
  
  static int blkdev_release(struct inode *inode, struct file *filp)
  {
--	struct block_device *bdev = filp->private_data;
--
--	blkdev_put(bdev, (filp->f_mode & FMODE_EXCL) ? filp : NULL);
-+	blkdev_put(I_BDEV(filp->f_mapping->host),
-+		   (filp->f_mode & FMODE_EXCL) ? filp : NULL);
+-	blkdev_put(I_BDEV(filp->f_mapping->host),
+-		   (filp->f_mode & FMODE_EXCL) ? filp : NULL);
++	blkdev_put(I_BDEV(filp->f_mapping->host), filp->private_data);
  	return 0;
  }
  
-@@ -533,7 +531,7 @@ static int blkdev_release(struct inode *inode, struct file *filp)
-  */
- static ssize_t blkdev_write_iter(struct kiocb *iocb, struct iov_iter *from)
- {
--	struct block_device *bdev = iocb->ki_filp->private_data;
-+	struct block_device *bdev = I_BDEV(iocb->ki_filp->f_mapping->host);
- 	struct inode *bd_inode = bdev->bd_inode;
- 	loff_t size = bdev_nr_bytes(bdev);
- 	size_t shorted = 0;
-@@ -569,7 +567,7 @@ static ssize_t blkdev_write_iter(struct kiocb *iocb, struct iov_iter *from)
- 
- static ssize_t blkdev_read_iter(struct kiocb *iocb, struct iov_iter *to)
- {
--	struct block_device *bdev = iocb->ki_filp->private_data;
-+	struct block_device *bdev = I_BDEV(iocb->ki_filp->f_mapping->host);
- 	loff_t size = bdev_nr_bytes(bdev);
- 	loff_t pos = iocb->ki_pos;
- 	size_t shorted = 0;
 -- 
 2.39.2
 
