@@ -2,75 +2,74 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EF01725E90
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 14:17:17 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB045725EBE
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 14:19:15 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6s6F-0006Ir-BR;
-	Wed, 07 Jun 2023 12:17:15 +0000
+	id 1q6s89-0007zJ-0U;
+	Wed, 07 Jun 2023 12:19:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1q6s6C-0006IS-Tm
+ (envelope-from <hch@lst.de>) id 1q6s81-0007zB-9v
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 12:17:12 +0000
+ Wed, 07 Jun 2023 12:19:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=E9faakThGtCW+0bU4cgq1GBsW1Ng9dSqZFBHRCf6MfU=; b=U586UBHrydGrR5dDBrhG90bP6F
- FpVXw9qMoHa7wgOZHDrKQV3E2R/JTuvUw3WwBU3oMjxhsIh7p4id1u/sm31IbIQdR6QdYKVtLZi2S
- TOyb1dktepIa9xrVri0KqXXr7gJuv8/U4OzfC3g0QJThCq1m/xb226CFH5kDXraPns6g=;
+ bh=G1xVSMT4nYeIjHeAvG7KBUYvK0CX2nm2f0U1ZadXKG8=; b=cqRClxjjIJ5XNuOxedliWdCjXU
+ b2sFgferb1Py6XfFLXrgahLwtQAHjBlrPqhVqzS+gUpADLrRHTuefSpRCul0hIuh0mhzXSfNfh5Dt
+ L+fete4Ha+1cyAExT/hohtbEHbAJjsibSw1E57g5RRqig0a9Wu/UmS7TA16O+ubJV3i8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=E9faakThGtCW+0bU4cgq1GBsW1Ng9dSqZFBHRCf6MfU=; b=McGPZ5XPVnhbsRqyIsUQ74ULoA
- i7oo3vaiDk4nv2tSNYNdb5IrcVE9nv2Td6QYC0ik3KaUpWAYZebM7lkBwyKGD7VsB4gdm0nX8Te1W
- E/SW3KigTKlyncoXNhSPEMsDSQEkciEon9wC91L3aM6WQdaUTQ4LeVq/sDFfAiMB2O08=;
+ bh=G1xVSMT4nYeIjHeAvG7KBUYvK0CX2nm2f0U1ZadXKG8=; b=BLk6mRliqWheKJk2LJRGNioDGT
+ LDTX9Us4d1wq/+ObPRPQvrf9gEvVszPHLpTy70THw9NOp8FJgJEJEQ3W6QJd9oqyWBVHsBwglY8Jv
+ MxsR0ewNzb8Js7hjk6WMNOyRFCH3ELmbCdx/TTeK0CocBM7LJSXfSFZo6hFbkWPogmHQ=;
 Received: from verein.lst.de ([213.95.11.211])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6s6B-00Dfp7-1c for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 12:17:12 +0000
+ id 1q6s7v-0003JC-7d for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jun 2023 12:19:00 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 52B4E6732D; Wed,  7 Jun 2023 14:16:58 +0200 (CEST)
-Date: Wed, 7 Jun 2023 14:16:58 +0200
+ id AC1196732D; Wed,  7 Jun 2023 14:18:50 +0200 (CEST)
+Date: Wed, 7 Jun 2023 14:18:50 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Christian Brauner <brauner@kernel.org>
-Message-ID: <20230607121658.GA13632@lst.de>
+Message-ID: <20230607121850.GA14396@lst.de>
 References: <20230606073950.225178-1-hch@lst.de>
- <20230606073950.225178-29-hch@lst.de>
- <20230607-kocht-kornfeld-a249c6740e38@brauner>
+ <20230606073950.225178-31-hch@lst.de>
+ <20230607-verjagen-weise-4fb3d76a6313@brauner>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230607-kocht-kornfeld-a249c6740e38@brauner>
+In-Reply-To: <20230607-verjagen-weise-4fb3d76a6313@brauner>
 User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jun 07, 2023 at 11:21:14AM +0200, Christian Brauner
- wrote: > On Tue, Jun 06, 2023 at 09:39:47AM +0200, Christoph Hellwig wrote:
- > > The only overlap between the block open flags mapped into th [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  On Wed, Jun 07, 2023 at 11:24:55AM +0200, Christian Brauner
+ wrote: > On Tue, Jun 06, 2023 at 09:39:49AM +0200, Christoph Hellwig wrote:
+ > > Store the file struct used as the holder in file->private_da [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1q6s6B-00Dfp7-1c
-Subject: Re: [f2fs-dev] [PATCH 28/31] block: replace fmode_t with a
- block-specific type for block open flags
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+X-Headers-End: 1q6s7v-0003JC-7d
+Subject: Re: [f2fs-dev] [PATCH 30/31] block: store the holder in
+ file->private_data
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,44 +96,30 @@ Cc: Vignesh Raghavendra <vigneshr@ti.com>,
  "Martin K. Petersen" <martin.petersen@oracle.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
  linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gV2VkLCBKdW4gMDcsIDIwMjMgYXQgMTE6MjE6MTRBTSArMDIwMCwgQ2hyaXN0aWFuIEJyYXVu
-ZXIgd3JvdGU6Cj4gT24gVHVlLCBKdW4gMDYsIDIwMjMgYXQgMDk6Mzk6NDdBTSArMDIwMCwgQ2hy
-aXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gPiBUaGUgb25seSBvdmVybGFwIGJldHdlZW4gdGhlIGJs
-b2NrIG9wZW4gZmxhZ3MgbWFwcGVkIGludG8gdGhlIGZtb2RlX3QgYW5kCj4gPiBvdGhlciB1c2Vz
-IG9mIGZtb2RlX3QgYXJlIEZNT0RFX1JFQUQgYW5kIEZNT0RFX1dSSVRFLiAgRGVmaW5lIGEgbmV3
-Cj4gCj4gYW5kIEZNT0RFX0VYQ0wgYWZhaWN0CgpGTU9ERV9FWENMIGlzbid0IHVzZWQgb3V0c2lk
-ZSB0aGUgYmxvY2sgbGF5ZXIgYW5kIHJlbW92ZWQgaW4gdGhlIGxhc3QKcGF0Y2guCgo+ID4gK2Js
-a19tb2RlX3QgZmlsZV90b19ibGtfbW9kZShzdHJ1Y3QgZmlsZSAqZmlsZSkKPiA+ICt7Cj4gPiAr
-CWJsa19tb2RlX3QgbW9kZSA9IDA7Cj4gPiArCj4gPiArCWlmIChmaWxlLT5mX21vZGUgJiBGTU9E
-RV9SRUFEKQo+ID4gKwkJbW9kZSB8PSBCTEtfT1BFTl9SRUFEOwo+ID4gKwlpZiAoZmlsZS0+Zl9t
-b2RlICYgRk1PREVfV1JJVEUpCj4gPiArCQltb2RlIHw9IEJMS19PUEVOX1dSSVRFOwo+ID4gKwlp
-ZiAoZmlsZS0+Zl9tb2RlICYgRk1PREVfRVhDTCkKPiA+ICsJCW1vZGUgfD0gQkxLX09QRU5fRVhD
-TDsKPiA+ICsJaWYgKChmaWxlLT5mX2ZsYWdzICYgT19BQ0NNT0RFKSA9PSAzKQo+IAo+IEkgcmVh
-bGx5IGRvbid0IGxpa2UgbWFnaWMgbnVtYmVycyBsaWtlIHRoaXMuCgpJIGRvbid0IGxpa2UgdGhl
-bSBlaXRoZXIsIGJ1dCB0aGlzIGlzIGp1c3QgbW92ZWQgYXJvdW5kIGFuZCBub3QgbmV3LgoKPiBH
-cm9hbiwgT19SRE9OTFkgYmVpbmcgZGVmaW5lZCBhcyAwIHN0cmlrZXMgYWdhaW4uLi4KPiBCZWN1
-YXNlIG9mIHRoaXMgcXVpcmsgd2UgaW50ZXJuYWxseSBtYXAKPiAKPiBPX1JET05MWSgwKSAtPiBG
-TU9ERV9SRUFEKDEpCj4gT19XUk9OTFkoMSkgLT4gRk1PREVfV1JJVEUoMikKPiBPX1JEV1IoMykg
-ICAtPiAoRk1PREVfUkVBRCB8IEZNT0RFX1dSSVRFKQoKT19SRFdSIGlzIDIuCgo+IHNvIGNoZWNr
-aW5nIGZvciB0aGUgcmF3IDMgaGVyZSBpcyBjb25mdXNpbmcgaW4gYWRkaXRpb24gdG8gYmVpbmcg
-YSBtYWdpYwo+IG51bWJlciBhcyBpdCBjb3VsZCBnaXZlIHRoZSBpbXByZXNzaW9uIHRoYXQgd2hh
-dCdzIGNoZWNrZWQgaGVyZSBpcwo+IChPX1dST05MWSB8IE9fUkRXUikgd2hpY2ggZG9lc24ndCBt
-YWtlIHNlbnNlLi4uCgpXZWxsLCB0aGF0IGlzIGV4YWN0bHkgd2hhdCB3ZSBjaGVjayBmb3IuICBU
-aGlzIGlzIGEgMzAtaXNoIHllYXIgb2xkCnF1aXJrIG9ubHkgdXNlZCBpbiB0aGUgZmxvcHB5IGRy
-aXZlci4KCj4gU28gbXkgcGVyZmVyZW5jZSB3b3VsZCBiZSBpbiBkZXNjZW5kaW5nIG9yZGVyIG9m
-IHByZWZlcmVuY2U6Cj4gCj4gKGZpbGUtPmZfZmxhZ3MgJiBPX0FDQ01PREUpID09IChGTU9ERV9S
-RUFEIHwgRk1PREVfV1JJVEUpCj4gCj4gb3Igd2hpbGUgYSBsaXR0bGUgbGVzcyBjbGVhciBidXQg
-aW5mb3JtYXRpdmUgZW5vdWdoIGZvciBwZW9wbGUgZmFtaWxpYXIKPiB3aXRoIHRoZSBPX1JET05M
-WSBxdWlyazoKPiAKPiBpZiAoKGZpbGUtPmZfZmxhZ3MgJiBPX0FDQ01PREUpID09IE9fQUNDTU9E
-RSkKCkkgZG9uJ3QgdW5kZXJzdGFuZCB0aGlzIHBhcnQuICBFc3BlY2lhbGx5IHRoZSBhYm92ZSBk
-b2Vzbid0IG1ha2UKYW55IHNlbnNlIGFzIEZNT0RFX1JFQUQgYW5kIEZNT0RFX1dSSVRFIGFyZSBp
-biBhIGNvbXBsZXRlbHkgZGlmZmVyZW50CnN5bWJvbCBzcGFjZSB0byBPXyosIGFuZCBub3QgYSBV
-QVDQhiBidXQgYSBrZXJuZWwgaW50ZXJuYWwgdGhpbmcgdGhhdApjb3VsZCBiZSByZW51bWJlcmVk
-IGFueSB0aW1lLgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMu
-c291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3Rp
-bmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On Wed, Jun 07, 2023 at 11:24:55AM +0200, Christian Brauner wrote:
+> On Tue, Jun 06, 2023 at 09:39:49AM +0200, Christoph Hellwig wrote:
+> > Store the file struct used as the holder in file->private_data as an
+> > indicator that this file descriptor was opened exclusively to  remove
+> > the last use of FMODE_EXCL.
+> > 
+> > Signed-off-by: Christoph Hellwig <hch@lst.de>
+> > ---
+> 
+> Feels a bit odd to store the object itself but anyway,
+> Acked-by: Christian Brauner <brauner@kernel.org>
+
+We could literally store anything we want.  The only reason I picked the
+file is because: a) we have it around and b) that allows passing it
+to blkdev_put without a branch in blkdev_release.
+
+If you prefer something else I can change it.
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
