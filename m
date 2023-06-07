@@ -2,104 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5BE0726105
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 15:19:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1406072617A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 15:39:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6t40-0004Mj-Q4;
-	Wed, 07 Jun 2023 13:19:01 +0000
+	id 1q6tNi-0000hc-EY;
+	Wed, 07 Jun 2023 13:39:22 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hare@suse.de>) id 1q6t3z-0004Md-Qf
+ (envelope-from <dsterba@suse.cz>) id 1q6tNh-0000hW-0T
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 13:19:00 +0000
+ Wed, 07 Jun 2023 13:39:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Udh/Vtqb23Sw8g+BkC8HMo4Q973SRGdJCkPyY7KWLNs=; b=S5NytmollzH2zMuxTR00Kwfc3V
- hy1YBCw2KAOzCcjjfeeuQ7teoPpy84r+mk4RramCD1gdlRCxAZ8Lpid7rNYtatNQ2QWKpfA+KVLw+
- d3w4892zIsM8Y+0zm3pvqmT7ULJOU/PC1spRbgduTDwx9E3TYfVWJVzyD/iHYtxGpBCE=;
+ bh=kvX+K1GPLsIpoFmWJX2s5gmxPQdlBYXQkV75nn7bEZM=; b=Ui/vAbGzFA4bKZBQuuFlJZZGAa
+ AUXhYLdH95BFq0YDKpYfz/5nHxj+8j5oO5wQXO46uoCaV9YXCe1wPNFpcTAewB4EhegymLT7Uqrqd
+ kdsNRGxJGsnfN/xeihWIoj8x2plQp//Vs+o45H84hahYvFw86iZDS5A6XurCVC1E2KHw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Reply-To:Message-ID:
+ Subject:Cc:To:From:Date:Sender:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Udh/Vtqb23Sw8g+BkC8HMo4Q973SRGdJCkPyY7KWLNs=; b=hz+ZSQk313L6Mex0q0sYLOzyKW
- xjKUby3jBdlmJIEVw+te0KyiNsbxdxXjC8F6YViFa6n0eZq1Nnf04+SJFSyBBWKPSJsCaZUAZxZnl
- OIs0ZWGuvv8UeiQ+CrxlpTrJihfFRHcvc2lvFV0P9oRi6g9GdcXZ/P0lGDZ/WHjNPfxM=;
-Received: from smtp-out2.suse.de ([195.135.220.29])
+ bh=kvX+K1GPLsIpoFmWJX2s5gmxPQdlBYXQkV75nn7bEZM=; b=aBIllzKCUfFBjaHFFDWsDR51IK
+ tmrNxfZgFBOGeyL9l3tI2ETaVEAZHPRWsck5mZkVJ9Q3YIN7b38jlCN4vdlUA+pC635+dtrwdjAsL
+ SoATWupVP30lVepq8aIiERWoqrMDR6cNU28q0S29Nz/52GyzzIR1y3WsjGjdlFv5p21o=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q6t3v-0005S4-HP for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 13:18:59 +0000
+ id 1q6tNc-0006Na-1N for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jun 2023 13:39:21 +0000
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 3B2C71FDAB;
- Wed,  7 Jun 2023 13:18:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1686143929; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
+ by smtp-out1.suse.de (Postfix) with ESMTPS id C1B66219B5;
+ Wed,  7 Jun 2023 13:39:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1686145149;
+ h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+ cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=Udh/Vtqb23Sw8g+BkC8HMo4Q973SRGdJCkPyY7KWLNs=;
- b=AG50lh6cNYbwFkDgaT6ESY/6kXvuXC7sDHKKcw8pqjJuajtZFb5iJMjU+bUHLK8tmhUW/e
- 3ggaoVJAuSiXjFOzMcU4WcpaNZCGv6jm+/3d19A6Snff4yAvXS0PckIuYdEhm38+y+iNCH
- we5Xow+88Kal0HjgD/hcxHzey97Vt2s=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1686143929;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
+ bh=kvX+K1GPLsIpoFmWJX2s5gmxPQdlBYXQkV75nn7bEZM=;
+ b=QMstqGgedcYgY/d/rSGDFDlChRste65gtAtzSH+mlxXl5vEtulOq2TI/sCACizK7l4xAIA
+ Zug8XKFA7SpEs+Tfusy0dW9TRY25HOfO+RBfFn6tbKVwi3s66msfhIUZOO9bDHcakuZnvK
+ aOdFM2BAbO6jcrNhKt6b1QqrvqZHki4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1686145149;
+ h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+ cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=Udh/Vtqb23Sw8g+BkC8HMo4Q973SRGdJCkPyY7KWLNs=;
- b=yrTu3ioEdQb/jvgg+opgbJOkJi/9oj9MdczoHd3QPBmppQ7hl9wTr/b/RUlZdWJ4DBVXYd
- uqhxaF5C7dZDCxAA==
+ bh=kvX+K1GPLsIpoFmWJX2s5gmxPQdlBYXQkV75nn7bEZM=;
+ b=wiFEvVZJSCbh6tVWyAuV/c0zFOWqBvdMPHB2HTHPCfNySm7jDxfJJMoNpYlbzC7zNnQARu
+ aZxg6KqpACFRuUAg==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D3BEE1346D;
- Wed,  7 Jun 2023 13:18:48 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1C3E41346D;
+ Wed,  7 Jun 2023 13:39:09 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id xHLBMriDgGQvYwAAMHmgww
- (envelope-from <hare@suse.de>); Wed, 07 Jun 2023 13:18:48 +0000
-Message-ID: <82a4143b-f800-09b9-98f2-6cda791877da@suse.de>
-Date: Wed, 7 Jun 2023 15:18:48 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
+ by imap2.suse-dmz.suse.de with ESMTPSA id AS4SBX2IgGQXbwAAMHmgww
+ (envelope-from <dsterba@suse.cz>); Wed, 07 Jun 2023 13:39:09 +0000
+Date: Wed, 7 Jun 2023 15:32:53 +0200
+From: David Sterba <dsterba@suse.cz>
 To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20230607133253.GO25292@twin.jikos.cz>
 References: <20230606073950.225178-1-hch@lst.de>
- <20230606073950.225178-9-hch@lst.de>
- <30183892-dce6-6946-2f7a-1bc693a657a2@suse.de>
- <20230607122131.GB14579@lst.de>
-From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <20230607122131.GB14579@lst.de>
-X-Spam-Score: -2.6 (--)
+ <20230606073950.225178-16-hch@lst.de>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20230606073950.225178-16-hch@lst.de>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/7/23 14:21, Christoph Hellwig wrote: > On Wed, Jun 07, 
- 2023 at 02:19:00PM +0200, Hannes Reinecke wrote: >>> - return true; >>> +
- return __disk_check_media_change(disk, >>> + disk_clear_events(dis [...] 
- Content analysis details:   (-2.6 points, 6.0 required)
+ Content preview:  On Tue, Jun 06, 2023 at 09:39:34AM +0200, Christoph Hellwig
+ wrote: > Passing a holder to blkdev_get_by_path when FMODE_EXCL isn't set
+ doesn't > make sense, so pass NULL instead and remove the holder a [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.29 listed in list.dnswl.org]
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
@@ -110,10 +106,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1q6t3v-0005S4-HP
-Subject: Re: [f2fs-dev] [PATCH 08/31] block: share code between
- disk_check_media_change and disk_force_media_change
+X-Headers-End: 1q6tNc-0006Na-1N
+Subject: Re: [f2fs-dev] [PATCH 15/31] btrfs: don't pass a holder for
+ non-exclusive blkdev_get_by_path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,6 +120,7 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Reply-To: dsterba@suse.cz
 Cc: Vignesh Raghavendra <vigneshr@ti.com>,
  "Rafael J. Wysocki" <rafael@kernel.org>, linux-nvme@lists.infradead.org,
  Phillip Potter <phil@philpotter.co.uk>, Chris Mason <clm@fb.com>,
@@ -140,34 +136,21 @@ Cc: Vignesh Raghavendra <vigneshr@ti.com>,
  "Martin K. Petersen" <martin.petersen@oracle.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
  linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 6/7/23 14:21, Christoph Hellwig wrote:
-> On Wed, Jun 07, 2023 at 02:19:00PM +0200, Hannes Reinecke wrote:
->>> -	return true;
->>> +	return __disk_check_media_change(disk,
->>> +			disk_clear_events(disk, DISK_EVENT_MEDIA_CHANGE |
->>> +						DISK_EVENT_EJECT_REQUEST));
->>
->> Can you move the call to disk_clear_events() out of the call to
->> __disk_check_media_change()?
->> I find this pattern hard to read.
-> 
-> I suspect you've not done enough functional programming in your youth :)
+On Tue, Jun 06, 2023 at 09:39:34AM +0200, Christoph Hellwig wrote:
+> Passing a holder to blkdev_get_by_path when FMODE_EXCL isn't set doesn't
+> make sense, so pass NULL instead and remove the holder argument from the
+> call chains the only end up in non-FMODE_EXCL blkdev_get_by_path calls.
 
-That's why I said 'I find'; purely personal preference.
-If you're happy with:
+Please add
 
-Reviewed-by: Hannes Reinecke <hare@suse.de>
+"Exclusive mode for device scanning is not used since 50d281fc434c
+ ("btrfs: scan device in non-exclusive mode")."
 
-Cheers,
-
-Hannes
-(In my youth? One is tempted to quote Falco: "If you remember the '90s 
-you haven't experienced them...")
-
+Acked-by: David Sterba <dsterba@suse.com>
 
 
 _______________________________________________
