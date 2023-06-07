@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63F0B72573F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 10:17:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D8AB725748
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 10:18:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6oM1-0004r2-PP;
-	Wed, 07 Jun 2023 08:17:18 +0000
+	id 1q6oMi-0007ik-CJ;
+	Wed, 07 Jun 2023 08:18:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1q6oM0-0004qw-0M
+ (envelope-from <brauner@kernel.org>) id 1q6oMg-0007hm-Ei
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 08:17:16 +0000
+ Wed, 07 Jun 2023 08:17:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9STpoUfPiaJfNFHkPs28XASF7HUmFP8clXa7STdAnUc=; b=MCcXofaHVu7IgfJgWsGR5x4Gsu
- MeyUazUUwtIyxrZNHiae2k0TLxZhsG70hqoLZMVogAvoE5HazhMf15Dc7FL3n1hRDvNdiOVp8sjUb
- Fk6XVKPpJzTZW7jlJ2Y/PCS59nE8nkyfEgf0+AXEN4TLxWWmokylH93pVf+PoA80cprE=;
+ bh=XhrE6JBMYvm6ZiGDAGWculHaIxw1zhWDSZlt/wbdvCw=; b=XCsfdMwv8sdTpvJhL72lQTASWL
+ rHcr5N6es/z0LEGOcQ1Meb8PgJmG1lUBuNDYC5dpmkcBpnk3jgW9RgH1UN2B1nikuG6nd4tRwqcB3
+ enJu1bywUBwRLWFf16YpiMXYjYfMlFhmfQO7YitbSgyKmrlyUO8LfkJxDWQXw1ZIGjBA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,40 +31,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9STpoUfPiaJfNFHkPs28XASF7HUmFP8clXa7STdAnUc=; b=FJVFqSGF1GvRelTqzuq/mPawnZ
- 7a3l0gsJwSUUrg9cA3o3CkMqvfvr8RkBygzFxL7CGCjFU8aKQb62ARp7m7t1JWjYJYrPQ/XzXLFee
- BmcKXm9CjKAsqAV9Y4188kFd5euNkMv4IEnNA3QnrgN+X/2y2AqCPCU2XuX1sfWQVEVA=;
+ bh=XhrE6JBMYvm6ZiGDAGWculHaIxw1zhWDSZlt/wbdvCw=; b=bc7WAYOriqKmg6SX6/WyUSEyNQ
+ BeiPeM0sp82Ql7oRUPzoo1BTwaHyZrWvJfbuD6Hy64zeBvKXdRsmSej7N1Hs/Ar07j+kPtPoQFMca
+ N+iGFYarVsJD55kTdl7YpbFNdZYyvZMLFpzYcF5pqKbg9jZTjPzOM1DW9LY7XGwysuxg=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6oLz-0002Uf-Mg for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 08:17:16 +0000
+ id 1q6oMf-00DUno-Ol for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jun 2023 08:17:59 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4E6F76323F;
- Wed,  7 Jun 2023 08:17:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3257CC433EF;
- Wed,  7 Jun 2023 08:17:04 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2DC4162C94;
+ Wed,  7 Jun 2023 08:17:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBE0EC433EF;
+ Wed,  7 Jun 2023 08:17:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686125829;
- bh=9STpoUfPiaJfNFHkPs28XASF7HUmFP8clXa7STdAnUc=;
+ s=k20201202; t=1686125871;
+ bh=FLHaJwurOdg3CBBPpURcf+GsCLNx/2nTjrvXvxslLqM=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=KgvCdUlx7knAQBUAn0H7V0CHr+U5wKzNYfkSnOh31srONfBoFE3rthoW+sKdJZ9a4
- YOy5KoOxOhCOxG1Md9F1WJ17Yz6b4wswcJZy/m8QeAdjkAj5Jotv8hKeB3pCZHkLRV
- HvxU4gBwAzz6gL7m244wkkZ6xIOpvzxUTOtLDuM5hMUaeXkTRULIc9m/meDk3tnVW3
- wQsKgJoM5NU2AlnhWr/FpFNJzRr9asvfMeuaYnRGzuZaTlKQLm7qRzm72SkzE/pc41
- In6xnqpqiB/kTsU7Mq8HOCQP9YgBx9DS6w8b8Z+MfP3x2QDTjz2GNC6K2x/+6+l9vq
- 0TsDj4ON224+A==
-Date: Wed, 7 Jun 2023 10:17:01 +0200
+ b=Dz/r7loUmnTb2g2EAC3T7ceavY7IwvhOHPGEEibcPUxsJY6KC2gmPe0xcRQR21aSh
+ olNDRKGuFSzVioAzLk1NChq/3z0NHm7Vb8vDNkiK+B7kEoqXVHZwbQsQb9GUVyxUve
+ RId/Cr+X/EOu48m38E7bB05/uF21WKLwVvjG/co6Q0PlSjZO+rmoiwML2uoHT9cxWD
+ 1OqT9nE1/AKE9YWl0HRujjE29nTi5g5d0aWLmzBEbBGhWdue4NjhPdeUakeYnOt+OC
+ WcNS0IQ/wY/XXkxplaeUBP2bDHV6G7BmhuQEPFAa5t9BmeAND50lnrKW69F6SPoN06
+ nNrInpX+dlUDQ==
+Date: Wed, 7 Jun 2023 10:17:38 +0200
 From: Christian Brauner <brauner@kernel.org>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20230607-testfahrt-posen-960b2a98b78b@brauner>
+Message-ID: <20230607-rappen-balken-59ec17f7f4be@brauner>
 References: <20230606073950.225178-1-hch@lst.de>
- <20230606073950.225178-4-hch@lst.de>
+ <20230606073950.225178-5-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230606073950.225178-4-hch@lst.de>
+In-Reply-To: <20230606073950.225178-5-hch@lst.de>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -72,9 +72,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Jun 06, 2023 at 09:39:22AM +0200, Christoph Hellwig
- wrote: > Signed-off-by: Christoph Hellwig <hch@lst.de> > --- Looks good to
- me, Acked-by: Christian Brauner <brauner@kernel.org> 
+ Content preview:  On Tue, Jun 06, 2023 at 09:39:23AM +0200, Christoph Hellwig
+ wrote: > cdrom_close_write is empty, and the for_data flag it is keyed off
+ is > never set. Remove all this clutter. > > Signed-off-by: Chris [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,9 +91,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q6oLz-0002Uf-Mg
-Subject: Re: [f2fs-dev] [PATCH 03/31] cdrom: remove the unused mode argument
- to cdrom_ioctl
+X-Headers-End: 1q6oMf-00DUno-Ol
+Subject: Re: [f2fs-dev] [PATCH 04/31] cdrom: remove the unused
+ cdrom_close_write release code
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,7 +124,10 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jun 06, 2023 at 09:39:22AM +0200, Christoph Hellwig wrote:
+On Tue, Jun 06, 2023 at 09:39:23AM +0200, Christoph Hellwig wrote:
+> cdrom_close_write is empty, and the for_data flag it is keyed off is
+> never set.  Remove all this clutter.
+> 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
 
