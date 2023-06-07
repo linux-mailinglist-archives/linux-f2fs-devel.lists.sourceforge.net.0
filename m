@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 907E17260DE
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 15:14:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB3337260EA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 15:15:50 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6szr-0004BK-DF;
-	Wed, 07 Jun 2023 13:14:44 +0000
+	id 1q6t0u-00016t-MN;
+	Wed, 07 Jun 2023 13:15:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hare@suse.de>) id 1q6szp-0004BC-RM
+ (envelope-from <hare@suse.de>) id 1q6t0t-00016g-13
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 13:14:42 +0000
+ Wed, 07 Jun 2023 13:15:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=g3qm10BFMOoxWlTfzY02rDFkH1MgJHM90hSPqL0EKSU=; b=nLdv6mpJkzm+YqOnzWcydS+xkP
- 92F5HKdd2MclehYR8h03WFXv5rq9QtB3GQ9L1+bPVtXKq6fEUGUTUyAhuEWg/yuFiDOC9EIXu/WhJ
- vJPiPGF9jb2JkBmy9YofXD0hg96kBQXyFAtUYz/1H63DasGMYt4G1N6XQMfP7KqEmkRw=;
+ bh=wEe7ym7DG6+ReBAqtJb3Db8VZpiGpFPixKb9/k6VjEM=; b=C/RxwoyiULpeyi/zQozjlJiY3V
+ QXeAg2InW6QGw/nOIFiQ32b4fMXmrSq3y3C82u2OiZ7eJAS1eYIr1hpbRDYAyUg7hZCt7b5xs0jZj
+ +iVmUrRlLvKZuWfTNvd0dOFwAoVUB8ONvwSS0lODNCjh7PY+7to1dWC8DG4qVkq/sm6c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,85 +31,86 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=g3qm10BFMOoxWlTfzY02rDFkH1MgJHM90hSPqL0EKSU=; b=OjmRQz/Wvts8Lla2EVA6FmYVGq
- T/vnt2rZap4e/lyVSb+Jag38eupd8WcTY8qFwYJbd2m3BZztMdBI6zDnbcBU7LcKrS24g4Gtwl2bM
- QiRR0NFDx+LbrXtmn0VQkhlrvAZ58IviR27fbRq3CQ8hQCBLcvMBTGe4zs1OoeaUtn6c=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
+ bh=wEe7ym7DG6+ReBAqtJb3Db8VZpiGpFPixKb9/k6VjEM=; b=j2QsxXmF6Zznd6SNBTeT1aJwEC
+ i1VxROL1jwzcQE1YbWLX2wZYjLGplj18w3h8jyY+gb9A9X0CF89y0drWYcrPazsJe1xfNXkyVLUxx
+ c+hrPEbUYEwmXfF7W0TJ6P/iG5uXuYuMKuqTJc1wwjpRSqHXrTk/iG75sjNP30DrCQB8=;
+Received: from smtp-out2.suse.de ([195.135.220.29])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q6szp-00DiKJ-VM for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 13:14:42 +0000
+ id 1q6t0p-00DiNP-1Y for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jun 2023 13:15:46 +0000
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id A641A219FE;
- Wed,  7 Jun 2023 13:14:35 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id C5CB41FDAB;
+ Wed,  7 Jun 2023 13:15:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1686143675; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1686143736; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=g3qm10BFMOoxWlTfzY02rDFkH1MgJHM90hSPqL0EKSU=;
- b=h0v2DqBB9ySJiLnmn6KXn42VRK0Z/nPXxfHyl6P9vx/g51yoRFC9AAW5wAXqURmVlJIrCN
- 2D+/sGF0Dbl/023m3VKR+jyJmZpI81N2dxOsOVo1Iyv6eQHVy55am5AqqgqG5JbeU+LsvI
- y9I3aAtB7v6O/td5ghW63FzKVmGA63w=
+ bh=wEe7ym7DG6+ReBAqtJb3Db8VZpiGpFPixKb9/k6VjEM=;
+ b=N0dwib7zQJVE0ULFBPC0sfkg/Jge+HIDAw84X+zwwrRYM1SykrGWO8FjFFKpN4AmJjRbx4
+ /4iCJ59NZj9pixMFJN353suhvUtbV0nQwz3/3vjLJBmBOXWzcQM9fpiiVasmuBLvAOL+mE
+ qCIwNxgxfEM9lUrK7xUKYDh6P8ZS15g=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1686143675;
+ s=susede2_ed25519; t=1686143736;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=g3qm10BFMOoxWlTfzY02rDFkH1MgJHM90hSPqL0EKSU=;
- b=nE+HbFK6uzo+zBGVf8a/fbVecve2gD4PPeEmbpshgySHxZDiiPHczbZcJawWlwnNHAICqS
- Q/nUJxr0GbT6aJBg==
+ bh=wEe7ym7DG6+ReBAqtJb3Db8VZpiGpFPixKb9/k6VjEM=;
+ b=6IBoqKo78nF4JFonmwwaXhneF6sFwiKgyR6/7kqsbB1BpRbIFiX4U3XRFI3zNWu5vhIuxP
+ RRp2kVdb3eXiQmDw==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7308A1346D;
- Wed,  7 Jun 2023 13:14:35 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 74F201346D;
+ Wed,  7 Jun 2023 13:15:36 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id uiivG7uCgGS9YAAAMHmgww
- (envelope-from <hare@suse.de>); Wed, 07 Jun 2023 13:14:35 +0000
-Message-ID: <04517ec2-bf6c-0783-9494-fb12a89d07a0@suse.de>
-Date: Wed, 7 Jun 2023 15:14:35 +0200
+ by imap2.suse-dmz.suse.de with ESMTPSA id ZokEHPiCgGSCYQAAMHmgww
+ (envelope-from <hare@suse.de>); Wed, 07 Jun 2023 13:15:36 +0000
+Message-ID: <36637ff7-1893-fe1a-bce7-5b1ef45f4839@suse.de>
+Date: Wed, 7 Jun 2023 15:15:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
 Content-Language: en-US
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 References: <20230606073950.225178-1-hch@lst.de>
- <20230606073950.225178-31-hch@lst.de>
+ <20230606073950.225178-32-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <20230606073950.225178-31-hch@lst.de>
-X-Spam-Score: -4.5 (----)
+In-Reply-To: <20230606073950.225178-32-hch@lst.de>
+X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/6/23 09:39, Christoph Hellwig wrote: > Store the file
- struct used as the holder in file->private_data as an > indicator that this
- file descriptor was opened exclusively to remove > the last use o [...] 
- Content analysis details:   (-4.5 points, 6.0 required)
+ Content preview:  On 6/6/23 09:39, Christoph Hellwig wrote: > FMODE_NDELAY,
+ FMODE_EXCL and FMODE_WRITE_IOCTL were only used for > block internal purposed
+ and are now entirely unused, so remove them. > > Signed-off-by: [...] 
+ Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ medium trust [195.135.220.29 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1q6szp-00DiKJ-VM
-Subject: Re: [f2fs-dev] [PATCH 30/31] block: store the holder in
- file->private_data
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.1 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1q6t0p-00DiNP-1Y
+Subject: Re: [f2fs-dev] [PATCH 31/31] fs: remove the now unused FMODE_* flags
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -141,65 +142,14 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 6/6/23 09:39, Christoph Hellwig wrote:
-> Store the file struct used as the holder in file->private_data as an
-> indicator that this file descriptor was opened exclusively to  remove
-> the last use of FMODE_EXCL.
+> FMODE_NDELAY, FMODE_EXCL and FMODE_WRITE_IOCTL were only used for
+> block internal purposed and are now entirely unused, so remove them.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->   block/fops.c | 14 ++++++++------
->   1 file changed, 8 insertions(+), 6 deletions(-)
+>   include/linux/fs.h | 7 -------
+>   1 file changed, 7 deletions(-)
 > 
-> diff --git a/block/fops.c b/block/fops.c
-> index c40b9f978e3bc7..915e0ef7560993 100644
-> --- a/block/fops.c
-> +++ b/block/fops.c
-> @@ -478,7 +478,7 @@ blk_mode_t file_to_blk_mode(struct file *file)
->   		mode |= BLK_OPEN_READ;
->   	if (file->f_mode & FMODE_WRITE)
->   		mode |= BLK_OPEN_WRITE;
-> -	if (file->f_mode & FMODE_EXCL)
-> +	if (file->private_data)
->   		mode |= BLK_OPEN_EXCL;
->   	if ((file->f_flags & O_ACCMODE) == 3)
->   		mode |= BLK_OPEN_WRITE_IOCTL;
-> @@ -501,12 +501,15 @@ static int blkdev_open(struct inode *inode, struct file *filp)
->   	filp->f_flags |= O_LARGEFILE;
->   	filp->f_mode |= FMODE_NOWAIT | FMODE_BUF_RASYNC;
->   
-> +	/*
-> +	 * Use the file private data to store the holder, file_to_blk_mode
-> +	 * relies on this.
-> +	 */
-
-Can you update the comment to reflect that we're only use the
-->private_data field for exclusive open?
-I know it's indicated by the condition, but we really should
-be clarify this usage.
-
->   	if (filp->f_flags & O_EXCL)
-> -		filp->f_mode |= FMODE_EXCL;
-> +		filp->private_data = filp;
->   
->   	bdev = blkdev_get_by_dev(inode->i_rdev, file_to_blk_mode(filp),
-> -				 (filp->f_mode & FMODE_EXCL) ? filp : NULL,
-> -				 NULL);
-> +				 filp->private_data, NULL);
->   	if (IS_ERR(bdev))
->   		return PTR_ERR(bdev);
->   
-> @@ -517,8 +520,7 @@ static int blkdev_open(struct inode *inode, struct file *filp)
->   
->   static int blkdev_release(struct inode *inode, struct file *filp)
->   {
-> -	blkdev_put(I_BDEV(filp->f_mapping->host),
-> -		   (filp->f_mode & FMODE_EXCL) ? filp : NULL);
-> +	blkdev_put(I_BDEV(filp->f_mapping->host), filp->private_data);
->   	return 0;
->   }
->   
-Other than that:
-
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
 Cheers,
