@@ -2,86 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC674725FED
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 14:47:39 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 469A772603C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 15:01:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6sZb-0008Pw-Ht;
-	Wed, 07 Jun 2023 12:47:35 +0000
+	id 1q6sn9-00006z-Lv;
+	Wed, 07 Jun 2023 13:01:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1q6sZV-0008Pp-Fn
+ (envelope-from <hare@suse.de>) id 1q6sn8-00006q-D4
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 12:47:29 +0000
+ Wed, 07 Jun 2023 13:01:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2n9gTM7Fbu+GFGmtyRMiVeFghCZhSAGtaiHBEBXO6cM=; b=EG0+S+MLpvPagIaaXG/UH6c0JL
- Q3t5sVidVmcCuoOtw013a1HplIU2x9xUY8+t7dNyA6g6KIi41Fx7/0V5eYRrHf2LVCOt1WymfElE6
- AtF1jhGNd5DY5ldXd4iW5DmaTJL+HNWeWIq3fPDaCu7NUaJ1SAqDBuFfXN0Pa+SV/ySk=;
+ bh=e0b8uiSLey2i5fKjUc72GEfnVBNvUaHmrUoFdc8j4KI=; b=ZYOZ7brN4yIoXTH999f1Z9CsEi
+ 9zduAGb6USP8ry7PqU00c9a6tz5N9+t8PvJy8lrcXtcDlrp9w80ojqHRaw1KBhsyW++6Q+XpC5Pr+
+ y417MI9a8FU60i6sWOOGnHvD4GmYMbuz3gQXthSHE0TD7WdqPdpyPj2j2wXFlCw/9AwQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2n9gTM7Fbu+GFGmtyRMiVeFghCZhSAGtaiHBEBXO6cM=; b=KQXOoUzBu28KbdcLD7aWCmY9vV
- MiAkg4/CRkN3mUtWM9Ph2+FfseQa6KKuUWZPaXs2T5crT5DERXrIM/iC0/0Ucl7Bh6Wld/4u5VYfn
- TUKDwpdZAzYNSA3rFTNYmh/Ndq0LuZxfisynlAqV8PYMeOG8foTpuv1q3nH51XiD7Jwk=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=e0b8uiSLey2i5fKjUc72GEfnVBNvUaHmrUoFdc8j4KI=; b=ZjNMLJOAlgxJXyhRecOgaoFku5
+ 5GU4hXwZ5Sf9OU/rYotRfXKRLTiFCnbfwTwzOpND5p0VsQdK29omokWvXOtBRY+jPqRa3QL0V2QNa
+ 5k/1P28ne0R2X1dBU44nk5DyPcRMdjieX2xdXnUCgDUZuEMv9c7HNtm+KhTel6W3ZRAk=;
+Received: from smtp-out2.suse.de ([195.135.220.29])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6sZS-0004Gn-SE for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 12:47:27 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1q6sn7-0004jK-H8 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jun 2023 13:01:34 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id D614963EED;
- Wed,  7 Jun 2023 12:47:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F576C4339B;
- Wed,  7 Jun 2023 12:47:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686142035;
- bh=yQwyPVuAGoNHQWOMctts7HBR5pbTnomidetU1VDq7mo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=KY16ohuxDUXf8jhwatNYz+c9Rc4twpyKWnQ7ldIraz/oidrRhEkgKjDaCyV7fu+/D
- hyPEXDLCndSEKQzmdg0sd7RtJsiVXZkKH9YZD/rZPdkgDjEfakY63lgFslkki2sVId
- 9aw42j6uL8oCpHNIXRMF+V8IaaIdwDSR9Lo2IhWB34MF3i5ImLcmOTYcFE8YqPxQZy
- vs7oB2HoHfPekk9Wo0uu34t8cgoDOIABPz67CJlm5dSZc8w51ypbNJGMVTv0G8WUu1
- ficc1osgWKt3z27CzmGiEUD/rWC+VhJRlyKTAeZUUWmkZq8ur2sbvHeLvycrfjH5AS
- qC1hC1l2dB0UA==
-Date: Wed, 7 Jun 2023 14:47:06 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20230607-bekannt-sonnig-c881b3228862@brauner>
-References: <20230606073950.225178-1-hch@lst.de>
- <20230606073950.225178-29-hch@lst.de>
- <20230607-kocht-kornfeld-a249c6740e38@brauner>
- <20230607121658.GA13632@lst.de>
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 4285A1FDAB;
+ Wed,  7 Jun 2023 13:01:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1686142887; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=e0b8uiSLey2i5fKjUc72GEfnVBNvUaHmrUoFdc8j4KI=;
+ b=Ibpbi9oFA88eQedg7LCdZoalGdrpovOdhUXuq5//mlAZvHhn/ZKCoq2VonRxr2cTdv0bUU
+ dbjDdT9klMGVAz6z9XFaX4QI5y9wEUhG70/Szm3I63ts9ZSwwk+/rEq8a4XNhQTKBYP76f
+ rKHGsjZLt14/3zbQB7bSxUTAfe20pgQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1686142887;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=e0b8uiSLey2i5fKjUc72GEfnVBNvUaHmrUoFdc8j4KI=;
+ b=SEA9Qb3CI3Se3OlJ/bGK2sJSDQ1QHdpuL9Tv0foAVPP1wQtkCAMsknZkx+8K7OdMvnwn45
+ 27BOFZPsjjJ4eOCA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A4CE51346D;
+ Wed,  7 Jun 2023 13:01:26 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id SFZNJ6Z/gGQHWQAAMHmgww
+ (envelope-from <hare@suse.de>); Wed, 07 Jun 2023 13:01:26 +0000
+Message-ID: <a481db0b-4479-6e95-f555-a54f740d93f7@suse.de>
+Date: Wed, 7 Jun 2023 15:01:22 +0200
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230607121658.GA13632@lst.de>
-X-Spam-Score: -5.9 (-----)
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+References: <20230606073950.225178-1-hch@lst.de>
+ <20230606073950.225178-19-hch@lst.de>
+From: Hannes Reinecke <hare@suse.de>
+In-Reply-To: <20230606073950.225178-19-hch@lst.de>
+X-Spam-Score: -4.5 (----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jun 07, 2023 at 02:16:58PM +0200, Christoph Hellwig
- wrote: > On Wed, Jun 07, 2023 at 11:21:14AM +0200, Christian Brauner wrote:
- > > On Tue, Jun 06, 2023 at 09:39:47AM +0200, Christoph Hellwig [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 6/6/23 09:39, Christoph Hellwig wrote: > There is no real
+ need to store the open mode in the super_block now. > It is only used by
+ f2fs, which can easily recalculate it. > > Signed-off-by: Christop [...] 
+ Content analysis details:   (-4.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.29 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -90,10 +106,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q6sZS-0004Gn-SE
-Subject: Re: [f2fs-dev] [PATCH 28/31] block: replace fmode_t with a
- block-specific type for block open flags
+ valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1q6sn7-0004jK-H8
+Subject: Re: [f2fs-dev] [PATCH 18/31] fs: remove sb->s_mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,69 +131,32 @@ Cc: Vignesh Raghavendra <vigneshr@ti.com>,
  Josef Bacik <josef@toxicpanda.com>, Coly Li <colyli@suse.de>,
  linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
  Alexander Viro <viro@zeniv.linux.org.uk>, David Sterba <dsterba@suse.com>,
- Jens Axboe <axboe@kernel.dk>,
+ Christian Brauner <brauner@kernel.org>,
  "Martin K. Petersen" <martin.petersen@oracle.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
  linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jun 07, 2023 at 02:16:58PM +0200, Christoph Hellwig wrote:
-> On Wed, Jun 07, 2023 at 11:21:14AM +0200, Christian Brauner wrote:
-> > On Tue, Jun 06, 2023 at 09:39:47AM +0200, Christoph Hellwig wrote:
-> > > The only overlap between the block open flags mapped into the fmode_t and
-> > > other uses of fmode_t are FMODE_READ and FMODE_WRITE.  Define a new
-> > 
-> > and FMODE_EXCL afaict
+On 6/6/23 09:39, Christoph Hellwig wrote:
+> There is no real need to store the open mode in the super_block now.
+> It is only used by f2fs, which can easily recalculate it.
 > 
-> FMODE_EXCL isn't used outside the block layer and removed in the last
-> patch.
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>   fs/f2fs/super.c    | 10 ++++++----
+>   fs/nilfs2/super.c  |  1 -
+>   fs/super.c         |  2 --
+>   include/linux/fs.h |  1 -
+>   4 files changed, 6 insertions(+), 8 deletions(-)
 > 
-> > > +blk_mode_t file_to_blk_mode(struct file *file)
-> > > +{
-> > > +	blk_mode_t mode = 0;
-> > > +
-> > > +	if (file->f_mode & FMODE_READ)
-> > > +		mode |= BLK_OPEN_READ;
-> > > +	if (file->f_mode & FMODE_WRITE)
-> > > +		mode |= BLK_OPEN_WRITE;
-> > > +	if (file->f_mode & FMODE_EXCL)
-> > > +		mode |= BLK_OPEN_EXCL;
-> > > +	if ((file->f_flags & O_ACCMODE) == 3)
-> > 
-> > I really don't like magic numbers like this.
-> 
-> I don't like them either, but this is just moved around and not new.
-> 
-> > Groan, O_RDONLY being defined as 0 strikes again...
-> > Becuase of this quirk we internally map
-> > 
-> > O_RDONLY(0) -> FMODE_READ(1)
-> > O_WRONLY(1) -> FMODE_WRITE(2)
-> > O_RDWR(3)   -> (FMODE_READ | FMODE_WRITE)
-> 
-> O_RDWR is 2.
+Reviewed-by: Hannes Reinecke <hare@suse.de>
 
-Yeah, that was a typo. See the other mail I sent right after:
-https://lore.kernel.org/all/20230607-kribbeln-dilettanten-b901b57dd962@brauner
+Cheers,
 
-> 
-> > so checking for the raw 3 here is confusing in addition to being a magic
-> > number as it could give the impression that what's checked here is
-> > (O_WRONLY | O_RDWR) which doesn't make sense...
-> 
-> Well, that is exactly what we check for.  This is a 30-ish year old
-> quirk only used in the floppy driver.
+Hannes
 
-Ugh, it's f_flags. I misread that as f_mode...
-
-This is rather ugly. Then please, make it explicit and check for
-== (O_WRONLY | O_RDWR) and leave a brief comment.
-
-Anything's better than that raw 3 in there. We just had fun with
-figuring out why there was a raw coredump in fs/coredump.c 30 years
-later.
 
 
 _______________________________________________
