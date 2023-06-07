@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB3337260EA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 15:15:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5BE0726105
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 15:19:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6t0u-00016t-MN;
-	Wed, 07 Jun 2023 13:15:48 +0000
+	id 1q6t40-0004Mj-Q4;
+	Wed, 07 Jun 2023 13:19:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hare@suse.de>) id 1q6t0t-00016g-13
+ (envelope-from <hare@suse.de>) id 1q6t3z-0004Md-Qf
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 13:15:47 +0000
+ Wed, 07 Jun 2023 13:19:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wEe7ym7DG6+ReBAqtJb3Db8VZpiGpFPixKb9/k6VjEM=; b=C/RxwoyiULpeyi/zQozjlJiY3V
- QXeAg2InW6QGw/nOIFiQ32b4fMXmrSq3y3C82u2OiZ7eJAS1eYIr1hpbRDYAyUg7hZCt7b5xs0jZj
- +iVmUrRlLvKZuWfTNvd0dOFwAoVUB8ONvwSS0lODNCjh7PY+7to1dWC8DG4qVkq/sm6c=;
+ bh=Udh/Vtqb23Sw8g+BkC8HMo4Q973SRGdJCkPyY7KWLNs=; b=S5NytmollzH2zMuxTR00Kwfc3V
+ hy1YBCw2KAOzCcjjfeeuQ7teoPpy84r+mk4RramCD1gdlRCxAZ8Lpid7rNYtatNQ2QWKpfA+KVLw+
+ d3w4892zIsM8Y+0zm3pvqmT7ULJOU/PC1spRbgduTDwx9E3TYfVWJVzyD/iHYtxGpBCE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,58 +31,60 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wEe7ym7DG6+ReBAqtJb3Db8VZpiGpFPixKb9/k6VjEM=; b=j2QsxXmF6Zznd6SNBTeT1aJwEC
- i1VxROL1jwzcQE1YbWLX2wZYjLGplj18w3h8jyY+gb9A9X0CF89y0drWYcrPazsJe1xfNXkyVLUxx
- c+hrPEbUYEwmXfF7W0TJ6P/iG5uXuYuMKuqTJc1wwjpRSqHXrTk/iG75sjNP30DrCQB8=;
+ bh=Udh/Vtqb23Sw8g+BkC8HMo4Q973SRGdJCkPyY7KWLNs=; b=hz+ZSQk313L6Mex0q0sYLOzyKW
+ xjKUby3jBdlmJIEVw+te0KyiNsbxdxXjC8F6YViFa6n0eZq1Nnf04+SJFSyBBWKPSJsCaZUAZxZnl
+ OIs0ZWGuvv8UeiQ+CrxlpTrJihfFRHcvc2lvFV0P9oRi6g9GdcXZ/P0lGDZ/WHjNPfxM=;
 Received: from smtp-out2.suse.de ([195.135.220.29])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q6t0p-00DiNP-1Y for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 13:15:46 +0000
+ id 1q6t3v-0005S4-HP for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jun 2023 13:18:59 +0000
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id C5CB41FDAB;
- Wed,  7 Jun 2023 13:15:36 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 3B2C71FDAB;
+ Wed,  7 Jun 2023 13:18:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1686143736; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1686143929; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wEe7ym7DG6+ReBAqtJb3Db8VZpiGpFPixKb9/k6VjEM=;
- b=N0dwib7zQJVE0ULFBPC0sfkg/Jge+HIDAw84X+zwwrRYM1SykrGWO8FjFFKpN4AmJjRbx4
- /4iCJ59NZj9pixMFJN353suhvUtbV0nQwz3/3vjLJBmBOXWzcQM9fpiiVasmuBLvAOL+mE
- qCIwNxgxfEM9lUrK7xUKYDh6P8ZS15g=
+ bh=Udh/Vtqb23Sw8g+BkC8HMo4Q973SRGdJCkPyY7KWLNs=;
+ b=AG50lh6cNYbwFkDgaT6ESY/6kXvuXC7sDHKKcw8pqjJuajtZFb5iJMjU+bUHLK8tmhUW/e
+ 3ggaoVJAuSiXjFOzMcU4WcpaNZCGv6jm+/3d19A6Snff4yAvXS0PckIuYdEhm38+y+iNCH
+ we5Xow+88Kal0HjgD/hcxHzey97Vt2s=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1686143736;
+ s=susede2_ed25519; t=1686143929;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wEe7ym7DG6+ReBAqtJb3Db8VZpiGpFPixKb9/k6VjEM=;
- b=6IBoqKo78nF4JFonmwwaXhneF6sFwiKgyR6/7kqsbB1BpRbIFiX4U3XRFI3zNWu5vhIuxP
- RRp2kVdb3eXiQmDw==
+ bh=Udh/Vtqb23Sw8g+BkC8HMo4Q973SRGdJCkPyY7KWLNs=;
+ b=yrTu3ioEdQb/jvgg+opgbJOkJi/9oj9MdczoHd3QPBmppQ7hl9wTr/b/RUlZdWJ4DBVXYd
+ uqhxaF5C7dZDCxAA==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 74F201346D;
- Wed,  7 Jun 2023 13:15:36 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D3BEE1346D;
+ Wed,  7 Jun 2023 13:18:48 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id ZokEHPiCgGSCYQAAMHmgww
- (envelope-from <hare@suse.de>); Wed, 07 Jun 2023 13:15:36 +0000
-Message-ID: <36637ff7-1893-fe1a-bce7-5b1ef45f4839@suse.de>
-Date: Wed, 7 Jun 2023 15:15:31 +0200
+ by imap2.suse-dmz.suse.de with ESMTPSA id xHLBMriDgGQvYwAAMHmgww
+ (envelope-from <hare@suse.de>); Wed, 07 Jun 2023 13:18:48 +0000
+Message-ID: <82a4143b-f800-09b9-98f2-6cda791877da@suse.de>
+Date: Wed, 7 Jun 2023 15:18:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
 Content-Language: en-US
-To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+To: Christoph Hellwig <hch@lst.de>
 References: <20230606073950.225178-1-hch@lst.de>
- <20230606073950.225178-32-hch@lst.de>
+ <20230606073950.225178-9-hch@lst.de>
+ <30183892-dce6-6946-2f7a-1bc693a657a2@suse.de>
+ <20230607122131.GB14579@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <20230606073950.225178-32-hch@lst.de>
+In-Reply-To: <20230607122131.GB14579@lst.de>
 X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -90,9 +92,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/6/23 09:39, Christoph Hellwig wrote: > FMODE_NDELAY,
- FMODE_EXCL and FMODE_WRITE_IOCTL were only used for > block internal purposed
- and are now entirely unused, so remove them. > > Signed-off-by: [...] 
+ Content preview:  On 6/7/23 14:21, Christoph Hellwig wrote: > On Wed, Jun 07, 
+ 2023 at 02:19:00PM +0200, Hannes Reinecke wrote: >>> - return true; >>> +
+ return __disk_check_media_change(disk, >>> + disk_clear_events(dis [...] 
  Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -109,8 +111,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1q6t0p-00DiNP-1Y
-Subject: Re: [f2fs-dev] [PATCH 31/31] fs: remove the now unused FMODE_* flags
+X-Headers-End: 1q6t3v-0005S4-HP
+Subject: Re: [f2fs-dev] [PATCH 08/31] block: share code between
+ disk_check_media_change and disk_force_media_change
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,7 +136,7 @@ Cc: Vignesh Raghavendra <vigneshr@ti.com>,
  Josef Bacik <josef@toxicpanda.com>, Coly Li <colyli@suse.de>,
  linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
  Alexander Viro <viro@zeniv.linux.org.uk>, David Sterba <dsterba@suse.com>,
- Christian Brauner <brauner@kernel.org>,
+ Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
  "Martin K. Petersen" <martin.petersen@oracle.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
  linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org
@@ -141,20 +144,29 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 6/6/23 09:39, Christoph Hellwig wrote:
-> FMODE_NDELAY, FMODE_EXCL and FMODE_WRITE_IOCTL were only used for
-> block internal purposed and are now entirely unused, so remove them.
+On 6/7/23 14:21, Christoph Hellwig wrote:
+> On Wed, Jun 07, 2023 at 02:19:00PM +0200, Hannes Reinecke wrote:
+>>> -	return true;
+>>> +	return __disk_check_media_change(disk,
+>>> +			disk_clear_events(disk, DISK_EVENT_MEDIA_CHANGE |
+>>> +						DISK_EVENT_EJECT_REQUEST));
+>>
+>> Can you move the call to disk_clear_events() out of the call to
+>> __disk_check_media_change()?
+>> I find this pattern hard to read.
 > 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->   include/linux/fs.h | 7 -------
->   1 file changed, 7 deletions(-)
-> 
+> I suspect you've not done enough functional programming in your youth :)
+
+That's why I said 'I find'; purely personal preference.
+If you're happy with:
+
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
 Cheers,
 
 Hannes
+(In my youth? One is tempted to quote Falco: "If you remember the '90s 
+you haven't experienced them...")
 
 
 
