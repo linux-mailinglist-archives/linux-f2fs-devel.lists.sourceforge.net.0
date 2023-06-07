@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39F237258F7
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 10:59:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CDEB7258FC
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 11:00:07 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6p0V-0003iu-U8;
-	Wed, 07 Jun 2023 08:59:08 +0000
+	id 1q6p1Q-0003o0-Cg;
+	Wed, 07 Jun 2023 09:00:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1q6p0V-0003io-AM
+ (envelope-from <brauner@kernel.org>) id 1q6p1P-0003nt-Ar
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 08:59:08 +0000
+ Wed, 07 Jun 2023 09:00:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=McfuNbA/tahMdIyurZwQPzUfk/2EBKxXH5L+MrJP2mw=; b=H7hxCLCa5s7vJuOCp/o2Qy8jO/
- W9zBUMe+9pSgPySSUWvU6INg3f0RqzVmP97HZThQ+y2pIWguX0r07UCtUE/nIbCPxPtOABil6PFGg
- dewunUmqynv4/emTSjKaL6uoEtId9n22Uv2xDFTI5/lJXT4zL4OtlLFNqzDBUSb17NBw=;
+ bh=bmYAt8mU64Y+EIk10wPJYlkZlkmcHKj5CsXfhW6m5kY=; b=aC4NCWZ/SRnd9Ed5J7JfNoo5LO
+ SjFesDz2Y6XnlMLsKNxW8AWGzJhXAlejKiSfQyjSXYk43UnGDFyYIo41aOOJGMHruu7yE93vlmPJj
+ yXveW/wnxPT5z/euOCZ4he6RcixCOcZeKGKXCHKk4iU1RE/1VgVYeTI/HjCFW03sMLkA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,67 +31,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=McfuNbA/tahMdIyurZwQPzUfk/2EBKxXH5L+MrJP2mw=; b=S6ruSSrhPnhBhP7Ke/Uo0B6rlM
- 82K11yq6NewLkB7ZgoBa1IncU8K3bYodSv6q6uLlf5+aENPayys86h19Qi9gT2YyA9oCCShTSN/wR
- pIospnFnHquvA8aXDD1pdEY+W30pBa8xu2j2vEu45YiuOeYlmUk1PgiwGchSy1cJrWWo=;
+ bh=bmYAt8mU64Y+EIk10wPJYlkZlkmcHKj5CsXfhW6m5kY=; b=Je8HRbVPKHxtTmeT+2AHzZrMxG
+ GVtdWmowQmGIJ77REVrkgJeTtwDAoyf0k5ZJ4SyyFea4D8EcFx03erEE3NlpiuJqMeq9dCaqeLHZu
+ 0dCZIheDr/AvStqv6nbd2q1xYuZlZK2kbA84ibtQn2P+Ku7J6Hqvy9+8gah2CBF7g6+I=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6p0V-00DXUQ-Iw for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 08:59:08 +0000
+ id 1q6p1O-00052c-58 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jun 2023 09:00:02 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 306DB635B9;
- Wed,  7 Jun 2023 08:59:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 01E93C433D2;
- Wed,  7 Jun 2023 08:58:55 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id BDEA3635B9;
+ Wed,  7 Jun 2023 08:59:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AAB4EC433D2;
+ Wed,  7 Jun 2023 08:59:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686128341;
- bh=iX37Aj7K24viaDo0LDFhBvFVeSZ8x6AEqp0i0SvvQJE=;
+ s=k20201202; t=1686128396;
+ bh=dWWAX+xiOcKgosI96OuwvEEnQrX5qRsaWpXnfV3wzsE=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=FVxcE5aPOf1NjQxle/YS0zgsVQslmwVIZneDuzN8CgnsrynVNK4yLUdTchMGP7JjH
- DnYtvu6Ebv1W+tdNOPejuUDxQY2Wm5DyW3a7K/WtGQlxu7YDI/ER1EdnprnbzrzD7c
- V16UtVlmMg6/YKPDjmPjVgM4zGFodtWbBl3A5IdCSSlCaX64BzH8oR0bXybh1uU2ZO
- K5SfuQpmvShS+48zhJ5RiC1X5zKGGB6jW0cKMr5i6nDwK4leRy1Drz3MAWaTydFfFG
- GfgzELEjGh1MkqWTrFQLvzHDpJAE3Gjfoc8pk6kjdD/drvyNtr4AzJDUXkbP1AU2Um
- tKGF7XxHcMz3A==
-Date: Wed, 7 Jun 2023 10:58:53 +0200
+ b=Rwe2e1Ca9g5PndSdWAR4ZxhkRR64XFN5oQuwRMk1FjfKraaCfNVTxn+BRhKyU+j/u
+ jg5JQ/jKXtDHzI9Uwmc7YThBmkwPCntyA1Nizp191gMau+kmlELxOjWKjvxjAc9JC2
+ RzBDL0p3j0FOCM7TOYUceH21NOI4PozRLAB2K3uQBAYBUemNsIy2dYg//LtIYEwErf
+ BV8xPRNRnufBYP0cou5VW32ptS1X7HphuSax6//1cqt1yDk43UFdKboMkPJBkTDSpW
+ GYhjav9dOdhYt8kknuatTMef0vgcOMh+q/hcr0bQH+Xq3sSPWUNEM6OXHtet+bxkeT
+ 12uBxWHxB1Ryw==
+Date: Wed, 7 Jun 2023 10:59:48 +0200
 From: Christian Brauner <brauner@kernel.org>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20230607-tierreich-erbeben-55e0ce413a8d@brauner>
+Message-ID: <20230607-pechvogel-monument-a22bf628a09c@brauner>
 References: <20230606073950.225178-1-hch@lst.de>
- <20230606073950.225178-22-hch@lst.de>
+ <20230606073950.225178-23-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230606073950.225178-22-hch@lst.de>
-X-Spam-Score: -5.9 (-----)
+In-Reply-To: <20230606073950.225178-23-hch@lst.de>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Jun 06, 2023 at 09:39:40AM +0200, Christoph Hellwig
- wrote: > Instead of passing a fmode_t and only checking it for FMODE_WRITE,
- pass > a bool open_for_write to prepare for callers that won't h [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Tue, Jun 06, 2023 at 09:39:41AM +0200, Christoph Hellwig
+ wrote: > Instead of passing a fmode_t and only checking it fo0r FMODE_WRITE,
+ pass > a bool open_for_write to prepare for callers that won't [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q6p0V-00DXUQ-Iw
-Subject: Re: [f2fs-dev] [PATCH 21/31] scsi: replace the fmode_t argument to
- ->sg_io_fn with a simple bool
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q6p1O-00052c-58
+Subject: Re: [f2fs-dev] [PATCH 22/31] nvme: replace the fmode_t argument to
+ the nvme ioctl handlers with a simple bool
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,8 +124,8 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Jun 06, 2023 at 09:39:40AM +0200, Christoph Hellwig wrote:
-> Instead of passing a fmode_t and only checking it for FMODE_WRITE, pass
+On Tue, Jun 06, 2023 at 09:39:41AM +0200, Christoph Hellwig wrote:
+> Instead of passing a fmode_t and only checking it fo0r FMODE_WRITE, pass
 > a bool open_for_write to prepare for callers that won't have the fmode_t.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
