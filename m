@@ -2,75 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 306FA725ED4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 14:20:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E302B725EDF
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 14:21:05 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6s9k-0006eJ-Kr;
-	Wed, 07 Jun 2023 12:20:52 +0000
+	id 1q6s9v-0001at-Sl;
+	Wed, 07 Jun 2023 12:21:04 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1q6s9j-0006e2-21
+ (envelope-from <hare@suse.de>) id 1q6s9u-0001aQ-9o
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 12:20:51 +0000
+ Wed, 07 Jun 2023 12:21:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RJ1GSjR2F6lCrABgtv3NbFxnpIDYWRxGJMlZdi7mqNA=; b=MLamoVFeKVdk83FvdYDhMp6DL5
- CZSPz9u/RlkqLNHlli+y9/7gjo/VkzXd0fnpocq7Zy/Ufyyo/+xxhOdYg9/P/uQ+OQ1wOWui3G+sZ
- Xo0jDTEMucNpwVtUJVBFRXqFjyhSdyiKX7zJPZT/cFP6zUdDCbMiA5xGm54DNUAY1r/c=;
+ bh=W1Rl1qGqvM4Z5x8Xq+CyMv3eUpGokjis8a1uEGHT2oM=; b=gNkLD3mtGThL92hFa6xKcWnGAe
+ egFIumixEsMwJ0Ox9SnxhUMi/u3yw8MCQzUfnwREpVEkPkeWmjukLlIeLU2Vbe3RX0+JDnTVeEXS0
+ 9qvOyzUs5xkhQIYF9MC32Aoe1IESTKcM+En5JjKWQyCt9rwst6GIJYCuqVXf1OWxer2U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RJ1GSjR2F6lCrABgtv3NbFxnpIDYWRxGJMlZdi7mqNA=; b=h9lSxbpbR/pDx3qt1NZswbVF+r
- QMyyne4moWSk4MGfRlAaRywd2xgknU5+/IDWfljy+lK9ubwV0nS4zyVcQnatYEPxvcKwqWuJbOwdh
- QxeMuR3VTyxdxIqt2cJpqs8nzV725QTk0Cw/ZB5bpVxScRs0+Y/Ckdopq6XbyfC1xlWQ=;
-Received: from verein.lst.de ([213.95.11.211])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6s9i-0003NM-DF for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 12:20:50 +0000
-Received: by verein.lst.de (Postfix, from userid 2407)
- id C229F6732D; Wed,  7 Jun 2023 14:20:41 +0200 (CEST)
-Date: Wed, 7 Jun 2023 14:20:41 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Hannes Reinecke <hare@suse.de>
-Message-ID: <20230607122041.GA14579@lst.de>
-References: <20230606073950.225178-1-hch@lst.de>
- <20230606073950.225178-6-hch@lst.de>
- <a7524776-f4c3-147a-cfa5-da92d2f877bb@suse.de>
+ bh=W1Rl1qGqvM4Z5x8Xq+CyMv3eUpGokjis8a1uEGHT2oM=; b=AJFi1i6XyDf1THdlTZor43ZF9y
+ Efcgv0tu3xBshRbYWT8mPrl+2HY1ieSnDV4yGneGTjZVYAfMcDqMCs2+6cJ422+3Kw0Ivg0DPlkZb
+ SN9lttot4uRlNjyZUPDLklAwZIELvnXjkPnOXeXEtcyIMd66hZ13NrRELVrmJaUKS5/8=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1q6s9p-00Dg0p-07 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jun 2023 12:20:59 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id BBB84219E0;
+ Wed,  7 Jun 2023 12:20:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1686140450; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=W1Rl1qGqvM4Z5x8Xq+CyMv3eUpGokjis8a1uEGHT2oM=;
+ b=NtfJezGisqgVMGMlpHu5h7lKBliQJSnIU40FJjYFHclq1pJ2yccwB2gCrQVYr/XEAgBe//
+ SwWqpD3W1ozsd6dyaotuzbIDg6Oacufyt0jV/rrLR+MxmjDwaQJv56xVitpaNX1eUWndRD
+ n4xYwVUPyj+t5hxm3UfoFljrLDNuTx4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1686140450;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=W1Rl1qGqvM4Z5x8Xq+CyMv3eUpGokjis8a1uEGHT2oM=;
+ b=zQ5xWW4Z2foG7bGxNOdFosbyzeVEHPlunA2KDXAT7USZKkViaz3OAfkcgfavN420ThY0SP
+ Jl33OjNpQS/R7bCg==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7586A13776;
+ Wed,  7 Jun 2023 12:20:50 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id DOJsHCJ2gGSBQQAAMHmgww
+ (envelope-from <hare@suse.de>); Wed, 07 Jun 2023 12:20:50 +0000
+Message-ID: <bb59f7f1-0d12-ed28-9754-7027959ada0b@suse.de>
+Date: Wed, 7 Jun 2023 14:20:50 +0200
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <a7524776-f4c3-147a-cfa5-da92d2f877bb@suse.de>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: 0.0 (/)
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+References: <20230606073950.225178-1-hch@lst.de>
+ <20230606073950.225178-11-hch@lst.de>
+From: Hannes Reinecke <hare@suse.de>
+In-Reply-To: <20230606073950.225178-11-hch@lst.de>
+X-Spam-Score: -2.6 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jun 07, 2023 at 02:13:33PM +0200, Hannes Reinecke
- wrote: >> +++ b/include/linux/cdrom.h >> @@ -64, 6 +64,
- 7 @@ struct cdrom_device_info
- { >> int (*exit)(struct cdrom_device_info *); >> int mrw_m [...] 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  On 6/6/23 09:39, Christoph Hellwig wrote: > The mode argument
+ to the ->release block_device_operation is never used, > so remove it. >
+ > Signed-off-by: Christoph Hellwig <hch@lst.de> > --- > arch/um/d [...] 
+ Content analysis details:   (-2.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1q6s9i-0003NM-DF
-Subject: Re: [f2fs-dev] [PATCH 05/31] cdrom: track if a cdrom_device_info
- was opened for data
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.1 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1q6s9p-00Dg0p-07
+Subject: Re: [f2fs-dev] [PATCH 10/31] block: remove the unused mode argument
+ to ->release
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -87,37 +128,63 @@ Cc: Vignesh Raghavendra <vigneshr@ti.com>,
  Phillip Potter <phil@philpotter.co.uk>, Chris Mason <clm@fb.com>,
  dm-devel@redhat.com, "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
  Pavel Machek <pavel@ucw.cz>, Miquel Raynal <miquel.raynal@bootlin.com>,
- Jack Wang <jinpu.wang@ionos.com>, Christoph Hellwig <hch@lst.de>,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- Richard Weinberger <richard@nod.at>, linux-pm@vger.kernel.org,
- linux-um@lists.infradead.org, Josef Bacik <josef@toxicpanda.com>,
- Coly Li <colyli@suse.de>, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>,
- David Sterba <dsterba@suse.com>, Jens Axboe <axboe@kernel.dk>,
+ Jack Wang <jinpu.wang@ionos.com>, linux-nilfs@vger.kernel.org,
+ linux-scsi@vger.kernel.org, Richard Weinberger <richard@nod.at>,
+ linux-pm@vger.kernel.org, linux-um@lists.infradead.org,
+ Josef Bacik <josef@toxicpanda.com>, Coly Li <colyli@suse.de>,
+ linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, David Sterba <dsterba@suse.com>,
  Christian Brauner <brauner@kernel.org>,
  "Martin K. Petersen" <martin.petersen@oracle.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
  linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jun 07, 2023 at 02:13:33PM +0200, Hannes Reinecke wrote:
->> +++ b/include/linux/cdrom.h
->> @@ -64,6 +64,7 @@ struct cdrom_device_info {
->>   	int (*exit)(struct cdrom_device_info *);
->>   	int mrw_mode_page;
->>   	__s64 last_media_change_ms;
->> +	bool opened_for_data;
->>   };
->>     struct cdrom_device_ops {
->
-> Do we care about alignment here?
-> integer followed by a 64 bit value followed by a bool seems
-> like an automatic padding to me ...
+On 6/6/23 09:39, Christoph Hellwig wrote:
+> The mode argument to the ->release block_device_operation is never used,
+> so remove it.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>   arch/um/drivers/ubd_kern.c          |  4 ++--
+>   arch/xtensa/platforms/iss/simdisk.c |  2 +-
+>   block/bdev.c                        | 14 +++++++-------
+>   drivers/block/amiflop.c             |  2 +-
+>   drivers/block/aoe/aoeblk.c          |  2 +-
+>   drivers/block/ataflop.c             |  4 ++--
+>   drivers/block/drbd/drbd_main.c      |  4 ++--
+>   drivers/block/floppy.c              |  2 +-
+>   drivers/block/loop.c                |  2 +-
+>   drivers/block/nbd.c                 |  2 +-
+>   drivers/block/pktcdvd.c             |  4 ++--
+>   drivers/block/rbd.c                 |  2 +-
+>   drivers/block/rnbd/rnbd-clt.c       |  2 +-
+>   drivers/block/swim.c                |  2 +-
+>   drivers/block/swim3.c               |  3 +--
+>   drivers/block/z2ram.c               |  2 +-
+>   drivers/cdrom/gdrom.c               |  2 +-
+>   drivers/md/bcache/super.c           |  2 +-
+>   drivers/md/dm.c                     |  2 +-
+>   drivers/md/md.c                     |  2 +-
+>   drivers/mmc/core/block.c            |  2 +-
+>   drivers/mtd/mtd_blkdevs.c           |  2 +-
+>   drivers/mtd/ubi/block.c             |  2 +-
+>   drivers/nvme/host/core.c            |  2 +-
+>   drivers/nvme/host/multipath.c       |  2 +-
+>   drivers/s390/block/dasd.c           |  2 +-
+>   drivers/s390/block/dcssblk.c        |  4 ++--
+>   drivers/scsi/sd.c                   |  3 +--
+>   drivers/scsi/sr.c                   |  2 +-
+>   include/linux/blkdev.h              |  2 +-
+>   30 files changed, 41 insertions(+), 43 deletions(-)
+> 
+Reviewed-by: Hannes Reinecke <hare@suse.de>
 
-I don't think the structure matter much here, but placing it before
-last_media_change_ms still seems better.  I'll change it.
+Cheers,
+
+Hannes
 
 
 
