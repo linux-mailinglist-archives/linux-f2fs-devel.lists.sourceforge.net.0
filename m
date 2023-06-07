@@ -2,98 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96D0572675C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 19:30:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 415E872675A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  7 Jun 2023 19:30:37 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q6wzX-0002eC-TS;
-	Wed, 07 Jun 2023 17:30:40 +0000
+	id 1q6wzT-0002dg-IY;
+	Wed, 07 Jun 2023 17:30:36 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1q6wzW-0002e0-3f
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1q6wzQ-0002dZ-05
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 17:30:38 +0000
+ Wed, 07 Jun 2023 17:30:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y7wSewIHqOn038tfLr/C4EvYPj9vTiG+1ljbtXi9EVM=; b=aw8BeWpRYFUOyjj8rgjSLhStR0
- yDjTF+UbPg8LpzkjOmBdcRWMsQdudk51+omc83GgCk3MKqCelluIZWxexur73BBnrZLgUEoUvC57p
- D/B2La22JKmEY+olH21+WEWcBGTmyadevp9TvmYfDB1H7T36aQQ06a/yQKKnSMV9qpb0=;
+ bh=ISN1xylzzfRGbEDB0mtFpecaYaDO4iCHl7OtcRNvKok=; b=OqP7d2ZTpPftqSSURS2YaviZ+2
+ /rWop9jMjm0GXnvCUQBEXFyGHBOtwXJtBBCroU11K2LioV2WTaERmiJNDq+b7ls8/DyT9o5xcR48M
+ HlyzxXC5mQWTF6uqp9oT79gwud8Bc2lMgKeJnb79ReMo/YtFGJOl2K8suuFjdKtEfseA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y7wSewIHqOn038tfLr/C4EvYPj9vTiG+1ljbtXi9EVM=; b=d28X9AJiOS7Cbj3aHnq4mnXvHT
- 8M4OBBH88NbqDuJ0tNJOPdwJqdIJTRaoRNVkyWWlibY0lJu8XX/ixDW8HpDU6fyNucJNJwppMhXJ1
- GlRawesbDsBXQDD7C2CbVOj0sumlMzR0mBT9CZZ6o3c//i8hClu0EqRuA7H6PRZtv6uA=;
+ bh=ISN1xylzzfRGbEDB0mtFpecaYaDO4iCHl7OtcRNvKok=; b=X0EY3xeskNnWylOm0bZTEUfPHd
+ N7yCcunSeBEvht6U7ShPr1kzLW0fdiwgaSLCqkMOPXnin+1Rq7iiqCt+LtvVvDzFDQ02v89Vjspal
+ 9P2CwBIlI7ay+g6+eritYQA8e9dNERi1xaTKPbRVwG2fp23CpdJDyXBrEGpK6pw60IW8=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q6wzV-00Dvre-EF for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 07 Jun 2023 17:30:37 +0000
+ id 1q6wzP-00DvrK-Vj for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 07 Jun 2023 17:30:32 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8B3A564214;
- Wed,  7 Jun 2023 17:30:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 72737C433AC;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id ED33B64204;
+ Wed,  7 Jun 2023 17:30:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 55A97C4339B;
  Wed,  7 Jun 2023 17:30:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1686159025;
- bh=DmAEGZ915kIQbX+lPFoH69b9X9/dsxFYI5AwYXW9k+s=;
+ bh=Iu0WdkrFGv1GjZ2atrz9cBImnG3oKrStjhc+uU+EgpI=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=QJXrvY/11bEUQMK5Tek6PN/u3d0h8IzhFQEy40ZpX5T8X4X3t1XTCY27nBtmLgK2M
- LxLWXyKrLhLaah/+ceLfW3LLgB+UblzXWLadXNVrsId/8y8mGNgjadbcrn1pEIGs8T
- 1puDhPKGprnwusJun9rrrc/3ENvqxwzwHu61S51moxZulHl9sEddlSVyTW0a7yF7ca
- ijPxf8JugSNmXu3ENdKm6pbpVVy7VE6U6sVHAtf0y9aeXf8nGRD0Smdhkdw0lu4fij
- qtAXN/pjwPJ+j+og63bV2WHygVddnrFtxSlvKKmGVpYnbVyWUPJsItFXUHvgkwLgvY
- EnNT4Q8evOSUg==
+ b=oq0QouLgg4ddzK8u3+yf703bLYcZNkZbV9Tb9+uzbMtT+yBG2FeVSw/Rzb89/yMaK
+ G9IfYZOwaa8n2qAlZQOtVwh+kUo6wnY2zCtO3pk1pDwvtvgvDBChhrzqMM9yBR0HgS
+ XNjr1VVwWCV1k77BPu10o/7L3KbXhg4cr22or+10RhpR3zisdhgiHtsuAbim/1rrxI
+ sqeIuVjqCDsgjW85CjY4t4R6xnS9UT63ec1Mw0sO6V3Fb1ZtKUUg8VS44GkDpXTp3W
+ YsN/SDUK/i9BmdVG8bRDeAzIKdWTONpVBT/R+IiBF9YclmtyP36MI+fNx7gVjCmyYL
+ 9FYrMnrTkeNeA==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 56A80E4F13B; Wed,  7 Jun 2023 17:30:25 +0000 (UTC)
+ 2FA3DE4F13A; Wed,  7 Jun 2023 17:30:25 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168615902535.7521.9662746473777436444.git-patchwork-notify@kernel.org>
+Message-Id: <168615902518.7521.17734763826963254315.git-patchwork-notify@kernel.org>
 Date: Wed, 07 Jun 2023 17:30:25 +0000
-References: <20230527170640.37930-1-guochunhai@vivo.com>
-In-Reply-To: <20230527170640.37930-1-guochunhai@vivo.com>
-To: Chunhai Guo <guochunhai@vivo.com>
-X-Spam-Score: -5.9 (-----)
+References: <20230531125918.55609-1-frank.li@vivo.com>
+In-Reply-To: <20230531125918.55609-1-frank.li@vivo.com>
+To: Yangtao Li <frank.li@vivo.com>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Sun, 28 May 2023 01:06:40 +0800 you
- wrote: > find_fsync_dnodes() detect the looped node chain by comparing the
- loop > counter with free blocks. While it may take tens of seconds to quit
- when > the [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Wed, 31 May 2023 20:59:18 +0800 you
+ wrote: > After enabling this feature, the read performance has been greatly
+ > improved: > > 167M/s -> 234M/s, Increase ratio by 40% > > Test w/: > ./fio
+ --name=o [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q6wzV-00Dvre-EF
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: Detect looped node chain efficiently
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q6wzP-00DvrK-Vj
+Subject: Re: [f2fs-dev] [PATCH] f2fs: flag as supporting buffered async reads
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,7 +107,7 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, frank.li@vivo.com,
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org, luhongfei@vivo.com,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -116,19 +118,24 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Sun, 28 May 2023 01:06:40 +0800 you wrote:
-> find_fsync_dnodes() detect the looped node chain by comparing the loop
-> counter with free blocks. While it may take tens of seconds to quit when
-> the free blocks are large enough. We can use Floyd's cycle detection
-> algorithm to make the detection more efficient.
+On Wed, 31 May 2023 20:59:18 +0800 you wrote:
+> After enabling this feature, the read performance has been greatly
+> improved:
 > 
-> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+>     167M/s -> 234M/s, Increase ratio by 40%
+> 
+> Test w/:
+>     ./fio --name=onessd --filename=/data/test/local/io_uring_test
+>     --size=256M --rw=randread --bs=4k --direct=0 --overwrite=0
+>     --numjobs=1 --iodepth=1 --time_based=0 --runtime=10
+>     --ioengine=io_uring --registerfiles --fixedbufs
+>     --gtod_reduce=1 --group_reporting --sqthread_poll=1
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,v3] f2fs: Detect looped node chain efficiently
-    https://git.kernel.org/jaegeuk/f2fs/c/a97c229c68ae
+  - [f2fs-dev] f2fs: flag as supporting buffered async reads
+    https://git.kernel.org/jaegeuk/f2fs/c/fdb43e12e0c1
 
 You are awesome, thank you!
 -- 
