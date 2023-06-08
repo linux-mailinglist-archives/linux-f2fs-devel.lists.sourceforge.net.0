@@ -2,93 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE6D7727D9E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Jun 2023 13:03:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7D8C727D9A
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Jun 2023 13:03:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q7DQb-0000nA-3B;
-	Thu, 08 Jun 2023 11:03:41 +0000
+	id 1q7DQX-0004xx-Qi;
+	Thu, 08 Jun 2023 11:03:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+69acd89764e6999cdd63+7228+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1q7DQV-0000kk-0p for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Jun 2023 11:03:36 +0000
+ id 1q7DQV-0004xf-P1 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Jun 2023 11:03:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZbP7hXQRI/Aj4VCpv9zrKCDBjMGU2VGZgBFY72Z1NCc=; b=mbRF1GSQtWt3pudoCnPe1wERlc
- WREwZ+9uGak8FKmyWMpIQQVLBx071zOjTe3jCcPcb/587TvCl9TbTz2WB7colYIWUY2e/BY9uMEOv
- JzGScpAxok0ld5n+7o9Mi9/2UeWcO2uuRnPZnKBQvQVAWnykXCICfuil+ti/J582/2nc=;
+ bh=FYQsICe+jkO2yrGbgRzbumctJVKnV4wWIZUy1tv1p54=; b=FUVf8GyPphWkLKrc96xep0XidP
+ PtOdr/uqIqfIHr2vfqH8Ls5G+hdYjRIry2Na2LAEGv0CCNebrcYV38vtjbWGGilp07wja3L8gyM3T
+ VmZzOv85RGWGSkcQAnijZE2PUQytdK3rKSKk9KF1VKNr5W7mYfImE8FiqAP5DEjLogdg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ZbP7hXQRI/Aj4VCpv9zrKCDBjMGU2VGZgBFY72Z1NCc=; b=m
- ns4B5L/o8GeWsddVuvGt39Sb8/PL3N0pkKxTjZlGEWtvCkMnzJtxgRaxZuHpSq15naSU2RxUnBkfa
- qxLD/aptlWWCMvRCn8WW02PlwjjCurRYteamjyGyZlg+8MhMlgdMWA8OtRO08+S8ZzcA6H3y41+lw
- MfqfDSYzsNWlsMuw=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=FYQsICe+jkO2yrGbgRzbumctJVKnV4wWIZUy1tv1p54=; b=G6rniCl2u6k/jy9j6uxZje9rL1
+ QudOqaXDlcbjymCBitRaOfpIUQTb+Lbpvr8QyfBh2lBP095N+l9TEIa/mwTzfnRJeqyJYK/aenVNj
+ hXbq05jGNryUI7L0MiPj1NeU70hiMscvyABZNEwZKQvvwDej1exGdHHZcr4U9lGHXqZM=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q7DQU-00Eduu-N5 for linux-f2fs-devel@lists.sourceforge.net;
+ id 1q7DQU-00Edut-M8 for linux-f2fs-devel@lists.sourceforge.net;
  Thu, 08 Jun 2023 11:03:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:In-Reply-To:References;
- bh=ZbP7hXQRI/Aj4VCpv9zrKCDBjMGU2VGZgBFY72Z1NCc=; b=LUOnMXLSVD1p6lkYtJ26KCHu1S
- V6dPxDormv+9J/w9Uma0762E1UO3j86fg1Lc1t+v4Z7LQSP2yOlNCmpipsfI5f0cE7Xt52HQiCvrC
- dmNYFzRardxLX5pwa+i2hPb6Gi12cpV8Aud74B3OePRHPPQSpP7EtomSxZyoKymNpWp0jXiy2bVjQ
- jT7w4sAIy0A/vIdj5SZUlfCAnCfaWovzJkY1/FQ9/DezIQPpW2nzAd8CDkupWG0F4XQRlNbGoTo56
- tc0XmjN75anbfdfpuQaU7tHNwXCajy+BPhavgct+vcn8JjKg4cyAnWnqlH6jkWslvMfu15OvPQtRn
- nxSGdKFw==;
+ MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
+ :Reply-To:Content-Type:Content-ID:Content-Description;
+ bh=FYQsICe+jkO2yrGbgRzbumctJVKnV4wWIZUy1tv1p54=; b=oucg3Pp/rKcskrh+Hb+2MAm4oh
+ CAxirj8/J8boUvG5KuKH4XNEziwGZWCBFdjLkSPuAUYn9sLXGhsGXcPg2M6lmVYYC1OxeFi4XX36Q
+ mX6ufS/9I1nDuIHYRLJpnpVCMycipoqj5pJDMjncVmj7ncRPeNeQdCfoC1C+XghtjX90w4hi7Cse9
+ WqJiXO1TpgvnDBjtOlTfsZXa+pPttbNa1Qk3YLwmNPxsJ0ApRlEg2FfQvwoShtptcHJJ/EHBK67bZ
+ riO/Gx/2T4VFi3othQU0kqoY1H9RFVaLIpHIcFoekDpe1RzqiRE6QCfLa+tpzrRlyc+jZL1+KdS5R
+ ywv3NawA==;
 Received: from
  2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1q7DPx-0091cI-1M; Thu, 08 Jun 2023 11:03:01 +0000
+ id 1q7DPz-0091cl-2t; Thu, 08 Jun 2023 11:03:04 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Thu,  8 Jun 2023 13:02:28 +0200
-Message-Id: <20230608110258.189493-1-hch@lst.de>
+Date: Thu,  8 Jun 2023 13:02:29 +0200
+Message-Id: <20230608110258.189493-2-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230608110258.189493-1-hch@lst.de>
+References: <20230608110258.189493-1-hch@lst.de>
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -2.1 (--)
+X-Spam-Score: -2.2 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi all,
- this series adds a new blk_mode_t for block open flags
- instead of abusing fmode_t. The block open flags work very different from
- the normal use of fmode_t and only share the basic READ/WRITE flags wit [...]
- Content analysis details:   (-2.1 points, 6.0 required)
+ Content preview:  For whole devices ->open is called for each open, but for
+ partitions it is only called on the first open of a partition,
+ e.g.: open("/dev/vdb", 
+ ...) open("/dev/vdb", ...) - 2 call to ->open open("/dev/vdb1",
+ ...) open("/dev/vdb", ...) - 2 call to ->open 
+ Content analysis details:   (-2.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [198.137.202.133 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
  mail domains are different
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1q7DQU-00Eduu-N5
-Subject: [f2fs-dev] decouple block open flags from fmode_t v2
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1q7DQU-00Edut-M8
+Subject: [f2fs-dev] [PATCH 01/30] block: also call ->open for incremental
+ partition opens
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,147 +119,85 @@ Cc: Vignesh Raghavendra <vigneshr@ti.com>,
  Christian Brauner <brauner@kernel.org>,
  "Martin K. Petersen" <martin.petersen@oracle.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org
+ linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org,
+ Hannes Reinecke <hare@suse.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi all,
+For whole devices ->open is called for each open, but for partitions it
+is only called on the first open of a partition, e.g.:
 
-this series adds a new blk_mode_t for block open flags instead of abusing
-fmode_t.  The block open flags work very different from the normal use of
-fmode_t and only share the basic READ/WRITE flags with it.  None of the
-other normal FMODE_* flags is used, but instead there are three
-block-specific ones not used by anyone else, which can now be removed.
+  open("/dev/vdb", ...)
+  open("/dev/vdb", ...)
+    - 2 call to ->open
 
-Note that I've only CCed maintainers and lists for drivers and file systems
-that have non-trivial changes, as otherwise the series would spam literally
-everyone in the block and file system world.
+  open("/dev/vdb1", ...)
+  open("/dev/vdb", ...)
+    - 2 call to ->open
 
-A git tree is available here:
+  open("/dev/vdb", ...)
+  open("/dev/vdb", ...)
+    - just open call to ->open
 
-    git://git.infradead.org/users/hch/block.git blk-open-release
+This is problematic as various block drivers look at open flags and
+might not do all the required setup if the earlier open was with an
+odd flag like O_NDELAY or the magic 3 ioctl-only open mode.
 
-Gitweb:
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Phillip Potter <phil@philpotter.co.uk>
+Reviewed-by: Hannes Reinecke <hare@suse.de>
+Acked-by: Christian Brauner <brauner@kernel.org>
+---
+ block/bdev.c | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
-    http://git.infradead.org/users/hch/block.git/shortlog/refs/heads/blk-open-release
+diff --git a/block/bdev.c b/block/bdev.c
+index 5c46ff10770638..981f6135795138 100644
+--- a/block/bdev.c
++++ b/block/bdev.c
+@@ -683,9 +683,6 @@ static int blkdev_get_part(struct block_device *part, fmode_t mode)
+ 	struct gendisk *disk = part->bd_disk;
+ 	int ret;
+ 
+-	if (atomic_read(&part->bd_openers))
+-		goto done;
+-
+ 	ret = blkdev_get_whole(bdev_whole(part), mode);
+ 	if (ret)
+ 		return ret;
+@@ -694,9 +691,10 @@ static int blkdev_get_part(struct block_device *part, fmode_t mode)
+ 	if (!bdev_nr_sectors(part))
+ 		goto out_blkdev_put;
+ 
+-	disk->open_partitions++;
+-	set_init_blocksize(part);
+-done:
++	if (!atomic_read(&part->bd_openers)) {
++		disk->open_partitions++;
++		set_init_blocksize(part);
++	}
+ 	atomic_inc(&part->bd_openers);
+ 	return 0;
+ 
+@@ -709,10 +707,10 @@ static void blkdev_put_part(struct block_device *part, fmode_t mode)
+ {
+ 	struct block_device *whole = bdev_whole(part);
+ 
+-	if (!atomic_dec_and_test(&part->bd_openers))
+-		return;
+-	blkdev_flush_mapping(part);
+-	whole->bd_disk->open_partitions--;
++	if (atomic_dec_and_test(&part->bd_openers)) {
++		blkdev_flush_mapping(part);
++		whole->bd_disk->open_partitions--;
++	}
+ 	blkdev_put_whole(whole, mode);
+ }
+ 
+-- 
+2.39.2
 
-Changes since v1:
- - drop "block: share code between disk_check_media_change and
-   disk_force_media_change" for now as it conflicts with a fix in
-   disk_force_media_change
- - add a few missing fmode_t -> blk_mode_t conversions
- - move the opened_for_data memeber in struct cdrom_device_info to a
-   place that creates less padding
- - better document the magic floppy O_ACCMODE == O_WRONLY | O_RDWR case
- - better document the new usage of file->private_data for block devices
- - improve a few commit messages
-
-Diffstat:
- arch/um/drivers/ubd_kern.c          |   20 ++-----
- arch/xtensa/platforms/iss/simdisk.c |    6 +-
- block/bdev.c                        |   99 ++++++++++++++++++------------------
- block/blk-zoned.c                   |   12 ++--
- block/blk.h                         |   26 ++++++++-
- block/bsg-lib.c                     |    2 
- block/bsg.c                         |    8 +-
- block/disk-events.c                 |   18 +++---
- block/fops.c                        |   60 ++++++++++++++-------
- block/genhd.c                       |   13 ++--
- block/ioctl.c                       |   61 +++++++---------------
- drivers/block/amiflop.c             |   20 +++----
- drivers/block/aoe/aoeblk.c          |    8 +-
- drivers/block/ataflop.c             |   43 +++++++--------
- drivers/block/drbd/drbd_main.c      |   13 ++--
- drivers/block/drbd/drbd_nl.c        |   23 +++++---
- drivers/block/floppy.c              |   72 +++++++++++++-------------
- drivers/block/loop.c                |   24 ++++----
- drivers/block/mtip32xx/mtip32xx.c   |    4 -
- drivers/block/nbd.c                 |   12 ++--
- drivers/block/pktcdvd.c             |   36 ++++++-------
- drivers/block/rbd.c                 |    6 +-
- drivers/block/rnbd/rnbd-clt.c       |    8 +-
- drivers/block/rnbd/rnbd-srv-sysfs.c |    3 -
- drivers/block/rnbd/rnbd-srv.c       |   23 ++++----
- drivers/block/rnbd/rnbd-srv.h       |    2 
- drivers/block/sunvdc.c              |    2 
- drivers/block/swim.c                |   24 ++++----
- drivers/block/swim3.c               |   33 +++++-------
- drivers/block/ublk_drv.c            |    4 -
- drivers/block/xen-blkback/xenbus.c  |    4 -
- drivers/block/xen-blkfront.c        |    2 
- drivers/block/z2ram.c               |    8 +-
- drivers/block/zram/zram_drv.c       |   21 +++----
- drivers/cdrom/cdrom.c               |   38 +++----------
- drivers/cdrom/gdrom.c               |   12 ++--
- drivers/md/bcache/bcache.h          |    2 
- drivers/md/bcache/request.c         |    4 -
- drivers/md/bcache/super.c           |   25 ++++-----
- drivers/md/dm-cache-target.c        |   12 ++--
- drivers/md/dm-clone-target.c        |   10 +--
- drivers/md/dm-core.h                |    7 +-
- drivers/md/dm-era-target.c          |    6 +-
- drivers/md/dm-ioctl.c               |   10 +--
- drivers/md/dm-snap.c                |    4 -
- drivers/md/dm-table.c               |   11 ++--
- drivers/md/dm-thin.c                |    9 +--
- drivers/md/dm-verity-fec.c          |    2 
- drivers/md/dm-verity-target.c       |    6 +-
- drivers/md/dm.c                     |   20 +++----
- drivers/md/dm.h                     |    2 
- drivers/md/md.c                     |   50 +++++++++---------
- drivers/mmc/core/block.c            |   12 ++--
- drivers/mtd/devices/block2mtd.c     |    6 +-
- drivers/mtd/mtd_blkdevs.c           |    8 +-
- drivers/mtd/mtdblock.c              |    2 
- drivers/mtd/ubi/block.c             |    9 +--
- drivers/nvme/host/core.c            |    6 +-
- drivers/nvme/host/ioctl.c           |   66 +++++++++++++-----------
- drivers/nvme/host/multipath.c       |    6 +-
- drivers/nvme/host/nvme.h            |    4 -
- drivers/nvme/target/io-cmd-bdev.c   |    4 -
- drivers/s390/block/dasd.c           |   10 +--
- drivers/s390/block/dasd_genhd.c     |    5 +
- drivers/s390/block/dasd_int.h       |    3 -
- drivers/s390/block/dasd_ioctl.c     |    2 
- drivers/s390/block/dcssblk.c        |   11 +---
- drivers/scsi/ch.c                   |    3 -
- drivers/scsi/scsi_bsg.c             |    4 -
- drivers/scsi/scsi_ioctl.c           |   38 ++++++-------
- drivers/scsi/sd.c                   |   39 ++++++--------
- drivers/scsi/sg.c                   |    7 +-
- drivers/scsi/sr.c                   |   22 ++++----
- drivers/scsi/st.c                   |    2 
- drivers/target/target_core_iblock.c |    9 +--
- drivers/target/target_core_pscsi.c  |   10 +--
- fs/btrfs/dev-replace.c              |    6 +-
- fs/btrfs/ioctl.c                    |   12 ++--
- fs/btrfs/super.c                    |   21 ++-----
- fs/btrfs/volumes.c                  |   55 +++++++++-----------
- fs/btrfs/volumes.h                  |   11 +---
- fs/erofs/super.c                    |    7 +-
- fs/ext4/super.c                     |   11 +---
- fs/f2fs/super.c                     |   12 ++--
- fs/jfs/jfs_logmgr.c                 |    6 +-
- fs/nfs/blocklayout/dev.c            |    9 +--
- fs/nilfs2/super.c                   |   12 +---
- fs/ocfs2/cluster/heartbeat.c        |    7 +-
- fs/reiserfs/journal.c               |   19 +++---
- fs/reiserfs/reiserfs.h              |    1 
- fs/super.c                          |   33 ++++--------
- fs/xfs/xfs_super.c                  |   15 ++---
- include/linux/blkdev.h              |   68 +++++++++++-------------
- include/linux/bsg.h                 |    2 
- include/linux/cdrom.h               |   12 ++--
- include/linux/device-mapper.h       |    8 +-
- include/linux/fs.h                  |    8 --
- include/linux/mtd/blktrans.h        |    2 
- include/scsi/scsi_ioctl.h           |    4 -
- kernel/power/hibernate.c            |   12 +---
- kernel/power/power.h                |    2 
- kernel/power/swap.c                 |   28 ++++------
- mm/swapfile.c                       |    7 +-
- 103 files changed, 791 insertions(+), 837 deletions(-)
 
 
 _______________________________________________
