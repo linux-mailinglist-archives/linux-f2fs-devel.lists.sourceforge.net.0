@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1ED2727DE4
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Jun 2023 13:05:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E832E727DE3
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Jun 2023 13:05:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q7DRn-0007r3-OC;
+	id 1q7DRr-0001HX-U7;
 	Thu, 08 Jun 2023 11:05:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+69acd89764e6999cdd63+7228+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1q7DRl-0007qi-JV for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Jun 2023 11:04:53 +0000
+ id 1q7DRp-0001Gc-Rf for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Jun 2023 11:04:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cT8NDVtiIsZNzV7dqaCyqaAv6UgEz/7VfiIdR+IkQQM=; b=cv9/3L4cT2beHZXlxN477UVPcg
- SKB5bOmnuqOuS8fAaUluJC2yIgrQL0MGchyhdG6kN0LVZVTGyImXHBz0RHZFT9VRP97HcS9Je8Ym9
- 1MltHN7flNJ5QIUh6T2ByFToUap0QaaOHULG+T/Ir3uHQRxc5sCJtY8HEgktKwjiz+IQ=;
+ bh=d1qoGjkPozWQoERQWNO6oRm0vDiGAX9ruSKuYqYCTmk=; b=TxlRQAn3VgLapM4IP9HOX3tQJ0
+ m9zRqkS6eLYsS26bkc8XbCDNQzJ1B1kNU3I7vL87SxftT/g0VOgs4Ko/zUYP4eRacoEbHyELGoidT
+ eonJTI0iDGw822E+N7pLOhUB54m09AwrX6J3ElQxO9sNahgc3RZbVDcg+Nu4caZIUArc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,33 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cT8NDVtiIsZNzV7dqaCyqaAv6UgEz/7VfiIdR+IkQQM=; b=j7XFJ9kbGD1B7ZT0pQy46PtTsk
- DHLALHj+RQbL1WXU2yT530y2nAQRXUkEa8cxdpocCikBZD6v+pbFZ8T8FHlH4kdRy9Yhw3n7GHMP4
- 5U1j0xhfYUAB1aHeGpdzhszCkPMvqM/TFVJzUf7awQiZ9yGqVRU1g+Ynbn3FqrJN5HRg=;
+ bh=d1qoGjkPozWQoERQWNO6oRm0vDiGAX9ruSKuYqYCTmk=; b=SpiEVNNLBvxq6+5OpZHsZDKAj3
+ Y2BqqoPwlzLfCBprWXzToea0fUx/XaJAz2b9+thicnkY6l6XSYCokihR/h1uWMadNZb2/XpDqr+6c
+ pdaU5RSVIPq+s74AeSR6Rv+tlO/ao0vDQL7J+AgkMjQl/LjodCTLJsmxQHQbCxWbyfAU=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q7DRk-0000Uc-Pw for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Jun 2023 11:04:53 +0000
+ id 1q7DRo-00Ee2F-Ft for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Jun 2023 11:04:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=cT8NDVtiIsZNzV7dqaCyqaAv6UgEz/7VfiIdR+IkQQM=; b=kiJFIQ1nAL+TXJv9FL1MxdQxRn
- MjE37b6TUrn3o2T+X8RTjzxc9dFoJwc13B1cxCTfAgHHieEEThz+nOulB+CXAbbC1Y0y85FoWFx1G
- VraKXIbJAMCy3hW0e3Z3ki4QwJEvq9BK9L16/RF4/o2PenRIOj00eETs5fBt1PFSS9iM3+erOXzTk
- Zaq0wNsryRPVn+c0ll3/+zPoyHsu/DIq1VB+b/aXjSerkeOYW0iTLL8nU8Au3EkY8EtDDZIBLMWmS
- WhjQhMLxjLCE3gWrcxXeubo/4FAPO6sinlscv6PM4NW47r2uUyAy4fyteW4jDGY1V2cNPUKALpg8d
- C5CDVyMw==;
+ bh=d1qoGjkPozWQoERQWNO6oRm0vDiGAX9ruSKuYqYCTmk=; b=UBhwv6q5nwz6kIVHHUvGdge5x1
+ LN4p34WeIV4Xtu0tQLYdNoagvbxLEVlibfWS6Z8JoEXQJFYWnQDx9vi4dLFZYXlo2iSndo43uia8K
+ 41YZnXLq4w0t9F1He0XGIdH8JIU2qaKY+Q12n2eTboggepOqy1af7u3SZ1Nz2UCa5x1ao9TjYwhHL
+ U4Nylniu61uWgkxg/RcG6hJOkIQCiW/0tRzPTkYt58gH65GKRL+gtI+Nmqtx8eWH9TBKrU7A6WA/Y
+ kF5WLY+PnO3X6CIjCM/m9E6lHA4vBST9YnPdPDqomL2/noHfHhw30VMExNOY6Tj20ZzVa4BVsJqUS
+ L5T6ftGQ==;
 Received: from
  2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1q7DRI-0092xn-1H; Thu, 08 Jun 2023 11:04:24 +0000
+ id 1q7DRK-0092zc-2h; Thu, 08 Jun 2023 11:04:27 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Thu,  8 Jun 2023 13:02:57 +0200
-Message-Id: <20230608110258.189493-30-hch@lst.de>
+Date: Thu,  8 Jun 2023 13:02:58 +0200
+Message-Id: <20230608110258.189493-31-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230608110258.189493-1-hch@lst.de>
 References: <20230608110258.189493-1-hch@lst.de>
@@ -71,12 +71,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Store the file struct used as the holder in
- file->private_data
- as an indicator that this file descriptor was opened exclusively to remove
- the last use of FMODE_EXCL. Signed-off-by: Christoph Hellwig <hch@lst.de>
- --- block/fops.c | 14 ++++++++------ 1 file changed, 8 insertions(+),
- 6 deletions(-)
+ Content preview:  FMODE_NDELAY, FMODE_EXCL and FMODE_WRITE_IOCTL were only used
+ for block internal purposed and are now entirely unused, so remove them.
+ Signed-off-by: Christoph Hellwig <hch@lst.de> Reviewed-by: Hannes Reinecke
+ <hare@suse.de> Reviewed-by: Christian Brauner <brauner@kernel.org> ---
+ include/linux/fs.h | 7 ------- 1 file changed, 7 delet [...] 
  Content analysis details:   (-2.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -92,9 +91,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1q7DRk-0000Uc-Pw
-Subject: [f2fs-dev] [PATCH 29/30] block: store the holder in
- file->private_data
+X-Headers-End: 1q7DRo-00Ee2F-Ft
+Subject: [f2fs-dev] [PATCH 30/30] fs: remove the now unused FMODE_* flags
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,62 +118,40 @@ Cc: Vignesh Raghavendra <vigneshr@ti.com>,
  Christian Brauner <brauner@kernel.org>,
  "Martin K. Petersen" <martin.petersen@oracle.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org
+ linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org,
+ Hannes Reinecke <hare@suse.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Store the file struct used as the holder in file->private_data as an
-indicator that this file descriptor was opened exclusively to  remove
-the last use of FMODE_EXCL.
+FMODE_NDELAY, FMODE_EXCL and FMODE_WRITE_IOCTL were only used for
+block internal purposed and are now entirely unused, so remove them.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Hannes Reinecke <hare@suse.de>
+Reviewed-by: Christian Brauner <brauner@kernel.org>
 ---
- block/fops.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ include/linux/fs.h | 7 -------
+ 1 file changed, 7 deletions(-)
 
-diff --git a/block/fops.c b/block/fops.c
-index 0d714d050a462c..9871bd6052b416 100644
---- a/block/fops.c
-+++ b/block/fops.c
-@@ -478,7 +478,7 @@ blk_mode_t file_to_blk_mode(struct file *file)
- 		mode |= BLK_OPEN_READ;
- 	if (file->f_mode & FMODE_WRITE)
- 		mode |= BLK_OPEN_WRITE;
--	if (file->f_mode & FMODE_EXCL)
-+	if (file->private_data)
- 		mode |= BLK_OPEN_EXCL;
- 	if (file->f_flags & O_NDELAY)
- 		mode |= BLK_OPEN_NDELAY;
-@@ -507,12 +507,15 @@ static int blkdev_open(struct inode *inode, struct file *filp)
- 	filp->f_flags |= O_LARGEFILE;
- 	filp->f_mode |= FMODE_NOWAIT | FMODE_BUF_RASYNC;
- 
-+	/*
-+	 * Use the file private data to store the holder for exclusive openes.
-+	 * file_to_blk_mode relies on it being present to set BLK_OPEN_EXCL.
-+	 */
- 	if (filp->f_flags & O_EXCL)
--		filp->f_mode |= FMODE_EXCL;
-+		filp->private_data = filp;
- 
- 	bdev = blkdev_get_by_dev(inode->i_rdev, file_to_blk_mode(filp),
--				 (filp->f_mode & FMODE_EXCL) ? filp : NULL,
--				 NULL);
-+				 filp->private_data, NULL);
- 	if (IS_ERR(bdev))
- 		return PTR_ERR(bdev);
- 
-@@ -523,8 +526,7 @@ static int blkdev_open(struct inode *inode, struct file *filp)
- 
- static int blkdev_release(struct inode *inode, struct file *filp)
- {
--	blkdev_put(I_BDEV(filp->f_mapping->host),
--		   (filp->f_mode & FMODE_EXCL) ? filp : NULL);
-+	blkdev_put(I_BDEV(filp->f_mapping->host), filp->private_data);
- 	return 0;
- }
- 
+diff --git a/include/linux/fs.h b/include/linux/fs.h
+index ad1d2c9afb3fa4..8045c7ef4000c2 100644
+--- a/include/linux/fs.h
++++ b/include/linux/fs.h
+@@ -119,13 +119,6 @@ typedef int (dio_iodone_t)(struct kiocb *iocb, loff_t offset,
+ #define FMODE_PWRITE		((__force fmode_t)0x10)
+ /* File is opened for execution with sys_execve / sys_uselib */
+ #define FMODE_EXEC		((__force fmode_t)0x20)
+-/* File is opened with O_NDELAY (only set for block devices) */
+-#define FMODE_NDELAY		((__force fmode_t)0x40)
+-/* File is opened with O_EXCL (only set for block devices) */
+-#define FMODE_EXCL		((__force fmode_t)0x80)
+-/* File is opened using open(.., 3, ..) and is writeable only for ioctls
+-   (specialy hack for floppy.c) */
+-#define FMODE_WRITE_IOCTL	((__force fmode_t)0x100)
+ /* 32bit hashes as llseek() offset (for directories) */
+ #define FMODE_32BITHASH         ((__force fmode_t)0x200)
+ /* 64bit hashes as llseek() offset (for directories) */
 -- 
 2.39.2
 
