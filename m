@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD430727DBC
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Jun 2023 13:04:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48F5D727DC2
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Jun 2023 13:04:15 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q7DR0-0006yz-VN;
-	Thu, 08 Jun 2023 11:04:07 +0000
+	id 1q7DR7-000702-K1;
+	Thu, 08 Jun 2023 11:04:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+69acd89764e6999cdd63+7228+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1q7DQy-0006ys-MU for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Jun 2023 11:04:05 +0000
+ id 1q7DR6-0006zs-C3 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Jun 2023 11:04:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gQ3Spsv4LyW6gkuENKLqfBtm97HUuPElpVTvO1XeD28=; b=G2W3bH0Efo1QseZAn0KC/X4LH5
- d4XNN4wQleXZL8kYklZtHmxRO+u9dStswhwtJIfwYvPLyt7uQGCis38J6jQF5yVcjwd3r3sopwygW
- A/SAF4+ZcFzSL8tOpC96Una87wjdwUtMKLtbyraoSrsise0OzzNz2yFtpd4ES7xC9KwE=;
+ bh=BWc5z9HT4dUA9mjQNGkIg08JFiqviKFgFc2kwBdnmvA=; b=LvJv/A6yU6ExdrZ6m1FDlDxTFB
+ TG0QpAdJ7TO8Pq+KZvQ4eDD7ebZQj2tXXqET/1gNJbfuS4z7WeJcweuvmpowoD2D2sFmN5XK1on5L
+ ncQ4lD+3V9Pkfj+yqpiH4xbxlr/Nsocw6BPMkHq2vutGS5m4HeBRj5xrDKYxYh+rIHAM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,33 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gQ3Spsv4LyW6gkuENKLqfBtm97HUuPElpVTvO1XeD28=; b=IyTvTkcnJa0iNVNG+zASbE/4ho
- 1J0d0VHqWGuK2soP36g9mmYa53Vogima8E/Jbk4TskYOX0k1olE9wzDZGTWKMUgx09e7GkoVDk8Xj
- VJ4iOE1UJDCN5Wd5E6Oa8tG8hZ+6Qa4QbyN8jg26ZcfNzTfVEiobiaF4G99vNDLE9xlc=;
+ bh=BWc5z9HT4dUA9mjQNGkIg08JFiqviKFgFc2kwBdnmvA=; b=GwsI8zzZRjUNyQ33Uva7xAddNy
+ rbYMYSmfRDxbPB2nNdPMNzGuOXI9NISJExjBDIyDYuvRzq/Smd901IcmK61sMpxDGY64vexQ4mLZr
+ J4Pg7QBdA7ukbcryvb68BvDT0441GMto306r97mv4HuUuphI+arAp4TxiKmWcvdkRvdU=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q7DQy-0000PR-JP for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Jun 2023 11:04:05 +0000
+ id 1q7DR5-0000Ps-HI for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Jun 2023 11:04:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=gQ3Spsv4LyW6gkuENKLqfBtm97HUuPElpVTvO1XeD28=; b=jW0zTWF6tfMg7bq3namLXxCJhX
- 9o76HmmsCWifkmnenvxNN9ST2kDHg69JQjRM52ooMvxhJiNBPaSCCFxcHBlMOLs2V774wWqMCQhPj
- /A1n8jDntoho8B6HC55sEWz9a3tEKJg5IDswpl9YuPwHOg7bQupCwXyuFlfPZADmA+4hFGg2+dmne
- GY8stUwwlY+yosMPEFLSh7VFkFng9rGoZBIUYp7nJ1KPt83j3gpN/sYgk7DKf0RRjZ9mHuWj6VGu7
- x+drRsxDDSDwRO0RDfNLxONcMjX6ZN6OS7II7WT15ThtGWxZ4Bd+3m2ZPDdl5LJs0Xqbsb7BknqRk
- Es3R62fQ==;
+ bh=BWc5z9HT4dUA9mjQNGkIg08JFiqviKFgFc2kwBdnmvA=; b=DSaSxe/TisXuiNZhOR1TgSi7tx
+ 33lAtkUXPMOr9WQm9Z+HhNKEJGoeKJSluj7uhXRCmimH7VoHS0E0fvUNcZ7UiWxsb/tBtz6fXhZlr
+ GE9jtxC+Q8FoQSEQz+4vk9nOOH8BTAjfrUuFLcHba2SvPuPGZNkEv8QjVxkATSDkihbdNi6umKqVB
+ 7p2NEvk5EAeqwWcAKAwVWRbUBkG4tyEy/NutpgRnWrvU0mWTHAqNh1aG3veS9lJl/Zm3XwnRRN4uy
+ kPNwBnK5dcXc2ETiMnCmg0liMCPKVYmWiFEJ6OPE/jhf6OnfgqyBEoO+PrWwml+/G7QKTlQlKNK+/
+ sLCUxnmg==;
 Received: from
  2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1q7DQO-0091yH-2h; Thu, 08 Jun 2023 11:03:29 +0000
+ id 1q7DQR-00921s-1m; Thu, 08 Jun 2023 11:03:31 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Thu,  8 Jun 2023 13:02:38 +0200
-Message-Id: <20230608110258.189493-11-hch@lst.de>
+Date: Thu,  8 Jun 2023 13:02:39 +0200
+Message-Id: <20230608110258.189493-12-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230608110258.189493-1-hch@lst.de>
 References: <20230608110258.189493-1-hch@lst.de>
@@ -71,10 +71,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Make the function name match the method name. Signed-off-by:
+ Content preview: holder is just an on-stack pointer that can easily be reused
+ by other calls,
+ replace it with a static variable that doesn't change. Signed-off-by:
  Christoph Hellwig <hch@lst.de> Reviewed-by: Hannes Reinecke <hare@suse.de>
- Acked-by: Christian Brauner <brauner@kernel.org> --- block/fops.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 [...] 
+ --- kernel/power/swap.c | 5 +++-- 1 file changed, 3 insertions(+),
+ 2 deletions(-)
  Content analysis details:   (-2.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -89,9 +91,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1q7DQy-0000PR-JP
-Subject: [f2fs-dev] [PATCH 10/30] block: rename blkdev_close to
- blkdev_release
+X-Headers-End: 1q7DR5-0000Ps-HI
+Subject: [f2fs-dev] [PATCH 11/30] swsusp: don't pass a stack address to
+ blkdev_get_by_path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,37 +125,44 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Make the function name match the method name.
+holder is just an on-stack pointer that can easily be reused by other calls,
+replace it with a static variable that doesn't change.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Hannes Reinecke <hare@suse.de>
-Acked-by: Christian Brauner <brauner@kernel.org>
 ---
- block/fops.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ kernel/power/swap.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/block/fops.c b/block/fops.c
-index 6a3087b750a6cd..26af2b39c758e1 100644
---- a/block/fops.c
-+++ b/block/fops.c
-@@ -500,7 +500,7 @@ static int blkdev_open(struct inode *inode, struct file *filp)
- 	return 0;
+diff --git a/kernel/power/swap.c b/kernel/power/swap.c
+index 81aec3b2c60510..b03ff1a33c7f68 100644
+--- a/kernel/power/swap.c
++++ b/kernel/power/swap.c
+@@ -1510,6 +1510,8 @@ int swsusp_read(unsigned int *flags_p)
+ 	return error;
  }
  
--static int blkdev_close(struct inode *inode, struct file *filp)
-+static int blkdev_release(struct inode *inode, struct file *filp)
++static void *swsusp_holder;
++
+ /**
+  *      swsusp_check - Check for swsusp signature in the resume device
+  */
+@@ -1517,14 +1519,13 @@ int swsusp_read(unsigned int *flags_p)
+ int swsusp_check(bool snapshot_test)
  {
- 	struct block_device *bdev = filp->private_data;
+ 	int error;
+-	void *holder;
+ 	fmode_t mode = FMODE_READ;
  
-@@ -677,7 +677,7 @@ static long blkdev_fallocate(struct file *file, int mode, loff_t start,
+ 	if (snapshot_test)
+ 		mode |= FMODE_EXCL;
  
- const struct file_operations def_blk_fops = {
- 	.open		= blkdev_open,
--	.release	= blkdev_close,
-+	.release	= blkdev_release,
- 	.llseek		= blkdev_llseek,
- 	.read_iter	= blkdev_read_iter,
- 	.write_iter	= blkdev_write_iter,
+ 	hib_resume_bdev = blkdev_get_by_dev(swsusp_resume_device,
+-					    mode, &holder, NULL);
++					    mode, &swsusp_holder, NULL);
+ 	if (!IS_ERR(hib_resume_bdev)) {
+ 		set_blocksize(hib_resume_bdev, PAGE_SIZE);
+ 		clear_page(swsusp_header);
 -- 
 2.39.2
 
