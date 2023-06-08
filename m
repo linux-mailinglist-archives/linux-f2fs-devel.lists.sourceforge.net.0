@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5F07727DD3
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Jun 2023 13:04:30 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA9AE727DD5
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  8 Jun 2023 13:04:34 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q7DRN-0007m8-7C;
-	Thu, 08 Jun 2023 11:04:29 +0000
+	id 1q7DRQ-00019N-NA;
+	Thu, 08 Jun 2023 11:04:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+69acd89764e6999cdd63+7228+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1q7DRK-0007lt-Oe for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Jun 2023 11:04:27 +0000
+ id 1q7DRP-000198-CD for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Jun 2023 11:04:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=D+1s3WT+5DpsHw6D0N73ilbFCvVf0P+vhIMd+8ZE9LA=; b=cN1ma9Xg0cFgySE8JD+CqXh5iw
- hgXbgViX1uZ+J+bduzktJjCzewhIfv1is6TQcKKwOWshwmjZBELbqgYWnoOJZE/8E7CUuzlYCjfyE
- 8QcH/JNuYB9qptWEgnWKFneUcZwn9aVk/AVuJpEpqUb5IRKEqCH+t5Z7PeL0MPM/d8Fo=;
+ bh=fSHs5E5DpSGLImT5XWoEiWSRTMtau5so4CZg7jfsQ30=; b=IAgySPTMOI8QUVDPeYmrzphYjL
+ 91qSJOTMqYQg7XWZSrf99ZLtiS8vJITF7WJPXYcoPVdLK/lL8aMeGFOayoMzU8ELloLRLUH0zqKpI
+ Vwn7i/B8Um89nQCZJOF0oGz2AHvEebKl49MJmAbeWLx7Ih+bQrItQJaGcWERip7sfBno=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,33 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=D+1s3WT+5DpsHw6D0N73ilbFCvVf0P+vhIMd+8ZE9LA=; b=ZOMFHxThHGfhrSpQw/Io8CR9CT
- yNpnLZfS3Ofo8MzRB1DeoBAW1VqnBjWL1B4yIQMzBT5dpaMHB7IwI3JjkbBSs6R0BfLAKkvmupqwe
- fp7SpSzppG30uurp1+5X60S1VyuMhdbETL8a5zvCWCob4JRdO6eOPskn/ZQLFwgoSyIc=;
+ bh=fSHs5E5DpSGLImT5XWoEiWSRTMtau5so4CZg7jfsQ30=; b=DF24JNCBCii1uwbRQ4ID7Bb+IL
+ hWq2yFDMPVaLKgFpe4V0gr4etQNN8pfEVWo8IdaFiKHZCE5G6fKAGDm7J0hBlBmdzGoxXNTAKhew7
+ m6bhcjeiLEaZ6FUj4yf79aNPwtJMNJALu/ASbyUpXbKRplufX0av6PwldGOtD/Kto2f8=;
 Received: from bombadil.infradead.org ([198.137.202.133])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q7DRK-00Edye-0y for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 08 Jun 2023 11:04:27 +0000
+ id 1q7DRP-0000SI-Ci for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 08 Jun 2023 11:04:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=D+1s3WT+5DpsHw6D0N73ilbFCvVf0P+vhIMd+8ZE9LA=; b=40Te1n4Dyq79Fvl8DiG/4q/bRo
- VTK3fXaSnaNNg1uOs526jLkNTpHwlbTJt5jmBxhgZxaikDudUl5mm+mGUQuUPzTI+l3GxVc9KxxXn
- M0u9wkYFM1nlyleudq0pRlJRKmHm0M/ldAYGoysH/K2SaONPz05psQK0kO5bzoQgK4WqStI0m6KqL
- 7jJzBJE4GL4xkU2KnLRRgd3OeBmywzsBlmlcWFhtymotB+hEmhzNWDG6W9CXpPMrNHdrxWxBOjdWm
- w7NtmU2XUqlRvQQJZZu/4nEZCVfDMTNSJR0uNM+71E6h4npceh/JitURnDS2n4/7TzJnLyOygUh2S
- mv3c6bbg==;
+ bh=fSHs5E5DpSGLImT5XWoEiWSRTMtau5so4CZg7jfsQ30=; b=hXwdiSdaUuO4Yg5CH0bD9GnXXO
+ Pn8A/fhdrm/NH1bFv2MmyDg9BkipqTds10V8VafyysiDUFsfQl21B1PyJGrNBHK2slELnb4soPq4y
+ 0nb5tYR9Gwp0/ibU6C/ZQtO7ZH7eAQMYQK5TAxdpoS00JE46z+JJuVsueQ+ngBS7RDTKHcqsYW7UU
+ pfrtV+OQzDfheA4zhFvGIfKWKvSiMkMOD46FRFiss5k4LpQi5jPgRONtuY+2iilyC4ECJvw0Canug
+ KfcoMRc5KCd3mTqCKl7fq3/udj4BX2Xg7qoU30qAXLRw0oXsGc0erimL9CgOvzICs4Ejj5eACRzw8
+ sOgUW/Kw==;
 Received: from
  2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1q7DQj-0092O2-23; Thu, 08 Jun 2023 11:03:49 +0000
+ id 1q7DQm-0092Rc-2c; Thu, 08 Jun 2023 11:03:53 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Date: Thu,  8 Jun 2023 13:02:46 +0200
-Message-Id: <20230608110258.189493-19-hch@lst.de>
+Date: Thu,  8 Jun 2023 13:02:47 +0200
+Message-Id: <20230608110258.189493-20-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230608110258.189493-1-hch@lst.de>
 References: <20230608110258.189493-1-hch@lst.de>
@@ -92,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1q7DRK-00Edye-0y
-Subject: [f2fs-dev] [PATCH 18/30] scsi: replace the fmode_t argument to
- scsi_cmd_allowed with a simple bool
+X-Headers-End: 1q7DRP-0000SI-Ci
+Subject: [f2fs-dev] [PATCH 19/30] scsi: replace the fmode_t argument to
+ scsi_ioctl with a simple bool
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -134,91 +134,242 @@ Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 Acked-by: Christian Brauner <brauner@kernel.org>
 ---
- drivers/scsi/scsi_bsg.c   | 2 +-
- drivers/scsi/scsi_ioctl.c | 8 ++++----
- drivers/scsi/sg.c         | 2 +-
- include/scsi/scsi_ioctl.h | 2 +-
- 4 files changed, 7 insertions(+), 7 deletions(-)
+ drivers/scsi/ch.c         |  3 ++-
+ drivers/scsi/scsi_ioctl.c | 34 +++++++++++++++++-----------------
+ drivers/scsi/sd.c         |  2 +-
+ drivers/scsi/sg.c         |  5 +++--
+ drivers/scsi/sr.c         |  2 +-
+ drivers/scsi/st.c         |  2 +-
+ include/scsi/scsi_ioctl.h |  2 +-
+ 7 files changed, 26 insertions(+), 24 deletions(-)
 
-diff --git a/drivers/scsi/scsi_bsg.c b/drivers/scsi/scsi_bsg.c
-index 96ee35256a168f..12431f35f861e1 100644
---- a/drivers/scsi/scsi_bsg.c
-+++ b/drivers/scsi/scsi_bsg.c
-@@ -42,7 +42,7 @@ static int scsi_bsg_sg_io_fn(struct request_queue *q, struct sg_io_v4 *hdr,
- 	if (copy_from_user(scmd->cmnd, uptr64(hdr->request), scmd->cmd_len))
- 		goto out_put_request;
- 	ret = -EPERM;
--	if (!scsi_cmd_allowed(scmd->cmnd, mode))
-+	if (!scsi_cmd_allowed(scmd->cmnd, mode & FMODE_WRITE))
- 		goto out_put_request;
+diff --git a/drivers/scsi/ch.c b/drivers/scsi/ch.c
+index ac648bb8f7e7f4..cb0a399be1ccee 100644
+--- a/drivers/scsi/ch.c
++++ b/drivers/scsi/ch.c
+@@ -877,7 +877,8 @@ static long ch_ioctl(struct file *file,
+ 	}
  
- 	ret = 0;
+ 	default:
+-		return scsi_ioctl(ch->device, file->f_mode, cmd, argp);
++		return scsi_ioctl(ch->device, file->f_mode & FMODE_WRITE, cmd,
++				  argp);
+ 
+ 	}
+ }
 diff --git a/drivers/scsi/scsi_ioctl.c b/drivers/scsi/scsi_ioctl.c
-index e3b31d32b6a92e..dda5468ca97f90 100644
+index dda5468ca97f90..6f6c5973c3ea95 100644
 --- a/drivers/scsi/scsi_ioctl.c
 +++ b/drivers/scsi/scsi_ioctl.c
-@@ -248,7 +248,7 @@ static int scsi_send_start_stop(struct scsi_device *sdev, int data)
-  * Only a subset of commands are allowed for unprivileged users. Commands used
-  * to format the media, update the firmware, etc. are not permitted.
-  */
--bool scsi_cmd_allowed(unsigned char *cmd, fmode_t mode)
-+bool scsi_cmd_allowed(unsigned char *cmd, bool open_for_write)
+@@ -346,7 +346,7 @@ bool scsi_cmd_allowed(unsigned char *cmd, bool open_for_write)
+ EXPORT_SYMBOL(scsi_cmd_allowed);
+ 
+ static int scsi_fill_sghdr_rq(struct scsi_device *sdev, struct request *rq,
+-		struct sg_io_hdr *hdr, fmode_t mode)
++		struct sg_io_hdr *hdr, bool open_for_write)
  {
- 	/* root can do any command. */
- 	if (capable(CAP_SYS_RAWIO))
-@@ -338,7 +338,7 @@ bool scsi_cmd_allowed(unsigned char *cmd, fmode_t mode)
- 	case GPCMD_SET_READ_AHEAD:
- 	/* ZBC */
- 	case ZBC_OUT:
--		return (mode & FMODE_WRITE);
-+		return open_for_write;
- 	default:
- 		return false;
- 	}
+ 	struct scsi_cmnd *scmd = blk_mq_rq_to_pdu(rq);
+ 
 @@ -354,7 +354,7 @@ static int scsi_fill_sghdr_rq(struct scsi_device *sdev, struct request *rq,
  		return -EMSGSIZE;
  	if (copy_from_user(scmd->cmnd, hdr->cmdp, hdr->cmd_len))
  		return -EFAULT;
--	if (!scsi_cmd_allowed(scmd->cmnd, mode))
-+	if (!scsi_cmd_allowed(scmd->cmnd, mode & FMODE_WRITE))
+-	if (!scsi_cmd_allowed(scmd->cmnd, mode & FMODE_WRITE))
++	if (!scsi_cmd_allowed(scmd->cmnd, open_for_write))
  		return -EPERM;
  	scmd->cmd_len = hdr->cmd_len;
  
+@@ -407,7 +407,8 @@ static int scsi_complete_sghdr_rq(struct request *rq, struct sg_io_hdr *hdr,
+ 	return ret;
+ }
+ 
+-static int sg_io(struct scsi_device *sdev, struct sg_io_hdr *hdr, fmode_t mode)
++static int sg_io(struct scsi_device *sdev, struct sg_io_hdr *hdr,
++		bool open_for_write)
+ {
+ 	unsigned long start_time;
+ 	ssize_t ret = 0;
+@@ -448,7 +449,7 @@ static int sg_io(struct scsi_device *sdev, struct sg_io_hdr *hdr, fmode_t mode)
+ 		goto out_put_request;
+ 	}
+ 
+-	ret = scsi_fill_sghdr_rq(sdev, rq, hdr, mode);
++	ret = scsi_fill_sghdr_rq(sdev, rq, hdr, open_for_write);
+ 	if (ret < 0)
+ 		goto out_put_request;
+ 
+@@ -477,8 +478,7 @@ static int sg_io(struct scsi_device *sdev, struct sg_io_hdr *hdr, fmode_t mode)
+ /**
+  * sg_scsi_ioctl  --  handle deprecated SCSI_IOCTL_SEND_COMMAND ioctl
+  * @q:		request queue to send scsi commands down
+- * @mode:	mode used to open the file through which the ioctl has been
+- *		submitted
++ * @open_for_write: is the file / block device opened for writing?
+  * @sic:	userspace structure describing the command to perform
+  *
+  * Send down the scsi command described by @sic to the device below
+@@ -501,7 +501,7 @@ static int sg_io(struct scsi_device *sdev, struct sg_io_hdr *hdr, fmode_t mode)
+  *      Positive numbers returned are the compacted SCSI error codes (4
+  *      bytes in one int) where the lowest byte is the SCSI status.
+  */
+-static int sg_scsi_ioctl(struct request_queue *q, fmode_t mode,
++static int sg_scsi_ioctl(struct request_queue *q, bool open_for_write,
+ 		struct scsi_ioctl_command __user *sic)
+ {
+ 	struct request *rq;
 @@ -554,7 +554,7 @@ static int sg_scsi_ioctl(struct request_queue *q, fmode_t mode,
  		goto error;
  
  	err = -EPERM;
--	if (!scsi_cmd_allowed(scmd->cmnd, mode))
-+	if (!scsi_cmd_allowed(scmd->cmnd, mode & FMODE_WRITE))
+-	if (!scsi_cmd_allowed(scmd->cmnd, mode & FMODE_WRITE))
++	if (!scsi_cmd_allowed(scmd->cmnd, open_for_write))
  		goto error;
  
  	/* default.  possible overridden later */
-diff --git a/drivers/scsi/sg.c b/drivers/scsi/sg.c
-index 037f8c98a6d364..e49ea693d0b656 100644
---- a/drivers/scsi/sg.c
-+++ b/drivers/scsi/sg.c
-@@ -237,7 +237,7 @@ static int sg_allow_access(struct file *filp, unsigned char *cmd)
- 
- 	if (sfp->parentdp->device->type == TYPE_SCANNER)
- 		return 0;
--	if (!scsi_cmd_allowed(cmd, filp->f_mode))
-+	if (!scsi_cmd_allowed(cmd, filp->f_mode & FMODE_WRITE))
- 		return -EPERM;
+@@ -776,7 +776,7 @@ static int scsi_put_cdrom_generic_arg(const struct cdrom_generic_command *cgc,
  	return 0;
  }
+ 
+-static int scsi_cdrom_send_packet(struct scsi_device *sdev, fmode_t mode,
++static int scsi_cdrom_send_packet(struct scsi_device *sdev, bool open_for_write,
+ 		void __user *arg)
+ {
+ 	struct cdrom_generic_command cgc;
+@@ -817,7 +817,7 @@ static int scsi_cdrom_send_packet(struct scsi_device *sdev, fmode_t mode,
+ 	hdr.cmdp = ((struct cdrom_generic_command __user *) arg)->cmd;
+ 	hdr.cmd_len = sizeof(cgc.cmd);
+ 
+-	err = sg_io(sdev, &hdr, mode);
++	err = sg_io(sdev, &hdr, open_for_write);
+ 	if (err == -EFAULT)
+ 		return -EFAULT;
+ 
+@@ -832,7 +832,7 @@ static int scsi_cdrom_send_packet(struct scsi_device *sdev, fmode_t mode,
+ 	return err;
+ }
+ 
+-static int scsi_ioctl_sg_io(struct scsi_device *sdev, fmode_t mode,
++static int scsi_ioctl_sg_io(struct scsi_device *sdev, bool open_for_write,
+ 		void __user *argp)
+ {
+ 	struct sg_io_hdr hdr;
+@@ -841,7 +841,7 @@ static int scsi_ioctl_sg_io(struct scsi_device *sdev, fmode_t mode,
+ 	error = get_sg_io_hdr(&hdr, argp);
+ 	if (error)
+ 		return error;
+-	error = sg_io(sdev, &hdr, mode);
++	error = sg_io(sdev, &hdr, open_for_write);
+ 	if (error == -EFAULT)
+ 		return error;
+ 	if (put_sg_io_hdr(&hdr, argp))
+@@ -852,7 +852,7 @@ static int scsi_ioctl_sg_io(struct scsi_device *sdev, fmode_t mode,
+ /**
+  * scsi_ioctl - Dispatch ioctl to scsi device
+  * @sdev: scsi device receiving ioctl
+- * @mode: mode the block/char device is opened with
++ * @open_for_write: is the file / block device opened for writing?
+  * @cmd: which ioctl is it
+  * @arg: data associated with ioctl
+  *
+@@ -860,7 +860,7 @@ static int scsi_ioctl_sg_io(struct scsi_device *sdev, fmode_t mode,
+  * does not take a major/minor number as the dev field.  Rather, it takes
+  * a pointer to a &struct scsi_device.
+  */
+-int scsi_ioctl(struct scsi_device *sdev, fmode_t mode, int cmd,
++int scsi_ioctl(struct scsi_device *sdev, bool open_for_write, int cmd,
+ 		void __user *arg)
+ {
+ 	struct request_queue *q = sdev->request_queue;
+@@ -896,11 +896,11 @@ int scsi_ioctl(struct scsi_device *sdev, fmode_t mode, int cmd,
+ 	case SG_EMULATED_HOST:
+ 		return sg_emulated_host(q, arg);
+ 	case SG_IO:
+-		return scsi_ioctl_sg_io(sdev, mode, arg);
++		return scsi_ioctl_sg_io(sdev, open_for_write, arg);
+ 	case SCSI_IOCTL_SEND_COMMAND:
+-		return sg_scsi_ioctl(q, mode, arg);
++		return sg_scsi_ioctl(q, open_for_write, arg);
+ 	case CDROM_SEND_PACKET:
+-		return scsi_cdrom_send_packet(sdev, mode, arg);
++		return scsi_cdrom_send_packet(sdev, open_for_write, arg);
+ 	case CDROMCLOSETRAY:
+ 		return scsi_send_start_stop(sdev, 3);
+ 	case CDROMEJECT:
+diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
+index c67c84f6ba6178..02b6704ec2b401 100644
+--- a/drivers/scsi/sd.c
++++ b/drivers/scsi/sd.c
+@@ -1463,7 +1463,7 @@ static int sd_ioctl(struct block_device *bdev, fmode_t mode,
+ 
+ 	if (is_sed_ioctl(cmd))
+ 		return sed_ioctl(sdkp->opal_dev, cmd, p);
+-	return scsi_ioctl(sdp, mode, cmd, p);
++	return scsi_ioctl(sdp, mode & FMODE_WRITE, cmd, p);
+ }
+ 
+ static void set_media_not_present(struct scsi_disk *sdkp)
+diff --git a/drivers/scsi/sg.c b/drivers/scsi/sg.c
+index e49ea693d0b656..138e28bb76b749 100644
+--- a/drivers/scsi/sg.c
++++ b/drivers/scsi/sg.c
+@@ -1103,7 +1103,8 @@ sg_ioctl_common(struct file *filp, Sg_device *sdp, Sg_fd *sfp,
+ 	case SCSI_IOCTL_SEND_COMMAND:
+ 		if (atomic_read(&sdp->detaching))
+ 			return -ENODEV;
+-		return scsi_ioctl(sdp->device, filp->f_mode, cmd_in, p);
++		return scsi_ioctl(sdp->device, filp->f_mode & FMODE_WRITE,
++				  cmd_in, p);
+ 	case SG_SET_DEBUG:
+ 		result = get_user(val, ip);
+ 		if (result)
+@@ -1159,7 +1160,7 @@ sg_ioctl(struct file *filp, unsigned int cmd_in, unsigned long arg)
+ 	ret = sg_ioctl_common(filp, sdp, sfp, cmd_in, p);
+ 	if (ret != -ENOIOCTLCMD)
+ 		return ret;
+-	return scsi_ioctl(sdp->device, filp->f_mode, cmd_in, p);
++	return scsi_ioctl(sdp->device, filp->f_mode & FMODE_WRITE, cmd_in, p);
+ }
+ 
+ static __poll_t
+diff --git a/drivers/scsi/sr.c b/drivers/scsi/sr.c
+index 55082acb59bcaa..00aaafc8dd78f8 100644
+--- a/drivers/scsi/sr.c
++++ b/drivers/scsi/sr.c
+@@ -543,7 +543,7 @@ static int sr_block_ioctl(struct block_device *bdev, fmode_t mode, unsigned cmd,
+ 		if (ret != -ENOSYS)
+ 			goto put;
+ 	}
+-	ret = scsi_ioctl(sdev, mode, cmd, argp);
++	ret = scsi_ioctl(sdev, mode & FMODE_WRITE, cmd, argp);
+ 
+ put:
+ 	scsi_autopm_put_device(sdev);
+diff --git a/drivers/scsi/st.c b/drivers/scsi/st.c
+index b90a440e135dc4..14d7981ddcdd19 100644
+--- a/drivers/scsi/st.c
++++ b/drivers/scsi/st.c
+@@ -3832,7 +3832,7 @@ static long st_ioctl(struct file *file, unsigned int cmd_in, unsigned long arg)
+ 		break;
+ 	}
+ 
+-	retval = scsi_ioctl(STp->device, file->f_mode, cmd_in, p);
++	retval = scsi_ioctl(STp->device, file->f_mode & FMODE_WRITE, cmd_in, p);
+ 	if (!retval && cmd_in == SCSI_IOCTL_STOP_UNIT) {
+ 		/* unload */
+ 		STp->rew_at_close = 0;
 diff --git a/include/scsi/scsi_ioctl.h b/include/scsi/scsi_ioctl.h
-index beac64e38b8746..914201a8cb947c 100644
+index 914201a8cb947c..a207c07da9d20c 100644
 --- a/include/scsi/scsi_ioctl.h
 +++ b/include/scsi/scsi_ioctl.h
-@@ -49,7 +49,7 @@ int scsi_ioctl(struct scsi_device *sdev, fmode_t mode, int cmd,
+@@ -45,7 +45,7 @@ typedef struct scsi_fctargaddress {
+ 
+ int scsi_ioctl_block_when_processing_errors(struct scsi_device *sdev,
+ 		int cmd, bool ndelay);
+-int scsi_ioctl(struct scsi_device *sdev, fmode_t mode, int cmd,
++int scsi_ioctl(struct scsi_device *sdev, bool open_for_write, int cmd,
  		void __user *arg);
  int get_sg_io_hdr(struct sg_io_hdr *hdr, const void __user *argp);
  int put_sg_io_hdr(const struct sg_io_hdr *hdr, void __user *argp);
--bool scsi_cmd_allowed(unsigned char *cmd, fmode_t mode);
-+bool scsi_cmd_allowed(unsigned char *cmd, bool open_for_write);
- 
- #endif /* __KERNEL__ */
- #endif /* _SCSI_IOCTL_H */
 -- 
 2.39.2
 
