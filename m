@@ -2,107 +2,158 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E182572A1E1
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  9 Jun 2023 20:13:57 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85C9072B598
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Jun 2023 05:02:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q7gcQ-0003vZ-GA;
-	Fri, 09 Jun 2023 18:13:50 +0000
+	id 1q8Xon-0002b0-Ge;
+	Mon, 12 Jun 2023 03:02:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <rjwysocki@gmail.com>) id 1q7gcO-0003vS-VF
+ (envelope-from <shengyong@oppo.com>) id 1q8Xom-0002au-5U
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 09 Jun 2023 18:13:49 +0000
+ Mon, 12 Jun 2023 03:02:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=f2Xux0G0tFdJlDzvQzZhcAqUXfykTqTn9g16hyE21ys=; b=ebdYpKebG6U4xnL9HolbxUjZBd
- GD8Emya7/cSXWtqRevHvGHJY2cKNHv6mB05tWxec1er8bVXeaTv4MaJ+L0CdaK+LQG19CPBMv/bmM
- THd2LYbWA1RD30IIMvQQ67/kqgRtfEfIlPeUNefqd4e2lXOD09aNyhLhvMYYPELYz1M4=;
+ bh=l1v+pSg/oWcs687py8tAQybrfDN3VE3PjazJlaYFLtQ=; b=XzYTrvZuDFai+XzgX5B3O1D0w8
+ 0mAYp/gYocRPBKU5bTUhbkMDxjau/wQemurWrL7k2NLARtGh8RCipcJH/iCxEQvMa/hI1SX+DJy0o
+ jaB42xEzPBRtTUkvrn7j7Q5i7YOBLu59XVrCQZfiE4IO+26JOmVEZEdThI8XB7M9/2Ns=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=f2Xux0G0tFdJlDzvQzZhcAqUXfykTqTn9g16hyE21ys=; b=fsDPKRid0VzhCjC3pmwFWQo8Ea
- uBxyL32bZXpzcVWLTiSwPhqHj2UZMnZ8+NMhijPqwGlTvlIP1I/I6LoLGQ0QqulSin8Di0iqNoGPw
- pmVPlGQ92HNVzWrcyj+xjvwUuo16Pjl/hVZuyjuTbOKo7X9sFJjp+jPWAJoZR+BZdsUg=;
-Received: from mail-ej1-f54.google.com ([209.85.218.54])
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=l1v+pSg/oWcs687py8tAQybrfDN3VE3PjazJlaYFLtQ=; b=V
+ bTtqHQF0JwaXGHoVllzTLRv8OIHVV2EGgGP69U2dQdTrpZsTWYhB3VghODPf6CFIU0LaAJcZlpJp2
+ 9SejU34Dj3vY2s6mYhPUDk3/FpVthXK2iqqws+t83sxYVCWMUXIjESpyefwIiLZa3WAlpNJhcKTu+
+ yobMzPDanP+48Jmg=;
+Received: from mail-tyzapc01on2071.outbound.protection.outlook.com
+ ([40.107.117.71] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1q7gcK-0007GK-Bv for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 09 Jun 2023 18:13:47 +0000
-Received: by mail-ej1-f54.google.com with SMTP id
- a640c23a62f3a-977d3292be0so55136466b.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 09 Jun 2023 11:13:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686334418; x=1688926418;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=f2Xux0G0tFdJlDzvQzZhcAqUXfykTqTn9g16hyE21ys=;
- b=XTU3Ab1dD+2qzg28uPP+/ABt5euMN0xjstmai2ddmBKPEvDc3tkAnstT26Z+K2eJ4Q
- ot/2A6vr09C5l/pCned58kXTW++yr9rzz0ToICsN0NRqI3LlQBtXKTgeMwPycrYkQtAc
- PfB33ETpSY2I1vtp0yu094zGlgG0ErKvWGWrSWKs/ltox87LkhGYujBxAuD5caFzA7K2
- Q4+S8RW/aedPibt9NKShwyf3rB2J5jMw/cdaWWk/+pBYQCRGYLXH76/CvhW+4wN1GUG+
- mkTEeYkqAongZT2DY0FI9CuUTCNikRkzd33Lh0vR7yMRVD+fyxGbUg9P/qBpcZbWto+4
- HgUg==
-X-Gm-Message-State: AC+VfDwSfZH5/SeRsrh3BSolAERwOQXfN9JeW4P/WX0aJsSAI6hNwmEh
- Xyg07nohwoYReFK2WCdNygTLTIu0n+IFialxfPc=
-X-Google-Smtp-Source: ACHHUZ7r7lbBrTdxRkyp2bTqJCFBDA6+Ddf+RviatN0r97z5LUsaxAu6Q2CxPlvVkZ/6P5sUxBvleBvx6ETeZa4XK48=
-X-Received: by 2002:a17:906:1049:b0:974:56cb:9dfc with SMTP id
- j9-20020a170906104900b0097456cb9dfcmr1993996ejj.1.1686334417837; Fri, 09 Jun
- 2023 11:13:37 -0700 (PDT)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1q8XoY-0007se-P9 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 12 Jun 2023 03:02:04 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Yr5XQwB115w71XaMsujnuZtRztM7frPMNuh9ri9iEOGEO1rhkK/KcmI1xdU2Umg/h+DdrYeeddK8IoKJcjRkazXESb4/TxqDLSVKE3lVS81rleRqKTX6r0sEQFRj11V7a+xakF2JoDlvm5fXEoXqZXclTCXU9c6GhML4ZVmYL1r8AlUwBla+LyFwi4sXAkRnGS1FzRSWVuoYvPaoeOy6QeU55dEpVq+Ld4oS58KpFtnn1romddMODM/2u+3rEzgUanNEbPnvcWRD7kpCqVZa4rI1Y2bm2+b+JA60fHCXbwraoydmg/H58zUI75HpEo7BP7m+iFpf0E5eub+pB7twqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=l1v+pSg/oWcs687py8tAQybrfDN3VE3PjazJlaYFLtQ=;
+ b=Ci9HqkVOtOZy3eGD8ZjWg/0QzC5KzHpY9ad/n04RHgGsqpR7fZYCoYdfWpsuwcWh53mD3aJWUuq9S3BhBlHcr0GyDkrnRVOKCtFnOCdfB32CDljWaEravmMSv7QX8eRtCwJasYj30AS/dQZP2OT3qaIJYiV0XkswVy5dn0iAgw8DvUx5abbq3EeErmTlAJStwil0s3rMaIZTy0/cUytbtcHxdhq7pTVsP5T0tGbL4ZJTrz1Wn1B37rqdL5IL72GLs1y/okWddkIR/j/KVhQrYb1ph68fIqkwrXWK8W0oqPDetjGFHH2GhqoYt2L1EHeDCZ2j0maSFRE79arJASVYDA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oppo.com; dmarc=pass action=none header.from=oppo.com;
+ dkim=pass header.d=oppo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=l1v+pSg/oWcs687py8tAQybrfDN3VE3PjazJlaYFLtQ=;
+ b=Qr07vN+St1CXRNDqCv1ijOppF0Cca8iLf5Kelv/wUrkLOLuOj9Dxkjp0qJ/akkbO2xu5MP0Xj1z9F67ZnNW7ujnGHE/rfmgGSIOnTzkZmrx+o5ZOAxGnyNPf//OpyHM/UE7RTCzu2aGluLKIlAawgoMLJIZjwJd3tV5WmtKU3/I=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oppo.com;
+Received: from SI2PR02MB5148.apcprd02.prod.outlook.com (2603:1096:4:153::6) by
+ KL1PR02MB6259.apcprd02.prod.outlook.com (2603:1096:820:dc::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6500.21; Mon, 12 Jun 2023 03:01:44 +0000
+Received: from SI2PR02MB5148.apcprd02.prod.outlook.com
+ ([fe80::6297:13a6:41f1:e471]) by SI2PR02MB5148.apcprd02.prod.outlook.com
+ ([fe80::6297:13a6:41f1:e471%6]) with mapi id 15.20.6500.020; Mon, 12 Jun 2023
+ 03:01:44 +0000
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Mon, 12 Jun 2023 11:01:15 +0800
+Message-Id: <20230612030121.2393541-1-shengyong@oppo.com>
+X-Mailer: git-send-email 2.40.1
+X-ClientProxiedBy: SI1PR02CA0029.apcprd02.prod.outlook.com
+ (2603:1096:4:1f4::20) To SI2PR02MB5148.apcprd02.prod.outlook.com
+ (2603:1096:4:153::6)
 MIME-Version: 1.0
-References: <20230608110258.189493-1-hch@lst.de>
- <20230608110258.189493-12-hch@lst.de>
-In-Reply-To: <20230608110258.189493-12-hch@lst.de>
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-Date: Fri, 9 Jun 2023 20:13:23 +0200
-Message-ID: <CAJZ5v0h61q6=JxjeUjjMz5k05HuRGWVKp_rK+9N8rug58kU_VQ@mail.gmail.com>
-To: Christoph Hellwig <hch@lst.de>
-X-Spam-Score: 0.5 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SI2PR02MB5148:EE_|KL1PR02MB6259:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6697293b-f580-4cb5-3f85-08db6af15a45
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: XXQOlJhgHZg9QnxtBMsueE+i1ybSyXRQ/xo6pNCmI9/eJ4YqQFk3K4MGgfjhaxbWw1ohWKvrTYa5bmSa9i+ARuvunPgXVe3av2spPj0BMPrfjWF0VJYxKPD5oj9uCK22DZfXbH73dImpGX4KD9fgGS20VPH9JSR4X5wrRSmmjvIjZU2ZftD2nOqCPprcRBrAnQWD6qogVfC6D5s0zlB0HMbzIhSbj9PWygw1n1rrMnknxd6NO3Zx0VPhOylmymnXjthpC6NjS+3pxkDsU8n6S4bLVden7FgIeWJFSTgk3ht4Ewb1Uhp0rdQrkt2fyrTttydG5gUnGRIFtgAJubN1oCEimdsjgTkl/YKf+mvONnZLE16GFde2MO02C+N9m3y08g9ofRULm3rJ/wCaR03Np/f380V+FH9TObJtFOG5s0uGdeNffdHeyzxjZXcbsVXfVfkFyawZbkBcI3bhk/njcJVsmh6NMlewdsvrnxOHDoCfcqYhE16gJRXgBIOgTbDSSt/hKhzEq8SagLgb1hPy2aIPMrRlss2KR2SUlr3dMw3snrFZzBhu6q1mOkjiyr3+nwJpu4JJuS7piWWgegfNEmN7rMMoXRIfEM9QWcWvaCO0PSmhKToHPYl6kaK/L8V1
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SI2PR02MB5148.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(4636009)(346002)(39860400002)(366004)(376002)(396003)(136003)(451199021)(66476007)(66556008)(8936002)(5660300002)(8676002)(36756003)(66946007)(4326008)(478600001)(6666004)(41300700001)(52116002)(6486002)(316002)(38100700002)(38350700002)(6512007)(6506007)(1076003)(26005)(186003)(2906002)(107886003)(2616005)(86362001)(83380400001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?K2CA3fMnp0BJvs4CIxLHOW5ANTtXk+UjC6e/bThqJzCJ/prDohPndzhjs8nK?=
+ =?us-ascii?Q?XV+XJJyYCBU0XCNYH+IC2yiFg/KHbCPy2G2LRiqhv7LR26BvqPKWuH3ScTSJ?=
+ =?us-ascii?Q?LxRg+vGOC5REmPv3ttn9H875E+O56T18CGVFwLQXbsDI3Fu7gsNoKzUzlaxt?=
+ =?us-ascii?Q?6wVUWZVPJGlgkaRdYpbMZ5C33qUBqnRWt1G0WXaxctM9ORbSgwug50LLyOWD?=
+ =?us-ascii?Q?B9fKqMN7WmjCbODz2ZoHN3jokJC1h2Gmg5SGgmCehLh5V6eFqQ+wrxKf2/lu?=
+ =?us-ascii?Q?mvnNS4XXG5f5kHh/N5lQSy0PT3O3MXnrAuKO57VQfiIdFVLJ4Z2h1XFHDnHK?=
+ =?us-ascii?Q?e2FecOgJ9GJhAGSttj3RjdsYqObJbiIT5oQ0LRVjVAToUZsSJbQ7dnH5ZsYs?=
+ =?us-ascii?Q?5ntuDMP1ffz1dgmNUgns/mAiaJ/0Mj+tUl6L8zIRWBAidcD6ut5OjtskJFMs?=
+ =?us-ascii?Q?wtihsZ0R0X1bVObyXgIB7u/69GLSLO4r9dLJm92GVM2ZvbyWfW/YwsFK8W6i?=
+ =?us-ascii?Q?nvbFhdjRGZgo7QlOnX8ey/K2clP3f6ukmbIbWx/IDNY8elhRXM802+hie1EX?=
+ =?us-ascii?Q?4TX/8bGS5niFKoy6D04oC7E3woPpORnuTiJ4b+TLPHJK8WZudOQFZpIj4LLe?=
+ =?us-ascii?Q?zodLCiMqBTj1PX8gH+p9j1JE9ixfSnw+AMh+vk6GMGnTBGL2HjIRQFeUGZfT?=
+ =?us-ascii?Q?v53a2g3rLZeuoFPGcrbIA4vK5XwmAYPmyvxYkS9noTk08vuglJJvC8W507Jf?=
+ =?us-ascii?Q?qLQnb5UXafGwz0PLDrHGeNyIJxZNXo79NVCxA1kNDH/tk1gffigYQKT0Ka/h?=
+ =?us-ascii?Q?r5Wl8hB09dXthHgqbWORYhaDYvpTVw356UOczeuEEq9XQkDI0PZxHynRn6tC?=
+ =?us-ascii?Q?W0LT9ZbljTvaFjfvUEQQooI4oir8lUCFVyNnjrERM7eniYjl+EL7Hj08g6QM?=
+ =?us-ascii?Q?DJIW2I8DQKU17+GkbkukteHkX4qRimulBtwuwC4BVx+nnXSv3JLgxJjL3nEf?=
+ =?us-ascii?Q?lqWYGnk59b/PPJoW0Ha3MuB06moRunli57E3hVZDQFgIk+LCCYH8kyV/esRN?=
+ =?us-ascii?Q?R4/RYnWjimJ5I7cLWs9avKs53tcvg9yjVyPD6qH1GtP8qeslDWTUxIRBQEIb?=
+ =?us-ascii?Q?oxd+eGLPW3T3y/YV7EQAcj/NweZTP/Ell4CQcg1CrDxOxxBeuwvL3BB9DKcn?=
+ =?us-ascii?Q?+Yz+rJJMZh4RLHU5u0UquyU76fnH7M7ZdgYo2PW0wG7pKZWdWBcMA9+ictia?=
+ =?us-ascii?Q?MvvXmqAEXtGKnvKvBpWKCXwviTB/VUlfiIEVtJ5oQSq2SXC7pWGuJUhktu+X?=
+ =?us-ascii?Q?45OoH4jOdsDLpeYtgh9+h6bqn8myGOA6j+KybQwdgJkv0s9lHSCWS3S7OTLy?=
+ =?us-ascii?Q?nztkYAil478SYS/CjhE0BFiSaTu4PE51vvs/CXtEBBJx4674KlxHdCJEVHTM?=
+ =?us-ascii?Q?hua21kM0aUVDFXJcIk3+63FS3qYeX6frYi3xZm1x5EtlQaurcj+ILrvr6E1x?=
+ =?us-ascii?Q?wvdgBYhYG/igNnYqfqmI0/0rKgvTx9nJE6qNC11/dPCkKu5DVadE2rSlfQu6?=
+ =?us-ascii?Q?lTHh++MKNx197Go2oGscMpFM8GRH6emmKdRb8hsg?=
+X-OriginatorOrg: oppo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6697293b-f580-4cb5-3f85-08db6af15a45
+X-MS-Exchange-CrossTenant-AuthSource: SI2PR02MB5148.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2023 03:01:44.0198 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: JIC0P4AbuRE7r2p/CE9d65Q2C5mlEzB62cjSlcz7Ka0TvoGfT+qIYmcN7+xL2XuZ554ZzcOXn7GdQVu9jgi1Tg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR02MB6259
+X-Spam-Score: -0.2 (/)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Thu, Jun 8, 2023 at 1:03 PM Christoph Hellwig <hch@lst.de>
-    wrote: > > holder is just an on-stack pointer that can easily be reused by
-    other calls, > replace it with a static variable that doesn't [...] 
- 
- Content analysis details:   (0.5 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview: This patchset introduces two ioctls to get or modify values
+ in f2fs_inode's extra attribute area: * f2fs_ioc_get_extra_attr *
+ f2fs_ioc_set_extra_attr
+ The argument of these two ioctls is `struct f2fs_extra_attr', which has three
+ members: * field: indicates which field in extra attribute area is handled
+ * attr: value or userspace pointer * attr_size: [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.218.54 listed in list.dnswl.org]
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [rjwysocki[at]gmail.com]
-  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
-                             mail domains are different
+ no trust [40.107.117.71 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.117.71 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
-                             [209.85.218.54 listed in wl.mailspike.net]
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-  0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
-                             EnvelopeFrom freemail headers are
-                             different
-X-Headers-End: 1q7gcK-0007GK-Bv
-Subject: Re: [f2fs-dev] [PATCH 11/30] swsusp: don't pass a stack address to
- blkdev_get_by_path
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1q8XoY-0007se-P9
+Subject: [f2fs-dev] [PATCH v4 0/6] f2fs: add f2fs_ioc_[get|set]_extra_attr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,52 +165,70 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>, linux-nvme@lists.infradead.org,
- Phillip Potter <phil@philpotter.co.uk>, Chris Mason <clm@fb.com>,
- dm-devel@redhat.com, "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
- Pavel Machek <pavel@ucw.cz>, Miquel Raynal <miquel.raynal@bootlin.com>,
- Jack Wang <jinpu.wang@ionos.com>, linux-nilfs@vger.kernel.org,
- linux-scsi@vger.kernel.org, Richard Weinberger <richard@nod.at>,
- linux-pm@vger.kernel.org, linux-um@lists.infradead.org,
- Josef Bacik <josef@toxicpanda.com>, Coly Li <colyli@suse.de>,
- linux-block@vger.kernel.org, linux-bcache@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>, David Sterba <dsterba@suse.com>,
- Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
- linux-mtd@lists.infradead.org, linux-btrfs@vger.kernel.org,
- Hannes Reinecke <hare@suse.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Sheng Yong via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Sheng Yong <shengyong@oppo.com>
+Cc: ebiggers@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gVGh1LCBKdW4gOCwgMjAyMyBhdCAxOjAz4oCvUE0gQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBs
-c3QuZGU+IHdyb3RlOgo+Cj4gaG9sZGVyIGlzIGp1c3QgYW4gb24tc3RhY2sgcG9pbnRlciB0aGF0
-IGNhbiBlYXNpbHkgYmUgcmV1c2VkIGJ5IG90aGVyIGNhbGxzLAo+IHJlcGxhY2UgaXQgd2l0aCBh
-IHN0YXRpYyB2YXJpYWJsZSB0aGF0IGRvZXNuJ3QgY2hhbmdlLgo+Cj4gU2lnbmVkLW9mZi1ieTog
-Q2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBsc3QuZGU+Cj4gUmV2aWV3ZWQtYnk6IEhhbm5lcyBSZWlu
-ZWNrZSA8aGFyZUBzdXNlLmRlPgoKQWNrZWQtYnk6IFJhZmFlbCBKLiBXeXNvY2tpIDxyYWZhZWxA
-a2VybmVsLm9yZz4KCj4gLS0tCj4gIGtlcm5lbC9wb3dlci9zd2FwLmMgfCA1ICsrKy0tCj4gIDEg
-ZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0t
-Z2l0IGEva2VybmVsL3Bvd2VyL3N3YXAuYyBiL2tlcm5lbC9wb3dlci9zd2FwLmMKPiBpbmRleCA4
-MWFlYzNiMmM2MDUxMC4uYjAzZmYxYTMzYzdmNjggMTAwNjQ0Cj4gLS0tIGEva2VybmVsL3Bvd2Vy
-L3N3YXAuYwo+ICsrKyBiL2tlcm5lbC9wb3dlci9zd2FwLmMKPiBAQCAtMTUxMCw2ICsxNTEwLDgg
-QEAgaW50IHN3c3VzcF9yZWFkKHVuc2lnbmVkIGludCAqZmxhZ3NfcCkKPiAgICAgICAgIHJldHVy
-biBlcnJvcjsKPiAgfQo+Cj4gK3N0YXRpYyB2b2lkICpzd3N1c3BfaG9sZGVyOwo+ICsKPiAgLyoq
-Cj4gICAqICAgICAgc3dzdXNwX2NoZWNrIC0gQ2hlY2sgZm9yIHN3c3VzcCBzaWduYXR1cmUgaW4g
-dGhlIHJlc3VtZSBkZXZpY2UKPiAgICovCj4gQEAgLTE1MTcsMTQgKzE1MTksMTMgQEAgaW50IHN3
-c3VzcF9yZWFkKHVuc2lnbmVkIGludCAqZmxhZ3NfcCkKPiAgaW50IHN3c3VzcF9jaGVjayhib29s
-IHNuYXBzaG90X3Rlc3QpCj4gIHsKPiAgICAgICAgIGludCBlcnJvcjsKPiAtICAgICAgIHZvaWQg
-KmhvbGRlcjsKPiAgICAgICAgIGZtb2RlX3QgbW9kZSA9IEZNT0RFX1JFQUQ7Cj4KPiAgICAgICAg
-IGlmIChzbmFwc2hvdF90ZXN0KQo+ICAgICAgICAgICAgICAgICBtb2RlIHw9IEZNT0RFX0VYQ0w7
-Cj4KPiAgICAgICAgIGhpYl9yZXN1bWVfYmRldiA9IGJsa2Rldl9nZXRfYnlfZGV2KHN3c3VzcF9y
-ZXN1bWVfZGV2aWNlLAo+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgbW9kZSwgJmhvbGRlciwgTlVMTCk7Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBtb2RlLCAmc3dzdXNwX2hvbGRlciwgTlVMTCk7Cj4gICAgICAgICBpZiAo
-IUlTX0VSUihoaWJfcmVzdW1lX2JkZXYpKSB7Cj4gICAgICAgICAgICAgICAgIHNldF9ibG9ja3Np
-emUoaGliX3Jlc3VtZV9iZGV2LCBQQUdFX1NJWkUpOwo+ICAgICAgICAgICAgICAgICBjbGVhcl9w
-YWdlKHN3c3VzcF9oZWFkZXIpOwo+IC0tCj4gMi4zOS4yCj4KCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
-dApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
-dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
+This patchset introduces two ioctls to get or modify values in
+f2fs_inode's extra attribute area:
+  * f2fs_ioc_get_extra_attr
+  * f2fs_ioc_set_extra_attr
+
+The argument of these two ioctls is `struct f2fs_extra_attr', which has
+three members:
+  * field: indicates which field in extra attribute area is handled
+  * attr: value or userspace pointer
+  * attr_size: size of `attr'
+
+The `field' member could help extend functionality of these two ioctls
+without modify or add new interfaces, if more fields are added into
+extra attributes ares in the feture.
+
+In order to reuse existed functions, several helpers are added to:
+  * read inode chksum from inode page
+  * get compress blocks
+  * verify compression level
+And, a compress_option v2 is added to access compress level and flags.
+
+Thanks,
+shengyong
+
+v4:
+  * split into small commits
+v3:
+  * setting lz4(hc) level correctly
+v2:
+  * fix compiling error if CONFIG_F2FS_FS_ZSTD is disabled by adding a
+    helper f2fs_is_compress_level_valid()
+  * fix compiling warning for casting unsinged long long to pointer
+
+Sheng Yong (6):
+  f2fs: add helper to check compression level
+  f2fs: cleanup MIN_INLINE_XATTR_SIZE
+  f2fs: add helper to get inode chksum from inode page
+  f2fs: add f2fs_ioc_get_compress_blocks
+  f2fs: add f2fs_ioc_[get|set]_extra_attr
+  f2fs: access compression level and flags by extra attr ioctls
+
+ fs/f2fs/compress.c        |  31 +++++
+ fs/f2fs/f2fs.h            |   4 +
+ fs/f2fs/file.c            | 280 ++++++++++++++++++++++++++++++++++++--
+ fs/f2fs/inode.c           |  21 +++
+ fs/f2fs/super.c           |   6 +-
+ fs/f2fs/xattr.h           |   1 +
+ include/uapi/linux/f2fs.h |  33 +++++
+ 7 files changed, 359 insertions(+), 17 deletions(-)
+
+-- 
+2.40.1
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
