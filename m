@@ -2,70 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE02172D105
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Jun 2023 22:50:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 125D072D106
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Jun 2023 22:50:37 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q8oUh-0003Du-NE;
-	Mon, 12 Jun 2023 20:50:31 +0000
+	id 1q8oUj-0000WH-3d;
+	Mon, 12 Jun 2023 20:50:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1q8oUf-0003Df-CY
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1q8oUf-0000Vz-9H
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Jun 2023 20:50:29 +0000
+ Mon, 12 Jun 2023 20:50:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PBkPI8Zi472xD9ibojlkySOX6BwL/RNb2pjc0k3l5tU=; b=Mg4Dm2AMyLMjUb8qCWDR4R+4kO
- qKfCSHcGPW8mlzLLabek1spxQp+ZOlCIKPbrpE1pUBHobgLhWmHCNYZFnUjYEPkqGKzldd2mXKIr1
- Wq1lIJnbYQdFb9eai0YFj4Hg7zQEE2tRrm2YtQe7xwnhbPzW/bs24ytWZ6ExybVmj22g=;
+ bh=DeZML/HMtvz6NTCeYV7M4KBATdyK6jqWsdkdWwaQlmU=; b=c8T6Ps+acx5e1ADTKdKygnPbQ6
+ z53d7wGZ0dpOAbW0Y6GKxH83wUjwkGUJ8w5Zq5SATxT1pJgIXv7RiLMb09VX41OlMU/nBK/gFygdf
+ f3ieN+2RQ8/Uo/dspRYtVsAOtJA0Yy0BEd0Hty33edp3uUDAU4qfDz1/vv+1NaNBdjh4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PBkPI8Zi472xD9ibojlkySOX6BwL/RNb2pjc0k3l5tU=; b=bwu4K7PRFo/Klh7SbZv5vjjbiN
- 63GNhB9EiHXHXMLeBKo65ouTF3rSrPIL/sgo4OvJHupMhwbGfCmStuUrREWfNaGIiV++1tCd6eync
- IBrbiQch2KoU5d8JIiO2ygxt5w53HtbMMDEzA2J+DuLcpghkr/moL3WS42t0mM70hAwE=;
+ bh=DeZML/HMtvz6NTCeYV7M4KBATdyK6jqWsdkdWwaQlmU=; b=SzVY2T9MxlXmVWDZWrE3cPXKcU
+ nUGHbsA3HERifrMZ/+Hj6eM9mCQP+Rfv0P/KLAryymEdcoOiVDFbT4Na3sh5WiShsbnP5++GxCWPB
+ X6AKfKqGxDfJJ6FZQ1cEShFkvKMwzgKeZqpsT6kdozXizTcuQ5xmLunkp3HZHqZAH4u4=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q8oUe-0013OR-Qk for linux-f2fs-devel@lists.sourceforge.net;
+ id 1q8oUe-0007Ug-97 for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 12 Jun 2023 20:50:29 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6CCB4628F0
+ by dfw.source.kernel.org (Postfix) with ESMTPS id DCD3E6221C
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 12 Jun 2023 20:50:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 597FBC4339C;
+ Mon, 12 Jun 2023 20:50:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 4A519C433EF;
  Mon, 12 Jun 2023 20:50:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1686603022;
- bh=jS12uuQxTqxQ2t3KIocRVKhkQuA+O7CPb1iTWoSgv30=;
+ bh=J3OtHHSsn0yjMX1uffsIAnEqKvVl+vYQ2fSPIvHvSCs=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=WRI8EtoL2MPrLFpeoKJZ29wGGmG+Dh5bghhGGgqft9ChJdDYf8d5kk9VrCz/EaSRa
- 0u2hJvqj8O/k9v3KkdCzOlEFMR4++9KygLsbZZ5zdC3CihGH5bkyYY1CLblIMGVAaj
- 4E3FGcIxCqU6QwWdhrSM7DcQwPCryJG8H/sDuvooAwWDAqvXU03TDAzPw/SyqU1EBk
- BPTDm6YyVtOT5aJ/MKXLSwaDr6hakV/cYy1Ue7+gQbFF9ZZbAVnn44P9sbvzytRdhj
- p4axVTBTuwjd5boN//Hxu/sDGatqb9hecA8F/mHWvWo257zyLoM88Ex4LmKU1p0n4O
- NswRCoy7gGM9Q==
+ b=mUKTUdzxXFJuqgCl9mF64LbBWb0+c3szdJ5CHE27/XfC2lj4iNRQVmJRGJnKMnlHN
+ zDratVzW4nhN3YxOfdlFbDup2LRGLUgrBS852fo40a/dFGoDv86agG6AkgeNct5qIz
+ OmcoY8tAa4OEf0SHxB+PehExcg5wo0KPb/UX6hwFHYNoHoGfdFCfwdUI9EEq1ohJtr
+ XK/qMqPpVBEEtHmUb7h9Kxms7e0lg5h2PY5fXI02PGKKAIbonBAHzockG/ZUwYdJYA
+ l61hEr3doTcKZVuSlcYXjffbxzYDuDusPERIMp+V//DP2v5D+O60fA+2EEyQKq+XOx
+ guwkf28Tdmp5Q==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 32E0AE21EC5; Mon, 12 Jun 2023 20:50:22 +0000 (UTC)
+ 27AA1E2A05F; Mon, 12 Jun 2023 20:50:22 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168660302220.10168.204042134009169734.git-patchwork-notify@kernel.org>
+Message-Id: <168660302215.10168.4138766982780443549.git-patchwork-notify@kernel.org>
 Date: Mon, 12 Jun 2023 20:50:22 +0000
-References: <20230606061822.1179551-1-chao@kernel.org>
-In-Reply-To: <20230606061822.1179551-1-chao@kernel.org>
+References: <20230606061901.1179970-1-chao@kernel.org>
+In-Reply-To: <20230606061901.1179970-1-chao@kernel.org>
 To: Chao Yu <chao@kernel.org>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
@@ -75,11 +75,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 6 Jun 2023 14:18:22 +0800 you wrote:
- > This patch adds F2FS_QUOTA_DEFAULT_FL to include two default flags: >
- F2FS_NOATIME_FL
- and F2FS_IMMUTABLE_FL, and use it to clean up codes. > > Signed-off [...]
- Content analysis details:   (-5.2 points, 6.0 required)
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 6 Jun 2023 14:19:01 +0800 you wrote:
+ > freeze_super() can fail, it needs to check its return value and do > error
+ handling in f2fs_resize_fs(). > > Fixes: 04f0b2eaa3b3 ("f2fs: ioctl for removi
+ [...] Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -94,9 +93,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q8oUe-0013OR-Qk
-Subject: Re: [f2fs-dev] [PATCH] f2fs: introduce F2FS_QUOTA_DEFAULT_FL for
- cleanup
+X-Headers-End: 1q8oUe-0007Ug-97
+Subject: Re: [f2fs-dev] [PATCH] f2fs: check return value of freeze_super()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,19 +117,19 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Tue,  6 Jun 2023 14:18:22 +0800 you wrote:
-> This patch adds F2FS_QUOTA_DEFAULT_FL to include two default flags:
-> F2FS_NOATIME_FL and F2FS_IMMUTABLE_FL, and use it to clean up codes.
+On Tue,  6 Jun 2023 14:19:01 +0800 you wrote:
+> freeze_super() can fail, it needs to check its return value and do
+> error handling in f2fs_resize_fs().
 > 
+> Fixes: 04f0b2eaa3b3 ("f2fs: ioctl for removing a range from F2FS")
+> Fixes: b4b10061ef98 ("f2fs: refactor resize_fs to avoid meta updates in progress")
 > Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  fs/f2fs/f2fs.h  | 2 ++
->  fs/f2fs/super.c | 6 +++---
->  2 files changed, 5 insertions(+), 3 deletions(-)
+> 
+> [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: introduce F2FS_QUOTA_DEFAULT_FL for cleanup
-    https://git.kernel.org/jaegeuk/f2fs/c/4138d5a9121b
+  - [f2fs-dev] f2fs: check return value of freeze_super()
+    https://git.kernel.org/jaegeuk/f2fs/c/e6fd55c1f4b6
 
 You are awesome, thank you!
 -- 
