@@ -2,68 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A2C772D050
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Jun 2023 22:16:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BCFE72D103
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 12 Jun 2023 22:50:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q8nxy-0000ar-Uf;
-	Mon, 12 Jun 2023 20:16:42 +0000
+	id 1q8oUf-00031H-Nv;
+	Mon, 12 Jun 2023 20:50:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1q8nxu-0000aY-OS
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1q8oUe-00031B-Qq
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Jun 2023 20:16:38 +0000
+ Mon, 12 Jun 2023 20:50:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ug1VxCEmHAqGISqkhoUB4D6Ip4k3KyuFNIlhKVmS6bk=; b=hcDt9PsCv2wH8nLAmoNX1z19nK
- wCp79vpumcFksGKfOJG4FHP3+jW2Lh+WZ6wEguZ4uJFiwDwYgrBWL0LZkG+rpdi+79oErZ1G0j2Lx
- HicKPhHvQ3ifBN39r0PMVGHUz8PgN1Udc+WcYFJ4i3/McgTxc7DR5RaN5hRMMxQ4wrWo=;
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=3jx8GmBufojtkRqFuD7YDxhuK0Mx97Af6IkaVZ1tpms=; b=FKartlPcc4pfT6K8Vk7k2FZMi3
+ UMkHwPGaHns17Nhr+sZ/Vv697a4iIkcbHZmv3tWWFRgfmMBtnSGgEwdaPB9lhNnSiHi3emYm1nD+0
+ UxRcLCp6XnIbyH/ZkSgcNITZfBgg5pFwF43nCcFw9GyJDtYXHPBn19cOGI8R/inzbTxo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ug1VxCEmHAqGISqkhoUB4D6Ip4k3KyuFNIlhKVmS6bk=; b=N
- PcJNG3wb+NoUwSTIZcnuKYs0quK+HqDhWLJ+lfZLmObkAkE1hOJnv7joYVM1srF429RhAUXAxfJdb
- jAA4TDh63h2j++7j0KbI+vfSINHq56Lk/nGoLQJzu1qmVD6cWSPVzsqBFhTKIllvw/qIW8R5DFrHS
- kHztdYI4lPQJfOno=;
+ List-Owner:List-Archive; bh=3jx8GmBufojtkRqFuD7YDxhuK0Mx97Af6IkaVZ1tpms=; b=K
+ EMJWWr4lopc+D1Rr2lOnlst4pnp+yN25Auc8Cxj4TEsMPsI3fNmlRU6oT+sgP5B8csBXemmjtS0KZ
+ OM15Q7NuDFVUk0kNj1YApgKre2XdNy57fPKC6+o1CneNzKM75nM5sJQa6JKz4l90KGytsgsEbTQhw
+ hunNq5uQoS0BuPNc=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q8nxs-0012Ba-Tf for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 12 Jun 2023 20:16:38 +0000
+ id 1q8oUe-0007Uf-68 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 12 Jun 2023 20:50:29 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B188D62946
+ by dfw.source.kernel.org (Postfix) with ESMTPS id C4E736130B
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 12 Jun 2023 20:16:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15A04C433EF;
- Mon, 12 Jun 2023 20:16:30 +0000 (UTC)
+ Mon, 12 Jun 2023 20:50:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2F284C433D2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 12 Jun 2023 20:50:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686600990;
- bh=IFNcl3Qr1j61HWEFzbLwNkndMDHFIaUy4E04xrmndB0=;
- h=From:To:Cc:Subject:Date:From;
- b=IsYOGsxQ+G+xE05S99c1FUqdnyA5A0r8/EhbCRuw0sMxfM3FubILmfAFyp76cq/P7
- zptzsxHFMYtBoVTdMsHEzTlfx5nOMGpzYDZcOMVuSxFFO5qlaafRO4cvD+Ur51UHCo
- LMWALzfw00GkhIrmQLLs1p5fPwVgIX3+bTK4aDMtLrHrv6YubXRfuZkdHHVs8cqYhn
- mkyexby7SIRqonCAREHNet3KtO304KOyHvkgKcEFngMWEDGSqFTiwpwM/91mFPhBOw
- Zsf9bKzZE5+ui8xZwBp3TqLbUgLiilTi+xgKwcO6Q/WXX98y57cbfJB49ar+ASFgGf
- WCFL45smMkm8g==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 12 Jun 2023 13:16:26 -0700
-Message-ID: <20230612201626.3768393-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.41.0.162.gfafddb0af9-goog
+ s=k20201202; t=1686603022;
+ bh=SEx7dV9nAjW0dkHfEsrGOYs539oeXuu1EqPP20ae+84=;
+ h=Subject:From:Date:To:From;
+ b=LxiD6HTz9LFS7zRZuDceBtMNLZZTZ3Ga1RXD9T8GZ/kTdqluCe3Jh5aUT4B9N9UHO
+ TBjUVy+Rq7VyboyGouXU5pxNtkLRkaO/ir37YMiT5BbjMzKzzgm9uSTcFciuJUsKsy
+ mpt155tI7NHzQgyomPj63mGGxXbZUATF36K3JLSDyS5LdMhc971m4x7KB5vAvzmPNW
+ DEGqOB0/b2F+gh5hmwWNAfK4ChCoTSpsin8r39pw3Q7CdDCg+XNWiI8CMcJYIfnePi
+ koavQWUJSlyn7mwOIx7jmuFCmANW7TqMAuDndFYVuYJbk49b/pUR0sdbPxv+RcztIE
+ WvkAy6KkF07GQ==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ 12F94E1CF31 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 12 Jun 2023 20:50:22 +0000 (UTC)
 MIME-Version: 1.0
+From: patchwork-bot+f2fs@kernel.org
+Message-Id: <168660302199.10168.971770710606969396.git-patchwork-summary@kernel.org>
+Date: Mon, 12 Jun 2023 20:50:21 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -71,14 +75,16 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Let's avoid any confusion from assigning compress_level=0
- for LZ4HC and ZSTD. Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> ---
- fs/f2fs/compress.c
- | 3 +-- fs/f2fs/f2fs.h | 2 ++ fs/f2fs/super.c | 12 +++++++----- 3 files
- changed, 10 insertions(+), 7 deletions(-) 
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev,v2] f2fs: fix
+ to avoid mmap vs set_compress_option case Submitter: Chao Yu <chao@kernel.org>
+ Committer: Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/projec [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -87,13 +93,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q8nxs-0012Ba-Tf
-Subject: [f2fs-dev] [PATCH] f2fs: assign default compression level
+X-Headers-End: 1q8oUe-0007Uf-68
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,105 +108,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Let's avoid any confusion from assigning compress_level=0 for LZ4HC and ZSTD.
+Hello:
 
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/compress.c |  3 +--
- fs/f2fs/f2fs.h     |  2 ++
- fs/f2fs/super.c    | 12 +++++++-----
- 3 files changed, 10 insertions(+), 7 deletions(-)
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 1132d3cd8f33..438af59d3571 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -317,8 +317,6 @@ static const struct f2fs_compress_ops f2fs_lz4_ops = {
- #endif
- 
- #ifdef CONFIG_F2FS_FS_ZSTD
--#define F2FS_ZSTD_DEFAULT_CLEVEL	1
--
- static int zstd_init_compress_ctx(struct compress_ctx *cc)
- {
- 	zstd_parameters params;
-@@ -327,6 +325,7 @@ static int zstd_init_compress_ctx(struct compress_ctx *cc)
- 	unsigned int workspace_size;
- 	unsigned char level = F2FS_I(cc->inode)->i_compress_level;
- 
-+	/* Need to remain this for backward compatibility */
- 	if (!level)
- 		level = F2FS_ZSTD_DEFAULT_CLEVEL;
- 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 4b249716ae7b..c61f728e1116 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1440,6 +1440,8 @@ struct compress_data {
- 
- #define F2FS_COMPRESSED_PAGE_MAGIC	0xF5F2C000
- 
-+#define F2FS_ZSTD_DEFAULT_CLEVEL	1
-+
- #define	COMPRESS_LEVEL_OFFSET	8
- 
- /* compress context */
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 8fd23caa1ed9..7162e55c4eb4 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -589,14 +589,12 @@ static int f2fs_set_lz4hc_level(struct f2fs_sb_info *sbi, const char *str)
- {
- #ifdef CONFIG_F2FS_FS_LZ4HC
- 	unsigned int level;
--#endif
- 
- 	if (strlen(str) == 3) {
--		F2FS_OPTION(sbi).compress_level = 0;
-+		F2FS_OPTION(sbi).compress_level = LZ4HC_DEFAULT_CLEVEL;
- 		return 0;
- 	}
- 
--#ifdef CONFIG_F2FS_FS_LZ4HC
- 	str += 3;
- 
- 	if (str[0] != ':') {
-@@ -614,6 +612,10 @@ static int f2fs_set_lz4hc_level(struct f2fs_sb_info *sbi, const char *str)
- 	F2FS_OPTION(sbi).compress_level = level;
- 	return 0;
- #else
-+	if (strlen(str) == 3) {
-+		F2FS_OPTION(sbi).compress_level = 0;
-+		return 0;
-+	}
- 	f2fs_info(sbi, "kernel doesn't support lz4hc compression");
- 	return -EINVAL;
- #endif
-@@ -627,7 +629,7 @@ static int f2fs_set_zstd_level(struct f2fs_sb_info *sbi, const char *str)
- 	int len = 4;
- 
- 	if (strlen(str) == len) {
--		F2FS_OPTION(sbi).compress_level = 0;
-+		F2FS_OPTION(sbi).compress_level = F2FS_ZSTD_DEFAULT_CLEVEL;
- 		return 0;
- 	}
- 
-@@ -640,7 +642,7 @@ static int f2fs_set_zstd_level(struct f2fs_sb_info *sbi, const char *str)
- 	if (kstrtouint(str + 1, 10, &level))
- 		return -EINVAL;
- 
--	if (!level || level > zstd_max_clevel()) {
-+	if (level < zstd_min_clevel() || level > zstd_max_clevel()) {
- 		f2fs_info(sbi, "invalid zstd compress level: %d", level);
- 		return -EINVAL;
- 	}
+Patch: [f2fs-dev,v2] f2fs: fix to avoid mmap vs set_compress_option case
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=751813
+  Lore link: https://lore.kernel.org/r/20230529104709.2560779-1-chao@kernel.org
+
+Patch: [f2fs-dev] f2fs: check return value of freeze_super()
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=754275
+  Lore link: https://lore.kernel.org/r/20230606061901.1179970-1-chao@kernel.org
+
+Patch: [f2fs-dev] f2fs: introduce F2FS_QUOTA_DEFAULT_FL for cleanup
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=754274
+  Lore link: https://lore.kernel.org/r/20230606061822.1179551-1-chao@kernel.org
+
+
+Total patches: 3
+
 -- 
-2.41.0.162.gfafddb0af9-goog
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
 
 
 
