@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94D3E72D71C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jun 2023 03:48:21 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id EDCBE72D71D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jun 2023 03:48:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q8t8o-0001tF-7x;
-	Tue, 13 Jun 2023 01:48:15 +0000
+	id 1q8t9O-0003c8-MQ;
+	Tue, 13 Jun 2023 01:48:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1q8t8n-0001t9-6N
+ (envelope-from <chao@kernel.org>) id 1q8t9N-0003c2-Da
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jun 2023 01:48:14 +0000
+ Tue, 13 Jun 2023 01:48:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yf3ukcB7aBk6rUrjbi3cbahvciFLLHKpzzve6JcDqKE=; b=hzJ/+mr+cHfddItNBw/gfqS00w
- Yo+luzgFvifLsu7F5uIPUScZJPTPyPWViqJBQ7S8oCt9w5a652EqFY7hiF/2rterSi4W/wJ8lrPNf
- giS0ynJlGazlDrlGquOLX7zXTSreLY6hh/yiLKUuMBIeMx1iGsux2Y7TtWV3l0s3XamI=;
+ bh=EKQf9AUcQkPpeKpp8S2CTMWBdQam6LzX/JCZk9FnDZk=; b=PzQWaClIH5vw2jxui9jZ6pqwb5
+ 7pt1T13g0j1daklqDxXEo7vF9VTMxos1oiI2LbWXqKo6uyPRG8wkFY+o59YRPuWhfHRJVkLkl4Zap
+ 2awaIVjEZfFGPhh5iWlZeNeFKPCIWHwU5uQ/47pa5FJjtSbYHtyX+LOjsGINZbcJr45Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,42 +31,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=yf3ukcB7aBk6rUrjbi3cbahvciFLLHKpzzve6JcDqKE=; b=AY6meS1fu9xQoc1h89DUpDFrew
- du9Qmtspvwo9tTjn9W7ciLxbz/HJP7Y/f9yi/sUT75bnPiK3NsTc7lByXiP1C0NRagUoNr5qWlPVe
- Owxr5TgYp8StGog41BDVL+762DUqQv/cpiGDSLGx3rRW9q7H8qRjX2WZZdQxJkDua6co=;
+ bh=EKQf9AUcQkPpeKpp8S2CTMWBdQam6LzX/JCZk9FnDZk=; b=XB/xzL52w9dsTw4rNlR+eDKlqh
+ o4bvTg5ufzY77RPjV5xDexc3nxqeOlCgSRHFMvMISLwHxkWgS95hYo6IRWCFEOUVi9Edx9N6ubKQV
+ QLy7b1YMr8SDhjYpC/VjVpruxukmN2DmRT6gS5rWUj48J4goEyTPSXPFxyd3no+absNo=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q8t8n-001EvT-FL for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jun 2023 01:48:13 +0000
+ id 1q8t9H-0008D9-Lt for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Jun 2023 01:48:47 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 0EEEB61228;
- Tue, 13 Jun 2023 01:48:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54A28C433D2;
- Tue, 13 Jun 2023 01:48:06 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 4473361EE3;
+ Tue, 13 Jun 2023 01:48:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7EC5BC433EF;
+ Tue, 13 Jun 2023 01:48:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686620887;
- bh=4PvqvZHTR3wNiiQv/YAPXFWmVcKgly99PAxW+i+I0eg=;
+ s=k20201202; t=1686620917;
+ bh=EKQf9AUcQkPpeKpp8S2CTMWBdQam6LzX/JCZk9FnDZk=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=OLKWvjtLmTytejGId/lVuExXUdNM1OC/tT1eRxKo/XPj5XZzUxUwt5CFP0392y+f4
- HfGxdLQFP6VJmNBJt8/9XjXzR8FKk8WxOxn214cbs6MqCtwWYyLVQmkTw9P8lOofq6
- NZTF892dVNHXmRrgFOszUOy0qx1A/peSGOofzNb5ZPFJW9OG4HGWRolmiGyIt+ZVI9
- nS7H37CtS/O7PUBiBLbtaA+xbwOu/SXG2zhVvfRurCbjJufIQA77xUKvLTFhBgYP4W
- 6uP+3NLik+IZ3lzdxyehE6uCBrweGgj7n4Cp7V9u+bMQchtFC9dr9MbaunYqdo1CwS
- Phm8lpxWXtLfQ==
-Message-ID: <54dcf5f1-0560-14b4-a7e7-6b969b7650c7@kernel.org>
-Date: Tue, 13 Jun 2023 09:48:04 +0800
+ b=KiV3xtRZV0GXj6BNuY4NmZT1iAHoKUDUnds4QJ9EBrd8SJKxe8suc3kBx+SCAkaU8
+ WZRm1tCZe5p9yALQvBObgaSkTwf+rq1kSEfO/KNzp9Z8xxDDTSf6d44jJVczRZtouU
+ fIClli0cXVb3z91YnrBHbfRtkUfw10BI+tH9R1J9ztk7pXHNqrJfrvCOL7y4QActvF
+ H61o1F3cU9f/9oRVgELIqFkCDVtfzPCzTA6I7FXQ2y7xWY+wN5ZPfWXeAbWlEX6q6J
+ jaM8mmdWLmPvpEIUJB4p/4K/Fmt9jmuyIa2ks/sYtI+v2H5mqsoN+QUPpQhxbbMGCl
+ sUaZBnXT3/Ocw==
+Message-ID: <45faec38-aeaf-d89e-4542-e87e5edc049a@kernel.org>
+Date: Tue, 13 Jun 2023 09:48:34 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.2
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Sheng Yong <shengyong@oppo.com>
+To: Sheng Yong <shengyong@oppo.com>, jaegeuk@kernel.org
 References: <20230612030121.2393541-1-shengyong@oppo.com>
- <20230612030121.2393541-2-shengyong@oppo.com> <ZIeY0qNjXgx419NZ@google.com>
+ <20230612030121.2393541-3-shengyong@oppo.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZIeY0qNjXgx419NZ@google.com>
+In-Reply-To: <20230612030121.2393541-3-shengyong@oppo.com>
 X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -74,10 +74,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/6/13 6:14,
- Jaegeuk Kim wrote: > Could you please check this version? > >
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev-test&id=9c84aad379019a0d86655bb50bd7b4bc
- [...] Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  On 2023/6/12 11:01, Sheng Yong wrote: > Signed-off-by: Sheng
+ Yong <shengyong@oppo.com> Reviewed-by: Chao Yu <chao@kernel.org> Thanks, 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -92,9 +91,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q8t8n-001EvT-FL
-Subject: Re: [f2fs-dev] [PATCH v4 1/6] f2fs: add helper to check compression
- level
+X-Headers-End: 1q8t9H-0008D9-Lt
+Subject: Re: [f2fs-dev] [PATCH v4 2/6] f2fs: cleanup MIN_INLINE_XATTR_SIZE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,16 +110,8 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/6/13 6:14, Jaegeuk Kim wrote:
-> Could you please check this version?
-> 
-> https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev-test&id=9c84aad379019a0d86655bb50bd7b4bc92683c4b
-> 
-> On 06/12, Sheng Yong wrote:
->> This patch adds a helper function to check if compression level is
->> valid.
->>
->> Signed-off-by: Sheng Yong <shengyong@oppo.com>
+On 2023/6/12 11:01, Sheng Yong wrote:
+> Signed-off-by: Sheng Yong <shengyong@oppo.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 
