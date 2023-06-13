@@ -2,98 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1E7072EEF5
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jun 2023 00:14:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A86F72F01B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jun 2023 01:40:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q9CHE-0001So-Ia;
-	Tue, 13 Jun 2023 22:14:12 +0000
+	id 1q9DcA-00020v-K2;
+	Tue, 13 Jun 2023 23:39:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1q9CHA-0001Si-Se
+ (envelope-from <jaegeuk@kernel.org>) id 1q9Dc8-00020o-O6
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jun 2023 22:14:10 +0000
+ Tue, 13 Jun 2023 23:39:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IaNpxfe9VBRajurg4lymuYlTPKYS4B0yt+ZAn6yihIY=; b=IAN+a2FXYU6uJRNNkS6pliXHFt
- TcLH5qu5SHXDPhzoIzTPSkt9U3O40TriNSgTxRtlC04WCXlTwYuyGbqw8w7yf+yZdka3EacJjvk2z
- LMJMhupLb5Dal52a7Uwosb5Qf7a1Y39Duzv+gvEpFna5mWkhiivUWgr4y006/V6zPNbY=;
+ bh=iM7jp4ZVAzmyh8AM7U/9RQMw4uUEYY3phMHGfu4nUJg=; b=StsW1hIQmpOGPtnn6M4tIgny7V
+ yXR3Xf0UHnNX+U6T0s44UQ4niQrdzmc4DF/28FcdU/dncNKAmy6GkpeLxYKyFmYTTk9PY5DrBJ43p
+ uM5PedaVRCgfKH3oAlYK8m01Z0J1rqvXAR99xBq44B3AG0OMkee0/5MOvWqB5+ak8rM8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
- From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=IaNpxfe9VBRajurg4lymuYlTPKYS4B0yt+ZAn6yihIY=; b=OPKrwda/+f8hUxsb+fw5paRgk2
- INF4RTCk5V1rds08kN9HKLdt/x8yOCsaV2MZewZZH9/1ar76ee7VTZlvfn3VqbyPaOZ38SZK9MNIW
- sjjkx+nBKyR6LO9bppP7Hz3klHm4PMaCKibVrG9PxQcqMp+exdbEEdq7+F3BtBFrynRU=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=iM7jp4ZVAzmyh8AM7U/9RQMw4uUEYY3phMHGfu4nUJg=; b=Q
+ MBnfaroGLOpE65vTUACSU6BfSR3bHMZL+GIM2MlL6gTT5/0Df+oywYVQe7WHbBJkSj8Y+e2iOrXME
+ KJcbRjvoYd1zmAvK0PzCFstqEnit5jHdGE1v633vbgXOUh5O0psrHZR9n0VJaiMFMHFhQGy63Fq5+
+ MrFf5oJ9hA2+APvg=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q9CHA-002ERL-Hh for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jun 2023 22:14:09 +0000
+ id 1q9Dc3-002Hz6-Up for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Jun 2023 23:39:53 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 26A2D61884
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 8926C62012
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 13 Jun 2023 22:14:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77A08C433C0;
- Tue, 13 Jun 2023 22:14:02 +0000 (UTC)
+ Tue, 13 Jun 2023 23:39:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E07A1C433CB;
+ Tue, 13 Jun 2023 23:39:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686694442;
- bh=BZl5RDaB9YV1iJvxCsTqdhiHN3w4NKnznFWhk6lWK64=;
- h=Date:From:To:Subject:References:In-Reply-To:From;
- b=oMfpyYEFVO6AHKQIpvThjeYITqASC7I2oMkJEzAx148ZcahRXmyp9nq2pbbPoOWPC
- K7Ex7mibuR6zWV4NbpcKJspZ27YbONbG8hdPzTpbloUMHJgD9Kf7vE6iuUa82ZOlvX
- S3cFv4t3Vjm75v2Dk675nc3diiFVXMqH5lbnVxxgtD5g4qv9sJ1jJth7vzAK+RT3kD
- cqmBb5OMWly5oT2v1/X/9++vQnyFGj3bT14lzOpsW5GzgojMqkHQfChPmMrdm6eiue
- QWJVeop+uS+qmBA0XXIc+NQAhIbPtzhMDGzaI2cHIOnXUw9nEBSjrdRK1PKcN+d2mm
- 9qeKSU+W0QE4Q==
-Date: Tue, 13 Jun 2023 15:14:00 -0700
+ s=k20201202; t=1686699582;
+ bh=GSISUAdKFLSbpxyTM08xZOsDpcq/incijyeO8wdFdzQ=;
+ h=From:To:Cc:Subject:Date:From;
+ b=n6BV8dpImJkWAKnYGbk6jQa8k3INA5QDed/haok34ODb+G9ceokA3wVB/ACdeA7BK
+ lbnSZFRd6Hb1QaHYi3hYDBlHeDIuHWDyWPdoUhFH7F1hptMmFCPrTszGeidgO8UsAb
+ yGY2bQCTIg2qZBby2Xxomtn0zuwoBvq6dfXrN/0ZIGavK/P1GNvD2/+FTDjG8mXg9R
+ 0/LYLtrGztsagsUGzKUvsEaU1fYMVKsM+vLUxj8r05UwVt2TTdo/1//fYPVJiwkO9y
+ WjEvZ9NBsRoEs3S/u7W7oIkqcy+I/XdEzxg8eQfUGOisx6Nsq4pBw6rWb2y1YV4VfK
+ ePojbsP7tVeMQ==
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <ZIjqKHDUmN6u9pXa@google.com>
-References: <20230606203645.3926651-1-jaegeuk@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net
+Date: Tue, 13 Jun 2023 16:39:40 -0700
+Message-ID: <20230613233940.3643362-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.41.0.162.gfafddb0af9-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230606203645.3926651-1-jaegeuk@kernel.org>
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Let's compress tmp files for the given extension list. This
- patch does not change the previous behavior, but allow the cases as below.
- Extention example: "ext" 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview: This reverts commit 27161f13e3c3 "f2fs: avoid race in between
+ read xattr & write xattr". That introduced a deadlock case: Thread #1: 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q9CHA-002ERL-Hh
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: compress tmp files given extension
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q9Dc3-002Hz6-Up
+Subject: [f2fs-dev] [PATCH] f2fs: remove i_xattr_sem to avoid deadlock and
+ fix the original issue
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,90 +102,195 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, stable@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Let's compress tmp files for the given extension list.
+This reverts commit 27161f13e3c3 "f2fs: avoid race in between read xattr & write xattr".
 
-This patch does not change the previous behavior, but allow the cases as below.
+That introduced a deadlock case:
 
-Extention example: "ext"
+Thread #1:
 
-- abc.ext : allow
-- abc.ext.abc : allow
-- abc.extm : not allow
+[122554.641906][   T92]  f2fs_getxattr+0xd4/0x5fc
+    -> waiting for f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
 
+[122554.641927][   T92]  __f2fs_get_acl+0x50/0x284
+[122554.641948][   T92]  f2fs_init_acl+0x84/0x54c
+[122554.641969][   T92]  f2fs_init_inode_metadata+0x460/0x5f0
+[122554.641990][   T92]  f2fs_add_inline_entry+0x11c/0x350
+    -> Locked dir->inode_page by f2fs_get_node_page()
+
+[122554.642009][   T92]  f2fs_do_add_link+0x100/0x1e4
+[122554.642025][   T92]  f2fs_create+0xf4/0x22c
+[122554.642047][   T92]  vfs_create+0x130/0x1f4
+
+Thread #2:
+
+[123996.386358][   T92]  __get_node_page+0x8c/0x504
+    -> waiting for dir->inode_page lock
+
+[123996.386383][   T92]  read_all_xattrs+0x11c/0x1f4
+[123996.386405][   T92]  __f2fs_setxattr+0xcc/0x528
+[123996.386424][   T92]  f2fs_setxattr+0x158/0x1f4
+    -> f2fs_down_write(&F2FS_I(inode)->i_xattr_sem);
+
+[123996.386443][   T92]  __f2fs_set_acl+0x328/0x430
+[123996.386618][   T92]  f2fs_set_acl+0x38/0x50
+[123996.386642][   T92]  posix_acl_chmod+0xc8/0x1c8
+[123996.386669][   T92]  f2fs_setattr+0x5e0/0x6bc
+[123996.386689][   T92]  notify_change+0x4d8/0x580
+[123996.386717][   T92]  chmod_common+0xd8/0x184
+[123996.386748][   T92]  do_fchmodat+0x60/0x124
+[123996.386766][   T92]  __arm64_sys_fchmodat+0x28/0x3c
+
+Let's take a look at the original issue back.
+
+Thread A:                                       Thread B:
+-f2fs_getxattr
+   -lookup_all_xattrs
+      -xnid = F2FS_I(inode)->i_xattr_nid;
+                                                -f2fs_setxattr
+                                                    -__f2fs_setxattr
+                                                        -write_all_xattrs
+                                                            -truncate_xattr_node
+                                                                  ...  ...
+                                                -write_checkpoint
+                                                                  ...  ...
+                                                -alloc_nid   <- nid reuse
+          -get_node_page
+              -f2fs_bug_on  <- nid != node_footer->nid
+
+I think we don't need to truncate xattr pages eagerly which introduces lots of
+data races without big benefits.
+
+Cc: <stable@vger.kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
+ fs/f2fs/f2fs.h  |  1 -
+ fs/f2fs/super.c |  1 -
+ fs/f2fs/xattr.c | 31 ++++++++-----------------------
+ 3 files changed, 8 insertions(+), 25 deletions(-)
 
- Change log from v1:
-  - refactor to allow abc.ext.dontcare only
-
- fs/f2fs/namei.c | 18 +++++++++++-------
- 1 file changed, 11 insertions(+), 7 deletions(-)
-
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index 3e35eb7dbb8f..49573ef4115d 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -23,7 +23,7 @@
- #include <trace/events/f2fs.h>
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 3f5b161dd743..7b9af2d51656 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -838,7 +838,6 @@ struct f2fs_inode_info {
  
- static inline bool is_extension_exist(const unsigned char *s, const char *sub,
--						bool tmp_ext)
-+						bool tmp_ext, bool tmp_dot)
+ 	/* avoid racing between foreground op and gc */
+ 	struct f2fs_rwsem i_gc_rwsem[2];
+-	struct f2fs_rwsem i_xattr_sem; /* avoid racing between reading and changing EAs */
+ 
+ 	int i_extra_isize;		/* size of extra space located in i_addr */
+ 	kprojid_t i_projid;		/* id for project quota */
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 1b2c788ed80d..c917fa771f0e 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1418,7 +1418,6 @@ static struct inode *f2fs_alloc_inode(struct super_block *sb)
+ 	INIT_LIST_HEAD(&fi->gdirty_list);
+ 	init_f2fs_rwsem(&fi->i_gc_rwsem[READ]);
+ 	init_f2fs_rwsem(&fi->i_gc_rwsem[WRITE]);
+-	init_f2fs_rwsem(&fi->i_xattr_sem);
+ 
+ 	/* Will be used by directory only */
+ 	fi->i_dir_level = F2FS_SB(sb)->dir_level;
+diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+index 213805d3592c..bdc8a55085a2 100644
+--- a/fs/f2fs/xattr.c
++++ b/fs/f2fs/xattr.c
+@@ -433,7 +433,7 @@ static inline int write_all_xattrs(struct inode *inode, __u32 hsize,
  {
- 	size_t slen = strlen(s);
- 	size_t sublen = strlen(sub);
-@@ -49,8 +49,12 @@ static inline bool is_extension_exist(const unsigned char *s, const char *sub,
- 	for (i = 1; i < slen - sublen; i++) {
- 		if (s[i] != '.')
- 			continue;
--		if (!strncasecmp(s + i + 1, sub, sublen))
--			return true;
-+		if (!strncasecmp(s + i + 1, sub, sublen)) {
-+			if (!tmp_dot)
-+				return true;
-+			if (i == slen - sublen - 1 || s[i + 1 + sublen] == '.')
-+				return true;
-+		}
- 	}
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	size_t inline_size = inline_xattr_size(inode);
+-	struct page *in_page = NULL;
++	struct page *in_page = ipage;
+ 	void *xattr_addr;
+ 	void *inline_addr = NULL;
+ 	struct page *xpage;
+@@ -446,29 +446,19 @@ static inline int write_all_xattrs(struct inode *inode, __u32 hsize,
  
- 	return false;
-@@ -148,7 +152,7 @@ static void set_compress_new_inode(struct f2fs_sb_info *sbi, struct inode *dir,
- 	cold_count = le32_to_cpu(sbi->raw_super->extension_count);
- 	hot_count = sbi->raw_super->hot_ext_count;
- 	for (i = cold_count; i < cold_count + hot_count; i++)
--		if (is_extension_exist(name, extlist[i], false))
-+		if (is_extension_exist(name, extlist[i], false, false))
- 			break;
- 	f2fs_up_read(&sbi->sb_lock);
- 	if (i < (cold_count + hot_count))
-@@ -156,12 +160,12 @@ static void set_compress_new_inode(struct f2fs_sb_info *sbi, struct inode *dir,
- 
- 	/* Don't compress unallowed extension. */
- 	for (i = 0; i < noext_cnt; i++)
--		if (is_extension_exist(name, noext[i], false))
-+		if (is_extension_exist(name, noext[i], false, false))
- 			return;
- 
- 	/* Compress wanting extension. */
- 	for (i = 0; i < ext_cnt; i++) {
--		if (is_extension_exist(name, ext[i], false)) {
-+		if (is_extension_exist(name, ext[i], true, true)) {
- 			set_compress_context(inode);
- 			return;
+ 	/* write to inline xattr */
+ 	if (inline_size) {
+-		if (ipage) {
+-			inline_addr = inline_xattr_addr(inode, ipage);
+-		} else {
++		if (!in_page) {
+ 			in_page = f2fs_get_node_page(sbi, inode->i_ino);
+ 			if (IS_ERR(in_page)) {
+ 				f2fs_alloc_nid_failed(sbi, new_nid);
+ 				return PTR_ERR(in_page);
+ 			}
+-			inline_addr = inline_xattr_addr(inode, in_page);
  		}
-@@ -189,7 +193,7 @@ static void set_file_temperature(struct f2fs_sb_info *sbi, struct inode *inode,
- 	cold_count = le32_to_cpu(sbi->raw_super->extension_count);
- 	hot_count = sbi->raw_super->hot_ext_count;
- 	for (i = 0; i < cold_count + hot_count; i++)
--		if (is_extension_exist(name, extlist[i], true))
-+		if (is_extension_exist(name, extlist[i], true, false))
- 			break;
- 	f2fs_up_read(&sbi->sb_lock);
++		inline_addr = inline_xattr_addr(inode, in_page);
  
+-		f2fs_wait_on_page_writeback(ipage ? ipage : in_page,
+-							NODE, true, true);
+-		/* no need to use xattr node block */
++		f2fs_wait_on_page_writeback(in_page, NODE, true, true);
+ 		if (hsize <= inline_size) {
+-			err = f2fs_truncate_xattr_node(inode);
+-			f2fs_alloc_nid_failed(sbi, new_nid);
+-			if (err) {
+-				f2fs_put_page(in_page, 1);
+-				return err;
+-			}
+ 			memcpy(inline_addr, txattr_addr, inline_size);
+-			set_page_dirty(ipage ? ipage : in_page);
++			set_page_dirty(in_page);
+ 			goto in_page_out;
+ 		}
+ 	}
+@@ -502,12 +492,13 @@ static inline int write_all_xattrs(struct inode *inode, __u32 hsize,
+ 	memcpy(xattr_addr, txattr_addr + inline_size, VALID_XATTR_BLOCK_SIZE);
+ 
+ 	if (inline_size)
+-		set_page_dirty(ipage ? ipage : in_page);
++		set_page_dirty(in_page);
+ 	set_page_dirty(xpage);
+ 
+ 	f2fs_put_page(xpage, 1);
+ in_page_out:
+-	f2fs_put_page(in_page, 1);
++	if (in_page != ipage)
++		f2fs_put_page(in_page, 1);
+ 	return err;
+ }
+ 
+@@ -528,10 +519,8 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
+ 	if (len > F2FS_NAME_LEN)
+ 		return -ERANGE;
+ 
+-	f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
+ 	error = lookup_all_xattrs(inode, ipage, index, len, name,
+ 				&entry, &base_addr, &base_size, &is_inline);
+-	f2fs_up_read(&F2FS_I(inode)->i_xattr_sem);
+ 	if (error)
+ 		return error;
+ 
+@@ -565,9 +554,7 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
+ 	int error;
+ 	size_t rest = buffer_size;
+ 
+-	f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
+ 	error = read_all_xattrs(inode, NULL, &base_addr);
+-	f2fs_up_read(&F2FS_I(inode)->i_xattr_sem);
+ 	if (error)
+ 		return error;
+ 
+@@ -794,9 +781,7 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
+ 	f2fs_balance_fs(sbi, true);
+ 
+ 	f2fs_lock_op(sbi);
+-	f2fs_down_write(&F2FS_I(inode)->i_xattr_sem);
+ 	err = __f2fs_setxattr(inode, index, name, value, size, ipage, flags);
+-	f2fs_up_write(&F2FS_I(inode)->i_xattr_sem);
+ 	f2fs_unlock_op(sbi);
+ 
+ 	f2fs_update_time(sbi, REQ_TIME);
 -- 
 2.41.0.162.gfafddb0af9-goog
 
