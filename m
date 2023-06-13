@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16F5372D6D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jun 2023 03:22:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94D3E72D71C
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 13 Jun 2023 03:48:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q8sjq-0003st-OX;
-	Tue, 13 Jun 2023 01:22:27 +0000
+	id 1q8t8o-0001tF-7x;
+	Tue, 13 Jun 2023 01:48:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1q8sjp-0003sm-0T
+ (envelope-from <chao@kernel.org>) id 1q8t8n-0001t9-6N
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jun 2023 01:22:25 +0000
+ Tue, 13 Jun 2023 01:48:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5n5cPn70L2lMC5xbKdWjEMJfuOI3bNODckRIw4qMc0U=; b=cx+Rql72TAmOIIywMWNd9tJRMN
- /L4fVKdlTeyarVTGufZ/+ZChBh7+JoZYggqHECBFm4N+hphMQe/VA+3B9nPzn3lqezBDvP3VhESPU
- HH9xmgzLDCH0ayegzJoPXNrquss4ZYmO6pPDj9uS/6KJkmgC4LW3d9r0ArMp0VyrZhxM=;
+ bh=yf3ukcB7aBk6rUrjbi3cbahvciFLLHKpzzve6JcDqKE=; b=hzJ/+mr+cHfddItNBw/gfqS00w
+ Yo+luzgFvifLsu7F5uIPUScZJPTPyPWViqJBQ7S8oCt9w5a652EqFY7hiF/2rterSi4W/wJ8lrPNf
+ giS0ynJlGazlDrlGquOLX7zXTSreLY6hh/yiLKUuMBIeMx1iGsux2Y7TtWV3l0s3XamI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,52 +31,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5n5cPn70L2lMC5xbKdWjEMJfuOI3bNODckRIw4qMc0U=; b=BoNsdHjJ1N4q4SCLqUjqYPH+rI
- r/qNtIl1deUzqPQ313nkTuIGCCG9ukxz/dl8fRwRGwmlbyhmn6t6KfQGjnhPmf02xXtI84sGY4ifM
- be2saQuglghrah1OFNhyPj7DfownrXtEZ2uJHv5dt2lBcY6ENOH/K33KeY4uOJqj/drY=;
+ bh=yf3ukcB7aBk6rUrjbi3cbahvciFLLHKpzzve6JcDqKE=; b=AY6meS1fu9xQoc1h89DUpDFrew
+ du9Qmtspvwo9tTjn9W7ciLxbz/HJP7Y/f9yi/sUT75bnPiK3NsTc7lByXiP1C0NRagUoNr5qWlPVe
+ Owxr5TgYp8StGog41BDVL+762DUqQv/cpiGDSLGx3rRW9q7H8qRjX2WZZdQxJkDua6co=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q8sjl-0007HJ-32 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jun 2023 01:22:25 +0000
+ id 1q8t8n-001EvT-FL for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 13 Jun 2023 01:48:13 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A81A9617D1;
- Tue, 13 Jun 2023 01:22:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5958DC433D2;
- Tue, 13 Jun 2023 01:22:14 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 0EEEB61228;
+ Tue, 13 Jun 2023 01:48:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54A28C433D2;
+ Tue, 13 Jun 2023 01:48:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686619335;
- bh=PTCQa7qLmhsnwtrjVgMeTp6OMAslZsDWTf7oxrwBWko=;
+ s=k20201202; t=1686620887;
+ bh=4PvqvZHTR3wNiiQv/YAPXFWmVcKgly99PAxW+i+I0eg=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=efnteJbeXMdfcndM7MScHCZhwSHssTS8yWvz7Cq98dyshU/3jFMy20/4EwyQQkj3f
- BnSzOs6HK0wfiuzn5YTacyfr+V11sHjiEb8KxLsr1c1d9xqrZ3C1Jwl3qp1AWpjhUH
- N9+o0l+8Z4zgaquhOzCr8oPdLI6ZRjbtD6JV5TwJDvFE3NxhT9gEuvHNM4+3VvUKo+
- RnPe0o/KhjRYH3JX9AsCpGAKsXv6eNLWfN6rHxC/XUdcTLHpyX5+49hhcqbZoJ/XRl
- F3WaS3Bxlh52bWj9aYArUGM6fSJ2kqis+XdFVfihJMshPaaaUbPmEHjIOOkTR8Clzg
- CMlO9ZdR1gTAg==
-Message-ID: <22a1f057-8242-cb4d-b9aa-eb7b889c7f9f@kernel.org>
-Date: Tue, 13 Jun 2023 09:22:12 +0800
+ b=OLKWvjtLmTytejGId/lVuExXUdNM1OC/tT1eRxKo/XPj5XZzUxUwt5CFP0392y+f4
+ HfGxdLQFP6VJmNBJt8/9XjXzR8FKk8WxOxn214cbs6MqCtwWYyLVQmkTw9P8lOofq6
+ NZTF892dVNHXmRrgFOszUOy0qx1A/peSGOofzNb5ZPFJW9OG4HGWRolmiGyIt+ZVI9
+ nS7H37CtS/O7PUBiBLbtaA+xbwOu/SXG2zhVvfRurCbjJufIQA77xUKvLTFhBgYP4W
+ 6uP+3NLik+IZ3lzdxyehE6uCBrweGgj7n4Cp7V9u+bMQchtFC9dr9MbaunYqdo1CwS
+ Phm8lpxWXtLfQ==
+Message-ID: <54dcf5f1-0560-14b4-a7e7-6b969b7650c7@kernel.org>
+Date: Tue, 13 Jun 2023 09:48:04 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.2
 Content-Language: en-US
-To: Christoph Hellwig <hch@lst.de>, jaegeuk@kernel.org
-References: <20230612053711.585847-1-hch@lst.de>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, Sheng Yong <shengyong@oppo.com>
+References: <20230612030121.2393541-1-shengyong@oppo.com>
+ <20230612030121.2393541-2-shengyong@oppo.com> <ZIeY0qNjXgx419NZ@google.com>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230612053711.585847-1-hch@lst.de>
-X-Spam-Score: -5.3 (-----)
+In-Reply-To: <ZIeY0qNjXgx419NZ@google.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/6/12 13:37, Christoph Hellwig wrote: > Since commit
- a2ad63daa88b ("VFS: add FMODE_CAN_ODIRECT file flag") file > systems can
- just set the FMODE_CAN_ODIRECT flag at open time instead of > wirin [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  On 2023/6/13 6:14,
+ Jaegeuk Kim wrote: > Could you please check this version? > >
+ https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev-test&id=9c84aad379019a0d86655bb50bd7b4bc
+ [...] Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -89,12 +90,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 NICE_REPLY_A           Looks like a legit reply (A)
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q8sjl-0007HJ-32
-Subject: Re: [f2fs-dev] [PATCH] f2fs: set FMODE_CAN_ODIRECT instead of a
- dummy direct_IO method
+ valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q8t8n-001EvT-FL
+Subject: Re: [f2fs-dev] [PATCH v4 1/6] f2fs: add helper to check compression
+ level
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,19 +106,22 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: ebiggers@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/6/12 13:37, Christoph Hellwig wrote:
-> Since commit a2ad63daa88b ("VFS: add FMODE_CAN_ODIRECT file flag") file
-> systems can just set the FMODE_CAN_ODIRECT flag at open time instead of
-> wiring up a dummy direct_IO method to indicate support for direct I/O.
+On 2023/6/13 6:14, Jaegeuk Kim wrote:
+> Could you please check this version?
 > 
-> Do that for f2fs so that noop_direct_IO can eventually be removed.
+> https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev-test&id=9c84aad379019a0d86655bb50bd7b4bc92683c4b
 > 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> On 06/12, Sheng Yong wrote:
+>> This patch adds a helper function to check if compression level is
+>> valid.
+>>
+>> Signed-off-by: Sheng Yong <shengyong@oppo.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 
