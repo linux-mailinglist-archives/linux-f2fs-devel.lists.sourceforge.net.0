@@ -2,95 +2,140 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A86F72F01B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jun 2023 01:40:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B66372F46C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 14 Jun 2023 08:09:27 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1q9DcA-00020v-K2;
-	Tue, 13 Jun 2023 23:39:55 +0000
+	id 1q9Jgz-0005xq-KQ;
+	Wed, 14 Jun 2023 06:09:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1q9Dc8-00020o-O6
+ (envelope-from <daejun7.park@samsung.com>) id 1q9Jgx-0005xk-Vp
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jun 2023 23:39:53 +0000
+ Wed, 14 Jun 2023 06:09:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
+ Date:Message-ID:In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iM7jp4ZVAzmyh8AM7U/9RQMw4uUEYY3phMHGfu4nUJg=; b=StsW1hIQmpOGPtnn6M4tIgny7V
- yXR3Xf0UHnNX+U6T0s44UQ4niQrdzmc4DF/28FcdU/dncNKAmy6GkpeLxYKyFmYTTk9PY5DrBJ43p
- uM5PedaVRCgfKH3oAlYK8m01Z0J1rqvXAR99xBq44B3AG0OMkee0/5MOvWqB5+ak8rM8=;
+ bh=Ams/WCEjAdJZZhA9Dn0/3apZO2D9Et1VjB/NoGAccik=; b=l7fahq4ohYFktrI97US+QEuKKX
+ PFVkYQ02yh801KnArPtgrekJ9Bh7Ks3CFj3vmt+gzQkRhPHGwGItIxNy/yO55UxTiO5YZlETFGSll
+ i98zxswSjXA3ACfY3c2tAVKhjDs2GwzUgdbWreD28dcWYMRN3ltUR8FtB/+v+3NrHK+8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=iM7jp4ZVAzmyh8AM7U/9RQMw4uUEYY3phMHGfu4nUJg=; b=Q
- MBnfaroGLOpE65vTUACSU6BfSR3bHMZL+GIM2MlL6gTT5/0Df+oywYVQe7WHbBJkSj8Y+e2iOrXME
- KJcbRjvoYd1zmAvK0PzCFstqEnit5jHdGE1v633vbgXOUh5O0psrHZR9n0VJaiMFMHFhQGy63Fq5+
- MrFf5oJ9hA2+APvg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:
+ In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Ams/WCEjAdJZZhA9Dn0/3apZO2D9Et1VjB/NoGAccik=; b=Xv9OxvgsxCQrrw0IJf+p4k7H0z
+ KhgIOVHyQOmRkFPk3nmVNMFQQOIY2AfojC36FlZgCtqm0q2EDTudklWxrkPxA4N6f8b/L7CorVLAc
+ w5pmUgEUG8EwQ5ZQA26McOL6anocIUym2hCinv56SoV3Z1j1XY4NgNiuPz43lMEi/sbo=;
+Received: from mailout3.samsung.com ([203.254.224.33])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1q9Dc3-002Hz6-Up for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 13 Jun 2023 23:39:53 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8926C62012
+ id 1q9Jgu-002bEe-8Q for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 14 Jun 2023 06:09:16 +0000
+Received: from epcas2p1.samsung.com (unknown [182.195.41.53])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20230614060858epoutp03298de8a74d7558b26fdc78948a9d4058~ocZOAmdnp1281112811epoutp03-
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 13 Jun 2023 23:39:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E07A1C433CB;
- Tue, 13 Jun 2023 23:39:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686699582;
- bh=GSISUAdKFLSbpxyTM08xZOsDpcq/incijyeO8wdFdzQ=;
- h=From:To:Cc:Subject:Date:From;
- b=n6BV8dpImJkWAKnYGbk6jQa8k3INA5QDed/haok34ODb+G9ceokA3wVB/ACdeA7BK
- lbnSZFRd6Hb1QaHYi3hYDBlHeDIuHWDyWPdoUhFH7F1hptMmFCPrTszGeidgO8UsAb
- yGY2bQCTIg2qZBby2Xxomtn0zuwoBvq6dfXrN/0ZIGavK/P1GNvD2/+FTDjG8mXg9R
- 0/LYLtrGztsagsUGzKUvsEaU1fYMVKsM+vLUxj8r05UwVt2TTdo/1//fYPVJiwkO9y
- WjEvZ9NBsRoEs3S/u7W7oIkqcy+I/XdEzxg8eQfUGOisx6Nsq4pBw6rWb2y1YV4VfK
- ePojbsP7tVeMQ==
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net
-Date: Tue, 13 Jun 2023 16:39:40 -0700
-Message-ID: <20230613233940.3643362-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.41.0.162.gfafddb0af9-goog
-MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+ Wed, 14 Jun 2023 06:08:58 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20230614060858epoutp03298de8a74d7558b26fdc78948a9d4058~ocZOAmdnp1281112811epoutp03-
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1686722938;
+ bh=Ams/WCEjAdJZZhA9Dn0/3apZO2D9Et1VjB/NoGAccik=;
+ h=Subject:Reply-To:From:To:CC:In-Reply-To:Date:References:From;
+ b=JEA+az0rQTF763c935Bfj2kn2JuWmkniLqaYlyP1ORxofTkGu/BpF+EFN/BveLjP9
+ 48klM+aBuvHuckk2tOkuF8jBHfF5fXQh/99xcgOu7RcmB1YPe5OtmTliUN/JZTLc0H
+ 2XX6/ntn+8abEsjp0tIAdfnciopqs5i7WEBzsKh4=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas2p4.samsung.com (KnoxPortal) with ESMTP id
+ 20230614060858epcas2p416e7127c36b51ad767165207f5047542~ocZNTfPh01707717077epcas2p40;
+ Wed, 14 Jun 2023 06:08:58 +0000 (GMT)
+Received: from epsmges2p4.samsung.com (unknown [182.195.36.70]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4Qgw3Y3j9tz4x9Q0; Wed, 14 Jun
+ 2023 06:08:57 +0000 (GMT)
+X-AuditID: b6c32a48-c3ff87000000acbc-6c-6489597951a4
+Received: from epcas2p3.samsung.com ( [182.195.41.55]) by
+ epsmges2p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 06.42.44220.97959846; Wed, 14 Jun 2023 15:08:57 +0900 (KST)
+Mime-Version: 1.0
+From: Daejun Park <daejun7.park@samsung.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
+X-Priority: 3
+X-Content-Kind-Code: NORMAL
+In-Reply-To: <20230613203947.2745943-1-jaegeuk@kernel.org>
+X-CPGS-Detection: blocking_info_exchange
+X-Drm-Type: N,general
+X-Msg-Generator: Mail
+X-Msg-Type: PERSONAL
+X-Reply-Demand: N
+Message-ID: <20230614060757epcms2p4e11a8f8bf2fa44eac99a5bb7f47f8dcd@epcms2p4>
+Date: Wed, 14 Jun 2023 15:07:57 +0900
+X-CMS-MailID: 20230614060757epcms2p4e11a8f8bf2fa44eac99a5bb7f47f8dcd
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+X-CPGSPASS: Y
+X-CPGSPASS: Y
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrEKsWRmVeSWpSXmKPExsWy7bCmuW5lZGeKQetHCYuXhzQtVj0It3iy
+ fhazxaVF7haXd81hc2D12LSqk81j94LPTB59W1YxenzeJBfAEpVtk5GamJJapJCal5yfkpmX
+ bqvkHRzvHG9qZmCoa2hpYa6kkJeYm2qr5OIToOuWmQO0VEmhLDGnFCgUkFhcrKRvZ1OUX1qS
+ qpCRX1xiq5RakJJTYF6gV5yYW1yal66Xl1piZWhgYGQKVJiQnTG1ZzpTwRfuinu7t7M3MP7l
+ 6mLk5JAQMJE4crSFqYuRi0NIYAejxN/DX9m7GDk4eAUEJf7uEAYxhQViJRZOswEpFxJQklh/
+ cRY7iC0soCdx6+EaRhCbTUBHYvqJ+2BxEYFdjBIX25NAbGYBLYlzW9cxQqzilZjR/pQFwpaW
+ 2L58K1icU8BK4kTvGlaIuIbEj2W9zBC2qMTN1W/ZYez3x+ZDzRGRaL13FqpGUOLBz91QcUmJ
+ 23M3QdXnS/y/shzKrpHYdmAelK0vca1jI9gNvAK+Esdv3gfrZRFQlXi98A3UHBeJD2eWM0Lc
+ ry2xbOFrZlAwMAtoSqzfpQ9iSggoSxy5xQJRwSfRcfgvO8yHDRt/Y2XvmPeECcJWk1j3cz3T
+ BEblWYhgnoVk1yyEXQsYmVcxiqUWFOempxYbFZjAYzY5P3cTIzjxaXnsYJz99oPeIUYmDsZD
+ jBIczEoivE812lOEeFMSK6tSi/Lji0pzUosPMZoCfTmRWUo0OR+YevNK4g1NLA1MzMwMzY1M
+ DcyVxHk/diinCAmkJ5akZqemFqQWwfQxcXBKNTBtSn6dYKIdMfWv8+Rl1cEzM4S5T6x587hB
+ +8KfDzt29Myczd4b++TzIT7ZrbFWks8nl5ZyWG46L7CrUNqwVtp7bq2X40qLX9cXVq4p/xug
+ 9qROYs+OO1+PHHff9TPJ/OuTFLtkK5P/QnMFm6/KGLAxl055+3v1pukNld3TDc5MuX0iY2rd
+ 5i+WOfERWjMt1LZbfMtRf1IveFb544Epp9mKD54vdllxesYmp4rvhvJ+p8S3132b7sC5W0Xr
+ xJxFbZbRH9K32tY/2qP9+0dH4qq2BL4Vr55Ipac4/Ao5sSzoyN9vK/UuRNi/NCoLO35DN/bJ
+ X/arbFNK8hcfj08QP7mQWeK19PEj/n63SvhuTxN7r8RSnJFoqMVcVJwIAEbnOmQFBAAA
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20230613204109epcas2p158ecc100d3fe2db1ab2b7ee8335d01e7
+References: <20230613203947.2745943-1-jaegeuk@kernel.org>
+ <CGME20230613204109epcas2p158ecc100d3fe2db1ab2b7ee8335d01e7@epcms2p4>
+X-Spam-Score: -3.2 (---)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This reverts commit 27161f13e3c3 "f2fs: avoid race in between
- read xattr & write xattr". That introduced a deadlock case: Thread #1: 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  Hi Jaegeuk, > If there're huge # of small discards, this will
+ increase checkpoint latency > insanely. Let's issue small discards only by
+ trim. > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> > --- > fs/f2fs/s
+ [...] Content analysis details:   (-3.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [203.254.224.33 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [203.254.224.33 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1q9Dc3-002Hz6-Up
-Subject: [f2fs-dev] [PATCH] f2fs: remove i_xattr_sem to avoid deadlock and
- fix the original issue
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1q9Jgu-002bEe-8Q
+Subject: Re: [f2fs-dev] [PATCH] f2fs: do not issue small discard commands
+ during checkpoint
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,201 +147,32 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, stable@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: daejun7.park@samsung.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This reverts commit 27161f13e3c3 "f2fs: avoid race in between read xattr & write xattr".
-
-That introduced a deadlock case:
-
-Thread #1:
-
-[122554.641906][   T92]  f2fs_getxattr+0xd4/0x5fc
-    -> waiting for f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
-
-[122554.641927][   T92]  __f2fs_get_acl+0x50/0x284
-[122554.641948][   T92]  f2fs_init_acl+0x84/0x54c
-[122554.641969][   T92]  f2fs_init_inode_metadata+0x460/0x5f0
-[122554.641990][   T92]  f2fs_add_inline_entry+0x11c/0x350
-    -> Locked dir->inode_page by f2fs_get_node_page()
-
-[122554.642009][   T92]  f2fs_do_add_link+0x100/0x1e4
-[122554.642025][   T92]  f2fs_create+0xf4/0x22c
-[122554.642047][   T92]  vfs_create+0x130/0x1f4
-
-Thread #2:
-
-[123996.386358][   T92]  __get_node_page+0x8c/0x504
-    -> waiting for dir->inode_page lock
-
-[123996.386383][   T92]  read_all_xattrs+0x11c/0x1f4
-[123996.386405][   T92]  __f2fs_setxattr+0xcc/0x528
-[123996.386424][   T92]  f2fs_setxattr+0x158/0x1f4
-    -> f2fs_down_write(&F2FS_I(inode)->i_xattr_sem);
-
-[123996.386443][   T92]  __f2fs_set_acl+0x328/0x430
-[123996.386618][   T92]  f2fs_set_acl+0x38/0x50
-[123996.386642][   T92]  posix_acl_chmod+0xc8/0x1c8
-[123996.386669][   T92]  f2fs_setattr+0x5e0/0x6bc
-[123996.386689][   T92]  notify_change+0x4d8/0x580
-[123996.386717][   T92]  chmod_common+0xd8/0x184
-[123996.386748][   T92]  do_fchmodat+0x60/0x124
-[123996.386766][   T92]  __arm64_sys_fchmodat+0x28/0x3c
-
-Let's take a look at the original issue back.
-
-Thread A:                                       Thread B:
--f2fs_getxattr
-   -lookup_all_xattrs
-      -xnid = F2FS_I(inode)->i_xattr_nid;
-                                                -f2fs_setxattr
-                                                    -__f2fs_setxattr
-                                                        -write_all_xattrs
-                                                            -truncate_xattr_node
-                                                                  ...  ...
-                                                -write_checkpoint
-                                                                  ...  ...
-                                                -alloc_nid   <- nid reuse
-          -get_node_page
-              -f2fs_bug_on  <- nid != node_footer->nid
-
-I think we don't need to truncate xattr pages eagerly which introduces lots of
-data races without big benefits.
-
-Cc: <stable@vger.kernel.org>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fs/f2fs/f2fs.h  |  1 -
- fs/f2fs/super.c |  1 -
- fs/f2fs/xattr.c | 31 ++++++++-----------------------
- 3 files changed, 8 insertions(+), 25 deletions(-)
-
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 3f5b161dd743..7b9af2d51656 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -838,7 +838,6 @@ struct f2fs_inode_info {
- 
- 	/* avoid racing between foreground op and gc */
- 	struct f2fs_rwsem i_gc_rwsem[2];
--	struct f2fs_rwsem i_xattr_sem; /* avoid racing between reading and changing EAs */
- 
- 	int i_extra_isize;		/* size of extra space located in i_addr */
- 	kprojid_t i_projid;		/* id for project quota */
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 1b2c788ed80d..c917fa771f0e 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1418,7 +1418,6 @@ static struct inode *f2fs_alloc_inode(struct super_block *sb)
- 	INIT_LIST_HEAD(&fi->gdirty_list);
- 	init_f2fs_rwsem(&fi->i_gc_rwsem[READ]);
- 	init_f2fs_rwsem(&fi->i_gc_rwsem[WRITE]);
--	init_f2fs_rwsem(&fi->i_xattr_sem);
- 
- 	/* Will be used by directory only */
- 	fi->i_dir_level = F2FS_SB(sb)->dir_level;
-diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index 213805d3592c..bdc8a55085a2 100644
---- a/fs/f2fs/xattr.c
-+++ b/fs/f2fs/xattr.c
-@@ -433,7 +433,7 @@ static inline int write_all_xattrs(struct inode *inode, __u32 hsize,
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	size_t inline_size = inline_xattr_size(inode);
--	struct page *in_page = NULL;
-+	struct page *in_page = ipage;
- 	void *xattr_addr;
- 	void *inline_addr = NULL;
- 	struct page *xpage;
-@@ -446,29 +446,19 @@ static inline int write_all_xattrs(struct inode *inode, __u32 hsize,
- 
- 	/* write to inline xattr */
- 	if (inline_size) {
--		if (ipage) {
--			inline_addr = inline_xattr_addr(inode, ipage);
--		} else {
-+		if (!in_page) {
- 			in_page = f2fs_get_node_page(sbi, inode->i_ino);
- 			if (IS_ERR(in_page)) {
- 				f2fs_alloc_nid_failed(sbi, new_nid);
- 				return PTR_ERR(in_page);
- 			}
--			inline_addr = inline_xattr_addr(inode, in_page);
- 		}
-+		inline_addr = inline_xattr_addr(inode, in_page);
- 
--		f2fs_wait_on_page_writeback(ipage ? ipage : in_page,
--							NODE, true, true);
--		/* no need to use xattr node block */
-+		f2fs_wait_on_page_writeback(in_page, NODE, true, true);
- 		if (hsize <= inline_size) {
--			err = f2fs_truncate_xattr_node(inode);
--			f2fs_alloc_nid_failed(sbi, new_nid);
--			if (err) {
--				f2fs_put_page(in_page, 1);
--				return err;
--			}
- 			memcpy(inline_addr, txattr_addr, inline_size);
--			set_page_dirty(ipage ? ipage : in_page);
-+			set_page_dirty(in_page);
- 			goto in_page_out;
- 		}
- 	}
-@@ -502,12 +492,13 @@ static inline int write_all_xattrs(struct inode *inode, __u32 hsize,
- 	memcpy(xattr_addr, txattr_addr + inline_size, VALID_XATTR_BLOCK_SIZE);
- 
- 	if (inline_size)
--		set_page_dirty(ipage ? ipage : in_page);
-+		set_page_dirty(in_page);
- 	set_page_dirty(xpage);
- 
- 	f2fs_put_page(xpage, 1);
- in_page_out:
--	f2fs_put_page(in_page, 1);
-+	if (in_page != ipage)
-+		f2fs_put_page(in_page, 1);
- 	return err;
- }
- 
-@@ -528,10 +519,8 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
- 	if (len > F2FS_NAME_LEN)
- 		return -ERANGE;
- 
--	f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
- 	error = lookup_all_xattrs(inode, ipage, index, len, name,
- 				&entry, &base_addr, &base_size, &is_inline);
--	f2fs_up_read(&F2FS_I(inode)->i_xattr_sem);
- 	if (error)
- 		return error;
- 
-@@ -565,9 +554,7 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
- 	int error;
- 	size_t rest = buffer_size;
- 
--	f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
- 	error = read_all_xattrs(inode, NULL, &base_addr);
--	f2fs_up_read(&F2FS_I(inode)->i_xattr_sem);
- 	if (error)
- 		return error;
- 
-@@ -794,9 +781,7 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
- 	f2fs_balance_fs(sbi, true);
- 
- 	f2fs_lock_op(sbi);
--	f2fs_down_write(&F2FS_I(inode)->i_xattr_sem);
- 	err = __f2fs_setxattr(inode, index, name, value, size, ipage, flags);
--	f2fs_up_write(&F2FS_I(inode)->i_xattr_sem);
- 	f2fs_unlock_op(sbi);
- 
- 	f2fs_update_time(sbi, REQ_TIME);
--- 
-2.41.0.162.gfafddb0af9-goog
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+SGkgSmFlZ2V1aywKCj4gSWYgdGhlcmUncmUgaHVnZSAjIG9mIHNtYWxsIGRpc2NhcmRzLCB0aGlz
+IHdpbGwgaW5jcmVhc2UgY2hlY2twb2ludCBsYXRlbmN5Cj4gaW5zYW5lbHkuIExldCdzIGlzc3Vl
+IHNtYWxsIGRpc2NhcmRzIG9ubHkgYnkgdHJpbS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKYWVnZXVr
+IEtpbSA8amFlZ2V1a0BrZXJuZWwub3JnPgo+IC0tLQo+ICBmcy9mMmZzL3NlZ21lbnQuYyB8IDUg
+KystLS0KPiAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkK
+PiAKPiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9zZWdtZW50LmMgYi9mcy9mMmZzL3NlZ21lbnQuYwo+
+IGluZGV4IDBjMGMwMzNjNGJkZC4uZWY0NmJiMDg1Mzg1IDEwMDY0NAo+IC0tLSBhL2ZzL2YyZnMv
+c2VnbWVudC5jCj4gKysrIGIvZnMvZjJmcy9zZWdtZW50LmMKPiBAQCAtMjE3OCw3ICsyMTc4LDcg
+QEAgdm9pZCBmMmZzX2NsZWFyX3ByZWZyZWVfc2VnbWVudHMoc3RydWN0IGYyZnNfc2JfaW5mbyAq
+c2JpLAo+IMKgIMKgIMKgIMKgIMKgfQ0KPiDCoCDCoCDCoCDCoCDCoG11dGV4X3VubG9jaygmZGly
+dHlfaS0+c2VnbGlzdF9sb2NrKTsNCj4gIA0KPiAtIMKgIMKgIMKgIMKgaWYgKCFmMmZzX2Jsb2Nr
+X3VuaXRfZGlzY2FyZChzYmkpKQ0KPiArIMKgIMKgIMKgIMKgaWYgKCFmMmZzX2Jsb2NrX3VuaXRf
+ZGlzY2FyZChzYmkpIHx8ICFmb3JjZSkNCg0KSWYgd2UgZG9uJ3QgaGFuZGxlIHRoZSBkaXNjYXJk
+IGVudHJpZXMgaGVyZSwgZGNjLT5lbnRyeV9saXN0IHdpbGwgc3RpbGwgaGF2ZSB0aGVtLA0Kc28g
+c3RhbGUgZGlzY2FyZCBlbnRyaWVzIG1heSBiZSBoYW5kbGVkIGJ5IHRyaW0sIGNhdXNpbmcgaW5j
+b3JyZWN0IGRpc2NhcmRzIHRvIGJlIGlzc3VlZC4NClRoZXJlZm9yZSwgSSB0aGluayB0aGlzIHBh
+dGNoIHNob3VsZCBhbHNvIHByZXZlbnQgdGhlIGNyZWF0aW9uIG9mIGRpc2NhcmQgZW50cmllcw0K
+aW4gYWRkX2Rpc2NhcmRfYWRkcnMoKSwgdW5sZXNzIGl0IGlzIGEgY2hlY2twb2ludCBjYXVzZWQg
+YnkgdHJpbS4NClRoaXMgd291bGQgZnVydGhlciByZWR1Y2UgdGhlIGxhdGVuY3kgY2F1c2VkIGJ5
+IHRoZSBjcmVhdGlvbiBvZiBhIGRpc2NhcmQgZW50cnkuDQoNClRoYW5rcywNCkRhZWp1bg0KCgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJm
+cy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5u
+ZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJm
+cy1kZXZlbAo=
