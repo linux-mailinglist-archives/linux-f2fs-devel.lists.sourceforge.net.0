@@ -2,139 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9940373263D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Jun 2023 06:37:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14C9E732702
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 16 Jun 2023 08:04:03 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qA1DZ-0004cW-DO;
-	Fri, 16 Jun 2023 04:37:49 +0000
+	id 1qA2Yr-0005XJ-Qr;
+	Fri, 16 Jun 2023 06:03:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <beomsu7.kim@samsung.com>) id 1qA1DS-0004cP-Nk
+ (envelope-from <ebiggers@kernel.org>) id 1qA2Yp-0005XC-TW
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 16 Jun 2023 04:37:43 +0000
+ Fri, 16 Jun 2023 06:03:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- Date:Message-ID:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TzMoaf8vGyU8GATKSoffunm8vsRVuxtDYDCKWXxcjoM=; b=ExQ64VXf4aVXb6iA6/t3LVq7R6
- tgpE+bfTxJEUILfcIl53Ioc6UEuKhS++JFNC/knOAaBaMUnMALHwkEJa6UE/KON77GzLk65Maggat
- NEFX8w21bw9zyO0q+QGaKdOQJ3ZelMBG0IpzWUZtWOVkkzlKqON5DYOARAtgR3SVUQH4=;
+ bh=tqjupH1JgWsh4eIl3JMqAC+sI7T5E022EfFeNrkKEzk=; b=Rqf4aeuogYQX3VUtqwo/NUiHqI
+ NTw/FmXz9zEoHp2wMk16usvKL/345bckL/i0FewrEz0tiQGi6Y6TmFEP+KklnI2IvxsroSbvvnroE
+ /3UbM+5EJA189Qgv2k5zA04NlScLQKK2P9eXamd6Fl+oX2WPI+S2scvdVni8Jvt85l8Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:CC:To:
- From:Sender:Reply-To:Subject:Mime-Version:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=TzMoaf8vGyU8GATKSoffunm8vsRVuxtDYDCKWXxcjoM=; b=c
- Qfem4+XBEsXU6BsrQ+Sf0aKyEp8Du1uoETb6YKjrFqdenRkYe8P4ZU79JnMp7kMXRpY6lfqaJZ28d
- 5TVJrTtdy5cbzJgA4DaqwaJTX/IK+gYfDUkcnb/VJtorCktZhUsp1rX5hsW+1PBFsuZrpjSHAW05D
- C/Hb3BjAVEU+3wTo=;
-Received: from mailout1.samsung.com ([203.254.224.24])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=tqjupH1JgWsh4eIl3JMqAC+sI7T5E022EfFeNrkKEzk=; b=MDgCwfDBjjIpf4hx2lQj5fxhlG
+ pnJPKvuPdw14khUFl7ITNSRCt3Etqcben8J3CUvg+92J07zQ+nBr62ZZ7WQTgdxcm4qrVJ8mscazu
+ urQI2QXLOOhzl82PEy2A1TfGA6BFyN1nFWYRgQ1cDZwjwFDGSliO/TxkkXE/WNZCXhrE=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qA1DN-0057FF-SF for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 16 Jun 2023 04:37:42 +0000
-Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20230616043724epoutp01b0d0404a7a03d919f9ff16d010ac2af2~pCb1Zd2KU2558425584epoutp01H
+ id 1qA2Yo-005Ebu-Nt for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 16 Jun 2023 06:03:52 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 525A360F9C
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 16 Jun 2023 04:37:24 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20230616043724epoutp01b0d0404a7a03d919f9ff16d010ac2af2~pCb1Zd2KU2558425584epoutp01H
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1686890244;
- bh=TzMoaf8vGyU8GATKSoffunm8vsRVuxtDYDCKWXxcjoM=;
- h=Subject:Reply-To:From:To:CC:Date:References:From;
- b=t5s68veHJRxeVnORsIARiDc6EwV0HlQVtpb5K+6Ul2//G7j5CyTf6JIZyOau63doP
- /WiPXKUAcFjJI9oD6fz+W3/WqpwZ2sZweGZxzCxmD+5yjRw08+r2olEjG3/4Ju/al5
- OlZ4OPaXOeSiT+0U/qMznfa9MynfGuv5kJtQQeDs=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTP id
- 20230616043723epcas2p29c8c2f82eba70fd792df2735fc3edace~pCb0xnmfw1438214382epcas2p2B;
- Fri, 16 Jun 2023 04:37:23 +0000 (GMT)
-Received: from epsmges2p1.samsung.com (unknown [182.195.36.99]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4Qj5wz0MD0z4x9Pw; Fri, 16 Jun
- 2023 04:37:23 +0000 (GMT)
-X-AuditID: b6c32a45-1dbff70000022cba-7e-648be7029a0a
-Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
- epsmges2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 68.BD.11450.207EB846; Fri, 16 Jun 2023 13:37:22 +0900 (KST)
-Mime-Version: 1.0
-From: beomsu kim <beomsu7.kim@samsung.com>
-To: Chao Yu <chao@kernel.org>, "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>
-X-Priority: 3
-X-Content-Kind-Code: NORMAL
-X-CPGS-Detection: blocking_info_exchange
-X-Drm-Type: N,general
-X-Msg-Generator: Mail
-X-Msg-Type: PERSONAL
-X-Reply-Demand: N
-Message-ID: <20230616043722epcms2p3073c77119d37f5f963b8a75801efb40f@epcms2p3>
-Date: Fri, 16 Jun 2023 13:37:22 +0900
-X-CMS-MailID: 20230616043722epcms2p3073c77119d37f5f963b8a75801efb40f
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrHKsWRmVeSWpSXmKPExsWy7bCmhS7T8+4UgyPXrSxOTz3LZLHqQbjF
- k/WzmC0uLXK3uLxrDpvF6x9yFqs65jJaTD1/hMmBw2PTqk42j90LPjN59G1ZxejxeZNcAEtU
- tk1GamJKapFCal5yfkpmXrqtkndwvHO8qZmBoa6hpYW5kkJeYm6qrZKLT4CuW2YO0A1KCmWJ
- OaVAoYDE4mIlfTubovzSklSFjPziElul1IKUnALzAr3ixNzi0rx0vbzUEitDAwMjU6DChOyM
- j/PPMBX85q1onniZsYFxPlcXIyeHhICJROej94xdjFwcQgI7GCXedZ1k62Lk4OAVEJT4u0MY
- pEZYwF3iwuWFzCC2kICiRF/zBrASYQEdiSVbjEHCbAJaEt3XzzCDjBEReMAoMeXGXjYQh1lg
- FaPE4tbLzBDLeCVmtD9lgbClJbYv38oIYWtI/FjWC1UjKnFz9Vt2GPv9sflQNSISrffOQtUI
- Sjz4uRsqLiHx+ifM/HyJ778/gj0jIdDCKLGzZw5UQl9i25/ZYIt5BXwltn7axw7yAYuAqsSk
- X/ogpoSAi8TmUyEgFcwC8hLb34J0cgDZmhLrd0FVKEscucUCUcEn0XH4LzvMUzvmPWGCKFGV
- 6AYFDjvYfx0GEAUeEh8f3WABKRASCJS4fJtjAqPCLEQYz0KycxbCzgWMzKsYxVILinPTU4uN
- Cgzh0Zqcn7uJEZwQtVx3ME5++0HvECMTB+MhRgkOZiUR3mUnulKEeFMSK6tSi/Lji0pzUosP
- MZoC/TqRWUo0OR+YkvNK4g1NLA1MzMwMzY1MDcyVxHmlbU8mCwmkJ5akZqemFqQWwfQxcXBK
- NTBN2GU6uzN0S7eNhiFnrUTQ4o1Z3UwLKzTEsn4VRy/bevdmemydg3TfcTuj5tD/QdxGpv/j
- wza47YzMYXRMVjM+N3G98vkvOy+4nDW8+fms806BA97KV3d8dZ2XV3Jym85+Lv4pX5ikbs8q
- 8JIXjHVV04vxPBbcpve3qNpq8q6meNPDd1Qfu01ceKm/1zm//dO5ArX6QMtF8gdqu4LCau+W
- C6ZfarXk2KwdvDHA0MA1VLtG9v6b/u/h0W1HFizcevHkxcD9ZvHvNbc8+sAffH1Bg9wTldnT
- Flq8Ftnz5v6XtglmNovM1sZKZrC2L7NyUTprOeGydntI7eQN10UtvFMNBPgt7z8x+c5YkPRu
- txJLcUaioRZzUXEiAAiX+VoRBAAA
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230602044830epcms2p141ec782e866c2adc5a3142516f051b87
-References: <CGME20230602044830epcms2p141ec782e866c2adc5a3142516f051b87@epcms2p3>
-X-Spam-Score: -3.2 (---)
+ Fri, 16 Jun 2023 06:03:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70BEEC433C8;
+ Fri, 16 Jun 2023 06:03:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1686895424;
+ bh=GZc7By0mJeVIkZQ9yAj/BUXxa2lJWfByQzhT8rhH0EY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=C4k8/qrDxfZcC0jfnV+CpWjNKwnbLPV/M0TfLNr3tFIPEa5n68xNnRZz7J5Wi5ZLT
+ tMN5gmgr02gV8glI6C6CT05ygiWuPkZvYsK9ukpmlSORnJXWILOCBZi6m/O/0Dx3bs
+ sjOVvOyBWxl9tj0/ACwhq/UASBdmm6GMaNTI6kJjI5FVWfwvmi8Jeo4sKSQUUc7IU+
+ cy5d3/81tb1SdqhdwMGpzpvwYj4C0KQcGbSmTIar2sbnnovn8eGlsgyLjdhRno3Dqz
+ yDAa0ldP5EFXAcLyuJRqbY5owxmIxuCaa0/5uxq+8wDc6XO6zw6cj5wA03o3wq+oPF
+ R86pe1A5PTw2Q==
+Date: Thu, 15 Jun 2023 23:03:42 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <20230616060342.GB181948@sol.localdomain>
+References: <20230529104709.2560779-1-chao@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20230529104709.2560779-1-chao@kernel.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  When evaluating in f2fs, it takes much time to obtain waf
- data. This patch helps to obtain waf data without calcluation. Signed-off-by:
- Beomsu Kim <beomsu7.kim@samsung.com> --- fs/f2fs/iostat.c | 17
- +++++++++++++++++ 1 file changed, 17 insertions(+) 
- Content analysis details:   (-3.2 points, 6.0 required)
+ Content preview:  Hi Chao, On Mon, May 29, 2023 at 06:47:09PM +0800, Chao Yu
+ wrote: > Compression option in inode should not be changed after they have
+ > been used, however, it may happen in below race case: > > Thread A Thread
+ [...] Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [203.254.224.24 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [203.254.224.24 listed in wl.mailspike.net]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qA1DN-0057FF-SF
-Subject: [f2fs-dev] [PATCH v2] f2fs: including waf data in f2fs status
- information
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qA2Yo-005Ebu-Nt
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix to avoid mmap vs
+ set_compress_option case
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -146,62 +106,133 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: beomsu7.kim@samsung.com
-Cc: Seokhwan Kim <sukka.kim@samsung.com>,
- Seonghun Kim <seonghun-sui.kim@samsung.com>
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-When evaluating in f2fs, it takes much time to obtain waf data.
-This patch helps to obtain waf data without calcluation.
+Hi Chao,
 
-Signed-off-by: Beomsu Kim <beomsu7.kim@samsung.com>
----
- fs/f2fs/iostat.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+On Mon, May 29, 2023 at 06:47:09PM +0800, Chao Yu wrote:
+> Compression option in inode should not be changed after they have
+> been used, however, it may happen in below race case:
+> 
+> Thread A				Thread B
+> - f2fs_ioc_set_compress_option
+>  - check f2fs_is_mmap_file()
+>  - check get_dirty_pages()
+>  - check F2FS_HAS_BLOCKS()
+> 					- f2fs_file_mmap
+> 					 - set_inode_flag(FI_MMAP_FILE)
+> 					- fault
+> 					 - do_page_mkwrite
+> 					  - f2fs_vm_page_mkwrite
+> 					  - f2fs_get_block_locked
+> 					 - fault_dirty_shared_page
+> 					  - set_page_dirty
+>  - update i_compress_algorithm
+>  - update i_log_cluster_size
+>  - update i_cluster_size
+> 
+> Avoid such race condition by covering f2fs_file_mmap() w/ inode lock,
+> meanwhile add mmap file check condition in f2fs_may_compress() as well.
+> 
+> Fixes: e1e8debec656 ("f2fs: add F2FS_IOC_SET_COMPRESS_OPTION ioctl")
+> Signed-off-by: Chao Yu <chao@kernel.org>
 
-diff --git a/fs/f2fs/iostat.c b/fs/f2fs/iostat.c
-index 3d5bfb1ad585..59720639e8c0 100644
---- a/fs/f2fs/iostat.c
-+++ b/fs/f2fs/iostat.c
-@@ -34,10 +34,23 @@ int __maybe_unused iostat_info_seq_show(struct seq_file *seq, void *offset)
- {
-        struct super_block *sb = seq->private;
-        struct f2fs_sb_info *sbi = F2FS_SB(sb);
-+       int j;
-+       unsigned long long waf = 0;
-+       unsigned long long data_written_by_user;
-+       unsigned long long data_written_to_storage;
- 
-        if (!sbi->iostat_enable)
-                return 0;
- 
-+       data_written_by_user = sbi->iostat_bytes[FS_DATA_IO];
-+
-+       data_written_to_storage = data_written_by_user;
-+       for (j = FS_NODE_IO; j <= FS_CP_META_IO; j++)
-+               data_written_to_storage += sbi->iostat_bytes[j];
-+
-+       if (data_written_by_user > 0)
-+               waf = data_written_to_storage * 100 / data_written_by_user;
-+
-        seq_printf(seq, "time:          %-16llu\n", ktime_get_real_seconds());
-        seq_printf(seq, "\t\t\t%-16s %-16s %-16s\n",
-                                "io_bytes", "count", "avg_bytes");
-@@ -81,6 +94,10 @@ int __maybe_unused iostat_info_seq_show(struct seq_file *seq, void *offset)
-        IOSTAT_INFO_SHOW("fs discard", FS_DISCARD_IO);
-        IOSTAT_INFO_SHOW("fs flush", FS_FLUSH_IO);
- 
-+       /* print waf */
-+       seq_puts(seq, "[WAF]\n");
-+       seq_printf(seq, "fs waf:                %llu.%02llu\n", waf / 100, waf % 100);
-+
-        return 0;
- }
- 
--- 
-2.17.1
+This patch causes the following deadlock report:
+
+[    9.622928] ======================================================
+[    9.623484] WARNING: possible circular locking dependency detected
+[    9.624054] 6.4.0-rc1-00039-g18a87f3eaef5 #12 Tainted: G                T
+[    9.624672] ------------------------------------------------------
+[    9.625242] xfs_io/2440 is trying to acquire lock:
+[    9.625682] ffff888103a2c888 (&sb->s_type->i_mutex_key#11){+.+.}-{3:3}, at: f2fs_file_mmap+0x53/0xc0
+[    9.626523]
+[    9.626523] but task is already holding lock:
+[    9.627058] ffff888103d0e8c0 (&mm->mmap_lock){++++}-{3:3}, at: vm_mmap_pgoff+0x72/0x1c0
+[    9.627797]
+[    9.627797] which lock already depends on the new lock.
+[    9.627797]
+[    9.628528]
+[    9.628528] the existing dependency chain (in reverse order) is:
+[    9.629210]
+[    9.629210] -> #1 (&mm->mmap_lock){++++}-{3:3}:
+[    9.629761]        lock_acquire+0xcb/0x2d0
+[    9.630147]        __might_fault+0x6f/0xa0
+[    9.630526]        _copy_to_user+0x27/0x90
+[    9.630915]        fiemap_fill_next_extent+0xbe/0x130
+[    9.631378]        f2fs_fiemap+0x223/0x5c0
+[    9.631757]        do_vfs_ioctl+0x6d5/0x860
+[    9.632150]        __x64_sys_ioctl+0x4a/0xd0
+[    9.632547]        do_syscall_64+0x39/0x90
+[    9.632935]        entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[    9.633444]
+[    9.633444] -> #0 (&sb->s_type->i_mutex_key#11){+.+.}-{3:3}:
+[    9.634104]        check_prev_add+0x93/0xbd0
+[    9.634500]        __lock_acquire+0xc27/0x11e0
+[    9.634918]        lock_acquire+0xcb/0x2d0
+[    9.635297]        down_write+0x3d/0x100
+[    9.635660]        f2fs_file_mmap+0x53/0xc0
+[    9.636053]        mmap_region+0x20b/0x920
+[    9.636433]        do_mmap+0x345/0x570
+[    9.636781]        vm_mmap_pgoff+0xa1/0x1c0
+[    9.637179]        ksys_mmap_pgoff+0xa0/0xc0
+[    9.637574]        __x64_sys_mmap+0x32/0x60
+[    9.637970]        do_syscall_64+0x39/0x90
+[    9.638348]        entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[    9.638864]
+[    9.638864] other info that might help us debug this:
+[    9.638864]
+[    9.639582]  Possible unsafe locking scenario:
+[    9.639582]
+[    9.640128]        CPU0                    CPU1
+[    9.640545]        ----                    ----
+[    9.640971]   lock(&mm->mmap_lock);
+[    9.641298]                                lock(&sb->s_type->i_mutex_key#11);
+[    9.641953]                                lock(&mm->mmap_lock);
+[    9.642500]   lock(&sb->s_type->i_mutex_key#11);
+[    9.642930]
+[    9.642930]  *** DEADLOCK ***
+[    9.642930]
+[    9.643469] 1 lock held by xfs_io/2440:
+[    9.643830]  #0: ffff888103d0e8c0 (&mm->mmap_lock){++++}-{3:3}, at: vm_mmap_pgoff+0x72/0x1c0
+[    9.644600]
+[    9.644600] stack backtrace:
+[    9.645012] CPU: 0 PID: 2440 Comm: xfs_io Tainted: G                T  6.4.0-rc1-00039-g18a87f3eaef5 #12
+[    9.645869] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS Arch Linux 1.16.2-1-1 04/01/2014
+[    9.646697] Call Trace:
+[    9.646933]  <TASK>
+[    9.647137]  dump_stack_lvl+0x4e/0x90
+[    9.647483]  dump_stack+0x14/0x20
+[    9.647800]  print_circular_bug+0x2eb/0x440
+[    9.648188]  check_noncircular+0x124/0x140
+[    9.648568]  check_prev_add+0x93/0xbd0
+[    9.648923]  ? add_chain_cache+0x10e/0x470
+[    9.649304]  __lock_acquire+0xc27/0x11e0
+[    9.649670]  lock_acquire+0xcb/0x2d0
+[    9.650013]  ? f2fs_file_mmap+0x53/0xc0
+[    9.650372]  down_write+0x3d/0x100
+[    9.650696]  ? f2fs_file_mmap+0x53/0xc0
+[    9.651059]  f2fs_file_mmap+0x53/0xc0
+[    9.651402]  mmap_region+0x20b/0x920
+[    9.651739]  do_mmap+0x345/0x570
+[    9.652053]  vm_mmap_pgoff+0xa1/0x1c0
+[    9.652397]  ksys_mmap_pgoff+0xa0/0xc0
+[    9.652747]  __x64_sys_mmap+0x32/0x60
+[    9.653098]  do_syscall_64+0x39/0x90
+[    9.653432]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[    9.653904] RIP: 0033:0x7f1366f92b62
+[    9.654237] Code: e4 e8 b2 4b 01 00 66 90 41 f7 c1 ff 0f 00 00 75 27 55 48 89 fd 53 89 cb 48 85 ff 74 3b 41 89 da 48 89 ef 4
+[    9.655918] RSP: 002b:00007ffd5de38f08 EFLAGS: 00000246 ORIG_RAX: 0000000000000009
+[    9.656601] RAX: ffffffffffffffda RBX: 0000000000000001 RCX: 00007f1366f92b62
+[    9.657256] RDX: 0000000000000001 RSI: 0000000000020000 RDI: 0000000000000000
+[    9.657909] RBP: 0000000000000000 R08: 0000000000000003 R09: 0000000000000000
+[    9.658558] R10: 0000000000000001 R11: 0000000000000246 R12: 0000000000000000
+[    9.659215] R13: 0000000000000000 R14: 0000000000000001 R15: 0000000000020000
+[    9.659867]  </TASK>
+
 
 
 _______________________________________________
