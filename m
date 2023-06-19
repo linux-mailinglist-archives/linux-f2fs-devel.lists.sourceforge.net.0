@@ -2,101 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5AF9733FD0
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 17 Jun 2023 11:01:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E605D734992
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 19 Jun 2023 02:55:00 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qARo3-0005aa-2c;
-	Sat, 17 Jun 2023 09:01:15 +0000
+	id 1qB3AP-0002Zw-7Z;
+	Mon, 19 Jun 2023 00:54:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3U3aNZAkbAKASYZKALLERAPPID.GOOGLEUSERCONTENT.COM@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1qARo1-0005aT-Fc for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 17 Jun 2023 09:01:13 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <chao@kernel.org>) id 1qB3AN-0002Zq-Lq
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jun 2023 00:54:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kCZf97Eox4u67Klmj8lmXvnCId2RnzbotAfmTDKMiNg=; b=l9MQviqYU92rh+yiM59UxEoPkc
- vUBhVsrUIlOhW6AdYB0UMcAxtgH8m7IlhMqbzLcRcZTL63sfqkS6rxGs1z4gw69shGLWgBlqqVSqi
- 1n1VLAuH2h9qh1Ssq2zzWuvDTiEf6app+8v6SEf12w10/qRASjYiqkJfNVLvA/FlF788=;
+ bh=cGk92vVSNERvYh8aQsDJ4uZoMj/oQhhKPaQptFTkXrg=; b=T5Q6M4mAuJAY4XgYLNmuv3kS76
+ qSIFvvMhQiwx5KgaKYb9JU1Q02HfY6NxKWreETZeLOnLW03wi9yxE8a+oG8hZ9+6MgAA2b3uHo5cZ
+ yUT92t483bGcoosf0NoIc+RZ78uF8hihsZoKwTy+8kXete2iGj6xDFcog9EqAcmL7UWw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=kCZf97Eox4u67Klmj8lmXvnCId2RnzbotAfmTDKMiNg=; b=g
- jyUboS2PundKs7pmW7kdprNpL7SCLRZnw2ZjuSC3U1QPGU4Ebh9Aaf7uKQLCs2LknzfVkpotpaZfA
- HzQRdSflVIXxu+taP1b041Ux8zBAhb7SeUhx4SQEdhna9/3j3BHQ0EDYWJH0UyvaPrdChoPJ9XxEb
- 1CA73CuuwR6eHRlM=;
-Received: from mail-io1-f78.google.com ([209.85.166.78])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qARo1-006k34-2W for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 17 Jun 2023 09:01:13 +0000
-Received: by mail-io1-f78.google.com with SMTP id
- ca18e2360f4ac-77ac4aa24eeso150125339f.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 17 Jun 2023 02:01:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686992467; x=1689584467;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kCZf97Eox4u67Klmj8lmXvnCId2RnzbotAfmTDKMiNg=;
- b=faAf72mpDQxY8jLvFaUmcEJXg5PxJtt8+OXX3Aej2eC6rfGGoxOKu2Ml//HkWEz+gl
- 5UGh7/6VCYPQYBMfjGFgAWc/NFg/8Sm3Cv6sKExCflsBvDRhub3dF1+8QYQRMgtyaZ/V
- +ve7EqtHF/tdqO+63WePnq6e1S5FwPLr0mB4JX9ymKRUZGlmiKeM0DlB5+jIJ556eGLg
- xHXgVjTKfKL2t8W3Jb+rps6fHo7RuspIj/H8qoCpN/oBM6fD0dXPI/fTESFUlT3UKorq
- BAoKopuPpCIdTmFIzrfxXlbTbg0qG4Nokv4uK7AqjnAO4Pm0xNFUv5vu4ciVa8tUsSYf
- Ivag==
-X-Gm-Message-State: AC+VfDwSNl0U21yCgTDg4yvRVFfwN861+OD/nDmZ04V6VLWGNkmcMQ1u
- ysSF9jlNnwQF/4PuouPEhBdXNWRFA7/zdHVSm7YafqinwQSc
-X-Google-Smtp-Source: ACHHUZ7cft+FCmnH2pEaVea26oLExDWClBt0nq4LlTvkudLqcfpayVBixd6cQrP8GJx3Xh/TEnyWRwL+ojZSl47nFVcoJ39KXwiF
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=cGk92vVSNERvYh8aQsDJ4uZoMj/oQhhKPaQptFTkXrg=; b=FlsPnrARKd0m8YTDebhY2VuJBW
+ Bt95nMAhoJyZwjHDikMwEqH1J513Qp17401HKpVja1Pz/brL8iSPdC5BRR1As0lTrJ0etKHfDDO/Y
+ 9aVz44PaeDiy6ov65ETsV3WckNZ61WPrXtGuNVVsol9WyorD0KzWyCEs9ZxLG2tKoLbA=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qB3AN-0006XR-OM for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 19 Jun 2023 00:54:48 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 4858060F39;
+ Mon, 19 Jun 2023 00:54:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C03D6C433C9;
+ Mon, 19 Jun 2023 00:54:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1687136077;
+ bh=J5rPQv5FZPHF2Y1H1ENGnLbVVE0JpWkmTsnb0eHScI0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=P8K4CmEjNDfHnh0orkbOZPaEX5mgFJXcCqfNf0JBhIrSAAagGvGRGeZfyFgUp4Y5J
+ juNLAB5KOgahrRYNYG9UkQtwjI5zIfP4R2/kMYjvFEPLltxaSurNxeZF5rENBMpJTR
+ Pz2L546yiFkP/pPV1+7Q+uhZLpLWkxoq56PjVQZmzWahwiRLTnrfuT0pKTph3zpvnd
+ UfOwEKYRP20u8snxlEQ+9+FjqvLkDgkmeGN3kyEPBl8Q5iAbwcAqnf1h+CG+nj2dUu
+ n/1Jc+wi4v8V0eKFRn7Yv8Lb3glrYAjZbUnuI0E0RKLZQroum02RtsS7Bzrlu+kzna
+ us1rDRFrpgFcw==
+Message-ID: <7ab6b6f9-37fa-9bf2-69ce-7b1b1944d9f3@kernel.org>
+Date: Mon, 19 Jun 2023 08:54:33 +0800
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:790:b0:335:ba2a:c3d with SMTP id
- q16-20020a056e02079000b00335ba2a0c3dmr1097467ils.5.1686992467471; Sat, 17 Jun
- 2023 02:01:07 -0700 (PDT)
-Date: Sat, 17 Jun 2023 02:01:07 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000c3329c05fe4f8aa0@google.com>
-From: syzbot <syzbot+c0e3db4f9cd6e05cadd3@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.2
+Content-Language: en-US
+To: Yangtao Li <frank.li@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20230609131555.56651-1-frank.li@vivo.com>
+ <8097d4d9-815e-2527-0fb7-90ec0609a4a3@kernel.org>
+ <dde6972a-e98c-8a6e-493b-9aff5668101d@vivo.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <dde6972a-e98c-8a6e-493b-9aff5668101d@vivo.com>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: b16049b21162
- Add linux-next specific files for 20230614 git tree: linux-next
- console+strace:
- https://syzkaller.appspot.com/x/log.txt?x=134b968d280000 kernel config:
- https://syzkaller.apps [...] 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  On 2023/6/13 12:14, Yangtao Li wrote: > > On 2023/6/12 22:38,
+ Chao Yu wrote: >> On 2023/6/9 21:15, Yangtao Li wrote: >>> It is observed
+ that when in user compression mode >>> (compress_extension=*), > [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.78 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.78 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1qARo1-006k34-2W
-Subject: [f2fs-dev] [syzbot] [f2fs?] possible deadlock in f2fs_file_mmap
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.1 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qB3AN-0006XR-OM
+Subject: Re: [f2fs-dev] [PATCH] f2fs: compress: don't force buffered io when
+ in COMPR_MODE_USER mode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,165 +109,67 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Qi Han <hanqi@vivo.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
-
-syzbot found the following issue on:
-
-HEAD commit:    b16049b21162 Add linux-next specific files for 20230614
-git tree:       linux-next
-console+strace: https://syzkaller.appspot.com/x/log.txt?x=134b968d280000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=d103d5f9125e9fe9
-dashboard link: https://syzkaller.appspot.com/bug?extid=c0e3db4f9cd6e05cadd3
-compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1620a663280000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=1327629b280000
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/a21dda01fc71/disk-b16049b2.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/f31e3fc32b7a/vmlinux-b16049b2.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/3967bcf93010/bzImage-b16049b2.xz
-mounted in repro: https://storage.googleapis.com/syzbot-assets/8deff423ac75/mount_0.gz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+c0e3db4f9cd6e05cadd3@syzkaller.appspotmail.com
-
-======================================================
-WARNING: possible circular locking dependency detected
-6.4.0-rc6-next-20230614-syzkaller #0 Not tainted
-------------------------------------------------------
-syz-executor407/5033 is trying to acquire lock:
-ffff888076c40a28 (&sb->s_type->i_mutex_key#15){+.+.}-{3:3}, at: inode_lock include/linux/fs.h:768 [inline]
-ffff888076c40a28 (&sb->s_type->i_mutex_key#15){+.+.}-{3:3}, at: f2fs_file_mmap+0x154/0x290 fs/f2fs/file.c:527
-
-but task is already holding lock:
-ffff8880787d3768 (&mm->mmap_lock){++++}-{3:3}, at: mmap_write_lock_killable include/linux/mmap_lock.h:110 [inline]
-ffff8880787d3768 (&mm->mmap_lock){++++}-{3:3}, at: vm_mmap_pgoff+0x158/0x3b0 mm/util.c:541
-
-which lock already depends on the new lock.
-
-
-the existing dependency chain (in reverse order) is:
-
--> #1 (&mm->mmap_lock){++++}-{3:3}:
-       down_read+0x9c/0x480 kernel/locking/rwsem.c:1520
-       mmap_read_lock include/linux/mmap_lock.h:142 [inline]
-       do_user_addr_fault+0xb3d/0x1210 arch/x86/mm/fault.c:1391
-       handle_page_fault arch/x86/mm/fault.c:1534 [inline]
-       exc_page_fault+0x98/0x170 arch/x86/mm/fault.c:1590
-       asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
-       fault_in_readable+0x129/0x210 mm/gup.c:1928
-       fault_in_iov_iter_readable+0x252/0x2c0 lib/iov_iter.c:216
-       f2fs_preallocate_blocks fs/f2fs/file.c:4508 [inline]
-       f2fs_file_write_iter+0x516/0x2500 fs/f2fs/file.c:4744
-       call_write_iter include/linux/fs.h:1865 [inline]
-       new_sync_write fs/read_write.c:491 [inline]
-       vfs_write+0x960/0xd70 fs/read_write.c:584
-       ksys_write+0x122/0x250 fs/read_write.c:637
-       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
-       do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
-       entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
--> #0 (&sb->s_type->i_mutex_key#15){+.+.}-{3:3}:
-       check_prev_add kernel/locking/lockdep.c:3142 [inline]
-       check_prevs_add kernel/locking/lockdep.c:3261 [inline]
-       validate_chain kernel/locking/lockdep.c:3876 [inline]
-       __lock_acquire+0x2e9d/0x5e20 kernel/locking/lockdep.c:5144
-       lock_acquire.part.0+0x11c/0x370 kernel/locking/lockdep.c:5761
-       down_write+0x92/0x200 kernel/locking/rwsem.c:1573
-       inode_lock include/linux/fs.h:768 [inline]
-       f2fs_file_mmap+0x154/0x290 fs/f2fs/file.c:527
-       call_mmap include/linux/fs.h:1870 [inline]
-       mmap_region+0x99c/0x2770 mm/mmap.c:2675
-       do_mmap+0x850/0xee0 mm/mmap.c:1367
-       vm_mmap_pgoff+0x1a2/0x3b0 mm/util.c:543
-       ksys_mmap_pgoff+0x42b/0x5b0 mm/mmap.c:1413
-       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
-       do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
-       entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
-other info that might help us debug this:
-
- Possible unsafe locking scenario:
-
-       CPU0                    CPU1
-       ----                    ----
-  lock(&mm->mmap_lock);
-                               lock(&sb->s_type->i_mutex_key#15);
-                               lock(&mm->mmap_lock);
-  lock(&sb->s_type->i_mutex_key#15);
-
- *** DEADLOCK ***
-
-1 lock held by syz-executor407/5033:
- #0: ffff8880787d3768 (&mm->mmap_lock){++++}-{3:3}, at: mmap_write_lock_killable include/linux/mmap_lock.h:110 [inline]
- #0: ffff8880787d3768 (&mm->mmap_lock){++++}-{3:3}, at: vm_mmap_pgoff+0x158/0x3b0 mm/util.c:541
-
-stack backtrace:
-CPU: 1 PID: 5033 Comm: syz-executor407 Not tainted 6.4.0-rc6-next-20230614-syzkaller #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 05/27/2023
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:88 [inline]
- dump_stack_lvl+0xd9/0x150 lib/dump_stack.c:106
- check_noncircular+0x2df/0x3b0 kernel/locking/lockdep.c:2195
- check_prev_add kernel/locking/lockdep.c:3142 [inline]
- check_prevs_add kernel/locking/lockdep.c:3261 [inline]
- validate_chain kernel/locking/lockdep.c:3876 [inline]
- __lock_acquire+0x2e9d/0x5e20 kernel/locking/lockdep.c:5144
- lock_acquire.part.0+0x11c/0x370 kernel/locking/lockdep.c:5761
- down_write+0x92/0x200 kernel/locking/rwsem.c:1573
- inode_lock include/linux/fs.h:768 [inline]
- f2fs_file_mmap+0x154/0x290 fs/f2fs/file.c:527
- call_mmap include/linux/fs.h:1870 [inline]
- mmap_region+0x99c/0x2770 mm/mmap.c:2675
- do_mmap+0x850/0xee0 mm/mmap.c:1367
- vm_mmap_pgoff+0x1a2/0x3b0 mm/util.c:543
- ksys_mmap_pgoff+0x42b/0x5b0 mm/mmap.c:1413
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7f5f44cdf4d9
-Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 b1 14 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007f5f3dc292f8 EFLAGS: 00000246 ORIG_RAX: 0000000000000009
-RAX: ffffffffffffffda RBX: 00007f5f44d696f8 RCX: 00007f5f44cdf4d9
-RDX: 000000000000000b RSI: 0000000000b36000 RDI: 0000000020000000
-RBP: 00007f5f44d696f0 R08: 0000000000000004 R09: 0000000000000000
-R10: 0000000000028011 R11: 0000000000000246 R12: 00007f5f44d696fc
-R13: 656d6974797a616c R14: 746e657478656f6e R15: 0000000000022000
- </TASK>
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
-If the bug is already fixed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
-
-If you want to change bug's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the bug is a duplicate of another bug, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMjAyMy82LzEzIDEyOjE0LCBZYW5ndGFvIExpIHdyb3RlOgo+IAo+IE9uIDIwMjMvNi8xMiAy
+MjozOCwgQ2hhbyBZdSB3cm90ZToKPj4gT24gMjAyMy82LzkgMjE6MTUsIFlhbmd0YW8gTGkgd3Jv
+dGU6Cj4+PiBJdCBpcyBvYnNlcnZlZCB0aGF0IHdoZW4gaW4gdXNlciBjb21wcmVzc2lvbiBtb2Rl
+Cj4+PiAoY29tcHJlc3NfZXh0ZW5zaW9uPSopLAo+Pj4gZXZlbiB0aG91Z2ggdGhlIGZpbGUgaXMg
+bm90IGNvbXByZXNzZWQsIHRoZSBmaWxlIGlzIHN0aWxsIGZvcmNlZCB0byB1c2UKPj4+IGJ1ZmZl
+ciBpbywgd2hpY2ggbWFrZXMgdGhlIEFuZHJvQmVuY2ggc2VxdWVudGlhbCByZWFkIGFuZCB3cml0
+ZSBkcm9wCj4+PiBzaWduaWZpY2FudGx5LiBJbiBmYWN0LCB3aGVuIHRoZSBmaWxlIGlzIG5vdCBj
+b21wcmVzc2VkLCB3ZSBkb24ndCBuZWVkCj4+PiB0byBmb3JjZSBpdCB0byBidWZmZXIgaW8uCj4+
+Pgo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCB3L28gcGF0Y2ggfCB3
+LyBwYXRjaCB8Cj4+PiBzZXEgcmVhZMKgIChNQi9zKSB8IDEzMjAuMDY4wqAgfCAzNjk2LjE1NCB8
+Cj4+PiBzZXEgd3JpdGUgKE1CL3MpIHwgNjE3Ljk5NsKgwqAgfCAyOTc4LjQ3OCB8Cj4+Pgo+Pj4g
+Rml4ZXM6IDRjOGZmNzA5NWJlZiAoImYyZnM6IHN1cHBvcnQgZGF0YSBjb21wcmVzc2lvbiIpCj4+
+PiBTaWduZWQtb2ZmLWJ5OiBRaSBIYW4gPGhhbnFpQHZpdm8uY29tPgo+Pj4gU2lnbmVkLW9mZi1i
+eTogWWFuZ3RhbyBMaSA8ZnJhbmsubGlAdml2by5jb20+Cj4+PiAtLS0KPj4+ICDCoCBmcy9mMmZz
+L2YyZnMuaCB8IDE0ICsrKysrKysrKysrKysrCj4+PiAgwqAgZnMvZjJmcy9maWxlLmMgfMKgIDIg
+Ky0KPj4+ICDCoCAyIGZpbGVzIGNoYW5nZWQsIDE1IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24o
+LSkKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9mMmZzLmggYi9mcy9mMmZzL2YyZnMuaAo+
+Pj4gaW5kZXggMWVmY2ZkOWU1YTk5Li43ZjU0NzI1MjUzMTAgMTAwNjQ0Cj4+PiAtLS0gYS9mcy9m
+MmZzL2YyZnMuaAo+Pj4gKysrIGIvZnMvZjJmcy9mMmZzLmgKPj4+IEBAIC0zMTY4LDYgKzMxNjgs
+MjAgQEAgc3RhdGljIGlubGluZSBpbnQgZjJmc19jb21wcmVzc2VkX2ZpbGUoc3RydWN0Cj4+PiBp
+bm9kZSAqaW5vZGUpCj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgIGlzX2lub2RlX2ZsYWdfc2V0KGlu
+b2RlLCBGSV9DT01QUkVTU0VEX0ZJTEUpOwo+Pj4gIMKgIH0KPj4+ICDCoCArc3RhdGljIGlubGlu
+ZSBib29sIGYyZnNfaXNfY29tcHJlc3NlZF9maWxlKHN0cnVjdCBpbm9kZSAqaW5vZGUpCj4+PiAr
+ewo+Pj4gK8KgwqDCoCBpbnQgY29tcHJlc3NfbW9kZSA9IEYyRlNfT1BUSU9OKEYyRlNfSV9TQihp
+bm9kZSkpLmNvbXByZXNzX21vZGU7Cj4+PiArCj4+PiArwqDCoMKgIGlmIChjb21wcmVzc19tb2Rl
+ID09IENPTVBSX01PREVfRlMpCj4+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIGYyZnNfY29tcHJl
+c3NlZF9maWxlKGlub2RlKTsKPj4+ICvCoMKgwqAgZWxzZSBpZiAoYXRvbWljX3JlYWQoJkYyRlNf
+SShpbm9kZSktPmlfY29tcHJfYmxvY2tzKSB8fAo+Pgo+PiBTaG91bGQgY2hlY2sgZGlydHkgcGFn
+ZSBhcyB3ZWxsPyBpX2NvbXByX2Jsb2NrcyBtYXkgaW5jcmVhc2UgYWZ0ZXIKPj4gZGF0YSB3cml0
+ZWJhY2suCj4+Cj4gSUlVQywgaW4gQ09NUFJfTU9ERV9VU0VSIG1vZGUsIGlfY29tcHJfYmxvY2tz
+IHdpbGwgb25seSBiZSB1cGRhdGVkIHdoZW4KPiBGSV9FTkFCTEVfQ09NUFJFU1MgaXMgZW5hYmxl
+ZC4KPiAKPiBJZiBGSV9FTkFCTEVfQ09NUFJFU1MgaXMgbm90IGVuYWJsZWQsIGlfY29tcHJfYmxv
+Y2tzIHdpbGwgbmV2ZXIgYmUKPiB1cGRhdGVkIGFmdGVyIGRhdGEgd3JpdGViYWNrLgo+IAo+IFNv
+IHRoZXJlIGlzIG5vIG5lZWQgdG8gYWRkaXRpb25hbGx5IGp1ZGdlIHdoZXRoZXIgdGhlcmUgaXMg
+YSBkaXJ0eSBwYWdlPwoKT2gsIHVzZXIgbW9kZSwgdGhhdCdzIGNvcnJlY3QuCgpJZiB3ZSBhbGxv
+dyBkaW8vYWlvIG9uIGNvbXByZXNzIGZpbGUsIGl0IG5lZWRzIHRvIGNvbnNpZGVyIHJhY2UgY2Fz
+ZSBpbgpiZXR3ZWVuIGFpbyBhbmQgaW9jX2NvbXByZXNzX2ZpbGUuCgpUaGFua3MsCgo+IAo+IAo+
+IFRoYW5rcywKPiAKPj4gVGhhbmtzLAo+Pgo+Pj4gK8KgwqDCoMKgwqDCoMKgIGlzX2lub2RlX2Zs
+YWdfc2V0KGlub2RlLCBGSV9DT01QUkVTU19SRUxFQVNFRCkgfHwKPj4+ICvCoMKgwqDCoMKgwqDC
+oCBpc19pbm9kZV9mbGFnX3NldChpbm9kZSwgRklfRU5BQkxFX0NPTVBSRVNTKSkKPj4+ICvCoMKg
+wqDCoMKgwqDCoCByZXR1cm4gdHJ1ZTsKPj4+ICsKPj4+ICvCoMKgwqAgcmV0dXJuIGZhbHNlOwo+
+Pj4gK30KPj4+ICsKPj4+ICDCoCBzdGF0aWMgaW5saW5lIGJvb2wgZjJmc19uZWVkX2NvbXByZXNz
+X2RhdGEoc3RydWN0IGlub2RlICppbm9kZSkKPj4+ICDCoCB7Cj4+PiAgwqDCoMKgwqDCoCBpbnQg
+Y29tcHJlc3NfbW9kZSA9IEYyRlNfT1BUSU9OKEYyRlNfSV9TQihpbm9kZSkpLmNvbXByZXNzX21v
+ZGU7Cj4+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9maWxlLmMgYi9mcy9mMmZzL2ZpbGUuYwo+Pj4g
+aW5kZXggNzRlY2M5ZTIwNjE5Li4wNjk4MTI5YjIxNjUgMTAwNjQ0Cj4+PiAtLS0gYS9mcy9mMmZz
+L2ZpbGUuYwo+Pj4gKysrIGIvZnMvZjJmcy9maWxlLmMKPj4+IEBAIC04MjEsNyArODIxLDcgQEAg
+c3RhdGljIGJvb2wgZjJmc19mb3JjZV9idWZmZXJlZF9pbyhzdHJ1Y3QgaW5vZGUKPj4+ICppbm9k
+ZSwgaW50IHJ3KQo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gdHJ1ZTsKPj4+ICDCoMKg
+wqDCoMKgIGlmIChmc3Zlcml0eV9hY3RpdmUoaW5vZGUpKQo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDC
+oCByZXR1cm4gdHJ1ZTsKPj4+IC3CoMKgwqAgaWYgKGYyZnNfY29tcHJlc3NlZF9maWxlKGlub2Rl
+KSkKPj4+ICvCoMKgwqAgaWYgKGYyZnNfaXNfY29tcHJlc3NlZF9maWxlKGlub2RlKSkKPj4+ICDC
+oMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIHRydWU7Cj4+PiAgwqAgwqDCoMKgwqDCoCAvKiBkaXNh
+bGxvdyBkaXJlY3QgSU8gaWYgYW55IG9mIGRldmljZXMgaGFzIHVuYWxpZ25lZCBibGtzaXplICov
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgt
+ZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3Jn
+ZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgt
+ZjJmcy1kZXZlbAo=
