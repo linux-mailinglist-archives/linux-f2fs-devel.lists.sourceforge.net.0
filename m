@@ -2,115 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDCE4735FD1
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jun 2023 00:26:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE680736098
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jun 2023 02:34:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qBNK6-0000LT-8d;
-	Mon, 19 Jun 2023 22:26:11 +0000
+	id 1qBPJi-0001SQ-13;
+	Tue, 20 Jun 2023 00:33:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <axboe@kernel.dk>) id 1qBNJv-0000LF-Nw
+ (envelope-from <chao@kernel.org>) id 1qBPJg-0001SK-MT
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jun 2023 22:26:00 +0000
+ Tue, 20 Jun 2023 00:33:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Subject:From
- :Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oC2tnKZazU9uVlrm2A6bHgfVySKOOyCWLXqbM4UiIQg=; b=QgRZu835b6QZ/V6goWPKanRJVh
- z6WrRLnOiKYjCEzHWlQZ+ibFzYbxcN1fD1n8EYN9kKqKH1oGon1iiGD/eJHK8hrFk3LxoKF20Z+Ds
- gbBd/3boS2VyQaSfW0aJTd/Eyt0HdfEUFpLBN4CJvi3v/Wg2227g4pksnQMBjsKKFxmA=;
+ bh=aNXV21OsSt7gI/n/3PefRlJKDR0R38lN2SdtU/cKoZk=; b=N7xYC2OF0f+8423YptqVD39sbw
+ zD/v+0ZBS9L7lJqgZmMYAkIBNSEnnPeoS9eu/nGT0UFhpcBJ+vws6pHc7qUAJIarIIW+kOnxDWekk
+ tt3ifu0C3D1tnEHBjIqobPVfFUWmP5Wr+YvIjNtxdRqf1yofymp+r/dC1JFBtkQyDMN4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Subject:From:Cc:To:MIME-Version:
- Date:Message-ID:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=oC2tnKZazU9uVlrm2A6bHgfVySKOOyCWLXqbM4UiIQg=; b=k
- 9iI3lKqVkMSfUwVQFqB/3+zgctpVl+IwGD15mIfj24qGB7RBqhc1l71iKBWnFF9KZStzlswWauC2q
- xdFn1G2Xd1wz98TbuQek1Sv3S7TyembvzmPmZpAepRGorlhmEn3noD115QOZSgEIwVwbt57g3UIhT
- 1sV45fHBx9xSIWPg=;
-Received: from mail-pf1-f180.google.com ([209.85.210.180])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qBNJo-0093gU-GR for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 19 Jun 2023 22:25:59 +0000
-Received: by mail-pf1-f180.google.com with SMTP id
- d2e1a72fcca58-6664ac3be47so711010b3a.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 19 Jun 2023 15:25:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel-dk.20221208.gappssmtp.com; s=20221208; t=1687213547; x=1689805547;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oC2tnKZazU9uVlrm2A6bHgfVySKOOyCWLXqbM4UiIQg=;
- b=iT9sfERL0SiBK1+79KP0UrfBj6j67RllURl+rtgoxgvPiToOhdaCisYQuvodFK1YQE
- wKU+GU08QFtwiBrnXAJw6lJWA7Karn/K7WXF+IZCdnhs5EMmtpn+El9exjSXApYbNY0X
- xsLzYr7kNxGxynLeom3YF6mvpyGv6OuHJu+6JA6gxUOQPtSFxLoh7XBJaDdmEmROUrVm
- HVzsOzZm+WhQL9ZSRBczJBewQVEO0yFblJ4a50Hau3IQHgyTHXEkOkly9jmzv6ec/bd5
- ja6w17hsyfOi/qgO+SZGbJdT1/uukHDXAez396VMV2t0IeZA1QxZ6Ruq1Q2tyoZc2ioy
- Mj5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687213547; x=1689805547;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=oC2tnKZazU9uVlrm2A6bHgfVySKOOyCWLXqbM4UiIQg=;
- b=c14J9jUN44VlSjgbS+UKmTM2nbmy3Z0eZoccRBLU2XFHjlsBNewOzkIS2Y5/TfctNG
- dsvgwDoAgE/1LlzwHhBVN+QrH4Qs6wAf7sy2wCC9P+Q/9ty0bUf+x3M9VburMmoKE4Ok
- eHvcvXtQm6kYhwoCPvxbQx8V+C5YZtkB1s8Q81MNypSRw8gtCAl1f3ZaD8Sza9DY0hp6
- iV+PIkAM0ysWwRIVVXljfXnIAolw3kC0rU9KY3ws6gPnOgcXQOq2haW2zDoLTqb+lelW
- KRFNj2KkTWBcOjHz1gHMj9BNvCIm8pI0Pq3En6rLIdTrFa5/pF5Rnw0yCcwx3QjEFaxB
- SoTA==
-X-Gm-Message-State: AC+VfDxI+lXfFvwR7hoyzYt1UA4NECURVQfUdJHPM72a4jRJo2adF95h
- 2vuRwfQS6aVgo1G81iBHR7kGJkV0MkB5pe6r6w8=
-X-Google-Smtp-Source: ACHHUZ5dDre5JtwuZeS25jOuzOzvltt1rhev/GGrypbNGHP5rit3XtWQeaKUe6C2Iv3OsmxEJsi0GA==
-X-Received: by 2002:a17:903:1105:b0:1b3:ebda:654e with SMTP id
- n5-20020a170903110500b001b3ebda654emr12740048plh.5.1687207438599; 
- Mon, 19 Jun 2023 13:43:58 -0700 (PDT)
-Received: from [192.168.1.136] ([198.8.77.157])
- by smtp.gmail.com with ESMTPSA id
- jl17-20020a170903135100b001a65fa33e62sm235362plb.154.2023.06.19.13.43.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 19 Jun 2023 13:43:57 -0700 (PDT)
-Message-ID: <1dc1a0f2-9be4-8ae0-da26-3c00c8a71b41@kernel.dk>
-Date: Mon, 19 Jun 2023 14:43:56 -0600
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=aNXV21OsSt7gI/n/3PefRlJKDR0R38lN2SdtU/cKoZk=; b=bu//xoWTriIU2j+IH+FDngULjq
+ Cf6wWuN1pVATW1Zy6c6UrHypg0f2cMCClMVYmUY6LELrTxGZNz5qoJRqv62jErMrzen/J9qp3yJ7E
+ qXGOniqFw/RGMkbeueF18uol3Pkof9ujjnvVMHWcy42seN7aN20+nPvwcDs3jfhGTSmc=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qBPJc-0000la-SF for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Jun 2023 00:33:53 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 706CD60C74;
+ Tue, 20 Jun 2023 00:33:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51F13C433C0;
+ Tue, 20 Jun 2023 00:33:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1687221222;
+ bh=2fIhx9gewgHQdAG7ylH52oVyteZ+F4kPWjIGNK8Ut3g=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=m8uf3fI1rWhcDoQc1vzBdZELxEoK+yqcFGwVQIhjuDHQqVMTtD0uRQQ2Bcujun0DY
+ Kg/cB9HATnKguN9rHJp+bGbSXAFjT/2o5GwawmSNRXWOk6Qxe6O4bHt16L8LUmaRuV
+ mMKf+6Kew4YAwDOg02Sf6rjsc72Hd/rx2ESgAeCVOqQ2LCo5YwszxhfLe6Pfqq34x8
+ rFMqyz8qI6+TfgGdctzolZ/EU2PxrtJmpInHpuwL5rUFBM0ULBDb7ST5J9EYx54A8z
+ hEVNljD126RpkA96NjNOGg0NssXNHqELKZNT2dsDaRK5GwUaOaYiabdjxDEB5XTges
+ n3YuMusFEmEEQ==
+Message-ID: <b8523d41-246b-b11e-f6e3-423e32cc597a@kernel.org>
+Date: Tue, 20 Jun 2023 08:33:38 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.2
 Content-Language: en-US
-To: Yangtao Li <frank.li@vivo.com>
-From: Jens Axboe <axboe@kernel.dk>
-X-Spam-Score: -0.0 (/)
+To: Yunlei He <heyunlei@oppo.com>, jaegeuk@kernel.org
+References: <20230613085250.3648491-1-heyunlei@oppo.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20230613085250.3648491-1-heyunlei@oppo.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi,
- I came across this patch in a news posting:
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=d618126911829523e35a61f4a5a4ad159b1b2c8d
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  On 2023/6/13 16:52, Yunlei He wrote: > File set both cold
+ and hot advise bit is confusion, so > return EINVAL to avoid this case. >
+ > Signed-off-by: Yunlei He <heyunlei@oppo.com> > --- > fs/f2fs/xattr [...]
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.180 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.180 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1qBNJo-0093gU-GR
-Subject: [f2fs-dev] f2fs async buffered write patch
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qBPJc-0000la-SF
+Subject: Re: [f2fs-dev] [PATCH] f2fs: not allowed to set file both cold and
+ hot
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,43 +107,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, LKML <linux-kernel@vger.kernel.org>,
- Lu Hongfei <luhongfei@vivo.com>, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi,
+On 2023/6/13 16:52, Yunlei He wrote:
+> File set both cold and hot advise bit is confusion, so
+> return EINVAL to avoid this case.
+> 
+> Signed-off-by: Yunlei He <heyunlei@oppo.com>
+> ---
+>   fs/f2fs/xattr.c | 3 +++
+>   1 file changed, 3 insertions(+)
+> 
+> diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+> index 213805d3592c..917f3ac9f1a1 100644
+> --- a/fs/f2fs/xattr.c
+> +++ b/fs/f2fs/xattr.c
+> @@ -127,6 +127,9 @@ static int f2fs_xattr_advise_set(const struct xattr_handler *handler,
+>                  return -EINVAL;
+> 
+>          new_advise = new_advise & FADVISE_MODIFIABLE_BITS;
+> +       if ((new_advise & FADVISE_COLD_BIT) && (new_advise & FADVISE_HOT_BIT))
+> +               return -EINVAL;
 
-I came across this patch in a news posting:
+Yunlei,
 
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=d618126911829523e35a61f4a5a4ad159b1b2c8d
+What about the below case:
 
-which has me a bit worried. As far as I can tell, all that patch does is
-set FMODE_BUF_WASYNC, and then just hope that the lower layers handle
-the rest?
+1. f2fs_xattr_advise_set(FADVISE_COLD_BIT)
+2. f2fs_xattr_advise_set(FADVISE_HOT_BIT)
 
-What happens if iocb->ki_flags & IOCB_NOWAIT is true, and now we do:
+Thanks,
 
-generic_perform_write(iocb, from)
-	...
-	->write_begin() <- does this block?
-	...
-	->write_end() <- or this one?
-	...
-	balance_dirty_pages_ratelimited() <- this one surely does...
-
-If you look just one level down the latter to
-balance_dirty_pages_ratelimited_flags(), you'll even see the 'flags'
-argument documented there.
-
-This looks pretty haphazard and cannot possibly work as-is, so please
-get this reverted until f2fs is converted to iomap, or IOCB_NOWAIT is
-handled by generic_perform_write() and below.
-
--- 
-Jens Axboe
-
+> +
+>          new_advise |= old_advise & ~FADVISE_MODIFIABLE_BITS;
+> 
+>          F2FS_I(inode)->i_advise = new_advise;
+> --
 
 
 _______________________________________________
