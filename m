@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA6D0736375
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jun 2023 08:16:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0052D736384
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 20 Jun 2023 08:21:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qBUfS-00057X-1B;
-	Tue, 20 Jun 2023 06:16:42 +0000
+	id 1qBUjs-0007xB-01;
+	Tue, 20 Jun 2023 06:21:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1qBUfE-00057M-17
+ (envelope-from <jaegeuk@kernel.org>) id 1qBUjq-0007x4-F6
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Jun 2023 06:16:28 +0000
+ Tue, 20 Jun 2023 06:21:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8W2DEuD87GIO7/1vXptKoP66YMqcW7HNrOQF79P3wa8=; b=FMqMNGyv5DHawb9fWB+VMquEWq
- LExJKBcr+aZ6y43fMq58Xv7Qkjn8rIpfaZMt4pYq4CXahpCuoJYpcJAuPs618IuVXgXLE0+cBFyYZ
- obfMpzmibEKsNNoMZrrRaoKSv6/faKEMJsBqY3wLMWvOG4ipLlQMp7XmGf0XXFAnziD0=;
+ bh=FLhDuaK+KUTsENCj+dFycBBE3xj46JtEPCzSUFxPqtg=; b=dTlPUGiZtFACfsE6VpqgHrlTGa
+ 8JSF85g6jOOuT6ba6zZYfappBMITdpIzdBsE9mP6J9btW0ZZKAA8C31nuJ1ZnRP5ku7eOokDUKBAZ
+ ktHGvJJP4w3hiWq0vmI7OcYY7weYVg21tpTYzbLdd7QSnjlexjohO5VUlWtTtnnYiS84=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,51 +31,53 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8W2DEuD87GIO7/1vXptKoP66YMqcW7HNrOQF79P3wa8=; b=lHFFPrxefACwDWKrG6+2zG8fJr
- upjlPSv6piQDfyAxbZWCoTh6pTQfPlW0Pyelk39v9zzLlPxlJAx6+JDzV0ia+j1Bd2ZrLyDOHTvEk
- 1Mcdcd7h1mxXbwubpRA+Lt7+uTJZHqVdriQJUPnUBdzKLMcGghXxtUF8ZFpa8Rc1Q0HA=;
+ bh=FLhDuaK+KUTsENCj+dFycBBE3xj46JtEPCzSUFxPqtg=; b=ZKxA6HDRuAHGmo5+DyJeVxwC9u
+ F+QtFshBRwA5UZY2u07+YgsP9VRULJo+2MH5+20EID+Ph3dIaL0hBHxsRrmVD6kVt6tTYMoXbAP2f
+ VnRD7bzrz9xvNep8o1SQG5SbQ0YpCBiZbvgpeI9gb97BKAMCbpso1K1SOuGquRjAYwfc=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qBUfD-00024U-U7 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 20 Jun 2023 06:16:28 +0000
+ id 1qBUjq-009KoJ-Od for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 20 Jun 2023 06:21:15 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8485C60EA9;
- Tue, 20 Jun 2023 06:16:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5C47C433C8;
- Tue, 20 Jun 2023 06:16:21 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7EBB560D2C;
+ Tue, 20 Jun 2023 06:21:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6E14C433C0;
+ Tue, 20 Jun 2023 06:21:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1687241781;
- bh=LMpBGTUUUELkIM6EQvSKyMUkDFcwpA6qZ213us++S/A=;
+ s=k20201202; t=1687242067;
+ bh=sEap7AtmGyj6ny2xcB77NlrkCp0q4sTLn1Jg45n5M8k=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=McUN6c30/9B3DyabSlV3RNOLOHpvJxz3x2/QO/PqBi1TJJTBj3ovgS4HP0J/GaEXe
- KDhYuEFd7/lPv4hkpbvMCsxo5+Me0Ixyf9I/NUQjXVT4G6twavRfo5HcXshpgWFF5G
- MlrdanTDPkbYMwgsyND8dU3Jw1wKB2kxOVYSO+XXWESEy4pXfYBwZC/nRoON+mTobc
- QB1yN0kBk/rlxO9no3utaa4R6KHWzbfzdCvjzhtVqwnw3wfTSWsxdG8f9KRmpci8PJ
- s+viyKm8QgrKQX3aEy6cc0z5btJ0KGd4FDQzZjdwY991SaF5kuwphQq4SgCoJyb9Gz
- 3EyLjHvJxcB5Q==
-Date: Mon, 19 Jun 2023 23:16:20 -0700
+ b=hHlr6iiLgaTzT0h0qDFm0ofeichsRQ137PSvtADwNRjz4eHx+fCOYy3UJgHccElyK
+ lrnuEpGz6mRdu4zbhNYI9QZyaAtIqKRyd2c6opwWFBm9WSrVBe6TlXZunw2+9B3A1K
+ maYU3VLS5r41tNexlaj/K/2qJzZr/2et2c3b7IE0Pq6yaXnj7lswBDhQf3Dz2vts0i
+ zKOy1kXF/Ge11JJwtMCIDUI8ZZn9EXPnF4uaELh2H0Oz58mJmkxXwfgF7vuOp86DFn
+ D25m2RmvmcolsE/rOTtl/pkfg/ENOXnIdfro8cX7ofz4rXWi6L4hksuCeF5S/FHfE6
+ yEMAwc4Xf8Mxg==
+Date: Mon, 19 Jun 2023 23:21:06 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Jens Axboe <axboe@kernel.dk>
-Message-ID: <ZJFENFDFVx++RmhA@google.com>
-References: <1dc1a0f2-9be4-8ae0-da26-3c00c8a71b41@kernel.dk>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZJFFUuB6EemEg/DH@google.com>
+References: <20230425165857.29175-1-frank.li@vivo.com>
+ <5409930b-4379-b279-886b-a05149436a68@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1dc1a0f2-9be4-8ae0-da26-3c00c8a71b41@kernel.dk>
-X-Spam-Score: -5.9 (-----)
+In-Reply-To: <5409930b-4379-b279-886b-a05149436a68@kernel.org>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 06/19, Jens Axboe wrote: > Hi,
- > > I came across this patch in a news posting: > >
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=d618126911829523e35a61f4a5a4ad15
- [...] Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 06/19, Chao Yu wrote: > On 2023/4/26 0:58,
+ Yangtao Li wrote:
+ > > This information can now be obtained from the mount, and there isi >
+ > no need to print it out every time the trace event is trigger [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -84,13 +86,14 @@ X-Spam-Report: Spam detection software,
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qBUfD-00024U-U7
-Subject: Re: [f2fs-dev] f2fs async buffered write patch
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qBUjq-009KoJ-Od
+Subject: Re: [f2fs-dev] [PATCH] f2fs: no need test opt for f2fs_issue_flush
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,50 +105,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net, LKML <linux-kernel@vger.kernel.org>,
- Lu Hongfei <luhongfei@vivo.com>, Yangtao Li <frank.li@vivo.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org,
+ Yangtao Li <frank.li@vivo.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 06/19, Jens Axboe wrote:
-> Hi,
+On 06/19, Chao Yu wrote:
+> On 2023/4/26 0:58, Yangtao Li wrote:
+> > This information can now be obtained from the mount, and there isi
+> > no need to print it out every time the trace event is triggered.
 > 
-> I came across this patch in a news posting:
+> It makes sense.
 > 
-> https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=d618126911829523e35a61f4a5a4ad159b1b2c8d
-> 
-> which has me a bit worried. As far as I can tell, all that patch does is
-> set FMODE_BUF_WASYNC, and then just hope that the lower layers handle
-> the rest?
-> 
-> What happens if iocb->ki_flags & IOCB_NOWAIT is true, and now we do:
-> 
-> generic_perform_write(iocb, from)
-> 	...
-> 	->write_begin() <- does this block?
-> 	...
-> 	->write_end() <- or this one?
-> 	...
-> 	balance_dirty_pages_ratelimited() <- this one surely does...
-> 
-> If you look just one level down the latter to
-> balance_dirty_pages_ratelimited_flags(), you'll even see the 'flags'
-> argument documented there.
-> 
-> This looks pretty haphazard and cannot possibly work as-is, so please
-> get this reverted until f2fs is converted to iomap, or IOCB_NOWAIT is
-> handled by generic_perform_write() and below.
+> Jaegeuk, is it intentional to print mount option in f2fs_issue_flush
+> tracepoint?
 
-Thank you for pointing that out. It seems I haven't reviewed it carefully.
-Hence I removed it from -next, and hope to have some time to convert iomap
-soon.
-
-Thanks,
+I don't remember tho, do we have a strong reason to change the tracepoint?
 
 > 
-> -- 
-> Jens Axboe
+> Thanks,
 
 
 _______________________________________________
