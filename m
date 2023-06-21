@@ -2,79 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E5C1738FF6
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jun 2023 21:22:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3285B73906B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 21 Jun 2023 21:53:04 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qC3PB-0004Ua-A9;
-	Wed, 21 Jun 2023 19:22:13 +0000
+	id 1qC3sv-0004ve-SE;
+	Wed, 21 Jun 2023 19:52:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <SRS0=fXM2=CJ=goodmis.org=rostedt@kernel.org>)
- id 1qC3P9-0004UL-7e; Wed, 21 Jun 2023 19:22:11 +0000
+ (envelope-from <jlayton@kernel.org>) id 1qC3st-0004vF-Ag;
+ Wed, 21 Jun 2023 19:52:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=f7ZPpeY/pUTL/3pt09RFwymSSI1p5pOpdla6e7cL0TQ=; b=M+cDxDViENXMv+nwY6z7+e1SWj
- YZf7OaHhuwcvIP5EAx2eguZ38xuCbzW7FVES+NZbEVYGUNjJkPqlfsrX4702RCNZePs52Gzj4ZIxz
- hZASiQ0fHG7wSjEdRYJyNa+ndmR+r371DANIBBn4+nX+xY1goT0if1uZpm7IvThmcnWI=;
+ bh=vTL4Y8a8sFEsX3Xqt4OIZCRU2/7UfNvPDdjp0N/3dJE=; b=Qv7N8ohYZEKayzuz+tbSgJx5m1
+ /az6xyi2kjYUmcXfdDna+II3ZP/anPDPF4FnKzSylK9Va1+gtEOiwDL9cWkfwyLYw53k0+uPrCldY
+ 4UUnHDsaPjcLFdIZfvKCOTYh4erzgGmjFzyrv/bHfCffLRRfnQO4ZgDsKi1oZIPXiGGM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=f7ZPpeY/pUTL/3pt09RFwymSSI1p5pOpdla6e7cL0TQ=; b=XHEa2S0iqKqfmefCzF+dV+umJr
- 2VnVnTyCUg669brdUdJH2/z6+lqPDTWkEPl8RCPgE//O524vGkf3jidSs2TnTu3zFCmUMdHwehYbv
- o9pKLqxZ4/gZMtRNKnBedpHQWNjnKXg04tAO9uGrpwnsIa7X6N0yaSbQU4SaDILuU+nc=;
+ bh=vTL4Y8a8sFEsX3Xqt4OIZCRU2/7UfNvPDdjp0N/3dJE=; b=Ow7j/dYddZMiUCMz5rY/RONTRE
+ eIA+5HqJDUQ6mALg11iuMMsr5IjGpMaT69Qq5EgDi++mtTVVVBQJth8vj2RNU+pIMEIkYLUmA48YV
+ kg0rovCLy0D+7Yie7DdVJSgMYB3hqOZzXZikF6ZJwQrwkuYmejSXYv0MWiGcQvDqdEb4=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qC3P8-00At1G-H0; Wed, 21 Jun 2023 19:22:11 +0000
+ id 1qC3sp-00Au5J-HA; Wed, 21 Jun 2023 19:52:55 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 21AE7616A1;
- Wed, 21 Jun 2023 19:22:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7D03C433C0;
- Wed, 21 Jun 2023 19:21:43 +0000 (UTC)
-Date: Wed, 21 Jun 2023 15:21:41 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <20230621152141.5961cf5f@gandalf.local.home>
-In-Reply-To: <20230621144507.55591-1-jlayton@kernel.org>
+ by dfw.source.kernel.org (Postfix) with ESMTPS id F2B69616B0;
+ Wed, 21 Jun 2023 19:52:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89C99C433C8;
+ Wed, 21 Jun 2023 19:52:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1687377165;
+ bh=vTL4Y8a8sFEsX3Xqt4OIZCRU2/7UfNvPDdjp0N/3dJE=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=tBqvzi0BueVyLSEbesqZv6Z2lEPP3VHDK/0ro+NhJgrWCN7POU/GnsfWmg+au/I1/
+ qhi//1NZGnRyBWC+DfSRBIODYBQomanDaEsbNql7Uti143OqrGRxW4LYitKm3HOUFm
+ 3AFCsCq6C4olFaFCKGiCtIGy0tLgZnX0NusQlw4HgjVra9Ac5A8Ylg7+9/P0lUpR5a
+ +VLBtjm16h891O76lVM1Ta8bhTOaRz+hamckCGdfcbzLfSMEYWZEagHpIq+7Dm+VlU
+ f0RFgH+s7zmUzeMyOo6a8vBaboDD6pPbvwZcf5WIVyOhAezSg+L8WY3I+kat7Le9is
+ Pb20wj8vyk/yg==
+Message-ID: <2a5a069572b46b59dd16fe8d54e549a9b5bbb6eb.camel@kernel.org>
+From: Jeff Layton <jlayton@kernel.org>
+To: Steven Rostedt <rostedt@goodmis.org>
+Date: Wed, 21 Jun 2023 15:52:27 -0400
+In-Reply-To: <20230621152141.5961cf5f@gandalf.local.home>
 References: <20230621144507.55591-1-jlayton@kernel.org>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ <20230621152141.5961cf5f@gandalf.local.home>
+User-Agent: Evolution 3.48.3 (3.48.3-1.fc38) 
 MIME-Version: 1.0
-X-Spam-Score: -4.8 (----)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed,
- 21 Jun 2023 10:45:05 -0400 Jeff Layton <jlayton@kernel.org>
- wrote: > Most of this conversion was done via coccinelle, with a few of the
- more > non-standard accesses done by hand. There should be no behavioral
- > changes with this set. That will come later, as we conve [...] 
- Content analysis details:   (-4.8 points, 6.0 required)
+ Content preview:  On Wed, 2023-06-21 at 15:21 -0400, Steven Rostedt wrote: >
+ On Wed, 21 Jun 2023 10:45:05 -0400 > Jeff Layton <jlayton@kernel.org> wrote:
+ > > > Most of this conversion was done via coccinelle, with a fe [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1qC3P8-00At1G-H0
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qC3sp-00Au5J-HA
 Subject: Re: [f2fs-dev] [PATCH 00/79] fs: new accessors for inode->i_ctime
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -127,7 +141,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, "Rafael
  linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
  Paul Moore <paul@paul-moore.com>, Leon Romanovsky <leon@kernel.org>,
  John Fastabend <john.fastabend@gmail.com>,
- Arve =?UTF-8?B?SGrDuG5uZXY=?= =?UTF-8?B?w6Vn?= <arve@android.com>,
+ Arve =?ISO-8859-1?Q?Hj=F8nnev=E5g?= <arve@android.com>,
  Minghao Chi <chi.minghao@zte.com.cn>, codalist@coda.cs.cmu.edu,
  selinux@vger.kernel.org, ZhangPeng <zhangpeng362@huawei.com>,
  Udipto Goswami <quic_ugoswami@quicinc.com>, Yonghong Song <yhs@fb.com>,
@@ -142,15 +156,15 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, "Rafael
  Tony Luck <tony.luck@intel.com>, Theodore Ts'o <tytso@mit.edu>,
  Nicolas Pitre <nico@fluxnic.net>, linux-ntfs-dev@lists.sourceforge.net,
  Muchun Song <muchun.song@linux.dev>, Roberto Sassu <roberto.sassu@huawei.com>,
- linux-f2fs-devel@lists.sourceforge.net,
- "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
- Jozef Martiniak <jomajm@gmail.com>, Eric Biederman <ebiederm@xmission.com>,
- Anna Schumaker <anna@kernel.org>, xu xin <cgel.zte@gmail.com>,
- Brad Warrum <bwarrum@linux.ibm.com>, Mike Kravetz <mike.kravetz@oracle.com>,
- Jingyu Wang <jingyuwang_vip@163.com>, linux-efi@vger.kernel.org,
- Dan Carpenter <error27@gmail.com>, Martin Brandenburg <martin@omnibond.com>,
- Tom Rix <trix@redhat.com>, Alexei Starovoitov <ast@kernel.org>,
- Chris Mason <clm@fb.com>, linux-mtd@lists.infradead.org,
+ linux-f2fs-devel@lists.sourceforge.net, "Guilherme G.
+ Piccoli" <gpiccoli@igalia.com>, Jozef Martiniak <jomajm@gmail.com>,
+ Eric Biederman <ebiederm@xmission.com>, Anna Schumaker <anna@kernel.org>,
+ xu xin <cgel.zte@gmail.com>, Brad Warrum <bwarrum@linux.ibm.com>,
+ Mike Kravetz <mike.kravetz@oracle.com>, Jingyu Wang <jingyuwang_vip@163.com>,
+ linux-efi@vger.kernel.org, Dan Carpenter <error27@gmail.com>,
+ Martin Brandenburg <martin@omnibond.com>, Tom Rix <trix@redhat.com>,
+ Alexei Starovoitov <ast@kernel.org>, Chris Mason <clm@fb.com>,
+ linux-mtd@lists.infradead.org,
  "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
  Marc Dionne <marc.dionne@auristor.com>, linux-afs@lists.infradead.org,
  Ian Kent <raven@themaw.net>, Naohiro Aota <naohiro.aota@wdc.com>,
@@ -211,22 +225,80 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, "Rafael
  Sungjong Seo <sj1557.seo@samsung.com>, David Woodhouse <dwmw2@infradead.org>,
  linux-karma-devel@lists.sourceforge.net, linux-btrfs@vger.kernel.org,
  Joel Becker <jlbec@evilplan.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-15"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, 21 Jun 2023 10:45:05 -0400
-Jeff Layton <jlayton@kernel.org> wrote:
+On Wed, 2023-06-21 at 15:21 -0400, Steven Rostedt wrote:
+> On Wed, 21 Jun 2023 10:45:05 -0400
+> Jeff Layton <jlayton@kernel.org> wrote:
+> =
 
-> Most of this conversion was done via coccinelle, with a few of the more
-> non-standard accesses done by hand. There should be no behavioral
-> changes with this set. That will come later, as we convert individual
-> filesystems to use multigrain timestamps.
+> > Most of this conversion was done via coccinelle, with a few of the more
+> > non-standard accesses done by hand. There should be no behavioral
+> > changes with this set. That will come later, as we convert individual
+> > filesystems to use multigrain timestamps.
+> =
 
-BTW, Linus has suggested to me that whenever a conccinelle script is used,
-it should be included in the change log.
+> BTW, Linus has suggested to me that whenever a conccinelle script is used,
+> it should be included in the change log.
+> =
 
--- Steve
+
+Ok, here's what I have. I note again that my usage of coccinelle is
+pretty primitive, so I ended up doing a fair bit of by-hand fixing after
+applying these.
+
+Given the way that this change is broken up into 77 patches by
+subsystem, to which changelogs should I add it? I could add it to the
+"infrastructure" patch, but that's the one where I _didn't_ use it.=A0
+
+Maybe to patch #79 (the one that renames i_ctime)?
+
+
+------------------------8<------------------------------
+@@
+expression inode;
+@@
+
+- inode->i_ctime =3D current_time(inode)
++ inode_set_current_ctime(inode)
+
+@@
+expression inode;
+@@
+
+- inode->i_ctime =3D inode->i_mtime =3D current_time(inode)
++ inode->i_mtime =3D inode_set_current_ctime(inode)
+
+@@
+struct inode *inode;
+expression value;
+@@
+
+- inode->i_ctime =3D value;
++ inode_set_ctime(inode, value);
+
+@@
+struct inode *inode;
+expression val;
+@@
+- inode->i_ctime.tv_sec =3D val
++ inode_set_ctime_sec(inode, val)
+
+@@
+struct inode *inode;
+expression val;
+@@
+- inode->i_ctime.tv_nsec =3D val
++ inode_set_ctime_nsec(inode, val)
+
+@@
+struct inode *inode;
+@@
+- inode->i_ctime
++ inode_ctime_peek(inode)
+
 
 
 _______________________________________________
