@@ -2,210 +2,158 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6841A739E2F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jun 2023 12:15:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AF4573A5D8
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jun 2023 18:18:02 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qCHL7-0005gt-KB;
-	Thu, 22 Jun 2023 10:14:58 +0000
+	id 1qCN0Q-0000vW-I1;
+	Thu, 22 Jun 2023 16:17:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qCHL4-0005ga-MF;
- Thu, 22 Jun 2023 10:14:55 +0000
+ (envelope-from <heyunlei@oppo.com>) id 1qCN0M-0000vM-7S
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 22 Jun 2023 16:17:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Date:To:From:Subject:Message-ID:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7+cabg86v1cYpPv8vDJOW5RfunjhlSEWXfJLwIkmtqs=; b=TCdxCMWcRRzARYpKMKS7+1Y+AG
- 478bjaG7+Tcd+i8mkiEGJ7+f9AmAPynbS7VgrzeebOKfccm6rgYKwGvU5EpZQqkZGJIjfxmvw+y8K
- UoIkmfuQxvcdjEJdiFdxHI3JDIGtK9w7f3SegkAFnOh7sJBmJ7dnAA4ylCXVvmf1dSX0=;
+ bh=JnIA4eGfMCYXEMlcFnq9u36R1p+VFdYmf3/BF4sqYzI=; b=EwQMJNHpMY+DvqulnjJ09hG7as
+ yUkAG4iGLU08MzGSnFq1Wg14KMUBn/TrDvYCmIfCkuQMs6ttg7e4PrnrJVvmKlNEFyPS+A6KOhd1Q
+ If9VIsM5b7Je4l3m2cvuiDl6YGbcEKO99XL6niWR17o/zx89/JnkHNlUdFNOOBcfjmq8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Date:To:From:Subject:Message-ID:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=7+cabg86v1cYpPv8vDJOW5RfunjhlSEWXfJLwIkmtqs=; b=aNoLjy8TDWkLQKIucPWmds71zz
- 68DRdAjYqRf6oT5d/gy+dnEXpDecclHWVrgCJohhMu/fTGGshyPZb+m0Jo342f2qewglhBUgcqas3
- xCd5iKyyrrfOepWtJZd7Ky6G3xt1LXDPaiOEx+w9swT5lTcqaQd6BZsgtDhX5DlqA7LE=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=JnIA4eGfMCYXEMlcFnq9u36R1p+VFdYmf3/BF4sqYzI=; b=k
+ 9leoYWZrA0ZNmA9gk6tj+qYZeWID1139z5nBPFjZ9cCjvVc/Oxz4uOHElGRsYWkX1kqTVim7RXZCS
+ O8NWEyS8truo2LArtXyiaeT1LJv5sdO/L/323OFQtde8BaCGB0SK/uEcyyEfo35vWMZ/vvfEUbKNP
+ R6R8Tp1M3nB3fYW0=;
+Received: from mail-tyzapc01on2074.outbound.protection.outlook.com
+ ([40.107.117.74] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qCHL4-00BOfU-Di; Thu, 22 Jun 2023 10:14:55 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id E4277617BB;
- Thu, 22 Jun 2023 10:14:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2888C433C9;
- Thu, 22 Jun 2023 10:14:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1687428888;
- bh=7+cabg86v1cYpPv8vDJOW5RfunjhlSEWXfJLwIkmtqs=;
- h=Subject:From:To:Date:In-Reply-To:References:From;
- b=bash4qEoN8ysoF4HTnLUBoIb4R/VvEf+WW/D9VIwZ7IkIbfsRZHAuo5DrHgU3mESQ
- YV3L6vJlJ5RLoTi5/71VkN5rQAydrP7yy38zcSGGfwasNdQxjqfQEDJO2KhRfaS72P
- L3pOkZCMNStmacczTh8Bxts4KstAt3iUVQoAzfNq5O0qEkTp/AQ/ZxnvFiOtuM8Rrh
- hGFigQvIDdzAyY8j4H2gTF58blmQ8XCJxFBrtJ8bp21DHjiO/HINP7f4QOOgCaaZnm
- wPOh/3PFD9MITyv48Pm3mcErp57QuFgfhsUJhmJROqlUtadgwIZDzlw31/avwVXFpE
- VwFt0TPP5toFA==
-Message-ID: <ad4bfb630128709588164db6f1fd2ef39c31d2a5.camel@kernel.org>
-From: Jeff Layton <jlayton@kernel.org>
-To: Damien Le Moal <dlemoal@kernel.org>, Jeremy Kerr <jk@ozlabs.org>, Arnd
- Bergmann <arnd@arndb.de>, Michael Ellerman <mpe@ellerman.id.au>, Nicholas
- Piggin <npiggin@gmail.com>,  Christophe Leroy
- <christophe.leroy@csgroup.eu>, Heiko Carstens <hca@linux.ibm.com>, Vasily
- Gorbik <gor@linux.ibm.com>,  Alexander Gordeev <agordeev@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle
- <svens@linux.ibm.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Arve =?ISO-8859-1?Q?Hj=F8nnev=E5g?= <arve@android.com>, Todd Kjos
- <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes
- <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Carlos
- Llamas <cmllamas@google.com>, Suren Baghdasaryan <surenb@google.com>,
- Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>, Jason
- Gunthorpe <jgg@ziepe.ca>,  Leon Romanovsky <leon@kernel.org>, Brad Warrum
- <bwarrum@linux.ibm.com>, Ritu Agarwal <rituagar@linux.ibm.com>, Eric Van
- Hensbergen <ericvh@kernel.org>, Latchesar Ionkov <lucho@ionkov.net>,
- Dominique Martinet <asmadeus@codewreck.org>, Christian Schoenebeck
- <linux_oss@crudebyte.com>, David Sterba <dsterba@suse.com>, David Howells
- <dhowells@redhat.com>, Marc Dionne <marc.dionne@auristor.com>, Alexander
- Viro <viro@zeniv.linux.org.uk>, Ian Kent <raven@themaw.net>, Luis de
- Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>,
- "Tigran A. Aivazian" <aivazian.tigran@gmail.com>, Eric Biederman
- <ebiederm@xmission.com>, Kees Cook <keescook@chromium.org>, Chris Mason
- <clm@fb.com>, Josef Bacik <josef@toxicpanda.com>, Xiubo Li
- <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Jan Harkes
- <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu, Joel Becker <jlbec@evilplan.org>,
- Christoph Hellwig <hch@lst.de>, Nicolas Pitre <nico@fluxnic.net>,  "Rafael
- J. Wysocki" <rafael@kernel.org>, Tyler Hicks <code@tyhicks.com>, Ard
- Biesheuvel <ardb@kernel.org>, Gao Xiang <xiang@kernel.org>, Chao Yu
- <chao@kernel.org>,  Yue Hu <huyue2@coolpad.com>, Jeffle Xu
- <jefflexu@linux.alibaba.com>, Namjae Jeon <linkinjeon@kernel.org>, Sungjong
- Seo <sj1557.seo@samsung.com>, Jan Kara <jack@suse.com>, Theodore Ts'o
- <tytso@mit.edu>, Andreas Dilger <adilger.kernel@dilger.ca>, Jaegeuk Kim
- <jaegeuk@kernel.org>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Miklos
- Szeredi <miklos@szeredi.hu>, Bob Peterson <rpeterso@redhat.com>, Andreas
- Gruenbacher <agruenba@redhat.com>, Richard Weinberger <richard@nod.at>,
- Anton Ivanov <anton.ivanov@cambridgegreys.com>, Johannes Berg
- <johannes@sipsolutions.net>, Mikulas Patocka
- <mikulas@artax.karlin.mff.cuni.cz>,  Mike Kravetz
- <mike.kravetz@oracle.com>, Muchun Song <muchun.song@linux.dev>, David
- Woodhouse <dwmw2@infradead.org>, Dave Kleikamp <shaggy@kernel.org>, Tejun
- Heo <tj@kernel.org>, Trond Myklebust <trond.myklebust@hammerspace.com>,
- Anna Schumaker <anna@kernel.org>, Chuck Lever <chuck.lever@oracle.com>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>, Anton Altaparmakov
- <anton@tuxera.com>,  Konstantin Komarov
- <almaz.alexandrovich@paragon-software.com>, Mark Fasheh <mark@fasheh.com>,
- Joseph Qi <joseph.qi@linux.alibaba.com>, Bob Copeland <me@bobcopeland.com>,
- Mike Marshall <hubcap@omnibond.com>, Martin Brandenburg
- <martin@omnibond.com>, Luis Chamberlain <mcgrof@kernel.org>, Iurii Zaikin
- <yzaikin@google.com>, Tony Luck <tony.luck@intel.com>,  "Guilherme G.
- Piccoli" <gpiccoli@igalia.com>, Anders Larsen <al@alarsen.net>, Steve
- French <sfrench@samba.org>, Paulo Alcantara <pc@manguebit.com>, Ronnie
- Sahlberg <lsahlber@redhat.com>, Shyam Prasad N <sprasad@microsoft.com>, Tom
- Talpey <tom@talpey.com>, Sergey Senozhatsky <senozhatsky@chromium.org>,
- Phillip Lougher <phillip@squashfs.org.uk>, Steven Rostedt
- <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, Evgeniy
- Dushistov <dushistov@mail.ru>, Hans de Goede <hdegoede@redhat.com>,
- "Darrick J. Wong" <djwong@kernel.org>, Naohiro Aota <naohiro.aota@wdc.com>,
- Johannes Thumshirn <jth@kernel.org>, Alexei Starovoitov <ast@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko
- <andrii@kernel.org>, Martin KaFai Lau <martin.lau@linux.dev>, Song Liu
- <song@kernel.org>, Yonghong Song <yhs@fb.com>, John Fastabend
- <john.fastabend@gmail.com>, KP Singh <kpsingh@kernel.org>, Stanislav
- Fomichev <sdf@google.com>, Hao Luo <haoluo@google.com>, Jiri Olsa
- <jolsa@kernel.org>,  Hugh Dickins <hughd@google.com>, Andrew Morton
- <akpm@linux-foundation.org>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo
- Abeni <pabeni@redhat.com>, John Johansen <john.johansen@canonical.com>,
- Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, "Serge
- E. Hallyn" <serge@hallyn.com>, Stephen Smalley
- <stephen.smalley.work@gmail.com>, Eric Paris <eparis@parisplace.org>, 
- Juergen Gross <jgross@suse.com>, Ruihan Li <lrh2000@pku.edu.cn>, Laurent
- Pinchart <laurent.pinchart+renesas@ideasonboard.com>, Wolfram Sang
- <wsa+renesas@sang-engineering.com>, Udipto Goswami
- <quic_ugoswami@quicinc.com>,  Linyu Yuan <quic_linyyuan@quicinc.com>, John
- Keeping <john@keeping.me.uk>, Andrzej Pietrasiewicz
- <andrzej.p@collabora.com>, Dan Carpenter <error27@gmail.com>, Yuta Hayama
- <hayama@lineo.co.jp>, Jozef Martiniak <jomajm@gmail.com>, Jens Axboe
- <axboe@kernel.dk>, Alan Stern <stern@rowland.harvard.edu>, Sandeep Dhavale
- <dhavale@google.com>, Dave Chinner <dchinner@redhat.com>, Johannes Weiner
- <hannes@cmpxchg.org>, ZhangPeng <zhangpeng362@huawei.com>, Viacheslav
- Dubeyko <slava@dubeyko.com>, Tetsuo Handa
- <penguin-kernel@I-love.SAKURA.ne.jp>,  Aditya Garg <gargaditya08@live.com>,
- Erez Zadok <ezk@cs.stonybrook.edu>, Yifei Liu <yifeliu@cs.stonybrook.edu>,
- Yu Zhe <yuzhe@nfschina.com>, "Matthew Wilcox (Oracle)"
- <willy@infradead.org>, Oleg Kanatov <okanatov@gmail.com>, "Dr. David Alan
- Gilbert" <linux@treblig.org>, Jiangshan Yi <yijiangshan@kylinos.cn>, xu xin
- <cgel.zte@gmail.com>, Stefan Roesch <shr@devkernel.io>, Zhihao Cheng
- <chengzhihao1@huawei.com>, "Liam R. Howlett" <Liam.Howlett@Oracle.com>, 
- Alexey Dobriyan <adobriyan@gmail.com>, Minghao Chi
- <chi.minghao@zte.com.cn>, Seth Forshee <sforshee@digitalocean.com>, Zeng
- Jingxiang <linuszeng@tencent.com>, Bart Van Assche <bvanassche@acm.org>,
- Mimi Zohar <zohar@linux.ibm.com>, Roberto Sassu <roberto.sassu@huawei.com>,
- Zhang Yi <yi.zhang@huawei.com>, Tom Rix <trix@redhat.com>, "Fabio M. De
- Francesco" <fmdefrancesco@gmail.com>, Chen Zhongjin
- <chenzhongjin@huawei.com>, Zhengchao Shao <shaozhengchao@huawei.com>, Rik
- van Riel <riel@surriel.com>, Jingyu Wang <jingyuwang_vip@163.com>, Hangyu
- Hua <hbh25y@gmail.com>, linuxppc-dev@lists.ozlabs.org,
- linux-kernel@vger.kernel.org,  linux-s390@vger.kernel.org,
- linux-rdma@vger.kernel.org,  linux-usb@vger.kernel.org,
- v9fs@lists.linux.dev, linux-fsdevel@vger.kernel.org, 
- linux-afs@lists.infradead.org, autofs@vger.kernel.org, linux-mm@kvack.org, 
- linux-btrfs@vger.kernel.org, ceph-devel@vger.kernel.org, 
- codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org,
- linux-efi@vger.kernel.org,  linux-erofs@lists.ozlabs.org,
- linux-ext4@vger.kernel.org,  linux-f2fs-devel@lists.sourceforge.net,
- cluster-devel@redhat.com,  linux-um@lists.infradead.org,
- linux-mtd@lists.infradead.org,  jfs-discussion@lists.sourceforge.net,
- linux-nfs@vger.kernel.org,  linux-nilfs@vger.kernel.org,
- linux-ntfs-dev@lists.sourceforge.net,  ntfs3@lists.linux.dev,
- ocfs2-devel@oss.oracle.com,  linux-karma-devel@lists.sourceforge.net,
- devel@lists.orangefs.org,  linux-unionfs@vger.kernel.org,
- linux-hardening@vger.kernel.org,  reiserfs-devel@vger.kernel.org,
- linux-cifs@vger.kernel.org,  samba-technical@lists.samba.org,
- linux-trace-kernel@vger.kernel.org,  linux-xfs@vger.kernel.org,
- bpf@vger.kernel.org, netdev@vger.kernel.org,  apparmor@lists.ubuntu.com,
- linux-security-module@vger.kernel.org,  selinux@vger.kernel.org
-Date: Thu, 22 Jun 2023 06:14:30 -0400
-In-Reply-To: <99b3c749-23d9-6f09-fb75-6a84f3d1b066@kernel.org>
-References: <20230621144507.55591-1-jlayton@kernel.org>
- <20230621144507.55591-2-jlayton@kernel.org>
- <99b3c749-23d9-6f09-fb75-6a84f3d1b066@kernel.org>
-User-Agent: Evolution 3.48.3 (3.48.3-1.fc38) 
+ id 1qCN0I-0000Ii-VQ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 22 Jun 2023 16:17:54 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=a7DoH4PuAJLtDwTbp11kRv8xfcETVREmOFhmUl+g78UUWxPQ4Kv7D31tLlrMFvMekKZtMMdWO3c71yk4gL+bbMTxMLqzwPQEr5Ay9+gZ/+7guAk2fdUG+zpBJ8YgkTAHBytdI+u5N/11HyBgNhhc4RTrAMCA7UiTbbOuOBR6Sly9uXOqfsXSEACk2fgnTIiUMmyOplmNMKGhaoQeIIBKRvDPLhfu/PPxzOhFDk2OPfTdnJFvMRUcAEjv5VxbPm8uoPEBFEdje4iXCrzTH9/GbJGRWOVlsxp3apRy8byQNfWP67kFU/ekgixyPRtOgiDtBiLtFZ2wgRDCFhU7NLuRuw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JnIA4eGfMCYXEMlcFnq9u36R1p+VFdYmf3/BF4sqYzI=;
+ b=gNrA4AuacV2vEQ/Zd4FWjwDzYQhH5fzxixq8V3pRxywWhsvAUoWtl4gMFBOJhYc66VChGZlX7KeJXD7sMcIHxKwpTOwyPlc8GBHEv8nT3xfsBDorPO/260dr74tTputIfUejWKAcxT77/msMQggb9NfFBzDX5FYAYsZVcQuVAoz/krBEnIQ8aM6x6slkobHCzSYXhY8z5C21seK8AdgU0JH0q3WnGcadz6yFPh9KFwf9p7vRXj8q3KZLsHceEdDUo63uIYkZHH6TOKfUsq9Kq9p9DJOgO3wiOiX1HEjJD99yoiGo9jy+r7Dk1goHYpU8PESz1/ofmk1W6ewX7ZuZtQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oppo.com; dmarc=pass action=none header.from=oppo.com;
+ dkim=pass header.d=oppo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JnIA4eGfMCYXEMlcFnq9u36R1p+VFdYmf3/BF4sqYzI=;
+ b=hkELmVS48PWTcdT7ZC1X18JM/+AO+udsJWKQZuBYPoVIbT9p4hkJ+rUN8g679SDzFXf/JYVbhiJDz1sMG/MPpWU9/qVuyYICIPy9oYSSXdVnifMWLU/RDdzqrDBo2nVVMeljvXaBEwvWcKYwXUSwWLc4Qi6LE8sBJuQ0PLkv62U=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oppo.com;
+Received: from TY2PR02MB4479.apcprd02.prod.outlook.com (2603:1096:404:800e::7)
+ by KL1PR02MB6189.apcprd02.prod.outlook.com (2603:1096:820:bd::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6521.23; Thu, 22 Jun
+ 2023 16:17:33 +0000
+Received: from TY2PR02MB4479.apcprd02.prod.outlook.com
+ ([fe80::bc4a:4d7a:4c73:76eb]) by TY2PR02MB4479.apcprd02.prod.outlook.com
+ ([fe80::bc4a:4d7a:4c73:76eb%4]) with mapi id 15.20.6521.020; Thu, 22 Jun 2023
+ 16:17:32 +0000
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Fri, 23 Jun 2023 00:16:46 +0800
+Message-Id: <20230622161647.742012-1-heyunlei@oppo.com>
+X-Mailer: git-send-email 2.40.1
+X-ClientProxiedBy: SG2PR04CA0178.apcprd04.prod.outlook.com
+ (2603:1096:4:14::16) To TY2PR02MB4479.apcprd02.prod.outlook.com
+ (2603:1096:404:800e::7)
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TY2PR02MB4479:EE_|KL1PR02MB6189:EE_
+X-MS-Office365-Filtering-Correlation-Id: a996395c-a53a-40dc-10c0-08db733c2e7d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: NV8P1aPqqZ7W3CaKpdGUvXr6grTgOg3DPSQ+JRVvWF3F+3bAY3goFj29jpdVgn4bALsR7TExN03CtJxoXikOaCBhBUIOLaNLmrV3WYc1kueDTsA1j97HXuP24iEozCd1dFr+hO86YxUrS7217PyENz9ZunC6K8BZWsLqlSPB0WJgCFVNSoqklNb/rOzZpK7/2KwviNUK342lVS4WDy3JZdyfIXNfVMk8BDknl2uLAXdZslI9KohdvgwnqCEPRUF9RjtQGOOABxApY0R4pe7R3o26KLSpSRBWu8oepX0IUwiMl1x+fatW0OC69kPLSwzfDmduRIwN4HT3HqDXJMkPooxCfD/CN7nTNFgcYJOpaxslxA8/Tytt707RcN3jOYbRcb5Y3DBa28yUTnlMg655lsp3NLUmKfslbYTTqwikawgcYGHHYypzGwIPq3qG1La3hizptjFtHMEtxU2hQ7ap6Kha1quufnxkLQ3lsrB6QNRLKFnMTQwy4OkztsZWWHwsp3VYfh8bCWtXTayWHX3cvZ/KrwTTa9I8uwiKCnRyAcdtlvEfOdBvknm6CLHcwFBxKkleinRwRAp0Q9Y1UGvefwjpMieOlFSl/cy/mgfR2nE8b55Y4rqEViP6+v8+gtjf
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TY2PR02MB4479.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(4636009)(39860400002)(136003)(346002)(376002)(396003)(366004)(451199021)(5660300002)(478600001)(66476007)(66556008)(66946007)(52116002)(4326008)(6666004)(6486002)(316002)(36756003)(86362001)(2616005)(83380400001)(1076003)(26005)(6512007)(6506007)(186003)(38100700002)(107886003)(4744005)(8936002)(2906002)(8676002)(41300700001)(15650500001)(38350700002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?QHaSTlsaJVQ/P/ieDFpkaIlw1T4YKm9MaOBIFRUP7rxF2U1ZucIzaDfAlQ9d?=
+ =?us-ascii?Q?4vDdqDyg1xZC/C1Gvs1GiGXNyWeUzerf2FFpVlTrQkyxWVgma6DKKnTQImAS?=
+ =?us-ascii?Q?rkMwN7Xgmayl3TiSR7s+DwNSMUYpUKEXAR9TI39abRrW/zp34olZCivJMHdx?=
+ =?us-ascii?Q?jPGTBiEu1AeKWmgcTfqLJ4+4oCunJjVDPnkaYPTZEUxqslFIw3ZGHS/iXi+1?=
+ =?us-ascii?Q?IJprDAS4nZ9knoMa9Xo36iaAXqyabr1FJXXJ6cUd7tHLutYf6vu7vfNsxS+L?=
+ =?us-ascii?Q?6LRbznem5spKT90KeeAEogv5JxhazwJBJvxBRCscGv9FYeemw+8uQkdbYzj0?=
+ =?us-ascii?Q?lY2n9HZSl0XDspaUD3qYfxyRGYcdBSKLzE3mnFyoJl8r2rOgE21wouTHmEzT?=
+ =?us-ascii?Q?AaIjYy82dTNARd3Gbiane8YQw0S2xSTAIW1qSlo4pSRy/xdFojiYUIJ1ufRQ?=
+ =?us-ascii?Q?H0OekxCjwtS4TpMjDVAUn8G6CM+PWLIjSIeg1kHzUracG2S7LR9QzxhV5/kH?=
+ =?us-ascii?Q?/pF9pgD9ExdoPY5Eej9RiNp8TqHjK1Hesr9UvGXEhrqi9unEBSAxAXx6wRqV?=
+ =?us-ascii?Q?cBI9WoqjQvsNEPxadOflUxCXnmLbcy8kRsWaT2BKjxZ1B0FCLMjpLdlPLt1D?=
+ =?us-ascii?Q?v2JBWG8CD9pFcOkgVWvuymVb5sreIQUOU/hqMksC3V7JK3ZNkXX8gXBVWhVw?=
+ =?us-ascii?Q?BU9bu+fd29v0VJTUEZvZTKImDpOV4eA51WprTbA4nBrJbnCgMl0mUuWgQ/9o?=
+ =?us-ascii?Q?4+Y0p6WpMqL94vaRB5ogYcYAuHUFqDMD4ykyCDp9Sn5mP9TYn8EdllTlQUOS?=
+ =?us-ascii?Q?uxDQYcEWr0Dm5+jGJuPxSkXUbSAzbjhLePTwMV9sPXzmVX7VcaK2sZ1qvGjf?=
+ =?us-ascii?Q?2EYEsQxxmqF4DGd9oJbfNeS1JGegV3rx5Jn42V9XTyQI8EADwIE/VFpDK7kj?=
+ =?us-ascii?Q?d81OoT8huafroqIdJXt6IoF+HFh4QEjKZ+aMdvAmhlZ8jsfZp2G/I3m9QPAK?=
+ =?us-ascii?Q?nZOiFAH2lh1P4+lsT+JNbSklTSTIcghToFmtmPtHIYseTz95wFVGret5e9JV?=
+ =?us-ascii?Q?Uj0opAeR4GWk8ytAbbCvVzHP6DAr7V34aqEmE3RJkopokIIeusL4Dv/cgnYA?=
+ =?us-ascii?Q?pk0UlepwgCnRVniZd+iL37HP6hNQlkZqAfl8cUcCeMCJeBOVQkL02DM/k2gl?=
+ =?us-ascii?Q?N6Fpp5jKUbcAoQ5xuYT7xbATW3PzBef9CnNUSg49uk+GK0gYSACbBBhWTD6P?=
+ =?us-ascii?Q?cGUM8ecPJqG1yyg5CJft2gsOUsugQPHIPTfDqvkNeKLog6KYE9Cg//zaMTMF?=
+ =?us-ascii?Q?2Bpt8xqxDWrLETnbLqvAMzlCgIjfjKGhDEpMarBu1AVih7WUtIJF6cmKbgDE?=
+ =?us-ascii?Q?qbW67kikmRfLSTrPXA/50CefiOfwrPaBOlC9awuIxkUcxciPnpy0vSe7kA5f?=
+ =?us-ascii?Q?75+7d75l7HRdRty1sYlmBMpytg0UazFOjmv9BWDaXhO+1TYK+lw9J4ohs1ef?=
+ =?us-ascii?Q?33k8L059vG/qbOD0roLC+CcuMJe3fJ4wTdbPb/MaF/PPosCW8FMOKN4tCfc8?=
+ =?us-ascii?Q?+bYCB3O6ZlB/Sn09MGux3J2P3cuyOxrJX+VUtYk4?=
+X-OriginatorOrg: oppo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a996395c-a53a-40dc-10c0-08db733c2e7d
+X-MS-Exchange-CrossTenant-AuthSource: TY2PR02MB4479.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2023 16:17:32.0384 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kOKcSgoPpX7h2FoRIuybf9PwlFUwwNu7b6Q9Gl4UotHJR05/RHbxTC9o7RK8VIxEyxRBz+HDPQCEpu1NdvWO5w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR02MB6189
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 2023-06-22 at 09:46 +0900, Damien Le Moal wrote: >
- On 6/21/23 23:45, Jeff Layton wrote: > > struct timespec64 has unused bits
- in the tv_nsec field that can be used > > for other purposes. In f [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview: Mtime and ctime stay old value without update after move file
+ range ioctl. This patch add time update. Signed-off-by: Yunlei He
+ <heyunlei@oppo.com>
+ --- v2: -update both src and dst inode fs/f2fs/file.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+) 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.117.74 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.117.74 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qCHL4-00BOfU-Di
-Subject: Re: [f2fs-dev] [PATCH 01/79] fs: add ctime accessors infrastructure
+ valid
+X-Headers-End: 1qCN0I-0000Ii-VQ
+Subject: [f2fs-dev] [PATCH 1/2 v2] f2fs: update mtime and ctime in move file
+ range method
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -217,50 +165,50 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Yunlei He via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Yunlei He <heyunlei@oppo.com>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, 2023-06-22 at 09:46 +0900, Damien Le Moal wrote:
-> On 6/21/23 23:45, Jeff Layton wrote:
-> > struct timespec64 has unused bits in the tv_nsec field that can be used
-> > for other purposes. In future patches, we're going to change how the
-> > inode->i_ctime is accessed in certain inodes in order to make use of
-> > them. In order to do that safely though, we'll need to eradicate raw
-> > accesses of the inode->i_ctime field from the kernel.
-> > 
-> > Add new accessor functions for the ctime that we can use to replace them.
-> > 
-> > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-> 
-> [...]
-> 
-> > +/**
-> > + * inode_ctime_peek - fetch the current ctime from the inode
-> > + * @inode: inode from which to fetch ctime
-> > + *
-> > + * Grab the current ctime from the inode and return it.
-> > + */
-> > +static inline struct timespec64 inode_ctime_peek(const struct inode *inode)
-> 
-> To be consistent with inode_ctime_set(), why not call this one inode_ctime_get()
+Mtime and ctime stay old value without update after move
+file range ioctl. This patch add time update.
 
-In later patches fetching the ctime for presentation may have side
-effects on certain filesystems. Using "peek" here is a hint that we want
-to avoid those side effects in these calls.
+Signed-off-by: Yunlei He <heyunlei@oppo.com>
+---
+v2:
+-update both src and dst inode
+ fs/f2fs/file.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-> ? Also, inode_set_ctime() & inode_get_ctime() may be a little more natural. But
-> no strong opinion about that though.
-> 
-
-I like the consistency of the inode_ctime_* prefix. It makes it simpler
-to find these calls when grepping, etc.
-
-That said, my opinions on naming are pretty loosely-held, so if the
-consensus is that the names should as you suggest, I'll go along with
-it.
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index cb42d8464ad9..e59fc8faa035 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -2886,6 +2886,19 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
+ 		f2fs_up_write(&F2FS_I(dst)->i_gc_rwsem[WRITE]);
+ out_src:
+ 	f2fs_up_write(&F2FS_I(src)->i_gc_rwsem[WRITE]);
++
++	if (!ret) {
++		src->i_mtime = src->i_ctime = current_time(src);
++		f2fs_mark_inode_dirty_sync(src, false);
++
++		if (src != dst) {
++			dst->i_mtime = dst->i_ctime = current_time(dst);
++			f2fs_mark_inode_dirty_sync(dst, false);
++		}
++
++		f2fs_update_time(sbi, REQ_TIME);
++	}
++
+ out_unlock:
+ 	if (src != dst)
+ 		inode_unlock(dst);
 -- 
-Jeff Layton <jlayton@kernel.org>
+2.40.1
+
 
 
 _______________________________________________
