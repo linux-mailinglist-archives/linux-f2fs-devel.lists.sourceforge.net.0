@@ -2,67 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBA68739383
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jun 2023 02:04:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9051273940C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 22 Jun 2023 02:46:51 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qC7oM-0007U7-1q;
-	Thu, 22 Jun 2023 00:04:30 +0000
+	id 1qC8TF-0007xX-J6;
+	Thu, 22 Jun 2023 00:46:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tom@talpey.com>) id 1qC7oJ-0007Ts-IZ;
- Thu, 22 Jun 2023 00:04:27 +0000
+ (envelope-from <dlemoal@kernel.org>) id 1qC8TC-0007xH-Iv;
+ Thu, 22 Jun 2023 00:46:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :In-Reply-To:From:References:To:Subject:Date:Message-ID:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TT7Kwu7fG6BWdEBVvDk+5WZrF7YR7qqWojgU6yBBfPw=; b=W9Qqz3cdhwWHwwpRK50gOoSxyQ
- UftkdatlNmAtXZEIXiWxCKinJJYEomZyCNQhyvuFtqRpYsANMLrUaLpXizPZjOB6hfve3vlvp2cPU
- ff+HfQ3uKJIIE1/deK57a8q3lO4+N3/X98fsgOLlYX624MEmjjLwcBZkcIGiISM7cLCw=;
+ bh=pmhiVXncviVqsn3wpRHxbelBhB6YgCHtE5DYwQktKNU=; b=JOXkbgUaW7fFmlDHQrsWCWKvAT
+ 9u2blDybsHj3byHLP13dt4dYSw/BKncTVH5q2lxvHtoqZSqRXxXf6sk7z7FM6dd5lZP7qfjcc5eVz
+ UXmkVv+EFQpFiCv6ir/gfCPpO699sN5vy57fg7Zu9os749K9dQOudXw4Q+Vjgzpe2oy8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:To:Subject:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TT7Kwu7fG6BWdEBVvDk+5WZrF7YR7qqWojgU6yBBfPw=; b=SqQJSBkveGgXf0cZfYAFAxSOWL
- CsKAlX0KGndXXTTb0PCEeGbqBBWokjqf/RaoGt+ShHD5S07ZFFVBbZgWOXu4pDbuNKGvbPk1sKNAM
- mnqHoeZWHC1aTtgic7ZtaN45EhrTOxNKVA78kg5sv8GSXJHlYTz7grAW400Y0HPMe8t0=;
-Received: from mail-bn8nam11on2040.outbound.protection.outlook.com
- ([40.107.236.40] helo=NAM11-BN8-obe.outbound.protection.outlook.com)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=pmhiVXncviVqsn3wpRHxbelBhB6YgCHtE5DYwQktKNU=; b=O876X1lG0UKwEBF30IJTpMALxx
+ a7+ld5o21AdpX3r4TWgTkYSW3u37smDyRqYVO6AjM/zGAgWLcbpeANL2wjux8RCV/ioATu9R2YMTc
+ HarR4bCKfgZJ8MUBL5nHHK5Dvhkb+8afdnz7Z24MbNPM5VbPpqaxczpGuxMek/KBX77w=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qC7oE-0004A1-GP; Thu, 22 Jun 2023 00:04:27 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nprCUexRgZAKJR5brPgGuVe+pm7FEZyfJ3h5IKWtkZKUvIC824nKNeabl16R4ubCpUTSN5Uzrp1jI0gWo+py2oiNDsqVLvVV3GAPenKSn6feEO0iAbTAwlugqlb4Swr+Sa+0ktE7Dt7FzWR/SGHXRLqTdgtZD7RjaaZSx8ru29PU+RaMbXBKovJsR1xNXD9L3VA00BZ4W+CA7+c97Kah9xBuudMbF7lSEzD1IJGycfkUyqTgyLzw36E6/4Us+CxNaLA19GOGvapKaP/NUEJ2sViT9DsoSyn6sZRK8B03gPvtR2bv4zTlxec0+T/l1+l2zLWwB3apIvUw2wgabsnTyw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TT7Kwu7fG6BWdEBVvDk+5WZrF7YR7qqWojgU6yBBfPw=;
- b=giXF3SIeJLFsT7izqNqNdNwkQ9M8KK+sIIBqR3k/BieWTNjrBaPs6WqWu1rnQgs3VFTZ+d8gVxteBk1WrDPhZkdtq7tGqoOKpcFCBwyG09yXVhhn5G9+DlbN1eujwKon8/18g3KFJDmh9/MQMb9HRqrRW8ZFlPwz/TdTgX9v0MIpyHR0a2H9i/wjksUdvKrJ+5dFhp+e83w6zVmRbEPkGJ0UrTQ9F3O5VSnfUVSwTa2mtBvWPBsctSmcvMoPoenm0hYWJMQZF7aON/s9WHmDBVlHU3DTtLD5Pv1A3s2Rhn1vNKuJbhZB3326yp8k7w4JkxEmPExKtaehNq5roZC4Mw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
- dkim=pass header.d=talpey.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=talpey.com;
-Received: from SN6PR01MB4445.prod.exchangelabs.com (2603:10b6:805:e2::33) by
- PH0PR01MB7976.prod.exchangelabs.com (2603:10b6:510:28b::13) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6521.23; Wed, 21 Jun 2023 17:29:48 +0000
-Received: from SN6PR01MB4445.prod.exchangelabs.com
- ([fe80::17e9:7e30:6603:23bc]) by SN6PR01MB4445.prod.exchangelabs.com
- ([fe80::17e9:7e30:6603:23bc%5]) with mapi id 15.20.6521.023; Wed, 21 Jun 2023
- 17:29:48 +0000
-Message-ID: <1f97d595-e035-46ce-6269-eebfe922cf35@talpey.com>
-Date: Wed, 21 Jun 2023 13:29:37 -0400
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ id 1qC8TC-00B3io-5a; Thu, 22 Jun 2023 00:46:42 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1B59E61720;
+ Thu, 22 Jun 2023 00:46:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A7C8C433C0;
+ Thu, 22 Jun 2023 00:46:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1687394795;
+ bh=rnAvPLn1sCs7GGwULNlh7vfJWhCgmoE6J+kuAdW07eg=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=OKJ2boTqeHZMsToMs1/n2lzwwGVbU+I2GYoijjuRh9SVeHfTSB1H+xyFQwyAFX7gH
+ /vyxfg2IKPw1xJaHjaP8DFfddUEEk8PpeVXJ0+PVhDflO3qbvKQQI9gg2+QYLwO5s8
+ 7RdM/94Dzx+hUObnhR05qpfqd0np7iM7DbNnG1PYspXU6CzNR2GHI+w68+F/UNiAvI
+ xFMWzHCJLXizYOftbvGh5G8E/rfFzaZBSJhjqQBlrMVQgwlWHoRl/ilVMdm4h9iQIc
+ xbVrb5SDTY2AyvfHzces3r+mtB2lxqGprTaDvGj1GvW5UryRveoRMwl/iNrb8xoLWk
+ lKxccXW186khg==
+Message-ID: <99b3c749-23d9-6f09-fb75-6a84f3d1b066@kernel.org>
+Date: Thu, 22 Jun 2023 09:46:12 +0900
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.12.0
-Content-Language: en-US
 To: Jeff Layton <jlayton@kernel.org>, Jeremy Kerr <jk@ozlabs.org>,
  Arnd Bergmann <arnd@arndb.de>, Michael Ellerman <mpe@ellerman.id.au>,
  Nicholas Piggin <npiggin@gmail.com>,
@@ -123,15 +120,16 @@ To: Jeff Layton <jlayton@kernel.org>, Jeremy Kerr <jk@ozlabs.org>,
  <gpiccoli@igalia.com>, Anders Larsen <al@alarsen.net>,
  Steve French <sfrench@samba.org>, Paulo Alcantara <pc@manguebit.com>,
  Ronnie Sahlberg <lsahlber@redhat.com>, Shyam Prasad N
- <sprasad@microsoft.com>, Sergey Senozhatsky <senozhatsky@chromium.org>,
+ <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
  Phillip Lougher <phillip@squashfs.org.uk>,
  Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
  <mhiramat@kernel.org>, Evgeniy Dushistov <dushistov@mail.ru>,
  Hans de Goede <hdegoede@redhat.com>, "Darrick J. Wong" <djwong@kernel.org>,
- Damien Le Moal <dlemoal@kernel.org>, Naohiro Aota <naohiro.aota@wdc.com>,
- Johannes Thumshirn <jth@kernel.org>, Alexei Starovoitov <ast@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>,
- Martin KaFai Lau <martin.lau@linux.dev>, Song Liu <song@kernel.org>,
+ Naohiro Aota <naohiro.aota@wdc.com>, Johannes Thumshirn <jth@kernel.org>,
+ Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>,
+ Andrii Nakryiko <andrii@kernel.org>, Martin KaFai Lau
+ <martin.lau@linux.dev>, Song Liu <song@kernel.org>,
  Yonghong Song <yhs@fb.com>, John Fastabend <john.fastabend@gmail.com>,
  KP Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@google.com>,
  Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
@@ -195,91 +193,38 @@ To: Jeff Layton <jlayton@kernel.org>, Jeremy Kerr <jk@ozlabs.org>,
  selinux@vger.kernel.org
 References: <20230621144507.55591-1-jlayton@kernel.org>
  <20230621144507.55591-2-jlayton@kernel.org>
-From: Tom Talpey <tom@talpey.com>
+Content-Language: en-US
+From: Damien Le Moal <dlemoal@kernel.org>
+Organization: Western Digital Research
 In-Reply-To: <20230621144507.55591-2-jlayton@kernel.org>
-X-ClientProxiedBy: MN2PR19CA0044.namprd19.prod.outlook.com
- (2603:10b6:208:19b::21) To SN6PR01MB4445.prod.exchangelabs.com
- (2603:10b6:805:e2::33)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR01MB4445:EE_|PH0PR01MB7976:EE_
-X-MS-Office365-Filtering-Correlation-Id: a87590c4-dfbb-4123-7a0c-08db727d1c63
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ebIVZ2lP88IpgoaPlyv0/XApxVauaI/c6ecMOapeeDWNf9jes1zrAVrrmH2jn/JCw5MqzpD/iiY5VgaZrkjuHTGrcF4TwFBKEpLM0Y4btotHRdVGi5pdk8Mm65mTC3AOmE3f73yf2gdAn+PB+PDqPiGQ7SJsAwECE4sM2H612pvDCCCOgs8S6jM+wb4cCtK0iMEwuNn+/CrmmEevKieK071/PIWklP/k6rFnr6VKm5mkazDb8VrIJQyTzklsx/SpZhSly8HRoMMp3/g3bLEEnASYe3MlbF9FXFmylpDhpF2qmbdAqnYmRD+3jLPYEe2XS5GHcrzC3mLZsXlYDzv/OpIYaoui/WhroKMWh7z6/UkgU2aaW0AJ9bgv/PaH6YTJpJbbVaGoSZ5VAYH4rQc7T527Oz7hOU4A7Nr2DLviXvflyhXW96J6TvMfPpAY4bNeqq/beT7QA7zmsw2wCx+GldUmbT+j5jc6dvS2KC60nHW90uH6bTgeC1VPaB3jlzbt2ir0jPIe4/XOAsrqaL32oYPe5R9X12M0vFe2zUpxzWk80wNn+3PayRyChImmrAytLST4djrm4is2DKzr05KWIjJKqXaLdMfQ/8cbXOqiDr/P5e9Ya2mh2LQhyEwcIscrH2BHSFDXqsW1bwEQ/dF1mIDCVTpceTld2KfVWgrmOWc=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN6PR01MB4445.prod.exchangelabs.com; PTR:; CAT:NONE;
- SFS:(13230028)(366004)(39830400003)(136003)(346002)(396003)(376002)(451199021)(6486002)(52116002)(6666004)(478600001)(76576003)(36756003)(83380400001)(1191002)(38100700002)(38350700002)(2616005)(31696002)(86362001)(186003)(921005)(53546011)(6506007)(6512007)(26005)(8936002)(8676002)(41300700001)(7276002)(7406005)(7366002)(7416002)(31686004)(7336002)(5660300002)(2906002)(110136005)(316002)(66946007)(66476007)(66556008)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bjNab0pKSmUrc3NzZitDZk4zNElnTzV1aVEzMnEwdnVYWndYU3ovdEZxSEdS?=
- =?utf-8?B?TFZKdlFjbUJvVGlUbzVZTDNBbHdaZGd3Rm50b2piUFQ5a21DUDZJZ0VFNVdm?=
- =?utf-8?B?VlMxV2ZvVVBjcmZzaDhHcW5vT29kMFExR3hycW5JT25VSDU1NmpTYmYwZ2lQ?=
- =?utf-8?B?R0tzRi9HRnVVdFFsZ01jcHV2dWNwSTFlcWhqYmJ5V09oSERHbmhTN2VGN01m?=
- =?utf-8?B?TFRIQkJKM2xXNlBnVTNnRlF5c2x0NHNSdFBNQVV4QXhSWHR2eDlEeFVzTUV5?=
- =?utf-8?B?RVZYYkNLWk11YWRKcGhQQVZnVWdOdFo4NnBEa1k4ak9Iek91ZjQrSW14SWdP?=
- =?utf-8?B?bngwSW40YW00SW40NmkxTlhHb1oremxKWGhWZCtxaTlSbDNwYjlJTXpyN1Iw?=
- =?utf-8?B?WXlibjVlQ244c1kxQk9rOGlXNFZGaHdlNVI1elVqS3NnN0lqTFJheTZHK1l1?=
- =?utf-8?B?L0wyTnpUVm5wY1ozQjhUenR2czlQUzZMbEx6WWdRcTdmWUQ3aGRZcDlVL0V2?=
- =?utf-8?B?RDIwc1c2T2sxakVBazA2NFlxWktMN1lyMFpScFZ3NTdqdytDekJxQU5qenVm?=
- =?utf-8?B?a0Y2OWZjK3Q4YmFzUzIrYkVwNlRLb3hYelJsSVJFRkxHcjRYT0s4NldFSXpI?=
- =?utf-8?B?RVZtQmp1RFJyNnh5QWhySHF2N2F6bi9DMFZpQzJQUXN5dFdIUGtmY0tqbkx0?=
- =?utf-8?B?cmdENjZnaEdaa1ZWY2NMSENOc2xXR1g4ZU9UWTUwVFVFYXNibTE2S3hDM3Jy?=
- =?utf-8?B?aHczM0JhYXJKempjemVuZWxnT1VFOWJSeTZMS21NcHF4RGdCQXd2dHJXWElM?=
- =?utf-8?B?cXhyS1dmSlZGUFhYTGk3c3hUY0pHMlZ3RjMrWnRrTDVNY2ZTVGNUbGVzRXU2?=
- =?utf-8?B?YkJnMG40cDhJajExYTM0WnVHc1pmSmJJZ2cvNlp2TjhUS3gvb1BFMlhHbk45?=
- =?utf-8?B?YlJ6MERxTmlhcnMraXlPbnlVZVNNTG1qcTBFclRYdXBpVndoeGhQdW5Vb05Q?=
- =?utf-8?B?MHlUaVVwSHgzeE9CbkdwZk9wOEN4Q1hsNzVwVFhOK0JGNTdqZWxhVVdacjlr?=
- =?utf-8?B?WEZZVjVxTG5yenFjSFRkOTg1OGM4YkxRNkJRaW5TUHhDZ2tBWmFKVlZZQWxS?=
- =?utf-8?B?WlJ2Slg4UGZvYlpmNUdudlhXU0JJdEJQTG9XVHgvMmRPQ2lLb2d3ay9UcnR4?=
- =?utf-8?B?eFJycC9TWFNOQ3RIRUk1UnNsaUU4Qk5JM29NQ3QxVElqUElXQXFVbFZBUEhQ?=
- =?utf-8?B?L2JnTWxtK0pUbHFqTElzVHdUOWFxYmoxZjd5Vjk1OVJpcmc3dmhSc0dQNEEw?=
- =?utf-8?B?bjZGSDhkZE1IVHhQVjZuSDVhRUhkazVjcTFYQmpHVjM1YjRKTHF3MzE3aytS?=
- =?utf-8?B?VUlVOEEwL245VVpXZjR1VDl5aVRmVFk4Wlc2eDkyYjY4NmZKRVBMNkk3TFBU?=
- =?utf-8?B?MlpzQmVnSnZLNTZvVVQ5dDBxZGdOYXUxaGJRdXRRS0N3UDhmR2ZzR0RFWUpG?=
- =?utf-8?B?a29lc0pLLzRVRVV4YUhIVmZkYmZrSGg4WVBrZElNY0xvVWhLZWo1WmpSa3VT?=
- =?utf-8?B?dTQ4QlZVVUlSaUxWZjJ3akUxVkkvUVJFb1RnOXBKRzIyYjR6azlXUWlZMVFk?=
- =?utf-8?B?UVRkWEtrOXNhSzcvb08zOHF2Vlo3SXhnOEQxNHlac0JQamFySEw1ZXlyZTR3?=
- =?utf-8?B?MTRqSytyMWJ0U0Z4V1d5cHF1OUZicGJZTWJIVkhVMFN1N2lPdi8yMUcxUjNj?=
- =?utf-8?B?QzJNc01nWlhXU21PYkVLSjVySDJSaHNBSnBuaGlmUnVPcnJUVnI2Q2s5c2JV?=
- =?utf-8?B?U3VzVjdIMTdWUUozUHA1VkxBYkI5dnlTdVVNMzV2TEpLMkdvWk4vQ3BoN0Ux?=
- =?utf-8?B?WDdrV21WcFNGYXRsVlcwZU5xYVBTSVJzYnkyOUY1YXN0bURBeXhSdlNOZVJR?=
- =?utf-8?B?c1RzME9oNmE1ZEFUdnl5MW5Td2hTTTJtQnVqMFdMVlFleUFaclZXR3kvNFhM?=
- =?utf-8?B?MDZGNzZJK1VoZVVIOU00QXgvUk90dDZVUVFsUFFzTitCdFBIRXVmNDJVTk9z?=
- =?utf-8?B?NERpcVBZemN5aWEwajl1VFJZY0UzYTF2VnJPUFpjM3p2QTZlaGlhdHhWY0ZB?=
- =?utf-8?Q?QZlEOIj5TLolgnPxRlWOC7Bv1?=
-X-OriginatorOrg: talpey.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a87590c4-dfbb-4123-7a0c-08db727d1c63
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR01MB4445.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jun 2023 17:29:47.9531 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tyC3gYC+Zqgx5aW3PCa1QPdWhwgB2jdF8rd0UI9nwHU/wkGKULuzvZBbtW9jiPuU
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR01MB7976
-X-Spam-Score: -2.0 (--)
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/21/2023 10:45 AM, Jeff Layton wrote: > struct timespec64
- has unused bits in the tv_nsec field that can be used > for other purposes.
- In future patches, we're going to change how the > inode->i_ct [...] 
- Content analysis details:   (-2.0 points, 6.0 required)
+ Content preview:  On 6/21/23 23:45, Jeff Layton wrote: > struct timespec64 has
+ unused bits in the tv_nsec field that can be used > for other purposes. In
+ future patches, we're going to change how the > inode->i_ctime i [...] 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.236.40 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.236.40 listed in wl.mailspike.net]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1qC7oE-0004A1-GP
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.1 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qC8TC-00B3io-5a
 Subject: Re: [f2fs-dev] [PATCH 01/79] fs: add ctime accessors infrastructure
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -292,11 +237,11 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 6/21/2023 10:45 AM, Jeff Layton wrote:
+On 6/21/23 23:45, Jeff Layton wrote:
 > struct timespec64 has unused bits in the tv_nsec field that can be used
 > for other purposes. In future patches, we're going to change how the
 > inode->i_ctime is accessed in certain inodes in order to make use of
@@ -306,50 +251,9 @@ On 6/21/2023 10:45 AM, Jeff Layton wrote:
 > Add new accessor functions for the ctime that we can use to replace them.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-> ---
->   fs/inode.c         | 16 ++++++++++++++
->   include/linux/fs.h | 53 +++++++++++++++++++++++++++++++++++++++++++++-
->   2 files changed, 68 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/inode.c b/fs/inode.c
-> index d37fad91c8da..c005e7328fbb 100644
-> --- a/fs/inode.c
-> +++ b/fs/inode.c
-> @@ -2499,6 +2499,22 @@ struct timespec64 current_time(struct inode *inode)
->   }
->   EXPORT_SYMBOL(current_time);
->   
-> +/**
-> + * inode_ctime_set_current - set the ctime to current_time
-> + * @inode: inode
-> + *
-> + * Set the inode->i_ctime to the current value for the inode. Returns
-> + * the current value that was assigned to i_ctime.
-> + */
-> +struct timespec64 inode_ctime_set_current(struct inode *inode)
-> +{
-> +	struct timespec64 now = current_time(inode);
-> +
-> +	inode_set_ctime(inode, now);
-> +	return now;
-> +}
-> +EXPORT_SYMBOL(inode_ctime_set_current);
-> +
->   /**
->    * in_group_or_capable - check whether caller is CAP_FSETID privileged
->    * @idmap:	idmap of the mount @inode was found from
-> diff --git a/include/linux/fs.h b/include/linux/fs.h
-> index 6867512907d6..9afb30606373 100644
-> --- a/include/linux/fs.h
-> +++ b/include/linux/fs.h
-> @@ -1474,7 +1474,58 @@ static inline bool fsuidgid_has_mapping(struct super_block *sb,
->   	       kgid_has_mapping(fs_userns, kgid);
->   }
->   
-> -extern struct timespec64 current_time(struct inode *inode);
-> +struct timespec64 current_time(struct inode *inode);
-> +struct timespec64 inode_ctime_set_current(struct inode *inode);
-> +
+
+[...]
+
 > +/**
 > + * inode_ctime_peek - fetch the current ctime from the inode
 > + * @inode: inode from which to fetch ctime
@@ -357,62 +261,15 @@ On 6/21/2023 10:45 AM, Jeff Layton wrote:
 > + * Grab the current ctime from the inode and return it.
 > + */
 > +static inline struct timespec64 inode_ctime_peek(const struct inode *inode)
-> +{
-> +	return inode->i_ctime;
-> +}
-> +
-> +/**
-> + * inode_ctime_set - set the ctime in the inode to the given value
-> + * @inode: inode in which to set the ctime
-> + * @ts: timespec value to set the ctime
-> + *
-> + * Set the ctime in @inode to @ts.
-> + */
-> +static inline struct timespec64 inode_ctime_set(struct inode *inode, struct timespec64 ts)
-> +{
-> +	inode->i_ctime = ts;
-> +	return ts;
-> +}
-> +
-> +/**
-> + * inode_ctime_set_sec - set only the tv_sec field in the inode ctime
 
-I'm curious about why you choose to split the tv_sec and tv_nsec
-set_ functions. Do any callers not set them both? Wouldn't a
-single call enable a more atomic behavior someday?
+To be consistent with inode_ctime_set(), why not call this one inode_ctime_get()
+? Also, inode_set_ctime() & inode_get_ctime() may be a little more natural. But
+no strong opinion about that though.
 
-   inode_ctime_set_sec_nsec(struct inode *, time64_t, time64_t)
+-- 
+Damien Le Moal
+Western Digital Research
 
-(or simply initialize a timespec64 and use inode_ctime_spec() )
-
-Tom.
-
-> + * @inode: inode in which to set the ctime
-> + * @sec:  value to set the tv_sec field
-> + *
-> + * Set the sec field in the ctime. Returns @sec.
-> + */
-> +static inline time64_t inode_ctime_set_sec(struct inode *inode, time64_t sec)
-> +{
-> +	inode->i_ctime.tv_sec = sec;
-> +	return sec;
-> +}
-> +
-> +/**
-> + * inode_ctime_set_nsec - set only the tv_nsec field in the inode ctime
-> + * @inode: inode in which to set the ctime
-> + * @nsec:  value to set the tv_nsec field
-> + *
-> + * Set the nsec field in the ctime. Returns @nsec.
-> + */
-> +static inline long inode_ctime_set_nsec(struct inode *inode, long nsec)
-> +{
-> +	inode->i_ctime.tv_nsec = nsec;
-> +	return nsec;
-> +}
->   
->   /*
->    * Snapshotting support.
 
 
 _______________________________________________
