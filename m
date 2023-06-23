@@ -2,103 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0589D73BEAF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Jun 2023 21:07:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4924E73BEB5
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 23 Jun 2023 21:16:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qCm8E-00034t-3x;
-	Fri, 23 Jun 2023 19:07:42 +0000
+	id 1qCmGG-00006F-O9;
+	Fri, 23 Jun 2023 19:16:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1qCm8D-00034n-BG
+ (envelope-from <jaegeuk@kernel.org>) id 1qCmGE-000068-4k
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Jun 2023 19:07:41 +0000
+ Fri, 23 Jun 2023 19:15:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mXBy0AaOYC8q+ZTQDhtqjJ6Nh3JsUHeZl6f+Js0D0Bo=; b=moK/F+monAVXrij7hk5faeeS2z
- 90UrgwKQeMXM3cMqRRv84ESZH9Q4lHA7wP/J4FK4waGNTer+kWItWw3H1DrGX3RSNszO5ydQc+aYp
- rV722gdf9C/03fY4TOXu2OtcX9di7jSTF4iJpRCk3OyJfnDjLwAiERulFzB8590BFBr8=;
+ bh=18Di6G033KpjIOYPm4VhN1PSzlu9LJ0ou/gFriGRm/0=; b=mHfaD401yr1e6LYBlcto6pXE5x
+ cG+2X46kwDmPPZSH6rDyPuHSWeop7FcMh/MAAR35Nw0xf3ocI7WMmOIkM6UmSfTDReF8H38l8YxGh
+ kLnESusW/tl/Hlrp8G9WQA8lI/z9J6TNBEDUYuJeY/P9gt90vQzyWmk9xFNWs4e/P2m0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mXBy0AaOYC8q+ZTQDhtqjJ6Nh3JsUHeZl6f+Js0D0Bo=; b=m3LN7cZ6L1vvlI0G6s8Q6LxsnB
- xvAYidShSJAsIbyU0aIrQ6hfDP79adkZzyaRDq+xbb8OBlE+FGoAcB/8MTD1NoqpyQPBfbBlAEQkT
- 3QSXehrj6U+ffVEYNpdGCJpkhPM+kOr4kByy53zJkIhDbScphYbzvIFULQUn6txjWPG0=;
+ bh=18Di6G033KpjIOYPm4VhN1PSzlu9LJ0ou/gFriGRm/0=; b=UAyCB10Du0SHauyv11oI8tirLO
+ 1VoPms6U5t8fdZBuE1uwJseJfHSDs5nvK9dthI1KgfZ+dpau5MQbM5SQePDYiS5jaTh2xMy/R/TNY
+ vD7i+JPm4RBJfRs228Xwyx/0iUnUqamQi7m0IGsMqgsaXt0gYHgENLH5oroYnj16WlFI=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qCm88-0006vF-Py for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 23 Jun 2023 19:07:41 +0000
+ id 1qCmG8-00075d-8I for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 23 Jun 2023 19:15:57 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6613E61A8A;
- Fri, 23 Jun 2023 19:07:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AAB0CC433C0;
- Fri, 23 Jun 2023 19:07:30 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D7D0061AB8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 23 Jun 2023 19:15:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 33C45C433C8;
+ Fri, 23 Jun 2023 19:15:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1687547250;
- bh=3oIrKT+DwvrEWaVxD5JTgNFQgRwhlYyZXMKFAb4an9c=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gxUi9P87k5n0u+hDcsZKcvsli/1yQ/u2ZG1slRAUCrG6d4kwy+TBzpAEdn7ufosx5
- cnI6viiDgcY4spSPRXJVltmixK3H+jd7eyS7bDVNpimkZgJyvaT4POV6QcGtZ1dnqE
- lj9OIq/G0yGf+jG41LjctjFOGUgkjIriMMBCUxnRGxGSTfqF1p3XhYdx77WMN/TMR5
- 3pGt09TR63vePyCOxuoedNqzin+5vFl6ixKPUbUkg0s1xvzz/quY6eVTlucKuf36+z
- gGObUR8zOvR90ImbnQxd3CpxMfUzig9AFTVK64OfLZuVdCw2y9lfpl+/WZOSu+wFhc
- iWXKpV8fIIyfw==
-Date: Fri, 23 Jun 2023 12:07:29 -0700
+ s=k20201202; t=1687547746;
+ bh=jnTBrbslxp9wjuZpk/G+lTdN3BwKxiUCagWOzSpADAk=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=Yst19NYT3zXJGrou6Zzh0yxyjM6theurBQUx3Nx4j3qnLNs/8udC/ajwe7ed+MmGi
+ CqI9Vp8SSbk2FUckSIudEFgmsAtLejfi7dQz0SYLleF48dCTOOVUEHiFvt3gN2k9hT
+ /XRKHObhVPr15REkiTzF2Fa+6eyjTg/H2OCt+3/UX1JMnEzSXLHtwYcX+Rfeoza+30
+ o2tNIpQbCuAlxA51CcIuHijfae/ViEV/UUTQmUYsRhRSAT1ytAzRWSVz8z/axM6uHA
+ j2MFDGR+vBtbLC3FeLZpYlFTOEoWioIQ4y+G8jTv3IMg8F5HZB0FJx/8tv+yODBidv
+ 00dJjbENoiIZQ==
+Date: Fri, 23 Jun 2023 12:15:44 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZJXtcfoR+BFx5CXn@google.com>
-References: <20230613085250.3648491-1-heyunlei@oppo.com>
- <b8523d41-246b-b11e-f6e3-423e32cc597a@kernel.org>
- <6c527e97-c4a6-dc58-13fb-516f77e5e068@oppo.com>
- <f7a44e66-6fde-a178-d29e-7684bcbc454e@kernel.org>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Message-ID: <ZJXvYG/q7gZwEuap@google.com>
+References: <20230606203645.3926651-1-jaegeuk@kernel.org>
+ <ZIjqKHDUmN6u9pXa@google.com> <ZJP0aoy03Vx2Q2K1@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <f7a44e66-6fde-a178-d29e-7684bcbc454e@kernel.org>
-X-Spam-Score: -5.9 (-----)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-1.v13.lw.sourceforge.com",
+In-Reply-To: <ZJP0aoy03Vx2Q2K1@google.com>
+X-Spam-Score: -5.2 (-----)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 06/20, Chao Yu wrote: > On 2023/6/20 10:42, 何云蕾(Yunlei
-    he) wrote: > > > > On 2023/6/20 8:33, Chao Yu wrote: > > > On 2023/6/13 16:52,
-    Yunlei He wrote: > > > > File set both cold and hot advis [...] 
- 
- Content analysis details:   (-5.9 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview: Let's compress tmp files for the given extension list. This
+ patch does not change the previous behavior, but allow the cases as below.
+ Extention example: "ext" 
+ Content analysis details:   (-5.2 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
-                             high trust
-                             [139.178.84.217 listed in list.dnswl.org]
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qCm88-0006vF-Py
-Subject: Re: [f2fs-dev] [PATCH] f2fs: not allowed to set file both cold and
- hot
+ author's domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qCmG8-00075d-8I
+Subject: Re: [f2fs-dev] [PATCH v4] f2fs: compress tmp files given extension
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,46 +106,115 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMDYvMjAsIENoYW8gWXUgd3JvdGU6Cj4gT24gMjAyMy82LzIwIDEwOjQyLCDkvZXkupHolb4o
-WXVubGVpIGhlKSB3cm90ZToKPiA+IAo+ID4gT24gMjAyMy82LzIwIDg6MzMsIENoYW8gWXUgd3Jv
-dGU6Cj4gPiA+IE9uIDIwMjMvNi8xMyAxNjo1MiwgWXVubGVpIEhlIHdyb3RlOgo+ID4gPiA+IEZp
-bGUgc2V0IGJvdGggY29sZCBhbmQgaG90IGFkdmlzZSBiaXQgaXMgY29uZnVzaW9uLCBzbwo+ID4g
-PiA+IHJldHVybiBFSU5WQUwgdG8gYXZvaWQgdGhpcyBjYXNlLgo+ID4gPiA+IAo+ID4gPiA+IFNp
-Z25lZC1vZmYtYnk6IFl1bmxlaSBIZSA8aGV5dW5sZWlAb3Bwby5jb20+Cj4gPiA+ID4gLS0tCj4g
-PiA+ID4gwqAgZnMvZjJmcy94YXR0ci5jIHwgMyArKysKPiA+ID4gPiDCoCAxIGZpbGUgY2hhbmdl
-ZCwgMyBpbnNlcnRpb25zKCspCj4gPiA+ID4gCj4gPiA+ID4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMv
-eGF0dHIuYyBiL2ZzL2YyZnMveGF0dHIuYwo+ID4gPiA+IGluZGV4IDIxMzgwNWQzNTkyYy4uOTE3
-ZjNhYzlmMWExIDEwMDY0NAo+ID4gPiA+IC0tLSBhL2ZzL2YyZnMveGF0dHIuYwo+ID4gPiA+ICsr
-KyBiL2ZzL2YyZnMveGF0dHIuYwo+ID4gPiA+IEBAIC0xMjcsNiArMTI3LDkgQEAgc3RhdGljIGlu
-dCBmMmZzX3hhdHRyX2FkdmlzZV9zZXQoY29uc3Qgc3RydWN0IHhhdHRyX2hhbmRsZXIgKmhhbmRs
-ZXIsCj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FSU5W
-QUw7Cj4gPiA+ID4gCj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoCBuZXdfYWR2aXNlID0gbmV3X2Fk
-dmlzZSAmIEZBRFZJU0VfTU9ESUZJQUJMRV9CSVRTOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqAgaWYg
-KChuZXdfYWR2aXNlICYgRkFEVklTRV9DT0xEX0JJVCkgJiYgKG5ld19hZHZpc2UgJiBGQURWSVNF
-X0hPVF9CSVQpKQo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAt
-RUlOVkFMOwoKV2h5IG5vdCB0aGlzIHRvIGFsbG93IHNldHRpbmcgb25lIGJpdCBvbmx5PwoKQEAg
-LTEyMyw3ICsxMjMsOCBAQCBzdGF0aWMgaW50IGYyZnNfeGF0dHJfYWR2aXNlX3NldChjb25zdCBz
-dHJ1Y3QgeGF0dHJfaGFuZGxlciAqaGFuZGxlciwKICAgICAgICAgICAgICAgIHJldHVybiAtRUlO
-VkFMOwoKICAgICAgICBuZXdfYWR2aXNlID0gKihjaGFyICopdmFsdWU7Ci0gICAgICAgaWYgKG5l
-d19hZHZpc2UgJiB+RkFEVklTRV9NT0RJRklBQkxFX0JJVFMpCisgICAgICAgaWYgKG5ld19hZHZp
-c2UgJiB+RkFEVklTRV9NT0RJRklBQkxFX0JJVFMgfHwKKyAgICAgICAgICAgbmV3X2FkdmlzZSA9
-PSBGQURWSVNFX01PRElGSUFCTEVfQklUUykKICAgICAgICAgICAgICAgIHJldHVybiAtRUlOVkFM
-OwoKPiA+ID4gCj4gPiA+IFl1bmxlaSwKPiA+ID4gCj4gPiA+IFdoYXQgYWJvdXQgdGhlIGJlbG93
-IGNhc2U6Cj4gPiA+IAo+ID4gPiAxLiBmMmZzX3hhdHRyX2FkdmlzZV9zZXQoRkFEVklTRV9DT0xE
-X0JJVCkKPiA+ID4gMi4gZjJmc194YXR0cl9hZHZpc2Vfc2V0KEZBRFZJU0VfSE9UX0JJVCkKPiA+
-IAo+ID4gSGkswqAgQ2hhbywKPiA+IAo+ID4gIMKgwqDCoCBJIHRlc3QgdGhpcyBjYXNlIHdvcmsg
-d2VsbCB3aXRoIHRoaXMgcGF0Y2gswqAgY2FzZSBiZWxvdyB3aWxsIHJldHVybiAtRUlOVkFMOgo+
-ID4gCj4gPiAgwqDCoMKgIGYyZnNfeGF0dHJfYWR2aXNlX3NldChGQURWSVNFX0NPTERfQklUIHwg
-RkFEVklTRV9IT1RfQklUKQo+IAo+IENvcnJlY3QsIEkgbWlzc2VkIHRvIGNoZWNrIGJlbG93IHN0
-YXRlbWVudC4KPiAKPiBuZXdfYWR2aXNlIHw9IG9sZF9hZHZpc2UgJiB+RkFEVklTRV9NT0RJRklB
-QkxFX0JJVFM7Cj4gCj4gQW55d2F5LCB0aGUgcGF0Y2ggbG9va3MgZ29vZCB0byBtZS4KPiAKPiBS
-ZXZpZXdlZC1ieTogQ2hhbyBZdSA8Y2hhb0BrZXJuZWwub3JnPgo+IAo+IFRoYW5rcywKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRl
-dmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApo
-dHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRl
-dmVsCg==
+Let's compress tmp files for the given extension list.
+
+This patch does not change the previous behavior, but allow the cases as below.
+
+Extention example: "ext"
+
+- abc.ext : allow
+- abc.ext.abc : allow
+- abc.extm : not allow
+
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+   Change log from v3:
+    - split temparature and compress extensions
+
+   Change log from v2:
+    - fix parameters
+ 
+   Change log from v1:
+    - refactor to allow abc.ext.dontcare only
+
+ fs/f2fs/namei.c | 28 +++++++++++++++++++++-------
+ 1 file changed, 21 insertions(+), 7 deletions(-)
+
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index 3e35eb7dbb8f..ff89de115272 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -23,7 +23,7 @@
+ #include <trace/events/f2fs.h>
+ 
+ static inline bool is_extension_exist(const unsigned char *s, const char *sub,
+-						bool tmp_ext)
++						bool tmp_ext, bool tmp_dot)
+ {
+ 	size_t slen = strlen(s);
+ 	size_t sublen = strlen(sub);
+@@ -49,13 +49,27 @@ static inline bool is_extension_exist(const unsigned char *s, const char *sub,
+ 	for (i = 1; i < slen - sublen; i++) {
+ 		if (s[i] != '.')
+ 			continue;
+-		if (!strncasecmp(s + i + 1, sub, sublen))
+-			return true;
++		if (!strncasecmp(s + i + 1, sub, sublen)) {
++			if (!tmp_dot)
++				return true;
++			if (i == slen - sublen - 1 || s[i + 1 + sublen] == '.')
++				return true;
++		}
+ 	}
+ 
+ 	return false;
+ }
+ 
++static inline bool is_temperature_extension(const unsigned char *s, const char *sub)
++{
++	return is_extension_exist(s, sub, true, false);
++}
++
++static inline bool is_compress_extension(const unsigned char *s, const char *sub)
++{
++	return is_extension_exist(s, sub, true, true);
++}
++
+ int f2fs_update_extension_list(struct f2fs_sb_info *sbi, const char *name,
+ 							bool hot, bool set)
+ {
+@@ -148,7 +162,7 @@ static void set_compress_new_inode(struct f2fs_sb_info *sbi, struct inode *dir,
+ 	cold_count = le32_to_cpu(sbi->raw_super->extension_count);
+ 	hot_count = sbi->raw_super->hot_ext_count;
+ 	for (i = cold_count; i < cold_count + hot_count; i++)
+-		if (is_extension_exist(name, extlist[i], false))
++		if (is_temperature_extension(name, extlist[i]))
+ 			break;
+ 	f2fs_up_read(&sbi->sb_lock);
+ 	if (i < (cold_count + hot_count))
+@@ -156,12 +170,12 @@ static void set_compress_new_inode(struct f2fs_sb_info *sbi, struct inode *dir,
+ 
+ 	/* Don't compress unallowed extension. */
+ 	for (i = 0; i < noext_cnt; i++)
+-		if (is_extension_exist(name, noext[i], false))
++		if (is_compress_extension(name, noext[i]))
+ 			return;
+ 
+ 	/* Compress wanting extension. */
+ 	for (i = 0; i < ext_cnt; i++) {
+-		if (is_extension_exist(name, ext[i], false)) {
++		if (is_compress_extension(name, ext[i])) {
+ 			set_compress_context(inode);
+ 			return;
+ 		}
+@@ -189,7 +203,7 @@ static void set_file_temperature(struct f2fs_sb_info *sbi, struct inode *inode,
+ 	cold_count = le32_to_cpu(sbi->raw_super->extension_count);
+ 	hot_count = sbi->raw_super->hot_ext_count;
+ 	for (i = 0; i < cold_count + hot_count; i++)
+-		if (is_extension_exist(name, extlist[i], true))
++		if (is_temperature_extension(name, extlist[i]))
+ 			break;
+ 	f2fs_up_read(&sbi->sb_lock);
+ 
+-- 
+2.41.0.162.gfafddb0af9-goog
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
