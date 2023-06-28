@@ -2,98 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4743674094C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 28 Jun 2023 07:53:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69992740A91
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 28 Jun 2023 10:07:34 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qEO77-0003tR-VS;
-	Wed, 28 Jun 2023 05:53:13 +0000
+	id 1qEQD0-0007EQ-9M;
+	Wed, 28 Jun 2023 08:07:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1qEO76-0003tD-8a
+ (envelope-from <jaegeuk@kernel.org>) id 1qEQCx-0007EK-QU
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 28 Jun 2023 05:53:12 +0000
+ Wed, 28 Jun 2023 08:07:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kwM4E7fj10dgg1KsyowvyJ8xn3AoW4S1VO+63NiM8eM=; b=GvK2JPHOEEDjGo/D1VixTrG3Fj
- 0S+1M2o5rOXIYc16k4m1Ecw/D99MWdNVpbye6276YmXGyabQx3Ryu8qXBGDYm3+aLf5jTfyfUYVKw
- p9lgHtB6bneT8oYQXusQZPUQd6y/3b3rHR+KSZtXJc9Ff+3vMdkG4kCmgIiWPOCDZBAc=;
+ bh=gbyGZHfHD3A0CThh/P1FB1PwsjFeBiZywR3Y8Z8tBEM=; b=PhX/6RwSNFMqKXl1FmGjrx2Unb
+ C8q3Ycs99VIX3HIT3ZmWOqaMFW+7NOCVwMAdCVti/u3IzJsP2xnwnHlj3pTAxl1SsqpFelkLRQ12t
+ 7azCPC87vuUQn0nL0XvG8a+bjQUhrA8w/MV36XfecYLIKVQ9yyV4ZBOi4rQVmWdFjf/Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kwM4E7fj10dgg1KsyowvyJ8xn3AoW4S1VO+63NiM8eM=; b=Z3oRNv8sZTIfc781PZ+b+AT017
- jX1rmrg+BGwfAzErICzWHrm45YHXD51sF99BW8tVJSkWQgwq3RevUu7UwP73V3YEZjuiVeyI8eQLo
- ameOD4bvD58vPyjEL59vI75DMcHRKRklYJmsIB41rlEKBBCqtbQ6mxI04v/ppOabySao=;
+ bh=gbyGZHfHD3A0CThh/P1FB1PwsjFeBiZywR3Y8Z8tBEM=; b=ZARfRcDOqtN3Eu6Y1LOXRIfVE2
+ Y6rvsHB7tdGRfKbbNKLj7D7Udf+unfSisKgp4M4qOHT1VHkDzeRcc4AYHb4zdSqdHg9oXAanVXpWf
+ dLKQQDhQUHBLDj4ZpN4tWtih4o3d2AFqpPpx56oXPhv5dpTcqNGp6Me0PjqiuQNFtD4M=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qEO70-00H5PG-W8 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 28 Jun 2023 05:53:12 +0000
+ id 1qEQCx-0004Pt-1m for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 28 Jun 2023 08:07:24 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 28774612D8;
- Wed, 28 Jun 2023 05:52:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5CF05C433C0;
- Wed, 28 Jun 2023 05:52:53 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6A2F661325
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 28 Jun 2023 08:07:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72539C433C8;
+ Wed, 28 Jun 2023 08:07:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1687931573;
- bh=PPV5gFBUM+cLvTsnfUr0wCzl2695GOcuHmjuhb1pj24=;
+ s=k20201202; t=1687939636;
+ bh=IOSxMIm++J/AtvG+30u6yhS8IDwIG/Uc3jBJXaL2v1k=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=LBpuumsnAWP8myDiXNDsmwsMUtxg5NoppaXFXDdBSjkhjck8TUBEgUhtmyPJbB/Pa
- cvAV6FTrWfoVgZloADtlRbNkbxFN83upW3iQCqBY+3xfzCLHl3oph/JZepjO+oOQiV
- G6zYZoL10K8nIrW6JSi5TYzWhVSNRelzJnzuvhnCz6XH/uli+f0jrTYBz7+7ghsK/F
- OPR2K8IXJ9MO8D+FWW5ln8H0HteyDnEuiRksR0w66R0WOMuvnct8pGzX5wLcGc5MsU
- zwFN8wNRGYlCUoN8AfHSZMEycFEsRONnfitjFbA2YNVDRy+AcvjWFzphcv/LTIRKQ1
- B04+mw/5BhZ0Q==
-Date: Tue, 27 Jun 2023 22:52:51 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: syzbot <syzbot+b67b270114065129f12b@syzkaller.appspotmail.com>
-Message-ID: <20230628055251.GB1908@sol.localdomain>
-References: <0000000000003b764f05ff09c1e2@google.com>
+ b=ZJeqKGgVWg5IBQHSCInLraK5jpK5xXuP6otl/gct3F4+5nWR4zd2ROPP+cAILOXCs
+ LIhaNN/35LDYehBBBm6cL2ZTEW6e4H0hp9egR1zSqoqeFmGxNKQX8T6lRAIAs/Z8vI
+ iUV1Gft01eER0aYZYL01KgzOev0M36fSykrcU95DrvbMxIyJcWzEJ8QBvf9JWrlLuu
+ LJcycs+ldlaQNuFuvG+c8aM0EkqM0ZNF24/wYnxeRVukMTwAwf7OtxLmJ1uHDJkzlI
+ sV2XASFW8pWhoe30lJYXuLUjKnX8iqxVWP+YlzWQT8nnLpAMghv8tluO1lHZMTwui8
+ VsnVAIMgGl3tw==
+Date: Wed, 28 Jun 2023 01:07:14 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZJvqMpWiit24BnXL@google.com>
+References: <20230613233940.3643362-1-jaegeuk@kernel.org>
+ <e5788348-b547-8e10-21af-90544f3aa75c@kernel.org>
+ <d0ec4a04-ab81-7e71-ad56-5b22e1815919@kernel.org>
+ <ZJmOgRADvLP/4rMJ@google.com>
+ <8a370c8e-3b5f-5ea7-5839-76896d1ec69e@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <0000000000003b764f05ff09c1e2@google.com>
+In-Reply-To: <8a370c8e-3b5f-5ea7-5839-76896d1ec69e@kernel.org>
 X-Spam-Score: -5.2 (-----)
-X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Jun 26, 2023 at 08:10:45AM -0700, syzbot wrote: >
- Hello, > > syzbot found the following issue on: > > HEAD commit: c87d46a9e8eb
- Add linux-next specific files for 20230622 > git tree: linux-nex [...] 
+ 
+ Content preview:  On 06/27, Chao Yu wrote: > On 2023/6/26 21:11, Jaegeuk Kim
+    wrote: > > On 06/25, Chao Yu wrote: > > > On 2023/6/25 15:26, Chao Yu wrote:
+    > > > > One concern below: > > > > > > > > Thread A:             [...] 
+ 
  Content analysis details:   (-5.2 points, 6.0 required)
- pts rule name              description
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+                             high trust
+                             [139.178.84.217 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+                             envelope-from domain
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+                             author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qEO70-00H5PG-W8
-Subject: Re: [f2fs-dev] [syzbot] [mm?] possible deadlock in
- f2fs_file_write_iter
+X-Headers-End: 1qEQCx-0004Pt-1m
+Subject: Re: [f2fs-dev] [PATCH] f2fs: remove i_xattr_sem to avoid deadlock
+ and fix the original issue
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,66 +113,242 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-mm@kvack.org, akpm@linux-foundation.org,
- syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org,
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Jun 26, 2023 at 08:10:45AM -0700, syzbot wrote:
-> Hello,
-> 
-> syzbot found the following issue on:
-> 
-> HEAD commit:    c87d46a9e8eb Add linux-next specific files for 20230622
-> git tree:       linux-next
-> console output: https://syzkaller.appspot.com/x/log.txt?x=129edf4b280000
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=d8ac8dd33677e8e0
-> dashboard link: https://syzkaller.appspot.com/bug?extid=b67b270114065129f12b
-> compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
-> 
-> Unfortunately, I don't have any reproducer for this issue yet.
-> 
-> Downloadable assets:
-> disk image: https://storage.googleapis.com/syzbot-assets/bdf5ea2db527/disk-c87d46a9.raw.xz
-> vmlinux: https://storage.googleapis.com/syzbot-assets/3201e576e2ad/vmlinux-c87d46a9.xz
-> kernel image: https://storage.googleapis.com/syzbot-assets/d011d9fa4e63/bzImage-c87d46a9.xz
-> 
-> IMPORTANT: if you fix the issue, please add the following tag to the commit:
-> Reported-by: syzbot+b67b270114065129f12b@syzkaller.appspotmail.com
-> 
-> F2FS-fs (loop5): Mounted with checkpoint version = 48b305e5
-> ======================================================
-> WARNING: possible circular locking dependency detected
-> 6.4.0-rc7-next-20230622-syzkaller #0 Not tainted
-> ------------------------------------------------------
-> syz-executor.5/16876 is trying to acquire lock:
-> ffff88802a033120 (&mm->mmap_lock){++++}-{3:3}, at: percpu_ref_put include/linux/percpu-refcount.h:351 [inline]
-> ffff88802a033120 (&mm->mmap_lock){++++}-{3:3}, at: put_dev_pagemap include/linux/memremap.h:251 [inline]
-> ffff88802a033120 (&mm->mmap_lock){++++}-{3:3}, at: gup_pte_range mm/gup.c:2583 [inline]
-> ffff88802a033120 (&mm->mmap_lock){++++}-{3:3}, at: gup_pmd_range mm/gup.c:2950 [inline]
-> ffff88802a033120 (&mm->mmap_lock){++++}-{3:3}, at: gup_pud_range mm/gup.c:2978 [inline]
-> ffff88802a033120 (&mm->mmap_lock){++++}-{3:3}, at: gup_p4d_range mm/gup.c:3003 [inline]
-> ffff88802a033120 (&mm->mmap_lock){++++}-{3:3}, at: gup_pgd_range mm/gup.c:3031 [inline]
-> ffff88802a033120 (&mm->mmap_lock){++++}-{3:3}, at: lockless_pages_from_mm mm/gup.c:3084 [inline]
-> ffff88802a033120 (&mm->mmap_lock){++++}-{3:3}, at: internal_get_user_pages_fast+0x135f/0x3370 mm/gup.c:3133
-> 
-> but task is already holding lock:
-> ffff88808b20ea30 (&fi->i_gc_rwsem[WRITE]){++++}-{3:3}, at: f2fs_down_read fs/f2fs/f2fs.h:2107 [inline]
-> ffff88808b20ea30 (&fi->i_gc_rwsem[WRITE]){++++}-{3:3}, at: f2fs_dio_write_iter fs/f2fs/file.c:4643 [inline]
-> ffff88808b20ea30 (&fi->i_gc_rwsem[WRITE]){++++}-{3:3}, at: f2fs_file_write_iter+0x1161/0x2500 fs/f2fs/file.c:4766
-> 
+On 06/27, Chao Yu wrote:
+> On 2023/6/26 21:11, Jaegeuk Kim wrote:
+> > On 06/25, Chao Yu wrote:
+> > > On 2023/6/25 15:26, Chao Yu wrote:
+> > > > One concern below:
+> > > > =
 
-This was caused by the patch
-"f2fs: fix to avoid mmap vs set_compress_option case"
-(https://lore.kernel.org/linux-f2fs-devel/20230529104709.2560779-1-chao@kernel.org/)
-which has been dropped.
+> > > > Thread A:=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =
+Thread B:
+> > > > - f2fs_getxattr
+> > > >   =A0- lookup_all_xattrs
+> > > >   =A0 - read_inline_xattr
+> > > >   =A0=A0 - f2fs_get_node_page(ino)
+> > > >   =A0=A0 - memcpy inline xattr
+> > > >   =A0=A0 - f2fs_put_page
+> > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0 - f2fs_setxattr
+> > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0 - __f2fs_setxattr
+> > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 - __f2fs_setxattr
+> > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0 - write_all_xattrs
+> > > >   =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0 - write xnode and inode
+> > > >   =A0 ---> inline xattr may out of update here.
+> > > >   =A0 - read_xattr_block
+> > > >   =A0=A0 - f2fs_get_node_page(xnid)
+> > > >   =A0=A0 - memcpy xnode xattr
+> > > >   =A0=A0 - f2fs_put_page
+> > > > =
 
-#syz set subsystems: f2fs
-#syz invalid
+> > > > Do we need to keep xattr_{get,set} being atomical operation?
+> > > =
 
-- Eric
+> > > It seems xfstest starts to complain w/ below message...
+> > =
+
+> > I don't see any failure. Which test do you see?
+> =
+
+> 051, 083, ... 467, 642
+> =
+
+> Testcase doesn't fail, but kernel log shows inode has corrupted xattr.
+
+I got it. It seems I had to fix the above issue only while keeping the sem.=
+ :(
+
+> =
+
+> > =
+
+> > > =
+
+> > > [ 3400.856443] F2FS-fs (vdc): inode (2187) has invalid last xattr ent=
+ry, entry_size: 21468
+> > > [ 3400.864042] F2FS-fs (vdc): inode (1595) has invalid last xattr ent=
+ry, entry_size: 26580
+> > > [ 3400.865764] F2FS-fs (vdc): inode (2187) has invalid last xattr ent=
+ry, entry_size: 21468
+> > > [ 3400.880067] F2FS-fs (vdc): inode (9839) has corrupted xattr
+> > > [ 3400.880714] F2FS-fs (vdc): inode (10855) has corrupted xattr
+> > > =
+
+> > > Thanks,
+> > > =
+
+> > > > =
+
+> > > > Thanks,
+> > > > =
+
+> > > > > =
+
+> > > > > I think we don't need to truncate xattr pages eagerly which intro=
+duces lots of
+> > > > > data races without big benefits.
+> > > > > =
+
+> > > > > Cc: <stable@vger.kernel.org>
+> > > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > > > > ---
+> > > > >  =A0 fs/f2fs/f2fs.h=A0 |=A0 1 -
+> > > > >  =A0 fs/f2fs/super.c |=A0 1 -
+> > > > >  =A0 fs/f2fs/xattr.c | 31 ++++++++-----------------------
+> > > > >  =A0 3 files changed, 8 insertions(+), 25 deletions(-)
+> > > > > =
+
+> > > > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > > > > index 3f5b161dd743..7b9af2d51656 100644
+> > > > > --- a/fs/f2fs/f2fs.h
+> > > > > +++ b/fs/f2fs/f2fs.h
+> > > > > @@ -838,7 +838,6 @@ struct f2fs_inode_info {
+> > > > >  =A0=A0=A0=A0=A0 /* avoid racing between foreground op and gc */
+> > > > >  =A0=A0=A0=A0=A0 struct f2fs_rwsem i_gc_rwsem[2];
+> > > > > -=A0=A0=A0 struct f2fs_rwsem i_xattr_sem; /* avoid racing between=
+ reading and changing EAs */
+> > > > >  =A0=A0=A0=A0=A0 int i_extra_isize;=A0=A0=A0=A0=A0=A0=A0 /* size =
+of extra space located in i_addr */
+> > > > >  =A0=A0=A0=A0=A0 kprojid_t i_projid;=A0=A0=A0=A0=A0=A0=A0 /* id f=
+or project quota */
+> > > > > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> > > > > index 1b2c788ed80d..c917fa771f0e 100644
+> > > > > --- a/fs/f2fs/super.c
+> > > > > +++ b/fs/f2fs/super.c
+> > > > > @@ -1418,7 +1418,6 @@ static struct inode *f2fs_alloc_inode(struc=
+t super_block *sb)
+> > > > >  =A0=A0=A0=A0=A0 INIT_LIST_HEAD(&fi->gdirty_list);
+> > > > >  =A0=A0=A0=A0=A0 init_f2fs_rwsem(&fi->i_gc_rwsem[READ]);
+> > > > >  =A0=A0=A0=A0=A0 init_f2fs_rwsem(&fi->i_gc_rwsem[WRITE]);
+> > > > > -=A0=A0=A0 init_f2fs_rwsem(&fi->i_xattr_sem);
+> > > > >  =A0=A0=A0=A0=A0 /* Will be used by directory only */
+> > > > >  =A0=A0=A0=A0=A0 fi->i_dir_level =3D F2FS_SB(sb)->dir_level;
+> > > > > diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+> > > > > index 213805d3592c..bdc8a55085a2 100644
+> > > > > --- a/fs/f2fs/xattr.c
+> > > > > +++ b/fs/f2fs/xattr.c
+> > > > > @@ -433,7 +433,7 @@ static inline int write_all_xattrs(struct ino=
+de *inode, __u32 hsize,
+> > > > >  =A0 {
+> > > > >  =A0=A0=A0=A0=A0 struct f2fs_sb_info *sbi =3D F2FS_I_SB(inode);
+> > > > >  =A0=A0=A0=A0=A0 size_t inline_size =3D inline_xattr_size(inode);
+> > > > > -=A0=A0=A0 struct page *in_page =3D NULL;
+> > > > > +=A0=A0=A0 struct page *in_page =3D ipage;
+> > > > >  =A0=A0=A0=A0=A0 void *xattr_addr;
+> > > > >  =A0=A0=A0=A0=A0 void *inline_addr =3D NULL;
+> > > > >  =A0=A0=A0=A0=A0 struct page *xpage;
+> > > > > @@ -446,29 +446,19 @@ static inline int write_all_xattrs(struct i=
+node *inode, __u32 hsize,
+> > > > >  =A0=A0=A0=A0=A0 /* write to inline xattr */
+> > > > >  =A0=A0=A0=A0=A0 if (inline_size) {
+> > > > > -=A0=A0=A0=A0=A0=A0=A0 if (ipage) {
+> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 inline_addr =3D inline_xattr_a=
+ddr(inode, ipage);
+> > > > > -=A0=A0=A0=A0=A0=A0=A0 } else {
+> > > > > +=A0=A0=A0=A0=A0=A0=A0 if (!in_page) {
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 in_page =3D f2fs_get_nod=
+e_page(sbi, inode->i_ino);
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (IS_ERR(in_page)) {
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 f2fs_alloc_n=
+id_failed(sbi, new_nid);
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 return PTR_E=
+RR(in_page);
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 }
+> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 inline_addr =3D inline_xattr_a=
+ddr(inode, in_page);
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0 }
+> > > > > +=A0=A0=A0=A0=A0=A0=A0 inline_addr =3D inline_xattr_addr(inode, i=
+n_page);
+> > > > > -=A0=A0=A0=A0=A0=A0=A0 f2fs_wait_on_page_writeback(ipage ? ipage =
+: in_page,
+> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0 NODE, true, true);
+> > > > > -=A0=A0=A0=A0=A0=A0=A0 /* no need to use xattr node block */
+> > > > > +=A0=A0=A0=A0=A0=A0=A0 f2fs_wait_on_page_writeback(in_page, NODE,=
+ true, true);
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0 if (hsize <=3D inline_size) {
+> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 err =3D f2fs_truncate_xattr_no=
+de(inode);
+> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 f2fs_alloc_nid_failed(sbi, new=
+_nid);
+> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (err) {
+> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 f2fs_put_page(in_p=
+age, 1);
+> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 return err;
+> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 }
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 memcpy(inline_addr, txat=
+tr_addr, inline_size);
+> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 set_page_dirty(ipage ? ipage :=
+ in_page);
+> > > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 set_page_dirty(in_page);
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 goto in_page_out;
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0 }
+> > > > >  =A0=A0=A0=A0=A0 }
+> > > > > @@ -502,12 +492,13 @@ static inline int write_all_xattrs(struct i=
+node *inode, __u32 hsize,
+> > > > >  =A0=A0=A0=A0=A0 memcpy(xattr_addr, txattr_addr + inline_size, VA=
+LID_XATTR_BLOCK_SIZE);
+> > > > >  =A0=A0=A0=A0=A0 if (inline_size)
+> > > > > -=A0=A0=A0=A0=A0=A0=A0 set_page_dirty(ipage ? ipage : in_page);
+> > > > > +=A0=A0=A0=A0=A0=A0=A0 set_page_dirty(in_page);
+> > > > >  =A0=A0=A0=A0=A0 set_page_dirty(xpage);
+> > > > >  =A0=A0=A0=A0=A0 f2fs_put_page(xpage, 1);
+> > > > >  =A0 in_page_out:
+> > > > > -=A0=A0=A0 f2fs_put_page(in_page, 1);
+> > > > > +=A0=A0=A0 if (in_page !=3D ipage)
+> > > > > +=A0=A0=A0=A0=A0=A0=A0 f2fs_put_page(in_page, 1);
+> > > > >  =A0=A0=A0=A0=A0 return err;
+> > > > >  =A0 }
+> > > > > @@ -528,10 +519,8 @@ int f2fs_getxattr(struct inode *inode, int i=
+ndex, const char *name,
+> > > > >  =A0=A0=A0=A0=A0 if (len > F2FS_NAME_LEN)
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0 return -ERANGE;
+> > > > > -=A0=A0=A0 f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
+> > > > >  =A0=A0=A0=A0=A0 error =3D lookup_all_xattrs(inode, ipage, index,=
+ len, name,
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 &entry, &bas=
+e_addr, &base_size, &is_inline);
+> > > > > -=A0=A0=A0 f2fs_up_read(&F2FS_I(inode)->i_xattr_sem);
+> > > > >  =A0=A0=A0=A0=A0 if (error)
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0 return error;
+> > > > > @@ -565,9 +554,7 @@ ssize_t f2fs_listxattr(struct dentry *dentry,=
+ char *buffer, size_t buffer_size)
+> > > > >  =A0=A0=A0=A0=A0 int error;
+> > > > >  =A0=A0=A0=A0=A0 size_t rest =3D buffer_size;
+> > > > > -=A0=A0=A0 f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
+> > > > >  =A0=A0=A0=A0=A0 error =3D read_all_xattrs(inode, NULL, &base_add=
+r);
+> > > > > -=A0=A0=A0 f2fs_up_read(&F2FS_I(inode)->i_xattr_sem);
+> > > > >  =A0=A0=A0=A0=A0 if (error)
+> > > > >  =A0=A0=A0=A0=A0=A0=A0=A0=A0 return error;
+> > > > > @@ -794,9 +781,7 @@ int f2fs_setxattr(struct inode *inode, int in=
+dex, const char *name,
+> > > > >  =A0=A0=A0=A0=A0 f2fs_balance_fs(sbi, true);
+> > > > >  =A0=A0=A0=A0=A0 f2fs_lock_op(sbi);
+> > > > > -=A0=A0=A0 f2fs_down_write(&F2FS_I(inode)->i_xattr_sem);
+> > > > >  =A0=A0=A0=A0=A0 err =3D __f2fs_setxattr(inode, index, name, valu=
+e, size, ipage, flags);
+> > > > > -=A0=A0=A0 f2fs_up_write(&F2FS_I(inode)->i_xattr_sem);
+> > > > >  =A0=A0=A0=A0=A0 f2fs_unlock_op(sbi);
+> > > > >  =A0=A0=A0=A0=A0 f2fs_update_time(sbi, REQ_TIME);
+> > > > =
+
+> > > > =
+
+> > > > _______________________________________________
+> > > > Linux-f2fs-devel mailing list
+> > > > Linux-f2fs-devel@lists.sourceforge.net
+> > > > https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
 
 
 _______________________________________________
