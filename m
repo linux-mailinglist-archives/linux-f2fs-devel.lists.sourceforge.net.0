@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFF3574918C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jul 2023 01:19:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2B017491A0
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  6 Jul 2023 01:20:27 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qHBmd-0003hq-CH;
-	Wed, 05 Jul 2023 23:19:40 +0000
+	id 1qHBnH-0000lC-Ul;
+	Wed, 05 Jul 2023 23:20:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dlemoal@kernel.org>) id 1qHBmc-0003hb-7b;
- Wed, 05 Jul 2023 23:19:39 +0000
+ (envelope-from <dlemoal@kernel.org>) id 1qHBnF-0000kn-KT;
+ Wed, 05 Jul 2023 23:20:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=slKcgiQ5FEofTrznkGRK93lJ2moJwj/7nqB+sNLe2dk=; b=VYxblbeVhd8rgqktQcoEY9CZho
- no0zNH++fmWbhRKKf+2ICvUHDnmy5x3hINyPjrQ9ucjAufG1zlQeXYCMArtOgatejaP4+hceBC1Dz
- WbCJi7NSiSxVJBrB45nXopbc/GSgBOPvskerSmu9ducO9wsmN0L+578pQ5q6xBypkHhQ=;
+ bh=PBi/rBZUAKk0nwnQVnXmgkjzjjT+h/TfW+uo53o5M8k=; b=DHI0b3/thOFwLFParMsH++Yv4N
+ yFnsf5V3VtZ4Uem7PdhSJCG2cxlNKG9369jiyJTD3mDU+6GjjKd9ee4Iqy9ntnDoNQEp2t1b5jAyg
+ 0ubHCmDFbR/nG1ZXjIqatx0dUL8EObUFt5GzIjpkWkunR0Vnj1xLxndwVU++960pe/mM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -30,33 +30,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=slKcgiQ5FEofTrznkGRK93lJ2moJwj/7nqB+sNLe2dk=; b=VOtsJDSvmWW/oJtYX5OnAdAeJF
- 5FiEEkViBOCGcLpIbV8ZdoSN+dhr/YWleQyzh4LM85AjrFxMfY8k0+IML2Thv6JXV8e7La3yXB4Jh
- tbvHu110auJI/NnCKEuEbaIl4Wh0akDM53Egk3qivZw4LylKhtolS7G9DTerYNR3C8tI=;
+ bh=PBi/rBZUAKk0nwnQVnXmgkjzjjT+h/TfW+uo53o5M8k=; b=fk11o6USggewA/VsGoEQ4TbSSG
+ k1VWaKfhqz7EuIliJkJlbJpeKj8evKTnhBWklHHivvIeCDNj7FbcIFhgU4qnfaLiTyOvV/MY2pWQ3
+ EHSq3fq/J2rXCfBYbX6ulI6475M6fx3ZFVQyVCULGxw8+oP62rsB8Ji3xZSF2RSpXNk0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qHBmY-007nKH-NR; Wed, 05 Jul 2023 23:19:39 +0000
+ id 1qHBnE-0000mk-4O; Wed, 05 Jul 2023 23:20:16 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3CA2F617C4;
- Wed,  5 Jul 2023 23:19:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D28EAC433C7;
- Wed,  5 Jul 2023 23:19:01 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 751EB617F2;
+ Wed,  5 Jul 2023 23:20:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26476C433C8;
+ Wed,  5 Jul 2023 23:19:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1688599164;
- bh=KCTloaubNslRR/SoL8UluRoG/IUPJVjSzADYJrfAJHU=;
+ s=k20201202; t=1688599209;
+ bh=lKrue1sGsFTYklMQWRMbQ3My1e6nxD2ObDEGwR/VsF0=;
  h=Date:Subject:To:References:From:In-Reply-To:From;
- b=b2X6YIL6Vy56XALQtKdhzhDP4FaYYu72cv/nQy9J7p20qPoaFddY4NYMECi8UiElG
- KXeBp5mYG0Tr3Z/9dS3G7DFV3U+NrS3kS1Bj4OLdG2oLV7lkerc27aKsKkqjab0O9K
- FATIdox5v3Da+YKWUBF3YXN3ElwAHoGXAASphNzizKagSfTJcPF38/AQplhEub1AKR
- LkLgfDZcW1uv2KNe1PZmf257zQ+kLCx4ktYMXGFo0Ya/ipY5JnCfPPINteVMs1bXpn
- 61eVfSZI95423vo52gH8KvQcVqXg5RZ32hLmWLwnt3Gj7afC9O4NqxdEhtaz5kVF+Y
- 8axRcbIlbfAZA==
-Message-ID: <3b403ef1-22e6-0220-6c9c-435e3444b4d3@kernel.org>
-Date: Thu, 6 Jul 2023 08:19:00 +0900
+ b=HLxmQwiZ1LmjUMMnuuRPPSyg4M265uTgwaRQNcugB9qBZelv5caqUlnlZ5FOkyCBO
+ LA9nfmoC3VcwDcNYXdLwyrAjpQ8qAvbq7SFByp4Q0d8VX6Iv9VyTpE94IU21bzQwq7
+ AXFUzX0mVEu7h6lf94UAW2WWe3aMpfRBaJ0VbFwIq54AZXBu03Eb370uSlX/QYxLnb
+ UXNpYhAvkUoamOq5NO810kR9phlIz2t2HqAG1QMsAKmqwo0IMtrDOTVHIlTnm36wsc
+ mJPYsNRjIZdhZzmDYmS/04VlnpppU6zobkiJuxMYBpvIxpIIrXPcePBFRLkFK603MQ
+ 3zkknzFWV7lIQ==
+Message-ID: <a482ca9b-9621-7363-0233-1c0bec15aa6c@kernel.org>
+Date: Thu, 6 Jul 2023 08:19:46 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.12.0
@@ -140,10 +140,10 @@ To: Jeff Layton <jlayton@kernel.org>, jk@ozlabs.org, arnd@arndb.de,
  apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org,
  selinux@vger.kernel.org
 References: <20230705185812.579118-1-jlayton@kernel.org>
- <20230705185812.579118-3-jlayton@kernel.org>
+ <20230705185812.579118-4-jlayton@kernel.org>
 From: Damien Le Moal <dlemoal@kernel.org>
 Organization: Western Digital Research
-In-Reply-To: <20230705185812.579118-3-jlayton@kernel.org>
+In-Reply-To: <20230705185812.579118-4-jlayton@kernel.org>
 X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -151,9 +151,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 7/6/23 03:58, Jeff Layton wrote: > A rename potentially
- involves updating 4 different inode timestamps. Add > a function that handles
- the details sanely, and convert the libfs.c > callers to use it [...] 
+ Content preview:  On 7/6/23 03:58, Jeff Layton wrote: > Now that everything
+ in-tree is converted to use the accessor functions, > rename the i_ctime field
+ in the inode to discourage direct access. > > Signed-off-by: Je [...] 
  Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -171,9 +171,9 @@ X-Spam-Report: Spam detection software,
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.1 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qHBmY-007nKH-NR
-Subject: Re: [f2fs-dev] [PATCH v2 08/92] fs: new helper:
- simple_rename_timestamp
+X-Headers-End: 1qHBnE-0000mk-4O
+Subject: Re: [f2fs-dev] [PATCH v2 92/92] fs: rename i_ctime field to
+ __i_ctime
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -190,107 +190,14 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On 7/6/23 03:58, Jeff Layton wrote:
-> A rename potentially involves updating 4 different inode timestamps. Add
-> a function that handles the details sanely, and convert the libfs.c
-> callers to use it.
+> Now that everything in-tree is converted to use the accessor functions,
+> rename the i_ctime field in the inode to discourage direct access.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-> ---
->  fs/libfs.c         | 36 +++++++++++++++++++++++++++---------
->  include/linux/fs.h |  2 ++
->  2 files changed, 29 insertions(+), 9 deletions(-)
-> 
-> diff --git a/fs/libfs.c b/fs/libfs.c
-> index a7e56baf8bbd..9ee79668c909 100644
-> --- a/fs/libfs.c
-> +++ b/fs/libfs.c
-> @@ -692,6 +692,31 @@ int simple_rmdir(struct inode *dir, struct dentry *dentry)
->  }
->  EXPORT_SYMBOL(simple_rmdir);
->  
-> +/**
-> + * simple_rename_timestamp - update the various inode timestamps for rename
-> + * @old_dir: old parent directory
-> + * @old_dentry: dentry that is being renamed
-> + * @new_dir: new parent directory
-> + * @new_dentry: target for rename
-> + *
-> + * POSIX mandates that the old and new parent directories have their ctime and
-> + * mtime updated, and that inodes of @old_dentry and @new_dentry (if any), have
-> + * their ctime updated.
-> + */
-> +void simple_rename_timestamp(struct inode *old_dir, struct dentry *old_dentry,
-> +			     struct inode *new_dir, struct dentry *new_dentry)
-> +{
-> +	struct inode *newino = d_inode(new_dentry);
-> +
-> +	old_dir->i_mtime = inode_set_ctime_current(old_dir);
-> +	if (new_dir != old_dir)
-> +		new_dir->i_mtime = inode_set_ctime_current(new_dir);
-> +	inode_set_ctime_current(d_inode(old_dentry));
-> +	if (newino)
-> +		inode_set_ctime_current(newino);
-> +}
-> +EXPORT_SYMBOL_GPL(simple_rename_timestamp);
-> +
->  int simple_rename_exchange(struct inode *old_dir, struct dentry *old_dentry,
->  			   struct inode *new_dir, struct dentry *new_dentry)
->  {
-> @@ -707,11 +732,7 @@ int simple_rename_exchange(struct inode *old_dir, struct dentry *old_dentry,
->  			inc_nlink(old_dir);
->  		}
->  	}
-> -	old_dir->i_ctime = old_dir->i_mtime =
-> -	new_dir->i_ctime = new_dir->i_mtime =
-> -	d_inode(old_dentry)->i_ctime =
-> -	d_inode(new_dentry)->i_ctime = current_time(old_dir);
-> -
-> +	simple_rename_timestamp(old_dir, old_dentry, new_dir, new_dentry);
 
-This is somewhat changing the current behavior: before the patch, the mtime and
-ctime of old_dir, new_dir and the inodes associated with the dentries are always
-equal. But given that simple_rename_timestamp() calls inode_set_ctime_current()
-4 times, the times could potentially be different.
+Looks OK to me.
 
-I am not sure if that is an issue, but it seems that calling
-inode_set_ctime_current() once, recording the "now" time it sets and using that
-value to set all times may be more efficient and preserve the existing behavior.
-
->  	return 0;
->  }
->  EXPORT_SYMBOL_GPL(simple_rename_exchange);
-> @@ -720,7 +741,6 @@ int simple_rename(struct mnt_idmap *idmap, struct inode *old_dir,
->  		  struct dentry *old_dentry, struct inode *new_dir,
->  		  struct dentry *new_dentry, unsigned int flags)
->  {
-> -	struct inode *inode = d_inode(old_dentry);
->  	int they_are_dirs = d_is_dir(old_dentry);
->  
->  	if (flags & ~(RENAME_NOREPLACE | RENAME_EXCHANGE))
-> @@ -743,9 +763,7 @@ int simple_rename(struct mnt_idmap *idmap, struct inode *old_dir,
->  		inc_nlink(new_dir);
->  	}
->  
-> -	old_dir->i_ctime = old_dir->i_mtime = new_dir->i_ctime =
-> -		new_dir->i_mtime = inode->i_ctime = current_time(old_dir);
-> -
-> +	simple_rename_timestamp(old_dir, old_dentry, new_dir, new_dentry);
->  	return 0;
->  }
->  EXPORT_SYMBOL(simple_rename);
-> diff --git a/include/linux/fs.h b/include/linux/fs.h
-> index bdfbd11a5811..14e38bd900f1 100644
-> --- a/include/linux/fs.h
-> +++ b/include/linux/fs.h
-> @@ -2979,6 +2979,8 @@ extern int simple_open(struct inode *inode, struct file *file);
->  extern int simple_link(struct dentry *, struct inode *, struct dentry *);
->  extern int simple_unlink(struct inode *, struct dentry *);
->  extern int simple_rmdir(struct inode *, struct dentry *);
-> +void simple_rename_timestamp(struct inode *old_dir, struct dentry *old_dentry,
-> +			     struct inode *new_dir, struct dentry *new_dentry);
->  extern int simple_rename_exchange(struct inode *old_dir, struct dentry *old_dentry,
->  				  struct inode *new_dir, struct dentry *new_dentry);
->  extern int simple_rename(struct mnt_idmap *, struct inode *,
+Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
 
 -- 
 Damien Le Moal
