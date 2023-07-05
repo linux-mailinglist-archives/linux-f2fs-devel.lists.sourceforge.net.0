@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A46D748C6C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jul 2023 20:59:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 920B8748C7E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jul 2023 20:59:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qH7ii-0004ww-V0;
-	Wed, 05 Jul 2023 18:59:21 +0000
+	id 1qH7iw-0005dk-5q;
+	Wed, 05 Jul 2023 18:59:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qH7id-0004wg-F4;
- Wed, 05 Jul 2023 18:59:15 +0000
+ (envelope-from <jlayton@kernel.org>) id 1qH7iv-0005dV-91;
+ Wed, 05 Jul 2023 18:59:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ReqA6iULWNP01vdMNQO/9GaGuHnlFE8K/R95B3vy3dg=; b=At3MNclhscmZYc7tflJTcOWoPn
- Dqn1QzcY1B0K2cc52uawcbnWyvx3mWX4d6Rkdj28xqHzJ8taQ4DplNZBpPz98S9dpAm76f/cAklDW
- ZK+XdgcEnUWFduLyB6BbNMeFcg7D/ovy5CIFM+8XAid8iQ7s9iX22n7yitP2NYoSdGkI=;
+ bh=R7MSuU1mdVZCSC5B0T9mYRKityO5tOlNXZ/D6zp029E=; b=PICvbuJpBOQ4VSz8VJ8brGdIm0
+ tMzKagtL8Eddqt4Hu1NfRPBauI2DVzJv5N3IilPOSD1xfWq33w47ahR038cx5MDBz7V0YxUyDAiqA
+ mDRy4gl1gBE3bhPZeYrVMBgSF4M+zI3vHlK2BUqqy7MrVI7aMHsegQQWeyncn6w5dRDk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -30,31 +30,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ReqA6iULWNP01vdMNQO/9GaGuHnlFE8K/R95B3vy3dg=; b=Hf7fhk5tkJQyXUpmoOgLA5Lq2o
- WxJ86Tx8U05potmr9uUvOxup05HK+flxUS7iAk0DabOjKWxbQDPBR1XHnjRvH4014ks4zDTFdcgPh
- hZ+kNTXSWbZQG9nupbgHiigexRr8/Pb3gOf9kD4woa0m7Kz5TklOvpC4FLrp6C/9/Y0A=;
+ bh=R7MSuU1mdVZCSC5B0T9mYRKityO5tOlNXZ/D6zp029E=; b=SpNCydvwoHeRJt3jNiPdUtr1Dv
+ SE04I2RpstXHnsrvulT+V9WDULxB2mTJITJByzGCqeI5YQaAZSGeIEyjJr/DxphbykqDq6hDJ6Hgb
+ muQgbNfaCrbOWqvf2vc6n4I6khch85uLyJgKbyLYNzjtKkPRrcGjY845LNMm12UJMJck=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qH7ic-0000Gl-Uh; Wed, 05 Jul 2023 18:59:15 +0000
+ id 1qH7iv-0000I4-Bw; Wed, 05 Jul 2023 18:59:33 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8AB0D616CE;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id EF11C616D8;
+ Wed,  5 Jul 2023 18:59:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54945C433BC;
  Wed,  5 Jul 2023 18:59:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EEEF1C4167D;
- Wed,  5 Jul 2023 18:58:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1688583549;
- bh=96h56beXLMAvkoYPxw1Hf+1T9dWrr7543/fVCrKiiH8=;
+ s=k20201202; t=1688583567;
+ bh=upDmKDv+6xjSiy7POdUF+8WFopDSBgqOL9aHcGqhK2Y=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=SV/pROPiikvWgbuJG9o5j/mdUiyRGcRaEJl1K0hVl0eCHK9Ob+YmgZ0cOVDNwxcd0
- s3XXK3FiPaVML6VBfbeTny5HiSuKA0KEKAjFDlBtEkXvpck7V4KUAdjnzKCg5fiugt
- aiOuDDRaoB7EF/ycBMYU5USexpq/ceGXPIb8HpDBW4vIvyY547qmZyivJt5T6PXA4H
- rtd7d3FTcpVX0DGPx74bauINVbOI0AHI9Zym6FoqdyCXdEJPTgmmD/blFQIJoOkcln
- fC0uEV1EXwoGgwuuPieKxDXph4tQwZUYbTrLEd3zCpi9KdekgoBzBb9kt9un4ZFr7M
- 0DXS4Kyxlm/3g==
+ b=lcNGsVlnIbVft2o9WVSu7oStzcC7UruKn4c1DTBWmjGO00DNBCt3+ZZxjK6miMMj/
+ GBdLPvZ/RE2acwmtA26p1q8MtPtZ6AFXE1afuhwSlwu52+nzTrcPM9ox138DUXq3pP
+ a+auUEyCQ5+EySj5vT4AGLwnwLHJre6WjBG5uo1Fk/D4NwBI39aiCvuIo2r0b4YzkK
+ eGFkZHIr8aozqfMt+EZCLKVtueQinWQYpN5V9F3hby1Tiu5AXVWEdS37dhPfamlHdD
+ XsiVC3GdeisubCKxKkTGzRJBTmma2JIDfH5g8iF/7cOUhrr8m/tq4qK4hAP5wOyo8R
+ g+tGtW7J9HY7Q==
 From: Jeff Layton <jlayton@kernel.org>
 To: jk@ozlabs.org, arnd@arndb.de, mpe@ellerman.id.au, npiggin@gmail.com,
  christophe.leroy@csgroup.eu, hca@linux.ibm.com, gor@linux.ibm.com,
@@ -135,8 +135,8 @@ To: jk@ozlabs.org, arnd@arndb.de, mpe@ellerman.id.au, npiggin@gmail.com,
  linux-trace-kernel@vger.kernel.org, linux-xfs@vger.kernel.org,
  bpf@vger.kernel.org, netdev@vger.kernel.org, apparmor@lists.ubuntu.com,
  linux-security-module@vger.kernel.org, selinux@vger.kernel.org
-Date: Wed,  5 Jul 2023 14:58:11 -0400
-Message-ID: <20230705185812.579118-3-jlayton@kernel.org>
+Date: Wed,  5 Jul 2023 14:58:12 -0400
+Message-ID: <20230705185812.579118-4-jlayton@kernel.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230705185812.579118-1-jlayton@kernel.org>
 References: <20230705185812.579118-1-jlayton@kernel.org>
@@ -148,12 +148,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: A rename potentially involves updating 4 different inode
- timestamps.
- Add a function that handles the details sanely, and convert the libfs.c callers
- to use it. Signed-off-by: Jeff Layton <jlayton@kernel.org> --- fs/libfs.c
- | 36 +++++++++++++++++++++++++++--------- include/linux/fs.h | 2 ++ 2 files
- changed, 29 insertions(+), 9 deletions(-) 
+ Content preview: Now that everything in-tree is converted to use the accessor
+ functions, rename the i_ctime field in the inode to discourage direct access.
+ Signed-off-by: Jeff Layton <jlayton@kernel.org> --- include/linux/fs.h |
+ 6 +++--- 1 file changed, 3 insertions(+), 3 deletions(-) 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -168,8 +166,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qH7ic-0000Gl-Uh
-Subject: [f2fs-dev] [PATCH v2 08/92] fs: new helper: simple_rename_timestamp
+X-Headers-End: 1qH7iv-0000I4-Bw
+Subject: [f2fs-dev] [PATCH v2 92/92] fs: rename i_ctime field to __i_ctime
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -185,97 +183,45 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-A rename potentially involves updating 4 different inode timestamps. Add
-a function that handles the details sanely, and convert the libfs.c
-callers to use it.
+Now that everything in-tree is converted to use the accessor functions,
+rename the i_ctime field in the inode to discourage direct access.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/libfs.c         | 36 +++++++++++++++++++++++++++---------
- include/linux/fs.h |  2 ++
- 2 files changed, 29 insertions(+), 9 deletions(-)
+ include/linux/fs.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/fs/libfs.c b/fs/libfs.c
-index a7e56baf8bbd..9ee79668c909 100644
---- a/fs/libfs.c
-+++ b/fs/libfs.c
-@@ -692,6 +692,31 @@ int simple_rmdir(struct inode *dir, struct dentry *dentry)
- }
- EXPORT_SYMBOL(simple_rmdir);
- 
-+/**
-+ * simple_rename_timestamp - update the various inode timestamps for rename
-+ * @old_dir: old parent directory
-+ * @old_dentry: dentry that is being renamed
-+ * @new_dir: new parent directory
-+ * @new_dentry: target for rename
-+ *
-+ * POSIX mandates that the old and new parent directories have their ctime and
-+ * mtime updated, and that inodes of @old_dentry and @new_dentry (if any), have
-+ * their ctime updated.
-+ */
-+void simple_rename_timestamp(struct inode *old_dir, struct dentry *old_dentry,
-+			     struct inode *new_dir, struct dentry *new_dentry)
-+{
-+	struct inode *newino = d_inode(new_dentry);
-+
-+	old_dir->i_mtime = inode_set_ctime_current(old_dir);
-+	if (new_dir != old_dir)
-+		new_dir->i_mtime = inode_set_ctime_current(new_dir);
-+	inode_set_ctime_current(d_inode(old_dentry));
-+	if (newino)
-+		inode_set_ctime_current(newino);
-+}
-+EXPORT_SYMBOL_GPL(simple_rename_timestamp);
-+
- int simple_rename_exchange(struct inode *old_dir, struct dentry *old_dentry,
- 			   struct inode *new_dir, struct dentry *new_dentry)
- {
-@@ -707,11 +732,7 @@ int simple_rename_exchange(struct inode *old_dir, struct dentry *old_dentry,
- 			inc_nlink(old_dir);
- 		}
- 	}
--	old_dir->i_ctime = old_dir->i_mtime =
--	new_dir->i_ctime = new_dir->i_mtime =
--	d_inode(old_dentry)->i_ctime =
--	d_inode(new_dentry)->i_ctime = current_time(old_dir);
--
-+	simple_rename_timestamp(old_dir, old_dentry, new_dir, new_dentry);
- 	return 0;
- }
- EXPORT_SYMBOL_GPL(simple_rename_exchange);
-@@ -720,7 +741,6 @@ int simple_rename(struct mnt_idmap *idmap, struct inode *old_dir,
- 		  struct dentry *old_dentry, struct inode *new_dir,
- 		  struct dentry *new_dentry, unsigned int flags)
- {
--	struct inode *inode = d_inode(old_dentry);
- 	int they_are_dirs = d_is_dir(old_dentry);
- 
- 	if (flags & ~(RENAME_NOREPLACE | RENAME_EXCHANGE))
-@@ -743,9 +763,7 @@ int simple_rename(struct mnt_idmap *idmap, struct inode *old_dir,
- 		inc_nlink(new_dir);
- 	}
- 
--	old_dir->i_ctime = old_dir->i_mtime = new_dir->i_ctime =
--		new_dir->i_mtime = inode->i_ctime = current_time(old_dir);
--
-+	simple_rename_timestamp(old_dir, old_dentry, new_dir, new_dentry);
- 	return 0;
- }
- EXPORT_SYMBOL(simple_rename);
 diff --git a/include/linux/fs.h b/include/linux/fs.h
-index bdfbd11a5811..14e38bd900f1 100644
+index 14e38bd900f1..b66442f91835 100644
 --- a/include/linux/fs.h
 +++ b/include/linux/fs.h
-@@ -2979,6 +2979,8 @@ extern int simple_open(struct inode *inode, struct file *file);
- extern int simple_link(struct dentry *, struct inode *, struct dentry *);
- extern int simple_unlink(struct inode *, struct dentry *);
- extern int simple_rmdir(struct inode *, struct dentry *);
-+void simple_rename_timestamp(struct inode *old_dir, struct dentry *old_dentry,
-+			     struct inode *new_dir, struct dentry *new_dentry);
- extern int simple_rename_exchange(struct inode *old_dir, struct dentry *old_dentry,
- 				  struct inode *new_dir, struct dentry *new_dentry);
- extern int simple_rename(struct mnt_idmap *, struct inode *,
+@@ -642,7 +642,7 @@ struct inode {
+ 	loff_t			i_size;
+ 	struct timespec64	i_atime;
+ 	struct timespec64	i_mtime;
+-	struct timespec64	i_ctime;
++	struct timespec64	__i_ctime; /* use inode_*_ctime accessors! */
+ 	spinlock_t		i_lock;	/* i_blocks, i_bytes, maybe i_size */
+ 	unsigned short          i_bytes;
+ 	u8			i_blkbits;
+@@ -1485,7 +1485,7 @@ struct timespec64 inode_set_ctime_current(struct inode *inode);
+  */
+ static inline struct timespec64 inode_get_ctime(const struct inode *inode)
+ {
+-	return inode->i_ctime;
++	return inode->__i_ctime;
+ }
+ 
+ /**
+@@ -1498,7 +1498,7 @@ static inline struct timespec64 inode_get_ctime(const struct inode *inode)
+ static inline struct timespec64 inode_set_ctime_to_ts(struct inode *inode,
+ 						      struct timespec64 ts)
+ {
+-	inode->i_ctime = ts;
++	inode->__i_ctime = ts;
+ 	return ts;
+ }
+ 
 -- 
 2.41.0
 
