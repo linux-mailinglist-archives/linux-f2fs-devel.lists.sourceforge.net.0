@@ -2,109 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 041917487C1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jul 2023 17:19:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E9BC1748903
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  5 Jul 2023 18:12:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qH4I6-0002UR-OY;
-	Wed, 05 Jul 2023 15:19:39 +0000
+	id 1qH57X-00078r-2B;
+	Wed, 05 Jul 2023 16:12:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bart.vanassche@gmail.com>) id 1qH4I1-0002UH-Ns;
- Wed, 05 Jul 2023 15:19:34 +0000
+ (envelope-from <jack@suse.cz>) id 1qH57T-00078h-Ut;
+ Wed, 05 Jul 2023 16:12:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vhOVd+fM39By6Neo4SNlvIwXWgDBhgramNmEhS79nFc=; b=PA+AFaky+3PRzV5GTum8zsWwZG
- pbzR+fv24zy1GVlxAraMZJdFJ7QqAP2vXicKUhKSO6SuitSv/AdIxxtXCQJlIb9hVe4YIqvoz+ROD
- DiayValDG7OCr4N54Qt9sQc8rqC1n1bmYvP1k6HyEWBrfIAW8RevMya5R+2gBIEpYRDk=;
+ bh=laJnl7HhQK/Tv/PqzUYoidR/wXDE+WAIJVPIFf2lcfQ=; b=Aye3rl6Z+huScCfHJIxO4xFmyG
+ KRNYiyAjb3Tp8IOrkvy657X8YmwgPv/RTlxL0lvVmkWD4N1c0KBjUYh06rdMtj09GQk8EbmY3Vmcv
+ L9bu2rtgpKNUSiwJnA8SROXtkt5+VjOfZ//lekielvRcKvwpsT/E9uQ4EWu1CHBkekF0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vhOVd+fM39By6Neo4SNlvIwXWgDBhgramNmEhS79nFc=; b=GBIgdYjKWT+mMVEZYW6kmmWInl
- dbFh60RM52onMkSxWOeqxPF/dwrofCPZFXPJqPp2ccTGr0WOI4PMw5VitpCbV1rlNXH9yluPn4rhy
- 0ACw+M2gzlyzM290Tl+hdTSnEfSvE5dfIY4H2UDKOb6619y6vVxyj+rRjlmHlAQViIHA=;
-Received: from mail-io1-f48.google.com ([209.85.166.48])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=laJnl7HhQK/Tv/PqzUYoidR/wXDE+WAIJVPIFf2lcfQ=; b=gxJrYR2T7jjiQx0/raRPWhHhAL
+ NeYM+dX4eL+DMCxZANHJTKpYuoWLbHxSPI9TLUHTyl6HJ0mINQFvwdnK82mJ/zboR5XTJmU9PCrnM
+ QIrUEixQmcF5J+eL805Sfi54iLlgl3c59i985B4D6GlxpP1F1bxjPurigj2RasPO4Yo0=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qH4Hx-0002AB-PG; Wed, 05 Jul 2023 15:19:33 +0000
-Received: by mail-io1-f48.google.com with SMTP id
- ca18e2360f4ac-78362f574c9so240991439f.3; 
- Wed, 05 Jul 2023 08:19:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688570364; x=1691162364;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vhOVd+fM39By6Neo4SNlvIwXWgDBhgramNmEhS79nFc=;
- b=C7G0hujHyhZzvdK0EDMu7lnXf3QZWs+FzIWjK6aHd4Cv17swLo8prKDMpgxH0zQPK7
- Z/5Wnel3/0OXFdo8ELbB09Caq3lXcvWd2xwxXT4E8q/MyQQpZmm0Ot9nqJVHiVSMBJWX
- zFZO3N7KITys8McBgmjPDrAB7kCHMbW7EL+m432xu7K10OHKHWloD2EmLnKO4IbueGqt
- FhdUqGoIwr9FzMH8K96CvTJ+8P0DXZSEgMJzKSfoQY/4nXeZtn7wcyiU587mmFxHHBLH
- mYnI11GS7gbLKdocVPoQyhhODwLf+hAo0x2OiyL/TXJZJi93y5YrrW5Xl0mBG/N/4h1o
- NAcQ==
-X-Gm-Message-State: AC+VfDw14/XaruNTAnhaHdlGzAUNzu/MuwWgPOzlllPXbNlkbHtTvUFj
- TrNDfQDcdtEtu0RWVzo/Yd4=
-X-Google-Smtp-Source: ACHHUZ70uoI88DRVhGiNe4v8NMOn4CckRug5A25bO6UrnrhXn4O+oQb9CB+u9z1UucgpvIObIHjohw==
-X-Received: by 2002:a05:6602:2113:b0:784:314f:8d68 with SMTP id
- x19-20020a056602211300b00784314f8d68mr18093430iox.1.1688570364015; 
- Wed, 05 Jul 2023 08:19:24 -0700 (PDT)
-Received: from ?IPV6:2620:15c:211:201:c1f1:7d21:6172:cbd2?
- ([2620:15c:211:201:c1f1:7d21:6172:cbd2])
- by smtp.gmail.com with ESMTPSA id
- l6-20020a656806000000b005579c73d209sm15456631pgt.1.2023.07.05.08.19.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Jul 2023 08:19:23 -0700 (PDT)
-Message-ID: <1ea08f84-f900-92f2-e32b-2db242a74559@acm.org>
-Date: Wed, 5 Jul 2023 08:19:16 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: Matthew Wilcox <willy@infradead.org>
+ id 1qH57Q-007N8O-Ol; Wed, 05 Jul 2023 16:12:44 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id CB46921E20;
+ Wed,  5 Jul 2023 16:12:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1688573545; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=laJnl7HhQK/Tv/PqzUYoidR/wXDE+WAIJVPIFf2lcfQ=;
+ b=pVxtRSYxDum30xk4c2JQyuaRHFNvjqGI5pa+1l9TjK2H7ROMjo7EdIGdDlzQXwaIwGyi0D
+ MYHnvgKqRst/eyFC+Okrc961iU1V/Mr8qyrvjiZzwHXWReUpWSrhSFOpe79t3kyTfJeQAV
+ Hf2p1cnNnsYhDEREwuHH1JI7foWXj1M=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1688573545;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=laJnl7HhQK/Tv/PqzUYoidR/wXDE+WAIJVPIFf2lcfQ=;
+ b=6GnGLv2MGHnmlspZbI9IPcwZjE0UgNGbJUyuJME/ujhWk8XPp6xGrnnDrvfBxv6bSto5fw
+ 0j8hz2dNTzGg/WAQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A8D5D134F3;
+ Wed,  5 Jul 2023 16:12:25 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id p7ssKWmWpWRbQAAAMHmgww
+ (envelope-from <jack@suse.cz>); Wed, 05 Jul 2023 16:12:25 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id 1C3A6A0707; Wed,  5 Jul 2023 18:12:25 +0200 (CEST)
+Date: Wed, 5 Jul 2023 18:12:25 +0200
+From: Jan Kara <jack@suse.cz>
+To: Bart Van Assche <bvanassche@acm.org>
+Message-ID: <20230705161225.cwig5a3mo6oz7lew@quack3>
 References: <20230629165206.383-1-jack@suse.cz>
  <20230704122224.16257-1-jack@suse.cz>
  <bb91e76b-0bd8-a949-f8b9-868f919ebcb9@acm.org>
- <ZKRFSZQglwCba9/i@casper.infradead.org>
-From: Bart Van Assche <bvanassche@acm.org>
-In-Reply-To: <ZKRFSZQglwCba9/i@casper.infradead.org>
-X-Spam-Score: 0.4 (/)
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <bb91e76b-0bd8-a949-f8b9-868f919ebcb9@acm.org>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 7/4/23 09:14, Matthew Wilcox wrote: > On Tue, Jul 04, 2023
- at 07:06:26AM -0700, Bart Van Assche wrote: >> On 7/4/23 05:21, Jan Kara
- wrote: >>> +struct bdev_handle { >>> + struct block_device *bdev; [...] 
- Content analysis details:   (0.4 points, 6.0 required)
+ Content preview:  On Tue 04-07-23 07:06:26, Bart Van Assche wrote: > On 7/4/23
+ 05:21, Jan Kara wrote: > > +struct bdev_handle { > > + struct block_device
+ *bdev; > > + void *holder; > > +}; > > Please explain in the pat [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.166.48 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.166.48 listed in wl.mailspike.net]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [bart.vanassche[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
- EnvelopeFrom freemail headers are different
- -0.1 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1qH4Hx-0002AB-PG
+X-Headers-End: 1qH57Q-007N8O-Ol
 Subject: Re: [f2fs-dev] [PATCH 01/32] block: Provide blkdev_get_handle_*
  functions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -145,32 +146,45 @@ Cc: Dave Kleikamp <shaggy@kernel.org>, jfs-discussion@lists.sourceforge.net,
  "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
  Andrew Morton <akpm@linux-foundation.org>, linux-erofs@lists.ozlabs.org,
  linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 7/4/23 09:14, Matthew Wilcox wrote:
-> On Tue, Jul 04, 2023 at 07:06:26AM -0700, Bart Van Assche wrote:
->> On 7/4/23 05:21, Jan Kara wrote:
->>> +struct bdev_handle {
->>> +	struct block_device *bdev;
->>> +	void *holder;
->>> +};
->>
->> Please explain in the patch description why a holder pointer is introduced
->> in struct bdev_handle and how it relates to the bd_holder pointer in struct
->> block_device. Is one of the purposes of this patch series perhaps to add
->> support for multiple holders per block device?
+On Tue 04-07-23 07:06:26, Bart Van Assche wrote:
+> On 7/4/23 05:21, Jan Kara wrote:
+> > +struct bdev_handle {
+> > +	struct block_device *bdev;
+> > +	void *holder;
+> > +};
 > 
-> That is all in patch 0/32.  Why repeat it?
+> Please explain in the patch description why a holder pointer is introduced
+> in struct bdev_handle and how it relates to the bd_holder pointer in struct
+> block_device. Is one of the purposes of this patch series perhaps to add
+> support for multiple holders per block device?
 
-This cover letter: https://lore.kernel.org/linux-block/20230629165206.383-1-jack@suse.cz/T/#t?
+No. The reason for adding holder to struct bdev_handle is that it is an
+argument blkdev_put() needs. Currently, every user of blkdev_put() has to
+remember what it has passed as 'holder' to blkdev_get_by_*() call and pass
+that to blkdev_put(). With struct bdev_handle this will happen
+automatically. This is already explained in the changelog of this patch:
 
-The word "holder" doesn't even occur in that cover letter so how could the
-answer to my question be present in the cover letter?
+"Create struct bdev_handle that contains all parameters that need to be
+passed to blkdev_put()..."
 
-Bart.
+If it was only about holder, the intrusive patches would not be warranted
+but as the description also says:
 
+"This will eventually allow us to pass one more argument to blkdev_put()
+without too much hassle."
+
+Because we will additionaly need to propagate the 'mode' argument used at
+open to blkdev_put().
+
+								Honza
+
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
 
 _______________________________________________
