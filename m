@@ -2,101 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D74574AD6C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 Jul 2023 10:55:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 889F774ADED
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 Jul 2023 11:41:08 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qHhEz-0002KY-1x;
-	Fri, 07 Jul 2023 08:55:01 +0000
+	id 1qHhxU-0002nt-BJ;
+	Fri, 07 Jul 2023 09:41:00 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <33NKnZAkbAE07DEzp00t6p44xs.v33v0t97t6r328t28.r31@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1qHhEw-0002KS-Vj for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Jul 2023 08:54:59 +0000
+ <BATV+5a4ca43f00c3395d7048+7257+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1qHhxS-0002nn-FR for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 07 Jul 2023 09:40:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=MQ6fgIhDLVZg04LxsAC2t0anmvaYhwdWlDV+pQJ8Auc=; b=X/bz2U79huyVkFyzmQVXM+kI1W
- FCcFnX3EaNBNArWpGoywMbv91HBxbW6MLNXOlJSJGdYtKJlUyQyyuNET1BWIbK1SYmVsBG1kUUdVR
- t9cmUDSk2CWq3k2UGqC2Nb1pMsUxcTJCE2DGe+8sFzsqbCWk+GXm9nWIDn9DvnPn6YlI=;
+ bh=iNSFWWILdKuyxqqKG9xcEz6tN3PAD56T4ksQ+pt8tdU=; b=XPT4awgYqOI6uuQ63oW9p3qa/v
+ OwR7fWFoWa4j3SmHAqNkO3MqI8YCUmN47aFQzamjiW4lQLE9ggCfCacNmz2AOE9HRsTfEVP7/iA4u
+ dfjeZjk/vVG5YD70/cT9KZwu6I6bn9a5r43weCmpKi1F6nVz1/nTF1FLK7riHyH4e4hw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=MQ6fgIhDLVZg04LxsAC2t0anmvaYhwdWlDV+pQJ8Auc=; b=e
- +JSl3xlc+GcW5SsKDrKAkc2PLLv0aWhmmfcyZJZCQ3PEk0jupqgDVIOMYCF2wAzCoBUaqw7xETkoa
- o/0F7c5BlvNd1TR8LecEuql37ffOUw+uq260hzRUt8RILNZRrgy1IICIBccjbAjdDiBP1OsAPadHd
- zYfaQaNCjCl8FhI4=;
-Received: from mail-pl1-f197.google.com ([209.85.214.197])
+ List-Owner:List-Archive; bh=iNSFWWILdKuyxqqKG9xcEz6tN3PAD56T4ksQ+pt8tdU=; b=h
+ fJfdg0rZrdg0GxoSPKPwLxYSFxoJ+P+ponE1EDXLwhWSAAQR0X6aFEg4fj60Bovx6bXDUER8nO3DC
+ LT2P6O+pmatSBpqeN5D7me8U+y3xSYouTWFfF/CQ/g4Y1vKrszJh8KK5wvFmHimBSrplJ6sWslI7v
+ 3Ze+wkHl+buY/QOM=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qHhEy-0007nk-UT for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Jul 2023 08:54:59 +0000
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-1b8c8bd3f7dso14033205ad.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 07 Jul 2023 01:54:58 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688720092; x=1691312092;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MQ6fgIhDLVZg04LxsAC2t0anmvaYhwdWlDV+pQJ8Auc=;
- b=il91dRnIeHOzwdvY0mkTLFWyiEZiINO6N5XE6M2K8+9GgOE1aYipC9XMrfVxHIb02u
- 1y6wBqZECmSBRjYqchjrPbydtZfNbi5o3hsDHyUk2NWJJsXllS6uedLUfZxb8jFhJCbh
- 45RrqV5YAZSouGb6MafDLydqrFEjWEmx3Ztihw/ZNXwgZIR+QXPFYf4cLyAirjI59jg4
- wXxszPOM1uBfuIVv5OjoQRzc/77eOizCdmo6CQE0Ya84ffLFuw39nXLJ9VkMeG1LI7Up
- 8wldXRxuVpqyuUijX7HplY2FtLtppR/vz12BLS1yY/HOPSewoslHuIZGKgVkRHiQIaxU
- kTkA==
-X-Gm-Message-State: ABy/qLaVQpwV5jgfxuN1e79zK6IrvAJfZgfOevMV2taMElc8VMnnWjjE
- TsU22gXAbDbpL6dE7B6hg3jave9yGxjQJgUD5+aX+ZgV7Hor
-X-Google-Smtp-Source: APBJJlH/6XUTd0vo2I6hYGqtjOXqugsdmlRs6OPKCWMF8oV9KCJpoI4Z+pjsIwuyh/eCQHgzTDqetM2K4JyPrJ5qEez8b5WEP5dr
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qHhxO-0000vF-JL for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 07 Jul 2023 09:40:58 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=iNSFWWILdKuyxqqKG9xcEz6tN3PAD56T4ksQ+pt8tdU=; b=aejeKuDT4AdHKinTJ8g3VOt7ts
+ IenIcX2+cZwm6ConRentrZ26tzwHUSmG23uvJ1CYyeCg2plh1DM+SORz5nbZPReCU9RFXluC0Nkiq
+ fzGpoE5QVRdjF+fid2YSbF/yAZV2zUDslh4KPb71vWM4gnuYFzqmzYPT21TxmSwUB7dmhopWByLco
+ Y1gpvB42r84SB7Vfy308ghYi8jOI1Dvg2jBb4HC5BE+MZ+nH6IfZdcM3Qsbyjhzswj+HjZ+hQo4jy
+ kQ+uLdOucjTGpzrMkJvPd/b3mHwOsCh++wUQ6MYQFF6jg5GcDitCqZJgVbyE3RK8l5zkDbuhLzogg
+ f0hkCN4Q==;
+Received: from [89.144.223.112] (helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1qHhxB-0048wu-26; Fri, 07 Jul 2023 09:40:42 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Fri,  7 Jul 2023 11:40:28 +0200
+Message-Id: <20230707094028.107898-1-hch@lst.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-X-Received: by 2002:a17:902:e843:b0:1b8:a70e:dd00 with SMTP id
- t3-20020a170902e84300b001b8a70edd00mr4150807plg.6.1688720092614; Fri, 07 Jul
- 2023 01:54:52 -0700 (PDT)
-Date: Fri, 07 Jul 2023 01:54:52 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <0000000000003ed80905ffe1c97e@google.com>
-From: syzbot <syzbot+listcf7fbb62c045af90dfd2@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -2.2 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello f2fs maintainers/developers, This is a 31-day syzbot
- report for the f2fs subsystem. All related reports/information can be found
- at: https://syzkaller.appspot.com/upstream/s/f2fs During the period, 4 new
- issues were detected and 1 were fixed. In total, 11 issues are still open
- and 29 have been fixed so far. 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview: f2fs_scan_devices reopens the main device since the very
+ beginning, 
+ which has always been useless, and also means that we don't pass the right
+ holder for the reopen, which now leads to a warning as th [...] 
+ Content analysis details:   (-2.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [198.137.202.133 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
  mail domains are different
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.197 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.197 listed in list.dnswl.org]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1qHhEy-0007nk-UT
-Subject: [f2fs-dev] [syzbot] Monthly f2fs report (Jul 2023)
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1qHhxO-0000vF-JL
+Subject: [f2fs-dev] [PATCH] f2fs: don't reopen the main block device in
+ f2fs_scan_devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,45 +100,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-block@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello f2fs maintainers/developers,
+f2fs_scan_devices reopens the main device since the very beginning, which
+has always been useless, and also means that we don't pass the right
+holder for the reopen, which now leads to a warning as the core super.c
+holder ops aren't passed in for the reopen.
 
-This is a 31-day syzbot report for the f2fs subsystem.
-All related reports/information can be found at:
-https://syzkaller.appspot.com/upstream/s/f2fs
-
-During the period, 4 new issues were detected and 1 were fixed.
-In total, 11 issues are still open and 29 have been fixed so far.
-
-Some of the still happening issues:
-
-Ref Crashes Repro Title
-<1> 212     Yes   INFO: task hung in f2fs_balance_fs
-                  https://syzkaller.appspot.com/bug?extid=8b85865808c8908a0d8c
-<2> 96      Yes   kernel BUG in f2fs_evict_inode
-                  https://syzkaller.appspot.com/bug?extid=e1246909d526a9d470fa
-<3> 49      Yes   possible deadlock in f2fs_file_mmap
-                  https://syzkaller.appspot.com/bug?extid=c0e3db4f9cd6e05cadd3
-<4> 4       Yes   WARNING: lock held when returning to user space in f2fs_write_single_data_page
-                  https://syzkaller.appspot.com/bug?extid=eb6201248f684e99b9f8
-<5> 1       Yes   general protection fault in f2fs_drop_extent_tree
-                  https://syzkaller.appspot.com/bug?extid=f4649be1be739e030111
-
+Fixes: 3c62be17d4f5 ("f2fs: support multiple devices")
+Fixes: 0718afd47f70 ("block: introduce holder ops")
+Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ fs/f2fs/super.c | 20 ++++++++------------
+ 1 file changed, 8 insertions(+), 12 deletions(-)
 
-To disable reminders for individual bugs, reply with the following command:
-#syz set <Ref> no-reminders
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index ca31163da00a55..8d11d4a5ec331d 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1560,7 +1560,8 @@ static void destroy_device_list(struct f2fs_sb_info *sbi)
+ {
+ 	int i;
+ 
+-	for (i = 0; i < sbi->s_ndevs; i++) {
++	kvfree(FDEV(0).blkz_seq);
++	for (i = 1; i < sbi->s_ndevs; i++) {
+ 		blkdev_put(FDEV(i).bdev, sbi->sb->s_type);
+ #ifdef CONFIG_BLK_DEV_ZONED
+ 		kvfree(FDEV(i).blkz_seq);
+@@ -4190,16 +4191,12 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+ 	sbi->aligned_blksize = true;
+ 
+ 	for (i = 0; i < max_devices; i++) {
+-
+-		if (i > 0 && !RDEV(i).path[0])
++		if (i == 0)
++			FDEV(0).bdev = sbi->sb->s_bdev;
++		else if (!RDEV(i).path[0])
+ 			break;
+ 
+-		if (max_devices == 1) {
+-			/* Single zoned block device mount */
+-			FDEV(0).bdev =
+-				blkdev_get_by_dev(sbi->sb->s_bdev->bd_dev, mode,
+-						  sbi->sb->s_type, NULL);
+-		} else {
++		if (max_devices > 1) {
+ 			/* Multi-device mount */
+ 			memcpy(FDEV(i).path, RDEV(i).path, MAX_PATH_LEN);
+ 			FDEV(i).total_segments =
+@@ -4215,10 +4212,9 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+ 				FDEV(i).end_blk = FDEV(i).start_blk +
+ 					(FDEV(i).total_segments <<
+ 					sbi->log_blocks_per_seg) - 1;
++				FDEV(i).bdev = blkdev_get_by_path(FDEV(i).path,
++					mode, sbi->sb->s_type, NULL);
+ 			}
+-			FDEV(i).bdev = blkdev_get_by_path(FDEV(i).path, mode,
+-							  sbi->sb->s_type,
+-							  NULL);
+ 		}
+ 		if (IS_ERR(FDEV(i).bdev))
+ 			return PTR_ERR(FDEV(i).bdev);
+-- 
+2.39.2
 
-To change bug's subsystems, reply with:
-#syz set <Ref> subsystems: new-subsystem
-
-You may send multiple commands in a single email message.
 
 
 _______________________________________________
