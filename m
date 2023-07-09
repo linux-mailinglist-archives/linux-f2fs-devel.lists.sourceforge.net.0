@@ -2,102 +2,115 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51C9B74B33D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  7 Jul 2023 16:45:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A74C74C65D
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun,  9 Jul 2023 18:08:12 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qHmiK-0000v1-QK;
-	Fri, 07 Jul 2023 14:45:41 +0000
+	id 1qIWx7-0007IG-AI;
+	Sun, 09 Jul 2023 16:08:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3CCWoZAkbAB8NTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1qHmiH-0000uu-96 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Jul 2023 14:45:37 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1qIWx5-0007I2-3m
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 09 Jul 2023 16:07:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=faKZ0VTkrZreCkMMkV/w1MPosNwfKMr16O7H/usv77c=; b=cO56GLwKzW2vlGKkQ7Up8W11UQ
- xhMwSAo7HxLyZGEULdAPwEqweYNi1pjQgzzo3hhqLOlpI7jKXjwu8ZMXglyxCOYYrxKxEt/CP6qhp
- ydTdliYr1CFEgW/ik6ngTJg21qZ1YZrIL1aDLHDe7dScsHezhC9WGcW4joZbNd99qVRg=;
+ bh=dYvUj3p1g8hkF8f4cMvD7d5u3EoabEDqXutELIsVPDQ=; b=Qw8RCl8/+T42OV9acHXblxOEzo
+ mF2MgCs5QOergoX6BAM9vAE1lNL+zAC4Mjvh+0DS4ifaOT5vrxEszHCWaYNi+l3MpXJHx2RJwZvoZ
+ 76dCjFxjbzmyLW7jkTDdmdCKTLnxYm/S4tIHlDxfdC96XOWQA7mxpfst151ML14+2ZZI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=faKZ0VTkrZreCkMMkV/w1MPosNwfKMr16O7H/usv77c=; b=L
- Ep9MZUd0vUVl5HyWmoW/rUmtfYeuxsgXQJq/uNfd/eSOcc+y8Lpd0S8njwzGpUcegXvbjSM9YO98y
- RXlCnbxmo9zHKZMh+5Ay/D6H7mk/5isXM+abmf3kc03F4cQrZmeE1rHWl0v/FPqnEKmc9vomhbW/M
- l267Q/akDRYJKfzY=;
-Received: from mail-pl1-f200.google.com ([209.85.214.200])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qHmiD-000i70-HF for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 07 Jul 2023 14:45:37 +0000
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-1b855dc0f0cso30364865ad.1
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=dYvUj3p1g8hkF8f4cMvD7d5u3EoabEDqXutELIsVPDQ=; b=IcQaalykBSL/cpaGTosnzo9XO4
+ ZGow8pnl+soe6llkDaVPM2XcaMfX74c5J516OqnyBvwCigRqrr6mrmuGleGPPZES4lqHJ0QHV27X/
+ kPRR7CDczjJ/Mc40AwqvB7BpmnSiboRFn6EJyhXozfnwlejp2t5HnsgQt5WiwknuvL54=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qIWx2-0004sG-1X for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 09 Jul 2023 16:07:58 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7FC1B60C01
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 07 Jul 2023 07:45:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688741128; x=1691333128;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=faKZ0VTkrZreCkMMkV/w1MPosNwfKMr16O7H/usv77c=;
- b=WuALK6Z/aFeACdZdeCJgLgLjrX4VjLXcm1dqAWbeO5Vs3rtLkv4PFIm9NQdaKrrIyj
- JfwgnOUmNtiDKsYYSgT8K3UtIKUiybVRzad+Ezhkd5sF9Ir+tIj9seXmEaXbCGUARUpP
- S1x1Q7PvzdyvM3ZNvZmn5wQvgLLFimUYXzre77yIFVpqnsLN85+OW23j25rpK1R5lkaN
- KLvHV7D5v5Bj0sUUmVrVu1rTm9T6xqFY+YlUYzynu/BkvavmrhMIg18THJTHHwc/5XDI
- 7Dbb4gNvtCyaYRLVOuNK8ruyQSx0QJQQJSZBZQFPtXEJMmw6zLydrZQXeoBtEVzqhsA5
- Kj5g==
-X-Gm-Message-State: ABy/qLaxEqfWWmWvN9ayT+0gX4Q2T8FRCX7WcqwyzmMGonPMvFpPjrWO
- d9f5U4nAenDtOCXWlv6Ec2q6cXRy8S4xrgJhrsJv5j3u9yAo
-X-Google-Smtp-Source: APBJJlGcoqmtq9dZ2KJii6DburbTcLjXYhE/WlTYXTej235pqTl7vDbZOS50awBLW5giYdO8BGKF+iPVXKutQjDtW/j39Ci5SfBp
+ Sun,  9 Jul 2023 16:07:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 86DCDC43397
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Sun,  9 Jul 2023 16:07:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1688918867;
+ bh=25WeeFRpU+aNv3UsS5BeFnTE0YSJuJBGUSJt5SbPUX8=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=f0LHiUoAY5AUdi3l6SGumkJIM4KjWmE+sbzZWD+wNH/xuVnKF2WZI5lgvIezaXs/Z
+ CeMElLtreg7ONx2SCLqhAxLyioQd3q1kflFp2QkIqJmr8s6qGOdJh1+1zsGQRtOc4i
+ 8IdeSxLy5/O9pGAFdNETi1dnUSIyqJsvkjfWroKvuEK6u0QcGUmcp/AXH02yktLXf5
+ oB+GrcAC0jaTKBURiFUw2UtqQnU3R/+FMo+2/QW+TMBrYQAlFA7mmfdbKyRagR1KkG
+ smc+wWlhQel5XDTPULP2fNuWXjiyDKtReInAanuE7ZIl7Y3Kw1d1atHvVD0NlFQ+Z6
+ 4YWY4rSxR1k8A==
+Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
+ from userid 48) id 73F40C53BC6; Sun,  9 Jul 2023 16:07:47 +0000 (UTC)
+From: bugzilla-daemon@kernel.org
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Sun, 09 Jul 2023 16:07:46 +0000
+X-Bugzilla-Reason: None
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Product: File System
+X-Bugzilla-Component: f2fs
+X-Bugzilla-Version: 2.5
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: high
+X-Bugzilla-Who: uddipak.bhyn@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: P1
+X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: cc
+Message-ID: <bug-216050-202145-bkLiIot7Ti@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
+References: <bug-216050-202145@https.bugzilla.kernel.org/>
+X-Bugzilla-URL: https://bugzilla.kernel.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Received: by 2002:a17:903:2149:b0:1b6:a2e4:c8f8 with SMTP id
- s9-20020a170903214900b001b6a2e4c8f8mr5275199ple.2.1688741128024; Fri, 07 Jul
- 2023 07:45:28 -0700 (PDT)
-Date: Fri, 07 Jul 2023 07:45:27 -0700
-In-Reply-To: <ZKgfG5yE+VoMiVsZ@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <0000000000000db85105ffe6af2c@google.com>
-From: syzbot <syzbot+e1246909d526a9d470fa@syzkaller.appspotmail.com>
-To: akpm@linux-foundation.org, chao@kernel.org, hughd@google.com, 
- jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net, 
- linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 3.1 (+++)
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot has tested the proposed patch and the reproducer
- did not trigger any issue: Reported-and-tested-by:
- syzbot+e1246909d526a9d470fa@syzkaller.appspotmail.com
- Content analysis details:   (3.1 points, 6.0 required)
+ Content preview:  https://bugzilla.kernel.org/show_bug.cgi?id=216050 Uddipak
+ (uddipak.bhyn@gmail.com) changed: What |Removed |Added CC|
+ |uddipak.bhyn@gmail.com
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.200 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.200 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1qHmiD-000i70-HF
-Subject: Re: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_evict_inode
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qIWx2-0004sG-1X
+Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,24 +126,29 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+https://bugzilla.kernel.org/show_bug.cgi?id=216050
 
-syzbot has tested the proposed patch and the reproducer did not trigger any issue:
+Uddipak (uddipak.bhyn@gmail.com) changed:
 
-Reported-and-tested-by: syzbot+e1246909d526a9d470fa@syzkaller.appspotmail.com
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 CC|                            |uddipak.bhyn@gmail.com
 
-Tested on:
+--- Comment #173 from Uddipak (uddipak.bhyn@gmail.com) ---
+Hi,
+This issue often occurs in my system when the disk is around 80% full. When the
+disk is less full I get much more uptime before this issue comes or would not
+even occur sometimes.
 
-commit:         14245406 f2fs: flush inode if atomic file is aborted
-git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
-console output: https://syzkaller.appspot.com/x/log.txt?x=16961190a80000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=20a954c5f553cc85
-dashboard link: https://syzkaller.appspot.com/bug?extid=e1246909d526a9d470fa
-compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
+$ uname -a
+Linux ... 6.4.2-arch1-1 #1 SMP PREEMPT_DYNAMIC Thu, 06 Jul 2023 18:35:54 +0000
+x86_64 GNU/Linux
 
-Note: no patches were applied.
-Note: testing is done by a robot and is best-effort only.
+-- 
+You may reply to this email to add a comment.
 
+You are receiving this mail because:
+You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
