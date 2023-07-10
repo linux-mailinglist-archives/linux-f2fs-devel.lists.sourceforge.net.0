@@ -2,104 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE84174E046
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Jul 2023 23:33:47 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A4E974E189
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Jul 2023 00:44:23 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qIyVn-0001jc-80;
-	Mon, 10 Jul 2023 21:33:40 +0000
+	id 1qIzc8-0002jA-M4;
+	Mon, 10 Jul 2023 22:44:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1qIyVl-0001jW-PW
- for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Jul 2023 21:33:38 +0000
+ (envelope-from <SRS0=G8aH=C4=goodmis.org=rostedt@kernel.org>)
+ id 1qIzc0-0002iz-Po for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Jul 2023 22:44:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qFZABpn3SslKxyGwneojElQRWTUJcXCXtThSUoZbr88=; b=ADNFuq8DGgB1poKg1b2mppjcD6
- fCwGk8R85fmEEf4uzNapFkF3wWlzIPUHipGTyoi4irK3H/EOXJuPy0d4DNq3dA4iRshe5wHxMpu7k
- 1dZjJU54xzDkC6zNtPdCo5Ghx8Lq1Qx7qM5IkT3GtuFVmK2c8zc0a2+uPmuBa1PC3WXM=;
+ bh=WzaIkWWy/2SD+XbdFhmFwNNX2yoQNQ0oNUNqVUZjy5o=; b=QSBEkqjLHU9DGpw+u1NM1j9uun
+ Y7X/B0ZL5fuQoY6kTKLXixVyjznSkmggaYWGVIkAeR+WRpa0rdfZp+zA4SVorLDVzPXtka2/LC+Ho
+ 1SRzDeAHnAR0OmlRbO25r2JO6WiVXZJR90F0q26OpiJvmr/cNAslV94WSW0nL1+EdTVQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=qFZABpn3SslKxyGwneojElQRWTUJcXCXtThSUoZbr88=; b=j
- y7Sd56u21E0yLnIsaZicETHhcAYH/2BVWEbRzxf+btppnkfqyYuG6FRh6WWYLSdzYfulMZehogv6G
- /hBWZSRBdPFuGzGbb4cCX/qMdYEauFb2NJUOamgqnGaN/nwzjiafEdzATEJrC41YbDP7LyaV0yJ6n
- B1TxjbELHCLJvNaA=;
-Received: from mga03.intel.com ([134.134.136.65])
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=WzaIkWWy/2SD+XbdFhmFwNNX2yoQNQ0oNUNqVUZjy5o=; b=YQtqCIgO8CxLrsJgWrf9yA/zRy
+ 8DbH6OjpDCNDP2Jx7nP4NyZmcbJZwx+NKGcL9IGtSyVyhn5MaWa7IAwimfoDv9imDNCuX8OVyFE7Q
+ ecBKy5dMT+bKMxutPdz9Mg1y31OUInvhg6Mo8gshp/iOtEDrnCp8eNCakoRnXe8idjik=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qIyVk-003hCz-Iq for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 10 Jul 2023 21:33:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1689024816; x=1720560816;
- h=date:from:to:cc:subject:message-id:mime-version;
- bh=Kb2rc3LY9QiBnaOXj6f06OeidL9rzaYUAi7KLEwieJc=;
- b=AjJSiNEOb7YyRbj+2fCcm4vykIQmh4A3e6r66hfeOWaOFj9wdnYJWTiY
- zwubqzMRghoai70H3xHTCUUoFE1iFxC2fArosHMyckFvjyqEWONApcUr/
- L6VVXPcrJLDsSHxiJQGLSCff+JWbZ5QhZCOISP09kOxcSlHmBRGQA1PXR
- nGb/t+lX/oBze8t3msFmc/XNRZWs3IzUqQ4sLW/vPrS4pgbarulKMaVK8
- 7d27AdfVCjwwqGhogGbmuLxVwxlgNlMUvcQbAJSKI23UquEI+VtVq3xbq
- vwnHAaSN+ACj9/2FWRTDYid0fudjdhnjk6tDmP4AXIk1OmT4xGeqJCRIS g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10767"; a="367958142"
-X-IronPort-AV: E=Sophos;i="6.01,195,1684825200"; d="scan'208";a="367958142"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Jul 2023 14:33:30 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10767"; a="671121006"
-X-IronPort-AV: E=Sophos;i="6.01,195,1684825200"; d="scan'208";a="671121006"
-Received: from lkp-server01.sh.intel.com (HELO c544d7fc5005) ([10.239.97.150])
- by orsmga003.jf.intel.com with ESMTP; 10 Jul 2023 14:33:29 -0700
-Received: from kbuild by c544d7fc5005 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1qIyVc-00041M-1S;
- Mon, 10 Jul 2023 21:33:28 +0000
-Date: Tue, 11 Jul 2023 05:33:11 +0800
-From: kernel test robot <lkp@intel.com>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <202307110542.NBAMyZxE-lkp@intel.com>
+ id 1qIzbv-003jPg-FS for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 10 Jul 2023 22:44:08 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9274B611FB;
+ Mon, 10 Jul 2023 22:43:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 330DEC433C7;
+ Mon, 10 Jul 2023 22:43:56 +0000 (UTC)
+Date: Mon, 10 Jul 2023 18:43:53 -0400
+From: Steven Rostedt <rostedt@goodmis.org>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Message-ID: <20230710184353.09640aee@gandalf.local.home>
+In-Reply-To: <20230628150243.17771-1-andriy.shevchenko@linux.intel.com>
+References: <20230628150243.17771-1-andriy.shevchenko@linux.intel.com>
+X-Mailer: Claws Mail 3.19.1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Spam-Score: -3.2 (---)
+X-Spam-Score: -4.8 (----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: tree:
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- dev-test head: d73b38253cda925126fc85e32277fbe2f1b100bf commit:
- 2031cbae1532cadb0838ebc1fecbfd14698b5a0a
- [5/6] f2fs: don't reopen [...] 
- Content analysis details:   (-3.2 points, 6.0 required)
+ Content preview:  On Wed,
+ 28 Jun 2023 18:02:43 +0300 Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+ wrote: > Since strreplace() returns the pointer to the string itself, > we
+ may use it directly in the code. > > Signed-off-by: Andy Shevchenko
+ <andriy.shevchenko@linux.intel.com>
+ > --- > include/trace/events [...] 
+ Content analysis details:   (-4.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [134.134.136.65 listed in wl.mailspike.net]
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [134.134.136.65 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qIyVk-003hCz-Iq
-Subject: [f2fs-dev] [jaegeuk-f2fs:dev-test 5/6] fs/f2fs/super.c:1563:17:
- error: no member named 'blkz_seq' in 'struct f2fs_dev_info'
+X-Headers-End: 1qIzbv-003jPg-FS
+Subject: Re: [f2fs-dev] [PATCH v1 1/1] f2fs: Use return value of strreplace()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -111,53 +90,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, llvm@lists.linux.dev,
- linux-f2fs-devel@lists.sourceforge.net, oe-kbuild-all@lists.linux.dev
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Masami Hiramatsu <mhiramat@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ linux-trace-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
-head:   d73b38253cda925126fc85e32277fbe2f1b100bf
-commit: 2031cbae1532cadb0838ebc1fecbfd14698b5a0a [5/6] f2fs: don't reopen the main block device in f2fs_scan_devices
-config: x86_64-rhel-8.3-rust (https://download.01.org/0day-ci/archive/20230711/202307110542.NBAMyZxE-lkp@intel.com/config)
-compiler: clang version 15.0.7 (https://github.com/llvm/llvm-project.git 8dfdcc7b7bf66834a761bd8de445840ef68e4d1a)
-reproduce: (https://download.01.org/0day-ci/archive/20230711/202307110542.NBAMyZxE-lkp@intel.com/reproduce)
+On Wed, 28 Jun 2023 18:02:43 +0300
+Andy Shevchenko <andriy.shevchenko@linux.intel.com> wrote:
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202307110542.NBAMyZxE-lkp@intel.com/
+> Since strreplace() returns the pointer to the string itself,
+> we may use it directly in the code.
+> 
+> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> ---
+>  include/trace/events/f2fs.h | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
+> 
+> diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+> index 793f82cc1515..f5994515290c 100644
+> --- a/include/trace/events/f2fs.h
+> +++ b/include/trace/events/f2fs.h
+> @@ -2234,13 +2234,11 @@ DECLARE_EVENT_CLASS(f2fs__rw_start,
+>  		 * because this screws up the tooling that parses
+>  		 * the traces.
+>  		 */
+> -		__assign_str(pathbuf, pathname);
+> -		(void)strreplace(__get_str(pathbuf), ' ', '_');
+> +		__assign_str(pathbuf, strreplace(pathname, ' ', '_'));
 
-All errors (new ones prefixed by >>):
+But this modifies the pathname that is passed into the trace event, which
+is something that a trace point should never do! In fact, the char
+*pathname, really should be a const char * (for which this would fail to
+build).
 
->> fs/f2fs/super.c:1563:17: error: no member named 'blkz_seq' in 'struct f2fs_dev_info'
-           kvfree(FDEV(0).blkz_seq);
-                  ~~~~~~~ ^
-   1 error generated.
+Note, I went to look for these events and I can not find where they are
+used. Should these events just be deleted?
+
+-- Steve
 
 
-vim +1563 fs/f2fs/super.c
+>  		__entry->offset = offset;
+>  		__entry->bytes = bytes;
+>  		__entry->i_size = i_size_read(inode);
+> -		__assign_str(cmdline, command);
+> -		(void)strreplace(__get_str(cmdline), ' ', '_');
+> +		__assign_str(cmdline, strreplace(command, ' ', '_'));
+>  		__entry->pid = pid;
+>  		__entry->ino = inode->i_ino;
+>  	),
 
-  1558	
-  1559	static void destroy_device_list(struct f2fs_sb_info *sbi)
-  1560	{
-  1561		int i;
-  1562	
-> 1563		kvfree(FDEV(0).blkz_seq);
-  1564		for (i = 1; i < sbi->s_ndevs; i++) {
-  1565			blkdev_put(FDEV(i).bdev, sbi->sb->s_type);
-  1566	#ifdef CONFIG_BLK_DEV_ZONED
-  1567			kvfree(FDEV(i).blkz_seq);
-  1568	#endif
-  1569		}
-  1570		kvfree(sbi->devs);
-  1571	}
-  1572	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
 
 
 _______________________________________________
