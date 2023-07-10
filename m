@@ -2,93 +2,96 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96EBC74D5B5
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Jul 2023 14:36:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D83474D7B9
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 10 Jul 2023 15:33:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qIq7u-0007Jq-9l;
-	Mon, 10 Jul 2023 12:36:27 +0000
+	id 1qIr0r-00027F-1G;
+	Mon, 10 Jul 2023 13:33:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qIq7k-0007JW-Ea;
- Mon, 10 Jul 2023 12:36:17 +0000
+ (envelope-from <jlayton@kernel.org>) id 1qIr0X-00026h-0G;
+ Mon, 10 Jul 2023 13:32:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pbpfxp2fiy+XyhiTnZqc8yWJnvarAsfY+1zkbm+t95Q=; b=k2o2u1MaXj5McTlrnHro9itDOQ
- 8AxMGJVUPanCVv5+jeaqE89L/qCFFNcBd3+envgoARGaoZPA4+ZtYgOAFRpzOL+dn/Q4UV6MGMATU
- grLxSG47HN4/F6ErDIr79CIGbNHHJ0zSmbzW62wcBF7sYrhWGHKWbQeDTN3eKqoRfYbo=;
+ bh=ypo6EEC/a10vTp0LME1omXwBE1UiKK/mReyAl6l5UHQ=; b=EiSAjIWjAeS2aoEUSBYv8WahTM
+ ebasPtQWLOUEH5eAm6dHZOeZZgCQFrhAi6vqX+AJhEqhcWTvspuD2DfnXWOm1QCEdvsosnA/L6nTM
+ FSEDAZRDpPzWtqvK6cSwHDY77YYS96qCf3xYBPC/UrdOx55/CCcn1RLVwyWbfjOwveMU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pbpfxp2fiy+XyhiTnZqc8yWJnvarAsfY+1zkbm+t95Q=; b=iyg7jw7ITDFN6N5i3gp8SkyNk0
- SRfLWK7rpD/jg8aofEhjpFgYmWTrYvoaesvsau2MCdOiNl7kACeF/b+dYhmqeJVxv+K4/KxyOzU7F
- bE622B1/FWz+bq8TE7TpOPXIxeJHXzY80Jx7BclSLSXfoz5GaUR2ymemNyTRevo7RroU=;
+ bh=ypo6EEC/a10vTp0LME1omXwBE1UiKK/mReyAl6l5UHQ=; b=bgbhnY/RYO8pH3vjD0eTpxnDBm
+ u0INSAFCMcC6KOcz3tH/vVv2oXc8IwFSIDh0IWdJ2W6RMFJaMa/MjR2DUvPbD8kj7UUYXAWftLVi4
+ X4JElcOdC5mH4QqTOnimdgmGOewqIqCC90I+tlypl6mMDE7375HXl4F6UJX/S1q0CfM0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qIq7k-003LLn-Km; Mon, 10 Jul 2023 12:36:17 +0000
+ id 1qIr0T-003Nhw-Bk; Mon, 10 Jul 2023 13:32:52 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3E95360FE3;
- Mon, 10 Jul 2023 12:36:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A3A7C433CB;
- Mon, 10 Jul 2023 12:35:31 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 58D4060B8D;
+ Mon, 10 Jul 2023 13:32:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A7E3BC433C9;
+ Mon, 10 Jul 2023 13:32:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1688992570;
- bh=H2xgbjqXpjCIL1YrRX5e2Lm0dCE6nhNpxkhLzNT5ua0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=GYBFwi445q0lt0ZphYZpLmOt5wR+meJbqPSRhxet7P0iiPRYgnHSi9LobGg38wRHk
- YRw3H+QXcyvvByqsJ+4wCmkCN6cf2UfzMYa1sqxLulNzp2UeGTyc0ij28Jne5oQ1T1
- 3RwWXPXG0ww5I/wkFqIbXj1fKOk/tlA6pnousvcLf4fNGPnso9ohJABAD43u0T4XNZ
- 4qx5bhLf1Dg7cYvF3ikt77ixrICUwaQpwn/PA/WiTF+kWZvjsjd1ey6AFXxc5U5x4u
- 9w1gOuNArxobHqFss0Ukd6pKRPqY5GTMTdaOCIUwXl2G+JmZTqpL3AJhz3XT+Fb/gm
- tN6yuNjSBVu7g==
-Date: Mon, 10 Jul 2023 14:35:28 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <20230710-zudem-entkam-bb508cbd8c78@brauner>
+ s=k20201202; t=1688995962;
+ bh=ypo6EEC/a10vTp0LME1omXwBE1UiKK/mReyAl6l5UHQ=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=J7Z7W1QfjLNRfgVQcSdKnYFRxtD+3fk+fVeHY9xuci1TKV61DCMVSYVvDG9kwuCBX
+ g+QpzC0XDkSjeL9nV9+lGdPbp68Q96EXBiPlDNXBynN9HrAz4Y+E89ZYAnFm4gMFob
+ SGwQAd+JWX6wsLqjr9V4UXCKsBkrO6/s1MT1FJcjDjR0RhV1HnH8M/padgIYfYI3iT
+ 50AKfuQ1Ba3eH+A3TeCdkft2SWR53hIVATzxttJnSld1dtaOLY6XNcMPkiIrdtp3w+
+ UMgZy7XJf81pa8iQgs3v7vGfymFo80jGgmK2T6kIjmEHcqRaAvCUmLi8QnIHmVmDpT
+ pZFJemBst7t+w==
+Message-ID: <c4eaff9389fe63ec4e29404ec0d1181b74935426.camel@kernel.org>
+From: Jeff Layton <jlayton@kernel.org>
+To: Christian Brauner <brauner@kernel.org>
+Date: Mon, 10 Jul 2023 09:32:23 -0400
+In-Reply-To: <20230710-zudem-entkam-bb508cbd8c78@brauner>
 References: <20230705185812.579118-1-jlayton@kernel.org>
  <5e40891f6423feb5b68f025e31f26e9a50ae9390.camel@kernel.org>
+ <20230710-zudem-entkam-bb508cbd8c78@brauner>
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <5e40891f6423feb5b68f025e31f26e9a50ae9390.camel@kernel.org>
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jul 07, 2023 at 08:42:31AM -0400, Jeff Layton wrote:
- > On Wed, 2023-07-05 at 14:58 -0400, Jeff Layton wrote: > > v2: > > - prepend
- patches to add missing ctime updates > > - add simple_rename_ [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Mon, 2023-07-10 at 14:35 +0200, Christian Brauner wrote:
+ > On Fri, Jul 07, 2023 at 08:42:31AM -0400, Jeff Layton wrote: > > On Wed,
+ 2023-07-05 at 14:58 -0400, Jeff Layton wrote: > > > v2: > > > - p [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qIq7k-003LLn-Km
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qIr0T-003Nhw-Bk
 Subject: Re: [f2fs-dev] [PATCH v2 00/89] fs: new accessors for inode->i_ctime
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -176,51 +179,84 @@ Cc: lucho@ionkov.net, rafael@kernel.org, djwong@kernel.org, al@alarsen.net,
  phillip@squashfs.org.uk, johannes@sipsolutions.net, sj1557.seo@samsung.com,
  dwmw2@infradead.org, linux-karma-devel@lists.sourceforge.net,
  linux-btrfs@vger.kernel.org, jlbec@evilplan.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-15"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jul 07, 2023 at 08:42:31AM -0400, Jeff Layton wrote:
-> On Wed, 2023-07-05 at 14:58 -0400, Jeff Layton wrote:
-> > v2:
-> > - prepend patches to add missing ctime updates
-> > - add simple_rename_timestamp helper function
-> > - rename ctime accessor functions as inode_get_ctime/inode_set_ctime_*
-> > - drop individual inode_ctime_set_{sec,nsec} helpers
-> > 
-> 
-> After review by Jan and others, and Jan's ext4 rework, the diff on top
-> of the series I posted a couple of days ago is below. I don't really
-> want to spam everyone with another ~100 patch v3 series, but I can if
-> you think that's best.
-> 
-> Christian, what would you like me to do here?
+On Mon, 2023-07-10 at 14:35 +0200, Christian Brauner wrote:
+> On Fri, Jul 07, 2023 at 08:42:31AM -0400, Jeff Layton wrote:
+> > On Wed, 2023-07-05 at 14:58 -0400, Jeff Layton wrote:
+> > > v2:
+> > > - prepend patches to add missing ctime updates
+> > > - add simple_rename_timestamp helper function
+> > > - rename ctime accessor functions as inode_get_ctime/inode_set_ctime_*
+> > > - drop individual inode_ctime_set_{sec,nsec} helpers
+> > > =
 
-I picked up the series from the list and folded the fixups you posted
-here into the respective fs conversion patches. I hope that helps you
-avoid a resend. You should have received a separate "thank you" mail for
-all of this.
+> > =
 
-To each patch that I folded one of the fixlets from below into I added a
-git note that records a link to your mail here and the respective patch
-hunk from this mail that I folded into the patch. git.kernel.org will
-show notes by default. For example,
-https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git/commit/?h=vfs.ctime&id=8b0e3c2e99004609a16ba145bcbdfdddb78e220e
-should show you the note I added. You can also fetch them via
-git fetch $remote refs/notes/*:refs/notes/*
-(You probably know that ofc but jic.) if you're interested.
+> > After review by Jan and others, and Jan's ext4 rework, the diff on top
+> > of the series I posted a couple of days ago is below. I don't really
+> > want to spam everyone with another ~100 patch v3 series, but I can if
+> > you think that's best.
+> > =
 
-Based on v6.5-rc1 as of today.
+> > Christian, what would you like me to do here?
+> =
 
-Btw, both b4 and patchwork somehow treat the series in weird was.
-IOW, based on the message id of the cover letter I was able to pull most
-messages except for:
+> I picked up the series from the list and folded the fixups you posted
+> here into the respective fs conversion patches. I hope that helps you
+> avoid a resend. You should have received a separate "thank you" mail for
+> all of this.
+> =
 
-[07/92] fs: add ctime accessors infrastructure
-[08/92] fs: new helper: simple_rename_timestamp
-[92/92] fs: rename i_ctime field to __i_ctime
+> To each patch that I folded one of the fixlets from below into I added a
+> git note that records a link to your mail here and the respective patch
+> hunk from this mail that I folded into the patch. git.kernel.org will
+> show notes by default. For example,
+> https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git/commit/?h=3Dv=
+fs.ctime&id=3D8b0e3c2e99004609a16ba145bcbdfdddb78e220e
+> should show you the note I added. You can also fetch them via
+> git fetch $remote refs/notes/*:refs/notes/*
+> (You probably know that ofc but jic.) if you're interested.
+> =
 
-which I pulled in separately. Not sure what the cause of this is.
+> Based on v6.5-rc1 as of today.
+> =
+
+
+Many thanks!!! I'll get to work rebasing the multigrain timestamp series
+on top of that.
+
+> Btw, both b4 and patchwork somehow treat the series in weird was.
+> IOW, based on the message id of the cover letter I was able to pull most
+> messages except for:
+> =
+
+> [07/92] fs: add ctime accessors infrastructure
+> [08/92] fs: new helper: simple_rename_timestamp
+> [92/92] fs: rename i_ctime field to __i_ctime
+> =
+
+> which I pulled in separately. Not sure what the cause of=A0
+> =
+
+> this is.
+
+Good to know.
+
+I ended up doing the send in two phases: one for the cover letter and
+infrastructure patches that went to everyone, and one for the per-
+subsystem patches that went do individual maintainers and lists.
+
+I suspect that screwed up the message IDs somehow. Hopefully I won't
+need to do a posting like that again soon, but I'll pay closer attention
+to the message id handling next time.
+
+Thanks again!
+-- =
+
+Jeff Layton <jlayton@kernel.org>
 
 
 _______________________________________________
