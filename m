@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A15F74F4B6
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Jul 2023 18:17:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5484074F4C5
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Jul 2023 18:18:11 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qJG2r-0003e2-60;
-	Tue, 11 Jul 2023 16:16:57 +0000
+	id 1qJG40-0004QF-7r;
+	Tue, 11 Jul 2023 16:18:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1qJG2p-0003dt-1g
+ (envelope-from <jaegeuk@kernel.org>) id 1qJG3z-0004Q9-69
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Jul 2023 16:16:55 +0000
+ Tue, 11 Jul 2023 16:18:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Xabd5+tKdxzACjm3r640WGDoM3dIXGfIhrKtcv2p6XU=; b=m1O6kjGQCWXr+nggl2/uHo2IWl
- HjHd1pPRQFso1y/GTiUT2+cY5t74C1jNtq6QZOPSF6HE4OhYPxMU+9RnWJMIpyIxkGPD7AeFSmWb/
- RazP18WFIh8mZzUBO/sowIInN+Mw7mJccFP0Uxa3MJJiS09+VQZwD3h++7dCKz9qowXU=;
+ bh=YKOwq8sdF95jVkTlVFJ5Q7JfTyV7gMWc0poo8VC6kiE=; b=MhkqYxepRd3xuCqOoqY7TgVD6M
+ inh9E16OG2yM0IeaRZXvFHLd3MkyeDTaSUnpmC2hwKhvaRbDWKJj5MiecwO1tjpxpqCha9E/4Kfwa
+ 9F2R9eJUWMmXKKN2xbJbg12aZL0GDgG9PlBxdd9IA3DRPPK1O9iBJ2aku1jqf0Ww02Hg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,71 +31,69 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Xabd5+tKdxzACjm3r640WGDoM3dIXGfIhrKtcv2p6XU=; b=IaDamDr7gM8dlY0Nk7HX6s8piV
- vZ6vL1xrFDGKIQCUChwME/TjLOYO+8ICS0CtgLSNe/c4k/ircyuOc/ZKsNP+wQALyi9V4HoW6wVIY
- toxRMHAAV5jGumGDPsQXY8l1dVAlIrzRo/k6SAxQKc5YOujesLfPFGqc7qSEDdYqsGRw=;
+ bh=YKOwq8sdF95jVkTlVFJ5Q7JfTyV7gMWc0poo8VC6kiE=; b=T2NHFa1VuskbYP6JCVQT5ttlQ1
+ 6sr0aQYjnKKzKJMD6L1EbI5AlVO0ugR8bAjVcF//4kGPg2K7J16Fv6q9Q1x9Auw16aZEvvLXrUx0I
+ 04dqKO+ryrPU7ASKRruuieBJku5x2xwjnFldb8Ner1drh1fQqzk4I2iDoefJTkMsyZ64=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qJG2l-0000pv-FT for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Jul 2023 16:16:54 +0000
+ id 1qJG3z-0000sJ-Uo for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Jul 2023 16:18:07 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9413B614F8;
- Tue, 11 Jul 2023 16:16:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D884CC433C8;
- Tue, 11 Jul 2023 16:16:41 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6E91061557;
+ Tue, 11 Jul 2023 16:18:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0E1FC43397;
+ Tue, 11 Jul 2023 16:17:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1689092202;
- bh=rRZeIKQQb+qwxmnDhPPGlaH96szkShA7ICpYM/PVFi8=;
+ s=k20201202; t=1689092279;
+ bh=9L6KVSpQ52iJPE/W9jY3lrnhEPrff+Z1LTyLQcv3sdo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=rc8vn0uB9tPlcuUwT5F8z9iXu2yjLff6cxv55rsFfQqgAPO1+3f+1w9VBYv3olzho
- YDwfEt9d3ky19mIVamGyNP+E8o3EPre00Ep35OHLtcBHxsxB/7069m2r/7ZesBekMy
- lHtUNe89yatns9oOXMd2DZZrIqxr6lg32G5kWq3Wqfhny2BJvYjLz0gAupiKbOZ/+i
- o52yfuUg5u9hIV6On71abHqtD8aYa1XEuf8dsEsz+9/8W2TmdJBFnFF4GlBcKgFe4J
- F5ssC8XIX9KFHeGRmDpH4Apm2WDDllBSTunPfRDPCiHNkFyOmo+p7VQwwSf9UqIY3s
- m1WyXJe7Q3lrg==
-Date: Tue, 11 Jul 2023 09:16:40 -0700
+ b=GjMT73AgXcyF+/wnM61zc+wcm/8+eqcyrwD4iVIc+yIvuT+1V7qmm2MdRA0lKY/WD
+ xdJ9bIgeszZQ6thQC1dB813TOS+iQrY0gKWqpajt4w0UqMTyhIgJcCUXMiuNqoFvgr
+ wnTKYlRQKa4jrojQp05SGNSzG7uNhVVs+BgMkx/U6TNOu8WX1gyvrEsiYs0NfLPOiG
+ N3frObkHFygc1ageTo9HcPRYpB6WWShpwoY0d1lOAkJJ2Et+mbfB3cECwz1PVy80tN
+ 9hx8J+DBW/XxqyR1TilaseDsC9Ig0lMUv3olAUi58RZ19k/PcdKY/mt034voSdWvPO
+ xq2nYnt433w4g==
+Date: Tue, 11 Jul 2023 09:17:57 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZK2AaP4WKyeMEOFr@google.com>
-References: <20230710061021.2303432-1-chao@kernel.org>
- <ZKw9aOijIJL5w5cj@google.com>
- <b98219b4-7c62-8c4a-1772-810065f9f918@kernel.org>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <ZK2AtW9hLjqpbaPW@google.com>
+References: <20230707094028.107898-1-hch@lst.de> <ZKx2jVONy35B0/S1@google.com>
+ <20230711050101.GA19128@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <b98219b4-7c62-8c4a-1772-810065f9f918@kernel.org>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20230711050101.GA19128@lst.de>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 07/11, Chao Yu wrote: > On 2023/7/11 1:18, Jaegeuk Kim
- wrote: > > On 07/10, Chao Yu wrote: > > > syzbot reports deadlock bug as below:
- > > > > > > -> #1 (&fi->i_sem){+.+.}-{3:3}: > > > down_write+0 [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 07/11, Christoph Hellwig wrote: > I think that's because
+ it doesn't look at sbi->s_ndevs in > destroy_device_list. Let's try the
+ variant
+ below, which also fixes > the buildbot warning for non-zoned [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qJG2l-0000pv-FT
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix potential deadlock by reordering
- w/ i_sem
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qJG3z-0000sJ-Uo
+Subject: Re: [f2fs-dev] [PATCH] f2fs: don't reopen the main block device in
+ f2fs_scan_devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,525 +105,88 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: syzbot+e5600587fa9cbf8e3826@syzkaller.appspotmail.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-block@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 07/11, Chao Yu wrote:
-> On 2023/7/11 1:18, Jaegeuk Kim wrote:
-> > On 07/10, Chao Yu wrote:
-> > > syzbot reports deadlock bug as below:
-> > > 
-> > > -> #1 (&fi->i_sem){+.+.}-{3:3}:
-> > >         down_write+0x3a/0x50 kernel/locking/rwsem.c:1573
-> > >         f2fs_down_write fs/f2fs/f2fs.h:2133 [inline]
-> > >         f2fs_add_inline_entry+0x3a8/0x760 fs/f2fs/inline.c:644
-> > >         f2fs_add_dentry+0xba/0x1e0 fs/f2fs/dir.c:784
-> > >         f2fs_do_add_link+0x21e/0x340 fs/f2fs/dir.c:827
-> > >         f2fs_add_link fs/f2fs/f2fs.h:3554 [inline]
-> > >         f2fs_create+0x32c/0x530 fs/f2fs/namei.c:377
-> > >         lookup_open fs/namei.c:3492 [inline]
-> > >         open_last_lookups fs/namei.c:3560 [inline]
-> > >         path_openat+0x13e7/0x3180 fs/namei.c:3790
-> > >         do_filp_open+0x234/0x490 fs/namei.c:3820
-> > >         do_sys_openat2+0x13e/0x1d0 fs/open.c:1407
-> > >         do_sys_open fs/open.c:1422 [inline]
-> > >         __do_sys_open fs/open.c:1430 [inline]
-> > >         __se_sys_open fs/open.c:1426 [inline]
-> > >         __x64_sys_open+0x225/0x270 fs/open.c:1426
-> > >         do_syscall_x64 arch/x86/entry/common.c:50 [inline]
-> > >         do_syscall_64+0x41/0xc0 arch/x86/entry/common.c:80
-> > >         entry_SYSCALL_64_after_hwframe+0x63/0xcd
-> > > 
-> > > -> #0 (&fi->i_xattr_sem){.+.+}-{3:3}:
-> > >         check_prev_add kernel/locking/lockdep.c:3142 [inline]
-> > >         check_prevs_add kernel/locking/lockdep.c:3261 [inline]
-> > >         validate_chain kernel/locking/lockdep.c:3876 [inline]
-> > >         __lock_acquire+0x39ff/0x7f70 kernel/locking/lockdep.c:5144
-> > >         lock_acquire+0x1e3/0x520 kernel/locking/lockdep.c:5761
-> > >         down_read+0x47/0x2f0 kernel/locking/rwsem.c:1520
-> > >         f2fs_down_read fs/f2fs/f2fs.h:2108 [inline]
-> > >         f2fs_getxattr+0xb8/0x1460 fs/f2fs/xattr.c:532
-> > >         __f2fs_get_acl+0x52/0x8e0 fs/f2fs/acl.c:179
-> > >         f2fs_acl_create fs/f2fs/acl.c:377 [inline]
-> > >         f2fs_init_acl+0xd7/0x9a0 fs/f2fs/acl.c:420
-> > >         f2fs_init_inode_metadata+0x824/0x1190 fs/f2fs/dir.c:558
-> > >         f2fs_do_tmpfile+0x34/0x170 fs/f2fs/dir.c:839
-> > >         __f2fs_tmpfile+0x1f9/0x380 fs/f2fs/namei.c:884
-> > >         f2fs_ioc_start_atomic_write+0x4a3/0x9e0 fs/f2fs/file.c:2099
-> > >         __f2fs_ioctl+0x1b5c/0xb770
-> > >         vfs_ioctl fs/ioctl.c:51 [inline]
-> > >         __do_sys_ioctl fs/ioctl.c:870 [inline]
-> > >         __se_sys_ioctl+0xf8/0x170 fs/ioctl.c:856
-> > >         do_syscall_x64 arch/x86/entry/common.c:50 [inline]
-> > >         do_syscall_64+0x41/0xc0 arch/x86/entry/common.c:80
-> > >         entry_SYSCALL_64_after_hwframe+0x63/0xcd
-> > > 
-> > > The root cause is as below reversed lock order:
-> > > - f2fs_create
-> > >   - f2fs_add_dentry
-> > >    - f2fs_down_write(&F2FS_I(dir)->i_xattr_sem)
-> > > 						- f2fs_ioc_start_atomic_write
-> > > 						 - __f2fs_tmpfile
-> > > 						  - f2fs_do_tmpfile
-> > > 						   - f2fs_down_write(&F2FS_I(inode)->i_sem)
-> > > 						   - f2fs_init_inode_metadata
-> > > 						    - f2fs_init_acl
-> > > 						     - __f2fs_get_acl
-> > > 						      - f2fs_getxattr
-> > > 						       - f2fs_down_read(&F2FS_I(dir)->i_xattr_sem)
-> > >    - f2fs_add_inline_entry
-> > >     - f2fs_down_write(&F2FS_I(inode)->i_sem)
-> > 
-> > How is it possible to get two inode are identical?
-> 
-> Oh, so, it looks like a false positive?
-> 
-> BTW, except commit message, what do you think of the change itself?
-> We can using i_sem to instead i_xattr_sem, so that 1) it can shrink
-> inode's size, 2) it's more clear that use common i_sem lock to protect
-> inode's {,x}attr access.
+On 07/11, Christoph Hellwig wrote:
+> I think that's because it doesn't look at sbi->s_ndevs in
+> destroy_device_list.  Let's try the variant below, which also fixes
+> the buildbot warning for non-zoned configfs:
 
-If then, xattr can be blocked by unnecessary i_sem lock?
+Thanks. At a glance, this looks better. Let me give it a try.
 
 > 
-> Thanks,
+> ---
+> >From 645d8dceaa97b6ee73be067495b111b15b187498 Mon Sep 17 00:00:00 2001
+> From: Christoph Hellwig <hch@lst.de>
+> Date: Fri, 7 Jul 2023 10:31:49 +0200
+> Subject: f2fs: don't reopen the main block device in f2fs_scan_devices
 > 
-> > 
-> > > 
-> > > We can break the dependency of deadlock by below change:
-> > > - use i_sem to keep order of {get,set}xattr instead of i_xattr_sem
-> > > - keep below lock order in inode operation to avoid deadlock:
-> > >   dir->i_sem -> inode->i_sem
-> > >   dir->i_sem -> dpage_lock
-> > > 
-> > > Fixes: 5eda1ad1aaff ("f2fs: fix deadlock in i_xattr_sem and inode page lock")
-> > > Reported-by: syzbot+e5600587fa9cbf8e3826@syzkaller.appspotmail.com
-> > > Closes: https://lore.kernel.org/linux-f2fs-devel/00000000000096797d06001a359d@google.com
-> > > Signed-off-by: Chao Yu <chao@kernel.org>
-> > > ---
-> > >   fs/f2fs/acl.c    | 36 +++++++++++++++++++-----------------
-> > >   fs/f2fs/acl.h    |  4 ++--
-> > >   fs/f2fs/dir.c    | 22 ++++++++++++++++------
-> > >   fs/f2fs/f2fs.h   |  1 -
-> > >   fs/f2fs/super.c  |  5 ++---
-> > >   fs/f2fs/verity.c |  5 +++--
-> > >   fs/f2fs/xattr.c  | 37 +++++++++++++++++++++----------------
-> > >   fs/f2fs/xattr.h  | 19 +++++++++++++------
-> > >   8 files changed, 76 insertions(+), 53 deletions(-)
-> > > 
-> > > diff --git a/fs/f2fs/acl.c b/fs/f2fs/acl.c
-> > > index ec2aeccb69a3..af58b38e953c 100644
-> > > --- a/fs/f2fs/acl.c
-> > > +++ b/fs/f2fs/acl.c
-> > > @@ -166,7 +166,7 @@ static void *f2fs_acl_to_disk(struct f2fs_sb_info *sbi,
-> > >   }
-> > >   static struct posix_acl *__f2fs_get_acl(struct inode *inode, int type,
-> > > -						struct page *dpage)
-> > > +						struct page *dpage, bool locked)
-> > >   {
-> > >   	int name_index = F2FS_XATTR_INDEX_POSIX_ACL_DEFAULT;
-> > >   	void *value = NULL;
-> > > @@ -176,13 +176,13 @@ static struct posix_acl *__f2fs_get_acl(struct inode *inode, int type,
-> > >   	if (type == ACL_TYPE_ACCESS)
-> > >   		name_index = F2FS_XATTR_INDEX_POSIX_ACL_ACCESS;
-> > > -	retval = f2fs_getxattr(inode, name_index, "", NULL, 0, dpage);
-> > > +	retval = f2fs_getxattr(inode, name_index, "", NULL, 0, dpage, locked);
-> > >   	if (retval > 0) {
-> > >   		value = f2fs_kmalloc(F2FS_I_SB(inode), retval, GFP_F2FS_ZERO);
-> > >   		if (!value)
-> > >   			return ERR_PTR(-ENOMEM);
-> > >   		retval = f2fs_getxattr(inode, name_index, "", value,
-> > > -							retval, dpage);
-> > > +							retval, dpage, locked);
-> > >   	}
-> > >   	if (retval > 0)
-> > > @@ -201,7 +201,7 @@ struct posix_acl *f2fs_get_acl(struct inode *inode, int type, bool rcu)
-> > >   	if (rcu)
-> > >   		return ERR_PTR(-ECHILD);
-> > > -	return __f2fs_get_acl(inode, type, NULL);
-> > > +	return __f2fs_get_acl(inode, type, NULL, false);
-> > >   }
-> > >   static int f2fs_acl_update_mode(struct mnt_idmap *idmap,
-> > > @@ -226,9 +226,9 @@ static int f2fs_acl_update_mode(struct mnt_idmap *idmap,
-> > >   	return 0;
-> > >   }
-> > > -static int __f2fs_set_acl(struct mnt_idmap *idmap,
-> > > -			struct inode *inode, int type,
-> > > -			struct posix_acl *acl, struct page *ipage)
-> > > +static int __f2fs_set_acl(struct mnt_idmap *idmap, struct inode *inode,
-> > > +					int type, struct posix_acl *acl,
-> > > +					struct page *ipage, bool locked)
-> > >   {
-> > >   	int name_index;
-> > >   	void *value = NULL;
-> > > @@ -266,7 +266,8 @@ static int __f2fs_set_acl(struct mnt_idmap *idmap,
-> > >   		}
-> > >   	}
-> > > -	error = f2fs_setxattr(inode, name_index, "", value, size, ipage, 0);
-> > > +	error = f2fs_setxattr(inode, name_index, "", value, size,
-> > > +						ipage, 0, locked);
-> > >   	kfree(value);
-> > >   	if (!error)
-> > > @@ -284,7 +285,7 @@ int f2fs_set_acl(struct mnt_idmap *idmap, struct dentry *dentry,
-> > >   	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
-> > >   		return -EIO;
-> > > -	return __f2fs_set_acl(idmap, inode, type, acl, NULL);
-> > > +	return __f2fs_set_acl(idmap, inode, type, acl, NULL, false);
-> > >   }
-> > >   /*
-> > > @@ -362,7 +363,7 @@ static int f2fs_acl_create_masq(struct posix_acl *acl, umode_t *mode_p)
-> > >   static int f2fs_acl_create(struct inode *dir, umode_t *mode,
-> > >   		struct posix_acl **default_acl, struct posix_acl **acl,
-> > > -		struct page *dpage)
-> > > +		struct page *dpage, bool locked)
-> > >   {
-> > >   	struct posix_acl *p;
-> > >   	struct posix_acl *clone;
-> > > @@ -374,7 +375,7 @@ static int f2fs_acl_create(struct inode *dir, umode_t *mode,
-> > >   	if (S_ISLNK(*mode) || !IS_POSIXACL(dir))
-> > >   		return 0;
-> > > -	p = __f2fs_get_acl(dir, ACL_TYPE_DEFAULT, dpage);
-> > > +	p = __f2fs_get_acl(dir, ACL_TYPE_DEFAULT, dpage, locked);
-> > >   	if (!p || p == ERR_PTR(-EOPNOTSUPP)) {
-> > >   		*mode &= ~current_umask();
-> > >   		return 0;
-> > > @@ -412,28 +413,29 @@ static int f2fs_acl_create(struct inode *dir, umode_t *mode,
-> > >   }
-> > >   int f2fs_init_acl(struct inode *inode, struct inode *dir, struct page *ipage,
-> > > -							struct page *dpage)
-> > > +						struct page *dpage, bool locked)
-> > >   {
-> > >   	struct posix_acl *default_acl = NULL, *acl = NULL;
-> > >   	int error;
-> > > -	error = f2fs_acl_create(dir, &inode->i_mode, &default_acl, &acl, dpage);
-> > > +	error = f2fs_acl_create(dir, &inode->i_mode, &default_acl, &acl,
-> > > +							dpage, locked);
-> > >   	if (error)
-> > >   		return error;
-> > >   	f2fs_mark_inode_dirty_sync(inode, true);
-> > >   	if (default_acl) {
-> > > -		error = __f2fs_set_acl(NULL, inode, ACL_TYPE_DEFAULT, default_acl,
-> > > -				       ipage);
-> > > +		error = __f2fs_set_acl(NULL, inode, ACL_TYPE_DEFAULT,
-> > > +					default_acl, ipage, locked);
-> > >   		posix_acl_release(default_acl);
-> > >   	} else {
-> > >   		inode->i_default_acl = NULL;
-> > >   	}
-> > >   	if (acl) {
-> > >   		if (!error)
-> > > -			error = __f2fs_set_acl(NULL, inode, ACL_TYPE_ACCESS, acl,
-> > > -					       ipage);
-> > > +			error = __f2fs_set_acl(NULL, inode, ACL_TYPE_ACCESS,
-> > > +							acl, ipage, locked);
-> > >   		posix_acl_release(acl);
-> > >   	} else {
-> > >   		inode->i_acl = NULL;
-> > > diff --git a/fs/f2fs/acl.h b/fs/f2fs/acl.h
-> > > index 94ebfbfbdc6f..9c14b6f549c6 100644
-> > > --- a/fs/f2fs/acl.h
-> > > +++ b/fs/f2fs/acl.h
-> > > @@ -37,13 +37,13 @@ extern struct posix_acl *f2fs_get_acl(struct inode *, int, bool);
-> > >   extern int f2fs_set_acl(struct mnt_idmap *, struct dentry *,
-> > >   			struct posix_acl *, int);
-> > >   extern int f2fs_init_acl(struct inode *, struct inode *, struct page *,
-> > > -							struct page *);
-> > > +							struct page *, bool);
-> > >   #else
-> > >   #define f2fs_get_acl	NULL
-> > >   #define f2fs_set_acl	NULL
-> > >   static inline int f2fs_init_acl(struct inode *inode, struct inode *dir,
-> > > -				struct page *ipage, struct page *dpage)
-> > > +			struct page *ipage, struct page *dpage, bool locked)
-> > >   {
-> > >   	return 0;
-> > >   }
-> > > diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-> > > index d635c58cf5a3..4b5c62e18d67 100644
-> > > --- a/fs/f2fs/dir.c
-> > > +++ b/fs/f2fs/dir.c
-> > > @@ -540,6 +540,8 @@ struct page *f2fs_init_inode_metadata(struct inode *inode, struct inode *dir,
-> > >   	int err;
-> > >   	if (is_inode_flag_set(inode, FI_NEW_INODE)) {
-> > > +		struct f2fs_xattr_arg xarg;
-> > > +
-> > >   		page = f2fs_new_inode_page(inode);
-> > >   		if (IS_ERR(page))
-> > >   			return page;
-> > > @@ -555,12 +557,16 @@ struct page *f2fs_init_inode_metadata(struct inode *inode, struct inode *dir,
-> > >   			put_page(page);
-> > >   		}
-> > > -		err = f2fs_init_acl(inode, dir, page, dpage);
-> > > +		err = f2fs_init_acl(inode, dir, page, dpage, true);
-> > >   		if (err)
-> > >   			goto put_error;
-> > > +		xarg.page = page;
-> > > +		xarg.locked = true;
-> > > +
-> > >   		err = f2fs_init_security(inode, dir,
-> > > -					 fname ? fname->usr_fname : NULL, page);
-> > > +					 fname ? fname->usr_fname : NULL,
-> > > +					 &xarg);
-> > >   		if (err)
-> > >   			goto put_error;
-> > > @@ -775,18 +781,20 @@ int f2fs_add_dentry(struct inode *dir, const struct f2fs_filename *fname,
-> > >   {
-> > >   	int err = -EAGAIN;
-> > > +	f2fs_down_read(&F2FS_I(dir)->i_sem);
-> > > +
-> > >   	if (f2fs_has_inline_dentry(dir)) {
-> > >   		/*
-> > > -		 * Should get i_xattr_sem to keep the lock order:
-> > > -		 * i_xattr_sem -> inode_page lock used by f2fs_setxattr.
-> > > +		 * Should get i_sem to keep the lock order:
-> > > +		 * i_sem -> inode_page lock used by f2fs_setxattr.
-> > >   		 */
-> > > -		f2fs_down_read(&F2FS_I(dir)->i_xattr_sem);
-> > >   		err = f2fs_add_inline_entry(dir, fname, inode, ino, mode);
-> > > -		f2fs_up_read(&F2FS_I(dir)->i_xattr_sem);
-> > >   	}
-> > >   	if (err == -EAGAIN)
-> > >   		err = f2fs_add_regular_entry(dir, fname, inode, ino, mode);
-> > > +	f2fs_up_read(&F2FS_I(dir)->i_sem);
-> > > +
-> > >   	f2fs_update_time(F2FS_I_SB(dir), REQ_TIME);
-> > >   	return err;
-> > >   }
-> > > @@ -835,6 +843,7 @@ int f2fs_do_tmpfile(struct inode *inode, struct inode *dir)
-> > >   	struct page *page;
-> > >   	int err = 0;
-> > > +	f2fs_down_write(&F2FS_I(dir)->i_sem);
-> > >   	f2fs_down_write(&F2FS_I(inode)->i_sem);
-> > >   	page = f2fs_init_inode_metadata(inode, dir, NULL, NULL);
-> > >   	if (IS_ERR(page)) {
-> > > @@ -847,6 +856,7 @@ int f2fs_do_tmpfile(struct inode *inode, struct inode *dir)
-> > >   	f2fs_update_time(F2FS_I_SB(inode), REQ_TIME);
-> > >   fail:
-> > >   	f2fs_up_write(&F2FS_I(inode)->i_sem);
-> > > +	f2fs_up_write(&F2FS_I(dir)->i_sem);
-> > >   	return err;
-> > >   }
-> > > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > > index c7cb2177b252..60ec032be48d 100644
-> > > --- a/fs/f2fs/f2fs.h
-> > > +++ b/fs/f2fs/f2fs.h
-> > > @@ -838,7 +838,6 @@ struct f2fs_inode_info {
-> > >   	/* avoid racing between foreground op and gc */
-> > >   	struct f2fs_rwsem i_gc_rwsem[2];
-> > > -	struct f2fs_rwsem i_xattr_sem; /* avoid racing between reading and changing EAs */
-> > >   	int i_extra_isize;		/* size of extra space located in i_addr */
-> > >   	kprojid_t i_projid;		/* id for project quota */
-> > > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> > > index ca31163da00a..c72fda24cffd 100644
-> > > --- a/fs/f2fs/super.c
-> > > +++ b/fs/f2fs/super.c
-> > > @@ -1418,7 +1418,6 @@ static struct inode *f2fs_alloc_inode(struct super_block *sb)
-> > >   	INIT_LIST_HEAD(&fi->gdirty_list);
-> > >   	init_f2fs_rwsem(&fi->i_gc_rwsem[READ]);
-> > >   	init_f2fs_rwsem(&fi->i_gc_rwsem[WRITE]);
-> > > -	init_f2fs_rwsem(&fi->i_xattr_sem);
-> > >   	/* Will be used by directory only */
-> > >   	fi->i_dir_level = F2FS_SB(sb)->dir_level;
-> > > @@ -3163,7 +3162,7 @@ static int f2fs_get_context(struct inode *inode, void *ctx, size_t len)
-> > >   {
-> > >   	return f2fs_getxattr(inode, F2FS_XATTR_INDEX_ENCRYPTION,
-> > >   				F2FS_XATTR_NAME_ENCRYPTION_CONTEXT,
-> > > -				ctx, len, NULL);
-> > > +				ctx, len, NULL, false);
-> > >   }
-> > >   static int f2fs_set_context(struct inode *inode, const void *ctx, size_t len,
-> > > @@ -3183,7 +3182,7 @@ static int f2fs_set_context(struct inode *inode, const void *ctx, size_t len,
-> > >   	return f2fs_setxattr(inode, F2FS_XATTR_INDEX_ENCRYPTION,
-> > >   				F2FS_XATTR_NAME_ENCRYPTION_CONTEXT,
-> > > -				ctx, len, fs_data, XATTR_CREATE);
-> > > +				ctx, len, fs_data, XATTR_CREATE, true);
-> > >   }
-> > >   static const union fscrypt_policy *f2fs_get_dummy_policy(struct super_block *sb)
-> > > diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
-> > > index 4fc95f353a7a..e181528b1f26 100644
-> > > --- a/fs/f2fs/verity.c
-> > > +++ b/fs/f2fs/verity.c
-> > > @@ -181,7 +181,7 @@ static int f2fs_end_enable_verity(struct file *filp, const void *desc,
-> > >   	/* Set the verity xattr. */
-> > >   	err = f2fs_setxattr(inode, F2FS_XATTR_INDEX_VERITY,
-> > >   			    F2FS_XATTR_NAME_VERITY, &dloc, sizeof(dloc),
-> > > -			    NULL, XATTR_CREATE);
-> > > +			    NULL, XATTR_CREATE, false);
-> > >   	if (err)
-> > >   		goto cleanup;
-> > > @@ -226,7 +226,8 @@ static int f2fs_get_verity_descriptor(struct inode *inode, void *buf,
-> > >   	/* Get the descriptor location */
-> > >   	res = f2fs_getxattr(inode, F2FS_XATTR_INDEX_VERITY,
-> > > -			    F2FS_XATTR_NAME_VERITY, &dloc, sizeof(dloc), NULL);
-> > > +			    F2FS_XATTR_NAME_VERITY, &dloc, sizeof(dloc),
-> > > +			    NULL, false);
-> > >   	if (res < 0 && res != -ERANGE)
-> > >   		return res;
-> > >   	if (res != sizeof(dloc) || dloc.version != cpu_to_le32(F2FS_VERIFY_VER)) {
-> > > diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-> > > index 476b186b90a6..a6a611f8a771 100644
-> > > --- a/fs/f2fs/xattr.c
-> > > +++ b/fs/f2fs/xattr.c
-> > > @@ -61,7 +61,7 @@ static int f2fs_xattr_generic_get(const struct xattr_handler *handler,
-> > >   		return -EINVAL;
-> > >   	}
-> > >   	return f2fs_getxattr(inode, handler->flags, name,
-> > > -			     buffer, size, NULL);
-> > > +			     buffer, size, NULL, false);
-> > >   }
-> > >   static int f2fs_xattr_generic_set(const struct xattr_handler *handler,
-> > > @@ -84,7 +84,7 @@ static int f2fs_xattr_generic_set(const struct xattr_handler *handler,
-> > >   		return -EINVAL;
-> > >   	}
-> > >   	return f2fs_setxattr(inode, handler->flags, name,
-> > > -					value, size, NULL, flags);
-> > > +					value, size, NULL, flags, false);
-> > >   }
-> > >   static bool f2fs_xattr_user_list(struct dentry *dentry)
-> > > @@ -136,15 +136,16 @@ static int f2fs_xattr_advise_set(const struct xattr_handler *handler,
-> > >   #ifdef CONFIG_F2FS_FS_SECURITY
-> > >   static int f2fs_initxattrs(struct inode *inode, const struct xattr *xattr_array,
-> > > -		void *page)
-> > > +								void *fs_data)
-> > >   {
-> > > +	struct f2fs_xattr_arg *xarg = (struct f2fs_xattr_arg *)fs_data;
-> > >   	const struct xattr *xattr;
-> > >   	int err = 0;
-> > >   	for (xattr = xattr_array; xattr->name != NULL; xattr++) {
-> > >   		err = f2fs_setxattr(inode, F2FS_XATTR_INDEX_SECURITY,
-> > >   				xattr->name, xattr->value,
-> > > -				xattr->value_len, (struct page *)page, 0);
-> > > +				xattr->value_len, xarg->page, 0, xarg->locked);
-> > >   		if (err < 0)
-> > >   			break;
-> > >   	}
-> > > @@ -152,10 +153,11 @@ static int f2fs_initxattrs(struct inode *inode, const struct xattr *xattr_array,
-> > >   }
-> > >   int f2fs_init_security(struct inode *inode, struct inode *dir,
-> > > -				const struct qstr *qstr, struct page *ipage)
-> > > +				const struct qstr *qstr,
-> > > +				struct f2fs_xattr_arg *xarg)
-> > >   {
-> > >   	return security_inode_init_security(inode, dir, qstr,
-> > > -				&f2fs_initxattrs, ipage);
-> > > +				&f2fs_initxattrs, xarg);
-> > >   }
-> > >   #endif
-> > > @@ -512,7 +514,8 @@ static inline int write_all_xattrs(struct inode *inode, __u32 hsize,
-> > >   }
-> > >   int f2fs_getxattr(struct inode *inode, int index, const char *name,
-> > > -		void *buffer, size_t buffer_size, struct page *ipage)
-> > > +				void *buffer, size_t buffer_size,
-> > > +				struct page *ipage, bool locked)
-> > >   {
-> > >   	struct f2fs_xattr_entry *entry = NULL;
-> > >   	int error;
-> > > @@ -528,12 +531,12 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
-> > >   	if (len > F2FS_NAME_LEN)
-> > >   		return -ERANGE;
-> > > -	if (!ipage)
-> > > -		f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
-> > > +	if (!locked)
-> > > +		f2fs_down_read(&F2FS_I(inode)->i_sem);
-> > >   	error = lookup_all_xattrs(inode, ipage, index, len, name,
-> > >   				&entry, &base_addr, &base_size, &is_inline);
-> > > -	if (!ipage)
-> > > -		f2fs_up_read(&F2FS_I(inode)->i_xattr_sem);
-> > > +	if (!locked)
-> > > +		f2fs_up_read(&F2FS_I(inode)->i_sem);
-> > >   	if (error)
-> > >   		return error;
-> > > @@ -567,9 +570,9 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
-> > >   	int error;
-> > >   	size_t rest = buffer_size;
-> > > -	f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
-> > > +	f2fs_down_read(&F2FS_I(inode)->i_sem);
-> > >   	error = read_all_xattrs(inode, NULL, &base_addr);
-> > > -	f2fs_up_read(&F2FS_I(inode)->i_xattr_sem);
-> > > +	f2fs_up_read(&F2FS_I(inode)->i_sem);
-> > >   	if (error)
-> > >   		return error;
-> > > @@ -775,7 +778,7 @@ static int __f2fs_setxattr(struct inode *inode, int index,
-> > >   int f2fs_setxattr(struct inode *inode, int index, const char *name,
-> > >   				const void *value, size_t size,
-> > > -				struct page *ipage, int flags)
-> > > +				struct page *ipage, int flags, bool locked)
-> > >   {
-> > >   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> > >   	int err;
-> > > @@ -796,9 +799,11 @@ int f2fs_setxattr(struct inode *inode, int index, const char *name,
-> > >   	f2fs_balance_fs(sbi, true);
-> > >   	f2fs_lock_op(sbi);
-> > > -	f2fs_down_write(&F2FS_I(inode)->i_xattr_sem);
-> > > +	if (!locked)
-> > > +		f2fs_down_write(&F2FS_I(inode)->i_sem);
-> > >   	err = __f2fs_setxattr(inode, index, name, value, size, ipage, flags);
-> > > -	f2fs_up_write(&F2FS_I(inode)->i_xattr_sem);
-> > > +	if (!locked)
-> > > +		f2fs_up_write(&F2FS_I(inode)->i_sem);
-> > >   	f2fs_unlock_op(sbi);
-> > >   	f2fs_update_time(sbi, REQ_TIME);
-> > > diff --git a/fs/f2fs/xattr.h b/fs/f2fs/xattr.h
-> > > index b1811c392e6f..170e4a49af31 100644
-> > > --- a/fs/f2fs/xattr.h
-> > > +++ b/fs/f2fs/xattr.h
-> > > @@ -52,6 +52,11 @@ struct f2fs_xattr_entry {
-> > >   	char    e_name[];      /* attribute name */
-> > >   };
-> > > +struct f2fs_xattr_arg {
-> > > +	struct page *page;	/* inode page */
-> > > +	bool locked;		/* indicate i_sem is locked */
-> > > +};
-> > > +
-> > >   #define XATTR_HDR(ptr)		((struct f2fs_xattr_header *)(ptr))
-> > >   #define XATTR_ENTRY(ptr)	((struct f2fs_xattr_entry *)(ptr))
-> > >   #define XATTR_FIRST_ENTRY(ptr)	(XATTR_ENTRY(XATTR_HDR(ptr) + 1))
-> > > @@ -128,9 +133,9 @@ extern const struct xattr_handler f2fs_xattr_security_handler;
-> > >   extern const struct xattr_handler *f2fs_xattr_handlers[];
-> > >   extern int f2fs_setxattr(struct inode *, int, const char *,
-> > > -				const void *, size_t, struct page *, int);
-> > > +				const void *, size_t, struct page *, int, bool);
-> > >   extern int f2fs_getxattr(struct inode *, int, const char *, void *,
-> > > -						size_t, struct page *);
-> > > +					size_t, struct page *, bool locked);
-> > >   extern ssize_t f2fs_listxattr(struct dentry *, char *, size_t);
-> > >   extern int f2fs_init_xattr_caches(struct f2fs_sb_info *);
-> > >   extern void f2fs_destroy_xattr_caches(struct f2fs_sb_info *);
-> > > @@ -140,13 +145,13 @@ extern void f2fs_destroy_xattr_caches(struct f2fs_sb_info *);
-> > >   #define f2fs_listxattr		NULL
-> > >   static inline int f2fs_setxattr(struct inode *inode, int index,
-> > >   		const char *name, const void *value, size_t size,
-> > > -		struct page *page, int flags)
-> > > +		struct page *page, int flags, bool locked)
-> > >   {
-> > >   	return -EOPNOTSUPP;
-> > >   }
-> > >   static inline int f2fs_getxattr(struct inode *inode, int index,
-> > >   			const char *name, void *buffer,
-> > > -			size_t buffer_size, struct page *dpage)
-> > > +			size_t buffer_size, struct page *dpage, bool locked)
-> > >   {
-> > >   	return -EOPNOTSUPP;
-> > >   }
-> > > @@ -156,10 +161,12 @@ static inline void f2fs_destroy_xattr_caches(struct f2fs_sb_info *sbi) { }
-> > >   #ifdef CONFIG_F2FS_FS_SECURITY
-> > >   extern int f2fs_init_security(struct inode *, struct inode *,
-> > > -				const struct qstr *, struct page *);
-> > > +					const struct qstr *,
-> > > +					struct f2fs_xattr_arg *xarg);
-> > >   #else
-> > >   static inline int f2fs_init_security(struct inode *inode, struct inode *dir,
-> > > -				const struct qstr *qstr, struct page *ipage)
-> > > +					const struct qstr *qstr,
-> > > +					struct f2fs_xattr_arg *xarg)
-> > >   {
-> > >   	return 0;
-> > >   }
-> > > -- 
-> > > 2.40.1
+> f2fs_scan_devices reopens the main device since the very beginning, which
+> has always been useless, and also means that we don't pass the right
+> holder for the reopen, which now leads to a warning as the core super.c
+> holder ops aren't passed in for the reopen.
+> 
+> Fixes: 3c62be17d4f5 ("f2fs: support multiple devices")
+> Fixes: 0718afd47f70 ("block: introduce holder ops")
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  block/blk-flush.c |  2 +-
+>  fs/f2fs/super.c   | 20 ++++++++------------
+>  2 files changed, 9 insertions(+), 13 deletions(-)
+> 
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index ca31163da00a55..30883beb750a59 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -1561,7 +1561,8 @@ static void destroy_device_list(struct f2fs_sb_info *sbi)
+>  	int i;
+>  
+>  	for (i = 0; i < sbi->s_ndevs; i++) {
+> -		blkdev_put(FDEV(i).bdev, sbi->sb->s_type);
+> +		if (i > 0)
+> +			blkdev_put(FDEV(i).bdev, sbi->sb->s_type);
+>  #ifdef CONFIG_BLK_DEV_ZONED
+>  		kvfree(FDEV(i).blkz_seq);
+>  #endif
+> @@ -4190,16 +4191,12 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+>  	sbi->aligned_blksize = true;
+>  
+>  	for (i = 0; i < max_devices; i++) {
+> -
+> -		if (i > 0 && !RDEV(i).path[0])
+> +		if (i == 0)
+> +			FDEV(0).bdev = sbi->sb->s_bdev;
+> +		else if (!RDEV(i).path[0])
+>  			break;
+>  
+> -		if (max_devices == 1) {
+> -			/* Single zoned block device mount */
+> -			FDEV(0).bdev =
+> -				blkdev_get_by_dev(sbi->sb->s_bdev->bd_dev, mode,
+> -						  sbi->sb->s_type, NULL);
+> -		} else {
+> +		if (max_devices > 1) {
+>  			/* Multi-device mount */
+>  			memcpy(FDEV(i).path, RDEV(i).path, MAX_PATH_LEN);
+>  			FDEV(i).total_segments =
+> @@ -4215,10 +4212,9 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+>  				FDEV(i).end_blk = FDEV(i).start_blk +
+>  					(FDEV(i).total_segments <<
+>  					sbi->log_blocks_per_seg) - 1;
+> +				FDEV(i).bdev = blkdev_get_by_path(FDEV(i).path,
+> +					mode, sbi->sb->s_type, NULL);
+>  			}
+> -			FDEV(i).bdev = blkdev_get_by_path(FDEV(i).path, mode,
+> -							  sbi->sb->s_type,
+> -							  NULL);
+>  		}
+>  		if (IS_ERR(FDEV(i).bdev))
+>  			return PTR_ERR(FDEV(i).bdev);
+> -- 
+> 2.39.2
 
 
 _______________________________________________
