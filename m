@@ -2,73 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F34DE74E62E
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Jul 2023 07:01:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC32D74E71A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Jul 2023 08:20:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qJ5Uy-0003vk-Lv;
-	Tue, 11 Jul 2023 05:01:17 +0000
+	id 1qJ6jH-0007Eg-LL;
+	Tue, 11 Jul 2023 06:20:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1qJ5Ux-0003ve-Hn
+ (envelope-from <hare@suse.de>) id 1qJ6jG-0007EZ-DM
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Jul 2023 05:01:16 +0000
+ Tue, 11 Jul 2023 06:20:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ei7eps8BVoQjwq/GzBbarZemDnrTg5OhoVFdBbrnXac=; b=bcVpji8+eJYa/eZ3+vgWCtRS/Z
- 4KZACTKHaxJKzPBBsHoy/Ig4ng/GEnfmQsIuCBE+R8trlfHrVbsEHeqIRc6Y1Njtlfy3DXZmlqL2F
- XnKvKSXm7R9cmpamk4eKpgoU5CRWMlyoVCoQ4Z44ic5oAp795ZVjqaY/6IceXIKOQwcs=;
+ bh=zVzsxiQ98RSmHXT12YjkKKL21vDieV95nWWwG2xBdp0=; b=G1XltYP5DMZRWCDrnGBNPG9DKW
+ 9fvoKpVwyuPXrQKvxfgCm3VfERH4OIMNpuf4iQm1CXN+57fqHHGWwDjL+FdrH40SiSqOiNhlfKGvc
+ j3BmSe4k2py55CVoln61mEi3HaK745X2n6CrDhBfs9fEZele4k7SuyLT7def2li4tKKI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Ei7eps8BVoQjwq/GzBbarZemDnrTg5OhoVFdBbrnXac=; b=LANPqBx+xO1YMrARVnILc4/dxA
- WKf1UzTs5Ttio3RduldQ7zy8/O/q/Jcb522MI1R+KJY6n7XXLp2Fn8Mer0aC1Mu6qN5SN/eqDQ6df
- sPCAzIuQcGVA++NtngygpZQ7m8KiQDv51bQuP5OtejfYNey9O76h/eNjZ7bL5411zW/U=;
-Received: from verein.lst.de ([213.95.11.211])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qJ5Uw-003wWR-NI for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Jul 2023 05:01:15 +0000
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 3A0A768B05; Tue, 11 Jul 2023 07:01:02 +0200 (CEST)
-Date: Tue, 11 Jul 2023 07:01:01 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Message-ID: <20230711050101.GA19128@lst.de>
-References: <20230707094028.107898-1-hch@lst.de> <ZKx2jVONy35B0/S1@google.com>
+ bh=zVzsxiQ98RSmHXT12YjkKKL21vDieV95nWWwG2xBdp0=; b=LIhu2/s/sI+O4P2U0SgUnrllxx
+ ++VVyb9m4RUrvhMpjzw33+7juYFvMhnj8Y+uDh/HwemhaU+4PJfdgIWmwYO4lDEBi2tA32YUJeVcG
+ k/fRPwKwqMqCuni2HbFALnEfWbD04UVTK7513RNsBvXtQTxsvxmAWQ5szpcAvp+qhmwQ=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qJ6jE-0003xV-KO for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Jul 2023 06:20:06 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 3002022434;
+ Tue, 11 Jul 2023 06:19:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1689056392; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zVzsxiQ98RSmHXT12YjkKKL21vDieV95nWWwG2xBdp0=;
+ b=jptecx4HSEQ8XXTn/IcgONrRRw/3DEcrO4mXNQE6gs6wNGNJhIS3ZL47HpFdvWdj4SPbJj
+ zdWpt9i8aAlq7MiGFpbVlHUZAxk1qovD5Nep8Y+qu9YQs3Oky1G9XD1vlPQPdIqAoyOevv
+ NMcekm8+Ti7WCS15d00JC9xsESCHH7I=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1689056392;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zVzsxiQ98RSmHXT12YjkKKL21vDieV95nWWwG2xBdp0=;
+ b=yNZvpPiHzBWcsh8Rbnb7FH6VeQmZ0bQMtYy10W6dCCtaILzPqy+RMnt6DAHsxVFWAcrm4P
+ NLNVyFybD3iA1xDw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E1F8F1390F;
+ Tue, 11 Jul 2023 06:19:51 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id XapONYf0rGQNDAAAMHmgww
+ (envelope-from <hare@suse.de>); Tue, 11 Jul 2023 06:19:51 +0000
+Message-ID: <63766a54-54db-20a7-ba2f-d31fd230623d@suse.de>
+Date: Tue, 11 Jul 2023 08:19:50 +0200
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <ZKx2jVONy35B0/S1@google.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: 0.0 (/)
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Content-Language: en-US
+To: Christoph Hellwig <hch@lst.de>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20230707094028.107898-1-hch@lst.de> <ZKx2jVONy35B0/S1@google.com>
+ <20230711050101.GA19128@lst.de>
+From: Hannes Reinecke <hare@suse.de>
+In-Reply-To: <20230711050101.GA19128@lst.de>
+X-Spam-Score: -4.5 (----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  I think that's because it doesn't look at sbi->s_ndevs in
- destroy_device_list. Let's try the variant below, which also fixes the buildbot
- warning for non-zoned configfs: --- From
- 645d8dceaa97b6ee73be067495b111b15b187498
- Mon Sep 17 00:00:00 2001 From: Christoph Hellwig <hch@lst.de> Date: Fri,
- 7 Jul 2023 10:31:49 +0200 Subject: f2fs: don't reopen the main block device
- i [...] Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  On 7/11/23 07:01, Christoph Hellwig wrote: > I think that's
+ because it doesn't look at sbi->s_ndevs in > destroy_device_list. Let's try
+ the variant below, which also fixes > the buildbot warning for n [...] 
+ Content analysis details:   (-4.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
-X-Headers-End: 1qJ5Uw-003wWR-NI
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.28 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1qJ6jE-0003xV-KO
 Subject: Re: [f2fs-dev] [PATCH] f2fs: don't reopen the main block device in
  f2fs_scan_devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -82,89 +121,69 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-block@vger.kernel.org, Christoph Hellwig <hch@lst.de>,
- linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-block@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-I think that's because it doesn't look at sbi->s_ndevs in
-destroy_device_list.  Let's try the variant below, which also fixes
-the buildbot warning for non-zoned configfs:
-
----
-From 645d8dceaa97b6ee73be067495b111b15b187498 Mon Sep 17 00:00:00 2001
-From: Christoph Hellwig <hch@lst.de>
-Date: Fri, 7 Jul 2023 10:31:49 +0200
-Subject: f2fs: don't reopen the main block device in f2fs_scan_devices
-
-f2fs_scan_devices reopens the main device since the very beginning, which
-has always been useless, and also means that we don't pass the right
-holder for the reopen, which now leads to a warning as the core super.c
-holder ops aren't passed in for the reopen.
-
-Fixes: 3c62be17d4f5 ("f2fs: support multiple devices")
-Fixes: 0718afd47f70 ("block: introduce holder ops")
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- block/blk-flush.c |  2 +-
- fs/f2fs/super.c   | 20 ++++++++------------
- 2 files changed, 9 insertions(+), 13 deletions(-)
-
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index ca31163da00a55..30883beb750a59 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1561,7 +1561,8 @@ static void destroy_device_list(struct f2fs_sb_info *sbi)
- 	int i;
- 
- 	for (i = 0; i < sbi->s_ndevs; i++) {
--		blkdev_put(FDEV(i).bdev, sbi->sb->s_type);
-+		if (i > 0)
-+			blkdev_put(FDEV(i).bdev, sbi->sb->s_type);
- #ifdef CONFIG_BLK_DEV_ZONED
- 		kvfree(FDEV(i).blkz_seq);
- #endif
-@@ -4190,16 +4191,12 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
- 	sbi->aligned_blksize = true;
- 
- 	for (i = 0; i < max_devices; i++) {
--
--		if (i > 0 && !RDEV(i).path[0])
-+		if (i == 0)
-+			FDEV(0).bdev = sbi->sb->s_bdev;
-+		else if (!RDEV(i).path[0])
- 			break;
- 
--		if (max_devices == 1) {
--			/* Single zoned block device mount */
--			FDEV(0).bdev =
--				blkdev_get_by_dev(sbi->sb->s_bdev->bd_dev, mode,
--						  sbi->sb->s_type, NULL);
--		} else {
-+		if (max_devices > 1) {
- 			/* Multi-device mount */
- 			memcpy(FDEV(i).path, RDEV(i).path, MAX_PATH_LEN);
- 			FDEV(i).total_segments =
-@@ -4215,10 +4212,9 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
- 				FDEV(i).end_blk = FDEV(i).start_blk +
- 					(FDEV(i).total_segments <<
- 					sbi->log_blocks_per_seg) - 1;
-+				FDEV(i).bdev = blkdev_get_by_path(FDEV(i).path,
-+					mode, sbi->sb->s_type, NULL);
- 			}
--			FDEV(i).bdev = blkdev_get_by_path(FDEV(i).path, mode,
--							  sbi->sb->s_type,
--							  NULL);
- 		}
- 		if (IS_ERR(FDEV(i).bdev))
- 			return PTR_ERR(FDEV(i).bdev);
--- 
-2.39.2
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gNy8xMS8yMyAwNzowMSwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gSSB0aGluayB0aGF0
+J3MgYmVjYXVzZSBpdCBkb2Vzbid0IGxvb2sgYXQgc2JpLT5zX25kZXZzIGluCj4gZGVzdHJveV9k
+ZXZpY2VfbGlzdC4gIExldCdzIHRyeSB0aGUgdmFyaWFudCBiZWxvdywgd2hpY2ggYWxzbyBmaXhl
+cwo+IHRoZSBidWlsZGJvdCB3YXJuaW5nIGZvciBub24tem9uZWQgY29uZmlnZnM6Cj4gCj4gLS0t
+Cj4gIEZyb20gNjQ1ZDhkY2VhYTk3YjZlZTczYmUwNjc0OTViMTExYjE1YjE4NzQ5OCBNb24gU2Vw
+IDE3IDAwOjAwOjAwIDIwMDEKPiBGcm9tOiBDaHJpc3RvcGggSGVsbHdpZyA8aGNoQGxzdC5kZT4K
+PiBEYXRlOiBGcmksIDcgSnVsIDIwMjMgMTA6MzE6NDkgKzAyMDAKPiBTdWJqZWN0OiBmMmZzOiBk
+b24ndCByZW9wZW4gdGhlIG1haW4gYmxvY2sgZGV2aWNlIGluIGYyZnNfc2Nhbl9kZXZpY2VzCj4g
+Cj4gZjJmc19zY2FuX2RldmljZXMgcmVvcGVucyB0aGUgbWFpbiBkZXZpY2Ugc2luY2UgdGhlIHZl
+cnkgYmVnaW5uaW5nLCB3aGljaAo+IGhhcyBhbHdheXMgYmVlbiB1c2VsZXNzLCBhbmQgYWxzbyBt
+ZWFucyB0aGF0IHdlIGRvbid0IHBhc3MgdGhlIHJpZ2h0Cj4gaG9sZGVyIGZvciB0aGUgcmVvcGVu
+LCB3aGljaCBub3cgbGVhZHMgdG8gYSB3YXJuaW5nIGFzIHRoZSBjb3JlIHN1cGVyLmMKPiBob2xk
+ZXIgb3BzIGFyZW4ndCBwYXNzZWQgaW4gZm9yIHRoZSByZW9wZW4uCj4gCj4gRml4ZXM6IDNjNjJi
+ZTE3ZDRmNSAoImYyZnM6IHN1cHBvcnQgbXVsdGlwbGUgZGV2aWNlcyIpCj4gRml4ZXM6IDA3MThh
+ZmQ0N2Y3MCAoImJsb2NrOiBpbnRyb2R1Y2UgaG9sZGVyIG9wcyIpCj4gU2lnbmVkLW9mZi1ieTog
+Q2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBsc3QuZGU+Cj4gLS0tCj4gICBibG9jay9ibGstZmx1c2gu
+YyB8ICAyICstCj4gICBmcy9mMmZzL3N1cGVyLmMgICB8IDIwICsrKysrKysrLS0tLS0tLS0tLS0t
+Cj4gICAyIGZpbGVzIGNoYW5nZWQsIDkgaW5zZXJ0aW9ucygrKSwgMTMgZGVsZXRpb25zKC0pCj4g
+Cj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvc3VwZXIuYyBiL2ZzL2YyZnMvc3VwZXIuYwo+IGluZGV4
+IGNhMzExNjNkYTAwYTU1Li4zMDg4M2JlYjc1MGE1OSAxMDA2NDQKPiAtLS0gYS9mcy9mMmZzL3N1
+cGVyLmMKPiArKysgYi9mcy9mMmZzL3N1cGVyLmMKPiBAQCAtMTU2MSw3ICsxNTYxLDggQEAgc3Rh
+dGljIHZvaWQgZGVzdHJveV9kZXZpY2VfbGlzdChzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpCj4g
+ICAJaW50IGk7Cj4gICAKPiAgIAlmb3IgKGkgPSAwOyBpIDwgc2JpLT5zX25kZXZzOyBpKyspIHsK
+PiAtCQlibGtkZXZfcHV0KEZERVYoaSkuYmRldiwgc2JpLT5zYi0+c190eXBlKTsKPiArCQlpZiAo
+aSA+IDApCj4gKwkJCWJsa2Rldl9wdXQoRkRFVihpKS5iZGV2LCBzYmktPnNiLT5zX3R5cGUpOwpZ
+b3UgY291bGQgaGF2ZSBzdGFydGVkIHRoZSBsb29wIGF0ICcxJywgYW5kIGF2b2lkIHRoZSBjdXJp
+b3VzICdpZicgCmNsYXVzZSAuLi4KCj4gICAjaWZkZWYgQ09ORklHX0JMS19ERVZfWk9ORUQKPiAg
+IAkJa3ZmcmVlKEZERVYoaSkuYmxrel9zZXEpOwo+ICAgI2VuZGlmCj4gQEAgLTQxOTAsMTYgKzQx
+OTEsMTIgQEAgc3RhdGljIGludCBmMmZzX3NjYW5fZGV2aWNlcyhzdHJ1Y3QgZjJmc19zYl9pbmZv
+ICpzYmkpCj4gICAJc2JpLT5hbGlnbmVkX2Jsa3NpemUgPSB0cnVlOwo+ICAgCj4gICAJZm9yIChp
+ID0gMDsgaSA8IG1heF9kZXZpY2VzOyBpKyspIHsKPiAtCj4gLQkJaWYgKGkgPiAwICYmICFSREVW
+KGkpLnBhdGhbMF0pCj4gKwkJaWYgKGkgPT0gMCkKPiArCQkJRkRFVigwKS5iZGV2ID0gc2JpLT5z
+Yi0+c19iZGV2Owo+ICsJCWVsc2UgaWYgKCFSREVWKGkpLnBhdGhbMF0pCj4gICAJCQlicmVhazsK
+PiAgIAo+IC0JCWlmIChtYXhfZGV2aWNlcyA9PSAxKSB7Cj4gLQkJCS8qIFNpbmdsZSB6b25lZCBi
+bG9jayBkZXZpY2UgbW91bnQgKi8KPiAtCQkJRkRFVigwKS5iZGV2ID0KPiAtCQkJCWJsa2Rldl9n
+ZXRfYnlfZGV2KHNiaS0+c2ItPnNfYmRldi0+YmRfZGV2LCBtb2RlLAo+IC0JCQkJCQkgIHNiaS0+
+c2ItPnNfdHlwZSwgTlVMTCk7Cj4gLQkJfSBlbHNlIHsKPiArCQlpZiAobWF4X2RldmljZXMgPiAx
+KSB7Cj4gICAJCQkvKiBNdWx0aS1kZXZpY2UgbW91bnQgKi8KPiAgIAkJCW1lbWNweShGREVWKGkp
+LnBhdGgsIFJERVYoaSkucGF0aCwgTUFYX1BBVEhfTEVOKTsKPiAgIAkJCUZERVYoaSkudG90YWxf
+c2VnbWVudHMgPQpTaW1pbGFyIGhlcmU7IHdvdWxkbid0IGl0IGJlIGJldHRlciB0byB1bnJvbGwg
+dGhlIGxvb3AsIGFuZCBoYXZlIHRoZSAKY2hlY2sgZm9yICdtYXhfZGV2aWNlcycgb3V0c2lkZSBv
+ZiB0aGUgbG9vcD8KVGhlbiB0aGUgbG9vcCBjYW4gYmUgY29kZWQgZm9yIHRoZSAnbWF4X2Rldmlj
+ZSA+IDEnIGNhc2Ugb25seSwgYW5kIGF2b2lkIAphbGwgdGhlIHNwZWNpYWwgY2FzaW5nIGluIHRo
+ZSBsb29wIC4uLgoKPiBAQCAtNDIxNSwxMCArNDIxMiw5IEBAIHN0YXRpYyBpbnQgZjJmc19zY2Fu
+X2RldmljZXMoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpKQo+ICAgCQkJCUZERVYoaSkuZW5kX2Js
+ayA9IEZERVYoaSkuc3RhcnRfYmxrICsKPiAgIAkJCQkJKEZERVYoaSkudG90YWxfc2VnbWVudHMg
+PDwKPiAgIAkJCQkJc2JpLT5sb2dfYmxvY2tzX3Blcl9zZWcpIC0gMTsKPiArCQkJCUZERVYoaSku
+YmRldiA9IGJsa2Rldl9nZXRfYnlfcGF0aChGREVWKGkpLnBhdGgsCj4gKwkJCQkJbW9kZSwgc2Jp
+LT5zYi0+c190eXBlLCBOVUxMKTsKPiAgIAkJCX0KPiAtCQkJRkRFVihpKS5iZGV2ID0gYmxrZGV2
+X2dldF9ieV9wYXRoKEZERVYoaSkucGF0aCwgbW9kZSwKPiAtCQkJCQkJCSAgc2JpLT5zYi0+c190
+eXBlLAo+IC0JCQkJCQkJICBOVUxMKTsKPiAgIAkJfQo+ICAgCQlpZiAoSVNfRVJSKEZERVYoaSku
+YmRldikpCj4gICAJCQlyZXR1cm4gUFRSX0VSUihGREVWKGkpLmJkZXYpOwoKQ2hlZXJzLAoKSGFu
+bmVzCi0tIApEci4gSGFubmVzIFJlaW5lY2tlICAgICAgICAgICAgICAgIEtlcm5lbCBTdG9yYWdl
+IEFyY2hpdGVjdApoYXJlQHN1c2UuZGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICArNDkg
+OTExIDc0MDUzIDY4OApTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHbWJILCBNYXhmZWxkc3RyLiA1
+LCA5MDQwOSBOw7xybmJlcmcKSFJCIDM2ODA5IChBRyBOw7xybmJlcmcpLCBHZXNjaMOkZnRzZsO8
+aHJlcjogSXZvIFRvdGV2LCBBbmRyZXcKTXllcnMsIEFuZHJldyBNY0RvbmFsZCwgTWFydGplIEJv
+dWRpZW4gTW9lcm1hbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxp
+c3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9s
+aXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
