@@ -2,101 +2,73 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16B5974E3D5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Jul 2023 04:01:09 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id F34DE74E62E
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 11 Jul 2023 07:01:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qJ2gc-0004QB-EZ;
-	Tue, 11 Jul 2023 02:01:06 +0000
+	id 1qJ5Uy-0003vk-Lv;
+	Tue, 11 Jul 2023 05:01:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dlemoal@kernel.org>) id 1qJ2ga-0004Q5-SV
+ (envelope-from <hch@lst.de>) id 1qJ5Ux-0003ve-Hn
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Jul 2023 02:01:05 +0000
+ Tue, 11 Jul 2023 05:01:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XhkWvTRJka6IdcGCK9Cuk8fjndV4LF5AA1pEha3Mkak=; b=gOFy7IXliZ7NK3kTtGQDb1V9nG
- v3pmBpICtzlN8kq+Y4Ga7LdHRcgbxLaDC33gFDDK5+JXIQzNgGj3GMTA6CG56hqBCsilvjq0uxy0p
- QgKJR9f8lh8LGW180AmBr8AusFamKqC0Xb4WN6N7cy6IYLb9NLyYsbAEO/Z33mLLbIHU=;
+ bh=Ei7eps8BVoQjwq/GzBbarZemDnrTg5OhoVFdBbrnXac=; b=bcVpji8+eJYa/eZ3+vgWCtRS/Z
+ 4KZACTKHaxJKzPBBsHoy/Ig4ng/GEnfmQsIuCBE+R8trlfHrVbsEHeqIRc6Y1Njtlfy3DXZmlqL2F
+ XnKvKSXm7R9cmpamk4eKpgoU5CRWMlyoVCoQ4Z44ic5oAp795ZVjqaY/6IceXIKOQwcs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=XhkWvTRJka6IdcGCK9Cuk8fjndV4LF5AA1pEha3Mkak=; b=I5iMpk0ukdYUnkNXrbrSmxTh/G
- wX6WiQBweqyrZliHu8/cpXFbi/eW4Id38eMYamiOATo5uazkYud900flLgpew6dZ1OxpTRGPj0kc1
- kptUxcv6gHYKOy5stBcoblhixF5jwKQcGUCbeVXm7AKEhJ7sjBYFIrCNK8wTB12jZMMw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=Ei7eps8BVoQjwq/GzBbarZemDnrTg5OhoVFdBbrnXac=; b=LANPqBx+xO1YMrARVnILc4/dxA
+ WKf1UzTs5Ttio3RduldQ7zy8/O/q/Jcb522MI1R+KJY6n7XXLp2Fn8Mer0aC1Mu6qN5SN/eqDQ6df
+ sPCAzIuQcGVA++NtngygpZQ7m8KiQDv51bQuP5OtejfYNey9O76h/eNjZ7bL5411zW/U=;
+Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qJ2ga-003pyQ-JN for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 11 Jul 2023 02:01:05 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 635A561217;
- Tue, 11 Jul 2023 02:00:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FCCDC433C8;
- Tue, 11 Jul 2023 02:00:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1689040857;
- bh=l2hscFblUVpAyfjjjjsEelyTSWlKonNRiDD3zw9mTXM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=j5B2L1FsInz2G3qVqNJOuLdDhXP7cSq1TMd6eZM/w5RkSa/FaUWN/jSLGksLRqk08
- 8VgfqM083jGGo0T4GtpwAimzeOFCAYrXNWb+eeBNEhE56Kt1zT8XwdjYwaWdBTeesq
- sJNioeRZEuzj2o1mYECloZBKS5w/sumJf3WRG/pBznlJZELRD9HO7Snp2X/+PSLQFv
- lTAxc2L9wxlcGVTUehlk7+L5gcUvPr+z0K4mdTQCdFyg5Xf35RHLdfIuysnpIjxFbt
- wAOorU2Sz6icw//YGHEK8WO+hnbW9FT6eiPQUG6qp6E0X0+gbGBe1iioBNc8zDcKm1
- asOUlkgq/9VZQ==
-Message-ID: <4d484518-5822-bd4b-4261-08a3aec6b5d2@kernel.org>
-Date: Tue, 11 Jul 2023 11:00:55 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Content-Language: en-US
+ id 1qJ5Uw-003wWR-NI for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 11 Jul 2023 05:01:15 +0000
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 3A0A768B05; Tue, 11 Jul 2023 07:01:02 +0200 (CEST)
+Date: Tue, 11 Jul 2023 07:01:01 +0200
+From: Christoph Hellwig <hch@lst.de>
 To: Jaegeuk Kim <jaegeuk@kernel.org>
+Message-ID: <20230711050101.GA19128@lst.de>
 References: <20230707094028.107898-1-hch@lst.de> <ZKx2jVONy35B0/S1@google.com>
- <c0883104-8472-91b1-b9ad-ec3114bd166c@kernel.org>
- <ZKy15tpRQjja6s/5@google.com>
-From: Damien Le Moal <dlemoal@kernel.org>
-Organization: Western Digital Research
-In-Reply-To: <ZKy15tpRQjja6s/5@google.com>
-X-Spam-Score: -7.9 (-------)
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <ZKx2jVONy35B0/S1@google.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 7/11/23 10:52,
- Jaegeuk Kim wrote: >>>> diff --git a/fs/f2fs/super.c
- b/fs/f2fs/super.c >>>> index ca31163da00a55..8d11d4a5ec331d 100644 >>>> ---
- a/fs/f2fs/super.c >>>> +++ b/fs/f2fs/super.c >>>> @@ [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  I think that's because it doesn't look at sbi->s_ndevs in
+ destroy_device_list. Let's try the variant below, which also fixes the buildbot
+ warning for non-zoned configfs: --- From
+ 645d8dceaa97b6ee73be067495b111b15b187498
+ Mon Sep 17 00:00:00 2001 From: Christoph Hellwig <hch@lst.de> Date: Fri,
+ 7 Jul 2023 10:31:49 +0200 Subject: f2fs: don't reopen the main block device
+ i [...] Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qJ2ga-003pyQ-JN
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+X-Headers-End: 1qJ5Uw-003wWR-NI
 Subject: Re: [f2fs-dev] [PATCH] f2fs: don't reopen the main block device in
  f2fs_scan_devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -116,37 +88,79 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 7/11/23 10:52, Jaegeuk Kim wrote:
->>>> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
->>>> index ca31163da00a55..8d11d4a5ec331d 100644
->>>> --- a/fs/f2fs/super.c
->>>> +++ b/fs/f2fs/super.c
->>>> @@ -1560,7 +1560,8 @@ static void destroy_device_list(struct f2fs_sb_info *sbi)
->>>>  {
->>>>  	int i;
->>>>  
->>>> -	for (i = 0; i < sbi->s_ndevs; i++) {
->>>
->>> #ifdef CONFIG_BLK_DEV_ZONED
->>>
->>>> +	kvfree(FDEV(0).blkz_seq);
->>>
->>> #endif
->>
->> This should not be needed since for the !CONFIG_BLK_DEV_ZONED case,
->> FDEV(0).blkz_seq should always be NULL. However, what I think may be missing is
->> "FDEV(0).blkz_seq = NULL;" after the kvfree() call. No ?
-> 
-> I was looking at a glance of this:
-> https://lore.kernel.org/linux-f2fs-devel/202307110542.NBAMyZxE-lkp@intel.com/T/#u
+I think that's because it doesn't look at sbi->s_ndevs in
+destroy_device_list.  Let's try the variant below, which also fixes
+the buildbot warning for non-zoned configfs:
 
-OK. Got it.
-I still think that it may be safer to add the NULL affectation though.
+---
+From 645d8dceaa97b6ee73be067495b111b15b187498 Mon Sep 17 00:00:00 2001
+From: Christoph Hellwig <hch@lst.de>
+Date: Fri, 7 Jul 2023 10:31:49 +0200
+Subject: f2fs: don't reopen the main block device in f2fs_scan_devices
 
+f2fs_scan_devices reopens the main device since the very beginning, which
+has always been useless, and also means that we don't pass the right
+holder for the reopen, which now leads to a warning as the core super.c
+holder ops aren't passed in for the reopen.
 
+Fixes: 3c62be17d4f5 ("f2fs: support multiple devices")
+Fixes: 0718afd47f70 ("block: introduce holder ops")
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ block/blk-flush.c |  2 +-
+ fs/f2fs/super.c   | 20 ++++++++------------
+ 2 files changed, 9 insertions(+), 13 deletions(-)
+
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index ca31163da00a55..30883beb750a59 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -1561,7 +1561,8 @@ static void destroy_device_list(struct f2fs_sb_info *sbi)
+ 	int i;
+ 
+ 	for (i = 0; i < sbi->s_ndevs; i++) {
+-		blkdev_put(FDEV(i).bdev, sbi->sb->s_type);
++		if (i > 0)
++			blkdev_put(FDEV(i).bdev, sbi->sb->s_type);
+ #ifdef CONFIG_BLK_DEV_ZONED
+ 		kvfree(FDEV(i).blkz_seq);
+ #endif
+@@ -4190,16 +4191,12 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+ 	sbi->aligned_blksize = true;
+ 
+ 	for (i = 0; i < max_devices; i++) {
+-
+-		if (i > 0 && !RDEV(i).path[0])
++		if (i == 0)
++			FDEV(0).bdev = sbi->sb->s_bdev;
++		else if (!RDEV(i).path[0])
+ 			break;
+ 
+-		if (max_devices == 1) {
+-			/* Single zoned block device mount */
+-			FDEV(0).bdev =
+-				blkdev_get_by_dev(sbi->sb->s_bdev->bd_dev, mode,
+-						  sbi->sb->s_type, NULL);
+-		} else {
++		if (max_devices > 1) {
+ 			/* Multi-device mount */
+ 			memcpy(FDEV(i).path, RDEV(i).path, MAX_PATH_LEN);
+ 			FDEV(i).total_segments =
+@@ -4215,10 +4212,9 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
+ 				FDEV(i).end_blk = FDEV(i).start_blk +
+ 					(FDEV(i).total_segments <<
+ 					sbi->log_blocks_per_seg) - 1;
++				FDEV(i).bdev = blkdev_get_by_path(FDEV(i).path,
++					mode, sbi->sb->s_type, NULL);
+ 			}
+-			FDEV(i).bdev = blkdev_get_by_path(FDEV(i).path, mode,
+-							  sbi->sb->s_type,
+-							  NULL);
+ 		}
+ 		if (IS_ERR(FDEV(i).bdev))
+ 			return PTR_ERR(FDEV(i).bdev);
 -- 
-Damien Le Moal
-Western Digital Research
+2.39.2
 
 
 
