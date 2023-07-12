@@ -2,97 +2,104 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9143B750CD1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Jul 2023 17:41:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id D19F8750D3B
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 12 Jul 2023 17:55:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qJbyD-0005tp-Gq;
-	Wed, 12 Jul 2023 15:41:37 +0000
+	id 1qJcBc-0002oP-Tf;
+	Wed, 12 Jul 2023 15:55:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1qJbyC-0005tj-9Z
+ (envelope-from <jaegeuk@kernel.org>) id 1qJcBc-0002oJ-CD
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Jul 2023 15:41:36 +0000
+ Wed, 12 Jul 2023 15:55:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=00uQbwkoHRt6iQegbRuZMhN08EeRN1HjETpfi4YcloE=; b=h4mdMTSt3fpljMpGc9IxZw4ok1
- CFrsql9vdLl40JIP5Tf/7LcdmQFlddfTZwkL4n2kprGO9pPX1NUvqMcr8rM+w7NSCESnrC+cURimA
- Ywm0T3GqHoToEVBC+OMrm0L/joTl7SvFVhDElSfihNWcDnsnXL0r31c4fFMmgF6wJNb0=;
+ bh=5x5eEAEQZESmHKyoI+VP37yIStyuKR9oXxC4ViJBtiY=; b=aM3JryRUid8qLx+hYiDvRgKk2+
+ 05iI/ex7MzAfM9nUZgMNC1aMlrlPNFwBZk8eTfwqXekN/nGnd2BHDmw3kq8fLogBc4p3bjdnHKofU
+ gkyyh9054uqux27yAfRIMypQMdpXw2vvkYbMvoIgeSrNaLt4kN3dpp8bqBeNj3T5LlRI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=00uQbwkoHRt6iQegbRuZMhN08EeRN1HjETpfi4YcloE=; b=J
- V4FUsh6ZBXbONRZ/HXJCL1aizFeax1E9aVrNGs+kpUtPHTDHHEdOgxr6zANZHVdT9J499v85n26h2
- hiRe7HPYgW6jiSzFO9aL6wpWPCROEcDnJwRLzja4tScd1Fq7qeaUBSclDpDToypL/8W6Sgjf7JZK9
- bPhIrzNpaxXjjU4k=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=5x5eEAEQZESmHKyoI+VP37yIStyuKR9oXxC4ViJBtiY=; b=bVS51TnHO5feuQyHwnlpwx+Fv9
+ WU+su9ICmM8kqD7pMqAl5RiGvlzeUWm6ZIyRqS8wsY02F0kcPg449Wq5nUs1K/RSuCoNyau4vS/VG
+ 1noAtXlNDkZgEkk7ZSPAvpG1FWn9V0g2RM/29wW+0IzqGxVfvz3UP4w7Qbf7KTfMaWk4=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qJbyD-0000F1-P3 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 12 Jul 2023 15:41:36 +0000
+ id 1qJcBe-00012Y-Kd for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 12 Jul 2023 15:55:29 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 45F5361828
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 12 Jul 2023 15:41:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 87C36C4339A;
- Wed, 12 Jul 2023 15:41:29 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 15565618B6;
+ Wed, 12 Jul 2023 15:55:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 59106C433CB;
+ Wed, 12 Jul 2023 15:55:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1689176489;
- bh=Xf1YVlI90CJqAdsOsxQGXcHlvrhCYt8qgAbDG+pjOYs=;
- h=From:To:Cc:Subject:Date:From;
- b=PWF2xIox3SLWy/gq16R1dt1BjG8PC61nFiFuntST9YrDAVpa3uA5GLfHksU/xLqKK
- 3UYzR+rQW2Rxw8xzLZHWJnRZ5NVQfc+FxaNkJev+1Eepl8ss0Je1pRlfJJmRS6fYj/
- m5Dtl+Kq+9qqfv/V8FmalHDC8/b8IaaZq1ln2yfi0SaNYG1xBzmz99WmgGVZnExJEk
- eNEyov8Rh00aSXw0ZnQpXlDrCMa5Niwf4HMylgjDDc3AlWinYuDbj91j7XmtQM5cep
- wwOlaKsVjjJkTFR5imVt0Ywgn3QqZd3+OsRxdLXiUSvtpUTjXfXM03S/uj6ZIQKG9Y
- BQTsY0zhg9nhg==
+ s=k20201202; t=1689177322;
+ bh=IwJ6PvasTqdcTOT6UiByru8yaWW/Eg0mVCn03s1JtSs=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=RcNs6OblWBdcWd6FIf9uOUwP52u68cmjQ01WwIqRgKa+TKewdn3GtA9IaxYGfWShi
+ NfVeNsfBu6o5R7fcOVRneeg4P6nGSIMrRCMKJXQIGbMHJRxr81xj3BhPE6vLn2fMQ8
+ UuYsqT/28tt2r38ufonqqV5tAWVRslsI5uyK+lMo3RrQvrKDIpdiV6uuDiwEp8Qoxf
+ LI05ttIbhJW1qRffLF8+BXLS1+QUskUtsHEjHPf8Za/9rQuUdlJFYJP7U7a+qFFOrs
+ k7lQy0fetcbYuZEBSfRZYMDXAAFt4I8pGOCYGEeTolj17LTub24+XmgR36xTC4mknY
+ mMnSAwJ2XiVyQ==
+Date: Wed, 12 Jul 2023 08:55:20 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 12 Jul 2023 08:41:27 -0700
-Message-ID: <20230712154127.1332750-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.41.0.255.g8b1d071c50-goog
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ZK7M6EkLkV8UbqUl@google.com>
+References: <20230613203947.2745943-1-jaegeuk@kernel.org>
+ <ZInmkgjDnAUD5Nk0@google.com>
+ <50d5fa8c-4fe9-8a03-be78-0b5383e55b62@kernel.org>
+ <ZKP6EJ5dZ4f4wScp@google.com>
+ <65143701-4c19-ab66-1500-abd1162639cd@kernel.org>
+ <ZKWovWZDiHjMavtB@google.com>
+ <cadfb8d7-f5d0-a3ec-cafb-a0c06ad7d290@kernel.org>
+ <ZK2FT9CUjxXvQ2K5@google.com>
+ <330c96f7-fbad-dd17-6368-f1378b3b5375@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+Content-Disposition: inline
+In-Reply-To: <330c96f7-fbad-dd17-6368-f1378b3b5375@kernel.org>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In indirect or double indirect node blocks, we should use
- parent inode information to check the offset. This fixes the below complaint
- with a reproducer. $ mount -t f2fs -o discard,compress_extension=* /dev/$DEV
- $TESTDIR $ f2fs_io write 1 3944 4 zero buffered $TESTDIR/a $ umount /dev/$DEV
- $ fsck.f2fs /dev/$DEV Info: MKFS version "Linux version 6.5.0-rc [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 07/12, Chao Yu wrote: > On 2023/7/12 0:37, Jaegeuk Kim
+ wrote: > > On 07/06, Chao Yu wrote: > > > On 2023/7/6 1:30, Jaegeuk Kim wrote:
+ > > > > On 07/04, Chao Yu wrote: > > > > > On 2023/7/4 18:53, J [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qJbyD-0000F1-P3
-Subject: [f2fs-dev] [PATCH] f2fs: should use inode when updating file offset
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qJcBe-00012Y-Kd
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: do not issue small discard commands
+ during checkpoint
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,80 +111,203 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In indirect or double indirect node blocks, we should use parent inode
-information to check the offset.
+On 07/12, Chao Yu wrote:
+> On 2023/7/12 0:37, Jaegeuk Kim wrote:
+> > On 07/06, Chao Yu wrote:
+> > > On 2023/7/6 1:30, Jaegeuk Kim wrote:
+> > > > On 07/04, Chao Yu wrote:
+> > > > > On 2023/7/4 18:53, Jaegeuk Kim wrote:
+> > > > > > On 07/03, Chao Yu wrote:
+> > > > > > > On 2023/6/15 0:10, Jaegeuk Kim wrote:
+> > > > > > > > If there're huge # of small discards, this will increase checkpoint latency
+> > > > > > > > insanely. Let's issue small discards only by trim.
+> > > > > > > > 
+> > > > > > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > > > > > > > ---
+> > > > > > > > 
+> > > > > > > >      Change log from v1:
+> > > > > > > >       - move the skip logic to avoid dangling objects
+> > > > > > > > 
+> > > > > > > >      fs/f2fs/segment.c | 2 +-
+> > > > > > > >      1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > > > > > 
+> > > > > > > > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> > > > > > > > index 8c7af8b4fc47..0457d620011f 100644
+> > > > > > > > --- a/fs/f2fs/segment.c
+> > > > > > > > +++ b/fs/f2fs/segment.c
+> > > > > > > > @@ -2193,7 +2193,7 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
+> > > > > > > >      			len = next_pos - cur_pos;
+> > > > > > > >      			if (f2fs_sb_has_blkzoned(sbi) ||
+> > > > > > > > -			    (force && len < cpc->trim_minlen))
+> > > > > > > > +					!force || len < cpc->trim_minlen)
+> > > > > > > >      				goto skip;
+> > > > > > > 
+> > > > > > > Sorry for late reply.
+> > > > > > > 
+> > > > > > > We have a configuration for such case, what do you think of setting
+> > > > > > > max_small_discards to zero? otherwise, w/ above change, max_small_discards
+> > > > > > > logic may be broken?
+> > > > > > > 
+> > > > > > > What:           /sys/fs/f2fs/<disk>/max_small_discards
+> > > > > > > Date:           November 2013
+> > > > > > > Contact:        "Jaegeuk Kim" <jaegeuk.kim@samsung.com>
+> > > > > > > Description:    Controls the issue rate of discard commands that consist of small
+> > > > > > >                    blocks less than 2MB. The candidates to be discarded are cached until
+> > > > > > >                    checkpoint is triggered, and issued during the checkpoint.
+> > > > > > >                    By default, it is disabled with 0.
+> > > > > > > 
+> > > > > > > Or, if we prefer to disable small_discards by default, what about below change:
+> > > > > > 
+> > > > > > I think small_discards is fine, but need to avoid long checkpoint latency only.
+> > > > > 
+> > > > > I didn't get you, do you mean we can still issue small discard by
+> > > > > fstrim, so small_discards functionality is fine?
+> > > > 
+> > > > You got the point.
+> > > 
+> > > Well, actually, what I mean is max_small_discards sysfs entry's functionality
+> > > is broken. Now, the entry can not be used to control number of small discards
+> > > committed by checkpoint.
+> > 
+> > Could you descrbie this problem first?
+> 
+> Oh, alright, actually, I've described this problem literally, but maybe it's not
+> clear, let me give some examples as below:
+> 
+> echo 0 > /sys/fs/f2fs/vdb/max_small_discards
+> xfs_io -f /mnt/f2fs/file -c "pwrite 0 2m" -c "fsync"
+> xfs_io /mnt/f2fs/file -c "fpunch 0 4k"
+> sync
+> cat /proc/fs/f2fs/vdb/discard_plist_info |head -2
+> 
+> echo 100 > /sys/fs/f2fs/vdb/max_small_discards
+> rm /mnt/f2fs/file
+> xfs_io -f /mnt/f2fs/file -c "pwrite 0 2m" -c "fsync"
+> xfs_io /mnt/f2fs/file -c "fpunch 0 4k"
+> sync
+> cat /proc/fs/f2fs/vdb/discard_plist_info |head -2
+> 
+> Before the patch:
+> 
+> Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
+>   0         .       .       .       .       .       .       .       .
+> 
+> Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
+>   0         3       1       .       .       .       .       .       .
+> 
+> After the patch:
+> Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
+>   0         .       .       .       .       .       .       .       .
+> 
+> Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
+>   0         .       .       .       .       .       .       .       .
+> 
+> So, now max_small_discards can not be used to control small discard number
+> cached by checkpoint.
 
-This fixes the below complaint with a reproducer.
+Since we do not submit small discards anymore during checkpoint. Why not relying
+on the discard thread to issue them?
 
-$ mount -t f2fs -o discard,compress_extension=* /dev/$DEV $TESTDIR
-$ f2fs_io write 1 3944 4 zero buffered $TESTDIR/a
-$ umount /dev/$DEV
-$ fsck.f2fs /dev/$DEV
-Info: MKFS version
-  "Linux version 6.5.0-rc1-custom (root@file) (gcc (Ubuntu 11.2.0-7ubuntu2) 11.2.0, GNU ld (GNU Binutils for Ubuntu) 2.37) #19 SMP PREEMPT_DYNAMIC Mon Jul 10 19:18:40 UTC 2023"
-Info: FSCK version
-  from "Linux version 6.5.0-rc1-custom (root@file) (gcc (Ubuntu 11.2.0-7ubuntu2) 11.2.0, GNU ld (GNU Binutils for Ubuntu) 2.37) #19 SMP PREEMPT_DYNAMIC Mon Jul 10 19:18:40 UTC 2023"
-    to "Linux version 6.5.0-rc1-custom (root@file) (gcc (Ubuntu 11.2.0-7ubuntu2) 11.2.0, GNU ld (GNU Binutils for Ubuntu) 2.37) #19 SMP PREEMPT_DYNAMIC Mon Jul 10 19:18:40 UTC 2023"
-Info: superblock features = 3088 :  extra_attr quota casefold compression
-Info: superblock encrypt level = 0, salt = 00000000000000000000000000000000
-Info: Segments per section = 1
-Info: Sections per zone = 1
-Info: total FS sectors = 134217728 (65536 MB)
-Info: CKPT version = 284f1e2f
-Info: Checked valid nat_bits in checkpoint
-Info: checkpoint state = c5 :  nat_bits crc compacted_summary unmount
-[ASSERT] (fsck_chk_inode_blk:1189)  --> ino: 0x6 has i_blocks: 00000007, but has 6 blocks
-
-[FSCK] Max image size: 378 MB, Free space: 65158 MB
-[FSCK] Unreachable nat entries                        [Ok..] [0x0]
-[FSCK] SIT valid block bitmap checking                [Ok..]
-[FSCK] Hard link checking for regular file            [Ok..] [0x0]
-[FSCK] valid_block_count matching with CP             [Fail] [0xf, 0xe]
-[FSCK] valid_node_count matching with CP (de lookup)  [Ok..] [0x6]
-[FSCK] valid_node_count matching with CP (nat lookup) [Ok..] [0x6]
-[FSCK] valid_inode_count matched with CP              [Ok..] [0x4]
-[FSCK] free segment_count matched with CP             [Ok..] [0x7f3f]
-[FSCK] next block offset is free                      [Ok..]
-[FSCK] fixing SIT types
-[FSCK] other corrupted bugs                           [Fail]
-Do you want to fix this partition? [Y/N]
-
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- fsck/fsck.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
-
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 051510fb06b2..78ffdb651595 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -1430,7 +1430,7 @@ int fsck_chk_idnode_blk(struct f2fs_sb_info *sbi, struct f2fs_inode *inode,
- 				FIX_MSG("Set indirect node 0x%x -> 0", i);
- 			}
- skip:
--			child->pgofs += ADDRS_PER_BLOCK(&node_blk->i);
-+			child->pgofs += ADDRS_PER_BLOCK(inode);
- 		}
- 	}
- 
-@@ -1472,8 +1472,7 @@ int fsck_chk_didnode_blk(struct f2fs_sb_info *sbi, struct f2fs_inode *inode,
- 				FIX_MSG("Set double indirect node 0x%x -> 0", i);
- 			}
- skip:
--			child->pgofs += ADDRS_PER_BLOCK(&node_blk->i) *
--							NIDS_PER_BLOCK;
-+			child->pgofs += ADDRS_PER_BLOCK(inode) * NIDS_PER_BLOCK;
- 		}
- 	}
- 
--- 
-2.41.0.255.g8b1d071c50-goog
-
+> 
+> Thanks,
+> 
+> > 
+> > > 
+> > > I think there is another way to achieve "avoid long checkpoint latency caused
+> > > by committing huge # of small discards", the way is we can set max_small_discards
+> > > to small value or zero, w/ such configuration, it will take checkpoint much less
+> > > time or no time to committing small discard due to below control logic:
+> > > 
+> > > f2fs_flush_sit_entries()
+> > > {
+> > > ...
+> > > 			if (!(cpc->reason & CP_DISCARD)) {
+> > > 				cpc->trim_start = segno;
+> > > 				add_discard_addrs(sbi, cpc, false);
+> > > 			}
+> > > ...
+> > > }
+> > > 
+> > > add_discard_addrs()
+> > > {
+> > > ...
+> > > 	while (force || SM_I(sbi)->dcc_info->nr_discards <=
+> > > 				SM_I(sbi)->dcc_info->max_discards) {
+> > > 
+> > > It will break the loop once nr_discards is larger than max_discards, if
+> > > max_discards is set to zero, checkpoint won't take time to handle small discards.
+> > > 
+> > > ...
+> > > 		if (!de) {
+> > > 			de = f2fs_kmem_cache_alloc(discard_entry_slab,
+> > > 						GFP_F2FS_ZERO, true, NULL);
+> > > 			de->start_blkaddr = START_BLOCK(sbi, cpc->trim_start);
+> > > 			list_add_tail(&de->list, head);
+> > > 		}
+> > > ...
+> > > 	}
+> > > ...
+> > > 
+> > > Thanks,
+> > > 
+> > > > 
+> > > > > 
+> > > > > Thanks,
+> > > > > 
+> > > > > > 
+> > > > > > > 
+> > > > > > >    From eb89d9b56e817e3046d7fa17165b12416f09d456 Mon Sep 17 00:00:00 2001
+> > > > > > > From: Chao Yu <chao@kernel.org>
+> > > > > > > Date: Mon, 3 Jul 2023 09:06:53 +0800
+> > > > > > > Subject: [PATCH] Revert "f2fs: enable small discard by default"
+> > > > > > > 
+> > > > > > > This reverts commit d618ebaf0aa83d175658aea5291e0c459d471d39 in order
+> > > > > > > to disable small discard by default, so that if there're huge number of
+> > > > > > > small discards, it will decrease checkpoint's latency obviously.
+> > > > > > > 
+> > > > > > > Also, this patch reverts 9ac00e7cef10 ("f2fs: do not issue small discard
+> > > > > > > commands during checkpoint"), due to it breaks small discard feature which
+> > > > > > > may be configured via sysfs entry max_small_discards.
+> > > > > > > 
+> > > > > > > Fixes: 9ac00e7cef10 ("f2fs: do not issue small discard commands during checkpoint")
+> > > > > > > Signed-off-by: Chao Yu <chao@kernel.org>
+> > > > > > > ---
+> > > > > > >     fs/f2fs/segment.c | 4 ++--
+> > > > > > >     1 file changed, 2 insertions(+), 2 deletions(-)
+> > > > > > > 
+> > > > > > > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> > > > > > > index 14c822e5c9c9..0a313368f18b 100644
+> > > > > > > --- a/fs/f2fs/segment.c
+> > > > > > > +++ b/fs/f2fs/segment.c
+> > > > > > > @@ -2193,7 +2193,7 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
+> > > > > > >     			len = next_pos - cur_pos;
+> > > > > > > 
+> > > > > > >     			if (f2fs_sb_has_blkzoned(sbi) ||
+> > > > > > > -					!force || len < cpc->trim_minlen)
+> > > > > > > +			    (force && len < cpc->trim_minlen))
+> > > > > > >     				goto skip;
+> > > > > > > 
+> > > > > > >     			f2fs_issue_discard(sbi, entry->start_blkaddr + cur_pos,
+> > > > > > > @@ -2269,7 +2269,7 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
+> > > > > > >     	atomic_set(&dcc->queued_discard, 0);
+> > > > > > >     	atomic_set(&dcc->discard_cmd_cnt, 0);
+> > > > > > >     	dcc->nr_discards = 0;
+> > > > > > > -	dcc->max_discards = MAIN_SEGS(sbi) << sbi->log_blocks_per_seg;
+> > > > > > > +	dcc->max_discards = 0;
+> > > > > > >     	dcc->max_discard_request = DEF_MAX_DISCARD_REQUEST;
+> > > > > > >     	dcc->min_discard_issue_time = DEF_MIN_DISCARD_ISSUE_TIME;
+> > > > > > >     	dcc->mid_discard_issue_time = DEF_MID_DISCARD_ISSUE_TIME;
+> > > > > > > -- 
+> > > > > > > 2.40.1
+> > > > > > > 
+> > > > > > > 
+> > > > > > > 
+> > > > > > > >      			f2fs_issue_discard(sbi, entry->start_blkaddr + cur_pos,
 
 
 _______________________________________________
