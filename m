@@ -2,91 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 117BA7515D6
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 Jul 2023 03:32:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D3087519B1
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 13 Jul 2023 09:22:50 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qJlBY-0005o2-MU;
-	Thu, 13 Jul 2023 01:32:01 +0000
+	id 1qJqes-0000xp-6a;
+	Thu, 13 Jul 2023 07:22:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1qJlBW-0005nw-VB
+ (envelope-from <ebiggers@kernel.org>) id 1qJqeq-0000xj-QR
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Jul 2023 01:31:59 +0000
+ Thu, 13 Jul 2023 07:22:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- References:Cc:To:Subject:From:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YktbYLbIsanJFLegZw7oZ8bVmp7ramFXb3Dggsfd2/c=; b=L+8GdG+cz9KLO7gusWaIDQ939H
- FhEGDByWGYE07YEygv8dbMqGcNKDZphON2FpmgVp3P8OKPtnfWQNGZ0Cmli43xDOwn+dowGKutaTY
- rYrFdo/pkFMptUkuU17V2C4p6ovgjn4o/emo5q5K4AXYu/q2xRqYTgAKQMVXHKholYPY=;
+ bh=aXlgRNR4+P8QoG2khYwdAhXKxFR+0pxzAZPWyreBXao=; b=dQItvL/4qq8aM8lc27lcufl0Ec
+ iqOk+IBboJDuHJSN2+eQXSODGEpzTAsznV01nYU6p2mLYHwuLy5A3clngNSztfEAYjazBlHCE7ixZ
+ pXryYqYBnKSArKCDT5+SDSk9oJVdupFavd5XoWwljqJd/qyj8TTRQu6FnLLg04I/7R68=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:Cc:To:
- Subject:From:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YktbYLbIsanJFLegZw7oZ8bVmp7ramFXb3Dggsfd2/c=; b=Ty1lew+zZPSTJ+hrClOTIVE4zp
- f2osQX2Sag0XH/mfW/KWE5amTtjvjQGNEH8ENGgAGSCJwOBrJBeJ+shpeLk3/BCknJZf52fnZxZUX
- dNDj9bKdSyetiTJ3RtpUisw4+vyD/ToOTe4/Ro2r9oATPDEjHstnkSMDGc05W5Khc47E=;
+ bh=aXlgRNR4+P8QoG2khYwdAhXKxFR+0pxzAZPWyreBXao=; b=jwQbiBB1pmZvjKmK13zXDKrHpd
+ sRZ49Mk5PCxDg+ixkraURvUpmzTayUiQmieCkQZEdOMoADmZTtZtCpnJ7ZUaCA5AbqLRHEDrjdkqr
+ PUQiT6Fkzm0pYbKGAFgSvxNuGxNR8i46+vlqwew0zzV52oD5mgd0vm4HV3gWn5tcAk5w=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qJlBU-00020k-O1 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Jul 2023 01:31:59 +0000
+ id 1qJqes-0002MN-Cg for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 13 Jul 2023 07:22:37 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 0D187619BF;
- Thu, 13 Jul 2023 01:31:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A07BC433C8;
- Thu, 13 Jul 2023 01:31:47 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id A65F861A39;
+ Thu, 13 Jul 2023 07:22:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8E1BC433C8;
+ Thu, 13 Jul 2023 07:22:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1689211908;
- bh=n4Oz2QCEBsG6WwGTn41C2bK8AbqLAE8ZcFktsPcA6JA=;
- h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
- b=mvCJSBnNt4C6zu4y+mNWrTfiqmab0xxo3oL/Ymxcm5UyWKeH5HFjlzOCqVPOrNWjL
- cU16qQw1zEHZ16yrVH0+tVG6v6zqyn0Y8lecyxyYn/oZ7DEbaJilmfp2gEaLSteKFV
- yg4yuG8mT7uVXQUwjV98TIhs5rdHD94UXp6BII3Cj2VY276F1j0BUCUe+8Jm6VpXk9
- 0jw0FbIYPK0ivm0atw/RU5vPx4NBasT0f4Q5afekF5G7Wjpqf3AEMn+cgDVx/pFxE2
- dp9QbVcOy4PL7hWhYC588ix0kZs8wW5EDM+jMF4ZUN7o59ECB95p6XN0S0Hxvl0QMk
- fdcb5z9rZYT4Q==
-Message-ID: <87acf602-1587-0615-909d-6e60c66c3cda@kernel.org>
-Date: Thu, 13 Jul 2023 09:31:44 +0800
+ s=k20201202; t=1689232950;
+ bh=BpHdt5uwnAilJ8S0bLCo0m3OsfgBJ2CqoYvUmojxMyk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=sj3qtugjAVE3RrZL9f0h3B+IJ+r1CcFJdTxT7WDHhHFjCVnjqxypDcJzsdYn5A+8u
+ 4E7+OTefkKJSfn/FlRo2iZ8G9xQpEyRiJJw+Uf2LAJ0Cf3P8oAyW38ItwNPdM26MAZ
+ GrcD8WLG3c7jKFzJmJ3+8GmDM0K8/R/HRokc2Q6AnUdPSpCa+5inVLgt0pM/Rz0K/a
+ vhOfw2l+9HOniKrCLauNkAR92k3HTriA/zd4UXGeUIb0hjCPTxP/DK4dsJFsGCCRkx
+ WTfmNxtpwtlSGMXtE2LJq3PccVAJ51GXO91HMoP/IU7htQgT2UTOZu4F6sN5InODth
+ Xsn1k8+6f6KlQ==
+Date: Thu, 13 Jul 2023 00:22:28 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Weichao Guo <guoweichao@oppo.com>
+Message-ID: <20230713072228.GD2199@sol.localdomain>
+References: <20230712102331.4079126-1-guoweichao@oppo.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-From: Chao Yu <chao@kernel.org>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230613203947.2745943-1-jaegeuk@kernel.org>
- <ZInmkgjDnAUD5Nk0@google.com>
- <50d5fa8c-4fe9-8a03-be78-0b5383e55b62@kernel.org>
- <ZKP6EJ5dZ4f4wScp@google.com>
- <65143701-4c19-ab66-1500-abd1162639cd@kernel.org>
- <ZKWovWZDiHjMavtB@google.com>
- <cadfb8d7-f5d0-a3ec-cafb-a0c06ad7d290@kernel.org>
- <ZK2FT9CUjxXvQ2K5@google.com>
- <330c96f7-fbad-dd17-6368-f1378b3b5375@kernel.org>
- <ZK7M6EkLkV8UbqUl@google.com>
-Content-Language: en-US
-In-Reply-To: <ZK7M6EkLkV8UbqUl@google.com>
-X-Spam-Score: -7.9 (-------)
+Content-Disposition: inline
+In-Reply-To: <20230712102331.4079126-1-guoweichao@oppo.com>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/7/12 23:55, Jaegeuk Kim wrote: > On 07/12, Chao Yu
- wrote: >> On 2023/7/12 0:37, Jaegeuk Kim wrote: >>> On 07/06, Chao Yu wrote:
- >>>> On 2023/7/6 1:30, Jaegeuk Kim wrote: >>>>> On 07/04, Chao Y [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  Hi Weichao, On Wed, Jul 12, 2023 at 06:23:31PM +0800, Weichao
+ Guo via Linux-f2fs-devel wrote: > Signed-off-by: Weichao Guo
+ <guoweichao@oppo.com>
+ > Signed-off-by: Sheng Yong <shengyong@oppo.com> > --- > fsck/mount [...]
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -99,11 +89,10 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qJlBU-00020k-O1
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: do not issue small discard commands
- during checkpoint
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qJqes-0002MN-Cg
+Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: support print_xattr_entry with
+ fscrypt context v2
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,233 +104,89 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/7/12 23:55, Jaegeuk Kim wrote:
-> On 07/12, Chao Yu wrote:
->> On 2023/7/12 0:37, Jaegeuk Kim wrote:
->>> On 07/06, Chao Yu wrote:
->>>> On 2023/7/6 1:30, Jaegeuk Kim wrote:
->>>>> On 07/04, Chao Yu wrote:
->>>>>> On 2023/7/4 18:53, Jaegeuk Kim wrote:
->>>>>>> On 07/03, Chao Yu wrote:
->>>>>>>> On 2023/6/15 0:10, Jaegeuk Kim wrote:
->>>>>>>>> If there're huge # of small discards, this will increase checkpoint latency
->>>>>>>>> insanely. Let's issue small discards only by trim.
->>>>>>>>>
->>>>>>>>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>>>>>>>> ---
->>>>>>>>>
->>>>>>>>>       Change log from v1:
->>>>>>>>>        - move the skip logic to avoid dangling objects
->>>>>>>>>
->>>>>>>>>       fs/f2fs/segment.c | 2 +-
->>>>>>>>>       1 file changed, 1 insertion(+), 1 deletion(-)
->>>>>>>>>
->>>>>>>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->>>>>>>>> index 8c7af8b4fc47..0457d620011f 100644
->>>>>>>>> --- a/fs/f2fs/segment.c
->>>>>>>>> +++ b/fs/f2fs/segment.c
->>>>>>>>> @@ -2193,7 +2193,7 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
->>>>>>>>>       			len = next_pos - cur_pos;
->>>>>>>>>       			if (f2fs_sb_has_blkzoned(sbi) ||
->>>>>>>>> -			    (force && len < cpc->trim_minlen))
->>>>>>>>> +					!force || len < cpc->trim_minlen)
->>>>>>>>>       				goto skip;
->>>>>>>>
->>>>>>>> Sorry for late reply.
->>>>>>>>
->>>>>>>> We have a configuration for such case, what do you think of setting
->>>>>>>> max_small_discards to zero? otherwise, w/ above change, max_small_discards
->>>>>>>> logic may be broken?
->>>>>>>>
->>>>>>>> What:           /sys/fs/f2fs/<disk>/max_small_discards
->>>>>>>> Date:           November 2013
->>>>>>>> Contact:        "Jaegeuk Kim" <jaegeuk.kim@samsung.com>
->>>>>>>> Description:    Controls the issue rate of discard commands that consist of small
->>>>>>>>                     blocks less than 2MB. The candidates to be discarded are cached until
->>>>>>>>                     checkpoint is triggered, and issued during the checkpoint.
->>>>>>>>                     By default, it is disabled with 0.
->>>>>>>>
->>>>>>>> Or, if we prefer to disable small_discards by default, what about below change:
->>>>>>>
->>>>>>> I think small_discards is fine, but need to avoid long checkpoint latency only.
->>>>>>
->>>>>> I didn't get you, do you mean we can still issue small discard by
->>>>>> fstrim, so small_discards functionality is fine?
->>>>>
->>>>> You got the point.
->>>>
->>>> Well, actually, what I mean is max_small_discards sysfs entry's functionality
->>>> is broken. Now, the entry can not be used to control number of small discards
->>>> committed by checkpoint.
->>>
->>> Could you descrbie this problem first?
->>
->> Oh, alright, actually, I've described this problem literally, but maybe it's not
->> clear, let me give some examples as below:
->>
->> echo 0 > /sys/fs/f2fs/vdb/max_small_discards
->> xfs_io -f /mnt/f2fs/file -c "pwrite 0 2m" -c "fsync"
->> xfs_io /mnt/f2fs/file -c "fpunch 0 4k"
->> sync
->> cat /proc/fs/f2fs/vdb/discard_plist_info |head -2
->>
->> echo 100 > /sys/fs/f2fs/vdb/max_small_discards
->> rm /mnt/f2fs/file
->> xfs_io -f /mnt/f2fs/file -c "pwrite 0 2m" -c "fsync"
->> xfs_io /mnt/f2fs/file -c "fpunch 0 4k"
->> sync
->> cat /proc/fs/f2fs/vdb/discard_plist_info |head -2
->>
->> Before the patch:
->>
->> Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
->>    0         .       .       .       .       .       .       .       .
->>
->> Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
->>    0         3       1       .       .       .       .       .       .
->>
->> After the patch:
->> Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
->>    0         .       .       .       .       .       .       .       .
->>
->> Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
->>    0         .       .       .       .       .       .       .       .
->>
->> So, now max_small_discards can not be used to control small discard number
->> cached by checkpoint.
+Hi Weichao,
 
-Let me explain more:
-
-Previously, we have two mechanisms to cache & submit small discards:
-
-a) set max small discard number in /sys/fs/f2fs/vdb/max_small_discards, and checkpoint
-will cache small discard candidates w/ configured maximum number.
-
-b) call FITRIM ioctl, also, checkpoint in f2fs_trim_fs() will cache small discard
-candidates w/ configured discard granularity, but w/o limitation of number. FSTRIM
-interface is asynchronized, so it won't submit discard directly.
-
-Finally, discard thread will submit them in background periodically.
-
-So what I mean is the mechanism a) is broken, since no matter how we configure the
-sysfs entry /sys/fs/f2fs/vdb/max_small_discards, checkpoint will not cache small
-discard candidates any more.
-
-So, it needs to fix max_small_discards sysfs functionality? or just drop the
-functionality?
-
+On Wed, Jul 12, 2023 at 06:23:31PM +0800, Weichao Guo via Linux-f2fs-devel wrote:
+> Signed-off-by: Weichao Guo <guoweichao@oppo.com>
+> Signed-off-by: Sheng Yong <shengyong@oppo.com>
+> ---
+>  fsck/mount.c | 44 +++++++++++++++++++++++++++---------------
+>  fsck/xattr.h | 54 +++++++++++++++++++++++++++++++++++++++++++---------
+>  2 files changed, 74 insertions(+), 24 deletions(-)
 > 
-> Since we do not submit small discards anymore during checkpoint. Why not relying
-> on the discard thread to issue them?
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index 397feb5..b9696c4 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -196,7 +196,7 @@ static void print_xattr_entry(const struct f2fs_xattr_entry *ent)
+>  {
+>  	const u8 *value = (const u8 *)&ent->e_name[ent->e_name_len];
+>  	const int size = le16_to_cpu(ent->e_value_size);
+> -	const struct fscrypt_context *ctx;
+> +	const union fscrypt_context *ctx;
+>  	int i;
+>  
+>  	MSG(0, "\nxattr: e_name_index:%d e_name:", ent->e_name_index);
+> @@ -213,21 +213,35 @@ static void print_xattr_entry(const struct f2fs_xattr_entry *ent)
+>  		return;
+>  #endif
+>  	case F2FS_XATTR_INDEX_ENCRYPTION:
+> -		ctx = (const struct fscrypt_context *)value;
+> -		if (size != sizeof(*ctx) ||
+> -		    ctx->format != FS_ENCRYPTION_CONTEXT_FORMAT_V1)
+> +		ctx = (const union fscrypt_context *)value;
+> +		if (size != fscrypt_context_size(ctx))
+>  			break;
+> -		MSG(0, "format: %d\n", ctx->format);
+> -		MSG(0, "contents_encryption_mode: 0x%x\n", ctx->contents_encryption_mode);
+> -		MSG(0, "filenames_encryption_mode: 0x%x\n", ctx->filenames_encryption_mode);
+> -		MSG(0, "flags: 0x%x\n", ctx->flags);
+> -		MSG(0, "master_key_descriptor: ");
+> -		for (i = 0; i < FS_KEY_DESCRIPTOR_SIZE; i++)
+> -			MSG(0, "%02X", ctx->master_key_descriptor[i]);
+> -		MSG(0, "\nnonce: ");
+> -		for (i = 0; i < FS_KEY_DERIVATION_NONCE_SIZE; i++)
+> -			MSG(0, "%02X", ctx->nonce[i]);
+> -		MSG(0, "\n");
+> +		switch (ctx->version) {
+> +		case FSCRYPT_CONTEXT_V1:
+> +			MSG(0, "format: %d\n", ctx->version);
+> +			MSG(0, "contents_encryption_mode: 0x%x\n", ctx->v1.contents_encryption_mode);
+> +			MSG(0, "filenames_encryption_mode: 0x%x\n", ctx->v1.filenames_encryption_mode);
+> +			MSG(0, "flags: 0x%x\n", ctx->v1.flags);
+> +			MSG(0, "master_key_descriptor: ");
+> +			for (i = 0; i < FSCRYPT_KEY_DESCRIPTOR_SIZE; i++)
+> +				MSG(0, "%02X", ctx->v1.master_key_descriptor[i]);
+> +			MSG(0, "\nnonce: ");
+> +			for (i = 0; i < FSCRYPT_FILE_NONCE_SIZE; i++)
+> +				MSG(0, "%02X", ctx->v1.nonce[i]);
+> +			MSG(0, "\n");
+> +		case FSCRYPT_CONTEXT_V2:
+> +			MSG(0, "format: %d\n", ctx->version);
+> +			MSG(0, "contents_encryption_mode: 0x%x\n", ctx->v2.contents_encryption_mode);
+> +			MSG(0, "filenames_encryption_mode: 0x%x\n", ctx->v2.filenames_encryption_mode);
+> +			MSG(0, "flags: 0x%x\n", ctx->v2.flags);
+> +			MSG(0, "master_key_identifier: ");
+> +			for (i = 0; i < FSCRYPT_KEY_IDENTIFIER_SIZE; i++)
+> +				MSG(0, "%02X", ctx->v2.master_key_identifier[i]);
+> +			MSG(0, "\nnonce: ");
+> +			for (i = 0; i < FSCRYPT_FILE_NONCE_SIZE; i++)
+> +				MSG(0, "%02X", ctx->v2.nonce[i]);
+> +			MSG(0, "\n");
+> +		}
+>  		return;
 
-Sorry, I'm not sure I get your point, do you mean max_small_discards functionality
-is obsoleted, so it recommended to use fstrim to cache & submit small discards?
+The FSCRYPT_CONTEXT_V1 case is falling through to FSCRYPT_CONTEXT_V2.  Also,
+this patch makes the values of encryption xattrs with unknown versions no longer
+be shown.  To fix this, there needs to be a return at end of each case (v1 and
+v2), and the return after the switch statement needs to be a break.
 
-Let me know, if I'm missing something or misunderstanding the point.
-
-Thanks,
-
-> 
->>
->> Thanks,
->>
->>>
->>>>
->>>> I think there is another way to achieve "avoid long checkpoint latency caused
->>>> by committing huge # of small discards", the way is we can set max_small_discards
->>>> to small value or zero, w/ such configuration, it will take checkpoint much less
->>>> time or no time to committing small discard due to below control logic:
->>>>
->>>> f2fs_flush_sit_entries()
->>>> {
->>>> ...
->>>> 			if (!(cpc->reason & CP_DISCARD)) {
->>>> 				cpc->trim_start = segno;
->>>> 				add_discard_addrs(sbi, cpc, false);
->>>> 			}
->>>> ...
->>>> }
->>>>
->>>> add_discard_addrs()
->>>> {
->>>> ...
->>>> 	while (force || SM_I(sbi)->dcc_info->nr_discards <=
->>>> 				SM_I(sbi)->dcc_info->max_discards) {
->>>>
->>>> It will break the loop once nr_discards is larger than max_discards, if
->>>> max_discards is set to zero, checkpoint won't take time to handle small discards.
->>>>
->>>> ...
->>>> 		if (!de) {
->>>> 			de = f2fs_kmem_cache_alloc(discard_entry_slab,
->>>> 						GFP_F2FS_ZERO, true, NULL);
->>>> 			de->start_blkaddr = START_BLOCK(sbi, cpc->trim_start);
->>>> 			list_add_tail(&de->list, head);
->>>> 		}
->>>> ...
->>>> 	}
->>>> ...
->>>>
->>>> Thanks,
->>>>
->>>>>
->>>>>>
->>>>>> Thanks,
->>>>>>
->>>>>>>
->>>>>>>>
->>>>>>>>     From eb89d9b56e817e3046d7fa17165b12416f09d456 Mon Sep 17 00:00:00 2001
->>>>>>>> From: Chao Yu <chao@kernel.org>
->>>>>>>> Date: Mon, 3 Jul 2023 09:06:53 +0800
->>>>>>>> Subject: [PATCH] Revert "f2fs: enable small discard by default"
->>>>>>>>
->>>>>>>> This reverts commit d618ebaf0aa83d175658aea5291e0c459d471d39 in order
->>>>>>>> to disable small discard by default, so that if there're huge number of
->>>>>>>> small discards, it will decrease checkpoint's latency obviously.
->>>>>>>>
->>>>>>>> Also, this patch reverts 9ac00e7cef10 ("f2fs: do not issue small discard
->>>>>>>> commands during checkpoint"), due to it breaks small discard feature which
->>>>>>>> may be configured via sysfs entry max_small_discards.
->>>>>>>>
->>>>>>>> Fixes: 9ac00e7cef10 ("f2fs: do not issue small discard commands during checkpoint")
->>>>>>>> Signed-off-by: Chao Yu <chao@kernel.org>
->>>>>>>> ---
->>>>>>>>      fs/f2fs/segment.c | 4 ++--
->>>>>>>>      1 file changed, 2 insertions(+), 2 deletions(-)
->>>>>>>>
->>>>>>>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->>>>>>>> index 14c822e5c9c9..0a313368f18b 100644
->>>>>>>> --- a/fs/f2fs/segment.c
->>>>>>>> +++ b/fs/f2fs/segment.c
->>>>>>>> @@ -2193,7 +2193,7 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
->>>>>>>>      			len = next_pos - cur_pos;
->>>>>>>>
->>>>>>>>      			if (f2fs_sb_has_blkzoned(sbi) ||
->>>>>>>> -					!force || len < cpc->trim_minlen)
->>>>>>>> +			    (force && len < cpc->trim_minlen))
->>>>>>>>      				goto skip;
->>>>>>>>
->>>>>>>>      			f2fs_issue_discard(sbi, entry->start_blkaddr + cur_pos,
->>>>>>>> @@ -2269,7 +2269,7 @@ static int create_discard_cmd_control(struct f2fs_sb_info *sbi)
->>>>>>>>      	atomic_set(&dcc->queued_discard, 0);
->>>>>>>>      	atomic_set(&dcc->discard_cmd_cnt, 0);
->>>>>>>>      	dcc->nr_discards = 0;
->>>>>>>> -	dcc->max_discards = MAIN_SEGS(sbi) << sbi->log_blocks_per_seg;
->>>>>>>> +	dcc->max_discards = 0;
->>>>>>>>      	dcc->max_discard_request = DEF_MAX_DISCARD_REQUEST;
->>>>>>>>      	dcc->min_discard_issue_time = DEF_MIN_DISCARD_ISSUE_TIME;
->>>>>>>>      	dcc->mid_discard_issue_time = DEF_MID_DISCARD_ISSUE_TIME;
->>>>>>>> -- 
->>>>>>>> 2.40.1
->>>>>>>>
->>>>>>>>
->>>>>>>>
->>>>>>>>>       			f2fs_issue_discard(sbi, entry->start_blkaddr + cur_pos,
+- Eric
 
 
 _______________________________________________
