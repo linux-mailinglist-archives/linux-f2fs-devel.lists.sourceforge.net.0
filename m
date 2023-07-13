@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 550F6752D71
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Jul 2023 01:02:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2376752D73
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Jul 2023 01:02:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qK5Jx-0006nu-3p;
-	Thu, 13 Jul 2023 23:02:01 +0000
+	id 1qK5K3-0004JQ-GK;
+	Thu, 13 Jul 2023 23:02:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qK5Jw-0006nm-5y
+ (envelope-from <jlayton@kernel.org>) id 1qK5K1-0004JJ-1I
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Jul 2023 23:02:00 +0000
+ Thu, 13 Jul 2023 23:02:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=X0oljiepnSz5gM+zvheytrmp9iA1L6amij6hJTcG588=; b=jCgF9CT2y3JRCCxWIiqPhXxlTS
- pCkRZTgXZfXLsHN/OldFie0drUQ6M+JbBKSbtr9lredYLIuB0gtHofgDSt9ogOeJDsE7kW1iFJKiq
- mQsKWYd/RkVy1gvZNU2o/WCjAZYAPFBfdWeb4Ygpuv8HHROWXlv+Uh8vy+moZn89z0l4=;
+ bh=Uf8fzofxnNcmoauKYc81EqlxvQyndJgVuHBZzE2ZMg0=; b=iCSCcmZkGYqG9LQsJ+IGTOzz/D
+ zPDuSuGFGjtx85uVH7jDvf+J6B4kA0ogUMH1ynXUb/+P/msz6hjX8UTjXalO+mhK+7+WxoswK0f9/
+ hTZgPPA5uvrHMdbUPdmVi+IUPQykH+PxJWCakTRqN5cuoO9igxErBA0o2lMeo0VFY6zs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -31,36 +31,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=X0oljiepnSz5gM+zvheytrmp9iA1L6amij6hJTcG588=; b=JYNLTuRPMdgK2kRHFurjAx2qFD
- pKJojPNQ86M0bNjPT1GaJAlMTXAwIOxHNZbHHXtiwdnQJ7PlmS1eENiwq6wSuP2uD9I6apbHBqFYt
- hHfmxII0xSySqlG727fr0sry6835xF8elGVdFZwBnI4qQ6PIKPMKMkZwsKoI2MgPIuTs=;
+ bh=Uf8fzofxnNcmoauKYc81EqlxvQyndJgVuHBZzE2ZMg0=; b=cWwbqI2NH8JE7zRyHqfi41dX99
+ 0pD3BJAA2lorFww8dsFEJIzQd6YMQ01elRq1vi5ncEeA7zLUhndki6U9VXYZlYY12hVmTU4O5ReC5
+ 9u9ZAhZy8vweOV9g7MSA0Mrx5H9xZdH/ITjIsXHhJ8tGTpNiSUlf/01RJT6SL3y3l4sA=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qK5Jv-006wGX-2y for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 13 Jul 2023 23:01:59 +0000
+ id 1qK5K3-0006Fa-Dr for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 13 Jul 2023 23:02:05 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 80B8861BA9;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id BA1F561BB5;
+ Thu, 13 Jul 2023 23:01:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F2C8C433BD;
  Thu, 13 Jul 2023 23:01:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC563C433AB;
- Thu, 13 Jul 2023 23:01:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1689289312;
- bh=kIvw1OVi/OYz+atwIBCynX0q88XJ1zU1WapHn2pYQP4=;
+ s=k20201202; t=1689289319;
+ bh=t187d4hlj7Hd2B853hoiIPlXJE4vBx7O1lkOZGTYDW8=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=ji6lTm8ixvNtDVVdWA3hLyHSMWJKcMADi3bT5BtloRaThTlgVtrnfDXRVZYz43eRu
- e46QVkCnWld61ntI9tgz1GRsuSCFqBU2ObStlUNmu2ITfHTBwbv7vJEVbd4VhZV50Z
- dT95XgUQ0gE/E1uvcZKi9FQTchZ0DfPl+ZI9RB22N2f/MLfNFP/JZ9fevITXI82Nnn
- gxkb+MeSgX88JSRcRtINCznpW+x3Bw6LJRgU7m1nPn5OW1YU0SQ5fO7Mc35+2Am2DI
- 3RZxGv1qzyqNs6VT+JidZtfoYQynlt0REEMl5HH24pEX9jmVLyVDYYNkSzsIu+nPLz
- p0XGmDep4V68Q==
+ b=BS7k3xvm0kV8VQrl/+Nc8umWhgO+pb9JT0LHiIqUglobFvawLeTwqlzQHpVKTDZvB
+ uzCvx/VSEkD7rBjIYWrgFJPCVeqzpiWP8yPt0omTj30LLcay2tknCTfGbRYu6T8MHO
+ XUKoIaSo5n/Bd8IGVTxHqLGvMrjMe0fw+PscScTZ4jWUdNZ+2byzzdy+o175llL7m5
+ o50SLzukRXrSYzl6VaWT8ZrHwmm4KFENLB31WgFlIK5T2Pi03WKPiptSSMpQZPxFLm
+ ct6V/7uDGKKjKZCyDiQclhCznfyT/lEVKO0vqyqaIX9NPJI1Mx1EUf0gKBJYoL63GW
+ 31d2FfqFHu4Cw==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Thu, 13 Jul 2023 19:00:56 -0400
+Date: Thu, 13 Jul 2023 19:00:57 -0400
 MIME-Version: 1.0
-Message-Id: <20230713-mgctime-v5-7-9eb795d2ae37@kernel.org>
+Message-Id: <20230713-mgctime-v5-8-9eb795d2ae37@kernel.org>
 References: <20230713-mgctime-v5-0-9eb795d2ae37@kernel.org>
 In-Reply-To: <20230713-mgctime-v5-0-9eb795d2ae37@kernel.org>
 To: Eric Van Hensbergen <ericvh@kernel.org>, 
@@ -99,34 +99,35 @@ To: Eric Van Hensbergen <ericvh@kernel.org>,
  Hugh Dickins <hughd@google.com>, Andrew Morton <akpm@linux-foundation.org>, 
  "Darrick J. Wong" <djwong@kernel.org>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=843; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=kIvw1OVi/OYz+atwIBCynX0q88XJ1zU1WapHn2pYQP4=;
- b=owEBbQKS/ZANAwAIAQAOaEEZVoIVAcsmYgBksIIvy36LZaWXx77QDXekEjnV6herdriJfAZSF
- KRvi1GJeviJAjMEAAEIAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCZLCCLwAKCRAADmhBGVaC
- FdpuD/4olF8PfkzpOMhKo0pYakgpPOkYsvbjRlnWul1JeLAyEulDwt7cUm7WvWS7sMfn1nmbiyP
- ZHDXA8DklrSv30kAkd/SL9dBOk9CqQRpnh3gYQN8VNdWNLw39gnLGtNuYCpAfLNo6atBt+fNyyC
- 9JTlkqthcsWlIIJg04NUID5P3Jx07BORb0Uye5L4hJyaE1uS3bR9dMrxhAWH4RhuGTPnQOnDXy0
- 8jUhXWSuWv5boD0GGnQiwKp0sMI/s08qlD+VHcAKA3ng2vs9Kgpqr37JvvET803NiGk8yj9pL03
- zs0M+o+33FLV8FRVqOh+U+Jx4gU5h0mFwEp9K+Thq8cujHzoq47kEHiEUovgVSQuqftTIVBazJG
- hs4VXOKAnNx4QoIzUmqCsLgvvJMSxUqe1h6CftfWNBb74Gl7VROa7K/9RRLjvfgLUknDQaYmnWs
- uRwFrVVPpco6YGgC+fPrV0+xTVyKEA/2zTAlQWrS7tRu0NtjQWSaQcYgz1Gpc6JaotWcgbi9HFc
- DovY/3/xXCkw7YtqNGLZBg8SMoSWMoDxy7Uwz5OXs5uUpmFp0p1YgTS1GFz/wgOrNTbFHTHc3QX
- hRQiNndjZv+/zFzfH7J5roV04qDMIMAABTOlktx3N/eKz8JCFhz6AePPqjavoMl+dS8drsBe4xd
- SUt6/wNve4Dcx+w==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2706; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=t187d4hlj7Hd2B853hoiIPlXJE4vBx7O1lkOZGTYDW8=;
+ b=owEBbQKS/ZANAwAIAQAOaEEZVoIVAcsmYgBksIIv0d3fY46+2hyVZzGgFlf73uVo9uOX8lOx6
+ K4UVJ9Da6yJAjMEAAEIAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCZLCCLwAKCRAADmhBGVaC
+ FbztD/4uZXXSyTwCnSezUKeydXdyB1DOo4czPXF+iJ085mANTre9b4XbUvuEDf9bQijKjYvAiIF
+ T6aBATLxstNxy4RGAHDXtSLWG232Ink6G1PNMhMC9R96FpJsuPjmMk8NUBog9j/mjyhM2PlaAMX
+ tX5JL88Tb2gI1FbBxP6pQJCDRkYxbfydZ/FGNzZuAcvlJMt3BH7bGga81LPIjr5UOfLB+GnI8oe
+ i5BFOw+r7A+Xu+KDGowTNXor3TGmR763yaM7A/mcig5Jp20jEJIXDGO1tVgSdAP0LebIstIif+9
+ kiMe/3MWPnPs0eVd+mEtYR53HfccdkA9ShOKV+Jx7qg5v2TSojDh7bRQBVb22NQZGRPBlgv2560
+ X83w+MU7yhsMU1MCxv2Whg6ooLLErWX5Zp68rM1FJYdQ/3YbvfDj6sg+4Aa3PF5ifwLM33BLCLr
+ pXwEOeLySTL3OWSfSzMqbNqkSShHhPhxZs+ZtZsqAM1fTRTO3svFqI7T/IFjBt7NKwvQJKyhtIJ
+ syGts3Gf66X08k1+2iwyGMuP2FA8o0TGMTCwUBXZtxQhhH4KlMpwsdFurHxhcT/j4CtVbSAH4Uc
+ fB3KEuG+QiBPD89OSHahxCRhPa+vWgmHHVnmaRK/PJC6un6LOOBM1as6ikNxs/Lc9yixCPrHMNq
+ /XZRVwDe3wtNV8A==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
-X-Spam-Score: -5.9 (-----)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Enable multigrain timestamps, which should ensure that there
  is an apparent change to the timestamp whenever it has been written after
- being actively observed via getattr. For ext4, we only need to enable the
- FS_MGTIME flag. 
- Content analysis details:   (-5.9 points, 6.0 required)
+ being actively observed via getattr. Beyond enabling the FS_MGTIME flag,
+ this patch eliminates update_time_for_write, which goes to great pains to
+ avoid in-memory stores. Just have it overwrite the timestamps unconditionally.
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -135,13 +136,14 @@ X-Spam-Report: Spam detection software,
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qK5Jv-006wGX-2y
-Subject: [f2fs-dev] [PATCH v5 7/8] ext4: switch to multigrain timestamps
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qK5K3-0006Fa-Dr
+Subject: [f2fs-dev] [PATCH v5 8/8] btrfs: convert to multigrain timestamps
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -172,26 +174,81 @@ Enable multigrain timestamps, which should ensure that there is an
 apparent change to the timestamp whenever it has been written after
 being actively observed via getattr.
 
-For ext4, we only need to enable the FS_MGTIME flag.
+Beyond enabling the FS_MGTIME flag, this patch eliminates
+update_time_for_write, which goes to great pains to avoid in-memory
+stores. Just have it overwrite the timestamps unconditionally.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/ext4/super.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/btrfs/file.c  | 24 ++++--------------------
+ fs/btrfs/super.c |  5 +++--
+ 2 files changed, 7 insertions(+), 22 deletions(-)
 
-diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index b54c70e1a74e..cb1ff47af156 100644
---- a/fs/ext4/super.c
-+++ b/fs/ext4/super.c
-@@ -7279,7 +7279,7 @@ static struct file_system_type ext4_fs_type = {
- 	.init_fs_context	= ext4_init_fs_context,
- 	.parameters		= ext4_param_specs,
- 	.kill_sb		= kill_block_super,
--	.fs_flags		= FS_REQUIRES_DEV | FS_ALLOW_IDMAP,
-+	.fs_flags		= FS_REQUIRES_DEV | FS_ALLOW_IDMAP | FS_MGTIME,
- };
- MODULE_ALIAS_FS("ext4");
+diff --git a/fs/btrfs/file.c b/fs/btrfs/file.c
+index d7a9ece7a40b..b9e75c9f95ac 100644
+--- a/fs/btrfs/file.c
++++ b/fs/btrfs/file.c
+@@ -1106,25 +1106,6 @@ void btrfs_check_nocow_unlock(struct btrfs_inode *inode)
+ 	btrfs_drew_write_unlock(&inode->root->snapshot_lock);
+ }
  
+-static void update_time_for_write(struct inode *inode)
+-{
+-	struct timespec64 now, ctime;
+-
+-	if (IS_NOCMTIME(inode))
+-		return;
+-
+-	now = current_time(inode);
+-	if (!timespec64_equal(&inode->i_mtime, &now))
+-		inode->i_mtime = now;
+-
+-	ctime = inode_get_ctime(inode);
+-	if (!timespec64_equal(&ctime, &now))
+-		inode_set_ctime_to_ts(inode, now);
+-
+-	if (IS_I_VERSION(inode))
+-		inode_inc_iversion(inode);
+-}
+-
+ static int btrfs_write_check(struct kiocb *iocb, struct iov_iter *from,
+ 			     size_t count)
+ {
+@@ -1156,7 +1137,10 @@ static int btrfs_write_check(struct kiocb *iocb, struct iov_iter *from,
+ 	 * need to start yet another transaction to update the inode as we will
+ 	 * update the inode when we finish writing whatever data we write.
+ 	 */
+-	update_time_for_write(inode);
++	if (!IS_NOCMTIME(inode)) {
++		inode->i_mtime = inode_set_ctime_current(inode);
++		inode_inc_iversion(inode);
++	}
+ 
+ 	start_pos = round_down(pos, fs_info->sectorsize);
+ 	oldsize = i_size_read(inode);
+diff --git a/fs/btrfs/super.c b/fs/btrfs/super.c
+index f1dd172d8d5b..8eda51b095c9 100644
+--- a/fs/btrfs/super.c
++++ b/fs/btrfs/super.c
+@@ -2144,7 +2144,7 @@ static struct file_system_type btrfs_fs_type = {
+ 	.name		= "btrfs",
+ 	.mount		= btrfs_mount,
+ 	.kill_sb	= btrfs_kill_super,
+-	.fs_flags	= FS_REQUIRES_DEV | FS_BINARY_MOUNTDATA,
++	.fs_flags	= FS_REQUIRES_DEV | FS_BINARY_MOUNTDATA | FS_MGTIME,
+ };
+ 
+ static struct file_system_type btrfs_root_fs_type = {
+@@ -2152,7 +2152,8 @@ static struct file_system_type btrfs_root_fs_type = {
+ 	.name		= "btrfs",
+ 	.mount		= btrfs_mount_root,
+ 	.kill_sb	= btrfs_kill_super,
+-	.fs_flags	= FS_REQUIRES_DEV | FS_BINARY_MOUNTDATA | FS_ALLOW_IDMAP,
++	.fs_flags	= FS_REQUIRES_DEV | FS_BINARY_MOUNTDATA |
++			  FS_ALLOW_IDMAP | FS_MGTIME,
+ };
+ 
+ MODULE_ALIAS_FS("btrfs");
 
 -- 
 2.41.0
