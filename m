@@ -2,97 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04FFC75318D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Jul 2023 07:55:37 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B21D753E87
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 14 Jul 2023 17:12:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qKBm9-0001YA-JN;
-	Fri, 14 Jul 2023 05:55:34 +0000
+	id 1qKKSP-0000S2-5m;
+	Fri, 14 Jul 2023 15:11:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1qKBm1-0001Y3-US
- for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 14 Jul 2023 05:55:26 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3pGWxZAkbAGERXYJ9KKDQ9OOHC.FNNFKDTRDQBNMSDMS.BNL@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1qKKSN-0000Rw-II for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 14 Jul 2023 15:11:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
+ :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ubKHXPE3lhZ6gaGYN7NJAXMwYds7BVJ9xEUFMJjcpk0=; b=iR87VVqORWtRVVkYR5u9xdCOOY
- AGloVwVNnGI41eITxEsIFaHj7GbTuezLdUqwdMFXA559RESB8Lxa80IN3tnhM1XUL8sU57kGGH5Ux
- twUImTglfnCMNOHjQJqTgwjYw7D35/ze0k7CbiUpzoHvsjTzz19YbeaLn/Wy/80tQYpA=;
+ bh=CCLOxUsPk9gij7lrd4gl3ju7/pLr9suuyXvJ5OtLAUQ=; b=TueBTun0hldeaW0D92zI8nrTOS
+ WOXqxwevwq5eMfp6V0WdDMDeKobukTHZNYaS9/RX2o7bmQDFS3fkX3nm4BTIwfJ9VWgI+JGYYJ5A5
+ Fi0qxBtCbhHiIGlPP4vpREeBguI5nYtJqZYDefUj4Hbbl0GHDT5CZTW03Zj+JeAiHVEU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ubKHXPE3lhZ6gaGYN7NJAXMwYds7BVJ9xEUFMJjcpk0=; b=X/4iGv5DC0ggtWwR/jmXJMLwjN
- CMxi3XnqxmBddG6Ml7nLcD0CAB2+GfGgHLXYgsVNFk25757AO8MF+KviaQ7v93rdiNo4OFHbCRh94
- G///y7S+ENDuH/EihFLWtl23O/+PtzJGkivvaiySiUrmD3AC9UrYmBS7dzsjeVYEbmHc=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qKBm1-007B5J-Ku for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 14 Jul 2023 05:55:26 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 10B1261C17;
- Fri, 14 Jul 2023 05:55:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2EC76C433C7;
- Fri, 14 Jul 2023 05:55:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1689314119;
- bh=IXG6OKn01yJj0TE1xVyNQVVP2cgIJ84xsyC/CW0XIaU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=lNSPH9QfHOdM9FO2SngD10EMxHIkKS12TAD6XmT2erE4WSzUHeNZqG1g7ORyq9Ptc
- Wc7RRfwHvx/wbR5WolW+1AXcbpMN09Y3E/WXLvIdB34yAaMhs9YktbrqvSGTCKTKKl
- 6XZuOTEeIQsVog29Cz2aPr0e50H4Qxk7DlNn/9O6OZdN2w9+USiaxuK1FjyuX7Mowp
- VOJpP2p+PuN9wgFUJhrU4aTJbs5cFsg0224yfp8ayO73ubM67xA4jKtUDGoFT824fK
- Dq6P8F3ZmDt6Rwle9l0TAQQZE7eH5nZHHj29VmmGWjvMa7nTKF8WD/A8tvxWoW927/
- zeswo3tOfNpuQ==
-Date: Thu, 13 Jul 2023 22:55:17 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Gabriel Krisman Bertazi <krisman@suse.de>
-Message-ID: <20230714055517.GG913@sol.localdomain>
-References: <20230422000310.1802-1-krisman@suse.de>
- <20230422000310.1802-3-krisman@suse.de>
+ h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
+ Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=CCLOxUsPk9gij7lrd4gl3ju7/pLr9suuyXvJ5OtLAUQ=; b=K
+ 0tnBe+/5CjYfpt6u9Bgd/2NVEkQY0c/GB5PotrUsx7X2fOwe2dGJ0r1Ip2NaBID+l8g4hV8bWWRvM
+ sejJeh0TbaO+yvfWa+E9i+e7LTT9Ir2o3KNB6g1X1AWMwKYCPWEjAHR6mBR9LL9KzApJwcVsvDxoh
+ GerPbys7FyztC3nU=;
+Received: from mail-ot1-f69.google.com ([209.85.210.69])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qKKSJ-0001Bq-M0 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 14 Jul 2023 15:11:41 +0000
+Received: by mail-ot1-f69.google.com with SMTP id
+ 46e09a7af769-6b75153caabso3263642a34.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 14 Jul 2023 08:11:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689347492; x=1691939492;
+ h=to:from:subject:message-id:in-reply-to:date:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=CCLOxUsPk9gij7lrd4gl3ju7/pLr9suuyXvJ5OtLAUQ=;
+ b=by7KmGl52HHlIq3kc8YkqRKmV1PxDd8YDWnnl/kSho9j4R0Uzfjx7O3MIoO9QPsRaP
+ 9H8Xee9T6glPW5t7wov91pKG7P5P5ohP11rtIwFrHdhvoRsHdQdnOk2DNejO6pDwceHf
+ juoF+EI9HGk5cw0zMGHD78LL4cujazhvyTmKlwkCDJcqJlaHVSjI//vTuOkgZJILgTIv
+ fIgwVPp0F6OxPONc/u+ItYz1emFjkHZhkG1w95UgFoCwBZyS9GPZ5u8Asj9exYmiTHcW
+ YcWY/yCdYUQHc+Cr+o7nMRcT4pTYFX+1M4H4PGYEhMVTsa8CewHg7GhvM1VUam1lLjCg
+ 6C4Q==
+X-Gm-Message-State: ABy/qLZ9ZaqqRVETirdT2cPW2jQz3XrjKabK2oucSl0mQNnT3yc0A+BF
+ 1bUBPf4TVxfskD1oPjQ2QiFFlm2LSoXN/v93hK8zg7ugofwa
+X-Google-Smtp-Source: APBJJlE6TyCcdhAUrsmWbb8fvxPE8mWG/ukHNruZoQLsPGdacASBBgg9EA/N2Q99G1L6A2y+bsP1WGM7Wx8B6uHLvOQRaJVtfrE4
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230422000310.1802-3-krisman@suse.de>
-X-Spam-Score: -5.2 (-----)
+X-Received: by 2002:a9d:7488:0:b0:6b8:8894:e4ac with SMTP id
+ t8-20020a9d7488000000b006b88894e4acmr4268213otk.3.1689347492003; Fri, 14 Jul
+ 2023 08:11:32 -0700 (PDT)
+Date: Fri, 14 Jul 2023 08:11:31 -0700
+In-Reply-To: <0000000000005921ef05ffddc3b7@google.com>
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <00000000000029c576060073dd62@google.com>
+From: syzbot <syzbot+e5600587fa9cbf8e3826@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.6 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Apr 21, 2023 at 08:03:05PM -0400, Gabriel Krisman
- Bertazi wrote: > @@ -209,6 +209,7 @@ struct dentry_operations { > #define
- DCACHE_FALLTHRU 0x01000000 /* Fall through to lower layer */ > #defi [...]
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview: syzbot has bisected this issue to: commit
+ 5eda1ad1aaffdfebdecf7a164e586060a210f74f
+ Author: Jaegeuk Kim <jaegeuk@kernel.org> Date: Wed Jun 28 08:00:56 2023 +0000
+ f2fs: fix deadlock in i_xattr_sem and inode page lock 
+ Content analysis details:   (0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qKBm1-007B5J-Ku
-Subject: Re: [f2fs-dev] [PATCH v2 2/7] fs: Add DCACHE_CASEFOLD_LOOKUP flag
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.69 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.69 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1qKKSJ-0001Bq-M0
+Subject: Re: [f2fs-dev] [syzbot] [f2fs?] possible deadlock in f2fs_getxattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,32 +107,32 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: brauner@kernel.org, tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Apr 21, 2023 at 08:03:05PM -0400, Gabriel Krisman Bertazi wrote:
-> @@ -209,6 +209,7 @@ struct dentry_operations {
->  #define DCACHE_FALLTHRU			0x01000000 /* Fall through to lower layer */
->  #define DCACHE_NOKEY_NAME		0x02000000 /* Encrypted name encoded without key */
->  #define DCACHE_OP_REAL			0x04000000
-> +#define DCACHE_CASEFOLD_LOOKUP		0x08000000 /* Dentry comes from a casefold directory */
->  
->  #define DCACHE_PAR_LOOKUP		0x10000000 /* being looked up (with parent locked shared) */
->  #define DCACHE_DENTRY_CURSOR		0x20000000
+syzbot has bisected this issue to:
 
-The first time I read DCACHE_CASEFOLD_LOOKUP, I got the wrong impression, since
-it uses _LOOKUP in a different way from DCACHE_PAR_LOOKUP.  DCACHE_PAR_LOOKUP
-uses it to mean "dentry is currently being looked up", while
-DCACHE_CASEFOLD_LOOKUP uses it to mean "dentry *was* looked up".
+commit 5eda1ad1aaffdfebdecf7a164e586060a210f74f
+Author: Jaegeuk Kim <jaegeuk@kernel.org>
+Date:   Wed Jun 28 08:00:56 2023 +0000
 
-Maybe DCACHE_CASEFOLDED_NAME would be more logical?  That would follow
-DCACHE_NOKEY_NAME.  (Also CASEFOLD => CASEFOLDED would be logical, I think.)
+    f2fs: fix deadlock in i_xattr_sem and inode page lock
 
-- Eric
+bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=1177322aa80000
+start commit:   3f01e9fed845 Merge tag 'linux-watchdog-6.5-rc2' of git://w..
+git tree:       upstream
+final oops:     https://syzkaller.appspot.com/x/report.txt?x=1377322aa80000
+console output: https://syzkaller.appspot.com/x/log.txt?x=1577322aa80000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=29fd3392a08741ef
+dashboard link: https://syzkaller.appspot.com/bug?extid=e5600587fa9cbf8e3826
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1336f364a80000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=130a365aa80000
+
+Reported-by: syzbot+e5600587fa9cbf8e3826@syzkaller.appspotmail.com
+Fixes: 5eda1ad1aaff ("f2fs: fix deadlock in i_xattr_sem and inode page lock")
+
+For information about bisection process see: https://goo.gl/tpsmEJ#bisection
 
 
 _______________________________________________
