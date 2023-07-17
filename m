@@ -2,72 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BC2F756ABC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Jul 2023 19:34:37 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86330756ABF
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Jul 2023 19:34:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qLS7D-00062t-V0;
-	Mon, 17 Jul 2023 17:34:32 +0000
+	id 1qLS7I-0006vF-AB;
+	Mon, 17 Jul 2023 17:34:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1qLS7A-00062f-RS
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1qLS7F-0006v3-Ur
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Jul 2023 17:34:29 +0000
+ Mon, 17 Jul 2023 17:34:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YCE5L/OOIxNC0GbAA+PcFZTStWr3k5C/tSnBcm3LOCw=; b=Guu7GL6UmTEo8ZIkkkMCCTDMiI
- tGL8++uIVXE7eN0NokGuA/FudeU8S2L1L7SCaKii1y34C1WGd7eAZNP99R7aNgGuPhGA3IArC+M6X
- MV8qiNRAIkqSB/IviKIPP9FT8f5+3PsEWCLkt8znuQOMhlsB5OEQL5GgW+pF8FlI7qtw=;
+ bh=6wNMhbacpipv5n/gj0l3s0Q0Nru6S+LBHbLasn76qAY=; b=ZGtMEh417/Ioepbd3ROy/bmsxB
+ BDAVBjbNRHVCBKLI/3BaoCKvo96RozI1MjiqZFO54D5hR6j5eJZJ/vo+3uF/qMqpfeGXQWVz61tw/
+ bLodGX7SFr13022K44OuqowOBLdc+tRyhOzFuY0dPAwadLF9aK0beEraTHQJHkiMmkRI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YCE5L/OOIxNC0GbAA+PcFZTStWr3k5C/tSnBcm3LOCw=; b=RXNu8Hh/8P8fkdrDuHHThoszfw
- e7E8qJYzTiNhKKmqWQSTbX9sKSVtr/CAY5PLiwzpMN2ynEUajMEK+kLW84Gha4wtvCRcprosd1j0t
- 68K8NRNc9+4KVg3SryD6qy+IBcNOzFVEGTkfnJWPOYYVBhgKLjnypz0G/fdPFCCjcBsg=;
+ bh=6wNMhbacpipv5n/gj0l3s0Q0Nru6S+LBHbLasn76qAY=; b=hxhECgHCort1k09yi7INLs7K2x
+ SEya0LtvIN3QE6hQMrWh5edHIYcpdjYgUqwg28+uzjr/Gfiu1mPmWKy2rgJIQWIY5q2f9GEJD5068
+ iuGs6xKXOSpDhZxViZjwFpRniiIHjvxHAwdHF5Dd9DB8iH1hkjPgR303YZwbfTg5FGLU=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qLS7C-000145-P9 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Jul 2023 17:34:29 +0000
+ id 1qLS7I-00014l-Db for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 17 Jul 2023 17:34:34 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 1D065611A5
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1FAEF611AD
  for <linux-f2fs-devel@lists.sourceforge.net>;
  Mon, 17 Jul 2023 17:34:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 03FA2C433C7;
- Mon, 17 Jul 2023 17:34:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 12E76C4339A;
+ Mon, 17 Jul 2023 17:34:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1689615262;
- bh=l9fnYPUEU4XFFKmH0AcPyY4PDnFuy0+gUPjAep7XsVM=;
+ bh=4ZvqU758s2JKaNXLRepPna0T6aOCUUXfAyBfPR8X2VY=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=CExiXQ92mVHqzUQ+lKfGH53U6rRbT4nRw4Pzy7cwswWdAUycAHRVY4leCkNFc4+b+
- 371vFB60YnA796WQX5YV6gAFm/kAEUV6Xe9JohYvFAFlnEvB1J96uDcpGsOpJOCgQF
- PNT5Z9KO+QQkUPjjhvlfb9kWfdeFEZJ4eDpX2Igw6Kpxym793J8w4pgRgy0NRQQeWE
- E+AtgBeBVi7GiOApuKuPqUTR1PmeBgo+JZ+CAycsk/Q3qpxcdz5n+Z9M/XVDFF+EV0
- W2U7uvjN76zlV4RduEHc3LHJVx/FmccjP2el0/26ZeUGsWW0yWX87lz2O33nkSuz2E
- hTcY1WSJQlMBw==
+ b=XSQ4EZW3ipVSumHvPXWYtnkSlLMtIQsp55O6t0OWefIpLJU6mOQ33fykGZQSD+XCL
+ WQO1rNHu79U+li2ThhL0UJi8n7KqE1NWixR5Lh9c2H6nYxiqTV2gI487LSAJuWObKy
+ nrt9PO+ZGljxzeatGDTeLOX7UawhMbDJsyxXJqEplq8dEY9KTGA3K3HyKSCwkvc2kL
+ cQRPGESCBHkyUv78DVU2WGtRP/jnJ56uwk3fZ8Ef9QkDA0RjuVjpAWMJn+dd7nJB1A
+ yav6BMCReubq2L3MlZ1vaZ/VA/xS0uGeTuhNI10/xy9x/t+etnsHGwZbkGVHwlw2ZV
+ 2meSprAdgZ48w==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- D16BCE29F34; Mon, 17 Jul 2023 17:34:21 +0000 (UTC)
+ E4D5FE29F36; Mon, 17 Jul 2023 17:34:21 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <168961526185.4078.17033386338905134361.git-patchwork-notify@kernel.org>
+Message-Id: <168961526192.4078.9064603829957550841.git-patchwork-notify@kernel.org>
 Date: Mon, 17 Jul 2023 17:34:21 +0000
-References: <20230710061058.2303767-1-chao@kernel.org>
-In-Reply-To: <20230710061058.2303767-1-chao@kernel.org>
-To: Chao Yu <chao@kernel.org>
+References: <20230323213919.1876157-1-jaegeuk@kernel.org>
+In-Reply-To: <20230323213919.1876157-1-jaegeuk@kernel.org>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -76,10 +76,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Mon, 10 Jul 2023 14:10:58 +0800 you
- wrote: > f2fs_compress_alloc_page() uses mempool to allocate memory, it never
- > fail, don't handle error case in its callers. > > Signed-off-by: Chao Yu
- <chao@ke [...] 
+ Jaegeuk Kim <jaegeuk@kernel.org>: On Thu, 23 Mar 2023 14:39:19 -0700 you
+ wrote: > https://bugzilla.kernel.org/show_bug.cgi?id=216050 > > Somehow we're
+ getting a page which has a different mapping. > Let's avoid the infinite
+ loop. > > [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +94,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qLS7C-000145-P9
-Subject: Re: [f2fs-dev] [PATCH] f2fs: don't handle error case of
- f2fs_compress_alloc_page()
+X-Headers-End: 1qLS7I-00014l-Db
+Subject: Re: [f2fs-dev] [PATCH] f2fs: get out of a repeat loop when getting
+ a locked data page
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,7 +108,7 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -119,18 +119,20 @@ Hello:
 This patch was applied to jaegeuk/f2fs.git (dev)
 by Jaegeuk Kim <jaegeuk@kernel.org>:
 
-On Mon, 10 Jul 2023 14:10:58 +0800 you wrote:
-> f2fs_compress_alloc_page() uses mempool to allocate memory, it never
-> fail, don't handle error case in its callers.
+On Thu, 23 Mar 2023 14:39:19 -0700 you wrote:
+> https://bugzilla.kernel.org/show_bug.cgi?id=216050
 > 
-> Signed-off-by: Chao Yu <chao@kernel.org>
-> ---
->  fs/f2fs/compress.c | 14 +-------------
->  1 file changed, 1 insertion(+), 13 deletions(-)
+> Somehow we're getting a page which has a different mapping.
+> Let's avoid the infinite loop.
+> 
+> Cc: <stable@vger.kernel.org>
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> 
+> [...]
 
 Here is the summary with links:
-  - [f2fs-dev] f2fs: don't handle error case of f2fs_compress_alloc_page()
-    https://git.kernel.org/jaegeuk/f2fs/c/df19023418cd
+  - [f2fs-dev] f2fs: get out of a repeat loop when getting a locked data page
+    https://git.kernel.org/jaegeuk/f2fs/c/5a47ad28e606
 
 You are awesome, thank you!
 -- 
