@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 548FB755905
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Jul 2023 03:20:29 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1339B75591A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Jul 2023 03:41:21 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qLCuR-0004Jq-6u;
-	Mon, 17 Jul 2023 01:20:18 +0000
+	id 1qLDEd-0001JO-EX;
+	Mon, 17 Jul 2023 01:41:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1qLCuQ-0004Ji-Fl
+ (envelope-from <chao@kernel.org>) id 1qLDEb-0001JI-GQ
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Jul 2023 01:20:17 +0000
+ Mon, 17 Jul 2023 01:41:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zOlI8ITPrwnZyII1ZuZdTLtO51RfmzCarl4LO0OmImE=; b=Hd9VOzLRitp6QpYld02++0N1MM
- fC+kUqIh0bRjxKS/zuoh23wTPdVedSFKTa9LeCkzIg+LSlPgCwv3g4bQ8tny35IJd/q3b8Er4QhCm
- C+ZNEuOeuj6exxvAm0b1Z/12FeinAml27HLVfOu05NFshDx/QbHSE5m+dhnbDdjYdaFY=;
+ bh=3cIoy7IMV4UcOy4rLK/LnfHNOPeEM/ZWsJP46mPlbh8=; b=FkuTc6FOWQJ8WDS/ROp03nneBt
+ /T0EWNj2yYiQ+eOM1YTs1n2XMXg+E48VO9/VKK0d3wiX0m9cQcxv8eiPSM33WR2YnayhmiqK4o4J0
+ Gat+Mb0ID0z9oy91AZ3C7wEIah8zrgEBbjycpuAtLawVd/IDCaZke4CcvOMdisXJWc5Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,40 +31,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zOlI8ITPrwnZyII1ZuZdTLtO51RfmzCarl4LO0OmImE=; b=ec943EqFWmQL6TAyZaZJWabWJI
- 71FDnpOgtrhH4VXj9uN+/tg/6v0E6U8rnrRa9obN/tVwqAPrggJ1hrFmmmJfGGiJsXadfx3eYNmJE
- H+0Nh66WLx5vM3QPKRK+s1a/A1YREEqmCP+pwSbsk8mIqVSYU6rxin8RRQoWoyoFYEF4=;
+ bh=3cIoy7IMV4UcOy4rLK/LnfHNOPeEM/ZWsJP46mPlbh8=; b=QAi11wStBwTtNFsBn/EuJtmaZx
+ DADJ0gn8U6djekfaLa1X0o9SmTYnx1XLzeQ1WGKuZrJzD+u7lZ9sBzY1NRkmX7dFERDGVSsEnu+gw
+ 0gj9fq8j9t5iv2vw67Y1e6IWYd3mb4liV2J0E6BWQlo1TSwDLLLMxPNnyMis6wcVRoRE=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qLCuL-00A6La-Vc for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Jul 2023 01:20:17 +0000
+ id 1qLDEc-0003Kt-PP for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 17 Jul 2023 01:41:09 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5D6AD60C41;
- Mon, 17 Jul 2023 01:20:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83FC9C433C7;
- Mon, 17 Jul 2023 01:20:06 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 162E760EF6;
+ Mon, 17 Jul 2023 01:41:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 355DFC433C8;
+ Mon, 17 Jul 2023 01:41:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1689556807;
- bh=HoKEMJo8m28Dflkj/derC+oi9BAG6fSI3t+amFLyaw4=;
+ s=k20201202; t=1689558062;
+ bh=h8WCJKKfnmgCNPGKKU1t3bjLb0VKxv98FIDHiEhMKKQ=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=IQDv8ktc4zSNBTfP9jwXDzwx5R1IR0AT2CbcCqfhjXrt36eaCGoVzxgjDs8DUmC0n
- vn5LL8r6xqtkhr4ZAVIOCNURlRCbjr4Zj4UYJQ0qg3RYAhNbNkskGmQbVNd+HgP8Az
- oloIDeoge8gdiJdMSsybjTnTSVmB9G5xk09UQVv38wfcqEIKWBbfWKCyr99PMFwFiY
- BoeYw9IA1userGQ/IsF2YMzxezXwPsAUNmBq/+LVx6sngGFeWV3ZAiM8H2qyDF+NqN
- TqLbpmSjVDByI1Jtfa/iea47B+0KhsGYJIcotgi+q0BH+tr1AVgMOTXNU3qNQC3vXc
- 9B/YbPLuCEUKw==
-Message-ID: <f1e004a9-2982-10c8-d086-1180dce29f6e@kernel.org>
-Date: Mon, 17 Jul 2023 09:20:04 +0800
+ b=HFYTdp5e1SXvhZ0h25t2Z98DppjOWAH+Z+y6QthJWAfddf1rl1yp5S+nOZgjgvN8q
+ o1QuIswGcJFEd4m3iw/JxY56g+XegdA8dNkYrIuxOXRHYGrxzMyhD8uvTj4lk/Utkj
+ maQBE2vyiN+JhrI6JYO9im75PS/BH12En1dPUAib2fnzFM0lARXa05tOGlxc368NR5
+ 0ngAuHPqpmFcvwGOOV910Z+5XvXpFVoWPYdcsYKGEzvPb1izidRlGbex3uLPFSRYwH
+ VIWH2jOYCn0Ir6WjDmVpBltqZhpesC1M054+7bwPv/2xLHX95dFwFMO/BjfP561VHO
+ IamuEU/rFKvdg==
+Message-ID: <b5d7b6b9-d328-b7c5-3d46-78d5c93f9251@kernel.org>
+Date: Mon, 17 Jul 2023 09:40:59 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
+Content-Language: en-US
 To: Weichao Guo <guoweichao@oppo.com>, jaegeuk@kernel.org, ebiggers@kernel.org
 References: <20230715060936.2343780-1-guoweichao@oppo.com>
-Content-Language: en-US
 From: Chao Yu <chao@kernel.org>
 In-Reply-To: <20230715060936.2343780-1-guoweichao@oppo.com>
 X-Spam-Score: -7.9 (-------)
@@ -93,7 +93,7 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
  -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qLCuL-00A6La-Vc
+X-Headers-End: 1qLDEc-0003Kt-PP
 Subject: Re: [f2fs-dev] [PATCH v4] f2fs-tools: support to show
  fscrypt_context_v2 in print_xattr_entry
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -140,18 +140,20 @@ On 2023/7/15 14:09, Weichao Guo wrote:
 >   		return;
 >   #endif
 >   	case F2FS_XATTR_INDEX_ENCRYPTION:
-
-#define F2FS_XATTR_NAME_ENCRYPTION_CONTEXT	"c"
-
-Should we check ent->e_name and ent->e_name_len w/ F2FS_XATTR_NAME_ENCRYPTION_CONTEXT?
-
-Thanks,
-
 > -		ctx = (const struct fscrypt_context *)value;
 > -		if (size != sizeof(*ctx) ||
 > -		    ctx->format != FS_ENCRYPTION_CONTEXT_FORMAT_V1)
 > +		ctx = (const union fscrypt_context *)value;
 > +		if (size == 0 || size != fscrypt_context_size(ctx))
+
+If I understand Eric's commnets correctly, if size == 0, we'd better just return in
+order to avoid below codes which may access out-of-boundary on xattr entry.
+
+for (i = 0; i < size; i++)
+	MSG(0, "%02X", value[i]);
+
+Thanks,
+
 >   			break;
 > -		MSG(0, "format: %d\n", ctx->format);
 > -		MSG(0, "contents_encryption_mode: 0x%x\n", ctx->contents_encryption_mode);
