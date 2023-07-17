@@ -2,128 +2,113 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A49EE755C7A
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Jul 2023 09:11:46 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD90E7560F0
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 17 Jul 2023 12:52:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qLIOO-0004fe-Oy;
-	Mon, 17 Jul 2023 07:11:36 +0000
+	id 1qLLqU-0004Qe-OJ;
+	Mon, 17 Jul 2023 10:52:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <duminjie@vivo.com>) id 1qLION-0004fX-6i
+ (envelope-from <guoweichao@oppo.com>) id 1qLLqQ-0004QP-0A
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Jul 2023 07:11:35 +0000
+ Mon, 17 Jul 2023 10:52:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=d6g3PWpaR7m3kb0jhHCSFAy4Ehk5+QHW5NIED9aNkyk=; b=m+EqJb67lSQljZZGXWbz2/aUdD
- G7N0kaY1n2B117VB4w0HCwcoHHvWUWro0wZJWu/4HEh4/kPIr0/t3ZHH/2OZX0UWkyAKfwLC9yWOG
- xJTraq598uh673u388COhKeX05zeCufgFb4YoM/1Spmh3+arlPpQmtcCfrRT7k0n5ors=;
+ bh=C6UOiYcvLPH/ff4Pg3Q0o18xw89hMxnDJzZG4uXGh6U=; b=iVjAIfkkk3cqYSEt2Lfg5ahEpI
+ tsiIc8EvY2A6Rh7cQ5M2CDqjxJs55WW49RBLg5MjlzyodDERSvhaSBEgvxHWzIP4kzHgBFfmjo0V5
+ 5Y+8vifmXxNEJw4fmcc5DRV/G/LSr3nu6mCNFPSvAjW7hm3FDY9ohMM98mVOYqNi7WQ4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
  :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=d6g3PWpaR7m3kb0jhHCSFAy4Ehk5+QHW5NIED9aNkyk=; b=B
- qy76z3Q1u7aGtyxhj02/eOOE9oLgh7j1DHQtImq7Mmw5EY5DK1zqQvDTILwyfzq+5DP2h/29fOpYw
- LJdfJbSi8ihi8I+D4/KPb6keSt26IyKxRCPJ4ivNot2URnmYnN7j/CZMVkhOqAP9z6fTEWy6RUgPK
- 9Dlls17A4r8qCP3U=;
-Received: from mail-psaapc01on2100.outbound.protection.outlook.com
- ([40.107.255.100] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ List-Owner:List-Archive; bh=C6UOiYcvLPH/ff4Pg3Q0o18xw89hMxnDJzZG4uXGh6U=; b=D
+ 9n9SKR49pI9B6RpFRCdJRArnFz1KmBbCi6KphndJUxzJ2C7c/v2aCkWhgK7JiNySE86d3B9dLgR2K
+ XHHLaDEHx5UmC+XQxPLjWEUMPJUW2JOVjtAq/r21slutszBpZO9HXZueRivg2Y3Hj5+mOtt21j11l
+ w3nZS7ZpvT8vY2co=;
+Received: from mail-psaapc01on2049.outbound.protection.outlook.com
+ ([40.107.255.49] helo=APC01-PSA-obe.outbound.protection.outlook.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qLIOH-00AIt5-IT for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 17 Jul 2023 07:11:35 +0000
+ id 1qLLqG-00ATeO-7n for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 17 Jul 2023 10:52:44 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FJ7UXIt+urtGEL9uhJOs1p8k4EmcUtA55aJ/jWCrrTcLGpWRGqMbAa37NTysAjDLn+R/1GdhwwmNUJBTlbNSo/QWUgnL4sbpWoW+EcedHjWXsch++X5dy4vq/VxZ9jK6R9X35pkc/R04rl8e1aQ6ud/Vne7T5mprp/rm0lI2mcMm9yGJpU3FUE2xgktzl90ohI+ounqM6rGUOBO3dD5MJyuhoTP083+rZ0t6BB44whGaUzLuXu9K2kAB8mzDNeim74gxIchROS8xHtrwE8ww0y95TjtYF5ScjesifVMQiGN84FVwgso6jdEVbd4YCtsulgjxkcxEbZw1/cp+mBFbNQ==
+ b=O+uh594EJ1umfqz0fOV4mq4zpItnfpV9aZXB/Soq/AFO6o/ihR0FAbIT10c/VoJcE/z9bd0EWRQwQjGaLf7jShfkW+jqK7ZbZ8GhSCd0xjZbxO6vbG2nj61HYzl3w9iUkz9LvfqNfTR6mffsTjBPQXoTvSonju8MY6WjT7D2P7VZrw80cof0O8Vh+YRuaeWTbT2TRO+P0IRTFlipsUc8dvucNTBnkJ/FDTtccxJmPwC9TS4OFLjAi6OM/8715p/EPL85ID7OS4R4Gi+jpHb2LdfYwA0LGg8A60RzN4cE9yV9UdADaNHH49b7msofGOFcPnhvGn5NPNR0jLQD+PnxDw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=d6g3PWpaR7m3kb0jhHCSFAy4Ehk5+QHW5NIED9aNkyk=;
- b=NJ7XR4a+yGdoO8wQul8v71nbfLbhytveraHzLojsJGn3u0qZ48W0dcCHtcm/u2799c/HdcD5y5SlWXKn1b8LKVgTZpHJdXfe5tGBRTOCutj8zPPta/cOIh+fhkVmevsUJQQTNkfCqDZmKgxUi6ZWDGu0GZt/rvX6i/MhDLGZo2JyF2mE0xVjG/wFS7x5KkpqitC2WfKB72qCcUEWVO4jnMrk6lalUmxMN6eadBNLT5RtnxjWn8lxIQfEKO3L7NSbVlCM9lpvYr1eM2WctxziDaEyZqm0/7CgIcLSjvxE39WG5d/BsD8odiutbiazhMsZ+vTa5MlkpJbRc0bf/LDx7g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ bh=C6UOiYcvLPH/ff4Pg3Q0o18xw89hMxnDJzZG4uXGh6U=;
+ b=Zomkg9JZ1DlkfkEhvL1Y0gMrY1fimt2+kEHM7NhLEGVceNJ56i3GG4oincsXRii+yHbBnfLd8XDGDN0BTWo4bxYrjb+pICnEvE84aNIWDnTTDNbEsFBHl4xYzaakGFuau7C/cnxruzXgYgESPqijLO1alzWHB5as2/katjeTIT5Y0Ib6x4x+4HS6oyBNXJ6gO2uwpRdp4tSn4PYMwxYdxIgop+3LaCYez2y9/cnMhlyV20/Bfb9As7mJdE6O7yhuex+nUcYLgy2p0otGxqaKhMQkNI/XqFHk1CdYhqVStCu2Zd7+G+dkN6sVtOLM/j/pNxBGpPWoUfaK0xxxJpO8Ew==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 58.252.5.68) smtp.rcpttodomain=kernel.org smtp.mailfrom=oppo.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=oppo.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oppo.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=d6g3PWpaR7m3kb0jhHCSFAy4Ehk5+QHW5NIED9aNkyk=;
- b=fEZcJYkkb2m18lwY5I1fd+Xsy3nZb1Cch9+rvSjLYugLJzhcUVctWLld4SHv0ZelfbDx7XRp7cOcwS4i0X1mLiIQ48OS1MJPHru7tT5LY9l47g5ujdiL8wPteMmUYhZxkKoNZjVoNdI1SPwHEqScOn2DAbSlSGCeOHACN+59zNPN54BbS8NGh8j1o7sZPfbt6edGiXdMtgOEJV1QFVY0NEoja6b5ODWb5vhcdPUOPkEo2GPtie3CwJE9PuS1f8ovm0VM81XJsBJbD/oMSb+xToDUwhOqOUgeOebRP3RrTLxljJlIQpPHj/UbMT3NZmclP+cpU6riI1PHC/ZHRkdJJA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SG2PR06MB5288.apcprd06.prod.outlook.com (2603:1096:4:1dc::9) by
- KL1PR0601MB5565.apcprd06.prod.outlook.com (2603:1096:820:c2::14) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=C6UOiYcvLPH/ff4Pg3Q0o18xw89hMxnDJzZG4uXGh6U=;
+ b=n1aS5drZOaFETMZnZA1iEidJ+IwxoR4Vsod7s6KpmLd49W6NpafpZGmI7lSPIfSCA+Eb53cGCT9Y/N6P0/mHYsgI69ZjXxXG8ZDitLlE+sll7lSPKsLjtaCfvVT5XO5wwSAQSqkgGGkJwaFmJfjLawBYuYjw/1rzA3cw+RU4T0U=
+Received: from TYAPR01CA0047.jpnprd01.prod.outlook.com (2603:1096:404:28::35)
+ by TY2PR02MB4367.apcprd02.prod.outlook.com (2603:1096:404:8007::11)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6588.32; Mon, 17 Jul
- 2023 07:11:21 +0000
-Received: from SG2PR06MB5288.apcprd06.prod.outlook.com
- ([fe80::f9b8:80b5:844e:f49a]) by SG2PR06MB5288.apcprd06.prod.outlook.com
- ([fe80::f9b8:80b5:844e:f49a%6]) with mapi id 15.20.6565.037; Mon, 17 Jul 2023
- 07:11:20 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net (open list:F2FS FILE SYSTEM),
- linux-kernel@vger.kernel.org (open list)
-Date: Mon, 17 Jul 2023 15:11:09 +0800
-Message-Id: <20230717071109.5663-1-duminjie@vivo.com>
-X-Mailer: git-send-email 2.39.0
-X-ClientProxiedBy: SG2PR01CA0166.apcprd01.prod.exchangelabs.com
- (2603:1096:4:28::22) To SG2PR06MB5288.apcprd06.prod.outlook.com
- (2603:1096:4:1dc::9)
+ 2023 10:52:28 +0000
+Received: from TYZAPC01FT041.eop-APC01.prod.protection.outlook.com
+ (2603:1096:404:28:cafe::3c) by TYAPR01CA0047.outlook.office365.com
+ (2603:1096:404:28::35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6588.20 via Frontend
+ Transport; Mon, 17 Jul 2023 10:52:28 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 58.252.5.68)
+ smtp.mailfrom=oppo.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=oppo.com;
+Received-SPF: Pass (protection.outlook.com: domain of oppo.com designates
+ 58.252.5.68 as permitted sender) receiver=protection.outlook.com;
+ client-ip=58.252.5.68; helo=mail.oppo.com; pr=C
+Received: from mail.oppo.com (58.252.5.68) by
+ TYZAPC01FT041.mail.protection.outlook.com (10.118.152.116) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6609.22 via Frontend Transport; Mon, 17 Jul 2023 10:52:27 +0000
+Received: from oem-PowerEdge-T550.adc.com (172.16.40.118) by
+ mailappw30.adc.com (172.16.56.197) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Mon, 17 Jul 2023 18:52:26 +0800
+To: <jaegeuk@kernel.org>, <chao@kernel.org>, <ebiggers@kernel.org>
+Date: Mon, 17 Jul 2023 18:52:18 +0800
+Message-ID: <20230717105218.610616-1-guoweichao@oppo.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
+X-Originating-IP: [172.16.40.118]
+X-ClientProxiedBy: mailappw31.adc.com (172.16.56.198) To mailappw30.adc.com
+ (172.16.56.197)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SG2PR06MB5288:EE_|KL1PR0601MB5565:EE_
-X-MS-Office365-Filtering-Correlation-Id: bc8a7291-95ac-4109-8248-08db8695056a
+X-MS-TrafficTypeDiagnostic: TYZAPC01FT041:EE_|TY2PR02MB4367:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8b2be2f6-0cd1-4e18-eb3f-08db86b3e9b4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: l42iGBW17ct8rT32zFiqg8MI8aVhChghrZdr13tqS8KcGOZMvTdoQS6ADulRUiifSRM3UIbodlrpy+ZE6eyyyokVbqc1oeUzJmOhrwPShq1LQ6M+gju1bgbeSJooDoOjEE7VduYJA6D5N5KTXvUyVYBYbbbPZipeBVPSP4RwSGmZbsvhrV6xV3o3GfEl5rZrm4h3S8/dYAlNn2pjr24GPT3rMvmaWZf3912MMbexH3zOIBf5dPu7hQ1Pl9pZ3hr3bsH63Thu2S4o9WadDyMsogXIeMoW5UIeic3SWd1p19/ZSCaslqjfUMJRdnRT2l6U9fjlxo2JE1V1BxaG/ElIt5Xg8/AWHFnUDeLKfsW3DoVdnzm3dusZyquD96+0FQH+X1IMxPgmiE0VFJlV0LQWwmRA1/tXlTmJ68DJByMbeZSRiLRrmWBfIq/7cMlnV3kZdXOdkrQejtjwS1Xr8vu0NDmVaXFoKANarFcnTOq1UGjhH1uIfLi0CvdSAITiTF1oJr+AKO+dFfp/b9MxI5buJS3G5dommuf2NyGhY163oA0z346/NM9FvkGoriRJGgWEMkcBvgqCCZ9X1vj7Zm3TwE0Qs4smXMNV5AQ8MhasmdXLAL5uBRXPg5cPcBf5yeIU
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SG2PR06MB5288.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(4636009)(396003)(366004)(39860400002)(376002)(346002)(136003)(451199021)(478600001)(66946007)(66556008)(66476007)(4326008)(5660300002)(316002)(8676002)(8936002)(2906002)(41300700001)(4744005)(6666004)(110136005)(6512007)(26005)(1076003)(6506007)(6486002)(52116002)(107886003)(38100700002)(186003)(2616005)(83380400001)(36756003)(38350700002)(86362001);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1CEM+5i9R1jnT9cV6VlBr3P3fVWcIBBJE2ryN0OH5qlhBd4V/bBSjfnWSi1X?=
- =?us-ascii?Q?EMVs0gaelvdwCFJp2fEsckExb66pFxoWyvJUrvjuGZB2+/F6lDFit3LgGA7A?=
- =?us-ascii?Q?IjBxuOoT+XoZGd7pgXkcVbyeEV5ABJdWjb9cZddKKcU7dXUD1YDRvdjNLJ7T?=
- =?us-ascii?Q?NQRHEAKkfssnFldQQ8FjtISx841JohhIISP+fLm1KSA9DeaIZijmCPzjfMkD?=
- =?us-ascii?Q?a2RvQ44/OKVxpOppfPWWo5ORXPNMM6GMEjzzxlgaMp+ymifWvsYH9D1WIx4t?=
- =?us-ascii?Q?AFK6bdJxBDS9d/wLxORVQLRqDM2KFhK5uNQuzMRiSA5TaPbhCY15bwMtham6?=
- =?us-ascii?Q?krJTvI79ZzpYUSvm8cbuxcHDdCunuvRWFmviORX4PlhlxRNp7YBpdIVblbn8?=
- =?us-ascii?Q?CTV/8gI5VExmy7/jlp32550aMpm/R9YtTbhdPkQwDwuLE5Yk6bGOCyqmrxRa?=
- =?us-ascii?Q?sbmtYrB4JaTdlBMFHPkUnQ902hJZSGOzg2kAo20V/fkCmOPYkeSpz9DBFFDX?=
- =?us-ascii?Q?yoRNFUo3pC1rPayjxNh3mdv8K2CoaDG2B3T6+e/I/w+cHBH9kUf0ZjplI8WT?=
- =?us-ascii?Q?d9rElCI5+mXLn1+5+H9psocYktbyVeQw8wEl/NMer+XF4fIdfVONBI/q6HvB?=
- =?us-ascii?Q?KHe1FbpXWvdGR4X1nZwZUvG3lWx7oEVL6pyfakdilPkNerPtzvPB+C2Y/uQw?=
- =?us-ascii?Q?PmiPWmsbEFt/e/5O2/ulL44lJxKOU8cCaRsEBPVcECzN7eGXI7FXinMzb3EB?=
- =?us-ascii?Q?ciP1Y5T6h/2pOOuL8A2zQMPc/Pb6zqEEG2mXXTKbzYZ6Y/Oey9pesL0F8y8K?=
- =?us-ascii?Q?BXPys/Dk+ne6ME82VZiDj4mRvcHaqaJO2Lt/4ziqxJFG2DZurcyxjdcH1faX?=
- =?us-ascii?Q?enQbPIpkNbX8Jt1sizSY21HjIgr6dVzVg9Wu13TBsSQg9fU2AD207VA7JRtq?=
- =?us-ascii?Q?pSHzZTGmmEHDHgou3hVc/6s9n3gUiEs0vQjOhDhrBX3nRZjobmLk+DJi0mn0?=
- =?us-ascii?Q?KzoNsS2jDJ6clefA12gGnyO3K/YBnakGyNcya9aT5gcRopECpbE1o0DYYisb?=
- =?us-ascii?Q?7T+b1YTr2bLGDieN7wZAkJj6KLDGgVucPOhkfCTdkw/hiX/tjW7nyLeZQbB5?=
- =?us-ascii?Q?fuUVrHyv7VZKXW/DCSZiiqT8/+F0nTUlCmVCt1g/+irByisCXrFKvz/P2xpG?=
- =?us-ascii?Q?AT/gsBOZMnmlnkkSkRq8rn50hg9630KtKwhW9Lq5Fy6ssrglXJCIxM59QjYd?=
- =?us-ascii?Q?kAG7X/ppMXUP4UDZlcRBOE4NytNQpq1RD6r7knQny/NUh4cgey5LE9kCHO3q?=
- =?us-ascii?Q?nZem6fA2JSLqfDDEE6AJt/7uxa6rfTuqLuR0mDpH/e+OlrhFan6P15vRMmR9?=
- =?us-ascii?Q?zqQ2H5zUSiz6lyvBLAkQbxDw+hkr0mDS9GsahHJ+Ni9jjivr8UniVIG3hCAt?=
- =?us-ascii?Q?+O/X0/VqiDc28Xs+NY2dxs/grOIn0L6/hVuSF2UmqeJjG4c886BQEtxJGf5C?=
- =?us-ascii?Q?ieWsY2KsGwZX8V9WEzFtiIz+ARZpuPk8QxvFsOrTl1RK1gQuJWUEt6cveLNA?=
- =?us-ascii?Q?r1t8YsSdsHbc7arXnau/cdict7iEaYhkdCnqXLWW?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bc8a7291-95ac-4109-8248-08db8695056a
-X-MS-Exchange-CrossTenant-AuthSource: SG2PR06MB5288.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2023 07:11:20.4394 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: efPVZjQbuD0bF5jhvnMN+LVDHEzJync6vDU36yscLgTsygOmPv4j45pHnTAIQwA2j7s0VwwfUVGp3E+cwSRKvQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR0601MB5565
+X-Microsoft-Antispam-Message-Info: epHQlI0Glfx5hSxi6HMaMh/EwlXa6is55HduQjFHbYRhPTxG0yaiQCkTWmcb6ipLNrz1rz1tv52wGWvtXLf+QBYAjQF+7bVHq6Wc9vAcmle1PYACE84bgNgF73gr2aYSl5xsFAETVhAa82rAEU4OZhEsICPz6SaIOzXb5XdIuOTkXIdQK/zexPnLi5hMwCaiiNkscrcmKAbsRTzmRCiunxaOHKtI7rmWNnWw319hNbvQDKrVrMot63Of0jUJ+LPRweI6l3P+YWTq/gnLZvp2RVy0EwzCPlSwtNEZsGH4lMT2tgBQhhjLmZtnNWK5ClLnCGObTxpVr1ws5+6auG7tuzrGb+wXqYkopbYxWOtFY6Z2ZYGzdzwGgqz3qw2HOat8XEM4igO6lFZB6xBK4NzEkSU3k0gJts72q2stTZIfcfl/zY1A3Fb5qrGaXr7V38y2zYvHulbTYWUh1k26/S2g+lttE1j82WXH5QP9/qjSPwqR027HYNEtjHGl4CgXM3ckdKJY30tqjTHjL8WWXOYwgcsZsGSCVSLFCdIeHuoWs2cwF1LkGr60VuXV/MbQ4ZRGsc6yMyLhnqroyckOXrKj4e25RoaQpRLpRF1OX7djH/b9Ojt6+4ij35twwGmwP5c3I9azmzDEh+ND/zbYOMt6aT+sP4U6hVNB1kMNhwggIni8knwpE1Ib0YhdU1pdTirqmvMzJ4KqUrzne8hSs6FUZ7HGATXDHMjpK8HUs6qlljU7f3KkS9G2SVjiXJb3L8Q/vS443DoDRBGXDySgWU4JOQ==
+X-Forefront-Antispam-Report: CIP:58.252.5.68; CTRY:CN; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.oppo.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230028)(4636009)(346002)(39860400002)(396003)(136003)(376002)(82310400008)(451199021)(46966006)(36840700001)(40470700004)(86362001)(2906002)(36756003)(40460700003)(40480700001)(186003)(16526019)(336012)(83380400001)(36860700001)(47076005)(1076003)(26005)(107886003)(82740400003)(356005)(81166007)(70206006)(6666004)(54906003)(110136005)(70586007)(316002)(2616005)(4326008)(41300700001)(478600001)(5660300002)(8936002)(8676002)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: oppo.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2023 10:52:27.9241 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8b2be2f6-0cd1-4e18-eb3f-08db86b3e9b4
+X-MS-Exchange-CrossTenant-Id: f1905eb1-c353-41c5-9516-62b4a54b5ee6
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f1905eb1-c353-41c5-9516-62b4a54b5ee6; Ip=[58.252.5.68];
+ Helo=[mail.oppo.com]
+X-MS-Exchange-CrossTenant-AuthSource: TYZAPC01FT041.eop-APC01.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY2PR02MB4367
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -131,18 +116,19 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Simplify code pattern of 'folio->index +
- folio_nr_pages(folio)'
- by using the existing helper folio_next_index(). Signed-off-by: Minjie Du
- <duminjie@vivo.com> --- fs/f2fs/data.c | 3 +-- 1 file changed, 1 insertion(+), 
- 2 deletions(-) 
+ Content preview:  As the fscrypt context has two versions now, this patch adds
+ the support of fscrypt_context_v2 for print_xattr_entry. Signed-off-by:
+ Weichao
+ Guo <guoweichao@oppo.com> Signed-off-by: Sheng Yong <shengyong@oppo.com>
+ --- v6: - print notice for unsupported fscrypt_context version v5: - check
+ if e_name/e_name_len is match [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [40.107.255.100 listed in list.dnswl.org]
+ no trust [40.107.255.49 listed in list.dnswl.org]
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.255.100 listed in wl.mailspike.net]
+ [40.107.255.49 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -152,9 +138,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1qLIOH-00AIt5-IT
-Subject: [f2fs-dev] [PATCH v1] f2fs: increase usage of folio_next_index()
- helper
+X-Headers-End: 1qLLqG-00ATeO-7n
+Subject: [f2fs-dev] [PATCH v6] f2fs-tools: support to show
+ fscrypt_context_v2 in print_xattr_entry
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -166,37 +152,180 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Minjie Du via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Minjie Du <duminjie@vivo.com>
-Cc: opensource.kernel@vivo.com, Minjie Du <duminjie@vivo.com>
+From: Weichao Guo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Weichao Guo <guoweichao@oppo.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Simplify code pattern of 'folio->index + folio_nr_pages(folio)' by using
-the existing helper folio_next_index().
+As the fscrypt context has two versions now, this patch adds the
+support of fscrypt_context_v2 for print_xattr_entry.
 
-Signed-off-by: Minjie Du <duminjie@vivo.com>
+Signed-off-by: Weichao Guo <guoweichao@oppo.com>
+Signed-off-by: Sheng Yong <shengyong@oppo.com>
 ---
- fs/f2fs/data.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+v6:
+- print notice for unsupported fscrypt_context version
+v5:
+- check if e_name/e_name_len is match with F2FS_XATTR_NAME_ENCRYPTION_CONTEXT
+v4:
+- logic fixs & avoid memory out-of-bounds accessing
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 5882afe71..298024b07 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -3236,8 +3236,7 @@ static int f2fs_write_cache_pages(struct address_space *mapping,
- 					}
- 					goto next;
- 				}
--				done_index = folio->index +
--					folio_nr_pages(folio);
-+				done_index = folio_next_index(folio);
- 				done = 1;
- 				break;
- 			}
+---
+ fsck/mount.c | 53 +++++++++++++++++++++++++++++++++---------------
+ fsck/xattr.h | 57 +++++++++++++++++++++++++++++++++++++++++++---------
+ 2 files changed, 85 insertions(+), 25 deletions(-)
+
+diff --git a/fsck/mount.c b/fsck/mount.c
+index df0314d..75bed75 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -194,7 +194,9 @@ static void print_xattr_entry(const struct f2fs_xattr_entry *ent)
+ {
+ 	const u8 *value = (const u8 *)&ent->e_name[ent->e_name_len];
+ 	const int size = le16_to_cpu(ent->e_value_size);
+-	const struct fscrypt_context *ctx;
++	char *enc_name = F2FS_XATTR_NAME_ENCRYPTION_CONTEXT;
++	u32 enc_name_len = strlen(enc_name);
++	const union fscrypt_context *ctx;
+ 	int i;
+ 
+ 	MSG(0, "\nxattr: e_name_index:%d e_name:", ent->e_name_index);
+@@ -211,22 +213,41 @@ static void print_xattr_entry(const struct f2fs_xattr_entry *ent)
+ 		return;
+ #endif
+ 	case F2FS_XATTR_INDEX_ENCRYPTION:
+-		ctx = (const struct fscrypt_context *)value;
+-		if (size != sizeof(*ctx) ||
+-		    ctx->format != FS_ENCRYPTION_CONTEXT_FORMAT_V1)
++		if (ent->e_name_len != enc_name_len ||
++			memcmp(ent->e_name, enc_name, enc_name_len))
+ 			break;
+-		MSG(0, "format: %d\n", ctx->format);
+-		MSG(0, "contents_encryption_mode: 0x%x\n", ctx->contents_encryption_mode);
+-		MSG(0, "filenames_encryption_mode: 0x%x\n", ctx->filenames_encryption_mode);
+-		MSG(0, "flags: 0x%x\n", ctx->flags);
+-		MSG(0, "master_key_descriptor: ");
+-		for (i = 0; i < FS_KEY_DESCRIPTOR_SIZE; i++)
+-			MSG(0, "%02X", ctx->master_key_descriptor[i]);
+-		MSG(0, "\nnonce: ");
+-		for (i = 0; i < FS_KEY_DERIVATION_NONCE_SIZE; i++)
+-			MSG(0, "%02X", ctx->nonce[i]);
+-		MSG(0, "\n");
+-		return;
++		ctx = (const union fscrypt_context *)value;
++		if (size == 0 || size != fscrypt_context_size(ctx))
++			break;
++		switch (ctx->version) {
++		case FSCRYPT_CONTEXT_V1:
++			MSG(0, "format: %d\n", ctx->version);
++			MSG(0, "contents_encryption_mode: 0x%x\n", ctx->v1.contents_encryption_mode);
++			MSG(0, "filenames_encryption_mode: 0x%x\n", ctx->v1.filenames_encryption_mode);
++			MSG(0, "flags: 0x%x\n", ctx->v1.flags);
++			MSG(0, "master_key_descriptor: ");
++			for (i = 0; i < FSCRYPT_KEY_DESCRIPTOR_SIZE; i++)
++				MSG(0, "%02X", ctx->v1.master_key_descriptor[i]);
++			MSG(0, "\nnonce: ");
++			for (i = 0; i < FSCRYPT_FILE_NONCE_SIZE; i++)
++				MSG(0, "%02X", ctx->v1.nonce[i]);
++			MSG(0, "\n");
++			return;
++		case FSCRYPT_CONTEXT_V2:
++			MSG(0, "format: %d\n", ctx->version);
++			MSG(0, "contents_encryption_mode: 0x%x\n", ctx->v2.contents_encryption_mode);
++			MSG(0, "filenames_encryption_mode: 0x%x\n", ctx->v2.filenames_encryption_mode);
++			MSG(0, "flags: 0x%x\n", ctx->v2.flags);
++			MSG(0, "master_key_identifier: ");
++			for (i = 0; i < FSCRYPT_KEY_IDENTIFIER_SIZE; i++)
++				MSG(0, "%02X", ctx->v2.master_key_identifier[i]);
++			MSG(0, "\nnonce: ");
++			for (i = 0; i < FSCRYPT_FILE_NONCE_SIZE; i++)
++				MSG(0, "%02X", ctx->v2.nonce[i]);
++			MSG(0, "\n");
++			return;
++		}
++		break;
+ 	}
+ 	for (i = 0; i < size; i++)
+ 		MSG(0, "%02X", value[i]);
+diff --git a/fsck/xattr.h b/fsck/xattr.h
+index 22ea35c..cddafa7 100644
+--- a/fsck/xattr.h
++++ b/fsck/xattr.h
+@@ -34,22 +34,61 @@ struct f2fs_xattr_entry {
+ 	char e_name[0];		/* attribute name */
+ };
+ 
+-#define FS_ENCRYPTION_CONTEXT_FORMAT_V1 1
+-#ifndef FS_KEY_DESCRIPTOR_SIZE
+-#define FS_KEY_DESCRIPTOR_SIZE 8
++#define FSCRYPT_CONTEXT_V1 1
++#define FSCRYPT_CONTEXT_V2 2
++#ifndef FSCRYPT_KEY_DESCRIPTOR_SIZE
++#define FSCRYPT_KEY_DESCRIPTOR_SIZE 8
+ #endif
+-#define FS_KEY_DERIVATION_NONCE_SIZE 16
++#ifndef FSCRYPT_KEY_IDENTIFIER_SIZE
++#define FSCRYPT_KEY_IDENTIFIER_SIZE	16
++#endif
++#define FSCRYPT_FILE_NONCE_SIZE 16
++#define F2FS_XATTR_NAME_ENCRYPTION_CONTEXT    "c"
++
++struct fscrypt_context_v1 {
++	u8 version; /* FSCRYPT_CONTEXT_V1 */
++	u8 contents_encryption_mode;
++	u8 filenames_encryption_mode;
++	u8 flags;
++	u8 master_key_descriptor[FSCRYPT_KEY_DESCRIPTOR_SIZE];
++	u8 nonce[FSCRYPT_FILE_NONCE_SIZE];
++};
+ 
+-struct fscrypt_context {
+-	u8 format;
++struct fscrypt_context_v2 {
++	u8 version; /* FSCRYPT_CONTEXT_V2 */
+ 	u8 contents_encryption_mode;
+ 	u8 filenames_encryption_mode;
+ 	u8 flags;
+-	u8 master_key_descriptor[FS_KEY_DESCRIPTOR_SIZE];
+-	u8 nonce[FS_KEY_DERIVATION_NONCE_SIZE];
++	u8 __reserved[4];
++	u8 master_key_identifier[FSCRYPT_KEY_IDENTIFIER_SIZE];
++	u8 nonce[FSCRYPT_FILE_NONCE_SIZE];
+ };
+ 
+-static_assert(sizeof(struct fscrypt_context) == 28, "");
++union fscrypt_context {
++	u8 version;
++	struct fscrypt_context_v1 v1;
++	struct fscrypt_context_v2 v2;
++};
++
++static_assert(sizeof(struct fscrypt_context_v1) == 28, "");
++static_assert(sizeof(struct fscrypt_context_v2) == 40, "");
++
++/*
++* Return the size expected for the given fscrypt_context based on its version
++* number, or 0 if the context version is unrecognized.
++*/
++static inline int fscrypt_context_size(const union fscrypt_context *ctx)
++{
++	switch (ctx->version) {
++	case FSCRYPT_CONTEXT_V1:
++		return sizeof(ctx->v1);
++	case FSCRYPT_CONTEXT_V2:
++		return sizeof(ctx->v2);
++	default:
++		MSG(0, "Unsupported fscrypt_context format!\n");
++	}
++	return 0;
++}
+ 
+ #define F2FS_ACL_VERSION	0x0001
+ 
 -- 
-2.39.0
+2.40.1
 
 
 
