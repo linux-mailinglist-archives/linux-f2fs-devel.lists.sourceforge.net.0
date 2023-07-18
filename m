@@ -2,84 +2,79 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67A2E757113
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jul 2023 02:50:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C88E675725F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jul 2023 05:37:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qLYv6-0007Eh-JM;
-	Tue, 18 Jul 2023 00:50:27 +0000
+	id 1qLbWu-0001hO-If;
+	Tue, 18 Jul 2023 03:37:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1qLYv3-0007EW-Lx
+ (envelope-from <jaegeuk@kernel.org>) id 1qLbWq-0001hI-JG
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Jul 2023 00:50:24 +0000
+ Tue, 18 Jul 2023 03:37:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QYiaMV5DhSvbtMurocMaC8W4p/gSEbAyUEWdW4FLWXM=; b=Qxz1WT5qRrIcg2lwowd259PYr4
- 7OCZHxh2HGn63i50lF0NOC0DNRmSK67S41T51GZj0AVENdTC8rKqQYpJiFjwlhNfV6y/xGZPwyXqw
- BJowAJADY7etPD4u1phcEySeIt6mw9PspRRi8+ssGkc53+5gsNHzzcRNbItygZeqODWM=;
+ bh=CWkwQcE4g8D4UrLpsfSAjGxcsIg6pZV2OqZut64Zaco=; b=CNRwyVPOPqNhidmdO6c1wyZeGg
+ aFJEGCJPF2THhVlHOu2bEqTYfnfmKU8DIcZvAG16Zxou7oYFgFOjwnXoTOVFWBS0DDDwLWCIktQ5A
+ XP7vMKncMCkXlIZG2R9QrSfbPcbBcfM5ASkKvjj05MYqAIHYTRbJ4pABceTAjiOXusP4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=QYiaMV5DhSvbtMurocMaC8W4p/gSEbAyUEWdW4FLWXM=; b=E5ZT726x22Kgas8iFxBFCpiCIO
- ldOytvyDePSc+D/7bmJ8UlK1FNF3NceROHmgqjFctG1sfG6KPD5Wc8zl5uBEuW0zCP2Zcv6zZuWK+
- iCdFUEodiFJDbVTjlQuBBtNaklZ4jFqeve8Xt+F0OUT1O4+8TvAJfc21hOpFmICHazWE=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=CWkwQcE4g8D4UrLpsfSAjGxcsIg6pZV2OqZut64Zaco=; b=K
+ +LbQc1d1TsMv/VWN3LU6pWGlc+Fuv3THLA8v2Y3QUQwQ8KoyzAhy4oJ9LfbSwnnjF8vbtNqkciy0G
+ rmfNLfgmoAUeqZfAZGYMioTYKTpH4Ho7iHI7ELQVdQN+EWjfXMYlGaSeETo8O96I7oMHWFHG8ZQSE
+ c3emwXdf/vMn6iTc=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qLYv3-0000wJ-Uw for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Jul 2023 00:50:24 +0000
+ id 1qLbWp-00BOnh-VA for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Jul 2023 03:37:36 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4856C6134B
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 67FC0611AB
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 Jul 2023 00:50:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C7D5C433C7;
- Tue, 18 Jul 2023 00:50:16 +0000 (UTC)
+ Tue, 18 Jul 2023 03:37:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC99DC433C7;
+ Tue, 18 Jul 2023 03:37:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1689641417;
- bh=oi0P5Z1z3e5pzyK9cu5qK0GfiD7NuaDR71W7Q+a65Jk=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=oMzLKQEVnVw0XAYge6OvtxePsHW0WLXe9CMi5BeIdrhUoyo/FI4t3CQvvUe8m47+Y
- Gu2oTnm868k1y7d0en6kx2EVKRJLYSSrprY7t4yo3Efx59u+0kk+KA+SVx8mF/X+3M
- N5zgrzCJljNazxbqMBMgx6dPmcUKDtukqLavRzOo1p9vzuNxXYyTieSNWduIUANDTm
- X1sSrsbvzWvYDnZYSceNROQlg6O0r4S/EBWbd1oUBE7Ev8Gp41SPRx5DvkuwUyzcWM
- uD0LI727s4knXDyUNDbfBHNofP3Pjb2ZGhUeXUqEx8SlQLxqcxVHQ1+cVc7qvdQPnJ
- T3pESM1nHv54Q==
-Message-ID: <50c3e421-3426-c06c-7ef5-ac74da475729@kernel.org>
-Date: Tue, 18 Jul 2023 08:50:14 +0800
+ s=k20201202; t=1689651449;
+ bh=hqFX19ePvyggE5tbXCUO/gQvepzTAxskGKPLrtqrsCk=;
+ h=From:To:Cc:Subject:Date:From;
+ b=GBsE0ZYVYD0aGMpJPLV8PPYdjDfJ88jehvx8DcDctj/hQtf/cY0EFLjjtl4ZhPFOj
+ Zl5H7g05zDh9XNNAergvZuIVLgZYBCgYc63lc3s3RPeODm2SRgqunKHrYlTMxgy8nT
+ SUzpCqnze1LxkltBv5resZQNP/2kkdGLpFtDPc8HWrhXJc0olOL5vUR5R08dqhcVEx
+ M62qlPw/hyh+z1xxjC8Oxy8dlwUL5ZUuHIco2JZaOArVbKo4epyKEsh3EuGRtm13BJ
+ ggvIreDFTlel7nPS6W1P0FPlT7te70G8skLXzLshxM+fQxbXvqONUm2+3rFzs2W030
+ hG/C9h12C5vgw==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Mon, 17 Jul 2023 20:37:28 -0700
+Message-ID: <20230718033728.1286392-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.41.0.255.g8b1d071c50-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
-References: <20230717181805.285894-1-jaegeuk@kernel.org>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230717181805.285894-1-jaegeuk@kernel.org>
-X-Spam-Score: -5.3 (-----)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/7/18 2:18, Jaegeuk Kim wrote: > In file included from
- external/f2fs-tools/lib/nls_utf8.c:29: >
- external/f2fs-tools/include/f2fs_fs.h:1781:44:
- error: call to undeclared function 'S_ISDIR'; ISO [...] 
- Content analysis details:   (-5.3 points, 6.0 required)
+ Content preview:  external/f2fs-tools/tools/f2fs_io/f2fs_io.c:1452:3: error:
+ format specifies type 'unsigned long' but the argument has type 'u64' (aka
+ 'unsigned long long') [-Werror,-Wformat] range.start, range.len, r [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -93,10 +88,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qLYv3-0000wJ-Uw
-Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: quick fix for Android build
+X-Headers-End: 1qLbWp-00BOnh-VA
+Subject: [f2fs-dev] [PATCH] f2fs_io: fix build warning
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,20 +102,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/7/18 2:18, Jaegeuk Kim wrote:
-> In file included from external/f2fs-tools/lib/nls_utf8.c:29:
-> external/f2fs-tools/include/f2fs_fs.h:1781:44: error: call to undeclared function 'S_ISDIR'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
->          raw_node->i.i_current_depth = cpu_to_le32(S_ISDIR(mode) ? 1 : 0);
-> 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+external/f2fs-tools/tools/f2fs_io/f2fs_io.c:1452:3: error: format specifies type 'unsigned long' but the argument has type 'u64' (aka 'unsigned long long') [-Werror,-Wformat]
+                range.start, range.len, ret);
+                ^~~~~~~~~~~
+external/f2fs-tools/tools/f2fs_io/f2fs_io.c:1452:16: error: format specifies type 'unsigned long' but the argument has type 'u64' (aka 'unsigned long long') [-Werror,-Wformat]
+                range.start, range.len, ret);
+                             ^~~~~~~~~
+2 errors generated.
+20:35:27 ninja failed with: exit status 1
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+---
+ tools/f2fs_io/f2fs_io.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks,
+diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
+index b4e73079e76c..73ac700f8209 100644
+--- a/tools/f2fs_io/f2fs_io.c
++++ b/tools/f2fs_io/f2fs_io.c
+@@ -1447,7 +1447,7 @@ static void do_gc_range(int argc, char **argv, const struct cmd_desc *cmd)
+ 		die_errno("F2FS_IOC_GARBAGE_COLLECT_RANGE failed");
+ 	}
+ 
+-	printf("trigger %s gc_range [%lu, %lu] ret=%d\n",
++	printf("trigger %s gc_range [%"PRIu64", %"PRIu64"] ret=%d\n",
+ 		range.sync ? "synchronous" : "asynchronous",
+ 		range.start, range.len, ret);
+ 	exit(0);
+-- 
+2.41.0.255.g8b1d071c50-goog
+
 
 
 _______________________________________________
