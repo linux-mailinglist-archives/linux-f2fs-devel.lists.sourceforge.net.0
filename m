@@ -2,112 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 272627576BD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jul 2023 10:38:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3552C758268
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 18 Jul 2023 18:47:53 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qLgDj-00014Z-Os;
-	Tue, 18 Jul 2023 08:38:10 +0000
+	id 1qLnrS-000761-Sa;
+	Tue, 18 Jul 2023 16:47:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chaoliu719@gmail.com>) id 1qLgDh-00014L-To
+ (envelope-from <krisman@suse.de>) id 1qLnrP-00075t-Qh
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Jul 2023 08:38:08 +0000
+ Tue, 18 Jul 2023 16:47:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
+ Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=30h3KzD2w48K2b2PswKmzqqYtrtvBjqTQadg4ahh90s=; b=Eyud+mzAW/zl1d810gAO/R/8LI
- hZLxOY4yQEG0xNWRZznSr2229r7YN30lXNlgP7JilIvQ0xg4ZiDb+Dc+EAnhFRxu/Ky4QPHCZ3Pt3
- Gr1sQ+OJMniapn6R42QcfGonjFm+4WtMo3NFBmx38BjRVSXe7gj/2PhrnuhehTivepKU=;
+ bh=0gG/SrZGF5/s3yIgwzjFlba62tVC4bEASQFHFHTinDw=; b=DR8375cQQC5ekkWaoRmNVh/i/5
+ 0xCdI4YCV44ZqVL1TXllHg9l9+2VTl1XGFyIW4Ewf/H9pKoDc/kPnKhcbw4F5QHrQZhN9jXf/HV6X
+ kicsRa46iB3YCkmBac4iDNSH+NHSMXJVkDDmZ956Iy4hzumt7NLZRyPcBUNLflh6otNo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=30h3KzD2w48K2b2PswKmzqqYtrtvBjqTQadg4ahh90s=; b=T
- 93PqTTkYDVspiInYkuwBp+nbTwrzW4g/iI5a3IBCZDJDURrqd+DIpJAIlZkJu/wM7I+SgakhAWn1P
- M00erpDbRzOi2q2YyafFjLUsEp5Oj3WaPJHd5rj30Az0tTCzJJJ8M0sYvsMVCyw6elnQaTJgUWcrw
- Np+q4w2WmaybBinU=;
-Received: from mail-pl1-f172.google.com ([209.85.214.172])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=0gG/SrZGF5/s3yIgwzjFlba62tVC4bEASQFHFHTinDw=; b=DXj8fURwBiXpeDtSLPYG2/15ef
+ ZgF0488MwN8DUDEhg/4lauO6WzvqyYkTSitWE3o32pu+hBZqnQzkdR3A9T5j+LvLy8FdlV20JycuN
+ vLHu/LcryW2IyEgz6BemK2NP0aaY95qI6BhKNUJsRygLonKBoVnb5BGneOd4/26w+r8k=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qLgDd-00047v-GR for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 18 Jul 2023 08:38:07 +0000
-Received: by mail-pl1-f172.google.com with SMTP id
- d9443c01a7336-1b9cd6a0051so33396685ad.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 18 Jul 2023 01:38:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689669478; x=1692261478;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=30h3KzD2w48K2b2PswKmzqqYtrtvBjqTQadg4ahh90s=;
- b=bOJ6K71cCVm6DplYNQv9p3wn+qKHMIc4I+ZLZ7zGmYk6ebDDJ5zRgl1AyGPcHSnQwl
- 3tP3Tvi/ziPemczNb/TLxLEMLmnROD5nXxxX3URdZ4TVrPEhTBBND2CJAIj4GrZk2tSX
- 7TUJNPe4L4+a7ZOtlWsxyAQPAQ+L4s0EPCQPyJTnkw0aVVP/Mu1DjHvcT12LUGjZpVRa
- Cn+JC3xtwaNo7LlBJlqiQs33ciaFevALpHby8Fesj5TrTC7bye8JAbocSFp9SxqU3FUY
- RlK+tEIlniFq2+SVEyPPMw0wtlsmcG8SU2qt7giEl+DV17lPAE46mUuRvqitP35lUMtP
- /WWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689669478; x=1692261478;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=30h3KzD2w48K2b2PswKmzqqYtrtvBjqTQadg4ahh90s=;
- b=HHDQSTluJ5L6T5umWorjl8MJDdd2steb91EwJDcEj7AFysXihMV+6ML3U7tXslClYK
- YQps+yCDjXAETpBrX6D563qJnEtNz532ZpHR+03pUfJTKw+W/jsODUPqDTodHGxgXHJy
- 7Kjwyl8hqsjrZdoiO+cIQKZz3rRPKP78cm7bpgnLpr6+kgnE++HmMCCNk/tgMckxAu/u
- HyTFtWfvXwROPQbMQe6v1/3JUiDwyxZj5Rh67BXhp5jKOwH5YJ+OzqqQTGSoHkdSuWOj
- F+fx6xHvuuCLWdsCXK/7JCU4dvu9W5GDgf8E/jb4cb4ui8siKWBHnkJ2cvPPVC+fcGOR
- uLTw==
-X-Gm-Message-State: ABy/qLY4TIBhdDyNVwR3Ll7HuhP6s6s0L5fY+IeFG9S+hABwgWN2Zdn7
- D/ZJ4ocbXcCoqZvzYOiXs9DKMIoVVfF5gfQn
-X-Google-Smtp-Source: APBJJlGVlccV5qjxxEhrAFezTsAhu/iOZCzOLJ5EZgBoIcb9uGek8/yf/wFF/6I5w4DqPUy4ClKAVw==
-X-Received: by 2002:a17:903:32c6:b0:1bb:3a7:6af7 with SMTP id
- i6-20020a17090332c600b001bb03a76af7mr2031650plr.23.1689669477654; 
- Tue, 18 Jul 2023 01:37:57 -0700 (PDT)
-Received: from localhost.localdomain ([156.236.96.165])
- by smtp.gmail.com with ESMTPSA id
- a1-20020a170902900100b001b8c689060dsm1262817plp.28.2023.07.18.01.37.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jul 2023 01:37:57 -0700 (PDT)
-From: Chao Liu <chaoliu719@gmail.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>,
-	Chao Yu <chao@kernel.org>
-Date: Tue, 18 Jul 2023 16:33:10 +0800
-Message-Id: <20230718083310.367067-1-chaoliu719@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ id 1qLnrL-00C4cc-8g for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 18 Jul 2023 16:47:40 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 02C3D21835;
+ Tue, 18 Jul 2023 16:47:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1689698847; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=0gG/SrZGF5/s3yIgwzjFlba62tVC4bEASQFHFHTinDw=;
+ b=sCqIZIaeY+lZmLjsOPsAbQI7GvoRp+QnzyxAweo04VRhB02G7zlyPODdtnMibPbRArJBXD
+ EmKHbQr2G1Hg/mlor+k1OhYUl6g3r4QossnKRSkX+YcTTQxPScxqx/r35yGnTw3fNEyVf5
+ ghYS+pV/sSq88EFejZe58ccHS7UeR7E=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1689698847;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=0gG/SrZGF5/s3yIgwzjFlba62tVC4bEASQFHFHTinDw=;
+ b=5Agcg3CzsovgtmLs9P2htHWvOOKunhSV4WopA6/9BhjEF+Ts1aNnzWoRaa1U1bHqG+xwJc
+ Fil0WRvm5Z4c3BAA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C0405134B0;
+ Tue, 18 Jul 2023 16:47:26 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id llAuKR7CtmTiUwAAMHmgww
+ (envelope-from <krisman@suse.de>); Tue, 18 Jul 2023 16:47:26 +0000
+From: Gabriel Krisman Bertazi <krisman@suse.de>
+To: Eric Biggers <ebiggers@kernel.org>
+References: <20230422000310.1802-1-krisman@suse.de>
+ <20230422000310.1802-4-krisman@suse.de>
+ <20230714050028.GC913@sol.localdomain>
+Date: Tue, 18 Jul 2023 12:47:25 -0400
+In-Reply-To: <20230714050028.GC913@sol.localdomain> (Eric Biggers's message of
+ "Thu, 13 Jul 2023 22:00:28 -0700")
+Message-ID: <87pm4p5fqa.fsf@suse.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chao Liu This patch is a cleanup: 1. Merge
- __drop_largest_extent()
- since it has only one caller. 2. Introduce __notify_largest_extent_updated()
- and __drop_largest_extent() to help manage largest and largest_up [...] 
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview:  Eric Biggers <ebiggers@kernel.org> writes: > I notice that
+ the existing vfat_revalidate_ci() in fs/fat/namei_vfat.c behaves > differently
+ in the 'flags == 0' case: > > > /* > * This may be nfsd (or something), anyway,
+ we can't see the > * inte [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.172 listed in list.dnswl.org]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [chaoliu719[at]gmail.com]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [chaoliu719[at]gmail.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.214.172 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -115,9 +106,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qLgDd-00047v-GR
-Subject: [f2fs-dev] [PATCH] f2fs: introduce two helper functions for the
- largest cached extent
+X-Headers-End: 1qLnrL-00C4cc-8g
+Subject: Re: [f2fs-dev] [PATCH v2 3/7] libfs: Validate negative dentries in
+ case-insensitive directories
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -129,201 +120,74 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Liu <liuchao@coolpad.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: brauner@kernel.org, tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
+ viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Chao Liu <liuchao@coolpad.com>
+Eric Biggers <ebiggers@kernel.org> writes:
 
-This patch is a cleanup:
-1. Merge __drop_largest_extent() since it has only one caller.
-2. Introduce __notify_largest_extent_updated() and
-   __drop_largest_extent() to help manage largest and largest_update
-   in extent_tree.
+> I notice that the existing vfat_revalidate_ci() in fs/fat/namei_vfat.c behaves
+> differently in the 'flags == 0' case:
+>
+>
+> 	/*
+> 	 * This may be nfsd (or something), anyway, we can't see the
+> 	 * intent of this. So, since this can be for creation, drop it.
+> 	 */
+> 	if (!flags)
+> 		return 0;
+>
+> I don't know whether that's really needed, but have you thought about this?
 
-Signed-off-by: Chao Liu <liuchao@coolpad.com>
----
- fs/f2fs/extent_cache.c | 60 +++++++++++++++++++-----------------------
- fs/f2fs/f2fs.h         |  4 +--
- 2 files changed, 29 insertions(+), 35 deletions(-)
+Hi Eric,
 
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 0e2d49140c07f..45dfddd8c3ad0 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -19,6 +19,12 @@
- #include "node.h"
- #include <trace/events/f2fs.h>
- 
-+static void __drop_largest_extent(struct extent_tree *et)
-+{
-+	et->largest.len = 0;
-+	et->largest_updated = true;
-+}
-+
- bool sanity_check_extent_cache(struct inode *inode)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-@@ -35,8 +41,7 @@ bool sanity_check_extent_cache(struct inode *inode)
- 
- 	/* Let's drop, if checkpoint got corrupted. */
- 	if (is_set_ckpt_flags(sbi, CP_ERROR_FLAG)) {
--		ei->len = 0;
--		et->largest_updated = true;
-+		__drop_largest_extent(et);
- 		return true;
- 	}
- 
-@@ -310,6 +315,8 @@ static void __detach_extent_node(struct f2fs_sb_info *sbi,
- 
- 	if (et->cached_en == en)
- 		et->cached_en = NULL;
-+
-+	/* keep the largest as we can still use it */
- 	kmem_cache_free(extent_node_slab, en);
- }
- 
-@@ -385,15 +392,6 @@ static unsigned int __free_extent_tree(struct f2fs_sb_info *sbi,
- 	return count - atomic_read(&et->node_cnt);
- }
- 
--static void __drop_largest_extent(struct extent_tree *et,
--					pgoff_t fofs, unsigned int len)
--{
--	if (fofs < et->largest.fofs + et->largest.len &&
--			fofs + len > et->largest.fofs) {
--		et->largest.len = 0;
--		et->largest_updated = true;
--	}
--}
- 
- void f2fs_init_read_extent_tree(struct inode *inode, struct page *ipage)
- {
-@@ -601,6 +599,15 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
- 	return en;
- }
- 
-+static void __notify_largest_extent_updated(struct extent_tree *et,
-+					struct inode *inode)
-+{
-+	if (et->type == EX_READ && et->largest_updated) {
-+		f2fs_mark_inode_dirty_sync(inode, true);
-+		et->largest_updated = false;
-+	}
-+}
-+
- static void __update_extent_tree_range(struct inode *inode,
- 			struct extent_info *tei, enum extent_type type)
- {
-@@ -612,7 +619,6 @@ static void __update_extent_tree_range(struct inode *inode,
- 	struct rb_node **insert_p = NULL, *insert_parent = NULL;
- 	unsigned int fofs = tei->fofs, len = tei->len;
- 	unsigned int end = fofs + len;
--	bool updated = false;
- 	bool leftmost = false;
- 
- 	if (!et)
-@@ -636,11 +642,10 @@ static void __update_extent_tree_range(struct inode *inode,
- 		prev = et->largest;
- 		dei.len = 0;
- 
--		/*
--		 * drop largest extent before lookup, in case it's already
--		 * been shrunk from extent tree
--		 */
--		__drop_largest_extent(et, fofs, len);
-+		/* updates may cause largest extent cache to become invalid */
-+		if (fofs < et->largest.fofs + et->largest.len &&
-+		    fofs + len > et->largest.fofs)
-+			__drop_largest_extent(et);
- 	}
- 
- 	/* 1. lookup first extent node in range [fofs, fofs + len - 1] */
-@@ -733,8 +738,7 @@ static void __update_extent_tree_range(struct inode *inode,
- 		if (dei.len >= 1 &&
- 				prev.len < F2FS_MIN_EXTENT_LEN &&
- 				et->largest.len < F2FS_MIN_EXTENT_LEN) {
--			et->largest.len = 0;
--			et->largest_updated = true;
-+			__drop_largest_extent(et);
- 			set_inode_flag(inode, FI_NO_EXTENT);
- 		}
- 	}
-@@ -742,10 +746,6 @@ static void __update_extent_tree_range(struct inode *inode,
- 	if (is_inode_flag_set(inode, FI_NO_EXTENT))
- 		__free_extent_tree(sbi, et);
- 
--	if (et->largest_updated) {
--		et->largest_updated = false;
--		updated = true;
--	}
- 	goto out_read_extent_cache;
- update_age_extent_cache:
- 	if (!tei->last_blocks)
-@@ -758,9 +758,7 @@ static void __update_extent_tree_range(struct inode *inode,
- 					insert_p, insert_parent, leftmost);
- out_read_extent_cache:
- 	write_unlock(&et->lock);
--
--	if (updated)
--		f2fs_mark_inode_dirty_sync(inode, true);
-+	__notify_largest_extent_updated(et, inode);
- }
- 
- #ifdef CONFIG_F2FS_FS_COMPRESSION
-@@ -1092,7 +1090,6 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
--	bool updated = false;
- 
- 	if (!__may_extent_tree(inode, type))
- 		return;
-@@ -1101,14 +1098,11 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
- 	__free_extent_tree(sbi, et);
- 	if (type == EX_READ) {
- 		set_inode_flag(inode, FI_NO_EXTENT);
--		if (et->largest.len) {
--			et->largest.len = 0;
--			updated = true;
--		}
-+		if (et->largest.len)
-+			__drop_largest_extent(et);
- 	}
- 	write_unlock(&et->lock);
--	if (updated)
--		f2fs_mark_inode_dirty_sync(inode, true);
-+	__notify_largest_extent_updated(et, inode);
- }
- 
- void f2fs_drop_extent_tree(struct inode *inode)
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index d372bedb0fe4e..da02e120e5ea6 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -665,7 +665,7 @@ struct extent_tree {
- 
- struct extent_tree_info {
- 	struct radix_tree_root extent_tree_root;/* cache extent cache entries */
--	struct mutex extent_tree_lock;	/* locking extent radix tree */
-+	struct mutex extent_tree_lock;		/* locking extent radix tree */
- 	struct list_head extent_list;		/* lru list for shrinker */
- 	spinlock_t extent_lock;			/* locking extent lru list */
- 	atomic_t total_ext_tree;		/* extent tree count */
-@@ -766,7 +766,7 @@ enum {
- 	FI_ACL_MODE,		/* indicate acl mode */
- 	FI_NO_ALLOC,		/* should not allocate any blocks */
- 	FI_FREE_NID,		/* free allocated nide */
--	FI_NO_EXTENT,		/* not to use the extent cache */
-+	FI_NO_EXTENT,		/* not to use the read extent cache */
- 	FI_INLINE_XATTR,	/* used for inline xattr */
- 	FI_INLINE_DATA,		/* used for inline data*/
- 	FI_INLINE_DENTRY,	/* used for inline dentry */
+I didn't look much into it before because, as you know, the vfat
+case-insensitive implementation is completely different than the
+ext4/f2fs code. But I think you are on to something.
+
+The original intent of this check was to safeguard against the case
+where d_revalidate would be called without nameidata from the filesystem
+helpers. The filesystems don't give the purpose of the lookup
+(nd->flags) so there is no way to tell if the dentry is being used for
+creation, and therefore we can't rely on the negative dentry for ci. The
+path is like this:
+
+lookup_one_len(...)
+  __lookup_hash(..., nd = NULL)
+     cached_lookup(...)
+       do_revalidate(parent, name, nd)
+         dentry->d_op->d_revalidate(parent, nd);
+
+Then !nd was dropped to pass flags directly around 2012, which
+overloaded the flags meaning. Which means, d_revalidate can
+still be called for creation without (LOOKUP_CREATE|...). For
+instance, in nfsd_create.  I wasn't considering this.
+
+This sucks, because we don't have enough information to avoid the name
+check in this case, so we'd also need memcmp there.  Except it won't be
+safe. because callers won't necessarily hold the parent lock in the path
+below.
+
+ lookup_one_unlocked()
+   lookup_dcache()
+      d_revalidate()  // called unlocked
+
+Thus, I'll have to add a similar:
+
+  if (!flags)
+    return 0;
+
+Ahead of the is_creation check.  It will solve it.
+
+But i think the issue is in VFS.  the lookup_one_* functions should have
+proper lookup flags, such that d_revalidate can tell the purpose of the
+lookup.
+
 -- 
-2.25.1
-
+Gabriel Krisman Bertazi
 
 
 _______________________________________________
