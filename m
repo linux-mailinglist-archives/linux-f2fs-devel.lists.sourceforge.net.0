@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83AC175A6B8
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Jul 2023 08:41:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5884875A80C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 20 Jul 2023 09:43:40 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qMNLf-0006SF-4q;
-	Thu, 20 Jul 2023 06:41:15 +0000
+	id 1qMOJw-0007Cy-3W;
+	Thu, 20 Jul 2023 07:43:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1qMNLd-0006S8-PT
+ (envelope-from <ebiggers@kernel.org>) id 1qMOJu-0007Cs-Bt
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 20 Jul 2023 06:41:14 +0000
+ Thu, 20 Jul 2023 07:43:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xPfDQnWVEYWyzCyaAVlpM3/f2ONEcTwcx2e8d4oWXe0=; b=k7s+GADiR4YJZBMEnsSqdcmcXn
- 13hB5m+WI1dJskxkOOZ/AvIWFH/eOjV5QAVQC8BaLmQQkF6D40fH9bFo0wTqCYIvygzfMmGgYw+a4
- mdhbCdx4dc0RU2PWcjyG62IUYJzvK+GTD0yM53cPHHVFx1rZy+75yBQ9JE10ZjUaerbM=;
+ bh=vc+6mn4GLjQ4v07KThVfWUEi9QVria8rDdcKrT/ysjw=; b=AeMhUGJLmk1ZjNI+ipsyGfQ89j
+ dCejYsVFg6gUgILEU0LsCERYjACyTzEkPmrCuDTAUdw914CdfQ44ZKpgcoLqhOrxfJoTDwjqYO+Ki
+ 4QarffKO+rTt6XWMXgCqKJKFPfqK2hvs4xjSt4y99yu/ScD3sYDgaaFhDexonN3inL9A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,42 +31,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xPfDQnWVEYWyzCyaAVlpM3/f2ONEcTwcx2e8d4oWXe0=; b=W4WPSkLmZ/c1ulvdJ0nE2C3F0z
- BAsvptsvFiJdBB1a2Sm69EiUhk210PR279qTi2RoL22eELRSrFcPaUmxuU/GxAe2ZzogY4r/HN+9g
- KMDznrJ96tcxmLImSZEDZdXdJ/0hprO9sqHIOWy0zGoSeXo0tpyeYfFnhhgOfVLMsIa0=;
+ bh=vc+6mn4GLjQ4v07KThVfWUEi9QVria8rDdcKrT/ysjw=; b=iQMfEX5yJJyf5bL/l+98LUR0VM
+ gcpydTuMN8HQvxZrM/WsOnMzw/H0wMvdpeYbgxCZ0HyUKYzkMjCSU6UzXLt7Gpn3E/hO34AdFCRwZ
+ GAuHSISA+amkMsOKErsmcsNyX7UAljqqkYW5x9dxmiOpA5uAwfGHYNAv81LKmpmPqI9o=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qMNLb-00Dngt-DS for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 20 Jul 2023 06:41:14 +0000
+ id 1qMOJu-00Dpor-4d for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 20 Jul 2023 07:43:30 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id D0BDC618E6;
- Thu, 20 Jul 2023 06:41:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 552DCC433C8;
- Thu, 20 Jul 2023 06:41:05 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1264D618FA;
+ Thu, 20 Jul 2023 07:43:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3FBDC433C8;
+ Thu, 20 Jul 2023 07:43:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1689835265;
- bh=Fwhi0QdXodruF3aPzC1ed/kg6TfNggfPfBJpEtC+W/0=;
+ s=k20201202; t=1689839000;
+ bh=wkKDK2+s1pOg2JvqCSmY6SM9Z1YuLDwx2K3C/NKe7xI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=U3DUGZGhvBF3pagyXCkuIbkh9GWM1q9AYfi36o6jEgra1mWC3ycE0FPJbD082kCx3
- P/oGbwjAUdlYldRThWZ3uS7bSE3pkxaRIbXNmSdNi0UWDHivL6pTg29lFOKLTRthOU
- iC8s17z9eMP1NeOAk5z1f1a2VBpMxhEVLRaRGkv/UsbUZ8UsVG697+gvR+E6iJx+TP
- qJPnqqJd7pgTPkaxsFOSqAE0DL3TBxWu1mFZ/pC+jJLV8imrOEO1jR0DsOS528zxQE
- YfMrkx1zDkyMtYRIFowDoE4JzZiVyL0HyUkV+5s/v757AXZ8VSgRktKzdncdvmsR2+
- ceIDdIs4pcx2Q==
-Date: Wed, 19 Jul 2023 23:41:03 -0700
+ b=eizBjjVGnO2vg1Tt2xjCxt2izjubXLk5XoIzez+G7NV6q1Pov2b3Jowbwu6LF+wXa
+ DNbJBORvYQCs0/CSWTrRQCmYn6FsD3maICWoXOwort8kKP5IwPbtFXh0cPUvhaD40s
+ ExnEkERouBZ6IjvHtIe0E+mUHUFZGymwvdhnJCHYdompFyjMBUL9wWaF6UroxpCZqR
+ Dcf1rsRIHmOSHhnxJooVrw450EAg1dAqIDazslQUWsPdBfInFNqjaoEzFkfSmavNZK
+ WkRV1J2XALtQTXEZC0xXWSOWH7LG+fDbExR5IFjiJMxBKUO/yvbkRuAfAebaoIjELj
+ 0C2zvsGLMPibA==
+Date: Thu, 20 Jul 2023 00:43:18 -0700
 From: Eric Biggers <ebiggers@kernel.org>
 To: Gabriel Krisman Bertazi <krisman@suse.de>
-Message-ID: <20230720064103.GC2607@sol.localdomain>
+Message-ID: <20230720074318.GA56170@sol.localdomain>
 References: <20230719221918.8937-1-krisman@suse.de>
- <20230719221918.8937-4-krisman@suse.de>
- <20230720060657.GB2607@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230720060657.GB2607@sol.localdomain>
+In-Reply-To: <20230719221918.8937-1-krisman@suse.de>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -74,16 +72,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Jul 19, 2023 at 11:06:57PM -0700, Eric Biggers wrote:
- > > I'm also having trouble understanding exactly when ->d_name is stable
- here. > AFAICS, unfortunately the VFS has an edge case where a d [...] 
+ Content preview:  Sorry, one more thing... On Wed, Jul 19, 2023 at 06:19:11PM
+ -0400, Gabriel Krisman Bertazi wrote: > > Another problem exists when turning
+ a negative dentry to positive. If > the negative dentry has a different case
+ than what [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -91,9 +90,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qMNLb-00Dngt-DS
-Subject: Re: [f2fs-dev] [PATCH v3 3/7] libfs: Validate negative dentries in
- case-insensitive directories
+X-Headers-End: 1qMOJu-00Dpor-4d
+Subject: Re: [f2fs-dev] [PATCH v3 0/7] Support negative dentries on
+ case-insensitive ext4 and f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,36 +106,40 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: brauner@kernel.org, tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
  viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
+ linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Jul 19, 2023 at 11:06:57PM -0700, Eric Biggers wrote:
+Sorry, one more thing...
+
+On Wed, Jul 19, 2023 at 06:19:11PM -0400, Gabriel Krisman Bertazi wrote:
 > 
-> I'm also having trouble understanding exactly when ->d_name is stable here.
-> AFAICS, unfortunately the VFS has an edge case where a dentry can be moved
-> without its parent's ->i_rwsem being held.  It happens when a subdirectory is
-> "found" under multiple names.  The VFS doesn't support directory hard links, so
-> if it finds a second link to a directory, it just moves the whole dentry tree to
-> the new location.  This can happen if a filesystem image is corrupted and
-> contains directory hard links.  Coincidentally, it can also happen in an
-> encrypted directory due to the no-key name => normal name transition...
+> Another problem exists when turning a negative dentry to positive.  If
+> the negative dentry has a different case than what is currently being
+> used for lookup, the dentry cannot be reused without changing its name,
+> in order to guarantee filename-preserving semantics to userspace.  We
+> need to either change the name or invalidate the dentry. This issue is
+> currently avoided in mainline, since the negative dentry mechanism is
+> disabled.
 
-Sorry, I think I got this slightly wrong.  The move does happen with the
-parent's ->i_rwsem held, but it's for read, not for write.  First, before
-->lookup is called, the ->i_rwsem of the parent directory is taken for read.
-->lookup() calls d_splice_alias() which can call __d_unalias() which does the
-__d_move().  If the old alias is in a different directory (which cannot happen
-in that fscrypt case, but can happen in the general "directory hard links"
-case), __d_unalias() takes that directory's ->i_rwsem for read too.
+Are you sure this problem even needs to be solved?
 
-So it looks like the parent's ->i_rwsem does indeed exclude moves of child
-dentries, but only if it's taken for *write*.  So I guess you can rely on that;
-it's just a bit more subtle than it first appears.  Though, some of your
-explanation seems to assume that a read lock is sufficient ("In __lookup_slow,
-either the parent inode is locked by the caller (lookup_slow) ..."), so maybe
-there is still a problem.
+It actually isn't specific to negative dentries.  If you have a file "foo"
+that's not in the dcache, and you open it (or look it up in any other way) as
+"FOO", then the positive dentry that gets created is named "FOO".
+
+As a result, the name that shows up in /proc/$pid/fd/ for anyone who has the
+file open is "FOO", not the true name "foo".  This is true even for processes
+that open it as "foo", as long as the dentry remains in the dcache.
+
+No negative dentries involved at all!
+
+Is your thinking that you just don't want to increase the number of ways in
+which this behavior can occur?
+
+Or, it looks like the positive dentry case is solvable using d_add_ci().
+So maybe you are planning to do that?  It's not clear to me.
 
 - Eric
 
