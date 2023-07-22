@@ -2,99 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 039D775D9AF
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 22 Jul 2023 06:30:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B158D75DCC3
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 22 Jul 2023 15:25:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qN4Ff-0006Lg-RG;
-	Sat, 22 Jul 2023 04:29:56 +0000
+	id 1qNCcB-00058P-V2;
+	Sat, 22 Jul 2023 13:25:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1qN4Fe-0006LX-NS
+ (envelope-from <chao@kernel.org>) id 1qNCcA-00058J-Bh
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 22 Jul 2023 04:29:55 +0000
+ Sat, 22 Jul 2023 13:25:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iE7CtcwGJ2XW9xfcT6j8HNt+PMo3woRj8eBHL125ou0=; b=R8M9yKGQ1N1MYmQ6Spr5ZB+PB7
- xlV3Nn3yOa+6fX6+SRgwogEhirn6JVdCZqRIV2NktF+rj7vi52egNzd5djkspRBYKFawD2p+C+IgZ
- HBKDwzSSMAIsZLopgX7fuJhfqO/BqYBdlZj1P1uOgJAkGsTSQPddN9XuPGeZ9fzrNhZ4=;
+ bh=7Wop0xat8BnoV2tH2/L/MH1ZyBwqBT449YIi13hqeWU=; b=fDorqZEqvbQZ70WjLVqWQWT8Bm
+ OEN+VUQZ3FGZAgirQbMEkVPBI0/OyXaJ7OodqwfCyat4STMhBBXj3C9DilhBmn8DNkwXxol6ENvzP
+ 73cq7+5CIJgT7JO3+csmGgWvfQzf9m19lMMpjgX71anT1xDb4E+Q1cRtOf3S1popS6Aw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
+ References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=iE7CtcwGJ2XW9xfcT6j8HNt+PMo3woRj8eBHL125ou0=; b=QJxkmXTNiXuojKg8486sstpuQG
- TDmYuaMtaT6tTPpA/GJA3C97O9+G8S7YlTee0wUDevTz4lTYU+YVNwrE2n4HAZITmGjCIuFrxcCeo
- JF8NzMrjlvvVNmIWa8RzEfg6VG6fdqtc1DAkcp7H//erKY2qaVCqQTOuILccz8tpMl5Q=;
+ bh=7Wop0xat8BnoV2tH2/L/MH1ZyBwqBT449YIi13hqeWU=; b=WIacy4yuxVUkKCaYuQzr2xv0oP
+ m8uTfK+9PGn0t3RuWxW+Y/mMthzKVmJj+NKUzzjtMjKGJpN1blWSigGMpv5kc5fasvvaOPRwCAt0E
+ olpFijQl+e1yaubCAcLYGpy+NS+ds00/YayfgHdcZ9tPHQ+ZUxHOT9iKqedcDr+28GIA=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qN4Fb-0002Qn-EM for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 22 Jul 2023 04:29:55 +0000
+ id 1qNCc4-0004Ys-0w for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 22 Jul 2023 13:25:42 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5EC6D60A4B;
- Sat, 22 Jul 2023 04:29:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78390C433C9;
- Sat, 22 Jul 2023 04:29:41 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 62BA260AF3;
+ Sat, 22 Jul 2023 13:25:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 59560C433C9;
+ Sat, 22 Jul 2023 13:25:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1690000181;
- bh=KBzG5bolVWZz3VdJ21H1CdN4OdjZ+jv8Wok+YIRRtaM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=YmY7ZCVl6UKWNvfLhwuerzICgHNPsKEXC/FamYqipG6pCKnUsYQIyCcIFkrOExufl
- 5onwwtqAeVw2LwsT69R8gDc4q3rd0vu7OncHVb15Qp7HCVpwzNf3o0iyxKH6LpWLB/
- xTBMOGfLvcnft4+poJKLEELPnbz4Wsh+9VLWIQDmNtA/LDk0vXbcw0Si91Mn4g6Vgn
- Bf8eqGbAqi/P/CuiG0D1HD9l7IwgvjxSEV1c8lcO8d4QS5nCZQeuU7J1GnF9veA9IL
- 0TnUXzHRYeVgZd/DoxskbGLuHjvP1zjRDKzMDVDou4yxKgdIL97+d4c9Tgj7qYMVyB
- 3mAdc3RH1bMNg==
-Date: Fri, 21 Jul 2023 21:29:39 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Gabriel Krisman Bertazi <krisman@suse.de>
-Message-ID: <20230722042939.GC5660@sol.localdomain>
-References: <20230719221918.8937-1-krisman@suse.de>
- <20230719221918.8937-4-krisman@suse.de>
- <20230720060657.GB2607@sol.localdomain>
- <20230720064103.GC2607@sol.localdomain> <87bkg53tr5.fsf@suse.de>
+ s=k20201202; t=1690032329;
+ bh=cBZVn6q0fbALKHQXUEmeXfI3nq2e37N2KDUI/cfm25w=;
+ h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
+ b=RMjK6H2oAAt/En87mtZSFB7xfzqJGBAHJVZJRbjd9b8c/PnIo32Q3Otf80LGO8Dqp
+ pgBhBjsQ58/kBLt2KHU4pMKrnMLbnAfVaQ+BF7nEcriBMAdIaoG41R719nWfyRc2dk
+ VFPXboZ9kLXRSKgLJ2I1DJNSDJYdaOXlg75nm1mxLw87dbbiqQT+qQ7EDBMTUzZGSj
+ pZq8eMdu+yIF3N2zf6kAVBSBNPuRN2DV8kMBWlc0DFtc0/xpWCGc+6JXgervEZfhsq
+ GhhudbbiXXq/MlZsIPHWYEtEMMyDxRWaiJcSQoj021Sr1G57a7vnYguF5kHCByV17W
+ 0MLhe6v2CAS8A==
+Message-ID: <a25c1baf-7e45-5489-d559-62462f0d94d3@kernel.org>
+Date: Sat, 22 Jul 2023 21:25:25 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <87bkg53tr5.fsf@suse.de>
-X-Spam-Score: -5.9 (-----)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+To: Chao Liu <chaoliu719@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20230718083310.367067-1-chaoliu719@gmail.com>
+Content-Language: en-US
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20230718083310.367067-1-chaoliu719@gmail.com>
+X-Spam-Score: -7.9 (-------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jul 21, 2023 at 04:16:30PM -0400, Gabriel Krisman
- Bertazi wrote: > Eric Biggers <ebiggers@kernel.org> writes: > > > On Wed,
- Jul 19, 2023 at 11:06:57PM -0700, Eric Biggers wrote: > >> > >> I'm [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On 2023/7/18 16:33,
+ Chao Liu wrote: > From: Chao Liu <liuchao@coolpad.com>
+ > > This patch is a cleanup: > 1. Merge __drop_largest_extent() since it
+ has only one caller. > 2. Introduce __notify_largest [...] 
+ Content analysis details:   (-7.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qN4Fb-0002Qn-EM
-Subject: Re: [f2fs-dev] [PATCH v3 3/7] libfs: Validate negative dentries in
- case-insensitive directories
+ valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qNCc4-0004Ys-0w
+Subject: Re: [f2fs-dev] [PATCH] f2fs: introduce two helper functions for the
+ largest cached extent
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,91 +107,205 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: brauner@kernel.org, tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
-Content-Type: text/plain; charset="us-ascii"
+Cc: Chao Liu <liuchao@coolpad.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Jul 21, 2023 at 04:16:30PM -0400, Gabriel Krisman Bertazi wrote:
-> Eric Biggers <ebiggers@kernel.org> writes:
+On 2023/7/18 16:33, Chao Liu wrote:
+> From: Chao Liu <liuchao@coolpad.com>
 > 
-> > On Wed, Jul 19, 2023 at 11:06:57PM -0700, Eric Biggers wrote:
-> >> 
-> >> I'm also having trouble understanding exactly when ->d_name is stable here.
-> >> AFAICS, unfortunately the VFS has an edge case where a dentry can be moved
-> >> without its parent's ->i_rwsem being held.  It happens when a subdirectory is
-> >> "found" under multiple names.  The VFS doesn't support directory hard links, so
-> >> if it finds a second link to a directory, it just moves the whole dentry tree to
-> >> the new location.  This can happen if a filesystem image is corrupted and
-> >> contains directory hard links.  Coincidentally, it can also happen in an
-> >> encrypted directory due to the no-key name => normal name transition...
-> >
-> > Sorry, I think I got this slightly wrong.  The move does happen with the
-> > parent's ->i_rwsem held, but it's for read, not for write.  First, before
-> > ->lookup is called, the ->i_rwsem of the parent directory is taken for read.
-> > ->lookup() calls d_splice_alias() which can call __d_unalias() which does the
-> > __d_move().  If the old alias is in a different directory (which cannot happen
-> > in that fscrypt case, but can happen in the general "directory hard links"
-> > case), __d_unalias() takes that directory's ->i_rwsem for read too.
-> >
-> > So it looks like the parent's ->i_rwsem does indeed exclude moves of child
-> > dentries, but only if it's taken for *write*.  So I guess you can rely on that;
-> > it's just a bit more subtle than it first appears.  Though, some of your
-> > explanation seems to assume that a read lock is sufficient ("In __lookup_slow,
-> > either the parent inode is locked by the caller (lookup_slow) ..."), so maybe
-> > there is still a problem.
+> This patch is a cleanup:
+> 1. Merge __drop_largest_extent() since it has only one caller.
+> 2. Introduce __notify_largest_extent_updated() and
+>     __drop_largest_extent() to help manage largest and largest_update
+>     in extent_tree.
 > 
-> I think I'm missing something on your clarification. I see your point
-> about __d_unalias, and I see in the case where alias->d_parent !=
-> dentry->d_parent we acquire the parent inode read lock:
+> Signed-off-by: Chao Liu <liuchao@coolpad.com>
+> ---
+>   fs/f2fs/extent_cache.c | 60 +++++++++++++++++++-----------------------
+>   fs/f2fs/f2fs.h         |  4 +--
+>   2 files changed, 29 insertions(+), 35 deletions(-)
 > 
-> static int __d_unalias(struct inode *inode,
-> 		struct dentry *dentry, struct dentry *alias)
-> {
-> ...
-> 	m1 = &dentry->d_sb->s_vfs_rename_mutex;
-> 	if (!inode_trylock_shared(alias->d_parent->d_inode))
-> 		goto out_err;
-> }
-> 
-> And it seems to use that for __d_move. In this case, __d_move changes
-> from under us even with a read lock, which is dangerous.  I think I
-> agree with your first email more than the clarification.
-> 
-> In the lookup_slow then:
-> 
-> lookup_slow()
->   d_lookup()
->     d_splice_alias()
->       __d_unalias()
->         __d_move()
-> 
-> this __d_move Can do a dentry move and race with d_revalidate even
-> though it has the parent read lock.
-> 
-> > So it looks like the parent's ->i_rwsem does indeed exclude moves of child
-> > dentries, but only if it's taken for *write*.  So I guess you can rely on that;
-> 
-> We can get away of it with acquiring the d_lock as you suggested, I
-> think.  But can you clarify the above? I wanna make sure I didn't miss
-> anything. I am indeed relying only on the read lock here, as you can see.
+> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
+> index 0e2d49140c07f..45dfddd8c3ad0 100644
+> --- a/fs/f2fs/extent_cache.c
+> +++ b/fs/f2fs/extent_cache.c
+> @@ -19,6 +19,12 @@
+>   #include "node.h"
+>   #include <trace/events/f2fs.h>
+>   
+> +static void __drop_largest_extent(struct extent_tree *et)
+> +{
+> +	et->largest.len = 0;
+> +	et->largest_updated = true;
+> +}
+> +
+>   bool sanity_check_extent_cache(struct inode *inode)
+>   {
+>   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> @@ -35,8 +41,7 @@ bool sanity_check_extent_cache(struct inode *inode)
+>   
+>   	/* Let's drop, if checkpoint got corrupted. */
+>   	if (is_set_ckpt_flags(sbi, CP_ERROR_FLAG)) {
+> -		ei->len = 0;
+> -		et->largest_updated = true;
+> +		__drop_largest_extent(et);
+>   		return true;
+>   	}
+>   
+> @@ -310,6 +315,8 @@ static void __detach_extent_node(struct f2fs_sb_info *sbi,
+>   
+>   	if (et->cached_en == en)
+>   		et->cached_en = NULL;
+> +
+> +	/* keep the largest as we can still use it */
+>   	kmem_cache_free(extent_node_slab, en);
+>   }
+>   
+> @@ -385,15 +392,6 @@ static unsigned int __free_extent_tree(struct f2fs_sb_info *sbi,
+>   	return count - atomic_read(&et->node_cnt);
+>   }
+>   
+> -static void __drop_largest_extent(struct extent_tree *et,
+> -					pgoff_t fofs, unsigned int len)
+> -{
+> -	if (fofs < et->largest.fofs + et->largest.len &&
+> -			fofs + len > et->largest.fofs) {
+> -		et->largest.len = 0;
+> -		et->largest_updated = true;
+> -	}
+> -}
+>   
+>   void f2fs_init_read_extent_tree(struct inode *inode, struct page *ipage)
+>   {
+> @@ -601,6 +599,15 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
+>   	return en;
+>   }
+>   
+> +static void __notify_largest_extent_updated(struct extent_tree *et,
+> +					struct inode *inode)
+> +{
+> +	if (et->type == EX_READ && et->largest_updated) {
+> +		f2fs_mark_inode_dirty_sync(inode, true);
+> +		et->largest_updated = false;
+> +	}
+> +}
+> +
+>   static void __update_extent_tree_range(struct inode *inode,
+>   			struct extent_info *tei, enum extent_type type)
+>   {
+> @@ -612,7 +619,6 @@ static void __update_extent_tree_range(struct inode *inode,
+>   	struct rb_node **insert_p = NULL, *insert_parent = NULL;
+>   	unsigned int fofs = tei->fofs, len = tei->len;
+>   	unsigned int end = fofs + len;
+> -	bool updated = false;
+>   	bool leftmost = false;
+>   
+>   	if (!et)
+> @@ -636,11 +642,10 @@ static void __update_extent_tree_range(struct inode *inode,
+>   		prev = et->largest;
+>   		dei.len = 0;
+>   
+> -		/*
+> -		 * drop largest extent before lookup, in case it's already
+> -		 * been shrunk from extent tree
+> -		 */
+> -		__drop_largest_extent(et, fofs, len);
+> +		/* updates may cause largest extent cache to become invalid */
+> +		if (fofs < et->largest.fofs + et->largest.len &&
+> +		    fofs + len > et->largest.fofs)
+> +			__drop_largest_extent(et);
+>   	}
+>   
+>   	/* 1. lookup first extent node in range [fofs, fofs + len - 1] */
+> @@ -733,8 +738,7 @@ static void __update_extent_tree_range(struct inode *inode,
+>   		if (dei.len >= 1 &&
+>   				prev.len < F2FS_MIN_EXTENT_LEN &&
+>   				et->largest.len < F2FS_MIN_EXTENT_LEN) {
+> -			et->largest.len = 0;
+> -			et->largest_updated = true;
+> +			__drop_largest_extent(et);
+>   			set_inode_flag(inode, FI_NO_EXTENT);
+>   		}
+>   	}
+> @@ -742,10 +746,6 @@ static void __update_extent_tree_range(struct inode *inode,
+>   	if (is_inode_flag_set(inode, FI_NO_EXTENT))
+>   		__free_extent_tree(sbi, et);
+>   
+> -	if (et->largest_updated) {
+> -		et->largest_updated = false;
+> -		updated = true;
+> -	}
+>   	goto out_read_extent_cache;
+>   update_age_extent_cache:
+>   	if (!tei->last_blocks)
+> @@ -758,9 +758,7 @@ static void __update_extent_tree_range(struct inode *inode,
+>   					insert_p, insert_parent, leftmost);
+>   out_read_extent_cache:
+>   	write_unlock(&et->lock);
+> -
+> -	if (updated)
+> -		f2fs_mark_inode_dirty_sync(inode, true);
+> +	__notify_largest_extent_updated(et, inode);
 
-In my first email I thought that __d_move() can be called without the parent
-inode's i_rwsem held at all.  In my second email I realized that it is always
-called with at least a read (shared) lock.
+et->largest_updated should be updated w/ &et->lock, this is why we checks
+local variable @updated here to decide whether setting inode dirty or not.
 
-The question is what kind of parent i_rwsem lock is guaranteed to be held by the
-caller of ->d_revalidate() when the name comparison is done.  Based on the
-above, it needs to be at least a write (exclusive) lock to exclude __d_move()
-without taking d_lock.  However, your analysis (in the commit message of "libfs:
-Validate negative dentries in case-insensitive directories") only talks about
-i_rwsem being "taken", without saying whether it's for read or write.  One thing
-you mentioned as taking i_rwsem is lookup_slow, but that only takes it for read.
-That seems like a problem, as it makes your analysis not correct.
+Thanks,
 
-- Eric
+>   }
+>   
+>   #ifdef CONFIG_F2FS_FS_COMPRESSION
+> @@ -1092,7 +1090,6 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
+>   {
+>   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+>   	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
+> -	bool updated = false;
+>   
+>   	if (!__may_extent_tree(inode, type))
+>   		return;
+> @@ -1101,14 +1098,11 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
+>   	__free_extent_tree(sbi, et);
+>   	if (type == EX_READ) {
+>   		set_inode_flag(inode, FI_NO_EXTENT);
+> -		if (et->largest.len) {
+> -			et->largest.len = 0;
+> -			updated = true;
+> -		}
+> +		if (et->largest.len)
+> +			__drop_largest_extent(et);
+>   	}
+>   	write_unlock(&et->lock);
+> -	if (updated)
+> -		f2fs_mark_inode_dirty_sync(inode, true);
+> +	__notify_largest_extent_updated(et, inode);
+>   }
+>   
+>   void f2fs_drop_extent_tree(struct inode *inode)
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index d372bedb0fe4e..da02e120e5ea6 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -665,7 +665,7 @@ struct extent_tree {
+>   
+>   struct extent_tree_info {
+>   	struct radix_tree_root extent_tree_root;/* cache extent cache entries */
+> -	struct mutex extent_tree_lock;	/* locking extent radix tree */
+> +	struct mutex extent_tree_lock;		/* locking extent radix tree */
+>   	struct list_head extent_list;		/* lru list for shrinker */
+>   	spinlock_t extent_lock;			/* locking extent lru list */
+>   	atomic_t total_ext_tree;		/* extent tree count */
+> @@ -766,7 +766,7 @@ enum {
+>   	FI_ACL_MODE,		/* indicate acl mode */
+>   	FI_NO_ALLOC,		/* should not allocate any blocks */
+>   	FI_FREE_NID,		/* free allocated nide */
+> -	FI_NO_EXTENT,		/* not to use the extent cache */
+> +	FI_NO_EXTENT,		/* not to use the read extent cache */
+>   	FI_INLINE_XATTR,	/* used for inline xattr */
+>   	FI_INLINE_DATA,		/* used for inline data*/
+>   	FI_INLINE_DENTRY,	/* used for inline dentry */
 
 
 _______________________________________________
