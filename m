@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C070E75E7B1
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jul 2023 03:32:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A6BD75E7B5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jul 2023 03:33:27 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qNkR0-00013R-0k;
-	Mon, 24 Jul 2023 01:32:26 +0000
+	id 1qNkRr-00014x-Di;
+	Mon, 24 Jul 2023 01:33:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1qNkQx-00013L-UX
+ (envelope-from <sashal@kernel.org>) id 1qNkRq-00014r-5T
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Jul 2023 01:32:24 +0000
+ Mon, 24 Jul 2023 01:33:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B+HbOxht0J+5PcDdP2CgOqWP25K08k6dOeFpgQ9/QbA=; b=ZsCon38HzzNgbGAuG5gWby9Zyf
- w7UDymv3Xaw/ZyLMooyG1EFEpGawOBdi+TjRnM8dfd9hrjEoy+A02qZH86wMtSKfMUzRuKFnbkO9+
- FPg4xOd33W1NfOvkIiRIU9l2J14qFmrBWrcEiW9RTi6RSq7lYpvocDUzZnTNV0VqrzmI=;
+ bh=/5IvtwbCcYeyrogqtUOhq1lPN3qI7duk51PztfQkBCY=; b=H+Aoi6EW2xvt+4qx25gOLul/Hv
+ IKTbjChOagEQHkTkKg+0v60qCldUeW6jPhu0/p11oDJXbS5jsOXC44S2+p7I364R9OeSGPt1Q/z36
+ oMm9VGU2SQsIdSMxPYqqcxyjqzw6oSdUQ4/PIgHUzosiBCFdt7CSjvCJOAfwfyrOq1a8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,44 +31,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=B+HbOxht0J+5PcDdP2CgOqWP25K08k6dOeFpgQ9/QbA=; b=UOmDzDi0dEGuD/3aG7dJztDkbe
- COUuPTpBK6feIYxNcqqi0WA8l/NR9k8BZqmqCSk86YHeG1MrvG4Q4CW0RlMP1beObYhvthKeTv3zQ
- lrvDHG8c9eUOJ/8u7YJIo6TOo0jfhyad+C30kszovC4O8qjpgb5xgf13OdH/wIevIW+I=;
+ bh=/5IvtwbCcYeyrogqtUOhq1lPN3qI7duk51PztfQkBCY=; b=dt8jqvoW9nE1VoT6ivcnaBNuow
+ N601lcO4lbIGZtf3aSSpFCORo/73U+YSFdsrKbaTSCJCNp3tY99zr5URPY8VHr1922msX9+vlxU1j
+ X6ssw83gIN0c826HyfsK6vPUnXGzpZSB4UfbBfukELh3X6odRw62F7MuJto5FKE75X2o=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qNkQx-0006qQ-Gk for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Jul 2023 01:32:24 +0000
+ id 1qNkRp-0000Sf-Mg for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Jul 2023 01:33:18 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id EFBAF60FAC;
- Mon, 24 Jul 2023 01:32:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93C4BC433C8;
- Mon, 24 Jul 2023 01:32:16 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 17DFE60FBE;
+ Mon, 24 Jul 2023 01:33:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ACF7CC433C7;
+ Mon, 24 Jul 2023 01:33:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1690162337;
- bh=ZJHmccshjD/9nRlQhEpIdwkZrJDSz+bsGh/6haxdcSQ=;
+ s=k20201202; t=1690162391;
+ bh=9sg7e9CQ/eMXJ0e8JW8PqVK0n93E3YbfwKNb4Hbv5wI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=KsJZd8IO7el7KoNNXrXAhdI1F4NhyIXfLIH7n9SO7ur1IucBJuvk+i9IUCCk7XJ3D
- ALd8hvsOePizEZo9RkYWOv8QAZCEoK1gkybVp/oHTl/JW/p1ZMoN5cDQ4kmFtnGHGe
- Ivg2uwSz7tezeTs8eRkIis7Z51h74Envlj9GUoaFZAHCjg9yJR6O3RonW7sqIK6ISy
- GNTNBUhJWEpvPug18QMrvkOmp8CnIeaEPzCEhsv1Y94Y3hooWfSZOjA2c71IVLj+sg
- DH0ahmIGMheYKpBQgXyudsRklCYhlZqFVkw3DX6o8uEMGvZZ/MHdx9lfEX5VBmK8oQ
- 2nZnbc7OyPysg==
+ b=XwYBsi4Q9fSf7RyvoeLFh5qZzXRX5j3H17LdErjMbqxAcy9Uw9jjvXlYq4XTATiPz
+ fRcWAFQFvMyUG3bwOTsaVRloRNZrBCQADBB0AsJtySqPcH0m3EmabeWTtxJ31ZMaoT
+ MjbvLvllkdnmfoEnoEY0XedstxqxLySbOmS4SpqzETba3JUvLdj7xfFAMk/TmdHql7
+ L5oYDsocsLzF/AUsGtTpD/vyEl75Ci43SPgqFnHZ1oMjBU2tBHHWozAKWQQbSYsDGv
+ uk9X0YofHzN+JsGpF0e9FvXT4ktV6V6+iWt5sekDE8ir1moX2gLIu0R8qm3ovAutx7
+ DjcVMto0BVN9A==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sun, 23 Jul 2023 21:31:26 -0400
-Message-Id: <20230724013140.2327815-26-sashal@kernel.org>
+Date: Sun, 23 Jul 2023 21:32:27 -0400
+Message-Id: <20230724013238.2329166-24-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230724013140.2327815-1-sashal@kernel.org>
-References: <20230724013140.2327815-1-sashal@kernel.org>
+In-Reply-To: <20230724013238.2329166-1-sashal@kernel.org>
+References: <20230724013238.2329166-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.4.5
+X-stable-base: Linux 6.1.40
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -95,8 +95,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qNkQx-0006qQ-Gk
-Subject: [f2fs-dev] [PATCH AUTOSEL 6.4 26/40] f2fs: fix to do sanity check
+X-Headers-End: 1qNkRp-0000Sf-Mg
+Subject: [f2fs-dev] [PATCH AUTOSEL 6.1 24/34] f2fs: fix to do sanity check
  on direct node in truncate_dnode()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -184,10 +184,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  4 files changed, 13 insertions(+), 8 deletions(-)
 
 diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index d211ee89c1586..91a090ff13a94 100644
+index 8d7dc76e6f935..2a3a07f426e13 100644
 --- a/fs/f2fs/f2fs.h
 +++ b/fs/f2fs/f2fs.h
-@@ -3432,7 +3432,6 @@ static inline bool __is_valid_data_blkaddr(block_t blkaddr)
+@@ -3431,7 +3431,6 @@ static inline bool __is_valid_data_blkaddr(block_t blkaddr)
   * file.c
   */
  int f2fs_sync_file(struct file *file, loff_t start, loff_t end, int datasync);
@@ -196,10 +196,10 @@ index d211ee89c1586..91a090ff13a94 100644
  int f2fs_truncate_blocks(struct inode *inode, u64 from, bool lock);
  int f2fs_truncate(struct inode *inode);
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 5ac53d2627d20..97d8917c5c9a5 100644
+index dbad2db68f1bc..d15f52c4466b6 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -627,11 +627,6 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
+@@ -628,11 +628,6 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
  					 dn->ofs_in_node, nr_free);
  }
  
@@ -212,10 +212,10 @@ index 5ac53d2627d20..97d8917c5c9a5 100644
  								bool cache_only)
  {
 diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index bd1dad5237967..2b34bfa7e0183 100644
+index 07419c3e42a52..e4b3d285302ff 100644
 --- a/fs/f2fs/node.c
 +++ b/fs/f2fs/node.c
-@@ -925,6 +925,7 @@ static int truncate_node(struct dnode_of_data *dn)
+@@ -923,6 +923,7 @@ static int truncate_node(struct dnode_of_data *dn)
  
  static int truncate_dnode(struct dnode_of_data *dn)
  {
@@ -223,7 +223,7 @@ index bd1dad5237967..2b34bfa7e0183 100644
  	struct page *page;
  	int err;
  
-@@ -932,16 +933,25 @@ static int truncate_dnode(struct dnode_of_data *dn)
+@@ -930,16 +931,25 @@ static int truncate_dnode(struct dnode_of_data *dn)
  		return 1;
  
  	/* get direct node */
@@ -252,10 +252,10 @@ index bd1dad5237967..2b34bfa7e0183 100644
  	if (err)
  		return err;
 diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
-index 1d6402529d10c..a82a4bb6ce68b 100644
+index ee0d75d9a302d..77055b239165a 100644
 --- a/include/linux/f2fs_fs.h
 +++ b/include/linux/f2fs_fs.h
-@@ -103,6 +103,7 @@ enum f2fs_error {
+@@ -104,6 +104,7 @@ enum f2fs_error {
  	ERROR_INCONSISTENT_SIT,
  	ERROR_CORRUPTED_VERITY_XATTR,
  	ERROR_CORRUPTED_XATTR,
