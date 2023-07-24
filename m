@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74C9775F149
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jul 2023 11:56:38 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C3D0175F146
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jul 2023 11:56:31 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qNsIq-0006ws-H5;
-	Mon, 24 Jul 2023 09:56:32 +0000
+	id 1qNsIm-00058D-6o;
+	Mon, 24 Jul 2023 09:56:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhengqi.arch@bytedance.com>) id 1qNsIo-0006wl-A7
+ (envelope-from <zhengqi.arch@bytedance.com>) id 1qNsIk-000585-Cd
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Jul 2023 09:56:30 +0000
+ Mon, 24 Jul 2023 09:56:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ztwb9n/1dXh113w/8xubUIoix8VXd/5rqVT4RvFn/tw=; b=Rib2L4j6XXGkeXGeW0DCW6isSK
- IDU/9TDpH/WchTb2ayMUI6YrdrC3Bdxw55/WJHp9wmUC6v91mUpGBvvp4CcYbBbFve9vtv09YDlus
- kKAb6M55ZFmV+QoOCfJSgYBN8stVifudD4k36TsUo5LQ+8GFIRaJdrhxtNAyImmYFmLo=;
+ bh=AVIFplaZ76DyAQXZ2ZJxr5973JfmLiF6XogxT7JwM8U=; b=XZoSRniMRW3VYEVEGFYKOorLBM
+ oayQqBegZ9PGJtVhOFqkM37FMqSeODJa+ni69Rn7uclwhYYDVSxLH1BVCh5Pf8H1ytSPRxpvR2yeS
+ 7Ee7DuiEXvf/GF7lZFD+fb3VzcMIqyQYyY/ZpOKMQ/irHWUkjRTnoZDmvpmE0Qo1SFE0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,60 +31,60 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ztwb9n/1dXh113w/8xubUIoix8VXd/5rqVT4RvFn/tw=; b=EkJycCx6SF3IO1h1m6pKiTHVqE
- Eb2O2ZH/8sZyZbJP8ZwAcYxz+hlHhmE2iqt5sDOU1pk7kZmn5SlE8fP9kGAZCMY6+kcj5TstNNmvG
- KNCGW7TJ90aZE4+rU0GSFzYCPhO7mlAFNcKMYeEWl5n9cX6V7jfJFIA9tV1AX3nUCDos=;
-Received: from mail-ot1-f51.google.com ([209.85.210.51])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=AVIFplaZ76DyAQXZ2ZJxr5973JfmLiF6XogxT7JwM8U=; b=IMLNCctsFSgFOnln/BV2aBvB2Z
+ W1QtS4WzC8JQujUcb+ayHpFhinheVq7aGUbig2fUkqDp0iK7hrdAxrIoLvlv1H+KJOVpeEbyV5ZN5
+ Ja0+xkLZiQSdlFTpqWu3MT2xG7gnhLl24SX0BQZ5Y0z3cql2TO4hZRfWqcR1meVOZYFs=;
+Received: from mail-ot1-f43.google.com ([209.85.210.43])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qNsIo-000Oml-6F for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Jul 2023 09:56:30 +0000
-Received: by mail-ot1-f51.google.com with SMTP id
- 46e09a7af769-6b9de4b0c1aso638936a34.1
+ id 1qNsIj-0004D5-J5 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Jul 2023 09:56:27 +0000
+Received: by mail-ot1-f43.google.com with SMTP id
+ 46e09a7af769-6b9cd6876bbso1009831a34.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 24 Jul 2023 02:56:30 -0700 (PDT)
+ Mon, 24 Jul 2023 02:56:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance.com; s=google; t=1690192584; x=1690797384;
+ d=bytedance.com; s=google; t=1690192580; x=1690797380;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ztwb9n/1dXh113w/8xubUIoix8VXd/5rqVT4RvFn/tw=;
- b=i2AY79f9q2KY9F5g4hYGF4+Tn1hRyFHBx8jG0TFZ8GGp9voWdqd22s8J05HZYIuKXf
- mM0i86J/t4UujTChkd9Gg8odNVKjYgQs+gNqH9tUv8aOj2fs7SEQCxWwl3nGze0PotcT
- beAfxrWvVYcDD8WarcnrsLB6M0VG1Yzhm31WF5tjPup2uGfCKH8VuToczMATAMKKRxLq
- 5xAuv7BG008Yj3Jm2lbAY/ZnGRN2kxwn66823u6qS7TWLZxz6w3L4wZrHS1j6+s5u33I
- KwDvG0Rt8Nt6CYJwTdXRc8yfdzDF9lYc8hs4AIMGA9cxpk67gGZFrLXBa/fNqGJtPg2r
- EHjw==
+ bh=AVIFplaZ76DyAQXZ2ZJxr5973JfmLiF6XogxT7JwM8U=;
+ b=jgSEkpoW0YR0mSryha13N+xFT1EGv8agOcZccmUhIrhG7F6ekeWyNAr61qOJdoyawb
+ EKbqLTtpXRslqxbo0Q46HMf6hjPE4iK6V5rQEenEBjSW1JzFNrIC2vSswwMfxxKMbtQQ
+ R5mYgwCzk7bYiyNTIpQiUaRZL42mQaVbqI5ZDf1yF09hwHTa/nOvHOJzhMgJtIrPf8/3
+ l0eHtrPwDpu8dw/CEaEkj7PDOCZygeEuEmorq48w+M6pF9djXpJ8lhvFI5FSovjVmejN
+ weFP/QJugH5Mc98ex7tdIELaLyoff2aJ9EsCBb3uohRIjc8SDCwVnfAXSxtebGL4sSVz
+ A94Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690192584; x=1690797384;
+ d=1e100.net; s=20221208; t=1690192580; x=1690797380;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ztwb9n/1dXh113w/8xubUIoix8VXd/5rqVT4RvFn/tw=;
- b=Z4Hgm+I/1cFtV03ru7ZzYsg7ls/fZHu1DPIu8DrvO19A5GHbfOdFEj7KpokPcv82SG
- XJ7GCXZiCHlmdaMNUHshVNG0nZHOc2DwTj+wme9EmPuwQtZ4yP0mFLifxdfOQ9h4jtDV
- PGeQQsmCR2egqw8R3jM3tX1XUTwSP8wI7kfJOybOJMe58NxZNDl0fJFgnOiMEzssV2Yf
- T3f8vxCiB0rn0JhN5TgX7DGpni/ryzz8l7j/lHfycqsF+Fu2PAFTHS/3PejETcXqQMKM
- Xwe+zfoS7VM64UuWkvdwulN1U7Jr9GAwlopHEECCU6B5Zm1vnY59cjAEritNYgRTNPpr
- 2TyA==
-X-Gm-Message-State: ABy/qLYDQO6ZSJA0p2ODrLt3pqvUYYVe7ZO5MIvc7LtakOV25Yvhye9K
- mBurebo/swGEYsTLLIiGjcx+roVfUMFXMxx3SyE=
-X-Google-Smtp-Source: APBJJlHRxCFTSeAmJPIiRwzXlrngv0y6n5gqphR6YCBFCcMRvGq0CtVM2WuFHUMj7p5y6QUWxkmpXA==
-X-Received: by 2002:a17:902:dad1:b0:1b8:aded:524c with SMTP id
- q17-20020a170902dad100b001b8aded524cmr12538511plx.1.1690192086608; 
- Mon, 24 Jul 2023 02:48:06 -0700 (PDT)
+ bh=AVIFplaZ76DyAQXZ2ZJxr5973JfmLiF6XogxT7JwM8U=;
+ b=A2G64yZBzNBvDSpzzKcgUjAj3pqvOvhcDgmLuzutR30kWyT0egGZnOFxxPq05y2xtA
+ 0oAOcKSvISJYZQ06LUWK23NUGk31O95FRJqHWo1t4YXTr/jTrPt8/EB7gNC/K03VV+aU
+ vG5nP/+/YBls25hJYkxh/YMIpmtbvSh5LZ/9qK8ivyMvDInlQ3oNYyw5YIKKVB/0OCqM
+ Blr8shN5CBiknrCt4PLn14nk6kzsGG8fGhpic4HGWjx6B0dG3ysePurpaZ48PdWoRNRM
+ Xor4+IsiCyo1RXpwJKXbBhgHj3HD24J1AP02u+0QD999ECREGVG5hT+i6MusQEpFZ/6N
+ 7nQA==
+X-Gm-Message-State: ABy/qLYH7wlIKxKUwKFRsvYwSOcIfLABaxRT01kBxFe8uh/gMVmN8ml3
+ VUx9K82WRcpb4TI+mjNCM9+yxw==
+X-Google-Smtp-Source: APBJJlFR9Ju5Vfb3AHUJ7jWuLYrfbcu6xuKCy8KktQCx0EpABVN8oHS8r350MQ/TdmOpiBIOkTrovA==
+X-Received: by 2002:a17:902:d484:b0:1b8:a27d:f591 with SMTP id
+ c4-20020a170902d48400b001b8a27df591mr12261184plg.5.1690192158548; 
+ Mon, 24 Jul 2023 02:49:18 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.47.54
+ d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.49.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jul 2023 02:48:06 -0700 (PDT)
+ Mon, 24 Jul 2023 02:49:18 -0700 (PDT)
 To: akpm@linux-foundation.org, david@fromorbit.com, tkhai@ya.ru,
  vbabka@suse.cz, roman.gushchin@linux.dev, djwong@kernel.org,
  brauner@kernel.org, paulmck@kernel.org, tytso@mit.edu,
  steven.price@arm.com, cel@kernel.org, senozhatsky@chromium.org,
  yujie.liu@intel.com, gregkh@linuxfoundation.org, muchun.song@linux.dev
-Date: Mon, 24 Jul 2023 17:43:22 +0800
-Message-Id: <20230724094354.90817-16-zhengqi.arch@bytedance.com>
+Date: Mon, 24 Jul 2023 17:43:28 +0800
+Message-Id: <20230724094354.90817-22-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
@@ -96,30 +96,28 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Use new APIs to dynamically allocate the dquota-cache
- shrinker.
- Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com> --- fs/quota/dquot.c
- | 17 ++++++++++------- 1 file changed, 10 insertions(+), 7 deletions(-) 
+ Content preview: Use new APIs to dynamically allocate the mm-shadow shrinker.
+ Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com> --- mm/workingset.c
+ | 26 ++++++++++++++ 1 file changed, 14 insertions(+), 12 deletions(-) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.43 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.51 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.51 listed in list.dnswl.org]
+ valid 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.43 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1qNsIo-000Oml-6F
-Subject: [f2fs-dev] [PATCH v2 15/47] quota: dynamically allocate the
- dquota-cache shrinker
+X-Headers-End: 1qNsIj-0004D5-J5
+Subject: [f2fs-dev] [PATCH v2 21/47] mm: workingset: dynamically allocate
+ the mm-shadow shrinker
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -147,47 +145,69 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Use new APIs to dynamically allocate the dquota-cache shrinker.
+Use new APIs to dynamically allocate the mm-shadow shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 ---
- fs/quota/dquot.c | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+ mm/workingset.c | 26 ++++++++++++++------------
+ 1 file changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/fs/quota/dquot.c b/fs/quota/dquot.c
-index e8232242dd34..6cb2d8911bc3 100644
---- a/fs/quota/dquot.c
-+++ b/fs/quota/dquot.c
-@@ -791,11 +791,7 @@ dqcache_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
- 	percpu_counter_read_positive(&dqstats.counter[DQST_FREE_DQUOTS]));
+diff --git a/mm/workingset.c b/mm/workingset.c
+index 4686ae363000..4bc85f739b13 100644
+--- a/mm/workingset.c
++++ b/mm/workingset.c
+@@ -762,12 +762,7 @@ static unsigned long scan_shadow_nodes(struct shrinker *shrinker,
+ 					NULL);
  }
  
--static struct shrinker dqcache_shrinker = {
--	.count_objects = dqcache_shrink_count,
--	.scan_objects = dqcache_shrink_scan,
--	.seeks = DEFAULT_SEEKS,
+-static struct shrinker workingset_shadow_shrinker = {
+-	.count_objects = count_shadow_nodes,
+-	.scan_objects = scan_shadow_nodes,
+-	.seeks = 0, /* ->count reports only fully expendable nodes */
+-	.flags = SHRINKER_NUMA_AWARE | SHRINKER_MEMCG_AWARE,
 -};
-+static struct shrinker *dqcache_shrinker;
++static struct shrinker *workingset_shadow_shrinker;
  
  /*
-  * Safely release dquot and put reference to dquot.
-@@ -2991,8 +2987,15 @@ static int __init dquot_init(void)
- 	pr_info("VFS: Dquot-cache hash table entries: %ld (order %ld,"
- 		" %ld bytes)\n", nr_hash, order, (PAGE_SIZE << order));
+  * Our list_lru->lock is IRQ-safe as it nests inside the IRQ-safe
+@@ -779,7 +774,7 @@ static int __init workingset_init(void)
+ {
+ 	unsigned int timestamp_bits;
+ 	unsigned int max_order;
+-	int ret;
++	int ret = -ENOMEM;
  
--	if (register_shrinker(&dqcache_shrinker, "dquota-cache"))
--		panic("Cannot register dquot shrinker");
-+	dqcache_shrinker = shrinker_alloc(0, "dquota-cache");
-+	if (!dqcache_shrinker)
-+		panic("Cannot allocate dquot shrinker");
-+
-+	dqcache_shrinker->count_objects = dqcache_shrink_count;
-+	dqcache_shrinker->scan_objects = dqcache_shrink_scan;
-+	dqcache_shrinker->seeks = DEFAULT_SEEKS;
-+
-+	shrinker_register(dqcache_shrinker);
+ 	BUILD_BUG_ON(BITS_PER_LONG < EVICTION_SHIFT);
+ 	/*
+@@ -796,17 +791,24 @@ static int __init workingset_init(void)
+ 	pr_info("workingset: timestamp_bits=%d max_order=%d bucket_order=%u\n",
+ 	       timestamp_bits, max_order, bucket_order);
  
+-	ret = prealloc_shrinker(&workingset_shadow_shrinker, "mm-shadow");
+-	if (ret)
++	workingset_shadow_shrinker = shrinker_alloc(SHRINKER_NUMA_AWARE |
++						    SHRINKER_MEMCG_AWARE,
++						    "mm-shadow");
++	if (!workingset_shadow_shrinker)
+ 		goto err;
++
+ 	ret = __list_lru_init(&shadow_nodes, true, &shadow_nodes_key,
+-			      &workingset_shadow_shrinker);
++			      workingset_shadow_shrinker);
+ 	if (ret)
+ 		goto err_list_lru;
+-	register_shrinker_prepared(&workingset_shadow_shrinker);
++
++	workingset_shadow_shrinker->count_objects = count_shadow_nodes;
++	workingset_shadow_shrinker->scan_objects = scan_shadow_nodes;
++
++	shrinker_register(workingset_shadow_shrinker);
  	return 0;
+ err_list_lru:
+-	free_prealloced_shrinker(&workingset_shadow_shrinker);
++	shrinker_free_non_registered(workingset_shadow_shrinker);
+ err:
+ 	return ret;
  }
 -- 
 2.30.2
