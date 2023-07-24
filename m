@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D850675F27B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jul 2023 12:15:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5870E75F286
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 24 Jul 2023 12:16:19 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qNsb0-0000rQ-Lp;
-	Mon, 24 Jul 2023 10:15:18 +0000
+	id 1qNsby-0000ug-4v;
+	Mon, 24 Jul 2023 10:16:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhengqi.arch@bytedance.com>) id 1qNsaz-0000qy-3D
+ (envelope-from <zhengqi.arch@bytedance.com>) id 1qNsbw-0000ua-Ka
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Jul 2023 10:15:17 +0000
+ Mon, 24 Jul 2023 10:16:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oXR+qbQ7FZSOf8H8/XKWyl6GGcPr2+dTjVkbZb7uW4E=; b=KfgYaQSE2w+2OBU5KgNxykg/L5
- jl+ANuH6JpOA6ihDFXM7lBoke8/9cJbadBdJ/qH8f3/hPMAZ3eYRUrqGpN6oOD12XvTKjI4rwbLJg
- LMEEUBPNKTEcsXHxOqjk2nz+7TCImmwmyXi0kpCb0ehexAkIf7bBeiGQBtzRxi1GRpug=;
+ bh=PA74NunQFszlW8RpIb5KtNwL3Pn/7Z7EgMABUrgFylU=; b=Y2mfncEqa5k93vuZ6nodz3K8tQ
+ 7Lqp658Scm8CkD6uDS+rGbvla0EU5b4Nr27Rs4ob13djcUWUJjkTwkkkttFbz8xSGG3FXA2/FFg4g
+ lqYDxEQ1dmuXMorNwZio3T91RexiYqJZxWwVFep6Rx+pUEoQW3t5kpLgtLNQ/wYt4074=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,60 +31,60 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=oXR+qbQ7FZSOf8H8/XKWyl6GGcPr2+dTjVkbZb7uW4E=; b=DAYnVZibcFMk1t0ZdfIEeLS8br
- K3egL3PE7y+50awT5nngX3FDFBZ4e8YCBcv2q0ouYhPKQq2pGibCrmaP5ecZ7q2wLqCQKDFTqr4pW
- rxMxchmYYQrSr0Z8j4erRvzqSAWhWhnE3uO5B1pudK3Qdd+87tAYPQrpIbtZs0vT4Y7E=;
-Received: from mail-qv1-f41.google.com ([209.85.219.41])
+ bh=PA74NunQFszlW8RpIb5KtNwL3Pn/7Z7EgMABUrgFylU=; b=ew/MHZ5JHygF/3pdXtMYkys1gA
+ F5O/nXE2nEGASZEkGMa17pjNeP5An1ukN8QARssOyg81aUYVdZpOhlQtIxqmndynM78PMV85ZvpcU
+ cCq5+CPVMUiLViyxZ0CmseoeMEN6VwTf3BerrRiPD5xtg1KMc3gfvW3q0LUH3pin7sYU=;
+Received: from mail-qv1-f44.google.com ([209.85.219.44])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qNsas-0004md-TA for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 24 Jul 2023 10:15:14 +0000
-Received: by mail-qv1-f41.google.com with SMTP id
- 6a1803df08f44-62fe3f0905aso6911786d6.0
+ id 1qNsbu-0004os-Ns for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 24 Jul 2023 10:16:16 +0000
+Received: by mail-qv1-f44.google.com with SMTP id
+ 6a1803df08f44-62fe3f0905aso6913816d6.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 24 Jul 2023 03:15:10 -0700 (PDT)
+ Mon, 24 Jul 2023 03:16:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance.com; s=google; t=1690193705; x=1690798505;
+ d=bytedance.com; s=google; t=1690193769; x=1690798569;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oXR+qbQ7FZSOf8H8/XKWyl6GGcPr2+dTjVkbZb7uW4E=;
- b=U0nzhM1HOyRJlvMdX+5cUTF7cnwK/bPq9FGVlTLsyOJUzun8Hv/e5t7o3kyj/uWv5U
- /T8mJ/UN/ApeICuRsJX0tpfR2IgVneGKlHYe85AoBE+OEc1ijSh8BuPS6EXL029qvkwR
- e9RXOx/aN6bm15otZ2k4IzIZs35bbC+kRDdQunQ/RJakrlF6xKJLYVshtJEh4K1Ml5j2
- BzVLjap0HmbzJ19Yh1astzsme+mpO0Eoltgwnf3lMU3u2OroW3c25bThUDAxdWQLhE/e
- Jv9N3bfXCE4Glbivugq3+cEaI8ikDiUkGHEQKe2oqBRE1SGQgXAyMZjv8y9TKb1MPNVK
- 8YgA==
+ bh=PA74NunQFszlW8RpIb5KtNwL3Pn/7Z7EgMABUrgFylU=;
+ b=XjT+yUz2O85D5/dtd9hhvonEm1fFLx715tNJo9vnDhTz3pop5umusU32TD24cY/f3h
+ n/KkAQIYa+4oEcuzBT1gFP/QhBMdnoNVJcvL92aBQf9ha4S1b97FJRbfmcZsn5OdCyDq
+ MYSKCr3VVdK7GhO2SHQAXhP/Az4aSjO1BLn61pMTp2PV6HHbdFbgM/hNhPHZWc8bugp2
+ 9vE1zVwUWxdSFvPMq9f4QVuF4G18Swq1m+umgT8QK+6VO2q5iipqdM7qwYXqpXi58l2L
+ pEBpxxcqJnR4rEDAoDuRcP46urXhKOeC2+Ac/XD1sXro0ZxuXUEtDKATWbLDdPp4Ziq7
+ DSYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690193705; x=1690798505;
+ d=1e100.net; s=20221208; t=1690193769; x=1690798569;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oXR+qbQ7FZSOf8H8/XKWyl6GGcPr2+dTjVkbZb7uW4E=;
- b=Hn7EPzfr6jcgBlQBt9huAxz89Ak6orlhY4cKUEX/y6hx8Ukr7rtzj+CRkpK/axCbGs
- uvq7tfvfhB4Q5H5lpYuVMLcFm4gxk/jo6RrdEwYR5ej+PLcogSUNJQ3oRYfTBnsgdtSy
- xdZ73JRicqgNrbmZL1LzAfhteC5DK/hX2IMkNFFvzTs6EdWPQgZxpaYYKNAF4Y85duKc
- 1GVUTCTcKX0lHg1psOHlNP+mEv1qYbud9MRgXGB8dp02Hj8l4Yy3ajNTRUuVsaOQhurA
- QhvlUgFOZXHzK+2074yQej7ODFbQ8p6a2ko7gp5jnjgiam1/fE6KNtjTrjbjKI1bQ3dy
- Oq8g==
-X-Gm-Message-State: ABy/qLYmQiKXO4PTWwnzv3fP5H9swT3UnriMOO1EfoVRW4ZRqSnfTUmW
- gTkPy5IaB3vYXvkAM2131bjp2Bcn6QdUp5wB3NI=
-X-Google-Smtp-Source: APBJJlFC05XpXuobjW4LsGQFjmg3Q9TZDeGvX5MkKK/m+2sDEjZkN7MidhVsDpGMtrBJxCeRn4k3XA==
-X-Received: by 2002:a17:903:22ce:b0:1b8:2ba0:c9a8 with SMTP id
- y14-20020a17090322ce00b001b82ba0c9a8mr12484346plg.2.1690192289977; 
- Mon, 24 Jul 2023 02:51:29 -0700 (PDT)
+ bh=PA74NunQFszlW8RpIb5KtNwL3Pn/7Z7EgMABUrgFylU=;
+ b=cHSMB6XUmCVnsQsvDvZpgzpYloxO3tZJ3OqTPpfysfZoiJEc8ZdFHV7phEcOzfDXpt
+ sEacjhvJhnjvzlaKIk5zwmAYKGKJPO+szdE4h7K05msygAxT/lBWrObyI7yUkPNF8TLW
+ HIvSLZwpLhMbRQOVuk+vIXgoWptRVLW+Tr04rj03cJxxoG3gE8tmWNTjEb2/PcB8hzx/
+ x6IcPKNKxNZ2NxjifvOjRBQe5F44pNHpel2+862fCK+2Wouxrp//9GToSAGqsX+34Q10
+ lj5hhiIYhBpwLDlLh/8dVp0uhsURGU4dAX5Fo2DQtbgs1O2HCKretY6yLJh+PDuBDZZ9
+ 2ExA==
+X-Gm-Message-State: ABy/qLZncZ2n7wPmW+RJzxiT+qZpwCy7DCH5VZEQZOcfZAYD5/xB1HOM
+ LNVHA3aBDq9wdOAMmfqChwdrDmTt1Zc3JlI5jc0=
+X-Google-Smtp-Source: APBJJlG2oOvKNbqCVYKCsLLrFI6N3Peh10WK+D3LiX3VUR0Gh2vD9sbZ8AKvOgxEZEiSv+Xi5/CKrg==
+X-Received: by 2002:a17:902:d4cb:b0:1b1:9272:55e2 with SMTP id
+ o11-20020a170902d4cb00b001b1927255e2mr12377128plg.3.1690192313997; 
+ Mon, 24 Jul 2023 02:51:53 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.51.18
+ d5-20020a170902c18500b001bb20380bf2sm8467233pld.13.2023.07.24.02.51.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Jul 2023 02:51:29 -0700 (PDT)
+ Mon, 24 Jul 2023 02:51:53 -0700 (PDT)
 To: akpm@linux-foundation.org, david@fromorbit.com, tkhai@ya.ru,
  vbabka@suse.cz, roman.gushchin@linux.dev, djwong@kernel.org,
  brauner@kernel.org, paulmck@kernel.org, tytso@mit.edu,
  steven.price@arm.com, cel@kernel.org, senozhatsky@chromium.org,
  yujie.liu@intel.com, gregkh@linuxfoundation.org, muchun.song@linux.dev
-Date: Mon, 24 Jul 2023 17:43:39 +0800
-Message-Id: <20230724094354.90817-33-zhengqi.arch@bytedance.com>
+Date: Mon, 24 Jul 2023 17:43:41 +0800
+Message-Id: <20230724094354.90817-35-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
@@ -97,15 +97,17 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  In preparation for implementing lockless slab shrink, use
- new APIs to dynamically allocate the ext4-es shrinker, so that it can be freed
- asynchronously using kfree_rcu(). Then it doesn't need to wait [...] 
+ new APIs to dynamically allocate the nfsd-client shrinker, so that it can
+ be freed asynchronously using kfree_rcu(). Then it doesn't need to w [...]
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.44 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.219.41 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.219.44 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -113,11 +115,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.219.41 listed in list.dnswl.org]
-X-Headers-End: 1qNsas-0004md-TA
-Subject: [f2fs-dev] [PATCH v2 32/47] ext4: dynamically allocate the ext4-es
- shrinker
+X-Headers-End: 1qNsbu-0004os-Ns
+Subject: [f2fs-dev] [PATCH v2 34/47] nfsd: dynamically allocate the
+ nfsd-client shrinker
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -139,92 +139,84 @@ Cc: kvm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  linux-bcache@vger.kernel.org, Qi Zheng <zhengqi.arch@bytedance.com>,
  linux-raid@vger.kernel.org, linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
+ linux-xfs@vger.kernel.org, Chuck Lever <chuck.lever@oracle.com>,
+ linux-fsdevel@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 In preparation for implementing lockless slab shrink, use new APIs to
-dynamically allocate the ext4-es shrinker, so that it can be freed
+dynamically allocate the nfsd-client shrinker, so that it can be freed
 asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
-read-side critical section when releasing the struct ext4_sb_info.
+read-side critical section when releasing the struct nfsd_net.
 
+Acked-by: Chuck Lever <chuck.lever@oracle.com>
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 ---
- fs/ext4/ext4.h           |  2 +-
- fs/ext4/extents_status.c | 22 ++++++++++++----------
- 2 files changed, 13 insertions(+), 11 deletions(-)
+ fs/nfsd/netns.h     |  2 +-
+ fs/nfsd/nfs4state.c | 20 ++++++++++++--------
+ 2 files changed, 13 insertions(+), 9 deletions(-)
 
-diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-index 0a2d55faa095..1bd150d454f5 100644
---- a/fs/ext4/ext4.h
-+++ b/fs/ext4/ext4.h
-@@ -1651,7 +1651,7 @@ struct ext4_sb_info {
- 	__u32 s_csum_seed;
+diff --git a/fs/nfsd/netns.h b/fs/nfsd/netns.h
+index ec49b200b797..f669444d5336 100644
+--- a/fs/nfsd/netns.h
++++ b/fs/nfsd/netns.h
+@@ -195,7 +195,7 @@ struct nfsd_net {
+ 	int			nfs4_max_clients;
  
- 	/* Reclaim extents from extent status tree */
--	struct shrinker s_es_shrinker;
-+	struct shrinker *s_es_shrinker;
- 	struct list_head s_es_list;	/* List of inodes with reclaimable extents */
- 	long s_es_nr_inode;
- 	struct ext4_es_stats s_es_stats;
-diff --git a/fs/ext4/extents_status.c b/fs/ext4/extents_status.c
-index 9b5b8951afb4..8d4a959dd32f 100644
---- a/fs/ext4/extents_status.c
-+++ b/fs/ext4/extents_status.c
-@@ -1596,7 +1596,7 @@ static unsigned long ext4_es_count(struct shrinker *shrink,
- 	unsigned long nr;
- 	struct ext4_sb_info *sbi;
+ 	atomic_t		nfsd_courtesy_clients;
+-	struct shrinker		nfsd_client_shrinker;
++	struct shrinker		*nfsd_client_shrinker;
+ 	struct work_struct	nfsd_shrinker_work;
+ };
  
--	sbi = container_of(shrink, struct ext4_sb_info, s_es_shrinker);
-+	sbi = shrink->private_data;
- 	nr = percpu_counter_read_positive(&sbi->s_es_stats.es_stats_shk_cnt);
- 	trace_ext4_es_shrink_count(sbi->s_sb, sc->nr_to_scan, nr);
- 	return nr;
-@@ -1605,8 +1605,7 @@ static unsigned long ext4_es_count(struct shrinker *shrink,
- static unsigned long ext4_es_scan(struct shrinker *shrink,
- 				  struct shrink_control *sc)
+diff --git a/fs/nfsd/nfs4state.c b/fs/nfsd/nfs4state.c
+index 3339177f8e2f..c7a4616cd866 100644
+--- a/fs/nfsd/nfs4state.c
++++ b/fs/nfsd/nfs4state.c
+@@ -4388,8 +4388,7 @@ static unsigned long
+ nfsd4_state_shrinker_count(struct shrinker *shrink, struct shrink_control *sc)
  {
--	struct ext4_sb_info *sbi = container_of(shrink,
--					struct ext4_sb_info, s_es_shrinker);
-+	struct ext4_sb_info *sbi = shrink->private_data;
- 	int nr_to_scan = sc->nr_to_scan;
- 	int ret, nr_shrunk;
+ 	int count;
+-	struct nfsd_net *nn = container_of(shrink,
+-			struct nfsd_net, nfsd_client_shrinker);
++	struct nfsd_net *nn = shrink->private_data;
  
-@@ -1690,14 +1689,17 @@ int ext4_es_register_shrinker(struct ext4_sb_info *sbi)
- 	if (err)
- 		goto err3;
+ 	count = atomic_read(&nn->nfsd_courtesy_clients);
+ 	if (!count)
+@@ -8125,12 +8124,17 @@ static int nfs4_state_create_net(struct net *net)
+ 	INIT_WORK(&nn->nfsd_shrinker_work, nfsd4_state_shrinker_worker);
+ 	get_net(net);
  
--	sbi->s_es_shrinker.scan_objects = ext4_es_scan;
--	sbi->s_es_shrinker.count_objects = ext4_es_count;
--	sbi->s_es_shrinker.seeks = DEFAULT_SEEKS;
--	err = register_shrinker(&sbi->s_es_shrinker, "ext4-es:%s",
--				sbi->s_sb->s_id);
--	if (err)
-+	sbi->s_es_shrinker = shrinker_alloc(0, "ext4-es:%s", sbi->s_sb->s_id);
-+	if (!sbi->s_es_shrinker)
- 		goto err4;
- 
-+	sbi->s_es_shrinker->scan_objects = ext4_es_scan;
-+	sbi->s_es_shrinker->count_objects = ext4_es_count;
-+	sbi->s_es_shrinker->seeks = DEFAULT_SEEKS;
-+	sbi->s_es_shrinker->private_data = sbi;
+-	nn->nfsd_client_shrinker.scan_objects = nfsd4_state_shrinker_scan;
+-	nn->nfsd_client_shrinker.count_objects = nfsd4_state_shrinker_count;
+-	nn->nfsd_client_shrinker.seeks = DEFAULT_SEEKS;
+-
+-	if (register_shrinker(&nn->nfsd_client_shrinker, "nfsd-client"))
++	nn->nfsd_client_shrinker = shrinker_alloc(0, "nfsd-client");
++	if (!nn->nfsd_client_shrinker)
+ 		goto err_shrinker;
 +
-+	shrinker_register(sbi->s_es_shrinker);
++	nn->nfsd_client_shrinker->scan_objects = nfsd4_state_shrinker_scan;
++	nn->nfsd_client_shrinker->count_objects = nfsd4_state_shrinker_count;
++	nn->nfsd_client_shrinker->seeks = DEFAULT_SEEKS;
++	nn->nfsd_client_shrinker->private_data = nn;
++
++	shrinker_register(nn->nfsd_client_shrinker);
 +
  	return 0;
- err4:
- 	percpu_counter_destroy(&sbi->s_es_stats.es_stats_shk_cnt);
-@@ -1716,7 +1718,7 @@ void ext4_es_unregister_shrinker(struct ext4_sb_info *sbi)
- 	percpu_counter_destroy(&sbi->s_es_stats.es_stats_cache_misses);
- 	percpu_counter_destroy(&sbi->s_es_stats.es_stats_all_cnt);
- 	percpu_counter_destroy(&sbi->s_es_stats.es_stats_shk_cnt);
--	unregister_shrinker(&sbi->s_es_shrinker);
-+	shrinker_unregister(sbi->s_es_shrinker);
- }
  
- /*
+ err_shrinker:
+@@ -8228,7 +8232,7 @@ nfs4_state_shutdown_net(struct net *net)
+ 	struct list_head *pos, *next, reaplist;
+ 	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
+ 
+-	unregister_shrinker(&nn->nfsd_client_shrinker);
++	shrinker_unregister(nn->nfsd_client_shrinker);
+ 	cancel_work(&nn->nfsd_shrinker_work);
+ 	cancel_delayed_work_sync(&nn->laundromat_work);
+ 	locks_end_grace(&nn->nfsd4_manager);
 -- 
 2.30.2
 
