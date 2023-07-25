@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F9AB760649
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jul 2023 05:05:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FAFB76065F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jul 2023 05:09:34 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qO8Mn-0003MD-UL;
-	Tue, 25 Jul 2023 03:05:40 +0000
+	id 1qO8QV-0004je-9B;
+	Tue, 25 Jul 2023 03:09:31 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhengqi.arch@bytedance.com>) id 1qO8Me-0003Lj-55
+ (envelope-from <zhengqi.arch@bytedance.com>) id 1qO8QT-0004jY-PT
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Jul 2023 03:05:31 +0000
+ Tue, 25 Jul 2023 03:09:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=niSMZqBCvW/Me9jsMaxXz5gtuZ44llk1Ot3soT0LhIs=; b=i9dmBjONRklN12I532rPdjCK07
- WJ1XPk1T1NQQzjN3gLpsnlboFP6yp+fUxSH951qhaBe2gd9+kxhZLOuf+kbaRSWs1PXwbPFEf09Hb
- mLjRh18b6KIQ+ZPAqinDd2+s+lL7FLSKe2Mx0+2iDOffoTqhh3NBuSSKHBVlFdkyp5EY=;
+ bh=ZLkcXzJjvvDBLgu5DbJbwRAKtejO8FK7VlKqBEYpGhg=; b=Ib+fi6RxaUMor9ZahgW9Ap3ar9
+ UWlYh6i20tcJY9mv/P3r3SQOgx4CdHzPNRvU2GRj162fsHA+ENBTsKWeLc6z2I2Bus2oFUPRkztFy
+ 7n8/FcOsJB1R+bDvbAiABDyHv8MijDQ1ccHgc7M02Hl8JRc34cFjJ/lqw5U/LY8tTP7I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,95 +31,95 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=niSMZqBCvW/Me9jsMaxXz5gtuZ44llk1Ot3soT0LhIs=; b=Ty0hkY4wsSB/jjOLbR+Yi0k5i1
- YaD9yvT5w3PtIw5ktk7eXVo3vR1u2PLsAXmKIdO/JpLpPOZpbhBpZ+yVhz75KKNw39rqHbyhax3N+
- HNvIaCh8G7OzdRFobCaXMRV6wWqiy2qtqsgeRPgosDaM01byaknsth+QoMAPxz/SjnYc=;
-Received: from mail-pf1-f176.google.com ([209.85.210.176])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=ZLkcXzJjvvDBLgu5DbJbwRAKtejO8FK7VlKqBEYpGhg=; b=nJXNqIK9vx0J54LhRmyP8YFvPH
+ SdtSCTzv7usVk9ndX4B0OCXkFA22csAqU1QobsQAKzodo2Gj9/+/JseeM5a7nqcxBQVuUUTeJpiFA
+ nov20TLoFXLisrClWdMZX8WWcpia+EVlTVcIwPAO7wBe0KpeWWem5mytE8wQYdwxsHCo=;
+Received: from mail-pj1-f53.google.com ([209.85.216.53])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qO8Mc-0000ap-BH for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Jul 2023 03:05:30 +0000
-Received: by mail-pf1-f176.google.com with SMTP id
- d2e1a72fcca58-6864c144897so1189007b3a.1
+ id 1qO8QR-001LpM-OH for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Jul 2023 03:09:29 +0000
+Received: by mail-pj1-f53.google.com with SMTP id
+ 98e67ed59e1d1-267711d2b43so714276a91.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 24 Jul 2023 20:05:30 -0700 (PDT)
+ Mon, 24 Jul 2023 20:09:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance.com; s=google; t=1690254325; x=1690859125;
+ d=bytedance.com; s=google; t=1690254562; x=1690859362;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=niSMZqBCvW/Me9jsMaxXz5gtuZ44llk1Ot3soT0LhIs=;
- b=FniJo6cfZiXO48N3LrJPbrRtsXuGwEsrxL+rPNcNzpIfBU8e0vwfaKRVcngIxQ6/Nq
- uV6IwXjWItzg/7IWT04hxNl0ft8u0yvH7EyRJ6POcXsP6dFyjR2vvuievKT7V7wXKj9i
- Hs4OFXg82m4uyRZZDGIHYrUPf7Daiin7owJFDMH9ALFzGhGiMR/jo54iE9PQ2yCszEax
- GduXKZlfrLf0f1lI69b+SeFKsM1fBAPgAwEi9/QiPJB5pr3rcwSAawR7U6Bt6cbBHX1B
- l+6jljnScvspLgnoIuyzCCNBX+9PGgFUwcZiZbmROS7agCNCVVXov8LOv0CsZfjvTopq
- 9j6w==
+ bh=ZLkcXzJjvvDBLgu5DbJbwRAKtejO8FK7VlKqBEYpGhg=;
+ b=T37460khNMPot0VVWdDz4lB6VWzVdicUBxVfz7CttLqrgD8g0MkXpwdKxm81+5qM3E
+ yM+KFmnDFeQa0ZY5ZeNvvyumpxFJqPDg3oixgT5YKKGKOt9qmtbXs6vK0nUKy4kqsaDS
+ iJ3utK1jXEfJapBrHYjK+SRbiAPBWHkzR4mO0jKk+qC4Stl39POzbhCCP4MwAtpmSso5
+ ynGZ9erR4hLoA8pCdH+sRZpUbw1kMvKh2ycfFI2IzmOqd8Zq8Q0hlgUcK6mejCeashGS
+ UzcYSPHM74qvjYTTAriMRhyDbW62IR+NfEc7uD2qj/U2RIYLpDl8fGFG28yoLGatJrqh
+ GkTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690254325; x=1690859125;
+ d=1e100.net; s=20221208; t=1690254562; x=1690859362;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=niSMZqBCvW/Me9jsMaxXz5gtuZ44llk1Ot3soT0LhIs=;
- b=VUd9VU3CtJzPHBkmDFQB3CeJYUmfT+wjHDrxq3wYdaO1/trqqp7j95iApHASAWo0ux
- ogsP/fMDFGXl9MXbmIIpxE5yP2YcMYjoljpunkAl641wvr2dQGd+JXhLhHiOxbJr3CZ0
- Lp1luzAUMf/jeaVUVwEcmaqUTGm32rtNW9Dsfq5cKQAsq5ZblwM7uB/UBIxSUdLbAQSK
- 6z0hK19kd0l8/60xSOy3GOFchtQc893OgV4FR6OA3NDt0QNb7loAmnpdGnvqv4W8k+CR
- 6BuI6AOrDHvAdo7fi/cluSLm+SdsMt5kMwIk7nDHv4A4XbdEKIUhKGX79AaatzxBog3W
- 4adA==
-X-Gm-Message-State: ABy/qLYO6cObBGQdWW1P/c+wcHqkyydEi4Bnl3aiQ+lZxnCRhQH43b/s
- uGCjspvRUv0QUhUy7EF9Fo8VXA==
-X-Google-Smtp-Source: APBJJlFB/cQTGj3IlIfGF+HAM8hU50IJB+Lr29ujA3cHbbDSAB3N90HdGCOpa8iydTeMw+f8qxyL2Q==
-X-Received: by 2002:a17:90a:1d46:b0:268:abc:83d5 with SMTP id
- u6-20020a17090a1d4600b002680abc83d5mr6012554pju.4.1690254324674; 
- Mon, 24 Jul 2023 20:05:24 -0700 (PDT)
-Received: from ?IPV6:fdbd:ff1:ce00:1c25:884:3ed:e1db:b610?
- ([2408:8000:b001:1:1f:58ff:f102:103])
+ bh=ZLkcXzJjvvDBLgu5DbJbwRAKtejO8FK7VlKqBEYpGhg=;
+ b=jpcYaOR25iqd1Vti7uIShf0ih6/kqdwVYR/LXQgpkT8qJZ8Jnjg+FE8Zu3XugFdcnX
+ PtPqL+pPT/2toIgX0JVWV1M8m1cPf4qM3B7XfHCUsRbEUOkY/Ux+HoRDg2E8x0z1LsRw
+ 8bv8dSiFhQsejPSjYbyPc3T3xYrHun+uEV/Gfu++8XZOA1Oo4X6Kn/exTOoa4MoswH4O
+ 5gyzYlZRX+TrgXuSFe24WLNKpZ4KPKZWMYnaadwk0CjQNl9hwxLBkOkGl0cuJEZYsIpX
+ dIvYAbNxZgwrXtET5QfSAO7wNvWzmq2X80uUsQERKF9r7ilOZkQ9C1sDHokgWVU791e/
+ NXtA==
+X-Gm-Message-State: ABy/qLZvxS337/jYXcnwZ4oiKE+vzsCVazm2QC6XYkaOdXAGr+oRH8sV
+ ZXDXD3v90YZ63dx51JoD77mIaA==
+X-Google-Smtp-Source: APBJJlEruF0WFFXXZAOwcLJKfTF/P8Yek4Wx/bwgxp4VRr2IRHJr9OEk7izXq54CPTEEiNehAqKYyg==
+X-Received: by 2002:a17:90a:50f:b0:263:730b:f568 with SMTP id
+ h15-20020a17090a050f00b00263730bf568mr10246975pjh.3.1690254562043; 
+ Mon, 24 Jul 2023 20:09:22 -0700 (PDT)
+Received: from [10.70.252.135] ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- t10-20020a17090aba8a00b002681d44071csm2043968pjr.46.2023.07.24.20.05.08
+ 21-20020a17090a199500b002633fa95ac2sm9540001pji.13.2023.07.24.20.09.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Jul 2023 20:05:24 -0700 (PDT)
-Message-ID: <6049aa99-aa47-5137-f66e-350bc4723914@bytedance.com>
-Date: Tue, 25 Jul 2023 11:05:04 +0800
+ Mon, 24 Jul 2023 20:09:21 -0700 (PDT)
+Message-ID: <d2621ad0-8b99-9154-5ff5-509dec2f32a3@bytedance.com>
+Date: Tue, 25 Jul 2023 11:09:07 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.12.0
 Content-Language: en-US
-To: Steven Price <steven.price@arm.com>
+To: Muchun Song <muchun.song@linux.dev>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
- <20230724094354.90817-25-zhengqi.arch@bytedance.com>
- <cdd08c9e-81d3-a85f-5426-5db738aa73ec@arm.com>
-In-Reply-To: <cdd08c9e-81d3-a85f-5426-5db738aa73ec@arm.com>
-X-Spam-Score: -2.2 (--)
+ <20230724094354.90817-2-zhengqi.arch@bytedance.com>
+ <97E80C37-8872-4C5A-A027-A0B35F39152A@linux.dev>
+In-Reply-To: <97E80C37-8872-4C5A-A027-A0B35F39152A@linux.dev>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Steven, On 2023/7/24 19:17,
- Steven Price wrote: > On 24/07/2023
- 10:43, Qi Zheng wrote: >> In preparation for implementing lockless slab shrink,
- use new APIs to >> dynamically allocate the drm-panfrost shrinke [...] 
- Content analysis details:   (-2.2 points, 6.0 required)
+ Content preview:  On 2023/7/25 10:35, Muchun Song wrote: > > >> On Jul 24, 2023,
+ at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote: >> >> The mm/vmscan.c
+ file is too large, so separate the shrinker-related >> code [...] 
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.176 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.176 listed in list.dnswl.org]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ no trust [209.85.216.53 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1qO8Mc-0000ap-BH
-Subject: Re: [f2fs-dev] [PATCH v2 24/47] drm/panfrost: dynamically allocate
- the drm-panfrost shrinker
+ valid 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.53 listed in wl.mailspike.net]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.1 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1qO8QR-001LpM-OH
+Subject: Re: [f2fs-dev] [PATCH v2 01/47] mm: vmscan: move shrinker-related
+ code into a separate file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,170 +133,66 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Qi Zheng via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Qi Zheng <zhengqi.arch@bytedance.com>
-Cc: kvm@vger.kernel.org, djwong@kernel.org, roman.gushchin@linux.dev,
- david@fromorbit.com, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- dm-devel@redhat.com, linux-mtd@lists.infradead.org, cel@kernel.org,
- x86@kernel.org, cluster-devel@redhat.com, xen-devel@lists.xenproject.org,
- linux-ext4@vger.kernel.org, paulmck@kernel.org, linux-arm-msm@vger.kernel.org,
- brauner@kernel.org, rcu@vger.kernel.org, linux-bcache@vger.kernel.org,
- yujie.liu@intel.com, vbabka@suse.cz, linux-raid@vger.kernel.org,
- linux-nfs@vger.kernel.org, tytso@mit.edu, netdev@vger.kernel.org,
- muchun.song@linux.dev, linux-kernel@vger.kernel.org,
+Cc: kvm@vger.kernel.org, djwong@kernel.org,
+ Roman Gushchin <roman.gushchin@linux.dev>, david@fromorbit.com,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Linux Memory Management List <linux-mm@kvack.org>, dm-devel@redhat.com,
+ linux-mtd@lists.infradead.org, cel@kernel.org, x86@kernel.org,
+ steven.price@arm.com, cluster-devel@redhat.com, xen-devel@lists.xenproject.org,
+ linux-ext4@vger.kernel.org, "Paul E. McKenney" <paulmck@kernel.org>,
+ linux-arm-msm@vger.kernel.org, linux-nfs@vger.kernel.org, rcu@vger.kernel.org,
+ linux-bcache@vger.kernel.org, yujie.liu@intel.com,
+ Vlastimil Babka <vbabka@suse.cz>, linux-raid@vger.kernel.org,
+ Christian Brauner <brauner@kernel.org>, tytso@mit.edu,
+ Greg KH <gregkh@linuxfoundation.org>, LKML <linux-kernel@vger.kernel.org>,
  linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- senozhatsky@chromium.org, gregkh@linuxfoundation.org,
- linux-fsdevel@vger.kernel.org, akpm@linux-foundation.org,
+ Sergey Senozhatsky <senozhatsky@chromium.org>, netdev <netdev@vger.kernel.org>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
  linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org, tkhai@ya.ru
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Steven,
 
-On 2023/7/24 19:17, Steven Price wrote:
-> On 24/07/2023 10:43, Qi Zheng wrote:
->> In preparation for implementing lockless slab shrink, use new APIs to
->> dynamically allocate the drm-panfrost shrinker, so that it can be freed
->> asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
->> read-side critical section when releasing the struct panfrost_device.
+
+On 2023/7/25 10:35, Muchun Song wrote:
+> 
+> 
+>> On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
+>>
+>> The mm/vmscan.c file is too large, so separate the shrinker-related
+>> code from it into a separate file. No functional changes.
 >>
 >> Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
-> 
-> One nit below, but otherwise:
-> 
-> Reviewed-by: Steven Price <steven.price@arm.com>
-> 
 >> ---
->>   drivers/gpu/drm/panfrost/panfrost_device.h    |  2 +-
->>   drivers/gpu/drm/panfrost/panfrost_drv.c       |  6 +++-
->>   drivers/gpu/drm/panfrost/panfrost_gem.h       |  2 +-
->>   .../gpu/drm/panfrost/panfrost_gem_shrinker.c  | 32 ++++++++++++-------
->>   4 files changed, 27 insertions(+), 15 deletions(-)
+>> include/linux/shrinker.h |   3 +
+>> mm/Makefile              |   4 +-
+>> mm/shrinker.c            | 707 +++++++++++++++++++++++++++++++++++++++
+>> mm/vmscan.c              | 701 --------------------------------------
+>> 4 files changed, 712 insertions(+), 703 deletions(-)
+>> create mode 100644 mm/shrinker.c
 >>
->> diff --git a/drivers/gpu/drm/panfrost/panfrost_device.h b/drivers/gpu/drm/panfrost/panfrost_device.h
->> index b0126b9fbadc..e667e5689353 100644
->> --- a/drivers/gpu/drm/panfrost/panfrost_device.h
->> +++ b/drivers/gpu/drm/panfrost/panfrost_device.h
->> @@ -118,7 +118,7 @@ struct panfrost_device {
->>   
->>   	struct mutex shrinker_lock;
->>   	struct list_head shrinker_list;
->> -	struct shrinker shrinker;
->> +	struct shrinker *shrinker;
->>   
->>   	struct panfrost_devfreq pfdevfreq;
->>   };
->> diff --git a/drivers/gpu/drm/panfrost/panfrost_drv.c b/drivers/gpu/drm/panfrost/panfrost_drv.c
->> index bbada731bbbd..f705bbdea360 100644
->> --- a/drivers/gpu/drm/panfrost/panfrost_drv.c
->> +++ b/drivers/gpu/drm/panfrost/panfrost_drv.c
->> @@ -598,10 +598,14 @@ static int panfrost_probe(struct platform_device *pdev)
->>   	if (err < 0)
->>   		goto err_out1;
->>   
->> -	panfrost_gem_shrinker_init(ddev);
->> +	err = panfrost_gem_shrinker_init(ddev);
->> +	if (err)
->> +		goto err_out2;
->>   
->>   	return 0;
->>   
->> +err_out2:
->> +	drm_dev_unregister(ddev);
->>   err_out1:
->>   	pm_runtime_disable(pfdev->dev);
->>   	panfrost_device_fini(pfdev);
->> diff --git a/drivers/gpu/drm/panfrost/panfrost_gem.h b/drivers/gpu/drm/panfrost/panfrost_gem.h
->> index ad2877eeeccd..863d2ec8d4f0 100644
->> --- a/drivers/gpu/drm/panfrost/panfrost_gem.h
->> +++ b/drivers/gpu/drm/panfrost/panfrost_gem.h
->> @@ -81,7 +81,7 @@ panfrost_gem_mapping_get(struct panfrost_gem_object *bo,
->>   void panfrost_gem_mapping_put(struct panfrost_gem_mapping *mapping);
->>   void panfrost_gem_teardown_mappings_locked(struct panfrost_gem_object *bo);
->>   
->> -void panfrost_gem_shrinker_init(struct drm_device *dev);
->> +int panfrost_gem_shrinker_init(struct drm_device *dev);
->>   void panfrost_gem_shrinker_cleanup(struct drm_device *dev);
->>   
->>   #endif /* __PANFROST_GEM_H__ */
->> diff --git a/drivers/gpu/drm/panfrost/panfrost_gem_shrinker.c b/drivers/gpu/drm/panfrost/panfrost_gem_shrinker.c
->> index bf0170782f25..9a90dfb5301f 100644
->> --- a/drivers/gpu/drm/panfrost/panfrost_gem_shrinker.c
->> +++ b/drivers/gpu/drm/panfrost/panfrost_gem_shrinker.c
->> @@ -18,8 +18,7 @@
->>   static unsigned long
->>   panfrost_gem_shrinker_count(struct shrinker *shrinker, struct shrink_control *sc)
->>   {
->> -	struct panfrost_device *pfdev =
->> -		container_of(shrinker, struct panfrost_device, shrinker);
->> +	struct panfrost_device *pfdev = shrinker->private_data;
->>   	struct drm_gem_shmem_object *shmem;
->>   	unsigned long count = 0;
->>   
->> @@ -65,8 +64,7 @@ static bool panfrost_gem_purge(struct drm_gem_object *obj)
->>   static unsigned long
->>   panfrost_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
->>   {
->> -	struct panfrost_device *pfdev =
->> -		container_of(shrinker, struct panfrost_device, shrinker);
->> +	struct panfrost_device *pfdev = shrinker->private_data;
->>   	struct drm_gem_shmem_object *shmem, *tmp;
->>   	unsigned long freed = 0;
->>   
->> @@ -97,13 +95,24 @@ panfrost_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
->>    *
->>    * This function registers and sets up the panfrost shrinker.
->>    */
->> -void panfrost_gem_shrinker_init(struct drm_device *dev)
->> +int panfrost_gem_shrinker_init(struct drm_device *dev)
->>   {
->>   	struct panfrost_device *pfdev = dev->dev_private;
->> -	pfdev->shrinker.count_objects = panfrost_gem_shrinker_count;
->> -	pfdev->shrinker.scan_objects = panfrost_gem_shrinker_scan;
->> -	pfdev->shrinker.seeks = DEFAULT_SEEKS;
->> -	WARN_ON(register_shrinker(&pfdev->shrinker, "drm-panfrost"));
->> +
->> +	pfdev->shrinker = shrinker_alloc(0, "drm-panfrost");
->> +	if (!pfdev->shrinker) {
->> +		WARN_ON(1);
+>> diff --git a/include/linux/shrinker.h b/include/linux/shrinker.h
+>> index 224293b2dd06..961cb84e51f5 100644
+>> --- a/include/linux/shrinker.h
+>> +++ b/include/linux/shrinker.h
+>> @@ -96,6 +96,9 @@ struct shrinker {
+>>   */
+>> #define SHRINKER_NONSLAB (1 << 3)
+>>
+>> +unsigned long shrink_slab(gfp_t gfp_mask, int nid, struct mem_cgroup *memcg,
+>> +			   int priority);
 > 
-> I don't think this WARN_ON is particularly useful - if there's a failed
-> memory allocation we should see output from the kernel anyway. And we're
-> changing the semantics from "continue just without a shrinker" (which
-> argueably justifies the warning) to "probe fails, device doesn't work"
-> which will be obvious to the user so I don't feel we need the additional
-> warn.
+> A good cleanup, vmscan.c is so huge.
+> 
+> I'd like to introduce a new header in mm/ directory and contains those
+> declarations of functions (like this and other debug function in
+> shrinker_debug.c) since they are used internally across mm.
 
-Make sense. Will delete this WARN_ON() in the next version.
-
-Thanks,
-Qi
+How about putting them in the mm/internal.h file?
 
 > 
->> +		return -ENOMEM;
->> +	}
->> +
->> +	pfdev->shrinker->count_objects = panfrost_gem_shrinker_count;
->> +	pfdev->shrinker->scan_objects = panfrost_gem_shrinker_scan;
->> +	pfdev->shrinker->seeks = DEFAULT_SEEKS;
->> +	pfdev->shrinker->private_data = pfdev;
->> +
->> +	shrinker_register(pfdev->shrinker);
->> +
->> +	return 0;
->>   }
->>   
->>   /**
->> @@ -116,7 +125,6 @@ void panfrost_gem_shrinker_cleanup(struct drm_device *dev)
->>   {
->>   	struct panfrost_device *pfdev = dev->dev_private;
->>   
->> -	if (pfdev->shrinker.nr_deferred) {
->> -		unregister_shrinker(&pfdev->shrinker);
->> -	}
->> +	if (pfdev->shrinker)
->> +		shrinker_unregister(pfdev->shrinker);
->>   }
+> Thanks.
 > 
 
 
