@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDC9F76067B
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jul 2023 05:18:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A34D3760689
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jul 2023 05:25:00 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qO8Z7-000143-Q3;
-	Tue, 25 Jul 2023 03:18:26 +0000
+	id 1qO8fO-00019c-Jn;
+	Tue, 25 Jul 2023 03:24:55 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <muchun.song@linux.dev>) id 1qO8Z6-00013w-6R
+ (envelope-from <muchun.song@linux.dev>) id 1qO8fO-00019W-0V
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Jul 2023 03:18:25 +0000
+ Tue, 25 Jul 2023 03:24:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
  Cc:Date:In-Reply-To:From:Subject:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=keHNwQXyGxB+2fa9SqrEE3DvQ5TME2b5TMHAzSBP2pw=; b=D8d9vSL/sMDCzu2ps/vn6nCNOJ
- vT7h4Xm7s47kbT/jh9ecbgivbIWaknY5VFsn976D9IhZyN5VJDKYhn347b/7+7gZtMIw1NQ8daul2
- DhG8jIkLZEx9kIT9ib5MVL50tUYaXbFmfoNh44S5x8+HZY+SsZzdnZHIyJ6GAgqHXAEM=;
+ bh=6p0DFvIoLJzSIVM0qRIM/GXeN12xkckyA9Fji4TGEhI=; b=HOxG8mXHceAhFyaqjTnC0AhhGa
+ 8PkZtTUrqrs4I9IcGPpdETCn+Wt52uQgdrImV7/sns4r+E85ysbAxryH8Mqh7q3Jmh4eCSgF/467p
+ aVj3qanFyz6DfY67xxlcjz3UFJf0kc9VKM4rZbzJx1/s0NvqcdKOsn/ap4twTUOTsJYg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
@@ -31,33 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=keHNwQXyGxB+2fa9SqrEE3DvQ5TME2b5TMHAzSBP2pw=; b=jRNYFXJUDYXFaEWBmwcImYYWmr
- 2XjB4aukTuge6nbB22EIaAqKqtH+ODxYD7+RO6SEvpVSewsDvNtuwS5gpTZUmUM37QTiQQ2bAobv4
- QM2zC4H83USv2RA41G33KPwRpEJo2s9ulCe4YUyGbILRk4h0iJSgrpTwk4vzPNm4UbnM=;
-Received: from out-37.mta0.migadu.com ([91.218.175.37])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=6p0DFvIoLJzSIVM0qRIM/GXeN12xkckyA9Fji4TGEhI=; b=RiBzh4e3I+FErZxRUskY1aYzNy
+ /oxx7MPbEBiD57HQHXI+856mCXXDlP9ik5ngwvAcigcLrRJ4Jgy3DHmPV38vTmX5blfd+7erBkxZN
+ 4NYuMK7o1i+NTJmItMoO9bPmZXYgdKVeLVESAUoHQclNfPc3p4pdExAD9n/nuFCB5ySU=;
+Received: from out-61.mta0.migadu.com ([91.218.175.61])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qO8Z5-0001IS-Qr for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Jul 2023 03:18:25 +0000
+ id 1qO8fL-001N5l-Jh for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Jul 2023 03:24:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1690255094;
+ t=1690255481;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=keHNwQXyGxB+2fa9SqrEE3DvQ5TME2b5TMHAzSBP2pw=;
- b=HAeGJ99i5xFhmj3CijzGTxYLYsS22+UCkxr4poXrv7YrVuJ+ys1PsTwIPg8xpWVSxn9zir
- H57AkKYqiD1vOZNVzVNI7GcU+WBHpxaXuuBnNpw5g5o1ZYYgFiQKUmRNmm30EbXVxytcjf
- W5muscH4uShV5wnAUhi90ZLbjVnLzlo=
+ bh=6p0DFvIoLJzSIVM0qRIM/GXeN12xkckyA9Fji4TGEhI=;
+ b=r9D+tXFVa/N1RN+BLv5WgR5iQ4rwtyebnPM62Sh3w2AQ+19WlSlFOjsJl5wosr8TEtJchn
+ V877L2MD6oNieyuMlTG6JawmQ1ns/Fjh33pHsVXqhR6CCRTDc2499SUTwOS+JRsWVrdweW
+ vS3GyBw0+b28Uj9NeJVk00fqQ8IPfLM=
 MIME-Version: 1.0
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <20230724094354.90817-3-zhengqi.arch@bytedance.com>
-Date: Tue, 25 Jul 2023 11:17:24 +0800
-Message-Id: <210C013C-AB14-45BC-AB2E-199FF7F5E523@linux.dev>
+In-Reply-To: <d2621ad0-8b99-9154-5ff5-509dec2f32a3@bytedance.com>
+Date: Tue, 25 Jul 2023 11:23:54 +0800
+Message-Id: <6FE62F56-1B4E-4E2A-BEA9-0DA6907A2FA9@linux.dev>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
- <20230724094354.90817-3-zhengqi.arch@bytedance.com>
+ <20230724094354.90817-2-zhengqi.arch@bytedance.com>
+ <97E80C37-8872-4C5A-A027-A0B35F39152A@linux.dev>
+ <d2621ad0-8b99-9154-5ff5-509dec2f32a3@bytedance.com>
 To: Qi Zheng <zhengqi.arch@bytedance.com>
 X-Migadu-Flow: FLOW_OUT
 X-Spam-Score: -0.2 (/)
@@ -67,10 +69,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  > On Jul 24, 2023, at 17:43,
+ Content preview:  > On Jul 25, 2023, at 11:09,
  Qi Zheng <zhengqi.arch@bytedance.com>
- wrote: > > The debugfs_remove_recursive() will wait for debugfs_file_put()
- to return, > so the shrinker will not be freed when doing [...] 
+ wrote: > > > > On 2023/7/25 10:35, Muchun Song wrote: >>> On Jul 24, 2023,
+ at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote: >>> [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -83,9 +85,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qO8Z5-0001IS-Qr
-Subject: Re: [f2fs-dev] [PATCH v2 02/47] mm: shrinker: remove redundant
- shrinker_rwsem in debugfs operations
+X-Headers-End: 1qO8fL-001N5l-Jh
+Subject: Re: [f2fs-dev] [PATCH v2 01/47] mm: vmscan: move shrinker-related
+ code into a separate file
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,18 +121,46 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 
 
-> On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
+> On Jul 25, 2023, at 11:09, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
 > 
-> The debugfs_remove_recursive() will wait for debugfs_file_put() to return,
-> so the shrinker will not be freed when doing debugfs operations (such as
-> shrinker_debugfs_count_show() and shrinker_debugfs_scan_write()), so there
-> is no need to hold shrinker_rwsem during debugfs operations.
 > 
-> Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
+> 
+> On 2023/7/25 10:35, Muchun Song wrote:
+>>> On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
+>>> 
+>>> The mm/vmscan.c file is too large, so separate the shrinker-related
+>>> code from it into a separate file. No functional changes.
+>>> 
+>>> Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
+>>> ---
+>>> include/linux/shrinker.h |   3 +
+>>> mm/Makefile              |   4 +-
+>>> mm/shrinker.c            | 707 +++++++++++++++++++++++++++++++++++++++
+>>> mm/vmscan.c              | 701 --------------------------------------
+>>> 4 files changed, 712 insertions(+), 703 deletions(-)
+>>> create mode 100644 mm/shrinker.c
+>>> 
+>>> diff --git a/include/linux/shrinker.h b/include/linux/shrinker.h
+>>> index 224293b2dd06..961cb84e51f5 100644
+>>> --- a/include/linux/shrinker.h
+>>> +++ b/include/linux/shrinker.h
+>>> @@ -96,6 +96,9 @@ struct shrinker {
+>>>  */
+>>> #define SHRINKER_NONSLAB (1 << 3)
+>>> 
+>>> +unsigned long shrink_slab(gfp_t gfp_mask, int nid, struct mem_cgroup *memcg,
+>>> +    int priority);
+>> A good cleanup, vmscan.c is so huge.
+>> I'd like to introduce a new header in mm/ directory and contains those
+>> declarations of functions (like this and other debug function in
+>> shrinker_debug.c) since they are used internally across mm.
+> 
+> How about putting them in the mm/internal.h file?
 
-Reviewed-by: Muchun Song <songmuchun@bytedance.com>
+Either is fine to me.
 
-Thanks.
+> 
+>> Thanks.
 
 
 
