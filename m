@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6FCC760E81
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jul 2023 11:22:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F351760EA0
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 25 Jul 2023 11:25:21 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qOEFl-0007qX-0r;
-	Tue, 25 Jul 2023 09:22:49 +0000
+	id 1qOEIA-0007vR-Vi;
+	Tue, 25 Jul 2023 09:25:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <muchun.song@linux.dev>) id 1qOEFj-0007qR-Hx
+ (envelope-from <muchun.song@linux.dev>) id 1qOEI9-0007vK-GM
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Jul 2023 09:22:47 +0000
+ Tue, 25 Jul 2023 09:25:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
  Cc:Date:In-Reply-To:From:Subject:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=O0aj+CEvUWLWW/lym+SjHnwm8OSi0vQ8fgtochDa6Vs=; b=IbCzmZZM5UtIXmM24WtXcd0Iib
- W0Kp6slq6FuWEGwsm8PWFsQRJiVbWkLxAGtUDez4iq/keGruqny1InkaB58n9ZsWbleVQbLpnkoRi
- l542DmQtsbXV0Q4HjwbGdqR+DrUomK/JoyNhklQFr0rAcGhnOWk2rTdfx2L7/ZZu3NdI=;
+ bh=+8cgQl/NwKjlv95whhBvr3/hIEapF8k47N3p7suJb70=; b=P96SnLWgDPafi/HuZaAo60WyaJ
+ Cfjjz+qv3GZDTt83+s2BXZqxVA/em57IkQVnQ+I6jIeL59ySzHeurK7eFPMVXORUVu8YMJth/IGFx
+ qEkqgiqo5lHo4W5B9nGcDCAWJpaW434R3WDh5nLpBnHmWVBg/Br8i0u3pPCMY/K6CNPY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
@@ -31,33 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=O0aj+CEvUWLWW/lym+SjHnwm8OSi0vQ8fgtochDa6Vs=; b=Eo6voNSdtGuOZ1qB4fAsq22r/k
- rWprTkJWz5UdHnsur6bZ23b7uHQWDZxvv1ZdTp3tDFw2qmxh0BEW2WVLcnfFcSsZrZ/6QuPEUuqTG
- ieK8EHTIbx7hdA8JIlN52M8kEWTRCTb4XEKogHdLI15VSycREkZgYZjmm1EueoYuPBJM=;
-Received: from out-44.mta1.migadu.com ([95.215.58.44])
+ bh=+8cgQl/NwKjlv95whhBvr3/hIEapF8k47N3p7suJb70=; b=kKgydhlBmJXvWidC6xDZN3nD1J
+ MpUdZWqJJCFsoTg9QrV+7wQkN3iFYKRt+SirnSBYJyaYVAhXt/8hJVIvCRj/xt0Us8bWof14+7B5h
+ ctg3SJIoU1k7CgWNRuHoaJv02ORBCCJ9VADZ02U/pYqEF2+GQPcgVNoEnq3FrMC/WCq0=;
+Received: from out-42.mta1.migadu.com ([95.215.58.42])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qOEFj-0006gs-8G for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 25 Jul 2023 09:22:47 +0000
+ id 1qOEI7-0006qo-Uy for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 25 Jul 2023 09:25:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1690276959;
+ t=1690277108;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=O0aj+CEvUWLWW/lym+SjHnwm8OSi0vQ8fgtochDa6Vs=;
- b=xJfsnq4tfri4+FrxQ/wgEMA3zFz0o0z0uW0gHHJCvckela5K3HUZXJd8znm8ohjnxlmbHS
- uH4lNpUNfMnIh4HG6zSYXwQDD4QbiVOnWxcUq/Ckyge75DILepht+8WUJVUEtTuA6yQWPk
- 2nBkRdUkFluXDihkXSSSRwQEBatV+pk=
+ bh=+8cgQl/NwKjlv95whhBvr3/hIEapF8k47N3p7suJb70=;
+ b=usOR6hHD6eRCxqjCTCcivuGWvHVkYPEcYN1LFGUp7w19ZF5rgZGS7F3BC9qYg1mh2K3CZg
+ P+ggLeAhjwkMLLXjRaq6w6val5oNQN/dZHMaY89bOfIaUuCQCvzNHzHVmmvDvSO+waObUp
+ Ejvejxqj/KUxQq2De9wkuBcRQhJyUA4=
 MIME-Version: 1.0
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <20230724094354.90817-8-zhengqi.arch@bytedance.com>
-Date: Tue, 25 Jul 2023 17:22:00 +0800
-Message-Id: <CD39258F-AAA8-42A7-BBA9-6528A629B315@linux.dev>
+In-Reply-To: <20230724094354.90817-9-zhengqi.arch@bytedance.com>
+Date: Tue, 25 Jul 2023 17:24:24 +0800
+Message-Id: <0C8B4C97-C8DF-401D-83E9-A13AE69E73F0@linux.dev>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
- <20230724094354.90817-8-zhengqi.arch@bytedance.com>
+ <20230724094354.90817-9-zhengqi.arch@bytedance.com>
 To: Qi Zheng <zhengqi.arch@bytedance.com>
 X-Migadu-Flow: FLOW_OUT
 X-Spam-Score: -0.2 (/)
@@ -69,9 +69,10 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview:  > On Jul 24, 2023, at 17:43,
  Qi Zheng <zhengqi.arch@bytedance.com>
- wrote: > > Use new APIs to dynamically allocate the xen-backend shrinker.
- > > Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com> Reviewed-by: Muchun
- Song <songmuchun@bytedance.com> 
+ wrote: > > Use new APIs to dynamically allocate the erofs-shrinker. > >
+ Signed-off-by:
+ Qi Zheng <zhengqi.arch@bytedance.com> Reviewed-by: Muchun Song
+ <songmuchun@bytedance.com>
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -85,9 +86,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1qOEFj-0006gs-8G
-Subject: Re: [f2fs-dev] [PATCH v2 07/47] xenbus/backend: dynamically
- allocate the xen-backend shrinker
+X-Headers-End: 1qOEI7-0006qo-Uy
+Subject: Re: [f2fs-dev] [PATCH v2 08/47] erofs: dynamically allocate the
+ erofs-shrinker
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,7 +123,7 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 > On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
 > 
-> Use new APIs to dynamically allocate the xen-backend shrinker.
+> Use new APIs to dynamically allocate the erofs-shrinker.
 > 
 > Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 
