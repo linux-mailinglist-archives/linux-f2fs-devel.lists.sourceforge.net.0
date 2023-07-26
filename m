@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56A68762C40
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Jul 2023 09:01:08 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94881762C80
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Jul 2023 09:05:23 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qOYW8-0006bk-Jv;
-	Wed, 26 Jul 2023 07:01:05 +0000
+	id 1qOYaG-0007HJ-Ps;
+	Wed, 26 Jul 2023 07:05:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <muchun.song@linux.dev>) id 1qOYW7-0006bc-63
+ (envelope-from <muchun.song@linux.dev>) id 1qOYaF-0007HD-1g
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 26 Jul 2023 07:01:04 +0000
+ Wed, 26 Jul 2023 07:05:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
  Cc:Date:In-Reply-To:From:Subject:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vPvKdDrljW6F/uCSplNpQplPV8vRRURSjQLOuFds+Ao=; b=BfWDehi+SUOUO8brXY4f6iuYkn
- /keSHmDnFxn0jV+vxdRFhlnCdTNd8Rgh6rD3pU8TE4COvlY1g64dC46J28ufnzwY7TJ2T70DMbikT
- a76rdkSlnEdPkjXNAybOTwhtqVCE06aFUohkOmxocryl0qg31+3ruRsmIS/TzRp0fMH0=;
+ bh=KXYamYs9irq65yhoLRu1td82YuFMeMDqOuwaU+oDyHM=; b=KpJhAMhDhj01u8rXdwOBhmEtdi
+ dmB7CM0K03a/rfcouJOz6uPeeaG1mhM26tXLfXoxw4rLiSLeqVJ+/UDiHJkJpG4XW9TYg+npQa3We
+ 9JgoFNJb+D2KM3v62wZrmBJ3cxe1FgdPd1qOIkzs5m4dHSU9nNr5EXo1yzhPt1aCtMOk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
@@ -31,33 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=vPvKdDrljW6F/uCSplNpQplPV8vRRURSjQLOuFds+Ao=; b=RvqoNBB6PH30/WDk4BvA8RpswZ
- bRlkxC1VjDHNOwezeM4N/TBmZ3gP1E2hKjvzXa+gsC8Dm8SmWCBDOM/HjhZAsYYWSwhb3uvMtlIct
- xQZEMEUEHuX12cAtETbI+Z3MRdR1pPXjIy3MTF+gPzs0Nu1gaRkbPKw836TxzQ/fyH7s=;
-Received: from out-5.mta0.migadu.com ([91.218.175.5])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=KXYamYs9irq65yhoLRu1td82YuFMeMDqOuwaU+oDyHM=; b=d58hqGKY62gpXp6l+LLWy1DDY3
+ RvK+2DdgAJszMXQuq35Wzu1uB2WYijDRcEheMUuotdkiebqXbORY1Wo1Y6h2yFivTQOeiZuf2z/OD
+ 0LK/ii7CWcdw+WWKcpsDciNeS0Ir6wesOxNUaqfo9VzD+KKEsKN4Ox2/5iXJazqdHGB0=;
+Received: from out-11.mta1.migadu.com ([95.215.58.11])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qOYW4-0007JV-6G for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 26 Jul 2023 07:01:04 +0000
+ id 1qOYaB-002jkG-2U for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 26 Jul 2023 07:05:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1690354853;
+ t=1690355108;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=vPvKdDrljW6F/uCSplNpQplPV8vRRURSjQLOuFds+Ao=;
- b=aaSBBHeBtwwGqsWMnojqRVsl/STDmmnYtUnl5ZO4CtbJBB+yMsEQoYCMTU1jXiNn7BQJ5o
- TY2b0wzcluA2pEgVpI6zUX6jG/ZH5Pzg0tSizSeLRNZh0UJXNUcxmFOyz901cApQh34Dur
- CIKrvfbRyMRXngths0iuBPdRZIsqJNY=
+ bh=KXYamYs9irq65yhoLRu1td82YuFMeMDqOuwaU+oDyHM=;
+ b=USoqEnOQU6eM3+N9zIAHCDwhNC+8+UNIWLHIgerhexBlGJCaVmSRSO1wU4o3mjHNGYO9Rs
+ DYRZMApHrS1Pjvb6NJH1mJ50Vk6voJ6kQPH4oorM80xUHt6/RAFEITooiN15iQlceLlIh+
+ 2SDmjYt2iC3yWxkOb7vPU57vNB82awk=
 MIME-Version: 1.0
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <20230724094354.90817-17-zhengqi.arch@bytedance.com>
-Date: Wed, 26 Jul 2023 15:00:21 +0800
-Message-Id: <76B579EB-401B-46DD-9666-180F9EAA18BF@linux.dev>
+In-Reply-To: <20230724094354.90817-18-zhengqi.arch@bytedance.com>
+Date: Wed, 26 Jul 2023 15:04:30 +0800
+Message-Id: <3A164818-56E1-4EB4-A927-1B2D23B81659@linux.dev>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
- <20230724094354.90817-17-zhengqi.arch@bytedance.com>
+ <20230724094354.90817-18-zhengqi.arch@bytedance.com>
 To: Qi Zheng <zhengqi.arch@bytedance.com>
 X-Migadu-Flow: FLOW_OUT
 X-Spam-Score: -0.2 (/)
@@ -69,9 +69,8 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview:  > On Jul 24, 2023, at 17:43,
  Qi Zheng <zhengqi.arch@bytedance.com>
- wrote: > > Use new APIs to dynamically allocate the ubifs-slab shrinker.
- > > Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com> Reviewed-by: Muchun
- Song <songmuchun@bytedance.com> 
+ wrote: > > Use new APIs to dynamically allocate the rcu-lazy shrinker. >
+ > Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com> > --- [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -84,9 +83,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qOYW4-0007JV-6G
-Subject: Re: [f2fs-dev] [PATCH v2 16/47] ubifs: dynamically allocate the
- ubifs-slab shrinker
+X-Headers-End: 1qOYaB-002jkG-2U
+Subject: Re: [f2fs-dev] [PATCH v2 17/47] rcu: dynamically allocate the
+ rcu-lazy shrinker
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,12 +120,31 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 > On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
 > 
-> Use new APIs to dynamically allocate the ubifs-slab shrinker.
+> Use new APIs to dynamically allocate the rcu-lazy shrinker.
 > 
 > Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
+> ---
+> kernel/rcu/tree_nocb.h | 19 +++++++++++--------
+> 1 file changed, 11 insertions(+), 8 deletions(-)
+> 
+> diff --git a/kernel/rcu/tree_nocb.h b/kernel/rcu/tree_nocb.h
+> index 43229d2b0c44..919f17561733 100644
+> --- a/kernel/rcu/tree_nocb.h
+> +++ b/kernel/rcu/tree_nocb.h
+> @@ -1397,12 +1397,7 @@ lazy_rcu_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
+> return count ? count : SHRINK_STOP;
+> }
+> 
+> -static struct shrinker lazy_rcu_shrinker = {
+> -	.count_objects = lazy_rcu_shrink_count,
+> -	.scan_objects = lazy_rcu_shrink_scan,
+> -	.batch = 0,
+> -	.seeks = DEFAULT_SEEKS,
+> -};
+> +static struct shrinker *lazy_rcu_shrinker;
 
-Reviewed-by: Muchun Song <songmuchun@bytedance.com>
-
+Seems there is no users of this variable, maybe we could drop
+this.
 
 
 
