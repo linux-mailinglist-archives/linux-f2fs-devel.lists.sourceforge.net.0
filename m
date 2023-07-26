@@ -2,100 +2,127 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C019F762824
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Jul 2023 03:25:13 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 307A5762843
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Jul 2023 03:39:56 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qOTGx-00072W-2w;
-	Wed, 26 Jul 2023 01:25:04 +0000
+	id 1qOTVF-0002W6-F1;
+	Wed, 26 Jul 2023 01:39:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1qOTGv-00072N-EE
+ (envelope-from <hughd@google.com>) id 1qOTVD-0002W0-Fe
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 26 Jul 2023 01:25:02 +0000
+ Wed, 26 Jul 2023 01:39:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:References:Message-ID:
+ In-Reply-To:Subject:cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Z2JWsdZng/wy82oyw+Jt0LN5rE3m0kE9g+PZ2zwZZCY=; b=MofuIXIBFrKkoLsxhZ8Ziu0e/M
- yeD7bfAy78tGJOixHblgL2ZBbUtkao4NQZKeGqt5x1HvNsdO+Tqpq5bgfb/fG3fxjhPloot7trbPi
- cAs5iAEPFWxQ6/hFFFZzpQazAGb5soZ7CxHHdDdXNYKQB8BLZG7/Nq2wyuZGNGWFh25w=;
+ bh=g4+spZWgq0eS9irqfihzysgfAABYfYXXmt6SNBBeIWA=; b=FIGvox+hmR+y1j0LIKBWozk4tY
+ 6ZNendpmqwDh9d7DlyRCsXuK1iThL0uw8fvbjlr93GZwuLf4guwd1xWX/9uTkR1fG9gt5l+QM2ySO
+ /VhU6gGx2QtZXxMg8Z1gECbJdLrGPrjz0mg4tnk7V/5yH7TMXTKi3HZxzRYaJJFa/gwQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Type:MIME-Version:References:Message-ID:In-Reply-To:Subject:cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Z2JWsdZng/wy82oyw+Jt0LN5rE3m0kE9g+PZ2zwZZCY=; b=MtZP1XcIhjmijBGED4m1K4pCYm
- L3k18CJF621Mp4q/vn3NsHxe2AoEV2eBUaT/gX+ZlYktm7LNhV4SZPrAcN3ffOuu78dCu/C8iRQUz
- ftVf4B5bqT+oOaLyHt6KBLWfyjLcVixVGqOqPWEdMoRm1Miatoc9VmxUaS4xkWNQVFH0=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qOTGs-002TW0-55 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 26 Jul 2023 01:25:02 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 443366140F;
- Wed, 26 Jul 2023 01:24:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B4C4C433C7;
- Wed, 26 Jul 2023 01:24:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1690334688;
- bh=TDYGviEhpX5ACllUm9tuh8DUX/RaBzuoFvskgQSUFhU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=d8c9L0jY2U1zx/UGyKhEyoXy6ZuapD4Iave4GXF6Ns2pkTFKZay9TMDmyCsV3h7lb
- m/o+UzgJZrYOtuV+rBFQ7nL93u8A/CVDba8tUSvnDgKpIZ0H66EswCHeTwG8wnZZDO
- nr/ioyOe+eP9880EzkNeMhc/3JyvNQ6cVZVIW85Wn3CNeo4ibV/i+fqmyHjXic5jb7
- wDXLy4k9DIoM8fEqpyIWhVU7n8NJYzMmZnWsYB8trThu4+9vmqm4x+zYGsFCiBfv2z
- YEbKLdf7lom2095UsB6xIFORDQrHyHshvRiFljmI9EtaRMEZDsqH3NizeSQmLfhrh6
- 1+qUz6tjKRcBw==
-Message-ID: <16625fbb-3dc0-34d5-ee75-fe010aa0d9ec@kernel.org>
-Date: Wed, 26 Jul 2023 09:24:44 +0800
+ bh=g4+spZWgq0eS9irqfihzysgfAABYfYXXmt6SNBBeIWA=; b=Qt69k72rap7GDcAGlXgqd1judo
+ dLT0lnB4M6gQ6K7MwBhnfwuqRO+scwHlvLMGQsGVRaAeWk+xirDlRF6k1EbovYQ+jyVdRKpH9asUD
+ abcO81AzJX0QOBLnXUHzEqXpnOLepxh3DxEm7EUjS6UVU3HnX/0lYTxZa8ik3+eGL6Z4=;
+Received: from mail-yw1-f180.google.com ([209.85.128.180])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qOTVD-0004A2-6H for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 26 Jul 2023 01:39:47 +0000
+Received: by mail-yw1-f180.google.com with SMTP id
+ 00721157ae682-583b019f1cbso49680067b3.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 25 Jul 2023 18:39:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20221208; t=1690335578; x=1690940378;
+ h=mime-version:references:message-id:in-reply-to:subject:cc:to:from
+ :date:from:to:cc:subject:date:message-id:reply-to;
+ bh=g4+spZWgq0eS9irqfihzysgfAABYfYXXmt6SNBBeIWA=;
+ b=MZxYT2MdZ0Omg+tGFjNofeHkNy3Qahh2PBaeRGC1CPgAvaobe+CbfQzviGlH2bRGld
+ yZXqVlc4rdM7Hn/0uDpIIp7PtuXFyXV1rOEzEcPsa6KfHQ8WsO8NrD1ggf9GGi+atd7F
+ nKDBxVEOzhZviRxzmHMsde7z3UqWCZoSc0lNm1akA/R8EHPW9npAKef3Z/pjfCjWQWBN
+ xmycegOze/hxSYYenv2HpylIbUfqF9JiHr0gy59wVHZoy8dXEq78uEH7BvhlWGHxnNVM
+ Pm/pG6h4Z3mK+EEHLb2xoyIraXRTQQ+dd3MgzFr8XAVX1x101W0eH3RmqvYAcZ2a0tMf
+ tMBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1690335578; x=1690940378;
+ h=mime-version:references:message-id:in-reply-to:subject:cc:to:from
+ :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=g4+spZWgq0eS9irqfihzysgfAABYfYXXmt6SNBBeIWA=;
+ b=J50A506JprqsVlqyb0VEaPFfyv1E3px8M5xh7G7+CXoWoFIEve2bUcqmXDQzeJ8+al
+ YHkdbFdr+tmrw0t6vMCb6WG76qO3KQQ7XVym6iZG9BtIhlQ5el9oLIWD4SK5elfMElth
+ Ip3lCratKc3BImMrYELi5180E1sWCWHi9Qu/O1A5lUrWAdk5oT75f0q9cU6lrYaDHo9i
+ i7LQiPSjAwP8zvqd34PilYaxD6TF0FDdvmVC0TpRAtN2aHd+svX92NUIf80r+6yzBwaB
+ WkY8y7dASI5Fg6Xt0vWvns3E3skJdQSXwMi3aumZqKWJzRK1yvZjhwuGnCQE1tyIUF0T
+ gZlw==
+X-Gm-Message-State: ABy/qLag93+jgwaOBqmoSiwlPJ4zlGLyHXpbHwA9iMM8aIEGx+Cq4JZt
+ XRUXE/yYujWJ1NUaOr3y24Firw==
+X-Google-Smtp-Source: APBJJlHxqCs0/k9opPHZr1oFjC/IjLn2NWFjtEyuaFY5bDdVyDOg3sTAz2vkUnxY9z5liUX1UEynKA==
+X-Received: by 2002:a81:46c3:0:b0:56d:2189:d87a with SMTP id
+ t186-20020a8146c3000000b0056d2189d87amr821699ywa.15.1690335578030; 
+ Tue, 25 Jul 2023 18:39:38 -0700 (PDT)
+Received: from ripple.attlocal.net
+ (172-10-233-147.lightspeed.sntcca.sbcglobal.net. [172.10.233.147])
+ by smtp.gmail.com with ESMTPSA id
+ s10-20020a5b044a000000b00c654cc439fesm3165326ybp.52.2023.07.25.18.39.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Jul 2023 18:39:37 -0700 (PDT)
+Date: Tue, 25 Jul 2023 18:39:25 -0700 (PDT)
+X-X-Sender: hugh@ripple.attlocal.net
+To: Jeff Layton <jlayton@kernel.org>
+In-Reply-To: <20230725-mgctime-v6-3-a794c2b7abca@kernel.org>
+Message-ID: <42c5bbe-a7a4-3546-e898-3f33bd71b062@google.com>
+References: <20230725-mgctime-v6-0-a794c2b7abca@kernel.org>
+ <20230725-mgctime-v6-3-a794c2b7abca@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Chao Liu <chaoliu719@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20230725013607.4134123-1-chaoliu719@gmail.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230725013607.4134123-1-chaoliu719@gmail.com>
-X-Spam-Score: -7.9 (-------)
+X-Spam-Score: -15.7 (---------------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/7/25 9:36,
- Chao Liu wrote: > From: Chao Liu <liuchao@coolpad.com>
- > > This patch is a cleanup: > 1. Merge __drop_largest_extent() since it
- has only one caller. > 2. Introduce __unlock_tree_wit [...] 
- Content analysis details:   (-7.9 points, 6.0 required)
+ Content preview:  On Tue, 25 Jul 2023, Jeff Layton wrote: > Most filesystems
+ that use the pagecache will update the mtime, ctime, > and change attribute
+ when a page becomes writeable. Add a page_mkwrite > operation for tmpfs and
+ just use it to bump the mtime [...] 
+ Content analysis details:   (-15.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -7.5 USER_IN_DEF_SPF_WL     From: address is in the default SPF
+ welcome-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.180 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -2.0 NICE_REPLY_A           Looks like a legit reply (A)
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qOTGs-002TW0-55
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: introduce two helper functions for
- the largest cached extent
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.128.180 listed in list.dnswl.org]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.5 ENV_AND_HDR_SPF_MATCH  Env and Hdr From used in default SPF WL
+ Match
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1qOTVD-0004A2-6H
+Subject: Re: [f2fs-dev] [PATCH v6 3/7] tmpfs: bump the mtime/ctime/iversion
+ when page becomes writeable
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,249 +134,126 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chao Liu <liuchao@coolpad.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Hugh Dickins via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Hugh Dickins <hughd@google.com>
+Cc: Latchesar Ionkov <lucho@ionkov.net>,
+ Martin Brandenburg <martin@omnibond.com>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ linux-xfs@vger.kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Christian Schoenebeck <linux_oss@crudebyte.com>,
+ Dave Chinner <david@fromorbit.com>, David Howells <dhowells@redhat.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Hans de Goede <hdegoede@redhat.com>, Marc Dionne <marc.dionne@auristor.com>,
+ codalist@coda.cs.cmu.edu, linux-afs@lists.infradead.org,
+ Mike Marshall <hubcap@omnibond.com>, Paulo Alcantara <pc@manguebit.com>,
+ linux-cifs@vger.kernel.org, Eric Van Hensbergen <ericvh@kernel.org>,
+ Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
+ Hugh Dickins <hughd@google.com>, Tyler Hicks <code@tyhicks.com>,
+ cluster-devel@redhat.com, coda@cs.cmu.edu, linux-mm@kvack.org,
+ linux-f2fs-devel@lists.sourceforge.net, Ilya Dryomov <idryomov@gmail.com>,
+ Iurii Zaikin <yzaikin@google.com>, Namjae Jeon <linkinjeon@kernel.org>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, ecryptfs@vger.kernel.org,
+ Kees Cook <keescook@chromium.org>, ocfs2-devel@lists.linux.dev,
+ Anthony Iliopoulos <ailiop@suse.com>, Josef Bacik <josef@toxicpanda.com>,
+ Tom Talpey <tom@talpey.com>, Tejun Heo <tj@kernel.org>,
+ Yue Hu <huyue2@coolpad.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ linux-mtd@lists.infradead.org, David Sterba <dsterba@suse.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Xiubo Li <xiubli@redhat.com>, Gao Xiang <xiang@kernel.org>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Jan Harkes <jaharkes@cs.cmu.edu>,
+ Christian Brauner <brauner@kernel.org>, linux-ext4@vger.kernel.org,
+ Theodore Ts'o <tytso@mit.edu>, Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, v9fs@lists.linux.dev,
+ ntfs3@lists.linux.dev, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
+ Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, Jeffle Xu <jefflexu@linux.alibaba.com>,
+ devel@lists.orangefs.org, Anna Schumaker <anna@kernel.org>,
+ Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Sungjong Seo <sj1557.seo@samsung.com>, linux-erofs@lists.ozlabs.org,
+ linux-nfs@vger.kernel.org, linux-btrfs@vger.kernel.org,
+ Joel Becker <jlbec@evilplan.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/7/25 9:36, Chao Liu wrote:
-> From: Chao Liu <liuchao@coolpad.com>
+On Tue, 25 Jul 2023, Jeff Layton wrote:
+
+> Most filesystems that use the pagecache will update the mtime, ctime,
+> and change attribute when a page becomes writeable. Add a page_mkwrite
+> operation for tmpfs and just use it to bump the mtime, ctime and change
+> attribute.
 > 
-> This patch is a cleanup:
-> 1. Merge __drop_largest_extent() since it has only one caller.
-> 2. Introduce __unlock_tree_with_checking_largest() and
->     __drop_largest_extent() to help manage largest and largest_update
->     in extent_tree.
-> 
-> Signed-off-by: Chao Liu <liuchao@coolpad.com>
-> ---
-> v2: Make sure et->largest_updated gets updated within &et->lock.
->      Thanks to Chao Yu for pointing out.
-> ---
->   fs/f2fs/extent_cache.c | 66 ++++++++++++++++++++----------------------
->   fs/f2fs/f2fs.h         |  4 +--
->   2 files changed, 33 insertions(+), 37 deletions(-)
-> 
-> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-> index 0e2d49140c07f..cfc69621a8a26 100644
-> --- a/fs/f2fs/extent_cache.c
-> +++ b/fs/f2fs/extent_cache.c
-> @@ -19,6 +19,12 @@
->   #include "node.h"
->   #include <trace/events/f2fs.h>
->   
-> +static void __drop_largest_extent(struct extent_tree *et)
-> +{
-> +	et->largest.len = 0;
-> +	et->largest_updated = true;
-> +}
-> +
->   bool sanity_check_extent_cache(struct inode *inode)
->   {
->   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> @@ -35,8 +41,7 @@ bool sanity_check_extent_cache(struct inode *inode)
->   
->   	/* Let's drop, if checkpoint got corrupted. */
->   	if (is_set_ckpt_flags(sbi, CP_ERROR_FLAG)) {
-> -		ei->len = 0;
-> -		et->largest_updated = true;
-> +		__drop_largest_extent(et);
+> This fixes xfstest generic/080 on tmpfs.
 
-__drop_largest_extent_force(et);
+Huh.  I didn't notice when this one crept into the multigrain series.
 
->   		return true;
->   	}
->   
-> @@ -310,6 +315,8 @@ static void __detach_extent_node(struct f2fs_sb_info *sbi,
->   
->   	if (et->cached_en == en)
->   		et->cached_en = NULL;
-> +
-> +	/* keep the largest as we can still use it */
+I'm inclined to NAK this patch: at the very least, it does not belong
+in the series, but should be discussed separately.
 
-The comments doesn't match below code?
+Yes, tmpfs does not and never has used page_mkwrite, and gains some
+performance advantage from that.  Nobody has ever asked for this
+change before, or not that I recall.
 
->   	kmem_cache_free(extent_node_slab, en);
->   }
->   
-> @@ -385,15 +392,6 @@ static unsigned int __free_extent_tree(struct f2fs_sb_info *sbi,
->   	return count - atomic_read(&et->node_cnt);
->   }
->   
-> -static void __drop_largest_extent(struct extent_tree *et,
-> -					pgoff_t fofs, unsigned int len)
-> -{
-> -	if (fofs < et->largest.fofs + et->largest.len &&
-> -			fofs + len > et->largest.fofs) {
-> -		et->largest.len = 0;
-> -		et->largest_updated = true;
-> -	}
-> -}
-
-What about:
-
-static void __drop_largest_extent_cond(struct extent_tree *et,
-					pgoff_t fofs, unsigned int len,
-					bool force)
-{
-	if (force || (fofs < et->largest.fofs + et->largest.len &&
-			fofs + len > et->largest.fofs)) {
-		et->largest.len = 0;
-		et->largest_updated = true;
-	}
-}
-
-static void __drop_largest_extent_force(struct extent_tree *et)
-{
-	__drop_largest_extent_cond(et, 0, 0, true);
-}
-
->   
->   void f2fs_init_read_extent_tree(struct inode *inode, struct page *ipage)
->   {
-> @@ -601,6 +599,19 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
->   	return en;
->   }
->   
-> +static void __unlock_tree_with_checking_largest(struct extent_tree *et,
-> +						struct inode *inode)
-> +{
-> +	if (et->type == EX_READ && et->largest_updated) {
-> +		et->largest_updated = false;
-> +		write_unlock(&et->lock);
-> +		f2fs_mark_inode_dirty_sync(inode, true);
-> +		return;
-> +	}
-> +
-> +	write_unlock(&et->lock);
-> +}
-> +
->   static void __update_extent_tree_range(struct inode *inode,
->   			struct extent_info *tei, enum extent_type type)
->   {
-> @@ -612,7 +623,6 @@ static void __update_extent_tree_range(struct inode *inode,
->   	struct rb_node **insert_p = NULL, *insert_parent = NULL;
->   	unsigned int fofs = tei->fofs, len = tei->len;
->   	unsigned int end = fofs + len;
-> -	bool updated = false;
->   	bool leftmost = false;
->   
->   	if (!et)
-> @@ -636,11 +646,10 @@ static void __update_extent_tree_range(struct inode *inode,
->   		prev = et->largest;
->   		dei.len = 0;
->   
-> -		/*
-> -		 * drop largest extent before lookup, in case it's already
-> -		 * been shrunk from extent tree
-> -		 */
-> -		__drop_largest_extent(et, fofs, len);
-
-__drop_largest_extent_cond(et, fofs, len, false);
-
-> +		/* updates may cause largest extent cache to become invalid */
-> +		if (fofs < et->largest.fofs + et->largest.len &&
-> +		    fofs + len > et->largest.fofs)
-> +			__drop_largest_extent(et);
->   	}
->   
->   	/* 1. lookup first extent node in range [fofs, fofs + len - 1] */
-> @@ -733,8 +742,7 @@ static void __update_extent_tree_range(struct inode *inode,
->   		if (dei.len >= 1 &&
->   				prev.len < F2FS_MIN_EXTENT_LEN &&
->   				et->largest.len < F2FS_MIN_EXTENT_LEN) {
-> -			et->largest.len = 0;
-> -			et->largest_updated = true;
-> +			__drop_largest_extent(et);
-
-__drop_largest_extent_force(et);
-
->   			set_inode_flag(inode, FI_NO_EXTENT);
->   		}
->   	}
-> @@ -742,10 +750,6 @@ static void __update_extent_tree_range(struct inode *inode,
->   	if (is_inode_flag_set(inode, FI_NO_EXTENT))
->   		__free_extent_tree(sbi, et);
->   
-> -	if (et->largest_updated) {
-> -		et->largest_updated = false;
-> -		updated = true;
-> -	}
-
-I guess we'd better keep previous logic.
-
->   	goto out_read_extent_cache;
->   update_age_extent_cache:
->   	if (!tei->last_blocks)
-> @@ -757,10 +761,7 @@ static void __update_extent_tree_range(struct inode *inode,
->   		__insert_extent_tree(sbi, et, &ei,
->   					insert_p, insert_parent, leftmost);
->   out_read_extent_cache:
-> -	write_unlock(&et->lock);
-> -
-> -	if (updated)
-> -		f2fs_mark_inode_dirty_sync(inode, true);
-
-Ditto,
-
-> +	__unlock_tree_with_checking_largest(et, inode);
->   }
->   
->   #ifdef CONFIG_F2FS_FS_COMPRESSION
-> @@ -1092,7 +1093,6 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
->   {
->   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->   	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
-> -	bool updated = false;
->   
->   	if (!__may_extent_tree(inode, type))
->   		return;
-> @@ -1101,14 +1101,10 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
->   	__free_extent_tree(sbi, et);
->   	if (type == EX_READ) {
->   		set_inode_flag(inode, FI_NO_EXTENT);
-> -		if (et->largest.len) {
-> -			et->largest.len = 0;
-> -			updated = true;
-> -		}
-> +		if (et->largest.len)
-> +			__drop_largest_extent(et);
->   	}
-> -	write_unlock(&et->lock);
-> -	if (updated)
-> -		f2fs_mark_inode_dirty_sync(inode, true);
-
-Ditto,
+Please drop it from the series: and if you feel strongly, or know
+strong reasons why tmpfs suddenly needs to use page_mkwrite now,
+please argue them separately.  To pass generic/080 is not enough.
 
 Thanks,
+Hugh
 
-> +	__unlock_tree_with_checking_largest(et, inode);
->   }
->   
->   void f2fs_drop_extent_tree(struct inode *inode)
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index d372bedb0fe4e..da02e120e5ea6 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -665,7 +665,7 @@ struct extent_tree {
->   
->   struct extent_tree_info {
->   	struct radix_tree_root extent_tree_root;/* cache extent cache entries */
-> -	struct mutex extent_tree_lock;	/* locking extent radix tree */
-> +	struct mutex extent_tree_lock;		/* locking extent radix tree */
->   	struct list_head extent_list;		/* lru list for shrinker */
->   	spinlock_t extent_lock;			/* locking extent lru list */
->   	atomic_t total_ext_tree;		/* extent tree count */
-> @@ -766,7 +766,7 @@ enum {
->   	FI_ACL_MODE,		/* indicate acl mode */
->   	FI_NO_ALLOC,		/* should not allocate any blocks */
->   	FI_FREE_NID,		/* free allocated nide */
-> -	FI_NO_EXTENT,		/* not to use the extent cache */
-> +	FI_NO_EXTENT,		/* not to use the read extent cache */
->   	FI_INLINE_XATTR,	/* used for inline xattr */
->   	FI_INLINE_DATA,		/* used for inline data*/
->   	FI_INLINE_DENTRY,	/* used for inline dentry */
+> 
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+> ---
+>  mm/shmem.c | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+> 
+> diff --git a/mm/shmem.c b/mm/shmem.c
+> index b154af49d2df..654d9a585820 100644
+> --- a/mm/shmem.c
+> +++ b/mm/shmem.c
+> @@ -2169,6 +2169,16 @@ static vm_fault_t shmem_fault(struct vm_fault *vmf)
+>  	return ret;
+>  }
+>  
+> +static vm_fault_t shmem_page_mkwrite(struct vm_fault *vmf)
+> +{
+> +	struct vm_area_struct *vma = vmf->vma;
+> +	struct inode *inode = file_inode(vma->vm_file);
+> +
+> +	file_update_time(vma->vm_file);
+> +	inode_inc_iversion(inode);
+> +	return 0;
+> +}
+> +
+>  unsigned long shmem_get_unmapped_area(struct file *file,
+>  				      unsigned long uaddr, unsigned long len,
+>  				      unsigned long pgoff, unsigned long flags)
+> @@ -4210,6 +4220,7 @@ static const struct super_operations shmem_ops = {
+>  
+>  static const struct vm_operations_struct shmem_vm_ops = {
+>  	.fault		= shmem_fault,
+> +	.page_mkwrite	= shmem_page_mkwrite,
+>  	.map_pages	= filemap_map_pages,
+>  #ifdef CONFIG_NUMA
+>  	.set_policy     = shmem_set_policy,
+> @@ -4219,6 +4230,7 @@ static const struct vm_operations_struct shmem_vm_ops = {
+>  
+>  static const struct vm_operations_struct shmem_anon_vm_ops = {
+>  	.fault		= shmem_fault,
+> +	.page_mkwrite	= shmem_page_mkwrite,
+>  	.map_pages	= filemap_map_pages,
+>  #ifdef CONFIG_NUMA
+>  	.set_policy     = shmem_set_policy,
+> 
+> -- 
+> 2.41.0
 
 
 _______________________________________________
