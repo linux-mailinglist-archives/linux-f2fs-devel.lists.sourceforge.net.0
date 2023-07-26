@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BDE2762C35
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Jul 2023 08:59:50 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E022762C3C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Jul 2023 09:00:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qOYUt-0006Xr-7H;
-	Wed, 26 Jul 2023 06:59:48 +0000
+	id 1qOYVh-00075f-2E;
+	Wed, 26 Jul 2023 07:00:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <muchun.song@linux.dev>) id 1qOYUq-0006Xi-Ef
+ (envelope-from <muchun.song@linux.dev>) id 1qOYVb-00075W-FO
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 26 Jul 2023 06:59:45 +0000
+ Wed, 26 Jul 2023 07:00:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
  Cc:Date:In-Reply-To:From:Subject:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Uv3CnAnXFWAb1Qfc6DYGZ2zStBaDmHQahM10yM3E8NM=; b=fX9u/NqHyKEqIf7MbEpny4WBZm
- R2F+NVdfQevign8wBCfwQmhiOhnhbu+37+XDzTZsowhxDkwdToYNfKKrTE4Jce9G6X5VjANDZSOV0
- Vureu3xDIYaKp3ahw/d7FlYpQqgCGr3f4mLav5AhHhAaNBubJbk37MmD5Hm6o1mfc5H0=;
+ bh=OC4KPzU6tciOrfm8EFdW/zf4963ci4mLF+j8l1KE5tM=; b=iLSjvrPtCoMZ7HNLbZ7l/L6pCE
+ u9EH6BUiDRxzqWQAGFDSF9U7mH4XpFOLgms/AQicYbMJy7PtvFTTYS8n053fLUnJQ9HyJAeT3ImGG
+ pbvSAm/PPIuVVEubaAj2nAa8I40yH2GKrwJW2gvLVIvnK8b6X4WOjxS82VVcmv0tKE2w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
@@ -31,33 +31,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Uv3CnAnXFWAb1Qfc6DYGZ2zStBaDmHQahM10yM3E8NM=; b=Ru7iFSpLE57E1Dh3pNVuOfKM9k
- Rwj9oHz8RJLp78PD0cyg8YMWQZtLE7T79mYhQHMEW+Wves11xZc9c7EUgSfJqUhIv2TcQW9pNQ/SN
- 7oXDIhf+wYR7s046rTpHfC9YmsWNE4ex0NNoZyegLNhjnIpwPa6j7SZuyNKRBNdhMBcY=;
-Received: from out-29.mta0.migadu.com ([91.218.175.29])
+ bh=OC4KPzU6tciOrfm8EFdW/zf4963ci4mLF+j8l1KE5tM=; b=Jrget9klx62EkhHBooeHZi4/0k
+ SlaM+V1D5x+xQlLIxMedpB/O7aZWnu7DB/DwcX7WuUmSG/U2rIR0yg5zDpfiCl2OxrW8B0o1dlq22
+ kAvCb4ypZZeWPjf9WZHN0gh/77aZMFGRNAgv+TYvyBLJ2cR4KfZFntir1KZGXYlQPCDM=;
+Received: from out-58.mta0.migadu.com ([91.218.175.58])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qOYUn-002jVR-PJ for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 26 Jul 2023 06:59:45 +0000
+ id 1qOYVX-002jXi-UC for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 26 Jul 2023 07:00:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1690354775;
+ t=1690354821;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Uv3CnAnXFWAb1Qfc6DYGZ2zStBaDmHQahM10yM3E8NM=;
- b=jD53phpyWPV1m6lZJFSij23z5l3BtMZ3Nm78UJiIwyWe54WQrTuB+sE65oVwbOCaOC4LVW
- IQLhspnZBS8xdLdXGppCnRW57Ryb0UwsUR0bMOKoxDhTEU7CwRK7a6TaSyxs47bGtrMftD
- EYhZrEwmNT7OG6AMmxQHn4AvJzBEbco=
+ bh=OC4KPzU6tciOrfm8EFdW/zf4963ci4mLF+j8l1KE5tM=;
+ b=iDZQzOerHRE+IOt6kDpFe/TDB+N4qMvQTQndP12lYqhs3OrJd5JfINtesZHtptfd9iC616
+ /Xb+r1wFTA+uxkP+jFrdX8hbQcjrGCMcJ2CcELtL1UjS+fWQpVujDpOM7OXMN1vC4ZHnGG
+ o/IYYCnTDc7xLzZrYv28Q3UtMNEdLjE=
 MIME-Version: 1.0
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <20230724094354.90817-15-zhengqi.arch@bytedance.com>
-Date: Wed, 26 Jul 2023 14:59:06 +0800
-Message-Id: <864F467A-C237-44F9-9271-945146948336@linux.dev>
+In-Reply-To: <20230724094354.90817-16-zhengqi.arch@bytedance.com>
+Date: Wed, 26 Jul 2023 14:59:35 +0800
+Message-Id: <425A7B54-A16E-4B93-A1EE-F6860F15C559@linux.dev>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
- <20230724094354.90817-15-zhengqi.arch@bytedance.com>
+ <20230724094354.90817-16-zhengqi.arch@bytedance.com>
 To: Qi Zheng <zhengqi.arch@bytedance.com>
 X-Migadu-Flow: FLOW_OUT
 X-Spam-Score: -0.2 (/)
@@ -69,8 +69,9 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview:  > On Jul 24, 2023, at 17:43,
  Qi Zheng <zhengqi.arch@bytedance.com>
- wrote: > > Use new APIs to dynamically allocate the nfsd-filecache shrinker.
- > > Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com> 
+ wrote: > > Use new APIs to dynamically allocate the dquota-cache shrinker.
+ > > Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com> Reviewed-by: Muchun
+ Song <songmuchun@bytedance.com> 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -83,9 +84,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qOYUn-002jVR-PJ
-Subject: Re: [f2fs-dev] [PATCH v2 14/47] nfsd: dynamically allocate the
- nfsd-filecache shrinker
+X-Headers-End: 1qOYVX-002jXi-UC
+Subject: Re: [f2fs-dev] [PATCH v2 15/47] quota: dynamically allocate the
+ dquota-cache shrinker
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,7 +121,7 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 > On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
 > 
-> Use new APIs to dynamically allocate the nfsd-filecache shrinker.
+> Use new APIs to dynamically allocate the dquota-cache shrinker.
 > 
 > Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 
