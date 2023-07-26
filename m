@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2003A762D40
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Jul 2023 09:25:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A836762D56
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 26 Jul 2023 09:27:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qOYu6-0006ZM-KJ;
-	Wed, 26 Jul 2023 07:25:51 +0000
+	id 1qOYvC-0007Xz-Rh;
+	Wed, 26 Jul 2023 07:26:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <muchun.song@linux.dev>) id 1qOYu4-0006ZG-VN
+ (envelope-from <muchun.song@linux.dev>) id 1qOYv8-0007Xp-7F
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 26 Jul 2023 07:25:49 +0000
+ Wed, 26 Jul 2023 07:26:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
  Cc:Date:In-Reply-To:From:Subject:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zvdjs6nZtoAJTeUNZnzlMBg+3W9EeQfEjhMJc2aooOM=; b=PJhN/UDDFJw0/kyZ8tvQ0YNEpk
- dcs3TD7sq2U43QUfBaWMIw6OBEYMfMvTIUkbW7EUVkqFCz5FY8GxBzfBIlO05x8KMTBp2fmJRhunA
- uB+Vw74b0xtJ0G2tB0JmUYdixn5alaBG7ydolj/ydkXRIl3Xogx5j/y4QsWEw6/K/bUQ=;
+ bh=x/YPwJU0rwLy+AuHnuxjdCUhH1EzE6WkopZ0kgAJ1Qo=; b=RrhN8SAG5alrNAhmBJIf133GdH
+ 6GoPYWZM0ZmJ2TybCAl5GgZGtuqCFq+4BgO5UfTEm8tmOVVY69cizYN3BDuNEZEPuHWArAIAeM9wg
+ 4x7Zz9SXyaHhq0W3VjgBn789EoOvSQlY5OwC8Df9oLLdBsJj9OwGE2+dJNAHv8TPrRvE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
@@ -31,38 +31,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zvdjs6nZtoAJTeUNZnzlMBg+3W9EeQfEjhMJc2aooOM=; b=dmZUnbnmTKN68N8mnL0JPlSP85
- Vdjb/gp5XrUyDmaM5dStw0UVjWiX6vLYZm2zGu/cTwO6gNOxA9L3XcimiB3NYtGAsdLBYEISQTluJ
- bWI94gVuWEFn2y/Z4gczFuHySuI10eRzqjHC7j3AV3DX7Gm8VRqNknbsQh+KAf3xg8ww=;
-Received: from out-53.mta0.migadu.com ([91.218.175.53])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=x/YPwJU0rwLy+AuHnuxjdCUhH1EzE6WkopZ0kgAJ1Qo=; b=I4GuC0L0cmRZMTl4BbRJ3MiHTu
+ vOqVfS6msV7xzHaLVaz3BXVH/eAPUcEApZJm0maLCT+zRj/IKmZUVxBlGqr0lpgccWjD8Xsmwo73q
+ om9f17uQxCN0p7kAn/B3xU8Oa/EUUd9HaGoi9yq64nNu0VTDyqtYC+xMeeN/I7NPPtL0=;
+Received: from out-29.mta0.migadu.com ([91.218.175.29])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qOYu3-0000FV-8g for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 26 Jul 2023 07:25:49 +0000
+ id 1qOYv6-002lqR-6F for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 26 Jul 2023 07:26:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1690356339;
+ t=1690356405;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=zvdjs6nZtoAJTeUNZnzlMBg+3W9EeQfEjhMJc2aooOM=;
- b=S2kua2S04Evo6/UraSJyk1agL/DLGyhTxgzf2kveiPAUMLzy8KFKZaoPl72LwAbMUUU5KX
- yI90TImY1RmSccSZNS94f8DfCPZ1jkBAfVxRDDBOpVRhB+p5BTP1ltZuaxYaeg0c8hKX8y
- 9ZHbolk78fhzGoCn5zkqLPSgrNIAnzc=
+ bh=x/YPwJU0rwLy+AuHnuxjdCUhH1EzE6WkopZ0kgAJ1Qo=;
+ b=UA4cvi/GGMdckJQ6g4p3+u38P404cT3MaC3q014wQwvll1a4nrZdfsP6/l2xBOvqxQBZnG
+ /GB100BFGEJn37pYrEcJWPkcPwCehM0mCMv1erArHez8P+wU/wx/xg2YNYRHWyz7GvCoJN
+ LWY2Z8xIEtpCzuJK57wk7wbFhJGlyYE=
 MIME-Version: 1.0
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <20230724094354.90817-26-zhengqi.arch@bytedance.com>
-Date: Wed, 26 Jul 2023 15:24:47 +0800
-Message-Id: <BE042CCF-24A0-4311-B245-25C675974173@linux.dev>
+In-Reply-To: <20230724094354.90817-27-zhengqi.arch@bytedance.com>
+Date: Wed, 26 Jul 2023 15:25:47 +0800
+Message-Id: <BAEA7759-FA46-40A3-B37B-AE657905A25F@linux.dev>
 References: <20230724094354.90817-1-zhengqi.arch@bytedance.com>
- <20230724094354.90817-26-zhengqi.arch@bytedance.com>
+ <20230724094354.90817-27-zhengqi.arch@bytedance.com>
 To: Qi Zheng <zhengqi.arch@bytedance.com>
 X-Migadu-Flow: FLOW_OUT
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -70,25 +70,22 @@ X-Spam-Report: Spam detection software,
  Content preview:  > On Jul 24, 2023, at 17:43,
  Qi Zheng <zhengqi.arch@bytedance.com>
  wrote: > > In preparation for implementing lockless slab shrink, use new
- APIs to > dynamically allocate the dm-bufio shrinker, so tha [...] 
+ APIs to > dynamically allocate the dm-zoned-meta shrinker, s [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [91.218.175.53 listed in wl.mailspike.net]
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1qOYu3-0000FV-8g
-Subject: Re: [f2fs-dev] [PATCH v2 25/47] dm: dynamically allocate the
- dm-bufio shrinker
+X-Headers-End: 1qOYv6-002lqR-6F
+Subject: Re: [f2fs-dev] [PATCH v2 26/47] dm zoned: dynamically allocate the
+ dm-zoned-meta shrinker
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,9 +121,9 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 > On Jul 24, 2023, at 17:43, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
 > 
 > In preparation for implementing lockless slab shrink, use new APIs to
-> dynamically allocate the dm-bufio shrinker, so that it can be freed
+> dynamically allocate the dm-zoned-meta shrinker, so that it can be freed
 > asynchronously using kfree_rcu(). Then it doesn't need to wait for RCU
-> read-side critical section when releasing the struct dm_bufio_client.
+> read-side critical section when releasing the struct dmz_metadata.
 > 
 > Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 
