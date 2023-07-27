@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02BCC764A23
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Jul 2023 10:07:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F350764A2B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Jul 2023 10:07:24 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qOw1i-0008Kk-0r;
-	Thu, 27 Jul 2023 08:07:12 +0000
+	id 1qOw1q-0006q1-Lq;
+	Thu, 27 Jul 2023 08:07:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhengqi.arch@bytedance.com>) id 1qOw1e-0008KO-QR
+ (envelope-from <zhengqi.arch@bytedance.com>) id 1qOw1p-0006pu-AX
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 27 Jul 2023 08:07:09 +0000
+ Thu, 27 Jul 2023 08:07:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hJ9OcOwqZEZhIoLNGrov7as0vMS5t1dTfm2Sm9qefJI=; b=RPfjmCxblFkVeKpAyHvJlECtGm
- PTuG0Dhasx+rNEQzWlmogdjoSVCsrdyM6IWuVlOJ8UOiYYL9GWk/3zRx2TYNu8DAWw9jtPHEMoMLd
- Z+LKhkiClRL1I8r8SwrFMkOHfdqJiC1KFVyciOLQV26Zg2FAxqEt1yLBpGf+hsX8g+UI=;
+ bh=YQ2nJ797AaeiRC4tEbuFSwr/qroaEGD64TBkJX9gwcc=; b=XfLxcjlrwJXt3k8/bzSXyOpX10
+ RfgOTg9OKMwFt9ku4Zk+FPxEmyEYuD3YAvUmOA2wmZ38ChW+fALZmMfGaiilf9DbgT+XpIFY5mQaH
+ DfSM0iC5kb+F4EUEKqeCzBKuy2mD8sjzXDrqlrxYO10bxe4g5UqlhQA07v8sIXQPH89E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,96 +31,95 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hJ9OcOwqZEZhIoLNGrov7as0vMS5t1dTfm2Sm9qefJI=; b=LrXa2SbwJhrrLLuCcwqMeukVje
- XjK77CcRTtMWY5doqcvX0ptDeOTFANhy6yzl0gyWrnRbbloTYhebjW7Ms3lSNWN7EKHAHyqFqV9rG
- Q/jaIUuAPbmyf59lepVnGPDifQ2IStpOVuVhXgB6+09NZYZq3dHUHi5cE4BexY38sz9g=;
-Received: from mail-pf1-f178.google.com ([209.85.210.178])
+ bh=YQ2nJ797AaeiRC4tEbuFSwr/qroaEGD64TBkJX9gwcc=; b=ZPg67NxFgL2Jdy53Vk6bAQ2DUy
+ 6HD8iQZZBaXxtm0Yfh5MrXzlZ/Q4nFdop6olVnXKAClJN64cyq7uN+9IVa6+p5dgbutOn71mpWwXq
+ LU8SJbj6eiRb5Xt7f27BVqb7l0OKmRKaUVFRqm6G+LC4s+TveoPBn6dQF14Px09/itVc=;
+Received: from mail-pf1-f175.google.com ([209.85.210.175])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qOw1b-0004UP-RU for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 27 Jul 2023 08:07:09 +0000
-Received: by mail-pf1-f178.google.com with SMTP id
- d2e1a72fcca58-6748a616e17so182448b3a.1
+ id 1qOw1n-0004Uv-HO for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 27 Jul 2023 08:07:21 +0000
+Received: by mail-pf1-f175.google.com with SMTP id
+ d2e1a72fcca58-6748a616e17so182490b3a.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 27 Jul 2023 01:07:07 -0700 (PDT)
+ Thu, 27 Jul 2023 01:07:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance.com; s=google; t=1690445222; x=1691050022;
+ d=bytedance.com; s=google; t=1690445234; x=1691050034;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hJ9OcOwqZEZhIoLNGrov7as0vMS5t1dTfm2Sm9qefJI=;
- b=AioCATUlkHfrdNMX26y5cMG8yiZzcrqJVPo4kMJoo0a/SPBGZMItYxbURGlfK0qQ3U
- pdquqHjvBnBibcfcPa96/7pchRYEBHxyNnf24E8fTswl7dwSe4DIa81z6/ovJRcM58gW
- OCn1XGDPuwokH00bwAsXcK1Gr5D3vpz/ZXjhjYJknWBgLZAbQPwFGeGyEdzXyVgOqH5z
- Y8WwL8gpftvasBEeZpl0cei4t7+d2ZCdr5qxpBrrzaVJwzr8lwB/25SUTyxKcTGn9xox
- E7xpcSMCUuenHibKLxGm6dPJne0R4y90eWbLKKoQI9m29dm8UqZ2/hC+L12FcXTeAlus
- bdTQ==
+ bh=YQ2nJ797AaeiRC4tEbuFSwr/qroaEGD64TBkJX9gwcc=;
+ b=krf0rRSBuACihGG0HOfvmWM3fExNQmmDQBZSFypO9OF26g2F9IRQXNjarXAj+rDJ2F
+ j6wi8ORGszAJ8F4/2B5RfozFOO9c5wQvkPuwF+U0dnMIFYzI2u+dIV518lO0Mey/M0g+
+ DAIhAFbNX4boMgnEYCrLvSqMruXRlIM+AwHL8QP9OXWtql9jawORm8JA9K2pNt2CM3by
+ 1AI1wCMU2elwBWzc8zmddDhb5S57BlUFVrs7Qpu26KSs608fAqSWn4u6Hcxn6Nu/AYp6
+ eAYr/PxpZmg2LEli6lhHn6OsT6FdGj3gL7SNMtigAeYxmILx7EQ2Lx+oYLfIsw664x5Q
+ hi2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690445222; x=1691050022;
+ d=1e100.net; s=20221208; t=1690445234; x=1691050034;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hJ9OcOwqZEZhIoLNGrov7as0vMS5t1dTfm2Sm9qefJI=;
- b=ZVQj8bVvt+ysrfglqtoMtJVXLPfFveel3r0ATL9JMbaX24jEFayGTN2jfBW1OkM+vf
- 1KtAeoM4krjQKrIrTEvoQDtVHhCiB3V7B4F5es+Yav4K9AEBLzgBuSl27LA0fJYkJX1t
- H6LVpEjjIJJHCRDNpVoN8vBac6+Vx7VvFSobZf9qMFAxJwUYuCN4qVJzIKIkK5nyDa/7
- 7DeRlBCvwusXugzllSepCsSLm7VB+DL4P0pES+kUlSWQDmbvjRIS0H0DfAW+EKrLTwMb
- ZL6s89Gt3zgwmUjhbwpwNUqk2UdW4RoxeN9yaT6iv70nZcQM9jD7TjRntFlr6pdWlANJ
- xDxw==
-X-Gm-Message-State: ABy/qLZj4LKySr0aFWpaL+czSytU+zggWeAQxpy8U4S+iPQDR4d14Zsn
- TtxV8Ud0KbLQNqRXfp95oYp/BA==
-X-Google-Smtp-Source: APBJJlEQjBlPfpR5V6JAfBPtQGnM4uH9f200On7b1qJi/VneGv5RiS5uPlFi7ClY0YXsCiY0kjcbBw==
-X-Received: by 2002:aa7:8615:0:b0:681:9fe0:b543 with SMTP id
- p21-20020aa78615000000b006819fe0b543mr4619538pfn.2.1690445222261; 
- Thu, 27 Jul 2023 01:07:02 -0700 (PDT)
+ bh=YQ2nJ797AaeiRC4tEbuFSwr/qroaEGD64TBkJX9gwcc=;
+ b=KkelRMbBEQ2WoceVlxwlmttnF0FWYE1xxmUl/Qhci3f1CJtSCeo+VOLQFoIR0P1/j9
+ AA1N9OuM+4Cum0l9+c0o2nFVJYwAsbgfbZ13XqHW96FYLoE400kTO4MbYsPZcuWJ6WGi
+ dDmF9QL395RuUBQTyiHl3MJY+myPQJPOZk0Mujm2BDhaW5l9rH0F/BqlCs3FRXwwDkMl
+ xEhuXaerpfQXm+VUTbnKuoedL/MVcJ8rpMoC6hh4CNhW+RCsWrbaQeMi+unkSi6nFmWK
+ Slp1LpUcWdqsR/XRG03z52kl1/ZvljtRWTkQg7G+7BkQZqUPHEfRBPggrty5jPKspfSa
+ 8Wvg==
+X-Gm-Message-State: ABy/qLZUS+ZqAVJXTGPStc3p59UDxv7GadPjW+x+4cC6wfNw7NkD0rhr
+ QynB9ky62iNA3uNJ5+1XZ/e+kw==
+X-Google-Smtp-Source: APBJJlExJjCwBoW4B5netumBOqdfs5+SJLDXxiJ/1dno6haNjCE+wUan/A+nwEsop7KuM9iLlMTgjA==
+X-Received: by 2002:a05:6a20:918e:b0:11a:dbb3:703b with SMTP id
+ v14-20020a056a20918e00b0011adbb3703bmr5540739pzd.6.1690445233998; 
+ Thu, 27 Jul 2023 01:07:13 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.147])
  by smtp.gmail.com with ESMTPSA id
- j8-20020aa78d08000000b006828e49c04csm885872pfe.75.2023.07.27.01.06.50
+ j8-20020aa78d08000000b006828e49c04csm885872pfe.75.2023.07.27.01.07.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jul 2023 01:07:01 -0700 (PDT)
+ Thu, 27 Jul 2023 01:07:13 -0700 (PDT)
 To: akpm@linux-foundation.org, david@fromorbit.com, tkhai@ya.ru,
  vbabka@suse.cz, roman.gushchin@linux.dev, djwong@kernel.org,
  brauner@kernel.org, paulmck@kernel.org, tytso@mit.edu,
  steven.price@arm.com, cel@kernel.org, senozhatsky@chromium.org,
  yujie.liu@intel.com, gregkh@linuxfoundation.org, muchun.song@linux.dev
-Date: Thu, 27 Jul 2023 16:04:19 +0800
-Message-Id: <20230727080502.77895-7-zhengqi.arch@bytedance.com>
+Date: Thu, 27 Jul 2023 16:04:20 +0800
+Message-Id: <20230727080502.77895-8-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230727080502.77895-1-zhengqi.arch@bytedance.com>
 References: <20230727080502.77895-1-zhengqi.arch@bytedance.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Use new APIs to dynamically allocate the x86-mmu shrinker.
- Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com> Reviewed-by: Muchun
- Song <songmuchun@bytedance.com> --- arch/x86/kvm/mmu/mmu.c | 18
- ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletion [...] 
+ Content preview: Use new APIs to dynamically allocate the android-binder
+ shrinker.
+ Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com> ---
+ drivers/android/binder_alloc.c
+ | 31 +++++++++++++++++++ 1 file changed, 19 insertions(+), 12 deletions(-)
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.175 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.210.175 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.178 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.178 listed in list.dnswl.org]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1qOw1b-0004UP-RU
-Subject: [f2fs-dev] [PATCH v3 06/49] kvm: mmu: dynamically allocate the
- x86-mmu shrinker
+ valid
+X-Headers-End: 1qOw1n-0004Uv-HO
+Subject: [f2fs-dev] [PATCH v3 07/49] binder: dynamically allocate the
+ android-binder shrinker
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -140,8 +139,7 @@ Cc: kvm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  cluster-devel@redhat.com, xen-devel@lists.xenproject.org,
  linux-ext4@vger.kernel.org, linux-arm-msm@vger.kernel.org, rcu@vger.kernel.org,
  linux-bcache@vger.kernel.org, Qi Zheng <zhengqi.arch@bytedance.com>,
- Muchun Song <songmuchun@bytedance.com>, linux-raid@vger.kernel.org,
- linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
+ linux-raid@vger.kernel.org, linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
  linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org
@@ -149,59 +147,68 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Use new APIs to dynamically allocate the x86-mmu shrinker.
+Use new APIs to dynamically allocate the android-binder shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
-Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 ---
- arch/x86/kvm/mmu/mmu.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+ drivers/android/binder_alloc.c | 31 +++++++++++++++++++------------
+ 1 file changed, 19 insertions(+), 12 deletions(-)
 
-diff --git a/arch/x86/kvm/mmu/mmu.c b/arch/x86/kvm/mmu/mmu.c
-index ec169f5c7dce..15fc92a24a26 100644
---- a/arch/x86/kvm/mmu/mmu.c
-+++ b/arch/x86/kvm/mmu/mmu.c
-@@ -6847,11 +6847,7 @@ static unsigned long mmu_shrink_count(struct shrinker *shrink,
- 	return percpu_counter_read_positive(&kvm_total_used_mmu_pages);
+diff --git a/drivers/android/binder_alloc.c b/drivers/android/binder_alloc.c
+index e3db8297095a..62675cedd38e 100644
+--- a/drivers/android/binder_alloc.c
++++ b/drivers/android/binder_alloc.c
+@@ -1053,11 +1053,7 @@ binder_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
+ 			    NULL, sc->nr_to_scan);
  }
  
--static struct shrinker mmu_shrinker = {
--	.count_objects = mmu_shrink_count,
--	.scan_objects = mmu_shrink_scan,
--	.seeks = DEFAULT_SEEKS * 10,
+-static struct shrinker binder_shrinker = {
+-	.count_objects = binder_shrink_count,
+-	.scan_objects = binder_shrink_scan,
+-	.seeks = DEFAULT_SEEKS,
 -};
-+static struct shrinker *mmu_shrinker;
++static struct shrinker *binder_shrinker;
  
- static void mmu_destroy_caches(void)
+ /**
+  * binder_alloc_init() - called by binder_open() for per-proc initialization
+@@ -1077,19 +1073,30 @@ void binder_alloc_init(struct binder_alloc *alloc)
+ 
+ int binder_alloc_shrinker_init(void)
  {
-@@ -6984,10 +6980,16 @@ int kvm_mmu_vendor_module_init(void)
- 	if (percpu_counter_init(&kvm_total_used_mmu_pages, 0, GFP_KERNEL))
- 		goto out;
+-	int ret = list_lru_init(&binder_alloc_lru);
++	int ret;
  
--	ret = register_shrinker(&mmu_shrinker, "x86-mmu");
--	if (ret)
-+	mmu_shrinker = shrinker_alloc(0, "x86-mmu");
-+	if (!mmu_shrinker)
- 		goto out_shrinker;
- 
-+	mmu_shrinker->count_objects = mmu_shrink_count;
-+	mmu_shrinker->scan_objects = mmu_shrink_scan;
-+	mmu_shrinker->seeks = DEFAULT_SEEKS * 10;
+-	if (ret == 0) {
+-		ret = register_shrinker(&binder_shrinker, "android-binder");
+-		if (ret)
+-			list_lru_destroy(&binder_alloc_lru);
++	ret = list_lru_init(&binder_alloc_lru);
++	if (ret)
++		return ret;
 +
-+	shrinker_register(mmu_shrinker);
++	binder_shrinker = shrinker_alloc(0, "android-binder");
++	if (!binder_shrinker) {
++		list_lru_destroy(&binder_alloc_lru);
++		return -ENOMEM;
+ 	}
+-	return ret;
 +
- 	return 0;
- 
- out_shrinker:
-@@ -7009,7 +7011,7 @@ void kvm_mmu_vendor_module_exit(void)
- {
- 	mmu_destroy_caches();
- 	percpu_counter_destroy(&kvm_total_used_mmu_pages);
--	unregister_shrinker(&mmu_shrinker);
-+	shrinker_free(mmu_shrinker);
++	binder_shrinker->count_objects = binder_shrink_count;
++	binder_shrinker->scan_objects = binder_shrink_scan;
++	binder_shrinker->seeks = DEFAULT_SEEKS;
++
++	shrinker_register(binder_shrinker);
++
++	return 0;
  }
  
- /*
+ void binder_alloc_shrinker_exit(void)
+ {
+-	unregister_shrinker(&binder_shrinker);
++	shrinker_free(binder_shrinker);
+ 	list_lru_destroy(&binder_alloc_lru);
+ }
+ 
 -- 
 2.30.2
 
