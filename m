@@ -2,94 +2,111 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1210765B3A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Jul 2023 20:14:06 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAF17765B78
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 27 Jul 2023 20:40:13 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qP5Uu-00007D-Gl;
-	Thu, 27 Jul 2023 18:14:01 +0000
+	id 1qP5u9-0006Ce-AN;
+	Thu, 27 Jul 2023 18:40:05 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tytso@mit.edu>) id 1qP5Us-00006q-Hz
+ (envelope-from <krisman@suse.de>) id 1qP5u8-0006CY-6y
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 27 Jul 2023 18:13:59 +0000
+ Thu, 27 Jul 2023 18:40:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:In-Reply-To:
+ Date:References:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YhV95XsKE5ygKImXHE1eq93G7xXd76r7xSZbt1Eo2yM=; b=IX/qDZ4/kWT6yHQi/bQi/YF7D4
- 4QQT6Zchv6hLU1FHUeOv2oY3k+lSRuBrzWVcRO3NO8EB4qQSHBg1PZrOFfeQjShCMGN2BzLKmyVGs
- kT9Nqtb5rwskf/Iq1DPhz9goaATXh35cYa2JIhlQIKDkvoncRlpVYB/qDO7YBe02iA9c=;
+ bh=F8/V8iHGHSv+JkjaulJJfd0u7+FldJFTn2B4741bG7s=; b=BYAd6xvcUMMy58pAviDpH0omRk
+ 2GzsIkL7VRN66Mu74g8e2TOlhlaO0jOPj87DvjCImcPKTRW+MKH5UK0uxePOHM9RIvWI/ARgVaTuX
+ RLW3FYg95UhRQNUljJ2D/gNCssSCQA95uEunb6f8GywRfXeB6oL8V7qYmSiVa8hQPjFc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:MIME-Version:Message-ID:In-Reply-To:Date:References:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YhV95XsKE5ygKImXHE1eq93G7xXd76r7xSZbt1Eo2yM=; b=CWpaLASBVsKQI5p/gwgGELVVIk
- FFetbka0D+nrT+n5Ks9crMf/cL2MMRKpXP1KMr2sN8+OOXrhc89D591t6mq1x8WCDdNqVEdxKGbEf
- bqHD0zrYujEwLA0hbdKOO3nfuEaMHAQmX8DRh+FBqckCKI9D1btKUF3kD5IX8zSlJxbQ=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qP5Up-0002jb-5S for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 27 Jul 2023 18:13:59 +0000
-Received: from cwcc.thunk.org (pool-173-48-115-64.bstnma.fios.verizon.net
- [173.48.115.64]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 36RIDdNJ032404
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 27 Jul 2023 14:13:40 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
- t=1690481621; bh=YhV95XsKE5ygKImXHE1eq93G7xXd76r7xSZbt1Eo2yM=;
- h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
- b=Jk0wiFKtbRC5O3WJWjnZ2xh+xyCKHrTjzINuGBBeD8UVxpWB8GV44VbRpWwgLz0qo
- ejRW0dZrPurHOSBaYdlvb0JS1/cwU8SRMjF+jexEYelgK2JklChrQfMebrl044UnRW
- 6q2UPLMYTpdTcFMbVAK4NvzHAyB4+sbOOdc4z5U7CWXEpf5w24hu5ziSqNy24pBphd
- mB2nr87xwE3PHYrVxZKzv0GIoJ86UlTyBu69wdfMBiSsGBgdeKDf7ydGLPtAM9Sxw4
- ilCU/kBrrs5nqJ+acgWcdOOF17qi7JfXWlGTOEpVJ0aHmFwy/b5ghndVr6hHp8pfbg
- jDoMewJBrFQMQ==
-Received: by cwcc.thunk.org (Postfix, from userid 15806)
- id 30B1A15C04EF; Thu, 27 Jul 2023 14:13:39 -0400 (EDT)
-Date: Thu, 27 Jul 2023 14:13:39 -0400
-From: "Theodore Ts'o" <tytso@mit.edu>
-To: Gabriel Krisman Bertazi <krisman@suse.de>
-Message-ID: <20230727181339.GH30264@mit.edu>
+ bh=F8/V8iHGHSv+JkjaulJJfd0u7+FldJFTn2B4741bG7s=; b=Nl4Tt6Xj3JgaVBapqPF4nC1dD0
+ zmFwQYk3SZzH1izlQVTqDHT7Txt5VNWkmNbbpcH3hBgT0AYMQMr76AOw9sHwCeC2i6/F80y4k20vr
+ FuBLh9bijN9Vc1hoEmoV8U+w8ZciRZsH9bdWZfS5Fgiysa8qgRDdWCK8FeX/77SqhMOU=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qP5u7-004rbA-P1 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 27 Jul 2023 18:40:04 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 8394821A6C;
+ Thu, 27 Jul 2023 18:39:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1690483197; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=F8/V8iHGHSv+JkjaulJJfd0u7+FldJFTn2B4741bG7s=;
+ b=pY7xJfduW/6AevRW1gpBnw2+o/lalqgiGdpIpgb8a36fV0VPJQbFJpeKD/+iHajpAxFQoZ
+ WxDrI+mh2W7AghNhOiiYqd00cY2hnkBeuUtKKh3EqFU4K2blkRL6eM/DJRuF30KmLelK8Z
+ cAJ69xSHsw1KGSoZ/V3fdghqT55UXFI=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1690483197;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=F8/V8iHGHSv+JkjaulJJfd0u7+FldJFTn2B4741bG7s=;
+ b=ZLBm2/R+T5G/C7PnCLDJwK+SOfa4pb3gmcixk2m0cqwJVAMWXz9y7botWgDEYF2IHH2wph
+ Qjor1waHfaUejSCQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3D579138E5;
+ Thu, 27 Jul 2023 18:39:57 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id N016Cf25wmTfCQAAMHmgww
+ (envelope-from <krisman@suse.de>); Thu, 27 Jul 2023 18:39:57 +0000
+From: Gabriel Krisman Bertazi <krisman@suse.de>
+To: "Theodore Ts'o" <tytso@mit.edu>
+Organization: SUSE
 References: <20230727172843.20542-1-krisman@suse.de>
+ <20230727181339.GH30264@mit.edu>
+Date: Thu, 27 Jul 2023 14:39:55 -0400
+In-Reply-To: <20230727181339.GH30264@mit.edu> (Theodore Ts'o's message of
+ "Thu, 27 Jul 2023 14:13:39 -0400")
+Message-ID: <87cz0d2o78.fsf@suse.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230727172843.20542-1-krisman@suse.de>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jul 27, 2023 at 01:28:36PM -0400, Gabriel Krisman
- Bertazi wrote: > This is the v4 of the negative dentry support on
- case-insensitive
- > directories. It doesn't have any functional changes from [...] 
+ Content preview:  "Theodore Ts'o" <tytso@mit.edu> writes: > On Thu, Jul 27,
+ 2023 at 01:28:36PM -0400, Gabriel Krisman Bertazi wrote: >> This is the v4
+ of the negative dentry support on case-insensitive >> directories. It doesn't
+ have any functional changes f [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [18.9.28.11 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1qP5Up-0002jb-5S
+ valid
+X-Headers-End: 1qP5u7-004rbA-P1
 Subject: Re: [f2fs-dev] [PATCH v4 0/7] Support negative dentries on
  case-insensitive ext4 and f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -110,27 +127,36 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jul 27, 2023 at 01:28:36PM -0400, Gabriel Krisman Bertazi wrote:
-> This is the v4 of the negative dentry support on case-insensitive
-> directories.  It doesn't have any functional changes from v1. It applies
-> Eric's comments to bring the flags check closet together, improve the
-> documentation and improve comments in the code.  I also relooked at the
-> locks to ensure the inode read lock is indeed enough in the lookup_slow
-> path.
+"Theodore Ts'o" <tytso@mit.edu> writes:
 
-Al, Christian, any thoughts or preferences for how we should handle
-this patch series?  I'm willing to take it through the ext4 tree, but
-since it has vfs, ext4, and f2fs changes (and the bulk of the changes
-are in the vfs), perhaps it should go through the vfs tree?
+> On Thu, Jul 27, 2023 at 01:28:36PM -0400, Gabriel Krisman Bertazi wrote:
+>> This is the v4 of the negative dentry support on case-insensitive
+>> directories.  It doesn't have any functional changes from v1. It applies
+>> Eric's comments to bring the flags check closet together, improve the
+>> documentation and improve comments in the code.  I also relooked at the
+>> locks to ensure the inode read lock is indeed enough in the lookup_slow
+>> path.
+>
+> Al, Christian, any thoughts or preferences for how we should handle
+> this patch series?  I'm willing to take it through the ext4 tree, but
+> since it has vfs, ext4, and f2fs changes (and the bulk of the changes
+> are in the vfs), perhaps it should go through the vfs tree?
+>
+> Also, Christian, I notice one of the five VFS patches in the series
+> has your Reviewed-by tag, but not the others?  Is that because you
+> haven't had a chance to make a final determination on those patches,
+> or you have outstanding comments still to be addressed?
 
-Also, Christian, I notice one of the five VFS patches in the series
-has your Reviewed-by tag, but not the others?  Is that because you
-haven't had a chance to make a final determination on those patches,
-or you have outstanding comments still to be addressed?
+Hi Ted,
 
-Cheers,
+Thanks for helping push it forward!
 
-					- Ted
+I'm not sure if I missed Christian's tag in a previous iteration. I
+looked through my archive and didn't find it. Unless I'm mistaken, I
+don't think I have any r-b from him here yet.
+
+-- 
+Gabriel Krisman Bertazi
 
 
 _______________________________________________
