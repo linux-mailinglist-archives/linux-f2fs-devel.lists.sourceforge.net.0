@@ -2,111 +2,91 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E5907666CD
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Jul 2023 10:19:32 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26E97766B92
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Jul 2023 13:20:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qPIh2-0005Uo-1e;
-	Fri, 28 Jul 2023 08:19:25 +0000
+	id 1qPLVy-0006Dr-Gy;
+	Fri, 28 Jul 2023 11:20:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhengqi.arch@bytedance.com>) id 1qPIh0-0005Ub-Bd
+ (envelope-from <brauner@kernel.org>) id 1qPLVu-0006Dd-FT
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Jul 2023 08:19:23 +0000
+ Fri, 28 Jul 2023 11:20:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0Vz5i3f1KwBqEHtOj3kkD+u+idA4hMEDLOXYQ/Zmb7I=; b=AWgSVBBb2EfmPltPz3Dq00jIjt
- GNwaG10VqRSNBu5rSci6lEy6eYt3Wds8T2GVHkEK4L8cSaPAuxA/B+bvb1ocnk6vWGyRoOf7tHbD8
- Uw529Jzwsz9fbqD59DO/oA0oyZaMdtKf1ik1s4/r9wZ/3FhlK2ARmt9gTGD02GDz6BlM=;
+ bh=Y3gNflm29tbucRmYFhFKSUPyIFzYB2tjGffD31r6wOQ=; b=RH33/g89Z+Gz0sejws7LE6qD48
+ FI2X/b8U8s80u1jQBkDPNZ+/ebx0B29HGHIbpu2fkOjtUOqVqcFQExfGTanokZe9+JjpfOQTvWT6H
+ zzPP0PgptiGczViTDuWuFi5y/WTCaevLlGPXqBtNZ1LNtGBSmBOFN50R9Tedf0smi1WM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0Vz5i3f1KwBqEHtOj3kkD+u+idA4hMEDLOXYQ/Zmb7I=; b=bwQ5uGWPZ2KwLQCoHlbY9SBl0C
- mLFImLkUSbJIpZYkfKuItDB/3eehBY4pWqT+xLFbbOqAODz2xsQ1lQexkeYVbbnsJrKjDqOmtFCuu
- ngjzeuEJsmngxJZJc5w/II8bezbbVFRO1guXRJTKa2d1J/LJIpC0UIlW3k4ikOMXKr+U=;
-Received: from mail-pf1-f176.google.com ([209.85.210.176])
+ bh=Y3gNflm29tbucRmYFhFKSUPyIFzYB2tjGffD31r6wOQ=; b=W0a8XrwOF/QZzBrh1dikuBfrZA
+ tQHsfh6sL5ObliqaeBigUMdBqibPXV7xbLJrobcV4U5OqLrgb4+hJRLIO0s6NwAGHWypkO+TAmW32
+ qjq3IsfSGrF2kHECk2kleVltmEe7/xpB/SYhkfuAtosk7u3Y+cD6NRNHyC7rGxioYls4=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qPIgy-005KTq-QI for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Jul 2023 08:19:23 +0000
-Received: by mail-pf1-f176.google.com with SMTP id
- d2e1a72fcca58-6748a616e17so437602b3a.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 28 Jul 2023 01:19:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance.com; s=google; t=1690532355; x=1691137155;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=0Vz5i3f1KwBqEHtOj3kkD+u+idA4hMEDLOXYQ/Zmb7I=;
- b=L2+elQ31DoTndDMbULUpYhAiCoRfDRGWwRsLhePlw7WW3kXFI6RoGNteAO7MNCCxPK
- FYWrT0NCxgniYdOvtk354oC7lAaEYLaI5+6nbBgCsJS7Z9F7PQNW+ZUGwlLgRq4XIWCd
- IlyzJlPUeNX37jF32KJvYLJePzYsZ7ze/fbSuG8EqYw256JXY3KCKzS1wluS9KcnHJgS
- wVJn5VLovDZDoJav6s/8z2Nev3fZMa4BKzS6r7L/dPmXUhh82k37p3M1JnHGLMc145hK
- MLBcl9i8u/Uj6MSDKzSJ+fdKEdHQ4PpsFlNhyTOhfKom9VA3y6JlxMc/+2lHqKKi6hTK
- U83g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690532355; x=1691137155;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0Vz5i3f1KwBqEHtOj3kkD+u+idA4hMEDLOXYQ/Zmb7I=;
- b=dtNIotuJzWhpcNl2wq1tPDrOR+xlJ5Oib1TOHJSL7hBXKqf2ef016CyN8FsBpqWj6a
- tjLlNw7D2zwhjbp8neH+0+hUDHY6WExiGXwT/2HJDAyGZp78EyWxL1TZDfE6DH/KgcsM
- pCL6LoTNSi+fq1IdzQNWPvXHOvDRYfYz2Ouh1cNCrQwa7ZEflxoIHJYU8JM8c4GuDD6/
- k8YUdMFylrgNgFkVXKlzhQrB4HxTLxv4Js6QzWBSR7tn3ToPpL+xtQWXT94lB0aGL858
- wKBmf8xxUCdEieMUQa+AYjHeOYM2Xb0GQVVArsS7wYM3uSmkj9CduQKjUjJJ5ErU3uiK
- f91Q==
-X-Gm-Message-State: ABy/qLbOrbAhxoOR6AkzDWMERPSY9asmGUXpjbbJlv2zjkxGefATHLCF
- iJRPME4K6tKuK43DErYRSx4EQA==
-X-Google-Smtp-Source: APBJJlFUUUMvBrf6ibd1LKjgOpEN2XEkSNdXdEqaA3c50PeJDSflhjqiMTE27IMY1LDD8QpZTvY8yg==
-X-Received: by 2002:a05:6a21:329f:b0:134:76d6:7f7 with SMTP id
- yt31-20020a056a21329f00b0013476d607f7mr2068612pzb.4.1690532355159; 
- Fri, 28 Jul 2023 01:19:15 -0700 (PDT)
-Received: from [10.70.252.135] ([203.208.167.147])
- by smtp.gmail.com with ESMTPSA id
- j63-20020a638b42000000b005637030d00csm2862658pge.30.2023.07.28.01.19.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Jul 2023 01:19:14 -0700 (PDT)
-Message-ID: <99d0958d-8446-6fe9-a0fb-f562cb04c7c8@bytedance.com>
-Date: Fri, 28 Jul 2023 16:19:01 +0800
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qPLVr-005RvT-PT for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 28 Jul 2023 11:20:05 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 70293620F0;
+ Fri, 28 Jul 2023 11:01:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71689C433C8;
+ Fri, 28 Jul 2023 11:00:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1690542063;
+ bh=OHILmmeiUht8a/iNB32Wqo6p3CZSNTmmXf/wqdU8eyM=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=lUHncmkLN11wgaMD1KR1Gy5if09x5xh0KGyx50ZGUuC2fBx+ijTW2wECE/sOye+rG
+ qDHl4LIc5ruyg2PAO1VZI95ZW/5j7Q0Vo/saVvtDVwvUJlMtgeQjFVYzjalCOIixt6
+ gEQ+u8asPVZluAxs1HoSNgHXPJA0QhMWBw4NywwMFrjIj9j61U5pX9yO+iEoVUAfbu
+ mdakOz70WJL7rxDzg7P00Ji6kHPu+xHi68+/TquTtcuasIukOIAL/+DVn48WGku6nx
+ 2ORenDwB3jD7HGc7jH1b/evq7YZ9RS2gsMH8Qjv3EgEZjMk8pxaawj3uGeQKo/zCuQ
+ +lMRyzmoHCobQ==
+From: Christian Brauner <brauner@kernel.org>
+To: Jeff Layton <jlayton@kernel.org>
+Date: Fri, 28 Jul 2023 13:00:37 +0200
+Message-Id: <20230728-unrecht-ersichtlich-cfa7d0c703d1@brauner>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230725-mgctime-v6-0-a794c2b7abca@kernel.org>
+References: <20230725-mgctime-v6-0-a794c2b7abca@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.12.0
-Content-Language: en-US
-To: Simon Horman <simon.horman@corigine.com>
-References: <20230727080502.77895-1-zhengqi.arch@bytedance.com>
- <20230727080502.77895-5-zhengqi.arch@bytedance.com>
- <ZMN4mjsF1QEsvW7D@corigine.com>
-In-Reply-To: <ZMN4mjsF1QEsvW7D@corigine.com>
-X-Spam-Score: -0.3 (/)
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1874; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=4DjYiXolHUh8qQu1N+OzbWT4vtvmgyT4c+N7Ht8XGtY=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMaQcnsy9IaFu+ZP9z1N8rj/+PH2Pm5FLY6hTmXAw+6xpv069
+ EIk93lHKwiDGxSArpsji0G4SLrecp2KzUaYGzBxWJpAhDFycAjARMyFGhh2xp3MqP+WJ6kre7E0z/m
+ vxVuf2tOrqbz/KOXZnbdld4czI8C9ly15G/weVYRsOZM6bEHF4077Al0vcwkM2vDFrTz89nQsA
+X-Developer-Key: i=brauner@kernel.org; a=openpgp;
+ fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Simon, On 2023/7/28 16:13, Simon Horman wrote: > On Thu, 
- Jul 27, 2023 at 04:04:17PM +0800,
- Qi Zheng wrote: >> The debugfs_remove_recursive()
- will wait for debugfs_file_put() to return, >> so the shrinker wil [...] 
- Content analysis details:   (-0.3 points, 6.0 required)
+ Content preview:  On Tue, 25 Jul 2023 10:58:13 -0400, Jeff Layton wrote: > The
+ VFS always uses coarse-grained timestamps when updating the > ctime and mtime
+ after a change. This has the benefit of allowing > filesystem [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.176 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.176 listed in wl.mailspike.net]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -116,10 +96,10 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.1 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1qPIgy-005KTq-QI
-Subject: Re: [f2fs-dev] [PATCH v3 04/49] mm: shrinker: remove redundant
- shrinker_rwsem in debugfs operations
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qPLVr-005RvT-PT
+Subject: Re: [f2fs-dev] (subset) [PATCH v6 0/7] fs: implement multigrain
+ timestamps
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,108 +111,98 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Qi Zheng via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Qi Zheng <zhengqi.arch@bytedance.com>
-Cc: kvm@vger.kernel.org, djwong@kernel.org, roman.gushchin@linux.dev,
- david@fromorbit.com, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- dm-devel@redhat.com, linux-mtd@lists.infradead.org, cel@kernel.org,
- x86@kernel.org, steven.price@arm.com, cluster-devel@redhat.com,
- xen-devel@lists.xenproject.org, linux-ext4@vger.kernel.org, paulmck@kernel.org,
- linux-arm-msm@vger.kernel.org, linux-nfs@vger.kernel.org, rcu@vger.kernel.org,
- linux-bcache@vger.kernel.org, Muchun Song <songmuchun@bytedance.com>,
- yujie.liu@intel.com, vbabka@suse.cz, linux-raid@vger.kernel.org,
- brauner@kernel.org, tytso@mit.edu, gregkh@linuxfoundation.org,
- muchun.song@linux.dev, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- senozhatsky@chromium.org, netdev@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, akpm@linux-foundation.org,
- linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org, tkhai@ya.ru
+Cc: Latchesar Ionkov <lucho@ionkov.net>,
+ Martin Brandenburg <martin@omnibond.com>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, "Darrick J. Wong" <djwong@kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Christian Schoenebeck <linux_oss@crudebyte.com>,
+ Dave Chinner <david@fromorbit.com>, David Howells <dhowells@redhat.com>,
+ linux-mm@kvack.org, linux-mtd@lists.infradead.org,
+ Hans de Goede <hdegoede@redhat.com>, Marc Dionne <marc.dionne@auristor.com>,
+ Steve French <sfrench@samba.org>, Tyler Hicks <code@tyhicks.com>,
+ linux-afs@lists.infradead.org, Mike Marshall <hubcap@omnibond.com>,
+ Paulo Alcantara <pc@manguebit.com>, linux-cifs@vger.kernel.org,
+ Xiubo Li <xiubli@redhat.com>, Andreas Gruenbacher <agruenba@redhat.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, Richard Weinberger <richard@nod.at>,
+ Mark Fasheh <mark@fasheh.com>, Ronnie Sahlberg <lsahlber@redhat.com>,
+ Hugh Dickins <hughd@google.com>, Luis Chamberlain <mcgrof@kernel.org>,
+ codalist@coda.cs.cmu.edu, cluster-devel@redhat.com, coda@cs.cmu.edu,
+ Iurii Zaikin <yzaikin@google.com>, Ilya Dryomov <idryomov@gmail.com>,
+ linux-ext4@vger.kernel.org, Namjae Jeon <linkinjeon@kernel.org>,
+ devel@lists.orangefs.org, Bob Peterson <rpeterso@redhat.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, Kees Cook <keescook@chromium.org>,
+ Anthony Iliopoulos <ailiop@suse.com>, ecryptfs@vger.kernel.org,
+ linux-nfs@vger.kernel.org, Josef Bacik <josef@toxicpanda.com>,
+ Tom Talpey <tom@talpey.com>, ocfs2-devel@lists.linux.dev,
+ Yue Hu <huyue2@coolpad.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Eric Van Hensbergen <ericvh@kernel.org>,
+ Gao Xiang <xiang@kernel.org>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ Jan Harkes <jaharkes@cs.cmu.edu>, Christian Brauner <brauner@kernel.org>,
+ Sungjong Seo <sj1557.seo@samsung.com>, Theodore Ts'o <tytso@mit.edu>,
+ Chris Mason <clm@fb.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ v9fs@lists.linux.dev, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Tejun Heo <tj@kernel.org>, Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Jeffle Xu <jefflexu@linux.alibaba.com>, Anna Schumaker <anna@kernel.org>,
+ Jan Kara <jack@suse.com>, linux-fsdevel@vger.kernel.org,
+ Andreas Dilger <adilger.kernel@dilger.ca>,
+ Andrew Morton <akpm@linux-foundation.org>, ntfs3@lists.linux.dev,
+ linux-erofs@lists.ozlabs.org, linux-btrfs@vger.kernel.org,
+ Joel Becker <jlbec@evilplan.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Simon,
+On Tue, 25 Jul 2023 10:58:13 -0400, Jeff Layton wrote:
+> The VFS always uses coarse-grained timestamps when updating the
+> ctime and mtime after a change. This has the benefit of allowing
+> filesystems to optimize away a lot metadata updates, down to around 1
+> per jiffy, even when a file is under heavy writes.
+> 
+> Unfortunately, this coarseness has always been an issue when we're
+> exporting via NFSv3, which relies on timestamps to validate caches. A
+> lot of changes can happen in a jiffy, so timestamps aren't sufficient to
+> help the client decide to invalidate the cache.
+> 
+> [...]
 
-On 2023/7/28 16:13, Simon Horman wrote:
-> On Thu, Jul 27, 2023 at 04:04:17PM +0800, Qi Zheng wrote:
->> The debugfs_remove_recursive() will wait for debugfs_file_put() to return,
->> so the shrinker will not be freed when doing debugfs operations (such as
->> shrinker_debugfs_count_show() and shrinker_debugfs_scan_write()), so there
->> is no need to hold shrinker_rwsem during debugfs operations.
->>
->> Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
->> Reviewed-by: Muchun Song <songmuchun@bytedance.com>
->> ---
->>   mm/shrinker_debug.c | 14 --------------
->>   1 file changed, 14 deletions(-)
->>
->> diff --git a/mm/shrinker_debug.c b/mm/shrinker_debug.c
->> index 3ab53fad8876..f1becfd45853 100644
->> --- a/mm/shrinker_debug.c
->> +++ b/mm/shrinker_debug.c
->> @@ -55,11 +55,6 @@ static int shrinker_debugfs_count_show(struct seq_file *m, void *v)
->>   	if (!count_per_node)
->>   		return -ENOMEM;
->>   
->> -	ret = down_read_killable(&shrinker_rwsem);
->> -	if (ret) {
->> -		kfree(count_per_node);
->> -		return ret;
->> -	}
->>   	rcu_read_lock();
-> 
-> Hi Qi Zheng,
-> 
-> As can be seen in the next hunk, this function returns 'ret'.
-> However, with this change 'ret' is uninitialised unless
-> signal_pending() returns non-zero in the while loop below.
+Survives xfstests (tmpfs, ext4, overlayfs) and the fs portions of LTP.
+Let's keep our eyes open for any potential issues. Past suspects has
+been IMA interacting with overlayfs. We'll see. Picked everything minus
+the tmpfs-writepage patch that was contentious.
 
-Thanks for your feedback, the 'ret' should be initialized to 0,
-will fix it.
+---
 
-Thanks,
-Qi
+Applied to the vfs.ctime branch of the vfs/vfs.git tree.
+Patches in the vfs.ctime branch should appear in linux-next soon.
 
-> 
-> This is flagged in a clan-16 W=1 build.
-> 
->   mm/shrinker_debug.c:87:11: warning: variable 'ret' is used uninitialized whenever 'do' loop exits because its condition is false [-Wsometimes-uninitialized]
->           } while ((memcg = mem_cgroup_iter(NULL, memcg, NULL)) != NULL);
->                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->   mm/shrinker_debug.c:92:9: note: uninitialized use occurs here
->           return ret;
->                  ^~~
->   mm/shrinker_debug.c:87:11: note: remove the condition if it is always true
->           } while ((memcg = mem_cgroup_iter(NULL, memcg, NULL)) != NULL);
->                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->                    1
->   mm/shrinker_debug.c:77:7: warning: variable 'ret' is used uninitialized whenever 'if' condition is true [-Wsometimes-uninitialized]
->                   if (!memcg_aware) {
->                       ^~~~~~~~~~~~
->   mm/shrinker_debug.c:92:9: note: uninitialized use occurs here
->           return ret;
->                  ^~~
->   mm/shrinker_debug.c:77:3: note: remove the 'if' if its condition is always false
->                   if (!memcg_aware) {
->                   ^~~~~~~~~~~~~~~~~~~
->   mm/shrinker_debug.c:52:9: note: initialize the variable 'ret' to silence this warning
->           int ret, nid;
->                  ^
->                   = 0
-> 
->>   
->>   	memcg_aware = shrinker->flags & SHRINKER_MEMCG_AWARE;
->> @@ -92,7 +87,6 @@ static int shrinker_debugfs_count_show(struct seq_file *m, void *v)
->>   	} while ((memcg = mem_cgroup_iter(NULL, memcg, NULL)) != NULL);
->>   
->>   	rcu_read_unlock();
->> -	up_read(&shrinker_rwsem);
->>   
->>   	kfree(count_per_node);
->>   	return ret;
-> 
-> ...
+Please report any outstanding bugs that were missed during review in a
+new review to the original patch series allowing us to drop it.
+
+It's encouraged to provide Acked-bys and Reviewed-bys even though the
+patch has now been applied. If possible patch trailers will be updated.
+
+Note that commit hashes shown below are subject to change due to rebase,
+trailer updates or similar. If in doubt, please check the listed branch.
+
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
+branch: vfs.ctime
+
+[1/7] fs: pass the request_mask to generic_fillattr
+      https://git.kernel.org/vfs/vfs/c/0a6ab6dc6958
+[2/7] fs: add infrastructure for multigrain timestamps
+      https://git.kernel.org/vfs/vfs/c/d242b98ac3e9
+[4/7] tmpfs: add support for multigrain timestamps
+      https://git.kernel.org/vfs/vfs/c/1f31c58cf032
+[5/7] xfs: switch to multigrain timestamps
+      https://git.kernel.org/vfs/vfs/c/859dd91017dd
+[6/7] ext4: switch to multigrain timestamps
+      https://git.kernel.org/vfs/vfs/c/093af249eab4
+[7/7] btrfs: convert to multigrain timestamps
+      https://git.kernel.org/vfs/vfs/c/b90a04d1c30c
 
 
 _______________________________________________
