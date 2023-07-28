@@ -2,100 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9141E766DDA
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Jul 2023 15:06:56 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B41CC766F0B
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 28 Jul 2023 16:10:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qPNB6-00053f-EY;
-	Fri, 28 Jul 2023 13:06:45 +0000
+	id 1qPOAV-0001ZO-NE;
+	Fri, 28 Jul 2023 14:10:12 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qPNB3-00053Y-SA
+ (envelope-from <brauner@kernel.org>) id 1qPOAU-0001ZI-Eo
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Jul 2023 13:06:42 +0000
+ Fri, 28 Jul 2023 14:10:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=syoEwursWPUnA3L11lne9/SRYA0L4iVsj1tzYRairOU=; b=D3PNoEUPnrEE+WvZankY6Is0ju
- S0LPa33cMsZ2YRoCVzBgJKMy8MlJ43k0+vypFjoDLvEkjptG+LwpEj/X36Z9Liqofr1qfXkfbggU3
- QF5VvN0xWgfHJtKPV0RzubDjcFc66ECYjzcfdBgnfo3vARxSkzLwcukeDePuyJ2ZbNU0=;
+ bh=QWr+P1AOA2zSjM/1sGYs83S7KtWIM/fJda0LiD/OPuI=; b=i7emvEZHYgdrtC/WFxECUwE1OM
+ 8UDxbEN9H97LqUcOFpnGISfJxKzR4hKMB57V4WTMjsD2BkkHgqmfvXrN5mYOe4K2/clOcktglW6++
+ PSpBX9zQJfTlCDSLGEJNMsFszeZRxiImqP2CwoLVe1DdejQzvSkh68Cp34EsH0lZjb9E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=syoEwursWPUnA3L11lne9/SRYA0L4iVsj1tzYRairOU=; b=f7PXTurmpg7xutjO6wkGgCVh58
- brbdG/l2PzT04AFdCck6adt7fZyL5y1KKOM59laiACMOBJgz7+y7zwkfVM0ICbtMTYl/LQaD2Mqrz
- 44tysNEODSsje328BDbM47ACL2tRHe73d2AWbwzyaXvlB7UfQGh8pmgPzEv7PbFz6MSQ=;
+ bh=QWr+P1AOA2zSjM/1sGYs83S7KtWIM/fJda0LiD/OPuI=; b=nE7RqLo0JBrTsCW0c7PXuWRYTG
+ pT2luK3/2i/7wz+YNV5NC+yNlfRiwYFctuknUKDacP7AT0QhZ3j31cMjPKd9Iz8suX6KXdVM4lSPd
+ 98MXrDn4Y5B24lZjQiFa3Um5BBErDBwjt69toSQkfgyNLo7X4bul6v1xu2Tairoi0Qww=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qPNB4-005WXY-39 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 28 Jul 2023 13:06:42 +0000
+ id 1qPOAP-005ZLp-RD for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 28 Jul 2023 14:10:10 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 641D862130;
- Fri, 28 Jul 2023 13:06:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6311C433C7;
- Fri, 28 Jul 2023 13:06:33 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 794286214E;
+ Fri, 28 Jul 2023 14:00:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E74BAC433C7;
+ Fri, 28 Jul 2023 14:00:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1690549595;
- bh=B5eDKcaoTXLugVjBQrPAJwdWNhFF7TbrpxphDJEcWEg=;
+ s=k20201202; t=1690552814;
+ bh=dIDs9VaKmXyd5CQQamII2fuzaJZZ/rrGjIB/Vv1ZMXA=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Ujq2W3motdbWyEsbwKZCMeTPTQxXd2t1I/SrcH9azhOZn/ak+gQinKrUWl0VTf2Qq
- BxXIVneSZuWTjRKw/GVZ5ZDZIO6RgPl4uY1ouAQOpfox/+IbfH4rFXKM8LOxulNxNy
- S9FhAd+MLi+W8qgg7wLIqC4UkLfKVTi1JC7hLBAN9kqj9wQzhaeD3mmieL1R05Kvzg
- SGyADjFmSatANJnLqL1/PvDvTh0RtoX0UO+/URnyM+Fq0tetNujCWjhvGS0tItAGbM
- T8eQEQGQwOk7eBnAXurQH7/IPb8QI1SKUhwFATf+bmNwNUehcgoCYj8jwpUKJVOpQc
- g+NS/HSOSid0A==
-Date: Fri, 28 Jul 2023 15:06:30 +0200
+ b=O23HruYPvglX9Lor/OifmLyxNBpV31d6BJgAkrsV1VPXHjVv5A7vPvAoEendMTxeD
+ TX6WfgGyw8wBQiG/jPaec3cBN12XZrz8Ic9Di4PQAFeln29v9kGHGJ7O2E+EykHsDl
+ BlRIyGfMUZeLFx9RRwB6aP70oAaHCH5eLqITi7FmXYGbDZ04EXwifq2TnavSeBevqQ
+ Z+lyRdUuv4pQCP9utJml9KJVcuor6At63T04IIJXw8IjTqrxUiynWTsqUXD7CKl0/3
+ Q0bs/hbrHIHrhv+i6nT71djGmPlqt9EaklPYdojV9K22wvQ2kIAPNZ3i6loOekXsLS
+ mM0mlzaZoLFYw==
+Date: Fri, 28 Jul 2023 16:00:10 +0200
 From: Christian Brauner <brauner@kernel.org>
 To: Gabriel Krisman Bertazi <krisman@suse.de>
-Message-ID: <20230728-beckenrand-wahrlich-62d6b0505d68@brauner>
+Message-ID: <20230728-unrentabel-volumen-1500701f2524@brauner>
 References: <20230727172843.20542-1-krisman@suse.de>
- <20230727172843.20542-4-krisman@suse.de>
+ <20230727172843.20542-2-krisman@suse.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230727172843.20542-4-krisman@suse.de>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20230727172843.20542-2-krisman@suse.de>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Jul 27, 2023 at 01:28:39PM -0400, Gabriel Krisman
+ Content preview:  On Thu, Jul 27, 2023 at 01:28:37PM -0400, Gabriel Krisman
  Bertazi wrote: > From: Gabriel Krisman Bertazi <krisman@collabora.com> > >
- Introduce a dentry revalidation helper to be used by case-insensiti [...]
- Content analysis details:   (-5.2 points, 6.0 required)
+ Negative dentries support on case-insensitive ext4/f2fs will requir [...]
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
- 0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal
- information
-X-Headers-End: 1qPNB4-005WXY-39
-Subject: Re: [f2fs-dev] [PATCH v4 3/7] libfs: Validate negative dentries in
- case-insensitive directories
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qPOAP-005ZLp-RD
+Subject: Re: [f2fs-dev] [PATCH v4 1/7] fs: Expose name under lookup to
+ d_revalidate hook
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,213 +107,138 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net, ebiggers@kernel.org,
  viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
  linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Jul 27, 2023 at 01:28:39PM -0400, Gabriel Krisman Bertazi wrote:
-> From: Gabriel Krisman Bertazi <krisman@collabora.com>
-> 
-> Introduce a dentry revalidation helper to be used by case-insensitive
-> filesystems to check if it is safe to reuse a negative dentry.
-> 
-> A negative dentry is safe to be reused on a case-insensitive lookup if
-> it was created during a case-insensitive lookup and this is not a lookup
-> that will instantiate a dentry. If this is a creation lookup, we also
-> need to make sure the name matches sensitively the name under lookup in
-> order to assure the name preserving semantics.
-> 
-> dentry->d_name is only checked by the case-insensitive d_revalidate hook
-> in the LOOKUP_CREATE/LOOKUP_RENAME_TARGET case since, for these cases,
-> d_revalidate is always called with the parent inode read-locked, and
-> therefore the name cannot change from under us.
-> 
-> d_revalidate is only called in 4 places: lookup_dcache, __lookup_slow,
-> lookup_open and lookup_fast:
-> 
->   - lookup_dcache always calls it with zeroed flags, with the exception
->     of when coming from __lookup_hash, which needs the parent locked
->     already, for instance in the open/creation path, which is locked in
->     open_last_lookups.
-> 
->   - In __lookup_slow, either the parent inode is read locked by the
->     caller (lookup_slow), or it is called with no flags (lookup_one*).
->     The read lock suffices to prevent ->d_name modifications, with the
->     exception of one case: __d_unalias, will call __d_move to fix a
->     directory accessible from multiple dentries, which effectively swaps
->     ->d_name while holding only the shared read lock.  This happens
->     through this flow:
-> 
->     lookup_slow()  //LOOKUP_CREATE
->       d_lookup()
->         ->d_lookup()
->           d_splice_alias()
->             __d_unalias()
->               __d_move()
-> 
->     Nevertheless, this case is not a problem because negative dentries
->     are not allowed to be moved with __d_move.
-> 
->   - lookup_open also requires the parent to be locked in the creation
->     case, which is done in open_last_lookups.
-> 
->   - lookup_fast will indeed be called with the parent unlocked, but it
->     shouldn't be called with LOOKUP_CREATE.  Either it is called in the
->     link_path_walk, where nd->flags doesn't have LOOKUP_CREATE yet or in
->     open_last_lookups. But, in this case, it also never has LOOKUP_CREATE,
->     because it is only called on the !O_CREAT case, which means op->intent
->     doesn't have LOOKUP_CREAT (set in build_open_flags only if O_CREAT is
->     set).
-> 
-> Finally, for the LOOKUP_RENAME_TARGET, we are doing a rename, so the
-> parents inodes are also locked.
-> 
-> Reviewed-by: Theodore Ts'o <tytso@mit.edu>
-> Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
-> 
-> ---
-> Changes since v3:
->   - Add comment regarding creation (Eric)
->   - Reorder checks to clarify !flags meaning (Eric)
->   - Add commit message explanaton of the inode read lock wrt.
->     __d_move. (Eric)
-> Changes since v2:
->   - Add comments to all rejection cases (Eric)
->   - safeguard against filesystem creating dentries without LOOKUP flags
-> ---
->  fs/libfs.c | 55 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 55 insertions(+)
-> 
-> diff --git a/fs/libfs.c b/fs/libfs.c
-> index 5b851315eeed..ed04c4dcc312 100644
-> --- a/fs/libfs.c
-> +++ b/fs/libfs.c
-> @@ -1462,9 +1462,64 @@ static int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str)
->  	return 0;
->  }
->  
-> +static inline int generic_ci_d_revalidate(struct dentry *dentry,
-> +					  const struct qstr *name,
-> +					  unsigned int flags)
-> +{
-> +	if (d_is_negative(dentry)) {
-> +		const struct dentry *parent = READ_ONCE(dentry->d_parent);
-> +		const struct inode *dir = READ_ONCE(parent->d_inode);
-> +
-> +		if (dir && needs_casefold(dir)) {
-> +			/*
-> +			 * Negative dentries created prior to turning the
-> +			 * directory case-insensitive cannot be trusted, since
-> +			 * they don't ensure any possible case version of the
-> +			 * filename doesn't exist.
-> +			 */
-> +			if (!d_is_casefold_lookup(dentry))
-> +				return 0;
-> +
-> +			/*
-> +			 * Filesystems will call into d_revalidate without
-> +			 * setting LOOKUP_ flags even for file creation (see
-> +			 * lookup_one* variants).  Reject negative dentries in
-> +			 * this case, since we can't know for sure it won't be
-> +			 * used for creation.
-> +			 */
-> +			if (!flags)
-> +				return 0;
-> +
-> +			/*
-> +			 * If the lookup is for creation, then a negative dentry
-> +			 * can only be reused if it's a case-sensitive match,
-> +			 * not just a case-insensitive one.  This is needed to
-> +			 * make the new file be created with the name the user
-> +			 * specified, preserving case.
-> +			 */
-> +			if (flags & (LOOKUP_CREATE | LOOKUP_RENAME_TARGET)) {
-> +				/*
-> +				 * ->d_name won't change from under us in the
-> +				 * creation path only, since d_revalidate during
-> +				 * creation and renames is always called with
-> +				 * the parent inode locked.  It isn't the case
-> +				 * for all lookup callpaths, so ->d_name must
-> +				 * not be touched outside
-> +				 * (LOOKUP_CREATE|LOOKUP_RENAME_TARGET) context.
-> +				 */
-> +				if (dentry->d_name.len != name->len ||
-> +				    memcmp(dentry->d_name.name, name->name, name->len))
-> +					return 0;
-> +			}
-> +		}
-> +	}
-> +	return 1;
-> +}
-> +
->  static const struct dentry_operations generic_ci_dentry_ops = {
->  	.d_hash = generic_ci_d_hash,
->  	.d_compare = generic_ci_d_compare,
-> +	.d_revalidate_name = generic_ci_d_revalidate,
->  };
->  #endif
-
-Wouldn't it make sense to get rid of all this indentation?
-
-	const struct dentry *parent;
-	const struct inode *dir;
-
-	if (!d_is_negative(dentry))
-		return 1;
-
-	parent = READ_ONCE(dentry->d_parent);
-	dir = READ_ONCE(parent->d_inode);
-
-	if (!dir)
-		return 1;
-
-	if (!needs_casefold(dir))
-		return 1;
-
-	/*
-	 * Negative dentries created prior to turning the
-	 * directory case-insensitive cannot be trusted, since
-	 * they don't ensure any possible case version of the
-	 * filename doesn't exist.
-	 */
-	if (!d_is_casefold_lookup(dentry))
-		return 0;
-
-	/*
-	 * Filesystems will call into d_revalidate without
-	 * setting LOOKUP_ flags even for file creation (see
-	 * lookup_one* variants).  Reject negative dentries in
-	 * this case, since we can't know for sure it won't be
-	 * used for creation.
-	 */
-	if (!flags)
-		return 0;
-
-	/*
-	 * If the lookup is for creation, then a negative dentry
-	 * can only be reused if it's a case-sensitive match,
-	 * not just a case-insensitive one.  This is needed to
-	 * make the new file be created with the name the user
-	 * specified, preserving case.
-	 */
-	if (flags & (LOOKUP_CREATE | LOOKUP_RENAME_TARGET)) {
-		/*
-		 * ->d_name won't change from under us in the
-		 * creation path only, since d_revalidate during
-		 * creation and renames is always called with
-		 * the parent inode locked.  It isn't the case
-		 * for all lookup callpaths, so ->d_name must
-		 * not be touched outside
-		 * (LOOKUP_CREATE|LOOKUP_RENAME_TARGET) context.
-		 */
-		if (dentry->d_name.len != name->len ||
-		    memcmp(dentry->d_name.name, name->name, name->len))
-			return 0;
-	}
-	return 1;
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gVGh1LCBKdWwgMjcsIDIwMjMgYXQgMDE6Mjg6MzdQTSAtMDQwMCwgR2FicmllbCBLcmlzbWFu
+IEJlcnRhemkgd3JvdGU6Cj4gRnJvbTogR2FicmllbCBLcmlzbWFuIEJlcnRhemkgPGtyaXNtYW5A
+Y29sbGFib3JhLmNvbT4KPiAKPiBOZWdhdGl2ZSBkZW50cmllcyBzdXBwb3J0IG9uIGNhc2UtaW5z
+ZW5zaXRpdmUgZXh0NC9mMmZzIHdpbGwgcmVxdWlyZQo+IGFjY2VzcyB0byB0aGUgbmFtZSB1bmRl
+ciBsb29rdXAgdG8gZW5zdXJlIGl0IG1hdGNoZXMgdGhlIGRlbnRyeS4gIFRoaXMKPiBhZGRzIGFu
+IG9wdGlvbmFsIG5ldyBmbGF2b3Igb2YgY2FjaGVkIGRlbnRyeSByZXZhbGlkYXRpb24gaG9vayB0
+byBleHBvc2UKPiB0aGlzIGV4dHJhIHBhcmFtZXRlci4KPiAKPiBJJ20gZmluZSB3aXRoIGV4dGVu
+ZGluZyBkX3JldmFsaWRhdGUgaW5zdGVhZCBvZiBhZGRpbmcgYSBuZXcgaG9vaywgaWYKPiBpdCBp
+cyBjb25zaWRlcmVkIGNsZWFuZXIgYW5kIHRoZSBhcHByb2FjaCBpcyBhY2NlcHRlZC4gIEkgd3Jv
+dGUgYSBuZXcKPiBob29rIHRvIHNpbXBsaWZ5IHJldmlld2luZy4KPiAKPiBSZXZpZXdlZC1ieTog
+VGhlb2RvcmUgVHMnbyA8dHl0c29AbWl0LmVkdT4KPiBTaWduZWQtb2ZmLWJ5OiBHYWJyaWVsIEty
+aXNtYW4gQmVydGF6aSA8a3Jpc21hbkBjb2xsYWJvcmEuY29tPgo+IAo+IC0tLQo+IENoYW5nZXMg
+c2luY2UgdjI6Cj4gICAtIERvY3VtZW50IGRfcmV2YWxpZGF0ZV9uYW1lIGhvb2suIChFcmljKQo+
+IC0tLQo+ICBEb2N1bWVudGF0aW9uL2ZpbGVzeXN0ZW1zL2xvY2tpbmcucnN0IHwgIDMgKysrCj4g
+IERvY3VtZW50YXRpb24vZmlsZXN5c3RlbXMvdmZzLnJzdCAgICAgfCAxMiArKysrKysrKysrKysK
+PiAgZnMvZGNhY2hlLmMgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAyICstCj4gIGZzL25h
+bWVpLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAyMyArKysrKysrKysrKysrKy0tLS0t
+LS0tLQo+ICBpbmNsdWRlL2xpbnV4L2RjYWNoZS5oICAgICAgICAgICAgICAgIHwgIDEgKwo+ICA1
+IGZpbGVzIGNoYW5nZWQsIDMxIGluc2VydGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQo+IAo+IGRp
+ZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9uL2ZpbGVzeXN0ZW1zL2xvY2tpbmcucnN0IGIvRG9jdW1l
+bnRhdGlvbi9maWxlc3lzdGVtcy9sb2NraW5nLnJzdAo+IGluZGV4IGVkMTQ4OTE5ZTExYS4uZDY4
+OTk3YmE2NTg0IDEwMDY0NAo+IC0tLSBhL0RvY3VtZW50YXRpb24vZmlsZXN5c3RlbXMvbG9ja2lu
+Zy5yc3QKPiArKysgYi9Eb2N1bWVudGF0aW9uL2ZpbGVzeXN0ZW1zL2xvY2tpbmcucnN0Cj4gQEAg
+LTE4LDYgKzE4LDggQEAgZGVudHJ5X29wZXJhdGlvbnMKPiAgcHJvdG90eXBlczo6Cj4gIAo+ICAJ
+aW50ICgqZF9yZXZhbGlkYXRlKShzdHJ1Y3QgZGVudHJ5ICosIHVuc2lnbmVkIGludCk7Cj4gKwlp
+bnQgKCpkX3JldmFsaWRhdGVfbmFtZSkoc3RydWN0IGRlbnRyeSAqLCBjb25zdCBzdHJ1Y3QgcXN0
+ciAqLAo+ICsJCQkJIHVuc2lnbmVkIGludCk7CgpJIHRoaW5rIHdlIHNob3VsZCBqdXN0IGV4dGVu
+ZCBkX3JldmFsaWRhdGUoKS4gWW91IGNhbid0IHJlYXNvbmFibHkKaW1wbGVtZW50IGRfcmV2YWxp
+ZGF0ZSgpIGFuZCBkX3JldmFsaWRhdGVfbmFtZSgpIGFuZCB0aGVuIGhhdmUgdGhlIFZGUwpjYWxs
+IGJvdGguIFRoYXQncyBqdXN0IHdlaXJkLiBJbWhvLCBpdCBiZWxvbmdzIGludG8gZF9yZXZhbGlk
+YXRlKCkKcHJvcGVyLiBEb2N1bWVudGF0aW9uIHNob3VsZCBjb21lIHdpdGggdGhlIHNhbWUgd2Fy
+bmluZyBhYm91dCBoYW5kbGluZwpkX2lub2RlIGluIHNvIGZhciBhcyB1bmRlciBzb21lIGNvbmRp
+dGlvbiBkX25hbWUgY2FuIGNoYW5nZSB1bmRlciB0aGUKY2FsbGVyLgoKPiAgCWludCAoKmRfd2Vh
+a19yZXZhbGlkYXRlKShzdHJ1Y3QgZGVudHJ5ICosIHVuc2lnbmVkIGludCk7Cj4gIAlpbnQgKCpk
+X2hhc2gpKGNvbnN0IHN0cnVjdCBkZW50cnkgKiwgc3RydWN0IHFzdHIgKik7Cj4gIAlpbnQgKCpk
+X2NvbXBhcmUpKGNvbnN0IHN0cnVjdCBkZW50cnkgKiwKPiBAQCAtMzcsNiArMzksNyBAQCBsb2Nr
+aW5nIHJ1bGVzOgo+ICBvcHMJCSAgIHJlbmFtZV9sb2NrCS0+ZF9sb2NrCW1heSBibG9jawlyY3Ut
+d2Fsawo+ICA9PT09PT09PT09PT09PT09PT0gPT09PT09PT09PT0JPT09PT09PT0JPT09PT09PT09
+PT09PT0JPT09PT09PT0KPiAgZF9yZXZhbGlkYXRlOgkgICBubwkJbm8JCXllcyAocmVmLXdhbGsp
+CW1heWJlCj4gK2RfcmV2YWxpZGF0ZV9uYW1lOiBubwkJbm8JCXllcyAocmVmLXdhbGspCW1heWJl
+Cj4gIGRfd2Vha19yZXZhbGlkYXRlOiBubwkJbm8JCXllcwkgCW5vCj4gIGRfaGFzaAkJICAgbm8J
+CW5vCQlubwkJbWF5YmUKPiAgZF9jb21wYXJlOgkgICB5ZXMJCW5vCQlubwkJbWF5YmUKPiBkaWZm
+IC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi9maWxlc3lzdGVtcy92ZnMucnN0IGIvRG9jdW1lbnRhdGlv
+bi9maWxlc3lzdGVtcy92ZnMucnN0Cj4gaW5kZXggY2IyYTk3ZTQ5ODcyLi4zNGM4NDJiZDdjYjIg
+MTAwNjQ0Cj4gLS0tIGEvRG9jdW1lbnRhdGlvbi9maWxlc3lzdGVtcy92ZnMucnN0Cj4gKysrIGIv
+RG9jdW1lbnRhdGlvbi9maWxlc3lzdGVtcy92ZnMucnN0Cj4gQEAgLTEyNTIsNiArMTI1Miw4IEBA
+IGRlZmluZWQ6Cj4gIAo+ICAJc3RydWN0IGRlbnRyeV9vcGVyYXRpb25zIHsKPiAgCQlpbnQgKCpk
+X3JldmFsaWRhdGUpKHN0cnVjdCBkZW50cnkgKiwgdW5zaWduZWQgaW50KTsKPiArCQlpbnQgKCpk
+X3JldmFsaWRhdGVfbmFtZSkoc3RydWN0IGRlbnRyeSAqLCBjb25zdCBzdHJ1Y3QgcXN0ciAqLAo+
+ICsJCQkJCSB1bnNpZ25lZCBpbnQpOwo+ICAJCWludCAoKmRfd2Vha19yZXZhbGlkYXRlKShzdHJ1
+Y3QgZGVudHJ5ICosIHVuc2lnbmVkIGludCk7Cj4gIAkJaW50ICgqZF9oYXNoKShjb25zdCBzdHJ1
+Y3QgZGVudHJ5ICosIHN0cnVjdCBxc3RyICopOwo+ICAJCWludCAoKmRfY29tcGFyZSkoY29uc3Qg
+c3RydWN0IGRlbnRyeSAqLAo+IEBAIC0xMjg4LDYgKzEyOTAsMTYgQEAgZGVmaW5lZDoKPiAgCXJl
+dHVybgo+ICAJLUVDSElMRCBhbmQgaXQgd2lsbCBiZSBjYWxsZWQgYWdhaW4gaW4gcmVmLXdhbGsg
+bW9kZS4KPiAgCj4gK2BgZF9yZXZhbGlkYXRlX25hbWVgYAo+ICsJVmFyaWFudCBvZiBkX3JldmFs
+aWRhdGUgdGhhdCBhbHNvIHByb3ZpZGVzIHRoZSBuYW1lIHVuZGVyIGxvb2stdXAuICBNb3N0Cj4g
+KwlmaWxlc3lzdGVtcyB3aWxsIGtlZXAgaXQgYXMgTlVMTCwgdW5sZXNzIHRoZXJlIGFyZSBwYXJ0
+aWN1bGFyIHNlbWFudGljcwo+ICsJZm9yIGZpbGVuYW1lcyBlbmNvZGluZyB0aGF0IG5lZWQgdG8g
+YmUgaGFuZGxlZCBkdXJpbmcgZGVudHJ5Cj4gKwlyZXZhbGlkYXRpb24uCj4gKwo+ICsJV2hlbiBh
+dmFpbGFibGUsIGl0IGlzIGNhbGxlZCBpbiBsaWV1IG9mIGRfcmV2YWxpZGF0ZSBhbmQgaGFzIHRo
+ZSBzYW1lCj4gKwlsb2NraW5nIHJ1bGVzIGFuZCByZXR1cm4gc2VtYW50aWNzLiAgUmVmZXIgdG8g
+ZF9yZXZhbGlkYXRlIGZvciBtb3JlCj4gKwlpbmZvcm1hdGlvbi4KPiArCj4gIGBgZF93ZWFrX3Jl
+dmFsaWRhdGVgYAo+ICAJY2FsbGVkIHdoZW4gdGhlIFZGUyBuZWVkcyB0byByZXZhbGlkYXRlIGEg
+Imp1bXBlZCIgZGVudHJ5LiAgVGhpcwo+ICAJaXMgY2FsbGVkIHdoZW4gYSBwYXRoLXdhbGsgZW5k
+cyBhdCBkZW50cnkgdGhhdCB3YXMgbm90IGFjcXVpcmVkCj4gZGlmZiAtLWdpdCBhL2ZzL2RjYWNo
+ZS5jIGIvZnMvZGNhY2hlLmMKPiBpbmRleCA1MmU2ZDVmZGFiNmIuLjk4NTIxODYyZTU4YSAxMDA2
+NDQKPiAtLS0gYS9mcy9kY2FjaGUuYwo+ICsrKyBiL2ZzL2RjYWNoZS5jCj4gQEAgLTE5MjgsNyAr
+MTkyOCw3IEBAIHZvaWQgZF9zZXRfZF9vcChzdHJ1Y3QgZGVudHJ5ICpkZW50cnksIGNvbnN0IHN0
+cnVjdCBkZW50cnlfb3BlcmF0aW9ucyAqb3ApCj4gIAkJZGVudHJ5LT5kX2ZsYWdzIHw9IERDQUNI
+RV9PUF9IQVNIOwo+ICAJaWYgKG9wLT5kX2NvbXBhcmUpCj4gIAkJZGVudHJ5LT5kX2ZsYWdzIHw9
+IERDQUNIRV9PUF9DT01QQVJFOwo+IC0JaWYgKG9wLT5kX3JldmFsaWRhdGUpCj4gKwlpZiAob3At
+PmRfcmV2YWxpZGF0ZSB8fCBvcC0+ZF9yZXZhbGlkYXRlX25hbWUpCj4gIAkJZGVudHJ5LT5kX2Zs
+YWdzIHw9IERDQUNIRV9PUF9SRVZBTElEQVRFOwo+ICAJaWYgKG9wLT5kX3dlYWtfcmV2YWxpZGF0
+ZSkKPiAgCQlkZW50cnktPmRfZmxhZ3MgfD0gRENBQ0hFX09QX1dFQUtfUkVWQUxJREFURTsKPiBk
+aWZmIC0tZ2l0IGEvZnMvbmFtZWkuYyBiL2ZzL25hbWVpLmMKPiBpbmRleCBlNTZmZjM5YTc5YmMu
+Ljg0ZGYwZGRkMjBkYiAxMDA2NDQKPiAtLS0gYS9mcy9uYW1laS5jCj4gKysrIGIvZnMvbmFtZWku
+Ywo+IEBAIC04NTMsMTEgKzg1MywxNiBAQCBzdGF0aWMgYm9vbCB0cnlfdG9fdW5sYXp5X25leHQo
+c3RydWN0IG5hbWVpZGF0YSAqbmQsIHN0cnVjdCBkZW50cnkgKmRlbnRyeSkKPiAgCXJldHVybiBm
+YWxzZTsKPiAgfQo+ICAKPiAtc3RhdGljIGlubGluZSBpbnQgZF9yZXZhbGlkYXRlKHN0cnVjdCBk
+ZW50cnkgKmRlbnRyeSwgdW5zaWduZWQgaW50IGZsYWdzKQo+ICtzdGF0aWMgaW5saW5lIGludCBk
+X3JldmFsaWRhdGUoc3RydWN0IGRlbnRyeSAqZGVudHJ5LAo+ICsJCQkgICAgICAgY29uc3Qgc3Ry
+dWN0IHFzdHIgKm5hbWUsCj4gKwkJCSAgICAgICB1bnNpZ25lZCBpbnQgZmxhZ3MpCj4gIHsKPiAt
+CWlmICh1bmxpa2VseShkZW50cnktPmRfZmxhZ3MgJiBEQ0FDSEVfT1BfUkVWQUxJREFURSkpCj4g
+Kwo+ICsJaWYgKHVubGlrZWx5KGRlbnRyeS0+ZF9mbGFncyAmIERDQUNIRV9PUF9SRVZBTElEQVRF
+KSkgewo+ICsJCWlmIChkZW50cnktPmRfb3AtPmRfcmV2YWxpZGF0ZV9uYW1lKQo+ICsJCQlyZXR1
+cm4gZGVudHJ5LT5kX29wLT5kX3JldmFsaWRhdGVfbmFtZShkZW50cnksIG5hbWUsIGZsYWdzKTsK
+PiAgCQlyZXR1cm4gZGVudHJ5LT5kX29wLT5kX3JldmFsaWRhdGUoZGVudHJ5LCBmbGFncyk7CgpU
+aGlzIHdob2xlIHNlcXVlbmNlIGdvdCBtZSB0aGlua2luZy4KCklmIHlvdSBjcmVhdGUgYW4gZXh0
+NCBmaWxlc3lzdGVtIHdpdGggY2FzZWZvbGRpbmcgbGlrZToKCm1rZnMuZXh0NCAtRiAtRSBlbmNv
+ZGluZz11dGY4IC9kZXYvc2RiCgphbmQgdGhlbgoKbW91bnQgLXQgZXh0NCAvZGV2L3NkYiAvbW50
+Cm1rZGlyIC9tbnQvY2FzZWZvbGQKY2hhdHRyICtGIC9tbnQvY2FzZWZvbGQKCnRoZW4geW91IGNh
+biBtb3VudCBvdmVybGF5ZnMgb24gdGhlIG5vbi1jYXNlZm9sZGVkIHJvb3QgZGVudHJ5IGF0IC9t
+bnQ6CgooMSkgbW91bnQgLXQgb3ZlcmxheSBvdmVybGF5IC1vIHVwcGVyZGlyPS91cHBlcix3b3Jr
+ZGlyPS93b3JrLGxvd2VyZGlyPS9tbnQgL29wdAoKYnV0IHlvdSBjYW5ub3QgbW91bnQgb3Zlcmxh
+eWZzIG9uIHRoZSBjYXNlZm9sZGVkIHJvb3QgZGVudHJ5IGF0Ci9tbnQvY2FzZWZvbGRlZDoKCigy
+KSBtb3VudCAtdCBvdmVybGF5IG92ZXJsYXkgLW8gdXBwZXJkaXI9L3VwcGVyLHdvcmtkaXI9L3dv
+cmssbG93ZXJkaXI9L21udC9jYXNlZm9sZCAvb3B0CgpiZWNhdXNlIG92ZXJsYXlmcyByZWplY3Rz
+IHRoZSBkZW50cnkgaW4gb3ZsX2RlbnRyeV93ZWlyZCgpIGJlY2F1c2UgdGhlCmRlbnRyeSB3aWxs
+IGhhdmUgRENBQ0hFX09QX0hBU0ggc2V0IGJlY2F1c2UgY2FzZWZvbGQgbGliZnMgaGVscGVycyBy
+ZWx5Cm9uIGEgY3VzdG9tIGRlbnRyeSBoYXNoIGZ1bmN0aW9uLgoKSW4gYW55IGNhc2UgKDEpIHNo
+b3VsZG4ndCBhIHByb2JsZW0gcGVyIHNlIGFzIG92ZXJsYXlmcyB3aWxsIHJldHVybgpFUkVNT1RF
+IGZyb20gbG9va3VwIGJlY2F1c2Ugb3ZsX2RlbnRyeV93ZWlyZCgpIHdpbGwgYWxzbyBiZSBjYWxs
+ZWQgYnkKb3ZlcmxheWZzIGR1cmluZyBsb29rdXAuIFNvIGl0IHNob3VsZCBiZSBzYWZlIHRob3Vn
+aCBJIGhhdmVuJ3Qgc3BlbnQgYQpsb3Qgb2YgbWVudGFsIGVmZm9ydCB0byBmaWd1cmUgb3V0IHdo
+ZXRoZXIgdGhpcyBjYW4gc29tZWhvdyBiZSBvdGhlcndpc2UKdXNlZCB0byB0cmlnZ2VyIG5vbnNl
+bnNpY2FsIGJlaGF2aW9yIG9yIHBvdGVudGlhbCBidWdzLgoKQnV0IHRoaXMgbG9naWMgaXMgcHJl
+ZGljYXRlZCBvbiBEQ0FDSEVfT1BfSEFTSC4gU28gaWYgZm9yIHNvbWUgY3JhenkKcmVhc29uIGEg
+ZmlsZXN5c3RlbSB3ZXJlIHRvIGltcGxlbWVudCAtPmRfcmV2YWxpZGF0ZV9uYW1lKCkgYnV0IGRp
+ZG4ndAphbHNvIGltcGxlbWVudCAtPmRfaGFzaCgpIHdlJ2QgYmUgaG9zZWQgYmVjYXVzZSBvdmVy
+bGF5ZnMgY2FsbHMKLT5kX3JldmFsaWRhdGUoKSBkaXJlY3RseS4KCkFuZCB0aGVuIHRoZXJlJ3Mg
+ZWNyeXB0ZnMgd2hpY2ggaXMgaGFwcGlseSBtb3VudGFibGUgb3ZlciBjYXNlZm9sZGluZwpkaXJl
+Y3RvcmllczoKCnVidW50dUBpbXAxLXZtOn4kIHN1ZG8gbW91bnQgLXQgZWNyeXB0ZnMgL21udC90
+ZXN0L2Nhc2Vmb2xkLWRpciAvb3B0CnVidW50dUBpbXAxLXZtOi9vcHQkIGZpbmRtbnQgfCBncmVw
+IG9wdArilJTilIAvb3B0ICAvbW50L3Rlc3QvY2FzZWZvbGQtZGlyIGVjcnlwdGZzIHJ3LHJlbGF0
+aW1lLGVjcnlwdGZzX3NpZz04NTY3ZWUyYWU1ODgwZjJkLGVjcnlwdGZzX2NpcGhlcj1hZXMsZWNy
+eXB0ZnNfa2V5X2J5dGVzPTE2LGVjcnlwdGZzX3VubGlua19zaWdzCgpTbyBpdCBkb2Vzbid0IGV2
+ZW4gc2VlbSB0byBjYXJlIGlmIHRoZSB1bmRlcmx5aW5nIGZpbGVzeXRlbSB1c2VzIGEKY3VzdG9t
+IGRlbnRyeSBoYXNoIGZ1bmN0aW9uIHdoaWNoIHNlZW1zIHByb2JsZW1hdGljIChTbyB1bnJlbGF0
+ZWQgdG8KdGhpcyBjaGFuZ2Ugc29tZW9uZSBzaG91bGQgbGlrZWx5IGV4cGxhaW4gd2h5IHRoYXQg
+ZG9lc24ndCBtYXR0ZXIuKS4KCkFmYWljdCB3aXRoIHlvdXIgc2VyaWVzIHRoaXMgd2lsbCBiZSBl
+dmVuIG1vcmUgYnJva2VuIGJlY2F1c2UgZWNyeXB0ZnMKYW5kIG92ZXJsYXlmcyBjYWxsIC0+ZF9y
+ZXZhbGlkYXRlKCkgZGlyZWN0bHkuCgpTbyB0aGlzIHN1Z2dlc3RzIHRoYXQgcmVhbGx5IHlvdSB3
+YW50IHRvIGV4dGVuZCAtPmRfcmV2YWxpZGF0ZSgpIGFuZCB3ZQpzaG91bGQgYXQgbGVhc3Qgc2lt
+aWxhciB0byBvdmVybGF5ZnMgbWFrZSBlY3J5cHRmcyByZWplY3QgYmVpbmcgbW91bnRlZApvbiBj
+YXNlZm9sZGluZyBkaXJlY3RvcmllcyBhbmQgcmVmdXNlIGxvb2t1cCByZXF1ZXN0cyBmb3IgY2Fz
+ZWZvbGRpbmcKZGlyZWN0b3JpZXMuCgpJZGVhbGx5IHdlJ2QgZXhwbGljaXRseSByZWplY3QgYnkg
+aGF2aW5nIHN1Y2ggZnNlcyBkZXRlY3QgY2FzZWZvbGRpbmcKdW5sZXNzIGl0J3MgcmVhbGx5IGVu
+b3VnaCB0byByZWplY3QgYmFzZWQgb24gRENBQ0hFX09QX0hBU0guCgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5n
+IGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0
+cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
