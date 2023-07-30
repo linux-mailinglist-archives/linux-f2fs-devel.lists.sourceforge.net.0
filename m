@@ -2,67 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BC457685FD
+	by mail.lfdr.de (Postfix) with ESMTPS id 666F47685FC
 	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 30 Jul 2023 16:26:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qQ7N4-0002mJ-Vo;
-	Sun, 30 Jul 2023 14:26:09 +0000
+	id 1qQ7N6-0005QA-P1;
+	Sun, 30 Jul 2023 14:26:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1qQ7N4-0002mA-5M
+ (envelope-from <chao@kernel.org>) id 1qQ7N4-0005Q3-GE
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 30 Jul 2023 14:26:09 +0000
+ Sun, 30 Jul 2023 14:26:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YbMBmeWMEOJmsklkaGJnWiQaOCUvKxP8nHbvTZhok64=; b=elvT78cfojTbngHG8pIQCjQvbh
- F+XYTjxyqpgzbl7IZh1vHQAq/qgij6AjCSN8aUWYOKSycgcJxG+HR6QsXOLCVn6hWg+F2p18g7vr6
- 2xQwWomJnWM2oFymvrmD63DJDJIJ07PpCb6GPoLua2pKwKyLqPA3A0ksdJam6P82+Mv0=;
+ bh=UmGtcZWWe7c6VEm2EQCOJClKAmZ35iUBrjyFcNXbdog=; b=k6dRQaGjxNQ6owvNlRhFgVsDXa
+ SlOLrkgvf6DcwE7TTvvdEXHrnqGVBkw472Vy1c11GGe8DclaRX5q9LG9RVGhSNPBa3+1lYosY3IiL
+ 8w8xcK41YM/bq2TVjBBDK9PTBr0Nv7W4Ft6ojhB8vDyEIca4uTg8KiauPrhFnNJ2n6/c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=YbMBmeWMEOJmsklkaGJnWiQaOCUvKxP8nHbvTZhok64=; b=i
- tcHupLUt83Fsx8N5350sWXTKe5JumkoQaNlBOpc4uxCm1IZ9HbBGf1IuegPYyJtWU2AsGyuVUhwlp
- xpoNDg/mNS6jPaOnChf66LQnLFth2BgM729R0QTASrWD4PVzTkCvoZ8oSOg4a+C8Fac8V90rz0Sir
- Y2zKc4d/kwJI1B68=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=UmGtcZWWe7c6VEm2EQCOJClKAmZ35iUBrjyFcNXbdog=; b=RSShzmULZzpojHebkVVlVXhPGn
+ LZTK6cre3KVKEWBQG6LFzQ9ee96RR82BnrtEibC5ym1zYNogj9+8FZrDVntemJikiQvyhHmVbhoYJ
+ 5/FtR6TrfbVfe2XDie+hwBy8IqDxJiiw5LFsgkYXYvccSyAO55XkjUi7JI1+jK/ij6sg=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qQ7My-0004Ze-QC for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 30 Jul 2023 14:26:09 +0000
+ id 1qQ7N0-0004Zg-JO for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 30 Jul 2023 14:26:10 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 38F8D60BA3
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 01C6660BFC
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 30 Jul 2023 14:25:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66557C433C8;
- Sun, 30 Jul 2023 14:25:57 +0000 (UTC)
+ Sun, 30 Jul 2023 14:26:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2771CC433CB;
+ Sun, 30 Jul 2023 14:25:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1690727158;
- bh=d8GF2nj75dcAK/W9xm27IQOlnskgBpm9dOo8ZbtueO0=;
- h=From:To:Cc:Subject:Date:From;
- b=r9uankZ7WV2NH7kxQVR4E7GJxfRrmfeRRSEqY/T7MMQISryAIPzyvqDkEa2xmTo4J
- ikfUr1rRYoSiu5NxCTcB/TRvOPB9i+m4A0hlZ226R4O7WWkzseocgfREbAGn+sj8UL
- yMW3+YJv2BfVCROnAZZ9HYJ8GS1v4Db3VKEN7xunZBJ0ekWRgqX+/YW4VdhyZzl+PM
- A0jx57OnYvlrBMHubevOAIUOfKRDBu8OqKyLr056BOsw5ECuHdU1kfRp0a+UbUfyUs
- TGrE07RgEul+Bc3Y8IldPVdY/imRuPEtyKmu7DbnQfjXEGltpByd+Fid+67Se+X1m5
- S4o6UGtMR43Wg==
+ s=k20201202; t=1690727160;
+ bh=bFoKB/RBY0k016vlqdS3IXGsfWxj2zFbV5ucQ5U5Jko=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=OvlXf1CA7g/XmjfjJdtJ6c5ETDOLD/8Qj13TesgGPngkufKf1IU5Gm7iTd279MJN1
+ AjNS5xyN4szVN3sey0hDrrJQBfGDrOtE4O5Y6VI9u4L725UyHOQGm40Zwstr5quhMa
+ XTHggwb/BYyTRd+PzDMsEmNgFE4zQ9iyertfROQPmcPZbLGqXnBmElLKbQGGUsvdk6
+ 3lgqwOOHXTfwnc1JgxhcqQihPRW9bEVkkujSsO9tHtZp7bmOO0UAINy3BhdgiFkGre
+ OltpB1i+2DVBtrJ1Q1Ev/iALlprSlHPZPkY2Xg/YhVrAAcpwZ41eT7f302LH4mhmbp
+ V5GBZnn2JMhjw==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Sun, 30 Jul 2023 22:25:51 +0800
-Message-Id: <20230730142552.3918623-1-chao@kernel.org>
+Date: Sun, 30 Jul 2023 22:25:52 +0800
+Message-Id: <20230730142552.3918623-2-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230730142552.3918623-1-chao@kernel.org>
+References: <20230730142552.3918623-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
@@ -71,12 +73,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The description of max_small_discards is out-of-update in
- below two aspects, fix it. - it is disabled by default - small discards will
- be issued during checkpoint Signed-off-by: Chao Yu <chao@kernel.org> ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 6 +++--- 1 file changed,
- 3 insertions(+), 3 deletions(-) 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  Previously, we have two mechanisms to cache & submit small
+ discards: a) set max small discard number in
+ /sys/fs/f2fs/vdb/max_small_discards, 
+ and checkpoint will cache small discard candidates w/ configured maximum
+ number. Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -90,9 +91,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qQ7My-0004Ze-QC
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: doc: fix description of
- max_small_discards
+X-Headers-End: 1qQ7N0-0004Zg-JO
+Subject: [f2fs-dev] [PATCH 2/2] Revert "f2fs: do not issue small discard
+ commands during checkpoint"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,33 +110,71 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The description of max_small_discards is out-of-update in below two
-aspects, fix it.
-- it is disabled by default
-- small discards will be issued during checkpoint
+Previously, we have two mechanisms to cache & submit small discards:
 
+a) set max small discard number in /sys/fs/f2fs/vdb/max_small_discards,
+and checkpoint will cache small discard candidates w/ configured maximum
+number.
+
+b) call FITRIM ioctl, also, checkpoint in f2fs_trim_fs() will cache small
+discard candidates w/ configured discard granularity, but w/o limitation
+of number. FSTRIM interface is asynchronized, so it won't submit discard
+directly.
+
+Finally, discard thread will submit them in background periodically.
+
+However, after commit 9ac00e7cef10 ("f2fs: do not issue small discard
+commands during checkpoint"), the mechanism a) is broken, since no matter
+how we configure the sysfs entry /sys/fs/f2fs/vdb/max_small_discards,
+checkpoint will not cache small discard candidates any more.
+
+echo 0 > /sys/fs/f2fs/vdb/max_small_discards
+xfs_io -f /mnt/f2fs/file -c "pwrite 0 2m" -c "fsync"
+xfs_io /mnt/f2fs/file -c "fpunch 0 4k"
+sync
+cat /proc/fs/f2fs/vdb/discard_plist_info |head -2
+
+echo 100 > /sys/fs/f2fs/vdb/max_small_discards
+rm /mnt/f2fs/file
+xfs_io -f /mnt/f2fs/file -c "pwrite 0 2m" -c "fsync"
+xfs_io /mnt/f2fs/file -c "fpunch 0 4k"
+sync
+cat /proc/fs/f2fs/vdb/discard_plist_info |head -2
+
+Before the patch:
+Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
+  0         .       .       .       .       .       .       .       .
+Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
+  0         3       1       .       .       .       .       .       .
+
+After the patch:
+Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
+  0         .       .       .       .       .       .       .       .
+Discard pend list(Show diacrd_cmd count on each entry, .:not exist):
+  0         .       .       .       .       .       .       .       .
+
+This patch reverts commit 9ac00e7cef10 ("f2fs: do not issue small discard
+commands during checkpoint") in order to fix this issue.
+
+Fixes: 9ac00e7cef10 ("f2fs: do not issue small discard commands during checkpoint")
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ fs/f2fs/segment.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index ad3d76d37c8b..36c3cb547901 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -102,9 +102,9 @@ What:		/sys/fs/f2fs/<disk>/max_small_discards
- Date:		November 2013
- Contact:	"Jaegeuk Kim" <jaegeuk.kim@samsung.com>
- Description:	Controls the issue rate of discard commands that consist of small
--		blocks less than 2MB. The candidates to be discarded are cached until
--		checkpoint is triggered, and issued during the checkpoint.
--		By default, it is disabled with 0.
-+		blocks less than 2MB. The candidates to be discarded are cached during
-+		checkpoint, and issued by issue_discard thread after checkpoint.
-+		It is enabled by default.
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 6e5d1039ca76..1f0a25011687 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -2195,7 +2195,7 @@ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
+ 			len = next_pos - cur_pos;
  
- What:		/sys/fs/f2fs/<disk>/max_ordered_discard
- Date:		October 2022
+ 			if (f2fs_sb_has_blkzoned(sbi) ||
+-					!force || len < cpc->trim_minlen)
++			    (force && len < cpc->trim_minlen))
+ 				goto skip;
+ 
+ 			f2fs_issue_discard(sbi, entry->start_blkaddr + cur_pos,
 -- 
 2.40.1
 
