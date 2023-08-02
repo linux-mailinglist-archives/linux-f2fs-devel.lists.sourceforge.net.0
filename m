@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92F1276D283
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Aug 2023 17:42:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id F103D76D284
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  2 Aug 2023 17:42:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qRDzS-0002LI-Rg;
-	Wed, 02 Aug 2023 15:42:21 +0000
+	id 1qRDzV-0005XV-PK;
+	Wed, 02 Aug 2023 15:42:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+e55ed01a16a80b75ffb8+7283+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1qRDzR-0002L3-DP for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 02 Aug 2023 15:42:20 +0000
+ id 1qRDzU-0005XL-Az for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 02 Aug 2023 15:42:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9z6iRUB0HpEH9yVJZ8SKsjwqR2QNW5zkViH5X/SDjhI=; b=jcrNyCaZSW9dN8GoB6PD7zdMKk
- MLmnPMGvOQcVMBxuVfN+0KzKd126rGoVh0Vwoa3KdiqN8JqIfDJHnfwF9O+MvcIxK61q7/yHnbXcB
- aNEi4/MBcugwOFFkXbZfw5LGnX/0BKQibgc5ZL/MfgJdC0PfsMxIn1Vii5+vfapDYWj8=;
+ bh=t1/fXxbj2uJU5xas1rDU20QLxJIeGJx3IPPvaW9KT9Y=; b=hK9TdUfZqy8KR6/hcW6ZL15D1U
+ OmVxVN2X3FFWZeKNdEIScd8M1SwyQ+sbl9ivwXBebvcKCRC/hkbqt17teif4Z88k1uaiHoenSIiux
+ sxVia2xwHVDsuqNZdWOuhJyDhEGIiw018dxRANVNsx6ljMhjLQG4QgBSFxLnbC3nuFE0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,66 +31,67 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9z6iRUB0HpEH9yVJZ8SKsjwqR2QNW5zkViH5X/SDjhI=; b=CyKmG06GVRxSLZOHD0STatK6f0
- YGWdHHczM9E3ZRh+Ml6B9etjhm+zNwZ2U3hTnU3U9aogl0SewBxGwS8xhwtbInI8nawNRSSiPd9SD
- ssIgcXcIF+hqWIjpkj0xa999K+H2PEEYNaGcyzGLA/s5aiQsicxXIfcDL6oAbpftCFwg=;
+ bh=t1/fXxbj2uJU5xas1rDU20QLxJIeGJx3IPPvaW9KT9Y=; b=gIrWJGOdqcNmSuUrysAbcDyWuO
+ YcShyUxpNQt6KqbCwfzZe+x7jgBYi9Hwv81O3qSo5D2IOQmyM9WK2UxbF3+T2cGk8w8KEj5NZI0GN
+ 8KDNZ1aqvWMZRM8SRDIYzmhsAvr9utHkHwMJYjBmNKxlzIZTsQdaNaVApkdHQyDIGRPk=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qRDzP-0004Ta-P1 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 02 Aug 2023 15:42:20 +0000
+ id 1qRDzT-0004Tk-QA for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 02 Aug 2023 15:42:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=9z6iRUB0HpEH9yVJZ8SKsjwqR2QNW5zkViH5X/SDjhI=; b=i+HYYGUwVQd0cBogaXIV5vo/pL
- zWblj0H6yG//E5OamCxdVKjjA+loZfVwsPHotijZMYyONUsXn+hTKEPyxDUrHsRUHCyDEzKsicFlq
- duF5vCrFzEbsPWaI2grnR07yMIRV3pbVI/44jrUI4J6B4XHIeW+91ZQBEGfYVI9o+NZeD/XBGRQP6
- o03BDUtDrFgof5bL0lrd7JoHdf7A7vgTEDPlp/C4wUx9XWGAuylz3IICKc7G/ZBWEMNj+Ucoc47ZZ
- BcPdWnYJZX9Eb6u3srXrOnd8/GtwLWAbFSXxE0MVQIBm2dAmvbZaDYkJWjeg771VMhLIIxgUqbssB
- Om0i9bfQ==;
+ bh=t1/fXxbj2uJU5xas1rDU20QLxJIeGJx3IPPvaW9KT9Y=; b=2i+CcpcoXVSq4J7NqyEaRQu0MS
+ DSsA4T4HQ7JZ+g7Ov6bcczZ/tpF4ZkTz9NxECM9geFk5dv1/TztPUrp17xFtlDXKLyoX3pkpemqeB
+ OQPpsZdYMVdmbDglOG0I9dpqcqqeyV/XjkQ67mNuOFgWIEwDlobHlmhsm0iPi3w+6wR+6G5B1YZQP
+ iWapYBcFtpmWKbvl+Jn8/7LBe0gSETLk1M6EwK0Ny2GMRQFmOIyT6N6Ad/dzBzf+vmZA2pOhMR8re
+ MOaux36gSAexWnIViecm5TMwu6JeqWJ/qWyq27xWHNPjx/AhL2CBf5lfuvqnCDWkGqZsv5nzmKORQ
+ JAio8dFQ==;
 Received: from
  2a02-8389-2341-5b80-39d3-4735-9a3c-88d8.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:39d3:4735:9a3c:88d8] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1qRDzD-005GL4-1L; Wed, 02 Aug 2023 15:42:07 +0000
+ id 1qRDzG-005GLm-2Q; Wed, 02 Aug 2023 15:42:11 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Al Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>
-Date: Wed,  2 Aug 2023 17:41:28 +0200
-Message-Id: <20230802154131.2221419-10-hch@lst.de>
+Date: Wed,  2 Aug 2023 17:41:29 +0200
+Message-Id: <20230802154131.2221419-11-hch@lst.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230802154131.2221419-1-hch@lst.de>
 References: <20230802154131.2221419-1-hch@lst.de>
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spam-Score: -2.1 (--)
+X-Spam-Score: -2.2 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Just like get_tree_bdev needs to drop s_umount when opening
- the main device, we need to do the same for the ext4 log device to avoid
- a potential lock order reversal with s_unmount for the mark_dead pa [...] 
- Content analysis details:   (-2.1 points, 6.0 required)
+ Content preview:  Use the generic fs_holder_ops to shut down the file system
+ when the log device goes away instead of duplicating the logic. Signed-off-by:
+ Christoph Hellwig <hch@lst.de> --- fs/ext4/super.c | 11 + 1 file changed,
+ 1 insertion(+), 10 deletions(-) 
+ Content analysis details:   (-2.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
  medium trust [198.137.202.133 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
  mail domains are different
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qRDzP-0004Ta-P1
-Subject: [f2fs-dev] [PATCH 09/12] ext4: drop s_umount over opening the log
- device
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1qRDzT-0004Tk-QA
+Subject: [f2fs-dev] [PATCH 10/12] ext4: use fs_holder_ops for the log device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,34 +116,43 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Just like get_tree_bdev needs to drop s_umount when opening the main
-device, we need to do the same for the ext4 log device to avoid a
-potential lock order reversal with s_unmount for the mark_dead path.
-
-It might be preferable to just drop s_umount over ->fill_super entirely,
-but that will require a fairly massive audit first, so we'll do the easy
-version here first.
+Use the generic fs_holder_ops to shut down the file system when the
+log device goes away instead of duplicating the logic.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/ext4/super.c | 3 +++
- 1 file changed, 3 insertions(+)
+ fs/ext4/super.c | 11 +----------
+ 1 file changed, 1 insertion(+), 10 deletions(-)
 
 diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index 193d665813b611..2ccb19d345c6dd 100644
+index 2ccb19d345c6dd..063832e2d12a8e 100644
 --- a/fs/ext4/super.c
 +++ b/fs/ext4/super.c
-@@ -5854,7 +5854,10 @@ static journal_t *ext4_get_dev_journal(struct super_block *sb,
- 	if (WARN_ON_ONCE(!ext4_has_feature_journal(sb)))
- 		return NULL;
+@@ -1096,15 +1096,6 @@ void ext4_update_dynamic_rev(struct super_block *sb)
+ 	 */
+ }
  
-+	/* see get_tree_bdev why this is needed and safe */
-+	up_write(&sb->s_umount);
- 	bdev = ext4_blkdev_get(j_dev, sb);
-+	down_write(&sb->s_umount);
- 	if (bdev == NULL)
- 		return NULL;
+-static void ext4_bdev_mark_dead(struct block_device *bdev)
+-{
+-	ext4_force_shutdown(bdev->bd_holder, EXT4_GOING_FLAGS_NOLOGFLUSH);
+-}
+-
+-static const struct blk_holder_ops ext4_holder_ops = {
+-	.mark_dead		= ext4_bdev_mark_dead,
+-};
+-
+ /*
+  * Open the external journal device
+  */
+@@ -1113,7 +1104,7 @@ static struct block_device *ext4_blkdev_get(dev_t dev, struct super_block *sb)
+ 	struct block_device *bdev;
  
+ 	bdev = blkdev_get_by_dev(dev, BLK_OPEN_READ | BLK_OPEN_WRITE, sb,
+-				 &ext4_holder_ops);
++				 &fs_holder_ops);
+ 	if (IS_ERR(bdev))
+ 		goto fail;
+ 	return bdev;
 -- 
 2.39.2
 
