@@ -2,117 +2,113 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9050776E54E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Aug 2023 12:13:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01E2076E6BC
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Aug 2023 13:21:47 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qRVKR-0007iu-Hc;
-	Thu, 03 Aug 2023 10:13:10 +0000
+	id 1qRWOe-0003Ex-EU;
+	Thu, 03 Aug 2023 11:21:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1qRVKP-0007im-QL
+ (envelope-from <jack@suse.cz>) id 1qRWOc-0003Ej-6h
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 03 Aug 2023 10:13:08 +0000
+ Thu, 03 Aug 2023 11:21:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xeiSnAfzIfdEhfvfk7HdXF8h59fF99a0d7iIRRtqUQQ=; b=Xs+7qQnwSM5tF5we56SZuKRt4n
- B8W5pYZAcz+nv9VT1xZitm3+GBXEvdWW98DnQ8gpRm9+ucpepLUHc31xUXkztZE3VsbVFZJ3VyEh+
- Aew2US/yJvdiTMHHSSAow+n4s2+UvQNFKOmssTz/Xc+XPvF6Hk4smPlXVVR5WHG9HC+0=;
+ bh=/oqdnU2hVSvQjG7zr7ybcm4vgtUzeJvEjdOgZyr5MDo=; b=Lgfqjad+OvPnsh7PvFJmupThxf
+ TPAlM8+eTdtJxQtwQC2vdezjviAv7R2gKnfLX7ee5VtAghGCApBcstBmp8bBZVqBqfZZfiI9Aguri
+ 0ApXm0TnXENpS27977lmn7VtfY6gYL5AcEpT/xHIDBTPNxo88cPsQa4Kydxx0RUzAjdc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xeiSnAfzIfdEhfvfk7HdXF8h59fF99a0d7iIRRtqUQQ=; b=lEgcn9kH57JyVMSigUS7G/BTMM
- 0K33qsZOa8rAFRNqQxmV6OH2FKhk1ajVCJQu2A2KQWKyICIY4CAPx8oT9DCetOqER9LJE8UA+uYeI
- 3JL15P0biWFnE4Mg29/5L+XccDm8E8NgEr2p4/Rudrj+nvA4WRSw+oi2MQJAFCcYVe+U=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qRVKO-00Bf4W-3N for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 03 Aug 2023 10:13:08 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ bh=/oqdnU2hVSvQjG7zr7ybcm4vgtUzeJvEjdOgZyr5MDo=; b=QIglMoFw57zzv/A4NM+72z46km
+ 4hrEQuCZwNRGT6CcA3iCKUEz8ceCPoMt1LGe7rqq8TS4B2I+FCGMkcjbSw83gJeWqS0Og/U9wsazh
+ N0LMQSq1Qx7/3vBY924twsICY4fVSKm9kUE33q47bhlBWB5NRt8og7KOtRfiM31WBqSA=;
+Received: from smtp-out2.suse.de ([195.135.220.29])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qRWOQ-0002a8-Ii for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 03 Aug 2023 11:21:29 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7CA7C61D39
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  3 Aug 2023 10:13:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 91220C43395
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu,  3 Aug 2023 10:13:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1691057581;
- bh=xeiSnAfzIfdEhfvfk7HdXF8h59fF99a0d7iIRRtqUQQ=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=Twkam2UFKoZXCuwHuOHpU5gWk/v780xXgYB7daVIsFCgfGhIQrh32m8LQDNWLIvf5
- ier7j1CD/fBvI9b3cpjgS827PtEykBNQ+1n1RHuy09qE+n6f1NqoVun3jqoErf0Plt
- zPuv+ytkaTv+1pTGltAdZum29dJ2KhPqGZ5hJJI0gHu9cD+vKAfi+Eizt7sHMRezJP
- abzgmns1MNJaAdXlnwaKkiEj/fShTOoOthEEFzg6ia+wldtfqz3n/cXYlCZiLCjdwt
- TESY5kPU0Hobx1R+ZD3vNSkvhkkBLCqezodqsHfO62tp9TfA3TMvolVDUsi9QUWmTr
- Fi1XiGucNPxQg==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 8074BC53BD1; Thu,  3 Aug 2023 10:13:01 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 03 Aug 2023 10:13:00 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: guido.iodice@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-kVoQ47neJp@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 982C91F45A;
+ Thu,  3 Aug 2023 11:21:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1691061671; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=/oqdnU2hVSvQjG7zr7ybcm4vgtUzeJvEjdOgZyr5MDo=;
+ b=SshCa3at/QVqc2HIIpLg9LhDhKTreRaL2cZGX45vYwIeK3cx7PttlNBGYy6OudlZNlY9ra
+ MOv4rt6y4ZaVGS2gQBky7dhvCX5sAuEwxT7t0AG/xr4WPg3HrvCw3+qX5Fp1tt3Cecc/DQ
+ xnTqKiRxO3ni8MzYtqEIGMQIwjC94ag=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1691061671;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=/oqdnU2hVSvQjG7zr7ybcm4vgtUzeJvEjdOgZyr5MDo=;
+ b=H+MFCeAyi3R3yXuvvMJFuzNpnCx698yyaUcPgHxx1B/25fIvZ6HmN/YfD5MBWOxvwIKJn3
+ LdjGjluOtzdqOXCQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 85D45134B0;
+ Thu,  3 Aug 2023 11:21:11 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id C3WjIKeNy2SCLgAAMHmgww
+ (envelope-from <jack@suse.cz>); Thu, 03 Aug 2023 11:21:11 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id D9E0FA076B; Thu,  3 Aug 2023 13:21:10 +0200 (CEST)
+Date: Thu, 3 Aug 2023 13:21:10 +0200
+From: Jan Kara <jack@suse.cz>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20230803112110.7qybhrgn2rwaguu2@quack3>
+References: <20230802154131.2221419-1-hch@lst.de>
+ <20230802154131.2221419-6-hch@lst.de>
 MIME-Version: 1.0
-X-Spam-Score: -5.9 (-----)
+Content-Disposition: inline
+In-Reply-To: <20230802154131.2221419-6-hch@lst.de>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
- Comment
- #176 from Guido (guido.iodice@gmail.com) --- After several months the bug
- occurred again with kernel 6.5 rc4. After rebooting with REISUB, I tried
- forcing GC with the usual script and it gave me no problems. 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Wed 02-08-23 17:41:24, Christoph Hellwig wrote: > Check
+ for sb->s_type which is the right place to look at the file system > type,
+ not the holder, which is just an implementation detail in the VFS [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.29 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qRVKO-00Bf4W-3N
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+X-Headers-End: 1qRWOQ-0002a8-Ii
+Subject: Re: [f2fs-dev] [PATCH 05/12] ext4: make the IS_EXT2_SB/IS_EXT3_SB
+ checks more robust
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,23 +120,66 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
+ Christian Brauner <brauner@kernel.org>, linux-nilfs@vger.kernel.org,
+ Jan Kara <jack@suse.cz>, linux-fsdevel@vger.kernel.org,
+ "Darrick J. Wong" <djwong@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Al Viro <viro@zeniv.linux.org.uk>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ David Sterba <dsterba@suse.com>, Theodore Ts'o <tytso@mit.edu>,
+ linux-ext4@vger.kernel.org, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+On Wed 02-08-23 17:41:24, Christoph Hellwig wrote:
+> Check for sb->s_type which is the right place to look at the file system
+> type, not the holder, which is just an implementation detail in the VFS
+> helpers.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
 
---- Comment #176 from Guido (guido.iodice@gmail.com) ---
-After several months the bug occurred again with kernel 6.5 rc4.
+Looks good. Feel free to add:
 
-After rebooting with REISUB, I tried forcing GC with the usual script and it
-gave me no problems.
+Reviewed-by: Jan Kara <jack@suse.cz>
 
+								Honza
+
+> ---
+>  fs/ext4/super.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/fs/ext4/super.c b/fs/ext4/super.c
+> index c94ebf704616e5..193d665813b611 100644
+> --- a/fs/ext4/super.c
+> +++ b/fs/ext4/super.c
+> @@ -140,7 +140,7 @@ static struct file_system_type ext2_fs_type = {
+>  };
+>  MODULE_ALIAS_FS("ext2");
+>  MODULE_ALIAS("ext2");
+> -#define IS_EXT2_SB(sb) ((sb)->s_bdev->bd_holder == &ext2_fs_type)
+> +#define IS_EXT2_SB(sb) ((sb)->s_type == &ext2_fs_type)
+>  #else
+>  #define IS_EXT2_SB(sb) (0)
+>  #endif
+> @@ -156,7 +156,7 @@ static struct file_system_type ext3_fs_type = {
+>  };
+>  MODULE_ALIAS_FS("ext3");
+>  MODULE_ALIAS("ext3");
+> -#define IS_EXT3_SB(sb) ((sb)->s_bdev->bd_holder == &ext3_fs_type)
+> +#define IS_EXT3_SB(sb) ((sb)->s_type == &ext3_fs_type)
+>  
+>  
+>  static inline void __ext4_read_bh(struct buffer_head *bh, blk_opf_t op_flags,
+> -- 
+> 2.39.2
+> 
 -- 
-You may reply to this email to add a comment.
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
