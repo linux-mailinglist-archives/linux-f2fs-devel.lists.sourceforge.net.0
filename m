@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8185576F1A3
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Aug 2023 20:15:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E41676F1AB
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  3 Aug 2023 20:17:01 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qRcrW-0005fm-OI;
-	Thu, 03 Aug 2023 18:15:51 +0000
+	id 1qRcsb-00010g-V6;
+	Thu, 03 Aug 2023 18:16:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qRcrW-0005fg-3V
+ (envelope-from <brauner@kernel.org>) id 1qRcsY-00010T-8L
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 03 Aug 2023 18:15:50 +0000
+ Thu, 03 Aug 2023 18:16:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IVySodCPrNfEpsA9iYNRPXBMJ7FTDZ9Jcs3M9WPQ+Ww=; b=a2wvgLKvRDmT2cmkwXeWvx6BaW
- KGmzejB2LJus6aUbWoiNmEE7LwfWK5bVnS8XcOJy0vgbrpkK1RgFKVO3sgNud7jMnzoJ+i76mZZ2/
- cBksBUCBDU1M5W/F3Wq76pG29efkIRxirtjA7Vu0xo1TUmYRhNRbshju4appOEXc6/8w=;
+ bh=TjzTeeAYoRqI2DJTIkjv88Qu/jSGbeP0vPjW5k918lM=; b=KkQkps2HszdzetPf7WM/f4eY0R
+ 7GtTfCRPHouewBnbzcYx5ra2/IQzyjSjnF6rcX/3RHPYv7cp22Q1wr3jBhNV44NFJu9qXcIsJ2khl
+ uw56wYJ01wuyPY0StC8EteDRVRGXM5PngNyil3DGmHaIm7nre2Hpcp11GQjNF2MAEHRw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,69 +31,68 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=IVySodCPrNfEpsA9iYNRPXBMJ7FTDZ9Jcs3M9WPQ+Ww=; b=mLqfYH2tS4TxlN2wyb97jFjQ44
- XIXFhVVxQ9KWWVKptqg15VaX9Sh31MJwtVEMyUNiJAZohUjH8QP2UEsTnKlt3030irYkwfZ9AmRt/
- ydbIy+nICacSj/4YDL9XPoswnzUjVaR4t/uUX8lSqIr8tp7mJGRMJZyEhKPie4UToTt4=;
+ bh=TjzTeeAYoRqI2DJTIkjv88Qu/jSGbeP0vPjW5k918lM=; b=HPJjSR8rmAgPF9KeNNPCnO1h5w
+ ZegnPiZkBpOHxnARc1Pl6iCMTyiIM0siT3KSnTNUMKeiQsPaCeX5CBBgnyCJSrT+AbihccjxS7F2N
+ ojnhAmU7XsSo1ltrCm4AHcutuleLtRkBRMihwDasLZ1cH6ppwo48xoe7L70ft6dZg2rw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qRcrT-0007YM-K5 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 03 Aug 2023 18:15:50 +0000
+ id 1qRcsY-00CBj1-O8 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 03 Aug 2023 18:16:55 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 0384C61D99;
- Thu,  3 Aug 2023 18:15:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60162C433C8;
- Thu,  3 Aug 2023 18:15:37 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 22B0C61E6B;
+ Thu,  3 Aug 2023 18:16:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4DF71C433C7;
+ Thu,  3 Aug 2023 18:16:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1691086541;
- bh=Yz12o17pxjfv8UNlGb+RqV6iHvHIX5yYabFhIVcGnJQ=;
+ s=k20201202; t=1691086608;
+ bh=jHElnSoIwa9PxqE0kOuribt4l2JQm4atAORM+XiqKXw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=NzNzQ0kZIAWvy0jQWijO38E4IFU1ELuOTm+2z0/vri0vio9s55oaqAQUbTAugZAIc
- pzSwoiINevuBV/XhzNXc0q3NFdO0ZzAFSLxi3cGXgl3HAJB+X2Uh/r/FdNfEqxzs+x
- oEq7YaNNZC/rU+FCceLfXnczQ2a6sngVIJgi7nDzGkT1xBRDxTdPkZIen5+avgHd07
- 8LXZzFT3Mn8qRcc0ic5S1kmXh1ScTSp3TgroiVqjyefr1jttGt6WWRWdWDbRFCjKZx
- XR0/Ri/7v2mM1CSXfr+YKoex1c07NyImzjyMt49SbRHVJ4+fuKehgj3MggKmlENRpl
- ceZJCjJnHL38w==
-Date: Thu, 3 Aug 2023 20:15:34 +0200
+ b=CUrkmNM33tsmjwf5s3/3SgDi3sohBFaejHQ29wPnGblVeGTpkVP4dw6ptwP5rUf52
+ bJSPuSDA4dXyZN72xMkSDJ6OaFoO173j1o0L/17vDP4dkgqBuskZYwqIquSsxyz3RC
+ wCWX2/drF2IX8rTb0TLskYJJSnSOdfGBxqmqJBlDjrO3IS+r86TmR+OF/Q8BpYZqVi
+ Q2n/dbQQnUh5kGlWjFnlBpgtKfcpckUbVCKAUvCrdySzjp/dv5MDTITafunfNOvGxE
+ 3v+lyjRY19RaHE1ZyNoROaK2c8hsj9ouZh9WJbEv8yCLsCANRL+ss2Yhq040Y7FakV
+ MQU1jo2tOUBQA==
+Date: Thu, 3 Aug 2023 20:16:41 +0200
 From: Christian Brauner <brauner@kernel.org>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20230803-hergibt-nachzahlen-296067ae0bb8@brauner>
+Message-ID: <20230803-unsterblich-hinbekommen-55b083eead3f@brauner>
 References: <20230802154131.2221419-1-hch@lst.de>
- <20230802154131.2221419-9-hch@lst.de>
+ <20230802154131.2221419-10-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230802154131.2221419-9-hch@lst.de>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20230802154131.2221419-10-hch@lst.de>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Aug 02, 2023 at 05:41:27PM +0200, Christoph Hellwig
- wrote: > Export fs_holder_ops so that file systems that open additional block
- > devices can use it as well. > > Signed-off-by: Christoph Hel [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Wed, Aug 02, 2023 at 05:41:28PM +0200, Christoph Hellwig
+ wrote: > Just like get_tree_bdev needs to drop s_umount when opening the
+ main > device, we need to do the same for the ext4 log device to av [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qRcrT-0007YM-K5
-Subject: Re: [f2fs-dev] [PATCH 08/12] fs: export fs_holder_ops
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qRcsY-00CBj1-O8
+Subject: Re: [f2fs-dev] [PATCH 09/12] ext4: drop s_umount over opening the
+ log device
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,9 +117,14 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Aug 02, 2023 at 05:41:27PM +0200, Christoph Hellwig wrote:
-> Export fs_holder_ops so that file systems that open additional block
-> devices can use it as well.
+On Wed, Aug 02, 2023 at 05:41:28PM +0200, Christoph Hellwig wrote:
+> Just like get_tree_bdev needs to drop s_umount when opening the main
+> device, we need to do the same for the ext4 log device to avoid a
+> potential lock order reversal with s_unmount for the mark_dead path.
+> 
+> It might be preferable to just drop s_umount over ->fill_super entirely,
+> but that will require a fairly massive audit first, so we'll do the easy
+> version here first.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
