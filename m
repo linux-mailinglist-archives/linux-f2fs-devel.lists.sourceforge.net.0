@@ -2,102 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A78E76F86F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Aug 2023 05:43:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0095D76F879
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Aug 2023 05:45:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qRliG-0004Df-Nz;
-	Fri, 04 Aug 2023 03:42:53 +0000
+	id 1qRlkb-00061C-Hh;
+	Fri, 04 Aug 2023 03:45:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1qRliE-0004DZ-Qq
+ (envelope-from <chao@kernel.org>) id 1qRlka-000616-1S
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Aug 2023 03:42:51 +0000
+ Fri, 04 Aug 2023 03:45:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0hcJ6hAZFx5vSQqyeZUL2YwqZS+fwhJW6d0syw1hpqQ=; b=NjVY+0SAEoXEwxPLcFvz8Zqlns
- GfE9ve/symWgAhr2sBetg8xa72t0T4AjyUQWpvGDSC04KVDlBpwYXQ4pyy71EnO2x1o7w/wZ1g9KB
- +q34vbRypvprlt3eHb64ZtW3XVqyYBrxGMcWK4lFw0jOKYHNbUSVTg9mrKd6NKcZZoLk=;
+ bh=rUHOoQxc+ZBS1RX52jnMw60v/RCce5NK4JX5PK0dfao=; b=QXmchnPaHQYCFJsZDZKlu7cVF4
+ xf7mvlWVxf2jLB8SipitlCCqPY55L6kQXuMQDMFRh3D3cnSXEkW07uza9Bl6cW9flhnQk65Sfqj6x
+ /mE5WB8bVe5xV1IcXD4A5r1h5QvqQS+bH+IL7ZCDdhqEKkXZtmLY1gC7iZ2RW5B4SAEQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0hcJ6hAZFx5vSQqyeZUL2YwqZS+fwhJW6d0syw1hpqQ=; b=G37ieHJ8mFPu8lzEgrsCcwuh/r
- w3y7mmmio4n19zYdUJ+cE6EBz0KPuHjgJGmmHu4UTq2Ftp1s6anmV6VlYfP/pTsQJzYrsCswbzseo
- 8vPWPI5Yzcqs7SPdVeIB8XpLL2qDsQ6Wq4IMI1tNx9rHuWGYy+xk5J7/8N5Ur43wYciA=;
+ bh=rUHOoQxc+ZBS1RX52jnMw60v/RCce5NK4JX5PK0dfao=; b=K/tBWSiHKybaU+Y/NRxphy/yYP
+ RbWDP3QnVe/62/gu8RG83Rx2ZEbEZ6ZFqVq+fp4OLKxMIODhepk4LOYIkr8lKi9sdchyJH8UWalSo
+ CBdctMpY14/7UEXnmfCuRbPGOWg2gYxcR6iqSV5/MSrWHboppohf/4fpwHRvDWHQgQWw=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qRliA-0006Qe-JF for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Aug 2023 03:42:51 +0000
+ id 1qRlkY-00CdX0-1N for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 04 Aug 2023 03:45:14 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 1884C61C0D
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  4 Aug 2023 03:42:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 24968C43395
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri,  4 Aug 2023 03:42:35 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 8CFC161EF7;
+ Fri,  4 Aug 2023 03:45:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37D00C433C8;
+ Fri,  4 Aug 2023 03:45:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1691120555;
- bh=0hcJ6hAZFx5vSQqyeZUL2YwqZS+fwhJW6d0syw1hpqQ=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=hsBhXdKZhSFfmm6on0j7ubWLHtBx8fmabDut2RNbRJwVU/J9ilEZ6qJ8urUYLvAqU
- dH0zOIQqPe2R1JS8uh231J3aq76MbliNKJJ3sh5P0bcfR9SU7bNZHhPZlMgN4RIJ5e
- zNVQi7fAuYocUsOY5W5e+GQX+mtcPTRJssns335N20IWDRXLWnPMiqFD+D9+RGfmLK
- gq/xKRtxTXIrMM5iKD6uG8wQiTsQp7jzE0ulb40bBaRt478vIOqTCdcNbVT4jUDalz
- giYOLXULQRL30BN/A1Lym8If2xnyZFcPoA1nZ9rhrVf+MmwugiUCigW0NPtW7zTeqY
- uHWscC0+/JZxg==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 0F84FC53BC6; Fri,  4 Aug 2023 03:42:35 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 04 Aug 2023 03:42:34 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: chao@kernel.org
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-9tU26oRzJr@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1691120707;
+ bh=5UWe8d+CZzpNzKcr2HNQxXlUCGWx9CtwP+MiNIa8p7U=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=d7GgkYCX54fvltblV39RF2PbVBQyZW2/qZzSdrGkbcAq5ZWPapqrMyAR0FUH9VAdv
+ 46p7VmoiGQAjbY+E2x0+/JoVei9HnJZN/svWWqSvUU7WV02EPIy9TFNfuniXmwdEmY
+ 9JsYShckAS1ReoEf2Td5uaQ8abZuFs7BY17C40iRVdrVLyYh4RT+AAQ0ltJT5EP6Xa
+ +NqwdLnIV7cpyXxcScS6aOpmNcHM9RxC0kKbdVQqo08+IBuWRhhBv99YOU148GFEla
+ hY/9houJ2MsN5B3ZR9EM8+V98S1pKVqOuePmkjJv9Rpx4OY3Y3ouPumEXiqioBjvFe
+ Mm4/8RwmcSe/g==
+Message-ID: <7ad85046-857c-b6e3-3c77-408e5b093ab5@kernel.org>
+Date: Fri, 4 Aug 2023 11:45:02 +0800
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Content-Language: en-US
+To: Chunhai Guo <guochunhai@vivo.com>, jaegeuk@kernel.org
+References: <20230803142842.29062-1-guochunhai@vivo.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20230803142842.29062-1-guochunhai@vivo.com>
+X-Spam-Score: -5.3 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
- Comment
- #177 from Chao Yu (chao@kernel.org) --- (In reply to kelak from comment #175)
- > Still happens on my system with 6.4.x kernels after about 4 days (today
- the > second time in the last two we [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On 2023/8/3 22:28, Chunhai Guo wrote: > Now f2fs support four
+ block allocation modes: lfs, adaptive, > fragment:segment, fragment:block.
+ Only lfs mode is allowed with zoned block > device feature. > 
+ Content analysis details:   (-5.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
@@ -112,9 +92,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.1 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qRliA-0006Qe-JF
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+X-Headers-End: 1qRlkY-00CdX0-1N
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: Only lfs mode is allowed with zoned
+ block device feature
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,27 +108,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+On 2023/8/3 22:28, Chunhai Guo wrote:
+> Now f2fs support four block allocation modes: lfs, adaptive,
+> fragment:segment, fragment:block. Only lfs mode is allowed with zoned block
+> device feature.
+> 
 
---- Comment #177 from Chao Yu (chao@kernel.org) ---
-(In reply to kelak from comment #175)
-> Still happens on my system with 6.4.x kernels after about 4 days (today the
-> second time in the last two weeks):
+Fixes: 6691d940b0e0 ("f2fs: introduce fragment allocation mode mount option")
 
-Jaegeuk has proposed a workaround solution as below, it aims to enable from
-6.6-rc1, could you please have a try with it?
+Otherwise, it looks good to me.
 
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=5a47ad28e6061c8fddf5c82d49fdc3280a80b2c4
+Thanks,
 
--- 
-You may reply to this email to add a comment.
+> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+> ---
+>   fs/f2fs/super.c | 10 +++++-----
+>   1 file changed, 5 insertions(+), 5 deletions(-)
+> 
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 30883beb750a..26add77f9062 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -862,11 +862,6 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>   			if (!name)
+>   				return -ENOMEM;
+>   			if (!strcmp(name, "adaptive")) {
+> -				if (f2fs_sb_has_blkzoned(sbi)) {
+> -					f2fs_warn(sbi, "adaptive mode is not allowed with zoned block device feature");
+> -					kfree(name);
+> -					return -EINVAL;
+> -				}
+>   				F2FS_OPTION(sbi).fs_mode = FS_MODE_ADAPTIVE;
+>   			} else if (!strcmp(name, "lfs")) {
+>   				F2FS_OPTION(sbi).fs_mode = FS_MODE_LFS;
+> @@ -1331,6 +1326,11 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+>   			F2FS_OPTION(sbi).discard_unit =
+>   					DISCARD_UNIT_SECTION;
+>   		}
+> +
+> +		if (F2FS_OPTION(sbi).fs_mode != FS_MODE_LFS) {
+> +			f2fs_info(sbi, "Only lfs mode is allowed with zoned block device feature");
+> +			return -EINVAL;
+> +		}
+>   #else
+>   		f2fs_err(sbi, "Zoned block device support is not enabled");
+>   		return -EINVAL;
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
 
 _______________________________________________
 Linux-f2fs-devel mailing list
