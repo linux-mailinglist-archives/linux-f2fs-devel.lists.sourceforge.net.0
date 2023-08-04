@@ -2,76 +2,70 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E221770501
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Aug 2023 17:40:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56B8E7708F3
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri,  4 Aug 2023 21:21:57 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qRwu2-0005DI-O1;
-	Fri, 04 Aug 2023 15:39:46 +0000
+	id 1qS0Mu-0005Ty-J7;
+	Fri, 04 Aug 2023 19:21:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qRwtx-0005DB-GM
+ (envelope-from <jaegeuk@kernel.org>) id 1qS0Mt-0005Ts-4W
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Aug 2023 15:39:41 +0000
+ Fri, 04 Aug 2023 19:21:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4nSuSrRvB/eUIaQUwnw+BXiKf+G16D7ch+jFXNS9l8Y=; b=h4DNguGLBA1MpSpZ9vX9lkG2Rh
- bH7hAZ2QCwjHSeIg7iucqVKTYL57bIefSMIxWjZSvXziJ2UAj0R1osjz+9q2J2EsDKE92/LncBYZN
- 5nLidXMDhNg70m2p+LK5tNkO5qbI0gLHmrcXqGYuomYeSledL9Od9LUy3BIiVJn7Pjes=;
+ bh=BcYgVt7EGVmyAdthQiE34Zblhe+pa+ZTMqfq9GxiId8=; b=YrWKKsBPaHG7T64t85aiY7nl9D
+ SsileGBiqVsu6P8MRGXBdCMtEaFLSqD3ZjXktQKTj8PFVNM6a5ZfMe2fBIGlGAbtKFXcpm+c04aCh
+ q5x97ChSi9BXmQaW7up92qyO3UuIJnez+9pThGpwsev+59VmMiJrDQiICjSC+Nq3yXY8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4nSuSrRvB/eUIaQUwnw+BXiKf+G16D7ch+jFXNS9l8Y=; b=DXrryQ6AfTwb7WHZWYL9Kp0F2G
- DuIeMw2ELk/LYveGgLseGF+KZZQB/G0tsCDOaPv/UAkPu+/dDJVZiddFLqoyivgRLoHFlQ/UsvyAI
- Lor0I19Eln+06R5lu0p91RthY6fUpm4bIFZebQ7/YyOE1ey5xr9RYrURv432IN5ZBwK8=;
+ bh=BcYgVt7EGVmyAdthQiE34Zblhe+pa+ZTMqfq9GxiId8=; b=Esb0f4nux9q300J9V8vjsWrl75
+ 5Uy9zgSzDU7ndsG1yabV48bMvgQziai/ozot5BCiSeSM7bw+M9Swti3eW1iBLpbBezcnsX2+N5fN4
+ Cb7q7b1np/7ufhTRIEUoDBBXnpqkoFlXuHfFeLvYVxTw2PbjkUa8sUyVwxMYW7cpUkCA=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qRwts-0006YI-KL for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 04 Aug 2023 15:39:39 +0000
+ id 1qS0Ms-00DGEK-TJ for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 04 Aug 2023 19:21:47 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 09BF56208A;
- Fri,  4 Aug 2023 15:39:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31522C433C9;
- Fri,  4 Aug 2023 15:39:26 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 51D5762118;
+ Fri,  4 Aug 2023 19:21:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88680C433C7;
+ Fri,  4 Aug 2023 19:21:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1691163570;
- bh=WBKOiXxNnEcmIAXLd9bFnF2KFmCPgIBMmS+a6ZOzWKY=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=guM3dTEfPj9gzW4hZVBn+/1D3e6V0oGJa3WQkuaCaRJm+YEkO/j0g28vpLcq+8KPx
- 00I5JDimR9O6GRpM1sCbRoDBeqI3dA0US5iDcvRFH1wRzLZGMG/AKi+37CHK3OiKfl
- Pd3WUGjQp78CvSWurtOz9TKUp2R8T9+xWekamZzkpVJreEREn7gcZJVUpwDMtQgJPa
- oNlJ1Fd+Wv/UAECk8iLUJUaVzEv4k+34Xo4z1QJAK3CSDmvC6vv3w+O4TwoqgSUVxv
- yOZLQQe40+3upkBEjN2TRg8dq8CL62TzVM9oUzcd7edWypJQ/9r8RDeBu3CtctpdP3
- S7Paz1gf4bygw==
-From: Christian Brauner <brauner@kernel.org>
-To: Christoph Hellwig <hch@lst.de>
-Date: Fri,  4 Aug 2023 17:39:20 +0200
-Message-Id: <20230804-wegelagerei-nagel-e5ba7e7cedd5@brauner>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230802154131.2221419-1-hch@lst.de>
-References: <20230802154131.2221419-1-hch@lst.de>
+ s=k20201202; t=1691176900;
+ bh=MWsb2DdQYJWtGNKDyuUQFngOkZf1+l6/DVDp5rm0/EU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=AmgohbXmO42MLHw37bUmYKkYI3JQmG8/8uqnf66nwVAxRF925dnb1Xs99X1nJ7DwA
+ E7y+uLv8ynN/3yiWE0I2dbvgRVegQ5Hqle7MbmQSsvY2jACPTL0mjxClN01yEwR5XL
+ LzQ+Qr67yVjKLJ1TwIXQ3OLrvt2za321FNaUjG67g1Debm2ty4WoomGa+6tdK6vGsi
+ 9ceVc6h/4OJDGo6EaoQ75YVR84CdKDUXIvtfKOFzjHfkTwFlHDdMdD/kmPjotHm9bQ
+ DG50rXghJns43omeR9LCPyBxr/sNbHIm+RC6xPvYdEIAwsjg+O2ifJrRbbwQmFt1Wi
+ Sj10LwdZDHTjg==
+Date: Fri, 4 Aug 2023 12:21:39 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+Message-ID: <ZM1PwzoqSt05KqTp@google.com>
+References: <20230523123521.67656-1-chao@kernel.org>
+ <fafcfeosil5yqwn2wcdx33im2mq4xkejw6bx7h2in3ay5h6znj@facx4rrg4p65>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3062; i=brauner@kernel.org;
- h=from:subject:message-id; bh=7FNUYW+x5CSjf6yCNgXxulkGn+cMsTW366YHSfu1h4A=;
- b=owGbwMvMwCU28Zj0gdSKO4sYT6slMaSclU4X5tucveB9lDl37gJ9jlmvFGN+KNg9TprAwbY/er8W
- 31PtjlIWBjEuBlkxRRaHdpNwueU8FZuNMjVg5rAygQxh4OIUgIncNWf4K3Hkgdv/npvLfSQ798adms
- 9ScvSZ2rptQtc471tqdUeIZzMyHOPQmly1SzxZ11D73stJc0XjnmfPNpO6vb5+SlL6wynWPAA=
-X-Developer-Key: i=brauner@kernel.org; a=openpgp;
- fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
+Content-Disposition: inline
+In-Reply-To: <fafcfeosil5yqwn2wcdx33im2mq4xkejw6bx7h2in3ay5h6znj@facx4rrg4p65>
 X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -79,9 +73,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, 02 Aug 2023 17:41:19 +0200, Christoph Hellwig wrote:
- > this series sits on top of the vfs.super branch in the VFS tree and does
- a > few closely related things: > > 1) it also converts nilfs2 a [...] 
+ Content preview:  On 08/04, Shinichiro Kawasaki wrote: > On May 23,
+ 2023 / 20:35, 
+ Chao Yu wrote: > > Use sbi->log_sectors_per_block to clean up below calculated
+ one: > > > > unsigned int log_sectors_per_block = sbi->lo [...] 
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -96,8 +91,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qRwts-0006YI-KL
-Subject: Re: [f2fs-dev] more blkdev_get and holder work
+X-Headers-End: 1qS0Ms-00DGEK-TJ
+Subject: Re: [f2fs-dev] [PATCH] f2fs: clean up w/ sbi->log_sectors_per_block
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,82 +104,48 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
- Christian Brauner <brauner@kernel.org>, linux-nilfs@vger.kernel.org,
- Jan Kara <jack@suse.cz>, linux-fsdevel@vger.kernel.org,
- "Darrick J. Wong" <djwong@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
- Al Viro <viro@zeniv.linux.org.uk>, Jaegeuk Kim <jaegeuk@kernel.org>,
- David Sterba <dsterba@suse.com>, Theodore Ts'o <tytso@mit.edu>,
- linux-ext4@vger.kernel.org, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- linux-btrfs@vger.kernel.org
+Cc: Damien Le Moal <Damien.LeMoal@wdc.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, 02 Aug 2023 17:41:19 +0200, Christoph Hellwig wrote:
-> this series sits on top of the vfs.super branch in the VFS tree and does a
-> few closely related things:
+On 08/04, Shinichiro Kawasaki wrote:
+> On May 23, 2023 / 20:35, Chao Yu wrote:
+> > Use sbi->log_sectors_per_block to clean up below calculated one:
+> > 
+> > unsigned int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
 > 
->   1) it also converts nilfs2 and btrfs to the new scheme where the file system
->      only opens the block devices after we know that a new super_block was
->      allocated.
->   2) it then makes sure that for all file system openers the super_block is
->      stored in bd_holder, and makes use of that fact in the mark_dead method
->      so that it doesn't have to fall get_super and thus can also work on
->      block devices that sb->s_bdev doesn't point to
->   3) it then drops the fs-specific holder ops in ext4 and xfs and uses the
->      generic fs_holder_ops there
+> Hello Chao,
 > 
-> [...]
+> When I ran workloads on f2fs using v6.5-rcX with fixes [1][2] and a zoned block
+> devices with 4kb logical block size, I observe mount failure as follows. When
+> I revert this commit, the failure goes away.
+> 
+> [  167.781975][ T1555] F2FS-fs (dm-0): IO Block Size:        4 KB
+> [  167.890728][ T1555] F2FS-fs (dm-0): Found nat_bits in checkpoint
+> [  171.482588][ T1555] F2FS-fs (dm-0): Zone without valid block has non-zero write pointer. Reset the write pointer: wp[0x1300,0x8]
+> [  171.496000][ T1555] F2FS-fs (dm-0): (0) : Unaligned zone reset attempted (block 280000 + 80000)
+> [  171.505037][ T1555] F2FS-fs (dm-0): Discard zone failed:  (errno=-5)
+> 
+> The patch replaced "sbi->log_blocksize - SECTOR_SHIFT" with
+> "sbi->log_sectors_per_block". However, I think these two are not equal when the
+> device has 4k logical block size. The former uses Linux kernel sector size 512
+> byte. The latter use 512b sector size or 4kb sector size depending on the
+> device. mkfs.f2fs obtains logical block size via BLKSSZGET ioctl from the device
+> and reflects it to the value sbi->log_sector_size_per_block. This causes
+> unexpected write pointer calculations in check_zone_write_pointer(). This
+> resulted in unexpected zone reset and the mount failure.
+> 
+> I think this patch needs revert. What do you think?
 
-Let's pick this up now so it still has ample time in -next even though
-we're still missing a nod from the btrfs people. The nilfs to
-mount_bdev() conversion is probably not super urgent but if wanted a
-follow-up patch won't be frowned upon.
+Yeah, applied the revert.
 
----
-
-Applied to the vfs.super branch of the vfs/vfs.git tree.
-Patches in the vfs.super branch should appear in linux-next soon.
-
-Please report any outstanding bugs that were missed during review in a
-new review to the original patch series allowing us to drop it.
-
-It's encouraged to provide Acked-bys and Reviewed-bys even though the
-patch has now been applied. If possible patch trailers will be updated.
-
-Note that commit hashes shown below are subject to change due to rebase,
-trailer updates or similar. If in doubt, please check the listed branch.
-
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
-branch: vfs.super
-
-[01/12] fs: export setup_bdev_super
-        https://git.kernel.org/vfs/vfs/c/71c00ec51d83
-[02/12] nilfs2: use setup_bdev_super to de-duplicate the mount code
-        https://git.kernel.org/vfs/vfs/c/c820df38784a
-[03/12] btrfs: always open the device read-only in btrfs_scan_one_device
-        https://git.kernel.org/vfs/vfs/c/75029e14cea6
-[04/12] btrfs: open block devices after superblock creation
-        https://git.kernel.org/vfs/vfs/c/364820697dbb
-[05/12] ext4: make the IS_EXT2_SB/IS_EXT3_SB checks more robust
-        https://git.kernel.org/vfs/vfs/c/4cf66c030db1
-[06/12] fs: use the super_block as holder when mounting file systems
-        https://git.kernel.org/vfs/vfs/c/c0188baf8f7e
-[07/12] fs: stop using get_super in fs_mark_dead
-        https://git.kernel.org/vfs/vfs/c/2a8402f9db25
-[08/12] fs: export fs_holder_ops
-        https://git.kernel.org/vfs/vfs/c/ee62b0ec9ff8
-[09/12] ext4: drop s_umount over opening the log device
-        https://git.kernel.org/vfs/vfs/c/644ab8c64a12
-[10/12] ext4: use fs_holder_ops for the log device
-        https://git.kernel.org/vfs/vfs/c/fba3de1aad77
-[11/12] xfs: drop s_umount over opening the log and RT devices
-        https://git.kernel.org/vfs/vfs/c/9470514a171c
-[12/12] xfs use fs_holder_ops for the log and RT devices
-        https://git.kernel.org/vfs/vfs/c/c6fb2ed736e3
+> 
+> [1] https://lkml.kernel.org/linux-f2fs-devel/20230711050101.GA19128@lst.de/
+> [2] https://lore.kernel.org/linux-f2fs-devel/20230804091556.2372567-1-shinichiro.kawasaki@wdc.com/
 
 
 _______________________________________________
