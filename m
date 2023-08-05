@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 533BB770F52
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  5 Aug 2023 12:39:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7FE877107E
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  5 Aug 2023 18:19:22 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qSEhA-00019V-SY;
-	Sat, 05 Aug 2023 10:39:40 +0000
+	id 1qSJzn-00054y-9a;
+	Sat, 05 Aug 2023 16:19:14 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qSEh9-00019P-W8
+ (envelope-from <djwong@kernel.org>) id 1qSJzl-00054j-Cz
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 05 Aug 2023 10:39:40 +0000
+ Sat, 05 Aug 2023 16:19:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xQ61czzkab6NCYwS7Jn5mrk3gMr4CLj7Pe6n75jK24U=; b=Ft60hU4hZ8IZm6fDgC8nGxIaEO
- D48Tj3lhTNGol8i+JsFg0Jmx+cuRCZ8tEkMVj0F6FImRzCPsFv0nNRzsYwplbczgbIws/UebTcjph
- w7p92z/Z7anBKQVU1viUPEjajEVgEnUtabZiWMV/A7OmjHkoUpKTZ3DBeAg9uIhATdJY=;
+ bh=yjNsJCLVAu0TU0e6K2MCvm9mrzrNe+dQtFIPEgONaU4=; b=IquPtAirGX+Trs6LVCyhKNzyF/
+ ck2Yfu10/NzM2eT86MUVJb/VSyoaWbb76YV6r+O/h0+V7N7COkJy2pzTc1hXyPfaJghJcXB/FLmuX
+ 5TCa2kFqVDl1XWDAo/WWBqre0XVTkcfKnfhK/iY8gNuDupNuV7UEqtl4AFCschRtrfek=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,36 +31,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xQ61czzkab6NCYwS7Jn5mrk3gMr4CLj7Pe6n75jK24U=; b=RWxAEk7+N5tX4AsbMJPCdBhXCU
- C5iSRFbAnLJc1Sia6nHDBpAOADhgUaBMe+/Cl5DxFjyV+0UYwc+u96p6bTTHMZkgLlw2I7ArJPcXS
- RWYdfDngHYHOMPAmzU78jPI8u4hVepc5QM7Jqcaaryxh1U7txh452/FiURykc3m322ro=;
+ bh=yjNsJCLVAu0TU0e6K2MCvm9mrzrNe+dQtFIPEgONaU4=; b=NyWCvHowHxgJOPkSoT8gs90Mt/
+ NJxD4wXB4fp7sIV3mODO9m/uXdRNfs2OvA0wcNpZcNaHYLVIykc9v8uUH9lGGIEtmYXLEHvzY9mEj
+ y/o4UeFE9V9iRsx6XHnZxEChDKLobFuUaPM5OiDQe1KuTVcQldrGkI5FR9GcPa4xYGko=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qSEh6-00Du1L-P4 for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 05 Aug 2023 10:39:39 +0000
+ id 1qSJzj-00088E-Kx for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 05 Aug 2023 16:19:12 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7EEAF60C6D;
- Sat,  5 Aug 2023 10:39:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9DD0C433C7;
- Sat,  5 Aug 2023 10:39:20 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E146E60BA3;
+ Sat,  5 Aug 2023 16:19:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F45DC433C8;
+ Sat,  5 Aug 2023 16:19:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1691231964;
- bh=uXGWtXBnq0nfa/jBhSY841c7zuCmhgyQEv0tqvbShRw=;
+ s=k20201202; t=1691252345;
+ bh=eczxg65nAKdspBAZJjvsqnJ9aD9e1Cnh1ASqk/5x4Tc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gcYazOn/niIWgO8RAq86Wd0rf6mY5HFyG8HgKYgI+uBhiJcOa1iN7eHEwWVbAcqFb
- 5XIJBVbVVoMXgQkQiYsI582grCtIP5eESCBkMFP2HJtSXo84sAac2RzSv75h991bTw
- DlhvR7swkECQCUNJ0aVzgU1Y6/CLhGJcMtH+agnVqKKciIHJRKsst4uRWzNWqfcH/S
- 4Z5gPIEd6TmqOwMkNTU2g/kveG9q6Rla8oYlgbxLN/F6Ht72xR0/n8EjkY0FHeNts+
- T/IgH7Tx7FR6m1gG2NYvDi0EBc0UAhmoFZi7m3tQ+5R3RXve3Uu+iNx/GDcEcrNUGm
- nFhvs+f54VGWQ==
-Date: Sat, 5 Aug 2023 12:39:12 +0200
-From: Christian Brauner <brauner@kernel.org>
+ b=Z0h/IrNV9FDvUWv2eNzdGVI/pdKwMLXK4ephLjq8qasptg9QR42I18oxpmAO8umTF
+ +jPDQ/hHlUXz8vlybFxoV5RemFk0DVSLbmOMRAK0CJqcO8LUXtppZEHOBIInbCw1Bp
+ JTrajwX0bDnORyljOsGHdnXOxmx4UhQ4gFvfINhcXD8pnn5ERuxQv6rcgrEHwNJK1I
+ cw8urElSBCWxmfql/5enH6QJ/LQEtkXgzdIYOACoSdLpWEdSHCXQJS6+TIJwCyfYu7
+ hRiEBFxuNr7P2y5wMX51/z0/iaXoTcxnlDluglqILaNhlVU/0TaObzI32WdPQIaxv2
+ RPO/N8LaaV66Q==
+Date: Sat, 5 Aug 2023 09:19:04 -0700
+From: "Darrick J. Wong" <djwong@kernel.org>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20230805-galaabend-diskreditieren-27943ea3c10e@brauner>
+Message-ID: <20230805161904.GM11377@frogsfrogsfrogs>
 References: <20230802154131.2221419-1-hch@lst.de>
  <20230802154131.2221419-12-hch@lst.de>
  <20230802163219.GW11352@frogsfrogsfrogs>
@@ -81,6 +81,8 @@ X-Spam-Report: Spam detection software,
  Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -89,11 +91,8 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qSEh6-00Du1L-P4
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qSJzj-00088E-Kx
 Subject: Re: [f2fs-dev] [PATCH 11/12] xfs: drop s_umount over opening the
  log and RT devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -108,8 +107,8 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
- linux-nilfs@vger.kernel.org, Jan Kara <jack@suse.cz>,
- linux-fsdevel@vger.kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
+ Christian Brauner <brauner@kernel.org>, linux-nilfs@vger.kernel.org,
+ Jan Kara <jack@suse.cz>, linux-fsdevel@vger.kernel.org,
  Josef Bacik <josef@toxicpanda.com>, linux-f2fs-devel@lists.sourceforge.net,
  linux-xfs@vger.kernel.org, Chris Mason <clm@fb.com>,
  Andreas Dilger <adilger.kernel@dilger.ca>, Al Viro <viro@zeniv.linux.org.uk>,
@@ -141,7 +140,20 @@ On Sat, Aug 05, 2023 at 10:32:39AM +0200, Christoph Hellwig wrote:
 > be trivial enough to not need a more specific reference.  If you
 > think there's a better way to refer to it I can update the comment,
 > though.
-> 
+
+How about:
+
+	/*
+	 * blkdev_put can't be called under s_umount, see the comment in
+	 * get_tree_bdev for more details
+	 */
+
+with that and the label name change,
+Reviewed-by: Darrick J. Wong <djwong@kernel.org>
+
+--D
+
+
 > > >  		mp->m_logdev_targp = mp->m_ddev_targp;
 > > >  	}
 > > >  
@@ -155,9 +167,7 @@ On Sat, Aug 05, 2023 at 10:32:39AM +0200, Christoph Hellwig wrote:
 > 
 > Agreed.  Christian, can you just change this in your branch, or should
 > I send an incremental patch?
-
-No need to send an incremental patch. I just s/out_unlock/out_relock/g
-in-tree. Thanks!
+> 
 
 
 _______________________________________________
