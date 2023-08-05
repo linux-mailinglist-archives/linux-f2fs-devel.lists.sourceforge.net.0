@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A6B3770ED4
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  5 Aug 2023 10:36:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 533BB770F52
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  5 Aug 2023 12:39:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qSClv-0006ar-US;
-	Sat, 05 Aug 2023 08:36:28 +0000
+	id 1qSEhA-00019V-SY;
+	Sat, 05 Aug 2023 10:39:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1qSClu-0006aN-29
+ (envelope-from <brauner@kernel.org>) id 1qSEh9-00019P-W8
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 05 Aug 2023 08:36:27 +0000
+ Sat, 05 Aug 2023 10:39:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zX+yAwxxXXeDB9MLA4OJTL2/Dp/CPy6h0+KrCbKhYSQ=; b=k7g+Z1DU5+drU7HUYMv6IknomA
- gf9mSg91slOt/0nc2eLrTZHNQ6VXJzwEdciLCZ0qjenKWRV6T9AZH706mPLnWfd3+cyMOI/gV59Zu
- SkZ4BmEGvLeBj9lnCBoUtDZoQLW9wfoVgPfQKNzggPJlhUO9JAvOHxJnS00yjzTOWrtE=;
+ bh=xQ61czzkab6NCYwS7Jn5mrk3gMr4CLj7Pe6n75jK24U=; b=Ft60hU4hZ8IZm6fDgC8nGxIaEO
+ D48Tj3lhTNGol8i+JsFg0Jmx+cuRCZ8tEkMVj0F6FImRzCPsFv0nNRzsYwplbczgbIws/UebTcjph
+ w7p92z/Z7anBKQVU1viUPEjajEVgEnUtabZiWMV/A7OmjHkoUpKTZ3DBeAg9uIhATdJY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,46 +31,71 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zX+yAwxxXXeDB9MLA4OJTL2/Dp/CPy6h0+KrCbKhYSQ=; b=iynrFnZVXkT3sp9nAugV1zh5eI
- +vCuklX2buQqtqs9pRtvot/Q95jqKwI+B2f74Od9juAepgJD2Dxi0+y92KU8AmI4h6bIGYWXGwvu0
- 4wETnlu+z+Ea5Lhx1BR7Y8frMCRRk1ZKmmByCS66TmYdc33OHmtx6dYod22AdSyadKi8=;
-Received: from verein.lst.de ([213.95.11.211])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=xQ61czzkab6NCYwS7Jn5mrk3gMr4CLj7Pe6n75jK24U=; b=RWxAEk7+N5tX4AsbMJPCdBhXCU
+ C5iSRFbAnLJc1Sia6nHDBpAOADhgUaBMe+/Cl5DxFjyV+0UYwc+u96p6bTTHMZkgLlw2I7ArJPcXS
+ RWYdfDngHYHOMPAmzU78jPI8u4hVepc5QM7Jqcaaryxh1U7txh452/FiURykc3m322ro=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qSClu-0001Iy-Fj for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 05 Aug 2023 08:36:27 +0000
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 981B468AA6; Sat,  5 Aug 2023 10:36:17 +0200 (CEST)
-Date: Sat, 5 Aug 2023 10:36:17 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20230805083617.GB29780@lst.de>
+ id 1qSEh6-00Du1L-P4 for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 05 Aug 2023 10:39:39 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7EEAF60C6D;
+ Sat,  5 Aug 2023 10:39:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9DD0C433C7;
+ Sat,  5 Aug 2023 10:39:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1691231964;
+ bh=uXGWtXBnq0nfa/jBhSY841c7zuCmhgyQEv0tqvbShRw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=gcYazOn/niIWgO8RAq86Wd0rf6mY5HFyG8HgKYgI+uBhiJcOa1iN7eHEwWVbAcqFb
+ 5XIJBVbVVoMXgQkQiYsI582grCtIP5eESCBkMFP2HJtSXo84sAac2RzSv75h991bTw
+ DlhvR7swkECQCUNJ0aVzgU1Y6/CLhGJcMtH+agnVqKKciIHJRKsst4uRWzNWqfcH/S
+ 4Z5gPIEd6TmqOwMkNTU2g/kveG9q6Rla8oYlgbxLN/F6Ht72xR0/n8EjkY0FHeNts+
+ T/IgH7Tx7FR6m1gG2NYvDi0EBc0UAhmoFZi7m3tQ+5R3RXve3Uu+iNx/GDcEcrNUGm
+ nFhvs+f54VGWQ==
+Date: Sat, 5 Aug 2023 12:39:12 +0200
+From: Christian Brauner <brauner@kernel.org>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20230805-galaabend-diskreditieren-27943ea3c10e@brauner>
 References: <20230802154131.2221419-1-hch@lst.de>
- <20230802154131.2221419-7-hch@lst.de>
- <20230803115131.w6hbhjvvkqnv4qbq@quack3>
- <20230803133330.dstks7aogjogqdd5@quack3>
+ <20230802154131.2221419-12-hch@lst.de>
+ <20230802163219.GW11352@frogsfrogsfrogs>
+ <20230805083239.GA29780@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230803133330.dstks7aogjogqdd5@quack3>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: 0.0 (/)
+In-Reply-To: <20230805083239.GA29780@lst.de>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Aug 03, 2023 at 03:33:30PM +0200, Jan Kara wrote:
- > As a side note, after this patch we can also remove bdev->bd_super and >
- transition the two real users (mark_buffer_write_io_error() and two [...]
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  On Sat, Aug 05, 2023 at 10:32:39AM +0200, Christoph Hellwig
+ wrote: > On Wed, Aug 02, 2023 at 09:32:19AM -0700, Darrick J. Wong wrote:
+ > > > + /* see get_tree_bdev why this is needed and safe */ > > > [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
-X-Headers-End: 1qSClu-0001Iy-Fj
-Subject: Re: [f2fs-dev] [PATCH 06/12] fs: use the super_block as holder when
- mounting file systems
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qSEh6-00Du1L-P4
+Subject: Re: [f2fs-dev] [PATCH 11/12] xfs: drop s_umount over opening the
+ log and RT devices
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -83,30 +108,56 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
- Christian Brauner <brauner@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- Theodore Ts'o <tytso@mit.edu>, linux-fsdevel@vger.kernel.org,
- "Darrick J. Wong" <djwong@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>, linux-xfs@vger.kernel.org,
- Chris Mason <clm@fb.com>, linux-nilfs@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, Jan Kara <jack@suse.cz>,
+ linux-fsdevel@vger.kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
+ Josef Bacik <josef@toxicpanda.com>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Chris Mason <clm@fb.com>,
  Andreas Dilger <adilger.kernel@dilger.ca>, Al Viro <viro@zeniv.linux.org.uk>,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>,
- linux-btrfs@vger.kernel.org
+ Jaegeuk Kim <jaegeuk@kernel.org>, David Sterba <dsterba@suse.com>,
+ Theodore Ts'o <tytso@mit.edu>, linux-ext4@vger.kernel.org,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Aug 03, 2023 at 03:33:30PM +0200, Jan Kara wrote:
-> As a side note, after this patch we can also remove bdev->bd_super and
-> transition the two real users (mark_buffer_write_io_error() and two places
-> in ocfs2) to use bd_holder. Ext4 also uses bd_super but there it is really
-> pointless as we have the superblock directly available in that function
-> anyway.
+On Sat, Aug 05, 2023 at 10:32:39AM +0200, Christoph Hellwig wrote:
+> On Wed, Aug 02, 2023 at 09:32:19AM -0700, Darrick J. Wong wrote:
+> > > +	/* see get_tree_bdev why this is needed and safe */
+> > 
+> > Which part of get_tree_bdev?  Is it this?
+> > 
+> > 		/*
+> > 		 * s_umount nests inside open_mutex during
+> > 		 * __invalidate_device().  blkdev_put() acquires
+> > 		 * open_mutex and can't be called under s_umount.  Drop
+> > 		 * s_umount temporarily.  This is safe as we're
+> > 		 * holding an active reference.
+> > 		 */
+> > 		up_write(&s->s_umount);
+> > 		blkdev_put(bdev, fc->fs_type);
+> > 		down_write(&s->s_umount);
+> 
+> Yes.  With the refactoring earlier in the series get_tree_bdev should
+> be trivial enough to not need a more specific reference.  If you
+> think there's a better way to refer to it I can update the comment,
+> though.
+> 
+> > >  		mp->m_logdev_targp = mp->m_ddev_targp;
+> > >  	}
+> > >  
+> > > -	return 0;
+> > > +	error = 0;
+> > > +out_unlock:
+> > > +	down_write(&sb->s_umount);
+> > 
+> > Isn't down_write taking s_umount?  I think the label should be
+> > out_relock or something less misleading.
+> 
+> Agreed.  Christian, can you just change this in your branch, or should
+> I send an incremental patch?
 
-I actually have a series to kill bd_super, but it uses b_assoc_map
-as the replacement, as nothing in buffer.c should poke into the holder
-and the buffer_head codes uses b_assoc_map a lot anyway.  Let me rebase
-it and send it out.
+No need to send an incremental patch. I just s/out_unlock/out_relock/g
+in-tree. Thanks!
 
 
 _______________________________________________
