@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D898772F14
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Aug 2023 21:39:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD4B4772F16
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Aug 2023 21:39:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qT64X-00055O-8Y;
-	Mon, 07 Aug 2023 19:39:21 +0000
+	id 1qT64d-0001RI-8o;
+	Mon, 07 Aug 2023 19:39:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qT64V-00055I-Ju
+ (envelope-from <jlayton@kernel.org>) id 1qT64c-0001RA-0E
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Aug 2023 19:39:19 +0000
+ Mon, 07 Aug 2023 19:39:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=R6vlvmLUvKOZulfJ+YX7AeQubON0sqkk/2/xliZw3ps=; b=hiZlVP5uKNIgk4NK8pOCwWH50b
- 2RdAJ1vf2t/VXsNfz0BRO3yTs+qTG3keQIS8CIN0VHzKzdka88alStNYmmyE/6teHVorPYCVEPN4I
- HW+mqHpprbbzwWZ4meU9p9mq7Vn9g+9pjteWqqUYJw+JGL8PR+p6E22Wa9twTRmC2O2c=;
+ bh=MKgBp9oK9I/eGiA5ZFHpYsdGcuADtbCd2AXbZ6/hxtU=; b=L/eXVXodHs3yRR/WWVZuK6paie
+ 4SJLNONsheQUq/cTF+9y1j77hJlXZ6D9hwiODayJ+AAUB5eKobqHlOpist8lyuo5r718aJupbyNPk
+ 3sV9jlrvrepn3kVwCyhMJFJIAutTXlySDo+v03hgHKl6WO68JylF1kCn0vowLsNJ1cbo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -31,36 +31,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=R6vlvmLUvKOZulfJ+YX7AeQubON0sqkk/2/xliZw3ps=; b=VFjXYcTRt8ywQiCeQPl9plgxx7
- +DKe9TFt79PxQyAgNWFUXHZFTlaTQqCPw0rrlvzJ+KazyIahtpXStpkfVO9GxFgfxhSQSEQVMeOqo
- iAiMtnt3LLQpWfN4dEAdVlucvsdW/LaMEPkaDuOgxsoUFXMSX784Jf6FQY6qmI3g2BBs=;
+ bh=MKgBp9oK9I/eGiA5ZFHpYsdGcuADtbCd2AXbZ6/hxtU=; b=L2wMGPBlKTLLRJneNFZTnsQzuB
+ xWFyAWak+IJUQAkFAHisE3fi8Eny2ApTRkE3Wzqa5KmCnf8hM7FsyIwoC4NSLtCrHKVTRt1xQXyLr
+ yRQA3tuhE2zwhvVt1PCFRCH3rEYY+czMmVgOiEfqNW8rFRTuRxkTucFWbDUVkoqej0r0=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qT64U-0002c0-Uq for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Aug 2023 19:39:19 +0000
+ id 1qT64b-00GNSu-DQ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 07 Aug 2023 19:39:26 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5E171621CB;
- Mon,  7 Aug 2023 19:39:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 190D6C433CB;
- Mon,  7 Aug 2023 19:39:06 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id BC37D621D9;
+ Mon,  7 Aug 2023 19:39:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7F53C0760F;
+ Mon,  7 Aug 2023 19:39:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1691437152;
- bh=FjK4CXRYiETGn7OzM9We0k7POLcZSDg/Zv0Z2hVxi0I=;
+ s=k20201202; t=1691437159;
+ bh=w/lSN0ukwva6epMNoVXoGECLFjjw4G/9PpuKUglAlXI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=Ho/bKlx1W7NVzVpTF8gn0UewKv0nHppAuc8rdt0EpJYDtixyqx9Pm88/s99GjJrGi
- VyWirQXhlLAHTHZVHTzlGto3MlaV9AC0IS4d6ITtkzLyremJTCyhuBghtZLgXI+wFI
- BWGm+mORoGztRukCVECswMBc3DvEXZDbVqOKZXPaUiWJUmCkRudhYLBAFuaGRz0svy
- C36sqbKO7RSDcSDE/CGOWo0cEGgTtCDEY05Q94XhMpgiKRb5sItIEiDQCoyYVBZcIf
- Wa4V9O81hy5cBvQhbAwM4fAHf3aZVD4FS2Awad7m8GiNGAzXgq+KA8NdanYEf8qWKH
- 93tAXs2YealYw==
+ b=n+ZsTu28M3VdcwnYvSVxoPse+qwGyO+HkVh5pC077q8BEHXzpiyNNUgAHQPYiFJIS
+ j6ZKghZfFnGATLTZj4oxP2NYEGEO7AiSUifGgRP68IlVHDXaWCgn54hYIL0JpmM0p+
+ CqLzra1OclcPSOt/Hnsh2xZ1sDfSGHbAsCwHm3aTfTxLNmvkLgEmlZKZJ5/0AUuD+R
+ Eqm6CVVkz6y/GuBriAK4Wwi5djQ8NvbLaSPToikNPLCl3fBhu8w7JrnSDO0z49QTWe
+ mdzgssplnSDCZhdVt8pPDznGidgkZHlZ4hD7/wgE/28c355BGbe+y20j1GWIEszM3w
+ vHVLY1B9cMgXw==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Mon, 07 Aug 2023 15:38:35 -0400
+Date: Mon, 07 Aug 2023 15:38:36 -0400
 MIME-Version: 1.0
-Message-Id: <20230807-mgctime-v7-4-d1dec143a704@kernel.org>
+Message-Id: <20230807-mgctime-v7-5-d1dec143a704@kernel.org>
 References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
 In-Reply-To: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -101,20 +101,20 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Amir Goldstein <amir73il@gmail.com>, "Darrick J. Wong" <djwong@kernel.org>, 
  Benjamin Coddington <bcodding@redhat.com>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1015; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=FjK4CXRYiETGn7OzM9We0k7POLcZSDg/Zv0Z2hVxi0I=;
- b=owEBbQKS/ZANAwAIAQAOaEEZVoIVAcsmYgBk0Ug9ionAyEQ00FE2RysKd05kyYmr3Uo7M3P+S
- fZsake1O9WJAjMEAAEIAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCZNFIPQAKCRAADmhBGVaC
- FSb/D/46K68INm7LKy6yCb3jkxB2bvd3492M0QuN7zYTdZH4x4RyMrHVer1FcL+lgqeruzzWSEv
- f1jPsb2uT+va62GuDI/zejA857D6P77Pxxt62BL6PnF8w9wZfjNo2RBhUJFbcYvEl7WV0QxsBOz
- eVhLOFWlIfBl7qnRoQcQ1EXt/gqm3vncmzxpOhadSWSyAjf3Uyf3ySH1I8zBuzQ6i19jmqQ0RvT
- bb3mEN/W/iBYc3G76Eud3bo16w9EvoB9nxjRlcTuuZvFPC7ModhHKFVftanzKrqnN++LssBxJTt
- qCOGvNDD4XQsoYkNqWK/GeE2dbwuRgBPiPB4T/mRNQGXzoSkgEejZgIlG9UhkKivUvI8mAD1Fvf
- EsZs1aXtF60wPVfCdR9EzkWR98DlT7wHqFko2/J5x3ayqhk5/Hd7Dxd9+3KOUjobqgsNV6z/0hu
- iEa0QiZI9t2vkWtpHGQNGJWoW5i6lWMNl2ugTM4Ph4rAECf19PhJ6QMCL6sLB1t/Yg+5Y9QCkZa
- u6JThQBEJCg3b3v0vqUh9tAePT84Au/SSSO41CUtR4p6gYotqAK/13vCIRlgBGFlSFirEva3rSu
- O4r5y/T/dIV3T3tPLC2QfaJLzkymk/JC3a+VkmmiF/LAO2Y1vQ5KE1bfV2hX76K1OaxCpRxc3+Z
- GjdlHLhrXMsZpbw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1355; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=w/lSN0ukwva6epMNoVXoGECLFjjw4G/9PpuKUglAlXI=;
+ b=owEBbQKS/ZANAwAIAQAOaEEZVoIVAcsmYgBk0Ug9pI0NrLPqkw/IVc72gm+1CKA4xq0qrZy8b
+ uVUq7nnyrmJAjMEAAEIAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCZNFIPQAKCRAADmhBGVaC
+ Fa9OEACCVBv40jfSNekICILFILSv3kfMvSgBhgjGx95YgjXppdwzEyLLlwpSVrSsRV+cftyGpIm
+ fAE/yx7Tg45YQHPEAIjZsXv7bmnKzSjeE6SBYRlzajEuRP5jYccKnpHBkFgt3Bm6CzwTXKsc+wP
+ P+Os6/rMfvLYhgIRrsw2TynaKTK+KCmkPhLl2MY80nE/IJJDuKyc12CA3WObaND9DMiDvrpFrVy
+ +EpTXRHLFTVw9XhkfotB2MTddGG22XE2bX61v2EY7jVHsLfvCexOUHqHERkOMf7sNYTYBNGbQWj
+ GDOTlMmoFkepJxCRNTmBrGPvaEWotzG/J/olLjLSwazaPHviKqV6+YswMlUDwNSkpe3Vj9wVLz4
+ 2q00zgOWKIlzdWwn+HfMColQvMyebLbvGGAipQSNWb31zah3OmKeUULR8PVuszN88ZNHeezNxXA
+ hvZpmJoX1eJLN7m8v8Ed43X/VhazgHgNvOCNu7abZkmYVfTwgI40o7Bd9RLXq+64YqOP+YK+z3Q
+ Zq+YbwZYcxNUuUpn+Cgp7YHZUbEsahymP2YrmwqP4Xob7knCd5llIT+NhSveXB+ZQWC6fDyX7Ch
+ VbhvDGsvPZ+SUd/2o3PDvfQrzxcr0zoGj7FQvhSljVPTCnHDYuqdBgwJjRAwav0+7Gr4YtL69lE
+ MReVPilZbhz9ThA==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -5.2 (-----)
@@ -124,10 +124,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In later patches, we're going to drop the "now" argument from
- the update_time operation. Have btrfs_update_time use the new
- inode_update_timestamps
- helper to fetch a new timestamp and update it proper [...] 
+ Content preview:  In later patches, we're going to drop the "now" parameter
+ from the update_time operation. Fix fat_update_time to fetch its own
+ timestamp.
+ It turns out that this is easily done by just passing a NULL t [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -143,9 +143,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qT64U-0002c0-Uq
-Subject: [f2fs-dev] [PATCH v7 04/13] btrfs: have it use
- inode_update_timestamps
+X-Headers-End: 1qT64b-00GNSu-DQ
+Subject: [f2fs-dev] [PATCH v7 05/13] fat: make fat_update_time get its own
+ timestamp
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -172,36 +172,42 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In later patches, we're going to drop the "now" argument from the
-update_time operation. Have btrfs_update_time use the new
-inode_update_timestamps helper to fetch a new timestamp and update it
-properly.
+In later patches, we're going to drop the "now" parameter from the
+update_time operation. Fix fat_update_time to fetch its own timestamp.
+It turns out that this is easily done by just passing a NULL timestamp
+pointer to fat_update_time.
+
+Also, it may be that things have changed by the time we get to calling
+fat_update_time after checking inode_needs_update_time. Ensure that we
+attempt the i_version bump if any of the S_* flags besides S_ATIME are
+set.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/btrfs/inode.c | 9 +--------
- 1 file changed, 1 insertion(+), 8 deletions(-)
+ fs/fat/misc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
-index 29a20f828dda..d52e7d64570a 100644
---- a/fs/btrfs/inode.c
-+++ b/fs/btrfs/inode.c
-@@ -6068,14 +6068,7 @@ static int btrfs_update_time(struct inode *inode, struct timespec64 *now,
- 	if (btrfs_root_readonly(root))
- 		return -EROFS;
+diff --git a/fs/fat/misc.c b/fs/fat/misc.c
+index 67006ea08db6..8cab87145d63 100644
+--- a/fs/fat/misc.c
++++ b/fs/fat/misc.c
+@@ -347,14 +347,14 @@ int fat_update_time(struct inode *inode, struct timespec64 *now, int flags)
+ 		return 0;
  
--	if (flags & S_VERSION)
--		dirty |= inode_maybe_inc_iversion(inode, dirty);
--	if (flags & S_CTIME)
--		inode_set_ctime_to_ts(inode, *now);
--	if (flags & S_MTIME)
--		inode->i_mtime = *now;
--	if (flags & S_ATIME)
--		inode->i_atime = *now;
-+	dirty = inode_update_timestamps(inode, flags);
- 	return dirty ? btrfs_dirty_inode(BTRFS_I(inode)) : 0;
- }
+ 	if (flags & (S_ATIME | S_CTIME | S_MTIME)) {
+-		fat_truncate_time(inode, now, flags);
++		fat_truncate_time(inode, NULL, flags);
+ 		if (inode->i_sb->s_flags & SB_LAZYTIME)
+ 			dirty_flags |= I_DIRTY_TIME;
+ 		else
+ 			dirty_flags |= I_DIRTY_SYNC;
+ 	}
  
+-	if ((flags & S_VERSION) && inode_maybe_inc_iversion(inode, false))
++	if ((flags & (S_VERSION|S_CTIME|S_MTIME)) && inode_maybe_inc_iversion(inode, false))
+ 		dirty_flags |= I_DIRTY_SYNC;
+ 
+ 	__mark_inode_dirty(inode, dirty_flags);
 
 -- 
 2.41.0
