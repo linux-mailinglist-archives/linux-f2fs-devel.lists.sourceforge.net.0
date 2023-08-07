@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6478C771FB0
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Aug 2023 13:11:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB7B7771FB9
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Aug 2023 13:12:04 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qSy9P-0001qh-5y;
-	Mon, 07 Aug 2023 11:11:52 +0000
+	id 1qSy9a-0001sE-Gf;
+	Mon, 07 Aug 2023 11:12:03 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <zhengqi.arch@bytedance.com>) id 1qSy9M-0001qV-I5
+ (envelope-from <zhengqi.arch@bytedance.com>) id 1qSy9Y-0001ro-D6
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Aug 2023 11:11:49 +0000
+ Mon, 07 Aug 2023 11:12:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bO4yc6b0222dRNj48HoFyPuU9QjRVolFKKVhhMGpLKw=; b=hb4pRAeJa7Mk2rm3qJFHLY1R54
- L24zVLwmkcO5tifWXz0iPos00RuYG3vUdY9txBI7+zqtSbRSWVQamEkVcRnUpLY1o3my4X3uEOpe1
- bGr875cAYAsBsjJx2G31IiemScB2DzLRKosaU5g8OX9xSQtt1eDIif/4seDzC8rKfBR4=;
+ bh=ubpyp4SIhGXjO6/VTKiZvWjlRzyN8ANvKHVN5xSGnIw=; b=Ykk0BrHAFY0Az7/pEbxIvs4qRS
+ GzgAL/MeZfnpm0+6l+GCjKkVFeG/cqTqsuXshMHjz5nNQwZZAFdi+F7BLhgdLyVmkHDQd5Q7X56D9
+ UX89qP2phHxrwAK+yUv6c2JQUgtzMjL0nvtH74w0q/tvwLb6nViyFs5RvVaceaRCj+jo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,61 +31,61 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bO4yc6b0222dRNj48HoFyPuU9QjRVolFKKVhhMGpLKw=; b=ReGAg4s38IemVjfUniXx6OGBB1
- AxKQin6ahGt8Hgo3CTTCNPw9+5xDHHh3WssZNJeVWuvsizjoLJERiE2sB7DXSdqiDTsDdyrx4pI3N
- 2sgAfz8pWo0uHfy/gh5WVgcDKjan42wq0XpGk92ty041rF5MB7ReRP+LWwFUXkGVykpM=;
-Received: from mail-pg1-f172.google.com ([209.85.215.172])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=ubpyp4SIhGXjO6/VTKiZvWjlRzyN8ANvKHVN5xSGnIw=; b=jo4JLmn5XuIHD0tbHFkMluz4aJ
+ Bil2eFNHydfCe4HZeHmdQfkil6WeRbEkGg+v4tVQl0To9bHDOv9rni3/ZT3r5VHx3dzCNj69Pxrsf
+ OJSol30u5mrDqlJRSFPkVWSJmCRK4nnN5w9S98ozEhBaS71JL2eKAKlqcYTAwuZtxfOQ=;
+Received: from mail-pl1-f180.google.com ([209.85.214.180])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qSy9J-0007hF-Df for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Aug 2023 11:11:49 +0000
-Received: by mail-pg1-f172.google.com with SMTP id
- 41be03b00d2f7-5643140aa5fso525259a12.0
+ id 1qSy9V-00FrYh-Pu for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 07 Aug 2023 11:12:01 +0000
+Received: by mail-pl1-f180.google.com with SMTP id
+ d9443c01a7336-1bb91c20602so9342305ad.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 07 Aug 2023 04:11:44 -0700 (PDT)
+ Mon, 07 Aug 2023 04:11:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance.com; s=google; t=1691406698; x=1692011498;
+ d=bytedance.com; s=google; t=1691406712; x=1692011512;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bO4yc6b0222dRNj48HoFyPuU9QjRVolFKKVhhMGpLKw=;
- b=V+0c3qPhJ3OvHdRK0zt0jjicV8eIk4mcEJBfZa3lpQkwu54lWNVPIEieS4PtRydxoC
- SOQosWaNmtA5ijvBvBTHzjmbD0d0j9BAeGMmaW/jH6uvD6Ej2n/njXM3uIqGlzrBkh1f
- 4pNHqPhVUKAnLp7tAzH1vcGObvmfuMOiL8NrO6wDjhRhzYUa1svLTbbXU3r4juxNC7M+
- zvZ3SM7T/9w0Je9dQGJ4Z6qlkuAYn1bir+6JxlC1Qr6arztdDyFiMoqBolNxM3VBbd9i
- jsX4xXrnwmvTP/fkwCWNcOiK6G4rP96fjoeNSyiOnE04LmSKfInS+5dfsRm42DUoM8bY
- LffQ==
+ bh=ubpyp4SIhGXjO6/VTKiZvWjlRzyN8ANvKHVN5xSGnIw=;
+ b=G6tJn+16QVti2qtu2hqYljseIE/XGpe1Yhsul4LFU6R/aCDAM7lceOlES83Z0B/Pue
+ 2irlih/PCzGRhADqlmxdT4ZmTPg/rDw2XT4QeZKx/Tui9xhVWAtyJogqiocaYi2mPJVJ
+ JfsH0RSoKbpVavaYBWWtyo/mJh8W+H0WFTE4SVefHn6UoqHLIS8l90Z//i2iVib88cLh
+ SO8x9HJ9eijOF2Obr6A8OaZNG3N0xetNtsejNB5r0CVLeObeV8ZzJa8r4m2G8/H610tO
+ JRFiieD8eIQL4G+uzuFBv5AMDY6TbkMqFwB+fegzuV4xQGReerwz1d1NP8JNZHZ17Zsd
+ g+Fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691406698; x=1692011498;
+ d=1e100.net; s=20221208; t=1691406712; x=1692011512;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bO4yc6b0222dRNj48HoFyPuU9QjRVolFKKVhhMGpLKw=;
- b=H/OGCq44U2qZnUah/vOevgZ6dqgM3JaaDctYP2o4QxpX6uMUMyRnl1Z/OOSoSNliA2
- qCkq6V+mhNDuvDVzyejjtpq6lXeKLfOgT8grxYt/1EgCHe+CmNozgvmfbL3bkazJ8b19
- 7K+v0YiI4J0bEIVeJ7RNQeCUqq4AkmuMFYaJae6q5EM+PY9hfRBQ4PTwwM1w3Rw+LepP
- d09aesGHt5ewnnLuAagpHGEL+J+7uI9bn1hCb/czGVTNynpRYlqoEyZymZfE8sixnKaP
- 3b7zaaTHJYQv+vLpXMZJUj909EJi6rTvxaicy4qBw/yrOO65JOj/p+MTNq2RIZczqqgh
- LgUw==
-X-Gm-Message-State: ABy/qLYJZKDU1h4GBk2myei1aAnhmdPRk/QBjlHRpVcITZ78q4IYkXSm
- 7T4LAFcPMIhu8mEoiqPGXkst+A==
-X-Google-Smtp-Source: APBJJlHTPEiI4d70NxX2nHst3XkAfiDRggXx1NmGRpA10Zf8iDezZWW8ih32EzxQIqpHPiYHvUOM5w==
-X-Received: by 2002:a17:90a:1f83:b0:268:3dc6:f0c5 with SMTP id
- x3-20020a17090a1f8300b002683dc6f0c5mr25027705pja.0.1691406698603; 
- Mon, 07 Aug 2023 04:11:38 -0700 (PDT)
+ bh=ubpyp4SIhGXjO6/VTKiZvWjlRzyN8ANvKHVN5xSGnIw=;
+ b=RL0oHkb6OOTaX3a7Xx5UtwKXy0TeoWz6gWZ4w5W51+PPdEO0btCIOKWwbL4GGUgQe/
+ wAyUpvhb4VFWDTrosjd3kr9GGN/Sghao7X9yoS3VqgaROMtq1o1GSw6g0kjjJh+3s30D
+ NUp+rQSOf9j5GK7dGhOU/8ehjKncSznD6kBsMigUVlNZAqYrCPBD6nSUmuir9XN6nI8v
+ fSlQISUmOnc24YKdQKfKmVyN3nTW2FSUxSQrsHVkzQPY2ybbTUUyQKsPj3MJSj+vdIxW
+ yB8rvt7PL0e9JkK2WSzVNl8xsISsOSfHPcdzed6xgcgRO8Bo9NlhnQ/4jAa/RvDb0qPT
+ 3z0Q==
+X-Gm-Message-State: ABy/qLZ2JtC/L7zo89k5l0sqU95mQ8CTLtYmis8pqMi9ozHa+mB2je/e
+ JbBGGy9Qh5WSNi7LH/tB6uUXWQ==
+X-Google-Smtp-Source: APBJJlGAdl0ewhYUg6UhJdRJKXIwq0U3XoR/AJshcbF16xE0A4mgQC4Umc8PgwnpC/Hq6tl8ikCZEw==
+X-Received: by 2002:a17:902:ea04:b0:1b8:17e8:547e with SMTP id
+ s4-20020a170902ea0400b001b817e8547emr32460173plg.1.1691406712196; 
+ Mon, 07 Aug 2023 04:11:52 -0700 (PDT)
 Received: from C02DW0BEMD6R.bytedance.net ([203.208.167.146])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.11.26
+ y13-20020a17090aca8d00b0025be7b69d73sm5861191pjt.12.2023.08.07.04.11.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 04:11:38 -0700 (PDT)
+ Mon, 07 Aug 2023 04:11:51 -0700 (PDT)
 To: akpm@linux-foundation.org, david@fromorbit.com, tkhai@ya.ru,
  vbabka@suse.cz, roman.gushchin@linux.dev, djwong@kernel.org,
  brauner@kernel.org, paulmck@kernel.org, tytso@mit.edu,
  steven.price@arm.com, cel@kernel.org, senozhatsky@chromium.org,
  yujie.liu@intel.com, gregkh@linuxfoundation.org, muchun.song@linux.dev,
  simon.horman@corigine.com, dlemoal@kernel.org
-Date: Mon,  7 Aug 2023 19:08:56 +0800
-Message-Id: <20230807110936.21819-9-zhengqi.arch@bytedance.com>
+Date: Mon,  7 Aug 2023 19:08:57 +0800
+Message-Id: <20230807110936.21819-10-zhengqi.arch@bytedance.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
 References: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
@@ -97,16 +97,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Use new APIs to dynamically allocate the xen-backend
- shrinker.
- Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com> Reviewed-by: Muchun
- Song <songmuchun@bytedance.com> --- drivers/xen/xenbus/xenbus_probe_backend.c
- | 18 +++++++++++------- 1 file changed, 11 insert [...] 
+ Content preview: Use new APIs to dynamically allocate the erofs-shrinker.
+ Signed-off-by:
+ Qi Zheng <zhengqi.arch@bytedance.com> Reviewed-by: Muchun Song
+ <songmuchun@bytedance.com>
+ --- fs/erofs/utils.c | 20 +++++++++++++------- 1 file changed, 13 insertions(+),
+ 7 deletions(-) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.215.172 listed in list.dnswl.org]
+ no trust [209.85.214.180 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -115,11 +116,12 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.215.172 listed in wl.mailspike.net]
-X-Headers-End: 1qSy9J-0007hF-Df
-Subject: [f2fs-dev] [PATCH v4 08/48] xenbus/backend: dynamically allocate
- the xen-backend shrinker
+ valid 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.180 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1qSy9V-00FrYh-Pu
+Subject: [f2fs-dev] [PATCH v4 09/48] erofs: dynamically allocate the
+ erofs-shrinker
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -148,52 +150,51 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Use new APIs to dynamically allocate the xen-backend shrinker.
+Use new APIs to dynamically allocate the erofs-shrinker.
 
 Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 ---
- drivers/xen/xenbus/xenbus_probe_backend.c | 18 +++++++++++-------
- 1 file changed, 11 insertions(+), 7 deletions(-)
+ fs/erofs/utils.c | 20 +++++++++++++-------
+ 1 file changed, 13 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/xen/xenbus/xenbus_probe_backend.c b/drivers/xen/xenbus/xenbus_probe_backend.c
-index da96c260e26b..929c41a5ccee 100644
---- a/drivers/xen/xenbus/xenbus_probe_backend.c
-+++ b/drivers/xen/xenbus/xenbus_probe_backend.c
-@@ -284,13 +284,9 @@ static unsigned long backend_shrink_memory_count(struct shrinker *shrinker,
- 	return 0;
+diff --git a/fs/erofs/utils.c b/fs/erofs/utils.c
+index cc6fb9e98899..6e1a828e6ca3 100644
+--- a/fs/erofs/utils.c
++++ b/fs/erofs/utils.c
+@@ -270,19 +270,25 @@ static unsigned long erofs_shrink_scan(struct shrinker *shrink,
+ 	return freed;
  }
  
--static struct shrinker backend_memory_shrinker = {
--	.count_objects = backend_shrink_memory_count,
+-static struct shrinker erofs_shrinker_info = {
+-	.scan_objects = erofs_shrink_scan,
+-	.count_objects = erofs_shrink_count,
 -	.seeks = DEFAULT_SEEKS,
 -};
--
- static int __init xenbus_probe_backend_init(void)
++static struct shrinker *erofs_shrinker_info;
+ 
+ int __init erofs_init_shrinker(void)
  {
-+	struct shrinker *backend_memory_shrinker;
- 	static struct notifier_block xenstore_notifier = {
- 		.notifier_call = backend_probe_and_watch
- 	};
-@@ -305,8 +301,16 @@ static int __init xenbus_probe_backend_init(void)
- 
- 	register_xenstore_notifier(&xenstore_notifier);
- 
--	if (register_shrinker(&backend_memory_shrinker, "xen-backend"))
--		pr_warn("shrinker registration failed\n");
-+	backend_memory_shrinker = shrinker_alloc(0, "xen-backend");
-+	if (!backend_memory_shrinker) {
-+		pr_warn("shrinker allocation failed\n");
-+		return 0;
-+	}
+-	return register_shrinker(&erofs_shrinker_info, "erofs-shrinker");
++	erofs_shrinker_info = shrinker_alloc(0, "erofs-shrinker");
++	if (!erofs_shrinker_info)
++		return -ENOMEM;
 +
-+	backend_memory_shrinker->count_objects = backend_shrink_memory_count;
-+	backend_memory_shrinker->seeks = DEFAULT_SEEKS;
++	erofs_shrinker_info->count_objects = erofs_shrink_count;
++	erofs_shrinker_info->scan_objects = erofs_shrink_scan;
++	erofs_shrinker_info->seeks = DEFAULT_SEEKS;
 +
-+	shrinker_register(backend_memory_shrinker);
- 
- 	return 0;
++	shrinker_register(erofs_shrinker_info);
++
++	return 0;
  }
+ 
+ void erofs_exit_shrinker(void)
+ {
+-	unregister_shrinker(&erofs_shrinker_info);
++	shrinker_free(erofs_shrinker_info);
+ }
+ #endif	/* !CONFIG_EROFS_FS_ZIP */
 -- 
 2.30.2
 
