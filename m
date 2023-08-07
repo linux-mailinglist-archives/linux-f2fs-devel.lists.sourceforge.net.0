@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 214D6772F12
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D898772F14
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  7 Aug 2023 21:39:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qT64R-00027e-B1;
-	Mon, 07 Aug 2023 19:39:14 +0000
+	id 1qT64X-00055O-8Y;
+	Mon, 07 Aug 2023 19:39:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qT64P-00027M-Nt
+ (envelope-from <jlayton@kernel.org>) id 1qT64V-00055I-Ju
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Aug 2023 19:39:12 +0000
+ Mon, 07 Aug 2023 19:39:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DUlXR9dWQDH3T2ku60GUgPm3Z8tUKiS4ne1Zxz+2SYQ=; b=NeK1QhjVkSg58r9ZyKjbIwqlTA
- 79O50Ep3IZH413MbgYXl4FhioV6B7fYz3aAxTom8oYT47YwEB6IqVNKx/5+zsFtxjiYzpa5FyjEC2
- 2nLZerzjxNe2hqCkYs5pjD4lyeT44z/g4m20V6cg3qoXHmK632ZFCpCbiX3YZulGVNZs=;
+ bh=R6vlvmLUvKOZulfJ+YX7AeQubON0sqkk/2/xliZw3ps=; b=hiZlVP5uKNIgk4NK8pOCwWH50b
+ 2RdAJ1vf2t/VXsNfz0BRO3yTs+qTG3keQIS8CIN0VHzKzdka88alStNYmmyE/6teHVorPYCVEPN4I
+ HW+mqHpprbbzwWZ4meU9p9mq7Vn9g+9pjteWqqUYJw+JGL8PR+p6E22Wa9twTRmC2O2c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -31,36 +31,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DUlXR9dWQDH3T2ku60GUgPm3Z8tUKiS4ne1Zxz+2SYQ=; b=NR3beZvVapTqW5Db++ARUYF6cc
- 9DUPBn64bc9vngu4Khtrn2dk4qtlunkAffbG8JWZAKJ8G0RrHqzkRRmgS5Ur6ryjgwdyE/Spr4AG/
- gpJeuphnc7/1G35m15i6/eXQJlYIOa75WBt0hlRlkJkeJqV36jpYDYDaFBroBNQ4YyH8=;
+ bh=R6vlvmLUvKOZulfJ+YX7AeQubON0sqkk/2/xliZw3ps=; b=VFjXYcTRt8ywQiCeQPl9plgxx7
+ +DKe9TFt79PxQyAgNWFUXHZFTlaTQqCPw0rrlvzJ+KazyIahtpXStpkfVO9GxFgfxhSQSEQVMeOqo
+ iAiMtnt3LLQpWfN4dEAdVlucvsdW/LaMEPkaDuOgxsoUFXMSX784Jf6FQY6qmI3g2BBs=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qT64N-0002bo-O8 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 07 Aug 2023 19:39:12 +0000
+ id 1qT64U-0002c0-Uq for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 07 Aug 2023 19:39:19 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2896E621E1;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5E171621CB;
+ Mon,  7 Aug 2023 19:39:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 190D6C433CB;
  Mon,  7 Aug 2023 19:39:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 53CBAC433C8;
- Mon,  7 Aug 2023 19:38:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1691437145;
- bh=c6Pn7MHvNlpH2XYBl6Q+eSLWZltLuR1g5CejPMxJHLg=;
+ s=k20201202; t=1691437152;
+ bh=FjK4CXRYiETGn7OzM9We0k7POLcZSDg/Zv0Z2hVxi0I=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=rnOlWm10rYTe6qOxo+HjOYyd53/YPygic8GIbCK0glL6lHAvDa3L+2dgg65DdEWoc
- QCvOyUM4o/KGwZka879ebiZUesSgio3+P6FBqqK3QvfZpWSgQwUnzlA61EGf/1EL5R
- p3n1XOeZB0Iid2kQfyukLgVQTc0bZr92JrZ78skB7cVDfqriJQck8t1Eyxj9uv2eoI
- POrR0jVC26utAJ97OQ1+6der5j+G+bHgervYfGOz0V5rqeAPcxj9Esf7WkP/Yet3zD
- RhnXCWKmhZa0pDQUouE77dppIHaiYE4XM0pBvN9MSSq9yeb0ehkZ9i8+Kqjk8geTx1
- MVPzlTxHB4a4A==
+ b=Ho/bKlx1W7NVzVpTF8gn0UewKv0nHppAuc8rdt0EpJYDtixyqx9Pm88/s99GjJrGi
+ VyWirQXhlLAHTHZVHTzlGto3MlaV9AC0IS4d6ITtkzLyremJTCyhuBghtZLgXI+wFI
+ BWGm+mORoGztRukCVECswMBc3DvEXZDbVqOKZXPaUiWJUmCkRudhYLBAFuaGRz0svy
+ C36sqbKO7RSDcSDE/CGOWo0cEGgTtCDEY05Q94XhMpgiKRb5sItIEiDQCoyYVBZcIf
+ Wa4V9O81hy5cBvQhbAwM4fAHf3aZVD4FS2Awad7m8GiNGAzXgq+KA8NdanYEf8qWKH
+ 93tAXs2YealYw==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Mon, 07 Aug 2023 15:38:34 -0400
+Date: Mon, 07 Aug 2023 15:38:35 -0400
 MIME-Version: 1.0
-Message-Id: <20230807-mgctime-v7-3-d1dec143a704@kernel.org>
+Message-Id: <20230807-mgctime-v7-4-d1dec143a704@kernel.org>
 References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
 In-Reply-To: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -101,20 +101,20 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Amir Goldstein <amir73il@gmail.com>, "Darrick J. Wong" <djwong@kernel.org>, 
  Benjamin Coddington <bcodding@redhat.com>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8078; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=c6Pn7MHvNlpH2XYBl6Q+eSLWZltLuR1g5CejPMxJHLg=;
- b=owEBbQKS/ZANAwAIAQAOaEEZVoIVAcsmYgBk0Ug9xhyiOiJxxIfKX2c3tg98g8sSp5LQ21GSY
- mzWI+/GCS2JAjMEAAEIAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCZNFIPQAKCRAADmhBGVaC
- FSzyD/9trWoynNfuWyY2cs6DBpaQQUV1pUEIFhN3cQn4D1Dj4pn7ZlrYbtaZoLZ00j/ocCZY8Cm
- OST1VE54JDQXwO32hBnXeM7G96Xn7zoRH+pqQYZPbR9kUjpu+aNn6ffZxRbMP9NIzQQ+N8ghne5
- Z7jufKj2R2Uw0drlgyYUcxJ65kEGr9rFzCJE/YalbmpYvHTz/ytdS17m/ehiKt8YSSFHSlH8dw2
- IMnxIjc1hTHm6Zzohb1yvcmnWCVoz+P2c4sKhLQjHhWslSapU8kYqN8GxTMaHZTfNu5fSFodfmw
- gDKWuekjA31txotjHOPG3MMTnGLmTF08E4pH6Rm05pHpkh4nB+tcB3+Un+AXQlgt32/AEWkPc77
- emLQ4B011pQb97XrODSs8U/viLyMEDTJaeml4+OXdMN/LbxDEw5SqZwVC/mRotC12Oyhq9FMvOd
- GzGdKdwcV/yxvGo+lWThX8az+eUTbFXUeUFSFAY1ba7HcCPCDTrmLAn8gSwHMDOhyn69WQnLXrg
- TiFxvFC2v9g1ufJHiN702KiosiBViIYVdYHCdtiwFjToHpTj8jbrgCWnPX6D8gnebZyjPZrsHyl
- 1e14BtVt8dQL92uLDufxrU+HAvzADZHUAHd3M7wIPV+ITM0tH7b1GTiFD6Evho+3GsGmFY2iQNR
- iA6s6+xRq9xJUrg==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1015; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=FjK4CXRYiETGn7OzM9We0k7POLcZSDg/Zv0Z2hVxi0I=;
+ b=owEBbQKS/ZANAwAIAQAOaEEZVoIVAcsmYgBk0Ug9ionAyEQ00FE2RysKd05kyYmr3Uo7M3P+S
+ fZsake1O9WJAjMEAAEIAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCZNFIPQAKCRAADmhBGVaC
+ FSb/D/46K68INm7LKy6yCb3jkxB2bvd3492M0QuN7zYTdZH4x4RyMrHVer1FcL+lgqeruzzWSEv
+ f1jPsb2uT+va62GuDI/zejA857D6P77Pxxt62BL6PnF8w9wZfjNo2RBhUJFbcYvEl7WV0QxsBOz
+ eVhLOFWlIfBl7qnRoQcQ1EXt/gqm3vncmzxpOhadSWSyAjf3Uyf3ySH1I8zBuzQ6i19jmqQ0RvT
+ bb3mEN/W/iBYc3G76Eud3bo16w9EvoB9nxjRlcTuuZvFPC7ModhHKFVftanzKrqnN++LssBxJTt
+ qCOGvNDD4XQsoYkNqWK/GeE2dbwuRgBPiPB4T/mRNQGXzoSkgEejZgIlG9UhkKivUvI8mAD1Fvf
+ EsZs1aXtF60wPVfCdR9EzkWR98DlT7wHqFko2/J5x3ayqhk5/Hd7Dxd9+3KOUjobqgsNV6z/0hu
+ iEa0QiZI9t2vkWtpHGQNGJWoW5i6lWMNl2ugTM4Ph4rAECf19PhJ6QMCL6sLB1t/Yg+5Y9QCkZa
+ u6JThQBEJCg3b3v0vqUh9tAePT84Au/SSSO41CUtR4p6gYotqAK/13vCIRlgBGFlSFirEva3rSu
+ O4r5y/T/dIV3T3tPLC2QfaJLzkymk/JC3a+VkmmiF/LAO2Y1vQ5KE1bfV2hX76K1OaxCpRxc3+Z
+ GjdlHLhrXMsZpbw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -5.2 (-----)
@@ -124,11 +124,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: In future patches we're going to change how the ctime is
- updated
- to keep track of when it has been queried. The way that the update_time
- operation
- works (and a lot of its callers) make this difficult, [...] 
+ Content preview:  In later patches, we're going to drop the "now" argument from
+ the update_time operation. Have btrfs_update_time use the new
+ inode_update_timestamps
+ helper to fetch a new timestamp and update it proper [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -144,9 +143,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qT64N-0002bo-O8
-Subject: [f2fs-dev] [PATCH v7 03/13] fs: drop the timespec64 arg from
- generic_update_time
+X-Headers-End: 1qT64U-0002c0-Uq
+Subject: [f2fs-dev] [PATCH v7 04/13] btrfs: have it use
+ inode_update_timestamps
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -173,230 +172,36 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In future patches we're going to change how the ctime is updated
-to keep track of when it has been queried. The way that the update_time
-operation works (and a lot of its callers) make this difficult, since
-they grab a timestamp early and then pass it down to eventually be
-copied into the inode.
-
-All of the existing update_time callers pass in the result of
-current_time() in some fashion. Drop the "time" parameter from
-generic_update_time, and rework it to fetch its own timestamp.
-
-This change means that an update_time could fetch a different timestamp
-than was seen in inode_needs_update_time. update_time is only ever
-called with one of two flag combinations: Either S_ATIME is set, or
-S_MTIME|S_CTIME|S_VERSION are set.
-
-With this change we now treat the flags argument as an indicator that
-some value needed to be updated when last checked, rather than an
-indication to update specific timestamps.
-
-Rework the logic for updating the timestamps and put it in a new
-inode_update_timestamps helper that other update_time routines can use.
-S_ATIME is as treated as we always have, but if any of the other three
-are set, then we attempt to update all three.
-
-Also, some callers of generic_update_time need to know what timestamps
-were actually updated. Change it to return an S_* flag mask to indicate
-that and rework the callers to expect it.
+In later patches, we're going to drop the "now" argument from the
+update_time operation. Have btrfs_update_time use the new
+inode_update_timestamps helper to fetch a new timestamp and update it
+properly.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/gfs2/inode.c     |  3 +-
- fs/inode.c          | 84 +++++++++++++++++++++++++++++++++++++++++------------
- fs/orangefs/inode.c |  3 +-
- fs/ubifs/file.c     |  6 ++--
- fs/xfs/xfs_iops.c   |  6 ++--
- include/linux/fs.h  |  3 +-
- 6 files changed, 80 insertions(+), 25 deletions(-)
+ fs/btrfs/inode.c | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
-diff --git a/fs/gfs2/inode.c b/fs/gfs2/inode.c
-index 200cabf3b393..f1f04557aa21 100644
---- a/fs/gfs2/inode.c
-+++ b/fs/gfs2/inode.c
-@@ -2155,7 +2155,8 @@ static int gfs2_update_time(struct inode *inode, struct timespec64 *time,
- 		if (error)
- 			return error;
- 	}
--	return generic_update_time(inode, time, flags);
-+	generic_update_time(inode, flags);
-+	return 0;
+diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
+index 29a20f828dda..d52e7d64570a 100644
+--- a/fs/btrfs/inode.c
++++ b/fs/btrfs/inode.c
+@@ -6068,14 +6068,7 @@ static int btrfs_update_time(struct inode *inode, struct timespec64 *now,
+ 	if (btrfs_root_readonly(root))
+ 		return -EROFS;
+ 
+-	if (flags & S_VERSION)
+-		dirty |= inode_maybe_inc_iversion(inode, dirty);
+-	if (flags & S_CTIME)
+-		inode_set_ctime_to_ts(inode, *now);
+-	if (flags & S_MTIME)
+-		inode->i_mtime = *now;
+-	if (flags & S_ATIME)
+-		inode->i_atime = *now;
++	dirty = inode_update_timestamps(inode, flags);
+ 	return dirty ? btrfs_dirty_inode(BTRFS_I(inode)) : 0;
  }
  
- static const struct inode_operations gfs2_file_iops = {
-diff --git a/fs/inode.c b/fs/inode.c
-index 3fc251bfaf73..e07e45f6cd01 100644
---- a/fs/inode.c
-+++ b/fs/inode.c
-@@ -1881,29 +1881,76 @@ static int relatime_need_update(struct vfsmount *mnt, struct inode *inode,
- 	return 0;
- }
- 
--int generic_update_time(struct inode *inode, struct timespec64 *time, int flags)
-+/**
-+ * inode_update_timestamps - update the timestamps on the inode
-+ * @inode: inode to be updated
-+ * @flags: S_* flags that needed to be updated
-+ *
-+ * The update_time function is called when an inode's timestamps need to be
-+ * updated for a read or write operation. This function handles updating the
-+ * actual timestamps. It's up to the caller to ensure that the inode is marked
-+ * dirty appropriately.
-+ *
-+ * In the case where any of S_MTIME, S_CTIME, or S_VERSION need to be updated,
-+ * attempt to update all three of them. S_ATIME updates can be handled
-+ * independently of the rest.
-+ *
-+ * Returns a set of S_* flags indicating which values changed.
-+ */
-+int inode_update_timestamps(struct inode *inode, int flags)
- {
--	int dirty_flags = 0;
-+	int updated = 0;
-+	struct timespec64 now;
-+
-+	if (flags & (S_MTIME|S_CTIME|S_VERSION)) {
-+		struct timespec64 ctime = inode_get_ctime(inode);
- 
--	if (flags & (S_ATIME | S_CTIME | S_MTIME)) {
--		if (flags & S_ATIME)
--			inode->i_atime = *time;
--		if (flags & S_CTIME)
--			inode_set_ctime_to_ts(inode, *time);
--		if (flags & S_MTIME)
--			inode->i_mtime = *time;
--
--		if (inode->i_sb->s_flags & SB_LAZYTIME)
--			dirty_flags |= I_DIRTY_TIME;
--		else
--			dirty_flags |= I_DIRTY_SYNC;
-+		now = inode_set_ctime_current(inode);
-+		if (!timespec64_equal(&now, &ctime))
-+			updated |= S_CTIME;
-+		if (!timespec64_equal(&now, &inode->i_mtime)) {
-+			inode->i_mtime = now;
-+			updated |= S_MTIME;
-+		}
-+		if (IS_I_VERSION(inode) && inode_maybe_inc_iversion(inode, updated))
-+			updated |= S_VERSION;
-+	} else {
-+		now = current_time(inode);
- 	}
- 
--	if ((flags & S_VERSION) && inode_maybe_inc_iversion(inode, false))
--		dirty_flags |= I_DIRTY_SYNC;
-+	if (flags & S_ATIME) {
-+		if (!timespec64_equal(&now, &inode->i_atime)) {
-+			inode->i_atime = now;
-+			updated |= S_ATIME;
-+		}
-+	}
-+	return updated;
-+}
-+EXPORT_SYMBOL(inode_update_timestamps);
-+
-+/**
-+ * generic_update_time - update the timestamps on the inode
-+ * @inode: inode to be updated
-+ * @flags: S_* flags that needed to be updated
-+ *
-+ * The update_time function is called when an inode's timestamps need to be
-+ * updated for a read or write operation. In the case where any of S_MTIME, S_CTIME,
-+ * or S_VERSION need to be updated we attempt to update all three of them. S_ATIME
-+ * updates can be handled done independently of the rest.
-+ *
-+ * Returns a S_* mask indicating which fields were updated.
-+ */
-+int generic_update_time(struct inode *inode, int flags)
-+{
-+	int updated = inode_update_timestamps(inode, flags);
-+	int dirty_flags = 0;
- 
-+	if (updated & (S_ATIME|S_MTIME|S_CTIME))
-+		dirty_flags = inode->i_sb->s_flags & SB_LAZYTIME ? I_DIRTY_TIME : I_DIRTY_SYNC;
-+	if (updated & S_VERSION)
-+		dirty_flags |= I_DIRTY_SYNC;
- 	__mark_inode_dirty(inode, dirty_flags);
--	return 0;
-+	return updated;
- }
- EXPORT_SYMBOL(generic_update_time);
- 
-@@ -1915,7 +1962,8 @@ int inode_update_time(struct inode *inode, struct timespec64 *time, int flags)
- {
- 	if (inode->i_op->update_time)
- 		return inode->i_op->update_time(inode, time, flags);
--	return generic_update_time(inode, time, flags);
-+	generic_update_time(inode, flags);
-+	return 0;
- }
- EXPORT_SYMBOL(inode_update_time);
- 
-diff --git a/fs/orangefs/inode.c b/fs/orangefs/inode.c
-index a52c30e80f45..3afa2a69bc63 100644
---- a/fs/orangefs/inode.c
-+++ b/fs/orangefs/inode.c
-@@ -903,9 +903,10 @@ int orangefs_permission(struct mnt_idmap *idmap,
- int orangefs_update_time(struct inode *inode, struct timespec64 *time, int flags)
- {
- 	struct iattr iattr;
-+
- 	gossip_debug(GOSSIP_INODE_DEBUG, "orangefs_update_time: %pU\n",
- 	    get_khandle_from_ino(inode));
--	generic_update_time(inode, time, flags);
-+	flags = generic_update_time(inode, flags);
- 	memset(&iattr, 0, sizeof iattr);
-         if (flags & S_ATIME)
- 		iattr.ia_valid |= ATTR_ATIME;
-diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
-index 436b27d7c58f..df9086b19cd0 100644
---- a/fs/ubifs/file.c
-+++ b/fs/ubifs/file.c
-@@ -1387,8 +1387,10 @@ int ubifs_update_time(struct inode *inode, struct timespec64 *time,
- 			.dirtied_ino_d = ALIGN(ui->data_len, 8) };
- 	int err, release;
- 
--	if (!IS_ENABLED(CONFIG_UBIFS_ATIME_SUPPORT))
--		return generic_update_time(inode, time, flags);
-+	if (!IS_ENABLED(CONFIG_UBIFS_ATIME_SUPPORT)) {
-+		generic_update_time(inode, flags);
-+		return 0;
-+	}
- 
- 	err = ubifs_budget_space(c, &req);
- 	if (err)
-diff --git a/fs/xfs/xfs_iops.c b/fs/xfs/xfs_iops.c
-index 3a9363953ef2..731f45391baa 100644
---- a/fs/xfs/xfs_iops.c
-+++ b/fs/xfs/xfs_iops.c
-@@ -1042,8 +1042,10 @@ xfs_vn_update_time(
- 
- 	if (inode->i_sb->s_flags & SB_LAZYTIME) {
- 		if (!((flags & S_VERSION) &&
--		      inode_maybe_inc_iversion(inode, false)))
--			return generic_update_time(inode, now, flags);
-+		      inode_maybe_inc_iversion(inode, false))) {
-+			generic_update_time(inode, flags);
-+			return 0;
-+		}
- 
- 		/* Capture the iversion update that just occurred */
- 		log_flags |= XFS_ILOG_CORE;
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 85977cdeda94..bb3c2c4f871f 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -2343,7 +2343,8 @@ extern int current_umask(void);
- 
- extern void ihold(struct inode * inode);
- extern void iput(struct inode *);
--extern int generic_update_time(struct inode *, struct timespec64 *, int);
-+int inode_update_timestamps(struct inode *inode, int flags);
-+int generic_update_time(struct inode *, int);
- 
- /* /sys/fs */
- extern struct kobject *fs_kobj;
 
 -- 
 2.41.0
