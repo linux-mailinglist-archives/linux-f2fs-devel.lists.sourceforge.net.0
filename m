@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B9DB773967
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Aug 2023 11:39:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4778677396D
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  8 Aug 2023 11:46:12 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qTJBH-0006Kp-Ik;
-	Tue, 08 Aug 2023 09:39:12 +0000
+	id 1qTJI0-0002I1-IA;
+	Tue, 08 Aug 2023 09:46:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1qTJBG-0006Kg-IC
+ (envelope-from <jack@suse.cz>) id 1qTJHy-0002Hv-Jg
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 08 Aug 2023 09:39:11 +0000
+ Tue, 08 Aug 2023 09:46:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PVeErVjOshT1HL9BKit56tV7zQvJsI4KiQWED3rMFuk=; b=mtl5co5airrBVRKqf4uuN/tLq0
- xVsnHNjAWtjhsckGnz9gu/6EiTRm6j4QK/2RfK2j6o1B1LN2yYnCwmzBKuoKWZ/EH3o0KWW/+FkVA
- Lks7Oo2XlTFetm2giLbrsjkRuY9e9n1Fj/KQQjdAlqNSN6ifD/vW5MX9wxyYonJwKab0=;
+ bh=4oOLWl4gstb/E24tmA8lOZvGXU8EGsCYOGiZDuV9ojs=; b=PJs8O1guoR/csMYdj9TqkSTH5U
+ fAGt1uErX8blOvEVo1C9DRCNMmAZwr05So3gUgWW9s9fvzr8ZQ+RkcJquVmw4YqdL1NiCwteULoKW
+ YOrn1DD5JPOAF/Cu/yYmmmYI8VN7W9EPTv7GB6KUzyyq3i2ONaDMbZlhPBhauQoeAxbI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,56 +31,56 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PVeErVjOshT1HL9BKit56tV7zQvJsI4KiQWED3rMFuk=; b=bPlU4qfbIQW2MDDeVxhZywr8xt
- I634gXHuAwSMhTnnuc1H1iLjB5K/mtnBh9LaFg31hjNuIupimKMBuN+dqLUOsEzK7dIUcd95QXkMI
- /WosaCe4zJqoiQICp1CtCdV1r9I2DDDc1BTe6zhEWJPMxV7FGpPmZqFaWkm78rPxY1VM=;
-Received: from smtp-out2.suse.de ([195.135.220.29])
+ bh=4oOLWl4gstb/E24tmA8lOZvGXU8EGsCYOGiZDuV9ojs=; b=d/H1qOVBw8VnT1ZohOdB2haU5b
+ mASjCb8QS6FdYQ7ccl+miSS2OQIae11uF9KYvvky/cZmNExgVSGPGOvzqtl3Exe1JBPdt7Te5LiHt
+ Kqr5BG43xVVAReqD01uCgA1PwZgNUwSz5aY3PrK6kLgHNSiqXpI/p0Bsnq3WuXE2ZDQs=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qTJBG-00025S-SQ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 08 Aug 2023 09:39:11 +0000
+ id 1qTJHy-0002Ll-9p for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 08 Aug 2023 09:46:06 +0000
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 186E41F88D;
- Tue,  8 Aug 2023 09:39:04 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 9409A21B18;
+ Tue,  8 Aug 2023 09:45:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1691487544; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1691487959; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=PVeErVjOshT1HL9BKit56tV7zQvJsI4KiQWED3rMFuk=;
- b=Ih/dtuDlLjuehwLx/dl1alOHiAbINBHhQjqICxdO8QzvDNyayDD12QEIdQQqzzznj7Q14P
- c5hv8MUHhglxrWQtTaFcAIVopxDABjqy/dP+ec5Lv+rEt0nndTNahsaoLReC2CFkrCP+64
- W8/atfzAfsnelhickcggtSiPj4yTuJM=
+ bh=4oOLWl4gstb/E24tmA8lOZvGXU8EGsCYOGiZDuV9ojs=;
+ b=lLrE4gVbl4Ys56f43Fm5p3Xgc+uttQq5Le5SAj/AGsdOsCPxyBSWC2O0IpSl0k3K+hnRZK
+ ZBv1ebXrfaExZ7cDvXNGrjZ6xpFGOMKiAeCI9qKY/Q/IKCJ9cx1Ukr/WgtZ76IUDmcLKuU
+ KNpTUoI2LFAiLqt+xbns1Pf6Aruyr0s=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1691487544;
+ s=susede2_ed25519; t=1691487959;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=PVeErVjOshT1HL9BKit56tV7zQvJsI4KiQWED3rMFuk=;
- b=j1Qrid+U1SfmOjtDLooGt12t1hCG9o0NAGXfAvVFTMysCO70VmrTAY263EbPzLWm1azsyz
- yYZCAZd1ftjgXqAg==
+ bh=4oOLWl4gstb/E24tmA8lOZvGXU8EGsCYOGiZDuV9ojs=;
+ b=siRsNQ5xaJJdg8UEXv1F6ndcrBP+WFiABqKYf3mt6YpMrLfp0SJdDJiIz6//upEoYljBFS
+ Iao2lSywwi36fkCg==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 01B42139E9;
- Tue,  8 Aug 2023 09:39:04 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7BB7013451;
+ Tue,  8 Aug 2023 09:45:59 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id u1hdADgN0mRKHgAAMHmgww
- (envelope-from <jack@suse.cz>); Tue, 08 Aug 2023 09:39:04 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id Ff8tHtcO0mS/IQAAMHmgww
+ (envelope-from <jack@suse.cz>); Tue, 08 Aug 2023 09:45:59 +0000
 Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 732A5A0769; Tue,  8 Aug 2023 11:39:03 +0200 (CEST)
-Date: Tue, 8 Aug 2023 11:39:03 +0200
+ id 07563A0769; Tue,  8 Aug 2023 11:45:59 +0200 (CEST)
+Date: Tue, 8 Aug 2023 11:45:58 +0200
 From: Jan Kara <jack@suse.cz>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <20230808093903.2cg5wwbwbvflkeph@quack3>
+Message-ID: <20230808094558.fgogaxmgtbstbij3@quack3>
 References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
- <20230807-mgctime-v7-7-d1dec143a704@kernel.org>
+ <20230807-mgctime-v7-8-d1dec143a704@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230807-mgctime-v7-7-d1dec143a704@kernel.org>
+In-Reply-To: <20230807-mgctime-v7-8-d1dec143a704@kernel.org>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -88,15 +88,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon 07-08-23 15:38:38,
- Jeff Layton wrote: > In later patches
- we're going to drop the "now" parameter from the > update_time operation.
- Prepare XFS for this by reworking how it fetches > timestamps [...] 
+ Content preview:  On Mon 07-08-23 15:38:39, Jeff Layton wrote: > Now that all
+ of the update_time operations are prepared for it, we can > drop the timespec64
+ argument from the update_time operation. Do that and > remov [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.29 listed in list.dnswl.org]
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -106,9 +105,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1qTJBG-00025S-SQ
-Subject: Re: [f2fs-dev] [PATCH v7 07/13] xfs: have xfs_vn_update_time gets
- its own timestamp
+X-Headers-End: 1qTJHy-0002Ll-9p
+Subject: Re: [f2fs-dev] [PATCH v7 08/13] fs: drop the timespec64 argument
+ from update_time
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -167,52 +166,15 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon 07-08-23 15:38:38, Jeff Layton wrote:
-> In later patches we're going to drop the "now" parameter from the
-> update_time operation. Prepare XFS for this by reworking how it fetches
-> timestamps and sets them in the inode. Ensure that we update the ctime
-> even if only S_MTIME is set.
+On Mon 07-08-23 15:38:39, Jeff Layton wrote:
+> Now that all of the update_time operations are prepared for it, we can
+> drop the timespec64 argument from the update_time operation. Do that and
+> remove it from some associated functions like inode_update_time and
+> inode_needs_update_time.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-> ---
->  fs/xfs/xfs_iops.c | 12 ++++++++----
->  1 file changed, 8 insertions(+), 4 deletions(-)
-> 
-> diff --git a/fs/xfs/xfs_iops.c b/fs/xfs/xfs_iops.c
-> index 731f45391baa..72d18e7840f5 100644
-> --- a/fs/xfs/xfs_iops.c
-> +++ b/fs/xfs/xfs_iops.c
-> @@ -1037,6 +1037,7 @@ xfs_vn_update_time(
->  	int			log_flags = XFS_ILOG_TIMESTAMP;
->  	struct xfs_trans	*tp;
->  	int			error;
-> +	struct timespec64	now = current_time(inode);
 
-No need to fetch current_time() here where you overwrite it just a bit
-later...
-
-> @@ -1056,12 +1057,15 @@ xfs_vn_update_time(
->  		return error;
->  
->  	xfs_ilock(ip, XFS_ILOCK_EXCL);
-> -	if (flags & S_CTIME)
-> -		inode_set_ctime_to_ts(inode, *now);
-> +	if (flags & (S_CTIME|S_MTIME))
-> +		now = inode_set_ctime_current(inode);
-> +	else
-> +		now = current_time(inode);
-> +
->  	if (flags & S_MTIME)
-> -		inode->i_mtime = *now;
-> +		inode->i_mtime = now;
->  	if (flags & S_ATIME)
-> -		inode->i_atime = *now;
-> +		inode->i_atime = now;
->  
->  	xfs_trans_ijoin(tp, ip, XFS_ILOCK_EXCL);
->  	xfs_trans_log_inode(tp, ip, log_flags);
-
-Otherwise the patch looks good to me so feel free to add:
+Looks good to me. Feel free to add:
 
 Reviewed-by: Jan Kara <jack@suse.cz>
 
