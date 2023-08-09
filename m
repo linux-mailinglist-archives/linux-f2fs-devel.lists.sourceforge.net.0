@@ -2,87 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 739F47755E4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Aug 2023 10:50:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E9B817756E7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Aug 2023 12:11:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qTetz-0006nE-4Q;
-	Wed, 09 Aug 2023 08:50:46 +0000
+	id 1qTg9q-0001S6-Pd;
+	Wed, 09 Aug 2023 10:11:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hirofumi@parknet.co.jp>) id 1qTetx-0006n1-Ia
+ (envelope-from <jlayton@kernel.org>) id 1qTg9o-0001S0-NQ
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Aug 2023 08:50:44 +0000
+ Wed, 09 Aug 2023 10:11:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gqexseAy8x9XfBgwRk35PK/BfcqKAg2w45FhtDl/m1c=; b=Po+RrBGlZoyVIjcmomi/hEXH77
- MjdRuHAhqDDedFnisF+0Qc04gMYT2C0oWkIxTjZ7j28+Wzk4zfEwYEV2bC9HZp2syYWyICapdNEZV
- 1JPkmLoKQNvqbHUaImyPKYPCjou7d7nXexic8UIkxjFp8SzPvIiiAAxfOdUnIjjQkvc4=;
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Eo2i7uJldKNgBm+LFT1PDtuMgoSPe8eMQdEaVs2mYLQ=; b=KBCHLCixbRd5RDJH9WM2eEN4xe
+ uT5dDnPSHVoNBKETmACne3jMuckSRJVLRpZNNR/CHELwjD+4CCILRNy8Y8eQ5s/56n2qwhWUA52fY
+ NTXQBXaS+99NW4l0l1xLqjxfi9UZcnsnokuzJRoGo6SRpBrwXOhS6/T4hPnjcRPBRwkc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gqexseAy8x9XfBgwRk35PK/BfcqKAg2w45FhtDl/m1c=; b=QoUjkp3a14xj6N4Bc6zjGe/7tb
- snmuIsG9CPJ/32Hlxcb/V2toi22DZ0I8+Uaa1nR16LiWOpwqFOeyoaMfvONjq/93qGPhoQdt0wfzX
- 32atb2Yg2j7yPNx+0QhpOrbDMqTW6tMbmNgzqeTnS3+qyMrlTf2Eo82ny31JXBMO02rU=;
-Received: from mail.parknet.co.jp ([210.171.160.6])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1qTetv-0004is-2h for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Aug 2023 08:50:44 +0000
-Received: from ibmpc.myhome.or.jp (server.parknet.ne.jp [210.171.168.39])
- by mail.parknet.co.jp (Postfix) with ESMTPSA id 2BF732055FA1;
- Wed,  9 Aug 2023 17:41:12 +0900 (JST)
-Received: from devron.myhome.or.jp (foobar@devron.myhome.or.jp [192.168.0.3])
- by ibmpc.myhome.or.jp (8.17.2/8.17.2/Debian-1) with ESMTPS id
- 3798fAMk208573
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 9 Aug 2023 17:41:11 +0900
-Received: from devron.myhome.or.jp (foobar@localhost [127.0.0.1])
- by devron.myhome.or.jp (8.17.2/8.17.2/Debian-1) with ESMTPS id 3798fAiA140744
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 9 Aug 2023 17:41:10 +0900
-Received: (from hirofumi@localhost)
- by devron.myhome.or.jp (8.17.2/8.17.2/Submit) id 3798f9uW140743;
- Wed, 9 Aug 2023 17:41:09 +0900
-From: OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>
-To: Jeff Layton <jlayton@kernel.org>
-In-Reply-To: <87msz08vc7.fsf@mail.parknet.co.jp> (OGAWA Hirofumi's message of
- "Wed, 09 Aug 2023 17:37:44 +0900")
+ bh=Eo2i7uJldKNgBm+LFT1PDtuMgoSPe8eMQdEaVs2mYLQ=; b=ivlpS62bSk3pVSYm+yWQCoeRSW
+ IcyioyWziuzrEMQuOHr8jrPuwue23nqHjYY3zOdzhCH0LraK/pGxUJkStPjoVXtqrvMGN0JQvOOJL
+ 2Jk/qdEq9ZZTDC+aLUhtu24MqgbHgcnhCVdtXCVpLyA8IQhfJo4KDZGVWWWYLZ4MAAHA=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qTg9j-0007IX-PB for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 09 Aug 2023 10:11:13 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 0F082630EB;
+ Wed,  9 Aug 2023 10:11:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0CD92C433C7;
+ Wed,  9 Aug 2023 10:10:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1691575861;
+ bh=3EDdk7dTfHs3Hy9RVE0ybDbynTaUkeq4N9itCD5SIYI=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=SLiD6EwBwAaKjaENOfNjWpIjgTZ7uN7B4ABF6+Bc5uUdhACL29f5ZDgIl8J0BIcLg
+ dmmWF/N3vxvPZnbf7qCfoiMntKQ5KpepxLV423OWizDLKnMdMdTqG2pBQ96c7iVI/q
+ 6jxcOzT1tUDuUKredqtZ802zOA9COiRKKjMvkV8B5wrgxL3TdF/tBsrcopqwbxnBca
+ PDqh4/C6S52dVHwYp/5zmkTrm4IUk3O7TYiV8whC/vrlI1m9OAGJxPareUgxFZUC+2
+ I7slyRMFE6wXePxHgLcOI25zOvoPWown/lV3vive98S0wwvTwTzicYt9+73JrhgKdm
+ fHO15Q9CkD8KA==
+Message-ID: <52bead1d6a33fec89944b96e2ec20d1ea8747a9a.camel@kernel.org>
+From: Jeff Layton <jlayton@kernel.org>
+To: OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>
+Date: Wed, 09 Aug 2023 06:10:53 -0400
+In-Reply-To: <87msz08vc7.fsf@mail.parknet.co.jp>
 References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
  <20230807-mgctime-v7-5-d1dec143a704@kernel.org>
  <87msz08vc7.fsf@mail.parknet.co.jp>
-Date: Wed, 09 Aug 2023 17:41:09 +0900
-Message-ID: <87il9o8v6i.fsf@mail.parknet.co.jp>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
 MIME-Version: 1.0
-X-Spam-Score: -0.7 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: OGAWA Hirofumi <hirofumi@mail.parknet.co.jp> writes: > Jeff
- Layton <jlayton@kernel.org> writes: > >> Also, it may be that things have
- changed by the time we get to calling >> fat_update_time after checking
- inode_needs_update_time. Ensure that we >> atte [...] 
- Content analysis details:   (-0.7 points, 6.0 required)
+ Content preview:  On Wed, 2023-08-09 at 17:37 +0900, OGAWA Hirofumi wrote: >
+ Jeff Layton <jlayton@kernel.org> writes: > > > Also, it may be that things
+ have changed by the time we get to calling > > fat_update_time aft [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [210.171.160.6 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1qTetv-0004is-2h
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qTg9j-0007IX-PB
 Subject: Re: [f2fs-dev] [PATCH v7 05/13] fat: make fat_update_time get its
  own timestamp
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -98,9 +108,8 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Martin Brandenburg <martin@omnibond.com>,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- "Darrick J. Wong" <djwong@kernel.org>,
- Dominique Martinet <asmadeus@codewreck.org>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, "Darrick
+ J. Wong" <djwong@kernel.org>, Dominique Martinet <asmadeus@codewreck.org>,
  Christian Schoenebeck <linux_oss@crudebyte.com>, ecryptfs@vger.kernel.org,
  Yue Hu <huyue2@gl0jj8bn.sched.sma.tdnsstic1.cn>,
  David Howells <dhowells@redhat.com>, Chris Mason <clm@fb.com>,
@@ -144,24 +153,56 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-OGAWA Hirofumi <hirofumi@mail.parknet.co.jp> writes:
-
+On Wed, 2023-08-09 at 17:37 +0900, OGAWA Hirofumi wrote:
 > Jeff Layton <jlayton@kernel.org> writes:
->
->> Also, it may be that things have changed by the time we get to calling
->> fat_update_time after checking inode_needs_update_time. Ensure that we
->> attempt the i_version bump if any of the S_* flags besides S_ATIME are
->> set.
->
+> 
+> > Also, it may be that things have changed by the time we get to calling
+> > fat_update_time after checking inode_needs_update_time. Ensure that we
+> > attempt the i_version bump if any of the S_* flags besides S_ATIME are
+> > set.
+> 
 > I'm not sure what it meaning though, this is from
 > generic_update_time(). Are you going to change generic_update_time()
 > too? If so, it doesn't break lazytime feature?
->
-> Thanks.
+> 
 
-BTW, fat is not implementing lazytime now, but it is for future.
+Yes. generic_update_time is also being changed in a similar fashion.
+This shouldn't break the lazytime feature: lazytime is all about how and
+when timestamps get written to disk. This work is all about which
+clocksource the timestamps originally come from.
+
+> Thanks.
+> 
+> > Signed-off-by: Jeff Layton <jlayton@kernel.org>
+> > ---
+> >  fs/fat/misc.c | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/fs/fat/misc.c b/fs/fat/misc.c
+> > index 67006ea08db6..8cab87145d63 100644
+> > --- a/fs/fat/misc.c
+> > +++ b/fs/fat/misc.c
+> > @@ -347,14 +347,14 @@ int fat_update_time(struct inode *inode, struct timespec64 *now, int flags)
+> >  		return 0;
+> >  
+> >  	if (flags & (S_ATIME | S_CTIME | S_MTIME)) {
+> > -		fat_truncate_time(inode, now, flags);
+> > +		fat_truncate_time(inode, NULL, flags);
+> >  		if (inode->i_sb->s_flags & SB_LAZYTIME)
+> >  			dirty_flags |= I_DIRTY_TIME;
+> >  		else
+> >  			dirty_flags |= I_DIRTY_SYNC;
+> >  	}
+> >  
+> > -	if ((flags & S_VERSION) && inode_maybe_inc_iversion(inode, false))
+> > +	if ((flags & (S_VERSION|S_CTIME|S_MTIME)) && inode_maybe_inc_iversion(inode, false))
+> >  		dirty_flags |= I_DIRTY_SYNC;
+> >  
+> >  	__mark_inode_dirty(inode, dirty_flags);
+> 
+
 -- 
-OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>
+Jeff Layton <jlayton@kernel.org>
 
 
 _______________________________________________
