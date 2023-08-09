@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA831775378
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Aug 2023 09:04:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A43F775393
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Aug 2023 09:07:10 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qTdFH-0003Yy-9o;
-	Wed, 09 Aug 2023 07:04:39 +0000
+	id 1qTdHW-00085X-S4;
+	Wed, 09 Aug 2023 07:06:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qTdFG-0003Yr-Jb
+ (envelope-from <brauner@kernel.org>) id 1qTdHV-00085Q-Ui
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Aug 2023 07:04:38 +0000
+ Wed, 09 Aug 2023 07:06:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DH4ItoPl4t9BDzY4p84Kc5DS/kvp/4jxDQStke3yeoI=; b=F2VB/WQpb+2mnXW9wlgdGXCxpl
- 8STqh0jQcb6jo77eyhHe513ltsbPbRGvm3gNEZE6fShwTaNujHrIeYRN0qxr+Wqkw6ySM1tDcgc18
- 9Mjw0lymMsl9Nl//q6ScOH3fDc8k/gS/Nu4/YOlEi1wWZca5NMSknFX6p2MNtGDZnI6A=;
+ bh=bpR6NrRrv+px6P4RAp9BUFvi3teg78SPomSPPQq/HRw=; b=XLKETelwI+WZPxNVTzjk6XmA3H
+ URdFTqEh8WD5YF4PdRdMIQc65mgcSZT6jFLL0y38n+F7y/eSFpL/B0dfdbTftqvOprKtZfxXkZOqh
+ Dda85LS++pzO6ZsJEwDMSHASzcY0vREB4QXbMaq3G78IPH/4l3ZUOvI59fCnMv1kGyGk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,70 +31,70 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DH4ItoPl4t9BDzY4p84Kc5DS/kvp/4jxDQStke3yeoI=; b=AjGaibWbcatB6EraUYA8BaoB7G
- XBQirNaibU2c4kRGxXK81TrYytKK1OqczJEVNERGaa6Yt5eWlM4zZjsYNeBn8Z7FoCHT3kg+1GBdu
- GorKp7UQtcONIIHBBoPM4VVMPceKybP5xljk64Yq7ik9Ako0/VxRl8gNZHCjNG5ZEOQ0=;
+ bh=bpR6NrRrv+px6P4RAp9BUFvi3teg78SPomSPPQq/HRw=; b=ZCp78jy4AkSKV+mew0YSscN/6O
+ ZR/qwpxHwr/smHn8ArMLK4l0rWYbRkYvCr/vf0olDvbOBpr6uLtk1SMCrnRUc9pWTn2ZfdTjqOQrk
+ 9ev5BRErGxYbfpta+SNtMzj9qc3fEczWmAGngJV4aqL0WdrX0J/TpGCQ3vmlY/VPlLs4=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qTdFE-00024D-RF for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Aug 2023 07:04:38 +0000
+ id 1qTdHW-000DwV-99 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 09 Aug 2023 07:06:58 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 012D462FB3;
- Wed,  9 Aug 2023 07:04:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF415C433C8;
- Wed,  9 Aug 2023 07:04:15 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9B61A62FBF;
+ Wed,  9 Aug 2023 07:06:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 46BD8C433C7;
+ Wed,  9 Aug 2023 07:06:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1691564670;
- bh=mNaI4yIhrZSJhUwcMni6JCN62HgxRgb2ToogP2H4jFU=;
+ s=k20201202; t=1691564812;
+ bh=LyptcIlHZJMPRLgCQdT8M5vqzNKCvVA2tglx+SSzKhk=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=dm1BfYtz2dqQMxa4y4K1DetMu3X3Ln+bwz+2jEemWCBc68DqnWDXfI9TyuC86JRyc
- OV6+7i/vF54n6ROMNvy+VNt+3Tcbr5mPPxWG7+kZZzvdk1l5Y2fXqdyi4kiTIEHp6R
- c+NokRM5ch22ngFHcUfi3IxiA2Hed3py0L00cGbjgid38+MsphBbYkHDRv8n5kfv6l
- 165HU85tqTN8dPjx7l1xQ1d3Tv6OZoFdRY/kHWh7X900UpXqc/s3kp4a/FPaL7/Rze
- xRv3G8HkDEWg3uieFtEQ8pvVu174WnaDQBFW7zKSqu+mNZR7+LKPBNsWLcV/CsHS/4
- sOc78sTonZdgw==
-Date: Wed, 9 Aug 2023 09:04:12 +0200
+ b=bD7f0dTITrbaEv4ks9HGhx0VVGQl2go0/eu1op4nP82j4N7TgX5btWqWiaSGoe8jp
+ i6+z7Q/Jk2DuDRVzKbPo4bN2rJnb7ZSAdXE4Z0xYd+h6nr/dULJQsuanMXc8U/mPWC
+ durewToMDZYiugVbqFDpM/vlNxIknI7IjiKj4iWyBj6wWmzWhg0/t+ygbJ1TK6LZ+2
+ DAg/4gaYUGbCnyrWc2K3wnSswvzR8b++oY6In8hF21Owe2spxR27o2A1Ew8ijOuuN3
+ Wo+4rLZHSLxhk9EzIXmcSquBg+Bnp2nKOE70h2bjG7fT6iPfQRAHqxOjlzas9G4WAl
+ a1bfUfvPCKxNg==
+Date: Wed, 9 Aug 2023 09:06:34 +0200
 From: Christian Brauner <brauner@kernel.org>
 To: Jan Kara <jack@suse.cz>
-Message-ID: <20230809-abartig-lachen-df1965c6b37a@brauner>
+Message-ID: <20230809-handreichung-umgearbeitet-951eebed4d61@brauner>
 References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
- <20230807-mgctime-v7-7-d1dec143a704@kernel.org>
- <20230808093903.2cg5wwbwbvflkeph@quack3>
+ <20230807-mgctime-v7-6-d1dec143a704@kernel.org>
+ <20230808093701.ggyj7tyqonivl7tb@quack3>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230808093903.2cg5wwbwbvflkeph@quack3>
-X-Spam-Score: -5.9 (-----)
+In-Reply-To: <20230808093701.ggyj7tyqonivl7tb@quack3>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Aug 08, 2023 at 11:39:03AM +0200, Jan Kara wrote:
- > On Mon 07-08-23 15:38:38, Jeff Layton wrote: > > In later patches we're
- going to drop the "now" parameter from the > > update_time operation [...]
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Tue, Aug 08, 2023 at 11:37:01AM +0200, Jan Kara wrote:
+ > On Mon 07-08-23 15:38:37, Jeff Layton wrote: > > In later patches, we're
+ going to drop the "now" parameter from the > > update_time operatio [...]
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qTdFE-00024D-RF
-Subject: Re: [f2fs-dev] [PATCH v7 07/13] xfs: have xfs_vn_update_time gets
- its own timestamp
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qTdHW-000DwV-99
+Subject: Re: [f2fs-dev] [PATCH v7 06/13] ubifs: have ubifs_update_time use
+ inode_update_timestamps
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,34 +152,42 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Aug 08, 2023 at 11:39:03AM +0200, Jan Kara wrote:
-> On Mon 07-08-23 15:38:38, Jeff Layton wrote:
-> > In later patches we're going to drop the "now" parameter from the
-> > update_time operation. Prepare XFS for this by reworking how it fetches
-> > timestamps and sets them in the inode. Ensure that we update the ctime
-> > even if only S_MTIME is set.
+On Tue, Aug 08, 2023 at 11:37:01AM +0200, Jan Kara wrote:
+> On Mon 07-08-23 15:38:37, Jeff Layton wrote:
+> > In later patches, we're going to drop the "now" parameter from the
+> > update_time operation. Prepare ubifs for this, by having it use the new
+> > inode_update_timestamps helper.
 > > 
 > > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-> > ---
-> >  fs/xfs/xfs_iops.c | 12 ++++++++----
-> >  1 file changed, 8 insertions(+), 4 deletions(-)
-> > 
-> > diff --git a/fs/xfs/xfs_iops.c b/fs/xfs/xfs_iops.c
-> > index 731f45391baa..72d18e7840f5 100644
-> > --- a/fs/xfs/xfs_iops.c
-> > +++ b/fs/xfs/xfs_iops.c
-> > @@ -1037,6 +1037,7 @@ xfs_vn_update_time(
-> >  	int			log_flags = XFS_ILOG_TIMESTAMP;
-> >  	struct xfs_trans	*tp;
-> >  	int			error;
-> > +	struct timespec64	now = current_time(inode);
 > 
-> No need to fetch current_time() here where you overwrite it just a bit
-> later...
+> One comment below:
+> 
+> > diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
+> > index df9086b19cd0..2d0178922e19 100644
+> > --- a/fs/ubifs/file.c
+> > +++ b/fs/ubifs/file.c
+> > @@ -1397,15 +1397,9 @@ int ubifs_update_time(struct inode *inode, struct timespec64 *time,
+> >  		return err;
+> >  
+> >  	mutex_lock(&ui->ui_mutex);
+> > -	if (flags & S_ATIME)
+> > -		inode->i_atime = *time;
+> > -	if (flags & S_CTIME)
+> > -		inode_set_ctime_to_ts(inode, *time);
+> > -	if (flags & S_MTIME)
+> > -		inode->i_mtime = *time;
+> > -
+> > -	release = ui->dirty;
+> > +	inode_update_timestamps(inode, flags);
+> >  	__mark_inode_dirty(inode, I_DIRTY_SYNC);
+> > +	release = ui->dirty;
+> >  	mutex_unlock(&ui->ui_mutex);
+> 
+> I think this is wrong. You need to keep sampling ui->dirty before calling
+> __mark_inode_dirty(). Otherwise you could release budget for inode update
+> you really need...
 
-It also shadows the @now parameter of that function. Since that function
-parameter is dropped in follow-up patches I simply s/now/time/g it here.
-In any case, fixed in-tree.
+Fixed in-tree.
 
 
 _______________________________________________
