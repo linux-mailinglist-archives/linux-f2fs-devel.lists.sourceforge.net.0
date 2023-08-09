@@ -2,91 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D72D776397
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Aug 2023 17:18:15 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39D21776496
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Aug 2023 17:58:19 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qTkwr-0005Kq-CH;
-	Wed, 09 Aug 2023 15:18:09 +0000
+	id 1qTlZZ-0001ZY-OE;
+	Wed, 09 Aug 2023 15:58:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hirofumi@parknet.co.jp>) id 1qTkwp-0005Kk-UI
+ (envelope-from <djwong@kernel.org>) id 1qTlZY-0001ZS-7H
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Aug 2023 15:18:08 +0000
+ Wed, 09 Aug 2023 15:58:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sRQCEDMCeocP5LvsTIIrU6gav2mEfed7GKR/ETVoDA4=; b=RECbhqsYHgNOZa2Rqpgod2ypV7
- 2R1L/JS8lYHb/S/4U9DPQGbWQERZPmx2ptBihjwjfQl/jntUgk28syBBPOw3NqA8OoaJ0AbgeHGUN
- cQkzaa3Jyi79KHESIrcWxgnjO8qCIL6lY7DFSdIlfS1zQMNbt9E7NJm1yW2ln/RsY/KI=;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=ltztflm5uh3qzayYTwLS8Tgqv2vBfXKuJ/QAANgymoQ=; b=f98V69mzF1CczPX64F9EgnGQSu
+ PYjqtxxyFU1UekMTq6TMwrngKKzn+DAZV6YQH5v/fCo04jIh0aAGjyLADBErIp/kY0geGoO6UmngB
+ bz6VJ/+T/+2tvG6aiGrYHnqzQMBX9nwh9iHPI9M9gPUowGu2lfnifE4UkzxKcNaNT2NU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sRQCEDMCeocP5LvsTIIrU6gav2mEfed7GKR/ETVoDA4=; b=dDSo/CoL/8kbxpKYo79bU7krU0
- 5vwNvl5kBXGJ4b6aIJ5U0k3OSG1GIlgmfkt1n2A8Nu39ECtY/za1cxI1WiQJGO2mxM2UNPWkx2pNZ
- uIky0+9fHpQwQsh6vUnuKmS57ZiVhMLohscwfkFkKjhJU6CpnMJws7XEiNqNDCBvVjO0=;
-Received: from mail.parknet.co.jp ([210.171.160.6])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1qTkwp-000d0a-Jp for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Aug 2023 15:18:08 +0000
-Received: from ibmpc.myhome.or.jp (server.parknet.ne.jp [210.171.168.39])
- by mail.parknet.co.jp (Postfix) with ESMTPSA id E5C652055FA4;
- Thu, 10 Aug 2023 00:18:01 +0900 (JST)
-Received: from devron.myhome.or.jp (foobar@devron.myhome.or.jp [192.168.0.3])
- by ibmpc.myhome.or.jp (8.17.2/8.17.2/Debian-1) with ESMTPS id
- 379FI0T9218787
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 10 Aug 2023 00:18:01 +0900
-Received: from devron.myhome.or.jp (foobar@localhost [127.0.0.1])
- by devron.myhome.or.jp (8.17.2/8.17.2/Debian-1) with ESMTPS id 379FI0wR202859
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 10 Aug 2023 00:18:00 +0900
-Received: (from hirofumi@localhost)
- by devron.myhome.or.jp (8.17.2/8.17.2/Submit) id 379FHvZ4202846;
- Thu, 10 Aug 2023 00:17:57 +0900
-From: OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>
-To: Jan Kara <jack@suse.cz>
-In-Reply-To: <20230809150041.452w7gucjmvjnvbg@quack3> (Jan Kara's message of
- "Wed, 9 Aug 2023 17:00:41 +0200")
+ bh=ltztflm5uh3qzayYTwLS8Tgqv2vBfXKuJ/QAANgymoQ=; b=bzeYFhQQN4rq3zNEvZ3W7JWAS4
+ IPspRq+sdDpP4Q7bTaYPkddZRQoKw0rrbvwq+dQSdA66fy4salVgT3sN9GlxPy/DRfK1I5IR/bRwu
+ 7HAewgelBJ9SLUL0Gn9Gi6dsm5JwhgWRsFX+Xkh8b8q7n9LvPWSX7OV6Cu67PUfes8N4=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qTlZT-000eMC-38 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 09 Aug 2023 15:58:08 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 5FF5363FB2;
+ Wed,  9 Aug 2023 15:57:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AEE8CC433C8;
+ Wed,  9 Aug 2023 15:57:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1691596676;
+ bh=BLJ8BG9cjda67FtOFMSOw2lof21Rwgd62y3h6CJUJXI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=AFE0tJAC1VN3lHwsywzTvQMCtTkKwH+fzaHay423Nn8U4BvgbFPhFlDGPhv+CSPLy
+ dFQ0xVpMhQ3C2M5foD/fbgkNjIR7VMHxas0FwdgXCZ4RBZmNRoRBLtdmPfwP64p4CR
+ L1KLFjlwnPyYmvJ9g5BmRhxInIEwBnrizZouBo3g6eX8F8ZAnH1hnfnSPD6lrGk5TK
+ 9rNGMty4rm4EuDy1vedzHwVAPS2NqLbaLW0knF3RHZVQHqjJb96V1TtEusFyVz0K14
+ VuLDs1Rym4oqY/gmU++wX3w7TKa1AFDz9Dgv9eLPqBx47m/DAmODVEOpJWGSAeViqX
+ g//bmjx4l6oPA==
+Date: Wed, 9 Aug 2023 08:57:56 -0700
+From: "Darrick J. Wong" <djwong@kernel.org>
+To: Jeff Layton <jlayton@kernel.org>
+Message-ID: <20230809155756.GV11352@frogsfrogsfrogs>
 References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
- <20230807-mgctime-v7-5-d1dec143a704@kernel.org>
- <87msz08vc7.fsf@mail.parknet.co.jp>
- <52bead1d6a33fec89944b96e2ec20d1ea8747a9a.camel@kernel.org>
- <878rak8hia.fsf@mail.parknet.co.jp>
- <20230809150041.452w7gucjmvjnvbg@quack3>
-Date: Thu, 10 Aug 2023 00:17:57 +0900
-Message-ID: <87v8do6y8q.fsf@mail.parknet.co.jp>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ <20230807-mgctime-v7-7-d1dec143a704@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.7 (/)
+Content-Disposition: inline
+In-Reply-To: <20230807-mgctime-v7-7-d1dec143a704@kernel.org>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Jan Kara <jack@suse.cz> writes: > Since you are talking past
- one another with Jeff let me chime in here :). I > think you are worried
- about this hunk: Right. 
- Content analysis details:   (-0.7 points, 6.0 required)
+ Content preview:  On Mon, Aug 07, 2023 at 03:38:38PM -0400, Jeff Layton wrote:
+ > In later patches we're going to drop the "now" parameter from the >
+ update_time
+ operation. Prepare XFS for this by reworking how it fetch [...] 
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [210.171.160.6 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1qTkwp-000d0a-Jp
-Subject: Re: [f2fs-dev] [PATCH v7 05/13] fat: make fat_update_time get its
- own timestamp
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qTlZT-000eMC-38
+Subject: Re: [f2fs-dev] [PATCH v7 07/13] xfs: have xfs_vn_update_time gets
+ its own timestamp
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,38 +108,35 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Martin Brandenburg <martin@omnibond.com>,
  Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- "Darrick J. Wong" <djwong@kernel.org>,
- Dominique Martinet <asmadeus@codewreck.org>,
+ linux-xfs@vger.kernel.org, Dominique Martinet <asmadeus@codewreck.org>,
  Christian Schoenebeck <linux_oss@crudebyte.com>, ecryptfs@vger.kernel.org,
- Yue Hu <huyue2@gl0jj8bn.sched.sma.tdnsstic1.cn>,
- David Howells <dhowells@redhat.com>, Chris Mason <clm@fb.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>, Hans de Goede <hdegoede@redhat.com>,
- Marc Dionne <marc.dionne@auristor.com>, samba-technical@lists.samba.org,
- linux-xfs@vger.kernel.org, linux-afs@lists.infradead.org,
+ linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Hans de Goede <hdegoede@redhat.com>, Marc Dionne <marc.dionne@auristor.com>,
+ codalist@coda.cs.cmu.edu, linux-afs@lists.infradead.org,
  linux-mtd@lists.infradead.org, Mike Marshall <hubcap@omnibond.com>,
  Paulo Alcantara <pc@manguebit.com>, linux-cifs@vger.kernel.org,
  Eric Van Hensbergen <ericvh@kernel.org>,
  Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
  Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- linux-unionfs@vger.kernel.org, Hugh Dickins <hughd@google.com>,
- Benjamin Coddington <bcodding@redhat.com>, Tyler Hicks <code@tyhicks.com>,
- cluster-devel@redhat.com, coda@cs.cmu.edu, linux-mm@kvack.org,
- Ilya Dryomov <idryomov@gmail.com>, Iurii Zaikin <yzaikin@google.com>,
- Namjae Jeon <linkinjeon@kernel.org>,
+ Hugh Dickins <hughd@google.com>, Benjamin Coddington <bcodding@redhat.com>,
+ Tyler Hicks <code@tyhicks.com>, cluster-devel@redhat.com, coda@cs.cmu.edu,
+ linux-mm@kvack.org, Ilya Dryomov <idryomov@gmail.com>,
+ Iurii Zaikin <yzaikin@google.com>, Namjae Jeon <linkinjeon@kernel.org>,
  Trond Myklebust <trond.myklebust@hammerspace.com>,
- codalist@telemann.coda.cs.cmu.edu, Shyam Prasad N <sprasad@microsoft.com>,
- Amir Goldstein <amir73il@gmail.com>, Kees Cook <keescook@chromium.org>,
- ocfs2-devel@lists.linux.dev, Josef Bacik <josef@toxicpanda.com>,
- Tom Talpey <tom@talpey.com>, Tejun Heo <tj@kernel.org>,
+ Shyam Prasad N <sprasad@microsoft.com>, Amir Goldstein <amir73il@gmail.com>,
+ Kees Cook <keescook@chromium.org>, ocfs2-devel@lists.linux.dev,
+ Josef Bacik <josef@toxicpanda.com>, Tom Talpey <tom@talpey.com>,
+ Tejun Heo <tj@kernel.org>, Yue Hu <huyue2@coolpad.com>,
  Alexander Viro <viro@zeniv.linux.org.uk>,
  Ronnie Sahlberg <ronniesahlberg@gmail.com>, David Sterba <dsterba@suse.com>,
  Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
  Xiubo Li <xiubli@redhat.com>, Gao Xiang <xiang@kernel.org>,
- Jan Harkes <jaharkes@cs.cmu.edu>, Christian Brauner <brauner@kernel.org>,
- linux-ext4@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Jan Harkes <jaharkes@cs.cmu.edu>,
+ Christian Brauner <brauner@kernel.org>, linux-ext4@vger.kernel.org,
+ Theodore Ts'o <tytso@mit.edu>, Joseph Qi <joseph.qi@linux.alibaba.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>, v9fs@lists.linux.dev,
- ntfs3@lists.linux.dev, Jeff Layton <jlayton@kernel.org>,
+ ntfs3@lists.linux.dev, samba-technical@lists.samba.org,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  Steve French <sfrench@samba.org>,
  Sergey Senozhatsky <senozhatsky@chromium.org>,
@@ -147,37 +151,61 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Jan Kara <jack@suse.cz> writes:
+On Mon, Aug 07, 2023 at 03:38:38PM -0400, Jeff Layton wrote:
+> In later patches we're going to drop the "now" parameter from the
+> update_time operation. Prepare XFS for this by reworking how it fetches
+> timestamps and sets them in the inode. Ensure that we update the ctime
+> even if only S_MTIME is set.
+> 
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+> ---
+>  fs/xfs/xfs_iops.c | 12 ++++++++----
+>  1 file changed, 8 insertions(+), 4 deletions(-)
+> 
+> diff --git a/fs/xfs/xfs_iops.c b/fs/xfs/xfs_iops.c
+> index 731f45391baa..72d18e7840f5 100644
+> --- a/fs/xfs/xfs_iops.c
+> +++ b/fs/xfs/xfs_iops.c
+> @@ -1037,6 +1037,7 @@ xfs_vn_update_time(
+>  	int			log_flags = XFS_ILOG_TIMESTAMP;
+>  	struct xfs_trans	*tp;
+>  	int			error;
+> +	struct timespec64	now = current_time(inode);
+>  
+>  	trace_xfs_update_time(ip);
+>  
+> @@ -1056,12 +1057,15 @@ xfs_vn_update_time(
+>  		return error;
+>  
+>  	xfs_ilock(ip, XFS_ILOCK_EXCL);
+> -	if (flags & S_CTIME)
+> -		inode_set_ctime_to_ts(inode, *now);
+> +	if (flags & (S_CTIME|S_MTIME))
 
-> Since you are talking past one another with Jeff let me chime in here :). I
-> think you are worried about this hunk:
+Minor nit: spaces around    ^ the operator.
 
-Right.
+Otherwise looks ok to me...
+Acked-by: Darrick J. Wong <djwong@kernel.org>
 
-> -	if ((flags & S_VERSION) && inode_maybe_inc_iversion(inode, false))
-> +	if ((flags & (S_VERSION|S_CTIME|S_MTIME)) && inode_maybe_inc_iversion(inode, false))
->  		dirty_flags |= I_DIRTY_SYNC;
->
-> which makes the 'flags' test pass even if we just modified ctime or mtime.
-> But do note the second part of the if - inode_maybe_inc_iversion() - so we
-> are going to mark the inode dirty with I_DIRTY_SYNC only if someone queried
-> iversion since the last time we have incremented it.
->
-> So this hunk is not really changing how inode is marked dirty, it only
-> changes how often we check whether iversion needs increment and that should
-> be fine (and desirable). Hence lazytime isn't really broken by this in any
-> way.
+--D
 
-OK. However, then it doesn't explain what I asked. This is not same with
-generic_update_time(), only FAT does.
-
-If thinks it is right thing, why generic_update_time() doesn't? I said
-first reply, this was from generic_update_time(). (Or I'm misreading
-updated generic_update_time()?)
-
-Thanks.
--- 
-OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>
+> +		now = inode_set_ctime_current(inode);
+> +	else
+> +		now = current_time(inode);
+> +
+>  	if (flags & S_MTIME)
+> -		inode->i_mtime = *now;
+> +		inode->i_mtime = now;
+>  	if (flags & S_ATIME)
+> -		inode->i_atime = *now;
+> +		inode->i_atime = now;
+>  
+>  	xfs_trans_ijoin(tp, ip, XFS_ILOCK_EXCL);
+>  	xfs_trans_log_inode(tp, ip, log_flags);
+> 
+> -- 
+> 2.41.0
+> 
 
 
 _______________________________________________
