@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75B017767E3
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Aug 2023 21:05:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C69D07767F0
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  9 Aug 2023 21:05:41 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qToUM-00086I-Jq;
-	Wed, 09 Aug 2023 19:04:59 +0000
+	id 1qToUz-0003yl-MT;
+	Wed, 09 Aug 2023 19:05:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qToUL-00086C-Mp
+ (envelope-from <jlayton@kernel.org>) id 1qToUy-0003vm-Iz
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Aug 2023 19:04:58 +0000
+ Wed, 09 Aug 2023 19:05:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=alXrKPD5fHXeJn9UjHKim4LKQU7HoozYjQglaZ1xXaI=; b=CHLvH8tDVQy4XeffP1teqlTzIZ
- DVUX/gEcegkVhqbIGtCAxkzrh/ziRmkDpZfF/EPRyM5RI7CjkJ7ZWYBtxDR3Lmgy8jk1GaPaB0FS7
- xzeClikUQdXPZ2dnfPPgJbrdLhJdcUY8cTsIHZ0p722/DPp5m9gvXTGytJ+EubJ4G2h0=;
+ bh=vuRLPJqHHB4jKbIejrjNY+b9NF+LaeumSqgXikGIlQ4=; b=IaDmW/e1lYG6JlSB+oAF96T5uy
+ 5Sb6ux/MF2XE1lmMkVlVrRB/mv/CR7R2CcVNdHUacvOiAGUzRfyh/Z1rwZ3egjRIuYQgdN0n3Rp2y
+ fppsYJSBcBxAx7x40ydSbWACmpte6safH866sn8pMXIz3cIsCwuZBYm7VT6bjYS/gBzw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -31,48 +31,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=alXrKPD5fHXeJn9UjHKim4LKQU7HoozYjQglaZ1xXaI=; b=CiFXufnITfL2Z59yfav+hlCCcW
- xyWWB7qCQenez3O62KDM8IkRwOHZ0dx6/UKMGK65A1iva2ryTMkFPXIsqSLDKVNYxdqFsxCmZh6t2
- 2elToQcFmxItXhZ9gloHTV97UHv6UISj+tx1kZ1F5X3vi6YsqaVeLcECP7Z+7jn0XwzY=;
+ bh=vuRLPJqHHB4jKbIejrjNY+b9NF+LaeumSqgXikGIlQ4=; b=JjQ9KkxeoxwEeLqiHXELj2Zfxc
+ E0lANvVr1MJslbAqFbqPE+ujvx5RH7kQFBykTaIxQ0bJUi3X60CMN9J+LAj+Qt9R7N66hqR7LR3E/
+ UGwAkWIpiwwm6Cnfz0VgHO/9A5f5ljENqYmB+gtEOce/qaVDfsRAcecLIVFBaVjTxhys=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qToUK-000krZ-Ic for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 09 Aug 2023 19:04:58 +0000
+ id 1qToUx-00057O-N4 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 09 Aug 2023 19:05:37 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C947D644DE;
- Wed,  9 Aug 2023 19:04:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB107C433C7;
- Wed,  9 Aug 2023 19:04:43 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1E99E6446B;
+ Wed,  9 Aug 2023 19:05:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F5CFC433C8;
+ Wed,  9 Aug 2023 19:05:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1691607890;
- bh=alXrKPD5fHXeJn9UjHKim4LKQU7HoozYjQglaZ1xXaI=;
+ s=k20201202; t=1691607929;
+ bh=4GKDaia1VeW/OijfJXE9UHIufNesebWNQDy9LU2whYI=;
  h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=AneNvnqJ20CJmKiEgeASfLx4NSIFXV4j2vtzAKGnX32iLsSf9A43S7wAfHVHbYQQP
- h3ON9dJJ2d4zasDcG0OHa5a1AfenYnO+uoesgXhOt+soOjJtmmxlhUNc5QuXKGuVOg
- rulv+awus9qyVEIGRttUpq9Lcin2kAZfB093o2LczBjmWrzPbu4HcAMNS3Ib4zj45p
- 3u7x0mQLZuZR6+lN5gsi60S8IiOPzBT4vt1n3+KsBq67CA1z2KjKobM8vv+qdWmPsN
- ddnXMIFOGmdQH1E3uRbvXBai78DI/EAYz+8n3M9qwxNTsQtwGjIcAPpzsM/ELjqang
- 5ERP9Tcme3DHA==
-Message-ID: <edf8e8ca3b38e56f30e0d24ac7293f848ffee371.camel@kernel.org>
+ b=gEyeaJZ4RUWChIryvRrKWbHk6CbM8eHu0rqtHvzvba6SSDpBpPtag+D6BMw4GFw2n
+ hFXK4OEbm0L9R1B4K8eNiaiBDtquinDOVTFyiDIMSP6pKYqwvVgkMBHyc14BMMGMP8
+ zAV3KdTeX3lKcSKjE5oKnAjO29eKsnCAgTvUvEsF/+3xUpWxGZvbyls48Ed9vXaSwV
+ DcuV4QvGf703nsP6BpmM4kVysUgEr6LDinf8/zizcxdQ20sie+EHfzuPrXj/APOCtH
+ 91Mo4Dg4M0l0SApVPB8n1GBtVl5sn3TKwCbUSa9ZQiDyJiArJw0iRB7MWozIYejid0
+ q+2d4Xd9I1nbw==
+Message-ID: <cbc98eb171d6ccacb24213af7d0ae91094d39780.camel@kernel.org>
 From: Jeff Layton <jlayton@kernel.org>
-To: OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>
-Date: Wed, 09 Aug 2023 15:04:42 -0400
-In-Reply-To: <87h6p86p9z.fsf@mail.parknet.co.jp>
+To: Mike Marshall <hubcap@omnibond.com>, Christian Brauner <brauner@kernel.org>
+Date: Wed, 09 Aug 2023 15:05:21 -0400
+In-Reply-To: <CAOg9mST=WFAjEwS9eNi_huoUpBvPy3R3fbFVTLUeFZAv6BJEEQ@mail.gmail.com>
 References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
- <20230807-mgctime-v7-5-d1dec143a704@kernel.org>
- <87msz08vc7.fsf@mail.parknet.co.jp>
- <52bead1d6a33fec89944b96e2ec20d1ea8747a9a.camel@kernel.org>
- <878rak8hia.fsf@mail.parknet.co.jp>
- <20230809150041.452w7gucjmvjnvbg@quack3>
- <87v8do6y8q.fsf@mail.parknet.co.jp>
- <2cb998ff14ace352a9dd553e82cfa0aa92ec09ce.camel@kernel.org>
- <87leek6rh1.fsf@mail.parknet.co.jp>
- <ccffe6ca3397c8374352b002fe01d55b09d84ef4.camel@kernel.org>
- <87h6p86p9z.fsf@mail.parknet.co.jp>
+ <20230807-mgctime-v7-8-d1dec143a704@kernel.org>
+ <20230809-segeln-pflaumen-460b81bd2d3a@brauner>
+ <CAOg9mST=WFAjEwS9eNi_huoUpBvPy3R3fbFVTLUeFZAv6BJEEQ@mail.gmail.com>
 User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
 MIME-Version: 1.0
 X-Spam-Score: -5.2 (-----)
@@ -82,9 +75,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 2023-08-10 at 03:31 +0900, OGAWA Hirofumi wrote: >
- Jeff Layton <jlayton@kernel.org> writes: > > > On Thu, 2023-08-10 at 02:44
- +0900, OGAWA Hirofumi wrote: > > > Jeff Layton <jlayton@kernel.org [...] 
+ Content preview: Yes. It's in Christian's vfs.ctime branch:
+ https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git/log/?h=vfs.ctime
+ On Wed, 2023-08-09 at 14:38 -0400, Mike Marshall wrote: > I've been following
+ this patch on fsdevel... is there a > remote I could fetch with a branch
+ that has this in it? > > -Mike > > On Wed, Aug 9, [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,9 +95,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qToUK-000krZ-Ic
-Subject: Re: [f2fs-dev] [PATCH v7 05/13] fat: make fat_update_time get its
- own timestamp
+X-Headers-End: 1qToUx-00057O-N4
+Subject: Re: [f2fs-dev] [PATCH v7 08/13] fs: drop the timespec64 argument
+ from update_time
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,35 +112,33 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Martin Brandenburg <martin@omnibond.com>,
  Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- Jan Kara <jack@suse.cz>, "Darrick
- J. Wong" <djwong@kernel.org>, Dominique Martinet <asmadeus@codewreck.org>,
+ linux-xfs@vger.kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>,
  Christian Schoenebeck <linux_oss@crudebyte.com>, ecryptfs@vger.kernel.org,
- Yue Hu <huyue2@gl0jj8bn.sched.sma.tdnsstic1.cn>,
- David Howells <dhowells@redhat.com>, Chris Mason <clm@fb.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>, Hans de Goede <hdegoede@redhat.com>,
- Marc Dionne <marc.dionne@auristor.com>, linux-xfs@vger.kernel.org,
- linux-afs@lists.infradead.org, linux-mtd@lists.infradead.org,
- Mike Marshall <hubcap@omnibond.com>, Paulo Alcantara <pc@manguebit.com>,
+ linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Hans de Goede <hdegoede@redhat.com>, Marc Dionne <marc.dionne@auristor.com>,
+ codalist@coda.cs.cmu.edu, linux-afs@lists.infradead.org,
+ linux-mtd@lists.infradead.org, Paulo Alcantara <pc@manguebit.com>,
  linux-cifs@vger.kernel.org, Eric Van Hensbergen <ericvh@kernel.org>,
  Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
  Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- linux-unionfs@vger.kernel.org, Hugh Dickins <hughd@google.com>,
- Benjamin Coddington <bcodding@redhat.com>, Tyler Hicks <code@tyhicks.com>,
- cluster-devel@redhat.com, coda@cs.cmu.edu, linux-mm@kvack.org,
- Ilya Dryomov <idryomov@gmail.com>, Iurii Zaikin <yzaikin@google.com>,
- Namjae Jeon <linkinjeon@kernel.org>,
+ Hugh Dickins <hughd@google.com>, Benjamin Coddington <bcodding@redhat.com>,
+ Tyler Hicks <code@tyhicks.com>, cluster-devel@redhat.com, coda@cs.cmu.edu,
+ linux-mm@kvack.org, Ilya Dryomov <idryomov@gmail.com>,
+ Iurii Zaikin <yzaikin@google.com>, Namjae Jeon <linkinjeon@kernel.org>,
  Trond Myklebust <trond.myklebust@hammerspace.com>,
- codalist@telemann.coda.cs.cmu.edu, Shyam Prasad N <sprasad@microsoft.com>,
- Amir Goldstein <amir73il@gmail.com>, Kees Cook <keescook@chromium.org>,
- ocfs2-devel@lists.linux.dev, Josef Bacik <josef@toxicpanda.com>,
- Tom Talpey <tom@talpey.com>, Tejun Heo <tj@kernel.org>,
+ Shyam Prasad N <sprasad@microsoft.com>, Amir Goldstein <amir73il@gmail.com>,
+ Kees Cook <keescook@chromium.org>, ocfs2-devel@lists.linux.dev,
+ Josef Bacik <josef@toxicpanda.com>, Tom Talpey <tom@talpey.com>,
+ Tejun Heo <tj@kernel.org>, Yue Hu <huyue2@coolpad.com>,
  Alexander Viro <viro@zeniv.linux.org.uk>,
  Ronnie Sahlberg <ronniesahlberg@gmail.com>, David Sterba <dsterba@suse.com>,
  Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
  Xiubo Li <xiubli@redhat.com>, Gao Xiang <xiang@kernel.org>,
- Jan Harkes <jaharkes@cs.cmu.edu>, Christian Brauner <brauner@kernel.org>,
- linux-ext4@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Jan Harkes <jaharkes@cs.cmu.edu>,
+ linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Theodore Ts'o <tytso@mit.edu>, Joseph Qi <joseph.qi@linux.alibaba.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>, v9fs@lists.linux.dev,
  ntfs3@lists.linux.dev, samba-technical@lists.samba.org,
  linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
@@ -156,57 +149,39 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
  linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
  Sungjong Seo <sj1557.seo@samsung.com>, linux-erofs@lists.ozlabs.org,
- linux-nfs@vger.kernel.org, linux-btrfs@vger.kernel.org,
- Joel Becker <jlbec@evilplan.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ linux-btrfs@vger.kernel.org, Joel Becker <jlbec@evilplan.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, 2023-08-10 at 03:31 +0900, OGAWA Hirofumi wrote:
-> Jeff Layton <jlayton@kernel.org> writes:
-> 
-> > On Thu, 2023-08-10 at 02:44 +0900, OGAWA Hirofumi wrote:
-> > > Jeff Layton <jlayton@kernel.org> writes:
-> > > 
-> > That would be wrong. The problem is that we're changing how update_time
-> > works:
-> > 
-> > Previously, update_time was given a timestamp and a set of S_* flags to
-> > indicate which fields should be updated. Now, update_time is not given a
-> > timestamp. It needs to fetch it itself, but that subtly changes the
-> > meaning of the flags field.
-> > 
-> > It now means "these fields needed to be updated when I last checked".
-> > The timestamp and i_version may now be different from when the flags
-> > field was set. This means that if any of S_CTIME/S_MTIME/S_VERSION were
-> > set that we need to attempt to update all 3 of them. They may now be
-> > different from the timestamp or version that we ultimately end up with.
-> > 
-> > The above may look to you like it would always cause I_DIRTY_SYNC to be
-> > set on any ctime or mtime update, but inode_maybe_inc_iversion only
-> > returns true if it actually updated i_version, and it only does that if
-> > someone issued a ->getattr against the file since the last time it was
-> > updated.
-> > 
-> > So, this shouldn't generate any more DIRTY_SYNC updates than it did
-> > before.
-> 
-> Again, if you claim so, why generic_update_time() doesn't work same? Why
-> only FAT does?
-> 
-> Or I'm misreading generic_update_time() patch?
-> 
-
-When you say it "doesn't work the same", what do you mean, specifically?
-I had to make some allowances for the fact that FAT is substantially
-different in its timestamp handling, and I tried to preserve existing
-behavior as best I could.
-
--- 
-Jeff Layton <jlayton@kernel.org>
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+WWVzLiBJdCdzIGluIENocmlzdGlhbidzIHZmcy5jdGltZSBicmFuY2g6CgpodHRwczovL2dpdC5r
+ZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dpdC92ZnMvdmZzLmdpdC9sb2cvP2g9dmZz
+LmN0aW1lCgpPbiBXZWQsIDIwMjMtMDgtMDkgYXQgMTQ6MzggLTA0MDAsIE1pa2UgTWFyc2hhbGwg
+d3JvdGU6Cj4gSSd2ZSBiZWVuIGZvbGxvd2luZyB0aGlzIHBhdGNoIG9uIGZzZGV2ZWwuLi4gaXMg
+dGhlcmUgYQo+IHJlbW90ZSBJIGNvdWxkIGZldGNoIHdpdGggYSBicmFuY2ggdGhhdCBoYXMgdGhp
+cyBpbiBpdD8KPiAKPiAtTWlrZQo+IAo+IE9uIFdlZCwgQXVnIDksIDIwMjMgYXQgODozMuKAr0FN
+IENocmlzdGlhbiBCcmF1bmVyIDxicmF1bmVyQGtlcm5lbC5vcmc+IHdyb3RlOgo+ID4gCj4gPiBP
+biBNb24sIEF1ZyAwNywgMjAyMyBhdCAwMzozODozOVBNIC0wNDAwLCBKZWZmIExheXRvbiB3cm90
+ZToKPiA+ID4gTm93IHRoYXQgYWxsIG9mIHRoZSB1cGRhdGVfdGltZSBvcGVyYXRpb25zIGFyZSBw
+cmVwYXJlZCBmb3IgaXQsIHdlIGNhbgo+ID4gPiBkcm9wIHRoZSB0aW1lc3BlYzY0IGFyZ3VtZW50
+IGZyb20gdGhlIHVwZGF0ZV90aW1lIG9wZXJhdGlvbi4gRG8gdGhhdCBhbmQKPiA+ID4gcmVtb3Zl
+IGl0IGZyb20gc29tZSBhc3NvY2lhdGVkIGZ1bmN0aW9ucyBsaWtlIGlub2RlX3VwZGF0ZV90aW1l
+IGFuZAo+ID4gPiBpbm9kZV9uZWVkc191cGRhdGVfdGltZS4KPiA+ID4gCj4gPiA+IFNpZ25lZC1v
+ZmYtYnk6IEplZmYgTGF5dG9uIDxqbGF5dG9uQGtlcm5lbC5vcmc+Cj4gPiA+IC0tLQo+ID4gPiAg
+ZnMvYmFkX2lub2RlLmMgICAgICAgICAgIHwgIDMgKy0tCj4gPiA+ICBmcy9idHJmcy9pbm9kZS5j
+ICAgICAgICAgfCAgMyArLS0KPiA+ID4gIGZzL2J0cmZzL3ZvbHVtZXMuYyAgICAgICB8ICA0ICst
+LS0KPiA+ID4gIGZzL2ZhdC9mYXQuaCAgICAgICAgICAgICB8ICAzICstLQo+ID4gPiAgZnMvZmF0
+L21pc2MuYyAgICAgICAgICAgIHwgIDIgKy0KPiA+ID4gIGZzL2dmczIvaW5vZGUuYyAgICAgICAg
+ICB8ICAzICstLQo+ID4gPiAgZnMvaW5vZGUuYyAgICAgICAgICAgICAgIHwgMzAgKysrKysrKysr
+KysrKy0tLS0tLS0tLS0tLS0tLS0tCj4gPiA+ICBmcy9vdmVybGF5ZnMvaW5vZGUuYyAgICAgfCAg
+MiArLQo+ID4gPiAgZnMvb3ZlcmxheWZzL292ZXJsYXlmcy5oIHwgIDIgKy0KPiA+ID4gIGZzL3Vi
+aWZzL2ZpbGUuYyAgICAgICAgICB8ICAzICstLQo+ID4gPiAgZnMvdWJpZnMvdWJpZnMuaCAgICAg
+ICAgIHwgIDIgKy0KPiA+ID4gIGZzL3hmcy94ZnNfaW9wcy5jICAgICAgICB8ICAxIC0KPiA+ID4g
+IGluY2x1ZGUvbGludXgvZnMuaCAgICAgICB8ICA0ICsrLS0KPiA+IAo+ID4gVGhpcyB3YXMgbWlz
+c2luZyB0aGUgY29udmVyc2lvbiBvZiBmcy9vcmFuZ2VmcyBvcmFuZ2Vmc191cGRhdGVfdGltZSgp
+Cj4gPiBjYXVzaW5nIHRoZSBidWlsZCB0byBmYWlsLiBTbyBhdCBzb21lIHBvaW50IGtidWlsZCB3
+aWxsIHllbGwgaGVyZS4KPiA+IEZ3aXcsIEkndmUgZml4ZWQgdGhhdCB1cCBpbi10cmVlLgoKQ2hl
+ZXJzLAotLSAKSmVmZiBMYXl0b24gPGpsYXl0b25Aa2VybmVsLm9yZz4KCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxp
+bmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xp
+c3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
