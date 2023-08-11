@@ -2,126 +2,91 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2757778CD4
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Aug 2023 13:05:27 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A998778F7F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 11 Aug 2023 14:28:07 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qUPxH-0005el-Fh;
-	Fri, 11 Aug 2023 11:05:18 +0000
+	id 1qURFG-0003n8-7o;
+	Fri, 11 Aug 2023 12:27:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1qUPxF-0005eb-Uq
- for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Aug 2023 11:05:17 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+10530082ca17b6f7899b+7292+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1qURFD-0003ms-Bx; Fri, 11 Aug 2023 12:27:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZxloC2aNuNh+I9TyXlePCyzE1Yd0mrW064xgIfzrgPI=; b=VSjFvyk5EHzTr9JCEAarD/i8RR
- pStiT749pVvTWtI5yupbDy3X/i1WMeK2steCBI9jtZbffBzMyiXWH3kRQU+zGYpvbySg/3N3TyNCK
- TnMoF/Pn78Po4nufhdKjBE65I9uUc8RakTzpNn5F2RBhIn/d08UolE+AhfmK2IAfoLKI=;
+ bh=96Jyxa0hgrG24aZgu2ilDmsPaDJbIFT8CvAcqFGq7ak=; b=DciJ7ZWMQ4S+3A1eP+qdCNxrny
+ 03nm2ElvfMD5LQTrFZ3V6sr/AwEeN9tcdfvTdWW5IQU7vu3YQutw6Wxbg3cV7VGmMdPuzZTe2DhEK
+ CScU/kCKn9kba9BZIllFDAS3ySk8PVDwVEh0jcpDmF887ou3idSGmEcKvNH0dfQrOcbQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ZxloC2aNuNh+I9TyXlePCyzE1Yd0mrW064xgIfzrgPI=; b=PwcOJu34tivkuzDSDppPGMiEsJ
- LYbhiNNZa47dYaLq4a0P7dsAjmrkfhpocb7eGV+aq2kMgcjOKAiN46WiZ0O8BHL99NiiC+8oEFgyG
- POhJYY+ueOKyo3X6hyu7WLt/Dhq8pEsGU5JuHgui4yHt52QzmEbSIChsxPrrEmF4+qos=;
-Received: from smtp-out2.suse.de ([195.135.220.29])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qUPxD-00015g-RI for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 11 Aug 2023 11:05:16 +0000
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 56FCE1F8A4;
- Fri, 11 Aug 2023 11:05:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1691751906; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZxloC2aNuNh+I9TyXlePCyzE1Yd0mrW064xgIfzrgPI=;
- b=mgBexqvGGXhYIvZpDO+h+RSeZSZvRuVoGRabY6qrZ6lr2J7kjuGoOz5DaNZCJe2x+bx23N
- XaNUwsPwYKOgal3UBswPCjqMGeMtig+6rkum6BjLhOLJZPrqrIH4Lt3viQPKcJszRC1+2v
- nyioYgZKrgfFqOvPZCVzDBUJMk23c3o=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1691751906;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZxloC2aNuNh+I9TyXlePCyzE1Yd0mrW064xgIfzrgPI=;
- b=V6OZVccO//IOpDNky8QrXYh0AlQjJpKzEkXYApB+dxTKiS56VtzWQPraD16FLOySq0XjGn
- yxQdXMma1ewxBjBA==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 462AB13A95;
- Fri, 11 Aug 2023 11:05:06 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id XrTPEOIV1mRqRQAAMHmgww
- (envelope-from <jack@suse.cz>); Fri, 11 Aug 2023 11:05:06 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 4581EA0797; Fri, 11 Aug 2023 13:05:05 +0200 (CEST)
-From: Jan Kara <jack@suse.cz>
-To: <linux-fsdevel@vger.kernel.org>
-Date: Fri, 11 Aug 2023 13:04:54 +0200
-Message-Id: <20230811110504.27514-23-jack@suse.cz>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20230810171429.31759-1-jack@suse.cz>
+ bh=96Jyxa0hgrG24aZgu2ilDmsPaDJbIFT8CvAcqFGq7ak=; b=Gh3XAD1ZAMnt4sDMZPPM+HTDKv
+ eKhJqH1ZEcTElTzRWnGbVGPzODdXoi3LDB4BZKBVNQBQKvAZzmG6ifm7RYQP9SNpKTwHzzKiNroG7
+ LSaBwebZ+WsjbROCJxTM0NKiMBDAREYsm2QmH2PWA987FLA/RcwAwqtUMj+9gUz9K6ek=;
+Received: from bombadil.infradead.org ([198.137.202.133])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qURFC-002Uf6-4p; Fri, 11 Aug 2023 12:27:55 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=96Jyxa0hgrG24aZgu2ilDmsPaDJbIFT8CvAcqFGq7ak=; b=Lt8QMt/qiwPklQXJKNxAAayl50
+ ejm5z3TauQQgWXDYeiy6ev7CoxuktCUjLml+tQTXB0FrmwYo9bGjhm2G8bwiVtr2qWkYfM3c8FNl1
+ cPDaz7ayPa6vktH3ev1ZeHUse0hr9sV3dSKzn62142iTuA8TTM4tDaiYAHOFhJAm7nP3aQxRbODoe
+ cl8s2GHmVFeXScu6jrXcZHGDTmN2udO8XZ0pPwfpsd5QoOiRLOiFHXD6KYR9f2MEyvA/KeT9RzHmF
+ DIvDgADu/AxqynsuMYC3hcwdLyXOsBeZQBLnrFNVOoRqDCMnS+8kcWICKZ1ml8I/4TT3bYAOcmKWy
+ N15IsxAA==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1qUREm-00Abyw-17; Fri, 11 Aug 2023 12:27:28 +0000
+Date: Fri, 11 Aug 2023 05:27:28 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Jan Kara <jack@suse.cz>
+Message-ID: <ZNYpMPM5o4q1xcIt@infradead.org>
 References: <20230810171429.31759-1-jack@suse.cz>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2242; i=jack@suse.cz;
- h=from:subject; bh=gXhkH4DHBaWcCLU4mZG3eLeDQyPPEcfvTwTt9MBb0vI=;
- b=owEBbQGS/pANAwAIAZydqgc/ZEDZAcsmYgBk1hXWp7/Zc8HF73Mv8jDbfnCCGN8lBP9y2bBtqjCQ
- 9sC1F2aJATMEAAEIAB0WIQSrWdEr1p4yirVVKBycnaoHP2RA2QUCZNYV1gAKCRCcnaoHP2RA2a5eB/
- wLf6nAu6TkEA4dk2EF3PqULDVlx3dhwNNIGvkWpa4/5lc5sbGHtZ0v0K7vK555uacVX16s9jiozhLP
- AEh3nIDG59WvvqOzW3dLBugQfYzFx3Q5gNDXFJSdbkOMoOOt14FtmCTikuXEVJJ9/GbQ9yjprSLke0
- pFyuPIZ3fEh0drhWARB3grIQp1pbZDiiJ3p18dh3Hm9CUoFdF3eN/LDfmLTnjcX5yJyDn6Ze2bYgJe
- xiQwowJYj9kUVNj8RbwxFsVhjBok/9VfYwiShXCRZSmHXUzLbk0mGbSaNv+mJg1wDwf4IgRW9XtXV6
- 8tlezwXcFPoSOOQIle3foL2UytnRD6
-X-Developer-Key: i=jack@suse.cz; a=openpgp;
- fpr=93C6099A142276A28BBE35D815BC833443038D8C
+Content-Disposition: inline
+In-Reply-To: <20230810171429.31759-1-jack@suse.cz>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Convert f2fs to use bdev_open_by_dev/path() and pass the
- handle
- around. CC: Jaegeuk Kim <jaegeuk@kernel.org> CC: Chao Yu <chao@kernel.org>
- CC: linux-f2fs-devel@lists.sourceforge.net Signed-off-by: Jan Kara
- <jack@suse.cz>
- --- fs/f2fs/f2fs.h | 1 + fs/f2fs/super.c | 17 +++++ [...] 
+ Content preview: Except for a mostly cosmetic nitpick this looks good to me:
+ Acked-by: Christoph Hellwig <hch@lst.de> That's not eactly the deep review
+ I'd like to do, but as I'm about to head out for vacation that's probably
+ as good as it gets. 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.29 listed in list.dnswl.org]
+ medium trust [198.137.202.133 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1qUPxD-00015g-RI
-Subject: [f2fs-dev] [PATCH 23/29] f2fs: Convert to bdev_open_by_dev/path()
+X-Headers-End: 1qURFC-002Uf6-4p
+Subject: Re: [f2fs-dev] [PATCH v2 0/29] block: Make blkdev_get_by_*() return
+ handle
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,83 +98,42 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Christoph Hellwig <hch@infradead.org>, Jan Kara <jack@suse.cz>,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Dave Kleikamp <shaggy@kernel.org>, jfs-discussion@lists.sourceforge.net,
+ "Darrick J. Wong" <djwong@kernel.org>, linux-nvme@lists.infradead.org,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, dm-devel@redhat.com,
+ target-devel@vger.kernel.org, linux-mtd@lists.infradead.org,
+ Jack Wang <jinpu.wang@ionos.com>, Alasdair Kergon <agk@redhat.com>,
+ drbd-dev@lists.linbit.com, linux-s390@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Christoph Hellwig <hch@infradead.org>, xen-devel@lists.xenproject.org,
+ Gao Xiang <xiang@kernel.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Kent Overstreet <kent.overstreet@gmail.com>,
+ Sven Schnelle <svens@linux.ibm.com>, linux-pm@vger.kernel.org,
+ Mike Snitzer <snitzer@kernel.org>, Joern Engel <joern@lazybastard.org>,
+ reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
+ linux-bcache@vger.kernel.org, David Sterba <dsterba@suse.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>, linux-raid@vger.kernel.org,
+ linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
+ linux-mm@kvack.org, Song Liu <song@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ Minchan Kim <minchan@kernel.org>, ocfs2-devel@oss.oracle.com,
+ Anna Schumaker <anna@kernel.org>, linux-fsdevel@vger.kernel.org,
+ "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
+ Andrew Morton <akpm@linux-foundation.org>, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Convert f2fs to use bdev_open_by_dev/path() and pass the handle around.
+Except for a mostly cosmetic nitpick this looks good to me:
 
-CC: Jaegeuk Kim <jaegeuk@kernel.org>
-CC: Chao Yu <chao@kernel.org>
-CC: linux-f2fs-devel@lists.sourceforge.net
-Signed-off-by: Jan Kara <jack@suse.cz>
----
- fs/f2fs/f2fs.h  |  1 +
- fs/f2fs/super.c | 17 +++++++++--------
- 2 files changed, 10 insertions(+), 8 deletions(-)
+Acked-by: Christoph Hellwig <hch@lst.de>
 
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index e18272ae3119..2ec6c10df636 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1234,6 +1234,7 @@ struct f2fs_bio_info {
- #define FDEV(i)				(sbi->devs[i])
- #define RDEV(i)				(raw_super->devs[i])
- struct f2fs_dev_info {
-+	struct bdev_handle *bdev_handle;
- 	struct block_device *bdev;
- 	char path[MAX_PATH_LEN];
- 	unsigned int total_segments;
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index aa1f9a3a8037..885dcbd81859 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1561,7 +1561,7 @@ static void destroy_device_list(struct f2fs_sb_info *sbi)
- 	int i;
- 
- 	for (i = 0; i < sbi->s_ndevs; i++) {
--		blkdev_put(FDEV(i).bdev, sbi->sb);
-+		bdev_release(FDEV(i).bdev_handle);
- #ifdef CONFIG_BLK_DEV_ZONED
- 		kvfree(FDEV(i).blkz_seq);
- #endif
-@@ -4196,9 +4196,9 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
- 
- 		if (max_devices == 1) {
- 			/* Single zoned block device mount */
--			FDEV(0).bdev =
--				blkdev_get_by_dev(sbi->sb->s_bdev->bd_dev, mode,
--						  sbi->sb, NULL);
-+			FDEV(0).bdev_handle = bdev_open_by_dev(
-+					sbi->sb->s_bdev->bd_dev, mode, sbi->sb,
-+					NULL);
- 		} else {
- 			/* Multi-device mount */
- 			memcpy(FDEV(i).path, RDEV(i).path, MAX_PATH_LEN);
-@@ -4216,12 +4216,13 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
- 					(FDEV(i).total_segments <<
- 					sbi->log_blocks_per_seg) - 1;
- 			}
--			FDEV(i).bdev = blkdev_get_by_path(FDEV(i).path, mode,
--							  sbi->sb, NULL);
-+			FDEV(i).bdev_handle = bdev_open_by_path(FDEV(i).path,
-+					mode, sbi->sb, NULL);
- 		}
--		if (IS_ERR(FDEV(i).bdev))
--			return PTR_ERR(FDEV(i).bdev);
-+		if (IS_ERR(FDEV(i).bdev_handle))
-+			return PTR_ERR(FDEV(i).bdev_handle);
- 
-+		FDEV(i).bdev = FDEV(i).bdev_handle->bdev;
- 		/* to release errored devices */
- 		sbi->s_ndevs = i + 1;
- 
--- 
-2.35.3
-
+That's not eactly the deep review I'd like to do, but as I'm about to
+head out for vacation that's probably as good as it gets.
 
 
 _______________________________________________
