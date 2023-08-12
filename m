@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B942779CAA
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 12 Aug 2023 04:42:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1CA477A424
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 13 Aug 2023 01:07:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qUeZi-0001kq-VX;
-	Sat, 12 Aug 2023 02:42:00 +0000
+	id 1qUxhU-0006kl-Ro;
+	Sat, 12 Aug 2023 23:07:17 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1qUeZd-0001kg-Bo
+ (envelope-from <tytso@mit.edu>) id 1qUxhT-0006kf-Ii
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 12 Aug 2023 02:41:54 +0000
+ Sat, 12 Aug 2023 23:07:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8r5rfkI/f0JWxTa0P0wyT+P3RB7GX5WL1neTUGTiUmY=; b=TqywrnYgfhE7drmUUpokfMTF2K
- ety28lBpOIzof/SPIkmWviiafNxRzYbD5kNeOKDt0jtsT9KnBRhyymPCTbCGgeJvPgwTzBhSVCD/t
- KZkjGKyrk/eWOQRxn3vJEji87gl88mmMN2hUqKqxlcO/WQSDqghMxA6hqLnqW/N93xWE=;
+ bh=9bn+ohKg+ghUW2txD551p5T3wS+9+MovG54qvNqbRtM=; b=kT6TBnWslU7vVRNiPn1vMYv6FZ
+ vWtN98NDnqN6eWmQiheYipul1uNmrBYdp2OtTAw+I19tILkpHDSLtaBiOJXaVVkyQfhDd4oKKclTt
+ geaDN6vytvNt+4Eve+t+9pk72SbiHOMt8mHJ3vjL6KPBPx0DWx2e+kl5n4G0bzD2XqAs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,56 +31,56 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8r5rfkI/f0JWxTa0P0wyT+P3RB7GX5WL1neTUGTiUmY=; b=b7TVML+D/9r1CPPiIvdt1plbCR
- TZ8+8LgjyW8Gx1YHEC+Vh6ZvqX0R8w5SshC5oVLK64KQtiBaHbZxCEx64Xu1yl38lTYeba/RWqRz+
- JsYHk56LfT1YJhYGeggb/FeYFO1bdSjmXMqSN76TNRu8kxCPWWn1tgOWGdbhBBnRGhWw=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=9bn+ohKg+ghUW2txD551p5T3wS+9+MovG54qvNqbRtM=; b=OkMn9fbZnminiNbMQ6MkaSx6lI
+ +Hmpay20qSV9QnLnNEZCEiB6hdZcyB7mM9Zj0q4k7AG8DrczyV4RiEFP9P0y9U2ANYItB2vpteP5j
+ Dd+aLLd1+Bbvu7y5NyGPNEB+CXiaiHXDOmHrDPbYAafZiw5I5LHA0pUJQ3tUzUMl+Id8=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qUeZd-0031YI-Hr for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 12 Aug 2023 02:41:54 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id EFCB4611E9;
- Sat, 12 Aug 2023 02:41:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C349C433C8;
- Sat, 12 Aug 2023 02:41:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1691808107;
- bh=Qf0UrKAKMrDNExp3AQ1BgZvKh1gbqbBiuVEpYRftFYQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=M6JQnBlN6gPmRaJcxSle3PgLqulDOpl6MrlQtLwU2djzM9v6MFqzrfW6iIL/vNYkq
- gyUqetOQzUya+qHJC1Iib0L83q+CcCH1k5F0DSldK6nDNEtrIm27bd0u+0BmbqdIGO
- kqvHWyLhLuGQhhLVgSA4mHpu4ROacoNAnqfDXILsLNG1hjjPOpvUSvIDMNpGRTFuD7
- yDNPaTg+KF2/Mp7m0iQuw7WQo00MtYitS4Dya2TPmbQz9WA/y2cVFyaMaJKoaWLdU5
- mf8dAbv724oV7pG6f+83UyqYnnPVW5Y+lNKTuUqt7yJwDVqxZMZ94P9itFMgTBbM3h
- Ru3S/R+5TgO/A==
-Date: Fri, 11 Aug 2023 19:41:45 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Gabriel Krisman Bertazi <krisman@suse.de>
-Message-ID: <20230812024145.GD971@sol.localdomain>
+ id 1qUxhS-003own-TJ for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 12 Aug 2023 23:07:15 +0000
+Received: from cwcc.thunk.org (pool-173-48-82-92.bstnma.fios.verizon.net
+ [173.48.82.92]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 37CN6mVO014307
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Sat, 12 Aug 2023 19:06:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
+ t=1691881612; bh=9bn+ohKg+ghUW2txD551p5T3wS+9+MovG54qvNqbRtM=;
+ h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
+ b=mvguaUSTYs57TQv3jE1NcPKPtmbX+5P1FJK3x4qCT7X7+bxjdR9Da7i5n+Wdwgk5p
+ HpWEh4oW7R+ksSyDy2MW1+MdMprUA+1ehBahLGxtHI0tPTXxx0MMyU7N/cjN5Z0A//
+ yDGDWbI6O4TXx++t1HdBSgudrdO3uxUME72iHJ4jasVdEhIt3X4MpaY4aJRILqC3xz
+ cXOYr7kDi2j76PJzGU5v7aSZ6J0OkWPbcuqxJHFfsfRSLb4X8LhfuuWBz8HDJjt8BC
+ nPvbXt4W4hDMoNjHJ5DgNDZIndXKWXXSVRPp2ihQmnHlSZNeoeUi73hQTpExwxBDaQ
+ QEnWpIsLP0MDw==
+Received: by cwcc.thunk.org (Postfix, from userid 15806)
+ id 8E17015C04FF; Sat, 12 Aug 2023 19:06:47 -0400 (EDT)
+Date: Sat, 12 Aug 2023 19:06:47 -0400
+From: "Theodore Ts'o" <tytso@mit.edu>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <20230812230647.GB2247938@mit.edu>
 References: <20230812004146.30980-1-krisman@suse.de>
- <20230812004146.30980-7-krisman@suse.de>
+ <20230812004146.30980-2-krisman@suse.de>
+ <20230812015915.GA971@sol.localdomain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230812004146.30980-7-krisman@suse.de>
-X-Spam-Score: -5.9 (-----)
+In-Reply-To: <20230812015915.GA971@sol.localdomain>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Aug 11, 2023 at 08:41:42PM -0400, Gabriel Krisman
- Bertazi wrote: > + /* > + * Filesystems will call into d_revalidate without
- setting > + * LOOKUP_ flags even for file creation (see lookup_one [...] 
- Content analysis details:   (-5.9 points, 6.0 required)
+ Content preview:  On Fri, Aug 11, 2023 at 06:59:15PM -0700, Eric Biggers wrote:
+ > > To be honest I've always been confused about why the ->s_encoding check
+ is > there. It looks like Ted added it in 6456ca6520ab ("ext4: [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [18.9.28.11 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -90,12 +90,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- 0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal
- information
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qUeZd-0031YI-Hr
-Subject: Re: [f2fs-dev] [PATCH v5 06/10] libfs: Validate negative dentries
- in case-insensitive directories
+X-Headers-End: 1qUxhS-003own-TJ
+Subject: Re: [f2fs-dev] [PATCH v5 01/10] fs: Expose helper to check if a
+ directory needs casefolding
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,72 +104,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: brauner@kernel.org, tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org, Gabriel Krisman Bertazi <krisman@collabora.com>
+Cc: Gabriel Krisman Bertazi <krisman@suse.de>, brauner@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, viro@zeniv.linux.org.uk,
+ linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Aug 11, 2023 at 08:41:42PM -0400, Gabriel Krisman Bertazi wrote:
-> +	/*
-> +	 * Filesystems will call into d_revalidate without setting
-> +	 * LOOKUP_ flags even for file creation (see lookup_one*
-> +	 * variants).  Reject negative dentries in this case, since we
-> +	 * can't know for sure it won't be used for creation.
-> +	 */
-> +	if (!flags)
-> +		return 0;
-> +
-> +	/*
-> +	 * If the lookup is for creation, then a negative dentry can
-> +	 * only be reused if it's a case-sensitive match, not just a
-> +	 * case-insensitive one.  This is needed to make the new file be
-> +	 * created with the name the user specified, preserving case.
-> +	 */
-> +	if (flags & (LOOKUP_CREATE | LOOKUP_RENAME_TARGET)) {
-> +		/*
-> +		 * ->d_name won't change from under us in the creation
-> +		 * path only, since d_revalidate during creation and
-> +		 * renames is always called with the parent inode
-> +		 * locked.  It isn't the case for all lookup callpaths,
-> +		 * so ->d_name must not be touched outside
-> +		 * (LOOKUP_CREATE|LOOKUP_RENAME_TARGET) context.
-> +		 */
-> +		if (dentry->d_name.len != name->len ||
-> +		    memcmp(dentry->d_name.name, name->name, name->len))
-> +			return 0;
-> +	}
+On Fri, Aug 11, 2023 at 06:59:15PM -0700, Eric Biggers wrote:
+> 
+> To be honest I've always been confused about why the ->s_encoding check is
+> there.  It looks like Ted added it in 6456ca6520ab ("ext4: fix kernel oops
+> caused by spurious casefold flag") to address a fuzzing report for a filesystem
+> that had a casefolded directory but didn't have the casefold feature flag set.
+> It seems like an unnecessarily complex fix, though.  The filesystem should just
+> reject the inode earlier, in __ext4_iget().  And likewise for f2fs.  Then no
+> other code has to worry about this problem.
 
-This is still really confusing to me.  Can you consider the below?  The code is
-the same except for the reordering, but the explanation is reworked to be much
-clearer (IMO).  Anything I am misunderstanding?
+It's not enough to check it in ext4_iget, since the casefold flag can
+get set *after* the inode has been fetched, but before you try to use
+it.  This can happen because syzbot has opened the block device for
+writing, and edits the superblock while it is mounted.
 
-	/*
-	 * If the lookup is for creation, then a negative dentry can only be
-	 * reused if it's a case-sensitive match, not just a case-insensitive
-	 * one.  This is needed to make the new file be created with the name
-	 * the user specified, preserving case.
-	 *
-	 * LOOKUP_CREATE or LOOKUP_RENAME_TARGET cover most creations.  In these
-	 * cases, ->d_name is stable and can be compared to 'name' without
-	 * taking ->d_lock because the caller holds dir->i_rwsem for write.
-	 * (This is because the directory lock blocks the dentry from being
-	 * concurrently instantiated, and negative dentries are never moved.)
-	 *
-	 * All other creations actually use flags==0.  These come from the edge
-	 * case of filesystems calling functions like lookup_one() that do a
-	 * lookup without setting the lookup flags at all.  Such lookups might
-	 * or might not be for creation, and if not don't guarantee stable
-	 * ->d_name.  Therefore, invalidate all negative dentries when flags==0.
-	 */
-	if (flags & (LOOKUP_CREATE | LOOKUP_RENAME_TARGET)) {
-		if (dentry->d_name.len != name->len ||
-		    memcmp(dentry->d_name.name, name->name, name->len))
-			return 0;
-	}
-	if (!flags)
-		return 0;
+One could say that this is an insane threat model, but the syzbot team
+thinks that this can be used to break out of a kernel lockdown after a
+UEFI secure boot.  Which is fine, except I don't think I've been able
+to get any company (including Google) to pay for headcount to fix
+problems like this, and the unremitting stream of these sorts of
+syzbot reports have already caused one major file system developer to
+burn out and step down.
+
+So problems like this get fixed on my own time, and when I have some
+free time.  And if we "simplify" the code, it will inevitably cause
+more syzbot reports, which I will then have to ignore, and the syzbot
+team will write more "kernel security disaster" slide deck
+presentations to senior VP's, although I'll note this has never
+resulted in my getting any additional SWE's to help me fix the
+problem...
+
+> So just __ext4_iget() needs to be fixed.  I think we should consider doing that
+> before further entrenching all the extra ->s_encoding checks.
+
+If we can get an upstream kernel consensus that syzbot reports caused
+by writing to a mounted file system aren't important, and we can
+publish this somewhere where hopefully the syzbot team will pay
+attention to it, sure...
+
+
+						- Ted
 
 
 _______________________________________________
