@@ -2,114 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A7C877C113
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Aug 2023 21:53:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B84A077C195
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 14 Aug 2023 22:37:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qVdcd-0006xg-TP;
-	Mon, 14 Aug 2023 19:53:04 +0000
+	id 1qVeJv-00062Y-TE;
+	Mon, 14 Aug 2023 20:37:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <krisman@suse.de>) id 1qVdcc-0006xa-Nq
+ (envelope-from <jaegeuk@kernel.org>) id 1qVeJu-00062S-6Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 14 Aug 2023 19:53:03 +0000
+ Mon, 14 Aug 2023 20:37:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Fnp8DJ6XQ4hPYRcJy/nsfcfTRDpO230iMwFulsuB2qI=; b=k2MQdidnuF3GNo1pFeIU6WsJwu
- iJJW77e4S/mBqn1IeKlGk+UBumrVMxI+91TXHppBo+/CNVA323dAGoSzQmFKZSL9lxuRQGH59SgJB
- KaL5cous/M7zJS+4cFRxePoCnpTgczyVquD3JYVww++XWZ3eLswHuMTKxY3d4yyZAcUA=;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=3KaM95H8lxdcFwHlB8zFOUmfx9269nBnNCgvq34uksU=; b=BdJPSCN5CoUoRAHd3HVHCarvFf
+ MlzORGlKm/uUhZojg5CndPzMvjoFteRBLmCrwTpOBcP4YshuAh//WAT4Sqeod1hY13A6VEmBYu+HL
+ SBcA4FjmO/w4m/d2ChNmeh4Bv7P6tjyrB9jX3VhGR8LonifZDQVoF5wMhUUFOXN5p/7c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Fnp8DJ6XQ4hPYRcJy/nsfcfTRDpO230iMwFulsuB2qI=; b=RW4sXiAEqZK57cpZGyKNdFV0YF
- XVUh5OoKrXZncYf0qwwRyUX5PB9BfkXZzUkdAF/qJCrQmdXUQvjW5OkXKyJRMGKNA09Rpx0b9TNnu
- rvImR3SskKxdgVv4TmzwNbIGZpX1RAR3dyinRDOQuJqNumX0MCfmlHKQLJ+IQUdwxJPY=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
+ bh=3KaM95H8lxdcFwHlB8zFOUmfx9269nBnNCgvq34uksU=; b=euDurPuYgkYxVoX/a8vk6UaAJf
+ BWyMebGLS2mJzuk2WkIV3StNFg+8JxIVR4J60CeiXtbWniWJ3KDWYuOr+MwAKe9VVR6i/abm0QMnX
+ l06PiBNMI907+KgQrkmcXC1XybJ8fQcmMvmQAyFQdN4EQGrNum5P/qwFRE/8Brp6NYqw=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qVdcd-0006HP-1I for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 14 Aug 2023 19:53:03 +0000
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qVeJs-0007EZ-N7 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 14 Aug 2023 20:37:46 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id C5E1A21863;
- Mon, 14 Aug 2023 19:52:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1692042776; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Fnp8DJ6XQ4hPYRcJy/nsfcfTRDpO230iMwFulsuB2qI=;
- b=wByIaV0BL2fwDFE3J5nsBdtkQzW7TreNuCuEN9lhHwgEgoYnFC1XQ93HdN5G8rOWbFZMhT
- tYxwmAMaIzfjoeFuqurMetjJH488jmFcc+609XpKGN0/2SoF7f4o87MxQ9u9dgYsojQf8R
- gfiL8hOR5f58OntElmGyYzTSop523WI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1692042776;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Fnp8DJ6XQ4hPYRcJy/nsfcfTRDpO230iMwFulsuB2qI=;
- b=cBEhiBwHrNtCo9a8pCW2gguVJaQI0PcZNTAmf9QC7ki0cTi3TSsJQD9u5PuWwtOIa1RfJm
- wFZ7kc4vL+LxF4CA==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 766A6138E2;
- Mon, 14 Aug 2023 19:52:56 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id LGLCFBiG2mSGCAAAMHmgww
- (envelope-from <krisman@suse.de>); Mon, 14 Aug 2023 19:52:56 +0000
-From: Gabriel Krisman Bertazi <krisman@suse.de>
-To: Eric Biggers <ebiggers@kernel.org>
-In-Reply-To: <20230814192406.GD1171@sol.localdomain> (Eric Biggers's message
- of "Mon, 14 Aug 2023 12:24:06 -0700")
-Organization: SUSE
-References: <20230814182903.37267-1-ebiggers@kernel.org>
- <20230814182903.37267-2-ebiggers@kernel.org> <87jztx5tle.fsf@suse.de>
- <20230814192406.GD1171@sol.localdomain>
-Date: Mon, 14 Aug 2023 15:52:54 -0400
-Message-ID: <877cpx5rl5.fsf@suse.de>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1D94261B8C;
+ Mon, 14 Aug 2023 20:37:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32D9AC433C8;
+ Mon, 14 Aug 2023 20:37:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1692045458;
+ bh=p/3cegYidBuPQOysI3EfoMODZv58DITeMGmAbN5Lraw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=M9Gj4ubRIm3PLxL0kOHAMCQbhl5UCr73qpln3KKMYGI8BLRT42nJyC5CTPpHF4ndY
+ YBIPHCeJjmV2NH0Q3B/m/UnVyIoottcNuILf10IYEJG4+zUfkHphzakSnVN8VdfUlM
+ iSXTFMuoXVShf2rz3Vq8J2jZczWE3g/r4n9A5klaL+G5rDuLAEdJ5NffG20axDDyMD
+ PUG67WZiX27Od1lPassZvtcavO5pQK9uxsL6hDMkQP/NyY8A6s6Wc71FT4hKfs2w34
+ NjUqxAtygX/kWlTIAL5iqO4tdReb4cBWgwprtGdqwkylzH6CZZR3DhkE1kmALM2djG
+ TaDUDVV2xUmHg==
+Date: Mon, 14 Aug 2023 13:37:36 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Kajetan Puchalski <kajetan.puchalski@arm.com>
+Message-ID: <ZNqQkDm0YschY+WI@google.com>
+References: <20230306122549.236561-1-douglas.raillard@arm.com>
+ <ZNotAI1T+hKfzJWV@e126311.manchester.arm.com>
+ <ZNo8hoR2V3Zo14+l@e126311.manchester.arm.com>
 MIME-Version: 1.0
-X-Spam-Score: -2.5 (--)
+Content-Disposition: inline
+In-Reply-To: <ZNo8hoR2V3Zo14+l@e126311.manchester.arm.com>
+X-Spam-Score: -5.9 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Eric Biggers <ebiggers@kernel.org> writes: > On Mon, Aug 14, 
- 2023 at 03:09:33PM -0400, Gabriel Krisman Bertazi wrote: >> Eric Biggers
- <ebiggers@kernel.org> writes: >> >> > From: Eric Biggers <ebiggers@google.com>
- >> > >> > It is invalid for th [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On 08/14, Kajetan Puchalski wrote: > On Mon, Aug 14, 2023
+ at 02:32:53PM +0100, Kajetan Puchalski wrote: > > On Mon, Mar 06, 2023 at
+ 12:25:49PM +0000, Douglas RAILLARD wrote: > > > From: Douglas Railla [...]
+ Content analysis details:   (-5.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 WEIRD_PORT             URI: Uses non-standard port number for HTTP
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1qVdcd-0006HP-1I
-Subject: Re: [f2fs-dev] [PATCH 1/3] ext4: reject casefold inode flag without
- casefold feature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qVeJs-0007EZ-N7
+Subject: Re: [f2fs-dev] [PATCH] f2fs: Fix f2fs_truncate_partial_nodes ftrace
+ event
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,57 +106,81 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net
+Cc: "open list:TRACING" <linux-kernel@vger.kernel.org>,
+ Steven Rostedt <rostedt@goodmis.org>,
+ "open list:F2FS FILE SYSTEM" <linux-f2fs-devel@lists.sourceforge.net>,
+ jstultz@google.com, Masami Hiramatsu <mhiramat@kernel.org>, qyousef@google.com,
+ Douglas RAILLARD <douglas.raillard@arm.com>, lukasz.luba@arm.com,
+ "open list:TRACING" <linux-trace-kernel@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Eric Biggers <ebiggers@kernel.org> writes:
+On 08/14, Kajetan Puchalski wrote:
+> On Mon, Aug 14, 2023 at 02:32:53PM +0100, Kajetan Puchalski wrote:
+> > On Mon, Mar 06, 2023 at 12:25:49PM +0000, Douglas RAILLARD wrote:
+> > > From: Douglas Raillard <douglas.raillard@arm.com>
+> > > 
+> > > Fix the nid_t field so that its size is correctly reported in the text
+> > > format embedded in trace.dat files. As it stands, it is reported as
+> > > being of size 4:
+> > > 
+> > >         field:nid_t nid[3];     offset:24;      size:4; signed:0;
+> > > 
+> > > Instead of 12:
+> > > 
+> > >         field:nid_t nid[3];     offset:24;      size:12;        signed:0;
+> > > 
+> > > This also fixes the reported offset of subsequent fields so that they
+> > > match with the actual struct layout.
+> > > 
+> > > 
+> > > Signed-off-by: Douglas Raillard <douglas.raillard@arm.com>
+> > > ---
+> > >  include/trace/events/f2fs.h | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > 
+> > > diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
+> > > index 31d994e6b4ca..8d053838d6cf 100644
+> > > --- a/include/trace/events/f2fs.h
+> > > +++ b/include/trace/events/f2fs.h
+> > > @@ -512,7 +512,7 @@ TRACE_EVENT(f2fs_truncate_partial_nodes,
+> > >  	TP_STRUCT__entry(
+> > >  		__field(dev_t,	dev)
+> > >  		__field(ino_t,	ino)
+> > > -		__field(nid_t,	nid[3])
+> > > +		__array(nid_t,	nid, 3)
+> > >  		__field(int,	depth)
+> > >  		__field(int,	err)
+> > >  	),
+> > > -- 
+> > > 2.25.1
+> > 
+> > Hi,
+> > 
+> > Just wanted to flag that I noticed this breaks Perfetto tracing on
+> > Android, at least as of Android 13. I'm not sure if it's been fixed in newer
+> > versions. Looks like the version of Perfetto in Android 13 is expecting
+> > the previous (ie broken) field format to be there and its entire ftrace
+> > collector fails as a result:
+> > 
+> > E/perfetto( 3532): ranslation_table.cc:133 Failed to infer ftrace field type for "f2fs_truncate_partial_nodes.nid" (type:"nid_t nid[3]" size:12 signed:0) (errno: 2, No such file or directory)
+> > I/perfetto( 3640):            probes.cc:65 Hard resetting ftrace state.
+> > 
+> > For my own purposes I just reverted these two:
+> > * 0b04d4c0542e8573a837b1d81b94209e48723b25 (f2fs: Fix f2fs_truncate_partial_nodes ftrace event)
+> > * f82e7ca019dfad3b006fd3b772f7ac569672db55 (tracing: Error if a trace event has an array for a __field()
+> > 
+> > and now it works fine so not the biggest deal but this should probably
+> > be addressed, I imagine more likely on the Perfetto side.
+> 
+> Added context here, it is just caused by the parser implementation in Perfetto
+> being pretty lacking:
+> 
+> https://github.com/google/perfetto/blob/c36c70c1d4a72eafdd257f7a63e55f49fbc3df3d/src/traced/probes/ftrace/proto_translation_table.cc#L255
 
-> On Mon, Aug 14, 2023 at 03:09:33PM -0400, Gabriel Krisman Bertazi wrote:
->> Eric Biggers <ebiggers@kernel.org> writes:
->> 
->> > From: Eric Biggers <ebiggers@google.com>
->> >
->> > It is invalid for the casefold inode flag to be set without the casefold
->> > superblock feature flag also being set.  e2fsck already considers this
->> > case to be invalid and handles it by offering to clear the casefold flag
->> > on the inode.  __ext4_iget() also already considered this to be invalid,
->> > sort of, but it only got so far as logging an error message; it didn't
->> > actually reject the inode.  Make it reject the inode so that other code
->> > doesn't have to handle this case.  This matches what f2fs does.
->> >
->> > Note: we could check 's_encoding != NULL' instead of
->> > ext4_has_feature_casefold().  This would make the check robust against
->> > the casefold feature being enabled by userspace writing to the page
->> > cache of the mounted block device.  However, it's unsolvable in general
->> > for filesystems to be robust against concurrent writes to the page cache
->> > of the mounted block device.  Though this very particular scenario
->> > involving the casefold feature is solvable, we should not pretend that
->> > we can support this model, so let's just check the casefold feature.
->> > tune2fs already forbids enabling casefold on a mounted filesystem.
->> 
->> just because we can't fix the general issue for the entire filesystem
->> doesn't mean this case *must not* ever be addressed. What is the
->> advantage of making the code less robust against the syzbot code?  Just
->> check sb->s_encoding and be safe later knowing the unicode map is
->> available.
->> 
->
-> Just to make sure, it sounds like you agree that the late checks of ->s_encoding
-> are not needed and only __ext4_iget() should handle it, right?  That simplifies
-> the code so it is obviously beneficial if we can do it.
-
-Yes.  After we get the inode from __ext4_iget, I think it doesn't matter
-if the user went behind our back straight to the block device and
-changed the superblock to remove the feature bit. If we already loaded
-->s_encoding, it won't be unloaded, so only checking at ext4_iget should
-be enough, as far as I can tell.
-
-
--- 
-Gabriel Krisman Bertazi
+Hi, I believe this was fixed by
+https://android-review.git.corp.google.com/c/platform/external/perfetto/+/2587146
 
 
 _______________________________________________
