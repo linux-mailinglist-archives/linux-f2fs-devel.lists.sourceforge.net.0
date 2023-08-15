@@ -2,90 +2,78 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4344A77C68F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Aug 2023 05:59:49 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DAF277C96F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 15 Aug 2023 10:37:28 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qVlDX-0002Dk-JL;
-	Tue, 15 Aug 2023 03:59:39 +0000
+	id 1qVpYG-00088T-8e;
+	Tue, 15 Aug 2023 08:37:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tytso@mit.edu>) id 1qVlDW-0002De-Jx
+ (envelope-from <muchun.song@linux.dev>) id 1qVpYE-00088N-6S
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Aug 2023 03:59:38 +0000
+ Tue, 15 Aug 2023 08:37:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=To:References:Message-Id:Content-Transfer-Encoding:
+ Cc:Date:In-Reply-To:From:Subject:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hQVHu1e68/W/Zp/E5V+JbF6iz8mNZvWi1CMyPSC8un8=; b=FPXYQJcdHxo0gLJh7TGavyumQK
- FZMit65qgXkODrGsb7zzkwRn2Aoz6diDFaKvoS4LNpkPRTYzxtgynfdW6UWwODL40PYaCgWdxC1ut
- gDiFmib8VvDTmYDa50Mt8BtaCkSy9TVZ0JHykKlY81PaJVMrHYUGoazJAT2B2HO7CxvI=;
+ bh=uBmn5bY96EnmwKJFlv+WltFrhGvpjIbZEKIiYirKvRY=; b=Oc6YNpTJW4LXrNeYCqLGh1F76I
+ njHZaIYH55cSyY14oBmwt1cXYpjUCUXkrKT4BFfQdOlH6GYbdrPWkM5WTT2qOdMwTM6tbJd9VfwZJ
+ 9wlSKTZkSPqbxYBE3Sn/WOOKqKX4Usat/aWy4sSTYiIkL2VN9V10zHpmQ9gE2Sew+2xo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:In-Reply-To:
+ From:Subject:MIME-Version:Content-Type:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hQVHu1e68/W/Zp/E5V+JbF6iz8mNZvWi1CMyPSC8un8=; b=h0crmcTs3IBP5A+5N8SiUy78KD
- MbXaeFfDSnRBLyPdiqA3N0mCZsRODHlth6iXt4MC4wgrzwnWqp4x9CKboEBQGjxgTxGui3rN3qZVZ
- nNWG4t9XgL5QSDYT3mXfPXvErE1E8qIArFYfQLXDGJDo3i7b+ZCFz/ltukLGSslurSnE=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=uBmn5bY96EnmwKJFlv+WltFrhGvpjIbZEKIiYirKvRY=; b=TRhts+VXVfFp/mDRoHNpUhFG7l
+ AjvgK3vwij9vz1/3WeaBJ5lEY0Zwcs+vPTERuGF8rx/wx0EX3PoCA4t05H7/KfUNHtqHbuiRjRjx4
+ 94QyGn8qHYH0lSdC61xmarz+t+HPCOYcd2YX76wB7+g/nI6uAkm7bn5xxWkbZWJFQA/U=;
+Received: from out-10.mta0.migadu.com ([91.218.175.10])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qVlDU-0060fI-ES for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 15 Aug 2023 03:59:38 +0000
-Received: from cwcc.thunk.org (pool-173-48-82-92.bstnma.fios.verizon.net
- [173.48.82.92]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 37F3xD8x030093
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 14 Aug 2023 23:59:14 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
- t=1692071955; bh=hQVHu1e68/W/Zp/E5V+JbF6iz8mNZvWi1CMyPSC8un8=;
- h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
- b=JGdFKfBtj/0FPkQ8fcQZkAoAmznTuYUafjbPPhPDtOwSaZhM/HVt7g3lKwWp6k299
- n53lV0FP35STcKQeOvowRopQwwcvFXuw9xFJgEvWKM8KkiB8ITg/r1RQmBiykwI1at
- rPswgebxZC6iUzx3za8Ug/1kfEHs437bisVD2p8Sn0qXs/83TVt7h4vaNvrNmrjqf5
- rRfudXDaBeZi9jyt+7G1YzHZge/dhnmMX/1pR/MEBXqdv9/gZ+1NRVVAMTGUxG6+Nx
- mD25jQmABx8YqJxtozabdjRRuRPpX7y06IJ6h4BGaIETIow1K6ZzsPGGY84yvtcZi+
- Makzq02cG2kPg==
-Received: by cwcc.thunk.org (Postfix, from userid 15806)
- id 221D515C0292; Mon, 14 Aug 2023 23:59:13 -0400 (EDT)
-Date: Mon, 14 Aug 2023 23:59:13 -0400
-From: "Theodore Ts'o" <tytso@mit.edu>
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20230815035913.GF2247938@mit.edu>
-References: <20230812004146.30980-1-krisman@suse.de>
- <20230812004146.30980-2-krisman@suse.de>
- <20230812015915.GA971@sol.localdomain>
- <20230812230647.GB2247938@mit.edu>
- <ZNhJSlaLEExcoIiT@casper.infradead.org>
- <20230813043022.GA3545@sol.localdomain>
- <20230814113852.GD2247938@mit.edu>
- <20230814172244.GA1171@sol.localdomain>
+ id 1qVpY8-0007kw-VD for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 15 Aug 2023 08:37:18 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1692088626;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uBmn5bY96EnmwKJFlv+WltFrhGvpjIbZEKIiYirKvRY=;
+ b=vz0KHcPQmyiJWfmlN0KqRtShPV8OO94S7Ve+8NAyKaJzlfD3l3Gwdcs50vzwkyJwFeNk42
+ wWmdUe83i5yu+zc+P73iwMyGZC6f36VMufdeZyZpMS2xcjecgpOeJWBucmjek3/RmzHbqM
+ Esg+z/IvqlGN9dYsqiRnMi0+1ICkj/k=
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230814172244.GA1171@sol.localdomain>
-X-Spam-Score: -2.5 (--)
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Muchun Song <muchun.song@linux.dev>
+In-Reply-To: <20230807110936.21819-2-zhengqi.arch@bytedance.com>
+Date: Tue, 15 Aug 2023 16:36:31 +0800
+Message-Id: <FC3AE898-443D-4ACB-BCB4-0F8F2F48CDD0@linux.dev>
+References: <20230807110936.21819-1-zhengqi.arch@bytedance.com>
+ <20230807110936.21819-2-zhengqi.arch@bytedance.com>
+To: Qi Zheng <zhengqi.arch@bytedance.com>
+X-Migadu-Flow: FLOW_OUT
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Aug 14, 2023 at 10:22:44AM -0700, Eric Biggers wrote:
- > > Keep in mind, the syzkaller team isn't asking for these pointless "fixes"
- > either. They'd very much prefer 1 fix to 1000 fixes. I thi [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  > On Aug 7, 2023, at 19:08,
+ Qi Zheng <zhengqi.arch@bytedance.com>
+ wrote: > > The following functions are only used inside the mm subsystem,
+ so it's > better to move their declarations to the mm/intern [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [18.9.28.11 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -95,9 +83,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qVlDU-0060fI-ES
-Subject: Re: [f2fs-dev] [PATCH v5 01/10] fs: Expose helper to check if a
- directory needs casefolding
+X-Headers-End: 1qVpY8-0007kw-VD
+Subject: Re: [f2fs-dev] [PATCH v4 01/48] mm: move some shrinker-related
+ function declarations to mm/internal.h
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,60 +97,83 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Gabriel Krisman Bertazi <krisman@suse.de>, brauner@kernel.org,
- Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
- viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
- linux-ext4@vger.kernel.org
+Cc: kvm@vger.kernel.org, djwong@kernel.org,
+ Roman Gushchin <roman.gushchin@linux.dev>, david@fromorbit.com,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Linux-MM <linux-mm@kvack.org>, dm-devel@redhat.com,
+ linux-mtd@lists.infradead.org, cel@kernel.org, x86@kernel.org,
+ steven.price@arm.com, cluster-devel@redhat.com, simon.horman@corigine.com,
+ xen-devel@lists.xenproject.org, linux-ext4@vger.kernel.org,
+ "Paul E. McKenney" <paulmck@kernel.org>, linux-arm-msm@vger.kernel.org,
+ linux-nfs@vger.kernel.org, rcu@vger.kernel.org, linux-bcache@vger.kernel.org,
+ dlemoal@kernel.org, yujie.liu@intel.com, Vlastimil Babka <vbabka@suse.cz>,
+ linux-raid@vger.kernel.org, Christian Brauner <brauner@kernel.org>,
+ tytso@mit.edu, Greg KH <gregkh@linuxfoundation.org>,
+ LKML <linux-kernel@vger.kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Sergey Senozhatsky <senozhatsky@chromium.org>,
+ netdev@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, linux-erofs@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org, tkhai@ya.ru
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Aug 14, 2023 at 10:22:44AM -0700, Eric Biggers wrote:
+
+
+> On Aug 7, 2023, at 19:08, Qi Zheng <zhengqi.arch@bytedance.com> wrote:
 > 
-> Keep in mind, the syzkaller team isn't asking for these pointless "fixes"
-> either.  They'd very much prefer 1 fix to 1000 fixes.  I think some confusion
-> might be arising from the very different types of problems that syzkaller finds.
-> Sometimes 1 syzkaller report == 1 bug == 1 high-priority "must fix" bug == 1
-> vulnerability == 1 fix needed.  But in general syzkaller is just letting kernel
-> developers know about a problem, and it is up to them to decide what to do about
-> it.  In this case there is one underlying issue that needs to be fixed, and the
-> individual syzkaller reports that result from that issue are not important.
+> The following functions are only used inside the mm subsystem, so it's
+> better to move their declarations to the mm/internal.h file.
+> 
+> 1. shrinker_debugfs_add()
+> 2. shrinker_debugfs_detach()
+> 3. shrinker_debugfs_remove()
+> 
+> Signed-off-by: Qi Zheng <zhengqi.arch@bytedance.com>
 
-... except that the Syzkaller folks have created slide decks talking
-about "Linux kernel security disaster", blaming the entire community,
-where they quote the number unresolved syzkaller reports, without the
-kind of nuance that you are referring to.
+Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 
-There is also not a great way of categorizing syzkaller reports as
-"requires maliciously fuzzed file system image", or "writing to
-mounted file system" --- either manually, or (ideally) automatically,
-since the syzbot test generators knows what they are doing.
+One nit bellow.
 
-And finally, the reality is even if someone where to fix the "one
-underlying issue", the reality is that it will be ten years or so
-before said fixed can be rolled out, since it requires changes in
-userspace utilities, as well as rolled out kernels, and enterprise
-distros are around for a decade; even community distros need to be
-supported for at least 3-5 years.
+[...]
 
-Finally, it's not just "one underlying issue"; there are also
-"maliciously fuzzed file systems", and working around those syzbot
-reports can be quite painful, especially the ones that lead to lockdep
-deadlock reports.  Many of these are spurious, caused by an inode
-being used in two contexts, that can only happen in a badly corrupted
-file system, and for which we've already signalled that the file
-system is corrupted, so if you panic on error, it wouldn't deadlock.
-(And if you deadlock, it's not _that_ much worse than panicing on a
-maliciously fuzzed file system.)  And all of these bugs get counted,
-one for each lockdep report variation (so there can be 3-4 per root
-cause) as a "security bug" in the "Linux kernel security disaster"
-statistics.
+> +
+> +/*
+> + * shrinker related functions
+> + */
 
-I might not mind the hyperbole if said slide decks asked for more
-headcount.  But instead, they blame the "Linux upstream community" for
-not fixing bugs, or treating the bugs seriously.   Sigh....
+This is a multi-comment format. "/* shrinker related functions. */" is
+the right one-line format of comment.
 
-  	    	    	       	      	       - Ted
+> +
+> +#ifdef CONFIG_SHRINKER_DEBUG
+> +extern int shrinker_debugfs_add(struct shrinker *shrinker);
+> +extern struct dentry *shrinker_debugfs_detach(struct shrinker *shrinker,
+> +      int *debugfs_id);
+> +extern void shrinker_debugfs_remove(struct dentry *debugfs_entry,
+> +    int debugfs_id);
+> +#else /* CONFIG_SHRINKER_DEBUG */
+> +static inline int shrinker_debugfs_add(struct shrinker *shrinker)
+> +{
+> +	return 0;
+> +}
+> +static inline struct dentry *shrinker_debugfs_detach(struct shrinker *shrinker,
+> +     int *debugfs_id)
+> +{
+> +	*debugfs_id = -1;
+> +	return NULL;
+> +}
+> +static inline void shrinker_debugfs_remove(struct dentry *debugfs_entry,
+> +	int debugfs_id)
+> +{
+> +}
+> +#endif /* CONFIG_SHRINKER_DEBUG */
+> +
+> #endif /* __MM_INTERNAL_H */
+> -- 
+> 2.30.2
+> 
+
 
 
 _______________________________________________
