@@ -2,105 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC4B677D95F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Aug 2023 06:12:03 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A228B77D994
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 16 Aug 2023 07:08:29 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qW7t0-0004M2-5X;
-	Wed, 16 Aug 2023 04:11:57 +0000
+	id 1qW8lb-0001qS-K3;
+	Wed, 16 Aug 2023 05:08:23 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1qW7sx-0004Lj-O4
+ (envelope-from <krisman@suse.de>) id 1qW8lY-0001qL-Fr
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 16 Aug 2023 04:11:54 +0000
+ Wed, 16 Aug 2023 05:08:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=svpBd5S2P/nTNVG35aYLso5/U4QoonV663ICFqQiRno=; b=IToDQZwecTd2WzrEJJ4A7Fx8aT
- k5rYUYY1oJ4pU/1h5EdFRD5W0zLcMw+naW20tbEUKkezCIONKlk1DhEeUX4kPsacEA8ov+ExyV2GG
- Jt0jCSkpZvIPelzodlI89uHiydQnafrRVz4cZS7VqyX3TYYmJN9PS6HR9ee5Ij6aHRsw=;
+ bh=kxsKmHWGtKjTsaPWvpb6GoO8un05d93uluQteuNEpjk=; b=FmedBt78fLyR/AbvDdtgXbpKce
+ wHxvpd/b6RPD7mS2+RMQHOkbAoQk9rLS6sktum456o+MhpxhCCNfpDQUmvodMboc/FzjGI5yExB3t
+ KwOxnPI7q0CSrcb+e9BTJJu/ZGtLIhNTFKOgGNMPwFNm6A2o68AYctwTBHm0ywpj9rPg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=svpBd5S2P/nTNVG35aYLso5/U4QoonV663ICFqQiRno=; b=SNO6GmYLcPg/h1YuxVyEWYGKMW
- suU0aV3OOMU8fA53WXU3Vdc0SaaL7qeVaKN5iYwMVeMqvqc74+Qjnmguc/AHBwwQF8OP1wSjlt9fU
- OxHRytYQBzYCNZr8GvZft1utADAJcn7jNTIFvBp98RM2NbfMo9GRn+8aKmiSKF7svrb4=;
-Received: from mgamail.intel.com ([192.55.52.43])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=kxsKmHWGtKjTsaPWvpb6GoO8un05d93uluQteuNEpjk=; b=O
+ uGCWcO3I8uREAUFxn5Z8bCyaaVGmSH0mfa1xBI7ZSInV5lPehXFIQWssCldyYWCq8pBhI4JsASTy+
+ D5+aS0QXXkFExarjIDdJm4NiInZNKixTbYXZAtuvabkBbkJI6oHPPJO3sE8oGZABA7tYDuQzWCEvk
+ +6o0Iv+tX6IF2060=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qW7su-006mMw-Jc for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 16 Aug 2023 04:11:54 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1692159112; x=1723695112;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=+hM076mTtFVP/XFcJDY1enqLmYazFXdz1WhZ1vHbVPY=;
- b=G1/bpN0Pv5G5UdQhknoLpnsLalo7aHUOyh300zJpjdT2SYWXVl2Zw1VG
- HdOHwd5vWdMlxR2BLJR5f02nmpk7i7x2z7xw32Om7gZFZ2h/vFx7dfoHJ
- bEmh2bNrNDdi0zX1Goeq6B0m9wK4/mkTTKaNzpAo1DTK8dub9bBloGUhe
- +PXSSdIvMec3EPpRTnpBQ9OMqUnVP40C1O55XRiVH1ePwd0FOred0GMna
- pjCkA3do/zeyb4DxpPMOOTgTeRwQCc0FX/BHQcrNqxV+VfkfXUVurlU9k
- O+9hC3suVlBPXbwZv+rPcUIchFKfZTR+SQcEscCeoT4wGXNQrix1HQq/6 w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10803"; a="458786768"
-X-IronPort-AV: E=Sophos;i="6.01,175,1684825200"; d="scan'208";a="458786768"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Aug 2023 21:11:46 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10803"; a="683895889"
-X-IronPort-AV: E=Sophos;i="6.01,175,1684825200"; d="scan'208";a="683895889"
-Received: from lkp-server02.sh.intel.com (HELO b5fb8d9e1ffc) ([10.239.97.151])
- by orsmga003.jf.intel.com with ESMTP; 15 Aug 2023 21:11:40 -0700
-Received: from kbuild by b5fb8d9e1ffc with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1qW7sh-0001Tt-07;
- Wed, 16 Aug 2023 04:11:39 +0000
-Date: Wed, 16 Aug 2023 12:11:25 +0800
-From: kernel test robot <lkp@intel.com>
-To: Daniel Rosenberg <drosen@google.com>,
- linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <202308161231.MjDoxlOG-lkp@intel.com>
-References: <20230816011432.1966838-2-drosen@google.com>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qW8lV-006njC-Nz for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 16 Aug 2023 05:08:20 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 317AB21961;
+ Wed, 16 Aug 2023 05:08:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1692162488; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=kxsKmHWGtKjTsaPWvpb6GoO8un05d93uluQteuNEpjk=;
+ b=h5KhqvcTyvJEGrqCdtIGrrikRGa185BCSx0hEuYqm8RPpkL+I9tQ8zCxb3YjlX25ACh+Yy
+ piOoQIsJd4vPIEEu14tHvtFqxDgwAdlb7oUHSRa0zeb2LreRu/YiBFMVYaJM/7E39Azy5c
+ /BdECTDEOyf/kom8KcxdHx/KVXt39vc=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1692162488;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=kxsKmHWGtKjTsaPWvpb6GoO8un05d93uluQteuNEpjk=;
+ b=Gi4uKrMGQ6x2tutZgxjlXf3ZfXUKxHPVlAYyNHkQPyusJ2pTcRd5XbK/xUZA6AfS+PZpd8
+ wFx/61RDUNoyv3Aw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id ED675133F2;
+ Wed, 16 Aug 2023 05:08:07 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id gOE8NLdZ3GTTTgAAMHmgww
+ (envelope-from <krisman@suse.de>); Wed, 16 Aug 2023 05:08:07 +0000
+From: Gabriel Krisman Bertazi <krisman@suse.de>
+To: viro@zeniv.linux.org.uk, brauner@kernel.org, tytso@mit.edu,
+ ebiggers@kernel.org, jaegeuk@kernel.org
+Date: Wed, 16 Aug 2023 01:07:54 -0400
+Message-ID: <20230816050803.15660-1-krisman@suse.de>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230816011432.1966838-2-drosen@google.com>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Daniel,
- kernel test robot noticed the following build warnings:
- [auto build test WARNING on 0cc81b1ad51287847e494e055e5d3426f95e7921] 
+ Content preview:  Hi, This is v6 of the negative dentry on case-insensitive
+ directories. Thanks Eric for the review of the last iteration. This version
+ drops the patch to expose the helper to check casefolding directories, [...]
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [192.55.52.43 listed in list.dnswl.org]
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qW7su-006mMw-Jc
-Subject: Re: [f2fs-dev] [PATCH 1/1] ANDROID: f2fs: Support Block Size ==
- Page Size
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+X-Headers-End: 1qW8lV-006njC-Nz
+Subject: [f2fs-dev] [PATCH v6 0/9] Support negative dentries on
+ case-insensitive ext4 and f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,72 +113,77 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daniel Rosenberg <drosen@google.com>, Chao Yu <yuchao0@huawei.com>,
- linux-kernel@vger.kernel.org, oe-kbuild-all@lists.linux.dev,
- Jaegeuk Kim <jaegeuk@kernel.org>, kernel-team@android.com
+Cc: linux-fsdevel@vger.kernel.org, Gabriel Krisman Bertazi <krisman@suse.de>,
+ linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Daniel,
+Hi,
 
-kernel test robot noticed the following build warnings:
+This is v6 of the negative dentry on case-insensitive directories.
+Thanks Eric for the review of the last iteration.  This version
+drops the patch to expose the helper to check casefolding directories,
+since it is not necessary in ecryptfs and it might be going away.  It
+also addresses some documentation details, fix a build bot error and
+simplifies the commit messages.  See the changelog in each patch for
+more details.
 
-[auto build test WARNING on 0cc81b1ad51287847e494e055e5d3426f95e7921]
+Thanks,
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Daniel-Rosenberg/ANDROID-f2fs-Support-Block-Size-Page-Size/20230816-091721
-base:   0cc81b1ad51287847e494e055e5d3426f95e7921
-patch link:    https://lore.kernel.org/r/20230816011432.1966838-2-drosen%40google.com
-patch subject: [PATCH 1/1] ANDROID: f2fs: Support Block Size == Page Size
-config: m68k-randconfig-r013-20230816 (https://download.01.org/0day-ci/archive/20230816/202308161231.MjDoxlOG-lkp@intel.com/config)
-compiler: m68k-linux-gcc (GCC) 12.3.0
-reproduce: (https://download.01.org/0day-ci/archive/20230816/202308161231.MjDoxlOG-lkp@intel.com/reproduce)
+---
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202308161231.MjDoxlOG-lkp@intel.com/
+Gabriel Krisman Bertazi (9):
+  ecryptfs: Reject casefold directory inodes
+  9p: Split ->weak_revalidate from ->revalidate
+  fs: Expose name under lookup to d_revalidate hooks
+  fs: Add DCACHE_CASEFOLDED_NAME flag
+  libfs: Validate negative dentries in case-insensitive directories
+  libfs: Chain encryption checks after case-insensitive revalidation
+  libfs: Merge encrypted_ci_dentry_ops and ci_dentry_ops
+  ext4: Enable negative dentries on case-insensitive lookup
+  f2fs: Enable negative dentries on case-insensitive lookup
 
-All warnings (new ones prefixed by >>):
-
-   In file included from include/linux/printk.h:7,
-                    from include/asm-generic/bug.h:22,
-                    from arch/m68k/include/asm/bug.h:32,
-                    from include/linux/bug.h:5,
-                    from include/linux/thread_info.h:13,
-                    from include/asm-generic/preempt.h:5,
-                    from ./arch/m68k/include/generated/asm/preempt.h:1,
-                    from include/linux/preempt.h:79,
-                    from include/linux/spinlock.h:56,
-                    from include/linux/wait.h:9,
-                    from include/linux/wait_bit.h:8,
-                    from include/linux/fs.h:6,
-                    from fs/f2fs/inode.c:8:
-   fs/f2fs/inode.c: In function 'sanity_check_inode':
->> include/linux/kern_levels.h:5:25: warning: format '%zu' expects argument of type 'size_t', but argument 6 has type 'long unsigned int' [-Wformat=]
-       5 | #define KERN_SOH        "\001"          /* ASCII Start Of Header */
-         |                         ^~~~~~
-   include/linux/kern_levels.h:12:25: note: in expansion of macro 'KERN_SOH'
-      12 | #define KERN_WARNING    KERN_SOH "4"    /* warning conditions */
-         |                         ^~~~~~~~
-   fs/f2fs/f2fs.h:2315:26: note: in expansion of macro 'KERN_WARNING'
-    2315 |         f2fs_printk(sbi, KERN_WARNING fmt, ##__VA_ARGS__)
-         |                          ^~~~~~~~~~~~
-   fs/f2fs/inode.c:325:25: note: in expansion of macro 'f2fs_warn'
-     325 |                         f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_inline_xattr_size: %d, max: %zu",
-         |                         ^~~~~~~~~
-
-
-vim +5 include/linux/kern_levels.h
-
-314ba3520e513a Joe Perches 2012-07-30  4  
-04d2c8c83d0e3a Joe Perches 2012-07-30 @5  #define KERN_SOH	"\001"		/* ASCII Start Of Header */
-04d2c8c83d0e3a Joe Perches 2012-07-30  6  #define KERN_SOH_ASCII	'\001'
-04d2c8c83d0e3a Joe Perches 2012-07-30  7  
+ Documentation/filesystems/locking.rst |   3 +-
+ Documentation/filesystems/vfs.rst     |  11 ++-
+ fs/9p/vfs_dentry.c                    |  11 ++-
+ fs/afs/dir.c                          |   6 +-
+ fs/afs/dynroot.c                      |   4 +-
+ fs/ceph/dir.c                         |   3 +-
+ fs/coda/dir.c                         |   3 +-
+ fs/crypto/fname.c                     |   3 +-
+ fs/dcache.c                           |   8 ++
+ fs/ecryptfs/dentry.c                  |   5 +-
+ fs/ecryptfs/inode.c                   |   8 ++
+ fs/exfat/namei.c                      |   3 +-
+ fs/ext4/namei.c                       |  35 +--------
+ fs/f2fs/namei.c                       |  25 +-----
+ fs/fat/namei_vfat.c                   |   6 +-
+ fs/fuse/dir.c                         |   3 +-
+ fs/gfs2/dentry.c                      |   3 +-
+ fs/hfs/sysdep.c                       |   3 +-
+ fs/jfs/namei.c                        |   3 +-
+ fs/kernfs/dir.c                       |   3 +-
+ fs/libfs.c                            | 107 ++++++++++++++++++--------
+ fs/namei.c                            |  18 +++--
+ fs/nfs/dir.c                          |   9 ++-
+ fs/ocfs2/dcache.c                     |   4 +-
+ fs/orangefs/dcache.c                  |   3 +-
+ fs/overlayfs/super.c                  |  20 +++--
+ fs/proc/base.c                        |   6 +-
+ fs/proc/fd.c                          |   3 +-
+ fs/proc/generic.c                     |   6 +-
+ fs/proc/proc_sysctl.c                 |   3 +-
+ fs/reiserfs/xattr.c                   |   3 +-
+ fs/smb/client/dir.c                   |   3 +-
+ fs/vboxsf/dir.c                       |   4 +-
+ include/linux/dcache.h                |  10 ++-
+ include/linux/fscrypt.h               |   4 +-
+ 35 files changed, 216 insertions(+), 136 deletions(-)
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.41.0
+
 
 
 _______________________________________________
