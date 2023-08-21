@@ -2,101 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0D1B782650
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Aug 2023 11:32:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42FF7782D25
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Aug 2023 17:22:55 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qY1H8-0007dP-8g;
-	Mon, 21 Aug 2023 09:32:43 +0000
+	id 1qY6jx-0000z7-Vx;
+	Mon, 21 Aug 2023 15:22:50 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1qY1H6-0007dI-PA
+ (envelope-from <chao@kernel.org>) id 1qY6jt-0000yz-PO
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Aug 2023 09:32:41 +0000
+ Mon, 21 Aug 2023 15:22:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G0QTNVHShuNqYFfaysbmQSCdsSoV6JLJFP9De81PZ6o=; b=Nd9xW7v4MkHo8nstXw9vb3dDHv
- xmEA6lN3mtWIyQc4y1FYRaxJdSpo2THLwIqqziF31oWiMGiobKyu1JN2hQOqrRFIQcMEBKGcF7y1Q
- nMSuxiybJk6PdSBvP1ONmEgQm9jrgvW6eWAMgt0xAnNSZ/YFr2UPELOUvkFCk6lJ/OJo=;
+ bh=jPF+J5hi8u90adnDr4nO8bMjliVy/4uW5b+cubtClwE=; b=QBbScOjxNYEgurRwDTYJ6oIOS+
+ Xr+GFHa3IKLwU+p9bcg8s2m0KStu6+9HiIOSACvuDnykZ61KXHA7uBqOFbuP8/RGPdgCI5DdxJ5gl
+ ac5LN+ZrExdhZnCbxRRNixXLSWpJckkpjNp90MJSPlIjzJWtuV1HaoKcZUzAQowqWBII=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=G0QTNVHShuNqYFfaysbmQSCdsSoV6JLJFP9De81PZ6o=; b=ELYQ1YtjS+IvOatGYaUHBZK7GL
- pAwwCuLgS66px1q6M2PoNBBN+DL9VVbu/wYq5EdePFpVdUMNFfwtA1/vKNi1nrtpl5XkAK346Nxyf
- +RDwy63GM4NmT7TFtdpdKPTsD+UE5cTYr+ssZXDW7AO7aL0FOl30GsdbZSFCDTArWj0E=;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=jPF+J5hi8u90adnDr4nO8bMjliVy/4uW5b+cubtClwE=; b=K
+ Z75dJQc8f/iqLkqGY+Nkhol7s/3cKnW4DCj3F3G47VppR556874Tuo5deTaHuNaEhyQ3sfeQ6332h
+ +4y7q68XAiGLV8Btq1tDN1yM0O1J/RYa/r0oQIkfLbPFnXpc/TzeRHdQPz/XDFVG/XP8LleEvl1Yk
+ Zf/J+7oZxgaXNDdU=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qY1H7-0006lH-5X for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Aug 2023 09:32:41 +0000
+ id 1qY6js-0004ko-QE for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 21 Aug 2023 15:22:45 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 52D7262ECB
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 02364630E6
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 21 Aug 2023 09:32:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2273FC4339A
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 21 Aug 2023 09:32:34 +0000 (UTC)
+ Mon, 21 Aug 2023 15:22:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A864C433C7;
+ Mon, 21 Aug 2023 15:22:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1692610354;
- bh=G0QTNVHShuNqYFfaysbmQSCdsSoV6JLJFP9De81PZ6o=;
- h=From:To:Subject:Date:In-Reply-To:References:From;
- b=s5IqGfKhWIJkh5sgS/DWG5tyKcnlLo0PNzeZojIqQ/zA02ZKe4fxoyDmORaDURwsy
- YQlYamLa0/1qrOh/aF0/p2ffxeMEz9sRoPN7asBoOHB1DhGo6FzSxHMcPZof2CIz4T
- xhFt8l2plFMX+4cYzX/cJc5SwE+Rk6DX96ouz8KSIz4efmB95p9bFcwpzoJA3qwe1Y
- 0xgAnEcizqZpogFrwfdf7eCA+nkmIJYp3af90lwZJBSvaU5KvQvPUbokJMKHzNx+tU
- +HmmoaKcN6rXNw/sPp/FTa170eGyJ9SrSksyAsxljgva2WUf6EAIp34CSoyBttnxoA
- FHZ1C2PO4IGeA==
-Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id 0ECE9C53BC6; Mon, 21 Aug 2023 09:32:34 +0000 (UTC)
-From: bugzilla-daemon@kernel.org
-To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon, 21 Aug 2023 09:32:33 +0000
-X-Bugzilla-Reason: None
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Product: File System
-X-Bugzilla-Component: f2fs
-X-Bugzilla-Version: 2.5
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: high
-X-Bugzilla-Who: guido.iodice@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: P1
-X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-216050-202145-BdpoP0lNgT@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-216050-202145@https.bugzilla.kernel.org/>
-References: <bug-216050-202145@https.bugzilla.kernel.org/>
-X-Bugzilla-URL: https://bugzilla.kernel.org/
-Auto-Submitted: auto-generated
+ s=k20201202; t=1692631353;
+ bh=UKJouoh35D1ljmwVw1T+lc1Ww6sUl1JIQ3DRiiX56nE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ERtRk+K/S1T+lRj2R+Ow5dux1h/He9Cp611H84buS7tp+NfH0i5Mp471gQaLJsEWQ
+ n+SviJ/Pnog9M+tHGU3sZkf2GqzUZem0eawP0md50cd54uoKo5hTvlYSV8GVFsaTyx
+ rrRbLOmsbytYn0+Rav3D9LfCsaRrPErSt42LBZhrHWPJyE6E3FQpKZcb8wnlDGWVO2
+ +o7awUAxU3GQ5i+X1sRSTxnQRmRhMTSWfNEJyYbn4g8p27fbM+1qdyfJiqfYVizGox
+ dJl1UTTpM7MWuXEX0+YxQ5dfutvSUlGqIVuNQtFav6cMZ8aMK8cwbfNhtQtZyog2xh
+ JusvYz1pHMTEw==
+From: Chao Yu <chao@kernel.org>
+To: jaegeuk@kernel.org
+Date: Mon, 21 Aug 2023 23:22:23 +0800
+Message-Id: <20230821152225.4086924-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=216050 ---
- Comment
- #181 from Guido (guido.iodice@gmail.com) --- The fact that dirty segments
- don't go below 10000 suggests that the bug is not completely fixed even with
- this patch. This is unfortunate becau [...] 
+ Content preview:  In sanity_check_{compress_, }inode(), it doesn't need to set
+ SBI_NEED_FSCK in each error case, instead,
+ we can set the flag in do_read_inode()
+ only once when sanity_check_inode() fails. Signed-off-by: Chao Yu
+ <chao@kernel.org>
+ --- fs/f2fs/inode.c | 23 ++++ 1 file changed, 4 insertions(+), 19 deletions(-)
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -104,16 +84,16 @@ X-Spam-Report: Spam detection software,
  high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qY1H7-0006lH-5X
-Subject: [f2fs-dev] [Bug 216050] f2fs_gc occupies 100% cpu
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qY6js-0004ko-QE
+Subject: [f2fs-dev] [PATCH 1/3] f2fs: clean up error handling in
+ sanity_check_{compress_, }inode()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,30 +105,172 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=216050
+In sanity_check_{compress_,}inode(), it doesn't need to set SBI_NEED_FSCK
+in each error case, instead, we can set the flag in do_read_inode() only
+once when sanity_check_inode() fails.
 
---- Comment #181 from Guido (guido.iodice@gmail.com) ---
-The fact that dirty segments don't go below 10000 suggests that the bug is not
-completely fixed even with this patch. This is unfortunate because the 5.15
-kernel, which is not affected by the bug, is near to EOL (October, if I
-remember correctly).
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/inode.c | 23 ++++-------------------
+ 1 file changed, 4 insertions(+), 19 deletions(-)
 
-I am not an expert, but I assume it is safer not to interrupt the script
-(because the gc goes on on its own anyway) or shut down the pc while the gc is
-running, but to do in reverse what the script does. TBH I don't remember if
-doing this really interrupts the gc or in any case once it enters the loop
-there is nothing to do. For clarity, I found the script on the Internet, I am
-not responsible for any damage or loss of data.
-
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index e81725c922cd..8ed5406ea204 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -214,7 +214,7 @@ static bool sanity_check_compress_inode(struct inode *inode,
+ 		f2fs_warn(sbi,
+ 			"%s: inode (ino=%lx) has unsupported compress algorithm: %u, run fsck to fix",
+ 			__func__, inode->i_ino, ri->i_compress_algorithm);
+-		goto err;
++		return false;
+ 	}
+ 	if (le64_to_cpu(ri->i_compr_blocks) >
+ 			SECTOR_TO_BLOCK(inode->i_blocks)) {
+@@ -222,14 +222,14 @@ static bool sanity_check_compress_inode(struct inode *inode,
+ 			"%s: inode (ino=%lx) has inconsistent i_compr_blocks:%llu, i_blocks:%llu, run fsck to fix",
+ 			__func__, inode->i_ino, le64_to_cpu(ri->i_compr_blocks),
+ 			SECTOR_TO_BLOCK(inode->i_blocks));
+-		goto err;
++		return false;
+ 	}
+ 	if (ri->i_log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
+ 		ri->i_log_cluster_size > MAX_COMPRESS_LOG_SIZE) {
+ 		f2fs_warn(sbi,
+ 			"%s: inode (ino=%lx) has unsupported log cluster size: %u, run fsck to fix",
+ 			__func__, inode->i_ino, ri->i_log_cluster_size);
+-		goto err;
++		return false;
+ 	}
+ 
+ 	clevel = le16_to_cpu(ri->i_compress_flag) >>
+@@ -273,8 +273,6 @@ static bool sanity_check_compress_inode(struct inode *inode,
+ err_level:
+ 	f2fs_warn(sbi, "%s: inode (ino=%lx) has unsupported compress level: %u, run fsck to fix",
+ 		  __func__, inode->i_ino, clevel);
+-err:
+-	set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 	return false;
+ }
+ 
+@@ -287,14 +285,12 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 
+ 	iblocks = le64_to_cpu(F2FS_INODE(node_page)->i_blocks);
+ 	if (!iblocks) {
+-		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_warn(sbi, "%s: corrupted inode i_blocks i_ino=%lx iblocks=%llu, run fsck to fix.",
+ 			  __func__, inode->i_ino, iblocks);
+ 		return false;
+ 	}
+ 
+ 	if (ino_of_node(node_page) != nid_of_node(node_page)) {
+-		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_warn(sbi, "%s: corrupted inode footer i_ino=%lx, ino,nid: [%u, %u] run fsck to fix.",
+ 			  __func__, inode->i_ino,
+ 			  ino_of_node(node_page), nid_of_node(node_page));
+@@ -303,7 +299,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 
+ 	if (f2fs_has_extra_attr(inode)) {
+ 		if (!f2fs_sb_has_extra_attr(sbi)) {
+-			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: inode (ino=%lx) is with extra_attr, but extra_attr feature is off",
+ 				  __func__, inode->i_ino);
+ 			return false;
+@@ -311,7 +306,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 		if (fi->i_extra_isize > F2FS_TOTAL_EXTRA_ATTR_SIZE ||
+ 			fi->i_extra_isize < F2FS_MIN_EXTRA_ATTR_SIZE ||
+ 			fi->i_extra_isize % sizeof(__le32)) {
+-			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_extra_isize: %d, max: %zu",
+ 				  __func__, inode->i_ino, fi->i_extra_isize,
+ 				  F2FS_TOTAL_EXTRA_ATTR_SIZE);
+@@ -321,7 +315,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 			f2fs_has_inline_xattr(inode) &&
+ 			(!fi->i_inline_xattr_size ||
+ 			fi->i_inline_xattr_size > MAX_INLINE_XATTR_SIZE)) {
+-			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_inline_xattr_size: %d, max: %zu",
+ 				  __func__, inode->i_ino, fi->i_inline_xattr_size,
+ 				  MAX_INLINE_XATTR_SIZE);
+@@ -335,7 +328,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 				return false;
+ 		}
+ 	} else if (f2fs_sb_has_flexible_inline_xattr(sbi)) {
+-		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_warn(sbi, "%s: corrupted inode ino=%lx, run fsck to fix.",
+ 			  __func__, inode->i_ino);
+ 		return false;
+@@ -343,31 +335,26 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 
+ 	if (!f2fs_sb_has_extra_attr(sbi)) {
+ 		if (f2fs_sb_has_project_quota(sbi)) {
+-			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
+ 				  __func__, inode->i_ino, F2FS_FEATURE_PRJQUOTA);
+ 			return false;
+ 		}
+ 		if (f2fs_sb_has_inode_chksum(sbi)) {
+-			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
+ 				  __func__, inode->i_ino, F2FS_FEATURE_INODE_CHKSUM);
+ 			return false;
+ 		}
+ 		if (f2fs_sb_has_flexible_inline_xattr(sbi)) {
+-			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
+ 				  __func__, inode->i_ino, F2FS_FEATURE_FLEXIBLE_INLINE_XATTR);
+ 			return false;
+ 		}
+ 		if (f2fs_sb_has_inode_crtime(sbi)) {
+-			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
+ 				  __func__, inode->i_ino, F2FS_FEATURE_INODE_CRTIME);
+ 			return false;
+ 		}
+ 		if (f2fs_sb_has_compression(sbi)) {
+-			set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
+ 				  __func__, inode->i_ino, F2FS_FEATURE_COMPRESSION);
+ 			return false;
+@@ -375,21 +362,18 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
+ 	}
+ 
+ 	if (f2fs_sanity_check_inline_data(inode)) {
+-		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_warn(sbi, "%s: inode (ino=%lx, mode=%u) should not have inline_data, run fsck to fix",
+ 			  __func__, inode->i_ino, inode->i_mode);
+ 		return false;
+ 	}
+ 
+ 	if (f2fs_has_inline_dentry(inode) && !S_ISDIR(inode->i_mode)) {
+-		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_warn(sbi, "%s: inode (ino=%lx, mode=%u) should not have inline_dentry, run fsck to fix",
+ 			  __func__, inode->i_ino, inode->i_mode);
+ 		return false;
+ 	}
+ 
+ 	if ((fi->i_flags & F2FS_CASEFOLD_FL) && !f2fs_sb_has_casefold(sbi)) {
+-		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_warn(sbi, "%s: inode (ino=%lx) has casefold flag, but casefold feature is off",
+ 			  __func__, inode->i_ino);
+ 		return false;
+@@ -477,6 +461,7 @@ static int do_read_inode(struct inode *inode)
+ 
+ 	if (!sanity_check_inode(inode, node_page)) {
+ 		f2fs_put_page(node_page, 1);
++		set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 		f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
+ 		return -EFSCORRUPTED;
+ 	}
 -- 
-You may reply to this email to add a comment.
+2.40.1
 
-You are receiving this mail because:
-You are watching the assignee of the bug.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
