@@ -2,67 +2,69 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42FF7782D25
+	by mail.lfdr.de (Postfix) with ESMTPS id 4065B782D23
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Aug 2023 17:22:55 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qY6jx-0000z7-Vx;
-	Mon, 21 Aug 2023 15:22:50 +0000
+	id 1qY6jq-00036H-Tj;
+	Mon, 21 Aug 2023 15:22:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1qY6jt-0000yz-PO
+ (envelope-from <chao@kernel.org>) id 1qY6jp-00036B-IV
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Aug 2023 15:22:45 +0000
+ Mon, 21 Aug 2023 15:22:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jPF+J5hi8u90adnDr4nO8bMjliVy/4uW5b+cubtClwE=; b=QBbScOjxNYEgurRwDTYJ6oIOS+
- Xr+GFHa3IKLwU+p9bcg8s2m0KStu6+9HiIOSACvuDnykZ61KXHA7uBqOFbuP8/RGPdgCI5DdxJ5gl
- ac5LN+ZrExdhZnCbxRRNixXLSWpJckkpjNp90MJSPlIjzJWtuV1HaoKcZUzAQowqWBII=;
+ bh=rToafid38dSDzo9BmIsdEKn34E8qPil/lAIBqR3Fvqo=; b=iyjLTgxgBiccTaUlQ4mQtXVi2q
+ W/PBpbXt8rtaw2PA/rrOhXtAU6fObNP5puJV3TaYS+7ZdYSfQNLv5vKYkQGXoa2zXpNfVwTsNJOuY
+ 36XjxvHxycNJEGp8PsDbpW0h28wIm9WLUsgglJUpRel/U6UIeHeXXEbidWawD0+/zwOo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=jPF+J5hi8u90adnDr4nO8bMjliVy/4uW5b+cubtClwE=; b=K
- Z75dJQc8f/iqLkqGY+Nkhol7s/3cKnW4DCj3F3G47VppR556874Tuo5deTaHuNaEhyQ3sfeQ6332h
- +4y7q68XAiGLV8Btq1tDN1yM0O1J/RYa/r0oQIkfLbPFnXpc/TzeRHdQPz/XDFVG/XP8LleEvl1Yk
- Zf/J+7oZxgaXNDdU=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=rToafid38dSDzo9BmIsdEKn34E8qPil/lAIBqR3Fvqo=; b=F2JaHAwWyunzialRFrg1vU78ZF
+ dvQEcgW5YF9DIbQ4uVIK79dLnGFkBDlbAeNSOsQQ6GRJ7UMgSHQvFgqeoSpcCy9ivLY8wwFVXSb8v
+ c14rFZA6W1RPfdrqR9+lGVqSrZ8u3esfWXfAA+sHZkpE+zr/O7OAhMc91rGq0OEoXU/Q=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qY6js-0004ko-QE for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Aug 2023 15:22:45 +0000
+ id 1qY6jp-00BU2l-Cm for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 21 Aug 2023 15:22:41 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 02364630E6
+ by dfw.source.kernel.org (Postfix) with ESMTPS id C6E9963A9A
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 21 Aug 2023 15:22:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A864C433C7;
- Mon, 21 Aug 2023 15:22:31 +0000 (UTC)
+ Mon, 21 Aug 2023 15:22:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E65AAC433C8;
+ Mon, 21 Aug 2023 15:22:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1692631353;
- bh=UKJouoh35D1ljmwVw1T+lc1Ww6sUl1JIQ3DRiiX56nE=;
- h=From:To:Cc:Subject:Date:From;
- b=ERtRk+K/S1T+lRj2R+Ow5dux1h/He9Cp611H84buS7tp+NfH0i5Mp471gQaLJsEWQ
- n+SviJ/Pnog9M+tHGU3sZkf2GqzUZem0eawP0md50cd54uoKo5hTvlYSV8GVFsaTyx
- rrRbLOmsbytYn0+Rav3D9LfCsaRrPErSt42LBZhrHWPJyE6E3FQpKZcb8wnlDGWVO2
- +o7awUAxU3GQ5i+X1sRSTxnQRmRhMTSWfNEJyYbn4g8p27fbM+1qdyfJiqfYVizGox
- dJl1UTTpM7MWuXEX0+YxQ5dfutvSUlGqIVuNQtFav6cMZ8aMK8cwbfNhtQtZyog2xh
- JusvYz1pHMTEw==
+ s=k20201202; t=1692631355;
+ bh=ViCdO3mKsu0rpP6MtdWLUzlowcnCJvN7GijE6W+iSaE=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=NMzRWXF/8nU1TTsBojqEhv3nqo6J7b23jvjPMJ1BJlZ4tSk1Y4dXWU2HWVLrA1j66
+ Fnd1QtrOKO0xij66hBlRITK31JSzw7r3O3zgzDjFW7YV0SsJwgvzaauhPsEuLkXXzF
+ 9xoISvWonafD/FqlpmjhQaAC+eEUahCA7ub5DrKY9rM/XvJHQsrn0MDAgmL1bTxhj2
+ WLumWWntO0YnMkmYNv6FG/Zkh83gfgmgNWY/WkLtGSOFbXg7wqPq6TSeZW9U7WVC/V
+ EAswnMFwxOON9QyUkfpnfv1bH11Xt6BOi4+Y0Sz/P95Uz9FqpETvBBn/UmpGQJ/Dbb
+ JzePma50DG+8w==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Mon, 21 Aug 2023 23:22:23 +0800
-Message-Id: <20230821152225.4086924-1-chao@kernel.org>
+Date: Mon, 21 Aug 2023 23:22:24 +0800
+Message-Id: <20230821152225.4086924-2-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230821152225.4086924-1-chao@kernel.org>
+References: <20230821152225.4086924-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
@@ -71,12 +73,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In sanity_check_{compress_, }inode(), it doesn't need to set
- SBI_NEED_FSCK in each error case, instead,
- we can set the flag in do_read_inode()
- only once when sanity_check_inode() fails. Signed-off-by: Chao Yu
- <chao@kernel.org>
- --- fs/f2fs/inode.c | 23 ++++ 1 file changed, 4 insertions(+), 19 deletions(-)
+ Content preview:  In error path of f2fs_submit_page_read(), it missed to call
+ iostat_update_and_unbind_ctx() and free bio_post_read_ctx,
+ fix it. Signed-off-by:
+ Chao Yu <chao@kernel.org> --- fs/f2fs/data.c | 3 +++ 1 file changed,
+ 3 insertions(+)
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -91,9 +92,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qY6js-0004ko-QE
-Subject: [f2fs-dev] [PATCH 1/3] f2fs: clean up error handling in
- sanity_check_{compress_, }inode()
+X-Headers-End: 1qY6jp-00BU2l-Cm
+Subject: [f2fs-dev] [PATCH 2/3] f2fs: fix error path of
+ f2fs_submit_page_read()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,162 +111,27 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-In sanity_check_{compress_,}inode(), it doesn't need to set SBI_NEED_FSCK
-in each error case, instead, we can set the flag in do_read_inode() only
-once when sanity_check_inode() fails.
+In error path of f2fs_submit_page_read(), it missed to call
+iostat_update_and_unbind_ctx() and free bio_post_read_ctx, fix it.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/inode.c | 23 ++++-------------------
- 1 file changed, 4 insertions(+), 19 deletions(-)
+ fs/f2fs/data.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index e81725c922cd..8ed5406ea204 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -214,7 +214,7 @@ static bool sanity_check_compress_inode(struct inode *inode,
- 		f2fs_warn(sbi,
- 			"%s: inode (ino=%lx) has unsupported compress algorithm: %u, run fsck to fix",
- 			__func__, inode->i_ino, ri->i_compress_algorithm);
--		goto err;
-+		return false;
- 	}
- 	if (le64_to_cpu(ri->i_compr_blocks) >
- 			SECTOR_TO_BLOCK(inode->i_blocks)) {
-@@ -222,14 +222,14 @@ static bool sanity_check_compress_inode(struct inode *inode,
- 			"%s: inode (ino=%lx) has inconsistent i_compr_blocks:%llu, i_blocks:%llu, run fsck to fix",
- 			__func__, inode->i_ino, le64_to_cpu(ri->i_compr_blocks),
- 			SECTOR_TO_BLOCK(inode->i_blocks));
--		goto err;
-+		return false;
- 	}
- 	if (ri->i_log_cluster_size < MIN_COMPRESS_LOG_SIZE ||
- 		ri->i_log_cluster_size > MAX_COMPRESS_LOG_SIZE) {
- 		f2fs_warn(sbi,
- 			"%s: inode (ino=%lx) has unsupported log cluster size: %u, run fsck to fix",
- 			__func__, inode->i_ino, ri->i_log_cluster_size);
--		goto err;
-+		return false;
- 	}
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 5d9697717353..916e317ac925 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -1167,6 +1167,9 @@ static int f2fs_submit_page_read(struct inode *inode, struct page *page,
+ 	f2fs_wait_on_block_writeback(inode, blkaddr);
  
- 	clevel = le16_to_cpu(ri->i_compress_flag) >>
-@@ -273,8 +273,6 @@ static bool sanity_check_compress_inode(struct inode *inode,
- err_level:
- 	f2fs_warn(sbi, "%s: inode (ino=%lx) has unsupported compress level: %u, run fsck to fix",
- 		  __func__, inode->i_ino, clevel);
--err:
--	set_sbi_flag(sbi, SBI_NEED_FSCK);
- 	return false;
- }
- 
-@@ -287,14 +285,12 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 
- 	iblocks = le64_to_cpu(F2FS_INODE(node_page)->i_blocks);
- 	if (!iblocks) {
--		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: corrupted inode i_blocks i_ino=%lx iblocks=%llu, run fsck to fix.",
- 			  __func__, inode->i_ino, iblocks);
- 		return false;
- 	}
- 
- 	if (ino_of_node(node_page) != nid_of_node(node_page)) {
--		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: corrupted inode footer i_ino=%lx, ino,nid: [%u, %u] run fsck to fix.",
- 			  __func__, inode->i_ino,
- 			  ino_of_node(node_page), nid_of_node(node_page));
-@@ -303,7 +299,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 
- 	if (f2fs_has_extra_attr(inode)) {
- 		if (!f2fs_sb_has_extra_attr(sbi)) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			f2fs_warn(sbi, "%s: inode (ino=%lx) is with extra_attr, but extra_attr feature is off",
- 				  __func__, inode->i_ino);
- 			return false;
-@@ -311,7 +306,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 		if (fi->i_extra_isize > F2FS_TOTAL_EXTRA_ATTR_SIZE ||
- 			fi->i_extra_isize < F2FS_MIN_EXTRA_ATTR_SIZE ||
- 			fi->i_extra_isize % sizeof(__le32)) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_extra_isize: %d, max: %zu",
- 				  __func__, inode->i_ino, fi->i_extra_isize,
- 				  F2FS_TOTAL_EXTRA_ATTR_SIZE);
-@@ -321,7 +315,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 			f2fs_has_inline_xattr(inode) &&
- 			(!fi->i_inline_xattr_size ||
- 			fi->i_inline_xattr_size > MAX_INLINE_XATTR_SIZE)) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_inline_xattr_size: %d, max: %zu",
- 				  __func__, inode->i_ino, fi->i_inline_xattr_size,
- 				  MAX_INLINE_XATTR_SIZE);
-@@ -335,7 +328,6 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 				return false;
- 		}
- 	} else if (f2fs_sb_has_flexible_inline_xattr(sbi)) {
--		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: corrupted inode ino=%lx, run fsck to fix.",
- 			  __func__, inode->i_ino);
- 		return false;
-@@ -343,31 +335,26 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 
- 	if (!f2fs_sb_has_extra_attr(sbi)) {
- 		if (f2fs_sb_has_project_quota(sbi)) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
- 				  __func__, inode->i_ino, F2FS_FEATURE_PRJQUOTA);
- 			return false;
- 		}
- 		if (f2fs_sb_has_inode_chksum(sbi)) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
- 				  __func__, inode->i_ino, F2FS_FEATURE_INODE_CHKSUM);
- 			return false;
- 		}
- 		if (f2fs_sb_has_flexible_inline_xattr(sbi)) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
- 				  __func__, inode->i_ino, F2FS_FEATURE_FLEXIBLE_INLINE_XATTR);
- 			return false;
- 		}
- 		if (f2fs_sb_has_inode_crtime(sbi)) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
- 				  __func__, inode->i_ino, F2FS_FEATURE_INODE_CRTIME);
- 			return false;
- 		}
- 		if (f2fs_sb_has_compression(sbi)) {
--			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			f2fs_warn(sbi, "%s: corrupted inode ino=%lx, wrong feature flag: %u, run fsck to fix.",
- 				  __func__, inode->i_ino, F2FS_FEATURE_COMPRESSION);
- 			return false;
-@@ -375,21 +362,18 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
- 	}
- 
- 	if (f2fs_sanity_check_inline_data(inode)) {
--		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: inode (ino=%lx, mode=%u) should not have inline_data, run fsck to fix",
- 			  __func__, inode->i_ino, inode->i_mode);
- 		return false;
- 	}
- 
- 	if (f2fs_has_inline_dentry(inode) && !S_ISDIR(inode->i_mode)) {
--		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: inode (ino=%lx, mode=%u) should not have inline_dentry, run fsck to fix",
- 			  __func__, inode->i_ino, inode->i_mode);
- 		return false;
- 	}
- 
- 	if ((fi->i_flags & F2FS_CASEFOLD_FL) && !f2fs_sb_has_casefold(sbi)) {
--		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_warn(sbi, "%s: inode (ino=%lx) has casefold flag, but casefold feature is off",
- 			  __func__, inode->i_ino);
- 		return false;
-@@ -477,6 +461,7 @@ static int do_read_inode(struct inode *inode)
- 
- 	if (!sanity_check_inode(inode, node_page)) {
- 		f2fs_put_page(node_page, 1);
-+		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
- 		return -EFSCORRUPTED;
+ 	if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE) {
++		iostat_update_and_unbind_ctx(bio);
++		if (bio->bi_private)
++			mempool_free(bio->bi_private, bio_post_read_ctx_pool);
+ 		bio_put(bio);
+ 		return -EFAULT;
  	}
 -- 
 2.40.1
