@@ -2,114 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FDFE78306C
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Aug 2023 20:53:53 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32B327830FC
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 21 Aug 2023 21:37:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qYA24-0003Hs-11;
-	Mon, 21 Aug 2023 18:53:44 +0000
+	id 1qYAiQ-0000dK-4a;
+	Mon, 21 Aug 2023 19:37:29 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <krisman@suse.de>) id 1qYA20-0003Hl-DG
+ (envelope-from <jaegeuk@kernel.org>) id 1qYAiO-0000dA-Rl
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Aug 2023 18:53:40 +0000
+ Mon, 21 Aug 2023 19:37:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:
- References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nd67bGfV1KhCemr7IE4Dyv8OFK+mAXQ8eNOnMuZJU1Y=; b=BDeZ/wY94s1HUWUI4A/T7KS5m9
- BI3J9b7JLChwOG8Ow5B9jl9Sm7Lbdct7DiTrCXadv10lmCdXBvzKTy3AcVY8qYmWlBPcGgjRdmzqU
- Lqe4i+kGN6qhkcUJvd7Yf/szSj/l5YB06Yi4zmROJrZ2UhYhoHTKyw5lV7SG8FKPOYOU=;
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=SKirFbwzHcq2vl0GeekKRpqTTs5O42T06+eRSrpDBU0=; b=YVoL7gO1aw897ggGu8ghtboLKX
+ PvRNWUGmEz9wMKcdfikCJYUapmH9LhG3viZmKuvLfB4uq+vK4E9sm8lEW/PoGdBnKKKkZEs4ENH/4
+ sqC+i09ZjztsPJjKihVRmFjl1rK860NquVsZgneQdnL6tMyAK+h7cbzbYE4/xhzBFb/I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:References:In-Reply-To:Subject:
- Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nd67bGfV1KhCemr7IE4Dyv8OFK+mAXQ8eNOnMuZJU1Y=; b=aZ/NgkC4sP9LjwHk3mGybRyMqF
- f5x3v8Dny8hLi7dC5R8om3ROL8G4t68sKhSZdr9YQc6yr1TzwJ3SJ9WXXplSFtZTJ4UOGZMeIyod6
- hBR3Ht+NjFG1Mi93SX0Skx67K7djNJajMvhhwfwE8AD3YhO8lB53t0ZR5yVC0WEaRQWc=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qYA1z-0004oA-C7 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 21 Aug 2023 18:53:40 +0000
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ bh=SKirFbwzHcq2vl0GeekKRpqTTs5O42T06+eRSrpDBU0=; b=WR7kSEpRjym1PsI4WfIUybSdsC
+ ZA0vvRFr0QuAEr5EhYIdBGxiCdHD0/7dXUJFJ6UelItl/tzVms6l57QRQOyOK78rvMqJChdKB/29x
+ Ll78puAN+jj6imDu601uK3JeO+Lw9AdTqKgBx+ztp2L9EsFoa4HqHGSb0ZpTXlCOxraw=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qYAiM-00BgKj-AY for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 21 Aug 2023 19:37:27 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 2D99B22BEF;
- Mon, 21 Aug 2023 18:53:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1692644008; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=nd67bGfV1KhCemr7IE4Dyv8OFK+mAXQ8eNOnMuZJU1Y=;
- b=yOcguDz1a0LAVX4UvhR8ca45H5AahyHKyLZ45z0o2XxhR6AzDrq+Yrj+qu65l9TBNZm1p/
- 1jJm3WZEmU6uIPiBvQYv57UtKHpvpY46ZnQyr8Hsiarzjgu03EKmBJBRtdn5C1tBRzZOwk
- W9Uh4nzQL+PC2ICwCg7yFnIFcrXcs1c=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1692644008;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=nd67bGfV1KhCemr7IE4Dyv8OFK+mAXQ8eNOnMuZJU1Y=;
- b=hVOmNCKJNw1sHxkFh1gX1fF+I762Xot715XhVhJDX41uM/onCZWkBV8mXdE4vpvbLnDlHa
- NqsN9DllNJfaObCg==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E9C391330D;
- Mon, 21 Aug 2023 18:53:27 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id Bw5hM6ey42QodQAAMHmgww
- (envelope-from <krisman@suse.de>); Mon, 21 Aug 2023 18:53:27 +0000
-From: Gabriel Krisman Bertazi <krisman@suse.de>
-To: Christian Brauner <brauner@kernel.org>
-In-Reply-To: <20230821-derart-serienweise-3506611e576d@brauner> (Christian
- Brauner's message of "Mon, 21 Aug 2023 17:52:37 +0200")
-Organization: SUSE
-References: <20230816050803.15660-1-krisman@suse.de>
- <20230817170658.GD1483@sol.localdomain>
- <20230821-derart-serienweise-3506611e576d@brauner>
-Date: Mon, 21 Aug 2023 14:53:26 -0400
-Message-ID: <871qfwns61.fsf@suse.de>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id ACCAB63AC3;
+ Mon, 21 Aug 2023 19:37:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E31FCC433C7;
+ Mon, 21 Aug 2023 19:37:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1692646634;
+ bh=pa2w5QguPjZl1Tc/zRZDdLnQ5jOQIfYoqd91HtNanlE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=oAFA0w11jOmVaZKjW3BqsiuaB6UW2PYswuDQQok3aepwIxf6lQkoLvsTO0lImJooh
+ aJ4+zKg5dY/nJiX23RuX6bVAdpMg+Ce5VuO5FPdV82clJ7viz8PbQCYdYHHUDaxhk/
+ /yv7Z5W+h9vgCi6KUqLx83tWykJwxkYBYJdYjlAHE85Dw9NOgFeNlksugemnB+3gl9
+ ypS9ASq+kSTunw3BjUOlxekcZ0kpwIxvHi1Wwk2gx73d1SOm9PdJB8IALxI8g7P/Hq
+ 6HVR+fOd8ZuY0HCt9R5Ojd6U03WFsoaSBz2WjPhWM7fE9m3DeIfemQtqilk0YfBT/f
+ dIavANTz0gwog==
+Date: Mon, 21 Aug 2023 12:37:12 -0700
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: Guenter Roeck <linux@roeck-us.net>
+Message-ID: <ZOO86IYpjfnidag6@google.com>
+References: <ae78956b-0c55-4980-8ec4-5cccf7e69c16@roeck-us.net>
+ <CAOtxgyeE+PLWVCTMHbr6OgwXY5MB1vPmauY2wcvEZdW8OhM-YQ@mail.gmail.com>
+ <93fee6c4-fb2b-49eb-ab54-e77603289f6a@roeck-us.net>
+ <CAOtxgychpamcvMDtOcX=ZGsL8WPfYfLAjCRg-YAnEHYDBva+7g@mail.gmail.com>
+ <63722b9f-b510-50a7-8839-6ada783d2164@kernel.org>
+ <20230817155319.GA1483@sol.localdomain>
+ <700c2e58-d2fe-47c6-85a8-aa7f7b1613cf@roeck-us.net>
+ <CAOtxgyedoExF5yfJO6BkU6fYjJMpfJBDuEuG_2rjyT7o9qcX4Q@mail.gmail.com>
+ <ZOAOTcUAskB+F5ez@google.com>
+ <22fab316-237c-4363-b968-96e8307cdd59@roeck-us.net>
 MIME-Version: 1.0
-X-Spam-Score: -2.5 (--)
+Content-Disposition: inline
+In-Reply-To: <22fab316-237c-4363-b968-96e8307cdd59@roeck-us.net>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Christian Brauner <brauner@kernel.org> writes: > On Thu, Aug
- 17, 2023 at 10:06:58AM -0700, Eric Biggers wrote: >> On Wed, Aug 16, 2023
- at 01:07:54AM -0400, Gabriel Krisman Bertazi wrote: >> > Hi, >> > >> > This
- is v6 of the negative dentry on case [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On 08/18, Guenter Roeck wrote: > On Fri, Aug 18,
+ 2023 at 05:35:25PM -0700,
+ Jaegeuk Kim wrote: > > May I know if this works? > > > >
+ https://lore.kernel.org/linux-f2fs-devel/20230819003012.3473675-1-ja
+ [...] Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qYA1z-0004oA-C7
-Subject: Re: [f2fs-dev] [PATCH v6 0/9] Support negative dentries on
- case-insensitive ext4 and f2fs
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qYAiM-00BgKj-AY
+Subject: Re: [f2fs-dev] circular locking dependency warning in f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,58 +113,44 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net,
- Eric Biggers <ebiggers@kernel.org>, viro@zeniv.linux.org.uk,
- linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Eric Biggers <ebiggers@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Christian Brauner <brauner@kernel.org> writes:
-
-> On Thu, Aug 17, 2023 at 10:06:58AM -0700, Eric Biggers wrote:
->> On Wed, Aug 16, 2023 at 01:07:54AM -0400, Gabriel Krisman Bertazi wrote:
->> > Hi,
->> > 
->> > This is v6 of the negative dentry on case-insensitive directories.
->> > Thanks Eric for the review of the last iteration.  This version
->> > drops the patch to expose the helper to check casefolding directories,
->> > since it is not necessary in ecryptfs and it might be going away.  It
->> > also addresses some documentation details, fix a build bot error and
->> > simplifies the commit messages.  See the changelog in each patch for
->> > more details.
->> > 
->> > Thanks,
->> > 
->> > ---
->> > 
->> > Gabriel Krisman Bertazi (9):
->> >   ecryptfs: Reject casefold directory inodes
->> >   9p: Split ->weak_revalidate from ->revalidate
->> >   fs: Expose name under lookup to d_revalidate hooks
->> >   fs: Add DCACHE_CASEFOLDED_NAME flag
->> >   libfs: Validate negative dentries in case-insensitive directories
->> >   libfs: Chain encryption checks after case-insensitive revalidation
->> >   libfs: Merge encrypted_ci_dentry_ops and ci_dentry_ops
->> >   ext4: Enable negative dentries on case-insensitive lookup
->> >   f2fs: Enable negative dentries on case-insensitive lookup
->> > 
->> 
->> Looks good,
->> 
->> Reviewed-by: Eric Biggers <ebiggers@google.com>
->
-> Thanks! We're a bit too late for v6.6 with this given that this hasn't
-> even been in -next. So this will be up for v6.7.
-
-Targeting 6.7 is fine by me. will you pick it up through the vfs tree? I
-prefer it goes through there since it mostly touches vfs.
-
--- 
-Gabriel Krisman Bertazi
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMDgvMTgsIEd1ZW50ZXIgUm9lY2sgd3JvdGU6Cj4gT24gRnJpLCBBdWcgMTgsIDIwMjMgYXQg
+MDU6MzU6MjVQTSAtMDcwMCwgSmFlZ2V1ayBLaW0gd3JvdGU6Cj4gPiBNYXkgSSBrbm93IGlmIHRo
+aXMgd29ya3M/Cj4gPiAKPiA+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2xpbnV4LWYyZnMtZGV2
+ZWwvMjAyMzA4MTkwMDMwMTIuMzQ3MzY3NS0xLWphZWdldWtAa2VybmVsLm9yZy9ULyN1Cj4gPiAK
+PiAKPiBZZXMsIHRoYXQgZml4ZXMgdGhlIHByb2JsZW0gZm9yIG1lLiBUaGF0IG1ha2VzIG1lIHdv
+bmRlciwgdGhvdWdoOgo+IFdoeSBub3QganVzdCB1c2UgdGhlIF9uZXN0ZWQgZnVuY3Rpb25zIHVu
+Y29uZGl0aW9uYWxseSA/CgpJIHRoaW5rIHdlIHNob3VsZCBpZ25vcmUgdGhhdCBpbiB0aGlzIGNh
+c2Ugb25seS4KCj4gCj4gVGhhbmtzLAo+IEd1ZW50ZXIKPiAKPiA+IE9uIDA4LzE4LCBKYWVnZXVr
+IEtpbSB3cm90ZToKPiA+ID4gQ2hhbywKPiA+ID4gCj4gPiA+IERvIHlvdSBoYXZlIHNvbWUgYmFu
+ZHdpZHRoIHRvIGFkZHJlc3MgdGhpcz8gT3RoZXJ3aXNlLCBJJ2xsIGRvIHNvbWUuCj4gPiA+IAo+
+ID4gPiBUaGFua3MsCj4gPiA+IAo+ID4gPiBPbiBGcmksIEF1ZyAxOCwgMjAyMyBhdCA2OjE14oCv
+QU0gR3VlbnRlciBSb2VjayA8bGludXhAcm9lY2stdXMubmV0PiB3cm90ZToKPiA+ID4gPgo+ID4g
+PiA+IE9uIFRodSwgQXVnIDE3LCAyMDIzIGF0IDA4OjUzOjE5QU0gLTA3MDAsIEVyaWMgQmlnZ2Vy
+cyB3cm90ZToKPiA+ID4gPiA+IE9uIFRodSwgQXVnIDE3LCAyMDIzIGF0IDEwOjI2OjEyUE0gKzA4
+MDAsIENoYW8gWXUgd3JvdGU6Cj4gPiA+ID4gPiA+ID4gPiA+ICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsb2NrKG5ld19pbm9kZSMyLT5pX3NlbSkK
+PiA+ID4gPiA+ID4gPiA+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGxvY2soZGlyLT5pX3hhdHRyX3NlbSkKPiA+ID4gPiA+ID4gPiA+ID4gbG9j
+ayhuZXdfaW5vZGUjMS0+aV9zZW0pCj4gPiA+ID4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+ID4gPiA+
+IFRoaXMgbG9va3MgZmluZSB0byBtZS4KPiA+ID4gPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gPiA+
+Cj4gPiA+ID4gPiA+ID4gPiBCYXNlZCBvbiB5b3VyIGZlZWRiYWNrLCBhbSBJIGNvcnJlY3QgYXNz
+dW1pbmcgdGhhdCB5b3UgZG9uJ3QgcGxhbgo+ID4gPiA+ID4gPiA+ID4gdG8gZml4IHRoaXMgPwo+
+ID4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+ID4gSSdtIHF1aXRlIG9wZW4gdG8gc29tZXRoaW5nIHRo
+YXQgSSBtYXkgbWlzcy4gQ2hhbywgd2hhdCBkbyB5b3UgdGhpbms/Cj4gPiA+ID4gPiA+Cj4gPiA+
+ID4gPiA+IEphZWdldWssIEkgYWdyZWUgd2l0aCB5b3UsIGl0IGxvb2tzIGxpa2UgYSBmYWxzZSBh
+bGFybS4KPiA+ID4gPiA+ID4KPiA+ID4gPiA+Cj4gPiA+ID4gPiBGYWxzZSBwb3NpdGl2ZSBsb2Nr
+ZGVwIHJlcG9ydHMgc3RpbGwgbmVlZCB0byBiZSBlbGltaW5hdGVkLCBmb3IgZXhhbXBsZSBieQo+
+ID4gPiA+ID4gZml4aW5nIHRoZSBsb2NrZGVwIGFubm90YXRpb25zLiAgT3RoZXJ3aXNlIGl0J3Mg
+aW1wb3NzaWJsZSB0byBkaXN0aW5ndWlzaCB0aGVtCj4gPiA+ID4gPiBmcm9tIHRydWUgcG9zaXRp
+dmVzLgo+ID4gPiA+ID4KPiA+ID4gPgo+ID4gPiA+IEV4YWN0bHksIGFuZCB0aGF0IGlzIHdoeSBJ
+IGRvbid0IHRlc3QgZmVhdHVyZXMgd2l0aCBrbm93biBsb2NrZGVwIGFubm90YXRpb24KPiA+ID4g
+PiBpc3N1ZXMuIEknbGwgZHJvcCBmMmZzIGZyb20gbXkgbGlzdCBvZiBmZWF0dXJlcyB0byB0ZXN0
+IGZvciB0aGUgdGltZSBiZWluZy4KPiA+ID4gPgo+ID4gPiA+IEd1ZW50ZXIKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1h
+aWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczov
+L2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
