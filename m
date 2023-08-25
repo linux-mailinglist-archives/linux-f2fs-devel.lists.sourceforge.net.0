@@ -2,86 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22D5C788911
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 15:55:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75ED6788915
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 15:55:40 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qZXHQ-0000Kx-8z;
-	Fri, 25 Aug 2023 13:55:15 +0000
+	id 1qZXHi-0002wZ-8K;
+	Fri, 25 Aug 2023 13:55:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hao.xu@linux.dev>) id 1qZXHI-0000KV-Hr
+ (envelope-from <hao.xu@linux.dev>) id 1qZXHh-0002wT-5A
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Aug 2023 13:55:07 +0000
+ Fri, 25 Aug 2023 13:55:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Tk2hf/ZsTIcu3ZelMcVU1L9gdHG1BIE6+k0PUkf3KOw=; b=VyvyKQ/gVB59k2O5uBUy8mm4qO
- jcnRJR9lwxat6TWa4Ljt4FyRt7EmGxd+E7B8LFR5CufolayRQuKeoBXQ9KOBtpi+CgR1/IE8hj66O
- uYEI5jbJPwdToyoWU48ZRdQZ3OGauKLz6ZkocrX1MtemqO+cVceUQNk8HPOEzSDrJQf4=;
+ bh=M7eywqhb1fMAXTeyjh6BJsPONBLehGvo8wJ7nQSmBJs=; b=nRr14dnQW6v1uI0mryHz5yAijM
+ vC+Ezu3KhTLQCBz6I1CdGxJfa9/R1DWJUw6q1xdBd0e6fycxjWYs8Lz8EjndBbZlwYVutW/GODsrP
+ /ts/YkOqUSoR4I+hwJzHYhqYQ4zO1jU1QLXKs2nEZktrCoYC2oCOIUDxyOfB9bKGixUE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Tk2hf/ZsTIcu3ZelMcVU1L9gdHG1BIE6+k0PUkf3KOw=; b=L
- NHfEMQgq16pWCVYgDr5H5ffHop1KG4Mr1SV/UurwMtu6KQqlGdiCbYTm+si6Gq5f0USlbXqqXa6ST
- eSAFX9q2MS3gv0eRDIjC1K6X0LeocV76PeKwBNP5DuN4sU5rIuFIpZ86G8Y++roKN00FJmBUznEzY
- /HC+Q+R00U0WkeVE=;
-Received: from out-252.mta1.migadu.com ([95.215.58.252])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=M7eywqhb1fMAXTeyjh6BJsPONBLehGvo8wJ7nQSmBJs=; b=mKC2Slz5NLRVJzudrtXRTINBeA
+ AgvQHHWyRIF2bDnhgZULHz50lPfikheYu24YQT2OVSOcgkacaA3KRjUmTYfnF/v3fKBOFo6WrByPv
+ lVLgo/usukM3Yjkk22I99hWqxlh8kZOxN4nlgzPJG1A40hL/HXk5iMNFlMdNGGBF4t9Y=;
+Received: from out-242.mta1.migadu.com ([95.215.58.242])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qZXH8-0007C7-EZ for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Aug 2023 13:55:07 +0000
+ id 1qZXHY-00FHZf-Jk for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 25 Aug 2023 13:55:33 +0000
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1692971691;
+ t=1692971717;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Tk2hf/ZsTIcu3ZelMcVU1L9gdHG1BIE6+k0PUkf3KOw=;
- b=uBcPYj+KePQLzK49m3TJoZ63Y8UYXvuGXKh/n3l6WJhsswjd7fki+qH9rfO1d4Ug+ZVsQ9
- lMMssXOvXKvFl3htZmbseqXbjusga8retQQQvlmfZ3u1SC4cy0Lfpdarfx6uPXt3VqFa7M
- TnDSmLpV98dTb6gRRR2P2i+KA8l5+u4=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=M7eywqhb1fMAXTeyjh6BJsPONBLehGvo8wJ7nQSmBJs=;
+ b=sf0c3BaV5zKRH4Bb8TUwfPopplZAFyQJxSB3uPd/Bru862GHE/6uLEqra/FCbrZoDX4RQi
+ CIrt1XneKgBJ/A8gWA/etx0kgRlpMUcGJTfa14yTcf5Kv3L0Wt8Br8rgcIz1PY9X6AeQ+Q
+ Vrx6zJaXOEDBrQhrS+G7Zr51TGkx4FM=
 From: Hao Xu <hao.xu@linux.dev>
 To: io-uring@vger.kernel.org,
 	Jens Axboe <axboe@kernel.dk>
-Date: Fri, 25 Aug 2023 21:54:02 +0800
-Message-Id: <20230825135431.1317785-1-hao.xu@linux.dev>
+Date: Fri, 25 Aug 2023 21:54:03 +0800
+Message-Id: <20230825135431.1317785-2-hao.xu@linux.dev>
+In-Reply-To: <20230825135431.1317785-1-hao.xu@linux.dev>
+References: <20230825135431.1317785-1-hao.xu@linux.dev>
 MIME-Version: 1.0
 X-Migadu-Flow: FLOW_OUT
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Hao Xu <howeyxu@tencent.com> This series introduce
- getdents64
- to io_uring, the code logic is similar with the snychronized version's. It
- first try nowait issue, and offload it to io-wq threads if the first try
- fails. Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview: From: Dominique Martinet <asmadeus@codewreck.org> This splits
+ off the vfs_getdents function from the getdents64 system call. This will
+ allow io_uring to call the vfs_getdents function. Co-developed-by: Stefan
+ Roesch <shr@fb.com> Signed-off-by: Stefan Roesch <shr@fb.com> Signed-off-by:
+ Dominique Martinet <asmadeus@codewreck.org> Signed-off-by: Hao Xu
+ <howeyxu@tencent.com> --- fs/inte [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1qZXH8-0007C7-EZ
-Subject: [f2fs-dev] [PATCH RFC v5 00/29] io_uring getdents
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1qZXHY-00FHZf-Jk
+Subject: [f2fs-dev] [PATCH 01/29] fs: split off vfs_getdents function of
+ getdents64 syscall
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,206 +119,104 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Hao Xu <howeyxu@tencent.com>
+From: Dominique Martinet <asmadeus@codewreck.org>
 
-This series introduce getdents64 to io_uring, the code logic is similar
-with the snychronized version's. It first try nowait issue, and offload
-it to io-wq threads if the first try fails.
+This splits off the vfs_getdents function from the getdents64 system
+call.
+This will allow io_uring to call the vfs_getdents function.
 
-Patch1 and Patch2 are some preparation
-Patch3 supports nowait for xfs getdents code
-Patch4-11 are vfs change, include adding helpers and trylock for locks
-Patch12-29 supports nowait for involved xfs journal stuff
-note, Patch24 and 27 are actually two questions, might be removed later.
-an xfs test may come later.
+Co-developed-by: Stefan Roesch <shr@fb.com>
+Signed-off-by: Stefan Roesch <shr@fb.com>
+Signed-off-by: Dominique Martinet <asmadeus@codewreck.org>
+Signed-off-by: Hao Xu <howeyxu@tencent.com>
+---
+ fs/internal.h |  8 ++++++++
+ fs/readdir.c  | 34 ++++++++++++++++++++++++++--------
+ 2 files changed, 34 insertions(+), 8 deletions(-)
 
-Tests I've done:
-a liburing test case for functional test:
-https://github.com/HowHsu/liburing/commit/39dc9a8e19c06a8cebf8c2301b85320eb45c061e?diff=unified
-
-xfstests:
-    test/generic: 1 fails and 171 not run
-    test/xfs: 72 fails and 156 not run
-run the code before without this patchset, same result.
-I'll try to make the environment more right to run more tests here.
-
-
-Tested it with a liburing performance test:
-https://github.com/HowHsu/liburing/blob/getdents/test/getdents2.c
-
-The test is controlled by the below script[2] which runs getdents2.t 100
-times and calulate the avg.
-The result show that io_uring version is about 2.6% faster:
-
-note:
-[1] the number of getdents call/request in io_uring and normal sync version
-are made sure to be same beforehand.
-
-[2] run_getdents.py
-
-```python3
-
-import subprocess
-
-N = 100
-sum = 0.0
-args = ["/data/home/howeyxu/tmpdir", "sync"]
-
-for i in range(N):
-    output = subprocess.check_output(["./liburing/test/getdents2.t"] + args)
-    sum += float(output)
-
-average = sum / N
-print("Average of sync:", average)
-
-sum = 0.0
-args = ["/data/home/howeyxu/tmpdir", "iouring"]
-
-for i in range(N):
-    output = subprocess.check_output(["./liburing/test/getdents2.t"] + args)
-    sum += float(output)
-
-average = sum / N
-print("Average of iouring:", average)
-
-```
-
-v4->v5:
- - move atime update to the beginning of getdents operation
- - trylock for i_rwsem
- - nowait semantics for involved xfs journal stuff
-
-v3->v4:
- - add Dave's xfs nowait code and fix a deadlock problem, with some code
-   style tweak.
- - disable fixed file to avoid a race problem for now
- - add a test program.
-
-v2->v3:
- - removed the kernfs patches
- - add f_pos_lock logic
- - remove the "reduce last EOF getdents try" optimization since
-   Dominique reports that doesn't make difference
- - remove the rewind logic, I think the right way is to introduce lseek
-   to io_uring not to patch this logic to getdents.
- - add Singed-off-by of Stefan Roesch for patch 1 since checkpatch
-   complained that Co-developed-by someone should be accompanied with
-   Signed-off-by same person, I can remove them if Stefan thinks that's
-   not proper.
-
-
-Dominique Martinet (1):
-  fs: split off vfs_getdents function of getdents64 syscall
-
-Hao Xu (28):
-  xfs: rename XBF_TRYLOCK to XBF_NOWAIT
-  xfs: add NOWAIT semantics for readdir
-  vfs: add nowait flag for struct dir_context
-  vfs: add a vfs helper for io_uring file pos lock
-  vfs: add file_pos_unlock() for io_uring usage
-  vfs: add a nowait parameter for touch_atime()
-  vfs: add nowait parameter for file_accessed()
-  vfs: move file_accessed() to the beginning of iterate_dir()
-  vfs: add S_NOWAIT for nowait time update
-  vfs: trylock inode->i_rwsem in iterate_dir() to support nowait
-  xfs: enforce GFP_NOIO implicitly during nowait time update
-  xfs: make xfs_trans_alloc() support nowait semantics
-  xfs: support nowait for xfs_log_reserve()
-  xfs: don't wait for free space in xlog_grant_head_check() in nowait
-    case
-  xfs: add nowait parameter for xfs_inode_item_init()
-  xfs: make xfs_trans_ijoin() error out -EAGAIN
-  xfs: set XBF_NOWAIT for xfs_buf_read_map if necessary
-  xfs: support nowait memory allocation in _xfs_buf_alloc()
-  xfs: distinguish error type of memory allocation failure for nowait
-    case
-  xfs: return -EAGAIN when bulk memory allocation fails in nowait case
-  xfs: comment page allocation for nowait case in xfs_buf_find_insert()
-  xfs: don't print warn info for -EAGAIN error in  xfs_buf_get_map()
-  xfs: support nowait for xfs_buf_read_map()
-  xfs: support nowait for xfs_buf_item_init()
-  xfs: return -EAGAIN when nowait meets sync in transaction commit
-  xfs: add a comment for xlog_kvmalloc()
-  xfs: support nowait semantics for xc_ctx_lock in xlog_cil_commit()
-  io_uring: add support for getdents
-
- arch/s390/hypfs/inode.c         |  2 +-
- block/fops.c                    |  2 +-
- fs/btrfs/file.c                 |  2 +-
- fs/btrfs/inode.c                |  2 +-
- fs/cachefiles/namei.c           |  2 +-
- fs/coda/dir.c                   |  4 +--
- fs/ecryptfs/file.c              |  4 +--
- fs/ext2/file.c                  |  4 +--
- fs/ext4/file.c                  |  6 ++--
- fs/f2fs/file.c                  |  4 +--
- fs/file.c                       | 13 +++++++
- fs/fuse/dax.c                   |  2 +-
- fs/fuse/file.c                  |  4 +--
- fs/gfs2/file.c                  |  2 +-
- fs/hugetlbfs/inode.c            |  2 +-
- fs/inode.c                      | 10 +++---
- fs/internal.h                   |  8 +++++
- fs/namei.c                      |  4 +--
- fs/nfsd/vfs.c                   |  2 +-
- fs/nilfs2/file.c                |  2 +-
- fs/orangefs/file.c              |  2 +-
- fs/orangefs/inode.c             |  2 +-
- fs/overlayfs/file.c             |  2 +-
- fs/overlayfs/inode.c            |  2 +-
- fs/pipe.c                       |  2 +-
- fs/ramfs/file-nommu.c           |  2 +-
- fs/readdir.c                    | 61 +++++++++++++++++++++++++--------
- fs/smb/client/cifsfs.c          |  2 +-
- fs/splice.c                     |  2 +-
- fs/stat.c                       |  2 +-
- fs/ubifs/file.c                 |  2 +-
- fs/udf/file.c                   |  2 +-
- fs/xfs/libxfs/xfs_alloc.c       |  2 +-
- fs/xfs/libxfs/xfs_attr_remote.c |  2 +-
- fs/xfs/libxfs/xfs_btree.c       |  2 +-
- fs/xfs/libxfs/xfs_da_btree.c    | 16 +++++++++
- fs/xfs/libxfs/xfs_da_btree.h    |  1 +
- fs/xfs/libxfs/xfs_dir2_block.c  |  7 ++--
- fs/xfs/libxfs/xfs_dir2_priv.h   |  2 +-
- fs/xfs/libxfs/xfs_shared.h      |  2 ++
- fs/xfs/libxfs/xfs_trans_inode.c | 12 +++++--
- fs/xfs/scrub/dir.c              |  2 +-
- fs/xfs/scrub/readdir.c          |  2 +-
- fs/xfs/scrub/repair.c           |  2 +-
- fs/xfs/xfs_buf.c                | 43 +++++++++++++++++------
- fs/xfs/xfs_buf.h                |  4 +--
- fs/xfs/xfs_buf_item.c           |  9 +++--
- fs/xfs/xfs_buf_item.h           |  2 +-
- fs/xfs/xfs_buf_item_recover.c   |  2 +-
- fs/xfs/xfs_dir2_readdir.c       | 49 ++++++++++++++++++++------
- fs/xfs/xfs_dquot.c              |  2 +-
- fs/xfs/xfs_file.c               |  6 ++--
- fs/xfs/xfs_inode.c              | 27 +++++++++++++++
- fs/xfs/xfs_inode.h              | 17 +++++----
- fs/xfs/xfs_inode_item.c         | 12 ++++---
- fs/xfs/xfs_inode_item.h         |  3 +-
- fs/xfs/xfs_iops.c               | 31 ++++++++++++++---
- fs/xfs/xfs_log.c                | 33 ++++++++++++------
- fs/xfs/xfs_log.h                |  5 +--
- fs/xfs/xfs_log_cil.c            | 17 +++++++--
- fs/xfs/xfs_log_priv.h           |  4 +--
- fs/xfs/xfs_trans.c              | 44 ++++++++++++++++++++----
- fs/xfs/xfs_trans.h              |  2 +-
- fs/xfs/xfs_trans_buf.c          | 18 ++++++++--
- fs/zonefs/file.c                |  4 +--
- include/linux/file.h            |  7 ++++
- include/linux/fs.h              | 16 +++++++--
- include/uapi/linux/io_uring.h   |  1 +
- io_uring/fs.c                   | 53 ++++++++++++++++++++++++++++
- io_uring/fs.h                   |  3 ++
- io_uring/opdef.c                |  8 +++++
- kernel/bpf/inode.c              |  4 +--
- mm/filemap.c                    |  8 ++---
- mm/shmem.c                      |  6 ++--
- net/unix/af_unix.c              |  4 +--
- 75 files changed, 499 insertions(+), 161 deletions(-)
-
+diff --git a/fs/internal.h b/fs/internal.h
+index f7a3dc111026..b1f66e52d61b 100644
+--- a/fs/internal.h
++++ b/fs/internal.h
+@@ -304,3 +304,11 @@ ssize_t __kernel_write_iter(struct file *file, struct iov_iter *from, loff_t *po
+ struct mnt_idmap *alloc_mnt_idmap(struct user_namespace *mnt_userns);
+ struct mnt_idmap *mnt_idmap_get(struct mnt_idmap *idmap);
+ void mnt_idmap_put(struct mnt_idmap *idmap);
++
++/*
++ * fs/readdir.c
++ */
++struct linux_dirent64;
++
++int vfs_getdents(struct file *file, struct linux_dirent64 __user *dirent,
++		 unsigned int count);
+diff --git a/fs/readdir.c b/fs/readdir.c
+index b264ce60114d..9592259b7e7f 100644
+--- a/fs/readdir.c
++++ b/fs/readdir.c
+@@ -21,6 +21,7 @@
+ #include <linux/unistd.h>
+ #include <linux/compat.h>
+ #include <linux/uaccess.h>
++#include "internal.h"
+ 
+ #include <asm/unaligned.h>
+ 
+@@ -351,10 +352,16 @@ static bool filldir64(struct dir_context *ctx, const char *name, int namlen,
+ 	return false;
+ }
+ 
+-SYSCALL_DEFINE3(getdents64, unsigned int, fd,
+-		struct linux_dirent64 __user *, dirent, unsigned int, count)
++
++/**
++ * vfs_getdents - getdents without fdget
++ * @file    : pointer to file struct of directory
++ * @dirent  : pointer to user directory structure
++ * @count   : size of buffer
++ */
++int vfs_getdents(struct file *file, struct linux_dirent64 __user *dirent,
++		 unsigned int count)
+ {
+-	struct fd f;
+ 	struct getdents_callback64 buf = {
+ 		.ctx.actor = filldir64,
+ 		.count = count,
+@@ -362,11 +369,7 @@ SYSCALL_DEFINE3(getdents64, unsigned int, fd,
+ 	};
+ 	int error;
+ 
+-	f = fdget_pos(fd);
+-	if (!f.file)
+-		return -EBADF;
+-
+-	error = iterate_dir(f.file, &buf.ctx);
++	error = iterate_dir(file, &buf.ctx);
+ 	if (error >= 0)
+ 		error = buf.error;
+ 	if (buf.prev_reclen) {
+@@ -379,6 +382,21 @@ SYSCALL_DEFINE3(getdents64, unsigned int, fd,
+ 		else
+ 			error = count - buf.count;
+ 	}
++	return error;
++}
++
++SYSCALL_DEFINE3(getdents64, unsigned int, fd,
++		struct linux_dirent64 __user *, dirent, unsigned int, count)
++{
++	struct fd f;
++	int error;
++
++	f = fdget_pos(fd);
++	if (!f.file)
++		return -EBADF;
++
++	error = vfs_getdents(f.file, dirent, count);
++
+ 	fdput_pos(f);
+ 	return error;
+ }
 -- 
 2.25.1
 
