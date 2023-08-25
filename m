@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81FBE788A8A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 16:06:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A9A4788A94
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 16:06:21 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qZXRr-00048y-8w;
-	Fri, 25 Aug 2023 14:06:03 +0000
+	id 1qZXS7-0004AR-Mp;
+	Fri, 25 Aug 2023 14:06:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hao.xu@linux.dev>) id 1qZXRp-00048r-P4
+ (envelope-from <hao.xu@linux.dev>) id 1qZXS6-0004AE-6h
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Aug 2023 14:06:01 +0000
+ Fri, 25 Aug 2023 14:06:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4gmh1Yl1nIIBwKe+EGho8dT2/H6COtTrErlOIONZgFQ=; b=JeYw/ghbEqyvp53dkampEvp4dA
- PwHBSnZobkyUOEkTW9nS+/nJhj/Hx4YxrSurAxsJWlJ0z3NI54rI5pZPnIgNU7Z/5oVDvNafHFR2w
- GrSYhcdgs1EEy/S5miY5HzbKQx5jelD+1iHyhkPBPWRk03OtVWCsEuQ9yoqqaj82xWus=;
+ bh=o5eD4gq5Ypmv7xNjaJcQB3ZOSw79lNA3YgufxQ7kbUU=; b=UedNVGiGYIWkN4hjfXmv+Fjo54
+ CfENgG/MNAzHh8s/B9cwl7+tV8oqiSf83JzJEXgf78j3wQ3RW7uCrxPNaIn38j4PBTI4MNR4nF2Ro
+ Za5infCqajVRlMZ2v1s6ojdg7H2hE/XjuHKJN0GKkOTF3BFE1oLdOC9Bel+oiiWbULZ0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4gmh1Yl1nIIBwKe+EGho8dT2/H6COtTrErlOIONZgFQ=; b=Fvvotj8E+62pXIFTHEzNcdfKNc
- hZcwCOSWqQfpEKpOw7izUzuyVtXX/ra6rfmkrpsbiwjb3MbZxRo4JYj+9XHhcfBt/4++RdmCtD7Nn
- CDDJKOHEcYnfSFBl3N8kChXfA27WNzJl3KcPPHEHDyzs6cvE54Q0otW1kPifYPaJCVL4=;
-Received: from out-248.mta1.migadu.com ([95.215.58.248])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=o5eD4gq5Ypmv7xNjaJcQB3ZOSw79lNA3YgufxQ7kbUU=; b=IpByl2jfb5vGs0N4155iCjK4RZ
+ mm6VYwc+XOCoQU2G35lE/sCOUIUHXXHUAjGqEFRmIz3ZxeqdQAeU+pF4YfK6L8xOxawYgzAcp6+Gk
+ dyvDdBXyQ0J9ivacweqyBrNZ2qpPARrmoxOlqzXIkCovW56p0gFllNeQ/G8vJa7D7c7w=;
+Received: from out-244.mta1.migadu.com ([95.215.58.244])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qZXRo-0007nL-RR for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Aug 2023 14:06:01 +0000
+ id 1qZXS4-00FIBE-FA for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 25 Aug 2023 14:06:18 +0000
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1692972353;
+ t=1692972368;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=4gmh1Yl1nIIBwKe+EGho8dT2/H6COtTrErlOIONZgFQ=;
- b=gfnw7iot2v83zX2rBTLz1spXwFLJTgZUr3L11o+Xtkb6kMiY2V8isvCmRHCyeGMc3m+Cgc
- 4QGEiH3BvMZ39xF7zrn0F0ImfXnteloPQ0HANELCYOPXSgll6hNjSPIHSsKK/xLoS1sTMP
- 6uHJDx4f8EyPCrO0C+jtU3MY4km0+Ig=
+ bh=o5eD4gq5Ypmv7xNjaJcQB3ZOSw79lNA3YgufxQ7kbUU=;
+ b=IDkI/8FcKGXMrBLpAzKCujyKyUIvnRClPZG+PDDA+Kg6Ww/HgNrG0d8/UaYBPttRvdNV2G
+ ImRsaH6EObyEWgQtf31bAS82oxf65cz7kpZXIj7D5nH1V4igKHLmt2T1OZkYhVy9UsI8OJ
+ u9rq7LaZ7EE10dyazZwRdVBs5aqDaMI=
 From: Hao Xu <hao.xu@linux.dev>
 To: io-uring@vger.kernel.org,
 	Jens Axboe <axboe@kernel.dk>
-Date: Fri, 25 Aug 2023 21:54:29 +0800
-Message-Id: <20230825135431.1317785-28-hao.xu@linux.dev>
+Date: Fri, 25 Aug 2023 21:54:30 +0800
+Message-Id: <20230825135431.1317785-29-hao.xu@linux.dev>
 In-Reply-To: <20230825135431.1317785-1-hao.xu@linux.dev>
 References: <20230825135431.1317785-1-hao.xu@linux.dev>
 MIME-Version: 1.0
@@ -67,10 +67,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Hao Xu <howeyxu@tencent.com> vmalloc() always succeed
- in 64 bit system? Not a real patch. Signed-off-by: Hao Xu
- <howeyxu@tencent.com>
- --- fs/xfs/xfs_log_cil.c | 3 +++ 1 file changed, 3 insertions(+) 
+ Content preview:  From: Hao Xu <howeyxu@tencent.com> Apply trylock logic for
+ xc_ctx_lock in xlog_cil_commit() in nowait case and error out -EAGAIN for
+ xlog_cil_commit(). Signed-off-by: Hao Xu <howeyxu@tencent.com> ---
+ fs/xfs/xfs_log_cil.c
+ | 12 ++++++++++-- fs/xfs/xfs_log_priv.h | 2 +- fs/xfs/xfs_trans.c | 4 +++-
+ 3 files changed, 14 insertions(+), 4 deletions(-) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -83,8 +85,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1qZXRo-0007nL-RR
-Subject: [f2fs-dev] [PATCH 27/29] xfs: add a comment for xlog_kvmalloc()
+X-Headers-End: 1qZXS4-00FIBE-FA
+Subject: [f2fs-dev] [PATCH 28/29] xfs: support nowait semantics for
+ xc_ctx_lock in xlog_cil_commit()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,28 +121,88 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Hao Xu <howeyxu@tencent.com>
 
-vmalloc() always succeed in 64 bit system?
-Not a real patch.
+Apply trylock logic for xc_ctx_lock in xlog_cil_commit() in nowait
+case and error out -EAGAIN for xlog_cil_commit().
 
 Signed-off-by: Hao Xu <howeyxu@tencent.com>
 ---
- fs/xfs/xfs_log_cil.c | 3 +++
- 1 file changed, 3 insertions(+)
+ fs/xfs/xfs_log_cil.c  | 12 ++++++++++--
+ fs/xfs/xfs_log_priv.h |  2 +-
+ fs/xfs/xfs_trans.c    |  4 +++-
+ 3 files changed, 14 insertions(+), 4 deletions(-)
 
 diff --git a/fs/xfs/xfs_log_cil.c b/fs/xfs/xfs_log_cil.c
-index f17c1799b3c4..b31830ee36dd 100644
+index b31830ee36dd..6d054359bbb5 100644
 --- a/fs/xfs/xfs_log_cil.c
 +++ b/fs/xfs/xfs_log_cil.c
-@@ -335,6 +335,9 @@ xlog_cil_alloc_shadow_bufs(
- 			 * storage.
- 			 */
- 			kmem_free(lip->li_lv_shadow);
-+			/*
-+			 * May this be indefinite loop in nowait case?
-+			 */
- 			lv = xlog_kvmalloc(buf_size);
+@@ -1613,7 +1613,7 @@ xlog_cil_process_intents(
+  * background commit, returns without it held once background commits are
+  * allowed again.
+  */
+-void
++int
+ xlog_cil_commit(
+ 	struct xlog		*log,
+ 	struct xfs_trans	*tp,
+@@ -1623,6 +1623,7 @@ xlog_cil_commit(
+ 	struct xfs_cil		*cil = log->l_cilp;
+ 	struct xfs_log_item	*lip, *next;
+ 	uint32_t		released_space = 0;
++	bool			nowait = tp->t_flags & XFS_TRANS_NOWAIT;
  
- 			memset(lv, 0, xlog_cil_iovec_space(niovecs));
+ 	/*
+ 	 * Do all necessary memory allocation before we lock the CIL.
+@@ -1632,7 +1633,12 @@ xlog_cil_commit(
+ 	xlog_cil_alloc_shadow_bufs(log, tp);
+ 
+ 	/* lock out background commit */
+-	down_read(&cil->xc_ctx_lock);
++	if (nowait) {
++		if (!down_read_trylock(&cil->xc_ctx_lock))
++			return -EAGAIN;
++	} else {
++		down_read(&cil->xc_ctx_lock);
++	}
+ 
+ 	if (tp->t_flags & XFS_TRANS_HAS_INTENT_DONE)
+ 		released_space = xlog_cil_process_intents(cil, tp);
+@@ -1668,6 +1674,8 @@ xlog_cil_commit(
+ 
+ 	/* xlog_cil_push_background() releases cil->xc_ctx_lock */
+ 	xlog_cil_push_background(log);
++
++	return 0;
+ }
+ 
+ /*
+diff --git a/fs/xfs/xfs_log_priv.h b/fs/xfs/xfs_log_priv.h
+index 41edaa0ae869..eb7a1241deab 100644
+--- a/fs/xfs/xfs_log_priv.h
++++ b/fs/xfs/xfs_log_priv.h
+@@ -580,7 +580,7 @@ int	xlog_cil_init(struct xlog *log);
+ void	xlog_cil_init_post_recovery(struct xlog *log);
+ void	xlog_cil_destroy(struct xlog *log);
+ bool	xlog_cil_empty(struct xlog *log);
+-void	xlog_cil_commit(struct xlog *log, struct xfs_trans *tp,
++int	xlog_cil_commit(struct xlog *log, struct xfs_trans *tp,
+ 			xfs_csn_t *commit_seq, bool regrant);
+ void	xlog_cil_set_ctx_write_state(struct xfs_cil_ctx *ctx,
+ 			struct xlog_in_core *iclog);
+diff --git a/fs/xfs/xfs_trans.c b/fs/xfs/xfs_trans.c
+index f1f84a3dd456..e5beda636a37 100644
+--- a/fs/xfs/xfs_trans.c
++++ b/fs/xfs/xfs_trans.c
+@@ -1037,7 +1037,9 @@ __xfs_trans_commit(
+ 		xfs_trans_apply_sb_deltas(tp);
+ 	xfs_trans_apply_dquot_deltas(tp);
+ 
+-	xlog_cil_commit(log, tp, &commit_seq, regrant);
++	error = xlog_cil_commit(log, tp, &commit_seq, regrant);
++	if (error)
++		goto out_unreserve;
+ 
+ 	xfs_trans_free(tp);
+ 
 -- 
 2.25.1
 
