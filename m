@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 322CD788A3F
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 16:04:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A492E788A5F
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 16:05:18 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qZXQc-00050c-82;
-	Fri, 25 Aug 2023 14:04:46 +0000
+	id 1qZXR6-00052c-54;
+	Fri, 25 Aug 2023 14:05:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hao.xu@linux.dev>) id 1qZXQZ-00050W-VF
+ (envelope-from <hao.xu@linux.dev>) id 1qZXR3-00052V-Ij
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Aug 2023 14:04:44 +0000
+ Fri, 25 Aug 2023 14:05:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sCdpGKioQF34weG5w+z0/y3PF/fjvtNNI35yO4EvtLk=; b=bWf3wKRaIcyZvuW/brto++iwAc
- s9Jvo2aLFMIG3F/sUvr66qfljhBQKwTyHcrlenSJGTSUqjzDc0ZuQN/kefIyWrUCcY1HSS9icKaF2
- 1/zSKfMQV/QR7nLOIWu9TjqVGYWvgVBFA9suM7DkIwUXNWn+QyP8bRN2cdCnopyPtiCw=;
+ bh=xYVJABOgP4/8L2CV4jLRK/KE5S9+YcPlTWp5R3EisXs=; b=iXrWfR2NZSQ/h1PYxDKVz2w+c9
+ 3Wxpk7PiqCT5N3RXxD+nIxa4a0OQtAWKWQQ2mQjBqIi54R0tOeoOhgQ6MVi1GZF3t6csIGwg1bFrw
+ /YqX9FiHxi2Z4kbQNA2tYK1sAQwDYaLAfzDu99UkEvHjdi4ACHXFSCmusIPvaGqDehb0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,31 +31,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sCdpGKioQF34weG5w+z0/y3PF/fjvtNNI35yO4EvtLk=; b=YS7oAXopoIPkY6vsQ03Rxob+je
- DXxEMul8AwrLhix8imB9THtQyur5wToKHV9D4HqHK1ZPi8JQ1Qv8YQhbIepbX/lST9wRa74MCA7R3
- zO8PBOY3kv865VfVoGBg+L3dwz2hhMPBJig9QQQvp5K2sMmfhU8Sg4XUPxHPaw1R6ta4=;
-Received: from out-249.mta1.migadu.com ([95.215.58.249])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=xYVJABOgP4/8L2CV4jLRK/KE5S9+YcPlTWp5R3EisXs=; b=GNt6wnb4Qf8zXGA5LLeDUCyH1G
+ DXt2zPsGgz2h3+RJ4zA7uxCPlhUZnlXMxRTULQlYDFCBocdJs3QVkE0Mu7NqVt/MUdsTHjHlO2zeY
+ BNE4ZukGKtT2pZQ4Pmtjieljx6BO7m7qjwSCFaDyL2YgiC0NN8ayp35tpru6Fvfs/Zpo=;
+Received: from out-245.mta1.migadu.com ([95.215.58.245])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qZXQZ-0007jO-Lm for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Aug 2023 14:04:44 +0000
+ id 1qZXR3-00FI6H-8M for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 25 Aug 2023 14:05:13 +0000
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1692972277;
+ t=1692972304;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=sCdpGKioQF34weG5w+z0/y3PF/fjvtNNI35yO4EvtLk=;
- b=cYsDGPpjRbWUMOTIPyMO/haz1FlbbiWizE4L6+4KiNimBQndM5dbyTTkg9jBA2egpwU6Cb
- fkg5cTnWwTpMK0RxO73BKMbVgecaeb3ZdD5hvh5LwNn8nQIo0z4wNaoOSgDtnANIdxLDF6
- nhdxpWfLei5X8co+EkZeZUy0T4PzeHk=
+ bh=xYVJABOgP4/8L2CV4jLRK/KE5S9+YcPlTWp5R3EisXs=;
+ b=mPHInzP0NdE0PARLrMiNVwBxHc2RcZZ9h1TcJI1UDo2PmUbrGHosmFv1DSPqUTrb8M6kqp
+ 4M25de/KL1vHeKbgvgWIJvfxIGajB7oK9YCJR4tOksovz6wykfv/qKqEWZZksomlKe2dSa
+ K35zik9gA6wCtduft3CmT9CQD0iaLDk=
 From: Hao Xu <hao.xu@linux.dev>
 To: io-uring@vger.kernel.org,
 	Jens Axboe <axboe@kernel.dk>
-Date: Fri, 25 Aug 2023 21:54:25 +0800
-Message-Id: <20230825135431.1317785-24-hao.xu@linux.dev>
+Date: Fri, 25 Aug 2023 21:54:26 +0800
+Message-Id: <20230825135431.1317785-25-hao.xu@linux.dev>
 In-Reply-To: <20230825135431.1317785-1-hao.xu@linux.dev>
 References: <20230825135431.1317785-1-hao.xu@linux.dev>
 MIME-Version: 1.0
@@ -67,11 +67,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Hao Xu <howeyxu@tencent.com> -EAGAIN is internal error
- to indicate a retry,
- no needs to print a warn. Signed-off-by: Hao Xu <howeyxu@tencent.com>
- --- fs/xfs/xfs_buf.c | 7 ++++--- 1 file changed, 4 insertions(+),
- 3 deletions(-)
+ Content preview: From: Hao Xu <howeyxu@tencent.com> This causes xfstests
+ generic/232
+ hung in umount process, waiting for ail push, so I comment it for now, need
+ some hints from xfs folks. Not a real patch. Signed-off-by: Hao Xu
+ <howeyxu@tencent.com>
+ --- fs/xfs/xfs_buf.c | 7 +++++++ 1 file changed, 7 insertions(+) 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -84,9 +85,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1qZXQZ-0007jO-Lm
-Subject: [f2fs-dev] [PATCH 23/29] xfs: don't print warn info for -EAGAIN
- error in xfs_buf_get_map()
+X-Headers-End: 1qZXR3-00FI6H-8M
+Subject: [f2fs-dev] [PATCH 24/29] xfs: support nowait for xfs_buf_read_map()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,32 +120,33 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Hao Xu <howeyxu@tencent.com>
 
--EAGAIN is internal error to indicate a retry, no needs to print a
-warn.
+This causes xfstests generic/232 hung in umount process, waiting for ail
+push, so I comment it for now, need some hints from xfs folks.
+Not a real patch.
 
 Signed-off-by: Hao Xu <howeyxu@tencent.com>
 ---
- fs/xfs/xfs_buf.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ fs/xfs/xfs_buf.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
 diff --git a/fs/xfs/xfs_buf.c b/fs/xfs/xfs_buf.c
-index 57bdc4c5dde1..cdad80e1ae25 100644
+index cdad80e1ae25..284962a9f31a 100644
 --- a/fs/xfs/xfs_buf.c
 +++ b/fs/xfs/xfs_buf.c
-@@ -730,9 +730,10 @@ xfs_buf_get_map(
- 	if (!bp->b_addr) {
- 		error = _xfs_buf_map_pages(bp, flags);
- 		if (unlikely(error)) {
--			xfs_warn_ratelimited(btp->bt_mount,
--				"%s: failed to map %u pages", __func__,
--				bp->b_page_count);
-+			if (error != -EAGAIN)
-+				xfs_warn_ratelimited(btp->bt_mount,
-+					"%s: failed to map %u pages", __func__,
-+					bp->b_page_count);
- 			xfs_buf_relse(bp);
- 			return error;
- 		}
+@@ -828,6 +828,13 @@ xfs_buf_read_map(
+ 	trace_xfs_buf_read(bp, flags, _RET_IP_);
+ 
+ 	if (!(bp->b_flags & XBF_DONE)) {
++//		/*
++//		 * Let's bypass the _xfs_buf_read() for now
++//		 */
++//		if (flags & XBF_NOWAIT) {
++//			xfs_buf_relse(bp);
++//			return -EAGAIN;
++//		}
+ 		/* Initiate the buffer read and wait. */
+ 		XFS_STATS_INC(target->bt_mount, xb_get_read);
+ 		bp->b_ops = ops;
 -- 
 2.25.1
 
