@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0E8C789160
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 26 Aug 2023 00:02:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29A4C7890EF
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 23:58:35 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qZesr-0000zB-QF;
-	Fri, 25 Aug 2023 22:02:26 +0000
+	id 1qZep1-0001qa-Tg;
+	Fri, 25 Aug 2023 21:58:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <david@fromorbit.com>) id 1qZesq-0000z4-Sj
+ (envelope-from <david@fromorbit.com>) id 1qZep0-0001qU-Hx
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Aug 2023 22:02:25 +0000
+ Fri, 25 Aug 2023 21:58:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EA93GbJhFaX1RD1S1v1NWvgWKkuCopUaLEmO6z67OS0=; b=TizDDBwpNwcuVP7sJyo6DyDjGm
- xbwlwZP3e65spXYFFbR2641ZfpE0VwV5MeCwF+6AVA4kBjXfyt7Uutd7I9tCcqpOKNSYYm/oiCZ1J
- UwWL5XAURRYIRu3Uq4PwNxLSkA6WBfqddbU+XHI3b3c4vCd46FO3D9F5oNN75l61V2SQ=;
+ bh=KYhyzbAkZA6I0JpkJP7NgCytRvclFoiu9vcGiedxJnM=; b=bgPyeuvA6WtPSUYO/KVJ4jW8wq
+ oYG9w9qni76kw5+cYYHEbcGohxYC+dU41/Flu+NvlD7N2/M9wjZptpVNyhfl5gqmN6UCoXzVK9+F8
+ X+/2AUIqXnfJBfpBZdAJ/LslJ2wpRcu0QYH7NAi3gqgTHbYMFe+/EuRkrK1dbza8oRXI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,87 +31,89 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EA93GbJhFaX1RD1S1v1NWvgWKkuCopUaLEmO6z67OS0=; b=Cn7kwPOG9EkuDSZzcp8rHeIwV9
- bHPe6AdmymjotQL8ReM8gBEcTbETcz6zUZ3yrWVAwAutVS/64Yx7tfTW26CNIs7WlCcMTz8hq90Qt
- P7lqbkGTuDMErUwJPaMywrNLQZDtzWwVg6zKp3Gsx7llGv7cn/DBy6mDTYxAklJa4Cts=;
-Received: from mail-yw1-f179.google.com ([209.85.128.179])
+ bh=KYhyzbAkZA6I0JpkJP7NgCytRvclFoiu9vcGiedxJnM=; b=KU2FzM/gRxQLhLrnROCt1U3f+m
+ RWBp6kLVGZjIsh/ZTuu22dCPYkJuSehId/yCb6YiQkTvkonM6iwbmjopKnifRdWcyr5IwNTxLkS6S
+ CFEXK5BpEASP5tH4ZATFbcIfJk9E3GoXjSPtJ/YFCbKccn7Y6NpOSOmT/bN9b0c+Exis=;
+Received: from mail-pl1-f181.google.com ([209.85.214.181])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qZesq-00Fadt-75 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Aug 2023 22:02:25 +0000
-Received: by mail-yw1-f179.google.com with SMTP id
- 00721157ae682-592976e5b6dso14391257b3.2
+ id 1qZeox-00FaSO-1S for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 25 Aug 2023 21:58:26 +0000
+Received: by mail-pl1-f181.google.com with SMTP id
+ d9443c01a7336-1bf1935f6c2so10097355ad.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 25 Aug 2023 15:02:24 -0700 (PDT)
+ Fri, 25 Aug 2023 14:58:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fromorbit-com.20221208.gappssmtp.com; s=20221208; t=1693000938; x=1693605738;
+ d=fromorbit-com.20221208.gappssmtp.com; s=20221208; t=1693000697; x=1693605497;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EA93GbJhFaX1RD1S1v1NWvgWKkuCopUaLEmO6z67OS0=;
- b=ktaXkq4J3rc5CNGonZIeoI/OeRx+oKOnC1G25TOn4ge68zI1AgZkWjkhFHK/AcpS7m
- sw7eT5QXO53XE3cNIRa/GQ77o8NsAwzmS7DQF/tGzD52n+Ds4v1K+dyTuw2A8mDXs1oy
- T+uleSe9jyWG3fJKquQLrQlhffLzzHtGH7oISCUeqeQ3CmnMNrdFgeTb0W4XtKfTLxGY
- tvoAyu5H5ZcwsDhyiWBAQdeI8lI+zj0+eikXi50l/VPW/ZJ1xT/HYefl3reHUG9LkYiC
- X5vbfHyODaScOWCHGh5ELz9vnjAre0fXhTNF3jm7FQ7muJXC+8HQix1pQR+f4FrC6wDD
- 8Spg==
+ bh=KYhyzbAkZA6I0JpkJP7NgCytRvclFoiu9vcGiedxJnM=;
+ b=1Wwb4WWQO1nzo+wP8Ym9u7PtaCAogAhPk/wJ6+iajebaGRGH1bh3YUovAHvK7YwsrG
+ Altfd+hiFr2QAEewrBlBdQUf12ReGBxFecEF9z4qSWtf7NHhqX4ZJ0Es/Ox5pMQG5qYE
+ ON1YhPXjTA4vUUqu5PDmVynp4FbeJjsl/2wr+ltmHseTIEjBJUjWiwUMJkDEEGYrxBj+
+ +r63aMykB0LkDPawaZCYLBT8qIm6t5FSY8zRlinkDxCVNHc4Plq432NNO6//LCu4oULp
+ 7N1QnclU4jSGyRit69XjN/5+++KdNQGagaG79+E8tysnI3S2OzcORxOrDNy4lC1Nj2mx
+ DSYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693000938; x=1693605738;
+ d=1e100.net; s=20221208; t=1693000697; x=1693605497;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EA93GbJhFaX1RD1S1v1NWvgWKkuCopUaLEmO6z67OS0=;
- b=Vj8jCuxoW79bf/dr/CPxbG8U3uXdh6LbFkQXFhy95M+kVGo3NA/CxqAWL6kZ3ObkFA
- IWL/rMREOzH42M9sk1PayXcyRlZ0G2b4oFoFUncgk2s4/PBlZtfhlFzyyAApiOT6myrS
- s/bTbnntZ01nUTNf9z5gyvvyGxXW9sgkZoK11Ts/o1z526QeBhG+hnXSILU38E6pANox
- kqsToYwaD0VALhe7KGcuwFBSZy6l4pUjUnJylpZNw6tja9dw9B7vswY7IrLsPxQlylnQ
- lXUVNHenSt8v17BwPGSgNHEBoSGnM2taAnTQcs2kFZXdHbpQap+LhzAXqfXBQTj0KdYj
- sE1Q==
-X-Gm-Message-State: AOJu0YzzcLNp63TvCS3cv/W7p5zQeY7pB+0tOeJs2kHuO+sL7HDhyUHW
- 4+vawoJGYUiaxxIco3YwhG08bOPex0S0pkxAEt8=
-X-Google-Smtp-Source: AGHT+IGuXiZpaiaSoWbg0vAVB9MheRguVETxlh6z74Aponrqbg78kQHVeidygYbMeETEncHmOPB93Q==
-X-Received: by 2002:a17:90a:bf88:b0:263:5d25:150c with SMTP id
- d8-20020a17090abf8800b002635d25150cmr15563047pjs.29.1693000434105; 
- Fri, 25 Aug 2023 14:53:54 -0700 (PDT)
+ bh=KYhyzbAkZA6I0JpkJP7NgCytRvclFoiu9vcGiedxJnM=;
+ b=J7a+QcbeXKtjMlKM6pjOf1+uaFJeGtNPb5ryhvyF7QD/p90DSQW44BntSvkSS21J4Z
+ VETHd35WTD4JTijIiV+36M+Uly2N6ftyhvEuQJ2oqYVbhN4wWanqJjDidQBfgJPSg0a2
+ zFEiFsLGZqvkGyr9i/1szWlOn6VP0qmHUdEZD9a3XSoM4nhfX6HmBoSaYV488Bj5p1r5
+ 2voRx/j4oo429EIOzky3r6QzbnhL8iEM1bnBBIQi6VpIflfHFSQderkNnx3DmCoYghDA
+ Wz5XOLw+DqwpgwkBj9CWFZW/0m3xdihkaSVto7RXyz+V+54gX5d6MtFcwJN2vH9vq7MZ
+ jIXw==
+X-Gm-Message-State: AOJu0YyI4baVjdnGZhz8/1EZaS9XNEbT/uYUEIakoT2Cn0Ce+lwCGmIz
+ vUgTFMGV4GXmTP20y/GAy9QlYQ==
+X-Google-Smtp-Source: AGHT+IGbNBRmb5i9MT6K586yDhJt+XUD4xbkK8zWzYl+0zg/QCNqIJVK22pGEJPGpFxCH5bzJj3AjQ==
+X-Received: by 2002:a17:902:c454:b0:1b8:6984:f5e5 with SMTP id
+ m20-20020a170902c45400b001b86984f5e5mr20508009plm.12.1693000697391; 
+ Fri, 25 Aug 2023 14:58:17 -0700 (PDT)
 Received: from dread.disaster.area (pa49-195-66-88.pa.nsw.optusnet.com.au.
  [49.195.66.88]) by smtp.gmail.com with ESMTPSA id
- fz23-20020a17090b025700b0026b4decfe59sm2177778pjb.31.2023.08.25.14.53.53
+ 13-20020a170902c24d00b0019ee045a2b3sm2241969plg.308.2023.08.25.14.58.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Aug 2023 14:53:53 -0700 (PDT)
+ Fri, 25 Aug 2023 14:58:16 -0700 (PDT)
 Received: from dave by dread.disaster.area with local (Exim 4.96)
- (envelope-from <david@fromorbit.com>) id 1qZekY-006V5n-1X;
- Sat, 26 Aug 2023 07:53:50 +1000
-Date: Sat, 26 Aug 2023 07:53:50 +1000
+ (envelope-from <david@fromorbit.com>) id 1qZeoo-006VLc-08;
+ Sat, 26 Aug 2023 07:58:14 +1000
+Date: Sat, 26 Aug 2023 07:58:14 +1000
 To: Hao Xu <hao.xu@linux.dev>
-Message-ID: <ZOki7u/zJGmZtL6g@dread.disaster.area>
+Message-ID: <ZOkj9uTkoHPR/tDV@dread.disaster.area>
 References: <20230825135431.1317785-1-hao.xu@linux.dev>
- <20230825135431.1317785-25-hao.xu@linux.dev>
+ <20230825135431.1317785-27-hao.xu@linux.dev>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230825135431.1317785-25-hao.xu@linux.dev>
-X-Spam-Score: -0.0 (/)
+In-Reply-To: <20230825135431.1317785-27-hao.xu@linux.dev>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Aug 25, 2023 at 09:54:26PM +0800, Hao Xu wrote: >
- From: Hao Xu <howeyxu@tencent.com> > > This causes xfstests generic/232 hung
- in umount process, waiting for ail > push, so I comment it for no [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  On Fri, Aug 25, 2023 at 09:54:28PM +0800, Hao Xu wrote: >
+ From: Hao Xu <howeyxu@tencent.com> > > if the log transaction is a sync one,
+ let's fail the nowait try and > return -EAGAIN directly since syn [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.179 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.181 listed in wl.mailspike.net]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.128.179 listed in list.dnswl.org]
-X-Headers-End: 1qZesq-00Fadt-75
-Subject: Re: [f2fs-dev] [PATCH 24/29] xfs: support nowait for
- xfs_buf_read_map()
+ no trust [209.85.214.181 listed in list.dnswl.org]
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1qZeox-00FaSO-1S
+Subject: Re: [f2fs-dev] [PATCH 26/29] xfs: return -EAGAIN when nowait meets
+ sync in transaction commit
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -145,49 +147,51 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Aug 25, 2023 at 09:54:26PM +0800, Hao Xu wrote:
+On Fri, Aug 25, 2023 at 09:54:28PM +0800, Hao Xu wrote:
 > From: Hao Xu <howeyxu@tencent.com>
 > 
-> This causes xfstests generic/232 hung in umount process, waiting for ail
-> push, so I comment it for now, need some hints from xfs folks.
-> Not a real patch.
+> if the log transaction is a sync one, let's fail the nowait try and
+> return -EAGAIN directly since sync transaction means blocked by IO.
 > 
 > Signed-off-by: Hao Xu <howeyxu@tencent.com>
 > ---
->  fs/xfs/xfs_buf.c | 7 +++++++
->  1 file changed, 7 insertions(+)
+>  fs/xfs/xfs_trans.c | 14 +++++++++++++-
+>  1 file changed, 13 insertions(+), 1 deletion(-)
 > 
-> diff --git a/fs/xfs/xfs_buf.c b/fs/xfs/xfs_buf.c
-> index cdad80e1ae25..284962a9f31a 100644
-> --- a/fs/xfs/xfs_buf.c
-> +++ b/fs/xfs/xfs_buf.c
-> @@ -828,6 +828,13 @@ xfs_buf_read_map(
->  	trace_xfs_buf_read(bp, flags, _RET_IP_);
+> diff --git a/fs/xfs/xfs_trans.c b/fs/xfs/xfs_trans.c
+> index 7988b4c7f36e..f1f84a3dd456 100644
+> --- a/fs/xfs/xfs_trans.c
+> +++ b/fs/xfs/xfs_trans.c
+> @@ -968,12 +968,24 @@ __xfs_trans_commit(
+>  	xfs_csn_t		commit_seq = 0;
+>  	int			error = 0;
+>  	int			sync = tp->t_flags & XFS_TRANS_SYNC;
+> +	bool			nowait = tp->t_flags & XFS_TRANS_NOWAIT;
+> +	bool			perm_log = tp->t_flags & XFS_TRANS_PERM_LOG_RES;
 >  
->  	if (!(bp->b_flags & XBF_DONE)) {
-> +//		/*
-> +//		 * Let's bypass the _xfs_buf_read() for now
-> +//		 */
-> +//		if (flags & XBF_NOWAIT) {
-> +//			xfs_buf_relse(bp);
-> +//			return -EAGAIN;
-> +//		}
+>  	trace_xfs_trans_commit(tp, _RET_IP_);
+>  
+> +	if (nowait && sync) {
+> +		/*
+> +		 * Currently nowait is only from xfs_vn_update_time()
+> +		 * so perm_log is always false here, but let's make
+> +		 * code general.
+> +		 */
+> +		if (perm_log)
+> +			xfs_defer_cancel(tp);
+> +		goto out_unreserve;
+> +	}
 
-This is *fundamentally broken*, and apart from anything else breaks
-readahead.
+This is fundamentally broken.  We cannot about a transaction commit
+with dirty items at this point with shutting down the filesystem.
 
-IF we asked for a read, we cannot instantiate the buffer and then
-*not issue any IO on it* and release it. That leaves an
-uninitialised buffer in memory, and there's every chance that
-something then trips over it and bad things happen.
+This points to XFS_TRANS_NOWAIT being completely broken, too,
+because we don't call xfs_trans_set_sync() until just before we
+commit the transaction. At this point, it is -too late- for
+nowait+sync to be handled gracefully, and it will *always* go bad.
 
-A buffer like this *must* be errored out and marked stale so that
-the next access to it will then re-initialise the buffer state and
-trigger any preparatory work that needs to be done for the new
-operation.
-
-This comes back to my first comments that XBF_TRYLOCK cannot simpy
-be replaced with XBF_NOWAIT semantics...
+IOWs, the whole transaction "nowait" semantics as designed and
+implemented is not a workable solution....
 
 -Dave.
 -- 
