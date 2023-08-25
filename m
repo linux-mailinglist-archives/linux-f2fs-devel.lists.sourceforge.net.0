@@ -2,98 +2,75 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 138B77888EB
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 15:48:22 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22D5C788911
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 15:55:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qZXAW-0004MZ-SK;
-	Fri, 25 Aug 2023 13:48:09 +0000
+	id 1qZXHQ-0000Kx-8z;
+	Fri, 25 Aug 2023 13:55:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1qZXAV-0004MK-Gw;
- Fri, 25 Aug 2023 13:48:07 +0000
+ (envelope-from <hao.xu@linux.dev>) id 1qZXHI-0000KV-Hr
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 25 Aug 2023 13:55:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BpzfsfMiRxmg30OdFnKzv1mOgTevyt5wkPNcyneGwG0=; b=DW80PpJSI3VvfrLM8uCeTR1zC+
- lG/KL/yYw7mTC+DUSxpdg2u6aUkB46H6rfKD0MvXxQ+6Qf5KQkrIPWKRpNsIpywqCzwD1rsgw23oc
- DSZFo6sm2ueL90DfzbP0NN9C1NqjVMSz5efmMuo29lKcMSGDinawJoBMBevGQR52+fe4=;
+ bh=Tk2hf/ZsTIcu3ZelMcVU1L9gdHG1BIE6+k0PUkf3KOw=; b=VyvyKQ/gVB59k2O5uBUy8mm4qO
+ jcnRJR9lwxat6TWa4Ljt4FyRt7EmGxd+E7B8LFR5CufolayRQuKeoBXQ9KOBtpi+CgR1/IE8hj66O
+ uYEI5jbJPwdToyoWU48ZRdQZ3OGauKLz6ZkocrX1MtemqO+cVceUQNk8HPOEzSDrJQf4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=BpzfsfMiRxmg30OdFnKzv1mOgTevyt5wkPNcyneGwG0=; b=FZMqyYPCSHOrUqsd53MBE6H+Ix
- ilsOGjcDg+F2lLZrNylkgEQuwzk9q+6PtDTrT4NB8gCyh6RrWMrDxFJ6Tc+QutF/L1ALpaDV3BzxP
- KYzIsQQ/yZl7YkbqXbwboKK7ohQ7oAry0M1Y6zH8dmW5DSkAAzfhytZOLnRV4bH/Y7T0=;
-Received: from smtp-out1.suse.de ([195.135.220.28])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qZXAU-00FH87-T4; Fri, 25 Aug 2023 13:48:07 +0000
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 49AEC21F79;
- Fri, 25 Aug 2023 13:47:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1692971277; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=BpzfsfMiRxmg30OdFnKzv1mOgTevyt5wkPNcyneGwG0=;
- b=uohLnKnqtpENx2vCia+CF25VunAvqKNxW8Gl/JZPjm2522sG0QzHP89CKm9gvg5uhIQmJN
- WBEcUX07tygEsfRFeW0MDCmmX2lneinhEWFdq+jYTgqP+tDCYKowqEsMW88igvW28lrojs
- hfcd/30g2Ie/qrM4mt7e3dhBm3c9V28=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1692971277;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=BpzfsfMiRxmg30OdFnKzv1mOgTevyt5wkPNcyneGwG0=;
- b=avw/hNX+TPhBa6q/Pyjq6dsHiVTX81moNODEW9+kRWtkr4cKF/cxPXXUPquXV79uoK0IL4
- nSbq/d/haJGtPRAQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 28033138F9;
- Fri, 25 Aug 2023 13:47:57 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id UJRbCQ2x6GQZAwAAMHmgww
- (envelope-from <jack@suse.cz>); Fri, 25 Aug 2023 13:47:57 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
- id A432FA0774; Fri, 25 Aug 2023 15:47:56 +0200 (CEST)
-Date: Fri, 25 Aug 2023 15:47:56 +0200
-From: Jan Kara <jack@suse.cz>
-To: Al Viro <viro@zeniv.linux.org.uk>
-Message-ID: <20230825134756.o3wpq6bogndukn53@quack3>
-References: <20230810171429.31759-1-jack@suse.cz>
- <20230825015843.GB95084@ZenIV>
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=Tk2hf/ZsTIcu3ZelMcVU1L9gdHG1BIE6+k0PUkf3KOw=; b=L
+ NHfEMQgq16pWCVYgDr5H5ffHop1KG4Mr1SV/UurwMtu6KQqlGdiCbYTm+si6Gq5f0USlbXqqXa6ST
+ eSAFX9q2MS3gv0eRDIjC1K6X0LeocV76PeKwBNP5DuN4sU5rIuFIpZ86G8Y++roKN00FJmBUznEzY
+ /HC+Q+R00U0WkeVE=;
+Received: from out-252.mta1.migadu.com ([95.215.58.252])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qZXH8-0007C7-EZ for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 25 Aug 2023 13:55:07 +0000
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1692971691;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Tk2hf/ZsTIcu3ZelMcVU1L9gdHG1BIE6+k0PUkf3KOw=;
+ b=uBcPYj+KePQLzK49m3TJoZ63Y8UYXvuGXKh/n3l6WJhsswjd7fki+qH9rfO1d4Ug+ZVsQ9
+ lMMssXOvXKvFl3htZmbseqXbjusga8retQQQvlmfZ3u1SC4cy0Lfpdarfx6uPXt3VqFa7M
+ TnDSmLpV98dTb6gRRR2P2i+KA8l5+u4=
+From: Hao Xu <hao.xu@linux.dev>
+To: io-uring@vger.kernel.org,
+	Jens Axboe <axboe@kernel.dk>
+Date: Fri, 25 Aug 2023 21:54:02 +0800
+Message-Id: <20230825135431.1317785-1-hao.xu@linux.dev>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230825015843.GB95084@ZenIV>
-X-Spam-Score: -2.5 (--)
+X-Migadu-Flow: FLOW_OUT
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri 25-08-23 02:58:43, Al Viro wrote: > On Fri, Aug 11,
- 2023 at 01:04:31PM +0200, Jan Kara wrote: > > Hello, > > > > this is a v2
- of the patch series which implements the idea of blkdev_get_by_*() [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview: From: Hao Xu <howeyxu@tencent.com> This series introduce
+ getdents64
+ to io_uring, the code logic is similar with the snychronized version's. It
+ first try nowait issue, and offload it to io-wq threads if the first try
+ fails. Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.28 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -103,9 +80,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1qZXAU-00FH87-T4
-Subject: Re: [f2fs-dev] [PATCH v2 0/29] block: Make blkdev_get_by_*() return
- handle
+X-Headers-End: 1qZXH8-0007C7-EZ
+Subject: [f2fs-dev] [PATCH RFC v5 00/29] io_uring getdents
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,95 +93,229 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Dave Kleikamp <shaggy@kernel.org>, jfs-discussion@lists.sourceforge.net,
- Jan Kara <jack@suse.cz>, "Darrick J. Wong" <djwong@kernel.org>,
- linux-nvme@lists.infradead.org, Joseph Qi <joseph.qi@linux.alibaba.com>,
- dm-devel@redhat.com, target-devel@vger.kernel.org,
- linux-mtd@lists.infradead.org, Jack Wang <jinpu.wang@ionos.com>,
- Alasdair Kergon <agk@redhat.com>, drbd-dev@lists.linbit.com,
+Cc: Wanpeng Li <wanpengli@tencent.com>, "Darrick J . Wong" <djwong@kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Dave Chinner <david@fromorbit.com>, linux-kernel@vger.kernel.org,
+ linux-mm@kvack.org, Stefan Roesch <shr@fb.com>, Clay Harris <bugs@claycon.org>,
  linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
- linux-scsi@vger.kernel.org, Sergey Senozhatsky <senozhatsky@chromium.org>,
- Christoph Hellwig <hch@infradead.org>, xen-devel@lists.xenproject.org,
- Gao Xiang <xiang@kernel.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Kent Overstreet <kent.overstreet@gmail.com>,
- Sven Schnelle <svens@linux.ibm.com>, linux-pm@vger.kernel.org,
- Mike Snitzer <snitzer@kernel.org>, Joern Engel <joern@lazybastard.org>,
- reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, Christian Brauner <brauner@kernel.org>,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Jens Axboe <axboe@kernel.dk>, linux-raid@vger.kernel.org,
- linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- linux-mm@kvack.org, Song Liu <song@kernel.org>,
+ codalist@coda.cs.cmu.edu, cluster-devel@redhat.com, linux-cachefs@redhat.com,
+ linux-ext4@vger.kernel.org, devel@lists.orangefs.org,
+ linux-cifs@vger.kernel.org, ecryptfs@vger.kernel.org,
+ linux-nfs@vger.kernel.org, linux-block@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, netdev@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-unionfs@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- Minchan Kim <minchan@kernel.org>, ocfs2-devel@oss.oracle.com,
- Anna Schumaker <anna@kernel.org>, linux-fsdevel@vger.kernel.org,
- "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-erofs@lists.ozlabs.org,
+ linux-fsdevel@vger.kernel.org, linux-mtd@lists.infradead.org,
+ bpf@vger.kernel.org, Pavel Begunkov <asml.silence@gmail.com>,
  linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri 25-08-23 02:58:43, Al Viro wrote:
-> On Fri, Aug 11, 2023 at 01:04:31PM +0200, Jan Kara wrote:
-> > Hello,
-> > 
-> > this is a v2 of the patch series which implements the idea of blkdev_get_by_*()
-> > calls returning bdev_handle which is then passed to blkdev_put() [1]. This
-> > makes the get and put calls for bdevs more obviously matching and allows us to
-> > propagate context from get to put without having to modify all the users
-> > (again!).  In particular I need to propagate used open flags to blkdev_put() to
-> > be able count writeable opens and add support for blocking writes to mounted
-> > block devices. I'll send that series separately.
-> > 
-> > The series is based on Christian's vfs tree as of yesterday as there is quite
-> > some overlap. Patches have passed some reasonable testing - I've tested block
-> > changes, md, dm, bcache, xfs, btrfs, ext4, swap. This obviously doesn't cover
-> > everything so I'd like to ask respective maintainers to review / test their
-> > changes. Thanks! I've pushed out the full branch to:
-> > 
-> > git://git.kernel.org/pub/scm/linux/kernel/git/jack/linux-fs.git bdev_handle
-> > 
-> > to ease review / testing.
-> 
-> Hmm...  Completely Insane Idea(tm): how about turning that thing inside out and
-> having your bdev_open_by... return an actual opened struct file?
-> 
-> After all, we do that for sockets and pipes just fine and that's a whole lot
-> hotter area.
-> 
-> Suppose we leave blkdev_open()/blkdev_release() as-is.  No need to mess with
-> what we have for normal opened files for block devices.  And have block_open_by_dev()
-> that would find bdev, etc., same yours does and shove it into anon file.
-> 
-> Paired with plain fput() - no need to bother with new primitives for closing.
-> With a helper returning I_BDEV(bdev_file_inode(file)) to get from those to bdev.
-> 
-> NOTE: I'm not suggesting replacing ->s_bdev with struct file * if we do that -
-> we want that value cached, obviously.  Just store both...
-> 
-> Not saying it's a good idea, but... might be interesting to look into.
-> Comments?
+From: Hao Xu <howeyxu@tencent.com>
 
-I can see the appeal of not having to introduce the new bdev_handle type
-and just using struct file which unifies in-kernel and userspace block
-device opens. But I can see downsides too - the last fput() happening from
-task work makes me a bit nervous whether it will not break something
-somewhere with exclusive bdev opens. Getting from struct file to bdev is
-somewhat harder but I guess a helper like F_BDEV() would solve that just
-fine.
+This series introduce getdents64 to io_uring, the code logic is similar
+with the snychronized version's. It first try nowait issue, and offload
+it to io-wq threads if the first try fails.
 
-So besides my last fput() worry about I think this could work and would be
-probably a bit nicer than what I have. But before going and redoing the whole
-series let me gather some more feedback so that we don't go back and forth.
-Christoph, Christian, Jens, any opinion?
+Patch1 and Patch2 are some preparation
+Patch3 supports nowait for xfs getdents code
+Patch4-11 are vfs change, include adding helpers and trylock for locks
+Patch12-29 supports nowait for involved xfs journal stuff
+note, Patch24 and 27 are actually two questions, might be removed later.
+an xfs test may come later.
 
-								Honza
+Tests I've done:
+a liburing test case for functional test:
+https://github.com/HowHsu/liburing/commit/39dc9a8e19c06a8cebf8c2301b85320eb45c061e?diff=unified
+
+xfstests:
+    test/generic: 1 fails and 171 not run
+    test/xfs: 72 fails and 156 not run
+run the code before without this patchset, same result.
+I'll try to make the environment more right to run more tests here.
+
+
+Tested it with a liburing performance test:
+https://github.com/HowHsu/liburing/blob/getdents/test/getdents2.c
+
+The test is controlled by the below script[2] which runs getdents2.t 100
+times and calulate the avg.
+The result show that io_uring version is about 2.6% faster:
+
+note:
+[1] the number of getdents call/request in io_uring and normal sync version
+are made sure to be same beforehand.
+
+[2] run_getdents.py
+
+```python3
+
+import subprocess
+
+N = 100
+sum = 0.0
+args = ["/data/home/howeyxu/tmpdir", "sync"]
+
+for i in range(N):
+    output = subprocess.check_output(["./liburing/test/getdents2.t"] + args)
+    sum += float(output)
+
+average = sum / N
+print("Average of sync:", average)
+
+sum = 0.0
+args = ["/data/home/howeyxu/tmpdir", "iouring"]
+
+for i in range(N):
+    output = subprocess.check_output(["./liburing/test/getdents2.t"] + args)
+    sum += float(output)
+
+average = sum / N
+print("Average of iouring:", average)
+
+```
+
+v4->v5:
+ - move atime update to the beginning of getdents operation
+ - trylock for i_rwsem
+ - nowait semantics for involved xfs journal stuff
+
+v3->v4:
+ - add Dave's xfs nowait code and fix a deadlock problem, with some code
+   style tweak.
+ - disable fixed file to avoid a race problem for now
+ - add a test program.
+
+v2->v3:
+ - removed the kernfs patches
+ - add f_pos_lock logic
+ - remove the "reduce last EOF getdents try" optimization since
+   Dominique reports that doesn't make difference
+ - remove the rewind logic, I think the right way is to introduce lseek
+   to io_uring not to patch this logic to getdents.
+ - add Singed-off-by of Stefan Roesch for patch 1 since checkpatch
+   complained that Co-developed-by someone should be accompanied with
+   Signed-off-by same person, I can remove them if Stefan thinks that's
+   not proper.
+
+
+Dominique Martinet (1):
+  fs: split off vfs_getdents function of getdents64 syscall
+
+Hao Xu (28):
+  xfs: rename XBF_TRYLOCK to XBF_NOWAIT
+  xfs: add NOWAIT semantics for readdir
+  vfs: add nowait flag for struct dir_context
+  vfs: add a vfs helper for io_uring file pos lock
+  vfs: add file_pos_unlock() for io_uring usage
+  vfs: add a nowait parameter for touch_atime()
+  vfs: add nowait parameter for file_accessed()
+  vfs: move file_accessed() to the beginning of iterate_dir()
+  vfs: add S_NOWAIT for nowait time update
+  vfs: trylock inode->i_rwsem in iterate_dir() to support nowait
+  xfs: enforce GFP_NOIO implicitly during nowait time update
+  xfs: make xfs_trans_alloc() support nowait semantics
+  xfs: support nowait for xfs_log_reserve()
+  xfs: don't wait for free space in xlog_grant_head_check() in nowait
+    case
+  xfs: add nowait parameter for xfs_inode_item_init()
+  xfs: make xfs_trans_ijoin() error out -EAGAIN
+  xfs: set XBF_NOWAIT for xfs_buf_read_map if necessary
+  xfs: support nowait memory allocation in _xfs_buf_alloc()
+  xfs: distinguish error type of memory allocation failure for nowait
+    case
+  xfs: return -EAGAIN when bulk memory allocation fails in nowait case
+  xfs: comment page allocation for nowait case in xfs_buf_find_insert()
+  xfs: don't print warn info for -EAGAIN error in  xfs_buf_get_map()
+  xfs: support nowait for xfs_buf_read_map()
+  xfs: support nowait for xfs_buf_item_init()
+  xfs: return -EAGAIN when nowait meets sync in transaction commit
+  xfs: add a comment for xlog_kvmalloc()
+  xfs: support nowait semantics for xc_ctx_lock in xlog_cil_commit()
+  io_uring: add support for getdents
+
+ arch/s390/hypfs/inode.c         |  2 +-
+ block/fops.c                    |  2 +-
+ fs/btrfs/file.c                 |  2 +-
+ fs/btrfs/inode.c                |  2 +-
+ fs/cachefiles/namei.c           |  2 +-
+ fs/coda/dir.c                   |  4 +--
+ fs/ecryptfs/file.c              |  4 +--
+ fs/ext2/file.c                  |  4 +--
+ fs/ext4/file.c                  |  6 ++--
+ fs/f2fs/file.c                  |  4 +--
+ fs/file.c                       | 13 +++++++
+ fs/fuse/dax.c                   |  2 +-
+ fs/fuse/file.c                  |  4 +--
+ fs/gfs2/file.c                  |  2 +-
+ fs/hugetlbfs/inode.c            |  2 +-
+ fs/inode.c                      | 10 +++---
+ fs/internal.h                   |  8 +++++
+ fs/namei.c                      |  4 +--
+ fs/nfsd/vfs.c                   |  2 +-
+ fs/nilfs2/file.c                |  2 +-
+ fs/orangefs/file.c              |  2 +-
+ fs/orangefs/inode.c             |  2 +-
+ fs/overlayfs/file.c             |  2 +-
+ fs/overlayfs/inode.c            |  2 +-
+ fs/pipe.c                       |  2 +-
+ fs/ramfs/file-nommu.c           |  2 +-
+ fs/readdir.c                    | 61 +++++++++++++++++++++++++--------
+ fs/smb/client/cifsfs.c          |  2 +-
+ fs/splice.c                     |  2 +-
+ fs/stat.c                       |  2 +-
+ fs/ubifs/file.c                 |  2 +-
+ fs/udf/file.c                   |  2 +-
+ fs/xfs/libxfs/xfs_alloc.c       |  2 +-
+ fs/xfs/libxfs/xfs_attr_remote.c |  2 +-
+ fs/xfs/libxfs/xfs_btree.c       |  2 +-
+ fs/xfs/libxfs/xfs_da_btree.c    | 16 +++++++++
+ fs/xfs/libxfs/xfs_da_btree.h    |  1 +
+ fs/xfs/libxfs/xfs_dir2_block.c  |  7 ++--
+ fs/xfs/libxfs/xfs_dir2_priv.h   |  2 +-
+ fs/xfs/libxfs/xfs_shared.h      |  2 ++
+ fs/xfs/libxfs/xfs_trans_inode.c | 12 +++++--
+ fs/xfs/scrub/dir.c              |  2 +-
+ fs/xfs/scrub/readdir.c          |  2 +-
+ fs/xfs/scrub/repair.c           |  2 +-
+ fs/xfs/xfs_buf.c                | 43 +++++++++++++++++------
+ fs/xfs/xfs_buf.h                |  4 +--
+ fs/xfs/xfs_buf_item.c           |  9 +++--
+ fs/xfs/xfs_buf_item.h           |  2 +-
+ fs/xfs/xfs_buf_item_recover.c   |  2 +-
+ fs/xfs/xfs_dir2_readdir.c       | 49 ++++++++++++++++++++------
+ fs/xfs/xfs_dquot.c              |  2 +-
+ fs/xfs/xfs_file.c               |  6 ++--
+ fs/xfs/xfs_inode.c              | 27 +++++++++++++++
+ fs/xfs/xfs_inode.h              | 17 +++++----
+ fs/xfs/xfs_inode_item.c         | 12 ++++---
+ fs/xfs/xfs_inode_item.h         |  3 +-
+ fs/xfs/xfs_iops.c               | 31 ++++++++++++++---
+ fs/xfs/xfs_log.c                | 33 ++++++++++++------
+ fs/xfs/xfs_log.h                |  5 +--
+ fs/xfs/xfs_log_cil.c            | 17 +++++++--
+ fs/xfs/xfs_log_priv.h           |  4 +--
+ fs/xfs/xfs_trans.c              | 44 ++++++++++++++++++++----
+ fs/xfs/xfs_trans.h              |  2 +-
+ fs/xfs/xfs_trans_buf.c          | 18 ++++++++--
+ fs/zonefs/file.c                |  4 +--
+ include/linux/file.h            |  7 ++++
+ include/linux/fs.h              | 16 +++++++--
+ include/uapi/linux/io_uring.h   |  1 +
+ io_uring/fs.c                   | 53 ++++++++++++++++++++++++++++
+ io_uring/fs.h                   |  3 ++
+ io_uring/opdef.c                |  8 +++++
+ kernel/bpf/inode.c              |  4 +--
+ mm/filemap.c                    |  8 ++---
+ mm/shmem.c                      |  6 ++--
+ net/unix/af_unix.c              |  4 +--
+ 75 files changed, 499 insertions(+), 161 deletions(-)
+
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+2.25.1
+
 
 
 _______________________________________________
