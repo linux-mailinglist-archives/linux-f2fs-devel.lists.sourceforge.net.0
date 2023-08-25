@@ -2,87 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D41BF788525
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 12:42:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7017F788768
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 25 Aug 2023 14:30:48 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qZUGF-0002IQ-Oa;
-	Fri, 25 Aug 2023 10:41:52 +0000
+	id 1qZVxW-0003SJ-35;
+	Fri, 25 Aug 2023 12:30:38 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1qZUGC-0002IJ-IS
+ (envelope-from <brauner@kernel.org>) id 1qZVxS-0003SC-9f
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Aug 2023 10:41:49 +0000
+ Fri, 25 Aug 2023 12:30:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NMEgiR8AW/gh86cW3G/eSrTv5j2OJVThwJez45gZSvI=; b=fs5FnQzxb4YgCY4TO/Twl9EbyB
- LvSJjGYucCSVp7hF15C2OyKTEC0w1Pty/AzHAfqTdEMfxTdhzpURANGkiTPP+S0UjE1Y3uppzEcaX
- QDtjytbCMw8Q7s/gI77QeNqI4Tk7ikggpuvuLUlFt7jk/bUBwgrMVAznvBW4+11DxzZ8=;
+ bh=NPd+xvPExLRNAvP+l5Wn+EPtfb4r1aRb/yTbtm54RWM=; b=DGyoZ1OUe2yL4w4pysvki9Msjm
+ iuGfAtfv0deQI5zn/u62xqwSo0eaF4gvf+Gh5sYDecBm+oABpP7tiUA+ggOyVy0MIXUB8UhPjR0LH
+ FlU9L/OB12R9d2LH6/HNqeqpU/W1WGMsocTMhjp1NcJJ22sxsiNhULY0i7765jQQJBC0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NMEgiR8AW/gh86cW3G/eSrTv5j2OJVThwJez45gZSvI=; b=gwq3otR14eqnBKU8AZNTDDn7Np
- xSUFK8HnL6zVOdF/nkq9G6IZAgCdLDxeKPgkZuui8r2QxsmKsSw5qFaqjnsMbykGTPuTdiwmzT7Ds
- AakRcuMrY5BXKzA+ToO1aWaZs1PO99Eww1gRpx4Bx4QaeKpcbevdzmc+OPZxybmvIH6w=;
+ bh=NPd+xvPExLRNAvP+l5Wn+EPtfb4r1aRb/yTbtm54RWM=; b=jEJhuok99VPFkX4PAs0+WjE3bU
+ uhkvsW7YDLZ5Nx7HziVnVoNqkX91h5jQekkL2ef2Dlq/6IQ1Lo+PYW1S/79p5GmBZZnL5DnQEKeGl
+ ZNOiE9mmS/rbpf3BifBewi/UgChFjAa/AqJXOO7kh4d6surCvHsCIOsqhL6D/DpkVxRY=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qZUGB-0000YA-T3 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 25 Aug 2023 10:41:48 +0000
+ id 1qZVxQ-00FE2t-S8 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 25 Aug 2023 12:30:34 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 48C91631D8;
- Fri, 25 Aug 2023 10:41:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2B84C433C8;
- Fri, 25 Aug 2023 10:41:40 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7676267B90;
+ Fri, 25 Aug 2023 12:30:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8004C433C9;
+ Fri, 25 Aug 2023 12:30:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1692960101;
- bh=C+23fD72ZNSqdBsS5bGjW78zBwwoHToxHQsJuw/KJN0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=WXuDL+Dm3ljWrCV0Zq03WyDGNcM27U7ChI6JYaZo16suJvxIOvNbKKBoVFLjIEiLC
- qFDGkg4xU4Nk2ANiPt9Bq67OaS3mvZbXfw4LveHu8/h57bfzdknZSI61aK8LAlTDkp
- 6ZRlkckYEgpFQTpfCPj31ueJ4Pi3qAevi2dbLHWj6am/YHKicn5xH9NeomAqm4kYs6
- tfHCyVQ9uBTWd723eCN/wc3afQJIa8K34VbQHMj/97brtnlZb3yElmw+fJoufyEKdI
- 4m49uq3n1RRyCBysKllqqSG+3IicUfyke4xqI2Q6qG8Bt5lNP6I1kBlE0KMri9HFum
- X6Sg7fWhXRcNQ==
-Message-ID: <517380b7-77e6-3b79-5156-234b51dbb104@kernel.org>
-Date: Fri, 25 Aug 2023 18:41:38 +0800
+ s=k20201202; t=1692966625;
+ bh=YllMQsUv14IXcAV5eXi5Bkkkb4eHZRqaRVsvNBAoLlM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=WGsV9oyBhqmEqmboUScP7GRsXXfMR9TqANIi5mr5dUFcT65MSCDGKtuxy2CS54cH1
+ cqRJ29ZmcwRtuClxZx1FFk2vGFa8ZmPDLwkwpzl8Dp9LixE/E3bzwfi2a7jw4f7SO6
+ Jhhg9hNJ+pf+Aln4mJxUMvAkp7V7PVNmieW+z0J91Hbjv6CStPv2g74s+XzJGxwGW2
+ GUOeS2AzXpgWXl7CYpZxWDdTtkYCRnaMhGP1KxD3oEhJ9cRdo+pYnkZ4XBJG1Q4XxV
+ bnjbLCNqqmsfHvBB6WDXzmEmdtXpYV2Zfl1XnqC4Rqx1plNlqUjOUFEq4sGYqWftex
+ slovSrrs/SCCg==
+Date: Fri, 25 Aug 2023 14:30:21 +0200
+From: Christian Brauner <brauner@kernel.org>
+To: Jan Kara <jack@suse.cz>
+Message-ID: <20230825-kaschieren-gespreizt-7d246803ae8f@brauner>
+References: <20230818123232.2269-1-jack@suse.cz>
+ <20230823104857.11437-23-jack@suse.cz>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Lizhi Xu <lizhi.xu@windriver.com>
-References: <0000000000000f188605ffdd9cf8@google.com>
- <20230825053732.3098387-1-lizhi.xu@windriver.com>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20230825053732.3098387-1-lizhi.xu@windriver.com>
-X-Spam-Score: -6.8 (------)
+Content-Disposition: inline
+In-Reply-To: <20230823104857.11437-23-jack@suse.cz>
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/8/25 13:37, Lizhi Xu wrote: > There are two paths:
- > 1. f2fs_add_dentry->f2fs_down_read->f2fs_add_inline_entry->down_write->
- > up_write->f2fs_up_read > 2. f2fs_add_dentry->f2fs_add_regular_ent [...]
- Content analysis details:   (-6.8 points, 6.0 required)
+ Content preview:  On Wed, Aug 23, 2023 at 12:48:34PM +0200, Jan Kara wrote:
+ > Convert f2fs to use bdev_open_by_dev/path() and pass the handle around.
+ > > CC: Jaegeuk Kim <jaegeuk@kernel.org> > CC: Chao Yu <chao@kernel. [...]
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -92,10 +88,12 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -1.6 NICE_REPLY_A           Looks like a legit reply (A)
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qZUGB-0000YA-T3
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix deadlock in f2f2_add_dentry
+X-Headers-End: 1qZVxQ-00FE2t-S8
+Subject: Re: [f2fs-dev] [PATCH 23/29] f2fs: Convert to
+ bdev_open_by_dev/path()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,86 +105,26 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Jens Axboe <axboe@kernel.dk>, Christoph Hellwig <hch@infradead.org>,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/8/25 13:37, Lizhi Xu wrote:
-> There are two paths:
-> 1. f2fs_add_dentry->f2fs_down_read->f2fs_add_inline_entry->down_write->
->     up_write->f2fs_up_read
-> 2. f2fs_add_dentry->f2fs_add_regular_entry->down_write->
->     f2fs_init_inode_metadata->f2fs_down_read->f2fs_up_read->up_write
+On Wed, Aug 23, 2023 at 12:48:34PM +0200, Jan Kara wrote:
+> Convert f2fs to use bdev_open_by_dev/path() and pass the handle around.
 > 
-> Force order lock to read->write.
-
-Hi Lizhi,
-
-Thanks for the fix.
-
-Can you please check below patch? it has fixed reported issue.
-
-https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=5c13e2388bf3426fd69a89eb46e50469e9624e56
-
-Feedback from syzbot:
-
-https://lore.kernel.org/linux-f2fs-devel/0000000000001ba17a0603b5871e@google.com/
-
-> 
-> Signed-off-by: Lizhi Xu <lizhi.xu@windriver.com>
-> Reported-and-tested-by: syzbot+a4976ce949df66b1ddf1@syzkaller.appspotmail.com
+> CC: Jaegeuk Kim <jaegeuk@kernel.org>
+> CC: Chao Yu <chao@kernel.org>
+> CC: linux-f2fs-devel@lists.sourceforge.net
+> Acked-by: Christoph Hellwig <hch@lst.de>
+> Signed-off-by: Jan Kara <jack@suse.cz>
 > ---
->   fs/f2fs/dir.c    | 4 +---
->   fs/f2fs/inline.c | 2 ++
->   2 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-> index d635c58cf5a3..022dc02c1390 100644
-> --- a/fs/f2fs/dir.c
-> +++ b/fs/f2fs/dir.c
-> @@ -736,12 +736,12 @@ int f2fs_add_regular_entry(struct inode *dir, const struct f2fs_filename *fname,
->   	f2fs_wait_on_page_writeback(dentry_page, DATA, true, true);
->   
->   	if (inode) {
-> -		f2fs_down_write(&F2FS_I(inode)->i_sem);
->   		page = f2fs_init_inode_metadata(inode, dir, fname, NULL);
->   		if (IS_ERR(page)) {
->   			err = PTR_ERR(page);
->   			goto fail;
->   		}
-> +		f2fs_down_write(&F2FS_I(inode)->i_sem);
->   	}
->   
->   	make_dentry_ptr_block(NULL, &d, dentry_blk);
-> @@ -780,9 +780,7 @@ int f2fs_add_dentry(struct inode *dir, const struct f2fs_filename *fname,
->   		 * Should get i_xattr_sem to keep the lock order:
->   		 * i_xattr_sem -> inode_page lock used by f2fs_setxattr.
->   		 */
-> -		f2fs_down_read(&F2FS_I(dir)->i_xattr_sem);
->   		err = f2fs_add_inline_entry(dir, fname, inode, ino, mode);
-> -		f2fs_up_read(&F2FS_I(dir)->i_xattr_sem);
->   	}
->   	if (err == -EAGAIN)
->   		err = f2fs_add_regular_entry(dir, fname, inode, ino, mode);
-> diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-> index 4638fee16a91..7618b383c2b7 100644
-> --- a/fs/f2fs/inline.c
-> +++ b/fs/f2fs/inline.c
-> @@ -628,10 +628,12 @@ int f2fs_add_inline_entry(struct inode *dir, const struct f2fs_filename *fname,
->   	if (IS_ERR(ipage))
->   		return PTR_ERR(ipage);
->   
-> +	f2fs_down_read(&F2FS_I(dir)->i_xattr_sem);
->   	inline_dentry = inline_data_addr(dir, ipage);
->   	make_dentry_ptr_inline(dir, &d, inline_dentry);
->   
->   	bit_pos = f2fs_room_for_filename(d.bitmap, slots, d.max);
-> +	f2fs_up_read(&F2FS_I(dir)->i_xattr_sem);
->   	if (bit_pos >= d.max) {
->   		err = do_convert_inline_dir(dir, ipage, inline_dentry);
->   		if (err)
+
+Looks good to me,
+Reviewed-by: Christian Brauner <brauner@kernel.org>
 
 
 _______________________________________________
