@@ -2,87 +2,115 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4400578935F
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 26 Aug 2023 04:29:41 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0060978938B
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 26 Aug 2023 04:58:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qZj3J-0003Yr-65;
-	Sat, 26 Aug 2023 02:29:29 +0000
+	id 1qZjVl-0004qr-KN;
+	Sat, 26 Aug 2023 02:58:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <viro@ftp.linux.org.uk>) id 1qZj3H-0003Yd-U6;
- Sat, 26 Aug 2023 02:29:27 +0000
+ (envelope-from <prvs=760245474b=lizhi.xu@windriver.com>)
+ id 1qZjVj-0004qk-Vr for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 26 Aug 2023 02:58:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kRz17k12DLtH5ptlx3fiiancvtShyoQwDvuAAOUED4Y=; b=RUj3D3g1rMvZg9deBGHzQ2kPXB
- 3Yw5MhAGQ4fth7Mqy08wuOsqp4JR1d2dkNymNPw90YU35ZyFeHvLP080kcHnpjrDcPZsCrYQn+Tw8
- 08QUBhmu4qbztyhwkhe8tqRChiZgpwVEEcocDF1wxIoHVGFdcpcuWU6ozA3sjk8A1UuQ=;
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Rhd/bZv5vOoG1xrHWO2yD+cjPhp7tUfExrPHpSA0s/4=; b=BT9krGAhLumqWZXKdhS7HrTDHe
+ qhtFLH16c5ZvXEQEl5vdSnjizb+lx25Re8CCXzOgY+hM7cKzesIRBGVn/Dttf+okFkRLW7gEZs0jX
+ z3cEc9bUSLs8MSX7d51LLm4tnqJQAy5AA1N3Tie7Tr5oOxqWcktTnpFc+BdrpTB/ozeE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
- Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kRz17k12DLtH5ptlx3fiiancvtShyoQwDvuAAOUED4Y=; b=eAhGt/AASeVUcQUASvvNqx/VgW
- DdS8zvi8eqAncxxCRvAmBeXggXZStJizSF/R5FxSGwVBeYmkkEMxTNzjRvt6jL66ZVu4ULTLRuhxs
- jYnpMhxYvLMPoFQy3dHCnE8hXZaT05slNFMi1LAEQ8zmX+5SnwVvmRgBz44zoL32YaUk=;
-Received: from zeniv.linux.org.uk ([62.89.141.173])
+ bh=Rhd/bZv5vOoG1xrHWO2yD+cjPhp7tUfExrPHpSA0s/4=; b=kQ6RZ+CG9xZjDB3dEViFRQcIqh
+ JjrAj79+Tq2AVIeb8pphSlmsWTYwgroCAFLgQ/K+MXd40qAjySOYWq1h7xOIQMtAd+87YygMmBXXQ
+ U068iLNlYxjSH0zTNQ5L09drxnyv0ZvMNky/HcRHIIY6fvvzzMQQzliqTyuwY+wgT6n4=;
+Received: from mx0a-0064b401.pphosted.com ([205.220.166.238])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qZj3E-0005DF-EV; Sat, 26 Aug 2023 02:29:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=kRz17k12DLtH5ptlx3fiiancvtShyoQwDvuAAOUED4Y=; b=mPm/qZCa7MWW4zdrpIjhXYeIS6
- 8cbIgOvCf/9Y6gIxhhuc7MbOClbX1o3H4gTlXLJmOpOyil1pufLmdD8oxm6VhlxB4x6C/OQmKz1OC
- 9Sg7eN60e8HGn0pn/DtWEZ2zi7uHlJyyQNolWeGdXQEgqn78/62UYsbUB8gsUgOw68YkPTd36+fo0
- kPzizyM3mKJ55bukbV99w6F1Yx4exn0ELF0EHA2mn4TEClpd2hjjcTiwEbEGv+vsWkEq4IC7ejHjR
- rO8uE9/3ipL5VpLJjGdd7WJssIdQ5Tj/z+j2E3fQDWI0Qb9TMLDhfRhfBXk5sw2QK4rJI42xn3tDe
- SBJa1VHw==;
-Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qZj2i-0010QB-1S; Sat, 26 Aug 2023 02:28:52 +0000
-Date: Sat, 26 Aug 2023 03:28:52 +0100
-From: Al Viro <viro@zeniv.linux.org.uk>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20230826022852.GO3390869@ZenIV>
-References: <20230810171429.31759-1-jack@suse.cz>
- <20230825015843.GB95084@ZenIV>
- <20230825134756.o3wpq6bogndukn53@quack3>
+ id 1qZjVj-0005to-Fr for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 26 Aug 2023 02:58:52 +0000
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+ by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 37Q2wfr0013746; Fri, 25 Aug 2023 19:58:41 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding:content-type; s=
+ PPS06212021; bh=Rhd/bZv5vOoG1xrHWO2yD+cjPhp7tUfExrPHpSA0s/4=; b=
+ Cdlh1NZBK2WPWMKTEq3sPPc5pq2k3x/3W2wt1IBw1rE+UhS51mYKEkgyg6nR/a6Z
+ Tdxrzu6cOpKQJXauXH1Twn2lddwQsY0VReR8Zv30skAMa/q9XIeaDQiW3orpt7jK
+ 346DrXIqT+/+76dzNu+7EC0p5vtIUbYiwj1wYcSEegrNx5as1ChYm/LpnBGFcasq
+ lzICv9sEDFOclnarBIOgezzfHBkuVR6ul7S78Uuo2FkWu23RqzcZehLG/f/SGvHg
+ MDGcozBPyjyVzwSxhLA4OJfSNieyOc+s4Pexg+aiETPdh5CMBpayKWWwyJricEFd
+ zbMhSc5+chWQuMaGCapYdg==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com
+ [147.11.82.254])
+ by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sn20e3s47-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+ Fri, 25 Aug 2023 19:58:41 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Fri, 25 Aug 2023 19:58:39 -0700
+Received: from pek-lpd-ccm6.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.27 via Frontend Transport; Fri, 25 Aug 2023 19:58:38 -0700
+To: <chao@kernel.org>
+Date: Sat, 26 Aug 2023 10:58:38 +0800
+Message-ID: <20230826025838.1131325-1-lizhi.xu@windriver.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <517380b7-77e6-3b79-5156-234b51dbb104@kernel.org>
+References: <517380b7-77e6-3b79-5156-234b51dbb104@kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230825134756.o3wpq6bogndukn53@quack3>
-X-Spam-Score: -0.1 (/)
+X-Proofpoint-GUID: ScFUOfPCRpgFf4VONwUJFSCDZq5XNeE-
+X-Proofpoint-ORIG-GUID: ScFUOfPCRpgFf4VONwUJFSCDZq5XNeE-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-25_19,2023-08-25_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 clxscore=1015
+ impostorscore=0 spamscore=0 malwarescore=0 mlxscore=0 suspectscore=0
+ priorityscore=1501 adultscore=0 lowpriorityscore=0 bulkscore=0
+ mlxlogscore=543 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2308260026
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Aug 25, 2023 at 03:47:56PM +0200, Jan Kara wrote:
- > I can see the appeal of not having to introduce the new bdev_handle type
- > and just using struct file which unifies in-kernel and userspace block
- > device opens. But I can see downsides too - the la [...] 
- Content analysis details:   (-0.1 points, 6.0 required)
+ Content preview:  On Fri, 25 Aug 2023 18:41:38, chao@kernel.org wrote: > Can
+ you please check below patch? it has fixed reported issue. > >
+ https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev
+ [...] Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [205.220.166.238 listed in list.dnswl.org]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [205.220.166.238 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1qZj3E-0005DF-EV
-Subject: Re: [f2fs-dev] [PATCH v2 0/29] block: Make blkdev_get_by_*() return
- handle
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1qZjVj-0005to-Fr
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix deadlock in f2f2_add_dentry
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -94,110 +122,23 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Dave Kleikamp <shaggy@kernel.org>, jfs-discussion@lists.sourceforge.net,
- "Darrick J. Wong" <djwong@kernel.org>, linux-nvme@lists.infradead.org,
- Joseph Qi <joseph.qi@linux.alibaba.com>, dm-devel@redhat.com,
- target-devel@vger.kernel.org, linux-mtd@lists.infradead.org,
- Jack Wang <jinpu.wang@ionos.com>, Alasdair Kergon <agk@redhat.com>,
- drbd-dev@lists.linbit.com, linux-s390@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Christoph Hellwig <hch@infradead.org>, xen-devel@lists.xenproject.org,
- Gao Xiang <xiang@kernel.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Kent Overstreet <kent.overstreet@gmail.com>,
- Sven Schnelle <svens@linux.ibm.com>, linux-pm@vger.kernel.org,
- Mike Snitzer <snitzer@kernel.org>, Joern Engel <joern@lazybastard.org>,
- reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, Christian Brauner <brauner@kernel.org>,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Jens Axboe <axboe@kernel.dk>, linux-raid@vger.kernel.org,
- linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- linux-mm@kvack.org, Song Liu <song@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- Minchan Kim <minchan@kernel.org>, ocfs2-devel@oss.oracle.com,
- Anna Schumaker <anna@kernel.org>, linux-fsdevel@vger.kernel.org,
- "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
+From: Lizhi Xu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Lizhi Xu <lizhi.xu@windriver.com>
+Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Fri, Aug 25, 2023 at 03:47:56PM +0200, Jan Kara wrote:
-
-> I can see the appeal of not having to introduce the new bdev_handle type
-> and just using struct file which unifies in-kernel and userspace block
-> device opens. But I can see downsides too - the last fput() happening from
-> task work makes me a bit nervous whether it will not break something
-> somewhere with exclusive bdev opens. Getting from struct file to bdev is
-> somewhat harder but I guess a helper like F_BDEV() would solve that just
-> fine.
+On Fri, 25 Aug 2023 18:41:38, chao@kernel.org wrote:
+> Can you please check below patch? it has fixed reported issue.
+>
+> https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev&id=5c13e2388bf3426fd69a89eb46e50469e9624e56
 > 
-> So besides my last fput() worry about I think this could work and would be
-> probably a bit nicer than what I have. But before going and redoing the whole
-> series let me gather some more feedback so that we don't go back and forth.
-> Christoph, Christian, Jens, any opinion?
-
-Redoing is not an issue - it can be done on top of your series just
-as well.  Async behaviour of fput() might be, but...  need to look
-through the actual users; for a lot of them it's perfectly fine.
-
-FWIW, from a cursory look there appears to be a missing primitive: take
-an opened bdev (or bdev_handle, with your variant, or opened file if we
-go that way eventually) and claim it.
-
-I mean, look at claim_swapfile() for example:
-                p->bdev = blkdev_get_by_dev(inode->i_rdev,
-                                   FMODE_READ | FMODE_WRITE | FMODE_EXCL, p);
-                if (IS_ERR(p->bdev)) {
-                        error = PTR_ERR(p->bdev);
-                        p->bdev = NULL;
-                        return error;
-                }
-                p->old_block_size = block_size(p->bdev);
-                error = set_blocksize(p->bdev, PAGE_SIZE);
-                if (error < 0)
-                        return error;
-we already have the file opened, and we keep it opened all the way until
-the swapoff(2); here we have noticed that it's a block device and we
-	* open the fucker again (by device number), this time claiming
-it with our swap_info_struct as holder, to be closed at swapoff(2) time
-(just before we close the file)
-	* flip the block size to PAGE_SIZE, to be reverted at swapoff(2)
-time That really looks like it ought to be
-	* take the opened file, see that it's a block device
-	* try to claim it with that holder
-	* on success, flip the block size
-with close_filp() in the swapoff(2) (or failure exit path in swapon(2))
-doing what it would've done for an O_EXCL opened block device.
-The only difference from O_EXCL userland open is that here we would
-end up with holder pointing not to struct file in question, but to our
-swap_info_struct.  It will do the right thing.
-
-This extra open is entirely due to "well, we need to claim it and the
-primitive that does that happens to be tied to opening"; feels rather
-counter-intuitive.
-
-For that matter, we could add an explicit "unclaim" primitive - might
-be easier to follow.  That would add another example where that could
-be used - in blkdev_bszset() we have an opened block device (it's an
-ioctl, after all), we want to change block size and we *really* don't
-want to have that happen under a mounted filesystem.  So if it's not
-opened exclusive, we do a temporary exclusive open of own and act on
-that instead.   Might as well go for a temporary claim...
-
-BTW, what happens if two threads call ioctl(fd, BLKBSZSET, &n)
-for the same descriptor that happens to have been opened O_EXCL?
-Without O_EXCL they would've been unable to claim the sucker at the same
-time - the holder we are using is the address of a function argument,
-i.e. something that points to kernel stack of the caller.  Those would
-conflict and we either get set_blocksize() calls fully serialized, or
-one of the callers would eat -EBUSY.  Not so in "opened with O_EXCL"
-case - they can very well overlap and IIRC set_blocksize() does *not*
-expect that kind of crap...  It's all under CAP_SYS_ADMIN, so it's not
-as if it was a meaningful security hole anyway, but it does look fishy.
+> Feedback from syzbot:
+> 
+> https://lore.kernel.org/linux-f2fs-devel/0000000000001ba17a0603b5871e@google.com/
+This fix uses nest lock to avoid deadlocks, which I personally believe is feasible.
 
 
 _______________________________________________
