@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C508478A191
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 27 Aug 2023 22:47:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D5E078A1A4
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 27 Aug 2023 22:52:34 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qaMfg-0004JO-Hc;
-	Sun, 27 Aug 2023 20:47:44 +0000
+	id 1qaMkI-0004SI-Hu;
+	Sun, 27 Aug 2023 20:52:30 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1qaMfe-0004JF-Ln
+ (envelope-from <willy@infradead.org>) id 1qaMkG-0004SC-RT
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 27 Aug 2023 20:47:42 +0000
+ Sun, 27 Aug 2023 20:52:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PcFOPVpAmfEy32wmLZk8ueqNLvTCgnNwnqcJznT/RPQ=; b=cg9KXFkDjBUoGifonyfF9qpG7A
- Fvhkw/3CZYCAoveTeshtfb/CNA6c7Dq//l5PzD7+YnXzd819hH1h2LSFWf8F8SFZVLQ8Rk1Sd/bJX
- HE9rRmFYhs/Zxf/4oeKRP0RuvfQYMF6Uvu6A7lwu7ee2AZeFoji23WnKSyrphYa/6EHA=;
+ bh=64WGA8VV9Ar6eu59jwKakipB5IQeiUdKnhF4bZRyjJg=; b=gKHg1OdCleTRXb4gj1UIPGuNkK
+ +2LrKc2cuh7Lqo9k6KQMt854w1v0LtmJwcMhnKRw1cM5rcWNx5ywr7L4DPBIXIP9beE7XYwM4E4wF
+ 8rYTq37Cl5PQwz4j1/WXe8GbQEkUwThQbMKOZcYXLV9hNpoNE5YlBq3IQv01DYPcmw50=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,35 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=PcFOPVpAmfEy32wmLZk8ueqNLvTCgnNwnqcJznT/RPQ=; b=XxErIVFGlw752fwTKCMm1pE0dp
- 1itW+gDdk7wIeSkLUHp5u+P7+wp2i6F3Dw3PfZDwM2MXfjjCsov1Ld15ON3zzqWwWlSpu1hhuBdnX
- iOqXrxRCWmpAkhQ0/quZGmjwQaEv7Z/JHaN83tx/FyvjSHtkbwOtapvYZtKMuz/Ozizk=;
+ bh=64WGA8VV9Ar6eu59jwKakipB5IQeiUdKnhF4bZRyjJg=; b=kwOXxfUgjnoGaW76BvuLOeEPhz
+ k61EbBX6yPNcCr2yfYInNWkzNqdEXozHts6150z5zMJefY33wq8UB/wi6/3Pq0SxeRgKA284oO0Xm
+ tk40AFfzaiGuVJ5HUoHcEfZiqFRGh+qOzhlZ7gmkR3lehqfWDBp6Y01ZvGpAbHvvbCOU=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qaMfa-0003ZS-R4 for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 27 Aug 2023 20:47:42 +0000
+ id 1qaMkG-0003jQ-Aj for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 27 Aug 2023 20:52:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=PcFOPVpAmfEy32wmLZk8ueqNLvTCgnNwnqcJznT/RPQ=; b=rNsimzjbKmM2oAlOTJ0DzjsqcD
- 17aYtuzwaGU+CR8bJtkEeJr/wCSQMKchDc0n2mlQZ7v9rEEKKGacwZsk+Mho4BlGQdRHWhRckPvPs
- fMAYQy7+QXBdTjAznfYn8yoo2Vt8NnBgsp0KpbdkC6EeIBdGLqHsafJ8s67fpw63Doi4IWtOlBji1
- MNTrBEfgnOFbk2WLamTkOgHWwWl/muBmiqb1Xzl2D+NHqIQ82dzKbnLLfmjRYZ7IV0n24RJ6z3j9d
- dk+Bi80MVVBrmB0+FFfEqYIN7sGr6Bu4FSHMLVu2SkHeyRuhO+l5+YcAQVjuGi14l8MuPMLDNTwlB
- D4MIXbrw==;
+ bh=64WGA8VV9Ar6eu59jwKakipB5IQeiUdKnhF4bZRyjJg=; b=f4Amt/s2VPJBfpbA4kwhdXTdVg
+ /pn5N3WZwWFuLeNUpjeDraYY4nQbaO2UYvFIaQahuWJpv6yWj9SJhm3438dxwJSqQjroyoc9F0SYv
+ XAWPI0/B2+Jwn7WLlLOC7qTdz3pp+yI4mEjVaLz0qln0W2Hlp6Bqseo3n3BK6S7q8PWF2QR7jDDR5
+ 5QOB+otXNut9VVTlFGgE9OB8fNY4Zqee0Fvn6lAYSC0XLvrtBqaDQzjA8XPvUV/U40DN9P1BUUcT+
+ KJAEsVOCJlXQA4wp82KhD9XmJfIxAUdOp4MXoPkTY5GoW5ML77D0bFxP371EeaBKUbiVosNZkp33g
+ ozZ78lYw==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1qaMf3-00DklQ-NN; Sun, 27 Aug 2023 20:47:05 +0000
-Date: Sun, 27 Aug 2023 21:47:05 +0100
+ Hat Linux)) id 1qaMjj-00DkxQ-7a; Sun, 27 Aug 2023 20:51:55 +0000
+Date: Sun, 27 Aug 2023 21:51:55 +0100
 From: Matthew Wilcox <willy@infradead.org>
 To: Hao Xu <hao.xu@linux.dev>
-Message-ID: <ZOu2SbpbRtQPeaDk@casper.infradead.org>
+Message-ID: <ZOu3a/24YJrtpIy1@casper.infradead.org>
 References: <20230827132835.1373581-1-hao.xu@linux.dev>
- <20230827132835.1373581-5-hao.xu@linux.dev>
+ <20230827132835.1373581-10-hao.xu@linux.dev>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230827132835.1373581-5-hao.xu@linux.dev>
+In-Reply-To: <20230827132835.1373581-10-hao.xu@linux.dev>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -67,10 +67,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sun, Aug 27, 2023 at 09:28:28PM +0800, Hao Xu wrote: >
- +++ b/include/linux/file.h > @@ -81, 6 +81,
- 8 @@ static inline void fdput_pos(struct
- fd f) > fdput(f); > } > > +extern int file_pos_lock_nowait( [...] 
+ Content preview:  On Sun, Aug 27, 2023 at 09:28:33PM +0800, Hao Xu wrote: >
+ From: Hao Xu <howeyxu@tencent.com> > > To enforce nowait semantics, error
+ out -EAGAIN if atime needs to be > updated. Squash this into patch 6.
+ Otherwise patch 6 makes no sense. 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -83,9 +83,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1qaMfa-0003ZS-R4
-Subject: Re: [f2fs-dev] [PATCH 04/11] vfs: add a vfs helper for io_uring
- file pos lock
+X-Headers-End: 1qaMkG-0003jQ-Aj
+Subject: Re: [f2fs-dev] [PATCH 09/11] vfs: error out -EAGAIN if atime needs
+ to be updated
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,15 +117,13 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Sun, Aug 27, 2023 at 09:28:28PM +0800, Hao Xu wrote:
-> +++ b/include/linux/file.h
-> @@ -81,6 +81,8 @@ static inline void fdput_pos(struct fd f)
->  	fdput(f);
->  }
->  
-> +extern int file_pos_lock_nowait(struct file *file, bool nowait);
+On Sun, Aug 27, 2023 at 09:28:33PM +0800, Hao Xu wrote:
+> From: Hao Xu <howeyxu@tencent.com>
+> 
+> To enforce nowait semantics, error out -EAGAIN if atime needs to be
+> updated.
 
-No extern on function declarations.
+Squash this into patch 6.  Otherwise patch 6 makes no sense.
 
 
 _______________________________________________
