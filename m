@@ -2,90 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 587BA789F64
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 27 Aug 2023 15:36:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E37978A133
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 27 Aug 2023 21:42:14 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qaFwQ-0006wY-NF;
-	Sun, 27 Aug 2023 13:36:35 +0000
+	id 1qaLe9-0000aY-D9;
+	Sun, 27 Aug 2023 19:42:06 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hao.xu@linux.dev>) id 1qaFwP-0006wQ-Hq
+ (envelope-from <viro@ftp.linux.org.uk>) id 1qaLe6-0000aR-Dv
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 27 Aug 2023 13:36:34 +0000
+ Sun, 27 Aug 2023 19:42:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NAMtHKwgj081g8lIPVs72MliioxtTYHj7D9CTN85ELE=; b=DbNu9wHy37BVTv7nqj81DmLDf2
- Z0db1cR8DloiKNZZBM90TSOG6l/mzbOv5FTYBea5Xmyt+ugXPdNSydNcp3/rU9YKrbDvDCPKnlY8g
- v8kIjewrJByJOo9WlctjlCE3kbE6I8R16BFLF0fFeYv/3CI5KnBlSdSSJr/oyTZ8FLTs=;
+ d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=684ZmibV0iRA7W1nKgqEgsL3aMIsGcfp6Zpl3WdJ4DU=; b=BEi8ZpQ/3od9+jjpaQ5rdXNDdv
+ ddWGc+R+BSQJfT9pR2KY71Wbhsdu1K3i5i2DKDF1Y+Pcia18B2VpMVjF+N52tRB9agVYFaCGVAQMU
+ ugtzrewVfylNspcpUEhhNQrxOhLW7ulyJ7u/m4YBl3IoRfqic0YBReYue/ePE8PlT90M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NAMtHKwgj081g8lIPVs72MliioxtTYHj7D9CTN85ELE=; b=RaV5fdVsM9aZ+NuVnaK4QiswLN
- l5ToojXtb6Hbrnfh99zLi+uwoKtO+6IBcgQztOaeBWABpAI2TjXBiJch//gmHbVSjhBr5jjDU+xxt
- 3RBknt0/ki7u40rsDQsAnDsZizg75gHaNNLn5v+2klpbBWK7SJRE1BXttI/qgagj7mBc=;
-Received: from out-247.mta1.migadu.com ([95.215.58.247])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=684ZmibV0iRA7W1nKgqEgsL3aMIsGcfp6Zpl3WdJ4DU=; b=jxcTBPTsKEfDMCXMygxvJ6wc7d
+ Q5RtytPosR/ZR8Jw0CnkUwzSimBH1eCK1+fXk+tcYK3J+nye6gF+vHEyC0jIw0jCQe6eXNZzkgwHb
+ 2rzQNZjNgAGwfirGFndGeEt8PALfu8uD6ERsgOuUlqbhL2i+04mHnw5ylVX4pwY2meY4=;
+Received: from zeniv.linux.org.uk ([62.89.141.173])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qaFwP-00H3zg-EN for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 27 Aug 2023 13:36:34 +0000
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1693143386;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NAMtHKwgj081g8lIPVs72MliioxtTYHj7D9CTN85ELE=;
- b=u7n0PP5Y7t8pZAzx+5IbBJkZfY9azRKTfFVD9LVMOb4Thl+C2D6j0w7wWcMlmzcA25L4C8
- zEudurGp2ODbmGylA6BsBPQ9105gr52QFoDr/T1ABSTboWT6yVGzUbuarS4ljsFfYjiAKI
- tkX7K8GiO8NfI2EeGspOsslEfgzb2IA=
-From: Hao Xu <hao.xu@linux.dev>
-To: io-uring@vger.kernel.org,
-	Jens Axboe <axboe@kernel.dk>
-Date: Sun, 27 Aug 2023 21:28:35 +0800
-Message-Id: <20230827132835.1373581-12-hao.xu@linux.dev>
-In-Reply-To: <20230827132835.1373581-1-hao.xu@linux.dev>
-References: <20230827132835.1373581-1-hao.xu@linux.dev>
+ id 1qaLe3-0001Ix-AQ for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 27 Aug 2023 19:42:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=684ZmibV0iRA7W1nKgqEgsL3aMIsGcfp6Zpl3WdJ4DU=; b=MC2inegbdk323giCAEH+EfdYar
+ 4kXwfSwyy2upf/dK+53+T+qrKyewF5s7dkck4Fy8HiN43ivhIJelmFUnVBY8gTnpZi1xWKTWuXIKw
+ PMxisq0e3KNF97DWVe6B6NWvtgyUOe2N5H03vNuXGmN7U3J3s/iHPYzfZnHTYEtijbR38gB7y6yM+
+ f7ACCYsTkBZjsnjijsZxvBLbNGKP/mTU09fHGjxl78/It44EuuASOQ2dnSIavl4Uy9jNvEkCB6Mv6
+ wSB2x3czu7lrhAFvslc5eM2xpF0ak84dfAdNaJZPWXabaeFkiWOblNYIYyhnd8Q9EJERXc2PyYNn0
+ cSxlywzw==;
+Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1qaLdS-001NqG-1T; Sun, 27 Aug 2023 19:41:22 +0000
+Date: Sun, 27 Aug 2023 20:41:22 +0100
+From: Al Viro <viro@zeniv.linux.org.uk>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20230827194122.GA325446@ZenIV>
+References: <20230601145904.1385409-1-hch@lst.de>
+ <20230601145904.1385409-4-hch@lst.de>
 MIME-Version: 1.0
-X-Migadu-Flow: FLOW_OUT
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <20230601145904.1385409-4-hch@lst.de>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Hao Xu <howeyxu@tencent.com> This add support for
- getdents64
- to io_uring, acting exactly like the syscall: the directory is iterated from
- it's current's position as stored in the file struct, and the file's position
- is updated ex [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Thu, Jun 01, 2023 at 04:58:55PM +0200, Christoph Hellwig
+ wrote: > All callers of generic_perform_write need to updated ki_pos, move
+ it into > common code. > @@ -4034, 7 +4037,
+ 6 @@ ssize_t __generic_file_write_iter(struct
+ kiocb *iocb, struct iov_iter *from) > endbyte = pos + status - 1; > err =
+ filemap_write_and_wait_range(mapping, pos, endbyte); > if (er [...] 
+ Content analysis details:   (-0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1qaFwP-00H3zg-EN
-Subject: [f2fs-dev] [PATCH 11/11] io_uring: add support for getdents
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1qaLe3-0001Ix-AQ
+Subject: Re: [f2fs-dev] [PATCH 03/12] filemap: update ki_pos in
+ generic_perform_write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,168 +97,136 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Wanpeng Li <wanpengli@tencent.com>, "Darrick J . Wong" <djwong@kernel.org>,
- Dominique Martinet <asmadeus@codewreck.org>,
- Dave Chinner <david@fromorbit.com>, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, Stefan Roesch <shr@fb.com>, Clay Harris <bugs@claycon.org>,
- linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
- codalist@coda.cs.cmu.edu, cluster-devel@redhat.com, linux-cachefs@redhat.com,
- linux-ext4@vger.kernel.org, devel@lists.orangefs.org,
- linux-cifs@vger.kernel.org, ecryptfs@vger.kernel.org,
+Cc: "Darrick J. Wong" <djwong@kernel.org>, linux-mm@kvack.org,
+ Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ Matthew Wilcox <willy@infradead.org>, cluster-devel@redhat.com,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
  linux-nfs@vger.kernel.org, linux-block@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, netdev@vger.kernel.org,
- samba-technical@lists.samba.org, linux-unionfs@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-mtd@lists.infradead.org,
- bpf@vger.kernel.org, Pavel Begunkov <asml.silence@gmail.com>,
- linux-btrfs@vger.kernel.org
+ Damien Le Moal <dlemoal@kernel.org>, Hannes Reinecke <hare@suse.de>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Xiubo Li <xiubli@redhat.com>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
+ Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Anna Schumaker <anna@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Hao Xu <howeyxu@tencent.com>
+On Thu, Jun 01, 2023 at 04:58:55PM +0200, Christoph Hellwig wrote:
+> All callers of generic_perform_write need to updated ki_pos, move it into
+> common code.
 
-This add support for getdents64 to io_uring, acting exactly like the
-syscall: the directory is iterated from it's current's position as
-stored in the file struct, and the file's position is updated exactly as
-if getdents64 had been called.
+> @@ -4034,7 +4037,6 @@ ssize_t __generic_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+>  		endbyte = pos + status - 1;
+>  		err = filemap_write_and_wait_range(mapping, pos, endbyte);
+>  		if (err == 0) {
+> -			iocb->ki_pos = endbyte + 1;
+>  			written += status;
+>  			invalidate_mapping_pages(mapping,
+>  						 pos >> PAGE_SHIFT,
+> @@ -4047,8 +4049,6 @@ ssize_t __generic_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
+>  		}
+>  	} else {
+>  		written = generic_perform_write(iocb, from);
+> -		if (likely(written > 0))
+> -			iocb->ki_pos += written;
+>  	}
+>  out:
+>  	return written ? written : err;
 
-For filesystems that support NOWAIT in iterate_shared(), try to use it
-first; if a user already knows the filesystem they use do not support
-nowait they can force async through IOSQE_ASYNC in the sqe flags,
-avoiding the need to bounce back through a useless EAGAIN return.
+[another late reply, sorry]
 
-Co-developed-by: Dominique Martinet <asmadeus@codewreck.org>
-Signed-off-by: Dominique Martinet <asmadeus@codewreck.org>
-Signed-off-by: Hao Xu <howeyxu@tencent.com>
----
- include/uapi/linux/io_uring.h |  1 +
- io_uring/fs.c                 | 53 +++++++++++++++++++++++++++++++++++
- io_uring/fs.h                 |  3 ++
- io_uring/opdef.c              |  8 ++++++
- 4 files changed, 65 insertions(+)
+That part is somewhat fishy - there's a case where you return a positive value
+and advance ->ki_pos by more than that amount.  I really wonder if all callers
+of ->write_iter() are OK with that.  Consider e.g. this:
 
-diff --git a/include/uapi/linux/io_uring.h b/include/uapi/linux/io_uring.h
-index 8e61f8b7c2ce..3896397a1998 100644
---- a/include/uapi/linux/io_uring.h
-+++ b/include/uapi/linux/io_uring.h
-@@ -240,6 +240,7 @@ enum io_uring_op {
- 	IORING_OP_URING_CMD,
- 	IORING_OP_SEND_ZC,
- 	IORING_OP_SENDMSG_ZC,
-+	IORING_OP_GETDENTS,
- 
- 	/* this goes last, obviously */
- 	IORING_OP_LAST,
-diff --git a/io_uring/fs.c b/io_uring/fs.c
-index f6a69a549fd4..04711feac4e6 100644
---- a/io_uring/fs.c
-+++ b/io_uring/fs.c
-@@ -47,6 +47,12 @@ struct io_link {
- 	int				flags;
- };
- 
-+struct io_getdents {
-+	struct file			*file;
-+	struct linux_dirent64 __user	*dirent;
-+	unsigned int			count;
-+};
-+
- int io_renameat_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe)
- {
- 	struct io_rename *ren = io_kiocb_to_cmd(req, struct io_rename);
-@@ -291,3 +297,50 @@ void io_link_cleanup(struct io_kiocb *req)
- 	putname(sl->oldpath);
- 	putname(sl->newpath);
- }
-+
-+int io_getdents_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe)
-+{
-+	struct io_getdents *gd = io_kiocb_to_cmd(req, struct io_getdents);
-+
-+	if (READ_ONCE(sqe->off))
-+		return -EINVAL;
-+
-+	gd->dirent = u64_to_user_ptr(READ_ONCE(sqe->addr));
-+	gd->count = READ_ONCE(sqe->len);
-+
-+	return 0;
-+}
-+
-+int io_getdents(struct io_kiocb *req, unsigned int issue_flags)
-+{
-+	struct io_getdents *gd = io_kiocb_to_cmd(req, struct io_getdents);
-+	struct file *file = req->file;
-+	unsigned long getdents_flags = 0;
-+	bool force_nonblock = issue_flags & IO_URING_F_NONBLOCK;
-+	bool locked;
-+	int ret;
-+
-+	if (force_nonblock) {
-+		if (!(file->f_flags & O_NONBLOCK) &&
-+		    !(file->f_mode & FMODE_NOWAIT))
-+			return -EAGAIN;
-+
-+		getdents_flags = DIR_CONTEXT_F_NOWAIT;
-+	}
-+
-+	ret = file_pos_lock_nowait(file, force_nonblock);
-+	if (ret == -EAGAIN)
-+		return ret;
-+	locked = ret;
-+
-+	ret = vfs_getdents(file, gd->dirent, gd->count, getdents_flags);
-+	if (locked)
-+		file_pos_unlock(file);
-+
-+	if (ret == -EAGAIN && force_nonblock)
-+		return -EAGAIN;
-+
-+	io_req_set_res(req, ret, 0);
-+	return 0;
-+}
-+
-diff --git a/io_uring/fs.h b/io_uring/fs.h
-index 0bb5efe3d6bb..f83a6f3a678d 100644
---- a/io_uring/fs.h
-+++ b/io_uring/fs.h
-@@ -18,3 +18,6 @@ int io_symlinkat(struct io_kiocb *req, unsigned int issue_flags);
- int io_linkat_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe);
- int io_linkat(struct io_kiocb *req, unsigned int issue_flags);
- void io_link_cleanup(struct io_kiocb *req);
-+
-+int io_getdents_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe);
-+int io_getdents(struct io_kiocb *req, unsigned int issue_flags);
-diff --git a/io_uring/opdef.c b/io_uring/opdef.c
-index 3b9c6489b8b6..1bae6b2a8d0b 100644
---- a/io_uring/opdef.c
-+++ b/io_uring/opdef.c
-@@ -428,6 +428,11 @@ const struct io_issue_def io_issue_defs[] = {
- 		.prep			= io_eopnotsupp_prep,
- #endif
- 	},
-+	[IORING_OP_GETDENTS] = {
-+		.needs_file		= 1,
-+		.prep			= io_getdents_prep,
-+		.issue			= io_getdents,
-+	},
- };
- 
- 
-@@ -648,6 +653,9 @@ const struct io_cold_def io_cold_defs[] = {
- 		.fail			= io_sendrecv_fail,
- #endif
- 	},
-+	[IORING_OP_GETDENTS] = {
-+		.name			= "GETDENTS",
-+	},
- };
- 
- const char *io_uring_get_opcode(u8 opcode)
--- 
-2.25.1
+ssize_t ksys_write(unsigned int fd, const char __user *buf, size_t count)
+{
+        struct fd f = fdget_pos(fd);
+        ssize_t ret = -EBADF;
 
+        if (f.file) {
+                loff_t pos, *ppos = file_ppos(f.file);
+                if (ppos) {
+                        pos = *ppos;   
+                        ppos = &pos;
+                }
+                ret = vfs_write(f.file, buf, count, ppos);
+                if (ret >= 0 && ppos)
+                        f.file->f_pos = pos;
+                fdput_pos(f);
+        }
+
+        return ret;
+}
+
+ssize_t vfs_write(struct file *file, const char __user *buf, size_t count, loff_t *pos)
+{
+        ssize_t ret;
+
+        if (!(file->f_mode & FMODE_WRITE))
+                return -EBADF;
+        if (!(file->f_mode & FMODE_CAN_WRITE))
+                return -EINVAL;
+        if (unlikely(!access_ok(buf, count)))
+                return -EFAULT;
+
+        ret = rw_verify_area(WRITE, file, pos, count);
+        if (ret)
+                return ret;
+        if (count > MAX_RW_COUNT)
+                count =  MAX_RW_COUNT;
+        file_start_write(file);
+        if (file->f_op->write)
+                ret = file->f_op->write(file, buf, count, pos);
+        else if (file->f_op->write_iter)
+                ret = new_sync_write(file, buf, count, pos);
+        else   
+                ret = -EINVAL;
+        if (ret > 0) {
+                fsnotify_modify(file);
+                add_wchar(current, ret);
+        }
+        inc_syscw(current);
+        file_end_write(file);
+        return ret;
+}
+
+static ssize_t new_sync_write(struct file *filp, const char __user *buf, size_t len, loff_t *ppos)
+{
+        struct kiocb kiocb;
+        struct iov_iter iter;
+        ssize_t ret; 
+
+        init_sync_kiocb(&kiocb, filp);
+        kiocb.ki_pos = (ppos ? *ppos : 0);
+        iov_iter_ubuf(&iter, ITER_SOURCE, (void __user *)buf, len);
+
+        ret = call_write_iter(filp, &kiocb, &iter);
+        BUG_ON(ret == -EIOCBQUEUED);
+        if (ret > 0 && ppos)
+                *ppos = kiocb.ki_pos;
+        return ret;
+} 
+
+Suppose ->write_iter() ends up doing returning a positive value smaller than
+the increment of kiocb.ki_pos.  What do we get?  ret is positive, so
+kiocb.ki_pos gets copied into *ppos, which is ksys_write's pos and there
+we copy it into file->f_pos.
+
+Is it really OK to have write() return 4096 and advance the file position
+by 16K?  AFAICS, userland wouldn't get any indication of something
+odd going on - just a short write to a regular file, with followup write
+of remaining 12K getting quietly written in the range 16K..28K.
+
+I don't remember what POSIX says about that, but it would qualify as
+nasty surprise for any userland program - sure, one can check fsync()
+results before closing the sucker and see if everything looks fine,
+but the way it's usually discussed could easily lead to assumption that
+(synchronous) O_DIRECT writes would not be affected by anything of that
+sort.
 
 
 _______________________________________________
