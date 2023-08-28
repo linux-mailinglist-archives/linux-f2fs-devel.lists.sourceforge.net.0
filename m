@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 260E578A200
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 27 Aug 2023 23:45:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D826D78A3C3
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Aug 2023 03:05:23 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qaNZv-0005Wj-B6;
-	Sun, 27 Aug 2023 21:45:50 +0000
+	id 1qaQgu-0000of-Mu;
+	Mon, 28 Aug 2023 01:05:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <viro@ftp.linux.org.uk>) id 1qaNZt-0005Wa-VT
+ (envelope-from <viro@ftp.linux.org.uk>) id 1qaQgp-0000oD-Dn
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 27 Aug 2023 21:45:48 +0000
+ Mon, 28 Aug 2023 01:05:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kY05MXjwCqUKuXNwucsgt/McL4F7q7Pfbjm7IIALTG0=; b=Swf9kquZaBVJedAarT8TCbaREC
- CfolvVLbNABF/dVTFRBIzt2zsqWQLpkcu+SRedKWUo6Ctwv2Nyk0M385K4atTcCRFCJii3z3GIoJI
- 4f7u0LlmBc27q/y8LITO4PsonFzrIVQHqYLSDTP1spzokHtIVXW7nH4WVhOpv32wcL2U=;
+ bh=joEHMg4Vnx51INzte3pGka01/tHMgi/viw3PIuubDEg=; b=b4tj1PZXYAv+Ud/k+qye1YcH0u
+ GOLOaZ5FrCDOSavrPJ9Pty+c3BpCdK3/zgxPjN0dTerXYuYshXHpeRW/x4DV2zLPtDCkfiFd0BQb1
+ Z9Y58TevGeYxyRNjF+w/LZi9xDUc5BS6Wgu7Jz8mAx6OiFmPKCfoMQ54NEALKL56j+Vs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
@@ -31,30 +31,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kY05MXjwCqUKuXNwucsgt/McL4F7q7Pfbjm7IIALTG0=; b=ZSnAcFKWo+t7Mw8SwiJw+gyvyB
- 1uM/+udvb03WPdrYwcZSz14wHW5KYuxhluxj6qPixbQh7/8THyMzrpHnQ5/f0f+8LYSGfsKxdIWqf
- eWRpE6c+4zyedty8IY6Qrl9apSRiHf3/905LWWLbZtcfQYXxUk1N7P/+6dTFqc11sVXs=;
+ bh=joEHMg4Vnx51INzte3pGka01/tHMgi/viw3PIuubDEg=; b=YxPv77zvDiZhf6zwNIr8nP9uGm
+ 0SHEoViqlNwpfc6DHwnHhWbxY5fDWMZaoAnEgX22natWfkXgEdTXlfLciQ3FtyW/5xAn51okORS5n
+ MCDu6iB72EvRJqADooOQcpTQbSguU1RO6/yydVFYueC6vzoxKjIXCMzdO9/ZgWAVk9sg=;
 Received: from zeniv.linux.org.uk ([62.89.141.173])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qaNZn-00HNnF-MS for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 27 Aug 2023 21:45:48 +0000
+ id 1qaQgn-0003wx-5i for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Aug 2023 01:05:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
  MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=kY05MXjwCqUKuXNwucsgt/McL4F7q7Pfbjm7IIALTG0=; b=rwicGoUvL4VgCd8/Qp1uGcvFJj
- 2egMEWh2qIptB38yz3LkaovCgsrzYd5qWYzYVrLDB0+2cvC8Hq94M95X4EXXJUaYQexvV5ydz/PhQ
- 3oSRutUhsOumwt9db2so3z+etJXEF+Wi2+NHOmG8HlbMqrIjqtB+TQ9YoLhUuiexvk8+I1LYJ/xSV
- ZlLyerq6Wcockw2BEhGC0e7r/uJgQmeAavj3yTO2QGyQwB10XYMkDDZ1Bff7wCxS6uqmy7RDsW0tE
- LxV9EZ6t5yOJ6J5Tl0xTjIsbFSoYFc5//Rfxs/6ERxlTJUc4/DLKribj0NNKKwb+gHZab/RxADkLO
- htbC578A==;
+ bh=joEHMg4Vnx51INzte3pGka01/tHMgi/viw3PIuubDEg=; b=tBQRCz5+oVdl3BS/sNcy7bWOX7
+ GGqnD2dBYFuddcCAHCZIxNjDzAdi2le5BAt0r8Kntb7pX1JY0YphckowafjvL81vNIQ3iZbSuHB8W
+ r/PUBBhyIh5zGyiYSh551Ab8m+qrDF3vUESvq5gmF+156kAmT5ewUZLVGI0pVuCR+wxckZ4BuuSiW
+ RJFEDzRbT6/CwsUyBB67HLFUFCa0gDIENAIc4MS7fD/7hjHRH/QwT9ZGKRpKtatGkE8elHlNUeY9H
+ K7XCyGgu0m99e9gG1KyKu8v/0XPiv+PZlDfNvSozoVu79X3N9xA7HRVP+E5Pt/Irs6JBUgQAoXzdY
+ 9136hnSA==;
 Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qaNZO-001P52-2K; Sun, 27 Aug 2023 21:45:18 +0000
-Date: Sun, 27 Aug 2023 22:45:18 +0100
+ Linux)) id 1qaQgN-001R4E-2B; Mon, 28 Aug 2023 01:04:43 +0000
+Date: Mon, 28 Aug 2023 02:04:43 +0100
 From: Al Viro <viro@zeniv.linux.org.uk>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20230827214518.GU3390869@ZenIV>
+Message-ID: <20230828010443.GV3390869@ZenIV>
 References: <20230601145904.1385409-1-hch@lst.de>
  <20230601145904.1385409-4-hch@lst.de>
  <20230827194122.GA325446@ZenIV>
@@ -63,25 +63,26 @@ Content-Disposition: inline
 In-Reply-To: <20230827194122.GA325446@ZenIV>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On Sun, Aug 27, 2023 at 08:41:22PM +0100, Al Viro wrote: >
- On Thu, Jun 01, 2023 at 04:58:55PM +0200, Christoph Hellwig wrote: > > All
- callers of generic_perform_write need to updated ki_pos, move it i [...] 
+ That part is somewhat fishy - there's a case where you return a positive
+ value > and advance ->ki_pos by more than that amount. I really wonder if
+ all callers > of ->write_iter() are OK with that. 
  Content analysis details:   (-0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1qaNZn-00HNnF-MS
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1qaQgn-0003wx-5i
 Subject: Re: [f2fs-dev] [PATCH 03/12] filemap: update ki_pos in
  generic_perform_write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -113,146 +114,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On Sun, Aug 27, 2023 at 08:41:22PM +0100, Al Viro wrote:
-> On Thu, Jun 01, 2023 at 04:58:55PM +0200, Christoph Hellwig wrote:
-> > All callers of generic_perform_write need to updated ki_pos, move it into
-> > common code.
-> 
-> > @@ -4034,7 +4037,6 @@ ssize_t __generic_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
-> >  		endbyte = pos + status - 1;
-> >  		err = filemap_write_and_wait_range(mapping, pos, endbyte);
-> >  		if (err == 0) {
-> > -			iocb->ki_pos = endbyte + 1;
-> >  			written += status;
-> >  			invalidate_mapping_pages(mapping,
-> >  						 pos >> PAGE_SHIFT,
-> > @@ -4047,8 +4049,6 @@ ssize_t __generic_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
-> >  		}
-> >  	} else {
-> >  		written = generic_perform_write(iocb, from);
-> > -		if (likely(written > 0))
-> > -			iocb->ki_pos += written;
-> >  	}
-> >  out:
-> >  	return written ? written : err;
-> 
-> [another late reply, sorry]
-> 
+
 > That part is somewhat fishy - there's a case where you return a positive value
 > and advance ->ki_pos by more than that amount.  I really wonder if all callers
-> of ->write_iter() are OK with that.  Consider e.g. this:
-> 
-> ssize_t ksys_write(unsigned int fd, const char __user *buf, size_t count)
-> {
->         struct fd f = fdget_pos(fd);
->         ssize_t ret = -EBADF;
-> 
->         if (f.file) {
->                 loff_t pos, *ppos = file_ppos(f.file);
->                 if (ppos) {
->                         pos = *ppos;   
->                         ppos = &pos;
->                 }
->                 ret = vfs_write(f.file, buf, count, ppos);
->                 if (ret >= 0 && ppos)
->                         f.file->f_pos = pos;
->                 fdput_pos(f);
->         }
-> 
->         return ret;
-> }
-> 
-> ssize_t vfs_write(struct file *file, const char __user *buf, size_t count, loff_t *pos)
-> {
->         ssize_t ret;
-> 
->         if (!(file->f_mode & FMODE_WRITE))
->                 return -EBADF;
->         if (!(file->f_mode & FMODE_CAN_WRITE))
->                 return -EINVAL;
->         if (unlikely(!access_ok(buf, count)))
->                 return -EFAULT;
-> 
->         ret = rw_verify_area(WRITE, file, pos, count);
->         if (ret)
->                 return ret;
->         if (count > MAX_RW_COUNT)
->                 count =  MAX_RW_COUNT;
->         file_start_write(file);
->         if (file->f_op->write)
->                 ret = file->f_op->write(file, buf, count, pos);
->         else if (file->f_op->write_iter)
->                 ret = new_sync_write(file, buf, count, pos);
->         else   
->                 ret = -EINVAL;
->         if (ret > 0) {
->                 fsnotify_modify(file);
->                 add_wchar(current, ret);
->         }
->         inc_syscw(current);
->         file_end_write(file);
->         return ret;
-> }
-> 
-> static ssize_t new_sync_write(struct file *filp, const char __user *buf, size_t len, loff_t *ppos)
-> {
->         struct kiocb kiocb;
->         struct iov_iter iter;
->         ssize_t ret; 
-> 
->         init_sync_kiocb(&kiocb, filp);
->         kiocb.ki_pos = (ppos ? *ppos : 0);
->         iov_iter_ubuf(&iter, ITER_SOURCE, (void __user *)buf, len);
-> 
->         ret = call_write_iter(filp, &kiocb, &iter);
->         BUG_ON(ret == -EIOCBQUEUED);
->         if (ret > 0 && ppos)
->                 *ppos = kiocb.ki_pos;
->         return ret;
-> } 
-> 
-> Suppose ->write_iter() ends up doing returning a positive value smaller than
-> the increment of kiocb.ki_pos.  What do we get?  ret is positive, so
-> kiocb.ki_pos gets copied into *ppos, which is ksys_write's pos and there
-> we copy it into file->f_pos.
-> 
-> Is it really OK to have write() return 4096 and advance the file position
-> by 16K?  AFAICS, userland wouldn't get any indication of something
-> odd going on - just a short write to a regular file, with followup write
-> of remaining 12K getting quietly written in the range 16K..28K.
-> 
-> I don't remember what POSIX says about that, but it would qualify as
-> nasty surprise for any userland program - sure, one can check fsync()
-> results before closing the sucker and see if everything looks fine,
-> but the way it's usually discussed could easily lead to assumption that
-> (synchronous) O_DIRECT writes would not be affected by anything of that
-> sort.
+> of ->write_iter() are OK with that.
 
-IOW, I suspect that the right thing to do would be something along the lines
-of
+Speaking of which, in case of negative return value we'd better *not* use
+->ki_pos; consider e.g. generic_file_write_iter() with O_DSYNC and
+vfs_fsync_range() failure.  An error gets returned, but ->ki_pos is left
+advanced.  Normal write(2) is fine - it will only update file->f_pos if
+->write_iter() has returned a non-negative.  However, io_uring
+kiocb_done() starts with
+        if (req->flags & REQ_F_CUR_POS)
+                req->file->f_pos = rw->kiocb.ki_pos;
+        if (ret >= 0 && (rw->kiocb.ki_complete == io_complete_rw)) {
+                if (!__io_complete_rw_common(req, ret)) {
+                        /*
+                         * Safe to call io_end from here as we're inline
+                         * from the submission path.
+                         */
+                        io_req_io_end(req);
+                        io_req_set_res(req, final_ret,
+                                       io_put_kbuf(req, issue_flags));
+                        return IOU_OK;
+                }
+        } else {
+                io_rw_done(&rw->kiocb, ret);
+        }
+Note that ->f_pos update is *NOT* conditional upon ret >= 0 - it happens
+no matter what, provided that original request had ->kiocb.ki_pos equal
+to -1 (on a non-FMODE_STREAM file).
 
-direct_write_fallback(): on error revert the ->ki_pos update from buffered write
-
-If we fail filemap_write_and_wait_range() on the range the buffered write went
-into, we only report the "number of bytes which we direct-written", to quote
-the comment in there.  Which is fine, but buffered write has already advanced
-iocb->ki_pos, so we need to roll that back.  Otherwise we end up with e.g.
-write(2) advancing position by more than the amount it reports having written.
-
-Fixes: 182c25e9c157 "filemap: update ki_pos in generic_perform_write"
-Signed-off-by: Al Viro <viro@zeniv.linux.org.uk>
----
-diff --git a/fs/libfs.c b/fs/libfs.c
-index 5b851315eeed..712c57828c0e 100644
---- a/fs/libfs.c
-+++ b/fs/libfs.c
-@@ -1646,6 +1646,7 @@ ssize_t direct_write_fallback(struct kiocb *iocb, struct iov_iter *iter,
- 		 * We don't know how much we wrote, so just return the number of
- 		 * bytes which were direct-written
- 		 */
-+		iocb->ki_pos -= buffered_written;
- 		if (direct_written)
- 			return direct_written;
- 		return err;
+Jens, is there any reason for doing that unconditionally?  IMO it's
+a bad idea - there's a wide scope for fuckups that way, especially
+since write(2) is not sensitive to that and this use of -1 ki_pos
+is not particularly encouraged on io_uring side either, AFAICT.
+Worse, it's handling of failure exits in the first place, which
+already gets little testing...
 
 
 _______________________________________________
