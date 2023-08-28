@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FFB078B282
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Aug 2023 16:04:37 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48DC478B284
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Aug 2023 16:04:39 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qacr6-0006x9-8U;
-	Mon, 28 Aug 2023 14:04:36 +0000
+	id 1qacr6-0003gG-Fu;
+	Mon, 28 Aug 2023 14:04:37 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1qacr2-0006wf-G0
+ (envelope-from <chao@kernel.org>) id 1qacr2-0003g9-OF
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Aug 2023 14:04:32 +0000
+ Mon, 28 Aug 2023 14:04:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fuf8lvG2IpaLnWoAUX0O/e+MhG9gfzWO/M9TjdC6zLw=; b=MFVmHMBtphFSvU4NHJqEF84CI0
- XgtdrSYFKJHPkXA75Gnr8mHEyQKcGoweNr2LwWmga+mXpIo8+joH/8liXzyvqoAE8NbBLObbg3Wdh
- cOh+QmojRSyVE0sRVldRNQxMmMlhI0u5yy7d6/yNNANw8l8ZtZlbKRxxVolVkzdc0bbA=;
+ bh=PgUOe7jlThSXOevv/q7GfcgMJW23C1btzunsJ7kUX7Y=; b=R3SAii8Y+yViqoFWfYNW8Ls3lJ
+ CdUfeFhWYmfa+MzdtB7rlcBNLiGhGpnzOZ8Ep8zVy6Gi5An7e41MhWTi7+qOEbN/MP6TH8pBIXPO9
+ x+Qa2zS4SQ6msqTVxfHiYY+KuI1oesLeVABeFMjUoNqil7WCJLs3k372VzHrA9PfjMz4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -31,37 +31,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=fuf8lvG2IpaLnWoAUX0O/e+MhG9gfzWO/M9TjdC6zLw=; b=YEWG/qf02sSinItLRgTZ+g6g0o
- wcaziNk1Ct5ZCJyVELOLv8LyC/MYOfEWXKt0k0jVjBimmDIyKC7tKdL9A5+DwFd1uogxc8rQlQZrg
- s46XynDNlhjb316OheKOLHJ1SOe/txL8JczzkkIDpCEKaAInw6EPIerIxb66i6tzsJXM=;
+ bh=PgUOe7jlThSXOevv/q7GfcgMJW23C1btzunsJ7kUX7Y=; b=jgihEl04Q3prz3gPUGrT647XzD
+ dy//FqWSWaVaPGF1mkd2VYrNdhDXCdxqBxElOqHEYIrzXOg+PKClgRbJNMTbs7+ekYhAPxB0c8+6U
+ RqFiEL/m2lEty42al+2hMAaaJzFvuurgJFhgjKDrrx+WaDv5bleZqJ4VI2TTQMuxIjxo=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qacr1-00043W-Km for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 28 Aug 2023 14:04:32 +0000
+ id 1qacr3-000oNy-6l for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Aug 2023 14:04:33 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 013B7648F5
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 93130648DD
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 28 Aug 2023 14:04:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 47734C433C8;
- Mon, 28 Aug 2023 14:04:24 +0000 (UTC)
+ Mon, 28 Aug 2023 14:04:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC948C433C9;
+ Mon, 28 Aug 2023 14:04:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1693231465;
- bh=dz5WGcW0XCq5mKyveB9Rm7v1wiY2CcHMtPUPvLN0ics=;
+ s=k20201202; t=1693231467;
+ bh=f4hmSgSOl/WVTXPEKDNSnKlH4/2yov+TX2iMMY7IA4Y=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=kT2hxGEFWQ4knn471dORoGRgGx7B1WliZz9InbbM6YqXTYfT+r5XfZGWbcDjrOON9
- CmsU/+aclugRcXJ6zi6FgLwZ205PSTLokiyRx/rvpcdSrOdbRraEl3OEWZdWiUjdcx
- 1W+MZc04wniOfJqrqA+m90CygGjkVrLcd4uizLPv8/bqFoY9YdhdviIKY5OHwk97S8
- Dsfy3QZmALv6+0IZ7FWDNWsSVsStZcq1S6E6vC8BAscmuua1XR4DII/grLfRB89H+b
- I9f1rLeTirBXy1Q2xCqmIs1JSeJ8sQEZAKNNhvaUBJZN7b4RuinK0rDgI9urTKSh5L
- zdjVybXCZS+6g==
+ b=b8Wj07gI/g/O9qcP2we66ARXQXmRJvil5y8pL7H2GiyLjJkKrTrxymWoYtvmDmYmj
+ pLeNELmV1ffI0hnTVjVUEUKtPAZD4wk8W3I9KSrONeBecs6V7agzrZFfAoc2Mteup5
+ iZ3haCpylhrAYFx1PRQsm1tmRDnrbwLNPeCRmhw45FQM4+w9vpkVXLjqxDd0o/2wmL
+ cyzJLsVCYzYBtqKt5Yosphi2kDT0L3KywRQvB0Kwc9sjpWGN+Fr4gcbpJxtJ4ktbDT
+ jAhzTks8y1Op6YMFpiRWXBXy4WePcllqP8zamU7D2x1kb5+HPKyc6D0FOk3asofH0l
+ w7mhNGD+URr7w==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Mon, 28 Aug 2023 22:04:16 +0800
-Message-Id: <20230828140417.2951796-3-chao@kernel.org>
+Date: Mon, 28 Aug 2023 22:04:17 +0800
+Message-Id: <20230828140417.2951796-4-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230828140417.2951796-1-chao@kernel.org>
 References: <20230828140417.2951796-1-chao@kernel.org>
@@ -73,12 +73,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch covers sanity check logic on cluster w/
- CONFIG_F2FS_CHECK_FS, 
- otherwise, there will be performance regression while querying cluster mapping
- info. Callers of f2fs_is_compressed_cluster() only care about whether cluster
- is compressed or not, rather than # of valid blocks in compressed cluster,
- so, let's adjust f2fs_is_compressed_cluster()'s logic [...] 
+ Content preview:  With below script,
+ redundant compress extension will be parsed
+ and added by parse_options(), because parse_options() doesn't check whether
+ the extension is existed or not,
+ fix it. 1. mount -t f2fs -o compress_extension=so
+ /dev/vdb /mnt/f2fs 2. mount -t f2fs -o remount, compress_extension=so /mnt/f2fs
+ 3. mount|grep f2fs 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +95,9 @@ X-Spam-Report: Spam detection software,
  author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qacr1-00043W-Km
-Subject: [f2fs-dev] [PATCH 3/4] f2fs: compress: do sanity check on cluster
- when CONFIG_F2FS_CHECK_FS is on
+X-Headers-End: 1qacr3-000oNy-6l
+Subject: [f2fs-dev] [PATCH 4/4] f2fs: compress: fix to avoid redundant
+ compress extension
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,157 +114,81 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This patch covers sanity check logic on cluster w/ CONFIG_F2FS_CHECK_FS,
-otherwise, there will be performance regression while querying cluster
-mapping info.
+With below script, redundant compress extension will be parsed and added
+by parse_options(), because parse_options() doesn't check whether the
+extension is existed or not, fix it.
 
-Callers of f2fs_is_compressed_cluster() only care about whether cluster
-is compressed or not, rather than # of valid blocks in compressed cluster,
-so, let's adjust f2fs_is_compressed_cluster()'s logic according to
-caller's requirement.
+1. mount -t f2fs -o compress_extension=so /dev/vdb /mnt/f2fs
+2. mount -t f2fs -o remount,compress_extension=so /mnt/f2fs
+3. mount|grep f2fs
 
+/dev/vdb on /mnt/f2fs type f2fs (...,compress_extension=so,compress_extension=so,...)
+
+Fixes: 4c8ff7095bef ("f2fs: support data compression")
+Fixes: 151b1982be5d ("f2fs: compress: add nocompress extensions support")
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/compress.c | 61 ++++++++++++++++++++++++++--------------------
- fs/f2fs/data.c     |  4 +--
- 2 files changed, 35 insertions(+), 30 deletions(-)
+ fs/f2fs/super.c | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 9662d635efbe..1828239cef0a 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -893,14 +893,15 @@ static bool cluster_has_invalid_data(struct compress_ctx *cc)
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 8d9d2ee7f3c7..68895be6407f 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -547,6 +547,29 @@ static int f2fs_set_test_dummy_encryption(struct super_block *sb,
+ }
  
- bool f2fs_sanity_check_cluster(struct dnode_of_data *dn)
- {
-+#ifdef CONFIG_F2FS_CHECK_FS
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
- 	unsigned int cluster_size = F2FS_I(dn->inode)->i_cluster_size;
--	bool compressed = dn->data_blkaddr == COMPRESS_ADDR;
- 	int cluster_end = 0;
-+	unsigned int count;
- 	int i;
- 	char *reason = "";
- 
--	if (!compressed)
-+	if (dn->data_blkaddr != COMPRESS_ADDR)
- 		return false;
- 
- 	/* [..., COMPR_ADDR, ...] */
-@@ -909,7 +910,7 @@ bool f2fs_sanity_check_cluster(struct dnode_of_data *dn)
- 		goto out;
- 	}
- 
--	for (i = 1; i < cluster_size; i++) {
-+	for (i = 1, count = 1; i < cluster_size; i++, count++) {
- 		block_t blkaddr = data_blkaddr(dn->inode, dn->node_page,
- 							dn->ofs_in_node + i);
- 
-@@ -929,19 +930,42 @@ bool f2fs_sanity_check_cluster(struct dnode_of_data *dn)
- 			goto out;
- 		}
- 	}
-+
-+	f2fs_bug_on(F2FS_I_SB(dn->inode), count != cluster_size &&
-+		!is_inode_flag_set(dn->inode, FI_COMPRESS_RELEASED));
-+
- 	return false;
- out:
- 	f2fs_warn(sbi, "access invalid cluster, ino:%lu, nid:%u, ofs_in_node:%u, reason:%s",
- 			dn->inode->i_ino, dn->nid, dn->ofs_in_node, reason);
- 	set_sbi_flag(sbi, SBI_NEED_FSCK);
- 	return true;
-+#else
-+	return false;
-+#endif
-+}
-+
-+static int __f2fs_get_cluster_blocks(struct inode *inode,
-+					struct dnode_of_data *dn)
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
++static bool is_compress_extension_exist(struct f2fs_sb_info *sbi,
++					const char *new_ext, bool is_ext)
 +{
-+	unsigned int cluster_size = F2FS_I(inode)->i_cluster_size;
-+	int count, i;
++	unsigned char (*ext)[F2FS_EXTENSION_LEN];
++	int ext_cnt;
++	int i;
 +
-+	for (i = 1, count = 1; i < cluster_size; i++) {
-+		block_t blkaddr = data_blkaddr(dn->inode, dn->node_page,
-+							dn->ofs_in_node + i);
-+
-+		if (__is_valid_data_blkaddr(blkaddr))
-+			count++;
++	if (is_ext) {
++		ext = F2FS_OPTION(sbi).extensions;
++		ext_cnt = F2FS_OPTION(sbi).compress_ext_cnt;
++	} else {
++		ext = F2FS_OPTION(sbi).noextensions;
++		ext_cnt = F2FS_OPTION(sbi).nocompress_ext_cnt;
 +	}
 +
-+	return count;
- }
++	for (i = 0; i < ext_cnt; i++) {
++		if (!strcasecmp(new_ext, ext[i]))
++			return true;
++	}
++
++	return false;
++}
++
+ /*
+  * 1. The same extension name cannot not appear in both compress and non-compress extension
+  * at the same time.
+@@ -1149,6 +1172,11 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 				return -EINVAL;
+ 			}
  
- static int __f2fs_cluster_blocks(struct inode *inode,
--				unsigned int cluster_idx, bool compr)
-+				unsigned int cluster_idx, bool compr_blks)
- {
- 	struct dnode_of_data dn;
--	unsigned int cluster_size = F2FS_I(inode)->i_cluster_size;
- 	unsigned int start_idx = cluster_idx <<
- 				F2FS_I(inode)->i_log_cluster_size;
- 	int ret;
-@@ -956,31 +980,14 @@ static int __f2fs_cluster_blocks(struct inode *inode,
++			if (is_compress_extension_exist(sbi, name, true)) {
++				kfree(name);
++				break;
++			}
++
+ 			strcpy(ext[ext_cnt], name);
+ 			F2FS_OPTION(sbi).compress_ext_cnt++;
+ 			kfree(name);
+@@ -1173,6 +1201,11 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
+ 				return -EINVAL;
+ 			}
  
- 	if (f2fs_sanity_check_cluster(&dn)) {
- 		ret = -EFSCORRUPTED;
--		f2fs_handle_error(F2FS_I_SB(inode), ERROR_CORRUPTED_CLUSTER);
- 		goto fail;
- 	}
- 
- 	if (dn.data_blkaddr == COMPRESS_ADDR) {
--		int i;
--
--		ret = 1;
--		for (i = 1; i < cluster_size; i++) {
--			block_t blkaddr;
--
--			blkaddr = data_blkaddr(dn.inode,
--					dn.node_page, dn.ofs_in_node + i);
--			if (compr) {
--				if (__is_valid_data_blkaddr(blkaddr))
--					ret++;
--			} else {
--				if (blkaddr != NULL_ADDR)
--					ret++;
--			}
--		}
--
--		f2fs_bug_on(F2FS_I_SB(inode),
--			!compr && ret != cluster_size &&
--			!is_inode_flag_set(inode, FI_COMPRESS_RELEASED));
-+		if (compr_blks)
-+			ret = __f2fs_get_cluster_blocks(inode, &dn);
-+		else
-+			ret = 1;
- 	}
- fail:
- 	f2fs_put_dnode(&dn);
-@@ -993,7 +1000,7 @@ static int f2fs_compressed_blocks(struct compress_ctx *cc)
- 	return __f2fs_cluster_blocks(cc->inode, cc->cluster_idx, true);
- }
- 
--/* return # of valid blocks in compressed cluster */
-+/* return whether cluster is compressed one or not */
- int f2fs_is_compressed_cluster(struct inode *inode, pgoff_t index)
- {
- 	return __f2fs_cluster_blocks(inode,
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 1ac34eb49a0e..cd9cedc35d7f 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -1690,9 +1690,7 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
- 			map->m_flags |= F2FS_MAP_NEW;
- 	} else if (is_hole) {
- 		if (f2fs_compressed_file(inode) &&
--		    f2fs_sanity_check_cluster(&dn) &&
--		    (flag != F2FS_GET_BLOCK_FIEMAP ||
--		     IS_ENABLED(CONFIG_F2FS_CHECK_FS))) {
-+		    f2fs_sanity_check_cluster(&dn)) {
- 			err = -EFSCORRUPTED;
- 			f2fs_handle_error(sbi,
- 					ERROR_CORRUPTED_CLUSTER);
++			if (is_compress_extension_exist(sbi, name, false)) {
++				kfree(name);
++				break;
++			}
++
+ 			strcpy(noext[noext_cnt], name);
+ 			F2FS_OPTION(sbi).nocompress_ext_cnt++;
+ 			kfree(name);
 -- 
 2.40.1
 
