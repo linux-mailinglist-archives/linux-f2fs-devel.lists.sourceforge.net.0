@@ -2,97 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE7CE78B17D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Aug 2023 15:21:24 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC30578B258
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 28 Aug 2023 15:56:57 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qacBA-0000NA-2A;
-	Mon, 28 Aug 2023 13:21:17 +0000
+	id 1qacjY-000740-0W;
+	Mon, 28 Aug 2023 13:56:48 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qacB4-0000Mv-OS;
- Mon, 28 Aug 2023 13:21:11 +0000
+ (envelope-from <viro@ftp.linux.org.uk>) id 1qacjW-00073t-Ga
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Aug 2023 13:56:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QtirhpZ6M4wRBs0PcZuQKaZInNnIQCord7zI9oR3eYc=; b=mtL7uTxhuLfSrcyZ3LM+a4ZnK1
- yBNWQmVU255EGTvNINnPrXP9J4R6e5X/nULlOjGjIcf8kVNain+chnomzrvKF6Ltqigk+vVYZJ17P
- 0UMdCwidiiK3w2rSy1js6kkc8DytVmQB3iG6rDHtbCZIyM7hDq0kJxFYErs6ojCbbSSI=;
+ d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=PJ90BdA+8s3qX5y6y0ylNyYbaZuzc0FQ7tGvCVtNYPo=; b=RrjuYnGUvGyK4yBUIzeuPdJhc7
+ hrj9B4k88UJjim6b3ANThPNLciu4UrEBrCKaZGuUbiepgV4iyG0al/PefDhUrWb8rqwcnd1c55aUt
+ o+IRRVIXrusf2FPSvXLUe7tmHEr5vbml6lNM4sFiO/V6IgVgtfNOBUllKPkgIaeRQtBA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=QtirhpZ6M4wRBs0PcZuQKaZInNnIQCord7zI9oR3eYc=; b=aW4r+d3Z7h+HTv5/Da979hz+rC
- xvYJdGPn+iz6lLcvrtNaS0UjzyUSIFFrAp7IDy4VRPTW9yiAKy89KKdAYZ+LYzobNgBsvr+zIu6B4
- sDEjvhFgMoo7RsT8rPLOK5DmJVyxLPamfoPNVBfk3yvfqYJAODtfo0g19CnIXkpEgI1U=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=PJ90BdA+8s3qX5y6y0ylNyYbaZuzc0FQ7tGvCVtNYPo=; b=deqhTn3QttpNu/pudoJQdMOtNS
+ 2vsiMlja1XHF3Ij+1XNsWuvITcTQqyMQObw2vZGSDOcwQ/VQdY+b482dn7NCvP6Gpihc8vTvhloWZ
+ T74mYZJZl6RgC0tZ1xxd4YAviIPEl8Hx53pyUsCoxzyqcv5cyeX0TjCHh9ybZvsqbH70=;
+Received: from zeniv.linux.org.uk ([62.89.141.173])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qacB4-000mFT-NV; Mon, 28 Aug 2023 13:21:11 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 1E9A96187E;
- Mon, 28 Aug 2023 13:21:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6569C433C8;
- Mon, 28 Aug 2023 13:20:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1693228864;
- bh=QtirhpZ6M4wRBs0PcZuQKaZInNnIQCord7zI9oR3eYc=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=dGzUUvJG87+eWzsz6xzROYCBNDl7W5LTOJNZSdrdj6kC4UZhu/D9tYCBTY1kzrQPe
- x7WILXB1VLYusnI7i57xbkDNp7AlezoIITxDEYtPZbpKeaRaDjmpnSpx19pqxTzCO1
- eHWv5jG6Kk405k0HzfGlQ5FnGrphH6RQF/qbsChQZpHtUi1E5k/RJY2W8E0veW1Pw4
- WmlHIAC8kSpEcFeEGWLjHX2ee4G742ubGUZGwha6A7RHD325wN5SUYbEQ3omUMFDG/
- CM1aA/cNlMXqkEYlHa/Phek8pvPKy4SQPmUA3IhuobWAQwG6yFUbEhG6jgGYrQO+H2
- J9dq9/E4F2ZeQ==
-Date: Mon, 28 Aug 2023 15:20:47 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20230828-durften-hauswand-67319ee0c17c@brauner>
-References: <20230810171429.31759-1-jack@suse.cz>
- <20230825015843.GB95084@ZenIV>
- <20230825134756.o3wpq6bogndukn53@quack3>
+ id 1qacjV-000o19-4P for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 28 Aug 2023 13:56:46 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=PJ90BdA+8s3qX5y6y0ylNyYbaZuzc0FQ7tGvCVtNYPo=; b=AIKhRmdLChvBh1g3+s6EW46CKf
+ MEbR4fH1pD3IzHz8haDpscNiqgIT1MwygtaGsg0/mJ22nTUE6hhMTmMaXMPK2UFki637fwtT5IR5e
+ NpCkU9lVELANCdo3c4h02AUyKpTFJGcO2Yf8AdjY5H7ThMDg0k1adrBbq/dNvtWwWnE3JjBJPdXc+
+ ZymQQTBtlnb8KZghvPVKQ32cCYcqGFspsFg4ARKclGMJ6roXU/fBsxC40PaksuQ+i2Lrun7tK4Cxw
+ NodllbY3kB+LQ2ImYXlQY7RelX2cS+RJORhfHJhRq6XyXuEQGqfPM8/oHIO2kXnO0q6TWo/qN/Di3
+ 04k9P7lQ==;
+Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1qacj1-001ZTg-1Q; Mon, 28 Aug 2023 13:56:15 +0000
+Date: Mon, 28 Aug 2023 14:56:15 +0100
+From: Al Viro <viro@zeniv.linux.org.uk>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20230828135615.GW3390869@ZenIV>
+References: <20230601145904.1385409-1-hch@lst.de>
+ <20230601145904.1385409-4-hch@lst.de>
+ <20230827194122.GA325446@ZenIV> <20230827214518.GU3390869@ZenIV>
+ <20230828123259.GB11084@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230825134756.o3wpq6bogndukn53@quack3>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <20230828123259.GB11084@lst.de>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  > So besides my last fput() worry about I think this could
- work and would be > probably a bit nicer than what I have. But before going
- and redoing the whole > series let me gather some more feedback s [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Mon, Aug 28, 2023 at 02:32:59PM +0200, Christoph Hellwig
+ wrote: > On Sun, Aug 27, 2023 at 10:45:18PM +0100, Al Viro wrote: > > IOW,
+ I suspect that the right thing to do would be something along the [...] 
+ Content analysis details:   (-0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qacB4-000mFT-NV
-Subject: Re: [f2fs-dev] [PATCH v2 0/29] block: Make blkdev_get_by_*() return
- handle
+X-Headers-End: 1qacjV-000o19-4P
+Subject: Re: [f2fs-dev] [PATCH 03/12] filemap: update ki_pos in
+ generic_perform_write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,46 +96,61 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Dave Kleikamp <shaggy@kernel.org>, jfs-discussion@lists.sourceforge.net,
- "Darrick J. Wong" <djwong@kernel.org>, linux-nvme@lists.infradead.org,
- Joseph Qi <joseph.qi@linux.alibaba.com>, dm-devel@redhat.com,
- target-devel@vger.kernel.org, linux-mtd@lists.infradead.org,
- Jack Wang <jinpu.wang@ionos.com>, Alasdair Kergon <agk@redhat.com>,
- drbd-dev@lists.linbit.com, linux-s390@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Christoph Hellwig <hch@infradead.org>, xen-devel@lists.xenproject.org,
- Gao Xiang <xiang@kernel.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Kent Overstreet <kent.overstreet@gmail.com>,
- Sven Schnelle <svens@linux.ibm.com>, linux-pm@vger.kernel.org,
- Mike Snitzer <snitzer@kernel.org>, Joern Engel <joern@lazybastard.org>,
- reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, Al Viro <viro@zeniv.linux.org.uk>,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+Cc: "Darrick J. Wong" <djwong@kernel.org>, linux-mm@kvack.org,
+ Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ Matthew Wilcox <willy@infradead.org>, cluster-devel@redhat.com,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
+ linux-nfs@vger.kernel.org, linux-block@vger.kernel.org,
+ Damien Le Moal <dlemoal@kernel.org>, Hannes Reinecke <hare@suse.de>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Xiubo Li <xiubli@redhat.com>,
  Trond Myklebust <trond.myklebust@hammerspace.com>,
- Jens Axboe <axboe@kernel.dk>, linux-raid@vger.kernel.org,
- linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- linux-mm@kvack.org, Song Liu <song@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- Minchan Kim <minchan@kernel.org>, ocfs2-devel@oss.oracle.com,
- Anna Schumaker <anna@kernel.org>, linux-fsdevel@vger.kernel.org,
- "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
+ Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
+ Theodore Ts'o <tytso@mit.edu>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, Anna Schumaker <anna@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-> So besides my last fput() worry about I think this could work and would be
-> probably a bit nicer than what I have. But before going and redoing the whole
-> series let me gather some more feedback so that we don't go back and forth.
-> Christoph, Christian, Jens, any opinion?
+On Mon, Aug 28, 2023 at 02:32:59PM +0200, Christoph Hellwig wrote:
+> On Sun, Aug 27, 2023 at 10:45:18PM +0100, Al Viro wrote:
+> > IOW, I suspect that the right thing to do would be something along the lines
+> > of
+> 
+> The idea looks sensible to me, but we'll also need to do it for the
+> filemap_write_and_wait_range failure case.
 
-I'll be a bit under water for the next few days, I expect but I'll get
-back to this. I think not making you redo this whole thing from scratch
-is what I'd prefer unless there's really clear advantages. But I don't
-want to offer a haphazard opinion in the middle of the merge window.
+Huh?  That's precisely where this patch is doing that...  That function
+in mainline is
+        if (unlikely(buffered_written < 0)) {
+                if (direct_written)
+                        return direct_written;
+                return buffered_written;
+        }
+
+        /*
+         * We need to ensure that the page cache pages are written to disk and
+         * invalidated to preserve the expected O_DIRECT semantics.
+         */
+        err = filemap_write_and_wait_range(mapping, pos, end);
+        if (err < 0) {
+                /*
+                 * We don't know how much we wrote, so just return the number of
+                 * bytes which were direct-written
+                 */
+                if (direct_written)
+                        return direct_written;
+                return err;
+        }
+        invalidate_mapping_pages(mapping, pos >> PAGE_SHIFT, end >> PAGE_SHIFT);
+        return direct_written + buffered_written;
+
+The first failure exit does not need any work - the caller had not bumped
+->ki_pos; the second one (after that 'if (err < 0) {' line) does and that's
+where the patch upthread adds iocb->ki_pos -= buffered_written.
+
+Or am I completely misparsing what you've written?
 
 
 _______________________________________________
