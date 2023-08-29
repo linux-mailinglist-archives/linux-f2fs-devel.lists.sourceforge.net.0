@@ -2,91 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B951278C4CD
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Aug 2023 15:06:18 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id AAE5378CF9E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Aug 2023 00:47:34 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qayQ4-0005Dt-5P;
-	Tue, 29 Aug 2023 13:06:08 +0000
+	id 1qb7Ua-0004BF-NH;
+	Tue, 29 Aug 2023 22:47:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1qayQ1-0005Dl-QX
+ (envelope-from <viro@ftp.linux.org.uk>) id 1qb7UY-0004B9-DF
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Aug 2023 13:06:06 +0000
+ Tue, 29 Aug 2023 22:47:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RchKoATVAdQvPJfSjQ7igQ4w+5FVPwMefhSLf5vYpSI=; b=kGfUKXifxYp7zvQ/UsdueZ4ge2
- hIyueSLqVwUiCMCZi7sdPqRGbPt/qU4qUJP7ZoWsAypLm8eQyyzw+ooFxtLa4trX5ZEuCru/oAqdc
- ZtGRauDWO6Kv5dw2wkaH7MvzMFD1EdH/zUuiBbHakvwlSKBWM0NdTa7cf34QvHkGvsh4=;
+ d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=XGuBrJRA9Fd4AduQK/hSseIFrv8V5F+R7owbTsvIznw=; b=bmlORhNG2OP98u/yiYITm/cBqX
+ USuEUltGmqeqWVasluS66vC3y/DzckgSoHLIZUUUiX+gQ/rrF17Qj9wdnynJ11FVA7MBRC/HzihXI
+ QbNV2VJifLBEfnt6HJEHHn7a5jJh29/eiTw66M0uWJ5VS3HTTGtn7Nt7YkyRhMQ1KpEY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RchKoATVAdQvPJfSjQ7igQ4w+5FVPwMefhSLf5vYpSI=; b=g+I9Xt5cczYuUI8sszmP31AfV7
- KZhFZXvaKnFiu+MGWzXndNqxRk2ol984nnjN/bBRNoOcPasODBRvZu9IimUSGqQgG1xcsZE23pqQ7
- poFn75Dypjx6Zs8+QW59j81SQVwhiM2lJP6SG7GSyUEcriMDAd9VRaMGJ0QEp3PrdOGA=;
-Received: from casper.infradead.org ([90.155.50.34])
+ bh=XGuBrJRA9Fd4AduQK/hSseIFrv8V5F+R7owbTsvIznw=; b=hPVkWlWYCyeUrsWOXlkmo1iC7T
+ Vla5rqOk2csRtiUcSLu/eGpUe23M7OchO8w/GXNk3sX6qr8wOPkI6b4ZK1ZSC+eB+72FrZdkBxQbX
+ ds0xCyEnFUyjewSXPZr8xFfZMPw7LrIr4vtJ8LfcVejINcO2gGaq0bdSmE8BNTIkeDUc=;
+Received: from zeniv.linux.org.uk ([62.89.141.173])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qayPt-0008Ky-KP for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Aug 2023 13:06:00 +0000
+ id 1qb7UX-0004vx-3M for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 29 Aug 2023 22:47:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=RchKoATVAdQvPJfSjQ7igQ4w+5FVPwMefhSLf5vYpSI=; b=Q3QmRgXTehCOZCVueX+FS2Az5N
- PVqmWnEC5SOyltZJNMDkbuPj3BuxIKobdTkUGJdkwt9An23qab7RWIeUTJvkRcM5ZQw7A9VajHpfv
- K7r2l3ZZ2pGC+tetoYQU12TmTvlZI3sm3ayVKtCD8x7/yd2j9SuUz7gnHbMb8LXGAJC6qfT96aNHD
- /+KAN9szQKpq1/b+zh8evtWeBszURne3cpQtIIZ5DUWss+rP/RkNTx5Y/tCCASZPZaSLUEyAkYJWx
- 0SrCGJoWwn5s3UmnWTZbObVE6DrneAPDreiurlPZ6M22SpYEkwQtVmJFqXgm29PIZAfXouLOFvP7I
- 44OUuuBQ==;
-Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1qayP8-006i8Z-JC; Tue, 29 Aug 2023 13:05:10 +0000
-Date: Tue, 29 Aug 2023 14:05:10 +0100
-From: Matthew Wilcox <willy@infradead.org>
-To: Hao Xu <hao.xu@linux.dev>
-Message-ID: <ZO3tBqJLtRwSYrEr@casper.infradead.org>
-References: <20230827132835.1373581-1-hao.xu@linux.dev>
- <20230827132835.1373581-3-hao.xu@linux.dev>
- <ZOu1xYS6LRmPgEiV@casper.infradead.org>
- <ca10040f-b7fa-7c43-1c89-6706d13b2747@linux.dev>
+ bh=XGuBrJRA9Fd4AduQK/hSseIFrv8V5F+R7owbTsvIznw=; b=q1V5fHa/AXkRLdmnc9TtDTItxb
+ sjv5FpbdJarUSWDm8h5uqmHXkHTGtBOUlKVK5U/4PExCLqpYcowYZaV/PvP/kk1bfsDWLvRZIDMi6
+ J4YRKXkMJOy3sqhHWZHu4Fl1bfB/qtOHn3XYeh3dGmGOC0qbSQkD2Y+wYSoEusMnNBuy4+VyYQnkY
+ Lc4KlaQORaxPNCRh9pBUGO98Ft5v23nvU0WQJiozkEiistd3znn+J2fx0QgNh+u6E23YopsyfOSpr
+ Rmce2YRpGqgEixjkKJHtsYkWfKbeh3RTX6XJKjEhssGOmTvrkXGjl1f8Qxu8W6gub1Ziw1YBVxlnq
+ 0FDl8ZIQ==;
+Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1qb7SA-001wYO-34; Tue, 29 Aug 2023 22:44:55 +0000
+Date: Tue, 29 Aug 2023 23:44:54 +0100
+From: Al Viro <viro@zeniv.linux.org.uk>
+To: Jeff Layton <jlayton@kernel.org>
+Message-ID: <20230829224454.GA461907@ZenIV>
+References: <20230725-mgctime-v6-0-a794c2b7abca@kernel.org>
+ <20230725-mgctime-v6-1-a794c2b7abca@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <ca10040f-b7fa-7c43-1c89-6706d13b2747@linux.dev>
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20230725-mgctime-v6-1-a794c2b7abca@kernel.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Aug 29, 2023 at 03:41:43PM +0800, Hao Xu wrote: >
- On 8/28/23 04:44, Matthew Wilcox wrote: > > > @@ -391, 10 +401,
- 17 @@ xfs_dir2_leaf_getdents(
- > > > bp = NULL; > > > } > > > - if (*lock_mode == [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On Tue, Jul 25, 2023 at 10:58:14AM -0400, Jeff Layton wrote:
+ > generic_fillattr just fills in the entire stat struct indiscriminately
+ > today, copying data from the inode. There is at least one attrib [...] 
+ Content analysis details:   (-0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qayPt-0008Ky-KP
-Subject: Re: [f2fs-dev] [PATCH 02/11] xfs: add NOWAIT semantics for readdir
+X-Headers-End: 1qb7UX-0004vx-3M
+Subject: Re: [f2fs-dev] [PATCH v6 1/7] fs: pass the request_mask to
+ generic_fillattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,81 +94,69 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Wanpeng Li <wanpengli@tencent.com>, "Darrick J . Wong" <djwong@kernel.org>,
+Cc: Latchesar Ionkov <lucho@ionkov.net>,
+ Martin Brandenburg <martin@omnibond.com>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ linux-xfs@vger.kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
  Dominique Martinet <asmadeus@codewreck.org>,
- Dave Chinner <david@fromorbit.com>, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, Stefan Roesch <shr@fb.com>, Clay Harris <bugs@claycon.org>,
- linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
- codalist@coda.cs.cmu.edu, cluster-devel@redhat.com, linux-cachefs@redhat.com,
- linux-ext4@vger.kernel.org, devel@lists.orangefs.org,
- linux-cifs@vger.kernel.org, ecryptfs@vger.kernel.org,
- linux-nfs@vger.kernel.org, linux-block@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>, io-uring@vger.kernel.org,
- Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
- netdev@vger.kernel.org, samba-technical@lists.samba.org,
- linux-unionfs@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-mtd@lists.infradead.org, bpf@vger.kernel.org,
- Pavel Begunkov <asml.silence@gmail.com>, linux-btrfs@vger.kernel.org
+ Christian Schoenebeck <linux_oss@crudebyte.com>,
+ Dave Chinner <david@fromorbit.com>, David Howells <dhowells@redhat.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Hans de Goede <hdegoede@redhat.com>, Marc Dionne <marc.dionne@auristor.com>,
+ codalist@coda.cs.cmu.edu, linux-afs@lists.infradead.org,
+ Mike Marshall <hubcap@omnibond.com>, Paulo Alcantara <pc@manguebit.com>,
+ linux-cifs@vger.kernel.org, Eric Van Hensbergen <ericvh@kernel.org>,
+ Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
+ Hugh Dickins <hughd@google.com>, Tyler Hicks <code@tyhicks.com>,
+ cluster-devel@redhat.com, coda@cs.cmu.edu, linux-mm@kvack.org,
+ linux-f2fs-devel@lists.sourceforge.net, Ilya Dryomov <idryomov@gmail.com>,
+ Iurii Zaikin <yzaikin@google.com>, Namjae Jeon <linkinjeon@kernel.org>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, ecryptfs@vger.kernel.org,
+ Kees Cook <keescook@chromium.org>, ocfs2-devel@lists.linux.dev,
+ Anthony Iliopoulos <ailiop@suse.com>, Josef Bacik <josef@toxicpanda.com>,
+ Tom Talpey <tom@talpey.com>, Tejun Heo <tj@kernel.org>,
+ Yue Hu <huyue2@coolpad.com>, Joel Becker <jlbec@evilplan.org>,
+ linux-mtd@lists.infradead.org, David Sterba <dsterba@suse.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
+ Xiubo Li <xiubli@redhat.com>, Gao Xiang <xiang@kernel.org>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Jan Harkes <jaharkes@cs.cmu.edu>,
+ Christian Brauner <brauner@kernel.org>, linux-ext4@vger.kernel.org,
+ Theodore Ts'o <tytso@mit.edu>, Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, v9fs@lists.linux.dev,
+ ntfs3@lists.linux.dev, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
+ Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, Jeffle Xu <jefflexu@linux.alibaba.com>,
+ devel@lists.orangefs.org, Anna Schumaker <anna@kernel.org>,
+ Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Sungjong Seo <sj1557.seo@samsung.com>, linux-erofs@lists.ozlabs.org,
+ linux-nfs@vger.kernel.org, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Aug 29, 2023 at 03:41:43PM +0800, Hao Xu wrote:
-> On 8/28/23 04:44, Matthew Wilcox wrote:
-> > > @@ -391,10 +401,17 @@ xfs_dir2_leaf_getdents(
-> > >   				bp = NULL;
-> > >   			}
-> > > -			if (*lock_mode == 0)
-> > > -				*lock_mode = xfs_ilock_data_map_shared(dp);
-> > > +			if (*lock_mode == 0) {
-> > > +				*lock_mode =
-> > > +					xfs_ilock_data_map_shared_generic(dp,
-> > > +					ctx->flags & DIR_CONTEXT_F_NOWAIT);
-> > > +				if (!*lock_mode) {
-> > > +					error = -EAGAIN;
-> > > +					break;
-> > > +				}
-> > > +			}
-> > 
-> > 'generic' doesn't seem like a great suffix to mean 'takes nowait flag'.
-> > And this is far too far indented.
-> > 
-> > 			xfs_dir2_lock(dp, ctx, lock_mode);
-> > 
-> > with:
-> > 
-> > STATIC void xfs_dir2_lock(struct xfs_inode *dp, struct dir_context *ctx,
-> > 		unsigned int lock_mode)
-> > {
-> > 	if (*lock_mode)
-> > 		return;
-> > 	if (ctx->flags & DIR_CONTEXT_F_NOWAIT)
-> > 		return xfs_ilock_data_map_shared_nowait(dp);
-> > 	return xfs_ilock_data_map_shared(dp);
-> > }
-> > 
-> > ... which I think you can use elsewhere in this patch (reformat it to
-> > XFS coding style, of course).  And then you don't need
-> > xfs_ilock_data_map_shared_generic().
+On Tue, Jul 25, 2023 at 10:58:14AM -0400, Jeff Layton wrote:
+> generic_fillattr just fills in the entire stat struct indiscriminately
+> today, copying data from the inode. There is at least one attribute
+> (STATX_CHANGE_COOKIE) that can have side effects when it is reported,
+> and we're looking at adding more with the addition of multigrain
+> timestamps.
 > 
-> How about rename xfs_ilock_data_map_shared() to xfs_ilock_data_map_block()
-> and rename xfs_ilock_data_map_shared_generic() to
-> xfs_ilock_data_map_shared()?
-> 
-> STATIC void xfs_ilock_data_map_shared(struct xfs_inode *dp, struct
-> dir_context *ctx, unsigned int lock_mode)
-> {
->  	if (*lock_mode)
->  		return;
->  	if (ctx->flags & DIR_CONTEXT_F_NOWAIT)
->  		return xfs_ilock_data_map_shared_nowait(dp);
->  	return xfs_ilock_data_map_shared_block(dp);
-> }
+> Add a request_mask argument to generic_fillattr and have most callers
+> just pass in the value that is passed to getattr. Have other callers
+> (e.g. ksmbd) just pass in STATX_BASIC_STATS. Also move the setting of
+> STATX_CHANGE_COOKIE into generic_fillattr.
 
-xfs_ilock_data_map_shared() is used for a lot of things which are not
-directories.  I think a new function name is appropriate, and that
-function name should include the word 'dir' in it somewhere.
+Out of curiosity - how much PITA would it be to put request_mask into
+kstat?  Set it in vfs_getattr_nosec() (and those get_file_..._info()
+on smbd side) and don't bother with that kind of propagation boilerplate
+- just have generic_fillattr() pick it there...
+
+Reduces the patchset size quite a bit...
 
 
 _______________________________________________
