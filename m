@@ -2,27 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42C1E78C2F2
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Aug 2023 13:03:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A78F78C3A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Aug 2023 13:54:14 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qawV5-0003rt-6J;
-	Tue, 29 Aug 2023 11:03:11 +0000
+	id 1qaxIG-0008Ro-VI;
+	Tue, 29 Aug 2023 11:54:02 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qawV2-0003rg-K8;
- Tue, 29 Aug 2023 11:03:09 +0000
+ (envelope-from <willy@infradead.org>) id 1qaxIF-0008RM-3c
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 29 Aug 2023 11:54:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=U8tO0dLFljDnktuq80r4afitP93wv2ZaRihVU0Qyu2I=; b=VjTeryLD9cErOpmR8mVUCkF3fX
- T55nTto+gnFp/whvAGxLACFSqOy+zlEFnGIlIvCrK5DrP0pOFc0PM/vldOA3bX1vSGy1cno2AjQmj
- M5kfKfN7KiV0fqsShYQSRXAhezQiH+/zVrfk8wkUBvNpA0HdotN3nCXESOCYE+JyzYMA=;
+ bh=YZxpYOTF14BVcouqFhbahruwZXBLTSy2TCKsEoryGgA=; b=H+j5d5BmmTRJf/LLrx8F0z1SpE
+ p5MBLc3OcfFHTWF/btKLqC19pNaEGrlG4VcrYW/3ZAwBFrunsxdEVPM04XmKohLCmVsGxsTWCYUE1
+ sZM1Xo9T4SVPbJAjjD+otVSFHYm1W0tMavRaj/iYOamEMkEc7FoyOuRgXvwOTUK42en8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,55 +31,51 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=U8tO0dLFljDnktuq80r4afitP93wv2ZaRihVU0Qyu2I=; b=HS+uSNfE06eo4q5q4ShuKZXaTN
- 1yo2DzltGu7phma5UGmAftEqtHmJprhJlD0XDlNBh0EweaaZJp8ZJXmlRw4vcIwrMptRoVtv6na3/
- 9Sg/opTJP6pp2UEy5nXKcB0O80aa4qrZjA1mSWDCeSKBV5NTZq8XFV4OedRt0OnXIsXM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=YZxpYOTF14BVcouqFhbahruwZXBLTSy2TCKsEoryGgA=; b=YtmLWB9ULTjjDm5+ytpS9efPZm
+ 2F41hOPL0QAnZ5EAlqJjLAEd/a1PXfeEjXIBEzY8PuNhy6qYMFUNm3UlqWgFL94Ugy9R0rU6DbhHm
+ Y7tcZvCw4SJfWoax0iepwaj50xE33+zpCokeVDBpTtVkqBRgXC+s30UG7cJKH/WALGHA=;
+Received: from casper.infradead.org ([90.155.50.34])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qawUz-002CwA-Mh; Tue, 29 Aug 2023 11:03:09 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4E2B2653BA;
- Tue, 29 Aug 2023 11:03:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A91DC433C8;
- Tue, 29 Aug 2023 11:02:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1693306979;
- bh=U8tO0dLFljDnktuq80r4afitP93wv2ZaRihVU0Qyu2I=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Zpf44oWH5Z2L6QhPNIGp7PeBhJpnP4KfVurKgcL9DEj/BIRmEq8ijJzbb6q5k8Ovs
- 9bWmbNzBkJw5MyDAxRy27lwjHGda6NbScABpEWJtXeah3765gQ9TUqIkk0ScRRsr4B
- pgJc/+HtIStX4e0zZcs6Mgm/y0cAQCiR+vX0i9HUCQ2jW21Dvj1m5KvDe2xJG8sZD9
- 7J/ySnM4IatjDikdEeiDLegDHPGVAKFz5CZJOY4FIoLRlouJhKb12RDwuxVPSp/21Q
- Im6ZTKLVuSh6T0hvwNEhJP5WmzsfCpgy49EfIICESoo8yOH/FPp5HVYEAtlfB2KJ19
- jLNduaFs+ry8A==
-Date: Tue, 29 Aug 2023 13:02:47 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20230829-stark-trapez-2251bf78c6a9@brauner>
-References: <20230818123232.2269-1-jack@suse.cz>
- <20230825-hubraum-gedreht-8c5c4db9330a@brauner>
- <20230828170744.iifdmaw732cfiauf@quack3>
+ id 1qaxIE-00024g-Tm for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 29 Aug 2023 11:54:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=YZxpYOTF14BVcouqFhbahruwZXBLTSy2TCKsEoryGgA=; b=kNMS0YeYJE43XRXxkVUmLf2G+X
+ 0F+Ci8x/vmTvip6eYnQqjlZo85hPiq+1XBtqpwy24WfkqxJcN3oDroYdU0hmUGTZO8DmOvrKcLnsA
+ I7wiz/QgNWUfJcZJ1P+jwtCGJuvaBfIm6i+nYBm4G4q1TzqZrEd8vmeeXhUF+nfDcEVXWTUFH8hQX
+ gmgzKK6rDBAyLZFUyKz32+/IHnRsGl+xYuxNBS8JVzpCmXVMJxm/LAsn2AL2YmcWHqJedjjw347sz
+ rnlxqkUfOTw1wHOoS2VuCxy8fDxR1A9rikvDXoQ9fhtzraRL7eHJTnjVX6n6aHUnUp8GZkipnoXzv
+ 988YMF3g==;
+Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
+ Hat Linux)) id 1qaxHQ-006P4x-1X; Tue, 29 Aug 2023 11:53:08 +0000
+Date: Tue, 29 Aug 2023 12:53:07 +0100
+From: Matthew Wilcox <willy@infradead.org>
+To: Hao Xu <hao.xu@linux.dev>
+Message-ID: <ZO3cI+DkotHQo3md@casper.infradead.org>
+References: <20230827132835.1373581-1-hao.xu@linux.dev>
+ <20230827132835.1373581-8-hao.xu@linux.dev>
+ <ZOvA5DJDZN0FRymp@casper.infradead.org>
+ <c728bf3f-d9db-4865-8473-058b26c11c06@linux.dev>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230828170744.iifdmaw732cfiauf@quack3>
-X-Spam-Score: -5.2 (-----)
+In-Reply-To: <c728bf3f-d9db-4865-8473-058b26c11c06@linux.dev>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  > replacement) I think we can go ahead with the series as
- is. As you said > there will be some conflicts in btrfs and I've learned about
- f2fs conflicts > as well so I can rebase & repost the series on [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Tue, Aug 29, 2023 at 03:46:13PM +0800, Hao Xu wrote: >
+ On 8/28/23 05:32, Matthew Wilcox wrote: > > On Sun, Aug 27, 2023 at 09:28:31PM
+ +0800, Hao Xu wrote: > > > From: Hao Xu <howeyxu@tencent.com> > [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -87,12 +84,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qawUz-002CwA-Mh
-Subject: Re: [f2fs-dev] [PATCH v3 0/29] block: Make blkdev_get_by_*() return
- handle
+X-Headers-End: 1qaxIE-00024g-Tm
+Subject: Re: [f2fs-dev] [PATCH 07/11] vfs: add nowait parameter for
+ file_accessed()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,43 +98,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Dave Kleikamp <shaggy@kernel.org>, jfs-discussion@lists.sourceforge.net,
- "Darrick J. Wong" <djwong@kernel.org>, linux-nvme@lists.infradead.org,
- Joseph Qi <joseph.qi@linux.alibaba.com>, dm-devel@redhat.com,
- target-devel@vger.kernel.org, linux-mtd@lists.infradead.org,
- Jack Wang <jinpu.wang@ionos.com>, Alasdair Kergon <agk@redhat.com>,
- drbd-dev@lists.linbit.com, linux-s390@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Christoph Hellwig <hch@infradead.org>, xen-devel@lists.xenproject.org,
- Gao Xiang <xiang@kernel.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Kent Overstreet <kent.overstreet@gmail.com>,
- Sven Schnelle <svens@linux.ibm.com>, linux-pm@vger.kernel.org,
- Mike Snitzer <snitzer@kernel.org>, Joern Engel <joern@lazybastard.org>,
- reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Jens Axboe <axboe@kernel.dk>, linux-raid@vger.kernel.org,
- linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- linux-mm@kvack.org, Song Liu <song@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- Minchan Kim <minchan@kernel.org>, ocfs2-devel@oss.oracle.com,
- Anna Schumaker <anna@kernel.org>, linux-fsdevel@vger.kernel.org,
- "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
+Cc: Wanpeng Li <wanpengli@tencent.com>, "Darrick J . Wong" <djwong@kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Dave Chinner <david@fromorbit.com>, linux-kernel@vger.kernel.org,
+ linux-mm@kvack.org, Stefan Roesch <shr@fb.com>, Clay Harris <bugs@claycon.org>,
+ linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ codalist@coda.cs.cmu.edu, cluster-devel@redhat.com, linux-cachefs@redhat.com,
+ linux-ext4@vger.kernel.org, devel@lists.orangefs.org,
+ linux-cifs@vger.kernel.org, ecryptfs@vger.kernel.org,
+ linux-nfs@vger.kernel.org, linux-block@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, io-uring@vger.kernel.org,
+ Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
+ netdev@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-unionfs@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, bpf@vger.kernel.org,
+ Pavel Begunkov <asml.silence@gmail.com>, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-> replacement) I think we can go ahead with the series as is. As you said
-> there will be some conflicts in btrfs and I've learned about f2fs conflicts
-> as well so I can rebase & repost the series on top of rc1 to make life
-> easier for you.
+On Tue, Aug 29, 2023 at 03:46:13PM +0800, Hao Xu wrote:
+> On 8/28/23 05:32, Matthew Wilcox wrote:
+> > On Sun, Aug 27, 2023 at 09:28:31PM +0800, Hao Xu wrote:
+> > > From: Hao Xu <howeyxu@tencent.com>
+> > > 
+> > > Add a boolean parameter for file_accessed() to support nowait semantics.
+> > > Currently it is true only with io_uring as its initial caller.
+> > 
+> > So why do we need to do this as part of this series?  Apparently it
+> > hasn't caused any problems for filemap_read().
+> > 
+> 
+> We need this parameter to indicate if nowait semantics should be enforced in
+> touch_atime(), There are locks and maybe IOs in it.
 
-That is be much appreciated. Thank you!
+That's not my point.  We currently call file_accessed() and
+touch_atime() for nowait reads and nowait writes.  You haven't done
+anything to fix those.
+
+I suspect you can trim this patchset down significantly by avoiding
+fixing the file_accessed() problem.  And then come back with a later
+patchset that fixes it for all nowait i/o.  Or do a separate prep series
+first that fixes it for the existing nowait users, and then a second
+series to do all the directory stuff.
+
+I'd do the first thing.  Just ignore the problem.  Directory atime
+updates cause I/O so rarely that you can afford to ignore it.  Almost
+everyone uses relatime or nodiratime.
 
 
 _______________________________________________
