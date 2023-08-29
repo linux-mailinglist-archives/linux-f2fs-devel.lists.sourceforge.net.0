@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 010E878BF59
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Aug 2023 09:42:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1220D78BF7F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Aug 2023 09:46:48 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qatMk-0001Uu-3a;
-	Tue, 29 Aug 2023 07:42:22 +0000
+	id 1qatQw-0005Tj-9r;
+	Tue, 29 Aug 2023 07:46:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hao.xu@linux.dev>) id 1qatMj-0001Uo-FB
+ (envelope-from <hao.xu@linux.dev>) id 1qatQu-0005Tc-OT
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Aug 2023 07:42:21 +0000
+ Tue, 29 Aug 2023 07:46:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kzCYK+m1dXoYq1GdX9wRq/xLcjMjzBwHZbogX1zaiXI=; b=OwXOqxrL8dfe7EqL2sdtwmmf/6
- 9j22MvFmi7czUWE3ba2qTmNP/HC0IdFEy0u+ZaU2ZidaNCC31Czq7Ub67V9od1mtKipAb7zHYo/3y
- 2MjndYh9FGkxeLzm1MP5TsaOg9hlmU1dZyemj5KwXiWs7jjea3ahYClgIdEF/TWOLf1U=;
+ bh=WP3nN15JcnIGn7wEIePFcf6LVOuPCzTP32Hu73YPviw=; b=lELz5V2UNXZkNPuo1PMrIwKlW8
+ r9XKoWafG17zyTHCYLa7HpqdNB0ZiTVlrYBe9mxFpGtrhHLyHkloDWIbU3J+zYpu00L0PjUGchO/g
+ irhhkbb3fHOxMH4ZHDJafTY6OZlxi9Cp9LKi2j8ng8NtTJpfP9aiAnO+e3plqPbW/4f0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,36 +31,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=kzCYK+m1dXoYq1GdX9wRq/xLcjMjzBwHZbogX1zaiXI=; b=mUQdRX0nX5NdmBLil8a656paKG
- kwL7LzkvmCeQxu89dfk6EUTncZZNJCXpGKTM0+Ez8SZB7EznPLd2A3nwnuou1Dfh8hJNpG5xNsJM+
- t1QtnIz5xrgxwSQ9fqBjzR+5M2i+LCI/Pagv2fUE6xa5oaOs/hJcUb+nKKxuQt86IXIo=;
-Received: from out-245.mta1.migadu.com ([95.215.58.245])
+ bh=WP3nN15JcnIGn7wEIePFcf6LVOuPCzTP32Hu73YPviw=; b=YxhIpuXzp1IXjPGUdAfE3W6NI4
+ ii4spTNXg+3/ast9wf3tDJ8ZZBGjd/aDtze4B+7tsYKLUqYsZJMERaT6fjXUr6zAo6ok+qfYE09gF
+ DwpkxrorSXcITrgEo59q5dQ3bSqoBhjSwBJXI1fEs3KGpjjFH507/CaXnMVC+uu+xkH0=;
+Received: from out-248.mta1.migadu.com ([95.215.58.248])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qatMb-00048b-1Y for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Aug 2023 07:42:21 +0000
-Message-ID: <ca10040f-b7fa-7c43-1c89-6706d13b2747@linux.dev>
+ id 1qatQu-0004Ew-E8 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 29 Aug 2023 07:46:41 +0000
+Message-ID: <c728bf3f-d9db-4865-8473-058b26c11c06@linux.dev>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1693294923;
+ t=1693295192;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=kzCYK+m1dXoYq1GdX9wRq/xLcjMjzBwHZbogX1zaiXI=;
- b=wx9qXfUOb6FlguPiqwy6R82+yQxWta9+fR66YAQ2/1ZdnqJnQPp1kHU4jR8nRlngim3iOe
- HThmnzNEUSaEuQwHiVi+WxF88JyUG2K+H0WcvTm70cW04LSIUXyP6AZ74VPb7aBxP9rojs
- L1LrBvpa76A1LVLwfY5LHU6MjnCVZUs=
-Date: Tue, 29 Aug 2023 15:41:43 +0800
+ bh=WP3nN15JcnIGn7wEIePFcf6LVOuPCzTP32Hu73YPviw=;
+ b=ngCnTfY2JVdB7UbTvhBxaE99SXYf68v1UOzv1oD4Q4J5vfDrhRAI+RinhUow/HJ/SENsM3
+ ljkpELTTwPgx4fdS1Wsi0U6qZJzH3KEWBSpgNNnZhZo9Ah7qcNPQhnBWxHwyd9Ba5JlzW/
+ R7n89/DPeOOyD3xIKShExED+0gXsmv8=
+Date: Tue, 29 Aug 2023 15:46:13 +0800
 MIME-Version: 1.0
 Content-Language: en-US
 To: Matthew Wilcox <willy@infradead.org>
 References: <20230827132835.1373581-1-hao.xu@linux.dev>
- <20230827132835.1373581-3-hao.xu@linux.dev>
- <ZOu1xYS6LRmPgEiV@casper.infradead.org>
+ <20230827132835.1373581-8-hao.xu@linux.dev>
+ <ZOvA5DJDZN0FRymp@casper.infradead.org>
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: Hao Xu <hao.xu@linux.dev>
-In-Reply-To: <ZOu1xYS6LRmPgEiV@casper.infradead.org>
+In-Reply-To: <ZOvA5DJDZN0FRymp@casper.infradead.org>
 X-Migadu-Flow: FLOW_OUT
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -69,9 +69,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 8/28/23 04:44, Matthew Wilcox wrote: > On Sun, Aug 27,
- 2023 at 09:28:26PM +0800, Hao Xu wrote: >> +++ b/fs/xfs/libxfs/xfs_da_btree.c
- >> @@ -2643,16 +2643,32 @@ xfs_da_read_buf( >> struct xfs_buf_ma [...] 
+ Content preview:  On 8/28/23 05:32, Matthew Wilcox wrote: > On Sun, Aug 27,
+ 2023 at 09:28:31PM +0800, Hao Xu wrote: >> From: Hao Xu <howeyxu@tencent.com>
+ >> >> Add a boolean parameter for file_accessed() to support now [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -84,8 +84,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
-X-Headers-End: 1qatMb-00048b-1Y
-Subject: Re: [f2fs-dev] [PATCH 02/11] xfs: add NOWAIT semantics for readdir
+X-Headers-End: 1qatQu-0004Ew-E8
+Subject: Re: [f2fs-dev] [PATCH 07/11] vfs: add nowait parameter for
+ file_accessed()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,110 +118,19 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 8/28/23 04:44, Matthew Wilcox wrote:
-> On Sun, Aug 27, 2023 at 09:28:26PM +0800, Hao Xu wrote:
->> +++ b/fs/xfs/libxfs/xfs_da_btree.c
->> @@ -2643,16 +2643,32 @@ xfs_da_read_buf(
->>   	struct xfs_buf_map	map, *mapp = &map;
->>   	int			nmap = 1;
->>   	int			error;
->> +	int			buf_flags = 0;
->>   
->>   	*bpp = NULL;
->>   	error = xfs_dabuf_map(dp, bno, flags, whichfork, &mapp, &nmap);
->>   	if (error || !nmap)
->>   		goto out_free;
->>   
->> +	/*
->> +	 * NOWAIT semantics mean we don't wait on the buffer lock nor do we
->> +	 * issue IO for this buffer if it is not already in memory. Caller will
->> +	 * retry. This will return -EAGAIN if the buffer is in memory and cannot
->> +	 * be locked, and no buffer and no error if it isn't in memory.  We
->> +	 * translate both of those into a return state of -EAGAIN and *bpp =
->> +	 * NULL.
->> +	 */
+On 8/28/23 05:32, Matthew Wilcox wrote:
+> On Sun, Aug 27, 2023 at 09:28:31PM +0800, Hao Xu wrote:
+>> From: Hao Xu <howeyxu@tencent.com>
+>>
+>> Add a boolean parameter for file_accessed() to support nowait semantics.
+>> Currently it is true only with io_uring as its initial caller.
 > 
-> I would not include this comment.
-
-No strong comment here, since this patch is mostly from Dave, it's
-better if Dave can ack this.
-
-> 
->> +	if (flags & XFS_DABUF_NOWAIT)
->> +		buf_flags |= XBF_TRYLOCK | XBF_INCORE;
->>   	error = xfs_trans_read_buf_map(mp, tp, mp->m_ddev_targp, mapp, nmap, 0,
->>   			&bp, ops);
-> 
-> what tsting did you do with this?  Because you don't actually _use_
-> buf_flags anywhere in this patch (presumably they should be the
-> sixth argument to xfs_trans_read_buf_map() instead of 0).  So I can only
-> conclude that either you didn't test, or your testing was inadequate.
+> So why do we need to do this as part of this series?  Apparently it
+> hasn't caused any problems for filemap_read().
 > 
 
-
-The tests I've done are listed in the cover-letter, this one is missed, 
-the tricky place is it's hard to get this kind of mistake since it runs
-well without nowait logic...I'll fix it in next version.
-
->>   	if (error)
->>   		goto out_free;
->> +	if (!bp) {
->> +		ASSERT(flags & XFS_DABUF_NOWAIT);
-> 
-> I don't think this ASSERT is appropriate.
-> 
->> @@ -391,10 +401,17 @@ xfs_dir2_leaf_getdents(
->>   				bp = NULL;
->>   			}
->>   
->> -			if (*lock_mode == 0)
->> -				*lock_mode = xfs_ilock_data_map_shared(dp);
->> +			if (*lock_mode == 0) {
->> +				*lock_mode =
->> +					xfs_ilock_data_map_shared_generic(dp,
->> +					ctx->flags & DIR_CONTEXT_F_NOWAIT);
->> +				if (!*lock_mode) {
->> +					error = -EAGAIN;
->> +					break;
->> +				}
->> +			}
-> 
-> 'generic' doesn't seem like a great suffix to mean 'takes nowait flag'.
-> And this is far too far indented.
-> 
-> 			xfs_dir2_lock(dp, ctx, lock_mode);
-> 
-> with:
-> 
-> STATIC void xfs_dir2_lock(struct xfs_inode *dp, struct dir_context *ctx,
-> 		unsigned int lock_mode)
-> {
-> 	if (*lock_mode)
-> 		return;
-> 	if (ctx->flags & DIR_CONTEXT_F_NOWAIT)
-> 		return xfs_ilock_data_map_shared_nowait(dp);
-> 	return xfs_ilock_data_map_shared(dp);
-> }
-> 
-> ... which I think you can use elsewhere in this patch (reformat it to
-> XFS coding style, of course).  And then you don't need
-> xfs_ilock_data_map_shared_generic().
-> 
-
-How about rename xfs_ilock_data_map_shared() to 
-xfs_ilock_data_map_block() and rename 
-xfs_ilock_data_map_shared_generic() to xfs_ilock_data_map_shared()?
-
-STATIC void xfs_ilock_data_map_shared(struct xfs_inode *dp, struct 
-dir_context *ctx, unsigned int lock_mode)
-{
-  	if (*lock_mode)
-  		return;
-  	if (ctx->flags & DIR_CONTEXT_F_NOWAIT)
-  		return xfs_ilock_data_map_shared_nowait(dp);
-  	return xfs_ilock_data_map_shared_block(dp);
-}
-
+We need this parameter to indicate if nowait semantics should be 
+enforced in touch_atime(), There are locks and maybe IOs in it.
 
 
 
