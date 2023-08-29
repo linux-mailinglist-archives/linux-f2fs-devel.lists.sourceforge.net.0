@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A78F78C3A5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Aug 2023 13:54:14 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id B951278C4CD
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 29 Aug 2023 15:06:18 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qaxIG-0008Ro-VI;
-	Tue, 29 Aug 2023 11:54:02 +0000
+	id 1qayQ4-0005Dt-5P;
+	Tue, 29 Aug 2023 13:06:08 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1qaxIF-0008RM-3c
+ (envelope-from <willy@infradead.org>) id 1qayQ1-0005Dl-QX
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Aug 2023 11:54:00 +0000
+ Tue, 29 Aug 2023 13:06:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YZxpYOTF14BVcouqFhbahruwZXBLTSy2TCKsEoryGgA=; b=H+j5d5BmmTRJf/LLrx8F0z1SpE
- p5MBLc3OcfFHTWF/btKLqC19pNaEGrlG4VcrYW/3ZAwBFrunsxdEVPM04XmKohLCmVsGxsTWCYUE1
- sZM1Xo9T4SVPbJAjjD+otVSFHYm1W0tMavRaj/iYOamEMkEc7FoyOuRgXvwOTUK42en8=;
+ bh=RchKoATVAdQvPJfSjQ7igQ4w+5FVPwMefhSLf5vYpSI=; b=kGfUKXifxYp7zvQ/UsdueZ4ge2
+ hIyueSLqVwUiCMCZi7sdPqRGbPt/qU4qUJP7ZoWsAypLm8eQyyzw+ooFxtLa4trX5ZEuCru/oAqdc
+ ZtGRauDWO6Kv5dw2wkaH7MvzMFD1EdH/zUuiBbHakvwlSKBWM0NdTa7cf34QvHkGvsh4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,62 +31,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=YZxpYOTF14BVcouqFhbahruwZXBLTSy2TCKsEoryGgA=; b=YtmLWB9ULTjjDm5+ytpS9efPZm
- 2F41hOPL0QAnZ5EAlqJjLAEd/a1PXfeEjXIBEzY8PuNhy6qYMFUNm3UlqWgFL94Ugy9R0rU6DbhHm
- Y7tcZvCw4SJfWoax0iepwaj50xE33+zpCokeVDBpTtVkqBRgXC+s30UG7cJKH/WALGHA=;
+ bh=RchKoATVAdQvPJfSjQ7igQ4w+5FVPwMefhSLf5vYpSI=; b=g+I9Xt5cczYuUI8sszmP31AfV7
+ KZhFZXvaKnFiu+MGWzXndNqxRk2ol984nnjN/bBRNoOcPasODBRvZu9IimUSGqQgG1xcsZE23pqQ7
+ poFn75Dypjx6Zs8+QW59j81SQVwhiM2lJP6SG7GSyUEcriMDAd9VRaMGJ0QEp3PrdOGA=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qaxIE-00024g-Tm for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Aug 2023 11:54:00 +0000
+ id 1qayPt-0008Ky-KP for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 29 Aug 2023 13:06:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=YZxpYOTF14BVcouqFhbahruwZXBLTSy2TCKsEoryGgA=; b=kNMS0YeYJE43XRXxkVUmLf2G+X
- 0F+Ci8x/vmTvip6eYnQqjlZo85hPiq+1XBtqpwy24WfkqxJcN3oDroYdU0hmUGTZO8DmOvrKcLnsA
- I7wiz/QgNWUfJcZJ1P+jwtCGJuvaBfIm6i+nYBm4G4q1TzqZrEd8vmeeXhUF+nfDcEVXWTUFH8hQX
- gmgzKK6rDBAyLZFUyKz32+/IHnRsGl+xYuxNBS8JVzpCmXVMJxm/LAsn2AL2YmcWHqJedjjw347sz
- rnlxqkUfOTw1wHOoS2VuCxy8fDxR1A9rikvDXoQ9fhtzraRL7eHJTnjVX6n6aHUnUp8GZkipnoXzv
- 988YMF3g==;
+ bh=RchKoATVAdQvPJfSjQ7igQ4w+5FVPwMefhSLf5vYpSI=; b=Q3QmRgXTehCOZCVueX+FS2Az5N
+ PVqmWnEC5SOyltZJNMDkbuPj3BuxIKobdTkUGJdkwt9An23qab7RWIeUTJvkRcM5ZQw7A9VajHpfv
+ K7r2l3ZZ2pGC+tetoYQU12TmTvlZI3sm3ayVKtCD8x7/yd2j9SuUz7gnHbMb8LXGAJC6qfT96aNHD
+ /+KAN9szQKpq1/b+zh8evtWeBszURne3cpQtIIZ5DUWss+rP/RkNTx5Y/tCCASZPZaSLUEyAkYJWx
+ 0SrCGJoWwn5s3UmnWTZbObVE6DrneAPDreiurlPZ6M22SpYEkwQtVmJFqXgm29PIZAfXouLOFvP7I
+ 44OUuuBQ==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1qaxHQ-006P4x-1X; Tue, 29 Aug 2023 11:53:08 +0000
-Date: Tue, 29 Aug 2023 12:53:07 +0100
+ Hat Linux)) id 1qayP8-006i8Z-JC; Tue, 29 Aug 2023 13:05:10 +0000
+Date: Tue, 29 Aug 2023 14:05:10 +0100
 From: Matthew Wilcox <willy@infradead.org>
 To: Hao Xu <hao.xu@linux.dev>
-Message-ID: <ZO3cI+DkotHQo3md@casper.infradead.org>
+Message-ID: <ZO3tBqJLtRwSYrEr@casper.infradead.org>
 References: <20230827132835.1373581-1-hao.xu@linux.dev>
- <20230827132835.1373581-8-hao.xu@linux.dev>
- <ZOvA5DJDZN0FRymp@casper.infradead.org>
- <c728bf3f-d9db-4865-8473-058b26c11c06@linux.dev>
+ <20230827132835.1373581-3-hao.xu@linux.dev>
+ <ZOu1xYS6LRmPgEiV@casper.infradead.org>
+ <ca10040f-b7fa-7c43-1c89-6706d13b2747@linux.dev>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <c728bf3f-d9db-4865-8473-058b26c11c06@linux.dev>
+In-Reply-To: <ca10040f-b7fa-7c43-1c89-6706d13b2747@linux.dev>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Aug 29, 2023 at 03:46:13PM +0800, Hao Xu wrote: >
- On 8/28/23 05:32, Matthew Wilcox wrote: > > On Sun, Aug 27, 2023 at 09:28:31PM
- +0800, Hao Xu wrote: > > > From: Hao Xu <howeyxu@tencent.com> > [...] 
+ Content preview:  On Tue, Aug 29, 2023 at 03:41:43PM +0800, Hao Xu wrote: >
+ On 8/28/23 04:44, Matthew Wilcox wrote: > > > @@ -391, 10 +401,
+ 17 @@ xfs_dir2_leaf_getdents(
+ > > > bp = NULL; > > > } > > > - if (*lock_mode == [...] 
  Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
-X-Headers-End: 1qaxIE-00024g-Tm
-Subject: Re: [f2fs-dev] [PATCH 07/11] vfs: add nowait parameter for
- file_accessed()
+X-Headers-End: 1qayPt-0008Ky-KP
+Subject: Re: [f2fs-dev] [PATCH 02/11] xfs: add NOWAIT semantics for readdir
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,34 +118,61 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Aug 29, 2023 at 03:46:13PM +0800, Hao Xu wrote:
-> On 8/28/23 05:32, Matthew Wilcox wrote:
-> > On Sun, Aug 27, 2023 at 09:28:31PM +0800, Hao Xu wrote:
-> > > From: Hao Xu <howeyxu@tencent.com>
-> > > 
-> > > Add a boolean parameter for file_accessed() to support nowait semantics.
-> > > Currently it is true only with io_uring as its initial caller.
+On Tue, Aug 29, 2023 at 03:41:43PM +0800, Hao Xu wrote:
+> On 8/28/23 04:44, Matthew Wilcox wrote:
+> > > @@ -391,10 +401,17 @@ xfs_dir2_leaf_getdents(
+> > >   				bp = NULL;
+> > >   			}
+> > > -			if (*lock_mode == 0)
+> > > -				*lock_mode = xfs_ilock_data_map_shared(dp);
+> > > +			if (*lock_mode == 0) {
+> > > +				*lock_mode =
+> > > +					xfs_ilock_data_map_shared_generic(dp,
+> > > +					ctx->flags & DIR_CONTEXT_F_NOWAIT);
+> > > +				if (!*lock_mode) {
+> > > +					error = -EAGAIN;
+> > > +					break;
+> > > +				}
+> > > +			}
 > > 
-> > So why do we need to do this as part of this series?  Apparently it
-> > hasn't caused any problems for filemap_read().
+> > 'generic' doesn't seem like a great suffix to mean 'takes nowait flag'.
+> > And this is far too far indented.
 > > 
+> > 			xfs_dir2_lock(dp, ctx, lock_mode);
+> > 
+> > with:
+> > 
+> > STATIC void xfs_dir2_lock(struct xfs_inode *dp, struct dir_context *ctx,
+> > 		unsigned int lock_mode)
+> > {
+> > 	if (*lock_mode)
+> > 		return;
+> > 	if (ctx->flags & DIR_CONTEXT_F_NOWAIT)
+> > 		return xfs_ilock_data_map_shared_nowait(dp);
+> > 	return xfs_ilock_data_map_shared(dp);
+> > }
+> > 
+> > ... which I think you can use elsewhere in this patch (reformat it to
+> > XFS coding style, of course).  And then you don't need
+> > xfs_ilock_data_map_shared_generic().
 > 
-> We need this parameter to indicate if nowait semantics should be enforced in
-> touch_atime(), There are locks and maybe IOs in it.
+> How about rename xfs_ilock_data_map_shared() to xfs_ilock_data_map_block()
+> and rename xfs_ilock_data_map_shared_generic() to
+> xfs_ilock_data_map_shared()?
+> 
+> STATIC void xfs_ilock_data_map_shared(struct xfs_inode *dp, struct
+> dir_context *ctx, unsigned int lock_mode)
+> {
+>  	if (*lock_mode)
+>  		return;
+>  	if (ctx->flags & DIR_CONTEXT_F_NOWAIT)
+>  		return xfs_ilock_data_map_shared_nowait(dp);
+>  	return xfs_ilock_data_map_shared_block(dp);
+> }
 
-That's not my point.  We currently call file_accessed() and
-touch_atime() for nowait reads and nowait writes.  You haven't done
-anything to fix those.
-
-I suspect you can trim this patchset down significantly by avoiding
-fixing the file_accessed() problem.  And then come back with a later
-patchset that fixes it for all nowait i/o.  Or do a separate prep series
-first that fixes it for the existing nowait users, and then a second
-series to do all the directory stuff.
-
-I'd do the first thing.  Just ignore the problem.  Directory atime
-updates cause I/O so rarely that you can afford to ignore it.  Almost
-everyone uses relatime or nodiratime.
+xfs_ilock_data_map_shared() is used for a lot of things which are not
+directories.  I think a new function name is appropriate, and that
+function name should include the word 'dir' in it somewhere.
 
 
 _______________________________________________
