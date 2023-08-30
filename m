@@ -2,97 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B87978CFBB
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Aug 2023 00:59:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51A2178D0DA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Aug 2023 02:04:09 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qb7fq-0004bd-3G;
-	Tue, 29 Aug 2023 22:59:03 +0000
+	id 1qb8gk-0004de-TG;
+	Wed, 30 Aug 2023 00:04:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qb7fp-0004bO-F9
+ (envelope-from <viro@ftp.linux.org.uk>) id 1qb8gi-0004dI-Dv
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Aug 2023 22:59:02 +0000
+ Wed, 30 Aug 2023 00:03:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/IyI8ii6BrUynwmVcI1iprtPkbpDnPXxoAG6ELBpQco=; b=egtvuzb+4YTZMorbzKAx5iGFTW
- 2LLwgVhVV07O/4mkJW8viJ4yKZOb/dmIDTE27XXo0gxKm2+DGOq35UcwpfjhqY4nE3R+LhtIcjfLc
- WqgXulnZueIOdU7gWeNRCmtKwavoOA3gVqtycJkyeK2kWZE7JSPz75hz4Uh9SjpTRZFA=;
+ d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=mhHf9bnOddbdauFdwTiNvB2pCJGntgXJjGP69XrW3To=; b=JqYO1BdKmIRxqpc3IZo/yuT1U0
+ qSCbwA0lM/PSJ/+57DCqvjzjZ+NsCyQxGo3FYiXNT9jaBOUSgR9SDTbnPrh3bjHXCbkFJCiOxbVYT
+ ijOEe9AIwlghuwpvNln9dH3s+tcok7ecv9UMFWmImRno9w1g50gbTGAh+s1AeXyOnFZ0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
+ h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/IyI8ii6BrUynwmVcI1iprtPkbpDnPXxoAG6ELBpQco=; b=YyPQhC3oqRq8ljWRESeHu0OpKY
- 0YbzYxGSS6eZYJxn+t0f/r4yGz3XNOSFco18hBQylwqfOstHMfVkdk74q5+iGHANgB6aPRsPOblzj
- vcvm2om8QMAuTq7Bnc3dtSr/A+SRJhJsjALlulvTw9ITy26jRPh20Gyib8uYHtEnI8yI=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=mhHf9bnOddbdauFdwTiNvB2pCJGntgXJjGP69XrW3To=; b=QgYk3g+Qv+O6iWeQMq+n8ATUB1
+ dP+/X2Pbc2oofKgVA3bZwqO3GbVtgr0PDuaYMx0ahLT40ptYMsp8rcqp8zqs4X16mdks+ZS0Qee5/
+ GW0qtYI46mLmkUuUmMEudTSg4Z9In2yobgWEWVQZrsAlcNYkpWFgCF/Ine5+c60Qgsis=;
+Received: from zeniv.linux.org.uk ([62.89.141.173])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qb7fp-002ofm-Bt for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 29 Aug 2023 22:59:02 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C592563D06;
- Tue, 29 Aug 2023 22:58:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9FABC433C7;
- Tue, 29 Aug 2023 22:58:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1693349935;
- bh=rn2r8LG5beXDEpNUXXmAsWk7K7Z6B0SkbbGrSUfCikA=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=UJJSRKRH7LTjcnDdUPp7RtBE/dB7QJhjeEB1YQbMKrKaYzMACob4EBI4SsR0sy5Ye
- mt7wmIqsOOWPvL2AjZ5YQtEhH9AU5fAVtL4UeL7OEXz9q6ZHDNk6+YIdzODX8+wqil
- jlsqG5Nirzs8oHVVRgwIrBWk+tU4uj4vEMyBjQFrJmh/cCsnnPwHApt0qQlEh4VPoV
- fx7tHB0NGyHo231wK83vtI9suH/0L3cn9cyGLY9db8p4Yc0AKTTsIBFPHCXTIrOvy6
- YzP3/2IXTyd/Lvsgr1kAOQEzWJjTRoatnNjA657yXZ2FiJLFoy7sfB1K1HWwMGB4Ek
- xBWdtuLvgMoog==
-Message-ID: <e1c4a6d5001d029548542a1f10425c5639ce28e4.camel@kernel.org>
-From: Jeff Layton <jlayton@kernel.org>
-To: Al Viro <viro@zeniv.linux.org.uk>
-Date: Tue, 29 Aug 2023 18:58:47 -0400
-In-Reply-To: <20230829224454.GA461907@ZenIV>
+ id 1qb8gf-002sBx-4k for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 30 Aug 2023 00:03:59 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=mhHf9bnOddbdauFdwTiNvB2pCJGntgXJjGP69XrW3To=; b=Bog5SZG0TYg0s2MQQfbUs9uVXk
+ XdtKROAwAGEUaoPB8IuJVEXbl9mZlm0jEhEk3H4E+vKRQyFUUSOp4nTdUWPuxI7Hp4HjDNA443+/y
+ /0fOLJMKC2WIb2tS4b+Rt+QMGMmK7PEfbf7jtUs42sJFP5+vBQdLHF+vLX+GuQ5QG1n3CXTQMflpP
+ 3DlTErG3FOwEjKOWr7tFZ3fPuvJ3DhE+vRtnrlv2iBll7kd62LGwN6s1l2hycllZ+6XxX/OrWlMoY
+ fxqTZRWZnCLTwYTWHz4AyRowlDGrc1MtyEFAz5FrKLMLieuTK/6uE/WBBD7mLUNv8cYmrCXKVybDc
+ uCQ9Bpgw==;
+Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1qb8f7-001xNh-0Q; Wed, 30 Aug 2023 00:02:21 +0000
+Date: Wed, 30 Aug 2023 01:02:21 +0100
+From: Al Viro <viro@zeniv.linux.org.uk>
+To: Jeff Layton <jlayton@kernel.org>
+Message-ID: <20230830000221.GB3390869@ZenIV>
 References: <20230725-mgctime-v6-0-a794c2b7abca@kernel.org>
  <20230725-mgctime-v6-1-a794c2b7abca@kernel.org>
  <20230829224454.GA461907@ZenIV>
-User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
+ <e1c4a6d5001d029548542a1f10425c5639ce28e4.camel@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+Content-Disposition: inline
+In-Reply-To: <e1c4a6d5001d029548542a1f10425c5639ce28e4.camel@kernel.org>
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, 2023-08-29 at 23:44 +0100, Al Viro wrote: > On Tue, 
- Jul 25, 2023 at 10:58:14AM -0400, Jeff Layton wrote: > > generic_fillattr
- just fills in the entire stat struct indiscriminately > > today, c [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Tue, Aug 29, 2023 at 06:58:47PM -0400, Jeff Layton wrote:
+ > On Tue, 2023-08-29 at 23:44 +0100, Al Viro wrote: > > On Tue, Jul 25, 2023
+ at 10:58:14AM -0400, Jeff Layton wrote: > > > generic_fillattr [...] 
+ Content analysis details:   (-0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qb7fp-002ofm-Bt
+X-Headers-End: 1qb8gf-002sBx-4k
 Subject: Re: [f2fs-dev] [PATCH v6 1/7] fs: pass the request_mask to
  generic_fillattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -151,34 +141,50 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, 2023-08-29 at 23:44 +0100, Al Viro wrote:
-> On Tue, Jul 25, 2023 at 10:58:14AM -0400, Jeff Layton wrote:
-> > generic_fillattr just fills in the entire stat struct indiscriminately
-> > today, copying data from the inode. There is at least one attribute
-> > (STATX_CHANGE_COOKIE) that can have side effects when it is reported,
-> > and we're looking at adding more with the addition of multigrain
-> > timestamps.
+On Tue, Aug 29, 2023 at 06:58:47PM -0400, Jeff Layton wrote:
+> On Tue, 2023-08-29 at 23:44 +0100, Al Viro wrote:
+> > On Tue, Jul 25, 2023 at 10:58:14AM -0400, Jeff Layton wrote:
+> > > generic_fillattr just fills in the entire stat struct indiscriminately
+> > > today, copying data from the inode. There is at least one attribute
+> > > (STATX_CHANGE_COOKIE) that can have side effects when it is reported,
+> > > and we're looking at adding more with the addition of multigrain
+> > > timestamps.
+> > > 
+> > > Add a request_mask argument to generic_fillattr and have most callers
+> > > just pass in the value that is passed to getattr. Have other callers
+> > > (e.g. ksmbd) just pass in STATX_BASIC_STATS. Also move the setting of
+> > > STATX_CHANGE_COOKIE into generic_fillattr.
 > > 
-> > Add a request_mask argument to generic_fillattr and have most callers
-> > just pass in the value that is passed to getattr. Have other callers
-> > (e.g. ksmbd) just pass in STATX_BASIC_STATS. Also move the setting of
-> > STATX_CHANGE_COOKIE into generic_fillattr.
+> > Out of curiosity - how much PITA would it be to put request_mask into
+> > kstat?  Set it in vfs_getattr_nosec() (and those get_file_..._info()
+> > on smbd side) and don't bother with that kind of propagation boilerplate
+> > - just have generic_fillattr() pick it there...
+> > 
+> > Reduces the patchset size quite a bit...
 > 
-> Out of curiosity - how much PITA would it be to put request_mask into
-> kstat?  Set it in vfs_getattr_nosec() (and those get_file_..._info()
-> on smbd side) and don't bother with that kind of propagation boilerplate
-> - just have generic_fillattr() pick it there...
+> It could be done. To do that right, I think we'd want to drop
+> request_mask from the ->getattr prototype as well and just have
+> everything use the mask in the kstat.
 > 
-> Reduces the patchset size quite a bit...
+> I don't think it'd reduce the size of the patchset in any meaningful
+> way, but it might make for a more sensible API over the long haul.
 
-It could be done. To do that right, I think we'd want to drop
-request_mask from the ->getattr prototype as well and just have
-everything use the mask in the kstat.
+->getattr() prototype change would be decoupled from that - for your
+patchset you'd only need the field addition + setting in vfs_getattr_nosec()
+(and possibly in ksmbd), with the remainders of both series being
+independent from each other.
 
-I don't think it'd reduce the size of the patchset in any meaningful
-way, but it might make for a more sensible API over the long haul.
--- 
-Jeff Layton <jlayton@kernel.org>
+What I suggest is
+
+branchpoint -> field addition (trivial commit) -> argument removal
+		|
+		V
+your series, starting with "use stat->request_mask in generic_fillattr()"
+
+Total size would be about the same, but it would be easier to follow
+the less trivial part of that.  Nothing in your branch downstream of
+that touches any ->getattr() instances, so it should have no
+conflicts with the argument removal side of things.
 
 
 _______________________________________________
