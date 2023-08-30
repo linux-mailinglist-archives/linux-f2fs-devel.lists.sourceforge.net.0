@@ -2,28 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51A2178D0DA
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Aug 2023 02:04:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F315478D108
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Aug 2023 02:23:46 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qb8gk-0004de-TG;
-	Wed, 30 Aug 2023 00:04:01 +0000
+	id 1qb8zl-0005v0-Np;
+	Wed, 30 Aug 2023 00:23:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <viro@ftp.linux.org.uk>) id 1qb8gi-0004dI-Dv
- for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Aug 2023 00:03:59 +0000
+ (envelope-from <viro@ftp.linux.org.uk>) id 1qb8zk-0005uh-IJ;
+ Wed, 30 Aug 2023 00:23:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mhHf9bnOddbdauFdwTiNvB2pCJGntgXJjGP69XrW3To=; b=JqYO1BdKmIRxqpc3IZo/yuT1U0
- qSCbwA0lM/PSJ/+57DCqvjzjZ+NsCyQxGo3FYiXNT9jaBOUSgR9SDTbnPrh3bjHXCbkFJCiOxbVYT
- ijOEe9AIwlghuwpvNln9dH3s+tcok7ecv9UMFWmImRno9w1g50gbTGAh+s1AeXyOnFZ0=;
+ bh=zZxZUyqerb7julFXQ03Jti/01WDk420m8vSi4C3S7Zg=; b=VpYwNnNZA6V8R2fEV02j59dh24
+ Dc98UEXfabr45lIGAwnUGERiwY5atqBDnDfW2kfxhoVObV5xKikUV73ESGUXnZ3MtQ0S9bK0ag/3k
+ M2wvH5isNwtENupC8Uj0aUv+Cm0pFLLtkvabIMvcnUGgf37qoXh8rIMnfcXqiflUPa9o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
@@ -31,37 +30,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=mhHf9bnOddbdauFdwTiNvB2pCJGntgXJjGP69XrW3To=; b=QgYk3g+Qv+O6iWeQMq+n8ATUB1
- dP+/X2Pbc2oofKgVA3bZwqO3GbVtgr0PDuaYMx0ahLT40ptYMsp8rcqp8zqs4X16mdks+ZS0Qee5/
- GW0qtYI46mLmkUuUmMEudTSg4Z9In2yobgWEWVQZrsAlcNYkpWFgCF/Ine5+c60Qgsis=;
+ bh=zZxZUyqerb7julFXQ03Jti/01WDk420m8vSi4C3S7Zg=; b=DAVoyRNt5FXPLpQBMNmmdKv8Jq
+ iGjmM6oX5WvX1zWHLCVowr3SftX93xCJnoChCWjVUysTXYBdLz/XLQ6dm8En4BBttLwv/LiXy8I5I
+ lXaTHl/MGWp79vOzWnLgTPm2a7CDwyBnkneqNRpaKNJouWX5szDh0yzkKMEkqWJvv2C8=;
 Received: from zeniv.linux.org.uk ([62.89.141.173])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qb8gf-002sBx-4k for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Aug 2023 00:03:59 +0000
+ id 1qb8zi-00015y-Rn; Wed, 30 Aug 2023 00:23:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
  MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=mhHf9bnOddbdauFdwTiNvB2pCJGntgXJjGP69XrW3To=; b=Bog5SZG0TYg0s2MQQfbUs9uVXk
- XdtKROAwAGEUaoPB8IuJVEXbl9mZlm0jEhEk3H4E+vKRQyFUUSOp4nTdUWPuxI7Hp4HjDNA443+/y
- /0fOLJMKC2WIb2tS4b+Rt+QMGMmK7PEfbf7jtUs42sJFP5+vBQdLHF+vLX+GuQ5QG1n3CXTQMflpP
- 3DlTErG3FOwEjKOWr7tFZ3fPuvJ3DhE+vRtnrlv2iBll7kd62LGwN6s1l2hycllZ+6XxX/OrWlMoY
- fxqTZRWZnCLTwYTWHz4AyRowlDGrc1MtyEFAz5FrKLMLieuTK/6uE/WBBD7mLUNv8cYmrCXKVybDc
- uCQ9Bpgw==;
+ bh=zZxZUyqerb7julFXQ03Jti/01WDk420m8vSi4C3S7Zg=; b=C+B8K/E0jwmlP3x0ynEg/wW0oT
+ 8W+g7CEhf7EdCVJx+aCWMaLZ8rDm21ORLwQNEzBBlnKI8nSnQEIfBUqrKOBnjUNllXW768GzG3qB7
+ +cpJ/jhntfWbFQ/3QFzCMkG1sg2st+PpzLnPrKtYydQR6EDaMR8Bc+aEbQhcPGU53TF4NXxBCLwrJ
+ Y+Cse/dfbORxx77QJVsCQ4BCKysmxvXtFDzxb882a/rtaocFDwQw24nZDPRB3CytP/MOuWTM+mTfa
+ +8MJ/m4rwupUEXN1Mh5oBPLgZehFHGmgz56mU9Gh95pn90zVDOFdIxrpzwqUqcKtUFnurzTC7a4a3
+ phr8qPBQ==;
 Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qb8f7-001xNh-0Q; Wed, 30 Aug 2023 00:02:21 +0000
-Date: Wed, 30 Aug 2023 01:02:21 +0100
+ Linux)) id 1qb8vV-001xXV-0L; Wed, 30 Aug 2023 00:19:17 +0000
+Date: Wed, 30 Aug 2023 01:19:17 +0100
 From: Al Viro <viro@zeniv.linux.org.uk>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <20230830000221.GB3390869@ZenIV>
-References: <20230725-mgctime-v6-0-a794c2b7abca@kernel.org>
- <20230725-mgctime-v6-1-a794c2b7abca@kernel.org>
- <20230829224454.GA461907@ZenIV>
- <e1c4a6d5001d029548542a1f10425c5639ce28e4.camel@kernel.org>
+Message-ID: <20230830001917.GC461907@ZenIV>
+References: <20230705185812.579118-1-jlayton@kernel.org>
+ <20230705185812.579118-3-jlayton@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <e1c4a6d5001d029548542a1f10425c5639ce28e4.camel@kernel.org>
+In-Reply-To: <20230705185812.579118-3-jlayton@kernel.org>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
@@ -69,9 +65,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Aug 29, 2023 at 06:58:47PM -0400, Jeff Layton wrote:
- > On Tue, 2023-08-29 at 23:44 +0100, Al Viro wrote: > > On Tue, Jul 25, 2023
- at 10:58:14AM -0400, Jeff Layton wrote: > > > generic_fillattr [...] 
+ Content preview:  On Wed, Jul 05, 2023 at 02:58:11PM -0400, Jeff Layton wrote:
+ > + * POSIX mandates that the old and new parent directories have their ctime
+ and > + * mtime updated, and that inodes of @old_dentry and @new_dentry (if
+ any), have > + * their ctime updated. 
  Content analysis details:   (-0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -82,9 +79,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qb8gf-002sBx-4k
-Subject: Re: [f2fs-dev] [PATCH v6 1/7] fs: pass the request_mask to
- generic_fillattr
+X-Headers-End: 1qb8zi-00015y-Rn
+Subject: Re: [f2fs-dev] [PATCH v2 08/92] fs: new helper:
+ simple_rename_timestamp
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,95 +93,100 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Latchesar Ionkov <lucho@ionkov.net>,
- Martin Brandenburg <martin@omnibond.com>,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- linux-xfs@vger.kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
- Dominique Martinet <asmadeus@codewreck.org>,
- Christian Schoenebeck <linux_oss@crudebyte.com>,
- Dave Chinner <david@fromorbit.com>, David Howells <dhowells@redhat.com>,
- Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
- Hans de Goede <hdegoede@redhat.com>, Marc Dionne <marc.dionne@auristor.com>,
- codalist@coda.cs.cmu.edu, linux-afs@lists.infradead.org,
- Mike Marshall <hubcap@omnibond.com>, Paulo Alcantara <pc@manguebit.com>,
- linux-cifs@vger.kernel.org, Eric Van Hensbergen <ericvh@kernel.org>,
- Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- Hugh Dickins <hughd@google.com>, Tyler Hicks <code@tyhicks.com>,
- cluster-devel@redhat.com, coda@cs.cmu.edu, linux-mm@kvack.org,
- linux-f2fs-devel@lists.sourceforge.net, Ilya Dryomov <idryomov@gmail.com>,
- Iurii Zaikin <yzaikin@google.com>, Namjae Jeon <linkinjeon@kernel.org>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Shyam Prasad N <sprasad@microsoft.com>, ecryptfs@vger.kernel.org,
- Kees Cook <keescook@chromium.org>, ocfs2-devel@lists.linux.dev,
- Anthony Iliopoulos <ailiop@suse.com>, Josef Bacik <josef@toxicpanda.com>,
- Tom Talpey <tom@talpey.com>, Tejun Heo <tj@kernel.org>,
- Yue Hu <huyue2@coolpad.com>, Joel Becker <jlbec@evilplan.org>,
- linux-mtd@lists.infradead.org, David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
- Xiubo Li <xiubli@redhat.com>, Gao Xiang <xiang@kernel.org>,
- OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Jan Harkes <jaharkes@cs.cmu.edu>,
- Christian Brauner <brauner@kernel.org>, linux-ext4@vger.kernel.org,
- Theodore Ts'o <tytso@mit.edu>, Joseph Qi <joseph.qi@linux.alibaba.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, v9fs@lists.linux.dev,
- ntfs3@lists.linux.dev, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
- Steve French <sfrench@samba.org>,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Luis Chamberlain <mcgrof@kernel.org>, Jeffle Xu <jefflexu@linux.alibaba.com>,
- devel@lists.orangefs.org, Anna Schumaker <anna@kernel.org>,
- Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- Sungjong Seo <sj1557.seo@samsung.com>, linux-erofs@lists.ozlabs.org,
- linux-nfs@vger.kernel.org, linux-btrfs@vger.kernel.org
+Cc: lucho@ionkov.net, rafael@kernel.org, djwong@kernel.org, al@alarsen.net,
+ cmllamas@google.com, andrii@kernel.org, hughd@google.com,
+ john.johansen@canonical.com, agordeev@linux.ibm.com, hch@lst.de,
+ hubcap@omnibond.com, pc@manguebit.com, linux-xfs@vger.kernel.org,
+ bvanassche@acm.org, jeffxu@chromium.org, mpe@ellerman.id.au,
+ john@keeping.me.uk, yi.zhang@huawei.com, jmorris@namei.org,
+ christophe.leroy@csgroup.eu, code@tyhicks.com, stern@rowland.harvard.edu,
+ borntraeger@linux.ibm.com, devel@lists.orangefs.org, mirimmad17@gmail.com,
+ sprasad@microsoft.com, jaharkes@cs.cmu.edu, linux-um@lists.infradead.org,
+ npiggin@gmail.com, jlbec@evilplan.org, ericvh@kernel.org, surenb@google.com,
+ trond.myklebust@hammerspace.com, anton@tuxera.com, brauner@kernel.org,
+ wsa+renesas@sang-engineering.com, gregkh@linuxfoundation.org,
+ stephen.smalley.work@gmail.com, linux-usb@vger.kernel.org,
+ linux-kernel@vger.kernel.org, lsahlber@redhat.com, senozhatsky@chromium.org,
+ arve@android.com, chuck.lever@oracle.com, svens@linux.ibm.com,
+ jolsa@kernel.org, jack@suse.com, tj@kernel.org, akpm@linux-foundation.org,
+ linux-trace-kernel@vger.kernel.org, xu.xin16@zte.com.cn, shaggy@kernel.org,
+ dhavale@google.com, penguin-kernel@i-love.sakura.ne.jp, zohar@linux.ibm.com,
+ linux-mm@kvack.org, joel@joelfernandes.org, edumazet@google.com,
+ sdf@google.com, jomajm@gmail.com, linux-s390@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, paul@paul-moore.com, leon@kernel.org,
+ john.fastabend@gmail.com, mcgrof@kernel.org, chi.minghao@zte.com.cn,
+ codalist@coda.cs.cmu.edu, selinux@vger.kernel.org, zhangpeng362@huawei.com,
+ quic_ugoswami@quicinc.com, yhs@fb.com, yzaikin@google.com,
+ linkinjeon@kernel.org, mhiramat@kernel.org, ecryptfs@vger.kernel.org,
+ tkjos@android.com, madkar@cs.stonybrook.edu, gor@linux.ibm.com,
+ yuzhe@nfschina.com, linuxppc-dev@lists.ozlabs.org,
+ reiserfs-devel@vger.kernel.org, miklos@szeredi.hu, huyue2@coolpad.com,
+ jaegeuk@kernel.org, gargaditya08@live.com, maco@android.com,
+ hirofumi@mail.parknet.co.jp, haoluo@google.com, tony.luck@intel.com,
+ tytso@mit.edu, nico@fluxnic.net, linux-ntfs-dev@lists.sourceforge.net,
+ muchun.song@linux.dev, roberto.sassu@huawei.com,
+ linux-f2fs-devel@lists.sourceforge.net, yang.yang29@zte.com.cn,
+ gpiccoli@igalia.com, ebiederm@xmission.com, anna@kernel.org,
+ quic_uaggarwa@quicinc.com, bwarrum@linux.ibm.com, mike.kravetz@oracle.com,
+ jingyuwang_vip@163.com, linux-efi@vger.kernel.org, error27@gmail.com,
+ martin@omnibond.com, trix@redhat.com, ocfs2-devel@lists.linux.dev,
+ ast@kernel.org, sebastian.reichel@collabora.com, clm@fb.com,
+ linux-mtd@lists.infradead.org, willy@infradead.org, marc.dionne@auristor.com,
+ linux-afs@lists.infradead.org, raven@themaw.net, naohiro.aota@wdc.com,
+ daniel@iogearbox.net, dennis.dalessandro@cornelisnetworks.com,
+ linux-rdma@vger.kernel.org, quic_linyyuan@quicinc.com, coda@cs.cmu.edu,
+ slava@dubeyko.com, idryomov@gmail.com, pabeni@redhat.com, adobriyan@gmail.com,
+ serge@hallyn.com, axboe@kernel.dk, amir73il@gmail.com, linuszeng@tencent.com,
+ keescook@chromium.org, arnd@arndb.de, autofs@vger.kernel.org,
+ rostedt@goodmis.org, yifeliu@cs.stonybrook.edu, dlemoal@kernel.org,
+ eparis@parisplace.org, ceph-devel@vger.kernel.org, xiang@kernel.org,
+ yijiangshan@kylinos.cn, dhowells@redhat.com, linux-nfs@vger.kernel.org,
+ linux-ext4@vger.kernel.org, kolga@netapp.com, song@kernel.org,
+ samba-technical@lists.samba.org, sfrench@samba.org, jk@ozlabs.org,
+ netdev@vger.kernel.org, rpeterso@redhat.com, linux-fsdevel@vger.kernel.org,
+ bpf@vger.kernel.org, ntfs3@lists.linux.dev, linux-erofs@lists.ozlabs.org,
+ davem@davemloft.net, jfs-discussion@lists.sourceforge.net,
+ princekumarmaurya06@gmail.com, ebiggers@google.com, neilb@suse.de,
+ asmadeus@codewreck.org, linux_oss@crudebyte.com, me@bobcopeland.com,
+ kpsingh@kernel.org, okanatov@gmail.com,
+ almaz.alexandrovich@paragon-software.com, joseph.qi@linux.alibaba.com,
+ hayama@lineo.co.jp, adilger.kernel@dilger.ca, mikulas@artax.karlin.mff.cuni.cz,
+ shaozhengchao@huawei.com, chenzhongjin@huawei.com, ardb@kernel.org,
+ anton.ivanov@cambridgegreys.com, agruenba@redhat.com, richard@nod.at,
+ mark@fasheh.com, shr@devkernel.io, Dai.Ngo@oracle.com,
+ cluster-devel@redhat.com, jgg@ziepe.ca, kuba@kernel.org, riel@surriel.com,
+ salah.triki@gmail.com, dushistov@mail.ru, linux-cifs@vger.kernel.org,
+ hca@linux.ibm.com, apparmor@lists.ubuntu.com, josef@toxicpanda.com,
+ Liam.Howlett@oracle.com, tom@talpey.com, hdegoede@redhat.com,
+ linux-hardening@vger.kernel.org, aivazian.tigran@gmail.com,
+ dchinner@redhat.com, dsterba@suse.com, xiubli@redhat.com,
+ konishi.ryusuke@gmail.com, jgross@suse.com, jth@kernel.org,
+ rituagar@linux.ibm.com, luisbg@kernel.org, martin.lau@linux.dev,
+ v9fs@lists.linux.dev, fmdefrancesco@gmail.com, linux-unionfs@vger.kernel.org,
+ lrh2000@pku.edu.cn, linux-security-module@vger.kernel.org,
+ ezk@cs.stonybrook.edu, jefflexu@linux.alibaba.com, linux@treblig.org,
+ hannes@cmpxchg.org, phillip@squashfs.org.uk, johannes@sipsolutions.net,
+ sj1557.seo@samsung.com, dwmw2@infradead.org,
+ linux-karma-devel@lists.sourceforge.net, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Aug 29, 2023 at 06:58:47PM -0400, Jeff Layton wrote:
-> On Tue, 2023-08-29 at 23:44 +0100, Al Viro wrote:
-> > On Tue, Jul 25, 2023 at 10:58:14AM -0400, Jeff Layton wrote:
-> > > generic_fillattr just fills in the entire stat struct indiscriminately
-> > > today, copying data from the inode. There is at least one attribute
-> > > (STATX_CHANGE_COOKIE) that can have side effects when it is reported,
-> > > and we're looking at adding more with the addition of multigrain
-> > > timestamps.
-> > > 
-> > > Add a request_mask argument to generic_fillattr and have most callers
-> > > just pass in the value that is passed to getattr. Have other callers
-> > > (e.g. ksmbd) just pass in STATX_BASIC_STATS. Also move the setting of
-> > > STATX_CHANGE_COOKIE into generic_fillattr.
-> > 
-> > Out of curiosity - how much PITA would it be to put request_mask into
-> > kstat?  Set it in vfs_getattr_nosec() (and those get_file_..._info()
-> > on smbd side) and don't bother with that kind of propagation boilerplate
-> > - just have generic_fillattr() pick it there...
-> > 
-> > Reduces the patchset size quite a bit...
-> 
-> It could be done. To do that right, I think we'd want to drop
-> request_mask from the ->getattr prototype as well and just have
-> everything use the mask in the kstat.
-> 
-> I don't think it'd reduce the size of the patchset in any meaningful
-> way, but it might make for a more sensible API over the long haul.
+On Wed, Jul 05, 2023 at 02:58:11PM -0400, Jeff Layton wrote:
 
-->getattr() prototype change would be decoupled from that - for your
-patchset you'd only need the field addition + setting in vfs_getattr_nosec()
-(and possibly in ksmbd), with the remainders of both series being
-independent from each other.
+> + * POSIX mandates that the old and new parent directories have their ctime and
+> + * mtime updated, and that inodes of @old_dentry and @new_dentry (if any), have
+> + * their ctime updated.
 
-What I suggest is
+APPLICATION USAGE
+Some implementations mark for update the last file status change timestamp
+of renamed files and some do not. Applications which make use of the
+last file status change timestamp may behave differently with respect
+to renamed files unless they are designed to allow for either behavior.
 
-branchpoint -> field addition (trivial commit) -> argument removal
-		|
-		V
-your series, starting with "use stat->request_mask in generic_fillattr()"
-
-Total size would be about the same, but it would be easier to follow
-the less trivial part of that.  Nothing in your branch downstream of
-that touches any ->getattr() instances, so it should have no
-conflicts with the argument removal side of things.
+So for children POSIX permits rather than mandates.  Doesn't really matter;
+Linux behaviour had been to touch ctime on children since way back, if
+not since the very beginning.
 
 
 _______________________________________________
