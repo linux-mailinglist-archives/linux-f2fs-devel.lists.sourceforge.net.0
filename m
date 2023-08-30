@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04BB578D329
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Aug 2023 08:12:31 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2ED7678D661
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Aug 2023 16:05:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qbERF-0002Qx-1S;
-	Wed, 30 Aug 2023 06:12:23 +0000
+	id 1qbLoz-0004N8-Ju;
+	Wed, 30 Aug 2023 14:05:26 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hao.xu@linux.dev>) id 1qbERD-0002Qj-2D
+ (envelope-from <chao@kernel.org>) id 1qbLoy-0004N2-0L
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Aug 2023 06:12:22 +0000
+ Wed, 30 Aug 2023 14:05:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JMzOvVHk770qYz+7D4bRM3eiaC0WBb12Z/fuZleaQ2g=; b=kIlQ8BROjEi8l1nn/6RIvyz0LO
- UbQK+rTB3UuJFw2+MBFUy65plEDMgtUSLfM/EO9dG+GpitrMitgp+wbymrQK6XteT1Qyh+VrBqYcy
- jt2VsJsE+KorlAZpRp+92jOX8mrWD7L7w3tvCqQFNxUS9bQ0hdCWj/o++y+rYrfPIJ1s=;
+ bh=qLtUAFqHq7BUFGYFQWuJu2rrOmYJjuqjvk8z1yFuitM=; b=mxx6OzYoatTw7LT7sdzXAp+1Av
+ Nngiu+v2Tv4n4CzpZ02kpX/Wq2YmQoRgDmwLqVIWiYis79EtXn1SCaw3cHznRgYlX3iWrglkIRHA8
+ H2tfaTyLR/3uCrgK3w2F2iz3MPU3w2zWpzIqgpOD3yhfOKsjjz66Zmy9P/2lh+IQmShA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -31,50 +31,55 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JMzOvVHk770qYz+7D4bRM3eiaC0WBb12Z/fuZleaQ2g=; b=CrI9a1vqkGF8prZWzGa1c712VP
- o6Sv5hluZvnQk3DD7LqcEInUgSk7S/ybAIVy+avbPPjpeF5rKlEF6HFXfRLUMyNA7nsKVVXYx5SpX
- XqKBUL8ECLUP1MY/kWAqot0XIcK4B6B1w9DbwFA0EJ1r9J6GtdYjudHNgZ45vG7lmKZw=;
-Received: from out-242.mta0.migadu.com ([91.218.175.242])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=qLtUAFqHq7BUFGYFQWuJu2rrOmYJjuqjvk8z1yFuitM=; b=Mix+frR5Xte0+R0QFVRPn1vGu5
+ r2xxnXSXnrKbf2lsGFOb4SaVG3378lcowHIWt6FhLLLQWx/1e/b+9GkmW0ss4xPx8Q2Tuo5B489cD
+ O5E8YTujCuAlOwTcD24QsDntfjfS5HOzJaOcifK73KjVZUiBwyemJVmD60KQgDVEDgE4=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qbER0-003B6W-JQ for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Aug 2023 06:12:21 +0000
-Message-ID: <642de4e6-801d-fcad-a7ce-bfc6dec3b6e5@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1693375918;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JMzOvVHk770qYz+7D4bRM3eiaC0WBb12Z/fuZleaQ2g=;
- b=n8qZNKHDJ8ZkQN8s6YCFhUc5vlrIehXvAzssrfT4lOFAEgM70y7j9ccF+kTN544/il9mhv
- /Qwyv0zoAHdwAPeCdmanHqcxV7A/7XcL4G5u9c/o5+tWUqR2xZIKUSlHotdEAwwwHhjWvg
- KLK2CGyPGmGk32bcLUct3rbhOUMJhk8=
-Date: Wed, 30 Aug 2023 14:11:31 +0800
+ id 1qbLov-0004tA-0W for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 30 Aug 2023 14:05:24 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 75F6660BA0;
+ Wed, 30 Aug 2023 14:05:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DB29C433C7;
+ Wed, 30 Aug 2023 14:05:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1693404314;
+ bh=JI+eB0h4KCK57zv/Cn29stcoz2S2ibRVvWbrnO+A4B0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=VjEoqGtAOR+M77pGguxBYDWP7o5NrltSEDoUgCg08t+8xmZ6mVJPwWCd7ag/hy1WD
+ OXvEsFze1nFH8mQjR8crz8PYIMuq3k5GkPL0ZzIvlJC1W2dlvMvBOQ/VM33ijrtFET
+ kQ0XPOX3nFp5yH+zXKe2kKKncmQddG1VvbYh2F4Eb1PaA/018Am+8yMPW06h2sHjwh
+ NDOPVdJ5unIjpsROoHLwK8gF/EtU0HjKIdW0NqmG3wTj1i3ZSVk4BGpWgY6BGhxxvC
+ LhNdM2jxjUUyxMhvtWFB5Od+GIfFzmCy9yh3HpefKEubx10E9wGJgDHcd2nKgt2vwS
+ g0xHTaL7Ha9Ig==
+Message-ID: <eb97c111-4ea8-787c-b3e3-ce02909e1f3d@kernel.org>
+Date: Wed, 30 Aug 2023 22:05:11 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
 Content-Language: en-US
-To: Matthew Wilcox <willy@infradead.org>
-References: <20230827132835.1373581-1-hao.xu@linux.dev>
- <20230827132835.1373581-8-hao.xu@linux.dev>
- <ZOvA5DJDZN0FRymp@casper.infradead.org>
- <c728bf3f-d9db-4865-8473-058b26c11c06@linux.dev>
- <ZO3cI+DkotHQo3md@casper.infradead.org>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Hao Xu <hao.xu@linux.dev>
-In-Reply-To: <ZO3cI+DkotHQo3md@casper.infradead.org>
-X-Migadu-Flow: FLOW_OUT
-X-Spam-Score: -0.2 (/)
+To: Chunhai Guo <guochunhai@vivo.com>, jaegeuk@kernel.org
+References: <20230830035248.4051323-1-guochunhai@vivo.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20230830035248.4051323-1-guochunhai@vivo.com>
+X-Spam-Score: -6.4 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 8/29/23 19:53, Matthew Wilcox wrote: > On Tue, Aug 29,
- 2023 at 03:46:13PM +0800, Hao Xu wrote: >> On 8/28/23 05:32, Matthew Wilcox
- wrote: >>> On Sun, Aug 27, 2023 at 09:28:31PM +0800, Hao Xu wrote: [...] 
- Content analysis details:   (-0.2 points, 6.0 required)
+ Content preview:  On 2023/8/30 11:52,
+ Chunhai Guo wrote: > The commit 344150999b7f
+ ("f2fs: fix to avoid potential deadlock") only > requires unplugging
+ current->plug.
+ Using blk_finish_plug() is unnecessary > as it sets [...] 
+ Content analysis details:   (-6.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
@@ -86,9 +91,13 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qbER0-003B6W-JQ
-Subject: Re: [f2fs-dev] [PATCH 07/11] vfs: add nowait parameter for
- file_accessed()
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -1.2 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qbLov-0004tA-0W
+Subject: Re: [f2fs-dev] [PATCH] f2fs: replace blk_finish_plug() with
+ blk_flush_plug()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,67 +109,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Wanpeng Li <wanpengli@tencent.com>, "Darrick J . Wong" <djwong@kernel.org>,
- Dominique Martinet <asmadeus@codewreck.org>,
- Dave Chinner <david@fromorbit.com>, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, Stefan Roesch <shr@fb.com>, Clay Harris <bugs@claycon.org>,
- linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
- codalist@coda.cs.cmu.edu, cluster-devel@redhat.com, linux-cachefs@redhat.com,
- linux-ext4@vger.kernel.org, devel@lists.orangefs.org,
- linux-cifs@vger.kernel.org, ecryptfs@vger.kernel.org,
- linux-nfs@vger.kernel.org, linux-block@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>, io-uring@vger.kernel.org,
- Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
- netdev@vger.kernel.org, samba-technical@lists.samba.org,
- linux-unionfs@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-mtd@lists.infradead.org, bpf@vger.kernel.org,
- Pavel Begunkov <asml.silence@gmail.com>, linux-btrfs@vger.kernel.org
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 8/29/23 19:53, Matthew Wilcox wrote:
-> On Tue, Aug 29, 2023 at 03:46:13PM +0800, Hao Xu wrote:
->> On 8/28/23 05:32, Matthew Wilcox wrote:
->>> On Sun, Aug 27, 2023 at 09:28:31PM +0800, Hao Xu wrote:
->>>> From: Hao Xu <howeyxu@tencent.com>
->>>>
->>>> Add a boolean parameter for file_accessed() to support nowait semantics.
->>>> Currently it is true only with io_uring as its initial caller.
->>>
->>> So why do we need to do this as part of this series?  Apparently it
->>> hasn't caused any problems for filemap_read().
->>>
->>
->> We need this parameter to indicate if nowait semantics should be enforced in
->> touch_atime(), There are locks and maybe IOs in it.
+On 2023/8/30 11:52, Chunhai Guo wrote:
+> The commit 344150999b7f ("f2fs: fix to avoid potential deadlock") only
+> requires unplugging current->plug. Using blk_finish_plug() is unnecessary
+> as it sets current->plug as NULL and prevents wb_writeback() from using
+> plug in subsequent loops. Instead, use blk_flush_plug() as a replacement.
 > 
-> That's not my point.  We currently call file_accessed() and
-> touch_atime() for nowait reads and nowait writes.  You haven't done
-> anything to fix those.
+> Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+> ---
+>   fs/f2fs/data.c | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
 > 
-> I suspect you can trim this patchset down significantly by avoiding
-> fixing the file_accessed() problem.  And then come back with a later
-> patchset that fixes it for all nowait i/o.  Or do a separate prep series
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 5d9697717353..936a95464186 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -3343,8 +3343,7 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
 
-I'm ok to do that.
+It missed to cover f2fs_write_node_pages()?
 
-> first that fixes it for the existing nowait users, and then a second
-> series to do all the directory stuff.
-> 
-> I'd do the first thing.  Just ignore the problem.  Directory atime
-> updates cause I/O so rarely that you can afford to ignore it.  Almost
-> everyone uses relatime or nodiratime.
+Thanks,
 
-Hi Matthew,
-The previous discussion shows this does cause issues in real
-producations: 
-https://lore.kernel.org/io-uring/2785f009-2ebb-028d-8250-d5f3a30510f0@gmail.com/#:~:text=fwiw%2C%20we%27ve%20just%20recently%20had%20similar%20problems%20with%20io_uring%20read/write
-
-
-
-
+>   		atomic_inc(&sbi->wb_sync_req[DATA]);
+>   	else if (atomic_read(&sbi->wb_sync_req[DATA])) {
+>   		/* to avoid potential deadlock */
+> -		if (current->plug)
+> -			blk_finish_plug(current->plug);
+> +		blk_flush_plug(current->plug, false);
+>   		goto skip_write;
+>   	}
+>   
 
 
 _______________________________________________
