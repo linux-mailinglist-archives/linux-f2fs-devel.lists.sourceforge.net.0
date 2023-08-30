@@ -2,91 +2,157 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97E1B78D1B2
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Aug 2023 03:24:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73F7678D296
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 30 Aug 2023 05:45:48 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qb9ws-0001uc-W4;
-	Wed, 30 Aug 2023 01:24:45 +0000
+	id 1qbC9C-0005gP-QA;
+	Wed, 30 Aug 2023 03:45:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <viro@ftp.linux.org.uk>) id 1qb9ws-0001uT-4P
+ (envelope-from <guochunhai@vivo.com>) id 1qbC9B-0005gH-9t
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Aug 2023 01:24:45 +0000
+ Wed, 30 Aug 2023 03:45:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UGL8Hs7wie/83TbDi9sHxBsPaDb/+1IP8lK74uZbCKw=; b=lnByOdGO/YGFr3Zyphcx2nDSJP
- 0iFnS6IYGPY26xq3NRfucd/pfT1XJL1fp85+/tdO6/r3dKftb2ngLLsiMAApStXWpj4ETAoF7K3vT
- TSeq06yeIlK/S8N6L/+vCpxnmDMiNU8eHXN1b+7vMn0PVvcSIPVhaB5mDJNNJrh6XWiU=;
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=nkZH+nXhAZGvuIPnQbt0Huk7a0XPWaLLFUXEX1qldaM=; b=UOuU+K8dFPOg4GnlsNcwF0/KiY
+ 3nxptKrz9eylll1Z7Hjjm5vJ51Gmzoavj+YAcMslk7O1LTYw7ZHPYHt0u0S5NChVn7RwKFObD6Hz9
+ VcO8ZdW0XXdMQML5m2ofU11p4r/h5lI6BkU7fF+6tmdcYXdCx3OVg0TnZ9lDbjo1brb8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
- Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=UGL8Hs7wie/83TbDi9sHxBsPaDb/+1IP8lK74uZbCKw=; b=ULRv0MDbEo3t//MoRXJ1/wQfuX
- 7kdGbAV1F3HzZJQYrgGm/mQWFiSDGW25XdhsivPD5ItOLJkrJB0Zh5KY/TI8/9N9UAov4ujV2jS1Y
- XNa4j1iuRcQrKGjvemLJu/YKBYAPwRugFDz10I9202/3JnUU/p8o+t6yBbSgZs+6ndPo=;
-Received: from zeniv.linux.org.uk ([62.89.141.173])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=nkZH+nXhAZGvuIPnQbt0Huk7a0XPWaLLFUXEX1qldaM=; b=H
+ 92iR7k/5pZ6Lgse6CyMqU3AEt5Pv0wn7T/yaeYx1FUstre3kNjvQGVBX64uazoiW8fX5n2Bkqk1R3
+ kme2rEJgqIM2vxltryYQ5Qb32/0kxflCTbBY3xZkR5S3LxU8ezPyLUn1ZdEQB8inRHyPjF+Vj6YKt
+ sgWueUWqsQyM7YTE=;
+Received: from mail-psaapc01on2125.outbound.protection.outlook.com
+ ([40.107.255.125] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qb9wp-00038W-97 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 30 Aug 2023 01:24:44 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=UGL8Hs7wie/83TbDi9sHxBsPaDb/+1IP8lK74uZbCKw=; b=VMCLMK1iXxNHLo2tyoSLb1HI/I
- ygrNcHqe5LWzcSOicXKiXv7+aZW1BJ7dB0vjqMCV0MnziRQDnoZOz3XgmiNQiiDnA13PUlmOVrxc4
- WpSk9x7uA8R3KciGWN7qJ88utnJ3QSHSvYKWfoJJvhO0U1H1/cqwYZYmtvld8BDA8iqcXv8CBaGId
- erqQdPcYkjIFz/hBJqwMuB/rDK2BOMTdgnlCwnIMFpdDxv6wkG8Wn7rLsnAYsC5D7sc1BRtVulXjw
- RcKjf3m9ODmy0yW/y+LgeKEyGIU6PCqX4XrC83Co4MtcnJcvY9SuxDXgB2k0Ps8NGdX3ExJB41/fI
- ibsynONQ==;
-Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qb9v5-001yGw-2Z; Wed, 30 Aug 2023 01:22:55 +0000
-Date: Wed, 30 Aug 2023 02:22:55 +0100
-From: Al Viro <viro@zeniv.linux.org.uk>
-To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <20230830012255.GC3390869@ZenIV>
-References: <20230725-mgctime-v6-0-a794c2b7abca@kernel.org>
- <20230725-mgctime-v6-1-a794c2b7abca@kernel.org>
- <20230829224454.GA461907@ZenIV>
- <e1c4a6d5001d029548542a1f10425c5639ce28e4.camel@kernel.org>
- <20230830000221.GB3390869@ZenIV>
- <1005e30582138e203a99f49564e2ef244b8d56aa.camel@kernel.org>
+ id 1qbC94-0031df-NQ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 30 Aug 2023 03:45:37 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Bow1+Y659BBNn2DnfLC3pEsT6Ac0IEcu6CtCkqty9HHxYsI7IruzMysyiwI650c5gPpJQIFf3II14VKPyikCra6Tyoo89zgfEoPE8skAWXLic5st9sZISyaZesWS4EqQHqrN1U+5dE8smUu7g4VITSqDyJlItvS3gyLeOmNxvh54k+qtnWDyG5ppB0NrvUlxCyzgLOAfUXQcvTfZSuSKhugfMgnv5k+Sfks1xfMNLfbZqtwJUAKdzqirFuxDIkPBHJHm8Q9C9cF2VRwPshzVnbX7tOQxA8BHLfozouasV1ayntefsNZA+67bqd2MMgUS37frCIVWIUl5FX7Kmte0+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nkZH+nXhAZGvuIPnQbt0Huk7a0XPWaLLFUXEX1qldaM=;
+ b=XRI53JVA+5PKfLYbd0TiZ51PbbweeLIjnM9pl7tAH9Om8hK/RWM1OQYKKP3keB4hzz1UoRdLIixbdBl0H8F7T0zdCJ7ufD218LqIvp33xuEQGehNfZ9K2YAo3j3GSFdMNwI5wo/1REIGn66PxWjEtcnB8NsAoibSGkd26/hgr4TsHWxd845ENs66YWDYVjNeFETwNLxIlxYNrIC08pwCWC8Nk5y2l0A6WqYBJVlr/PJB7J1OuWPcVjQkGtLinEfICPaFQ5IhfyyThQcbLuq1MUIKr09kqDWtDitCWKT4lCsRcXikXRSGo9UaywvvI80hEI++xxX/Au/m5JWLL6oo1g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nkZH+nXhAZGvuIPnQbt0Huk7a0XPWaLLFUXEX1qldaM=;
+ b=cv79zOyYN7vyKwmNOAZxbeCMYdFtCn7zxY4svhdg//PjQO5w+d5cqJL9ZpvbS5duJjhKBfxKOHHfoGCRH4LlxQnc0xHfbe7KMblQKRhUBQuQctFaZhRrPWpkfk3+AOYDMt2UFLXz30bFzqvTfwSzF/3ncFr/MrhSF02SLUQ6ZqpViIls51b9sz35utw5tpJVLYD+Fxw2ouwt/D6QJjTGyaWwS12/KUBQFbrWG9V3xw5llRGeRg45ENkMp7NO6xMBvTiIkpuxYi3otlXYmt/qsElsw4DZVmRbeUbMHjWzhfUUvh+jAC/20mXqtIeq1B/McAOMlrEdlh70PVv8f7fVTQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from TY2PR06MB3342.apcprd06.prod.outlook.com (2603:1096:404:fb::23)
+ by KL1PR06MB6553.apcprd06.prod.outlook.com (2603:1096:820:f1::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.35; Wed, 30 Aug
+ 2023 03:45:18 +0000
+Received: from TY2PR06MB3342.apcprd06.prod.outlook.com
+ ([fe80::60d3:1ef9:d644:3959]) by TY2PR06MB3342.apcprd06.prod.outlook.com
+ ([fe80::60d3:1ef9:d644:3959%4]) with mapi id 15.20.6745.020; Wed, 30 Aug 2023
+ 03:45:18 +0000
+To: chao@kernel.org,
+	jaegeuk@kernel.org
+Date: Tue, 29 Aug 2023 21:52:48 -0600
+Message-Id: <20230830035248.4051323-1-guochunhai@vivo.com>
+X-Mailer: git-send-email 2.25.1
+X-ClientProxiedBy: SG2PR06CA0240.apcprd06.prod.outlook.com
+ (2603:1096:4:ac::24) To TY2PR06MB3342.apcprd06.prod.outlook.com
+ (2603:1096:404:fb::23)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1005e30582138e203a99f49564e2ef244b8d56aa.camel@kernel.org>
-X-Spam-Score: -0.1 (/)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TY2PR06MB3342:EE_|KL1PR06MB6553:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7a52f0d7-c3db-4f3b-830a-08dba90b873e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: AXMJVyKc30qRuUpuTZ78FydYb52dV1eNGlrvJn6hTJlOq7IdXMSLCJrkhcaZhX7NcTVIGnBnYWxx7HXul5hjzGW6QGsbh6hzYDP5b5b3+d/HdjgJQMtakNC+ABB1zMIqV14baaFZth1MtZbpjNcuvldhVqhSv7aH0ilhNy5aDme9AjDMINjNrmsv63ZoEmsgDjyew0JNq7gXdj/SYPmus+lzwnTeBqywX0uKNkZvV7Q+0xAbMSsOe2w7d6KHFpvWro4pf9f/9JvEHpa7HR6DzS6+LqJ4kUU4hfzn3yCYBzQd8I0C43cVMWuqCrtyYfyjk+UeXWYgVc8Zpa7Px68Rp99SxWKkEvo8m4HmsvuP19erakymtRmt33aOTrEZhJdPY5B61IM7z+WQa+NAeStgjW7FkWcOowz0tATZn26zwGUTJd190svHHaJ8o+lSxFRekKQBQ//YwNpieXl2FXVQz7yHTPnZT1gEzJdb+nEV/UHA09lGbkmFg8Lgek1n+nR5mqYfza347PD49gejyfy3eWjV5l7rHzJ4tu2yAGOqp0oGmORXz9JCUEfC60n40Iw0U8n7Oa0RF9H553eQ9z9oM1vryMBBWkbfcuGXkfXZnT/YsP+H346RVdHLlbu4817s
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TY2PR06MB3342.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(39860400002)(346002)(396003)(376002)(366004)(136003)(451199024)(1800799009)(186009)(6512007)(38100700002)(316002)(41300700001)(38350700002)(4326008)(4744005)(86362001)(26005)(83380400001)(107886003)(2616005)(36756003)(5660300002)(1076003)(8676002)(2906002)(8936002)(6666004)(6506007)(66476007)(6486002)(66556008)(66946007)(52116002)(478600001);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zeqVHlYaszq9jv3974cA8EHP4em/QqRU4tWHOUB7WML9Dzf3KRFHS3LBYthk?=
+ =?us-ascii?Q?d8nl6DfC9WJcqFfsLcGeQv06NJonNLkdPNfEkEsep8ZVE1PJQ6MnjdVBkwwo?=
+ =?us-ascii?Q?4tL6dgaVD5MRlBawvZPC8X8bbOQNejSZiOSndiNQnYfuXcG5kd6a+WteHfO2?=
+ =?us-ascii?Q?BxXZ+oUE2mUKdd9Ax/cHLgxBA1RE6jo9alyiMkRvk89xaeD+vaMgsbITucvV?=
+ =?us-ascii?Q?naOEeeao/hSzj8234N+XlrTSNshqsZzjnJdOQH8MSeA2sSO7lyLf21+NSmIA?=
+ =?us-ascii?Q?2O1zdZKYKSt6d6Rufdwx9SRg0HCFX9dSwPSmzMCiw+xPf39SjaSFSbp9j+YK?=
+ =?us-ascii?Q?YIhL9v8HreR1p4ohynL5T8vIGfc3iSw+7aQLsS+hZKcG9MbjMv7SkM5eVW5F?=
+ =?us-ascii?Q?tdeXGrsGivl8EB7+RYIGQSk7sN+6qhe4y3mNKH5Wn49TjxdyDLAsIfiu3feG?=
+ =?us-ascii?Q?miFzTxbGjPi7s2c2belmFgq+CA0/i/10F65qS4ojAPWKQvPdrxe5X1konQxv?=
+ =?us-ascii?Q?zelD70gEQeY3EQXDX9VkMmkU2OR7va+co4LSCS8cPPehbx/6EyfHGp5hV+5d?=
+ =?us-ascii?Q?kzJt19WyvOMWW0nCyenYwzE/1aYly++bZKm5DD/PBkDy7Yg1jvsNwOcDb5Y7?=
+ =?us-ascii?Q?SLLbU2UHkb38tA+gC821V4FFLvY4aO+mPSAveKqWUFfLk26Wv0f2UTwuHDVf?=
+ =?us-ascii?Q?7rG0uyTrhIQBWAWeqZIDvKDGCc/7eR9dmsJqre5roMxIFB+GRjpnwcqCYQQl?=
+ =?us-ascii?Q?kspVxLRkBmgXvu3sQBmDdgDounD5heQ3poQGT1GbYbWicAddz42uqEv3uMUq?=
+ =?us-ascii?Q?eK8oM1bADVvrWCZ++86zT71Tiamw+Nv8yP+cWSNp8DoBcT28XOAya0TogXt8?=
+ =?us-ascii?Q?gLv4C4gGTaMhg65reOcQwMTNxs5LPNqcvbTrutwUbJLCvXvbW0xXpDUmXZH6?=
+ =?us-ascii?Q?3I/v5pODWxv78qbZDK2dUOH2QdhQ4nnY6al5uoKZ/YnFaHivYypbIDI5Kgm6?=
+ =?us-ascii?Q?OPxbhjb7XQPEFnczpTMSrGr1TfDylejDEaWJ7Ky1i/yMMIx+R9btdDdKK8bB?=
+ =?us-ascii?Q?T4mZaI8Etp3ECO8cWIeWu1I+dp+Pw81x+NIMat7A7ng0hIVUugwff4TKYnk0?=
+ =?us-ascii?Q?KAFygPoTWjmX5cjfavSaceWUiPzoWH3FMuyKfKgJSM/ghM5PsHjZ3q1LPlcK?=
+ =?us-ascii?Q?+k+dU7rGoME2JsB0CqH1FHXCOoBuRxsPNceZV+89J5MwGewFMNzEt+1vwQpo?=
+ =?us-ascii?Q?09hKNf6QS7FsXYWbI8GEDYC91xiDL3WsWRKK0v8QA1M/wZYWK1LBwvFwk34a?=
+ =?us-ascii?Q?bsmSQtdkCJw89d1iZMZgMY0oHz8MDjaLppbcQNjhqXqlmOO46HcCe1avChq9?=
+ =?us-ascii?Q?PxqEbkNEMSoAzVnyq5gZY7BZNPo8AkpHhJzwCmVcNxjEzPf6vKfCRCn4jGGp?=
+ =?us-ascii?Q?kZ/BZb8R4jHvV3RNzfn/vZ0gBkPifqcb2fzudeud5bu6FqcQju/f0uKR68ll?=
+ =?us-ascii?Q?8WlU0gXGBNbG9skhh44t5JuO/jdFxa6Al0sF/8FGyZJUUz9B588aqq5ymMj5?=
+ =?us-ascii?Q?narXs2Jsi5ZnlKxq8Y68D3Na/Tws6vlFbcwlK2DY?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7a52f0d7-c3db-4f3b-830a-08dba90b873e
+X-MS-Exchange-CrossTenant-AuthSource: TY2PR06MB3342.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Aug 2023 03:45:18.4930 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2gO01obBsKHZWwbTuQpBn0Hwt+T+qH+kp+tj8YPJQFNMLMiKGVxrM8QB/RRVLtomseAnBPhgfqXfNeJXTcRQoQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR06MB6553
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Aug 29, 2023 at 08:43:31PM -0400, Jeff Layton wrote:
- > On Wed, 2023-08-30 at 01:02 +0100, Al Viro wrote: > > On Tue, Aug 29, 2023
- at 06:58:47PM -0400, Jeff Layton wrote: > > > On Tue, 2023-08- [...] 
- Content analysis details:   (-0.1 points, 6.0 required)
+ Content preview: The commit 344150999b7f ("f2fs: fix to avoid potential
+ deadlock")
+ only requires unplugging current->plug. Using blk_finish_plug() is unnecessary
+ as it sets current->plug as NULL and prevents wb_writeb [...] 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.255.125 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.255.125 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qb9wp-00038W-97
-Subject: Re: [f2fs-dev] [PATCH v6 1/7] fs: pass the request_mask to
- generic_fillattr
+X-Headers-End: 1qbC94-0031df-NQ
+Subject: [f2fs-dev] [PATCH] f2fs: replace blk_finish_plug() with
+ blk_flush_plug()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -98,105 +164,40 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Latchesar Ionkov <lucho@ionkov.net>,
- Martin Brandenburg <martin@omnibond.com>,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- linux-xfs@vger.kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
- Dominique Martinet <asmadeus@codewreck.org>,
- Christian Schoenebeck <linux_oss@crudebyte.com>,
- Dave Chinner <david@fromorbit.com>, David Howells <dhowells@redhat.com>,
- Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
- Hans de Goede <hdegoede@redhat.com>, Marc Dionne <marc.dionne@auristor.com>,
- codalist@coda.cs.cmu.edu, linux-afs@lists.infradead.org,
- Mike Marshall <hubcap@omnibond.com>, Paulo Alcantara <pc@manguebit.com>,
- linux-cifs@vger.kernel.org, Eric Van Hensbergen <ericvh@kernel.org>,
- Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- Hugh Dickins <hughd@google.com>, Tyler Hicks <code@tyhicks.com>,
- cluster-devel@redhat.com, coda@cs.cmu.edu, linux-mm@kvack.org,
- linux-f2fs-devel@lists.sourceforge.net, Ilya Dryomov <idryomov@gmail.com>,
- Iurii Zaikin <yzaikin@google.com>, Namjae Jeon <linkinjeon@kernel.org>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Shyam Prasad N <sprasad@microsoft.com>, ecryptfs@vger.kernel.org,
- Kees Cook <keescook@chromium.org>, ocfs2-devel@lists.linux.dev,
- Anthony Iliopoulos <ailiop@suse.com>, Josef Bacik <josef@toxicpanda.com>,
- Tom Talpey <tom@talpey.com>, Tejun Heo <tj@kernel.org>,
- Yue Hu <huyue2@coolpad.com>, Joel Becker <jlbec@evilplan.org>,
- linux-mtd@lists.infradead.org, David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
- Xiubo Li <xiubli@redhat.com>, Gao Xiang <xiang@kernel.org>,
- OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Jan Harkes <jaharkes@cs.cmu.edu>,
- Christian Brauner <brauner@kernel.org>, linux-ext4@vger.kernel.org,
- Theodore Ts'o <tytso@mit.edu>, Joseph Qi <joseph.qi@linux.alibaba.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, v9fs@lists.linux.dev,
- ntfs3@lists.linux.dev, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
- Steve French <sfrench@samba.org>,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Luis Chamberlain <mcgrof@kernel.org>, Jeffle Xu <jefflexu@linux.alibaba.com>,
- devel@lists.orangefs.org, Anna Schumaker <anna@kernel.org>,
- Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- Sungjong Seo <sj1557.seo@samsung.com>, linux-erofs@lists.ozlabs.org,
- linux-nfs@vger.kernel.org, linux-btrfs@vger.kernel.org
+From: Chunhai Guo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chunhai Guo <guochunhai@vivo.com>
+Cc: Chunhai Guo <guochunhai@vivo.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Tue, Aug 29, 2023 at 08:43:31PM -0400, Jeff Layton wrote:
-> On Wed, 2023-08-30 at 01:02 +0100, Al Viro wrote:
-> > On Tue, Aug 29, 2023 at 06:58:47PM -0400, Jeff Layton wrote:
-> > > On Tue, 2023-08-29 at 23:44 +0100, Al Viro wrote:
-> > > > On Tue, Jul 25, 2023 at 10:58:14AM -0400, Jeff Layton wrote:
-> > > > > generic_fillattr just fills in the entire stat struct indiscriminately
-> > > > > today, copying data from the inode. There is at least one attribute
-> > > > > (STATX_CHANGE_COOKIE) that can have side effects when it is reported,
-> > > > > and we're looking at adding more with the addition of multigrain
-> > > > > timestamps.
-> > > > > 
-> > > > > Add a request_mask argument to generic_fillattr and have most callers
-> > > > > just pass in the value that is passed to getattr. Have other callers
-> > > > > (e.g. ksmbd) just pass in STATX_BASIC_STATS. Also move the setting of
-> > > > > STATX_CHANGE_COOKIE into generic_fillattr.
-> > > > 
-> > > > Out of curiosity - how much PITA would it be to put request_mask into
-> > > > kstat?  Set it in vfs_getattr_nosec() (and those get_file_..._info()
-> > > > on smbd side) and don't bother with that kind of propagation boilerplate
-> > > > - just have generic_fillattr() pick it there...
-> > > > 
-> > > > Reduces the patchset size quite a bit...
-> > > 
-> > > It could be done. To do that right, I think we'd want to drop
-> > > request_mask from the ->getattr prototype as well and just have
-> > > everything use the mask in the kstat.
-> > > 
-> > > I don't think it'd reduce the size of the patchset in any meaningful
-> > > way, but it might make for a more sensible API over the long haul.
-> > 
-> > ->getattr() prototype change would be decoupled from that - for your
-> > patchset you'd only need the field addition + setting in vfs_getattr_nosec()
-> > (and possibly in ksmbd), with the remainders of both series being
-> > independent from each other.
-> > 
-> > What I suggest is
-> > 
-> > branchpoint -> field addition (trivial commit) -> argument removal
-> > 		|
-> > 		V
-> > your series, starting with "use stat->request_mask in generic_fillattr()"
-> > 
-> > Total size would be about the same, but it would be easier to follow
-> > the less trivial part of that.  Nothing in your branch downstream of
-> > that touches any ->getattr() instances, so it should have no
-> > conflicts with the argument removal side of things.
-> 
-> The only problem with this plan is that Linus has already merged this.
-> I've no issue with adding the request_mask to the kstat and removing it
-> as a separate parameter elsewhere, but I think we'll need to do it on
-> top of what's already been merged.
+The commit 344150999b7f ("f2fs: fix to avoid potential deadlock") only
+requires unplugging current->plug. Using blk_finish_plug() is unnecessary
+as it sets current->plug as NULL and prevents wb_writeback() from using
+plug in subsequent loops. Instead, use blk_flush_plug() as a replacement.
 
-D'oh...  My apologies; I'll do a branch on top of that (and rebase on
-top of -rc1 once the window closes).
+Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+---
+ fs/f2fs/data.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 5d9697717353..936a95464186 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -3343,8 +3343,7 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
+ 		atomic_inc(&sbi->wb_sync_req[DATA]);
+ 	else if (atomic_read(&sbi->wb_sync_req[DATA])) {
+ 		/* to avoid potential deadlock */
+-		if (current->plug)
+-			blk_finish_plug(current->plug);
++		blk_flush_plug(current->plug, false);
+ 		goto skip_write;
+ 	}
+ 
+-- 
+2.25.1
+
 
 
 _______________________________________________
