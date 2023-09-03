@@ -2,101 +2,122 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04A84790F09
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Sep 2023 00:39:00 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE782790EFC
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Sep 2023 00:31:30 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qcvk4-0007QA-01;
-	Sun, 03 Sep 2023 22:38:52 +0000
+	id 1qcvcd-0007BP-RS;
+	Sun, 03 Sep 2023 22:31:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3GQn1ZAkbAC4cijUKVVObKZZSN.QYYQVOecObMYXdOXd.MYW@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1qcvk2-0007Q3-PK for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 03 Sep 2023 22:38:50 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <david@fromorbit.com>) id 1qcvcc-0007BE-It
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 03 Sep 2023 22:31:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9uvjNZ30LBEHGWu5hFTDkWGufH/rb9S8Ay/l9GigndY=; b=GGYCireirVFAP2T2GzeqgnCsms
- 2QnMzWhZDPNIq1L79QZ4vZaq6NaK8qdAeTDW36W9ePgyOOAhm9II8zhKcZqdWL7aDt1B8fXVQ5M1d
- 2fULgB9BcCc/MvnS3xzNzhP1S+z69vN80OeeoTjYWkWfngBSbjfbCue8QpHjOO3uyXmw=;
+ bh=Nv6YpToDNZJcA/Ccz8YHJKQ8zE37n7OYKvDh05ivZ8M=; b=I9S8q88p1NrB0Q7XfAiqkZFHAo
+ HaG7cdPJjpJ9PYtd7BEfZhtAP3rJnTwSvIxDEdlf6NnSwcHKLSi9ffuOvM84Qbevmm9l+/8q2t+IT
+ VsEZ97MpBJf83tqO4seqgUnnyGNhtWdySRgdYha/JZRppanFh8eZRJr2ot3MvGSZCxAM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=9uvjNZ30LBEHGWu5hFTDkWGufH/rb9S8Ay/l9GigndY=; b=e
- jdvxv0p/K0BbFtJphiScuPKqILG28YNZY2tCQy2nA08FhsXmZSKo/G4NaelduxaLuRde0J84dpFGd
- DtUMIfpkfyFlduS0in5J1K++mc7HYbT2GmDhKeC0N8Kd8apEovTOHeMgmyUej74uJUFWZ7CoiAzg6
- J15yBAjmXrT1oiDo=;
-Received: from mail-pl1-f207.google.com ([209.85.214.207])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Nv6YpToDNZJcA/Ccz8YHJKQ8zE37n7OYKvDh05ivZ8M=; b=WAuxZrSchlZWu0B9n23Y8NtElS
+ fHH0MlPIfF+gPZNhBAJPvzdQ95Q6fvBohCIDRwgVY8mEn8x211GnwxBg0ZSuGeEqhnwbGkTvUW26X
+ JB7QZ4wA4KFjI+apO1Zsf9vSoDiPu6dVhkwqBtgyHKn9aoB4X3wn4GN3jqW+mjc1rH6k=;
+Received: from mail-oa1-f51.google.com ([209.85.160.51])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qcvjx-0001Tm-Eq for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 03 Sep 2023 22:38:50 +0000
-Received: by mail-pl1-f207.google.com with SMTP id
- d9443c01a7336-1bf56d92231so7778025ad.1
+ id 1qcvcS-0001Hn-PK for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 03 Sep 2023 22:31:09 +0000
+Received: by mail-oa1-f51.google.com with SMTP id
+ 586e51a60fabf-1c4cf775a14so781418fac.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 03 Sep 2023 15:38:45 -0700 (PDT)
+ Sun, 03 Sep 2023 15:31:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=fromorbit-com.20230601.gappssmtp.com; s=20230601; t=1693780255; x=1694385055;
+ darn=lists.sourceforge.net; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nv6YpToDNZJcA/Ccz8YHJKQ8zE37n7OYKvDh05ivZ8M=;
+ b=3FBboo7vMoI+7NQD5jDZZr/HvUccF6fZtJAsL93BpX2MHFIA8qSXjyup7atJmGiq8Z
+ +Uj6eLz+mf3c9CfxDFvZHJf9pmC+GCBxvXFoljHEsHCIq03PAG02dZymvGOsrxQKQUVK
+ SSDw2EziU9julWp39ZT1uvWOEdDKthOj9PJywlm97ja3X7ysntK2nEYHys0oiPhcHj7i
+ 95c+W+eV+DE4p5816KcowTspiyBSpn/M66P1kbxueS1m7aZd9lmZYHNEMM8UeKKFNHOA
+ 5n90QOl1UXg2OSN6GZJzfC08oo1z5y/UjwoTBEJ9ppGSfDXLJqYtaSQKPDmZZq12tQOn
+ d6wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693780720; x=1694385520;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=9uvjNZ30LBEHGWu5hFTDkWGufH/rb9S8Ay/l9GigndY=;
- b=D5sYe/5tbs3q1xoesKLzk0q9ZZbbiHfa36ueyvqtNUeW6ktxiqGHUalu3PAoKCdCwb
- cPXav9HqTUWv6u7g8bFmzqepEcPAqDs8SmPVzU7zJB3ftM2whc2CsQLey3mC3ugfCFlr
- R4HjbC4usNvPIU6hY/MvFRlhtPKFaXLUSRo8xTqg01oqO5AhMi7kNhewqrtfVIN9A0lP
- wti+n/GdllB4Bzv46LKmRO+Q4aNA/Yq2RcaEArVN/BAwPQLbfDcIGX2gO4U+G/IJOgkc
- GufGARVxH7nGWlPke7ol/1+opcCwEl5hh/pXnVKRLMZu28jgT78HQrajLJq08jGdnlgC
- rLrw==
-X-Gm-Message-State: AOJu0YwDvYx0Fb4upuypxIyTkXkEss26s6sDQtioFF+IrwOKmD8Cme74
- m1MQsjREMuAr3Ft3QggTyq4gjZ62h6sishsAGvmscHawNmZK
-X-Google-Smtp-Source: AGHT+IEXT2qrOqWzU6OZ8OLjQpbiKOTHuAbsdErDcr6GxN7nF7gabr/2juLru+7RCP9ARrdnz9DEVUrHMi9NILSo63+dEF/0gfHe
+ d=1e100.net; s=20221208; t=1693780255; x=1694385055;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Nv6YpToDNZJcA/Ccz8YHJKQ8zE37n7OYKvDh05ivZ8M=;
+ b=bge/XaNHETcI7J9vtA1bA/MbPA8DnHgezuZRK+TZsGbQfTNk6kN20k2EZOo37zwJkc
+ /aahzhirqbcqVLkCfcPVZ6j8X+3Jg6nCTfHeqNX91rz25toLoriZbhAv1UFS+q50Yp14
+ 1yRC/+mshJC4jJ/t/35TVzfjYgg6QIx4eA84Gw4q4Vtid3OLDdbzsV5NSBoinyt+a1On
+ mYxxa1MZ4U/w3kMvmjD9m9q7KltxAz1gj5uHYLytv+reJIEwbt3xabbg8h2AsNTNS9SU
+ bM9ZSdK/z+NXr1u1QPeWitkhCN6evMNZSVPD0femZfvGZ8MoqQshPyi77aQkH5hANdrV
+ i8Qw==
+X-Gm-Message-State: AOJu0YxezD1sVhzxic9DmvlB0EwhledhTvBoRi3Syvcp84NEBfahSfSr
+ L1WGhD6thdZNUfCZK+WNk/Ok8A==
+X-Google-Smtp-Source: AGHT+IGLu9Ypqvz2HQH6Ke2apJHDtGTD5ZHmV6+9u1MT+8XuCmbNG2jkA6AQg79Zc5mY+kWQOWShIA==
+X-Received: by 2002:a05:6870:568d:b0:1be:c8e2:3ec3 with SMTP id
+ p13-20020a056870568d00b001bec8e23ec3mr11536784oao.14.1693780255066; 
+ Sun, 03 Sep 2023 15:30:55 -0700 (PDT)
+Received: from dread.disaster.area (pa49-195-66-88.pa.nsw.optusnet.com.au.
+ [49.195.66.88]) by smtp.gmail.com with ESMTPSA id
+ i15-20020a63bf4f000000b00565e96d9874sm5648132pgo.89.2023.09.03.15.30.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 03 Sep 2023 15:30:54 -0700 (PDT)
+Received: from dave by dread.disaster.area with local (Exim 4.96)
+ (envelope-from <david@fromorbit.com>) id 1qcvcK-00ASFy-0F;
+ Mon, 04 Sep 2023 08:30:52 +1000
+Date: Mon, 4 Sep 2023 08:30:52 +1000
+To: Hao Xu <hao.xu@linux.dev>
+Message-ID: <ZPUJHAKzxvXiEDYA@dread.disaster.area>
+References: <20230827132835.1373581-1-hao.xu@linux.dev>
+ <20230827132835.1373581-8-hao.xu@linux.dev>
+ <ZOvA5DJDZN0FRymp@casper.infradead.org>
+ <c728bf3f-d9db-4865-8473-058b26c11c06@linux.dev>
+ <ZO3cI+DkotHQo3md@casper.infradead.org>
+ <642de4e6-801d-fcad-a7ce-bfc6dec3b6e5@linux.dev>
 MIME-Version: 1.0
-X-Received: by 2002:a63:3dc9:0:b0:564:1f95:71f1 with SMTP id
- k192-20020a633dc9000000b005641f9571f1mr1995310pga.3.1693780249419; Sun, 03
- Sep 2023 15:30:49 -0700 (PDT)
-Date: Sun, 03 Sep 2023 15:30:49 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <0000000000001825ce06047bf2a6@google.com>
-From: syzbot <syzbot+062317ea1d0a6d5e29e7@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com, 
- terrelln@fb.com
-X-Spam-Score: 3.1 (+++)
+Content-Disposition: inline
+In-Reply-To: <642de4e6-801d-fcad-a7ce-bfc6dec3b6e5@linux.dev>
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 6c1b980a7e79
- Merge tag 'dma-mapping-6.6-2023-08-29' of git.. git tree: upstream console
- output: https://syzkaller.appspot.com/x/log.txt?x=13a9669fa80000 kernel
- config: https://syzkaller.a [...] 
- Content analysis details:   (3.1 points, 6.0 required)
+ Content preview:  On Wed, Aug 30, 2023 at 02:11:31PM +0800, Hao Xu wrote: >
+ On 8/29/23 19:53, Matthew Wilcox wrote: > > On Tue, Aug 29, 2023 at 03:46:13PM
+ +0800, Hao Xu wrote: > > > On 8/28/23 05:32, Matthew Wilcox wro [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.207 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.214.207 listed in wl.mailspike.net]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
+ no trust [209.85.160.51 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-X-Headers-End: 1qcvjx-0001Tm-Eq
-Subject: [f2fs-dev] [syzbot] [f2fs?] possible deadlock in super_lock
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.160.51 listed in wl.mailspike.net]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1qcvcS-0001Hn-PK
+Subject: Re: [f2fs-dev] [PATCH 07/11] vfs: add nowait parameter for
+ file_accessed()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,197 +129,76 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Dave Chinner via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Dave Chinner <david@fromorbit.com>
+Cc: Wanpeng Li <wanpengli@tencent.com>, "Darrick J . Wong" <djwong@kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>, linux-kernel@vger.kernel.org,
+ linux-mm@kvack.org, Stefan Roesch <shr@fb.com>, Clay Harris <bugs@claycon.org>,
+ linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ Matthew Wilcox <willy@infradead.org>, codalist@coda.cs.cmu.edu,
+ cluster-devel@redhat.com, linux-cachefs@redhat.com, linux-ext4@vger.kernel.org,
+ devel@lists.orangefs.org, linux-cifs@vger.kernel.org, ecryptfs@vger.kernel.org,
+ linux-nfs@vger.kernel.org, linux-block@vger.kernel.org,
+ Alexander Viro <viro@zeniv.linux.org.uk>, io-uring@vger.kernel.org,
+ Jens Axboe <axboe@kernel.dk>, Christian Brauner <brauner@kernel.org>,
+ netdev@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-unionfs@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-mtd@lists.infradead.org, bpf@vger.kernel.org,
+ Pavel Begunkov <asml.silence@gmail.com>, linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+On Wed, Aug 30, 2023 at 02:11:31PM +0800, Hao Xu wrote:
+> On 8/29/23 19:53, Matthew Wilcox wrote:
+> > On Tue, Aug 29, 2023 at 03:46:13PM +0800, Hao Xu wrote:
+> > > On 8/28/23 05:32, Matthew Wilcox wrote:
+> > > > On Sun, Aug 27, 2023 at 09:28:31PM +0800, Hao Xu wrote:
+> > > > > From: Hao Xu <howeyxu@tencent.com>
+> > > > > 
+> > > > > Add a boolean parameter for file_accessed() to support nowait semantics.
+> > > > > Currently it is true only with io_uring as its initial caller.
+> > > > 
+> > > > So why do we need to do this as part of this series?  Apparently it
+> > > > hasn't caused any problems for filemap_read().
+> > > > 
+> > > 
+> > > We need this parameter to indicate if nowait semantics should be enforced in
+> > > touch_atime(), There are locks and maybe IOs in it.
+> > 
+> > That's not my point.  We currently call file_accessed() and
+> > touch_atime() for nowait reads and nowait writes.  You haven't done
+> > anything to fix those.
+> > 
+> > I suspect you can trim this patchset down significantly by avoiding
+> > fixing the file_accessed() problem.  And then come back with a later
+> > patchset that fixes it for all nowait i/o.  Or do a separate prep series
+> 
+> I'm ok to do that.
+> 
+> > first that fixes it for the existing nowait users, and then a second
+> > series to do all the directory stuff.
+> > 
+> > I'd do the first thing.  Just ignore the problem.  Directory atime
+> > updates cause I/O so rarely that you can afford to ignore it.  Almost
+> > everyone uses relatime or nodiratime.
+> 
+> Hi Matthew,
+> The previous discussion shows this does cause issues in real
+> producations: https://lore.kernel.org/io-uring/2785f009-2ebb-028d-8250-d5f3a30510f0@gmail.com/#:~:text=fwiw%2C%20we%27ve%20just%20recently%20had%20similar%20problems%20with%20io_uring%20read/write
+> 
 
-syzbot found the following issue on:
+Then separate it out into it's own patch set so we can have a
+discussion on the merits of requiring using noatime, relatime or
+lazytime for really latency sensitive IO applications. Changing code
+is not always the right solution...
 
-HEAD commit:    6c1b980a7e79 Merge tag 'dma-mapping-6.6-2023-08-29' of git..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=13a9669fa80000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=2212484c18930a61
-dashboard link: https://syzkaller.appspot.com/bug?extid=062317ea1d0a6d5e29e7
-compiler:       gcc (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40
-
-Unfortunately, I don't have any reproducer for this issue yet.
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/6e2281f5cb6b/disk-6c1b980a.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/5fc2481dcded/vmlinux-6c1b980a.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/283bb76567da/bzImage-6c1b980a.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+062317ea1d0a6d5e29e7@syzkaller.appspotmail.com
-
-======================================================
-WARNING: possible circular locking dependency detected
-6.5.0-syzkaller-04808-g6c1b980a7e79 #0 Not tainted
-------------------------------------------------------
-syz-executor.4/22893 is trying to acquire lock:
-ffff888039b740e0 (&type->s_umount_key#25){++++}-{3:3}, at: __super_lock fs/super.c:58 [inline]
-ffff888039b740e0 (&type->s_umount_key#25){++++}-{3:3}, at: super_lock+0x23c/0x380 fs/super.c:117
-
-but task is already holding lock:
-ffff88801e60ba88 (&bdev->bd_holder_lock){+.+.}-{3:3}, at: blkdev_flushbuf block/ioctl.c:368 [inline]
-ffff88801e60ba88 (&bdev->bd_holder_lock){+.+.}-{3:3}, at: blkdev_common_ioctl+0x14e9/0x1ce0 block/ioctl.c:500
-
-which lock already depends on the new lock.
-
-
-the existing dependency chain (in reverse order) is:
-
--> #2 (&bdev->bd_holder_lock){+.+.}-{3:3}:
-       __mutex_lock_common kernel/locking/mutex.c:603 [inline]
-       __mutex_lock+0x181/0x1340 kernel/locking/mutex.c:747
-       bdev_mark_dead+0x25/0x230 block/bdev.c:961
-       disk_force_media_change+0x51/0x80 block/disk-events.c:303
-       __loop_clr_fd+0x3ab/0x8f0 drivers/block/loop.c:1174
-       lo_release+0x188/0x1c0 drivers/block/loop.c:1743
-       blkdev_put_whole+0xa5/0xe0 block/bdev.c:663
-       blkdev_put+0x40f/0x8e0 block/bdev.c:898
-       kill_block_super+0x58/0x70 fs/super.c:1623
-       kill_f2fs_super+0x2b7/0x3d0 fs/f2fs/super.c:4879
-       deactivate_locked_super+0x9a/0x170 fs/super.c:481
-       deactivate_super+0xde/0x100 fs/super.c:514
-       cleanup_mnt+0x222/0x3d0 fs/namespace.c:1254
-       task_work_run+0x14d/0x240 kernel/task_work.c:179
-       resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
-       exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
-       exit_to_user_mode_prepare+0x210/0x240 kernel/entry/common.c:204
-       __syscall_exit_to_user_mode_work kernel/entry/common.c:285 [inline]
-       syscall_exit_to_user_mode+0x1d/0x60 kernel/entry/common.c:296
-       do_syscall_64+0x44/0xb0 arch/x86/entry/common.c:86
-       entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
--> #1 (&disk->open_mutex){+.+.}-{3:3}:
-       __mutex_lock_common kernel/locking/mutex.c:603 [inline]
-       __mutex_lock+0x181/0x1340 kernel/locking/mutex.c:747
-       blkdev_get_by_dev.part.0+0x4f0/0xb20 block/bdev.c:786
-       blkdev_get_by_dev+0x75/0x80 block/bdev.c:829
-       journal_init_dev fs/reiserfs/journal.c:2626 [inline]
-       journal_init+0xbb8/0x64b0 fs/reiserfs/journal.c:2786
-       reiserfs_fill_super+0xcc6/0x3150 fs/reiserfs/super.c:2022
-       mount_bdev+0x1f3/0x2e0 fs/super.c:1603
-       legacy_get_tree+0x109/0x220 fs/fs_context.c:638
-       vfs_get_tree+0x8c/0x370 fs/super.c:1724
-       do_new_mount fs/namespace.c:3335 [inline]
-       path_mount+0x1492/0x1ed0 fs/namespace.c:3662
-       do_mount fs/namespace.c:3675 [inline]
-       __do_sys_mount fs/namespace.c:3884 [inline]
-       __se_sys_mount fs/namespace.c:3861 [inline]
-       __x64_sys_mount+0x293/0x310 fs/namespace.c:3861
-       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
-       do_syscall_64+0x38/0xb0 arch/x86/entry/common.c:80
-       entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
--> #0 (&type->s_umount_key#25){++++}-{3:3}:
-       check_prev_add kernel/locking/lockdep.c:3134 [inline]
-       check_prevs_add kernel/locking/lockdep.c:3253 [inline]
-       validate_chain kernel/locking/lockdep.c:3868 [inline]
-       __lock_acquire+0x2e3d/0x5de0 kernel/locking/lockdep.c:5136
-       lock_acquire kernel/locking/lockdep.c:5753 [inline]
-       lock_acquire+0x1ae/0x510 kernel/locking/lockdep.c:5718
-       down_read+0x9c/0x470 kernel/locking/rwsem.c:1520
-       __super_lock fs/super.c:58 [inline]
-       super_lock+0x23c/0x380 fs/super.c:117
-       super_lock_shared fs/super.c:146 [inline]
-       super_lock_shared_active fs/super.c:1387 [inline]
-       fs_bdev_sync+0x94/0x1b0 fs/super.c:1422
-       blkdev_flushbuf block/ioctl.c:370 [inline]
-       blkdev_common_ioctl+0x1550/0x1ce0 block/ioctl.c:500
-       blkdev_ioctl+0x249/0x770 block/ioctl.c:622
-       vfs_ioctl fs/ioctl.c:51 [inline]
-       __do_sys_ioctl fs/ioctl.c:871 [inline]
-       __se_sys_ioctl fs/ioctl.c:857 [inline]
-       __x64_sys_ioctl+0x18f/0x210 fs/ioctl.c:857
-       do_syscall_x64 arch/x86/entry/common.c:50 [inline]
-       do_syscall_64+0x38/0xb0 arch/x86/entry/common.c:80
-       entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
-other info that might help us debug this:
-
-Chain exists of:
-  &type->s_umount_key#25 --> &disk->open_mutex --> &bdev->bd_holder_lock
-
- Possible unsafe locking scenario:
-
-       CPU0                    CPU1
-       ----                    ----
-  lock(&bdev->bd_holder_lock);
-                               lock(&disk->open_mutex);
-                               lock(&bdev->bd_holder_lock);
-  rlock(&type->s_umount_key#25);
-
- *** DEADLOCK ***
-
-1 lock held by syz-executor.4/22893:
- #0: ffff88801e60ba88 (&bdev->bd_holder_lock){+.+.}-{3:3}, at: blkdev_flushbuf block/ioctl.c:368 [inline]
- #0: ffff88801e60ba88 (&bdev->bd_holder_lock){+.+.}-{3:3}, at: blkdev_common_ioctl+0x14e9/0x1ce0 block/ioctl.c:500
-
-stack backtrace:
-CPU: 1 PID: 22893 Comm: syz-executor.4 Not tainted 6.5.0-syzkaller-04808-g6c1b980a7e79 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/26/2023
-Call Trace:
- <TASK>
- __dump_stack lib/dump_stack.c:88 [inline]
- dump_stack_lvl+0xd9/0x1b0 lib/dump_stack.c:106
- check_noncircular+0x311/0x3f0 kernel/locking/lockdep.c:2187
- check_prev_add kernel/locking/lockdep.c:3134 [inline]
- check_prevs_add kernel/locking/lockdep.c:3253 [inline]
- validate_chain kernel/locking/lockdep.c:3868 [inline]
- __lock_acquire+0x2e3d/0x5de0 kernel/locking/lockdep.c:5136
- lock_acquire kernel/locking/lockdep.c:5753 [inline]
- lock_acquire+0x1ae/0x510 kernel/locking/lockdep.c:5718
- down_read+0x9c/0x470 kernel/locking/rwsem.c:1520
- __super_lock fs/super.c:58 [inline]
- super_lock+0x23c/0x380 fs/super.c:117
- super_lock_shared fs/super.c:146 [inline]
- super_lock_shared_active fs/super.c:1387 [inline]
- fs_bdev_sync+0x94/0x1b0 fs/super.c:1422
- blkdev_flushbuf block/ioctl.c:370 [inline]
- blkdev_common_ioctl+0x1550/0x1ce0 block/ioctl.c:500
- blkdev_ioctl+0x249/0x770 block/ioctl.c:622
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:871 [inline]
- __se_sys_ioctl fs/ioctl.c:857 [inline]
- __x64_sys_ioctl+0x18f/0x210 fs/ioctl.c:857
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x38/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7f6f9f67cae9
-Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 e1 20 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007f6fa03670c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
-RAX: ffffffffffffffda RBX: 00007f6f9f79bf80 RCX: 00007f6f9f67cae9
-RDX: ffffffffffffffff RSI: 0000000000001261 RDI: 0000000000000003
-RBP: 00007f6f9f6c847a R08: 0000000000000000 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
-R13: 000000000000000b R14: 00007f6f9f79bf80 R15: 00007ffc6e219ec8
- </TASK>
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
-If the bug is already fixed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want to overwrite bug's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the bug is a duplicate of another bug, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
+-Dave.
+-- 
+Dave Chinner
+david@fromorbit.com
 
 
 _______________________________________________
