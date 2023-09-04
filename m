@@ -2,87 +2,92 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E07F791BB5
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Sep 2023 18:40:54 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E35CE791C74
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Sep 2023 20:11:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qdCd3-0004LX-4m;
-	Mon, 04 Sep 2023 16:40:46 +0000
+	id 1qdE2l-0007qO-P1;
+	Mon, 04 Sep 2023 18:11:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1qdCd1-0004LR-KV
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1qdE2i-0007q5-Uv
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Sep 2023 16:40:44 +0000
+ Mon, 04 Sep 2023 18:11:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rLmavJmKst8MwlRCpvYzryPGqmmeFR2AewgneG0z5Bs=; b=WWe/9AUXseyOHr3c6kfpyyd1yr
- icWkQRp01J5Io/YrdQyRcUuZcTIDWIor2whcyqhtEN0ty0+R6zEer4ga7seWIlHLhgh3+ZO+TYYc7
- FW3Xh2fGALSiBcjW4PWoTo6DeaNpMivnbYz1oeIkG+DQL4V6OLuRdoQtCo+1YOXU+XFM=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=l6ySz8Xdl/lofCA0CUuBs5db3qwNK8caYs/39D/l/gY=; b=VQQEyWedZV1VwQhk9aZBLgBxMU
+ wUoPIIBjMXkSQhkuIsd+dd3hN7jqeax4QrEkaxaJuXeRcOM084F8Xajd8IvGnV5a6TPw56yDDcOe9
+ ZJDUrL8D2vYTlg9srMoKkQlun4ml9IKnJsN5PHWEc8wysIQyDCqQe67NRH8Pl5p1R63s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=rLmavJmKst8MwlRCpvYzryPGqmmeFR2AewgneG0z5Bs=; b=FrNYb0fB/wjbfacI6kHic8r2Ip
- 9cFxHFj186gCtUCvqZ3I7sHQ2pG0TXaOKC5wupUVo2J1E6gXoi7+jzn7vWpXI7DJ/uxtDOn8Ftejr
- +EgdePGkjY6lBXxxBy8Qw+K867Qku77dyopy+4p1bC/JApMaO7GhoSweU6oO7kRalumM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=l6ySz8Xdl/lofCA0CUuBs5db3qwNK8caYs/39D/l/gY=; b=h
+ tXMLV7i4CCxXJtHhtZ/VIr4QqdMJrEkwT0psnivlk/yBL4W82jWahHmWAwjmErgK7Xj2srbjURHMz
+ Dlt9Iw6U8I2e0J0OieFCuCDw02hhgs9deizMS776Po2WoS3ZJ3bcTH5LApkldTeb4pGPf3uvZbK5V
+ UcEQjB3UOf8C6FPs=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qdCcy-0003rj-E2 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Sep 2023 16:40:44 +0000
+ id 1qdE2i-009VKp-BG for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 04 Sep 2023 18:11:21 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 40D1260EDE;
- Mon,  4 Sep 2023 16:40:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 857D6C433C8;
- Mon,  4 Sep 2023 16:40:32 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTPS id 7AC2CCE0F94
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  4 Sep 2023 18:11:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B9A1EC433C7
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  4 Sep 2023 18:11:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1693845632;
- bh=3xgIBlBK1m7Zp9mLlRF22BaIUy8HKmcr8AoobM9e/dM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=KBMDbz4uHiM3Eij5T6Y3avqcmevmnQMOGFB8RuIvWI4tmD5wqCudMFYvhxbFhMyMc
- gwXM6ex64ixHUfiD3ns6AzKvqj3UjflxLCRjY0eOU63EaqFWayJgOdw8FKXTho7lGK
- sOgP0+AxDFIjfteO0jnfHAfwVKwYne7Ma3Ba+8GyKZlfLGzvI5Qi6zOflfFw3N87Ko
- AgSKU+I5YJMqaEllCxbklIe/9qksg+EuuT2t8XMBptlpAkgOrhsSYc0JEwPahBp7ZH
- OZBWUjN3vAoFshEVo09g3oDm4plAXgbfJWQYosczYPmxwSdn5KxNxMG2RZvz2/GNxP
- dQO8MEPbKikyA==
-Date: Mon, 4 Sep 2023 09:40:30 -0700
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZPYIfvwCd/UpMS8S@google.com>
-References: <20230831071011.56116-1-guochunhai@vivo.com>
- <0749d51f-bbc3-dfcb-93e3-c6c34614f403@kernel.org>
+ s=k20201202; t=1693851068;
+ bh=GED/wRfWdIURO4Ujkrb/S7pFUcCgkSWFjwOUOxFnUoI=;
+ h=Subject:From:Date:To:From;
+ b=M8ceyUvnyu6pjkNBhBwqWob5+oGqWnmp7wDPZ6H+Sbwr9bbovAvalYNvHM+R+t0BM
+ Cg1cfEo31AqrzMBeanvoLyWDOC9aI0xbohYuP8tj5xQs6GiUZASafCHy9Dyi/iKLDW
+ Aqd8AdiIiL+ynEt27gSe08ibxNUvdC2tJaaINX7YRKYYkgf7pW+NP+vjONmKAznUef
+ UbSLN3xJEJ6fSQt7xQtWqSqHls6m/EdzGdNS9AHPUnJiiIY9Bgb92rahy9yPPvjy9t
+ ajrGPH4Yiijmi8ZShb6pWy62NOQgJYjYiVds3HLdQQQpsE/U8waaX1xeeGoCpP+VCT
+ 9MZ9wAD77lUEw==
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ 9838EC04DD9 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon,  4 Sep 2023 18:11:08 +0000 (UTC)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <0749d51f-bbc3-dfcb-93e3-c6c34614f403@kernel.org>
-X-Spam-Score: -5.2 (-----)
+From: patchwork-bot+f2fs@kernel.org
+Message-Id: <169385106853.19669.2971263993020474852.git-patchwork-summary@kernel.org>
+Date: Mon, 04 Sep 2023 18:11:08 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 09/04, Chao Yu wrote: > On 2023/8/31 15:10, Chunhai Guo
- wrote: > > The commit 344150999b7f ("f2fs: fix to avoid potential deadlock")
- only > > requires unplugging current->plug. Using blk_finish_plu [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Series: fs: implement multigrain
+ timestamps Submitter: Jeff Layton <jlayton@kernel.org> Committer: Christian
+ Brauner <brauner@kernel.org> Patchwork:
+ https://patchwork.kernel.org/project/f2fs/list/?ser [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -91,9 +96,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qdCcy-0003rj-E2
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: replace blk_finish_plug() with
- blk_flush_plug()
+X-Headers-End: 1qdE2i-009VKp-BG
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,69 +109,95 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Chunhai Guo <guochunhai@vivo.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 09/04, Chao Yu wrote:
-> On 2023/8/31 15:10, Chunhai Guo wrote:
-> > The commit 344150999b7f ("f2fs: fix to avoid potential deadlock") only
-> > requires unplugging current->plug. Using blk_finish_plug() is unnecessary
-> > as it sets current->plug as NULL and prevents wb_writeback() from using
-> > plug in subsequent loops. Instead, use blk_flush_plug() as a replacement.
-> > 
-> > Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
-> > ---
-> >   fs/f2fs/data.c | 3 +--
-> >   fs/f2fs/node.c | 3 +--
-> >   2 files changed, 2 insertions(+), 4 deletions(-)
-> > 
-> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> > index 916e317ac925..77b4a55d6d94 100644
-> > --- a/fs/f2fs/data.c
-> > +++ b/fs/f2fs/data.c
-> > @@ -3346,8 +3346,7 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
-> >   		atomic_inc(&sbi->wb_sync_req[DATA]);
-> >   	else if (atomic_read(&sbi->wb_sync_req[DATA])) {
-> >   		/* to avoid potential deadlock */
-> > -		if (current->plug)
-> > -			blk_finish_plug(current->plug);
-> 
-> What about?
-> 
-> if (current->plug) {
-> 	struct blk_plug *plug = current->plug;
-> 
-> 	blk_finish_plug(plug);
-> 	blk_start_plug(plug);
-> }
-> 
-> Jaegeuk, thoughts?
+Hello:
 
-By the way, do we really need to reuse current->plug again? After checkpoint
-being done, we can use the plug in __f2fs_write_data_pages. Are there some
-numbers to show the benefit?
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-> 
-> Thanks,
-> 
-> > +		blk_flush_plug(current->plug, false);
-> >   		goto skip_write;
-> >   	}
-> > diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> > index ee2e1dd64f25..c4b5717a8c1a 100644
-> > --- a/fs/f2fs/node.c
-> > +++ b/fs/f2fs/node.c
-> > @@ -2126,8 +2126,7 @@ static int f2fs_write_node_pages(struct address_space *mapping,
-> >   		atomic_inc(&sbi->wb_sync_req[NODE]);
-> >   	else if (atomic_read(&sbi->wb_sync_req[NODE])) {
-> >   		/* to avoid potential deadlock */
-> > -		if (current->plug)
-> > -			blk_finish_plug(current->plug);
-> > +		blk_flush_plug(current->plug, false);
-> >   		goto skip_write;
-> >   	}
+Series: fs: implement multigrain timestamps
+  Submitter: Jeff Layton <jlayton@kernel.org>
+  Committer: Christian Brauner <brauner@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=773825
+  Lore link: https://lore.kernel.org/r/20230807-mgctime-v7-0-d1dec143a704@kernel.org
+    Patches: [f2fs-dev,v7,01/13] fs: remove silly warning from current_time
+             [f2fs-dev,v7,02/13] fs: pass the request_mask to generic_fillattr
+             [f2fs-dev,v7,03/13] fs: drop the timespec64 arg from generic_update_time
+             [f2fs-dev,v7,04/13] btrfs: have it use inode_update_timestamps
+             [f2fs-dev,v7,09/13] fs: add infrastructure for multigrain timestamps
+             [f2fs-dev,v7,10/13] tmpfs: add support for multigrain timestamps
+             [f2fs-dev,v7,12/13] ext4: switch to multigrain timestamps
+             [f2fs-dev,v7,13/13] btrfs: convert to multigrain timestamps
+
+Series: [f2fs-dev,01/17] fs: unexport buffer_check_dirty_writeback
+  Submitter: Christoph Hellwig <hch@lst.de>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=742589
+  Lore link: https://lore.kernel.org/r/20230424054926.26927-2-hch@lst.de
+    Patches: [f2fs-dev,01/17] fs: unexport buffer_check_dirty_writeback
+             [f2fs-dev,04/17] fs: remove emergency_thaw_bdev
+
+Series: fs: new accessors for inode->i_ctime
+  Submitter: Jeff Layton <jlayton@kernel.org>
+  Committer: Christian Brauner <brauner@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=762813
+  Lore link: https://lore.kernel.org/r/20230705185812.579118-1-jlayton@kernel.org
+    Patches: [f2fs-dev,v2,07/92] fs: add ctime accessors infrastructure
+             [f2fs-dev,v2,08/92] fs: new helper: simple_rename_timestamp
+             [f2fs-dev,v2,92/92] fs: rename i_ctime field to __i_ctime
+
+Series: Simplify rejection of unexpected casefold inode flag
+  Submitter: Eric Biggers <ebiggers@kernel.org>
+  Committer: Theodore Ts'o <tytso@mit.edu>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=776070
+  Lore link: https://lore.kernel.org/r/20230814182903.37267-1-ebiggers@kernel.org
+    Patches: [f2fs-dev,1/3] ext4: reject casefold inode flag without casefold feature
+             [f2fs-dev,2/3] ext4: remove redundant checks of s_encoding
+             [f2fs-dev,3/3] libfs: remove redundant checks of s_encoding
+
+Series: [f2fs-dev,01/12] fs: export setup_bdev_super
+  Submitter: Christoph Hellwig <hch@lst.de>
+  Committer: Christian Brauner <brauner@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=772239
+  Lore link: https://lore.kernel.org/r/20230802154131.2221419-2-hch@lst.de
+    Patches: [f2fs-dev,01/12] fs: export setup_bdev_super
+             [f2fs-dev,02/12] nilfs2: use setup_bdev_super to de-duplicate the mount code
+             [f2fs-dev,05/12] ext4: make the IS_EXT2_SB/IS_EXT3_SB checks more robust
+             [f2fs-dev,07/12] fs: stop using get_super in fs_mark_dead
+             [f2fs-dev,08/12] fs: export fs_holder_ops
+             [f2fs-dev,09/12] ext4: drop s_umount over opening the log device
+             [f2fs-dev,10/12] ext4: use fs_holder_ops for the log device
+
+Series: fsverity: simplify initcall and move sysctl registration
+  Submitter: Eric Biggers <ebiggers@kernel.org>
+  Committer: Eric Biggers <ebiggers@google.com>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=762871
+  Lore link: https://lore.kernel.org/r/20230705212743.42180-1-ebiggers@kernel.org
+    Patches: [f2fs-dev,1/2] fsverity: simplify handling of errors during initcall
+             [f2fs-dev,2/2] fsverity: move sysctl registration out of signature.c
+
+Patch: None
+  Submitter: Jeff Layton <jlayton@kernel.org>
+  Committer: Christian Brauner <brauner@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=762831
+  Lore link: https://lore.kernel.org/r/20230705190309.579783-41-jlayton@kernel.org
+
+Patch: [f2fs-dev,GIT,PULL] f2fs update for 6.6
+  Submitter: Jaegeuk Kim <jaegeuk@kernel.org>
+  Committer: Linus Torvalds <torvalds@linux-foundation.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=781273
+  Lore link: https://lore.kernel.org/r/ZPJ7P1J+jbyL6Mve@google.com
+
+
+Total patches: 27
+
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
 
 _______________________________________________
