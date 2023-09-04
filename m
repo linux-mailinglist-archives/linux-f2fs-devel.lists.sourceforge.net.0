@@ -2,100 +2,100 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06CAF791C76
+	by mail.lfdr.de (Postfix) with ESMTPS id 18D3C791C79
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Sep 2023 20:11:26 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qdE2m-00076y-08;
-	Mon, 04 Sep 2023 18:11:22 +0000
+	id 1qdE2g-0003GB-Rj;
+	Mon, 04 Sep 2023 18:11:18 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1qdE2k-00076n-CX
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1qdE2f-0003G5-Kk
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Sep 2023 18:11:21 +0000
+ Mon, 04 Sep 2023 18:11:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cAu4OpOoEvlXClCd1Z3ZHpfJMYuJmznhf5SPht9uwpo=; b=Zebw+uOsmuT5O9DheFDZM6olNi
- PzRp3L6Vz4BREuJ5J5PG0Jl4rymN4y0ca/tOHxl4SekiSJBmwN4kQX2u3fgMG/mEe3BRfYSovM/H5
- JBuTNK180VFlMRQJ8aKGHWXAblAhaOYoLyE2sfEjvdkGwASmR+1T2fQ9N8/EsgSMWQ1A=;
+ bh=kmfv1pf+LlrUXECFl22Y7F74qpbdpRAeBbonW5mPEPM=; b=M275QWXTgMymQ3W3wcjbT/TmPY
+ Bz+ro7mecoQFWPya8Co0Vm4IaC+aT1adqH53F6aI3TRvicqJ9ot4eO5+NhOV/u/pAg+Zxfko0ipbn
+ EYeY3KgPAMGd3HEvNtRzrlrx/T8+bMzflX6QVNpu+82PPiJH1t+e9yp2ah2DFK6zoleY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cAu4OpOoEvlXClCd1Z3ZHpfJMYuJmznhf5SPht9uwpo=; b=KSmPJwdoBtQ/tj/ZsOx1ThAS9k
- 2bQOYHV9logYpwWzmRZf2LTC6HebRFgeEaLz2A7NZTuUM34laAfvvMUc0F2HKEV7g44rQy7MLQqOg
- j1iiqldxQCKK07wY+he/eFCgq13SQDXkJNsVEDs7ILlgSvBRovUFBz8Gc5E7cAUWIikI=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=kmfv1pf+LlrUXECFl22Y7F74qpbdpRAeBbonW5mPEPM=; b=hnp7zYlq/YYFhX5UccKiIvjojn
+ /qroD6NlzNqxTSxKx5nkQ9a1DnQi/NYRh8ZaAlIWeizx0+qTrRtQU/tLG04VVCe/+rNrUT0fCyLja
+ 29U5AIy4HsRhVP4KBWAboXSwkYBXmRCmTvtEQK2l3LUCtrMUh6StxPy+79UG5em+Nu/M=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qdE2i-009VKw-BI for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Sep 2023 18:11:21 +0000
+ id 1qdE2e-009VKo-J7 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 04 Sep 2023 18:11:17 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 9BE26CE0F96;
+ by ams.source.kernel.org (Postfix) with ESMTPS id 2F706B80EF2;
  Mon,  4 Sep 2023 18:11:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CC393C433CA;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D11E1C433C9;
  Mon,  4 Sep 2023 18:11:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1693851068;
- bh=KWuluqFF5yFV+lOCkFnoct0phRXw96Jca/CuZaTU2kY=;
+ bh=r/KSGQSC2NTgHdn0OJxxPyQs5JUPuWZgLFSrloxRrHA=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=K3gkbkhJRwgpsacHeBsq0A7kucjUSGo8OzMP1ouPw/XPyf9sD5QK/Sf142+usc7ZE
- C827H7oMTO9xQURopm4EWqGoFioLBjSEY4gmbRDnvHI4L+ywXrxJRVy5ldQmRaAtfj
- 1pffFi8IArgTV4dPuYUPdlhMXVuT7Hb/6kEuD4lj+4NJdrul8tjUb9OXjEUjpGn+jT
- 2ndFdt5oPLx5wHtLQ20DiaB9Xl09djxp9OA/4zW9QgSOHR3JDKxABg9kMIgFr5Ox62
- wqlEdaiOf1aM8ubxkjKV3yvjnRyA83mc2npN6NfYoiPdtaZLbxGvWm4TgDkfWkglX8
- L2qkw/qB1Voxg==
+ b=WY31BwYbsVaGAsAtOYrlZpg1KnLgAs5RHjbBmkE63X+qnTxnsbYUW9NjQiKOCOSGM
+ 35dAjc/16r8x9+4UIY1GQvYdcgSsF77G7M2umeI4achKQwD1r8kxyKpsMJDAeQKbTj
+ u6bTnoPshfWTKPGcNpvjSFXZ9frMcmaQ0P9oEyxf+sCu7ki/Kd6jSbGw0PTGvlI3UD
+ RA7tIDXWOm7Wp2tIjI5uMzknfLnXGn9YM9MyAad0LLRUPYtXYJ8QofSzgrkLH468um
+ 4pvwF6c7OW0hlvH9nqUhoyMV8I8+BpXY3iW5/itS6xyJ86O/cYKn3kkqQsfYzZub2B
+ DuKDMXXQ3sPjg==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- A2BE4C04E26; Mon,  4 Sep 2023 18:11:08 +0000 (UTC)
+ B6BD6C0C3FD; Mon,  4 Sep 2023 18:11:08 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <169385106866.19669.14483196627780303129.git-patchwork-notify@kernel.org>
+Message-Id: <169385106874.19669.13506137748616735375.git-patchwork-notify@kernel.org>
 Date: Mon, 04 Sep 2023 18:11:08 +0000
-References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
-In-Reply-To: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
-To: Jeff Layton <jlayton@kernel.org>
+References: <20230424054926.26927-2-hch@lst.de>
+In-Reply-To: <20230424054926.26927-2-hch@lst.de>
+To: Christoph Hellwig <hch@lst.de>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Christian Brauner <brauner@kernel.org>: On Mon, 07 Aug 2023 15:38:31 -0400
- you wrote: > The VFS always uses coarse-grained timestamps when updating
- the > ctime and mtime after a change. This has the benefit of allowing >
- filesystems to opti [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Jens Axboe <axboe@kernel.dk>: On Mon, 24 Apr 2023 07:49:10 +0200 you wrote:
+ > buffer_check_dirty_writeback is only used by the block device aops, > remove
+ the export. > > Signed-off-by: Christoph Hellwig <hch@lst.de> > --- > fs/bu
+ [...] Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ medium trust [145.40.68.75 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qdE2i-009VKw-BI
-Subject: Re: [f2fs-dev] [PATCH v7 00/13] fs: implement multigrain timestamps
+X-Headers-End: 1qdE2e-009VKo-J7
+Subject: Re: [f2fs-dev] [PATCH 01/17] fs: unexport
+ buffer_check_dirty_writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,34 +107,13 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: lucho@ionkov.net, martin@omnibond.com,
- almaz.alexandrovich@paragon-software.com, jack@suse.cz,
- linux-xfs@vger.kernel.org, djwong@kernel.org, asmadeus@codewreck.org,
- linux_oss@crudebyte.com, ecryptfs@vger.kernel.org,
- linux-unionfs@vger.kernel.org, dhowells@redhat.com, clm@fb.com,
- adilger.kernel@dilger.ca, hdegoede@redhat.com, marc.dionne@auristor.com,
- codalist@coda.cs.cmu.edu, linux-afs@lists.infradead.org, hubcap@omnibond.com,
- pc@manguebit.com, linux-cifs@vger.kernel.org, ericvh@kernel.org,
- agruenba@redhat.com, miklos@szeredi.hu, richard@nod.at, mark@fasheh.com,
- hughd@google.com, bcodding@redhat.com, code@tyhicks.com,
- cluster-devel@redhat.com, coda@cs.cmu.edu, linux-mm@kvack.org,
- ntfs3@lists.linux.dev, idryomov@gmail.com, yzaikin@google.com,
- linkinjeon@kernel.org, trond.myklebust@hammerspace.com, sprasad@microsoft.com,
- amir73il@gmail.com, keescook@chromium.org, ocfs2-devel@lists.linux.dev,
- josef@toxicpanda.com, tom@talpey.com, tj@kernel.org, huyue2@coolpad.com,
- viro@zeniv.linux.org.uk, ronniesahlberg@gmail.com, dsterba@suse.com,
- jaegeuk@kernel.org, ceph-devel@vger.kernel.org, xiubli@redhat.com,
- xiang@kernel.org, hirofumi@mail.parknet.co.jp, jaharkes@cs.cmu.edu,
- brauner@kernel.org, linux-ext4@vger.kernel.org, tytso@mit.edu,
- joseph.qi@linux.alibaba.com, gregkh@linuxfoundation.org, v9fs@lists.linux.dev,
- linux-fsdevel@vger.kernel.org, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- sfrench@samba.org, senozhatsky@chromium.org, mcgrof@kernel.org,
- jefflexu@linux.alibaba.com, devel@lists.orangefs.org, anna@kernel.org,
- jack@suse.com, rpeterso@redhat.com, linux-mtd@lists.infradead.org,
- akpm@linux-foundation.org, sj1557.seo@samsung.com,
- linux-erofs@lists.ozlabs.org, linux-nfs@vger.kernel.org,
- linux-btrfs@vger.kernel.org, jlbec@evilplan.org
+Cc: axboe@kernel.dk, cluster-devel@redhat.com, linux-nfs@vger.kernel.org,
+ miklos@szeredi.hu, djwong@kernel.org, ceph-devel@vger.kernel.org,
+ linux-kernel@vger.kernel.org, willy@infradead.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ linux-mm@kvack.org, dhowells@redhat.com, linux-fsdevel@vger.kernel.org,
+ akpm@linux-foundation.org, linux-ext4@vger.kernel.org,
+ linux-xfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -142,48 +121,52 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 Hello:
 
 This series was applied to jaegeuk/f2fs.git (dev)
-by Christian Brauner <brauner@kernel.org>:
+by Jens Axboe <axboe@kernel.dk>:
 
-On Mon, 07 Aug 2023 15:38:31 -0400 you wrote:
-> The VFS always uses coarse-grained timestamps when updating the
-> ctime and mtime after a change. This has the benefit of allowing
-> filesystems to optimize away a lot metadata updates, down to around 1
-> per jiffy, even when a file is under heavy writes.
+On Mon, 24 Apr 2023 07:49:10 +0200 you wrote:
+> buffer_check_dirty_writeback is only used by the block device aops,
+> remove the export.
 > 
-> Unfortunately, this coarseness has always been an issue when we're
-> exporting via NFSv3, which relies on timestamps to validate caches. A
-> lot of changes can happen in a jiffy, so timestamps aren't sufficient to
-> help the client decide to invalidate the cache.
-> 
-> [...]
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  fs/buffer.c | 1 -
+>  1 file changed, 1 deletion(-)
 
 Here is the summary with links:
-  - [f2fs-dev,v7,01/13] fs: remove silly warning from current_time
-    https://git.kernel.org/jaegeuk/f2fs/c/b3030e4f2344
-  - [f2fs-dev,v7,02/13] fs: pass the request_mask to generic_fillattr
-    https://git.kernel.org/jaegeuk/f2fs/c/0d72b92883c6
-  - [f2fs-dev,v7,03/13] fs: drop the timespec64 arg from generic_update_time
-    https://git.kernel.org/jaegeuk/f2fs/c/541d4c798a59
-  - [f2fs-dev,v7,04/13] btrfs: have it use inode_update_timestamps
-    https://git.kernel.org/jaegeuk/f2fs/c/bb7cc0a62e47
-  - [f2fs-dev,v7,05/13] fat: make fat_update_time get its own timestamp
+  - [f2fs-dev,01/17] fs: unexport buffer_check_dirty_writeback
     (no matching commit)
-  - [f2fs-dev,v7,06/13] ubifs: have ubifs_update_time use inode_update_timestamps
+  - [f2fs-dev,02/17] fs: remove the special !CONFIG_BLOCK def_blk_fops
     (no matching commit)
-  - [f2fs-dev,v7,07/13] xfs: have xfs_vn_update_time gets its own timestamp
+  - [f2fs-dev,03/17] fs: rename and move block_page_mkwrite_return
     (no matching commit)
-  - [f2fs-dev,v7,08/13] fs: drop the timespec64 argument from update_time
+  - [f2fs-dev,04/17] fs: remove emergency_thaw_bdev
+    https://git.kernel.org/jaegeuk/f2fs/c/4a8b719f95c0
+  - [f2fs-dev,05/17] filemap: update ki_pos in generic_perform_write
     (no matching commit)
-  - [f2fs-dev,v7,09/13] fs: add infrastructure for multigrain timestamps
-    https://git.kernel.org/jaegeuk/f2fs/c/ffb6cf19e063
-  - [f2fs-dev,v7,10/13] tmpfs: add support for multigrain timestamps
-    https://git.kernel.org/jaegeuk/f2fs/c/d48c33972916
-  - [f2fs-dev,v7,11/13] xfs: switch to multigrain timestamps
+  - [f2fs-dev,06/17] filemap: add a kiocb_write_and_wait helper
     (no matching commit)
-  - [f2fs-dev,v7,12/13] ext4: switch to multigrain timestamps
-    https://git.kernel.org/jaegeuk/f2fs/c/0269b585868e
-  - [f2fs-dev,v7,13/13] btrfs: convert to multigrain timestamps
-    https://git.kernel.org/jaegeuk/f2fs/c/50e9ceef1d4f
+  - [f2fs-dev,07/17] filemap: add a kiocb_invalidate_pages helper
+    (no matching commit)
+  - [f2fs-dev,08/17] filemap: add a kiocb_invalidate_post_write helper
+    (no matching commit)
+  - [f2fs-dev,09/17] fs: factor out a direct_write_fallback helper
+    (no matching commit)
+  - [f2fs-dev,10/17] iomap: use kiocb_write_and_wait and kiocb_invalidate_pages
+    (no matching commit)
+  - [f2fs-dev,11/17] iomap: assign current->backing_dev_info in iomap_file_buffered_write
+    (no matching commit)
+  - [f2fs-dev,12/17] fuse: use direct_write_fallback
+    (no matching commit)
+  - [f2fs-dev,13/17] block: don't plug in blkdev_write_iter
+    (no matching commit)
+  - [f2fs-dev,14/17] block: open code __generic_file_write_iter for blkdev writes
+    (no matching commit)
+  - [f2fs-dev,15/17] block: stop setting ->direct_IO
+    (no matching commit)
+  - [f2fs-dev,16/17] block: use iomap for writes to block devices
+    (no matching commit)
+  - [f2fs-dev,17/17] fs: add CONFIG_BUFFER_HEAD
+    (no matching commit)
 
 You are awesome, thank you!
 -- 
