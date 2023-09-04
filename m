@@ -2,66 +2,66 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35EAC791A52
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Sep 2023 17:10:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDD50791A5B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Sep 2023 17:13:03 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qdBDg-00045r-Jj;
-	Mon, 04 Sep 2023 15:10:27 +0000
+	id 1qdBG4-0005mF-KP;
+	Mon, 04 Sep 2023 15:12:57 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1qdBDd-00045e-Ur
+ (envelope-from <chao@kernel.org>) id 1qdBG3-0005m6-Lv
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Sep 2023 15:10:24 +0000
+ Mon, 04 Sep 2023 15:12:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lh7JfKrbmzSvo/+Smfz7cHzjht5szOeju1LuYhEkx6M=; b=frdEa6Ii49fUpwd2Fbi/Nhexyr
- HBntcmmoCTW64KvswwV2ORXSzstg5EW/108UZiG0hcZa0MNQbJK3X99KHQIxBgUkhpU1oZh9PJwj7
- Fm3Jv3CsFzP4XIivPDlSZ+UvmMWeTJgEXkjzBEIYdS1DMLbl/1hVuwP5fNjWV8Ympq+I=;
+ bh=nzRPsnoDv0reoq3J4HngyKkbQvH3g1iWRTKzy26+yis=; b=Nk3Rok7Q2clyqvsvbzDsBgJVl/
+ L1ZaSQMA4DQgemwbiqXtHV9m/K3LozxcOXcTx0d7FFNFqYyq93DarAIDqtltQoiU2roDFyLU5TT2O
+ Vqz4Q9XRdIf/brDNyZZa7/cLnVgmKKnAc0W9SVz1BOAD2kDERV+OHcMFB1h6LMzT9uqg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=lh7JfKrbmzSvo/+Smfz7cHzjht5szOeju1LuYhEkx6M=; b=P
- SvfCW9jjrRJGVQLUWl/wedUCeZx6eNW3bh7SeUJXldnC7t7mrFZ8VcTmTZullrqP054QHNPlJkp8p
- u/sUqoYEjQ+WDea84vkFFAIczpzxn0FrwTWvI25j2ccDhdEegcSBRnNWeCHeyCuq0gBT21E3A44bD
- IC1KAA72sNCJGzSM=;
+ List-Owner:List-Archive; bh=nzRPsnoDv0reoq3J4HngyKkbQvH3g1iWRTKzy26+yis=; b=Q
+ yn7k/l5M0J9NM5CqZFkASyGYUx5es2rFKwCmJ8XkK4Nupgy1HSttb/caHeG10jwcuZUlgTIzsj8MY
+ PvKMqYslKnnTTiu3egXBfGpzr9Jy7q5mBaeL+G7nXs95Q5g2uWNKKbvD+ltM4SbjWXXYdhf0vm+9s
+ DfByvlXigKZ4n4PY=;
 Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qdBDa-0000RO-Vm for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Sep 2023 15:10:24 +0000
+ id 1qdBG3-009N0D-F1 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 04 Sep 2023 15:12:56 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 9B840B80DB3
+ by ams.source.kernel.org (Postfix) with ESMTPS id 201B3B80E6C
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  4 Sep 2023 15:10:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4AD7CC433C8;
- Mon,  4 Sep 2023 15:10:14 +0000 (UTC)
+ Mon,  4 Sep 2023 15:12:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93DD8C433C7;
+ Mon,  4 Sep 2023 15:12:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1693840215;
- bh=XRW8YTHaWV8ms59XN9GHUEpvdguZ6HOD3am7bwM4Xcw=;
+ s=k20201202; t=1693840367;
+ bh=vvfGHYHl5xJjMX5/f31WY7Kz3B/DCsZa1lluG2f5HTY=;
  h=From:To:Cc:Subject:Date:From;
- b=rsFq0ku1qS0T2Ddu4stzj5273qMjAcyW7K4Is58Rdir03Aae+SLjVCkfOIiTCvXhi
- YXUe/IDnTZvTQcxUQ++0yRY8dzIeGsMlzCo4cnnxjEJI9GO6rEXRHJifQMgA4EwJVA
- xdUKjAX8e9zjOuLBSLRRLiElWIC+iBxWLl5GQKicTdU0wcod7wfoLsbt5ioDpteUKT
- UA7pCshnCDcEi+/M1URolrZUx4x6cws6m04Q41PciPvQqZFYFAwSch1nCh/UcvTXV5
- dtloxXoJL2KdyrCzlvg8/X2VqJG/xFomRxhq+k+qX44prz+0xxMzPojoRvagOQTAw8
- HFAEYo4uxAbLg==
+ b=pMvSXDc23f+POmvwTwuhEYS/fiPLUKyv4ziUOUzRmJX2ex+RrGrPNc+LJc8V/1x6k
+ AbXy8HtqSJt+H5kShX2tbt7N/k5bDXXnIpcJxaQl+iAM0OQ0fBNebclJvc01cGVWFn
+ +ZnJ20TWM2LHCr7iYtAu4pWRwBiOnJGxHGLt6djxsL0KdHJQZXuHa6CVJ3gF+pzMhT
+ VkIesIrIV/C/uiKoBztmT+w3FSm2DOHrOQywow1Xox144kRZAZW1LhTdqflZnu+eKR
+ OEdyJAJqHN+6u65u1itLYA+kegZJU3Ojyl2csrhYvHqEwz4Cfh/1Su8kO75IspDdM5
+ lBL5ZYlApGAug==
 From: Chao Yu <chao@kernel.org>
 To: jaegeuk@kernel.org
-Date: Mon,  4 Sep 2023 23:10:07 +0800
-Message-Id: <20230904151007.1784860-1-chao@kernel.org>
+Date: Mon,  4 Sep 2023 23:12:42 +0800
+Message-Id: <20230904151242.1786219-1-chao@kernel.org>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 X-Spam-Score: -2.5 (--)
@@ -71,13 +71,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  fsck.f2fs prints i_gc_failures reset message w/ [FIX] tags, 
- it's not appropriate due to reset i_gc_failures is not a fix. Let's add
- INFO_MSG()
- macro to print such important non-fix message. Signed-off-by: Chao Yu
- <chao@kernel.org>
- --- fsck/fsck.c | 2 +- include/f2fs_fs.h | 7 +++++++ 2 files changed,
- 8 insertions(+), 1 deletion(-) 
+ Content preview:  If file has both cold and compress flag,
+ during f2fs_ioc_compress_file(), 
+ f2fs will trigger IPU for non-compress cluster and OPU for compress cluster,
+ so that, data of the file may be fragmented. Fix it by always triggering
+ OPU for IOs from user mode compression. 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +91,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qdBDa-0000RO-Vm
-Subject: [f2fs-dev] [PATCH] fsck.f2fs: use INFO_MSG() to print i_gc_failure
- reset info
+X-Headers-End: 1qdBG3-009N0D-F1
+Subject: [f2fs-dev] [PATCH] f2fs: compress: fix to avoid fragment w/ OPU
+ during f2fs_ioc_compress_file()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,53 +105,38 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-fsck.f2fs prints i_gc_failures reset message w/ [FIX] tags, it's not
-appropriate due to reset i_gc_failures is not a fix.
+If file has both cold and compress flag, during f2fs_ioc_compress_file(),
+f2fs will trigger IPU for non-compress cluster and OPU for compress
+cluster, so that, data of the file may be fragmented.
 
-Let's add INFO_MSG() macro to print such important non-fix message.
+Fix it by always triggering OPU for IOs from user mode compression.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fsck/fsck.c       | 2 +-
- include/f2fs_fs.h | 7 +++++++
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ fs/f2fs/data.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 78ffdb6..a30719e 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -1282,7 +1282,7 @@ skip_blkcnt_fix:
- 		if (c.fix_on) {
- 			node_blk->i.i_gc_failures = cpu_to_le16(0);
- 			need_fix = 1;
--			FIX_MSG("Regular: 0x%x reset i_gc_failures from 0x%x to 0x00",
-+			INFO_MSG("Regular: 0x%x reset i_gc_failures from 0x%x to 0x00",
- 					nid, i_gc_failures);
- 		}
- 	}
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 7e7db22..bc4f7b8 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -235,6 +235,13 @@ static inline uint64_t bswap_64(uint64_t val)
- /*
-  * Debugging interfaces
-  */
-+
-+#define INFO_MSG(fmt, ...)						\
-+	do {								\
-+		printf("[INFO] (%s:%4d) ", __func__, __LINE__);		\
-+		printf(" --> "fmt"\n", ##__VA_ARGS__);			\
-+	} while (0)
-+
- #define FIX_MSG(fmt, ...)						\
- 	do {								\
- 		printf("[FIX] (%s:%4d) ", __func__, __LINE__);		\
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 2a38d2cc2140..d4b59c57d827 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -2665,6 +2665,11 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
+ 		return true;
+ 	if (f2fs_is_atomic_file(inode))
+ 		return true;
++	/* rewrite low ratio compress data w/ OPU mode to avoid fragmentation */
++	if (f2fs_compressed_file(inode) &&
++		F2FS_OPTION(sbi).compress_mode == COMPR_MODE_USER &&
++		is_inode_flag_set(inode, FI_ENABLE_COMPRESS))
++		return true;
+ 
+ 	/* swap file is migrating in aligned write mode */
+ 	if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
 -- 
 2.40.1
 
