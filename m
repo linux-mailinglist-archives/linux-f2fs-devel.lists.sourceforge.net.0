@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EABEF791C7C
+	by mail.lfdr.de (Postfix) with ESMTPS id D7DA2791C7B
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Sep 2023 20:11:26 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qdE2n-0003Gu-Mz;
+	id 1qdE2o-00077U-D5;
 	Mon, 04 Sep 2023 18:11:25 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1qdE2k-0003GW-Mn
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1qdE2l-00076w-QT
  for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 04 Sep 2023 18:11:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,82 +21,82 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WNz4HeXn5zZLOUogZdhHncbxwaWCMyhqjgKNkJwDyqg=; b=RIfDoFwtBqJoXYvtf6QrL3OPBd
- dePrDMGwwDPI2XzKJmWK0eUklqROScn/njbkY2zuJqlL2YuO4YhfutlMc7kOccil22Q7z1M4rWGsL
- hzFox9cF/GvhRvbMfk+xSJS2LtsH82nPUiOt6w5K/DJnHOuOHDVFa7Is2lY+ldBbSoqU=;
+ bh=Cs525KJaUGEpKmDAg63B82k12IN3kX3ELt+OF7NVZIY=; b=WHFMuTB7YOL8pJZ+2wO1ZLm/kM
+ ewPJuU3e+tlOtLztI2L8EB5Pifrx+yr8jLwI3S11LFaVm1Eb7Yppi34WT6MbWc4z+soret81hxU++
+ qDa3lqUo/KABJ2oSskgT+tXOe7Fcc/m35yMzA7ybB/d3+QvHTyB+WEKbk77ox+UEXfXM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WNz4HeXn5zZLOUogZdhHncbxwaWCMyhqjgKNkJwDyqg=; b=T9gdhHEI4zDFbhD8hzKj6aDp0X
- Q2cCE3AWQv9JZRth3E71fl3/PTiV1ph0o7yEZNJfWcRZl+bi9CpWkh9D0zDmH/A3hR5bl37IoYrLY
- mt9Z6yUVd/nP4AZi41Syymh5c5ueP6c5rWhVlrl+sfj79MIF5/7D84hc3t7Z48+ODwt4=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=Cs525KJaUGEpKmDAg63B82k12IN3kX3ELt+OF7NVZIY=; b=f7FiQS03BKxx9n4GvP6OcTJRyG
+ Yru1xRvooC7fhBd7heMlyKkZR9zuqol86joyAJeJMtQ6IbSfmQ3NSkVOqqqrWrxELnkVuQqmw/usJ
+ Sz9X8rflvw3AR4IyspktIsx8p+TDDlSm8k4aWUpmg2DKe8yUcKCT4IhH59Nro+fRZCNc=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qdE2g-009VL4-Bl for linux-f2fs-devel@lists.sourceforge.net;
+ id 1qdE2j-0007WZ-L8 for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 04 Sep 2023 18:11:22 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id E8A496197F;
- Mon,  4 Sep 2023 18:11:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 597CEC4AF75;
+ by sin.source.kernel.org (Postfix) with ESMTPS id 39194CE0FBC;
+ Mon,  4 Sep 2023 18:11:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 59525C116A6;
  Mon,  4 Sep 2023 18:11:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1693851069;
- bh=cFYymj3Ka1spHJa4/0G+nw3LrDmT9lBxaGODfikfc8Y=;
+ bh=9V05BJ+Zrz7p6pZ+b0iissf5Ol4gDyoeQK0k983jp/8=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=HIoQAEctV7TS3fRVm0POXSQq9Ll+Bl1t7kZywcSeWsEy2YnSs+onEhSyT/mQseWrj
- bMPC7nhuY0L1UH9EBlpQyhyj4N7jWrTvmXPJmi3TkpUdkWj1ELjgvcLjpNKq8mlsQO
- bOEDpbVVjkdi0O3wHsXx9ygm7Ar5ooyxZZ06tLGcsKos/YK9M+1dPg7MKA/FPeMbCM
- Y2iIUHdQNocTzMUkxr/fBaE9jA1Jb0RX/Ye0HUzsav2FHJ2X8rQnVuAmCDY8qiQZae
- uEZdytHlkUKOKcWemWUidZ00bi2rCgj/Y+zQFLXT+T+mCPmSUtS6JmTM/XqFemCFNp
- KsyokaD/sILsg==
+ b=q//cpDgINdSIlQFIs/BZqxxdsINFkxrc4Mu7UetIPc7BiMzw0uhEfroJJYNGh9Y/7
+ mcKD20fU3Rg0ULNFUaFzGSTO/O9D6mpFmSlZrY6Ctgzwsoh5Z5pwuCl+wC3uPthmeP
+ D/QeifcpwXU3D/ZU7TIO3dldJCslfK8p6OTbUXlyC/NqKvUCWSmvxZrbJI2HCsF9pp
+ sqlPbcWpavpzVrBexl9HiVhvAgFLNI89jQuhlm3r2RUWQLYugwGmVaBWfUONhbqiH4
+ YVBprbBK1yL+uyTmzhN5hdyR3iCLSBy7Vu1R3nwrj2DP1dzSYcc40YeMS2z68Wr2Bp
+ btqg4yNrLqmwQ==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 33A77C04E28; Mon,  4 Sep 2023 18:11:09 +0000 (UTC)
+ 29183C2BBF6; Mon,  4 Sep 2023 18:11:09 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <169385106920.19669.8631180334558169868.git-patchwork-notify@kernel.org>
+Message-Id: <169385106916.19669.6288590634358957039.git-patchwork-notify@kernel.org>
 Date: Mon, 04 Sep 2023 18:11:09 +0000
-References: <ZPJ7P1J+jbyL6Mve@google.com>
-In-Reply-To: <ZPJ7P1J+jbyL6Mve@google.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: -5.2 (-----)
+References: <20230705190309.579783-41-jlayton@kernel.org>
+In-Reply-To: <20230705190309.579783-41-jlayton@kernel.org>
+To: Jeff Layton <jlayton@kernel.org>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This pull request was applied to jaegeuk/f2fs.git
- (dev)
- by Linus Torvalds <torvalds@linux-foundation.org>: On Fri, 1 Sep 2023 17:01:03
- -0700 you wrote: > Hi Linus, > > Could you please consider this pull request?
- > > Thanks, > > The following changes since commit
- 06c2afb862f9da8dc5efa4b6076a0e48c3fbaaa5: > [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  Hello: This patch was applied to jaegeuk/f2fs.git (dev) by
+ Christian Brauner <brauner@kernel.org>: On Wed, 5 Jul 2023 15:01:08 -0400
+ you wrote: > In later patches, we're going to change how the inode's ctime
+ field is > used. Switch to using accessor functions instead of raw accesses
+ of > inode->i_c [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qdE2g-009VL4-Bl
-Subject: Re: [f2fs-dev] [GIT PULL] f2fs update for 6.6
+X-Headers-End: 1qdE2j-0007WZ-L8
+Subject: Re: [f2fs-dev] [PATCH v2 43/92] f2fs: convert to ctime accessor
+ functions
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,31 +108,39 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: torvalds@linux-foundation.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: brauner@kernel.org, jack@suse.cz, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, viro@zeniv.linux.org.uk,
+ linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 Hello:
 
-This pull request was applied to jaegeuk/f2fs.git (dev)
-by Linus Torvalds <torvalds@linux-foundation.org>:
+This patch was applied to jaegeuk/f2fs.git (dev)
+by Christian Brauner <brauner@kernel.org>:
 
-On Fri, 1 Sep 2023 17:01:03 -0700 you wrote:
-> Hi Linus,
+On Wed,  5 Jul 2023 15:01:08 -0400 you wrote:
+> In later patches, we're going to change how the inode's ctime field is
+> used. Switch to using accessor functions instead of raw accesses of
+> inode->i_ctime.
 > 
-> Could you please consider this pull request?
-> 
-> Thanks,
-> 
-> The following changes since commit 06c2afb862f9da8dc5efa4b6076a0e48c3fbaaa5:
-> 
-> [...]
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+> ---
+>  fs/f2fs/dir.c      |  8 ++++----
+>  fs/f2fs/f2fs.h     |  4 +++-
+>  fs/f2fs/file.c     | 20 ++++++++++----------
+>  fs/f2fs/inline.c   |  2 +-
+>  fs/f2fs/inode.c    | 10 +++++-----
+>  fs/f2fs/namei.c    | 12 ++++++------
+>  fs/f2fs/recovery.c |  4 ++--
+>  fs/f2fs/super.c    |  2 +-
+>  fs/f2fs/xattr.c    |  2 +-
+>  9 files changed, 33 insertions(+), 31 deletions(-)
 
 Here is the summary with links:
-  - [f2fs-dev,GIT,PULL] f2fs update for 6.6
-    https://git.kernel.org/jaegeuk/f2fs/c/92901222f83d
+  - [f2fs-dev,v2,43/92] f2fs: convert to ctime accessor functions
+    https://git.kernel.org/jaegeuk/f2fs/c/c62ebd3501cc
 
 You are awesome, thank you!
 -- 
