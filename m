@@ -2,73 +2,72 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8BF4791C75
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Sep 2023 20:11:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16A7B791C78
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  4 Sep 2023 20:11:26 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qdE2j-0007qA-4m;
-	Mon, 04 Sep 2023 18:11:21 +0000
+	id 1qdE2l-0001qn-Nn;
+	Mon, 04 Sep 2023 18:11:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1qdE2h-0007pz-Dz
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1qdE2j-0001qF-LE
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Sep 2023 18:11:19 +0000
+ Mon, 04 Sep 2023 18:11:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
  Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4Ayb3yjCLQTlLTjoZzR7ktb7o3vVPYxJNAemwcs1exQ=; b=SvjyN5ZEg/ONgeRag9m1s+DscU
- juc+H8cSL1Cr7MBNfhB2bphrjDHYb6bCXkotjbmslI2AsaHP0lBC0yBCSSajKPVLkqIm2ooAqSt4f
- E0E1wUOxAnzFI4M+VDv9DSeaY5MeC2qHtvb+AplaSBKjzbM/o86jv4IctTgkcPl1psIA=;
+ bh=AoON+jLAMrkgYtLmtqnFtngN1/nb9Fe4Y2jIvpYAUiM=; b=XzKbzGprsp8f2RdqWWuqf9Ks1t
+ tHiRgV0/QSUxdwj0iQAiIeORPsKMTOEceGVgGv05z7J1YzyNWxYf27xTwulze/q/TUuyGh5o0vWM0
+ /YGAyGFx5dQe3fVSdFaJnw5AraorEBkHIs/gj+ewTm2GmX6pNC55tKVUcYRtoutf2tiA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
  Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4Ayb3yjCLQTlLTjoZzR7ktb7o3vVPYxJNAemwcs1exQ=; b=J8XXyq0cQfR8APu/l5v7ty8ziT
- 5GcHlqbrn7V7HtMDgZbBMbQ1X04cC5vpHdW0ymrHhZBUZPyD4MhVvoMGe0u3RJFbIfJfZFQZdXW4i
- 3PGozKi+1sHwYrw7/09xnY/nlI0bgoc9zd4Phxf74UQVL+Wf4sKQwNPt/5lOm3T82zhk=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=AoON+jLAMrkgYtLmtqnFtngN1/nb9Fe4Y2jIvpYAUiM=; b=XGSUCumbwkIvY1u+JruxgQi/Ux
+ IPv49hln4Abv0H9stp/SmmEwOwjx0wdU4c65UlbJoZGLC5dGdhLB3Ddfs8tAYGVDqgFKLWkG4gjga
+ PSf6iIPMGPnAcxPnbmNu7RizQb0rcumggNhPUUwp9fUFQd6/Ir27LGeNz6oMgvd7ov7U=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qdE2h-0007WX-7j for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 04 Sep 2023 18:11:19 +0000
+ id 1qdE2j-0007WW-L0 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 04 Sep 2023 18:11:22 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id E8A5E61981
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon,  4 Sep 2023 18:11:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5532FC116A3;
+ by sin.source.kernel.org (Postfix) with ESMTPS id C2F73CE0F9E;
+ Mon,  4 Sep 2023 18:11:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2A55FC433BD;
  Mon,  4 Sep 2023 18:11:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1693851069;
- bh=kDblhT9YU6Z13oCtuFpW2rqTqYaBtsASH9dKHi3/gS0=;
+ bh=6PRC2IiXOaVQ74rsqcqlaidhvNsvQl6gN6anNwKmH0Q=;
  h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=KCIPdf7Q0FJfi462+L+9hLlIq0BX3t5I5nU+KyC3JUzPxLXnAhbxymMCPphIjkZk2
- nAsEm8alo/h9yzDnwp6A8LVb7rfbQMxy2RfjbpRRrEaQ/eBashGE75ZiLRId6mtGSt
- n174WOpZJUMdgC0EjnVVC2vm5+7uig8ReNTtltsXQsPxwJ4Heo6W2elu0nWCCAFa+P
- IPwUZr1zyeD6ymPLFhgxMaBz9kyOb8bPnob2+yLx+ge2NU+glqZFicKWUrFr0q5nEO
- oYTUotqMOD89YLI/lMJVg/6rp/a47wySfbJ7iLUnBpXB+H2O664scK9VXRyIFBHpkL
- AGY3UbxOXs2Pw==
+ b=sM5gXvVxBTbLKXM4zeMrnhi3wGLIX+kAeewNYN0MFxtWVI7SEPDf2wFxs2s3Pwnth
+ yqpnH5JHbAWIcRhtwNZhAZhMJ6MGeIaJoTstJ/tkvt3FZyQwzMV6cOgUSocRSaXUz1
+ 5w2aLgeG4KUnKPBPu6QATkd85nxxzXS6zoEDB+lw/OsBRaR7mvQAXba6y69P9sLeXt
+ 54OZnTSjbSK6qDO2x8fsJEnQFSmpOhamIEqCAxEmXE4oydL6Ybr7AaH/fijRxsy8Yt
+ ilvyJOum2raf9GBdSKVlAU4PraDAaMxQICKPMioyjy7UN6z9UHS0VAqZOWcJM35VOv
+ nhY+rzU7Nh3wA==
 Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
  (localhost.localdomain [127.0.0.1])
  by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 1F4B9C0C3FD; Mon,  4 Sep 2023 18:11:09 +0000 (UTC)
+ 090F6C04DD9; Mon,  4 Sep 2023 18:11:09 +0000 (UTC)
 MIME-Version: 1.0
 From: patchwork-bot+f2fs@kernel.org
-Message-Id: <169385106912.19669.17692351155547248889.git-patchwork-notify@kernel.org>
+Message-Id: <169385106903.19669.6849396083145416463.git-patchwork-notify@kernel.org>
 Date: Mon, 04 Sep 2023 18:11:09 +0000
-References: <20230705212743.42180-1-ebiggers@kernel.org>
-In-Reply-To: <20230705212743.42180-1-ebiggers@kernel.org>
+References: <20230814182903.37267-1-ebiggers@kernel.org>
+In-Reply-To: <20230814182903.37267-1-ebiggers@kernel.org>
 To: Eric Biggers <ebiggers@kernel.org>
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
@@ -76,15 +75,14 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Eric Biggers <ebiggers@google.com>: On Wed, 5 Jul 2023 14:27:41 -0700 you
- wrote: > This series simplifies handling of errors during the fsverity_init()
- > initcall, and moves the sysctl registration out of signature.c so that
- > it is not [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Theodore Ts'o <tytso@mit.edu>: On Mon, 14 Aug 2023 11:29:00 -0700 you wrote:
+ > This series makes unexpected casefold flags on inodes be consistently >
+ rejected early on so that additional validation isn't needed later on > during
+ r [...] Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -95,9 +93,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qdE2h-0007WX-7j
-Subject: Re: [f2fs-dev] [PATCH 0/2] fsverity: simplify initcall and move
- sysctl registration
+X-Headers-End: 1qdE2j-0007WW-L0
+Subject: Re: [f2fs-dev] [PATCH 0/3] Simplify rejection of unexpected
+ casefold inode flag
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,8 +107,8 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: fsverity@lists.linux.dev, linux-ext4@vger.kernel.org,
- linux-btrfs@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-fsdevel@vger.kernel.org, krisman@suse.de, linux-ext4@vger.kernel.org,
+ tytso@mit.edu, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -118,24 +116,26 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 Hello:
 
 This series was applied to jaegeuk/f2fs.git (dev)
-by Eric Biggers <ebiggers@google.com>:
+by Theodore Ts'o <tytso@mit.edu>:
 
-On Wed,  5 Jul 2023 14:27:41 -0700 you wrote:
-> This series simplifies handling of errors during the fsverity_init()
-> initcall, and moves the sysctl registration out of signature.c so that
-> it is not unnecessarily tied to the builtin signature feature.
+On Mon, 14 Aug 2023 11:29:00 -0700 you wrote:
+> This series makes unexpected casefold flags on inodes be consistently
+> rejected early on so that additional validation isn't needed later on
+> during random filesystem operations.  For additional context, refer to
+> the discussion on patch 1 of
+> https://lore.kernel.org/linux-fsdevel/20230812004146.30980-1-krisman@suse.de/T/#u
 > 
-> Eric Biggers (2):
->   fsverity: simplify handling of errors during initcall
->   fsverity: move sysctl registration out of signature.c
+> Applies to v6.5-rc6
 > 
 > [...]
 
 Here is the summary with links:
-  - [f2fs-dev,1/2] fsverity: simplify handling of errors during initcall
-    https://git.kernel.org/jaegeuk/f2fs/c/e77000ccc531
-  - [f2fs-dev,2/2] fsverity: move sysctl registration out of signature.c
-    https://git.kernel.org/jaegeuk/f2fs/c/456ae5fe9b44
+  - [f2fs-dev,1/3] ext4: reject casefold inode flag without casefold feature
+    https://git.kernel.org/jaegeuk/f2fs/c/8216776ccff6
+  - [f2fs-dev,2/3] ext4: remove redundant checks of s_encoding
+    https://git.kernel.org/jaegeuk/f2fs/c/b81427939590
+  - [f2fs-dev,3/3] libfs: remove redundant checks of s_encoding
+    https://git.kernel.org/jaegeuk/f2fs/c/af494af38580
 
 You are awesome, thank you!
 -- 
