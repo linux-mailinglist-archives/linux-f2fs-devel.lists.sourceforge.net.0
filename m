@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B816791FD1
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Sep 2023 03:04:43 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F51D791FD3
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  5 Sep 2023 03:04:44 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qdKUf-0000Op-Le;
-	Tue, 05 Sep 2023 01:04:36 +0000
+	id 1qdKUk-0003sF-JA;
+	Tue, 05 Sep 2023 01:04:43 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1qdKUc-0000Od-Qo
+ (envelope-from <ebiggers@kernel.org>) id 1qdKUj-0003rw-GZ
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 05 Sep 2023 01:04:33 +0000
+ Tue, 05 Sep 2023 01:04:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bsEiP5/yz8kruujdT+NFC+HAM3mz/oSNQ4lCmRHgtoU=; b=FVj630IWcntKL4tmYE47NMi8ob
- Onb37uOvbkdtWZDlSptUiag39i7LNCgs62Ny52DXPqmPOwusQXeaJ/1IuS29F5Af7B1O13FzDqYD0
- 4+QLpqQkXeBWYi6E3lkPAGp9OkvU3vhN00S6i8x3O11IAwdBpEa8lpTk34V16MVTgjT4=;
+ bh=9V54Y4Ekd+dGSKb1dg7S8e1d86fnqpDdznVsLu8apy4=; b=LQmGqHBIyNRCjvySXjhlIutaOE
+ Gip3+cJzxkkmMi8HR5RiWP9iBw5V8S12qrJShIEDOhz06uCcZb9x/rjSFAINWiDtEM89p8Xb1T8h0
+ o5BYBjDMXGQHSFd171W1QQcDSg5e4rFjnwTRPCb98ewRD7UzSHdBYoilz2DCXFccBvnE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -31,72 +31,72 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bsEiP5/yz8kruujdT+NFC+HAM3mz/oSNQ4lCmRHgtoU=; b=IQTZH4PUxG9ZDoLMAnIBmAf0ql
- H5bcxvW/WwA8nyQU24NHpzbAblf3120yAHSOf4qvCTmpXGlnWUQDin6jkzTz6QBdAqDObHX8m4hVE
- Isay8FgBopqhwNEfP5ifxrRpejGJrI3G3t4fSpBnmP2VKedn9M7ntfLe+5wKvVFLdxfU=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=9V54Y4Ekd+dGSKb1dg7S8e1d86fnqpDdznVsLu8apy4=; b=GHFKS0tDpFFpGjKoOmo5avidWW
+ daePEMdEQ+EDati1xAHdiYX8XL8qxBQ1hs/jg1laxUr+y1FXw6D+96A+XQVmHTXJnraEC+PcRvsAr
+ NuOxYFhhVHWxFoVHW0PnQPdcNs98uHqYThYXkXdOAJtETtd3SwVzN1siOD1i56VkllGY=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qdKUa-00048q-S0 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 05 Sep 2023 01:04:33 +0000
+ id 1qdKUf-00048y-Rd for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 05 Sep 2023 01:04:41 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7494260C1A
+ by sin.source.kernel.org (Postfix) with ESMTPS id CA5C7CE0ABD
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  5 Sep 2023 01:04:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07982C433CB;
  Tue,  5 Sep 2023 01:04:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B00CCC433C8;
- Tue,  5 Sep 2023 01:04:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1693875866;
- bh=mA/Dvgn43PcLulCBha8yDFRXAbYYmz0W5UhWW5k2V0U=;
+ s=k20201202; t=1693875867;
+ bh=p3a2uN2tAZ707/skilVDeTRZvcvkaY5rfhOHvxATwY4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=DqsUKpp+DESWe4xI4x4m+43TguAisfpiOWMlga8z5er8oM3F0oHOQNRAnTX5TBQg3
- UuV8aCgTuSbhnsofkbhOgSDf0l/QqCr45WJpwvrizqcDgOfltg8/pUM3ncdj3vm8yl
- 9kS3Y1jc06DxH/qbMp2iyLyZXHd97llvlE6NM+FbNiX7cvB/vbctzzz926HgBKzJZS
- bbuT3LIkc6AyHdfhm2duWA3lHHBnTSQ9bwVfrbP7nFRm02mVBn4Lx+mnJmAa9O7y1w
- I2/0k/V5UIEUTO22Al89dZxI+miSnWEaIEPvzMHck9D8TGtuveZqlitVPKFBjyGXDX
- 8T56f8ALmUVgQ==
+ b=qhSgUiDXOmH5Kx+vNSNz1ej2NRNKMmxVC/mq7cJ51DmM+5XXRhsdFtzzv0YzM+5gw
+ 3U0zAVJnbS6PPaA6vlwpMWbdE0TdVZVq0zPdq2SrLJrq1ZM4HAcAjy+JyXtVy7fLAP
+ 9S9P92FIim1IzWNg46D3qXyDJC0pFLc/NE3uSAXCoOjt5gKFIfjXQXS7WFy+LlJT+J
+ FmHXZI3nvb07FxhZows1ecXWcx/v/aAXH0eqTytqRm4/Jv82sCdxokgSI0btL7KpE1
+ Vgt/ToAQZ9AefDXFqxuuwbOEiJBgbu2lZ4v1uUxAXhtXM1r+udnXl+f2CK0Qb8uG9C
+ iaPlGmN+oFR1Q==
 From: Eric Biggers <ebiggers@kernel.org>
 To: linux-fscrypt@vger.kernel.org
-Date: Mon,  4 Sep 2023 17:58:27 -0700
-Message-ID: <20230905005830.365985-3-ebiggers@kernel.org>
+Date: Mon,  4 Sep 2023 17:58:28 -0700
+Message-ID: <20230905005830.365985-4-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20230905005830.365985-1-ebiggers@kernel.org>
 References: <20230905005830.365985-1-ebiggers@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -2.7 (--)
+X-Spam-Score: -0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Eric Biggers <ebiggers@google.com> Replace
- FS_CFLG_OWN_PAGES
- with a bit flag 'needs_bounce_pages' which has the opposite meaning. I.e.,
- filesystems now opt into the bounce page pool instead of opt out. Make
- fscrypt_alloc_bounce_page() [...] 
- Content analysis details:   (-2.7 points, 6.0 required)
+ Content preview: From: Eric Biggers <ebiggers@google.com> For a given
+ filesystem, 
+ the number of bits used by the maximum file logical block number is computable
+ from the maximum file size and block size. These values are always present
+ in struct super_block. [...] 
+ Content analysis details:   (-0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 2.5 SUSPICIOUS_RECIPS      Similar addresses in recipient list
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qdKUa-00048q-S0
-Subject: [f2fs-dev] [PATCH 2/5] fscrypt: make the bounce page pool opt-in
- instead of opt-out
+X-Headers-End: 1qdKUf-00048y-Rd
+Subject: [f2fs-dev] [PATCH 3/5] fscrypt: use s_maxbytes instead of
+ filesystem lblk_bits
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,122 +116,129 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Eric Biggers <ebiggers@google.com>
 
-Replace FS_CFLG_OWN_PAGES with a bit flag 'needs_bounce_pages' which has
-the opposite meaning.  I.e., filesystems now opt into the bounce page
-pool instead of opt out.  Make fscrypt_alloc_bounce_page() check that
-the bounce page pool has been initialized.
+For a given filesystem, the number of bits used by the maximum file
+logical block number is computable from the maximum file size and block
+size.  These values are always present in struct super_block.
+Therefore, compute it this way instead of using the value from
+fscrypt_operations::get_ino_and_lblk_bits.  Since filesystems always
+have to set the super_block fields anyway, this avoids having to provide
+this information redundantly via fscrypt_operations.
 
-I believe the opt in makes more sense, since nothing else in
-fscrypt_operations is opt out, and these days filesystems can choose to
-use blk-crypto which doesn't need the fscrypt bounce page pool.  Also, I
-happen to be planning to add two more flags, and I wanted to fix the
-"FS_CFLG_" name anyway as it wasn't prefixed with "FSCRYPT_".
+This change is in preparation for adding support for sub-block data
+units.  For that, the value that is needed will become "the maximum file
+data unit number".  A hardcoded value won't suffice for that; it will
+need to be computed anyway.
 
 Signed-off-by: Eric Biggers <ebiggers@google.com>
 ---
- fs/crypto/crypto.c      |  9 ++++++++-
- fs/ext4/crypto.c        |  1 +
- fs/f2fs/super.c         |  1 +
- fs/ubifs/crypto.c       |  1 -
- include/linux/fscrypt.h | 19 ++++++++++---------
- 5 files changed, 20 insertions(+), 11 deletions(-)
+ fs/crypto/fscrypt_private.h | 10 ++++++++++
+ fs/crypto/inline_crypt.c    |  7 ++-----
+ fs/crypto/policy.c          | 20 +++++++++++---------
+ 3 files changed, 23 insertions(+), 14 deletions(-)
 
-diff --git a/fs/crypto/crypto.c b/fs/crypto/crypto.c
-index 6a837e4b80dcb..803347a5d0a6d 100644
---- a/fs/crypto/crypto.c
-+++ b/fs/crypto/crypto.c
-@@ -49,6 +49,13 @@ EXPORT_SYMBOL(fscrypt_enqueue_decrypt_work);
+diff --git a/fs/crypto/fscrypt_private.h b/fs/crypto/fscrypt_private.h
+index 2d63da48635ab..4b113214b53af 100644
+--- a/fs/crypto/fscrypt_private.h
++++ b/fs/crypto/fscrypt_private.h
+@@ -296,6 +296,16 @@ union fscrypt_iv {
+ void fscrypt_generate_iv(union fscrypt_iv *iv, u64 lblk_num,
+ 			 const struct fscrypt_info *ci);
  
- struct page *fscrypt_alloc_bounce_page(gfp_t gfp_flags)
++/*
++ * Return the number of bits used by the maximum file logical block number that
++ * is possible on the given filesystem.
++ */
++static inline int
++fscrypt_max_file_lblk_bits(const struct super_block *sb)
++{
++	return fls64(sb->s_maxbytes - 1) - sb->s_blocksize_bits;
++}
++
+ /* fname.c */
+ bool __fscrypt_fname_encrypted_size(const union fscrypt_policy *policy,
+ 				    u32 orig_len, u32 max_len,
+diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
+index 8bfb3ce864766..7d9f6c167de58 100644
+--- a/fs/crypto/inline_crypt.c
++++ b/fs/crypto/inline_crypt.c
+@@ -41,9 +41,8 @@ static struct block_device **fscrypt_get_devices(struct super_block *sb,
+ 
+ static unsigned int fscrypt_get_dun_bytes(const struct fscrypt_info *ci)
  {
-+	if (WARN_ON_ONCE(!fscrypt_bounce_page_pool)) {
-+		/*
-+		 * Oops, the filesystem called a function that uses the bounce
-+		 * page pool, but it forgot to set needs_bounce_pages.
-+		 */
-+		return NULL;
-+	}
- 	return mempool_alloc(fscrypt_bounce_page_pool, gfp_flags);
+-	struct super_block *sb = ci->ci_inode->i_sb;
++	const struct super_block *sb = ci->ci_inode->i_sb;
+ 	unsigned int flags = fscrypt_policy_flags(&ci->ci_policy);
+-	int ino_bits = 64, lblk_bits = 64;
+ 
+ 	if (flags & FSCRYPT_POLICY_FLAG_DIRECT_KEY)
+ 		return offsetofend(union fscrypt_iv, nonce);
+@@ -55,9 +54,7 @@ static unsigned int fscrypt_get_dun_bytes(const struct fscrypt_info *ci)
+ 		return sizeof(__le32);
+ 
+ 	/* Default case: IVs are just the file logical block number */
+-	if (sb->s_cop->get_ino_and_lblk_bits)
+-		sb->s_cop->get_ino_and_lblk_bits(sb, &ino_bits, &lblk_bits);
+-	return DIV_ROUND_UP(lblk_bits, 8);
++	return DIV_ROUND_UP(fscrypt_max_file_lblk_bits(sb), 8);
  }
  
-@@ -325,7 +332,7 @@ int fscrypt_initialize(struct super_block *sb)
- 		return 0;
+ /*
+diff --git a/fs/crypto/policy.c b/fs/crypto/policy.c
+index f4456ecb3f877..36bffc4d6228d 100644
+--- a/fs/crypto/policy.c
++++ b/fs/crypto/policy.c
+@@ -119,8 +119,7 @@ static bool supported_direct_key_modes(const struct inode *inode,
  
- 	/* No need to allocate a bounce page pool if this FS won't use it. */
--	if (sb->s_cop->flags & FS_CFLG_OWN_PAGES)
-+	if (!sb->s_cop->needs_bounce_pages)
- 		return 0;
- 
- 	mutex_lock(&fscrypt_init_mutex);
-diff --git a/fs/ext4/crypto.c b/fs/ext4/crypto.c
-index 8cdb7bbc655b0..a9221be67f2a7 100644
---- a/fs/ext4/crypto.c
-+++ b/fs/ext4/crypto.c
-@@ -240,6 +240,7 @@ static void ext4_get_ino_and_lblk_bits(struct super_block *sb,
- }
- 
- const struct fscrypt_operations ext4_cryptops = {
-+	.needs_bounce_pages	= 1,
- 	.legacy_key_prefix_for_backcompat = "ext4:",
- 	.get_context		= ext4_get_context,
- 	.set_context		= ext4_set_context,
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 8de799a8bad04..276535af5bf3c 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3231,6 +3231,7 @@ static struct block_device **f2fs_get_devices(struct super_block *sb,
- }
- 
- static const struct fscrypt_operations f2fs_cryptops = {
-+	.needs_bounce_pages	= 1,
- 	.legacy_key_prefix_for_backcompat = "f2fs:",
- 	.get_context		= f2fs_get_context,
- 	.set_context		= f2fs_set_context,
-diff --git a/fs/ubifs/crypto.c b/fs/ubifs/crypto.c
-index fab90f9a8eaff..f0ca403777d9a 100644
---- a/fs/ubifs/crypto.c
-+++ b/fs/ubifs/crypto.c
-@@ -88,7 +88,6 @@ int ubifs_decrypt(const struct inode *inode, struct ubifs_data_node *dn,
- }
- 
- const struct fscrypt_operations ubifs_crypt_operations = {
--	.flags			= FS_CFLG_OWN_PAGES,
- 	.legacy_key_prefix_for_backcompat = "ubifs:",
- 	.get_context		= ubifs_crypt_get_context,
- 	.set_context		= ubifs_crypt_set_context,
-diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 85574282c7e52..ac684f688d488 100644
---- a/include/linux/fscrypt.h
-+++ b/include/linux/fscrypt.h
-@@ -59,18 +59,19 @@ struct fscrypt_name {
- 
- #ifdef CONFIG_FS_ENCRYPTION
- 
--/*
-- * If set, the fscrypt bounce page pool won't be allocated (unless another
-- * filesystem needs it).  Set this if the filesystem always uses its own bounce
-- * pages for writes and therefore won't need the fscrypt bounce page pool.
-- */
--#define FS_CFLG_OWN_PAGES (1U << 1)
--
- /* Crypto operations for filesystems */
- struct fscrypt_operations {
- 
--	/* Set of optional flags; see above for allowed flags */
--	unsigned int flags;
+ static bool supported_iv_ino_lblk_policy(const struct fscrypt_policy_v2 *policy,
+ 					 const struct inode *inode,
+-					 const char *type,
+-					 int max_ino_bits, int max_lblk_bits)
++					 const char *type, int max_ino_bits)
+ {
+ 	struct super_block *sb = inode->i_sb;
+ 	int ino_bits = 64, lblk_bits = 64;
+@@ -154,13 +153,18 @@ static bool supported_iv_ino_lblk_policy(const struct fscrypt_policy_v2 *policy,
+ 		sb->s_cop->get_ino_and_lblk_bits(sb, &ino_bits, &lblk_bits);
+ 	if (ino_bits > max_ino_bits) {
+ 		fscrypt_warn(inode,
+-			     "Can't use %s policy on filesystem '%s' because its inode numbers are too long",
++			     "Can't use %s policy on filesystem '%s' because its maximum inode number is too large",
+ 			     type, sb->s_id);
+ 		return false;
+ 	}
+-	if (lblk_bits > max_lblk_bits) {
++
 +	/*
-+	 * If set, then fs/crypto/ will allocate a global bounce page pool.  The
-+	 * bounce page pool is required by the following functions:
-+	 *
-+	 * - fscrypt_encrypt_pagecache_blocks()
-+	 * - fscrypt_zeroout_range() for files not using inline crypto
-+	 *
-+	 * If the filesystem doesn't use those, it doesn't need to set this.
++	 * IV_INO_LBLK_64 and IV_INO_LBLK_32 both require that file logical
++	 * block numbers fit in 32 bits.
 +	 */
-+	unsigned int needs_bounce_pages : 1;
++	if (fscrypt_max_file_lblk_bits(sb) > 32) {
+ 		fscrypt_warn(inode,
+-			     "Can't use %s policy on filesystem '%s' because its block numbers are too long",
++			     "Can't use %s policy on filesystem '%s' because its maximum file size is too large",
+ 			     type, sb->s_id);
+ 		return false;
+ 	}
+@@ -239,8 +243,7 @@ static bool fscrypt_supported_v2_policy(const struct fscrypt_policy_v2 *policy,
+ 		return false;
+ 
+ 	if ((policy->flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64) &&
+-	    !supported_iv_ino_lblk_policy(policy, inode, "IV_INO_LBLK_64",
+-					  32, 32))
++	    !supported_iv_ino_lblk_policy(policy, inode, "IV_INO_LBLK_64", 32))
+ 		return false;
  
  	/*
- 	 * This field exists only for backwards compatibility reasons and should
+@@ -250,8 +253,7 @@ static bool fscrypt_supported_v2_policy(const struct fscrypt_policy_v2 *policy,
+ 	 * implementation limit is 32 bits.
+ 	 */
+ 	if ((policy->flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32) &&
+-	    !supported_iv_ino_lblk_policy(policy, inode, "IV_INO_LBLK_32",
+-					  32, 32))
++	    !supported_iv_ino_lblk_policy(policy, inode, "IV_INO_LBLK_32", 32))
+ 		return false;
+ 
+ 	if (memchr_inv(policy->__reserved, 0, sizeof(policy->__reserved))) {
 -- 
 2.42.0
 
