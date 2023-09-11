@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0B1279A884
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Sep 2023 16:17:48 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8991C79A972
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 11 Sep 2023 17:09:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qfhjO-0004Pu-Qy;
-	Mon, 11 Sep 2023 14:17:39 +0000
+	id 1qfiXZ-0001df-UY;
+	Mon, 11 Sep 2023 15:09:28 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <gregkh@linuxfoundation.org>) id 1qfhjN-0004Po-W2
+ (envelope-from <gregkh@linuxfoundation.org>) id 1qfiXY-0001dZ-Mw
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 11 Sep 2023 14:17:39 +0000
+ Mon, 11 Sep 2023 15:09:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1TcekvYMqh3sHYiyVCtunYqUgrmLafuy7+Kw+PcPoBU=; b=Mv0j0qW2zU0Mc3I027yf6dG8pN
- 2iG9I6GxKMRAjBN+siYfFGzWvwuonJSrGCTdjbp8/vDQWPhYIOCNrswDhDT/+n6mK32EiE5ZhKqC7
- Olqv9t0wRVxfoaMRzwEUHckrAAQCU1s2cqDWf/DdDLDgCaMdF8tOdR+1KcK/kr9HPmes=;
+ bh=mmoIJvCMWPHTIg8Tk2mvqbdCeNvN9OVEbnM75jEfPt4=; b=lpJ7VadlSroIRDtva/ka64XOyQ
+ strUiu6R8AaGXP2aY/BWRsfGUeeB/3Ut0tFzUdTICQsUHM4NZXot30yoApZFgtSTDxK//YBoZDYt/
+ wnu7CbzTFQqtswKUHRAnDAFjtSV9pej8udzDOroN+iYmRVjhfWmA+n3+gW/Sq8vZYcKY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -31,66 +31,66 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1TcekvYMqh3sHYiyVCtunYqUgrmLafuy7+Kw+PcPoBU=; b=OL5tXCQBvNlLjBM+J2wdmn5bQq
- POZo9fk+Q/lsOvLl2+NkbCOL5OK+9O6yS0UST1FkzXb0dwO9hf77EUCydIwysTWpgJbhqwJVqA4GC
- YRe4cKZQcqm1qgOZ0KizzHHMHnP+j612p4k/iRlCsMCHmVFD+HG3t7fQkunQu5aUX7rc=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=mmoIJvCMWPHTIg8Tk2mvqbdCeNvN9OVEbnM75jEfPt4=; b=cjXH6OuEXG8X43wKtWHw+13BpK
+ bc3N4FpRdaMREAQXyts5Qms2vaw0dt6GqsPANBAOiUhctF8zFW8XKlrI6rVPzIMJTbRZpMMe5Mj85
+ 6PmAXWjb4rzE70tfXdnupEhxB1ZWzPNZZs3/jPv3VqVVa6vfcxzg4oMKO2ogIKikK3wk=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qfhjK-0005zy-IT for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 11 Sep 2023 14:17:38 +0000
+ id 1qfiXQ-000QGB-D4 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 11 Sep 2023 15:09:27 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5886B61199;
- Mon, 11 Sep 2023 14:17:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4084CC433C8;
- Mon, 11 Sep 2023 14:17:28 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 18070B8116B;
+ Mon, 11 Sep 2023 14:53:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68C88C433C7;
+ Mon, 11 Sep 2023 14:53:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1694441848;
- bh=8UFl4AnrnLbEsv7iJtPYFeoL1rel8kz4vDooVRAS1dY=;
+ s=korg; t=1694443998;
+ bh=avq1F+9iYeNxlkMp1peMBnpxkyhXukQnDuSxvAnaeiA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=eJcAc46YXNjo8mLxggmP4Xy58zv7oSUwsDs6xwz0CtpHn4whEbt/6ByrjmewVKF1m
- /G+RUtTesdnf9veT7K1fUlJBsCtGglcOn/Y770x5EkjKylE8504p+xkx6dW8Tu1zrT
- J0AWt5I35mS7f4hph2Sk2Ps8Af/AR3pntYFcN7Cs=
+ b=0b9g/+SCuE1ni3EB7w8R/XkYWhAidyehy7MdKcflFTr7lpvmPsLzTeWfs1VCFSXqE
+ GHnN+J/eErn9dWbyBvLlf7GPAPPFXTrs4l7mlSoJQPUlzOhLtGW8eI4uIZf7GneAb4
+ Ox+O+GluANU+JSbNClqrsS9wS12quFKHF9t49IHA=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
-Date: Mon, 11 Sep 2023 15:45:49 +0200
-Message-ID: <20230911134706.453276358@linuxfoundation.org>
+Date: Mon, 11 Sep 2023 15:47:13 +0200
+Message-ID: <20230911134706.571140893@linuxfoundation.org>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20230911134650.921299741@linuxfoundation.org>
-References: <20230911134650.921299741@linuxfoundation.org>
+In-Reply-To: <20230911134650.286315610@linuxfoundation.org>
+References: <20230911134650.286315610@linuxfoundation.org>
 User-Agent: quilt/0.67
 X-stable: review
 X-Patchwork-Hint: ignore
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  6.5-stable review patch. If anyone has any objections, please
+ Content preview:  6.4-stable review patch. If anyone has any objections, please
  let me know. From: Randy Dunlap <rdunlap@infradead.org> 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qfhjK-0005zy-IT
-Subject: [f2fs-dev] [PATCH 6.5 550/739] f2fs: fix spelling in ABI
+X-Headers-End: 1qfiXQ-000QGB-D4
+Subject: [f2fs-dev] [PATCH 6.4 574/737] f2fs: fix spelling in ABI
  documentation
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -112,7 +112,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-6.5-stable review patch.  If anyone has any objections, please let me know.
+6.4-stable review patch.  If anyone has any objections, please let me know.
 
 ------------------
 
