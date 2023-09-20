@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E79137A7FDC
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Sep 2023 14:30:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48D3E7A81DA
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Sep 2023 14:48:44 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qiwLy-0004ZT-Tt;
-	Wed, 20 Sep 2023 12:30:49 +0000
+	id 1qiwdA-0003RY-Rr;
+	Wed, 20 Sep 2023 12:48:35 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qiwLx-0004ZN-V1
+ (envelope-from <jack@suse.cz>) id 1qiwd8-0003RR-3Q
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Sep 2023 12:30:48 +0000
+ Wed, 20 Sep 2023 12:48:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5iSTEIjazqkFIU0ER/9Qme0p7rffrgasYHVvrA5GZXo=; b=ZTFBTdphe+ceCnORvIwlCem5CY
- rY7oSCiZS+6gNW6ADX6ugCYcGx5e+C5FfzRxGByxkF0KfTWDR1890n9W8dB+p6jpiuu6/qbDRLQEO
- XYdlN3tbV1oduTDYpaWaP9J2TTg4o7oR+u3oHJ8oaqC0RFAo2KafHGhh/H0HCWFXcnVs=;
+ bh=S4Cb2+aB7mfyt7b8CnMGxNhCI32rhMMOyFzUtOYeWkI=; b=HoGhi/s95LpiSO10XKWpJsw+bw
+ BSsxuhkXAKXyJMg1wNKETQ7bKSvD3puapcRG1y8Tjx5pEeea03SnpL5HN+sii74BPlSr6WbB4HOW5
+ ffYF+gJ6Bv98K1DZIizZBK01Q1nAx+qr4UIeW1lBZ+qKjxva7scpeHzmsDEJCUcOs6H8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -31,77 +31,88 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5iSTEIjazqkFIU0ER/9Qme0p7rffrgasYHVvrA5GZXo=; b=UvHvZaSyw25ayFZ5i2AzFybZHc
- xZjO1uHLGETfhJmgOLyZTr15ZEf1rmsA0cWobaOBbf8M6sU5PGweohBnjW2DFbrAtBxWi2AFfkNM8
- r56ND0MtNTKptEY1/fe/SNMiGH7QR4Fc7qt8hTMpr3SlaW+8zP+Ej/0ZkinjXCkj9in0=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=S4Cb2+aB7mfyt7b8CnMGxNhCI32rhMMOyFzUtOYeWkI=; b=So8NlnblS+ghdmo6ya/XkSXvZc
+ nyx5/ZV1e3ibNaVBqfMCfxNh+lfvGfUX7DbylZE0DR704qVa4P29//SxCX26v4rly9tc2l7ZTZTIG
+ NpEE0nFOcuAyBmStH3m0p9H8MmIuXaimv1/fucOlORU3xnIxaulpNMcGls+n77JzW50Q=;
+Received: from smtp-out2.suse.de ([195.135.220.29])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qiwLu-00GgHo-R2 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Sep 2023 12:30:48 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qiwd4-00GhV6-NF for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 20 Sep 2023 12:48:32 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id BFA40CE1B2A;
- Wed, 20 Sep 2023 12:30:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78689C433C9;
- Wed, 20 Sep 2023 12:30:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695213035;
- bh=WHZrBC/vCXejBhe9fn64G41JLovo0BEJWmvdteNc0Wk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=WIRTz6HXDVqX9R+IM4F055cFjYqJUHAaAphvCvM/Qs3rFYyu+o45qITxyVEEQe8sD
- OZKQGBLgPMy9ZQ/IKUNbd2jq1LQ/06FUsXC8DsLI+wujFWH/bm4rfowjDYq17j/WCK
- V9a6LRQPh03AImZwfBpV4GCtWBYD+sb0xQ1LOvI0/IKyxSRYx9klJmbtk2qkIJL1PW
- HokBPEoncH4Fp+Fp/h+14dDnVpiAuUDVvIuiNyohCScr9S3zuoJ7s1wYlGcfHEI8Lp
- /vc3aX7T32ZRtncWVs9lNg9/PlkMdS8qxAYp6Ag1NTY0/p+HvsS2fDIFql73KoyeP8
- 25jWhQpdbIVoQ==
-Date: Wed, 20 Sep 2023 14:30:15 +0200
-From: Christian Brauner <brauner@kernel.org>
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 6FD471F854;
+ Wed, 20 Sep 2023 12:48:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1695214104; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=S4Cb2+aB7mfyt7b8CnMGxNhCI32rhMMOyFzUtOYeWkI=;
+ b=F7mgIbanJ66gmiZEnO9W56nZWxHlxkK7s6FOoSjoypnC5mKMR7KN4k+DpGXfgaj5VjGrIN
+ M0WZKpREOaiHCVlfxV6kRat3Qsi7lPO5Z2V/s3ZDJoLypj4Zm8y+7h34PJ3ugAMCBOih8J
+ +FrYu16LwC7uAnxqkcIerKEtN0dDPrI=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1695214104;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=S4Cb2+aB7mfyt7b8CnMGxNhCI32rhMMOyFzUtOYeWkI=;
+ b=ekUr1ejuvPyxJth9da/nEkPHSmqGtFGO/4Uu+iGJvWuLB6F/9QQ+xqsl4Q0KgC4KgxQtPa
+ Leco5xPA1ZhiWrBg==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5150913A64;
+ Wed, 20 Sep 2023 12:48:24 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id 4Cc/ExjqCmXZZgAAMHmgww
+ (envelope-from <jack@suse.cz>); Wed, 20 Sep 2023 12:48:24 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id CD6D5A077D; Wed, 20 Sep 2023 14:48:23 +0200 (CEST)
+Date: Wed, 20 Sep 2023 14:48:23 +0200
+From: Jan Kara <jack@suse.cz>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <20230920-endspiel-grenzenlos-a48ae1ebab74@brauner>
-References: <1f29102c09c60661758c5376018eac43f774c462.camel@kernel.org>
+Message-ID: <20230920124823.ghl6crb5sh4x2pmt@quack3>
+References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
+ <20230919110457.7fnmzo4nqsi43yqq@quack3>
+ <1f29102c09c60661758c5376018eac43f774c462.camel@kernel.org>
  <4511209.uG2h0Jr0uP@nimes>
  <08b5c6fd3b08b87fa564bb562d89381dd4e05b6a.camel@kernel.org>
  <20230920-leerung-krokodil-52ec6cb44707@brauner>
  <20230920101731.ym6pahcvkl57guto@quack3>
  <317d84b1b909b6c6519a2406fcb302ce22dafa41.camel@kernel.org>
- <20230920-raser-teehaus-029cafd5a6e4@brauner>
- <35c28758a9cc28a276a6b4b4ae8a420a1444e711.camel@kernel.org>
- <20230920-kahlkopf-tonlage-ab6ca571465e@brauner>
- <08b4e3275bad93ed99ea2892bd1950ff401ab912.camel@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <08b4e3275bad93ed99ea2892bd1950ff401ab912.camel@kernel.org>
+In-Reply-To: <317d84b1b909b6c6519a2406fcb302ce22dafa41.camel@kernel.org>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  > I don't, actually. I'm just mentioning that it's possible
- if we find the > mount option to be unpalatable. Ok. > > > @Jan, what do
- you think? > > > > > My plan was to take a stab at doing this for a later
- kernel release. > > > > Ok. > > If it works out,
- then we may be able to eventually remove the mount > opti [...] 
+ Content preview:  On Wed 20-09-23 06:35:18, Jeff Layton wrote: > On Wed,
+ 2023-09-20
+ at 12:17 +0200, Jan Kara wrote: > > If I were a sysadmin, I'd rather opt
+ for something like > > finegrained timestamps + lazytime (if [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [195.135.220.29 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qiwLu-00GgHo-R2
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1qiwd4-00GhV6-NF
 Subject: Re: [f2fs-dev] [PATCH v7 12/13] ext4: switch to multigrain
  timestamps
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -147,7 +158,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Jaegeuk Kim <jaegeuk@kernel.org>, ceph-devel@vger.kernel.org,
  Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>,
  OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Jan Harkes <jaharkes@cs.cmu.edu>,
- linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Christian Brauner <brauner@kernel.org>, linux-ext4@vger.kernel.org,
  Theodore Ts'o <tytso@mit.edu>, Joseph Qi <joseph.qi@linux.alibaba.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>, v9fs@lists.linux.dev,
  ntfs3@lists.linux.dev, samba-technical@lists.samba.org,
@@ -159,27 +170,55 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Jan Kara <jack@suse.com>, Bo b Peterson <rpeterso@redhat.com>,
  linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
  Sungjong Seo <sj1557.seo@samsung.com>, Bruno Haible <bruno@clisp.org>,
- linux-btrfs@vger.kernel.org, Joel Becker <jlbec@evilplan.org>
+ linux-nfs@vger.kernel.org, linux-btrfs@vger.kernel.org,
+ Joel Becker <jlbec@evilplan.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-> I don't, actually. I'm just mentioning that it's possible if we find the
-> mount option to be unpalatable.
-
-Ok.
-
+On Wed 20-09-23 06:35:18, Jeff Layton wrote:
+> On Wed, 2023-09-20 at 12:17 +0200, Jan Kara wrote:
+> > If I were a sysadmin, I'd rather opt for something like
+> > finegrained timestamps + lazytime (if I needed the finegrained timestamps
+> > functionality). That should avoid the IO overhead of finegrained timestamps
+> > as well and I'd know I can have problems with timestamps only after a
+> > system crash.
 > 
-> > @Jan, what do you think?
+> > I've just got another idea how we could solve the problem: Couldn't we
+> > always just report coarsegrained timestamp to userspace and provide access
+> > to finegrained value only to NFS which should know what it's doing?
 > > 
-> > > My plan was to take a stab at doing this for a later kernel release.
-> > 
-> > Ok.
 > 
-> If it works out, then we may be able to eventually remove the mount
-> option, but that is a separate project altogether.
+> I think that'd be hard. First of all, where would we store the second
+> timestamp? We can't just truncate the fine-grained ones to come up with
+> a coarse-grained one. It might also be confusing having nfsd and local
+> filesystems present different attributes.
 
-It would just become a nop for anyone setting it which is fine by me.
+So what I had in mind (and I definitely miss all the NFS intricacies so the
+idea may be bogus) was that inode->i_ctime would be maintained exactly as
+is now. There will be new (kernel internal at least for now) STATX flag
+STATX_MULTIGRAIN_TS. fill_mg_cmtime() will return timestamp truncated to
+sb->s_time_gran unless STATX_MULTIGRAIN_TS is set. Hence unless you set
+STATX_MULTIGRAIN_TS, there is no difference in the returned timestamps
+compared to the state before multigrain timestamps were introduced. With
+STATX_MULTIGRAIN_TS we return full precision timestamp as stored in the
+inode. Then NFS in fh_fill_pre_attrs() and fh_fill_post_attrs() needs to
+make sure STATX_MULTIGRAIN_TS is set when calling vfs_getattr() to get
+multigrain time.
+
+I agree nfsd may now be presenting slightly different timestamps than user
+is able to see with stat(2) directly on the filesystem. But is that a
+problem? Essentially it is a similar solution as the mgtime mount option
+but now sysadmin doesn't have to decide on filesystem mount how to report
+timestamps but the stat caller knowingly opts into possibly inconsistent
+(among files) but high precision timestamps. And in the particular NFS
+usecase where stat is called all the time anyway, timestamps will likely
+even be consistent among files.
+
+								Honza
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
 
 _______________________________________________
