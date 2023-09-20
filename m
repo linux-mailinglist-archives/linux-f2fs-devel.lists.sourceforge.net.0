@@ -2,69 +2,81 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A0CE7A8859
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Sep 2023 17:30:20 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACCF57A8865
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 Sep 2023 17:31:08 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qiz9Q-0005cs-QF;
-	Wed, 20 Sep 2023 15:30:05 +0000
+	id 1qizAL-0000Jy-12;
+	Wed, 20 Sep 2023 15:31:01 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qiz9O-0005cm-Jt
+ (envelope-from <jack@suse.cz>) id 1qizA5-0000JT-4Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Sep 2023 15:30:03 +0000
+ Wed, 20 Sep 2023 15:30:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
- :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=shQOY5YSFRPH4MYjqUKwyU+DkSv5sjGrh2VkaY95KB0=; b=WWx6wymvJ2MC8ET3g+LrUiCHfb
- RukaeUocRapooCmem4/AwK6cjAYym69Skhpw0diKlQzdiHd/Sm0SIJrMYfw4HnGHItGufiPS+bERu
- E8tcy3YyajnydNGCGOGV33C7s0znZnKhQ0tuumVnknkiwpZCujfwSX9/695ElRBOANvg=;
+ bh=Z07gJ0ljk8a9zukVNTeRislBXMh7pJ7EEuF8a+v+/FI=; b=CvwijpZ/8LxG4TN9+GHQbJyHck
+ IWtgjNYG6Ino2A2uSrYaHmC0stjZqdcQbAoX4/LVwW6yPR3dYEcp+TDTSrpMO858brQwxRf/o/VBE
+ FeeuWvQv2yEGDi+bG3EqYQrweK2v7DT0IwwlG6L/4vowvlH5Yj0Zucl1sHD9iNjrZae4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=shQOY5YSFRPH4MYjqUKwyU+DkSv5sjGrh2VkaY95KB0=; b=EO2DBb+PTkO65lYfdEv0zfhd59
- wrkXDOYfFMWKl8bjL4bzG79WheW0cHfnYIMzdBJZinDKBPlKRTdJpmEJ33H5DqMkk21OpAxKJ008J
- MUy8ojU5UXwDtiHgKJh6XtOONikoSaJKwpJfQXqomxHGuzr8zocRCm3lORdMCocuw84w=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=Z07gJ0ljk8a9zukVNTeRislBXMh7pJ7EEuF8a+v+/FI=; b=MAckLiX0w0NA137SWtOvVen62C
+ OKf/MvydH3TW1Wziw5f/t2ALv7EratuVsQGbuyFLLdzajUDDvNsVoQinNIWBYGpJy90qS0KLY9eGf
+ XZf9fK91lRLOcSqvJLUHww1xqI7dAD3wuIcMpU7+uh0nzJIN7PU0LGkSYvF8OQnx0DlM=;
+Received: from smtp-out1.suse.de ([195.135.220.28])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qiz9M-00Gts2-W1 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 Sep 2023 15:30:03 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qizA3-00Gu3Z-KH for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 20 Sep 2023 15:30:44 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id CB0C3CE168E;
- Wed, 20 Sep 2023 15:29:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E996C433C7;
- Wed, 20 Sep 2023 15:29:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695223789;
- bh=shQOY5YSFRPH4MYjqUKwyU+DkSv5sjGrh2VkaY95KB0=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=k1nl+EUmAYscMk0MAMW2wOdy5tjaXvnpQu2mWSR498aox4xq7L28RDznbIZh6rShu
- bXVpJ07+Dr4X3NpXfTZ0f+3K8zQ8Zd6GU7TcRKgE2VVsNXC3Y08ZZyb7CwubbNshsl
- rm6wzJ/+k25k/ioraZ+0GeLOcb5AuV3QTsiMjdD7WPv7IhViBMRoyEFjeAf8ki2Aj8
- W8ZdClpH4+zgGo/wL79cSK2jQ4cXV/iem14axjymtw8/HBVWpvEmqX0RCWhOZdTah7
- KQG1SBOFHqTYAzExj0EvSsQ5z8MaqVyH0lewm2ewDy4wd3OYa7pYLYkwfk2fAVqddy
- kVlr1oQs66e8A==
-Message-ID: <4e6b2d3addc34619e5d2e35ccbd798362a1fb95a.camel@kernel.org>
-From: Jeff Layton <jlayton@kernel.org>
-To: Christian Brauner <brauner@kernel.org>, Chuck Lever III
- <chuck.lever@oracle.com>, Jan Kara <jack@suse.cz>
-Date: Wed, 20 Sep 2023 11:29:41 -0400
-In-Reply-To: <20230920-keine-eile-c9755b5825db@brauner>
-References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
- <20230919110457.7fnmzo4nqsi43yqq@quack3>
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 2A37D21F95;
+ Wed, 20 Sep 2023 15:30:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1695223837; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Z07gJ0ljk8a9zukVNTeRislBXMh7pJ7EEuF8a+v+/FI=;
+ b=cPiRr5NlB4Iwub7EwKz86boVSJQJZ3WLxzLaU6G09EfO4FmtVOdy7KUFneBvjrGmUR3ITh
+ 2SAzepsqhIpBmvq/dM3lwFGS4jeZb1JiYpwLyM/YRSlBcScjreBuxS42wYeBxMo6k0JIzb
+ vOOpZeXkJqjpWBWmAFVZOTXkw8HJ8lk=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1695223837;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Z07gJ0ljk8a9zukVNTeRislBXMh7pJ7EEuF8a+v+/FI=;
+ b=6KZkGGsMv2dh1rvGNnyToBfPP9oSwDD0PDv8XeIzbn7pcxdfbwlBblC3C43EGbanxkRyi5
+ mASfcKX9dgdX2bCw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0DEDB132C7;
+ Wed, 20 Sep 2023 15:30:37 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id +bZeAx0QC2WLRwAAMHmgww
+ (envelope-from <jack@suse.cz>); Wed, 20 Sep 2023 15:30:37 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id 97616A077D; Wed, 20 Sep 2023 17:30:36 +0200 (CEST)
+Date: Wed, 20 Sep 2023 17:30:36 +0200
+From: Jan Kara <jack@suse.cz>
+To: Christian Brauner <brauner@kernel.org>
+Message-ID: <20230920153036.pfg5h4aoed6ua6s3@quack3>
+References: <20230919110457.7fnmzo4nqsi43yqq@quack3>
  <1f29102c09c60661758c5376018eac43f774c462.camel@kernel.org>
  <4511209.uG2h0Jr0uP@nimes>
  <08b5c6fd3b08b87fa564bb562d89381dd4e05b6a.camel@kernel.org>
@@ -74,34 +86,34 @@ References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
  <20230920-raser-teehaus-029cafd5a6e4@brauner>
  <57C103E1-1AD2-4D86-926C-481BC6BDB191@oracle.com>
  <20230920-keine-eile-c9755b5825db@brauner>
-User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20230920-keine-eile-c9755b5825db@brauner>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, 2023-09-20 at 16:53 +0200, Christian Brauner wrote:
- > > You could put it behind an EXPERIMENTAL Kconfig option so that the >
- > code stays in and can be used by the brave or foolish while it is [...] 
+ Content preview:  On Wed 20-09-23 16:53:26, Christian Brauner wrote: > > You
+ could put it behind an EXPERIMENTAL Kconfig option so that the > > code stays
+ in and can be used by the brave or foolish while it is > > stil [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ medium trust [195.135.220.28 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qiz9M-00Gts2-W1
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1qizA3-00Gu3Z-KH
 Subject: Re: [f2fs-dev] [PATCH v7 12/13] ext4: switch to multigrain
  timestamps
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -118,13 +130,16 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Martin Brandenburg <martin@omnibond.com>,
  Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>, "Darrick
- J. Wong" <djwong@kernel.org>, Dominique Martinet <asmadeus@codewreck.org>,
+ Jan Kara <jack@suse.cz>,
+ "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>,
+ "Darrick J. Wong" <djwong@kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>,
  Christian Schoenebeck <linux_oss@crudebyte.com>,
  "linux-unionfs@vger.kernel.org" <linux-unionfs@vger.kernel.org>,
  David Howells <dhowells@redhat.com>, Chris Mason <clm@fb.com>,
  Andreas Dilger <adilger.kernel@dilger.ca>, Hans de Goede <hdegoede@redhat.com>,
  Marc Dionne <marc.dionne@auristor.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
  "codalist@coda.cs.cmu.edu" <codalist@coda.cs.cmu.edu>,
  "linux-afs@lists.infradead.org" <linux-afs@lists.infradead.org>,
  "linux-mtd@lists.infradead.org" <linux-mtd@lists.infradead.org>,
@@ -160,12 +175,13 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  "v9fs@lists.linux.dev" <v9fs@lists.linux.dev>,
  "ntfs3@lists.linux.dev" <ntfs3@lists.linux.dev>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Jeff Layton <jlayton@kernel.org>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
  "linux-f2fs-devel@lists.sourceforge.net"
  <linux-f2fs-devel@lists.sourceforge.net>, Steve French <sfrench@samba.org>,
  Sergey Senozhatsky <senozhatsky@chromium.org>,
- Luis Chamberlain <mcgrof@kernel.org>, Jeffle Xu <jefflexu@linux.alibaba.com>,
+ Luis Chamberlain <mcgrof@kernel.org>, Chuck Lever III <chuck.lever@oracle.com>,
+ Jeffle Xu <jefflexu@linux.alibaba.com>,
  "devel@lists.orangefs.org" <devel@lists.orangefs.org>,
  Anna Schumaker <anna@kernel.org>, Jan Kara <jack@suse.com>,
  Bo b Peterson <rpeterso@redhat.com>,
@@ -178,7 +194,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, 2023-09-20 at 16:53 +0200, Christian Brauner wrote:
+On Wed 20-09-23 16:53:26, Christian Brauner wrote:
 > > You could put it behind an EXPERIMENTAL Kconfig option so that the
 > > code stays in and can be used by the brave or foolish while it is
 > > still being refined.
@@ -201,16 +217,17 @@ On Wed, 2023-09-20 at 16:53 +0200, Christian Brauner wrote:
 > 
 > survives xfstests.
 
-I think that's probably the wisest course of action. I need some time to
-ponder the options for this series anyway, and another cycle in next
-wouldn't hurt.
+Agreed. I think most of ffb6cf19e063 ("fs: add infrastructure for
+multigrain timestamps") will be needed anyway but there's no problem in
+reintroducing it in the new solution. I've checked the branch and the
+reverts look good to me. Feel free to add:
 
-The branch itself looks fine, but you might want to reverse the order of
-the patches in case someone lands there in the middle of a bisect. IOW,
-I think you want to revert the "convert to multigrain" patches before
-you revert the infrastructure. 
+Acked-by: Jan Kara <jack@suse.cz>
+
+								Honza
 -- 
-Jeff Layton <jlayton@kernel.org>
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
 
 _______________________________________________
