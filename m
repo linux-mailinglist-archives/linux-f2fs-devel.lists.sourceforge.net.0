@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A04B37B233E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 19:06:36 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36AB47B235E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 19:09:45 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qluT7-0007Oi-0K;
-	Thu, 28 Sep 2023 17:06:27 +0000
+	id 1qluWD-0008Tl-S2;
+	Thu, 28 Sep 2023 17:09:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qluT5-0007OP-58;
- Thu, 28 Sep 2023 17:06:26 +0000
+ (envelope-from <jlayton@kernel.org>) id 1qluW9-0008TN-Us;
+ Thu, 28 Sep 2023 17:09:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DNM/VlOuUT51G0bnMvXw+94sqfHee3c68K5vLwQuau4=; b=kA6qJviO4ZO2Ky9iYK/RgUJ0ry
- wbSKKvlrNYsDCJS/7bk3vu6XavUHT92DloU67M2SbW96UC3UJ3a3zKAMRl5gqsrB8dvEeVjdW7tH1
- EwV9JTcGrJYMzrO4whS4i8AQSJ6zZ1iBiGSyM41DmdQl7gVz5wgvo2SVh9ZPiPE2Q7gU=;
+ bh=WeJmzV4JvFZz14Bi7n5eT9UeLT4u7m3FR+NHBqKUVRI=; b=B797vJQ5o+/N5FYcgQ6OOGRqpt
+ e/FP/gzSALXcmJfafnQrG6hO8qSxUGaCbjf1O98PyXxnNPlZMxY47vKJt2cK4BxjQD0SpYfefy1Kt
+ P0mBHkqM4mid3gRxi8j7L3OrA76Ci/j0b0IRPOtHC3/rMETlI34+1T2lZPy8riad5qbI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -30,42 +30,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DNM/VlOuUT51G0bnMvXw+94sqfHee3c68K5vLwQuau4=; b=nNneVpDPOqSKBzvVJ/pDukSs/o
- SxkWhEW6WlxcmHqfl3V3igbU1ABc1dg+GZWMrwgQGxW6Gb20/hOy2sGFehnfzRcN+M0Zij39i5C2x
- dog8+Wllicsfbn7wh+5sH600fJ2V9ivL6G33tnIURET0LcdeZSgpD9HsKaXv5a06uZa8=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=WeJmzV4JvFZz14Bi7n5eT9UeLT4u7m3FR+NHBqKUVRI=; b=llNEY3cMCZMMYTNiVgiCUibBwK
+ ryhDmM7bnKD54fH/auuqz6vi5ThBwJQ83kabUa1xHaYwX+Hbp6iy5s4R3mxZFKf3LhWUELG5UyFzQ
+ sE3oKn2HWy6ZjA7wH/uar/0IuOUYDpbW6XCmg8oA5AbI+xiVlceAEVe/WRrg0im/adKM=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qluT3-00ALxD-95; Thu, 28 Sep 2023 17:06:26 +0000
+ id 1qluW6-0001Yp-ND; Thu, 28 Sep 2023 17:09:38 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A10FF61D47;
- Thu, 28 Sep 2023 17:06:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9B31C433C8;
- Thu, 28 Sep 2023 17:06:04 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id BE5D1CE223E;
+ Thu, 28 Sep 2023 17:09:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E060C433C8;
+ Thu, 28 Sep 2023 17:09:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695920779;
- bh=DNM/VlOuUT51G0bnMvXw+94sqfHee3c68K5vLwQuau4=;
+ s=k20201202; t=1695920964;
+ bh=zRV/ipMOOeHJFSr00KRb3DbkWuWIfMUsmholMiYqIFk=;
  h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=T1EG9wCsmdavqbCDgZQmRYDY2hTjqQ8HvqU7HakqZRoba0+m8x7Xb0PPxNH54fTbK
- gxOvKBrhR/NUHAqOFYLgQFvCS4fbqqpdpyJ0meCz+VJBZB5WwUDXaofxixCnDwGA2b
- xVhvTR3lvjwhcUNCr4cL+zM4prum42dBj/EqssN3wQ5xwZohTtnO5wenm4djJ5rTsg
- au+O/I2DWLjGqSGQ9+pJFDrXNkgJ5uSZlH8zfxoOHymWjEqjSumVZbYplcXqZfm3+f
- KDfZ0aAr31be94G8szYCClaMWLFdZEYGpG76Y3w4tHoT3E7mgxWznMj5HFQTi8O+xa
- SaKUjb/2UX2Ww==
-Message-ID: <af047e4a1c6947c59d4a13d4ae221c784a5386b4.camel@kernel.org>
+ b=RTCWP38X/3Qiq9e2eoLruFi6qLhhyLJQrL65PrzDXWj1P7d+rG2Zhi5BPUongplET
+ wsh5RnIrkn2G9TM6HAAN0NYZV5F3YR+mvgQFtP+9DfawGUb0VUEGN4ZEWFes0Iqc9f
+ GfOE5yeYJ7UoCrij4lXLrG+jRW8wnHjCzfKNNQxN4dSF4K07yMiaZJqV+VHP19Z5O0
+ 9Eizi+4+cRTlhImq1fbs7Tb7Mmc79AROTIyl6OUF1ztlUjMfm5tqzXneCy0nyt31m3
+ teqvuavXAiJG2oyvZuxOiGcbkwGZED723LL7ZyPIvGZsh/B5aAGwbzTt8Xw0FUHUy0
+ P2xkFw6PYWKrw==
+Message-ID: <555fd53b72742fe8a8d2b67c80502f749631d773.camel@kernel.org>
 From: Jeff Layton <jlayton@kernel.org>
-To: Arnd Bergmann <arnd@arndb.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Linus Torvalds
- <torvalds@linux-foundation.org>, David Sterba <dsterba@suse.cz>, Amir
- Goldstein <amir73il@gmail.com>, Theodore Ts'o <tytso@mit.edu>,  "Eric W.
- Biederman" <ebiederm@xmission.com>, Kees Cook <keescook@chromium.org>,
- Jeremy Kerr <jk@ozlabs.org>, Michael Ellerman <mpe@ellerman.id.au>,
- Nicholas Piggin <npiggin@gmail.com>, Christophe Leroy
- <christophe.leroy@csgroup.eu>, Heiko Carstens <hca@linux.ibm.com>, Vasily
- Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle
- <svens@linux.ibm.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Arve =?ISO-8859-1?Q?Hj=F8nnev=E5g?= <arve@android.com>, Todd Kjos
+To: Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner
+ <brauner@kernel.org>, Linus Torvalds <torvalds@linux-foundation.org>, David
+ Sterba <dsterba@suse.cz>, Amir Goldstein <amir73il@gmail.com>, Theodore
+ Ts'o <tytso@mit.edu>,  Eric Biederman <ebiederm@xmission.com>, Kees Cook
+ <keescook@chromium.org>, Jeremy Kerr <jk@ozlabs.org>, Arnd Bergmann
+ <arnd@arndb.de>, Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin
+ <npiggin@gmail.com>,  Christophe Leroy <christophe.leroy@csgroup.eu>, Heiko
+ Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,  Alexander
+ Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger
+ <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Greg
+ Kroah-Hartman <gregkh@linuxfoundation.org>, Arve
+ =?ISO-8859-1?Q?Hj=F8nnev=E5g?= <arve@android.com>, Todd Kjos
  <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes
  <joel@joelfernandes.org>, Carlos Llamas <cmllamas@google.com>, Suren
  Baghdasaryan <surenb@google.com>, Mattia Dongili <malattia@linux.it>,
@@ -84,9 +84,9 @@ To: Arnd Bergmann <arnd@arndb.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
  <clm@fb.com>, Josef Bacik <josef@toxicpanda.com>, Xiubo Li
  <xiubli@redhat.com>,  Ilya Dryomov <idryomov@gmail.com>, Jan Harkes
  <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu, Joel Becker <jlbec@evilplan.org>,
- Christoph Hellwig <hch@lst.de>, Nicolas Pitre <nico@fluxnic.net>, "Rafael J
- . Wysocki" <rafael@kernel.org>, Ard Biesheuvel <ardb@kernel.org>, Gao Xiang
- <xiang@kernel.org>, Chao Yu <chao@kernel.org>,  Yue Hu
+ Christoph Hellwig <hch@lst.de>, Nicolas Pitre <nico@fluxnic.net>, "Rafael
+ J. Wysocki" <rafael@kernel.org>, Ard Biesheuvel <ardb@kernel.org>, Gao
+ Xiang <xiang@kernel.org>, Chao Yu <chao@kernel.org>,  Yue Hu
  <huyue2@coolpad.com>, Jeffle Xu <jefflexu@linux.alibaba.com>, Namjae Jeon
  <linkinjeon@kernel.org>, Sungjong Seo <sj1557.seo@samsung.com>, Jan Kara
  <jack@suse.com>, Andreas Dilger <adilger.kernel@dilger.ca>, Jaegeuk Kim
@@ -125,34 +125,33 @@ To: Arnd Bergmann <arnd@arndb.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
  <yonghong.song@linux.dev>, John Fastabend <john.fastabend@gmail.com>, KP
  Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@google.com>, Hao Luo
  <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,  Hugh Dickins
- <hughd@google.com>, Andrew Morton <akpm@linux-foundation.org>, "David S .
+ <hughd@google.com>, Andrew Morton <akpm@linux-foundation.org>, "David S.
  Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub
  Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, John Johansen
  <john.johansen@canonical.com>, Paul Moore <paul@paul-moore.com>, James
  Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Stephen
  Smalley <stephen.smalley.work@gmail.com>, Eric Paris <eparis@parisplace.org>
-Date: Thu, 28 Sep 2023 13:06:03 -0400
-In-Reply-To: <6020d6e7-b187-4abb-bf38-dc09d8bd0f6d@app.fastmail.com>
+Date: Thu, 28 Sep 2023 13:09:08 -0400
+In-Reply-To: <20230928110554.34758-2-jlayton@kernel.org>
 References: <20230928110554.34758-1-jlayton@kernel.org>
  <20230928110554.34758-2-jlayton@kernel.org>
- <6020d6e7-b187-4abb-bf38-dc09d8bd0f6d@app.fastmail.com>
 User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, 2023-09-28 at 11:48 -0400, Arnd Bergmann wrote: >
- On Thu, Sep 28, 2023, at 07:05, Jeff Layton wrote: > > This shaves 8 bytes
- off struct inode, according to pahole. > > > > Signed-off-by: Jeff [...] 
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  On Thu, 2023-09-28 at 07:05 -0400, Jeff Layton wrote: > This
+ shaves 8 bytes off struct inode, according to pahole. > > Signed-off-by:
+ Jeff Layton <jlayton@kernel.org> > --- > include/linux/fs.h | 32 + [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -163,7 +162,7 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qluT3-00ALxD-95
+X-Headers-End: 1qluW6-0001Yp-ND
 Subject: Re: [f2fs-dev] [PATCH 86/87] fs: switch timespec64 fields in inode
  to discrete integers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -193,7 +192,7 @@ Cc: jfs-discussion@lists.sourceforge.net, linux-efi@vger.kernel.org,
  v9fs@lists.linux.dev, linux-usb@vger.kernel.org,
  samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-security-module@vger.kernel.org, Netdev <netdev@vger.kernel.org>,
+ linux-security-module@vger.kernel.org, netdev@vger.kernel.org,
  linux-fsdevel@vger.kernel.org, bpf@vger.kernel.org, ntfs3@lists.linux.dev,
  linux-erofs@lists.ozlabs.org, linux-karma-devel@lists.sourceforge.net,
  linux-btrfs@vger.kernel.org
@@ -201,34 +200,110 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, 2023-09-28 at 11:48 -0400, Arnd Bergmann wrote:
-> On Thu, Sep 28, 2023, at 07:05, Jeff Layton wrote:
-> > This shaves 8 bytes off struct inode, according to pahole.
-> > 
-> > Signed-off-by: Jeff Layton <jlayton@kernel.org>
+On Thu, 2023-09-28 at 07:05 -0400, Jeff Layton wrote:
+> This shaves 8 bytes off struct inode, according to pahole.
 > 
-> FWIW, this is similar to the approach that Deepa suggested
-> back in 2016:
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+> ---
+>  include/linux/fs.h | 32 +++++++++++++++++++++++---------
+>  1 file changed, 23 insertions(+), 9 deletions(-)
 > 
-> https://lore.kernel.org/lkml/1452144972-15802-3-git-send-email-deepa.kernel@gmail.com/
+> diff --git a/include/linux/fs.h b/include/linux/fs.h
+> index 831657011036..de902ff2938b 100644
+> --- a/include/linux/fs.h
+> +++ b/include/linux/fs.h
+> @@ -671,9 +671,12 @@ struct inode {
+>  	};
+>  	dev_t			i_rdev;
+>  	loff_t			i_size;
+> -	struct timespec64	__i_atime; /* use inode_*_atime accessors */
+> -	struct timespec64	__i_mtime; /* use inode_*_mtime accessors */
+> -	struct timespec64	__i_ctime; /* use inode_*_ctime accessors */
+> +	time64_t		i_atime_sec;
+> +	time64_t		i_mtime_sec;
+> +	time64_t		i_ctime_sec;
+> +	u32			i_atime_nsec;
+> +	u32			i_mtime_nsec;
+> +	u32			i_ctime_nsec;
+>  	spinlock_t		i_lock;	/* i_blocks, i_bytes, maybe i_size */
+>  	unsigned short          i_bytes;
+>  	u8			i_blkbits;
+> @@ -1519,7 +1522,9 @@ struct timespec64 inode_set_ctime_current(struct inode *inode);
+>   */
+>  static inline struct timespec64 inode_get_ctime(const struct inode *inode)
+>  {
+> -	return inode->__i_ctime;
+> +	struct timespec64 ts = { .tv_sec  = inode->i_ctime_sec,
+> +				 .tv_nsec = inode->i_ctime_nsec };
+> +	return ts;
+>  }
 > 
-> It was NaKed at the time because of the added complexity,
-> though it would have been much easier to do it then,
-> as we had to touch all the timespec references anyway.
+>
+>  
+>  /**
+> @@ -1532,7 +1537,8 @@ static inline struct timespec64 inode_get_ctime(const struct inode *inode)
+>  static inline struct timespec64 inode_set_ctime_to_ts(struct inode *inode,
+>  						      struct timespec64 ts)
+>  {
+> -	inode->__i_ctime = ts;
+> +	inode->i_ctime_sec = ts.tv_sec;
+> +	inode->i_ctime_nsec = ts.tv_sec;
+
+Bug above and in the other inode_set_?time_to_ts() functions. This isn't
+setting the nsec field correctly.
+
+>  	return ts;
+>  }
 > 
-> The approach still seems ok to me, but I'm not sure it's worth
-> doing it now if we didn't do it then.
 > 
 
-I remember seeing those patches go by. I don't remember that change
-being NaK'ed, but I wasn't paying close attention at the time 
 
-Looking at it objectively now, I think it's worth it to recover 8 bytes
-per inode and open a 4 byte hole that Amir can use to grow the
-i_fsnotify_mask. We might even able to shave off another 12 bytes
-eventually if we can move to a single 64-bit word per timestamp. 
+>  
+> @@ -1555,13 +1561,17 @@ static inline struct timespec64 inode_set_ctime(struct inode *inode,
+>  
+>  static inline struct timespec64 inode_get_atime(const struct inode *inode)
+>  {
+> -	return inode->__i_atime;
+> +	struct timespec64 ts = { .tv_sec  = inode->i_atime_sec,
+> +				 .tv_nsec = inode->i_atime_nsec };
+> +
+> +	return ts;
+>  }
+>  
+>  static inline struct timespec64 inode_set_atime_to_ts(struct inode *inode,
+>  						      struct timespec64 ts)
+>  {
+> -	inode->__i_atime = ts;
+> +	inode->i_atime_sec = ts.tv_sec;
+> +	inode->i_atime_nsec = ts.tv_sec;
+>  	return ts;
+>  }
+>  
+> @@ -1575,13 +1585,17 @@ static inline struct timespec64 inode_set_atime(struct inode *inode,
+>  
+>  static inline struct timespec64 inode_get_mtime(const struct inode *inode)
+>  {
+> -	return inode->__i_mtime;
+> +	struct timespec64 ts = { .tv_sec  = inode->i_mtime_sec,
+> +				 .tv_nsec = inode->i_mtime_nsec };
+> +
+> +	return ts;
+>  }
+>  
+>  static inline struct timespec64 inode_set_mtime_to_ts(struct inode *inode,
+>  						      struct timespec64 ts)
+>  {
+> -	inode->__i_mtime = ts;
+> +	inode->i_atime_sec = ts.tv_sec;
+> +	inode->i_atime_nsec = ts.tv_sec;
 
-It is a lot of churn though.
+Doh! s/atime/mtime/ in the above lines.
+
+>  	return ts;
+>  }
+>  
+
+Both bugs are fixed in my tree.
 -- 
 Jeff Layton <jlayton@kernel.org>
 
