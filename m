@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BBEB7B19DB
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 13:06:42 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39CB17B19EA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 13:06:56 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qloqu-0002TU-I2;
-	Thu, 28 Sep 2023 11:06:39 +0000
+	id 1qlor8-0004Sj-Le;
+	Thu, 28 Sep 2023 11:06:54 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qloqs-0002T7-T3;
- Thu, 28 Sep 2023 11:06:37 +0000
+ (envelope-from <jlayton@kernel.org>) id 1qlor3-0004S0-Bn;
+ Thu, 28 Sep 2023 11:06:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0YEv1V3zZSOHcgruK+mvOq6BiG3lZhaaQ3ES0cY6BjM=; b=ToMDQsRPd56LyVYrvXRp+7mN4Y
- TCUN3GC9CGInbfQ5xIH7ZaU2wCF0kyYJ7UVo3SoFop+Cq0O3nkU+pPHNbrUs7ep97aFZatQHJ/2DR
- NKnb/0nW6KCSB3bQtVJKH/lDZYioFWnvz8roiw16Qaw6IrIv1W9hZ48cyUwQwDmugZ1M=;
+ bh=AZYm+3IMy7PsScQJ1WtwjofEM45ISgwj290K5ddP3W4=; b=hUODD9UxB7OIYgMDWMvS34I1A0
+ zIl2loyptfkBjh0u8l5iqJtKs4Y6MSHs6L9LzxPpXp1sZ9akYo0svgBLx27W9QdFTyVMXw92CeQs1
+ 7yBEC6/ut3beIaLeKD5GjDOqRAetZ6+rpgmF8Siw6srvcjkkD1BG0NB9tZe7Jrt6rXdM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -30,28 +30,28 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0YEv1V3zZSOHcgruK+mvOq6BiG3lZhaaQ3ES0cY6BjM=; b=OZr9DuV0rij5cp48YlbZrXBoH7
- 7i2SCiXgkh084lY/JNRmNFLbeINDVuWuKsXyTeaVZiE4Vyfd6v1Oddr1hMvPacZTBvmxDOs46sIlu
- yoRw9DALZrAtNYvBMgrZJknKOrsTa+anEBCPggmvNibihsEGikH3GntcHL6h7fgpTc8Y=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=AZYm+3IMy7PsScQJ1WtwjofEM45ISgwj290K5ddP3W4=; b=OLpFUaLIMLu9nFouwaPPWR1FFM
+ jlX6FKZdwA2bLt+NhYzG0aRIc2emqYKxYCxGMKnE1NoQnVHzJY4VMXZ/wW7E/tcah51w3nu8XDDN6
+ KfUH4c+z4DGf1Tk0TGE3qSFpk+tfQC/nHZ6nEumgE77/jTi4AjpfWbSGtqqlRg2BK7+o=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qloqq-009nee-FL; Thu, 28 Sep 2023 11:06:37 +0000
+ id 1qlor1-009nfp-HL; Thu, 28 Sep 2023 11:06:48 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 5B9D9CE1D1B;
- Thu, 28 Sep 2023 11:06:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28B2DC07618;
- Thu, 28 Sep 2023 11:06:11 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTP id 0FB05B81BBB;
+ Thu, 28 Sep 2023 11:06:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF540C4160E;
+ Thu, 28 Sep 2023 11:06:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695899185;
- bh=EREGf1zcL5EA1z4Sr1OlKcRcr7XPDG3rng7QCUAKDtA=;
+ s=k20201202; t=1695899200;
+ bh=KcEb7Ur9VnfCswhdPaiHlW6A+8Un/231FkVSjN0vVmY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=bFxyq+wI82J/WQ/3LWfsBekhh8OiaT2wYsSAjrDQk/NrGOURDgw5PWuMWCgk6npZ6
- gYLI9nWuVeVxeze31PlhCET+PdMZY70Xy9a1ckPrunnaxH93RrMhwAf8QKEfxBAiMW
- A3cOqQLFufYccE9l6906MspLgdIVzFHYGgIdgAYxkIU2uPLpvYnElaoBbxLu/GOElz
- nfJ0kqX0lpMPX7fozYTYh3xQ6uUVAew7yxgjGjuRy8Oehoifs61PNFQPPpZBViM2G3
- Q4xpsOM8kKsqE0iTJbEpoU+nreDJHiQfBK4Xqt/1AbCybTiYxp8gYPp3ucvOuJLoxK
- YlW0JpzEkcqqQ==
+ b=LIvJMQV9gV0uW8yl32NSd4yb2599TLMQSz3pZ7A8RvzTMK+/pPweiGT83QuRE6Ap1
+ RJ4tHrEtdELF24JEcAXBlbRxCLgD4fFKMvaVxDYJKFUi3JGR08fTlWqCpRUQLEU1eL
+ PLdctIni/gLihdwFGrq6SVBHRpLIcoURicUh3JGLAt4t51ztAQPhDNYHtf1HHGTOrp
+ XAB3XmZIrDME0ElXf57Dd8FtxB0Uiap7czp3ZlR45ObMUeHSnxd6fREH7G/U4RgfCh
+ xv1/nw1L9/w3ErqEe74BXlZqblyXh/mVR1R03Etd6mg/RnXyu8EBj+lRYoEkTAJg+R
+ yYzEQo7GNicAA==
 From: Jeff Layton <jlayton@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Christian Brauner <brauner@kernel.org>,
@@ -150,8 +150,8 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  "Serge E. Hallyn" <serge@hallyn.com>,
  Stephen Smalley <stephen.smalley.work@gmail.com>,
  Eric Paris <eparis@parisplace.org>
-Date: Thu, 28 Sep 2023 07:05:53 -0400
-Message-ID: <20230928110554.34758-2-jlayton@kernel.org>
+Date: Thu, 28 Sep 2023 07:05:54 -0400
+Message-ID: <20230928110554.34758-3-jlayton@kernel.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230928110554.34758-1-jlayton@kernel.org>
 References: <20230928110554.34758-1-jlayton@kernel.org>
@@ -163,15 +163,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This shaves 8 bytes off struct inode, according to pahole.
- Signed-off-by: Jeff Layton <jlayton@kernel.org> --- include/linux/fs.h |
- 32 +++++++++++++++++++++++--------- 1 file changed, 23 insertions(+),
- 9 deletions(-)
+ Content preview: The recent change to use discrete integers instead of struct
+ timespec64 in struct inode shaved 8 bytes off of it, but it also moves the
+ i_lock into the previous cacheline, away from the fields that it [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
+ medium trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -182,9 +181,9 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qloqq-009nee-FL
-Subject: [f2fs-dev] [PATCH 86/87] fs: switch timespec64 fields in inode to
- discrete integers
+X-Headers-End: 1qlor1-009nfp-HL
+Subject: [f2fs-dev] [PATCH 87/87] fs: move i_blocks up a few places in
+ struct inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -220,94 +219,35 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-This shaves 8 bytes off struct inode, according to pahole.
+The recent change to use discrete integers instead of struct timespec64
+in struct inode shaved 8 bytes off of it, but it also moves the i_lock
+into the previous cacheline, away from the fields that it protects.
+
+Move i_blocks up above the i_lock, which moves the new 4 byte hole to
+just after the timestamps, without changing the size of the structure.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- include/linux/fs.h | 32 +++++++++++++++++++++++---------
- 1 file changed, 23 insertions(+), 9 deletions(-)
+ include/linux/fs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 831657011036..de902ff2938b 100644
+index de902ff2938b..3e0fe0f52e7c 100644
 --- a/include/linux/fs.h
 +++ b/include/linux/fs.h
-@@ -671,9 +671,12 @@ struct inode {
- 	};
- 	dev_t			i_rdev;
- 	loff_t			i_size;
--	struct timespec64	__i_atime; /* use inode_*_atime accessors */
--	struct timespec64	__i_mtime; /* use inode_*_mtime accessors */
--	struct timespec64	__i_ctime; /* use inode_*_ctime accessors */
-+	time64_t		i_atime_sec;
-+	time64_t		i_mtime_sec;
-+	time64_t		i_ctime_sec;
-+	u32			i_atime_nsec;
-+	u32			i_mtime_nsec;
-+	u32			i_ctime_nsec;
+@@ -677,11 +677,11 @@ struct inode {
+ 	u32			i_atime_nsec;
+ 	u32			i_mtime_nsec;
+ 	u32			i_ctime_nsec;
++	blkcnt_t		i_blocks;
  	spinlock_t		i_lock;	/* i_blocks, i_bytes, maybe i_size */
  	unsigned short          i_bytes;
  	u8			i_blkbits;
-@@ -1519,7 +1522,9 @@ struct timespec64 inode_set_ctime_current(struct inode *inode);
-  */
- static inline struct timespec64 inode_get_ctime(const struct inode *inode)
- {
--	return inode->__i_ctime;
-+	struct timespec64 ts = { .tv_sec  = inode->i_ctime_sec,
-+				 .tv_nsec = inode->i_ctime_nsec };
-+	return ts;
- }
+ 	u8			i_write_hint;
+-	blkcnt_t		i_blocks;
  
- /**
-@@ -1532,7 +1537,8 @@ static inline struct timespec64 inode_get_ctime(const struct inode *inode)
- static inline struct timespec64 inode_set_ctime_to_ts(struct inode *inode,
- 						      struct timespec64 ts)
- {
--	inode->__i_ctime = ts;
-+	inode->i_ctime_sec = ts.tv_sec;
-+	inode->i_ctime_nsec = ts.tv_sec;
- 	return ts;
- }
- 
-@@ -1555,13 +1561,17 @@ static inline struct timespec64 inode_set_ctime(struct inode *inode,
- 
- static inline struct timespec64 inode_get_atime(const struct inode *inode)
- {
--	return inode->__i_atime;
-+	struct timespec64 ts = { .tv_sec  = inode->i_atime_sec,
-+				 .tv_nsec = inode->i_atime_nsec };
-+
-+	return ts;
- }
- 
- static inline struct timespec64 inode_set_atime_to_ts(struct inode *inode,
- 						      struct timespec64 ts)
- {
--	inode->__i_atime = ts;
-+	inode->i_atime_sec = ts.tv_sec;
-+	inode->i_atime_nsec = ts.tv_sec;
- 	return ts;
- }
- 
-@@ -1575,13 +1585,17 @@ static inline struct timespec64 inode_set_atime(struct inode *inode,
- 
- static inline struct timespec64 inode_get_mtime(const struct inode *inode)
- {
--	return inode->__i_mtime;
-+	struct timespec64 ts = { .tv_sec  = inode->i_mtime_sec,
-+				 .tv_nsec = inode->i_mtime_nsec };
-+
-+	return ts;
- }
- 
- static inline struct timespec64 inode_set_mtime_to_ts(struct inode *inode,
- 						      struct timespec64 ts)
- {
--	inode->__i_mtime = ts;
-+	inode->i_atime_sec = ts.tv_sec;
-+	inode->i_atime_nsec = ts.tv_sec;
- 	return ts;
- }
- 
+ #ifdef __NEED_I_SIZE_ORDERED
+ 	seqcount_t		i_size_seqcount;
 -- 
 2.41.0
 
