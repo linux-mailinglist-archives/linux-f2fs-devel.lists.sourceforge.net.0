@@ -2,223 +2,159 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6539E7B21F2
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 18:06:10 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A04B37B233E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 19:06:36 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qltWa-0002pq-DA;
-	Thu, 28 Sep 2023 16:06:00 +0000
+	id 1qluT7-0007Oi-0K;
+	Thu, 28 Sep 2023 17:06:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <arnd@arndb.de>) id 1qltWY-0002pT-A2;
- Thu, 28 Sep 2023 16:05:58 +0000
+ (envelope-from <jlayton@kernel.org>) id 1qluT5-0007OP-58;
+ Thu, 28 Sep 2023 17:06:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Subject:Cc:To:From:Date:References:
- In-Reply-To:Message-Id:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
+ :References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AEM/fDbI9O0BImAELzI+hfXsnObtdXB3nh8ZZCXXqn0=; b=hxXdDZtfl80pBswvGUCs44j4LZ
- agDp6T/K/qKNZaigy7hFL16x5t2GDn5etxDgtlkOdOgrRTjXm75HSkm/bkEHG4v195j47iw4fRuYa
- 62IQ/fx1q6wbpNw97EA32VW3P4JIdzvsjfK2QA+Jiaj5kruQSBr04PQqV5xOrPylwJLo=;
+ bh=DNM/VlOuUT51G0bnMvXw+94sqfHee3c68K5vLwQuau4=; b=kA6qJviO4ZO2Ky9iYK/RgUJ0ry
+ wbSKKvlrNYsDCJS/7bk3vu6XavUHT92DloU67M2SbW96UC3UJ3a3zKAMRl5gqsrB8dvEeVjdW7tH1
+ EwV9JTcGrJYMzrO4whS4i8AQSJ6zZ1iBiGSyM41DmdQl7gVz5wgvo2SVh9ZPiPE2Q7gU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Subject:Cc:To:From:Date:References:In-Reply-To:Message-Id:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=AEM/fDbI9O0BImAELzI+hfXsnObtdXB3nh8ZZCXXqn0=; b=hw9QKg/YU/Siqh5ZtqEvzz9u3S
- anXdEa7iCdoX7n1/AWQiA+TEu0+1h5k5/7UQnPIQRqyYEaICDRNvVX6XSQ5W48dZ1VtTerHIu3bd/
- RoxnXyWAg2XHukytOnbOXnFs+Rmlqoatn/xleD1qOkcLgBDgVQlidCglMDH3RFMWLg6U=;
-Received: from new3-smtp.messagingengine.com ([66.111.4.229])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ bh=DNM/VlOuUT51G0bnMvXw+94sqfHee3c68K5vLwQuau4=; b=nNneVpDPOqSKBzvVJ/pDukSs/o
+ SxkWhEW6WlxcmHqfl3V3igbU1ABc1dg+GZWMrwgQGxW6Gb20/hOy2sGFehnfzRcN+M0Zij39i5C2x
+ dog8+Wllicsfbn7wh+5sH600fJ2V9ivL6G33tnIURET0LcdeZSgpD9HsKaXv5a06uZa8=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qltWV-000709-JL; Thu, 28 Sep 2023 16:05:58 +0000
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailnew.nyi.internal (Postfix) with ESMTP id 5C6B0581DAC;
- Thu, 28 Sep 2023 11:48:43 -0400 (EDT)
-Received: from imap51 ([10.202.2.101])
- by compute6.internal (MEProxy); Thu, 28 Sep 2023 11:48:43 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
- :cc:content-type:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:sender
- :subject:subject:to:to; s=fm1; t=1695916123; x=1695923323; bh=AE
- M/fDbI9O0BImAELzI+hfXsnObtdXB3nh8ZZCXXqn0=; b=Zb4LJ/iWxs7PYCxfSp
- Mmj7xYkSAgWplciC0+hZqHaIVvkpCb/Wp0lEpODKkSCM40frExHvLz4EZAD1HZJ2
- 9ttgDzhZqI1ch1xpfCA8FHvF2/PahtOaTm//TzyXbpTROeAOQjegRsYYeSoWNyYK
- byMO63AHEnUHVIOFCUm+mvxA/KjnXoKo0xnweP/w+dWDOvLPjGksvDhU3ohZT6Yp
- QpiswLlY9kvUQhVEctTQH/u+sDAFDQssEAik0gF+XDqfmAiKXNJoWxztil5xTMTb
- X/lrYQ3vvVFk9wvd6DyfBmvUprhzlzpKTyylDH3eDykTx5H6fgxF/6J3HRQ+0H0e
- vkbw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm2; t=1695916123; x=1695923323; bh=AEM/fDbI9O0BI
- mAELzI+hfXsnObtdXB3nh8ZZCXXqn0=; b=n/Qf6qJXucXyk4LW4CL1tlnrKQD+5
- he13BWxPblPpTww3+/1Dnpdhq7Gwr3a+fNA/QON3ImAoB4q0Q/wz7xwPYTvIh6y4
- pI+Bd8aWYcux+cr2fpJzmkbS+P4O02I2hebi06+hrjnSwnPE23SfqSF4cbFR4hlH
- YaVmK8v0yltudUYq72xKx5sAA01J7qL+ne43uzwAXwT6ryRFwbNVU+Y1mHF2dF66
- agNWj0CMsq4gNWlnonaqngyXaD0pPv6qEhlNb+XbjMdBnMkU2kFvOV0FzP6pW1Jx
- vJR5UdEjaUxDazFxTy4TLY4x736COIBHAoRVIXDZypp4DjDlHgBb2dBag==
-X-ME-Sender: <xms:VqAVZehkLTOXwS_xg_6r9_9U7myXUu9Xf4xrZ0lmC-mNKcMCcnNsJw>
- <xme:VqAVZfCC0hBNW-6zWSNUDpimotTv1K_lD4MorQPse5pJgj_jwgOrIpVTd1e1lCsJ4
- CyxiAxCxEI04_Mnbzk>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrtddtgdeifecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefofgggkfgjfhffhffvvefutgesthdtredtreertdenucfhrhhomhepfdetrhhn
- ugcuuegvrhhgmhgrnhhnfdcuoegrrhhnugesrghrnhgusgdruggvqeenucggtffrrghtth
- gvrhhnpeevhfffledtgeehfeffhfdtgedvheejtdfgkeeuvefgudffteettdekkeeufeeh
- udenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptd
- enucfrrghrrghmpehmrghilhhfrhhomheprghrnhgusegrrhhnuggsrdguvg
-X-ME-Proxy: <xmx:VqAVZWG45Rd33BgqA4LgSTkoIL6Ot1dfOvbe8RgsboLNiKSqszWOAg>
- <xmx:VqAVZXQTxuydNZS_enwE9LlRoOhiuGF9gCIhq3TRrDdNwtGtt6FbIQ>
- <xmx:VqAVZbxEBIkR5teHqxhFLdOZo9wRUGgFdkIYaLd2pyKQSq2CtJDzCg>
- <xmx:W6AVZTZKpR7w9NLRl_L1L6zoNyttDC4RXO7dBXqniz-srYv7BlTPTA>
-Feedback-ID: i56a14606:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id BE4B9B60089; Thu, 28 Sep 2023 11:48:38 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.9.0-alpha0-958-g1b1b911df8-fm-20230927.002-g1b1b911d
-MIME-Version: 1.0
-Message-Id: <6020d6e7-b187-4abb-bf38-dc09d8bd0f6d@app.fastmail.com>
-In-Reply-To: <20230928110554.34758-2-jlayton@kernel.org>
+ id 1qluT3-00ALxD-95; Thu, 28 Sep 2023 17:06:26 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id A10FF61D47;
+ Thu, 28 Sep 2023 17:06:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9B31C433C8;
+ Thu, 28 Sep 2023 17:06:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1695920779;
+ bh=DNM/VlOuUT51G0bnMvXw+94sqfHee3c68K5vLwQuau4=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=T1EG9wCsmdavqbCDgZQmRYDY2hTjqQ8HvqU7HakqZRoba0+m8x7Xb0PPxNH54fTbK
+ gxOvKBrhR/NUHAqOFYLgQFvCS4fbqqpdpyJ0meCz+VJBZB5WwUDXaofxixCnDwGA2b
+ xVhvTR3lvjwhcUNCr4cL+zM4prum42dBj/EqssN3wQ5xwZohTtnO5wenm4djJ5rTsg
+ au+O/I2DWLjGqSGQ9+pJFDrXNkgJ5uSZlH8zfxoOHymWjEqjSumVZbYplcXqZfm3+f
+ KDfZ0aAr31be94G8szYCClaMWLFdZEYGpG76Y3w4tHoT3E7mgxWznMj5HFQTi8O+xa
+ SaKUjb/2UX2Ww==
+Message-ID: <af047e4a1c6947c59d4a13d4ae221c784a5386b4.camel@kernel.org>
+From: Jeff Layton <jlayton@kernel.org>
+To: Arnd Bergmann <arnd@arndb.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, Linus Torvalds
+ <torvalds@linux-foundation.org>, David Sterba <dsterba@suse.cz>, Amir
+ Goldstein <amir73il@gmail.com>, Theodore Ts'o <tytso@mit.edu>,  "Eric W.
+ Biederman" <ebiederm@xmission.com>, Kees Cook <keescook@chromium.org>,
+ Jeremy Kerr <jk@ozlabs.org>, Michael Ellerman <mpe@ellerman.id.au>,
+ Nicholas Piggin <npiggin@gmail.com>, Christophe Leroy
+ <christophe.leroy@csgroup.eu>, Heiko Carstens <hca@linux.ibm.com>, Vasily
+ Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle
+ <svens@linux.ibm.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Arve =?ISO-8859-1?Q?Hj=F8nnev=E5g?= <arve@android.com>, Todd Kjos
+ <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes
+ <joel@joelfernandes.org>, Carlos Llamas <cmllamas@google.com>, Suren
+ Baghdasaryan <surenb@google.com>, Mattia Dongili <malattia@linux.it>,
+ Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>, Jason
+ Gunthorpe <jgg@ziepe.ca>,  Leon Romanovsky <leon@kernel.org>, Brad Warrum
+ <bwarrum@linux.ibm.com>, Ritu Agarwal <rituagar@linux.ibm.com>, Hans de
+ Goede <hdegoede@redhat.com>, Ilpo =?ISO-8859-1?Q?J=E4rvinen?=
+ <ilpo.jarvinen@linux.intel.com>, Mark Gross <markgross@kernel.org>, Jiri
+ Slaby <jirislaby@kernel.org>, Eric Van Hensbergen <ericvh@kernel.org>,
+ Latchesar Ionkov <lucho@ionkov.net>, Dominique Martinet
+ <asmadeus@codewreck.org>, Christian Schoenebeck <linux_oss@crudebyte.com>, 
+ David Sterba <dsterba@suse.com>, David Howells <dhowells@redhat.com>, Marc
+ Dionne <marc.dionne@auristor.com>,  Ian Kent <raven@themaw.net>, Luis de
+ Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>,
+ "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,  Chris Mason
+ <clm@fb.com>, Josef Bacik <josef@toxicpanda.com>, Xiubo Li
+ <xiubli@redhat.com>,  Ilya Dryomov <idryomov@gmail.com>, Jan Harkes
+ <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu, Joel Becker <jlbec@evilplan.org>,
+ Christoph Hellwig <hch@lst.de>, Nicolas Pitre <nico@fluxnic.net>, "Rafael J
+ . Wysocki" <rafael@kernel.org>, Ard Biesheuvel <ardb@kernel.org>, Gao Xiang
+ <xiang@kernel.org>, Chao Yu <chao@kernel.org>,  Yue Hu
+ <huyue2@coolpad.com>, Jeffle Xu <jefflexu@linux.alibaba.com>, Namjae Jeon
+ <linkinjeon@kernel.org>, Sungjong Seo <sj1557.seo@samsung.com>, Jan Kara
+ <jack@suse.com>, Andreas Dilger <adilger.kernel@dilger.ca>, Jaegeuk Kim
+ <jaegeuk@kernel.org>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, 
+ Christoph Hellwig <hch@infradead.org>, Miklos Szeredi <miklos@szeredi.hu>,
+ Bob Peterson <rpeterso@redhat.com>, Andreas Gruenbacher
+ <agruenba@redhat.com>, Richard Weinberger <richard@nod.at>, Anton Ivanov
+ <anton.ivanov@cambridgegreys.com>, Johannes Berg
+ <johannes@sipsolutions.net>, Mikulas Patocka
+ <mikulas@artax.karlin.mff.cuni.cz>,  Mike Kravetz
+ <mike.kravetz@oracle.com>, Muchun Song <muchun.song@linux.dev>, Jan Kara
+ <jack@suse.cz>,  David Woodhouse <dwmw2@infradead.org>, Dave Kleikamp
+ <shaggy@kernel.org>, Tejun Heo <tj@kernel.org>, Trond Myklebust
+ <trond.myklebust@hammerspace.com>, Anna Schumaker <anna@kernel.org>, Chuck
+ Lever <chuck.lever@oracle.com>, Neil Brown <neilb@suse.de>, Olga
+ Kornievskaia <kolga@netapp.com>, Dai Ngo <Dai.Ngo@oracle.com>, Tom Talpey
+ <tom@talpey.com>,  Ryusuke Konishi <konishi.ryusuke@gmail.com>, Anton
+ Altaparmakov <anton@tuxera.com>, Konstantin Komarov
+ <almaz.alexandrovich@paragon-software.com>, Mark Fasheh <mark@fasheh.com>, 
+ Joseph Qi <joseph.qi@linux.alibaba.com>, Bob Copeland <me@bobcopeland.com>,
+ Mike Marshall <hubcap@omnibond.com>, Martin Brandenburg
+ <martin@omnibond.com>, Luis Chamberlain <mcgrof@kernel.org>, Iurii Zaikin
+ <yzaikin@google.com>, Tony Luck <tony.luck@intel.com>,  "Guilherme G.
+ Piccoli" <gpiccoli@igalia.com>, Anders Larsen <al@alarsen.net>, Steve
+ French <sfrench@samba.org>, Paulo Alcantara <pc@manguebit.com>, Ronnie
+ Sahlberg <lsahlber@redhat.com>, Shyam Prasad N <sprasad@microsoft.com>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>, Phillip Lougher
+ <phillip@squashfs.org.uk>, Steven Rostedt <rostedt@goodmis.org>, Masami
+ Hiramatsu <mhiramat@kernel.org>, Evgeniy Dushistov <dushistov@mail.ru>,
+ Chandan Babu R <chandan.babu@oracle.com>, "Darrick J. Wong"
+ <djwong@kernel.org>, Damien Le Moal <dlemoal@kernel.org>, Naohiro Aota
+ <naohiro.aota@wdc.com>, Johannes Thumshirn <jth@kernel.org>, Alexei
+ Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>,
+ Andrii Nakryiko <andrii@kernel.org>, Martin KaFai Lau
+ <martin.lau@linux.dev>, Song Liu <song@kernel.org>, Yonghong Song
+ <yonghong.song@linux.dev>, John Fastabend <john.fastabend@gmail.com>, KP
+ Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@google.com>, Hao Luo
+ <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,  Hugh Dickins
+ <hughd@google.com>, Andrew Morton <akpm@linux-foundation.org>, "David S .
+ Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub
+ Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, John Johansen
+ <john.johansen@canonical.com>, Paul Moore <paul@paul-moore.com>, James
+ Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Stephen
+ Smalley <stephen.smalley.work@gmail.com>, Eric Paris <eparis@parisplace.org>
+Date: Thu, 28 Sep 2023 13:06:03 -0400
+In-Reply-To: <6020d6e7-b187-4abb-bf38-dc09d8bd0f6d@app.fastmail.com>
 References: <20230928110554.34758-1-jlayton@kernel.org>
  <20230928110554.34758-2-jlayton@kernel.org>
-Date: Thu, 28 Sep 2023 11:48:16 -0400
-From: "Arnd Bergmann" <arnd@arndb.de>
-To: "Jeff Layton" <jlayton@kernel.org>,
- "Alexander Viro" <viro@zeniv.linux.org.uk>,
- "Christian Brauner" <brauner@kernel.org>,
- "Linus Torvalds" <torvalds@linux-foundation.org>,
- "David Sterba" <dsterba@suse.cz>, "Amir Goldstein" <amir73il@gmail.com>,
- "Theodore Ts'o" <tytso@mit.edu>,
- "Eric W. Biederman" <ebiederm@xmission.com>,
- "Kees Cook" <keescook@chromium.org>, "Jeremy Kerr" <jk@ozlabs.org>,
- "Michael Ellerman" <mpe@ellerman.id.au>,
- "Nicholas Piggin" <npiggin@gmail.com>,
- "Christophe Leroy" <christophe.leroy@csgroup.eu>,
- "Heiko Carstens" <hca@linux.ibm.com>, "Vasily Gorbik" <gor@linux.ibm.com>,
- "Alexander Gordeev" <agordeev@linux.ibm.com>,
- "Christian Borntraeger" <borntraeger@linux.ibm.com>,
- "Sven Schnelle" <svens@linux.ibm.com>,
- "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
- =?UTF-8?Q?Arve_Hj=C3=B8nnev=C3=A5g?= <arve@android.com>,
- "Todd Kjos" <tkjos@android.com>, "Martijn Coenen" <maco@android.com>,
- "Joel Fernandes" <joel@joelfernandes.org>,
- "Carlos Llamas" <cmllamas@google.com>,
- "Suren Baghdasaryan" <surenb@google.com>,
- "Mattia Dongili" <malattia@linux.it>,
- "Dennis Dalessandro" <dennis.dalessandro@cornelisnetworks.com>,
- "Jason Gunthorpe" <jgg@ziepe.ca>, "Leon Romanovsky" <leon@kernel.org>,
- "Brad Warrum" <bwarrum@linux.ibm.com>,
- "Ritu Agarwal" <rituagar@linux.ibm.com>,
- "Hans de Goede" <hdegoede@redhat.com>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- "Mark Gross" <markgross@kernel.org>, "Jiri Slaby" <jirislaby@kernel.org>,
- "Eric Van Hensbergen" <ericvh@kernel.org>,
- "Latchesar Ionkov" <lucho@ionkov.net>,
- "Dominique Martinet" <asmadeus@codewreck.org>,
- "Christian Schoenebeck" <linux_oss@crudebyte.com>,
- "David Sterba" <dsterba@suse.com>, "David Howells" <dhowells@redhat.com>,
- "Marc Dionne" <marc.dionne@auristor.com>, "Ian Kent" <raven@themaw.net>,
- "Luis de Bethencourt" <luisbg@kernel.org>,
- "Salah Triki" <salah.triki@gmail.com>,
- "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
- "Chris Mason" <clm@fb.com>, "Josef Bacik" <josef@toxicpanda.com>,
- "Xiubo Li" <xiubli@redhat.com>, "Ilya Dryomov" <idryomov@gmail.com>,
- "Jan Harkes" <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu,
- "Joel Becker" <jlbec@evilplan.org>, "Christoph Hellwig" <hch@lst.de>,
- "Nicolas Pitre" <nico@fluxnic.net>,
- "Rafael J . Wysocki" <rafael@kernel.org>,
- "Ard Biesheuvel" <ardb@kernel.org>, "Gao Xiang" <xiang@kernel.org>,
- "Chao Yu" <chao@kernel.org>, "Yue Hu" <huyue2@coolpad.com>,
- "Jeffle Xu" <jefflexu@linux.alibaba.com>,
- "Namjae Jeon" <linkinjeon@kernel.org>,
- "Sungjong Seo" <sj1557.seo@samsung.com>, "Jan Kara" <jack@suse.com>,
- "Andreas Dilger" <adilger.kernel@dilger.ca>,
- "Jaegeuk Kim" <jaegeuk@kernel.org>,
- "OGAWA Hirofumi" <hirofumi@mail.parknet.co.jp>,
- "Christoph Hellwig" <hch@infradead.org>,
- "Miklos Szeredi" <miklos@szeredi.hu>, "Bob Peterson" <rpeterso@redhat.com>,
- "Andreas Gruenbacher" <agruenba@redhat.com>,
- "Richard Weinberger" <richard@nod.at>,
- "Anton Ivanov" <anton.ivanov@cambridgegreys.com>,
- "Johannes Berg" <johannes@sipsolutions.net>,
- "Mikulas Patocka" <mikulas@artax.karlin.mff.cuni.cz>,
- "Mike Kravetz" <mike.kravetz@oracle.com>,
- "Muchun Song" <muchun.song@linux.dev>, "Jan Kara" <jack@suse.cz>,
- "David Woodhouse" <dwmw2@infradead.org>,
- "Dave Kleikamp" <shaggy@kernel.org>, "Tejun Heo" <tj@kernel.org>,
- "Trond Myklebust" <trond.myklebust@hammerspace.com>,
- "Anna Schumaker" <anna@kernel.org>,
- "Chuck Lever" <chuck.lever@oracle.com>, "Neil Brown" <neilb@suse.de>,
- "Olga Kornievskaia" <kolga@netapp.com>, "Dai Ngo" <Dai.Ngo@oracle.com>,
- "Tom Talpey" <tom@talpey.com>,
- "Ryusuke Konishi" <konishi.ryusuke@gmail.com>,
- "Anton Altaparmakov" <anton@tuxera.com>,
- "Konstantin Komarov" <almaz.alexandrovich@paragon-software.com>,
- "Mark Fasheh" <mark@fasheh.com>, "Joseph Qi" <joseph.qi@linux.alibaba.com>,
- "Bob Copeland" <me@bobcopeland.com>, "Mike Marshall" <hubcap@omnibond.com>,
- "Martin Brandenburg" <martin@omnibond.com>,
- "Luis Chamberlain" <mcgrof@kernel.org>,
- "Iurii Zaikin" <yzaikin@google.com>, "Tony Luck" <tony.luck@intel.com>,
- "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
- "Anders Larsen" <al@alarsen.net>, "Steve French" <sfrench@samba.org>,
- "Paulo Alcantara" <pc@manguebit.com>,
- "Ronnie Sahlberg" <lsahlber@redhat.com>,
- "Shyam Prasad N" <sprasad@microsoft.com>,
- "Sergey Senozhatsky" <senozhatsky@chromium.org>,
- "Phillip Lougher" <phillip@squashfs.org.uk>,
- "Steven Rostedt" <rostedt@goodmis.org>,
- "Masami Hiramatsu" <mhiramat@kernel.org>,
- "Evgeniy Dushistov" <dushistov@mail.ru>,
- "Chandan Babu R" <chandan.babu@oracle.com>,
- "Darrick J. Wong" <djwong@kernel.org>,
- "Damien Le Moal" <dlemoal@kernel.org>,
- "Naohiro Aota" <naohiro.aota@wdc.com>,
- "Johannes Thumshirn" <jth@kernel.org>,
- "Alexei Starovoitov" <ast@kernel.org>,
- "Daniel Borkmann" <daniel@iogearbox.net>,
- "Andrii Nakryiko" <andrii@kernel.org>,
- "Martin KaFai Lau" <martin.lau@linux.dev>, "Song Liu" <song@kernel.org>,
- "Yonghong Song" <yonghong.song@linux.dev>,
- "John Fastabend" <john.fastabend@gmail.com>,
- "KP Singh" <kpsingh@kernel.org>, "Stanislav Fomichev" <sdf@google.com>,
- "Hao Luo" <haoluo@google.com>, "Jiri Olsa" <jolsa@kernel.org>,
- "Hugh Dickins" <hughd@google.com>,
- "Andrew Morton" <akpm@linux-foundation.org>,
- "David S . Miller" <davem@davemloft.net>,
- "Eric Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>,
- "Paolo Abeni" <pabeni@redhat.com>,
- "John Johansen" <john.johansen@canonical.com>,
- "Paul Moore" <paul@paul-moore.com>, "James Morris" <jmorris@namei.org>,
- "Serge E. Hallyn" <serge@hallyn.com>,
- "Stephen Smalley" <stephen.smalley.work@gmail.com>,
- "Eric Paris" <eparis@parisplace.org>
-X-Spam-Score: -0.9 (/)
+ <6020d6e7-b187-4abb-bf38-dc09d8bd0f6d@app.fastmail.com>
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
+MIME-Version: 1.0
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Sep 28, 2023, at 07:05, Jeff Layton wrote: > This
- shaves 8 bytes off struct inode, according to pahole. > > Signed-off-by: Jeff
- Layton <jlayton@kernel.org> FWIW, this is similar to the approach that Deepa
- suggested back in 2016: 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview:  On Thu, 2023-09-28 at 11:48 -0400, Arnd Bergmann wrote: >
+ On Thu, Sep 28, 2023, at 07:05, Jeff Layton wrote: > > This shaves 8 bytes
+ off struct inode, according to pahole. > > > > Signed-off-by: Jeff [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
- low trust [66.111.4.229 listed in list.dnswl.org]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
@@ -226,7 +162,8 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1qltWV-000709-JL
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qluT3-00ALxD-95
 Subject: Re: [f2fs-dev] [PATCH 86/87] fs: switch timespec64 fields in inode
  to discrete integers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -264,24 +201,36 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Sep 28, 2023, at 07:05, Jeff Layton wrote:
-> This shaves 8 bytes off struct inode, according to pahole.
->
-> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+On Thu, 2023-09-28 at 11:48 -0400, Arnd Bergmann wrote:
+> On Thu, Sep 28, 2023, at 07:05, Jeff Layton wrote:
+> > This shaves 8 bytes off struct inode, according to pahole.
+> > 
+> > Signed-off-by: Jeff Layton <jlayton@kernel.org>
+> 
+> FWIW, this is similar to the approach that Deepa suggested
+> back in 2016:
+> 
+> https://lore.kernel.org/lkml/1452144972-15802-3-git-send-email-deepa.kernel@gmail.com/
+> 
+> It was NaKed at the time because of the added complexity,
+> though it would have been much easier to do it then,
+> as we had to touch all the timespec references anyway.
+> 
+> The approach still seems ok to me, but I'm not sure it's worth
+> doing it now if we didn't do it then.
+> 
 
-FWIW, this is similar to the approach that Deepa suggested
-back in 2016:
+I remember seeing those patches go by. I don't remember that change
+being NaK'ed, but I wasn't paying close attention at the time 
 
-https://lore.kernel.org/lkml/1452144972-15802-3-git-send-email-deepa.kernel@gmail.com/
+Looking at it objectively now, I think it's worth it to recover 8 bytes
+per inode and open a 4 byte hole that Amir can use to grow the
+i_fsnotify_mask. We might even able to shave off another 12 bytes
+eventually if we can move to a single 64-bit word per timestamp. 
 
-It was NaKed at the time because of the added complexity,
-though it would have been much easier to do it then,
-as we had to touch all the timespec references anyway.
-
-The approach still seems ok to me, but I'm not sure it's worth
-doing it now if we didn't do it then.
-
-     Arnd
+It is a lot of churn though.
+-- 
+Jeff Layton <jlayton@kernel.org>
 
 
 _______________________________________________
