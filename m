@@ -2,56 +2,56 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 501887B1935
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 13:03:44 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AAEA7B19D6
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 13:06:25 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qloo4-0007bs-Hh;
-	Thu, 28 Sep 2023 11:03:43 +0000
+	id 1qloqZ-0004Ot-UA;
+	Thu, 28 Sep 2023 11:06:19 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qloo2-0007bV-4L;
- Thu, 28 Sep 2023 11:03:40 +0000
+ (envelope-from <jlayton@kernel.org>) id 1qloqY-0004OV-T3;
+ Thu, 28 Sep 2023 11:06:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4WjQgRNMdW3j3sfcIHlzIOpBIEpILEBwQl2Kii/SrPo=; b=dyvW0Ir+NOc1ReSGKyO6190d79
- /i5+AEdi8EsGIXk1+otiV7R008M+wMLk28VnCc23tMh4P/PcOybiImqBPMHh7wwKI/KyZeze3PHh/
- 3zBAJ49xigL8VZYuFFBVY28XZE0CAtfXc6GWO/EmKfrgGJjsJ+/ouLpc9qzLyRQ/pkGQ=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=4WjQgRNMdW3j3sfcIHlzIOpBIEpILEBwQl2Kii/SrPo=; b=lODzt/5pl8YttzQzwHAiUsVXXE
- OmCtFokhA4Jnh5OQ3Gkn0y7/hH/TLHON34W09QeA7UCTD4YJjy6Txx+pYylJTKgRIFGeYkl5qqvrr
- 9Gboe5n7TTgeu57QLhs9TjEZ/GnWpLcjzAwAl2zXoprlvlf2rNPFJKdnJgtBdjVt1t3Y=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=f+579iacD2RSgWVCKH/CfEZa/lD9il6pqmO8eji8PO0=; b=mHhNE4jzmnyYzSHtuVWCDJWPhW
+ Bb2UQCqnZ6Esu5vWcagsL0X3mDC8heY5XniCHBiTB3Air/Txxv/E92WZiWlXve7cDNAC2ade2djvs
+ 73uNK/lOgi+QfCP6zW/jq80NnnXhrRrHyV4S7A9lLK2SZ3zD3lHgXfxzQ31miVRiXYhs=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=f+579iacD2RSgWVCKH/CfEZa/lD9il6pqmO8eji8PO0=; b=a
+ FcKk/OGSZAJ49Z14iaKgtM3wX2bwuCSMb317uj4UyoB2azAeyPpYvf4gvzDpDWURZ8EDJRzSBjkrk
+ Ga/C0H2sSo57zxaCBcA2OHzMKvzRUk0jzkXPPGlwexwQqogTU+/wxdjyByVrpBggecsMICjiTsTza
+ z0P2CUtwEvJCjipo=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qlony-000690-RD; Thu, 28 Sep 2023 11:03:39 +0000
+ id 1qloqX-009ndK-T3; Thu, 28 Sep 2023 11:06:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C8B4E61348;
- Thu, 28 Sep 2023 11:03:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BBF2CC433CD;
- Thu, 28 Sep 2023 11:03:16 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTP id 69215B81BB2;
+ Thu, 28 Sep 2023 11:06:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B45DC433C8;
+ Thu, 28 Sep 2023 11:05:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695899012;
- bh=2HU082C0O+wshN8razE9iX9Rxehg6mRJCvsU5n9rFmw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=cgJqBVdgRTRGPcB9AYO9nuxbQNU/aRFlsoq2/9IfdhTUxto7jaIgTs2iK3Hh6VNmI
- PQNGXum64iBmE5gmxTB5fzhsNqjzKt2sLpABU1iY4QR3sLG/3TAi2tRkz3bK5NdR2Q
- 5J/x2S1ciuMIVP8CxOGFxyla+hxGROy5UoKNIuzR78QFdYK0UlmPcZ7xnSW65TY0z1
- d09jqnFZdRWx08/ZfFzae3DcpVgwGYgcj94ylvD+5VeIqKKaZOw2/kkGfhLURz1SoJ
- LecijjrtKtsZor5I1BxBnr+8zBdASh0oRnrtfNreKI0opyGPJWi1hjF5WHyNrggNrR
- Xz99F3TmopI2w==
+ s=k20201202; t=1695899170;
+ bh=AhfBjRw4Zieo7d/UWgS6g+DDX4jTgfxPdqjByEx9qhM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=V+wOzFncXPhDXQFQdHny1CsSK9qUJSENwQ3KCibIzAaql9xTx9HnhDcijW4/7BOtC
+ kszW/YDyA0AMr7XQAUyJiZeb60fme2uDkyobxKoT8cY6VhZHy5eoMPnsaN6X7TtxCq
+ QTaef29MEouz7MkE+tPPdhmCepxFcMdSgkZxMJFkcJInXSuCSMx/JWDM3dr1kZYemo
+ enoSOcU6aqdkN9wSvXmqf6Z9xnaErzYq51O9jQbKnwkBY5wjm/kE01rgGkYxHItLa5
+ 5cRJCieL6/r3mfMz8yZQYtWkWaXM39nIwleCYU584hrkq3VtvO021SVUVEZ1qpwd4S
+ nSI/tWahGoeXg==
 From: Jeff Layton <jlayton@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Christian Brauner <brauner@kernel.org>,
@@ -150,27 +150,27 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  "Serge E. Hallyn" <serge@hallyn.com>,
  Stephen Smalley <stephen.smalley.work@gmail.com>,
  Eric Paris <eparis@parisplace.org>
-Date: Thu, 28 Sep 2023 07:03:00 -0400
-Message-ID: <20230928110300.32891-2-jlayton@kernel.org>
+Date: Thu, 28 Sep 2023 07:05:52 -0400
+Message-ID: <20230928110554.34758-1-jlayton@kernel.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230928110300.32891-1-jlayton@kernel.org>
-References: <20230928110300.32891-1-jlayton@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: -5.2 (-----)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Recently, we converted the ctime accesses in the kernel to
- use new accessor functions. Linus recently pointed out though that if we
- add accessors for the atime and mtime, then that would allow us to s [...]
- Content analysis details:   (-5.2 points, 6.0 required)
+ Content preview:  Make it clear that these fields are private now, and that
+ the accessors should be used instead. Signed-off-by: Jeff Layton
+ <jlayton@kernel.org>
+ --- include/linux/fs.h | 14 +++++++------- 1 file changed, 7 insertions(+),
+ 7 deletions(-) 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.68.75 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -181,9 +181,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qlony-000690-RD
-Subject: [f2fs-dev] [PATCH 01/87] fs: new accessor methods for atime and
- mtime
+X-Headers-End: 1qloqX-009ndK-T3
+Subject: [f2fs-dev] [PATCH 85/87] fs: rename i_atime and i_mtime fields to
+ __i_atime and __i_mtime
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -219,94 +219,63 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Recently, we converted the ctime accesses in the kernel to use new
-accessor functions. Linus recently pointed out though that if we add
-accessors for the atime and mtime, then that would allow us to
-seamlessly change how these timestamps are stored in the inode.
-
-Add new accessor functions for the atime and mtime that mirror the
-accessors for the ctime.
+Make it clear that these fields are private now, and that the accessors
+should be used instead.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/libfs.c         | 13 +++++++++++++
- include/linux/fs.h | 42 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 55 insertions(+)
+ include/linux/fs.h | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/fs/libfs.c b/fs/libfs.c
-index 37f2d34ee090..f5cdc7f7f5b5 100644
---- a/fs/libfs.c
-+++ b/fs/libfs.c
-@@ -1912,3 +1912,16 @@ ssize_t direct_write_fallback(struct kiocb *iocb, struct iov_iter *iter,
- 	return direct_written + buffered_written;
- }
- EXPORT_SYMBOL_GPL(direct_write_fallback);
-+
-+/**
-+ * simple_inode_init_ts - initialize the timestamps for a new inode
-+ * @inode: inode to be initialized
-+ *
-+ * When a new inode is created, most filesystems set the timestamps to the
-+ * current time. Add a helper to do this.
-+ */
-+struct timespec64 simple_inode_init_ts(struct inode *inode);
-+{
-+	return inode->i_atime = inode->i_mtime = inode_set_ctime_current(inode);
-+}
-+EXPORT_SYMBOL(simple_inode_init_ts);
 diff --git a/include/linux/fs.h b/include/linux/fs.h
-index b528f063e8ff..12d247b82aa0 100644
+index 12d247b82aa0..831657011036 100644
 --- a/include/linux/fs.h
 +++ b/include/linux/fs.h
-@@ -1553,6 +1553,48 @@ static inline struct timespec64 inode_set_ctime(struct inode *inode,
- 	return inode_set_ctime_to_ts(inode, ts);
+@@ -671,9 +671,9 @@ struct inode {
+ 	};
+ 	dev_t			i_rdev;
+ 	loff_t			i_size;
+-	struct timespec64	i_atime;
+-	struct timespec64	i_mtime;
+-	struct timespec64	__i_ctime; /* use inode_*_ctime accessors! */
++	struct timespec64	__i_atime; /* use inode_*_atime accessors */
++	struct timespec64	__i_mtime; /* use inode_*_mtime accessors */
++	struct timespec64	__i_ctime; /* use inode_*_ctime accessors */
+ 	spinlock_t		i_lock;	/* i_blocks, i_bytes, maybe i_size */
+ 	unsigned short          i_bytes;
+ 	u8			i_blkbits;
+@@ -1555,13 +1555,13 @@ static inline struct timespec64 inode_set_ctime(struct inode *inode,
+ 
+ static inline struct timespec64 inode_get_atime(const struct inode *inode)
+ {
+-	return inode->i_atime;
++	return inode->__i_atime;
  }
  
-+static inline struct timespec64 inode_get_atime(const struct inode *inode)
-+{
-+	return inode->i_atime;
-+}
-+
-+static inline struct timespec64 inode_set_atime_to_ts(struct inode *inode,
-+						      struct timespec64 ts)
-+{
-+	inode->i_atime = ts;
-+	return ts;
-+}
-+
-+static inline struct timespec64 inode_set_atime(struct inode *inode,
-+						time64_t sec, long nsec)
-+{
-+	struct timespec64 ts = { .tv_sec  = sec,
-+				 .tv_nsec = nsec };
-+	return inode_set_atime_to_ts(inode, ts);
-+}
-+
-+static inline struct timespec64 inode_get_mtime(const struct inode *inode)
-+{
-+	return inode->i_mtime;
-+}
-+
-+static inline struct timespec64 inode_set_mtime_to_ts(struct inode *inode,
-+						      struct timespec64 ts)
-+{
-+	inode->i_mtime = ts;
-+	return ts;
-+}
-+
-+static inline struct timespec64 inode_set_mtime(struct inode *inode,
-+						time64_t sec, long nsec)
-+{
-+	struct timespec64 ts = { .tv_sec  = sec,
-+				 .tv_nsec = nsec };
-+	return inode_set_mtime_to_ts(inode, ts);
-+}
-+
-+struct timespec64 simple_inode_init_ts(struct inode *inode);
-+
- /*
-  * Snapshotting support.
-  */
+ static inline struct timespec64 inode_set_atime_to_ts(struct inode *inode,
+ 						      struct timespec64 ts)
+ {
+-	inode->i_atime = ts;
++	inode->__i_atime = ts;
+ 	return ts;
+ }
+ 
+@@ -1575,13 +1575,13 @@ static inline struct timespec64 inode_set_atime(struct inode *inode,
+ 
+ static inline struct timespec64 inode_get_mtime(const struct inode *inode)
+ {
+-	return inode->i_mtime;
++	return inode->__i_mtime;
+ }
+ 
+ static inline struct timespec64 inode_set_mtime_to_ts(struct inode *inode,
+ 						      struct timespec64 ts)
+ {
+-	inode->i_mtime = ts;
++	inode->__i_mtime = ts;
+ 	return ts;
+ }
+ 
 -- 
 2.41.0
 
