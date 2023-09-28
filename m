@@ -2,81 +2,150 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E53557B09E4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 27 Sep 2023 18:21:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E56737B16EB
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 11:13:33 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qlXIN-0001gl-Tb;
-	Wed, 27 Sep 2023 16:21:51 +0000
+	id 1qln5D-0002js-MQ;
+	Thu, 28 Sep 2023 09:13:20 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qlXIL-0001gL-Ow;
- Wed, 27 Sep 2023 16:21:49 +0000
+ (envelope-from <bo.wu@vivo.com>) id 1qln5C-0002jl-2T
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 28 Sep 2023 09:13:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
+ :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pGSXFW875XdfGIucswtJNPAM/ZfOGJND2OExEMVRxgE=; b=ZUJlYmyrTZK1n516JBvDwfQITn
- qyFk8N4ukbcD+gkv6nvmaLMtOWlENAUyFTjT/PlkTuMOUN9OzYDCdDyKVbT5FOaHItQniBJiozprv
- xSOngDiI3IMGcG9JUiN1zaRK6/L+Jx1go64S/mOAeHO5xcsoDvEp9XCPDGz47DdJFbu0=;
+ bh=3KMtsiKHYy1xq1klfJWWqCiGsUG002Vy8S9v3ddjc08=; b=WA7A8aiA4A4rcnVJxEAlU38Hre
+ Pk/0i1/1re8Y1dziYDWC3oXi/sc7Ah7R72+z7Sy7FzHPR0rX87aa7d+5XrWeLjRdtcTagERZ20Cf9
+ E/bRr6tAZBaqeFHNBIy2x03BIJJUgP2/C/zKAONOQEfFq7fejAHjgpPhGUYkc/8Ymer8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=pGSXFW875XdfGIucswtJNPAM/ZfOGJND2OExEMVRxgE=; b=HQei9txc6uyQIc2PF2buRPKZVr
- sFlWCyrGjMl1ZSywH2uA8D5lhJfV2vccpfoVvvK2wpHlQ39t/kogYpBZGde+7sbXHqFy5wB5aGxy9
- cSGoJUaiZloWM0o2q8D5PZ/UdsD4zUvnLvdKHtCQWEJZD1YflbTQSlcz5xKUsE85dnkY=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=3KMtsiKHYy1xq1klfJWWqCiGsUG002Vy8S9v3ddjc08=; b=E
+ hU1a5L78ciVwcWFSla9dxZVRL9odE+C2xr5HJ6awtKg6bK+dATZCm/TB858cnwwSu6tj+J8MC0xMh
+ iOUGmo8q9uNZv2SkK+G6cbgRD7TMTfTIaMLSycvTZalkdThrvMHcP3qV0BvjpSwi9wV60GJsE858I
+ 995rBM5SylSA2nww=;
+Received: from mail-tyzapc01on2110.outbound.protection.outlook.com
+ ([40.107.117.110] helo=APC01-TYZ-obe.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qlXIE-0008TL-O1; Wed, 27 Sep 2023 16:21:47 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 89EFFCE1A9C;
- Wed, 27 Sep 2023 16:21:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF3E3C433C7;
- Wed, 27 Sep 2023 16:21:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695831690;
- bh=5fVqTod0fsU3D85/NgpH5eX11yWtVW2s8jme29QI3SA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=K+SdxwDZhx8uxbb5abeHgPolVgmwSiIBL6/AzX/eEpmg7s5Jd1TwEPpueT17Z+y1i
- r/3aJFhGZoIRaqB+ADboLRaAQZpJm6SMvyfu5jpdUX9fmjLLqHrtdJHSnoHaBHBoNB
- 1Ras0NDOeGzjZ5rjoNJ7hj3RFSgjPFHQeOCu0doiR1ZFlmc7Dtn7+Tg4yFYE5HRxY7
- FflbgLOEB1zCas3wjtrhbqXfzlZd6DZqKcBXDoRDLeETsNHRLxD2cXgjOH7guvx0ma
- AufPlRnLwdi+pMqoWiBGk6SGa+Snjtz53w/pXkwTjOc2fDnSaUxFN105snuKm+T14u
- FBsBAdYo6oMFA==
-Date: Wed, 27 Sep 2023 18:21:19 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20230927-prahlen-reintreten-93706074e58d@brauner>
-References: <20230818123232.2269-1-jack@suse.cz>
+ id 1qln57-0004yN-FG for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 28 Sep 2023 09:13:18 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=O66y4y6KSLER9wnFmoLtzN7qOhydMdLezG+KKdUFk8NXWmHDFRF3hy9V2q+E96pmbxbUWsM72ImPwuk9CMBAd8FSwx+MDWSSuNxjvTxuS8qvn5AwGKVfWW8NXZRDOqN9/jIdDs7aTraexYiVoWfao7m09SFfdm1E5JR5lDgSLI5fiC/M9FLQGK0H8e5mMWz69EtLRPqqxQkZW3EYzzESroBgmXLjC/gp9vDyeG1rSY97GavjjSLm9RWxcoa5AdqS4zw3hvRCvHa4YHCk0szf7b48Co5x6W6qUa8GCtalvUyPe3VkVOPVU4EpKfZ1LO8pRTbONQbHYFGHCwSfkjRK0g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3KMtsiKHYy1xq1klfJWWqCiGsUG002Vy8S9v3ddjc08=;
+ b=OdSTP1NTgYEyWQYVaKuj7vxLI6oONc/QV6NJc/o6oPeJ6Yrwi4T/GhNSofOFyixtUzg9GV6et0INxw19/KG4QVJW0k1dqguzTh4m4v1BQ9UANRuJk33tL1EvPmX22CnUyDpYDLv2ps8ejU1JIZfI4zf/wQLQhp/4Qdq/DXRAkK90QOZeBVZW4wc2X7KPfQEsC80kZ8rKf8ldCwXKXFyHQBBDgA16TAhz8/dWgFKfc4hENjsUdPe9PdyM/aYqSIaRSZMLfvz0DSdc8GqS685n50zQOqQ+gtwdqIPfggTZ2DIf+AsI7dQuUm5lB0qC5CBbUka03hFFrS14AaeA/RS20w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3KMtsiKHYy1xq1klfJWWqCiGsUG002Vy8S9v3ddjc08=;
+ b=V9KlbKDnYheWFow/bnJPDBS9xVq/z6PuAqhECzCtqfE0A/+eYDJ24q3LIbzNg+tUsDpY1TcAby2HbxM9vIQ+AH9A+YYp7+4vM+rUgY0W8j7K3Lf1FNFagoN59+Rii+7or4fLReUwTYo5zT92BlIhierrtlXgcQpebb94xyxAflgPaZ/9D/J3mePVdh3RlMyP2TiKJ1I2rejMu1Mt4S3mQoi1/kdHzZ9m2ctkW/zQxOzb3DnK/Y1KOGT4sT6Map6I9RdWlGsANQQAb7NaaKHBl7N5NUpaWO6rxNRlOkZRulk4bCWNFippx+9w3AL2TDuGK9fCVCE++Gmvp/ho0aHBKA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SL2PR06MB3017.apcprd06.prod.outlook.com (2603:1096:100:3a::16)
+ by PSAPR06MB4470.apcprd06.prod.outlook.com (2603:1096:301:86::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.28; Thu, 28 Sep
+ 2023 09:13:02 +0000
+Received: from SL2PR06MB3017.apcprd06.prod.outlook.com
+ ([fe80::e1e6:c2aa:6b5b:bc1c]) by SL2PR06MB3017.apcprd06.prod.outlook.com
+ ([fe80::e1e6:c2aa:6b5b:bc1c%6]) with mapi id 15.20.6813.027; Thu, 28 Sep 2023
+ 09:13:02 +0000
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Thu, 28 Sep 2023 03:20:48 -0600
+Message-Id: <cover.1695890686.git.bo.wu@vivo.com>
+X-Mailer: git-send-email 2.25.1
+X-ClientProxiedBy: SG3P274CA0020.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:be::32)
+ To SL2PR06MB3017.apcprd06.prod.outlook.com
+ (2603:1096:100:3a::16)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230818123232.2269-1-jack@suse.cz>
-X-Spam-Score: -2.5 (--)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SL2PR06MB3017:EE_|PSAPR06MB4470:EE_
+X-MS-Office365-Filtering-Correlation-Id: da962d47-9258-41ec-9c46-08dbc0031d8a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: HBTOBH//uck07RIcQV+eRDfySnm/a0xjBs6hTYvIBAokAr1cUU6wS4DBw9fn7jeU5mORlJSVMpxmI4ZN1rbIN1nN3QVUC97DhMt7LOzkn3xU3GHX63RK3Sx9dasIW0OLeba1cOBJ6jSZ9aTswCzs5WM0b9BXkBTrX00PgipB9rxsRTTl439D/bosF4lVds4Gelv+kwwWqAMbZ9N438lFZqkve1bimOou8B5Pr8F5uZ75oFGX5+CRWPYpWnXwSr/CgHQR4mZzHfJGPeX5ek8liOw3pSySmmb29ha+ApMWmAFynE4S+l/N7vFcdrRT3huFx68qKOK+YOFB645nnlMpwZzY0n/x9fIFo6GFg+zMABJtX8nW65Yiu53du8CwEuTfeZxOESV2RNlpuHBTQLMdzihcS1alQqg1CA723BnYy3cDJhU0MMIuh6pHFGlNCgMNk0vWvLAwSQcZKFzwZdDevBY5/+C6AKL4emSfDYnOVdepBUycII3dmfai/9Bfb4D0DNxXbdSm23XnNqV0HF51I/FI0qSr5mK/BLHBF1XSJy8Zpzba1aat2sG2Qgl3abuGc5J184VPiqcmVPU80FInR1dMD/TFDZUQ+xT0wedpQqc=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SL2PR06MB3017.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(39850400004)(346002)(396003)(376002)(136003)(230922051799003)(64100799003)(451199024)(186009)(1800799009)(41300700001)(316002)(4744005)(83380400001)(8676002)(36756003)(8936002)(66946007)(2616005)(4326008)(5660300002)(966005)(52116002)(6486002)(110136005)(6512007)(86362001)(6506007)(66556008)(54906003)(6666004)(66476007)(107886003)(26005)(38100700002)(38350700002)(2906002)(478600001);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?bBGBGdp8vN+8bA9zki25olaOUBBI6Iey5hYKwFH8MWDMhOeDDiNDRuy1NJEd?=
+ =?us-ascii?Q?SK0tHZULAAt7DGCfdfDhfjGfndy7G6o0hfBVC5svSB/Hmmb+To8Sk+RdGkoH?=
+ =?us-ascii?Q?XYcbLT8ggZwY7z0N5Utb8+00rGvMWtvgkxLAjM2bb2LkI3hrHIVC+03/7yrZ?=
+ =?us-ascii?Q?0xjvE5yaGjq5yETw8bF6JVUg3B/gJxcbr4mR5l5u6E+8o5uZt/45xbOU4qiT?=
+ =?us-ascii?Q?LORXLXbkvW+YYuoqOCYfd0YsaPQkT6D/Z+b9wOvj7K0jMDAd3BWZZvSuTwz+?=
+ =?us-ascii?Q?4B7fOsuUq5Am3l9qOCGb2S0ywRJkBRyX3eBRcK/IVvPk7Yxtcj6trUlrlx54?=
+ =?us-ascii?Q?UZoKWvgrNKHTwFt6EkX9PDUAgfM1wZaynjpt8pIpI9ElQM2x5nx5E2+iiHoH?=
+ =?us-ascii?Q?NKF6Fzr18dGtq+fYbzufPqB7Cvg8jgS/o1Ys2V0WCGRyMoE72Ff8d4Ncqlkd?=
+ =?us-ascii?Q?YiKP71QjGO0riqIghylVMlhyD0SJv18zTWcFf7m0j4HdFtSY21m30tK8GASG?=
+ =?us-ascii?Q?L9NpUuqtD5mwJWs+6O7KxqmR/ii7cLzO70T5sLbbt3mjqDxyBI/OzVbDtSTg?=
+ =?us-ascii?Q?XnXBirEelbuYqE5NY5oNfiYKYfRd5jYdu146Fmt9w9V85AIeMxNVgP0+sTUM?=
+ =?us-ascii?Q?+VvnOTCJzhkNmCriJTJRdxGa35ShXA/2IhJTzMWfqm5d9Pn6vIvy/tjh/PVE?=
+ =?us-ascii?Q?3l86eb8H+rYjyztaEr178SyJiJUySAxIyENWkdnkWrCLCo9Y4hr0py3xvrjT?=
+ =?us-ascii?Q?o/JcQ0w48O67FC/qcXCXn174gIFNXZRTYpVzMv78nJ7v39V5oBL9t00R3MGI?=
+ =?us-ascii?Q?URT6SC9NFfrZ380xckfO/oO8D0e9Yhy0ckK4jp6CfbJVGDkcND2iQtg7LJZT?=
+ =?us-ascii?Q?a1BG+w8sD5p5gilaAGUPYmunB0GOGcMOU4Zgy7ZvtAMcJ0uQ4Owi71TcZ4I3?=
+ =?us-ascii?Q?+BFWeB4r+fDJoCR4illlOWuqBwM8wEoH2qP0EbLxqKfCYOhOr5WP34BIbAr1?=
+ =?us-ascii?Q?jrzrYYDTiphImZGkp93NXVXwscd4vl4HOOGmV3uVyxbnfqjXGTBquh0nqB27?=
+ =?us-ascii?Q?UPI8VIakrhOuWR+lc0d1om+DFk1El+KaezGDC6Rb4KHhNvd6LXIMYlSbXpHC?=
+ =?us-ascii?Q?DIILlmK61odTnVGgzPImiY3VcD5fPKoinlpsE5mdUaV1yMpJ4je8A5YskaeK?=
+ =?us-ascii?Q?NXut3BMx6S06zyhrWbBn2M+Ye+lCQ6VuQ/MOm7i9hSIffNAeiJe5cGpnbd6Q?=
+ =?us-ascii?Q?6okGSzAIfYGLpwMs7MbZqNeH1inPeJO8oRNwWl0QBI4fTTN2fGOxeRjqpEaC?=
+ =?us-ascii?Q?umMZaWrmq26mYAg0GwLwqSZ8LOkGMPSvZhMp4IVNoL/Y4SJLAqiCwBTWUAh3?=
+ =?us-ascii?Q?s2tJG5C1sr7BS+WC7+FveMjaUVrxwTEC9yguZhpBS9qPtFQ44XulihCkVIr5?=
+ =?us-ascii?Q?qP5WV0w32nsAsLlinIbKTZf0Dbt96BK+mAdxm7xzseXt9rqgylgx8E+pQcRV?=
+ =?us-ascii?Q?02OIav2eRkvmsx/OlS24zhlNKSVhfHUSLYgQKzkX/uOiiy/dxpyrglibmrwH?=
+ =?us-ascii?Q?K/QCCSLCfzBsEOvBkokuoZXhs1hgd1rdUpm/CptV?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: da962d47-9258-41ec-9c46-08dbc0031d8a
+X-MS-Exchange-CrossTenant-AuthSource: SL2PR06MB3017.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2023 09:13:02.0231 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LpGPiOv8Sjy3+nFAh7niDAgNt24pn5xxoWUYRNtrxLHblRH0l17Tkadas6Mbr78+xUPhcsj5kJHpZkd8y+pLsg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PSAPR06MB4470
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, 27 Sep 2023 11:34:07 +0200, Jan Kara wrote: > Create
- struct bdev_handle that contains all parameters that need to be > passed
- to blkdev_put() and provide bdev_open_* functions that return > th [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview: The performance flame graph of resize shows that
+ 'get_free_segments()'
+ consum most user space time: https://linkthinking.cn/images/resize_flame.jpg
+ Every calling 'get_free_segments()',
+ it will traverses all segments to calculate
+ the free segments count. And this path is called a lot in resize & sload
+ & defrag. 
+ Content analysis details:   (-0.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [40.107.117.110 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [40.107.117.110 listed in wl.mailspike.net]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
@@ -84,10 +153,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qlXIE-0008TL-O1
-Subject: Re: [f2fs-dev] [PATCH v4 0/29] block: Make blkdev_get_by_*() return
- handle
+X-Headers-End: 1qln57-0004yN-FG
+Subject: [f2fs-dev] [PATCH v2 0/3] f2fs-tools: cache free segments count to
+ improve perfmance
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -99,128 +167,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Dave Kleikamp <shaggy@kernel.org>, jfs-discussion@lists.sourceforge.net,
- "Darrick J. Wong" <djwong@kernel.org>, linux-nvme@lists.infradead.org,
- Joseph Qi <joseph.qi@linux.alibaba.com>, dm-devel@redhat.com,
- target-devel@vger.kernel.org, linux-mtd@lists.infradead.org,
- Jack Wang <jinpu.wang@ionos.com>, Alasdair Kergon <agk@redhat.com>,
- drbd-dev@lists.linbit.com, linux-s390@vger.kernel.org,
- linux-nilfs@vger.kernel.org, linux-scsi@vger.kernel.org,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Christoph Hellwig <hch@infradead.org>, xen-devel@lists.xenproject.org,
- Gao Xiang <xiang@kernel.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Kent Overstreet <kent.overstreet@gmail.com>,
- Sven Schnelle <svens@linux.ibm.com>, linux-pm@vger.kernel.org,
- Mike Snitzer <snitzer@kernel.org>, Joern Engel <joern@lazybastard.org>,
- reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>,
- Trond Myklebust <trond.myklebust@hammerspace.com>, linux-raid@vger.kernel.org,
- linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- linux-mm@kvack.org, Song Liu <song@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- Minchan Kim <minchan@kernel.org>, ocfs2-devel@oss.oracle.com,
- Anna Schumaker <anna@kernel.org>, linux-fsdevel@vger.kernel.org,
- "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
+From: Wu Bo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Wu Bo <bo.wu@vivo.com>
+Cc: Wu Bo <wubo.oduw@gmail.com>, Wu Bo <bo.wu@vivo.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, 27 Sep 2023 11:34:07 +0200, Jan Kara wrote:
-> Create struct bdev_handle that contains all parameters that need to be
-> passed to blkdev_put() and provide bdev_open_* functions that return
-> this structure instead of plain bdev pointer. This will eventually allow
-> us to pass one more argument to blkdev_put() (renamed to bdev_release())
-> without too much hassle.
-> 
-> 
-> [...]
+The performance flame graph of resize shows that 'get_free_segments()' consum
+most user space time:
+https://linkthinking.cn/images/resize_flame.jpg
 
-> to ease review / testing. Christian, can you pull the patches to your tree
-> to get some exposure in linux-next as well? Thanks!
+Every calling 'get_free_segments()', it will traverses all segments to calculate
+the free segments count. And this path is called a lot in resize & sload &
+defrag.
 
-Yep. So I did it slighly differently. I pulled in the btrfs prereqs and
-then applied your series on top of it so we get all the Link: tags right.
-I'm running tests right now. Please double-check.
+If the free segments count is cached, these tools performance will be
+improved.
 
----
+Changed in v2:
+  - Fixed some logic issues reviewed by Chao Yu
 
-Applied to the vfs.super branch of the vfs/vfs.git tree.
-Patches in the vfs.super branch should appear in linux-next soon.
+Wu Bo (3):
+  f2fs-tools: use 'IS_CUR_SEGNO()' to check if it is current segment
+  f2fs-tools: skip not matched segment when finding free block
+  f2fs-tools: cache free segments count to improve perfmance
 
-Please report any outstanding bugs that were missed during review in a
-new review to the original patch series allowing us to drop it.
+ fsck/f2fs.h    |  1 +
+ fsck/mount.c   | 25 ++++++++++++-------------
+ fsck/segment.c |  2 ++
+ 3 files changed, 15 insertions(+), 13 deletions(-)
 
-It's encouraged to provide Acked-bys and Reviewed-bys even though the
-patch has now been applied. If possible patch trailers will be updated.
+-- 
+2.25.1
 
-Note that commit hashes shown below are subject to change due to rebase,
-trailer updates or similar. If in doubt, please check the listed branch.
-
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
-branch: vfs.super
-
-[01/29] block: Provide bdev_open_* functions
-       https://git.kernel.org/vfs/vfs/c/b7c828aa0b3c
-[02/29] block: Use bdev_open_by_dev() in blkdev_open()
-        https://git.kernel.org/vfs/vfs/c/d4e36f27b45a
-[03/29] block: Use bdev_open_by_dev() in disk_scan_partitions() and blkdev_bszset()
-        https://git.kernel.org/vfs/vfs/c/5f9bd6764c7a
-[04/29] drdb: Convert to use bdev_open_by_path()
-        https://git.kernel.org/vfs/vfs/c/0220ca8e443d
-[05/29] pktcdvd: Convert to bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/7af10b889789
-[06/29] rnbd-srv: Convert to use bdev_open_by_path()
-        https://git.kernel.org/vfs/vfs/c/3d27892a4be7
-[07/29] xen/blkback: Convert to bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/26afb0ed10b3
-[08/29] zram: Convert to use bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/efc8e3f4c6dc
-[09/29] bcache: Convert to bdev_open_by_path()
-        https://git.kernel.org/vfs/vfs/c/dc893f51d24a
-[10/29] dm: Convert to bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/80c2267c6d07
-[11/29] md: Convert to bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/15db36126ca6
-[12/29] mtd: block2mtd: Convert to bdev_open_by_dev/path()
-        https://git.kernel.org/vfs/vfs/c/4c27234bf3ce
-[13/29] nvmet: Convert to bdev_open_by_path()
-        https://git.kernel.org/vfs/vfs/c/70cffddcc300
-[14/29] s390/dasd: Convert to bdev_open_by_path()
-        https://git.kernel.org/vfs/vfs/c/5581d03457f8
-[15/29] scsi: target: Convert to bdev_open_by_path()
-        https://git.kernel.org/vfs/vfs/c/43de7d844d47
-[16/29] PM: hibernate: Convert to bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/105ea4a2fd18
-[17/29] PM: hibernate: Drop unused snapshot_test argument
-        https://git.kernel.org/vfs/vfs/c/b589a66e3688
-[18/29] mm/swap: Convert to use bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/615af8e29233
-[19/29] fs: Convert to bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/5173192bcfe6
-[20/29] btrfs: Convert to bdev_open_by_path()
-        https://git.kernel.org/vfs/vfs/c/8cf64782764f
-[21/29] erofs: Convert to use bdev_open_by_path()
-        https://git.kernel.org/vfs/vfs/c/4d41880bf249
-[22/29] ext4: Convert to bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/f7507612395e
-[23/29] f2fs: Convert to bdev_open_by_dev/path()
-        https://git.kernel.org/vfs/vfs/c/d9ff8e3b6498
-[24/29] jfs: Convert to bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/459dc6376338
-[25/29] nfs/blocklayout: Convert to use bdev_open_by_dev/path()
-        https://git.kernel.org/vfs/vfs/c/5b1df9a40929
-[26/29] ocfs2: Convert to use bdev_open_by_dev()
-        https://git.kernel.org/vfs/vfs/c/b6b95acbd943
-[27/29] reiserfs: Convert to bdev_open_by_dev/path()
-        https://git.kernel.org/vfs/vfs/c/7e3615ff6119
-[28/29] xfs: Convert to bdev_open_by_path()
-        https://git.kernel.org/vfs/vfs/c/176ccb99e207
-[29/29] block: Remove blkdev_get_by_*() functions
-        https://git.kernel.org/vfs/vfs/c/953863a5a2ff
 
 
 _______________________________________________
