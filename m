@@ -2,56 +2,56 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AAEA7B19D6
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 13:06:25 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BBEB7B19DB
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 13:06:42 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qloqZ-0004Ot-UA;
-	Thu, 28 Sep 2023 11:06:19 +0000
+	id 1qloqu-0002TU-I2;
+	Thu, 28 Sep 2023 11:06:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1qloqY-0004OV-T3;
- Thu, 28 Sep 2023 11:06:18 +0000
+ (envelope-from <jlayton@kernel.org>) id 1qloqs-0002T7-T3;
+ Thu, 28 Sep 2023 11:06:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=f+579iacD2RSgWVCKH/CfEZa/lD9il6pqmO8eji8PO0=; b=mHhNE4jzmnyYzSHtuVWCDJWPhW
- Bb2UQCqnZ6Esu5vWcagsL0X3mDC8heY5XniCHBiTB3Air/Txxv/E92WZiWlXve7cDNAC2ade2djvs
- 73uNK/lOgi+QfCP6zW/jq80NnnXhrRrHyV4S7A9lLK2SZ3zD3lHgXfxzQ31miVRiXYhs=;
+ bh=0YEv1V3zZSOHcgruK+mvOq6BiG3lZhaaQ3ES0cY6BjM=; b=ToMDQsRPd56LyVYrvXRp+7mN4Y
+ TCUN3GC9CGInbfQ5xIH7ZaU2wCF0kyYJ7UVo3SoFop+Cq0O3nkU+pPHNbrUs7ep97aFZatQHJ/2DR
+ NKnb/0nW6KCSB3bQtVJKH/lDZYioFWnvz8roiw16Qaw6IrIv1W9hZ48cyUwQwDmugZ1M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=f+579iacD2RSgWVCKH/CfEZa/lD9il6pqmO8eji8PO0=; b=a
- FcKk/OGSZAJ49Z14iaKgtM3wX2bwuCSMb317uj4UyoB2azAeyPpYvf4gvzDpDWURZ8EDJRzSBjkrk
- Ga/C0H2sSo57zxaCBcA2OHzMKvzRUk0jzkXPPGlwexwQqogTU+/wxdjyByVrpBggecsMICjiTsTza
- z0P2CUtwEvJCjipo=;
-Received: from ams.source.kernel.org ([145.40.68.75])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=0YEv1V3zZSOHcgruK+mvOq6BiG3lZhaaQ3ES0cY6BjM=; b=OZr9DuV0rij5cp48YlbZrXBoH7
+ 7i2SCiXgkh084lY/JNRmNFLbeINDVuWuKsXyTeaVZiE4Vyfd6v1Oddr1hMvPacZTBvmxDOs46sIlu
+ yoRw9DALZrAtNYvBMgrZJknKOrsTa+anEBCPggmvNibihsEGikH3GntcHL6h7fgpTc8Y=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qloqX-009ndK-T3; Thu, 28 Sep 2023 11:06:18 +0000
+ id 1qloqq-009nee-FL; Thu, 28 Sep 2023 11:06:37 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 69215B81BB2;
+ by sin.source.kernel.org (Postfix) with ESMTP id 5B9D9CE1D1B;
+ Thu, 28 Sep 2023 11:06:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28B2DC07618;
  Thu, 28 Sep 2023 11:06:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B45DC433C8;
- Thu, 28 Sep 2023 11:05:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695899170;
- bh=AhfBjRw4Zieo7d/UWgS6g+DDX4jTgfxPdqjByEx9qhM=;
- h=From:To:Cc:Subject:Date:From;
- b=V+wOzFncXPhDXQFQdHny1CsSK9qUJSENwQ3KCibIzAaql9xTx9HnhDcijW4/7BOtC
- kszW/YDyA0AMr7XQAUyJiZeb60fme2uDkyobxKoT8cY6VhZHy5eoMPnsaN6X7TtxCq
- QTaef29MEouz7MkE+tPPdhmCepxFcMdSgkZxMJFkcJInXSuCSMx/JWDM3dr1kZYemo
- enoSOcU6aqdkN9wSvXmqf6Z9xnaErzYq51O9jQbKnwkBY5wjm/kE01rgGkYxHItLa5
- 5cRJCieL6/r3mfMz8yZQYtWkWaXM39nIwleCYU584hrkq3VtvO021SVUVEZ1qpwd4S
- nSI/tWahGoeXg==
+ s=k20201202; t=1695899185;
+ bh=EREGf1zcL5EA1z4Sr1OlKcRcr7XPDG3rng7QCUAKDtA=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=bFxyq+wI82J/WQ/3LWfsBekhh8OiaT2wYsSAjrDQk/NrGOURDgw5PWuMWCgk6npZ6
+ gYLI9nWuVeVxeze31PlhCET+PdMZY70Xy9a1ckPrunnaxH93RrMhwAf8QKEfxBAiMW
+ A3cOqQLFufYccE9l6906MspLgdIVzFHYGgIdgAYxkIU2uPLpvYnElaoBbxLu/GOElz
+ nfJ0kqX0lpMPX7fozYTYh3xQ6uUVAew7yxgjGjuRy8Oehoifs61PNFQPPpZBViM2G3
+ Q4xpsOM8kKsqE0iTJbEpoU+nreDJHiQfBK4Xqt/1AbCybTiYxp8gYPp3ucvOuJLoxK
+ YlW0JpzEkcqqQ==
 From: Jeff Layton <jlayton@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Christian Brauner <brauner@kernel.org>,
@@ -150,40 +150,41 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  "Serge E. Hallyn" <serge@hallyn.com>,
  Stephen Smalley <stephen.smalley.work@gmail.com>,
  Eric Paris <eparis@parisplace.org>
-Date: Thu, 28 Sep 2023 07:05:52 -0400
-Message-ID: <20230928110554.34758-1-jlayton@kernel.org>
+Date: Thu, 28 Sep 2023 07:05:53 -0400
+Message-ID: <20230928110554.34758-2-jlayton@kernel.org>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230928110554.34758-1-jlayton@kernel.org>
+References: <20230928110554.34758-1-jlayton@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Make it clear that these fields are private now, and that
- the accessors should be used instead. Signed-off-by: Jeff Layton
- <jlayton@kernel.org>
- --- include/linux/fs.h | 14 +++++++------- 1 file changed, 7 insertions(+),
- 7 deletions(-) 
+ Content preview:  This shaves 8 bytes off struct inode, according to pahole.
+ Signed-off-by: Jeff Layton <jlayton@kernel.org> --- include/linux/fs.h |
+ 32 +++++++++++++++++++++++--------- 1 file changed, 23 insertions(+),
+ 9 deletions(-)
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.68.75 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qloqX-009ndK-T3
-Subject: [f2fs-dev] [PATCH 85/87] fs: rename i_atime and i_mtime fields to
- __i_atime and __i_mtime
+X-Headers-End: 1qloqq-009nee-FL
+Subject: [f2fs-dev] [PATCH 86/87] fs: switch timespec64 fields in inode to
+ discrete integers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -219,60 +220,91 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Make it clear that these fields are private now, and that the accessors
-should be used instead.
+This shaves 8 bytes off struct inode, according to pahole.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- include/linux/fs.h | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ include/linux/fs.h | 32 +++++++++++++++++++++++---------
+ 1 file changed, 23 insertions(+), 9 deletions(-)
 
 diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 12d247b82aa0..831657011036 100644
+index 831657011036..de902ff2938b 100644
 --- a/include/linux/fs.h
 +++ b/include/linux/fs.h
-@@ -671,9 +671,9 @@ struct inode {
+@@ -671,9 +671,12 @@ struct inode {
  	};
  	dev_t			i_rdev;
  	loff_t			i_size;
--	struct timespec64	i_atime;
--	struct timespec64	i_mtime;
--	struct timespec64	__i_ctime; /* use inode_*_ctime accessors! */
-+	struct timespec64	__i_atime; /* use inode_*_atime accessors */
-+	struct timespec64	__i_mtime; /* use inode_*_mtime accessors */
-+	struct timespec64	__i_ctime; /* use inode_*_ctime accessors */
+-	struct timespec64	__i_atime; /* use inode_*_atime accessors */
+-	struct timespec64	__i_mtime; /* use inode_*_mtime accessors */
+-	struct timespec64	__i_ctime; /* use inode_*_ctime accessors */
++	time64_t		i_atime_sec;
++	time64_t		i_mtime_sec;
++	time64_t		i_ctime_sec;
++	u32			i_atime_nsec;
++	u32			i_mtime_nsec;
++	u32			i_ctime_nsec;
  	spinlock_t		i_lock;	/* i_blocks, i_bytes, maybe i_size */
  	unsigned short          i_bytes;
  	u8			i_blkbits;
-@@ -1555,13 +1555,13 @@ static inline struct timespec64 inode_set_ctime(struct inode *inode,
+@@ -1519,7 +1522,9 @@ struct timespec64 inode_set_ctime_current(struct inode *inode);
+  */
+ static inline struct timespec64 inode_get_ctime(const struct inode *inode)
+ {
+-	return inode->__i_ctime;
++	struct timespec64 ts = { .tv_sec  = inode->i_ctime_sec,
++				 .tv_nsec = inode->i_ctime_nsec };
++	return ts;
+ }
+ 
+ /**
+@@ -1532,7 +1537,8 @@ static inline struct timespec64 inode_get_ctime(const struct inode *inode)
+ static inline struct timespec64 inode_set_ctime_to_ts(struct inode *inode,
+ 						      struct timespec64 ts)
+ {
+-	inode->__i_ctime = ts;
++	inode->i_ctime_sec = ts.tv_sec;
++	inode->i_ctime_nsec = ts.tv_sec;
+ 	return ts;
+ }
+ 
+@@ -1555,13 +1561,17 @@ static inline struct timespec64 inode_set_ctime(struct inode *inode,
  
  static inline struct timespec64 inode_get_atime(const struct inode *inode)
  {
--	return inode->i_atime;
-+	return inode->__i_atime;
+-	return inode->__i_atime;
++	struct timespec64 ts = { .tv_sec  = inode->i_atime_sec,
++				 .tv_nsec = inode->i_atime_nsec };
++
++	return ts;
  }
  
  static inline struct timespec64 inode_set_atime_to_ts(struct inode *inode,
  						      struct timespec64 ts)
  {
--	inode->i_atime = ts;
-+	inode->__i_atime = ts;
+-	inode->__i_atime = ts;
++	inode->i_atime_sec = ts.tv_sec;
++	inode->i_atime_nsec = ts.tv_sec;
  	return ts;
  }
  
-@@ -1575,13 +1575,13 @@ static inline struct timespec64 inode_set_atime(struct inode *inode,
+@@ -1575,13 +1585,17 @@ static inline struct timespec64 inode_set_atime(struct inode *inode,
  
  static inline struct timespec64 inode_get_mtime(const struct inode *inode)
  {
--	return inode->i_mtime;
-+	return inode->__i_mtime;
+-	return inode->__i_mtime;
++	struct timespec64 ts = { .tv_sec  = inode->i_mtime_sec,
++				 .tv_nsec = inode->i_mtime_nsec };
++
++	return ts;
  }
  
  static inline struct timespec64 inode_set_mtime_to_ts(struct inode *inode,
  						      struct timespec64 ts)
  {
--	inode->i_mtime = ts;
-+	inode->__i_mtime = ts;
+-	inode->__i_mtime = ts;
++	inode->i_atime_sec = ts.tv_sec;
++	inode->i_atime_nsec = ts.tv_sec;
  	return ts;
  }
  
