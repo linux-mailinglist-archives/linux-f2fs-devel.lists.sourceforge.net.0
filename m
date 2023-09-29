@@ -2,98 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 430C77B2782
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 Sep 2023 23:28:02 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF35D7B2986
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Sep 2023 02:25:51 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qlyY6-0003Qt-LL;
-	Thu, 28 Sep 2023 21:27:55 +0000
+	id 1qm1KA-0006Eq-SU;
+	Fri, 29 Sep 2023 00:25:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tytso@mit.edu>) id 1qlyY5-0003Qm-Q0
+ (envelope-from <torvalds@linuxfoundation.org>) id 1qm1K9-0006Ef-4F
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 28 Sep 2023 21:27:54 +0000
+ Fri, 29 Sep 2023 00:25:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=w4hql40FuyyfsTNK9D530X9ExV2y5b7TU7/1a0HHsnU=; b=UsHIDs5sbVc02WqHEM+tEDQoIB
- Xqw7sNTCkFsY+8VY4SPGWcs83QChLymjovNX4Y1vg+rCZXUYvRQX1sP1XH8IjPWe+X6eMzB0WZaTY
- 6jXLWXJcG2+V+Q0SblbHr7eQvmPPly7CxKGaeNu3TnxOwstNoD04yM52o0qGBrQ3tMEw=;
+ bh=bvzvBt54YKz6rxhAovyc5UddK2JDmyrig02MAqmRW1o=; b=LtRXAOPJa9jrEtqx1sXoHn1vjw
+ hIjsxWolBwZeyu+qz+JFfamNz0Eq0tNbk0JPkrZLpcAmNBK28zX1R3TPhQc307j1+6zWOo9PMoizT
+ inZ7Nggru7PuIc/7n11g1fCUfua5zidKWzgdsX1TYolRdMqftBINtrBxozjaY6lfAQKQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=w4hql40FuyyfsTNK9D530X9ExV2y5b7TU7/1a0HHsnU=; b=O2uKd5HIPPVFnHllZrk2xu61b8
- tqXL2qhIWBxop2A/MVp8N8z5BAhv9aEmX0OTN8cxCSZKbc6GnJB0ungVBaudBjnExw3oDgFcm/hHq
- GmYmCHtrCX2fioDp62a1ioKUZ2u/gXEb3nuwu2ubQ5Lq3FDJo99W7xfwWB+/UtKd6yyQ=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qlyY5-0002Xw-An for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 28 Sep 2023 21:27:54 +0000
-Received: from cwcc.thunk.org (pool-173-48-111-87.bstnma.fios.verizon.net
- [173.48.111.87]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 38SLQv6B021535
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 28 Sep 2023 17:26:58 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
- t=1695936431; bh=w4hql40FuyyfsTNK9D530X9ExV2y5b7TU7/1a0HHsnU=;
- h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
- b=WaP79h5bQ62LFZ7vHHOCmGWKrdVEw7kTPaoOfwjqG7743/KpOeTQfqQpPAFra25uw
- qHhUQptGls8wmshhyjdnO9G7FinJGRSu/H+Pr36/HOeVsY2L1QKwp6wJYXWDQj3sU6
- spxP8X5T3MP/kvZK7FBaCvSP9XyEeM6QQ1hm7OJdJzn5aY8Xu6Fua+baunPXgUoy7L
- KhVrZIKyvYcsT0NIC33rKKlIWvn/ApA3rOkeZe9sao19Z+JDKma1IeqPjZOBPScT5p
- +jnf6c81JzZ84Oc7GpEzLi5aGjfgb8lOPxXH2Up3ynLvwNxgs1A65KPgjW+ME/+Top
- l7dosLTQv306w==
-Received: by cwcc.thunk.org (Postfix, from userid 15806)
- id 06AD715C0266; Thu, 28 Sep 2023 17:26:57 -0400 (EDT)
-Date: Thu, 28 Sep 2023 17:26:56 -0400
-From: "Theodore Ts'o" <tytso@mit.edu>
-To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <20230928212656.GC189345@mit.edu>
+ bh=bvzvBt54YKz6rxhAovyc5UddK2JDmyrig02MAqmRW1o=; b=KOr4qWSq/pVifknD6GmSZSIFVB
+ 42SmVrBf5M0JilWmw4C7P983XEcUDRtRkYA5a1kaQ0bCPb9E0d9t39gonw0an44MxhDVy7QfkICZq
+ QGJh5RbNCZJVbsckPY+wLAW3Q0gSn/40Uhfxb36z5rhUDsiVxcQFWKLnB3GxIGWUrlwg=;
+Received: from mail-ed1-f49.google.com ([209.85.208.49])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1qm1K7-00Ajdm-B1 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 29 Sep 2023 00:25:41 +0000
+Received: by mail-ed1-f49.google.com with SMTP id
+ 4fb4d7f45d1cf-5230a22cfd1so16998893a12.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 28 Sep 2023 17:25:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux-foundation.org; s=google; t=1695947133; x=1696551933;
+ darn=lists.sourceforge.net; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bvzvBt54YKz6rxhAovyc5UddK2JDmyrig02MAqmRW1o=;
+ b=DHIDZAYh+uneUsbqfaS3K4mU+IX7fcaMqpDpYIkGCR42febSoVchsIUSF+zgtBkvxL
+ X3Ea1keiA9Ozk0lz8pwM8w5y+XgJ4Z8eDnnOa5h3thAqO75uJtwiNZ/8mfMjZbyaMxSh
+ ApVUwlRPGChSBzmYLd2ruvZozxnwvC0qTXv7A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695947133; x=1696551933;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bvzvBt54YKz6rxhAovyc5UddK2JDmyrig02MAqmRW1o=;
+ b=WKGr0SxCG5GnImE1yzPwGfiL75kXPfckKLc+7U2QR6A1V8Kv0zrYEBKRVqL7IVe8Ht
+ UbP9hgFADgj50YPCawpQLwURGppjAk7owdVPrHnTmxcnUV3Q7ZhNbuy1RJyRbzBnwyu+
+ 70l+wJ6B+FhRCdQ5fVHJd0HFn/SVPKpdT3fNJOh6QpI8eqTAltOnk6K/z7+KBK2aqUNg
+ Y0HPa26Kz+2S8iSrFfkVBHujaFxnAscR81nFGYvzVSNDLh4VsRIyPN1xkqREnwGFaa2w
+ KAnJypEYV7h0XDs7GT4BcWrnYjBhkIurPsBthCxeL799bb293TPMgftp7Mi07VAfmPW0
+ otsA==
+X-Gm-Message-State: AOJu0YwCOZCj1p+wlcUFBJRtqaPuqdDWt4tqqh/T0RbamuP4U4QKuSgR
+ 4aGA52/wOh7oxojE9KE9vTEl1ENl/lsgvarrfIVeWHpr0eM=
+X-Google-Smtp-Source: AGHT+IEmQymPyXvxmVpU9JQ/0plN1FRAaa86pigJBx70ij7HYbSMb+3se+/FBeGl6AkhA1ZgKo64pw==
+X-Received: by 2002:aa7:d5cc:0:b0:530:9fbc:8df6 with SMTP id
+ d12-20020aa7d5cc000000b005309fbc8df6mr2338400eds.2.1695947132734; 
+ Thu, 28 Sep 2023 17:25:32 -0700 (PDT)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com.
+ [209.85.221.53]) by smtp.gmail.com with ESMTPSA id
+ bt13-20020a0564020a4d00b00530a9488623sm1467363edb.46.2023.09.28.17.25.32
+ for <linux-f2fs-devel@lists.sourceforge.net>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 28 Sep 2023 17:25:32 -0700 (PDT)
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-3248e90f032so984408f8f.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 28 Sep 2023 17:25:32 -0700 (PDT)
+X-Received: by 2002:aa7:d807:0:b0:530:52d2:f656 with SMTP id
+ v7-20020aa7d807000000b0053052d2f656mr2404674edq.21.1695946739584; Thu, 28 Sep
+ 2023 17:18:59 -0700 (PDT)
+MIME-Version: 1.0
 References: <20230928110554.34758-1-jlayton@kernel.org>
  <20230928110554.34758-2-jlayton@kernel.org>
  <6020d6e7-b187-4abb-bf38-dc09d8bd0f6d@app.fastmail.com>
  <af047e4a1c6947c59d4a13d4ae221c784a5386b4.camel@kernel.org>
  <20230928171943.GK11439@frogsfrogsfrogs>
  <6a6f37d16b55a3003af3f3dbb7778a367f68cd8d.camel@kernel.org>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <6a6f37d16b55a3003af3f3dbb7778a367f68cd8d.camel@kernel.org>
-X-Spam-Score: -2.5 (--)
+ <20230928212656.GC189345@mit.edu>
+In-Reply-To: <20230928212656.GC189345@mit.edu>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Thu, 28 Sep 2023 17:18:42 -0700
+X-Gmail-Original-Message-ID: <CAHk-=wjTynK9BdGbi+8eShU77nkPvipFwRxEd1TSBrw2+LiuDg@mail.gmail.com>
+Message-ID: <CAHk-=wjTynK9BdGbi+8eShU77nkPvipFwRxEd1TSBrw2+LiuDg@mail.gmail.com>
+To: "Theodore Ts'o" <tytso@mit.edu>
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Sep 28, 2023 at 01:40:55PM -0400, Jeff Layton wrote:
- > > Correct. We'd lose some fidelity in currently stored timestamps, but
- as > Linus and Ted pointed out, anything below ~100ns granularity [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  On Thu, 28 Sept 2023 at 14:28, Theodore Ts'o <tytso@mit.edu>
+ wrote: > > I don't think anyone will complain about breaking the userspace
+ API > --- especially since if, say, the CIA was using this for t [...] 
+ Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [18.9.28.11 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.208.49 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.208.49 listed in wl.mailspike.net]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1qlyY5-0002Xw-An
+X-Headers-End: 1qm1K7-00Ajdm-B1
 Subject: Re: [f2fs-dev] [PATCH 86/87] fs: switch timespec64 fields in inode
  to discrete integers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -131,13 +161,12 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Stephen Smalley <stephen.smalley.work@gmail.com>, linux-usb@vger.kernel.org,
  linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
  Sergey Senozhatsky <senozhatsky@chromium.org>,
- Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>,
+ =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>,
  Chuck Lever <chuck.lever@oracle.com>, Sven Schnelle <svens@linux.ibm.com>,
  Jiri Olsa <jolsa@kernel.org>, Jan Kara <jack@suse.com>,
  Tejun Heo <tj@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
- linux-trace-kernel@vger.kernel.org,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Dave Kleikamp <shaggy@kernel.org>, linux-mm@kvack.org,
+ linux-trace-kernel@vger.kernel.org, Dave Kleikamp <shaggy@kernel.org>,
+ samba-technical@lists.samba.org, linux-mm@kvack.org,
  Joel Fernandes <joel@joelfernandes.org>, Eric Dumazet <edumazet@google.com>,
  Stanislav Fomichev <sdf@google.com>, codalist@telemann.coda.cs.cmu.edu,
  linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
@@ -166,7 +195,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Naohiro Aota <naohiro.aota@wdc.com>, Daniel Borkmann <daniel@iogearbox.net>,
  Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>,
  linux-rdma@vger.kernel.org, coda@cs.cmu.edu,
- Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
  Ilya Dryomov <idryomov@gmail.com>, Paolo Abeni <pabeni@redhat.com>,
  "Serge E. Hallyn" <serge@hallyn.com>,
  Christian Schoenebeck <linux_oss@crudebyte.com>,
@@ -177,7 +206,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Gao Xiang <xiang@kernel.org>, Jan Harkes <jaharkes@cs.cmu.edu>,
  linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org,
  Olga Kornievskaia <kolga@netapp.com>, Song Liu <song@kernel.org>,
- samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
+ Jeff Layton <jlayton@kernel.org>, Steve French <sfrench@samba.org>,
  Jeremy Kerr <jk@ozlabs.org>, Netdev <netdev@vger.kernel.org>,
  Bob Peterson <rpeterso@redhat.com>, linux-fsdevel@vger.kernel.org,
  bpf@vger.kernel.org, ntfs3@lists.linux.dev, linux-erofs@lists.ozlabs.org,
@@ -217,40 +246,57 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Sep 28, 2023 at 01:40:55PM -0400, Jeff Layton wrote:
-> 
-> Correct. We'd lose some fidelity in currently stored timestamps, but as
-> Linus and Ted pointed out, anything below ~100ns granularity is
-> effectively just noise, as that's the floor overhead for calling into
-> the kernel. It's hard to argue that any application needs that sort of
-> timestamp resolution, at least with contemporary hardware. 
-> 
-> Doing that would mean that tests that store specific values in the
-> atime/mtime and expect to be able to fetch exactly that value back would
-> break though, so we'd have to be OK with that if we want to try it. The
-> good news is that it's relatively easy to experiment with new ways to
-> store timestamps with these wrappers in place.
+On Thu, 28 Sept 2023 at 14:28, Theodore Ts'o <tytso@mit.edu> wrote:
+>
+> I don't think anyone will complain about breaking the userspace API
+> --- especially since if, say, the CIA was using this for their spies'
+> drop boxes, they probably wouldn't want to admit it.  :-)
 
-The reason why we store 1ns granularity in ext4's on-disk format (and
-accept that we only support times only a couple of centuries into the
-future, as opposed shooting for an on-disk format good for several
-millennia :-), was in case there was userspace that might try to store
-a very fine-grained timestamp and want to be able to get it back
-bit-for-bit identical.
+Well, you will find that real apps do kind of of care.
 
-For example, what if someone was trying to implement some kind of
-steganographic scheme where they going store a secret message (or more
-likely, a 256-bit AES key) in the nanosecond fields of the file's
-{c,m,a,cr}time timestamps, "hiding in plain sight".  Not that I think
-that we have to support something like that, since the field is for
-*timestamps* not cryptographic bits, so if we break someone who is
-doing that, do we care?
+Just to take a very real example, "git" will very much notice time
+granularity issues and care - because git will cache the 'stat' times
+in the index.
 
-I don't think anyone will complain about breaking the userspace API
---- especially since if, say, the CIA was using this for their spies'
-drop boxes, they probably wouldn't want to admit it.  :-)
+So if you get a different stat time (because the vfs layer has changed
+some granularity), git will then have to check the files carefully
+again and update the index.
 
-       	    	     	      	      	    - Ted
+You can simulate this "re-check all files" with something like this:
+
+    $ time git diff
+
+    real 0m0.040s
+    user 0m0.035s
+    sys 0m0.264s
+
+    $ rm .git/index && git read-tree HEAD
+
+    $ time git diff
+
+    real 0m9.595s
+    user 0m7.287s
+    sys 0m2.810s
+
+so the difference between just doing a "look, index information
+matches current 'stat' information" and "oops, index does not have the
+stat data" is "40 milliseconds" vs "10 seconds".
+
+That's a big difference, and you'd see that each time the granularity
+changes. But then once the index file has been updated, it's back to
+the good case.
+
+So yes, real programs to cache stat information, and it matters for performance.
+
+But I don't think any actual reasonable program will have
+*correctness* issues, though - because there are certainly filesystems
+out there that don't do nanosecond resolution (and other operations
+like copying trees around will obviously also change times).
+
+Anybody doing steganography in the timestamps is already not going to
+have a great time, really.
+
+                 Linus
 
 
 _______________________________________________
