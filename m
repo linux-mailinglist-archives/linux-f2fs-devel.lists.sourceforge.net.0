@@ -2,27 +2,27 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 402DA7B2F48
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Sep 2023 11:33:52 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 935597B2F82
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Sep 2023 11:45:46 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qm9sW-0004pE-GE;
-	Fri, 29 Sep 2023 09:33:43 +0000
+	id 1qmA42-00039j-Fd;
+	Fri, 29 Sep 2023 09:45:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <brauner@kernel.org>) id 1qm9sT-0004ov-CP;
- Fri, 29 Sep 2023 09:33:40 +0000
+ (envelope-from <brauner@kernel.org>) id 1qmA3o-00039G-EP;
+ Fri, 29 Sep 2023 09:45:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NNKyA6g97rLVbr42UzH2N/ytlbMvdX3fLnQJc60CKxo=; b=KLGNBNufZiZKn0QfrJerH6T0Yf
- Wyx+VzlNmH2bkR8KT4llbe+edwAHy86UMls3F0zdcqMbfvrsPnOkwc05hJj70KzgAkzf6xYNvNmR0
- 62WxaJTylS3V+mjeuXUmr+cUx3tf/CB8v+xN0laoT8JC8eGkSyX6+Gd8hPY1lvP/4HNE=;
+ bh=oQTvAmCkCsoaLNjfsaMUmlY4D/qoWr90XSuheIQAYtc=; b=KGMfsDrT9HiErJ21X2JusOgLeZ
+ pxKHxifuGjSfI1mPztsoxQfDbrt5L9Pg6h1JzmnDlEnYv8HaIoxcepKowlpdSN9FsppyBERHdyzoS
+ 3YZJN3kAOORsxy/rVGHcLdZ9gNv6kvEU7ArKRV13jf/8k+A7ISutUUBUv1LEYi41Fc4g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -30,38 +30,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NNKyA6g97rLVbr42UzH2N/ytlbMvdX3fLnQJc60CKxo=; b=JVI6g/zFccuuxFKgZh8pNVC8PJ
- BoTZkn6gOIPkP/Xf1eamhLhc3lblPTA6nSIFQ/WQCcLGdXJtR0CpjjXLrmiizhM33HcVVsnp13jXd
- +DUhzfLkGSEtRf9lL0U5HrEOM/nMIU9s94V7jT5d9MkjmjfHnVI49ag9OAnxmEOairAk=;
+ bh=oQTvAmCkCsoaLNjfsaMUmlY4D/qoWr90XSuheIQAYtc=; b=IgCzf/XoRT9gIi51DpGEHny4Ar
+ 4DhoxJO6L/7H6p6CWkTxhBs2mvWX6i1PqFHt+L7JN4SxYCQh4ARwvv11ZMSsZj1Owpx/pdtvTQGG9
+ GwvplxXoeDWVH9oBM9bCr+Fh3gc8UGk3dwWNmRYiYk6VvoQl6evqlThF/jWpDR2Zqbng=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qm9sQ-00BHUy-E4; Fri, 29 Sep 2023 09:33:40 +0000
+ id 1qmA3o-00BIgS-Ci; Fri, 29 Sep 2023 09:45:25 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 2FAEC61E8C;
- Fri, 29 Sep 2023 09:33:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D9F8C433C8;
- Fri, 29 Sep 2023 09:32:52 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 59C9F61D59;
+ Fri, 29 Sep 2023 09:45:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9CB9BC433C8;
+ Fri, 29 Sep 2023 09:44:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695980011;
- bh=5rEQjJQmUmhQcZE/S/zbC0z+O4aP1HcivNZvR+uMTdw=;
+ s=k20201202; t=1695980717;
+ bh=oQTvAmCkCsoaLNjfsaMUmlY4D/qoWr90XSuheIQAYtc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=j3Z7MPGXgH3qxJhUlGKswKaevoMz5lRlYfLKv517rB572Uft036HOzVnh6y+Fta2y
- IoP7pRk6lJWa27fv+jFujIlmXsGfS+YQww12NsbvPCYDl6f8XCPE+CtURkcHaeicsG
- yrkS/+0BXoBXAhDuBIWkGS4iWyGcgZc4uj5K1I6XTsFJQGfVSUCd06bbdxYUiSeitY
- kWvaORdHP4IXSdIX2Ck5PihMbYV+j7YqPan4YQc6tbETcfSrUPTc518VDuKuEt3jeG
- gYpsCzcJzJ2TfBOID0I9Ah10OPTMXVGJPcaLChcuIuOHlJVeXlo8F4Hi+JnhGg6W4h
- 6HAwcZKgDftHQ==
-Date: Fri, 29 Sep 2023 11:32:49 +0200
+ b=WlV6Iok6t6x6wqtPDr2u2AsUWg4hMLM7cqaWPUDEeTpPDmS0JTVgMZlUl0HPmoBuT
+ /MtXZyL5oovwNZMVTtYCnXU5O+6UqBVLwaqKXfjDA7Gi3QJjfoFg0kuMJ76nbuwBFl
+ FM+QH0bvVjfmuBVMp9s5CgN9psq1cDgIpp1TcndUbm+j24otqfdnexR7nd6Jf+tuT9
+ QFRyk1BHauhj4nL9X9E976w/vvMYaEWzc8Ucm1v15cgYx/ItXrPfVSX9rwflr20Upl
+ 1p24LfpWvr++mxmy87xjKVxbcTxjBWdURGxp63tvXsg372LYC0Zasv3SIGFC2AHpa8
+ 8VA1Ctle4jMgQ==
+Date: Fri, 29 Sep 2023 11:44:15 +0200
 From: Christian Brauner <brauner@kernel.org>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <20230929-keimt-umspannen-bfd12d2c2033@brauner>
+To: Jeff Layton <jlayton@kernel.org>
+Message-ID: <20230929-yuppie-unzweifelhaft-434bf13bc964@brauner>
 References: <20230928110554.34758-1-jlayton@kernel.org>
- <20230928110554.34758-3-jlayton@kernel.org>
- <CAHk-=wij_42Q9WHY898r-gugmT5c-1JJKRh3C+nTUd1hc1aeqQ@mail.gmail.com>
+ <20230928110554.34758-2-jlayton@kernel.org>
+ <6020d6e7-b187-4abb-bf38-dc09d8bd0f6d@app.fastmail.com>
+ <af047e4a1c6947c59d4a13d4ae221c784a5386b4.camel@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAHk-=wij_42Q9WHY898r-gugmT5c-1JJKRh3C+nTUd1hc1aeqQ@mail.gmail.com>
+In-Reply-To: <af047e4a1c6947c59d4a13d4ae221c784a5386b4.camel@kernel.org>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -69,10 +70,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Sep 28, 2023 at 10:41:34AM -0700,
- Linus Torvalds wrote:
- > On Thu, 28 Sept 2023 at 04:06, Jeff Layton <jlayton@kernel.org> wrote:
- > > > > Move i_blocks up above the i_lock, which moves the new [...] 
+ Content preview:  > It is a lot of churn though. I think that i_{a,c,m}time
+ shouldn't be accessed directly by filesystems same as no filesystem should
+ really access i_{g, u}id which we also provide i_{g, u}id_{read,
+ write}() accessors for. The mode is [...] 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,9 +89,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qm9sQ-00BHUy-E4
-Subject: Re: [f2fs-dev] [PATCH 87/87] fs: move i_blocks up a few places in
- struct inode
+X-Headers-End: 1qmA3o-00BIgS-Ci
+Subject: Re: [f2fs-dev] [PATCH 86/87] fs: switch timespec64 fields in inode
+ to discrete integers
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -104,10 +105,11 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>, "Darrick J. Wong" <djwong@kernel.org>,
- Anders Larsen <al@alarsen.net>, Carlos Llamas <cmllamas@google.com>,
- Andrii Nakryiko <andrii@kernel.org>, Mattia Dongili <malattia@linux.it>,
- Hugh Dickins <hughd@google.com>, John Johansen <john.johansen@canonical.com>,
+ "Rafael J . Wysocki" <rafael@kernel.org>,
+ "Darrick J. Wong" <djwong@kernel.org>, Anders Larsen <al@alarsen.net>,
+ Carlos Llamas <cmllamas@google.com>, Andrii Nakryiko <andrii@kernel.org>,
+ Mattia Dongili <malattia@linux.it>, Hugh Dickins <hughd@google.com>,
+ John Johansen <john.johansen@canonical.com>,
  Yonghong Song <yonghong.song@linux.dev>,
  Alexander Gordeev <agordeev@linux.ibm.com>, Christoph Hellwig <hch@lst.de>,
  Mike Marshall <hubcap@omnibond.com>, Paulo Alcantara <pc@manguebit.com>,
@@ -130,8 +132,9 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Chuck Lever <chuck.lever@oracle.com>, Sven Schnelle <svens@linux.ibm.com>,
  Jiri Olsa <jolsa@kernel.org>, Jan Kara <jack@suse.com>,
  Tejun Heo <tj@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
- linux-trace-kernel@vger.kernel.org, Dave Kleikamp <shaggy@kernel.org>,
- samba-technical@lists.samba.org, linux-mm@kvack.org,
+ linux-trace-kernel@vger.kernel.org,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ Dave Kleikamp <shaggy@kernel.org>, linux-mm@kvack.org,
  Joel Fernandes <joel@joelfernandes.org>, Eric Dumazet <edumazet@google.com>,
  Stanislav Fomichev <sdf@google.com>, linux-s390@vger.kernel.org,
  linux-nilfs@vger.kernel.org, Paul Moore <paul@paul-moore.com>,
@@ -148,7 +151,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Nicolas Pitre <nico@fluxnic.net>, linux-ntfs-dev@lists.sourceforge.net,
  Muchun Song <muchun.song@linux.dev>, linux-f2fs-devel@lists.sourceforge.net,
  "Guilherme G. Piccoli" <gpiccoli@igalia.com>, gfs2@lists.linux.dev,
- Eric Biederman <ebiederm@xmission.com>, Anna Schumaker <anna@kernel.org>,
+ "Eric W. Biederman" <ebiederm@xmission.com>, Anna Schumaker <anna@kernel.org>,
  Brad Warrum <bwarrum@linux.ibm.com>, Mike Kravetz <mike.kravetz@oracle.com>,
  linux-efi@vger.kernel.org, Martin Brandenburg <martin@omnibond.com>,
  ocfs2-devel@lists.linux.dev, Alexei Starovoitov <ast@kernel.org>,
@@ -170,11 +173,11 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Gao Xiang <xiang@kernel.org>, Jan Harkes <jaharkes@cs.cmu.edu>,
  linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org,
  Olga Kornievskaia <kolga@netapp.com>, Song Liu <song@kernel.org>,
- Jeff Layton <jlayton@kernel.org>, Steve French <sfrench@samba.org>,
- Jeremy Kerr <jk@ozlabs.org>, netdev@vger.kernel.org,
+ samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
+ Jeremy Kerr <jk@ozlabs.org>, Netdev <netdev@vger.kernel.org>,
  Bob Peterson <rpeterso@redhat.com>, linux-fsdevel@vger.kernel.org,
  bpf@vger.kernel.org, ntfs3@lists.linux.dev, linux-erofs@lists.ozlabs.org,
- "David S. Miller" <davem@davemloft.net>,
+ "David S . Miller" <davem@davemloft.net>,
  Chandan Babu R <chandan.babu@oracle.com>, jfs-discussion@lists.sourceforge.net,
  Jan Kara <jack@suse.cz>, Neil Brown <neilb@suse.de>,
  Dominique Martinet <asmadeus@codewreck.org>,
@@ -210,32 +213,27 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Thu, Sep 28, 2023 at 10:41:34AM -0700, Linus Torvalds wrote:
-> On Thu, 28 Sept 2023 at 04:06, Jeff Layton <jlayton@kernel.org> wrote:
-> >
-> > Move i_blocks up above the i_lock, which moves the new 4 byte hole to
-> > just after the timestamps, without changing the size of the structure.
-> 
-> I'm sure others have mentioned this, but 'struct inode' is marked with
-> __randomize_layout, so the actual layout may end up being very
-> different.
-> 
-> I'm personally not convinced the whole structure randomization is
-> worth it - it's easy enough to figure out for any distro kernel since
-> the seed has to be the same across machines for modules to work, so
-> even if the seed isn't "public", any layout is bound to be fairly
-> easily discoverable.
-> 
-> So the whole randomization only really works for private kernel
-> builds, and it adds this kind of pain where "optimizing" the structure
-> layout is kind of pointless depending on various options.
-> 
-> I certainly *hope* no distro enables that pointless thing, but it's a worry.
+> It is a lot of churn though.
 
-They don't last we checked. Just last cycle we moved stuff in struct
-file around to optimize things and we explicitly said we don't give a
-damn about struct randomization. Anyone who enables this will bleed
-performance pretty badly, I would reckon.
+I think that i_{a,c,m}time shouldn't be accessed directly by
+filesystems same as no filesystem should really access i_{g,u}id which
+we also provide i_{g,u}id_{read,write}() accessors for. The mode is
+another example where really most often should use helpers because of all
+the set*id stripping that we need to do (and the bugs that we had
+because of this...).
+
+The interdependency between ctime and mtime is enough to hide this in
+accessors. The other big advantage is simply grepability. So really I
+would like to see this change even without the type switch.
+
+In other words, there's no need to lump the two changes together. Do the
+conversion part and we can argue about the switch to discrete integers
+separately.
+
+The other adavantage is that we have a cycle to see any possible
+regression from the conversion.
+
+Thoughts anyone?
 
 
 _______________________________________________
