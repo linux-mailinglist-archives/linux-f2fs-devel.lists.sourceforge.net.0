@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8CC87B35FF
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Sep 2023 16:47:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E16157B3605
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 Sep 2023 16:51:17 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qmEmS-0000FT-73;
-	Fri, 29 Sep 2023 14:47:47 +0000
+	id 1qmEpo-0000Js-PL;
+	Fri, 29 Sep 2023 14:51:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bugzilla-daemon@kernel.org>) id 1qmEmR-0000FJ-15
+ (envelope-from <bugzilla-daemon@kernel.org>) id 1qmEpn-0000Jm-Cv
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 29 Sep 2023 14:47:45 +0000
+ Fri, 29 Sep 2023 14:51:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RgrgOv3o8RxcFsOYotwBf8F2bKWedr8nlrjymPMKxBI=; b=V2IvqY1hxQdLuxDcdrwlIvgp2n
- RUk7yyAObRchAm9CwxEFe/r1cGv6e5r5dB8Eu1wmnUutCYJrNcRjfOr1kyksavdNUCvG0YNYylPIX
- QrbuaaSEA+AiUaafQxTeC5pbzm1RCXP5cCGHJ7D8lDpH/WQvKKVP+5JpdaIPkPkSeOpg=;
+ bh=87Q82B9JM2vjwkA2bXdEisUS+VjRdYFmsMpxrLYTQh4=; b=bWWiowg2EK2NahZz+hSMrqqB1G
+ adUZeiKk6uuIOKo0AQUXhN8vXnTmhN52DVSUUZWmuc0njjNomegJa5mnf5LpwaS2/Hk28jGzYiLnD
+ RHwOtv6cTgeNFyaqhyMA+lqU5SFmXvmdZoWKdUOK/IYS0IAULYbXauglFho9KMWRZLhA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
@@ -31,36 +31,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RgrgOv3o8RxcFsOYotwBf8F2bKWedr8nlrjymPMKxBI=; b=J2IgYkQGc65JBNZ6gdjUv8Spyc
- 0NRQF0ffgJzLkbKXe3HRl/WLjym4eNxBUJqichr6987hpQUwkn3/l0P/hgllgwYmTBKqqGHPAjyTE
- SKiCA3s9AFPulrdjmB7VabxeZT3LrZv8Xwn+JiZJveKGWjEPC5JzgNKWKrXkYOUdLmNk=;
+ bh=87Q82B9JM2vjwkA2bXdEisUS+VjRdYFmsMpxrLYTQh4=; b=nMXaNwYMD9cRWO+1uGmWhbOV5j
+ D6EermMYF8W2uyyiMboT7gUNzlkLGkAsE5KNRW5wPReK4/rQP+yQrOlkL13h/W6nXuqbD38G8cl7I
+ lXjWfgViyHgx87XJvszUHl+3KAH2Xfdoon0UH6hTjdBN0zesAMS3yZd7HJCV4UySHuZY=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qmEmK-00Bd2X-Vl for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 29 Sep 2023 14:47:45 +0000
+ id 1qmEpl-00BdF4-Nt for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 29 Sep 2023 14:51:14 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5E02361F94
+ by dfw.source.kernel.org (Postfix) with ESMTP id 56C3261EE8
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 29 Sep 2023 14:47:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0B5EDC433C9
+ Fri, 29 Sep 2023 14:51:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 03C0FC433C7
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 29 Sep 2023 14:47:35 +0000 (UTC)
+ Fri, 29 Sep 2023 14:51:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695998855;
- bh=aQMRM78eL7NcDE+c7AftSRB1cX5Disfuv6ZdLfbkA8k=;
+ s=k20201202; t=1695999068;
+ bh=CQlx2HoO/HLZKvz9W8ZWeWqglqXaii0O8G3/GCam24c=;
  h=From:To:Subject:Date:In-Reply-To:References:From;
- b=XdvimPtZbgVZAM7+JgpBD0/x2g2heH24nqdbNp0EcAt71d/TQxS580wEj5b0r53GD
- sAMie00OKK38wDsFkLOk8gUqcVx1PJVSTD/dKGSA39i089/8Obtsb3eD21fCcfR3a/
- G4EcJuF3Z+oPW9znGl+0wSS+5vfT7Ajju20J3lBLINXUAvfGdubAn9JoyAKhfSEyry
- hC33BqJDYVZin4+LMcrsJN/BD7gUzmaIylHvp2p67e96jV4t3GjdSf83c866YYXDNB
- vDZOJ3hQz+m0B5cuww03Tejj+rYAmUIDGrQBFV6Nm2lvG96mqmj5Y+nLo6KJxVviLP
- E/0VXWACxX4kw==
+ b=Jrv6o4ADjNPsBhF7ygpsCGABd8NADiDoK0hzlw7qXUUBI4ULuTSfczxYjgboUfHWV
+ exW2yRScK2bx3srI/EOrK5Ncpez3Vkc3moB7quBZriF18FfdXlMB/LXbP5v/nZ7F/C
+ oTrITZ4yqxsXCvSik2t8hFVn8vhmsYKNSX+pMpLM/yNH/6JromVgIAqqzY1yuSRpiC
+ XwYbx5GQo4O3IFR1NrBZ5yW3HaW+lFhEIQMj93+fU3gUy1P4+rg/vwcYbesgkbhCNx
+ vjVJe2MIRvpvWYyPMFqAayQDbJM2pO3wFUmse1O6dUd+iOyBndjLHDEw+fk4ScZ9Tz
+ j3cx/6MZS6Q+A==
 Received: by aws-us-west-2-korg-bugzilla-1.web.codeaurora.org (Postfix,
- from userid 48) id E5B1FC4332E; Fri, 29 Sep 2023 14:47:34 +0000 (UTC)
+ from userid 48) id DEFEAC4332E; Fri, 29 Sep 2023 14:51:07 +0000 (UTC)
 From: bugzilla-daemon@kernel.org
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Fri, 29 Sep 2023 14:47:34 +0000
+Date: Fri, 29 Sep 2023 14:51:07 +0000
 X-Bugzilla-Reason: None
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: AssignedTo filesystem_f2fs@kernel-bugs.kernel.org
@@ -76,9 +76,9 @@ X-Bugzilla-Priority: P1
 X-Bugzilla-Assigned-To: filesystem_f2fs@kernel-bugs.kernel.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-210797-202145-KuH0fcVh79@https.bugzilla.kernel.org/>
-In-Reply-To: <bug-210797-202145@https.bugzilla.kernel.org/>
-References: <bug-210797-202145@https.bugzilla.kernel.org/>
+Message-ID: <bug-210795-202145-2ycWO6nyFH@https.bugzilla.kernel.org/>
+In-Reply-To: <bug-210795-202145@https.bugzilla.kernel.org/>
+References: <bug-210795-202145@https.bugzilla.kernel.org/>
 X-Bugzilla-URL: https://bugzilla.kernel.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
@@ -89,7 +89,7 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=210797 Tomas
+ Content preview: https://bugzilla.kernel.org/show_bug.cgi?id=210795 Tomas
  Thiemel
  (thiemel@centrum.cz) changed: What |Removed |Added Status|ASSIGNED |RESOLVED
  Resolution|--- |DOCUMENTED 
@@ -108,9 +108,10 @@ X-Spam-Report: Spam detection software,
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qmEmK-00Bd2X-Vl
-Subject: [f2fs-dev] [Bug 210797] resize.f2fs over 2 (LVM) disks corrupts
- whole filesystem
+X-Headers-End: 1qmEpl-00BdF4-Nt
+Subject: [f2fs-dev] [Bug 210795] fsck.f2fs - 1.14.0 - error when not
+ /dev/vgXX/lvYYY path provided - [ASSERT] (init_sb_info:1017) !strcmp((char
+ *)sb->devs[i].path, (char *)c.devices[i].path)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,7 +127,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-https://bugzilla.kernel.org/show_bug.cgi?id=210797
+https://bugzilla.kernel.org/show_bug.cgi?id=210795
 
 Tomas Thiemel (thiemel@centrum.cz) changed:
 
@@ -134,12 +135,6 @@ Tomas Thiemel (thiemel@centrum.cz) changed:
 ----------------------------------------------------------------------------
              Status|ASSIGNED                    |RESOLVED
          Resolution|---                         |DOCUMENTED
-
---- Comment #2 from Tomas Thiemel (thiemel@centrum.cz) ---
-Chao Yu 2020-12-21 02:04:26 UTC:
-"That's not a bug, resize.f2fs just doesn't support it after you change size of
-any of devices; the only possible way is do resize(expand) on a single device
-image."
 
 -- 
 You may reply to this email to add a comment.
