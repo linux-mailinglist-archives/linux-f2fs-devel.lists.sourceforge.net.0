@@ -2,110 +2,118 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DB157B4CFA
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  2 Oct 2023 09:57:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 873A97B5D91
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  3 Oct 2023 01:09:57 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qnDoN-0007R5-BW;
-	Mon, 02 Oct 2023 07:57:50 +0000
+	id 1qnS2v-0006zN-67;
+	Mon, 02 Oct 2023 23:09:49 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1qnDoL-0007Qs-5E;
- Mon, 02 Oct 2023 07:57:48 +0000
+ (envelope-from <3s00bZQYKAOoPdaeQZSaaSXQ.OaY@flex--drosen.bounces.google.com>)
+ id 1qnS2u-0006zD-Bn for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 02 Oct 2023 23:09:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
+ Mime-Version:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HRtvvsbDRmaIGA2qlEwuFNnN4SG9to1RwhMyTnDS1Ek=; b=RboY2lYKE0Xa0BDYe3H/Dttv9x
- 3XGqe02UKIDi9SwLxpYNNigGfJwNbXrRx0e9INtX/11SNYQuX0OFmudXYYhHAArpI1BDUxFNbgLkl
- Ig+AOaujJYDuzjzMzqQCFOZBhvk9AgVa7amjPAa82AOIC2JL/r2KodaMMoerEhzrqZLo=;
+ bh=h+VrPtOekhb8+q73onDrKN45JQ6nX1n1Q4LL4kdfewA=; b=b+9JIpQdkAOJk6wwhZKEBDuG9Q
+ +ld9mE1QU06SbIg6pjTXH6d6uOLwrokGYUeJ0pubuwlhJeA4zFy8DBd4rjyjtyiUMEhSGfAJtxlKq
+ e7141EFj00sWqB9Y9hcXo1Lb+XebxDboiUBQF/TpobY2ORXkposaCjOCMwQX0Ozv55Jc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=HRtvvsbDRmaIGA2qlEwuFNnN4SG9to1RwhMyTnDS1Ek=; b=L5D7G61HnJO0vVjwbQUEzb/IaV
- X4H/mdJX2/jO7qukK6xOmN75aLosTTpX2mkxz+9ufLCS6/ti0YHTQiEcB3B5aT+aNkZsS4Zc/4daa
- DZUDzjkd7sh3pLI6mBn5Qf1tQ64i+QhEg6DxeK4q9sjCW1VxRDgeOxYcEMYCwaitTTOU=;
-Received: from smtp-out2.suse.de ([195.135.220.29])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=h+VrPtOekhb8+q73onDrKN45JQ6nX1n1Q4LL4kdfewA=; b=D
+ W60bYN06UnpvOFbIjw9SmtHrkVbrhrTJCRLQwwJPH0I7rDhisE/pO7QzILkTyKKvgCmj8+/UM8Toa
+ Iy7csnYH5buzRZ9nsFqIcevuOGw+VE3ZVWvTc1UI8EgAyh3Q2aM4HeTIU4YNPP8/ykWsDFI7S8wA/
+ Izk6LKZyXKxm9DgU=;
+Received: from mail-yb1-f201.google.com ([209.85.219.201])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qnDoF-0006jF-KM; Mon, 02 Oct 2023 07:57:47 +0000
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id AB8121F459;
- Mon,  2 Oct 2023 07:57:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1696233452; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=HRtvvsbDRmaIGA2qlEwuFNnN4SG9to1RwhMyTnDS1Ek=;
- b=AelUG9FSlQyUcQTA9I9qRJmPzMA6mvk2OLx4Qv2PacqmgU2FkeI54uQfwuwk8GDISDrHf1
- K6okkr5Yua+jK8r2TTOukY7745vay4e4z1caiTsHAigkH18O5VWdMY9s+0PKMe8/Ta1ITc
- H4lySULw9TgNQsjwAFd513U/tj8Iifc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1696233452;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=HRtvvsbDRmaIGA2qlEwuFNnN4SG9to1RwhMyTnDS1Ek=;
- b=4yX5F6ZD5YaXQ1SgLuHClpbWfxc1xKg7esoSW59wSh/oO7HSeTROmd590v4TgEevJu81R5
- RAceDQWhH8NjA0AQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 83FA513434;
- Mon,  2 Oct 2023 07:57:32 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id JLsgIOx3GmUuEgAAMHmgww
- (envelope-from <jack@suse.cz>); Mon, 02 Oct 2023 07:57:32 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 27D44A07C9; Mon,  2 Oct 2023 09:57:32 +0200 (CEST)
-Date: Mon, 2 Oct 2023 09:57:32 +0200
-From: Jan Kara <jack@suse.cz>
-To: Christian Brauner <brauner@kernel.org>
-Message-ID: <20231002075732.4c5oslpabrmw3niz@quack3>
-References: <20230818123232.2269-1-jack@suse.cz>
- <20230927-prahlen-reintreten-93706074e58d@brauner>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230927-prahlen-reintreten-93706074e58d@brauner>
-X-Spam-Score: -2.5 (--)
+ id 1qnS2r-00GeZz-2i for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 02 Oct 2023 23:09:48 +0000
+Received: by mail-yb1-f201.google.com with SMTP id
+ 3f1490d57ef6-d7fd4c23315so469032276.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 02 Oct 2023 16:09:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1696288179; x=1696892979;
+ darn=lists.sourceforge.net; 
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=h+VrPtOekhb8+q73onDrKN45JQ6nX1n1Q4LL4kdfewA=;
+ b=zejLNnNdJajlRfwBx6RNh8K7B1hGSGZ9Fml4InO1ngjcCAw4XyZv7AYRb4sYLfHAbl
+ RYCWeJhc3aJMMireAW3yb+OCJ6D4I80uXDAopBlzXmAErmKMDiltvmUBgEFjGHKfVtw1
+ uD6xlvkRiO3ehfUNSE5qCfPKsJd69c+xrfdjx8N3OdYlgatCr5TvXzmpE34OgZSrzkvG
+ p/tV2qchc4MSrMGp2HNQ4qTCIFkWiXgVlLY+fED/Pkn9TDyiM7U56jnXkiq1DKqGH1QG
+ TfP3HreUlVVxHh+8fxXQSUIucjf6Bs+Y8TxgRDUrKL5475dXyqngXGtuN210kGFQWH2l
+ O47Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696288179; x=1696892979;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=h+VrPtOekhb8+q73onDrKN45JQ6nX1n1Q4LL4kdfewA=;
+ b=OAs+8C6Rir19ILyypURG7tXuoUzi8CAXWHPpeuljDXDBgtAge96+TF90P/cf7EPnN7
+ bCiyJDmx52q46DEM9P36Cxrdxu3G7eHsWTszoUsXb+6vB4GNRgGgfy10b+tqb3NrexIG
+ /uJ59o2Ed4gFF6PjMLwvj1hXAXBFKpFI/ddX7jRoMEsUEWxvWxxds3BQ9ibYIy51lVXp
+ 6ackDaAFp5SUaiIuwZiNG56wYTBupMRTa5SbhOU8Vii4kiiEQ9dZF85Sk4POS8/rkkno
+ PVdFmdmExRMY3yQjcD/NT5WIVeIR8k5gkCs8Urj13izUOZz7mB8s54aURHz6o7u2VbV2
+ GtoA==
+X-Gm-Message-State: AOJu0YwiAZu0t7ugm4DnFpSLv/lB/jOSGjLRuQAICKyd6Unt9xNIUEtS
+ zqW0CK0M8gbwJLmV7dr5Ea/mCn0yECzPBGSRvcNnnLOTjj3Yrg0/Ly+yhgz+ieJ5bKG4gkzI319
+ JYoMhz+ibOPbrKeimSQuH4qa1sFbURraqWnU1y0Yu/3w2xg3YEokOQw8k+FbiMJJnOHuEYb+7uM
+ Njtv0hCL0=
+X-Google-Smtp-Source: AGHT+IEiQymAa7emMibbrofWKTUTBTNmFDJ5Vgb2eeRJ4K+AIcSgV+sbogBvdxPrJYARMPwpiTai1QF3ZeE=
+X-Received: from drosen.mtv.corp.google.com
+ ([2620:15c:211:201:459f:6e1a:6be7:55da])
+ (user=drosen job=sendgmr) by 2002:a25:910:0:b0:d86:55b7:97b0 with SMTP id
+ 16-20020a250910000000b00d8655b797b0mr231052ybj.9.1696288179184; Mon, 02 Oct
+ 2023 16:09:39 -0700 (PDT)
+Date: Mon,  2 Oct 2023 16:09:34 -0700
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
+Message-ID: <20231002230935.169229-1-drosen@google.com>
+To: linux-f2fs-devel@lists.sourceforge.net
+X-Spam-Score: -8.3 (--------)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed 27-09-23 18:21:19, Christian Brauner wrote: > On Wed, 
- 27 Sep 2023 11:34:07 +0200, Jan Kara wrote: > > Create struct bdev_handle
- that contains all parameters that need to be > > passed to blkdev [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview: F2fs filesystems currently have two large restrictions around
+ block size. The block size must equal the page size, and the block size must
+ be 4096. The following patch, along with the associated f2fs-tools patch
+ set, relax the latter restriction, allowing you to use 16K block size f2fs
+ on a 16K page size system. It does not allow mounting 4K bloc [...] 
+ Content analysis details:   (-8.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [195.135.220.29 listed in list.dnswl.org]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.219.201 listed in list.dnswl.org]
+ -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
+ welcome-list
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1qnDoF-0006jF-KM
-Subject: Re: [f2fs-dev] [PATCH v4 0/29] block: Make blkdev_get_by_*() return
- handle
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.6 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.219.201 listed in wl.mailspike.net]
+ -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
+X-Headers-End: 1qnS2r-00GeZz-2i
+Subject: [f2fs-dev] [PATCH v2 0/1] Add 16K Support for f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,138 +125,45 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Dave Kleikamp <shaggy@kernel.org>, jfs-discussion@lists.sourceforge.net,
- Jan Kara <jack@suse.cz>, "Darrick J. Wong" <djwong@kernel.org>,
- linux-nvme@lists.infradead.org, Joseph Qi <joseph.qi@linux.alibaba.com>,
- dm-devel@redhat.com, target-devel@vger.kernel.org,
- linux-mtd@lists.infradead.org, Jack Wang <jinpu.wang@ionos.com>,
- Alasdair Kergon <agk@redhat.com>, drbd-dev@lists.linbit.com,
- linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
- linux-scsi@vger.kernel.org, Sergey Senozhatsky <senozhatsky@chromium.org>,
- Christoph Hellwig <hch@infradead.org>, xen-devel@lists.xenproject.org,
- Gao Xiang <xiang@kernel.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Kent Overstreet <kent.overstreet@gmail.com>,
- Sven Schnelle <svens@linux.ibm.com>, linux-pm@vger.kernel.org,
- Mike Snitzer <snitzer@kernel.org>, Joern Engel <joern@lazybastard.org>,
- reiserfs-devel@vger.kernel.org, linux-block@vger.kernel.org,
- linux-bcache@vger.kernel.org, David Sterba <dsterba@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>,
- Trond Myklebust <trond.myklebust@hammerspace.com>, linux-raid@vger.kernel.org,
- linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org, Ted Tso <tytso@mit.edu>,
- linux-mm@kvack.org, Song Liu <song@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- Minchan Kim <minchan@kernel.org>, ocfs2-devel@oss.oracle.com,
- Anna Schumaker <anna@kernel.org>, linux-fsdevel@vger.kernel.org,
- "Md. Haris Iqbal" <haris.iqbal@ionos.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org
+From: Daniel Rosenberg via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Daniel Rosenberg <drosen@google.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, Daniel Rosenberg <drosen@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed 27-09-23 18:21:19, Christian Brauner wrote:
-> On Wed, 27 Sep 2023 11:34:07 +0200, Jan Kara wrote:
-> > Create struct bdev_handle that contains all parameters that need to be
-> > passed to blkdev_put() and provide bdev_open_* functions that return
-> > this structure instead of plain bdev pointer. This will eventually allow
-> > us to pass one more argument to blkdev_put() (renamed to bdev_release())
-> > without too much hassle.
-> > 
-> > 
-> > [...]
-> 
-> > to ease review / testing. Christian, can you pull the patches to your tree
-> > to get some exposure in linux-next as well? Thanks!
-> 
-> Yep. So I did it slighly differently. I pulled in the btrfs prereqs and
-> then applied your series on top of it so we get all the Link: tags right.
-> I'm running tests right now. Please double-check.
+F2fs filesystems currently have two large restrictions around block size.
+The block size must equal the page size, and the block size must be 4096.
 
-Thanks for picking patches up! I've checked the branch and it looks good to
-me. 
+The following patch, along with the associated f2fs-tools patch set, relax the
+latter restriction, allowing you to use 16K block size f2fs on a 16K page size
+system. It does not allow mounting 4K block size f2fs on a 16k page system.
 
-								Honza
+Doing that would require a lot more work, requiring a refactor of all block
+sized struct similar to the userspace patches, as well as handling the block
+reading/writing at sub page boundaries. I'm currently leaving that to future
+work.
 
-> 
-> ---
-> 
-> Applied to the vfs.super branch of the vfs/vfs.git tree.
-> Patches in the vfs.super branch should appear in linux-next soon.
-> 
-> Please report any outstanding bugs that were missed during review in a
-> new review to the original patch series allowing us to drop it.
-> 
-> It's encouraged to provide Acked-bys and Reviewed-bys even though the
-> patch has now been applied. If possible patch trailers will be updated.
-> 
-> Note that commit hashes shown below are subject to change due to rebase,
-> trailer updates or similar. If in doubt, please check the listed branch.
-> 
-> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
-> branch: vfs.super
-> 
-> [01/29] block: Provide bdev_open_* functions
->        https://git.kernel.org/vfs/vfs/c/b7c828aa0b3c
-> [02/29] block: Use bdev_open_by_dev() in blkdev_open()
->         https://git.kernel.org/vfs/vfs/c/d4e36f27b45a
-> [03/29] block: Use bdev_open_by_dev() in disk_scan_partitions() and blkdev_bszset()
->         https://git.kernel.org/vfs/vfs/c/5f9bd6764c7a
-> [04/29] drdb: Convert to use bdev_open_by_path()
->         https://git.kernel.org/vfs/vfs/c/0220ca8e443d
-> [05/29] pktcdvd: Convert to bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/7af10b889789
-> [06/29] rnbd-srv: Convert to use bdev_open_by_path()
->         https://git.kernel.org/vfs/vfs/c/3d27892a4be7
-> [07/29] xen/blkback: Convert to bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/26afb0ed10b3
-> [08/29] zram: Convert to use bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/efc8e3f4c6dc
-> [09/29] bcache: Convert to bdev_open_by_path()
->         https://git.kernel.org/vfs/vfs/c/dc893f51d24a
-> [10/29] dm: Convert to bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/80c2267c6d07
-> [11/29] md: Convert to bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/15db36126ca6
-> [12/29] mtd: block2mtd: Convert to bdev_open_by_dev/path()
->         https://git.kernel.org/vfs/vfs/c/4c27234bf3ce
-> [13/29] nvmet: Convert to bdev_open_by_path()
->         https://git.kernel.org/vfs/vfs/c/70cffddcc300
-> [14/29] s390/dasd: Convert to bdev_open_by_path()
->         https://git.kernel.org/vfs/vfs/c/5581d03457f8
-> [15/29] scsi: target: Convert to bdev_open_by_path()
->         https://git.kernel.org/vfs/vfs/c/43de7d844d47
-> [16/29] PM: hibernate: Convert to bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/105ea4a2fd18
-> [17/29] PM: hibernate: Drop unused snapshot_test argument
->         https://git.kernel.org/vfs/vfs/c/b589a66e3688
-> [18/29] mm/swap: Convert to use bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/615af8e29233
-> [19/29] fs: Convert to bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/5173192bcfe6
-> [20/29] btrfs: Convert to bdev_open_by_path()
->         https://git.kernel.org/vfs/vfs/c/8cf64782764f
-> [21/29] erofs: Convert to use bdev_open_by_path()
->         https://git.kernel.org/vfs/vfs/c/4d41880bf249
-> [22/29] ext4: Convert to bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/f7507612395e
-> [23/29] f2fs: Convert to bdev_open_by_dev/path()
->         https://git.kernel.org/vfs/vfs/c/d9ff8e3b6498
-> [24/29] jfs: Convert to bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/459dc6376338
-> [25/29] nfs/blocklayout: Convert to use bdev_open_by_dev/path()
->         https://git.kernel.org/vfs/vfs/c/5b1df9a40929
-> [26/29] ocfs2: Convert to use bdev_open_by_dev()
->         https://git.kernel.org/vfs/vfs/c/b6b95acbd943
-> [27/29] reiserfs: Convert to bdev_open_by_dev/path()
->         https://git.kernel.org/vfs/vfs/c/7e3615ff6119
-> [28/29] xfs: Convert to bdev_open_by_path()
->         https://git.kernel.org/vfs/vfs/c/176ccb99e207
-> [29/29] block: Remove blkdev_get_by_*() functions
->         https://git.kernel.org/vfs/vfs/c/953863a5a2ff
+changes for v2:
+Adjusted format string
+
+Daniel Rosenberg (1):
+  f2fs: Support Block Size == Page Size
+
+ fs/f2fs/data.c          |  2 +-
+ fs/f2fs/inode.c         |  2 +-
+ fs/f2fs/node.c          |  2 +-
+ fs/f2fs/super.c         |  4 +--
+ include/linux/f2fs_fs.h | 69 ++++++++++++++++++++++++-----------------
+ 5 files changed, 46 insertions(+), 33 deletions(-)
+
+
+base-commit: 3e729e50d01e6a336132d1739866a6463f82faa9
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+2.42.0.582.g8ccd20d70d-goog
+
 
 
 _______________________________________________
