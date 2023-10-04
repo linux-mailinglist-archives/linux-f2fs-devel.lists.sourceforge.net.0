@@ -2,124 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D27327B746A
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Oct 2023 01:02:28 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DFD77B8B79
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  4 Oct 2023 20:54:44 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qnoPH-0004IX-11;
-	Tue, 03 Oct 2023 23:02:21 +0000
+	id 1qo716-0002xs-8e;
+	Wed, 04 Oct 2023 18:54:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1qnoPF-0004IR-Iy
+ (envelope-from <jlayton@kernel.org>) id 1qo714-0002xk-Ds
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Oct 2023 23:02:20 +0000
+ Wed, 04 Oct 2023 18:54:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nEaRtaRax1n0h+1IKPeikRHaTx6MRk96Qy5GH4j8LaQ=; b=LO0t3wW/LfSU4x31T3DelqjCNJ
- nCTm20dGeyA1ZKvp1UHm78NWJ9lNReuHHnjDtra9CWUiMcjASQ4CivKgD405QEVYnMJusmLnoTGgo
- UyfTKEwBdqxbyCLFh+lGQwEZQck0USXFBhctWsx1uj79a5PkicPseRKqrK3YZkotrSL0=;
+ bh=Y7KhhUN0d+/Gj27X+DKDid8KEN4cs5YtU5hsTPAOmls=; b=d2/lHmXDsGkizN8S2IJ4JiwTYx
+ fh7IoOgYos904hQ5nxRekBhKjY/WOagdPUzUP9nRea4J7L+Qr+zI/xSV4Du2xpYSCT8vVflq3nsYR
+ ZL4C9SePxvrA2oOiYiOFNhm0eSvskWJ+xrqOD6PqHshXiCSKEgj+efcVSPsUwnfcY48s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=nEaRtaRax1n0h+1IKPeikRHaTx6MRk96Qy5GH4j8LaQ=; b=Z
- kchweATTNkKCUewThz/jaxm11Ch6IxHa3MrWoAxstNJXFrMALsPXNoMAeC7hx+gUCVHjW/qgF/Us1
- kAl3o1zlG3m1kbxQaipqzWnXMNQCmdzR7I7MLpbQ/X/CTIglQJ2fx8uYPXILaNHTt9qaytzwRrgME
- ooJNODv6EGoGdMvw=;
-Received: from mail-pj1-f48.google.com ([209.85.216.48])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qnoPC-000LMS-Py for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Oct 2023 23:02:20 +0000
-Received: by mail-pj1-f48.google.com with SMTP id
- 98e67ed59e1d1-27763c2c22eso1074493a91.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 03 Oct 2023 16:02:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696374133; x=1696978933; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nEaRtaRax1n0h+1IKPeikRHaTx6MRk96Qy5GH4j8LaQ=;
- b=DY2VMA0O7ZNGxR/itPO+zBQyfPfHXWu8UXMwpn3QYi0vsiEt0BOof9+V6EPl7bRXWP
- Zw4zzjOWNUwpI+M8wtuAg7vQjnZkTsTQAsduqc1cc9vv1GgwZ2tA19Xd1c+NC/SrrubU
- vc+8KMSAM7cRrNeq8j4t3MMj4D58acGO/RMeWlnGfpEw87tnKIFP4zC6pnnPD1MsTTQO
- CmPgKGxk+k225EM1vrG8BErqsrBW7WfJOgRFlTlCxnuw3KriH5YlyJpKwLBextFJR4YO
- /AuEgfDk/fLAqFb3iw1c8rhqL586sTggnTIuwDUc11AWkpiO4TfCinJnfV5eC04xeqK0
- lYJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696374133; x=1696978933;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nEaRtaRax1n0h+1IKPeikRHaTx6MRk96Qy5GH4j8LaQ=;
- b=ed51rUuaR3MFjmgEwHOtQCyyohoqtWcKnm2AQ8SMt/DYNfOZ+DePy+0d9oqk1TOQLS
- W0tz/C1VJk8mRdo9Rt2qesHLDqAlRd6U2WGJTETSvYgNSjO+p2ZiTq1PbHerVlyYocBw
- cTu4oke5MMht+lGNPjgqrAfXnw4EVt+ktBIvX6ma5d3/Q1uc/cYoHKPeW217VwT6Qo3B
- 3Fze2olu5h49AZ1NhnZlt9XO9+joxcHGBomU7sR4WH5CyKnZlwnTdBTaCxXqdr4C2HNl
- XkdnZeXGpzWLkxn1erwmMBVfm4lfrbRYxvN38r8ZJJ90IfCBQtIpgaY5ERlw5MofFqYc
- FrzA==
-X-Gm-Message-State: AOJu0Yz5/JUYrqTcshIrawSgMbe5rtq8CbJfkpbODD+ipzrzG4Q3TC/j
- za/NEdWbCQizFpUWf756mig=
-X-Google-Smtp-Source: AGHT+IHSyviMq44U3UuFEk2M4ds+PrQx58KEBZHBDUujKrCVVa2ZnMDeTAUbtE9+odUQcUIRWSBM3A==
-X-Received: by 2002:a17:90a:4292:b0:279:be6:bf73 with SMTP id
- p18-20020a17090a429200b002790be6bf73mr732397pjg.11.1696374133149; 
- Tue, 03 Oct 2023 16:02:13 -0700 (PDT)
-Received: from daehojeong-desktop.mtv.corp.google.com
- ([2620:15c:211:201:1d9:902f:6531:9779])
- by smtp.gmail.com with ESMTPSA id
- ji13-20020a170903324d00b001c727d3ea6bsm2167940plb.74.2023.10.03.16.02.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Oct 2023 16:02:12 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Tue,  3 Oct 2023 16:01:55 -0700
-Message-ID: <20231003230155.355807-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Y7KhhUN0d+/Gj27X+DKDid8KEN4cs5YtU5hsTPAOmls=; b=UVOq+brArvisPKzqb0dJuGD5el
+ VKq+PxWH1u0d4yJT39+igB6IvTUUp6NqKmWx5qIFI0KS0vtJGtOd88/USAp/T9WQfJUyRYAdmThFP
+ UI31AmQcyNiajUChNTHc+Z0GJoLXzRuO60QTKA8ZX0E/8lne1k4Bb5s9wbBpNFjjcFjc=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qo710-000578-A4 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Oct 2023 18:54:38 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 06F556129B;
+ Wed,  4 Oct 2023 18:54:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E217C433C9;
+ Wed,  4 Oct 2023 18:54:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1696445668;
+ bh=tCBISPWGGNokIp2mrKL+31cK3tG8P238OYYBHV60Bhs=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=ICpZaDp8WPBHBzLqiwbH/Lg9p8LqbmsgAz7ulyJIv6dJOBISnqcve+wUh6Zcf2btx
+ St/t/TMAZZ1NzxOSbq/KBJEHzjj+IrrJgbK5EoJpSCBYz20pcqPFS/mpAhSXCekEn9
+ cLmP/yWN514DmpRWQfmTtMv5JXd+KUMhb/0cyRUh6THVMjWhFO7Efk//qpPDMCd2hO
+ VX9VWcObdPAQGh0AdWoogJCMRtZxsHlluAJC2quCjHtZZ63/wE2YrmKkO4taQM3hG3
+ ce6ddArmxDDgs2kzjMUNNAIUH6foN75SSkT14ADF2XtwEsR/2r8+YO8dm3SmjAZVX5
+ AAQ4C+I0Qm5Tw==
+From: Jeff Layton <jlayton@kernel.org>
+To: Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, linux-fsdevel@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Date: Wed,  4 Oct 2023 14:52:21 -0400
+Message-ID: <20231004185347.80880-34-jlayton@kernel.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231004185347.80880-1-jlayton@kernel.org>
+References: <20231004185221.80802-1-jlayton@kernel.org>
+ <20231004185347.80880-1-jlayton@kernel.org>
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Daeho Jeong For direct nodes,
- we have to use DEF_ADDRS_PER_BLOCK.
- Signed-off-by: Daeho Jeong --- fsck/fsck.c | 2 +- 1 file changed,
- 1 insertion(+), 1 deletion(-) 
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview: Convert to using the new inode timestamp accessor functions.
+ Signed-off-by: Jeff Layton <jlayton@kernel.org> --- fs/f2fs/dir.c | 6 +++---
+ fs/f2fs/f2fs.h | 10 ++++++---- fs/f2fs/file.c | 14 +++++++-------
+ fs/f2fs/inline.c | 2 +- fs/f2fs/inode.c | 24 ++++++++++++ [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.48 listed in list.dnswl.org]
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [daeho43[at]gmail.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [daeho43[at]gmail.com]
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.48 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1qnoPC-000LMS-Py
-Subject: [f2fs-dev] [PATCH] f2fs-tools: use proper address entry count for
- direct nodes
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qo710-000578-A4
+Subject: [f2fs-dev] [PATCH v2 36/89] f2fs: convert to new timestamp accessors
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,35 +104,252 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-From: Daeho Jeong <daehojeong@google.com>
+Convert to using the new inode timestamp accessor functions.
 
-For direct nodes, we have to use DEF_ADDRS_PER_BLOCK.
-
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
+Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fsck/fsck.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/f2fs/dir.c      |  6 +++---
+ fs/f2fs/f2fs.h     | 10 ++++++----
+ fs/f2fs/file.c     | 14 +++++++-------
+ fs/f2fs/inline.c   |  2 +-
+ fs/f2fs/inode.c    | 24 ++++++++++++------------
+ fs/f2fs/namei.c    |  4 ++--
+ fs/f2fs/recovery.c |  8 ++++----
+ fs/f2fs/super.c    |  2 +-
+ 8 files changed, 36 insertions(+), 34 deletions(-)
 
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 78ffdb6..56a7d31 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -2894,7 +2894,7 @@ static void fsck_failed_reconnect_file_dnode(struct f2fs_sb_info *sbi,
- 	fsck->chk.valid_blk_cnt--;
- 	f2fs_clear_main_bitmap(sbi, ni.blk_addr);
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index 8aa29fe2e87b..042593aed1ec 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -455,7 +455,7 @@ void f2fs_set_link(struct inode *dir, struct f2fs_dir_entry *de,
+ 	de->file_type = fs_umode_to_ftype(inode->i_mode);
+ 	set_page_dirty(page);
  
--	for (i = 0; i < ADDRS_PER_BLOCK(&node->i); i++) {
-+	for (i = 0; i < DEF_ADDRS_PER_BLOCK; i++) {
- 		addr = le32_to_cpu(node->dn.addr[i]);
- 		if (!addr)
- 			continue;
+-	dir->i_mtime = inode_set_ctime_current(dir);
++	inode_set_mtime_to_ts(dir, inode_set_ctime_current(dir));
+ 	f2fs_mark_inode_dirty_sync(dir, false);
+ 	f2fs_put_page(page, 1);
+ }
+@@ -609,7 +609,7 @@ void f2fs_update_parent_metadata(struct inode *dir, struct inode *inode,
+ 			f2fs_i_links_write(dir, true);
+ 		clear_inode_flag(inode, FI_NEW_INODE);
+ 	}
+-	dir->i_mtime = inode_set_ctime_current(dir);
++	inode_set_mtime_to_ts(dir, inode_set_ctime_current(dir));
+ 	f2fs_mark_inode_dirty_sync(dir, false);
+ 
+ 	if (F2FS_I(dir)->i_current_depth != current_depth)
+@@ -919,7 +919,7 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
+ 	}
+ 	f2fs_put_page(page, 1);
+ 
+-	dir->i_mtime = inode_set_ctime_current(dir);
++	inode_set_mtime_to_ts(dir, inode_set_ctime_current(dir));
+ 	f2fs_mark_inode_dirty_sync(dir, false);
+ 
+ 	if (inode)
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 3878288122ee..9043cedfa12b 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3318,13 +3318,15 @@ static inline void clear_file(struct inode *inode, int type)
+ 
+ static inline bool f2fs_is_time_consistent(struct inode *inode)
+ {
+-	struct timespec64 ctime = inode_get_ctime(inode);
++	struct timespec64 ts = inode_get_atime(inode);
+ 
+-	if (!timespec64_equal(F2FS_I(inode)->i_disk_time, &inode->i_atime))
++	if (!timespec64_equal(F2FS_I(inode)->i_disk_time, &ts))
+ 		return false;
+-	if (!timespec64_equal(F2FS_I(inode)->i_disk_time + 1, &ctime))
++	ts = inode_get_ctime(inode);
++	if (!timespec64_equal(F2FS_I(inode)->i_disk_time + 1, &ts))
+ 		return false;
+-	if (!timespec64_equal(F2FS_I(inode)->i_disk_time + 2, &inode->i_mtime))
++	ts = inode_get_mtime(inode);
++	if (!timespec64_equal(F2FS_I(inode)->i_disk_time + 2, &ts))
+ 		return false;
+ 	return true;
+ }
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 161826c6e200..5769c9879e79 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -798,7 +798,7 @@ int f2fs_truncate(struct inode *inode)
+ 	if (err)
+ 		return err;
+ 
+-	inode->i_mtime = inode_set_ctime_current(inode);
++	inode_set_mtime_to_ts(inode, inode_set_ctime_current(inode));
+ 	f2fs_mark_inode_dirty_sync(inode, false);
+ 	return 0;
+ }
+@@ -905,9 +905,9 @@ static void __setattr_copy(struct mnt_idmap *idmap,
+ 	i_uid_update(idmap, attr, inode);
+ 	i_gid_update(idmap, attr, inode);
+ 	if (ia_valid & ATTR_ATIME)
+-		inode->i_atime = attr->ia_atime;
++		inode_set_atime_to_ts(inode, attr->ia_atime);
+ 	if (ia_valid & ATTR_MTIME)
+-		inode->i_mtime = attr->ia_mtime;
++		inode_set_mtime_to_ts(inode, attr->ia_mtime);
+ 	if (ia_valid & ATTR_CTIME)
+ 		inode_set_ctime_to_ts(inode, attr->ia_ctime);
+ 	if (ia_valid & ATTR_MODE) {
+@@ -1012,7 +1012,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+ 			return err;
+ 
+ 		spin_lock(&F2FS_I(inode)->i_size_lock);
+-		inode->i_mtime = inode_set_ctime_current(inode);
++		inode_set_mtime_to_ts(inode, inode_set_ctime_current(inode));
+ 		F2FS_I(inode)->last_disk_size = i_size_read(inode);
+ 		spin_unlock(&F2FS_I(inode)->i_size_lock);
+ 	}
+@@ -1840,7 +1840,7 @@ static long f2fs_fallocate(struct file *file, int mode,
+ 	}
+ 
+ 	if (!ret) {
+-		inode->i_mtime = inode_set_ctime_current(inode);
++		inode_set_mtime_to_ts(inode, inode_set_ctime_current(inode));
+ 		f2fs_mark_inode_dirty_sync(inode, false);
+ 		f2fs_update_time(F2FS_I_SB(inode), REQ_TIME);
+ 	}
+@@ -2888,10 +2888,10 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
+ 	if (ret)
+ 		goto out_unlock;
+ 
+-	src->i_mtime = inode_set_ctime_current(src);
++	inode_set_mtime_to_ts(src, inode_set_ctime_current(src));
+ 	f2fs_mark_inode_dirty_sync(src, false);
+ 	if (src != dst) {
+-		dst->i_mtime = inode_set_ctime_current(dst);
++		inode_set_mtime_to_ts(dst, inode_set_ctime_current(dst));
+ 		f2fs_mark_inode_dirty_sync(dst, false);
+ 	}
+ 	f2fs_update_time(sbi, REQ_TIME);
+diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+index 2fe25619ccb5..ac00423f117b 100644
+--- a/fs/f2fs/inline.c
++++ b/fs/f2fs/inline.c
+@@ -699,7 +699,7 @@ void f2fs_delete_inline_entry(struct f2fs_dir_entry *dentry, struct page *page,
+ 	set_page_dirty(page);
+ 	f2fs_put_page(page, 1);
+ 
+-	dir->i_mtime = inode_set_ctime_current(dir);
++	inode_set_mtime_to_ts(dir, inode_set_ctime_current(dir));
+ 	f2fs_mark_inode_dirty_sync(dir, false);
+ 
+ 	if (inode)
+diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+index cde243840abd..5779c7edd49b 100644
+--- a/fs/f2fs/inode.c
++++ b/fs/f2fs/inode.c
+@@ -386,9 +386,9 @@ static void init_idisk_time(struct inode *inode)
+ {
+ 	struct f2fs_inode_info *fi = F2FS_I(inode);
+ 
+-	fi->i_disk_time[0] = inode->i_atime;
++	fi->i_disk_time[0] = inode_get_atime(inode);
+ 	fi->i_disk_time[1] = inode_get_ctime(inode);
+-	fi->i_disk_time[2] = inode->i_mtime;
++	fi->i_disk_time[2] = inode_get_mtime(inode);
+ }
+ 
+ static int do_read_inode(struct inode *inode)
+@@ -417,12 +417,12 @@ static int do_read_inode(struct inode *inode)
+ 	inode->i_size = le64_to_cpu(ri->i_size);
+ 	inode->i_blocks = SECTOR_FROM_BLOCK(le64_to_cpu(ri->i_blocks) - 1);
+ 
+-	inode->i_atime.tv_sec = le64_to_cpu(ri->i_atime);
++	inode_set_atime(inode, le64_to_cpu(ri->i_atime),
++			le32_to_cpu(ri->i_atime_nsec));
+ 	inode_set_ctime(inode, le64_to_cpu(ri->i_ctime),
+ 			le32_to_cpu(ri->i_ctime_nsec));
+-	inode->i_mtime.tv_sec = le64_to_cpu(ri->i_mtime);
+-	inode->i_atime.tv_nsec = le32_to_cpu(ri->i_atime_nsec);
+-	inode->i_mtime.tv_nsec = le32_to_cpu(ri->i_mtime_nsec);
++	inode_set_mtime(inode, le64_to_cpu(ri->i_mtime),
++			le32_to_cpu(ri->i_mtime_nsec));
+ 	inode->i_generation = le32_to_cpu(ri->i_generation);
+ 	if (S_ISDIR(inode->i_mode))
+ 		fi->i_current_depth = le32_to_cpu(ri->i_current_depth);
+@@ -698,12 +698,12 @@ void f2fs_update_inode(struct inode *inode, struct page *node_page)
+ 	}
+ 	set_raw_inline(inode, ri);
+ 
+-	ri->i_atime = cpu_to_le64(inode->i_atime.tv_sec);
+-	ri->i_ctime = cpu_to_le64(inode_get_ctime(inode).tv_sec);
+-	ri->i_mtime = cpu_to_le64(inode->i_mtime.tv_sec);
+-	ri->i_atime_nsec = cpu_to_le32(inode->i_atime.tv_nsec);
+-	ri->i_ctime_nsec = cpu_to_le32(inode_get_ctime(inode).tv_nsec);
+-	ri->i_mtime_nsec = cpu_to_le32(inode->i_mtime.tv_nsec);
++	ri->i_atime = cpu_to_le64(inode_get_atime_sec(inode));
++	ri->i_ctime = cpu_to_le64(inode_get_ctime_sec(inode));
++	ri->i_mtime = cpu_to_le64(inode_get_mtime_sec(inode));
++	ri->i_atime_nsec = cpu_to_le32(inode_get_atime_nsec(inode));
++	ri->i_ctime_nsec = cpu_to_le32(inode_get_ctime_nsec(inode));
++	ri->i_mtime_nsec = cpu_to_le32(inode_get_mtime_nsec(inode));
+ 	if (S_ISDIR(inode->i_mode))
+ 		ri->i_current_depth =
+ 			cpu_to_le32(F2FS_I(inode)->i_current_depth);
+diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+index 193b22a2d6bf..d0053b0284d8 100644
+--- a/fs/f2fs/namei.c
++++ b/fs/f2fs/namei.c
+@@ -243,8 +243,8 @@ static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
+ 
+ 	inode->i_ino = ino;
+ 	inode->i_blocks = 0;
+-	inode->i_mtime = inode->i_atime = inode_set_ctime_current(inode);
+-	F2FS_I(inode)->i_crtime = inode->i_mtime;
++	simple_inode_init_ts(inode);
++	F2FS_I(inode)->i_crtime = inode_get_mtime(inode);
+ 	inode->i_generation = get_random_u32();
+ 
+ 	if (S_ISDIR(inode->i_mode))
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index 7be60df277a5..b56d0f1078a7 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -320,12 +320,12 @@ static int recover_inode(struct inode *inode, struct page *page)
+ 	}
+ 
+ 	f2fs_i_size_write(inode, le64_to_cpu(raw->i_size));
+-	inode->i_atime.tv_sec = le64_to_cpu(raw->i_atime);
++	inode_set_atime(inode, le64_to_cpu(raw->i_atime),
++			le32_to_cpu(raw->i_atime_nsec));
+ 	inode_set_ctime(inode, le64_to_cpu(raw->i_ctime),
+ 			le32_to_cpu(raw->i_ctime_nsec));
+-	inode->i_mtime.tv_sec = le64_to_cpu(raw->i_mtime);
+-	inode->i_atime.tv_nsec = le32_to_cpu(raw->i_atime_nsec);
+-	inode->i_mtime.tv_nsec = le32_to_cpu(raw->i_mtime_nsec);
++	inode_set_mtime(inode, le64_to_cpu(raw->i_mtime),
++			le32_to_cpu(raw->i_mtime_nsec));
+ 
+ 	F2FS_I(inode)->i_advise = raw->i_advise;
+ 	F2FS_I(inode)->i_flags = le32_to_cpu(raw->i_flags);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index a61be3204c54..0118405467ce 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2758,7 +2758,7 @@ static ssize_t f2fs_quota_write(struct super_block *sb, int type,
+ 
+ 	if (len == towrite)
+ 		return err;
+-	inode->i_mtime = inode_set_ctime_current(inode);
++	inode_set_mtime_to_ts(inode, inode_set_ctime_current(inode));
+ 	f2fs_mark_inode_dirty_sync(inode, false);
+ 	return len - towrite;
+ }
 -- 
-2.42.0.582.g8ccd20d70d-goog
+2.41.0
 
 
 
