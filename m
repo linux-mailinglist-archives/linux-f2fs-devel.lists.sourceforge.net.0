@@ -2,100 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE6FF7BC5A9
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Oct 2023 09:41:05 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACF907BC5BA
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Oct 2023 09:46:38 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qp1vk-0000zY-1f;
-	Sat, 07 Oct 2023 07:40:56 +0000
+	id 1qp21C-000382-Ss;
+	Sat, 07 Oct 2023 07:46:33 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1qp1vi-0000zR-Ka
+ (envelope-from <chao@kernel.org>) id 1qp21B-00037v-8g
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 07 Oct 2023 07:40:55 +0000
+ Sat, 07 Oct 2023 07:46:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sBenpsV+sBSDlZFeO1XdnFRWCHx5t1Ml7axEpMKUykk=; b=SrcqP50gtNakZFrf1mrottJ6T1
- Ux99JpsSfyNIPnp2SuJtD0MPuuDcWNf/EaxbooEmDO0r0+bTGT3dEZcUS+GcHBsPIJFUMEz9JIV2O
- 4V44Y8Ory7/3NjxoU2oGrOPcWoEOqLwef8lo2zCBvC1rRSLDvlC9KfcQWrYdV8hs0Yo0=;
+ bh=zYa7LO8/Wh38Nb3C+f7kcpPnWxwJd6t+/Ec+JvinqRI=; b=TbAyUGix9VupND/15NULxnGkAa
+ ZYevk3XlUOSI4jXzTiAG8rDpRq3zVvLMaP63MVT0Dpq9QDv1SWTVE+2BZ3OSmlrEtfIANOGR4/f9d
+ cBTMOrpgG9TaG8IQ2YeEONEXYb09S9k1MwqD/Zkkx6Elv+jaqIdw+Hwmbtui9Hr+4ajQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=sBenpsV+sBSDlZFeO1XdnFRWCHx5t1Ml7axEpMKUykk=; b=cOrU4TsevjDMjWHvgC5JfCt9As
- 12ChqZNTXnuyJ3/+eNITZANRsWti2jYFa5WKRW2grQlYqEIkSBa+OPgWih3oi3I60o38iDvHoW+6m
- 3i1wtibC+/K6lQOG3pqE6KVwC9lQQU6CfBBaRDbcnCk87+64++5voVLZ9tLP8xf4gBDI=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=zYa7LO8/Wh38Nb3C+f7kcpPnWxwJd6t+/Ec+JvinqRI=; b=H
+ vxccPaIha4EB8DAaAzdY9vS/rqbACDz3QuGkln6XPQN8Fi7rgljOoIu8jSgTWaZ5/eZSkwPjBaKfd
+ vi79fRi6ataLnyPKW//bEtLi0XPJrbE7sGtCraTmzYoy1mRD/h/LxxXBCwYyDe5bukYR3DjxxCIA4
+ 4sCYueY1C5dZU+yQ=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qp1ve-0001Mw-Fe for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 07 Oct 2023 07:40:55 +0000
+ id 1qp218-00562L-3O for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 07 Oct 2023 07:46:32 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A097460ACD
+ by sin.source.kernel.org (Postfix) with ESMTP id 45636CE092F
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat,  7 Oct 2023 07:40:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65BF4C433C7;
- Sat,  7 Oct 2023 07:40:38 +0000 (UTC)
+ Sat,  7 Oct 2023 07:46:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 49ABCC433C8;
+ Sat,  7 Oct 2023 07:46:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1696664439;
- bh=QNdP6CzhDYNi4kZoC6kQSoWNk4vaR0KoYKoMwwnfCk0=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=ZD6BHLVLeAO36MPjUMFZlQ3Ecnh8qiTLRZdfejreYwLcgJmWLK9rR7NhpFwqBrau8
- 4oFjd8xleln0VttlWWN0zcesnyf1iDRE59q82+INdEIFVpY2ZpxCBQDubDevB/sCpE
- J+45YDh/Bg8prgEqziRTMus8rCDdN2/KsipcCnJNfSk33of/M6NsoOdE1V8yiVBkrr
- SfG1CMPMpG0/Wbovjo1oy5iKFxY5sj5nJ8WfcjbbNJ4m50CTQN1rMOpj/UllFVvAs2
- ExA8ZJPV6VqYdzEetODqywayAPc1DJEV5uZEjw0bPTz2CBiE/hR2nBbg46URxq1ig9
- xQVMrZL075N0A==
-Message-ID: <c70b330a-b5f5-72d9-1190-fe1a6872919d@kernel.org>
-Date: Sat, 7 Oct 2023 15:40:36 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20231003225208.1936359-1-jaegeuk@kernel.org>
+ s=k20201202; t=1696664782;
+ bh=7rTaaOwJ2XLjmWgatV7u/BoCzFYYD2I7Tous8LEzDnw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=jBA2dmFZkbBvFOg+3XCyntOekKurJ/TwSib6bXG5qcMhfJfFQ/Cn6w+piTYwnUxzd
+ FaDfts0ZBNFSl2LqCRKAYIXB2CeR80MhrYThSsysifOnpn/zJEoBIuo0hqL/w/GAVM
+ rbyxQIFDsXWq5LpC9XSWWCyPXR2sNN4uiTRIlK8kmdLttHUyZSwvkXlxifTvElyElR
+ XA56wfJyxPbBbm4GZTwhLpef1irgERmSRZTWx3YNt8jP2byRFz7NAnchRTx9PveyiD
+ 0xkL/5GvH/tRBM3IMRzpQicllWWe/lrNw42G8QqVXq/BQzCcrfhz7LkeQaNFguUOV+
+ k6ASXtzDyE/Cw==
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20231003225208.1936359-1-jaegeuk@kernel.org>
-X-Spam-Score: -5.8 (-----)
+To: jaegeuk@kernel.org
+Date: Sat,  7 Oct 2023 15:45:52 +0800
+Message-Id: <20231007074552.3170496-1-chao@kernel.org>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/10/4 6:52,
- Jaegeuk Kim wrote: > Let's avoid unnecessary
- f2fs_map_block calls to load extents. > > # f2fs_io fadvise willneed 0 4096
- /data/local/tmp/test > > f2fs_map_blocks: dev = (254,51), in [...] 
- Content analysis details:   (-5.8 points, 6.0 required)
+ Content preview:  Otherwise,
+ it may print random physical block address in tracepoint
+ of f2fs_map_blocks() as below: f2fs_map_blocks: dev = (253,16), ino = 2297,
+ file offset = 0, start blkaddr = 0xa356c421, len = 0x0, flags = 0 
+ Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [145.40.73.55 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.6 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qp1ve-0001Mw-Fe
-Subject: Re: [f2fs-dev] [PATCH] f2fs: stop iterating f2fs_map_block if hole
- exists
+X-Headers-End: 1qp218-00562L-3O
+Subject: [f2fs-dev] [PATCH] f2fs: fix to initialize map.m_pblk in
+ f2fs_precache_extents()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,65 +101,37 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/10/4 6:52, Jaegeuk Kim wrote:
-> Let's avoid unnecessary f2fs_map_block calls to load extents.
-> 
->   # f2fs_io fadvise willneed 0 4096 /data/local/tmp/test
-> 
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 386, start blkaddr = 0x34ac00, len = 0x1400, flags = 2,
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 5506, start blkaddr = 0x34c200, len = 0x1000, flags = 2,
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 9602, start blkaddr = 0x34d600, len = 0x1200, flags = 2,
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 14210, start blkaddr = 0x34ec00, len = 0x400, flags = 2,
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 15235, start blkaddr = 0x34f401, len = 0xbff, flags = 2,
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 18306, start blkaddr = 0x350200, len = 0x1200, flags = 2
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 22915, start blkaddr = 0x351601, len = 0xa7d, flags = 2
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 25600, start blkaddr = 0x351601, len = 0x0, flags = 0
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 25601, start blkaddr = 0x351601, len = 0x0, flags = 0
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 25602, start blkaddr = 0x351601, len = 0x0, flags = 0
->    ...
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 1037188, start blkaddr = 0x351601, len = 0x0, flags = 0
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 1038206, start blkaddr = 0x351601, len = 0x0, flags = 0
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 1039224, start blkaddr = 0x351601, len = 0x0, flags = 0
->    f2fs_map_blocks: dev = (254,51), ino = 85845, file offset = 2075548, start blkaddr = 0x351601, len = 0x0, flags = 0
+Otherwise, it may print random physical block address in tracepoint
+of f2fs_map_blocks() as below:
 
-Jaegeuk,
+f2fs_map_blocks: dev = (253,16), ino = 2297, file offset = 0, start blkaddr = 0xa356c421, len = 0x0, flags = 0
 
-Not sure, but it looks it's due to f2fs_precache_extents() will traverse file
-w/ range [0, max_file_blocks), since data which exceeds EOF will always be zero,
-so it's not necessary to precache its mapping info, so we'd better adjust upper
-boundary to i_size rather than max_file_blocks().
+Fixes: c4020b2da4c9 ("f2fs: support F2FS_IOC_PRECACHE_EXTENTS")
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/file.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-> 
-> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> ---
->   fs/f2fs/file.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 161826c6e200..2403fd1de5a0 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -3270,7 +3270,7 @@ int f2fs_precache_extents(struct inode *inode)
->   		f2fs_down_write(&fi->i_gc_rwsem[WRITE]);
->   		err = f2fs_map_blocks(inode, &map, F2FS_GET_BLOCK_PRECACHE);
->   		f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
-> -		if (err)
-> +		if (err || !map.m_len)
-Well, if there is a hole in the head of file, it may break here rather
-than precaching following valid map info.
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 5d726cbc4f0b..cfb199f9af0d 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3261,6 +3261,7 @@ int f2fs_precache_extents(struct inode *inode)
+ 		return -EOPNOTSUPP;
+ 
+ 	map.m_lblk = 0;
++	map.m_pblk = 0;
+ 	map.m_next_pgofs = NULL;
+ 	map.m_next_extent = &m_next_extent;
+ 	map.m_seg_type = NO_CHECK_TYPE;
+-- 
+2.40.1
 
-What about passing parameter offset|len from f2fs_file_fadvise() to
-f2fs_precache_extents(), and then precaching mapping info on demand.
-
-Thanks,
-
->   			return err;
->   
->   		map.m_lblk = m_next_extent;
 
 
 _______________________________________________
