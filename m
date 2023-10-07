@@ -2,125 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E529B7B990C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu,  5 Oct 2023 02:04:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FC907BC3D9
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  7 Oct 2023 03:39:38 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qoBqv-0006MB-JK;
-	Thu, 05 Oct 2023 00:04:30 +0000
+	id 1qowHv-0005lZ-BY;
+	Sat, 07 Oct 2023 01:39:27 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1qoBqu-0006M5-4p
+ (envelope-from <chao@kernel.org>) id 1qowHu-0005lS-HH
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 05 Oct 2023 00:04:28 +0000
+ Sat, 07 Oct 2023 01:39:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xkg7+rczDvEf5vw76+FGOEqy3G1WsJgAGbY3dy46WG0=; b=QZlJpfDS4RdLs41m5+uO2u+mhZ
- cjMeZLHIKpnOQptek7cJ8kscA4ZTQsZ+HlBj2AYZ1gXR2LFYyUFykNWdHwKA5od9JyXyWS1i1beqD
- kDp3AM+YY6+U4nUOeZocCPUS9Lgz0lg4N7zfDRYY6vpKG6b64otSAiZ30tkXdTgkkvJk=;
+ bh=j6sNZCKnEQokM+uyM5VFZouUjjj71QVVWqBGcaYslaw=; b=KwNN7rDxd/q7vA3pLfPIKzAjZe
+ E4s90AdG9qXUxF/OvD3tmJv7RPp1AZHQG1tAwB3jpFFn/v7kfT/Q+YYnT7OGxUAxR4cPlnnAE+uyY
+ FxcCzD8xDR81tRpG/tfyyu5VFSShPNZ8wzBFLZ4GuXyYHxwCCTx1Fig7w8SwXmNnYrcc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xkg7+rczDvEf5vw76+FGOEqy3G1WsJgAGbY3dy46WG0=; b=FLl6Soj08SBL7kRCcKiXZkxJYX
- UFaf6NmaZpd+eOoIo9jQaYKLOyCS9HIMMF1QrFwO0wUBGvdhD5yRT/jUJ8Uixem6hpQrejhlASVn6
- F0rP4Q696fkSD3bOyEnLl5m+Lw51yUx834HnVYfns15syldmUfXQhbUjRfdHIQGS5F1s=;
-Received: from mail-vs1-f43.google.com ([209.85.217.43])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qoBqq-0004aK-3O for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 05 Oct 2023 00:04:28 +0000
-Received: by mail-vs1-f43.google.com with SMTP id
- ada2fe7eead31-4526c6579afso309109137.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 04 Oct 2023 17:04:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696464258; x=1697069058; darn=lists.sourceforge.net;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xkg7+rczDvEf5vw76+FGOEqy3G1WsJgAGbY3dy46WG0=;
- b=MZDjnWtH4OETn+BxybZYmN06+tLA/sqWRugXt/IB9luTpqu6tdh1lTVLBp1Tmj5nJZ
- Lm2kDC5xRqNpGL8Swm4XvVLGcXuTY9q7H0dSYgfwTAvZ7m/i/yCsd88bGqLPe8WkmKEI
- 34wpNM5TNHmNAxG02LoRI5LoMwQCPHvF4J7MGriTTYwC/aA+HP1bD1nZzXFNrnwkdakQ
- LyElKCVTHgolohIYgExNoEdsvj7y8gFJRMeq4BGPh/6gOTEjS32ONVlIoUTQWnMoYmvY
- lCCxKG81MerzOamY1J5qEZnxSz71ClsEe701Ldg6eqHOWbCcSpy1dTex/BR6ZHfhMzMY
- /ZJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696464258; x=1697069058;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xkg7+rczDvEf5vw76+FGOEqy3G1WsJgAGbY3dy46WG0=;
- b=dmmUJ5DvILivieY0jN9QOANdwOCrdQtD8hWZjbvQyz5i1bgoLu8M7TqV11IDtgmcIz
- V7/EZMvroVav2umwKzZL/vNn5Q5Oqf2r5rOge4NWr9kpR5DXW18Su0LAYYZ9axp9xiqg
- CWo7e4IKLIpOURJrQdHEluHjNGRmqk9tcjf+j+2ti2sYq2Ujx9IaNXwRPIFYpzChtjrO
- GzlGT/4D3ZtLaFf+PVZ6edtSylyjHNFZQS/y6WvYEWMXyITfLWrLqKy3t3tkWDDfNDC0
- gYn5Fv2flrLE9slEKbcDrO6f7NXrKwc7HD2PxhgacaiPEO6pVl6kilL+D7UqeZXyhCbq
- ltXQ==
-X-Gm-Message-State: AOJu0Yw/KwrQKRj+6dOeCbbNF9a/KEYiz9N0Bhobt1BdQ9HeF9WoxwTJ
- gLtDSxSEKTxPbAQ6VpLB3nCtaCH59WYdCIz6Fmc=
-X-Google-Smtp-Source: AGHT+IEkEy7nTZvm9Lo1GeI7LwD4zyd85KPs0KALc+yrS1+dsVdNI/ItufsM2wWbY3At4/Yvp+fWO2fpBLL86lPRrkw=
-X-Received: by 2002:a05:6102:53c9:b0:455:dd1c:9653 with SMTP id
- bs9-20020a05610253c900b00455dd1c9653mr487841vsb.1.1696464258319; Wed, 04 Oct
- 2023 17:04:18 -0700 (PDT)
+ bh=j6sNZCKnEQokM+uyM5VFZouUjjj71QVVWqBGcaYslaw=; b=dIo3mZC7Zf7WXYokYSXGMuV/Ip
+ 1JrXnB0zuI+IuVHudbEUcU1Am4A+VrNosYfglJjbB9DXsZTgXgTc7RSMN2U47rWrLYHOX0vE6Z/f4
+ xiIMgzaDrM+9QAUlueTw2VfxUwqt5aBqye2P1am2BmGbVOf8HOO3zi2B4XnUDdJfOUJ8=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qowHr-004gYi-O4 for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 07 Oct 2023 01:39:27 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id E5ACDCE27F3;
+ Sat,  7 Oct 2023 01:39:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C255C433C7;
+ Sat,  7 Oct 2023 01:39:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1696642753;
+ bh=rPEFVhkJbavRhduSugGv8Bpbd12aQ4MMBNkNgyLZsG0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=My44mYggaL/DpjDM4YY3VTvGDvCrrsNK7YsosV6YQeCBso9q7UIHWswct/6TJQ1tq
+ YoowysLf/z9oUvq50221n0asCv5IbRTaeglm0dHjFwh1JzGfyqfPkDpMnfJTiIRzBJ
+ VhmIhYuw7u5673VdN8iFAG2Xy7THr8rsk048LfBR9nghM/A3aVmciaHKWyWx+WvsE9
+ 2li5TTXbM5QIoXzVHOz6t8IKAwF/Fdnhyp6BoJpmc1KZqAbXRILNo37gzqbj1JjVQ5
+ UoZXeXC+ejLN8OYJ5cWAVn3err+pZBaxnB6xq2oD+pcHDDlVas3WwLP9shDdrplg0r
+ eSuJUN5BXHrOA==
+Message-ID: <17d0aa0a-2851-becd-21c3-3567a89fd82a@kernel.org>
+Date: Sat, 7 Oct 2023 09:39:05 +0800
 MIME-Version: 1.0
-References: <20231003230155.355807-1-daeho43@gmail.com>
- <ZR30mNQEyRjzr0jm@google.com>
- <CACOAw_zSvAPTREb0dSv6srRuxuKxDZp4rMhLyWTk+uJ3WKSWKA@mail.gmail.com>
- <ZR37Xyr9HcVuLqxx@google.com>
-In-Reply-To: <ZR37Xyr9HcVuLqxx@google.com>
-From: Daeho Jeong <daeho43@gmail.com>
-Date: Wed, 4 Oct 2023 17:04:07 -0700
-Message-ID: <CACOAw_weaNhBUpeR9xnkPYQCu6RO-AkUZeJGJYh9tokdUtATKg@mail.gmail.com>
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: -0.4 (/)
-X-Spam-Report: Spam detection software, running on the system "util-spamd-2.v13.lw.sourceforge.com",
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Content-Language: en-US
+To: Wu Bo <bo.wu@vivo.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <cover.1695890686.git.bo.wu@vivo.com>
+ <c6c4f47e6048164218b18dd2e299faf9c9b0a3d7.1695890686.git.bo.wu@vivo.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <c6c4f47e6048164218b18dd2e299faf9c9b0a3d7.1695890686.git.bo.wu@vivo.com>
+X-Spam-Score: -3.7 (---)
+X-Spam-Report: Spam detection software,
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On Wed, Oct 4, 2023 at 4:55 PM Jaegeuk Kim wrote: > > On
-    10/04, Daeho Jeong wrote: > > On Wed, Oct 4, 2023 at 4:26 PM Jaegeuk Kim
-    wrote: > > > > > > On 10/03, Daeho Jeong wrote: > > > > From: [...] 
- 
- Content analysis details:   (-0.4 points, 6.0 required)
- 
-  pts rule name              description
+ Content preview:  On 2023/9/28 17:20, Wu Bo wrote: > Use IS_CUR_SEGNO() here
+ can make code more concise and readable. It missed to add your signed-off
+ tag here, otherwise the patch looks good to me. Thanks, 
+ Content analysis details:   (-3.7 points, 6.0 required)
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
-  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
-  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-                             in digit
-                             [daeho43[at]gmail.com]
-  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
-                             provider
-                             [daeho43[at]gmail.com]
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.5 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
-                             [209.85.217.43 listed in wl.mailspike.net]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
-                              no trust
-                             [209.85.217.43 listed in list.dnswl.org]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
+ envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
-                             author's domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
-                             valid
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
-X-Headers-End: 1qoBqq-0004aK-3O
-Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: use proper address entry count
- for direct nodes
+ author's domain
+ -2.8 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qowHr-004gYi-O4
+Subject: Re: [f2fs-dev] [PATCH v2 1/3] f2fs-tools: use 'IS_CUR_SEGNO()' to
+ check if it is current segment
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -132,50 +105,47 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>, kernel-team@android.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Wu Bo <wubo.oduw@gmail.com>, linux-f2fs-devel@lists.sourceforge.net
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gV2VkLCBPY3QgNCwgMjAyMyBhdCA0OjU14oCvUE0gSmFlZ2V1ayBLaW0gPGphZWdldWtAa2Vy
-bmVsLm9yZz4gd3JvdGU6Cj4KPiBPbiAxMC8wNCwgRGFlaG8gSmVvbmcgd3JvdGU6Cj4gPiBPbiBX
-ZWQsIE9jdCA0LCAyMDIzIGF0IDQ6MjbigK9QTSBKYWVnZXVrIEtpbSA8amFlZ2V1a0BrZXJuZWwu
-b3JnPiB3cm90ZToKPiA+ID4KPiA+ID4gT24gMTAvMDMsIERhZWhvIEplb25nIHdyb3RlOgo+ID4g
-PiA+IEZyb206IERhZWhvIEplb25nIDxkYWVob2plb25nQGdvb2dsZS5jb20+Cj4gPiA+ID4KPiA+
-ID4gPiBGb3IgZGlyZWN0IG5vZGVzLCB3ZSBoYXZlIHRvIHVzZSBERUZfQUREUlNfUEVSX0JMT0NL
-Lgo+ID4gPiA+Cj4gPiA+ID4gU2lnbmVkLW9mZi1ieTogRGFlaG8gSmVvbmcgPGRhZWhvamVvbmdA
-Z29vZ2xlLmNvbT4KPiA+ID4gPiAtLS0KPiA+ID4gPiAgZnNjay9mc2NrLmMgfCAyICstCj4gPiA+
-ID4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+ID4gPiA+
-Cj4gPiA+ID4gZGlmZiAtLWdpdCBhL2ZzY2svZnNjay5jIGIvZnNjay9mc2NrLmMKPiA+ID4gPiBp
-bmRleCA3OGZmZGI2Li41NmE3ZDMxIDEwMDY0NAo+ID4gPiA+IC0tLSBhL2ZzY2svZnNjay5jCj4g
-PiA+ID4gKysrIGIvZnNjay9mc2NrLmMKPiA+ID4gPiBAQCAtMjg5NCw3ICsyODk0LDcgQEAgc3Rh
-dGljIHZvaWQgZnNja19mYWlsZWRfcmVjb25uZWN0X2ZpbGVfZG5vZGUoc3RydWN0IGYyZnNfc2Jf
-aW5mbyAqc2JpLAo+ID4gPiA+ICAgICAgIGZzY2stPmNoay52YWxpZF9ibGtfY250LS07Cj4gPiA+
-ID4gICAgICAgZjJmc19jbGVhcl9tYWluX2JpdG1hcChzYmksIG5pLmJsa19hZGRyKTsKPiA+ID4g
-Pgo+ID4gPiA+IC0gICAgIGZvciAoaSA9IDA7IGkgPCBBRERSU19QRVJfQkxPQ0soJm5vZGUtPmkp
-OyBpKyspIHsKPiA+ID4gPiArICAgICBmb3IgKGkgPSAwOyBpIDwgREVGX0FERFJTX1BFUl9CTE9D
-SzsgaSsrKSB7Cj4gPiA+Cj4gPiA+IEl0IHNlZW1zIHdlIG5lZWQgdG8gdXNlIHRoZSBpbm9kZSBi
-bG9jayBwYXNzaW5nIGJ5IGZzY2tfZmFpbGVkX3JlY29ubmVjdF9maWxlKCkuCj4gPgo+ID4gVGhp
-cyBmdW5jdGlvbiBpcyBmb3IgZGlyZWN0IG5vZGVzLiBJcyBpdCBjb3JyZWN0IHRvIHVzZSBpbm9k
-ZSBibG9jayBoZXJlPwo+Cj4gIDUyMyB1bnNpZ25lZCBpbnQgYWRkcnNfcGVyX2Jsb2NrKHN0cnVj
-dCBmMmZzX2lub2RlICppKQo+ICA1MjQgewo+ICA1MjUgICAgICAgICBpZiAoIUxJTlVYX1NfSVNS
-RUcobGUxNl90b19jcHUoaS0+aV9tb2RlKSkgfHwKPiAgNTI2ICAgICAgICAgICAgICAgICAgICAg
-ICAgICEobGUzMl90b19jcHUoaS0+aV9mbGFncykgJiBGMkZTX0NPTVBSX0ZMKSkKPiAgNTI3ICAg
-ICAgICAgICAgICAgICByZXR1cm4gREVGX0FERFJTX1BFUl9CTE9DSzsKPiAgNTI4ICAgICAgICAg
-cmV0dXJuIEFMSUdOX0RPV04oREVGX0FERFJTX1BFUl9CTE9DSywgMSA8PCBpLT5pX2xvZ19jbHVz
-dGVyX3NpemUpOwo+ICA1MjkgfQo+Cj4gSWYgdGhlIGlub2RlIGlzIGNvbXByZXNzZWQsIGl0IHNl
-ZW1zIGl0IGhhcyB0byBiZSBhbGlnbmVkIHRvIGNsdXN0ZXIgc2l6ZS4KCm1ha2VzIHNlbnNlLiBU
-aGFua3N+IQoKPgo+ID4KPiA+ID4KPiA+ID4gPiAgICAgICAgICAgICAgIGFkZHIgPSBsZTMyX3Rv
-X2NwdShub2RlLT5kbi5hZGRyW2ldKTsKPiA+ID4gPiAgICAgICAgICAgICAgIGlmICghYWRkcikK
-PiA+ID4gPiAgICAgICAgICAgICAgICAgICAgICAgY29udGludWU7Cj4gPiA+Cj4gPiA+IDMwMTIg
-ICAgICAgICAgICAgICAgICAgICAgICAgZnNjay0+Y2hrLnZhbGlkX2Jsa19jbnQtLTsKPiA+ID4g
-MzAxMyAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoYWRkciA9PSBORVdfQUREUikKPiA+ID4K
-PiA+ID4gQW5kLCB3ZSBhbHNvIG5lZWQgdG8gc2tpcCBpZiBhZGRyID09IENPTVBSRVNTX0FERFIg
-aGVyZT8KPiA+ID4KPiA+ID4gMzAxNCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNv
-bnRpbnVlOwo+ID4gPiAzMDE1ICAgICAgICAgICAgICAgICAgICAgICAgIGYyZnNfY2xlYXJfbWFp
-bl9iaXRtYXAoc2JpLCBhZGRyKTsKPiA+ID4gMzAxNiAgICAgICAgICAgICAgICAgfQo+ID4gPgo+
-ID4gPiA+IC0tCj4gPiA+ID4gMi40Mi4wLjU4Mi5nOGNjZDIwZDcwZC1nb29nCgoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBt
-YWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6
-Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+On 2023/9/28 17:20, Wu Bo wrote:
+> Use IS_CUR_SEGNO() here can make code more concise and readable.
+
+It missed to add your signed-off tag here, otherwise the patch looks good to me.
+
+Thanks,
+
+> ---
+>   fsck/mount.c | 10 +---------
+>   1 file changed, 1 insertion(+), 9 deletions(-)
+> 
+> diff --git a/fsck/mount.c b/fsck/mount.c
+> index df0314d..e4372cf 100644
+> --- a/fsck/mount.c
+> +++ b/fsck/mount.c
+> @@ -2532,16 +2532,8 @@ void build_sit_area_bitmap(struct f2fs_sb_info *sbi)
+>   		ptr += SIT_VBLOCK_MAP_SIZE;
+>   
+>   		if (se->valid_blocks == 0x0 && is_usable_seg(sbi, segno)) {
+> -			if (le32_to_cpu(sbi->ckpt->cur_node_segno[0]) == segno ||
+> -				le32_to_cpu(sbi->ckpt->cur_data_segno[0]) == segno ||
+> -				le32_to_cpu(sbi->ckpt->cur_node_segno[1]) == segno ||
+> -				le32_to_cpu(sbi->ckpt->cur_data_segno[1]) == segno ||
+> -				le32_to_cpu(sbi->ckpt->cur_node_segno[2]) == segno ||
+> -				le32_to_cpu(sbi->ckpt->cur_data_segno[2]) == segno) {
+> -				continue;
+> -			} else {
+> +			if (!IS_CUR_SEGNO(sbi, segno))
+>   				free_segs++;
+> -			}
+>   		} else {
+>   			sum_vblocks += se->valid_blocks;
+>   		}
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
