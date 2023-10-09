@@ -2,108 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40B977BE279
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Oct 2023 16:20:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 569787BE603
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon,  9 Oct 2023 18:10:52 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qpr6y-0001CA-De;
-	Mon, 09 Oct 2023 14:19:54 +0000
+	id 1qpsqB-0002Wd-W1;
+	Mon, 09 Oct 2023 16:10:42 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3-wskZQkbANIGMN8y992FyDD61.4CC492IG2F0CBH2BH.0CA@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1qpr6w-0001C4-9J for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Oct 2023 14:19:52 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <brauner@kernel.org>) id 1qpsq3-0002WJ-UP;
+ Mon, 09 Oct 2023 16:10:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0TGWQAlp8UuYQhA52ZWaujZvCAShLjeIRZ1glRL7WKI=; b=PSNCdLc6qcN0eXunA+kgI6Lg67
- FrauvM9dQ5YELwA9M33Q57vst1L8SzT/7BhY5l5Yg6YcOHT5cgtcLep9PRcRGBywGNnrJb3uYqoWt
- 4zEn8Nq3sFbre5/526hm086W0Fr48i9UkK4iWuPbF6VomriFho1o2DsykwQn06lTNPP4=;
+ bh=DKIztmNQcH504fteiT67Hvcb59ZRmpmLX2wFhNZjIcI=; b=dYld1uZYQ9akm+BF0ltOr1XAOh
+ c7R+UtGUPLbXayj81TqXBfeyi44FhD8WY4Gdc0hpMDYKQ1i6AI601RjU5MjHg20GX8ng0mX4FbyuH
+ fMpvX9rmeW5Sexa52AqK4HXxjXbbidA6AZ99IKyfbZ4T3+jCm6/9wsntKR8s23Ca4hJk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=0TGWQAlp8UuYQhA52ZWaujZvCAShLjeIRZ1glRL7WKI=; b=R
- Z5PBqV65OUAcmrZp+DG98OaOjJdY4veOGiHIyCx+1ForrHDn6h8OjGNMVhJO4/CZkJBpodtrQqKXZ
- 74T5e5VEYpMqYwhcBulHLjh1oHRLFgyfTmRuiAw5jabSiSVVSePcj9MpN4mq4/8e1ZMg+BIWy0PwD
- HXAdhNB1Qe7bs4EY=;
-Received: from mail-oi1-f200.google.com ([209.85.167.200])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qpr6q-0004aP-Di for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Oct 2023 14:19:52 +0000
-Received: by mail-oi1-f200.google.com with SMTP id
- 5614622812f47-3ae5e567e06so5904788b6e.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 09 Oct 2023 07:19:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696861180; x=1697465980;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0TGWQAlp8UuYQhA52ZWaujZvCAShLjeIRZ1glRL7WKI=;
- b=tLOLoV0qzNDfqiIYNpPQJLCC/W9DFuD0IbvZdHs0sFJtyvWilwZKwYEAwrKnSjXGUD
- PbpgkRtadtswjQpiShzpr2TofbOfxD/mesbsViOv8l5im5wQgbNKkl6Jzgey3scUcKcR
- 1vaQ+nXtOTSjvKWRhbAj6TDdzyFK9qFSDFAdHIa9aTaIeDtu+to9PWltvPONZr7Ht56u
- h1nCHWwHq2x/RDhsTay9ucu5PrCBh1KU4Ub85YEpJm5gJo11MzFvXUBk1C8p4LbgowB8
- hR1ksh2ZZHmhITtC/pcjWyYJvbxlUBBMjitd/qRiRobEdkUsgnZGHRaS4HUuBVAEue8c
- 5MeQ==
-X-Gm-Message-State: AOJu0Yyihz2Knmx2wHG7SkcpoDutlLGKvY9gXTS44Lu6dKZ2y/6grZQV
- s2GtW24w1CAWWgIel5CUrEfUIBhNpY+hc9JHXuSVmrnUB8Xc
-X-Google-Smtp-Source: AGHT+IF8k7g0eSiSkI0Ync143FSHXVQo54adV+KV5FBCMFaXl+hqfgqHiK68ktgDtgtIhiy6neQ2zCz/2mSRkRXFkrZ/R/d9uXLc
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=DKIztmNQcH504fteiT67Hvcb59ZRmpmLX2wFhNZjIcI=; b=Jua/mWqreMycyxkIU/c+pfwUdX
+ XGmJNyXLuQdtcEgLHeSNe/7W1QxlhvPK9T89TtqGJ+kbWaaYU4tmsdDru3dYIh0S1gecXMm9c+qxH
+ 8O6rBhJ5q9kmXdiFtqaIL4CypftY3N7LVIUwreJ53NnAhbfvhI3gzC61fxY5h8OU15mo=;
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1qpsq0-008bRK-Nc; Mon, 09 Oct 2023 16:10:34 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 8AAB4CE149F;
+ Mon,  9 Oct 2023 16:10:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A92FFC433C8;
+ Mon,  9 Oct 2023 16:09:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1696867824;
+ bh=keW4wOj90e6SAzWHDhiijPY7xlKn91ViUXq7+ZBy/qA=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=uXLBAcbtT3qSJRhL/8M371BpeA1C5ljwEOv35PPhR9AAXbskswQIJClC2lj7Rj5gp
+ Wf8DMgzdk7F1Im4JpcUlzudlx2J7u7qAkCKVl53l50QCMlVywy97j4Z/z6YC81cPOB
+ ZEhm/bd89ThwJczgLVLfYGYQSRgf/gJFEhHLWwuJMYiWS6kKeieI6gsrdpEaduSXjN
+ MyDpNqeyNgkjuA9pNpJc3RCwGGB/UZ94Td6pVCF9naF2MzsC97YBscCdHyiZxAMM7J
+ TNVG7+Kfo/TbzJEmvAHe6SdjHTFA0oLVhgfu0YPY0D5YqFYWH70KP0wz8Tk3JvnzVy
+ Fp4FzyfzRg4Qw==
+From: Christian Brauner <brauner@kernel.org>
+To: Jeff Layton <jlayton@kernel.org>
+Date: Mon,  9 Oct 2023 18:09:31 +0200
+Message-Id: <20231009-charmant-locken-893b11849e84@brauner>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231004185221.80802-1-jlayton@kernel.org>
+References: 
 MIME-Version: 1.0
-X-Received: by 2002:a05:6808:2190:b0:3a8:45f0:b83a with SMTP id
- be16-20020a056808219000b003a845f0b83amr6406561oib.5.1696861179851; Mon, 09
- Oct 2023 07:19:39 -0700 (PDT)
-Date: Mon, 09 Oct 2023 07:19:39 -0700
-In-Reply-To: <20231009-leihgabe-abseilen-26e86d03f787@brauner>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000dbce480607494722@google.com>
-From: syzbot <syzbot+062317ea1d0a6d5e29e7@syzkaller.appspotmail.com>
-To: axboe@kernel.dk, brauner@kernel.org, chao@kernel.org, 
- daniel.vetter@ffwll.ch, hdanton@sina.com, jack@suse.cz, jaegeuk@kernel.org, 
- jinpu.wang@ionos.com, linux-f2fs-devel@lists.sourceforge.net, 
- linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, 
- mairacanal@riseup.net, mcanal@igalia.com, reiserfs-devel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com, terrelln@fb.com, willy@infradead.org, 
- yukuai3@huawei.com
-X-Spam-Score: 3.1 (+++)
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10941; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=IjD9jhCYjdIJ9vPkYDocQbsMoCTgovwgHUWkZ/3GCzk=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMaSqqLYye23auu+81JbW5Y9by59u2veoRtMoSybRa4ps7qMV
+ 1SnPO0pZGMS4GGTFFFkc2k3C5ZbzVGw2ytSAmcPKBDKEgYtTAG4yFyPDct4beVfC7N9kTeGsyQvesc
+ LrVB9X8d5HrqtS30c2lc/vYPgrs2DPvYLs+5rO5WFr0n0CStp+xH9eLnqRR9iW68ZB+QY+AA==
+X-Developer-Key: i=brauner@kernel.org; a=openpgp;
+ fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot has tested the proposed patch but the reproducer
- is still triggering an issue: INFO: task hung in blkdev_put INFO: task
- syz-executor.1:6676
- blocked for more than 143 seconds. Not tainted
- 6.6.0-rc5-syzkaller-gb6ab131813c2
- #0 "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
- task:syz-ex [...] 
- Content analysis details:   (3.1 points, 6.0 required)
+ Content preview:  On Wed, Oct 04, 2023 at 02:52:21PM -0400, Jeff Layton wrote:
+ > v2: > - bugfix in mtime handling > - incorporate _sec and _nsec accessor
+ functions (Chuck Lever) > - move i_generation to plug hole after [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.167.200 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.167.200 listed in wl.mailspike.net]
-X-Headers-End: 1qpr6q-0004aP-Di
-Subject: Re: [f2fs-dev] [syzbot] [reiserfs?] possible deadlock in super_lock
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1qpsq0-008bRK-Nc
+Subject: Re: [f2fs-dev] [PATCH v2 00/89] fs: new accessor methods for inode
+ atime and mtime
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,366 +105,328 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Latchesar Ionkov <lucho@ionkov.net>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, "Darrick J. Wong" <djwong@kernel.org>,
+ Anders Larsen <al@alarsen.net>, Carlos Llamas <cmllamas@google.com>,
+ Andrii Nakryiko <andrii@kernel.org>, Mattia Dongili <malattia@linux.it>,
+ Hugh Dickins <hughd@google.com>, John Johansen <john.johansen@canonical.com>,
+ Yonghong Song <yonghong.song@linux.dev>,
+ Alexander Gordeev <agordeev@linux.ibm.com>, Christoph Hellwig <hch@lst.de>,
+ Mike Marshall <hubcap@omnibond.com>, Paulo Alcantara <pc@manguebit.com>,
+ linux-xfs@vger.kernel.org, linux-bcachefs@vger.kernel.org,
+ Michael Ellerman <mpe@ellerman.id.au>, James Morris <jmorris@namei.org>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Christoph Hellwig <hch@infradead.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, devel@lists.orangefs.org,
+ Shyam Prasad N <sprasad@microsoft.com>, linux-um@lists.infradead.org,
+ Nicholas Piggin <npiggin@gmail.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Eric Van Hensbergen <ericvh@kernel.org>,
+ Suren Baghdasaryan <surenb@google.com>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Anton Altaparmakov <anton@tuxera.com>, Christian Brauner <brauner@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Stephen Smalley <stephen.smalley.work@gmail.com>, linux-usb@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>, arve@android.com,
+ Chuck Lever <chuck.lever@oracle.com>, Sven Schnelle <svens@linux.ibm.com>,
+ Jiri Olsa <jolsa@kernel.org>, Jan Kara <jack@suse.com>,
+ Tejun Heo <tj@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
+ linux-trace-kernel@vger.kernel.org,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ Dave Kleikamp <shaggy@kernel.org>, linux-mm@kvack.org,
+ Joel Fernandes <joel@joelfernandes.org>, Eric Dumazet <edumazet@google.com>,
+ Stanislav Fomichev <sdf@google.com>, linux-s390@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, Paul Moore <paul@paul-moore.com>,
+ Leon Romanovsky <leon@kernel.org>, John Fastabend <john.fastabend@gmail.com>,
+ Luis Chamberlain <mcgrof@kernel.org>, codalist@coda.cs.cmu.edu,
+ Iurii Zaikin <yzaikin@google.com>, Namjae Jeon <linkinjeon@kernel.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Todd Kjos <tkjos@android.com>,
+ Vasily Gorbik <gor@linux.ibm.com>, selinux@vger.kernel.org,
+ Brian Foster <bfoster@redhat.com>, linuxppc-dev@lists.ozlabs.org,
+ reiserfs-devel@vger.kernel.org, Miklos Szeredi <miklos@szeredi.hu>,
+ Yue Hu <huyue2@coolpad.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Martijn Coenen <maco@android.com>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Hao Luo <haoluo@google.com>,
+ Tony Luck <tony.luck@intel.com>, Theodore Ts'o <tytso@mit.edu>,
+ Nicolas Pitre <nico@fluxnic.net>, linux-ntfs-dev@lists.sourceforge.net,
+ Muchun Song <muchun.song@linux.dev>, linux-f2fs-devel@lists.sourceforge.net,
+ "Guilherme G. Piccoli" <gpiccoli@igalia.com>, gfs2@lists.linux.dev,
+ Eric Biederman <ebiederm@xmission.com>, Anna Schumaker <anna@kernel.org>,
+ Brad Warrum <bwarrum@linux.ibm.com>, Mike Kravetz <mike.kravetz@oracle.com>,
+ linux-efi@vger.kernel.org, Martin Brandenburg <martin@omnibond.com>,
+ ocfs2-devel@lists.linux.dev, Alexei Starovoitov <ast@kernel.org>,
+ platform-driver-x86@vger.kernel.org, Chris Mason <clm@fb.com>,
+ linux-mtd@lists.infradead.org, linux-hardening@vger.kernel.org,
+ Marc Dionne <marc.dionne@auristor.com>, Jiri Slaby <jirislaby@kernel.org>,
+ linux-afs@lists.infradead.org, Ian Kent <raven@themaw.net>,
+ Naohiro Aota <naohiro.aota@wdc.com>, Daniel Borkmann <daniel@iogearbox.net>,
+ Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>,
+ linux-rdma@vger.kernel.org, coda@cs.cmu.edu, ilpo.jarvinen@linux.intel.com,
+ Ilya Dryomov <idryomov@gmail.com>, Paolo Abeni <pabeni@redhat.com>,
+ "Serge E. Hallyn" <serge@hallyn.com>,
+ Christian Schoenebeck <linux_oss@crudebyte.com>,
+ Kees Cook <keescook@chromium.org>, Arnd Bergmann <arnd@arndb.de>,
+ autofs@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
+ Mark Gross <markgross@kernel.org>, Damien Le Moal <dlemoal@kernel.org>,
+ Eric Paris <eparis@parisplace.org>, ceph-devel@vger.kernel.org,
+ Gao Xiang <xiang@kernel.org>, Jan Harkes <jaharkes@cs.cmu.edu>,
+ linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Olga Kornievskaia <kolga@netapp.com>, Song Liu <song@kernel.org>,
+ samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
+ Jeremy Kerr <jk@ozlabs.org>, netdev@vger.kernel.org,
+ Bob Peterson <rpeterso@redhat.com>, linux-fsdevel@vger.kernel.org,
+ bpf@vger.kernel.org, ntfs3@lists.linux.dev, linux-erofs@lists.ozlabs.org,
+ "David S. Miller" <davem@davemloft.net>,
+ Chandan Babu R <chandan.babu@oracle.com>, jfs-discussion@lists.sourceforge.net,
+ Jan Kara <jack@suse.cz>, Neil Brown <neilb@suse.de>,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Amir Goldstein <amir73il@gmail.com>, Bob Copeland <me@bobcopeland.com>,
+ KP Singh <kpsingh@kernel.org>, linux-unionfs@vger.kernel.org,
+ David Howells <dhowells@redhat.com>, Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Andreas Dilger <adilger.kernel@dilger.ca>,
+ Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
+ Ard Biesheuvel <ardb@kernel.org>,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+ Andreas Gruenbacher <agruenba@redhat.com>, Richard Weinberger <richard@nod.at>,
+ Mark Fasheh <mark@fasheh.com>, Dai Ngo <Dai.Ngo@oracle.com>,
+ Jason Gunthorpe <jgg@ziepe.ca>, linux-serial@vger.kernel.org,
+ Jakub Kicinski <kuba@kernel.org>, Salah Triki <salah.triki@gmail.com>,
+ Evgeniy Dushistov <dushistov@mail.ru>, linux-cifs@vger.kernel.org,
+ Heiko Carstens <hca@linux.ibm.com>, apparmor@lists.ubuntu.com,
+ Josef Bacik <josef@toxicpanda.com>, Tom Talpey <tom@talpey.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
+ David Sterba <dsterba@suse.com>, Xiubo Li <xiubli@redhat.com>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ Johannes Thumshirn <jth@kernel.org>, Ritu Agarwal <rituagar@linux.ibm.com>,
+ Luis de Bethencourt <luisbg@kernel.org>,
+ Martin KaFai Lau <martin.lau@linux.dev>, v9fs@lists.linux.dev,
+ Kent Overstreet <kent.overstreet@linux.dev>, David Sterba <dsterba@suse.cz>,
+ linux-security-module@vger.kernel.org, Jeffle Xu <jefflexu@linux.alibaba.com>,
+ Phillip Lougher <phillip@squashfs.org.uk>,
+ Johannes Berg <johannes@sipsolutions.net>,
+ Sungjong Seo <sj1557.seo@samsung.com>, David Woodhouse <dwmw2@infradead.org>,
+ linux-karma-devel@lists.sourceforge.net, linux-btrfs@vger.kernel.org,
+ Joel Becker <jlbec@evilplan.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+On Wed, Oct 04, 2023 at 02:52:21PM -0400, Jeff Layton wrote:
+> v2:
+> - bugfix in mtime handling
+> - incorporate _sec and _nsec accessor functions (Chuck Lever)
+> - move i_generation to plug hole after changing timestamps (Amir Goldstein)
+> 
+> While working on the multigrain timestamp changes, Linus suggested
+> adding some similar wrappers for accessing the atime and mtime that we
+> have for the ctime. With that, we could then move to using discrete
+> integers instead of struct timespec64 in struct inode and shrink it.
+> 
+> This patch implements this. Linus suggested using macros for the new
+> accessors, but the existing ctime wrappers were static inlines and since
+> there are only 3 different timestamps, I didn't see that trying to
+> fiddle with macros would gain us anything (other than less verbosity in
+> fs.h).
+> 
+> [...]
 
-syzbot has tested the proposed patch but the reproducer is still triggering an issue:
-INFO: task hung in blkdev_put
+This was applied on top of -next but vfs.ctime is now based on v6.6-rc3
+as stable tag otherwise this is too much of a moving target with other
+stuff in -next. Anything that had to be dropped and requires fixups
+should just be explained in the pr. The sooner this sees some -next, the
+better, I think.
 
-INFO: task syz-executor.1:6676 blocked for more than 143 seconds.
-      Not tainted 6.6.0-rc5-syzkaller-gb6ab131813c2 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.1  state:D stack:0     pid:6676  ppid:6383   flags:0x00000005
-Call trace:
- __switch_to+0x320/0x754 arch/arm64/kernel/process.c:556
- context_switch kernel/sched/core.c:5382 [inline]
- __schedule+0x1364/0x23b4 kernel/sched/core.c:6695
- schedule+0xc4/0x170 kernel/sched/core.c:6771
- schedule_preempt_disabled+0x18/0x2c kernel/sched/core.c:6830
- __mutex_lock_common+0xbd8/0x21a0 kernel/locking/mutex.c:679
- __mutex_lock kernel/locking/mutex.c:747 [inline]
- mutex_lock_nested+0x2c/0x38 kernel/locking/mutex.c:799
- blkdev_put+0xec/0x740 block/bdev.c:884
- blkdev_release+0x84/0x9c block/fops.c:604
- __fput+0x324/0x7f8 fs/file_table.c:384
- __fput_sync+0x60/0x9c fs/file_table.c:465
- __do_sys_close fs/open.c:1572 [inline]
- __se_sys_close fs/open.c:1557 [inline]
- __arm64_sys_close+0x150/0x1e0 fs/open.c:1557
- __invoke_syscall arch/arm64/kernel/syscall.c:37 [inline]
- invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:51
- el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:136
- do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:155
- el0_svc+0x58/0x16c arch/arm64/kernel/entry-common.c:678
- el0t_64_sync_handler+0x84/0xfc arch/arm64/kernel/entry-common.c:696
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:595
-INFO: task syz-executor.2:6678 blocked for more than 143 seconds.
-      Not tainted 6.6.0-rc5-syzkaller-gb6ab131813c2 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.2  state:D stack:0     pid:6678  ppid:6377   flags:0x00000005
-Call trace:
- __switch_to+0x320/0x754 arch/arm64/kernel/process.c:556
- context_switch kernel/sched/core.c:5382 [inline]
- __schedule+0x1364/0x23b4 kernel/sched/core.c:6695
- schedule+0xc4/0x170 kernel/sched/core.c:6771
- schedule_preempt_disabled+0x18/0x2c kernel/sched/core.c:6830
- __mutex_lock_common+0xbd8/0x21a0 kernel/locking/mutex.c:679
- __mutex_lock kernel/locking/mutex.c:747 [inline]
- mutex_lock_nested+0x2c/0x38 kernel/locking/mutex.c:799
- blkdev_put+0xec/0x740 block/bdev.c:884
- blkdev_release+0x84/0x9c block/fops.c:604
- __fput+0x324/0x7f8 fs/file_table.c:384
- __fput_sync+0x60/0x9c fs/file_table.c:465
- __do_sys_close fs/open.c:1572 [inline]
- __se_sys_close fs/open.c:1557 [inline]
- __arm64_sys_close+0x150/0x1e0 fs/open.c:1557
- __invoke_syscall arch/arm64/kernel/syscall.c:37 [inline]
- invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:51
- el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:136
- do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:155
- el0_svc+0x58/0x16c arch/arm64/kernel/entry-common.c:678
- el0t_64_sync_handler+0x84/0xfc arch/arm64/kernel/entry-common.c:696
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:595
-INFO: task syz-executor.0:6682 blocked for more than 143 seconds.
-      Not tainted 6.6.0-rc5-syzkaller-gb6ab131813c2 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.0  state:D stack:0     pid:6682  ppid:6389   flags:0x0000000d
-Call trace:
- __switch_to+0x320/0x754 arch/arm64/kernel/process.c:556
- context_switch kernel/sched/core.c:5382 [inline]
- __schedule+0x1364/0x23b4 kernel/sched/core.c:6695
- schedule+0xc4/0x170 kernel/sched/core.c:6771
- schedule_preempt_disabled+0x18/0x2c kernel/sched/core.c:6830
- __mutex_lock_common+0xbd8/0x21a0 kernel/locking/mutex.c:679
- __mutex_lock kernel/locking/mutex.c:747 [inline]
- mutex_lock_nested+0x2c/0x38 kernel/locking/mutex.c:799
- bd_finish_claiming+0x218/0x3dc block/bdev.c:566
- blkdev_get_by_dev+0x3f4/0x55c block/bdev.c:799
- journal_init_dev fs/reiserfs/journal.c:2616 [inline]
- journal_init+0xb08/0x1e68 fs/reiserfs/journal.c:2783
- reiserfs_fill_super+0xd58/0x2058 fs/reiserfs/super.c:2029
- mount_bdev+0x1e8/0x2b4 fs/super.c:1629
- get_super_block+0x44/0x58 fs/reiserfs/super.c:2605
- legacy_get_tree+0xd4/0x16c fs/fs_context.c:638
- vfs_get_tree+0x90/0x288 fs/super.c:1750
- do_new_mount+0x25c/0x8c8 fs/namespace.c:3335
- path_mount+0x590/0xe04 fs/namespace.c:3662
- do_mount fs/namespace.c:3675 [inline]
- __do_sys_mount fs/namespace.c:3884 [inline]
- __se_sys_mount fs/namespace.c:3861 [inline]
- __arm64_sys_mount+0x45c/0x594 fs/namespace.c:3861
- __invoke_syscall arch/arm64/kernel/syscall.c:37 [inline]
- invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:51
- el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:136
- do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:155
- el0_svc+0x58/0x16c arch/arm64/kernel/entry-common.c:678
- el0t_64_sync_handler+0x84/0xfc arch/arm64/kernel/entry-common.c:696
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:595
-INFO: task syz-executor.3:6690 blocked for more than 143 seconds.
-      Not tainted 6.6.0-rc5-syzkaller-gb6ab131813c2 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.3  state:D stack:0     pid:6690  ppid:6373   flags:0x0000000d
-Call trace:
- __switch_to+0x320/0x754 arch/arm64/kernel/process.c:556
- context_switch kernel/sched/core.c:5382 [inline]
- __schedule+0x1364/0x23b4 kernel/sched/core.c:6695
- schedule+0xc4/0x170 kernel/sched/core.c:6771
- super_lock+0x23c/0x328 fs/super.c:134
- super_lock_shared fs/super.c:146 [inline]
- super_lock_shared_active fs/super.c:1431 [inline]
- fs_bdev_sync+0xa4/0x168 fs/super.c:1466
- blkdev_flushbuf block/ioctl.c:372 [inline]
- blkdev_common_ioctl+0x848/0x2884 block/ioctl.c:502
- blkdev_ioctl+0x35c/0xae4 block/ioctl.c:624
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:871 [inline]
- __se_sys_ioctl fs/ioctl.c:857 [inline]
- __arm64_sys_ioctl+0x14c/0x1c8 fs/ioctl.c:857
- __invoke_syscall arch/arm64/kernel/syscall.c:37 [inline]
- invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:51
- el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:136
- do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:155
- el0_svc+0x58/0x16c arch/arm64/kernel/entry-common.c:678
- el0t_64_sync_handler+0x84/0xfc arch/arm64/kernel/entry-common.c:696
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:595
-INFO: task syz-executor.3:6695 blocked for more than 143 seconds.
-      Not tainted 6.6.0-rc5-syzkaller-gb6ab131813c2 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.3  state:D stack:0     pid:6695  ppid:6373   flags:0x00000005
-Call trace:
- __switch_to+0x320/0x754 arch/arm64/kernel/process.c:556
- context_switch kernel/sched/core.c:5382 [inline]
- __schedule+0x1364/0x23b4 kernel/sched/core.c:6695
- schedule+0xc4/0x170 kernel/sched/core.c:6771
- schedule_preempt_disabled+0x18/0x2c kernel/sched/core.c:6830
- __mutex_lock_common+0xbd8/0x21a0 kernel/locking/mutex.c:679
- __mutex_lock kernel/locking/mutex.c:747 [inline]
- mutex_lock_nested+0x2c/0x38 kernel/locking/mutex.c:799
- bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
- loop_configure+0x15c/0xfd4 drivers/block/loop.c:1018
- lo_ioctl+0xc70/0x1d04
- blkdev_ioctl+0x3e4/0xae4 block/ioctl.c:630
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:871 [inline]
- __se_sys_ioctl fs/ioctl.c:857 [inline]
- __arm64_sys_ioctl+0x14c/0x1c8 fs/ioctl.c:857
- __invoke_syscall arch/arm64/kernel/syscall.c:37 [inline]
- invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:51
- el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:136
- do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:155
- el0_svc+0x58/0x16c arch/arm64/kernel/entry-common.c:678
- el0t_64_sync_handler+0x84/0xfc arch/arm64/kernel/entry-common.c:696
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:595
-INFO: task syz-executor.5:6696 blocked for more than 143 seconds.
-      Not tainted 6.6.0-rc5-syzkaller-gb6ab131813c2 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.5  state:D stack:0     pid:6696  ppid:6381   flags:0x00000005
-Call trace:
- __switch_to+0x320/0x754 arch/arm64/kernel/process.c:556
- context_switch kernel/sched/core.c:5382 [inline]
- __schedule+0x1364/0x23b4 kernel/sched/core.c:6695
- schedule+0xc4/0x170 kernel/sched/core.c:6771
- schedule_preempt_disabled+0x18/0x2c kernel/sched/core.c:6830
- __mutex_lock_common+0xbd8/0x21a0 kernel/locking/mutex.c:679
- __mutex_lock kernel/locking/mutex.c:747 [inline]
- mutex_lock_nested+0x2c/0x38 kernel/locking/mutex.c:799
- blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
- blkdev_open+0x128/0x2b0 block/fops.c:589
- do_dentry_open+0x6fc/0x118c fs/open.c:929
- vfs_open+0x7c/0x90 fs/open.c:1063
- do_open fs/namei.c:3639 [inline]
- path_openat+0x1f2c/0x27f8 fs/namei.c:3796
- do_filp_open+0x1bc/0x3cc fs/namei.c:3823
- do_sys_openat2+0x124/0x1b8 fs/open.c:1422
- do_sys_open fs/open.c:1437 [inline]
- __do_sys_openat fs/open.c:1453 [inline]
- __se_sys_openat fs/open.c:1448 [inline]
- __arm64_sys_openat+0x1f0/0x240 fs/open.c:1448
- __invoke_syscall arch/arm64/kernel/syscall.c:37 [inline]
- invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:51
- el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:136
- do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:155
- el0_svc+0x58/0x16c arch/arm64/kernel/entry-common.c:678
- el0t_64_sync_handler+0x84/0xfc arch/arm64/kernel/entry-common.c:696
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:595
-INFO: task syz-executor.5:6703 blocked for more than 143 seconds.
-      Not tainted 6.6.0-rc5-syzkaller-gb6ab131813c2 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.5  state:D stack:0     pid:6703  ppid:6381   flags:0x00000005
-Call trace:
- __switch_to+0x320/0x754 arch/arm64/kernel/process.c:556
- context_switch kernel/sched/core.c:5382 [inline]
- __schedule+0x1364/0x23b4 kernel/sched/core.c:6695
- schedule+0xc4/0x170 kernel/sched/core.c:6771
- schedule_preempt_disabled+0x18/0x2c kernel/sched/core.c:6830
- __mutex_lock_common+0xbd8/0x21a0 kernel/locking/mutex.c:679
- __mutex_lock kernel/locking/mutex.c:747 [inline]
- mutex_lock_nested+0x2c/0x38 kernel/locking/mutex.c:799
- bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
- loop_configure+0x15c/0xfd4 drivers/block/loop.c:1018
- lo_ioctl+0xc70/0x1d04
- blkdev_ioctl+0x3e4/0xae4 block/ioctl.c:630
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:871 [inline]
- __se_sys_ioctl fs/ioctl.c:857 [inline]
- __arm64_sys_ioctl+0x14c/0x1c8 fs/ioctl.c:857
- __invoke_syscall arch/arm64/kernel/syscall.c:37 [inline]
- invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:51
- el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:136
- do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:155
- el0_svc+0x58/0x16c arch/arm64/kernel/entry-common.c:678
- el0t_64_sync_handler+0x84/0xfc arch/arm64/kernel/entry-common.c:696
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:595
-INFO: task syz-executor.4:6698 blocked for more than 143 seconds.
-      Not tainted 6.6.0-rc5-syzkaller-gb6ab131813c2 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.4  state:D stack:0     pid:6698  ppid:6384   flags:0x00000005
-Call trace:
- __switch_to+0x320/0x754 arch/arm64/kernel/process.c:556
- context_switch kernel/sched/core.c:5382 [inline]
- __schedule+0x1364/0x23b4 kernel/sched/core.c:6695
- schedule+0xc4/0x170 kernel/sched/core.c:6771
- schedule_preempt_disabled+0x18/0x2c kernel/sched/core.c:6830
- __mutex_lock_common+0xbd8/0x21a0 kernel/locking/mutex.c:679
- __mutex_lock kernel/locking/mutex.c:747 [inline]
- mutex_lock_nested+0x2c/0x38 kernel/locking/mutex.c:799
- blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
- blkdev_open+0x128/0x2b0 block/fops.c:589
- do_dentry_open+0x6fc/0x118c fs/open.c:929
- vfs_open+0x7c/0x90 fs/open.c:1063
- do_open fs/namei.c:3639 [inline]
- path_openat+0x1f2c/0x27f8 fs/namei.c:3796
- do_filp_open+0x1bc/0x3cc fs/namei.c:3823
- do_sys_openat2+0x124/0x1b8 fs/open.c:1422
- do_sys_open fs/open.c:1437 [inline]
- __do_sys_openat fs/open.c:1453 [inline]
- __se_sys_openat fs/open.c:1448 [inline]
- __arm64_sys_openat+0x1f0/0x240 fs/open.c:1448
- __invoke_syscall arch/arm64/kernel/syscall.c:37 [inline]
- invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:51
- el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:136
- do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:155
- el0_svc+0x58/0x16c arch/arm64/kernel/entry-common.c:678
- el0t_64_sync_handler+0x84/0xfc arch/arm64/kernel/entry-common.c:696
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:595
-INFO: task syz-executor.4:6704 blocked for more than 143 seconds.
-      Not tainted 6.6.0-rc5-syzkaller-gb6ab131813c2 #0
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:syz-executor.4  state:D stack:0     pid:6704  ppid:6384   flags:0x00000005
-Call trace:
- __switch_to+0x320/0x754 arch/arm64/kernel/process.c:556
- context_switch kernel/sched/core.c:5382 [inline]
- __schedule+0x1364/0x23b4 kernel/sched/core.c:6695
- schedule+0xc4/0x170 kernel/sched/core.c:6771
- schedule_preempt_disabled+0x18/0x2c kernel/sched/core.c:6830
- __mutex_lock_common+0xbd8/0x21a0 kernel/locking/mutex.c:679
- __mutex_lock kernel/locking/mutex.c:747 [inline]
- mutex_lock_nested+0x2c/0x38 kernel/locking/mutex.c:799
- bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
- loop_configure+0x15c/0xfd4 drivers/block/loop.c:1018
- lo_ioctl+0xc70/0x1d04
- blkdev_ioctl+0x3e4/0xae4 block/ioctl.c:630
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:871 [inline]
- __se_sys_ioctl fs/ioctl.c:857 [inline]
- __arm64_sys_ioctl+0x14c/0x1c8 fs/ioctl.c:857
- __invoke_syscall arch/arm64/kernel/syscall.c:37 [inline]
- invoke_syscall+0x98/0x2b8 arch/arm64/kernel/syscall.c:51
- el0_svc_common+0x130/0x23c arch/arm64/kernel/syscall.c:136
- do_el0_svc+0x48/0x58 arch/arm64/kernel/syscall.c:155
- el0_svc+0x58/0x16c arch/arm64/kernel/entry-common.c:678
- el0t_64_sync_handler+0x84/0xfc arch/arm64/kernel/entry-common.c:696
- el0t_64_sync+0x190/0x194 arch/arm64/kernel/entry.S:595
+---
 
-Showing all locks held in the system:
-1 lock held by khungtaskd/30:
- #0: ffff80008e3739c0 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire+0xc/0x44 include/linux/rcupdate.h:302
-2 locks held by kworker/u4:6/235:
-2 locks held by getty/5770:
- #0: ffff0000d6cf20a0 (&tty->ldisc_sem){++++}-{0:0}, at: ldsem_down_read+0x3c/0x4c drivers/tty/tty_ldsem.c:340
- #1: ffff8000959f02f0 (&ldata->atomic_read_lock){+.+.}-{3:3}, at: n_tty_read+0x414/0x1214 drivers/tty/n_tty.c:2206
-1 lock held by syz-executor.1/6676:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_put+0xec/0x740 block/bdev.c:884
-1 lock held by syz-executor.2/6678:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_put+0xec/0x740 block/bdev.c:884
-3 locks held by syz-executor.0/6682:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
- #1: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_finish_claiming+0x84/0x3dc block/bdev.c:557
- #2: ffff0000c1543a88 (&bdev->bd_holder_lock){+.+.}-{3:3}, at: bd_finish_claiming+0x218/0x3dc block/bdev.c:566
-1 lock held by syz-executor.3/6690:
- #0: ffff0000c1543a88 (&bdev->bd_holder_lock){+.+.}-{3:3}, at: blkdev_flushbuf block/ioctl.c:370 [inline]
- #0: ffff0000c1543a88 (&bdev->bd_holder_lock){+.+.}-{3:3}, at: blkdev_common_ioctl+0x7fc/0x2884 block/ioctl.c:502
-1 lock held by syz-executor.3/6695:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.5/6696:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.5/6703:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.4/6698:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.4/6704:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.0/6872:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.1/6939:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.1/6940:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.2/6956:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.2/6957:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.5/6959:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.5/6960:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.3/6976:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.3/6977:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.4/6979:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.4/6980:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.1/6999:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.1/7000:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.2/7054:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.2/7055:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.5/7067:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.5/7068:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.3/7075:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.3/7078:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
-1 lock held by syz-executor.4/7083:
- #0: ffff0000c9ce34c8 (&disk->open_mutex){+.+.}-{3:3}, at: blkdev_get_by_dev+0x114/0x55c block/bdev.c:786
-1 lock held by syz-executor.4/7084:
- #0: ffff80008e1748a8 (bdev_lock){+.+.}-{3:3}, at: bd_prepare_to_claim+0x1a4/0x49c block/bdev.c:508
+Applied to the vfs.ctime branch of the vfs/vfs.git tree.
+Patches in the vfs.ctime branch should appear in linux-next soon.
 
-=============================================
+Please report any outstanding bugs that were missed during review in a
+new review to the original patch series allowing us to drop it.
 
+It's encouraged to provide Acked-bys and Reviewed-bys even though the
+patch has now been applied. If possible patch trailers will be updated.
 
+Note that commit hashes shown below are subject to change due to rebase,
+trailer updates or similar. If in doubt, please check the listed branch.
 
-Tested on:
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
+branch: vfs.ctime
 
-commit:         b6ab1318 reiserfs: fix journal device opening
-git tree:       https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git b4/vfs-fixes-reiserfs
-console output: https://syzkaller.appspot.com/x/log.txt?x=125bdcde680000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=1b8c825e0d5f3f72
-dashboard link: https://syzkaller.appspot.com/bug?extid=062317ea1d0a6d5e29e7
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-userspace arch: arm64
-
-Note: no patches were applied.
+[01/86] fs: new accessor methods for atime and mtime
+        https://git.kernel.org/vfs/vfs/c/22f45fee808d
+[02/86] fs: convert core infrastructure to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/6ac95fb71485
+[03/86] spufs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/9953073d5f20
+[04/86] hypfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/1d64bfe22112
+[05/86] android: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/a8a74b6b4f2c
+[06/86] char: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/671ffa0775a7
+[07/86] qib: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/ebd5458f3b52
+[08/86] ibmasm: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/1d4257d57a41
+[09/86] misc: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/d4bf8378b9cb
+[10/86] x86: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/070601b1e496
+[11/86] tty: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/5c9f26b87bed
+[12/86] function: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/092f46404245
+[13/86] legacy: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/5c51d80e51d0
+[14/86] usb: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/4707a33afd6f
+[15/86] 9p: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/20fc454b4493
+[16/86] adfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/3e8d59046f6d
+[17/86] affs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/60d4d0d37086
+[18/86] afs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/6471772aa6fe
+[19/86] autofs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/3eaad981548b
+[20/86] befs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/21d0433caf69
+[21/86] bfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/06e502c123a6
+[22/86] btrfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/f62049d7838d
+[23/86] ceph: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/ac7750d84e38
+[24/86] coda: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/5c4bf2507baa
+[25/86] configfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/3b930e187f16
+[26/86] cramfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/bb0bf9d3bda8
+[27/86] debugfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/7dc950e659d6
+[28/86] devpts: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/a1eb5c26d5a1
+[29/86] efivarfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/17b5652aa824
+[30/86] efs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/a3cfbea29e7d
+[31/86] erofs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/2beccde96d66
+[32/86] exfat: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/522f3c42c9e7
+[33/86] ext2: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/07be81fce412
+[34/86] ext4: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/2ff285d78c4d
+[35/86] f2fs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/c495130561ae
+[36/86] fat: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/e57260ae3226
+[37/86] freevxfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/a83513cd029e
+[38/86] fuse: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/5f1e57582b4e
+[39/86] gfs2: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/a5f1a9296668
+[40/86] hfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/7ee8d53576e9
+[41/86] hfsplus: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/2179ad3569f6
+[42/86] hostfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/c3e1be490207
+[43/86] hpfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/e08a2ea26b41
+[44/86] hugetlbfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/a9701db0ca64
+[45/86] isofs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/362d327da07e
+[46/86] jffs2: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/36a8a5a63218
+[47/86] jfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/acd529413de5
+[48/86] kernfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/05acde68936b
+[49/86] minix: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/34c1ca111ec1
+[50/86] nfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/77e808456854
+[51/86] nfsd: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/a800ed7ebbbf
+[52/86] nilfs2: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/4ddc9518c2fa
+[53/86] ntfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/0d15c2118b1a
+[54/86] ntfs3: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/82f8d5fde753
+[55/86] ocfs2: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/45251ebaca70
+[56/86] omfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/e7c1ff814326
+[57/86] openpromfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/cb62db1d3c61
+[58/86] orangefs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/68e257a49aed
+[59/86] overlayfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/d482d98dc1bd
+[60/86] proc: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/8c8afe8a25fa
+[61/86] pstore: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/b0be548328a2
+[62/86] qnx4: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/c28589f2d838
+[63/86] qnx6: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/ae0f3d29e728
+[64/86] ramfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/6315fd97a8fc
+[65/86] reiserfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/8eceb9b75a5b
+[66/86] romfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/6d3dd456da31
+[67/86] client: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/b14d4c14f51b
+[68/86] server: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/bec3d7ffcecd
+[69/86] squashfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/d7d5ff75af52
+[70/86] sysv: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/39f012d8743e
+[71/86] tracefs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/22ada3856de8
+[72/86] ubifs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/af8b66e1d4b7
+[73/86] udf: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/1da45142f95a
+[74/86] ufs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/41c46d3bb9b3
+[75/86] vboxsf: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/cc36ec7935eb
+[76/86] xfs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/ee3be90b2ba7
+[77/86] zonefs: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/8c798cc16b17
+[78/86] linux: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/dd53b64b6f51
+[79/86] ipc: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/f132b3723b71
+[80/86] bpf: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/448a018f67a3
+[81/86] mm: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/b6f5b3d5ffc9
+[82/86] sunrpc: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/fc9db028b8d7
+[83/86] apparmor: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/794ef2a745ec
+[84/86] selinux: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/3d57ee3686d7
+[85/86] security: convert to new timestamp accessors
+        https://git.kernel.org/vfs/vfs/c/71f6d9ebaf43
+[86/86] fs: rename inode i_atime and i_mtime fields
+        https://git.kernel.org/vfs/vfs/c/fea0e8fc7829
 
 
 _______________________________________________
