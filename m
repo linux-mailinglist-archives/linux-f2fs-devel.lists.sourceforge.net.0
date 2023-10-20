@@ -2,95 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 147EB7D061C
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Oct 2023 03:22:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C9DE7D0689
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 20 Oct 2023 04:40:23 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qteDW-0000rO-Ke;
-	Fri, 20 Oct 2023 01:22:22 +0000
+	id 1qtfQo-0005ju-Os;
+	Fri, 20 Oct 2023 02:40:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1qteDV-0000rI-Ra
+ (envelope-from <jaegeuk@kernel.org>) id 1qtfQk-0005jb-Lq
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 20 Oct 2023 01:22:21 +0000
+ Fri, 20 Oct 2023 02:40:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Mp3m7Wck8Tj+/JZMkV3nskRyj8t4yVSOK4ORBNaBNco=; b=ZV/L2lyppHbxXS4XAGfbW3GXYn
- eJV+MaNspBn9Ze4s9p/Tp4d6onkS6bileoq5xPEg/z0lOwANeORk3Ozbx+Emngy9GAxs1JK84LBpj
- AjWLbDLUP1nibcCrTwebYgYhruVerhgxpo6i6MF5s8eGj06BPaEUKKd2JyoVca9d6IeA=;
+ bh=NwQf5KbdQheT71fcog7xLmBrciaymRvPgq3sihow3qQ=; b=WMgjrfvRl+sXVzLHjLNuOJPXON
+ U6X8uJpD4ZrbjvWnE5twSuaRK1MFs2Rq4bhB5uxAu1sgd/XRUxurZWvWemFA7+Evwk/TvBrAJOegm
+ OMDqPOGNVNjGrA1pROWzF5IY6IVZpLzGNSeS9vP27UAjAxtHC8u5eRzAFAInxvPRuylQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Mp3m7Wck8Tj+/JZMkV3nskRyj8t4yVSOK4ORBNaBNco=; b=a
- GwNA3rVhSx0oTrlUXWLIKQCY4CR7TX0xh4NeFLEi/V22VsIKEbjzqePqOKfiSvdKcEPrn3aJxZVC+
- ilzAtR93D5uNPrOMPtafqDbI2a9FWHa9nMjLvdWsa3obw8zbWVBv0FCZ2jOpfXECy7vGYJ0fmbggO
- tBKuDzvl7WUUCgPY=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:To:
+ From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=NwQf5KbdQheT71fcog7xLmBrciaymRvPgq3sihow3qQ=; b=IAmxG+rMk3f29Dc9/juyDvZgQx
+ iLuR2ErOpkAectMViA8xt/jLtye8zjzULNQ+Zf7JXASQYzSZ/Rghbl4nOkb18DDYM/ZXwyeoyvL75
+ 65b+D4OrW0t6KZS72xzevsPm9zgZS7brnwCGp3oBsgBeB3chmoEMaOzDCAn+ItEK8ZXE=;
 Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qteDU-003siL-VQ for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 20 Oct 2023 01:22:21 +0000
+ id 1qtfQh-0006rD-Dm for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 20 Oct 2023 02:40:06 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 77C5161C5D
+ by dfw.source.kernel.org (Postfix) with ESMTP id CC7866152C
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 20 Oct 2023 01:22:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16D46C433C8;
- Fri, 20 Oct 2023 01:22:15 +0000 (UTC)
+ Fri, 20 Oct 2023 02:39:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7653AC433C8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 20 Oct 2023 02:39:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1697764935;
- bh=bsUAFvciYZ5H5iM4IYuVPHhbmudSIbqO7L1aINivF3Y=;
- h=From:To:Cc:Subject:Date:From;
- b=f6M0Eolx0lmrHIW2yfDbpG+9r8eERp43RZoD7jNy8rMgVZtClnmjMMEIKdn2yVbuO
- ldzDQvczTJzKRA5aaNdyej9hdDW6DmfNAjp+8Uc4cxMBTUsUtmeIsN8jFJ6e6Msn2m
- dXgEuoN6Aop6MfNXP5y9cay4in/w1Vcj7FK4c9C3sJQ6+05HTjw1KnDx/N9cmNNIYz
- 9+ANsgpXE9JrFmUG5+/+pvUbBM9EaFtw1Y/zFHRnbkOGWmxQb0vZp68dWVikJdRfHi
- aan5jTTXjhoXj6l75Sgmmhcz9PiaR4I0x1B6oaj9lUsrpY1+5AAHIWjzR8/PX4fO+X
- 9klOH2Y+Z+5Kw==
+ s=k20201202; t=1697769594;
+ bh=pShlm2SzYGBDwuulpbboRW792NZmEYMM8Ftcvf8t+v8=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=eVxQ2jn4LB4c8dWTyHMl0G/zvHY93u1uKslIo1dUK0399nNrTeauGVA2qRltVjWEf
+ zy8k0TZwfRhWV47I1w9TbS7x8ipuW5Wm/Y7Tzl8eO+/ammxex2B3EzVWFc8XCCpjZp
+ OBlbQiBksNXvljTf4uWJsOGpE9N73ZDYpePp3DaLEu/1g/qCR3HBLGicsRD2q9BuwZ
+ gbVB8rPq+Gdss66HH9bOlkg6lLUyDuTcHTg+GAnAwkkq3H4ZpyDcvKdzbHh+RsxcNM
+ qUf4v6weuIdCNnhwMVMUpF8jUvVCeWJLqNa5czaGO6cZMM9lJNW6PcN9/6f6/lwXaa
+ PQ00Kz9ael7Ig==
+Date: Thu, 19 Oct 2023 19:39:52 -0700
 From: Jaegeuk Kim <jaegeuk@kernel.org>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Thu, 19 Oct 2023 18:22:13 -0700
-Message-ID: <20231020012213.2606422-1-jaegeuk@kernel.org>
-X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
+Message-ID: <ZTHoeBTX7SlbIxOg@google.com>
+References: <20231020012213.2606422-1-jaegeuk@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20231020012213.2606422-1-jaegeuk@kernel.org>
 X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Let's add list/setattrs commands. Signed-off-by: Jaegeuk Kim
- <jaegeuk@kernel.org> --- tools/f2fs_io/f2fs_io.c | 88
- +++++++++++++++++++++++++++++++++++++++++ 1 file changed,
- 88 insertions(+) diff --git a/tools/f2fs_io/f2fs_io.c
- b/tools/f2fs_io/f2fs_io.c
- index c812aa1458a2..a6a0de6d8dbd 100644 --- a/tools/f2fs_io/f2fs_io.c +++
- b/tools/f2fs_io/f2fs_io.c @@ -35,6 +35,7 @@ #include <termios.h [...] 
+ Content preview: Let's add list/set/removexattrs commands. Signed-off-by:
+ Jaegeuk Kim <jaegeuk@kernel.org> --- - add removexattrs 
  Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
  high trust [139.178.84.217 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qteDU-003siL-VQ
-Subject: [f2fs-dev] [PATCH] f2fs_io: add list/setattr command
+X-Headers-End: 1qtfQh-0006rD-Dm
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs_io: add list/setattr command
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,20 +100,22 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Let's add list/setattrs commands.
+Let's add list/set/removexattrs commands.
 
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- tools/f2fs_io/f2fs_io.c | 88 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 88 insertions(+)
+
+ - add removexattrs
+
+ tools/f2fs_io/f2fs_io.c | 107 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 107 insertions(+)
 
 diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index c812aa1458a2..a6a0de6d8dbd 100644
+index c812aa1458a2..e7d286a67939 100644
 --- a/tools/f2fs_io/f2fs_io.c
 +++ b/tools/f2fs_io/f2fs_io.c
 @@ -35,6 +35,7 @@
@@ -126,7 +126,7 @@ index c812aa1458a2..a6a0de6d8dbd 100644
  
  #ifdef HAVE_CONFIG_H
  #include <config.h>
-@@ -1526,6 +1527,91 @@ static void do_gc_range(int argc, char **argv, const struct cmd_desc *cmd)
+@@ -1526,6 +1527,109 @@ static void do_gc_range(int argc, char **argv, const struct cmd_desc *cmd)
  	exit(0);
  }
  
@@ -215,15 +215,34 @@ index c812aa1458a2..a6a0de6d8dbd 100644
 +	exit(0);
 +}
 +
++#define removexattr_desc "removexattr"
++#define removexattr_help "f2fs_io removexattr [name] [file_path]\n\n"
++
++static void do_removexattr(int argc, char **argv, const struct cmd_desc *cmd)
++{
++	int ret;
++
++	if (argc != 3) {
++		fputs("Excess arguments\n\n", stderr);
++		fputs(cmd->cmd_help, stderr);
++		exit(1);
++	}
++
++	ret = removexattr(argv[2], argv[1]);
++	printf("removexattr %s REMOVE: name: %s: ret=%d\n", argv[1], argv[2], ret);
++	exit(0);
++}
++
  #define CMD_HIDDEN 	0x0001
  #define CMD(name) { #name, do_##name, name##_desc, name##_help, 0 }
  #define _CMD(name) { #name, do_##name, NULL, NULL, CMD_HIDDEN }
-@@ -1564,6 +1650,8 @@ const struct cmd_desc cmd_list[] = {
+@@ -1564,6 +1668,9 @@ const struct cmd_desc cmd_list[] = {
  	CMD(precache_extents),
  	CMD(move_range),
  	CMD(gc_range),
 +	CMD(listxattr),
 +	CMD(setxattr),
++	CMD(removexattr),
  	{ NULL, NULL, NULL, NULL, 0 }
  };
  
