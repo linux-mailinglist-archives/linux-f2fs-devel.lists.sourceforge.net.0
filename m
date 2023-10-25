@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E4AF7D6663
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B4FE7D6662
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Oct 2023 11:13:23 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qvZww-0003Av-8R;
-	Wed, 25 Oct 2023 09:13:14 +0000
+	id 1qvZwy-0005U8-G9;
+	Wed, 25 Oct 2023 09:13:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
  (envelope-from <kazunori.kobayashi@miraclelinux.com>)
- id 1qvZwv-0003Ap-J4 for linux-f2fs-devel@lists.sourceforge.net;
+ id 1qvZwv-0005Tr-LD for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 25 Oct 2023 09:13:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
@@ -21,9 +21,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QQ/17KLqALE4B8widhP681PaNMIrFY8nfETZa+CkAqw=; b=QPgDZJSeYMry86oq8y1vH/Cvtf
- s3v6AZUa4ZhTdCj6TDP5K4NtLv+i9LvQhA1ThUg5bVrX2D5tQbkAc/WK+o5hyH5Jy3m7gezNUjEqd
- wfqFDZhC4ZfI2fWeq2B2sOi6s0sL1OCNk1WGeE6k+xF2cT5dvJUi1T0ME6P+to9UBH0E=;
+ bh=xIELli7CNarBzKjciVCNTZMcEOSk0wgTFI+5haEbN1c=; b=IRjhn9iwK04ASGy/Z8B9KAHwKV
+ xDXgmTZfRLGQjuGOLwffJF3w2M3JSsKNZzUsI4ouT4vjkSjcbieXVDN7K/6J21klOgjw2XlXFjNFy
+ 0G6Y5MEbgz6F2Ix/2Thw76sAmpD6/IjG5VttoXCTD+I3l8ig0AaeSz+7/gWtqXeOk9LU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
@@ -31,27 +31,27 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
  In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=QQ/17KLqALE4B8widhP681PaNMIrFY8nfETZa+CkAqw=; b=aZlG6MVkl5b3/h/kn6Fsu1aGXc
- Q28cBYu1najl9GSf+u5DlKaPikIs0n27HpBd47+1ntsxDxKHRwppRe8tyJbXQDVpqU++gvBdKpBv9
- G7S/Tzic5ltv42a2h/OCsWmDTEYYGhxuH0eECTFhYTw58CkJUSupLsy4sCu8hjziYJu8=;
+ bh=xIELli7CNarBzKjciVCNTZMcEOSk0wgTFI+5haEbN1c=; b=Tu5Nx+mLucyZe0mlh7G5O1GcJb
+ 8b2tH1ygVYzWRDbprgBKNxqrtBMCZWeJ+/qrN4fUtnNd74wFuekO3uxoP9hCV5L/yhVLdSO4ciUXT
+ T/jPIlaqLhtjKX0zsxlbIfm7BbD0YqmEDzpu6FRKNMzg+K28/gCmhka91JxTIQ1nVexY=;
 Received: from 202x210x215x66.ap202.ftth.ucom.ne.jp ([202.210.215.66]
  helo=smtp.priv.miraclelinux.com)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qvZwu-008geg-Pn for linux-f2fs-devel@lists.sourceforge.net;
+ id 1qvZwu-0005fk-QB for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 25 Oct 2023 09:13:13 +0000
 Received: from cip-lava-a.miraclelinux.com (cip-lava-a.miraclelinux.com
  [10.2.1.116])
- by smtp.priv.miraclelinux.com (Postfix) with ESMTP id 77053140036;
- Wed, 25 Oct 2023 17:54:38 +0900 (JST)
+ by smtp.priv.miraclelinux.com (Postfix) with ESMTP id 5E431140099;
+ Wed, 25 Oct 2023 17:55:29 +0900 (JST)
 From: Kazunori Kobayashi <kazunori.kobayashi@miraclelinux.com>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Wed, 25 Oct 2023 08:54:32 +0000
-Message-Id: <20231025085432.11639-1-kazunori.kobayashi@miraclelinux.com>
+Date: Wed, 25 Oct 2023 08:56:57 +0000
+Message-Id: <20231025085657.11689-1-kazunori.kobayashi@miraclelinux.com>
 X-Mailer: git-send-email 2.17.1
 X-Spam-Score: 0.4 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -64,12 +64,12 @@ X-Spam-Report: Spam detection software,
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_SORBS_DUL      RBL: SORBS: sent directly from dynamic IP
  address [202.210.215.66 listed in dnsbl.sorbs.net]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.4 RDNS_DYNAMIC           Delivered to internal network by host with
  dynamic-looking rDNS
-X-Headers-End: 1qvZwu-008geg-Pn
-Subject: [f2fs-dev] [PATCH 4.19] f2fs: fix to do sanity check on inode type
+X-Headers-End: 1qvZwu-0005fk-QB
+Subject: [f2fs-dev] [PATCH 5.10] f2fs: fix to do sanity check on inode type
  during garbage collection
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -138,19 +138,19 @@ Signed-off-by: Kazunori Kobayashi <kazunori.kobayashi@miraclelinux.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index ff447bbb5248..fb4494c54484 100644
+index 8e4daee0171f..dfa99cd195b8 100644
 --- a/fs/f2fs/gc.c
 +++ b/fs/f2fs/gc.c
-@@ -958,7 +958,8 @@ static void gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+@@ -1451,7 +1451,8 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
  
  		if (phase == 3) {
  			inode = f2fs_iget(sb, dni.ino);
--			if (IS_ERR(inode) || is_bad_inode(inode))
+-			if (IS_ERR(inode) || is_bad_inode(inode)) {
 +			if (IS_ERR(inode) || is_bad_inode(inode) ||
-+					special_file(inode->i_mode))
++					special_file(inode->i_mode)) {
+ 				set_sbi_flag(sbi, SBI_NEED_FSCK);
  				continue;
- 
- 			if (!down_write_trylock(
+ 			}
 -- 
 2.39.2
 
