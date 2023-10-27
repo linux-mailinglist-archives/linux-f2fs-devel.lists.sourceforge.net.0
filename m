@@ -2,123 +2,122 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 902AF7D8C5E
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 27 Oct 2023 01:53:51 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAB797D8C84
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 27 Oct 2023 02:21:52 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qwAAZ-0005Lj-Mv;
-	Thu, 26 Oct 2023 23:53:43 +0000
+	id 1qwAbc-0005Ld-OB;
+	Fri, 27 Oct 2023 00:21:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1qwAAX-0005Ld-JE
+ (envelope-from <daeho43@gmail.com>) id 1qwAbb-0005LT-FO
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Oct 2023 23:53:41 +0000
+ Fri, 27 Oct 2023 00:21:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bPUJt5LRLkoFKrQkmKdp/52n5DApmDpEURBE+GDif+k=; b=CnIN854Ws58AYEtcKFGosOxm22
- G7LHgiFsaPxWMZYGobfW8JjNwLlLDgvlLA6lW7AFj0JrMiuj8czyty6/vUoEv1mMbmqFodxHI67+u
- w4gEbL82nloEMkhHmauHhahbIJAryJcJWhjOJkJ35tQlJmV4pPf+nmjiS3eTJZWsZ7W4=;
+ bh=i0gYOpz/XgQiw5wtt3cYyUWDo3FK+dwt3ja69KJWCyg=; b=Gny/cHV0nxd9E4upir+nxKbZwg
+ DZJ1UPIK+uL4sNIdhYW9IkmNHQF0ENFlpuRa2mMa4bab4bJpoPqE/TGmPalq5VWB4sh5TGK0rrmmV
+ 4CECUS4ZnKsmG+uDJdHqnr8MLttUJF1ap2IJjaFht5olmVzX+iJcepx7d1lWQC+/L4zY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=bPUJt5LRLkoFKrQkmKdp/52n5DApmDpEURBE+GDif+k=; b=R
- tL78XeOsUpnElj+DaAI0F0sgErJI+PrAWId9rbnE1pLO/yzDDI0g5R+kKBrrRUObVRuy7YcmEY5fl
- y5c4XYrj4/gND4I00+1blcC08A7q5kCtNsgkVeLkHNTg6wByq0UJktuL9xJ0DggRlcoEaoq7EH/Yd
- tB4BwQInY5xj3+RE=;
-Received: from mail-pj1-f47.google.com ([209.85.216.47])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ List-Owner:List-Archive; bh=i0gYOpz/XgQiw5wtt3cYyUWDo3FK+dwt3ja69KJWCyg=; b=M
+ zJwetmDJK9oo+Nn0kBLRnN4mliZq9nn8uCFv9YNsdhH9Bqmz9OXW8y+Xi7+tW7WaIlbPMEPeA6r65
+ 940WvWjfXwULYO4t3v5jB0KC8XVI1vLq2QDED86Xx4ztJM2BzUHxsQraqTbqjd38ukT0NwZDYeeQV
+ PEYdAPa2ERCx4uOk=;
+Received: from mail-pf1-f182.google.com ([209.85.210.182])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1qwAAV-00ATKF-GN for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Oct 2023 23:53:41 +0000
-Received: by mail-pj1-f47.google.com with SMTP id
- 98e67ed59e1d1-27d11401516so1224134a91.2
+ id 1qwAba-0004SV-Eo for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 27 Oct 2023 00:21:39 +0000
+Received: by mail-pf1-f182.google.com with SMTP id
+ d2e1a72fcca58-6bf03b98b9bso1977681b3a.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 26 Oct 2023 16:53:39 -0700 (PDT)
+ Thu, 26 Oct 2023 17:21:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698364414; x=1698969214; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1698366093; x=1698970893; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bPUJt5LRLkoFKrQkmKdp/52n5DApmDpEURBE+GDif+k=;
- b=lWr/DvbhcRRKISizJy53IH6afD+RE6fXLdqaZ/bbIsBRypIYb22pBSVjllWo4nWTI6
- HrAU6a0rJxbZZjVkFkmeSH2AfUpVL83FzsHc/oawWEDv53p4YBL34Vtya8LliZaYmi9a
- UHNX8p6w3AnLf4OwjdMulCH9258mjNwZo5IpM1c4X28wHP7gExkX23gn+Lv2FylDYgrx
- zjMJWHiUH0XpqU6Q9rH3wtW8o8XrvpvNQP/CB4PGWGyw9eLmwD77MuX4LPMw3wOYRd4X
- ciXPi/NXUmcIzpHfImKDwGCxlIq+gCk62GypG2pY6S+y/tSdPzlgG5HJTkbASE1MFruM
- 3iQg==
+ bh=i0gYOpz/XgQiw5wtt3cYyUWDo3FK+dwt3ja69KJWCyg=;
+ b=dWBRExHPF7A3ueOkEonY/gU3S+3Pxme3SxMBiZN5rSQXRyFctF60Qxb0wEwittmLrW
+ 22c2BfgAPRYvCMpzIAlNBUuiPwm7gelHIzk6cFmd8RtFA/5bDvLiJNdHwbNe3AP6Smyi
+ s5RKiYTSO1D6E+U1B+Vx20WuKw1o4Pj2Z6Mf7PthvlDVA+mwL3S2z59BELZTFdtb3wWf
+ ECbPz8EkgYKldigGX3XjroOZJx8kaN//h80J1G6paL8WLxwfZwVsDgPoMw0BIG0IuJFf
+ 81GJb22XPBgBruIotSwQHUD504ZxMsNizyksD65InPYsnHKB4URYeiETCIGxnPNlt4ls
+ aXRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698364414; x=1698969214;
+ d=1e100.net; s=20230601; t=1698366093; x=1698970893;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bPUJt5LRLkoFKrQkmKdp/52n5DApmDpEURBE+GDif+k=;
- b=AyYx+UJ5Eqth6nlzcBGlZ+Qn2viAUyroOIgS6t/MLGc/WnKXXr68TEjd3qF3+Fl/sX
- KxKO9/U45fvHTlvy7zIOeO+011jMdAmFejnB3Umw2Jsal/KNbortqFC+ibCIjQwKx4OM
- hNGqr1KpfhqLCzF6RqPgGTHPQbVg7D7rM+iUvkHIUUhyJG9S03u923M+oHgyx1e1Z1AX
- yUT4N7+6IEbeuKtk/xiK0JqO3XQfh2gi30OtX+Tlf/LQ/P7OXQE0H31m5MrizY7y2njV
- FIanKiaQ33xA8Gl2WGdx1yRFUawq6elWsw4VbNWmMtP4lhp/DIvK7WzOTYKtWRSZwYCB
- vPxg==
-X-Gm-Message-State: AOJu0YwPUwRQSIwcbn9O2jOuAB3UzOU1OfGKkXZsqWm5brpmy5ciHhq/
- uK9qhH4OFU8jSCPq7Vo/F7M=
-X-Google-Smtp-Source: AGHT+IFLnUzRReWC4Vcbn/QeHEdJNZLFaU8EP32LJnB4+aXTtBHRKUxLHnL3IiJFDRCmJxi2XzOA0A==
-X-Received: by 2002:a17:90a:d388:b0:27d:515d:94f0 with SMTP id
- q8-20020a17090ad38800b0027d515d94f0mr974677pju.24.1698364413651; 
- Thu, 26 Oct 2023 16:53:33 -0700 (PDT)
+ bh=i0gYOpz/XgQiw5wtt3cYyUWDo3FK+dwt3ja69KJWCyg=;
+ b=dlvfch16oS1ZsYzBWqlijoo89UnCe8Z6LlJ3fQDd81acSjPtkXJPrDVI5N055TOPI5
+ 8Q8JXdim9nv2m7tgSAaEmM4+E4saA0nNBqxK2b9Cc0BFBSX4kICFSqroHR3HsMJUmHO5
+ z1Szh/j4soaygsXhP8ovau+PB2202J3ufG6HLOLpXz8hgskcO0z5qPPY+CjjCKqFvij6
+ +mP7H6jRGd6WEaLbVIRA4RTJ7khvWEy62Rg/2Jl+F3Jl4V2Wd33spuuRQ8RQPGIl0A23
+ XYp8f1ckIUEAjq27/lLwm/72f3sNCXwRtocVwNHlP5lKptax1n5fDQBYVjRtzKfk7zF7
+ K8mQ==
+X-Gm-Message-State: AOJu0YzmizTLz1+dwV+nauy2NK0BsFb41LCZSd+FC723NjEoSqA4wSjB
+ wK58any8bJtW3PTLUoQ1QB8=
+X-Google-Smtp-Source: AGHT+IHDVla0y5rFv28aqQSb3U2ckrbvtYt8HyCM0jwWYulDBX7L3l/TyXhWFQ8W05wLts0sYdsxaA==
+X-Received: by 2002:a05:6a21:999f:b0:13e:debc:3657 with SMTP id
+ ve31-20020a056a21999f00b0013edebc3657mr1252660pzb.30.1698366092731; 
+ Thu, 26 Oct 2023 17:21:32 -0700 (PDT)
 Received: from daehojeong-desktop.mtv.corp.google.com
  ([2620:15c:211:201:85a4:5aef:279b:f31e])
  by smtp.gmail.com with ESMTPSA id
- q1-20020a17090a750100b0027ce34334f5sm123657pjk.37.2023.10.26.16.53.32
+ y3-20020aa78f23000000b00690f622d3cdsm175111pfr.126.2023.10.26.17.21.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 16:53:33 -0700 (PDT)
+ Thu, 26 Oct 2023 17:21:32 -0700 (PDT)
 From: Daeho Jeong <daeho43@gmail.com>
 To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
  kernel-team@android.com
-Date: Thu, 26 Oct 2023 16:53:16 -0700
-Message-ID: <20231026235316.1189315-1-daeho43@gmail.com>
+Date: Thu, 26 Oct 2023 17:21:23 -0700
+Message-ID: <20231027002123.1195780-1-daeho43@gmail.com>
 X-Mailer: git-send-email 2.42.0.820.g83a721a137-goog
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Daeho Jeong We need to make sure to finish all the
- zones
- except six open zones. In a case of that the previous mount wasn't
- successfully
- unmounted, we have to change all the current segments. 
+ Content preview:  From: Daeho Jeong When we detect quota inode corruption, we
+ better deallocate the current space and allocate new ones for a clean start.
+ Signed-off-by: Daeho Jeong 
  Content analysis details:   (0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.216.47 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
- in digit [daeho43[at]gmail.com]
  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
  provider [daeho43[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.47 listed in wl.mailspike.net]
+ [209.85.210.182 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.182 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1qwAAV-00ATKF-GN
-Subject: [f2fs-dev] [PATCH v2] f2fs-tools: make six open zone check resilient
+X-Headers-End: 1qwAba-0004SV-Eo
+Subject: [f2fs-dev] [PATCH v2] f2fs-tools: do not reuse corrupted quota
+ inodes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -137,290 +136,329 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 From: Daeho Jeong <daehojeong@google.com>
 
-We need to make sure to finish all the zones except six open zones. In
-a case of that the previous mount wasn't successfully unmounted, we have
-to change all the current segments.
+When we detect quota inode corruption, we better deallocate the current
+space and allocate new ones for a clean start.
 
 Signed-off-by: Daeho Jeong <daehojeong@google.com>
 
 ---
-v2: skip write pointer check after fixing it.
+v2: change node count check when creating a new node block
 ---
- fsck/fsck.c         | 107 +++++++++++++++++++-------------------------
- include/f2fs_fs.h   |   1 +
- lib/libf2fs_zoned.c |  28 ++++++++++++
- 3 files changed, 75 insertions(+), 61 deletions(-)
+ fsck/fsck.c    | 148 +++++++++++++++++++++++++++++++++++--------------
+ fsck/segment.c |   5 +-
+ 2 files changed, 109 insertions(+), 44 deletions(-)
 
 diff --git a/fsck/fsck.c b/fsck/fsck.c
-index dc8e282..46cc2e5 100644
+index 99cface..dc8e282 100644
 --- a/fsck/fsck.c
 +++ b/fsck/fsck.c
-@@ -2600,10 +2600,9 @@ static int check_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
- 	struct curseg_info *curseg = CURSEG_I(sbi, type);
- 	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
- 	struct blk_zone blkz;
--	block_t cs_block, wp_block, zone_last_vblock;
-+	block_t cs_block, wp_block;
- 	uint64_t cs_sector, wp_sector;
- 	int i, ret;
--	unsigned int zone_segno;
- 	int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
- 
- 	/* get the device the curseg points to */
-@@ -2637,49 +2636,28 @@ static int check_curseg_write_pointer(struct f2fs_sb_info *sbi, int type)
- 		(blk_zone_wp_sector(&blkz) >> log_sectors_per_block);
- 	wp_sector = blk_zone_wp_sector(&blkz);
- 
--	if (cs_sector == wp_sector)
--		return 0;
--
--	if (cs_sector > wp_sector) {
-+	if (cs_sector == wp_sector) {
-+		if (is_set_ckpt_flags(F2FS_CKPT(sbi), CP_UMOUNT_FLAG))
-+			return 0;
-+		MSG(0, "Correct write pointer. But, we can't trust it, "
-+		    "since the previous mount wasn't safely unmounted: "
-+		    "curseg %d[0x%x,0x%x]\n",
-+		    type, curseg->segno, curseg->next_blkoff);
-+	} else if (cs_sector > wp_sector) {
- 		MSG(0, "Inconsistent write pointer with curseg %d: "
- 		    "curseg %d[0x%x,0x%x] > wp[0x%x,0x%x]\n",
- 		    type, type, curseg->segno, curseg->next_blkoff,
-+		    GET_SEGNO(sbi, wp_block),
-+		    OFFSET_IN_SEG(sbi, wp_block));
-+		if (!c.fix_on)
-+			fsck->chk.wp_inconsistent_zones++;
-+	} else {
-+		MSG(0, "Write pointer goes advance from curseg %d: "
-+		    "curseg %d[0x%x,0x%x] wp[0x%x,0x%x]\n",
-+		    type, type, curseg->segno, curseg->next_blkoff,
- 		    GET_SEGNO(sbi, wp_block), OFFSET_IN_SEG(sbi, wp_block));
--		fsck->chk.wp_inconsistent_zones++;
--		return -EINVAL;
--	}
--
--	MSG(0, "Write pointer goes advance from curseg %d: "
--	    "curseg %d[0x%x,0x%x] wp[0x%x,0x%x]\n",
--	    type, type, curseg->segno, curseg->next_blkoff,
--	    GET_SEGNO(sbi, wp_block), OFFSET_IN_SEG(sbi, wp_block));
--
--	zone_segno = GET_SEG_FROM_SEC(sbi,
--				      GET_SEC_FROM_SEG(sbi, curseg->segno));
--	zone_last_vblock = START_BLOCK(sbi, zone_segno) +
--		last_vblk_off_in_zone(sbi, zone_segno);
--
--	/*
--	 * If valid blocks exist between the curseg position and the write
--	 * pointer, they are fsync data. This is not an error to fix. Leave it
--	 * for kernel to recover later.
--	 * If valid blocks exist between the curseg's zone start and the curseg
--	 * position, or if there is no valid block in the curseg's zone, fix
--	 * the inconsistency between the curseg and the writ pointer.
--	 * Of Note is that if there is no valid block in the curseg's zone,
--	 * last_vblk_off_in_zone() returns -1 and zone_last_vblock is always
--	 * smaller than cs_block.
--	 */
--	if (cs_block <= zone_last_vblock && zone_last_vblock < wp_block) {
--		MSG(0, "Curseg has fsync data: curseg %d[0x%x,0x%x] "
--		    "last valid block in zone[0x%x,0x%x]\n",
--		    type, curseg->segno, curseg->next_blkoff,
--		    GET_SEGNO(sbi, zone_last_vblock),
--		    OFFSET_IN_SEG(sbi, zone_last_vblock));
--		return 0;
- 	}
- 
--	fsck->chk.wp_inconsistent_zones++;
- 	return -EINVAL;
+@@ -67,6 +67,14 @@ int f2fs_set_sit_bitmap(struct f2fs_sb_info *sbi, u32 blk)
+ 	return f2fs_set_bit(BLKOFF_FROM_MAIN(sbi, blk), fsck->sit_area_bitmap);
  }
  
-@@ -2693,7 +2671,7 @@ static int check_curseg_write_pointer(struct f2fs_sb_info *UNUSED(sbi),
- 
- #endif
- 
--int check_curseg_offset(struct f2fs_sb_info *sbi, int type)
-+int check_curseg_offset(struct f2fs_sb_info *sbi, int type, bool check_wp)
- {
- 	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
- 	struct curseg_info *curseg = CURSEG_I(sbi, type);
-@@ -2727,30 +2705,30 @@ int check_curseg_offset(struct f2fs_sb_info *sbi, int type)
- 		}
- 	}
- 
--	if (c.zoned_model == F2FS_ZONED_HM)
-+	if (check_wp && c.zoned_model == F2FS_ZONED_HM)
- 		return check_curseg_write_pointer(sbi, type);
- 
- 	return 0;
- }
- 
--int check_curseg_offsets(struct f2fs_sb_info *sbi)
-+int check_curseg_offsets(struct f2fs_sb_info *sbi, bool check_wp)
- {
- 	int i, ret;
- 
- 	for (i = 0; i < NO_CHECK_TYPE; i++) {
--		ret = check_curseg_offset(sbi, i);
-+		ret = check_curseg_offset(sbi, i, check_wp);
- 		if (ret)
- 			return ret;
- 	}
- 	return 0;
- }
- 
--static void fix_curseg_info(struct f2fs_sb_info *sbi)
-+static void fix_curseg_info(struct f2fs_sb_info *sbi, bool check_wp)
- {
- 	int i, need_update = 0;
- 
- 	for (i = 0; i < NO_CHECK_TYPE; i++) {
--		if (check_curseg_offset(sbi, i)) {
-+		if (check_curseg_offset(sbi, i, check_wp)) {
- 			update_curseg_info(sbi, i);
- 			need_update = 1;
- 		}
-@@ -3219,10 +3197,8 @@ static int chk_and_fix_wp_with_sit(int UNUSED(i), void *blkzone, void *opaque)
- 	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
- 	block_t zone_block, wp_block, wp_blkoff;
- 	unsigned int zone_segno, wp_segno;
--	struct curseg_info *cs;
--	int cs_index, ret, last_valid_blkoff;
-+	int ret, last_valid_blkoff;
- 	int log_sectors_per_block = sbi->log_blocksize - SECTOR_SHIFT;
--	unsigned int segs_per_zone = sbi->segs_per_sec * sbi->secs_per_zone;
- 
- 	if (blk_zone_conv(blkz))
- 		return 0;
-@@ -3238,14 +3214,6 @@ static int chk_and_fix_wp_with_sit(int UNUSED(i), void *blkzone, void *opaque)
- 	wp_segno = GET_SEGNO(sbi, wp_block);
- 	wp_blkoff = wp_block - START_BLOCK(sbi, wp_segno);
- 
--	/* if a curseg points to the zone, skip the check */
--	for (cs_index = 0; cs_index < NO_CHECK_TYPE; cs_index++) {
--		cs = &SM_I(sbi)->curseg_array[cs_index];
--		if (zone_segno <= cs->segno &&
--		    cs->segno < zone_segno + segs_per_zone)
--			return 0;
--	}
--
- 	last_valid_blkoff = last_vblk_off_in_zone(sbi, zone_segno);
- 
- 	/*
-@@ -3281,10 +3249,27 @@ static int chk_and_fix_wp_with_sit(int UNUSED(i), void *blkzone, void *opaque)
- 	if (last_valid_blkoff + zone_block > wp_block) {
- 		MSG(0, "Unexpected invalid write pointer: wp[0x%x,0x%x]\n",
- 		    wp_segno, wp_blkoff);
-+		if (!c.fix_on)
-+			fsck->chk.wp_inconsistent_zones++;
-+	}
++static inline int f2fs_clear_sit_bitmap(struct f2fs_sb_info *sbi, u32 blk)
++{
++	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
 +
-+	if (!c.fix_on)
- 		return 0;
++	return f2fs_clear_bit(BLKOFF_FROM_MAIN(sbi, blk),
++						fsck->sit_area_bitmap);
++}
 +
-+	ret = f2fs_finish_zone(wpd->dev_index, blkz);
-+	if (ret) {
-+		u64 fill_sects = blk_zone_length(blkz) -
-+			(blk_zone_wp_sector(blkz) - blk_zone_sector(blkz));
-+		printf("[FSCK] Finishing zone failed: %s\n", dev->path);
-+		ret = dev_fill(NULL, wp_block * F2FS_BLKSIZE,
-+			(fill_sects >> log_sectors_per_block) * F2FS_BLKSIZE);
-+		if (ret)
-+			printf("[FSCK] Fill up zone failed: %s\n", dev->path);
- 	}
- 
--	return 0;
-+	if (!ret)
-+		fsck->chk.wp_fixed = 1;
-+	return ret;
- }
- 
- static void fix_wp_sit_alignment(struct f2fs_sb_info *sbi)
-@@ -3330,8 +3315,8 @@ void fsck_chk_and_fix_write_pointers(struct f2fs_sb_info *sbi)
- 	if (c.zoned_model != F2FS_ZONED_HM)
- 		return;
- 
--	if (check_curseg_offsets(sbi) && c.fix_on) {
--		fix_curseg_info(sbi);
-+	if (check_curseg_offsets(sbi, true) && c.fix_on) {
-+		fix_curseg_info(sbi, true);
- 		fsck->chk.wp_fixed = 1;
- 	}
- 
-@@ -3525,7 +3510,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 	}
- 
- 	printf("[FSCK] next block offset is free                     ");
--	if (check_curseg_offsets(sbi) == 0) {
-+	if (check_curseg_offsets(sbi, false) == 0) {
- 		printf(" [Ok..]\n");
- 	} else {
- 		printf(" [Fail]\n");
-@@ -3578,7 +3563,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 			fix_nat_entries(sbi);
- 			rewrite_sit_area_bitmap(sbi);
- 			fix_wp_sit_alignment(sbi);
--			fix_curseg_info(sbi);
-+			fix_curseg_info(sbi, false);
- 			fix_checksum(sbi);
- 			fix_checkpoints(sbi);
- 		} else if (is_set_ckpt_flags(cp, CP_FSCK_FLAG) ||
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 772a6a5..d94e447 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -1749,6 +1749,7 @@ extern int f2fs_report_zones(int, report_zones_cb_t *, void *);
- extern int f2fs_check_zones(int);
- int f2fs_reset_zone(int, void *);
- extern int f2fs_reset_zones(int);
-+int f2fs_finish_zone(int i, void *blkzone);
- extern uint32_t f2fs_get_usable_segments(struct f2fs_super_block *sb);
- 
- #define SIZE_ALIGN(val, size)	(((val) + (size) - 1) / (size))
-diff --git a/lib/libf2fs_zoned.c b/lib/libf2fs_zoned.c
-index 2ab2497..ba9286f 100644
---- a/lib/libf2fs_zoned.c
-+++ b/lib/libf2fs_zoned.c
-@@ -502,6 +502,28 @@ out:
+ static int add_into_hard_link_list(struct f2fs_sb_info *sbi,
+ 						u32 nid, u32 link_cnt)
+ {
+@@ -2150,6 +2158,9 @@ int fsck_chk_quota_node(struct f2fs_sb_info *sbi)
  	return ret;
  }
  
-+int f2fs_finish_zone(int i, void *blkzone)
-+{
-+	struct blk_zone *blkz = (struct blk_zone *)blkzone;
-+	struct device_info *dev = c.devices + i;
-+	struct blk_zone_range range;
-+	int ret;
++static void fsck_disconnect_file(struct f2fs_sb_info *sbi, nid_t ino,
++			bool dealloc);
 +
-+	if (!blk_zone_seq(blkz) || blk_zone_empty(blkz))
-+		return 0;
-+
-+	/* Non empty sequential zone: finish */
-+	range.sector = blk_zone_sector(blkz);
-+	range.nr_sectors = blk_zone_length(blkz);
-+	ret = ioctl(dev->fd, BLKFINISHZONE, &range);
-+	if (ret != 0) {
-+		ret = -errno;
-+		ERR_MSG("ioctl BLKFINISHZONE failed: errno=%d\n", errno);
-+	}
-+
-+	return ret;
-+}
-+
- uint32_t f2fs_get_usable_segments(struct f2fs_super_block *sb)
+ int fsck_chk_quota_files(struct f2fs_sb_info *sbi)
  {
- #ifdef HAVE_BLK_ZONE_REP_V2
-@@ -588,6 +610,12 @@ int f2fs_reset_zones(int i)
- 	return -1;
+ 	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
+@@ -2181,6 +2192,8 @@ int fsck_chk_quota_files(struct f2fs_sb_info *sbi)
+ 		if (c.fix_on) {
+ 			DBG(0, "Fixing Quota file ([%3d] ino [0x%x])\n",
+ 							qtype, ino);
++			fsck_disconnect_file(sbi, ino, true);
++			f2fs_rebuild_qf_inode(sbi, qtype);
+ 			f2fs_filesize_update(sbi, ino, 0);
+ 			ret = quota_write_inode(sbi, qtype);
+ 			if (!ret) {
+@@ -2874,10 +2887,53 @@ static int fsck_do_reconnect_file(struct f2fs_sb_info *sbi,
+ 	return 0;
  }
  
-+int f2fs_finish_zone(int i, void *UNUSED(blkzone))
+-static void fsck_failed_reconnect_file_dnode(struct f2fs_sb_info *sbi,
+-					struct f2fs_inode *inode, nid_t nid)
++static inline void release_inode_cnt(struct f2fs_sb_info *sbi, bool dealloc)
 +{
-+	ERR_MSG("%d: Unsupported zoned block device\n", i);
-+	return -1;
++	F2FS_FSCK(sbi)->chk.valid_inode_cnt--;
++	if (dealloc)
++		sbi->total_valid_inode_count--;
 +}
 +
- uint32_t f2fs_get_usable_segments(struct f2fs_super_block *sb)
++static inline void release_node_cnt(struct f2fs_sb_info *sbi, bool dealloc)
++{
++	F2FS_FSCK(sbi)->chk.valid_node_cnt--;
++	if (dealloc)
++		sbi->total_valid_node_count--;
++}
++
++static inline void release_block_cnt(struct f2fs_sb_info *sbi, bool dealloc)
++{
++	F2FS_FSCK(sbi)->chk.valid_blk_cnt--;
++	if (dealloc)
++		sbi->total_valid_block_count--;
++}
++
++static inline void release_block(struct f2fs_sb_info *sbi, u64 blkaddr,
++			bool dealloc)
++{
++	f2fs_clear_main_bitmap(sbi, blkaddr);
++	if (dealloc) {
++		struct seg_entry *se;
++		u64 offset;
++
++		se = get_seg_entry(sbi, GET_SEGNO(sbi, blkaddr));
++		offset = OFFSET_IN_SEG(sbi, blkaddr);
++		se->valid_blocks--;
++		f2fs_clear_bit(offset, (char *)se->cur_valid_map);
++		se->dirty = 1;
++		f2fs_clear_sit_bitmap(sbi, blkaddr);
++	}
++}
++
++static inline void release_nat_entry(struct f2fs_sb_info *sbi, u32 nid)
++{
++	nullify_nat_entry(sbi, nid);
++	F2FS_FSCK(sbi)->chk.valid_nat_entry_cnt--;
++}
++
++static void fsck_disconnect_file_dnode(struct f2fs_sb_info *sbi,
++			struct f2fs_inode *inode, nid_t nid, bool dealloc)
  {
- 	return get_sb(segment_count_main);
+-	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
+ 	struct f2fs_node *node;
+ 	struct node_info ni;
+ 	u32 addr;
+@@ -2890,27 +2946,29 @@ static void fsck_failed_reconnect_file_dnode(struct f2fs_sb_info *sbi,
+ 	err = dev_read_block(node, ni.blk_addr);
+ 	ASSERT(err >= 0);
+ 
+-	fsck->chk.valid_node_cnt--;
+-	fsck->chk.valid_blk_cnt--;
+-	f2fs_clear_main_bitmap(sbi, ni.blk_addr);
++	release_node_cnt(sbi, dealloc);
++	release_block_cnt(sbi, dealloc);
++	release_block(sbi, ni.blk_addr, dealloc);
+ 
+ 	for (i = 0; i < ADDRS_PER_BLOCK(inode); i++) {
+ 		addr = le32_to_cpu(node->dn.addr[i]);
+ 		if (!addr)
+ 			continue;
+-		fsck->chk.valid_blk_cnt--;
++		release_block_cnt(sbi, dealloc);
+ 		if (addr == NEW_ADDR || addr == COMPRESS_ADDR)
+ 			continue;
+-		f2fs_clear_main_bitmap(sbi, addr);
++		release_block(sbi, addr, dealloc);
+ 	}
+ 
++	if (dealloc)
++		release_nat_entry(sbi, nid);
++
+ 	free(node);
+ }
+ 
+-static void fsck_failed_reconnect_file_idnode(struct f2fs_sb_info *sbi,
+-					struct f2fs_inode *inode, nid_t nid)
++static void fsck_disconnect_file_idnode(struct f2fs_sb_info *sbi,
++			struct f2fs_inode *inode, nid_t nid, bool dealloc)
+ {
+-	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
+ 	struct f2fs_node *node;
+ 	struct node_info ni;
+ 	nid_t tmp;
+@@ -2923,24 +2981,26 @@ static void fsck_failed_reconnect_file_idnode(struct f2fs_sb_info *sbi,
+ 	err = dev_read_block(node, ni.blk_addr);
+ 	ASSERT(err >= 0);
+ 
+-	fsck->chk.valid_node_cnt--;
+-	fsck->chk.valid_blk_cnt--;
+-	f2fs_clear_main_bitmap(sbi, ni.blk_addr);
++	release_node_cnt(sbi, dealloc);
++	release_block_cnt(sbi, dealloc);
++	release_block(sbi, ni.blk_addr, dealloc);
+ 
+ 	for (i = 0; i < NIDS_PER_BLOCK; i++) {
+ 		tmp = le32_to_cpu(node->in.nid[i]);
+ 		if (!tmp)
+ 			continue;
+-		fsck_failed_reconnect_file_dnode(sbi, inode, tmp);
++		fsck_disconnect_file_dnode(sbi, inode, tmp, dealloc);
+ 	}
+ 
++	if (dealloc)
++		release_nat_entry(sbi, nid);
++
+ 	free(node);
+ }
+ 
+-static void fsck_failed_reconnect_file_didnode(struct f2fs_sb_info *sbi,
+-					struct f2fs_inode *inode, nid_t nid)
++static void fsck_disconnect_file_didnode(struct f2fs_sb_info *sbi,
++			struct f2fs_inode *inode, nid_t nid, bool dealloc)
+ {
+-	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
+ 	struct f2fs_node *node;
+ 	struct node_info ni;
+ 	nid_t tmp;
+@@ -2953,28 +3013,26 @@ static void fsck_failed_reconnect_file_didnode(struct f2fs_sb_info *sbi,
+ 	err = dev_read_block(node, ni.blk_addr);
+ 	ASSERT(err >= 0);
+ 
+-	fsck->chk.valid_node_cnt--;
+-	fsck->chk.valid_blk_cnt--;
+-	f2fs_clear_main_bitmap(sbi, ni.blk_addr);
++	release_node_cnt(sbi, dealloc);
++	release_block_cnt(sbi, dealloc);
++	release_block(sbi, ni.blk_addr, dealloc);
+ 
+ 	for (i = 0; i < NIDS_PER_BLOCK; i++) {
+ 		tmp = le32_to_cpu(node->in.nid[i]);
+ 		if (!tmp)
+ 			continue;
+-		fsck_failed_reconnect_file_idnode(sbi, inode, tmp);
++		fsck_disconnect_file_idnode(sbi, inode, tmp, dealloc);
+ 	}
+ 
++	if (dealloc)
++		release_nat_entry(sbi, nid);
++
+ 	free(node);
+ }
+ 
+-/*
+- * Counters and main_area_bitmap are already changed during checking
+- * inode block, so clear them. There is no need to clear new blocks
+- * allocted to lost+found.
+- */
+-static void fsck_failed_reconnect_file(struct f2fs_sb_info *sbi, nid_t ino)
++static void fsck_disconnect_file(struct f2fs_sb_info *sbi, nid_t ino,
++			bool dealloc)
+ {
+-	struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
+ 	struct f2fs_node *node;
+ 	struct node_info ni;
+ 	nid_t nid;
+@@ -2988,18 +3046,18 @@ static void fsck_failed_reconnect_file(struct f2fs_sb_info *sbi, nid_t ino)
+ 	ASSERT(err >= 0);
+ 
+ 	/* clear inode counters */
+-	fsck->chk.valid_inode_cnt--;
+-	fsck->chk.valid_node_cnt--;
+-	fsck->chk.valid_blk_cnt--;
+-	f2fs_clear_main_bitmap(sbi, ni.blk_addr);
++	release_inode_cnt(sbi, dealloc);
++	release_node_cnt(sbi, dealloc);
++	release_block_cnt(sbi, dealloc);
++	release_block(sbi, ni.blk_addr, dealloc);
+ 
+ 	/* clear xnid counters */
+ 	if (node->i.i_xattr_nid) {
+ 		nid = le32_to_cpu(node->i.i_xattr_nid);
+-		fsck->chk.valid_node_cnt--;
+-		fsck->chk.valid_blk_cnt--;
++		release_node_cnt(sbi, dealloc);
++		release_block_cnt(sbi, dealloc);
+ 		get_node_info(sbi, nid, &ni);
+-		f2fs_clear_main_bitmap(sbi, ni.blk_addr);
++		release_block(sbi, ni.blk_addr, dealloc);
+ 	}
+ 
+ 	/* clear data counters */
+@@ -3009,10 +3067,10 @@ static void fsck_failed_reconnect_file(struct f2fs_sb_info *sbi, nid_t ino)
+ 			block_t addr = le32_to_cpu(node->i.i_addr[ofs + i]);
+ 			if (!addr)
+ 				continue;
+-			fsck->chk.valid_blk_cnt--;
++			release_block_cnt(sbi, dealloc);
+ 			if (addr == NEW_ADDR || addr == COMPRESS_ADDR)
+ 				continue;
+-			f2fs_clear_main_bitmap(sbi, addr);
++			release_block(sbi, addr, dealloc);
+ 		}
+ 	}
+ 
+@@ -3024,18 +3082,24 @@ static void fsck_failed_reconnect_file(struct f2fs_sb_info *sbi, nid_t ino)
+ 		switch (i) {
+ 		case 0: /* direct node */
+ 		case 1:
+-			fsck_failed_reconnect_file_dnode(sbi, &node->i, nid);
++			fsck_disconnect_file_dnode(sbi, &node->i, nid,
++					dealloc);
+ 			break;
+ 		case 2: /* indirect node */
+ 		case 3:
+-			fsck_failed_reconnect_file_idnode(sbi, &node->i, nid);
++			fsck_disconnect_file_idnode(sbi, &node->i, nid,
++					dealloc);
+ 			break;
+ 		case 4: /* double indirect node */
+-			fsck_failed_reconnect_file_didnode(sbi, &node->i, nid);
++			fsck_disconnect_file_didnode(sbi, &node->i, nid,
++					dealloc);
+ 			break;
+ 		}
+ 	}
+ 
++	if (dealloc)
++		release_nat_entry(sbi, ino);
++
+ 	free(node);
+ }
+ 
+@@ -3121,7 +3185,7 @@ static int fsck_reconnect_file(struct f2fs_sb_info *sbi)
+ 			if (fsck_do_reconnect_file(sbi, lpf_node, node)) {
+ 				DBG(1, "Failed to reconnect inode [0x%x]\n",
+ 				    nid);
+-				fsck_failed_reconnect_file(sbi, nid);
++				fsck_disconnect_file(sbi, nid, false);
+ 				continue;
+ 			}
+ 
+diff --git a/fsck/segment.c b/fsck/segment.c
+index 3a9500f..4e326c4 100644
+--- a/fsck/segment.c
++++ b/fsck/segment.c
+@@ -37,7 +37,7 @@ int reserve_new_block(struct f2fs_sb_info *sbi, block_t *to,
+ 				return -ENOSPC;
+ 			}
+ 			if (is_node && fsck->chk.valid_node_cnt >=
+-					sbi->total_valid_node_count) {
++					sbi->total_node_count) {
+ 				ERR_MSG("Not enough space for node block\n");
+ 				return -ENOSPC;
+ 			}
+@@ -76,7 +76,7 @@ int reserve_new_block(struct f2fs_sb_info *sbi, block_t *to,
+ 
+ 	se = get_seg_entry(sbi, GET_SEGNO(sbi, blkaddr));
+ 	offset = OFFSET_IN_SEG(sbi, blkaddr);
+-	se->type = type;
++	se->type = se->orig_type = type;
+ 	if (se->valid_blocks == 0)
+ 		SM_I(sbi)->free_segments--;
+ 	se->valid_blocks++;
+@@ -101,6 +101,7 @@ int reserve_new_block(struct f2fs_sb_info *sbi, block_t *to,
+ 		if (c.func == FSCK) {
+ 			fsck->chk.valid_blk_cnt++;
+ 			if (is_node) {
++				fsck->chk.valid_nat_entry_cnt++;
+ 				fsck->chk.valid_node_cnt++;
+ 				if (is_inode)
+ 					fsck->chk.valid_inode_cnt++;
 -- 
 2.42.0.820.g83a721a137-goog
 
