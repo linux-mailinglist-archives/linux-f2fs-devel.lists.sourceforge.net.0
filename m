@@ -2,100 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5339A7E4371
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Nov 2023 16:30:21 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 962437E4915
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Nov 2023 20:20:05 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r0O1o-00066C-UD;
-	Tue, 07 Nov 2023 15:30:08 +0000
+	id 1r0RcC-0004Pb-PD;
+	Tue, 07 Nov 2023 19:19:56 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1r0O1k-000666-GZ
+ (envelope-from <lkp@intel.com>) id 1r0RcA-0004PS-KR
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 07 Nov 2023 15:30:04 +0000
+ Tue, 07 Nov 2023 19:19:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- Subject:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=N3NfUK9vTca0Yu7sRR+7zkU4QC3cBvby2mUMCIq0JIc=; b=lRBafY4AN83yxYx4ss5fnSqieV
- EvQpQDNmMS7Zvvhgm1SxiVoa8aNIT7+USfoAOsKDb3IXkrxO2nh+THk8VHVFcbvrcYjX4jXih+xDu
- 9JVOE2dR6mgvMYfCJJE6d1Lj9E738bgfTlRr+bn2yK0TZDXst3hLPUXRkeiyeXEDSEk4=;
+ bh=VXY5W0+pOCVSXrYAdmCsp6aMx1ynu/+NH/Qvyu98Jso=; b=cQaDBYyKLpKvkkEMHte3VGKUN5
+ vCHxaaiL0I+lLTIBfq0lSeZmA6FVjZ25QcjdvND+Co+Xxy4Sbnt5eLlTTQS4e844TDbqeNQjgEhNA
+ h5uYrJWmJy7H8aHpwlOPdZdWh9tFdv8dxwQBlDwhCpUMqwd+brOPCj8o5jKhMKQVX1qA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:From:
- References:Cc:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=N3NfUK9vTca0Yu7sRR+7zkU4QC3cBvby2mUMCIq0JIc=; b=MlhQhvVBRp4Sj8PvaVpBeg68p8
- PS0JKz4kBehCLEM9JYDxFzoO+DmJXV/vXfb65jY5KxoJB+ZaUHZ9L9HTCXPqrv5dyQynWFecxrYV0
- RuHybzAN9/EM5sNFS2UNAJFKtiNDcc5V7UyiQJ21TB16jZFqC364cl2Z8fDEoj5HA3Ng=;
-Received: from sin.source.kernel.org ([145.40.73.55])
+ bh=VXY5W0+pOCVSXrYAdmCsp6aMx1ynu/+NH/Qvyu98Jso=; b=AlfWzNzpCLLmpVtlNSg0TYZbeU
+ jBoRAy39BKcLqpwr4SAEvWJ7FaIyzATkg4b2S2Bt8MGGfkrq19qgl46dOcNK5GYsp2ttBgsiNDkYW
+ s4WFERZiuJ/MmNZ+OEjhv7/ol1V+glI9LWicfiXN754Fm6viKSOWfpx/W5Y50fpO9V5Q=;
+Received: from mgamail.intel.com ([134.134.136.24])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r0O1j-00AXC6-ON for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 07 Nov 2023 15:30:04 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 27388CE0EB2;
- Tue,  7 Nov 2023 15:29:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 648F4C433C8;
- Tue,  7 Nov 2023 15:29:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699370996;
- bh=cmxamXDMEWUMn8cEgNqWaQdc+pX1ObexCCh/OMwnfHI=;
- h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
- b=b4FN91eqriAaFztaTy2f+42mALgF03S0uKEpBnmgUhocuaniZd6h7Y8UPj3uEMr0q
- 0OPCW/creEavn5kKuhQSbll4vxj25ID2Docy0fwdZsJsHQFUFFhUsgH6ug7XRdqt3h
- YNi9CPucW3PUjALzU/Zv328qAy32nRVtX0KbQu13wCTY1CcukMGx0x9W7L9YWcc2hr
- FGu1cFpqh20d2escaYfKmj2KDmj4aVQ2Fu+FQGpgWffFQopIsTnTYeJySCIpXibp3q
- Hfosa/XQ5yjnau/o+Aw82wsAVV+YcsnI/6R1UUxNmFYWGb6UIH8JkF7z/VfE/fRwkK
- ULfd7rEmE7s0Q==
-Message-ID: <e2167506-2b0a-a0f5-c0e9-0e8b6139c69e@kernel.org>
-Date: Tue, 7 Nov 2023 23:29:53 +0800
+ id 1r0Rc6-00BcP0-SS for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 07 Nov 2023 19:19:54 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1699384790; x=1730920790;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=Ey6mMZSS50+XcIbiBxZUVaica+lG7Ql2zmbRMzN42mo=;
+ b=jnLgjVsfCt4GLWsxiUKGWAGkbuP6PrZOm5gbDgpLzKZFh4JeASFKWMew
+ iUv+akFimoDMYPT1WClU1aGtdjCe998ps7BuyP26RySIibxYSEhbCLBOW
+ EQB5+FstuMLZfsIh1x7azaKooYFMKQAP+5yWnsP4brH0zVRT0ay37DPxz
+ atvlc9GfIQTNhI1pu1QVQsm+0FWz1BjotYUBO5An357Jud8TJUuBOjpBr
+ 1BD65dUfW/9gU730u9FN7pSXRfbKoBOk5QdQ9H8p6R/+mzbu3vNs6ux9I
+ FrP9SROrdGnlXMklHkOKKEo26aJZj8/KnXAIY2f3epRPOwxO19voGbtKS g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10887"; a="392469679"
+X-IronPort-AV: E=Sophos;i="6.03,284,1694761200"; d="scan'208";a="392469679"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 07 Nov 2023 11:19:44 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10887"; a="906519722"
+X-IronPort-AV: E=Sophos;i="6.03,284,1694761200"; d="scan'208";a="906519722"
+Received: from lkp-server01.sh.intel.com (HELO 17d9e85e5079) ([10.239.97.150])
+ by fmsmga001.fm.intel.com with ESMTP; 07 Nov 2023 11:19:42 -0800
+Received: from kbuild by 17d9e85e5079 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1r0Rbw-0007LU-1v;
+ Tue, 07 Nov 2023 19:19:40 +0000
+Date: Wed, 8 Nov 2023 03:18:36 +0800
+From: kernel test robot <lkp@intel.com>
+To: dslab@lzu.edu.cn, jaegeuk@kernel.org, chao@kernel.org
+Message-ID: <202311080247.0hkA0mLH-lkp@intel.com>
+References: <20231106121418.3675-1-dslab@lzu.edu.cn>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Content-Language: en-US
-To: Sergey Shtylyov <s.shtylyov@omp.ru>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
-References: <20231025202019.5228-1-s.shtylyov@omp.ru>
-From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20231025202019.5228-1-s.shtylyov@omp.ru>
-X-Spam-Score: -4.9 (----)
+Content-Disposition: inline
+In-Reply-To: <20231106121418.3675-1-dslab@lzu.edu.cn>
+X-Spam-Score: -0.9 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Sergey, Thanks for the patch. On 2023/10/26 4:20, Sergey
- Shtylyov wrote: > In check_swap_activate(), if the *while* loop exits early
- (0- or 1-page > long swap file), an overflow happens while calculating the
- value of the > span pa [...] 
- Content analysis details:   (-4.9 points, 6.0 required)
+ Content preview:  Hi, kernel test robot noticed the following build errors:
+ [auto build test ERROR on jaegeuk-f2fs/dev-test] [also build test ERROR on
+ jaegeuk-f2fs/dev linus/master v6.6 next-20231107] [If your patch is applied
+ to the wrong git tree, kindly drop us a note. And [...] 
+ Content analysis details:   (-0.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.73.55 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [134.134.136.24 listed in wl.mailspike.net]
+ -0.7 RCVD_IN_DNSWL_LOW      RBL: Sender listed at https://www.dnswl.org/,
+ low trust [134.134.136.24 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -2.3 NICE_REPLY_A           Looks like a legit reply (A)
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1r0O1j-00AXC6-ON
-Subject: Re: [f2fs-dev] [PATCH] f2fs: data: fix possible overflow in
- check_swap_activate()
+X-Headers-End: 1r0Rc6-00BcP0-SS
+Subject: Re: [f2fs-dev] [PATCH] f2fs: the name of a struct is wrong in a
+ comment.
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,59 +115,63 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org
+Cc: Yang Hubin <yanghb2019@lzu.edu.cn>, linux-kernel@vger.kernel.org,
+ llvm@lists.linux.dev, linux-f2fs-devel@lists.sourceforge.net,
+ oe-kbuild-all@lists.linux.dev
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hi Sergey,
+Hi,
 
-Thanks for the patch.
+kernel test robot noticed the following build errors:
 
-On 2023/10/26 4:20, Sergey Shtylyov wrote:
-> In check_swap_activate(), if the *while* loop exits early (0- or 1-page
-> long swap file), an overflow happens while calculating the value of the
-> span parameter as the lowest_pblock variable ends up being greater than
-> the highest_pblock variable. Let's set *span to 0 in this case...
+[auto build test ERROR on jaegeuk-f2fs/dev-test]
+[also build test ERROR on jaegeuk-f2fs/dev linus/master v6.6 next-20231107]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-What do you think of returning -EINVAL for such case? I assume this is a
-corner case.
+url:    https://github.com/intel-lab-lkp/linux/commits/dslab-lzu-edu-cn/f2fs-the-name-of-a-struct-is-wrong-in-a-comment/20231106-201822
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
+patch link:    https://lore.kernel.org/r/20231106121418.3675-1-dslab%40lzu.edu.cn
+patch subject: [PATCH] f2fs: the name of a struct is wrong in a comment.
+config: x86_64-rhel-8.3-rust (https://download.01.org/0day-ci/archive/20231108/202311080247.0hkA0mLH-lkp@intel.com/config)
+compiler: clang version 16.0.4 (https://github.com/llvm/llvm-project.git ae42196bc493ffe877a7e3dff8be32035dea4d07)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231108/202311080247.0hkA0mLH-lkp@intel.com/reproduce)
 
-> 
-> Found by Linux Verification Center (linuxtesting.org) with the SVACE static
-> analysis tool.
-> 
-> Signed-off-by: Sergey Shtylyov <s.shtylyov@omp.ru>
-> ---
-> This patch is against the 'master' branch of Jaegeuk Kim's F2FS repo...
-> 
->   fs/f2fs/data.c | 5 ++++-
->   1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 916e317ac925..342cb0d5056d 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -4047,7 +4047,10 @@ static int check_swap_activate(struct swap_info_struct *sis,
->   		cur_lblock += nr_pblocks;
->   	}
->   	ret = nr_extents;
-> -	*span = 1 + highest_pblock - lowest_pblock;
-> +	if (lowest_pblock <= highest_pblock)
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202311080247.0hkA0mLH-lkp@intel.com/
 
-if (unlikely(higest_pblock < lowest_pblock))
-	return -EINVAL;
+All errors (new ones prefixed by >>):
 
-*span = 1 + highest_pblock - lowest_pblock;
+   In file included from fs/f2fs/dir.c:10:
+>> include/linux/f2fs_fs.h:501:16: error: expected ']'
+           __u8 reserved[NAT_JOURNAL_RESERVED];
+                         ^
+   include/linux/f2fs_fs.h:474:38: note: expanded from macro 'NAT_JOURNAL_RESERVED'
+                                   sizeof(struct nat_journal_entry))SIT_JOURNA
+                                                                    ^
+   include/linux/f2fs_fs.h:501:15: note: to match this '['
+           __u8 reserved[NAT_JOURNAL_RESERVED];
+                        ^
+   1 error generated.
 
-Thanks,
 
-> +		*span = 1 + highest_pblock - lowest_pblock;
-> +	else
-> +		*span = 0;
->   	if (cur_lblock == 0)
->   		cur_lblock = 1;	/* force Empty message */
->   	sis->max = cur_lblock;
+vim +501 include/linux/f2fs_fs.h
+
+dd31866b0d55c9 Jaegeuk Kim 2012-11-02  498  
+dd31866b0d55c9 Jaegeuk Kim 2012-11-02  499  struct nat_journal {
+dd31866b0d55c9 Jaegeuk Kim 2012-11-02  500  	struct nat_journal_entry entries[NAT_JOURNAL_ENTRIES];
+dd31866b0d55c9 Jaegeuk Kim 2012-11-02 @501  	__u8 reserved[NAT_JOURNAL_RESERVED];
+dd31866b0d55c9 Jaegeuk Kim 2012-11-02  502  } __packed;
+dd31866b0d55c9 Jaegeuk Kim 2012-11-02  503  
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
 
 _______________________________________________
