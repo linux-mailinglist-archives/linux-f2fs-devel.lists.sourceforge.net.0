@@ -2,105 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 602BB7E10C7
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat,  4 Nov 2023 20:39:36 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C767E7E3498
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Nov 2023 05:45:52 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1qzMUT-0001WM-ON;
-	Sat, 04 Nov 2023 19:39:29 +0000
+	id 1r0Dy8-0004vY-PX;
+	Tue, 07 Nov 2023 04:45:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pr-tracker-bot@kernel.org>) id 1qzMUS-0001WB-45
+ (envelope-from <ebiggers@kernel.org>) id 1r0Dy7-0004vS-FV
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 04 Nov 2023 19:39:28 +0000
+ Tue, 07 Nov 2023 04:45:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
- Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ovSF76QGOgmW0kwPmtsUJ4CCPXsF0BhS/UvX1ibEyWo=; b=Hp9GZXeXc3Qe5oOyjNn4PIapu4
- k31hBdrPNY57sLtsx5i3ywg94HxXCUFcD0/z35VfL2OtvEApMDJTYNz25lutlC0cMNTbi2RQOUzVf
- wZ84LsDJe+sqX0gXWRncV4Tgjy+JKxzmZ56tHgz7s47h7iNritYkIohakpezloo12hKU=;
+ bh=nnrDWNHgsplSq1p2fUKGXOHI5nMlRkX7df0078s3prk=; b=EcC3mcd85+hSO/HZRiTZ2ObTD6
+ LAnD5+j0hN0kmC3aZ1fEndQ7m8Os2jIqFYEPuxCBHDpQ/KlzgEP5BNwKK7QNTFN1GzaUEcxkN1hv4
+ 29TTPveFl8UoWt2hXsRqZw/uLC8TxPXGGaOYtr8Wp8BmMv+6g5emvnwz5xANWq1407Fw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ovSF76QGOgmW0kwPmtsUJ4CCPXsF0BhS/UvX1ibEyWo=; b=dMTc00zulfYJZt7sJBibn+qjOn
- G6o463VV+ZLiG8Mq4/xMPAT9fuNdmKqxp3FRH/tUDZK9oWpBm9D615Ln4cMiYS3rUdcvC8jckF89D
- w0hRNS5YZUi8QIKdfz/fHLvLynoydt/gTb1qqDkVGnoQEwjPNJgfwwchbSISolnCYpFg=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:To:From:
+ Sender:Reply-To:Cc:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=nnrDWNHgsplSq1p2fUKGXOHI5nMlRkX7df0078s3prk=; b=K
+ RBBJKV9KXtUk4bx2MFbTHC+MLc9j6br8bTFJrf7eha7iK0Y6fqUd+Cdbs7WG3DHIzwQXTn7qqDnss
+ qvW/O2LLM+qmjQehH4xy5/0Phr+nGd12pvCgIsoWD0FGOE6mBCN6OqoYHgsTidoXd/Z1oSS6n7ocL
+ RM9aFdDhCDQZ8iTg=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1qzMUQ-0005eP-2I for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 04 Nov 2023 19:39:28 +0000
+ id 1r0Dy5-0000U4-A8 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 07 Nov 2023 04:45:37 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 047CD60BBA;
- Sat,  4 Nov 2023 19:39:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 83D88C433CB;
- Sat,  4 Nov 2023 19:39:16 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 16DD1CE0E05
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  7 Nov 2023 04:45:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 47069C433C8
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  7 Nov 2023 04:45:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699126756;
- bh=6npM8jiNedjVjYxnDVV6oGnIIsmn8/OnctvkCFveI8o=;
- h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
- b=Up8wWSIxy8iBogY1IkuQcDkoZ+9JNrMy/+JCjkwAdxklswhfKjiGtWHOgAgcPi6QX
- SFgGfCJy6/5vdZUjAfFpeJgkcz6Qz+1sLPCEZnpBbzrUunoYYui2ABCZ8c8apG79Wp
- 703wWK5nacDLfbtaHvjDPEuyio1FCCmVhTqQ1AOAJY41JiHsLqGJsln4pLFAFhpZZi
- 0KNEr/xleV4Xr7NVrUg1w4UIpdDHgwJ3tLMgQYDUpcYyutFwaiKUP377ZpTSBfZRxa
- axBa1VboJNWc41BEeMB6qrx84hkDTrcgarL1VNsS7vAFuk+m75SMHORkRUrrerjASs
- x4UuCN1TyBxhg==
-Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
- 6BE68EAB08A; Sat,  4 Nov 2023 19:39:16 +0000 (UTC)
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <ZUaVqCoMnLi7bV6P@google.com>
-References: <ZUaVqCoMnLi7bV6P@google.com>
-X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
-X-PR-Tracked-Message-Id: <ZUaVqCoMnLi7bV6P@google.com>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- tags/f2fs-for-6.7-rc1
-X-PR-Tracked-Commit-Id: 1e7bef5f90ed69d903768d78369f251b77e5d2f5
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: aea6bf908d730b01bd264a8821159db9463c111c
-Message-Id: <169912675643.21555.2499024044009023704.pr-tracker-bot@kernel.org>
-Date: Sat, 04 Nov 2023 19:39:16 +0000
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-X-Spam-Score: -5.8 (-----)
+ s=k20201202; t=1699332324;
+ bh=OzxF+wKTlkTeokV+iQfnTi1bpG5IL/pboG/VvoglCgY=;
+ h=From:To:Subject:Date:From;
+ b=HxKZpsAVnFyy7fPB7vGRjefGYpP/arMaGR59dCefDB8DakHnfk/Q2Oi9y1dcniD2o
+ K7BR37dcBXHYJ19c7cv2hKGQQ96fGrOvWsa8g9e/YgC+1dPr1v3Kv8hyuzIJeMujgU
+ H0lseEM4kD7o4rbt/qiThtyQ8hVB9/RmDeeY458Njn634lfGVJFev0OC8rGnh5XGGE
+ nCitOs9b8BPK4Y9TufxX4RbvUe21aFMOkzDqq4qgYyKj8vuImQOEfgFeW6rEmyi9gM
+ Y8CiTWTm9IBfpYsTz/RnTLTy8FHRAl7pZ8fr+Zc6bJ/6cRSYAGhUczBpFyZPJGXvSW
+ rvdSy7HBmKMRg==
+From: Eric Biggers <ebiggers@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Mon,  6 Nov 2023 20:44:34 -0800
+Message-ID: <20231107044434.157292-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.42.1
+MIME-Version: 1.0
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The pull request you sent on Sat, 4 Nov 2023 12:04:08 -0700:
- > git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- tags/f2fs-for-6.7-rc1 has been merged into torvalds/linux.git:
- https://git.kernel.org/torvalds/c/aea6bf908d730b01bd264a8821159db9463c111c
- Content analysis details:   (-5.8 points, 6.0 required)
+ Content preview: From: Eric Biggers <ebiggers@google.com> When setting an
+ xattr, 
+ explicitly null-terminate the xattr list. This eliminates the fragile
+ assumption
+ that the unused xattr space is always zeroed. Signed-off-by: Eric Biggers
+ <ebiggers@google.com> --- fs/f2fs/xattr.c | 6 ++++++ 1 file changed,
+ 6 insertions(+)
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1qzMUQ-0005eP-2I
-Subject: Re: [f2fs-dev] [GIT PULL] f2fs update for 6.7
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1r0Dy5-0000U4-A8
+Subject: [f2fs-dev] [PATCH] f2fs: explicitly null-terminate the xattr list
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,26 +105,57 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The pull request you sent on Sat, 4 Nov 2023 12:04:08 -0700:
+From: Eric Biggers <ebiggers@google.com>
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git tags/f2fs-for-6.7-rc1
+When setting an xattr, explicitly null-terminate the xattr list.  This
+eliminates the fragile assumption that the unused xattr space is always
+zeroed.
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/aea6bf908d730b01bd264a8821159db9463c111c
+Signed-off-by: Eric Biggers <ebiggers@google.com>
+---
+ fs/f2fs/xattr.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-Thank you!
+diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+index 47e88b4d4e7d0..a8fc2cac68799 100644
+--- a/fs/f2fs/xattr.c
++++ b/fs/f2fs/xattr.c
+@@ -747,20 +747,26 @@ static int __f2fs_setxattr(struct inode *inode, int index,
+ 		 * Before we come here, old entry is removed.
+ 		 * We just write new entry.
+ 		 */
+ 		last->e_name_index = index;
+ 		last->e_name_len = len;
+ 		memcpy(last->e_name, name, len);
+ 		pval = last->e_name + len;
+ 		memcpy(pval, value, size);
+ 		last->e_value_size = cpu_to_le16(size);
+ 		new_hsize += newsize;
++		/*
++		 * Explicitly add the null terminator.  The unused xattr space
++		 * is supposed to always be zeroed, which would make this
++		 * unnecessary, but don't depend on that.
++		 */
++		*(u32 *)((u8 *)last + newsize) = 0;
+ 	}
+ 
+ 	error = write_all_xattrs(inode, new_hsize, base_addr, ipage);
+ 	if (error)
+ 		goto exit;
+ 
+ 	if (index == F2FS_XATTR_INDEX_ENCRYPTION &&
+ 			!strcmp(name, F2FS_XATTR_NAME_ENCRYPTION_CONTEXT))
+ 		f2fs_set_encrypted_inode(inode);
+ 	if (S_ISDIR(inode->i_mode))
 
+base-commit: be3ca57cfb777ad820c6659d52e60bbdd36bf5ff
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
+2.42.1
+
 
 
 _______________________________________________
