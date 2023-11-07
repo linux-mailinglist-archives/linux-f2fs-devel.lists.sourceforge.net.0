@@ -2,84 +2,84 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A73D97E422D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Nov 2023 15:57:01 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C3037E433A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue,  7 Nov 2023 16:18:08 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r0NVb-0005IO-3a;
-	Tue, 07 Nov 2023 14:56:49 +0000
+	id 1r0Npx-0005wZ-SX;
+	Tue, 07 Nov 2023 15:17:53 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1r0NVW-0005IH-4S
+ (envelope-from <chao@kernel.org>) id 1r0Npw-0005wT-7F
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 07 Nov 2023 14:56:45 +0000
+ Tue, 07 Nov 2023 15:17:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pN2J/aCPDF85ssXpVjhGPkRsWzlBQzfKjVSJJQCLEQw=; b=VnBQF0DkXRxPhVWuN35TJb73Cg
- nl8jusIfEhSotIWHnCJWEPHwjuPdhfx9RhuM+bFcx9nSmmIz4MojE50uWpIRwqq84p2c3sPpj8nLF
- Qx3TNnNrzt4es03e0g7AxhzE00hoPZCoX1zYtplTw5vwzKYLS28Za4WFL27oXGQV4Tlw=;
+ bh=Iwivhnlv0jOPHkBGHXEGyqDw1bqcXWL1rsgXjzVe2XM=; b=DB62AVH82uhP+dPw9cpEDAzBZ2
+ 9CnFzwedALpzZf9BkMxnvQihkYqQwYXk+4mUhfiuO9SD/YTfWrDY0CfFHJsBzMU0216l7KCIvPBxX
+ sDD2uRFgrNm2LUjDaIlCWG5b+6DO5qMLEHk48tXmbXw+CugTOr+o48QdH6xOXW7JoBmA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pN2J/aCPDF85ssXpVjhGPkRsWzlBQzfKjVSJJQCLEQw=; b=S94tBBfGpSzBfQI5QiNx89hnY3
- YpVKydaBwlj0AdshXFT0x7TSdTVzYIdA2afMuUvSVeCg/WVysn4RF4xxnoXXaa5AEZFWaLbMoqDlm
- SPzoZZld6ck+YA4Yi5J147bLxkrAUAu/gOy2mvqEj7NzUEulCmvGPe/2/j7hCJN6XHaM=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ bh=Iwivhnlv0jOPHkBGHXEGyqDw1bqcXWL1rsgXjzVe2XM=; b=HCdYRVPmQVmYgaOlSSL2nDlyD2
+ lmUNCcG8RYRFCEjn/Tog25x2KbuqSd8RHVdCZU0KGV4l+QoYai3+QxHXlIFnhv3TPUBFir8bKYFIO
+ wFX6HhSLGDhwxIoxGIl+W19wSaVaBGQpHiIbT55XB+5/qnsbtUciUZZCQRYv6jpRqW1c=;
+Received: from sin.source.kernel.org ([145.40.73.55])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r0NVU-00ANC9-2J for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 07 Nov 2023 14:56:44 +0000
+ id 1r0Npv-00ATR2-Df for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 07 Nov 2023 15:17:52 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A3EE76122E;
- Tue,  7 Nov 2023 14:56:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F4F0C433C7;
- Tue,  7 Nov 2023 14:56:35 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 336DECE0E92
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue,  7 Nov 2023 15:17:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA4AFC433C7;
+ Tue,  7 Nov 2023 15:17:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699368998;
- bh=l1ZYfffC8O+aReYdWjMaCT0Mwo0ccB4D+3F/B6MBj3c=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=M7YFzhYjMZlrzGd8ah5eKsEd7JrZ2FMPduPsfxDC1cHTGkX8V+fF/2pUn2lYZWc+D
- gJIy/XHWSx30Yw6jmVrUspsPkck2iIh3NSQXMb2gA8lYXeYD+BL9KHkuZqmMlU8YBJ
- GrI9bpnkW6dl3oSHEmT3zH0RkL9s8lSD27Zk2Ua+JFeSV/dQb6PVCdx6p190mTIftx
- eJvCCJ4TAs8eSWuwerOGQvadl3X7zHtAqRZorL9jjP2BXfM4ZJcaiRc03D/JY+JNAK
- 6P749INlnfnaD/I4u5nDnwqXfTsDWXChDLOv5hCMrOjbQFHJ+X95z5UDzX81q2pSzo
- on7nFlLK3l4SQ==
-Message-ID: <86cf3a62-975c-92cf-672d-5103416592d9@kernel.org>
-Date: Tue, 7 Nov 2023 22:56:33 +0800
+ s=k20201202; t=1699370258;
+ bh=UxL35KjJQ/twQVAUT2tkNwtkMZEf2lQpswfQ1wsLrgg=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=m5MIQM1O3IibI6393f+ZQSXm52n2DNDN030z13SkAtyHDE92rBR+SXURgv1pXEs8u
+ Wjnz/HvlMsGh2+al/Vwi/OFP68eRK7r9AzPAca2HTt9zlOo7Rz5TRXaUPeY7OPTOR0
+ LcRzU9LJEErkqr36S7YG3S+K4c1SyCXAM8BTm2Q+D6v3azO1ih2EwlJnRbx6X38VhT
+ sZKEaICHnd1NSqv6aKzvX+Df87F1nSb0ImCwbZSJqpnax7EsZQGyPdiLMis4XUZr9I
+ 86N426aTaFYNpEBIKActrZxEaoYEymsS8Ui364eh6vYRKnN0AEf/mkpHW+bZ0sP/AK
+ SPcl3T68j5WXQ==
+Message-ID: <182aa8bc-6825-57ee-f5f7-d15611354747@kernel.org>
+Date: Tue, 7 Nov 2023 23:17:35 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
 Content-Language: en-US
-To: dslab@lzu.edu.cn, jaegeuk@kernel.org
-References: <20231104074501.13998-1-dslab@lzu.edu.cn>
+To: Eric Biggers <ebiggers@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+References: <20231107044434.157292-1-ebiggers@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <20231104074501.13998-1-dslab@lzu.edu.cn>
-X-Spam-Score: -7.6 (-------)
+In-Reply-To: <20231107044434.157292-1-ebiggers@kernel.org>
+X-Spam-Score: -4.9 (----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/11/4 15:45,
- dslab@lzu.edu.cn wrote: > From: Yang Hubin
- <yanghb2019@lzu.edu.cn> > > The macro SUMMARY_SIZE represents the size of
- the struct f2fs_summary, > > instead of the size of the struct [...] 
- Content analysis details:   (-7.6 points, 6.0 required)
+ Content preview:  On 2023/11/7 12:44, Eric Biggers wrote: > From: Eric Biggers
+ <ebiggers@google.com> > > When setting an xattr, explicitly null-terminate
+ the xattr list. This > eliminates the fragile assumption that th [...] 
+ Content analysis details:   (-4.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.73.55 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -92,9 +92,9 @@ X-Spam-Report: Spam detection software,
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -2.3 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1r0NVU-00ANC9-2J
-Subject: Re: [f2fs-dev] [PATCH] f2fs: the name of a struct is wrong in a
- comment.
+X-Headers-End: 1r0Npv-00ATR2-Df
+Subject: Re: [f2fs-dev] [PATCH] f2fs: explicitly null-terminate the xattr
+ list
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,21 +106,18 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yang Hubin <yanghb2019@lzu.edu.cn>, Qian Haolai <qianhl2023@lzu.edu.cn>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/11/4 15:45, dslab@lzu.edu.cn wrote:
-> From: Yang Hubin <yanghb2019@lzu.edu.cn>
+On 2023/11/7 12:44, Eric Biggers wrote:
+> From: Eric Biggers <ebiggers@google.com>
 > 
-> The macro SUMMARY_SIZE represents the size of the struct f2fs_summary,
+> When setting an xattr, explicitly null-terminate the xattr list.  This
+> eliminates the fragile assumption that the unused xattr space is always
+> zeroed.
 > 
-> instead of the size of the struct summary.
-> 
-> Signed-off-by: Yang Hubin <yanghb2019@lzu.edu.cn>
-> Signed-off-by: Qian Haolai <qianhl2023@lzu.edu.cn>
+> Signed-off-by: Eric Biggers <ebiggers@google.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 
