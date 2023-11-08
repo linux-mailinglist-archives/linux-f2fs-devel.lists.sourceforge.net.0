@@ -2,106 +2,95 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F7DA7E59A5
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Nov 2023 16:01:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0F377E5C69
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Nov 2023 18:29:41 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r0k3w-0002bR-MW;
-	Wed, 08 Nov 2023 15:01:47 +0000
+	id 1r0mMv-000427-TX;
+	Wed, 08 Nov 2023 17:29:32 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3zaJLZQkbAHIiopaQbbUhQffYT.WeeWbUkiUhSedjUdj.Sec@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1r0k3u-0002bF-8c for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 08 Nov 2023 15:01:44 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <jaegeuk@kernel.org>) id 1r0mMv-000421-0o
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 08 Nov 2023 17:29:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6LqIztK5sqIUqLI07DaATWBMeUGb1bfpP4v378T+XPo=; b=ffhltqFSu8jr8kXlZFQXtv/Zvs
- on+fAtl0XzfDu0biyLGH/jc1IAXjX+BgKFzrHMWRydpow3Bzl3HQdoGh7LYQ6aHkYyHRWnczdVV3t
- mWpAWiAAHgkffd2cU+gemHZRGNqh3+GfkRY4HzIyXHrKz+E8FrwLhWuxe1wNbFFL6vgs=;
+ bh=HJ0iusR/nb11s5+WQdNV6JH/9Rw/JS7cYiIWlXPv0Ys=; b=PZBhCNul2FK0ajKzeZ08FS6JLS
+ A4xU+owVwFMK05wJXP9pUdTwb321EhWsBm6XSo2D3EJfxLB+M9wNuHpchHYAEQu85uMrNp0ZWeON/
+ whzQa/fnbkaUajvdqdpD5Pm7xFBpia8nukkQu4rh7ZNJzHudPRk0115qQ8jkmNreTUns=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=6LqIztK5sqIUqLI07DaATWBMeUGb1bfpP4v378T+XPo=; b=Y
- TRBOfqbPD454Sm7AjOv/vWDOp9VYoCRgKeF0YrwwzTiPVdSD5wR5uWBSDW+bpWlQi2QWIVEMNPLGZ
- FrAnUBAWpa5269pehAx3QoVJP+MUWV7ctmCCefM+yzI+EJPL0KpF8EaDiV/bBPJHVD3q27Q9rTJVC
- VqT49qFLfwoIdrA4=;
-Received: from mail-ot1-f77.google.com ([209.85.210.77])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1r0k3s-0002db-1A for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 08 Nov 2023 15:01:44 +0000
-Received: by mail-ot1-f77.google.com with SMTP id
- 46e09a7af769-6cf61d80fafso9691531a34.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 08 Nov 2023 07:01:44 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699455698; x=1700060498;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=6LqIztK5sqIUqLI07DaATWBMeUGb1bfpP4v378T+XPo=;
- b=J1wQSWV0rCRLorXPUmU1DTitcNZ6SB7KqrxdioFh9qeyiBxHbZQ82FjnvmuY0LlOcF
- Fwvj5N6+YMFi8Qm4rrnXL+RTWPPjMVfxQwYhFga7pxtwA9A8ZkExHkmDBt+SY+3Dv1Wr
- Dgx06ow5HnTd19ppB+eO48WJ+SZafvlivDxIZWY/kXDJA/lw/TYKNNpt64dgljqbfnUR
- 9nv/AnQpyvvXuAGmbpSWbhgrqZL1zb0P+xNSU26ZkCXPSPhtkq14pxyI7omyFwbfzCdE
- rVryqzasEEQwK4Edh8FE8N4v+GImRUrm1Kr0diCobOBo9Nk2LFGNFAhyzCaQRDNQ9ySg
- AHsQ==
-X-Gm-Message-State: AOJu0YwvLdUB1iFPKrbDMd7lPXmaza+OgJOxD5Aj66twPfuU+jbWWVJA
- 49aD/hQ2m0O04B0njGAmKMuR4AsfqrmKYAOqSdCT9esh3wT6
-X-Google-Smtp-Source: AGHT+IEwZUGdPuRRvdDTfVm4G4F3cDzyWKXpEThqnBqQlVhZHwBf5AITtkOsINuLkwH5t9O5gP9WjF91cWvPSmTEAZkC1m21H3mb
+ List-Owner:List-Archive; bh=HJ0iusR/nb11s5+WQdNV6JH/9Rw/JS7cYiIWlXPv0Ys=; b=Q
+ azZkWFwK+0+MwKS7Pjl2UsYcsrrhWqHh2DEqHO1P7lFHIyFD69YoI2LpQ77bl405KmbU9PA78xczB
+ D0gEpzEYbPCMQ6X20laSnvKkLmtDFkPGIh1QlMC18WiHAfsRQkx0/rEuHlCcQTWQczzCvdV1l1zqa
+ IG2Pz3NCd1YURWGA=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1r0mMs-00Gef6-7X for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 08 Nov 2023 17:29:32 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0B7F6616BF;
+ Wed,  8 Nov 2023 17:29:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9BA42C433C7;
+ Wed,  8 Nov 2023 17:29:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1699464563;
+ bh=T/0mKptvvESma/AQB1GrlQxI5LkrrrNNFxmZXf/2u3w=;
+ h=From:To:Cc:Subject:Date:From;
+ b=R4VNL8vD2jsgFwiVczOa56SyeIyuYYP9pqZEKEKy1lGIEFNqlW02NaeXY51uuIFE/
+ ChG0+7My0SnXwVcwqmJDlFuZPdRjevTASIt5qdyi0jBVfdtRRt1PkunmFZjo0LI+81
+ sTS8LGM9EccuIj08wCU65Ohfo6EDBhocxy7DIowTQai4hP2nhZWmjK4Y10VTKCiRRo
+ oJ7QTcR6L4t67QODGD4Wt221tgt3lhoN2QHK7SYOSp4uyEw2SJQU1RpVtYtAtRf3cA
+ TmFbYNMxhm08DcE32EWSacSGRjeTk3G42vih7iHqB9n15UgK2VHjW22lrewqxcAKg6
+ LVc4XltfyuAdw==
+From: Jaegeuk Kim <jaegeuk@kernel.org>
+To: linux-f2fs-devel@lists.sourceforge.net
+Date: Wed,  8 Nov 2023 09:29:22 -0800
+Message-ID: <20231108172922.1325972-1-jaegeuk@kernel.org>
+X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 MIME-Version: 1.0
-X-Received: by 2002:a05:6830:2445:b0:6bf:27b3:3d29 with SMTP id
- x5-20020a056830244500b006bf27b33d29mr602704otr.5.1699455693260; Wed, 08 Nov
- 2023 07:01:33 -0800 (PST)
-Date: Wed, 08 Nov 2023 07:01:33 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000e890bc0609a55cff@google.com>
-From: syzbot <syzbot+31e4659a3fe953aec2f4@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+X-Spam-Score: -5.2 (-----)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 90b0c2b2edd1
- Merge tag 'pinctrl-v6.7-1' of git://git.kerne.. git tree: upstream
- console+strace:
- https://syzkaller.appspot.com/x/log.txt?x=10222eeb680000 kernel config:
- https://syzkaller.a [...] 
- Content analysis details:   (0.6 points, 6.0 required)
+ Content preview:  From: Daeho Jeong <daehojeong@google.com> Make nat journal
+ and nat cache have the same content. Signed-off-by: Daeho Jeong
+ <daehojeong@google.com>
+ Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org> --- fsck/fsck.c | 1 -
+ fsck/fsck.h
+ | 2 -- fsck/mount.c | 54 ++++++++++++++++++++++++++++ [...] 
+ Content analysis details:   (-5.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
- blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: googleapis.com]
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.77 listed in list.dnswl.org]
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.77 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1r0k3s-0002db-1A
-Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_evict_inode (2)
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1r0mMs-00Gef6-7X
+Subject: [f2fs-dev] [PATCH] f2fs-tools: synchronize nat journal with nat
+ cache
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,120 +102,143 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-Hello,
+From: Daeho Jeong <daehojeong@google.com>
 
-syzbot found the following issue on:
+Make nat journal and nat cache have the same content.
 
-HEAD commit:    90b0c2b2edd1 Merge tag 'pinctrl-v6.7-1' of git://git.kerne..
-git tree:       upstream
-console+strace: https://syzkaller.appspot.com/x/log.txt?x=10222eeb680000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=93ac5233c138249e
-dashboard link: https://syzkaller.appspot.com/bug?extid=31e4659a3fe953aec2f4
-compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=13a2847b680000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=1579d0df680000
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/10c213d23300/disk-90b0c2b2.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/0c55e6e441c1/vmlinux-90b0c2b2.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/c7f0436ea052/bzImage-90b0c2b2.xz
-mounted in repro: https://storage.googleapis.com/syzbot-assets/dbf260983b94/mount_0.gz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+31e4659a3fe953aec2f4@syzkaller.appspotmail.com
-
-------------[ cut here ]------------
-kernel BUG at fs/f2fs/inode.c:933!
-invalid opcode: 0000 [#1] PREEMPT SMP KASAN
-CPU: 1 PID: 5054 Comm: syz-executor410 Not tainted 6.6.0-syzkaller-14142-g90b0c2b2edd1 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/09/2023
-RIP: 0010:f2fs_evict_inode+0x1576/0x1590 fs/f2fs/inode.c:933
-Code: fd 31 ff 89 de e8 5a 4f bf fd 40 84 ed 75 29 e8 c0 4c bf fd 4c 8b 74 24 08 e9 c9 eb ff ff e8 b1 4c bf fd 0f 0b e8 aa 4c bf fd <0f> 0b e8 a3 4c bf fd 0f 0b e9 f6 fe ff ff e8 97 4c bf fd e8 72 e7
-RSP: 0018:ffffc900039df918 EFLAGS: 00010293
-RAX: ffffffff83cf9f56 RBX: 0000000000000002 RCX: ffff888014b30000
-RDX: 0000000000000000 RSI: 0000000000000002 RDI: 0000000000000000
-RBP: 0000000000000000 R08: ffffffff83cf984a R09: 1ffff1100ed0061d
-R10: dffffc0000000000 R11: ffffed100ed0061e R12: 1ffff1100ed0058f
-R13: ffff888076802c38 R14: ffff8880768030e8 R15: dffffc0000000000
-FS:  00005555556ae3c0(0000) GS:ffff8880b9900000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007ffdbe23ce18 CR3: 00000000727e8000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- evict+0x2a4/0x620 fs/inode.c:664
- dispose_list fs/inode.c:697 [inline]
- evict_inodes+0x5f8/0x690 fs/inode.c:747
- generic_shutdown_super+0x9d/0x2c0 fs/super.c:675
- kill_block_super+0x44/0x90 fs/super.c:1667
- kill_f2fs_super+0x303/0x3b0 fs/f2fs/super.c:4894
- deactivate_locked_super+0xc1/0x130 fs/super.c:484
- cleanup_mnt+0x426/0x4c0 fs/namespace.c:1256
- task_work_run+0x24a/0x300 kernel/task_work.c:180
- ptrace_notify+0x2cd/0x380 kernel/signal.c:2399
- ptrace_report_syscall include/linux/ptrace.h:411 [inline]
- ptrace_report_syscall_exit include/linux/ptrace.h:473 [inline]
- syscall_exit_work kernel/entry/common.c:251 [inline]
- syscall_exit_to_user_mode_prepare kernel/entry/common.c:278 [inline]
- __syscall_exit_to_user_mode_work kernel/entry/common.c:283 [inline]
- syscall_exit_to_user_mode+0x15c/0x280 kernel/entry/common.c:296
- do_syscall_64+0x50/0x110 arch/x86/entry/common.c:88
- entry_SYSCALL_64_after_hwframe+0x63/0x6b
-RIP: 0033:0x7fa1a5e8ee77
-Code: 08 00 48 83 c4 08 5b 5d c3 66 2e 0f 1f 84 00 00 00 00 00 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 b8 a6 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 01 c3 48 c7 c2 b0 ff ff ff f7 d8 64 89 02 b8
-RSP: 002b:00007ffdbe23d5c8 EFLAGS: 00000202 ORIG_RAX: 00000000000000a6
-RAX: 0000000000000000 RBX: 0000000000021a97 RCX: 00007fa1a5e8ee77
-RDX: 0000000000000000 RSI: 000000000000000a RDI: 00007ffdbe23d680
-RBP: 00007ffdbe23d680 R08: 0000000000000000 R09: 0000000000000000
-R10: 00000000ffffffff R11: 0000000000000202 R12: 00007ffdbe23e740
-R13: 00005555556af700 R14: 431bde82d7b634db R15: 00007ffdbe23e6e4
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:f2fs_evict_inode+0x1576/0x1590 fs/f2fs/inode.c:933
-Code: fd 31 ff 89 de e8 5a 4f bf fd 40 84 ed 75 29 e8 c0 4c bf fd 4c 8b 74 24 08 e9 c9 eb ff ff e8 b1 4c bf fd 0f 0b e8 aa 4c bf fd <0f> 0b e8 a3 4c bf fd 0f 0b e9 f6 fe ff ff e8 97 4c bf fd e8 72 e7
-RSP: 0018:ffffc900039df918 EFLAGS: 00010293
-RAX: ffffffff83cf9f56 RBX: 0000000000000002 RCX: ffff888014b30000
-RDX: 0000000000000000 RSI: 0000000000000002 RDI: 0000000000000000
-RBP: 0000000000000000 R08: ffffffff83cf984a R09: 1ffff1100ed0061d
-R10: dffffc0000000000 R11: ffffed100ed0061e R12: 1ffff1100ed0058f
-R13: ffff888076802c38 R14: ffff8880768030e8 R15: dffffc0000000000
-FS:  00005555556ae3c0(0000) GS:ffff8880b9900000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007ffdbe23ce18 CR3: 00000000727e8000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-
-
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ fsck/fsck.c  |  1 -
+ fsck/fsck.h  |  2 --
+ fsck/mount.c | 54 ++++++++++++++++++++++++++++------------------------
+ 3 files changed, 29 insertions(+), 28 deletions(-)
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index c97dceb406b3..55eddcaa21da 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -735,7 +735,6 @@ fix:
+ 		struct f2fs_fsck *fsck = F2FS_FSCK(sbi);
+ 
+ 		FIX_MSG("Relink root inode, blkaddr: 0x%x", last_blkaddr);
+-		update_nat_journal_blkaddr(sbi, root_ino, last_blkaddr);
+ 		update_nat_blkaddr(sbi, root_ino, root_ino, last_blkaddr);
+ 
+ 		if (f2fs_test_bit(root_ino, fsck->nat_area_bitmap))
+diff --git a/fsck/fsck.h b/fsck/fsck.h
+index c85a0741b257..f6f15e7781b8 100644
+--- a/fsck/fsck.h
++++ b/fsck/fsck.h
+@@ -205,8 +205,6 @@ extern void update_sum_entry(struct f2fs_sb_info *, block_t,
+ 				struct f2fs_summary *);
+ extern void get_node_info(struct f2fs_sb_info *, nid_t, struct node_info *);
+ extern void nullify_nat_entry(struct f2fs_sb_info *, u32);
+-extern void update_nat_journal_blkaddr(struct f2fs_sb_info *sbi, u32 nid,
+-					block_t blkaddr);
+ extern void rewrite_sit_area_bitmap(struct f2fs_sb_info *);
+ extern void build_nat_area_bitmap(struct f2fs_sb_info *);
+ extern void build_sit_area_bitmap(struct f2fs_sb_info *);
+diff --git a/fsck/mount.c b/fsck/mount.c
+index 7871f2f48c81..72516f403734 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -2479,10 +2479,25 @@ void update_data_blkaddr(struct f2fs_sb_info *sbi, nid_t nid,
+ void update_nat_blkaddr(struct f2fs_sb_info *sbi, nid_t ino,
+ 					nid_t nid, block_t newaddr)
+ {
+-	struct f2fs_nat_block *nat_block;
++	struct f2fs_nat_block *nat_block = NULL;
++	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
++	struct f2fs_journal *journal = F2FS_SUMMARY_BLOCK_JOURNAL(curseg->sum_blk);
++	struct f2fs_nat_entry *entry;
+ 	pgoff_t block_addr;
+ 	int entry_off;
+-	int ret;
++	int ret, i;
++
++	for (i = 0; i < nats_in_cursum(journal); i++) {
++		if (le32_to_cpu(nid_in_journal(journal, i)) == nid) {
++			entry = &nat_in_journal(journal, i);
++			entry->block_addr = cpu_to_le32(newaddr);
++			if (ino)
++				entry->ino = cpu_to_le32(ino);
++			MSG(0, "update nat(nid:%d) blkaddr [0x%x] in journal\n",
++							nid, newaddr);
++			goto update_cache;
++		}
++	}
+ 
+ 	nat_block = (struct f2fs_nat_block *)calloc(F2FS_BLKSIZE, 1);
+ 	ASSERT(nat_block);
+@@ -2493,15 +2508,19 @@ void update_nat_blkaddr(struct f2fs_sb_info *sbi, nid_t ino,
+ 	ret = dev_read_block(nat_block, block_addr);
+ 	ASSERT(ret >= 0);
+ 
++	entry = &nat_block->entries[entry_off];
+ 	if (ino)
+-		nat_block->entries[entry_off].ino = cpu_to_le32(ino);
+-	nat_block->entries[entry_off].block_addr = cpu_to_le32(newaddr);
+-	if (c.func == FSCK)
+-		F2FS_FSCK(sbi)->entries[nid] = nat_block->entries[entry_off];
++		entry->ino = cpu_to_le32(ino);
++	entry->block_addr = cpu_to_le32(newaddr);
+ 
+ 	ret = dev_write_block(nat_block, block_addr);
+ 	ASSERT(ret >= 0);
+-	free(nat_block);
++update_cache:
++	if (c.func == FSCK)
++		F2FS_FSCK(sbi)->entries[nid] = *entry;
++
++	if (nat_block)
++		free(nat_block);
+ }
+ 
+ void get_node_info(struct f2fs_sb_info *sbi, nid_t nid, struct node_info *ni)
+@@ -3120,6 +3139,9 @@ void nullify_nat_entry(struct f2fs_sb_info *sbi, u32 nid)
+ 	int ret;
+ 	int i = 0;
+ 
++	if (c.func == FSCK)
++		F2FS_FSCK(sbi)->entries[nid].block_addr = 0;
++
+ 	/* check in journal */
+ 	for (i = 0; i < nats_in_cursum(journal); i++) {
+ 		if (le32_to_cpu(nid_in_journal(journal, i)) == nid) {
+@@ -3153,24 +3175,6 @@ void nullify_nat_entry(struct f2fs_sb_info *sbi, u32 nid)
+ 	free(nat_block);
+ }
+ 
+-void update_nat_journal_blkaddr(struct f2fs_sb_info *sbi, u32 nid,
+-					block_t blkaddr)
+-{
+-	struct curseg_info *curseg = CURSEG_I(sbi, CURSEG_HOT_DATA);
+-	struct f2fs_journal *journal = F2FS_SUMMARY_BLOCK_JOURNAL(curseg->sum_blk);
+-	int i;
+-
+-	for (i = 0; i < nats_in_cursum(journal); i++) {
+-		if (le32_to_cpu(nid_in_journal(journal, i)) == nid) {
+-			nat_in_journal(journal, i).block_addr =
+-						cpu_to_le32(blkaddr);
+-			MSG(0, "update nat(nid:%d) blkaddr [0x%x] in journal\n",
+-							nid, blkaddr);
+-			return;
+-		}
+-	}
+-}
+-
+ void duplicate_checkpoint(struct f2fs_sb_info *sbi)
+ {
+ 	struct f2fs_super_block *sb = F2FS_RAW_SUPER(sbi);
+-- 
+2.42.0.869.gea05f2083d-goog
 
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
 
 
 _______________________________________________
