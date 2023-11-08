@@ -2,127 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BADF77E581F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Nov 2023 14:49:34 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F7DA7E59A5
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed,  8 Nov 2023 16:01:58 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r0ivr-0002El-M9;
-	Wed, 08 Nov 2023 13:49:23 +0000
+	id 1r0k3w-0002bR-MW;
+	Wed, 08 Nov 2023 15:01:47 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <wubo.oduw@gmail.com>) id 1r0ivl-0002Ee-EI
- for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 08 Nov 2023 13:49:17 +0000
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3zaJLZQkbAHIiopaQbbUhQffYT.WeeWbUkiUhSedjUdj.Sec@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1r0k3u-0002bF-8c for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 08 Nov 2023 15:01:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dOVQvjAd30bPlrgwF/zoJUn8J/52P5ntF/Um+egF0hQ=; b=UF3R8VxwLtxNuc30+Vr8dk+wCn
- sFYz4z4Kde4Bo6N/5d2/xPx1M28w/xiKS/CKz/Ks7hqjkdrSNptQa8X2eOLpJi0PPvHdOjDLU6m/N
- wMh91iDUDV2sVsuKQVGrPlCVOawX5ijXumA//DhJGMPiPFHH3eZULLRwE8fGHbaD/MIA=;
+ bh=6LqIztK5sqIUqLI07DaATWBMeUGb1bfpP4v378T+XPo=; b=ffhltqFSu8jr8kXlZFQXtv/Zvs
+ on+fAtl0XzfDu0biyLGH/jc1IAXjX+BgKFzrHMWRydpow3Bzl3HQdoGh7LYQ6aHkYyHRWnczdVV3t
+ mWpAWiAAHgkffd2cU+gemHZRGNqh3+GfkRY4HzIyXHrKz+E8FrwLhWuxe1wNbFFL6vgs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=dOVQvjAd30bPlrgwF/zoJUn8J/52P5ntF/Um+egF0hQ=; b=WAbL42H5J3qz5mGcFk5ilrBHh4
- Gs1zksC9ocm/BenFWJT0QftHmayKyKS45y5DYgk8tWkDgYoOAl3Of5L2U8N4ISPIbq0pIvC7DvIMi
- p/2mZqKTaZUc4ztmklvR/+4QXaMeZxMLhoAps4sDgURlS61eayI48pFJCnbHLBHW1Pgk=;
-Received: from mail-pl1-f174.google.com ([209.85.214.174])
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=6LqIztK5sqIUqLI07DaATWBMeUGb1bfpP4v378T+XPo=; b=Y
+ TRBOfqbPD454Sm7AjOv/vWDOp9VYoCRgKeF0YrwwzTiPVdSD5wR5uWBSDW+bpWlQi2QWIVEMNPLGZ
+ FrAnUBAWpa5269pehAx3QoVJP+MUWV7ctmCCefM+yzI+EJPL0KpF8EaDiV/bBPJHVD3q27Q9rTJVC
+ VqT49qFLfwoIdrA4=;
+Received: from mail-ot1-f77.google.com ([209.85.210.77])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1r0ivi-0000mk-6P for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 08 Nov 2023 13:49:17 +0000
-Received: by mail-pl1-f174.google.com with SMTP id
- d9443c01a7336-1cc29f39e7aso47510125ad.0
+ id 1r0k3s-0002db-1A for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 08 Nov 2023 15:01:44 +0000
+Received: by mail-ot1-f77.google.com with SMTP id
+ 46e09a7af769-6cf61d80fafso9691531a34.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 08 Nov 2023 05:49:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699451348; x=1700056148; darn=lists.sourceforge.net;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dOVQvjAd30bPlrgwF/zoJUn8J/52P5ntF/Um+egF0hQ=;
- b=Uf37RMqSVPdSSwz6I3aG7fZO7vSAaJZ36GP06Y2tA5EmXxwsZtcKwA9n29+ZT5fwOg
- /ePeccis9djqKjuMhuO+sGmVtQteOf3aDpH1Q4V7Ux0+tpTMQ7gOCy1w06jcohJ4TUni
- 36NtdygauakIwEzdhHa1rzbICdI24/7f/Pjz8dYkZtXqb3HKKJRTxN49xFmZUv6CM+MZ
- hMmL0wpQEdjS2VwgE9z2uk6fulOutv5FlQc618lg2uzZWMdK1bpfq264Yv5VKaz7iJGE
- bsPd9/5E+2jnLLAf2Kg3wgVQw9IrsGqbhI7GJJBeJvezVWX7jOKIpKVxpwvVq5trO0vc
- PfEA==
+ Wed, 08 Nov 2023 07:01:44 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699451348; x=1700056148;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dOVQvjAd30bPlrgwF/zoJUn8J/52P5ntF/Um+egF0hQ=;
- b=jMFvH3iHqavVE8MOuSchqS4QGMcsZBp2xtaSsTn/s1IHYjUippA7IGe//dXBpf7Xsb
- QKZXD31K5J8jf9wbr5GB/1ix9kz0TUOoqUhWtP+GOAjTsWNMJRi8paSMDlHpLnaSqtEn
- lJVvHs0f8eA1RDyzTRB/yPM386NPUUQO1m4MCFVvHqA8Mt0bdS/G9qVOi6yqVkuEWOPe
- JIV3PaQi7s7/zJjF58/tK6wT5HwJ1slACoLpju5fuinhGJ6PnLnujJwLc/ToWEC5cWb+
- uLoPQQ6e8ejTz+H6Xa/UGgdcNp50orc1rhswBaIezgfevnMNwSUfMQI2KACxeraIsqqN
- m2Hg==
-X-Gm-Message-State: AOJu0YxbkenSc9Muh/zp5p4HT9f9hK/depzF0A/i4ltnfLfWfbnUFe/E
- EQhMgIHyoT8kvXNgixYcMNE=
-X-Google-Smtp-Source: AGHT+IENTLxUJKFCXpcr7DVd+xUScGlCIJEQlS19CZynEIHEZsdBattk0qL1LdRIbwXmT4J++pGgyw==
-X-Received: by 2002:a17:903:41cd:b0:1cc:6fa6:ab62 with SMTP id
- u13-20020a17090341cd00b001cc6fa6ab62mr2087355ple.29.1699451348378; 
- Wed, 08 Nov 2023 05:49:08 -0800 (PST)
-Received: from [192.168.50.127] ([164.70.122.136])
- by smtp.gmail.com with ESMTPSA id
- j13-20020a170902c3cd00b001a98f844e60sm1755756plj.263.2023.11.08.05.48.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 05:49:07 -0800 (PST)
-Message-ID: <670ce4a6-f00c-dbe9-86e2-366311221cf3@gmail.com>
-Date: Wed, 8 Nov 2023 21:48:45 +0800
+ d=1e100.net; s=20230601; t=1699455698; x=1700060498;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=6LqIztK5sqIUqLI07DaATWBMeUGb1bfpP4v378T+XPo=;
+ b=J1wQSWV0rCRLorXPUmU1DTitcNZ6SB7KqrxdioFh9qeyiBxHbZQ82FjnvmuY0LlOcF
+ Fwvj5N6+YMFi8Qm4rrnXL+RTWPPjMVfxQwYhFga7pxtwA9A8ZkExHkmDBt+SY+3Dv1Wr
+ Dgx06ow5HnTd19ppB+eO48WJ+SZafvlivDxIZWY/kXDJA/lw/TYKNNpt64dgljqbfnUR
+ 9nv/AnQpyvvXuAGmbpSWbhgrqZL1zb0P+xNSU26ZkCXPSPhtkq14pxyI7omyFwbfzCdE
+ rVryqzasEEQwK4Edh8FE8N4v+GImRUrm1Kr0diCobOBo9Nk2LFGNFAhyzCaQRDNQ9ySg
+ AHsQ==
+X-Gm-Message-State: AOJu0YwvLdUB1iFPKrbDMd7lPXmaza+OgJOxD5Aj66twPfuU+jbWWVJA
+ 49aD/hQ2m0O04B0njGAmKMuR4AsfqrmKYAOqSdCT9esh3wT6
+X-Google-Smtp-Source: AGHT+IEwZUGdPuRRvdDTfVm4G4F3cDzyWKXpEThqnBqQlVhZHwBf5AITtkOsINuLkwH5t9O5gP9WjF91cWvPSmTEAZkC1m21H3mb
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-To: Chao Yu <chao@kernel.org>, Wu Bo <bo.wu@vivo.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20231030094024.263707-1-bo.wu@vivo.com>
- <c181256e-9f6e-d43e-4d02-a7d8d5286d56@kernel.org>
-Content-Language: en-US
-From: Wu Bo <wubo.oduw@gmail.com>
-In-Reply-To: <c181256e-9f6e-d43e-4d02-a7d8d5286d56@kernel.org>
-X-Spam-Score: -3.5 (---)
+X-Received: by 2002:a05:6830:2445:b0:6bf:27b3:3d29 with SMTP id
+ x5-20020a056830244500b006bf27b33d29mr602704otr.5.1699455693260; Wed, 08 Nov
+ 2023 07:01:33 -0800 (PST)
+Date: Wed, 08 Nov 2023 07:01:33 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <000000000000e890bc0609a55cff@google.com>
+From: syzbot <syzbot+31e4659a3fe953aec2f4@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.6 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/11/7 22:39, Chao Yu wrote: > On 2023/10/30 17:40,
- Wu Bo wrote: >> If GC victim has pinned block, it can't be recycled. >> And
- if GC is foreground running, after many failure try, the pinned fi [...] 
- Content analysis details:   (-3.5 points, 6.0 required)
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: 90b0c2b2edd1
+ Merge tag 'pinctrl-v6.7-1' of git://git.kerne.. git tree: upstream
+ console+strace:
+ https://syzkaller.appspot.com/x/log.txt?x=10222eeb680000 kernel config:
+ https://syzkaller.a [...] 
+ Content analysis details:   (0.6 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider [wubo.oduw[at]gmail.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 URIBL_BLOCKED          ADMINISTRATOR NOTICE: The query to URIBL was
+ blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+ for more information. [URIs: googleapis.com]
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.214.174 listed in list.dnswl.org]
+ no trust [209.85.210.77 listed in list.dnswl.org]
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.174 listed in wl.mailspike.net]
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ [209.85.210.77 listed in wl.mailspike.net]
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -3.3 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1r0ivi-0000mk-6P
-Subject: Re: [f2fs-dev] [PATCH 1/1] f2fs: fix fallocate failed under pinned
- block situation
+X-Headers-End: 1r0k3s-0002db-1A
+Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_evict_inode (2)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -134,83 +113,123 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-T24gMjAyMy8xMS83IDIyOjM5LCBDaGFvIFl1IHdyb3RlOgo+IE9uIDIwMjMvMTAvMzAgMTc6NDAs
-IFd1IEJvIHdyb3RlOgo+PiBJZiBHQyB2aWN0aW0gaGFzIHBpbm5lZCBibG9jaywgaXQgY2FuJ3Qg
-YmUgcmVjeWNsZWQuCj4+IEFuZCBpZiBHQyBpcyBmb3JlZ3JvdW5kIHJ1bm5pbmcsIGFmdGVyIG1h
-bnkgZmFpbHVyZSB0cnksIHRoZSBwaW5uZWQgZmlsZQo+PiBpcyBleHBlY3RlZCB0byBiZSBjbGVh
-ciBwaW4gZmxhZy4gVG8gZW5hYmxlIHRoZSBzZWN0aW9uIGJlIHJlY3ljbGVkLgo+Pgo+PiBCdXQg
-d2hlbiBmYWxsb2NhdGUgdHJpZ2dlciBGR19HQywgR0MgY2FuIG5ldmVyIHJlY3ljbGUgdGhlIHBp
-bm5lZAo+PiBzZWN0aW9uLiBCZWNhdXNlIEdDIHdpbGwgZ28gdG8gc3RvcCBiZWZvcmUgdGhlIGZh
-aWx1cmUgdHJ5IG1lZXQgdGhlIAo+PiB0aHJlc2hvbGQ6Cj4+IMKgwqDCoMKgaWYgKGhhc19lbm91
-Z2hfZnJlZV9zZWNzKHNiaSwgc2VjX2ZyZWVkLCAwKSkgewo+PiDCoMKgwqDCoMKgwqDCoCBpZiAo
-IWdjX2NvbnRyb2wtPm5vX2JnX2djICYmCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdG90YWxf
-c2VjX2ZyZWVkIDwgZ2NfY29udHJvbC0+bnJfZnJlZV9zZWNzKQo+PiDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIGdvdG8gZ29fZ2NfbW9yZTsKPj4gwqDCoMKgwqDCoMKgwqAgZ290byBzdG9wOwo+PiDC
-oMKgwqDCoH0KPj4KPj4gU28gd2hlbiBmYWxsb2NhdGUgdHJpZ2dlciBGR19HQywgYXQgbGVhc3Qg
-cmVjeWNsZSBvbmUuCj4KPiBIbW0uLi4gaXQgbWF5IGJyZWFrIHBpbmZpbGUncyBzZW1hbnRpY3Mg
-YXQgbGVhc3Qgb24gb25lIHBpbm5lZCBmaWxlPwo+IEluIHRoaXMgY2FzZSwgSSBwcmVmZXIgdG8g
-ZmFpbCBmYWxsb2NhdGUoKSByYXRoZXIgdGhhbiB1bnBpbm5pbmcgZmlsZSwKPiBpbiBvcmRlciB0
-byBhdm9pZCBsZWF2aW5nIGludmFsaWQgTEJBIHJlZmVyZW5jZXMgb2YgdW5waW5uZWQgZmlsZSBo
-ZWxkCj4gYnkgdXNlcnNwYWNlLgoKQXMgZjJmcyBkZXNpZ25lZCBub3csIEZHX0dDIGlzIGFibGUg
-dG8gdW5waW4gdGhlIHBpbm5lZCBmaWxlLgoKZmFsbG9jYXRlKCkgdHJpZ2dlcmVkIEZHX0dDLCBi
-dXQgY2FuJ3QgcmVjeWNsZSBzcGFjZS7CoCBJdCBicmVha3MgdGhlIApkZXNpZ24gbG9naWMgb2Yg
-RkdfR0MuCgpUaGlzIGlzc3VlIGlzIGhhcHBlbmVkIGluIEFuZHJvaWQgT1RBIHNjZW5hcmlvLsKg
-IGZhbGxvY2F0ZSgpIGFsd2F5cyAKcmV0dXJuIGZhaWx1cmUgY2F1c2UgT1RBIGZhaWwuCgogwqBB
-bmQgdGhpcyBjb21taXQgY2hhbmdlZCBwcmV2aW91cyBiZWhhdmlvciBvZiBmYWxsb2NhdGUoKToK
-CkNvbW1pdCAyZTQyYjdmODE3YWMgKCJmMmZzOiBzdG9wIGFsbG9jYXRpbmcgcGlubmVkIHNlY3Rp
-b25zIGlmIEVBR0FJTiAKaGFwcGVucyIpCgpCZWZvcmUgdGhpcyBjb21taXQsIGlmIGZhbGxvY2F0
-ZSgpIG1lZXQgdGhpcyBzaXR1YXRpb24sIGl0IHdpbGwgdHJpZ2dlciAKRkdfR0MgdG8gcmVjeWNs
-ZSBwaW5uZWQgc3BhY2UgZmluYWxseS4KCkZHX0dDIGlzIGV4cGVjdGVkIHRvIHJlY3ljbGUgcGlu
-bmVkIHNwYWNlIHdoZW4gdGhlcmUgaXMgbm8gbW9yZSBmcmVlIApzcGFjZS7CoCBBbmQgdGhpcyBp
-cyB0aGUgcmlnaHQgdGltZSB0byBkbyBpdCB3aGVuIGZhbGxvY2F0ZSgpIG5lZWQgZnJlZSAKc3Bh
-Y2UuCgpJdCBpcyB3ZWlyZCB3aGVuIGYyZnMgc2hvd3MgZW5vdWdoIHNwYXJlIHNwYWNlIGJ1dCBj
-YW4ndCBmYWxsb2NhdGUoKS4gU28gCkkgdGhpbmsgaXQgc2hvdWxkIGJlIGZpeGVkLgoKPgo+IFRo
-b3VnaHRzPwo+Cj4gVGhhbmtzLAo+Cj4+Cj4+IFRoaXMgaXNzdWUgY2FuIGJlIHJlcHJvZHVjZWQg
-YnkgZmlsbGluZyBmMmZzIHNwYWNlIGFzIGZvbGxvd2luZyBsYXlvdXQuCj4+IEV2ZXJ5IHNlZ21l
-bnQgaGFzIG9uZSBibG9jayBpcyBwaW5uZWQ6Cj4+ICstKy0rLSstKy0rLSstLS0tLSstKwo+PiB8
-IHwgfHB8IHwgfCB8IC4uLiB8IHwgc2VnX24KPj4gKy0rLSstKy0rLSstKy0tLS0tKy0rCj4+ICst
-Ky0rLSstKy0rLSstLS0tLSstKwo+PiB8IHwgfHB8IHwgfCB8IC4uLiB8IHwgc2VnX24rMQo+PiAr
-LSstKy0rLSstKy0rLS0tLS0rLSsKPj4gLi4uCj4+ICstKy0rLSstKy0rLSstLS0tLSstKwo+PiB8
-IHwgfHB8IHwgfCB8IC4uLiB8IHwgc2VnX24rawo+PiArLSstKy0rLSstKy0rLS0tLS0rLSsKPj4K
-Pj4gQW5kIGZvbGxvd2luZyBhcmUgc3RlcHMgdG8gcmVwcm9kdWNlIHRoaXMgaXNzdWU6Cj4+IGRk
-IGlmPS9kZXYvemVybyBvZj0uL2YyZnNfcGluLmltZyBicz0yTSBjb3VudD0xMDI0Cj4+IG1rZnMu
-ZjJmcyBmMmZzX3Bpbi5pbWcKPj4gbWtkaXIgZjJmcwo+PiBtb3VudCBmMmZzX3Bpbi5pbWcgLi9m
-MmZzCj4+IGNkIGYyZnMKPj4gZGQgaWY9L2Rldi96ZXJvIG9mPS4vbGFyZ2VfcGFkZGluZyBicz0x
-TSBjb3VudD0xNzYwCj4+IC4vcGluX2ZpbGxpbmcuc2gKPj4gcm0gcGFkZGluZyoKPj4gc3luYwo+
-PiB0b3VjaCBmYWxsb2NhdGVfNDBtCj4+IGYyZnNfaW8gcGluZmlsZSBzZXQgZmFsbG9jYXRlXzQw
-bQo+PiBmYWxsb2NhdGUgLWwgNDE5NDMwNDAgZmFsbG9jYXRlXzQwbQo+Pgo+PiBmYWxsb2NhdGUg
-YWx3YXlzIGZhaWwgd2l0aCBFQUdBSU4gZXZlbiB0aGVyZSBoYXMgZW5vdWdoIGZyZWUgc3BhY2Uu
-Cj4+Cj4+ICdwaW5fZmlsbGluZy5zaCcgaXM6Cj4+IGNvdW50PTEKPj4gd2hpbGUgOgo+PiBkbwo+
-PiDCoMKgwqDCoCAjIGZpbGxpbmcgdGhlIHNlZyBzcGFjZQo+PiDCoMKgwqDCoCBmb3IgaSBpbiB7
-MS4uNTExfToKPj4gwqDCoMKgwqAgZG8KPj4gwqDCoMKgwqDCoMKgwqDCoCBuYW1lPXBhZGRpbmdf
-JGNvdW50LSRpCj4+IMKgwqDCoMKgwqDCoMKgwqAgZWNobyB3cml0ZSAkbmFtZQo+PiDCoMKgwqDC
-oMKgwqDCoMKgIGRkIGlmPS9kZXYvemVybyBvZj0uLyRuYW1lIGJzPTRLIGNvdW50PTEgPiAvZGV2
-L251bGwgMj4mMQo+PiDCoMKgwqDCoMKgwqDCoMKgIGlmIFsgJD8gLW5lIDAgXTsgdGhlbgo+PiDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBleGl0IDAKPj4gwqDCoMKgwqDCoMKgwqDC
-oCBmaQo+PiDCoMKgwqDCoCBkb25lCj4+IMKgwqDCoMKgIHN5bmMKPj4KPj4gwqDCoMKgwqAgIyBw
-aW4gb25lIGJsb2NrIGluIGEgc2VnbWVudAo+PiDCoMKgwqDCoCBuYW1lPXBpbl9maWxlJGNvdW50
-Cj4+IMKgwqDCoMKgIGRkIGlmPS9kZXYvemVybyBvZj0uLyRuYW1lIGJzPTRLIGNvdW50PTEgPiAv
-ZGV2L251bGwgMj4mMQo+PiDCoMKgwqDCoCBzeW5jCj4+IMKgwqDCoMKgIGYyZnNfaW8gcGluZmls
-ZSBzZXQgJG5hbWUKPj4gwqDCoMKgwqAgY291bnQ9JCgoJGNvdW50ICsgMSkpCj4+IGRvbmUKPj4K
-Pj4gU2lnbmVkLW9mZi1ieTogV3UgQm8gPGJvLnd1QHZpdm8uY29tPgo+PiAtLS0KPj4gwqAgZnMv
-ZjJmcy9maWxlLmMgfCAyICstCj4+IMKgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwg
-MSBkZWxldGlvbigtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9maWxlLmMgYi9mcy9mMmZz
-L2ZpbGUuYwo+PiBpbmRleCBjYTU5MDQxMjliMTYuLmU4YTEzNjE2NTQzZiAxMDA2NDQKPj4gLS0t
-IGEvZnMvZjJmcy9maWxlLmMKPj4gKysrIGIvZnMvZjJmcy9maWxlLmMKPj4gQEAgLTE2OTAsNyAr
-MTY5MCw3IEBAIHN0YXRpYyBpbnQgZjJmc19leHBhbmRfaW5vZGVfZGF0YShzdHJ1Y3QgaW5vZGUg
-Cj4+ICppbm9kZSwgbG9mZl90IG9mZnNldCwKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-LmluaXRfZ2NfdHlwZSA9IEZHX0dDLAo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAuc2hv
-dWxkX21pZ3JhdGVfYmxvY2tzID0gZmFsc2UsCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IC5lcnJfZ2Nfc2tpcHBlZCA9IHRydWUsCj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC5ucl9m
-cmVlX3NlY3MgPSAwIH07Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC5ucl9mcmVlX3NlY3Mg
-PSAxIH07Cj4+IMKgwqDCoMKgwqAgcGdvZmZfdCBwZ19zdGFydCwgcGdfZW5kOwo+PiDCoMKgwqDC
-oMKgIGxvZmZfdCBuZXdfc2l6ZTsKPj4gwqDCoMKgwqDCoCBsb2ZmX3Qgb2ZmX2VuZDsKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRl
-dmVsIG1haWxpbmcgbGlzdApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApo
-dHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRl
-dmVsCg==
+Hello,
+
+syzbot found the following issue on:
+
+HEAD commit:    90b0c2b2edd1 Merge tag 'pinctrl-v6.7-1' of git://git.kerne..
+git tree:       upstream
+console+strace: https://syzkaller.appspot.com/x/log.txt?x=10222eeb680000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=93ac5233c138249e
+dashboard link: https://syzkaller.appspot.com/bug?extid=31e4659a3fe953aec2f4
+compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=13a2847b680000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=1579d0df680000
+
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/10c213d23300/disk-90b0c2b2.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/0c55e6e441c1/vmlinux-90b0c2b2.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/c7f0436ea052/bzImage-90b0c2b2.xz
+mounted in repro: https://storage.googleapis.com/syzbot-assets/dbf260983b94/mount_0.gz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+31e4659a3fe953aec2f4@syzkaller.appspotmail.com
+
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/inode.c:933!
+invalid opcode: 0000 [#1] PREEMPT SMP KASAN
+CPU: 1 PID: 5054 Comm: syz-executor410 Not tainted 6.6.0-syzkaller-14142-g90b0c2b2edd1 #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/09/2023
+RIP: 0010:f2fs_evict_inode+0x1576/0x1590 fs/f2fs/inode.c:933
+Code: fd 31 ff 89 de e8 5a 4f bf fd 40 84 ed 75 29 e8 c0 4c bf fd 4c 8b 74 24 08 e9 c9 eb ff ff e8 b1 4c bf fd 0f 0b e8 aa 4c bf fd <0f> 0b e8 a3 4c bf fd 0f 0b e9 f6 fe ff ff e8 97 4c bf fd e8 72 e7
+RSP: 0018:ffffc900039df918 EFLAGS: 00010293
+RAX: ffffffff83cf9f56 RBX: 0000000000000002 RCX: ffff888014b30000
+RDX: 0000000000000000 RSI: 0000000000000002 RDI: 0000000000000000
+RBP: 0000000000000000 R08: ffffffff83cf984a R09: 1ffff1100ed0061d
+R10: dffffc0000000000 R11: ffffed100ed0061e R12: 1ffff1100ed0058f
+R13: ffff888076802c38 R14: ffff8880768030e8 R15: dffffc0000000000
+FS:  00005555556ae3c0(0000) GS:ffff8880b9900000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ffdbe23ce18 CR3: 00000000727e8000 CR4: 00000000003506f0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+Call Trace:
+ <TASK>
+ evict+0x2a4/0x620 fs/inode.c:664
+ dispose_list fs/inode.c:697 [inline]
+ evict_inodes+0x5f8/0x690 fs/inode.c:747
+ generic_shutdown_super+0x9d/0x2c0 fs/super.c:675
+ kill_block_super+0x44/0x90 fs/super.c:1667
+ kill_f2fs_super+0x303/0x3b0 fs/f2fs/super.c:4894
+ deactivate_locked_super+0xc1/0x130 fs/super.c:484
+ cleanup_mnt+0x426/0x4c0 fs/namespace.c:1256
+ task_work_run+0x24a/0x300 kernel/task_work.c:180
+ ptrace_notify+0x2cd/0x380 kernel/signal.c:2399
+ ptrace_report_syscall include/linux/ptrace.h:411 [inline]
+ ptrace_report_syscall_exit include/linux/ptrace.h:473 [inline]
+ syscall_exit_work kernel/entry/common.c:251 [inline]
+ syscall_exit_to_user_mode_prepare kernel/entry/common.c:278 [inline]
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:283 [inline]
+ syscall_exit_to_user_mode+0x15c/0x280 kernel/entry/common.c:296
+ do_syscall_64+0x50/0x110 arch/x86/entry/common.c:88
+ entry_SYSCALL_64_after_hwframe+0x63/0x6b
+RIP: 0033:0x7fa1a5e8ee77
+Code: 08 00 48 83 c4 08 5b 5d c3 66 2e 0f 1f 84 00 00 00 00 00 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 b8 a6 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 01 c3 48 c7 c2 b0 ff ff ff f7 d8 64 89 02 b8
+RSP: 002b:00007ffdbe23d5c8 EFLAGS: 00000202 ORIG_RAX: 00000000000000a6
+RAX: 0000000000000000 RBX: 0000000000021a97 RCX: 00007fa1a5e8ee77
+RDX: 0000000000000000 RSI: 000000000000000a RDI: 00007ffdbe23d680
+RBP: 00007ffdbe23d680 R08: 0000000000000000 R09: 0000000000000000
+R10: 00000000ffffffff R11: 0000000000000202 R12: 00007ffdbe23e740
+R13: 00005555556af700 R14: 431bde82d7b634db R15: 00007ffdbe23e6e4
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:f2fs_evict_inode+0x1576/0x1590 fs/f2fs/inode.c:933
+Code: fd 31 ff 89 de e8 5a 4f bf fd 40 84 ed 75 29 e8 c0 4c bf fd 4c 8b 74 24 08 e9 c9 eb ff ff e8 b1 4c bf fd 0f 0b e8 aa 4c bf fd <0f> 0b e8 a3 4c bf fd 0f 0b e9 f6 fe ff ff e8 97 4c bf fd e8 72 e7
+RSP: 0018:ffffc900039df918 EFLAGS: 00010293
+RAX: ffffffff83cf9f56 RBX: 0000000000000002 RCX: ffff888014b30000
+RDX: 0000000000000000 RSI: 0000000000000002 RDI: 0000000000000000
+RBP: 0000000000000000 R08: ffffffff83cf984a R09: 1ffff1100ed0061d
+R10: dffffc0000000000 R11: ffffed100ed0061e R12: 1ffff1100ed0058f
+R13: ffff888076802c38 R14: ffff8880768030e8 R15: dffffc0000000000
+FS:  00005555556ae3c0(0000) GS:ffff8880b9900000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007ffdbe23ce18 CR3: 00000000727e8000 CR4: 00000000003506f0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+
+
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want syzbot to run the reproducer, reply with:
+#syz test: git://repo/address.git branch-or-commit-hash
+If you attach or paste a git patch, syzbot will apply it before testing.
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
