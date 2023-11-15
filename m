@@ -2,82 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C79FA7EBD13
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Nov 2023 07:29:25 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A7997EBD5D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 15 Nov 2023 08:11:10 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r39Om-0004Ve-4h;
-	Wed, 15 Nov 2023 06:29:16 +0000
+	id 1r3A3A-0004TQ-Kx;
+	Wed, 15 Nov 2023 07:10:59 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1r39Ok-0004VY-Kh
+ (envelope-from <chao@kernel.org>) id 1r3A39-0004TK-KB
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Nov 2023 06:29:14 +0000
+ Wed, 15 Nov 2023 07:10:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Jf/B5Oc/WzvvUdFmnUBFud6eMGY4eARI7RldZTjwxOg=; b=FWpM+7TPskhuNZ0f0tJvM2rAMI
- UCatBDJGHYer2vAwtYkWscW6Ca1RvJroIZ3DJjHC9QiiTKQkYRuvvq9afvS9Q5uah80OyyKO6S8Qm
- CMRB3CzTLZQHiNB9jadVCuoaLaovMVSmvkn3LhoS1wiKXDcPcvkJAqG6PWx4X/daXYaU=;
+ bh=Mv1YDXYKdMQKh4hwj/lqDhq0ErSSmdhnDrDK7Xk6iQc=; b=HdUD89WMa9qORM6FKTuFG/KR3w
+ BpMiCCQeSJFW9OiPhIhbiekxs7nb3jqcy8I0XQ8X4AvZkDlBZa792FLJ/jNFjAXrr7leS8uyVA7j9
+ jGNlc2Sl3eR4RNHSO5G760+W4+RfcaqvGzRxXa0WMia+rXc3O6ARVU08JgV5pDUFgtOQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Jf/B5Oc/WzvvUdFmnUBFud6eMGY4eARI7RldZTjwxOg=; b=j0EYizCbn/1GjODzjt6EpuA9eT
- jUXm5Tfm4tYXi+CNQ0wUtaE/Fv+eO7MIx0fl8DtASxbm52fLv9CzPAvNpVKQHL9n+L+VdED39MDGH
- 3IqO5CbrhTBTZ4wHt+beM7uGt5XNnENkQR0ogNNFttRefWrU3vb3Nn2OFy9j6P5PdbY4=;
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=Mv1YDXYKdMQKh4hwj/lqDhq0ErSSmdhnDrDK7Xk6iQc=; b=KeF2DhSNBtR/hqRiz22+xxc7vG
+ k+U8SzS71Qi06j5RB/luWPeVJ1uJPqtPuIxRYWybdtp7lIW7D9tlhF6TyGbf+yqdVwQMKSbjHjJPY
+ d4x5eKxACyAcp8l7DWVeH+xW+1+xewB+913ecP43N+0k0wMrBrsQtVPdlhtZc8edafa4=;
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r39Og-006AcF-6A for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 15 Nov 2023 06:29:14 +0000
+ id 1r3A37-0001Gl-U6 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 15 Nov 2023 07:10:58 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 92D74614BB
+ by ams.source.kernel.org (Postfix) with ESMTP id CAE87B818AD
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 15 Nov 2023 06:29:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E0F8C433C7;
- Wed, 15 Nov 2023 06:29:00 +0000 (UTC)
+ Wed, 15 Nov 2023 07:10:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44198C433C8;
+ Wed, 15 Nov 2023 07:10:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700029741;
- bh=L8aS70wCeZHXd9bSYTpdvYQwgG0Gn4rLS8gBbZvlwHY=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=BrdbpUmo27fDVhHtmSsHprxs9HvkdzIYcfuhcpJ0Ab63OtZ+7RLbCS/zTCqwT8phM
- ijNqjG7lzVSgmePPnk6eoerp5tCWJRNoCIk/q9gXPeFAoV04nxFkc61lmQLYcTXsse
- qKr3tB8bSIEEL49kQC/xHLIAjOUMc2dxD+yOnNBI5JyJUlFa1SC25mgXQgv8Ndd08X
- yxSkolJujqdwQEOfMx5ZV5bamvDrE0gR8y4EZbZ8z0ZC59e9iRZEew3rNlVPCYSgBP
- xFN5MpMoQK4v4I0q+XRnPH4VOqf0YFP54FfVZONyuQ3/h83zmZmdpej4N31vDBNL0n
- fT99yXCMww4eA==
-Message-ID: <236866a2-41b0-2ad0-db77-4c377367c80e@kernel.org>
-Date: Wed, 15 Nov 2023 14:28:57 +0800
+ s=k20201202; t=1700032249;
+ bh=TMjsKA19pdESkB8wNvbgHH7uT5VESKKfmvxevnjfKTI=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=iimzLD7qaMsEZ7cCzRjAo2wc1mKKOw0QkKO9it+iWAFZ94uayL8vXJwxrWbL+mYzy
+ qkagnb/yG0ySR36ItIsnhzrkpqhP7PIOm5HLpCH7nIMK4FbAxJI0PB4WutUXCuUCYO
+ gmr6UC5kY3sh/8OYak85/78O0dCUEr4Ihtr5D+kfaC9GBW0ulW4w5N1k/3u9B8zdve
+ nE/bwiFmp4m9sFpePRYPQ9s7lDZxin+SRVTxUulNleAyA26FM0opW8dLs2wrwGmH00
+ U+XfXLQbQ7f9z0Kzupj0zBTldZKiZD7cdVX8fS+0ky5o86r9awZlsoCGUXKH6nweO5
+ yOi2q/TMYsjNg==
+Message-ID: <15ad0fa5-9841-bd43-5123-f2ccf5ed3199@kernel.org>
+Date: Wed, 15 Nov 2023 15:10:46 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
 Content-Language: en-US
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20231114212414.3498074-1-jaegeuk@kernel.org>
- <4a0e1c6f-12c4-f3dd-bb26-4bf0aee6be4b@kernel.org>
- <ZVQwz5ubx9LojzEf@google.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+References: <20231016215849.639313-1-jaegeuk@kernel.org>
 From: Chao Yu <chao@kernel.org>
-In-Reply-To: <ZVQwz5ubx9LojzEf@google.com>
-X-Spam-Score: -8.9 (--------)
+In-Reply-To: <20231016215849.639313-1-jaegeuk@kernel.org>
+X-Spam-Score: -6.2 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2023/11/15 10:45, Jaegeuk Kim wrote: > On 11/15, Chao Yu
- wrote: >> On 2023/11/15 5:24, Jaegeuk Kim wrote: >>> When recovering zoned
- UFS, sometimes we add the same zone to discard multiple >>> times [...] 
- Content analysis details:   (-8.9 points, 6.0 required)
+ Content preview:  On 2023/10/17 5:58, Jaegeuk Kim wrote: > This reverts commit
+ 2835107ae3908576b41ff5f6a4e63ba7ec9a6246. > > There's a report that the impact
+ was true. > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org [...] 
+ Content analysis details:   (-6.2 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
@@ -89,13 +87,14 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [139.178.84.217 listed in list.dnswl.org]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.68.75 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
  -3.7 NICE_REPLY_A           Looks like a legit reply (A)
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1r39Og-006AcF-6A
-Subject: Re: [f2fs-dev] [PATCH] f2fs: skip adding a discard command if exists
+X-Headers-End: 1r3A37-0001Gl-U6
+Subject: Re: [f2fs-dev] [PATCH 1/2] Revert "f2fs-tools: do not support
+ user-space cache"
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -107,61 +106,22 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 2023/11/15 10:45, Jaegeuk Kim wrote:
-> On 11/15, Chao Yu wrote:
->> On 2023/11/15 5:24, Jaegeuk Kim wrote:
->>> When recovering zoned UFS, sometimes we add the same zone to discard multiple
->>> times. Simple workaround is to bypass adding it.
->>
->> What about skipping f2fs_bug_on() just for zoned UFS case? so that the check
->> condition can still be used for non-zoned UFS case.
+On 2023/10/17 5:58, Jaegeuk Kim wrote:
+> This reverts commit 2835107ae3908576b41ff5f6a4e63ba7ec9a6246.
 > 
-> Hmm, I've never seen this bug_on before, but even this really happens, it does
-
-I've never seen it was been triggered as well.
-
-> not make sense to move forward to create duplicate commands resulting in a loop.
-
-Agreed.
-
-It looks those codes were copied from extent_cache code base, do we need to fix
-all cases to avoid loop?
-
+> There's a report that the impact was true.
 > 
-> So, the question is, do we really need to check this? Have we hit this before?
-Not sure, just be worry about that flaw of newly developed feature can make
-code run into that branch.
+> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+
+Sorry for delay reply, feel free to add:
+
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
-> 
->>
->> Thanks,
->>
->>>
->>> Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
->>> ---
->>>    fs/f2fs/segment.c | 3 ++-
->>>    1 file changed, 2 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
->>> index 727d016318f9..f4ffd64b44b2 100644
->>> --- a/fs/f2fs/segment.c
->>> +++ b/fs/f2fs/segment.c
->>> @@ -1380,7 +1380,8 @@ static void __insert_discard_cmd(struct f2fs_sb_info *sbi,
->>>    			p = &(*p)->rb_right;
->>>    			leftmost = false;
->>>    		} else {
->>> -			f2fs_bug_on(sbi, 1);
->>> +			/* Let's skip to add, if exists */
->>> +			return;
->>>    		}
->>>    	}
 
 
 _______________________________________________
