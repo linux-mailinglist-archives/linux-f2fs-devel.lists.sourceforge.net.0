@@ -2,98 +2,128 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC3517EF723
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Nov 2023 18:41:58 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id C15CB7EF8CC
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Nov 2023 21:39:18 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r42qi-0004ZM-BQ;
-	Fri, 17 Nov 2023 17:41:48 +0000
+	id 1r45cO-0001b7-BD;
+	Fri, 17 Nov 2023 20:39:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1r42qh-0004ZE-2r
+ (envelope-from <daeho43@gmail.com>) id 1r45cN-0001ay-E9
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 17 Nov 2023 17:41:47 +0000
+ Fri, 17 Nov 2023 20:39:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jmtEd5NC0ZmxjhBH9cougUeBMBfDCmi5XK4w+3wNXZ8=; b=bqMlFEd0qSJcJTSYzDUsHTUc1f
- iZU7yGYt+vKXjjrV6uLFLgRXAY/LjFsRUneks0uDBHldW7sZgEAiT6/TrnpECNs+ooZGdAHN3f3ZT
- aHieut2ED1opeEfUGPzkdq16LJKiuJPhpXvkzL9cNSJEfAnTvtPz4dMd5kNA4IPjbvHA=;
+ bh=7ETgvrJcyf+GAZnQOzgEhP5ISVDHjC8tSZ7J4fXmHUs=; b=CIc9bts7+jkn85zSJHKPXD65f6
+ wH0kZz6LOSisnOR2x7jm2mp3gQcIK+jZASSiLHXH11i5XUNPTYjcmMGDy/lx/xlQwFLqTSkj6RbhD
+ gINC0/Q3bXBnhXglmMwcQCw9UpTSCXheaSizBpx86tY/KY3WaBjzT5vGb17X46hIHf1M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=jmtEd5NC0ZmxjhBH9cougUeBMBfDCmi5XK4w+3wNXZ8=; b=gaJ1pIPUn+DG6yQWi4anXUtSIN
- pb9VwioM76mPiIK9aW6snNHx507tnUAY20t/65bJOK0xONwNtud5iAHM5ihU4ijTI7qNT1PJ9i1gT
- lz/CQN9Ie7Aw3X2BoZyVpRwoVteG/OhIIisUqpx1Nk7xeFRbanyvoSyClHInAyqnfsWk=;
-Received: from ams.source.kernel.org ([145.40.68.75])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r42qg-0002lG-BT for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 17 Nov 2023 17:41:47 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 195A0B82100
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=7ETgvrJcyf+GAZnQOzgEhP5ISVDHjC8tSZ7J4fXmHUs=; b=i
+ rFmHl7csebK3124QzZKVqIpd4jGyu1OOBD3JJo+KbaSdJUZLNaBRuCsALLy9q8BisGpny3UgM/cCQ
+ FqzodfLtwyQciSCOOVzJAI+YB4NaTkwk7soCioDh6MmmZVHWFWxCJVvpLhXD6K86OzXoD2UVycNbE
+ lREdRwfies5XvMqk=;
+Received: from mail-pl1-f178.google.com ([209.85.214.178])
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1r45cH-008pOl-Td for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 17 Nov 2023 20:39:10 +0000
+Received: by mail-pl1-f178.google.com with SMTP id
+ d9443c01a7336-1cc5b705769so21550435ad.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 17 Nov 2023 17:41:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4FED2C433C8;
- Fri, 17 Nov 2023 17:41:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700242899;
- bh=MER7uh+se/JwOjTPFGrER85ioNfg81q8jMULDAOSPNA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=cqy2H4wG/EgkVRNDWyWbR5qlXsCjjanoSmXnv2CXByhpNRQylp1+7r0Av16pM79TA
- LqTHgMtBZtNdILI6SggFyPhd6b46+v1zyfhTaR0Kcfee+CFK0bRclQv9axkOKnkgOf
- kx0j57oi5JxZvxc1spaoBOMxGkf2NwfxZQod47XD8wgajmq0qCOQB+Lchv1l+YEcaV
- 6MPtqhCwkGTc+WAW4NbD5xOJ23ZNDpONRGk13uYnCIIyBdx4I7eiPUqCcBFECE1WRZ
- qoTR4FCP+APCZTDFPB8xv5Qb1Mwwn9kpjI1+CAkk37HbD8jaJUz7NnjGkxFT5Wrl5o
- F2LGQhKIMlpZA==
-Date: Fri, 17 Nov 2023 09:41:37 -0800
-From: Jaegeuk Kim <jaegeuk@kernel.org>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ZVel0bHLlg4IizJ_@google.com>
-References: <20231114212414.3498074-1-jaegeuk@kernel.org>
- <4a0e1c6f-12c4-f3dd-bb26-4bf0aee6be4b@kernel.org>
- <ZVQwz5ubx9LojzEf@google.com>
- <236866a2-41b0-2ad0-db77-4c377367c80e@kernel.org>
+ Fri, 17 Nov 2023 12:39:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1700253540; x=1700858340; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7ETgvrJcyf+GAZnQOzgEhP5ISVDHjC8tSZ7J4fXmHUs=;
+ b=J+LVBP0T1Ip3Ub5vbOvT/g9FpcdyH10dc5iaKb3DJXfdhtX5Z1hBC9ys5mh+lt+vui
+ Qw0zs29nMb99rhxvgrxh2+ImHxBRFgDBqrIksJkTKdpTooqO93tWs+QZUOXNaN40HGtt
+ tVWYS+Hm/vnKJF6lOeQz7BHjaL4fEoqlz45LO1fVu9OR/L+njXNtidDwzveRvx8ddMmo
+ D34G7jKU77M6b0PNLzd+yPPsQqch49PgkPxIAZ6TW80AGDgNgwZrsz91d4pP4exA4xDO
+ YVHAUU6akVsFMAa6EIvznhWvnK6V/qE/OQDYhCO1rgXYzEJUbJphoce7YmDTDVmNjfNP
+ c+5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700253540; x=1700858340;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7ETgvrJcyf+GAZnQOzgEhP5ISVDHjC8tSZ7J4fXmHUs=;
+ b=cCSlXpOBfCccj9+fuTkOec+HCyK0D5O9DxKKPbKAlPaYRwyPFCgDeTGkIyuxjJ+R1E
+ 7DdDpkNZpzcd/U4n2dYMj+GlWiVNZfy9jyGSKn4BuBakmyNX1rKIXSLeM0NGi0G8zOiG
+ rF/qLYx7dAXZGZXr27LpDJIdddLgNa3gGVXVvWcRl6NY5BjCr3Qh8ckwbt5nLiJ2G4Jv
+ p4r8Yx5DCD2Ebe7v1en57y+7tHweAS8i5lDskVAIJk85Vp5R+at7Zfd+XWrkfAIDzqMA
+ aQln7Ia44n03K6ZnQPeTJY9md0mV1SJ1TEBYKGcMOhRUim6qXnnMdBlrzMAoYcEXg+4N
+ XzQA==
+X-Gm-Message-State: AOJu0Yz/2/Ul39rhiK9yqrdbtYfjSz8jUKU9XBuAKeEXn5zq5zRr5k3O
+ ZzZ5VVOy0sEc2Ew5JjFuLP4=
+X-Google-Smtp-Source: AGHT+IFiuEUBAekE+jWCaO/fNCPjfjb6h+uNLtJcA/CX3wX3J72Mgq0MlYYDv3o9VqGqm721rrLDJw==
+X-Received: by 2002:a17:903:1247:b0:1cc:510c:a0b9 with SMTP id
+ u7-20020a170903124700b001cc510ca0b9mr860978plh.34.1700253540200; 
+ Fri, 17 Nov 2023 12:39:00 -0800 (PST)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2620:0:1000:8411:4344:b98f:50f2:673a])
+ by smtp.gmail.com with ESMTPSA id
+ j9-20020a17090276c900b001bdd7579b5dsm1746528plt.240.2023.11.17.12.38.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Nov 2023 12:38:59 -0800 (PST)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Fri, 17 Nov 2023 12:38:55 -0800
+Message-ID: <20231117203855.3415891-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <236866a2-41b0-2ad0-db77-4c377367c80e@kernel.org>
-X-Spam-Score: -2.5 (--)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 11/15, Chao Yu wrote: > On 2023/11/15 10:45, Jaegeuk Kim
- wrote: > > On 11/15, Chao Yu wrote: > > > On 2023/11/15 5:24, Jaegeuk Kim
- wrote: > > > > When recovering zoned UFS, sometimes we add the sam [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ Content preview:  From: Daeho Jeong Fixes: 0f503e443ccb ("f2fs-tools: do not
+ reuse corrupted quota inodes") Signed-off-by: Daeho Jeong --- fsck/fsck.c
+ | 5 ++++- 1 file changed, 4 insertions(+),
+ 1 deletion(-) diff --git a/fsck/fsck.c
+ b/fsck/fsck.c index 55eddca..2bb759c 100644 --- a/fsck/fsck.c +++
+ b/fsck/fsck.c
+ @@ -3094,10 +3094,13 @@ static void fsck_disconnect_file(struct f2fs_sb_info
+ *sbi, nid_t ino, r [...] 
+ Content analysis details:   (0.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [145.40.68.75 listed in list.dnswl.org]
+ 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider [daeho43[at]gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+ in digit [daeho43[at]gmail.com]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.214.178 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.178 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1r42qg-0002lG-BT
-Subject: Re: [f2fs-dev] [PATCH] f2fs: skip adding a discard command if exists
+X-Headers-End: 1r45cH-008pOl-Td
+Subject: [f2fs-dev] [PATCH] f2fs-tools: adjust nat and block release logic
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -105,65 +135,41 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On 11/15, Chao Yu wrote:
-> On 2023/11/15 10:45, Jaegeuk Kim wrote:
-> > On 11/15, Chao Yu wrote:
-> > > On 2023/11/15 5:24, Jaegeuk Kim wrote:
-> > > > When recovering zoned UFS, sometimes we add the same zone to discard multiple
-> > > > times. Simple workaround is to bypass adding it.
-> > > 
-> > > What about skipping f2fs_bug_on() just for zoned UFS case? so that the check
-> > > condition can still be used for non-zoned UFS case.
-> > 
-> > Hmm, I've never seen this bug_on before, but even this really happens, it does
-> 
-> I've never seen it was been triggered as well.
-> 
-> > not make sense to move forward to create duplicate commands resulting in a loop.
-> 
-> Agreed.
-> 
-> It looks those codes were copied from extent_cache code base, do we need to fix
-> all cases to avoid loop?
+From: Daeho Jeong <daehojeong@google.com>
 
-Not sure other cases yet.. let's do one by one, since I hit this in real.
+Fixes: 0f503e443ccb ("f2fs-tools: do not reuse corrupted quota inodes")
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ fsck/fsck.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-> 
-> > 
-> > So, the question is, do we really need to check this? Have we hit this before?
-> Not sure, just be worry about that flaw of newly developed feature can make
-> code run into that branch.
-> 
-> Thanks,
-> 
-> > 
-> > > 
-> > > Thanks,
-> > > 
-> > > > 
-> > > > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-> > > > ---
-> > > >    fs/f2fs/segment.c | 3 ++-
-> > > >    1 file changed, 2 insertions(+), 1 deletion(-)
-> > > > 
-> > > > diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> > > > index 727d016318f9..f4ffd64b44b2 100644
-> > > > --- a/fs/f2fs/segment.c
-> > > > +++ b/fs/f2fs/segment.c
-> > > > @@ -1380,7 +1380,8 @@ static void __insert_discard_cmd(struct f2fs_sb_info *sbi,
-> > > >    			p = &(*p)->rb_right;
-> > > >    			leftmost = false;
-> > > >    		} else {
-> > > > -			f2fs_bug_on(sbi, 1);
-> > > > +			/* Let's skip to add, if exists */
-> > > > +			return;
-> > > >    		}
-> > > >    	}
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index 55eddca..2bb759c 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -3094,10 +3094,13 @@ static void fsck_disconnect_file(struct f2fs_sb_info *sbi, nid_t ino,
+ 		release_block_cnt(sbi, dealloc);
+ 		get_node_info(sbi, nid, &ni);
+ 		release_block(sbi, ni.blk_addr, dealloc);
++
++		if (dealloc)
++			release_nat_entry(sbi, nid);
+ 	}
+ 
+ 	/* clear data counters */
+-	if(!(node->i.i_inline & F2FS_INLINE_DATA)) {
++	if (!(node->i.i_inline & (F2FS_INLINE_DATA | F2FS_INLINE_DENTRY))) {
+ 		ofs = get_extra_isize(node);
+ 		for (i = 0; i < ADDRS_PER_INODE(&node->i); i++) {
+ 			block_t addr = le32_to_cpu(node->i.i_addr[ofs + i]);
+-- 
+2.43.0.rc0.421.g78406f8d94-goog
+
 
 
 _______________________________________________
