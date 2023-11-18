@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 231F07EFD2B
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 18 Nov 2023 03:34:21 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87D4C7EFD26
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 18 Nov 2023 03:31:17 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r4B9w-0001mJ-CS;
-	Sat, 18 Nov 2023 02:34:12 +0000
+	id 1r4B70-0003up-Jp;
+	Sat, 18 Nov 2023 02:31:09 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <3aRtYZQYKADIRfcgSbUccUZS.Qca@flex--drosen.bounces.google.com>)
- id 1r4B9u-0001mD-SY for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 18 Nov 2023 02:34:10 +0000
+ (envelope-from <3axtYZQYKADQTheiUdWeeWbU.Sec@flex--drosen.bounces.google.com>)
+ id 1r4B6z-0003uf-0b for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 18 Nov 2023 02:31:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Cc:To:From:Subject:Message-ID:
  References:Mime-Version:In-Reply-To:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8DMjQxPHsXDl1utN53ZdyGpdJ7ktMDSn08B+JQ2WLUU=; b=SykHY2pJzGo08J37tQKZK5qsZL
- /BAESkx1vQ6VrjK5N6REdcKjOlG4fwx3H7wNfmcdXeEMJuJcSBTkh/LklxvqUE8slCueDlK0QU1xe
- px1tcLHUrtg+LwdvVb82t3rixOCAwLPJmqG6c/PyXhnV//AJ/qVFAM7q57a4MRicIBhw=;
+ bh=tr34ob542s4ed/d1TuUjgEiMRik6RfIXC+Oz8Qv370A=; b=icC7i0ldX1jLtz5dnFszMEXVS6
+ STuJp0QCDP4iFMK6aNKn4xsH/mlPsJpgYnZwbWMH3BD0wbIJWm1bIxOCqoliIulpJG+4NLFIoRmNM
+ qaLv7i2cfc78o5u1lovuP+kOFHWxa65WZrdXCTZy5ub575BY90Xyez84dHNNvCnRFjBk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:
@@ -31,57 +31,57 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8DMjQxPHsXDl1utN53ZdyGpdJ7ktMDSn08B+JQ2WLUU=; b=PvvGu7fvO+4HATVSSXFcPkfXPv
- k1CZUU94jo2UlIt2UokSfNXqpTbWAB7F5lX5htAKKopFARUF+WnTuf1kc6AkWCMqawykF5lTsMNy5
- 9dEa4HPKVRowp1mLdMG9LqL4m0HZtoO+7zLNxIohAm3BRwgGJKw5dynMrTZaPie8o01Q=;
-Received: from mail-qk1-f202.google.com ([209.85.222.202])
+ bh=tr34ob542s4ed/d1TuUjgEiMRik6RfIXC+Oz8Qv370A=; b=Jie5vCuQpCCkAu48meqs+fYZ2h
+ Ty99vsSAa6xgq7uOkS0YLIxUFHU7eT8waDJjmboDAYCk/TIyRR77reMbGZy+M+o5npPYNj84xX/iy
+ LXMcwPfCMI8BGbtk7uk42kxYFyTn+4oQDc7XTtktAF7QlOc/5i6lhx3OmIKS3OkUKCpY=;
+Received: from mail-pf1-f201.google.com ([209.85.210.201])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1r4B9q-0007pB-E4 for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 18 Nov 2023 02:34:10 +0000
-Received: by mail-qk1-f202.google.com with SMTP id
- af79cd13be357-778b3526240so302077985a.1
+ id 1r4B6x-0007m1-1V for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 18 Nov 2023 02:31:07 +0000
+Received: by mail-pf1-f201.google.com with SMTP id
+ d2e1a72fcca58-6b496e1e53bso3879664b3a.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 17 Nov 2023 18:34:06 -0800 (PST)
+ Fri, 17 Nov 2023 18:31:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1700274840; x=1700879640;
+ d=google.com; s=20230601; t=1700274661; x=1700879461;
  darn=lists.sourceforge.net; 
  h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
  :date:from:to:cc:subject:date:message-id:reply-to;
- bh=8DMjQxPHsXDl1utN53ZdyGpdJ7ktMDSn08B+JQ2WLUU=;
- b=ANQUbnmi+q10Ii6FXt8PDk4sfrqtOsz+CNMyYdpim0YFatkvHtNDGucAzYrHKg3VUX
- 4BtNBCL6Gfpt9RGH7HhSdGU1iJKwFzxbofFlhK6M7B2hzIFrkB6ng1k7bgjmRr3lQb//
- gEH0CXlWgI4K5PiGmU0r6MDYZ/7Ub9X2K53BhXwVjI6WPn+Iy1F4hIE0orzY7rrVaCPA
- 0yU0nRagrKhRpc9P+pRbXqgxjmgXnf7d8gL4FshTIF+SfcCDF262PHkGH2Zor2Shkm+G
- iTmrtqkqjFG37KbGhgd2cM7pdLMLjnOwAxgAsPXVwFx5ZGxc3X/ak6Q4qyz2GyoNgbfP
- j7OQ==
+ bh=tr34ob542s4ed/d1TuUjgEiMRik6RfIXC+Oz8Qv370A=;
+ b=alXH5OJRvM8GJZY/sZ/mddpFO4WeBsCk2Hy9Bz0xwNd87Pnm6bp+x3j7I6MICyaR7l
+ YcxixWPcjMLeqtcbSUsxbSNiIGiszqYdly0D5KimZb4/fHpabf8v+lV4Nzm7uKPGoxkn
+ Z25ZX0G55M0Pj9fqZR7HQDVXJvYxrn79Jr5fwbSmsnH1YM4K59F4Rf3ZGYj/Xr24qYDD
+ k1dJVMO189tYdlJZhqtLUdmw9tGn37mrRtYEvf3bOAD0tnn0FJKRVm8NxYYmEyNONE48
+ YtJ4WwkDScupAj74E5Ec6eI8MbIg0gmZXlt0jJviSdkHaEYv3tP9XkGgl2FlShgaOHU5
+ CzrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700274840; x=1700879640;
+ d=1e100.net; s=20230601; t=1700274661; x=1700879461;
  h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
  :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8DMjQxPHsXDl1utN53ZdyGpdJ7ktMDSn08B+JQ2WLUU=;
- b=o6TFrVzswBeq4radrTqnYrcd3URtDnYRBy27nu1QuwS5nXVBjwBey6aLftAblQ09wX
- F4OUbKnRNMPAlK63tTXBKGGybjAwtigJkx3byu0RSNjf/VfxwiWx/rpuPL1G3kb4AMQ1
- WVSJdOWoXHbLNI+9F8JXedph0s9p8BMxKSyjQ+wnVkPRAW5m0Ov99EZ1dtJwt8opTVAt
- YBq1k3TrAvHm+ZYEgHtj2np+qWFpjAlTdZONt9XY9MJaoxAtRyHsGRWwehLSY9Mi9Gzl
- WHAGevYD5fqn1scKNJ75kYZYZGHeW0RESkOmGrfORWWZefDH2c+0OM12liyfS6kcgxP4
- gExQ==
-X-Gm-Message-State: AOJu0YwuefNSpX3n+fVW4cM3mHWp+Tbu319YbtA7ciyjrJxzDZXlhGWv
- 1EPFCO9k++WlyoybbSBAv9DAa86kgfOAPeWWlpAQGjvHMKXwTRlqIU5IUgNOj84g6xS6ulkLpg1
- 85xXKzbkdwQZJB3Qnf/dPw4ysE25AQh7s2oK4/ia7IlACXWvUgQZZJOs6z6HGZIl+3rOzWa8N9+
- JqJOYCwDU=
-X-Google-Smtp-Source: AGHT+IH01QzCwzxOFZY8LgvM0Atm+9JJTfj3QptRXy62USP5KTIzx7jsWUsHznI8auj1W8ripK5iTejYps0=
+ bh=tr34ob542s4ed/d1TuUjgEiMRik6RfIXC+Oz8Qv370A=;
+ b=tbV06e567cjLXSfkEOnGU8UTAEJlQtNsOZdhlcqEauMttzMvKLwktbBpS5Zc0rz/bW
+ E56Mgcpwe9JB2bDHL/Qf8o7lVtSuo1xm0TkFOTPBAFOIxxxGTjhE0d6yEEa9+laHrUno
+ yUfxCxTfnyxF/jpgV1lsKax1kkwfewGqvqgBFl2YhfyYZD88LC44A64Aq3fC4TFqjtw3
+ C2Vej2+w5ImHIV6760bT/cS10n4InM3cHXy4fnChpO99EwJhS6mA6dRQRWNKyG8WxaTF
+ Zv7wWOStxUMgHD00NtDU4Ws0nz+j4NPZInqU1F86WfLtjPhIcMRw1PgL3eK172+nGQi7
+ o92g==
+X-Gm-Message-State: AOJu0Yw5HvID961N87wB7Al0L59JZALllsDEnbSwBoRI+vaGIWyY1UVs
+ PqhoIlvvRX8mfwfEt39puuOvgkbM8bq5x75n24biuYmL5C/RSNRMc+e33zG06FW2VIX1RQql34B
+ EsDelcJqxptZ3dUMsAItAODWTONqIRSG/614ko0cQcgwSf3OAXXcY+i2Ru3M5jYOWcvQBm62duU
+ GOI8TAN5w=
+X-Google-Smtp-Source: AGHT+IGeRlkEDxOMDz6U3QRL6zq+ukqgmMLNJT1u1+XH7x5gYLPrHwYuOJja6P3tPXlb5mO2FUrQjmQgYiY=
 X-Received: from drosen.mtv.corp.google.com
  ([2620:15c:211:201:5334:1f35:bdef:529b])
- (user=drosen job=sendgmr) by 2002:a81:4984:0:b0:59b:e81f:62ab with SMTP id
- w126-20020a814984000000b0059be81f62abmr31882ywa.7.1700273001441; Fri, 17 Nov
- 2023 18:03:21 -0800 (PST)
-Date: Fri, 17 Nov 2023 18:03:07 -0800
+ (user=drosen job=sendgmr) by 2002:a25:348b:0:b0:da0:567d:f819 with SMTP id
+ b133-20020a25348b000000b00da0567df819mr24825yba.10.1700273003544; Fri, 17 Nov
+ 2023 18:03:23 -0800 (PST)
+Date: Fri, 17 Nov 2023 18:03:08 -0800
 In-Reply-To: <20231118020309.1894531-1-drosen@google.com>
 Mime-Version: 1.0
 References: <20231118020309.1894531-1-drosen@google.com>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
-Message-ID: <20231118020309.1894531-2-drosen@google.com>
+Message-ID: <20231118020309.1894531-3-drosen@google.com>
 To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -7.7 (-------)
 X-Spam-Report: Spam detection software,
@@ -90,20 +90,20 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: The conversion from block size to MB in this debug statement
- assumes a block size of 4K. This switches it to properly use the filesystem's
- block size. Signed-off-by: Daniel Rosenberg <drosen@google.com> ---
- fsck/fsck.c
- | 3 ++- 1 file changed, 2 insertions(+), 1 deletion(-) 
+ Content preview:  The cache is initialized during the first read, however, it
+ requires the block size to establish its buffer. This disables the cache
+ until the block size is known. Signed-off-by: Daniel Rosenberg
+ <drosen@google.com>
+ --- fsck/mount.c | 5 +++++ 1 file changed, 5 insertions(+) 
  Content analysis details:   (-7.7 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.201 listed in wl.mailspike.net]
  -7.5 USER_IN_DEF_DKIM_WL    From: address is in the default DKIM
  welcome-list
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.222.202 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -111,12 +111,14 @@ X-Spam-Report: Spam detection software,
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.202 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.210.201 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
  -0.0 DKIMWL_WL_MED          DKIMwl.org - Medium trust sender
-X-Headers-End: 1r4B9q-0007pB-E4
-Subject: [f2fs-dev] [PATCH 1/3] f2fs-tools: Fix debug size print
+X-Headers-End: 1r4B6x-0007m1-1V
+Subject: [f2fs-dev] [PATCH 2/3] f2fs-tools: Wait for Block Size to
+ initialize Cache
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -137,29 +139,40 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The conversion from block size to MB in this debug statement assumes a
-block size of 4K. This switches it to properly use the filesystem's
-block size.
+The cache is initialized during the first read, however, it requires the
+block size to establish its buffer. This disables the cache until the
+block size is known.
 
 Signed-off-by: Daniel Rosenberg <drosen@google.com>
 ---
- fsck/fsck.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ fsck/mount.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 55eddca..509b485 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -3494,7 +3494,8 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 	max_blks = SM_I(sbi)->main_blkaddr + (data_secs + node_secs) *
- 							BLKS_PER_SEC(sbi);
- 	printf("[FSCK] Max image size: %"PRIu64" MB, Free space: %"PRIu64" MB\n",
--						max_blks >> 8, free_blks >> 8);
-+						max_blks >> (20 - F2FS_BLKSIZE_BITS),
-+						free_blks >> (20 - F2FS_BLKSIZE_BITS));
- 	printf("[FSCK] Unreachable nat entries                       ");
- 	if (nr_unref_nid == 0x0) {
- 		printf(" [Ok..] [0x%x]\n", nr_unref_nid);
+diff --git a/fsck/mount.c b/fsck/mount.c
+index 72516f4..658e601 100644
+--- a/fsck/mount.c
++++ b/fsck/mount.c
+@@ -3860,8 +3860,12 @@ int f2fs_do_mount(struct f2fs_sb_info *sbi)
+ {
+ 	struct f2fs_checkpoint *cp = NULL;
+ 	struct f2fs_super_block *sb = NULL;
++	int num_cache_entry = c.cache_config.num_cache_entry;
+ 	int ret;
+ 
++	/* Must not initiate cache until block size is known */
++	c.cache_config.num_cache_entry = 0;
++
+ 	sbi->active_logs = NR_CURSEG_TYPE;
+ 	ret = validate_super_block(sbi, SB0_ADDR);
+ 	if (ret) {
+@@ -3881,6 +3885,7 @@ int f2fs_do_mount(struct f2fs_sb_info *sbi)
+ 		}
+ 	}
+ 	sb = F2FS_RAW_SUPER(sbi);
++	c.cache_config.num_cache_entry = num_cache_entry;
+ 
+ 	ret = check_sector_size(sb);
+ 	if (ret)
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
