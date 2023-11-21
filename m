@@ -2,88 +2,64 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62BF67F24A8
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Nov 2023 04:33:32 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C7707F251A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Nov 2023 06:12:48 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r5HVp-0000LG-2U;
-	Tue, 21 Nov 2023 03:33:20 +0000
+	id 1r5J3v-0000PG-7z;
+	Tue, 21 Nov 2023 05:12:39 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <torvalds@linuxfoundation.org>) id 1r5HVm-0000LA-UQ
+ (envelope-from <tytso@mit.edu>) id 1r5J3u-0000P9-J4
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Nov 2023 03:33:18 +0000
+ Tue, 21 Nov 2023 05:12:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
- In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
- :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EIi2i2u1rSIPQrzJXn8A5YNmAC8BSlreYh/h3LyEO0w=; b=Q0OfiKdHwAgn2msbIOlG/GX/r/
- pLEn9/in6kcGv//n2BjHzHKnUJOW8vnbSiI+HZVS5zH3DcY1FCivw/ouRXtbinWSMEWz/CslFKerN
- ScD8bAsl64rB/pVIyMyJtG6kSX/45a8VcIdt91WAPrqig+7ZTi/YtXpdRHQ1U6QKxo00=;
+ bh=6uSNTF4gBA2mBMIlInFqz++irtP7bRP60ummCQhH030=; b=nFw6Jxjs0646NHIoA5x2bo3AF1
+ t7h/PXIbDHKY1tIHpG1JxLNSW3MKSR9AP9pzn9j1INIbAz3ShSihRDJ54KaaLpBx/g9o7/6FQ8O8o
+ WLF9bSulF4OImijBIHmldctqBjSnrKcYokmEpDMhY1MmB3u1Bf58BRYEIiMchp7lHaZM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
- MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EIi2i2u1rSIPQrzJXn8A5YNmAC8BSlreYh/h3LyEO0w=; b=g2UZbQFFFy/KNxFI+31TkfYokM
- EHKpKKu0Zlk/updlhcJfslg5bLE/sJ5xXWf6Rs+c7+JD0tpjmmrjJpkGG8SujydJJvCk9pMHqzEv8
- UnoKcjhvR+3eqTPVNKpBdA8WZXHV2eFfGQREAMHClXQEp/OqT4zXH1DJmewR9/vULvlM=;
-Received: from mail-ej1-f44.google.com ([209.85.218.44])
+ bh=6uSNTF4gBA2mBMIlInFqz++irtP7bRP60ummCQhH030=; b=b2CkeDM6HXwOBnBmFTa3YqdKa5
+ SsWuVIzPrY2QeYyf3TC8vPwJc7GWPQpF8kzuQCWLr7WH8RxymquRXD5akw+KQFREEbz0NvSpjfnQA
+ VJ1A/BOBMEIdc1iifsAmjUdKMmiuYqHKqsD+zjt9p1s0mCmfutG6XtZ9t8jENkEVdKXc=;
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1r5HVe-0005z0-OT for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Nov 2023 03:33:17 +0000
-Received: by mail-ej1-f44.google.com with SMTP id
- a640c23a62f3a-a00c200782dso116502766b.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 20 Nov 2023 19:33:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google; t=1700537581; x=1701142381;
- darn=lists.sourceforge.net; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EIi2i2u1rSIPQrzJXn8A5YNmAC8BSlreYh/h3LyEO0w=;
- b=YopnEpn1JZ5oDWjhntMhSSzuzOlSD0RDgX8KuBd9EXMnaRRmLQ4mmWagDtxkGSF0oM
- IMGrOZzTOkLyrs+KDkacXiH5jj0ETx0602zbxyenQxluDBeCyjK5PBpBGCWUNSQar/Xd
- jdZdiYWCJISEJtdMTGoEM/L7/ytGv1UAEl0pM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700537581; x=1701142381;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EIi2i2u1rSIPQrzJXn8A5YNmAC8BSlreYh/h3LyEO0w=;
- b=SlGVAnT1ZapjxY3S9QZmVznLygIxya6GX6XKX6OxDNi5HWyG6EY5TqT8hIKp8o1NXh
- QVUILh/hfH0RRkKHFIlXExysE4mEt8310XAU1OH7kc0xVeMzvfm6sSm8yz0KYDXc/uG3
- USnSQfmqjnYEOdu8ntNViv9E02SIhoBlSkUhRcwnOww18jahir90uBoxGEZqy68VnmrW
- RAP4dtMGMa/IC4ZZfG3nihwRmy7ImLPYm4WDTZbzPjDHQF0UUXgFZjgwhWiug4doM2JS
- sZmICUDZUS43ZU/yoj1N2ZRS00v2z9ZICcKHsVs06drwD6AwqNpbv6EUpnqht6lapkPM
- 6idg==
-X-Gm-Message-State: AOJu0YwkH4VFGog59gStrv6USFIs0q3yw4F5CaGJ0A7foGeEi3Ad6n8n
- z3jMY/4ldImbgWIN5ZIi6TJXPv++c/lupgVW9sS22Q==
-X-Google-Smtp-Source: AGHT+IFZ24MXxGlwOaaGFmMF/WAYxe+S0ZPNjeBX+6+RpKbV6EJ7l1A33BH39dO1Puiv5ZD9nrv6Bw==
-X-Received: by 2002:ac2:55b8:0:b0:503:654:cf27 with SMTP id
- y24-20020ac255b8000000b005030654cf27mr6261318lfg.28.1700535811709; 
- Mon, 20 Nov 2023 19:03:31 -0800 (PST)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com.
- [209.85.208.44]) by smtp.gmail.com with ESMTPSA id
- h11-20020a50ed8b000000b00548a3a22d66sm2201709edr.41.2023.11.20.19.03.31
- for <linux-f2fs-devel@lists.sourceforge.net>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Nov 2023 19:03:31 -0800 (PST)
-Received: by mail-ed1-f44.google.com with SMTP id
- 4fb4d7f45d1cf-548f853fc9eso477094a12.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 20 Nov 2023 19:03:31 -0800 (PST)
-X-Received: by 2002:a05:6402:797:b0:543:8391:a19a with SMTP id
- d23-20020a056402079700b005438391a19amr722096edy.40.1700535810689; Mon, 20 Nov
- 2023 19:03:30 -0800 (PST)
-MIME-Version: 1.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1r5J3s-00084g-7w for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 21 Nov 2023 05:12:38 +0000
+Received: from cwcc.thunk.org (pool-173-48-82-21.bstnma.fios.verizon.net
+ [173.48.82.21]) (authenticated bits=0)
+ (User authenticated as tytso@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 3AL5CFRR025396
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 21 Nov 2023 00:12:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
+ t=1700543538; bh=6uSNTF4gBA2mBMIlInFqz++irtP7bRP60ummCQhH030=;
+ h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
+ b=Um42NUhanFatTa+1jqPuCLUYty2ATWUCBuWm8YpeFYYKfK5UUs0HKRpVD4imsmJNV
+ x7JOR/FgtbjoZsfqxykX2b3XgR32OWQ5PINc9aUIuzmXLZG0Irnb0SYI51LeD9enjy
+ UrJBL3wN0yyOoFm2B4ttvmgRnqk5rEp1xeJyacx0igObUTwOALdAuqQhgTJ1P8Qrqj
+ qiG0W2d9z+yVrsAhmyEw3XAbftuTPO/mdMxN8aKpTkUi7/BKVT44zqjPRR7/5l8qUh
+ GzZ87cv+wdd4RYxhZVvVE7MqT2Mr+yDtLALuqxJhLZroOVEeSrg7ZGMd1hiECK7acM
+ Uanm2L3MmZy/A==
+Received: by cwcc.thunk.org (Postfix, from userid 15806)
+ id 2024415C02B0; Tue, 21 Nov 2023 00:12:15 -0500 (EST)
+Date: Tue, 21 Nov 2023 00:12:15 -0500
+From: "Theodore Ts'o" <tytso@mit.edu>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <20231121051215.GA335601@mit.edu>
 References: <20230816050803.15660-1-krisman@suse.de>
  <20231025-selektiert-leibarzt-5d0070d85d93@brauner>
  <655a9634.630a0220.d50d7.5063SMTPIN_ADDED_BROKEN@mx.google.com>
@@ -91,41 +67,36 @@ References: <20230816050803.15660-1-krisman@suse.de>
  <CAHk-=whTCWwfmSzv3uVLN286_WZ6coN-GNw=4DWja7NZzp5ytg@mail.gmail.com>
  <20231121020254.GB291888@mit.edu>
  <CAHk-=whb80quGmmgVcsq51cXw9dQ9EfNMi9otL9eh34jVZaD2g@mail.gmail.com>
-In-Reply-To: <CAHk-=whb80quGmmgVcsq51cXw9dQ9EfNMi9otL9eh34jVZaD2g@mail.gmail.com>
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Mon, 20 Nov 2023 19:03:13 -0800
-X-Gmail-Original-Message-ID: <CAHk-=wh+o0Zkzn=mtF6nB1b-EEcod-y4+ZWtAe7=Mi1v7RjUpg@mail.gmail.com>
-Message-ID: <CAHk-=wh+o0Zkzn=mtF6nB1b-EEcod-y4+ZWtAe7=Mi1v7RjUpg@mail.gmail.com>
-To: "Theodore Ts'o" <tytso@mit.edu>
-X-Spam-Score: 0.1 (/)
+ <CAHk-=wh+o0Zkzn=mtF6nB1b-EEcod-y4+ZWtAe7=Mi1v7RjUpg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAHk-=wh+o0Zkzn=mtF6nB1b-EEcod-y4+ZWtAe7=Mi1v7RjUpg@mail.gmail.com>
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, 20 Nov 2023 at 18:29,
- Linus Torvalds <torvalds@linux-foundation.org>
- wrote: > > It's a bit complicated, yes. But no, doing things one unicode
- > character at a time is just bad bad bad. Put another way: the _point_ of
- UTF-8 is that ASCII is still ASCII. It's literally why UTF-8 doesn't suck.
- Content analysis details:   (0.1 points, 6.0 required)
+ Content preview:  On Mon, Nov 20, 2023 at 07:03:13PM -0800,
+ Linus Torvalds wrote: > On Mon, 20 Nov 2023 at 18:29,
+ Linus Torvalds > <torvalds@linux-foundation.org>
+ wrote: > > > > It's a bit complicated, yes. But no, doi [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.218.44 listed in list.dnswl.org]
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.218.44 listed in wl.mailspike.net]
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [18.9.28.11 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1r5HVe-0005z0-OT
+X-Headers-End: 1r5J3s-00084g-7w
 Subject: Re: [f2fs-dev] [PATCH v6 0/9] Support negative dentries on
  case-insensitive ext4 and f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -147,90 +118,41 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, 20 Nov 2023 at 18:29, Linus Torvalds
-<torvalds@linux-foundation.org> wrote:
->
-> It's a bit complicated, yes. But no, doing things one unicode
-> character at a time is just bad bad bad.
+On Mon, Nov 20, 2023 at 07:03:13PM -0800, Linus Torvalds wrote:
+> On Mon, 20 Nov 2023 at 18:29, Linus Torvalds
+> <torvalds@linux-foundation.org> wrote:
+> >
+> > It's a bit complicated, yes. But no, doing things one unicode
+> > character at a time is just bad bad bad.
+> 
+> Put another way: the _point_ of UTF-8 is that ASCII is still ASCII.
+> It's literally why UTF-8 doesn't suck.
+> 
+> So you can still compare ASCII strings as-is.
+> 
+> No, that doesn't help people who are really using other locales, and
+> are actively using complicated characters.
+> 
+> But it very much does mean that you can compare "Bad" and "bad" and
+> never ever look at any unicode translation ever.
 
-Put another way: the _point_ of UTF-8 is that ASCII is still ASCII.
-It's literally why UTF-8 doesn't suck.
+Yeah, agreed, that would be a nice optimization.  However, in the
+unfortunate case where (a) it's non-ASCII, and (b) the input string is
+non-normalized and/or differs in case, we end up scanning some portion
+of the two strings twice; once doing the strcmp, and once doing the
+Unicode slow path.
 
-So you can still compare ASCII strings as-is.
+That being said, given that even in the case where we're dealing with
+non-ASCII strings, in the fairly common case where the program is
+doing a readdir() followed by a open() or stat(), the filename will be
+byte-identical and so a strcmp() will suffice.
 
-No, that doesn't help people who are really using other locales, and
-are actively using complicated characters.
+So I agree that it's a nice optimization.  It'd be interesting how
+much such an optimization would actually show up in various
+benchmarks.  It'd have to be something that was really metadata-heavy,
+or else the filenamea lookups would get drowned out.
 
-But it very much does mean that you can compare "Bad" and "bad" and
-never ever look at any unicode translation ever.
-
-In a perfect world, you'd use all the complicated DCACHE_WORD_ACCESS
-stuff that can do all of this one word at a time.
-
-But even if you end up doing the rules just one byte at a time, it
-means that you can deal with the common cases without "unicode
-cursors" or function calls to extract unicode characters, or anything
-like that. You can still treat things as bytes.
-
-So the top of generic_ci_d_compare() should probably be something
-trivial like this:
-
-        const char *ct = name.name;
-        unsigned int tcount = name.len;
-
-        /* Handle the exact equality quickly */
-        if (len == tcount && !dentry_string_cmp(str, ct, tcount))
-                return 0;
-
-because byte-wise equality is equality even if high bits are set.
-
-After that, it should probably do something like
-
-        /* Not byte-identical, but maybe igncase identical in ASCII */
-        do {
-                unsigned char a, b;
-
-                /* Dentry name byte */
-                a = *str;
-
-                /* If that's NUL, the qstr needs to be done too! */
-                if (!a)
-                        return !!tcount;
-
-                /* Alternatively, if the qstr is done, it needed to be NUL */
-                if (!tcount)
-                        return 1;
-                b = *ct;
-
-                if ((a | b) & 0x80)
-                        break;
-
-                if (a != b) {
-                        /* Quick "not same" igncase ASCII */
-                        if ((a ^ b) & ~32)
-                                return 1;
-                        a &= ~32;
-                        if (a < 'A' || a > 'Z')
-                                return 1;
-                }
-
-                /* Ok, same ASCII, bytefolded, go to next */
-                str++;
-                ct++;
-                tcount--;
-                len--;
-        }
-
-and only after THAT should it do the utf name comparison (and only on
-the remaining parts, since the above will have checked for common
-ASCII beginnings).
-
-And the above was obviously never tested, and written in the MUA, and
-may be completely wrong in all the details, but you get the idea. Deal
-with the usual cases first. Do the full unicode only when you
-absolutely have to.
-
-                Linus
+   	    	      	      	    	- Ted
 
 
 _______________________________________________
