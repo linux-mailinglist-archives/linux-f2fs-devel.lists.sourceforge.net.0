@@ -2,103 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C7707F251A
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Nov 2023 06:12:48 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A13E7F3958
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Nov 2023 23:39:53 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r5J3v-0000PG-7z;
-	Tue, 21 Nov 2023 05:12:39 +0000
+	id 1r5ZPG-0005dk-3L;
+	Tue, 21 Nov 2023 22:39:45 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tytso@mit.edu>) id 1r5J3u-0000P9-J4
+ (envelope-from <ebiggers@kernel.org>) id 1r5ZPE-0005dd-Cu
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Nov 2023 05:12:38 +0000
+ Tue, 21 Nov 2023 22:39:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6uSNTF4gBA2mBMIlInFqz++irtP7bRP60ummCQhH030=; b=nFw6Jxjs0646NHIoA5x2bo3AF1
- t7h/PXIbDHKY1tIHpG1JxLNSW3MKSR9AP9pzn9j1INIbAz3ShSihRDJ54KaaLpBx/g9o7/6FQ8O8o
- WLF9bSulF4OImijBIHmldctqBjSnrKcYokmEpDMhY1MmB3u1Bf58BRYEIiMchp7lHaZM=;
+ bh=xvGMzjc4utdrIKc0TPq3ACSXu/1S9AWiz790knsYmbo=; b=aqh6lkrMPmdYbDRPLp3E3TIlwd
+ QPMhBjbdzJ8OpWjbuZToOYflW/Da7ozbcuBFj+FKwtI3b4mKQo1GRGnAGV+bhu6YklHoyO3kwVB5d
+ 63LYnnViA7Kl/0rPT4kuEtn1nhhiiB6jJEAnAjPG/uG8RjFjaGrsV1uW4LD7kOlTWGKk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=6uSNTF4gBA2mBMIlInFqz++irtP7bRP60ummCQhH030=; b=b2CkeDM6HXwOBnBmFTa3YqdKa5
- SsWuVIzPrY2QeYyf3TC8vPwJc7GWPQpF8kzuQCWLr7WH8RxymquRXD5akw+KQFREEbz0NvSpjfnQA
- VJ1A/BOBMEIdc1iifsAmjUdKMmiuYqHKqsD+zjt9p1s0mCmfutG6XtZ9t8jENkEVdKXc=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=xvGMzjc4utdrIKc0TPq3ACSXu/1S9AWiz790knsYmbo=; b=b
+ PSQ4Fvrnv2I4jiQr2G4sGd+kSPQrxIwMB6aX0XX2kjEDatPHWLXmYdXx8x5YCJ5fRnAD/pyiecezS
+ +XV3gMhOQGOzFLeGbVjccYKvdD24WU6Nn7g+N8uNVof+ktP00q0PAEZNxKGfw3PkuzQUvgXTErygt
+ LIf5+EFOgF6l3PvU=;
+Received: from ams.source.kernel.org ([145.40.68.75])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r5J3s-00084g-7w for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Nov 2023 05:12:38 +0000
-Received: from cwcc.thunk.org (pool-173-48-82-21.bstnma.fios.verizon.net
- [173.48.82.21]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 3AL5CFRR025396
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 21 Nov 2023 00:12:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
- t=1700543538; bh=6uSNTF4gBA2mBMIlInFqz++irtP7bRP60ummCQhH030=;
- h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
- b=Um42NUhanFatTa+1jqPuCLUYty2ATWUCBuWm8YpeFYYKfK5UUs0HKRpVD4imsmJNV
- x7JOR/FgtbjoZsfqxykX2b3XgR32OWQ5PINc9aUIuzmXLZG0Irnb0SYI51LeD9enjy
- UrJBL3wN0yyOoFm2B4ttvmgRnqk5rEp1xeJyacx0igObUTwOALdAuqQhgTJ1P8Qrqj
- qiG0W2d9z+yVrsAhmyEw3XAbftuTPO/mdMxN8aKpTkUi7/BKVT44zqjPRR7/5l8qUh
- GzZ87cv+wdd4RYxhZVvVE7MqT2Mr+yDtLALuqxJhLZroOVEeSrg7ZGMd1hiECK7acM
- Uanm2L3MmZy/A==
-Received: by cwcc.thunk.org (Postfix, from userid 15806)
- id 2024415C02B0; Tue, 21 Nov 2023 00:12:15 -0500 (EST)
-Date: Tue, 21 Nov 2023 00:12:15 -0500
-From: "Theodore Ts'o" <tytso@mit.edu>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <20231121051215.GA335601@mit.edu>
-References: <20230816050803.15660-1-krisman@suse.de>
- <20231025-selektiert-leibarzt-5d0070d85d93@brauner>
- <655a9634.630a0220.d50d7.5063SMTPIN_ADDED_BROKEN@mx.google.com>
- <20231120-nihilismus-verehren-f2b932b799e0@brauner>
- <CAHk-=whTCWwfmSzv3uVLN286_WZ6coN-GNw=4DWja7NZzp5ytg@mail.gmail.com>
- <20231121020254.GB291888@mit.edu>
- <CAHk-=whb80quGmmgVcsq51cXw9dQ9EfNMi9otL9eh34jVZaD2g@mail.gmail.com>
- <CAHk-=wh+o0Zkzn=mtF6nB1b-EEcod-y4+ZWtAe7=Mi1v7RjUpg@mail.gmail.com>
+ id 1r5ZPC-0006YC-MA for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 21 Nov 2023 22:39:43 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 5C6E3B82446;
+ Tue, 21 Nov 2023 22:39:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FCD6C433C7;
+ Tue, 21 Nov 2023 22:39:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1700606375;
+ bh=F7T9ozkx5kq3xFIaUUxDQId3Ryj4a172IH01F7bLlaA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=lhpw0ES8jbh5enMJozW9b9tfugeonU6dStP/RBqgzl6iW4a2QYjdVbrLamfcFe6ZM
+ n1AfA68K0vk7gYwZ4DVK6cBs7YgncKMSPbJ+48E0DKjGJqloppllX1aI+hvM/Psard
+ eDLY8DTaFPpYB9LOnb7BLfW1Vg4TtTE6T0qOXFK5HxayRph8zgZdsSjJDbpm2Nxf6M
+ /3PxIQ67MLlFu+4GEn38Idncz6/l1K7ljSl0Sxk4XHP6cAmkWnYkb2EZLVl1cwsVl6
+ l9kRe3IvMRhHJs+1bmn/WtqDcXNBF/F6sqM8CAzZXNi164XKNgq4l/o5Z3w6emAgVB
+ 00EsoXKMJbGUw==
+From: Eric Biggers <ebiggers@kernel.org>
+To: fstests@vger.kernel.org
+Date: Tue, 21 Nov 2023 14:39:05 -0800
+Message-ID: <20231121223909.4617-1-ebiggers@kernel.org>
+X-Mailer: git-send-email 2.42.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAHk-=wh+o0Zkzn=mtF6nB1b-EEcod-y4+ZWtAe7=Mi1v7RjUpg@mail.gmail.com>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Nov 20, 2023 at 07:03:13PM -0800,
- Linus Torvalds wrote: > On Mon, 20 Nov 2023 at 18:29,
- Linus Torvalds > <torvalds@linux-foundation.org>
- wrote: > > > > It's a bit complicated, yes. But no, doi [...] 
+ Content preview: This series adds a test that verifies the on-disk format of
+ encrypted files that use a crypto data unit size that differs from the
+ filesystem
+ block size. This tests the functionality that was introduc [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [18.9.28.11 listed in list.dnswl.org]
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [145.40.68.75 listed in list.dnswl.org]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1r5J3s-00084g-7w
-Subject: Re: [f2fs-dev] [PATCH v6 0/9] Support negative dentries on
- case-insensitive ext4 and f2fs
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1r5ZPC-0006YC-MA
+Subject: [f2fs-dev] [PATCH v2 0/4] xfstests: test custom crypto data unit
+ size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,49 +100,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Gabriel Krisman Bertazi <krisman@suse.de>,
- Christian Brauner <brauner@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- ebiggers@kernel.org, viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org,
- jaegeuk@kernel.org, linux-ext4@vger.kernel.org
+Cc: linux-fscrypt@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Daniel Rosenberg <drosen@google.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Mon, Nov 20, 2023 at 07:03:13PM -0800, Linus Torvalds wrote:
-> On Mon, 20 Nov 2023 at 18:29, Linus Torvalds
-> <torvalds@linux-foundation.org> wrote:
-> >
-> > It's a bit complicated, yes. But no, doing things one unicode
-> > character at a time is just bad bad bad.
-> 
-> Put another way: the _point_ of UTF-8 is that ASCII is still ASCII.
-> It's literally why UTF-8 doesn't suck.
-> 
-> So you can still compare ASCII strings as-is.
-> 
-> No, that doesn't help people who are really using other locales, and
-> are actively using complicated characters.
-> 
-> But it very much does mean that you can compare "Bad" and "bad" and
-> never ever look at any unicode translation ever.
+This series adds a test that verifies the on-disk format of encrypted
+files that use a crypto data unit size that differs from the filesystem
+block size.  This tests the functionality that was introduced in Linux
+6.7 by kernel commit 5b1188847180 ("fscrypt: support crypto data unit
+size less than filesystem block size").
 
-Yeah, agreed, that would be a nice optimization.  However, in the
-unfortunate case where (a) it's non-ASCII, and (b) the input string is
-non-normalized and/or differs in case, we end up scanning some portion
-of the two strings twice; once doing the strcmp, and once doing the
-Unicode slow path.
+This depends on the xfsprogs patch
+"xfs_io/encrypt: support specifying crypto data unit size"
+(https://lore.kernel.org/r/20231013062639.141468-1-ebiggers@kernel.org)
+which adds the '-s' option to the set_encpolicy command of xfs_io.
 
-That being said, given that even in the case where we're dealing with
-non-ASCII strings, in the fairly common case where the program is
-doing a readdir() followed by a open() or stat(), the filename will be
-byte-identical and so a strcmp() will suffice.
+As usual, the test skips itself when any prerequisite isn't met.
 
-So I agree that it's a nice optimization.  It'd be interesting how
-much such an optimization would actually show up in various
-benchmarks.  It'd have to be something that was really metadata-heavy,
-or else the filenamea lookups would get drowned out.
+I've tested the new test on both ext4 and f2fs.
 
-   	    	      	      	    	- Ted
+Changed in v2:
+- Updated the cover letter, commit message, and a comment to reflect
+  that the kernel commit that added this feature was merged in 6.7.
+- Rebased onto latest for-next branch of xfstests.
+
+Eric Biggers (4):
+  fscrypt-crypt-util: rename block to data unit
+  common/rc: fix _require_xfs_io_command with digits in argument
+  common/encrypt: support custom data unit size
+  generic: add test for custom crypto data unit size
+
+ common/encrypt           | 42 +++++++++++++-----
+ common/rc                |  2 +-
+ src/fscrypt-crypt-util.c | 93 ++++++++++++++++++++--------------------
+ tests/f2fs/002           |  6 +--
+ tests/generic/900        | 29 +++++++++++++
+ tests/generic/900.out    | 11 +++++
+ 6 files changed, 123 insertions(+), 60 deletions(-)
+ create mode 100755 tests/generic/900
+ create mode 100644 tests/generic/900.out
+
+
+base-commit: b9e1a88f8198ac02f3b82fe3b127d4e14f4a97b7
+-- 
+2.42.1
+
 
 
 _______________________________________________
