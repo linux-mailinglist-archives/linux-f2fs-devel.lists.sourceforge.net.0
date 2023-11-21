@@ -2,64 +2,59 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB7047F23C0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Nov 2023 03:17:35 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 52DA07F23FA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 21 Nov 2023 03:28:02 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r5GKM-0005lk-02;
-	Tue, 21 Nov 2023 02:17:24 +0000
+	id 1r5GUQ-00084j-SV;
+	Tue, 21 Nov 2023 02:27:51 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tytso@mit.edu>) id 1r5GKH-0005lR-7k
+ (envelope-from <viro@ftp.linux.org.uk>) id 1r5GUP-00084c-5U
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Nov 2023 02:17:20 +0000
+ Tue, 21 Nov 2023 02:27:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RI/R/dL+OK3InX9FiqKDXHPEN021Sx3jNB6FQIcl/vA=; b=DX1Dr+zHBZaNUti8n92FfmmFXn
- QhmSkH19AA8q/mt661X3W3VfvMfcEsVb1dhMt/oJSSb71IgfdpQqWKk706ceZ/GYzWa97Ag8UYbNx
- 9KwPUDRt6vi258r6YntJ3duxlAzsXFkSP6HvMTSreMTsJ9ylbB815GK1asXCFZBgBHgw=;
+ d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=pAfw17aMAXO5jNA5wNi4EQEUNYP31ut+8Y9AyC6qrR4=; b=d58sABd0og04cjkoIPAytffXXy
+ GPH26/FANqWnfX3cJCnaIhEsLCBe5OFjHPJo/yRqWgL9Lliez0uTHjkHfB20bveVQiZhmKwv/B4/X
+ Y8l5dfh/oZgax1lCJI3I9i5eHo4643/5w5zfApZK65ALG76L8G6QWdDYMCo4nZ1FEDkY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=RI/R/dL+OK3InX9FiqKDXHPEN021Sx3jNB6FQIcl/vA=; b=hvS/o84Y0japeVqV3YCVx1rP06
- NoRaECGBIcFF47rS+RHIx9Gd15Wi+EkaJuILAXDXmeZd78Qo+gd2ZLaJuWUbVPJd826nKJIr0ggel
- QC21mCroBrlI+DE4VYxiNypTQ5QeoKQsTYGJSJgPnZUJ/AiUu4kTKU1PsOSVgJpAWxiM=;
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11] helo=outgoing.mit.edu)
+ bh=pAfw17aMAXO5jNA5wNi4EQEUNYP31ut+8Y9AyC6qrR4=; b=Nww6FyDBmKn30C47qvgs+vwpkw
+ N5yNbSkORTWTHOjnaMAbd51XtdSo7LB2MYi9h3BxjF1CLRcMgbv0c+dOw1o6naqmkVQgpbrSb16qq
+ d4YAAkQn9Jc79cG6XTX5+fQxLVxzA2ki4uzrAQ/5ZuE4YSX0EaT8gf4HBmLfu+BtK/3w=;
+Received: from zeniv.linux.org.uk ([62.89.141.173])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r5GKD-0004JQ-Bm for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 21 Nov 2023 02:17:19 +0000
-Received: from cwcc.thunk.org (pool-173-48-82-21.bstnma.fios.verizon.net
- [173.48.82.21]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 3AL22s5b004315
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 20 Nov 2023 21:02:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
- t=1700532178; bh=RI/R/dL+OK3InX9FiqKDXHPEN021Sx3jNB6FQIcl/vA=;
- h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
- b=fh+Iz59mAaEhYI6Rnl1Ws5eNRCdm8wGGiPBNrtSex6iEN3evmaEE4VQ38o7HziJIX
- 1oE53Yx5gx4QD+4kGuf0DRlqTlOmzTWeEI2U3lwozuid2nmQUf3gYQ2cFfVX58ObIS
- AOF5SVofHZTGGj/d41vBKcNaXkE103Uvrh87PK5pi0LdMGHs5Xqj6zMO4rTyX9usd9
- drGCCLumglHiyBKsUPqRzlaLSTktuNh3kOnfULa7loj6SCmki5AcJ9s3b1I/ItdyGj
- OJ8dmIFQVzZuLCX6BAwNAawsKR4kbHK+H0hmI1SBGThTTmsfe2NgCjRISca5zfG2+N
- +bR7dioZFi29A==
-Received: by cwcc.thunk.org (Postfix, from userid 15806)
- id A86F715C02B0; Mon, 20 Nov 2023 21:02:54 -0500 (EST)
-Date: Mon, 20 Nov 2023 21:02:54 -0500
-From: "Theodore Ts'o" <tytso@mit.edu>
+ id 1r5GUM-0004XV-IW for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 21 Nov 2023 02:27:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=pAfw17aMAXO5jNA5wNi4EQEUNYP31ut+8Y9AyC6qrR4=; b=AETveS0/spmd3pq0pAjwyZKShu
+ tTeHavtT/gA+L4dHwyYTyK6rUDhxbOCURftxNAGCXud042shrupW8lwe2qo9/h2ypa8tab3dD4rO9
+ oX3P8AJRMLpJaOQcc5pNl8OJ/6L4Q1ffJ2sfK5A9wjhyVsO41T2Hss/TOD/hDbNIfjDygAEK7wSyu
+ K9mp0GPMbw3EutV72rle1DncPk898z76DHRjLyuQ16eHbBw9/UKSNqv4eBiVBoy2eC/11xfu5BXqT
+ JLQSAsphb6iW722vNGnMbBhmIPS8a17bXLScTxDEgsznFKy2Ckn6kt/e77jIUL30U9RqSqZOMEznS
+ 9oS6N6Vg==;
+Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1r5GUA-000z3m-0x; Tue, 21 Nov 2023 02:27:34 +0000
+Date: Tue, 21 Nov 2023 02:27:34 +0000
+From: Al Viro <viro@zeniv.linux.org.uk>
 To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <20231121020254.GB291888@mit.edu>
+Message-ID: <20231121022734.GC38156@ZenIV>
 References: <20230816050803.15660-1-krisman@suse.de>
  <20231025-selektiert-leibarzt-5d0070d85d93@brauner>
  <655a9634.630a0220.d50d7.5063SMTPIN_ADDED_BROKEN@mx.google.com>
@@ -68,7 +63,7 @@ References: <20230816050803.15660-1-krisman@suse.de>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <CAHk-=whTCWwfmSzv3uVLN286_WZ6coN-GNw=4DWja7NZzp5ytg@mail.gmail.com>
-X-Spam-Score: -2.5 (--)
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
@@ -77,24 +72,21 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview:  On Mon, Nov 20, 2023 at 10:07:51AM -0800,
  Linus Torvalds wrote:
- > Of course, "do it in shared generic code" doesn't tend to really fix >
- the braindamage, but at least it's now shared braindamage and n [...] 
- Content analysis details:   (-2.5 points, 6.0 required)
+ > Well, we all know - very much including Al - that Al isn't always the >
+ most responsive person, and tends to have his own ratholes that he > dives
+ deep into. 
+ Content analysis details:   (-0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
- medium trust [18.9.28.11 listed in list.dnswl.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
- author's domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1r5GKD-0004JQ-Bm
+X-Headers-End: 1r5GUM-0004XV-IW
 Subject: Re: [f2fs-dev] [PATCH v6 0/9] Support negative dentries on
  case-insensitive ext4 and f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -109,14 +101,30 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Gabriel Krisman Bertazi <krisman@suse.de>,
- Christian Brauner <brauner@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- ebiggers@kernel.org, viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org,
- jaegeuk@kernel.org, linux-ext4@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ Christian Brauner <brauner@kernel.org>, tytso@mit.edu,
+ linux-f2fs-devel@lists.sourceforge.net, ebiggers@kernel.org,
+ linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
 On Mon, Nov 20, 2023 at 10:07:51AM -0800, Linus Torvalds wrote:
+
+> Well, we all know - very much including Al - that Al isn't always the
+> most responsive person, and tends to have his own ratholes that he
+> dives deep into.
+
+FWIW, the right now I'm getting out of one of those - rename() deadlocks
+fun.  Will post that, assuming it survives local beating, then post
+the dcache stuff and other branches (all rebased by now).
+
+Other ratholes - d_name/d_parent audit is about halfway through -
+we do have fun shite in quite a few ->d_revalidate() instances (UAF,
+etc.); RCU pathwalk methods need to be re-audited; the fixes caught
+in the last cycle are either in mainline by now, or rebased.
+
+But that stuff is relatively easy to suspend for a few days.
+
 > Of course, "do it in shared generic code" doesn't tend to really fix
 > the braindamage, but at least it's now shared braindamage and not
 > spread out all over. I'm looking at things like
@@ -124,27 +132,23 @@ On Mon, Nov 20, 2023 at 10:07:51AM -0800, Linus Torvalds wrote:
 > lookups and compares one utf8 character at a time". What a disgrace.
 > Somebody either *really* didn't care, or was a Unicode person who
 > didn't understand the point of UTF-8.
-
-This isn't because of case-folding brain damage, but rather Unicode
-brain damage.  We compare one character at a time because it's
-possible for some character like =E9 to either be encoded as 0x0089 (aka
-"Latin Small Letter E with Acute") OR as 0x0065 0x0301 ("Latin Small
-Letter E" plus "Combining Acute Accent").
-
-Typically, we pretend that UTF-8 means that we can just encode =E9, or
-0x0089 as 0xC3 0xA9 and then call it a day and just use strcmp(3) on
-the sucker.  But Unicode is a lot more insane than that.  Technically,
-0x65 0xCC 0x81 is the same character as 0xC3 0xA9.
-
+> 
 > Oh well. I guess people went "this is going to suck anyway, so let's
 > make sure it *really* sucks".
+> 
 
-It's more like, "this is going to suck, but if it's going to suck
-anyway, let's implement the full Unicode spec in all its gory^H^H^H^H
-glory, whether or not it's sane".
+> The patches look fine to me. Al - do you even care about them?
 
+I will review that series; my impression from the previous iterations
+had been fairly unpleasant, TBH, but I hadn't rechecked since April
+or so.
 
-					- Ted
+Re dcache conflicts - see #untested-pile-dcache; most the dcache-affecting
+stuff should be there.  One intersting exception is the general helper
+for safely picking parent/parent's inode/entry name for ->d_revalidate()
+use;  we have the parent-related part boilerplated, but the name side
+tends to be missing.  That's still being tweaked, looking for sane
+calling conventions.
 
 
 _______________________________________________
