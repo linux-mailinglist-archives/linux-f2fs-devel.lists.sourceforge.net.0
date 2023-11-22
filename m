@@ -2,28 +2,28 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44B377F51B5
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Nov 2023 21:33:22 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 372697F51F9
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Nov 2023 21:59:47 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r5tuN-0003ey-ER;
-	Wed, 22 Nov 2023 20:33:16 +0000
+	id 1r5uJw-0002Li-D1;
+	Wed, 22 Nov 2023 20:59:40 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <viro@ftp.linux.org.uk>) id 1r5tuM-0003er-Ba
+ (envelope-from <viro@ftp.linux.org.uk>) id 1r5uJu-0002Lb-Vj
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 22 Nov 2023 20:33:14 +0000
+ Wed, 22 Nov 2023 20:59:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Sender:In-Reply-To:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Xr3fIxd6ShAqICy5ksdIon7PqrY/ojAeg18qArUzk6A=; b=TuvKAWY5bZwx2xugQucRM1z4WG
- M8qqC0S63z+TlVaMKjW4FweiweT3+RrtoOTtM5/32MfcaNWsXcnqwgSlbCUyAZ7tM0sy4VmNW8bHw
- qAmmSOuyvkoRjkrTMucJyjnGx+THgRqtfxIUofCbb4XY0uaf030KOQXV+ED2exqur4c4=;
+ bh=ItOH4J4akSw10+RJtO1Y4ChxcpuLncLMjxNty1VtDU8=; b=VMvbzH7wenQrS/JzoZf3dUJvx2
+ zwwMFn4H+in8X+T/O/zmYJmBCCBsmWeqe0z/aDIv2jrSp4Zi4faJejyeAE1nTdgPfN23Fm0kNO1Lc
+ 6rQi3frddrJyRurm0HXtvKZ7wt5Jpa24boMqnHwz9G2rLRtHL/JfSdje4eyAlnxr/ris=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Sender:In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
@@ -31,35 +31,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Xr3fIxd6ShAqICy5ksdIon7PqrY/ojAeg18qArUzk6A=; b=JDKA5GY04URbf5MYY5tTs8q0im
- qpI9ZEKLckKpK5WLcEPRmZ0QqGtk384EId+N6tt8WtdR716KsTpCq3TUNn7wzsR6MxbPcI5HDV0ed
- 1V81lrM9v1B4IXdzbupG3kk3qZYNY2M5W6R1gow22ZznGut0Gq32C72rPHPlpwD0MuCc=;
+ bh=ItOH4J4akSw10+RJtO1Y4ChxcpuLncLMjxNty1VtDU8=; b=aZz4jkl3wVc5Cm+yYlOWGoAEYI
+ 4MIH4Rwi2b1Ea4PTs6O+d9O2IsXrJ+sMRGyqDZXVRfjjdub0pg5/+Jz4qA7LfKPFkAa0kbZWqPjNg
+ hVaeEC3GmZni/HFmW73jjOLx9XZGXhExjIHXzIppSG98NM4xoMFBDVQQttP4LL+HqyK4=;
 Received: from zeniv.linux.org.uk ([62.89.141.173])
- by sfi-mx-2.v28.lw.sourceforge.com with esmtps
+ by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r5tuH-0007wq-5M for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 22 Nov 2023 20:33:14 +0000
+ id 1r5uJu-00D4Aj-G8 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 22 Nov 2023 20:59:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
  MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Xr3fIxd6ShAqICy5ksdIon7PqrY/ojAeg18qArUzk6A=; b=KKYvlDukgHRf+nguuPK0ae5+u/
- OXrvbkccPXPLZCxlORrI9UqhuEUvOYRWn+F9MhvJc4Ic7blUtkdu1r8/jTDdQyMPMKiWdhPZDb9CR
- dcYg0VJIEp/M3HQi110IkSjsgjwm1ccfgdiaMFFOblx8vPI23bvEfoiR/5ACeI+kstejVCcs0UCrq
- GpH/GFfTuSBtUpQKzIZcwSPGBDe5b9WB5WgcYwTYDHEZIXac8c+thhN6wMON9gqSl9+3T7XuiCjWK
- AUBG7pM9Ohz2Ho50hJaYLiCIDdB5hqsZbk2a5KH2RBVXRyVkGG48s77Xkfq0/Y5KqdUdX2DDFAWEs
- GdtwzRng==;
+ bh=ItOH4J4akSw10+RJtO1Y4ChxcpuLncLMjxNty1VtDU8=; b=vYv0j7L+dcsY2dIfElCy7D8CHt
+ BOJR+U78FSLDhQUShbKI0HjkscG/pNujZ4x7UMH070cOT39LfHRCrOotFD6fZ0eyWVxEwogAYDDsD
+ AEZgD3hZNDAzHDTqlsHpFVELRHqBA+heb+41vqvYEnJDOm4aCvXXPR2N0rO+sqIHviTxpM0k4QRLw
+ F9Mwy9QPGSXEumvsTjJMKepFcV9zHxQXBHFfcxyDHMlcJWti2YMiNpPPxPRAa6jX4epYmOEUFsa6j
+ Tea1pPXz4c65Q5G5aBfSs0dBnfl9N/I+qtWOpvtDpG/TkEa9znfwJsgpUZMVRWIMkLBFh9sbve7LD
+ 1dQDfBVg==;
 Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1r5tts-001m5b-0v; Wed, 22 Nov 2023 20:32:44 +0000
-Date: Wed, 22 Nov 2023 20:32:44 +0000
+ Linux)) id 1r5uJi-001mWY-2Q; Wed, 22 Nov 2023 20:59:26 +0000
+Date: Wed, 22 Nov 2023 20:59:26 +0000
 From: Al Viro <viro@zeniv.linux.org.uk>
 To: Gabriel Krisman Bertazi <krisman@suse.de>
-Message-ID: <20231122203244.GG38156@ZenIV>
+Message-ID: <20231122205926.GH38156@ZenIV>
 References: <20230816050803.15660-1-krisman@suse.de>
- <20230816050803.15660-5-krisman@suse.de>
+ <20230816050803.15660-4-krisman@suse.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230816050803.15660-5-krisman@suse.de>
+In-Reply-To: <20230816050803.15660-4-krisman@suse.de>
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -67,9 +67,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Aug 16, 2023 at 01:07:58AM -0400, Gabriel Krisman
+ Content preview:  On Wed, Aug 16, 2023 at 01:07:57AM -0400, Gabriel Krisman
  Bertazi wrote: > From: Gabriel Krisman Bertazi <krisman@collabora.com> > >
- This flag marks a negative or positive dentry as being created afte [...]
+ Negative dentries support on case-insensitive ext4/f2fs will requir [...]
  Content analysis details:   (-0.1 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -80,8 +80,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1r5tuH-0007wq-5M
-Subject: Re: [f2fs-dev] [PATCH v6 4/9] fs: Add DCACHE_CASEFOLDED_NAME flag
+X-Headers-End: 1r5uJu-00D4Aj-G8
+Subject: Re: [f2fs-dev] [PATCH v6 3/9] fs: Expose name under lookup to
+ d_revalidate hooks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -100,18 +101,21 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-On Wed, Aug 16, 2023 at 01:07:58AM -0400, Gabriel Krisman Bertazi wrote:
+On Wed, Aug 16, 2023 at 01:07:57AM -0400, Gabriel Krisman Bertazi wrote:
 > From: Gabriel Krisman Bertazi <krisman@collabora.com>
 > 
-> This flag marks a negative or positive dentry as being created after a
-> case-insensitive lookup operation.  It is useful to differentiate
-> dentries this way to detect whether the negative dentry can be trusted
-> during a case-insensitive lookup.
+> Negative dentries support on case-insensitive ext4/f2fs will require
+> access to the name under lookup to ensure it matches the dentry.  This
+> adds the information on d_revalidate and updates its implementation.
 
-What should happen to that flag when d_splice_alias() picks an existing
-alias?  AFAICS, you set it in ->lookup() for the dentry passed to ->lookup(),
-but the alias picked by that sucker won't see anything of that sort, will
-it?
+There's actually one hell of a stronger reason for that particular change;
+uses of ->d_name in ->d_revalidate() instances are often racy.
+
+So IMO this is the right way to go, regardless of c-i stuff, except that
+it ought to be followed by making individual ->d_revalidate() instances use
+the damn argument, now that they have it in stable form.
+
+Said followups don't need to be in the same series, obviously.
 
 
 _______________________________________________
