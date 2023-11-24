@@ -2,82 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 564777F6A0A
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Nov 2023 02:10:02 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DCD07F6D99
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 24 Nov 2023 09:03:22 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1r6Khc-0001jv-02;
-	Fri, 24 Nov 2023 01:09:52 +0000
+	id 1r6R9a-0002xq-AS;
+	Fri, 24 Nov 2023 08:03:10 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1r6Kha-0001jp-8X
+ (envelope-from <chao@kernel.org>) id 1r6R9Z-0002xh-5K
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 24 Nov 2023 01:09:50 +0000
+ Fri, 24 Nov 2023 08:03:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Date:Subject:
- CC:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i+8SzhtrIW+qrRU4GxkBZJ0ehnst9ifSAaO16PUtH58=; b=e14GM+LeAZp1GZb53pxQWA09ki
- vrfSbo4emAYsyL5CsnP/OCE4Rxf0dVy9v33B5sXI3thwwAx//aoFb8qAofuRDXkGxtMe3MNEdFAt0
- vGdGUo3ETUg589eykSrWWo9uBlXLe5Hlg8IBpTMlS9S2SMYblqCr30Op4Ri+9c7XQgBU=;
+ bh=j8BYPsGm53ifkECEDA5BuOzsZfa64kfWRFxbHWTuPQU=; b=PXmp9+ff2petpIh0zwOw+SVmX7
+ UvVN6NuLqGWZywkGOjbNXB9SYyuzoO/DeJhtAcesZt4JXHOnEt0Yd4QsmOlZqOGu6fay223J30SCd
+ 3Zowd9t1Gnfhf/7MFpzhyG8VfjIFyyzqYEWyO7vuTohBgyqz59JAr1oeUARUQ2xKCcIU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=i+8SzhtrIW+qrRU4GxkBZJ0ehnst9ifSAaO16PUtH58=; b=c
- wVcyxadI4Um8x2wc3Km4GfGVlKrur2dxg2cGT1N0qAkjaeu3H4fhHexrJckNGADQDhNYd4x15hu/O
- DDM47i8+GVeobw1rP9mYAOdI4FKZbypbfyUAvNsTzBk6iBa+q2vjLYXPGeDPU8zgLRY/RSmdIkTmR
- EGjdYeZnaN32FY8E=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=j8BYPsGm53ifkECEDA5BuOzsZfa64kfWRFxbHWTuPQU=; b=Cc7MFuctbUOIcoNV2/gBPG0NFU
+ a5gmM6N22FoO3vhX/25Wl/jKw/s0zGL4F/ARGKacLOMKo0yTN9bjVrmNkIRJ3r86Cd3+fm4tm0FfZ
+ K4yvp5rNoPL0uoTU9kcFUJFUTcrroP2BrRIHGNhDgEQUzbPB0YdDywTl/z05ANzfoLNs=;
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1r6KhZ-00Dvs7-42 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 24 Nov 2023 01:09:50 +0000
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 3AO199em043798;
- Fri, 24 Nov 2023 09:09:09 +0800 (+08)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from SHDLP.spreadtrum.com (bjmbx02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4SbxZ81N8sz2K5kLN;
- Fri, 24 Nov 2023 09:03:44 +0800 (CST)
-Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.23; Fri, 24 Nov 2023 09:09:06 +0800
-From: Zhiguo Niu <zhiguo.niu@unisoc.com>
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Fri, 24 Nov 2023 09:08:48 +0800
-Message-ID: <1700788128-29002-1-git-send-email-zhiguo.niu@unisoc.com>
-X-Mailer: git-send-email 1.9.1
+ id 1r6R9V-00E7Ew-31 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 24 Nov 2023 08:03:09 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 765CD61FBE;
+ Fri, 24 Nov 2023 08:02:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BAF80C433C8;
+ Fri, 24 Nov 2023 08:02:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1700812976;
+ bh=sBzSvuJ4CblFWXdVQH6A6MIoJi7BRHC78qIapG0MoN0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=oAv42OXygJGg57DtJoXcD2bs44UQ0LlgMlymsctEEebaaWI/h1rz5Zl6RtiFY44YB
+ 62135gf70qxSMPJrIdUwsApXdBAoUmNZjcbCuH8lv4lp9odrOYsb2GuLtOr+TZbtOx
+ yRZG3dzDwb7gARvfSTwbvFL2NfWCMdels9SY3/o6FvnUm05DKX7DsvXG71Ju+IAKI+
+ OtqaDms3AZYu++WsrzzETjOLfFZKzndc3RZ9Sf9DJMwpHFMr7c8teuT/+fVDAn7UZq
+ rRpWmqt937Uda7Aatm90ACZNAMvy5OWqXHuiWRXmBcE7vtAlafq4zgYNpWCz+5Tz7o
+ lcuXA0Pw/S0KQ==
+Message-ID: <53283bde-7de1-4513-44d0-c4d90f0aad98@kernel.org>
+Date: Fri, 24 Nov 2023 16:02:52 +0800
 MIME-Version: 1.0
-X-Originating-IP: [10.0.73.87]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 3AO199em043798
-X-Spam-Score: -0.0 (/)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Content-Language: en-US
+To: Daniel Rosenberg <drosen@google.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20231118020309.1894531-1-drosen@google.com>
+ <20231118020309.1894531-2-drosen@google.com>
+From: Chao Yu <chao@kernel.org>
+In-Reply-To: <20231118020309.1894531-2-drosen@google.com>
+X-Spam-Score: -6.8 (------)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: The current pending_discard attr just only shows the
- discard_cmd_cnt
- information, which is not very meaningful. More discard information can be
- shown so that we can check them through sysfs when neede [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  On 2023/11/18 10:03, Daniel Rosenberg wrote: > The conversion
+ from block size to MB in this debug statement assumes a > block size of 4K.
+ This switches it to properly use the filesystem's > block size [...] 
+ Content analysis details:   (-6.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [139.178.84.217 listed in list.dnswl.org]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1r6KhZ-00Dvs7-42
-Subject: [f2fs-dev] [PATCH] f2fs: show more discard stat by sysfs
+ -1.6 NICE_REPLY_A           Looks like a legit reply (A)
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1r6R9V-00E7Ew-31
+Subject: Re: [f2fs-dev] [PATCH 1/3] f2fs-tools: Fix debug size print
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -89,73 +106,21 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: hongyu.jin@unisoc.com, zhiguo.niu@unisoc.com, niuzhiguo84@gmail.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, kernel-team@android.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 
-The current pending_discard attr just only shows the discard_cmd_cnt
-information, which is not very meaningful. More discard information
-can be shown so that we can check them through sysfs when needed.
+On 2023/11/18 10:03, Daniel Rosenberg wrote:
+> The conversion from block size to MB in this debug statement assumes a
+> block size of 4K. This switches it to properly use the filesystem's
+> block size.
+> 
+> Signed-off-by: Daniel Rosenberg <drosen@google.com>
 
-Signed-off-by: Zhiguo Niu <zhiguo.niu@unisoc.com>
----
- fs/f2fs/sysfs.c | 21 +++++++++++++++------
- 1 file changed, 15 insertions(+), 6 deletions(-)
+Reviewed-by: Chao Yu <chao@kernel.org>
 
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 417fae96..f98e680 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -134,13 +134,22 @@ static ssize_t cp_status_show(struct f2fs_attr *a,
- 	return sysfs_emit(buf, "%x\n", le32_to_cpu(F2FS_CKPT(sbi)->ckpt_flags));
- }
- 
--static ssize_t pending_discard_show(struct f2fs_attr *a,
-+static ssize_t discard_stat_show(struct f2fs_attr *a,
- 		struct f2fs_sb_info *sbi, char *buf)
- {
--	if (!SM_I(sbi)->dcc_info)
-+	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
-+
-+	if (!dcc)
- 		return -EINVAL;
--	return sysfs_emit(buf, "%llu\n", (unsigned long long)atomic_read(
--				&SM_I(sbi)->dcc_info->discard_cmd_cnt));
-+
-+	return sysfs_emit(buf, "%llu, %llu, %llu, %u\n",
-+			(unsigned long long)atomic_read(
-+				&dcc->discard_cmd_cnt),
-+			(unsigned long long)atomic_read(
-+				&dcc->issued_discard),
-+			(unsigned long long)atomic_read(
-+				&dcc->queued_discard),
-+			dcc->undiscard_blks);
- }
- 
- static ssize_t gc_mode_show(struct f2fs_attr *a,
-@@ -1016,7 +1025,7 @@ static ssize_t f2fs_sb_feature_show(struct f2fs_attr *a,
- F2FS_GENERAL_RO_ATTR(encoding);
- F2FS_GENERAL_RO_ATTR(mounted_time_sec);
- F2FS_GENERAL_RO_ATTR(main_blkaddr);
--F2FS_GENERAL_RO_ATTR(pending_discard);
-+F2FS_GENERAL_RO_ATTR(discard_stat);
- F2FS_GENERAL_RO_ATTR(gc_mode);
- #ifdef CONFIG_F2FS_STAT_FS
- F2FS_GENERAL_RO_ATTR(moved_blocks_background);
-@@ -1074,7 +1083,7 @@ static ssize_t f2fs_sb_feature_show(struct f2fs_attr *a,
- 	ATTR_LIST(discard_urgent_util),
- 	ATTR_LIST(discard_granularity),
- 	ATTR_LIST(max_ordered_discard),
--	ATTR_LIST(pending_discard),
-+	ATTR_LIST(discard_stat),
- 	ATTR_LIST(gc_mode),
- 	ATTR_LIST(ipu_policy),
- 	ATTR_LIST(min_ipu_util),
--- 
-1.9.1
-
+Thanks,
 
 
 _______________________________________________
